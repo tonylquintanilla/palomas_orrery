@@ -66,6 +66,11 @@ Module updated: October 13, 2026 with Anthropic's Claude Opus 5.5 (L-431,
 after build 2's look: drawn_aphelion_distance(), how far a drawn ellipse
 moved to another centre reaches from the plot's centre, so the frame is
 sized from the orbit as drawn.)
+Module updated: October 14, 2026 with Anthropic's Claude Opus 5.5 (L-431,
+build 3, the website: print_place() is the one home of the place
+format_by_error prints to, unchanged in what it prints, and
+figures_by_error() counts the figures, so export_objects.py serves each
+period with the count the orrery's hover prints it to.)
 """
 
 import math
@@ -160,6 +165,40 @@ def report_exponent(err):
     return int(math.floor(x + 0.5))
 
 
+def print_place(value, err):
+    """
+    The place format_by_error prints value to: the Report test's place for
+    err, never coarser than value's leading digit (never fewer than one
+    figure). With no error to round by, ten figures are kept and the
+    caller says so. Returns p (0 = whole units, -2 = hundredths).
+
+    Its own function so the place has one home: format_by_error prints by
+    it, and export_objects.py counts the figures the website prints a
+    period to by it (L-431, build 3).
+    """
+    if err is None or not (err > 0):
+        err = abs(value) * 1e-10 if value else 1e-10
+    p = report_exponent(err)
+    if value != 0:
+        top = int(math.floor(math.log10(abs(value))))
+        if p > top:
+            p = top                  # never fewer than one figure
+    return p
+
+
+def figures_by_error(value, err):
+    """How many significant figures format_by_error prints value with:
+    the leading digit's place down to print_place. For the website's
+    copy of a period, which prints a served value at its served count
+    (L-431, build 3)."""
+    if value is None:
+        return None
+    if value == 0:
+        return 1
+    top = int(math.floor(math.log10(abs(value))))
+    return top - print_place(value, err) + 1
+
+
 def format_by_error(value, err):
     """
     value printed to the place its error earns, never fewer than one
@@ -168,14 +207,7 @@ def format_by_error(value, err):
     """
     if value is None:
         return None
-    if err is None or not (err > 0):
-        # No error to round by: keep ten figures and let the caller say so.
-        err = abs(value) * 1e-10 if value else 1e-10
-    p = report_exponent(err)
-    if value != 0:
-        top = int(math.floor(math.log10(abs(value))))
-        if p > top:
-            p = top                  # never fewer than one figure
+    p = print_place(value, err)
     if p >= 0:
         unit = 10 ** p
         r = int(round(value / unit)) * unit

@@ -3,10 +3,11 @@ JPL), build 3, the orrery's half, with L-395's move: the objects export
 carries each body's period, and the Horizons check moves into the
 orrery's maintenance run and checks the period too.
 
-Built on orrery fe000597d5282a93461d31065997254d5bf981ff at
-https://github.com/tonylquintanilla/palomas_orrery ("L440 dashboard").
-Rebuilt there on October 14: the first copy was built on db63721d and
-refused once L-440's dashboard had landed. Its partners run after it:
+Built on orrery 5cd63ccea16e5242014f8aeb12cfb4beeb36ea31 at
+https://github.com/tonylquintanilla/palomas_orrery ("L431").
+Rebuilt there on October 14: earlier copies were built on db63721d and
+fe000597 and refused, writing nothing, once L-440's dashboard and then
+patch_L269_6 had landed. Its partners run after it:
 patch_L431_12_website_gallery_20261014.py, built on gallery
 4b2b660ad779a971b496536f6203f93b04aa7a8d at
 https://github.com/tonylquintanilla/tonyquintanilla.github.io ("daily
@@ -73,6 +74,9 @@ SAFETY
     matched after turning them into LF and written back LF, and the patch
     says so. Undo after a run is Discard Changes in GitHub Desktop, and
     delete the created files.
+
+Role: patch
+Domain: dev_tools
 """
 import os
 import sys
@@ -920,13 +924,13 @@ EDITS = [
          'Runs the GENERATORS, then the CHECKERS, and prints one summary at\n'
          'the end. Nothing stops on a failure -- every tool runs every time, so a\n'
      )),
-    ('orrery_maintenance_run.py', 'line 215: Module updated: October 14, 2026 with Anthrop',
+    ('orrery_maintenance_run.py', 'line 222: Module updated: October 14, 2026 with Anthrop',
      (
-         '28 gating checkers.)\n'
+         'fault, the line-ending fix taken out, fed Windows output with a rise.)\n'
          '"""\n'
      ),
      (
-         '28 gating checkers.)\n'
+         'fault, the line-ending fix taken out, fed Windows output with a rise.)\n'
          "Module updated: October 14, 2026 with Anthropic's Claude Opus 5.5 (L-431\n"
          "build 3, with L-395's move: GENERATORS gains Horizons check,\n"
          "horizons_check.py, moved here from the website's Daily Run, before\n"
@@ -941,7 +945,7 @@ EDITS = [
          'gating gave on 2026-10-13.)\n'
          '"""\n'
      )),
-    ('orrery_maintenance_run.py', 'line 240: # L-395 and L-431 build 3 (2026-10-14): JPL H',
+    ('orrery_maintenance_run.py', 'line 247: # L-395 and L-431 build 3 (2026-10-14): JPL H',
      (
          "     ['data/constants_export.json']),\n"
          "    # L-395 (2026-10-01): the orrery's object list is the one definition\n"
@@ -963,7 +967,7 @@ EDITS = [
          "     'HORIZONS CHECK:'),\n"
          "    # L-395 (2026-10-01): the orrery's object list is the one definition\n"
      )),
-    ('orrery_maintenance_run.py', 'line 243: # constants export.',
+    ('orrery_maintenance_run.py', 'line 250: # constants export.',
      (
          '    # are exported, and the gallery pulls the file as it pulls the\n'
          '    # constants export.\n'
@@ -975,7 +979,7 @@ EDITS = [
          '    # its confirmation dates.\n'
          "    ('Objects export', ['export_objects.py'],\n"
      )),
-    ('orrery_maintenance_run.py', "line 297: # L-395, L-431 build 3: what today's Horizons",
+    ('orrery_maintenance_run.py', "line 304: # L-395, L-431 build 3: what today's Horizons",
      (
          "     'OBJECTS EXPORT:'),\n"
          "    # Rule 7's exact row, built: every printed exact row states a print\n"
@@ -996,7 +1000,7 @@ EDITS = [
          "     'HORIZONS CHECK SUITE:'),\n"
          "    # Rule 7's exact row, built: every printed exact row states a print\n"
      )),
-    ('orrery_maintenance_run.py', 'line 764: if gen_hint and rc == 0:',
+    ('orrery_maintenance_run.py', 'line 779: if gen_hint and rc == 0:',
      (
          '                    % len(outputs))\n'
          '        if gen_hint and rc == 0:\n'
@@ -1011,13 +1015,13 @@ EDITS = [
          '        if gen_hint and rc is not None:\n'
          '            verdict = line_containing(output, gen_hint)\n'
      )),
-    ('palomas_orrery_dashboard.py', "line 237: October 14, 2026 with Anthropic's Claude Opus",
+    ('palomas_orrery_dashboard.py', "line 240: October 14, 2026 with Anthropic's Claude Opus",
      (
-         'in a description is cut, only moved behind "+ more".\n'
+         "scanner's output with Windows line endings.\n"
          '"""\n'
      ),
      (
-         'in a description is cut, only moved behind "+ more".\n'
+         "scanner's output with Windows line endings.\n"
          "October 14, 2026 with Anthropic's Claude Opus 5.5 (L-431 build 3, with\n"
          "L-395's move): the Horizons check moved from the website's Daily Run into\n"
          "the orrery's maintenance run, and its buttons follow it, each named what\n"
@@ -1028,7 +1032,7 @@ EDITS = [
          'patch has removed their scripts, so Dashboard Parity holds at every step.\n'
          '"""\n'
      )),
-    ('palomas_orrery_dashboard.py', 'line 1009: "and says which generated files actually move',
+    ('palomas_orrery_dashboard.py', 'line 1012: "and says which generated files actually move',
      (
          '         "reports and continues rather than stopping at the first failure, "\n'
          '         "and says which generated files actually moved. About ten seconds. "\n'
@@ -1041,7 +1045,7 @@ EDITS = [
          '         "internet and a couple of minutes more. "\n'
          '         "Run after an edit session and before a push. Everything indented "\n'
      )),
-    ('palomas_orrery_dashboard.py', 'line 1075: SCRIPT_DIR,',
+    ('palomas_orrery_dashboard.py', 'line 1078: SCRIPT_DIR,',
      (
          '         "Exact Rows by the Count is the same check as a pass/fail.",\n'
          '         SCRIPT_DIR,\n'
@@ -1071,7 +1075,7 @@ EDITS = [
          '         "nothing more.",\n'
          '         SCRIPT_DIR,\n'
      )),
-    ('palomas_orrery_dashboard.py', 'line 1294: SCRIPT_DIR,',
+    ('palomas_orrery_dashboard.py', 'line 1297: SCRIPT_DIR,',
      (
          '         "rows must pass. Ends on \\"HILLS CLOUD: PASS\\" (L-421).",\n'
          '         SCRIPT_DIR,\n'
@@ -1107,7 +1111,7 @@ EDITS = [
          '         "L-431).",\n'
          '         SCRIPT_DIR,\n'
      )),
-    ('palomas_orrery_dashboard.py', 'line 1766: "Horizons Check"):',
+    ('palomas_orrery_dashboard.py', 'line 1770: "Horizons Check"):',
      (
          '    ("Maintenance Run",\n'
          '     "Ledger Index"):\n'
@@ -1119,7 +1123,7 @@ EDITS = [
          '    ("Maintenance Run",\n'
          '     "Ledger Index"):\n'
      )),
-    ('palomas_orrery_dashboard.py', 'line 1822: ("Maintenance Run",',
+    ('palomas_orrery_dashboard.py', 'line 1826: ("Maintenance Run",',
      (
          '        "Checks the Hills cloud\'s frame, Fig. 3 reading and tilt, faults planted.",\n'
          '    ("Maintenance Run",\n'
@@ -1156,7 +1160,7 @@ EDITS = [
          'Read this file in 2 parts: lines 1-222, 223-322.\n'
          '\n'
          "Skill version: 1.6 | 2026-10-14, with Anthropic's Claude Opus 5.5, at\n"
-         'palomas_orrery @ fe000597 and gallery @ 4b2b660a. v1.6 (L-431 build 3,\n'
+         'palomas_orrery @ 5cd63cce and gallery @ 4b2b660a. v1.6 (L-431 build 3,\n'
          "with L-395's move) records where the Horizons check lives now and what\n"
          'it compares, under Where the Check Lives, and What It Compares: it runs\n'
          "in the orrery's maintenance run beside the objects export, asks JPL\n"
@@ -1280,7 +1284,7 @@ EDITS = [
          'Read this file in 2 parts: lines 1-269, 270-507.\n'
          '\n'
          "Skill version: 1.9 | 2026-10-14, with Anthropic's Claude Opus 5.5, at\n"
-         'palomas_orrery @ fe000597 and gallery @ 4b2b660a. v1.9 (L-431 build 3,\n'
+         'palomas_orrery @ 5cd63cce and gallery @ 4b2b660a. v1.9 (L-431 build 3,\n'
          "with L-395's move) records two things the build changed. The builder\n"
          "reads each object's period from the config and, where the period is\n"
          "taken around the solar system's barycentre, also serves the elements\n"
@@ -1405,7 +1409,7 @@ EDITS = [
          'Read this file in 4 parts: lines 1-133, 134-342, 343-607, 608-811.\n'
          '\n'
          "Skill version: 1.15 | 2026-10-14, with Anthropic's Claude Opus 5.5, at\n"
-         'palomas_orrery @ fe000597 and gallery @ 4b2b660a. v1.15 (L-431 build\n'
+         'palomas_orrery @ 5cd63cce and gallery @ 4b2b660a. v1.15 (L-431 build\n'
          "3) records what a room prints for a body's orbital period and where it\n"
          "comes from: the orrery's period, copied by the mirror, printed at its\n"
          'served figure count in one of three forms, read from the config so it\n'
@@ -1563,7 +1567,7 @@ EDITS = [
          'PROJECT INSTRUCTIONS\n'
          'Tony Quintanilla, PE | Claude | v3.96 | October 14, 2026\n'
          '\n'
-         'Cut from fe000597 at https://github.com/tonylquintanilla/palomas_orrery\n'
+         'Cut from 5cd63cce at https://github.com/tonylquintanilla/palomas_orrery\n'
          '(branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.\n'
      )),
     ('PROJECT_INSTRUCTIONS.md', 'line 1171: v3.96 (October 14, 2026): No rule changed in ',
@@ -1698,22 +1702,22 @@ EDITS = [
          '\n'
          '================================================================\n'
      )),
-    ('LEDGER_CONSOLIDATED.md', 'line 409: Module updated: October 14, 2026 with Anthrop',
+    ('LEDGER_CONSOLIDATED.md', 'line 412: Module updated: October 14, 2026 with Anthrop',
      (
-         'db63721d.\n'
+         'rise line no longer says NOT READ when a file rose), built on fe00059.\n'
          'Review and RICE update Tony 6-21-2026\n'
      ),
      (
-         'db63721d.\n'
+         'rise line no longer says NOT READ when a file rose), built on fe00059.\n'
          "Module updated: October 14, 2026 with Anthropic's Claude Opus 5.5\n"
          "(L-431 build 3, the website, and L-395's move of the Horizons check into\n"
          "the orrery: built and tested offline, both now waiting only on Tony's\n"
          'run and look; loose ends re-homed to L-433; horizons-orbital-mechanics\n'
          '1.6, gallery-cache-builder 1.9, interactive-exhibit 1.15, protocol\n'
-         'v3.96), built on fe000597 and gallery 4b2b660a.\n'
+         'v3.96), built on 5cd63cce and gallery 4b2b660a.\n'
          'Review and RICE update Tony 6-21-2026\n'
      )),
-    ('LEDGER_CONSOLIDATED.md', 'line 1151: <!-- L:440 status:OPEN upd:2026-10-13 section',
+    ('LEDGER_CONSOLIDATED.md', 'line 1154: <!-- L:440 status:OPEN upd:2026-10-13 section',
      (
          "#### [L-440] The dashboard's labels, short lines and headings, and the parity check (dashboard, both repos)\n"
          '<!-- L:440 status:OPEN upd:2026-10-13 section:A flag: rice: -->\n'
@@ -1724,7 +1728,7 @@ EDITS = [
          '<!-- L:440 status:OPEN upd:2026-10-14 section:A flag: rice: -->\n'
          "- **Tony's request, 2026-10-12**, after confirming every run step has a\n"
      )),
-    ('LEDGER_CONSOLIDATED.md', 'line 1192: - **Note (2026-10-14), from L-431 build 3:** ',
+    ('LEDGER_CONSOLIDATED.md', 'line 1195: - **Note (2026-10-14), from L-431 build 3:** ',
      (
          '  and the standalone tools outside the runs keep theirs.\n'
          "**Gap:** Tony's look at the dashboard (the handoff, section 6). Later\n"
@@ -1740,7 +1744,7 @@ EDITS = [
          '  Parity is the check that it is complete.\n'
          "**Gap:** Tony's look at the dashboard (the handoff, section 6). Later\n"
      )),
-    ('LEDGER_CONSOLIDATED.md', 'line 1524: <!-- L:433 status:OPEN upd:2026-10-11 section',
+    ('LEDGER_CONSOLIDATED.md', 'line 1527: <!-- L:433 status:OPEN upd:2026-10-11 section',
      (
          "#### [L-433] The road after the Sun and Earth rooms, in Tony's words (planning)\n"
          '<!-- L:433 status:OPEN upd:2026-10-11 section:A flag: rice: -->\n'
@@ -1751,7 +1755,7 @@ EDITS = [
          '<!-- L:433 status:OPEN upd:2026-10-14 section:A flag: rice: -->\n'
          '- **Tony, 2026-10-10, in his run record** (`documentation/WHERE_WE_ARE_10-10-26_2019_run_record.md` at 6fc3648), two notes:\n'
      )),
-    ('LEDGER_CONSOLIDATED.md', 'line 1542: - **Note (2026-10-14), loose ends received fr',
+    ('LEDGER_CONSOLIDATED.md', 'line 1545: - **Note (2026-10-14), loose ends received fr',
      (
          '  layers, his "earth science part".\n'
          '**Gap:** at the next design talk after the orbital periods: Tony\n'
@@ -1778,7 +1782,7 @@ EDITS = [
          '    work opens its block under the next free handle.\n'
          '**Gap:** at the next design talk after the orbital periods: Tony\n'
      )),
-    ('LEDGER_CONSOLIDATED.md', 'line 1575: <!-- L:431 status:OPEN upd:2026-10-13 section',
+    ('LEDGER_CONSOLIDATED.md', 'line 1578: <!-- L:431 status:OPEN upd:2026-10-13 section',
      (
          '#### [L-431] Orbital periods from JPL, for every body, printed by their errors (orrery, provenance)\n'
          '<!-- L:431 status:OPEN upd:2026-10-13 section:A flag: rice: -->\n'
@@ -1789,7 +1793,7 @@ EDITS = [
          '<!-- L:431 status:PENDING-GATE upd:2026-10-14 section:A flag: rice: -->\n'
          "- **Opened 2026-10-10** from Tony's look at Encke: its hover has no\n"
      )),
-    ('LEDGER_CONSOLIDATED.md', 'line 1857: - **2026-10-14, build 3 BUILT** (the website)',
+    ('LEDGER_CONSOLIDATED.md', 'line 1860: - **2026-10-14, build 3 BUILT** (the website)',
      (
          '  ran.)\n'
          "**Gap:** three builds, in order (the record's section 3):\n"
@@ -1797,8 +1801,9 @@ EDITS = [
      (
          '  ran.)\n'
          "- **2026-10-14, build 3 BUILT** (the website), with L-395's move, on\n"
-         '  orrery fe000597 and gallery 4b2b660a (first built on db63721d and\n'
-         "  924977a3; rebuilt when L-440's dashboard landed), in three patches:\n"
+         '  orrery 5cd63cce and gallery 4b2b660a (first built on db63721d and\n'
+         "  924977a3; rebuilt when L-440's dashboard landed, and again after\n"
+         '  patch_L269_6), in three patches:\n'
          '  `patch_L431_11_website_orrery_20261014.py`,\n'
          '  `patch_L431_12_website_gallery_20261014.py`, and\n'
          '  `patch_L431_13_dashboard_buttons_20261014.py`, which moves the\n'
@@ -1842,7 +1847,7 @@ EDITS = [
          "    JPL's.\n"
          "**Gap:** three builds, in order (the record's section 3):\n"
      )),
-    ('LEDGER_CONSOLIDATED.md', 'line 1865: 3. The website, NEXT, briefed in',
+    ('LEDGER_CONSOLIDATED.md', 'line 1868: 3. The website, NEXT, briefed in',
      (
          '   barycentre orbits (patch_L431_8, pushed at 4da3d7cc).\n'
          '3. The website, NEXT, briefed in\n'
@@ -1871,7 +1876,7 @@ EDITS = [
          'naming class above stays recorded, as it was.\n'
          '**Ref:** `documentation/DESIGN_L431_orbital_periods_rulings_20261011.md`;\n'
      )),
-    ('LEDGER_CONSOLIDATED.md', 'line 2722: <!-- L:395 status:OPEN upd:2026-10-12 section',
+    ('LEDGER_CONSOLIDATED.md', 'line 2725: <!-- L:395 status:OPEN upd:2026-10-12 section',
      (
          "#### [L-395] The gallery's objects are hand-copied from the orrery's dictionary: export them, and check them against Horizons (orrery, gallery, objects)\n"
          '<!-- L:395 status:OPEN upd:2026-10-12 section:A flag: rice: -->\n'
@@ -1882,7 +1887,7 @@ EDITS = [
          '<!-- L:395 status:PENDING-GATE upd:2026-10-14 section:A flag: rice: -->\n'
          '- **2026-10-01, design rulings and the first build** [verified: orrery\n'
      )),
-    ('LEDGER_CONSOLIDATED.md', 'line 3078: **Gap:** The check is built and runs every da',
+    ('LEDGER_CONSOLIDATED.md', 'line 3081: **Gap:** The check is built and runs every da',
      (
          '  cleared, and whether the identity check widens past the thirteen.\n'
          '**Gap:** The check is built and runs every day. Still open: moving it\n'
@@ -1950,7 +1955,7 @@ EDITS = [
      (
          '\n'
          "Last updated: October 14, 2026: the website prints JPL's periods; the Horizons check moved.\n"
-         '- Written at orrery fe000597 and gallery 4b2b660a.\n'
+         '- Written at orrery 5cd63cce and gallery 4b2b660a.\n'
          '\n'
      )),
     ('documentation/WHERE_WE_ARE.md', 'line 10: > - The dashboard: one short line per card, "',
@@ -2063,9 +2068,8 @@ EDITS = [
      (
          'Read from files when this page was written, not typed from memory.\n'
          '- Last cache build: 20261014T175225Z, ok, no retry (gallery 4b2b660a).\n'
-         '- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, fe000597).\n'
-         '  Whole tree: 281: orrery 116, Earth System 149, stars 13, utilities 2,\n'
-         '  dev tools 1. Your run said "Tier-1 rise: NOT READ": L-269\'s to look at.\n'
+         '- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, 5cd63cce).\n'
+         '  Whole tree: 280: orrery 116, Earth System 149, stars 13, utilities 2.\n'
          "- This page's date and the ledger's newest stamp: both Oct 14. Agree.\n"
          '\n'
      )),
@@ -5213,14 +5217,16 @@ CREATED = {
         "<!-- Doc-Kind: hand | Record of L-431 build 3 (the website prints each body's orbital period from JPL, and draws an orbit around its period's centre) built with L-395's move (the Horizons check now runs in the orrery's maintenance run and checks the period too). Built and tested in the sandbox; the run order for Tony, with what each step prints; the one decision; where the loose ends went. -->\n"
         "# L-431 build 3, the website, with the Horizons check's move (L-395)\n"
         '\n'
-        'Built on orrery fe000597d5282a93461d31065997254d5bf981ff at\n'
-        'https://github.com/tonylquintanilla/palomas_orrery ("L440 dashboard") and\n'
-        'gallery 4b2b660ad779a971b496536f6203f93b04aa7a8d at\n'
-        'https://github.com/tonylquintanilla/tonyquintanilla.github.io ("daily run\n'
-        '10-14-26"). First built on orrery db63721d and gallery 924977a3; both\n'
-        'moved during the session (the dashboard labels, L-440, and your Daily\n'
-        'Run of October 14), the first orrery patch refused on your machine, and\n'
-        'the build was rebuilt on the new HEADs.\n'
+        'Built on orrery 5cd63ccea16e5242014f8aeb12cfb4beeb36ea31 at\n'
+        'https://github.com/tonylquintanilla/palomas_orrery ("L431") and\n'
+        'gallery 77988635526d1dd68f8c082cae39f4b7ad3f56b8 at\n'
+        'https://github.com/tonylquintanilla/tonyquintanilla.github.io (your Daily\n'
+        "Run of October 14, then the gallery patch's first copy added in the\n"
+        'root, unrun). First built on orrery db63721d and gallery 924977a3; both\n'
+        'moved during the session (the dashboard labels, L-440; your Daily Run\n'
+        'of October 14; then patch_L269_6), the orrery patch refused twice on\n'
+        'your machine, writing nothing each time, and the build was rebuilt on\n'
+        'the new HEADs each time.\n'
         "Tony's local folders: orrery\n"
         '`C:\\Users\\tonyq\\OneDrive\\Desktop\\python_work\\palomas_orrery_for_github\\`;\n'
         'gallery `C:\\Users\\tonyq\\OneDrive\\Desktop\\python_work\\tonyquintanilla.github.io\\`.\n'
@@ -5299,7 +5305,9 @@ CREATED = {
         'Orrery folder:\n'
         '\n'
         '1. Save the new `patch_L431_11_website_orrery_20261014.py` in the\n'
-        '   orrery folder, replacing the copy that refused, and press Run. It\n'
+        '   orrery folder, replacing the copy that refused (and the new\n'
+        '   `patch_L431_13_dashboard_buttons_20261014.py` beside it, for step 7),\n'
+        '   and press Run. It\n'
         '   prints 79 "ok" lines for the edits and 7 for the new files, then:\n'
         '   `patch applied (79 edits in 14 files, 7 files created)`\n'
         '   A second run prints "ERROR: horizons_check.py already exists; this\n'
@@ -5441,9 +5449,9 @@ CREATED = {
         '  session took L-440 and the ledger now lists L-438 and L-439 as\n'
         '  retired, so the objects work opens under the next free handle (on\n'
         "  L-433's note).\n"
-        '- Your run of the dashboard session\'s maintenance run printed "Tier-1\n'
-        '  rise: NOT READ" under the scanner\'s verdict. Not this build\'s: it is\n'
-        "  L-269's to look at. In these runs the line read normally.\n"
+        '- The "Tier-1 rise: NOT READ" line your run printed was L-269\'s; its\n'
+        '  session fixed it in patch_L269_6 (Windows line endings), which this\n'
+        '  build now sits on.\n'
         "- The orrery's export now serves typed periods, from\n"
         '  `KNOWN_ORBITAL_PERIODS`. The website marks every one as typed, and the\n'
         '  provenance scanner already names the table. Its 132 unsourced entries\n'

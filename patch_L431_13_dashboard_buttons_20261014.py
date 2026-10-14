@@ -2,11 +2,11 @@
 from JPL), build 3, its third and last patch: the dashboard's buttons for
 the website follow the website's patch.
 
-Built on orrery fe000597d5282a93461d31065997254d5bf981ff at
-https://github.com/tonylquintanilla/palomas_orrery ("L440 dashboard"),
+Built on orrery 5cd63ccea16e5242014f8aeb12cfb4beeb36ea31 at
+https://github.com/tonylquintanilla/palomas_orrery ("L431"),
 AFTER patch_L431_11_website_orrery_20261014.py, and after
 patch_L431_12_website_gallery_20261014.py has run in the gallery
-(gallery 4b2b660ad779a971b496536f6203f93b04aa7a8d at
+(gallery 77988635526d1dd68f8c082cae39f4b7ad3f56b8 at
 https://github.com/tonylquintanilla/tonyquintanilla.github.io).
 Tony's local folders: orrery
 C:\\Users\\tonyq\\OneDrive\\Desktop\\python_work\\palomas_orrery_for_github\\;
@@ -45,6 +45,9 @@ SAFETY
     file found with Windows line endings is matched after turning them
     into LF and written back LF, and the patch says so. Undo after a run
     is Discard Changes in GitHub Desktop.
+
+Role: patch
+Domain: dev_tools
 """
 import os
 import sys
@@ -56,7 +59,7 @@ ZONES = ()
 MUST_EXIST = ('celestial_objects.py', 'palomas_orrery_dashboard.py')
 
 EDITS = [
-    ('palomas_orrery_dashboard.py', "line 245: October 14, 2026 with Anthropic's Claude Opus",
+    ('palomas_orrery_dashboard.py', "line 248: October 14, 2026 with Anthropic's Claude Opus",
      (
          'patch has removed their scripts, so Dashboard Parity holds at every step.\n'
          '"""\n'
@@ -72,7 +75,7 @@ EDITS = [
          'served cache, in alphabetical place, with its short line.\n'
          '"""\n'
      )),
-    ('palomas_orrery_dashboard.py', 'line 363: "or replies if you like. Then the Horizons Ch',
+    ('palomas_orrery_dashboard.py', 'line 366: "or replies if you like. Then the Horizons Ch',
      (
          '         "Updater: approve or decline each new message, and write entries "\n'
          '         "or replies if you like. Then the Horizons Check: JPL confirms "\n'
@@ -84,7 +87,7 @@ EDITS = [
          '         "or replies if you like. Then the Cache "\n'
          '         "Builder, with no OneDrive pause since 2026-10-10 (L-216: "\n'
      )),
-    ('palomas_orrery_dashboard.py', 'line 393: GALLERY_REPO_DIR,',
+    ('palomas_orrery_dashboard.py', 'line 396: GALLERY_REPO_DIR,',
      (
          '         "tools/guestbook_local.json, which git ignores.",\n'
          '         GALLERY_REPO_DIR,\n'
@@ -110,7 +113,7 @@ EDITS = [
          '         "tools/guestbook_local.json, which git ignores.",\n'
          '         GALLERY_REPO_DIR,\n'
      )),
-    ('palomas_orrery_dashboard.py', 'line 445: "The Daily Run\'s fourth step: the same button',
+    ('palomas_orrery_dashboard.py', 'line 448: "The Daily Run\'s fourth step: the same button',
      (
          '         "gallery_maintenance_run.py",\n'
          '         "The Daily Run\'s fourth step: the same button as Gallery "\n'
@@ -121,7 +124,7 @@ EDITS = [
          '         "The Daily Run\'s third step: the same button as Gallery "\n'
          '         "Maintenance Run -- offline under Gallery -- checks and data, "\n'
      )),
-    ('palomas_orrery_dashboard.py', 'line 465: "the config mirror check, the Horizons check ',
+    ('palomas_orrery_dashboard.py', 'line 468: "the config mirror check, the Horizons check ',
      (
          '        "the mirror suite, the store writer and store editor suites, "\n'
          '        "the config mirror check, the Horizons check suite, Horizons "\n'
@@ -134,7 +137,7 @@ EDITS = [
          '        "confirmations, the pointer join, cache in step, drawn orbit, the drawings "\n'
          '        "check, the collapsed-features sweep, the "\n'
      )),
-    ('palomas_orrery_dashboard.py', 'line 482: "daily_run.py --check: fails if any of the fo',
+    ('palomas_orrery_dashboard.py', 'line 485: "daily_run.py --check: fails if any of the fo',
      (
          '        "daily_run.py",\n'
          '        "daily_run.py --check: fails if any of the four scripts the "\n'
@@ -145,7 +148,7 @@ EDITS = [
          '        "daily_run.py --check: fails if any of the three scripts the "\n'
          '        "Daily Run calls is missing, say after a rename, and names it. "\n'
      )),
-    ('palomas_orrery_dashboard.py', 'line 549: ("Horizons Check Suite",',
+    ('palomas_orrery_dashboard.py', 'line 552: ("Horizons Check Suite",',
      (
          '        "JPL\'S CHECK OF THE OBJECTS",\n'
          '        ("Horizons Check Suite",\n'
@@ -182,7 +185,7 @@ EDITS = [
          '        "Maintenance Run on 2026-10-14, L-431). GATES the gallery runner.",\n'
          '        GALLERY_REPO_DIR,\n'
      )),
-    ('palomas_orrery_dashboard.py', 'line 633: GALLERY_REPO_DIR,',
+    ('palomas_orrery_dashboard.py', 'line 636: GALLERY_REPO_DIR,',
      (
          '        "it, not by its name.",\n'
          '        GALLERY_REPO_DIR,\n'
@@ -205,7 +208,7 @@ EDITS = [
          '        "caught. GATES the gallery runner.",\n'
          '        GALLERY_REPO_DIR,\n'
      )),
-    ('palomas_orrery_dashboard.py', 'line 1671: "Horizons Check"):',
+    ('palomas_orrery_dashboard.py', 'line 1675: "Horizons Check"):',
      (
          '    ("Daily Run",\n'
          '     "Horizons Check"):\n'
@@ -217,7 +220,7 @@ EDITS = [
          '    ("Daily Run",\n'
          '     "Cache Builder"):\n'
      )),
-    ('palomas_orrery_dashboard.py', 'line 1698: "Horizons Check Suite"):',
+    ('palomas_orrery_dashboard.py', 'line 1702: "Horizons Check Suite"):',
      (
          '    ("Gallery -- checks and data",\n'
          '     "Horizons Check Suite"):\n'

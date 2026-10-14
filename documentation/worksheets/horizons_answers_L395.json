@@ -1,0 +1,771 @@
+{
+  "_comment": "JPL Horizons answers for test_horizons_check.py (L-395), keyed by the exact query the check makes. Answers from 2026-10-07 were fetched by Tony in his browser and recorded in the orrery's documentation/HORIZONS_ANSWERS_L395_20261007.md. Answers from 2026-10-10 were fetched by this build session through the chat's web-fetch tool, which passes a page through a reading model: their field lines are JPL's, their layout is rebuilt. Each answer's source is in sources. Re-fetched 2026-10-10: every 2026-10-07 answer used here read the same except Encke's record (G3), which JPL re-solved in place (solution date 2026-Oct-09); the recorded 2026-10-07 text is kept. Moved from the gallery's documentation/ into the orrery's documentation/worksheets/ by L-431 build 3 (2026-10-14), with the check. That build added answers for the period's elements queries and the spacecraft data sheets; every one it added is CONSTRUCTED, says so in sources, and is not JPL's text.",
+  "sources": {
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=9&group=mb&format=text": "2026-10-07, Tony in his browser; HORIZONS_ANSWERS_L395_20261007.md (orrery) answer B1",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2004%20MN4&group=sb&format=text": "2026-10-07, Tony in his browser; HORIZONS_ANSWERS_L395_20261007.md (orrery) answer C1",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2004%20MN4&group=mb&format=text": "2026-10-07, Tony in his browser; HORIZONS_ANSWERS_L395_20261007.md (orrery) answer E1",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=499&group=sb&format=text": "2026-10-07, Tony in his browser; HORIZONS_ANSWERS_L395_20261007.md (orrery) answer E2",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='90000030'&OBJ_DATA=YES&MAKE_EPHEM=NO": "2026-10-07, Tony in his browser; HORIZONS_ANSWERS_L395_20261007.md (orrery) answer G1",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='DES=1P%3B'&OBJ_DATA=YES&MAKE_EPHEM=NO": "2026-10-07, Tony in his browser; HORIZONS_ANSWERS_L395_20261007.md (orrery) answer G2",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='90000091'&OBJ_DATA=YES&MAKE_EPHEM=NO": "2026-10-07, Tony in his browser; HORIZONS_ANSWERS_L395_20261007.md (orrery) answer G3",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='DES=2P%3B'&OBJ_DATA=YES&MAKE_EPHEM=NO": "2026-10-07, Tony in his browser; HORIZONS_ANSWERS_L395_20261007.md (orrery) answer G4",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=199&group=mb&format=text": "2026-10-07, Tony in his browser; HORIZONS_ANSWERS_L395_20261007.md (orrery) answer D1",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=299&group=mb&format=text": "2026-10-07, Tony in his browser; HORIZONS_ANSWERS_L395_20261007.md (orrery) answer D2",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=399&group=mb&format=text": "2026-10-07, Tony in his browser; HORIZONS_ANSWERS_L395_20261007.md (orrery) answer D3",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=499&group=mb&format=text": "2026-10-07, Tony in his browser; HORIZONS_ANSWERS_L395_20261007.md (orrery) answer D4",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=599&group=mb&format=text": "2026-10-07, Tony in his browser; HORIZONS_ANSWERS_L395_20261007.md (orrery) answer D5",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=699&group=mb&format=text": "2026-10-07, Tony in his browser; HORIZONS_ANSWERS_L395_20261007.md (orrery) answer D6",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=799&group=mb&format=text": "2026-10-07, Tony in his browser; HORIZONS_ANSWERS_L395_20261007.md (orrery) answer D7",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=899&group=mb&format=text": "2026-10-07, Tony in his browser; HORIZONS_ANSWERS_L395_20261007.md (orrery) answer D8",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=10&group=mb&format=text": "2026-10-10 19:59 UTC, the chat's web-fetch tool (a reading model: fields, not bytes)",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=10&group=sb&format=text": "2026-10-10 19:59 UTC, the chat's web-fetch tool (a reading model: fields, not bytes)",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=199&group=sb&format=text": "2026-10-10 19:59 UTC, the chat's web-fetch tool (a reading model: fields, not bytes)",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=299&group=sb&format=text": "2026-10-10 19:59 UTC, the chat's web-fetch tool (a reading model: fields, not bytes)",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=399&group=sb&format=text": "2026-10-10 19:59 UTC, the chat's web-fetch tool (a reading model: fields, not bytes)",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=599&group=sb&format=text": "2026-10-10 19:59 UTC, the chat's web-fetch tool (a reading model: fields, not bytes)",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=699&group=sb&format=text": "2026-10-10 19:59 UTC, the chat's web-fetch tool (a reading model: fields, not bytes)",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=799&group=sb&format=text": "2026-10-10 19:59 UTC, the chat's web-fetch tool (a reading model: fields, not bytes)",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=899&group=sb&format=text": "2026-10-10 19:59 UTC, the chat's web-fetch tool (a reading model: fields, not bytes)",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=9&group=sb&format=text": "2026-10-10 19:59 UTC, the chat's web-fetch tool (a reading model: fields, not bytes)",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F2026%20A1&group=sb&format=text": "2026-10-10 19:59 UTC, the chat's web-fetch tool (a reading model: fields, not bytes)",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F2026%20A1&group=mb&format=text": "2026-10-10 19:59 UTC, the chat's web-fetch tool (a reading model: fields, not bytes)",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F2025%20N1&group=sb&format=text": "2026-10-10 19:59 UTC, the chat's web-fetch tool (a reading model: fields, not bytes)",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F2025%20N1&group=mb&format=text": "2026-10-10 19:59 UTC, the chat's web-fetch tool (a reading model: fields, not bytes)",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='90004956'&OBJ_DATA=YES&MAKE_EPHEM=NO": "2026-10-10, the chat's web-fetch tool, the two header lines only. On 2026-10-07 this record number held MAPS (C/2026 A1); by 2026-10-10 it held another comet and MAPS was 90004957",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='90000090'&OBJ_DATA=YES&MAKE_EPHEM=NO": "2026-10-10, the chat's web-fetch tool, the two header lines only: Encke's record before the newest",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='199'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461326.854166667'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'": "CONSTRUCTED 2026-10-14 by the L-431 build 3 session, which cannot reach JPL: Horizons' text layout for an elements row (OUT_UNITS AU-D), filled with the orrery's own period record for Mercury (data/osculating_cache.json, fetched 2026-10-13), so PR here is the record's days. Not a JPL answer. The live check is Tony's maintenance run.",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='599'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461325.500694444'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'": "CONSTRUCTED 2026-10-14 by the L-431 build 3 session, which cannot reach JPL: Horizons' text layout for an elements row (OUT_UNITS AU-D), filled with the orrery's own period record for Jupiter (data/osculating_cache.json, fetched 2026-10-12), so PR here is the record's days. Not a JPL answer. The live check is Tony's maintenance run.",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='90000091%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461326.854166667'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'": "CONSTRUCTED 2026-10-14 by the L-431 build 3 session, which cannot reach JPL: Horizons' text layout for an elements row (OUT_UNITS AU-D), filled with the orrery's own period record for Encke (data/osculating_cache.json, fetched 2026-10-13), so PR here is the record's days. Not a JPL answer. The live check is Tony's maintenance run.",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-31'&OBJ_DATA=YES&MAKE_EPHEM=NO": "CONSTRUCTED 2026-10-14 by the L-431 build 3 session, which cannot reach JPL: a data sheet's header line and the sentences documentation/SURVEY_L401_spacecraft_data_sheets_20261012.md quotes for Voyager 1 (-31), read 2026-10-12 through the chat's web-fetch tool. Not a byte copy of JPL's sheet. The live re-read is Tony's maintenance run, from 2026-11-11.",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-32'&OBJ_DATA=YES&MAKE_EPHEM=NO": "CONSTRUCTED 2026-10-14 by the L-431 build 3 session, which cannot reach JPL: a data sheet's header line and the sentences documentation/SURVEY_L401_spacecraft_data_sheets_20261012.md quotes for Voyager 2 (-32), read 2026-10-12 through the chat's web-fetch tool. Not a byte copy of JPL's sheet. The live re-read is Tony's maintenance run, from 2026-11-11.",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-23'&OBJ_DATA=YES&MAKE_EPHEM=NO": "CONSTRUCTED 2026-10-14 by the L-431 build 3 session, which cannot reach JPL: a data sheet's header line and the sentences documentation/SURVEY_L401_spacecraft_data_sheets_20261012.md quotes for Pioneer 10 (-23), read 2026-10-12 through the chat's web-fetch tool. Not a byte copy of JPL's sheet. The live re-read is Tony's maintenance run, from 2026-11-11."
+  },
+  "answers": {
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=9&group=mb&format=text": "API VERSION: 1.1\nAPI SOURCE: NASA/JPL Horizons Lookup API\n\nObject name        = Pluto Barycenter\nType               = barycenter\nPrimary SPKID      = 9\nPrimary designation= \nAliases            = \n\nObject name        = Apollo 9 S-IVB (spacecraft)\nType               = spacecraft\nPrimary SPKID      = -399090\nPrimary designation= 1969-018B\nAliases            = \n\nObject name        = DART Falcon 9 Booster (spacecraft)\nType               = spacecraft\nPrimary SPKID      = -149498\nPrimary designation= 2021-110B\nAliases            = \n\nObject name        = Falcon 9 RB Booster\nType               = spacecraft\nPrimary SPKID      = -162719\nPrimary designation= 2025-010D\nAliases            =",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2004%20MN4&group=sb&format=text": "API VERSION: 1.1\nAPI SOURCE: NASA/JPL Horizons Lookup API\n\nObject name        = 99942 Apophis\nType               = asteroid (integrated barycenter)\nPrimary SPKID      = 20099942\nPrimary designation= 2004 MN4\nAliases            = 50264249, 3264226, 2099942, K04M04N",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2004%20MN4&group=mb&format=text": "API VERSION: 1.1\nAPI SOURCE: NASA/JPL Horizons Lookup API\n\nNOTICE: no matches found",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=499&group=sb&format=text": "API VERSION: 1.1\nAPI SOURCE: NASA/JPL Horizons Lookup API\n\nObject name        = 499 Venusia\nType               = asteroid (integrated barycenter)\nPrimary SPKID      = 20000499\nPrimary designation= A902 YE\nAliases            = 1950 CE, 2000499, J02Y00E",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='90000030'&OBJ_DATA=YES&MAKE_EPHEM=NO": "API VERSION: 1.2\nAPI SOURCE: NASA/JPL Horizons API\n\n*******************************************************************************\nJPL/HORIZONS                      1P/Halley                2026-Oct-07 11:33:19\nRec #:90000030        Soln.date: 2025-Nov-21_15:57:34   # obs: 8518 (1835-1994)\n \nIAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):\n \n  EPOCH=  2439875.5 ! 1968-Jan-20.0000000 (TDB)    RMSW= n.a.\n   EC= .9679359956953212   QR= .5748638313743413   TP= 2446469.9736161465\n   OM= 59.09894720612437   W= 112.2414314637764    IN= 162.1905300439129\n   A= 17.92863504856929    MA= 274.3823371364693   ADIST= 35.28240626576424\n   PER= 75.9152528074041   N= .012983244           ANGMOM= .018296559\n   DAN= 1.78543            DDN= .82795             L= 305.8544912\n   B= 16.4450919           MOID= .0745097          TP= 1986-Feb-08.4736161465\n \nComet physical (GM= km^3/s^2; RAD= km):\n   GM= n.a.                RAD= 5.5\n   M1=  5.5      M2=  13.6     k1=  8.     k2=  5.      PHCOF=  .030\nComet non-gravitational force model (AMRAT=m^2/kg;A1-A3=au/d^2;DT=days;R0=au):\n   AMRAT=  0.                                      DT=  0.\n   A1= 4.887055233121E-10  A2= 1.554720290005E-10  A3= 0.\n Non-standard or simulated/proxy model:\n   ALN=  .1112620426   NK=  4.6142   NM=  2.15     NN=  5.093    R0=  2.808\n\nCOMET comments \n1: soln ref.= JPL#75, data arc: 1835-08-21 to 1994-01-11\n2: k1=8.0, k2=5.0, phase coef.=0.03;\n*******************************************************************************",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='DES=1P%3B'&OBJ_DATA=YES&MAKE_EPHEM=NO": "API VERSION: 1.2\nAPI SOURCE: NASA/JPL Horizons API\n\n*******************************************************************************\nJPL/DASTCOM            Small-body Index Search Results     2026-Oct-07 11:34:03\n\n Comet AND asteroid index search:\n\n    DES = 1P;\n\n Matching small-bodies: \n\n    Record #  Epoch-yr  >MATCH DESIG<  Primary Desig  Name  \n    --------  --------  -------------  -------------  -------------------------\n    90000001    -239    1P             1P              Halley\n    90000002    -163    1P             1P              Halley\n    90000003     -86    1P             1P              Halley\n    90000004     -11    1P             1P              Halley\n    90000005      66    1P             1P              Halley\n    90000006     141    1P             1P              Halley\n    90000007     218    1P             1P              Halley\n    90000008     295    1P             1P              Halley\n    90000009     374    1P             1P              Halley\n    90000010     451    1P             1P              Halley\n    90000011     530    1P             1P              Halley\n    90000012     607    1P             1P              Halley\n    90000013     684    1P             1P              Halley\n    90000014     760    1P             1P              Halley\n    90000015     837    1P             1P              Halley\n    90000016     912    1P             1P              Halley\n    90000017     989    1P             1P              Halley\n    90000018    1066    1P             1P              Halley\n    90000019    1145    1P             1P              Halley\n    90000020    1222    1P             1P              Halley\n    90000021    1301    1P             1P              Halley\n    90000022    1378    1P             1P              Halley\n    90000023    1456    1P             1P              Halley\n    90000024    1531    1P             1P              Halley\n    90000025    1607    1P             1P              Halley\n    90000026    1682    1P             1P              Halley\n    90000027    1759    1P             1P              Halley\n    90000028    1835    1P             1P              Halley\n    90000029    1910    1P             1P              Halley\n    90000030    1968    1P             1P              Halley\n\n (30 matches. To SELECT, enter record # (integer), followed by semi-colon.)\n*******************************************************************************",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='90000091'&OBJ_DATA=YES&MAKE_EPHEM=NO": "API VERSION: 1.2\nAPI SOURCE: NASA/JPL Horizons API\n\n*******************************************************************************\nJPL/HORIZONS                      2P/Encke                 2026-Oct-07 11:34:41\nRec #:90000091 (+COV) Soln.date: 2026-Oct-01_15:11:48    # obs: 880 (2018-2026)\n \nIAU76/J2000 helio. ecliptic osc. elements (au, days, deg., period=Julian yrs):\n \n  EPOCH=  2460147.5 ! 2023-Jul-22.0000000 (TDB)    RMSW= n.a.\n   EC= .8469532425568865   QR= .3395910296522707   TP= 2460240.0266747689\n   OM= 334.0240655739339   W= 187.2820411908973    IN= 11.33709697552753\n   A= 2.218871117073451    MA= 332.4086523635144   ADIST= 4.098151204494632\n   PER= 3.30526525077918   N= .298198846           ANGMOM= .013623462\n   DAN= 3.92304            DDN= .34085             L= 161.165498\n   B= -1.427808            MOID= .16594701         TP= 2023-Oct-22.5266747689\n \nComet physical (GM= km^3/s^2; RAD= km):\n   GM= n.a.                RAD= 2.4\n   M1=  15.7     M2=  n.a.     k1=  4.5    k2= n.a.     PHCOF= n.a.\nComet non-gravitational force model (AMRAT=m^2/kg;A1-A3=au/d^2;DT=days;R0=au):\n   AMRAT=  0.                                      DT=  0.\n   A1= 2.041002176702E-10  A2= 2.635817800183E-12  A3= 0.\n Non-standard or simulated/proxy model:\n   ALN=  .1112620426   NK=  4.6142   NM=  2.15     NN=  5.093    R0=  2.808\n\nCOMET comments \n1: soln ref.= JPL#K273/20, data arc: 2018-11-05 to 2026-10-01\n2: k1=4.5;\n*******************************************************************************",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='DES=2P%3B'&OBJ_DATA=YES&MAKE_EPHEM=NO": "API VERSION: 1.2\nAPI SOURCE: NASA/JPL Horizons API\n\n*******************************************************************************\nJPL/DASTCOM            Small-body Index Search Results     2026-Oct-07 11:35:16\n\n Comet AND asteroid index search:\n\n    DES = 2P;\n\n Matching small-bodies: \n\n    Record #  Epoch-yr  >MATCH DESIG<  Primary Desig  Name  \n    --------  --------  -------------  -------------  -------------------------\n    90000031    1786    2P             2P              Encke\n    90000032    1796    2P             2P              Encke\n    90000033    1805    2P             2P              Encke\n    90000034    1819    2P             2P              Encke\n    90000035    1822    2P             2P              Encke\n    90000036    1825    2P             2P              Encke\n    90000037    1828    2P             2P              Encke\n    90000038    1832    2P             2P              Encke\n    90000039    1835    2P             2P              Encke\n    90000040    1838    2P             2P              Encke\n    90000041    1842    2P             2P              Encke\n    90000042    1845    2P             2P              Encke\n    90000043    1848    2P             2P              Encke\n    90000044    1852    2P             2P              Encke\n    90000045    1855    2P             2P              Encke\n    90000046    1858    2P             2P              Encke\n    90000047    1862    2P             2P              Encke\n    90000048    1865    2P             2P              Encke\n    90000049    1868    2P             2P              Encke\n    90000050    1872    2P             2P              Encke\n    90000051    1875    2P             2P              Encke\n    90000052    1878    2P             2P              Encke\n    90000053    1881    2P             2P              Encke\n    90000054    1885    2P             2P              Encke\n    90000055    1888    2P             2P              Encke\n    90000056    1891    2P             2P              Encke\n    90000057    1895    2P             2P              Encke\n    90000058    1898    2P             2P              Encke\n    90000059    1901    2P             2P              Encke\n    90000060    1904    2P             2P              Encke\n    90000061    1908    2P             2P              Encke\n    90000062    1911    2P             2P              Encke\n    90000063    1914    2P             2P              Encke\n    90000064    1918    2P             2P              Encke\n    90000065    1921    2P             2P              Encke\n    90000066    1924    2P             2P              Encke\n    90000067    1928    2P             2P              Encke\n    90000068    1931    2P             2P              Encke\n    90000069    1934    2P             2P              Encke\n    90000070    1937    2P             2P              Encke\n    90000071    1941    2P             2P              Encke\n    90000072    1947    2P             2P              Encke\n    90000073    1951    2P             2P              Encke\n    90000074    1954    2P             2P              Encke\n    90000075    1957    2P             2P              Encke\n    90000076    1961    2P             2P              Encke\n    90000077    1964    2P             2P              Encke\n    90000078    1967    2P             2P              Encke\n    90000079    1971    2P             2P              Encke\n    90000080    1974    2P             2P              Encke\n    90000081    1977    2P             2P              Encke\n    90000082    1980    2P             2P              Encke\n    90000083    1984    2P             2P              Encke\n    90000084    1987    2P             2P              Encke\n    90000085    1990    2P             2P              Encke\n    90000086    1994    2P             2P              Encke\n    90000087    1995    2P             2P              Encke\n    90000088    1998    2P             2P              Encke\n    90000089    2004    2P             2P              Encke\n    90000090    2015    2P             2P              Encke\n    90000091    2023    2P             2P              Encke\n\n (61 matches. To SELECT, enter record # (integer), followed by semi-colon.)\n*******************************************************************************",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=199&group=mb&format=text": "API VERSION: 1.1\nAPI SOURCE: NASA/JPL Horizons Lookup API\n\nObject name        = Mercury\nType               = planet\nPrimary SPKID      = 199\nPrimary designation= \nAliases            = ",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=299&group=mb&format=text": "API VERSION: 1.1\nAPI SOURCE: NASA/JPL Horizons Lookup API\n\nObject name        = Venus\nType               = planet\nPrimary SPKID      = 299\nPrimary designation= \nAliases            = ",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=399&group=mb&format=text": "API VERSION: 1.1\nAPI SOURCE: NASA/JPL Horizons Lookup API\n\nObject name        = Earth\nType               = planet\nPrimary SPKID      = 399\nPrimary designation= \nAliases            = Geocenter",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=499&group=mb&format=text": "API VERSION: 1.1\nAPI SOURCE: NASA/JPL Horizons Lookup API\n\nObject name        = Mars\nType               = planet\nPrimary SPKID      = 499\nPrimary designation= \nAliases            = ",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=599&group=mb&format=text": "API VERSION: 1.1\nAPI SOURCE: NASA/JPL Horizons Lookup API\n\nObject name        = Jupiter\nType               = planet\nPrimary SPKID      = 599\nPrimary designation= \nAliases            = ",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=699&group=mb&format=text": "API VERSION: 1.1\nAPI SOURCE: NASA/JPL Horizons Lookup API\n\nObject name        = Saturn\nType               = planet\nPrimary SPKID      = 699\nPrimary designation= \nAliases            = ",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=799&group=mb&format=text": "API VERSION: 1.1\nAPI SOURCE: NASA/JPL Horizons Lookup API\n\nObject name        = Uranus\nType               = planet\nPrimary SPKID      = 799\nPrimary designation= \nAliases            = ",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=899&group=mb&format=text": "API VERSION: 1.1\nAPI SOURCE: NASA/JPL Horizons Lookup API\n\nObject name        = Neptune\nType               = planet\nPrimary SPKID      = 899\nPrimary designation= \nAliases            = ",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=10&group=mb&format=text": "API VERSION: 1.1\n\nObject name        = Sun\nType               = Sun\nPrimary SPKID      = 10\nPrimary designation= \nAliases            = Sol\n\nObject name        = Pioneer 10 (spacecraft)\nType               = spacecraft\nPrimary SPKID      = -23\nPrimary designation= 1972-012A\nAliases            = \n\nObject name        = Apollo 10 S-IVB (spacecraft)\nType               = spacecraft\nPrimary SPKID      = -399100\nPrimary designation= 1969-043B\nAliases            = \n\nObject name        = Apollo 10 LM (spacecraft)\nType               = spacecraft\nPrimary SPKID      = -399101\nPrimary designation= 1969-059C\nAliases            = Snoopy",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=10&group=sb&format=text": "API VERSION: 1.1\n\nObject name        = 10 Hygiea\nType               = asteroid (integrated barycenter)\nPrimary SPKID      = 20000010\nPrimary designation= A849 GA\nAliases            = A900 GA, 2000010, I49G00A",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=199&group=sb&format=text": "API VERSION: 1.1\n\nObject name        = 199 Byblis\nType               = asteroid (integrated barycenter)\nPrimary SPKID      = 20000199\nPrimary designation= A879 NA\nAliases            = 1971 WB, 2000199, I79N00A",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=299&group=sb&format=text": "API VERSION: 1.1\n\nObject name        = 299 Thora\nType               = asteroid (integrated barycenter)\nPrimary SPKID      = 20000299\nPrimary designation= A890 TA\nAliases            = 1939 PK, 1935 PC, 2000299, I90T00A",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=399&group=sb&format=text": "API VERSION: 1.1\n\nObject name        = 399 Persephone\nType               = asteroid (integrated barycenter)\nPrimary SPKID      = 20000399\nPrimary designation= A895 DD\nAliases            = 1948 CC, 2000399, I95D00D",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=599&group=sb&format=text": "API VERSION: 1.1\n\nObject name        = 599 Luisa\nType               = asteroid (integrated barycenter)\nPrimary SPKID      = 20000599\nPrimary designation= A906 HF\nAliases            = 2000599, J06H00F",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=699&group=sb&format=text": "API VERSION: 1.1\n\nObject name        = 699 Hela\nType               = asteroid (integrated barycenter)\nPrimary SPKID      = 20000699\nPrimary designation= A910 LC\nAliases            = 1957 WX1, 1948 KD, A923 TB, A902 WE, 2000699, J10L00C",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=799&group=sb&format=text": "API VERSION: 1.1\n\nObject name        = 799 Gudula\nType               = asteroid (integrated barycenter)\nPrimary SPKID      = 20000799\nPrimary designation= A915 EA\nAliases            = 1952 HL4, 1948 KB, 1935 BC, A907 FB, 2000799, J15E00A",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=899&group=sb&format=text": "API VERSION: 1.1\n\nObject name        = 899 Jokaste\nType               = asteroid (integrated barycenter)\nPrimary SPKID      = 20000899\nPrimary designation= A918 PH\nAliases            = 1953 TL2, 2000899, J18P00H",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=9&group=sb&format=text": "API VERSION: 1.1\n\nObject name        = 9 Metis\nType               = asteroid (integrated barycenter)\nPrimary SPKID      = 20000009\nPrimary designation= A848 HA\nAliases            = 1974 QU2, 2000009, I48H00A",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F2026%20A1&group=sb&format=text": "API VERSION: 1.1\n\nObject name        = MAPS (C/2026 A1)\nType               = comet (integrated barycenter)\nPrimary SPKID      = 1004111\nPrimary designation= C/2026 A1\nAliases            = K26A010",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F2026%20A1&group=mb&format=text": "API VERSION: 1.1\n\nNOTICE: no matches found",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F2025%20N1&group=sb&format=text": "API VERSION: 1.1\n\nObject name        = ATLAS (C/2025 N1)\nType               = comet (integrated barycenter)\nPrimary SPKID      = 1004083\nPrimary designation= C/2025 N1\nAliases            = 3I, K25N010",
+    "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F2025%20N1&group=mb&format=text": "API VERSION: 1.1\n\nNOTICE: no matches found",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='90004956'&OBJ_DATA=YES&MAKE_EPHEM=NO": "API VERSION: 1.2\nAPI SOURCE: NASA/JPL Horizons API\n\n*******************************************************************************\nJPL/HORIZONS                PANSTARRS (C/2025 Y3)          2026-Oct-10 12:29:23\nRec #:90004956 (+COV) Soln.date: 2026-Jan-20_12:12:02     # obs: 27 (2025-2026)\n",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='90000090'&OBJ_DATA=YES&MAKE_EPHEM=NO": "API VERSION: 1.2\nAPI SOURCE: NASA/JPL Horizons API\n\n*******************************************************************************\nJPL/HORIZONS                      2P/Encke                 2026-Oct-10 12:59:50\nRec #:90000090 (+COV) Soln.date: 2022-May-23_10:10:06   # obs: 2782 (2009-2021)\n",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='199'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461326.854166667'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'": "API VERSION: 1.2\nAPI SOURCE: NASA/JPL Horizons API\n\n*******************************************************************************\nEphemeris / API_USER\n*******************************************************************************\nTarget body name: Mercury (199)\nCenter body name: Sun (10)\n*******************************************************************************\n$$SOE\n2461326.854166667 = A.D. 2026-10-13 08:30 TDB \n EC= 2.056387074252793E-01 QR= 3.074951889588476E-01 IN= 7.003371896375679E+00\n OM= 4.829726978781827E+01 W = 2.920131028257546E+01 Tp=  2461354.853725976\n N = 4.092359074054842E+00 MA= 2.454157493912693E+02 TA= 2.264124374773949E+02\n A = 3.870973974099114E-01 AD= 4.666996058609752E-01 PR= 8.796882030278451E+01\n$$EOE\n*******************************************************************************\n",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='599'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461325.500694444'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'": "API VERSION: 1.2\nAPI SOURCE: NASA/JPL Horizons API\n\n*******************************************************************************\nEphemeris / API_USER\n*******************************************************************************\nTarget body name: Jupiter (599)\nCenter body name: Sun (10)\n*******************************************************************************\n$$SOE\n2461325.500694444 = A.D. 2026-10-12 00:01 TDB \n EC= 4.840091756160265E-02 QR= 4.950295611914326E+00 IN= 1.303779019594749E+00\n OM= 1.005229024177593E+02 W = 2.735032249017481E+02 Tp=  2459965.768981680\n N = 8.310852668387375E-02 MA= 1.130052993331561E+02 TA= 1.179862376069898E+02\n A = 5.202081110912366E+00 AD= 5.453866609910406E+00 PR= 4.331685500446416E+03\n$$EOE\n*******************************************************************************\n",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='90000091%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461326.854166667'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'": "API VERSION: 1.2\nAPI SOURCE: NASA/JPL Horizons API\n\n*******************************************************************************\nEphemeris / API_USER\n*******************************************************************************\nTarget body name: 2P/Encke\nCenter body name: Sun (10)\n*******************************************************************************\n$$SOE\n2461326.854166667 = A.D. 2026-10-13 08:30 TDB \n EC= 8.473192969120388E-01 QR= 3.386051863192332E-01 IN= 1.134776793499110E+01\n OM= 3.340190669262349E+02 W = 1.872878429358795E+02 Tp=  2461446.728467565\n N = 2.984282223736913E-01 MA= 3.242261254747133E+02 TA= 2.153797954248334E+02\n A = 2.217733999588400E+00 AD= 4.096862812857567E+00 PR= 1.206320223793072E+03\n$$EOE\n*******************************************************************************\n",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-31'&OBJ_DATA=YES&MAKE_EPHEM=NO": "API VERSION: 1.2\nAPI SOURCE: NASA/JPL Horizons API\n\n*******************************************************************************\n Revised: Aug 19, 2022           Voyager 1                     -31\n\n Trajectory: 2022 refit by R. Jacobson; there has been no new tracking data possible since 1992.\n Formal predicted geocentric pointing uncertainty on 2030-Jan-1:\n   RA +/- 1.701 arcseconds, DEC +/- 1.535 arcseconds\n*******************************************************************************\n",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-32'&OBJ_DATA=YES&MAKE_EPHEM=NO": "API VERSION: 1.2\nAPI SOURCE: NASA/JPL Horizons API\n\n*******************************************************************************\n Revised: Aug 19, 2022           Voyager 2                     -32\n\n Trajectory: 2022 refit by R. Jacobson of 1989-1992 tracking.\n Formal predicted geocentric pointing uncertainty on 2030-Jan-1:\n   RA +/- 4.718 arcseconds, DEC +/- 3.715 arcseconds\n*******************************************************************************\n",
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-23'&OBJ_DATA=YES&MAKE_EPHEM=NO": "API VERSION: 1.2\nAPI SOURCE: NASA/JPL Horizons API\n\n*******************************************************************************\n Revised: Jul 27, 2005           Pioneer 10                     -23\n\n Trajectory from the JPL Navigation Team. It should be used cautiously for high precision.\n*******************************************************************************\n"
+  },
+  "inputs": {
+    "_comment": "What test_horizons_check.py runs the check on, frozen with these answers on 2026-10-14 (L-431 build 3), so the test does not move when the live records do: the orbit cache's entries for Mercury, Jupiter and Encke as they stood at orrery db63721d (their period records' dates are the dates the recorded elements answers were asked at); the thirteen identity confirmations as the move carried them over, before any period was confirmed; and the 26 data sheets as seeded from the survey of 2026-10-12. The live files, data/osculating_cache.json, data/horizons_confirmations.json and data/spacecraft_sheets.json, change on every plot and every check; this copy never does.",
+    "cache": {
+      "Mercury": {
+        "elements": {
+          "a": 0.3870973974099114,
+          "e": 0.2056387074252793,
+          "i": 7.003371896375679,
+          "omega": 29.20131028257546,
+          "Omega": 48.29726978781827,
+          "epoch": "2026-10-13 08:30 osc.",
+          "TP": 2461354.853725976,
+          "MA": 245.4157493912693,
+          "TA": 226.4124374773949
+        },
+        "metadata": {
+          "fetched": "2026-10-13T08:31:10.523436",
+          "source": "JPL Horizons",
+          "solution_date": "2026-10-13",
+          "horizons_id": "199",
+          "display_name": "Mercury",
+          "refresh_interval_days": 7,
+          "center_body": "@sun"
+        },
+        "period": {
+          "days": 87.96882030278451,
+          "open_orbit": false,
+          "center": "@sun",
+          "epoch": "2026-10-13 08:30",
+          "fetched": "2026-10-13",
+          "source": "JPL Horizons PR (sidereal orbit period)",
+          "year_change_days": 0.00036931457614741703,
+          "year_step_days": 365.25,
+          "sbdb_sigma_days": null,
+          "sbdb_status": "not a small body; SBDB not asked",
+          "sbdb_fullname": null,
+          "error_days": 0.00036931457614741703,
+          "error_from": "year_change",
+          "test": {
+            "@sun": 0.0003627265252816869,
+            "@0": 1.163980847255786,
+            "run": "2026-10-11"
+          },
+          "horizons_targetname": "Mercury (199)",
+          "agrees_with_elements_fetch": true,
+          "elements": {
+            "a": 0.3870973974099114,
+            "e": 0.2056387074252793,
+            "i": 7.003371896375679,
+            "omega": 29.20131028257546,
+            "Omega": 48.29726978781827,
+            "TP": 2461354.853725976,
+            "MA": 245.4157493912693,
+            "TA": 226.4124374773949,
+            "q": 0.3074951889588476,
+            "epoch": "2026-10-13 08:30 osc."
+          },
+          "elements_fetch_days": 87.96882030278451,
+          "elements_fetch_center": "@sun"
+        }
+      },
+      "Jupiter": {
+        "elements": {
+          "a": 5.202081110912366,
+          "e": 0.04840091756160265,
+          "i": 1.303779019594749,
+          "omega": 273.5032249017481,
+          "Omega": 100.5229024177593,
+          "epoch": "2026-10-12 00:01 osc.",
+          "TP": 2459965.76898168,
+          "MA": 113.0052993331561,
+          "TA": 117.9862376069898
+        },
+        "metadata": {
+          "fetched": "2026-10-12T13:57:06.970290",
+          "source": "JPL Horizons",
+          "solution_date": "2026-10-12",
+          "horizons_id": "599",
+          "display_name": "Jupiter",
+          "refresh_interval_days": 30,
+          "center_body": "@sun"
+        },
+        "period": {
+          "days": 4331.685500446416,
+          "open_orbit": false,
+          "center": "@sun",
+          "epoch": "2026-10-12 00:01",
+          "fetched": "2026-10-12",
+          "source": "JPL Horizons PR (sidereal orbit period)",
+          "year_change_days": 1.6283133990627903,
+          "year_step_days": 365.25,
+          "sbdb_sigma_days": null,
+          "sbdb_status": "not a small body; SBDB not asked",
+          "sbdb_fullname": null,
+          "error_days": 1.6283133990627903,
+          "error_from": "year_change",
+          "test": {
+            "@sun": 1.6283133990627903,
+            "@0": 5.4868924125021294,
+            "run": "2026-10-12"
+          },
+          "horizons_targetname": "Jupiter (599)",
+          "agrees_with_elements_fetch": true
+        }
+      },
+      "Encke": {
+        "elements": {
+          "a": 2.2177339995884,
+          "e": 0.8473192969120388,
+          "i": 11.3477679349911,
+          "omega": 187.2878429358795,
+          "Omega": 334.0190669262349,
+          "epoch": "2026-10-13 08:30 osc.",
+          "TP": 2461446.728467565,
+          "MA": 324.2261254747133,
+          "TA": 215.3797954248334,
+          "solution_TP": 2460240.028455204
+        },
+        "metadata": {
+          "fetched": "2026-10-13T08:31:16.769709",
+          "source": "JPL Horizons",
+          "solution_date": "2026-10-13",
+          "horizons_id": "90000091",
+          "display_name": "Encke",
+          "refresh_interval_days": 30,
+          "center_body": "@sun"
+        },
+        "period": {
+          "days": 1206.320223793072,
+          "open_orbit": false,
+          "center": "@sun",
+          "epoch": "2026-10-13 08:30",
+          "fetched": "2026-10-13",
+          "source": "JPL Horizons PR (sidereal orbit period)",
+          "year_change_days": 0.15083758920104628,
+          "year_step_days": 365.25,
+          "sbdb_sigma_days": 0.0006574,
+          "sbdb_status": "SBDB sigma",
+          "sbdb_fullname": "2P/Encke",
+          "error_days": 0.15083758920104628,
+          "error_from": "year_change",
+          "test": {
+            "@sun": 0.1496537241050646,
+            "@0": 11.35785233450406,
+            "run": "2026-10-11"
+          },
+          "horizons_targetname": "2P/Encke",
+          "agrees_with_elements_fetch": true,
+          "elements": {
+            "a": 2.2177339995884,
+            "e": 0.8473192969120388,
+            "i": 11.3477679349911,
+            "omega": 187.2878429358795,
+            "Omega": 334.0190669262349,
+            "TP": 2461446.728467565,
+            "MA": 324.2261254747133,
+            "TA": 215.3797954248334,
+            "q": 0.3386051863192332,
+            "epoch": "2026-10-13 08:30 osc."
+          },
+          "elements_fetch_days": 1206.320223793072,
+          "elements_fetch_center": "@sun"
+        }
+      }
+    },
+    "confirmations": {
+      "_comment": "Written by horizons_check.py (L-395, L-431): the last date each keyed entry of the orrery's object list was confirmed against JPL Horizons, and what was confirmed -- its identity, and its period where the period was fetched -- with this record's last run. Only the check writes it. check_horizons_confirmations.py reads it offline, and export_objects.py copies its dates into data/objects_export.json. The identity confirmations of 2026-10-10 were carried over from the website's own record by L-431's build 3. Do not edit by hand.",
+      "schema": 2,
+      "cadence_days": 30,
+      "objects": {
+        "sun": {
+          "confirmed": "2026-10-10",
+          "horizons_id": "10",
+          "id_type": null,
+          "horizons_name": "Sun",
+          "object_type": "fixed",
+          "orrery_sha": "32619f8d",
+          "jpl_name": "Sun",
+          "jpl_type": "Sun",
+          "queries": [
+            "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=10&group=mb&format=text",
+            "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=10&group=sb&format=text"
+          ],
+          "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)"
+        },
+        "mercury": {
+          "confirmed": "2026-10-10",
+          "horizons_id": "199",
+          "id_type": null,
+          "horizons_name": "Mercury",
+          "object_type": "orbital",
+          "orrery_sha": "32619f8d",
+          "jpl_name": "Mercury",
+          "jpl_type": "planet",
+          "queries": [
+            "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=199&group=mb&format=text",
+            "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=199&group=sb&format=text"
+          ],
+          "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)"
+        },
+        "venus": {
+          "confirmed": "2026-10-10",
+          "horizons_id": "299",
+          "id_type": null,
+          "horizons_name": "Venus",
+          "object_type": "orbital",
+          "orrery_sha": "32619f8d",
+          "jpl_name": "Venus",
+          "jpl_type": "planet",
+          "queries": [
+            "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=299&group=mb&format=text",
+            "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=299&group=sb&format=text"
+          ],
+          "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)"
+        },
+        "earth": {
+          "confirmed": "2026-10-10",
+          "horizons_id": "399",
+          "id_type": null,
+          "horizons_name": "Earth",
+          "object_type": "orbital",
+          "orrery_sha": "32619f8d",
+          "jpl_name": "Earth",
+          "jpl_type": "planet",
+          "queries": [
+            "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=399&group=mb&format=text",
+            "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=399&group=sb&format=text"
+          ],
+          "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)"
+        },
+        "mars": {
+          "confirmed": "2026-10-10",
+          "horizons_id": "499",
+          "id_type": null,
+          "horizons_name": "Mars",
+          "object_type": "orbital",
+          "orrery_sha": "32619f8d",
+          "jpl_name": "Mars",
+          "jpl_type": "planet",
+          "queries": [
+            "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=499&group=mb&format=text",
+            "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=499&group=sb&format=text"
+          ],
+          "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)"
+        },
+        "jupiter": {
+          "confirmed": "2026-10-10",
+          "horizons_id": "599",
+          "id_type": null,
+          "horizons_name": "Jupiter",
+          "object_type": "orbital",
+          "orrery_sha": "32619f8d",
+          "jpl_name": "Jupiter",
+          "jpl_type": "planet",
+          "queries": [
+            "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=599&group=mb&format=text",
+            "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=599&group=sb&format=text"
+          ],
+          "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)"
+        },
+        "saturn": {
+          "confirmed": "2026-10-10",
+          "horizons_id": "699",
+          "id_type": null,
+          "horizons_name": "Saturn",
+          "object_type": "orbital",
+          "orrery_sha": "32619f8d",
+          "jpl_name": "Saturn",
+          "jpl_type": "planet",
+          "queries": [
+            "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=699&group=mb&format=text",
+            "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=699&group=sb&format=text"
+          ],
+          "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)"
+        },
+        "uranus": {
+          "confirmed": "2026-10-10",
+          "horizons_id": "799",
+          "id_type": null,
+          "horizons_name": "Uranus",
+          "object_type": "orbital",
+          "orrery_sha": "32619f8d",
+          "jpl_name": "Uranus",
+          "jpl_type": "planet",
+          "queries": [
+            "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=799&group=mb&format=text",
+            "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=799&group=sb&format=text"
+          ],
+          "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)"
+        },
+        "neptune": {
+          "confirmed": "2026-10-10",
+          "horizons_id": "899",
+          "id_type": null,
+          "horizons_name": "Neptune",
+          "object_type": "orbital",
+          "orrery_sha": "32619f8d",
+          "jpl_name": "Neptune",
+          "jpl_type": "planet",
+          "queries": [
+            "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=899&group=mb&format=text",
+            "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=899&group=sb&format=text"
+          ],
+          "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)"
+        },
+        "pluto_barycenter": {
+          "confirmed": "2026-10-10",
+          "horizons_id": "9",
+          "id_type": null,
+          "horizons_name": "Pluto Barycenter",
+          "object_type": "barycenter",
+          "orrery_sha": "32619f8d",
+          "jpl_name": "Pluto Barycenter",
+          "jpl_type": "barycenter",
+          "queries": [
+            "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=9&group=mb&format=text",
+            "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=9&group=sb&format=text"
+          ],
+          "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)"
+        },
+        "apophis": {
+          "confirmed": "2026-10-10",
+          "horizons_id": "2004 MN4",
+          "id_type": "smallbody",
+          "horizons_name": "99942 Apophis",
+          "object_type": "orbital",
+          "orrery_sha": "32619f8d",
+          "jpl_name": "99942 Apophis",
+          "jpl_type": "asteroid (integrated barycenter)",
+          "queries": [
+            "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2004%20MN4&group=sb&format=text",
+            "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2004%20MN4&group=mb&format=text"
+          ],
+          "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)"
+        },
+        "halley": {
+          "confirmed": "2026-10-10",
+          "horizons_id": "90000030",
+          "id_type": "smallbody",
+          "horizons_name": "1P/Halley",
+          "object_type": "orbital",
+          "orrery_sha": "32619f8d",
+          "jpl_name": "1P/Halley",
+          "jpl_type": "comet record",
+          "pin": {
+            "record": "90000030",
+            "solution_date": "2025-Nov-21_15:57:34",
+            "records": 30,
+            "newest": "90000030",
+            "newest_epoch_year": "1968"
+          },
+          "queries": [
+            "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='90000030'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+            "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='DES=1P%3B'&OBJ_DATA=YES&MAKE_EPHEM=NO"
+          ],
+          "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)"
+        },
+        "encke": {
+          "confirmed": "2026-10-10",
+          "horizons_id": "90000091",
+          "id_type": "smallbody",
+          "horizons_name": "2P/Encke",
+          "object_type": "orbital",
+          "orrery_sha": "32619f8d",
+          "jpl_name": "2P/Encke",
+          "jpl_type": "comet record",
+          "pin": {
+            "record": "90000091",
+            "solution_date": "2026-Oct-09_14:41:02",
+            "records": 61,
+            "newest": "90000091",
+            "newest_epoch_year": "2023"
+          },
+          "queries": [
+            "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='90000091'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+            "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='DES=2P%3B'&OBJ_DATA=YES&MAKE_EPHEM=NO"
+          ],
+          "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)"
+        }
+      }
+    },
+    "sheets": {
+      "_comment": "Written by horizons_check.py (L-395, L-401): each spacecraft's JPL Horizons data sheet, as last read -- its Revised: date and what it states about the trajectory's uncertainty -- with the rows of constants_new.py that quote it and a note for each change seen. Seeded from documentation/SURVEY_L401_spacecraft_data_sheets_20261012.md. Only the check writes it. Do not edit by hand.",
+      "schema": 1,
+      "cadence_days": 30,
+      "seeded_from": "documentation/SURVEY_L401_spacecraft_data_sheets_20261012.md",
+      "sheets": {
+        "-31": {
+          "name": "Voyager 1",
+          "read": "2026-10-12",
+          "revised": "Aug 19, 2022",
+          "stated": {
+            "RA_arcsec": 1.701,
+            "DEC_arcsec": 1.535
+          },
+          "rows": {
+            "RA_arcsec": "VOYAGER_1_POINTING_RA_2030_ARCSEC",
+            "DEC_arcsec": "VOYAGER_1_POINTING_DEC_2030_ARCSEC"
+          },
+          "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-31'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+          "notes": [
+            "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+          ]
+        },
+        "-32": {
+          "name": "Voyager 2",
+          "read": "2026-10-12",
+          "revised": "Aug 19, 2022",
+          "stated": {
+            "RA_arcsec": 4.718,
+            "DEC_arcsec": 3.715
+          },
+          "rows": {
+            "RA_arcsec": "VOYAGER_2_POINTING_RA_2030_ARCSEC",
+            "DEC_arcsec": "VOYAGER_2_POINTING_DEC_2030_ARCSEC"
+          },
+          "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-32'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+          "notes": [
+            "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+          ]
+        },
+        "-399110": {
+          "name": "Apollo 11 S-IVB",
+          "read": "2026-10-12",
+          "revised": "Mar 22, 2016",
+          "stated": null,
+          "rows": {},
+          "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-399110'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+          "notes": [
+            "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+          ]
+        },
+        "-23": {
+          "name": "Pioneer 10",
+          "read": "2026-10-12",
+          "revised": "Jul 27, 2005",
+          "stated": null,
+          "rows": {},
+          "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-23'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+          "notes": [
+            "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+          ]
+        },
+        "-24": {
+          "name": "Pioneer 11",
+          "read": "2026-10-12",
+          "revised": "Jun 15, 2007",
+          "stated": null,
+          "rows": {},
+          "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-24'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+          "notes": [
+            "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+          ]
+        },
+        "-77": {
+          "name": "Galileo",
+          "read": "2026-10-12",
+          "revised": "Feb 23, 2008",
+          "stated": null,
+          "rows": {},
+          "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-77'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+          "notes": [
+            "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+          ]
+        },
+        "-21": {
+          "name": "SOHO",
+          "read": "2026-10-12",
+          "revised": "Sep 01, 2026",
+          "stated": null,
+          "rows": {},
+          "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-21'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+          "notes": [
+            "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+          ]
+        },
+        "-82": {
+          "name": "Cassini",
+          "read": "2026-10-12",
+          "revised": "Sep 28, 2018",
+          "stated": null,
+          "rows": {},
+          "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-82'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+          "notes": [
+            "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+          ]
+        },
+        "-226": {
+          "name": "Rosetta",
+          "read": "2026-10-12",
+          "revised": "Oct 24, 2016",
+          "stated": null,
+          "rows": {},
+          "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-226'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+          "notes": [
+            "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+          ]
+        },
+        "-98": {
+          "name": "New Horizons",
+          "read": "2026-10-12",
+          "revised": "Sep 01, 2026",
+          "stated": null,
+          "rows": {},
+          "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-98'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+          "notes": [
+            "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+          ]
+        },
+        "-5": {
+          "name": "Akatsuki",
+          "read": "2026-10-12",
+          "revised": "Aug 06, 2025",
+          "stated": null,
+          "rows": {},
+          "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-5'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+          "notes": [
+            "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+          ]
+        },
+        "-61": {
+          "name": "Juno",
+          "read": "2026-10-12",
+          "revised": "Sep 30, 2026",
+          "stated": null,
+          "rows": {},
+          "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-61'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+          "notes": [
+            "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+          ]
+        },
+        "-139479": {
+          "name": "Gaia",
+          "read": "2026-10-12",
+          "revised": "May 16, 2025",
+          "stated": null,
+          "rows": {},
+          "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-139479'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+          "notes": [
+            "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+          ]
+        },
+        "-37": {
+          "name": "Hayabusa2",
+          "read": "2026-10-12",
+          "revised": "Jun 30, 2026",
+          "stated": null,
+          "rows": {},
+          "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-37'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+          "notes": [
+            "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+          ]
+        },
+        "-64": {
+          "name": "OSIRISREx",
+          "read": "2026-10-12",
+          "revised": "Sep 18, 2025",
+          "stated": null,
+          "rows": {},
+          "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-64'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+          "notes": [
+            "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+          ]
+        },
+        "-96": {
+          "name": "Parker",
+          "read": "2026-10-12",
+          "revised": "Sep 30, 2026",
+          "stated": null,
+          "rows": {},
+          "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-96'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+          "notes": [
+            "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+          ]
+        },
+        "-168": {
+          "name": "MarsRover",
+          "read": "2026-10-12",
+          "revised": "Feb 18, 2021",
+          "stated": null,
+          "rows": {},
+          "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-168'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+          "notes": [
+            "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+          ]
+        },
+        "-49": {
+          "name": "Lucy",
+          "read": "2026-10-12",
+          "revised": "Oct 25, 2025",
+          "stated": null,
+          "rows": {},
+          "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-49'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+          "notes": [
+            "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+          ]
+        },
+        "-135": {
+          "name": "DART",
+          "read": "2026-10-12",
+          "revised": "Mar 01, 2024",
+          "stated": null,
+          "rows": {},
+          "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-135'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+          "notes": [
+            "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+          ]
+        },
+        "-170": {
+          "name": "JamesWebb",
+          "read": "2026-10-12",
+          "revised": "Sep 21, 2026",
+          "stated": null,
+          "rows": {},
+          "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-170'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+          "notes": [
+            "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+          ]
+        },
+        "-28": {
+          "name": "JUICE",
+          "read": "2026-10-12",
+          "revised": "Jun 30, 2026",
+          "stated": null,
+          "rows": {},
+          "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-28'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+          "notes": [
+            "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+          ]
+        },
+        "-255": {
+          "name": "Psyche",
+          "read": "2026-10-12",
+          "revised": "Sep 30, 2026",
+          "stated": null,
+          "rows": {},
+          "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-255'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+          "notes": [
+            "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+          ]
+        },
+        "-159": {
+          "name": "Clipper",
+          "read": "2026-10-12",
+          "revised": "Sep 30, 2026",
+          "stated": null,
+          "rows": {},
+          "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-159'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+          "notes": [
+            "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+          ]
+        },
+        "-121": {
+          "name": "BepiColombo",
+          "read": "2026-10-12",
+          "revised": "Jun 30, 2026",
+          "stated": null,
+          "rows": {},
+          "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-121'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+          "notes": [
+            "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+          ]
+        },
+        "-144": {
+          "name": "SolO",
+          "read": "2026-10-12",
+          "revised": "Sep 30, 2026",
+          "stated": null,
+          "rows": {},
+          "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-144'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+          "notes": [
+            "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+          ]
+        },
+        "-1024": {
+          "name": "Artemis II",
+          "read": "2026-10-12",
+          "revised": "Apr 20, 2026",
+          "stated": null,
+          "rows": {},
+          "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-1024'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+          "notes": [
+            "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+          ]
+        }
+      }
+    }
+  }
+}

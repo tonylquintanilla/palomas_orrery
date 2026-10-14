@@ -237,6 +237,14 @@ in a description is cut, only moved behind "+ more".
 October 14, 2026 with Anthropic's Claude Opus 5.5 (L-269): Maintenance
 Report's description counts four planted faults, one of them the
 scanner's output with Windows line endings.
+October 14, 2026 with Anthropic's Claude Opus 5.5 (L-431 build 3, with
+L-395's move): the Horizons check moved from the website's Daily Run into
+the orrery's maintenance run, and its buttons follow it, each named what
+the run prints: Horizons Check under the orrery's generators, Horizons
+Check Suite and Horizons Confirmations under its checkers, each in
+alphabetical place, with their short lines. The website's own Horizons
+buttons leave in a second patch, patch_L431_13, run after the website's
+patch has removed their scripts, so Dashboard Parity holds at every step.
 """
 
 import os
@@ -1009,7 +1017,9 @@ LAUNCH_GROUPS = {
          "One command for the whole routine: regenerates the generated "
          "documents, then runs every checker, then prints one summary. It "
          "reports and continues rather than stopping at the first failure, "
-         "and says which generated files actually moved. About ten seconds. "
+         "and says which generated files actually moved. About ten seconds; "
+         "on a day something is due for JPL, its Horizons Check needs the "
+         "internet and a couple of minutes more. "
          "Run after an edit session and before a push. Everything indented "
          "below is included in it and can still be launched on its own.",
          SCRIPT_DIR,
@@ -1075,6 +1085,27 @@ LAUNCH_GROUPS = {
          "missing. Writes EXACT_ROWS_PRINTED.md and prints whether every "
          "printed exact row prints by its count; this button never fails. "
          "Exact Rows by the Count is the same check as a pass/fail.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Horizons Check",
+         "horizons_check.py",
+         "Asks JPL Horizons about what the website serves, for whatever is "
+         "due, so on most runs it asks nothing (L-395, moved here from the "
+         "website's Daily Run on 2026-10-14, L-431). Each keyed object: the "
+         "same id, the same index, JPL's exact name, and a pinned comet "
+         "still JPL's newest record. Each fetched orbital period: JPL's "
+         "period at the same date and centre, within the period's own "
+         "error. Both are asked again from day 25, before the website's "
+         "own check goes red at day 30. Each spacecraft's data sheet: "
+         "re-read every 30 days, and red where a row of constants_new.py "
+         "quotes a figure the sheet no longer gives. One line per thing "
+         "asked; each disagreement with the query to paste into a browser. "
+         "Records the confirmations and the sheets, and never edits the "
+         "list or a row. Needs the internet only on a day something is "
+         "due; if JPL cannot be reached it says UNREACHABLE and asks "
+         "nothing more.",
          SCRIPT_DIR,
          True,
          None,
@@ -1294,6 +1325,33 @@ LAUNCH_GROUPS = {
          "the ecliptic node set to 0, the paper's Fig. 3 reading moved, the "
          "tilt pushed to 60 degrees) and each must be caught, then the real "
          "rows must pass. Ends on \"HILLS CLOUD: PASS\" (L-421).",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Horizons Check Suite",
+         "test_horizons_check.py",
+         "The Horizons Check on recorded answers, with no network "
+         "(documentation/worksheets/horizons_answers_L395.json, each answer "
+         "with its source; the period and data-sheet answers were written "
+         "in JPL's format on 2026-10-14 and say so, and the inputs the test "
+         "runs on are frozen beside them). Every served entry agrees, and "
+         "each planted mistake is caught by name: a wrong id, the wrong "
+         "index, a name off by one letter, a stale pin, a period JPL "
+         "disagrees with, a changed data sheet, JPL unreachable (L-395, "
+         "L-431).",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Horizons Confirmations",
+         "check_horizons_confirmations.py",
+         "What today's Horizons Check found, read offline: fails on any "
+         "keyed object or fetched period never confirmed against JPL, "
+         "confirmed 30 or more days ago, or changed since; on a data sheet "
+         "a row quotes that no longer gives the row's figure; and on a "
+         "check that could not reach JPL today, named UNREACHABLE (L-395, "
+         "L-431).",
          SCRIPT_DIR,
          True,
          None,
@@ -1767,6 +1825,9 @@ CARD_LINES = {
      "Exact Rows Report"):
         "Lists every place an exact row of constants_new.py is printed.",
     ("Maintenance Run",
+     "Horizons Check"):
+        "Asks JPL about served objects and periods when due; re-reads sheets.",
+    ("Maintenance Run",
      "Ledger Index"):
         "Regenerates the ledger's index from its detail blocks.",
     ("Maintenance Run",
@@ -1823,6 +1884,12 @@ CARD_LINES = {
     ("Maintenance Run",
      "Hills Cloud Sampler"):
         "Checks the Hills cloud's frame, Fig. 3 reading and tilt, faults planted.",
+    ("Maintenance Run",
+     "Horizons Check Suite"):
+        "The Horizons Check on recorded answers, planted mistakes caught.",
+    ("Maintenance Run",
+     "Horizons Confirmations"):
+        "Fails on anything JPL has not confirmed within 30 days.",
     ("Maintenance Run",
      "Maintenance Report"):
         "Checks the run's summary names each file whose Tier-1 count rose.",

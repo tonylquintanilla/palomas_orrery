@@ -1,6 +1,9 @@
 {
-  "schema": 1,
+  "schema": 2,
   "source_sha256": "57ba8161e6f0a2104ed556a7cbf7cbaa46b3f7d95aa1e93da4c7dd412d12cc24",
+  "period_inputs_sha256": "0eaee9aec07788c08a60529fea303d4bafc8969058dad0cd78261cabea0f9bb7",
+  "confirmations_sha256": "828e90cd916238f5751bea491110b91f4cd15e5d31d2a18a76715d3af83125e5",
+  "cadence_days": 30,
   "objects": {
     "sun": {
       "name": "Sun",
@@ -9,7 +12,17 @@
       "id_type": null,
       "object_type": "fixed",
       "description": "NASA: \"The Sun's gravity holds the solar system together, keeping everything in its orbit.\"",
-      "info_url": "https://science.nasa.gov/sun/"
+      "info_url": "https://science.nasa.gov/sun/",
+      "period": null,
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-10",
+          "horizons_id": "10",
+          "id_type": null,
+          "horizons_name": "Sun"
+        },
+        "period": null
+      }
     },
     "mercury": {
       "name": "Mercury",
@@ -18,7 +31,61 @@
       "id_type": null,
       "object_type": "orbital",
       "description": "NASA: \"Mercury is the smallest planet in our solar system and the nearest to the Sun.\"",
-      "info_url": "https://science.nasa.gov/mercury/"
+      "info_url": "https://science.nasa.gov/mercury/",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@sun",
+        "center_label": "the Sun",
+        "open_orbit": false,
+        "fetched": "2026-10-13",
+        "words": null,
+        "years": {
+          "value": 0.240846,
+          "figures": 6,
+          "text": "0.240846"
+        },
+        "days": {
+          "value": 87.969,
+          "figures": 5,
+          "text": "87.969"
+        },
+        "record": {
+          "days": 87.96882030278451,
+          "error_days": 0.00036931457614741703,
+          "error_from": "year_change",
+          "sbdb_status": "not a small body; SBDB not asked",
+          "epoch": "2026-10-13 08:30",
+          "elements": {
+            "a": 0.3870973974099114,
+            "e": 0.2056387074252793,
+            "i": 7.003371896375679,
+            "omega": 29.20131028257546,
+            "Omega": 48.29726978781827,
+            "TP": 2461354.853725976,
+            "MA": 245.4157493912693,
+            "TA": 226.4124374773949,
+            "q": 0.3074951889588476,
+            "epoch": "2026-10-13 08:30 osc."
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-10",
+          "horizons_id": "199",
+          "id_type": null,
+          "horizons_name": "Mercury"
+        },
+        "period": {
+          "confirmed": "2026-10-14",
+          "center": "@sun",
+          "epoch": "2026-10-13 08:30",
+          "days": 87.96882030278451,
+          "jpl_days": 87.96882030278451,
+          "error_days": 0.00036931457614741703
+        }
+      }
     },
     "venus": {
       "name": "Venus",
@@ -27,7 +94,35 @@
       "id_type": null,
       "object_type": "orbital",
       "description": "NASA: \"Venus is the second planet from the Sun, and the sixth largest planet. It's the hottest planet in our solar system.\"",
-      "info_url": "https://science.nasa.gov/venus/"
+      "info_url": "https://science.nasa.gov/venus/",
+      "period": {
+        "kind": "typed",
+        "typed": true,
+        "center": null,
+        "center_label": null,
+        "open_orbit": false,
+        "fetched": null,
+        "words": "Typed value, not fetched from JPL.",
+        "years": {
+          "value": 0.615198,
+          "figures": 6,
+          "text": "0.615198"
+        },
+        "days": {
+          "value": 224.701,
+          "figures": 6,
+          "text": "224.701"
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-10",
+          "horizons_id": "299",
+          "id_type": null,
+          "horizons_name": "Venus"
+        },
+        "period": null
+      }
     },
     "earth": {
       "name": "Earth",
@@ -36,7 +131,35 @@
       "id_type": null,
       "object_type": "orbital",
       "description": "Our home planet.",
-      "info_url": "https://science.nasa.gov/earth/"
+      "info_url": "https://science.nasa.gov/earth/",
+      "period": {
+        "kind": "typed",
+        "typed": true,
+        "center": null,
+        "center_label": null,
+        "open_orbit": false,
+        "fetched": null,
+        "words": "Typed value, not fetched from JPL.",
+        "years": {
+          "value": 1.00002,
+          "figures": 6,
+          "text": "1.00002"
+        },
+        "days": {
+          "value": 365.256,
+          "figures": 6,
+          "text": "365.256"
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-10",
+          "horizons_id": "399",
+          "id_type": null,
+          "horizons_name": "Earth"
+        },
+        "period": null
+      }
     },
     "mars": {
       "name": "Mars",
@@ -45,7 +168,35 @@
       "id_type": null,
       "object_type": "orbital",
       "description": "NASA: \"Mars is one of the easiest planets to spot in the night sky -- it looks like a bright red point of light.\"",
-      "info_url": "https://science.nasa.gov/mars/"
+      "info_url": "https://science.nasa.gov/mars/",
+      "period": {
+        "kind": "typed",
+        "typed": true,
+        "center": null,
+        "center_label": null,
+        "open_orbit": false,
+        "fetched": null,
+        "words": "Typed value, not fetched from JPL.",
+        "years": {
+          "value": 1.8808,
+          "figures": 5,
+          "text": "1.8808"
+        },
+        "days": {
+          "value": 686.98,
+          "figures": 5,
+          "text": "686.98"
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-10",
+          "horizons_id": "499",
+          "id_type": null,
+          "horizons_name": "Mars"
+        },
+        "period": null
+      }
     },
     "jupiter": {
       "name": "Jupiter",
@@ -54,7 +205,50 @@
       "id_type": null,
       "object_type": "orbital",
       "description": "NASA: \"Jupiter is the largest and oldest planet in our solar system.\"",
-      "info_url": "https://science.nasa.gov/jupiter/"
+      "info_url": "https://science.nasa.gov/jupiter/",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@sun",
+        "center_label": "the Sun",
+        "open_orbit": false,
+        "fetched": "2026-10-12",
+        "words": null,
+        "years": {
+          "value": 11.86,
+          "figures": 4,
+          "text": "11.86"
+        },
+        "days": {
+          "value": 4330.0,
+          "figures": 3,
+          "text": "4330"
+        },
+        "record": {
+          "days": 4331.685500446416,
+          "error_days": 1.6283133990627903,
+          "error_from": "year_change",
+          "sbdb_status": "not a small body; SBDB not asked",
+          "epoch": "2026-10-12 00:01",
+          "elements": null
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-10",
+          "horizons_id": "599",
+          "id_type": null,
+          "horizons_name": "Jupiter"
+        },
+        "period": {
+          "confirmed": "2026-10-14",
+          "center": "@sun",
+          "epoch": "2026-10-12 00:01",
+          "days": 4331.685500446416,
+          "jpl_days": 4331.685500446416,
+          "error_days": 1.6283133990627903
+        }
+      }
     },
     "saturn": {
       "name": "Saturn",
@@ -63,7 +257,35 @@
       "id_type": null,
       "object_type": "orbital",
       "description": "NASA: \"Saturn is the sixth planet from the Sun and the second largest planet in our solar system.\"",
-      "info_url": "https://science.nasa.gov/saturn/"
+      "info_url": "https://science.nasa.gov/saturn/",
+      "period": {
+        "kind": "typed",
+        "typed": true,
+        "center": null,
+        "center_label": null,
+        "open_orbit": false,
+        "fetched": null,
+        "words": "Typed value, not fetched from JPL.",
+        "years": {
+          "value": 29.45714,
+          "figures": 7,
+          "text": "29.45714"
+        },
+        "days": {
+          "value": 10759.22,
+          "figures": 7,
+          "text": "10759.22"
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-10",
+          "horizons_id": "699",
+          "id_type": null,
+          "horizons_name": "Saturn"
+        },
+        "period": null
+      }
     },
     "uranus": {
       "name": "Uranus",
@@ -72,7 +294,35 @@
       "id_type": null,
       "object_type": "orbital",
       "description": "NASA: \"Uranus is the seventh planet from the Sun, and the third largest planet in our solar system -- about four times wider than Earth.\"",
-      "info_url": "https://science.nasa.gov/uranus/"
+      "info_url": "https://science.nasa.gov/uranus/",
+      "period": {
+        "kind": "typed",
+        "typed": true,
+        "center": null,
+        "center_label": null,
+        "open_orbit": false,
+        "fetched": null,
+        "words": "Typed value, not fetched from JPL.",
+        "years": {
+          "value": 84.0205,
+          "figures": 6,
+          "text": "84.0205"
+        },
+        "days": {
+          "value": 30688.5,
+          "figures": 6,
+          "text": "30688.5"
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-10",
+          "horizons_id": "799",
+          "id_type": null,
+          "horizons_name": "Uranus"
+        },
+        "period": null
+      }
     },
     "neptune": {
       "name": "Neptune",
@@ -81,7 +331,35 @@
       "id_type": null,
       "object_type": "orbital",
       "description": "NASA: \"Dark, cold and whipped by supersonic winds, giant Neptune is the eighth and most distant major planet orbiting our Sun.\"",
-      "info_url": "https://science.nasa.gov/neptune/"
+      "info_url": "https://science.nasa.gov/neptune/",
+      "period": {
+        "kind": "typed",
+        "typed": true,
+        "center": null,
+        "center_label": null,
+        "open_orbit": false,
+        "fetched": null,
+        "words": "Typed value, not fetched from JPL.",
+        "years": {
+          "value": 164.79,
+          "figures": 5,
+          "text": "164.79"
+        },
+        "days": {
+          "value": 60189.0,
+          "figures": 5,
+          "text": "60189"
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-10",
+          "horizons_id": "899",
+          "id_type": null,
+          "horizons_name": "Neptune"
+        },
+        "period": null
+      }
     },
     "pluto_barycenter": {
       "name": "Pluto-Charon Barycenter",
@@ -90,7 +368,27 @@
       "id_type": null,
       "object_type": "barycenter",
       "description": "Center of mass for Pluto-Charon binary planet system.",
-      "info_url": "https://science.nasa.gov/dwarf-planets/pluto/"
+      "info_url": "https://science.nasa.gov/dwarf-planets/pluto/",
+      "period": {
+        "kind": "none",
+        "typed": false,
+        "center": null,
+        "center_label": null,
+        "open_orbit": false,
+        "fetched": null,
+        "years": null,
+        "days": null,
+        "words": "Not yet fetched from JPL."
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-10",
+          "horizons_id": "9",
+          "id_type": null,
+          "horizons_name": "Pluto Barycenter"
+        },
+        "period": null
+      }
     },
     "apophis": {
       "name": "Apophis",
@@ -99,7 +397,35 @@
       "id_type": "smallbody",
       "object_type": "orbital",
       "description": "A near-Earth asteroid that will make a close approach in 2029. Future OSIRIS-APEX target.",
-      "info_url": "https://cneos.jpl.nasa.gov/apophis/"
+      "info_url": "https://cneos.jpl.nasa.gov/apophis/",
+      "period": {
+        "kind": "typed",
+        "typed": true,
+        "center": null,
+        "center_label": null,
+        "open_orbit": false,
+        "fetched": null,
+        "words": "Typed value, not fetched from JPL.",
+        "years": {
+          "value": 0.886,
+          "figures": 3,
+          "text": "0.886"
+        },
+        "days": {
+          "value": 323.6,
+          "figures": 4,
+          "text": "323.6"
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-10",
+          "horizons_id": "2004 MN4",
+          "id_type": "smallbody",
+          "horizons_name": "99942 Apophis"
+        },
+        "period": null
+      }
     },
     "halley": {
       "name": "Halley",
@@ -108,7 +434,35 @@
       "id_type": "smallbody",
       "object_type": "orbital",
       "description": "The most famous periodic comet. Its orbit runs backward compared with the planets, and its dust gives two meteor showers each year, the Eta Aquarids and the Orionids.",
-      "info_url": "https://science.nasa.gov/solar-system/comets/1p-halley/"
+      "info_url": "https://science.nasa.gov/solar-system/comets/1p-halley/",
+      "period": {
+        "kind": "typed",
+        "typed": true,
+        "center": null,
+        "center_label": null,
+        "open_orbit": false,
+        "fetched": null,
+        "words": "Typed value, not fetched from JPL.",
+        "years": {
+          "value": 75.92414034,
+          "figures": 10,
+          "text": "75.92414034"
+        },
+        "days": {
+          "value": 27731.29226,
+          "figures": 10,
+          "text": "27731.29226"
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-10",
+          "horizons_id": "90000030",
+          "id_type": "smallbody",
+          "horizons_name": "1P/Halley"
+        },
+        "period": null
+      }
     },
     "encke": {
       "name": "Encke",
@@ -117,7 +471,61 @@
       "id_type": "smallbody",
       "object_type": "orbital",
       "description": "A short-period comet whose dust trail is the source of the Taurid meteor showers.",
-      "info_url": "https://science.nasa.gov/solar-system/comets/2p-encke/"
+      "info_url": "https://science.nasa.gov/solar-system/comets/2p-encke/",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@sun",
+        "center_label": "the Sun",
+        "open_orbit": false,
+        "fetched": "2026-10-13",
+        "words": null,
+        "years": {
+          "value": 3.303,
+          "figures": 4,
+          "text": "3.303"
+        },
+        "days": {
+          "value": 1206.3,
+          "figures": 5,
+          "text": "1206.3"
+        },
+        "record": {
+          "days": 1206.320223793072,
+          "error_days": 0.15083758920104628,
+          "error_from": "year_change",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-13 08:30",
+          "elements": {
+            "a": 2.2177339995884,
+            "e": 0.8473192969120388,
+            "i": 11.3477679349911,
+            "omega": 187.2878429358795,
+            "Omega": 334.0190669262349,
+            "TP": 2461446.728467565,
+            "MA": 324.2261254747133,
+            "TA": 215.3797954248334,
+            "q": 0.3386051863192332,
+            "epoch": "2026-10-13 08:30 osc."
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-10",
+          "horizons_id": "90000091",
+          "id_type": "smallbody",
+          "horizons_name": "2P/Encke"
+        },
+        "period": {
+          "confirmed": "2026-10-14",
+          "center": "@sun",
+          "epoch": "2026-10-13 08:30",
+          "days": 1206.320223793072,
+          "jpl_days": 1206.320223793072,
+          "error_days": 0.15083758920104628
+        }
+      }
     }
   },
   "numbers": {

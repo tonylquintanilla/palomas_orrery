@@ -2301,7 +2301,261 @@ Run order:
 
 In the orrery folder, run patch_L431_11_website_orrery_20261014.py, replacing the copy that refused. It should end with “patch applied (79 edits in 14 files, 7 files created)”.
 
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L431_11_website_orrery_20261014.py
+patch_L431_11_website_orrery_20261014.py
+Running in: c:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github
 
+ok  .gitignore                                    line 46: # L-431 build 3 (2026-10-14): the Horizons ch
+ok  orbital_period.py                             line 69: Module updated: October 14, 2026 with Anthrop
+ok  orbital_period.py                             line 163: def print_place(value, err):
+ok  orbital_period.py                             line 171: if err is None or not (err > 0):
+ok  export_objects.py                             line 29: schema          1
+ok  export_objects.py                             line 33: period_inputs_sha256
+ok  export_objects.py                             line 37: exact name for the object. Only the
+ok  export_objects.py                             line 55: period       the body's orbital period, by th
+ok  export_objects.py                             line 60: PERIOD (L-431, build 3)
+ok  export_objects.py                             line 72: non-empty string: the gallery's Horizons chec
+ok  export_objects.py                             line 81: The same list bytes give the same export byte
+ok  export_objects.py                             line 95: Module updated: October 14, 2026 with Anthrop
+ok  export_objects.py                             line 106: SCHEMA = 1
+ok  export_objects.py                             line 181: def build_export(text):
+ok  export_objects.py                             line 224: return objects, numbers
+ok  export_objects.py                             line 227: "period_inputs_sha256": hashlib.sha256(
+ok  export_objects.py                             line 230: def period_summary(key, period):
+ok  export_objects.py                             line 242: export = build_export(raw.decode("utf-8").rep
+ok  export_objects.py                             line 268: print("Periods exported (L-431):")
+ok  test_objects_export.py                        line 33: the gallery's Horizons check compares (L-395)
+ok  test_objects_export.py                        line 43: - any exported entry differs from what the li
+ok  test_objects_export.py                        line 55: Module updated: October 14, 2026 with Anthrop
+ok  test_objects_export.py                        line 69: SELF_TEST_RECORD = {
+ok  test_objects_export.py                        line 98: # L-431, build 3: the periods.
+ok  test_objects_export.py                        line 110: for field, what in (("period_inputs_sha256",
+ok  test_objects_export.py                        line 150: fresh = ex.build_export(text)
+ok  test_objects_export.py                        line 167: if held is not None:
+ok  test_objects_export.py                        line 185: print("Periods compared with their inputs (L-
+ok  orrery_maintenance_run.py                     line 21: Runs the nine GENERATORS, then the CHECKERS, 
+ok  orrery_maintenance_run.py                     line 222: Module updated: October 14, 2026 with Anthrop
+ok  orrery_maintenance_run.py                     line 247: # L-395 and L-431 build 3 (2026-10-14): JPL H
+ok  orrery_maintenance_run.py                     line 250: # constants export.
+ok  orrery_maintenance_run.py                     line 304: # L-395, L-431 build 3: what today's Horizons
+ok  orrery_maintenance_run.py                     line 779: if gen_hint and rc == 0:
+ok  palomas_orrery_dashboard.py                   line 240: October 14, 2026 with Anthropic's Claude Opus
+ok  palomas_orrery_dashboard.py                   line 1012: "and says which generated files actually move
+ok  palomas_orrery_dashboard.py                   line 1078: SCRIPT_DIR,
+ok  palomas_orrery_dashboard.py                   line 1297: SCRIPT_DIR,
+ok  palomas_orrery_dashboard.py                   line 1770: "Horizons Check"):
+ok  palomas_orrery_dashboard.py                   line 1826: ("Maintenance Run",
+ok  skills/horizons-orbital-mechanics/SKILL.md    line 4: fires_when: Horizons queries, centers, frames
+ok  skills/horizons-orbital-mechanics/SKILL.md    line 9: Skill version: 1.5 | 2026-10-13, with Anthrop
+ok  skills/horizons-orbital-mechanics/SKILL.md    line 24: Earlier: 1.3 | 2026-10-12, with Anthropic's C
+ok  skills/horizons-orbital-mechanics/SKILL.md    line 68: apparition. The gallery's Horizons check (too
+ok  skills/horizons-orbital-mechanics/SKILL.md    line 218: ## Where the Check Lives, and What It Compare
+ok  skills/gallery-cache-builder/SKILL.md         line 9: Read this file in 2 parts: lines 1-268, 269-4
+ok  skills/gallery-cache-builder/SKILL.md         line 26: Earlier: 1.6 | Cut from tonyquintanilla.githu
+ok  skills/gallery-cache-builder/SKILL.md         line 60: - The Builder Reads the Period's Centre [QUAL
+ok  skills/gallery-cache-builder/SKILL.md         line 350: Three more fields are read from the config by
+ok  skills/interactive-exhibit/SKILL.md           line 9: Read this file in 4 parts: lines 1-137, 138-3
+ok  skills/interactive-exhibit/SKILL.md           line 27: Earlier: 1.12 | 2026-10-06, with Anthropic's 
+ok  skills/interactive-exhibit/SKILL.md           line 255: - **A body's orbital period is the orrery's, 
+ok  documentation/SKILL_HISTORIES.md              line 582: Earlier: 1.12 | 2026-10-06, with Anthropic's 
+ok  documentation/SKILL_HISTORIES.md              line 752: Earlier: 1.6 | Cut from tonyquintanilla.githu
+ok  documentation/SKILL_HISTORIES.md              line 768: Earlier: 1.3 | 2026-10-12, with Anthropic's C
+ok  PROJECT_INSTRUCTIONS.md                       line 3: Tony Quintanilla, PE | Claude | v3.95 | Octob
+ok  PROJECT_INSTRUCTIONS.md                       line 1171: v3.96 (October 14, 2026): No rule changed in 
+ok  PROJECT_INSTRUCTIONS.md                       line 1234: v3.93 (October 12, 2026): No rule changed in 
+ok  documentation/PROJECT_INSTRUCTIONS_HISTORY.md line 2706: v3.93 (October 12, 2026): No rule changed in 
+ok  LEDGER_CONSOLIDATED.md                        line 412: Module updated: October 14, 2026 with Anthrop
+ok  LEDGER_CONSOLIDATED.md                        line 1154: <!-- L:440 status:OPEN upd:2026-10-13 section
+ok  LEDGER_CONSOLIDATED.md                        line 1195: - **Note (2026-10-14), from L-431 build 3:** 
+ok  LEDGER_CONSOLIDATED.md                        line 1527: <!-- L:433 status:OPEN upd:2026-10-11 section
+ok  LEDGER_CONSOLIDATED.md                        line 1545: - **Note (2026-10-14), loose ends received fr
+ok  LEDGER_CONSOLIDATED.md                        line 1578: <!-- L:431 status:OPEN upd:2026-10-13 section
+ok  LEDGER_CONSOLIDATED.md                        line 1860: - **2026-10-14, build 3 BUILT** (the website)
+ok  LEDGER_CONSOLIDATED.md                        line 1868: 3. The website, NEXT, briefed in
+ok  LEDGER_CONSOLIDATED.md                        line 2725: <!-- L:395 status:OPEN upd:2026-10-12 section
+ok  LEDGER_CONSOLIDATED.md                        line 3081: **Gap:** The check is built and runs every da
+ok  documentation/WHERE_WE_ARE.md                 line 4: Last updated: October 13, 2026, evening: the 
+ok  documentation/WHERE_WE_ARE.md                 line 10: > - The dashboard: one short line per card, "
+ok  documentation/WHERE_WE_ARE.md                 line 27: 5.   [NOW]   *L-401 (the distance digits): bu
+ok  documentation/WHERE_WE_ARE.md                 line 34: 6a.  [NOW]   *Orbital periods from JPL: build
+ok  documentation/WHERE_WE_ARE.md                 line 39: 8.   [done]  The served objects are checked a
+ok  documentation/WHERE_WE_ARE.md                 line 64: - The Horizons check lives in the orrery's ma
+ok  documentation/WHERE_WE_ARE.md                 line 78: - Comets by first apparition, oldest first. A
+ok  documentation/WHERE_WE_ARE.md                 line 89: - Last cache build: 20261013T132123Z, ok, no 
+ok  documentation/WHERE_WE_ARE.md                 line 117: - *Build 3 and the check's move, with the run
+ok  documentation/WHERE_WE_ARE.md                 line 123: - The Horizons check's move: `HANDOFF_L395_ho
+ok  horizons_check.py                             created
+ok  check_horizons_confirmations.py               created
+ok  test_horizons_check.py                        created
+ok  data/horizons_confirmations.json              created
+ok  data/spacecraft_sheets.json                   created
+ok  documentation/worksheets/horizons_answers_L395.json created
+ok  documentation/HANDOFF_L431_build3_website_20261014.md created
+
+patch applied (79 edits in 14 files, 7 files created)
+Stamps updated: the docstrings of every edited module, the three skills,
+the protocol (v3.96), the ledger, Where We Are.
+
+NEXT (the handoff has the whole run order, with what each step prints):
+  1. Run orrery_maintenance_run.py. It needs the internet today: the
+     Horizons check asks JPL about the three periods it has never
+     confirmed (Mercury, Jupiter, Encke). Expect "Horizons check" to read
+     PASS and every gating checker to pass. UNREACHABLE means JPL could
+     not be reached: run it again later, before you commit.
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261014T215653Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 1.6s  rewrote LEDGER_CONSOLIDATED.md
+  Skill manifest               0.2s  rewrote PROJECT_INSTRUCTIONS.md
+  Constants export             0.8s  unchanged (1 checked, not written)
+  Horizons check               6.4s  rewrote data/horizons_confirmations.json --
+                                     PASS -- 3 checked today, 3 queries
+  Objects export               0.3s  rewrote data/objects_export.json
+  Drawings export              0.3s  unchanged (1 checked, not written)
+  Module atlas                 8.0s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               5.6s  rewrote DATA_INVENTORY.md
+  Exact rows report            2.2s  rewrote EXACT_ROWS_PRINTED.md -- 13 of 41
+                                     exact rows printed at 43 lines (33 orrery,
+                                     10 gallery); 8 drawn only, 14 not followed,
+                                     0 map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.3s  No changes to constants_new.py since HEAD.
+  Constants relations          0.3s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              1.1s  No figure count exceeds its inputs: 36
+                                     derived row(s) read, 26 judged OK -- 26 OK,
+                                     10 NOT YET MIGRATED, 1 NO DERIVED LINE, 1
+                                     UNMARKED CONVERSION; 18 conversion(s)
+                                     checked.
+  Constants export check       2.0s  Export matches the store: sha256
+                                     2a1211f8cce2 on both sides; 127 rows
+                                     re-read, 56 not exported, 31 tokens; 320
+                                     conversions re-computed, 10 of 10 worked
+                                     cases hold.
+  Objects export check         0.3s  pass
+  Horizons confirmations       0.4s  pass -- 13 of 13 entries and 3 periods
+                                     confirmed, 26 sheets read, within 30 days
+  Horizons check suite         0.8s  pass -- 60 checks, every planted fault
+                                     caught by name
+  Skill headers                0.3s  12 skills parsed, no consistency problems.
+  Exact rows by the count      2.4s  PASSING -- 13 printed exact rows each state
+                                     a count; 33 orrery lines print through
+                                     exact_text() or row_text(); 10 gallery lines
+                                     are served the count
+  Dimensions                   1.4s  No unit contradicts its arithmetic: 54
+                                     derived row(s) read -- 42 OK, 9 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.2s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.2s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 126 status lines in constants_new.py are
+                                     well formed; 54 rows carry none.
+  Row shape                    0.1s  All 183 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.3s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Scanner row run (L-414)      0.2s  16 of 16 pins hold -- each row reads its own
+                                     comment run, declared rows are named, the
+                                     gate path is read by name.
+  Reset completeness          17.8s  PASS -- all 311 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  1.9s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Earth pole of date           0.3s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Hills cloud sampler (L-421)    0.5s  PASS -- 4 of 4 planted faults caught; the
+                                     real rows pass, the dots' plane tilted 34.1
+                                     deg
+  Drawings export check        0.7s  PASS -- 3 of 3 planted faults caught;
+                                     hills_cloud 3600 dots, tilt 30.9 deg, sha256
+                                     a51e93118069
+  Position digits (L-401)      3.2s  PASS -- 13 of 13 planted faults caught by
+                                     name; 23 hovers examined, 181 lines compared
+                                     against their errors; 5 pairs printed the
+                                     same from either end; 496 hovers of every
+                                     listed object from the Sun, Earth and
+                                     Neptune; 3 recorded 2xr answers read by
+                                     column name; 6 period sentences
+  Orbit markers (L-431, L-401)   12.5s  PASS -- 12 of 12 planted faults caught by
+                                     name; 4 ellipses, 1080 drawn points on their
+                                     period's centre; 14 markers, 9 dates, 53
+                                     printed distances against their errors; 6
+                                     elements as given; 3 Keplerian positions
+                                     half a year on; 1 parameters-window date
+                                     pairs; 2 Moon arcs; 2 perturbation checks; 1
+                                     perihelion osculating orbits; 2 frames; 2
+                                     sources read
+  Domain Split                 0.5s  PASS -- 6 of 6 planted faults caught; the
+                                     split reads each module's Domain: tag and
+                                     prints the same on the console, in the audit
+                                     and in the run history.
+  Maintenance report (L-269)    0.1s  PASS -- 4 of 4 planted faults caught by
+                                     name; 4 summaries; 2 risen file(s) named
+  Dashboard parity             0.3s  PASS -- 9 of 9 planted faults caught; 80
+                                     steps matched to their buttons by name and
+                                     script; 110 cards carry a short line
+  Worksheet checker            9.9s  74 of 110 routed, 8 clean
+  Worksheet checker tests     17.8s  All 135 checks passed
+  Worksheet key round trip     1.4s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         22.6s  All 76 checks passed
+  Extractor pins               0.4s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          55.2s  0 TIER-1 -- the push gate holds; Whole tree,
+                                     Tier-1: 280: orrery 116, Earth System 149,
+                                     stars 13, utilities 2.
+
+======================================================================
+  30 of 30 gating checkers passed -- 180.7s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           74 of 110 routed, 8 clean
+    Provenance scanner          0 TIER-1 -- the push gate holds; Whole tree, Tier-1: 280: orrery 116, Earth System 149, stars 13, utilities 2.
+      No file's Tier-1 count rose since the previous run.
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2247 file(s) examined, 14 written, 1 created, 0 removed, 2 rewritten identically
+    written   DATA_INVENTORY.md
+    written   EXACT_ROWS_PRINTED.md
+    written   LEDGER_CONSOLIDATED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROJECT_INSTRUCTIONS.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/horizons_confirmations.json
+    written   data/objects_export.json
+    written   data/provenance_history.json
+    written   data/worksheet_check_state.json
+    written   documentation/prompts/citation_review.jsonl
+    written   module_atlas.py
+    created   data/horizons_check_last_run.json
+    rewritten with identical bytes, no action needed:
+      data/worksheet_routed.json
+      test_output/test_orbit_paths.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  2. Move this script, and patch_L431_10_brief_both_sets_20261013.py if it
+     is still in this folder, into documentation/. Commit and push.
+  3. Then the gallery: tools/pull_objects_export.py, then
+     patch_L431_12_website_gallery_20261014.py. Then back here for
+     patch_L431_13_dashboard_buttons_20261014.py.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
 Run the orrery maintenance run. It needs the internet. Expect “30 of 30 gating checkers passed”. Then push the orrery.
 In the gallery folder, run tools/pull_objects_export.py, then patch_L431_12_website_gallery_20261014.py (replace your copy of this one too). Then run the gallery maintenance run and expect “27 of 27”. Don’t commit the gallery yet.

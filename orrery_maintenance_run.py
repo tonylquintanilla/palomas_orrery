@@ -18,7 +18,7 @@ Run it after any edit session and before a push.
 
 WHAT IT DOES
 ------------
-Runs the nine GENERATORS, then the CHECKERS, and prints one summary at
+Runs the GENERATORS, then the CHECKERS, and prints one summary at
 the end. Nothing stops on a failure -- every tool runs every time, so a
 single pass shows the whole picture rather than the first problem in it.
 
@@ -219,6 +219,18 @@ With a file's Tier-1 risen, the summary's rise line had printed NOT READ
 on Tony's machine (his run record of 2026-10-13), because the reader's
 pattern stopped at the carriage return. Maintenance report now plants a fourth
 fault, the line-ending fix taken out, fed Windows output with a rise.)
+Module updated: October 14, 2026 with Anthropic's Claude Opus 5.5 (L-431
+build 3, with L-395's move: GENERATORS gains Horizons check,
+horizons_check.py, moved here from the website's Daily Run, before
+Objects export so the export carries the dates it writes; it is this
+runner's first row that needs the internet, and only on a day something
+is due; a generator's verdict hint is now quoted whatever its exit
+code, so the check's UNREACHABLE or FAIL line shows on its row. CHECKERS
+gains Horizons confirmations,
+check_horizons_confirmations.py, which goes red on what the check found,
+and Horizons check suite, test_horizons_check.py. "Runs the nine
+GENERATORS" no longer names a count, for the reason the paragraph on
+gating gave on 2026-10-13.)
 """
 
 import hashlib
@@ -244,10 +256,24 @@ GENERATORS = [
     # the modules and the data file it adds.
     ('Constants export', ['export_constants.py'],
      ['data/constants_export.json']),
+    # L-395 and L-431 build 3 (2026-10-14): JPL Horizons confirms what
+    # the website serves -- each keyed entry's identity and fetched
+    # period, and the spacecraft data sheets -- asking only about what is
+    # due, so most runs ask nothing. It runs just before the objects
+    # export, which copies the dates it writes, and after the constants
+    # export, whose rows the sheets are judged against. It is a generator
+    # because it writes the two records; check_horizons_confirmations.py,
+    # among the checkers, is the row that goes red on what it found. The
+    # fourth field quotes its verdict line, UNREACHABLE by name when JPL
+    # could not be reached.
+    ('Horizons check', ['horizons_check.py'],
+     ['data/horizons_confirmations.json', 'data/spacecraft_sheets.json'],
+     'HORIZONS CHECK:'),
     # L-395 (2026-10-01): the orrery's object list is the one definition
     # of each object the website serves. The entries carrying a 'key'
     # are exported, and the gallery pulls the file as it pulls the
-    # constants export.
+    # constants export. Since L-431 build 3 each carries its period and
+    # its confirmation dates.
     ('Objects export', ['export_objects.py'],
      ['data/objects_export.json']),
     # L-421 (2026-10-11, Tony's option A): the orrery places the Hills
@@ -301,6 +327,18 @@ CHECKERS = [
     # in an exported description.
     ('Objects export check', ['test_objects_export.py'],
      'OBJECTS EXPORT:'),
+    # L-395, L-431 build 3: what today's Horizons check found, read
+    # offline -- each entry's identity and fetched period confirmed within
+    # 30 days and unchanged since, each spacecraft sheet a row quotes
+    # still giving the row's figure, and today's run reaching JPL. It
+    # gates, so a disagreement or an unreached JPL makes the run red.
+    ('Horizons confirmations', ['check_horizons_confirmations.py'],
+     'HORIZONS CONFIRMATIONS:'),
+    # L-395, L-431 build 3: the check on JPL's recorded answers, with no
+    # network; every planted fault caught by name, a period JPL disagrees
+    # with among them.
+    ('Horizons check suite', ['test_horizons_check.py'],
+     'HORIZONS CHECK SUITE:'),
     # Rule 7's exact row, built: every printed exact row states a print
     # count, every orrery line prints it through exact_text(), and the
     # gallery serves the count. The same script as the Exact rows report
@@ -776,7 +814,11 @@ def main():
         else:
             note = ('unchanged (%d checked, not written)'
                     % len(outputs))
-        if gen_hint and rc == 0:
+        # The hint is quoted whatever the exit code (L-431 build 3): the
+        # Horizons check exits 1 when JPL disagrees or cannot be reached,
+        # and its verdict line is what says which. Until then a failed
+        # generator showed only its exit code.
+        if gen_hint and rc is not None:
             verdict = line_containing(output, gen_hint)
             if verdict.startswith(gen_hint):
                 verdict = verdict[len(gen_hint):].strip()

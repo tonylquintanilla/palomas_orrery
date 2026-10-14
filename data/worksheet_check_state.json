@@ -30,6 +30,7 @@
     "REQUEST_constants_new_pilot_gpt.jsonl",
     "REQUEST_constants_new_pilot_gpt.md",
     "batch1_blind_source_lookup_gemini.md",
+    "horizons_answers_L395.json",
     "worksheet_asteroid_belt.md",
     "worksheet_batch1_tier1_sourcing_gemini.md",
     "worksheet_claude-opus-5_pilot_constants_new_20260818.jsonl",
@@ -52,5 +53,5 @@
     "worksheet_mars_visualization.md",
     "worksheet_mercury_visualization.md"
   ],
-  "uncited_changed": "2026-09-14"
+  "uncited_changed": "2026-10-14"
 }

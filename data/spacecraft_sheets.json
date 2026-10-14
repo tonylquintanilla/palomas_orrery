@@ -1,0 +1,306 @@
+{
+  "_comment": "Written by horizons_check.py (L-395, L-401): each spacecraft's JPL Horizons data sheet, as last read -- its Revised: date and what it states about the trajectory's uncertainty -- with the rows of constants_new.py that quote it and a note for each change seen. Seeded from documentation/SURVEY_L401_spacecraft_data_sheets_20261012.md. Only the check writes it. Do not edit by hand.",
+  "schema": 1,
+  "cadence_days": 30,
+  "seeded_from": "documentation/SURVEY_L401_spacecraft_data_sheets_20261012.md",
+  "sheets": {
+    "-31": {
+      "name": "Voyager 1",
+      "read": "2026-10-12",
+      "revised": "Aug 19, 2022",
+      "stated": {
+        "RA_arcsec": 1.701,
+        "DEC_arcsec": 1.535
+      },
+      "rows": {
+        "RA_arcsec": "VOYAGER_1_POINTING_RA_2030_ARCSEC",
+        "DEC_arcsec": "VOYAGER_1_POINTING_DEC_2030_ARCSEC"
+      },
+      "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-31'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+      "notes": [
+        "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+      ]
+    },
+    "-32": {
+      "name": "Voyager 2",
+      "read": "2026-10-12",
+      "revised": "Aug 19, 2022",
+      "stated": {
+        "RA_arcsec": 4.718,
+        "DEC_arcsec": 3.715
+      },
+      "rows": {
+        "RA_arcsec": "VOYAGER_2_POINTING_RA_2030_ARCSEC",
+        "DEC_arcsec": "VOYAGER_2_POINTING_DEC_2030_ARCSEC"
+      },
+      "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-32'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+      "notes": [
+        "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+      ]
+    },
+    "-399110": {
+      "name": "Apollo 11 S-IVB",
+      "read": "2026-10-12",
+      "revised": "Mar 22, 2016",
+      "stated": null,
+      "rows": {},
+      "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-399110'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+      "notes": [
+        "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+      ]
+    },
+    "-23": {
+      "name": "Pioneer 10",
+      "read": "2026-10-12",
+      "revised": "Jul 27, 2005",
+      "stated": null,
+      "rows": {},
+      "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-23'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+      "notes": [
+        "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+      ]
+    },
+    "-24": {
+      "name": "Pioneer 11",
+      "read": "2026-10-12",
+      "revised": "Jun 15, 2007",
+      "stated": null,
+      "rows": {},
+      "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-24'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+      "notes": [
+        "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+      ]
+    },
+    "-77": {
+      "name": "Galileo",
+      "read": "2026-10-12",
+      "revised": "Feb 23, 2008",
+      "stated": null,
+      "rows": {},
+      "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-77'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+      "notes": [
+        "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+      ]
+    },
+    "-21": {
+      "name": "SOHO",
+      "read": "2026-10-12",
+      "revised": "Sep 01, 2026",
+      "stated": null,
+      "rows": {},
+      "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-21'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+      "notes": [
+        "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+      ]
+    },
+    "-82": {
+      "name": "Cassini",
+      "read": "2026-10-12",
+      "revised": "Sep 28, 2018",
+      "stated": null,
+      "rows": {},
+      "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-82'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+      "notes": [
+        "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+      ]
+    },
+    "-226": {
+      "name": "Rosetta",
+      "read": "2026-10-12",
+      "revised": "Oct 24, 2016",
+      "stated": null,
+      "rows": {},
+      "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-226'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+      "notes": [
+        "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+      ]
+    },
+    "-98": {
+      "name": "New Horizons",
+      "read": "2026-10-12",
+      "revised": "Sep 01, 2026",
+      "stated": null,
+      "rows": {},
+      "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-98'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+      "notes": [
+        "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+      ]
+    },
+    "-5": {
+      "name": "Akatsuki",
+      "read": "2026-10-12",
+      "revised": "Aug 06, 2025",
+      "stated": null,
+      "rows": {},
+      "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-5'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+      "notes": [
+        "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+      ]
+    },
+    "-61": {
+      "name": "Juno",
+      "read": "2026-10-12",
+      "revised": "Sep 30, 2026",
+      "stated": null,
+      "rows": {},
+      "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-61'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+      "notes": [
+        "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+      ]
+    },
+    "-139479": {
+      "name": "Gaia",
+      "read": "2026-10-12",
+      "revised": "May 16, 2025",
+      "stated": null,
+      "rows": {},
+      "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-139479'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+      "notes": [
+        "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+      ]
+    },
+    "-37": {
+      "name": "Hayabusa2",
+      "read": "2026-10-12",
+      "revised": "Jun 30, 2026",
+      "stated": null,
+      "rows": {},
+      "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-37'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+      "notes": [
+        "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+      ]
+    },
+    "-64": {
+      "name": "OSIRISREx",
+      "read": "2026-10-12",
+      "revised": "Sep 18, 2025",
+      "stated": null,
+      "rows": {},
+      "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-64'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+      "notes": [
+        "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+      ]
+    },
+    "-96": {
+      "name": "Parker",
+      "read": "2026-10-12",
+      "revised": "Sep 30, 2026",
+      "stated": null,
+      "rows": {},
+      "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-96'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+      "notes": [
+        "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+      ]
+    },
+    "-168": {
+      "name": "MarsRover",
+      "read": "2026-10-12",
+      "revised": "Feb 18, 2021",
+      "stated": null,
+      "rows": {},
+      "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-168'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+      "notes": [
+        "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+      ]
+    },
+    "-49": {
+      "name": "Lucy",
+      "read": "2026-10-12",
+      "revised": "Oct 25, 2025",
+      "stated": null,
+      "rows": {},
+      "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-49'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+      "notes": [
+        "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+      ]
+    },
+    "-135": {
+      "name": "DART",
+      "read": "2026-10-12",
+      "revised": "Mar 01, 2024",
+      "stated": null,
+      "rows": {},
+      "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-135'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+      "notes": [
+        "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+      ]
+    },
+    "-170": {
+      "name": "JamesWebb",
+      "read": "2026-10-12",
+      "revised": "Sep 21, 2026",
+      "stated": null,
+      "rows": {},
+      "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-170'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+      "notes": [
+        "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+      ]
+    },
+    "-28": {
+      "name": "JUICE",
+      "read": "2026-10-12",
+      "revised": "Jun 30, 2026",
+      "stated": null,
+      "rows": {},
+      "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-28'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+      "notes": [
+        "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+      ]
+    },
+    "-255": {
+      "name": "Psyche",
+      "read": "2026-10-12",
+      "revised": "Sep 30, 2026",
+      "stated": null,
+      "rows": {},
+      "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-255'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+      "notes": [
+        "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+      ]
+    },
+    "-159": {
+      "name": "Clipper",
+      "read": "2026-10-12",
+      "revised": "Sep 30, 2026",
+      "stated": null,
+      "rows": {},
+      "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-159'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+      "notes": [
+        "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+      ]
+    },
+    "-121": {
+      "name": "BepiColombo",
+      "read": "2026-10-12",
+      "revised": "Jun 30, 2026",
+      "stated": null,
+      "rows": {},
+      "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-121'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+      "notes": [
+        "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+      ]
+    },
+    "-144": {
+      "name": "SolO",
+      "read": "2026-10-12",
+      "revised": "Sep 30, 2026",
+      "stated": null,
+      "rows": {},
+      "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-144'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+      "notes": [
+        "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+      ]
+    },
+    "-1024": {
+      "name": "Artemis II",
+      "read": "2026-10-12",
+      "revised": "Apr 20, 2026",
+      "stated": null,
+      "rows": {},
+      "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-1024'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+      "notes": [
+        "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+      ]
+    }
+  }
+}

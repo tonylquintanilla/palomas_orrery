@@ -2703,6 +2703,40 @@ resident.
 (Moved down from the resident protocol on 2026-10-13 when
 v3.95 made a fourth entry.)
 
+v3.93 (October 12, 2026): No rule changed in this document. ONE
+skill bump, one version (L-431, with L-401): horizons-orbital-mechanics
+1.3 -> 1.4. THE DRAWN ORBIT FOLLOWS THE PERIOD'S CENTRE.
+
+WHAT PROMPTED IT. L-431's second build draws each body's ellipse
+around the same centre as its period and dates the perihelion and
+aphelion markers from the period JPL gave (Tony's ruling 7 of
+2026-10-11); it carried L-401's second slice, the markers' and orbit
+hovers' digits. Its brief asked for one version if the build added
+method, and it did.
+
+WHAT CHANGED. horizons-orbital-mechanics gains The Drawn Orbit Follows
+the Period's Centre: the period record keeps Horizons' elements around
+its own centre; a barycentre ellipse in a Sun-centred plot is moved to
+where the barycentre is, found from the body's two element sets at one
+date; a record from another date is not paired; a marker's date comes
+from the period of the drawn elements; a date carries its period's
+error; and the comparison with mean elements stays Sun-centred. Its
+v1.1 entry moved to documentation/SKILL_HISTORIES.md, by the
+three-entry rule.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copy reads
+horizons-orbital-mechanics 1.4 before Horizons work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.90 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-14 when
+v3.96 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

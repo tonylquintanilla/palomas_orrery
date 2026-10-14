@@ -409,6 +409,12 @@ db63721d.
 Module updated: October 14, 2026 with Anthropic's Claude Opus 5.5
 (L-269: the maintenance run reads a tool's Windows line endings; the
 rise line no longer says NOT READ when a file rose), built on fe00059.
+Module updated: October 14, 2026 with Anthropic's Claude Opus 5.5
+(L-431 build 3, the website, and L-395's move of the Horizons check into
+the orrery: built and tested offline, both now waiting only on Tony's
+run and look; loose ends re-homed to L-433; horizons-orbital-mechanics
+1.6, gallery-cache-builder 1.9, interactive-exhibit 1.15, protocol
+v3.96), built on 5cd63cce and gallery 4b2b660a.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -759,7 +765,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-391 | Group clouds: the Trojans' sources, and the shapes of the three other groups (gallery, exhibits) | OPEN | -- | 2026-09-29 |
 | ! | L-393 | Encounter data: dates, spacecraft records centred on their targets, and how far the cache reaches in time (gallery, cache) | OPEN | -- | 2026-09-29 |
 | ! | L-394 | A card cannot say which body it belongs to (gallery, Studio) | OPEN | -- | 2026-09-29 |
-| ! | L-395 | The gallery's objects are hand-copied from the orrery's dictionary: export them, and check them against Horizons (orrery, gallery, objects) | OPEN | -- | 2026-10-12 |
+| ! | L-395 | The gallery's objects are hand-copied from the orrery's dictionary: export them, and check them against Horizons (orrery, gallery, objects) | PENDING-GATE | -- | 2026-10-14 |
 | ! | L-396 | Tony's page: WHERE_WE_ARE.md, the big picture in plain words (documentation, skills) | OPEN | -- | 2026-10-07 |
 | ! | L-399 | Small bodies: fetch each one's own position uncertainty from Horizons (gallery, builder) | OPEN | -- | 2026-10-01 |
 | ! | L-401 | The orrery's own distance hovers print by fixed widths, not by the errors the position earns (orrery, provenance) | OPEN | -- | 2026-10-13 |
@@ -777,12 +783,12 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-427 | Rows a neighbour's citation had been crediting (store) | OPEN | -- | 2026-10-09 |
 | ! | L-429 | The room button on the row, in the Solar System room's list (gallery, exhibits) | OPEN | -- | 2026-10-10 |
 | ! | L-430 | Uncited lines in the orrery's Oort cloud tooltips and the Sun's reach text (orrery, words) | OPEN | -- | 2026-10-10 |
-| ! | L-431 | Orbital periods from JPL, for every body, printed by their errors (orrery, provenance) | OPEN | -- | 2026-10-13 |
+| ! | L-431 | Orbital periods from JPL, for every body, printed by their errors (orrery, provenance) | PENDING-GATE | -- | 2026-10-14 |
 | ! | L-432 | Objects drawn in the default goldenrod (orrery, colours) | OPEN | -- | 2026-10-11 |
-| ! | L-433 | The road after the Sun and Earth rooms, in Tony's words (planning) | OPEN | -- | 2026-10-11 |
+| ! | L-433 | The road after the Sun and Earth rooms, in Tony's words (planning) | OPEN | -- | 2026-10-14 |
 | ! | L-434 | Stored drawings for the other dot-cloud shells (orrery + gallery) | OPEN | -- | 2026-10-11 |
 | ! | L-435 | Standing rulings that are method, held only on Tony's page (skills, records) | OPEN | -- | 2026-10-12 |
-| ! | L-440 | The dashboard's labels, short lines and headings, and the parity check (dashboard, both repos) | OPEN | -- | 2026-10-13 |
+| ! | L-440 | The dashboard's labels, short lines and headings, and the parity check (dashboard, both repos) | OPEN | -- | 2026-10-14 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1151,7 +1157,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
 #### [L-440] The dashboard's labels, short lines and headings, and the parity check (dashboard, both repos)
-<!-- L:440 status:OPEN upd:2026-10-13 section:A flag: rice: -->
+<!-- L:440 status:OPEN upd:2026-10-14 section:A flag: rice: -->
 - **Tony's request, 2026-10-12**, after confirming every run step has a
   button: "Could you check for labeling that is easily recognizable
   based on the script name and functionality? And pithy descriptions?
@@ -1192,6 +1198,13 @@ as an archive of the prioritization thinking -- no cleanup on close.
 - **Not renamed, recorded:** the run rows themselves keep their names
   (the printed script line now tells the modes of one script apart),
   and the standalone tools outside the runs keep theirs.
+- **Note (2026-10-14), from L-431 build 3:** its third patch,
+  `patch_L431_13_dashboard_buttons_20261014.py`, takes the website's
+  Horizons Check and Horizons Check Suite off the dashboard (their
+  scripts moved to the orrery, whose own three buttons patch_L431_11
+  adds), says three Daily Run steps, and adds Drawn Orbit under the
+  website's served-cache heading, each with its short line. Dashboard
+  Parity is the check that it is complete.
 **Gap:** Tony's look at the dashboard (the handoff, section 6). Later
 slice, recorded: the "when" index, from per-entry tags.
 **Ref:** `documentation/HANDOFF_L440_dashboard_labels_20261013.md`;
@@ -1524,7 +1537,7 @@ website drawing it, with Tony's look.
 owed to interactive-exhibit); `documentation/HANDOFF_L421_oort_gallery_20261011.md`.
 
 #### [L-433] The road after the Sun and Earth rooms, in Tony's words (planning)
-<!-- L:433 status:OPEN upd:2026-10-11 section:A flag: rice: -->
+<!-- L:433 status:OPEN upd:2026-10-14 section:A flag: rice: -->
 - **Tony, 2026-10-10, in his run record** (`documentation/WHERE_WE_ARE_10-10-26_2019_run_record.md` at 6fc3648), two notes:
   - "a couple of things to keep in mind. before we close the sun and
     earth rooms, i would like to implement fuzzy boundaries. and in the
@@ -1542,6 +1555,24 @@ owed to interactive-exhibit); `documentation/HANDOFF_L421_oort_gallery_20261011.
   reads "The planets get their details, Jupiter and Saturn first";
   Tony's note leans to the inner planets. Stage 14 is the Earth System
   layers, his "earth science part".
+- **Note (2026-10-14), loose ends received from L-431 and L-395** for
+  the work that brings the rest of the orrery's objects to the website
+  (stage 11; brief
+  `documentation/HANDOFF_L438_objects_to_website_brief_20261013.md`):
+  - The served objects with no `'key'` in the orrery's list (moon, io,
+    titan, pluto, charon, voyager_1) get no period on the website and
+    no Horizons check; each gains both when it gets a key.
+  - The Pluto-Charon barycentre's own period, around the Sun: the
+    orrery never fetches elements for the barycentre itself, so the
+    website prints "not yet fetched from JPL" for it.
+  - From L-395: the fields the list lacks (a moon's parent, a clean
+    kind); the display-name rename, which waits for names to stop
+    being keys; MAPS and 3I/ATLAS checked live once served; and
+    whether the identity check widens past the keyed entries (default
+    no).
+  - That brief names its item L-438, which the ledger's index now lists
+    as retired with L-439 (the dashboard labels took L-440). The objects
+    work opens its block under the next free handle.
 **Gap:** at the next design talk after the orbital periods: Tony
 confirms the order, and the road and the master plan's critical path
 (`documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md`, Section 5a) are
@@ -1575,7 +1606,7 @@ colours, Encke first, beside Halley and the other comets.
 L-395.
 
 #### [L-431] Orbital periods from JPL, for every body, printed by their errors (orrery, provenance)
-<!-- L:431 status:OPEN upd:2026-10-13 section:A flag: rice: -->
+<!-- L:431 status:PENDING-GATE upd:2026-10-14 section:A flag: rice: -->
 - **Opened 2026-10-10** from Tony's look at Encke: its hover has no
   orbital period, because the hover's "Known Orbital Period" reads only
   `KNOWN_ORBITAL_PERIODS` in `constants_new.py`, a typed table that
@@ -1857,6 +1888,51 @@ L-395.
   that centre" until patch_L431_10 added the rest at Tony's request.
   (This line was in a later copy of patch_L431_8 than the one that
   ran.)
+- **2026-10-14, build 3 BUILT** (the website), with L-395's move, on
+  orrery 5cd63cce and gallery 4b2b660a (first built on db63721d and
+  924977a3; rebuilt when L-440's dashboard landed, and again after
+  patch_L269_6), in three patches:
+  `patch_L431_11_website_orrery_20261014.py`,
+  `patch_L431_12_website_gallery_20261014.py`, and
+  `patch_L431_13_dashboard_buttons_20261014.py`, which moves the
+  website's Horizons buttons only after the website's patch has removed
+  their scripts, so Dashboard Parity (L-440) holds at every step. Record:
+  `documentation/HANDOFF_L431_build3_website_20261014.md`.
+  - The orrery's objects export is schema 2. Each keyed object carries
+    its period: from the orbit cache's record where one was fetched
+    (centre, days, error and what governs it, the SBDB words, the date,
+    and the elements around the centre), the typed value marked
+    `typed: true` where none was, or none. Years and days are printed
+    by the orrery's own digits rule and the export carries the printed
+    text and its figure count. A barycentre period carries the
+    Sun-centred elements of the same date, or says it is not paired.
+    The cache is now an input, and the export fingerprints it.
+  - The website copies the period into the config (the mirror) and
+    prints it in every body hover of the Solar System room and in the
+    Earth room's Sun Direction, in one of three forms: fetched, with
+    its centre and date; typed, marked; or "not yet fetched from JPL".
+    It is read from the config, so it reaches a visitor on the push;
+    the builder is not needed for it. Where a period is around the
+    barycentre the builder serves "drawn_orbit" (the elements around
+    it at the Sun-centred date) and the room moves the ellipse to the
+    barycentre, with no perturbation lines; that part needs the
+    builder.
+  - The five planted faults the brief asked for are each caught: an
+    export period with no centre (`test_objects_export.py`); a mirror
+    that drops the centre (`tools/test_mirror_objects.py`); a hover
+    printing more figures than the export's count
+    (`documentation/smoke_solar_system_figures.js`); a barycentre orbit
+    drawn around the Sun (`tools/test_drawn_orbit.py`); a Horizons
+    check passing a period JPL disagrees with
+    (`test_horizons_check.py`).
+  - Found while building, and the one question for Tony: the Pluto-Charon
+    barycentre has no period to export. The orrery fetches elements for
+    Pluto and for Pluto around the barycentre, never for the barycentre
+    itself around the Sun, so its row prints "not yet fetched from JPL".
+    Eight served bodies print their typed value, marked, until Tony
+    plots them in the orrery: Venus, Earth, Mars, Saturn, Uranus,
+    Neptune, Apophis and Halley. Mercury, Jupiter and Encke print
+    JPL's.
 **Gap:** three builds, in order (the record's section 3):
 1. The period in the orrery: BUILT and working against JPL
    (2026-10-11); its words settled at L-401's look (2026-10-12).
@@ -1865,13 +1941,19 @@ L-395.
    (2026-10-13), and CLOSED: the three findings from his saved plot
    (patch_L431_7, pushed at 400a9615) and no perturbation lines for
    barycentre orbits (patch_L431_8, pushed at 4da3d7cc).
-3. The website, NEXT, briefed in
-   `documentation/HANDOFF_L431_build3_website_brief_20261013.md`: the
-   export carries each period and the elements around its centre, and
-   for a barycentre body the Sun-centred elements too (above); every
-   room's hover prints it and draws the orbit around that centre; the
-   Horizons check compares it.
-The typed table's 132 unsourced entries stay one class, not chased.
+3. The website: BUILT and tested offline (2026-10-14, above). It
+   closes at Tony's run (both patches, both maintenance runs, the Daily
+   Run, the live check) and his look on the phone and the desktop;
+   the status then goes to DONE with no other change.
+Loose ends, re-homed at this build: the Pluto-Charon barycentre's own
+period, and the served objects with no key in the orrery's list (the
+Moon among them, so the brief's "one moon" in the look prints no
+period), are on L-433's note of 2026-10-14 for the objects work. The
+typed table's 132 unsourced entries are struck as a loose end: the
+table now prints only for a body with no fetched record, marked as
+typed on both sides, and the provenance scanner names it
+(`PROVENANCE_AUDIT.md`, `KNOWN_ORBITAL_PERIODS`). The "mean" elements'
+naming class above stays recorded, as it was.
 **Ref:** `documentation/DESIGN_L431_orbital_periods_rulings_20261011.md`;
 `documentation/DESIGN_L431_orbital_periods_20261011.md`;
 `documentation/HANDOFF_L431_period_build1_20261011.md`;
@@ -2722,7 +2804,7 @@ is enough. L-422 holds the shape; this item holds the check.
 **Ref:** `documentation/WHERE_WE_ARE.md`; `skills/ledger-and-session-records/SKILL.md` (The Document Stack); `PROJECT_INSTRUCTIONS.md` v3.74; L-363; L-395; L-333; L-362.
 
 #### [L-395] The gallery's objects are hand-copied from the orrery's dictionary: export them, and check them against Horizons (orrery, gallery, objects)
-<!-- L:395 status:OPEN upd:2026-10-12 section:A flag: rice: -->
+<!-- L:395 status:PENDING-GATE upd:2026-10-14 section:A flag: rice: -->
 - **2026-10-01, design rulings and the first build** [verified: orrery
   feb5e369, gallery 43993b49; Tony's runs 22 of 22 gating; his phone:
   "perfect"]. Tony's rulings, each "confirmed as recommended" unless
@@ -3078,14 +3160,47 @@ is enough. L-422 holds the shape; this item holds the check.
   Brief: `documentation/HANDOFF_L395_horizons_check_move_brief_20261012.md`,
   with two (decide) items for that session: how a changed sheet is
   cleared, and whether the identity check widens past the thirteen.
-**Gap:** The check is built and runs every day. Still open: moving it
-into the orrery's maintenance run with the spacecraft data sheets'
-30-day re-read (the brief above); fields the
-list lacks (a moon's parent, a clean kind); the remaining served
-objects (moon, io, titan, pluto, charon, voyager_1, which have no key
-yet); the display-name rename; MAPS and 3I/ATLAS checked live when
-served; L-391 to L-394. The numbers in the other descriptions are
-L-403. Encke's period is L-431.
+- **2026-10-14, the move BUILT**, with L-431's build 3 (record:
+  `documentation/HANDOFF_L431_build3_website_20261014.md`).
+  `horizons_check.py` is a generator row of the orrery's maintenance
+  run, just before the objects export; `check_horizons_confirmations.py`
+  and `test_horizons_check.py` are checker rows. It asks JPL only what
+  is due, compares each fetched period with JPL's PR within its own
+  error, and re-reads the 26 spacecraft data sheets on the same 30-day
+  cycle into `data/spacecraft_sheets.json`. The thirteen confirmations
+  of 2026-10-10 were carried over with their dates, so the move asks
+  JPL nothing new for them. The export carries each object's dates;
+  the website's offline check reads them from it. The website's Daily
+  Run is three steps; its copies of the check, its tests, its record
+  and the recorded answers are removed (git keeps them), and the
+  dashboard's buttons follow the files.
+  - The first (decide) item was ruled before the build: a changed sheet
+    is red only where a `constants_new.py` row quotes a figure the
+    sheet no longer gives, and a patch to the row clears it (option A,
+    `DESIGN_rulings_20261012.md` ruling 6). The second keeps its
+    default, no: the check covers the keyed entries only.
+  - Not tested against JPL here (the sandbox cannot reach it): the
+    identity answers are JPL's own, but the period (elements) and
+    data-sheet answers were written in JPL's format by this build and
+    marked so, and the test's inputs are frozen beside them. Tony's
+    maintenance run is the live test; its first run asks JPL for the
+    three fetched periods.
+  - A cold review found two faults, fixed before delivery: a small
+    body's ';' is now sent as %3B, as JPL's examples send it; and an
+    identity or a period is asked again from day 25, so the website,
+    red at day 30 and a push and a pull behind, is not red every cycle.
+**Gap:** The move is built. It closes when Tony's orrery maintenance
+run shows "Horizons check" as PASS or NOTHING DUE and the website's
+offline run is green on the pulled export; the status then goes to
+DONE with no other change.
+Loose ends, re-homed at this build: the fields the list lacks (a
+moon's parent, a clean kind); the remaining served objects with no key
+(moon, io, titan, pluto, charon, voyager_1); the display-name rename;
+MAPS and 3I/ATLAS checked live when served; and whether the identity
+check widens past the keyed entries -- all on L-433's note of
+2026-10-14, for the objects work. L-391, L-393 and L-394 stay open on
+their own; L-392 is done. The numbers in the other descriptions are
+L-403. Encke's period was L-431's, and is built.
 **Ref:** `documentation/HANDOFF_L395_horizons_check_move_brief_20261012.md`; `documentation/DESIGN_L395_horizons_check_20261007.md`; `documentation/HORIZONS_ANSWERS_L395_20261007.md`; `documentation/HANDOFF_L395_horizons_check_build_20261010.md`; gallery `tools/horizons_check.py`, `tools/check_horizons_confirmations.py`, `tools/test_horizons_check.py`, `data/horizons_confirmations.json`; `celestial_objects.py`; gallery `data/objects_config.json`; `export_constants.py`; gallery `tools/pull_constants_export.py` and `tools/mirror_constants.py` (the model); skills/horizons-orbital-mechanics/SKILL.md; L-363; L-364; L-391 to L-394.
 
 #### [L-394] A card cannot say which body it belongs to (gallery, Studio)

@@ -6,9 +6,18 @@ fires_when: Nightly builder, atomic swap and its retry/roll-back/swap log, "Acce
 
 # Gallery Cache Builder (Phase 1b data serving)
 
-Read this file in 2 parts: lines 1-268, 269-448.
+Read this file in 2 parts: lines 1-269, 270-507.
 
-Skill version: 1.8 | 2026-10-10, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.9 | 2026-10-14, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 5cd63cce and gallery @ 4b2b660a. v1.9 (L-431 build 3,
+with L-395's move) records two things the build changed. The builder
+reads each object's period from the config and, where the period is
+taken around the solar system's barycentre, also serves the elements
+around it as "drawn_orbit", checked before the swap as #D (The Builder
+Reads the Period's Centre). And the Daily Run is three steps: the
+Horizons check left it for the orrery's maintenance run (The Daily
+Run's Steps). A config change's exceptions now name the period too.
+Earlier: 1.8 | 2026-10-10, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ a6678b0f and gallery @ cb9038cc. v1.8 (L-216) retires
 the hand routine's OneDrive pause, on Tony's word of 2026-10-10: "you
 can remove the pause check from the daily run. the retry is
@@ -23,18 +32,8 @@ older than the two entries below moved to
 documentation/SKILL_HISTORIES.md. Both because a plain read of a
 long file shows its start and end and leaves out its middle, where
 the rules are (Tony, 2026-10-05).
-Earlier: 1.6 | Cut from tonyquintanilla.github.io @ a1a516cf (tools/gallery_cache_builder.py, tools/test_gallery_cache_builder_offline.py, documentation/check_cache_siblings.py, gallery_maintenance_run.py, .gitignore) and palomas_orrery @ ba94e80e (LEDGER_CONSOLIDATED.md L-216) | 2026-09-20, with Anthropic's Claude Opus 5
-v1.6 records the build that stops a failed swap depending on a person
-noticing (L-216): each rename is retried, a swap that still cannot finish
-puts the previous generation back, and every run that reaches the swap
-writes one line to `data/cache_swap_log.jsonl`, a tracked file outside the
-generation. The count goes to FIVE occurrences, and pausing OneDrive did
-not prevent the last two. It adds what Tony does before and after a hand
-build, and it writes down two things that had lived only in code or only
-in a ledger block: never `shutil.rmtree` anything in this tree, and judge
-a conflict copy by what is inside it.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
-on 2026-10-05 (L-418).
+on 2026-10-05 (L-418) and 2026-10-14 (L-431).
 
 The standalone builder that fetches fresh JPL Horizons data and deploys the
 web gallery's served cache. Tony runs it MANUALLY and commits the result
@@ -57,6 +56,8 @@ if this list and the headings disagree (L-418).
 - Never shutil.rmtree anything in this tree [QUALITY]
 - The sibling report names what the builder did not make [QUALITY]
 - A config change is not deployed until the cache is rebuilt [CRITICAL]
+- The Builder Reads the Period's Centre [QUALITY]
+- The Daily Run's Steps [QUALITY]
 - Validation stance
 - Commit with round-trip verify
 - The three-layer gate (documentation/TESTING_PROTOCOL.md, orrery repo)
@@ -346,6 +347,64 @@ of a room's data the page reads directly: the `arrival` block --
 `drawn` and `moon` -- is fetched from `data/objects_config.json` by
 `gallery/arrival.js`, not from the cache. A change to what a room OPENS
 on needs only the push. Everything else needs the builder.
+
+Three more fields are read from the config by the rooms' drivers, not
+from the cache, so they too reach a visitor on the push alone: a body's
+`position_accuracy` (L-398), its `description` and `info_url` (L-395),
+and its `period` (L-431 build 3), which `tools/mirror_objects.py` copies
+from the orrery's export. The orbit drawn around a period's centre is
+NOT one of them: it is the cache's `drawn_orbit`, and needs the builder.
+
+## The Builder Reads the Period's Centre [QUALITY]
+
+Built 2026-10-14 (L-431 build 3), at the rule horizons-orbital-mechanics
+calls The Drawn Orbit Follows the Period's Centre.
+
+- Each object in `data/objects_config.json` carries a `period` block,
+  copied by `tools/mirror_objects.py` from the orrery's export, never by
+  hand. `kind` is `fetched`, `typed` or `none`; a fetched one names its
+  `center`, the Horizons centre JPL's period was taken around.
+- The served `osculating` block, its positions and its trust stay
+  Sun-centred and unchanged. Where a fetched period's centre is the
+  solar system's barycentre ('@0') and the body is drawn from its
+  elements around the Sun (not a comet, not a spacecraft), the builder
+  ALSO fetches the body's elements around that centre at the SAME date
+  as the Sun-centred ones, and serves them as `drawn_orbit` (centre
+  slug `ssb`, `paired_with: osculating`). The room pairs the two sets
+  at that date to find where the barycentre sits seen from the Sun, and
+  draws the ellipse there (`render_orbits.drawn_orbit_offset`). No
+  perturbation lines are drawn for it (Tony, 2026-10-13).
+- A set from another date is never paired: `build_drawn_orbit_block`
+  raises, and the pre-swap check #D aborts a `drawn_orbit` that is
+  around the stored centre, is not at the `osculating` date, or has no
+  mean motion. `tools/check_cache_in_step.py` asks the same question
+  from the other side, with the same rule (`drawn_centre_wanted`):
+  every object whose period wants a drawn orbit has one, and no other
+  object does.
+- A comet whose period is around another centre is drawn from its
+  elements at perihelion, around the Sun, and the builder WARNS rather
+  than fetching. Encke, today, is around the Sun.
+- Which bodies this touches is decided by the orrery's period records,
+  not here. On 2026-10-14 no served body's period was around the
+  barycentre (Sedna is not served), so the first live `drawn_orbit` may
+  come from a planet whose period the orrery fetches around '@0' when
+  Tony plots it.
+
+## The Daily Run's Steps [QUALITY]
+
+`daily_run.py`, Tony's design of 2026-09-27 (L-281), is three steps
+since 2026-10-14: the guest book updater, this builder with no flags,
+and the gallery maintenance run offline. A step that reports a problem
+does not stop the next; nothing in it commits or pushes. The Horizons
+check was its step 2 from 2026-10-10 to 2026-10-14 and moved into the
+orrery's maintenance run beside the objects export (L-395; Tony,
+2026-10-12: "the orrery stores and serves the data not the other way
+around"). The gallery's "Horizons confirmations" row still reads the
+dates JPL confirmed each object, from the pulled export, offline, and
+goes red, naming the objects, on the day a confirmation turns 30 days
+old: the cure is the orrery's maintenance run, then the push, then the
+pull here. `python daily_run.py --check` lists the steps and fails if a
+script is missing; the maintenance run runs it.
 
 ## Validation stance
 

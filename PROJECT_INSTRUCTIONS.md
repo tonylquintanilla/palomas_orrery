@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.95 | October 13, 2026
+Tony Quintanilla, PE | Claude | v3.96 | October 14, 2026
 
-Cut from 70202e3b at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 5cd63cce at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -486,10 +486,12 @@ safe-file-editing            1.13 Editing existing files, patch scripts,
                                   sed/regex edits, encoding checks (portable)
 agentic-pre-test             1.3  BEFORE delivering complete files/agentic
                                   code; after data-content sweeps
-horizons-orbital-mechanics   1.5  Horizons queries, centers, frames, osculating
+horizons-orbital-mechanics   1.6  Horizons queries, centers, frames, osculating
                                   elements, encounters, comet record pinning,
                                   2xr uncertainties, periods, the drawn orbit's
-                                  centre
+                                  centre, the Horizons check
+                                  (horizons_check.py, its period comparison and
+                                  the data sheets' re-read)
 provenance-discipline        2.29 Scanner runs, audits, citations, constants,
                                   pre-push (Tier-1 = 0 on the active build
                                   path)
@@ -512,12 +514,12 @@ gallery-assembler            1.3  render_orbits.py, resolver.py,
                                   unresponsive, it worked yesterday, a console
                                   error appears, or Claude is about to hand
                                   Tony a test to run
-gallery-cache-builder        1.8  Nightly builder, atomic swap and its
+gallery-cache-builder        1.9  Nightly builder, atomic swap and its
                                   retry/roll-back/swap log, "Access is denied"
                                   under data/, coverage_index, serving cache,
                                   objects_config, dry-run/first-build/nightly,
                                   builder testing layers
-interactive-exhibit          1.14 adding or changing an exhibit in
+interactive-exhibit          1.15 adding or changing an exhibit in
                                   interactive.html; any edit to the Sun's
                                   chrome (drawer, nav cluster, frame zoom,
                                   i-panel, HUD, consent, back link); "Earth
@@ -1168,6 +1170,44 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.96 (October 14, 2026): No rule changed in this document. THREE
+skill bumps, one version each (L-431 build 3, with L-395's move):
+horizons-orbital-mechanics 1.5 -> 1.6, gallery-cache-builder 1.8 ->
+1.9, interactive-exhibit 1.14 -> 1.15. THE WEBSITE PRINTS THE ORRERY'S
+PERIOD, AND THE HORIZONS CHECK LIVES IN THE ORRERY.
+
+WHAT PROMPTED IT. Tony, 2026-10-13: "I've gotten away from the gallery
+work. What's our path back?" L-431's third build carries each body's
+period from the orrery's export to every room's hover, and draws an
+orbit around its period's centre. He asked the same day whether the
+Horizons check's move (L-395) should ride the build -- yes -- so the
+period comparison was written once, where the check now lives.
+
+WHAT CHANGED. horizons-orbital-mechanics gains Where the Check Lives,
+and What It Compares: a generator row of the orrery's maintenance run,
+asking JPL only what is due, comparing each fetched period with JPL's
+PR within its own error, and re-reading the spacecraft data sheets on
+the same 30-day cycle; its pinning line no longer puts the check in
+the website's Daily Run. gallery-cache-builder gains The Builder Reads
+the Period's Centre (the served "drawn_orbit" and check #D) and The
+Daily Run's Steps (three since the move). interactive-exhibit gains
+two provenance bullets: a body's period is the orrery's, printed as
+served in one of three forms and read from the config, so it reaches a
+visitor on the push; the orbit drawn around a period's centre is cache
+data and needs the builder. Each skill's oldest entry moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copies read
+horizons-orbital-mechanics 1.6, gallery-cache-builder 1.9 and
+interactive-exhibit 1.15 before work that fires them.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.93 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.95 (October 13, 2026): No rule changed in this document. ONE
 skill bump, one version (L-437): provenance-discipline 2.28 -> 2.29.
 THE TIER-1 TOTAL PRINTS WITH ITS DOMAINS.
@@ -1228,37 +1268,6 @@ horizons-orbital-mechanics 1.5 before Horizons work.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.91 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.93 (October 12, 2026): No rule changed in this document. ONE
-skill bump, one version (L-431, with L-401): horizons-orbital-mechanics
-1.3 -> 1.4. THE DRAWN ORBIT FOLLOWS THE PERIOD'S CENTRE.
-
-WHAT PROMPTED IT. L-431's second build draws each body's ellipse
-around the same centre as its period and dates the perihelion and
-aphelion markers from the period JPL gave (Tony's ruling 7 of
-2026-10-11); it carried L-401's second slice, the markers' and orbit
-hovers' digits. Its brief asked for one version if the build added
-method, and it did.
-
-WHAT CHANGED. horizons-orbital-mechanics gains The Drawn Orbit Follows
-the Period's Centre: the period record keeps Horizons' elements around
-its own centre; a barycentre ellipse in a Sun-centred plot is moved to
-where the barycentre is, found from the body's two element sets at one
-date; a record from another date is not paired; a marker's date comes
-from the period of the drawn elements; a date carries its period's
-error; and the comparison with mean elements stays Sun-centred. Its
-v1.1 entry moved to documentation/SKILL_HISTORIES.md, by the
-three-entry rule.
-
-THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
-that session. The next session confirms its loaded copy reads
-horizons-orbital-mechanics 1.4 before Horizons work.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.90 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

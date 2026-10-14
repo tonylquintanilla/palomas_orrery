@@ -1,22 +1,24 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 13, 2026, evening: the dashboard's cards, headings and names.
-- Written at orrery db63721d and gallery 924977a3.
+Last updated: October 14, 2026: the website prints JPL's periods; the Horizons check moved.
+- Written at orrery 5cd63cce and gallery 4b2b660a.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The dashboard: one short line per card, "+ more" opens the rest;
->   the website checks under your six headings, which fold; the orrery
->   opens its own console. A new check, Dashboard Parity.
+> - Orbital periods, build 3: the website's hovers print the orrery's
+>   period, its centre and the date JPL gave it. Built and tested here.
+> - The Horizons check moved into the orrery's maintenance run, and
+>   checks each period too. The website's Daily Run is three steps.
 >
-> **Do next:** *L-431's website build, from its brief (in Where the
-> details are), and the briefed sessions beside it.*
+> **Do next:** *Run the three patches in the order the handoff gives
+> (in Where the details are); then the look.*
 >
 > **Needs you now:**
-> - *Run patch_L440_1, then the maintenance run (Dashboard parity
->   among the passes); open the dashboard and look; then push.*
+> - *One question: Pluto-Charon's barycentre has no period from JPL
+>   yet (the orrery never fetches the barycentre itself), so its row
+>   says "not yet fetched from JPL". Ship it so, and fetch it later?*
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
@@ -24,20 +26,20 @@ Last updated: October 13, 2026, evening: the dashboard's cards, headings and nam
 
   1-4. [done]  The Sun, Earth and Solar System rooms are live; the orrery
                feeds the website and nothing is typed twice.
-  5.   [NOW]   *L-401 (the distance digits): builds 1 and 2 accepted;
-               build 3 later. Then Earth's remaining items.*
-               << moved this session
+  5.   [NOW]   L-401 (the distance digits): builds 1 and 2 accepted;
+               build 3 later. Then Earth's remaining items.
   5b.  [NOW]   The scaffolding checks clear beside the slices: the
                dashboard (L-440) built; L-424, L-425, L-426 to come.
   6.   [next]  The typed facts: the inner Oort cloud is drawn on the
                website too. Left: the check.
-  6a.  [NOW]   *Orbital periods from JPL: builds 1 and 2 accepted and
-               closed; build 3, the website, briefed and next.*
+  6a.  [done]  *Orbital periods from JPL: all three builds; the
+               website's waits only on your run and your look.*
                << moved this session
   7.   [next]  The Sun's numbers get the checking Earth's got; the Solar
                System room's features close with these rooms.
-  8.   [done]  The served objects are checked against JPL Horizons.
-               Next: the check moves to the orrery.
+  8.   [done]  The served objects are checked against JPL Horizons, from
+               the orrery's run; your next run is the periods' first live test.
+               << moved this session
   9.   [next]  The website's checks, in the order you confirmed:
                L-423 (the website's checks).
  10.   [next]  A bare interactive.html link opens the Solar System room;
@@ -61,9 +63,6 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
   turned into km at their distance and said to be ours. (Oct 12)
 - "Surface": the solid surface, or one radius where there is none (a
   giant planet's 1-bar level, the Sun's photosphere). (Oct 12)
-- The Horizons check lives in the orrery's maintenance run, beside the
-  export; the website's daily check reads its dates. A changed sheet
-  goes red only when the figure a row quotes changed. (Oct 12)
 - A checker's word names its case: two words for a moved value. The
   citation location checks: all three levels now. (Oct 12)
 - The scattered disk: yes, in the Solar System room, after fuzzy
@@ -75,8 +74,8 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 - Orbital periods: JPL's own, every body, orrery and website; the
   centre that moves less in a year, digits by the larger error, the
   drawn orbit and markers alike; typed table last, marked. (Oct 11)
-- Comets by first apparition, oldest first. A colour is a drawing
-  choice, to tell bodies apart; not the default goldenrod. (Oct 10)
+- Comets by first apparition, oldest first. A colour tells bodies
+  apart; not the default goldenrod. (Oct 10)
 - Fuzzy boundaries come before the Sun and Earth rooms close. Every
   new check gets its dashboard button. (Oct 10)
 - The Hills cloud follows its paper (Fig. 3, its text), cited; to 10,000 AU. (Oct 10)
@@ -86,11 +85,10 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261013T132123Z, ok, no retry (gallery 924977a3).
-- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, f59c84b2).
-  Whole tree: 281: orrery 116, Earth System 149, stars 13, utilities 2,
-  unclassified 1 (your run; the 1 is patch_L436_1, still in the root).
-- This page's date and the ledger's newest stamp: both Oct 13. Agree.
+- Last cache build: 20261014T175225Z, ok, no retry (gallery 4b2b660a).
+- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, 5cd63cce).
+  Whole tree: 280: orrery 116, Earth System 149, stars 13, utilities 2.
+- This page's date and the ledger's newest stamp: both Oct 14. Agree.
 
 ## Waiting on you
 
@@ -114,13 +112,14 @@ Not urgent, in your order:
 
 - Every item: `LEDGER_CONSOLIDATED.md`. Open for build: L-421 (the
   typed facts), its check.
+- *Build 3 and the check's move, with the run order:
+  `HANDOFF_L431_build3_website_20261014.md`*
 - Orbital periods: rulings `DESIGN_L431_..._rulings_20261011.md`; build 2's
   look and fixes `HANDOFF_L431_build2_look_fixes_20261013.md`; build 3's
   brief `HANDOFF_L431_build3_website_brief_20261013.md`
 - The distance digits: `DESIGN_L401_distance_digits_rulings_20261011.md`;
   reviews `REVIEW_L401_..._comparison_20261011.md`; build 1
   `HANDOFF_L401_distance_build1_20261012.md`
-- The Horizons check's move: `HANDOFF_L395_horizons_check_move_brief_20261012.md`
 - Your notes of Oct 12: `WHERE_WE_ARE_10-12-26_2212_run_record.md`
 - L-421 (typed facts, inner Oort): `MANIFEST_L421_typed_facts_20261006.md`, `HANDOFF_L421_*`
 - L-436 (away from the machine): `DESIGN_L436_orrery_away_from_the_machine_20261013.md`

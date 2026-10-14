@@ -1,12 +1,24 @@
 ---
 name: horizons-orbital-mechanics
 description: JPL Horizons API and orbital mechanics reference for the Paloma's Orrery project (astroquery Horizons queries, orbit_data_manager, osculating_cache_manager, idealized_orbits, apsidal_markers, spacecraft_encounters, close_approach_data, position_accuracy, orbital_period). Use for any Paloma's Orrery task involving Horizons queries or ephemerides, coordinate center bodies, reference frames, osculating elements, orbit caches, a small body's position uncertainty (VEC_TABLE 2xr), orbital periods and the centre they are taken around, the drawn orbit and its markers' dates, encounter or flyby resolution, or whenever a rendered orbit looks wrong or an ephemeris API returns empty. Do not use for projects other than Paloma's Orrery.
-fires_when: Horizons queries, centers, frames, osculating elements, encounters, comet record pinning, 2xr uncertainties, periods, the drawn orbit's centre
+fires_when: Horizons queries, centers, frames, osculating elements, encounters, comet record pinning, 2xr uncertainties, periods, the drawn orbit's centre, the Horizons check (horizons_check.py, its period comparison and the data sheets' re-read)
 ---
 
 # Horizons and Orbital Mechanics Reference
 
-Skill version: 1.5 | 2026-10-13, with Anthropic's Claude Opus 5.5, at
+Read this file in 2 parts: lines 1-222, 223-322.
+
+Skill version: 1.6 | 2026-10-14, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 5cd63cce and gallery @ 4b2b660a. v1.6 (L-431 build 3,
+with L-395's move) records where the Horizons check lives now and what
+it compares, under Where the Check Lives, and What It Compares: it runs
+in the orrery's maintenance run beside the objects export, asks JPL
+only what is due, compares each fetched period with JPL's PR within the
+period's own error, and re-reads each spacecraft's data sheet on the
+same 30-day cycle. It corrects the line under Small-Body Record Pinning
+that put the check in the website's Daily Run. It is the first version long enough
+for more than one read, so it opens with its read plan (L-418).
+Earlier: 1.5 | 2026-10-13, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 400a9615. v1.5 (L-431) corrects one bullet of 1.4, by
 Tony's ruling of 2026-10-13: an orbit drawn around the solar system's
 barycentre gets no comparison with the stored mean elements. 1.4 said
@@ -21,16 +33,8 @@ barycentre ellipse in a Sun-centred plot is moved to where the
 barycentre is, found from the body's two element sets at one date, a
 marker's date comes from the period of the drawn elements, and a date
 stepped from a period carries that period's error.
-Earlier: 1.3 | 2026-10-12, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 47815de2. v1.3 (L-401, L-431) adds what two builds
-learned, in one version as both items asked: A Small Body's
-Uncertainty Comes With Its Position (VEC_TABLE='2xr', which astroquery
-0.4.11 cannot ask for or read, so a direct call read by column name);
-A Period Depends on Its Centre (the two-centre test and its saved
-choice); and the Small-Body Database's lookup of a pinned record by
-the name Horizons gives it, under Small-Body Record Pinning.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
-on 2026-10-12 and 2026-10-13 (L-431).
+on 2026-10-12, 2026-10-13 and 2026-10-14 (L-431).
 
 ## Horizons Center Body Rules
 
@@ -65,8 +69,9 @@ periodic comets:
   took new solutions on 2026-10-01 and 2026-10-09 under the same
   number), so a pin fixes the apparition, not the numbers. What a pin
   does not follow is a NEWER record, which JPL adds for a new
-  apparition. The gallery's Horizons check (tools/horizons_check.py,
-  the Daily Run's step 2) confirms every 30 days that each pin is still
+  apparition. The Horizons check (horizons_check.py, in the orrery's
+  maintenance run since 2026-10-14; the website's Daily Run before
+  that) confirms every 30 days that each pin is still
   the newest record for its comet and reports a newer one for Tony; it
   never re-pins.
 - The Small-Body Database (SBDB) cannot find a Horizons record number,
@@ -214,6 +219,61 @@ HORIZONS_ANSWERS_L395_20261007.md.
 - Read JPL's live answers, not its documentation's examples: the
   Lookup's documentation gives Apophis's primary SPKID as 2099942,
   while the live answer is 20099942, with 2099942 an older alias.
+
+## Where the Check Lives, and What It Compares (L-395, L-431 build 3)
+
+Moved 2026-10-14 from the website's Daily Run into the orrery (Tony,
+2026-10-12: "the orrery stores and serves the data not the other way
+around"). The move's brief is
+documentation/HANDOFF_L395_horizons_check_move_brief_20261012.md; the
+build's record, documentation/HANDOFF_L431_build3_website_20261014.md.
+
+- `horizons_check.py` is a GENERATOR row of the orrery's maintenance
+  run, just before the objects export, so the export carries the dates
+  it writes. `check_horizons_confirmations.py` is a CHECKER row that
+  reads what it wrote, offline. The website keeps an offline check of
+  its own, `tools/check_horizons_confirmations.py`, which reads the
+  dates from the pulled export and goes red, naming the objects, on the
+  day one turns 30 days old.
+- Only what is due is asked: a part of an entry never confirmed, one
+  confirmed 30 days ago or more, or one that has changed since (the
+  record keeps what was confirmed, so a change shows). On most runs it
+  asks JPL nothing. An identity or a period is asked again from day 25
+  ("renewing"): the website goes red at day 30 and sees a new date only
+  after the orrery's push and its own pull, so asking at day 30 would
+  leave it red every cycle. The offline checker passes a renewing
+  confirmation until day 30. The data sheets keep 30.
+- A small body's COMMAND ends with ';', sent as %3B, as JPL's own
+  examples send it; a bare ';' in a URL can end the parameter early.
+- The period: for an entry whose period was fetched, one ELEMENTS query
+  as the orrery asked it -- the same COMMAND, CENTER the period's own
+  centre, TLIST the period's own date written as a calendar Julian day,
+  OUT_UNITS AU-D -- and JPL's PR must lie within the period's own error
+  of the period the website prints. A typed period, or none, is not
+  compared; the line names it as not from JPL.
+- Any failure to get JPL's answer is "could not reach JPL". It never
+  passes, nothing is recorded for that part, it stays due, and the run
+  asks JPL nothing more that day. The verdict says UNREACHABLE by name:
+  the convention for every row that needs the network.
+- The data sheets: every spacecraft in the list (an id starting with
+  '-') has its Horizons data sheet re-read on the same 30-day cycle,
+  into `data/spacecraft_sheets.json`. Red only where a row of
+  `constants_new.py` quotes a figure from the sheet and the sheet no
+  longer gives it (Tony's option A, 2026-10-12: "the row claims the
+  figure, not the page"); a patch to the row clears it. A sheet whose
+  "Revised:" date moved and whose figure did not is noted, not red.
+  Nothing here edits a row.
+- The thirteen identity confirmations of 2026-10-10 were carried over
+  with their dates, so the move asked JPL nothing. The offline tests run
+  on JPL's recorded answers,
+  `documentation/worksheets/horizons_answers_L395.json`. Its identity
+  answers are JPL's own; its elements and data-sheet answers were
+  written in JPL's format by the build, which could not reach JPL, and
+  the file says so for each, so the first live run is the real test of
+  the parsing. The same file freezes the inputs the test runs on (the
+  three cache entries, the carried confirmations, the seeded sheets):
+  a test that read the live records would fail on the day the check
+  first worked.
 
 ## Reference Frame Diagnostic
 

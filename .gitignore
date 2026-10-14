@@ -43,3 +43,9 @@ data/solar-system/
 # leaves the folder and everything in it out of every commit. A session
 # that needs a paper gets it uploaded into its chat.
 /papers/
+
+# L-431 build 3 (2026-10-14): the Horizons check's verdict for the run it
+# was written on. It changes on every maintenance run and is read only by
+# check_horizons_confirmations.py on the same machine, the same day; the
+# confirmations it rests on are tracked in data/horizons_confirmations.json.
+data/horizons_check_last_run.json

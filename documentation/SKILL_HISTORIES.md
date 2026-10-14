@@ -579,6 +579,18 @@ older than the two entries below moved to
 documentation/SKILL_HISTORIES.md. Both because a plain read of a
 long file shows its start and end and leaves out its middle, where
 the rules are (Tony, 2026-10-05).
+Earlier: 1.12 | 2026-10-06, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 51436054 and gallery @ ed48d078. v1.12 (L-421, L-349)
+draws the line the provenance rule left open: a fact about one feature
+is served with that feature's words, never typed in a renderer, and
+code may type only sentences about the picture. Found when Claude told
+Tony this skill already required the inner belt's "protons" to be
+served; it required served NUMBERS, and let page text carry its source
+in the page, which Claude read as allowing a typed fact. Tony: "I
+thought the only source of truth is the constants py and the objects
+list ... not from the code." A search the same day found 17 such facts
+in the two rooms (documentation/MANIFEST_L421_typed_facts_20261006.md).
+(Moved down 2026-10-14, when 1.15 made a fourth entry.)
 
 ## safe-file-editing
 
@@ -749,6 +761,17 @@ REBUILT (L-336). It also corrects this skill's own claim that the failed
 `staging -> live` rename was "one data point" -- there have been three,
 the third on 2026-09-17 -- and writes down the hand routine Tony
 actually uses now.
+Earlier: 1.6 | Cut from tonyquintanilla.github.io @ a1a516cf (tools/gallery_cache_builder.py, tools/test_gallery_cache_builder_offline.py, documentation/check_cache_siblings.py, gallery_maintenance_run.py, .gitignore) and palomas_orrery @ ba94e80e (LEDGER_CONSOLIDATED.md L-216) | 2026-09-20, with Anthropic's Claude Opus 5
+v1.6 records the build that stops a failed swap depending on a person
+noticing (L-216): each rename is retried, a swap that still cannot finish
+puts the previous generation back, and every run that reaches the swap
+writes one line to `data/cache_swap_log.jsonl`, a tracked file outside the
+generation. The count goes to FIVE occurrences, and pausing OneDrive did
+not prevent the last two. It adds what Tony does before and after a hand
+build, and it writes down two things that had lived only in code or only
+in a ledger block: never `shutil.rmtree` anything in this tree, and judge
+a conflict copy by what is inside it.
+(Moved down 2026-10-14, when 1.9 made a fourth entry.)
 
 ## horizons-orbital-mechanics
 
@@ -765,3 +788,13 @@ does not follow is a NEWER record, not a new solution.
 
 Earlier: 1.1 | Cut from palomas_orrery @ e83fe9ce | 2026-07-12
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons.
+
+Earlier: 1.3 | 2026-10-12, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 47815de2. v1.3 (L-401, L-431) adds what two builds
+learned, in one version as both items asked: A Small Body's
+Uncertainty Comes With Its Position (VEC_TABLE='2xr', which astroquery
+0.4.11 cannot ask for or read, so a direct call read by column name);
+A Period Depends on Its Centre (the two-centre test and its saved
+choice); and the Small-Body Database's lookup of a pinned record by
+the name Horizons gives it, under Small-Body Record Pinning.
+(Moved down 2026-10-14, when 1.6 made a fourth entry.)

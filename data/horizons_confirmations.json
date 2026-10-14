@@ -1,0 +1,243 @@
+{
+  "_comment": "Written by horizons_check.py (L-395, L-431): the last date each keyed entry of the orrery's object list was confirmed against JPL Horizons, and what was confirmed -- its identity, and its period where the period was fetched -- with this record's last run. Only the check writes it. check_horizons_confirmations.py reads it offline, and export_objects.py copies its dates into data/objects_export.json. The identity confirmations of 2026-10-10 were carried over from the website's own record by L-431's build 3. Do not edit by hand.",
+  "schema": 2,
+  "cadence_days": 30,
+  "objects": {
+    "sun": {
+      "confirmed": "2026-10-10",
+      "horizons_id": "10",
+      "id_type": null,
+      "horizons_name": "Sun",
+      "object_type": "fixed",
+      "orrery_sha": "32619f8d",
+      "jpl_name": "Sun",
+      "jpl_type": "Sun",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=10&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=10&group=sb&format=text"
+      ],
+      "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)"
+    },
+    "mercury": {
+      "confirmed": "2026-10-10",
+      "horizons_id": "199",
+      "id_type": null,
+      "horizons_name": "Mercury",
+      "object_type": "orbital",
+      "orrery_sha": "32619f8d",
+      "jpl_name": "Mercury",
+      "jpl_type": "planet",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=199&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=199&group=sb&format=text"
+      ],
+      "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)",
+      "period": {
+        "confirmed": "2026-10-14",
+        "center": "@sun",
+        "epoch": "2026-10-13 08:30",
+        "days": 87.96882030278451,
+        "error_days": 0.00036931457614741703,
+        "jpl_days": 87.96882030278451,
+        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='199'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461326.854166667'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
+      }
+    },
+    "venus": {
+      "confirmed": "2026-10-10",
+      "horizons_id": "299",
+      "id_type": null,
+      "horizons_name": "Venus",
+      "object_type": "orbital",
+      "orrery_sha": "32619f8d",
+      "jpl_name": "Venus",
+      "jpl_type": "planet",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=299&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=299&group=sb&format=text"
+      ],
+      "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)"
+    },
+    "earth": {
+      "confirmed": "2026-10-10",
+      "horizons_id": "399",
+      "id_type": null,
+      "horizons_name": "Earth",
+      "object_type": "orbital",
+      "orrery_sha": "32619f8d",
+      "jpl_name": "Earth",
+      "jpl_type": "planet",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=399&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=399&group=sb&format=text"
+      ],
+      "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)"
+    },
+    "mars": {
+      "confirmed": "2026-10-10",
+      "horizons_id": "499",
+      "id_type": null,
+      "horizons_name": "Mars",
+      "object_type": "orbital",
+      "orrery_sha": "32619f8d",
+      "jpl_name": "Mars",
+      "jpl_type": "planet",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=499&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=499&group=sb&format=text"
+      ],
+      "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)"
+    },
+    "jupiter": {
+      "confirmed": "2026-10-10",
+      "horizons_id": "599",
+      "id_type": null,
+      "horizons_name": "Jupiter",
+      "object_type": "orbital",
+      "orrery_sha": "32619f8d",
+      "jpl_name": "Jupiter",
+      "jpl_type": "planet",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=599&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=599&group=sb&format=text"
+      ],
+      "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)",
+      "period": {
+        "confirmed": "2026-10-14",
+        "center": "@sun",
+        "epoch": "2026-10-12 00:01",
+        "days": 4331.685500446416,
+        "error_days": 1.6283133990627903,
+        "jpl_days": 4331.685500446416,
+        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='599'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461325.500694444'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
+      }
+    },
+    "saturn": {
+      "confirmed": "2026-10-10",
+      "horizons_id": "699",
+      "id_type": null,
+      "horizons_name": "Saturn",
+      "object_type": "orbital",
+      "orrery_sha": "32619f8d",
+      "jpl_name": "Saturn",
+      "jpl_type": "planet",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=699&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=699&group=sb&format=text"
+      ],
+      "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)"
+    },
+    "uranus": {
+      "confirmed": "2026-10-10",
+      "horizons_id": "799",
+      "id_type": null,
+      "horizons_name": "Uranus",
+      "object_type": "orbital",
+      "orrery_sha": "32619f8d",
+      "jpl_name": "Uranus",
+      "jpl_type": "planet",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=799&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=799&group=sb&format=text"
+      ],
+      "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)"
+    },
+    "neptune": {
+      "confirmed": "2026-10-10",
+      "horizons_id": "899",
+      "id_type": null,
+      "horizons_name": "Neptune",
+      "object_type": "orbital",
+      "orrery_sha": "32619f8d",
+      "jpl_name": "Neptune",
+      "jpl_type": "planet",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=899&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=899&group=sb&format=text"
+      ],
+      "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)"
+    },
+    "pluto_barycenter": {
+      "confirmed": "2026-10-10",
+      "horizons_id": "9",
+      "id_type": null,
+      "horizons_name": "Pluto Barycenter",
+      "object_type": "barycenter",
+      "orrery_sha": "32619f8d",
+      "jpl_name": "Pluto Barycenter",
+      "jpl_type": "barycenter",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=9&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=9&group=sb&format=text"
+      ],
+      "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)"
+    },
+    "apophis": {
+      "confirmed": "2026-10-10",
+      "horizons_id": "2004 MN4",
+      "id_type": "smallbody",
+      "horizons_name": "99942 Apophis",
+      "object_type": "orbital",
+      "orrery_sha": "32619f8d",
+      "jpl_name": "99942 Apophis",
+      "jpl_type": "asteroid (integrated barycenter)",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2004%20MN4&group=sb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2004%20MN4&group=mb&format=text"
+      ],
+      "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)"
+    },
+    "halley": {
+      "confirmed": "2026-10-10",
+      "horizons_id": "90000030",
+      "id_type": "smallbody",
+      "horizons_name": "1P/Halley",
+      "object_type": "orbital",
+      "orrery_sha": "32619f8d",
+      "jpl_name": "1P/Halley",
+      "jpl_type": "comet record",
+      "pin": {
+        "record": "90000030",
+        "solution_date": "2025-Nov-21_15:57:34",
+        "records": 30,
+        "newest": "90000030",
+        "newest_epoch_year": "1968"
+      },
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='90000030'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+        "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='DES=1P%3B'&OBJ_DATA=YES&MAKE_EPHEM=NO"
+      ],
+      "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)"
+    },
+    "encke": {
+      "confirmed": "2026-10-10",
+      "horizons_id": "90000091",
+      "id_type": "smallbody",
+      "horizons_name": "2P/Encke",
+      "object_type": "orbital",
+      "orrery_sha": "32619f8d",
+      "jpl_name": "2P/Encke",
+      "jpl_type": "comet record",
+      "pin": {
+        "record": "90000091",
+        "solution_date": "2026-Oct-09_14:41:02",
+        "records": 61,
+        "newest": "90000091",
+        "newest_epoch_year": "2023"
+      },
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='90000091'&OBJ_DATA=YES&MAKE_EPHEM=NO",
+        "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='DES=2P%3B'&OBJ_DATA=YES&MAKE_EPHEM=NO"
+      ],
+      "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)",
+      "period": {
+        "confirmed": "2026-10-14",
+        "center": "@sun",
+        "epoch": "2026-10-13 08:30",
+        "days": 1206.320223793072,
+        "error_days": 0.15083758920104628,
+        "jpl_days": 1206.320223793072,
+        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='90000091%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461326.854166667'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
+      }
+    }
+  }
+}

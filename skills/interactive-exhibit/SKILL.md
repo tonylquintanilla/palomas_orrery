@@ -6,9 +6,16 @@ fires_when: adding or changing an exhibit in interactive.html; any edit to the S
 
 # Interactive Exhibit
 
-Read this file in 4 parts: lines 1-137, 138-373, 374-621, 622-783.
+Read this file in 4 parts: lines 1-133, 134-342, 343-607, 608-811.
 
-Skill version: 1.14 | 2026-10-10, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.15 | 2026-10-14, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 5cd63cce and gallery @ 4b2b660a. v1.15 (L-431 build
+3) records what a room prints for a body's orbital period and where it
+comes from: the orrery's period, copied by the mirror, printed at its
+served figure count in one of three forms, read from the config so it
+reaches a visitor on the push; and the orbit drawn around a period's
+centre, which is served in the cache and needs the builder.
+Earlier: 1.14 | 2026-10-10, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ a6678b0f and gallery @ cb9038cc. v1.14 (L-429) records
 Tony's rulings of the same day, after 1.13 was installed: every room's
 row puts GO TO in its true middle, the Solar System room's room button
@@ -24,19 +31,8 @@ cards yet". Tony, 2026-10-10: "so the visitor does not need to tap the
 row to see the button then tap again to enter the room." The skill
 also gets its read plan, at its next version as Tony ruled on
 2026-10-08 (L-418).
-Earlier: 1.12 | 2026-10-06, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 51436054 and gallery @ ed48d078. v1.12 (L-421, L-349)
-draws the line the provenance rule left open: a fact about one feature
-is served with that feature's words, never typed in a renderer, and
-code may type only sentences about the picture. Found when Claude told
-Tony this skill already required the inner belt's "protons" to be
-served; it required served NUMBERS, and let page text carry its source
-in the page, which Claude read as allowing a typed fact. Tony: "I
-thought the only source of truth is the constants py and the objects
-list ... not from the code." A search the same day found 17 such facts
-in the two rooms (documentation/MANIFEST_L421_typed_facts_20261006.md).
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
-on 2026-10-05 (L-418) and 2026-10-10 (L-429).
+on 2026-10-05 (L-418), 2026-10-10 (L-429) and 2026-10-14 (L-431).
 
 ## Contents
 
@@ -252,6 +248,38 @@ page:
   either. A changed `horizons_id` reaches the served cache only when
   the builder runs, so Cache in step fails until it has (Apophis,
   2026-10-01).
+- **A body's orbital period is the orrery's, printed as served**
+  (v1.15, L-431 build 3; Tony's rulings of 2026-10-11, section 2 item 6:
+  "periods are basic data, for all bodies and should be part of the
+  hover text"). The object's `period` block in
+  `data/objects_config.json` is a COPY written by
+  `tools/mirror_objects.py` from the orrery's export (schema 2), never
+  by hand: `kind` (`fetched`, `typed`, `none`), `center` and
+  `center_label`, `fetched` (the date), and `years` and `days` each as
+  value, figure count and the orrery's printed text. The page prints
+  the served text, never a recount (`SolarSystemFigures.periodLine`,
+  shared by the Solar System room's body hovers and the Earth room's
+  Sun Direction). Three forms, and nothing else: "Orbital period: N
+  years (M days), around <centre>, from JPL Horizons, fetched <date>.";
+  "Orbital period: N years (M days). Typed value, not fetched from
+  JPL." -- printed, marked, so the website and the orrery agree; and
+  "Orbital period: not yet fetched from JPL." A body with no block (the
+  Sun) prints no line; a fetched period served with no centre prints no
+  line and the room says why in its warnings. The block is read from the
+  config by the room's driver, so a change reaches a visitor on the
+  push alone. An object without a `'key'` in the orrery's list (the
+  Moon, today) has no period to serve.
+- **The orbit is drawn around the period's centre** (v1.15, L-431 build
+  3). Where a body's period is around the solar system's barycentre,
+  the served cache carries `drawn_orbit`, the body's elements around it
+  at the date of its Sun-centred ones; the room draws that ellipse,
+  moved by `render_orbits.drawn_orbit_offset` to where the barycentre
+  sits seen from the Sun, and draws no perturbation lines for it.
+  The orbit's info marker names that centre. Without a `drawn_orbit`
+  the room draws from the Sun-centred elements, as the orrery does, and
+  its warnings say the builder has not run. It is cache data, so it
+  needs the builder; `tools/check_cache_in_step.py` fails until it has
+  run.
 - The Artifact Bounds the Audit, and The Braid orders it: the new
   exhibit's pointers are the slice; a provenance gap found elsewhere
   while building it is recorded, one ledger row per CLASS, not chased.
