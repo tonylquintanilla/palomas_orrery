@@ -399,6 +399,9 @@ build 3 briefed), built on 869b8c22.
 Module updated: October 13, 2026 with Anthropic's Claude Opus 5.5
 (L-269: the maintenance run's summary names the files whose Tier-1
 rose), built on ab96681.
+Module updated: October 13, 2026 with Anthropic's Claude Opus 5.5
+(L-431: build 3's brief carries both element sets for a barycentre
+body), built on 084d0a6.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -1783,8 +1786,8 @@ L-395.
   my look." Build 3, the website, is briefed in
   `documentation/HANDOFF_L431_build3_website_brief_20261013.md`
   (written in the coordination session at 28e1b7d1).
-- **For build 3, confirmed by Tony and not yet in the brief's export
-  list.** A body drawn around the barycentre is placed in a Sun-centred
+- **For build 3, confirmed by Tony; added to the brief's section 2a
+  on 2026-10-13 (patch_L431_10).** A body drawn around the barycentre is placed in a Sun-centred
   scene by pairing its two element sets at one date (horizons-orbital-
   mechanics, The Drawn Orbit Follows the Period's Centre). The orrery
   fetches its Sun-centred elements every time and keeps the barycentre
@@ -1793,9 +1796,10 @@ L-395.
   as the barycentre ones, or it cannot place the orbit. Tony,
   2026-10-13, asked whether the heliocentric data should also be
   fetched; told it already is and that build 3 must export both:
-  "confirmed." The brief's section 2a lists only "the elements around
-  that centre". (This line was in a later copy of patch_L431_8 than the
-  one that ran.)
+  "confirmed." The brief's section 2a listed only "the elements around
+  that centre" until patch_L431_10 added the rest at Tony's request.
+  (This line was in a later copy of patch_L431_8 than the one that
+  ran.)
 **Gap:** three builds, in order (the record's section 3):
 1. The period in the orrery: BUILT and working against JPL
    (2026-10-11); its words settled at L-401's look (2026-10-12).

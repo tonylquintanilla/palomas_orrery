@@ -2229,7 +2229,48 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-4. Move `patch_L269_5` and `patch_L431_9` into `documentation/`, then commit and push.
+4. Move `patch_L269_5` and `patch_L431_9` into `documentation/`, then commit and push. -- close
+
+====================================================================================================
+
+Yes, you can close this session. Everything from it is in your push at 084d0a6, and I checked the repo to confirm:
+- The new patch ran, and all 27 checks passed.
+- The new line shows at the bottom of the maintenance run: "No file's Tier-1 count rose since the previous run."
+- Both patches are filed in `documentation/`, the old L-269 patch is gone, and your root folder has no patches left in it.
+
+No closing patch is needed. The ledger, the handoffs and Where We Are were all updated inside the patches you ran.
+
+Two things carry over to future sessions, and both are already written down:
+- The next session that does Horizons work confirms it loads the horizons skill as version 1.5. That's the version this session moved it to.
+- The website build (part 3 of the orbital periods work) has to send the website both sets of orbit numbers for Sedna and any other body drawn around the barycentre: the ones around the Sun and the ones around the barycentre. That note is on L-431, the orbital periods item, because the build 3 brief doesn't mention it.
+
+I’ve written the note into the build 3 brief. The patch is saved in your orrery folder as patch_L431_10_brief_both_sets_20261013.py.
+
+What I need from you: run the patch, then orrery_maintenance_run.py. Move the patch into documentation/, then commit and push.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L431_10_brief_both_sets_20261013.py
+ok  documentation/HANDOFF_L431_build3_website_brief_20261013.md line 104: - **Added 2026-10-13, on Tony's confirmation
+ok  LEDGER_CONSOLIDATED.md                        line 401: Module updated: October 13, 2026 with Anthro
+ok  LEDGER_CONSOLIDATED.md                        line 1789: - **For build 3, confirmed by Tony; added to
+ok  LEDGER_CONSOLIDATED.md                        line 1799: "confirmed." The brief's section 2a listed o
+
+patch applied (4 edits in 2 files)
+Stamps updated: the ledger.
+
+Build 3's brief, section 2a, now asks the export to carry both element sets for
+a body drawn around the barycentre (Sedna): the Sun-centred ones and the
+barycentre ones, from one fetch date.
+
+NEXT:
+  1. Run orrery_maintenance_run.py; it rebuilds the ledger index.
+
+OK: 432 L-blocks parsed, no consistency problems.
+Index regenerated (242 live items) in C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\LEDGER_CONSOLIDATED.md.
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  2. Move this script into documentation/; commit and push.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 

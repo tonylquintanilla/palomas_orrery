@@ -102,6 +102,22 @@ coordination session of October 12 and 13.
 - The export is deterministic from `celestial_objects.py` plus the
   cache; say in the docstring that the cache is now an input, and
   fingerprint it.
+- **Added 2026-10-13, on Tony's confirmation (L-431).** For a body
+  whose period record names the solar system's barycentre (Sedna), the
+  export carries BOTH element sets: the barycentre ones from the period
+  record, which are drawn, and the Sun-centred ones the orrery fetches
+  every time, at the same date. A barycentre ellipse is placed in a
+  Sun-centred scene by pairing the two (horizons-orbital-mechanics, The
+  Drawn Orbit Follows the Period's Centre): the body's position from
+  each set at that date gives where the barycentre sits seen from the
+  Sun, and the orbit is moved there. With the barycentre set alone the
+  website cannot place the orbit. The pair is exported only when both
+  sets are from one fetch date, as the orrery pairs them; otherwise the
+  body is drawn from its Sun-centred elements, as the orrery does, and
+  the export says so. `test_objects_export.py` refuses a barycentre
+  record exported without its Sun-centred set. Tony, 2026-10-13, asked
+  whether the heliocentric data should also be fetched, was told it
+  already is and must travel with the barycentre set: "confirmed."
 
 ### 2b. Gallery: the mirror, the builder, the rooms
 
