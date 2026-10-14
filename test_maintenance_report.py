@@ -14,10 +14,21 @@ him.
 This file runs the runner's real main() with its suite replaced by one
 row, the scanner, whose output is RECORDED here rather than run: the
 scanner's console at orrery ab96681 (2026-10-13), from its priority
-summary to its last line, in three versions -- as printed (no file
+summary to its last line, in four versions -- as printed (no file
 rose), with one file risen (the shape provenance_history.console_lines
-prints), and with the run-history lines missing. It judges the printed
-summary with reading of its own, sharing no code with the runner's.
+prints), with the run-history lines missing, and with one file risen
+and Windows line endings, as the scanner's output reaches the runner on
+Tony's machine. The output passes through the runner's real run_tool(),
+with only the process call replaced, so the way the runner reads a
+tool's output is tested too. It judges the printed summary with reading
+of its own, sharing no code with the runner's.
+
+Why the fourth (2026-10-14). The first three were all written with
+plain line endings, and all passed. On Tony's machine every line the
+scanner prints ends in a carriage return as well, and with a file risen
+the summary said "Tier-1 rise: NOT READ" (his run record of 2026-10-13):
+the reader's pattern stopped at the carriage return. A check fed only
+the sandbox's line endings could not fail on that.
 
 It first plants a fault for each thing it must catch, each put into a
 copy of the real orrery_maintenance_run.py at the line it would live in,
@@ -28,6 +39,8 @@ and requires the right finding, by name:
     a risen file counted but not named               RISEN FILE NOT NAMED
     missing run-history lines passed over in         MISSING RISE NOT ANNOUNCED
       silence
+    Windows line endings kept as they came           RISE NOT READ FROM
+                                                     WINDOWS OUTPUT
 
 The last line starts "MAINTENANCE REPORT:", which the maintenance run
 quotes, and says what was compared and how many things were examined.
@@ -42,6 +55,11 @@ Domain: dev_tools
 
 Module created: October 13, 2026 with Anthropic's Claude Opus 5.5 (L-269,
 patch_L269_5_risen_files_20261013.py).
+Module updated: October 14, 2026 with Anthropic's Claude Opus 5.5 (L-269,
+patch_L269_6_windows_output_20261014.py: the summaries pass through the
+runner's real run_tool(); a fourth summary, one file risen with Windows
+line endings, and a fourth planted fault, the runner's line-ending fix
+taken out.)
 """
 import contextlib
 import io
@@ -67,6 +85,10 @@ WITH_RISE = AS_PRINTED.replace(
 NO_HISTORY = AS_PRINTED[:AS_PRINTED.index('Run history')] + \
     AS_PRINTED[AS_PRINTED.index('====='):]
 
+# What a Python program's print() puts on a pipe on Windows: every line
+# ends in a carriage return and a newline.
+WINDOWS = '\r\n'
+
 # ============================================================================
 # RUNNING THE REAL SUMMARY
 # ============================================================================
@@ -88,13 +110,27 @@ def load(old=None, new=None):
     return mod
 
 
-def summary_of(mod, scanner_output):
+class _Completed(object):
+    """What subprocess.run() hands back: the exit code and the bytes."""
+    def __init__(self, stdout):
+        self.returncode = 0
+        self.stdout = stdout
+
+
+def summary_of(mod, scanner_output, line_end='\n'):
     """What main() prints when its suite is the scanner alone and the
-    scanner printed scanner_output. Nothing is run or written."""
+    scanner printed scanner_output, each line ending in line_end.
+    The output reaches main() through the runner's own run_tool(); only
+    the process call inside it is replaced. Nothing is run or written."""
     mod.GENERATORS = []
     mod.CHECKERS = [('Provenance scanner', ['provenance_scanner.py'],
                      ('GATE PATH:', 'Whole tree, Tier-1:'), True)]
-    mod.run_tool = lambda project_dir, argv_tail: (0, scanner_output, 0.1)
+    raw = scanner_output.replace('\n', line_end).encode('utf-8')
+    real = mod.subprocess
+    mod.subprocess = types.SimpleNamespace(
+        run=lambda *args, **kwargs: _Completed(raw),
+        DEVNULL=real.DEVNULL, PIPE=real.PIPE, STDOUT=real.STDOUT,
+        TimeoutExpired=real.TimeoutExpired)
     mod.tree_snapshot = lambda project_dir: {}
     mod.print_files_written = lambda before, after: None
     mod.staleness_report = lambda project_dir: []
@@ -142,6 +178,16 @@ def judge(mod, findings, counts):
         findings.append(('MISSING RISE NOT ANNOUNCED', 'the scanner printed no run '
                          'history and the runner did not say so'))
 
+    s = summary_of(mod, WITH_RISE, line_end=WINDOWS)
+    counts['summaries'] += 1
+    flat = ' '.join(s.split())
+    for fname, before, after in RISEN:
+        counts['risen'] += 1
+        if ('%s: %d -> %d' % (fname, before, after)) not in flat:
+            findings.append(('RISE NOT READ FROM WINDOWS OUTPUT', 'with Windows '
+                             'line endings the summary does not name %s, %d -> %d'
+                             % (fname, before, after)))
+
 
 PLANTS = [
     ('the summary no longer prints the rise lines',
@@ -156,6 +202,10 @@ PLANTS = [
      ("    return ['Tier-1 rise: NOT READ -- the scanner printed neither '\n",
       "    return []\n    return ['Tier-1 rise: NOT READ -- the scanner printed neither '\n"),
      'MISSING RISE NOT ANNOUNCED'),
+    ('Windows line endings kept as they came',
+     ("        output = output.replace('\\r\\n', '\\n')\n",
+      "        pass\n"),
+     'RISE NOT READ FROM WINDOWS OUTPUT'),
 ]
 
 
@@ -184,9 +234,11 @@ def main():
         problems.append('%s -- %s' % (cls, detail))
     print("compared: the maintenance run's printed summary against the scanner output "
           "recorded here -- the sentence that no file rose, the risen file by name with "
-          "its before and after, and the sentence when the run history is missing")
-    print('examined: three summaries (as printed at ab96681, with one file risen, with '
-          'no run history) from the real main() of orrery_maintenance_run.py')
+          "its before and after, the sentence when the run history is missing, and the "
+          "risen file again when the output has Windows line endings")
+    print('examined: four summaries (as printed at ab96681, with one file risen, with '
+          'no run history, with one file risen and Windows line endings) from the real '
+          'main() and run_tool() of orrery_maintenance_run.py')
     if problems:
         print('MAINTENANCE REPORT: FAIL -- %d problem(s)' % len(problems))
         return 1

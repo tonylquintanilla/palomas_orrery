@@ -212,6 +212,13 @@ every step of this run, the website's offline run and the Daily Run to
 a dashboard button of the same name and script, and every card to its
 short line, after nine planted faults are each caught. The run now counts
 28 gating checkers.)
+Module updated: October 14, 2026 with Anthropic's Claude Opus 5.5 (L-269,
+patch_L269_6_windows_output_20261014.py: run_tool() turns a tool's
+Windows line endings into plain ones before anything reads its output.
+With a file's Tier-1 risen, the summary's rise line had printed NOT READ
+on Tony's machine (his run record of 2026-10-13), because the reader's
+pattern stopped at the carriage return. Maintenance report now plants a fourth
+fault, the line-ending fix taken out, fed Windows output with a rise.)
 """
 
 import hashlib
@@ -360,8 +367,9 @@ CHECKERS = [
     # the run history; six faults planted, each caught by name.
     ('Domain Split', ['test_domain_split.py'], 'DOMAIN SPLIT:'),
     # L-269, 2026-10-13: this runner's summary names each file whose
-    # Tier-1 rose since the scanner's previous run; three faults planted
-    # first in copies of this file, each caught by name.
+    # Tier-1 rose since the scanner's previous run; four faults planted
+    # first in copies of this file, each caught by name, one of them the
+    # scanner's output with Windows line endings (2026-10-14).
     ('Maintenance report (L-269)', ['test_maintenance_report.py'],
      'MAINTENANCE REPORT:'),
     # L-440: every step of both maintenance runs and of the Daily Run
@@ -680,7 +688,14 @@ def run_tool(project_dir, argv_tail):
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
             timeout=TOOL_TIMEOUT_SECONDS)
+        # L-269, 2026-10-14: a tool's lines come back as the system wrote
+        # them -- on Windows every one ends "\r\n" -- and every reader of
+        # the output below expects "\n". Turned into "\n" here, once, so
+        # no reader has to remember it. The case that showed it: with a
+        # file's Tier-1 risen, scanner_risen_lines() printed NOT READ on
+        # Tony's machine, because its pattern stopped at the "\r".
         output = completed.stdout.decode('utf-8', 'replace')
+        output = output.replace('\r\n', '\n')
         return completed.returncode, output, time.time() - started
     except subprocess.TimeoutExpired:
         return (None, 'TIMEOUT after %d seconds.' % TOOL_TIMEOUT_SECONDS,

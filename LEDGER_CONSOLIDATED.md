@@ -406,6 +406,9 @@ Module updated: October 13, 2026 with Anthropic's Claude Opus 5.5
 (L-440 opened and built: the dashboard's cards, headings and names,
 and the Dashboard parity check; L-324's parity row is built), built on
 db63721d.
+Module updated: October 14, 2026 with Anthropic's Claude Opus 5.5
+(L-269: the maintenance run reads a tool's Windows line endings; the
+rise line no longer says NOT READ when a file rose), built on fe00059.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -8789,6 +8792,22 @@ Names Its Items [QUALITY], resident protocol Part 3.
   `patch_L269_1_scanner_breakdown_20261013.py` in the root folder is
   superseded and is deleted, not filed: its name repeats an older
   patch's in documentation/.
+- **2026-10-14, the rise line read Windows output**, by
+  `patch_L269_6_windows_output_20261014.py`, on fe00059. In Tony's run
+  record of 2026-10-13 the summary said "Tier-1 rise: NOT READ" on a run
+  where a file's Tier-1 had risen (whole tree 281, a patch script in the
+  root folder). The scanner had printed "Tier-1 ROSE in 1 file(s):", but
+  on Windows every line it prints ends in a carriage return as well, and
+  the reader's pattern stopped there. The "no file rose" sentence still
+  matched, so the line failed only when it had something to report, and
+  the checker passed because its recorded output had plain line endings.
+  Fixed at the one place the runner takes in a tool's output,
+  `run_tool()`, so every reader gets plain line endings.
+  `test_maintenance_report.py` now passes its summaries through the real
+  `run_tool()` and adds a fourth, one file risen with Windows line
+  endings, and a fourth planted fault, the fix taken out, caught as RISE
+  NOT READ FROM WINDOWS OUTPUT. Against the runner at fe00059 the new
+  check fails with that finding, which is the bug.
 
 #### [L-281] The guest book: no-account comments, approve-before-show
 <!-- L:281 status:OPEN upd:2026-09-27 section:A flag: rice:3/2/70/1 -->

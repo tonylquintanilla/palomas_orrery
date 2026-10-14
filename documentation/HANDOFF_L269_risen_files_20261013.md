@@ -83,3 +83,47 @@ may ask for a one-line description for the Maintenance Report button;
 that session said it would.
 
 No skill or protocol version changes.
+
+## 5. Afterwards: the rise line on Windows (2026-10-14)
+
+Added by `patch_L269_6_windows_output_20261014.py`, built on fe00059 at
+https://github.com/tonylquintanilla/palomas_orrery ("L440 dashboard").
+Written October 14, 2026 with Anthropic's Claude Opus 5.5, in the L-437
+session, at Tony's request: "i think this patch is rather orphaned. can
+you take care of this?"
+
+What went wrong. Tony's run record of 2026-10-13 shows the summary
+saying "Tier-1 rise: NOT READ" on a run where a patch script in the root
+folder had raised the whole tree to 281. The scanner had printed the
+risen file. On Windows each line a program prints ends in a carriage
+return and a newline, and the pattern in `scanner_risen_lines()` that
+reads the risen-files list allowed only the newline. When no file rose
+it still read the sentence, so the fault showed only when there was
+something to report. The checker passed because its recorded output had
+plain line endings, the sandbox's.
+
+The fix. `run_tool()` turns a tool's Windows line endings into plain
+ones as it takes in the output, so every reader below it gets the same
+text on every system. No reader changes.
+
+The check. `test_maintenance_report.py` now passes each recorded output
+through the runner's real `run_tool()`, with only the process call
+replaced, and adds a fourth summary: one file risen, Windows line
+endings. A fourth planted fault takes the fix out and must be caught as
+RISE NOT READ FROM WINDOWS OUTPUT. Run against the runner at fe00059,
+the new check fails with exactly that finding.
+
+For Tony:
+- (do) Run `patch_L269_6_windows_output_20261014.py` (VS Code, Run),
+  then `orrery_maintenance_run.py`: every gating checker passes, and
+  Maintenance report reads 4 of 4 planted faults caught. This patch adds
+  no Tier-1 finding of its own, so the line under the scanner's row
+  should read "No file's Tier-1 count rose since the previous run." The
+  next run where a file's count does rise is the fix seen on your
+  machine; until then the checker's Windows summary stands in for it.
+- Pre-tested on a clean clone of fe00059 with the patch applied: the
+  maintenance run passed 28 of 28 gating checkers; Maintenance report 4
+  of 4; Dashboard parity passed; a second run of the patch refuses.
+- (do) Move the patch into `documentation/`; commit and push.
+
+No skill or protocol version changes.

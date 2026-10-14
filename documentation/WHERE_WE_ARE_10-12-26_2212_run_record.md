@@ -2272,6 +2272,49 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
   2. Move this script into documentation/; commit and push. -- db63721d258004b855c1259371d8adf15bf7647c
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
+===================================================================================
+
+**What you'll see:** every body's hover in the Solar System room now shows its orbital period. So does Earth's Sun Direction in the Earth room. Each period uses the orrery's own digits and says where it came from, in one of three forms:
+- **From JPL:** Mercury, Jupiter and Encke show JPL's period, the centre it's measured around, and the date JPL gave it.
+- **Typed:** the eight bodies the orrery hasn't fetched yet are marked "Typed value, not fetched from JPL." They switch to JPL's period once you plot them in the orrery.
+- **Not yet fetched:** the Pluto-Charon barycentre (see the question below).
+
+The Horizons check now runs in the orrery's maintenance run and checks each period against JPL. The website's Daily Run is down to three steps.
+
+**Tested here:**
+- Both patches applied cleanly to copies of the repos as they are on GitHub, and each refuses a second run.
+- The gallery patch refuses if you run it before the orrery's new export is pulled into the gallery.
+- With a stand-in for JPL, the orrery's maintenance run passed 29 of 29 gating checks and the website's passed 27 of 27.
+- All three rooms opened without errors in a test page.
+
+**What hasn't been tested:** I couldn't reach JPL from here. The answers the period check was tested on were written in JPL's format from the orrery's own numbers, so your next orrery maintenance run is the first real test. If its Horizons check says FAIL, don't push. Bring it to a session.
+
+A separate review found two faults, and I fixed and retested both:
+- Encke's query to JPL was written in a form JPL might misread.
+- The website's check would have turned red every 30 days. The orrery now asks JPL again from day 25, so the website has time to catch up.
+
+**Run order** (the handoff gives what each step prints):
+1. Orrery: run the orrery patch, then the maintenance run (it needs the internet), then push.
+
+
+
+2. Gallery: run `tools/pull_objects_export.py`, then the gallery patch, then the gallery maintenance run, then the Daily Run.
+3. Push the gallery, then run the live check.
+4. Take a look on your phone and desktop. The periods appear as soon as you push. A redrawn orbit only needs the cache rebuild, and no body on the website uses one yet.
+
+**One question:** the Pluto-Charon barycentre has no period from JPL. The orrery fetches Pluto, and Pluto around the barycentre, but never the barycentre itself around the Sun. So its row says "Orbital period: not yet fetched from JPL." I recommend shipping it that way and teaching the orrery to fetch it later. The other choice is to hold the build until it can. Which do you want?
+
+**Where this leaves us:**
+- Orbital periods and the Horizons check are both marked done on the road. In the ledger, L-431 (periods) and L-395 (the check) each wait only on your run and your look.
+- Loose ends now sit on L-433 (the road), including bodies with no period yet such as the Moon, which has no key in the orrery's list.
+- Two documents use the number L-438 (the objects brief and the dashboard-labels patch). That patch already doesn't run, and it will need rebuilding after this one.
+- After you reinstall the three updated skills, the next session checks it loaded horizons-orbital-mechanics 1.6, gallery-cache-builder 1.9 and interactive-exhibit 1.15.
+
+Files are in the orrery folder after the patch runs:
+- `patch_L431_11_website_orrery_20261014.py`
+- `patch_L431_12_website_gallery_20261014.py`
+- `documentation/HANDOFF_L431_build3_website_20261014.md`
+
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 **Session: DONE: 10-13-26 2048: Opus: L-437 session build with domain split**
@@ -2735,9 +2778,199 @@ I tried it on a spare copy of f59c84b2, and it applied cleanly.
 
 After the closing patch, run the maintenance run, move the patch into `documentation/`, and commit and push.
 
+===================================================================================================================
+
+I’ve fixed it and saved the patch, patch_L269_6_windows_output_20261014.py, in your orrery folder. Please run it.
+
+The fix. The maintenance run now converts each tool’s Windows line endings to plain ones as it takes in the output. Every part that reads that output now sees the same text on your machine as in my sandbox. So the line under the scanner’s row will name a file whose Tier-1 count rose, instead of saying “NOT READ”.
+
+The check now covers your case. The L-269 test gains a fourth sample of scanner output: one file risen, with Windows line endings, passed through the maintenance run’s real reading step. It also gains a fourth planted fault, which takes the fix back out. Run against the code as it is at the latest push, the new check fails with that exact problem. With the patch, it passes and catches all 4 planted faults.
+
+Tested on a spare copy of the latest push. The full maintenance run passed 28 of 28 pass/fail checks, including the dashboard check that every run row has a matching button. The patch refuses if run a second time.
+
+What you’ll see. The line under the scanner should read “No file’s Tier-1 count rose since the previous run.” That’s because nothing rises on this run; the patch adds no Tier-1 finding of its own. The next time a count does rise, you’ll see the file named. Until then, the test’s Windows sample proves that case.
+
+The patch also notes the fix in the ledger under L-269 and adds a section 5 to the L-269 handoff. It doesn’t touch your Where We Are page.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L269_6_windows_output_20261014.py
+ok  orrery_maintenance_run.py                            line 683: output = completed.stdout.decode('utf-8'
+ok  orrery_maintenance_run.py                            line 363: # Tier-1 rose since the scanner's previo
+ok  orrery_maintenance_run.py                            line 215: """
+ok  test_maintenance_report.py                           line 187: "its before and after, and the sentence 
+ok  test_maintenance_report.py                           line 159: ]
+ok  test_maintenance_report.py                           line 145: 
+ok  test_maintenance_report.py                           line 97: mod.run_tool = lambda project_dir, argv_t
+ok  test_maintenance_report.py                           line 93: scanner printed scanner_output. Nothing i
+ok  test_maintenance_report.py                           line 91: def summary_of(mod, scanner_output):
+ok  test_maintenance_report.py                           line 70: # =======================================
+ok  test_maintenance_report.py                           line 45: """
+ok  test_maintenance_report.py                           line 31: 
+ok  test_maintenance_report.py                           line 19: prints), and with the run-history lines m
+ok  test_maintenance_report.py                           line 17: summary to its last line, in three versio
+ok  palomas_orrery_dashboard.py                          line 1303: "that. Runs the run's real summary on r
+ok  palomas_orrery_dashboard.py                          line 237: """
+ok  LEDGER_CONSOLIDATED.md                               line 8792: 
+ok  LEDGER_CONSOLIDATED.md                               line 409: Review and RICE update Tony 6-21-2026
+ok  documentation/HANDOFF_L269_risen_files_20261013.md   line 86: No skill or protocol version changes.
+
+patch applied (19 edits in 5 files)
+Stamps updated: orrery_maintenance_run.py, test_maintenance_report.py,
+palomas_orrery_dashboard.py, the ledger; the L-269 handoff gains section 5.
+
+NEXT:
+  1. Run orrery_maintenance_run.py. Every gating checker passes, and
+     "Maintenance report (L-269)" reads 4 of 4 planted faults caught.
+     Under the scanner's row: "No file's Tier-1 count rose since the
+     previous run." The next run where a count does rise will name the
+     file instead of saying NOT READ; the checker proves that case now.
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261014T175908Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 1.7s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Skill manifest               0.2s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             1.6s  unchanged (1 checked, not written)
+  Objects export               0.1s  unchanged (1 checked, not written)
+  Drawings export              0.5s  unchanged (1 checked, not written)
+  Module atlas                 7.6s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               6.0s  rewrote DATA_INVENTORY.md
+  Exact rows report            2.2s  unchanged (1 checked, not written) -- 13 of
+                                     41 exact rows printed at 43 lines (33
+                                     orrery, 10 gallery); 8 drawn only, 14 not
+                                     followed, 0 map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.3s  No changes to constants_new.py since HEAD.
+  Constants relations          0.3s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              1.9s  No figure count exceeds its inputs: 36
+                                     derived row(s) read, 26 judged OK -- 26 OK,
+                                     10 NOT YET MIGRATED, 1 NO DERIVED LINE, 1
+                                     UNMARKED CONVERSION; 18 conversion(s)
+                                     checked.
+  Constants export check       2.0s  Export matches the store: sha256
+                                     2a1211f8cce2 on both sides; 127 rows
+                                     re-read, 56 not exported, 31 tokens; 320
+                                     conversions re-computed, 10 of 10 worked
+                                     cases hold.
+  Objects export check         0.2s  pass
+  Skill headers                0.2s  12 skills parsed, no consistency problems.
+  Exact rows by the count      2.6s  PASSING -- 13 printed exact rows each state
+                                     a count; 33 orrery lines print through
+                                     exact_text() or row_text(); 10 gallery lines
+                                     are served the count
+  Dimensions                   2.1s  No unit contradicts its arithmetic: 54
+                                     derived row(s) read -- 42 OK, 9 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.2s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.2s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 126 status lines in constants_new.py are
+                                     well formed; 54 rows carry none.
+  Row shape                    0.1s  All 183 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.4s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Scanner row run (L-414)      0.3s  16 of 16 pins hold -- each row reads its own
+                                     comment run, declared rows are named, the
+                                     gate path is read by name.
+  Reset completeness          28.5s  PASS -- all 311 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  2.7s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Earth pole of date           0.4s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Hills cloud sampler (L-421)    0.6s  PASS -- 4 of 4 planted faults caught; the
+                                     real rows pass, the dots' plane tilted 34.1
+                                     deg
+  Drawings export check        0.5s  PASS -- 3 of 3 planted faults caught;
+                                     hills_cloud 3600 dots, tilt 30.9 deg, sha256
+                                     a51e93118069
+  Position digits (L-401)      3.7s  PASS -- 13 of 13 planted faults caught by
+                                     name; 23 hovers examined, 181 lines compared
+                                     against their errors; 5 pairs printed the
+                                     same from either end; 496 hovers of every
+                                     listed object from the Sun, Earth and
+                                     Neptune; 3 recorded 2xr answers read by
+                                     column name; 6 period sentences
+  Orbit markers (L-431, L-401)   13.6s  PASS -- 12 of 12 planted faults caught by
+                                     name; 4 ellipses, 1080 drawn points on their
+                                     period's centre; 14 markers, 9 dates, 53
+                                     printed distances against their errors; 6
+                                     elements as given; 3 Keplerian positions
+                                     half a year on; 1 parameters-window date
+                                     pairs; 2 Moon arcs; 2 perturbation checks; 1
+                                     perihelion osculating orbits; 2 frames; 2
+                                     sources read
+  Domain Split                 0.5s  PASS -- 6 of 6 planted faults caught; the
+                                     split reads each module's Domain: tag and
+                                     prints the same on the console, in the audit
+                                     and in the run history.
+  Maintenance report (L-269)    0.1s  PASS -- 4 of 4 planted faults caught by
+                                     name; 4 summaries; 2 risen file(s) named
+  Dashboard parity             0.3s  PASS -- 9 of 9 planted faults caught; 77
+                                     steps matched to their buttons by name and
+                                     script; 107 cards carry a short line
+  Worksheet checker           10.7s  74 of 110 routed, 8 clean
+  Worksheet checker tests     16.9s  All 135 checks passed
+  Worksheet key round trip     1.6s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         22.4s  All 76 checks passed
+  Extractor pins               0.4s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          55.4s  0 TIER-1 -- the push gate holds; Whole tree,
+                                     Tier-1: 280: orrery 116, Earth System 149,
+                                     stars 13, utilities 2.
+
+======================================================================
+  28 of 28 gating checkers passed -- 189.1s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           74 of 110 routed, 8 clean
+    Provenance scanner          0 TIER-1 -- the push gate holds; Whole tree, Tier-1: 280: orrery 116, Earth System 149, stars 13, utilities 2.
+      No file's Tier-1 count rose since the previous run.
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2238 file(s) examined, 8 written, 0 created, 0 removed, 5 rewritten identically
+    written   DATA_INVENTORY.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    written   module_atlas.py
+    rewritten with identical bytes, no action needed:
+      LEDGER_CONSOLIDATED.md
+      PROJECT_INSTRUCTIONS.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      test_output/test_orbit_paths.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  2. Move this script into documentation/; commit and push.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+After it, run the maintenance run, move the patch into documentation/, and commit and push.
+
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-**Session: OPEN: 10-13-26 0920: Opus: L-438 Dashboard redesign**
+**Session: DONE: 10-14-26 1309: Opus: L-438 Dashboard redesign**
 
 When you run it:
 
@@ -3154,6 +3387,20 @@ Cache and restore points (date = when that content was written):
 [CENTER MENU] Added traces to 183 object variables
 Restored sash positions: [489, 1013]
 
-  3. Move this script into documentation/; commit and push.
+  3. Move this script into documentation/; commit and push. -- fe000597d5282a93461d31065997254d5bf981ff
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
+Yes. Your run of `patch_L440_1` applied the whole reorganization, and you pushed it at fe000597. All 59 edits printed "ok", including the line that put the website checks under the six headings.
+
+Your record confirms each part worked:
+- **The maintenance run passed 28 of 28.** Dashboard parity matched all 77 run steps to their buttons and found a short line on all 107 cards.
+- **The orrery opened its own console window.** The dashboard logged "Launched in console: palomas_orrery.py", and the orrery's startup output scrolled in that window.
+
+What you should see on the dashboard:
+- Each card shows its name, the script in small grey type, one short line, and "+ more" beside the name.
+- Under "Gallery -- checks and data" are your six headings in your order: tools you run by hand, the module atlas, JPL's check, the served cache, from the orrery, the rooms. Each heading folds when clicked.
+- Under "Maintenance Run", the checkers no longer start with "Test" and run alphabetically.
+
+Your record doesn't yet hold your verdicts on the look (section 6 of `HANDOFF_L440_dashboard_labels_20261013.md`). Once you've added them, L-440 can be closed. -- looks great. the indentations and expansion and groupings seem to work well. thanks. 
+
+One thing in your run belongs to the L-269 session, not this one. Under the scanner's verdict, the new line reads "Tier-1 rise: NOT READ". The L-269 check of the maintenance summary passed on its recorded output, but the live scanner printed neither phrase it looks for. That session should look at it.

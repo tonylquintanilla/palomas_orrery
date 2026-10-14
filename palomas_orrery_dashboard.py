@@ -234,6 +234,9 @@ draws each match under its own headings (2026-09-19, L-341); every check
 keeps its own button, the two guest book checks excepted (L-281); a
 runner's card sits directly above its indented group; and nothing written
 in a description is cut, only moved behind "+ more".
+October 14, 2026 with Anthropic's Claude Opus 5.5 (L-269): Maintenance
+Report's description counts four planted faults, one of them the
+scanner's output with Windows line endings.
 """
 
 import os
@@ -1300,7 +1303,8 @@ LAUNCH_GROUPS = {
          "Check that the maintenance run's summary names, under the "
          "provenance scanner's verdict, every file whose Tier-1 count rose "
          "since the scanner's previous run, and says so when it cannot read "
-         "that. Runs the run's real summary on recorded scanner output. Three "
+         "that. Runs the run's real summary on recorded scanner output, once "
+         "with Windows line endings, as it reaches the run on Windows. Four "
          "faults are planted first, each in a copy of the real code, and each "
          "must be caught by name. "
          "Ends on \"MAINTENANCE REPORT: PASS\" (L-269).",

@@ -11,20 +11,21 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 157  
-**Total Lines of Code (non-blank):** 123,966  
-**Total Public Functions/Classes:** 1,480
+**Total Python Files:** 158  
+**Total Lines of Code (non-blank):** 128,831  
+**Total Public Functions/Classes:** 1,475
 
 ## Classification Coverage
 
 **Patch scripts awaiting archive (1).** A `Role: patch` module is a one-shot script that has already run. Its base fingerprint no longer matches, so it cannot run again. Move each into `documentation/`. While one sits in the scanned tree it inflates the module count here and the file count in the provenance audit.
 
-- `patch_L440_1_dashboard_labels_20261013.py`
+- `patch_L269_6_windows_output_20261014.py`
 
-**Undetermined role (8).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (9).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
 - `patch_L431_10_brief_both_sets_20261013.py`
+- `patch_L431_11_website_orrery_20261014.py`
 - `test_drawings_export.py`
 - `test_earth_pole_of_date.py`
 - `test_extractor_pins.py`
@@ -32,9 +33,10 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
-**Undetermined domain (1).** No valid `Domain:` tag.
+**Undetermined domain (2).** No valid `Domain:` tag.
 
 - `patch_L431_10_brief_both_sets_20261013.py`
+- `patch_L431_11_website_orrery_20261014.py`
 
 
 ---
@@ -47,7 +49,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `earth_system_visualization_gui.py` | Earth System Visualization GUI for Paloma's Orrery Hub window with climate data visualizations (1,903 lines) |
 | `orbital_param_viz.py` | Interactive orbital element visualization tool. (1,965 lines) |
 | `palomas_orrery.py` | Main GUI and plotting engine for Paloma's Orrery. (9,668 lines) |
-| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (2,866 lines) |
+| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (2,870 lines) |
 | `star_visualization_gui.py` | Stellar visualization GUI for Paloma's Orrery. (1,409 lines) |
 
 ---
@@ -226,8 +228,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `ledger_index.py` | Generate the at-a-glance INDEX for the consolidated ledger. (715 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (129 lines) |
-| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (986 lines) |
-| `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (769 lines) |
+| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (989 lines) |
+| `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (784 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (505 lines) |
 | `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (3,528 lines) |
 | `skills_index.py` | Generate the Skill Manifest table in the project instructions from the SKILL.md files in skills/. (882 lines) |
@@ -239,7 +241,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `test_derived_figures.py` | - a derived constant declares no more significant figures than its inputs support, and names every derived row it cannot judge. (1,239 lines) |
 | `test_dimensions.py` | - a derived constant's unit follows from its arithmetic. (591 lines) |
 | `test_domain_split.py` | Checks for L-437: the provenance scanner's whole-tree Tier-1 total prints with its domain split, and a module's domain is read from its own docstring Domain: tag. (406 lines) |
-| `test_maintenance_report.py` | The maintenance run's summary names every file whose Tier-1 rose since the scanner's previous run; and proof that this check can fail. (171 lines) |
+| `test_maintenance_report.py` | The maintenance run's summary names every file whose Tier-1 rose since the scanner's previous run; and proof that this check can fail. (218 lines) |
 | `test_objects_export.py` | - data/objects_export.json says what the object list in celestial_objects.py holds, and no entry in the list writes a field twice. (173 lines) |
 | `test_orbit_cache.py` | Comprehensive test suite for orbit data caching and repair (224 lines) |
 | `test_orbit_markers.py` | Each orbit is drawn around its period's centre, each marker's date comes from the period JPL gave, and every orbit and marker hover prints by the errors JPL states; and proof that this check can fail. (885 lines) |
@@ -261,7 +263,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_L440_1_dashboard_labels_20261013.py` | - L-440: the dashboard's cards say what each tool is, the website checks sit under six headings that fold, and a new check holds the run steps and the buttons together. (996 lines) |
+| `patch_L269_6_windows_output_20261014.py` | - L-269: the maintenance run's rise line reads the scanner's output on Windows. (155 lines) |
 
 ---
 
@@ -271,6 +273,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
 | `patch_L431_10_brief_both_sets_20261013.py` | - L-431 (orbital periods): build 3's brief says the export carries BOTH element sets for a body drawn around the solar system's barycentre, the Sun-centred ones as well as the barycentre ones, as Tony confirmed on 2026-10-13. Records only. (103 lines) |
+| `patch_L431_11_website_orrery_20261014.py` | - L-431 (orbital periods from JPL), build 3, the orrery's half, with L-395's move: the objects export carries each body's period, and the Horizons check moves into the orrery's maintenance run and checks the period too. (5,637 lines) |
 | `test_drawings_export.py` | Each stored drawing in data/drawings/ is the drawing its rows give today, git tracks it, and each check can fail. (173 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
