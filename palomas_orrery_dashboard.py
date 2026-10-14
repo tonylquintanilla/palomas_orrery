@@ -198,6 +198,11 @@ under the orrery's checkers, in the same patch as its checker
 test_domain_split.py, with the same name as its maintenance-run row (the
 button is named what the run prints). It sits before Drawings Export,
 its alphabetical place once the labels lose "Test".
+October 13, 2026 with Anthropic's Claude Opus 5.5 (L-269): Maintenance
+Report under the orrery's checkers, in the same patch as its checker
+test_maintenance_report.py, with the same name as its maintenance-run
+row. It sits before Test Objects Export, its alphabetical place once
+the labels lose "Test".
 """
 
 import os
@@ -1232,6 +1237,19 @@ LAUNCH_GROUPS = {
          "the ecliptic node set to 0, the paper's Fig. 3 reading moved, the "
          "tilt pushed to 60 degrees) and each must be caught, then the real "
          "rows must pass. Ends on \"HILLS CLOUD: PASS\" (L-421).",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Maintenance Report",
+         "test_maintenance_report.py",
+         "Check that the maintenance run's summary names, under the "
+         "provenance scanner's verdict, every file whose Tier-1 count rose "
+         "since the scanner's previous run, and says so when it cannot read "
+         "that. Runs the run's real summary on recorded scanner output. Three "
+         "faults are planted first, each in a copy of the real code, and each "
+         "must be caught by name. "
+         "Ends on \"MAINTENANCE REPORT: PASS\" (L-269).",
          SCRIPT_DIR,
          True,
          None,

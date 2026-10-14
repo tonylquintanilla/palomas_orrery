@@ -396,6 +396,9 @@ built on 28e1b7d.
 Module updated: October 13, 2026 with Anthropic's Claude Opus 5.5
 (L-431: build 2 closed, accepted at Tony's look with its four fixes run;
 build 3 briefed), built on 869b8c22.
+Module updated: October 13, 2026 with Anthropic's Claude Opus 5.5
+(L-269: the maintenance run's summary names the files whose Tier-1
+rose), built on ab96681.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -623,7 +626,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-266 | Nothing checks that a cited link still resolves | OPEN | 9.0 | 2026-08-30 |
 | ! | L-185 | Source discipline for the assembler's own constants | OPEN | 8.1 | 2026-08-06 |
 | ! | L-340 | The exhibit store editor: what the first screenshot showed, and the Mode 5 pass | OPEN | 8.1 | 2026-09-22 |
-| ! | L-269 | A report names its items, not how many there are | OPEN | 6.0 | 2026-08-30 |
+| ! | L-269 | A report names its items, not how many there are | OPEN | 6.0 | 2026-10-13 |
 | ! | L-245 | Constants drift check compares against the last COMMIT, not the last RUN | OPEN | 5.4 | 2026-08-25 |
 | ! | L-195 | Citation legs -- put the authority in the Source line | OPEN | 5.1 | 2026-08-15 |
 | ! | L-206 | Worksheet return filenames carry model and session | OPEN | 5.1 | 2026-08-18 |
@@ -8541,7 +8544,7 @@ Names Its Items [QUALITY], resident protocol Part 3.
   either); L-235 (checks that cannot fail, gallery side).
 
 #### [L-269] A report names its items, not how many there are
-<!-- L:269 status:OPEN upd:2026-08-30 section:A flag: rice:5/4/90/3 -->
+<!-- L:269 status:OPEN upd:2026-10-13 section:A flag: rice:5/4/90/3 -->
 - **Tony's ruling, 2026-08-30, and the reason is the load-bearing
   part:** "I can't go grep the code for all the instances that built a
   count. A list is manageable and it gives me a sense of the gap."
@@ -8710,6 +8713,24 @@ Names Its Items [QUALITY], resident protocol Part 3.
   the risen-files half, drops the whole-tree line, and restates the
   GATING AND REPORT-ONLY count, which reads twenty-five while the run
   has twenty-six gating checkers since L-437.
+- **2026-10-13, redelivered as `patch_L269_5_risen_files_20261013.py`**,
+  cut on ab96681 after L-431's close, as the coordination session
+  ordered ("drop the breakdown half, keep the half that names each file
+  whose count rose, one patch, planted faults shown caught"). Tony's
+  request that started it, in his run record: "i was expecting the
+  module class breakdown." L-437 answered the breakdown; this answers
+  the rest. Under the scanner's verdict the summary now names each file
+  whose Tier-1 rose since the scanner's previous run, read from its own
+  run-history lines, or says that none rose, or says NOT READ.
+  `scanner_risen_lines()` in `orrery_maintenance_run.py`; new checker
+  `test_maintenance_report.py`, "Maintenance report (L-269)" in the run
+  and "Maintenance Report" on the dashboard, three faults planted in
+  copies of the runner, each caught by name. GATING AND REPORT-ONLY no
+  longer names a count: the headline counts from the table, and three
+  sessions adding rows on one day left the typed number behind. The old
+  `patch_L269_1_scanner_breakdown_20261013.py` in the root folder is
+  superseded and is deleted, not filed: its name repeats an older
+  patch's in documentation/.
 
 #### [L-281] The guest book: no-account comments, approve-before-show
 <!-- L:281 status:OPEN upd:2026-09-27 section:A flag: rice:3/2/70/1 -->

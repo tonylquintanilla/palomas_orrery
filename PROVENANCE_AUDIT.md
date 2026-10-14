@@ -20,12 +20,12 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T1 by domain | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|--------------|---:|---:|---:|--------:|
+| 20261014T040249Z | `ab96681` | 155 | 1115 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 684 | 145 | 6 | 0 |
 | 20261014T034203Z | `869b8c2` | 155 | 1115 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 684 | 145 | 6 | 0 |
 | 20261013T232900Z | `bd7ca20` | 154 | 1115 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 684 | 145 | 6 | 0 |
 | 20261013T192756Z | `082dbb1` | 155 | 1116 | 281 | orrery 116, Earth System 149, stars 13, utilities 2, unclassified 1 | 684 | 145 | 6 | 0 |
 | 20261013T190348Z | `a246b86` | 156 | 1116 | 281 | orrery 116, Earth System 149, stars 13, utilities 2, unclassified 1 | 684 | 145 | 6 | 0 |
 | 20261013T175754Z | `4da3d7c` | 153 | 1114 | 281 | -- | 683 | 144 | 6 | 0 |
-| 20261013T174809Z | `400a961` | 154 | 1114 | 281 | -- | 683 | 144 | 6 | 0 |
 
 Change since the previous run: total +0, Tier-1 +0.
 
@@ -205,7 +205,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `visualization_core.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `visualization_utils.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `earth_pole_live_check.py` | orrery | 0 | 1 | 0 | 0 | 1 |
-| `patch_L269_1_scanner_breakdown_20261013.py` | unclassified | 0 | 1 | 0 | 0 | 1 |
+| `patch_L269_5_risen_files_20261013.py` | unclassified | 0 | 1 | 0 | 0 | 1 |
 | `celestial_coordinates.py` | orrery | 0 | 1 | 0 | 0 | 1 |
 | `hills_cloud_sampler.py` | orrery | 0 | 1 | 0 | 0 | 1 |
 | `add_docstrings.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
@@ -239,7 +239,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 **Domain coverage gap (1):** these files have findings and no `Domain:` tag the report knows, so they are counted as unclassified rather than guessed into a domain. Add the tag to each module's own docstring (one of the six above); nothing in provenance_scanner.py needs editing:
 
-- `patch_L269_1_scanner_breakdown_20261013.py` -- no Domain: tag in its docstring
+- `patch_L269_5_risen_files_20261013.py` -- no Domain: tag in its docstring
 
 ---
 
@@ -1426,11 +1426,11 @@ is planned for a future session.
 | 2341 | string | display string @ line 2341 | (5 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 2416 | string | display string @ line 2416 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 
-### patch_L269_1_scanner_breakdown_20261013.py
+### patch_L269_5_risen_files_20261013.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 94 | dict | CREATED[...] | (2 entries) | 3 | 5 | **15** | Cited, not cross-checked; date-sensitive | UNDETERMINED -- could not be classified |
+| 93 | dict | CREATED[...] | (2 entries) | 3 | 5 | **15** | Cited, not cross-checked; date-sensitive | UNDETERMINED -- could not be classified |
 
 ### planet9_visualization_shells.py
 
@@ -1884,9 +1884,9 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 106 | dict | ROLE_MAP[...] | (146 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 393 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 416 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 106 | dict | ROLE_MAP[...] | (147 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 394 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 417 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### moon_visualization_shells.py
 
@@ -1908,10 +1908,10 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 360 | constant | TOOL_TIMEOUT_SECONDS | 900 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 423 | constant | HASH_LIMIT_BYTES | 2 * 1024 * 1024 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 542 | constant | NOTE_WIDTH | 44 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 543 | constant | NOTE_INDENT | 37 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 382 | constant | TOOL_TIMEOUT_SECONDS | 900 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 445 | constant | HASH_LIMIT_BYTES | 2 * 1024 * 1024 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 564 | constant | NOTE_WIDTH | 44 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 565 | constant | NOTE_INDENT | 37 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### osculating_cache_manager.py
 
@@ -1931,10 +1931,10 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 230 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 231 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 1499 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 1630 | dict | SECTION_SYMBOLS[...] | (8 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
+| 235 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 236 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 1517 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 1648 | dict | SECTION_SYMBOLS[...] | (8 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
 
 ### planet_visualization_utilities.py
 

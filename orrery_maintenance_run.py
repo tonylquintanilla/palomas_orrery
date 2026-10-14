@@ -87,12 +87,18 @@ artifact, and it is short enough to copy.
 
 GATING AND REPORT-ONLY
 ----------------------
-Twenty-five checkers are pass/fail: a problem makes them exit non-zero.
-Two are REPORT-ONLY -- worksheet_checker.py and provenance_scanner.py
-exit 0 whatever they find, and exit 1 only when they could not run.
-They are marked in the CHECKERS table, and the summary counts the
-gating twenty-five in its headline and quotes the two report-only verdicts
-underneath.
+Every checker is pass/fail unless the CHECKERS table marks it
+REPORT-ONLY: a problem makes it exit non-zero. Two are REPORT-ONLY --
+worksheet_checker.py and provenance_scanner.py exit 0 whatever they find,
+and exit 1 only when they could not run. The summary counts the gating
+checkers in its headline, from the table itself, and quotes the two
+report-only verdicts underneath. (This paragraph named the count until
+2026-10-13; three sessions added rows that day and it fell behind, so
+the number now lives only where the run counts it.)
+
+Under the scanner's verdict the summary also names every file whose
+Tier-1 rose since the scanner's previous run, read from the scanner's
+own output; when it cannot read that, it says so (L-269).
 
 The block quotes each tool's own note rather than restating it. A
 restatement would be a second copy of a number, free to drift from the
@@ -190,10 +196,21 @@ One more gating checker. The count under GATING AND REPORT-ONLY is not
 edited here:
 the dashboard-labels and L-425 patches also add rows beside this one,
 and the patch that runs last restates it.)
+Module updated: October 13, 2026 with Anthropic's Claude Opus 5.5 (L-269,
+patch_L269_5_risen_files_20261013.py, Tony's run record of the same
+day: the summary names, under the scanner's verdict, each file whose
+Tier-1 rose since the scanner's previous run, read from the scanner's
+output by scanner_risen_lines(), and says NOT READ when it cannot. The
+whole-tree split is L-437's and is not repeated. CHECKERS gains
+Maintenance report (L-269), test_maintenance_report.py, three faults
+planted in copies of this file, each caught by name. GATING AND
+REPORT-ONLY no longer names a count: the headline counts from the
+table, and the paragraph's number had fallen behind.)
 """
 
 import hashlib
 import os
+import re
 import subprocess
 import sys
 import time
@@ -336,6 +353,11 @@ CHECKERS = [
     # Domain: tag, prints the same in the console line, the audit and
     # the run history; six faults planted, each caught by name.
     ('Domain Split', ['test_domain_split.py'], 'DOMAIN SPLIT:'),
+    # L-269, 2026-10-13: this runner's summary names each file whose
+    # Tier-1 rose since the scanner's previous run; three faults planted
+    # first in copies of this file, each caught by name.
+    ('Maintenance report (L-269)', ['test_maintenance_report.py'],
+     'MAINTENANCE REPORT:'),
     # A fourth field marks a tool REPORT-ONLY: it exits 0 whatever it
     # finds, so "passed" says only that it ran. Exactly two are, and
     # both are deliberate -- their numbers are the verdict, not their
@@ -541,6 +563,31 @@ def line_containing(text, hint):
 
 NOTE_WIDTH = 44
 NOTE_INDENT = 37        # matches '  %-25s %6.1fs  ' below
+
+
+def scanner_risen_lines(output):
+    """
+    The files whose Tier-1 rose since the scanner's previous run, read
+    from its own run-history lines (L-269). The summary otherwise quotes
+    the GATE PATH line and the whole-tree split (L-437) and nothing
+    else, so a rise printed only on the scanner's screen, which this
+    runner captures and does not show. Read, never recomputed, so it
+    cannot drift from what the scanner printed; what cannot be read is
+    said, not dropped.
+    """
+    if re.search(r"no file's Tier-1 count rose", output):
+        return ["No file's Tier-1 count rose since the previous run."]
+    r = re.search(r'Tier-1 ROSE in (\d+) file\(s\):[ \t]*\n((?:[ \t]+\S+[ \t]+\d+ -> \d+.*\n?)*)',
+                  output)
+    if r:
+        lines = ['Tier-1 rose since the previous run in %s file(s):' % r.group(1)]
+        for fname, before, after in re.findall(r'(\S+)[ \t]+(\d+) -> (\d+)', r.group(2)):
+            lines.append('- %s: %s -> %s' % (fname, before, after))
+        return lines
+    if 'first recorded run' in output:
+        return ['Tier-1 rise: first recorded run, nothing to compare with.']
+    return ['Tier-1 rise: NOT READ -- the scanner printed neither '
+            '"no file\'s Tier-1 count rose" nor "Tier-1 ROSE in"']
 
 
 def wrapped(text, width=NOTE_WIDTH):
@@ -762,6 +809,12 @@ def main():
               % len(report_only))
         for row in report_only:
             print('    %-27s %s' % (row[0], row[3]))
+            # L-269: under the scanner's verdict, each file whose Tier-1
+            # rose since its previous run, read from its own output.
+            if row[0] == 'Provenance scanner' and row[1] is not None:
+                for line in scanner_risen_lines(row[4]):
+                    for piece in wrapped(line, 62):
+                        print('      ' + piece)
     print('=' * 70)
 
     # ---- what the run wrote (L-212) -----------------------------------

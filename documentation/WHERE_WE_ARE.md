@@ -1,21 +1,24 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 13, 2026, night: orbital periods' build 2 closed.
-- Written at orrery 869b8c22 and gallery 924977a3.
+Last updated: October 13, 2026, night: the maintenance run names risen files.
+- Written at orrery ab96681 and gallery 924977a3.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
 > - Orbital periods, build 2 (the drawn orbits and markers): accepted
 >   at your look and closed; all four fixes from your plot are in.
+> - The maintenance run's summary names any file whose count of
+>   problems to fix now (Tier-1) rose since the last run.
 >
 > **Do next:** *L-431's website build, from its brief (in Where the
 > details are), and the briefed sessions beside it.*
 >
 > **Needs you now:**
-> - *Run patch_L431_9 and the maintenance run; move the patch into
->   documentation/; push.*
+> - *Run patch_L269_5 and the maintenance run; delete the old
+>   patch_L269_1; move the new one and patch_L431_9 into documentation/;
+>   push.*
 
 *Italic* lines are the must-reads. Marks reset at every update.
 

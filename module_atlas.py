@@ -255,6 +255,7 @@ ROLE_MAP = {
     'test_derived_figures':                   'devtool',
     'test_dimensions':                        'devtool',
     'test_domain_split':                      'devtool',
+    'test_maintenance_report':                'devtool',
     'test_objects_export':                    'devtool',
     'test_orbit_cache':                       'devtool',
     'test_orbit_markers':                     'devtool',
