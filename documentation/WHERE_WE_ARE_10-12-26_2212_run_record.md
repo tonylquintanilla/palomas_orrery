@@ -2971,18 +2971,230 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-  2. Move this script into documentation/. Commit and push the orrery. -- 
+  2. Move this script into documentation/. Commit and push the orrery. -- b9aee91a07dab7a9ed746b0d7b1effbdc2936f10
   3. Back in the gallery: the Daily Run, then commit and push (the
      handoff, step 9 on).
+
+======================================================================
+  DAILY RUN -- Wednesday October 14, 2026  17:55
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io
+======================================================================
+Daily Run steps, from C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io:
+  1. Guest book updater                 tools\guestbook_updater.py  found
+  2. Cache builder                      tools\gallery_cache_builder.py  found
+  3. Gallery maintenance run, offline   gallery_maintenance_run.py  found
+=== DAILY RUN: all 3 step scripts found
+Last cache build: 2026-10-14 17:53 UTC, ok, 0 days ago.
+
+======================================================================
+  DAILY RUN step 1 of 3: Guest book updater
+======================================================================
+======================================================================
+  guest book updater -- C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io
+======================================================================
+1 entry in the guest book; 171 gallery pages a link may point at.
+
+Fetching the form's responses...
+No new messages.
+
+w write, r reply, x remove, p pin/unpin, f form address, s sheet address, q finish > q
+
+======================================================================
+  approved 0, declined 0, waiting 0; the guest book now has 1 entry
+  No change to data/guestbook.json.
+======================================================================
+
+======================================================================
+  DAILY RUN step 2 of 3: Cache builder
+======================================================================
+[RECOVER] removed retained data\solar-system.prev (cleared read-only on 7 entries)
+[sweep] no sibling directories present
+[POLE] earth: pole of 2026-10-14 served (RA 0.68079, Dec 89.85000 deg); tilt 23.43801 deg
+[SWAP] the new cache is in place; every rename worked on the first try. Recorded in data/cache_swap_log.jsonl
+[warn] sun: features-only entry; no Horizons fetch
+[done] run 20261014T225537Z (nightly): 19 objects
+
+----------------------------------------------------------------------
+WHAT TO DO NEXT, before you commit anything:
+
+  1. Run the gallery maintenance run, from this same folder:
+         python gallery_maintenance_run.py
+     Every gating checker should pass. Its LAST line reads the
+     swap log back and should agree with the [SWAP] line above.
+  2. In GitHub Desktop, look at the change list. A good build
+     shows changed and added files and NO pile of deletions.
+  3. Commit and push.
+  4. After the push, check what the live site serves:
+         python gallery_maintenance_run.py --live
+
+TONY-ACTION ROLLUP for this run:
+  (do)     steps 1 to 4 above, in that order.
+----------------------------------------------------------------------
+
+The builder's next steps start with the maintenance run.
+The Daily Run runs it now.
+
+======================================================================
+  DAILY RUN step 3 of 3: Gallery maintenance run, offline
+======================================================================
+======================================================================
+  gallery maintenance run -- OFFLINE (before a commit)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Module atlas              1.8s  rewrote MODULE_ATLAS.md,
+                                    MODULE_INDEX.md
+  PASS Constants export pull     1.1s  rewrote data/constants_export.sha
+  PASS Config mirror             0.1s  no change to
+                                    data/objects_config.json
+  PASS Objects export pull       0.6s  rewrote data/objects_export.sha
+  PASS Objects mirror            0.1s  no change to
+                                    data/objects_config.json
+  PASS Drawings pull             0.8s  rewrote
+                                    data/drawings/pulled_at.sha
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite      19.4s  PASS (234 checks, 0 failures)
+  PASS Pole of date              0.2s  POLE OF DATE: all 11 checks passed
+                                    (frame angle, orrery, ERFA, block
+                                    checker, and each shown able to
+                                    fail).
+  PASS Mirror suite              0.1s  All 64 mirror checks passed:
+                                    served, spelling, relabel refused
+                                    and accepted, conflict refused,
+                                    definition as exactly 1, fallback
+                                    and absent named, no-slot refused,
+                                    five shapes, formatting kept,
+                                    idempotent, report writes nothing,
+                                    uncertainty written as served,
+                                    Earth's pole served, print count
+                                    written as served, "in" written as
+                                    served and a slot served in
+                                    another unit from it.
+  PASS Store writer suite       10.0s  All 329 store-writer checks
+                                    passed: an allow list that lets
+                                    through only a shell's words, a
+                                    belt's words and the arrival
+                                    settings, the rooms section's
+                                    included; a no-edit round trip;
+                                    one line per change; empty words
+                                    handled; a refused batch writing
+                                    nothing; awkward text; and the
+                                    shell list matching the cache
+                                    check's rule.
+  PASS Store editor suite        0.2s  All 312 store-editor checks
+                                    passed: every box the form offers
+                                    is one the writer allows; the word
+                                    list and the tick list differ by
+                                    the belts, on purpose; nothing
+                                    typed saves nothing; the save
+                                    message does not promise a visitor
+                                    sees what they cannot yet; and a
+                                    red Cache in step is explained
+                                    rather than just shown.
+  PASS Objects mirror suite      0.1s  MIRROR OBJECTS SUITE: pass
+  PASS Objects mirror check      0.1s  OBJECTS MIRROR: pass
+  PASS Config mirror check       0.1s  Every served link holds the
+                                    export's value, unit and figure
+                                    count; 112 link(s) compared, store
+                                    2a1211f8cce2.
+  PASS Horizons confirmations    0.1s  HORIZONS CONFIRMATIONS: pass -- 13
+                                    of 13 confirmed, and 3 periods,
+                                    within 30 days
+  PASS Pointer join              0.1s  Every link is accounted for: 119
+                                    link(s) against orrery b9aee91a, 4
+                                    fallback named; read check: 43 of
+                                    43 measured rows reached carry a
+                                    read.
+  PASS Cache in step             0.1s  The served cache holds the
+                                    config's 19 object(s) and their
+                                    features exactly: 4 object(s) with
+                                    36 named shell(s), in both cache
+                                    files.
+  PASS Drawn orbit               1.8s  DRAWN ORBIT: pass -- 18 checks,
+                                    every planted fault caught
+  PASS Drawings                  0.2s  DRAWINGS: PASS -- 3 of 3 planted
+                                    faults caught; pulled at orrery
+                                    b9aee91a; hills_cloud 3600 dots,
+                                    tilt 30.9 deg, sha256 a51e93118069
+  PASS Collapsed features        0.1s  34 stored as themselves, 16
+                                    collapsed, 0 unclassified.
+  PASS Feature renderers         0.1s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.1s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.2s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.2s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.2s  === ALL CHECKS PASSED ===
+  PASS Arrival                   0.2s  Arrival: both rooms open on the
+                                    right things; every shell trace
+                                    carries its key; the fallback with
+                                    no arrival block is unchanged.
+  PASS Display figures           0.2s  === PASS: 62 hover(s) and 320
+                                    number(s) examined; 14 graded, 7
+                                    graded by line, 48 held to the
+                                    fixture ===
+  PASS Solar System figures      0.1s  === PASS: 6 worked cases, 11
+                                    drawer rows matched to their
+                                    accuracy rows, 10 served
+                                    distances; Uranus, Neptune and
+                                    Pluto print to JPL's ten-thousands
+                                    place; 5 period cases and 10
+                                    served periods printed as the
+                                    orrery printed them ===
+  PASS Solar System drawer       0.1s  === PASS: the Sun is never ticked,
+                                    See more hides only what is not
+                                    ticked, the handle names the last
+                                    body ticked, All / none leaves the
+                                    Sun, rooms are offered only where
+                                    they exist, and the page asks this
+                                    file ===
+  PASS Guest book                0.1s  === GUEST BOOK: all 8 checks
+                                    passed
+  PASS Guest book updater        0.3s  === GUEST BOOK UPDATER: all 43
+                                    checks passed (6 scripted runs,
+                                    self-test first)
+  PASS Daily run steps           0.1s  === DAILY RUN: all 3 step scripts
+                                    found
+  PASS Artifact 1 assembler      0.2s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.1s  RESULT: no sibling directories and
+                                    nothing in data/ the builder did
+                                    not make.
+
+======================================================================
+  27 of 27 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: no sibling directories and
+  last swap 2026-10-14T22:55:41.568619+00:00: succeeded first time
+======================================================================
+
+  After you push: python gallery_maintenance_run.py --live
+
+======================================================================
+  DAILY RUN -- summary
+======================================================================
+  Guest book updater           ok
+  Cache builder                ok
+  Maintenance run, offline     ok
+
+  NEXT:
+    1. GitHub Desktop: look at the change list, then commit and push.
+    2. Then the dashboard's Gallery Maintenance Run -- live, AFTER a push.
+======================================================================
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
   3. Back here: run the Daily Run (guest book, cache builder, maintenance
      run). Move this script into documentation/. Commit the config and the
-     cache together, and push. Then: python gallery_maintenance_run.py --live
+     cache together, and push. -- 86ef2df6313f956f5c9e49611e6a2bdd0e95da29
+     
+     Then: python gallery_maintenance_run.py --live
   4. The look, on the phone and the desktop: the handoff says where.
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
 
-     
      Then back here for
      patch_L431_13_dashboard_buttons_20261014.py.
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
@@ -3001,6 +3213,35 @@ Two other things changed in the records:
 
 The dashboard session took ledger number L-440 and retired L-438 and L-439. That clears up the double use of L-438; the objects work will open under the next free number.
 The question from before still stands: should the Pluto-Charon barycentre ship with “not yet fetched from JPL” for its period?
+
+===========================================================
+
+11. The look (decide), on the phone and the desktop: in the Solar
+   System room, hover Mercury and Jupiter (JPL's period, around the
+   Sun), 
+   
+   Mars (typed, marked) and Pluto (not yet fetched). 
+   
+   In the Earth
+   room, hover the Sun Direction: Earth's period. 
+   
+   Encke and Halley are
+   not rows in that room's list, so their periods show only once they
+   are; 
+   
+   the Moon has no key in the orrery's list, so it gets no period
+   (section 6). 
+   
+   The Sun room prints no period: the Sun has none.
+    
+    The dashboard (step 7's patch): the website group no longer shows
+    Horizons Check or Horizons Check Suite; 
+    
+    the Maintenance Run group
+    shows Horizons Check, Horizons Check Suite and Horizons
+    Confirmations; 
+    
+    Drawn Orbit sits under the served cache.
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
