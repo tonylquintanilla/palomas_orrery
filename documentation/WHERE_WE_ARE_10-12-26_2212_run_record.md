@@ -395,7 +395,7 @@ Close them one at a time, each on the pushed HEAD, in this order: L-437, then L-
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-**Session: OPEN: 10-12-26 2232: Opus: L-431 build 2 session**
+**Session: DONE: 10-13-26 2309: Opus: L-431 build 2 session**
 
 I’ve built and tested the change, and the patch is saved in your orrery folder as patch_L431_6_orbits_markers_20261012.py. Each orbit is now drawn around the same centre as its period. The perihelion and aphelion dates now come from JPL’s period for that orbit.
 
@@ -2269,7 +2269,7 @@ Index regenerated (242 live items) in C:\Users\tonyq\OneDrive\Desktop\python_wor
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-  2. Move this script into documentation/; commit and push.
+  2. Move this script into documentation/; commit and push. -- db63721d258004b855c1259371d8adf15bf7647c
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -2734,3 +2734,426 @@ I tried it on a spare copy of f59c84b2, and it applied cleanly.
 **Heads-up about the L-269 patch** (the other session's maintenance summary breakdown). `patch_L269_1_scanner_breakdown_20261013.py`, also in your root folder, will refuse to run and write nothing. It was built on the same starting point as L-437, and L-437 ran first, so four of the places it looks for have changed. Half of what it does is now a duplicate: L-437 already prints the whole-tree line with its domains on the scanner's row. Its other half is new and worth keeping, which is naming each file whose Tier-1 count rose since the last run. A ready-to-paste note for that session is in section 11 of the handoff, and the same note is in the ledger on L-269. Paste it in when you next open that session.
 
 After the closing patch, run the maintenance run, move the patch into `documentation/`, and commit and push.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+**Session: OPEN: 10-13-26 0920: Opus: L-438 Dashboard redesign**
+
+When you run it:
+
+Delete documentation/patch_L438_1_dashboard_labels_20261013.py. It never ran, and this patch replaces it.
+Save the new patch in your orrery folder and press Run.
+Run orrery_maintenance_run.py. You should see 28 of 28 passing, Dashboard parity among them.
+Look at the dashboard: section 6 of the new handoff, HANDOFF_L440_dashboard_labels_20261013.md, lists what to check. Then move the patch into documentation/, commit and push.
+
+None of this waits on L-431 build 3. If another session adds a button before this runs, the patch keeps it. Dashboard parity will then name that button until it has a short line.
+
+==================================================
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L440_1_dashboard_labels_20261013.py
+patch_L440_1_dashboard_labels_20261013.py -- L-440: the dashboard's
+Running in: c:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github
+
+ok  palomas_orrery_dashboard.py    console  Solar System                 Paloma's Orrery: opens its own console window
+ok  palomas_orrery_dashboard.py    wording  Daily Run                    Daily Run -- everything indented below: names the new label
+ok  palomas_orrery_dashboard.py    renamed  Daily Run                    Gallery Cache Builder -- Manual Run -> Cache Builder
+ok  palomas_orrery_dashboard.py    renamed  Gallery -- checks and data   Artifact 1 Assembler Pin -> Artifact 1 Assembler
+ok  palomas_orrery_dashboard.py    renamed  Gallery -- checks and data   Drawings Check -> Drawings
+ok  palomas_orrery_dashboard.py    renamed  Gallery -- checks and data   Gallery Builder Offline Tests -> Cache Builder Suite
+ok  palomas_orrery_dashboard.py    renamed  Gallery -- checks and data   Gallery Module Atlas -> Module Atlas
+ok  palomas_orrery_dashboard.py    headed   Gallery -- checks and data   six headings, cards alphabetical under each
+ok  palomas_orrery_dashboard.py    wording  Maintenance Run              Exact Rows Report: names the new label
+ok  palomas_orrery_dashboard.py    renamed  Maintenance Run              Regenerate Module Atlas -> Module Atlas
+ok  palomas_orrery_dashboard.py    renamed  Maintenance Run              Update Ledger Index -> Ledger Index
+ok  palomas_orrery_dashboard.py    renamed  Maintenance Run              Update Skill Manifest -> Skill Manifest
+ok  palomas_orrery_dashboard.py    renamed  Maintenance Run              Constants Change Report -> Constants Change
+ok  palomas_orrery_dashboard.py    renamed  Maintenance Run              Test Citation Inheritance -> Citation Inheritance
+ok  palomas_orrery_dashboard.py    renamed  Maintenance Run              Test Constants Export -> Constants Export Check
+ok  palomas_orrery_dashboard.py    renamed  Maintenance Run              Test Constants Provenance -> Constants Relations
+ok  palomas_orrery_dashboard.py    renamed  Maintenance Run              Test Cross-Check Annotations -> Cross-Check Annotations
+ok  palomas_orrery_dashboard.py    renamed  Maintenance Run              Test Derived Figures -> Derived Figures
+ok  palomas_orrery_dashboard.py    renamed  Maintenance Run              Test Dimensions -> Dimensions
+ok  palomas_orrery_dashboard.py    renamed  Maintenance Run              Test Drawings Export -> Drawings Export Check
+ok  palomas_orrery_dashboard.py    renamed  Maintenance Run              Test Earth Pole of Date -> Earth Pole of Date
+ok  palomas_orrery_dashboard.py    renamed  Maintenance Run              Test Exact Rows By The Count -> Exact Rows by the Count
+ok  palomas_orrery_dashboard.py    renamed  Maintenance Run              Test Hills Cloud Sampler -> Hills Cloud Sampler
+ok  palomas_orrery_dashboard.py    renamed  Maintenance Run              Test Objects Export -> Objects Export Check
+ok  palomas_orrery_dashboard.py    renamed  Maintenance Run              Test Orbit Cache -> Orbit Cache
+ok  palomas_orrery_dashboard.py    renamed  Maintenance Run              Test Position Digits -> Position Digits
+ok  palomas_orrery_dashboard.py    renamed  Maintenance Run              Test Reset Completeness -> Reset Completeness
+ok  palomas_orrery_dashboard.py    renamed  Maintenance Run              Test Row Shape -> Row Shape
+ok  palomas_orrery_dashboard.py    wording  Maintenance Run              Row Shape: names the new label
+ok  palomas_orrery_dashboard.py    renamed  Maintenance Run              Test Scanner Recognition -> Scanner Recognition 1d/1e
+ok  palomas_orrery_dashboard.py    renamed  Maintenance Run              Test Scanner Row Run -> Scanner Row Run
+ok  palomas_orrery_dashboard.py    renamed  Maintenance Run              Test Skill Headers -> Skill Headers
+ok  palomas_orrery_dashboard.py    wording  Maintenance Run              Skill Headers: names the new label
+ok  palomas_orrery_dashboard.py    renamed  Maintenance Run              Test Status Lines -> Status Lines
+ok  palomas_orrery_dashboard.py    wording  Maintenance Run              Status Lines: names the new label
+ok  palomas_orrery_dashboard.py    renamed  Maintenance Run              Test Worksheet Checker -> Worksheet Checker Tests
+ok  palomas_orrery_dashboard.py    added    Maintenance Run              Dashboard Parity
+ok  palomas_orrery_dashboard.py    sorted   Maintenance Run              generators and checkers, alphabetically under their new names
+ok  palomas_orrery_dashboard.py    edited   the fonts
+ok  palomas_orrery_dashboard.py    edited   the LAUNCH TARGETS comment
+ok  palomas_orrery_dashboard.py    added    CARD_LINES (107 lines) and its two helpers
+ok  palomas_orrery_dashboard.py    replaced the search and drawing code: folding headings, the new card
+ok  palomas_orrery_dashboard.py    stamped  the docstring
+ok  orrery_maintenance_run.py      added    the Dashboard parity row to CHECKERS
+ok  orrery_maintenance_run.py      left     the GATING AND REPORT-ONLY paragraph: it names no count; the run counts 28
+ok  orrery_maintenance_run.py      stamped  the docstring
+ok  LEDGER_CONSOLIDATED.md         stamped  the header
+ok  LEDGER_CONSOLIDATED.md         added    the L-440 block at the top of section A
+ok  LEDGER_CONSOLIDATED.md         noted    on L-324: its parity row is built
+ok  documentation/WHERE_WE_ARE.md  edited   the box: changed since you last read this
+ok  documentation/WHERE_WE_ARE.md  edited   the box: needs you now
+ok  documentation/WHERE_WE_ARE.md  edited   the road: stage 5b
+ok  documentation/WHERE_WE_ARE.md  edited   settled: the heading
+ok  documentation/WHERE_WE_ARE.md  edited   settled: the dashboard line
+ok  documentation/WHERE_WE_ARE.md  edited   details: the dashboard record
+ok  documentation/WHERE_WE_ARE.md  edited   the "Last updated" lines
+ok  documentation/WHERE_WE_ARE.md  checked  130 lines above the run-record marker (cap 130)
+ok  test_dashboard_parity.py       new file
+ok  documentation/HANDOFF_L440_dashboard_labels_20261013.md new file
+
+patch applied
+Stamps updated: palomas_orrery_dashboard.py and
+orrery_maintenance_run.py docstrings, the ledger header.
+Permanent after this script is spent: CARD_LINES and the new card,
+the folding headings, the six website headings, the run-names on
+the buttons, test_dashboard_parity.py and its row in the run.
+
+NEXT:
+  1. Run orrery_maintenance_run.py. Expect 28 of 28 gating checkers
+     to pass, "Dashboard parity" among them with 9 of 9 planted
+     faults caught. If another session's patch has added a button
+     since, Dashboard parity names it until it has a short line.
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261014T040249Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 2.0s  rewrote LEDGER_CONSOLIDATED.md
+  Skill manifest               0.3s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             1.2s  unchanged (1 checked, not written)
+  Objects export               0.1s  unchanged (1 checked, not written)
+  Drawings export              0.5s  unchanged (1 checked, not written)
+  Module atlas                10.1s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               9.1s  rewrote DATA_INVENTORY.md
+  Exact rows report            3.3s  unchanged (1 checked, not written) -- 13 of
+                                     41 exact rows printed at 43 lines (33
+                                     orrery, 10 gallery); 8 drawn only, 14 not
+                                     followed, 0 map entries broken
+  Document index               0.2s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.3s  No changes to constants_new.py since HEAD.
+  Constants relations          0.3s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              1.5s  No figure count exceeds its inputs: 36
+                                     derived row(s) read, 26 judged OK -- 26 OK,
+                                     10 NOT YET MIGRATED, 1 NO DERIVED LINE, 1
+                                     UNMARKED CONVERSION; 18 conversion(s)
+                                     checked.
+  Constants export check       2.6s  Export matches the store: sha256
+                                     2a1211f8cce2 on both sides; 127 rows
+                                     re-read, 56 not exported, 31 tokens; 320
+                                     conversions re-computed, 10 of 10 worked
+                                     cases hold.
+  Objects export check         0.2s  pass
+  Skill headers                0.4s  12 skills parsed, no consistency problems.
+  Exact rows by the count      4.1s  PASSING -- 13 printed exact rows each state
+                                     a count; 33 orrery lines print through
+                                     exact_text() or row_text(); 10 gallery lines
+                                     are served the count
+  Dimensions                   2.6s  No unit contradicts its arithmetic: 54
+                                     derived row(s) read -- 42 OK, 9 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.3s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.3s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.2s  All 126 status lines in constants_new.py are
+                                     well formed; 54 rows carry none.
+  Row shape                    0.1s  All 183 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.3s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Scanner row run (L-414)      0.3s  16 of 16 pins hold -- each row reads its own
+                                     comment run, declared rows are named, the
+                                     gate path is read by name.
+  Reset completeness          32.7s  PASS -- all 311 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  3.9s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Earth pole of date           0.5s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Hills cloud sampler (L-421)    0.6s  PASS -- 4 of 4 planted faults caught; the
+                                     real rows pass, the dots' plane tilted 34.1
+                                     deg
+  Drawings export check        0.5s  PASS -- 3 of 3 planted faults caught;
+                                     hills_cloud 3600 dots, tilt 30.9 deg, sha256
+                                     a51e93118069
+  Position digits (L-401)      2.6s  PASS -- 13 of 13 planted faults caught by
+                                     name; 23 hovers examined, 181 lines compared
+                                     against their errors; 5 pairs printed the
+                                     same from either end; 496 hovers of every
+                                     listed object from the Sun, Earth and
+                                     Neptune; 3 recorded 2xr answers read by
+                                     column name; 6 period sentences
+  Orbit markers (L-431, L-401)   16.4s  PASS -- 12 of 12 planted faults caught by
+                                     name; 4 ellipses, 1080 drawn points on their
+                                     period's centre; 14 markers, 9 dates, 53
+                                     printed distances against their errors; 6
+                                     elements as given; 3 Keplerian positions
+                                     half a year on; 1 parameters-window date
+                                     pairs; 2 Moon arcs; 2 perturbation checks; 1
+                                     perihelion osculating orbits; 2 frames; 2
+                                     sources read
+  Domain Split                 0.7s  PASS -- 6 of 6 planted faults caught; the
+                                     split reads each module's Domain: tag and
+                                     prints the same on the console, in the audit
+                                     and in the run history.
+  Maintenance report (L-269)    0.1s  PASS -- 3 of 3 planted faults caught by
+                                     name; 3 summaries; 1 risen file(s) named
+  Dashboard parity             0.3s  PASS -- 9 of 9 planted faults caught; 77
+                                     steps matched to their buttons by name and
+                                     script; 107 cards carry a short line
+  Worksheet checker           11.3s  74 of 110 routed, 8 clean
+  Worksheet checker tests     19.0s  All 135 checks passed
+  Worksheet key round trip     1.6s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         30.2s  All 76 checks passed
+  Extractor pins               0.5s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          73.8s  0 TIER-1 -- the push gate holds; Whole tree,
+                                     Tier-1: 281: orrery 116, Earth System 149,
+                                     stars 13, utilities 2, dev tools 1.
+
+======================================================================
+  28 of 28 gating checkers passed -- 235.0s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           74 of 110 routed, 8 clean
+    Provenance scanner          0 TIER-1 -- the push gate holds; Whole tree, Tier-1: 281: orrery 116, Earth System 149, stars 13, utilities 2, dev tools 1.
+      Tier-1 rise: NOT READ -- the scanner printed neither "no
+      file's Tier-1 count rose" nor "Tier-1 ROSE in"
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2237 file(s) examined, 9 written, 0 created, 0 removed, 4 rewritten identically
+    written   DATA_INVENTORY.md
+    written   LEDGER_CONSOLIDATED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    written   module_atlas.py
+    rewritten with identical bytes, no action needed:
+      PROJECT_INSTRUCTIONS.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      test_output/test_orbit_paths.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  2. Open palomas_orrery_dashboard.py and look (the handoff,
+     section 6, says what to see). Launch Paloma's Orrery once: it
+     should open its own console window beside the plot window.
+
+
+============================================================
+    PALOMA'S ORRERY - Dashboard
+============================================================
+    Author: Tony Quintanilla
+    "Data Preservation is Climate Action"
+============================================================
+
+Python detected:
+Python 3.13.0
+
+Starting Dashboard...
+Working directory: C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github
+
+[DASHBOARD] Dashboard ready.
+
+[13:02:16]  Dashboard ready.
+[13:03:11]  Launched in console: palomas_orrery.py  (PID 31644)
+
+Working directory set to: C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github
+Interpreter: C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe
+Working directory: C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github
+Window config file: C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\window_config.json
+Restored window geometry: 1536x793+0+5
+Window will be maximized
+
+============================================================
+LOADING ORBIT CACHE FROM: data/orbit_paths.json
+============================================================
+
+Cache loaded successfully: 1502 valid entries
+
+[CACHE HEALTH SUMMARY]
+Total cached orbits: 1502
+Orbits by center object:
+  3I/ATLAS: 5 orbits
+  Apophis: 2 orbits
+  Arrokoth: 6 orbits
+  Bennu: 2 orbits
+  Bennu/OSIRIS: 1 orbits
+  Earth: 135 orbits
+  Earth-Moon Barycenter: 3 orbits
+  Eris: 2 orbits
+  Eris-Dysnomia Barycenter: 4 orbits
+  Eris/Dysnomia: 101 orbits
+  Haumea: 11 orbits
+  Haumea System Barycenter: 3 orbits
+  Juno: 4 orbits
+  Jupiter: 104 orbits
+  K1: 2 orbits
+  K1-B: 1 orbits
+  K1-C: 1 orbits
+  K1-D: 1 orbits
+  L1: 2 orbits
+  L2: 3 orbits
+  Leucus: 1 orbits
+  Makemake: 1 orbits
+  Mars: 106 orbits
+  Menoetius: 2 orbits
+  Mercury: 102 orbits
+  Moon: 112 orbits
+  Neptune: 101 orbits
+  Orcus: 3 orbits
+  Orcus-Vanth Barycenter: 3 orbits
+  Patroclus: 2 orbits
+  Patroclus-Menoetius Barycenter: 4 orbits
+  Phobos: 6 orbits
+  Planet 9: 5 orbits
+  Pluto: 102 orbits
+  Pluto-Charon Barycenter: 9 orbits
+  Polymele: 1 orbits
+  Quaoar: 1 orbits
+  Quaoar-Weywot Barycenter: 2 orbits
+  R2: 1 orbits
+  Saturn: 101 orbits
+  Sun: 157 orbits
+  Uranus: 101 orbits
+  Vanth: 2 orbits
+  Venus: 101 orbits
+
+Note: Cache can only be manually deleted by removing 'data/orbit_paths.json' file
+Cache and restore points (date = when that content was written):
+  data/orbit_paths.json: 131.1 MB, written 2026-10-13 08:31
+  data/orbit_paths.json.backup: 131.1 MB, written 2026-10-12 20:49
+  data/orbit_paths.json.backup_old: 131.1 MB, written 2026-10-12 14:06
+--------------------------------------------------
+[DEBUG] Sun can be center (numeric ID: 10)
+[DEBUG] Mercury can be center (numeric ID: 199)
+[DEBUG] Venus can be center (numeric ID: 299)
+[DEBUG] Apophis can be center (has center_id)
+[DEBUG] Earth can be center (numeric ID: 399)
+[DEBUG] Moon can be center (numeric ID: 301)
+[DEBUG] Earth-Moon Barycenter can be center (numeric ID: 3)
+[DEBUG] EM-L1 can be center (numeric ID: 3011)
+[DEBUG] EM-L2 can be center (numeric ID: 3012)
+[DEBUG] EM-L3 can be center (numeric ID: 3013)
+[DEBUG] EM-L4 can be center (numeric ID: 3014)
+[DEBUG] EM-L5 can be center (numeric ID: 3015)
+[DEBUG] L1 can be center (numeric ID: 31)
+[DEBUG] L2 can be center (numeric ID: 32)
+[DEBUG] L3 can be center (numeric ID: 33)
+[DEBUG] L4 can be center (numeric ID: 34)
+[DEBUG] L5 can be center (numeric ID: 35)
+[DEBUG] Bennu can be center (has center_id)
+[DEBUG] Itokawa can be center (has center_id)
+[DEBUG] Ryugu can be center (has center_id)
+[DEBUG] Eros can be center (has center_id)
+[DEBUG] Mars can be center (numeric ID: 499)
+[DEBUG] Phobos can be center (numeric ID: 401)
+[DEBUG] Deimos can be center (numeric ID: 402)
+[DEBUG] Dinkinesh can be center (has center_id)
+[DEBUG] Vesta can be center (has center_id)
+[DEBUG] Donaldjohanson can be center (has center_id)
+[DEBUG] Ceres can be center (has center_id)
+[DEBUG] 16 Psyche can be center (has center_id)
+[DEBUG] Orus can be center (has center_id)
+[DEBUG] Polymele can be center (has center_id)
+[DEBUG] Eurybates can be center (has center_id)
+[DEBUG] Patroclus-Menoetius Barycenter can be center (numeric ID: 20000617)
+[DEBUG] Patroclus can be center (has center_id)
+[DEBUG] Menoetius can be center (has center_id)
+[DEBUG] Leucus can be center (has center_id)
+[DEBUG] Jupiter can be center (numeric ID: 599)
+[DEBUG] Metis can be center (numeric ID: 516)
+[DEBUG] Adrastea can be center (numeric ID: 515)
+[DEBUG] Amalthea can be center (numeric ID: 505)
+[DEBUG] Thebe can be center (numeric ID: 514)
+[DEBUG] Io can be center (numeric ID: 501)
+[DEBUG] Europa can be center (numeric ID: 502)
+[DEBUG] Ganymede can be center (numeric ID: 503)
+[DEBUG] Callisto can be center (numeric ID: 504)
+[DEBUG] Saturn can be center (numeric ID: 699)
+[DEBUG] Pan can be center (numeric ID: 618)
+[DEBUG] Daphnis can be center (numeric ID: 635)
+[DEBUG] Prometheus can be center (numeric ID: 616)
+[DEBUG] Pandora can be center (numeric ID: 617)
+[DEBUG] Mimas can be center (numeric ID: 601)
+[DEBUG] Enceladus can be center (numeric ID: 602)
+[DEBUG] Tethys can be center (numeric ID: 603)
+[DEBUG] Dione can be center (numeric ID: 604)
+[DEBUG] Rhea can be center (numeric ID: 605)
+[DEBUG] Titan can be center (numeric ID: 606)
+[DEBUG] Hyperion can be center (numeric ID: 607)
+[DEBUG] Iapetus can be center (numeric ID: 608)
+[DEBUG] Phoebe can be center (numeric ID: 609)
+[DEBUG] Uranus can be center (numeric ID: 799)
+[DEBUG] Ariel can be center (numeric ID: 701)
+[DEBUG] Umbriel can be center (numeric ID: 702)
+[DEBUG] Titania can be center (numeric ID: 703)
+[DEBUG] Oberon can be center (numeric ID: 704)
+[DEBUG] Miranda can be center (numeric ID: 705)
+[DEBUG] Portia can be center (numeric ID: 712)
+[DEBUG] Mab can be center (numeric ID: 726)
+[DEBUG] Neptune can be center (numeric ID: 899)
+[DEBUG] Triton can be center (numeric ID: 801)
+[DEBUG] Despina can be center (numeric ID: 805)
+[DEBUG] Galatea can be center (numeric ID: 806)
+[DEBUG] Pluto-Charon Barycenter can be center (numeric ID: 9)
+[DEBUG] Pluto can be center (numeric ID: 999)
+[DEBUG] Charon can be center (numeric ID: 901)
+[DEBUG] Styx can be center (numeric ID: 905)
+[DEBUG] Nix can be center (numeric ID: 902)
+[DEBUG] Kerberos can be center (numeric ID: 904)
+[DEBUG] Hydra can be center (numeric ID: 903)
+[DEBUG] Orcus-Vanth Barycenter can be center (numeric ID: 20090482)
+[DEBUG] Orcus can be center (has center_id)
+[DEBUG] Vanth can be center (has center_id)
+[DEBUG] Haumea can be center (has center_id)
+[DEBUG] Hi'iaka can be center (has center_id)
+[DEBUG] Namaka can be center (has center_id)
+[DEBUG] Quaoar can be center (has center_id)
+[DEBUG] Weywot can be center (has center_id)
+[DEBUG] Arrokoth can be center (has center_id)
+[DEBUG] Makemake can be center (numeric ID: 20136472)
+[DEBUG] MK2 can be center (numeric ID: 120136472)
+[DEBUG] Gonggong can be center (has center_id)
+[DEBUG] Xiangliu can be center (has center_id)
+[DEBUG] Eris can be center (has center_id)
+[DEBUG] Dysnomia can be center (has center_id)
+[CENTER MENU] Dynamic center dropdown initialized (starts with Sun only)
+[DASHBOARD] Dashboard ready.
+[CENTER MENU] Added traces to 183 object variables
+Restored sash positions: [489, 1013]
+
+  3. Move this script into documentation/; commit and push.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+

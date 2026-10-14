@@ -206,6 +206,12 @@ Maintenance report (L-269), test_maintenance_report.py, three faults
 planted in copies of this file, each caught by name. GATING AND
 REPORT-ONLY no longer names a count: the headline counts from the
 table, and the paragraph's number had fallen behind.)
+Module updated: October 13, 2026 with Anthropic's Claude Opus 5.5 (L-440:
+CHECKERS gains Dashboard parity, test_dashboard_parity.py, which holds
+every step of this run, the website's offline run and the Daily Run to
+a dashboard button of the same name and script, and every card to its
+short line, after nine planted faults are each caught. The run now counts
+28 gating checkers.)
 """
 
 import hashlib
@@ -358,6 +364,11 @@ CHECKERS = [
     # first in copies of this file, each caught by name.
     ('Maintenance report (L-269)', ['test_maintenance_report.py'],
      'MAINTENANCE REPORT:'),
+    # L-440: every step of both maintenance runs and of the Daily Run
+    # has a dashboard button with the same name and script, and every
+    # card its short line; nine faults planted first, each caught.
+    ('Dashboard parity', ['test_dashboard_parity.py'],
+     'DASHBOARD PARITY:'),
     # A fourth field marks a tool REPORT-ONLY: it exits 0 whatever it
     # finds, so "passed" says only that it ran. Exactly two are, and
     # both are deliberate -- their numbers are the verdict, not their

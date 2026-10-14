@@ -203,6 +203,37 @@ Report under the orrery's checkers, in the same patch as its checker
 test_maintenance_report.py, with the same name as its maintenance-run
 row. It sits before Test Objects Export, its alphabetical place once
 the labels lose "Test".
+October 13, 2026 with Anthropic's Claude Opus 5.5 (L-440, the dashboard's
+labels, descriptions and findability; Tony's request of 2026-10-12). Each
+card shows its name, the repository and script it runs in small type, and
+one short line of at most twelve words saying what the tool does; the
+paragraph opens in place under "+ more" (Tony's choice of 2026-10-13,
+option B). The lines are in CARD_LINES, keyed by group and label, each
+written from its script's own docstring. Text wraps to the window's width
+and the Launch button is packed first, so a narrow window no longer pushes
+the button off the card, as the fixed 600-pixel wrap did. A heading inside
+a group now folds the cards under it; every heading starts open, so what a
+runner runs stays visible (Tony's ruling of 2026-08-12), and a search keeps
+a heading that holds a match. The website checks group gains six headings
+in Tony's order of 2026-10-13: tools you run by hand, the module atlas,
+JPL's check, the served cache, from the orrery, the rooms -- the manual
+tools first, then the generated report, then the checks in the order the
+data flows. A button under a runner now carries the name that run prints
+(Tony's ruling, 2026-10-12, DESIGN_rulings_20261012.md; ruling 5 took
+"Test" off), and the orrery's generators and checkers are re-sorted
+alphabetically under the new names. Dashboard Parity
+(test_dashboard_parity.py), a checker of the orrery's maintenance run,
+holds all of it. Paloma's Orrery now opens in its own console window, as
+the maintenance run does, so its printed output shows (Tony, 2026-10-13);
+on macOS and Linux no new window opens and the output goes to the terminal
+the dashboard was started from. Every other button runs as before.
+Standing rules, carried here so the next builder reads them in the file:
+the Maintenance Run group is GENERATORS then CHECKERS, each alphabetical
+(2026-09-12, L-324); the search filters name, short line and paragraph and
+draws each match under its own headings (2026-09-19, L-341); every check
+keeps its own button, the two guest book checks excepted (L-281); a
+runner's card sits directly above its indented group; and nothing written
+in a description is cut, only moved behind "+ more".
 """
 
 import os
@@ -257,21 +288,32 @@ FONT_BUTTON = ("Segoe UI", 13, "bold")
 FONT_DESC = ("Segoe UI", 11)
 FONT_LINK = ("Segoe UI", 11)
 FONT_FOOTER = ("Segoe UI", 10)
+FONT_SCRIPT = ("Consolas", 10)     # the script a card runs (L-440)
 
 # ============================================================
 # LAUNCH TARGETS
 # ============================================================
 # Each entry: (display_name, script_filename, description,
-#              [base_dir], [interactive])
+#              [base_dir], [interactive], [args], [indent])
 # base_dir:    optional, defaults to SCRIPT_DIR
 # interactive: optional, True = opens in its own console window
-#              (for scripts that need terminal input)
+#              (for scripts that need terminal input, and for the
+#              orrery, whose printed output shows there; L-440)
+# args:        optional list of arguments passed to the script
+# indent:      optional, True = a step the runner above it runs
+# A bare string is a heading inside its group; it folds the cards
+# under it. Each card's short line is in CARD_LINES, below, keyed by
+# (group, display_name): add one with every new button. A button
+# under a runner is named what that run prints (Tony, 2026-10-12).
+# Dashboard Parity holds both rules on every maintenance run (L-440).
 
 LAUNCH_GROUPS = {
     "Solar System": [
         ("Paloma's Orrery",
          "palomas_orrery.py",
-         "Interactive 3D solar system with comets, asteroids, and spacecraft"),
+         "Interactive 3D solar system with comets, asteroids, and spacecraft",
+         SCRIPT_DIR,
+         True),
         ("Orbital Construction",
          "orbital_param_viz.py",
          "Visualize how orbital elements build an orbit"),
@@ -311,8 +353,8 @@ LAUNCH_GROUPS = {
          "(L-281, Tony's design of 2026-09-27). First the Guest Book "
          "Updater: approve or decline each new message, and write entries "
          "or replies if you like. Then the Horizons Check: JPL confirms "
-         "the website's objects that are due (L-395). Then the Gallery "
-         "Cache Builder, with no OneDrive pause since 2026-10-10 (L-216: "
+         "the website's objects that are due (L-395). Then the Cache "
+         "Builder, with no OneDrive pause since 2026-10-10 (L-216: "
          "the retry is sufficient). Then the Gallery Maintenance Run, "
          "offline, which the builder's own next steps ask for before a "
          "commit. A step that reports a problem does not stop the next "
@@ -361,7 +403,7 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
-        ("Gallery Cache Builder -- Manual Run",
+        ("Cache Builder",
          os.path.join("tools", "gallery_cache_builder.py"),
          "Manual serving-cache build. Runs from the gallery repo ROOT: the "
          "builder resolves its data/ paths from the working directory, so "
@@ -426,23 +468,101 @@ LAUNCH_GROUPS = {
         "button below, to run it alone.",
         GALLERY_REPO_DIR,
         True),
-        ("Arrival",
-        os.path.join("documentation", "run_offline_check.py"),
-        "Both rooms open on the right things (L-334). Builds the Sun "
-        "room's shells and the Earth room's scene with the real "
-        "renderers, applies gallery/arrival.js with the real "
-        "data/objects_config.json, and compares what is drawn on "
-        "opening against its list; it also fails on any trace with no "
-        "shell key. It first makes itself fail on purpose four ways. "
-        "GATES the gallery runner. The check is Node, so this button "
-        "runs it through documentation/run_offline_check.py, which "
-        "reads its command from the gallery runner's own list: the two "
-        "cannot drift. Runs from the gallery repo ROOT.",
+        "TOOLS YOU RUN BY HAND -- each tests a tool you use yourself",
+        ("Daily Run Steps",
+        "daily_run.py",
+        "daily_run.py --check: fails if any of the four scripts the "
+        "Daily Run calls is missing, say after a rename, and names it. "
+        "Runs nothing else. GATES the gallery runner.",
         GALLERY_REPO_DIR,
         True,
-        ["Arrival"],
+        ["--check"],
         True),
-        ("Artifact 1 Assembler Pin",
+        ("Guest Book Checks",
+        os.path.join("documentation", "run_guestbook_checks.py"),
+        "Both checks for the lobby's guest book (L-281), which the "
+        "gallery runner also runs. Guest book: the page's own drawing "
+        "code on the real data/guestbook.json -- newest first, every "
+        "piece of text escaped so nothing a visitor types can become part "
+        "of the page, no link ever drawn on a visitor's entry, and only "
+        "links to this gallery's own pages. Guest book updater: the tool "
+        "in three scripted runs on made-up messages, including the case "
+        "where the form has no message or note column, which it must "
+        "refuse rather than guess. Each suite first proves it can fail. "
+        "The first is Node; this is the Python wrapper the dashboard "
+        "needs. GATES the gallery runner.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
+        True),
+        ("Store Editor Suite",
+        os.path.join("tools", "test_exhibit_store_editor.py"),
+        "Checks the editor window's logic WITHOUT opening the window: "
+        "that every box the form offers is a path the writer will "
+        "accept, that Earth's word list and its tick list differ by the "
+        "two radiation belts on purpose, that nothing typed saves "
+        "nothing, that the save message never claims a visitor sees what "
+        "they cannot yet, and that a red Cache in step is explained "
+        "rather than just shown. Run it by hand with --window to also "
+        "open a real window and walk every row and every tick; the "
+        "runner does not, because that would put a window on your screen "
+        "in the middle of a check. GATES the gallery runner.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
+        True),
+        ("Store Writer Suite",
+        os.path.join("tools", "test_store_writer.py"),
+        "Checks the writer that the Exhibit Store Editor saves through: "
+        "that it changes only the one line it was asked to, that it ADDS "
+        "a word a shell does not carry yet, and that it refuses "
+        "everything outside a served shell's words, a belt's words and "
+        "the arrival settings -- slugs, colours and every number among "
+        "them. Its own fixtures run first each time, so a pass means each "
+        "refusal actually ran rather than merely being declared; then "
+        "every shell and every word field of the real config, both "
+        "rooms. GATES the gallery runner.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
+        True),
+        "THE MODULE ATLAS -- the website's map of its own modules",
+        ("Module Atlas",
+        "module_atlas.py",
+        "The gallery repo's own module atlas: regenerates its "
+        "MODULE_ATLAS.md and MODULE_INDEX.md. The gallery runner does "
+        "this first on every run, as a generator. Not the orrery's "
+        "atlas, which has its own button under the maintenance run.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
+        True),
+        "JPL'S CHECK OF THE OBJECTS",
+        ("Horizons Check Suite",
+        os.path.join("tools", "test_horizons_check.py"),
+        "The Horizons check on JPL's recorded answers, with no network "
+        "(documentation/horizons_answers_L395.json, each answer with its "
+        "source): every served entry agrees, and each planted mistake -- a "
+        "wrong id, the wrong index, a name off by one letter, a stale pin, "
+        "a record number JPL gave to another comet, JPL unreachable -- is "
+        "caught by name (L-395). GATES the gallery runner.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
+        True),
+        ("Horizons Confirmations",
+        os.path.join("tools", "check_horizons_confirmations.py"),
+        "Reads data/horizons_confirmations.json offline and fails on any "
+        "served object never confirmed against JPL, confirmed 30 or more "
+        "days ago, or changed since it was confirmed -- so a Horizons "
+        "Check that stopped running shows (L-395). GATES the gallery "
+        "runner.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
+        True),
+        "THE SERVED CACHE -- what the website serves, and its builder",
+        ("Artifact 1 Assembler",
         os.path.join("documentation", "pin_artifact1_known_failure.py"),
         "Runs the Artifact 1 assembler test and compares its five verdicts, "
         "and T3's feature set, against the 2026-08-31 pin. It GATES the "
@@ -451,6 +571,23 @@ LAUNCH_GROUPS = {
         "indistinguishable from the old one -- a row that always fails hides "
         "the next change behind the last. Runs from the gallery repo ROOT.",
         GALLERY_REPO_DIR,
+        True,
+        None,
+        True),
+        ("Cache Builder Suite",
+        "test_gallery_cache_builder_offline.py",
+        "Offline smoke test for gallery_cache_builder.py: mocks Horizons, "
+        "exercises first-build, nightly re-run, and the Guard v2 monitor path. "
+        "No network. Since L-216 it also covers the swap's retries, the "
+        "roll-back that puts the previous cache back, the swap log, a dry "
+        "run leaving that log alone, the sibling report naming folders the "
+        "builder did not make, the builder SAYING how each swap went, the "
+        "maintenance run reading every rename, and the next steps printing "
+        "only after a good hand run. The lock itself cannot be produced in "
+        "a sandbox, so a refused rename is simulated through the builder's "
+        "own _rename seam -- the same name the real build path goes "
+        "through. The run itself prints the current count of checks.",
+        GALLERY_TOOLS_DIR,
         True,
         None,
         True),
@@ -489,17 +626,7 @@ LAUNCH_GROUPS = {
         True,
         None,
         True),
-        ("Collapsed Features",
-        "sweep_collapsed_features.py",
-        "Sorts every served feature group: a shell stored as itself, or a "
-        "known group collapsed into parallel lists (belts, rings), each "
-        "named. It exits 2 only on a group it cannot classify, which is "
-        "the case that should stop a push. GATES the gallery runner "
-        "(L-300). Runs from the gallery repo ROOT and changes nothing.",
-        GALLERY_REPO_DIR,
-        True,
-        None,
-        True),
+        "FROM THE ORRERY -- its numbers, drawings and pole",
         ("Config Mirror -- report only",
         os.path.join("tools", "mirror_constants.py"),
         "Lists what the mirror WOULD write into data/objects_config.json "
@@ -538,31 +665,7 @@ LAUNCH_GROUPS = {
         True,
         None,
         True),
-        ("Daily Run Steps",
-        "daily_run.py",
-        "daily_run.py --check: fails if any of the four scripts the "
-        "Daily Run calls is missing, say after a rename, and names it. "
-        "Runs nothing else. GATES the gallery runner.",
-        GALLERY_REPO_DIR,
-        True,
-        ["--check"],
-        True),
-        ("Display Figures",
-        os.path.join("documentation", "run_offline_check.py"),
-        "Every number in an Earth hover shows the figures its source "
-        "supports (L-342). Reads the BUILT hovers from the served "
-        "cache, not the formatting helpers, and fails on any number it "
-        "cannot account for, or if the config and the cache would print "
-        "differently. GATES the gallery runner. The check is Node, so "
-        "this button runs it through "
-        "documentation/run_offline_check.py, which reads its command "
-        "from the gallery runner's own list: the two cannot drift. Runs "
-        "from the gallery repo ROOT.",
-        GALLERY_REPO_DIR,
-        True,
-        ["Display figures"],
-        True),
-        ("Drawings Check",
+        ("Drawings",
         os.path.join("tools", "check_drawings.py"),
         "Every stored drawing the config names -- today the Hills cloud's "
         "3,600 dots, placed by the orrery -- is pulled into data/drawings/, "
@@ -585,122 +688,6 @@ LAUNCH_GROUPS = {
         "website draws them as given (L-421, Tony's option A). The cache "
         "builder then serves them. With no network it reports N-A and "
         "leaves the previous pull alone.",
-        GALLERY_REPO_DIR,
-        True,
-        None,
-        True),
-        ("Earth Scene Geometry",
-        os.path.join("documentation", "run_offline_check.py"),
-        "The Earth room's composed scene, headless, on the recorded "
-        "payload documentation/payload_earth_scene.json: the axis tilt "
-        "against the served pole of date, the equator and geostationary "
-        "ring in one plane, the terminator, the subsolar point, the "
-        "Moon's arc and what the room opens on. Every number compared "
-        "is read from the served rows. GATES the gallery runner. The "
-        "check is Node, so this button runs it through "
-        "documentation/run_offline_check.py, which reads its command "
-        "from the gallery runner's own list: the two cannot drift. Runs "
-        "from the gallery repo ROOT.",
-        GALLERY_REPO_DIR,
-        True,
-        ["Earth scene geometry"],
-        True),
-        ("Feature Renderers",
-        os.path.join("documentation", "run_offline_check.py"),
-        "Smoke test for gallery/feature_renderers.js, the code that "
-        "draws every shell, ring, belt and magnetosphere on the "
-        "website. The geometry checks measure the drawn points, not the "
-        "inputs, so a wrong answer fails. GATES the gallery runner. The "
-        "check is Node, so this button runs it through "
-        "documentation/run_offline_check.py, which reads its command "
-        "from the gallery runner's own list: the two cannot drift. Runs "
-        "from the gallery repo ROOT.",
-        GALLERY_REPO_DIR,
-        True,
-        ["Feature renderers"],
-        True),
-        ("Gallery Builder Offline Tests",
-        "test_gallery_cache_builder_offline.py",
-        "Offline smoke test for gallery_cache_builder.py: mocks Horizons, "
-        "exercises first-build, nightly re-run, and the Guard v2 monitor path. "
-        "No network. Since L-216 it also covers the swap's retries, the "
-        "roll-back that puts the previous cache back, the swap log, a dry "
-        "run leaving that log alone, the sibling report naming folders the "
-        "builder did not make, the builder SAYING how each swap went, the "
-        "maintenance run reading every rename, and the next steps printing "
-        "only after a good hand run. The lock itself cannot be produced in "
-        "a sandbox, so a refused rename is simulated through the builder's "
-        "own _rename seam -- the same name the real build path goes "
-        "through. The run itself prints the current count of checks.",
-        GALLERY_TOOLS_DIR,
-        True,
-        None,
-        True),
-        ("Gallery Module Atlas",
-        "module_atlas.py",
-        "The gallery repo's own module atlas: regenerates its "
-        "MODULE_ATLAS.md and MODULE_INDEX.md. The gallery runner does "
-        "this first on every run, as a generator. Not the orrery's "
-        "atlas, which has its own button under the maintenance run.",
-        GALLERY_REPO_DIR,
-        True,
-        None,
-        True),
-        ("Guest Book Checks",
-        os.path.join("documentation", "run_guestbook_checks.py"),
-        "Both checks for the lobby's guest book (L-281), which the "
-        "gallery runner also runs. Guest book: the page's own drawing "
-        "code on the real data/guestbook.json -- newest first, every "
-        "piece of text escaped so nothing a visitor types can become part "
-        "of the page, no link ever drawn on a visitor's entry, and only "
-        "links to this gallery's own pages. Guest book updater: the tool "
-        "in three scripted runs on made-up messages, including the case "
-        "where the form has no message or note column, which it must "
-        "refuse rather than guess. Each suite first proves it can fail. "
-        "The first is Node; this is the Python wrapper the dashboard "
-        "needs. GATES the gallery runner.",
-        GALLERY_REPO_DIR,
-        True,
-        None,
-        True),
-        ("Horizons Check Suite",
-        os.path.join("tools", "test_horizons_check.py"),
-        "The Horizons check on JPL's recorded answers, with no network "
-        "(documentation/horizons_answers_L395.json, each answer with its "
-        "source): every served entry agrees, and each planted mistake -- a "
-        "wrong id, the wrong index, a name off by one letter, a stale pin, "
-        "a record number JPL gave to another comet, JPL unreachable -- is "
-        "caught by name (L-395). GATES the gallery runner.",
-        GALLERY_REPO_DIR,
-        True,
-        None,
-        True),
-        ("Horizons Confirmations",
-        os.path.join("tools", "check_horizons_confirmations.py"),
-        "Reads data/horizons_confirmations.json offline and fails on any "
-        "served object never confirmed against JPL, confirmed 30 or more "
-        "days ago, or changed since it was confirmed -- so a Horizons "
-        "Check that stopped running shows (L-395). GATES the gallery "
-        "runner.",
-        GALLERY_REPO_DIR,
-        True,
-        None,
-        True),
-        ("Hover Budget",
-        os.path.join("documentation", "run_hover_budget.py"),
-        "Counts the LINES in every hover the renderers produce -- 78 of "
-        "them, across the composed Earth room, Earth's features on their "
-        "own, and the two ringed planets -- and prints the longest ten so "
-        "the offender is named rather than implied. It GATES the gallery "
-        "runner. It exists because its sibling checks hover WIDTH, no line "
-        "over 90 characters, and on 2026-09-15 a 32-line bow shock hover "
-        "passed that comfortably while the box ran off the bottom of the "
-        "phone: a hover can be perfectly narrow and still overflow. The "
-        "ceiling is a RATCHET -- lower it when the worst hover comes down, "
-        "never raise it to admit a new one, which is how the old ones "
-        "reached 32. The suite is Node; this is the Python wrapper the "
-        "dashboard needs, the same shape as the Artifact 1 pin. Runs from "
-        "the gallery repo ROOT.",
         GALLERY_REPO_DIR,
         True,
         None,
@@ -751,19 +738,6 @@ LAUNCH_GROUPS = {
         True,
         None,
         True),
-        ("Page Framing",
-        os.path.join("documentation", "run_offline_check.py"),
-        "The page's own framing helpers, taken out of the page and run "
-        "against real feature traces; the checks measure the axis "
-        "ranges that result, so a wrong range fails. GATES the gallery "
-        "runner. The check is Node, so this button runs it through "
-        "documentation/run_offline_check.py, which reads its command "
-        "from the gallery runner's own list: the two cannot drift. Runs "
-        "from the gallery repo ROOT.",
-        GALLERY_REPO_DIR,
-        True,
-        ["Page framing"],
-        True),
         ("Pointer Join",
         os.path.join("tools", "check_constants_links.py"),
         "Classifies all 70 of the config's links into the store: served "
@@ -788,6 +762,111 @@ LAUNCH_GROUPS = {
         GALLERY_REPO_DIR,
         True,
         None,
+        True),
+        "THE ROOMS -- as the page draws them",
+        ("Arrival",
+        os.path.join("documentation", "run_offline_check.py"),
+        "Both rooms open on the right things (L-334). Builds the Sun "
+        "room's shells and the Earth room's scene with the real "
+        "renderers, applies gallery/arrival.js with the real "
+        "data/objects_config.json, and compares what is drawn on "
+        "opening against its list; it also fails on any trace with no "
+        "shell key. It first makes itself fail on purpose four ways. "
+        "GATES the gallery runner. The check is Node, so this button "
+        "runs it through documentation/run_offline_check.py, which "
+        "reads its command from the gallery runner's own list: the two "
+        "cannot drift. Runs from the gallery repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        ["Arrival"],
+        True),
+        ("Collapsed Features",
+        "sweep_collapsed_features.py",
+        "Sorts every served feature group: a shell stored as itself, or a "
+        "known group collapsed into parallel lists (belts, rings), each "
+        "named. It exits 2 only on a group it cannot classify, which is "
+        "the case that should stop a push. GATES the gallery runner "
+        "(L-300). Runs from the gallery repo ROOT and changes nothing.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
+        True),
+        ("Display Figures",
+        os.path.join("documentation", "run_offline_check.py"),
+        "Every number in an Earth hover shows the figures its source "
+        "supports (L-342). Reads the BUILT hovers from the served "
+        "cache, not the formatting helpers, and fails on any number it "
+        "cannot account for, or if the config and the cache would print "
+        "differently. GATES the gallery runner. The check is Node, so "
+        "this button runs it through "
+        "documentation/run_offline_check.py, which reads its command "
+        "from the gallery runner's own list: the two cannot drift. Runs "
+        "from the gallery repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        ["Display figures"],
+        True),
+        ("Earth Scene Geometry",
+        os.path.join("documentation", "run_offline_check.py"),
+        "The Earth room's composed scene, headless, on the recorded "
+        "payload documentation/payload_earth_scene.json: the axis tilt "
+        "against the served pole of date, the equator and geostationary "
+        "ring in one plane, the terminator, the subsolar point, the "
+        "Moon's arc and what the room opens on. Every number compared "
+        "is read from the served rows. GATES the gallery runner. The "
+        "check is Node, so this button runs it through "
+        "documentation/run_offline_check.py, which reads its command "
+        "from the gallery runner's own list: the two cannot drift. Runs "
+        "from the gallery repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        ["Earth scene geometry"],
+        True),
+        ("Feature Renderers",
+        os.path.join("documentation", "run_offline_check.py"),
+        "Smoke test for gallery/feature_renderers.js, the code that "
+        "draws every shell, ring, belt and magnetosphere on the "
+        "website. The geometry checks measure the drawn points, not the "
+        "inputs, so a wrong answer fails. GATES the gallery runner. The "
+        "check is Node, so this button runs it through "
+        "documentation/run_offline_check.py, which reads its command "
+        "from the gallery runner's own list: the two cannot drift. Runs "
+        "from the gallery repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        ["Feature renderers"],
+        True),
+        ("Hover Budget",
+        os.path.join("documentation", "run_hover_budget.py"),
+        "Counts the LINES in every hover the renderers produce -- 78 of "
+        "them, across the composed Earth room, Earth's features on their "
+        "own, and the two ringed planets -- and prints the longest ten so "
+        "the offender is named rather than implied. It GATES the gallery "
+        "runner. It exists because its sibling checks hover WIDTH, no line "
+        "over 90 characters, and on 2026-09-15 a 32-line bow shock hover "
+        "passed that comfortably while the box ran off the bottom of the "
+        "phone: a hover can be perfectly narrow and still overflow. The "
+        "ceiling is a RATCHET -- lower it when the worst hover comes down, "
+        "never raise it to admit a new one, which is how the old ones "
+        "reached 32. The suite is Node; this is the Python wrapper the "
+        "dashboard needs, the same shape as the Artifact 1 pin. Runs from "
+        "the gallery repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
+        True),
+        ("Page Framing",
+        os.path.join("documentation", "run_offline_check.py"),
+        "The page's own framing helpers, taken out of the page and run "
+        "against real feature traces; the checks measure the axis "
+        "ranges that result, so a wrong range fails. GATES the gallery "
+        "runner. The check is Node, so this button runs it through "
+        "documentation/run_offline_check.py, which reads its command "
+        "from the gallery runner's own list: the two cannot drift. Runs "
+        "from the gallery repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        ["Page framing"],
         True),
         ("Solar System Drawer",
         os.path.join("documentation", "run_offline_check.py"),
@@ -818,37 +897,6 @@ LAUNCH_GROUPS = {
         "It breaks that file three ways first, so a pass has shown it can "
         "fail. The check is Node; this is the Python wrapper the dashboard "
         "needs. GATES the gallery runner. Runs from the gallery repo ROOT.",
-        GALLERY_REPO_DIR,
-        True,
-        None,
-        True),
-        ("Store Editor Suite",
-        os.path.join("tools", "test_exhibit_store_editor.py"),
-        "Checks the editor window's logic WITHOUT opening the window: "
-        "that every box the form offers is a path the writer will "
-        "accept, that Earth's word list and its tick list differ by the "
-        "two radiation belts on purpose, that nothing typed saves "
-        "nothing, that the save message never claims a visitor sees what "
-        "they cannot yet, and that a red Cache in step is explained "
-        "rather than just shown. Run it by hand with --window to also "
-        "open a real window and walk every row and every tick; the "
-        "runner does not, because that would put a window on your screen "
-        "in the middle of a check. GATES the gallery runner.",
-        GALLERY_REPO_DIR,
-        True,
-        None,
-        True),
-        ("Store Writer Suite",
-        os.path.join("tools", "test_store_writer.py"),
-        "Checks the writer that the Exhibit Store Editor saves through: "
-        "that it changes only the one line it was asked to, that it ADDS "
-        "a word a shell does not carry yet, and that it refuses "
-        "everything outside a served shell's words, a belt's words and "
-        "the arrival settings -- slugs, colours and every number among "
-        "them. Its own fixtures run first each time, so a pass means each "
-        "refusal actually ran rather than merely being declared; then "
-        "every shell and every word field of the real config, both "
-        "rooms. GATES the gallery runner.",
         GALLERY_REPO_DIR,
         True,
         None,
@@ -985,22 +1033,6 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
-        ("Exact Rows Report",
-         "exact_rows_report.py",
-         "List every place the orrery or the gallery prints an exact row of "
-         "constants_new.py -- a definition or a stated rule, such as a cut "
-         "angle -- with the code on each line, so the width it prints at "
-         "can be read. Rule 7 of provenance-discipline says such a row "
-         "prints by a print count it states, not a width chosen where it "
-         "is printed; this is the list that work moves from. Reads the "
-         "gallery folder beside the orrery and says so at the top if it is "
-         "missing. Writes EXACT_ROWS_PRINTED.md and prints whether every "
-         "printed exact row prints by its count; this button never fails. "
-         "Test Exact Rows By The Count is the same check as a pass/fail.",
-         SCRIPT_DIR,
-         True,
-         None,
-         True),
         ("Document Index",
          "doc_index.py",
          "Regenerate the key-documents table in README.md from the "
@@ -1028,6 +1060,38 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
+        ("Exact Rows Report",
+         "exact_rows_report.py",
+         "List every place the orrery or the gallery prints an exact row of "
+         "constants_new.py -- a definition or a stated rule, such as a cut "
+         "angle -- with the code on each line, so the width it prints at "
+         "can be read. Rule 7 of provenance-discipline says such a row "
+         "prints by a print count it states, not a width chosen where it "
+         "is printed; this is the list that work moves from. Reads the "
+         "gallery folder beside the orrery and says so at the top if it is "
+         "missing. Writes EXACT_ROWS_PRINTED.md and prints whether every "
+         "printed exact row prints by its count; this button never fails. "
+         "Exact Rows by the Count is the same check as a pass/fail.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Ledger Index",
+         "ledger_index.py",
+         "Regenerate the INDEX in LEDGER_CONSOLIDATED.md from the DETAIL blocks "
+         "and migrate DONE items to section C. Run after editing any ledger block.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Module Atlas",
+         "module_atlas.py",
+         "Scan codebase, generate MODULE_ATLAS.md. "
+         "Run after significant codebase changes (new modules, reorganizations).",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
         ("Objects Export",
          "export_objects.py",
          "Write data/objects_export.json from the object list in "
@@ -1042,23 +1106,7 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
-        ("Regenerate Module Atlas",
-         "module_atlas.py",
-         "Scan codebase, generate MODULE_ATLAS.md. "
-         "Run after significant codebase changes (new modules, reorganizations).",
-         SCRIPT_DIR,
-         True,
-         None,
-         True),
-        ("Update Ledger Index",
-         "ledger_index.py",
-         "Regenerate the INDEX in LEDGER_CONSOLIDATED.md from the DETAIL blocks "
-         "and migrate DONE items to section C. Run after editing any ledger block.",
-         SCRIPT_DIR,
-         True,
-         None,
-         True),
-        ("Update Skill Manifest",
+        ("Skill Manifest",
          "skills_index.py",
          "Regenerate the Skill Manifest table in the protocol from skills/*/SKILL.md. "
          "Run after adding, renaming, or versioning a skill.",
@@ -1082,7 +1130,15 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
-        ("Constants Change Report",
+        ("Citation Inheritance",
+         "test_citation_inheritance.py",
+         "Pass/fail tests for block-scoped citation inheritance in the "
+         "provenance scanner.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Constants Change",
          "constants_change_report.py",
          "Ask git what changed in constants_new.py since the last commit "
          "and report each moved value in words. The line that matters "
@@ -1096,39 +1152,7 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
-        ("Extractor Pins",
-         "test_extractor_pins.py",
-         "Pin the instruction filter's kept-and-dropped set at "
-         "LOOKBACK 30 / LOOKAHEAD 25, frozen 2026-08-14. The claim "
-         "ordinal in every issued key -- the `::c2` -- counts claims "
-         "AFTER this filter runs, so extending the instruction pattern "
-         "by one phrase lets a formerly-dropped number join the sequence "
-         "and shifts every ordinal after it with no prose edit at all. A "
-         "worksheet returned against the old ordinals would then bind to "
-         "the wrong claim. It does not decide whether a change is wrong; "
-         "it reports that the extractor no longer means what the issued "
-         "keys assume, and prints the replacement pin file.",
-         SCRIPT_DIR,
-         True,
-         None,
-         True),
-        ("Provenance Scanner",
-         "provenance_scanner.py",
-         "Scan for hardcoded constants and duplicates. Writes PROVENANCE_AUDIT.md. "
-         "Run before/after edits to shared values, or when a value looks suspicious.",
-         SCRIPT_DIR,
-         True,
-         None,
-         True),
-        ("Test Citation Inheritance",
-         "test_citation_inheritance.py",
-         "Pass/fail tests for block-scoped citation inheritance in the "
-         "provenance scanner.",
-         SCRIPT_DIR,
-         True,
-         None,
-         True),
-        ("Test Constants Export",
+        ("Constants Export Check",
          "test_constants_export.py",
          "Check that data/constants_export.json matches constants_new.py: "
          "the store hash it was made from, every exported row re-read, the "
@@ -1139,7 +1163,7 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
-        ("Test Constants Provenance",
+        ("Constants Relations",
          "test_constants_provenance.py",
          "Pass/fail regression tests for constants_new.py. "
          "Run before committing changes to constants, or first if a plot looks wrong.",
@@ -1147,7 +1171,7 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
-        ("Test Cross-Check Annotations",
+        ("Cross-Check Annotations",
          "test_cross_checked.py",
          "Pass/fail tests for the cross-check annotation grammar and V2 "
          "scoring. Run after editing annotations or the scanner's parser.",
@@ -1155,7 +1179,21 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
-        ("Test Derived Figures",
+                ("Dashboard Parity",
+         "test_dashboard_parity.py",
+         "Check that every row of the orrery's maintenance run, the website's "
+         "offline maintenance run and the Daily Run has a button here with "
+         "the same name and the same script, that every indented button "
+         "names a row, that every button's script is on disk, and that every "
+         "card carries its short line of twelve words or fewer. It reads "
+         "both repositories and edits neither. Nine faults are planted "
+         "first, each caught by name. Ends on \"DASHBOARD PARITY: PASS\" "
+         "(L-440).",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Derived Figures",
          "test_derived_figures.py",
          "Check that no derived constant declares more significant "
          "figures than its inputs support: fewest figures for products "
@@ -1168,7 +1206,7 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
-        ("Test Dimensions",
+        ("Dimensions",
          "test_dimensions.py",
          "Check that each derived constant's unit follows from its "
          "arithmetic, in dimension and in size, using astropy inside the "
@@ -1194,7 +1232,7 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
-        ("Test Drawings Export",
+        ("Drawings Export Check",
          "test_drawings_export.py",
          "Check that each stored drawing in data/drawings/ (today the Hills "
          "cloud's dots, which the website draws) is exactly the drawing its "
@@ -1207,7 +1245,7 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
-        ("Test Earth Pole of Date",
+        ("Earth Pole of Date",
          "test_earth_pole_of_date.py",
          "Offline checks of Earth's pole and tilt of the plot's date: the "
          "build manifest's worked case, the geometry against ERFA's true "
@@ -1219,7 +1257,7 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
-        ("Test Exact Rows By The Count",
+        ("Exact Rows by the Count",
          "exact_rows_report.py",
          "Fails when a printed exact row of constants_new.py states no "
          "print count, when an orrery line prints one by a width of its "
@@ -1230,7 +1268,23 @@ LAUNCH_GROUPS = {
          True,
          ["--check"],
          True),
-        ("Test Hills Cloud Sampler",
+        ("Extractor Pins",
+         "test_extractor_pins.py",
+         "Pin the instruction filter's kept-and-dropped set at "
+         "LOOKBACK 30 / LOOKAHEAD 25, frozen 2026-08-14. The claim "
+         "ordinal in every issued key -- the `::c2` -- counts claims "
+         "AFTER this filter runs, so extending the instruction pattern "
+         "by one phrase lets a formerly-dropped number join the sequence "
+         "and shifts every ordinal after it with no prose edit at all. A "
+         "worksheet returned against the old ordinals would then bind to "
+         "the wrong claim. It does not decide whether a change is wrong; "
+         "it reports that the extractor no longer means what the issued "
+         "keys assume, and prints the replacement pin file.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Hills Cloud Sampler",
          "test_hills_cloud_sampler.py",
          "The Hills cloud's three checks, each first shown able to fail: "
          "four faults are planted (the galactic pole's RA and Dec swapped, "
@@ -1254,7 +1308,7 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
-        ("Test Objects Export",
+        ("Objects Export Check",
          "test_objects_export.py",
          "Check that data/objects_export.json matches celestial_objects.py, "
          "entry by entry, and that no entry among all 182 writes a field "
@@ -1266,7 +1320,7 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
-        ("Test Orbit Cache",
+        ("Orbit Cache",
          "test_orbit_cache.py",
          "Comprehensive test suite for orbit data caching, format conversion, "
          "and repair. Run alongside Verify Orbit Cache when the cache looks off.",
@@ -1290,7 +1344,7 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
-        ("Test Position Digits",
+        ("Position Digits",
          "test_position_digits.py",
          "Check that the orrery's body hover prints each distance and speed "
          "to the digits JPL's errors earn: a planet by its published row, a "
@@ -1305,7 +1359,15 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
-        ("Test Reset Completeness",
+        ("Provenance Scanner",
+         "provenance_scanner.py",
+         "Scan for hardcoded constants and duplicates. Writes PROVENANCE_AUDIT.md. "
+         "Run before/after edits to shared values, or when a value looks suspicious.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Reset Completeness",
          "test_reset_completeness.py",
          "Guard the Reset button against partial-reset drift: dirties every "
          "tracked control, calls the live reset handler, asserts everything "
@@ -1314,20 +1376,20 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
-        ("Test Row Shape",
+        ("Row Shape",
          "test_status_lines.py",
          "The row-shape guard by itself. A value that is not a container "
          "literal must fit on the assignment's own line, because "
          "constants_change_report.py reads values line by line off a git "
          "diff and once reported a constant REMOVED that was only unreadable. "
          "Dicts and lists are exempt: a lookup table cannot fit on one line. "
-         "Same script as Test Status Lines, run with --shape-only so it ends "
+         "Same script as Status Lines, run with --shape-only so it ends "
          "on its own verdict.",
          SCRIPT_DIR,
          True,
          ["--shape-only"],
          True),
-        ("Test Scanner Recognition",
+        ("Scanner Recognition 1d/1e",
          "test_provenance_1d.py",
          "Proves the provenance scanner still recognizes a real citation "
          "and still refuses a fake one. Covers shadow constants (a local "
@@ -1341,7 +1403,7 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
-        ("Test Scanner Row Run",
+        ("Scanner Row Run",
          "test_row_run.py",
          "Pins for the provenance scanner (L-414): a row's citation is read "
          "from its own comment run, declared rows are named as their own "
@@ -1351,35 +1413,24 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
-        ("Test Skill Headers",
+        ("Skill Headers",
          "skills_index.py",
          "skills_index.py --check: reads every skill's header as YAML, "
          "the way Settings > Skills does, and fails on a header YAML "
          "refuses, a name or description that is not text, or a value "
-         "YAML would cut short at a space before a # (L-407). The Update "
-         "Skill Manifest button runs the same script without the check, "
+         "YAML would cut short at a space before a # (L-407). The Skill "
+         "Manifest button runs the same script without the check, "
          "and writes the protocol's table.",
          SCRIPT_DIR,
          True,
          ["--check"],
          True),
-        ("Test Status Lines",
+        ("Status Lines",
          "test_status_lines.py",
          "Pass/fail tests for the Status Line grammar on every "
          "constants_new.py row that carries one, plus coverage on the rows "
-         "that carry none. Runs the row-shape guard as well; Test Row Shape "
+         "that carry none. Runs the row-shape guard as well; Row Shape "
          "below runs that half on its own.",
-         SCRIPT_DIR,
-         True,
-         None,
-         True),
-        ("Test Worksheet Checker",
-         "test_worksheet_checker.py",
-         "Pass/fail tests for the worksheet checker. Every layer is "
-         "exercised twice, once with evidence that clears it and once "
-         "with an injected violation that must not, because zero "
-         "findings and a broken check look identical. Run after editing "
-         "the checker or the worksheet schema.",
          SCRIPT_DIR,
          True,
          None,
@@ -1392,6 +1443,17 @@ LAUNCH_GROUPS = {
          "can see once the edit is committed. Report-only -- it writes "
          "WORKSHEET_CHECK.md and never gates a push. Run after writing "
          "annotations, after a value moves, or before a gallery build.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Worksheet Checker Tests",
+         "test_worksheet_checker.py",
+         "Pass/fail tests for the worksheet checker. Every layer is "
+         "exercised twice, once with evidence that clears it and once "
+         "with an injected violation that must not, because zero "
+         "findings and a broken check look identical. Run after editing "
+         "the checker or the worksheet schema.",
          SCRIPT_DIR,
          True,
          None,
@@ -1502,6 +1564,379 @@ LAUNCH_GROUPS = {
     ],
 
 }
+
+
+# ============================================================
+# CARD LINES (L-440)
+# ============================================================
+# One short line per card, at most twelve words, saying what the
+# tool does. The card shows it; the paragraph above opens under
+# "+ more" (Tony's choice, 2026-10-13). Keyed (group, label), so a
+# button added to LAUNCH_GROUPS needs its line added here too.
+# Dashboard Parity (test_dashboard_parity.py) fails on a card with
+# no line, a line over twelve words, and a line for no card. Each
+# line was written from the script's own docstring, not from the
+# paragraph alone.
+
+CARD_LINES = {
+    ("Solar System",
+     "Paloma's Orrery"):
+        "The 3D solar system: planets, comets, asteroids and spacecraft, by date.",
+    ("Solar System",
+     "Orbital Construction"):
+        "Shows step by step how six orbital elements build an orbit.",
+    ("Earth System",
+     "Earth System Viewer"):
+        "A hub window of climate data plots and planetary boundaries.",
+    ("Earth System",
+     "Google Earth Controller"):
+        "Pick and open the climate KMZ layers in Google Earth Pro.",
+    ("Earth System",
+     "Earth System Generator"):
+        "Builds the climate layers: a Plotly preview and a Google Earth KMZ.",
+    ("Earth System",
+     "Food Insecurity Generator"):
+        "Builds Sudan's IPC food-insecurity layer for Google Earth from IPC data.",
+    ("Earth System",
+     "Food Insecurity Controller"):
+        "The Google Earth controller, opened with the food-insecurity layers loaded.",
+    ("Stars",
+     "Star Visualization"):
+        "HR diagrams, 3D stellar neighborhoods and planetarium views of nearby stars.",
+    ("Daily Run",
+     "Daily Run -- everything indented below"):
+        "The website's daily routine: guest book, JPL check, cache build, checks.",
+    ("Daily Run",
+     "Guest Book Updater"):
+        "Approve, decline or defer each new guest book message; write entries.",
+    ("Daily Run",
+     "Horizons Check"):
+        "Asks JPL whether each object the website serves is still that object.",
+    ("Daily Run",
+     "Cache Builder"):
+        "Fetches from JPL, checks, and swaps in the website's new served cache.",
+    ("Daily Run",
+     "Gallery Maintenance Run -- offline"):
+        "Every website check that needs no network; run before you commit.",
+    ("Gallery -- checks and data",
+     "Gallery Maintenance Run -- offline"):
+        "Every website generator and check that needs no network, in one run.",
+    ("Gallery -- checks and data",
+     "Daily Run Steps"):
+        "Fails if any script the Daily Run calls is missing.",
+    ("Gallery -- checks and data",
+     "Guest Book Checks"):
+        "Both guest book checks: the page's drawing of it and its updater.",
+    ("Gallery -- checks and data",
+     "Store Editor Suite"):
+        "Checks the room-words editor's logic without opening its window.",
+    ("Gallery -- checks and data",
+     "Store Writer Suite"):
+        "Checks the words writer changes only the line asked, refuses the rest.",
+    ("Gallery -- checks and data",
+     "Module Atlas"):
+        "Regenerates the website repo's own module atlas and index.",
+    ("Gallery -- checks and data",
+     "Horizons Check Suite"):
+        "The Horizons check on JPL's recorded answers, planted mistakes caught.",
+    ("Gallery -- checks and data",
+     "Horizons Confirmations"):
+        "Fails on any served object JPL has not confirmed within 30 days.",
+    ("Gallery -- checks and data",
+     "Artifact 1 Assembler"):
+        "Compares the Artifact 1 assembler test's verdicts with their recorded pin.",
+    ("Gallery -- checks and data",
+     "Cache Builder Suite"):
+        "The cache builder's offline tests, JPL mocked: build, swap, roll back.",
+    ("Gallery -- checks and data",
+     "Cache In Step"):
+        "Checks the served cache holds what data/objects_config.json says.",
+    ("Gallery -- checks and data",
+     "Cache Siblings"):
+        "Reports leftover staging and quarantine folders beside the served cache.",
+    ("Gallery -- checks and data",
+     "Config Mirror -- report only"):
+        "Lists what the mirror would write into the config; writes nothing.",
+    ("Gallery -- checks and data",
+     "Config Mirror Check"):
+        "Checks every served number in the config matches the orrery's export.",
+    ("Gallery -- checks and data",
+     "Constants Export Pull"):
+        "Copies the orrery's constants export into the website, noting its commit.",
+    ("Gallery -- checks and data",
+     "Drawings"):
+        "Checks each stored drawing is pulled, served, and tilted as recorded.",
+    ("Gallery -- checks and data",
+     "Drawings Pull"):
+        "Copies the orrery's stored drawings, the Hills cloud's dots, into the website.",
+    ("Gallery -- checks and data",
+     "Mirror Suite"):
+        "Checks the constants mirror's writes and refusals on made-up files.",
+    ("Gallery -- checks and data",
+     "Objects Export Pull"):
+        "Copies the orrery's objects export (names, JPL ids, links) into the website.",
+    ("Gallery -- checks and data",
+     "Objects Mirror Check"):
+        "Lists every object field in the config that differs from the export.",
+    ("Gallery -- checks and data",
+     "Objects Mirror Suite"):
+        "Checks the objects mirror's writes and refusals on made-up files.",
+    ("Gallery -- checks and data",
+     "Pointer Join"):
+        "Sorts the config's links into the orrery's store: served, waiting, outside.",
+    ("Gallery -- checks and data",
+     "Pole of Date"):
+        "Checks the website's copy of Earth's tilt geometry against the orrery's.",
+    ("Gallery -- checks and data",
+     "Arrival"):
+        "Checks the Sun and Earth rooms open on the right things.",
+    ("Gallery -- checks and data",
+     "Collapsed Features"):
+        "Sorts every served feature group; fails on one it cannot classify.",
+    ("Gallery -- checks and data",
+     "Display Figures"):
+        "Checks every number in an Earth hover shows only the figures earned.",
+    ("Gallery -- checks and data",
+     "Earth Scene Geometry"):
+        "Checks the Earth room's tilt, rings, terminator and Moon on recorded data.",
+    ("Gallery -- checks and data",
+     "Feature Renderers"):
+        "Checks the code that draws every shell, ring, belt and magnetosphere.",
+    ("Gallery -- checks and data",
+     "Hover Budget"):
+        "Counts the lines in every room hover and names the ten longest.",
+    ("Gallery -- checks and data",
+     "Page Framing"):
+        "Checks the page's framing helpers give the right axis ranges.",
+    ("Gallery -- checks and data",
+     "Solar System Drawer"):
+        "Checks the Solar System room's drawer does what your design says.",
+    ("Gallery -- checks and data",
+     "Solar System Figures"):
+        "Checks the Solar System room prints distances only to earned digits.",
+    ("Gallery -- checks and data",
+     "Sun Shells"):
+        "Checks the Sun room's shells are built and shaped as configured.",
+    ("Gallery -- checks and data",
+     "Gallery Maintenance Run -- live, AFTER a push"):
+        "After a push: checks what palomasorrery.com actually serves.",
+    ("Gallery -- authoring",
+     "Exhibit Store Editor"):
+        "A window to edit the words visitors read in each room.",
+    ("Gallery -- authoring",
+     "Gallery Cleanup"):
+        "Finds gallery files no card uses, and deletes them after you confirm.",
+    ("Gallery -- authoring",
+     "Gallery Editor"):
+        "Arrange the gallery's rooms and cards, and edit their details.",
+    ("Gallery -- authoring",
+     "Gallery JSON Fixer"):
+        "Updates older gallery JSON files so the current viewer reads them.",
+    ("Gallery -- authoring",
+     "Gallery Studio"):
+        "Curate an orrery Plotly plot and export it for the gallery.",
+    ("Gallery -- authoring",
+     "Inspect Staging"):
+        "A plain-language report on a dry-run cache build; changes nothing.",
+    ("Gallery -- authoring",
+     "JSON Converter"):
+        "Converts saved orrery HTML plots into lightweight gallery JSON files.",
+    ("Gallery -- authoring",
+     "Serve Gallery Locally"):
+        "Serves the website at localhost:8000 and opens the assembler dev page.",
+    ("Maintenance Run",
+     "MAINTENANCE RUN -- everything indented below"):
+        "Every orrery generator, then every check, with one summary at the end.",
+    ("Maintenance Run",
+     "Constants Export"):
+        "Writes the constants export the website reads, from constants_new.py.",
+    ("Maintenance Run",
+     "Data Inventory"):
+        "Lists the large local data stores in DATA_INVENTORY.md.",
+    ("Maintenance Run",
+     "Document Index"):
+        "Regenerates README.md's table of key documents from their own tags.",
+    ("Maintenance Run",
+     "Drawings Export"):
+        "Writes the Hills cloud's dots to data/drawings/ for the website.",
+    ("Maintenance Run",
+     "Exact Rows Report"):
+        "Lists every place an exact row of constants_new.py is printed.",
+    ("Maintenance Run",
+     "Ledger Index"):
+        "Regenerates the ledger's index from its detail blocks.",
+    ("Maintenance Run",
+     "Module Atlas"):
+        "Regenerates MODULE_ATLAS.md and MODULE_INDEX.md from each module's docstring.",
+    ("Maintenance Run",
+     "Objects Export"):
+        "Writes the objects export the website reads, from celestial_objects.py.",
+    ("Maintenance Run",
+     "Skill Manifest"):
+        "Regenerates the protocol's skill table from skills/*/SKILL.md.",
+    ("Maintenance Run",
+     "Builder Marker Join"):
+        "Checks the worksheet request builder joins a continued citation line.",
+    ("Maintenance Run",
+     "Citation Inheritance"):
+        "Checks the scanner's rule that a block's citation covers its strings.",
+    ("Maintenance Run",
+     "Constants Change"):
+        "Reports what moved in constants_new.py, and whether its source moved too.",
+    ("Maintenance Run",
+     "Constants Export Check"):
+        "Checks the constants export matches constants_new.py, row by row.",
+    ("Maintenance Run",
+     "Constants Relations"):
+        "Checks how constants relate: derivations, orderings, completeness.",
+    ("Maintenance Run",
+     "Cross-Check Annotations"):
+        "Checks the grammar and scoring of cross-check annotations.",
+    ("Maintenance Run",
+     "Dashboard Parity"):
+        "Checks run steps against buttons by name, and every card's short line.",
+    ("Maintenance Run",
+     "Derived Figures"):
+        "Checks a derived constant claims no more figures than its inputs.",
+    ("Maintenance Run",
+     "Dimensions"):
+        "Checks each derived constant's unit follows from its arithmetic.",
+    ("Maintenance Run",
+     "Domain Split"):
+        "Checks the scanner's Tier-1 total prints with its split by domain.",
+    ("Maintenance Run",
+     "Drawings Export Check"):
+        "Checks each stored drawing is exactly what its rows give today.",
+    ("Maintenance Run",
+     "Earth Pole of Date"):
+        "Checks Earth's tilt of date offline, against ERFA, with its fallback.",
+    ("Maintenance Run",
+     "Exact Rows by the Count"):
+        "Fails where a printed exact row gives no print count.",
+    ("Maintenance Run",
+     "Extractor Pins"):
+        "Checks the citation filter still keeps and drops the same numbers.",
+    ("Maintenance Run",
+     "Hills Cloud Sampler"):
+        "Checks the Hills cloud's frame, Fig. 3 reading and tilt, faults planted.",
+    ("Maintenance Run",
+     "Maintenance Report"):
+        "Checks the run's summary names each file whose Tier-1 count rose.",
+    ("Maintenance Run",
+     "Objects Export Check"):
+        "Checks the objects export matches celestial_objects.py, entry by entry.",
+    ("Maintenance Run",
+     "Orbit Cache"):
+        "Tests orbit cache loading, saving, conversion and repair.",
+    ("Maintenance Run",
+     "Orbit Markers"):
+        "Checks each orbit's centre, its marker dates, and its hover digits.",
+    ("Maintenance Run",
+     "Position Digits"):
+        "Checks the body hover prints only the digits JPL's errors earn.",
+    ("Maintenance Run",
+     "Provenance Scanner"):
+        "Scans for numbers that need a source; writes PROVENANCE_AUDIT.md.",
+    ("Maintenance Run",
+     "Reset Completeness"):
+        "Checks the orrery's Reset button returns every control to its default.",
+    ("Maintenance Run",
+     "Row Shape"):
+        "Checks each constants_new.py value fits on its assignment's own line.",
+    ("Maintenance Run",
+     "Scanner Recognition 1d/1e"):
+        "Checks the scanner accepts a real citation and refuses a fake one.",
+    ("Maintenance Run",
+     "Scanner Row Run"):
+        "Checks the scanner reads each row's citation from its own comments.",
+    ("Maintenance Run",
+     "Skill Headers"):
+        "Checks every skill header reads the way the Settings uploader reads it.",
+    ("Maintenance Run",
+     "Status Lines"):
+        "Checks the Status line grammar on every constants_new.py row.",
+    ("Maintenance Run",
+     "Worksheet Checker"):
+        "Reports whether each worksheet records what its cross-check annotation claims.",
+    ("Maintenance Run",
+     "Worksheet Checker Tests"):
+        "Checks each layer of the worksheet checker can actually fail.",
+    ("Maintenance Run",
+     "Worksheet Key Round Trip"):
+        "Checks every annotated site's key resolves back to that site.",
+    ("Tools and Caches",
+     "Add Module Docstrings"):
+        "Adds the Role and Domain tags to module docstrings; touches no code.",
+    ("Tools and Caches",
+     "Animation HTML Tool"):
+        "Measures a saved animation's traces, frames and payload size.",
+    ("Tools and Caches",
+     "Climate Cache Manager"):
+        "Updates the climate data caches safely, with validation and rollback.",
+    ("Tools and Caches",
+     "Create Ephemeris Database"):
+        "Rebuilds satellite_ephemerides.json from idealized_orbits.py and Horizons files.",
+    ("Tools and Caches",
+     "Dependency Trace"):
+        "Shows which modules a module uses, and which use it.",
+    ("Tools and Caches",
+     "Earth Pole Live Check"):
+        "Asks Horizons for Earth's pole on five dates and checks the tilt.",
+    ("Tools and Caches",
+     "Export Orbit Cache"):
+        "Writes web-servable orbit files from the local orbit caches.",
+    ("Tools and Caches",
+     "Osculating Cache Manager"):
+        "Loads and reports on the osculating orbital elements cache.",
+    ("Tools and Caches",
+     "SIMBAD Query Manager"):
+        "Tests SIMBAD queries on a few stars, with rate limits and retries.",
+    ("Tools and Caches",
+     "Verify Orbit Cache"):
+        "Backs up, validates and repairs orbit_paths.json.",
+    ("Tools and Caches",
+     "VOT Cache Manager"):
+        "Checks the VizieR VOT cache files are intact.",
+    ("Tools and Caches",
+     "Worksheet Request Builder"):
+        "Writes the cross-check request sent out to another model.",
+}
+
+
+def card_line(group_name, label):
+    """The short line for a card, or "" when it has none yet."""
+    return CARD_LINES.get((group_name, label), "")
+
+
+def entry_indented(entry):
+    """True for a card the runner above it already runs."""
+    return (not isinstance(entry, str) and len(entry) > 6
+            and bool(entry[6]))
+
+
+def filter_entries(entries, keep):
+    """The entries for which keep() is true, with their headings.
+
+    A heading is kept when a kept card falls under it: its cards
+    run to the next heading or to the first card that is not
+    indented. So a search shows a match under its own heading,
+    and a heading with no match is not drawn (L-440).
+    """
+    out = []
+    pending = None
+    for entry in entries:
+        if isinstance(entry, str):
+            pending = entry
+            continue
+        if not entry_indented(entry):
+            pending = None
+        if keep(entry):
+            if pending is not None:
+                out.append(pending)
+                pending = None
+            out.append(entry)
+    return out
+
 
 # ============================================================
 # LAUNCH TARGET LABELS AND HOVER TEXT
@@ -1973,9 +2408,15 @@ class PalomasOrreryDashboardFrame(ctk.CTkFrame):
         return sum(1 for entries in LAUNCH_GROUPS.values()
                    for entry in entries if not isinstance(entry, str))
 
-    def _entry_matches(self, entry, needle):
-        """Name or description contains `needle`, case-insensitively."""
-        return needle in entry[0].lower() or needle in entry[2].lower()
+    def _entry_matches(self, group_name, entry, needle):
+        """Name, short line or description contains `needle`, any case.
+
+        The short line is searched as well as the paragraph (L-440): it
+        is the text a card shows, so a word read on a card finds it.
+        """
+        return (needle in entry[0].lower()
+                or needle in card_line(group_name, entry[0]).lower()
+                or needle in entry[2].lower())
 
     def _render_launch(self, query):
         """Draw the groups, filtered by `query`.
@@ -1984,7 +2425,9 @@ class PalomasOrreryDashboardFrame(ctk.CTkFrame):
         non-empty one draws only the groups that still have a match, and
         only the matching buttons inside them. A group with nothing left
         is not drawn at all, so the headings that remain are themselves
-        the answer to "where does this live".
+        the answer to "where does this live". A heading inside a group
+        is kept when a card under it matches, so a match is also shown
+        under its own heading (L-440).
         """
         for child in self._launch_container.winfo_children():
             child.destroy()
@@ -2005,9 +2448,9 @@ class PalomasOrreryDashboardFrame(ctk.CTkFrame):
                 # category. (Found by testing, 2026-09-19.)
                 drawn = list(entries)
             else:
-                drawn = [e for e in entries
-                         if not isinstance(e, str)
-                         and self._entry_matches(e, needle)]
+                drawn = filter_entries(
+                    entries,
+                    lambda e, g=group_name: self._entry_matches(g, e, needle))
             if not drawn:
                 continue
             shown += sum(1 for e in drawn if not isinstance(e, str))
@@ -2059,6 +2502,11 @@ class PalomasOrreryDashboardFrame(ctk.CTkFrame):
                                    fg_color="transparent")
         cards_frame.pack(fill="x", padx=20, pady=(0, 4))
 
+        # The frame holding the cards under the current heading, or None
+        # outside any heading. A heading's cards run to the next heading
+        # or to the first card that is not indented (the live runner at
+        # the foot of the website group), whichever comes first.
+        section = None
         for i, entry in enumerate(entries):
             # A bare string is a HEADING inside the group, not a
             # card. The maintenance runner prints GENERATORS then
@@ -2068,32 +2516,59 @@ class PalomasOrreryDashboardFrame(ctk.CTkFrame):
             # two labels a sorted run of twenty buttons gives no
             # clue where one kind stops and the other starts.
             if isinstance(entry, str):
-                self._build_indent_heading(cards_frame, entry)
+                section = self._build_indent_heading(cards_frame, entry)
                 continue
             name, script, desc = entry[0], entry[1], entry[2]
             base_dir = entry[3] if len(entry) > 3 else SCRIPT_DIR
             interactive = entry[4] if len(entry) > 4 else False
             args = entry[5] if len(entry) > 5 else None
             indent = entry[6] if len(entry) > 6 else False
-            self._build_launch_card(cards_frame, name, script, desc,
+            if not indent:
+                section = None
+            parent = section if section is not None else cards_frame
+            self._build_launch_card(parent, group_name, name, script, desc,
                                     base_dir, interactive, args, i,
                                     indent)
 
     def _build_indent_heading(self, parent, text):
-        """A dim heading inside the indented maintenance-run group.
+        """A heading inside a group, which folds the cards under it.
 
-        Drawn for a bare string in a LAUNCH_GROUPS list. Not a card and
-        not clickable: it names which half of the runner the buttons
-        below it belong to.
+        Drawn for a bare string in a LAUNCH_GROUPS list. Not a card: it
+        names which part of the group the buttons below it belong to,
+        and clicking it hides or shows them (Tony, 2026-10-13, L-440).
+        "-" in front means open, "+" means folded. Every heading starts
+        OPEN when the dashboard launches, so what a runner runs stays
+        visible, which is Tony's ruling of 2026-08-12; folding is for
+        the moment, and is not remembered. Returns the frame the cards
+        under it are drawn into.
         """
-        ctk.CTkLabel(
-            parent, text=text,
-            font=FONT_DESC, text_color=COLOR_TEXT_DIM, anchor="w"
-        ).pack(anchor="w", padx=(28, 0), pady=(10, 2))
+        state = {"open": True}
+        heading = ctk.CTkButton(
+            parent, text="-  " + text, anchor="w",
+            font=FONT_DESC, text_color=COLOR_TEXT_DIM,
+            fg_color="transparent", hover_color=COLOR_SURFACE_HOVER,
+            height=24, corner_radius=6
+        )
+        heading.pack(anchor="w", padx=(22, 0), pady=(10, 2))
+        section = ctk.CTkFrame(parent, fg_color="transparent")
+        section.pack(fill="x")
 
-    def _build_launch_card(self, parent, name, script, desc, base_dir,
-                           interactive, args, index, indent=False):
-        """Individual launch card with button and description.
+        def toggle():
+            if state["open"]:
+                section.pack_forget()
+                heading.configure(text="+  " + text)
+            else:
+                section.pack(fill="x", after=heading)
+                heading.configure(text="-  " + text)
+            state["open"] = not state["open"]
+
+        heading.configure(command=toggle)
+        return section
+
+    def _build_launch_card(self, parent, group_name, name, script, desc,
+                           base_dir, interactive, args, index,
+                           indent=False):
+        """Individual launch card: name, script, short line, paragraph.
 
         `indent` marks a tool that the maintenance runner already covers.
         Indenting rather than removing was Tony's ruling of 2026-08-12:
@@ -2101,31 +2576,26 @@ class PalomasOrreryDashboardFrame(ctk.CTkFrame):
         the automation's contents remain known instead of disappearing
         behind one button. The runner sits directly above its indented
         group.
+
+        The card (L-440, Tony's choice of option B, 2026-10-13): the name;
+        the repository and script it runs, in small type, so the mapping
+        is visible without hovering; the short line from CARD_LINES; and
+        the paragraph, opened in place by "+ more". A card with no short
+        line yet shows its paragraph, as every card did before, so
+        nothing is hidden, and Dashboard Parity names the card. Text
+        wraps to the column's width, and the Launch button is packed
+        first, so a narrow window never pushes the button off the card.
         """
         card = ctk.CTkFrame(parent, fg_color=COLOR_SURFACE,
                             corner_radius=10)
-        card.pack(fill="x", pady=4, ipady=6,
+        card.pack(fill="x", pady=4, ipady=4,
                   padx=(28, 0) if indent else 0)
 
         inner = ctk.CTkFrame(card, fg_color="transparent")
-        inner.pack(fill="x", padx=16, pady=8)
+        inner.pack(fill="x", padx=16, pady=6)
 
-        # Left side: name + description
-        text_frame = ctk.CTkFrame(inner, fg_color="transparent")
-        text_frame.pack(side="left", fill="x", expand=True)
-
-        ctk.CTkLabel(
-            text_frame, text=name,
-            font=FONT_BUTTON, text_color=COLOR_TEXT, anchor="w"
-        ).pack(anchor="w")
-
-        ctk.CTkLabel(
-            text_frame, text=desc,
-            font=FONT_DESC, text_color=COLOR_TEXT_DIM, anchor="w",
-            wraplength=600, justify="left"
-        ).pack(anchor="w")
-
-        # Right side: launch button
+        # Right side first: the launch button keeps its place whatever
+        # the window's width.
         script_path = os.path.join(base_dir, script)
         exists = os.path.exists(script_path)
 
@@ -2147,10 +2617,82 @@ class PalomasOrreryDashboardFrame(ctk.CTkFrame):
         # Name the repo and file this button runs. A missing script shows
         # the full path instead, so "Not Found" says where it looked.
         if exists:
-            hover = launch_target_label(script, base_dir, args)
+            target = launch_target_label(script, base_dir, args)
         else:
-            hover = "Not found: %s" % script_path
-        Tooltip(btn, hover)
+            target = "Not found: %s" % script_path
+        Tooltip(btn, target)
+
+        # Left side: name, script, short line, paragraph.
+        text_frame = ctk.CTkFrame(inner, fg_color="transparent")
+        text_frame.pack(side="left", fill="x", expand=True)
+
+        title_row = ctk.CTkFrame(text_frame, fg_color="transparent")
+        title_row.pack(anchor="w", fill="x")
+        ctk.CTkLabel(
+            title_row, text=name,
+            font=FONT_BUTTON, text_color=COLOR_TEXT, anchor="w"
+        ).pack(side="left")
+
+        ctk.CTkLabel(
+            text_frame, text=target,
+            font=FONT_SCRIPT, text_color=COLOR_TEXT_DIM, anchor="w",
+            justify="left"
+        ).pack(anchor="w")
+
+        wrapped = []
+        short = card_line(group_name, name)
+        para = ctk.CTkLabel(
+            text_frame, text=desc,
+            font=FONT_DESC, text_color=COLOR_TEXT_DIM, anchor="w",
+            wraplength=600, justify="left"
+        )
+        wrapped.append(para)
+        if short:
+            line = ctk.CTkLabel(
+                text_frame, text=short,
+                font=FONT_DESC, text_color=COLOR_TEXT, anchor="w",
+                wraplength=600, justify="left"
+            )
+            line.pack(anchor="w")
+            wrapped.insert(0, line)
+            state = {"open": False}
+            more = ctk.CTkButton(
+                title_row, text="+ more", width=60, height=22,
+                font=FONT_DESC, fg_color="transparent",
+                hover_color=COLOR_BUTTON_HOVER, text_color=COLOR_LINK
+            )
+
+            def toggle(p=para, s=state, m=more):
+                if s["open"]:
+                    p.pack_forget()
+                    m.configure(text="+ more")
+                else:
+                    p.pack(anchor="w", pady=(4, 0))
+                    m.configure(text="- less")
+                s["open"] = not s["open"]
+
+            more.configure(command=toggle)
+            more.pack(side="left", padx=(10, 0))
+        else:
+            para.pack(anchor="w")
+
+        last = {"width": None}
+
+        def rewrap(event, labels=wrapped, last=last):
+            # CTk scales a wraplength by the display's scaling, while the
+            # event gives real pixels, so divide the scaling back out.
+            if event.width == last["width"]:
+                return
+            last["width"] = event.width
+            for lab in labels:
+                try:
+                    scale = lab._get_widget_scaling()
+                except Exception:
+                    scale = 1.0
+                lab.configure(wraplength=max(200, int((event.width - 8)
+                                                      / scale)))
+
+        text_frame.bind("<Configure>", rewrap, add="+")
 
     def _launch(self, script, base_dir=None, interactive=False, args=None):
         """Launch a Python script as a subprocess.

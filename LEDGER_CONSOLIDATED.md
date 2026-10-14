@@ -402,6 +402,10 @@ rose), built on ab96681.
 Module updated: October 13, 2026 with Anthropic's Claude Opus 5.5
 (L-431: build 3's brief carries both element sets for a barycentre
 body), built on 084d0a6.
+Module updated: October 13, 2026 with Anthropic's Claude Opus 5.5
+(L-440 opened and built: the dashboard's cards, headings and names,
+and the Dashboard parity check; L-324's parity row is built), built on
+db63721d.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -619,7 +623,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*242 live items; 226 need attention (`!`); 167 RICE-scored; 190 closed (section C + O.Done/W.Done); 5 retired (never reused): L-059, L-081-084. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*243 live items; 227 need attention (`!`); 167 RICE-scored; 190 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -775,6 +779,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-433 | The road after the Sun and Earth rooms, in Tony's words (planning) | OPEN | -- | 2026-10-11 |
 | ! | L-434 | Stored drawings for the other dot-cloud shells (orrery + gallery) | OPEN | -- | 2026-10-11 |
 | ! | L-435 | Standing rulings that are method, held only on Tony's page (skills, records) | OPEN | -- | 2026-10-12 |
+| ! | L-440 | The dashboard's labels, short lines and headings, and the parity check (dashboard, both repos) | OPEN | -- | 2026-10-13 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1141,6 +1146,55 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ## DETAIL / RECORD
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
+
+#### [L-440] The dashboard's labels, short lines and headings, and the parity check (dashboard, both repos)
+<!-- L:440 status:OPEN upd:2026-10-13 section:A flag: rice: -->
+- **Tony's request, 2026-10-12**, after confirming every run step has a
+  button: "Could you check for labeling that is easily recognizable
+  based on the script name and functionality? And pithy descriptions?
+  And easy way to find besides search?" Brief:
+  `documentation/HANDOFF_dashboard_labels_brief_20261012.md`, with its
+  audit `documentation/AUDIT_dashboard_labels_20261012.md`.
+- **Tony's rulings in the build session, 2026-10-13** (his words in this
+  session's chat; the handoff quotes each):
+  - "Test" comes off the checker labels (ruling 5 of 2026-10-12, before
+    the session).
+  - Where the paragraph goes: option B, "+ more" opens it inside the
+    card ("B. Confirmed."), after seeing both at desktop and 9:16 width.
+  - The website checks group gets six headings, in his order: tools you
+    run by hand, the module atlas, JPL's check, the served cache, from
+    the orrery, the rooms. His logic: "manual use first tools, then
+    generated reports, then checks in pipeline order: jpl checks, then
+    served data, then gallery renders." Headings fold, keeping the
+    indentation ("i would also make these groups collapsible but keeping
+    the indentation method"); all start open.
+  - The "when" index: "record for later." If built, it is generated from
+    a tag on each entry, never hand-written.
+  - Only Paloma's Orrery changes how it launches: its own console
+    window, as the maintenance run has ("what i wanted was for the
+    orrery to also open a console window instead of just the dashboard
+    status"). Every other button stays as it was.
+- **Built:** `patch_L440_1_dashboard_labels_20261013.py`, on orrery
+  db63721d. Each card shows its name, its repository and script in small
+  type, and one line of at most twelve words from CARD_LINES; the
+  paragraph opens under "+ more". Text wraps to the window's width, so
+  the Launch button stays on the card in a narrow window. Buttons under a
+  runner take the name the run prints; the orrery's generators and
+  checkers re-sorted alphabetically under the new names. New checker
+  `test_dashboard_parity.py`, the run's "Dashboard parity" row and the
+  "Dashboard Parity" button: every step of both runs and the Daily Run
+  against the buttons, by name and script, both directions; every
+  script on disk; every card's short line; nine planted faults, each
+  caught by its own kind of finding. 28 gating checkers.
+- **Not renamed, recorded:** the run rows themselves keep their names
+  (the printed script line now tells the modes of one script apart),
+  and the standalone tools outside the runs keep theirs.
+**Gap:** Tony's look at the dashboard (the handoff, section 6). Later
+slice, recorded: the "when" index, from per-entry tags.
+**Ref:** `documentation/HANDOFF_L440_dashboard_labels_20261013.md`;
+`palomas_orrery_dashboard.py`; `test_dashboard_parity.py`;
+L-324 (its parity row, now built); L-416; L-341; L-281.
+
 
 
 #### [L-410] Fuzzy boundaries for edges known only as ranges, the outer corona first (orrery + gallery, the Sun's slice)
@@ -10307,6 +10361,10 @@ indented buttons on the dashboard, exactly TWO absent: Status lines and
 Row shape. Both added. The lists agree at this SHA and nothing enforces
 that they keep agreeing; that parity check is one row of backlog by
 class, not built here. [verified @a391262e]
+**Note (2026-10-13) -- the parity check is built, by L-440.**
+`test_dashboard_parity.py`, the maintenance run's "Dashboard parity"
+row, compares every step of both runs and the Daily Run with the
+dashboard's buttons, by name and script, in both directions.
 **Note (2026-09-12) -- the dashboard group is reordered, Tony's
 instruction.** The indented group is GENERATORS then CHECKERS, each
 alphabetical, mirroring the runner's own two sections; the standalone

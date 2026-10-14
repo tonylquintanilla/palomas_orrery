@@ -1,24 +1,22 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 13, 2026, night: the maintenance run names risen files.
-- Written at orrery ab96681 and gallery 924977a3.
+Last updated: October 13, 2026, evening: the dashboard's cards, headings and names.
+- Written at orrery db63721d and gallery 924977a3.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Orbital periods, build 2 (the drawn orbits and markers): accepted
->   at your look and closed; all four fixes from your plot are in.
-> - The maintenance run's summary names any file whose count of
->   problems to fix now (Tier-1) rose since the last run.
+> - The dashboard: one short line per card, "+ more" opens the rest;
+>   the website checks under your six headings, which fold; the orrery
+>   opens its own console. A new check, Dashboard Parity.
 >
 > **Do next:** *L-431's website build, from its brief (in Where the
 > details are), and the briefed sessions beside it.*
 >
 > **Needs you now:**
-> - *Run patch_L269_5 and the maintenance run; delete the old
->   patch_L269_1; move the new one and patch_L431_9 into documentation/;
->   push.*
+> - *Run patch_L440_1, then the maintenance run (Dashboard parity
+>   among the passes); open the dashboard and look; then push.*
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
@@ -29,8 +27,8 @@ Last updated: October 13, 2026, night: the maintenance run names risen files.
   5.   [NOW]   *L-401 (the distance digits): builds 1 and 2 accepted;
                build 3 later. Then Earth's remaining items.*
                << moved this session
-  5b.  [NOW]   The scaffolding checks (L-424, L-425, L-426, the
-               dashboard) clear beside the slices, not after.
+  5b.  [NOW]   The scaffolding checks clear beside the slices: the
+               dashboard (L-440) built; L-424, L-425, L-426 to come.
   6.   [next]  The typed facts: the inner Oort cloud is drawn on the
                website too. Left: the check.
   6a.  [NOW]   *Orbital periods from JPL: builds 1 and 2 accepted and
@@ -53,7 +51,7 @@ Last updated: October 13, 2026, night: the maintenance run names risen files.
  15.   [goal]  The website does what the desktop orrery does, with a date
                to choose, within the range the data covers.
 
-## Settled
+## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings. A line leaves after a few weeks, once it is habit.
 - Digits by the error JPL states; whole km and a plain sentence where it
@@ -70,6 +68,8 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
   citation location checks: all three levels now. (Oct 12)
 - The scattered disk: yes, in the Solar System room, after fuzzy
   boundaries. A dashboard button is named what the run prints. (Oct 12)
+- The dashboard: a short line per card, the rest under "+ more"; the
+  website checks in your six headings; only the orrery opens a console. (Oct 13)
 - Scattered dots are placed by the orrery and stored for the website;
   a shape that is a formula is worked out on each side. (Oct 11)
 - Orbital periods: JPL's own, every body, orrery and website; the
@@ -124,8 +124,8 @@ Not urgent, in your order:
 - Your notes of Oct 12: `WHERE_WE_ARE_10-12-26_2212_run_record.md`
 - L-421 (typed facts, inner Oort): `MANIFEST_L421_typed_facts_20261006.md`, `HANDOFF_L421_*`
 - L-436 (away from the machine): `DESIGN_L436_orrery_away_from_the_machine_20261013.md`
-- Your six rulings of Oct 12: `DESIGN_rulings_20261012.md`; the briefs for the
-  dashboard's labels, L-425, L-424 with L-426 (`HANDOFF_..._brief_20261012.md`)
+- Your six rulings of Oct 12: `DESIGN_rulings_20261012.md`; briefs for L-425,
+  L-424 with L-426; the dashboard: `HANDOFF_L440_dashboard_labels_20261013.md`
 - The reasoning behind the order: `MASTER_PLAN_INTERACTIVE_GALLERY.md`
 
 --- Your run record below this line. No patch edits it; the length cap
