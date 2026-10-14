@@ -3,12 +3,15 @@ JPL), build 3, the orrery's half, with L-395's move: the objects export
 carries each body's period, and the Horizons check moves into the
 orrery's maintenance run and checks the period too.
 
-Built on orrery db63721d258004b855c1259371d8adf15bf7647c at
-https://github.com/tonylquintanilla/palomas_orrery ("L431 website brief
-fix"). Its partner, patch_L431_12_website_gallery_20261014.py, is built
-on gallery 924977a353b6c3e7d50e360e840fe176685f97c9 at
-https://github.com/tonylquintanilla/tonyquintanilla.github.io and runs
-SECOND, after this one is pushed.
+Built on orrery fe000597d5282a93461d31065997254d5bf981ff at
+https://github.com/tonylquintanilla/palomas_orrery ("L440 dashboard").
+Rebuilt there on October 14: the first copy was built on db63721d and
+refused once L-440's dashboard had landed. Its partners run after it:
+patch_L431_12_website_gallery_20261014.py, built on gallery
+4b2b660ad779a971b496536f6203f93b04aa7a8d at
+https://github.com/tonylquintanilla/tonyquintanilla.github.io ("daily
+run 10-14-26"), once this one is pushed; then
+patch_L431_13_dashboard_buttons_20261014.py, back in the orrery.
 Tony's local folders: orrery
 C:\\Users\\tonyq\\OneDrive\\Desktop\\python_work\\palomas_orrery_for_github\\;
 gallery C:\\Users\\tonyq\\OneDrive\\Desktop\\python_work\\tonyquintanilla.github.io\\.
@@ -41,7 +44,6 @@ WHAT IT CHANGES
     palomas_orrery_dashboard.py: the three new rows get their buttons;
       the website's Horizons Check and its suite leave with their scripts,
       and the Daily Run's descriptions say three steps.
-    module_atlas.py: the three new modules' roles.
     .gitignore: data/horizons_check_last_run.json, which changes every run.
     skills: horizons-orbital-mechanics 1.6, gallery-cache-builder 1.9,
       interactive-exhibit 1.15; each skill's oldest entry to
@@ -918,13 +920,13 @@ EDITS = [
          'Runs the GENERATORS, then the CHECKERS, and prints one summary at\n'
          'the end. Nothing stops on a failure -- every tool runs every time, so a\n'
      )),
-    ('orrery_maintenance_run.py', 'line 209: Module updated: October 14, 2026 with Anthrop',
+    ('orrery_maintenance_run.py', 'line 215: Module updated: October 14, 2026 with Anthrop',
      (
-         "table, and the paragraph's number had fallen behind.)\n"
+         '28 gating checkers.)\n'
          '"""\n'
      ),
      (
-         "table, and the paragraph's number had fallen behind.)\n"
+         '28 gating checkers.)\n'
          "Module updated: October 14, 2026 with Anthropic's Claude Opus 5.5 (L-431\n"
          "build 3, with L-395's move: GENERATORS gains Horizons check,\n"
          "horizons_check.py, moved here from the website's Daily Run, before\n"
@@ -939,7 +941,7 @@ EDITS = [
          'gating gave on 2026-10-13.)\n'
          '"""\n'
      )),
-    ('orrery_maintenance_run.py', 'line 234: # L-395 and L-431 build 3 (2026-10-14): JPL H',
+    ('orrery_maintenance_run.py', 'line 240: # L-395 and L-431 build 3 (2026-10-14): JPL H',
      (
          "     ['data/constants_export.json']),\n"
          "    # L-395 (2026-10-01): the orrery's object list is the one definition\n"
@@ -961,7 +963,7 @@ EDITS = [
          "     'HORIZONS CHECK:'),\n"
          "    # L-395 (2026-10-01): the orrery's object list is the one definition\n"
      )),
-    ('orrery_maintenance_run.py', 'line 237: # constants export.',
+    ('orrery_maintenance_run.py', 'line 243: # constants export.',
      (
          '    # are exported, and the gallery pulls the file as it pulls the\n'
          '    # constants export.\n'
@@ -973,7 +975,7 @@ EDITS = [
          '    # its confirmation dates.\n'
          "    ('Objects export', ['export_objects.py'],\n"
      )),
-    ('orrery_maintenance_run.py', "line 291: # L-395, L-431 build 3: what today's Horizons",
+    ('orrery_maintenance_run.py', "line 297: # L-395, L-431 build 3: what today's Horizons",
      (
          "     'OBJECTS EXPORT:'),\n"
          "    # Rule 7's exact row, built: every printed exact row states a print\n"
@@ -994,7 +996,7 @@ EDITS = [
          "     'HORIZONS CHECK SUITE:'),\n"
          "    # Rule 7's exact row, built: every printed exact row states a print\n"
      )),
-    ('orrery_maintenance_run.py', 'line 753: if gen_hint and rc == 0:',
+    ('orrery_maintenance_run.py', 'line 764: if gen_hint and rc == 0:',
      (
          '                    % len(outputs))\n'
          '        if gen_hint and rc == 0:\n'
@@ -1009,123 +1011,24 @@ EDITS = [
          '        if gen_hint and rc is not None:\n'
          '            verdict = line_containing(output, gen_hint)\n'
      )),
-    ('palomas_orrery_dashboard.py', "line 206: October 14, 2026 with Anthropic's Claude Opus",
+    ('palomas_orrery_dashboard.py', "line 237: October 14, 2026 with Anthropic's Claude Opus",
      (
-         'the labels lose "Test".\n'
+         'in a description is cut, only moved behind "+ more".\n'
          '"""\n'
      ),
      (
-         'the labels lose "Test".\n'
+         'in a description is cut, only moved behind "+ more".\n'
          "October 14, 2026 with Anthropic's Claude Opus 5.5 (L-431 build 3, with\n"
-         "L-395's move): the Horizons check moved from the website's Daily Run\n"
-         "into the orrery's maintenance run, and its buttons follow it, each named\n"
-         "what the run prints. Horizons Check under the orrery's generators, and\n"
-         'Horizons Check Suite and Horizons Confirmations under its checkers, in\n'
-         'alphabetical place; the Daily Run group loses Horizons Check, and the\n'
-         "Daily Run's description and its third step's say so; the gallery's\n"
-         "Horizons Check Suite goes with its script, and the gallery's own\n"
-         'Horizons Confirmations stays, saying it now reads the dates from the\n'
-         'pulled export (every check keeps its button, Tony, 2026-10-10).\n'
+         "L-395's move): the Horizons check moved from the website's Daily Run into\n"
+         "the orrery's maintenance run, and its buttons follow it, each named what\n"
+         "the run prints: Horizons Check under the orrery's generators, Horizons\n"
+         'Check Suite and Horizons Confirmations under its checkers, each in\n'
+         "alphabetical place, with their short lines. The website's own Horizons\n"
+         "buttons leave in a second patch, patch_L431_13, run after the website's\n"
+         'patch has removed their scripts, so Dashboard Parity holds at every step.\n'
          '"""\n'
      )),
-    ('palomas_orrery_dashboard.py', 'line 313: "or replies if you like. Then the Horizons Ch',
-     (
-         '         "Updater: approve or decline each new message, and write entries "\n'
-         '         "or replies if you like. Then the Horizons Check: JPL confirms "\n'
-         '         "the website\'s objects that are due (L-395). Then the Gallery "\n'
-         '         "Cache Builder, with no OneDrive pause since 2026-10-10 (L-216: "\n'
-     ),
-     (
-         '         "Updater: approve or decline each new message, and write entries "\n'
-         '         "or replies if you like. Then the Gallery "\n'
-         '         "Cache Builder, with no OneDrive pause since 2026-10-10 (L-216: "\n'
-     )),
-    ('palomas_orrery_dashboard.py', 'line 343: GALLERY_REPO_DIR,',
-     (
-         '         "tools/guestbook_local.json, which git ignores.",\n'
-         '         GALLERY_REPO_DIR,\n'
-         '         True,\n'
-         '         None,\n'
-         '         True),\n'
-         '        ("Horizons Check",\n'
-         '         os.path.join("tools", "horizons_check.py"),\n'
-         '         "The Daily Run\'s second step (L-395). Asks JPL Horizons whether "\n'
-         '         "each object the website takes from the orrery\'s list is still "\n'
-         '         "the object the list says -- the same id, the same index, JPL\'s "\n'
-         '         "exact name -- for the entries that are due: each every 30 days, "\n'
-         '         "and at once after its entry changes. A pinned comet record "\n'
-         '         "(Halley, Encke) must still be JPL\'s newest. One line per entry; "\n'
-         '         "for each disagreement the list\'s value, JPL\'s value and the "\n'
-         '         "query to paste into a browser. Records each confirmation in "\n'
-         '         "data/horizons_confirmations.json and never edits the list. "\n'
-         '         "Needs the internet; if JPL cannot be reached it says so and "\n'
-         '         "asks nothing more. Runs from the gallery repo ROOT.",\n'
-         '         GALLERY_REPO_DIR,\n'
-     ),
-     (
-         '         "tools/guestbook_local.json, which git ignores.",\n'
-         '         GALLERY_REPO_DIR,\n'
-     )),
-    ('palomas_orrery_dashboard.py', 'line 395: "The Daily Run\'s fourth step: the same button',
-     (
-         '         "gallery_maintenance_run.py",\n'
-         '         "The Daily Run\'s fourth step: the same button as Gallery "\n'
-         '         "Maintenance Run -- offline under Gallery -- checks and data, "\n'
-     ),
-     (
-         '         "gallery_maintenance_run.py",\n'
-         '         "The Daily Run\'s third step: the same button as Gallery "\n'
-         '         "Maintenance Run -- offline under Gallery -- checks and data, "\n'
-     )),
-    ('palomas_orrery_dashboard.py', 'line 415: "the config mirror check, the Horizons check ',
-     (
-         '        "the mirror suite, the store writer and store editor suites, "\n'
-         '        "the config mirror check, the Horizons check suite, Horizons "\n'
-         '        "confirmations, the pointer join, cache in step, the drawings "\n'
-     ),
-     (
-         '        "the mirror suite, the store writer and store editor suites, "\n'
-         '        "the config mirror check, Horizons "\n'
-         '        "confirmations, the pointer join, cache in step, the drawings "\n'
-     )),
-    ('palomas_orrery_dashboard.py', 'line 666: ("Horizons Check Suite",',
-     (
-         '        True),\n'
-         '        ("Horizons Check Suite",\n'
-         '        os.path.join("tools", "test_horizons_check.py"),\n'
-         '        "The Horizons check on JPL\'s recorded answers, with no network "\n'
-         '        "(documentation/horizons_answers_L395.json, each answer with its "\n'
-         '        "source): every served entry agrees, and each planted mistake -- a "\n'
-         '        "wrong id, the wrong index, a name off by one letter, a stale pin, "\n'
-         '        "a record number JPL gave to another comet, JPL unreachable -- is "\n'
-         '        "caught by name (L-395). GATES the gallery runner.",\n'
-         '        GALLERY_REPO_DIR,\n'
-         '        True,\n'
-         '        None,\n'
-         '        True),\n'
-         '        ("Horizons Confirmations",\n'
-         '        os.path.join("tools", "check_horizons_confirmations.py"),\n'
-         '        "Reads data/horizons_confirmations.json offline and fails on any "\n'
-         '        "served object never confirmed against JPL, confirmed 30 or more "\n'
-         '        "days ago, or changed since it was confirmed -- so a Horizons "\n'
-         '        "Check that stopped running shows (L-395). GATES the gallery "\n'
-         '        "runner.",\n'
-         '        GALLERY_REPO_DIR,\n'
-     ),
-     (
-         '        True),\n'
-         '        ("Horizons Confirmations",\n'
-         '        os.path.join("tools", "check_horizons_confirmations.py"),\n'
-         '        "The website\'s own check of JPL\'s confirmations, offline: it reads "\n'
-         '        "the dates in the pulled data/objects_export.json and fails on any "\n'
-         '        "served object never confirmed against JPL, confirmed 30 or more "\n'
-         '        "days ago, or changed since -- and on a fetched period the same "\n'
-         '        "way -- so the website shows it when the orrery\'s Horizons Check "\n'
-         '        "has not run (L-395; the check itself moved into the orrery\'s "\n'
-         '        "Maintenance Run on 2026-10-14, L-431). GATES the gallery runner.",\n'
-         '        GALLERY_REPO_DIR,\n'
-     )),
-    ('palomas_orrery_dashboard.py', 'line 961: "and says which generated files actually move',
+    ('palomas_orrery_dashboard.py', 'line 1009: "and says which generated files actually move',
      (
          '         "reports and continues rather than stopping at the first failure, "\n'
          '         "and says which generated files actually moved. About ten seconds. "\n'
@@ -1138,56 +1041,37 @@ EDITS = [
          '         "internet and a couple of minutes more. "\n'
          '         "Run after an edit session and before a push. Everything indented "\n'
      )),
-    ('palomas_orrery_dashboard.py', 'line 1031: ("Horizons Check",',
+    ('palomas_orrery_dashboard.py', 'line 1075: SCRIPT_DIR,',
      (
-         '         True),\n'
-         '        ("Objects Export",\n'
+         '         "Exact Rows by the Count is the same check as a pass/fail.",\n'
+         '         SCRIPT_DIR,\n'
      ),
      (
-         '         True),\n'
-         '        ("Horizons Check",\n'
-         '         "horizons_check.py",\n'
-         '         "Asks JPL Horizons about what the website serves, for whatever is "\n'
-         '         "due -- each every 30 days, and at once after it changes -- so on "\n'
-         '         "most runs it asks nothing (L-395, moved here from the Daily Run "\n'
-         '         "on 2026-10-14, L-431). Each keyed object: the same id, the same "\n'
-         '         "index, JPL\'s exact name, and a pinned comet still JPL\'s newest "\n'
-         '         "record. Each fetched orbital period: JPL\'s period at the same "\n'
-         '         "date and centre, within the period\'s own error. Each "\n'
-         '         "spacecraft\'s data sheet: re-read, and red where a row of "\n'
-         '         "constants_new.py quotes a figure the sheet no longer gives. One "\n'
-         '         "line per thing asked; each disagreement with the query to paste "\n'
-         '         "into a browser. Records the confirmations and the sheets, and "\n'
-         '         "never edits the list or a row. Needs the internet only on a day "\n'
-         '         "something is due; if JPL cannot be reached it says UNREACHABLE "\n'
-         '         "and asks nothing more.",\n'
+         '         "Exact Rows by the Count is the same check as a pass/fail.",\n'
          '         SCRIPT_DIR,\n'
          '         True,\n'
          '         None,\n'
          '         True),\n'
-         '        ("Objects Export",\n'
-     )),
-    ('palomas_orrery_dashboard.py', 'line 1037: "\\"Horizons:\\" sentence) and NASA link. The w',
-     (
-         '         "type, object type, description (without its opening "\n'
-         '         "\\"Horizons:\\" sentence) and NASA link. The website pulls this "\n'
-         '         "file and never reads orrery source (L-395). Lists every number in "\n'
-         '         "an exported description. Writes nothing if an entry writes a "\n'
-         '         "field twice, a key repeats, or a keyed entry has no JPL name.",\n'
-         '         SCRIPT_DIR,\n'
-     ),
-     (
-         '         "type, object type, description (without its opening "\n'
-         '         "\\"Horizons:\\" sentence) and NASA link, its orbital period from "\n'
-         '         "the orbit cache (L-431), and when JPL last confirmed it. The "\n'
-         '         "website pulls this file and never reads orrery source (L-395). "\n'
-         '         "Lists every number in an exported description and every period. "\n'
-         '         "Writes nothing if an entry writes a field twice, a key repeats, "\n'
-         '         "a keyed entry has no JPL name, or a period record names no "\n'
-         '         "centre.",\n'
+         '        ("Horizons Check",\n'
+         '         "horizons_check.py",\n'
+         '         "Asks JPL Horizons about what the website serves, for whatever is "\n'
+         '         "due, so on most runs it asks nothing (L-395, moved here from the "\n'
+         '         "website\'s Daily Run on 2026-10-14, L-431). Each keyed object: the "\n'
+         '         "same id, the same index, JPL\'s exact name, and a pinned comet "\n'
+         '         "still JPL\'s newest record. Each fetched orbital period: JPL\'s "\n'
+         '         "period at the same date and centre, within the period\'s own "\n'
+         '         "error. Both are asked again from day 25, before the website\'s "\n'
+         '         "own check goes red at day 30. Each spacecraft\'s data sheet: "\n'
+         '         "re-read every 30 days, and red where a row of constants_new.py "\n'
+         '         "quotes a figure the sheet no longer gives. One line per thing "\n'
+         '         "asked; each disagreement with the query to paste into a browser. "\n'
+         '         "Records the confirmations and the sheets, and never edits the "\n'
+         '         "list or a row. Needs the internet only on a day something is "\n'
+         '         "due; if JPL cannot be reached it says UNREACHABLE and asks "\n'
+         '         "nothing more.",\n'
          '         SCRIPT_DIR,\n'
      )),
-    ('palomas_orrery_dashboard.py', 'line 1240: SCRIPT_DIR,',
+    ('palomas_orrery_dashboard.py', 'line 1294: SCRIPT_DIR,',
      (
          '         "rows must pass. Ends on \\"HILLS CLOUD: PASS\\" (L-421).",\n'
          '         SCRIPT_DIR,\n'
@@ -1200,13 +1084,15 @@ EDITS = [
          '         True),\n'
          '        ("Horizons Check Suite",\n'
          '         "test_horizons_check.py",\n'
-         '         "The Horizons Check on JPL\'s recorded answers, with no network "\n'
+         '         "The Horizons Check on recorded answers, with no network "\n'
          '         "(documentation/worksheets/horizons_answers_L395.json, each answer "\n'
-         '         "with its source; those added on 2026-10-14 are constructed and "\n'
-         '         "say so). Every served entry agrees, and each planted mistake is "\n'
-         '         "caught by name: a wrong id, the wrong index, a name off by one "\n'
-         '         "letter, a stale pin, a period JPL disagrees with, a changed data "\n'
-         '         "sheet, JPL unreachable (L-395, L-431).",\n'
+         '         "with its source; the period and data-sheet answers were written "\n'
+         '         "in JPL\'s format on 2026-10-14 and say so, and the inputs the test "\n'
+         '         "runs on are frozen beside them). Every served entry agrees, and "\n'
+         '         "each planted mistake is caught by name: a wrong id, the wrong "\n'
+         '         "index, a name off by one letter, a stale pin, a period JPL "\n'
+         '         "disagrees with, a changed data sheet, JPL unreachable (L-395, "\n'
+         '         "L-431).",\n'
          '         SCRIPT_DIR,\n'
          '         True,\n'
          '         None,\n'
@@ -1221,35 +1107,32 @@ EDITS = [
          '         "L-431).",\n'
          '         SCRIPT_DIR,\n'
      )),
-    ('module_atlas.py', "line 227: 'check_horizons_confirmations':           'de",
+    ('palomas_orrery_dashboard.py', 'line 1766: "Horizons Check"):',
      (
-         "    'add_docstrings':                         'devtool',\n"
-         "    'constants_change_report':                'devtool',\n"
+         '    ("Maintenance Run",\n'
+         '     "Ledger Index"):\n'
      ),
      (
-         "    'add_docstrings':                         'devtool',\n"
-         "    'check_horizons_confirmations':           'devtool',\n"
-         "    'constants_change_report':                'devtool',\n"
+         '    ("Maintenance Run",\n'
+         '     "Horizons Check"):\n'
+         '        "Asks JPL about served objects and periods when due; re-reads sheets.",\n'
+         '    ("Maintenance Run",\n'
+         '     "Ledger Index"):\n'
      )),
-    ('module_atlas.py', "line 243: 'horizons_check':                         'de",
+    ('palomas_orrery_dashboard.py', 'line 1822: ("Maintenance Run",',
      (
-         "    'food_insecurity_generator':              'devtool',\n"
-         "    'ledger_index':                           'devtool',\n"
+         '        "Checks the Hills cloud\'s frame, Fig. 3 reading and tilt, faults planted.",\n'
+         '    ("Maintenance Run",\n'
      ),
      (
-         "    'food_insecurity_generator':              'devtool',\n"
-         "    'horizons_check':                         'devtool',\n"
-         "    'ledger_index':                           'devtool',\n"
-     )),
-    ('module_atlas.py', "line 258: 'test_horizons_check':                    'de",
-     (
-         "    'test_domain_split':                      'devtool',\n"
-         "    'test_maintenance_report':                'devtool',\n"
-     ),
-     (
-         "    'test_domain_split':                      'devtool',\n"
-         "    'test_horizons_check':                    'devtool',\n"
-         "    'test_maintenance_report':                'devtool',\n"
+         '        "Checks the Hills cloud\'s frame, Fig. 3 reading and tilt, faults planted.",\n'
+         '    ("Maintenance Run",\n'
+         '     "Horizons Check Suite"):\n'
+         '        "The Horizons Check on recorded answers, planted mistakes caught.",\n'
+         '    ("Maintenance Run",\n'
+         '     "Horizons Confirmations"):\n'
+         '        "Fails on anything JPL has not confirmed within 30 days.",\n'
+         '    ("Maintenance Run",\n'
      )),
     ('skills/horizons-orbital-mechanics/SKILL.md', 'line 4: fires_when: Horizons queries, centers, frames',
      (
@@ -1273,7 +1156,7 @@ EDITS = [
          'Read this file in 2 parts: lines 1-222, 223-322.\n'
          '\n'
          "Skill version: 1.6 | 2026-10-14, with Anthropic's Claude Opus 5.5, at\n"
-         'palomas_orrery @ db63721d and gallery @ 924977a3. v1.6 (L-431 build 3,\n'
+         'palomas_orrery @ fe000597 and gallery @ 4b2b660a. v1.6 (L-431 build 3,\n'
          "with L-395's move) records where the Horizons check lives now and what\n"
          'it compares, under Where the Check Lives, and What It Compares: it runs\n'
          "in the orrery's maintenance run beside the objects export, asks JPL\n"
@@ -1397,7 +1280,7 @@ EDITS = [
          'Read this file in 2 parts: lines 1-269, 270-507.\n'
          '\n'
          "Skill version: 1.9 | 2026-10-14, with Anthropic's Claude Opus 5.5, at\n"
-         'palomas_orrery @ db63721d and gallery @ 924977a3. v1.9 (L-431 build 3,\n'
+         'palomas_orrery @ fe000597 and gallery @ 4b2b660a. v1.9 (L-431 build 3,\n'
          "with L-395's move) records two things the build changed. The builder\n"
          "reads each object's period from the config and, where the period is\n"
          "taken around the solar system's barycentre, also serves the elements\n"
@@ -1522,7 +1405,7 @@ EDITS = [
          'Read this file in 4 parts: lines 1-133, 134-342, 343-607, 608-811.\n'
          '\n'
          "Skill version: 1.15 | 2026-10-14, with Anthropic's Claude Opus 5.5, at\n"
-         'palomas_orrery @ db63721d and gallery @ 924977a3. v1.15 (L-431 build\n'
+         'palomas_orrery @ fe000597 and gallery @ 4b2b660a. v1.15 (L-431 build\n'
          "3) records what a room prints for a body's orbital period and where it\n"
          "comes from: the orrery's period, copied by the mirror, printed at its\n"
          'served figure count in one of three forms, read from the config so it\n'
@@ -1680,7 +1563,7 @@ EDITS = [
          'PROJECT INSTRUCTIONS\n'
          'Tony Quintanilla, PE | Claude | v3.96 | October 14, 2026\n'
          '\n'
-         'Cut from db63721d at https://github.com/tonylquintanilla/palomas_orrery\n'
+         'Cut from fe000597 at https://github.com/tonylquintanilla/palomas_orrery\n'
          '(branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.\n'
      )),
     ('PROJECT_INSTRUCTIONS.md', 'line 1171: v3.96 (October 14, 2026): No rule changed in ',
@@ -1815,22 +1698,49 @@ EDITS = [
          '\n'
          '================================================================\n'
      )),
-    ('LEDGER_CONSOLIDATED.md', 'line 405: Module updated: October 14, 2026 with Anthrop',
+    ('LEDGER_CONSOLIDATED.md', 'line 409: Module updated: October 14, 2026 with Anthrop',
      (
-         'body), built on 084d0a6.\n'
+         'db63721d.\n'
          'Review and RICE update Tony 6-21-2026\n'
      ),
      (
-         'body), built on 084d0a6.\n'
+         'db63721d.\n'
          "Module updated: October 14, 2026 with Anthropic's Claude Opus 5.5\n"
          "(L-431 build 3, the website, and L-395's move of the Horizons check into\n"
          "the orrery: built and tested offline, both now waiting only on Tony's\n"
          'run and look; loose ends re-homed to L-433; horizons-orbital-mechanics\n'
          '1.6, gallery-cache-builder 1.9, interactive-exhibit 1.15, protocol\n'
-         'v3.96), built on db63721d and gallery 924977a3.\n'
+         'v3.96), built on fe000597 and gallery 4b2b660a.\n'
          'Review and RICE update Tony 6-21-2026\n'
      )),
-    ('LEDGER_CONSOLIDATED.md', 'line 1470: <!-- L:433 status:OPEN upd:2026-10-11 section',
+    ('LEDGER_CONSOLIDATED.md', 'line 1151: <!-- L:440 status:OPEN upd:2026-10-13 section',
+     (
+         "#### [L-440] The dashboard's labels, short lines and headings, and the parity check (dashboard, both repos)\n"
+         '<!-- L:440 status:OPEN upd:2026-10-13 section:A flag: rice: -->\n'
+         "- **Tony's request, 2026-10-12**, after confirming every run step has a\n"
+     ),
+     (
+         "#### [L-440] The dashboard's labels, short lines and headings, and the parity check (dashboard, both repos)\n"
+         '<!-- L:440 status:OPEN upd:2026-10-14 section:A flag: rice: -->\n'
+         "- **Tony's request, 2026-10-12**, after confirming every run step has a\n"
+     )),
+    ('LEDGER_CONSOLIDATED.md', 'line 1192: - **Note (2026-10-14), from L-431 build 3:** ',
+     (
+         '  and the standalone tools outside the runs keep theirs.\n'
+         "**Gap:** Tony's look at the dashboard (the handoff, section 6). Later\n"
+     ),
+     (
+         '  and the standalone tools outside the runs keep theirs.\n'
+         '- **Note (2026-10-14), from L-431 build 3:** its third patch,\n'
+         "  `patch_L431_13_dashboard_buttons_20261014.py`, takes the website's\n"
+         '  Horizons Check and Horizons Check Suite off the dashboard (their\n'
+         '  scripts moved to the orrery, whose own three buttons patch_L431_11\n'
+         '  adds), says three Daily Run steps, and adds Drawn Orbit under the\n'
+         "  website's served-cache heading, each with its short line. Dashboard\n"
+         '  Parity is the check that it is complete.\n'
+         "**Gap:** Tony's look at the dashboard (the handoff, section 6). Later\n"
+     )),
+    ('LEDGER_CONSOLIDATED.md', 'line 1524: <!-- L:433 status:OPEN upd:2026-10-11 section',
      (
          "#### [L-433] The road after the Sun and Earth rooms, in Tony's words (planning)\n"
          '<!-- L:433 status:OPEN upd:2026-10-11 section:A flag: rice: -->\n'
@@ -1841,7 +1751,7 @@ EDITS = [
          '<!-- L:433 status:OPEN upd:2026-10-14 section:A flag: rice: -->\n'
          '- **Tony, 2026-10-10, in his run record** (`documentation/WHERE_WE_ARE_10-10-26_2019_run_record.md` at 6fc3648), two notes:\n'
      )),
-    ('LEDGER_CONSOLIDATED.md', 'line 1488: - **Note (2026-10-14), loose ends received fr',
+    ('LEDGER_CONSOLIDATED.md', 'line 1542: - **Note (2026-10-14), loose ends received fr',
      (
          '  layers, his "earth science part".\n'
          '**Gap:** at the next design talk after the orbital periods: Tony\n'
@@ -1863,13 +1773,12 @@ EDITS = [
          '    being keys; MAPS and 3I/ATLAS checked live once served; and\n'
          '    whether the identity check widens past the keyed entries (default\n'
          '    no).\n'
-         '  - The handle L-438 is named by two documents: that brief, and the\n'
-         '    dashboard-labels patch `patch_L438_1_dashboard_labels_20261013.py`,\n'
-         "    which has not run (it refuses at db63721d, and this build's orrery\n"
-         '    patch edits two of its files). Neither has opened a block yet.\n'
+         "  - That brief names its item L-438, which the ledger's index now lists\n"
+         '    as retired with L-439 (the dashboard labels took L-440). The objects\n'
+         '    work opens its block under the next free handle.\n'
          '**Gap:** at the next design talk after the orbital periods: Tony\n'
      )),
-    ('LEDGER_CONSOLIDATED.md', 'line 1521: <!-- L:431 status:OPEN upd:2026-10-13 section',
+    ('LEDGER_CONSOLIDATED.md', 'line 1575: <!-- L:431 status:OPEN upd:2026-10-13 section',
      (
          '#### [L-431] Orbital periods from JPL, for every body, printed by their errors (orrery, provenance)\n'
          '<!-- L:431 status:OPEN upd:2026-10-13 section:A flag: rice: -->\n'
@@ -1880,7 +1789,7 @@ EDITS = [
          '<!-- L:431 status:PENDING-GATE upd:2026-10-14 section:A flag: rice: -->\n'
          "- **Opened 2026-10-10** from Tony's look at Encke: its hover has no\n"
      )),
-    ('LEDGER_CONSOLIDATED.md', 'line 1803: - **2026-10-14, build 3 BUILT** (the website)',
+    ('LEDGER_CONSOLIDATED.md', 'line 1857: - **2026-10-14, build 3 BUILT** (the website)',
      (
          '  ran.)\n'
          "**Gap:** three builds, in order (the record's section 3):\n"
@@ -1888,9 +1797,13 @@ EDITS = [
      (
          '  ran.)\n'
          "- **2026-10-14, build 3 BUILT** (the website), with L-395's move, on\n"
-         '  orrery db63721d and gallery 924977a3, in\n'
-         '  `patch_L431_11_website_orrery_20261014.py` and\n'
-         '  `patch_L431_12_website_gallery_20261014.py`. Record:\n'
+         '  orrery fe000597 and gallery 4b2b660a (first built on db63721d and\n'
+         "  924977a3; rebuilt when L-440's dashboard landed), in three patches:\n"
+         '  `patch_L431_11_website_orrery_20261014.py`,\n'
+         '  `patch_L431_12_website_gallery_20261014.py`, and\n'
+         '  `patch_L431_13_dashboard_buttons_20261014.py`, which moves the\n'
+         "  website's Horizons buttons only after the website's patch has removed\n"
+         '  their scripts, so Dashboard Parity (L-440) holds at every step. Record:\n'
          '  `documentation/HANDOFF_L431_build3_website_20261014.md`.\n'
          "  - The orrery's objects export is schema 2. Each keyed object carries\n"
          "    its period: from the orbit cache's record where one was fetched\n"
@@ -1929,7 +1842,7 @@ EDITS = [
          "    JPL's.\n"
          "**Gap:** three builds, in order (the record's section 3):\n"
      )),
-    ('LEDGER_CONSOLIDATED.md', 'line 1811: 3. The website, NEXT, briefed in',
+    ('LEDGER_CONSOLIDATED.md', 'line 1865: 3. The website, NEXT, briefed in',
      (
          '   barycentre orbits (patch_L431_8, pushed at 4da3d7cc).\n'
          '3. The website, NEXT, briefed in\n'
@@ -1958,7 +1871,7 @@ EDITS = [
          'naming class above stays recorded, as it was.\n'
          '**Ref:** `documentation/DESIGN_L431_orbital_periods_rulings_20261011.md`;\n'
      )),
-    ('LEDGER_CONSOLIDATED.md', 'line 2668: <!-- L:395 status:OPEN upd:2026-10-12 section',
+    ('LEDGER_CONSOLIDATED.md', 'line 2722: <!-- L:395 status:OPEN upd:2026-10-12 section',
      (
          "#### [L-395] The gallery's objects are hand-copied from the orrery's dictionary: export them, and check them against Horizons (orrery, gallery, objects)\n"
          '<!-- L:395 status:OPEN upd:2026-10-12 section:A flag: rice: -->\n'
@@ -1969,7 +1882,7 @@ EDITS = [
          '<!-- L:395 status:PENDING-GATE upd:2026-10-14 section:A flag: rice: -->\n'
          '- **2026-10-01, design rulings and the first build** [verified: orrery\n'
      )),
-    ('LEDGER_CONSOLIDATED.md', 'line 3024: **Gap:** The check is built and runs every da',
+    ('LEDGER_CONSOLIDATED.md', 'line 3078: **Gap:** The check is built and runs every da',
      (
          '  cleared, and whether the identity check widens past the thirteen.\n'
          '**Gap:** The check is built and runs every day. Still open: moving it\n'
@@ -2027,34 +1940,32 @@ EDITS = [
          "L-403. Encke's period was L-431's, and is built.\n"
          '**Ref:** `documentation/HANDOFF_L395_horizons_check_move_brief_20261012.md`; `documentation/DESIGN_L395_horizons_check_20261007.md`; `documentation/HORIZONS_ANSWERS_L395_20261007.md`; `documentation/HANDOFF_L395_horizons_check_build_20261010.md`; gallery `tools/horizons_check.py`, `tools/check_horizons_confirmations.py`, `tools/test_horizons_check.py`, `data/horizons_confirmations.json`; `celestial_objects.py`; gallery `data/objects_config.json`; `export_constants.py`; gallery `tools/pull_constants_export.py` and `tools/mirror_constants.py` (the model); skills/horizons-orbital-mechanics/SKILL.md; L-363; L-364; L-391 to L-394.\n'
      )),
-    ('documentation/WHERE_WE_ARE.md', 'line 4: Last updated: October 13, 2026, night: the ma',
+    ('documentation/WHERE_WE_ARE.md', 'line 4: Last updated: October 13, 2026, evening: the ',
      (
          '\n'
-         'Last updated: October 13, 2026, night: the maintenance run names risen files.\n'
-         '- Written at orrery ab96681 and gallery 924977a3.\n'
+         "Last updated: October 13, 2026, evening: the dashboard's cards, headings and names.\n"
+         '- Written at orrery db63721d and gallery 924977a3.\n'
          '\n'
      ),
      (
          '\n'
          "Last updated: October 14, 2026: the website prints JPL's periods; the Horizons check moved.\n"
-         '- Written at orrery db63721d and gallery 924977a3.\n'
+         '- Written at orrery fe000597 and gallery 4b2b660a.\n'
          '\n'
      )),
-    ('documentation/WHERE_WE_ARE.md', 'line 10: > - Orbital periods, build 2 (the drawn orbit',
+    ('documentation/WHERE_WE_ARE.md', 'line 10: > - The dashboard: one short line per card, "',
      (
          '> **Changed since you last read this:**\n'
-         '> - Orbital periods, build 2 (the drawn orbits and markers): accepted\n'
-         '>   at your look and closed; all four fixes from your plot are in.\n'
-         "> - The maintenance run's summary names any file whose count of\n"
-         '>   problems to fix now (Tier-1) rose since the last run.\n'
+         '> - The dashboard: one short line per card, "+ more" opens the rest;\n'
+         '>   the website checks under your six headings, which fold; the orrery\n'
+         '>   opens its own console. A new check, Dashboard Parity.\n'
          '>\n'
          "> **Do next:** *L-431's website build, from its brief (in Where the\n"
          '> details are), and the briefed sessions beside it.*\n'
          '>\n'
          '> **Needs you now:**\n'
-         '> - *Run patch_L269_5 and the maintenance run; delete the old\n'
-         '>   patch_L269_1; move the new one and patch_L431_9 into documentation/;\n'
-         '>   push.*\n'
+         '> - *Run patch_L440_1, then the maintenance run (Dashboard parity\n'
+         '>   among the passes); open the dashboard and look; then push.*\n'
          '\n'
      ),
      (
@@ -2064,8 +1975,8 @@ EDITS = [
          "> - The Horizons check moved into the orrery's maintenance run, and\n"
          ">   checks each period too. The website's Daily Run is three steps.\n"
          '>\n'
-         '> **Do next:** *Run the two patches, orrery first, in the order the\n'
-         '> handoff gives (in Where the details are); then the look.*\n'
+         '> **Do next:** *Run the three patches in the order the handoff gives\n'
+         '> (in Where the details are); then the look.*\n'
          '>\n'
          '> **Needs you now:**\n'
          "> - *One question: Pluto-Charon's barycentre has no period from JPL\n"
@@ -2073,21 +1984,21 @@ EDITS = [
          '>   says "not yet fetched from JPL". Ship it so, and fetch it later?*\n'
          '\n'
      )),
-    ('documentation/WHERE_WE_ARE.md', 'line 29: 5.   [NOW]   *L-401 (the distance digits): bu',
+    ('documentation/WHERE_WE_ARE.md', 'line 27: 5.   [NOW]   *L-401 (the distance digits): bu',
      (
          '               feeds the website and nothing is typed twice.\n'
          '  5.   [NOW]   *L-401 (the distance digits): builds 1 and 2 accepted;\n'
          "               build 3 later. Then Earth's remaining items.*\n"
          '               << moved this session\n'
-         '  5b.  [NOW]   The scaffolding checks (L-424, L-425, L-426, the\n'
+         '  5b.  [NOW]   The scaffolding checks clear beside the slices: the\n'
      ),
      (
          '               feeds the website and nothing is typed twice.\n'
          '  5.   [NOW]   L-401 (the distance digits): builds 1 and 2 accepted;\n'
          "               build 3 later. Then Earth's remaining items.\n"
-         '  5b.  [NOW]   The scaffolding checks (L-424, L-425, L-426, the\n'
+         '  5b.  [NOW]   The scaffolding checks clear beside the slices: the\n'
      )),
-    ('documentation/WHERE_WE_ARE.md', 'line 36: 6a.  [NOW]   *Orbital periods from JPL: build',
+    ('documentation/WHERE_WE_ARE.md', 'line 34: 6a.  [NOW]   *Orbital periods from JPL: build',
      (
          '               website too. Left: the check.\n'
          '  6a.  [NOW]   *Orbital periods from JPL: builds 1 and 2 accepted and\n'
@@ -2100,7 +2011,7 @@ EDITS = [
          "               website's waits only on your run and your look.*\n"
          '               << moved this session\n'
      )),
-    ('documentation/WHERE_WE_ARE.md', 'line 41: 8.   [done]  The served objects are checked a',
+    ('documentation/WHERE_WE_ARE.md', 'line 39: 8.   [done]  The served objects are checked a',
      (
          "               System room's features close with these rooms.\n"
          '  8.   [done]  The served objects are checked against JPL Horizons.\n'
@@ -2114,18 +2025,7 @@ EDITS = [
          '               << moved this session\n'
          "  9.   [next]  The website's checks, in the order you confirmed:\n"
      )),
-    ('documentation/WHERE_WE_ARE.md', 'line 56: ## Settled',
-     (
-         '\n'
-         '## Settled\n'
-         '\n'
-     ),
-     (
-         '\n'
-         '## Settled  **>> UPDATED THIS SESSION**\n'
-         '\n'
-     )),
-    ('documentation/WHERE_WE_ARE.md', "line 66: - The Horizons check lives in the orrery's ma",
+    ('documentation/WHERE_WE_ARE.md', "line 64: - The Horizons check lives in the orrery's ma",
      (
          "  giant planet's 1-bar level, the Sun's photosphere). (Oct 12)\n"
          "- The Horizons check lives in the orrery's maintenance run, beside the\n"
@@ -2150,35 +2050,23 @@ EDITS = [
          '  apart; not the default goldenrod. (Oct 10)\n'
          '- Fuzzy boundaries come before the Sun and Earth rooms close. Every\n'
      )),
-    ('documentation/WHERE_WE_ARE.md', 'line 90: - Tier-1 on the gate path: 0, by name (PROVEN',
+    ('documentation/WHERE_WE_ARE.md', 'line 89: - Last cache build: 20261013T132123Z, ok, no ',
      (
+         'Read from files when this page was written, not typed from memory.\n'
          '- Last cache build: 20261013T132123Z, ok, no retry (gallery 924977a3).\n'
          '- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, f59c84b2).\n'
          '  Whole tree: 281: orrery 116, Earth System 149, stars 13, utilities 2,\n'
          '  unclassified 1 (your run; the 1 is patch_L436_1, still in the root).\n'
          "- This page's date and the ledger's newest stamp: both Oct 13. Agree.\n"
          '\n'
-         '## Waiting on you\n'
-         '\n'
      ),
      (
-         '- Last cache build: 20261013T132123Z, ok, no retry (gallery 924977a3).\n'
-         '- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, db63721d).\n'
-         '  Whole tree: 280: orrery 116, Earth System 149, stars 13, utilities 2.\n'
+         'Read from files when this page was written, not typed from memory.\n'
+         '- Last cache build: 20261014T175225Z, ok, no retry (gallery 4b2b660a).\n'
+         '- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, fe000597).\n'
+         '  Whole tree: 281: orrery 116, Earth System 149, stars 13, utilities 2,\n'
+         '  dev tools 1. Your run said "Tier-1 rise: NOT READ": L-269\'s to look at.\n'
          "- This page's date and the ledger's newest stamp: both Oct 14. Agree.\n"
-         '\n'
-         '## Waiting on you  **>> UPDATED THIS SESSION**\n'
-         '\n'
-     )),
-    ('documentation/WHERE_WE_ARE.md', 'line 112: 4. L-438 is named by two documents (the objec',
-     (
-         '3. The orrery from your phone: L-436 (away from the machine), an idea.\n'
-         '\n'
-     ),
-     (
-         '3. The orrery from your phone: L-436 (away from the machine), an idea.\n'
-         '4. L-438 is named by two documents (the objects brief, the dashboard\n'
-         '   labels patch); see L-433 (the road), its note of Oct 14.\n'
          '\n'
      )),
     ('documentation/WHERE_WE_ARE.md', "line 117: - *Build 3 and the check's move, with the run",
@@ -5325,19 +5213,28 @@ CREATED = {
         "<!-- Doc-Kind: hand | Record of L-431 build 3 (the website prints each body's orbital period from JPL, and draws an orbit around its period's centre) built with L-395's move (the Horizons check now runs in the orrery's maintenance run and checks the period too). Built and tested in the sandbox; the run order for Tony, with what each step prints; the one decision; where the loose ends went. -->\n"
         "# L-431 build 3, the website, with the Horizons check's move (L-395)\n"
         '\n'
-        'Built on orrery db63721d258004b855c1259371d8adf15bf7647c at\n'
-        'https://github.com/tonylquintanilla/palomas_orrery ("L431 website brief\n'
-        'fix") and gallery 924977a353b6c3e7d50e360e840fe176685f97c9 at\n'
+        'Built on orrery fe000597d5282a93461d31065997254d5bf981ff at\n'
+        'https://github.com/tonylquintanilla/palomas_orrery ("L440 dashboard") and\n'
+        'gallery 4b2b660ad779a971b496536f6203f93b04aa7a8d at\n'
         'https://github.com/tonylquintanilla/tonyquintanilla.github.io ("daily run\n'
-        '10-13-26"). Neither repo moved during the session.\n'
+        '10-14-26"). First built on orrery db63721d and gallery 924977a3; both\n'
+        'moved during the session (the dashboard labels, L-440, and your Daily\n'
+        'Run of October 14), the first orrery patch refused on your machine, and\n'
+        'the build was rebuilt on the new HEADs.\n'
         "Tony's local folders: orrery\n"
         '`C:\\Users\\tonyq\\OneDrive\\Desktop\\python_work\\palomas_orrery_for_github\\`;\n'
         'gallery `C:\\Users\\tonyq\\OneDrive\\Desktop\\python_work\\tonyquintanilla.github.io\\`.\n'
         '\n'
-        '- Type: BUILD. Two patches, delivered for Tony to run on his return:\n'
-        '  `patch_L431_11_website_orrery_20261014.py` (orrery, first) and\n'
-        '  `patch_L431_12_website_gallery_20261014.py` (gallery, second). This\n'
+        '- Type: BUILD. Three patches, run in this order:\n'
+        '  `patch_L431_11_website_orrery_20261014.py` (orrery),\n'
+        '  `patch_L431_12_website_gallery_20261014.py` (gallery) and\n'
+        '  `patch_L431_13_dashboard_buttons_20261014.py` (orrery again). This\n'
         '  record is created by the first.\n'
+        "- Why three: L-440's Dashboard Parity check, in the orrery's maintenance\n"
+        '  run, reads the gallery folder beside the orrery and holds every run\n'
+        '  step to a dashboard button. The dashboard is in the orrery; the\n'
+        "  website's Horizons scripts leave in the gallery patch. So the\n"
+        "  website's buttons can only move after it, in a small third patch.\n"
         '- Companion: the brief, `documentation/HANDOFF_L431_build3_website_brief_20261013.md`,\n'
         '  read with `documentation/HANDOFF_L395_horizons_check_move_brief_20261012.md`.\n'
         '- Skills loaded at session start, each confirmed against the manifest at\n'
@@ -5401,10 +5298,10 @@ CREATED = {
         '\n'
         'Orrery folder:\n'
         '\n'
-        '1. Save `patch_L431_11_website_orrery_20261014.py` in the orrery\n'
-        '   folder and press Run. It prints 86 "ok" lines for the edits and 7\n'
-        '   for the new files, then:\n'
-        '   `patch applied (86 edits in 15 files, 7 files created)`\n'
+        '1. Save the new `patch_L431_11_website_orrery_20261014.py` in the\n'
+        '   orrery folder, replacing the copy that refused, and press Run. It\n'
+        '   prints 79 "ok" lines for the edits and 7 for the new files, then:\n'
+        '   `patch applied (79 edits in 14 files, 7 files created)`\n'
         '   A second run prints "ERROR: horizons_check.py already exists; this\n'
         '   patch has run. NOTHING was written."\n'
         '2. Run `orrery_maintenance_run.py`. It needs the internet today: the\n'
@@ -5413,7 +5310,8 @@ CREATED = {
         '   - "Objects export ... rewrote data/objects_export.json"\n'
         '   - "Skill manifest" rewrites PROJECT_INSTRUCTIONS.md (the three new\n'
         '     skill versions) and "Ledger index" rewrites the ledger\'s index\n'
-        '   - "29 of 29 gating checkers passed", and the provenance scanner\'s\n'
+        '   - "Dashboard parity ... PASS"\n'
+        '   - "30 of 30 gating checkers passed", and the provenance scanner\'s\n'
         '     "0 TIER-1 -- the push gate holds"\n'
         '   If "Horizons check" says UNREACHABLE, JPL could not be reached:\n'
         '   "Horizons confirmations" is then red too. Run it again later; do\n'
@@ -5436,19 +5334,38 @@ CREATED = {
         '6. Run `gallery_maintenance_run.py` (offline). Its Objects mirror\n'
         "   rewrites `data/objects_config.json` with each object's period.\n"
         '   Expect "27 of 27 gating checkers passed", with "Drawn orbit" and\n'
-        '   "Horizons confirmations" among them.\n'
-        '7. Run the Daily Run: the guest book, the cache builder, the\n'
+        '   "Horizons confirmations" among them. Don\'t commit the gallery yet.\n'
+        '\n'
+        'Orrery folder again:\n'
+        '\n'
+        '7. Save `patch_L431_13_dashboard_buttons_20261014.py` in the orrery\n'
+        '   folder and press Run. It prints 10 "ok" lines, then\n'
+        '   `patch applied (10 edits in 1 file)`. Run before the gallery patch,\n'
+        '   it says "the gallery patch has not run yet" and writes nothing.\n'
+        '8. Run `orrery_maintenance_run.py`. Expect "Dashboard parity ... PASS"\n'
+        '   and "30 of 30 gating checkers passed". (Between steps 5 and 7,\n'
+        '   Dashboard parity is red, naming the two Horizons buttons and Drawn\n'
+        '   Orbit. That is expected; step 7 is the cure.) Move the script into\n'
+        '   `documentation/`. Commit and push the orrery.\n'
+        '\n'
+        'Gallery folder again:\n'
+        '\n'
+        '9. Run the Daily Run: the guest book, the cache builder, the\n'
         '   maintenance run again.\n'
-        '8. Move the patch script into `documentation/`. Commit the config and\n'
+        '10. Move the gallery patch into `documentation/`. Commit the config and\n'
         '   the cache together, and push. Then run\n'
         '   `python gallery_maintenance_run.py --live`.\n'
-        '9. The look (decide), on the phone and the desktop: in the Solar\n'
+        '11. The look (decide), on the phone and the desktop: in the Solar\n'
         "   System room, hover Mercury and Jupiter (JPL's period, around the\n"
         '   Sun), Mars (typed, marked) and Pluto (not yet fetched). In the Earth\n'
         "   room, hover the Sun Direction: Earth's period. Encke and Halley are\n"
         "   not rows in that room's list, so their periods show only once they\n"
         "   are; the Moon has no key in the orrery's list, so it gets no period\n"
         '   (section 6). The Sun room prints no period: the Sun has none.\n'
+        "    The dashboard (step 7's patch): the website group no longer shows\n"
+        '    Horizons Check or Horizons Check Suite; the Maintenance Run group\n'
+        '    shows Horizons Check, Horizons Check Suite and Horizons\n'
+        '    Confirmations; Drawn Orbit sits under the served cache.\n'
         '\n'
         '## 4. What reaches a visitor, and when\n'
         '\n'
@@ -5475,7 +5392,7 @@ CREATED = {
         '  "Horizons confirmations", which needs JPL that day and read\n'
         '  UNREACHABLE, as it should. The Horizons check then ran on recorded\n'
         '  answers as if online: "HORIZONS CHECK: PASS -- 3 checked today, 3\n'
-        '  queries". Then the maintenance run again: "29 of 29 gating checkers\n'
+        '  queries". Then the maintenance run again: "30 of 30 gating checkers\n'
         '  passed". Be clear what that proves: the identity answers are JPL\'s\n'
         '  own, but the three elements answers (the periods) and the data-sheet\n'
         "  answers were written by this session in JPL's format, from the\n"
@@ -5484,6 +5401,11 @@ CREATED = {
         '  your step 2.\n'
         '- The gallery maintenance run on that export: 27 of 27, and the config\n'
         "  the mirror wrote matched the build's byte for byte.\n"
+        '- With both folders side by side, as on your machine: Dashboard parity\n'
+        '  passed after the orrery patch, went red after the gallery patch,\n'
+        '  naming exactly the two Horizons buttons and Drawn Orbit, and passed\n'
+        '  again after the third patch ("79 steps matched to their buttons by\n'
+        '  name and script; 109 cards carry a short line"); then 30 of 30.\n'
         "- The three rooms' drivers ran in plain Python on the served cache, and\n"
         '  the page booted headless on each with no errors; the hovers above are\n'
         '  what it printed.\n'
@@ -5515,13 +5437,13 @@ CREATED = {
         '  period; the fields the list lacks; the display-name rename; MAPS and\n'
         '  3I/ATLAS checked live once served; and whether the identity check\n'
         '  widens past the keyed entries (default no).\n'
-        '- L-438 is named by two documents: the objects-to-website brief and\n'
-        '  the dashboard-labels patch `patch_L438_1_dashboard_labels_20261013.py`.\n'
-        '  Neither has opened a ledger block. That patch does not run at\n'
-        '  db63721d ("the GATING AND REPORT-ONLY count sentence was not found"),\n'
-        "  and this build's orrery patch edits two of the files it edits\n"
-        '  (`palomas_orrery_dashboard.py`, `orrery_maintenance_run.py`), so it\n'
-        '  needs rebuilding on the new HEAD before it can run.\n'
+        '- The objects-to-website brief names its item L-438. The dashboard\n'
+        '  session took L-440 and the ledger now lists L-438 and L-439 as\n'
+        '  retired, so the objects work opens under the next free handle (on\n'
+        "  L-433's note).\n"
+        '- Your run of the dashboard session\'s maintenance run printed "Tier-1\n'
+        '  rise: NOT READ" under the scanner\'s verdict. Not this build\'s: it is\n'
+        "  L-269's to look at. In these runs the line read normally.\n"
         "- The orrery's export now serves typed periods, from\n"
         '  `KNOWN_ORBITAL_PERIODS`. The website marks every one as typed, and the\n'
         '  provenance scanner already names the table. Its 132 unsourced entries\n'
@@ -5544,12 +5466,12 @@ CREATED = {
         '\n'
         '- (do) Optional, any day: plot the eight typed bodies in the orrery\n'
         '  and answer yes to Update Orbital Elements (section 3).\n'
-        '- (do) Steps 1 to 8 of section 3, in order.\n'
+        '- (do) Steps 1 to 10 of section 3, in order.\n'
         '- (do) Reinstall the three skills from `skills/` (Settings > Skills):\n'
         '  horizons-orbital-mechanics, gallery-cache-builder,\n'
         '  interactive-exhibit.\n'
         "- (decide) The Pluto-Charon barycentre's row (section 2).\n"
-        '- (decide) The look (step 9).\n'
+        '- (decide) The look (step 11).\n'
         '\n'
         "Session written October 2026 with Anthropic's Claude Opus 5.5.\n"
     ),
@@ -5645,7 +5567,9 @@ def main():
     print('     not be reached: run it again later, before you commit.')
     print('  2. Move this script, and patch_L431_10_brief_both_sets_20261013.py if it')
     print('     is still in this folder, into documentation/. Commit and push.')
-    print('  3. Then the gallery: patch_L431_12_website_gallery_20261014.py.')
+    print('  3. Then the gallery: tools/pull_objects_export.py, then')
+    print('     patch_L431_12_website_gallery_20261014.py. Then back here for')
+    print('     patch_L431_13_dashboard_buttons_20261014.py.')
     return 0
 
 

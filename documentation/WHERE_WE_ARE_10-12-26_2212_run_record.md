@@ -2293,45 +2293,34 @@ A separate review found two faults, and I fixed and retested both:
 - Encke's query to JPL was written in a form JPL might misread.
 - The website's check would have turned red every 30 days. The orrery now asks JPL again from day 25, so the website has time to catch up.
 
-**Run order** (the handoff gives what each step prints):
-1. Orrery: run the orrery patch, then the maintenance run (it needs the internet), then push.
+===============================================================================================
+
+Why three: the dashboard session added a check, Dashboard Parity, that makes sure every step in the maintenance runs has a matching dashboard button. The dashboard lives in the orrery, but two of the buttons it has to remove belong to scripts the gallery patch deletes. So those buttons can only go after the gallery patch has run. A small third orrery patch does that.
+
+Run order:
+
+In the orrery folder, run patch_L431_11_website_orrery_20261014.py, replacing the copy that refused. It should end with “patch applied (79 edits in 14 files, 7 files created)”.
 
 
 
-2. Gallery: run `tools/pull_objects_export.py`, then the gallery patch, then the gallery maintenance run, then the Daily Run.
-3. Push the gallery, then run the live check.
-4. Take a look on your phone and desktop. The periods appear as soon as you push. A redrawn orbit only needs the cache rebuild, and no body on the website uses one yet.
+Run the orrery maintenance run. It needs the internet. Expect “30 of 30 gating checkers passed”. Then push the orrery.
+In the gallery folder, run tools/pull_objects_export.py, then patch_L431_12_website_gallery_20261014.py (replace your copy of this one too). Then run the gallery maintenance run and expect “27 of 27”. Don’t commit the gallery yet.
+Back in the orrery folder, run patch_L431_13_dashboard_buttons_20261014.py, then the maintenance run again. Expect “Dashboard parity ... PASS” and 30 of 30, then push the orrery.
+In the gallery folder, run the Daily Run, commit and push, then run the live check.
+Have a look on your phone and desktop.
 
-**One question:** the Pluto-Charon barycentre has no period from JPL. The orrery fetches Pluto, and Pluto around the barycentre, but never the barycentre itself around the Sun. So its row says "Orbital period: not yet fetched from JPL." I recommend shipping it that way and teaching the orrery to fetch it later. The other choice is to hold the build until it can. Which do you want?
+Between steps 3 and 4, Dashboard Parity is red and names the two Horizons buttons and the Drawn Orbit button. That’s expected, and step 4 clears it. If you run patch 13 too early, it says so and writes nothing.
 
-**Where this leaves us:**
-- Orbital periods and the Horizons check are both marked done on the road. In the ledger, L-431 (periods) and L-395 (the check) each wait only on your run and your look.
-- Loose ends now sit on L-433 (the road), including bodies with no period yet such as the Moon, which has no key in the orrery's list.
-- Two documents use the number L-438 (the objects brief and the dashboard-labels patch). That patch already doesn't run, and it will need rebuilding after this one.
-- After you reinstall the three updated skills, the next session checks it loaded horizons-orbital-mechanics 1.6, gallery-cache-builder 1.9 and interactive-exhibit 1.15.
+In a test with both folders side by side, as on your machine, the whole sequence ran green from start to finish. The handoff has the full run order with what each step prints.
 
-Files are in the orrery folder after the patch runs:
-- `patch_L431_11_website_orrery_20261014.py`
-- `patch_L431_12_website_gallery_20261014.py`
-- `documentation/HANDOFF_L431_build3_website_20261014.md`
+Two other things changed in the records:
+
+The dashboard session took ledger number L-440 and retired L-438 and L-439. That clears up the double use of L-438; the objects work will open under the next free number.
+The question from before still stands: should the Pluto-Charon barycentre ship with “not yet fetched from JPL” for its period?
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-**Session: DONE: 10-13-26 2048: Opus: L-437 session build with domain split**
-
-I'll pull the orrery at HEAD, read the two handoffs, load the four skills and check their versions, then measure and build L-437.
-
-All four skills match the manifest (provenance-discipline 2.28, safe-file-editing 1.13, agentic-pre-test 1.3, ledger-and-session-records 1.20).
-
-Now I'll write the new domain section into the build copy, replacing the hand list.
-
-Now the run history: the new field, the domain delta, and the table column.
-
-Now the maintenance run's scanner row, quoting the whole-tree line as its second part.
-
-Now the skill edits: the version entry, the two sections, and the moved entry.
-
-The patch is ready and saved in your orrery folder. It makes the scanner print the Tier-1 total with its split by domain, and I tested it on a spare copy of the repo, where it passed. What you need to do is run it.
+**Session: DONE: 10-14-26 1701: Opus: L-437 session build with domain split**
 
 After the patch, the scanner's last block and the maintenance run's scanner row both read:
 
@@ -2963,7 +2952,7 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-  2. Move this script into documentation/; commit and push.
+  2. Move this script into documentation/; commit and push. -- 5615a5621f0da55e3fdba669c8abb809805b9eec
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
 After it, run the maintenance run, move the patch into documentation/, and commit and push.
