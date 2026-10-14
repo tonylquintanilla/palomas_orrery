@@ -276,7 +276,6 @@ ROLE_MAP = {
     'worksheet_request_builder':                 'devtool',
 
     # patch
-    'patch_L431_11_website_orrery_20261014':     'patch',
     'patch_L431_13_dashboard_buttons_20261014':  'patch',
 }
 # ROLE-MAP:END

@@ -245,6 +245,13 @@ Check Suite and Horizons Confirmations under its checkers, each in
 alphabetical place, with their short lines. The website's own Horizons
 buttons leave in a second patch, patch_L431_13, run after the website's
 patch has removed their scripts, so Dashboard Parity holds at every step.
+October 14, 2026 with Anthropic's Claude Opus 5.5 (L-431 build 3, its
+third patch, patch_L431_13, run after the website's): the Daily Run
+group loses Horizons Check and says three steps; the website checks lose
+Horizons Check Suite, whose script went to the orrery; the website's
+Horizons Confirmations says it reads the dates from the pulled export;
+and Drawn Orbit, the website's new checker, gets its button under the
+served cache, in alphabetical place, with its short line.
 """
 
 import os
@@ -363,8 +370,7 @@ LAUNCH_GROUPS = {
          "What the gallery needs once a day, in one window, in this order "
          "(L-281, Tony's design of 2026-09-27). First the Guest Book "
          "Updater: approve or decline each new message, and write entries "
-         "or replies if you like. Then the Horizons Check: JPL confirms "
-         "the website's objects that are due (L-395). Then the Cache "
+         "or replies if you like. Then the Cache "
          "Builder, with no OneDrive pause since 2026-10-10 (L-216: "
          "the retry is sufficient). Then the Gallery Maintenance Run, "
          "offline, which the builder's own next steps ask for before a "
@@ -393,23 +399,6 @@ LAUNCH_GROUPS = {
          "alone as often as you like; it is also the Daily Run's first "
          "step. The private address of the form's responses is kept in "
          "tools/guestbook_local.json, which git ignores.",
-         GALLERY_REPO_DIR,
-         True,
-         None,
-         True),
-        ("Horizons Check",
-         os.path.join("tools", "horizons_check.py"),
-         "The Daily Run's second step (L-395). Asks JPL Horizons whether "
-         "each object the website takes from the orrery's list is still "
-         "the object the list says -- the same id, the same index, JPL's "
-         "exact name -- for the entries that are due: each every 30 days, "
-         "and at once after its entry changes. A pinned comet record "
-         "(Halley, Encke) must still be JPL's newest. One line per entry; "
-         "for each disagreement the list's value, JPL's value and the "
-         "query to paste into a browser. Records each confirmation in "
-         "data/horizons_confirmations.json and never edits the list. "
-         "Needs the internet; if JPL cannot be reached it says so and "
-         "asks nothing more. Runs from the gallery repo ROOT.",
          GALLERY_REPO_DIR,
          True,
          None,
@@ -445,7 +434,7 @@ LAUNCH_GROUPS = {
          True),
         ("Gallery Maintenance Run -- offline",
          "gallery_maintenance_run.py",
-         "The Daily Run's fourth step: the same button as Gallery "
+         "The Daily Run's third step: the same button as Gallery "
          "Maintenance Run -- offline under Gallery -- checks and data, "
          "which describes it in full. Run after the build and before you "
          "commit.",
@@ -465,8 +454,8 @@ LAUNCH_GROUPS = {
         "then runs every checker and prints "
         "one line each. Python: the cache builder suite, pole of date, "
         "the mirror suite, the store writer and store editor suites, "
-        "the config mirror check, the Horizons check suite, Horizons "
-        "confirmations, the pointer join, cache in step, the drawings "
+        "the config mirror check, Horizons "
+        "confirmations, the pointer join, cache in step, drawn orbit, the drawings "
         "check, the collapsed-features sweep, the "
         "guest book updater, the Daily Run's steps, the artifact-1 "
         "assembler pin, and cache siblings (report only). Node: feature "
@@ -482,7 +471,7 @@ LAUNCH_GROUPS = {
         "TOOLS YOU RUN BY HAND -- each tests a tool you use yourself",
         ("Daily Run Steps",
         "daily_run.py",
-        "daily_run.py --check: fails if any of the four scripts the "
+        "daily_run.py --check: fails if any of the three scripts the "
         "Daily Run calls is missing, say after a rename, and names it. "
         "Runs nothing else. GATES the gallery runner.",
         GALLERY_REPO_DIR,
@@ -549,25 +538,15 @@ LAUNCH_GROUPS = {
         None,
         True),
         "JPL'S CHECK OF THE OBJECTS",
-        ("Horizons Check Suite",
-        os.path.join("tools", "test_horizons_check.py"),
-        "The Horizons check on JPL's recorded answers, with no network "
-        "(documentation/horizons_answers_L395.json, each answer with its "
-        "source): every served entry agrees, and each planted mistake -- a "
-        "wrong id, the wrong index, a name off by one letter, a stale pin, "
-        "a record number JPL gave to another comet, JPL unreachable -- is "
-        "caught by name (L-395). GATES the gallery runner.",
-        GALLERY_REPO_DIR,
-        True,
-        None,
-        True),
         ("Horizons Confirmations",
         os.path.join("tools", "check_horizons_confirmations.py"),
-        "Reads data/horizons_confirmations.json offline and fails on any "
+        "The website's own check of JPL's confirmations, offline: it reads "
+        "the dates in the pulled data/objects_export.json and fails on any "
         "served object never confirmed against JPL, confirmed 30 or more "
-        "days ago, or changed since it was confirmed -- so a Horizons "
-        "Check that stopped running shows (L-395). GATES the gallery "
-        "runner.",
+        "days ago, or changed since -- and on a fetched period the same "
+        "way -- so the website shows it when the orrery's Horizons Check "
+        "has not run (L-395; the check itself moved into the orrery's "
+        "Maintenance Run on 2026-10-14, L-431). GATES the gallery runner.",
         GALLERY_REPO_DIR,
         True,
         None,
@@ -633,6 +612,20 @@ LAUNCH_GROUPS = {
         "and held the only copy of 38 days of run history, now kept at "
         "documentation/cache_run_history/. Judge a copy by what is inside "
         "it, not by its name.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
+        True),
+        ("Drawn Orbit",
+        os.path.join("tools", "test_drawn_orbit.py"),
+        "An orbit whose period JPL gives around the solar system's "
+        "barycentre is drawn around the barycentre, moved to where it sits "
+        "seen from the Sun (L-431 build 3). Checks the cache builder serves "
+        "those elements only for such a body and only at the date of its "
+        "Sun-centred ones, refuses a set from another date, and that the "
+        "room draws the ellipse in the right place, on Sedna's real numbers. "
+        "Planted faults, among them an orbit drawn around the Sun, are each "
+        "caught. GATES the gallery runner.",
         GALLERY_REPO_DIR,
         True,
         None,
@@ -1672,9 +1665,6 @@ CARD_LINES = {
      "Guest Book Updater"):
         "Approve, decline or defer each new guest book message; write entries.",
     ("Daily Run",
-     "Horizons Check"):
-        "Asks JPL whether each object the website serves is still that object.",
-    ("Daily Run",
      "Cache Builder"):
         "Fetches from JPL, checks, and swaps in the website's new served cache.",
     ("Daily Run",
@@ -1699,11 +1689,11 @@ CARD_LINES = {
      "Module Atlas"):
         "Regenerates the website repo's own module atlas and index.",
     ("Gallery -- checks and data",
-     "Horizons Check Suite"):
-        "The Horizons check on JPL's recorded answers, planted mistakes caught.",
-    ("Gallery -- checks and data",
      "Horizons Confirmations"):
         "Fails on any served object JPL has not confirmed within 30 days.",
+    ("Gallery -- checks and data",
+     "Drawn Orbit"):
+        "Checks a barycentre orbit is served and drawn around the barycentre.",
     ("Gallery -- checks and data",
      "Artifact 1 Assembler"):
         "Compares the Artifact 1 assembler test's verdicts with their recorded pin.",

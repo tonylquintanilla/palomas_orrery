@@ -11,15 +11,14 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 161  
-**Total Lines of Code (non-blank):** 131,122  
-**Total Public Functions/Classes:** 1,526
+**Total Python Files:** 160  
+**Total Lines of Code (non-blank):** 125,548  
+**Total Public Functions/Classes:** 1,524
 
 ## Classification Coverage
 
-**Patch scripts awaiting archive (2).** A `Role: patch` module is a one-shot script that has already run. Its base fingerprint no longer matches, so it cannot run again. Move each into `documentation/`. While one sits in the scanned tree it inflates the module count here and the file count in the provenance audit.
+**Patch scripts awaiting archive (1).** A `Role: patch` module is a one-shot script that has already run. Its base fingerprint no longer matches, so it cannot run again. Move each into `documentation/`. While one sits in the scanned tree it inflates the module count here and the file count in the provenance audit.
 
-- `patch_L431_11_website_orrery_20261014.py`
 - `patch_L431_13_dashboard_buttons_20261014.py`
 
 **Undetermined role (8).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
@@ -48,7 +47,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `earth_system_visualization_gui.py` | Earth System Visualization GUI for Paloma's Orrery Hub window with climate data visualizations (1,903 lines) |
 | `orbital_param_viz.py` | Interactive orbital element visualization tool. (1,965 lines) |
 | `palomas_orrery.py` | Main GUI and plotting engine for Paloma's Orrery. (9,668 lines) |
-| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (2,937 lines) |
+| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (2,927 lines) |
 | `star_visualization_gui.py` | Stellar visualization GUI for Paloma's Orrery. (1,409 lines) |
 
 ---
@@ -229,7 +228,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `ledger_index.py` | Generate the at-a-glance INDEX for the consolidated ledger. (715 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (129 lines) |
-| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (989 lines) |
+| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (993 lines) |
 | `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (826 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (505 lines) |
 | `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (3,528 lines) |
@@ -265,7 +264,6 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_L431_11_website_orrery_20261014.py` | - L-431 (orbital periods from JPL), build 3, the orrery's half, with L-395's move: the objects export carries each body's period, and the Horizons check moves into the orrery's maintenance run and checks the period too. (5,568 lines) |
 | `patch_L431_13_dashboard_buttons_20261014.py` | - L-431 (orbital periods from JPL), build 3, its third and last patch: the dashboard's buttons for the website follow the website's patch. (330 lines) |
 
 ---

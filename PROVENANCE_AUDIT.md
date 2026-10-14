@@ -2,9 +2,9 @@
 # Paloma's Orrery -- Provenance Audit
 
 Generated: October 14, 2026
-Files scanned: 161
-Total findings: 1123
-Constants: 193 | Dicts: 64 | Display strings: 866
+Files scanned: 159
+Total findings: 1122
+Constants: 193 | Dicts: 63 | Display strings: 866
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -20,14 +20,14 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T1 by domain | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|--------------|---:|---:|---:|--------:|
+| 20261014T225215Z | `344ed65` | 159 | 1122 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 683 | 153 | 6 | 0 |
 | 20261014T223944Z | `5cd63cc` | 161 | 1123 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 684 | 153 | 6 | 0 |
 | 20261014T215653Z | `fe00059` | 158 | 1117 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 684 | 147 | 6 | 0 |
 | 20261014T175908Z | `db63721` | 157 | 1117 | 281 | orrery 116, Earth System 149, stars 13, utilities 2, dev tools 1 | 683 | 147 | 6 | 0 |
 | 20261014T040249Z | `ab96681` | 155 | 1115 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 684 | 145 | 6 | 0 |
 | 20261014T034203Z | `869b8c2` | 155 | 1115 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 684 | 145 | 6 | 0 |
-| 20261013T232900Z | `bd7ca20` | 154 | 1115 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 684 | 145 | 6 | 0 |
 
-Change since the previous run: total +6, Tier-1 +0.
+Change since the previous run: total -1, Tier-1 +0.
 
 No file's Tier-1 count rose.
 
@@ -61,7 +61,7 @@ No file's Tier-1 count rose.
 | Tier | Score | Action | Count |
 |------|-------|--------|------:|
 | 1 | 16-20 | FIX NOW | 280 |
-| 2 | 10-15 | REVIEW | 684 |
+| 2 | 10-15 | REVIEW | 683 |
 | 3 | 5-9 | LOW PRIORITY | 153 |
 | 4 | 1-4 | LOWEST PRIORITY | 6 |
 
@@ -208,7 +208,6 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `visualization_core.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `visualization_utils.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `earth_pole_live_check.py` | orrery | 0 | 1 | 0 | 0 | 1 |
-| `patch_L431_11_website_orrery_20261014.py` | dev_tools | 0 | 1 | 0 | 0 | 1 |
 | `celestial_coordinates.py` | orrery | 0 | 1 | 0 | 0 | 1 |
 | `hills_cloud_sampler.py` | orrery | 0 | 1 | 0 | 0 | 1 |
 | `add_docstrings.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
@@ -234,13 +233,13 @@ Same data again, grouped by subject-matter domain rather than by individual file
 |--------|------:|-------:|-------:|-------:|-------:|------:|
 | Orrery (solar system + orbital mechanics) | 42 | 116 | 567 | 53 | 3 | 739 |
 | Earth System | 13 | 149 | 75 | 2 | 0 | 226 |
-| Dev Tools (audit, diagnostics, one-shot scripts) | 28 | 0 | 1 | 92 | 0 | 93 |
+| Dev Tools (audit, diagnostics, one-shot scripts) | 27 | 0 | 0 | 92 | 0 | 92 |
 | Stars (stellar neighborhood) | 12 | 13 | 41 | 6 | 3 | 63 |
 | Utilities (cross-domain shared helpers) | 1 | 2 | 0 | 0 | 0 | 2 |
 | Gallery | 0 | 0 | 0 | 0 | 0 | 0 |
 | Unclassified (no Domain: tag, or one outside the six) | 0 | 0 | 0 | 0 | 0 | 0 |
 
-**Domain coverage:** all 96 files with findings declare a `Domain:` tag the report knows.
+**Domain coverage:** all 95 files with findings declare a `Domain:` tag the report knows.
 
 ---
 
@@ -1427,12 +1426,6 @@ is planned for a future session.
 | 2341 | string | display string @ line 2341 | (5 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 2416 | string | display string @ line 2416 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 
-### patch_L431_11_website_orrery_20261014.py
-
-| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
-|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 2099 | dict | CREATED[...] | (7 entries) | 3 | 5 | **15** | Cited, not cross-checked; date-sensitive | UNDETERMINED -- could not be classified |
-
 ### planet9_visualization_shells.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
@@ -1895,9 +1888,9 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 106 | dict | ROLE_MAP[...] | (153 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 402 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 425 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 106 | dict | ROLE_MAP[...] | (152 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 401 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 424 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### moon_visualization_shells.py
 
@@ -1942,10 +1935,10 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 277 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 278 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 2023 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 2154 | dict | SECTION_SYMBOLS[...] | (8 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
+| 284 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 285 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 2013 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 2144 | dict | SECTION_SYMBOLS[...] | (8 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
 
 ### planet_visualization_utilities.py
 
