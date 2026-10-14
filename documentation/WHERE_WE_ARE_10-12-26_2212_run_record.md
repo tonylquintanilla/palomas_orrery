@@ -3218,21 +3218,23 @@ The question from before still stands: should the Pluto-Charon barycentre ship w
 
 11. The look (decide), on the phone and the desktop: in the Solar
    System room, hover Mercury and Jupiter (JPL's period, around the
-   Sun), 
+   Sun), --yes
    
-   Mars (typed, marked) and Pluto (not yet fetched). 
+   Mars (typed, marked) -- yes
+   
+   and Pluto (not yet fetched). -- yes
    
    In the Earth
-   room, hover the Sun Direction: Earth's period. 
+   room, hover the Sun Direction: Earth's period. -- yes, it says typed not fetched
    
    Encke and Halley are
    not rows in that room's list, so their periods show only once they
-   are; 
+   are; -- yes
    
    the Moon has no key in the orrery's list, so it gets no period
-   (section 6). 
+   (section 6). -- xyz position only
    
-   The Sun room prints no period: the Sun has none.
+   The Sun room prints no period: the Sun has none. -- right
     
     The dashboard (step 7's patch): the website group no longer shows
     Horizons Check or Horizons Check Suite; 
@@ -3242,6 +3244,302 @@ The question from before still stands: should the Pluto-Charon barycentre ship w
     Confirmations; 
     
     Drawn Orbit sits under the served cache.
+
+============================================================================
+
+What your run record shows
+
+The period check worked against JPL itself. The Horizons check in your orrery maintenance run asked JPL about Mercury, Jupiter and Encke and printed “PASS -- 3 checked today, 3 queries”. That was the first real test of the period check. In my sandbox it had only seen answers I’d written in JPL’s format.
+The run totals matched what I expected. The orrery run passed 30 of 30. The gallery run passed 27 of 27. Dashboard Parity passed after the third patch. The cache build swapped in on the first try.
+Your look was yes on every point. The Moon showing its position only and no period is what I expected, since it has no key in the orrery’s list.
+I’m reading your “yes” on Pluto’s row as your answer to the open question. It ships showing “not yet fetched from JPL”, and fetching the barycentre’s own period waits for the objects work.
+One gap: I don’t see the gallery’s live check (gallery_maintenance_run.py --live) in the record. If you ran it, nothing more is needed.
+
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 16 files from https://palomasorrery.com/
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches (the working copy is CRLF)
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+    SERVED   gallery/arrival.js                             matches the working copy
+    SERVED   gallery/nav_cluster.js                         matches the working copy
+    SERVED   gallery/solar_system_figures.js                matches the working copy
+    SERVED   gallery/solar_system_drawer.js                 matches the working copy
+    SERVED   data/objects_config.json                       matches the working copy
+    SERVED   gallery/guestbook.js                           matches the working copy
+    SERVED   data/guestbook.json                            matches the working copy
+    SERVED   data/solar-system/drawings/hills_cloud.json    matches the working copy
+
+  PASS Served reachability       2.3s  all 16 files served and
+                                    byte-identical to the working copy
+
+  orrery export pinned at b9aee91a
+
+  PASS Export freshness          0.2s  the served export is the orrery's
+                                    at b9aee91a, byte for byte
+
+  orrery HEAD 5ca56dfe
+  examining 7 of 119 links; the other 112 are served from the export
+    NOT IN STORE  planet_poles['Sun']              not a top-level constant in the store
+                  /objects/0/features/orientation
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  7 pointers: 4 match, 0 DRIFT, 0 UNIT MISMATCH, 3 could not be examined.
+
+  PASS Store drift               1.4s  7 pointers against orrery 5ca56dfe
+                                    -- 4 match, 0 DRIFT, 0 UNIT
+                                    MISMATCH, 3 could not be examined.
+
+======================================================================
+  2 of 2 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Store drift            7 pointers against orrery 5ca56dfe -- 4
+  last swap 2026-10-14T22:55:41.568619+00:00: succeeded first time
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+===================================================================================
+
+What the search does now: each word you type is matched on its own, anywhere on a card, in any order. That’s the way you said you’d use it.
+
+One word finds exactly what it found before. “export” still shows 22 cards.
+Each word you add narrows the list: “export pull” shows 10, “export pull objects” shows 8.
+“pull objects export” and “objects export pull” give the same 8 cards, Objects Export Pull among them.
+The Dashboard Parity check now also checks the search. It catches the old exact-phrase search as a fault, so a change that breaks word order would go red.
+
+What it records:
+
+L-431, orbital periods: closed, quoting your yes on each point of the look. Your yes on the Pluto row is recorded as the answer: it ships saying “not yet fetched from JPL”.
+L-395, the Horizons check’s move: closed. Its record cites the live pass from JPL on your run.
+L-440, the dashboard: closed, with your “looks great”.
+L-441, new: the dashboard’s “when” index, which you’d said to record for later.
+Where We Are: updated by section. The next steps listed are the master plan’s restamp, then the design session for bringing the orrery’s objects to the website.
+
+To run it:
+
+Save it in the orrery folder and press Run. It should end with “patch applied (39 edits in 6 files)”.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L440_2_word_order_search_20261014.py
+patch_L440_2_word_order_search_20261014.py
+Running in: c:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github
+
+ok  palomas_orrery_dashboard.py                   line 255: October 14, 2026 with Anthropic's Claude Opus
+ok  palomas_orrery_dashboard.py                   line 1215: "card carries its short line of twelve words 
+ok  palomas_orrery_dashboard.py                   line 1852: "Checks run steps against buttons by name, an
+ok  palomas_orrery_dashboard.py                   line 1970: def search_words(query):
+ok  palomas_orrery_dashboard.py                   line 2472: def _entry_matches(self, group_name, entry, n
+ok  palomas_orrery_dashboard.py                   line 2500: for group_name, entries in LAUNCH_GROUPS.item
+ok  test_dashboard_parity.py                      line 54: 6. The search finds a card by its words in an
+ok  test_dashboard_parity.py                      line 65: Before the real comparison it plants nine fau
+ok  test_dashboard_parity.py                      line 70: and an unreadable runner.
+ok  test_dashboard_parity.py                      line 77: Module updated: October 14, 2026 with Anthrop
+ok  test_dashboard_parity.py                      line 122: # Rule 6, the search: (typed, card names that
+ok  test_dashboard_parity.py                      line 210: """(LAUNCH_GROUPS, CARD_LINES, SCRIPT_DIR, GA
+ok  test_dashboard_parity.py                      line 231: matches = getattr(module, 'matching_groups', 
+ok  test_dashboard_parity.py                      line 352: def planted(steps, buttons, lines):
+ok  test_dashboard_parity.py                      line 408: if groups is not None:
+ok  test_dashboard_parity.py                      line 418: groups, lines, sdir, gdir = read_dashboard()
+ok  test_dashboard_parity.py                      line 430: results = planted(steps, buttons, lines)
+ok  test_dashboard_parity.py                      line 436: found = compare(steps, buttons, lines)
+ok  test_dashboard_parity.py                      line 467: 'carry a short line' % (caught, total, len(st
+ok  orrery_maintenance_run.py                     line 234: Module updated: October 14, 2026 with Anthrop
+ok  orrery_maintenance_run.py                     line 415: # card its short line; nine faults planted fi
+ok  LEDGER_CONSOLIDATED.md                        line 418: Module updated: October 14, 2026 with Anthrop
+ok  LEDGER_CONSOLIDATED.md                        line 1159: #### [L-441] The dashboard's "when" index, ge
+ok  LEDGER_CONSOLIDATED.md                        line 1208: **Gap:** Tony's look at the dashboard (the ha
+ok  LEDGER_CONSOLIDATED.md                        line 1609: <!-- L:431 status:PENDING-GATE upd:2026-10-14
+ok  LEDGER_CONSOLIDATED.md                        line 1944: 3. The website: BUILT and tested offline (202
+ok  LEDGER_CONSOLIDATED.md                        line 2807: <!-- L:395 status:PENDING-GATE upd:2026-10-14
+ok  LEDGER_CONSOLIDATED.md                        line 3192: **Gap:** The move is built. It closes when To
+ok  documentation/WHERE_WE_ARE.md                 line 4: Last updated: October 14, 2026: the website p
+ok  documentation/WHERE_WE_ARE.md                 line 10: > - Orbital periods, build 3: the website's h
+ok  documentation/WHERE_WE_ARE.md                 line 32: dashboard (L-440) built; L-424, L-425, L-426 
+ok  documentation/WHERE_WE_ARE.md                 line 41: the orrery's run; your next run is the period
+ok  documentation/WHERE_WE_ARE.md                 line 72: - Dashboard search: each word anywhere on a c
+ok  documentation/WHERE_WE_ARE.md                 line 77: - Comets by first apparition, oldest first. A
+ok  documentation/WHERE_WE_ARE.md                 line 88: - Last cache build: 20261014T175225Z, ok, no 
+ok  documentation/WHERE_WE_ARE.md                 line 93: ## Waiting on you
+ok  documentation/WHERE_WE_ARE.md                 line 110: 4. The dashboard's "when" index: L-441, recor
+ok  documentation/WHERE_WE_ARE.md                 line 115: - *Build 3 and the check's move, with the run
+ok  documentation/HANDOFF_L431_build3_website_20261014.md line 268: ## 9. After the run (2026-10-14, evening)
+
+patch applied (39 edits in 6 files)
+Stamps updated: the dashboard, Dashboard parity, the maintenance run,
+the ledger, Where We Are.
+
+NEXT:
+  1. Run orrery_maintenance_run.py. Expect "Dashboard parity ... PASS --
+     10 of 10 planted faults caught" and every gating checker to pass.
+     "Ledger index" moves L-431, L-395 and L-440 to the closed section.
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261014T225215Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 3.5s  rewrote LEDGER_CONSOLIDATED.md
+  Skill manifest               0.3s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             1.3s  unchanged (1 checked, not written)
+  Horizons check               0.5s  unchanged (2 checked, not written) --
+                                     NOTHING DUE -- 13 entries and 26 sheets
+                                     current, no query asked
+  Objects export               0.3s  unchanged (1 checked, not written)
+  Drawings export              0.4s  unchanged (1 checked, not written)
+  Module atlas                 9.7s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               6.5s  rewrote DATA_INVENTORY.md
+  Exact rows report            2.7s  unchanged (1 checked, not written) -- 13 of
+                                     41 exact rows printed at 43 lines (33
+                                     orrery, 10 gallery); 8 drawn only, 14 not
+                                     followed, 0 map entries broken
+  Document index               0.2s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.3s  No changes to constants_new.py since HEAD.
+  Constants relations          0.3s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              1.3s  No figure count exceeds its inputs: 36
+                                     derived row(s) read, 26 judged OK -- 26 OK,
+                                     10 NOT YET MIGRATED, 1 NO DERIVED LINE, 1
+                                     UNMARKED CONVERSION; 18 conversion(s)
+                                     checked.
+  Constants export check       2.2s  Export matches the store: sha256
+                                     2a1211f8cce2 on both sides; 127 rows
+                                     re-read, 56 not exported, 31 tokens; 320
+                                     conversions re-computed, 10 of 10 worked
+                                     cases hold.
+  Objects export check         0.4s  pass
+  Horizons confirmations       0.6s  pass -- 13 of 13 entries and 3 periods
+                                     confirmed, 26 sheets read, within 30 days
+  Horizons check suite         0.8s  pass -- 60 checks, every planted fault
+                                     caught by name
+  Skill headers                0.3s  12 skills parsed, no consistency problems.
+  Exact rows by the count      3.3s  PASSING -- 13 printed exact rows each state
+                                     a count; 33 orrery lines print through
+                                     exact_text() or row_text(); 10 gallery lines
+                                     are served the count
+  Dimensions                   1.8s  No unit contradicts its arithmetic: 54
+                                     derived row(s) read -- 42 OK, 9 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.2s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.2s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 126 status lines in constants_new.py are
+                                     well formed; 54 rows carry none.
+  Row shape                    0.1s  All 183 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.3s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Scanner row run (L-414)      0.3s  16 of 16 pins hold -- each row reads its own
+                                     comment run, declared rows are named, the
+                                     gate path is read by name.
+  Reset completeness          23.3s  PASS -- all 311 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  3.0s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Earth pole of date           0.5s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Hills cloud sampler (L-421)    0.7s  PASS -- 4 of 4 planted faults caught; the
+                                     real rows pass, the dots' plane tilted 34.1
+                                     deg
+  Drawings export check        0.6s  PASS -- 3 of 3 planted faults caught;
+                                     hills_cloud 3600 dots, tilt 30.9 deg, sha256
+                                     a51e93118069
+  Position digits (L-401)      3.7s  PASS -- 13 of 13 planted faults caught by
+                                     name; 23 hovers examined, 181 lines compared
+                                     against their errors; 5 pairs printed the
+                                     same from either end; 496 hovers of every
+                                     listed object from the Sun, Earth and
+                                     Neptune; 3 recorded 2xr answers read by
+                                     column name; 6 period sentences
+  Orbit markers (L-431, L-401)   15.4s  PASS -- 12 of 12 planted faults caught by
+                                     name; 4 ellipses, 1080 drawn points on their
+                                     period's centre; 14 markers, 9 dates, 53
+                                     printed distances against their errors; 6
+                                     elements as given; 3 Keplerian positions
+                                     half a year on; 1 parameters-window date
+                                     pairs; 2 Moon arcs; 2 perturbation checks; 1
+                                     perihelion osculating orbits; 2 frames; 2
+                                     sources read
+  Domain Split                 0.8s  PASS -- 6 of 6 planted faults caught; the
+                                     split reads each module's Domain: tag and
+                                     prints the same on the console, in the audit
+                                     and in the run history.
+  Maintenance report (L-269)    0.2s  PASS -- 4 of 4 planted faults caught by
+                                     name; 4 summaries; 2 risen file(s) named
+  Dashboard parity             0.6s  PASS -- 10 of 10 planted faults caught; 79
+                                     steps matched to their buttons by name and
+                                     script; 109 cards carry a short line; the
+                                     search finds 4 of 4 cases in any word order
+  Worksheet checker           12.9s  74 of 110 routed, 8 clean
+  Worksheet checker tests     23.9s  All 135 checks passed
+  Worksheet key round trip     1.6s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         33.5s  All 76 checks passed
+  Extractor pins               0.6s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          91.3s  0 TIER-1 -- the push gate holds; Whole tree,
+                                     Tier-1: 280: orrery 116, Earth System 149,
+                                     stars 13, utilities 2.
+
+======================================================================
+  30 of 30 gating checkers passed -- 250.3s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           74 of 110 routed, 8 clean
+    Provenance scanner          0 TIER-1 -- the push gate holds; Whole tree, Tier-1: 280: orrery 116, Earth System 149, stars 13, utilities 2.
+      No file's Tier-1 count rose since the previous run.
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2248 file(s) examined, 9 written, 0 created, 0 removed, 4 rewritten identically
+    written   DATA_INVENTORY.md
+    written   LEDGER_CONSOLIDATED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    written   module_atlas.py
+    rewritten with identical bytes, no action needed:
+      PROJECT_INSTRUCTIONS.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      test_output/test_orbit_paths.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  2. Open the dashboard and try the search: "pull objects export" and
+     "objects export pull" both find Objects Export Pull. -- correct
+  3. Move this script into documentation/; commit and push.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+Run the orrery maintenance run. Expect “Dashboard parity ... 10 of 10 planted faults caught” and 30 of 30. The ledger index moves the three closed items to the closed section.
+Try the search in the dashboard. Then move the patch into documentation/, commit and push.
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 

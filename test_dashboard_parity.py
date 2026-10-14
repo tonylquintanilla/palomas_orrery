@@ -51,6 +51,12 @@ THE RULES IT HOLDS, by name, in both directions
     4. Every button's script is on disk (the dashboard's "Not Found").
     5. Every card has a line in CARD_LINES, of twelve words or fewer, and
        every line in CARD_LINES belongs to a card.
+    6. The search finds a card by its words in any order (Tony,
+       2026-10-14: "objects export pull = pull objects export"): the
+       dashboard's own matching_groups(), the function its search box
+       calls, is asked SEARCH_CASES below and shows what each case says;
+       one word shows exactly what the old whole-phrase search showed;
+       and each word added narrows the list, never widens it.
     The few steps a differently named button covers on purpose are in
     COVERED_BY, each with its reason; they are printed on every run so
     that they stay known.
@@ -62,18 +68,23 @@ THE RULES IT HOLDS, by name, in both directions
 
 PROOF THAT IT CAN FAIL
 
-    Before the real comparison it plants nine faults, one at a time, in
+    Before the real comparison it plants ten faults, one at a time, in
     copies of the real lists, and each must be caught by its own kind of
     finding: a step with no button, a renamed button, a button running
     the wrong script, a missing script, a card with no line, a line over
     twelve words, a line for no card, an indented button naming no step,
-    and an unreadable runner.
+    an unreadable runner, and a search that matches only the whole
+    phrase, as the dashboard's did until 2026-10-14.
 
 Role: devtool
 Domain: dev_tools
 
 Module created: October 13, 2026 with Anthropic's Claude Opus 5.5 (L-440,
 the dashboard's labels, descriptions and findability).
+Module updated: October 14, 2026 with Anthropic's Claude Opus 5.5 (L-440,
+Tony's request of the same day: rule 6, the search finds a card by its
+words in any order, tested on the dashboard's own card_matches(); a tenth
+planted fault, the old whole-phrase search, must be caught as SEARCH.)
 """
 
 import ast
@@ -119,6 +130,21 @@ WRAPPERS = {
     'Solar System figures': 'documentation/run_solar_system_figures.py',
 }
 NODE_RUNNER = 'documentation/run_offline_check.py'
+
+# Rule 6, the search: (typed, card names that must be shown, "only" when
+# nothing else may be). The first three are Tony's example of 2026-10-14
+# in three orders and two cases; the last must show nothing, so a search
+# that shows everything cannot pass. ONE_WORDS must each show exactly what
+# the old whole-phrase search showed, and NARROWING each list smaller or
+# equal as words are added.
+SEARCH_CASES = (
+    ('objects export pull', {'Objects Export Pull'}, 'includes'),
+    ('pull objects export', {'Objects Export Pull'}, 'includes'),
+    ('Export OBJECTS pull', {'Objects Export Pull'}, 'includes'),
+    ('pull objects zqxw', set(), 'only'),
+)
+ONE_WORDS = ('export', 'horizons', 'stars', 'guest')
+NARROWING = ('export', 'export pull', 'export pull objects')
 
 # Arguments a button leaves out because the script uses the same value by
 # default: (repo, step) -> (argument, reason).
@@ -207,7 +233,8 @@ class _Stand(types.ModuleType):
 
 
 def read_dashboard(path=DASHBOARD):
-    """(LAUNCH_GROUPS, CARD_LINES, SCRIPT_DIR, GALLERY_REPO_DIR)."""
+    """(LAUNCH_GROUPS, CARD_LINES, SCRIPT_DIR, GALLERY_REPO_DIR,
+    matching_groups)."""
     saved = {}
     for name in ('tkinter', 'customtkinter', 'PIL', 'PIL.Image',
                  'PIL.ImageTk'):
@@ -228,8 +255,11 @@ def read_dashboard(path=DASHBOARD):
     lines = getattr(module, 'CARD_LINES', None)
     if lines is None:
         raise Unreadable('%s: no CARD_LINES' % path)
+    matches = getattr(module, 'matching_groups', None)
+    if matches is None:
+        raise Unreadable('%s: no matching_groups' % path)
     return (module.LAUNCH_GROUPS, lines, module.SCRIPT_DIR,
-            module.GALLERY_REPO_DIR)
+            module.GALLERY_REPO_DIR, matches)
 
 
 def buttons_of(groups, script_dir, gallery_dir):
@@ -349,8 +379,59 @@ def _command_problem(s, b, cover):
     return None
 
 
-def planted(steps, buttons, lines):
-    """Nine faults, each required to produce its own kind of finding."""
+def _shown(search, typed, groups):
+    return sorted(e[0] for _g, drawn in search(typed, groups)
+                  for e in drawn if not isinstance(e, str))
+
+
+def check_search(groups, search):
+    """Rule 6: the dashboard's matching_groups() against SEARCH_CASES,
+    ONE_WORDS and NARROWING."""
+    found = []
+    for typed, want, how in SEARCH_CASES:
+        shown = set(_shown(search, typed, groups))
+        ok = (shown == want) if how == 'only' else (bool(want) and want <= shown)
+        if not ok:
+            found.append(('SEARCH', 'typing "%s" shows %s; it should show %s%s'
+                          % (typed, sorted(shown)[:6] or 'nothing',
+                             'only ' if how == 'only' else '',
+                             sorted(want) or 'nothing')))
+    for word in ONE_WORDS:
+        if _shown(search, word, groups) != _shown(_phrase_only, word, groups):
+            found.append(('SEARCH', 'one word, "%s", no longer shows what it '
+                          'showed before' % word))
+    sizes = [len(_shown(search, typed, groups)) for typed in NARROWING]
+    if any(b > a for a, b in zip(sizes, sizes[1:])):
+        found.append(('SEARCH', 'adding words widened the list: %s'
+                      % ', '.join('"%s" %d' % p for p in zip(NARROWING, sizes))))
+    return found
+
+
+def _phrase_only(query, groups, lines=None):
+    """The search as it was until 2026-10-14: the typed text as one
+    phrase, in the group's name (the whole group), or a card's name,
+    short line or paragraph. Planted, to show rule 6 can fail, and the
+    yardstick a single word must still match."""
+    needle = (query or '').strip().lower()
+    lines = _LINES if lines is None else lines
+    out = []
+    for name, entries in groups.items():
+        if needle in name.lower():
+            drawn = [e for e in entries if not isinstance(e, str)]
+        else:
+            drawn = [e for e in entries if not isinstance(e, str)
+                     and (needle in e[0].lower() or needle in e[2].lower()
+                          or needle in lines.get((name, e[0]), '').lower())]
+        if drawn:
+            out.append((name, drawn))
+    return out
+
+
+_LINES = {}
+
+
+def planted(steps, buttons, lines, groups=None):
+    """Ten faults, each required to produce its own kind of finding."""
     results = []
 
     def one(label, kind, s=steps, b=buttons, c=lines, runner=None):
@@ -405,6 +486,10 @@ def planted(steps, buttons, lines):
     one('an unreadable runner', 'UNREADABLE',
         runner=lambda: read_runs(gallery=os.path.join(HERE,
                                                       'no_such_gallery')))
+    if groups is not None:
+        got = check_search(groups, _phrase_only)
+        results.append(('a search matching the whole phrase only', 'SEARCH',
+                        any(k == 'SEARCH' for k, _t in got)))
     return results
 
 
@@ -415,7 +500,8 @@ def main():
     print('  website repo: %s' % GALLERY)
     try:
         steps = read_runs()
-        groups, lines, sdir, gdir = read_dashboard()
+        groups, lines, sdir, gdir, matches = read_dashboard()
+        _LINES.update(lines)
     except Unreadable as exc:
         print('')
         print('CANNOT READ: %s' % exc)
@@ -427,13 +513,13 @@ def main():
     print('')
     print('Planted faults, each must be caught by its own kind of finding:')
     caught = 0
-    results = planted(steps, buttons, lines)
+    results = planted(steps, buttons, lines, groups)
     for label, kind, ok in results:
         caught += ok
         print('  %-6s %-36s -> %s' % ('caught' if ok else 'MISSED', label,
                                       kind))
 
-    found = compare(steps, buttons, lines)
+    found = compare(steps, buttons, lines) + check_search(groups, matches)
     counts = {}
     for s in steps:
         key = 'Daily Run' if s['kind'] == 'DAILY' else s['repo']
@@ -464,9 +550,11 @@ def main():
         return 1
     print('DASHBOARD PARITY: PASS -- %d of %d planted faults caught; %d '
           'steps matched to their buttons by name and script; %d cards '
-          'carry a short line' % (caught, total, len(steps),
-                                  len(set((b['group'], b['name'])
-                                          for b in buttons))))
+          'carry a short line; the search finds %d of %d cases in any '
+          'word order' % (caught, total, len(steps),
+                          len(set((b['group'], b['name'])
+                                  for b in buttons)),
+                          len(SEARCH_CASES), len(SEARCH_CASES)))
     return 0
 
 

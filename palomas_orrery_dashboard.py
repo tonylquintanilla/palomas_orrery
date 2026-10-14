@@ -252,6 +252,17 @@ Horizons Check Suite, whose script went to the orrery; the website's
 Horizons Confirmations says it reads the dates from the pulled export;
 and Drawn Orbit, the website's new checker, gets its button under the
 served cache, in alphabetical place, with its short line.
+October 14, 2026 with Anthropic's Claude Opus 5.5 (L-440, Tony's request
+of the same day: "can we make the dashboard search be word order
+insensitive? for example: objects export pull = pull objects export"):
+the search matches each typed word on its own, so a card shows when every
+word appears somewhere on it -- the group's name, the card's name, its
+short line or its paragraph -- in any order. One word finds what it found
+before; each word added narrows the list (Tony: "with order insensitive,
+i would actually narrow the search but still find results"). Until now
+the typed text had to appear as one phrase. matching_groups() holds the
+rule at module level, so Dashboard Parity can test it and plant the old
+phrase match as a fault.
 """
 
 import os
@@ -1212,8 +1223,9 @@ LAUNCH_GROUPS = {
          "offline maintenance run and the Daily Run has a button here with "
          "the same name and the same script, that every indented button "
          "names a row, that every button's script is on disk, and that every "
-         "card carries its short line of twelve words or fewer. It reads "
-         "both repositories and edits neither. Nine faults are planted "
+         "card carries its short line of twelve words or fewer; and that the "
+         "search finds a card by its words in any order. It reads "
+         "both repositories and edits neither. Ten faults are planted "
          "first, each caught by name. Ends on \"DASHBOARD PARITY: PASS\" "
          "(L-440).",
          SCRIPT_DIR,
@@ -1849,7 +1861,7 @@ CARD_LINES = {
         "Checks the grammar and scoring of cross-check annotations.",
     ("Maintenance Run",
      "Dashboard Parity"):
-        "Checks run steps against buttons by name, and every card's short line.",
+        "Checks run steps against buttons, short lines, and the search.",
     ("Maintenance Run",
      "Derived Figures"):
         "Checks a derived constant claims no more figures than its inputs.",
@@ -1967,6 +1979,59 @@ CARD_LINES = {
 def card_line(group_name, label):
     """The short line for a card, or "" when it has none yet."""
     return CARD_LINES.get((group_name, label), "")
+
+
+def search_words(query):
+    """The words of a search, case folded, in the order typed."""
+    return (query or "").casefold().split()
+
+
+def words_in(words, *texts):
+    """True when every word appears somewhere in the texts, in any order.
+
+    Each word is matched on its own, as a piece of text, so "pull" also
+    finds "pulls" and the order the words are typed in does not matter
+    (Tony, 2026-10-14: "objects export pull = pull objects export").
+    No words matches nothing; the caller shows everything for an empty
+    box.
+    """
+    if not words:
+        return False
+    hay = " ".join(t.casefold() for t in texts if t)
+    return all(w in hay for w in words)
+
+
+def card_matches(query, group_name, entry):
+    """True when every word of `query` is on the card: its group's name,
+    its own name, its short line (L-440) or its "+ more" paragraph."""
+    return words_in(search_words(query), group_name, entry[0],
+                    card_line(group_name, entry[0]), entry[2])
+
+
+def matching_groups(query, groups):
+    """What a search draws: [(group name, entries)], headings kept.
+
+    Each word is matched on its own, anywhere on the card, in any order
+    (Tony, 2026-10-14). So one word finds exactly what it found before,
+    and each word added narrows the list rather than emptying it: "I
+    usually use only one word to avoid getting no results with word
+    combinations. With order insensitive, I would actually narrow the
+    search but still find results."
+
+    A group whose own name holds every word comes whole: somebody typing
+    a category name means the category ("stars", 2026-09-19).
+    """
+    words = search_words(query)
+    out = []
+    for name, entries in groups.items():
+        if not words or words_in(words, name):
+            drawn = list(entries)
+        else:
+            drawn = filter_entries(
+                entries, lambda e, g=name: card_matches(query, g, e))
+        if drawn:
+            out.append((name, drawn))
+    return out
 
 
 def entry_indented(entry):
@@ -2469,16 +2534,6 @@ class PalomasOrreryDashboardFrame(ctk.CTkFrame):
         return sum(1 for entries in LAUNCH_GROUPS.values()
                    for entry in entries if not isinstance(entry, str))
 
-    def _entry_matches(self, group_name, entry, needle):
-        """Name, short line or description contains `needle`, any case.
-
-        The short line is searched as well as the paragraph (L-440): it
-        is the text a card shows, so a word read on a card finds it.
-        """
-        return (needle in entry[0].lower()
-                or needle in card_line(group_name, entry[0]).lower()
-                or needle in entry[2].lower())
-
     def _render_launch(self, query):
         """Draw the groups, filtered by `query`.
 
@@ -2497,23 +2552,12 @@ class PalomasOrreryDashboardFrame(ctk.CTkFrame):
         self._rendered_query = needle
         shown = 0
 
-        for group_name, entries in LAUNCH_GROUPS.items():
-            if not needle:
-                drawn = list(entries)
-            elif needle in group_name.lower():
-                # The GROUP NAME counts as a match, and takes the whole
-                # group with it. Typing "stars" found nothing before
-                # this: the Stars group exists, but its one button is
-                # called Star Visualization and no description says
-                # "stars". Somebody typing a category name means the
-                # category. (Found by testing, 2026-09-19.)
-                drawn = list(entries)
-            else:
-                drawn = filter_entries(
-                    entries,
-                    lambda e, g=group_name: self._entry_matches(g, e, needle))
-            if not drawn:
-                continue
+        # The matching itself is matching_groups(), at module level,
+        # where Dashboard Parity tests it (L-440, 2026-10-14): each word
+        # on its own, anywhere on the card, in any order; a group whose
+        # name holds every word comes whole (the GROUP NAME rule: typing
+        # "stars" found nothing before it, 2026-09-19).
+        for group_name, drawn in matching_groups(needle, LAUNCH_GROUPS):
             shown += sum(1 for e in drawn if not isinstance(e, str))
             self._build_group(group_name, drawn)
 

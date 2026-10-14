@@ -12,14 +12,14 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 160  
-**Total Lines of Code (non-blank):** 125,548  
-**Total Public Functions/Classes:** 1,524
+**Total Lines of Code (non-blank):** 126,213  
+**Total Public Functions/Classes:** 1,529
 
 ## Classification Coverage
 
 **Patch scripts awaiting archive (1).** A `Role: patch` module is a one-shot script that has already run. Its base fingerprint no longer matches, so it cannot run again. Move each into `documentation/`. While one sits in the scanned tree it inflates the module count here and the file count in the provenance audit.
 
-- `patch_L431_13_dashboard_buttons_20261014.py`
+- `patch_L440_2_word_order_search_20261014.py`
 
 **Undetermined role (8).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
@@ -47,7 +47,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `earth_system_visualization_gui.py` | Earth System Visualization GUI for Paloma's Orrery Hub window with climate data visualizations (1,903 lines) |
 | `orbital_param_viz.py` | Interactive orbital element visualization tool. (1,965 lines) |
 | `palomas_orrery.py` | Main GUI and plotting engine for Paloma's Orrery. (9,668 lines) |
-| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (2,927 lines) |
+| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (2,962 lines) |
 | `star_visualization_gui.py` | Stellar visualization GUI for Paloma's Orrery. (1,409 lines) |
 
 ---
@@ -228,8 +228,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `ledger_index.py` | Generate the at-a-glance INDEX for the consolidated ledger. (715 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (129 lines) |
-| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (993 lines) |
-| `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (826 lines) |
+| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (992 lines) |
+| `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (830 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (505 lines) |
 | `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (3,528 lines) |
 | `skills_index.py` | Generate the Skill Manifest table in the project instructions from the SKILL.md files in skills/. (882 lines) |
@@ -237,7 +237,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `test_constants_export.py` | - data/constants_export.json says what constants_new.py holds. (389 lines) |
 | `test_constants_provenance.py` | Regression tests for verified numeric constants. (476 lines) |
 | `test_cross_checked.py` | Regression tests for cross-check annotations. (501 lines) |
-| `test_dashboard_parity.py` | Every step the maintenance runs and the Daily Run take has a dashboard button with the same name and the same script, every button under a runner names one of its steps, every button's script is on disk, and every card carries its short line; and proof that this check c... (419 lines) |
+| `test_dashboard_parity.py` | Every step the maintenance runs and the Daily Run take has a dashboard button with the same name and the same script, every button under a runner names one of its steps, every button's script is on disk, and every card carries its short line; and proof that this check c... (498 lines) |
 | `test_derived_figures.py` | - a derived constant declares no more significant figures than its inputs support, and names every derived row it cannot judge. (1,239 lines) |
 | `test_dimensions.py` | - a derived constant's unit follows from its arithmetic. (591 lines) |
 | `test_domain_split.py` | Checks for L-437: the provenance scanner's whole-tree Tier-1 total prints with its domain split, and a module's domain is read from its own docstring Domain: tag. (406 lines) |
@@ -264,7 +264,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `patch_L431_13_dashboard_buttons_20261014.py` | - L-431 (orbital periods from JPL), build 3, its third and last patch: the dashboard's buttons for the website follow the website's patch. (330 lines) |
+| `patch_L440_2_word_order_search_20261014.py` | - L-440 (the dashboard): the search ignores word order; and the close of L-431 (orbital periods from JPL), L-395 (the Horizons check's move) and L-440 on Tony's runs and looks of October 14. (878 lines) |
 
 ---
 

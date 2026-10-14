@@ -1,24 +1,23 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 14, 2026: the website prints JPL's periods; the Horizons check moved.
-- Written at orrery 5cd63cce and gallery 4b2b660a.
+Last updated: October 14, 2026, evening: periods accepted; three items closed; search.
+- Written at orrery 5ca56df and gallery 86ef2df.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Orbital periods, build 3: the website's hovers print the orrery's
->   period, its centre and the date JPL gave it. Built and tested here.
-> - The Horizons check moved into the orrery's maintenance run, and
->   checks each period too. The website's Daily Run is three steps.
+> - Orbital periods are on the website, accepted at your look. L-431
+>   (periods), L-395 (the check's move) and L-440 (the dashboard) closed.
+> - The dashboard search: each word on its own, in any order; more
+>   words narrow the list.
 >
-> **Do next:** *Run the three patches in the order the handoff gives
-> (in Where the details are); then the look.*
+> **Do next:** *The master plan's restamp, from its brief; then the
+> objects-to-website design session (both in Where the details are).*
 >
 > **Needs you now:**
-> - *One question: Pluto-Charon's barycentre has no period from JPL
->   yet (the orrery never fetches the barycentre itself), so its row
->   says "not yet fetched from JPL". Ship it so, and fetch it later?*
+> - *Run patch_L440_2, then the maintenance run (Dashboard parity,
+>   10 of 10 faults caught); try the search; push.*
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
@@ -29,17 +28,16 @@ Last updated: October 14, 2026: the website prints JPL's periods; the Horizons c
   5.   [NOW]   L-401 (the distance digits): builds 1 and 2 accepted;
                build 3 later. Then Earth's remaining items.
   5b.  [NOW]   The scaffolding checks clear beside the slices: the
-               dashboard (L-440) built; L-424, L-425, L-426 to come.
+               dashboard (L-440) done; L-424, L-425, L-426 to come.
   6.   [next]  The typed facts: the inner Oort cloud is drawn on the
                website too. Left: the check.
-  6a.  [done]  *Orbital periods from JPL: all three builds; the
-               website's waits only on your run and your look.*
+  6a.  [done]  *Orbital periods from JPL, in the orrery and on the
+               website; accepted at your look, Oct 14.*
                << moved this session
   7.   [next]  The Sun's numbers get the checking Earth's got; the Solar
                System room's features close with these rooms.
   8.   [done]  The served objects are checked against JPL Horizons, from
-               the orrery's run; your next run is the periods' first live test.
-               << moved this session
+               the orrery's run; the periods passed live, Oct 14.
   9.   [next]  The website's checks, in the order you confirmed:
                L-423 (the website's checks).
  10.   [next]  A bare interactive.html link opens the Solar System room;
@@ -69,15 +67,16 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
   boundaries. A dashboard button is named what the run prints. (Oct 12)
 - The dashboard: a short line per card, the rest under "+ more"; the
   website checks in your six headings; only the orrery opens a console. (Oct 13)
+- Dashboard search: each word anywhere on a card, in any order. (Oct 14)
+- Pluto-Charon's barycentre: "not yet fetched"; its period waits for
+  the objects work. (Oct 14)
 - Scattered dots are placed by the orrery and stored for the website;
   a shape that is a formula is worked out on each side. (Oct 11)
 - Orbital periods: JPL's own, every body, orrery and website; the
   centre that moves less in a year, digits by the larger error, the
   drawn orbit and markers alike; typed table last, marked. (Oct 11)
-- Comets by first apparition, oldest first. A colour tells bodies
-  apart; not the default goldenrod. (Oct 10)
-- Fuzzy boundaries come before the Sun and Earth rooms close. Every
-  new check gets its dashboard button. (Oct 10)
+- Comets by first apparition, oldest first. Fuzzy boundaries before
+  the Sun and Earth rooms close. Every new check gets a button. (Oct 10)
 - The Hills cloud follows its paper (Fig. 3, its text), cited; to 10,000 AU. (Oct 10)
 - OneDrive: no pause before a build; the retry is sufficient. Empty
   "solar-system (N)" folders are harmless; delete by hand. (Oct 8, 10)
@@ -85,12 +84,12 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261014T175225Z, ok, no retry (gallery 4b2b660a).
-- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, 5cd63cce).
+- Last cache build: 20261014T225537Z, ok, no retry (gallery 86ef2df).
+- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, 5ca56df).
   Whole tree: 280: orrery 116, Earth System 149, stars 13, utilities 2.
 - This page's date and the ledger's newest stamp: both Oct 14. Agree.
 
-## Waiting on you
+## Waiting on you  **>> UPDATED THIS SESSION**
 
 At the next design talk:
 - L-401 (the distance digits): a model with no stated accuracy (the
@@ -107,13 +106,15 @@ Not urgent, in your order:
 1. Whether the editor also edits the Solar System room's rows.
 2. Choosing a date, and animation.
 3. The orrery from your phone: L-436 (away from the machine), an idea.
+4. The dashboard's "when" index: L-441, recorded for later.
 
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`. Open for build: L-421 (the
   typed facts), its check.
-- *Build 3 and the check's move, with the run order:
-  `HANDOFF_L431_build3_website_20261014.md`*
+- *Next: `HANDOFF_master_plan_restamp_brief_20261013.md`, then
+  `HANDOFF_L438_objects_to_website_brief_20261013.md`*
+- Build 3 and the check's move: `HANDOFF_L431_build3_website_20261014.md`
 - Orbital periods: rulings `DESIGN_L431_..._rulings_20261011.md`; build 2's
   look and fixes `HANDOFF_L431_build2_look_fixes_20261013.md`; build 3's
   brief `HANDOFF_L431_build3_website_brief_20261013.md`

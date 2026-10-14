@@ -231,6 +231,9 @@ check_horizons_confirmations.py, which goes red on what the check found,
 and Horizons check suite, test_horizons_check.py. "Runs the nine
 GENERATORS" no longer names a count, for the reason the paragraph on
 gating gave on 2026-10-13.)
+Module updated: October 14, 2026 with Anthropic's Claude Opus 5.5 (L-440:
+the comment on Dashboard parity says it also checks the dashboard's
+search, word order ignored, with a tenth planted fault.)
 """
 
 import hashlib
@@ -412,7 +415,8 @@ CHECKERS = [
      'MAINTENANCE REPORT:'),
     # L-440: every step of both maintenance runs and of the Daily Run
     # has a dashboard button with the same name and script, and every
-    # card its short line; nine faults planted first, each caught.
+    # card its short line; and the search finds a card by its words in
+    # any order (2026-10-14); ten faults planted first, each caught.
     ('Dashboard parity', ['test_dashboard_parity.py'],
      'DASHBOARD PARITY:'),
     # A fourth field marks a tool REPORT-ONLY: it exits 0 whatever it

@@ -265,4 +265,23 @@ test of the check; your look is the test of the words.
 - (decide) The Pluto-Charon barycentre's row (section 2).
 - (decide) The look (step 11).
 
+## 9. After the run (2026-10-14, evening)
+
+Added by `patch_L440_2_word_order_search_20261014.py`, built on orrery
+5ca56df at https://github.com/tonylquintanilla/palomas_orrery and read
+against gallery 86ef2df at
+https://github.com/tonylquintanilla/tonyquintanilla.github.io.
+
+- Your run record (`documentation/WHERE_WE_ARE_10-12-26_2212_run_record.md`
+  at 5ca56df) shows every step green: the orrery run 30 of 30 twice, the
+  website's 27 of 27 twice, the cache swapped in first time. The Horizons
+  check reached JPL and passed for Mercury, Jupiter and Encke: the first
+  live test of the period comparison, and of Encke's query sent with
+  %3B.
+- Your look said yes to every line, Pluto's barycentre included, which
+  answers section 2: it ships saying "not yet fetched from JPL".
+- L-431, L-395 and L-440 are closed in the ledger. L-440's later slice,
+  the dashboard's "when" index, is L-441.
+- The live check's output is not in the record; nothing waits on it.
+
 Session written October 2026 with Anthropic's Claude Opus 5.5.
