@@ -419,6 +419,12 @@ Module updated: October 14, 2026 with Anthropic's Claude Opus 5.5
 (L-431, L-395 and L-440 closed on Tony's runs and looks; the dashboard's
 search matches each word in any order; L-441 opened for the "when"
 index), built on 5ca56df.
+Module updated: October 14, 2026 with Anthropic's Claude Opus 5.5
+(L-442: the master plan is strategy and the road is the order, Tony's
+seven kinds of document; plan v36, its history moved out;
+ledger-and-session-records 1.21, protocol v3.97; L-433 closed, its loose
+ends to L-443, opened; L-431's live-check line corrected), built on
+9248845c.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -636,7 +642,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*241 live items; 225 need attention (`!`); 167 RICE-scored; 193 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*241 live items; 225 need attention (`!`); 167 RICE-scored; 195 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -787,10 +793,10 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-429 | The room button on the row, in the Solar System room's list (gallery, exhibits) | OPEN | -- | 2026-10-10 |
 | ! | L-430 | Uncited lines in the orrery's Oort cloud tooltips and the Sun's reach text (orrery, words) | OPEN | -- | 2026-10-10 |
 | ! | L-432 | Objects drawn in the default goldenrod (orrery, colours) | OPEN | -- | 2026-10-11 |
-| ! | L-433 | The road after the Sun and Earth rooms, in Tony's words (planning) | OPEN | -- | 2026-10-14 |
 | ! | L-434 | Stored drawings for the other dot-cloud shells (orrery + gallery) | OPEN | -- | 2026-10-11 |
 | ! | L-435 | Standing rulings that are method, held only on Tony's page (skills, records) | OPEN | -- | 2026-10-12 |
 | ! | L-441 | The dashboard's "when" index, generated from tags (dashboard) | OPEN | -- | 2026-10-14 |
+| ! | L-443 | The rest of the orrery's objects come to the website as plotted positions (gallery + orrery, objects) | OPEN | -- | 2026-10-14 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1130,8 +1136,10 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-422 | ledger-and-session-records 1.17: Tony's page by section, the run-record zone, labels on handles, RICE for lists, where a record goes (skills, documentation) | DONE | -- | 2026-10-08 |
 |  | L-428 | The lobby's way in: the Solar System room first (gallery, lobby) | DONE | -- | 2026-10-10 |
 |  | L-431 | Orbital periods from JPL, for every body, printed by their errors (orrery, provenance) | DONE | -- | 2026-10-14 |
+|  | L-433 | The road after the Sun and Earth rooms, in Tony's words (planning, DONE 2026-10-14) | DONE | -- | 2026-10-14 |
 |  | L-437 | The whole-tree Tier-1 total prints with its domains; a module's domain has one home (provenance tooling, DONE 2026-10-13) | DONE | -- | 2026-10-13 |
 |  | L-440 | The dashboard's labels, short lines and headings, and the parity check (dashboard, both repos) | DONE | -- | 2026-10-14 |
+|  | L-442 | The master plan is strategy and the road is the order: Tony's seven kinds of document (documentation, DONE 2026-10-14) | DONE | -- | 2026-10-14 |
 
 ### W.Done -- Web Publication track, closed items
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1160,6 +1168,38 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ## DETAIL / RECORD
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
+
+#### [L-443] The rest of the orrery's objects come to the website as plotted positions (gallery + orrery, objects)
+<!-- L:443 status:OPEN upd:2026-10-14 section:A flag: rice: -->
+- **Tony, 2026-10-13:** "I am anxious to add the symbols to the gallery
+  too so visitors can at least plot positions." And his note of
+  2026-10-10 on L-433: "then add the symbols for most if not all the
+  orrery's objects list." Stage 11 on the road.
+- **Opened 2026-10-14, at L-433's close** (L-442), so L-433's loose ends
+  have an open home. The brief,
+  `documentation/HANDOFF_L438_objects_to_website_brief_20261013.md`,
+  names this work L-438; the ledger's index had retired L-438 and L-439
+  before the item opened, and a retired handle is never reused. The
+  brief is otherwise current.
+- **Loose ends received from L-433** (its note of 2026-10-14, from L-431
+  and L-395), word for word:
+  - The served objects with no `'key'` in the orrery's list (moon, io,
+    titan, pluto, charon, voyager_1) get no period on the website and
+    no Horizons check; each gains both when it gets a key.
+  - The Pluto-Charon barycentre's own period, around the Sun: the
+    orrery never fetches elements for the barycentre itself, so the
+    website prints "not yet fetched from JPL" for it.
+  - From L-395: the fields the list lacks (a moon's parent, a clean
+    kind); the display-name rename, which waits for names to stop
+    being keys; MAPS and 3I/ATLAS checked live once served; and
+    whether the identity check widens past the keyed entries (default
+    no).
+**Gap:** the design session, from the brief: measure, propose the
+slices and the mechanism, and build the first slice only after Tony's
+word.
+**Ref:** `documentation/HANDOFF_L438_objects_to_website_brief_20261013.md`;
+L-433; L-431; L-395; L-442; `export_objects.py`; `celestial_objects.py`;
+gallery `data/objects_config.json`.
 
 #### [L-441] The dashboard's "when" index, generated from tags (dashboard)
 <!-- L:441 status:OPEN upd:2026-10-14 section:A flag: rice: -->
@@ -1495,50 +1535,6 @@ clumps and the tide; then each shape's export, its served name and the
 website drawing it, with Tony's look.
 **Ref:** L-421; L-239; L-224; L-410; L-351 (the served-drawing contract,
 owed to interactive-exhibit); `documentation/HANDOFF_L421_oort_gallery_20261011.md`.
-
-#### [L-433] The road after the Sun and Earth rooms, in Tony's words (planning)
-<!-- L:433 status:OPEN upd:2026-10-14 section:A flag: rice: -->
-- **Tony, 2026-10-10, in his run record** (`documentation/WHERE_WE_ARE_10-10-26_2019_run_record.md` at 6fc3648), two notes:
-  - "a couple of things to keep in mind. before we close the sun and
-    earth rooms, i would like to implement fuzzy boundaries. and in the
-    last session we found something important. the orbital periods
-    dictionary is hand maintained and instead should be fetched from
-    Horizons along with the other osculating data." (L-410, L-431.)
-  - "the near term goal is to complete the sun and earth room
-    thoroughly as a template for other body rooms. then add the symbols
-    for most if not all the orrery's objects list. then we can decide on
-    priorities. the "golden artifacts" are one path, but not the only
-    one. I would be inclined to work on the inner planets after that.
-    and we should not forget the earth science part."
-- **Against Where We Are's road, as it stood at 6fc3648:** the Sun and
-  Earth rooms (stages 5 to 7) and the objects (stage 11) agree. Stage 13
-  reads "The planets get their details, Jupiter and Saturn first";
-  Tony's note leans to the inner planets. Stage 14 is the Earth System
-  layers, his "earth science part".
-- **Note (2026-10-14), loose ends received from L-431 and L-395** for
-  the work that brings the rest of the orrery's objects to the website
-  (stage 11; brief
-  `documentation/HANDOFF_L438_objects_to_website_brief_20261013.md`):
-  - The served objects with no `'key'` in the orrery's list (moon, io,
-    titan, pluto, charon, voyager_1) get no period on the website and
-    no Horizons check; each gains both when it gets a key.
-  - The Pluto-Charon barycentre's own period, around the Sun: the
-    orrery never fetches elements for the barycentre itself, so the
-    website prints "not yet fetched from JPL" for it.
-  - From L-395: the fields the list lacks (a moon's parent, a clean
-    kind); the display-name rename, which waits for names to stop
-    being keys; MAPS and 3I/ATLAS checked live once served; and
-    whether the identity check widens past the keyed entries (default
-    no).
-  - That brief names its item L-438, which the ledger's index now lists
-    as retired with L-439 (the dashboard labels took L-440). The objects
-    work opens its block under the next free handle.
-**Gap:** at the next design talk after the orbital periods: Tony
-confirms the order, and the road and the master plan's critical path
-(`documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md`, Section 5a) are
-rewritten to it. Until then the road stands, with his lean noted.
-**Ref:** L-410; L-431; L-412; L-413; L-221 (the master plan is the
-roadmap); `documentation/WHERE_WE_ARE.md`.
 
 #### [L-432] Objects drawn in the default goldenrod (orrery, colours)
 <!-- L:432 status:OPEN upd:2026-10-11 section:A flag: rice: -->
@@ -14575,6 +14571,9 @@ the only place that check CAN fire, because the gate is load-triggered
 and a skill copy is bound when the conversation starts. Deferred
 verification, carried in writing, settled against the one thing a
 later session can actually read. Same structure as the SHA round trip.
+**Note (2026-10-14):** sequencing authority moved from the plan to the
+road on Where We Are (L-442, Tony's ruling of 2026-10-13); the status
+half of this ruling stands.
 **Ref:** `skills/ledger-and-session-records/SKILL.md` "The Document
 Stack"; LEDGER_CONSOLIDATED.md "RICE scoring -- prioritization for
 planning"; L-220 (Stamp What You Change); L-215 (the RICE tail
@@ -22563,7 +22562,10 @@ L-403. Encke's period was L-431's, and is built.
   position only", the Sun room "-- right". His "yes" on Pluto's row
   answers the build's one question: it ships saying "not yet fetched
   from JPL", and the barycentre's own period waits for the objects work
-  (L-433's note). The live check's output is not in the record.
+  (L-433's note). The website's live check is in the record too: "2 of
+  2 gating checkers passed", the served files byte-identical and the
+  export the orrery's at b9aee91a. (Corrected 2026-10-14, L-442; this
+  line first read that its output was not in the record.)
 Loose ends, re-homed at this build: the Pluto-Charon barycentre's own
 period, and the served objects with no key in the orrery's list (the
 Moon among them, so the brief's "one moon" in the look prints no
@@ -22656,6 +22658,133 @@ uncertainty); skills/horizons-orbital-mechanics/SKILL.md.
 **Ref:** `documentation/HANDOFF_L440_dashboard_labels_20261013.md`;
 `palomas_orrery_dashboard.py`; `test_dashboard_parity.py`;
 L-324 (its parity row, now built); L-416; L-341; L-281.
+#### [L-442] The master plan is strategy and the road is the order: Tony's seven kinds of document (documentation, DONE 2026-10-14)
+<!-- L:442 status:DONE upd:2026-10-14 section:C flag: rice: -->
+- **Tony's ruling, 2026-10-13**, in the coordination session of
+  October 12 and 13, recorded in
+  `documentation/HANDOFF_master_plan_restamp_brief_20261013.md`,
+  section 1. His words: "master plan: strategic - where we are:
+  tactical - handoffs: orders and reports - ledger: logistics." "by
+  handoff I am conflating different documents, briefs, design
+  manifests, closing reports and maybe others. But they are still all
+  communication documents." "And of course there are code builds. Which
+  is the work itself." "the ledger is like a maintenance management
+  system, both history and work orders with priority, but by itself is
+  not a schedule or a plan. Skills and the project instructions as you
+  said is how we work together. You could say it's our field manual.
+  There are other documents that are references like the module atlas
+  and the provenance scanner report." And "Yes" to the seven-part
+  statement.
+- **The seven kinds:** strategy (the master plan); tactics (Where We
+  Are and its road); communication (briefs, design records, manifests,
+  handoffs and closing reports, review prompts and returns, Tony's run
+  records); logistics (the ledger); the field manual (the protocol and
+  the skills); reference (generated documents); the work (the code
+  builds).
+- **What moved, and where each now lives:**
+  - Sequencing: from the plan's Section 5a to the road on
+    `documentation/WHERE_WE_ARE.md`. Status stays with the ledger (a
+    Note on L-221).
+  - The critical path's dated record (the "You are here" table of
+    2026-08-23 and the subsections 2026-08-25 to 2026-09-29): to
+    `documentation/MASTER_PLAN_HISTORY.md` PART 1, word for word.
+  - Section 10, Lineage: to the same file's PART 2, word for word.
+    Tony, 2026-10-14, first "Keep history in the plan, so no.", then,
+    asking for a recommendation and given one: "Changing ruling to: Yes
+    move it." The brief's file name, MASTER_PLAN_CRITICAL_PATH_CHRONICLE.md,
+    became MASTER_PLAN_HISTORY.md because the file holds both.
+  - The rule: `skills/ledger-and-session-records/SKILL.md` 1.21, The
+    Document Stack; protocol v3.97.
+- **The plan's v36:** the executive summary rewritten (both SHAs read
+  live; what the plan is and is not; the seven kinds; the five
+  segments' state; the direction; signals read from files); Section 5a
+  gains The direction, L-433's paragraph. Every line naming 5a as the
+  order's home is changed: the summary's How to read the rest, the
+  status block's Next line, 5a's opening and its L-154 paragraph, What
+  this section deliberately does not carry, and Section 11's NEXT
+  paragraph. The plan gains a Doc-Kind line (it had none).
+- **Sections 6 and 7 against the ledger at 9248845c**, one pass (The
+  Braid). Five disagreements, each corrected in one line and marked
+  "at v36": Section 6 said L-154's status still read BLOCKED (DONE
+  2026-08-24); Section 6 said MODULE_DOMAIN_MAP's retirement was
+  deferred (L-437 retired it, 2026-10-13); Section 7 decision 12
+  retired a JSON export that L-322 then built
+  (`data/constants_export.json`, 2026-09-16); decision 13 said there is
+  no generation step (the same); decision 18's open question, whether
+  every measured field is range-capable, is answered as method by
+  provenance-discipline, When the source gives a range. Checked and in
+  agreement, or still open in the ledger: L-080, L-068 with L-066,
+  L-016 and L-014, L-087, L-162, L-170 to L-173, L-176 to L-182, L-190.
+- **Found and recorded, not chased:** Section 6's Attribution page
+  ("[ ] Not started", required before any publicly reachable interactive
+  page) has no ledger item. The plan's status block under the summary
+  was last written at v35; it now says so and is not updated.
+- **Doc-Kind:** the brief assumed the Doc-Kind comment is where a file's
+  class is written. It is not: its three values in use (hand, zoned,
+  generated) say how a file is written, read by `doc_index.py`. The
+  skill maps them onto the seven kinds in a table and adds no value.
+- **The obligation from v3.96 discharged:** this session's loaded copies
+  read horizons-orbital-mechanics 1.6, gallery-cache-builder 1.9 and
+  interactive-exhibit 1.15.
+**Gap:** none. The next session confirms its loaded copy of
+ledger-and-session-records reads 1.21 before ledger work.
+**Ref:** `documentation/HANDOFF_master_plan_restamp_brief_20261013.md`;
+`documentation/HANDOFF_L442_master_plan_restamp_20261014.md`;
+`documentation/MASTER_PLAN_HISTORY.md`;
+`documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md` v36;
+`skills/ledger-and-session-records/SKILL.md` 1.21;
+`PROJECT_INSTRUCTIONS.md` v3.97; L-221; L-433; L-443; L-296; L-437.
+
+
+#### [L-433] The road after the Sun and Earth rooms, in Tony's words (planning, DONE 2026-10-14)
+<!-- L:433 status:DONE upd:2026-10-14 section:C flag: rice: -->
+- **Tony, 2026-10-10, in his run record** (`documentation/WHERE_WE_ARE_10-10-26_2019_run_record.md` at 6fc3648), two notes:
+  - "a couple of things to keep in mind. before we close the sun and
+    earth rooms, i would like to implement fuzzy boundaries. and in the
+    last session we found something important. the orbital periods
+    dictionary is hand maintained and instead should be fetched from
+    Horizons along with the other osculating data." (L-410, L-431.)
+  - "the near term goal is to complete the sun and earth room
+    thoroughly as a template for other body rooms. then add the symbols
+    for most if not all the orrery's objects list. then we can decide on
+    priorities. the "golden artifacts" are one path, but not the only
+    one. I would be inclined to work on the inner planets after that.
+    and we should not forget the earth science part."
+- **Against Where We Are's road, as it stood at 6fc3648:** the Sun and
+  Earth rooms (stages 5 to 7) and the objects (stage 11) agree. Stage 13
+  reads "The planets get their details, Jupiter and Saturn first";
+  Tony's note leans to the inner planets. Stage 14 is the Earth System
+  layers, his "earth science part".
+- **Note (2026-10-14), loose ends received from L-431 and L-395** for
+  the work that brings the rest of the orrery's objects to the website
+  (stage 11; brief
+  `documentation/HANDOFF_L438_objects_to_website_brief_20261013.md`):
+  - The served objects with no `'key'` in the orrery's list (moon, io,
+    titan, pluto, charon, voyager_1) get no period on the website and
+    no Horizons check; each gains both when it gets a key.
+  - The Pluto-Charon barycentre's own period, around the Sun: the
+    orrery never fetches elements for the barycentre itself, so the
+    website prints "not yet fetched from JPL" for it.
+  - From L-395: the fields the list lacks (a moon's parent, a clean
+    kind); the display-name rename, which waits for names to stop
+    being keys; MAPS and 3I/ATLAS checked live once served; and
+    whether the identity check widens past the keyed entries (default
+    no).
+  - That brief names its item L-438, which the ledger's index now lists
+    as retired with L-439 (the dashboard labels took L-440). The objects
+    work opens its block under the next free handle.
+  - Re-homed 2026-10-14, word for word, to L-443 (the objects to the
+    website), opened at this item's close.
+**CLOSED 2026-10-14** (L-442). Tony confirmed the order on 2026-10-12
+(`documentation/DESIGN_rulings_20261012.md`, ruling 3): "Confirmed."
+and "when I said sun and earth rooms I included the solar system
+features." His lean went in: the inner planets' rooms (Mercury, Venus,
+Mars) after the objects, Jupiter and Saturn after them, the Earth
+System beside. The road on Where We Are has carried it since that
+session; the master plan's v36 carries the direction in Section 5a.
+**Gap:** none. The loose ends above went to L-443.
+**Ref:** L-410; L-431; L-412; L-413; L-221 (the master plan is the
+roadmap); `documentation/WHERE_WE_ARE.md`.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

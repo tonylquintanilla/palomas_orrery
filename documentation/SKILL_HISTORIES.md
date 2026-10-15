@@ -748,6 +748,17 @@ Block Format: an item inside an ordered list needs no RICE score
 (L-412). Under Where a File Goes: which repository a record goes to,
 and that documentation/ stays flat.
 
+The skill's v1.18 entry, moved here word for word on 2026-10-14 when
+v1.21 made a fourth entry (L-442):
+Earlier: 1.18 | 2026-10-08, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ b0b3df82. v1.18 (L-418) records two conventions the
+provenance-discipline split brought in, under A skill keeps three
+version entries: a file longer than one read opens with a read plan
+that skills_index.py writes, and a skill's extra files live in its
+references folder, each named in its SKILL.md. The Anchor Requirement
+names provenance-cross-check for a review prompt carried to another
+model.
+
 ## gallery-cache-builder
 
 v1.4 adds Recovery from a failed swap: discard and re-run -- Tony's

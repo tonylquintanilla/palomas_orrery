@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.96 | October 14, 2026
+Tony Quintanilla, PE | Claude | v3.97 | October 14, 2026
 
-Cut from 5cd63cce at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 9248845c at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -502,7 +502,7 @@ earth-system-pipeline        1.2  KMZ layers, ERA5/ERDDAP/IPC, scenarios, ANY
                                   human-cost visualization or text
 gallery-pipeline             1.2  Gallery Studio, json_converter, index.html
                                   viewer, gallery cards
-ledger-and-session-records   1.20 Ledger edits, ledger_index.py, RICE,
+ledger-and-session-records   1.21 Ledger edits, ledger_index.py, RICE,
                                   handoffs, manifests, atlas, dep_trace,
                                   WHERE_WE_ARE.md at every session's end
 gallery-assembler            1.3  render_orbits.py, resolver.py,
@@ -1170,6 +1170,43 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.97 (October 14, 2026): No rule changed in this document. ONE
+skill bump, one version (L-442): ledger-and-session-records 1.20 ->
+1.21. THE PLAN IS STRATEGY; THE ROAD IS THE ORDER.
+
+WHAT PROMPTED IT. Tony, 2026-10-13: "We should update the master plan
+soon," then "the master plan for the interactive gallery is our
+planning roadmap. Is it doing its job?" It worked as the record of the
+architecture and had stopped working as the order of the work; the road
+on Where We Are had taken that job on 2026-10-10 (L-433). His ruling the
+same day named seven kinds of document: "master plan: strategic - where
+we are: tactical - handoffs: orders and reports - ledger: logistics."
+
+WHAT CHANGED. ledger-and-session-records rewrites The Document Stack as
+the seven kinds -- strategy, tactics, communication, logistics, the
+field manual, reference, the work -- each with when it is read, and
+maps the Doc-Kind values in use onto them. Sequencing moves from the
+master plan to the road on Where We Are; the ledger keeps status.
+The plan restamps to v36 beside it: strategy only, its dated history
+and its lineage moved to documentation/MASTER_PLAN_HISTORY.md (Tony's
+ruling of 2026-10-14). The skill's v1.18 entry moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule. This
+document's one mention of the plan (The Braid: Section 5a carries the
+braid's sequencing form) stays true: 5a keeps the braid.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copy reads
+ledger-and-session-records 1.21 before ledger work. This session
+confirmed its loaded copies read horizons-orbital-mechanics 1.6,
+gallery-cache-builder 1.9 and interactive-exhibit 1.15, discharging
+v3.96's obligation.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.94 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.96 (October 14, 2026): No rule changed in this document. THREE
 skill bumps, one version each (L-431 build 3, with L-395's move):
 horizons-orbital-mechanics 1.5 -> 1.6, gallery-cache-builder 1.8 ->
@@ -1235,39 +1272,6 @@ provenance-discipline 2.29 before provenance work.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.92 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.94 (October 13, 2026): No rule changed in this document. ONE
-skill bump, one version (L-431): horizons-orbital-mechanics 1.4 -> 1.5.
-NO PERTURBATION LINES FOR AN ORBIT DRAWN AROUND THE BARYCENTRE.
-
-WHAT PROMPTED IT. Tony's look at L-431's second build was accepted; his
-saved plot showed Sedna's orbit hover comparing its orbit around the
-Sun with a stored "mean" orbit, beneath elements drawn around the
-barycentre. The first fix labelled the comparison "both around the
-Sun". Tony asked why, when Sedna is worked out around the barycentre.
-For a body that far out the orbit around the Sun moves with the Sun's
-own wobble about the barycentre. Sedna's stored elements are JPL's
-around the Sun at its 2018 solution epoch (Tony's Horizons file showed
-the centre and the epoch), so the difference from today's mostly shows
-that wobble, not a change in Sedna's path.
-His ruling, 2026-10-13: remove the lines for orbits drawn around the
-barycentre.
-
-WHAT CHANGED. horizons-orbital-mechanics 1.5 replaces 1.4's bullet
-"the comparison with mean elements stays Sun-centred" with the ruling.
-A second version in one session, as interactive-exhibit 1.14 was,
-because the ruling came after 1.4 was installed. Its v1.2 entry moved
-to documentation/SKILL_HISTORIES.md, by the three-entry rule.
-
-THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
-that session. The next session confirms its loaded copy reads
-horizons-orbital-mechanics 1.5 before Horizons work.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.91 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

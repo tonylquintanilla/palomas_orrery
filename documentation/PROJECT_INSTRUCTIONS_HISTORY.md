@@ -2737,6 +2737,42 @@ resident.
 (Moved down from the resident protocol on 2026-10-14 when
 v3.96 made a fourth entry.)
 
+v3.94 (October 13, 2026): No rule changed in this document. ONE
+skill bump, one version (L-431): horizons-orbital-mechanics 1.4 -> 1.5.
+NO PERTURBATION LINES FOR AN ORBIT DRAWN AROUND THE BARYCENTRE.
+
+WHAT PROMPTED IT. Tony's look at L-431's second build was accepted; his
+saved plot showed Sedna's orbit hover comparing its orbit around the
+Sun with a stored "mean" orbit, beneath elements drawn around the
+barycentre. The first fix labelled the comparison "both around the
+Sun". Tony asked why, when Sedna is worked out around the barycentre.
+For a body that far out the orbit around the Sun moves with the Sun's
+own wobble about the barycentre. Sedna's stored elements are JPL's
+around the Sun at its 2018 solution epoch (Tony's Horizons file showed
+the centre and the epoch), so the difference from today's mostly shows
+that wobble, not a change in Sedna's path.
+His ruling, 2026-10-13: remove the lines for orbits drawn around the
+barycentre.
+
+WHAT CHANGED. horizons-orbital-mechanics 1.5 replaces 1.4's bullet
+"the comparison with mean elements stays Sun-centred" with the ruling.
+A second version in one session, as interactive-exhibit 1.14 was,
+because the ruling came after 1.4 was installed. Its v1.2 entry moved
+to documentation/SKILL_HISTORIES.md, by the three-entry rule.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copy reads
+horizons-orbital-mechanics 1.5 before Horizons work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.91 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-14 when
+v3.97 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

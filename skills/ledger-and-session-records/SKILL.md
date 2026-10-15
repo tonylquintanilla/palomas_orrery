@@ -6,9 +6,20 @@ fires_when: Ledger edits, ledger_index.py, RICE, handoffs, manifests, atlas, dep
 
 # Ledger and Session Records
 
-Read this file in 3 parts: lines 1-223, 224-526, 527-718.
+Read this file in 4 parts: lines 1-196, 197-446, 447-622, 623-799.
 
-Skill version: 1.20 | 2026-10-11, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.21 | 2026-10-14, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 9248845c. v1.21 (L-442) carries Tony's seven kinds of
+document. The Document Stack is rewritten as the seven, each with when
+it is read: strategy (the master plan), tactics (Where We Are and its
+road), communication, logistics (the ledger), the field manual,
+reference, and the work. Sequencing moves from the plan to the road on
+Where We Are; the ledger keeps status. A table maps the Doc-Kind values
+in use onto the seven. Riding this version: Where We Are's section and
+the RICE bullet name the road as the order's home. Tony, 2026-10-13:
+"master plan: strategic - where we are: tactical - handoffs: orders
+and reports - ledger: logistics."
+Earlier: 1.20 | 2026-10-11, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 1bbd9fe1. v1.20 (L-351, L-421), on Tony's request: every
 handoff, brief and design record names his two local repository folders
 in its header, beside the GitHub line, so a session linked to his
@@ -22,17 +33,9 @@ Local Folders, under Where a File Goes, names the two repositories'
 folders on his machine, so a session linked to it saves a patch where
 he runs it. Tony, 2026-10-10: "palomas_orrery_for_github is the repo
 folder."
-Earlier: 1.18 | 2026-10-08, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ b0b3df82. v1.18 (L-418) records two conventions the
-provenance-discipline split brought in, under A skill keeps three
-version entries: a file longer than one read opens with a read plan
-that skills_index.py writes, and a skill's extra files live in its
-references folder, each named in its SKILL.md. The Anchor Requirement
-names provenance-cross-check for a review prompt carried to another
-model.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
 on 2026-10-05 (L-418), 2026-10-07 (L-422), 2026-10-08 (L-418),
-2026-10-10 (L-395) and 2026-10-11 (L-421).
+2026-10-10 (L-395), 2026-10-11 (L-421) and 2026-10-14 (L-442).
 
 Note: READING the ledger at session start is resident Part-1 behavior,
 not this skill's job. This skill carries the maintenance mechanics.
@@ -42,7 +45,7 @@ not this skill's job. This skill carries the maintenance mechanics.
 Generated from this file's headings. skills_index.py --check fails
 if this list and the headings disagree (L-418).
 
-- The Document Stack (the round trip)
+- The Document Stack (seven kinds of document)
   - Where We Are -- Tony's page [QUALITY]
 - Ledger Block Format
   - A Closing Item Re-homes Its Loose Ends [QUALITY]
@@ -55,13 +58,57 @@ if this list and the headings disagree (L-418).
 - Codebase Tooling
 - Field Notes
 
-## The Document Stack (the round trip)
+## The Document Stack (seven kinds of document)
 
-protocol -> ledger -> handoff -> manifest -> code -> repo -> ledger.
-- Protocol: the constitution; evolves slowly; amendments ratified by Tony.
-- Ledger: the single authoritative backlog AND institutional memory;
-  survives session boundaries. As of v3.30 it is also the change log for
-  the protocol version history and the skills layer.
+Tony's ruling of 2026-10-13 (L-442), in his words, in the order he gave
+them: "master plan: strategic - where we are: tactical - handoffs:
+orders and reports - ledger: logistics." Then: "by handoff I am
+conflating different documents, briefs, design manifests, closing
+reports and maybe others. But they are still all communication
+documents." "And of course there are code builds. Which is the work
+itself." And: "the ledger is like a maintenance management system, both
+history and work orders with priority, but by itself is not a schedule
+or a plan. Skills and the project instructions as you said is how we
+work together. You could say it's our field manual. There are other
+documents that are references like the module atlas and the provenance
+scanner report." He said "Yes" to the statement below.
+
+Seven kinds, each with what it is for and WHEN IT IS READ:
+
+1. STRATEGY: the master plan. What the gallery is for, how it is
+   built, where the work goes over months. Read when a decision changes
+   direction, when a new class of work opens, and at a restamp. Never
+   read to learn what is next.
+2. TACTICS: Where We Are, and on it the road. What is next and in what
+   order. Read at the start of every session and written at the end.
+   The ONLY place sequencing lives; the plan defers to it.
+3. COMMUNICATION: briefs, design records, manifests, closing reports
+   and handoffs, coordination notes, review prompts and returns, and
+   the run record in Tony's hand. A document that carries work from
+   one session, person or model to another. Written once, read by its
+   receiver, then history. A ruling in one of them is not recorded
+   until it reaches the ledger.
+4. LOGISTICS: the ledger. A maintenance management system: the history
+   of every job, and the open work orders with their priority. Never a
+   schedule. Read two ways: as the work-order list when sizing or
+   choosing a slice; as the archive when asking what was already
+   decided. It wins on STATUS (what is done, what was ruled).
+5. THE FIELD MANUAL: the protocol and the skills. How we work
+   together. The protocol is read every session because it is
+   resident; a skill when its trigger fires. Neither says what to
+   build.
+6. REFERENCE: generated documents that make no claim of their own and
+   are read to learn the current state of the code or the data: the
+   module atlas, PROVENANCE_AUDIT.md, DATA_INVENTORY, the worksheet
+   check, the scanner's run history, the exports. Not communication
+   (written to nobody); not logistics (no priority).
+7. THE WORK: the code builds. Everything above exists to get them done
+   well and keep them from drifting. The render is the ground truth
+   for the work; the SHA for its state.
+
+Under COMMUNICATION, the documents a build passes through go in one
+order, the round trip: protocol -> ledger -> handoff -> manifest ->
+code -> repo -> ledger.
 - Handoff: a session record -- decisions, deliveries, open scope. A
   handoff is a CLAIM, not a verification; the render and the repo are the
   facts. Design-session handoffs (zero code) are first-class outputs: the
@@ -70,36 +117,68 @@ protocol -> ledger -> handoff -> manifest -> code -> repo -> ledger.
   time (never on an un-pushed base); opens with the anchor (built on
   <SHA> at <URL>) per the requirement below. If handoff and manifest
   disagree, that is a flag to raise, not a thing to silently resolve.
+- A design record carries rulings until they are moved out of it: to
+  the ledger if they are decisions, to a skill if they are method (the
+  protocol's Method Belongs to the Skill). The record is then history.
 
-**The master plan is not a rung in that ordering** (Tony's ruling,
-2026-08-20, L-221). It is the ROADMAP -- where we are and where we
-are going, not what is directly in front. It is ONE document at two
+Under LOGISTICS, the ledger is also the change log for the protocol's
+version history and the skills layer (v3.30). Under THE FIELD MANUAL,
+the protocol is the constitution: it evolves slowly, and Tony ratifies
+its amendments.
+
+**Where a file's kind is written.** A documentation file's first line
+carries a Doc-Kind comment, which `doc_index.py` reads. Its three values
+in use at 9248845c (hand 95, zoned 48, generated 6) say HOW a file is
+written, not which of the seven kinds it is, so the table maps one onto
+the other:
+
+| Doc-Kind | How it is written | Kinds of document carrying it |
+|---|---|---|
+| hand | by hand throughout | strategy (the plan), tactics (Where We Are), communication (briefs, handoffs, records) |
+| zoned | by hand around a zone a tool writes | the field manual (the protocol and its archived copies), logistics (the ledger), the README |
+| generated | wholly by a tool | reference (MODULE_ATLAS.md, MODULE_INDEX.md, PROVENANCE_AUDIT.md, DATA_INVENTORY.md, WORKSHEET_CHECK.md, EXACT_ROWS_PRINTED.md) |
+
+No value is added: every kind in use has one, and a second tag per file
+for its kind would be a second store. A file's kind of document is read
+from its name (HANDOFF_, DESIGN_, MANIFEST_, SURVEY_, REVIEW_) and its
+place. A skill opens with frontmatter and carries no Doc-Kind; the
+work carries its Role: and Domain: tags.
+
+**The master plan is not a rung in the round trip** (Tony's ruling,
+2026-08-20, L-221). It is the STRATEGY (Tony's ruling of 2026-10-13,
+L-442; until then this skill called it the ROADMAP): where the work goes
+over months, not what is directly in front. It is ONE document at two
 zooms (v1.12, Tony's ruling of 2026-09-28, L-333 and L-362): an
-EXECUTIVE SUMMARY at the top, and the body, which keeps the critical
-path as Section 5a. The summary is REWRITTEN from the current state at
-every restamp, never carried forward, so it cannot fall behind the
-body the way the two separate companion files did: they restamped with
-v19 and v20 and then stood still for a month while the plan reached
-v33. Those files, `MASTER_PLAN_INTERACTIVE_GALLERY_SUMMARY.md` and
+EXECUTIVE SUMMARY at the top, and the body, which keeps the shape of
+the critical path as Section 5a. Its dated session history and its
+lineage moved to `documentation/MASTER_PLAN_HISTORY.md` on 2026-10-14
+(L-442), a dated record like the two retired companions. The summary is
+REWRITTEN from the current state at every restamp, never carried
+forward, so it cannot fall behind the body the way the two separate
+companion files did: they restamped with v19 and v20 and then stood
+still for a month while the plan reached v33. Those files,
+`MASTER_PLAN_INTERACTIVE_GALLERY_SUMMARY.md` and
 `MASTER_PLAN_CRITICAL_PATH_SUMMARY.md`, carry a retirement line and are
-dated records. The plan restamps once per DESIGN BUILD; stepwise updating is the ledger's job.
-That is Tony's ruling of 2026-09-06 (L-296), replacing "at key
-junctures": a juncture is not countable, so the rule could not be
-applied without a judgment call every time, and the call kept landing
-on Tony. A design build is countable. Versions are REPLACED, not
-archived -- only the PROTOCOL keeps a versioned copy per version -- and
-git holds the superseded bytes either way, which is why the plan's own
-rolling stamp keeps three entries and simply drops the fourth instead
-of pushing it down into a history file. That cadence is not staleness
-to be corrected by restamping more often.
+dated records. The plan restamps once per DESIGN BUILD; stepwise
+updating is the ledger's job. That is Tony's ruling of 2026-09-06
+(L-296), replacing "at key junctures": a juncture is not countable, so
+the rule could not be applied without a judgment call every time, and
+the call kept landing on Tony. A design build is countable. Versions
+are REPLACED, not archived -- only the PROTOCOL keeps a versioned copy
+per version -- and git holds the superseded bytes either way, which is
+why the plan's own rolling stamp keeps three entries and simply drops
+the fourth instead of pushing it down into a history file. That cadence
+is not staleness to be corrected by restamping more often.
 
-It does not compete on the axis above, which is about STATUS: where
-any two documents disagree about what is done, the ledger wins. The
-plan carries a different authority, SEQUENCING. RICE ranks items in
-isolation; bundling several items to complete a planned step
-SUPERSEDES RICE order. The ledger already calls RICE
-"prioritization for planning" -- this names what the planning is
-and says it outranks the score.
+Where any two documents disagree about what is done, the ledger wins:
+that is STATUS. The order of the work is the road's on Where We Are:
+that is SEQUENCING. L-221 gave sequencing to the plan on 2026-08-20;
+Tony's ruling of 2026-10-13 moved it to the road (L-442), which had
+been doing that job since 2026-10-10 (L-433). RICE ranks items in
+isolation; bundling several items to complete a step on the road
+SUPERSEDES RICE order. The ledger already calls RICE "prioritization
+for planning" -- this names what the planning is and says it outranks
+the score.
 
 **The same rule reaches past handoffs and manifests** (Tony's
 ruling, 2026-08-20, L-221). Any session document -- a review
@@ -119,9 +198,10 @@ ruling.)
 
 `documentation/WHERE_WE_ARE.md` is the one document written for Tony
 rather than for the work (v1.13, L-396). It is not a rung in the status
-ordering and it is not another zoom of the master plan: the ledger still
-wins on status and the plan on sequencing. It restates both in plain
-words, for a reader who cannot hold the detail. Tony, 2026-09-30: "i
+ordering and it is not another zoom of the master plan: the ledger wins
+on status and the road on this page on sequencing (moved from the plan
+on 2026-10-13, L-442). It restates the status in plain words and carries
+the order itself, for a reader who cannot hold the detail. Tony, 2026-09-30: "i
 struggle to keep the big picture. it's the old dilemma of loosing the
 forest for the trees." The plan's summary and critical path had been
 tried for that job and had not really helped, by his account: they are
@@ -278,8 +358,9 @@ scores, verification results, corrections, open questions for Tony).
   section descending; unscored show --.
   AN ITEM INSIDE AN ORDERED LIST NEEDS NO RICE SCORE (v1.17; Tony's
   ruling of 2026-10-07, L-412). A list such as the Sun's slice (L-412)
-  or Earth's list (L-413) IS the priority, under the master plan's
-  sequencing authority (L-221), and a score beside it would only
+  or Earth's list (L-413) IS the priority, under the road's
+  sequencing authority (L-221, moved to the road 2026-10-13, L-442),
+  and a score beside it would only
   disagree with it. An item outside any list keeps RICE, and gets a
   coarse score when it is next opened rather than at creation. The
   index shows -- for the unscored; for list items that is expected.

@@ -1,23 +1,26 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 14, 2026, evening: periods accepted; three items closed; search.
-- Written at orrery 5ca56df and gallery 86ef2df.
+Last updated: October 14, 2026, night: the master plan restamped; its history moved out.
+- Written at orrery 9248845 and gallery 86ef2df.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Orbital periods are on the website, accepted at your look. L-431
->   (periods), L-395 (the check's move) and L-440 (the dashboard) closed.
-> - The dashboard search: each word on its own, in any order; more
->   words narrow the list.
+> - The master plan is strategy only. The order lives on the road
+>   below; what is done lives in the ledger. (Your ruling, Oct 13.)
+> - The plan's dated history and its lineage moved to one record,
+>   `MASTER_PLAN_HISTORY.md`. (Your ruling, Oct 14.)
+> - L-433 (the road after the Sun and Earth rooms) closed; the objects
+>   work is L-443 (the objects to the website).
 >
-> **Do next:** *The master plan's restamp, from its brief; then the
-> objects-to-website design session (both in Where the details are).*
+> **Do next:** *The design session for the orrery's objects on the
+> website, L-443 (the objects to the website), from its brief.*
 >
 > **Needs you now:**
-> - *Run patch_L440_2, then the maintenance run (Dashboard parity,
->   10 of 10 faults caught); try the search; push.*
+> - *Run patch_L442_1, then the maintenance run; reinstall
+>   ledger-and-session-records 1.21; copy protocol v3.97 to the
+>   Project; commit; push.*
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
@@ -31,9 +34,7 @@ Last updated: October 14, 2026, evening: periods accepted; three items closed; s
                dashboard (L-440) done; L-424, L-425, L-426 to come.
   6.   [next]  The typed facts: the inner Oort cloud is drawn on the
                website too. Left: the check.
-  6a.  [done]  *Orbital periods from JPL, in the orrery and on the
-               website; accepted at your look, Oct 14.*
-               << moved this session
+  6a.  [done]  Orbital periods from JPL, orrery and website (Oct 14).
   7.   [next]  The Sun's numbers get the checking Earth's got; the Solar
                System room's features close with these rooms.
   8.   [done]  The served objects are checked against JPL Horizons, from
@@ -42,7 +43,9 @@ Last updated: October 14, 2026, evening: periods accepted; three items closed; s
                L-423 (the website's checks).
  10.   [next]  A bare interactive.html link opens the Solar System room;
                the Explorer gets its own address.
- 11.   [later] The rest of the orrery's objects come to the website.
+ 11.   [next]  *The rest of the orrery's objects come to the website:
+               L-443 (the objects to the website), design first.*
+               << moved this session
  12.   [later] Encounters: comets and spacecraft at the dates that matter.
  13.   [later] The inner planets' rooms (Mercury, Venus, Mars), from the
                template; Jupiter and Saturn follow (L-433).
@@ -54,6 +57,8 @@ Last updated: October 14, 2026, evening: periods accepted; three items closed; s
 ## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings. A line leaves after a few weeks, once it is habit.
+- The plan is strategy; the road here is the order; the ledger has
+  status. The plan's history and lineage: MASTER_PLAN_HISTORY.md. (Oct 13, 14)
 - Digits by the error JPL states; whole km and a plain sentence where it
   states none; speeds to their distance's precision, or to one meter
   per second where JPL states none. (Oct 11)
@@ -78,10 +83,8 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 - Comets by first apparition, oldest first. Fuzzy boundaries before
   the Sun and Earth rooms close. Every new check gets a button. (Oct 10)
 - The Hills cloud follows its paper (Fig. 3, its text), cited; to 10,000 AU. (Oct 10)
-- OneDrive: no pause before a build; the retry is sufficient. Empty
-  "solar-system (N)" folders are harmless; delete by hand. (Oct 8, 10)
 
-## Signals  **>> UPDATED THIS SESSION**
+## Signals
 
 Read from files when this page was written, not typed from memory.
 - Last cache build: 20261014T225537Z, ok, no retry (gallery 86ef2df).
@@ -89,7 +92,7 @@ Read from files when this page was written, not typed from memory.
   Whole tree: 280: orrery 116, Earth System 149, stars 13, utilities 2.
 - This page's date and the ledger's newest stamp: both Oct 14. Agree.
 
-## Waiting on you  **>> UPDATED THIS SESSION**
+## Waiting on you
 
 At the next design talk:
 - L-401 (the distance digits): a model with no stated accuracy (the
@@ -112,12 +115,9 @@ Not urgent, in your order:
 
 - Every item: `LEDGER_CONSOLIDATED.md`. Open for build: L-421 (the
   typed facts), its check.
-- *Next: `HANDOFF_master_plan_restamp_brief_20261013.md`, then
-  `HANDOFF_L438_objects_to_website_brief_20261013.md`*
-- Build 3 and the check's move: `HANDOFF_L431_build3_website_20261014.md`
-- Orbital periods: rulings `DESIGN_L431_..._rulings_20261011.md`; build 2's
-  look and fixes `HANDOFF_L431_build2_look_fixes_20261013.md`; build 3's
-  brief `HANDOFF_L431_build3_website_brief_20261013.md`
+- *Next: `HANDOFF_L438_objects_to_website_brief_20261013.md`; its item
+  is now L-443 (the objects to the website)*
+- This session: `HANDOFF_L442_master_plan_restamp_20261014.md`
 - The distance digits: `DESIGN_L401_distance_digits_rulings_20261011.md`;
   reviews `REVIEW_L401_..._comparison_20261011.md`; build 1
   `HANDOFF_L401_distance_build1_20261012.md`
@@ -126,7 +126,7 @@ Not urgent, in your order:
 - L-436 (away from the machine): `DESIGN_L436_orrery_away_from_the_machine_20261013.md`
 - Your six rulings of Oct 12: `DESIGN_rulings_20261012.md`; briefs for L-425,
   L-424 with L-426; the dashboard: `HANDOFF_L440_dashboard_labels_20261013.md`
-- The reasoning behind the order: `MASTER_PLAN_INTERACTIVE_GALLERY.md`
+- The strategy behind the road: `MASTER_PLAN_INTERACTIVE_GALLERY.md`
 
 --- Your run record below this line. No patch edits it; the length cap
 --- stops here; the close reads your timestamped copy and clears this.

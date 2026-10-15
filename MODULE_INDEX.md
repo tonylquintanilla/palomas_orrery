@@ -12,19 +12,16 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 160  
-**Total Lines of Code (non-blank):** 126,213  
-**Total Public Functions/Classes:** 1,529
+**Total Lines of Code (non-blank):** 126,310  
+**Total Public Functions/Classes:** 1,542
 
 ## Classification Coverage
 
-**Patch scripts awaiting archive (1).** A `Role: patch` module is a one-shot script that has already run. Its base fingerprint no longer matches, so it cannot run again. Move each into `documentation/`. While one sits in the scanned tree it inflates the module count here and the file count in the provenance audit.
-
-- `patch_L440_2_word_order_search_20261014.py`
-
-**Undetermined role (8).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (9).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
 - `patch_L431_10_brief_both_sets_20261013.py`
+- `patch_L442_1_master_plan_restamp_20261014.py`
 - `test_drawings_export.py`
 - `test_earth_pole_of_date.py`
 - `test_extractor_pins.py`
@@ -260,20 +257,13 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 ---
 
-## Patch Scripts (transient -- awaiting archive)
-
-| Module | Description |
-|--------|-------------|
-| `patch_L440_2_word_order_search_20261014.py` | - L-440 (the dashboard): the search ignores word order; and the close of L-431 (orbital periods from JPL), L-395 (the Horizons check's move) and L-440 on Tony's runs and looks of October 14. (878 lines) |
-
----
-
 ## Undetermined -- Needs a Role: Tag
 
 | Module | Description |
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
 | `patch_L431_10_brief_both_sets_20261013.py` | - L-431 (orbital periods): build 3's brief says the export carries BOTH element sets for a body drawn around the solar system's barycentre, the Sun-centred ones as well as the barycentre ones, as Tony confirmed on 2026-10-13. Records only. (103 lines) |
+| `patch_L442_1_master_plan_restamp_20261014.py` | - the master plan's restamp (v36) and Tony's seven kinds of document (L-442). (975 lines) |
 | `test_drawings_export.py` | Each stored drawing in data/drawings/ is the drawing its rows give today, git tracks it, and each check can fail. (173 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
