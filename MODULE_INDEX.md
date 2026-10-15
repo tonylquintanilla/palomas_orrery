@@ -1,7 +1,7 @@
 <!-- Doc-Kind: generated | The human-browsable module index, rebuilt by module_atlas.py alongside the atlas. Do not hand-edit. -->
 # Paloma's Orrery - Module Index
 
-**Generated:** October 14, 2026 by `module_atlas.py`  
+**Generated:** October 15, 2026 by `module_atlas.py`  
 **Repository:** Paloma's Orrery - Solar System Visualization Suite  
 **Philosophy:** Data Preservation is Climate Action
 
@@ -11,17 +11,18 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 160  
-**Total Lines of Code (non-blank):** 125,651  
-**Total Public Functions/Classes:** 1,534
+**Total Python Files:** 161  
+**Total Lines of Code (non-blank):** 125,781  
+**Total Public Functions/Classes:** 1,538
 
 ## Classification Coverage
 
-**Undetermined role (9).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (10).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
 - `patch_L431_10_brief_both_sets_20261013.py`
 - `patch_L442_2_close_and_rulings_20261014.py`
+- `patch_L442_3_order_earth_sun_objects_20261015.py`
 - `test_drawings_export.py`
 - `test_earth_pole_of_date.py`
 - `test_extractor_pins.py`
@@ -264,6 +265,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
 | `patch_L431_10_brief_both_sets_20261013.py` | - L-431 (orbital periods): build 3's brief says the export carries BOTH element sets for a body drawn around the solar system's barycentre, the Sun-centred ones as well as the barycentre ones, as Tony confirmed on 2026-10-13. Records only. (103 lines) |
 | `patch_L442_2_close_and_rulings_20261014.py` | - the restamp's close, and Tony's rulings of 2026-10-14 from his run record and chat (L-442). (318 lines) |
+| `patch_L442_3_order_earth_sun_objects_20261015.py` | - Tony's ruling of 2026-10-15 on the order: finish Earth, finish the Sun, then the objects. (130 lines) |
 | `test_drawings_export.py` | Each stored drawing in data/drawings/ is the drawing its rows give today, git tracks it, and each check can fail. (173 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |

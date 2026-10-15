@@ -14,8 +14,8 @@ Last updated: October 14, 2026, late: the restamp ran and is pushed; your notes 
 > - Dropped: L-436 (the orrery from your phone) and L-441 (the
 >   dashboard's "when" index).
 >
-> **Do next:** *Build L-444 (the missing periods): small, orrery only.
-> Then the design session for L-443 (the objects to the website).*
+> **Do next:** *Build L-444 (the missing periods). Then finish Earth's
+> list, then the Sun's; the objects come after (your ruling, Oct 15).*
 >
 > **Needs you now:**
 > - *Run patch_L442_2, then the maintenance run; commit; push.*
@@ -44,8 +44,9 @@ Last updated: October 14, 2026, late: the restamp ran and is pushed; your notes 
                L-423 (the website's checks).
  10.   [next]  A bare interactive.html link opens the Solar System room;
                the Explorer gets its own address.
- 11.   [next]  The rest of the orrery's objects come to the website:
-               L-443 (the objects to the website), design first.
+ 11.   [later] The rest of the orrery's objects come to the website:
+               L-443 (the objects to the website), after the Sun and
+               Earth rooms close.  << moved this session
  12.   [later] Encounters: comets and spacecraft at the dates that matter.
  13.   [later] The inner planets' rooms (Mercury, Venus, Mars), from the
                template; Jupiter and Saturn follow (L-433).
@@ -84,8 +85,8 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 - Orbital periods: JPL's own, every body, orrery and website; the
   centre that moves less in a year, digits by the larger error, the
   drawn orbit and markers alike; typed table last, marked. (Oct 11)
-- Comets by first apparition, oldest first. Fuzzy boundaries before
-  the Sun and Earth rooms close. Every new check gets a button. (Oct 10)
+- The order: finish Earth, then the Sun (fuzzy boundaries inside
+  it), then the objects; no batch of objects first. (Oct 15)
 
 ## Signals  **>> UPDATED THIS SESSION**
 
@@ -116,8 +117,7 @@ Not urgent, in your order:
 
 - Every item: `LEDGER_CONSOLIDATED.md`. Open for build: L-421 (the
   typed facts), its check.
-- *Next: L-444 (the missing periods) in the ledger, then
-  `HANDOFF_L438_objects_to_website_brief_20261013.md`, now L-443*
+- *Next: `HANDOFF_L444_missing_periods_brief_20261014.md`*
 - This session: `HANDOFF_L442_master_plan_restamp_20261014.md`
 - The distance digits: `DESIGN_L401_distance_digits_rulings_20261011.md`;
   reviews `REVIEW_L401_..._comparison_20261011.md`; build 1
