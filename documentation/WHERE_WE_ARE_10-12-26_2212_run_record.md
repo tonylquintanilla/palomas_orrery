@@ -395,7 +395,7 @@ Close them one at a time, each on the pushed HEAD, in this order: L-437, then L-
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-**Session: DONE: 10-13-26 2309: Opus: L-431 build 2 session**
+**Session: DONE: 10-13-26 2309: Opus: L-431 build 2 session and DONE: 10-14-26 1846: Opus: L-431 build 3 website session**
 
 I’ve built and tested the change, and the patch is saved in your orrery folder as patch_L431_6_orbits_markers_20261012.py. Each orbit is now drawn around the same centre as its period. The perihelion and aphelion dates now come from JPL’s period for that orbit.
 
@@ -3535,11 +3535,30 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
   2. Open the dashboard and try the search: "pull objects export" and
      "objects export pull" both find Objects Export Pull. -- correct
-  3. Move this script into documentation/; commit and push.
+  3. Move this script into documentation/; commit and push. -- 387b947249af3665225234cdf4fc5a081fc34df0
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
 Run the orrery maintenance run. Expect “Dashboard parity ... 10 of 10 planted faults caught” and 30 of 30. The ledger index moves the three closed items to the closed section.
 Try the search in the dashboard. Then move the patch into documentation/, commit and push.
+
+========================================================================================
+
+Yes, this build is done.
+
+- **The patch ran cleanly:** "patch applied (39 edits in 6 files)".
+- **The maintenance run passed 30 of 30.** "Dashboard parity" caught all 10 planted faults, including the old whole-phrase search.
+- **You confirmed the search works** ("correct").
+- **GitHub matches your push.** The orrery is at 387b9472. The gallery is at 86ef2df and unchanged, as expected.
+- **The website's live check passed too** (2 of 2). The ledger entry I wrote for orrery periods (L-431) says its output wasn't in your record. That's no longer true, so the next session can correct that line.
+
+L-431 (orbital periods), L-395 (the Horizons check's move) and L-440 (the dashboard) are closed.
+
+**One thing still for you:** if you haven't yet, reinstall the three updated skills from the `skills/` folder in Settings > Skills: horizons-orbital-mechanics, gallery-cache-builder and interactive-exhibit. The next session should confirm it loads versions 1.6, 1.9 and 1.15. -- done
+
+**Where this leaves us:**
+- Orbital periods are live in the orrery and on the website. The Horizons check runs from the orrery and checks the periods against JPL.
+- The dashboard search ignores word order.
+- Next on the road are the master plan's restamp, from its brief, and then the design session for bringing the orrery's objects to the website.
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
