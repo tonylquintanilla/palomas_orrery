@@ -644,8 +644,10 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-then commit and push. Expect 30 of 30. -- 
+then commit and push. Expect 30 of 30. -- ffc4bd4eef2ee24b23c272feee49bd84c298d58b
+
 Next session: build L-444 (the missing periods). It’s small and only touches the orrery. I put it before the objects design because every new object that work adds will need its period fetched this way. -- please provide a brief for this build by a separate session. we are only coordinating here. 
+
 Then: the design session for bringing the rest of the orrery’s objects to the website, L-443, from its brief. -- what is left of the sun and earth slices? 
 
 If you’d rather do the objects design first, tell me before you run the patch and I’ll swap the order.
