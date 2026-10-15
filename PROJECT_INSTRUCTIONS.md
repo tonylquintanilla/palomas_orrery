@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.97 | October 14, 2026
+Tony Quintanilla, PE | Claude | v3.98 | October 15, 2026
 
-Cut from 9248845c at https://github.com/tonylquintanilla/palomas_orrery
+Cut from ffd6c36a at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -486,12 +486,13 @@ safe-file-editing            1.13 Editing existing files, patch scripts,
                                   sed/regex edits, encoding checks (portable)
 agentic-pre-test             1.3  BEFORE delivering complete files/agentic
                                   code; after data-content sweeps
-horizons-orbital-mechanics   1.6  Horizons queries, centers, frames, osculating
+horizons-orbital-mechanics   1.7  Horizons queries, centers, frames, osculating
                                   elements, encounters, comet record pinning,
                                   2xr uncertainties, periods, the drawn orbit's
                                   centre, the Horizons check
                                   (horizons_check.py, its period comparison and
-                                  the data sheets' re-read)
+                                  the data sheets' re-read), the period fetch
+                                  before it (period_fetch.py)
 provenance-discipline        2.29 Scanner runs, audits, citations, constants,
                                   pre-push (Tier-1 = 0 on the active build
                                   path)
@@ -1170,6 +1171,36 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.98 (October 15, 2026): No rule changed in this document. ONE
+skill bump, one version (L-444): horizons-orbital-mechanics 1.6 -> 1.7.
+THE RUN FETCHES A SERVED BODY'S MISSING PERIOD BEFORE THE CHECK.
+
+WHAT PROMPTED IT. Tony, 2026-10-14, in his run record: "should the
+30-day Horizons checker initiate a fetch of the missing data as well as
+report, including a new object as never having been fetched?" Ruled the
+same day: a separate step before the check, with the orrery's own
+fetching code; the check stays a check. On 2026-10-15 he chose option
+A: the elements and the period together, the same call as plotting.
+
+WHAT CHANGED. horizons-orbital-mechanics gains one bullet under Where
+the Check Lives, and What It Compares: period_fetch.py runs just before
+the check and fetches, with plotting's own call and save, the period of
+each served object that has none fetched, so the check compares it with
+JPL the same day. Its v1.4 entry moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copy reads
+horizons-orbital-mechanics 1.7 before work that fires it. This session
+confirmed its loaded copy of ledger-and-session-records reads 1.21,
+discharging v3.97's obligation.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.95 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.97 (October 14, 2026): No rule changed in this document. ONE
 skill bump, one version (L-442): ledger-and-session-records 1.20 ->
 1.21. THE PLAN IS STRATEGY; THE ROAD IS THE ORDER.
@@ -1242,36 +1273,6 @@ interactive-exhibit 1.15 before work that fires them.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.93 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.95 (October 13, 2026): No rule changed in this document. ONE
-skill bump, one version (L-437): provenance-discipline 2.28 -> 2.29.
-THE TIER-1 TOTAL PRINTS WITH ITS DOMAINS.
-
-WHAT PROMPTED IT. Tony, 2026-10-12: "the provenance checker is still
-reporting 288 tier 1 items. Can we separate this into meaningful
-groups, like orrery, earth science and stars in the checker report?"
-The split was in the audit's table and nowhere the total printed. And
-a module's domain had two homes, the scanner's hand list and the
-module's own docstring tag, which disagreed on 12 files at c5dff25.
-
-WHAT CHANGED. provenance-discipline rewrites Report Domain
-Classification -- the docstring Domain: tag is the store, the hand list
-is gone, and a file with no tag the report knows is counted as
-unclassified and named -- and Scanner Mechanics gains a bullet: the
-whole-tree total prints with its split everywhere it prints, and in
-the run history tier1_by_domain is the Tier-1 split while domain_counts
-stays the all-tier count. Its v2.26 entry moved to
-documentation/SKILL_HISTORIES.md, by the three-entry rule.
-
-THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
-that session. The next session confirms its loaded copy reads
-provenance-discipline 2.29 before provenance work.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.92 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

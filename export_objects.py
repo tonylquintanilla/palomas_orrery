@@ -89,7 +89,8 @@ The period the orrery's own hover shows for the body seen from the Sun,
 read from the period record the orbit cache keeps beside the entry's
 elements (data/osculating_cache.json, under the entry's name; the record
 is written by orbital_period.build_period_record when Tony accepts an
-elements update). Its parts:
+elements update, or by period_fetch.py in the maintenance run, just
+before this, for a served body that has none fetched, L-444). Its parts:
 
     kind         "fetched" (from JPL Horizons), "typed" (the orrery's
                  typed table KNOWN_ORBITAL_PERIODS, used only when
@@ -185,6 +186,9 @@ date; and its confirmation, copied from data/horizons_confirmations.json,
 which horizons_check.py writes in the maintenance run just before this
 runs. The orbit cache and the confirmations are inputs now, and both are
 fingerprinted.)
+Module updated: October 15, 2026 with Anthropic's Claude Opus 5.5 (L-444:
+the PERIOD section names period_fetch.py as the other writer of the
+period record. Nothing this module does changed.)
 """
 
 import ast

@@ -1,0 +1,308 @@
+{
+  "_comment": "Recorded answers and frozen inputs for test_period_fetch.py (L-444). Written 2026-10-15 with Anthropic's Claude Opus 5.5, built on orrery ffd6c36a1546d844987d2b36aaee510225d2d64b, in a session that could not reach JPL. Each answer says where it came from: 'recorded' answers are JPL's own values as plotting saved them in the orbit cache; the one 'CONSTRUCTED' answer per body is not JPL's and says why it is safe. The test treats a query with no answer here as JPL not reached, so it cannot pass on an answer nobody recorded. The first live run, on Tony's machine, is the real test of the fetch.",
+  "built_on": "ffd6c36a1546d844987d2b36aaee510225d2d64b",
+  "when": "2026-10-13T08:29:00",
+  "when_note": "The time the test passes as 'now'. fetch_osculating_elements adds 69 seconds (UTC to TDB) and writes it to the minute, which gives the recorded epoch '2026-10-13 08:30'.",
+  "inputs": {
+    "cache": {
+      "Mercury": {
+        "elements": {
+          "a": 0.3870973974099114,
+          "e": 0.2056387074252793,
+          "i": 7.003371896375679,
+          "omega": 29.20131028257546,
+          "Omega": 48.29726978781827,
+          "epoch": "2026-10-13 08:30 osc.",
+          "TP": 2461354.853725976,
+          "MA": 245.4157493912693,
+          "TA": 226.4124374773949
+        },
+        "metadata": {
+          "fetched": "2026-10-13T08:31:10.523436",
+          "source": "JPL Horizons",
+          "solution_date": "2026-10-13",
+          "horizons_id": "199",
+          "display_name": "Mercury",
+          "refresh_interval_days": 7,
+          "center_body": "@sun"
+        },
+        "period": {
+          "days": 87.96882030278451,
+          "open_orbit": false,
+          "center": "@sun",
+          "epoch": "2026-10-13 08:30",
+          "fetched": "2026-10-13",
+          "source": "JPL Horizons PR (sidereal orbit period)",
+          "year_change_days": 0.00036931457614741703,
+          "year_step_days": 365.25,
+          "sbdb_sigma_days": null,
+          "sbdb_status": "not a small body; SBDB not asked",
+          "sbdb_fullname": null,
+          "error_days": 0.00036931457614741703,
+          "error_from": "year_change",
+          "test": {
+            "@sun": 0.0003627265252816869,
+            "@0": 1.163980847255786,
+            "run": "2026-10-11"
+          },
+          "horizons_targetname": "Mercury (199)",
+          "agrees_with_elements_fetch": true,
+          "elements": {
+            "a": 0.3870973974099114,
+            "e": 0.2056387074252793,
+            "i": 7.003371896375679,
+            "omega": 29.20131028257546,
+            "Omega": 48.29726978781827,
+            "TP": 2461354.853725976,
+            "MA": 245.4157493912693,
+            "TA": 226.4124374773949,
+            "q": 0.3074951889588476,
+            "epoch": "2026-10-13 08:30 osc."
+          },
+          "elements_fetch_days": 87.96882030278451,
+          "elements_fetch_center": "@sun"
+        }
+      },
+      "Jupiter": {
+        "elements": {
+          "a": 5.202081110912366,
+          "e": 0.04840091756160265,
+          "i": 1.303779019594749,
+          "omega": 273.5032249017481,
+          "Omega": 100.5229024177593,
+          "epoch": "2026-10-12 00:01 osc.",
+          "TP": 2459965.76898168,
+          "MA": 113.0052993331561,
+          "TA": 117.9862376069898
+        },
+        "metadata": {
+          "fetched": "2026-10-12T13:57:06.970290",
+          "source": "JPL Horizons",
+          "solution_date": "2026-10-12",
+          "horizons_id": "599",
+          "display_name": "Jupiter",
+          "refresh_interval_days": 30,
+          "center_body": "@sun"
+        },
+        "period": {
+          "days": 4331.685500446416,
+          "open_orbit": false,
+          "center": "@sun",
+          "epoch": "2026-10-12 00:01",
+          "fetched": "2026-10-12",
+          "source": "JPL Horizons PR (sidereal orbit period)",
+          "year_change_days": 1.6283133990627903,
+          "year_step_days": 365.25,
+          "sbdb_sigma_days": null,
+          "sbdb_status": "not a small body; SBDB not asked",
+          "sbdb_fullname": null,
+          "error_days": 1.6283133990627903,
+          "error_from": "year_change",
+          "test": {
+            "@sun": 1.6283133990627903,
+            "@0": 5.4868924125021294,
+            "run": "2026-10-12"
+          },
+          "horizons_targetname": "Jupiter (599)",
+          "agrees_with_elements_fetch": true
+        }
+      },
+      "Encke": {
+        "elements": {
+          "a": 2.2177339995884,
+          "e": 0.8473192969120388,
+          "i": 11.3477679349911,
+          "omega": 187.2878429358795,
+          "Omega": 334.0190669262349,
+          "epoch": "2026-10-13 08:30 osc.",
+          "TP": 2461446.728467565,
+          "MA": 324.2261254747133,
+          "TA": 215.3797954248334,
+          "solution_TP": 2460240.028455204
+        },
+        "metadata": {
+          "fetched": "2026-10-13T08:31:16.769709",
+          "source": "JPL Horizons",
+          "solution_date": "2026-10-13",
+          "horizons_id": "90000091",
+          "display_name": "Encke",
+          "refresh_interval_days": 30,
+          "center_body": "@sun"
+        },
+        "period": {
+          "days": 1206.320223793072,
+          "open_orbit": false,
+          "center": "@sun",
+          "epoch": "2026-10-13 08:30",
+          "fetched": "2026-10-13",
+          "source": "JPL Horizons PR (sidereal orbit period)",
+          "year_change_days": 0.15083758920104628,
+          "year_step_days": 365.25,
+          "sbdb_sigma_days": 0.0006574,
+          "sbdb_status": "SBDB sigma",
+          "sbdb_fullname": "2P/Encke",
+          "error_days": 0.15083758920104628,
+          "error_from": "year_change",
+          "test": {
+            "@sun": 0.1496537241050646,
+            "@0": 11.35785233450406,
+            "run": "2026-10-11"
+          },
+          "horizons_targetname": "2P/Encke",
+          "agrees_with_elements_fetch": true,
+          "elements": {
+            "a": 2.2177339995884,
+            "e": 0.8473192969120388,
+            "i": 11.3477679349911,
+            "omega": 187.2878429358795,
+            "Omega": 334.0190669262349,
+            "TP": 2461446.728467565,
+            "MA": 324.2261254747133,
+            "TA": 215.3797954248334,
+            "q": 0.3386051863192332,
+            "epoch": "2026-10-13 08:30 osc."
+          },
+          "elements_fetch_days": 1206.320223793072,
+          "elements_fetch_center": "@sun"
+        }
+      }
+    },
+    "cache_from": "data/osculating_cache.json at ffd6c36a, the entries for Mercury, Jupiter and Encke, as plotting wrote them (Jupiter's before L-431 build 2, so without the elements its period record now keeps)"
+  },
+  "answers": {
+    "elements": {
+      "199|None|2026-10-13 08:30|None": {
+        "answer": {
+          "a": 0.3870973974099114,
+          "e": 0.2056387074252793,
+          "i": 7.003371896375679,
+          "omega": 29.20131028257546,
+          "Omega": 48.29726978781827,
+          "TP": 2461354.853725976,
+          "MA": 245.4157493912693,
+          "TA": 226.4124374773949,
+          "P_days": 87.96882030278451,
+          "center_body": "@sun",
+          "solution_date": "2026-10-13"
+        },
+        "from": "recorded: Mercury's elements, metadata.solution_date and period.elements_fetch_days in data/osculating_cache.json at ffd6c36a"
+      },
+      "90000091|smallbody|2026-10-13 08:30|None": {
+        "answer": {
+          "a": 2.2177339995884,
+          "e": 0.8473192969120388,
+          "i": 11.3477679349911,
+          "omega": 187.2878429358795,
+          "Omega": 334.0190669262349,
+          "TP": 2461446.728467565,
+          "MA": 324.2261254747133,
+          "TA": 215.3797954248334,
+          "P_days": 1206.320223793072,
+          "center_body": "@sun",
+          "solution_date": "2026-10-13"
+        },
+        "from": "recorded: Encke's elements, metadata.solution_date and period.elements_fetch_days in data/osculating_cache.json at ffd6c36a"
+      }
+    },
+    "period_pairs": {
+      "199|None|2026-10-13 08:30|@sun": {
+        "answer": {
+          "p1": 87.96882030278451,
+          "p2": 87.96918961736066,
+          "step_days": 365.25,
+          "e": 0.2056387074252793,
+          "targetname": "Mercury (199)",
+          "elements": {
+            "a": 0.3870973974099114,
+            "e": 0.2056387074252793,
+            "i": 7.003371896375679,
+            "omega": 29.20131028257546,
+            "Omega": 48.29726978781827,
+            "TP": 2461354.853725976,
+            "MA": 245.4157493912693,
+            "TA": 226.4124374773949,
+            "q": 0.3074951889588476,
+            "epoch": "2026-10-13 08:30 osc."
+          }
+        },
+        "from": "recorded: Mercury's period record at ffd6c36a (days, year_change_days, year_step_days, horizons_targetname, elements). Only the direction of the year's change is constructed: p2 is p1 plus the change."
+      },
+      "199|None|2026-10-13 08:30|@0": {
+        "answer": {
+          "p1": 87.96882030278451,
+          "p2": 89.1328011500403,
+          "step_days": 365.25,
+          "e": 0.2056387074252793,
+          "targetname": "Mercury (199)",
+          "elements": {
+            "a": 0.3870973974099114,
+            "e": 0.2056387074252793,
+            "i": 7.003371896375679,
+            "omega": 29.20131028257546,
+            "Omega": 48.29726978781827,
+            "TP": 2461354.853725976,
+            "MA": 245.4157493912693,
+            "TA": 226.4124374773949,
+            "q": 0.3074951889588476,
+            "epoch": "2026-10-13 08:30 osc."
+          }
+        },
+        "from": "CONSTRUCTED: plotting kept only how much the period around the barycentre moved in a year (period.test['@0'], recorded at ffd6c36a), not the period itself, so p1 is the Sun-centred period and the elements are the Sun-centred ones. Only the change decides the centre."
+      },
+      "90000091|smallbody|2026-10-13 08:30|@sun": {
+        "answer": {
+          "p1": 1206.320223793072,
+          "p2": 1206.471061382273,
+          "step_days": 365.25,
+          "e": 0.8473192969120388,
+          "targetname": "2P/Encke",
+          "elements": {
+            "a": 2.2177339995884,
+            "e": 0.8473192969120388,
+            "i": 11.3477679349911,
+            "omega": 187.2878429358795,
+            "Omega": 334.0190669262349,
+            "TP": 2461446.728467565,
+            "MA": 324.2261254747133,
+            "TA": 215.3797954248334,
+            "q": 0.3386051863192332,
+            "epoch": "2026-10-13 08:30 osc."
+          }
+        },
+        "from": "recorded: Encke's period record at ffd6c36a (days, year_change_days, year_step_days, horizons_targetname, elements). Only the direction of the year's change is constructed: p2 is p1 plus the change."
+      },
+      "90000091|smallbody|2026-10-13 08:30|@0": {
+        "answer": {
+          "p1": 1206.320223793072,
+          "p2": 1217.678076127576,
+          "step_days": 365.25,
+          "e": 0.8473192969120388,
+          "targetname": "2P/Encke",
+          "elements": {
+            "a": 2.2177339995884,
+            "e": 0.8473192969120388,
+            "i": 11.3477679349911,
+            "omega": 187.2878429358795,
+            "Omega": 334.0190669262349,
+            "TP": 2461446.728467565,
+            "MA": 324.2261254747133,
+            "TA": 215.3797954248334,
+            "q": 0.3386051863192332,
+            "epoch": "2026-10-13 08:30 osc."
+          }
+        },
+        "from": "CONSTRUCTED: plotting kept only how much the period around the barycentre moved in a year (period.test['@0'], recorded at ffd6c36a), not the period itself, so p1 is the Sun-centred period and the elements are the Sun-centred ones. Only the change decides the centre."
+      }
+    },
+    "sbdb": {
+      "2P": {
+        "answer": [
+          0.0006574,
+          "SBDB sigma",
+          "2P/Encke"
+        ],
+        "from": "recorded: Encke's period record at ffd6c36a (sbdb_sigma_days, sbdb_status, sbdb_fullname)"
+      }
+    }
+  }
+}

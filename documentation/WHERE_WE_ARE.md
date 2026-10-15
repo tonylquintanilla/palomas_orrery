@@ -1,24 +1,24 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 14, 2026, late: the restamp ran and is pushed; your notes filed.
-- Written at orrery 2b0e54c and gallery 86ef2df.
+Last updated: October 15, 2026: L-444 (the missing periods) built.
+- Written at orrery ffd6c36 and gallery 86ef2df.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The restamp ran clean (30 of 30) and is pushed at 2b0e54c. The
->   plan is strategy; the road below is the order.
-> - Ruled: the run fetches a served body's missing period from JPL,
->   as its own step: L-444 (the missing periods).
-> - Dropped: L-436 (the orrery from your phone) and L-441 (the
->   dashboard's "when" index).
+> - Built: L-444 (the missing periods). A new first step of the
+>   maintenance run fetches from JPL each served body's missing
+>   period, the orbit and the period together (your option A).
+> - The order after it: Earth, then the Sun, then the objects (your
+>   ruling, Oct 15).
 >
-> **Do next:** *Build L-444 (the missing periods). Then finish Earth's
-> list, then the Sun's; the objects come after (your ruling, Oct 15).*
+> **Do next:** *Run L-444's patch and the maintenance run. Then finish
+> Earth's list, then the Sun's; the objects come after (your ruling, Oct 15).*
 >
 > **Needs you now:**
-> - *Run patch_L442_2, then the maintenance run; commit; push.*
+> - *Run patch_L444_missing_periods, then the maintenance run (the
+>   first live fetch); reinstall horizons-orbital-mechanics 1.7; push.*
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
@@ -37,9 +37,9 @@ Last updated: October 14, 2026, late: the restamp ran and is pushed; your notes 
                System room's features close with these rooms.
   8.   [done]  The served objects are checked against JPL Horizons, from
                the orrery's run; the periods passed live, Oct 14.
-  8a.  [next]  *The run fetches each served body's missing period from
-               JPL: L-444 (the missing periods).*
-               << new this session
+  8a.  [NOW]   *L-444 (the missing periods), built Oct 15: your first run
+               fetches Venus, Earth, Mars, Saturn, Uranus, Neptune,
+               Apophis and Halley from JPL.*  << moved this session
   9.   [next]  The website's checks, in the order you confirmed:
                L-423 (the website's checks).
  10.   [next]  A bare interactive.html link opens the Solar System room;
@@ -63,7 +63,7 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 - Fuzzy boundaries wherever they are meaningful, not only the corona
   and the exosphere. (Oct 14)
 - A served body's missing period is fetched by the run, before the
-  check, with the orrery's own code. (Oct 14)
+  check, with the orrery's own code: orbit and period together. (Oct 14, 15)
 - Digits by the error JPL states; whole km and a plain sentence where it
   states none; speeds to their distance's precision, or to one meter
   per second where JPL states none. (Oct 11)
@@ -94,7 +94,7 @@ Read from files when this page was written, not typed from memory.
 - Last cache build: 20261014T225537Z, ok, no retry (gallery 86ef2df).
 - Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, 2b0e54c).
   Whole tree: 280: orrery 116, Earth System 149, stars 13, utilities 2.
-- This page's date and the ledger's newest stamp: both Oct 14. Agree.
+- This page's date and the ledger's newest stamp: both Oct 15. Agree.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
@@ -117,8 +117,8 @@ Not urgent, in your order:
 
 - Every item: `LEDGER_CONSOLIDATED.md`. Open for build: L-421 (the
   typed facts), its check.
-- *Next: `HANDOFF_L444_missing_periods_brief_20261014.md`*
-- This session: `HANDOFF_L442_master_plan_restamp_20261014.md`
+- *Next: L-413 (Earth's list), after your first live period fetch*
+- This session: `HANDOFF_L444_missing_periods_build_20261015.md`
 - The distance digits: `DESIGN_L401_distance_digits_rulings_20261011.md`;
   reviews `REVIEW_L401_..._comparison_20261011.md`; build 1
   `HANDOFF_L401_distance_build1_20261012.md`

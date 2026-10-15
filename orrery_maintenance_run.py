@@ -234,6 +234,13 @@ gating gave on 2026-10-13.)
 Module updated: October 14, 2026 with Anthropic's Claude Opus 5.5 (L-440:
 the comment on Dashboard parity says it also checks the dashboard's
 search, word order ignored, with a tenth planted fault.)
+Module updated: October 15, 2026 with Anthropic's Claude Opus 5.5 (L-444:
+GENERATORS gains Period fetch, period_fetch.py, just before Horizons
+check: it fetches from JPL the period of each served object that has none
+fetched, with plotting's own call, so the check compares it the same day.
+It is now the first row that needs the internet, and only on a day
+something is missing. CHECKERS gains Period fetch suite,
+test_period_fetch.py.)
 """
 
 import hashlib
@@ -259,6 +266,15 @@ GENERATORS = [
     # the modules and the data file it adds.
     ('Constants export', ['export_constants.py'],
      ['data/constants_export.json']),
+    # L-444 (2026-10-15): before the Horizons check, fetch from JPL the
+    # period of each served object that has none fetched -- a typed
+    # period, none, or a new object with no cache entry -- with
+    # plotting's own call and save, so the check compares it with JPL the
+    # same day and the export carries it. It asks only for what is
+    # missing, so most runs ask nothing. Its hint quotes its verdict,
+    # UNREACHABLE by name when JPL could not be reached.
+    ('Period fetch', ['period_fetch.py'],
+     ['data/osculating_cache.json'], 'PERIOD FETCH:'),
     # L-395 and L-431 build 3 (2026-10-14): JPL Horizons confirms what
     # the website serves -- each keyed entry's identity and fetched
     # period, and the spacecraft data sheets -- asking only about what is
@@ -342,6 +358,11 @@ CHECKERS = [
     # with among them.
     ('Horizons check suite', ['test_horizons_check.py'],
      'HORIZONS CHECK SUITE:'),
+    # L-444: the period fetch on recorded answers, with no network; each
+    # planted fault in a copy of period_fetch.py caught by name, among
+    # them a record written by another path than plotting's.
+    ('Period fetch suite', ['test_period_fetch.py'],
+     'PERIOD FETCH SUITE:'),
     # Rule 7's exact row, built: every printed exact row states a print
     # count, every orrery line prints it through exact_text(), and the
     # gallery serves the count. The same script as the Exact rows report

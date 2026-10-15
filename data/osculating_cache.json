@@ -65,68 +65,176 @@
   },
   "Venus": {
     "elements": {
-      "a": 0.7233279372751529,
-      "e": 0.006778547491951363,
-      "i": 3.394365136604852,
-      "omega": 54.8626447678653,
-      "Omega": 76.60656724397842,
-      "epoch": "2026-08-04 19:57 osc.",
-      "TP": 2461175.607166043,
-      "MA": 130.9338107054059,
-      "TA": 131.5173799483992
+      "a": 0.7233425854391095,
+      "e": 0.006756359033685199,
+      "i": 3.394359700186716,
+      "omega": 54.91578561657533,
+      "Omega": 76.60439148300738,
+      "epoch": "2026-10-15 10:52 osc.",
+      "TP": 2461400.341864155,
+      "MA": 245.6278254931248,
+      "TA": 244.925066396131
     },
     "metadata": {
-      "fetched": "2026-08-04T19:58:59.453995",
+      "fetched": "2026-10-15T10:51:31.571315",
       "source": "JPL Horizons",
-      "solution_date": "2026-08-04",
+      "solution_date": "2026-10-15",
       "horizons_id": "299",
       "display_name": "Venus",
       "refresh_interval_days": 30,
       "center_body": "@sun"
+    },
+    "period": {
+      "days": 224.7056262286513,
+      "open_orbit": false,
+      "center": "@sun",
+      "epoch": "2026-10-15 10:52",
+      "fetched": "2026-10-15",
+      "source": "JPL Horizons PR (sidereal orbit period)",
+      "year_change_days": 0.0076482824500203606,
+      "year_step_days": 365.25,
+      "sbdb_sigma_days": null,
+      "sbdb_status": "not a small body; SBDB not asked",
+      "sbdb_fullname": null,
+      "error_days": 0.0076482824500203606,
+      "error_from": "year_change",
+      "test": {
+        "@sun": 0.0076482824500203606,
+        "@0": 5.144301333862103,
+        "run": "2026-10-15"
+      },
+      "horizons_targetname": "Venus (299)",
+      "agrees_with_elements_fetch": true,
+      "elements": {
+        "a": 0.7233425854391095,
+        "e": 0.006756359033685199,
+        "i": 3.394359700186716,
+        "omega": 54.91578561657533,
+        "Omega": 76.60439148300738,
+        "TP": 2461400.341864155,
+        "MA": 245.6278254931248,
+        "TA": 244.925066396131,
+        "q": 0.7184554232275288,
+        "epoch": "2026-10-15 10:52 osc."
+      },
+      "elements_fetch_days": 224.7056262286513,
+      "elements_fetch_center": "@sun"
     }
   },
   "Earth": {
     "elements": {
-      "a": 0.9991609075089946,
-      "e": 0.01725633817381888,
-      "i": 0.004535327342978969,
-      "omega": 267.8647017501623,
-      "Omega": 193.2423453182036,
-      "epoch": "2023-05-07 00:39 osc.",
-      "TP": 2459946.723188862,
-      "MA": 123.1628451926368,
-      "TA": 124.7986552457518
+      "a": 1.000511185160326,
+      "e": 0.01702963707252433,
+      "i": 0.004028601336298406,
+      "omega": 281.0757590385103,
+      "Omega": 180.5234221305656,
+      "epoch": "2026-10-15 10:52 osc.",
+      "TP": 2461408.099997574,
+      "MA": 282.0515528445952,
+      "TA": 280.1349491120672
     },
     "metadata": {
-      "fetched": "2026-10-10T21:52:17.489345",
+      "fetched": "2026-10-15T10:51:32.672197",
       "source": "JPL Horizons",
-      "solution_date": "2026-10-10",
+      "solution_date": "2026-10-15",
       "horizons_id": "399",
       "display_name": "Earth",
       "refresh_interval_days": 30,
       "center_body": "@sun"
+    },
+    "period": {
+      "days": 365.5364560333389,
+      "open_orbit": false,
+      "center": "@sun",
+      "epoch": "2026-10-15 10:52",
+      "fetched": "2026-10-15",
+      "source": "JPL Horizons PR (sidereal orbit period)",
+      "year_change_days": 0.7694187238463996,
+      "year_step_days": 365.25,
+      "sbdb_sigma_days": null,
+      "sbdb_status": "not a small body; SBDB not asked",
+      "sbdb_fullname": null,
+      "error_days": 0.7694187238463996,
+      "error_from": "year_change",
+      "test": {
+        "@sun": 0.7694187238463996,
+        "@0": 1.7602720248968922,
+        "run": "2026-10-15"
+      },
+      "horizons_targetname": "Earth (399)",
+      "agrees_with_elements_fetch": true,
+      "elements": {
+        "a": 1.000511185160326,
+        "e": 0.01702963707252433,
+        "i": 0.004028601336298406,
+        "omega": 281.0757590385103,
+        "Omega": 180.5234221305656,
+        "TP": 2461408.099997574,
+        "MA": 282.0515528445952,
+        "TA": 280.1349491120672,
+        "q": 0.9834728427900445,
+        "epoch": "2026-10-15 10:52 osc."
+      },
+      "elements_fetch_days": 365.5364560333389,
+      "elements_fetch_center": "@sun"
     }
   },
   "Mars": {
     "elements": {
-      "a": 1.523660976617718,
-      "e": 0.09337961358946746,
-      "i": 1.847929114514544,
-      "omega": 286.6313423531831,
-      "Omega": 49.48947185724621,
-      "epoch": "2023-05-07 00:39 osc.",
-      "TP": 2459751.877064948,
-      "MA": 167.5121684601876,
-      "TA": 169.5879936612281
+      "a": 1.523691434444281,
+      "e": 0.09341118581750261,
+      "i": 1.84744734992013,
+      "omega": 286.6483894212423,
+      "Omega": 49.48072680872549,
+      "epoch": "2026-10-15 10:52 osc.",
+      "TP": 2461125.834848277,
+      "MA": 106.4404901178929,
+      "TA": 116.3290663766482
     },
     "metadata": {
-      "fetched": "2026-10-10T21:52:18.727059",
+      "fetched": "2026-10-15T10:51:33.682241",
       "source": "JPL Horizons",
-      "solution_date": "2026-10-10",
+      "solution_date": "2026-10-15",
       "horizons_id": "499",
       "display_name": "Mars",
       "refresh_interval_days": 30,
       "center_body": "@sun"
+    },
+    "period": {
+      "days": 686.9796873275407,
+      "open_orbit": false,
+      "center": "@sun",
+      "epoch": "2026-10-15 10:52",
+      "fetched": "2026-10-15",
+      "source": "JPL Horizons PR (sidereal orbit period)",
+      "year_change_days": 0.04042817196886972,
+      "year_step_days": 365.25,
+      "sbdb_sigma_days": null,
+      "sbdb_status": "not a small body; SBDB not asked",
+      "sbdb_fullname": null,
+      "error_days": 0.04042817196886972,
+      "error_from": "year_change",
+      "test": {
+        "@sun": 0.04042817196886972,
+        "@0": 12.662041116881028,
+        "run": "2026-10-15"
+      },
+      "horizons_targetname": "Mars (499)",
+      "agrees_with_elements_fetch": true,
+      "elements": {
+        "a": 1.523691434444281,
+        "e": 0.09341118581750261,
+        "i": 1.84744734992013,
+        "omega": 286.6483894212423,
+        "Omega": 49.48072680872549,
+        "TP": 2461125.834848277,
+        "MA": 106.4404901178929,
+        "TA": 116.3290663766482,
+        "q": 1.381361610732869,
+        "epoch": "2026-10-15 10:52 osc."
+      },
+      "elements_fetch_days": 686.9796873275407,
+      "elements_fetch_center": "@sun"
     }
   },
   "Pluto": {
@@ -153,24 +261,60 @@
   },
   "Apophis": {
     "elements": {
-      "a": 0.9219161713005533,
-      "e": 0.1922975631562459,
-      "i": 3.360113696484132,
-      "omega": 126.7406650094593,
-      "Omega": 203.8149690104709,
-      "epoch": "2029-04-10 osc.",
-      "TP": 2462336.95561401,
-      "MA": 248.1486740267171,
-      "TA": 229.6998065655672
+      "a": 0.9223340441778785,
+      "e": 0.1911837946145804,
+      "i": 3.341088482961081,
+      "omega": 126.6840231838445,
+      "Omega": 203.892579976571,
+      "epoch": "2026-10-15 10:52 osc.",
+      "TP": 2461366.471227606,
+      "MA": 318.2538334651354,
+      "TA": 300.8139894354114
     },
     "metadata": {
-      "fetched": "2026-03-27T01:04:56.962885",
+      "fetched": "2026-10-15T10:51:39.234430",
       "source": "JPL Horizons",
-      "solution_date": "2026-03-27",
+      "solution_date": "2026-10-15",
       "horizons_id": "2004 MN4",
       "display_name": "Apophis",
       "refresh_interval_days": 30,
       "center_body": "@sun"
+    },
+    "period": {
+      "days": 323.5420892338735,
+      "open_orbit": false,
+      "center": "@sun",
+      "epoch": "2026-10-15 10:52",
+      "fetched": "2026-10-15",
+      "source": "JPL Horizons PR (sidereal orbit period)",
+      "year_change_days": 0.0034301412194395198,
+      "year_step_days": 365.25,
+      "sbdb_sigma_days": 8.244e-07,
+      "sbdb_status": "SBDB sigma",
+      "sbdb_fullname": "99942 Apophis (2004 MN4)",
+      "error_days": 0.0034301412194395198,
+      "error_from": "year_change",
+      "test": {
+        "@sun": 0.0034301412194395198,
+        "@0": 4.014116654526674,
+        "run": "2026-10-15"
+      },
+      "horizons_targetname": "99942 Apophis (2004 MN4)",
+      "agrees_with_elements_fetch": true,
+      "elements": {
+        "a": 0.9223340441778785,
+        "e": 0.1911837946145804,
+        "i": 3.341088482961081,
+        "omega": 126.6840231838445,
+        "Omega": 203.892579976571,
+        "TP": 2461366.471227606,
+        "MA": 318.2538334651354,
+        "TA": 300.8139894354114,
+        "q": 0.7459987217097395,
+        "epoch": "2026-10-15 10:52 osc."
+      },
+      "elements_fetch_days": 323.5420892338735,
+      "elements_fetch_center": "@sun"
     }
   },
   "2024 YR4": {
@@ -197,24 +341,60 @@
   },
   "Uranus": {
     "elements": {
-      "a": 19.27240628536434,
-      "e": 0.04728599199114292,
-      "i": 0.7733267436282991,
-      "omega": 91.9773936624136,
-      "Omega": 74.0072184265225,
-      "epoch": "2026-06-11 18:18 osc.",
-      "TP": 2469728.368694648,
-      "MA": 260.6862369923801,
-      "TA": 255.3972919491659
+      "a": 19.26155103386303,
+      "e": 0.0475550388469807,
+      "i": 0.7755196849283905,
+      "omega": 92.65214142234936,
+      "Omega": 73.97577949589122,
+      "epoch": "2026-10-15 10:52 osc.",
+      "TP": 2469774.907195627,
+      "MA": 261.5251328519989,
+      "TA": 256.1897677353513
     },
     "metadata": {
-      "fetched": "2026-06-11T18:26:58.670064",
+      "fetched": "2026-10-15T10:51:36.262633",
       "source": "JPL Horizons",
-      "solution_date": "2026-06-11",
+      "solution_date": "2026-10-15",
       "horizons_id": "799",
       "display_name": "Uranus",
       "refresh_interval_days": 30,
       "center_body": "@sun"
+    },
+    "period": {
+      "days": 30679.94522205484,
+      "open_orbit": false,
+      "center": "@0",
+      "epoch": "2026-10-15 10:52",
+      "fetched": "2026-10-15",
+      "source": "JPL Horizons PR (sidereal orbit period)",
+      "year_change_days": 0.18876053482017596,
+      "year_step_days": 365.25,
+      "sbdb_sigma_days": null,
+      "sbdb_status": "not a small body; SBDB not asked",
+      "sbdb_fullname": null,
+      "error_days": 0.18876053482017596,
+      "error_from": "year_change",
+      "test": {
+        "@sun": 76.50715371414844,
+        "@0": 0.18876053482017596,
+        "run": "2026-10-15"
+      },
+      "horizons_targetname": "Uranus (799)",
+      "agrees_with_elements_fetch": null,
+      "elements": {
+        "a": 19.18724499148008,
+        "e": 0.04724469102120214,
+        "i": 0.7745935392071048,
+        "omega": 97.20389194455073,
+        "Omega": 73.9677825153016,
+        "TP": 2470120.745259646,
+        "MA": 256.8366706470684,
+        "TA": 251.642181251973,
+        "q": 18.2807495303095,
+        "epoch": "2026-10-15 10:52 osc."
+      },
+      "elements_fetch_days": 30876.34112626876,
+      "elements_fetch_center": "@sun"
     }
   },
   "Chariklo": {
@@ -318,25 +498,60 @@
   },
   "Halley": {
     "elements": {
-      "a": 17.86792157626872,
-      "e": 0.9668436864790834,
-      "i": 162.1638403656609,
-      "omega": 112.3813079032221,
-      "Omega": 59.46886773834493,
-      "epoch": "2023-05-07 00:39 osc.",
-      "TP": 2446492.430386876,
-      "MA": 177.2000737699816,
-      "TA": 179.8151502474417,
-      "solution_TP": 2446469.9736161465
+      "a": 17.85952833547308,
+      "e": 0.9680309438638349,
+      "i": 162.1915401187941,
+      "omega": 112.1627845700233,
+      "Omega": 59.26214776907469,
+      "epoch": "2026-10-15 10:52 osc.",
+      "TP": 2474039.836782,
+      "MA": 194.0127034084964,
+      "TA": 180.9097913544927
     },
     "metadata": {
-      "fetched": "2026-10-10T21:57:48.221426",
+      "fetched": "2026-10-15T10:51:41.154387",
       "source": "JPL Horizons",
-      "solution_date": "2026-10-10",
+      "solution_date": "2026-10-15",
       "horizons_id": "90000030",
       "display_name": "Halley",
       "refresh_interval_days": 30,
       "center_body": "@sun"
+    },
+    "period": {
+      "days": 27562.22169273424,
+      "open_orbit": false,
+      "center": "@0",
+      "epoch": "2026-10-15 10:52",
+      "fetched": "2026-10-15",
+      "source": "JPL Horizons PR (sidereal orbit period)",
+      "year_change_days": 0.011189067670784425,
+      "year_step_days": 365.25,
+      "sbdb_sigma_days": 2.3103e-05,
+      "sbdb_status": "SBDB sigma",
+      "sbdb_fullname": "1P/Halley",
+      "error_days": 0.011189067670784425,
+      "error_from": "year_change",
+      "test": {
+        "@sun": 6.952928436188813,
+        "@0": 0.011189067670784425,
+        "run": "2026-10-15"
+      },
+      "horizons_targetname": "1P/Halley",
+      "agrees_with_elements_fetch": null,
+      "elements": {
+        "a": 17.86506705971184,
+        "e": 0.9673030057836857,
+        "i": 162.2456991329948,
+        "omega": 111.735371349088,
+        "Omega": 58.83597353862582,
+        "TP": 2474032.247300198,
+        "MA": 194.0777431132587,
+        "TA": 180.9248975121199,
+        "q": 0.5841339943254654,
+        "epoch": "2026-10-15 10:52 osc."
+      },
+      "elements_fetch_days": 27567.88221439316,
+      "elements_fetch_center": "@sun"
     }
   },
   "Lemmon": {
@@ -1371,24 +1586,60 @@
   },
   "Neptune": {
     "elements": {
-      "a": 30.08088204636207,
-      "e": 0.01034995496028203,
-      "i": 1.76843804427517,
-      "omega": 280.7240850712512,
-      "Omega": 131.7173412733918,
-      "epoch": "2026-06-15 17:32 osc.",
-      "TP": 2469496.119217195,
-      "MA": 310.4805612882517,
-      "TA": 309.5708452145885
+      "a": 30.06079710676687,
+      "e": 0.009684299778844725,
+      "i": 1.775426317141584,
+      "omega": 282.2190148964298,
+      "Omega": 131.9929074550766,
+      "epoch": "2026-10-15 10:52 osc.",
+      "TP": 2469789.97340767,
+      "MA": 309.4015430537881,
+      "TA": 308.5374242302181
     },
     "metadata": {
-      "fetched": "2026-06-15T17:32:10.039325",
+      "fetched": "2026-10-15T10:51:37.794118",
       "source": "JPL Horizons",
-      "solution_date": "2026-06-15",
+      "solution_date": "2026-10-15",
       "horizons_id": "899",
       "display_name": "Neptune",
       "refresh_interval_days": 30,
       "center_body": "@sun"
+    },
+    "period": {
+      "days": 60184.8784092995,
+      "open_orbit": false,
+      "center": "@0",
+      "epoch": "2026-10-15 10:52",
+      "fetched": "2026-10-15",
+      "source": "JPL Horizons PR (sidereal orbit period)",
+      "year_change_days": 2.554290918284096,
+      "year_step_days": 365.25,
+      "sbdb_sigma_days": null,
+      "sbdb_status": "not a small body; SBDB not asked",
+      "sbdb_fullname": null,
+      "error_days": 2.554290918284096,
+      "error_from": "year_change",
+      "test": {
+        "@sun": 136.5912079689224,
+        "@0": 2.554290918284096,
+        "run": "2026-10-15"
+      },
+      "horizons_targetname": "Neptune (899)",
+      "agrees_with_elements_fetch": null,
+      "elements": {
+        "a": 30.06753024907772,
+        "e": 0.008575047885178658,
+        "i": 1.774757747376338,
+        "omega": 273.2343901815323,
+        "Omega": 131.9625936857237,
+        "TP": 2468316.608707084,
+        "MA": 318.2028542544751,
+        "TA": 317.5426779690917,
+        "q": 29.80969973740282,
+        "epoch": "2026-10-15 10:52 osc."
+      },
+      "elements_fetch_days": 60198.82048971157,
+      "elements_fetch_center": "@sun"
     }
   },
   "Hi'iaka": {
@@ -1657,24 +1908,60 @@
   },
   "Saturn": {
     "elements": {
-      "a": 9.539775044910225,
-      "e": 0.0550808002962414,
-      "i": 2.488188270689308,
-      "omega": 338.734635917323,
-      "Omega": 113.6559254703079,
-      "epoch": "2026-07-16 15:31 osc.",
-      "TP": 2463567.482493604,
-      "MA": 282.0724431536136,
-      "TA": 275.8225539846309
+      "a": 9.535562302553389,
+      "e": 0.05515541746678355,
+      "i": 2.487178273665797,
+      "omega": 339.3176440740343,
+      "Omega": 113.5546573526542,
+      "epoch": "2026-10-15 10:52 osc.",
+      "TP": 2463579.846915195,
+      "MA": 284.6467936085178,
+      "TA": 278.435637744408
     },
     "metadata": {
-      "fetched": "2026-07-16T15:31:02.192362",
+      "fetched": "2026-10-15T10:51:35.008674",
       "source": "JPL Horizons",
-      "solution_date": "2026-07-16",
+      "solution_date": "2026-10-15",
       "horizons_id": "699",
       "display_name": "Saturn",
       "refresh_interval_days": 30,
       "center_body": "@sun"
+    },
+    "period": {
+      "days": 10748.03372433625,
+      "open_orbit": false,
+      "center": "@0",
+      "epoch": "2026-10-15 10:52",
+      "fetched": "2026-10-15",
+      "source": "JPL Horizons PR (sidereal orbit period)",
+      "year_change_days": 0.1777568829493248,
+      "year_step_days": 365.25,
+      "sbdb_sigma_days": null,
+      "sbdb_status": "not a small body; SBDB not asked",
+      "sbdb_fullname": null,
+      "error_days": 0.1777568829493248,
+      "error_from": "year_change",
+      "test": {
+        "@sun": 13.854823585468694,
+        "@0": 0.1777568829493248,
+        "run": "2026-10-15"
+      },
+      "horizons_targetname": "Saturn (699)",
+      "agrees_with_elements_fetch": null,
+      "elements": {
+        "a": 9.532874394029514,
+        "e": 0.05451628987393888,
+        "i": 2.487093961474025,
+        "omega": 339.2095025509147,
+        "Omega": 113.5180974868358,
+        "TP": 2463577.423304503,
+        "MA": 284.6886072018676,
+        "TA": 278.5512718324208,
+        "q": 9.013177450232751,
+        "epoch": "2026-10-15 10:52 osc."
+      },
+      "elements_fetch_days": 10753.64842818222,
+      "elements_fetch_center": "@sun"
     }
   },
   "Gonggong": {

@@ -842,7 +842,7 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-then commit and push. -- 
+then commit and push. -- 7166648db41ed4038d4fc684ff2668aba8b3d333
 
 After that, start the L-444 build session with the prompt I gave you. The prompt still applies as written.
 
@@ -866,6 +866,262 @@ The Horizons check then compares those eight with JPL in the same run.
 Reinstall horizons-orbital-mechanics (now 1.7) in Settings > Skills.
 Save PROJECT_INSTRUCTIONS.md as documentation/project_instructions_v3_98.md, then copy it into the Project instructions.
 Move the patch into documentation/, then commit and push.
+Look at Venus’s hover in the orrery. After the gallery’s pull, look at it on the website too.
+
+The session close is inside the patch:
+
+The L-444 block records your “A” and the build.
+Where We Are marks stage 8a as in progress.
+The protocol moves to v3.98.
+A build record, documentation/HANDOFF_L444_missing_periods_build_20261015.md.
+
+L-444 stays open until your run’s results are recorded.
+
+Where this leaves us:
+
+Your next maintenance run fills in the eight missing periods, and the website prints them after your push.
+After that comes Earth’s list, then the Sun’s, then the objects, as you ruled this morning.
+
+=================================================================================================
+
+**Turn: 10-15-26 0852:**
+
+Steps, in order:
+
+Save the patch into palomas_orrery_for_github and click Run. Expect “patch applied (4 new files, 32 edits, 1 move)”.
+It works before or after the coordination session’s patch_L442_3_order_earth_sun_objects_20261015.py.
+If that patch hasn’t run yet, two notes say “Do next” and “Next” on Where We Are were left for it.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L444_missing_periods_20261015.py
+ok  new   period_fetch.py
+ok  new   test_period_fetch.py
+ok  new   documentation/worksheets/period_fetch_answers_L444.json
+ok  new   documentation/HANDOFF_L444_missing_periods_build_20261015.md
+ok  base  orrery_maintenance_run.py matches ffd6c36a
+ok  base  palomas_orrery_dashboard.py matches ffd6c36a
+ok  base  export_objects.py matches ffd6c36a
+ok  base  osculating_cache_manager.py matches ffd6c36a
+ok  base  skills/horizons-orbital-mechanics/SKILL.md matches ffd6c36a
+ok  base  PROJECT_INSTRUCTIONS.md matches ffd6c36a
+ok  edit  orrery_maintenance_run.py                    GENERATORS: Period fetch row
+ok  edit  orrery_maintenance_run.py                    CHECKERS: Period fetch suite row
+ok  edit  orrery_maintenance_run.py                    docstring stamp
+ok  edit  palomas_orrery_dashboard.py                  card: Period Fetch
+ok  edit  palomas_orrery_dashboard.py                  card: Period Fetch Suite
+ok  edit  palomas_orrery_dashboard.py                  short line: Period Fetch
+ok  edit  palomas_orrery_dashboard.py                  short line: Period Fetch Suite
+ok  edit  palomas_orrery_dashboard.py                  docstring stamp
+ok  edit  export_objects.py                            PERIOD: who writes the record
+ok  edit  export_objects.py                            docstring stamp
+ok  edit  osculating_cache_manager.py                  opening: the one exception
+ok  edit  osculating_cache_manager.py                  docstring stamp
+ok  edit  skills/horizons-orbital-mechanics/SKILL.md   description names period_fetch
+ok  edit  skills/horizons-orbital-mechanics/SKILL.md   fires_when names the period fetch
+ok  edit  skills/horizons-orbital-mechanics/SKILL.md   version 1.7, the 1.4 entry moved down
+ok  edit  skills/horizons-orbital-mechanics/SKILL.md   the 1.4 entry leaves
+ok  edit  skills/horizons-orbital-mechanics/SKILL.md   Where the Check Lives: the fetch runs first
+ok  edit  documentation/SKILL_HISTORIES.md             horizons: the 1.4 entry
+ok  edit  PROJECT_INSTRUCTIONS.md                      header version
+ok  edit  PROJECT_INSTRUCTIONS.md                      v3.98 entry
+ok  edit  LEDGER_CONSOLIDATED.md                       L-444 date
+ok  edit  LEDGER_CONSOLIDATED.md                       L-444 built
+ok  edit  LEDGER_CONSOLIDATED.md                       header stamp
+ok  edit  documentation/WHERE_WE_ARE.md                header
+ok  edit  documentation/WHERE_WE_ARE.md                changed since you last read this
+ok  edit  documentation/WHERE_WE_ARE.md                do next
+ok  edit  documentation/WHERE_WE_ARE.md                needs you now
+ok  edit  documentation/WHERE_WE_ARE.md                road 8a
+ok  edit  documentation/WHERE_WE_ARE.md                settled: the period fetch
+ok  edit  documentation/WHERE_WE_ARE.md                signals: the dates
+ok  edit  documentation/WHERE_WE_ARE.md                details: next
+ok  edit  documentation/WHERE_WE_ARE.md                details: this session
+ok  move  PROJECT_INSTRUCTIONS.md -> documentation/PROJECT_INSTRUCTIONS_HISTORY.md
+ok  documentation/WHERE_WE_ARE.md: 130 lines above the marker (cap 130)
+stamps updated: orrery_maintenance_run.py, palomas_orrery_dashboard.py, export_objects.py, osculating_cache_manager.py (docstrings); the skill's version line; the protocol's header; the ledger's header; Where We Are's date
+
+patch applied (4 new files, 32 edits, 1 move)
+
+NEXT:
+  1. Run orrery_maintenance_run.py. Its new Period fetch row asks JPL
+     for the eight missing periods; look for 'PERIOD FETCH: PASS'.
+  2. Reinstall horizons-orbital-mechanics (now 1.7) in Settings >
+     Skills; save PROJECT_INSTRUCTIONS.md as
+     documentation/project_instructions_v3_98.md and copy it into
+     the Project instructions.
+  3. Move this script into documentation/; commit and push.
+Undo is Discard Changes in GitHub Desktop.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+Run orrery_maintenance_run.py. This is the first live fetch.
+The Period fetch row should read “PASS -- fetched 8”: Venus, Earth, Mars, Saturn, Uranus, Neptune, Apophis, Halley.
+The Horizons check then compares those eight with JPL in the same run.
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261015T154011Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 3.0s  rewrote LEDGER_CONSOLIDATED.md
+  Skill manifest               0.3s  rewrote PROJECT_INSTRUCTIONS.md
+  Constants export             1.4s  unchanged (1 checked, not written)
+  Period fetch                14.4s  rewrote data/osculating_cache.json -- PASS
+                                     -- fetched 8: Venus, Earth, Mars, Saturn,
+                                     Uranus, Neptune, Apophis, Halley; elements
+                                     refreshed for: Venus, Earth, Mars, Saturn,
+                                     Uranus, Neptune, Apophis, Halley
+  Horizons check              17.5s  rewrote data/horizons_confirmations.json --
+                                     PASS -- 8 checked today, 8 queries
+  Objects export               0.4s  rewrote data/objects_export.json
+  Drawings export              0.4s  unchanged (1 checked, not written)
+  Module atlas                13.0s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               7.0s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Exact rows report            2.9s  unchanged (1 checked, not written) -- 13 of
+                                     41 exact rows printed at 43 lines (33
+                                     orrery, 10 gallery); 8 drawn only, 14 not
+                                     followed, 0 map entries broken
+  Document index               0.2s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.3s  No changes to constants_new.py since HEAD.
+  Constants relations          0.4s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              1.4s  No figure count exceeds its inputs: 36
+                                     derived row(s) read, 26 judged OK -- 26 OK,
+                                     10 NOT YET MIGRATED, 1 NO DERIVED LINE, 1
+                                     UNMARKED CONVERSION; 18 conversion(s)
+                                     checked.
+  Constants export check       2.3s  Export matches the store: sha256
+                                     2a1211f8cce2 on both sides; 127 rows
+                                     re-read, 56 not exported, 31 tokens; 320
+                                     conversions re-computed, 10 of 10 worked
+                                     cases hold.
+  Objects export check         0.4s  pass
+  Horizons confirmations       0.5s  pass -- 13 of 13 entries and 11 periods
+                                     confirmed, 26 sheets read, within 30 days
+  Horizons check suite         0.9s  pass -- 60 checks, every planted fault
+                                     caught by name
+  Period fetch suite           4.3s  pass -- 23 checks, every planted fault
+                                     caught (12 planted)
+  Skill headers                0.3s  12 skills parsed, no consistency problems.
+  Exact rows by the count      4.1s  PASSING -- 13 printed exact rows each state
+                                     a count; 33 orrery lines print through
+                                     exact_text() or row_text(); 10 gallery lines
+                                     are served the count
+  Dimensions                   2.4s  No unit contradicts its arithmetic: 54
+                                     derived row(s) read -- 42 OK, 9 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.2s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.3s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.2s  All 126 status lines in constants_new.py are
+                                     well formed; 54 rows carry none.
+  Row shape                    0.1s  All 183 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.4s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Scanner row run (L-414)      0.3s  16 of 16 pins hold -- each row reads its own
+                                     comment run, declared rows are named, the
+                                     gate path is read by name.
+  Reset completeness          28.8s  PASS -- all 311 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  3.3s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Earth pole of date           0.5s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Hills cloud sampler (L-421)    0.8s  PASS -- 4 of 4 planted faults caught; the
+                                     real rows pass, the dots' plane tilted 34.1
+                                     deg
+  Drawings export check        0.8s  PASS -- 3 of 3 planted faults caught;
+                                     hills_cloud 3600 dots, tilt 30.9 deg, sha256
+                                     a51e93118069
+  Position digits (L-401)      2.8s  PASS -- 13 of 13 planted faults caught by
+                                     name; 23 hovers examined, 181 lines compared
+                                     against their errors; 5 pairs printed the
+                                     same from either end; 496 hovers of every
+                                     listed object from the Sun, Earth and
+                                     Neptune; 3 recorded 2xr answers read by
+                                     column name; 6 period sentences
+  Orbit markers (L-431, L-401)   19.5s  PASS -- 12 of 12 planted faults caught by
+                                     name; 4 ellipses, 1080 drawn points on their
+                                     period's centre; 14 markers, 9 dates, 53
+                                     printed distances against their errors; 6
+                                     elements as given; 3 Keplerian positions
+                                     half a year on; 1 parameters-window date
+                                     pairs; 2 Moon arcs; 2 perturbation checks; 1
+                                     perihelion osculating orbits; 2 frames; 2
+                                     sources read
+  Domain Split                 0.9s  PASS -- 6 of 6 planted faults caught; the
+                                     split reads each module's Domain: tag and
+                                     prints the same on the console, in the audit
+                                     and in the run history.
+  Maintenance report (L-269)    0.2s  PASS -- 4 of 4 planted faults caught by
+                                     name; 4 summaries; 2 risen file(s) named
+  Dashboard parity             0.6s  PASS -- 10 of 10 planted faults caught; 81
+                                     steps matched to their buttons by name and
+                                     script; 111 cards carry a short line; the
+                                     search finds 4 of 4 cases in any word order
+  Worksheet checker           17.0s  74 of 110 routed, 8 clean
+  Worksheet checker tests     27.0s  All 135 checks passed
+  Worksheet key round trip     2.6s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         37.6s  All 76 checks passed
+  Extractor pins               0.6s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          96.1s  0 TIER-1 -- the push gate holds; Whole tree,
+                                     Tier-1: 280: orrery 116, Earth System 149,
+                                     stars 13, utilities 2.
+
+======================================================================
+  31 of 31 gating checkers passed -- 318.4s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           74 of 110 routed, 8 clean
+    Provenance scanner          0 TIER-1 -- the push gate holds; Whole tree, Tier-1: 280: orrery 116, Earth System 149, stars 13, utilities 2.
+      No file's Tier-1 count rose since the previous run.
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2263 file(s) examined, 18 written, 2 created, 1 removed, 3 rewritten identically
+    written   LEDGER_CONSOLIDATED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROJECT_INSTRUCTIONS.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/horizons_check_last_run.json
+    written   data/horizons_confirmations.json
+    written   data/objects_export.json
+    written   data/osculating_cache.json
+    written   data/osculating_cache_backup.json
+    written   data/osculating_cache_backup_old.json
+    written   data/provenance_history.json
+    written   data/worksheet_check_state.json
+    written   documentation/WHERE_WE_ARE_10-14-26_2250_run_record.md
+    written   documentation/prompts/citation_review.jsonl
+    written   module_atlas.py
+    written   skills/horizons-orbital-mechanics/SKILL.md
+    created   documentation/patch_L444_missing_periods_20261015.py
+    created   documentation/project_instructions_v3_98.md
+    removed   patch_L444_missing_periods_20261015.py
+    rewritten with identical bytes, no action needed:
+      DATA_INVENTORY.md
+      data/worksheet_routed.json
+      test_output/test_orbit_paths.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+Reinstall horizons-orbital-mechanics (now 1.7) in Settings > Skills. -- done
+Save PROJECT_INSTRUCTIONS.md as documentation/project_instructions_v3_98.md, then copy it into the Project instructions. -- done
+Move the patch into documentation/, then commit and push. -- 
 Look at Venus’s hover in the orrery. After the gallery’s pull, look at it on the website too.
 
 The session close is inside the patch:

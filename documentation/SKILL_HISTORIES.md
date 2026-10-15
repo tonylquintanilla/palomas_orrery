@@ -809,3 +809,13 @@ A Period Depends on Its Centre (the two-centre test and its saved
 choice); and the Small-Body Database's lookup of a pinned record by
 the name Horizons gives it, under Small-Body Record Pinning.
 (Moved down 2026-10-14, when 1.6 made a fourth entry.)
+
+Earlier: 1.4 | 2026-10-12, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ c9722520. v1.4 (L-431, with L-401) adds The Drawn Orbit
+Follows the Period's Centre, what L-431's second build learned: the
+period record keeps Horizons' elements around its own centre, a
+barycentre ellipse in a Sun-centred plot is moved to where the
+barycentre is, found from the body's two element sets at one date, a
+marker's date comes from the period of the drawn elements, and a date
+stepped from a period carries that period's error.
+(Moved down 2026-10-15, when 1.7 made a fourth entry.)

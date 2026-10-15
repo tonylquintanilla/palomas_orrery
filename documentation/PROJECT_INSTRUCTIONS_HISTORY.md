@@ -2773,6 +2773,39 @@ resident.
 (Moved down from the resident protocol on 2026-10-14 when
 v3.97 made a fourth entry.)
 
+v3.95 (October 13, 2026): No rule changed in this document. ONE
+skill bump, one version (L-437): provenance-discipline 2.28 -> 2.29.
+THE TIER-1 TOTAL PRINTS WITH ITS DOMAINS.
+
+WHAT PROMPTED IT. Tony, 2026-10-12: "the provenance checker is still
+reporting 288 tier 1 items. Can we separate this into meaningful
+groups, like orrery, earth science and stars in the checker report?"
+The split was in the audit's table and nowhere the total printed. And
+a module's domain had two homes, the scanner's hand list and the
+module's own docstring tag, which disagreed on 12 files at c5dff25.
+
+WHAT CHANGED. provenance-discipline rewrites Report Domain
+Classification -- the docstring Domain: tag is the store, the hand list
+is gone, and a file with no tag the report knows is counted as
+unclassified and named -- and Scanner Mechanics gains a bullet: the
+whole-tree total prints with its split everywhere it prints, and in
+the run history tier1_by_domain is the Tier-1 split while domain_counts
+stays the all-tier count. Its v2.26 entry moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copy reads
+provenance-discipline 2.29 before provenance work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.92 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-15 when
+v3.98 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

@@ -1,14 +1,20 @@
 ---
 name: horizons-orbital-mechanics
-description: JPL Horizons API and orbital mechanics reference for the Paloma's Orrery project (astroquery Horizons queries, orbit_data_manager, osculating_cache_manager, idealized_orbits, apsidal_markers, spacecraft_encounters, close_approach_data, position_accuracy, orbital_period). Use for any Paloma's Orrery task involving Horizons queries or ephemerides, coordinate center bodies, reference frames, osculating elements, orbit caches, a small body's position uncertainty (VEC_TABLE 2xr), orbital periods and the centre they are taken around, the drawn orbit and its markers' dates, encounter or flyby resolution, or whenever a rendered orbit looks wrong or an ephemeris API returns empty. Do not use for projects other than Paloma's Orrery.
-fires_when: Horizons queries, centers, frames, osculating elements, encounters, comet record pinning, 2xr uncertainties, periods, the drawn orbit's centre, the Horizons check (horizons_check.py, its period comparison and the data sheets' re-read)
+description: JPL Horizons API and orbital mechanics reference for the Paloma's Orrery project (astroquery Horizons queries, orbit_data_manager, osculating_cache_manager, idealized_orbits, apsidal_markers, spacecraft_encounters, close_approach_data, position_accuracy, orbital_period, period_fetch). Use for any Paloma's Orrery task involving Horizons queries or ephemerides, coordinate center bodies, reference frames, osculating elements, orbit caches, a small body's position uncertainty (VEC_TABLE 2xr), orbital periods and the centre they are taken around, the drawn orbit and its markers' dates, encounter or flyby resolution, or whenever a rendered orbit looks wrong or an ephemeris API returns empty. Do not use for projects other than Paloma's Orrery.
+fires_when: Horizons queries, centers, frames, osculating elements, encounters, comet record pinning, 2xr uncertainties, periods, the drawn orbit's centre, the Horizons check (horizons_check.py, its period comparison and the data sheets' re-read), the period fetch before it (period_fetch.py)
 ---
 
 # Horizons and Orbital Mechanics Reference
 
-Read this file in 2 parts: lines 1-222, 223-322.
+Read this file in 2 parts: lines 1-221, 222-330.
 
-Skill version: 1.6 | 2026-10-14, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.7 | 2026-10-15, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ ffd6c36a. v1.7 (L-444) adds one bullet under Where the
+Check Lives, and What It Compares: period_fetch.py runs just before the
+check and fetches, with plotting's own call and save, the period of
+each served object that has none fetched, so the check compares it with
+JPL the same day.
+Earlier: 1.6 | 2026-10-14, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 5cd63cce and gallery @ 4b2b660a. v1.6 (L-431 build 3,
 with L-395's move) records where the Horizons check lives now and what
 it compares, under Where the Check Lives, and What It Compares: it runs
@@ -25,16 +31,9 @@ barycentre gets no comparison with the stored mean elements. 1.4 said
 the comparison stays Sun-centred; for a body as far out as Sedna that
 mostly measures the Sun's own wobble. A second version in one session, as interactive-exhibit 1.14
 was, because the ruling came after 1.4 was installed.
-Earlier: 1.4 | 2026-10-12, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ c9722520. v1.4 (L-431, with L-401) adds The Drawn Orbit
-Follows the Period's Centre, what L-431's second build learned: the
-period record keeps Horizons' elements around its own centre, a
-barycentre ellipse in a Sun-centred plot is moved to where the
-barycentre is, found from the body's two element sets at one date, a
-marker's date comes from the period of the drawn elements, and a date
-stepped from a period carries that period's error.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
-on 2026-10-12, 2026-10-13 and 2026-10-14 (L-431).
+on 2026-10-12, 2026-10-13 and 2026-10-14 (L-431), and 2026-10-15
+(L-444).
 
 ## Horizons Center Body Rules
 
@@ -235,6 +234,15 @@ build's record, documentation/HANDOFF_L431_build3_website_20261014.md.
   its own, `tools/check_horizons_confirmations.py`, which reads the
   dates from the pulled export and goes red, naming the objects, on the
   day one turns 30 days old.
+- `period_fetch.py` runs first, a GENERATOR row just before the check
+  (L-444, 2026-10-15). For each served object whose period is not
+  fetched -- typed, none, or a new object with no cache entry -- it
+  makes plotting's own call, `fetch_osculating_elements(...,
+  center_body=None, with_period=True)`, without the dialog, and saves
+  it as plotting does, so the check compares the new period with JPL
+  the same day. It asks nothing on most runs, saves nothing for a body
+  whose answer is not whole, and says UNREACHABLE. The check itself
+  still fills no gaps.
 - Only what is due is asked: a part of an entry never confirmed, one
   confirmed 30 days ago or more, or one that has changed since (the
   record keeps what was confirmed, so a change shows). On most runs it

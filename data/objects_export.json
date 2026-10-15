@@ -1,8 +1,8 @@
 {
   "schema": 2,
   "source_sha256": "57ba8161e6f0a2104ed556a7cbf7cbaa46b3f7d95aa1e93da4c7dd412d12cc24",
-  "period_inputs_sha256": "0eaee9aec07788c08a60529fea303d4bafc8969058dad0cd78261cabea0f9bb7",
-  "confirmations_sha256": "828e90cd916238f5751bea491110b91f4cd15e5d31d2a18a76715d3af83125e5",
+  "period_inputs_sha256": "df96fd45254ef73d08eef7253402d2e646729aece8393e8e6fd451655c4f02db",
+  "confirmations_sha256": "7d29e86e920bc1d556d319ef2e9540e6c02eb94c4aeeaeeb19fda3f4516d3268",
   "cadence_days": 30,
   "objects": {
     "sun": {
@@ -96,22 +96,41 @@
       "description": "NASA: \"Venus is the second planet from the Sun, and the sixth largest planet. It's the hottest planet in our solar system.\"",
       "info_url": "https://science.nasa.gov/venus/",
       "period": {
-        "kind": "typed",
-        "typed": true,
-        "center": null,
-        "center_label": null,
+        "kind": "fetched",
+        "typed": false,
+        "center": "@sun",
+        "center_label": "the Sun",
         "open_orbit": false,
-        "fetched": null,
-        "words": "Typed value, not fetched from JPL.",
+        "fetched": "2026-10-15",
+        "words": null,
         "years": {
-          "value": 0.615198,
-          "figures": 6,
-          "text": "0.615198"
+          "value": 0.6152,
+          "figures": 4,
+          "text": "0.6152"
         },
         "days": {
-          "value": 224.701,
-          "figures": 6,
-          "text": "224.701"
+          "value": 224.71,
+          "figures": 5,
+          "text": "224.71"
+        },
+        "record": {
+          "days": 224.7056262286513,
+          "error_days": 0.0076482824500203606,
+          "error_from": "year_change",
+          "sbdb_status": "not a small body; SBDB not asked",
+          "epoch": "2026-10-15 10:52",
+          "elements": {
+            "a": 0.7233425854391095,
+            "e": 0.006756359033685199,
+            "i": 3.394359700186716,
+            "omega": 54.91578561657533,
+            "Omega": 76.60439148300738,
+            "TP": 2461400.341864155,
+            "MA": 245.6278254931248,
+            "TA": 244.925066396131,
+            "q": 0.7184554232275288,
+            "epoch": "2026-10-15 10:52 osc."
+          }
         }
       },
       "confirmation": {
@@ -121,7 +140,14 @@
           "id_type": null,
           "horizons_name": "Venus"
         },
-        "period": null
+        "period": {
+          "confirmed": "2026-10-15",
+          "center": "@sun",
+          "epoch": "2026-10-15 10:52",
+          "days": 224.7056262286513,
+          "jpl_days": 224.7056262286513,
+          "error_days": 0.0076482824500203606
+        }
       }
     },
     "earth": {
@@ -133,22 +159,41 @@
       "description": "Our home planet.",
       "info_url": "https://science.nasa.gov/earth/",
       "period": {
-        "kind": "typed",
-        "typed": true,
-        "center": null,
-        "center_label": null,
+        "kind": "fetched",
+        "typed": false,
+        "center": "@sun",
+        "center_label": "the Sun",
         "open_orbit": false,
-        "fetched": null,
-        "words": "Typed value, not fetched from JPL.",
+        "fetched": "2026-10-15",
+        "words": null,
         "years": {
-          "value": 1.00002,
-          "figures": 6,
-          "text": "1.00002"
+          "value": 1.0,
+          "figures": 3,
+          "text": "1.00"
         },
         "days": {
-          "value": 365.256,
-          "figures": 6,
-          "text": "365.256"
+          "value": 366.0,
+          "figures": 3,
+          "text": "366"
+        },
+        "record": {
+          "days": 365.5364560333389,
+          "error_days": 0.7694187238463996,
+          "error_from": "year_change",
+          "sbdb_status": "not a small body; SBDB not asked",
+          "epoch": "2026-10-15 10:52",
+          "elements": {
+            "a": 1.000511185160326,
+            "e": 0.01702963707252433,
+            "i": 0.004028601336298406,
+            "omega": 281.0757590385103,
+            "Omega": 180.5234221305656,
+            "TP": 2461408.099997574,
+            "MA": 282.0515528445952,
+            "TA": 280.1349491120672,
+            "q": 0.9834728427900445,
+            "epoch": "2026-10-15 10:52 osc."
+          }
         }
       },
       "confirmation": {
@@ -158,7 +203,14 @@
           "id_type": null,
           "horizons_name": "Earth"
         },
-        "period": null
+        "period": {
+          "confirmed": "2026-10-15",
+          "center": "@sun",
+          "epoch": "2026-10-15 10:52",
+          "days": 365.5364560333389,
+          "jpl_days": 365.5364560333389,
+          "error_days": 0.7694187238463996
+        }
       }
     },
     "mars": {
@@ -170,22 +222,41 @@
       "description": "NASA: \"Mars is one of the easiest planets to spot in the night sky -- it looks like a bright red point of light.\"",
       "info_url": "https://science.nasa.gov/mars/",
       "period": {
-        "kind": "typed",
-        "typed": true,
-        "center": null,
-        "center_label": null,
+        "kind": "fetched",
+        "typed": false,
+        "center": "@sun",
+        "center_label": "the Sun",
         "open_orbit": false,
-        "fetched": null,
-        "words": "Typed value, not fetched from JPL.",
+        "fetched": "2026-10-15",
+        "words": null,
         "years": {
           "value": 1.8808,
           "figures": 5,
           "text": "1.8808"
         },
         "days": {
-          "value": 686.98,
-          "figures": 5,
-          "text": "686.98"
+          "value": 687.0,
+          "figures": 4,
+          "text": "687.0"
+        },
+        "record": {
+          "days": 686.9796873275407,
+          "error_days": 0.04042817196886972,
+          "error_from": "year_change",
+          "sbdb_status": "not a small body; SBDB not asked",
+          "epoch": "2026-10-15 10:52",
+          "elements": {
+            "a": 1.523691434444281,
+            "e": 0.09341118581750261,
+            "i": 1.84744734992013,
+            "omega": 286.6483894212423,
+            "Omega": 49.48072680872549,
+            "TP": 2461125.834848277,
+            "MA": 106.4404901178929,
+            "TA": 116.3290663766482,
+            "q": 1.381361610732869,
+            "epoch": "2026-10-15 10:52 osc."
+          }
         }
       },
       "confirmation": {
@@ -195,7 +266,14 @@
           "id_type": null,
           "horizons_name": "Mars"
         },
-        "period": null
+        "period": {
+          "confirmed": "2026-10-15",
+          "center": "@sun",
+          "epoch": "2026-10-15 10:52",
+          "days": 686.9796873275407,
+          "jpl_days": 686.9796873275407,
+          "error_days": 0.04042817196886972
+        }
       }
     },
     "jupiter": {
@@ -259,22 +337,53 @@
       "description": "NASA: \"Saturn is the sixth planet from the Sun and the second largest planet in our solar system.\"",
       "info_url": "https://science.nasa.gov/saturn/",
       "period": {
-        "kind": "typed",
-        "typed": true,
-        "center": null,
-        "center_label": null,
+        "kind": "fetched",
+        "typed": false,
+        "center": "@0",
+        "center_label": "the solar system's center of mass",
         "open_orbit": false,
-        "fetched": null,
-        "words": "Typed value, not fetched from JPL.",
+        "fetched": "2026-10-15",
+        "words": null,
         "years": {
-          "value": 29.45714,
-          "figures": 7,
-          "text": "29.45714"
+          "value": 29.427,
+          "figures": 5,
+          "text": "29.427"
         },
         "days": {
-          "value": 10759.22,
-          "figures": 7,
-          "text": "10759.22"
+          "value": 10748.0,
+          "figures": 5,
+          "text": "10,748"
+        },
+        "record": {
+          "days": 10748.03372433625,
+          "error_days": 0.1777568829493248,
+          "error_from": "year_change",
+          "sbdb_status": "not a small body; SBDB not asked",
+          "epoch": "2026-10-15 10:52",
+          "elements": {
+            "a": 9.532874394029514,
+            "e": 0.05451628987393888,
+            "i": 2.487093961474025,
+            "omega": 339.2095025509147,
+            "Omega": 113.5180974868358,
+            "TP": 2463577.423304503,
+            "MA": 284.6886072018676,
+            "TA": 278.5512718324208,
+            "q": 9.013177450232751,
+            "epoch": "2026-10-15 10:52 osc."
+          },
+          "paired": true,
+          "sun_elements": {
+            "a": 9.535562302553389,
+            "e": 0.05515541746678355,
+            "i": 2.487178273665797,
+            "omega": 339.3176440740343,
+            "Omega": 113.5546573526542,
+            "epoch": "2026-10-15 10:52 osc.",
+            "TP": 2463579.846915195,
+            "MA": 284.6467936085178,
+            "TA": 278.435637744408
+          }
         }
       },
       "confirmation": {
@@ -284,7 +393,14 @@
           "id_type": null,
           "horizons_name": "Saturn"
         },
-        "period": null
+        "period": {
+          "confirmed": "2026-10-15",
+          "center": "@0",
+          "epoch": "2026-10-15 10:52",
+          "days": 10748.03372433625,
+          "jpl_days": 10748.03372433625,
+          "error_days": 0.1777568829493248
+        }
       }
     },
     "uranus": {
@@ -296,22 +412,53 @@
       "description": "NASA: \"Uranus is the seventh planet from the Sun, and the third largest planet in our solar system -- about four times wider than Earth.\"",
       "info_url": "https://science.nasa.gov/uranus/",
       "period": {
-        "kind": "typed",
-        "typed": true,
-        "center": null,
-        "center_label": null,
+        "kind": "fetched",
+        "typed": false,
+        "center": "@0",
+        "center_label": "the solar system's center of mass",
         "open_orbit": false,
-        "fetched": null,
-        "words": "Typed value, not fetched from JPL.",
+        "fetched": "2026-10-15",
+        "words": null,
         "years": {
-          "value": 84.0205,
-          "figures": 6,
-          "text": "84.0205"
+          "value": 83.997,
+          "figures": 5,
+          "text": "83.997"
         },
         "days": {
-          "value": 30688.5,
-          "figures": 6,
-          "text": "30688.5"
+          "value": 30680.0,
+          "figures": 5,
+          "text": "30,680"
+        },
+        "record": {
+          "days": 30679.94522205484,
+          "error_days": 0.18876053482017596,
+          "error_from": "year_change",
+          "sbdb_status": "not a small body; SBDB not asked",
+          "epoch": "2026-10-15 10:52",
+          "elements": {
+            "a": 19.18724499148008,
+            "e": 0.04724469102120214,
+            "i": 0.7745935392071048,
+            "omega": 97.20389194455073,
+            "Omega": 73.9677825153016,
+            "TP": 2470120.745259646,
+            "MA": 256.8366706470684,
+            "TA": 251.642181251973,
+            "q": 18.2807495303095,
+            "epoch": "2026-10-15 10:52 osc."
+          },
+          "paired": true,
+          "sun_elements": {
+            "a": 19.26155103386303,
+            "e": 0.0475550388469807,
+            "i": 0.7755196849283905,
+            "omega": 92.65214142234936,
+            "Omega": 73.97577949589122,
+            "epoch": "2026-10-15 10:52 osc.",
+            "TP": 2469774.907195627,
+            "MA": 261.5251328519989,
+            "TA": 256.1897677353513
+          }
         }
       },
       "confirmation": {
@@ -321,7 +468,14 @@
           "id_type": null,
           "horizons_name": "Uranus"
         },
-        "period": null
+        "period": {
+          "confirmed": "2026-10-15",
+          "center": "@0",
+          "epoch": "2026-10-15 10:52",
+          "days": 30679.94522205484,
+          "jpl_days": 30679.94522205484,
+          "error_days": 0.18876053482017596
+        }
       }
     },
     "neptune": {
@@ -333,22 +487,53 @@
       "description": "NASA: \"Dark, cold and whipped by supersonic winds, giant Neptune is the eighth and most distant major planet orbiting our Sun.\"",
       "info_url": "https://science.nasa.gov/neptune/",
       "period": {
-        "kind": "typed",
-        "typed": true,
-        "center": null,
-        "center_label": null,
+        "kind": "fetched",
+        "typed": false,
+        "center": "@0",
+        "center_label": "the solar system's center of mass",
         "open_orbit": false,
-        "fetched": null,
-        "words": "Typed value, not fetched from JPL.",
+        "fetched": "2026-10-15",
+        "words": null,
         "years": {
-          "value": 164.79,
+          "value": 164.78,
           "figures": 5,
-          "text": "164.79"
+          "text": "164.78"
         },
         "days": {
-          "value": 60189.0,
-          "figures": 5,
-          "text": "60189"
+          "value": 60180.0,
+          "figures": 4,
+          "text": "60,180"
+        },
+        "record": {
+          "days": 60184.8784092995,
+          "error_days": 2.554290918284096,
+          "error_from": "year_change",
+          "sbdb_status": "not a small body; SBDB not asked",
+          "epoch": "2026-10-15 10:52",
+          "elements": {
+            "a": 30.06753024907772,
+            "e": 0.008575047885178658,
+            "i": 1.774757747376338,
+            "omega": 273.2343901815323,
+            "Omega": 131.9625936857237,
+            "TP": 2468316.608707084,
+            "MA": 318.2028542544751,
+            "TA": 317.5426779690917,
+            "q": 29.80969973740282,
+            "epoch": "2026-10-15 10:52 osc."
+          },
+          "paired": true,
+          "sun_elements": {
+            "a": 30.06079710676687,
+            "e": 0.009684299778844725,
+            "i": 1.775426317141584,
+            "omega": 282.2190148964298,
+            "Omega": 131.9929074550766,
+            "epoch": "2026-10-15 10:52 osc.",
+            "TP": 2469789.97340767,
+            "MA": 309.4015430537881,
+            "TA": 308.5374242302181
+          }
         }
       },
       "confirmation": {
@@ -358,7 +543,14 @@
           "id_type": null,
           "horizons_name": "Neptune"
         },
-        "period": null
+        "period": {
+          "confirmed": "2026-10-15",
+          "center": "@0",
+          "epoch": "2026-10-15 10:52",
+          "days": 60184.8784092995,
+          "jpl_days": 60184.8784092995,
+          "error_days": 2.554290918284096
+        }
       }
     },
     "pluto_barycenter": {
@@ -399,22 +591,41 @@
       "description": "A near-Earth asteroid that will make a close approach in 2029. Future OSIRIS-APEX target.",
       "info_url": "https://cneos.jpl.nasa.gov/apophis/",
       "period": {
-        "kind": "typed",
-        "typed": true,
-        "center": null,
-        "center_label": null,
+        "kind": "fetched",
+        "typed": false,
+        "center": "@sun",
+        "center_label": "the Sun",
         "open_orbit": false,
-        "fetched": null,
-        "words": "Typed value, not fetched from JPL.",
+        "fetched": "2026-10-15",
+        "words": null,
         "years": {
-          "value": 0.886,
-          "figures": 3,
-          "text": "0.886"
+          "value": 0.88581,
+          "figures": 5,
+          "text": "0.88581"
         },
         "days": {
-          "value": 323.6,
-          "figures": 4,
-          "text": "323.6"
+          "value": 323.54,
+          "figures": 5,
+          "text": "323.54"
+        },
+        "record": {
+          "days": 323.5420892338735,
+          "error_days": 0.0034301412194395198,
+          "error_from": "year_change",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-15 10:52",
+          "elements": {
+            "a": 0.9223340441778785,
+            "e": 0.1911837946145804,
+            "i": 3.341088482961081,
+            "omega": 126.6840231838445,
+            "Omega": 203.892579976571,
+            "TP": 2461366.471227606,
+            "MA": 318.2538334651354,
+            "TA": 300.8139894354114,
+            "q": 0.7459987217097395,
+            "epoch": "2026-10-15 10:52 osc."
+          }
         }
       },
       "confirmation": {
@@ -424,7 +635,14 @@
           "id_type": "smallbody",
           "horizons_name": "99942 Apophis"
         },
-        "period": null
+        "period": {
+          "confirmed": "2026-10-15",
+          "center": "@sun",
+          "epoch": "2026-10-15 10:52",
+          "days": 323.5420892338735,
+          "jpl_days": 323.5420892338735,
+          "error_days": 0.0034301412194395198
+        }
       }
     },
     "halley": {
@@ -436,22 +654,53 @@
       "description": "The most famous periodic comet. Its orbit runs backward compared with the planets, and its dust gives two meteor showers each year, the Eta Aquarids and the Orionids.",
       "info_url": "https://science.nasa.gov/solar-system/comets/1p-halley/",
       "period": {
-        "kind": "typed",
-        "typed": true,
-        "center": null,
-        "center_label": null,
+        "kind": "fetched",
+        "typed": false,
+        "center": "@0",
+        "center_label": "the solar system's center of mass",
         "open_orbit": false,
-        "fetched": null,
-        "words": "Typed value, not fetched from JPL.",
+        "fetched": "2026-10-15",
+        "words": null,
         "years": {
-          "value": 75.92414034,
-          "figures": 10,
-          "text": "75.92414034"
+          "value": 75.4613,
+          "figures": 6,
+          "text": "75.4613"
         },
         "days": {
-          "value": 27731.29226,
-          "figures": 10,
-          "text": "27731.29226"
+          "value": 27562.22,
+          "figures": 7,
+          "text": "27,562.22"
+        },
+        "record": {
+          "days": 27562.22169273424,
+          "error_days": 0.011189067670784425,
+          "error_from": "year_change",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-15 10:52",
+          "elements": {
+            "a": 17.86506705971184,
+            "e": 0.9673030057836857,
+            "i": 162.2456991329948,
+            "omega": 111.735371349088,
+            "Omega": 58.83597353862582,
+            "TP": 2474032.247300198,
+            "MA": 194.0777431132587,
+            "TA": 180.9248975121199,
+            "q": 0.5841339943254654,
+            "epoch": "2026-10-15 10:52 osc."
+          },
+          "paired": true,
+          "sun_elements": {
+            "a": 17.85952833547308,
+            "e": 0.9680309438638349,
+            "i": 162.1915401187941,
+            "omega": 112.1627845700233,
+            "Omega": 59.26214776907469,
+            "epoch": "2026-10-15 10:52 osc.",
+            "TP": 2474039.836782,
+            "MA": 194.0127034084964,
+            "TA": 180.9097913544927
+          }
         }
       },
       "confirmation": {
@@ -461,7 +710,14 @@
           "id_type": "smallbody",
           "horizons_name": "1P/Halley"
         },
-        "period": null
+        "period": {
+          "confirmed": "2026-10-15",
+          "center": "@0",
+          "epoch": "2026-10-15 10:52",
+          "days": 27562.22169273424,
+          "jpl_days": 27562.22169273424,
+          "error_days": 0.011189067670784425
+        }
       }
     },
     "encke": {

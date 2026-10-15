@@ -263,6 +263,10 @@ i would actually narrow the search but still find results"). Until now
 the typed text had to appear as one phrase. matching_groups() holds the
 rule at module level, so Dashboard Parity can test it and plant the old
 phrase match as a fault.
+October 15, 2026 with Anthropic's Claude Opus 5.5 (L-444): Period Fetch
+under the orrery's generators and Period Fetch Suite under its checkers,
+each named what the run prints, in alphabetical place, with its short
+line.
 """
 
 import os
@@ -1144,6 +1148,24 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
+        ("Period Fetch",
+         "period_fetch.py",
+         "Asks JPL Horizons for the orbital period of each object the "
+         "website serves that has none fetched yet -- a typed period, none, "
+         "or a new object -- so on most runs it asks nothing (L-444). It "
+         "uses the orrery's own fetch, the one plotting makes when you say "
+         "yes to the update dialog, without the dialog: the orbit's "
+         "elements and its period together, saved to "
+         "data/osculating_cache.json, naming each body whose elements it "
+         "refreshed. It runs just before the Horizons Check, which then "
+         "compares the new periods with JPL the same day. The Sun and the "
+         "Pluto-Charon barycentre are named and skipped, as plotting skips "
+         "them. If JPL cannot be reached it saves nothing for that body, "
+         "says UNREACHABLE and asks nothing more.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
         ("Skill Manifest",
          "skills_index.py",
          "Regenerate the Skill Manifest table in the protocol from skills/*/SKILL.md. "
@@ -1407,6 +1429,23 @@ LAUNCH_GROUPS = {
          "its own. Twelve faults are planted first, each in a copy of the real "
          "code, and each must be caught by name. "
          "Ends on \"ORBIT MARKERS: PASS\" (L-431, L-401).",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
+        ("Period Fetch Suite",
+         "test_period_fetch.py",
+         "The Period Fetch on recorded answers, with no network "
+         "(documentation/worksheets/period_fetch_answers_L444.json, taken "
+         "from the periods plotting saved for Mercury, Jupiter and Encke). "
+         "Twelve faults are planted, each in a copy of period_fetch.py or "
+         "of plotting's filter, and each must be caught by name: a fetched "
+         "period asked again, the list not printed first, a new object "
+         "missed, a record made another way than plotting's, a failed "
+         "fetch read as a pass, and more. Then the real step must ask only "
+         "for what is missing, with plotting's call, and save the record "
+         "plotting saves, field by field. "
+         "Ends on \"PERIOD FETCH SUITE: pass\" (L-444).",
          SCRIPT_DIR,
          True,
          None,
@@ -1839,6 +1878,9 @@ CARD_LINES = {
      "Objects Export"):
         "Writes the objects export the website reads, from celestial_objects.py.",
     ("Maintenance Run",
+     "Period Fetch"):
+        "Fetches from JPL each served object's missing orbital period.",
+    ("Maintenance Run",
      "Skill Manifest"):
         "Regenerates the protocol's skill table from skills/*/SKILL.md.",
     ("Maintenance Run",
@@ -1904,6 +1946,9 @@ CARD_LINES = {
     ("Maintenance Run",
      "Orbit Markers"):
         "Checks each orbit's centre, its marker dates, and its hover digits.",
+    ("Maintenance Run",
+     "Period Fetch Suite"):
+        "Checks the period fetch on recorded answers; twelve planted faults.",
     ("Maintenance Run",
      "Position Digits"):
         "Checks the body hover prints only the digits JPL's errors earn.",

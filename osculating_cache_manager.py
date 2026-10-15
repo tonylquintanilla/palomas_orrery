@@ -2,7 +2,8 @@
 osculating_cache_manager.py
 
 Auto-updating cache for osculating orbital elements from JPL Horizons.
-Uses two-generation backup protection and always-prompt user workflow.
+Uses two-generation backup protection and always-prompt user workflow,
+with one exception, period_fetch.py (L-444), stamped below.
 
 Design Philosophy:
 - Visibility over automation ("Otherwise it's a third party program")
@@ -22,6 +23,11 @@ build 2: get_fallback_elements reads the same centre-aware key the fetch
 writes, so a declined update keeps elements around the view's centre;
 the period record now also keeps the elements around its own centre,
 which the drawing reads through orbital_period.drawing_orbit.)
+Module updated: October 15, 2026 with Anthropic's Claude Opus 5.5 (L-444:
+period_fetch.py, a step of the maintenance run, calls
+fetch_osculating_elements with plotting's arguments and saves with
+save_cache, without the dialog, for a served body whose period is not
+fetched: Tony's option A of 2026-10-15. Nothing in this module changed.)
 
 Role: cache
 Domain: orrery
