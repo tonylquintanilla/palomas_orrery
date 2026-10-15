@@ -6,7 +6,8 @@ https://github.com/tonylquintanilla/palomas_orrery ("L444 missing
 periods brief"). The gallery is not touched (read at
 86ef2df6313f956f5c9e49611e6a2bdd0e95da29 at
 https://github.com/tonylquintanilla/tonyquintanilla.github.io).
-Pushed at: (Tony's commit after his run).
+Pushed at: 9579fcd577706b2eec8a9e552949331074f4e45b (Tony's commit
+after his run, 2026-10-15 10:57).
 Tony's local folders: orrery
 `C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\`;
 gallery `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\`.
@@ -158,5 +159,21 @@ never edited by a test):
 - (do) Move the patch script into `documentation/`; commit; push.
 - (do) Look at one fetched body's hover in the orrery, and on the
   website after the gallery's pull.
+
+## 6. Tony's run, and the close (added 2026-10-15)
+
+- The patch applied on 7166648d. The first live run fetched all eight,
+  Venus, Earth, Mars, Saturn, Uranus, Neptune, Apophis and Halley, and
+  the Horizons check confirmed each against JPL: 31 of 31 gating
+  checkers, pushed at 9579fcd. Venus's hover in the orrery: "orbital
+  period around the sun fetched today, correct."
+- Tony asked whether the Horizons check should come before the cache
+  build. It does in the orrery; the website's Daily Run builds before
+  it pulls. Opened as L-446 (the daily run's order), with his "Yes".
+- Earth printed 366 days: the period of Earth's centre, which the Moon
+  makes wobble through the month. Tony's ruling the same day: take
+  Earth's period from the Earth-Moon barycentre. Opened as L-445
+  (Earth's period), which also carries the look at the website.
+- L-444 closed by `patch_L444_2_close_20261015.py`.
 
 Session record written October 2026 with Anthropic's Claude Opus 5.5.

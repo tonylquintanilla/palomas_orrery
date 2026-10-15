@@ -12,15 +12,15 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 161  
-**Total Lines of Code (non-blank):** 126,440  
-**Total Public Functions/Classes:** 1,565
+**Total Lines of Code (non-blank):** 126,572  
+**Total Public Functions/Classes:** 1,566
 
 ## Classification Coverage
 
 **Undetermined role (8).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
-- `patch_L444_missing_periods_20261015.py`
+- `patch_L444_2_close_20261015.py`
 - `test_drawings_export.py`
 - `test_earth_pole_of_date.py`
 - `test_extractor_pins.py`
@@ -30,7 +30,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 **Undetermined domain (1).** No valid `Domain:` tag.
 
-- `patch_L444_missing_periods_20261015.py`
+- `patch_L444_2_close_20261015.py`
 
 
 ---
@@ -224,7 +224,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `ledger_index.py` | Generate the at-a-glance INDEX for the consolidated ledger. (715 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (129 lines) |
-| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (990 lines) |
+| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (992 lines) |
 | `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (851 lines) |
 | `period_fetch.py` | - fetch from JPL the orbital period of each object the website serves that has none fetched yet, with the same code the orrery uses when Tony plots, so the Horizons check can compare it with JPL the same day and the objects export can carry it to the website (L-444). (323 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (505 lines) |
@@ -263,7 +263,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
-| `patch_L444_missing_periods_20261015.py` | - L-444 (the missing periods): a new first step of the orrery's maintenance run fetches from JPL the orbital period of each served object that has none fetched yet, with the code plotting uses, just before the Horizons check. (211 lines) |
+| `patch_L444_2_close_20261015.py` | - closes L-444 (the missing periods) on Tony's first live run, and opens the item for Earth's period from the Earth-Moon barycentre (Tony's ruling of 2026-10-15). (341 lines) |
 | `test_drawings_export.py` | Each stored drawing in data/drawings/ is the drawing its rows give today, git tracks it, and each check can fail. (173 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |

@@ -1121,8 +1121,78 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
 Reinstall horizons-orbital-mechanics (now 1.7) in Settings > Skills. -- done
 Save PROJECT_INSTRUCTIONS.md as documentation/project_instructions_v3_98.md, then copy it into the Project instructions. -- done
-Move the patch into documentation/, then commit and push. -- 
+Move the patch into documentation/, then commit and push. -- 9579fcd577706b2eec8a9e552949331074f4e45b
+
 Look at Venus’s hover in the orrery. After the gallery’s pull, look at it on the website too.
+
+Working directory set to: C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github
+Interpreter: C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe
+Working directory: C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github
+Window config file: C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\window_config.json
+Restored window geometry: 1536x793+0+5
+Window will be maximized
+
+============================================================
+LOADING ORBIT CACHE FROM: data/orbit_paths.json
+============================================================
+
+Cache loaded successfully: 1502 valid entries
+
+[CACHE HEALTH SUMMARY]
+Total cached orbits: 1502
+Orbits by center object:
+  3I/ATLAS: 5 orbits
+  Apophis: 2 orbits
+  Arrokoth: 6 orbits
+  Bennu: 2 orbits
+  Bennu/OSIRIS: 1 orbits
+  Earth: 135 orbits
+  Earth-Moon Barycenter: 3 orbits
+  Eris: 2 orbits
+  Eris-Dysnomia Barycenter: 4 orbits
+  Eris/Dysnomia: 101 orbits
+  Haumea: 11 orbits
+  Haumea System Barycenter: 3 orbits
+  Juno: 4 orbits
+  Jupiter: 104 orbits
+  K1: 2 orbits
+  K1-B: 1 orbits
+  K1-C: 1 orbits
+  K1-D: 1 orbits
+  L1: 2 orbits
+  L2: 3 orbits
+  Leucus: 1 orbits
+  Makemake: 1 orbits
+  Mars: 106 orbits
+  Menoetius: 2 orbits
+  Mercury: 102 orbits
+  Moon: 112 orbits
+  Neptune: 101 orbits
+  Orcus: 3 orbits
+  Orcus-Vanth Barycenter: 3 orbits
+  Patroclus: 2 orbits
+  Patroclus-Menoetius Barycenter: 4 orbits
+  Phobos: 6 orbits
+  Planet 9: 5 orbits
+  Pluto: 102 orbits
+  Pluto-Charon Barycenter: 9 orbits
+  Polymele: 1 orbits
+  Quaoar: 1 orbits
+  Quaoar-Weywot Barycenter: 2 orbits
+  R2: 1 orbits
+  Saturn: 101 orbits
+  Sun: 157 orbits
+  Uranus: 101 orbits
+  Vanth: 2 orbits
+  Venus: 101 orbits
+
+Note: Cache can only be manually deleted by removing 'data/orbit_paths.json' file
+Cache and restore points (date = when that content was written):
+  data/orbit_paths.json: 131.1 MB, written 2026-10-13 08:31
+  data/orbit_paths.json.backup: 131.1 MB, written 2026-10-12 20:49
+  data/orbit_paths.json.backup_old: 131.1 MB, written 2026-10-12 14:06
+
+-- orbital period around the sun fetched today, correct.   
 
 The session close is inside the patch:
 
@@ -1137,6 +1207,206 @@ Where this leaves us:
 
 Your next maintenance run fills in the eight missing periods, and the website prints them after your push.
 After that comes Earth’s list, then the Sun’s, then the objects, as you ruled this morning.
+
+================================================================================================
+
+The closing patch now opens two items: L-445 for Earth’s period, and L-446 for the daily run’s order (the website pulls the orrery’s checked data before it builds), with your “Yes” recorded. It has the same name as before, patch_L444_2_close_20261015.py, so use this copy and discard the earlier one if you saved it.
+
+Save it into palomas_orrery_for_github and click Run. It ends “patch applied (3 files)” and names the two new items, L-445 and L-446 unless another session takes those numbers first.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L444_2_close_20261015.py
+ok  LEDGER_CONSOLIDATED.md                                     L-444 to DONE
+ok  LEDGER_CONSOLIDATED.md                                     L-444 run recorded, loose ends re-homed
+ok  LEDGER_CONSOLIDATED.md                                     L-445 opened, Earth's period
+ok  LEDGER_CONSOLIDATED.md                                     L-446 opened, the daily run's order
+ok  LEDGER_CONSOLIDATED.md                                     header stamp
+ok  documentation/WHERE_WE_ARE.md                              header
+ok  documentation/WHERE_WE_ARE.md                              changed since you last read this
+ok  documentation/WHERE_WE_ARE.md                              do next
+ok  documentation/WHERE_WE_ARE.md                              needs you now
+ok  documentation/WHERE_WE_ARE.md                              road 8a done, 8b new
+ok  documentation/WHERE_WE_ARE.md                              signals: last cache build
+ok  documentation/WHERE_WE_ARE.md                              signals: Tier-1
+ok  documentation/WHERE_WE_ARE.md                              details: next
+ok  documentation/WHERE_WE_ARE.md: 130 lines above the marker (cap 130)
+ok  documentation/HANDOFF_L444_missing_periods_build_20261015.md pushed at
+ok  documentation/HANDOFF_L444_missing_periods_build_20261015.md the close
+stamps updated: the ledger's header; Where We Are's date; the build record's push line
+
+New items: L-445 (Earth's period) and L-446 (the daily run's order).
+patch applied (3 files)
+
+NEXT:
+  1. Run orrery_maintenance_run.py. Its ledger index moves L-444
+     to the closed section and lists L-445 and L-446.
+  2. Move this script into documentation/; commit and push.
+Undo is Discard Changes in GitHub Desktop.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+Run orrery_maintenance_run.py. Its ledger step moves L-444 into the closed section.
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261015T155506Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 1.8s  rewrote LEDGER_CONSOLIDATED.md
+  Skill manifest               0.2s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             1.6s  unchanged (1 checked, not written)
+  Period fetch                 0.3s  unchanged (1 checked, not written) --
+                                     NOTHING MISSING -- 13 served objects
+                                     examined, no query asked
+  Horizons check               1.1s  rewrote data/horizons_confirmations.json --
+                                     PASS -- 1 checked today, 1 queries
+  Objects export               0.4s  rewrote data/objects_export.json
+  Drawings export              0.5s  unchanged (1 checked, not written)
+  Module atlas                 8.1s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               5.0s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Exact rows report            2.2s  unchanged (1 checked, not written) -- 13 of
+                                     41 exact rows printed at 43 lines (33
+                                     orrery, 10 gallery); 8 drawn only, 14 not
+                                     followed, 0 map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.2s  No changes to constants_new.py since HEAD.
+  Constants relations          0.3s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              1.1s  No figure count exceeds its inputs: 36
+                                     derived row(s) read, 26 judged OK -- 26 OK,
+                                     10 NOT YET MIGRATED, 1 NO DERIVED LINE, 1
+                                     UNMARKED CONVERSION; 18 conversion(s)
+                                     checked.
+  Constants export check       1.9s  Export matches the store: sha256
+                                     2a1211f8cce2 on both sides; 127 rows
+                                     re-read, 56 not exported, 31 tokens; 320
+                                     conversions re-computed, 10 of 10 worked
+                                     cases hold.
+  Objects export check         0.3s  pass
+  Horizons confirmations       0.4s  pass -- 13 of 13 entries and 11 periods
+                                     confirmed, 26 sheets read, within 30 days
+  Horizons check suite         0.7s  pass -- 60 checks, every planted fault
+                                     caught by name
+  Period fetch suite           3.4s  pass -- 23 checks, every planted fault
+                                     caught (12 planted)
+  Skill headers                0.2s  12 skills parsed, no consistency problems.
+  Exact rows by the count      1.8s  PASSING -- 13 printed exact rows each state
+                                     a count; 33 orrery lines print through
+                                     exact_text() or row_text(); 10 gallery lines
+                                     are served the count
+  Dimensions                   1.3s  No unit contradicts its arithmetic: 54
+                                     derived row(s) read -- 42 OK, 9 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.2s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.2s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 126 status lines in constants_new.py are
+                                     well formed; 54 rows carry none.
+  Row shape                    0.1s  All 183 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.3s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Scanner row run (L-414)      0.2s  16 of 16 pins hold -- each row reads its own
+                                     comment run, declared rows are named, the
+                                     gate path is read by name.
+  Reset completeness          20.6s  PASS -- all 311 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  2.3s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Earth pole of date           0.4s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Hills cloud sampler (L-421)    0.6s  PASS -- 4 of 4 planted faults caught; the
+                                     real rows pass, the dots' plane tilted 34.1
+                                     deg
+  Drawings export check        0.6s  PASS -- 3 of 3 planted faults caught;
+                                     hills_cloud 3600 dots, tilt 30.9 deg, sha256
+                                     a51e93118069
+  Position digits (L-401)      2.9s  PASS -- 13 of 13 planted faults caught by
+                                     name; 23 hovers examined, 181 lines compared
+                                     against their errors; 5 pairs printed the
+                                     same from either end; 496 hovers of every
+                                     listed object from the Sun, Earth and
+                                     Neptune; 3 recorded 2xr answers read by
+                                     column name; 6 period sentences
+  Orbit markers (L-431, L-401)   12.6s  PASS -- 12 of 12 planted faults caught by
+                                     name; 4 ellipses, 1080 drawn points on their
+                                     period's centre; 14 markers, 9 dates, 53
+                                     printed distances against their errors; 6
+                                     elements as given; 3 Keplerian positions
+                                     half a year on; 1 parameters-window date
+                                     pairs; 2 Moon arcs; 2 perturbation checks; 1
+                                     perihelion osculating orbits; 2 frames; 2
+                                     sources read
+  Domain Split                 0.5s  PASS -- 6 of 6 planted faults caught; the
+                                     split reads each module's Domain: tag and
+                                     prints the same on the console, in the audit
+                                     and in the run history.
+  Maintenance report (L-269)    0.1s  PASS -- 4 of 4 planted faults caught by
+                                     name; 4 summaries; 2 risen file(s) named
+  Dashboard parity             0.4s  PASS -- 10 of 10 planted faults caught; 81
+                                     steps matched to their buttons by name and
+                                     script; 111 cards carry a short line; the
+                                     search finds 4 of 4 cases in any word order
+  Worksheet checker            7.8s  74 of 110 routed, 8 clean
+  Worksheet checker tests     18.9s  All 135 checks passed
+  Worksheet key round trip     1.1s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         23.2s  All 76 checks passed
+  Extractor pins               0.5s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          58.0s  0 TIER-1 -- the push gate holds; Whole tree,
+                                     Tier-1: 281: orrery 116, Earth System 149,
+                                     stars 13, utilities 2, unclassified 1.
+
+======================================================================
+  31 of 31 gating checkers passed -- 184.2s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           74 of 110 routed, 8 clean
+    Provenance scanner          0 TIER-1 -- the push gate holds; Whole tree, Tier-1: 281: orrery 116, Earth System 149, stars 13, utilities 2, unclassified 1.
+      Tier-1 rose since the previous run in 1 file(s):
+      - patch_L444_2_close_20261015.py: 0 -> 1
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2264 file(s) examined, 10 written, 0 created, 0 removed, 5 rewritten identically
+    written   LEDGER_CONSOLIDATED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/horizons_check_last_run.json
+    written   data/horizons_confirmations.json
+    written   data/objects_export.json
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    rewritten with identical bytes, no action needed:
+      DATA_INVENTORY.md
+      PROJECT_INSTRUCTIONS.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      test_output/test_orbit_paths.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+Move the patch into documentation/, then commit and push. -- 
+
+On Where We Are, stage 8a is marked done, and two new stages follow it: 8b for Earth’s period and 8c for the daily run’s order.
+
+Where this leaves us:
+
+L-444 is finished: all eight periods are fetched and confirmed against JPL.
+Next are two small builds: Earth’s period from the Earth-Moon barycentre in the orrery, and pull-before-build in the website’s daily run. Then Earth’s list, then the Sun’s.
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 

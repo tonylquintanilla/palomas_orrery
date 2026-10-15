@@ -3,8 +3,8 @@
 
 Generated: October 15, 2026
 Files scanned: 161
-Total findings: 1125
-Constants: 194 | Dicts: 65 | Display strings: 866
+Total findings: 1123
+Constants: 194 | Dicts: 63 | Display strings: 866
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -20,16 +20,22 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T1 by domain | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|--------------|---:|---:|---:|--------:|
+| 20261015T201751Z | `9579fcd` | 161 | 1123 | 281 | orrery 116, Earth System 149, stars 13, utilities 2, unclassified 1 | 683 | 153 | 6 | 0 |
 | 20261015T155506Z | `7166648` | 161 | 1125 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 686 | 153 | 6 | 0 |
 | 20261015T154011Z | `ffd6c36` | 158 | 1122 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 683 | 153 | 6 | 0 |
 | 20261015T043854Z | `2b0e54c` | 160 | 1122 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 683 | 153 | 6 | 0 |
 | 20261015T035759Z | `9248845` | 160 | 1122 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 683 | 153 | 6 | 0 |
 | 20261014T234115Z | `5ca56df` | 160 | 1122 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 683 | 153 | 6 | 0 |
-| 20261014T225215Z | `344ed65` | 159 | 1122 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 683 | 153 | 6 | 0 |
 
-Change since the previous run: total +3, Tier-1 +0.
+Change since the previous run: total -2, Tier-1 +1.
 
-No file's Tier-1 count rose.
+Tier-1 rose in these files:
+
+| File | Before | After |
+|------|-------:|------:|
+| patch_L444_2_close_20261015.py | 0 | 1 |
+
+Tier-1 moved by domain: unclassified 0 -> 1.
 
 ---
 
@@ -60,12 +66,12 @@ No file's Tier-1 count rose.
 
 | Tier | Score | Action | Count |
 |------|-------|--------|------:|
-| 1 | 16-20 | FIX NOW | 280 |
-| 2 | 10-15 | REVIEW | 686 |
+| 1 | 16-20 | FIX NOW | 281 |
+| 2 | 10-15 | REVIEW | 683 |
 | 3 | 5-9 | LOW PRIORITY | 153 |
 | 4 | 1-4 | LOWEST PRIORITY | 6 |
 
-**Whole tree, Tier-1: 280: orrery 116, Earth System 149, stars 13, utilities 2.** By each file's docstring `Domain:` tag; Findings by File Type below has every tier and every domain. The push gate is the Gate Path section, not this total.
+**Whole tree, Tier-1: 281: orrery 116, Earth System 149, stars 13, utilities 2, unclassified 1.** By each file's docstring `Domain:` tag; Findings by File Type below has every tier and every domain. The push gate is the Gate Path section, not this total.
 
 **Tier 2 note (April 2026 audit):** All Tier-2 findings are documented
 accepted residuals -- cited constants, V_STALE staleness flags on verified
@@ -80,7 +86,7 @@ The push gate is Tier-1 = 0 on the active build path, and it binds at export. Th
 
 **GATE PATH: 0 TIER-1 -- the push gate holds.**
 
-Examined: 102 of 127 exported rows; 25 more are computed from other rows, whose inputs are scored where they are typed; 0 display string(s) in 13 served object(s). The whole tree's Tier-1 count is 280: orrery 116, Earth System 149, stars 13, utilities 2; most of them are off this path.
+Examined: 102 of 127 exported rows; 25 more are computed from other rows, whose inputs are scored where they are typed; 0 display string(s) in 13 served object(s). The whole tree's Tier-1 count is 281: orrery 116, Earth System 149, stars 13, utilities 2, unclassified 1; most of them are off this path.
 
 Exported rows computed from other rows (25): `CHROMOSPHERE_TOP_KM`, `DEG_PER_RAD`, `EARTH_BOW_SHOCK_STANDOFF_RADII`, `EARTH_DIPOLE_TILT_DEG`, `EARTH_DIPOLE_TILT_RATE_DEG_PER_YEAR`, `EARTH_GEOSTATIONARY_RADIUS_KM`, `EARTH_HILL_SPHERE_KM`, `EARTH_LEO_INNER_KM`, `EARTH_LEO_OUTER_KM`, `EARTH_LOWER_MANTLE_KM`, `EARTH_MAGNETOPAUSE_STANDOFF_RADII`, `EARTH_MAGNETOTAIL_DRAWN_END_RADII`, `EARTH_MAGNETOTAIL_DRAWN_RADIUS_RADII`, `EARTH_OBLIQUITY_J2000_DEG`, `EARTH_SIDEREAL_ROTATION_PERIOD_H`, `EARTH_STRATOPAUSE_RADIUS_KM`, `EARTH_THERMOPAUSE_RADIUS_KM`, `EARTH_VAN_ALLEN_OUTER_RADII`, `GALACTIC_NORTH_POLE_DEC_J2000_DEG`, `HELMET_CUSP_RADII`, `INNER_LIMIT_OORT_CLOUD_AU`, `OUTER_OORT_CLOUD_AU`, `ROCHE_LIMIT_DRAWN_RADII`, `SGR_A_STAR_DEC_ICRS_DEG`, `SGR_A_STAR_RA_ICRS_DEG`.
 
@@ -181,7 +187,6 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `scenarios_coral_bleaching.py` | earth_science | 1 | 2 | 0 | 0 | 3 |
 | `sgr_a_visualization_core.py` | orrery | 1 | 2 | 0 | 0 | 3 |
 | `orbital_period.py` | orrery | 0 | 2 | 0 | 1 | 3 |
-| `patch_L444_missing_periods_20261015.py` | unclassified | 0 | 3 | 0 | 0 | 3 |
 | `visualization_3d.py` | stars | 0 | 3 | 0 | 0 | 3 |
 | `dep_trace.py` | dev_tools | 0 | 0 | 3 | 0 | 3 |
 | `doc_index.py` | dev_tools | 0 | 0 | 3 | 0 | 3 |
@@ -200,6 +205,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `test_dashboard_parity.py` | dev_tools | 0 | 0 | 2 | 0 | 2 |
 | `worksheet_request_builder.py` | dev_tools | 0 | 0 | 2 | 0 | 2 |
 | `orbital_elements.py` | orrery | 1 | 0 | 0 | 0 | 1 |
+| `patch_L444_2_close_20261015.py` | unclassified | 1 | 0 | 0 | 0 | 1 |
 | `data_acquisition.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `exoplanet_orbits.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `fetch_paleoclimate_data.py` | earth_science | 1 | 0 | 0 | 0 | 1 |
@@ -238,11 +244,11 @@ Same data again, grouped by subject-matter domain rather than by individual file
 | Stars (stellar neighborhood) | 12 | 13 | 41 | 6 | 3 | 63 |
 | Utilities (cross-domain shared helpers) | 1 | 2 | 0 | 0 | 0 | 2 |
 | Gallery | 0 | 0 | 0 | 0 | 0 | 0 |
-| Unclassified (no Domain: tag, or one outside the six) | 1 | 0 | 3 | 0 | 0 | 3 |
+| Unclassified (no Domain: tag, or one outside the six) | 1 | 1 | 0 | 0 | 0 | 1 |
 
 **Domain coverage gap (1):** these files have findings and no `Domain:` tag the report knows, so they are counted as unclassified rather than guessed into a domain. Add the tag to each module's own docstring (one of the six above); nothing in provenance_scanner.py needs editing:
 
-- `patch_L444_missing_periods_20261015.py` -- no Domain: tag in its docstring
+- `patch_L444_2_close_20261015.py` -- no Domain: tag in its docstring
 
 ---
 
@@ -644,6 +650,12 @@ is planned for a future session.
 | 2174 | string | display string @ line 2174 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 | 2197 | string | display string @ line 2197 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 | 2332 | string | display string @ line 2332 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+
+### patch_L444_2_close_20261015.py
+
+| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
+|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
+| 59 | constant | WWA_CAP | 130 | 4 | 5 | **20** | No source citation (recalled) | UNDETERMINED -- could not be classified |
 
 ### planet_visualization_utilities.py
 
@@ -1428,14 +1440,6 @@ is planned for a future session.
 | 2303 | string | display string @ line 2303 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 2341 | string | display string @ line 2341 | (5 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 2416 | string | display string @ line 2416 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-
-### patch_L444_missing_periods_20261015.py
-
-| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
-|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 81 | constant | WWA_CAP | 130 | 3 | 5 | **15** | Cited, not cross-checked; date-sensitive | UNDETERMINED -- could not be classified |
-| 83 | dict | NEW_FILES[...] | (4 entries) | 3 | 5 | **15** | Cited, not cross-checked; date-sensitive | MEASURED -- independently catalogued fact (key) |
-| 85 | dict | FINGERPRINTS[...] | (6 entries) | 3 | 5 | **15** | Cited, not cross-checked; date-sensitive | UNDETERMINED -- could not be classified |
 
 ### planet9_visualization_shells.py
 

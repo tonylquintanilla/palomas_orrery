@@ -1,24 +1,21 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 15, 2026: L-444 (the missing periods) built.
-- Written at orrery ffd6c36 and gallery 86ef2df.
+Last updated: October 15, 2026, afternoon: L-444 (the missing periods) done.
+- Written at orrery 9579fcd and gallery 9f8569e.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Built: L-444 (the missing periods). A new first step of the
->   maintenance run fetches from JPL each served body's missing
->   period, the orbit and the period together (your option A).
-> - The order after it: Earth, then the Sun, then the objects (your
->   ruling, Oct 15).
+> - Done: L-444 (the missing periods): all eight fetched and confirmed.
+> - Ruled: Earth's period from the Earth-Moon barycentre: L-445.
+> - Ruled: the website's daily run pulls before it builds: L-446.
 >
-> **Do next:** *Run L-444's patch and the maintenance run. Then finish
-> Earth's list, then the Sun's; the objects come after (your ruling, Oct 15).*
+> **Do next:** *Build L-445 (Earth's period). Then finish Earth's
+> list, then the Sun's; the objects come after (your ruling, Oct 15).*
 >
 > **Needs you now:**
-> - *Run patch_L444_missing_periods, then the maintenance run (the
->   first live fetch); reinstall horizons-orbital-mechanics 1.7; push.*
+> - *Run patch_L444_2_close, then the maintenance run; commit; push.*
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
@@ -37,9 +34,12 @@ Last updated: October 15, 2026: L-444 (the missing periods) built.
                System room's features close with these rooms.
   8.   [done]  The served objects are checked against JPL Horizons, from
                the orrery's run; the periods passed live, Oct 14.
-  8a.  [NOW]   *L-444 (the missing periods), built Oct 15: your first run
-               fetches Venus, Earth, Mars, Saturn, Uranus, Neptune,
-               Apophis and Halley from JPL.*  << moved this session
+  8a.  [done]  The run fetches each served body's missing period from
+               JPL: L-444 (the missing periods), all eight, Oct 15.
+  8b.  [next]  *L-445 (Earth's period): from the Earth-Moon barycentre,
+               not Earth's centre.*  << new this session
+  8c.  [next]  L-446 (the daily run's order): the website pulls the
+               orrery's checked data before it builds.  << new this session
   9.   [next]  The website's checks, in the order you confirmed:
                L-423 (the website's checks).
  10.   [next]  A bare interactive.html link opens the Solar System room;
@@ -91,8 +91,8 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261014T225537Z, ok, no retry (gallery 86ef2df).
-- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, 2b0e54c).
+- Last cache build: 20261015T153610Z, ok, no retry (gallery 9f8569e).
+- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, 9579fcd).
   Whole tree: 280: orrery 116, Earth System 149, stars 13, utilities 2.
 - This page's date and the ledger's newest stamp: both Oct 15. Agree.
 
@@ -117,7 +117,7 @@ Not urgent, in your order:
 
 - Every item: `LEDGER_CONSOLIDATED.md`. Open for build: L-421 (the
   typed facts), its check.
-- *Next: L-413 (Earth's list), after your first live period fetch*
+- *Next: L-445 (Earth's period) in the ledger*
 - This session: `HANDOFF_L444_missing_periods_build_20261015.md`
 - The distance digits: `DESIGN_L401_distance_digits_rulings_20261011.md`;
   reviews `REVIEW_L401_..._comparison_20261011.md`; build 1

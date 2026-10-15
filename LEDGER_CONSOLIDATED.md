@@ -436,6 +436,10 @@ Module updated: October 15, 2026 with Anthropic's Claude Opus 5.5
 (L-444 built: the run fetches a served body's missing period from JPL,
 before the Horizons check; horizons-orbital-mechanics 1.7, protocol
 v3.98), built on ffd6c36a.
+Module updated: October 15, 2026 with Anthropic's Claude Opus 5.5
+(L-444 closed on Tony's first live run, pushed at 9579fcd; L-445
+opened, Earth's period from the Earth-Moon barycentre; L-446 opened,
+the Daily Run pulls before it builds), built on 9579fcd5.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -653,7 +657,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*240 live items; 224 need attention (`!`); 167 RICE-scored; 197 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*241 live items; 225 need attention (`!`); 167 RICE-scored; 198 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -807,7 +811,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-434 | Stored drawings for the other dot-cloud shells (orrery + gallery) | OPEN | -- | 2026-10-11 |
 | ! | L-435 | Standing rulings that are method, held only on Tony's page (skills, records) | OPEN | -- | 2026-10-12 |
 | ! | L-443 | The rest of the orrery's objects come to the website as plotted positions (gallery + orrery, objects) | OPEN | -- | 2026-10-14 |
-| ! | L-444 | The maintenance run fetches a served body's missing period from JPL, as its own step before the Horizons check (orrery, periods) | OPEN | -- | 2026-10-15 |
+| ! | L-445 | Earth's orbital period from the Earth-Moon barycentre, not Earth's centre (orrery + website, periods) | OPEN | -- | 2026-10-15 |
+| ! | L-446 | The website's Daily Run pulls the orrery's exports before it builds the cache (gallery, daily run) | OPEN | -- | 2026-10-15 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1152,6 +1157,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-440 | The dashboard's labels, short lines and headings, and the parity check (dashboard, both repos) | DONE | -- | 2026-10-14 |
 |  | L-441 | The dashboard's "when" index, generated from tags (dashboard, dropped 2026-10-14) | DONE | -- | 2026-10-14 |
 |  | L-442 | The master plan is strategy and the road is the order: Tony's seven kinds of document (documentation, DONE 2026-10-14) | DONE | -- | 2026-10-14 |
+|  | L-444 | The maintenance run fetches a served body's missing period from JPL, as its own step before the Horizons check (orrery, periods) | DONE | -- | 2026-10-15 |
 
 ### W.Done -- Web Publication track, closed items
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1181,86 +1187,78 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
-#### [L-444] The maintenance run fetches a served body's missing period from JPL, as its own step before the Horizons check (orrery, periods)
-<!-- L:444 status:OPEN upd:2026-10-15 section:A flag: rice: -->
-- **Tony's question, 2026-10-14**, in his run record
-  (`documentation/WHERE_WE_ARE_10-14-26_2250_run_record.md`, at
-  2b0e54c): "should the 30-day Horizons checker initiate a fetch of the
-  missing data as well as report, including a new object as never having
-  been fetched?"
-- **What the check does at 2b0e54c:** it reports and never fetches. A
-  served body whose period is from the typed table, or has none, is
-  named "typed, not fetched from JPL" or "no period fetched from JPL"
-  (`horizons_check.py`, the "not compared" branch). A period record is
-  written only when Tony plots the body in the orrery
-  (`osculating_cache_manager.py`, which calls
-  `orbital_period.build_period_record`). So eight served bodies print a
-  typed period, marked, until plotted: Venus, Earth, Mars, Saturn,
-  Uranus, Neptune, Apophis and Halley (L-431). A new keyed object has
-  its identity asked on the next run and its period never.
-- **Ruled, 2026-10-14, on Claude's recommendation; Tony: "yes".** A
-  separate GENERATOR row of the maintenance run, before the Horizons
-  check:
-  - it fetches with the orrery's own code, the path plotting takes, so a
-    period fetched this way is the same record plotting would write;
-  - it asks JPL only for what is missing: a keyed, served object with no
-    fetched period record, including a new one the first time the run
-    sees it. On most days it asks nothing;
-  - the Horizons check runs after it and compares the new periods with
-    JPL the same day;
-  - a fetch that fails is named (UNREACHABLE, the convention for every
-    row that needs the network), never passed;
-  - the check stays a check: it does not fill gaps itself, so a missing
-    period cannot stop being reported.
-- **Effect:** the eight bodies print JPL's period on the website after
-  the next maintenance run and push, without being plotted.
-- **Tony's ruling, 2026-10-15, at the build's start** (the brief's
-  section 4, asked with Claude's recommendation): option A, the elements
-  and the period together, the same call as plotting. His answer: "A".
-- **Built, 2026-10-15,** on ffd6c36a, in
-  `patch_L444_missing_periods_20261015.py`; the record is
-  `documentation/HANDOFF_L444_missing_periods_build_20261015.md`.
-  `period_fetch.py` is the generator row "Period fetch", just before
-  "Horizons check". `test_period_fetch.py` is the checker "Period fetch
-  suite", on answers recorded from the periods plotting saved for
-  Mercury, Jupiter and Encke
-  (`documentation/worksheets/period_fetch_answers_L444.json`; one answer
-  per body, the period around the barycentre, is constructed and says
-  so). Dashboard buttons Period Fetch and Period Fetch Suite;
-  horizons-orbital-mechanics 1.7; protocol v3.98.
-- **What it asks at ffd6c36a,** read offline: the eight, Venus, Earth,
-  Mars, Saturn, Uranus, Neptune, Apophis and Halley, each "typed
-  period, not fetched from JPL". Named and skipped: the Sun (no period)
-  and the Pluto-Charon barycentre (plotting fetches no elements for a
-  barycentre; L-443 carries it).
-- **Planted and caught, 12:** a fetched period asked again; the set not
-  printed before asking; a new object with no cache entry missed; the
-  period alone beside the old elements (option B), caught by the call
-  check and again by the field comparison alone; the id_type read the
-  export's way; a failed fetch read as a pass; a partial answer treated
-  as whole; the stop after a failure removed; the read-back removed;
-  plotting's filter changed in palomas_orrery.py, and not found there.
-  The saved records match plotting's recorded ones field by field,
-  except the dates they were written and the two-centre test's own.
-- **One difference from plotting, on failure only:** plotting saves the
-  elements when the period query fails; this step saves nothing for that
-  body, so it stays missing and is asked again on the next run.
-- **Note (Claude):** a generator row does not count in the run's checker
-  total. A fetch that fails shows on its own row as exit 1 with
-  UNREACHABLE, and in the failure detail at the end, but the summary's
-  checker count can still read all passed: a body left typed is not
-  compared, so the Horizons check may have nothing due. Recorded, not
-  changed: whether a failed generator should turn the run red is a
-  question for the runner as a whole, not this row.
-**Gap:** Tony's first live run: the eight fetched by name, or each
-failure named; then one fetched body's hover in the orrery and, after
-the push and the gallery's pull, on the website. Then close.
-**Ref:** `horizons_check.py`; `orbital_period.py`
-(`build_period_record`); `osculating_cache_manager.py`;
-`export_objects.py`; `orrery_maintenance_run.py`;
-`palomas_orrery_dashboard.py`; L-431; L-395; L-443 (its new objects get
-their periods this way); skills/horizons-orbital-mechanics/SKILL.md,
-Where the Check Lives.
+#### [L-445] Earth's orbital period from the Earth-Moon barycentre, not Earth's centre (orrery + website, periods)
+<!-- L:445 status:OPEN upd:2026-10-15 section:A flag: rice: -->
+- **Found 2026-10-15, on L-444's first live run.** JPL's period for
+  Earth's centre (Horizons 399, around the Sun) at 2026-10-15 10:52 is
+  365.5364560333389 days. The two-centre test measured its change in a
+  year at 0.769 days around the Sun and 1.76 days around the
+  barycentre, so it prints to three figures: 366 days
+  (`data/objects_export.json` and `data/osculating_cache.json` at
+  9579fcd).
+- **Why, Claude's reading, not a source:** the Earth and the Moon
+  circle their common centre once a month, so Earth's centre wobbles.
+  Its speed changes a little, and the period worked out from its
+  position and speed swings by about half a day either way through the
+  month. The Earth-Moon barycentre (Horizons 3) makes no such loop, so
+  its period should stay close to the familiar year. The build confirms
+  this against JPL's PR for target 3 before relying on it.
+- **Tony's ruling, 2026-10-15:** "Confirmed as recommended, the
+  barycenter." Earth's period is taken for the Earth-Moon barycentre,
+  and the hover says so.
+- **Where it reaches,** to map in the build, not decided here: the
+  period record (`orbital_period.build_period_record`, which
+  `fetch_osculating_elements` calls, so plotting and `period_fetch.py`
+  keep agreeing); the Horizons check's period comparison, which must
+  ask the same target; the export's period block and its words; the
+  website's Earth hover, through the mirror. Earth's identity and
+  position stay Earth's centre (399).
+- **Received from L-444 at its close:** the look at the website. The
+  gallery's Daily Run builds the cache before it pulls the orrery's
+  export, so the eight periods' words reach the website on its first
+  run after 9579fcd, and the orbits drawn around the barycentre
+  (Saturn, Uranus, Neptune) on the run after that. L-446 (the daily
+  run's order) would make that one run.
+**Gap:** a small build, its own session: the target for Earth's period,
+the check asking the same target, the hover's words, a planted fault
+(Earth's period taken for 399 again) and a live run; then the website
+look above.
+**Ref:** L-444; L-431; `orbital_period.py`; `period_fetch.py`;
+`horizons_check.py`; `export_objects.py`; `osculating_cache_manager.py`;
+skills/horizons-orbital-mechanics/SKILL.md, A Period Depends on Its
+Centre.
+
+#### [L-446] The website's Daily Run pulls the orrery's exports before it builds the cache (gallery, daily run)
+<!-- L:446 status:OPEN upd:2026-10-15 section:A flag: rice: -->
+- **Tony's question, 2026-10-15, after L-444's first live run:** "Wait,
+  shouldn't the horizons check come before the cache build?"
+- **What is there** (gallery `daily_run.py` at 9f8569e): STEPS run the
+  guest book, then the cache builder, then the gallery maintenance run,
+  whose generators pull the orrery's constants export and copy it into
+  `data/objects_config.json`, pull its objects export and copy it in,
+  and pull its drawings. So each cache build reads what the PREVIOUS
+  day's pull brought. On the orrery side the order is already right: the
+  Horizons check runs in the orrery's maintenance run, before the
+  export, so everything the website pulls was checked. Tony placed the
+  check before the cache build on 2026-10-07 (`daily_run.py`'s own
+  notes); the Daily Run lost that order when the check moved into the
+  orrery on 2026-10-14 (L-431 build 3) and its result began to arrive
+  through the pull.
+- **Ruled, 2026-10-15, on Claude's recommendation; Tony: "Yes."** The
+  pulls, each with its copy step, run before the cache builder, so one
+  Daily Run carries checked data straight into the build.
+**Gap:** a small gallery build, its own session: the pulls and copies
+ahead of the builder; whether the maintenance run keeps its own pull
+rows (a no-op on a second run) or loses them; the Daily Run's dashboard
+group, which Dashboard Parity holds; and one Daily Run showing new
+periods reaching the website and the orbits drawn around the barycentre
+in a single run.
+**Ref:** gallery `daily_run.py`, `gallery_maintenance_run.py`,
+`tools/pull_objects_export.py`, `tools/mirror_objects.py`,
+`tools/pull_constants_export.py`, `tools/mirror_constants.py`,
+`tools/pull_drawings.py`, `tools/gallery_cache_builder.py`; L-444;
+L-445; L-431; L-395; skills/gallery-cache-builder/SKILL.md, The Daily
+Run's Steps.
 
 #### [L-443] The rest of the orrery's objects come to the website as plotted positions (gallery + orrery, objects)
 <!-- L:443 status:OPEN upd:2026-10-14 section:A flag: rice: -->
@@ -22963,6 +22961,100 @@ chat the same night: "yes".
 **Gap:** none.
 **Ref:** L-440; `documentation/HANDOFF_L440_dashboard_labels_20261013.md`
 (sections 2 and 7); `palomas_orrery_dashboard.py`.
+
+#### [L-444] The maintenance run fetches a served body's missing period from JPL, as its own step before the Horizons check (orrery, periods)
+<!-- L:444 status:DONE upd:2026-10-15 section:C flag: rice: -->
+- **Tony's question, 2026-10-14**, in his run record
+  (`documentation/WHERE_WE_ARE_10-14-26_2250_run_record.md`, at
+  2b0e54c): "should the 30-day Horizons checker initiate a fetch of the
+  missing data as well as report, including a new object as never having
+  been fetched?"
+- **What the check does at 2b0e54c:** it reports and never fetches. A
+  served body whose period is from the typed table, or has none, is
+  named "typed, not fetched from JPL" or "no period fetched from JPL"
+  (`horizons_check.py`, the "not compared" branch). A period record is
+  written only when Tony plots the body in the orrery
+  (`osculating_cache_manager.py`, which calls
+  `orbital_period.build_period_record`). So eight served bodies print a
+  typed period, marked, until plotted: Venus, Earth, Mars, Saturn,
+  Uranus, Neptune, Apophis and Halley (L-431). A new keyed object has
+  its identity asked on the next run and its period never.
+- **Ruled, 2026-10-14, on Claude's recommendation; Tony: "yes".** A
+  separate GENERATOR row of the maintenance run, before the Horizons
+  check:
+  - it fetches with the orrery's own code, the path plotting takes, so a
+    period fetched this way is the same record plotting would write;
+  - it asks JPL only for what is missing: a keyed, served object with no
+    fetched period record, including a new one the first time the run
+    sees it. On most days it asks nothing;
+  - the Horizons check runs after it and compares the new periods with
+    JPL the same day;
+  - a fetch that fails is named (UNREACHABLE, the convention for every
+    row that needs the network), never passed;
+  - the check stays a check: it does not fill gaps itself, so a missing
+    period cannot stop being reported.
+- **Effect:** the eight bodies print JPL's period on the website after
+  the next maintenance run and push, without being plotted.
+- **Tony's ruling, 2026-10-15, at the build's start** (the brief's
+  section 4, asked with Claude's recommendation): option A, the elements
+  and the period together, the same call as plotting. His answer: "A".
+- **Built, 2026-10-15,** on ffd6c36a, in
+  `patch_L444_missing_periods_20261015.py`; the record is
+  `documentation/HANDOFF_L444_missing_periods_build_20261015.md`.
+  `period_fetch.py` is the generator row "Period fetch", just before
+  "Horizons check". `test_period_fetch.py` is the checker "Period fetch
+  suite", on answers recorded from the periods plotting saved for
+  Mercury, Jupiter and Encke
+  (`documentation/worksheets/period_fetch_answers_L444.json`; one answer
+  per body, the period around the barycentre, is constructed and says
+  so). Dashboard buttons Period Fetch and Period Fetch Suite;
+  horizons-orbital-mechanics 1.7; protocol v3.98.
+- **What it asks at ffd6c36a,** read offline: the eight, Venus, Earth,
+  Mars, Saturn, Uranus, Neptune, Apophis and Halley, each "typed
+  period, not fetched from JPL". Named and skipped: the Sun (no period)
+  and the Pluto-Charon barycentre (plotting fetches no elements for a
+  barycentre; L-443 carries it).
+- **Planted and caught, 12:** a fetched period asked again; the set not
+  printed before asking; a new object with no cache entry missed; the
+  period alone beside the old elements (option B), caught by the call
+  check and again by the field comparison alone; the id_type read the
+  export's way; a failed fetch read as a pass; a partial answer treated
+  as whole; the stop after a failure removed; the read-back removed;
+  plotting's filter changed in palomas_orrery.py, and not found there.
+  The saved records match plotting's recorded ones field by field,
+  except the dates they were written and the two-centre test's own.
+- **One difference from plotting, on failure only:** plotting saves the
+  elements when the period query fails; this step saves nothing for that
+  body, so it stays missing and is asked again on the next run.
+- **Note (Claude), struck at the close, 2026-10-15:** a generator row
+  does not count in the run's checker total. Struck because nothing
+  failed, the row names a failure by name and in the run's failure
+  detail, and no ruling asks generators to gate; kept as history.
+- **Tony's first live run, 2026-10-15** (his run record, the copy of
+  `documentation/WHERE_WE_ARE_10-14-26_2250_run_record.md` he uploaded
+  at 13:47): the patch applied on 7166648d, "patch applied (4 new
+  files, 32 edits, 1 move)". The maintenance run's Period fetch row:
+  "PASS -- fetched 8: Venus, Earth, Mars, Saturn, Uranus, Neptune,
+  Apophis, Halley", elements refreshed for the same eight. The Horizons
+  check: "PASS -- 8 checked today, 8 queries". Horizons confirmations:
+  13 of 13 entries and 11 periods. 31 of 31 gating checkers. Pushed at
+  9579fcd. Venus's hover in the orrery: "orbital period around the sun
+  fetched today, correct."
+- **Centres chosen** (`data/objects_export.json` at 9579fcd): around
+  the Sun, Venus, Earth, Mars and Apophis; around the barycentre,
+  Saturn, Uranus, Neptune and Halley.
+- **Loose ends, re-homed at the close:** Earth's period prints 366 days,
+  the period of Earth's centre: L-445 (Earth's period), Tony's ruling
+  of 2026-10-15. The look at the website, which waits for the gallery's
+  Daily Run (its run of 10:38 came before the push at 10:57): L-445's
+  Gap.
+**Gap:** none. Closed 2026-10-15.
+**Ref:** `horizons_check.py`; `orbital_period.py`
+(`build_period_record`); `osculating_cache_manager.py`;
+`export_objects.py`; `orrery_maintenance_run.py`;
+`palomas_orrery_dashboard.py`; L-431; L-395; L-443 (its new objects get
+their periods this way); skills/horizons-orbital-mechanics/SKILL.md,
+Where the Check Lives.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
