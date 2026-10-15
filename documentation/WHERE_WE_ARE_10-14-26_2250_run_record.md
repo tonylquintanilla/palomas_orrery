@@ -1,5 +1,5 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
-# Where We Are
+# Where We Are --**Tony:** notes --
 
 Last updated: October 14, 2026, evening: periods accepted; three items closed; search.
 - Written at orrery 5ca56df and gallery 86ef2df.
@@ -12,12 +12,13 @@ Last updated: October 14, 2026, evening: periods accepted; three items closed; s
 > - The dashboard search: each word on its own, in any order; more
 >   words narrow the list.
 >
-> **Do next:** *The master plan's restamp, from its brief; then the
+> **Do next:** *The master plan's restamp, from its brief; -- done
+> then the
 > objects-to-website design session (both in Where the details are).*
 >
 > **Needs you now:**
 > - *Run patch_L440_2, then the maintenance run (Dashboard parity,
->   10 of 10 faults caught); try the search; push.*
+>   10 of 10 faults caught); try the search; push.* -- done
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
@@ -27,6 +28,7 @@ Last updated: October 14, 2026, evening: periods accepted; three items closed; s
                feeds the website and nothing is typed twice.
   5.   [NOW]   L-401 (the distance digits): builds 1 and 2 accepted;
                build 3 later. Then Earth's remaining items.
+               -- **L-401 build 3** afterwards: the fly-to buttons, the parameters window, the animation's uncertainty. Small, and its own session.
   5b.  [NOW]   The scaffolding checks clear beside the slices: the
                dashboard (L-440) done; L-424, L-425, L-426 to come.
   6.   [next]  The typed facts: the inner Oort cloud is drawn on the
@@ -81,6 +83,8 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 - OneDrive: no pause before a build; the retry is sufficient. Empty
   "solar-system (N)" folders are harmless; delete by hand. (Oct 8, 10)
 
+-- Question: should the 30-day Horizons checker initiate a fetch of the missing data as well as report, including a new object as never having been fetched? 
+
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
@@ -95,7 +99,7 @@ At the next design talk:
 - L-401 (the distance digits): a model with no stated accuracy (the
   Moon's analytical orbit) still reads as km precision at the floor;
   numbers that are not distances have no digits rule.
-- The fuzzy outer corona, with the dust cloud; the exosphere the same way.
+- The fuzzy outer corona, with the dust cloud; the exosphere the same way. -- in general we should implement fuzzy boundaries where they are meaningful.
 - Moving the highlighted row to the top of the list.
 - GO's arrow, only if the text box stays centred.
 - Earth's design talks, the belts' shape first.
@@ -105,8 +109,8 @@ At the next design talk:
 Not urgent, in your order:
 1. Whether the editor also edits the Solar System room's rows.
 2. Choosing a date, and animation.
-3. The orrery from your phone: L-436 (away from the machine), an idea.
-4. The dashboard's "when" index: L-441, recorded for later.
+3. The orrery from your phone: L-436 (away from the machine), an idea. -- drop
+4. The dashboard's "when" index: L-441, recorded for later. -- drop
 
 ## Where the details are  **>> UPDATED THIS SESSION**
 
@@ -410,13 +414,241 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
 4. Reinstall ledger-and-session-records 1.21 in Settings > Skills. -- done 
 5. Save `PROJECT_INSTRUCTIONS.md` as `documentation/project_instructions_v3_97.md`, and copy it into the Project instructions. -- done 
-6. Move the patch script into `documentation/`, then commit and push.
+6. Move the patch script into `documentation/`, then commit and push. -- 2b0e54cc525f616e477f639e4234a284be94d14d
 
 The session record is saved in your folder as `documentation/HANDOFF_L442_master_plan_restamp_20261014.md`.
 
 **Where this leaves us:**
 - The plan is the strategy, the road on Where We Are is the order, and the ledger records what is done.
 - Next on the road is the design session for bringing the orrery's objects to the website. Its brief calls the item L-438, but its ledger number is now L-443.
+
+============================================================================================
+**Turn: 10-14-26 2315:**
+
+My recommendation: yes, fetch the missing periods automatically, but as a separate step in the maintenance run, not inside the check.
+
+The fetch would use the orrery’s own fetching code. That is the same code that runs when you plot, so a period fetched this way is identical to one you’d get by plotting.
+It would ask JPL only for what’s missing. That means bodies the website serves that have no fetched period, and new objects the first time the run sees them. On most days it asks JPL nothing.
+The fetch runs first, the check runs after it. The check then compares the new periods with JPL the same day. A fetch that fails is named, so it can’t hide.
+The check stays a check. If it filled gaps itself, a missing period could quietly stop being reported. Separate, each step can still go red on its own.
+
+The effect: those eight bodies would show JPL’s periods on the website after your next maintenance run and push, without you plotting each one.
+
+Do you want me to go that way? -- yes
+
+Your other notes from the run record will go into the ledger and Where We Are with the next small patch:
+
+Drop L-436 (the orrery from your phone) and L-441 (the dashboard’s “when” index). -- yes
+Use fuzzy boundaries wherever they are meaningful. -- yes
+L-401 build 3 (the distance digits) stays its own small session. -- yes
+
+-- next steps? 
+
+========================================================================================
+**Turn: 10-14-26 2324**
+
+I’ve built a small patch that files your answers, and it’s saved in your orrery folder as patch_L442_2_close_and_rulings_20261014.py. It ran cleanly on a test copy of the orrery. A second run refused, as it should, so it can’t apply twice.
+
+What it records:
+
+Your restamp run: 30 of 30, the push at 2b0e54c, and your “it works” on the plan’s new front page.
+A new ledger item, L-444 (the missing periods). It records your yes: the maintenance run will fetch each served body’s missing period from JPL, as its own step before the Horizons check.
+L-436 and L-441 are closed as dropped. Those are the orrery from your phone and the dashboard’s “when” index.
+Your fuzzy-boundaries rule goes onto L-410 (fuzzy boundaries): use them wherever they are meaningful, not only for the outer corona and the exosphere.
+L-401 build 3 (the distance digits: the fly-to buttons, the parameters window and the animation’s uncertainty) is noted as its own small session.
+Where We Are gets all of this, and the restamp’s session record gets its push SHA.
+
+Next steps, in the order the patch puts on the road:
+
+Now: run the patch, 
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L442_2_close_and_rulings_20261014.py
+ok  LEDGER           L-442 run recorded
+ok  LEDGER           L-436 closed (dropped)
+ok  LEDGER           L-436 status
+ok  LEDGER           L-401 Note
+ok  LEDGER           L-410 Note
+ok  LEDGER           L-441 closed (dropped)
+ok  LEDGER           L-441 status
+ok  LEDGER           L-444 opened
+ok  LEDGER           header stamp
+ok  WHERE_WE_ARE     header
+ok  WHERE_WE_ARE     the box
+ok  WHERE_WE_ARE     road: stage 8a
+ok  WHERE_WE_ARE     road: stage 11 marks reset
+ok  WHERE_WE_ARE     settled: two lines in
+ok  WHERE_WE_ARE     settled: Hills cloud line out
+ok  WHERE_WE_ARE     signals
+ok  WHERE_WE_ARE     waiting: two dropped
+ok  WHERE_WE_ARE     details: your notes
+ok  WHERE_WE_ARE     details: L-436 line out
+ok  WHERE_WE_ARE     details: next
+ok  WHERE_WE_ARE     waiting: heading
+ok  WHERE_WE_ARE     130 lines above the marker (cap 130)
+ok  HANDOFF_L442     Pushed at line
+
+patch applied (23 edits in 3 files, 1689697 bytes)
+
+NEXT:
+  1. Run orrery_maintenance_run.py. Expect the ledger index to move
+     L-436 and L-441 to the closed section, and 30 of 30.
+  2. Move this script into documentation/; commit and push.
+Undo is Discard Changes in GitHub Desktop.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+then the maintenance run, 
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261015T035759Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 1.6s  rewrote LEDGER_CONSOLIDATED.md
+  Skill manifest               0.2s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             1.0s  unchanged (1 checked, not written)
+  Horizons check               0.6s  unchanged (2 checked, not written) --
+                                     NOTHING DUE -- 13 entries and 26 sheets
+                                     current, no query asked
+  Objects export               0.3s  unchanged (1 checked, not written)
+  Drawings export              0.7s  unchanged (1 checked, not written)
+  Module atlas                12.4s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               5.1s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Exact rows report            2.0s  unchanged (1 checked, not written) -- 13 of
+                                     41 exact rows printed at 43 lines (33
+                                     orrery, 10 gallery); 8 drawn only, 14 not
+                                     followed, 0 map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.2s  No changes to constants_new.py since HEAD.
+  Constants relations          0.2s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              1.0s  No figure count exceeds its inputs: 36
+                                     derived row(s) read, 26 judged OK -- 26 OK,
+                                     10 NOT YET MIGRATED, 1 NO DERIVED LINE, 1
+                                     UNMARKED CONVERSION; 18 conversion(s)
+                                     checked.
+  Constants export check       1.7s  Export matches the store: sha256
+                                     2a1211f8cce2 on both sides; 127 rows
+                                     re-read, 56 not exported, 31 tokens; 320
+                                     conversions re-computed, 10 of 10 worked
+                                     cases hold.
+  Objects export check         0.3s  pass
+  Horizons confirmations       0.4s  pass -- 13 of 13 entries and 3 periods
+                                     confirmed, 26 sheets read, within 30 days
+  Horizons check suite         0.6s  pass -- 60 checks, every planted fault
+                                     caught by name
+  Skill headers                0.2s  12 skills parsed, no consistency problems.
+  Exact rows by the count      1.9s  PASSING -- 13 printed exact rows each state
+                                     a count; 33 orrery lines print through
+                                     exact_text() or row_text(); 10 gallery lines
+                                     are served the count
+  Dimensions                   1.5s  No unit contradicts its arithmetic: 54
+                                     derived row(s) read -- 42 OK, 9 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.2s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.1s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 126 status lines in constants_new.py are
+                                     well formed; 54 rows carry none.
+  Row shape                    0.1s  All 183 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.3s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Scanner row run (L-414)      0.2s  16 of 16 pins hold -- each row reads its own
+                                     comment run, declared rows are named, the
+                                     gate path is read by name.
+  Reset completeness          18.2s  PASS -- all 311 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  2.1s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped.
+  Earth pole of date           0.4s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Hills cloud sampler (L-421)    0.7s  PASS -- 4 of 4 planted faults caught; the
+                                     real rows pass, the dots' plane tilted 34.1
+                                     deg
+  Drawings export check        0.7s  PASS -- 3 of 3 planted faults caught;
+                                     hills_cloud 3600 dots, tilt 30.9 deg, sha256
+                                     a51e93118069
+  Position digits (L-401)      3.5s  PASS -- 13 of 13 planted faults caught by
+                                     name; 23 hovers examined, 181 lines compared
+                                     against their errors; 5 pairs printed the
+                                     same from either end; 496 hovers of every
+                                     listed object from the Sun, Earth and
+                                     Neptune; 3 recorded 2xr answers read by
+                                     column name; 6 period sentences
+  Orbit markers (L-431, L-401)   14.3s  PASS -- 12 of 12 planted faults caught by
+                                     name; 4 ellipses, 1080 drawn points on their
+                                     period's centre; 14 markers, 9 dates, 53
+                                     printed distances against their errors; 6
+                                     elements as given; 3 Keplerian positions
+                                     half a year on; 1 parameters-window date
+                                     pairs; 2 Moon arcs; 2 perturbation checks; 1
+                                     perihelion osculating orbits; 2 frames; 2
+                                     sources read
+  Domain Split                 0.6s  PASS -- 6 of 6 planted faults caught; the
+                                     split reads each module's Domain: tag and
+                                     prints the same on the console, in the audit
+                                     and in the run history.
+  Maintenance report (L-269)    0.2s  PASS -- 4 of 4 planted faults caught by
+                                     name; 4 summaries; 2 risen file(s) named
+  Dashboard parity             0.4s  PASS -- 10 of 10 planted faults caught; 79
+                                     steps matched to their buttons by name and
+                                     script; 109 cards carry a short line; the
+                                     search finds 4 of 4 cases in any word order
+  Worksheet checker            9.5s  74 of 110 routed, 8 clean
+  Worksheet checker tests     19.9s  All 135 checks passed
+  Worksheet key round trip     1.2s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         23.3s  All 76 checks passed
+  Extractor pins               0.4s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          63.4s  0 TIER-1 -- the push gate holds; Whole tree,
+                                     Tier-1: 280: orrery 116, Earth System 149,
+                                     stars 13, utilities 2.
+
+======================================================================
+  30 of 30 gating checkers passed -- 191.6s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           74 of 110 routed, 8 clean
+    Provenance scanner          0 TIER-1 -- the push gate holds; Whole tree, Tier-1: 280: orrery 116, Earth System 149, stars 13, utilities 2.
+      No file's Tier-1 count rose since the previous run.
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2255 file(s) examined, 6 written, 0 created, 0 removed, 6 rewritten identically
+    written   LEDGER_CONSOLIDATED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    rewritten with identical bytes, no action needed:
+      DATA_INVENTORY.md
+      PROJECT_INSTRUCTIONS.md
+      WORKSHEET_CHECK.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      test_output/test_orbit_paths.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+then commit and push. Expect 30 of 30. -- 
+Next session: build L-444 (the missing periods). It’s small and only touches the orrery. I put it before the objects design because every new object that work adds will need its period fetched this way. -- please provide a brief for this build by a separate session. we are only coordinating here. 
+Then: the design session for bringing the rest of the orrery’s objects to the website, L-443, from its brief. -- what is left of the sun and earth slices? 
+
+If you’d rather do the objects design first, tell me before you run the patch and I’ll swap the order.
 
 
 

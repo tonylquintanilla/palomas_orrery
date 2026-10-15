@@ -425,6 +425,10 @@ seven kinds of document; plan v36, its history moved out;
 ledger-and-session-records 1.21, protocol v3.97; L-433 closed, its loose
 ends to L-443, opened; L-431's live-check line corrected), built on
 9248845c.
+Module updated: October 14, 2026 with Anthropic's Claude Opus 5.5
+(L-442 closed on Tony's run, pushed at 2b0e54c; L-444 opened, the run
+fetches a served body's missing period; L-436 and L-441 dropped; notes
+on L-410 and L-401), built on 2b0e54cc.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -642,7 +646,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*241 live items; 225 need attention (`!`); 167 RICE-scored; 195 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*240 live items; 224 need attention (`!`); 167 RICE-scored; 197 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -795,8 +799,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-432 | Objects drawn in the default goldenrod (orrery, colours) | OPEN | -- | 2026-10-11 |
 | ! | L-434 | Stored drawings for the other dot-cloud shells (orrery + gallery) | OPEN | -- | 2026-10-11 |
 | ! | L-435 | Standing rulings that are method, held only on Tony's page (skills, records) | OPEN | -- | 2026-10-12 |
-| ! | L-441 | The dashboard's "when" index, generated from tags (dashboard) | OPEN | -- | 2026-10-14 |
 | ! | L-443 | The rest of the orrery's objects come to the website as plotted positions (gallery + orrery, objects) | OPEN | -- | 2026-10-14 |
+| ! | L-444 | The maintenance run fetches a served body's missing period from JPL, as its own step before the Horizons check (orrery, periods) | OPEN | -- | 2026-10-14 |
 
 ### B. Pending Action (Tony-side)
 
@@ -865,7 +869,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-017 (#7) | Tooltip rewiring globals() -> config fields | OPEN | 1.0 | 2026-06-21 |
 | ! | L-067 | measure_animation_html.py file-browser dialog (B5) | OPEN | 0.8 | 2026-06-23 |
 | ! | L-014 (#2) | Asteroid-belt migration decision | OPEN | 0.4 | 2026-06-20 |
-| ! | L-436 | The orrery away from the machine: the linked session from the phone; not Pyodide (idea) | OPEN | -- | 2026-10-13 |
 
 ### D.Loose end to reconcile
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1137,8 +1140,10 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-428 | The lobby's way in: the Solar System room first (gallery, lobby) | DONE | -- | 2026-10-10 |
 |  | L-431 | Orbital periods from JPL, for every body, printed by their errors (orrery, provenance) | DONE | -- | 2026-10-14 |
 |  | L-433 | The road after the Sun and Earth rooms, in Tony's words (planning, DONE 2026-10-14) | DONE | -- | 2026-10-14 |
+|  | L-436 | The orrery away from the machine: the linked session from the phone; not Pyodide (idea, dropped 2026-10-14) | DONE | -- | 2026-10-14 |
 |  | L-437 | The whole-tree Tier-1 total prints with its domains; a module's domain has one home (provenance tooling, DONE 2026-10-13) | DONE | -- | 2026-10-13 |
 |  | L-440 | The dashboard's labels, short lines and headings, and the parity check (dashboard, both repos) | DONE | -- | 2026-10-14 |
+|  | L-441 | The dashboard's "when" index, generated from tags (dashboard, dropped 2026-10-14) | DONE | -- | 2026-10-14 |
 |  | L-442 | The master plan is strategy and the road is the order: Tony's seven kinds of document (documentation, DONE 2026-10-14) | DONE | -- | 2026-10-14 |
 
 ### W.Done -- Web Publication track, closed items
@@ -1168,6 +1173,50 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ## DETAIL / RECORD
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
+
+#### [L-444] The maintenance run fetches a served body's missing period from JPL, as its own step before the Horizons check (orrery, periods)
+<!-- L:444 status:OPEN upd:2026-10-14 section:A flag: rice: -->
+- **Tony's question, 2026-10-14**, in his run record
+  (`documentation/WHERE_WE_ARE_10-14-26_2250_run_record.md`, at
+  2b0e54c): "should the 30-day Horizons checker initiate a fetch of the
+  missing data as well as report, including a new object as never having
+  been fetched?"
+- **What the check does at 2b0e54c:** it reports and never fetches. A
+  served body whose period is from the typed table, or has none, is
+  named "typed, not fetched from JPL" or "no period fetched from JPL"
+  (`horizons_check.py`, the "not compared" branch). A period record is
+  written only when Tony plots the body in the orrery
+  (`osculating_cache_manager.py`, which calls
+  `orbital_period.build_period_record`). So eight served bodies print a
+  typed period, marked, until plotted: Venus, Earth, Mars, Saturn,
+  Uranus, Neptune, Apophis and Halley (L-431). A new keyed object has
+  its identity asked on the next run and its period never.
+- **Ruled, 2026-10-14, on Claude's recommendation; Tony: "yes".** A
+  separate GENERATOR row of the maintenance run, before the Horizons
+  check:
+  - it fetches with the orrery's own code, the path plotting takes, so a
+    period fetched this way is the same record plotting would write;
+  - it asks JPL only for what is missing: a keyed, served object with no
+    fetched period record, including a new one the first time the run
+    sees it. On most days it asks nothing;
+  - the Horizons check runs after it and compares the new periods with
+    JPL the same day;
+  - a fetch that fails is named (UNREACHABLE, the convention for every
+    row that needs the network), never passed;
+  - the check stays a check: it does not fill gaps itself, so a missing
+    period cannot stop being reported.
+- **Effect:** the eight bodies print JPL's period on the website after
+  the next maintenance run and push, without being plotted.
+**Gap:** a small orrery build, its own session: the row, its dashboard
+button (every new check gets a button), its planted faults (a fetch that
+fails, a body already fetched asked again, a period written by another
+path than plotting's), and the first live run.
+**Ref:** `horizons_check.py`; `orbital_period.py`
+(`build_period_record`); `osculating_cache_manager.py`;
+`export_objects.py`; `orrery_maintenance_run.py`;
+`palomas_orrery_dashboard.py`; L-431; L-395; L-443 (its new objects get
+their periods this way); skills/horizons-orbital-mechanics/SKILL.md,
+Where the Check Lives.
 
 #### [L-443] The rest of the orrery's objects come to the website as plotted positions (gallery + orrery, objects)
 <!-- L:443 status:OPEN upd:2026-10-14 section:A flag: rice: -->
@@ -1201,16 +1250,6 @@ word.
 L-433; L-431; L-395; L-442; `export_objects.py`; `celestial_objects.py`;
 gallery `data/objects_config.json`.
 
-#### [L-441] The dashboard's "when" index, generated from tags (dashboard)
-<!-- L:441 status:OPEN upd:2026-10-14 section:A flag: rice: -->
-- **Opened 2026-10-14, re-homed from L-440 at its close.** Tony's ruling
-  in the L-440 build session (2026-10-13), on an index of the dashboard's
-  tools by when each is used: "record for later." If it is built, it is
-  generated from a tag on each entry, never hand-written.
-**Gap:** a design talk, when Tony wants it.
-**Ref:** L-440; `documentation/HANDOFF_L440_dashboard_labels_20261013.md`
-(sections 2 and 7); `palomas_orrery_dashboard.py`.
-
 
 
 #### [L-410] Fuzzy boundaries for edges known only as ranges, the outer corona first (orrery + gallery, the Sun's slice)
@@ -1240,6 +1279,14 @@ gallery `data/objects_config.json`.
 - **Tony, 2026-10-10, in his run record** (`documentation/WHERE_WE_ARE_10-10-26_2019_run_record.md` at 6fc3648): "before we close the
   sun and earth rooms, i would like to implement fuzzy boundaries."
   So this item belongs to finishing those two rooms (L-433).
+- **Tony, 2026-10-14**, in his run record
+  (`documentation/WHERE_WE_ARE_10-14-26_2250_run_record.md`, at 2b0e54c),
+  beside "The fuzzy outer corona, with the dust cloud; the exosphere the
+  same way": "in general we should implement fuzzy boundaries where they
+  are meaningful." Confirmed in chat the same night: "yes". So the design
+  talk takes up the rule, not only the corona and the exosphere: which
+  drawn edges are known only as ranges, and which of them a fade would
+  teach better than a shell.
 **Gap:** a design talk before any build. The Sun slice's ninth item
 (L-412).
 **Ref:** L-131, L-241, L-371; `solar_visualization_shells.py`
@@ -2299,6 +2346,11 @@ tools/gallery_cache_builder.py (trust); L-149; L-150; L-363; L-398.
   L-431's build 2 ("the distances' digits. -- correct"). The perihelion
   osculating orbit's hover now carries the accuracy sentence it lacked
   (patch_L431_7; L-431 records it).
+- **Tony, 2026-10-14**, in his run record
+  (`documentation/WHERE_WE_ARE_10-14-26_2250_run_record.md`, at 2b0e54c),
+  on the road's stage 5: "**L-401 build 3** afterwards: the fly-to
+  buttons, the parameters window, the animation's uncertainty. Small,
+  and its own session." Confirmed in chat the same night: "yes".
 **Gap:** Builds 1 and 2 are built and accepted. Left, build 3: the fly-to buttons, the parameters window, the
 animation's 2xr; and the encounter slice (`spacecraft_encounters.py`,
 `close_approach_data.py`). The two questions above go to the design
@@ -22726,6 +22778,19 @@ L-324 (its parity row, now built); L-416; L-341; L-281.
 - **The obligation from v3.96 discharged:** this session's loaded copies
   read horizons-orbital-mechanics 1.6, gallery-cache-builder 1.9 and
   interactive-exhibit 1.15.
+- **2026-10-14, run and pushed.** Tony's run record
+  (`documentation/WHERE_WE_ARE_10-14-26_2250_run_record.md`, at 2b0e54c):
+  the plan's new front page, "it works"; patch_L442_1 ran ("patch
+  applied (47 edits in 8 files)"); the maintenance run, "30 of 30
+  gating checkers passed", the manifest and the ledger index rewritten
+  and Tier-1 on the gate path 0; ledger-and-session-records 1.21
+  reinstalled ("done"); `documentation/project_instructions_v3_97.md`
+  saved and copied to the Project ("done"); pushed at
+  2b0e54cc525f616e477f639e4234a284be94d14d.
+- **His notes in the same record, filed by patch_L442_2:** the Horizons
+  check's question, ruled the same night (L-444); "-- drop" on L-436 and
+  L-441 (closed); fuzzy boundaries wherever they are meaningful (a Note
+  on L-410); L-401's build 3 as its own small session (a Note on L-401).
 **Gap:** none. The next session confirms its loaded copy of
 ledger-and-session-records reads 1.21 before ledger work.
 **Ref:** `documentation/HANDOFF_master_plan_restamp_brief_20261013.md`;
@@ -22785,6 +22850,67 @@ session; the master plan's v36 carries the direction in Section 5a.
 **Gap:** none. The loose ends above went to L-443.
 **Ref:** L-410; L-431; L-412; L-413; L-221 (the master plan is the
 roadmap); `documentation/WHERE_WE_ARE.md`.
+
+#### [L-436] The orrery away from the machine: the linked session from the phone; not Pyodide (idea, dropped 2026-10-14)
+<!-- L:436 status:DONE upd:2026-10-14 section:C flag: rice: -->
+- **Opened 2026-10-13 on first mention, an idea and not a plan.** Tony,
+  on what drives it: "i am often away from my machine." Three questions
+  across 2026-10-12 and 13: could the dashboard be operated from the
+  phone through the linked session; could a patch and the maintenance
+  run be run that way, stopping at the push; could the orrery itself be
+  run from the phone (the Sun, Mercury, Venus, Sedna and Voyager 1 at 0
+  hours, the hovers read back); and could the orrery's window be
+  converted to Pyodide to run it remotely.
+- **What the linked session can do today** (measured in that session):
+  read and write files in the repository folder (done: patches and
+  briefs saved straight into it on 2026-10-12 and 13); run a command on
+  the computer (not yet tried; the first test is the maintenance run
+  alone). It cannot click a window, cannot see a render, and the push
+  stays in GitHub Desktop by Tony's choice. So "run the patch and the
+  maintenance run, stop at the push" works for the mechanical steps;
+  the look (Mode 5) and the push wait for the machine.
+- **Not Pyodide.** The window is tkinter and would be rebuilt as a page;
+  Horizons does not permit a browser page to call it, so a relay would
+  be hosted; the caches are hundreds of megabytes read from disk. The
+  protocol's own words: the assembler exists because the orrery's Python
+  requirement is a wall; the website IS the orrery running remotely,
+  and stage 15 of the road is that goal. A port would be a second
+  attempt at it with the hard parts left in.
+- **Two routes that fit, if taken up:** a headless hover script in the
+  orrery (names and a date in; the hovers printed through the same
+  dispatch the plot uses; the HTML saved), which the linked session can
+  run from the phone, giving the words and digits but not the render;
+  and the website's rooms, which already open on the phone and which
+  L-431 build 3 and stage 11 are filling.
+  **Tony-action (decide, not urgent):** whether the hover script joins
+  L-401 build 3's scope or waits. Default: waits; a convenience, not a
+  slice.
+  **Tony-action (do, when convenient):** the first command from the
+  phone, the maintenance run alone, its output read back.
+**CLOSED 2026-10-14, dropped by Tony.** His run record
+(`documentation/WHERE_WE_ARE_10-14-26_2250_run_record.md`, at 2b0e54c),
+on this item in Where We Are's not-urgent list: "-- drop". Confirmed in
+chat the same night: "yes". Its two Tony-actions (whether a hover
+script joins L-401 build 3; the first command from the phone) are
+struck with it: an idea dropped leaves no work behind.
+**Gap:** none.
+**Ref:** `documentation/DESIGN_L436_orrery_away_from_the_machine_20261013.md`;
+PROJECT_INSTRUCTIONS.md, The Orrery and the Assembler; L-401 (build 3's
+slices); L-431 (build 3, the website); L-363 (the Solar System room).
+
+#### [L-441] The dashboard's "when" index, generated from tags (dashboard, dropped 2026-10-14)
+<!-- L:441 status:DONE upd:2026-10-14 section:C flag: rice: -->
+- **Opened 2026-10-14, re-homed from L-440 at its close.** Tony's ruling
+  in the L-440 build session (2026-10-13), on an index of the dashboard's
+  tools by when each is used: "record for later." If it is built, it is
+  generated from a tag on each entry, never hand-written.
+**CLOSED 2026-10-14, dropped by Tony.** His run record
+(`documentation/WHERE_WE_ARE_10-14-26_2250_run_record.md`, at 2b0e54c),
+on this item in Where We Are's not-urgent list: "-- drop". Confirmed in
+chat the same night: "yes".
+**Gap:** none.
+**Ref:** L-440; `documentation/HANDOFF_L440_dashboard_labels_20261013.md`
+(sections 2 and 7); `palomas_orrery_dashboard.py`.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
@@ -23480,48 +23606,6 @@ of globals(), so a rename surfaces as a missing key, not a silent drop.
   path. Small, isolated tooling.
 **Gap:** add filedialog.askopenfilename to measure_animation_html.py.
 **Ref:** spun out of L-048 (closed 2026-06-23).
-
-#### [L-436] The orrery away from the machine: the linked session from the phone; not Pyodide (idea)
-<!-- L:436 status:OPEN upd:2026-10-13 section:D.Feature-C flag: rice: -->
-- **Opened 2026-10-13 on first mention, an idea and not a plan.** Tony,
-  on what drives it: "i am often away from my machine." Three questions
-  across 2026-10-12 and 13: could the dashboard be operated from the
-  phone through the linked session; could a patch and the maintenance
-  run be run that way, stopping at the push; could the orrery itself be
-  run from the phone (the Sun, Mercury, Venus, Sedna and Voyager 1 at 0
-  hours, the hovers read back); and could the orrery's window be
-  converted to Pyodide to run it remotely.
-- **What the linked session can do today** (measured in that session):
-  read and write files in the repository folder (done: patches and
-  briefs saved straight into it on 2026-10-12 and 13); run a command on
-  the computer (not yet tried; the first test is the maintenance run
-  alone). It cannot click a window, cannot see a render, and the push
-  stays in GitHub Desktop by Tony's choice. So "run the patch and the
-  maintenance run, stop at the push" works for the mechanical steps;
-  the look (Mode 5) and the push wait for the machine.
-- **Not Pyodide.** The window is tkinter and would be rebuilt as a page;
-  Horizons does not permit a browser page to call it, so a relay would
-  be hosted; the caches are hundreds of megabytes read from disk. The
-  protocol's own words: the assembler exists because the orrery's Python
-  requirement is a wall; the website IS the orrery running remotely,
-  and stage 15 of the road is that goal. A port would be a second
-  attempt at it with the hard parts left in.
-- **Two routes that fit, if taken up:** a headless hover script in the
-  orrery (names and a date in; the hovers printed through the same
-  dispatch the plot uses; the HTML saved), which the linked session can
-  run from the phone, giving the words and digits but not the render;
-  and the website's rooms, which already open on the phone and which
-  L-431 build 3 and stage 11 are filling.
-  **Tony-action (decide, not urgent):** whether the hover script joins
-  L-401 build 3's scope or waits. Default: waits; a convenience, not a
-  slice.
-  **Tony-action (do, when convenient):** the first command from the
-  phone, the maintenance run alone, its output read back.
-**Gap:** not scoped; an idea on record. Unscored until opened (an item
-outside any list gets a coarse score then).
-**Ref:** `documentation/DESIGN_L436_orrery_away_from_the_machine_20261013.md`;
-PROJECT_INSTRUCTIONS.md, The Orrery and the Assembler; L-401 (build 3's
-slices); L-431 (build 3, the website); L-363 (the Solar System room).
 
 ### D.Parked (Tony's explicit call) `[per chain]`
 

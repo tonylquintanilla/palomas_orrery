@@ -12,8 +12,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 160  
-**Total Lines of Code (non-blank):** 126,310  
-**Total Public Functions/Classes:** 1,542
+**Total Lines of Code (non-blank):** 125,651  
+**Total Public Functions/Classes:** 1,534
 
 ## Classification Coverage
 
@@ -21,7 +21,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 - `earth_pole_live_check.py`
 - `patch_L431_10_brief_both_sets_20261013.py`
-- `patch_L442_1_master_plan_restamp_20261014.py`
+- `patch_L442_2_close_and_rulings_20261014.py`
 - `test_drawings_export.py`
 - `test_earth_pole_of_date.py`
 - `test_extractor_pins.py`
@@ -225,7 +225,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `ledger_index.py` | Generate the at-a-glance INDEX for the consolidated ledger. (715 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (129 lines) |
-| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (992 lines) |
+| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (990 lines) |
 | `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (830 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (505 lines) |
 | `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (3,528 lines) |
@@ -263,7 +263,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
 | `patch_L431_10_brief_both_sets_20261013.py` | - L-431 (orbital periods): build 3's brief says the export carries BOTH element sets for a body drawn around the solar system's barycentre, the Sun-centred ones as well as the barycentre ones, as Tony confirmed on 2026-10-13. Records only. (103 lines) |
-| `patch_L442_1_master_plan_restamp_20261014.py` | - the master plan's restamp (v36) and Tony's seven kinds of document (L-442). (975 lines) |
+| `patch_L442_2_close_and_rulings_20261014.py` | - the restamp's close, and Tony's rulings of 2026-10-14 from his run record and chat (L-442). (318 lines) |
 | `test_drawings_export.py` | Each stored drawing in data/drawings/ is the drawing its rows give today, git tracks it, and each check can fail. (173 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |

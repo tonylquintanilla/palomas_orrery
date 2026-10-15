@@ -5,7 +5,9 @@ Built on orrery 9248845ca8516dcee3498f07c554e6a24426c23c at
 https://github.com/tonylquintanilla/palomas_orrery ("v3.96"); gallery
 read at 86ef2df6313f956f5c9e49611e6a2bdd0e95da29 at
 https://github.com/tonylquintanilla/tonyquintanilla.github.io and not
-touched. Pushed at: (Tony fills in after his push).
+touched. Pushed at 2b0e54cc525f616e477f639e4234a284be94d14d
+(Tony's push of 2026-10-14; his run record is
+`documentation/WHERE_WE_ARE_10-14-26_2250_run_record.md`).
 Tony's local folders: orrery
 `C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\`;
 gallery `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\`.

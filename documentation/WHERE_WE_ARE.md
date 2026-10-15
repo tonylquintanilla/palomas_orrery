@@ -1,26 +1,24 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 14, 2026, night: the master plan restamped; its history moved out.
-- Written at orrery 9248845 and gallery 86ef2df.
+Last updated: October 14, 2026, late: the restamp ran and is pushed; your notes filed.
+- Written at orrery 2b0e54c and gallery 86ef2df.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The master plan is strategy only. The order lives on the road
->   below; what is done lives in the ledger. (Your ruling, Oct 13.)
-> - The plan's dated history and its lineage moved to one record,
->   `MASTER_PLAN_HISTORY.md`. (Your ruling, Oct 14.)
-> - L-433 (the road after the Sun and Earth rooms) closed; the objects
->   work is L-443 (the objects to the website).
+> - The restamp ran clean (30 of 30) and is pushed at 2b0e54c. The
+>   plan is strategy; the road below is the order.
+> - Ruled: the run fetches a served body's missing period from JPL,
+>   as its own step: L-444 (the missing periods).
+> - Dropped: L-436 (the orrery from your phone) and L-441 (the
+>   dashboard's "when" index).
 >
-> **Do next:** *The design session for the orrery's objects on the
-> website, L-443 (the objects to the website), from its brief.*
+> **Do next:** *Build L-444 (the missing periods): small, orrery only.
+> Then the design session for L-443 (the objects to the website).*
 >
 > **Needs you now:**
-> - *Run patch_L442_1, then the maintenance run; reinstall
->   ledger-and-session-records 1.21; copy protocol v3.97 to the
->   Project; commit; push.*
+> - *Run patch_L442_2, then the maintenance run; commit; push.*
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
@@ -39,13 +37,15 @@ Last updated: October 14, 2026, night: the master plan restamped; its history mo
                System room's features close with these rooms.
   8.   [done]  The served objects are checked against JPL Horizons, from
                the orrery's run; the periods passed live, Oct 14.
+  8a.  [next]  *The run fetches each served body's missing period from
+               JPL: L-444 (the missing periods).*
+               << new this session
   9.   [next]  The website's checks, in the order you confirmed:
                L-423 (the website's checks).
  10.   [next]  A bare interactive.html link opens the Solar System room;
                the Explorer gets its own address.
- 11.   [next]  *The rest of the orrery's objects come to the website:
-               L-443 (the objects to the website), design first.*
-               << moved this session
+ 11.   [next]  The rest of the orrery's objects come to the website:
+               L-443 (the objects to the website), design first.
  12.   [later] Encounters: comets and spacecraft at the dates that matter.
  13.   [later] The inner planets' rooms (Mercury, Venus, Mars), from the
                template; Jupiter and Saturn follow (L-433).
@@ -59,6 +59,10 @@ Last updated: October 14, 2026, night: the master plan restamped; its history mo
 Standing rulings. A line leaves after a few weeks, once it is habit.
 - The plan is strategy; the road here is the order; the ledger has
   status. The plan's history and lineage: MASTER_PLAN_HISTORY.md. (Oct 13, 14)
+- Fuzzy boundaries wherever they are meaningful, not only the corona
+  and the exosphere. (Oct 14)
+- A served body's missing period is fetched by the run, before the
+  check, with the orrery's own code. (Oct 14)
 - Digits by the error JPL states; whole km and a plain sentence where it
   states none; speeds to their distance's precision, or to one meter
   per second where JPL states none. (Oct 11)
@@ -82,17 +86,16 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
   drawn orbit and markers alike; typed table last, marked. (Oct 11)
 - Comets by first apparition, oldest first. Fuzzy boundaries before
   the Sun and Earth rooms close. Every new check gets a button. (Oct 10)
-- The Hills cloud follows its paper (Fig. 3, its text), cited; to 10,000 AU. (Oct 10)
 
-## Signals
+## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
 - Last cache build: 20261014T225537Z, ok, no retry (gallery 86ef2df).
-- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, 5ca56df).
+- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, 2b0e54c).
   Whole tree: 280: orrery 116, Earth System 149, stars 13, utilities 2.
 - This page's date and the ledger's newest stamp: both Oct 14. Agree.
 
-## Waiting on you
+## Waiting on you  **>> UPDATED THIS SESSION**
 
 At the next design talk:
 - L-401 (the distance digits): a model with no stated accuracy (the
@@ -108,22 +111,19 @@ At the next design talk:
 Not urgent, in your order:
 1. Whether the editor also edits the Solar System room's rows.
 2. Choosing a date, and animation.
-3. The orrery from your phone: L-436 (away from the machine), an idea.
-4. The dashboard's "when" index: L-441, recorded for later.
 
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`. Open for build: L-421 (the
   typed facts), its check.
-- *Next: `HANDOFF_L438_objects_to_website_brief_20261013.md`; its item
-  is now L-443 (the objects to the website)*
+- *Next: L-444 (the missing periods) in the ledger, then
+  `HANDOFF_L438_objects_to_website_brief_20261013.md`, now L-443*
 - This session: `HANDOFF_L442_master_plan_restamp_20261014.md`
 - The distance digits: `DESIGN_L401_distance_digits_rulings_20261011.md`;
   reviews `REVIEW_L401_..._comparison_20261011.md`; build 1
   `HANDOFF_L401_distance_build1_20261012.md`
-- Your notes of Oct 12: `WHERE_WE_ARE_10-12-26_2212_run_record.md`
+- Your notes of Oct 14: `WHERE_WE_ARE_10-14-26_2250_run_record.md`
 - L-421 (typed facts, inner Oort): `MANIFEST_L421_typed_facts_20261006.md`, `HANDOFF_L421_*`
-- L-436 (away from the machine): `DESIGN_L436_orrery_away_from_the_machine_20261013.md`
 - Your six rulings of Oct 12: `DESIGN_rulings_20261012.md`; briefs for L-425,
   L-424 with L-426; the dashboard: `HANDOFF_L440_dashboard_labels_20261013.md`
 - The strategy behind the road: `MASTER_PLAN_INTERACTIVE_GALLERY.md`

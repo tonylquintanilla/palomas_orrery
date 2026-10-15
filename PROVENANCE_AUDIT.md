@@ -20,12 +20,12 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T1 by domain | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|--------------|---:|---:|---:|--------:|
+| 20261015T043854Z | `2b0e54c` | 160 | 1122 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 683 | 153 | 6 | 0 |
 | 20261015T035759Z | `9248845` | 160 | 1122 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 683 | 153 | 6 | 0 |
 | 20261014T234115Z | `5ca56df` | 160 | 1122 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 683 | 153 | 6 | 0 |
 | 20261014T225215Z | `344ed65` | 159 | 1122 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 683 | 153 | 6 | 0 |
 | 20261014T223944Z | `5cd63cc` | 161 | 1123 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 684 | 153 | 6 | 0 |
 | 20261014T215653Z | `fe00059` | 158 | 1117 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 684 | 147 | 6 | 0 |
-| 20261014T175908Z | `db63721` | 157 | 1117 | 281 | orrery 116, Earth System 149, stars 13, utilities 2, dev tools 1 | 683 | 147 | 6 | 0 |
 
 Change since the previous run: total +0, Tier-1 +0.
 
