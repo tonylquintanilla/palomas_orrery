@@ -154,7 +154,7 @@ PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-**Session: DONE: 10-15-26 2143: Master plan coordination**
+**Session: DONE: 10-15-26 2204: Master plan coordination**
 
 Here is the draft of the plan's new front page, for your phone read. The one question: does it tell you what the plan is for, in about one screen? I'm building the rest of the patch meanwhile, and any change you ask for goes in before you run it.
 
@@ -876,6 +876,20 @@ And correct stage 5 on Where We Are's road the same way.
 - The master plan is strategy only. The order of the work is the road on Where We Are, and the ledger records what's done.
 - On the road: L-445 (Earth's period), then the rest of Earth's list, then the Sun's list, then the orrery's objects come to the website.
 - L-401 build 3 is parked until its features come up.
+
+============================================================
+
+Yes, it's done. GitHub has your push at 802e5bd, and I read the ledger and Where We Are there to confirm what landed:
+
+- **L-401 (the distance digits):** build 3 is recorded as parked. Each of its four parts now opens with its feature: the fly-to buttons and the parameters window, the animation, and the encounters.
+- **L-413 (Earth's list):** the gap now reads L-445 (Earth's period) first, then the rest of L-421's checks (facts typed into the rooms' code), then the design talks.
+- **Where We Are:** the road's stage 5 says the same order, and "Do next" is building L-445.
+
+Nothing from this coordination session is left open.
+
+**Where this leaves us:**
+- Next is the L-445 build: Earth's orbital period taken around the Earth-Moon barycentre (the Earth-Moon pair's shared centre of mass) instead of Earth's centre.
+- Before any Horizons work, that session confirms it loaded horizons-orbital-mechanics 1.7, the skill for JPL Horizons and orbital periods.
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -2148,7 +2162,7 @@ Next on the road is L-445, then L-446, then Earth’s list.
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-**Session: OPEN: 10-15-26 0911: Opus: L-401 build 3 orrery session**
+**Session: DONE: 10-15-26 2200: Opus: L-401 build 3 orrery session**
 
 The close is ready as patch_L401_5_build3_parked_20261015.py. It records that L-401’s build 3 is parked, not built. No code file changes.
 
@@ -2371,6 +2385,19 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-Commit and push.
+Commit and push. -- 802e5bd8086433552d27f6a62016923f99513cd2
+
+=================================================================
+
+Yes, it's done. GitHub has your push at 802e5bd, and that commit carries the close.
+
+- **The patch:** all 18 edits applied, and Where We Are stayed at exactly its 130-line cap.
+- **The maintenance run:** 31 of 31 checks passed. The Tier-1 count on what leaves the orrery stayed at 0, so the push check holds. The Tier-1 total across the whole code base is unchanged at 280.
+- **What GitHub now shows:**
+  - L-401's block records build 3 as parked, and both L-401 and L-413 are dated Oct 15.
+  - Where We Are reads "L-401 build 3 parked."
+  - The script is in `documentation/` and no longer in the main folder.
+
+The session is closed. Next on the road is L-445 (Earth's period). That session should first confirm it loaded version 1.7 of horizons-orbital-mechanics, the skill for JPL Horizons and orbital periods; this session loaded 1.6.
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
