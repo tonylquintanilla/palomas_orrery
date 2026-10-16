@@ -1064,10 +1064,10 @@ CHECKERS -- the verdict informs the push call
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 
-  2. Move this script into documentation/; commit; push.
+  2. Move this script into documentation/; commit; push. gallery: 09d92918a78a00fea893740b7e2da109d5b11c25; orrery: 
 
+b0220972b21167b62c501a75fd192c69d0729f80
 
-  
 Undo is Discard Changes in GitHub Desktop.
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
