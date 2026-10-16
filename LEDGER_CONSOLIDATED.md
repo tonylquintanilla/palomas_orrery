@@ -446,6 +446,9 @@ built on 47d241bc.
 Module updated: October 15, 2026 with Anthropic's Claude Opus 5.5
 (L-447 closed on Tony's look; a note on L-446; L-448 opened, the
 test file in the tracked tree), built on 464d872b.
+Module updated: October 15, 2026 with Anthropic's Claude Opus 5.5
+(L-401 build 3 parked, each part with its feature, Tony's ruling;
+L-413's order corrected: L-445 first), built on 45085c4.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -798,13 +801,13 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-394 | A card cannot say which body it belongs to (gallery, Studio) | OPEN | -- | 2026-09-29 |
 | ! | L-396 | Tony's page: WHERE_WE_ARE.md, the big picture in plain words (documentation, skills) | OPEN | -- | 2026-10-07 |
 | ! | L-399 | Small bodies: fetch each one's own position uncertainty from Horizons (gallery, builder) | OPEN | -- | 2026-10-01 |
-| ! | L-401 | The orrery's own distance hovers print by fixed widths, not by the errors the position earns (orrery, provenance) | OPEN | -- | 2026-10-13 |
+| ! | L-401 | The orrery's own distance hovers print by fixed widths, not by the errors the position earns (orrery, provenance) | OPEN | -- | 2026-10-15 |
 | ! | L-402 | Choose a date, or animate, within the range the drawn bodies are trusted for (gallery, exhibits) | OPEN | -- | 2026-10-01 |
 | ! | L-403 | Numbers in the object list's descriptions carry no source (orrery, provenance) | OPEN | -- | 2026-10-01 |
 | ! | L-410 | Fuzzy boundaries for edges known only as ranges, the outer corona first (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-11 |
 | ! | L-411 | The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-04 |
 | ! | L-412 | The Sun's slice: the order Tony confirmed (the Sun's slice) | OPEN | -- | 2026-10-11 |
-| ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-10-11 |
+| ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-10-15 |
 | ! | L-421 | Facts typed in the Earth and Sun rooms' code, not served with their sources (gallery, words) | OPEN | -- | 2026-10-11 |
 | ! | L-423 | The website's checks: the order Tony confirmed (checks, gallery) | OPEN | -- | 2026-10-08 |
 | ! | L-424 | The checker reports one word for two different cases (worksheet checker) | OPEN | -- | 2026-10-11 |
@@ -1933,7 +1936,7 @@ for each case and updates the skill's bullet to match.
 L-252; L-418.
 
 #### [L-413] Earth's list: the old Earth items, in the order Tony confirmed (Earth room)
-<!-- L:413 status:OPEN upd:2026-10-11 section:A flag: rice: -->
+<!-- L:413 status:OPEN upd:2026-10-15 section:A flag: rice: -->
 - **Confirmed by Tony, 2026-10-04,** after a sweep of the open items
   that touch the Earth room, read against the code at orrery cbde99dc
   and gallery e7ef96eb, and checked against the Claude Fable 5.1 ledger
@@ -2016,8 +2019,12 @@ L-252; L-418.
 - **Added 2026-10-11, first:** L-401, the orrery's distance digits.
   Tony: "actually, let's promote L401 to next. accuracy and precision
   are fundamental."
-**Gap:** L-401 first; then L-421's check; then the design talks in the
-order above.
+- **2026-10-15, the order corrected** (Tony's ruling in the
+  coordination session of 2026-10-15): L-401's build 3 is parked, each
+  part with its feature (L-401 records where), and L-445 (Earth's
+  period from the Earth-Moon barycentre) is first on this list.
+**Gap:** L-445 (Earth's period) first; then the rest of L-421's checks
+(its Gap: parts 2 and 3); then the design talks in the order above.
 **Ref:** L-412 (the Sun's list, which resumes after this); the handles
 above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
 
@@ -2169,7 +2176,7 @@ above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
 tools/gallery_cache_builder.py (trust); L-149; L-150; L-363; L-398.
 
 #### [L-401] The orrery's own distance hovers print by fixed widths, not by the errors the position earns (orrery, provenance)
-<!-- L:401 status:OPEN upd:2026-10-13 section:A flag: rice: -->
+<!-- L:401 status:OPEN upd:2026-10-15 section:A flag: rice: -->
 - **Recorded 2026-10-01, closing L-398**, as one row for the class under
   The Braid: recorded, not chased. provenance-discipline 2.23 says every
   computed position a display prints goes to the place the larger of
@@ -2431,10 +2438,47 @@ tools/gallery_cache_builder.py (trust); L-149; L-150; L-363; L-398.
   on the road's stage 5: "**L-401 build 3** afterwards: the fly-to
   buttons, the parameters window, the animation's uncertainty. Small,
   and its own session." Confirmed in chat the same night: "yes".
-**Gap:** Builds 1 and 2 are built and accepted. Left, build 3: the fly-to buttons, the parameters window, the
-animation's 2xr; and the encounter slice (`spacecraft_encounters.py`,
-`close_approach_data.py`). The two questions above go to the design
-talk.
+- **2026-10-15, build 3 parked, not built** (Tony's ruling of
+  2026-10-15, in the coordination session; carried by the build
+  session's close, `patch_L401_5_build3_parked_20261015.py`). The
+  build session read the code at ffd6c36 and proposed build 3's scope;
+  Tony: "no. we got ahead." By the braid, none of its four parts is
+  drawn in the Sun or Earth rooms on the website, so each part opens
+  with its feature:
+  - the fly-to buttons (`visualization_utils.add_fly_to_object_buttons`)
+    and the parameters window (`orbital_param_viz.py`): the next time a
+    session opens those files;
+  - the animation's uncertainty (`palomas_orrery_helpers.fetch_trajectory`
+    does not ask for 2xr): with "choosing a date, and animation" (Where
+    We Are, waiting on Tony, not urgent);
+  - the encounters (`spacecraft_encounters.py`, `close_approach_data.py`):
+    with road stage 12, encounters.
+  Nothing was built. No code file changed.
+- **What the scoping read found, for whichever part opens first**
+  (read at ffd6c36; recorded, not chased):
+  - Fly-to buttons: the label prints ".0f km", ".3f AU" or ".2f AU",
+    and the dropdown sorts by parsing that label back into a number, so
+    a change to the label's digits must keep the sort working.
+  - Parameters window: the elements print cut to fixed widths (a to
+    3 decimals, e to 6, angles to 1); the distances worked from them
+    (periapsis, apoapsis, b, c) and the body's position marker print
+    ".3f AU". The fallback "estimate" dates (the plot date plus a
+    quarter and three quarters of a period) are still there; removing
+    them removes something the orrery already does, so it is asked
+    first. The two questions above (a model with no stated accuracy;
+    numbers that are not distances) reach this window most.
+  - The animation: the Voyagers' sheet figure needs their distance from
+    Earth on every frame, a second query per frame; the frames' small
+    bodies need only 2xr in the query `fetch_trajectory` already makes.
+  - Encounters: the hover re-cuts typed mission figures (Juno's
+    21.219 km/s prints 21.22; a typed 10.8 prints 10.80); a distance
+    the orrery resolves from Horizons has no stated accuracy. The
+    close-approach hover prints nine decimals of an AU beside JPL's own
+    3-sigma range from the same record. Where the typed mission figures
+    came from is a provenance question of its own.
+**Gap:** Builds 1 and 2 are built and accepted. Build 3 is parked
+(2026-10-15): each of its four parts opens with its feature, as above.
+The two questions above go to the design talk.
 **Ref:** `documentation/DESIGN_L401_distance_digits_rulings_20261011.md`;
 `documentation/REVIEW_L401_distance_digits_comparison_20261011.md`;
 `documentation/HANDOFF_L401_distance_build1_brief_20261011.md`;

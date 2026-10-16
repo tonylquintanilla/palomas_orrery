@@ -1,21 +1,20 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 15, 2026, night: the front page's words done.
-- Written at orrery 464d872 and gallery db63b7d.
+Last updated: October 15, 2026, late night: L-401 build 3 parked.
+- Written at orrery 45085c4 and gallery 95713f4.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Done: L-444 (the missing periods): all eight fetched and confirmed.
-> - Ruled: L-445 (Earth's period) and L-446 (the daily run's order).
-> - Done: the front page says what the site is: L-447 (its words).
+> - Parked: L-401 build 3 (the distance digits), your ruling of Oct 15:
+>   each part waits for its feature. Earth's list now starts at L-445.
 >
 > **Do next:** *Build L-445 (Earth's period). Then finish Earth's
 > list, then the Sun's; the objects come after (your ruling, Oct 15).*
 >
 > **Needs you now:**
-> - *Run patch_L447_3_close; one Daily Run clears Cache in step.*
+> - *Run patch_L401_5, then the maintenance run; commit; push.*
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
@@ -23,8 +22,9 @@ Last updated: October 15, 2026, night: the front page's words done.
 
   1-4. [done]  The Sun, Earth and Solar System rooms are live; the orrery
                feeds the website and nothing is typed twice.
-  5.   [NOW]   L-401 (the distance digits): builds 1 and 2 accepted;
-               build 3 later. Then Earth's remaining items.
+  5.   [NOW]   *Earth's list (L-413): L-445 (Earth's period, stage 8b),
+               then the rest of L-421's checks (stage 6), then Earth's
+               design talks.*  << moved this session
   5b.  [NOW]   The scaffolding checks clear beside the slices: the
                dashboard (L-440) done; L-424, L-425, L-426 to come.
   6.   [next]  The typed facts: the inner Oort cloud is drawn on the
@@ -37,16 +37,16 @@ Last updated: October 15, 2026, night: the front page's words done.
   8a.  [done]  The run fetches each served body's missing period from
                JPL: L-444 (the missing periods), all eight, Oct 15.
   8b.  [next]  *L-445 (Earth's period): from the Earth-Moon barycentre,
-               not Earth's centre.*  << new this session
+               not Earth's centre.*
   8c.  [next]  L-446 (the daily run's order): the website pulls the
-               orrery's checked data before it builds.  << new this session
+               orrery's checked data before it builds.
   9.   [next]  The website's checks, in the order you confirmed:
                L-423 (the website's checks).
  10.   [next]  A bare interactive.html link opens the Solar System room;
                the Explorer gets its own address.
  11.   [later] The rest of the orrery's objects come to the website:
                L-443 (the objects to the website), after the Sun and
-               Earth rooms close.  << moved this session
+               Earth rooms close.
  12.   [later] Encounters: comets and spacecraft at the dates that matter.
  13.   [later] The inner planets' rooms (Mercury, Venus, Mars), from the
                template; Jupiter and Saturn follow (L-433).
@@ -58,6 +58,8 @@ Last updated: October 15, 2026, night: the front page's words done.
 ## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings. A line leaves after a few weeks, once it is habit.
+- L-401 build 3 parked: fly-to buttons, parameters window when next
+  opened; animation with choosing a date; encounters, stage 12. (Oct 15)
 - The plan is strategy; the road here is the order; the ledger has
   status. The plan's history and lineage: MASTER_PLAN_HISTORY.md. (Oct 13, 14)
 - Fuzzy boundaries wherever they are meaningful, not only the corona
@@ -91,12 +93,12 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261015T153610Z, ok, no retry (gallery 9f8569e).
-- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, 9579fcd).
+- Last cache build: 20261016T021807Z, ok, no retry (gallery 95713f4).
+- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, 45085c4).
   Whole tree: 280: orrery 116, Earth System 149, stars 13, utilities 2.
 - This page's date and the ledger's newest stamp: both Oct 15. Agree.
 
-## Waiting on you  **>> UPDATED THIS SESSION**
+## Waiting on you
 
 At the next design talk:
 - L-401 (the distance digits): a model with no stated accuracy (the
@@ -115,13 +117,11 @@ Not urgent, in your order:
 
 ## Where the details are  **>> UPDATED THIS SESSION**
 
-- Every item: `LEDGER_CONSOLIDATED.md`. Open for build: L-421 (the
-  typed facts), its check.
+- Every item: `LEDGER_CONSOLIDATED.md`.
 - *Next: L-445 (Earth's period) in the ledger*
-- This session, last: `HANDOFF_L447_front_page_words_20261015.md`
 - The distance digits: `DESIGN_L401_distance_digits_rulings_20261011.md`;
   reviews `REVIEW_L401_..._comparison_20261011.md`; build 1
-  `HANDOFF_L401_distance_build1_20261012.md`
+  `HANDOFF_L401_distance_build1_20261012.md`; build 3 parked: L-401.
 - Your notes of Oct 14: `WHERE_WE_ARE_10-14-26_2250_run_record.md`
 - L-421 (typed facts, inner Oort): `MANIFEST_L421_typed_facts_20261006.md`, `HANDOFF_L421_*`
 - Your six rulings of Oct 12: `DESIGN_rulings_20261012.md`; briefs for L-425,
