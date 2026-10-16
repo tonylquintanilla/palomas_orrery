@@ -11,28 +11,21 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 162  
-**Total Lines of Code (non-blank):** 127,489  
-**Total Public Functions/Classes:** 1,585
+**Total Python Files:** 160  
+**Total Lines of Code (non-blank):** 126,985  
+**Total Public Functions/Classes:** 1,577
 
 ## Classification Coverage
 
-**Undetermined role (9).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (7).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
-- `patch_L445_1_earth_period_20261015.py`
-- `patch_L446_3_daily_run_orrery_20261015.py`
 - `test_drawings_export.py`
 - `test_earth_pole_of_date.py`
 - `test_extractor_pins.py`
 - `test_hills_cloud_sampler.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
-
-**Undetermined domain (2).** No valid `Domain:` tag.
-
-- `patch_L445_1_earth_period_20261015.py`
-- `patch_L446_3_daily_run_orrery_20261015.py`
 
 
 ---
@@ -265,8 +258,6 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
-| `patch_L445_1_earth_period_20261015.py` | - L-445 (Earth's period): Earth's orbital period is asked of the Earth-Moon barycentre (Horizons target 3), not Earth's centre (399); the Horizons check asks the same target; the hover and the parameters window say whose period it is. L-448 (the test file in... (189 lines) |
-| `patch_L446_3_daily_run_orrery_20261015.py` | - the orrery's half of L-446 (the Daily Run pulls before it builds, with L-380 and L-388): the dashboard's buttons, the ledger, Where We Are, gallery-cache-builder 1.10, protocol v3.100, a new item L-449 (the dropped run records), and the build record. (315 lines) |
 | `test_drawings_export.py` | Each stored drawing in data/drawings/ is the drawing its rows give today, git tracks it, and each check can fail. (173 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |

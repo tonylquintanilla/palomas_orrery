@@ -1,21 +1,21 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 16, 2026: L-445 (Earth's period), L-446 (Daily Run) built.
-- Written at orrery 54c27d7 and gallery 0f8efb1.
+Last updated: October 16, 2026, morning: L-446 (the Daily Run's order) closed.
+- Written at orrery 3cedfb7 and gallery 0f8efb1.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
 > - L-445 (Earth's period) built: the Earth-Moon barycentre's period,
 >   1.00000 years (365.25 days); L-448 (the test file) rode it.
-> - L-446 (the Daily Run's order) built: the pulls ran before the cache
->   build in your Daily Run; 82 vanished run records were put back.
+> - L-446 (the Daily Run's order) closed: the pulls ran before the build,
+>   28 of 28 checks passed, the live site serves the orrery's export.
 >
-> **Do next:** *Run patch_L446_3, then the orrery maintenance run; push.*
+> **Do next:** *The L-445 (Earth's period) close, in its own session.*
 >
 > **Needs you now:**
-> - *The words of Earth's hover, at your look: keep or change.*
+> - *Run patch_L446_4, then the orrery maintenance run; push.*
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
@@ -36,10 +36,9 @@ Last updated: October 16, 2026: L-445 (Earth's period), L-446 (Daily Run) built.
   8-8a.[done]  The served objects are checked against JPL from the
                orrery's run, missing periods fetched first (Oct 14, 15).
   8b.  [NOW]   *L-445 (Earth's period): built; your look at the hover next.*
-  8c.  [NOW]   *L-446 (the Daily Run's order): built, ran once; patch_L446_3
-               left.*  << moved this session
-  9.   [next]  The website's checks, in the order you confirmed:
-               L-423 (the website's checks); its item 2 is stage 8c.
+  8c.  [done]  L-446 (the Daily Run's order): pulls before the build (Oct 16).
+  9.   [next]  L-423 (the website's checks): item 2 done (Oct 16); next,
+               item 1, L-262 (the framing test): its row passed Oct 15.
  10.   [next]  A bare interactive.html link opens the Solar System room;
                the Explorer gets its own address.
  11.   [later] The rest of the orrery's objects come to the website:
@@ -53,7 +52,7 @@ Last updated: October 16, 2026: L-445 (Earth's period), L-446 (Daily Run) built.
  15.   [goal]  The website does what the desktop orrery does, with a date
                to choose, within the range the data covers.
 
-## Settled  **>> UPDATED THIS SESSION**
+## Settled
 
 Standing rulings. A line leaves after a few weeks, once it is habit.
 - L-401 build 3 parked: fly-to buttons, parameters window when next
@@ -93,9 +92,9 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 
 Read from files when this page was written, not typed from memory.
 - Last cache build: 20261016T043242Z, ok, one retry absorbed (gallery 0f8efb1).
-- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, 77245ea).
+- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, 3cedfb7).
   Whole tree: 280: orrery 116, Earth System 149, stars 13, utilities 2.
-- This page's date and the ledger's newest stamp: both Oct 15. Agree.
+- This page's date and the ledger's newest stamp: both Oct 16. Agree.
 
 ## Waiting on you
 
@@ -118,8 +117,8 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- *Now: `HANDOFF_L445_earth_period_build_20261015.md` and
-  `HANDOFF_L446_daily_run_order_build_20261015.md`, the two builds*
+- *Now: `HANDOFF_L445_earth_period_build_20261015.md`, its close next*
+- L-446, closed: `HANDOFF_L446_daily_run_order_build_20261015.md`
 - The distance digits: `DESIGN_L401_distance_digits_rulings_20261011.md`;
   build 1 `HANDOFF_L401_distance_build1_20261012.md`; build 3 parked: L-401.
 - Your notes of Oct 15: `WHERE_WE_ARE_10-15-26_2236_run_record.md`
@@ -133,20 +132,6 @@ Not urgent, in your order:
 
 **Tony**: Run record:
 
-PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L395_4_run_confirmed_and_page_20261008.py
-ok  LEDGER_CONSOLIDATED.md         header stamp
-ok  LEDGER_CONSOLIDATED.md         L-395 date
-ok  LEDGER_CONSOLIDATED.md         L-395 Tony's run
-ok  WHERE_WE_ARE.md                header date
-ok  WHERE_WE_ARE.md                road stage 8
-ok  WHERE_WE_ARE.md                decisions: the Horizons build
-
-patch applied
-
-NEXT:
-  1. Run orrery_maintenance_run.py -- it rebuilds the ledger's index.
-  2. Move this script into documentation/; commit and push.
-PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
 
 
