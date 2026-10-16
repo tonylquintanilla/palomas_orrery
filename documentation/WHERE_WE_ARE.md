@@ -1,21 +1,21 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 15, 2026, afternoon: L-444 (the missing periods) done.
-- Written at orrery 9579fcd and gallery 9f8569e.
+Last updated: October 15, 2026, evening: the front page's words.
+- Written at orrery 47d241b and gallery 9f8569e.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
 > - Done: L-444 (the missing periods): all eight fetched and confirmed.
-> - Ruled: Earth's period from the Earth-Moon barycentre: L-445.
-> - Ruled: the website's daily run pulls before it builds: L-446.
+> - Ruled: L-445 (Earth's period) and L-446 (the daily run's order).
+> - Built: the front page says what the site is: L-447 (its words).
 >
 > **Do next:** *Build L-445 (Earth's period). Then finish Earth's
 > list, then the Sun's; the objects come after (your ruling, Oct 15).*
 >
 > **Needs you now:**
-> - *Run patch_L444_2_close, then the maintenance run; commit; push.*
+> - *Run the two L-447 patches; look at the front page on your phone.*
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
@@ -118,7 +118,7 @@ Not urgent, in your order:
 - Every item: `LEDGER_CONSOLIDATED.md`. Open for build: L-421 (the
   typed facts), its check.
 - *Next: L-445 (Earth's period) in the ledger*
-- This session: `HANDOFF_L444_missing_periods_build_20261015.md`
+- This session, last: `HANDOFF_L447_front_page_words_20261015.md`
 - The distance digits: `DESIGN_L401_distance_digits_rulings_20261011.md`;
   reviews `REVIEW_L401_..._comparison_20261011.md`; build 1
   `HANDOFF_L401_distance_build1_20261012.md`

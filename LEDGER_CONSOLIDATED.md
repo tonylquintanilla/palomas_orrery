@@ -440,6 +440,9 @@ Module updated: October 15, 2026 with Anthropic's Claude Opus 5.5
 (L-444 closed on Tony's first live run, pushed at 9579fcd; L-445
 opened, Earth's period from the Earth-Moon barycentre; L-446 opened,
 the Daily Run pulls before it builds), built on 9579fcd5.
+Module updated: October 15, 2026 with Anthropic's Claude Opus 5.5
+(L-447 opened: the website's front page says what the site is),
+built on 47d241bc.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -657,7 +660,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*241 live items; 225 need attention (`!`); 167 RICE-scored; 198 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*242 live items; 226 need attention (`!`); 167 RICE-scored; 198 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -813,6 +816,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-443 | The rest of the orrery's objects come to the website as plotted positions (gallery + orrery, objects) | OPEN | -- | 2026-10-14 |
 | ! | L-445 | Earth's orbital period from the Earth-Moon barycentre, not Earth's centre (orrery + website, periods) | OPEN | -- | 2026-10-15 |
 | ! | L-446 | The website's Daily Run pulls the orrery's exports before it builds the cache (gallery, daily run) | OPEN | -- | 2026-10-15 |
+| ! | L-447 | The website's front page says what the site is (gallery, lobby) | OPEN | -- | 2026-10-15 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1186,6 +1190,50 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ## DETAIL / RECORD
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
+
+#### [L-447] The website's front page says what the site is (gallery, lobby)
+<!-- L:447 status:OPEN upd:2026-10-15 section:A flag: rice: -->
+- **Asked 2026-10-15** by Tony: he showed palomasorrery.com to his
+  brother, whose main comment was that from the front page he could not
+  tell what the site is about. A coordination session the same day
+  looked at the page on desktop and phone and agreed on why: "Paloma's
+  Orrery" -- most people do not know the word "orrery", and "Paloma's"
+  says whose it is, not what it is; the line under the title, "The
+  solar system, the Earth and the stars, to explore." (gallery
+  `gallery/gallery_config.json`, "sentence"), names subjects but not
+  what kind of thing the site is; nothing says paloma is Spanish for
+  dove, so a newcomer sees birds over space with no reason; "exhibits"
+  and "interactive scenes" are the project's words, not a visitor's;
+  and the sentence that explains the site sits behind the "i" button.
+- **Designed and ruled the same day,** in the L-444 session: three
+  versions of two lines, with Claude's pick, version A. Tony: "Confirmed
+  as recommended, A and love in 3D" ("love" is "live"). The words:
+  "Explore the solar system, the Earth and the nearby stars in 3D,
+  built from real science data such as NASA JPL's Horizons." and, under
+  it, "An orrery is a model of the solar system. I built this one for
+  my daughter Paloma, whose name is Spanish for dove." No redesign: the
+  title, the picture and the layout stay (L-428's design). "Interactive
+  scenes" reads "live in 3D"; "exhibits" stays, the site speaking as a
+  museum with rooms and doors. No number is in the words; each claim is
+  one the site's own "i" card already makes.
+- **Built 2026-10-15,** gallery
+  `patch_L447_1_front_page_words_20261015.py` on 9f8569e: the sentence
+  in `gallery_config.json` and a new "name_note" beside it, printed by
+  `renderLobby()` in `index.html` under the sentence, smaller and in
+  italics, in the lobby's near-white with its shadow; "live in 3D" on
+  the doors, the subject pages and their room rows; the same sentence
+  as the fallback, the no-script text and the link-preview
+  descriptions (og and twitter), so a shared link says it too.
+- **Verified on a throwaway copy:** headless Chromium screenshots at
+  390 x 844 (phone) and 1280 x 800 (desktop), shown to Tony before he
+  ran it; the Enter button still ends inside the phone's first screen;
+  the gallery's maintenance run 27 of 27; the editor and the guest-book
+  updater keep the new field (both load and write the whole config).
+  The record is `documentation/HANDOFF_L447_front_page_words_20261015.md`.
+**Gap:** Tony's look at the front page on his phone (the acceptance);
+then close.
+**Ref:** L-428 (the lobby's way in); L-282 (the lobby); gallery
+`index.html` (`renderLobby`), `gallery/gallery_config.json`.
 
 #### [L-445] Earth's orbital period from the Earth-Moon barycentre, not Earth's centre (orrery + website, periods)
 <!-- L:445 status:OPEN upd:2026-10-15 section:A flag: rice: -->
