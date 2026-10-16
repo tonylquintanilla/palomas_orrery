@@ -449,6 +449,9 @@ test file in the tracked tree), built on 464d872b.
 Module updated: October 15, 2026 with Anthropic's Claude Opus 5.5
 (L-401 build 3 parked, each part with its feature, Tony's ruling;
 L-413's order corrected: L-445 first), built on 45085c4.
+Module updated: October 15, 2026 with Anthropic's Claude Fable 5.1
+(coordination: L-446 takes in L-380 and L-388, item 2 of L-423; L-448
+rides L-445; the two briefs written), built on b4105c0.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -789,13 +792,13 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-377 | The provenance scanner's proximity rule can count a string as cited by a neighbour's source (checks) | OPEN | -- | 2026-09-28 |
 | ! | L-378 | Phone behaviour of the rooms has no automated check (checks, gallery) | OPEN | -- | 2026-10-08 |
 | ! | L-379 | The recorded Earth scene payload is aging, and three checks patch it piece by piece (checks, gallery) | OPEN | -- | 2026-10-06 |
-| ! | L-380 | The gallery maintenance routine pulls the constants export after the cache build (gallery, routine) | OPEN | -- | 2026-10-08 |
+| ! | L-380 | The gallery maintenance routine pulls the constants export after the cache build (gallery, routine) | OPEN | -- | 2026-10-15 |
 | ! | L-381 | The uncertainty field's pattern reads a sentence's full stop as a decimal point (export, checks) | OPEN | -- | 2026-09-28 |
 | ! | L-382 | Earth's magnetosphere costs about 42 percent more per orrery animation frame since D8 (orrery, rendering) | OPEN | -- | 2026-09-28 |
 | ! | L-385 | The orrery's Auto view of the Sun opens about 31 times wider since Stage D (orrery, Tony's eye) | OPEN | -- | 2026-10-04 |
 | ! | L-386 | The Sun's conversion rows, not yet exported (store, the Sun's slice) | OPEN | -- | 2026-10-09 |
 | ! | L-387 | The orrery's hovers print the conversion names by their own formats, not by the computed count (orrery) | OPEN | -- | 2026-09-28 |
-| ! | L-388 | The gallery's export pull can print success when it could not fetch, and the mirror then writes from the old export (gallery, tooling) | OPEN | -- | 2026-10-08 |
+| ! | L-388 | The gallery's export pull can print success when it could not fetch, and the mirror then writes from the old export (gallery, tooling) | OPEN | -- | 2026-10-15 |
 | ! | L-391 | Group clouds: the Trojans' sources, and the shapes of the three other groups (gallery, exhibits) | OPEN | -- | 2026-09-29 |
 | ! | L-393 | Encounter data: dates, spacecraft records centred on their targets, and how far the cache reaches in time (gallery, cache) | OPEN | -- | 2026-09-29 |
 | ! | L-394 | A card cannot say which body it belongs to (gallery, Studio) | OPEN | -- | 2026-09-29 |
@@ -809,7 +812,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-412 | The Sun's slice: the order Tony confirmed (the Sun's slice) | OPEN | -- | 2026-10-11 |
 | ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-10-15 |
 | ! | L-421 | Facts typed in the Earth and Sun rooms' code, not served with their sources (gallery, words) | OPEN | -- | 2026-10-11 |
-| ! | L-423 | The website's checks: the order Tony confirmed (checks, gallery) | OPEN | -- | 2026-10-08 |
+| ! | L-423 | The website's checks: the order Tony confirmed (checks, gallery) | OPEN | -- | 2026-10-15 |
 | ! | L-424 | The checker reports one word for two different cases (worksheet checker) | OPEN | -- | 2026-10-11 |
 | ! | L-425 | A citation's location record is checked only in part (provenance tooling) | OPEN | -- | 2026-10-09 |
 | ! | L-426 | The worksheet checker compares very small numbers as equal (worksheet checker) | OPEN | -- | 2026-10-09 |
@@ -1208,9 +1211,14 @@ as an archive of the prioritization thinking -- no cleanup on close.
   deleted mid-run and committed as a deletion, and 464d872 put it back
   with the same bytes, so the repository gained two commits and no
   change.
+- **2026-10-15, rides L-445** (Earth's period; Tony's ruling in the
+  coordination session of 2026-10-15). L-445's brief carries it: the
+  test writes its fixture into a temporary folder, `.gitignore` gains
+  `test_output/`, and the patch deletes the tracked file so the
+  deletion is what Tony commits.
 **Gap:** stop tracking it: the test writes it into a folder git ignores
 (or a temporary folder), and the file leaves the repository in the same
-patch. Small; ride a session already touching the maintenance run.
+patch. Rides L-445's session.
 **Ref:** `test_orbit_cache.py`; `.gitignore`; L-447.
 
 #### [L-445] Earth's orbital period from the Earth-Moon barycentre, not Earth's centre (orrery + website, periods)
@@ -1245,10 +1253,19 @@ patch. Small; ride a session already touching the maintenance run.
   run after 9579fcd, and the orbits drawn around the barycentre
   (Saturn, Uranus, Neptune) on the run after that. L-446 (the daily
   run's order) would make that one run.
-**Gap:** a small build, its own session: the target for Earth's period,
-the check asking the same target, the hover's words, a planted fault
-(Earth's period taken for 399 again) and a live run; then the website
-look above.
+- **The brief, 2026-10-15:**
+  `documentation/HANDOFF_L445_earth_period_brief_20261015.md`, written
+  in the coordination session of that evening at b4105c0. It maps where
+  the target reaches (one home for the map in `orbital_period.py`; the
+  record carries the target and every reader takes it from the record;
+  `period_fetch.py` re-fetches a body whose record's target is not the
+  map's, which is how Earth is re-fetched without plotting) and the
+  planted faults. L-448 (the test file in the tracked tree) rides this
+  session, Tony's ruling of 2026-10-15.
+**Gap:** a small build, its own session, from the brief: the target for
+Earth's period, the check asking the same target, the hover's words in
+the orrery and on the website, the planted faults and a live run; then
+the website look above. L-448 rides.
 **Ref:** L-444; L-431; `orbital_period.py`; `period_fetch.py`;
 `horizons_check.py`; `export_objects.py`; `osculating_cache_manager.py`;
 skills/horizons-orbital-mechanics/SKILL.md, A Period Depends on Its
@@ -1280,8 +1297,26 @@ Centre.
   periods into the config, and the builder last ran at 10:36, before
   them. This item's order removes that gap; until it is built, the next
   Daily Run's builder clears it.
-**Gap:** a small gallery build, its own session: the pulls and copies
-ahead of the builder; whether the maintenance run keeps its own pull
+- **2026-10-15, L-380 and L-388 folded in** (Tony's ruling in the
+  coordination session of 2026-10-15, "yes, confirmed as recommended").
+  This item was opened without reference to two older ones that are
+  the same build: L-380 (the gallery pulls the constants export AFTER
+  the cache build, so the cache's stamp is one step behind; its Gap is
+  pull first, then build) and L-388 (a pull that cannot fetch prints
+  success and exits 0, and the mirror then writes from the old export;
+  its Gap is fail by name, and no mirror after a failed pull). Tony had
+  made them item 2 of L-423 (the website's checks) on 2026-10-08, "one
+  patch". So: this item carries the build; L-380 and L-388 close at its
+  close; L-423's item 2 is done by it, and building this item advances
+  road stage 9 as well as 8c. The fail-by-name half belongs in the same
+  patch anyway: once the pull runs before the build, a pull that fails
+  quietly would feed the builder stale data in the same run.
+- **The brief:** `documentation/HANDOFF_L446_daily_run_order_brief_20261015.md`,
+  written in that session at b4105c0. It carries the one decision for
+  Tony (what the Daily Run does after a failed pull: stop, or build on
+  the previous pull and say so) and the planted faults.
+**Gap:** a small gallery build, its own session, from the brief: the
+pulls and copies ahead of the builder; whether the maintenance run keeps its own pull
 rows (a no-op on a second run) or loses them; the Daily Run's dashboard
 group, which Dashboard Parity holds; and one Daily Run showing new
 periods reaching the website and the orbits drawn around the barycentre
@@ -1289,9 +1324,10 @@ in a single run.
 **Ref:** gallery `daily_run.py`, `gallery_maintenance_run.py`,
 `tools/pull_objects_export.py`, `tools/mirror_objects.py`,
 `tools/pull_constants_export.py`, `tools/mirror_constants.py`,
-`tools/pull_drawings.py`, `tools/gallery_cache_builder.py`; L-444;
-L-445; L-431; L-395; skills/gallery-cache-builder/SKILL.md, The Daily
-Run's Steps.
+`tools/pull_drawings.py`, `tools/gallery_cache_builder.py`; L-380;
+L-388; L-423 (item 2); L-444; L-445; L-431; L-395;
+skills/gallery-cache-builder/SKILL.md, The Daily Run's Steps;
+`documentation/HANDOFF_L446_daily_run_order_brief_20261015.md`.
 
 #### [L-443] The rest of the orrery's objects come to the website as plotted positions (gallery + orrery, objects)
 <!-- L:443 status:OPEN upd:2026-10-14 section:A flag: rice: -->
@@ -2029,7 +2065,7 @@ L-252; L-418.
 above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
 
 #### [L-423] The website's checks: the order Tony confirmed (checks, gallery)
-<!-- L:423 status:OPEN upd:2026-10-08 section:A flag: rice: -->
+<!-- L:423 status:OPEN upd:2026-10-15 section:A flag: rice: -->
 - **Confirmed by Tony, 2026-10-08**, in the decisions session of
   2026-10-08: "Yes open it now"; on the order, "The order is okay".
   This is road stage 9 on Where We Are. It comes before the front-door
@@ -2043,6 +2079,9 @@ above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
      (the live room's framing has no test) moves into L-367.
   2. L-380 and L-388, the export pull, as one patch: pull before the
      cache build, and fail by name when the pull cannot fetch.
+     2026-10-15: L-446 (the Daily Run's order) carries this item, by
+     Tony's ruling in the coordination session; its brief is written.
+     Done when L-446 closes.
   3. L-357, stale leftovers: delete the unreferenced hover fixture
      (Tony, 2026-10-08: yes) and correct two code comments.
   4. L-235 with L-237, the Earth golden record, as a pair: the check
@@ -2639,9 +2678,15 @@ is enough. L-422 holds the shape; this item holds the check.
 **Ref:** gallery `data/objects_config.json` (the Oort cloud's shapes); skills/provenance-discipline/SKILL.md; skills/interactive-exhibit/SKILL.md; L-363.
 
 #### [L-388] The gallery's export pull can print success when it could not fetch, and the mirror then writes from the old export (gallery, tooling)
-<!-- L:388 status:OPEN upd:2026-10-08 section:A flag: rice: -->
+<!-- L:388 status:OPEN upd:2026-10-15 section:A flag: rice: -->
 - **2026-10-08:** item 2 of L-423 (the website's checks), one
   patch with L-380.
+- **2026-10-15, folded into L-446** (the Daily Run's order; Tony's
+  ruling in the coordination session of 2026-10-15). The fail-by-name
+  half of L-446's build is this item's Gap, and its brief carries the
+  network-off test as the planted fault that matters most. This item
+  closes at that build's close; the brief is
+  `documentation/HANDOFF_L446_daily_run_order_brief_20261015.md`.
 - **Found 2026-09-28** building the L-345 gallery patch. In a sandbox
   that could not reach GitHub, the gallery maintenance run's "Constants
   export pull" reported PASS "no change", with an N-A inside it, and
@@ -2773,9 +2818,14 @@ the view opens at photosphere + 10% and what the axis does; Tony's eye.
 **Ref:** `constants_rows.py`; `export_constants.py`; `test_constants_export.py`; L-322.
 
 #### [L-380] The gallery maintenance routine pulls the constants export after the cache build (gallery, routine)
-<!-- L:380 status:OPEN upd:2026-10-08 section:A flag: rice: -->
+<!-- L:380 status:OPEN upd:2026-10-15 section:A flag: rice: -->
 - **2026-10-08:** item 2 of L-423 (the website's checks), one
   patch with L-388.
+- **2026-10-15, folded into L-446** (the Daily Run's order; Tony's
+  ruling in the coordination session of 2026-10-15). L-446's build is
+  this fix: the pulls run before the builder. This item closes at that
+  build's close; its brief is
+  `documentation/HANDOFF_L446_daily_run_order_brief_20261015.md`.
 - **Found 2026-09-25** at gallery `ce09f789`. The routine builds the
   served cache and then pulls `constants_export.json` from the orrery,
   so the served `frame_constants.orrery_sha` names the export from
