@@ -5,7 +5,7 @@ Built on gallery 9f8569ee3125de27fed96c86c701e3c4d52d88e3 at
 https://github.com/tonylquintanilla/tonyquintanilla.github.io; records
 on orrery 47d241bc32c4a21a9a183d7f58873bc75f157997 at
 https://github.com/tonylquintanilla/palomas_orrery.
-Pushed at: (Tony's commits after his run).
+Pushed at: gallery db63b7d7 and orrery 8e50aea (2026-10-15).
 Tony's local folders: orrery
 `C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\`;
 gallery `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\`.
@@ -77,5 +77,18 @@ more of them.
 - (do) Look at the front page on the phone, with the Home Screen clip's
   tab closed first.
 - (decide) Close L-447, or change the words first.
+
+## 6. Tony's run, his look, and the close (added 2026-10-15)
+
+- Both patches applied and were pushed: gallery db63b7d, orrery
+  8e50aea. Tony's look on the phone: "perfect." L-447 closed by
+  `patch_L447_3_close_20261015.py`.
+- His gallery maintenance run failed one checker, Cache in step, for
+  Saturn, Uranus and Neptune: L-444's periods had just reached the
+  website's config, and the cache builder had not run since. Not this
+  item's; recorded on L-446, and the next Daily Run clears it.
+- He saw `test_output/test_orbit_paths.json` committed. It is a test
+  fixture the maintenance run writes, tracked since at least
+  2026-10-13; opened as L-448.
 
 Session record written October 2026 with Anthropic's Claude Opus 5.5.

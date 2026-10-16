@@ -443,6 +443,9 @@ the Daily Run pulls before it builds), built on 9579fcd5.
 Module updated: October 15, 2026 with Anthropic's Claude Opus 5.5
 (L-447 opened: the website's front page says what the site is),
 built on 47d241bc.
+Module updated: October 15, 2026 with Anthropic's Claude Opus 5.5
+(L-447 closed on Tony's look; a note on L-446; L-448 opened, the
+test file in the tracked tree), built on 464d872b.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -660,7 +663,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*242 live items; 226 need attention (`!`); 167 RICE-scored; 198 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*242 live items; 226 need attention (`!`); 167 RICE-scored; 199 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -816,7 +819,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-443 | The rest of the orrery's objects come to the website as plotted positions (gallery + orrery, objects) | OPEN | -- | 2026-10-14 |
 | ! | L-445 | Earth's orbital period from the Earth-Moon barycentre, not Earth's centre (orrery + website, periods) | OPEN | -- | 2026-10-15 |
 | ! | L-446 | The website's Daily Run pulls the orrery's exports before it builds the cache (gallery, daily run) | OPEN | -- | 2026-10-15 |
-| ! | L-447 | The website's front page says what the site is (gallery, lobby) | OPEN | -- | 2026-10-15 |
+| ! | L-448 | The maintenance run writes a test file into the tracked tree (orrery, maintenance) | OPEN | -- | 2026-10-15 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1162,6 +1165,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-441 | The dashboard's "when" index, generated from tags (dashboard, dropped 2026-10-14) | DONE | -- | 2026-10-14 |
 |  | L-442 | The master plan is strategy and the road is the order: Tony's seven kinds of document (documentation, DONE 2026-10-14) | DONE | -- | 2026-10-14 |
 |  | L-444 | The maintenance run fetches a served body's missing period from JPL, as its own step before the Horizons check (orrery, periods) | DONE | -- | 2026-10-15 |
+|  | L-447 | The website's front page says what the site is (gallery, lobby) | DONE | -- | 2026-10-15 |
 
 ### W.Done -- Web Publication track, closed items
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1191,49 +1195,20 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
-#### [L-447] The website's front page says what the site is (gallery, lobby)
-<!-- L:447 status:OPEN upd:2026-10-15 section:A flag: rice: -->
-- **Asked 2026-10-15** by Tony: he showed palomasorrery.com to his
-  brother, whose main comment was that from the front page he could not
-  tell what the site is about. A coordination session the same day
-  looked at the page on desktop and phone and agreed on why: "Paloma's
-  Orrery" -- most people do not know the word "orrery", and "Paloma's"
-  says whose it is, not what it is; the line under the title, "The
-  solar system, the Earth and the stars, to explore." (gallery
-  `gallery/gallery_config.json`, "sentence"), names subjects but not
-  what kind of thing the site is; nothing says paloma is Spanish for
-  dove, so a newcomer sees birds over space with no reason; "exhibits"
-  and "interactive scenes" are the project's words, not a visitor's;
-  and the sentence that explains the site sits behind the "i" button.
-- **Designed and ruled the same day,** in the L-444 session: three
-  versions of two lines, with Claude's pick, version A. Tony: "Confirmed
-  as recommended, A and love in 3D" ("love" is "live"). The words:
-  "Explore the solar system, the Earth and the nearby stars in 3D,
-  built from real science data such as NASA JPL's Horizons." and, under
-  it, "An orrery is a model of the solar system. I built this one for
-  my daughter Paloma, whose name is Spanish for dove." No redesign: the
-  title, the picture and the layout stay (L-428's design). "Interactive
-  scenes" reads "live in 3D"; "exhibits" stays, the site speaking as a
-  museum with rooms and doors. No number is in the words; each claim is
-  one the site's own "i" card already makes.
-- **Built 2026-10-15,** gallery
-  `patch_L447_1_front_page_words_20261015.py` on 9f8569e: the sentence
-  in `gallery_config.json` and a new "name_note" beside it, printed by
-  `renderLobby()` in `index.html` under the sentence, smaller and in
-  italics, in the lobby's near-white with its shadow; "live in 3D" on
-  the doors, the subject pages and their room rows; the same sentence
-  as the fallback, the no-script text and the link-preview
-  descriptions (og and twitter), so a shared link says it too.
-- **Verified on a throwaway copy:** headless Chromium screenshots at
-  390 x 844 (phone) and 1280 x 800 (desktop), shown to Tony before he
-  ran it; the Enter button still ends inside the phone's first screen;
-  the gallery's maintenance run 27 of 27; the editor and the guest-book
-  updater keep the new field (both load and write the whole config).
-  The record is `documentation/HANDOFF_L447_front_page_words_20261015.md`.
-**Gap:** Tony's look at the front page on his phone (the acceptance);
-then close.
-**Ref:** L-428 (the lobby's way in); L-282 (the lobby); gallery
-`index.html` (`renderLobby`), `gallery/gallery_config.json`.
+#### [L-448] The maintenance run writes a test file into the tracked tree (orrery, maintenance)
+<!-- L:448 status:OPEN upd:2026-10-15 section:A flag: rice: -->
+- **Seen by Tony, 2026-10-15,** pushing L-447's records: "test_orbit_paths.json
+  was pushed." `test_output/test_orbit_paths.json` is a fixed fixture
+  that `test_orbit_cache.py` writes on every maintenance run (a valid and
+  a deliberately corrupted entry, dated 2025). It is tracked, and has
+  been since at least 87a5470 (2026-10-13). At 8e50aea it was caught
+  deleted mid-run and committed as a deletion, and 464d872 put it back
+  with the same bytes, so the repository gained two commits and no
+  change.
+**Gap:** stop tracking it: the test writes it into a folder git ignores
+(or a temporary folder), and the file leaves the repository in the same
+patch. Small; ride a session already touching the maintenance run.
+**Ref:** `test_orbit_cache.py`; `.gitignore`; L-447.
 
 #### [L-445] Earth's orbital period from the Earth-Moon barycentre, not Earth's centre (orrery + website, periods)
 <!-- L:445 status:OPEN upd:2026-10-15 section:A flag: rice: -->
@@ -1295,6 +1270,13 @@ Centre.
 - **Ruled, 2026-10-15, on Claude's recommendation; Tony: "Yes."** The
   pulls, each with its copy step, run before the cache builder, so one
   Daily Run carries checked data straight into the build.
+- **Seen 2026-10-15, in Tony's gallery maintenance run after L-447**
+  (gallery db63b7d): Cache in step failed for Saturn, Uranus and
+  Neptune -- "the config's period is around @0, the cache draws its
+  orbit around the Sun". The maintenance run had just pulled L-444's
+  periods into the config, and the builder last ran at 10:36, before
+  them. This item's order removes that gap; until it is built, the next
+  Daily Run's builder clears it.
 **Gap:** a small gallery build, its own session: the pulls and copies
 ahead of the builder; whether the maintenance run keeps its own pull
 rows (a no-op on a second run) or loses them; the Daily Run's dashboard
@@ -23103,6 +23085,60 @@ chat the same night: "yes".
 `palomas_orrery_dashboard.py`; L-431; L-395; L-443 (its new objects get
 their periods this way); skills/horizons-orbital-mechanics/SKILL.md,
 Where the Check Lives.
+
+#### [L-447] The website's front page says what the site is (gallery, lobby)
+<!-- L:447 status:DONE upd:2026-10-15 section:C flag: rice: -->
+- **Asked 2026-10-15** by Tony: he showed palomasorrery.com to his
+  brother, whose main comment was that from the front page he could not
+  tell what the site is about. A coordination session the same day
+  looked at the page on desktop and phone and agreed on why: "Paloma's
+  Orrery" -- most people do not know the word "orrery", and "Paloma's"
+  says whose it is, not what it is; the line under the title, "The
+  solar system, the Earth and the stars, to explore." (gallery
+  `gallery/gallery_config.json`, "sentence"), names subjects but not
+  what kind of thing the site is; nothing says paloma is Spanish for
+  dove, so a newcomer sees birds over space with no reason; "exhibits"
+  and "interactive scenes" are the project's words, not a visitor's;
+  and the sentence that explains the site sits behind the "i" button.
+- **Designed and ruled the same day,** in the L-444 session: three
+  versions of two lines, with Claude's pick, version A. Tony: "Confirmed
+  as recommended, A and love in 3D" ("love" is "live"). The words:
+  "Explore the solar system, the Earth and the nearby stars in 3D,
+  built from real science data such as NASA JPL's Horizons." and, under
+  it, "An orrery is a model of the solar system. I built this one for
+  my daughter Paloma, whose name is Spanish for dove." No redesign: the
+  title, the picture and the layout stay (L-428's design). "Interactive
+  scenes" reads "live in 3D"; "exhibits" stays, the site speaking as a
+  museum with rooms and doors. No number is in the words; each claim is
+  one the site's own "i" card already makes.
+- **Built 2026-10-15,** gallery
+  `patch_L447_1_front_page_words_20261015.py` on 9f8569e: the sentence
+  in `gallery_config.json` and a new "name_note" beside it, printed by
+  `renderLobby()` in `index.html` under the sentence, smaller and in
+  italics, in the lobby's near-white with its shadow; "live in 3D" on
+  the doors, the subject pages and their room rows; the same sentence
+  as the fallback, the no-script text and the link-preview
+  descriptions (og and twitter), so a shared link says it too.
+- **Verified on a throwaway copy:** headless Chromium screenshots at
+  390 x 844 (phone) and 1280 x 800 (desktop), shown to Tony before he
+  ran it; the Enter button still ends inside the phone's first screen;
+  the gallery's maintenance run 27 of 27; the editor and the guest-book
+  updater keep the new field (both load and write the whole config).
+  The record is `documentation/HANDOFF_L447_front_page_words_20261015.md`.
+- **Run and pushed, 2026-10-15** (Tony's run record, the copy of
+  `documentation/WHERE_WE_ARE_10-14-26_2250_run_record.md` he uploaded
+  at 20:36): the gallery patch "patch applied (13 edits in 2 files)",
+  pushed at db63b7d; the orrery records patch, pushed at 8e50aea. His
+  gallery maintenance run: 26 of 27, the one failure Cache in step for
+  Saturn, Uranus and Neptune, which is not this item's: the periods
+  reached the website's config in that run and the cache builder had
+  not run since (recorded on L-446). The live run: 2 of 2.
+- **Tony's look, 2026-10-15:** "perfect."
+- **Loose ends:** none. The Cache in step failure is L-446's, noted
+  there; the test file Tony saw committed is L-448.
+**Gap:** none. Closed 2026-10-15.
+**Ref:** L-428 (the lobby's way in); L-282 (the lobby); gallery
+`index.html` (`renderLobby`), `gallery/gallery_config.json`.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

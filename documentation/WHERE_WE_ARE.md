@@ -1,21 +1,21 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 15, 2026, evening: the front page's words.
-- Written at orrery 47d241b and gallery 9f8569e.
+Last updated: October 15, 2026, night: the front page's words done.
+- Written at orrery 464d872 and gallery db63b7d.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
 > - Done: L-444 (the missing periods): all eight fetched and confirmed.
 > - Ruled: L-445 (Earth's period) and L-446 (the daily run's order).
-> - Built: the front page says what the site is: L-447 (its words).
+> - Done: the front page says what the site is: L-447 (its words).
 >
 > **Do next:** *Build L-445 (Earth's period). Then finish Earth's
 > list, then the Sun's; the objects come after (your ruling, Oct 15).*
 >
 > **Needs you now:**
-> - *Run the two L-447 patches; look at the front page on your phone.*
+> - *Run patch_L447_3_close; one Daily Run clears Cache in step.*
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
