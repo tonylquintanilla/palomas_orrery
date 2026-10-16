@@ -46,7 +46,13 @@ WHAT IT CHECKS
        served period than its error (the check must not pass a period
        JPL disagrees with); an open orbit where a period is served; an
        answer with no elements row; JPL unreachable; a barycentre period
-       is asked around the barycentre.
+       is asked around the barycentre. (L-445) Earth's period, asked of
+       its record's target, the Earth-Moon barycentre (3), agrees with
+       JPL's recorded answer for 3; planted: a copy of the check that asks
+       the body's own id, 399, against an answer for 399 that would agree,
+       caught by the question it asks; a period confirmed when asked of
+       399 is due at once; the run records the target in the
+       confirmation.
     4. The data sheets (L-401): the Voyagers' figures are read. Planted:
        a moved Revised date with the figure unchanged (noted, not red); a
        changed figure (red, naming the row); a sheet that no longer
@@ -86,6 +92,10 @@ Module updated: October 14, 2026 with Anthropic's Claude Opus 5.5 (L-431,
 build 3, with L-395's move: moved into the orrery with the check; the
 period comparison, the data sheets, the run on the orrery's own files and
 the orrery's offline checker are tested, each by planted faults.)
+Module updated: October 15, 2026 with Anthropic's Claude Opus 5.5 (L-445,
+Earth's period: the period is asked of its record's target, shown with a
+planted copy of the check asking the body's own id, on JPL's answers for
+target 3 in documentation/worksheets/period_answers_L445.json.)
 """
 
 import datetime
@@ -103,6 +113,9 @@ import horizons_check as hc  # noqa: E402
 
 ANSWERS = os.path.join(HERE, "documentation", "worksheets",
                        "horizons_answers_L395.json")
+EARTH_ANSWERS = os.path.join(HERE, "documentation", "worksheets",
+                             "period_answers_L445.json")
+MODULE = os.path.join(HERE, "horizons_check.py")
 TODAY = datetime.date(2026, 10, 14)
 
 # The thirteen served entries' identity facts as the orrery's list held
@@ -212,9 +225,49 @@ def build_root(tmp, real_cache, inputs, served=None):
     return cache
 
 
+def earth_case(earth):
+    """(object, period block) for Earth with its period asked of the
+    Earth-Moon barycentre (L-445): its entry as L-444's live run wrote it,
+    the record moved to target 3 with JPL's recorded PR for 3 around the
+    Sun and that period's change in a year as its error."""
+    import export_objects as ex
+    entry = json.loads(json.dumps(earth["inputs"]["cache"]["Earth"]))
+    rec = entry["period"]
+    pair = earth["answers"]["period_pairs"][
+        "3|None|%s|@sun" % rec["epoch"]]["answer"]
+    rec.update({"target": "3",
+                "target_label": "the Earth-Moon center of mass",
+                "days": pair["p1"],
+                "error_days": abs(pair["p2"] - pair["p1"]),
+                "year_change_days": abs(pair["p2"] - pair["p1"]),
+                "elements": pair["elements"]})
+    block, _inputs = ex.period_block("Earth", "orbital", {"Earth": entry}, {})
+    obj = {"horizons_id": "399", "id_type": None, "horizons_name": "Earth",
+           "object_type": "orbital", "name": "Earth", "period": block}
+    return obj, entry
+
+
+def checker_with(old, new):
+    """A copy of horizons_check.py with one fault planted in it."""
+    import types
+    with open(MODULE, "r", encoding="utf-8") as handle:
+        src = handle.read().replace("\r\n", "\n")
+    if src.count(old) != 1:
+        raise SystemExit("ANCHOR FAIL for a planted fault: %r" % old[:60])
+    mod = types.ModuleType("horizons_check_planted")
+    mod.__file__ = MODULE
+    exec(compile(src.replace(old, new), MODULE + " [planted]", "exec"),
+         mod.__dict__)
+    return mod
+
+
 def main():
     with open(ANSWERS, "r", encoding="utf-8") as handle:
         recorded = json.load(handle)
+    with open(EARTH_ANSWERS, "r", encoding="utf-8") as handle:
+        earth = json.load(handle)
+    earth_answers = dict((u, v["answer"])
+                         for u, v in earth["check_answers"].items())
     answers = recorded["answers"]
     inputs = recorded["inputs"]
     real_cache = inputs["cache"]
@@ -325,6 +378,54 @@ def main():
                             recorded_fetch(answers))
         t.check("CENTER='@0'" in (r["query"] or ""),
                 "a barycentre period is asked around the barycentre")
+
+        # L-445: Earth's period is the Earth-Moon barycentre's. The fetch
+        # holds a recorded JPL answer for 3 and a planted one for 399 that
+        # would agree too, so only the question asked tells them apart.
+        e_obj, _e_entry = earth_case(earth)
+        e_fetch = recorded_fetch(earth_answers)
+        r = hc.check_period("earth", e_obj, e_obj["period"], e_fetch)
+        t.check(r["status"] == "agrees" and "COMMAND='3'" in (r["query"] or "")
+                and r.get("target") == "3",
+                "Earth's period, asked of its record's target 3 around the "
+                "Sun, agrees: JPL's PR %s days, served %s"
+                % (r["jpl_days"], e_obj["period"]["days"]["text"]))
+        wrong = checker_with(
+            '    target = period.get("target") or obj.get("horizons_id")\n',
+            '    target = obj.get("horizons_id")\n')
+        r = wrong.check_period("earth", e_obj, e_obj["period"], e_fetch)
+        t.check("COMMAND='3'" not in (r["query"] or ""),
+                "planted: the check asking the body's own id, 399, while the "
+                "record names 3 -- caught: it asked %s"
+                % ((r["query"] or "").split("&")[1:2] or ["nothing"])[0])
+        held = {"horizons_id": "399", "period": {
+            "confirmed": "2026-10-15", "center": "@sun",
+            "epoch": e_obj["period"]["record"]["epoch"],
+            "days": e_obj["period"]["record"]["days"]}}
+        pstate, pdetail = hc.period_state(e_obj["period"], held, TODAY)
+        t.check(pstate == "changed" and "target" in pdetail,
+                "a period confirmed when asked of 399 is due at once once its "
+                "target is 3: %s" % pdetail)
+        tmp_e = tempfile.mkdtemp(prefix="horizons_check_earth_")
+        try:
+            build_root(tmp_e, real_cache, inputs)
+            cpath = os.path.join(tmp_e, "data", "osculating_cache.json")
+            ecache = hc.load_json(cpath)
+            ecache["Earth"] = _e_entry
+            with open(cpath, "w") as handle:
+                json.dump(ecache, handle)
+            both = dict(answers)
+            both.update(earth_answers)
+            code, out = hc.run(tmp_e, recorded_fetch(both), TODAY, pause=0,
+                               echo=quiet)
+            conf = hc.load_confirmations(os.path.join(tmp_e, hc.CONFIRMATIONS))
+            ep = conf["objects"]["earth"].get("period") or {}
+            t.check(code == 0 and ep.get("target") == "3"
+                    and "COMMAND='3'" in (ep.get("query") or ""),
+                    "the run confirms Earth's period and records its target "
+                    "3 and the query (%s)" % out.get("verdict"))
+        finally:
+            shutil.rmtree(tmp_e, ignore_errors=True)
 
         print("4. The data sheets")
         for ident in ("-31", "-32"):

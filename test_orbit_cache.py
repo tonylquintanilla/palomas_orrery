@@ -12,8 +12,18 @@ This module tests the orbit data manager's caching functionality including:
 
 Run this module periodically to ensure cache functionality remains robust.
 
+Its fixture files are written into a temporary folder, made when the
+tests start and removed when they finish, so nothing is left in the
+repository (L-448). Until 2026-10-15 they went to test_output/, and
+test_output/test_orbit_paths.json, which git tracked, was rewritten on
+every maintenance run.
+
 Role: devtool
 Domain: dev_tools
+
+Module updated: October 15, 2026 with Anthropic's Claude Opus 5.5 (L-448:
+the fixture is written into a temporary folder, removed when the tests
+finish, instead of test_output/ in the repository.)
 """
 import json
 import os
@@ -30,15 +40,20 @@ import sys
 
 class TestOrbitCache(unittest.TestCase):
     """Test suite for orbit data caching functionality"""
-    
+
+    @classmethod
+    def setUpClass(cls):
+        # L-448: a temporary folder outside the repository, removed in
+        # tearDownClass, so a run leaves no file for git to see.
+        cls.shared_dir = tempfile.mkdtemp(prefix="test_orbit_cache_")
+
+    @classmethod
+    def tearDownClass(cls):
+        shutil.rmtree(cls.shared_dir, ignore_errors=True)
+
     def setUp(self):
         """Set up test environment before each test"""
-        # Create a test directory in the current project directory
-        self.test_dir = os.path.join(os.path.dirname(__file__), "test_output")
-        
-        # Create the directory if it doesn't exist
-        if not os.path.exists(self.test_dir):
-            os.makedirs(self.test_dir)
+        self.test_dir = self.shared_dir
             
         # Clear any existing test files
         for file in os.listdir(self.test_dir):
@@ -92,12 +107,10 @@ class TestOrbitCache(unittest.TestCase):
         
     def tearDown(self):
         """Clean up test environment after each test"""
-        # Don't remove the test directory - keep it for inspection
-        # Just clean up the module
+        # The temporary folder is removed once, after the last test
+        # (tearDownClass). Here, just clean up the module.
         if 'orbit_data_manager' in sys.modules:
             del sys.modules['orbit_data_manager']
-            
-        print(f"\nTest files saved in: {self.test_dir}")
             
     def test_save_and_load_valid_cache(self):
         """Test saving and loading valid cache data"""
@@ -248,27 +261,42 @@ def main():
     the tearDown print -- a path, which appears whether the tests passed
     or not. Running the suite here lets the result be read and stated.
     """
-    print("Test output will be created in: ./test_output/")
+    print("Test files are written into a temporary folder, removed when "
+          "the tests finish.")
     print("Running tests in isolated environment...")
 
-    test_output_dir = os.path.join(os.path.dirname(__file__), "test_output")
-    if not os.path.exists(test_output_dir):
-        os.makedirs(test_output_dir)
-        print("Created test output directory: %s" % test_output_dir)
-
+    here = os.path.dirname(os.path.abspath(__file__))
+    old_folder = os.path.join(here, "test_output")
+    before = set(os.listdir(here))
     suite = unittest.TestLoader().loadTestsFromTestCase(TestOrbitCache)
     result = unittest.TextTestRunner(verbosity=2).run(suite)
 
     total = result.testsRun
     bad = len(result.failures) + len(result.errors)
-    if bad:
+    # L-448: the run leaves nothing behind -- its temporary folder is gone
+    # and nothing new stands beside this file. Said with its evidence.
+    left = sorted(set(os.listdir(here)) - before)
+    shared = getattr(TestOrbitCache, "shared_dir", None)
+    if shared and os.path.exists(shared):
+        left.append(shared)
+    if left:
+        print("\nThe tests left files behind: %s" % ", ".join(left))
+    else:
+        print("\nNothing left behind: the temporary folder %s is removed and "
+              "no file was added beside this one%s."
+              % (shared, "" if not os.path.exists(old_folder)
+                 else " (test_output/ is still there from before L-448)"))
+    if bad or left:
         # Non-zero exit is what maintenance_run.py reads. unittest.main()
         # set it for free; forgetting it here would leave this row green
         # forever, which is the defect this patch exists to remove.
-        print("\n%d of %d orbit cache tests FAILED." % (bad, total))
+        print("\n%d of %d orbit cache tests FAILED%s." % (
+            bad, total, "; and files were left behind: %s" % ", ".join(left)
+            if left else ""))
         return 1
     print("\nAll %d orbit cache tests passed: cache loads, old formats "
-          "convert, corrupted entries are dropped." % total)
+          "convert, corrupted entries are dropped; nothing left behind."
+          % total)
     return 0
 
 

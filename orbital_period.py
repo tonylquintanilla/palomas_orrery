@@ -32,6 +32,9 @@ Key functions:
     drawing_orbit() - the elements to draw, their centre, and their period
     period_for_computation() - the period a marker's date is worked out from
     osculating_centre_for_view() - the one home of the view-to-centre map
+    period_target() - the one home of whose period is asked (L-445)
+    record_target() - the id a saved period record was asked of
+    target_words() - "for <whose>, " when the period is another body's
     period_hover_lines() - the hover's period lines, <br>-joined
     period_panel_text() - one short line for the orbital parameters window
     report_exponent() - the Report test's place for an error
@@ -71,6 +74,14 @@ build 3, the website: print_place() is the one home of the place
 format_by_error prints to, unchanged in what it prints, and
 figures_by_error() counts the figures, so export_objects.py serves each
 period with the count the orrery's hover prints it to.)
+Module updated: October 15, 2026 with Anthropic's Claude Opus 5.5 (L-445,
+Earth's period: PERIOD_TARGETS, the one home of whose period a body's is
+(Earth's, around the Sun, is the Earth-Moon barycentre's, target 3).
+build_period_record asks the target, writes 'target' and 'target_label'
+into the record, does not compare the elements fetch's PR with another
+body's, and drops a previous record asked of another target. The hover
+and the parameters window say whose period it is; another body's
+elements are never drawn as this body's orbit.)
 """
 
 import math
@@ -106,6 +117,22 @@ VIEW_TO_OSCULATING_CENTRE = {
     'Patroclus-Menoetius Barycenter': '@20000617',
     'Earth-Moon Barycenter': '@3',
     'Earth': '@399',
+}
+
+# The body a period is ASKED OF, where that is not the body itself (L-445,
+# Tony's ruling of 2026-10-15: "Confirmed as recommended, the
+# barycenter."). The ONE home of this map; every other reader takes the
+# target from the period record, never from a second copy of this map.
+# Earth's centre circles the Earth-Moon barycentre once a month, so its
+# osculating period around the Sun swings through the month; the
+# barycentre's does not. JPL's answers for both, at the same minute, are
+# recorded in documentation/worksheets/period_fetch_answers_L445.json.
+# Earth's identity and position stay Earth's centre, 399. It applies only
+# to a period taken around the Sun (period_target), never around another
+# centre: Earth around the Earth-Moon barycentre ('Earth@3') stays 399.
+# A target here is a major body, asked with no id_type.
+PERIOD_TARGETS = {
+    '399': '3',
 }
 
 # What the hover calls each centre. Words, not values.
@@ -149,6 +176,36 @@ def centre_label(location, parent_name=None):
 
 def _is_heliocentric(location):
     return str(location or '').lower() in HELIOCENTRIC_FORMS
+
+
+def period_target(horizons_id, location):
+    """The Horizons id a body's period is asked of, around location: the
+    map's target for a period taken around the Sun (Earth's, '399' ->
+    '3'), else the body itself (L-445)."""
+    hid = str(horizons_id).strip()
+    if _is_heliocentric(location):
+        return PERIOD_TARGETS.get(hid, hid)
+    return hid
+
+
+def record_target(rec, asked_id):
+    """The id a period record was asked of: its 'target', or, for a record
+    saved before L-445, asked_id, the id its elements fetch asked, which
+    is what build_period_record asked the period of until then. None
+    when neither is known."""
+    rec = rec if isinstance(rec, dict) else {}
+    target = rec.get('target')
+    if target:
+        return str(target)
+    return str(asked_id) if asked_id not in (None, '') else None
+
+
+def target_words(rec):
+    """'for <whose>, ' when the period is another body's than the one
+    shown (Earth's is the Earth-Moon center of mass's), else ''. The
+    hover, the parameters window and the export all print from this."""
+    label = (rec or {}).get('target_label') if isinstance(rec, dict) else None
+    return 'for %s, ' % label if label else ''
 
 
 # ============================================================================
@@ -374,8 +431,25 @@ def build_period_record(horizons_id, id_type, date_str, location, previous=None,
     location at the same date. Where the chosen centre is that location,
     the two must agree, and the record says whether they did.
 
+    The period is asked of period_target(horizons_id, location) (L-445):
+    Earth's, around the Sun, of the Earth-Moon barycentre ('3'). The
+    record names it in 'target', and in 'target_label' when it is not the
+    body itself. Then the elements fetch's PR is another body's, so the
+    two are not compared and the record says why. A previous record
+    asked of another target is not this one's: its centre choice and
+    test are dropped and the two-centre test runs for the new target.
+
     Raises on a failed query; the caller keeps the previous record.
     """
+    body = str(horizons_id).strip()
+    target = period_target(body, location)
+    own = target == body
+    ask_type = id_type if own else None
+    if previous and record_target(previous, body) != target:
+        print('  [L-445 period] %s: the last period was asked of %s; now %s, '
+              'so the two-centre test runs again'
+              % (body, record_target(previous, body), target), flush=True)
+        previous = None
     test = None
     chosen = location
     if _is_heliocentric(location):
@@ -386,7 +460,7 @@ def build_period_record(horizons_id, id_type, date_str, location, previous=None,
         else:
             chosen = None
     if chosen is not None:
-        pair = query_period_pair(horizons_id, id_type, date_str, chosen)
+        pair = query_period_pair(target, ask_type, date_str, chosen)
         if _is_heliocentric(location):
             other = CENTRE_BARYCENTRE if chosen == CENTRE_SUN else CENTRE_SUN
             other_change = prev_test.get(other)
@@ -399,8 +473,8 @@ def build_period_record(horizons_id, id_type, date_str, location, previous=None,
             else:
                 test = prev_test
     if chosen is None:
-        sun = query_period_pair(horizons_id, id_type, date_str, CENTRE_SUN)
-        bary = query_period_pair(horizons_id, id_type, date_str, CENTRE_BARYCENTRE)
+        sun = query_period_pair(target, ask_type, date_str, CENTRE_SUN)
+        bary = query_period_pair(target, ask_type, date_str, CENTRE_BARYCENTRE)
         c_sun, c_bary = _change(sun), _change(bary)
         test = {CENTRE_SUN: c_sun, CENTRE_BARYCENTRE: c_bary,
                 'run': datetime.now().strftime('%Y-%m-%d')}
@@ -415,7 +489,14 @@ def build_period_record(horizons_id, id_type, date_str, location, previous=None,
     days = pair['p1']
     change = _change(pair)
     agrees = None
-    if elements_p_days is not None and days is not None and (
+    not_compared = None
+    if not own:
+        # L-445: the elements fetch asked the body, the period query the
+        # target, so their two PRs are two bodies' and are not compared.
+        not_compared = ('not compared: the elements fetch asked %s, the period '
+                        'query %s' % (body, target))
+        print('  [L-445 period] %s: %s' % (body, not_compared), flush=True)
+    elif elements_p_days is not None and days is not None and (
             chosen == location or (_is_heliocentric(chosen) and _is_heliocentric(location))):
         agrees = abs(elements_p_days - days) <= 1e-9 * abs(days)
         print('  [L-431 period] %s: the elements fetch gave PR %.10g d, the period '
@@ -424,8 +505,8 @@ def build_period_record(horizons_id, id_type, date_str, location, previous=None,
     sigma, sigma_status, sbdb_name = None, 'not a small body; SBDB not asked', None
     if days is None:
         sigma_status = 'open orbit; SBDB not asked'
-    elif _is_small_body(horizons_id, id_type):
-        search = sbdb_search_string(horizons_id, pair.get('targetname'))
+    elif _is_small_body(target, ask_type):
+        search = sbdb_search_string(target, pair.get('targetname'))
         sigma, sigma_status, sbdb_name = fetch_sbdb_period_sigma(search)
     errors = [x for x in (change, sigma) if x is not None]
     err = max(errors) if errors else None
@@ -452,7 +533,12 @@ def build_period_record(horizons_id, id_type, date_str, location, previous=None,
         'error_from': governs,
         'test': test,
         'horizons_targetname': pair.get('targetname'),
+        # L-445: the id the period was asked of, and its words when that
+        # is not the body itself (None when it is).
+        'target': target,
+        'target_label': None if own else centre_label(target),
         'agrees_with_elements_fetch': agrees,
+        'elements_fetch_not_compared': not_compared,
         # L-431, build 2: the elements around the chosen centre at the plot
         # date, so the drawing can be taken around the period's centre;
         # and the period the elements fetch itself gave, around its own
@@ -595,7 +681,9 @@ def period_hover_lines(resolved):
         return ('Orbital period: %s years (%s days)<br>'
                 'Typed value, not fetched from JPL.' % (years_s, days_s))
     rec = resolved['record']
-    where = 'Around %s, from JPL Horizons, fetched %s.' % (resolved['label'], rec.get('fetched'))
+    where = ('%saround %s, from JPL Horizons, fetched %s.'
+             % (target_words(rec), resolved['label'], rec.get('fetched')))
+    where = where[0].upper() + where[1:]
     if rec.get('days') is None:
         return 'Orbital period: none (open orbit)<br>' + where
     err = rec.get('error_days')
@@ -638,7 +726,8 @@ def period_panel_text(resolved):
     days_s = format_by_error(rec['days'], err)
     years_s = format_by_error(rec['days'] / D_PER_JULIAN_YEAR,
                               err / D_PER_JULIAN_YEAR if err else None)
-    return '%s days (%s yr), JPL, around %s' % (days_s, years_s, resolved['label'])
+    return '%s days (%s yr), JPL, %saround %s' % (days_s, years_s, target_words(rec),
+                                                  resolved['label'])
 
 
 # ============================================================================
@@ -852,6 +941,16 @@ def drawing_orbit(obj_name, center_object_name, params, cache=None,
         out['period'] = fetched
         return out
     el = rec.get('elements')
+    if rec.get('target_label'):
+        # L-445: the record's elements are its target's (Earth's record
+        # holds the Earth-Moon barycentre's), not this body's, so they are
+        # never drawn as its orbit. The drawing stays around its own
+        # centre, timed by the period its own elements fetch gave.
+        out['note'] = ('Drawn around %s; the period above is %saround %s.'
+                       % (out['label'], target_words(rec),
+                          centre_label(rec.get('center'), parent_name)))
+        el = None
+        allow_move = False
     if (allow_move and isinstance(el, dict)
             and _strip_osc(el.get('epoch')) == _strip_osc(params.get('epoch'))
             and _elements_usable(params) and _elements_usable(el)):
@@ -865,9 +964,10 @@ def drawing_orbit(obj_name, center_object_name, params, cache=None,
     # this date (a record saved before build 2): the drawing stays around
     # its own centre, and its markers use the period the elements fetch
     # gave around that centre, or the typed table, marked.
-    out['note'] = ('Drawn around %s; the period above is around %s.<br>'
-                   'Update the orbital elements to draw it around that center.'
-                   % (out['label'], centre_label(rec.get('center'), parent_name)))
+    if out['note'] is None:
+        out['note'] = ('Drawn around %s; the period above is around %s.<br>'
+                       'Update the orbital elements to draw it around that center.'
+                       % (out['label'], centre_label(rec.get('center'), parent_name)))
     own = rec.get('elements_fetch_days')
     if own is not None and _same_centre(rec.get('elements_fetch_center'), params_centre):
         out['period'] = _period(own, None, KIND_FETCHED, params_centre, None, parent_name)

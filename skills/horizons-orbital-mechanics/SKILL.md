@@ -6,9 +6,15 @@ fires_when: Horizons queries, centers, frames, osculating elements, encounters, 
 
 # Horizons and Orbital Mechanics Reference
 
-Read this file in 2 parts: lines 1-221, 222-330.
+Read this file in 2 parts: lines 1-233, 234-342.
 
-Skill version: 1.7 | 2026-10-15, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.8 | 2026-10-15, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 77245ea8. v1.8 (L-445) adds one bullet under A Period
+Depends on Its Centre: a body's period may be asked of another target
+than the body. Earth's, around the Sun, is asked of the Earth-Moon
+barycentre, target 3; the record carries the target, and every reader
+takes it from the record.
+Earlier: 1.7 | 2026-10-15, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ ffd6c36a. v1.7 (L-444) adds one bullet under Where the
 Check Lives, and What It Compares: period_fetch.py runs just before the
 check and fetches, with plotting's own call and save, the period of
@@ -24,16 +30,9 @@ period's own error, and re-reads each spacecraft's data sheet on the
 same 30-day cycle. It corrects the line under Small-Body Record Pinning
 that put the check in the website's Daily Run. It is the first version long enough
 for more than one read, so it opens with its read plan (L-418).
-Earlier: 1.5 | 2026-10-13, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 400a9615. v1.5 (L-431) corrects one bullet of 1.4, by
-Tony's ruling of 2026-10-13: an orbit drawn around the solar system's
-barycentre gets no comparison with the stored mean elements. 1.4 said
-the comparison stays Sun-centred; for a body as far out as Sedna that
-mostly measures the Sun's own wobble. A second version in one session, as interactive-exhibit 1.14
-was, because the ruling came after 1.4 was installed.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
 on 2026-10-12, 2026-10-13 and 2026-10-14 (L-431), and 2026-10-15
-(L-444).
+(L-444, L-445).
 
 ## Horizons Center Body Rules
 
@@ -135,6 +134,19 @@ documentation/DESIGN_L431_orbital_periods_rulings_20261011.md.
   centre the orrery gives them (`orbital_period.build_period_record`).
 - Horizons prints PR as 9.999E+99 for an open orbit; astroquery 0.4.11
   maps PR to `P`, in days.
+- A body's period may be asked of another TARGET than the body (L-445,
+  Tony's ruling of 2026-10-15: "Confirmed as recommended, the
+  barycenter."). Earth's centre (399) circles the Earth-Moon barycentre
+  once a month, so its period around the Sun swings through the month;
+  Earth's period is asked of the barycentre, Horizons target 3. Earth's
+  identity and position stay 399. The one home of the map is
+  `orbital_period.PERIOD_TARGETS`, applied only around the Sun (Earth
+  around the Earth-Moon barycentre stays 399). The record carries
+  `target`, and `target_label` when it is not the body; every reader --
+  the export, the period fetch, the Horizons check, the hover -- takes
+  it from the record, never from a second map. The elements fetch's PR
+  is then another body's and is not compared, and the record's elements
+  are the target's, never drawn as the body's orbit.
 
 ## The Drawn Orbit Follows the Period's Centre (L-431, build 2)
 

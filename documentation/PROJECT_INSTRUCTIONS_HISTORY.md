@@ -2806,6 +2806,47 @@ resident.
 (Moved down from the resident protocol on 2026-10-15 when
 v3.98 made a fourth entry.)
 
+v3.96 (October 14, 2026): No rule changed in this document. THREE
+skill bumps, one version each (L-431 build 3, with L-395's move):
+horizons-orbital-mechanics 1.5 -> 1.6, gallery-cache-builder 1.8 ->
+1.9, interactive-exhibit 1.14 -> 1.15. THE WEBSITE PRINTS THE ORRERY'S
+PERIOD, AND THE HORIZONS CHECK LIVES IN THE ORRERY.
+
+WHAT PROMPTED IT. Tony, 2026-10-13: "I've gotten away from the gallery
+work. What's our path back?" L-431's third build carries each body's
+period from the orrery's export to every room's hover, and draws an
+orbit around its period's centre. He asked the same day whether the
+Horizons check's move (L-395) should ride the build -- yes -- so the
+period comparison was written once, where the check now lives.
+
+WHAT CHANGED. horizons-orbital-mechanics gains Where the Check Lives,
+and What It Compares: a generator row of the orrery's maintenance run,
+asking JPL only what is due, comparing each fetched period with JPL's
+PR within its own error, and re-reading the spacecraft data sheets on
+the same 30-day cycle; its pinning line no longer puts the check in
+the website's Daily Run. gallery-cache-builder gains The Builder Reads
+the Period's Centre (the served "drawn_orbit" and check #D) and The
+Daily Run's Steps (three since the move). interactive-exhibit gains
+two provenance bullets: a body's period is the orrery's, printed as
+served in one of three forms and read from the config, so it reaches a
+visitor on the push; the orbit drawn around a period's centre is cache
+data and needs the builder. Each skill's oldest entry moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copies read
+horizons-orbital-mechanics 1.6, gallery-cache-builder 1.9 and
+interactive-exhibit 1.15 before work that fires them.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.93 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-15 when
+v3.99 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

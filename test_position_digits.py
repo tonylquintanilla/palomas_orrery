@@ -29,6 +29,7 @@ right finding, by name:
     the Voyagers' data-sheet figures dropped     SPACECRAFT DATA-SHEET FIGURE IGNORED
     the surface line dropped for a giant planet  SURFACE LINE DROPPED
     the small-body database named for a planet   DATABASE MENTIONED FOR A PLANET OR MOON
+    another body's period printed as the body's  TARGET WORDS DROPPED
 
 The last five go beyond the brief's six. The first two prove the static
 plot still asks for a small body's uncertainty and reads Horizons'
@@ -63,6 +64,10 @@ Module updated: October 12, 2026 with Anthropic's Claude Opus 5.5 (L-401,
 Tony's look: the surface line for every centre with a radius, and the
 period sentence's database clause for asteroids and comets only, each
 with a planted fault).
+Module updated: October 15, 2026 with Anthropic's Claude Opus 5.5 (L-445,
+Earth's period: a period asked of another body says whose it is, in the
+hover and the parameters window, and a body's own period does not; the
+fourteenth planted fault drops those words.)
 """
 import math
 import os
@@ -672,6 +677,31 @@ def check_period_sentence(findings, counts):
         elif want and not has:
             findings.append(('DATABASE REASON DROPPED',
                              'status %r: %s' % (status, text.replace('<br>', ' / '))))
+    # L-445: a period asked of another body says whose it is, in the hover
+    # and in the parameters window; a body's own period does not.
+    for label in ('the Earth-Moon center of mass', None):
+        rec = {'days': 365.2514, 'error_days': 0.0039, 'error_from': 'year_change',
+               'sbdb_sigma_days': None, 'sbdb_status': 'not a small body; SBDB not asked',
+               'fetched': '2026-10-15', 'target': '3' if label else '399',
+               'target_label': label}
+        resolved = {'kind': 'fetched', 'days': 365.2514, 'record': rec, 'label': 'the Sun'}
+        hover = orbital_period.period_hover_lines(resolved)
+        panel = orbital_period.period_panel_text(resolved)
+        counts['period'] = counts.get('period', 0) + 2
+        if label:
+            if ('<br>For %s, around the Sun, from JPL Horizons' % label) not in hover \
+                    or ('for %s, around the Sun' % label) not in panel:
+                findings.append(('TARGET WORDS DROPPED',
+                                 'a period asked of %s: %s | %s'
+                                 % (label, hover.replace('<br>', ' / '), panel)))
+        elif 'For ' in hover or ' for ' in panel:
+            findings.append(('TARGET WORDS FOR THE BODY ITSELF',
+                             "a body's own period: %s | %s"
+                             % (hover.replace('<br>', ' / '), panel)))
+        for line in hover.split('<br>'):
+            if len(line) >= 98:
+                findings.append(('PERIOD LINE TOO WIDE', '%d characters: %s'
+                                 % (len(line), line)))
 
 
 def run_checks(sky_source=None, orrery_source=None):
@@ -816,6 +846,13 @@ def _database_for_planets():
 
 
 @contextmanager
+def _target_words_dropped():
+    """L-445: Earth's period printed with no word of whose it is."""
+    with _patched(orbital_period, 'target_words', lambda rec: ''):
+        yield
+
+
+@contextmanager
 def _sheet_ignored():
     with _patched(pa, 'SPACECRAFT_SHEET_ROWS', {}):
         yield
@@ -866,6 +903,8 @@ PLANTS = [
      'SURFACE LINE DROPPED'),
     ('the small-body database named for a planet', _database_for_planets, {},
      'DATABASE MENTIONED FOR A PLANET OR MOON'),
+    ("a period asked of another body printed as the body's own", _target_words_dropped, {},
+     'TARGET WORDS DROPPED'),
 ]
 
 

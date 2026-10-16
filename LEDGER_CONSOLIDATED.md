@@ -452,6 +452,10 @@ L-413's order corrected: L-445 first), built on 45085c4.
 Module updated: October 15, 2026 with Anthropic's Claude Fable 5.1
 (coordination: L-446 takes in L-380 and L-388, item 2 of L-423; L-448
 rides L-445; the two briefs written), built on b4105c0.
+Module updated: October 15, 2026 with Anthropic's Claude Opus 5.5
+(L-445 built: Earth's period from the Earth-Moon barycentre, orrery and
+website; L-448 built with it; horizons-orbital-mechanics 1.8, protocol
+v3.99), built on 77245ea8.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -1216,9 +1220,14 @@ as an archive of the prioritization thinking -- no cleanup on close.
   test writes its fixture into a temporary folder, `.gitignore` gains
   `test_output/`, and the patch deletes the tracked file so the
   deletion is what Tony commits.
-**Gap:** stop tracking it: the test writes it into a folder git ignores
-(or a temporary folder), and the file leaves the repository in the same
-patch. Rides L-445's session.
+- **Built 2026-10-15** with L-445: `test_orbit_cache.py` writes its
+  fixture into a temporary folder it removes when the tests finish, and
+  fails, naming the file, if a run leaves anything beside it (shown
+  failing on a copy writing into `test_output/` again); `.gitignore`
+  gains `test_output/`; patch_L445_1 deletes
+  `test_output/test_orbit_paths.json`. A throwaway maintenance run's
+  FILES WRITTEN no longer names it.
+**Gap:** Tony's commit of the deletion (patch_L445_1); then DONE.
 **Ref:** `test_orbit_cache.py`; `.gitignore`; L-447.
 
 #### [L-445] Earth's orbital period from the Earth-Moon barycentre, not Earth's centre (orrery + website, periods)
@@ -1262,10 +1271,28 @@ patch. Rides L-445's session.
   map's, which is how Earth is re-fetched without plotting) and the
   planted faults. L-448 (the test file in the tracked tree) rides this
   session, Tony's ruling of 2026-10-15.
-**Gap:** a small build, its own session, from the brief: the target for
-Earth's period, the check asking the same target, the hover's words in
-the orrery and on the website, the planted faults and a live run; then
-the website look above. L-448 rides.
+- **Built 2026-10-15** (build session, Anthropic's Claude Opus 5.5, on
+  orrery 77245ea8 and gallery 95713f49; record:
+  `documentation/HANDOFF_L445_earth_period_build_20261015.md`).
+  JPL's PR for target 3 at Earth's record minute, read through the
+  chat's web-fetch tool, confirms Claude's reading: 365.2514 days
+  around the Sun, moving 0.0039 days in a year there against 2.52
+  around the solar system's barycentre, so the Sun stays the centre
+  and the period prints 1.00000 years (365.25 days). The answers are
+  recorded in `documentation/worksheets/period_answers_L445.json`.
+  One home for the map, `orbital_period.PERIOD_TARGETS` (399 -> 3),
+  applied only around the Sun, so 'Earth@3' stays 399; the record
+  carries `target` and `target_label`; the export, the period fetch,
+  the Horizons check and the hover read it from there. The period
+  fetch re-fetches Earth on the first run ("period asked of 399, now
+  3"). The drawn orbit stays Earth's own. Patches:
+  `patch_L445_1_earth_period_20261015.py` (orrery) and
+  `patch_L445_2_gallery_period_words_20261015.py` (gallery).
+  horizons-orbital-mechanics 1.8, protocol v3.99.
+**Gap:** Tony's live run (the Period fetch row names Earth; the
+Horizons check compares the new record with JPL the same run); his
+look at Earth's hover in the orrery and the words; the gallery patch,
+its run and the website look after the next Daily Run. L-448 rides.
 **Ref:** L-444; L-431; `orbital_period.py`; `period_fetch.py`;
 `horizons_check.py`; `export_objects.py`; `osculating_cache_manager.py`;
 skills/horizons-orbital-mechanics/SKILL.md, A Period Depends on Its

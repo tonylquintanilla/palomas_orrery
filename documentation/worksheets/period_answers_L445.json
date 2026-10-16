@@ -1,0 +1,152 @@
+{
+  "_comment": "Recorded answers and frozen inputs for L-445 (Earth's period from the Earth-Moon barycentre), used by test_period_fetch.py and test_horizons_check.py. Written 2026-10-15 with Anthropic's Claude Opus 5.5, built on orrery 77245ea87179455bb4794ba7ed8712b98350fdb7. The session could not reach JPL from its shell; it read JPL's answers for target 3 through the chat's web-fetch tool, and those rows are quoted verbatim under 'rows'. Each answer says where it came from. A query with no answer here is JPL not reached, so no test can pass on an answer nobody recorded. The first live run, on Tony's machine, is the real test.",
+  "built_on": "77245ea87179455bb4794ba7ed8712b98350fdb7",
+  "when": "2026-10-15T10:51:00",
+  "when_note": "The time the test passes as 'now'. fetch_osculating_elements adds 69 seconds (UTC to TDB) and writes it to the minute, which gives Earth's recorded epoch '2026-10-15 10:52'.",
+  "rows": {
+    "@sun 2461328.952777778": "2461328.952777778 = A.D. 2026-Oct-15 10:52:00.0000 TDB \n EC= 1.665700703570279E-02 QR= 9.833340533575802E-01 IN= 3.539628218831075E-03\n OM= 1.745713560440271E+02 W = 2.885065695535376E+02 Tp=  2461409.573837415781\n N = 9.856226074003173E-01 MA= 2.805380609884262E+02 TA= 2.786546695974959E+02\n A = 9.999909089638295E-01 AD= 1.016647764570079E+00 PR= 3.652513622323839E+02",
+    "@sun 2461694.202777778": "2461694.202777778 = A.D. 2027-Oct-15 16:52:00.0000 TDB \n EC= 1.668863920769168E-02 QR= 9.833093572682385E-01 IN= 3.677589048157778E-03\n OM= 1.748554194645079E+02 W = 2.881534183957392E+02 Tp=  2461774.760732847732\n N = 9.856121792512442E-01 MA= 2.806010983474699E+02 TA= 2.787144624486472E+02\n A = 9.999979624723669E-01 AD= 1.016686567676495E+00 PR= 3.652552267297335E+02",
+    "@0 2461328.952777778": "2461328.952777778 = A.D. 2026-Oct-15 10:52:00.0000 TDB \n EC= 2.043582435080134E-02 QR= 9.724693922643347E-01 IN= 5.096676041976203E-03\n OM= 2.484721313374610E+02 W = 2.284205939732351E+02 Tp=  2461422.299674326554\n N = 9.970770184903528E-01 MA= 2.669259547036272E+02 TA= 2.645913965336791E+02\n A = 9.927572041105303E-01 AD= 1.013045015956726E+00 PR= 3.610553581357900E+02",
+    "@0 2461694.202777778": "2461694.202777778 = A.D. 2027-Oct-15 16:52:00.0000 TDB \n EC= 1.984066745896993E-02 QR= 9.775894413934343E-01 IN= 3.765029169810863E-03\n OM= 2.231680619794394E+02 W = 2.465808252435118E+02 Tp=  2461781.020742829423\n N = 9.901558164403439E-01 MA= 2.740366869326973E+02 TA= 2.717653832517663E+02\n A = 9.973780883757609E-01 AD= 1.017166735358088E+00 PR= 3.635791397905601E+02"
+  },
+  "inputs": {
+    "cache": {
+      "Earth": {
+        "elements": {
+          "a": 1.000511185160326,
+          "e": 0.01702963707252433,
+          "i": 0.004028601336298406,
+          "omega": 281.0757590385103,
+          "Omega": 180.5234221305656,
+          "epoch": "2026-10-15 10:52 osc.",
+          "TP": 2461408.099997574,
+          "MA": 282.0515528445952,
+          "TA": 280.1349491120672
+        },
+        "metadata": {
+          "fetched": "2026-10-15T10:51:32.672197",
+          "source": "JPL Horizons",
+          "solution_date": "2026-10-15",
+          "horizons_id": "399",
+          "display_name": "Earth",
+          "refresh_interval_days": 30,
+          "center_body": "@sun"
+        },
+        "period": {
+          "days": 365.5364560333389,
+          "open_orbit": false,
+          "center": "@sun",
+          "epoch": "2026-10-15 10:52",
+          "fetched": "2026-10-15",
+          "source": "JPL Horizons PR (sidereal orbit period)",
+          "year_change_days": 0.7694187238463996,
+          "year_step_days": 365.25,
+          "sbdb_sigma_days": null,
+          "sbdb_status": "not a small body; SBDB not asked",
+          "sbdb_fullname": null,
+          "error_days": 0.7694187238463996,
+          "error_from": "year_change",
+          "test": {
+            "@sun": 0.7694187238463996,
+            "@0": 1.7602720248968922,
+            "run": "2026-10-15"
+          },
+          "horizons_targetname": "Earth (399)",
+          "agrees_with_elements_fetch": true,
+          "elements": {
+            "a": 1.000511185160326,
+            "e": 0.01702963707252433,
+            "i": 0.004028601336298406,
+            "omega": 281.0757590385103,
+            "Omega": 180.5234221305656,
+            "TP": 2461408.099997574,
+            "MA": 282.0515528445952,
+            "TA": 280.1349491120672,
+            "q": 0.9834728427900445,
+            "epoch": "2026-10-15 10:52 osc."
+          },
+          "elements_fetch_days": 365.5364560333389,
+          "elements_fetch_center": "@sun"
+        }
+      }
+    },
+    "cache_from": "data/osculating_cache.json at 77245ea8, Earth's entry as L-444's first live run wrote it: its period asked of 399, Earth's centre"
+  },
+  "answers": {
+    "elements": {
+      "399|None|2026-10-15 10:52|None": {
+        "answer": {
+          "a": 1.000511185160326,
+          "e": 0.01702963707252433,
+          "i": 0.004028601336298406,
+          "omega": 281.0757590385103,
+          "Omega": 180.5234221305656,
+          "TP": 2461408.099997574,
+          "MA": 282.0515528445952,
+          "TA": 280.1349491120672,
+          "P_days": 365.5364560333389,
+          "center_body": "@sun",
+          "solution_date": "2026-10-15"
+        },
+        "from": "recorded: Earth's elements, metadata.center_body, metadata.solution_date and period.elements_fetch_days in data/osculating_cache.json at 77245ea8, as plotting's first live fetch of 2026-10-15 wrote them (L-444)"
+      }
+    },
+    "period_pairs": {
+      "3|None|2026-10-15 10:52|@sun": {
+        "answer": {
+          "p1": 365.2513622323839,
+          "p2": 365.2552267297335,
+          "step_days": 365.25,
+          "e": 0.01665700703570279,
+          "targetname": "Earth-Moon Barycenter (3)",
+          "elements": {
+            "a": 0.9999909089638295,
+            "e": 0.01665700703570279,
+            "i": 0.003539628218831075,
+            "omega": 288.5065695535376,
+            "Omega": 174.5713560440271,
+            "TP": 2461409.573837416,
+            "MA": 280.5380609884262,
+            "TA": 278.6546695974959,
+            "q": 0.9833340533575802,
+            "epoch": "2026-10-15 10:52 osc."
+          }
+        },
+        "from": "JPL's own: Horizons' elements rows for target 3 around @sun at 2026-10-15 10:52 TDB (JD 2461328.952777778) and a Julian year later (JD 2461694.202777778), read 2026-10-15 through the chat's web-fetch tool and quoted verbatim under 'rows'. p1, p2, e and the elements are those rows' PR, EC and elements under the orbit cache's names; targetname is astroquery's form of JPL's line 'Target body name: Earth-Moon Barycenter (3)'."
+      },
+      "3|None|2026-10-15 10:52|@0": {
+        "answer": {
+          "p1": 361.05535813579,
+          "p2": 363.5791397905601,
+          "step_days": 365.25,
+          "e": 0.02043582435080134,
+          "targetname": "Earth-Moon Barycenter (3)",
+          "elements": {
+            "a": 0.9927572041105303,
+            "e": 0.02043582435080134,
+            "i": 0.005096676041976203,
+            "omega": 228.4205939732351,
+            "Omega": 248.472131337461,
+            "TP": 2461422.2996743266,
+            "MA": 266.9259547036272,
+            "TA": 264.5913965336791,
+            "q": 0.9724693922643347,
+            "epoch": "2026-10-15 10:52 osc."
+          }
+        },
+        "from": "JPL's own: Horizons' elements rows for target 3 around @0 at 2026-10-15 10:52 TDB (JD 2461328.952777778) and a Julian year later (JD 2461694.202777778), read 2026-10-15 through the chat's web-fetch tool and quoted verbatim under 'rows'. p1, p2, e and the elements are those rows' PR, EC and elements under the orbit cache's names; targetname is astroquery's form of JPL's line 'Target body name: Earth-Moon Barycenter (3)'."
+      }
+    },
+    "sbdb": {}
+  },
+  "check_answers": {
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='3'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461328.952777778'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'": {
+      "answer": "API VERSION: 1.2\nAPI SOURCE: NASA/JPL Horizons API\n\n*******************************************************************************\nTarget body name: Earth-Moon Barycenter (3)       {source: DE441}\nCenter body name: Sun (10)                        {source: DE441}\n*******************************************************************************\n$$SOE\n2461328.952777778 = A.D. 2026-Oct-15 10:52:00.0000 TDB \n EC= 1.665700703570279E-02 QR= 9.833340533575802E-01 IN= 3.539628218831075E-03\n OM= 1.745713560440271E+02 W = 2.885065695535376E+02 Tp=  2461409.573837415781\n N = 9.856226074003173E-01 MA= 2.805380609884262E+02 TA= 2.786546695974959E+02\n A = 9.999909089638295E-01 AD= 1.016647764570079E+00 PR= 3.652513622323839E+02\n$$EOE\n*******************************************************************************\n",
+      "from": "JPL's own elements row (the 'rows' entry for @sun at JD 2461328.952777778); the lines around it are written in JPL's format by this build"
+    },
+    "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='399'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461328.952777778'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'": {
+      "answer": "API VERSION: 1.2\nAPI SOURCE: NASA/JPL Horizons API\n\n*******************************************************************************\nTarget body name: Earth (399)                     {source: DE441}\nCenter body name: Sun (10)                        {source: DE441}\n*******************************************************************************\n$$SOE\n2461328.952777778 = A.D. 2026-Oct-15 10:52:00.0000 TDB \n EC= 1.665700703570279E-02 QR= 9.833340533575802E-01 IN= 3.539628218831075E-03\n OM= 1.745713560440271E+02 W = 2.885065695535376E+02 Tp=  2461409.573837415781\n N = 9.856226074003173E-01 MA= 2.805380609884262E+02 TA= 2.786546695974959E+02\n A = 9.999909089638295E-01 AD= 1.016647764570079E+00 PR= 3.652513622323839E+02\n$$EOE\n*******************************************************************************\n",
+      "from": "PLANTED, not JPL's: target 3's row under Earth's name, so a check that asks 399 instead of 3 would agree with the served period. Only the question asked tells the two apart; test_horizons_check.py requires COMMAND='3'."
+    }
+  }
+}

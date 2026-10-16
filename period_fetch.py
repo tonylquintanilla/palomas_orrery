@@ -26,8 +26,13 @@ WHAT IT ASKS, AND WHEN
     website serves) whose period, read through export_objects.period_block
     exactly as the Horizons check and the export read it, is not "fetched"
     -- a typed period, none, or no cache entry at all, which is how a new
-    object looks the first time this runs. It prints that set by name
-    before asking anything.
+    object looks the first time this runs -- or whose fetched period was
+    asked of another body than orbital_period.period_target now names
+    (L-445): "period asked of 399, now 3" is how Earth looks the first
+    time this runs after its period moved to the Earth-Moon barycentre,
+    and how any later change of target reaches the website without
+    anyone plotting. It prints that set by name, with why, before asking
+    anything.
 
     Two kinds of served object are named and not fetched, for the reason
     plotting does not fetch them either:
@@ -60,10 +65,13 @@ THE FETCH IS PLOTTING'S
     elements even when the period query failed; this step saves nothing
     for a body unless its period came back, so the cache moves only on a
     whole answer and the body stays missing, to be asked again next run.
+    A period that comes back asked of the old target is the last one,
+    kept because the new query failed, and counts as not come back
+    (L-445).
 
     After each save the cache is read back through export_objects and the
-    body must now read "fetched", or the run fails naming it: the success
-    line carries its evidence.
+    body must now read "fetched", asked of the target the map names, or
+    the run fails naming it: the success line carries its evidence.
 
 WHAT MAKES IT FAIL
 
@@ -104,6 +112,10 @@ Domain: dev_tools
 
 Module created: October 15, 2026 with Anthropic's Claude Opus 5.5
 (L-444, the missing periods).
+Module updated: October 15, 2026 with Anthropic's Claude Opus 5.5 (L-445,
+Earth's period: a fetched period asked of another target than the map
+now names is missing too, named with the reason, and the read-back
+requires the new target.)
 """
 
 import ast
@@ -181,6 +193,17 @@ def plotting_skips(entry):
     return None
 
 
+def wanted_target(entry, cache):
+    """The id this entry's period should be asked of now, by
+    orbital_period's one map, around the centre its elements are fetched
+    around (L-445): Earth's, around the Sun, is '3'."""
+    import orbital_period
+    meta = ((cache.get(entry["name"]) or {}).get("metadata") or {}
+            if isinstance(cache, dict) else {})
+    return orbital_period.period_target(entry["horizons_id"],
+                                        meta.get("center_body", "@sun"))
+
+
 def classify(entries, cache, typed):
     """(missing, have, skipped): missing is [(entry, why)], have is
     [entry], skipped is [(entry, why)]."""
@@ -190,6 +213,13 @@ def classify(entries, cache, typed):
             entry["name"], entry["object_type"], cache, typed)
         if block is None:
             skipped.append((entry, "orbits nothing here, so no period"))
+            continue
+        want = wanted_target(entry, cache)
+        if block.get("kind") == "fetched" and block.get("target") != want:
+            # L-445: fetched, but asked of another body than the map now
+            # names, so it is re-fetched as missing.
+            missing.append((entry, "period asked of %s, now %s"
+                            % (block.get("target"), want)))
             continue
         if block.get("kind") == "fetched":
             have.append(entry)
@@ -233,6 +263,14 @@ def plotting_save(entry, fetched):
     ocm.save_cache(cache)
 
 
+def fetched_target(fetched, horizons_id):
+    """The id a fetched entry's period was asked of (L-445)."""
+    import orbital_period
+    return orbital_period.record_target(
+        fetched.get("period"),
+        (fetched.get("metadata") or {}).get("horizons_id", horizons_id))
+
+
 def complete(fetched):
     """True when the fetch returned the elements and a period record with
     a centre and days, the parts the export refuses to go without."""
@@ -248,7 +286,10 @@ def _period_words(block):
     days = (block or {}).get("days") or {}
     if (block or {}).get("open_orbit"):
         return "an open orbit (JPL gives no period)"
-    return "%s d around %s" % (days.get("text"), block.get("center_label"))
+    whose = ("%s's period, " % block["target_label"]
+             if block.get("target_label") else "")
+    return "%s%s d around %s" % (whose, days.get("text"),
+                                 block.get("center_label"))
 
 
 # ------------------------------------------------------------- the run
@@ -302,6 +343,14 @@ def run(root, when, fetch=plotting_fetch, save=plotting_save, echo=print):
         except Exception as exc:          # any failure is JPL not reached
             echo("  could not reach JPL: %s" % exc)
             got = None
+        if complete(got) and fetched_target(
+                got, entry["horizons_id"]) != wanted_target(entry, cache):
+            # L-445: the period query failed and the fetch kept the last
+            # period, asked of the old target. Not a new answer.
+            echo("  %s: the period came back asked of %s, the last one "
+                 "kept" % (name, fetched_target(
+                     got, entry["horizons_id"])))
+            got = {"elements": got.get("elements")}
         if not complete(got):
             part = ("its elements" if not isinstance(got, dict)
                     else "its period")
@@ -322,6 +371,13 @@ def run(root, when, fetch=plotting_fetch, save=plotting_save, echo=print):
         if not block or block.get("kind") != "fetched":
             problems.append("%s: saved but reads back as %s, not fetched"
                             % (name, (block or {}).get("kind")))
+            echo("  FAIL: %s" % problems[-1])
+            continue
+        if block.get("target") != wanted_target(entry, cache_now):
+            problems.append("%s: saved but its period reads back as asked "
+                            "of %s, not %s" % (name, block.get("target"),
+                                               wanted_target(entry,
+                                                             cache_now)))
             echo("  FAIL: %s" % problems[-1])
             continue
         fetched.append(name)

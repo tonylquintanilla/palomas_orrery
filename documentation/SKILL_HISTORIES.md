@@ -819,3 +819,12 @@ barycentre is, found from the body's two element sets at one date, a
 marker's date comes from the period of the drawn elements, and a date
 stepped from a period carries that period's error.
 (Moved down 2026-10-15, when 1.7 made a fourth entry.)
+
+Earlier: 1.5 | 2026-10-13, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 400a9615. v1.5 (L-431) corrects one bullet of 1.4, by
+Tony's ruling of 2026-10-13: an orbit drawn around the solar system's
+barycentre gets no comparison with the stored mean elements. 1.4 said
+the comparison stays Sun-centred; for a body as far out as Sedna that
+mostly measures the Sun's own wobble. A second version in one session, as interactive-exhibit 1.14
+was, because the ruling came after 1.4 was installed.
+(Moved down 2026-10-15, when 1.8 made a fourth entry.)

@@ -53,7 +53,10 @@ WHAT IS ASKED, AND WHEN
     from JPL, one elements query at the period's own date and around its
     own centre -- the question the orrery asked when it fetched it --
     and JPL's PR must lie within the period's own error of the period
-    the website prints. A typed period, or none, is not compared: the
+    the website prints. It is asked of the period's own target, as the
+    export names it (L-445): Earth's period is the Earth-Moon
+    barycentre's, so the check asks Horizons target 3, not Earth's 399,
+    and a change of target makes the period due at once. A typed period, or none, is not compared: the
     website marks it as not from JPL, and this names it.
 
     DATA SHEETS (L-401, ruled 2026-10-12): every spacecraft in the list
@@ -81,7 +84,8 @@ WHAT IT WRITES
     data/horizons_confirmations.json: for each keyed entry, the date its
     identity was confirmed and what was confirmed, with JPL's name and
     type and the queries asked; under "period" the date its period was
-    confirmed, the period, its centre and date, JPL's PR and the query.
+    confirmed, the period, its centre, its target (L-445) and date,
+    JPL's PR and the query.
     The thirteen identity confirmations of 2026-10-10 were carried over
     from the website's record by the move, with their dates and queries,
     so the move asked JPL nothing.
@@ -122,6 +126,9 @@ Module updated: October 14, 2026 with Anthropic's Claude Opus 5.5 (L-431,
 build 3, with L-395's move: moved into the orrery's maintenance run
 beside the objects export; it compares each fetched period with JPL's PR
 and re-reads the spacecraft data sheets on the same 30-day cycle.)
+Module updated: October 15, 2026 with Anthropic's Claude Opus 5.5 (L-445,
+Earth's period: the period is asked of the target its record names, and
+the confirmation records that target.)
 """
 
 import datetime
@@ -493,8 +500,14 @@ def check_period(key, obj, period, fetch):
                                "the period's date cannot be read (%s)"
                                % exc, "")
         return out
-    url = period_url(obj.get("horizons_id"), obj.get("id_type"),
+    # L-445: the period is asked of its record's target (Earth's is the
+    # Earth-Moon barycentre, "3"), with no id_type when that is another
+    # body; the body's own id only for a block that names none.
+    target = period.get("target") or obj.get("horizons_id")
+    own = str(target) == str(obj.get("horizons_id"))
+    url = period_url(target, obj.get("id_type") if own else None,
                      period.get("center"), jd)
+    out["target"] = str(target)
     out["query"] = url
     try:
         answer = fetch(url)
@@ -689,9 +702,14 @@ def period_state(period, record, today):
     if not held or not held.get("confirmed"):
         return "never", "period never confirmed"
     rec = period.get("record") or {}
+    # L-445: a confirmation written before the target was recorded was
+    # asked of the body's own id, which the identity record keeps.
+    held = dict(held)
+    held.setdefault("target", (record or {}).get("horizons_id"))
     moved = [f for f, now in (("center", period.get("center")),
                               ("epoch", rec.get("epoch")),
-                              ("days", rec.get("days")))
+                              ("days", rec.get("days")),
+                              ("target", period.get("target")))
              if held.get(f) != now]
     if moved:
         return "changed", "period changed since its confirmation of %s: %s" % (
@@ -922,6 +940,7 @@ def run(root, fetch, today, pause=PAUSE_SECONDS, check_all=False,
             record["period"] = {
                 "confirmed": today.isoformat(),
                 "center": obj["period"].get("center"),
+                "target": result.get("target"),
                 "epoch": rec.get("epoch"),
                 "days": rec.get("days"),
                 "error_days": rec.get("error_days"),
@@ -951,6 +970,9 @@ def run(root, fetch, today, pause=PAUSE_SECONDS, check_all=False,
                                          if result["jpl_days"] is None
                                          else "%.10g days"
                                          % result["jpl_days"])
+            if result.get("target") and result["target"] != str(
+                    objects[key].get("horizons_id")):
+                extra += " of %s" % result["target"]
         elif kind == "sheet" and word == "agrees":
             extra = " -- Revised %s" % result["sheet"]["revised"]
         elif result.get("error"):

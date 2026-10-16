@@ -1,20 +1,20 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 15, 2026, late night: the two briefs written.
-- Written at orrery b4105c0 and gallery 95713f4.
+Last updated: October 15, 2026, late night: L-445 (Earth's period) built.
+- Written at orrery 77245ea and gallery 95713f4.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Briefs written for L-445 (Earth's period) and L-446 (the Daily
->   Run's order); L-446 takes in L-380 and L-388 (the export pull).
+> - L-445 (Earth's period) built: the Earth-Moon barycentre's period,
+>   1.00000 years (365.25 days); L-448 (the test file) rode it.
 >
-> **Do next:** *Start the L-445 (Earth's period) build session from
-> its brief; L-446 (the Daily Run's order) from its brief, either order.*
+> **Do next:** *Run patch_L445_1 and the maintenance run; look at
+> Earth's hover; then patch_L445_2 in the gallery.*
 >
 > **Needs you now:**
-> - *Run patch_L446_1, then the maintenance run; commit; push.*
+> - *The words of Earth's hover, at your look: keep or change.*
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
@@ -36,8 +36,8 @@ Last updated: October 15, 2026, late night: the two briefs written.
                the orrery's run; the periods passed live, Oct 14.
   8a.  [done]  The run fetches each served body's missing period from
                JPL: L-444 (the missing periods), all eight, Oct 15.
-  8b.  [next]  *L-445 (Earth's period): from the Earth-Moon barycentre,
-               not Earth's centre.*
+  8b.  [NOW]   *L-445 (Earth's period): built; your run and look next.*
+               << moved this session
   8c.  [next]  L-446 (the Daily Run's order): the website pulls the
                orrery's data before it builds; takes in L-380, L-388.
   9.   [next]  The website's checks, in the order you confirmed:
@@ -55,7 +55,7 @@ Last updated: October 15, 2026, late night: the two briefs written.
  15.   [goal]  The website does what the desktop orrery does, with a date
                to choose, within the range the data covers.
 
-## Settled
+## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings. A line leaves after a few weeks, once it is habit.
 - L-401 build 3 parked: fly-to buttons, parameters window when next
@@ -84,17 +84,17 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
   the objects work. (Oct 14)
 - Scattered dots are placed by the orrery and stored for the website;
   a shape that is a formula is worked out on each side. (Oct 11)
-- Orbital periods: JPL's own, every body, orrery and website; the
-  centre that moves less in a year, digits by the larger error, the
-  drawn orbit and markers alike; typed table last, marked. (Oct 11)
+- Orbital periods: JPL's own, every body, both sides; the steadier
+  centre, digits by the larger error, drawn orbit and markers alike;
+  typed last, marked; Earth's from the Earth-Moon barycentre. (Oct 11, 15)
 - The order: finish Earth, then the Sun (fuzzy boundaries inside
   it), then the objects; no batch of objects first. (Oct 15)
 
-## Signals
+## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
 - Last cache build: 20261016T021807Z, ok, no retry (gallery 95713f4).
-- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, 45085c4).
+- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, 77245ea).
   Whole tree: 280: orrery 116, Earth System 149, stars 13, utilities 2.
 - This page's date and the ledger's newest stamp: both Oct 15. Agree.
 
@@ -118,11 +118,11 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- *Next: `HANDOFF_L445_earth_period_brief_20261015.md` and
-  `HANDOFF_L446_daily_run_order_brief_20261015.md`, the two briefs*
+- *Now: `HANDOFF_L445_earth_period_build_20261015.md`, this build;
+  next: `HANDOFF_L446_daily_run_order_brief_20261015.md`*
 - The distance digits: `DESIGN_L401_distance_digits_rulings_20261011.md`;
   build 1 `HANDOFF_L401_distance_build1_20261012.md`; build 3 parked: L-401.
-- Your notes of Oct 14: `WHERE_WE_ARE_10-14-26_2250_run_record.md`
+- Your notes of Oct 15: `WHERE_WE_ARE_10-15-26_2236_run_record.md`
 - L-421 (typed facts, inner Oort): `MANIFEST_L421_typed_facts_20261006.md`, `HANDOFF_L421_*`
 - Your six rulings of Oct 12: `DESIGN_rulings_20261012.md`; briefs for L-425,
   L-424 with L-426; the dashboard: `HANDOFF_L440_dashboard_labels_20261013.md`

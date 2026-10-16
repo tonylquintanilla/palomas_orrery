@@ -66,6 +66,29 @@ WHAT IT CHECKS, AND THE FAULT PLANTED FOR EACH
        (PLOTTED_TYPES, SKIP_NAMES) equal the ones in palomas_orrery.py, at
        both sites. Planted: a type removed from palomas_orrery.py's copy;
        and a source in which the filter cannot be found.
+    6. (L-445) Earth's period moves to the Earth-Moon barycentre. On a list
+       of the Sun and Earth, with Earth's entry as L-444's live run wrote
+       it (its period asked of 399), and JPL's answers for target 3 in
+       documentation/worksheets/period_answers_L445.json:
+       - Earth is named missing, "period asked of 399, now 3", before any
+         question; re-fetched with plotting's call; its period asked of 3
+         alone, around the centre JPL's own answers make steadier, with a
+         fresh two-centre test; the record names target 3 and its words,
+         and says why the elements fetch's PR, Earth's own, was not
+         compared; Earth's elements stay Earth's; the next run asks
+         nothing. Planted in period_fetch.py: the target not compared.
+         Planted in orbital_period.py: the period asked of the body; the
+         elements fetch's PR compared with another body's; the last
+         record's centre choice kept across the change of target.
+       - The drawn orbit stays Earth's, timed by the record's period; with
+         the record around another centre, the barycentre's elements are
+         still never drawn as Earth's. Planted: that guard removed.
+       - Earth around the Earth-Moon barycentre is still asked of 399.
+         Planted: the map applied around any centre.
+       - A save that leaves the old target is FAIL; JPL refusing the query
+         for 3 is UNREACHABLE and the last period, kept by the fetch, is
+         not saved as a new one. Planted: each of those two checks
+         removed.
 
 RUN COMMAND
 
@@ -81,6 +104,10 @@ Domain: dev_tools
 
 Module created: October 15, 2026 with Anthropic's Claude Opus 5.5
 (L-444, the missing periods).
+Module updated: October 15, 2026 with Anthropic's Claude Opus 5.5 (L-445,
+Earth's period: part 6, Earth re-fetched from the Earth-Moon barycentre,
+with eight planted faults, five of them in a copy of orbital_period.py;
+the recorded records of part 2 carry the three fields L-445 adds.)
 """
 
 import copy
@@ -106,7 +133,10 @@ import osculating_cache_manager as ocm   # noqa: E402
 
 ANSWERS = os.path.join(HERE, "documentation", "worksheets",
                        "period_fetch_answers_L444.json")
+EARTH_ANSWERS = os.path.join(HERE, "documentation", "worksheets",
+                             "period_answers_L445.json")
 MODULE = os.path.join(HERE, "period_fetch.py")
+OP_MODULE = os.path.join(HERE, "orbital_period.py")
 ORRERY = os.path.join(HERE, "palomas_orrery.py")
 
 LIST_ENTRIES = [
@@ -122,6 +152,14 @@ LIST_ENTRIES = [
     # No id_type written: plotting's default 'smallbody' must be used.
     {"name": "Encke", "key": "encke", "id": "90000091",
      "horizons_name": "2P/Encke", "object_type": "orbital"},
+]
+
+# L-445: Earth alone beside the Sun, so its scenarios ask about nothing
+# else.
+EARTH_ENTRIES = [
+    LIST_ENTRIES[0],
+    {"name": "Earth", "key": "earth", "id": "399", "id_type": None,
+     "horizons_name": "Earth", "object_type": "orbital"},
 ]
 
 # Fields a fresh fetch writes differently from the recorded one, and why.
@@ -171,13 +209,16 @@ class World(object):
     replaced by the recorded answers, and every call of
     fetch_osculating_elements recorded."""
 
-    def __init__(self, answers, cache, refuse=()):
+    def __init__(self, answers, cache, refuse=(), entries=None, op=None):
         self.answers = answers["answers"]
         self.tmp = tempfile.mkdtemp(prefix="period_fetch_test_")
         os.makedirs(os.path.join(self.tmp, "data"))
         with open(os.path.join(self.tmp, "celestial_objects.py"), "w",
                   encoding="utf-8", newline="") as handle:
-            handle.write(fixture_list(LIST_ENTRIES))
+            handle.write(fixture_list(entries or LIST_ENTRIES))
+        # L-445: a copy of orbital_period.py with a fault planted in it
+        # stands in for the real module while this world is open.
+        self.op = op
         self.write_cache(cache)
         self.refuse = set(refuse)
         self.calls = []
@@ -195,6 +236,9 @@ class World(object):
 
     def __enter__(self):
         data = Path(self.tmp) / "data"
+        op = self.op or orbital_period
+        self.real_op = sys.modules.get("orbital_period")
+        sys.modules["orbital_period"] = op
         self.saved = {
             (ocm, "CACHE_FILE"): ocm.CACHE_FILE,
             (ocm, "BACKUP_FILE"): ocm.BACKUP_FILE,
@@ -203,10 +247,8 @@ class World(object):
             (ocm, "fetch_osculating_elements"): ocm.fetch_osculating_elements,
             (orbit_data_manager, "query_horizons_elements"):
                 orbit_data_manager.query_horizons_elements,
-            (orbital_period, "query_period_pair"):
-                orbital_period.query_period_pair,
-            (orbital_period, "fetch_sbdb_period_sigma"):
-                orbital_period.fetch_sbdb_period_sigma,
+            (op, "query_period_pair"): op.query_period_pair,
+            (op, "fetch_sbdb_period_sigma"): op.fetch_sbdb_period_sigma,
         }
         ocm.CACHE_FILE = data / "osculating_cache.json"
         ocm.BACKUP_FILE = data / "osculating_cache_backup.json"
@@ -252,13 +294,21 @@ class World(object):
 
         ocm.fetch_osculating_elements = spy
         orbit_data_manager.query_horizons_elements = elements
-        orbital_period.query_period_pair = pair
-        orbital_period.fetch_sbdb_period_sigma = sbdb
+        op.query_period_pair = pair
+        op.fetch_sbdb_period_sigma = sbdb
+        world.asked_pairs = []
+        real_pair = pair
+
+        def pair_logged(horizons_id, id_type, date_str, location):
+            world.asked_pairs.append((str(horizons_id), location))
+            return real_pair(horizons_id, id_type, date_str, location)
+        op.query_period_pair = pair_logged
         return self
 
     def __exit__(self, *exc):
         for (module, name), value in self.saved.items():
             setattr(module, name, value)
+        sys.modules["orbital_period"] = self.real_op
         shutil.rmtree(self.tmp, ignore_errors=True)
         return False
 
@@ -333,6 +383,28 @@ def scenario_no_stick(mod, answers):
                           save=lambda entry, got: None)
         return {"code": code, "s": s, "calls": list(w.calls),
                 "log": list(w.log)}
+
+
+def scenario_earth(mod, earth, op=None, save=None, refuse=()):
+    """L-445: Earth's entry as L-444's live run wrote it, its period asked
+    of 399; the run must re-fetch it asked of 3. Then the same run again,
+    which must ask nothing."""
+    frozen = earth["inputs"]["cache"]
+    with World(earth, copy.deepcopy(frozen), entries=EARTH_ENTRIES,
+               op=op, refuse=refuse) as w:
+        kw = {"echo": w.echo}
+        if save is not None:
+            kw["save"] = save
+        code, s = mod.run(w.tmp, when_of(earth), **kw)
+        first = {"code": code, "s": s, "calls": list(w.calls),
+                 "log": list(w.log), "cache": w.cache(),
+                 "pairs": list(w.asked_pairs), "op": op or orbital_period}
+        w.calls[:] = []
+        w.log[:] = []
+        code2, s2 = mod.run(w.tmp, when_of(earth), echo=w.echo)
+        first["again"] = {"code": code2, "s": s2, "calls": list(w.calls),
+                          "log": list(w.log)}
+        return first
 
 
 # ------------------------------------------------------------- judges
@@ -425,6 +497,12 @@ def compare(level, got, want, out):
             out.append("%s.%s: %r, recorded %r" % (level, k, g, v))
 
 
+# L-445 writes three fields the recorded entries predate. For a body whose
+# period is its own: the target is its own id, with no words, and the
+# elements fetch's PR is compared as before.
+L445_FIELDS = {"Mercury": "199", "Encke": "90000091"}
+
+
 def judge_record(r, answers):
     out = []
     frozen = answers["inputs"]["cache"]
@@ -433,7 +511,11 @@ def judge_record(r, answers):
         if name not in cache:
             out.append("%s not in the cache" % name)
             continue
-        compare("entry", cache[name], frozen[name], out)
+        want = copy.deepcopy(frozen[name])
+        want["period"].update({"target": L445_FIELDS[name],
+                               "target_label": None,
+                               "elements_fetch_not_compared": None})
+        compare("entry", cache[name], want, out)
     return out
 
 
@@ -479,6 +561,149 @@ def judge_fail(r, part):
 def judge_no_stick(r):
     line = verdict_line(r)
     if (line.startswith("PERIOD FETCH: FAIL -- Mercury: saved but reads back")
+            and r["code"] == 1):
+        return []
+    return ["verdict %r exit %s" % (line, r["code"])]
+
+
+def _change(pair):
+    return abs(pair["p2"] - pair["p1"])
+
+
+def judge_earth(r, earth):
+    """Earth's period re-fetched from the Earth-Moon barycentre: named
+    missing for that reason, asked of 3 alone, around the centre the
+    two-centre test picks from JPL's own answers, with a fresh test, and
+    no comparison with the elements fetch's PR, which is Earth's own."""
+    out = []
+    pairs = earth["answers"]["period_pairs"]
+    date = earth["inputs"]["cache"]["Earth"]["period"]["epoch"]
+    sun = pairs["3|None|%s|@sun" % date]["answer"]
+    bary = pairs["3|None|%s|@0" % date]["answer"]
+    centre, chosen = (("@0", bary) if _change(bary) < _change(sun)
+                      else ("@sun", sun))
+    head = r["log"][:next((i for i, l in enumerate(r["log"])
+                           if l.startswith("FETCH ")), len(r["log"]))]
+    if not any(l.strip().startswith("Earth") and
+               "period asked of 399, now 3" in l for l in head):
+        out.append("Earth not named missing with 'period asked of 399, now "
+                   "3' before the first question")
+    want = ("PERIOD FETCH: PASS -- fetched 1: Earth; elements refreshed for: "
+            "Earth")
+    if verdict_line(r) != want or r["code"] != 0:
+        out.append("verdict %r exit %s, expected %r"
+                   % (verdict_line(r), r["code"], want))
+    asked = sorted(set(t for t, _c in r["pairs"]))
+    if asked != ["3"]:
+        out.append("the period was asked of %s, not 3 alone" % asked)
+    rec = ((r.get("cache") or {}).get("Earth") or {}).get("period") or {}
+    for field, value in (("target", "3"),
+                         ("target_label", "the Earth-Moon center of mass"),
+                         ("center", centre),
+                         ("agrees_with_elements_fetch", None)):
+        if rec.get(field) != value:
+            out.append("the record's %s is %r, not %r"
+                       % (field, rec.get(field), value))
+    if not _close(rec.get("days"), chosen["p1"]):
+        out.append("the record's days %r, JPL's PR for 3 around %s is %r"
+                   % (rec.get("days"), centre, chosen["p1"]))
+    test = rec.get("test") or {}
+    if not (_close(test.get("@sun"), _change(sun))
+            and _close(test.get("@0"), _change(bary))):
+        out.append("the two-centre test %r is not target 3's (around the Sun "
+                   "%r, the barycentre %r)" % (test, _change(sun),
+                                              _change(bary)))
+    why = rec.get("elements_fetch_not_compared") or ""
+    if not ("399" in why and "3" in why.replace("399", "")):
+        out.append("the record does not say why the elements fetch's PR was "
+                   "not compared: %r" % why)
+    el = ((r.get("cache") or {}).get("Earth") or {}).get("elements") or {}
+    own = earth["answers"]["elements"]["399|None|%s|None" % date]["answer"]
+    if not _close(el.get("a"), own["a"]):
+        out.append("Earth's elements are not Earth's own (a %r, 399's %r)"
+                   % (el.get("a"), own["a"]))
+    again = r.get("again") or {}
+    if again.get("calls") or not verdict_line(again).startswith(
+            "PERIOD FETCH: NOTHING MISSING"):
+        out.append("the next run asked again: %r" % verdict_line(again))
+    return out
+
+
+def judge_earth_drawing(r):
+    """The drawn orbit stays Earth's own, around the Sun, with the record's
+    period; and if the record named another centre, the barycentre's
+    elements would still never be drawn as Earth's orbit."""
+    out = []
+    op = r["op"]
+    cache = copy.deepcopy(r.get("cache") or {})
+    entry = cache.get("Earth") or {}
+    params = copy.deepcopy(entry.get("elements") or {})
+    rec = entry.get("period") or {}
+    if not params or not rec:
+        return ["no Earth entry to draw"]
+    got = op.drawing_orbit("Earth", "Sun", params, cache=cache)
+    if got["elements"] is not params or tuple(got["offset_au"]) != (0.0, 0.0,
+                                                                   0.0):
+        out.append("Earth is drawn from other elements than its own")
+    if not _close((got["period"] or {}).get("days"), rec.get("days")):
+        out.append("Earth's markers are not timed by its record's period")
+    moved = copy.deepcopy(cache)
+    moved["Earth"]["period"]["center"] = "@0"
+    got = op.drawing_orbit("Earth", "Sun", params, cache=moved)
+    if got["elements"] is not params:
+        out.append("with its period around the barycentre, Earth is drawn from "
+                   "the barycentre's elements (a %r)"
+                   % (got["elements"] or {}).get("a"))
+    elif "Earth-Moon center of mass" not in (got["note"] or ""):
+        out.append("the drawing's note does not say whose period it is: %r"
+                   % got["note"])
+    return out
+
+
+def judge_map_scope(op):
+    """The map applies only around the Sun: Earth's period around the
+    Earth-Moon barycentre (a view's 'Earth@3') is still asked of 399."""
+    asked = []
+
+    def pair(horizons_id, id_type, date_str, location):
+        asked.append((str(horizons_id), location))
+        return {"p1": 27.3, "p2": 27.3, "step_days": 365.25, "e": 0.05,
+                "targetname": "Earth (399)", "elements": None}
+    real = op.query_period_pair
+    op.query_period_pair = pair
+    try:
+        rec = op.build_period_record("399", None, "2026-10-15 10:52", "@3")
+    finally:
+        op.query_period_pair = real
+    out = []
+    if asked != [("399", "@3")]:
+        out.append("Earth around the Earth-Moon barycentre was asked %r, not "
+                   "399 around @3" % asked)
+    if rec.get("target") != "399" or rec.get("target_label") is not None:
+        out.append("its record names target %r, words %r"
+                   % (rec.get("target"), rec.get("target_label")))
+    return out
+
+
+def judge_earth_refused(r):
+    """JPL refuses the period query for 3: the fetch keeps the last period,
+    asked of 399, which is not a new answer. UNREACHABLE, nothing saved."""
+    out = []
+    line = verdict_line(r)
+    if not line.startswith("PERIOD FETCH: UNREACHABLE -- JPL could not be "
+                           "reached for Earth"):
+        out.append("verdict %r" % line)
+    rec = ((r.get("cache") or {}).get("Earth") or {}).get("period") or {}
+    if rec.get("target") is not None or rec.get("epoch") != "2026-10-15 10:52":
+        out.append("the cache moved: Earth's period now target %r, epoch %r"
+                   % (rec.get("target"), rec.get("epoch")))
+    return out
+
+
+def judge_earth_no_stick(r):
+    line = verdict_line(r)
+    if (line.startswith("PERIOD FETCH: FAIL -- Earth: saved but its period "
+                        "reads back as asked of 399, not 3")
             and r["code"] == 1):
         return []
     return ["verdict %r exit %s" % (line, r["code"])]
@@ -576,6 +801,75 @@ FAULTS = [
 ]
 
 
+# L-445: faults planted in a copy of period_fetch.py, judged on Earth.
+EARTH_FAULTS = [
+    ("Earth's period asked of 399 kept: the target not compared",
+     '        if block.get("kind") == "fetched" and block.get("target") != want:\n',
+     '        if False:\n', "earth"),
+    ("the last period kept on a refused query saved as a new answer",
+     '        if complete(got) and fetched_target(\n',
+     '        if False and fetched_target(\n', "earth_refused"),
+    ("a save asked of the old target read back as fetched",
+     '        if block.get("target") != wanted_target(entry, cache_now):\n',
+     '        if False:\n', "earth_no_stick"),
+]
+
+# L-445: faults planted in a copy of orbital_period.py, with the real
+# period_fetch.py, judged on Earth.
+OP_FAULTS = [
+    ("the period asked of the body, not the map's target",
+     "    target = period_target(body, location)\n",
+     "    target = body\n", "earth"),
+    ("the elements fetch's PR compared with another body's period",
+     "    if not own:\n        # L-445: the elements fetch asked the body",
+     "    if False:\n        # L-445: the elements fetch asked the body",
+     "earth"),
+    ("the last record's centre choice kept across the change of target",
+     "              % (body, record_target(previous, body), target), "
+     "flush=True)\n        previous = None\n",
+     "              % (body, record_target(previous, body), target), "
+     "flush=True)\n", "earth"),
+    ("the map applied around another centre (Earth around the Earth-Moon "
+     "barycentre asked of 3)",
+     "    if _is_heliocentric(location):\n        return PERIOD_TARGETS.get",
+     "    if True:\n        return PERIOD_TARGETS.get", "map_scope"),
+    ("the barycentre's elements drawn as Earth's orbit",
+     "    if rec.get('target_label'):\n        # L-445: the record's elements",
+     "    if False:\n        # L-445: the record's elements", "earth_drawing"),
+]
+
+
+def op_from(source, label):
+    mod = types.ModuleType("orbital_period")
+    mod.__file__ = OP_MODULE
+    exec(compile(source, OP_MODULE + " [" + label + "]", "exec"), mod.__dict__)
+    return mod
+
+
+def plant_op(source, old, new, label):
+    n = source.count(old)
+    if n != 1:
+        raise SystemExit("ANCHOR FAIL for planted fault '%s': %d matches"
+                         % (label, n))
+    return op_from(source.replace(old, new), label)
+
+
+def run_earth_judge(which, mod, earth, op=None):
+    if which == "earth":
+        return judge_earth(scenario_earth(mod, earth, op=op), earth)
+    if which == "earth_drawing":
+        return judge_earth_drawing(scenario_earth(mod, earth, op=op))
+    if which == "earth_no_stick":
+        return judge_earth_no_stick(scenario_earth(
+            mod, earth, op=op, save=lambda entry, got: None))
+    if which == "map_scope":
+        return judge_map_scope(op or orbital_period)
+    if which == "earth_refused":
+        return judge_earth_refused(scenario_earth(mod, earth, op=op,
+                                                  refuse={("period", "3")}))
+    raise ValueError(which)
+
+
 def run_judge(which, mod, answers):
     """Findings for one judge kind on one module."""
     if which == "nothing":
@@ -628,6 +922,10 @@ class Quiet(object):
 
 def main():
     answers = load_answers()
+    with open(EARTH_ANSWERS, "r", encoding="utf-8") as handle:
+        earth = json.load(handle)
+    with open(OP_MODULE, "r", encoding="utf-8") as handle:
+        op_source = handle.read().replace("\r\n", "\n")
     with open(MODULE, "r", encoding="utf-8") as handle:
         source = handle.read().replace("\r\n", "\n")
     with open(ORRERY, "r", encoding="utf-8") as handle:
@@ -636,7 +934,7 @@ def main():
     t = Tally()
 
     print("=" * 70)
-    print("  PERIOD FETCH SUITE (L-444)")
+    print("  PERIOD FETCH SUITE (L-444, L-445)")
     print("=" * 70)
     print("Answers: %s (built on %s)"
           % (os.path.relpath(ANSWERS, HERE).replace(os.sep, "/"),
@@ -659,6 +957,19 @@ def main():
     found = judge_filter(real, "nothing here\n")
     t.check(bool(found), "plotting's filter not found -- caught: %s"
             % (found[0] if found else "NOT CAUGHT"))
+    for label, old, new, which in EARTH_FAULTS:
+        mod = plant(source, old, new, label)
+        with Quiet():
+            found = run_earth_judge(which, mod, earth)
+        t.check(bool(found), "%s -- caught: %s"
+                % (label, found[0] if found else "NOT CAUGHT"))
+    print("Planted faults, each in a copy of orbital_period.py, each caught:")
+    for label, old, new, which in OP_FAULTS:
+        op = plant_op(op_source, old, new, label)
+        with Quiet():
+            found = run_earth_judge(which, real, earth, op=op)
+        t.check(bool(found), "%s -- caught: %s"
+                % (label, found[0] if found else "NOT CAUGHT"))
 
     print("")
     print("The real period_fetch.py:")
@@ -689,6 +1000,27 @@ def main():
     t.check(not found, "PLOTTED_TYPES and SKIP_NAMES equal palomas_orrery.py's "
             "pre-fetch filter at both sites" + ("" if not found else
                                                  " -- " + "; ".join(found)))
+    earth_cases = [
+        ("Earth, its period asked of 399: named missing for that reason, "
+         "re-fetched asked of 3 around the steadier centre, with a fresh "
+         "two-centre test and no comparison with Earth's own PR; the next "
+         "run asks nothing", "earth"),
+        ("Earth's drawn orbit stays its own; the barycentre's elements are "
+         "never drawn as Earth's", "earth_drawing"),
+        ("Earth around the Earth-Moon barycentre is still asked of 399",
+         "map_scope"),
+        ("a save that leaves the old target: FAIL, naming Earth",
+         "earth_no_stick"),
+        ("the period query for 3 refused: UNREACHABLE, the last period kept "
+         "is not saved as a new one", "earth_refused"),
+    ]
+    for label, which in earth_cases:
+        with Quiet() as q:
+            found = run_earth_judge(which, real, earth)
+        t.check(not found, label + ("" if not found else
+                                    " -- " + "; ".join(found)))
+        if found:
+            print(q.buf.getvalue())
 
     print("")
     if t.failed:
@@ -696,7 +1028,9 @@ def main():
               % (len(t.failed), t.passed + len(t.failed), "; ".join(t.failed)))
         return 1
     print("PERIOD FETCH SUITE: pass -- %d checks, every planted fault caught "
-          "(%d planted)" % (t.passed, len(FAULTS) + 2))
+          "(%d planted, %d of them for Earth's period, L-445)"
+          % (t.passed, len(FAULTS) + 2 + len(EARTH_FAULTS) + len(OP_FAULTS),
+             len(EARTH_FAULTS) + len(OP_FAULTS)))
     return 0
 
 

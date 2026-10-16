@@ -83,11 +83,12 @@
       "period": {
         "confirmed": "2026-10-15",
         "center": "@sun",
-        "epoch": "2026-10-15 10:52",
-        "days": 365.5364560333389,
-        "error_days": 0.7694187238463996,
-        "jpl_days": 365.5364560333389,
-        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='399'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461328.952777778'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
+        "target": "3",
+        "epoch": "2026-10-15 23:43",
+        "days": 365.2512450953095,
+        "error_days": 0.003941247785462565,
+        "jpl_days": 365.2512450953092,
+        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='3'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461329.488194445'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
       }
     },
     "mars": {

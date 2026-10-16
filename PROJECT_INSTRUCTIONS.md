@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.98 | October 15, 2026
+Tony Quintanilla, PE | Claude | v3.99 | October 15, 2026
 
-Cut from ffd6c36a at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 77245ea8 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -486,7 +486,7 @@ safe-file-editing            1.13 Editing existing files, patch scripts,
                                   sed/regex edits, encoding checks (portable)
 agentic-pre-test             1.3  BEFORE delivering complete files/agentic
                                   code; after data-content sweeps
-horizons-orbital-mechanics   1.7  Horizons queries, centers, frames, osculating
+horizons-orbital-mechanics   1.8  Horizons queries, centers, frames, osculating
                                   elements, encounters, comet record pinning,
                                   2xr uncertainties, periods, the drawn orbit's
                                   centre, the Horizons check
@@ -1171,6 +1171,35 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.99 (October 15, 2026): No rule changed in this document. ONE
+skill bump, one version (L-445): horizons-orbital-mechanics 1.7 -> 1.8.
+EARTH'S PERIOD IS THE EARTH-MOON BARYCENTRE'S.
+
+WHAT PROMPTED IT. L-444's first live run printed Earth's period as 366
+days: JPL's period for Earth's centre, which circles the Earth-Moon
+barycentre once a month and so swings through the month. Tony's ruling,
+2026-10-15: "Confirmed as recommended, the barycenter."
+
+WHAT CHANGED. horizons-orbital-mechanics gains one bullet under A
+Period Depends on Its Centre: a body's period may be asked of another
+target than the body. Earth's, around the Sun, is asked of Horizons
+target 3; its identity and position stay 399. The one home of the map
+is orbital_period.PERIOD_TARGETS, applied only around the Sun; the
+record carries the target, and every reader takes it from the record.
+A session following 1.7 would ask 399. Its v1.5 entry moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copy reads
+horizons-orbital-mechanics 1.8 before work that fires it. This session
+confirmed its loaded copy read 1.7, discharging v3.98's obligation.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.96 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.98 (October 15, 2026): No rule changed in this document. ONE
 skill bump, one version (L-444): horizons-orbital-mechanics 1.6 -> 1.7.
 THE RUN FETCHES A SERVED BODY'S MISSING PERIOD BEFORE THE CHECK.
@@ -1235,44 +1264,6 @@ v3.96's obligation.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.94 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.96 (October 14, 2026): No rule changed in this document. THREE
-skill bumps, one version each (L-431 build 3, with L-395's move):
-horizons-orbital-mechanics 1.5 -> 1.6, gallery-cache-builder 1.8 ->
-1.9, interactive-exhibit 1.14 -> 1.15. THE WEBSITE PRINTS THE ORRERY'S
-PERIOD, AND THE HORIZONS CHECK LIVES IN THE ORRERY.
-
-WHAT PROMPTED IT. Tony, 2026-10-13: "I've gotten away from the gallery
-work. What's our path back?" L-431's third build carries each body's
-period from the orrery's export to every room's hover, and draws an
-orbit around its period's centre. He asked the same day whether the
-Horizons check's move (L-395) should ride the build -- yes -- so the
-period comparison was written once, where the check now lives.
-
-WHAT CHANGED. horizons-orbital-mechanics gains Where the Check Lives,
-and What It Compares: a generator row of the orrery's maintenance run,
-asking JPL only what is due, comparing each fetched period with JPL's
-PR within its own error, and re-reading the spacecraft data sheets on
-the same 30-day cycle; its pinning line no longer puts the check in
-the website's Daily Run. gallery-cache-builder gains The Builder Reads
-the Period's Centre (the served "drawn_orbit" and check #D) and The
-Daily Run's Steps (three since the move). interactive-exhibit gains
-two provenance bullets: a body's period is the orrery's, printed as
-served in one of three forms and read from the config, so it reaches a
-visitor on the push; the orbit drawn around a period's centre is cache
-data and needs the builder. Each skill's oldest entry moved to
-documentation/SKILL_HISTORIES.md, by the three-entry rule.
-
-THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
-that session. The next session confirms its loaded copies read
-horizons-orbital-mechanics 1.6, gallery-cache-builder 1.9 and
-interactive-exhibit 1.15 before work that fires them.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.93 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

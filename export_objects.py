@@ -103,6 +103,16 @@ before this, for a served body that has none fetched, L-444). Its parts:
     center_label the hover's words for that centre, from
                  orbital_period.centre_label, so the website's sentence
                  and the orrery's name the centre alike
+    target       (fetched only, L-445) the Horizons id the period was
+                 asked of: the record's 'target', or, for a record saved
+                 before L-445, the id its elements fetch asked. Earth's
+                 is "3", the Earth-Moon barycentre; every other body's is
+                 its own id
+    target_label (fetched only, L-445) the words for whose period it is
+                 when that is not the body itself ("the Earth-Moon
+                 center of mass"), else null. The orrery's hover and the
+                 website's sentence both print "for <it>," before the
+                 centre when it is not null
     years, days  each {"value", "figures", "text"}: the period printed to
                  the place its own error earns (orbital_period.
                  format_by_error, the orrery's digits rule), the value
@@ -132,7 +142,8 @@ before this, for a served body that has none fetched, L-444). Its parts:
                  Sun-centred elements are from another date they are not
                  paired, "paired" is false and "not_paired" says why, as
                  the orrery then draws the body from its Sun-centred
-                 elements. Tony, 2026-10-13, asked whether the
+                 elements. A period asked of another body (a target_label)
+                 is never paired: its elements are that body's (L-445). Tony, 2026-10-13, asked whether the
                  heliocentric data should also be fetched; it already
                  is, and it travels with the barycentre set: "confirmed."
 
@@ -153,6 +164,8 @@ WHAT MAKES IT FAIL (exit 1, and NOTHING is written)
     - the orbit cache or the confirmations record cannot be read
     - a keyed entry's period record names no centre, or holds no days
       (a period with no centre cannot be printed or drawn honestly)
+    - a keyed entry's period record names no target and its metadata no
+      horizons_id, so nobody can say whose period it is (L-445)
 
 The list is read with Python's own parser (ast), not imported, so the
 export never runs the list's code and cannot be changed by it. The
@@ -189,6 +202,11 @@ fingerprinted.)
 Module updated: October 15, 2026 with Anthropic's Claude Opus 5.5 (L-444:
 the PERIOD section names period_fetch.py as the other writer of the
 period record. Nothing this module does changed.)
+Module updated: October 15, 2026 with Anthropic's Claude Opus 5.5 (L-445,
+Earth's period: a fetched period's block names its target, the id the
+period was asked of, and its target_label when that is not the body;
+a period asked of another body is never paired with this body's
+elements; a record with no target and no horizons_id is refused.)
 """
 
 import ast
@@ -382,15 +400,27 @@ def period_block(name, object_type, cache, typed_table):
                               % name)
         if "days" not in rec:
             raise ExportError("%s: its period record holds no days" % name)
+        # L-445: the id the period was asked of. A record saved before
+        # L-445 has no 'target'; its period was asked of the id its
+        # elements fetch asked, which the metadata keeps.
+        target = op.record_target(rec, (entry.get("metadata") or {}).get(
+            "horizons_id"))
+        if not target:
+            raise ExportError("%s: its period record names no target"
+                              % name)
         inputs = {"period": rec, "elements": entry.get("elements"),
                   "center_body": (entry.get("metadata") or {}).get(
-                      "center_body")}
+                      "center_body"),
+                  "horizons_id": (entry.get("metadata") or {}).get(
+                      "horizons_id")}
         days = rec.get("days")
         err = rec.get("error_days")
         block = {
             "kind": "fetched", "typed": False,
             "center": rec["center"],
             "center_label": op.centre_label(rec["center"]),
+            "target": target,
+            "target_label": rec.get("target_label"),
             "open_orbit": days is None,
             "fetched": rec.get("fetched"),
             "words": None,
@@ -415,7 +445,12 @@ def period_block(name, object_type, cache, typed_table):
             sun_centre = (entry.get("metadata") or {}).get("center_body",
                                                             "@sun")
             el = rec.get("elements")
-            if not isinstance(el, dict):
+            if rec.get("target_label"):
+                record["paired"] = False
+                record["not_paired"] = ("the period is %s's; its elements "
+                                        "are not this body's"
+                                        % rec["target_label"])
+            elif not isinstance(el, dict):
                 record["paired"] = False
                 record["not_paired"] = ("the period record holds no "
                                         "elements around its centre")
@@ -548,8 +583,10 @@ def period_summary(key, period):
     if "paired" in record:
         extra = (", paired with the Sun-centred elements" if record["paired"]
                  else ", NOT paired: %s" % record.get("not_paired"))
-    return "%s: %s, around %s, fetched %s%s" % (
-        key, shown, period["center_label"], period["fetched"], extra)
+    whose = ("for %s, " % period["target_label"]
+             if period.get("target_label") else "")
+    return "%s: %s, %saround %s, fetched %s%s" % (
+        key, shown, whose, period["center_label"], period["fetched"], extra)
 
 
 def render(export):

@@ -56,6 +56,8 @@ WHAT MAKES IT FAIL
     - a keyed entry has no horizons_name
     - a fetched period with no centre, or a barycentre period with no
       Sun-centred set and no reason
+    - a fetched period that names no target, the id it was asked of
+      (L-445)
     - the self-test did not produce the refusals it must
 
 Role: devtool
@@ -72,6 +74,10 @@ compared with the orbit cache, the typed table and the confirmations
 record; a period with no centre, a barycentre period with no Sun-centred
 set and a confirmation date that differs are refused, each shown failing
 on a planted fault first.)
+Module updated: October 15, 2026 with Anthropic's Claude Opus 5.5 (L-445,
+Earth's period: a fetched period must name its target, the id it was
+asked of; a record naming none, and an exported block naming none, are
+each refused, shown failing on a planted fault first.)
 """
 
 import json
@@ -111,6 +117,11 @@ def period_problems(export):
             continue
         if not period.get("center"):
             out.append("%s: a fetched period with no centre" % key)
+            continue
+        if not period.get("target"):
+            # L-445: whose period it is (Earth's is the Earth-Moon
+            # barycentre's) must be named, or the check cannot ask it.
+            out.append("%s: a fetched period that names no target" % key)
             continue
         record = period.get("record") or {}
         if str(period["center"]).lower() not in ("@sun", "@10", "sun", "10"):
@@ -157,7 +168,8 @@ def self_test():
     # L-431, build 3: the periods.
     cache = {"Mars": {"period": dict(SELF_TEST_RECORD),
                       "elements": dict(SELF_TEST_RECORD["elements"]),
-                      "metadata": {"center_body": "@sun"}}}
+                      "metadata": {"center_body": "@sun",
+                                   "horizons_id": "499"}}}
     confirmations = {"objects": {"mars": {
         "confirmed": "2026-10-10", "horizons_id": "499", "id_type": None,
         "horizons_name": "Mars"}}}
@@ -175,6 +187,26 @@ def self_test():
         if "names no centre" not in str(exc):
             problems.append("the record with no centre was refused for the "
                             "wrong reason: %s" % exc)
+    # L-445: a record with no target, and no horizons_id to say what its
+    # period was asked of, is refused; an exported block naming no target
+    # is caught.
+    if with_period["objects"]["mars"]["period"].get("target") != "499":
+        problems.append("a pre-L-445 record's period was not named as "
+                        "asked of its elements fetch's id")
+    targetless = json.loads(json.dumps(cache))
+    del targetless["Mars"]["metadata"]["horizons_id"]
+    try:
+        ex.build_export(good, targetless, {}, confirmations, b"x")
+        problems.append("a period record naming no target was not refused")
+    except ex.ExportError as exc:
+        if "names no target" not in str(exc):
+            problems.append("the record naming no target was refused for "
+                            "the wrong reason: %s" % exc)
+    untargeted = json.loads(json.dumps(with_period))
+    untargeted["objects"]["mars"]["period"].pop("target")
+    if not any("names no target" in d for d in period_problems(untargeted)):
+        problems.append("an exported period naming no target was not "
+                        "refused")
     moved = json.loads(json.dumps(with_period))
     moved["objects"]["mars"]["period"]["record"]["days"] = 1206.33
     if not any("mars.period" in d for d in differences(moved, with_period)):
@@ -287,11 +319,11 @@ def main():
         failures.extend(period_problems(held))
 
     print("Self-test: a repeated field, a changed word, a keyed entry with "
-          "no horizons_name, a period record with no centre, a period that "
-          "differs from its record, a period printed to more figures, a "
-          "barycentre period with no Sun-centred set, an exported period "
-          "with no centre and a changed confirmation date were each "
-          "refused.")
+          "no horizons_name, a period record with no centre, a period record "
+          "naming no target, a period that differs from its record, a "
+          "period printed to more figures, a barycentre period with no "
+          "Sun-centred set, an exported period with no centre, one naming "
+          "no target and a changed confirmation date were each refused.")
     print("Scanned %d entries in OBJECT_DEFINITIONS for repeated fields: "
           "%d found." % (scanned, len(repeats)))
     if fresh is not None:
