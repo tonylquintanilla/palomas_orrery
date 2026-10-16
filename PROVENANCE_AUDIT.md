@@ -20,14 +20,14 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T1 by domain | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|--------------|---:|---:|---:|--------:|
+| 20261016T221523Z | `0d7211e` | 160 | 1124 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 684 | 154 | 6 | 0 |
 | 20261016T144821Z | `3cedfb7` | 160 | 1124 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 684 | 154 | 6 | 0 |
 | 20261016T141205Z | `6ad6975` | 162 | 1129 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 688 | 154 | 7 | 0 |
 | 20261016T044401Z | `77245ea` | 162 | 1129 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 688 | 154 | 7 | 0 |
 | 20261016T034327Z | `b4105c0` | 160 | 1122 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 683 | 153 | 6 | 0 |
 | 20261016T025755Z | `45085c4` | 160 | 1122 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 683 | 153 | 6 | 0 |
-| 20261016T020825Z | `464d872` | 160 | 1122 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 683 | 153 | 6 | 0 |
 
-Change since the previous run: total -5, Tier-1 +0.
+Change since the previous run: total +0, Tier-1 +0.
 
 No file's Tier-1 count rose.
 
@@ -212,7 +212,6 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `hills_cloud_sampler.py` | orrery | 0 | 1 | 0 | 0 | 1 |
 | `add_docstrings.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `data_inventory.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
-| `export_constants.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `export_drawings.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `osculating_cache_manager.py` | orrery | 0 | 0 | 1 | 0 | 1 |
 | `test_dimensions.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
@@ -222,6 +221,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `test_reset_completeness.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `worksheet_key_aliases.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `worksheet_keys.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
+| `export_constants.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `export_orbit_cache.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 
 ---
@@ -1807,7 +1807,7 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 171 | constant | SCHEMA | 6 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 204 | constant | SCHEMA | 7 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
 
 ### export_drawings.py
 

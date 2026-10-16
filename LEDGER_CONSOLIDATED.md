@@ -684,7 +684,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*240 live items; 224 need attention (`!`); 167 RICE-scored; 202 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*238 live items; 222 need attention (`!`); 167 RICE-scored; 204 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -780,7 +780,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-346 | A derived row with empty inputs is invisible to a walk by inputs (checks) | OPEN | -- | 2026-09-22 |
 | ! | L-347 | The page re-derives the bow shock standoff to draw its shape (gallery) | OPEN | -- | 2026-09-22 |
 | ! | L-348 | Derived rows outside Earth were counted, not propagated (store) | OPEN | -- | 2026-09-22 |
-| ! | L-351 | Rules learned at C2, owed to the next bumps of their stores (skills, protocol) | OPEN | -- | 2026-10-11 |
+| ! | L-351 | Rules learned at C2, owed to the next bumps of their stores (skills, protocol) | OPEN | -- | 2026-10-16 |
 | ! | L-352 | The orrery's display sites format by fixed width, with no check reading them (orrery) | OPEN | -- | 2026-09-28 |
 | ! | L-353 | A count taken from a file's print resolution where a published error budget exists unopened (store) | OPEN | -- | 2026-09-22 |
 | ! | L-354 | Declared picks with their range in prose, on other bodies (store) | OPEN | -- | 2026-09-22 |
@@ -836,8 +836,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-434 | Stored drawings for the other dot-cloud shells (orrery + gallery) | OPEN | -- | 2026-10-11 |
 | ! | L-435 | Standing rulings that are method, held only on Tony's page (skills, records) | OPEN | -- | 2026-10-12 |
 | ! | L-443 | The rest of the orrery's objects come to the website as plotted positions (gallery + orrery, objects) | OPEN | -- | 2026-10-14 |
-| ! | L-445 | Earth's orbital period from the Earth-Moon barycentre, not Earth's centre (orrery + website, periods) | OPEN | -- | 2026-10-15 |
-| ! | L-448 | The maintenance run writes a test file into the tracked tree (orrery, maintenance) | OPEN | -- | 2026-10-15 |
 | ! | L-449 | A cache build dropped the 82 build-run records it should have carried (gallery, cache builder) | OPEN | -- | 2026-10-16 |
 
 ### B. Pending Action (Tony-side)
@@ -1186,8 +1184,10 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-441 | The dashboard's "when" index, generated from tags (dashboard, dropped 2026-10-14) | DONE | -- | 2026-10-14 |
 |  | L-442 | The master plan is strategy and the road is the order: Tony's seven kinds of document (documentation, DONE 2026-10-14) | DONE | -- | 2026-10-14 |
 |  | L-444 | The maintenance run fetches a served body's missing period from JPL, as its own step before the Horizons check (orrery, periods) | DONE | -- | 2026-10-15 |
+|  | L-445 | Earth's orbital period from the Earth-Moon barycentre, not Earth's centre (orrery + website, periods) | DONE | -- | 2026-10-16 |
 |  | L-446 | The website's Daily Run pulls the orrery's exports before it builds the cache (gallery, daily run) | DONE | -- | 2026-10-16 |
 |  | L-447 | The website's front page says what the site is (gallery, lobby) | DONE | -- | 2026-10-15 |
+|  | L-448 | The maintenance run writes a test file into the tracked tree (orrery, maintenance) | DONE | -- | 2026-10-16 |
 
 ### W.Done -- Web Publication track, closed items
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1254,152 +1254,6 @@ records, beside the point-count one).
 `_write_run_manifest`), `data/cache_swap_log.jsonl`,
 `data/solar-system/raw/runs/`; L-446; L-216;
 `documentation/HANDOFF_L446_daily_run_order_build_20261015.md`.
-
-#### [L-448] The maintenance run writes a test file into the tracked tree (orrery, maintenance)
-<!-- L:448 status:DONE upd:2026-10-16 section:C flag: rice: -->
-- **Seen by Tony, 2026-10-15,** pushing L-447's records: "test_orbit_paths.json
-  was pushed." `test_output/test_orbit_paths.json` is a fixed fixture
-  that `test_orbit_cache.py` writes on every maintenance run (a valid and
-  a deliberately corrupted entry, dated 2025). It is tracked, and has
-  been since at least 87a5470 (2026-10-13). At 8e50aea it was caught
-  deleted mid-run and committed as a deletion, and 464d872 put it back
-  with the same bytes, so the repository gained two commits and no
-  change.
-- **2026-10-15, rides L-445** (Earth's period; Tony's ruling in the
-  coordination session of 2026-10-15). L-445's brief carries it: the
-  test writes its fixture into a temporary folder, `.gitignore` gains
-  `test_output/`, and the patch deletes the tracked file so the
-  deletion is what Tony commits.
-- **Built 2026-10-15** with L-445: `test_orbit_cache.py` writes its
-  fixture into a temporary folder it removes when the tests finish, and
-  fails, naming the file, if a run leaves anything beside it (shown
-  failing on a copy writing into `test_output/` again); `.gitignore`
-  gains `test_output/`; patch_L445_1 deletes
-  `test_output/test_orbit_paths.json`. A throwaway maintenance run's
-  FILES WRITTEN no longer names it.
-- **Closed 2026-10-16 on Tony's run,** read from his record
-  `documentation/WHERE_WE_ARE_10-15-26_2236_run_record.md` (the copy he uploaded on 2026-10-16). His
-  first maintenance run after patch_L445_1 printed "Orbit cache ... All 6
-  orbit cache tests passed: cache loads, old formats convert, corrupted
-  entries are dropped; nothing left behind."; the deletion went up in
-  his push at 54c27d7. Every run since says the same.
-- **The patch crashed on its last step, and nothing was lost.**
-  patch_L445_1 deleted the file, then tried to remove the emptied
-  `test_output` folder; Windows refused (`PermissionError: [WinError 5]
-  Access is denied`), most likely OneDrive holding the folder it had
-  just seen emptied. Every write had landed before the refusal:
-  compared byte for byte with the build the same night. The traceback
-  hid the patch's "ok" lines. The empty folder is ignored by git and by
-  `.gitignore`; Tony deletes it by hand when he likes.
-- **Loose ends, re-homed or struck:**
-  - A patch that removes a folder treats a refused removal as a note:
-    carried to safe-file-editing's next version on L-351 (rules owed to
-    the next bumps of their stores).
-**Gap:** none. Closed 2026-10-16.
-**Ref:** `test_orbit_cache.py`; `.gitignore`; L-447; L-351.
-
-#### [L-445] Earth's orbital period from the Earth-Moon barycentre, not Earth's centre (orrery + website, periods)
-<!-- L:445 status:DONE upd:2026-10-16 section:C flag: rice: -->
-- **Found 2026-10-15, on L-444's first live run.** JPL's period for
-  Earth's centre (Horizons 399, around the Sun) at 2026-10-15 10:52 is
-  365.5364560333389 days. The two-centre test measured its change in a
-  year at 0.769 days around the Sun and 1.76 days around the
-  barycentre, so it prints to three figures: 366 days
-  (`data/objects_export.json` and `data/osculating_cache.json` at
-  9579fcd).
-- **Why, Claude's reading, not a source:** the Earth and the Moon
-  circle their common centre once a month, so Earth's centre wobbles.
-  Its speed changes a little, and the period worked out from its
-  position and speed swings by about half a day either way through the
-  month. The Earth-Moon barycentre (Horizons 3) makes no such loop, so
-  its period should stay close to the familiar year. The build confirms
-  this against JPL's PR for target 3 before relying on it.
-- **Tony's ruling, 2026-10-15:** "Confirmed as recommended, the
-  barycenter." Earth's period is taken for the Earth-Moon barycentre,
-  and the hover says so.
-- **Where it reaches,** to map in the build, not decided here: the
-  period record (`orbital_period.build_period_record`, which
-  `fetch_osculating_elements` calls, so plotting and `period_fetch.py`
-  keep agreeing); the Horizons check's period comparison, which must
-  ask the same target; the export's period block and its words; the
-  website's Earth hover, through the mirror. Earth's identity and
-  position stay Earth's centre (399).
-- **Received from L-444 at its close:** the look at the website. The
-  gallery's Daily Run builds the cache before it pulls the orrery's
-  export, so the eight periods' words reach the website on its first
-  run after 9579fcd, and the orbits drawn around the barycentre
-  (Saturn, Uranus, Neptune) on the run after that. L-446 (the daily
-  run's order) would make that one run.
-- **The brief, 2026-10-15:**
-  `documentation/HANDOFF_L445_earth_period_brief_20261015.md`, written
-  in the coordination session of that evening at b4105c0. It maps where
-  the target reaches (one home for the map in `orbital_period.py`; the
-  record carries the target and every reader takes it from the record;
-  `period_fetch.py` re-fetches a body whose record's target is not the
-  map's, which is how Earth is re-fetched without plotting) and the
-  planted faults. L-448 (the test file in the tracked tree) rides this
-  session, Tony's ruling of 2026-10-15.
-- **Built 2026-10-15** (build session, Anthropic's Claude Opus 5.5, on
-  orrery 77245ea8 and gallery 95713f49; record:
-  `documentation/HANDOFF_L445_earth_period_build_20261015.md`).
-  JPL's PR for target 3 at Earth's record minute, read through the
-  chat's web-fetch tool, confirms Claude's reading: 365.2514 days
-  around the Sun, moving 0.0039 days in a year there against 2.52
-  around the solar system's barycentre, so the Sun stays the centre
-  and the period prints 1.00000 years (365.25 days). The answers are
-  recorded in `documentation/worksheets/period_answers_L445.json`.
-  One home for the map, `orbital_period.PERIOD_TARGETS` (399 -> 3),
-  applied only around the Sun, so 'Earth@3' stays 399; the record
-  carries `target` and `target_label`; the export, the period fetch,
-  the Horizons check and the hover read it from there. The period
-  fetch re-fetches Earth on the first run ("period asked of 399, now
-  3"). The drawn orbit stays Earth's own. Patches:
-  `patch_L445_1_earth_period_20261015.py` (orrery) and
-  `patch_L445_2_gallery_period_words_20261015.py` (gallery).
-  horizons-orbital-mechanics 1.8, protocol v3.99.
-- **Closed 2026-10-16 on Tony's run and look,** read from his record
-  `documentation/WHERE_WE_ARE_10-15-26_2236_run_record.md` (the copy he uploaded on 2026-10-16). Each
-  proof the brief asked for, as his run printed it:
-  - patch_L445_1 wrote every file and then stopped on the empty
-    folder's removal (L-448); every file was compared byte for byte
-    with the build the same night.
-  - `orrery_maintenance_run.py`: "Period fetch ... rewrote
-    data/osculating_cache.json -- PASS -- fetched 1: Earth; elements
-    refreshed for: Earth"; "Horizons check ... rewrote
-    data/horizons_confirmations.json -- PASS -- 1 checked today, 1
-    queries"; "Period fetch suite ... pass -- 36 checks, every planted
-    fault caught (20 planted, 8 of them for Earth's period, L-445)".
-    The one red row, Dashboard parity, named L-446's two new website
-    steps with no button yet; L-446's orrery patch added them (31 of 31
-    at 3cedfb7). Pushed at 54c27d7.
-  - The words in the orrery, "For the Earth-Moon center of mass, around
-    the Sun, from JPL Horizons, fetched <date>.": Tony, "-- correct".
-  - patch_L445_2 applied (9 edits in 2 files); the gallery's offline
-    run, "28 of 28 gating checkers passed"; pushed at 0f8efb1; the live
-    run, "Export freshness -- the served export is the orrery's at
-    54c27d7f, byte for byte".
-  - The website look, Earth's hover in the Solar System and Earth rooms
-    (asked 2026-10-16): Tony, "-- correct", and "yes, the hover is
-    correct and we can close."
-- **Loose ends, re-homed or struck:**
-  - The look at the website, received from L-444: done above.
-  - The skill obligation: horizons-orbital-mechanics 1.8 travels. Tony
-    reinstalled it on 2026-10-15; the session that built and closed
-    this item loaded 1.7 and cannot read the new copy. The next session
-    whose work fires the skill confirms its loaded copy reads 1.8.
-  - Struck, unreachable today: if Earth's period were ever taken around
-    the solar system's barycentre, the website's cache builder would
-    fetch the drawn orbit for Earth's own id (399) around it. The
-    two-centre test keeps the Sun (0.0039 days of change in a year
-    against 2.52, `documentation/worksheets/period_answers_L445.json`),
-    and the orrery's drawing already refuses the barycentre's elements
-    for Earth (tested).
-  - L-448 (the test file): closed with this item.
-**Gap:** none. Closed 2026-10-16.
-**Ref:** L-444; L-431; `orbital_period.py`; `period_fetch.py`;
-`horizons_check.py`; `export_objects.py`; `osculating_cache_manager.py`;
-skills/horizons-orbital-mechanics/SKILL.md, A Period Depends on Its
-Centre.
 
 #### [L-443] The rest of the orrery's objects come to the website as plotted positions (gallery + orrery, objects)
 <!-- L:443 status:OPEN upd:2026-10-14 section:A flag: rice: -->
@@ -23466,6 +23320,152 @@ L-388; L-423 (item 2); L-444; L-445; L-431; L-395;
 skills/gallery-cache-builder/SKILL.md, The Daily Run's Steps;
 `documentation/HANDOFF_L446_daily_run_order_brief_20261015.md`;
 `documentation/HANDOFF_L446_daily_run_order_build_20261015.md`.
+
+#### [L-445] Earth's orbital period from the Earth-Moon barycentre, not Earth's centre (orrery + website, periods)
+<!-- L:445 status:DONE upd:2026-10-16 section:C flag: rice: -->
+- **Found 2026-10-15, on L-444's first live run.** JPL's period for
+  Earth's centre (Horizons 399, around the Sun) at 2026-10-15 10:52 is
+  365.5364560333389 days. The two-centre test measured its change in a
+  year at 0.769 days around the Sun and 1.76 days around the
+  barycentre, so it prints to three figures: 366 days
+  (`data/objects_export.json` and `data/osculating_cache.json` at
+  9579fcd).
+- **Why, Claude's reading, not a source:** the Earth and the Moon
+  circle their common centre once a month, so Earth's centre wobbles.
+  Its speed changes a little, and the period worked out from its
+  position and speed swings by about half a day either way through the
+  month. The Earth-Moon barycentre (Horizons 3) makes no such loop, so
+  its period should stay close to the familiar year. The build confirms
+  this against JPL's PR for target 3 before relying on it.
+- **Tony's ruling, 2026-10-15:** "Confirmed as recommended, the
+  barycenter." Earth's period is taken for the Earth-Moon barycentre,
+  and the hover says so.
+- **Where it reaches,** to map in the build, not decided here: the
+  period record (`orbital_period.build_period_record`, which
+  `fetch_osculating_elements` calls, so plotting and `period_fetch.py`
+  keep agreeing); the Horizons check's period comparison, which must
+  ask the same target; the export's period block and its words; the
+  website's Earth hover, through the mirror. Earth's identity and
+  position stay Earth's centre (399).
+- **Received from L-444 at its close:** the look at the website. The
+  gallery's Daily Run builds the cache before it pulls the orrery's
+  export, so the eight periods' words reach the website on its first
+  run after 9579fcd, and the orbits drawn around the barycentre
+  (Saturn, Uranus, Neptune) on the run after that. L-446 (the daily
+  run's order) would make that one run.
+- **The brief, 2026-10-15:**
+  `documentation/HANDOFF_L445_earth_period_brief_20261015.md`, written
+  in the coordination session of that evening at b4105c0. It maps where
+  the target reaches (one home for the map in `orbital_period.py`; the
+  record carries the target and every reader takes it from the record;
+  `period_fetch.py` re-fetches a body whose record's target is not the
+  map's, which is how Earth is re-fetched without plotting) and the
+  planted faults. L-448 (the test file in the tracked tree) rides this
+  session, Tony's ruling of 2026-10-15.
+- **Built 2026-10-15** (build session, Anthropic's Claude Opus 5.5, on
+  orrery 77245ea8 and gallery 95713f49; record:
+  `documentation/HANDOFF_L445_earth_period_build_20261015.md`).
+  JPL's PR for target 3 at Earth's record minute, read through the
+  chat's web-fetch tool, confirms Claude's reading: 365.2514 days
+  around the Sun, moving 0.0039 days in a year there against 2.52
+  around the solar system's barycentre, so the Sun stays the centre
+  and the period prints 1.00000 years (365.25 days). The answers are
+  recorded in `documentation/worksheets/period_answers_L445.json`.
+  One home for the map, `orbital_period.PERIOD_TARGETS` (399 -> 3),
+  applied only around the Sun, so 'Earth@3' stays 399; the record
+  carries `target` and `target_label`; the export, the period fetch,
+  the Horizons check and the hover read it from there. The period
+  fetch re-fetches Earth on the first run ("period asked of 399, now
+  3"). The drawn orbit stays Earth's own. Patches:
+  `patch_L445_1_earth_period_20261015.py` (orrery) and
+  `patch_L445_2_gallery_period_words_20261015.py` (gallery).
+  horizons-orbital-mechanics 1.8, protocol v3.99.
+- **Closed 2026-10-16 on Tony's run and look,** read from his record
+  `documentation/WHERE_WE_ARE_10-15-26_2236_run_record.md` (the copy he uploaded on 2026-10-16). Each
+  proof the brief asked for, as his run printed it:
+  - patch_L445_1 wrote every file and then stopped on the empty
+    folder's removal (L-448); every file was compared byte for byte
+    with the build the same night.
+  - `orrery_maintenance_run.py`: "Period fetch ... rewrote
+    data/osculating_cache.json -- PASS -- fetched 1: Earth; elements
+    refreshed for: Earth"; "Horizons check ... rewrote
+    data/horizons_confirmations.json -- PASS -- 1 checked today, 1
+    queries"; "Period fetch suite ... pass -- 36 checks, every planted
+    fault caught (20 planted, 8 of them for Earth's period, L-445)".
+    The one red row, Dashboard parity, named L-446's two new website
+    steps with no button yet; L-446's orrery patch added them (31 of 31
+    at 3cedfb7). Pushed at 54c27d7.
+  - The words in the orrery, "For the Earth-Moon center of mass, around
+    the Sun, from JPL Horizons, fetched <date>.": Tony, "-- correct".
+  - patch_L445_2 applied (9 edits in 2 files); the gallery's offline
+    run, "28 of 28 gating checkers passed"; pushed at 0f8efb1; the live
+    run, "Export freshness -- the served export is the orrery's at
+    54c27d7f, byte for byte".
+  - The website look, Earth's hover in the Solar System and Earth rooms
+    (asked 2026-10-16): Tony, "-- correct", and "yes, the hover is
+    correct and we can close."
+- **Loose ends, re-homed or struck:**
+  - The look at the website, received from L-444: done above.
+  - The skill obligation: horizons-orbital-mechanics 1.8 travels. Tony
+    reinstalled it on 2026-10-15; the session that built and closed
+    this item loaded 1.7 and cannot read the new copy. The next session
+    whose work fires the skill confirms its loaded copy reads 1.8.
+  - Struck, unreachable today: if Earth's period were ever taken around
+    the solar system's barycentre, the website's cache builder would
+    fetch the drawn orbit for Earth's own id (399) around it. The
+    two-centre test keeps the Sun (0.0039 days of change in a year
+    against 2.52, `documentation/worksheets/period_answers_L445.json`),
+    and the orrery's drawing already refuses the barycentre's elements
+    for Earth (tested).
+  - L-448 (the test file): closed with this item.
+**Gap:** none. Closed 2026-10-16.
+**Ref:** L-444; L-431; `orbital_period.py`; `period_fetch.py`;
+`horizons_check.py`; `export_objects.py`; `osculating_cache_manager.py`;
+skills/horizons-orbital-mechanics/SKILL.md, A Period Depends on Its
+Centre.
+
+#### [L-448] The maintenance run writes a test file into the tracked tree (orrery, maintenance)
+<!-- L:448 status:DONE upd:2026-10-16 section:C flag: rice: -->
+- **Seen by Tony, 2026-10-15,** pushing L-447's records: "test_orbit_paths.json
+  was pushed." `test_output/test_orbit_paths.json` is a fixed fixture
+  that `test_orbit_cache.py` writes on every maintenance run (a valid and
+  a deliberately corrupted entry, dated 2025). It is tracked, and has
+  been since at least 87a5470 (2026-10-13). At 8e50aea it was caught
+  deleted mid-run and committed as a deletion, and 464d872 put it back
+  with the same bytes, so the repository gained two commits and no
+  change.
+- **2026-10-15, rides L-445** (Earth's period; Tony's ruling in the
+  coordination session of 2026-10-15). L-445's brief carries it: the
+  test writes its fixture into a temporary folder, `.gitignore` gains
+  `test_output/`, and the patch deletes the tracked file so the
+  deletion is what Tony commits.
+- **Built 2026-10-15** with L-445: `test_orbit_cache.py` writes its
+  fixture into a temporary folder it removes when the tests finish, and
+  fails, naming the file, if a run leaves anything beside it (shown
+  failing on a copy writing into `test_output/` again); `.gitignore`
+  gains `test_output/`; patch_L445_1 deletes
+  `test_output/test_orbit_paths.json`. A throwaway maintenance run's
+  FILES WRITTEN no longer names it.
+- **Closed 2026-10-16 on Tony's run,** read from his record
+  `documentation/WHERE_WE_ARE_10-15-26_2236_run_record.md` (the copy he uploaded on 2026-10-16). His
+  first maintenance run after patch_L445_1 printed "Orbit cache ... All 6
+  orbit cache tests passed: cache loads, old formats convert, corrupted
+  entries are dropped; nothing left behind."; the deletion went up in
+  his push at 54c27d7. Every run since says the same.
+- **The patch crashed on its last step, and nothing was lost.**
+  patch_L445_1 deleted the file, then tried to remove the emptied
+  `test_output` folder; Windows refused (`PermissionError: [WinError 5]
+  Access is denied`), most likely OneDrive holding the folder it had
+  just seen emptied. Every write had landed before the refusal:
+  compared byte for byte with the build the same night. The traceback
+  hid the patch's "ok" lines. The empty folder is ignored by git and by
+  `.gitignore`; Tony deletes it by hand when he likes.
+- **Loose ends, re-homed or struck:**
+  - A patch that removes a folder treats a refused removal as a note:
+    carried to safe-file-editing's next version on L-351 (rules owed to
+    the next bumps of their stores).
+**Gap:** none. Closed 2026-10-16.
+**Ref:** `test_orbit_cache.py`; `.gitignore`; L-447; L-351.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

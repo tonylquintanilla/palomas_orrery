@@ -66,6 +66,33 @@ One JSON file, data/constants_export.json:
                               (provenance-discipline 2.22, Rule 3). A
                               display prints a unit from here and never
                               converts a served number itself (L-345)
+                     source   the row's citation, as text, or null
+                              (schema 7, L-421). A row's own citation is
+                              its "# Source:" line with the lines that
+                              continue it, "# Source+:" or an untagged
+                              "#   ..." line, joined with spaces. A line
+                              that opens "as <ROW>." points at another
+                              row's citation and is read as that row's,
+                              followed by any words after the pointer. A
+                              DERIVED row with no "# Source:" of its own
+                              takes its inputs' citations: each input's
+                              own, or, for a derived input with none, that
+                              input's inputs', walked in the order its
+                              "inputs" lists them, each text once,
+                              joined with "; ". A typed row with no
+                              "# Source:" line -- a declared choice --
+                              has none, and none is invented for it.
+                              The gallery's mirror writes this beside the
+                              number, so the website prints the orrery's
+                              words (Tony's ruling of 2026-10-16,
+                              option A: the orrery owns the citation)
+                     source_from  the rows whose "# Source:" lines the
+                              citation was read from, a list: the row
+                              itself when it carries its own, the row its
+                              line points to, its inputs when it
+                              inherited, empty when it has none (schema 7)
+                     source_inherited  true when the citation came from
+                              the row's inputs, false otherwise (schema 7)
     not_exported   every row that is NOT in rows, by name, with the reason
 
 ROUNDING HAPPENS HERE, AND ONLY HERE
@@ -157,18 +184,24 @@ Module updated: September 28, 2026 with Anthropic's Claude Opus 5.5
 exported; not_exported names the row it is served through, and a marker
 constants_rows.conversion_problem() refuses stops the export. The schema
 does not change: the file's fields are the same.)
+Module updated: October 16, 2026 with Anthropic's Claude Opus 5.5
+(L-421 part 3: every exported row also carries its citation, "source",
+with "source_from" and "source_inherited", a derived row with no
+"# Source:" of its own taking its inputs'. The gallery's mirror writes
+it beside the number, Tony's option A of 2026-10-16. SCHEMA moves to 7.)
 """
 
 import json
 import math
 import os
+import re
 import sys
 
 import constants_rows
 from constants_tokens import RETIRED_TOKENS, TOKENS
 
 EXPORT_PATH = os.path.join("data", "constants_export.json")
-SCHEMA = 6
+SCHEMA = 7
 
 
 def round_to(value, figures):
@@ -208,6 +241,92 @@ def _export_value(value, figures, where):
             out[str(key)] = got
         return out, None
     return None, "%s is a %s, not a number" % (where, type(value).__name__)
+
+
+POINTER_RE = re.compile(r"^as ([A-Z][A-Z0-9_]*)\.\s*(.*)$", re.DOTALL)
+
+
+def own_source(name, by_name, _seen=None):
+    """(text, [rows it was read from]) for a row's own citation, or
+    (None, []) (L-421, schema 7).
+
+    Its "# Source:" line, with every line that continues it -- a
+    "# Source+:" line or an untagged "#   ..." line, the two forms the
+    store uses -- joined with single spaces, read through constants_rows'
+    one reader, the same one every other field uses.
+
+    Twelve rows write their line as a pointer, "as <ROW>." -- the same
+    source as that row. A pointer is read as the named row's citation,
+    resolved the same way, with any words after the pointer kept after
+    it ("as HELMET_CUSP_LOW_RADII. This row is the high end."). Printed
+    as written, the website would show a visitor a store name.
+    """
+    text = by_name[name].field("Source", loose=True)
+    if text is None or not text.strip():
+        return None, []
+    text = text.strip()
+    match = POINTER_RE.match(text)
+    if match and match.group(1) in by_name:
+        seen = set([name]) if _seen is None else _seen
+        target = match.group(1)
+        if target in seen:
+            return text, [name]
+        seen.add(target)
+        cited, cited_from = own_source(target, by_name, seen)
+        if cited is None:
+            return text, [name]
+        rest = match.group(2).strip()
+        return (cited + (" " + rest if rest else "")), cited_from
+    return text, [name]
+
+
+def resolve_source(name, by_name, _seen=None):
+    """(text or None, [rows it was read from], inherited) for one row.
+
+    The inheritance rule (provenance-discipline: a derived row "names its
+    inputs and is never cleared on its own; checking it means checking
+    them"). A row with its own "# Source:" is cited by it (own_source,
+    which follows a pointer). A derived row with none takes, for each
+    input in the order its "inputs" lists them, that input's own
+    citation, or -- when that input is derived and has none -- its
+    inputs', and so on down. Each row is visited once, each text kept
+    once, in the order found, joined with "; ". A typed row with no
+    "# Source:" contributes nothing: it is a declared choice or an
+    uncited value, and no citation is invented for it.
+    test_constants_export.py check 7 works the same rule by its own code.
+    """
+    row = by_name[name]
+    text, cited_from = own_source(name, by_name)
+    if text is not None:
+        return text, cited_from, False
+    if not row.is_derived:
+        return None, [], False
+    seen = set([name]) if _seen is None else _seen
+    found = []
+
+    def walk(row_name):
+        for used in by_name[row_name].inputs:
+            if used in seen or used not in by_name:
+                continue
+            seen.add(used)
+            cited, used_from = own_source(used, by_name)
+            if cited is not None:
+                found.append((used_from, cited))
+            elif by_name[used].is_derived:
+                walk(used)
+
+    walk(name)
+    if not found:
+        return None, [], False
+    texts = []
+    rows_from = []
+    for used_from, cited in found:
+        if cited not in texts:
+            texts.append(cited)
+        for used in used_from:
+            if used not in rows_from:
+                rows_from.append(used)
+    return "; ".join(texts), rows_from, True
 
 
 def build_export(project_dir, tokens=None, retired=None):
@@ -308,6 +427,11 @@ def build_export(project_dir, tokens=None, retired=None):
             "prints": row.prints,
             "in": converted,
         }
+        # L-421 part 3 (schema 7): the citation travels with the number.
+        cited, cited_from, inherited = resolve_source(row.name, by_name)
+        exported[row.name]["source"] = cited
+        exported[row.name]["source_from"] = cited_from
+        exported[row.name]["source_inherited"] = inherited
 
     if failures:
         return None, failures
@@ -401,6 +525,28 @@ def main():
             print("  %-26s %d" % (key, counted[key]))
     for line in constants_rows.wrap_names(list(rows)):
         print(line)
+    print("")
+    own = [n for n in rows if rows[n]["source"] is not None
+           and not rows[n]["source_inherited"]]
+    inherited = [n for n in rows if rows[n]["source_inherited"]]
+    uncited = [n for n in rows if rows[n]["source"] is None]
+    pointed = [n for n in own if rows[n]["source_from"] != [n]]
+    print("Citations (schema 7): %d row(s) cite their own source, %d "
+          "inherit their inputs', %d have none:"
+          % (len(own), len(inherited), len(uncited)))
+    if pointed:
+        print("  own, read through an \"as <ROW>.\" pointer (%d):"
+              % len(pointed))
+        for line in constants_rows.wrap_names(pointed):
+            print(line)
+    if inherited:
+        print("  inherited from their inputs (%d):" % len(inherited))
+        for line in constants_rows.wrap_names(inherited):
+            print(line)
+    if uncited:
+        print("  no citation, own or inherited (%d):" % len(uncited))
+        for line in constants_rows.wrap_names(uncited):
+            print(line)
     print("")
     print("Not exported, %d row(s):" % len(skipped))
     if converted_names:

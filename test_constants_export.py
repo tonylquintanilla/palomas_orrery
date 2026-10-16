@@ -57,10 +57,31 @@ WHAT IT CHECKS, each printing what it compared
        constants_rows.conversion_problem() finds nothing wrong with it:
        it is served as its source row's "in", which check 6 re-computes.
        Each one skipped is named in the output.
+    7. Every row's citation (schema 7, L-421 part 3) is worked out again
+       here by the inheritance rule, written in this file rather than by
+       the export's own function, and must equal the served "source",
+       "source_from" and "source_inherited". The rule: a row with its own
+       "# Source:" is cited by it, and a line that opens "as <ROW>." is
+       read as that row's citation followed by the words after it; a
+       derived row with none takes each
+       input's own citation, or, for a derived input with none, that
+       input's inputs', in the order the row's "inputs" lists them, each text
+       once, joined with "; "; a typed row with none has none. Seven worked
+       cases are pinned by the rows they cite, so a change to the rule
+       fails here by name: a derived row with its own source keeps it, a
+       derived row inherits two inputs, a declared input contributes
+       nothing, a declared typed row has none, a pointer is followed, and
+       a derived row inherits through its input's pointer. No row in the store
+       today reaches a citation through a derived input that has none,
+       so a small store written in this file has one that does, and the
+       export's own function must give the answer worked out here for
+       it; without that case the walk down a chain could break and every
+       live row still pass. The rows with no citation, own or inherited,
+       are named in the output.
 
 WHAT MAKES IT FAIL
 
-    Any of the five. Also: the export file is missing, is not JSON, lacks
+    Any of the seven. Also: the export file is missing, is not JSON, lacks
     a field, or the generator itself reports a problem with the store.
 
 WHAT A GREEN RUN PROVES
@@ -94,6 +115,10 @@ Module updated: September 28, 2026 with Anthropic's Claude Opus 5.5
 (L-345, patch L322_D_20: check 5 skips a conversion inside a closed
 slice only when constants_rows.conversion_problem() passes it, and names
 each one it skipped.)
+Module updated: October 16, 2026 with Anthropic's Claude Opus 5.5
+(L-421 part 3: check 2 compares "source", "source_from" and
+"source_inherited", new in schema 7, and check 7 works every row's
+citation out again by the inheritance rule and holds five worked cases.)
 """
 
 import json
@@ -106,7 +131,193 @@ import export_constants
 REQUIRED = ("schema", "store", "store_sha256", "tokens", "closed_slices",
             "transitional", "rows", "not_exported")
 ROW_FIELDS = ("value", "unit", "figures", "status", "derived", "read",
-              "inputs", "uncertainty", "prints", "in")
+              "inputs", "uncertainty", "prints", "in", "source",
+              "source_from", "source_inherited")
+
+# Check 7's worked cases of the inheritance rule (L-421 part 3): (row,
+# the rows its citation is read from, inherited). Written out here, not
+# computed, so a change to the rule fails by name.
+CITATION_PINS = (
+    # A derived row with its own "# Source:" keeps it.
+    ("HELMET_CUSP_RADII", ("HELMET_CUSP_RADII",), False),
+    # A derived row with none inherits both of its inputs'.
+    ("CHROMOSPHERE_TOP_KM", ("SUN_RADIUS_KM", "CHROMOSPHERE_PHYSICAL_KM"),
+     True),
+    ("EARTH_GEOSTATIONARY_RADIUS_KM",
+     ("EARTH_GM_KM3_S2", "EARTH_ROTATION_RATE_RAD_S"), True),
+    # A declared input (the solar wind's pressure and Bz) contributes
+    # nothing: the standoff inherits the five fitted coefficients only.
+    ("EARTH_MAGNETOPAUSE_STANDOFF_RADII",
+     ("EARTH_MAGNETOPAUSE_SHUE_A1_RADII", "EARTH_MAGNETOPAUSE_SHUE_A2_RADII",
+      "EARTH_MAGNETOPAUSE_SHUE_A5", "EARTH_MAGNETOPAUSE_SHUE_A3_PER_NT",
+      "EARTH_MAGNETOPAUSE_SHUE_A4_NT"), True),
+    # A declared typed row has no citation, and none is invented.
+    ("EARTH_SOLAR_WIND_PRESSURE_NPA", (), False),
+    # "as OORT_CLOUD_OUTER_EDGE_LOW_AU." is followed to that row's line.
+    ("OORT_CLOUD_OUTER_EDGE_HIGH_AU", ("OORT_CLOUD_OUTER_EDGE_LOW_AU",),
+     False),
+    # A derived row whose input points: the pointer is followed there too.
+    ("OUTER_OORT_CLOUD_AU", ("OORT_CLOUD_OUTER_EDGE_LOW_AU",), True),
+)
+
+
+def _citation(name, by_name):
+    """Check 7's own working of the inheritance rule.
+
+    Deliberately not export_constants.resolve_source(): a second
+    working of the same rule, so a fault in either shows as a
+    disagreement. The text is read through constants_rows, the one
+    reader of the store's comments.
+    """
+    def own(row_name):
+        """(text, rows) of the row's own line, a pointer followed."""
+        def line(row):
+            text = by_name[row].field("Source", loose=True)
+            return text.strip() if text and text.strip() else None
+
+        def joined(text, tails):
+            return " ".join([text] + [t for t in reversed(tails) if t])
+
+        path = [row_name]
+        tails = []
+        while True:
+            text = line(path[-1])
+            if text is None:
+                if len(path) == 1:
+                    return None, []
+                # The last pointer names a row with no line: the pointing
+                # row's line stands as written.
+                tails.pop()
+                return joined(line(path[-2]), tails), [path[-2]]
+            target = None
+            if text.startswith("as ") and "." in text:
+                head, _dot, after = text[3:].partition(".")
+                if head in by_name and head not in path:
+                    target = head
+            if target is None:
+                return joined(text, tails), [path[-1]]
+            tails.append(after.strip())
+            path.append(target)
+
+    text, rows_read = own(name)
+    if text is not None:
+        return text, rows_read, False
+    if not by_name[name].is_derived:
+        return None, [], False
+    order = []
+    visited = {name: True}
+    stack = list(reversed(by_name[name].inputs))
+    while stack:
+        used = stack.pop()
+        if used in visited or used not in by_name:
+            continue
+        visited[used] = True
+        if own(used)[0] is not None:
+            order.append(used)
+        elif by_name[used].is_derived:
+            stack.extend(reversed(by_name[used].inputs))
+    if not order:
+        return None, [], False
+    texts = []
+    rows_from = []
+    for used in order:
+        text, rows_read = own(used)
+        if text not in texts:
+            texts.append(text)
+        for row_name in rows_read:
+            if row_name not in rows_from:
+                rows_from.append(row_name)
+    return "; ".join(texts), rows_from, True
+
+
+# Check 7's chain: a store no live row is shaped like yet. CHAIN_C has
+# no source; its input CHAIN_B is derived with none, so its citation is
+# CHAIN_A's, reached two steps down; CHAIN_D is declared and gives
+# nothing; CHAIN_A2 repeats CHAIN_A's text, which is kept once. CHAIN_P
+# points at CHAIN_A and adds words; CHAIN_Q points at CHAIN_D, which has
+# no line, so CHAIN_Q's own line stands as written.
+CHAIN_STORE = '''\
+CHAIN_A = 2.0
+# Source: Fixture citation for A,
+#   continued on an untagged line.
+CHAIN_A2 = 3.0
+# Source: Fixture citation for A,
+# Source+: continued on an untagged line.
+CHAIN_D = 5.0
+# Status: declared 2026-10-16 -- a fixture choice
+CHAIN_B = CHAIN_A * 2
+CHAIN_C = CHAIN_B + CHAIN_D + CHAIN_A2
+CHAIN_P = 7.0
+# Source: as CHAIN_A. The high end.
+CHAIN_Q = 11.0
+# Source: as CHAIN_D. Nowhere to go.
+'''
+# The order is the row's "inputs" as the export lists them, which is
+# Python's own walk of the expression: CHAIN_A2, then CHAIN_B's CHAIN_A.
+CHAIN_WANTED = (
+    ("CHAIN_C", ("Fixture citation for A, continued on an untagged line.",
+                 ["CHAIN_A2", "CHAIN_A"], True)),
+    ("CHAIN_P", ("Fixture citation for A, continued on an untagged line. "
+                 "The high end.", ["CHAIN_A"], False)),
+    ("CHAIN_Q", ("as CHAIN_D. Nowhere to go.", ["CHAIN_Q"], False)),
+)
+
+
+def _check_chain(failures, facts):
+    """Check 7's chain: the export's function on a store written here."""
+    _rows, chain = constants_rows.parse_store_text(CHAIN_STORE)
+    ok = True
+    for name, wanted in CHAIN_WANTED:
+        mine = _citation(name, chain)
+        theirs = export_constants.resolve_source(name, chain)
+        theirs = (theirs[0], list(theirs[1]), theirs[2])
+        if not mine == theirs == wanted:
+            ok = False
+            failures.append(("(chain) " + name, "wanted %r; this file "
+                             "works out %r; export_constants gives %r"
+                             % (wanted, mine, theirs)))
+    facts["chain"] = ok
+
+
+def _check_citations(on_disk, by_name, failures, facts):
+    """Check 7. Every row's citation worked out again by the rule."""
+    _check_chain(failures, facts)
+    examined = 0
+    uncited = []
+    for name, served in on_disk["rows"].items():
+        if name not in by_name:
+            continue
+        examined += 1
+        text, cited_from, inherited = _citation(name, by_name)
+        got = (served.get("source"), served.get("source_from"),
+               served.get("source_inherited"))
+        if got != (text, cited_from, inherited):
+            failures.append((name, "citation served as from %r, inherited "
+                             "%r; by the inheritance rule it is from %r, "
+                             "inherited %r%s"
+                             % (got[1], got[2], cited_from, inherited,
+                                "" if got[0] == text else
+                                " (and the text differs)")))
+        if text is None:
+            uncited.append(name)
+    held = 0
+    for name, cited_from, inherited in CITATION_PINS:
+        served = on_disk["rows"].get(name)
+        if served is None:
+            failures.append((name, "PIN: not exported, so its citation "
+                             "cannot be checked"))
+            continue
+        got = (tuple(served.get("source_from") or ()),
+               served.get("source_inherited"))
+        if got != (cited_from, inherited):
+            failures.append((name, "PIN: the citation should come from %r, "
+                             "inherited %r; it comes from %r, inherited %r"
+                             % (cited_from, inherited, got[0], got[1])))
+            continue
+        held += 1
+    facts["citations"] = examined
+    facts["uncited"] = uncited
+    facts["citation_pins"] = (held, len(CITATION_PINS))
 
 # Check 6's worked cases of provenance-discipline 2.22, Rule 3: (row,
 # unit, value served, figures served, prints served). Written out here,
@@ -315,6 +526,9 @@ def check(project_dir, closed=None):
     _check_conversions(on_disk, constants_rows.load_values(project_dir),
                        by_name, failures, facts)
 
+    # 7. citations (schema 7, L-421 part 3)
+    _check_citations(on_disk, by_name, failures, facts)
+
     # 5. closed slices
     closed = constants_rows.CLOSED_SLICES if closed is None else closed
     facts["closed"] = closed
@@ -393,6 +607,18 @@ def main():
                   "cases of the count rule holding: %d of %d"
                   % (facts["conversions"], facts["pins"][0],
                      facts["pins"][1]))
+        if "citations" in facts:
+            print("7. citations worked out again by the inheritance rule: "
+                  "%d; worked cases holding: %d of %d; the written store "
+                  "(a chain, a pointer, a pointer to nothing): %s"
+                  % (facts["citations"], facts["citation_pins"][0],
+                     facts["citation_pins"][1],
+                     "holds" if facts.get("chain") else "FAILS"))
+            print("   rows with no citation, own or inherited (%d)%s"
+                  % (len(facts["uncited"]), ":" if facts["uncited"] else ""))
+            for line in constants_rows.wrap_names(facts["uncited"],
+                                                  indent="     "):
+                print(line)
         print("")
 
     if failures:
@@ -414,10 +640,12 @@ def main():
 
     print("Export matches the store: sha256 %s on both sides; %d rows "
           "re-read, %d not exported, %d tokens; %d conversions "
-          "re-computed, %d of %d worked cases hold."
+          "re-computed, %d of %d worked cases hold; %d citations worked "
+          "out again, %d of %d worked cases hold."
           % (facts["hash_store"][:12], facts["rows_examined"],
              facts["not_exported"], facts["tokens"], facts["conversions"],
-             facts["pins"][0], facts["pins"][1]))
+             facts["pins"][0], facts["pins"][1], facts["citations"],
+             facts["citation_pins"][0], facts["citation_pins"][1]))
     return 0
 
 

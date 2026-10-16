@@ -12,8 +12,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 160  
-**Total Lines of Code (non-blank):** 126,985  
-**Total Public Functions/Classes:** 1,577
+**Total Lines of Code (non-blank):** 127,334  
+**Total Public Functions/Classes:** 1,579
 
 ## Classification Coverage
 
@@ -210,7 +210,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `earth_system_generator.py` | Paloma's Orrery: Earth System Generator Engine Architecture: The Teaser (Plotly) & Blockbuster (KMZ) Pipeline (673 lines) |
 | `exact_rows_report.py` | - which exact rows a display prints, and where. (604 lines) |
 | `examine_hot_csv.py` | Examine the HOT CSV file structure (47 lines) |
-| `export_constants.py` | - write data/constants_export.json from constants_new.py. The orrery is the producer of its numbers; the gallery reads this file and never reads orrery source. (396 lines) |
+| `export_constants.py` | - write data/constants_export.json from constants_new.py. The orrery is the producer of its numbers; the gallery reads this file and never reads orrery source. (531 lines) |
 | `export_drawings.py` | - write the orrery's stored drawings into data/drawings/, one file per drawing, for the website to pull and draw. (158 lines) |
 | `export_objects.py` | - write data/objects_export.json from the object list in celestial_objects.py. The orrery is the one definition of each object; the gallery reads this file and never reads orrery source. (585 lines) |
 | `export_orbit_cache.py` | Phase 1b desktop devtool: read the local orbit caches and write web-servable orbit/position files for the interactive gallery. (617 lines) |
@@ -226,7 +226,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (3,528 lines) |
 | `skills_index.py` | Generate the Skill Manifest table in the project instructions from the SKILL.md files in skills/. (882 lines) |
 | `test_citation_inheritance.py` | Regression tests for citation-block inheritance. (516 lines) |
-| `test_constants_export.py` | - data/constants_export.json says what constants_new.py holds. (389 lines) |
+| `test_constants_export.py` | - data/constants_export.json says what constants_new.py holds. (603 lines) |
 | `test_constants_provenance.py` | Regression tests for verified numeric constants. (476 lines) |
 | `test_cross_checked.py` | Regression tests for cross-check annotations. (501 lines) |
 | `test_dashboard_parity.py` | Every step the maintenance runs and the Daily Run take has a dashboard button with the same name and the same script, every button under a runner names one of its steps, every button's script is on disk, and every card carries its short line; and proof that this check c... (498 lines) |
