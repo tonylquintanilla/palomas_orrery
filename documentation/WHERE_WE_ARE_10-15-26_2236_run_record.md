@@ -408,9 +408,25 @@ v3.100. Nothing from the refused run was written. -- i think i never uploaded v3
 
 Then run the L-445 close after that lands, not alongside it.
 
+======================================================================
+
+The brief is saved in your orrery folder as `documentation/HANDOFF_L421_checks_brief_20261016.md`, anchored at orrery 641e469 and gallery 09d9291.
+
+**What it covers**
+
+- Part 2, the typed-facts survey, becomes a gating check in the website's run ("Typed facts"). It builds both rooms the way the hover-budget check already does, once as served and once with every served word replaced by a marker, and names any sentence that survives and is not on a short allowed list. It also reads each room's own description in interactive.html, which the original plan left open. Expected result today: none.
+- Part 3, the citations. I measured this one before writing: of the 119 numbers the config links to the orrery, 83 carry a citation beside them, 36 carry none, and only 8 of the 83 match the orrery row's `# Source:` line word for word. The 72 others mostly name the same paper in different words, often with a gloss the website added. The root cause is that the constants export does not carry a row's source at all, so nothing can compare them. The build makes the export carry it and the mirror write it, the way it already writes the value, the unit and the figure count.
+- L-262 (the framing test) rides along and closes; its check has passed on your last two runs.
+
+**The one decision it asks of you**, at that session's start: who owns the citation beside a served number. The recommendation is the orrery, with the website's gloss kept in its own field so no words a visitor reads are lost. That is the same rule you gave for the numbers on Sep 17.
+
+**Three patches, in order**, so no run is red between them: the orrery's export first, then the gallery's mirror and checks, then the orrery's close with the dashboard button. One session at a time on each repository.
+
+The brief is in your folder but not yet in the repository; it goes up with your next push, or the build session's.
+
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-**Session: OPEN: 10-15-26 2249: Opus: L-445 build session**
+**Session: DONE: 10-16-26 1021: Opus: L-445 build session**
 
 L-445 is built, and both patches are saved in your two repository folders.
 
@@ -1064,9 +1080,7 @@ CHECKERS -- the verdict informs the push call
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 
-  2. Move this script into documentation/; commit; push. gallery: 09d92918a78a00fea893740b7e2da109d5b11c25; orrery: 
-
-b0220972b21167b62c501a75fd192c69d0729f80
+  2. Move this script into documentation/; commit; push. gallery: 09d92918a78a00fea893740b7e2da109d5b11c25; orrery: b0220972b21167b62c501a75fd192c69d0729f80 641e469db3a829bde62a8d9f8f093b516b55dd71
 
 Undo is Discard Changes in GitHub Desktop.
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
@@ -1090,7 +1104,7 @@ Next on Earth’s list is the rest of L-421’s checks (the typed facts).
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-**Session: OPEN: 10-15-26 2248: Opus: L-446 Build Session**
+**Session: DONE: 10-16-26 1008: Opus: L-446 Build Session**
 
 The Daily Run fix is built, and both patches are saved in your repository folders. From now on the Daily Run brings in the orrery’s data before it builds the cache. If it can’t reach the orrery, it stops before the build, as you chose.
 
