@@ -456,6 +456,10 @@ Module updated: October 15, 2026 with Anthropic's Claude Opus 5.5
 (L-445 built: Earth's period from the Earth-Moon barycentre, orrery and
 website; L-448 built with it; horizons-orbital-mechanics 1.8, protocol
 v3.99), built on 77245ea8.
+Module updated: October 16, 2026 with Anthropic's Claude Opus 5.5
+(L-446 built: the Daily Run pulls before it builds and stops on a failed
+pull, Tony's option A; L-380 and L-388 built with it; gallery-cache-builder
+1.10, protocol v3.100), built on 54c27d7 and gallery 95713f49.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -673,7 +677,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*242 live items; 226 need attention (`!`); 167 RICE-scored; 199 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*243 live items; 227 need attention (`!`); 167 RICE-scored; 199 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -830,6 +834,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-445 | Earth's orbital period from the Earth-Moon barycentre, not Earth's centre (orrery + website, periods) | OPEN | -- | 2026-10-15 |
 | ! | L-446 | The website's Daily Run pulls the orrery's exports before it builds the cache (gallery, daily run) | OPEN | -- | 2026-10-15 |
 | ! | L-448 | The maintenance run writes a test file into the tracked tree (orrery, maintenance) | OPEN | -- | 2026-10-15 |
+| ! | L-449 | A cache build dropped the 82 build-run records it should have carried (gallery, cache builder) | OPEN | -- | 2026-10-16 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1205,6 +1210,44 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
+#### [L-449] A cache build dropped the 82 build-run records it should have carried (gallery, cache builder)
+<!-- L:449 status:OPEN upd:2026-10-16 section:A flag: rice: -->
+- **Seen by Tony, 2026-10-15,** at L-446's first Daily Run: "the cache
+  build failed. i got the long row of red lines. and 117 changes. nothing
+  committed." The red lines were GitHub Desktop's deletion marks: the new
+  cache's `data/solar-system/raw/runs/` held only that build's record,
+  20261016T043242Z, where gallery 95713f4 holds 82. [measured on Tony's
+  machine through the link]
+- **The build itself was sound.** Swap log: outcome ok, `staging_to_live`
+  took 2 attempts (a refusal the retry absorbed). The elements and
+  vectors carried forward and grew by one day; the new cache passed 28 of
+  28 gallery checks in a sandbox copy. `.prev` held all 82 records.
+- **Cause unknown.** The builder copies `raw/` forward whole
+  (`shutil.copytree(live_raw, staging / 'raw')`) and writes only its own
+  run record; nothing in it deletes one. Four earlier swaps that needed
+  the same retry (2026-10-04, 10-06, 10-08, 10-10) kept every record, by
+  the counts in git (59 to 82, one per build). The pulls L-446 put before
+  the builder do not touch `data/solar-system/`. Not reproduced.
+- **Put back the same night** from gallery 95713f4's bytes, all 82, at
+  Tony's word ("yes, please fix as you see fit"); his push 0f8efb1
+  carries 83.
+- **Tony's question, 2026-10-15:** "if these are obsolete files that
+  should have been deleted, why not let them go? i noticed that in recent
+  daily's nothing is being deleted only added." Nothing on the website
+  reads them; git keeps every version; they are the builder's log of
+  each build. Claude's view, given that night: keep them while the loss
+  is unexplained, because an unasked deletion accepted once makes the
+  next one look normal; if they should not be kept, a rule the builder
+  follows on purpose (for example, keep the last 30).
+**Gap:** (decide) keep the run records, or a rule for how many the
+builder keeps. Then: the cause, if it recurs; a check that a build's
+`raw/` holds everything the live one held (a shrink check for the run
+records, beside the point-count one).
+**Ref:** gallery `tools/gallery_cache_builder.py` (`run_build`,
+`_write_run_manifest`), `data/cache_swap_log.jsonl`,
+`data/solar-system/raw/runs/`; L-446; L-216;
+`documentation/HANDOFF_L446_daily_run_order_build_20261015.md`.
+
 #### [L-448] The maintenance run writes a test file into the tracked tree (orrery, maintenance)
 <!-- L:448 status:OPEN upd:2026-10-15 section:A flag: rice: -->
 - **Seen by Tony, 2026-10-15,** pushing L-447's records: "test_orbit_paths.json
@@ -1342,19 +1385,67 @@ Centre.
   written in that session at b4105c0. It carries the one decision for
   Tony (what the Daily Run does after a failed pull: stop, or build on
   the previous pull and say so) and the planted faults.
-**Gap:** a small gallery build, its own session, from the brief: the
-pulls and copies ahead of the builder; whether the maintenance run keeps its own pull
-rows (a no-op on a second run) or loses them; the Daily Run's dashboard
-group, which Dashboard Parity holds; and one Daily Run showing new
-periods reaching the website and the orbits drawn around the barycentre
-in a single run.
+- **Ruled 2026-10-15, at the build session's start:** option A. When a
+  pull cannot reach the orrery, the Daily Run STOPS before the builder,
+  names the pull, and the summary says so; nothing is built on
+  yesterday's export. Option B (build on the previous pull, named in
+  red) declined. Tony's answer to the session's one question: "A: Stop
+  before the build (Recommended)". This changes the Daily Run's
+  standing rule that a step's problem does not stop the next, for the
+  pull step only.
+- **Built 2026-10-15** on orrery 77245ea8 and gallery 95713f49, two
+  patches: `patch_L446_2_daily_run_gallery_20261015.py` (gallery) and
+  `patch_L446_3_daily_run_orrery_20261015.py` (orrery). [verified in a
+  sandbox; Tony's run is the proof] The orrery patch refused once
+  ("SKILL_HISTORIES.md base moved": L-445's build landed first) and was
+  rebuilt on 54c27d7, its protocol entry v3.100.
+- **Tony's first Daily Run, 2026-10-15 (gallery pushed at 0f8efb1):** the
+  pulls ran before the builder (constants export SHA 77245ea, then
+  54c27d7 on his later run); the build swapped in, one refused rename
+  absorbed. It dropped the 82 build-run records: L-449, put back the
+  same night. Not yet seen: his verdicts on the run's checks and on the
+  live run's Export freshness.
+  - `gallery_maintenance_run.py --pull` runs only the five
+    pull-and-mirror rows, read from GENERATORS through `PULL_ROWS`, so
+    the list keeps one home. `daily_run.py` is four steps: guest book,
+    the pulls, the builder, the offline run.
+  - The three pulls print `FAIL:` with the address they tried and exit
+    1 where they printed N-A and exited 0. A mirror whose pull failed
+    is not run (`FED_BY`) and its row is red, naming the pull.
+  - Beyond the brief, and the same class: a failed GENERATOR now fails
+    the offline run and is named in its summary. Generators were not
+    counted with the checkers, so a red pull row sat above a green "27
+    of 27 passed" and exit 0 -- L-388's shape one level up.
+  - New gating checker "Pull failures" (`tools/test_pull_failures.py`):
+    each pull with its network replaced by one that fails three ways,
+    and the run after a failed pull; three faults planted first. Run
+    against the ORIGINAL pulls it fails 9 of 13, so it can fail.
+  - Dashboard: Pulls From The Orrery in the Daily Run group, Pull
+    Failures in the gallery checks; Dashboard Parity 83 steps, PASS.
+  - Sandbox results, which could not reach GitHub's API (HTTP 403, a
+    real network-off case): the Daily Run stopped after the pulls, the
+    builder did not run, every file under `data/` byte-identical. With
+    only the HEAD answer stood in for, files fetched from GitHub: the
+    pulls wrote orrery 77245ea's SHA, the builder ran after them, the
+    second pass printed "no change" on all five rows, 28 of 28.
+- **Swept for items on the same files** (Cluster the Tail): none other
+  is a small fix on them; nothing carried.
+**Gap:** Tony's run: the gallery patch, ONE Daily Run (the pulls run
+first; the maintenance run's pull rows print "no change"; Cache in
+step passes in the same run), commit, push, the live run (Export
+freshness names today's orrery HEAD); then the orrery patch and
+`orrery_maintenance_run.py`. Then close this item, L-380 and L-388, and
+L-423's item 2, from his run record. L-449 (the dropped run records)
+stays open on its own.
 **Ref:** gallery `daily_run.py`, `gallery_maintenance_run.py`,
+`tools/test_pull_failures.py`,
 `tools/pull_objects_export.py`, `tools/mirror_objects.py`,
 `tools/pull_constants_export.py`, `tools/mirror_constants.py`,
 `tools/pull_drawings.py`, `tools/gallery_cache_builder.py`; L-380;
 L-388; L-423 (item 2); L-444; L-445; L-431; L-395;
 skills/gallery-cache-builder/SKILL.md, The Daily Run's Steps;
-`documentation/HANDOFF_L446_daily_run_order_brief_20261015.md`.
+`documentation/HANDOFF_L446_daily_run_order_brief_20261015.md`;
+`documentation/HANDOFF_L446_daily_run_order_build_20261015.md`.
 
 #### [L-443] The rest of the orrery's objects come to the website as plotted positions (gallery + orrery, objects)
 <!-- L:443 status:OPEN upd:2026-10-14 section:A flag: rice: -->
@@ -2108,7 +2199,7 @@ above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
      cache build, and fail by name when the pull cannot fetch.
      2026-10-15: L-446 (the Daily Run's order) carries this item, by
      Tony's ruling in the coordination session; its brief is written.
-     Done when L-446 closes.
+     Built 2026-10-15. Done when L-446 closes.
   3. L-357, stale leftovers: delete the unreferenced hover fixture
      (Tony, 2026-10-08: yes) and correct two code comments.
   4. L-235 with L-237, the Earth golden record, as a pair: the check
@@ -2714,6 +2805,13 @@ is enough. L-422 holds the shape; this item holds the check.
   network-off test as the planted fault that matters most. This item
   closes at that build's close; the brief is
   `documentation/HANDOFF_L446_daily_run_order_brief_20261015.md`.
+- **2026-10-15, built in L-446's build:** each pull fails by name and
+  exits 1; a mirror after a failed pull does not run; a failed
+  generator fails the run. Shown failing with the network off: in the
+  build sandbox, which GitHub's API refuses, the Daily Run stopped
+  after the pulls and every file under `data/` was byte-identical; and
+  "Pull failures" now tests it on every run. Read for loose ends: none
+  beyond the Gap. Closes with L-446, on Tony's run.
 - **Found 2026-09-28** building the L-345 gallery patch. In a sandbox
   that could not reach GitHub, the gallery maintenance run's "Constants
   export pull" reported PASS "no change", with an N-A inside it, and
@@ -2853,6 +2951,10 @@ the view opens at photosphere + 10% and what the axis does; Tony's eye.
   this fix: the pulls run before the builder. This item closes at that
   build's close; its brief is
   `documentation/HANDOFF_L446_daily_run_order_brief_20261015.md`.
+- **2026-10-15, built in L-446's build:** the pulls are the Daily Run's
+  step 2, before the builder, so the builder's stamp reads the
+  `data/constants_export.sha` the pull has just written. Read for loose
+  ends: none beyond the Gap. Closes with L-446, on Tony's run.
 - **Found 2026-09-25** at gallery `ce09f789`. The routine builds the
   served cache and then pulls `constants_export.json` from the orrery,
   so the served `frame_constants.orrery_sha` names the export from

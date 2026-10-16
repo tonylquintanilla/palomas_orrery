@@ -1,17 +1,18 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 15, 2026, late night: L-445 (Earth's period) built.
-- Written at orrery 77245ea and gallery 95713f4.
+Last updated: October 16, 2026: L-445 (Earth's period), L-446 (Daily Run) built.
+- Written at orrery 54c27d7 and gallery 0f8efb1.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
 > - L-445 (Earth's period) built: the Earth-Moon barycentre's period,
 >   1.00000 years (365.25 days); L-448 (the test file) rode it.
+> - L-446 (the Daily Run's order) built: the pulls ran before the cache
+>   build in your Daily Run; 82 vanished run records were put back.
 >
-> **Do next:** *Run patch_L445_1 and the maintenance run; look at
-> Earth's hover; then patch_L445_2 in the gallery.*
+> **Do next:** *Run patch_L446_3, then the orrery maintenance run; push.*
 >
 > **Needs you now:**
 > - *The words of Earth's hover, at your look: keep or change.*
@@ -32,14 +33,11 @@ Last updated: October 15, 2026, late night: L-445 (Earth's period) built.
   6a.  [done]  Orbital periods from JPL, orrery and website (Oct 14).
   7.   [next]  The Sun's numbers get the checking Earth's got; the Solar
                System room's features close with these rooms.
-  8.   [done]  The served objects are checked against JPL Horizons, from
-               the orrery's run; the periods passed live, Oct 14.
-  8a.  [done]  The run fetches each served body's missing period from
-               JPL: L-444 (the missing periods), all eight, Oct 15.
-  8b.  [NOW]   *L-445 (Earth's period): built; your run and look next.*
-               << moved this session
-  8c.  [next]  L-446 (the Daily Run's order): the website pulls the
-               orrery's data before it builds; takes in L-380, L-388.
+  8-8a.[done]  The served objects are checked against JPL from the
+               orrery's run, missing periods fetched first (Oct 14, 15).
+  8b.  [NOW]   *L-445 (Earth's period): built; your look at the hover next.*
+  8c.  [NOW]   *L-446 (the Daily Run's order): built, ran once; patch_L446_3
+               left.*  << moved this session
   9.   [next]  The website's checks, in the order you confirmed:
                L-423 (the website's checks); its item 2 is stage 8c.
  10.   [next]  A bare interactive.html link opens the Solar System room;
@@ -89,11 +87,12 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
   typed last, marked; Earth's from the Earth-Moon barycentre. (Oct 11, 15)
 - The order: finish Earth, then the Sun (fuzzy boundaries inside
   it), then the objects; no batch of objects first. (Oct 15)
+- A failed pull stops the Daily Run before the build: option A. (Oct 15)
 
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261016T021807Z, ok, no retry (gallery 95713f4).
+- Last cache build: 20261016T043242Z, ok, one retry absorbed (gallery 0f8efb1).
 - Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, 77245ea).
   Whole tree: 280: orrery 116, Earth System 149, stars 13, utilities 2.
 - This page's date and the ledger's newest stamp: both Oct 15. Agree.
@@ -114,12 +113,13 @@ At the next design talk:
 Not urgent, in your order:
 1. Whether the editor also edits the Solar System room's rows.
 2. Choosing a date, and animation.
+3. L-449 (the run records): keep them all, or a rule for how many.
 
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- *Now: `HANDOFF_L445_earth_period_build_20261015.md`, this build;
-  next: `HANDOFF_L446_daily_run_order_brief_20261015.md`*
+- *Now: `HANDOFF_L445_earth_period_build_20261015.md` and
+  `HANDOFF_L446_daily_run_order_build_20261015.md`, the two builds*
 - The distance digits: `DESIGN_L401_distance_digits_rulings_20261011.md`;
   build 1 `HANDOFF_L401_distance_build1_20261012.md`; build 3 parked: L-401.
 - Your notes of Oct 15: `WHERE_WE_ARE_10-15-26_2236_run_record.md`

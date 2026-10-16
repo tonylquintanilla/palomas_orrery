@@ -267,6 +267,17 @@ October 15, 2026 with Anthropic's Claude Opus 5.5 (L-444): Period Fetch
 under the orrery's generators and Period Fetch Suite under its checkers,
 each named what the run prints, in alphabetical place, with its short
 line.
+October 15, 2026 with Anthropic's Claude Opus 5.5 (L-446, with L-380 and
+L-388): the Daily Run is four steps. Pulls From The Orrery, the website's
+gallery_maintenance_run.py --pull, joins the Daily Run group between the
+Guest Book Updater and the Cache Builder, named what the Daily Run prints;
+the Daily Run button says the pulls run first and that a failed pull
+stops it before the builder (Tony's option A of 2026-10-15); Daily Run
+Steps says four scripts; the offline runner's Daily Run card says fourth
+step. Pull Failures, the website's new checker, gets its button under the
+gallery checks, in alphabetical place. Each has its short line. Fixed in
+passing: the Daily Run's short line still named the JPL check, which left
+it on 2026-10-14.
 """
 
 import os
@@ -385,11 +396,18 @@ LAUNCH_GROUPS = {
          "What the gallery needs once a day, in one window, in this order "
          "(L-281, Tony's design of 2026-09-27). First the Guest Book "
          "Updater: approve or decline each new message, and write entries "
-         "or replies if you like. Then the Cache "
+         "or replies if you like. Then the Pulls From The Orrery: the "
+         "orrery's exports and drawings, at its HEAD, copied into the "
+         "website's config BEFORE the build, so the build uses what the "
+         "orrery exported today (L-446). If a pull cannot reach the "
+         "orrery, the Daily Run STOPS there and names it: nothing is built "
+         "on yesterday's export, and you run it again later (Tony's option "
+         "A, 2026-10-15). Then the Cache "
          "Builder, with no OneDrive pause since 2026-10-10 (L-216: "
          "the retry is sufficient). Then the Gallery Maintenance Run, "
          "offline, which the builder's own next steps ask for before a "
-         "commit. A step that reports a problem does not stop the next "
+         "commit; its pull rows print \"no change\". Apart from the pulls, "
+         "a step that reports a problem does not stop the next "
          "one. It ends with one summary naming each step's result and "
          "what is left for you: commit and push in GitHub Desktop, and "
          "the live maintenance run. It opens by saying when the last "
@@ -417,6 +435,22 @@ LAUNCH_GROUPS = {
          GALLERY_REPO_DIR,
          True,
          None,
+         True),
+        ("Pulls From The Orrery",
+         "gallery_maintenance_run.py",
+         "The Daily Run's second step (L-446): gallery_maintenance_run.py "
+         "--pull. Runs only the five pull-and-mirror rows -- Constants "
+         "Export Pull, Config Mirror, Objects Export Pull, Objects Mirror, "
+         "Drawings Pull -- before the Cache Builder, so the build reads "
+         "what the orrery exported today. Everything they bring was "
+         "already checked against JPL in the orrery's maintenance run. A "
+         "pull that cannot reach the orrery prints FAIL with the address "
+         "it tried and writes nothing, and the mirror after it does not "
+         "run (L-388). Ends on a line starting \"=== PULLS:\" that names "
+         "any row that failed; the Daily Run stops there when one did.",
+         GALLERY_REPO_DIR,
+         True,
+         ["--pull"],
          True),
         ("Cache Builder",
          os.path.join("tools", "gallery_cache_builder.py"),
@@ -449,7 +483,7 @@ LAUNCH_GROUPS = {
          True),
         ("Gallery Maintenance Run -- offline",
          "gallery_maintenance_run.py",
-         "The Daily Run's third step: the same button as Gallery "
+         "The Daily Run's fourth step: the same button as Gallery "
          "Maintenance Run -- offline under Gallery -- checks and data, "
          "which describes it in full. Run after the build and before you "
          "commit.",
@@ -469,7 +503,7 @@ LAUNCH_GROUPS = {
         "then runs every checker and prints "
         "one line each. Python: the cache builder suite, pole of date, "
         "the mirror suite, the store writer and store editor suites, "
-        "the config mirror check, Horizons "
+        "the config mirror check, pull failures, Horizons "
         "confirmations, the pointer join, cache in step, drawn orbit, the drawings "
         "check, the collapsed-features sweep, the "
         "guest book updater, the Daily Run's steps, the artifact-1 "
@@ -486,7 +520,7 @@ LAUNCH_GROUPS = {
         "TOOLS YOU RUN BY HAND -- each tests a tool you use yourself",
         ("Daily Run Steps",
         "daily_run.py",
-        "daily_run.py --check: fails if any of the three scripts the "
+        "daily_run.py --check: fails if any of the four scripts the "
         "Daily Run calls is missing, say after a rename, and names it. "
         "Runs nothing else. GATES the gallery runner.",
         GALLERY_REPO_DIR,
@@ -778,6 +812,19 @@ LAUNCH_GROUPS = {
         "and to ERFA, the IAU's routines; then reruns each check with "
         "one input altered, where it must fail. Needs astropy. GATES "
         "the gallery runner. Runs from the gallery repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
+        True),
+        ("Pull Failures",
+        os.path.join("tools", "test_pull_failures.py"),
+        "Runs each of the three pulls in a throwaway copy with its "
+        "network replaced by one that fails three ways -- the orrery's "
+        "HEAD unreachable, its answer unreadable, the file missing at "
+        "HEAD. Each must exit 1, print FAIL naming the address, and leave "
+        "every file as it was; and the mirror after a failed pull must "
+        "not run (L-388, L-446). Plants three faults first, each caught. "
+        "Edits nothing in the repository. GATES the gallery runner.",
         GALLERY_REPO_DIR,
         True,
         None,
@@ -1711,10 +1758,13 @@ CARD_LINES = {
         "HR diagrams, 3D stellar neighborhoods and planetarium views of nearby stars.",
     ("Daily Run",
      "Daily Run -- everything indented below"):
-        "The website's daily routine: guest book, JPL check, cache build, checks.",
+        "The website's daily routine: guest book, pulls, cache build, checks.",
     ("Daily Run",
      "Guest Book Updater"):
         "Approve, decline or defer each new guest book message; write entries.",
+    ("Daily Run",
+     "Pulls From The Orrery"):
+        "Brings the orrery's exports in before the build; stops if one fails.",
     ("Daily Run",
      "Cache Builder"):
         "Fetches from JPL, checks, and swaps in the website's new served cache.",
@@ -1790,6 +1840,9 @@ CARD_LINES = {
     ("Gallery -- checks and data",
      "Pole of Date"):
         "Checks the website's copy of Earth's tilt geometry against the orrery's.",
+    ("Gallery -- checks and data",
+     "Pull Failures"):
+        "Proves each pull fails by name with no network, writing nothing.",
     ("Gallery -- checks and data",
      "Arrival"):
         "Checks the Sun and Earth rooms open on the right things.",

@@ -1,7 +1,7 @@
 <!-- Doc-Kind: generated | The provenance audit: every numeric claim scored against its citation, rebuilt by provenance_scanner.py on each run. Do not hand-edit. -->
 # Paloma's Orrery -- Provenance Audit
 
-Generated: October 15, 2026
+Generated: October 16, 2026
 Files scanned: 162
 Total findings: 1129
 Constants: 193 | Dicts: 70 | Display strings: 866
@@ -20,14 +20,14 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T1 by domain | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|--------------|---:|---:|---:|--------:|
+| 20261016T141205Z | `6ad6975` | 162 | 1129 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 688 | 154 | 7 | 0 |
 | 20261016T044401Z | `77245ea` | 162 | 1129 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 688 | 154 | 7 | 0 |
 | 20261016T034327Z | `b4105c0` | 160 | 1122 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 683 | 153 | 6 | 0 |
 | 20261016T025755Z | `45085c4` | 160 | 1122 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 683 | 153 | 6 | 0 |
 | 20261016T020825Z | `464d872` | 160 | 1122 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 683 | 153 | 6 | 0 |
 | 20261016T013358Z | `464d872` | 160 | 1122 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 683 | 153 | 6 | 0 |
-| 20261015T201751Z | `9579fcd` | 161 | 1123 | 281 | orrery 116, Earth System 149, stars 13, utilities 2, unclassified 1 | 683 | 153 | 6 | 0 |
 
-Change since the previous run: total +7, Tier-1 +0.
+Change since the previous run: total +0, Tier-1 +0.
 
 No file's Tier-1 count rose.
 
@@ -1949,10 +1949,10 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 299 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 300 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 2123 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 2254 | dict | SECTION_SYMBOLS[...] | (8 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
+| 310 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 311 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 2176 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 2307 | dict | SECTION_SYMBOLS[...] | (8 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
 
 ### planet_visualization_utilities.py
 

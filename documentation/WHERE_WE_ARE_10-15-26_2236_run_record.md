@@ -370,17 +370,41 @@ After those two: the rest of Earth’s list, then the Sun’s, then the objects.
 
 What remains, in this order, one session at a time:
 
-L-446 session: rebuild patch_L446_3 on 54c27d7. Its protocol entry becomes v3.100, since v3.99 is taken. Then run it, the maintenance run (Dashboard parity goes green), commit, push; reinstall gallery-cache-builder 1.10. That session also owes a new ledger item for the 82 cache records that vanished and were restored.
-L-445 session: its close. L-445 and L-448 to DONE, with your “correct” on the hover words and the folder-removal crash noted. Your two steps from its build record, if not done: reinstall horizons-orbital-mechanics 1.8, and save documentation/project_instructions_v3_99.md (it is not in the repo yet). Then the L-446 session’s close, after yours shows the Daily Run working.
+L-446 session: rebuild patch_L446_3 on 54c27d7. Its protocol entry becomes v3.100, since v3.99 is taken. -- 3.99 was never installed or uploaded. 
+
+Then run it, the maintenance run (Dashboard parity goes green), commit, push; reinstall gallery-cache-builder 1.10. That session also owes a new ledger item for the 82 cache records that vanished and were restored.
+
+L-445 session: its close. L-445 and L-448 to DONE, with your “correct” on the hover words and the folder-removal crash noted. Your two steps from its build record, 
+
+if not done: reinstall horizons-orbital-mechanics 1.8, and save documentation/project_instructions_v3_99.md (it is not in the repo yet). Then the L-446 session’s close, after yours shows the Daily Run working. -- 1.8 is in the repo. reinstalled it just in case and running the manifest again.
+
+Headers: 12 read as YAML by PyYAML.
+OK: 12 skills parsed, no consistency problems.
+Read plans checked (7): gallery-cache-builder/SKILL.md 2 parts, horizons-orbital-mechanics/SKILL.md 2 parts, interactive-exhibit/SKILL.md 4 parts, ledger-and-session-records/SKILL.md 4 parts, provenance-cross-check/SKILL.md 2 parts, provenance-discipline/SKILL.md 5 parts, provenance-discipline/references/figures.md 3 parts.
+Long skills with no read plan yet, by PLAN_NOT_YET (2): orrery-coding-conventions, safe-file-editing.
+  WARNING: gallery-cache-builder: SKILL.md body is 542 lines; Anthropic's guideline is under 500
+  WARNING: interactive-exhibit: SKILL.md body is 806 lines; Anthropic's guideline is under 500
+  WARNING: ledger-and-session-records: SKILL.md body is 794 lines; Anthropic's guideline is under 500
+  WARNING: orrery-coding-conventions: SKILL.md body is 650 lines; Anthropic's guideline is under 500
+  WARNING: orrery-coding-conventions: long and no read plan yet; on PLAN_NOT_YET, so it gets one at its next version
+  WARNING: provenance-cross-check: SKILL.md body is 561 lines; Anthropic's guideline is under 500
+  WARNING: provenance-discipline: SKILL.md body is 1323 lines; Anthropic's guideline is under 500
+  WARNING: safe-file-editing: SKILL.md body is 714 lines; Anthropic's guideline is under 500
+  WARNING: safe-file-editing: long and no read plan yet; on PLAN_NOT_YET, so it gets one at its next version
+Manifest already matched all 12 skills.
+Skill Manifest regenerated (12 skills) in PROJECT_INSTRUCTIONS.md.
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
 Harmless leftovers: the empty test_output folder on disk (git ignores it; delete it by hand whenever), and the uploaded run record is newer than the copy at HEAD, so it goes up with the next push.
 
-The one thing to do now: go back to the L-446 session and paste this:
+The one thing to do now: go back to the L-446 session and paste this: -- done
 
 patch_L446_3 refused: SKILL_HISTORIES.md base moved. The orrery HEAD is
 now 54c27d7 (the L-445 build landed first: protocol v3.99, horizons
 1.8, a SKILL_HISTORIES entry, L-445's ledger and Where We Are edits).
 Pull 54c27d7 and rebuild patch_L446_3 on it. Its protocol entry is
-v3.100. Nothing from the refused run was written.
+v3.100. Nothing from the refused run was written. -- i think i never uploaded v3.99 and so 3.100 replaced it.
 
 Then run the L-445 close after that lands, not alongside it.
 
@@ -850,6 +874,10 @@ Next on the road is L-446 (the Daily Run’s order), from its brief.
 ==========================================================================
 
 The fault was in my patch: it tried to remove the folder without allowing for Windows refusing. Your copy of the patch keeps that flaw, so when you move it into documentation/, it stands as the record of what ran. I’ll note the cause in L-448 when it closes, and future patches will treat a refused folder removal as a note, not a crash.
+
+======================================================
+
+
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -1390,6 +1418,207 @@ ok  palomas_orrery_dashboard.py                                11 edit(s)
 ok  skills/gallery-cache-builder/SKILL.md                      6 edit(s)
 ERROR: documentation/SKILL_HISTORIES.md is not the version this patch was built on (base moved). Compare it with the repository in GitHub Desktop.
 NOTHING was written. Undo is not needed.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+================================================================================
+
+What changed from the first version:
+
+Protocol entry is now v3.100, sitting on top of L-445’s v3.99. v3.97 moves down to the history file to keep three resident.
+Ledger and Where We Are now show both builds. L-445 is waiting on your look at Earth’s hover; L-446 has run once and only this patch is left.
+New ledger item, L-449 (the dropped run records). It records what happened at your Daily Run and asks your question: keep all the run records, or set a rule for how many. It’s also on Where We Are’s “not urgent” list.
+The build record now ends with a short account of tonight’s run.
+
+Tested: I ran it on fresh copies of both repositories as you pushed them. It applied cleanly, and a second run refused. The ledger index, the skill check and Dashboard Parity all pass, with 83 steps matched.
+
+One thing I caught while saving it: the first copy to your folder came through as the old patch. The file tool had reused its earlier upload under the same name. I re-sent it from a fresh path, and your folder now holds the rebuilt version (52,891 bytes).
+
+Your next step: run patch_L446_3_daily_run_orrery_20261015.py in the orrery folder, then orrery_maintenance_run.py, then commit and push.
+
+Where this leaves us:
+
+Both builds are done. L-445’s last step is your look at Earth’s hover; L-446’s is this patch.
+After the push: reinstall the gallery-cache-builder skill at 1.10, and save the protocol as documentation/project_instructions_v3_100.md.
+The two website patch scripts were committed in the website folder’s top level. Move them into its documentation/ folder whenever it’s convenient.
+
+I’m still not committing or pushing from here. Those uncommitted changes are only in my working copies, and you push your repositories yourself after running the patch.
+
+1. Your next step hasn’t changed: run patch_L446_3 in the orrery folder, 
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L446_3_daily_run_orrery_20261015.py
+ok  palomas_orrery_dashboard.py                                11 edit(s)
+ok  skills/gallery-cache-builder/SKILL.md                      6 edit(s)
+ok  documentation/SKILL_HISTORIES.md                           1 edit(s)
+ok  PROJECT_INSTRUCTIONS.md                                    4 edit(s)
+ok  documentation/PROJECT_INSTRUCTIONS_HISTORY.md              1 edit(s)
+ok  LEDGER_CONSOLIDATED.md                                     8 edit(s)
+ok  documentation/WHERE_WE_ARE.md                              8 edit(s)
+ok  documentation/HANDOFF_L446_daily_run_order_build_20261015.md new file
+patch applied (8 file(s) written)
+
+NEXT:
+  1. Run orrery_maintenance_run.py: it rebuilds the ledger index and
+     the skill manifest (gallery-cache-builder 1.10); Dashboard parity
+     should pass with 83 steps.
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261016T044401Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 1.9s  rewrote LEDGER_CONSOLIDATED.md
+  Skill manifest               0.2s  rewrote PROJECT_INSTRUCTIONS.md
+  Constants export             0.9s  unchanged (1 checked, not written)
+  Period fetch                 0.3s  unchanged (1 checked, not written) --
+                                     NOTHING MISSING -- 13 served objects
+                                     examined, no query asked
+  Horizons check               0.7s  rewrote data/horizons_confirmations.json --
+                                     PASS -- 1 checked today, 1 queries
+  Objects export               0.3s  rewrote data/objects_export.json
+  Drawings export              0.4s  unchanged (1 checked, not written)
+  Module atlas                 7.5s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               5.6s  rewrote DATA_INVENTORY.md
+  Exact rows report            2.4s  rewrote EXACT_ROWS_PRINTED.md -- 13 of 41
+                                     exact rows printed at 43 lines (33 orrery,
+                                     10 gallery); 8 drawn only, 14 not followed,
+                                     0 map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.2s  No changes to constants_new.py since HEAD.
+  Constants relations          0.3s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              1.0s  No figure count exceeds its inputs: 36
+                                     derived row(s) read, 26 judged OK -- 26 OK,
+                                     10 NOT YET MIGRATED, 1 NO DERIVED LINE, 1
+                                     UNMARKED CONVERSION; 18 conversion(s)
+                                     checked.
+  Constants export check       1.7s  Export matches the store: sha256
+                                     2a1211f8cce2 on both sides; 127 rows
+                                     re-read, 56 not exported, 31 tokens; 320
+                                     conversions re-computed, 10 of 10 worked
+                                     cases hold.
+  Objects export check         0.3s  pass
+  Horizons confirmations       0.3s  pass -- 13 of 13 entries and 11 periods
+                                     confirmed, 26 sheets read, within 30 days
+  Horizons check suite         0.6s  pass -- 64 checks, every planted fault
+                                     caught by name
+  Period fetch suite           2.7s  pass -- 36 checks, every planted fault
+                                     caught (20 planted, 8 of them for Earth's
+                                     period, L-445)
+  Skill headers                0.2s  12 skills parsed, no consistency problems.
+  Exact rows by the count      1.9s  PASSING -- 13 printed exact rows each state
+                                     a count; 33 orrery lines print through
+                                     exact_text() or row_text(); 10 gallery lines
+                                     are served the count
+  Dimensions                   1.2s  No unit contradicts its arithmetic: 54
+                                     derived row(s) read -- 42 OK, 9 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.1s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.1s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 126 status lines in constants_new.py are
+                                     well formed; 54 rows carry none.
+  Row shape                    0.1s  All 183 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.2s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Scanner row run (L-414)      0.2s  16 of 16 pins hold -- each row reads its own
+                                     comment run, declared rows are named, the
+                                     gate path is read by name.
+  Reset completeness          19.5s  PASS -- all 311 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  2.3s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped; nothing left behind.
+  Earth pole of date           0.3s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Hills cloud sampler (L-421)    0.5s  PASS -- 4 of 4 planted faults caught; the
+                                     real rows pass, the dots' plane tilted 34.1
+                                     deg
+  Drawings export check        0.5s  PASS -- 3 of 3 planted faults caught;
+                                     hills_cloud 3600 dots, tilt 30.9 deg, sha256
+                                     a51e93118069
+  Position digits (L-401)      3.1s  PASS -- 14 of 14 planted faults caught by
+                                     name; 23 hovers examined, 181 lines compared
+                                     against their errors; 5 pairs printed the
+                                     same from either end; 496 hovers of every
+                                     listed object from the Sun, Earth and
+                                     Neptune; 3 recorded 2xr answers read by
+                                     column name; 10 period sentences
+  Orbit markers (L-431, L-401)   17.4s  PASS -- 12 of 12 planted faults caught by
+                                     name; 4 ellipses, 1080 drawn points on their
+                                     period's centre; 14 markers, 9 dates, 53
+                                     printed distances against their errors; 6
+                                     elements as given; 3 Keplerian positions
+                                     half a year on; 1 parameters-window date
+                                     pairs; 2 Moon arcs; 2 perturbation checks; 1
+                                     perihelion osculating orbits; 2 frames; 2
+                                     sources read
+  Domain Split                 0.6s  PASS -- 6 of 6 planted faults caught; the
+                                     split reads each module's Domain: tag and
+                                     prints the same on the console, in the audit
+                                     and in the run history.
+  Maintenance report (L-269)    0.1s  PASS -- 4 of 4 planted faults caught by
+                                     name; 4 summaries; 2 risen file(s) named
+  Dashboard parity             0.4s  PASS -- 10 of 10 planted faults caught; 83
+                                     steps matched to their buttons by name and
+                                     script; 113 cards carry a short line; the
+                                     search finds 4 of 4 cases in any word order
+  Worksheet checker           11.6s  74 of 110 routed, 8 clean
+  Worksheet checker tests     25.8s  All 135 checks passed
+  Worksheet key round trip     1.9s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         32.9s  All 76 checks passed
+  Extractor pins               0.6s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          82.0s  0 TIER-1 -- the push gate holds; Whole tree,
+                                     Tier-1: 280: orrery 116, Earth System 149,
+                                     stars 13, utilities 2.
+
+======================================================================
+  31 of 31 gating checkers passed -- 230.7s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           74 of 110 routed, 8 clean
+    Provenance scanner          0 TIER-1 -- the push gate holds; Whole tree, Tier-1: 280: orrery 116, Earth System 149, stars 13, utilities 2.
+      No file's Tier-1 count rose since the previous run.
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2277 file(s) examined, 14 written, 1 created, 0 removed, 2 rewritten identically
+    written   DATA_INVENTORY.md
+    written   EXACT_ROWS_PRINTED.md
+    written   LEDGER_CONSOLIDATED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROJECT_INSTRUCTIONS.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/horizons_check_last_run.json
+    written   data/horizons_confirmations.json
+    written   data/objects_export.json
+    written   data/provenance_history.json
+    written   documentation/WHERE_WE_ARE_10-15-26_2236_run_record.md
+    written   documentation/prompts/citation_review.jsonl
+    created   documentation/project_instructions_v3_100.md
+    rewritten with identical bytes, no action needed:
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  2. GitHub Desktop: commit and push.
+  3. Reinstall gallery-cache-builder (1.10) in Settings > Skills; save
+     PROJECT_INSTRUCTIONS.md as documentation/project_instructions_v3_100.md
+     and copy it into the Project instructions. -- done, but we jumped from 3.98 to 3.100. 3.99 was never installed or uploaded. 
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

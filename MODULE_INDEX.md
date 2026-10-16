@@ -1,7 +1,7 @@
 <!-- Doc-Kind: generated | The human-browsable module index, rebuilt by module_atlas.py alongside the atlas. Do not hand-edit. -->
 # Paloma's Orrery - Module Index
 
-**Generated:** October 15, 2026 by `module_atlas.py`  
+**Generated:** October 16, 2026 by `module_atlas.py`  
 **Repository:** Paloma's Orrery - Solar System Visualization Suite  
 **Philosophy:** Data Preservation is Climate Action
 
@@ -12,7 +12,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 162  
-**Total Lines of Code (non-blank):** 127,435  
+**Total Lines of Code (non-blank):** 127,489  
 **Total Public Functions/Classes:** 1,585
 
 ## Classification Coverage
@@ -45,7 +45,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `earth_system_visualization_gui.py` | Earth System Visualization GUI for Paloma's Orrery Hub window with climate data visualizations (1,903 lines) |
 | `orbital_param_viz.py` | Interactive orbital element visualization tool. (1,965 lines) |
 | `palomas_orrery.py` | Main GUI and plotting engine for Paloma's Orrery. (9,668 lines) |
-| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (3,007 lines) |
+| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (3,060 lines) |
 | `star_visualization_gui.py` | Stellar visualization GUI for Paloma's Orrery. (1,409 lines) |
 
 ---
@@ -266,7 +266,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
 | `patch_L445_1_earth_period_20261015.py` | - L-445 (Earth's period): Earth's orbital period is asked of the Earth-Moon barycentre (Horizons target 3), not Earth's centre (399); the Horizons check asks the same target; the hover and the parameters window say whose period it is. L-448 (the test file in... (189 lines) |
-| `patch_L446_3_daily_run_orrery_20261015.py` | - the orrery's half of L-446 (the Daily Run pulls before it builds, with L-380 and L-388): the dashboard's buttons, the ledger, Where We Are, gallery-cache-builder 1.10, protocol v3.99, and the build record. (314 lines) |
+| `patch_L446_3_daily_run_orrery_20261015.py` | - the orrery's half of L-446 (the Daily Run pulls before it builds, with L-380 and L-388): the dashboard's buttons, the ledger, Where We Are, gallery-cache-builder 1.10, protocol v3.100, a new item L-449 (the dropped run records), and the build record. (315 lines) |
 | `test_drawings_export.py` | Each stored drawing in data/drawings/ is the drawing its rows give today, git tracks it, and each check can fail. (173 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |

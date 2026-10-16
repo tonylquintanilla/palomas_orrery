@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.99 | October 15, 2026
+Tony Quintanilla, PE | Claude | v3.100 | October 16, 2026
 
-Cut from 77245ea8 at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 54c27d7f at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -515,11 +515,12 @@ gallery-assembler            1.3  render_orbits.py, resolver.py,
                                   unresponsive, it worked yesterday, a console
                                   error appears, or Claude is about to hand
                                   Tony a test to run
-gallery-cache-builder        1.9  Nightly builder, atomic swap and its
+gallery-cache-builder        1.10 Nightly builder, atomic swap and its
                                   retry/roll-back/swap log, "Access is denied"
                                   under data/, coverage_index, serving cache,
                                   objects_config, dry-run/first-build/nightly,
-                                  builder testing layers
+                                  builder testing layers, the Daily Run's order
+                                  and a failed pull
 interactive-exhibit          1.15 adding or changing an exhibit in
                                   interactive.html; any edit to the Sun's
                                   chrome (drawer, nav cluster, frame zoom,
@@ -1171,6 +1172,44 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.100 (October 16, 2026): No rule changed in this document. ONE
+skill bump, one version (L-446, with L-380 and L-388):
+gallery-cache-builder 1.9 -> 1.10. THE WEBSITE'S DAILY RUN PULLS
+BEFORE IT BUILDS.
+
+WHAT PROMPTED IT. Tony, 2026-10-15, after L-444's first live run:
+"Wait, shouldn't the horizons check come before the cache build?" The
+check already runs in the orrery, before the export; what came after
+the build was the website's pull of that export, so each build read
+the previous run's pull. Ruled the same day: the pulls run before the
+builder. At the build's start Tony chose option A for a pull that
+cannot reach the orrery: the Daily Run stops before the builder.
+
+WHAT CHANGED. gallery-cache-builder rewrites The Daily Run's Steps:
+four steps, the pulls (gallery_maintenance_run.py --pull, reading the
+one pull list in its GENERATORS) before the builder; a pull that
+cannot fetch fails by name and its mirror does not run; the Daily Run
+stops there; "Pull failures" tests those branches every run. Its
+description and trigger name the Daily Run's order. Its v1.8 entry
+moved to documentation/SKILL_HISTORIES.md, by the three-entry rule.
+Built at 77245ea8; rebuilt on 54c27d7 after L-445's build (v3.99)
+landed first, so this entry is v3.100.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copy reads
+gallery-cache-builder 1.10 before work that fires it. This session
+confirmed its loaded copies read gallery-cache-builder 1.9,
+safe-file-editing 1.13, agentic-pre-test 1.3 and
+ledger-and-session-records 1.21, as the manifest expected. v3.99's
+obligation, horizons-orbital-mechanics 1.8, still travels: no work
+this session fired that skill.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.97 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.99 (October 15, 2026): No rule changed in this document. ONE
 skill bump, one version (L-445): horizons-orbital-mechanics 1.7 -> 1.8.
 EARTH'S PERIOD IS THE EARTH-MOON BARYCENTRE'S.
@@ -1227,43 +1266,6 @@ discharging v3.97's obligation.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.95 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.97 (October 14, 2026): No rule changed in this document. ONE
-skill bump, one version (L-442): ledger-and-session-records 1.20 ->
-1.21. THE PLAN IS STRATEGY; THE ROAD IS THE ORDER.
-
-WHAT PROMPTED IT. Tony, 2026-10-13: "We should update the master plan
-soon," then "the master plan for the interactive gallery is our
-planning roadmap. Is it doing its job?" It worked as the record of the
-architecture and had stopped working as the order of the work; the road
-on Where We Are had taken that job on 2026-10-10 (L-433). His ruling the
-same day named seven kinds of document: "master plan: strategic - where
-we are: tactical - handoffs: orders and reports - ledger: logistics."
-
-WHAT CHANGED. ledger-and-session-records rewrites The Document Stack as
-the seven kinds -- strategy, tactics, communication, logistics, the
-field manual, reference, the work -- each with when it is read, and
-maps the Doc-Kind values in use onto them. Sequencing moves from the
-master plan to the road on Where We Are; the ledger keeps status.
-The plan restamps to v36 beside it: strategy only, its dated history
-and its lineage moved to documentation/MASTER_PLAN_HISTORY.md (Tony's
-ruling of 2026-10-14). The skill's v1.18 entry moved to
-documentation/SKILL_HISTORIES.md, by the three-entry rule. This
-document's one mention of the plan (The Braid: Section 5a carries the
-braid's sequencing form) stays true: 5a keeps the braid.
-
-THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
-that session. The next session confirms its loaded copy reads
-ledger-and-session-records 1.21 before ledger work. This session
-confirmed its loaded copies read horizons-orbital-mechanics 1.6,
-gallery-cache-builder 1.9 and interactive-exhibit 1.15, discharging
-v3.96's obligation.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.94 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

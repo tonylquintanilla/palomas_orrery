@@ -783,6 +783,14 @@ build, and it writes down two things that had lived only in code or only
 in a ledger block: never `shutil.rmtree` anything in this tree, and judge
 a conflict copy by what is inside it.
 (Moved down 2026-10-14, when 1.9 made a fourth entry.)
+Earlier: 1.8 | 2026-10-10, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ a6678b0f and gallery @ cb9038cc. v1.8 (L-216) retires
+the hand routine's OneDrive pause, on Tony's word of 2026-10-10: "you
+can remove the pause check from the daily run. the retry is
+sufficient." A session following the old step would have told him to
+pause. The skill also gets its read plan, at its next version as Tony
+ruled on 2026-10-08 (L-418).
+(Moved down 2026-10-15, when 1.10 made a fourth entry.)
 
 ## horizons-orbital-mechanics
 

@@ -2847,6 +2847,46 @@ resident.
 (Moved down from the resident protocol on 2026-10-15 when
 v3.99 made a fourth entry.)
 
+v3.97 (October 14, 2026): No rule changed in this document. ONE
+skill bump, one version (L-442): ledger-and-session-records 1.20 ->
+1.21. THE PLAN IS STRATEGY; THE ROAD IS THE ORDER.
+
+WHAT PROMPTED IT. Tony, 2026-10-13: "We should update the master plan
+soon," then "the master plan for the interactive gallery is our
+planning roadmap. Is it doing its job?" It worked as the record of the
+architecture and had stopped working as the order of the work; the road
+on Where We Are had taken that job on 2026-10-10 (L-433). His ruling the
+same day named seven kinds of document: "master plan: strategic - where
+we are: tactical - handoffs: orders and reports - ledger: logistics."
+
+WHAT CHANGED. ledger-and-session-records rewrites The Document Stack as
+the seven kinds -- strategy, tactics, communication, logistics, the
+field manual, reference, the work -- each with when it is read, and
+maps the Doc-Kind values in use onto them. Sequencing moves from the
+master plan to the road on Where We Are; the ledger keeps status.
+The plan restamps to v36 beside it: strategy only, its dated history
+and its lineage moved to documentation/MASTER_PLAN_HISTORY.md (Tony's
+ruling of 2026-10-14). The skill's v1.18 entry moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule. This
+document's one mention of the plan (The Braid: Section 5a carries the
+braid's sequencing form) stays true: 5a keeps the braid.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copy reads
+ledger-and-session-records 1.21 before ledger work. This session
+confirmed its loaded copies read horizons-orbital-mechanics 1.6,
+gallery-cache-builder 1.9 and interactive-exhibit 1.15, discharging
+v3.96's obligation.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.94 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-16 when
+v3.100 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================
