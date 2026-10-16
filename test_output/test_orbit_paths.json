@@ -1,0 +1,1 @@
+{"Valid_Sun": {"data_points": {"2025-01-01": {"x": 1.5, "y": 0.2, "z": 0.1}, "2025-01-02": {"x": 1.51, "y": 0.21, "z": 0.11}, "2025-01-03": {"x": 1.52, "y": 0.22, "z": 0.12}}, "metadata": {"start_date": "2025-01-01", "end_date": "2025-01-03", "center_body": "Sun", "last_updated": "2025-01-01"}}, "Invalid_Sun": "corrupted"}
