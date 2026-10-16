@@ -1,21 +1,21 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 16, 2026, morning: L-446 (the Daily Run's order) closed.
-- Written at orrery 3cedfb7 and gallery 0f8efb1.
+Last updated: October 16, 2026, morning: L-445 (Earth's period) closed.
+- Written at orrery a66fd67 and gallery 0f8efb1.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - L-445 (Earth's period) built: the Earth-Moon barycentre's period,
->   1.00000 years (365.25 days); L-448 (the test file) rode it.
-> - L-446 (the Daily Run's order) closed: the pulls ran before the build,
->   28 of 28 checks passed, the live site serves the orrery's export.
+> - L-445 (Earth's period) closed: the Earth-Moon barycentre's period,
+>   in the orrery and on the website, your "correct" on both.
+> - L-448 (the test file) closed: the tests leave nothing in the repo.
 >
-> **Do next:** *The L-445 (Earth's period) close, in its own session.*
+> **Do next:** *Earth's list goes on: the rest of L-421's checks (the
+> typed facts, stage 6).*
 >
 > **Needs you now:**
-> - *Run patch_L446_4, then the orrery maintenance run; push.*
+> - *Run patch_L445_3, then the orrery maintenance run; push.*
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
@@ -23,9 +23,8 @@ Last updated: October 16, 2026, morning: L-446 (the Daily Run's order) closed.
 
   1-4. [done]  The Sun, Earth and Solar System rooms are live; the orrery
                feeds the website and nothing is typed twice.
-  5.   [NOW]   *Earth's list (L-413): L-445 (Earth's period, stage 8b),
-               then the rest of L-421's checks (stage 6), then Earth's
-               design talks.*
+  5.   [NOW]   *Earth's list (L-413): the rest of L-421's checks (stage
+               6), then Earth's design talks.* << moved this session
   5b.  [NOW]   The scaffolding checks clear beside the slices: the
                dashboard (L-440) done; L-424, L-425, L-426 to come.
   6.   [next]  The typed facts: the inner Oort cloud is drawn on the
@@ -33,9 +32,9 @@ Last updated: October 16, 2026, morning: L-446 (the Daily Run's order) closed.
   6a.  [done]  Orbital periods from JPL, orrery and website (Oct 14).
   7.   [next]  The Sun's numbers get the checking Earth's got; the Solar
                System room's features close with these rooms.
-  8-8a.[done]  The served objects are checked against JPL from the
-               orrery's run, missing periods fetched first (Oct 14, 15).
-  8b.  [NOW]   *L-445 (Earth's period): built; your look at the hover next.*
+  8-8b.[done]  The served objects are checked against JPL from the
+               orrery's run, missing periods fetched first; Earth's from
+               the Earth-Moon barycentre (Oct 14-16). << moved this session
   8c.  [done]  L-446 (the Daily Run's order): pulls before the build (Oct 16).
   9.   [next]  L-423 (the website's checks): item 2 done (Oct 16); next,
                item 1, L-262 (the framing test): its row passed Oct 15.
@@ -92,7 +91,7 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 
 Read from files when this page was written, not typed from memory.
 - Last cache build: 20261016T043242Z, ok, one retry absorbed (gallery 0f8efb1).
-- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, 3cedfb7).
+- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, a66fd67).
   Whole tree: 280: orrery 116, Earth System 149, stars 13, utilities 2.
 - This page's date and the ledger's newest stamp: both Oct 16. Agree.
 
@@ -117,8 +116,9 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- *Now: `HANDOFF_L445_earth_period_build_20261015.md`, its close next*
-- L-446, closed: `HANDOFF_L446_daily_run_order_build_20261015.md`
+- *Next: L-421 (the typed facts) in the ledger, its remaining checks*
+- Closed: L-445 `HANDOFF_L445_earth_period_build_20261015.md`; L-446
+  `HANDOFF_L446_daily_run_order_build_20261015.md`
 - The distance digits: `DESIGN_L401_distance_digits_rulings_20261011.md`;
   build 1 `HANDOFF_L401_distance_build1_20261012.md`; build 3 parked: L-401.
 - Your notes of Oct 15: `WHERE_WE_ARE_10-15-26_2236_run_record.md`

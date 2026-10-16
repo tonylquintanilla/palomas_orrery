@@ -877,7 +877,216 @@ The fault was in my patch: it tried to remove the folder without allowing for Wi
 
 ======================================================
 
+**Turn: 10-16-26 1012:**
+Only two things remain for L-445, and one of them is mine.
 
+**Yours: look at Earth's hover on the website.** Your run record shows the website patch, its run and the push (0f8efb1), but no note from a look at the site itself. The words are already live: the config the site serves now gives Earth's period as 1.00000 years (365.25 days), "for the Earth-Moon center of mass". The look is the Solar System room and the Earth room on your phone or browser, checking that the sentence reads the way your "correct" approved in the orrery. -- correct
+
+**Mine: the close.** Once you've looked, I'll write the close patch from this run record. It will:
+- move L-445 and L-448 to DONE, quoting your "correct" and the run lines that prove the build: the Period fetch fetched Earth, the Horizons check passed, all checks passed on both sides, and both pushes;
+- record the folder-removal crash on L-448, with its cause;
+- mark road stage 8b done on Where We Are.
+
+Everything else from the build record is already done. The 1.8 skill is reinstalled, the missing v3.99 protocol copy was added by L-446's close, and both repositories are pushed. The empty `test_output` folder on your disk is harmless, so delete it whenever you like.
+
+One thing carries forward and isn't yours to do. A fresh session has to confirm it loads the orbital-mechanics skill as 1.8. This session started on 1.7, so it can't check that.
+
+So the one thing I need: tell me how Earth's hover looks on the website, and I'll write the close.
+
+========================================================================================================
+
+**Turn: 10-16-26 1021:**
+I’ve written the close patch, and it’s in your orrery folder as patch_L445_3_close_20261016.py.
+
+1. Your next step: run it, 
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L445_3_close_20261016.py
+ok  edit    LEDGER_CONSOLIDATED.md                       line 466: Module updated: October 16, 2026 with Anthropi
+ok  edit    LEDGER_CONSOLIDATED.md                       line 1255: <!-- L:448 status:DONE upd:2026-10-16 section:
+ok  edit    LEDGER_CONSOLIDATED.md                       line 1276: - **Closed 2026-10-16 on Tony's run,** read fr
+ok  edit    LEDGER_CONSOLIDATED.md                       line 1280: <!-- L:445 status:DONE upd:2026-10-16 section:
+ok  edit    LEDGER_CONSOLIDATED.md                       line 1338: - **Closed 2026-10-16 on Tony's run and look,*
+ok  edit    LEDGER_CONSOLIDATED.md                       line 3751: <!-- L:351 status:OPEN upd:2026-10-16 section:
+ok  edit    LEDGER_CONSOLIDATED.md                       line 3864: - **2026-10-16, safe-file-editing, next bump (
+ok  edit    documentation/WHERE_WE_ARE.md                line 4: Last updated: October 16, 2026, morning: L-445
+ok  edit    documentation/WHERE_WE_ARE.md                line 10: > - L-445 (Earth's period) closed: the Earth-M
+ok  edit    documentation/WHERE_WE_ARE.md                line 18: > - *Run patch_L445_3, then the orrery mainten
+ok  edit    documentation/WHERE_WE_ARE.md                line 26: 5.   [NOW]   *Earth's list (L-413): the rest o
+ok  edit    documentation/WHERE_WE_ARE.md                line 36: 8-8b.[done]  The served objects are checked ag
+ok  edit    documentation/WHERE_WE_ARE.md                line 95: - Tier-1 on the gate path: 0, by name (PROVENA
+ok  edit    documentation/WHERE_WE_ARE.md                line 120: - *Next: L-421 (the typed facts) in the ledger
+stamps updated: the ledger's header; Where We Are's date
+
+patch applied (0 new files, 14 edits in 2 files, 0 deleted)
+
+NEXT:
+  1. Run orrery_maintenance_run.py: its ledger index moves L-445 and
+     L-448 into the closed section.
+
+======================================================================
+  gallery maintenance run -- OFFLINE (before a commit)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Module atlas              1.7s  no change to MODULE_ATLAS.md,
+                                    MODULE_INDEX.md
+  PASS Constants export pull     1.3s  rewrote data/constants_export.sha
+  PASS Config mirror             0.1s  no change to
+                                    data/objects_config.json
+  PASS Objects export pull       0.6s  rewrote data/objects_export.json,
+                                    data/objects_export.sha
+  PASS Objects mirror            0.1s  no change to
+                                    data/objects_config.json
+  PASS Drawings pull             0.8s  rewrote
+                                    data/drawings/pulled_at.sha
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite      15.9s  PASS (234 checks, 0 failures)
+  PASS Pole of date              0.2s  POLE OF DATE: all 11 checks passed
+                                    (frame angle, orrery, ERFA, block
+                                    checker, and each shown able to
+                                    fail).
+  PASS Mirror suite              0.1s  All 64 mirror checks passed:
+                                    served, spelling, relabel refused
+                                    and accepted, conflict refused,
+                                    definition as exactly 1, fallback
+                                    and absent named, no-slot refused,
+                                    five shapes, formatting kept,
+                                    idempotent, report writes nothing,
+                                    uncertainty written as served,
+                                    Earth's pole served, print count
+                                    written as served, "in" written as
+                                    served and a slot served in
+                                    another unit from it.
+  PASS Store writer suite        9.5s  All 329 store-writer checks
+                                    passed: an allow list that lets
+                                    through only a shell's words, a
+                                    belt's words and the arrival
+                                    settings, the rooms section's
+                                    included; a no-edit round trip;
+                                    one line per change; empty words
+                                    handled; a refused batch writing
+                                    nothing; awkward text; and the
+                                    shell list matching the cache
+                                    check's rule.
+  PASS Store editor suite        0.1s  All 312 store-editor checks
+                                    passed: every box the form offers
+                                    is one the writer allows; the word
+                                    list and the tick list differ by
+                                    the belts, on purpose; nothing
+                                    typed saves nothing; the save
+                                    message does not promise a visitor
+                                    sees what they cannot yet; and a
+                                    red Cache in step is explained
+                                    rather than just shown.
+  PASS Objects mirror suite      0.1s  MIRROR OBJECTS SUITE: pass
+  PASS Objects mirror check      0.1s  OBJECTS MIRROR: pass
+  PASS Config mirror check       0.1s  Every served link holds the
+                                    export's value, unit and figure
+                                    count; 112 link(s) compared, store
+                                    2a1211f8cce2.
+  PASS Pull failures             0.3s  PULL FAILURES: all 13 checks
+                                    passed (3 pulls x 3 ways to fail,
+                                    the run after a failed pull, and 3
+                                    planted faults caught)
+  PASS Horizons confirmations    0.1s  HORIZONS CONFIRMATIONS: pass -- 13
+                                    of 13 confirmed, and 11 periods,
+                                    within 30 days
+  PASS Pointer join              0.1s  Every link is accounted for: 119
+                                    link(s) against orrery a66fd679, 4
+                                    fallback named; read check: 43 of
+                                    43 measured rows reached carry a
+                                    read.
+  PASS Cache in step             0.1s  The served cache holds the
+                                    config's 19 object(s) and their
+                                    features exactly: 4 object(s) with
+                                    36 named shell(s), in both cache
+                                    files.
+  PASS Drawn orbit               1.7s  DRAWN ORBIT: pass -- 18 checks,
+                                    every planted fault caught
+  PASS Drawings                  0.2s  DRAWINGS: PASS -- 3 of 3 planted
+                                    faults caught; pulled at orrery
+                                    a66fd679; hills_cloud 3600 dots,
+                                    tilt 30.9 deg, sha256 a51e93118069
+  PASS Collapsed features        0.1s  34 stored as themselves, 16
+                                    collapsed, 0 unclassified.
+  PASS Feature renderers         0.8s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.1s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.2s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.2s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.2s  === ALL CHECKS PASSED ===
+  PASS Arrival                   0.2s  Arrival: both rooms open on the
+                                    right things; every shell trace
+                                    carries its key; the fallback with
+                                    no arrival block is unchanged.
+  PASS Display figures           0.2s  === PASS: 62 hover(s) and 323
+                                    number(s) examined; 14 graded, 7
+                                    graded by line, 48 held to the
+                                    fixture ===
+  PASS Solar System figures      0.1s  === PASS: 6 worked cases, 11
+                                    drawer rows matched to their
+                                    accuracy rows, 10 served
+                                    distances; Uranus, Neptune and
+                                    Pluto print to JPL's ten-thousands
+                                    place; 6 period cases and 10
+                                    served periods printed as the
+                                    orrery printed them ===
+  PASS Solar System drawer       0.1s  === PASS: the Sun is never ticked,
+                                    See more hides only what is not
+                                    ticked, the handle names the last
+                                    body ticked, All / none leaves the
+                                    Sun, rooms are offered only where
+                                    they exist, and the page asks this
+                                    file ===
+  PASS Guest book                0.1s  === GUEST BOOK: all 8 checks
+                                    passed
+  PASS Guest book updater        0.2s  === GUEST BOOK UPDATER: all 43
+                                    checks passed (6 scripted runs,
+                                    self-test first)
+  PASS Daily run steps           0.1s  === DAILY RUN: all 4 step scripts
+                                    found
+  PASS Artifact 1 assembler      0.2s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.1s  RESULT: no sibling directories and
+                                    nothing in data/ the builder did
+                                    not make.
+
+======================================================================
+  28 of 28 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: no sibling directories and
+  last swap 2026-10-16T14:05:49.914200+00:00: succeeded first time
+======================================================================
+
+  After you push: python gallery_maintenance_run.py --live
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+  2. Move this script into documentation/; commit; push.
+
+
+  
+Undo is Discard Changes in GitHub Desktop.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+The patch changes two files, and only at the lines it edits, so your notes elsewhere are kept:
+
+The ledger: L-445 and L-448 move to DONE. Each quotes the lines from your run record that prove it, including your two “correct”s. L-448 also records the folder-removal crash and its likely cause, OneDrive holding the just-emptied folder.
+Where We Are: stage 8b is folded into the done stages. Earth’s list now reads “the rest of L-421’s checks (the typed facts)” as what’s next.
+
+I tested it on a fresh copy of the repository at a66fd67 and on a Windows-style copy, and both came out identical to the build. A note I placed in your run-record section was kept. A second run refuses and writes nothing.
+
+Two things carry forward on their own:
+
+The skill check: a fresh session has to confirm it loads the orbital-mechanics skill as 1.8. This session can’t, because it started on 1.7.
+The folder-removal lesson: I fixed my patch generator so a refused folder removal is reported as a note, not a crash. The rule is also recorded in the ledger (on L-351, which collects rules waiting for each skill’s next version) for the safe-file-editing skill’s next version.
+
+Where this leaves us
+
+Earth’s period now comes from the Earth-Moon barycentre in the orrery and on the website, and both items are closed once you push.
+Next on Earth’s list is the rest of L-421’s checks (the typed facts).
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -1813,13 +2022,22 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-  2. Move this script and patch_L446_3 into documentation/; commit; push. -- 
+  2. Move this script and patch_L446_3 into documentation/; commit; push. -- a66fd679d3844064b240f40097fbe057011bb8df
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
 Where this leaves us:
 
 L-446 is finished. L-449 (the 82 dropped run records) stays open on its own, with your question about whether to keep them at all.
 Next is L-445’s close (Earth’s period), in its own session.
+
+=================================================================
+
+No, you don’t need to rerun (the daily run). This morning’s run (9:05 your time) already did everything a rerun would:
+
+The build swapped in first time. No refused rename, no retry.
+No run records were dropped. The folder now holds 84: the 83 from before plus this morning’s. Your change list should show one new record there and no deletions.
+
+That’s also the first data point for L-449 (the dropped records). This morning’s records survived on a build with no retry. Last night’s were lost on a build that did need one, although four earlier builds with the same retry kept theirs. One run doesn’t settle it, but it fits the drop being tied to that refused rename. I’ll keep that observation for L-449 when it’s next opened.
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
