@@ -1,14 +1,24 @@
 ---
 name: interactive-exhibit
 description: How an interactive exhibit (a room in interactive.html such as ?exhibit=sun) is designed, built, verified and carded for the Paloma's Orrery gallery. Covers the exhibit switch and boot path, the assembler driver spec, the JS feature handoff, the shared chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent gate, back link), what is per-body, the served-data provenance contract, what a room opens on (the arrival block) and the shell-key stamp the renderers apply, who may write data/objects_config.json, the Mode 5 phone sequence, and carding an exhibit through Studio. Use when adding or changing an exhibit (Earth, Jupiter, the stars), touching sun* chrome in interactive.html, deciding what an exhibit may render, or editing the served words with store_writer or exhibit_store_editor. Not for propagation math (gallery-assembler), the nightly builder (gallery-cache-builder), or the Studio/converter chain (gallery-pipeline). Do not use for projects other than Paloma's Orrery.
-fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, See more, Home's order and its framing; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia)
+fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, See more, Home's order and its framing; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia); a served number's citation and its source_note; the Typed facts check (smoke_typed_facts.js)
 ---
 
 # Interactive Exhibit
 
-Read this file in 4 parts: lines 1-133, 134-342, 343-607, 608-811.
+Read this file in 4 parts: lines 1-135, 136-385, 386-651, 652-857.
 
-Skill version: 1.15 | 2026-10-14, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.16 | 2026-10-16, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 6b975155 and gallery @ 2090a8b7. v1.16 (L-421 parts 2
+and 3; Tony's option A, 2026-10-16) records that a number's citation is
+served like the number: the orrery's export carries each row's source,
+the mirror writes it beside the number, the Config mirror check compares
+it word for word, and the website's own words about a citation live in
+`source_note`, which the i panel prints after it. And that the typed-
+fact rule is now a gating check, Typed facts, which builds the Sun and
+Earth rooms with every served word masked and fails on a sentence that
+survives and is not on its allowed list.
+Earlier: 1.15 | 2026-10-14, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 5cd63cce and gallery @ 4b2b660a. v1.15 (L-431 build
 3) records what a room prints for a body's orbital period and where it
 comes from: the orrery's period, copied by the mirror, printed at its
@@ -22,17 +32,9 @@ row puts GO TO in its true middle, the Solar System room's room button
 to its right, and a long name wraps rather than being cut. A second
 version in one session, against One Session, One Bump, because the
 ruling came after 1.13 was in use.
-Earlier: 1.13 | 2026-10-10, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 04d17331 and gallery @ 2aab10fd. v1.13 (L-429)
-corrects the Solar System room's drawer as built: a body with a room
-shows its "Enter the <name> room" button on its own row, before GO,
-always, on every screen; a body with none still opens to "No room or
-cards yet". Tony, 2026-10-10: "so the visitor does not need to tap the
-row to see the button then tap again to enter the room." The skill
-also gets its read plan, at its next version as Tony ruled on
-2026-10-08 (L-418).
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
-on 2026-10-05 (L-418), 2026-10-10 (L-429) and 2026-10-14 (L-431).
+on 2026-10-05 (L-418), 2026-10-10 (L-429), 2026-10-14 (L-431) and
+2026-10-16 (L-421).
 
 ## Contents
 
@@ -142,6 +144,29 @@ page:
   orrery store's value; the pointer names it; the source is the
   published authority. Earth's `planet_radius` at fc8d9fb3 is the
   worked example (IERS 2010, `EARTH_EQUATORIAL_RADIUS_KM`).
+- **The citation is the orrery's, served like the number** (v1.16,
+  L-421 part 3; Tony's option A, 2026-10-16: "Yes, A as ruled"). The
+  orrery's export (schema 7) carries each row's `source`: its own
+  `# Source:` text with continuations joined; for a citation that reads
+  "as <ROW>.", that row's citation followed by the rest; for a derived
+  row with none, its inputs' citations, in the order its `inputs` lists
+  them, marked `source_inherited`. `tools/mirror_constants.py` writes it
+  into the linked entry's `source`, as it writes the value, and the
+  Config mirror check (`tools/check_constants_links.py --mirror`)
+  compares the two word for word and fails on a difference. So a
+  citation beside a served number is never edited in the gallery: it
+  changes in `constants_new.py`. A row with no citation on either side
+  is named as declared; a citation only the website keeps, beside a row
+  with none, is named and left alone; an export older than schema 7 is
+  refused by name.
+- **The website's own words about a citation go in `source_note`**
+  (v1.16). A gloss such as "extent of the closed-field helmet, not of
+  the streamer as a whole" is the website's, so it is a served WORD:
+  `tools/store_writer.py` and the exhibit store editor write it, and
+  the mirror never touches it. The store writer refuses a linked
+  entry's `source`, which is the mirror's. The i panel prints the
+  citation on its Source line and the note after it. A hover carries
+  neither (Tony's split of 2026-09-15).
 - The live maintenance run (`gallery_maintenance_run.py --live`, Store
   drift) follows every pointer into the orrery store at orrery HEAD and
   reports MATCH, DRIFT, or NOT IN STORE, by name. A new exhibit's
@@ -170,6 +195,24 @@ page:
   `flux_peak_of`, beside the belts' other words. The rest found in the
   Earth and Sun rooms on 2026-10-06 are listed in
   documentation/MANIFEST_L421_typed_facts_20261006.md.
+- **The typed-fact rule is checked, and the check gates** (v1.16,
+  L-421 part 2). `documentation/smoke_typed_facts.js`, the gallery
+  run's "Typed facts" row, builds the Sun and Earth rooms three times:
+  as served, with every served word masked, and with every served
+  number scaled. A sentence that survives the masking is typed. It
+  passes only when the sentence is on the check's ALLOWED list (each
+  with its class: about the picture, a frame limit, how to use the
+  page, a number's label), and a number's own line passes when at most
+  a few typed words sit beside the number. Each room's description in
+  `interactive.html` is read the same way. The check prints its OPEN
+  list without failing: sentences found on its first run and waiting
+  for Tony's ruling (L-451). Adding a sentence to ALLOWED is a ruling,
+  and the row prints the list in full so an addition is seen. The
+  served words it masks are read from ONE home, `tools/store_writer.py`
+  (`WORD_FIELDS`, `BELT_WORD_LISTS`, `SERVED_WORDS_PATCHED`,
+  `SERVED_SETTINGS`); a served string under a feature in none of them
+  is reported by name, never passed by silence. A new served word field
+  is added there first.
 - Where a value is unknowable or stylized (a dipole azimuth, the
   streamer belt's warp), the hover says so; silence reads as precision
   the model lacks (Show the Envelope of the Unknowable).
@@ -429,7 +472,8 @@ diffs, so nothing rewrites it wholesale. Two tools edit it IN PLACE,
 sharing one scanner (`tools/mirror_constants.py`'s `parse_with_spans`)
 so they cannot come to disagree about the file's layout:
 
-- `tools/mirror_constants.py` writes the NUMBERS, pulled from the
+- `tools/mirror_constants.py` writes the NUMBERS and, since v1.16,
+  their CITATIONS (`source`), pulled from the
   orrery's export. A number changes in `constants_new.py`, never here.
 - `tools/store_writer.py` writes the WORDS and the arrival settings, and
   `tools/exhibit_store_editor.py` is the window over it.
@@ -809,3 +853,5 @@ loaded copy reads 1.9 before exhibit work. 1.13 was cut in a session
 that loaded 1.12; the next session confirms its loaded copy reads 1.13
 before exhibit work. 1.14 followed in the same session, after 1.13 was
 installed; the next session confirms its loaded copy reads 1.14.
+1.16 was cut in a session that loaded 1.15; the next session confirms
+its loaded copy reads 1.16 before exhibit work.

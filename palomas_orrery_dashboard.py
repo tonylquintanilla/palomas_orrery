@@ -278,6 +278,12 @@ step. Pull Failures, the website's new checker, gets its button under the
 gallery checks, in alphabetical place. Each has its short line. Fixed in
 passing: the Daily Run's short line still named the JPL check, which left
 it on 2026-10-14.
+October 16, 2026 with Anthropic's Claude Opus 5.5 (L-421 parts 2 and 3):
+Typed Facts, the website's new checker, gets its button under the gallery
+checks' rooms, in alphabetical place, with its short line, running
+through documentation/run_offline_check.py. The offline runner's
+description names it; Config Mirror Check says it compares the citation
+too. Fixed in passing: Mirror Suite said 42 checks, and it holds 77.
 """
 
 import os
@@ -509,8 +515,8 @@ LAUNCH_GROUPS = {
         "guest book updater, the Daily Run's steps, the artifact-1 "
         "assembler pin, and cache siblings (report only). Node: feature "
         "renderers, page framing, Sun shells, Earth scene geometry, "
-        "hover budget, arrival, display figures, Solar System figures, "
-        "the Solar System drawer, and the guest book. "
+        "hover budget, typed facts, arrival, display figures, Solar "
+        "System figures, the Solar System drawer, and the guest book. "
         "Three states rather than two: a suite that could not run -- "
         "Node missing, say -- reports UNREACHABLE and is never counted "
         "as a pass. Every checker named here also has its own indented "
@@ -697,8 +703,9 @@ LAUNCH_GROUPS = {
         ("Config Mirror Check",
         os.path.join("tools", "check_constants_links.py"),
         "Checks that every served link in data/objects_config.json holds "
-        "exactly what the export says -- value, unit and figure count -- "
-        "and prints how many it compared. A difference is a hand edit or a "
+        "exactly what the export says -- value, unit, figure count, and "
+        "since L-421 the citation beside it, word for word -- and prints "
+        "how many it compared. A difference is a hand edit or a "
         "pull without a mirror run, and it says which. GATES the gallery "
         "runner.",
         GALLERY_REPO_DIR,
@@ -747,7 +754,7 @@ LAUNCH_GROUPS = {
         True),
         ("Mirror Suite",
         os.path.join("tools", "test_mirror_constants.py"),
-        "42 checks over the mirror, on made-up configs and exports rather "
+        "77 checks over the mirror, on made-up configs and exports rather "
         "than the real ones. It exists because no link in the real config "
         "can produce a relabel, a conflict or a definition until those "
         "rows are exported, so a run over the real file would exercise one "
@@ -980,6 +987,25 @@ LAUNCH_GROUPS = {
         GALLERY_REPO_DIR,
         True,
         ["Sun shells"],
+        True),
+        ("Typed Facts",
+        os.path.join("documentation", "run_offline_check.py"),
+        "No fact about nature is typed in the rooms' code (L-421): a fact "
+        "is served with its feature's words and its source. It builds the "
+        "Sun and Earth rooms three ways -- as served, with every served "
+        "word replaced by a marker, and with every served number scaled "
+        "-- and names, by room, feature and sentence, anything still "
+        "printed that is not the pointer line, a served number's own "
+        "label, or on its short allowed list, which it prints in full. It "
+        "reads each room's description sentence by sentence too. "
+        "Sentences held for your ruling (L-451) are printed every run and "
+        "do not fail. GATES the gallery runner. The check is Node, so this "
+        "button runs it through documentation/run_offline_check.py, which "
+        "reads its command from the gallery runner's own list. Runs from "
+        "the gallery repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        ["Typed facts"],
         True),
         ("Gallery Maintenance Run -- live, AFTER a push",
         "gallery_maintenance_run.py",
@@ -1873,6 +1899,9 @@ CARD_LINES = {
     ("Gallery -- checks and data",
      "Sun Shells"):
         "Checks the Sun room's shells are built and shaped as configured.",
+    ("Gallery -- checks and data",
+     "Typed Facts"):
+        "Checks no fact about nature is typed in the rooms' code.",
     ("Gallery -- checks and data",
      "Gallery Maintenance Run -- live, AFTER a push"):
         "After a push: checks what palomasorrery.com actually serves.",

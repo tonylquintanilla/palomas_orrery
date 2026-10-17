@@ -2887,6 +2887,39 @@ resident.
 (Moved down from the resident protocol on 2026-10-16 when
 v3.100 made a fourth entry.)
 
+v3.98 (October 15, 2026): No rule changed in this document. ONE
+skill bump, one version (L-444): horizons-orbital-mechanics 1.6 -> 1.7.
+THE RUN FETCHES A SERVED BODY'S MISSING PERIOD BEFORE THE CHECK.
+
+WHAT PROMPTED IT. Tony, 2026-10-14, in his run record: "should the
+30-day Horizons checker initiate a fetch of the missing data as well as
+report, including a new object as never having been fetched?" Ruled the
+same day: a separate step before the check, with the orrery's own
+fetching code; the check stays a check. On 2026-10-15 he chose option
+A: the elements and the period together, the same call as plotting.
+
+WHAT CHANGED. horizons-orbital-mechanics gains one bullet under Where
+the Check Lives, and What It Compares: period_fetch.py runs just before
+the check and fetches, with plotting's own call and save, the period of
+each served object that has none fetched, so the check compares it with
+JPL the same day. Its v1.4 entry moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copy reads
+horizons-orbital-mechanics 1.7 before work that fires it. This session
+confirmed its loaded copy of ledger-and-session-records reads 1.21,
+discharging v3.97's obligation.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.95 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-16 when
+v3.101 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

@@ -467,6 +467,11 @@ Module updated: October 16, 2026 with Anthropic's Claude Opus 5.5
 (L-445 and L-448 closed on Tony's run and look; a note carried to
 safe-file-editing's next version on L-351), built on a66fd67 and
 gallery 0f8efb1.
+Module updated: October 16, 2026 with Anthropic's Claude Opus 5.5
+(L-421 and L-262 closed on Tony's runs and look; L-423's item 1 done;
+L-449 gains a second night's evidence; L-450 to L-453 new;
+interactive-exhibit 1.16, protocol v3.101), built on 6b97515 and
+gallery 2090a8b.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -684,7 +689,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*238 live items; 222 need attention (`!`); 167 RICE-scored; 204 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*239 live items; 223 need attention (`!`); 167 RICE-scored; 207 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -773,7 +778,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-235 | Checks that cannot fail, gallery side [three instances] | OPEN | -- | 2026-10-08 |
 | ! | L-237 | Artifact 1's golden record is stale and needs re-cutting | OPEN | -- | 2026-10-10 |
 | ! | L-241 | Hills torus hover states the cloud bounds, not the drawn ring | OPEN | -- | 2026-10-08 |
-| ! | L-262 | The framing smoke test has never run against the page | OPEN | -- | 2026-10-08 |
 | ! | L-292 | Earth shells the orrery does not draw | OPEN | -- | 2026-10-08 |
 | ! | L-343 | A figure count can describe the arithmetic and not the claim (store) | OPEN | -- | 2026-09-22 |
 | ! | L-344 | A stated uncertainty computed from a rounded intermediate (store) | OPEN | -- | 2026-09-22 |
@@ -795,7 +799,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-364 | A comet's own trust window can exclude today while the served window passes the scene (gallery, trust) | OPEN | -- | 2026-09-29 |
 | ! | L-365 | The assembler leaves out a body it cannot draw, without a warning (gallery, assembler) | OPEN | -- | 2026-09-29 |
 | ! | L-366 | An orbit's info marker describes an arbitrary point on the orbit (gallery, assembler) | OPEN | -- | 2026-09-26 |
-| ! | L-367 | No checker opens a new room (checks, gallery) | OPEN | -- | 2026-10-09 |
+| ! | L-367 | No checker opens a new room (checks, gallery) | OPEN | -- | 2026-10-16 |
 | ! | L-368 | Other bodies' typed poles disagree with their cited table or cite a withdrawn report (orrery, store) | OPEN | -- | 2026-09-28 |
 | ! | L-370 | Jupiter and Saturn numbers typed only in objects_config.json (gallery, store) | OPEN | -- | 2026-09-28 |
 | ! | L-371 | The Sun room's served numbers: 43 with no link, and radii printed with no count (gallery, the Sun's slice) | OPEN | -- | 2026-10-08 |
@@ -823,9 +827,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-410 | Fuzzy boundaries for edges known only as ranges, the outer corona first (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-11 |
 | ! | L-411 | The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-04 |
 | ! | L-412 | The Sun's slice: the order Tony confirmed (the Sun's slice) | OPEN | -- | 2026-10-11 |
-| ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-10-15 |
-| ! | L-421 | Facts typed in the Earth and Sun rooms' code, not served with their sources (gallery, words) | OPEN | -- | 2026-10-11 |
-| ! | L-423 | The website's checks: the order Tony confirmed (checks, gallery) | OPEN | -- | 2026-10-15 |
+| ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-10-16 |
+| ! | L-423 | The website's checks: the order Tony confirmed (checks, gallery) | OPEN | -- | 2026-10-16 |
 | ! | L-424 | The checker reports one word for two different cases (worksheet checker) | OPEN | -- | 2026-10-11 |
 | ! | L-425 | A citation's location record is checked only in part (provenance tooling) | OPEN | -- | 2026-10-09 |
 | ! | L-426 | The worksheet checker compares very small numbers as equal (worksheet checker) | OPEN | -- | 2026-10-09 |
@@ -837,6 +840,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-435 | Standing rulings that are method, held only on Tony's page (skills, records) | OPEN | -- | 2026-10-12 |
 | ! | L-443 | The rest of the orrery's objects come to the website as plotted positions (gallery + orrery, objects) | OPEN | -- | 2026-10-14 |
 | ! | L-449 | A cache build dropped the 82 build-run records it should have carried (gallery, cache builder) | OPEN | -- | 2026-10-16 |
+| ! | L-450 | The orrery's citation texts carry store notes and miss locators (orrery, citations) | OPEN | -- | 2026-10-16 |
+| ! | L-451 | The sentences the Typed facts check holds open (gallery, words) | OPEN | -- | 2026-10-16 |
+| ! | L-452 | The website's notes beside a citation: read them again now that the citation prints above them (gallery, words) | OPEN | -- | 2026-10-16 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1145,6 +1151,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-055 | O14/O15 verdicts arrive with the v4 gate (comet legend churn; sodium particle count) | DONE | -- | 2026-06-17 |
 |  | L-057 | Animation auto-scale-vs-shells + Phase 3 tier decision -- CLOSED | DONE | -- | 2026-06-11 |
 |  | L-223 | A paste into the ledger is an unverified transfer | DONE | -- | 2026-08-21 |
+|  | L-262 | The framing smoke test has never run against the page | DONE | -- | 2026-10-16 |
 |  | L-345 | Unit-conversion rows multiply by shell: rows per shell, or the export converts? (store, DONE 2026-09-28) | DONE | -- | 2026-09-28 |
 |  | L-349 | The inner belt's hover says "where the measured particle flux peaks" (words, Tony's) | DONE | -- | 2026-10-06 |
 |  | L-350 | The magnetotail's observed extent is served and shown nowhere (gallery) | DONE | -- | 2026-10-04 |
@@ -1174,6 +1181,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-418 | Long skills open with their contents, and keep three version entries (skills) | DONE | -- | 2026-10-09 |
 |  | L-419 | A patch checks a file Tony annotates only at the lines it edits (patches, skills) | DONE | -- | 2026-10-06 |
 |  | L-420 | The galactic plane in the Celestial Grid, the galactic centre in the star background (orrery, sky, DONE 2026-10-07) | DONE | -- | 2026-10-07 |
+|  | L-421 | Facts typed in the Earth and Sun rooms' code, not served with their sources (gallery, words) | DONE | -- | 2026-10-16 |
 |  | L-422 | ledger-and-session-records 1.17: Tony's page by section, the run-record zone, labels on handles, RICE for lists, where a record goes (skills, documentation) | DONE | -- | 2026-10-08 |
 |  | L-428 | The lobby's way in: the Solar System room first (gallery, lobby) | DONE | -- | 2026-10-10 |
 |  | L-431 | Orbital periods from JPL, for every body, printed by their errors (orrery, provenance) | DONE | -- | 2026-10-14 |
@@ -1188,6 +1196,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-446 | The website's Daily Run pulls the orrery's exports before it builds the cache (gallery, daily run) | DONE | -- | 2026-10-16 |
 |  | L-447 | The website's front page says what the site is (gallery, lobby) | DONE | -- | 2026-10-15 |
 |  | L-448 | The maintenance run writes a test file into the tracked tree (orrery, maintenance) | DONE | -- | 2026-10-16 |
+|  | L-453 | The page's grey type turned blue, and the inner shells' radius named (gallery, the rooms' look) | DONE | -- | 2026-10-16 |
 
 ### W.Done -- Web Publication track, closed items
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1217,8 +1226,109 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
+#### [L-452] The website's notes beside a citation: read them again now that the citation prints above them (gallery, words)
+<!-- L:452 status:OPEN upd:2026-10-16 section:A flag: rice: -->
+- **Found 2026-10-16 at L-421's close,** from Tony's two i panels.
+  Under option A the website's own words about a citation moved to
+  `source_note` by a mechanical rule (what followed " -- " in the old
+  citation, less what the orrery's citation already says); 35 notes.
+  Printed after the orrery's citation, some now repeat it. The Alfven
+  Surface's "first Parker Solar Probe crossing, 28 April 2021" follows
+  a citation that says "first crossing 28 April 2021"; measured by
+  shared words of four letters or more, 14 of the 35 share two thirds
+  or more of their words with their citation. Some of those add a locator the citation lacks ("sec. 1",
+  "Table 1 ... p. 17,698") and earn their place.
+- **The same panel shows a second class:** the Crust's served `note`
+  ends "(Tony, 2026-09-28)", a project attribution in words a visitor
+  reads (the hover rule, interactive-exhibit: no project vocabulary).
+  One instance in the config.
+**Gap:** read the 35 notes against their citations; strike a repeat,
+keep a locator, word each for the visitor; take the attribution out of
+the Crust's note. Words go to Tony before they ship. Through the store
+writer, in a session that opens the rooms' words.
+**Ref:** L-421; L-450; gallery `data/objects_config.json`,
+`tools/store_writer.py`.
+
+#### [L-451] The sentences the Typed facts check holds open (gallery, words)
+<!-- L:451 status:OPEN upd:2026-10-16 section:A flag: rice: -->
+- **Recorded 2026-10-16** building L-421 part 2. The Typed facts check
+  (`documentation/smoke_typed_facts.js`) fails on a typed sentence not
+  on its allowed list, and prints these eight without failing, for
+  Tony's ruling. Each: serve it with its feature's words and source,
+  allow it as a sentence about the picture, or cut it.
+- A number's own sentence whose typed words say more than a label (the
+  number is served and cited; the words around it are typed):
+  1. "Tilt: # deg on ###, measured against the orbit of the Earth-Moon
+     barycenter, the gravitational center of the Earth-Moon system,
+     around the Sun that day (JPL Horizons)."
+  2. "Earth turns once every # hours measured against the stars."
+  3. "Spacecraft found the tail stops widening about # Earth radii
+     behind Earth, plus or minus #, and is about # Earth radii wide
+     beyond there, plus or minus #."
+  4. "Spacecraft that cross the real boundary typically find it within
+     # Earth radii of this model."
+  5. "Spacecraft that cross the real shock typically find it within #
+     Earth radii of this model."
+- A room description's sentence that states a fact with no source in
+  the page:
+  6. The Sun's: "Some of what you see is drawn to show a shape rather
+     than measured - the streamer belt's warp, the clumping of the Oort
+     cloud, the thinning at the galactic plane."
+  7. The Sun's: "Nobody has measured those, and where that is so, the
+     text says so."
+  8. Earth's: "The radiation belts sit in Earth's equatorial plane, the
+     daily average of the tilted magnetic equator they follow."
+**Gap:** (decide) Tony's ruling on each, at a design talk; then the
+build moves each off the OPEN list, which the check prints until it is
+empty.
+**Ref:** L-421; gallery `documentation/smoke_typed_facts.js`,
+`gallery/feature_renderers.js`, `interactive.html`.
+
+#### [L-450] The orrery's citation texts carry store notes and miss locators (orrery, citations)
+<!-- L:450 status:OPEN upd:2026-10-16 section:A flag: rice: -->
+- **Found 2026-10-16** building L-421 part 3. Since option A the
+  website prints each row's `# Source:` text word for word, so words
+  written as notes for the store reach a visitor's i panel:
+  - "Converted to km^3 s^-2 here." (`EARTH_GM_KM3_S2`, and inherited
+    into the geostationary ring and Earth's Hill sphere);
+  - "IAU B3 rounds to 6378.1 km" (`EARTH_EQUATORIAL_RADIUS_KM`, and
+    inherited into the low-orbit and atmosphere rows);
+  - "4.0 is the TOP of that stated range, chosen so the drawn cusp does
+    not ..." (`HELMET_CUSP_RADII`).
+- **What the website's citations had and the orrery's lack,** read
+  before the mirror replaced them: the arXiv number 2009.04820 and the
+  Nesvorny paper's URL.
+- **One disagreement on the edition:** the website cited the IADC
+  guidelines at Revision 3 (June 2021); the orrery's rows cite REVISION
+  2 (March 2020). Which one was read decides which the rows should say.
+- **`EARTH_D660_DEPTH_KM`'s Source names no work:** "the 660-km seismic
+  discontinuity, ringwoodite dissociating to bridgmanite plus
+  ferropericlase; global average depth 660 km (2 sig figs ...)". Ishii
+  et al. (2019) is on its Ref line.
+**Gap:** each row's `# Source:` names the work and its locator, with
+store notes moved to the row's other comment lines; the IADC edition
+checked against the document read. One class; the rows are named
+above. When `constants_new.py`'s Earth and Sun rows are next opened
+(road stage 7, the Sun's numbers get Earth's checking).
+**Ref:** L-421; L-452; `constants_new.py`; `export_constants.py`;
+provenance-discipline.
+
 #### [L-449] A cache build dropped the 82 build-run records it should have carried (gallery, cache builder)
 <!-- L:449 status:OPEN upd:2026-10-16 section:A flag: rice: -->
+- **It happened again, 2026-10-16,** at L-421's gallery Daily Run:
+  Tony, "there are 130 items, and again a long list of red deletes ...
+  this is the second time in a row." Build 20261016T224259Z left one
+  record in `data/solar-system/raw/runs/` where the repository held 84.
+  This time the swap log says every rename worked on the first try
+  ("[SWAP] the new cache is in place; every rename worked on the first
+  try"), so a retried rename is not the cause. `.prev` held all 84.
+  Builds that dropped them: 04:32 and 22:42 UTC on 2026-10-16; the
+  14:05 build that day kept them. Put back from the repository's bytes
+  at Tony's word ("Yes thanks"); his push 5032cf2 carries 85.
+- **Proposed check, for Tony's word:** after the builder, the Daily
+  Run compares the new cache's `raw/runs/` with the one it replaced
+  and stops, naming each record lost, before the maintenance run and
+  before anything reaches the change list.
 - **Seen by Tony, 2026-10-15,** at L-446's first Daily Run: "the cache
   build failed. i got the long row of red lines. and 117 changes. nothing
   committed." The red lines were GitHub Desktop's deletion marks: the new
@@ -1247,9 +1357,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
   next one look normal; if they should not be kept, a rule the builder
   follows on purpose (for example, keep the last 30).
 **Gap:** (decide) keep the run records, or a rule for how many the
-builder keeps. Then: the cause, if it recurs; a check that a build's
-`raw/` holds everything the live one held (a shrink check for the run
-records, beside the point-count one).
+builder keeps. Then: the cause, which has now recurred, with the swap's
+first-try rename ruling out the retry; the check above, a shrink check
+for the run records beside the point-count one.
 **Ref:** gallery `tools/gallery_cache_builder.py` (`run_build`,
 `_write_run_manifest`), `data/cache_swap_log.jsonl`,
 `data/solar-system/raw/runs/`; L-446; L-216;
@@ -1366,205 +1476,6 @@ gallery `data/objects_config.json`.
 **Ref:** `solar_visualization_shells.py`, `comet_visualization_shells.py`;
 gallery `data/objects_config.json`; L-228, L-371.
 
-
-#### [L-421] Facts typed in the Earth and Sun rooms' code, not served with their sources (gallery, words)
-<!-- L:421 status:OPEN upd:2026-10-11 section:A flag: rice: -->
-- **Found 2026-10-06**, on Tony's question: "where are the facts for the
-  info panel stored, the code itself? Shouldn't the data and sources use
-  the store?" Both rooms were built headless twice, once as served and
-  once with every served word replaced by a marker; a sentence still
-  present was typed. 17 found: 13 in Earth's room (the rotation axis,
-  the pole of date, the geostationary ring, the magnetopause, the bow
-  shock, the magnetotail, the belts, the day-night line, the Moon's arc,
-  the Sun direction) and 4 in the Sun's (the inner and outer Oort cloud,
-  the galactic tide, the streamer belt). Listed with a decision each in
-  `documentation/MANIFEST_L421_typed_facts_20261006.md`.
-- **Tony's ruling, the same day:** handled now, not backlogged -- "the
-  work is here. We should handle it now. What we are doing is working
-  to make the earth and sun slices complete, following the braid."
-  Claude had proposed a ledger row; the rooms are the current slice, so
-  that was the Braid read backwards. The plan, including where the
-  drawn guides' words go, "Approved as recommended"; its build moves to
-  a fresh session, "Confirmed as recommended".
-- **The rule** went into interactive-exhibit 1.12: code types only
-  sentences about the picture; a fact about nature, about a paper, or a
-  source is served with its feature's words.
-- **Its own question, not yet checked:** whether the citation in the
-  gallery's `data/objects_config.json` and the one in `constants_new.py`
-  agree for each served number. The checks compare the numbers.
-- **Sources, read 2026-10-06** (Round 1, recorded in
-  `documentation/L421_round1_sources_20261006.md`): five of the six
-  unsourced facts were sourced from what was read that day -- the
-  USNO Almanac glossary, USNO's Rise, Set and Twilight Definitions,
-  NASA Earth Observatory's Catalog of Earth Satellite Orbits, and
-  Williams (1994). The sense of rotation now cites Archinal et al.
-  (2019), the correction (Fig. 1, from the PDF Tony supplied), and the
-  glossary's diurnal and direct motion; the 2018 report was not
-  re-read, so it is no longer cited. The sixth, the inner Oort cloud
-  drawn flat in the ecliptic, is contradicted by Nesvorny et al.
-  (2025, ApJ 983), which finds a slightly warped disk tilted about 30
-  degrees to the ecliptic.
-- **Tony's ruling, 2026-10-06:** the inner Oort cloud is redrawn from
-  the 2025 paper as part of the Sun slice -- "remember this is part
-  of the sun slice not deferred."
-- **Built, run and pushed, gallery** (no word a visitor reads
-  changed; each patch reproduced on a fresh clone, 24 of 24):
-  - `patch_L421_1_served_hover_words_20261006.py`, at 6fae15e0: the
-    geostationary ring, magnetopause, bow shock, magnetotail and both
-    belts print a served `hover` word, `{name}` filled from served
-    rows (E5 to E10). Tony on the phone: "correct".
-  - `patch_L421_2_served_guide_words_20261006.py`, at 4cfeca27: the
-    axis, Sun line, terminator and Moon arc print served words from
-    Earth's `orientation.words`, each with its source; the pole of
-    date's source prints from the cache builder's record; the Sun's
-    clumps and tide print served words (E1 to E4, E11 to E13, S2,
-    S3); the panel's words and footer move to the paragraph grey.
-    Tony: "All type is correct."
-  - `patch_L421_3_guide_links_20261006.py`, at ab66aba7: the four
-    guides get Read more links (Wikipedia: Earth's rotation, Subsolar
-    point, Terminator (solar), Orbit of the Moon), and the panel now
-    fills an empty link or source from any trace in a group -- the
-    sources patch 2 served had not reached the panel until then.
-    Tony: each link "correct".
-  Verdicts quoted from
-  `documentation/WHERE_WE_ARE_10-7-26_0832_run_record.md` and chat.
-- **E10 as built:** "2020" and "IGRF-13 model" are served words in
-  the belts' `hovers_plane`, citing the tilt row's source, not fields
-  read from `constants_new.py`. L-322 (the IGRF epoch, a class) is
-  unchanged by this.
-- **S4 stays typed**, as the manifest ruled: the streamer belt's
-  caveat is a drawing choice.
-- **The design talk, 2026-10-09** (Claude Opus 5.5; record
-  `documentation/DESIGN_L421_inner_oort_tilt_20261009.md`). The paper
-  read in full: the inner cloud a slightly warped disk tilted about 30
-  degrees to the ecliptic, nearly polar to the galaxy, with two spiral
-  arms; the round outer cloud beyond about 10,000 au. Tony's rulings,
-  in order:
-  - The boundary: "would a fuzzy boundary work?", then "Yes": the inner
-    cloud gives way to the outer across a band from 10,000 au
-    (Nesvorny et al. 2025) to 20,000 au (Portegies Zwart et al. 2021).
-  - The hover: "say 'about' in the hover and draw 30 Degrees and say so
-    with the citation"; the hover, the panel's `about` and `note`
-    confirmed (16:33, 16:42).
-  - The arms: "Please draw the arms." The method: "A. And it's
-    consistent with 'about' 30 degrees" -- dots along orbits, so the
-    tilt and the arms come out of the orbits. The revised hover and note
-    confirmed, with one phrase cut (17:03).
-  - The tilt's "range as an envelope" in the Gap above is not in the
-    paper, which gives "about 30" only; struck.
-- **2026-10-10, the orrery side built** (Claude Opus 5.5, from
-  `documentation/HANDOFF_L421_oort_orrery_build_brief_20261009.md`;
-  record `documentation/HANDOFF_L421_oort_orrery_20261010.md`).
-  - Tony's answers: the band's near end stays at 10,000 au, not the
-    7,500 au "roughly 15,000 au across" might mean ("Confirmed as
-    recommended"). Then the tilt check failed before anything was
-    drawn: orbits spread evenly over the captions' ranges tilt about
-    40 degrees. Tony attached the paper and ruled: "follow the paper.
-    Draw following figure 3 and describe following the text. And cite
-    everything."
-  - Fig. 3 read into a table by
-    `documentation/L421_fig3_reading_20261010.py`: 203 cells, 2,052
-    dots, the axes checked against the figure's own lines, overlaps
-    estimated, its solid-black core held at the method's cap and said
-    so on the row.
-  - Rows added to `constants_new.py`: `INNER_OORT_DISK_OUTER_AU`,
-    `HILLS_CLOUD_TILT_DEG`, `ECLIPTIC_NODE_GALACTIC_LON_DEG`, the four
-    `HILLS_CLOUD_PERI_ARG_BAND*` rows, `HILLS_CLOUD_NODE_LOW_DEG` and
-    `_HIGH_DEG`, `HILLS_CLOUD_INCL_GAL_LOW_DEG` and `_HIGH_DEG`
-    (measured, each read from the paper); `HILLS_CLOUD_PLANES_READ`,
-    its two cell rows and `HILLS_CLOUD_ECCENTRICITY` (declared, each
-    with its reason). Tokens `eccentricity` and `dot_count`.
-  - New modules: `hills_cloud_sampler.py` (the dots, and three checks:
-    the frame, the reading, the tilt), `pole_frames.py` (the pole
-    matrix, moved unchanged from `idealized_orbits.py`),
-    `test_hills_cloud_sampler.py` (each check shown failing on a planted
-    fault), the 22nd gating checker of the maintenance run.
-  - Rewritten: `create_sun_hills_cloud_torus` reads the sampler, its
-    typed 2,000 and 20,000 au defaults gone; `create_sun_outer_oort_clumpy`
-    reads the rows for its typed 20,000 and 100,000 au; the clumps and
-    the tide fill in across the band; every string that printed the
-    single edge says the band; the Hills cloud's words are Tony's
-    confirmed words with the citation; two comments citing Hills (1981)
-    corrected; the checkbox reads "Hills Cloud (tilted disk)".
-  - Measured in the sandbox: the plane through the dots 34.1 degrees
-    from the ecliptic (the paper: about 30); the arms near the
-    ecliptic; Sgr A* within half a degree of where the frame puts the
-    galaxy's centre; the maintenance run 22 of 22, gate path 0 Tier-1.
-  - Two departures from the brief, with reasons in the record: a new
-    row for 10,000 au rather than a second source on NASA's outer-edge
-    row (a different quantity that prints the same number), and the
-    node as a measured row the sampler checks rather than a derived one.
-  - One confirmed clause changed to say what is drawn: the note's
-    "picked within the ranges the model gives" became "picked where the
-    model's orbits lie (its Fig. 3)". It comes to Tony with the gallery
-    words.
-- **Tony's run and look, 2026-10-10**, from his run record attached in
-  chat that evening: patch_L421_5 and the maintenance run, "22 of 22
-  gating checkers passed", the gate path at 0; pushed at 9f154782. The
-  three checks of the build record's section 7 (the disk tipped with
-  its two arms; the clumps and the tide thin inside 20,000 au and full
-  outside; the hovers): each marked correct. Asked whether
-  `hills_cloud_sampler.py` is used once: no, it draws the cloud every
-  time the box is ticked; only the patches are one-time.
-- **2026-10-11, the website half, built and live.** Tony chose how the
-  website gets the dots, from three ways put to him: "A" -- the orrery
-  places them and the website draws them as given, rather than a copy
-  of the sampler in the gallery (B) or a second one in JavaScript (C).
-  Asked whether the approach suits other shells: yes for scattered-dot
-  shapes, no for formula shapes; "Confirmed as recommended", with the
-  folder `data/drawings/` in both repositories and L-434 for the rest.
-  - Orrery, `patch_L421_6_drawings_export_20261011.py`, pushed at
-    1bbd9fe1: `drawn_hills_cloud()` holds the drawing's settings once
-    (600 orbits of 6 dots, seed 421), so every plot is the same cloud
-    (L-239); `export_drawings.py` writes `data/drawings/hills_cloud.json`
-    (the ninth generator) and `test_drawings_export.py` checks it, three
-    faults planted first (the 23rd gating checker); two dashboard
-    buttons.
-  - Gallery, `patch_L421_7_oort_gallery_20261011.py`, pushed at
-    e5a3d13f: the Hills cloud drawn from the served dots ("Hills Cloud
-    (tilted disk)", shape `served_dots`), its hover, description, about
-    and note in Tony's confirmed words with {tilt}, {near} and {far}
-    filled from rows; the clumps and the tide from 10,000 au, full by
-    20,000; the Inner Oort Cloud sphere's note names the band; L-408's
-    Galactic Plane; `HILLS_CAVEAT` and the torus gone;
-    `tools/pull_drawings.py`, `tools/check_drawings.py` (gating) and the
-    builder's `serve_drawings()`; L-363's "1.2 times".
-  - The changed clause, "picked where the model's orbits lie (its Fig.
-    3)": Tony, "correct".
-  - Measured before delivery: the drawn cloud's plane 30.9 degrees from
-    the ecliptic, fitted twice by separate arithmetic (the paper: about
-    30). The typed-facts survey's method of 2026-10-06, run by hand on
-    the Sun room before and after: one typed fact about nature before
-    (the Hills caveat's "as the inner cloud is thought to be"), none
-    after; every typed line left is about the picture.
-- **Tony's runs and look, 2026-10-11** (`documentation/WHERE_WE_ARE_10-11-26_1311_run_record.md`): the orrery, "23 of 23
-  gating checkers passed", gate path 0; the gallery's Daily Run, 26 of
-  27. The one red was the cache builder suite's new check, "every named
-  drawing served byte for byte": the suite wrote its stand-in drawing
-  as text, which Windows writes CRLF, and the builder serves LF, as it
-  should. Gallery `patch_L421_8_suite_line_endings_20261011.py` writes
-  it as bytes and adds a check that a CRLF drawing is served LF (234
-  checks). The phone, all four looks "correct": the tilted disk with
-  its arms, the text box's three distances and "about 30 degrees", the
-  clumps and the tide thin inside the sphere, the Galactic Plane edge-on
-  with its poles and "60 degrees". Tony: "beautiful. thanks."
-**Gap:** the website side is built and looked at. Still open: part 2,
-the survey as a gating check in the gallery run, shown failing on a
-planted typed sentence first (its method, run by hand on 2026-10-11, is
-in the website half's build record); part 3, whether each served
-number's citation in `data/objects_config.json` agrees with its row's
-in `constants_new.py`. The orrery's other uncited Oort lines are L-430;
-the other dot-cloud shells, L-434.
-**Ref:** L-413; L-349 (`flux_peak_of`, the first case); L-322 (the
-IGRF epoch, a class); L-408; L-430;
-`documentation/DESIGN_L421_inner_oort_tilt_20261009.md`,
-`documentation/HANDOFF_L421_oort_orrery_20261010.md`,
-`documentation/HANDOFF_L421_oort_gallery_20261011.md`;
-`hills_cloud_sampler.py`, `export_drawings.py`; gallery
-`tools/pull_drawings.py`, `tools/check_drawings.py`,
-`gallery/feature_renderers.js`,
-`gallery/earth_geometry.js`, `data/objects_config.json`;
-skills/interactive-exhibit/SKILL.md.
 
 #### [L-435] Standing rulings that are method, held only on Tony's page (skills, records)
 <!-- L:435 status:OPEN upd:2026-10-12 section:A flag: rice: -->
@@ -1898,7 +1809,7 @@ for each case and updates the skill's bullet to match.
 L-252; L-418.
 
 #### [L-413] Earth's list: the old Earth items, in the order Tony confirmed (Earth room)
-<!-- L:413 status:OPEN upd:2026-10-15 section:A flag: rice: -->
+<!-- L:413 status:OPEN upd:2026-10-16 section:A flag: rice: -->
 - **Confirmed by Tony, 2026-10-04,** after a sweep of the open items
   that touch the Earth room, read against the code at orrery cbde99dc
   and gallery e7ef96eb, and checked against the Claude Fable 5.1 ledger
@@ -1985,13 +1896,17 @@ L-252; L-418.
   coordination session of 2026-10-15): L-401's build 3 is parked, each
   part with its feature (L-401 records where), and L-445 (Earth's
   period from the Earth-Moon barycentre) is first on this list.
-**Gap:** L-445 (Earth's period) first; then the rest of L-421's checks
-(its Gap: parts 2 and 3); then the design talks in the order above.
+- **2026-10-16:** L-445 (Earth's period) closed; L-421's checks built
+  and closed on Tony's runs and look. Left on this list: the design
+  talks, in the order above.
+**Gap:** the design talks in the order above, L-330 (the belts' shape)
+first; L-451 (the sentences the Typed facts check holds open) joins
+the first talk that opens those rooms' words.
 **Ref:** L-412 (the Sun's list, which resumes after this); the handles
 above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
 
 #### [L-423] The website's checks: the order Tony confirmed (checks, gallery)
-<!-- L:423 status:OPEN upd:2026-10-15 section:A flag: rice: -->
+<!-- L:423 status:OPEN upd:2026-10-16 section:A flag: rice: -->
 - **Confirmed by Tony, 2026-10-08**, in the decisions session of
   2026-10-08: "Yes open it now"; on the order, "The order is okay".
   This is road stage 9 on Where We Are. It comes before the front-door
@@ -2003,6 +1918,8 @@ above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
      in, at gallery ab66aba7. Confirm the Page framing row passes on
      the next gallery maintenance run, then close it; its residual
      (the live room's framing has no test) moves into L-367.
+     Done 2026-10-16: L-262 closed on Tony's runs; the residual is on
+     L-367.
   2. L-380 and L-388, the export pull, as one patch: pull before the
      cache build, and fail by name when the pull cannot fetch.
      2026-10-15: L-446 (the Daily Run's order) carries this item, by
@@ -2024,7 +1941,7 @@ above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
 - **Not a member:** L-379 (the aging Earth recording). Its only
   remaining piece, `documentation/payload_earth.json`, waits for a
   build that opens that file.
-**Gap:** work down the list from item 1.
+**Gap:** items 1 and 2 done; next, item 3, L-357 (stale leftovers).
 **Ref:** L-412; L-363; the members above;
 `documentation/HANDOFF_decisions_20261008.md`.
 
@@ -2962,10 +2879,12 @@ rest of the Sun's slice is ordered on L-412.
 **Ref:** `idealized_orbits.py`; `documentation/BUILD_MANIFEST_L322_D_earth_pole_20260922.md` sec. 2.5 and 7; L-322.
 
 #### [L-367] No checker opens a new room (checks, gallery)
-<!-- L:367 status:OPEN upd:2026-10-09 section:A flag: rice: -->
+<!-- L:367 status:OPEN upd:2026-10-16 section:A flag: rice: -->
 - **2026-10-08:** item 6 of L-423 (the website's checks). Takes
   L-262's residual (the live room's framing has no test) when
   L-262 closes. Finishes before L-363.
+- **2026-10-16, received from L-262 at its close:** the live room's
+  framing, `sunRefitFrame` in `interactive.html`, has no test.
 - **Found 2026-09-26** delivering L-363. The gallery maintenance run
   passed 16 of 16 on the patched copy, and none of its checkers boots a
   room from the page's `EXHIBITS` table. They read recorded payloads
@@ -7736,89 +7655,6 @@ Skill, resident protocol Part 3.
 status pass; (b) and (c) are gated on it.
 **Ref:** L-256; A Check That Cannot Fail Is Not Passing [CRITICAL],
 resident protocol Part 3.
-
-#### [L-262] The framing smoke test has never run against the page
-<!-- L:262 status:OPEN upd:2026-10-08 section:A flag: rice: -->
-- **2026-10-08, checked at gallery ab66aba7:** both one-line fixes
-  below are in. The gallery maintenance run's Page framing row passes
-  `gallery/solar_system_earth_test2.html` and
-  `gallery/feature_renderers.js`, and `smoke_framing.js` reads
-  `documentation/payload_jupiter_saturn.json`. Left: confirm the row
-  passes on the next run, and the residual -- the live room's
-  framing, `sunRefitFrame` in `interactive.html`, has no test -- which
-  moves into L-367 when this item closes.
-- **Note (2026-10-08):** RICE struck (was 3/4/95/1). This item is item 1 of L-423 (the website's checks),
-  and an item in an ordered list carries no score; the list's
-  order is its priority (Tony's rule of 2026-10-07, L-412).
-- **Found by the gallery maintenance runner's first execution**
-  (L-236), 2026-08-29, which is the argument for the runner made by
-  the runner.
-- **`documentation/smoke_framing.js` slices `interactive.html`
-  between two markers**, `function gridDtick(span) {` and
-  `async function fetchText(url) {`, and exits immediately with
-  "FAIL: helpers not found in page" when it cannot find them.
-- **Neither marker has ever existed in that file.** Measured across
-  the whole history of both files at gallery `c367b262`: `gridDtick`
-  appears in exactly one commit, `0cabfb3` (2026-08-26, L-238), and
-  only inside the smoke test itself. The page has `fetchTextOrThrow`
-  and no `gridDtick` at all. The suite was written against a patched
-  HTML that was never committed in that shape.
-- **It has been dead since the day it landed**, three days, and
-  nothing surfaced it because the file sits in `documentation/` and
-  was in no routine. Put the check where it runs.
-- **Note:** RICE 3/4/95/1, confirmed by Tony 2026-08-29. The fix is
-  either re-pointing the markers at the page's real helpers or
-  extracting those helpers so both the page and the test read one
-  copy -- a design call, not a rename, because the page currently
-  inlines its framing logic.
-- **AMENDED 2026-08-30: the diagnosis above is wrong, and the bullets
-  are kept rather than corrected in place so the record stays
-  evidence.** The measurement was right; the conclusion drawn from it
-  was not. The test was never about `interactive.html`. It takes the
-  page path as `process.argv[2]`, and its markers -- `gridDtick`,
-  `frameLayout`, `rebuildFrameOptions` -- live in
-  `gallery/solar_system_earth_test2.html`. Run against the page that
-  actually holds its helpers it passes all twelve checks, verified
-  2026-08-30.
-- **Measured again at gallery `1bf98450`, 2026-08-30.**
-  `gallery/solar_system_earth_test2.html` contains both slice anchors,
-  once each. `interactive.html` contains neither, zero times. The two
-  pages carry DIFFERENT framing implementations, which is why the
-  original reading looked sound.
-- **It is a GATING row, which the first write-up did not establish.**
-  `gallery_maintenance_run.py`'s check tuple is
-  `(label, runner, argv-tail, cwd, verdict hint, report_only)` and the
-  Page framing row carries `report_only=False`. So this is not a dead
-  check sitting quietly in `documentation/`; it is a gating check that
-  fails on every run that reaches it. Either it has been failing, or it
-  has not been running -- both are worth knowing and only the runner's
-  own output can say which.
-- **The fix, still two one-line edits, and neither touches a live
-  page.**
-  1. `gallery_maintenance_run.py` line 146 -- point the argv-tail at
-     `gallery/solar_system_earth_test2.html` AND add
-     `gallery/feature_renderers.js`. The script reads a second file at
-     `process.argv[3]` for `window.GalleryFeatures`; the runner passes
-     only one argument today, so the page fix alone would move the
-     failure rather than clear it. The neighbouring "Sun shells" row
-     already passes `feature_renderers.js` this way.
-  2. `documentation/smoke_framing.js` -- it reads
-     `payload_jupiter_saturn.json` from the working directory. The
-     runner's cwd is the repo root and the file is in
-     `documentation/`.
-- **This voids the bundling argument.** L-262 was to ride along with
-  the portrait pass to save one Mode 5. It needs no Mode 5 at all, so
-  it should not wait for one.
-- **Gap: the residual, recorded rather than left implied.** Once
-  pointed correctly the test guards `solar_system_earth_test2.html` --
-  a test page. The live exhibit's own framing, `sunRefitFrame` in
-  `interactive.html`, still has no test, and L-267's work adds more
-  framing logic to exactly that file. "Put the check where it runs" is
-  half satisfied.
-**Ref:** L-236 (the runner that found it); L-238 (the commit that
-added the suite); L-267 (which adds framing logic to the untested
-file); A Check That Cannot Fail Is Not Passing [CRITICAL] and A Report
-Names Its Items [QUALITY], resident protocol Part 3.
 
 #### [L-266] Nothing checks that a cited link still resolves
 <!-- L:266 status:OPEN upd:2026-08-30 section:A flag: rice:5/4/90/2 -->
@@ -23466,6 +23302,381 @@ Centre.
     the next bumps of their stores).
 **Gap:** none. Closed 2026-10-16.
 **Ref:** `test_orbit_cache.py`; `.gitignore`; L-447; L-351.
+
+#### [L-262] The framing smoke test has never run against the page
+<!-- L:262 status:DONE upd:2026-10-16 section:C flag: rice: -->
+- **Closed 2026-10-16,** as item 1 of L-423, riding L-421's build.
+  The Page framing row passed on Tony's runs of 2026-10-15 and
+  2026-10-16; from his record `documentation/WHERE_WE_ARE_10-16-26_1708_run_record.md`: "PASS Page
+  framing 0.2s === ALL CHECKS PASSED ===". The residual -- the live
+  room's framing, `sunRefitFrame` in `interactive.html`, has no test --
+  moves to L-367, which already named it.
+- **2026-10-08, checked at gallery ab66aba7:** both one-line fixes
+  below are in. The gallery maintenance run's Page framing row passes
+  `gallery/solar_system_earth_test2.html` and
+  `gallery/feature_renderers.js`, and `smoke_framing.js` reads
+  `documentation/payload_jupiter_saturn.json`. Left: confirm the row
+  passes on the next run, and the residual -- the live room's
+  framing, `sunRefitFrame` in `interactive.html`, has no test -- which
+  moves into L-367 when this item closes.
+- **Note (2026-10-08):** RICE struck (was 3/4/95/1). This item is item 1 of L-423 (the website's checks),
+  and an item in an ordered list carries no score; the list's
+  order is its priority (Tony's rule of 2026-10-07, L-412).
+- **Found by the gallery maintenance runner's first execution**
+  (L-236), 2026-08-29, which is the argument for the runner made by
+  the runner.
+- **`documentation/smoke_framing.js` slices `interactive.html`
+  between two markers**, `function gridDtick(span) {` and
+  `async function fetchText(url) {`, and exits immediately with
+  "FAIL: helpers not found in page" when it cannot find them.
+- **Neither marker has ever existed in that file.** Measured across
+  the whole history of both files at gallery `c367b262`: `gridDtick`
+  appears in exactly one commit, `0cabfb3` (2026-08-26, L-238), and
+  only inside the smoke test itself. The page has `fetchTextOrThrow`
+  and no `gridDtick` at all. The suite was written against a patched
+  HTML that was never committed in that shape.
+- **It has been dead since the day it landed**, three days, and
+  nothing surfaced it because the file sits in `documentation/` and
+  was in no routine. Put the check where it runs.
+- **Note:** RICE 3/4/95/1, confirmed by Tony 2026-08-29. The fix is
+  either re-pointing the markers at the page's real helpers or
+  extracting those helpers so both the page and the test read one
+  copy -- a design call, not a rename, because the page currently
+  inlines its framing logic.
+- **AMENDED 2026-08-30: the diagnosis above is wrong, and the bullets
+  are kept rather than corrected in place so the record stays
+  evidence.** The measurement was right; the conclusion drawn from it
+  was not. The test was never about `interactive.html`. It takes the
+  page path as `process.argv[2]`, and its markers -- `gridDtick`,
+  `frameLayout`, `rebuildFrameOptions` -- live in
+  `gallery/solar_system_earth_test2.html`. Run against the page that
+  actually holds its helpers it passes all twelve checks, verified
+  2026-08-30.
+- **Measured again at gallery `1bf98450`, 2026-08-30.**
+  `gallery/solar_system_earth_test2.html` contains both slice anchors,
+  once each. `interactive.html` contains neither, zero times. The two
+  pages carry DIFFERENT framing implementations, which is why the
+  original reading looked sound.
+- **It is a GATING row, which the first write-up did not establish.**
+  `gallery_maintenance_run.py`'s check tuple is
+  `(label, runner, argv-tail, cwd, verdict hint, report_only)` and the
+  Page framing row carries `report_only=False`. So this is not a dead
+  check sitting quietly in `documentation/`; it is a gating check that
+  fails on every run that reaches it. Either it has been failing, or it
+  has not been running -- both are worth knowing and only the runner's
+  own output can say which.
+- **The fix, still two one-line edits, and neither touches a live
+  page.**
+  1. `gallery_maintenance_run.py` line 146 -- point the argv-tail at
+     `gallery/solar_system_earth_test2.html` AND add
+     `gallery/feature_renderers.js`. The script reads a second file at
+     `process.argv[3]` for `window.GalleryFeatures`; the runner passes
+     only one argument today, so the page fix alone would move the
+     failure rather than clear it. The neighbouring "Sun shells" row
+     already passes `feature_renderers.js` this way.
+  2. `documentation/smoke_framing.js` -- it reads
+     `payload_jupiter_saturn.json` from the working directory. The
+     runner's cwd is the repo root and the file is in
+     `documentation/`.
+- **This voids the bundling argument.** L-262 was to ride along with
+  the portrait pass to save one Mode 5. It needs no Mode 5 at all, so
+  it should not wait for one.
+- **Gap: the residual, recorded rather than left implied.** Once
+  pointed correctly the test guards `solar_system_earth_test2.html` --
+  a test page. The live exhibit's own framing, `sunRefitFrame` in
+  `interactive.html`, still has no test, and L-267's work adds more
+  framing logic to exactly that file. "Put the check where it runs" is
+  half satisfied.
+**Gap:** none. Closed 2026-10-16; the residual is on L-367.
+**Ref:** L-236 (the runner that found it); L-238 (the commit that
+added the suite); L-267 (which adds framing logic to the untested
+file); L-367; A Check That Cannot Fail Is Not Passing [CRITICAL] and A Report
+Names Its Items [QUALITY], resident protocol Part 3.
+
+#### [L-421] Facts typed in the Earth and Sun rooms' code, not served with their sources (gallery, words)
+<!-- L:421 status:DONE upd:2026-10-16 section:C flag: rice: -->
+- **Found 2026-10-06**, on Tony's question: "where are the facts for the
+  info panel stored, the code itself? Shouldn't the data and sources use
+  the store?" Both rooms were built headless twice, once as served and
+  once with every served word replaced by a marker; a sentence still
+  present was typed. 17 found: 13 in Earth's room (the rotation axis,
+  the pole of date, the geostationary ring, the magnetopause, the bow
+  shock, the magnetotail, the belts, the day-night line, the Moon's arc,
+  the Sun direction) and 4 in the Sun's (the inner and outer Oort cloud,
+  the galactic tide, the streamer belt). Listed with a decision each in
+  `documentation/MANIFEST_L421_typed_facts_20261006.md`.
+- **Tony's ruling, the same day:** handled now, not backlogged -- "the
+  work is here. We should handle it now. What we are doing is working
+  to make the earth and sun slices complete, following the braid."
+  Claude had proposed a ledger row; the rooms are the current slice, so
+  that was the Braid read backwards. The plan, including where the
+  drawn guides' words go, "Approved as recommended"; its build moves to
+  a fresh session, "Confirmed as recommended".
+- **The rule** went into interactive-exhibit 1.12: code types only
+  sentences about the picture; a fact about nature, about a paper, or a
+  source is served with its feature's words.
+- **Its own question, not yet checked:** whether the citation in the
+  gallery's `data/objects_config.json` and the one in `constants_new.py`
+  agree for each served number. The checks compare the numbers.
+- **Sources, read 2026-10-06** (Round 1, recorded in
+  `documentation/L421_round1_sources_20261006.md`): five of the six
+  unsourced facts were sourced from what was read that day -- the
+  USNO Almanac glossary, USNO's Rise, Set and Twilight Definitions,
+  NASA Earth Observatory's Catalog of Earth Satellite Orbits, and
+  Williams (1994). The sense of rotation now cites Archinal et al.
+  (2019), the correction (Fig. 1, from the PDF Tony supplied), and the
+  glossary's diurnal and direct motion; the 2018 report was not
+  re-read, so it is no longer cited. The sixth, the inner Oort cloud
+  drawn flat in the ecliptic, is contradicted by Nesvorny et al.
+  (2025, ApJ 983), which finds a slightly warped disk tilted about 30
+  degrees to the ecliptic.
+- **Tony's ruling, 2026-10-06:** the inner Oort cloud is redrawn from
+  the 2025 paper as part of the Sun slice -- "remember this is part
+  of the sun slice not deferred."
+- **Built, run and pushed, gallery** (no word a visitor reads
+  changed; each patch reproduced on a fresh clone, 24 of 24):
+  - `patch_L421_1_served_hover_words_20261006.py`, at 6fae15e0: the
+    geostationary ring, magnetopause, bow shock, magnetotail and both
+    belts print a served `hover` word, `{name}` filled from served
+    rows (E5 to E10). Tony on the phone: "correct".
+  - `patch_L421_2_served_guide_words_20261006.py`, at 4cfeca27: the
+    axis, Sun line, terminator and Moon arc print served words from
+    Earth's `orientation.words`, each with its source; the pole of
+    date's source prints from the cache builder's record; the Sun's
+    clumps and tide print served words (E1 to E4, E11 to E13, S2,
+    S3); the panel's words and footer move to the paragraph grey.
+    Tony: "All type is correct."
+  - `patch_L421_3_guide_links_20261006.py`, at ab66aba7: the four
+    guides get Read more links (Wikipedia: Earth's rotation, Subsolar
+    point, Terminator (solar), Orbit of the Moon), and the panel now
+    fills an empty link or source from any trace in a group -- the
+    sources patch 2 served had not reached the panel until then.
+    Tony: each link "correct".
+  Verdicts quoted from
+  `documentation/WHERE_WE_ARE_10-7-26_0832_run_record.md` and chat.
+- **E10 as built:** "2020" and "IGRF-13 model" are served words in
+  the belts' `hovers_plane`, citing the tilt row's source, not fields
+  read from `constants_new.py`. L-322 (the IGRF epoch, a class) is
+  unchanged by this.
+- **S4 stays typed**, as the manifest ruled: the streamer belt's
+  caveat is a drawing choice.
+- **The design talk, 2026-10-09** (Claude Opus 5.5; record
+  `documentation/DESIGN_L421_inner_oort_tilt_20261009.md`). The paper
+  read in full: the inner cloud a slightly warped disk tilted about 30
+  degrees to the ecliptic, nearly polar to the galaxy, with two spiral
+  arms; the round outer cloud beyond about 10,000 au. Tony's rulings,
+  in order:
+  - The boundary: "would a fuzzy boundary work?", then "Yes": the inner
+    cloud gives way to the outer across a band from 10,000 au
+    (Nesvorny et al. 2025) to 20,000 au (Portegies Zwart et al. 2021).
+  - The hover: "say 'about' in the hover and draw 30 Degrees and say so
+    with the citation"; the hover, the panel's `about` and `note`
+    confirmed (16:33, 16:42).
+  - The arms: "Please draw the arms." The method: "A. And it's
+    consistent with 'about' 30 degrees" -- dots along orbits, so the
+    tilt and the arms come out of the orbits. The revised hover and note
+    confirmed, with one phrase cut (17:03).
+  - The tilt's "range as an envelope" in the Gap above is not in the
+    paper, which gives "about 30" only; struck.
+- **2026-10-10, the orrery side built** (Claude Opus 5.5, from
+  `documentation/HANDOFF_L421_oort_orrery_build_brief_20261009.md`;
+  record `documentation/HANDOFF_L421_oort_orrery_20261010.md`).
+  - Tony's answers: the band's near end stays at 10,000 au, not the
+    7,500 au "roughly 15,000 au across" might mean ("Confirmed as
+    recommended"). Then the tilt check failed before anything was
+    drawn: orbits spread evenly over the captions' ranges tilt about
+    40 degrees. Tony attached the paper and ruled: "follow the paper.
+    Draw following figure 3 and describe following the text. And cite
+    everything."
+  - Fig. 3 read into a table by
+    `documentation/L421_fig3_reading_20261010.py`: 203 cells, 2,052
+    dots, the axes checked against the figure's own lines, overlaps
+    estimated, its solid-black core held at the method's cap and said
+    so on the row.
+  - Rows added to `constants_new.py`: `INNER_OORT_DISK_OUTER_AU`,
+    `HILLS_CLOUD_TILT_DEG`, `ECLIPTIC_NODE_GALACTIC_LON_DEG`, the four
+    `HILLS_CLOUD_PERI_ARG_BAND*` rows, `HILLS_CLOUD_NODE_LOW_DEG` and
+    `_HIGH_DEG`, `HILLS_CLOUD_INCL_GAL_LOW_DEG` and `_HIGH_DEG`
+    (measured, each read from the paper); `HILLS_CLOUD_PLANES_READ`,
+    its two cell rows and `HILLS_CLOUD_ECCENTRICITY` (declared, each
+    with its reason). Tokens `eccentricity` and `dot_count`.
+  - New modules: `hills_cloud_sampler.py` (the dots, and three checks:
+    the frame, the reading, the tilt), `pole_frames.py` (the pole
+    matrix, moved unchanged from `idealized_orbits.py`),
+    `test_hills_cloud_sampler.py` (each check shown failing on a planted
+    fault), the 22nd gating checker of the maintenance run.
+  - Rewritten: `create_sun_hills_cloud_torus` reads the sampler, its
+    typed 2,000 and 20,000 au defaults gone; `create_sun_outer_oort_clumpy`
+    reads the rows for its typed 20,000 and 100,000 au; the clumps and
+    the tide fill in across the band; every string that printed the
+    single edge says the band; the Hills cloud's words are Tony's
+    confirmed words with the citation; two comments citing Hills (1981)
+    corrected; the checkbox reads "Hills Cloud (tilted disk)".
+  - Measured in the sandbox: the plane through the dots 34.1 degrees
+    from the ecliptic (the paper: about 30); the arms near the
+    ecliptic; Sgr A* within half a degree of where the frame puts the
+    galaxy's centre; the maintenance run 22 of 22, gate path 0 Tier-1.
+  - Two departures from the brief, with reasons in the record: a new
+    row for 10,000 au rather than a second source on NASA's outer-edge
+    row (a different quantity that prints the same number), and the
+    node as a measured row the sampler checks rather than a derived one.
+  - One confirmed clause changed to say what is drawn: the note's
+    "picked within the ranges the model gives" became "picked where the
+    model's orbits lie (its Fig. 3)". It comes to Tony with the gallery
+    words.
+- **Tony's run and look, 2026-10-10**, from his run record attached in
+  chat that evening: patch_L421_5 and the maintenance run, "22 of 22
+  gating checkers passed", the gate path at 0; pushed at 9f154782. The
+  three checks of the build record's section 7 (the disk tipped with
+  its two arms; the clumps and the tide thin inside 20,000 au and full
+  outside; the hovers): each marked correct. Asked whether
+  `hills_cloud_sampler.py` is used once: no, it draws the cloud every
+  time the box is ticked; only the patches are one-time.
+- **2026-10-11, the website half, built and live.** Tony chose how the
+  website gets the dots, from three ways put to him: "A" -- the orrery
+  places them and the website draws them as given, rather than a copy
+  of the sampler in the gallery (B) or a second one in JavaScript (C).
+  Asked whether the approach suits other shells: yes for scattered-dot
+  shapes, no for formula shapes; "Confirmed as recommended", with the
+  folder `data/drawings/` in both repositories and L-434 for the rest.
+  - Orrery, `patch_L421_6_drawings_export_20261011.py`, pushed at
+    1bbd9fe1: `drawn_hills_cloud()` holds the drawing's settings once
+    (600 orbits of 6 dots, seed 421), so every plot is the same cloud
+    (L-239); `export_drawings.py` writes `data/drawings/hills_cloud.json`
+    (the ninth generator) and `test_drawings_export.py` checks it, three
+    faults planted first (the 23rd gating checker); two dashboard
+    buttons.
+  - Gallery, `patch_L421_7_oort_gallery_20261011.py`, pushed at
+    e5a3d13f: the Hills cloud drawn from the served dots ("Hills Cloud
+    (tilted disk)", shape `served_dots`), its hover, description, about
+    and note in Tony's confirmed words with {tilt}, {near} and {far}
+    filled from rows; the clumps and the tide from 10,000 au, full by
+    20,000; the Inner Oort Cloud sphere's note names the band; L-408's
+    Galactic Plane; `HILLS_CAVEAT` and the torus gone;
+    `tools/pull_drawings.py`, `tools/check_drawings.py` (gating) and the
+    builder's `serve_drawings()`; L-363's "1.2 times".
+  - The changed clause, "picked where the model's orbits lie (its Fig.
+    3)": Tony, "correct".
+  - Measured before delivery: the drawn cloud's plane 30.9 degrees from
+    the ecliptic, fitted twice by separate arithmetic (the paper: about
+    30). The typed-facts survey's method of 2026-10-06, run by hand on
+    the Sun room before and after: one typed fact about nature before
+    (the Hills caveat's "as the inner cloud is thought to be"), none
+    after; every typed line left is about the picture.
+- **Tony's runs and look, 2026-10-11** (`documentation/WHERE_WE_ARE_10-11-26_1311_run_record.md`): the orrery, "23 of 23
+  gating checkers passed", gate path 0; the gallery's Daily Run, 26 of
+  27. The one red was the cache builder suite's new check, "every named
+  drawing served byte for byte": the suite wrote its stand-in drawing
+  as text, which Windows writes CRLF, and the builder serves LF, as it
+  should. Gallery `patch_L421_8_suite_line_endings_20261011.py` writes
+  it as bytes and adds a check that a CRLF drawing is served LF (234
+  checks). The phone, all four looks "correct": the tilted disk with
+  its arms, the text box's three distances and "about 30 degrees", the
+  clumps and the tide thin inside the sphere, the Galactic Plane edge-on
+  with its poles and "60 degrees". Tony: "beautiful. thanks."
+- **2026-10-16, parts 2 and 3 built** (Claude Opus 5.5, from
+  `documentation/HANDOFF_L421_checks_brief_20261016.md`; record
+  `documentation/HANDOFF_L421_checks_build_20261016.md`). Tony's
+  decision at the start, section 4 of the brief: "Yes, A as ruled" --
+  the orrery owns the citation; the website's gloss keeps its own
+  field.
+  - Orrery, `patch_L421_9_export_citations_20261016.py`: the export
+    moves to schema 7 and each row carries `source`, `source_from` and
+    `source_inherited`; a citation that reads "as <ROW>." resolves to
+    that row's (twelve rows); a derived row with none takes its inputs'
+    in the order its `inputs` lists them. 127 rows: 94 cite their own
+    (12 through a pointer), 22 inherit, 11 have none.
+    `test_constants_export.py` check 7 works every citation out again
+    independently, with a fixture chain for the walk no live row
+    exercises; a broken walk and an ignored pointer, planted, are both
+    caught.
+  - Gallery, `patch_L421_10_citations_typed_facts_20261016.py`: the
+    mirror writes the citation beside each linked number (99 written:
+    69 reworded to the orrery's, 30 added) and refuses an export older
+    than schema 7; the website's own words moved to `source_note` (35),
+    written by the store writer and the editor, never by the mirror;
+    the Config mirror check compares citations word for word; the i
+    panel prints the citation, then the note. The Typed facts check,
+    `documentation/smoke_typed_facts.js`, a gating row: the Sun and
+    Earth rooms built as served, masked and scaled; shown failing on a
+    typed sentence in a hover, on a typed fact in a room description,
+    and on a served word field it could not cover; a sentence added to
+    the allowed list passes and is printed.
+- **Tony's runs and look, 2026-10-16,** from his record `documentation/WHERE_WE_ARE_10-16-26_1708_run_record.md`:
+  - The orrery: "31 of 31 gating checkers passed"; "127 citations
+    worked out again, 7 of 7 worked cases hold"; pushed at 6b97515.
+  - The gallery's Daily Run: "29 of 29 gating checkers passed"; the
+    Config mirror check, "112 link(s) compared, 106 citation(s) word for
+    word, 6 declared with none, 7 not served"; "TYPED FACTS: PASS -- 0
+    typed facts in the Sun and Earth rooms; 16 number line(s), 26 of 26
+    allowed sentence(s) seen, 8 held open (L-451)". Pushed at 5032cf2,
+    with the 84 build-run records the build had dropped (L-449).
+  - The live run: "2 of 2 gating checkers passed"; "the served export
+    is the orrery's at 6b975155, byte for byte".
+  - The two i panels, the Sun's Alfven Surface and Earth's Crust, each
+    the orrery's citation then the website's note, from his phone:
+    "-- correct", and "all correct. thanks."
+- **Loose ends, re-homed or struck:**
+  - The eight sentences the check holds open: L-451 (new).
+  - The orrery's citation texts that read as store notes, the locators
+    the website had, the IADC edition, D660's Source: L-450 (new).
+  - The website's notes that may repeat their citation, and the Crust
+    note's attribution: L-452 (new).
+  - The orrery's other uncited Oort lines: L-430, unchanged.
+  - The other dot-cloud shells: L-434, unchanged.
+  - The IGRF epoch: L-322, unchanged.
+  - The brief's pointer to `test_citation_inheritance.py` for the
+    derived-row rule: struck; that test pins a different rule (display
+    strings inheriting a block's citation). The derived-row rule is
+    pinned in `test_constants_export.py` check 7.
+  - The rule, as method: interactive-exhibit 1.16 (a citation is
+    served like a number; `source_note`; the Typed facts check),
+    protocol v3.101. Tony reinstalls; the next session confirms 1.16.
+  - Riding the close, from the same phone look: the page's grey type
+    turned blue and the inner shells' radius named, L-453.
+**Gap:** none. Closed 2026-10-16.
+**Ref:** L-413; L-349 (`flux_peak_of`, the first case); L-322 (the
+IGRF epoch, a class); L-408; L-430; L-450; L-451; L-452; L-453;
+`documentation/HANDOFF_L421_checks_build_20261016.md`;
+`documentation/DESIGN_L421_inner_oort_tilt_20261009.md`,
+`documentation/HANDOFF_L421_oort_orrery_20261010.md`,
+`documentation/HANDOFF_L421_oort_gallery_20261011.md`;
+`hills_cloud_sampler.py`, `export_drawings.py`; gallery
+`tools/pull_drawings.py`, `tools/check_drawings.py`,
+`gallery/feature_renderers.js`,
+`gallery/earth_geometry.js`, `data/objects_config.json`;
+skills/interactive-exhibit/SKILL.md.
+
+#### [L-453] The page's grey type turned blue, and the inner shells' radius named (gallery, the rooms' look)
+<!-- L:453 status:DONE upd:2026-10-16 section:C flag: rice: -->
+- **Tony's phone look, 2026-10-16,** during L-421's close: "Can you
+  brighten the grey type? Maybe in blue to distinguish from white?",
+  then "Change all remaining grey type to blue please."
+  - Built: the page's two greys became two blues, `--text-secondary`
+    #9a9a9a to #a3b8de and `--text-dim` #5a5a6a to #8296c2, and the
+    greys written into the scene (the date line, the grid numbers, the
+    palomasorrery.com credit, the Explorer's legend) the brighter blue.
+    Against the panel the greys measured 6.3 and 2.6 to 1; the blues
+    8.8 and 6.0. The nav buttons' arrows took the same blue, named to
+    Tony with the patch. White and gold unchanged; the lobby untouched.
+  - Two patches, because the first (the drawer's names only) was run
+    before the second was rebuilt on it: gallery
+    `patch_drawer_row_colour_20261016.py`, pushed at cfa3d52, and
+    `patch_grey_to_blue_2_20261016.py`, pushed at a83b752. A third,
+    `patch_grey_to_blue_20261016.py`, stopped on its base check and
+    wrote nothing; it is spent.
+- **Found in the same look:** the Earth room's Lower Mantle hover
+  printed its radius as a bare "= 5,710 km (0.0000382 AU)". A radius
+  served in km had no line above it to name it; four shells serve km
+  (the inner core, outer core, lower mantle, upper mantle). Tony: "yes,
+  good catch". `patch_km_radius_label_20261016.py` prints "Radius:
+  5,710 km (0.0000382 AU)" and the Display figures check fails on a
+  bare "= " for a km radius, shown failing on all four against the old
+  code; pushed at 2090a8b.
+- **Tony's look,** `documentation/WHERE_WE_ARE_10-16-26_1708_run_record.md`: "-- correct."
+**Gap:** none. Closed 2026-10-16.
+**Ref:** gallery `interactive.html`, `gallery/feature_renderers.js`,
+`documentation/smoke_display_figures.js`; L-421.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

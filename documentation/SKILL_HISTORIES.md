@@ -591,6 +591,16 @@ thought the only source of truth is the constants py and the objects
 list ... not from the code." A search the same day found 17 such facts
 in the two rooms (documentation/MANIFEST_L421_typed_facts_20261006.md).
 (Moved down 2026-10-14, when 1.15 made a fourth entry.)
+Earlier: 1.13 | 2026-10-10, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 04d17331 and gallery @ 2aab10fd. v1.13 (L-429)
+corrects the Solar System room's drawer as built: a body with a room
+shows its "Enter the <name> room" button on its own row, before GO,
+always, on every screen; a body with none still opens to "No room or
+cards yet". Tony, 2026-10-10: "so the visitor does not need to tap the
+row to see the button then tap again to enter the room." The skill
+also gets its read plan, at its next version as Tony ruled on
+2026-10-08 (L-418).
+(Moved down 2026-10-16, when 1.16 made a fourth entry.)
 
 ## safe-file-editing
 

@@ -40,43 +40,43 @@ Rule 7: each printed exact row states a print count, each orrery line prints it 
 
 - orrery `earth_visualization_shells.py` line 1561: `f"Altitude range: {exact_text('EARTH_LEO_LOWER_ALTITUDE_KM', grouping=True)} km to {exact_tex...`
 - orrery `shell_configs.py` line 2376: `f"Low Earth Orbit (LEO) is the region from roughly {exact_text('EARTH_LEO_LOWER_ALTITUDE_KM',...`
-- gallery `gallery/feature_renderers.js` line 2650 (config `/objects/1/features/earth_orbital_zones/leo_outer/altitude`): `kmAndAu(km.altitudeKm, km.altitudeFigures)) + "<br>";`
+- gallery `gallery/feature_renderers.js` line 2679 (config `/objects/1/features/earth_orbital_zones/leo_outer/altitude`): `kmAndAu(km.altitudeKm, km.altitudeFigures)) + "<br>";`
 
 ### `EARTH_LEO_LOWER_ALTITUDE_KM`
 
 - orrery `earth_visualization_shells.py` line 1561: `f"Altitude range: {exact_text('EARTH_LEO_LOWER_ALTITUDE_KM', grouping=True)} km to {exact_tex...`
 - orrery `shell_configs.py` line 2376: `f"Low Earth Orbit (LEO) is the region from roughly {exact_text('EARTH_LEO_LOWER_ALTITUDE_KM',...`
-- gallery `gallery/feature_renderers.js` line 2650 (config `/objects/1/features/earth_orbital_zones/leo_inner/altitude`): `kmAndAu(km.altitudeKm, km.altitudeFigures)) + "<br>";`
+- gallery `gallery/feature_renderers.js` line 2679 (config `/objects/1/features/earth_orbital_zones/leo_inner/altitude`): `kmAndAu(km.altitudeKm, km.altitudeFigures)) + "<br>";`
 
 ### `EARTH_VAN_ALLEN_OUTER_RADII`
 
 - orrery `earth_visualization_shells.py` line 1340: `f"ring is the flux peak, L = {exact_text('EARTH_VAN_ALLEN_OUTER_RADII')} -- about {_km_above_...`
 - orrery `earth_visualization_shells.py` line 1346: `f"the L = {_band_low} to {_band_high} band; the drawn {exact_text('EARTH_VAN_ALLEN_OUTER_RADI...`
 - orrery `shell_configs.py` line 2365: `f"{exact_text('EARTH_VAN_ALLEN_OUTER_RADII')} Earth radii out (doi:10.1029/2024JA033504).\n"`
-- gallery `gallery/feature_renderers.js` line 1454 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `var at = "Drawn at " + fmtServed(distances[i], counts[i], 1) +`
-- gallery `gallery/feature_renderers.js` line 1469 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `drawn: fmtServed(distances[i], counts[i], 1),`
-- gallery `gallery/feature_renderers.js` line 1475 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `? SOFT_BR + "(given as L = " + fmtServed(distances[i], counts[i], 1) +`
-- gallery `gallery/feature_renderers.js` line 1479 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `kmAndAu(distances[i] * radiusKm,`
+- gallery `gallery/feature_renderers.js` line 1471 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `var at = "Drawn at " + fmtServed(distances[i], counts[i], 1) +`
+- gallery `gallery/feature_renderers.js` line 1486 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `drawn: fmtServed(distances[i], counts[i], 1),`
+- gallery `gallery/feature_renderers.js` line 1492 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `? SOFT_BR + "(given as L = " + fmtServed(distances[i], counts[i], 1) +`
+- gallery `gallery/feature_renderers.js` line 1496 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `kmAndAu(distances[i] * radiusKm,`
 
 ### `EARTH_SOLAR_WIND_PRESSURE_NPA`
 
 - orrery `earth_visualization_shells.py` line 1011: `f"Sun-facing side at a nominal solar wind pressure of {exact_text('EARTH_SOLAR_WIND_PRESSURE_...`
 - orrery `earth_visualization_shells.py` line 1194: `f"side at a nominal solar wind pressure of {exact_text('EARTH_SOLAR_WIND_PRESSURE_NPA')} nPa....`
 - orrery `earth_visualization_shells.py` line 1278: `f"Sun-facing side at a nominal solar wind pressure of {exact_text('EARTH_SOLAR_WIND_PRESSURE_...`
-- gallery `gallery/feature_renderers.js` line 2922 (config `/objects/1/features/earth_magnetosphere/magnetopause/surface/pressure`): `pressure: fmtServed(dp, servedFigures(mpS.pressure), 1),`
-- gallery `gallery/feature_renderers.js` line 3133 (config `/objects/1/features/earth_magnetosphere/bow_shock/surface/pressure`): `pressure: fmtServed(bsP, servedFigures(bsS.pressure), 1),`
+- gallery `gallery/feature_renderers.js` line 2955 (config `/objects/1/features/earth_magnetosphere/magnetopause/surface/pressure`): `pressure: fmtServed(dp, servedFigures(mpS.pressure), 1),`
+- gallery `gallery/feature_renderers.js` line 3168 (config `/objects/1/features/earth_magnetosphere/bow_shock/surface/pressure`): `pressure: fmtServed(bsP, servedFigures(bsS.pressure), 1),`
 
 ### `EARTH_SOLAR_WIND_BZ_NT`
 
-- gallery `gallery/feature_renderers.js` line 2921 (config `/objects/1/features/earth_magnetosphere/magnetopause/surface/bz`): `bz: fmtServed(bz, servedFigures(mpS.bz), 1),`
+- gallery `gallery/feature_renderers.js` line 2954 (config `/objects/1/features/earth_magnetosphere/magnetopause/surface/bz`): `bz: fmtServed(bz, servedFigures(mpS.bz), 1),`
 
 ### `EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG`
 
-- gallery `gallery/feature_renderers.js` line 2923 (config `/objects/1/features/earth_magnetosphere/magnetopause/surface/cut_angle`): `cut_angle: fmtServed(mpCut, servedFigures(mpS.cut_angle), 0)`
+- gallery `gallery/feature_renderers.js` line 2956 (config `/objects/1/features/earth_magnetosphere/magnetopause/surface/cut_angle`): `cut_angle: fmtServed(mpCut, servedFigures(mpS.cut_angle), 0)`
 
 ### `EARTH_BOW_SHOCK_CUT_ANGLE_DEG`
 
-- gallery `gallery/feature_renderers.js` line 3134 (config `/objects/1/features/earth_magnetosphere/bow_shock/surface/cut_angle`): `cut_angle: fmtServed(bsCut, servedFigures(bsS.cut_angle), 0)`
+- gallery `gallery/feature_renderers.js` line 3169 (config `/objects/1/features/earth_magnetosphere/bow_shock/surface/cut_angle`): `cut_angle: fmtServed(bsCut, servedFigures(bsS.cut_angle), 0)`
 
 ### `INNER_CORONA_RADII`
 
@@ -136,9 +136,9 @@ No display prints these exact rows. Under Rule 7 they carry no print count. The 
 - `S_PER_DAY`: named on 12 other orrery line(s).
 - `D_PER_JULIAN_YEAR`: named on 16 other orrery line(s).
 - `EARTH_POLE_RA_J2000_DEG`: named on 6 other orrery line(s).
-  - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 925 (config `/objects/1/features/orientation/pole/ra`): `var ra = measured(pole.ra, "deg", slug + "/orientation/pole/ra", warn);`
+  - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 939 (config `/objects/1/features/orientation/pole/ra`): `var ra = measured(pole.ra, "deg", slug + "/orientation/pole/ra", warn);`
 - `EARTH_POLE_DEC_J2000_DEG`: named on 6 other orrery line(s).
-  - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 926 (config `/objects/1/features/orientation/pole/dec`): `var dec = measured(pole.dec, "deg", slug + "/orientation/pole/dec", warn);`
+  - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 940 (config `/objects/1/features/orientation/pole/dec`): `var dec = measured(pole.dec, "deg", slug + "/orientation/pole/dec", warn);`
 - `ARCSEC_PER_DEG`: named on 2 other orrery line(s).
 - `EARTH_OBLIQUITY_J2000_ARCSEC`: named on 0 other orrery line(s).
 - `EARTH_OBLIQUITY_J2000_DEG`: named on 18 other orrery line(s).
@@ -148,9 +148,9 @@ No display prints these exact rows. Under Rule 7 they carry no print count. The 
 - `DEG_PER_RAD`: named on 2 other orrery line(s).
 - `EARTH_SOLAR_WIND_SPEED_KM_S`: named on 0 other orrery line(s).
 - `EARTH_MAGNETOTAIL_DRAWN_RADIUS_RADII`: named on 3 other orrery line(s).
-  - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 2961 (config `/objects/1/features/earth_magnetosphere/magnetotail/drawn_radius`): `var tailRadius = measured(tl.drawn_radius, "r_earth",`
+  - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 2995 (config `/objects/1/features/earth_magnetosphere/magnetotail/drawn_radius`): `var tailRadius = measured(tl.drawn_radius, "r_earth",`
 - `EARTH_MAGNETOTAIL_DRAWN_END_RADII`: named on 3 other orrery line(s).
-  - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 2963 (config `/objects/1/features/earth_magnetosphere/magnetotail/drawn_end`): `var tailEnd = measured(tl.drawn_end, "r_earth", tlWhere + "/drawn_end",`
+  - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 2997 (config `/objects/1/features/earth_magnetosphere/magnetotail/drawn_end`): `var tailEnd = measured(tl.drawn_end, "r_earth", tlWhere + "/drawn_end",`
 - `ROCHE_LIMIT_DRAWN_RADII`: named on 6 other orrery line(s).
 - `HILLS_CLOUD_PLANES_NODE_CELL_DEG`: named on 3 other orrery line(s).
 - `HILLS_CLOUD_PLANES_INCL_CELL_DEG`: named on 3 other orrery line(s).

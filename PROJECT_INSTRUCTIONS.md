@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.100 | October 16, 2026
+Tony Quintanilla, PE | Claude | v3.101 | October 16, 2026
 
-Cut from 54c27d7f at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 6b975155 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -521,7 +521,7 @@ gallery-cache-builder        1.10 Nightly builder, atomic swap and its
                                   objects_config, dry-run/first-build/nightly,
                                   builder testing layers, the Daily Run's order
                                   and a failed pull
-interactive-exhibit          1.15 adding or changing an exhibit in
+interactive-exhibit          1.16 adding or changing an exhibit in
                                   interactive.html; any edit to the Sun's
                                   chrome (drawer, nav cluster, frame zoom,
                                   i-panel, HUD, consent, back link); "Earth
@@ -536,7 +536,9 @@ interactive-exhibit          1.15 adding or changing an exhibit in
                                   framing; testing a room headlessly
                                   (tools/headless); carding an exhibit in
                                   Studio; choosing a feature's info link (NASA
-                                  or Wikipedia)
+                                  or Wikipedia); a served number's citation and
+                                  its source_note; the Typed facts check
+                                  (smoke_typed_facts.js)
 <!-- SKILL-MANIFEST:END -->
 
 Session-Start Repo Pull and the SHA Round Trip [CRITICAL]
@@ -1172,6 +1174,46 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.101 (October 16, 2026): No rule changed in this document. ONE
+skill bump, one version (L-421 parts 2 and 3, with L-262):
+interactive-exhibit 1.15 -> 1.16. A CITATION IS SERVED LIKE A NUMBER,
+AND THE TYPED-FACT RULE IS A GATING CHECK.
+
+WHAT PROMPTED IT. L-421's Gap held two parts: whether each served
+number's citation in the website's config agrees with its row in
+constants_new.py, and the typed-facts survey as a check. The brief put
+one decision to Tony at the session's start: which side owns the
+citation. Tony, 2026-10-16: "Yes, A as ruled": the orrery does.
+
+WHAT CHANGED. interactive-exhibit adds three rules to its served-data
+provenance contract. The citation beside a served number is the
+orrery's: the export (schema 7) carries each row's source, own, through
+an "as <ROW>." pointer, or inherited from its inputs; the mirror writes
+it beside the number; the Config mirror check compares it word for word
+and fails on a difference. The website's own words about a citation
+are a served word, `source_note`, written by the store writer, never by
+the mirror, and the i panel prints them after the citation. And the
+typed-fact rule of 1.12 is now the gallery run's "Typed facts" row,
+which masks every served word, fails on a typed sentence not on its
+allowed list, and reads the served-word vocabulary from one home in
+store_writer.py. Its v1.13 entry moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copy reads
+interactive-exhibit 1.16 before exhibit work. This session confirmed
+its loaded copies read gallery-cache-builder 1.10 (discharging v3.100's
+obligation), interactive-exhibit 1.15 and ledger-and-session-records
+1.21, as the manifest expected. v3.99's obligation,
+horizons-orbital-mechanics 1.8, still travels: no work this session
+fired that skill.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.98 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.100 (October 16, 2026): No rule changed in this document. ONE
 skill bump, one version (L-446, with L-380 and L-388):
 gallery-cache-builder 1.9 -> 1.10. THE WEBSITE'S DAILY RUN PULLS
@@ -1236,36 +1278,6 @@ confirmed its loaded copy read 1.7, discharging v3.98's obligation.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.96 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.98 (October 15, 2026): No rule changed in this document. ONE
-skill bump, one version (L-444): horizons-orbital-mechanics 1.6 -> 1.7.
-THE RUN FETCHES A SERVED BODY'S MISSING PERIOD BEFORE THE CHECK.
-
-WHAT PROMPTED IT. Tony, 2026-10-14, in his run record: "should the
-30-day Horizons checker initiate a fetch of the missing data as well as
-report, including a new object as never having been fetched?" Ruled the
-same day: a separate step before the check, with the orrery's own
-fetching code; the check stays a check. On 2026-10-15 he chose option
-A: the elements and the period together, the same call as plotting.
-
-WHAT CHANGED. horizons-orbital-mechanics gains one bullet under Where
-the Check Lives, and What It Compares: period_fetch.py runs just before
-the check and fetches, with plotting's own call and save, the period of
-each served object that has none fetched, so the check compares it with
-JPL the same day. Its v1.4 entry moved to
-documentation/SKILL_HISTORIES.md, by the three-entry rule.
-
-THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
-that session. The next session confirms its loaded copy reads
-horizons-orbital-mechanics 1.7 before work that fires it. This session
-confirmed its loaded copy of ledger-and-session-records reads 1.21,
-discharging v3.97's obligation.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.95 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 
