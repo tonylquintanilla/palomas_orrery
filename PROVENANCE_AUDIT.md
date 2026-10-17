@@ -1,8 +1,8 @@
 <!-- Doc-Kind: generated | The provenance audit: every numeric claim scored against its citation, rebuilt by provenance_scanner.py on each run. Do not hand-edit. -->
 # Paloma's Orrery -- Provenance Audit
 
-Generated: October 16, 2026
-Files scanned: 161
+Generated: October 17, 2026
+Files scanned: 160
 Total findings: 1124
 Constants: 193 | Dicts: 65 | Display strings: 866
 
@@ -20,12 +20,12 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T1 by domain | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|--------------|---:|---:|---:|--------:|
+| 20261017T131817Z | `e63a207` | 160 | 1124 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 684 | 154 | 6 | 0 |
 | 20261017T014624Z | `6b97515` | 161 | 1124 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 684 | 154 | 6 | 0 |
 | 20261016T221523Z | `0d7211e` | 160 | 1124 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 684 | 154 | 6 | 0 |
 | 20261016T144821Z | `3cedfb7` | 160 | 1124 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 684 | 154 | 6 | 0 |
 | 20261016T141205Z | `6ad6975` | 162 | 1129 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 688 | 154 | 7 | 0 |
 | 20261016T044401Z | `77245ea` | 162 | 1129 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 688 | 154 | 7 | 0 |
-| 20261016T034327Z | `b4105c0` | 160 | 1122 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 683 | 153 | 6 | 0 |
 
 Change since the previous run: total +0, Tier-1 +0.
 
