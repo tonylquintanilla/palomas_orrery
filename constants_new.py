@@ -272,7 +272,7 @@ EARTH_EQUATORIAL_RADIUS_KM = 6378.1366
 # Read: Table 1.1 "IERS numerical standards", IERS Technical Note 36
 # Read+: p. 18, 2026-09-19, Claude Opus 5
 # Source: IERS Conventions (2010), Petit & Luzum (eds.), IERS Technical
-# Source+: Note No. 36, Table 1.1; IAU B3 rounds to 6378.1 km
+# Source+: Note No. 36, Table 1.1
 # Ref: Prsa et al. 2016, AJ 152:41 (arXiv:1605.09788)
 # Also: https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html
 # Note: IERS publishes 6378136.6 +/- 0.1 m. IAU B3's 6.3781e6 m is an
@@ -284,11 +284,13 @@ EARTH_EQUATORIAL_RADIUS_KM = 6378.1366
 
 EARTH_POLAR_RADIUS_KM = 6356.752
 # Source: NASA Planetary Fact Sheet, Earth -- polar radius, 6356.752 km.
-# Source+: IERS Technical Note 36 does NOT tabulate a polar radius; it
-# Source+: follows from that table's equatorial radius and flattening
-# Source+: factor, 6378136.6 m x (1 - 1/298.25642) = 6356751.86 m, which
-# Source+: agrees with the fact sheet to the metre. Corrected 2026-09-19: the
-# Source+: old line named IERS as though it printed this number.
+# Note: IERS Technical Note 36 does NOT tabulate a polar radius; it
+# Note+: follows from that table's equatorial radius and flattening
+# Note+: factor, 6378136.6 m x (1 - 1/298.25642) = 6356751.86 m, which
+# Note+: agrees with the fact sheet to the metre.
+# Corrected: 2026-09-19 -- the old Source line named IERS as though it
+# Corrected+: printed this number. This note and that history were in the
+# Corrected+: Source line until 2026-10-17 (L-450).
 # Unit: km
 # Status: measured V_CROSS_CHECKED 2026-09-19
 # Figures: 7 -- as printed on the fact sheet.
@@ -368,7 +370,7 @@ EARTH_INNER_CORE_KM = 1221.5
 # Read+: Inter. 25:297-356, p. 308, 2026-09-19, Claude Opus 5
 # Source: Dziewonski, A. M. & Anderson, D. L. (1981), "Preliminary
 # Source+: reference Earth model", Phys. Earth Planet. Inter. 25:297-356
-# Source+: -- inner core boundary (ICB) at r = 1221.5 km (5 sig figs).
+# Source+: -- inner core boundary (ICB) at r = 1221.5 km.
 # Note: the shell previously carried radius_fraction 0.19, an
 # Note+: approximate value taken by hand when the shells were first
 # Note+: drawn (Tony's account, 2026-08-26). It drew 1211.8 km.
@@ -393,8 +395,7 @@ EARTH_OUTER_CORE_KM = 3480.0
 # Read: Table I, "Preliminary reference Earth model", Phys. Earth Planet.
 # Read+: Inter. 25:297-356, p. 308, 2026-09-19, Claude Opus 5
 # Source: Dziewonski & Anderson (1981), PREM, Phys. Earth Planet. Inter.
-# Source+: 25:297-356 -- core-mantle boundary (CMB) at r = 3480 km
-# Source+: (4 sig figs).
+# Source+: 25:297-356 -- core-mantle boundary (CMB) at r = 3480 km.
 # Note: the NASA Earth Fact Sheet lists a core radius of 3485 km. PREM is
 # Note+: preferred because the other three boundaries in this nested
 # Note+: stack are PREM's, and mixing reference models across one stack
@@ -409,23 +410,33 @@ EARTH_OUTER_CORE_RADII = EARTH_OUTER_CORE_KM / EARTH_EQUATORIAL_RADIUS_KM
 
 EARTH_D660_DEPTH_KM = 660.0
 # Unit: km
-# Status: measured V_SOURCED 2026-09-19 -- L-253
+# Status: measured V_SOURCED 2026-10-17 -- open full text
 # Figures: 2 -- uncertainty 10 km. The global average depth is 660 +/- 10
 # Figures+: km, so the last significant digit is the tens place. The
-# Figures+: trailing zero is not significant, which the source line above
-# Figures+: already said; the +/- 10 km behind it is now sourced (see the
-# Figures+: read line). The field at the head of this line is that 10 km,
+# Figures+: trailing zero is not significant; the +/- 10 km is the Source
+# Figures+: line's. The field at the head of this line is that 10 km,
 # Figures+: written so test_derived_figures.py can read it (L-322 C2).
 # Read: Ishii et al. (2018), "Complete agreement of the post-spinel
 # Read+: transition with the 660-km seismic discontinuity", Sci. Rep.
 # Read+: 8:6358, results section -- "the global average depth of the
-# Read+: discontinuity is 660 +/- 10 km", 2026-09-19, Claude Opus 5
-# Source: the 660-km seismic discontinuity, ringwoodite dissociating to
-# Source+: bridgmanite plus ferropericlase; global average depth 660 km
-# Source+: (2 sig figs -- the trailing zero is not significant).
+# Read+: discontinuity is 660 +/- 10 km", 2026-09-19, Claude Opus 5;
+# Read+: re-read for the title, authors, DOI and section through the open
+# Read+: PMC copy, 2026-10-17, Claude Opus 5.5.
+# Source: Ishii, T., Huang, R., Fei, H. et al. (2018), "Complete agreement
+# Source+: of the post-spinel transition with the 660-km seismic
+# Source+: discontinuity", Sci. Rep. 8:6358, doi:10.1038/s41598-018-24832-y
+# Source+: -- section "New results of the post-spinel transition pressure in
+# Source+: complete agreement with the discontinuity depth": the global
+# Source+: average depth of the discontinuity is 660 +/- 10 km.
+# Access: open full text, https://pmc.ncbi.nlm.nih.gov/articles/PMC5910398
+# Access+: (2026-10-17).
 # Ref: Ishii, T., Huang, R., Myhill, R. et al. (2019), "Sharp 660-km
 # Ref+: discontinuity controlled by extremely narrow binary post-spinel
 # Ref+: transition", Nature Geoscience 12:869-872.
+# Note: the 660-km seismic discontinuity, where ringwoodite dissociates
+# Note+: to bridgmanite plus ferropericlase. Until 2026-10-17 (L-450) the
+# Note+: Source line was this sentence and named no work; the paper was
+# Note+: only in the website's note.
 # Note: a GLOBAL AVERAGE, not a constant depth. The boundary is not
 # Note+: uniform: it lies deeper where the mantle is colder and shallower
 # Note+: where it is warmer. The shell is drawn at one radius because a
@@ -464,13 +475,14 @@ EARTH_UPPER_MANTLE_KM = 6346.6
 # Read+: Inter. 25:297-356, p. 308, 2026-09-19, Claude Opus 5
 # Source: Dziewonski & Anderson (1981), PREM, Phys. Earth Planet. Inter.
 # Source+: 25:297-356 -- base of the crust (Mohorovicic discontinuity) in
-# Source+: the reference model, r = 6346.6 km (5 sig figs), i.e. 24.4 km
-# Source+: below the mean radius.
+# Source+: the reference model, r = 6346.6 km.
 # Note: the Moho is not a sphere. It lies about 5-10 km below ocean
 # Note+: basins, 30-50 km below continents, and as deep as 70 km below
 # Note+: young mountain belts. 6346.6 km is the reference global average
 # Note+: and the shell's hover text says so rather than implying a
 # Note+: precision the boundary does not have.
+# Note+: It is 24.4 km below the mean radius (our arithmetic, in the
+# Note+: Source line until 2026-10-17, L-450).
 EARTH_UPPER_MANTLE_RADII = EARTH_UPPER_MANTLE_KM / EARTH_EQUATORIAL_RADIUS_KM
 # Unit: r_earth
 # Conversion: of EARTH_UPPER_MANTLE_KM -- computed from that row, which carries the
@@ -497,8 +509,10 @@ EARTH_GM_KM3_S2 = 398600.4418
 # Read+: p. 18, 2026-09-19, Claude Opus 5
 # Source: IERS Conventions (2010), IERS Technical Note 36, Table 1.1 --
 # Source+: geocentric gravitational constant GM_E = 3.986004418e14 m^3 s^-2
-# Source+: (uncertainty 8e5 m^3 s^-2). Converted to km^3 s^-2 here.
+# Source+: (uncertainty 8e5 m^3 s^-2).
 # Ref: https://iers-conventions.obspm.fr/content/tn36.pdf
+# Note: the table gives m^3 s^-2; this row stores km^3 s^-2 (in the
+# Note+: Source line until 2026-10-17, L-450).
 # Note: TCG-compatible value as tabulated; the TT-compatible value differs
 # Note+: in the ninth figure, below anything this file derives from it.
 # Note+: Corrected 2026-09-19 -- the old line said TCB. Table 1.1's own footnote
@@ -512,9 +526,10 @@ EARTH_ROTATION_RATE_RAD_S = 7.292115e-5
 # Read+: IERS Technical Note 36 p. 19, 2026-09-19, Claude Opus 5
 # Source: IERS Conventions (2010), IERS Technical Note 36, Table 1.2
 # Source+: "Parameters of the Geodetic Reference System GRS80" -- nominal
-# Source+: mean Earth angular velocity, 7.292115e-5 rad s^-1. Corrected
-# Source+: 2026-09-19: the old line said Table 1.1, which has no angular
-# Source+: velocity in it. The value is unchanged; only the table is.
+# Source+: mean Earth angular velocity, 7.292115e-5 rad s^-1.
+# Corrected: 2026-09-19 -- the old line said Table 1.1, which has no
+# Corrected+: angular velocity in it. The value is unchanged; only the table
+# Corrected+: is. In the Source line until 2026-10-17 (L-450).
 # Ref: https://iers-conventions.obspm.fr/content/tn36.pdf
 
 EARTH_GEOSTATIONARY_RADIUS_KM = (EARTH_GM_KM3_S2 / EARTH_ROTATION_RATE_RAD_S ** 2) ** (1.0 / 3.0)
@@ -526,6 +541,20 @@ EARTH_GEOSTATIONARY_RADIUS_KM = (EARTH_GM_KM3_S2 / EARTH_ROTATION_RATE_RAD_S ** 
 # Status: derived -- inherits EARTH_GM_KM3_S2, EARTH_ROTATION_RATE_RAD_S
 # Figures: 7 -- set by EARTH_ROTATION_RATE_RAD_S (7.292115e-5, 7). The
 # Figures+: cube root damps rather than magnifies, so no figure is dropped.
+# Source: as EARTH_GM_KM3_S2. IERS Conventions (2010), IERS Technical Note
+# Source+: 36, Table 1.2 "Parameters of the Geodetic Reference System GRS80"
+# Source+: -- nominal mean Earth angular velocity, 7.292115e-5 rad s^-1.
+# Source+: NASA Earth Observatory, Riebeek (2009, page updated 2025-11-14),
+# Source+: "Catalog of Earth Satellite Orbits", section High Earth Orbit,
+# Source+: https://science.nasa.gov/earth/earth-observatory/catalog-of-earth-satellite-orbits/
+# Source+: -- at 42,164 km from Earth's centre the orbit matches Earth's
+# Source+: rotation, so a satellite seems to stay over a single longitude;
+# Source+: circular and over the equator, it is geostationary.
+# Read: the NASA page, 2026-10-06, as the website's note recorded it.
+# Note: the row's own Source since 2026-10-17 (L-452, Tony: "why drop the
+# Note+: source?"). It is the two inputs' citations, then the NASA page the
+# Note+: hover's sentence on keeping pace with Earth comes from, which until
+# Note+: then was only in the website's note.
 # Note: the orrery's geostationary shell types 42164.0 km and quotes
 # Note+: 6.62 radii, a ratio taken against the 6371 km mean radius. Against
 # Note+: the equatorial radius this file draws to, it is 6.611.
@@ -858,30 +887,41 @@ EARTH_LEO_UPPER_ALTITUDE_KM = 2000.0
 # Source+: 2, March 2020, section 3.3.2 (1) -- the LEO Protected Region
 # Source+: extends from the Earth's surface to an altitude of 2,000 km.
 # Source+: Section 3.3.1 takes the equatorial radius as the reference
-# Source+: surface, as this file does, and gives it as 6,378 km.
-# Source+: Corrected 2026-09-19: the old line said "Rev. 3 (June 2021)".
-# Source+: The document at the Ref link below, which is the one that was
-# Source+: read, is Revision 2 of March 2020, and its revision history
-# Source+: table ends there. No Rev. 3 was involved.
+# Source+: surface and gives it as 6,378 km.
+# Note: this file takes the same reference surface.
+# Corrected: 2026-09-19 -- the old line said "Rev. 3 (June 2021)". The
+# Corrected+: document at the Ref link below, which is the one that was read,
+# Corrected+: is Revision 2 of March 2020, and its revision history table
+# Corrected+: ends there. No Rev. 3 was involved. In the Source line until
+# Corrected+: 2026-10-17 (L-450).
 # Ref: https://orbitaldebris.jsc.nasa.gov/library/iadc-space-debris-guidelines-revision-2.pdf
-EARTH_LEO_LOWER_ALTITUDE_KM = 200.0
+EARTH_LEO_LOWER_ALTITUDE_KM = 180.0
 # Unit: km
-# Status: declared 2026-09-19 -- a drawing floor, not a measured boundary, so
-# Status+: there is no source to read against and none is expected.
-# Figures: exact -- prints 3, the digits it was chosen with (200 km). A
-# Figures+: drawing choice, so all of its digits are known; the .0 is
-# Figures+: Python's (Rule 2).
-# Declared: the floor the orrery's LEO shell draws from. The IADC region
-# Declared+: starts at the surface; 200 km is a drawing choice marking where
-# Declared+: orbits stop decaying within days. Not a measured boundary.
+# Status: measured V_SOURCED 2026-10-17 -- open
+# Figures: 2 -- the page prints "180 km", a round figure; the trailing zero
+# Figures+: is a placeholder (Rule 2), and the .0 is Python's.
+# Read: "Types of orbits", ESA, section "Low Earth orbit (LEO)", page dated
+# Read+: 30/03/2020, 2026-10-17, Claude Opus 5.5.
+# Source: ESA, "Types of orbits" (2020), section "Low Earth orbit (LEO)",
+# Source+: https://www.esa.int/Our_Activities/Launchers/Types_of_orbits --
+# Source+: the lower limit for how low a satellite can fly is down to the
+# Source+: impact of Earth's atmosphere; generally, satellites do not fly
+# Source+: below 180 km for this reason.
+# Note: where the drawn LEO shell starts. The IADC region (the upper edge's
+# Note+: row) starts at the surface; this is where satellites start.
+# Corrected: 2026-10-17 (Tony's option A) -- was a declared 200 km, "a
+# Corrected+: drawing choice marking where orbits stop decaying within
+# Corrected+: days", a reason nothing sourced. Tony: "if drawn we need to
+# Corrected+: settle it."
 EARTH_LEO_INNER_KM = EARTH_EQUATORIAL_RADIUS_KM + EARTH_LEO_LOWER_ALTITUDE_KM
-# Derived: 6378.1366 + 200 = 6578.1366 km. A SUM is good to the coarsest
-# Derived+: decimal place among its MEASURED inputs; the 200 km floor is a
-# Derived+: declared choice and exact, so the equatorial radius sets it.
+# Derived: 6378.1366 + 180 = 6560 km, to tens of kilometres. A SUM is good
+# Derived+: to the coarsest decimal place among its MEASURED inputs, and the
+# Derived+: 180 km edge is good to tens of kilometres.
 # Unit: km
 # Status: derived -- inherits EARTH_EQUATORIAL_RADIUS_KM,
 # Status+: EARTH_LEO_LOWER_ALTITUDE_KM
-# Figures: 8 -- set by EARTH_EQUATORIAL_RADIUS_KM
+# Figures: 3 -- set by EARTH_LEO_LOWER_ALTITUDE_KM (180, tens of km). It was
+# Figures+: 8 while the edge was a declared, exact 200 (until 2026-10-17).
 # Note: the altitude is added to the EQUATORIAL radius, the standard
 # Note+: Earth radius, on purpose (Tony, 2026-10-05, L-389). The crust is
 # Note+: drawn at the mean radius only because Earth is drawn as a
@@ -894,7 +934,7 @@ EARTH_LEO_OUTER_KM = EARTH_EQUATORIAL_RADIUS_KM + EARTH_LEO_UPPER_ALTITUDE_KM
 # Status+: EARTH_LEO_UPPER_ALTITUDE_KM
 # Figures: 8 -- set by EARTH_EQUATORIAL_RADIUS_KM; the 2,000 km IADC
 # Figures+: altitude is exact and does not limit the sum.
-# Derived: 6378.1366 + 200 = 6578.1 km; 6378.1366 + 2000 = 8378.1 km.
+# Derived: 6378.1366 + 2000 = 8378.1 km.
 # Note: the altitude is added to the EQUATORIAL radius, as on the row
 # Note+: above (Tony, 2026-10-05, L-389). Corrected in passing the same
 # Note+: day: this note said the LEO shell's hover typed its distances
@@ -996,13 +1036,14 @@ EARTH_VAN_ALLEN_INNER_RADII = 1.5
 # Source: Baker, D. N. et al. (2018), "Space Weather Effects in the
 # Source+: Earth's Radiation Belts", Space Sci. Rev. 214:17,
 # Source+: doi:10.1007/s11214-017-0452-7 -- sec. 2: inner-zone proton fluxes
-# Source+: peak near geocentric r ~ 1.5 R_E. Geocentric, equatorial, which
-# Source+: is the frame this row is in.
+# Source+: peak near geocentric r ~ 1.5 R_E.
 # Access: open full text,
 # Access+: https://link.springer.com/article/10.1007/s11214-017-0452-7
 # Access+: (2026-09-13).
 # Note: a peak, not an edge; the edges are their own rows since 2026-09-14.
-# Note+: The drawn torus marks where the flux is greatest.
+# Note+: Geocentric and equatorial: the frame this row is in (in the
+# Note+: Source line until 2026-10-17, L-450). The drawn belt's dots are
+# Note+: thickest here (L-330, 2026-10-17).
 # Note+: The same number is read a second time in a different frame, kept
 # Note+: here as a second reading and not as agreement: Li et al. (2025),
 # Note+: doi:10.1029/2024JA033504, centres the inner belt near L = 1.5, and
@@ -1030,16 +1071,19 @@ EARTH_VAN_ALLEN_OUTER_BAND_LOW_L = 4.0
 # Source+: After the Magnetic Super Storm of 10 May 2024", J. Geophys. Res.
 # Source+: Space Physics 130, e2024JA033504, doi:10.1029/2024JA033504 --
 # Source+: sec. 1: the outer radiation belt is most intense around L = 4
-# Source+: and 5. This row is the lower end of that band.
-# Source+: Li et al. (2015), doi:10.1002/2014JA020777, sec. 1 -- greatest
-# Source+: intensity between 4 and 5 equatorial R_E for electrons above
-# Source+: 500 keV. Kellerman et al. (2014), as reported in "Electron
-# Source+: intensity measurements by the Cluster/RAPID/IES instrument in
-# Source+: Earth's radiation belts and ring current" (2018,
-# Source+: arXiv:1809.00902) -- maximum electron flux at L = 4-5. The arXiv
-# Source+: paper is the document opened; Kellerman is the layer below it.
-# Source+: These two corroborate; they were carried on the peak row's
-# Source+: "# Declared:" line until 2026-09-22 and were not re-read here.
+# Source+: and 5.
+# Also: Li et al. (2015), doi:10.1002/2014JA020777, sec. 1 -- greatest
+# Also+: intensity between 4 and 5 equatorial R_E for electrons above
+# Also+: 500 keV. Kellerman et al. (2014), as reported in "Electron
+# Also+: intensity measurements by the Cluster/RAPID/IES instrument in
+# Also+: Earth's radiation belts and ring current" (2018,
+# Also+: arXiv:1809.00902) -- maximum electron flux at L = 4-5. The arXiv
+# Also+: paper is the document opened; Kellerman is the layer below it.
+# Also+: These two corroborate; they were carried on the peak row's
+# Also+: "# Declared:" line until 2026-09-22 and were not re-read, so since
+# Also+: 2026-10-17 (L-450) they are not part of the citation a visitor
+# Also+: reads.
+# Note: the lower end of that band.
 # Access: open full text, https://par.nsf.gov/servlets/purl/10575739
 # Access+: (2026-09-22), the same paper Wiley serves.
 
@@ -1050,8 +1094,9 @@ EARTH_VAN_ALLEN_OUTER_BAND_HIGH_L = 5.0
 # Read: sec. 1 para. 1, p. 1, the par.nsf.gov copy of Li et al. (2025),
 # Read+: 2026-09-22, Claude Opus 5
 # Source: Li et al. (2025), doi:10.1029/2024JA033504 -- sec. 1: the outer
-# Source+: radiation belt is most intense around L = 4 and 5. This row is
-# Source+: the upper end of that band. Corroborated as the row above.
+# Source+: radiation belt is most intense around L = 4 and 5.
+# Note: the upper end of that band; corroborated as the row above (its
+# Note+: Also lines).
 # Access: open full text, https://par.nsf.gov/servlets/purl/10575739
 # Access+: (2026-09-22).
 
@@ -1109,7 +1154,8 @@ EARTH_VAN_ALLEN_INNER_BELT_INNER_EDGE = 1.1
 # Source: Meredith, N. P., Horne, R. B., Kersten, T., Fraser, B. J. and
 # Source+: Grew, R. S. (2014), "Global morphology and spectral properties of
 # Source+: EMIC waves derived from CRRES observations", J. Geophys. Res.
-# Source+: Space Physics 119, 5328-5342, doi:10.1002/2014JA020064 --
+# Source+: Space Physics 119, 5328-5342, doi:10.1002/2014JA020064, open full
+# Source+: text at https://nora.nerc.ac.uk/id/eprint/507469/1/jgra51120.pdf --
 # Source+: introduction, first paragraph: the inner belt extends from about
 # Source+: 1.1 to 2 Earth radii in the geomagnetic equatorial plane.
 # Access: open full text,
@@ -1150,12 +1196,15 @@ EARTH_VAN_ALLEN_OUTER_BELT_INNER_EDGE = 3.0
 # Read: introduction para. 1, Meredith et al. (2014), read through the Wiley
 # Read+: article page, and introduction para. 1, Li, Tu et al. (2024) at
 # Read+: par.nsf.gov, 2026-09-21, Claude Opus 5
-# Source: Meredith et al. (2014), doi:10.1002/2014JA020064 -- introduction,
-# Source+: first paragraph: the outer belt extends from 3 to 7 R_E. Li, Tu,
+# Source: Meredith et al. (2014), doi:10.1002/2014JA020064, open full text at
+# Source+: https://nora.nerc.ac.uk/id/eprint/507469/1/jgra51120.pdf --
+# Source+: introduction, first paragraph: the outer belt extends from 3 to 7
+# Source+: R_E. Li, Tu,
 # Source+: Selesnick and Huang (2024), "Modeling the contribution of
 # Source+: precipitation loss to a radiation belt electron dropout observed
 # Source+: by Van Allen Probes", J. Geophys. Res. Space Physics 129,
-# Source+: e2023JA032171, doi:10.1029/2023JA032171 -- introduction, first
+# Source+: e2023JA032171, doi:10.1029/2023JA032171, open full text at
+# Source+: https://par.nsf.gov/servlets/purl/10578577 -- introduction, first
 # Source+: paragraph, the same span independently.
 # Access: open full text,
 # Access+: https://nora.nerc.ac.uk/id/eprint/507469/1/jgra51120.pdf and
@@ -1327,15 +1376,17 @@ EARTH_DIPOLE_TILT_DEG = math.atan(math.sqrt(EARTH_IGRF13_G11_NT**2 + EARTH_IGRF1
 # Figures+: (provenance-discipline 2.17, Show or cap).
 # Source: Alken et al. (2021), "International Geomagnetic Reference Field:
 # Source+: the thirteenth generation", Earth Planets Space 73:49,
-# Source+: doi:10.1186/s40623-020-01288-x -- for the RELATION: the
-# Source+: geomagnetic poles are computed from the three degree-1 Gauss
-# Source+: coefficients, which is what this row does. The paper prints no
-# Source+: tilt of its own. Its Table 4 gives the 2020.0 north geomagnetic
-# Source+: pole at 80.65 N, -72.68 E; these coefficients reproduce it as
-# Source+: 80.6512 N, -72.6797 E (read 2026-09-21 by Claude Opus 5).
+# Source+: doi:10.1186/s40623-020-01288-x -- the geomagnetic poles, and so
+# Source+: the dipole's tilt, are computed from the three degree-1 Gauss
+# Source+: coefficients; the paper prints no tilt of its own. Its Table 4
+# Source+: gives the 2020.0 north geomagnetic pole at 80.65 N, -72.68 E.
+# Read: Table 4, 2026-09-21, Claude Opus 5.
 # Access: open full text,
 # Access+: https://link.springer.com/article/10.1186/s40623-020-01288-x
 # Access+: (2026-09-21).
+# Note: this row computes the tilt from those coefficients, and they
+# Note+: reproduce Table 4's pole as 80.6512 N, -72.6797 E. Both were in the
+# Note+: Source line until 2026-10-17 (L-450).
 # Note: promoted to the store 2026-09-15 (L-231) because a value cannot be
 # Note+: quoted on the web page unless the store carries it. It previously
 # Note+: lived only as a literal in PLANET_DIPOLE, which made it a sourced
@@ -1492,9 +1543,10 @@ EARTH_MAGNETOPAUSE_SHUE_A7_PER_NT = -0.007
 # Figures: 1 -- Table 1 prints -0.007, uncertainty 0.0005
 # Read: Table 1 "After Fit", p. 17,698, 2026-09-11, Claude Fable 5.1
 # Source: Shue et al. (1998), doi:10.1029/98JA01103 -- Table 1 "After Fit"
-# Source+: row a7, p. 17,698: -0.007 +/- 0.0005 per nT. Eq. 11 prints it as
-# Source+: the subtraction (0.58 - 0.007 Bz); the table carries the sign, so
-# Source+: the stored coefficient is negative and adds.
+# Source+: row a7, p. 17,698: -0.007 +/- 0.0005 per nT.
+# Note: eq. 11 prints it as the subtraction (0.58 - 0.007 Bz); the table
+# Note+: carries the sign, so the stored coefficient is negative and adds
+# Note+: (in the Source line until 2026-10-17, L-450).
 # Access: open full text, https://doi.org/10.1029/98JA01103 (2026-09-11).
 
 EARTH_MAGNETOPAUSE_SHUE_A8 = 0.024
@@ -1577,9 +1629,10 @@ EARTH_BOW_SHOCK_JELINEK_LAMBDA = 1.17
 # Figures: 3 -- sec. 4 prints 1.17.
 # Read: sec. 4, text after eq. 11, p. 4, 2026-09-11, Claude Fable 5.1
 # Source: Jelinek et al. (2012), doi:10.1029/2011JA017252 -- sec. 4, in the
-# Source+: text after eq. 11: lambda = 1.17 for the bow shock (1.54 for the
-# Source+: magnetopause, which this file does not store because the
-# Source+: magnetopause is Shue's).
+# Source+: text after eq. 11: lambda = 1.17 for the bow shock.
+# Note: the same sentence gives 1.54 for the magnetopause, which this file
+# Note+: does not store because the magnetopause is Shue's (in the Source
+# Note+: line until 2026-10-17, L-450).
 # Access: open full text, https://doi.org/10.1029/2011JA017252 (2026-09-10).
 # Note: the per-boundary scaling of the parabolic surface, eqs. 15-16:
 # Note+: x = R0 p^(-1/eps) - tau^2 / 2 and
@@ -1757,10 +1810,10 @@ EARTH_MAGNETOTAIL_OBSERVED_RADII = 220.0
 # Source+: Sibeck, D. G. (1983), "Average configuration of the distant (less
 # Source+: than 220-earth-radii) magnetotail - Initial ISEE-3 magnetic field
 # Source+: results", Geophys. Res. Lett. 10(10), 973-976,
-# Source+: doi:10.1029/GL010i010p00973 -- the abstract states that the
-# Source+: magnetotail retains much of its near-Earth structure out to
-# Source+: X = -220 Earth radii, that flaring ceases at 100-120 R_E, and
-# Source+: that the tail diameter settles near 60 R_E.
+# Source+: doi:10.1029/GL010i010p00973, abstract open at
+# Source+: https://ntrs.nasa.gov/citations/19830066648 -- the abstract states
+# Source+: that the magnetotail retains much of its near-Earth structure out
+# Source+: to X = -220 Earth radii.
 # Access: abstract, open, https://ntrs.nasa.gov/citations/19830066648
 # Access+: (NTRS document 19830066648, read 2026-09-14). The Wiley pages are
 # Access+: walled. The NTRS abstract prints "-100 to -1200 earth radii" where
@@ -1790,6 +1843,10 @@ EARTH_MAGNETOTAIL_OBSERVED_RADII = 220.0
 # Note+: (2026-09-25). Until then it ended at a typed 100 R_E chosen by eye,
 # Note+: which was removed rather than promoted (A Drawing Approximation
 # Note+: Does Not Promote).
+# Note+: The same abstract says flaring ceases at 100-120 R_E and the tail
+# Note+: diameter settles near 60 R_E; both were in the Source line until
+# Note+: 2026-10-17 (L-450), where a visitor read figures the room does not
+# Note+: use.
 # Note+: This row's 100-120 R_E for the end of flaring is superseded as a
 # Note+: value by EARTH_MAGNETOTAIL_FLARE_END_RADII, the same mission's
 # Note+: later average with a stated uncertainty (Tony, 2026-09-25). This
@@ -2081,7 +2138,8 @@ INNER_CORONA_RADII = 3
 # Figures+: counting (Rule 2); it prints the digit it was chosen with.
 # Source: Lamy, Gilardy, Llebaria, Quemerais & Ernandez, "Coronal
 #   Photopolarimetry with the LASCO-C3 Coronagraph over 24 Years
-#   [1996-2019]", Solar Physics -- Sec. 1: the inner solar corona,
+#   [1996-2019]", Solar Physics, arXiv:2009.04820 -- Sec. 1: the inner
+#   solar corona,
 #   "defined here as extending to ~3 R_sun from the center of the
 #   solar disk".
 # Status: declared 2026-08-29 -- a stated CONVENTION, not a
@@ -2126,7 +2184,9 @@ HELMET_CUSP_LOW_RADII = 2
 # Read+: documentation/SOURCE_suess_nerney_2004_helmet_extent_20260821.md
 # Source: Suess & Nerney (2004), Adv. Space Res. 33:668-675, bibcode
 # Source+: 2004AdSpR..33..668S -- the closed field regions, or helmets,
-# Source+: reach no higher than 2-4 solar radii. This row is the low end.
+# Source+: reach no higher than 2-4 solar radii.
+# Note: the low end of that stated range. Moved out of the Source line
+# Note+: 2026-10-17 (L-450): a visitor reads that line, and has no "row".
 # Access: abstract, open,
 # Access+: https://ui.adsabs.harvard.edu/abs/2004AdSpR..33..668S/abstract
 # Access+: (2026-08-21).
@@ -2136,7 +2196,10 @@ HELMET_CUSP_HIGH_RADII = 4
 # Status: measured V_SOURCED 2026-10-04 -- abstract, open
 # Figures: 1 -- the source prints "2-4".
 # Read: as HELMET_CUSP_LOW_RADII, 2026-08-21, Tony Quintanilla.
-# Source: as HELMET_CUSP_LOW_RADII. This row is the high end.
+# Source: as HELMET_CUSP_LOW_RADII.
+# Note: the high end of that stated range. Until 2026-10-17 (L-450) the
+# Note+: Source line said so, after the low row's own "This row is the low
+# Note+: end.", so a visitor read both.
 # Access: as HELMET_CUSP_LOW_RADII.
 
 HELMET_CUSP_RADII = HELMET_CUSP_HIGH_RADII
@@ -2151,8 +2214,7 @@ HELMET_CUSP_RADII = HELMET_CUSP_HIGH_RADII
 # Declared+: range in the Source line below.
 # Source: Suess & Nerney (2004), Adv. Space Res. 33:668-675, bibcode
 #   2004AdSpR..33..668S -- "the closed field regions, or helmets, reach
-#   no higher than 2-4 solar radii". 4.0 is the TOP of that stated
-#   range, chosen so the drawn cusp does not understate the helmet.
+#   no higher than 2-4 solar radii".
 # Note: this is the CUSP -- where the closed loops open -- not an outer
 #   edge of the streamer belt. The belt has no outer edge: above the
 #   cusp an open stalk continues into the slow solar wind. The renderer
@@ -2238,8 +2300,9 @@ ALFVEN_SURFACE_RADII = 19.7
 # Read+: the interval's start as 19.8; the text's 19.7 is kept.
 # Access: open, https://doi.org/10.1103/PhysRevLett.127.255101
 # Access+: (2026-10-04).
-# Source: Kasper et al. (2021), Phys. Rev. Lett. 127:255101 -- first crossing
-# Source+: 28 April 2021 09:33 UT; the sub-Alfvenic interval spans 19.7 to
+# Source: Kasper et al. (2021), Phys. Rev. Lett. 127:255101 -- Parker Solar
+# Source+: Probe's first crossing, 28 April 2021 09:33 UT; the sub-Alfvenic
+# Source+: interval spans 19.7 to
 # Source+: 18.4 solar radii from the center of the Sun
 # See: HELIOCENTRIC, from Sun center, like every other shell radius in this
 # See+: file. The widely quoted 18.8 R_sun is the ALTITUDE above the
@@ -2462,8 +2525,9 @@ INNER_OORT_DISK_OUTER_AU = 10000
 # Read+: line, 2026-10-10, Claude Opus 5.5
 # Source: Nesvorny, D., Dones, L., Vokrouhlicky, D., Levison, H. F.,
 # Source+: Beauge, C., Faherty, J., Emmart, C. and Parker, J. P. (2025),
-# Source+: "A Spiral Structure in the Inner Oort Cloud", arXiv:2502.11252v1
-# Source+: -- sec. 1, p. 2: simulations form the inner Oort cloud at
+# Source+: "A Spiral Structure in the Inner Oort Cloud", arXiv:2502.11252v1,
+# Source+: https://arxiv.org/pdf/2502.11252v1 -- sec. 1, p. 2: simulations
+# Source+: form the inner Oort cloud at
 # Source+: 1,000 < r < 10,000 au; and the new long-period comets' nearly
 # Source+: isotropic inclinations suggest the outer Oort cloud at
 # Source+: r > 10,000 au is roughly spherical.
@@ -2483,8 +2547,9 @@ HILLS_CLOUD_TILT_DEG = 30
 # Read+: 2026-10-10, Claude Opus 5.5
 # Source: Nesvorny, D., Dones, L., Vokrouhlicky, D., Levison, H. F.,
 # Source+: Beauge, C., Faherty, J., Emmart, C. and Parker, J. P. (2025),
-# Source+: "A Spiral Structure in the Inner Oort Cloud", arXiv:2502.11252v1
-# Source+: -- sec. 1, p. 3: the inner Oort cloud is a slightly warped disk,
+# Source+: "A Spiral Structure in the Inner Oort Cloud", arXiv:2502.11252v1,
+# Source+: https://arxiv.org/pdf/2502.11252v1 -- sec. 1, p. 3: the inner
+# Source+: Oort cloud is a slightly warped disk,
 # Source+: roughly 15,000 au across, inclined i ~ 30 deg to the ecliptic
 # Source+: (nearly polar in the Galactic reference system).
 # Access: open full text, https://arxiv.org/pdf/2502.11252v1 (2026-10-10).

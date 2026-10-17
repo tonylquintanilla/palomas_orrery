@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.101 | October 16, 2026
+Tony Quintanilla, PE | Claude | v3.102 | October 17, 2026
 
-Cut from 6b975155 at https://github.com/tonylquintanilla/palomas_orrery
+Cut from a73bc24a at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -493,7 +493,7 @@ horizons-orbital-mechanics   1.8  Horizons queries, centers, frames, osculating
                                   (horizons_check.py, its period comparison and
                                   the data sheets' re-read), the period fetch
                                   before it (period_fetch.py)
-provenance-discipline        2.29 Scanner runs, audits, citations, constants,
+provenance-discipline        2.30 Scanner runs, audits, citations, constants,
                                   pre-push (Tier-1 = 0 on the active build
                                   path)
 provenance-cross-check       1.0  Cross-check worksheets and relay prompts,
@@ -515,13 +515,14 @@ gallery-assembler            1.3  render_orbits.py, resolver.py,
                                   unresponsive, it worked yesterday, a console
                                   error appears, or Claude is about to hand
                                   Tony a test to run
-gallery-cache-builder        1.10 Nightly builder, atomic swap and its
+gallery-cache-builder        1.11 Nightly builder, atomic swap and its
                                   retry/roll-back/swap log, "Access is denied"
                                   under data/, coverage_index, serving cache,
                                   objects_config, dry-run/first-build/nightly,
                                   builder testing layers, the Daily Run's order
-                                  and a failed pull
-interactive-exhibit          1.16 adding or changing an exhibit in
+                                  and a failed pull, the run records and their
+                                  check
+interactive-exhibit          1.17 adding or changing an exhibit in
                                   interactive.html; any edit to the Sun's
                                   chrome (drawer, nav cluster, frame zoom,
                                   i-panel, HUD, consent, back link); "Earth
@@ -538,7 +539,9 @@ interactive-exhibit          1.16 adding or changing an exhibit in
                                   Studio; choosing a feature's info link (NASA
                                   or Wikipedia); a served number's citation and
                                   its source_note; the Typed facts check
-                                  (smoke_typed_facts.js)
+                                  (smoke_typed_facts.js); a feature drawn as
+                                  stored dots (the Hills cloud, Earth's
+                                  radiation belts)
 <!-- SKILL-MANIFEST:END -->
 
 Session-Start Repo Pull and the SHA Round Trip [CRITICAL]
@@ -1174,6 +1177,60 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.102 (October 17, 2026): No rule changed in this document. THREE
+skill bumps, one version each (Earth's round 1: L-452 with L-450,
+L-330, L-449): provenance-discipline 2.29 -> 2.30, interactive-exhibit
+1.16 -> 1.17, gallery-cache-builder 1.10 -> 1.11. FIVE PRINCIPLES FOR
+WHAT A VISITOR READS; THE BELTS ARE STORED DOTS; THE RUN RECORDS ARE
+KEPT AND CHECKED.
+
+WHAT PROMPTED IT. Earth's design talk of 2026-10-16 and this build's
+words list. Tony, 2026-10-16: "Wording that is relevant to the citation
+should be moved to the store. Notes should be dropped unless they are
+drawing choices." Tony, 2026-10-17, on the belts' render: "Yes, random.
+And it shows the density better too." On a claim a visitor reads whose
+source would have moved out of sight: "why drop the source?" On a lost
+run record: stop and name, as recommended.
+
+WHAT CHANGED. provenance-discipline gains What a Visitor Reads: the
+five principles Tony approved for every word a visitor reads -- a
+citation names what was read and where; the store's bookkeeping never
+goes in a Source line; a website note says only what was chosen for the
+drawing; a claim a visitor reads keeps a citation the visitor can see,
+and a drawn thing with no source is settled in the build that finds it;
+one number in one place, in plain words. Tony: "my decision based on
+principles should be implemented in the skill so that it is uniformly
+applied." interactive-exhibit narrows `source_note` to a drawing
+choice beside a citation: wording that bears on a citation lives in the
+store, on the row; words written for the store never go in its
+`# Source:` line, which a visitor reads word for word; and a claim a
+visitor reads keeps a citation the visitor can see. It also records
+Earth's radiation belts as the second stored drawing, dots scattered at
+random along dipole field lines, which the website draws as given.
+gallery-cache-builder records the run records rule (every record kept
+until L-449's cause is found, then a limit with each removal named) and
+the Daily Run's records check after the builder, which stops on a loss
+and names each record. Each skill's oldest resident entry moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copies read
+interactive-exhibit 1.17 and gallery-cache-builder 1.11 before work
+that fires them, and provenance-discipline 2.30 before provenance
+work. This session confirmed its loaded copies read
+interactive-exhibit 1.16 (discharging v3.101's obligation),
+gallery-cache-builder 1.10, orrery-coding-conventions 1.10,
+provenance-discipline 2.29, safe-file-editing 1.13, agentic-pre-test
+1.3 and ledger-and-session-records 1.21, as the manifest expected.
+v3.99's obligation, horizons-orbital-mechanics 1.8, still travels: no
+work this session fired that skill.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.99 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.101 (October 16, 2026): No rule changed in this document. ONE
 skill bump, one version (L-421 parts 2 and 3, with L-262):
 interactive-exhibit 1.15 -> 1.16. A CITATION IS SERVED LIKE A NUMBER,
@@ -1249,35 +1306,6 @@ this session fired that skill.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.97 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.99 (October 15, 2026): No rule changed in this document. ONE
-skill bump, one version (L-445): horizons-orbital-mechanics 1.7 -> 1.8.
-EARTH'S PERIOD IS THE EARTH-MOON BARYCENTRE'S.
-
-WHAT PROMPTED IT. L-444's first live run printed Earth's period as 366
-days: JPL's period for Earth's centre, which circles the Earth-Moon
-barycentre once a month and so swings through the month. Tony's ruling,
-2026-10-15: "Confirmed as recommended, the barycenter."
-
-WHAT CHANGED. horizons-orbital-mechanics gains one bullet under A
-Period Depends on Its Centre: a body's period may be asked of another
-target than the body. Earth's, around the Sun, is asked of Horizons
-target 3; its identity and position stay 399. The one home of the map
-is orbital_period.PERIOD_TARGETS, applied only around the Sun; the
-record carries the target, and every reader takes it from the record.
-A session following 1.7 would ask 399. Its v1.5 entry moved to
-documentation/SKILL_HISTORIES.md, by the three-entry rule.
-
-THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
-that session. The next session confirms its loaded copy reads
-horizons-orbital-mechanics 1.8 before work that fires it. This session
-confirmed its loaded copy read 1.7, discharging v3.98's obligation.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.96 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

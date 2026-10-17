@@ -35,17 +35,23 @@ data/drawings/<name>.json for each entry in DRAWINGS:
     what          one sentence on what the dots are
     made_by       the function that places the dots
     frame         the frame the coordinates are in
-    unit          "au"
+    unit          "au" (the Hills cloud) or "r_earth" (the belts)
     rounding      how each coordinate was rounded, and why that is safe
     settings      the drawing's settings: orbits, dots per orbit, seed
     rows          the constants_new.py rows the dots are placed from
     rows_sha256   sha256 of those rows' values (sorted JSON), so a
                   change to any of them shows as a change here
     dots          how many dots
-    plane_tilt_deg  the tilt to the ecliptic of the plane through THESE
-                  dots, as rounded, to 0.1 degree: the figure the
-                  website's own check fits again from the served dots
-    x, y, z       the dots, one list each, whole AU
+    plane_tilt_deg  (the Hills cloud only) the tilt to the ecliptic of the
+                  plane through THESE dots, as rounded, to 0.1 degree:
+                  the figure the website's own check fits again from the
+                  served dots
+    belts         (the belts only) the belts' names, in the order the
+                  belt list numbers them
+    x, y, z       the dots, one list each, whole AU (the Hills cloud) or
+                  hundredths of an Earth radius (the belts)
+    w, belt       (the belts only) each dot's weight, 0 to 1, from the
+                  declared fade, and which belt it is in, 0 inner, 1 outer
 
 DETERMINISTIC ON PURPOSE
 ------------------------
@@ -68,6 +74,12 @@ Domain: dev_tools
 Module created: October 11, 2026 with Anthropic's Claude Opus 5.5
 (L-421, the website half of the inner Oort cloud: the first stored
 drawing, the Hills cloud).
+Module updated: October 17, 2026 with Anthropic's Claude Opus 5.5 (L-330,
+Tony's rulings of 2026-10-17: the second stored drawing, Earth's two
+radiation belts, from van_allen_belt_sampler.py, in Earth radii in
+Earth's body frame, with each dot's weight and belt; render() writes
+whichever of the lists x, y, z, w and belt a drawing carries, so the
+Hills cloud's file is unchanged byte for byte.)
 """
 
 import hashlib
@@ -111,11 +123,53 @@ def _hills_cloud():
     }
 
 
+def _van_allen_belts():
+    """Earth's two radiation belts' file content, as a dict (L-330)."""
+    import van_allen_belt_sampler as vab
+    rows = vab.rows_from_store()
+    dots = vab.drawn_van_allen_belts(rows)
+    x, y, z, w, belt = [], [], [], [], []
+    for index, key in enumerate(("inner", "outer")):
+        part = dots[key]
+        x += [round(v, 2) for v in part["x"]]
+        y += [round(v, 2) for v in part["y"]]
+        z += [round(v, 2) for v in part["z"]]
+        w += [round(v, 2) for v in part["w"]]
+        belt += [index] * len(part["x"])
+    return {
+        "schema": SCHEMA,
+        "drawing": "van_allen_belts",
+        "what": ("Earth's two radiation belts as dots scattered at random "
+                 "along dipole field lines (r = L cos^2 latitude; Koskinen "
+                 "and Kilpua 2022, sec. 1.2.1), between each belt's measured "
+                 "edges and thickest at its measured peak. The fade is drawn "
+                 "to show the shape, not measured."),
+        "made_by": "van_allen_belt_sampler.drawn_van_allen_belts()",
+        "frame": ("Earth's body frame, centred on Earth: z along the spin "
+                  "axis, x and y in the equatorial plane. The instrument "
+                  "turns it to Earth's pole."),
+        "unit": "r_earth",
+        "rounding": ("each coordinate to 0.01 Earth radii, about 64 km, and "
+                     "each weight to 0.01: a drawing, not a measurement"),
+        "belts": ["inner", "outer"],
+        "settings": dots["settings"],
+        "rows": list(vab.ROW_NAMES),
+        "rows_sha256": rows_sha256(rows),
+        "dots": len(x),
+        "x": x, "y": y, "z": z, "w": w, "belt": belt,
+    }
+
+
 # name -> function returning the file's content. A new stored drawing
 # is one line here, and test_drawings_export.py checks every entry.
 DRAWINGS = {
     "hills_cloud": _hills_cloud,
+    "van_allen_belts": _van_allen_belts,
 }
+
+# The lists a drawing may carry, one line each in the file, in this
+# order: the coordinates, then (the belts) each dot's weight and belt.
+LISTS = ("x", "y", "z", "w", "belt")
 
 
 def rows_sha256(rows):
@@ -128,11 +182,13 @@ def rows_sha256(rows):
 def render(content):
     """The exact text written to disk: the header indented, one line per
     coordinate list, so a reader can open the file and see what it is."""
-    head = {k: v for k, v in content.items() if k not in ("x", "y", "z")}
+    head = {k: v for k, v in content.items() if k not in LISTS}
     text = json.dumps(head, indent=2, ensure_ascii=True, allow_nan=False)
     assert text.endswith("\n}")
     lines = [text[:-2]]
-    for axis in ("x", "y", "z"):
+    for axis in LISTS:
+        if axis not in content:
+            continue
         lines.append(',\n  "%s": %s' % (axis, json.dumps(
             content[axis], separators=(",", ":"))))
     return "".join(lines) + "\n}\n"
@@ -171,9 +227,10 @@ def main():
                 handle.write(text)
             action = "written" if old is not None else "created"
             written += 1
-        print("  %-14s %s: %d dots, plane tilted %.1f deg, %d bytes, "
-              "rows sha256 %s"
-              % (name, action, content["dots"], content["plane_tilt_deg"],
+        tilt = content.get("plane_tilt_deg")
+        print("  %-15s %s: %d dots, %s%d bytes, rows sha256 %s"
+              % (name, action, content["dots"],
+                 "" if tilt is None else "plane tilted %.1f deg, " % tilt,
                  len(text), content["rows_sha256"][:12]))
     print("")
     print("Drawings export: %d drawing(s) (%s), %d written."

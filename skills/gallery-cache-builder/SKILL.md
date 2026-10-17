@@ -1,15 +1,24 @@
 ---
 name: gallery-cache-builder
-description: Nightly data-serving pipeline for the Paloma's Orrery web gallery (Phase 1b, ledger L-098). Use for any task touching tools/gallery_cache_builder.py, tools/test_gallery_cache_builder_offline.py, inspect_staging.py, debug_encke_tp.py, gallery_cleanup.py, data/objects_config.json, the data/solar-system/ serving cache (coverage_index.json, feature_configs.json, positions/, raw/), atomic-swap / .prev / .staging_* / .quarantine_* semantics, Guard v2, dry-run / first-build / nightly modes, documentation/TESTING_PROTOCOL.md layers, or wiring interactive.html to the served data; for the rule that a config change is not deployed until the cache is rebuilt; and whenever a rename or a delete under data/ is refused with "Access is denied" (WinError 5), or the swap log data/cache_swap_log.jsonl is being read or written; and for daily_run.py's order and a failed pull. Do NOT use for the Studio/converter/viewer curation chain (that is gallery-pipeline) or for projects other than Paloma's Orrery.
+description: Nightly data-serving pipeline for the Paloma's Orrery web gallery (Phase 1b, ledger L-098). Use for any task touching tools/gallery_cache_builder.py, tools/test_gallery_cache_builder_offline.py, inspect_staging.py, debug_encke_tp.py, gallery_cleanup.py, data/objects_config.json, the data/solar-system/ serving cache (coverage_index.json, feature_configs.json, positions/, raw/), atomic-swap / .prev / .staging_* / .quarantine_* semantics, Guard v2, dry-run / first-build / nightly modes, documentation/TESTING_PROTOCOL.md layers, or wiring interactive.html to the served data; for the rule that a config change is not deployed until the cache is rebuilt; and whenever a rename or a delete under data/ is refused with "Access is denied" (WinError 5), or the swap log data/cache_swap_log.jsonl is being read or written; and for daily_run.py's order, a failed pull and the run records check. Do NOT use for the Studio/converter/viewer curation chain (that is gallery-pipeline) or for projects other than Paloma's Orrery.
 fires_when: Nightly builder, atomic swap and its retry/roll-back/swap log, "Access is denied" under data/, coverage_index, serving cache, objects_config, dry-run/first-build/nightly, builder testing layers, the Daily
-  Run's order and a failed pull
+  Run's order and a failed pull, the run records and their check
 ---
 
 # Gallery Cache Builder (Phase 1b data serving)
 
-Read this file in 2 parts: lines 1-271, 272-548.
+Read this file in 3 parts: lines 1-272, 273-552, 553-579.
 
-Skill version: 1.10 | 2026-10-15, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.11 | 2026-10-17, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ a73bc24a and gallery @ f49b3e69. v1.11 (L-449) records
+the run records rule and its check. Every record is kept until the
+cause of the losses of 2026-10-15 and 10-16 is found; then a deliberate
+limit, its number set then, with each removal named (Tony, 2026-10-16).
+The builder prints what its copy carried, and the Daily Run compares
+the new cache's records with the replaced cache's after the builder and
+stops on a loss, naming each record and its copy (Tony, 2026-10-17:
+stop and name). See The Daily Run's Steps.
+Earlier: 1.10 | 2026-10-15, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 54c27d7f and gallery @ 95713f49. v1.10 (L-446, with
 L-380 and L-388) records the Daily Run's new order. It is four steps:
 the pulls from the orrery now run BEFORE the builder, so one Daily Run
@@ -17,15 +26,6 @@ carries today's export into the build. A pull that cannot reach the
 orrery fails by name, its mirror does not run, and the Daily Run stops
 before the builder: Tony's option A of 2026-10-15 (The Daily Run's
 Steps).
-Earlier: 1.9 | 2026-10-14, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 5cd63cce and gallery @ 4b2b660a. v1.9 (L-431 build 3,
-with L-395's move) records two things the build changed. The builder
-reads each object's period from the config and, where the period is
-taken around the solar system's barycentre, also serves the elements
-around it as "drawn_orbit", checked before the swap as #D (The Builder
-Reads the Period's Centre). And the Daily Run is three steps: the
-Horizons check left it for the orrery's maintenance run (The Daily
-Run's Steps). A config change's exceptions now name the period too.
 Earlier: 1.7 | 2026-10-05, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 72e3b558. v1.7 (L-418) changes no rule. A contents
 list now opens the skill, generated from its headings, and
@@ -35,7 +35,8 @@ documentation/SKILL_HISTORIES.md. Both because a plain read of a
 long file shows its start and end and leaves out its middle, where
 the rules are (Tony, 2026-10-05).
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
-on 2026-10-05 (L-418), 2026-10-14 (L-431) and 2026-10-15 (L-446).
+on 2026-10-05 (L-418), 2026-10-14 (L-431), 2026-10-15 (L-446) and
+2026-10-17 (L-449).
 
 The standalone builder that fetches fresh JPL Horizons data and deploys the
 web gallery's served cache. Tony runs it MANUALLY and commits the result
@@ -434,8 +435,38 @@ gating) runs each pull with its network replaced by one that fails,
 three ways, so these branches are tested every day and not only on the
 day the network is down.
 
-Apart from the pulls, a step that reports a problem does not stop the
-next: the guest book's problems still do not stop the build. Nothing in
+THE RUN RECORDS ARE KEPT, AND CHECKED AFTER THE BUILDER (L-449). Each
+build writes one record to `raw/runs/`, and the builder copies the old
+ones forward. Records went missing after builds on 2026-10-15 and
+2026-10-16, cause unknown, and were put back from `.prev` on Tony's
+word. Tony's rulings: keep EVERY record until the cause is found, then
+a deliberate limit, its number set at that time, with the builder naming
+each record it removes (2026-10-16); and on a loss, stop and name
+(2026-10-17). So:
+
+- The builder prints two `[RUNS]` lines at its copy-forward: how many
+  records `raw/runs` held before the copy and how many the staging
+  copy holds after it, with both paths. It removes no record. These
+  two lines are what the next loss is read from; record them in L-449.
+- `daily_run.py` compares `data/solar-system/raw/runs/` with the
+  replaced cache's `data/solar-system.prev/raw/runs/` between the
+  builder and the maintenance run. On success it prints what it
+  compared ("carried 85 of 85, plus tonight's"). A record in the old
+  and not the new STOPS the Daily Run before the maintenance run,
+  naming each lost record with its copy's path; Tony copies them back
+  in File Explorer, then runs the maintenance run. The copies stay in
+  `.prev` only until the next build clears it. A missing folder is
+  "could not compare", reported as a problem, never as a pass; it does
+  not stop the run, since it is what a failed or rolled-back build
+  leaves.
+- It is not a step of its own and has no dashboard button: it runs no
+  script, and it means something only straight after a build. The
+  builder's offline suite runs the comparison on its own builds and
+  plants a loss, which must stop it by name.
+
+Apart from the pulls and the records, a step that reports a problem
+does not stop the next: the guest book's problems still do not stop the
+build. Nothing in
 the Daily Run commits or pushes. The Horizons
 check was its step 2 from 2026-10-10 to 2026-10-14 and moved into the
 orrery's maintenance run beside the objects export (L-395; Tony,

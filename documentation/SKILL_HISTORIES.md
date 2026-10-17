@@ -467,6 +467,22 @@ two long procedures, Report to the Figures You Have and the
 Review-Repair Protocol for Cross-Checked Annotations, and the field
 notes last. Every section's text is unchanged.
 
+Earlier: 2.28 | 2026-10-09, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ aa46bb10. v2.28 (L-414) settles how the scanner reads
+a row, under Scanner Mechanics and The Goal State. A row in
+constants_new.py is read through its own comment run, not a window of
+30 lines back and 15 ahead: the window missed EARTH_MEAN_RADIUS_KM's own
+Source line 16 lines down (2026-10-04), and credited the stratopause
+row's Source to the thermopause row when a planted-fault run removed
+the thermopause's own (2026-10-09). A declared row with its reason
+written down is its own kind, named and never Tier-1. The gate-path
+figure is read from the two exports and printed by name, on the
+console, in the audit and in the run history. The two measurements are
+field notes. Riding this version: The Status Line says what the
+scanner now reads, and A Breadcrumb Must Not Cite says where the window
+still applies.
+(Moved down 2026-10-17, when 2.30 made a fourth entry.)
+
 ## interactive-exhibit
 
 Earlier: 1.8 | 2026-10-01, with Anthropic's Claude Opus 5.5, from
@@ -601,6 +617,15 @@ row to see the button then tap again to enter the room." The skill
 also gets its read plan, at its next version as Tony ruled on
 2026-10-08 (L-418).
 (Moved down 2026-10-16, when 1.16 made a fourth entry.)
+
+Earlier: 1.14 | 2026-10-10, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ a6678b0f and gallery @ cb9038cc. v1.14 (L-429) records
+Tony's rulings of the same day, after 1.13 was installed: every room's
+row puts GO TO in its true middle, the Solar System room's room button
+to its right, and a long name wraps rather than being cut. A second
+version in one session, against One Session, One Bump, because the
+ruling came after 1.13 was in use.
+(Moved down 2026-10-17, when 1.17 made a fourth entry.)
 
 ## safe-file-editing
 
@@ -801,6 +826,17 @@ sufficient." A session following the old step would have told him to
 pause. The skill also gets its read plan, at its next version as Tony
 ruled on 2026-10-08 (L-418).
 (Moved down 2026-10-15, when 1.10 made a fourth entry.)
+
+Earlier: 1.9 | 2026-10-14, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 5cd63cce and gallery @ 4b2b660a. v1.9 (L-431 build 3,
+with L-395's move) records two things the build changed. The builder
+reads each object's period from the config and, where the period is
+taken around the solar system's barycentre, also serves the elements
+around it as "drawn_orbit", checked before the swap as #D (The Builder
+Reads the Period's Centre). And the Daily Run is three steps: the
+Horizons check left it for the orrery's maintenance run (The Daily
+Run's Steps). A config change's exceptions now name the period too.
+(Moved down 2026-10-17, when 1.11 made a fourth entry.)
 
 ## horizons-orbital-mechanics
 

@@ -75,6 +75,11 @@ Module updated: October 5, 2026 with Anthropic's Claude Opus 5.5 (L-413's
     tooltip come from earth_upper_atmosphere_info, the same words; the
     magnetosphere tooltip's inner belt line says "near their measured
     flux peak" (L-349). Words approved by Tony, 2026-10-05.)
+Module updated: October 17, 2026 with Anthropic's Claude Opus 5.5 (L-330
+    round 1: the magnetosphere tooltip says the belts are "thickest" near
+    their flux peaks, as their dots now are; the LEO tooltip prints its
+    lower altitude through constants_rows.row_text(), since that row is
+    ESA's measured 180 km and no longer an exact drawing floor.)
 """
 
 # Phase C4: Import hover text strings from body shell modules.
@@ -128,7 +133,7 @@ from solar_visualization_shells import (
 # earth_visualization_shells.py does. The tooltip field is dead data (no
 # consumer), kept in agreement with the live hover because a migration
 # would promote it.
-from constants_rows import figures_of, exact_text, format_prints
+from constants_rows import figures_of, exact_text, format_prints, row_text
 # L-371: the Roche limit draws from the row that says where it is drawn.
 from constants_new import ROCHE_LIMIT_DRAWN_RADII
 from constants_new import (
@@ -2360,8 +2365,8 @@ CUSTOM_SHELLS = {
                 "Bow Shock: The boundary where the supersonic solar wind is first slowed\n"
                 f"by Earth's magnetic field, typically located about {EARTH_BOW_SHOCK_STANDOFF_RADII:.{figures_of('EARTH_BOW_SHOCK_STANDOFF_RADII')}g} Earth radii upstream\n"
                 "from Earth on the Sun-facing side.\n\n"
-                f"Inner Van Allen Belt: trapped protons, drawn near their measured flux peak, {EARTH_VAN_ALLEN_INNER_RADII:g} Earth radii out\n"
-                "(Baker et al. 2018). Outer Van Allen Belt: trapped electrons, drawn at the flux peak\n"
+                f"Inner Van Allen Belt: trapped protons, thickest near their measured flux peak, {EARTH_VAN_ALLEN_INNER_RADII:g} Earth radii out\n"
+                "(Baker et al. 2018). Outer Van Allen Belt: trapped electrons, thickest at the flux peak\n"
                 f"{exact_text('EARTH_VAN_ALLEN_OUTER_RADII')} Earth radii out (doi:10.1029/2024JA033504).\n"
                 "Standoffs: Shue et al. (1998); Jelinek et al. (2012).\n\n"
                 "The same builder produces all four traces (separate legend entries):\n"
@@ -2373,7 +2378,7 @@ CUSTOM_SHELLS = {
             'builder': 'earth_visualization_shells.create_earth_leo_shell',
             'tooltip': (
                 "SET MANUAL SCALE TO 0.003 AU TO VISUALIZE.\n\n"
-                f"Low Earth Orbit (LEO) is the region from roughly {exact_text('EARTH_LEO_LOWER_ALTITUDE_KM', grouping=True)} km to {exact_text('EARTH_LEO_UPPER_ALTITUDE_KM', grouping=True)} km altitude\n"
+                f"Low Earth Orbit (LEO) is the region from roughly {row_text('EARTH_LEO_LOWER_ALTITUDE_KM', grouping=True)} km to {exact_text('EARTH_LEO_UPPER_ALTITUDE_KM', grouping=True)} km altitude\n"
                 f"({EARTH_LEO_INNER_RADII:.2f} to {EARTH_LEO_OUTER_RADII:.2f} Earth radii), where satellites orbit at all inclinations.\n\n"
                 "Unlike geostationary orbit, LEO satellites travel at all angles relative to the equator --\n"
                 "forming a true shell around Earth rather than a ring. A LEO satellite completes\n"

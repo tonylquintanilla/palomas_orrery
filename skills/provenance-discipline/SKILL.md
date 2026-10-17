@@ -6,9 +6,19 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0 on 
 
 # Provenance Discipline
 
-Read this file in 5 parts: lines 1-302, 303-606, 607-864, 865-1144, 1145-1328.
+Read this file in 5 parts: lines 1-299, 300-603, 604-861, 862-1144, 1145-1376.
 
-Skill version: 2.29 | 2026-10-13, with Anthropic's Claude Opus 5.5, at
+Skill version: 2.30 | 2026-10-17, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ a73bc24a. v2.30 (L-452 with L-450, Earth's round 1)
+adds What a Visitor Reads: the five principles Tony approved one by one
+on 2026-10-17 for the words a visitor reads -- a citation names what was
+read and where; the store's bookkeeping never goes in a Source line; a
+website note says only what was chosen for the drawing; a claim a
+visitor reads keeps a citation the visitor can see, and a drawn thing
+with no source is settled in the build that finds it; one number in
+one place, in plain words. Tony: "my decision based on principles
+should be implemented in the skill so that it is uniformly applied."
+Earlier: 2.29 | 2026-10-13, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 70202e3b. v2.29 (L-437) gives a module's domain one
 home and makes the whole-tree Tier-1 total travel with its split.
 Report Domain Classification is rewritten: the scanner reads each
@@ -21,20 +31,6 @@ audit and in the run history, where tier1_by_domain is the Tier-1
 split and domain_counts stays the all-tier count. Tony, 2026-10-12:
 "Can we separate this into meaningful groups, like orrery, earth
 science and stars in the checker report?"
-Earlier: 2.28 | 2026-10-09, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ aa46bb10. v2.28 (L-414) settles how the scanner reads
-a row, under Scanner Mechanics and The Goal State. A row in
-constants_new.py is read through its own comment run, not a window of
-30 lines back and 15 ahead: the window missed EARTH_MEAN_RADIUS_KM's own
-Source line 16 lines down (2026-10-04), and credited the stratopause
-row's Source to the thermopause row when a planted-fault run removed
-the thermopause's own (2026-10-09). A declared row with its reason
-written down is its own kind, named and never Tier-1. The gate-path
-figure is read from the two exports and printed by name, on the
-console, in the audit and in the run history. The two measurements are
-field notes. Riding this version: The Status Line says what the
-scanner now reads, and A Breadcrumb Must Not Cite says where the window
-still applies.
 Earlier: 2.27 | 2026-10-08, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ b0b3df82. v2.27 (L-418) splits the skill, and no rule is
 reworded. The relay procedure, the Review-Repair Protocol, is now the
@@ -53,8 +49,8 @@ conversion marker and Rule 8 records the widening as built (L-390); and
 the examples in The Status Line and Report to the Figures You Have name
 rows as they now stand.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
-on 2026-10-05 and 2026-10-08 (L-418), 2026-10-09 (L-414) and
-2026-10-13 (L-437).
+on 2026-10-05 and 2026-10-08 (L-418), 2026-10-09 (L-414),
+2026-10-13 (L-437) and 2026-10-17 (L-452).
 
 ## Contents
 
@@ -80,6 +76,7 @@ if this list and the headings disagree (L-418).
 - A Computed Position Prints What Its Errors Earn [QUALITY]
   - An Accuracy Stated in Words Is Stored as the Place It Reports To
 - A Simple Error a Check Finds Is Fixed and Reported [QUALITY]
+- What a Visitor Reads [QUALITY]
 - Examples Go Stale Like Values [QUALITY]
 - The Goal State
 - Clearing a Flagged Claim (the only two moves)
@@ -941,6 +938,57 @@ worked: recorded, one row per class, not chased. This governs findings
 INSIDE it. A discovery run that exists to list -- the first Horizons
 cross-check -- still lists, apart from the simple errors, which it
 fixes and names.
+
+## What a Visitor Reads [QUALITY]
+
+**Five principles for every word a visitor reads, in either instrument,
+applied the same way to every served row and every visitor-facing
+sentence.** Tony approved them one by one on 2026-10-17 (L-452, L-450)
+and ruled where they live: "my decision based on principles should be
+implemented in the skill so that it is uniformly applied."
+
+The mechanism they rest on: a row's `# Source:` line reaches a visitor
+WORD FOR WORD -- the export carries it, the mirror writes it, the
+website's i panel prints it. Every other comment line on the row stays
+in the store, where only we read it.
+
+1. **A citation names what was actually read, and where in it.** The
+   work opened (title and authors as printed), the place in it, what it
+   says there, and the address of an open copy where there is one (The
+   Access Standard). A paper that corroborates but was not re-read goes
+   on an `# Also:` line, never in the citation.
+2. **The store's bookkeeping never goes in `# Source:`.** "This row",
+   "this file", "here", a figure count, a unit we converted, the
+   history of a correction, our own check or arithmetic: each goes to
+   `# Note:`, `# Corrected:`, `# Read:` or `# Also:`. Nothing is lost
+   from the store; a visitor is not handed words written for us.
+3. **A website note says only what was chosen for the drawing.** The
+   `source_note` beside a citation (interactive-exhibit, A
+   `source_note` holds only a drawing choice). Wording in it that bears
+   on the citation moves to the row.
+4. **A claim a visitor reads keeps a citation the visitor can see, or
+   it comes out.** Where a sentence rests on a source the number's own
+   citation does not carry, that source joins the row's `# Source:`;
+   moving it to a store-only line hides it ("why drop the source?",
+   Tony, 2026-10-17). And a DRAWN thing with no source -- a boundary,
+   an edge, a floor -- is settled in the build that finds it, never
+   reworded around or deferred: source it, or put it to Tony as a
+   declared drawing choice with its reason ("we can't just drop the
+   notes. if drawn we need to settle it"). The low-orbit floor was the
+   case: a declared 200 km with an unsourced reason became ESA's
+   180 km.
+5. **A number lives in one place, and a visitor reads plain words.** A
+   note or sentence does not retype a number its row serves (One Value,
+   One Home); it carries no project words -- no names, no dates of
+   rulings, no handles (orrery-coding-conventions, Hover Text Is
+   Written for the Visitor).
+
+Applied FORWARD: to every row and string a build touches, and to the
+slice being worked. An instance found outside it is recorded by class,
+one ledger row (The Braid). The case that produced the five: 35 website
+notes and about twenty citation lines on Earth's and the Sun's served
+rows, sorted by them in Earth's round 1, with one served citation that
+read "This row is the low end. This row is the high end."
 
 ## Examples Go Stale Like Values [QUALITY]
 

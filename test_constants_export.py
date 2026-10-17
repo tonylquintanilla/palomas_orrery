@@ -119,6 +119,12 @@ Module updated: October 16, 2026 with Anthropic's Claude Opus 5.5
 (L-421 part 3: check 2 compares "source", "source_from" and
 "source_inherited", new in schema 7, and check 7 works every row's
 citation out again by the inheritance rule and holds five worked cases.)
+Module updated: October 17, 2026 with Anthropic's Claude Opus 5.5
+(L-330 round 1 and L-452: the low-orbit altitude's worked case is ESA's
+measured 180 km at two figures, where it was an exact 200; the
+geostationary ring's citation pin becomes the case of a derived row with
+its own pointing Source, and the low-orbit outer edge takes its place as
+a derived row inheriting both inputs'.)
 """
 
 import json
@@ -143,8 +149,13 @@ CITATION_PINS = (
     # A derived row with none inherits both of its inputs'.
     ("CHROMOSPHERE_TOP_KM", ("SUN_RADIUS_KM", "CHROMOSPHERE_PHYSICAL_KM"),
      True),
-    ("EARTH_GEOSTATIONARY_RADIUS_KM",
-     ("EARTH_GM_KM3_S2", "EARTH_ROTATION_RATE_RAD_S"), True),
+    # (EARTH_GEOSTATIONARY_RADIUS_KM was this pin until 2026-10-17, when
+    # it took its own Source to keep the NASA page a visitor reads, L-452.)
+    ("EARTH_LEO_OUTER_KM",
+     ("EARTH_EQUATORIAL_RADIUS_KM", "EARTH_LEO_UPPER_ALTITUDE_KM"), True),
+    # A derived row's own Source may point: it keeps the pointed row's
+    # citation and the words after it.
+    ("EARTH_GEOSTATIONARY_RADIUS_KM", ("EARTH_GM_KM3_S2",), False),
     # A declared input (the solar wind's pressure and Bz) contributes
     # nothing: the standoff inherits the five fitted coefficients only.
     ("EARTH_MAGNETOPAUSE_STANDOFF_RADII",
@@ -329,7 +340,9 @@ CONVERSION_PINS = (
     ("EARTH_BOW_SHOCK_STANDOFF_RADII", "au", 0.00058, 2, None),
     ("EARTH_MAGNETOPAUSE_STANDOFF_RADII", "km", 65000.0, 2, None),
     ("EARTH_MAGNETOPAUSE_STANDOFF_RADII", "au", 0.00044, 2, None),
-    ("EARTH_LEO_LOWER_ALTITUDE_KM", "r_earth", None, "exact", 3),
+    # ESA's 180 km since 2026-10-17 (L-330 round 1); it was a declared,
+    # exact 200 km floor printing 3.
+    ("EARTH_LEO_LOWER_ALTITUDE_KM", "r_earth", 0.028, 2, None),
     ("EARTH_EQUATORIAL_RADIUS_KM", "r_earth", 1.0, "exact", 1),
     # L-345, patch D19a: a sum good to the kilometre, and one good to
     # tens of kilometres, each in Earth radii.

@@ -101,6 +101,17 @@ October 5, 2026 (L-413's orrery patch, Opus 5.5): earth_geocorona_info,
     different top for the layer; the inner belt says it is drawn near
     the measured proton flux peak (L-349). Words approved by Tony.
 Module updated: October 5, 2026 with Anthropic's Claude Opus 5.5
+October 17, 2026 (L-330, L-314, Earth round 1, Opus 5.5): the radiation
+    belts are drawn curved along dipole field lines, as dots scattered at
+    random and thickest at each belt's measured peak, from
+    van_allen_belt_sampler.py's stored drawing, where they were evenly
+    spaced flat rings; _even_belt_rings() is gone with the rings, and
+    _au_above_surface() gives the hover its AU. The magnetopause and bow
+    shock hovers say the shapes are drawn along the Sun-Earth line while
+    the real noses are turned a few degrees. The LEO shell starts at ESA's
+    180 km, from its row, and its hover cites ESA and the IADC revision
+    actually read. All words approved by Tony.
+Module updated: October 17, 2026 with Anthropic's Claude Opus 5.5
 """
 import numpy as np
 import math
@@ -224,49 +235,21 @@ def _whole_figures(name):
     return "%d" % int(value)
 
 
-def _even_belt_rings(inner, peak, outer):
-    """Ring radii for one radiation belt, and which ring is the peak.
+def _au_above_surface(radii, sig):
+    """Altitude above Earth's equatorial surface, in AU, as text at `sig`
+    significant figures, from a geocentric distance in Earth radii.
 
-    The rings are evenly spaced from the inner edge to the outer edge, on
-    the largest step that also lands exactly on the peak: the greatest
-    common divisor of the two distances, edge to peak and peak to edge,
-    taken on the rows' decimal values. At the rows as they stand, the
-    inner belt gets ten rings with the peak fifth from the inside, and the
-    outer belt nine with the peak fourth. Both peaks sit nearer the inner
-    edge than the middle, and the drawing shows that. (The rows' values
-    are not repeated here: this comment would be a second home for them.)
-
-    L-322 Stage D, patch D9 (Tony, 2026-09-25, option 2 of two: "even
-    spacing with enough rings so that the peak ring can be identified at
-    the correct radius fraction"). D8 added the peak ring on top of five
-    evenly spaced rings, so it landed beside one of them and the gaps
-    stopped being equal, which read as a physical feature.
-
-    The ring positions are the rows' own values; only the ring COUNT is a
-    rendering matter, and it follows from the rows. max_rings is a
-    rendering cap: a row typed with more decimals would make the step
-    tiny and the count huge, and this refuses rather than drawing
-    hundreds of rings.
+    The AU beside _km_above_surface()'s kilometres, which the hover
+    convention asks for (orrery-coding-conventions, Hover Text AU
+    Convention). Worked from the full distance, not from the rounded
+    kilometres, so the two round once each (provenance-discipline, Rule
+    4). Written out in decimals, never in exponent form. L-330, 2026-10-17.
     """
-    from fractions import Fraction
-    max_rings = 25
-    a = Fraction(inner).limit_denominator(1000)
-    p = Fraction(peak).limit_denominator(1000)
-    b = Fraction(outer).limit_denominator(1000)
-    if not a < p < b:
-        raise ValueError("belt rows out of order: inner %g, peak %g, "
-                         "outer %g" % (inner, peak, outer))
-    low, high = p - a, b - p
-    step = Fraction(math.gcd(low.numerator * high.denominator,
-                             high.numerator * low.denominator),
-                    low.denominator * high.denominator)
-    count = int((b - a) / step) + 1
-    if count > max_rings:
-        raise ValueError("a belt from %g to %g with its peak at %g needs %d "
-                         "evenly spaced rings to put one on the peak; the "
-                         "cap is %d" % (inner, outer, peak, count, max_rings))
-    radii = [float(a + step * k) for k in range(count)]
-    return radii, int((p - a) / step)
+    au = (radii - 1.0) * EARTH_EQUATORIAL_RADIUS_KM / KM_PER_AU
+    if au <= 0.0:
+        return "0"
+    places = sig - 1 - int(math.floor(math.log10(au)))
+    return "%.*f" % (max(places, 0), round(au, places))
 
 
 # L-231 (2026-09-15): the belts are drawn in Earth's equatorial plane now,
@@ -1075,7 +1058,7 @@ def _earth_magnetosphere_points():
     # Rendering settings. They change how the drawing looks, not where
     # anything is, so they stay here in the drawing code
     # (provenance-discipline 2.18, Three Kinds of Drawing Number), and
-    # inside the function, as the belts' n_points and n_rings are: at
+    # inside the function, as the belts' dot counts are (in their sampler): at
     # module level the provenance scanner cannot tell them from claims.
     n_theta = 12          # rows of points from the nose to the cut
     n_phi = 24            # points round each row and each tail ring
@@ -1201,6 +1184,13 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
                  "The Sun-facing surface is the model's own shape, drawn only as far round<br>"
                  "as the paper plots it. A second fit, Jelinek et al. (2012), puts the nose<br>"
                  "about an Earth radius farther out, which is inside the scatter above.<br><br>"
+                 # L-314 (Tony, 2026-10-16: "Unturned until we can design the
+                 # solar wind fetch"); words approved 2026-10-17. Source: the
+                 # Shue and Jelinek rows, whose fits are made in frames turned
+                 # this way (aberrated GSM and GSE).
+                 "It is drawn along the line from the Sun to Earth; the real boundary's<br>"
+                 "nose is turned a few degrees toward the direction Earth moves in its<br>"
+                 "orbit, by an amount that depends on the solar wind's speed.<br><br>"
                  f"Spacecraft found that the tail stops widening about {flare_value} Earth radii<br>"
                  f"behind Earth, plus or minus {flare_unc}, and that beyond there it is about {width_value}<br>"
                  f"Earth radii wide, plus or minus {width_unc}. The tail is drawn widening in a<br>"
@@ -1282,6 +1272,10 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
                 "the pressure changes.<br><br>"
                 "The bow shock points towards the Sun along the X-axis. The XY plane is<br>"
                 "the ecliptic.<br><br>"
+                # L-314, as the magnetopause's sentence above.
+                "It is drawn along the line from the Sun to Earth; the real shock's nose<br>"
+                "is turned a few degrees toward the direction Earth moves in its orbit,<br>"
+                "by an amount that depends on the solar wind's speed.<br><br>"
                 "Source (standoff): Jelinek et al. (2012), J. Geophys. Res. 117:A05208, doi:10.1029/2011JA017252."]
     
     bow_shock_customdata = ['Earth: Bow Shock']
@@ -1310,6 +1304,14 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
     ))
     
     # 3. Create and add Van Allen radiation belts
+    # L-330 (2026-10-17, Tony's rulings): both belts are drawn curved along
+    # dipole field lines, as dots scattered at random, thickest at each
+    # belt's measured peak. The dots are placed once, by
+    # van_allen_belt_sampler.drawn_van_allen_belts(), from a fixed seed, so
+    # every plot and the website (which draws the stored copy,
+    # data/drawings/van_allen_belts.json) show the same belts. Until then
+    # each belt was evenly spaced flat rings in the equatorial plane
+    # (L-322 Stage D, patches D8 and D9).
     belt_colors = ['rgb(255, 100, 100)', 'rgb(100, 200, 255)']
     belt_names = ['Earth: Inner Radiation Belt', 'Earth: Outer Radiation Belt']
     # Source: every figure below interpolates a row in constants_new.py --
@@ -1317,127 +1319,86 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
     # Source+: the four EARTH_VAN_ALLEN_*_EDGE rows, each carrying its own
     # Source+: citation and access route. The spans were typed here until
     # Source+: 2026-09-14, when L-305 item 7 gave them rows to read.
-    # Source+: The kilometres are arithmetic on those rows, not a second
-    # Source+: figure: see _km_above_surface() at the top of this module.
+    # Source+: The kilometres and AU are arithmetic on those rows, not a
+    # Source+: second figure: see _km_above_surface() and _au_above_surface().
+    # Source+: The field lines: Koskinen and Kilpua (2022), sec. 1.2.1, as
+    # Source+: cited in van_allen_belt_sampler.py's docstring.
     # L-322 Stage C2: the band's two ends, from their store rows at their
     # declared counts, for the outer belt's source line below.
     _band_low = _declared('EARTH_VAN_ALLEN_OUTER_BAND_LOW_L')
     _band_high = _declared('EARTH_VAN_ALLEN_OUTER_BAND_HIGH_L')
+    _field_lines = ("Source (field lines): Koskinen and Kilpua (2022), "
+                    "Physics of Earth's Radiation Belts, sec. 1.2.1.")
+    # L-330: Tony's approved words, 2026-10-17
+    # (documentation/WORDS_earth_round1_20261017.md, item 1a).
     belt_texts = [
         f"Inner Van Allen Belt: Region of trapped charged particles (mainly protons).<br>"
-        "The belt is one continuous region. The rings only mark its extent: they<br>"
-        "are evenly spaced from its inner edge to its outer edge, and the brighter<br>"
-        f"ring is near the measured proton flux peak, {EARTH_VAN_ALLEN_INNER_RADII:g} Earth radii from<br>"
-        f"Earth's centre, about {_km_above_surface(EARTH_VAN_ALLEN_INNER_RADII, 2):,} km above the surface at the equator.<br>"
-        f"The belt spans about {EARTH_VAN_ALLEN_INNER_BELT_INNER_EDGE:g} to {EARTH_VAN_ALLEN_INNER_BELT_OUTER_EDGE:g} Earth radii in the geomagnetic<br>"
-        f"equatorial plane -- roughly {_km_above_surface(EARTH_VAN_ALLEN_INNER_BELT_INNER_EDGE, 2):,} to {_km_above_surface(EARTH_VAN_ALLEN_INNER_BELT_OUTER_EDGE, 1):,} km above the surface<br>"
-        f"(every kilometre figure here converted from Earth radii).<br>"
+        "The belt is one continuous region. Its dots follow Earth's magnetic<br>"
+        "field lines, which curve from the equator down toward the ground, and<br>"
+        f"they are thickest near the measured proton flux peak, {EARTH_VAN_ALLEN_INNER_RADII:g} Earth radii<br>"
+        f"from Earth's centre, about {_km_above_surface(EARTH_VAN_ALLEN_INNER_RADII, 2):,} km ({_au_above_surface(EARTH_VAN_ALLEN_INNER_RADII, 2)} AU) above the surface<br>"
+        "at the equator.<br>"
+        f"At the equator the belt spans about {EARTH_VAN_ALLEN_INNER_BELT_INNER_EDGE:g} to {EARTH_VAN_ALLEN_INNER_BELT_OUTER_EDGE:g} Earth radii -- roughly<br>"
+        f"{_km_above_surface(EARTH_VAN_ALLEN_INNER_BELT_INNER_EDGE, 2):,} to {_km_above_surface(EARTH_VAN_ALLEN_INNER_BELT_OUTER_EDGE, 1):,} km above the surface (every kilometre figure here<br>"
+        "converted from Earth radii).<br>"
+        "Drawn by choice: the field lines are those of a magnet at Earth's centre<br>"
+        "lined up with its spin axis, the daily average of the tilted magnetic<br>"
+        "field; the belt stops at the ground; and how the dots thin away from the<br>"
+        "peak shows the shape, it is not measured.<br>"
         "Source (peak): Baker et al. (2018), Space Sci. Rev. 214:17, doi:10.1007/s11214-017-0452-7.<br>"
-        "Source (extent): Meredith et al. (2014), J. Geophys. Res. Space Physics 119:5328.",
+        "Source (extent): Meredith et al. (2014), J. Geophys. Res. Space Physics 119:5328.<br>"
+        + _field_lines,
         f"Outer Van Allen Belt: Region of trapped charged particles (mainly electrons).<br>"
-        "The belt is one continuous region. The rings only mark its extent: they<br>"
-        "are evenly spaced from its inner edge to its outer edge, and the brighter<br>"
-        f"ring is the flux peak, L = {exact_text('EARTH_VAN_ALLEN_OUTER_RADII')} -- about {_km_above_surface(EARTH_VAN_ALLEN_OUTER_RADII, 2):,} km above the<br>"
-        "surface at the equator, where L equals geocentric distance in Earth radii.<br>"
-        f"The belt spans about {EARTH_VAN_ALLEN_OUTER_BELT_INNER_EDGE:g} to {EARTH_VAN_ALLEN_OUTER_BELT_OUTER_EDGE:g} Earth radii and moves with geomagnetic<br>"
-        f"activity -- roughly {_km_above_surface(EARTH_VAN_ALLEN_OUTER_BELT_INNER_EDGE, 1):,} to {_km_above_surface(EARTH_VAN_ALLEN_OUTER_BELT_OUTER_EDGE, 1):,} km above the surface<br>"
-        f"(every kilometre figure here converted from Earth radii).<br>"
+        "The belt is one continuous region. Its dots follow Earth's magnetic<br>"
+        "field lines, which curve from the equator down toward the ground nearer<br>"
+        f"the poles, and they are thickest at L = {exact_text('EARTH_VAN_ALLEN_OUTER_RADII')}, about {_km_above_surface(EARTH_VAN_ALLEN_OUTER_RADII, 2):,} km<br>"
+        f"({_au_above_surface(EARTH_VAN_ALLEN_OUTER_RADII, 2)} AU) above the surface at the equator, where L equals<br>"
+        "distance from Earth's centre in Earth radii.<br>"
+        f"At the equator the belt spans about {EARTH_VAN_ALLEN_OUTER_BELT_INNER_EDGE:g} to {EARTH_VAN_ALLEN_OUTER_BELT_OUTER_EDGE:g} Earth radii and moves<br>"
+        f"with geomagnetic activity -- roughly {_km_above_surface(EARTH_VAN_ALLEN_OUTER_BELT_INNER_EDGE, 1):,} to {_km_above_surface(EARTH_VAN_ALLEN_OUTER_BELT_OUTER_EDGE, 1):,} km above the<br>"
+        "surface (every kilometre figure here converted from Earth radii).<br>"
+        "Drawn by choice: the same field lines, magnet and spin axis as the inner<br>"
+        "belt; the belt stops at the ground; and how the dots thin away from the<br>"
+        "peak shows the shape, it is not measured.<br>"
         "Source (peak): Li et al. (2025), doi:10.1029/2024JA033504 -- most intense across<br>"
         f"the L = {_band_low} to {_band_high} band; the drawn {exact_text('EARTH_VAN_ALLEN_OUTER_RADII')} is our midpoint of it.<br>"
-        "Source (extent): Meredith et al. (2014); Li, Tu et al. (2024), doi:10.1029/2023JA032171."
+        "Source (extent): Meredith et al. (2014); Li, Tu et al. (2024), doi:10.1029/2023JA032171.<br>"
+        + _field_lines,
     ]
-    
-    # L-322 Stage D, patch D8 (2026-09-25): each belt is drawn across its
-    # edge rows. It was a spread of 0.5 Earth radii around the peak
-    # (belt_thickness), chosen by eye, and it is removed rather than
-    # promoted (A Drawing Approximation Does Not Promote). Since patch D9
-    # the rings are evenly spaced from the inner edge row to the outer edge
-    # row on a step that also lands on the peak row, and the peak ring is
-    # drawn brighter and larger (_even_belt_rings). The point count, the
-    # brightnesses and the sizes are rendering settings; the ring count
-    # follows from the rows.
-    belt_bands = [
-        (EARTH_VAN_ALLEN_INNER_RADII,
-         EARTH_VAN_ALLEN_INNER_BELT_INNER_EDGE,
-         EARTH_VAN_ALLEN_INNER_BELT_OUTER_EDGE),
-        (EARTH_VAN_ALLEN_OUTER_RADII,
-         EARTH_VAN_ALLEN_OUTER_BELT_INNER_EDGE,
-         EARTH_VAN_ALLEN_OUTER_BELT_OUTER_EDGE),
-    ]
-    # L-322 Stage D, patch D9: the rings are evenly spaced on a step that
-    # lands on the edges and the peak (_even_belt_rings), and the peak ring
-    # is fully opaque with larger points. At D8 it was 0.6 against 0.2 at
-    # the same size, which Tony could barely see. Rendering settings.
-    belt_edge_alpha = 0.2   # the rings across the belt (the old opacity)
-    belt_peak_alpha = 1.0   # the ring at the peak
-    belt_edge_size = 1.5    # the old point size
-    belt_peak_size = 3.0
 
-    for i, (belt_peak, belt_inner, belt_outer) in enumerate(belt_bands):
-        belt_x = []
-        belt_y = []
-        belt_z = []
-        belt_point_colors = []
-        belt_point_sizes = []
+    # The dots, in Earth radii in Earth's body frame (z along the spin
+    # axis), with each dot's weight from the declared fade. Shading by the
+    # weight is a rendering setting: opacity and size rise toward the peak,
+    # as in the render Tony approved on 2026-10-17.
+    from van_allen_belt_sampler import drawn_van_allen_belts
+    belt_dots = drawn_van_allen_belts()
+    belt_peaks = [EARTH_VAN_ALLEN_INNER_RADII, EARTH_VAN_ALLEN_OUTER_RADII]
+    belt_alpha_low, belt_alpha_high = 0.35, 1.0   # opacity at weight 0 and 1
+    belt_size_low, belt_size_high = 1.5, 3.0      # point size at weight 0 and 1
+
+    for i, key in enumerate(('inner', 'outer')):
+        dots = belt_dots[key]
+        weights = np.array(dots['w'])
         belt_rgb = belt_colors[i].replace('rgb(', '').replace(')', '')
-        
-        # 48 points a ring (80 at D8, with 6 rings): with 11 and 9 rings
-        # the two belts stay near D8's size per animation frame.
-        n_points = 48
-        
-        ring_radii, peak_ring = _even_belt_rings(belt_inner, belt_peak,
-                                                 belt_outer)
-        for i_ring, ring_radius in enumerate(ring_radii):
-            belt_radius = ring_radius * EARTH_RADIUS_AU
-            is_peak = i_ring == peak_ring
-            ring_color = 'rgba(%s, %g)' % (
-                belt_rgb, belt_peak_alpha if is_peak else belt_edge_alpha)
-            ring_size = belt_peak_size if is_peak else belt_edge_size
-            
-            for j in range(n_points):
-                angle = (j / n_points) * 2 * np.pi
-                
-                # A flat ring in the body frame. It becomes a ring around
-                # Earth's rotational axis a few lines below, where
-                # orient_to_planet_pole rotates it -- which is what the
-                # old comment here claimed and the code never did.
-                x = belt_radius * np.cos(angle)
-                y = belt_radius * np.sin(angle)
-                
-                # L-231 (Tony's ruling, 2026-09-15): the saddle is gone.
-                # This was z = 0.2 * belt_radius * sin(2 * angle), lifting
-                # the ring a fifth of its radius TWICE per circuit -- more
-                # vertical swing than Earth's real magnetic tilt
-                # would give, at twice the frequency, meaning nothing. The
-                # comment here said it made the belt "thinner near poles";
-                # it changed no cross-section, it moved the whole ring.
-                # Any real vertical extent is L-330's question.
-                z = 0.0
-                
-                belt_x.append(x)
-                belt_y.append(y)
-                belt_z.append(z)
-                belt_point_colors.append(ring_color)
-                belt_point_sizes.append(ring_size)
-        
-        # L-231 (Tony's ruling, 2026-09-15): into Earth's EQUATORIAL
-        # plane, before the centre offset. The deciding argument is the
-        # geostationary ring, which is drawn in that plane at 6.6 R_E,
-        # inside an outer belt whose sources span 3 to 7 -- the ecliptic
-        # put those two 23.4 degrees apart in one picture. The magnetic
-        # equator would be better still, but it needs a DIRECTION as well
-        # as an angle and that direction turns once a day; the spin
-        # equator is its daily average. Same call Saturn's belts use.
-        belt_x, belt_y, belt_z = orient_to_planet_pole(
-            np.array(belt_x), np.array(belt_y), np.array(belt_z), 'Earth')
+        belt_point_colors = ['rgba(%s, %.3f)' % (
+            belt_rgb, belt_alpha_low + (belt_alpha_high - belt_alpha_low) * w)
+            for w in weights]
+        belt_point_sizes = list(belt_size_low +
+                                (belt_size_high - belt_size_low) * weights)
 
-        # Apply center position offset
+        # L-231 (Tony's ruling, 2026-09-15): around Earth's spin axis, in
+        # its equatorial plane, before the centre offset: the spin equator
+        # is the daily average of the magnetic one, and the geostationary
+        # ring is drawn in the same plane. Same call Saturn's belts use.
+        belt_x, belt_y, belt_z = orient_to_planet_pole(
+            np.array(dots['x']) * EARTH_RADIUS_AU,
+            np.array(dots['y']) * EARTH_RADIUS_AU,
+            np.array(dots['z']) * EARTH_RADIUS_AU, 'Earth')
         belt_x = np.array(belt_x) + center_x
         belt_y = np.array(belt_y) + center_y
         belt_z = np.array(belt_z) + center_z
-        
+
         belt_text = [f"{belt_names[i]}<br><br>{belt_texts[i]}"]
-        belt_customdata = [belt_names[i]]
 
         traces.append(
             go.Scatter3d(
@@ -1446,8 +1407,7 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
                 z=belt_z,
                 mode='markers',
                 marker=dict(
-                    # One colour and one size per point, so the peak ring
-                    # stands out from the rest (L-322 Stage D, D8 and D9).
+                    # One colour and one size per dot, from its weight.
                     size=belt_point_sizes,
                     color=belt_point_colors,
                 ),
@@ -1457,20 +1417,20 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
                 showlegend=True
             )
         )
-        # Info marker for this belt. Per-belt border per two-standards
-        # (May 28, 2026): white on inner reddish belt (i=0,
-        # rgb(255,100,100)), red on outer blue belt (i=1,
-        # rgb(100,200,255)). Inner belt is the borderline-reddish case
-        # the two-standards convention exists for.
-        # L-322 Stage D, patch D9: the marker sits on the peak ring's first
-        # point; the rings are in order of radius now, not peak first.
-        marker_index = peak_ring * n_points
+        # Info marker for this belt, at its peak on the equator. Per-belt
+        # border per two-standards (May 28, 2026): white on the inner
+        # reddish belt, red on the outer blue belt.
+        mx, my, mz = orient_to_planet_pole(
+            np.array([belt_peaks[i] * EARTH_RADIUS_AU]), np.array([0.0]),
+            np.array([0.0]), 'Earth')
         traces.append(create_info_marker(
-            belt_x[marker_index], belt_y[marker_index], belt_z[marker_index],
+            float(np.asarray(mx)[0]) + center_x,
+            float(np.asarray(my)[0]) + center_y,
+            float(np.asarray(mz)[0]) + center_z,
             belt_colors[i], belt_text[0], belt_names[i],
             border_color='white' if i == 0 else 'red'
         ))
-    
+
     return traces
 
 # Source: UCS Satellite Database, ESA Space Debris Office, NASA
@@ -1524,8 +1484,8 @@ def create_earth_leo_shell(center_position=(0, 0, 0)):
     # L-291: were typed 6571 / 8371, which is the 6371 km MEAN radius plus
     # the altitude -- a shadow of the wrong radius. The store derives
     # both from the equatorial radius this shell is drawn against.
-    LEO_LOW_KM  = EARTH_LEO_INNER_KM    # 200 km altitude
-    LEO_HIGH_KM = EARTH_LEO_OUTER_KM    # 2000 km altitude
+    LEO_LOW_KM  = EARTH_LEO_INNER_KM    # EARTH_LEO_LOWER_ALTITUDE_KM up
+    LEO_HIGH_KM = EARTH_LEO_OUTER_KM    # EARTH_LEO_UPPER_ALTITUDE_KM up
     STARLINK_KM = 6921.0   # ~550 km altitude -- densest population
 
     np.random.seed(7)      # Deterministic scatter
@@ -1558,8 +1518,8 @@ def create_earth_leo_shell(center_position=(0, 0, 0)):
     hover_text = (
         "Earth: Low Earth Orbit (LEO)<br><br>"
         "Low Earth Orbit (LEO)<br>"
-        f"Altitude range: {exact_text('EARTH_LEO_LOWER_ALTITUDE_KM', grouping=True)} km to {exact_text('EARTH_LEO_UPPER_ALTITUDE_KM', grouping=True)} km above surface<br>"
-        f"Radius: {EARTH_LEO_INNER_KM:,.0f} km to {EARTH_LEO_OUTER_KM:,.0f} km from Earth's center "
+        f"Altitude range: {row_text('EARTH_LEO_LOWER_ALTITUDE_KM', grouping=True)} km to {exact_text('EARTH_LEO_UPPER_ALTITUDE_KM', grouping=True)} km above surface<br>"
+        f"Radius: {row_text('EARTH_LEO_INNER_KM', grouping=True)} km to {EARTH_LEO_OUTER_KM:,.0f} km from Earth's center "
         f"({EARTH_LEO_INNER_RADII:.2f} to {EARTH_LEO_OUTER_RADII:.2f} Earth radii)<br><br>"
         "LEO satellites orbit at all inclinations -- forming a true shell, not a ring.<br>"
         "One orbit takes 90-120 minutes; a satellite crosses the sky in ~6 minutes.<br><br>"
@@ -1569,8 +1529,13 @@ def create_earth_leo_shell(center_position=(0, 0, 0)):
         "<b>Tracked debris objects (>10 cm):</b> 35,000+<br><br>"
         f"Compare with the Geostationary Belt (GEO) at {EARTH_GEOSTATIONARY_RADIUS_KM:,.0f} km -- 5x farther out,<br>"
         "invisible to the naked eye, but controlling global communications.<br><br>"
-        "Source (upper edge): IADC Space Debris Mitigation Guidelines, IADC-02-01 Rev. 3 (2021), "
-        "sec. 3.3.2. The 200 km floor is a drawing choice, not a measured boundary."
+        # L-330 round 1 (Tony, 2026-10-17, option A): the lower edge is
+        # ESA's. The upper edge's revision was "Rev. 3 (2021)" here; the
+        # document read is Revision 2 of March 2020 (fixed in passing).
+        "Source (upper edge): IADC Space Debris Mitigation Guidelines, IADC-02-01 Revision 2<br>"
+        "(2020), sec. 3.3.2.<br>"
+        "Source (lower edge): ESA, \"Types of orbits\" (2020) -- satellites generally do not fly<br>"
+        f"below {row_text('EARTH_LEO_LOWER_ALTITUDE_KM')} km, because of Earth's atmosphere."
     )
 
     traces = [

@@ -2920,6 +2920,38 @@ resident.
 (Moved down from the resident protocol on 2026-10-16 when
 v3.101 made a fourth entry.)
 
+v3.99 (October 15, 2026): No rule changed in this document. ONE
+skill bump, one version (L-445): horizons-orbital-mechanics 1.7 -> 1.8.
+EARTH'S PERIOD IS THE EARTH-MOON BARYCENTRE'S.
+
+WHAT PROMPTED IT. L-444's first live run printed Earth's period as 366
+days: JPL's period for Earth's centre, which circles the Earth-Moon
+barycentre once a month and so swings through the month. Tony's ruling,
+2026-10-15: "Confirmed as recommended, the barycenter."
+
+WHAT CHANGED. horizons-orbital-mechanics gains one bullet under A
+Period Depends on Its Centre: a body's period may be asked of another
+target than the body. Earth's, around the Sun, is asked of Horizons
+target 3; its identity and position stay 399. The one home of the map
+is orbital_period.PERIOD_TARGETS, applied only around the Sun; the
+record carries the target, and every reader takes it from the record.
+A session following 1.7 would ask 399. Its v1.5 entry moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copy reads
+horizons-orbital-mechanics 1.8 before work that fires it. This session
+confirmed its loaded copy read 1.7, discharging v3.98's obligation.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.96 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-17 when
+v3.102 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

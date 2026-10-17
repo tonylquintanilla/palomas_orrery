@@ -1,22 +1,25 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 16, 2026, night: Earth's design talk 1 held.
-- Written at orrery 48c84c3 and gallery 2090a8b.
+Last updated: October 17, 2026, afternoon: Earth's round-1 build done.
+- Written at orrery da78b80 and gallery f49b3e6.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Earth's first design talk: the belts go curved, as a density field;
->   a render first, regular against random dots (L-330).
-> - Also ruled: five held sentences served (L-451); notes only for
->   drawing choices (L-452); every run record kept for now (L-449); the
->   magnetosphere unturned, and its hover says so (L-314).
+> - Belts as random dots along the field lines; your approved words;
+>   a lost run record stops the Daily Run. Three patches, waiting.
+> - Fades only where nature thins out; Earth's hydrogen fade designed
+>   (L-410, the fades).
 >
-> **Do next:** *The round-1 build: the run-records check, the belts' render.*
+> **Do next:** *Your run order, section 1 of
+> HANDOFF_earth_round1_build_20261017.md.*
 >
 > **Needs you now:**
-> - *Run patch_earth_round1_close, the orrery run, push.*
+> - *Patches 1, 2, the close, the orrery run, push; reinstall three
+>   skills; patch 3, the Daily Run, push; then the two looks.*
+> - At the phone look, three wordings Claude chose (handoff, sec. 4);
+>   then: Earth's fade built first, or talk 2?
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
@@ -24,8 +27,8 @@ Last updated: October 16, 2026, night: Earth's design talk 1 held.
 
   1-4. [done]  The Sun, Earth and Solar System rooms are live; the orrery
                feeds the website and nothing is typed twice.
-  5.   [NOW]   *Earth's list (L-413): talk 1 held; its build next,
-               then talks 2 to 6.* << moved this session
+  5.   [NOW]   *Earth's list (L-413): round 1 built, waiting on your
+               runs and looks; then Earth's fade or talk 2.* << moved this session
   5b.  [NOW]   The scaffolding checks clear beside the slices: the
                dashboard (L-440) done; L-424, L-425, L-426 to come.
   6-6a.[done]  The typed facts, served and checked (Oct 16);
@@ -57,8 +60,8 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
   opened; animation with choosing a date; encounters, stage 12. (Oct 15)
 - The plan is strategy; the road here is the order; the ledger has
   status. The plan's history and lineage: MASTER_PLAN_HISTORY.md. (Oct 13, 14)
-- Fuzzy boundaries wherever they are meaningful, not only the corona
-  and the exosphere. (Oct 14)
+- A fade only where nature thins out; a range is a drawn choice and
+  words; a moving edge gets its own device. Replaces the range idea. (Oct 17)
 - A served body's missing period is fetched by the run, before the
   check, with the orrery's own code: orbit and period together. (Oct 14, 15)
 - Digits by the error JPL states; whole km and a plain sentence where it
@@ -77,25 +80,23 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 - Dashboard search: each word anywhere on a card, in any order. (Oct 14)
 - Pluto-Charon's barycentre: "not yet fetched"; its period waits for
   the objects work. (Oct 14)
-- Scattered dots are placed by the orrery and stored for the website;
-  a shape that is a formula is worked out on each side. (Oct 11)
-- Orbital periods: JPL's own, every body, both sides; the steadier
-  centre, digits by the larger error, drawn orbit and markers alike;
-  typed last, marked; Earth's from the Earth-Moon barycentre. (Oct 11, 15)
 - The order: finish Earth, then the Sun (fuzzy boundaries inside
   it), then the objects; no batch of objects first. (Oct 15)
 - A failed pull stops the Daily Run before the build: option A. (Oct 15)
 - A served number's citation is the orrery's, word for word, its wording
   in the store; the website's note only for a drawing choice. Grey type
   is blue. All run records kept for now; magnetosphere unturned. (Oct 16)
+- Belts: random dots, both curved. Low orbit starts at ESA's 180 km.
+  A lost run record stops the Daily Run. Lines past a hover's 17 go to
+  its i panel. What a visitor reads: in provenance-discipline. (Oct 17)
 
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261016T224259Z, ok, every rename on the first try (gallery 2090a8b).
-- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, 48c84c3).
+- Last cache build: 20261017T131445Z, ok, every rename on the first try (gallery f49b3e6).
+- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, da78b80).
   Whole tree: 280: orrery 116, Earth System 149, stars 13, utilities 2.
-- This page's date and the ledger's newest stamp: both Oct 16. Agree.
+- This page's date and the ledger's newest stamp: both Oct 17. Agree.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
@@ -103,12 +104,13 @@ At the next design talk:
 - L-401 (the distance digits): a model with no stated accuracy (the
   Moon's analytical orbit) still reads as km precision at the floor;
   numbers that are not distances have no digits rule.
-- The fuzzy outer corona, with the dust cloud; the exosphere the same way.
+- The Sun's fades, the outer corona first with the dust cloud: L-410 (fades).
 - Moving the highlighted row to the top of the list.
 - GO's arrow, only if the text box stays centred.
 - The tide's cone and brightness on the phone: L-412 (the Sun's list).
 - Stored drawings for the other dot clouds: L-434 (stored drawings).
-- Earth's talk 2: L-356 with L-375 (the field's model and offset).
+- Earth's talk 2: L-356 with L-375 (the field's model and offset), and
+  L-454 (a device for edges that move).
 
 Not urgent, in your order:
 1. Whether the editor also edits the Solar System room's rows.
@@ -117,13 +119,11 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- *Next: `HANDOFF_earth_round1_build_brief_20261016.md`*
-- Your rulings tonight: `DESIGN_earth_round1_rulings_20261016.md`
-- Closed: L-421 `HANDOFF_L421_checks_build_20261016.md`; L-445
-  `HANDOFF_L445_earth_period_build_20261015.md`
+- *Next: `HANDOFF_earth_round1_build_20261017.md` (your run order)*
+- The fades: `DESIGN_fades_rulings_20261017.md`. Round 1's rulings:
+  `DESIGN_earth_round1_rulings_20261016.md`; words: `WORDS_earth_round1_*`
 - The distance digits: `DESIGN_L401_distance_digits_rulings_20261011.md`;
   build 1 `HANDOFF_L401_distance_build1_20261012.md`; build 3 parked: L-401.
-- Your notes of Oct 16: `WHERE_WE_ARE_10-16-26_1708_run_record.md`
 - Your six rulings of Oct 12: `DESIGN_rulings_20261012.md`; briefs for L-425,
   L-424 with L-426; the dashboard: `HANDOFF_L440_dashboard_labels_20261013.md`
 - The strategy behind the road: `MASTER_PLAN_INTERACTIVE_GALLERY.md`

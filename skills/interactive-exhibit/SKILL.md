@@ -1,14 +1,23 @@
 ---
 name: interactive-exhibit
 description: How an interactive exhibit (a room in interactive.html such as ?exhibit=sun) is designed, built, verified and carded for the Paloma's Orrery gallery. Covers the exhibit switch and boot path, the assembler driver spec, the JS feature handoff, the shared chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent gate, back link), what is per-body, the served-data provenance contract, what a room opens on (the arrival block) and the shell-key stamp the renderers apply, who may write data/objects_config.json, the Mode 5 phone sequence, and carding an exhibit through Studio. Use when adding or changing an exhibit (Earth, Jupiter, the stars), touching sun* chrome in interactive.html, deciding what an exhibit may render, or editing the served words with store_writer or exhibit_store_editor. Not for propagation math (gallery-assembler), the nightly builder (gallery-cache-builder), or the Studio/converter chain (gallery-pipeline). Do not use for projects other than Paloma's Orrery.
-fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, See more, Home's order and its framing; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia); a served number's citation and its source_note; the Typed facts check (smoke_typed_facts.js)
+fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, See more, Home's order and its framing; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia); a served number's citation and its source_note; the Typed facts check (smoke_typed_facts.js); a feature drawn as stored dots (the Hills cloud, Earth's radiation belts)
 ---
 
 # Interactive Exhibit
 
-Read this file in 4 parts: lines 1-135, 136-385, 386-651, 652-857.
+Read this file in 5 parts: lines 1-137, 138-363, 364-632, 633-873, 874-891.
 
-Skill version: 1.16 | 2026-10-16, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.17 | 2026-10-17, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ a73bc24a and gallery @ f49b3e69. v1.17 (L-452 and
+L-450, L-330; Earth's round 1) narrows `source_note` to a drawing choice
+beside a citation: wording that bears on a citation lives in the store,
+on the row, and a claim a visitor reads keeps a citation the visitor can
+see (Tony, 2026-10-16 and 2026-10-17). And it records Earth's radiation
+belts as the second stored drawing: dots scattered at random along
+dipole field lines, placed by the orrery and drawn by the website as
+given (Tony, 2026-10-17: "Yes, random").
+Earlier: 1.16 | 2026-10-16, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 6b975155 and gallery @ 2090a8b7. v1.16 (L-421 parts 2
 and 3; Tony's option A, 2026-10-16) records that a number's citation is
 served like the number: the orrery's export carries each row's source,
@@ -25,16 +34,9 @@ comes from: the orrery's period, copied by the mirror, printed at its
 served figure count in one of three forms, read from the config so it
 reaches a visitor on the push; and the orbit drawn around a period's
 centre, which is served in the cache and needs the builder.
-Earlier: 1.14 | 2026-10-10, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ a6678b0f and gallery @ cb9038cc. v1.14 (L-429) records
-Tony's rulings of the same day, after 1.13 was installed: every room's
-row puts GO TO in its true middle, the Solar System room's room button
-to its right, and a long name wraps rather than being cut. A second
-version in one session, against One Session, One Bump, because the
-ruling came after 1.13 was in use.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
-on 2026-10-05 (L-418), 2026-10-10 (L-429), 2026-10-14 (L-431) and
-2026-10-16 (L-421).
+on 2026-10-05 (L-418), 2026-10-10 (L-429), 2026-10-14 (L-431),
+2026-10-16 (L-421) and 2026-10-17 (L-452).
 
 ## Contents
 
@@ -159,14 +161,44 @@ page:
   is named as declared; a citation only the website keeps, beside a row
   with none, is named and left alone; an export older than schema 7 is
   refused by name.
-- **The website's own words about a citation go in `source_note`**
-  (v1.16). A gloss such as "extent of the closed-field helmet, not of
-  the streamer as a whole" is the website's, so it is a served WORD:
-  `tools/store_writer.py` and the exhibit store editor write it, and
-  the mirror never touches it. The store writer refuses a linked
-  entry's `source`, which is the mirror's. The i panel prints the
-  citation on its Source line and the note after it. A hover carries
-  neither (Tony's split of 2026-09-15).
+- **A `source_note` holds only a drawing choice** (v1.17, L-452;
+  Tony, 2026-10-16: "Wording that is relevant to the citation should be
+  moved to the store. Notes should be dropped unless they are drawing
+  choices."). Wording that bears on a citation -- a locator, an
+  edition, an address, what the cited value is -- lives in the store,
+  on the row: in its `# Source:` text when it is part of the citation,
+  otherwise in the row's other comment lines (`# Note:`, `# Read:`,
+  `# Corrected:`, `# Also:`), which no visitor sees. Words written for
+  the store -- "this row", "this file", "here", a figure count, the
+  history of a correction, our own check -- never go in `# Source:`,
+  because a visitor reads it word for word (L-450). A claim a visitor
+  reads keeps a citation the visitor can see (Tony, 2026-10-17: "why
+  drop the source?"): where a hover's sentence rests on a source the
+  number's own citation does not carry, that source joins the row's
+  `# Source:`, as the geostationary ring's NASA page did. The note is a
+  served WORD: `tools/store_writer.py` and the exhibit store editor
+  write it, and the mirror never touches it. The store writer refuses a
+  linked entry's `source`, which is the mirror's. The i panel prints the
+  citation on its Source line and the note after it, after a dash. It
+  carries no project words: no names, no dates of rulings. A hover
+  carries neither (Tony's split of 2026-09-15). These are three of the
+  five principles in provenance-discipline, What a Visitor Reads,
+  which hold every word a visitor reads in either instrument.
+- **Scattered dots are the orrery's stored drawing** (v1.17, L-330;
+  the rule L-434 set for the Hills cloud). Earth's two radiation belts
+  are dots scattered at random along dipole field lines (r = L
+  cos^2 latitude; Koskinen and Kilpua 2022, sec. 1.2.1), between each
+  belt's measured edges and thickest at its measured peak (Tony,
+  2026-10-17: both belts curved, "Yes, random"). The orrery places
+  them once, from a seed (`van_allen_belt_sampler.py`), and
+  `export_drawings.py` writes `data/drawings/van_allen_belts.json`: in
+  Earth radii, in Earth's body frame (z the spin axis), each dot with
+  its weight and its belt. The website draws the dots as given, scaled
+  by Earth's served radius and turned to the served pole, and places
+  none itself. The fade is a declared drawing choice and the hover says
+  so: drawn to show the shape, not measured. A shape that is a few
+  numbers and a formula (a sphere, a ring) is not stored; the website
+  computes it from the served rows.
 - The live maintenance run (`gallery_maintenance_run.py --live`, Store
   drift) follows every pointer into the orrery store at orrery HEAD and
   reports MATCH, DRIFT, or NOT IN STORE, by name. A new exhibit's
@@ -854,4 +886,6 @@ that loaded 1.12; the next session confirms its loaded copy reads 1.13
 before exhibit work. 1.14 followed in the same session, after 1.13 was
 installed; the next session confirms its loaded copy reads 1.14.
 1.16 was cut in a session that loaded 1.15; the next session confirms
-its loaded copy reads 1.16 before exhibit work.
+its loaded copy reads 1.16 before exhibit work. 1.17 was cut in a
+session that loaded 1.16; the next session confirms its loaded copy
+reads 1.17 before exhibit work.

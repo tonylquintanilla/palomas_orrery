@@ -12,20 +12,27 @@ For every entry in export_drawings.DRAWINGS it checks:
     the dots      drawing it again from constants_new.py gives the same
                   file, byte for byte after line endings; so the file
                   follows the rows and the sampler, and nobody edited it
-    the count     x, y and z each hold "dots" entries, and dots is the
-                  settings' orbits times dots per orbit
+    the count     each list the file carries holds "dots" entries, and
+                  dots is what the settings give: orbits times dots per
+                  orbit (the Hills cloud), the two belts' dots (the belts)
     the tilt      the plane through the file's own dots is tilted as the
                   file records, and within the sampler's tolerance of
                   HILLS_CLOUD_TILT_DEG, the paper's "about 30" (for the
                   Hills cloud)
+    the belts     every dot on a field line between its belt's edge rows,
+                  none below the ground, and each belt thickest at its
+                  peak at the equator, read from the file's own dots
+                  (van_allen_belt_sampler.check_dots; for the belts)
 
-A check that passes is only worth something if it can fail, so three
-faults are planted first, each in memory, and each must be caught:
+A check that passes is only worth something if it can fail, so faults
+are planted first, each in memory, and each must be caught:
 
     planted                                  must be caught by
     one dot moved by 1,000 AU                the dots
     the eccentricity row set to 0.5          the dots
     git reporting the file as ignored        tracked
+    a belt dot moved off its belt            the belts
+    the outer belt's peak drawn at its edge  the belts
 
 The last line starts "DRAWINGS EXPORT:", which the maintenance run
 quotes. It names each drawing, its dots, its tilt and its sha256.
@@ -41,6 +48,11 @@ Domain: orrery
 
 Module created: October 11, 2026 with Anthropic's Claude Opus 5.5 (L-421,
 the website half of the inner Oort cloud)
+Module updated: October 17, 2026 with Anthropic's Claude Opus 5.5 (L-330:
+the second drawing, Earth's radiation belts; the count reads each
+drawing's own settings, the tilt is checked where a drawing records one,
+and the belts' dots are checked against their rows, with two more faults
+planted)
 """
 import hashlib
 import json
@@ -50,6 +62,7 @@ import sys
 
 import export_drawings as ed
 import hills_cloud_sampler as hcs
+import van_allen_belt_sampler as vab
 
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -92,13 +105,28 @@ def check_one(name, text_on_disk, text_now, path, ignored=git_ignored):
                                                 "(layout only)"))
     n = content.get("dots")
     settings = content.get("settings", {})
-    lengths = [len(content.get(axis, [])) for axis in ("x", "y", "z")]
-    want = settings.get("n_orbits", 0) * settings.get("points_per_orbit", 0)
-    if lengths != [n, n, n] or n != want:
-        failures.append("%s: %s dots recorded, x/y/z hold %s, settings give "
-                        "%d" % (name, n, lengths, want))
+    axes = [axis for axis in ed.LISTS if axis in content]
+    lengths = [len(content.get(axis, [])) for axis in axes]
+    if "n_orbits" in settings:
+        want = settings.get("n_orbits", 0) * settings.get("points_per_orbit", 0)
+    else:
+        want = settings.get("dots_inner", 0) + settings.get("dots_outer", 0)
+    if lengths != [n] * len(axes) or n != want or axes[:3] != ["x", "y", "z"]:
+        failures.append("%s: %s dots recorded, %s hold %s, settings give "
+                        "%d" % (name, n, "/".join(axes), lengths, want))
+    elif name == "van_allen_belts":
+        split = {}
+        for index, key in enumerate(content.get("belts", [])):
+            pick = [k for k, b in enumerate(content["belt"]) if b == index]
+            split[key] = dict((axis, [content[axis][k] for k in pick])
+                              for axis in ("x", "y", "z"))
+        try:
+            for line in vab.check_dots(split, vab.rows_from_store()):
+                failures.append("%s: %s" % (name, line))
+        except KeyError as exc:
+            failures.append("%s: the file names no belt %s" % (name, exc))
     tilt = None
-    if lengths == [n, n, n] and n:
+    if lengths == [n] * len(axes) and n and "plane_tilt_deg" in content:
         tilt = hcs.plane_tilt_deg(*(list(map(float, content[axis]))
                                     for axis in ("x", "y", "z")))
         if abs(round(tilt, 1) - content.get("plane_tilt_deg", -999)) > 0.05:
@@ -138,6 +166,29 @@ def _planted(text_now, path):
     return out
 
 
+def _planted_belts(text_now):
+    """Two faults in the belts' file, each caught by the belts' check:
+    the file is also re-drawn from its rows, so each planted text is
+    compared with itself there and only the belts' check can catch it."""
+    out = []
+    moved = json.loads(text_now)
+    moved["x"][0] += 3.0
+    out.append(("a belt dot moved off its belt", ed.render(moved),
+                "off the field lines"))
+    edge = json.loads(text_now)
+    rows = vab.rows_from_store()
+    rows["EARTH_VAN_ALLEN_OUTER_RADII"] = (
+        rows["EARTH_VAN_ALLEN_OUTER_BELT_INNER_EDGE"] + 0.05)
+    other = vab.drawn_van_allen_belts(rows)
+    outer = [k for k, b in enumerate(edge["belt"]) if b == 1]
+    for axis in ("x", "y", "z"):
+        for k, v in zip(outer, other["outer"][axis]):
+            edge[axis][k] = round(v, 2)
+    out.append(("the outer belt's peak drawn at its edge", ed.render(edge),
+                "not thickest at the peak"))
+    return out
+
+
 def main():
     print("=" * 70)
     print("  DRAWINGS EXPORT CHECK -- data/drawings/ against the rows")
@@ -160,6 +211,18 @@ def main():
             caught += 1
         else:
             problems.append("planted fault not caught: " + label)
+    belts_now = texts_now["van_allen_belts"]
+    belt_planted = _planted_belts(belts_now)
+    for label, text, expect in belt_planted:
+        failures, _ = check_one("van_allen_belts", text, text,
+                                ed.path_of(PROJECT_DIR, "van_allen_belts"),
+                                lambda _p: False)
+        hit = any(expect in line for line in failures)
+        print("  planted: %-36s %s" % (label, "caught" if hit else "MISSED"))
+        if hit:
+            caught += 1
+        else:
+            problems.append("planted fault not caught: " + label)
     print("")
 
     named = []
@@ -173,13 +236,14 @@ def main():
             on_disk = handle.read().replace(b"\r\n", b"\n").decode("utf-8")
         failures, info = check_one(name, on_disk, texts_now[name], path)
         problems.extend(failures)
-        tilt = "%.1f deg" % info["tilt"] if info.get("tilt") is not None else "?"
-        print("  %-14s %s dots, plane tilted %s, tracked by git: %s, "
+        tilt = ("plane tilted %.1f deg" % info["tilt"]
+                if info.get("tilt") is not None else "no plane recorded")
+        print("  %-15s %s dots, %s, tracked by git: %s, "
               "sha256 %s" % (name, info.get("dots"), tilt,
                              "no" if any("git ignores" in f for f in failures)
                              else "yes", info.get("sha256", "")[:12]))
         if not failures:
-            named.append("%s %s dots, tilt %s, sha256 %s"
+            named.append("%s %s dots, %s, sha256 %s"
                          % (name, info["dots"], tilt, info["sha256"][:12]))
     print("")
     if problems:
@@ -188,7 +252,7 @@ def main():
         print("DRAWINGS EXPORT: FAIL -- %d problem(s)" % len(problems))
         return 1
     print("DRAWINGS EXPORT: PASS -- %d of %d planted faults caught; %s"
-          % (caught, len(planted), "; ".join(named)))
+          % (caught, len(planted) + len(belt_planted), "; ".join(named)))
     return 0
 
 

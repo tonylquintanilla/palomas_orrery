@@ -476,6 +476,11 @@ Module updated: October 16, 2026 with Anthropic's Claude Opus 5.5
 (Earth's design talk, round 1, zero code: rulings onto L-330, L-451,
 L-452, L-450, L-449, L-314 and L-413; the build brief written), built
 on 48c84c3 and gallery 2090a8b.
+Module updated: October 17, 2026 with Anthropic's Claude Opus 5.5
+(Earth's round-1 build: L-449, L-330, L-451, L-452, L-450 and L-314
+built in three patches, each waiting on Tony's run and look; the fades
+ruled and Earth's designed on L-410, retitled; L-454 and L-455 new;
+L-413 and L-435 updated), built on da78b80 and gallery f49b3e6.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -693,7 +698,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*239 live items; 223 need attention (`!`); 167 RICE-scored; 207 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*241 live items; 225 need attention (`!`); 167 RICE-scored; 207 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -764,7 +769,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-257 | Three enforcement builds the 2.8 skill text defers | OPEN | 1.8 | 2026-08-27 |
 | ! | L-313 | Recenter the camera on a chosen feature in the exhibit rooms | OPEN | 1.8 | 2026-09-10 |
 | ! | L-321 | The orrery's hover text joins the provenance braid, Earth first | OPEN | 1.8 | 2026-09-12 |
-| ! | L-330 | Belt shape: the belts curved along the field lines, a density field (Earth exhibit) | OPEN | 1.8 | 2026-10-16 |
+| ! | L-330 | Belt shape: the belts curved along the field lines, a density field (Earth exhibit) | OPEN | 1.8 | 2026-10-17 |
 | ! | L-337 | A centre marker for bodies without shells in the exhibit rooms | OPEN | 1.8 | 2026-09-19 |
 |  | L-194 | Text-only assertions -- claims the scanner cannot see | DEFERRED | 1.4 | 2026-08-15 |
 | ! | L-297 | Earth-Moon Lagrange points: serving path sized, deferred from the Earth exhibit | OPEN | 1.4 | 2026-09-07 |
@@ -828,10 +833,10 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-401 | The orrery's own distance hovers print by fixed widths, not by the errors the position earns (orrery, provenance) | OPEN | -- | 2026-10-15 |
 | ! | L-402 | Choose a date, or animate, within the range the drawn bodies are trusted for (gallery, exhibits) | OPEN | -- | 2026-10-01 |
 | ! | L-403 | Numbers in the object list's descriptions carry no source (orrery, provenance) | OPEN | -- | 2026-10-01 |
-| ! | L-410 | Fuzzy boundaries for edges known only as ranges, the outer corona first (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-11 |
+| ! | L-410 | Fades where nature thins out: Earth's hydrogen designed, the outer corona next (orrery + gallery, the Sun and Earth) | OPEN | -- | 2026-10-17 |
 | ! | L-411 | The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-04 |
 | ! | L-412 | The Sun's slice: the order Tony confirmed (the Sun's slice) | OPEN | -- | 2026-10-11 |
-| ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-10-16 |
+| ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-10-17 |
 | ! | L-423 | The website's checks: the order Tony confirmed (checks, gallery) | OPEN | -- | 2026-10-16 |
 | ! | L-424 | The checker reports one word for two different cases (worksheet checker) | OPEN | -- | 2026-10-11 |
 | ! | L-425 | A citation's location record is checked only in part (provenance tooling) | OPEN | -- | 2026-10-09 |
@@ -843,10 +848,12 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-434 | Stored drawings for the other dot-cloud shells (orrery + gallery) | OPEN | -- | 2026-10-11 |
 | ! | L-435 | Standing rulings that are method, held only on Tony's page (skills, records) | OPEN | -- | 2026-10-12 |
 | ! | L-443 | The rest of the orrery's objects come to the website as plotted positions (gallery + orrery, objects) | OPEN | -- | 2026-10-14 |
-| ! | L-449 | A cache build dropped the 82 build-run records it should have carried (gallery, cache builder) | OPEN | -- | 2026-10-16 |
-| ! | L-450 | The orrery's citation texts carry store notes and miss locators (orrery, citations) | OPEN | -- | 2026-10-16 |
-| ! | L-451 | The sentences the Typed facts check holds open (gallery, words) | OPEN | -- | 2026-10-16 |
-| ! | L-452 | The website's notes beside a citation: read them again now that the citation prints above them (gallery, words) | OPEN | -- | 2026-10-16 |
+| ! | L-449 | A cache build dropped the 82 build-run records it should have carried (gallery, cache builder) | OPEN | -- | 2026-10-17 |
+| ! | L-450 | The orrery's citation texts carry store notes and miss locators (orrery, citations) | OPEN | -- | 2026-10-17 |
+| ! | L-451 | The sentences the Typed facts check holds open (gallery, words) | OPEN | -- | 2026-10-17 |
+| ! | L-452 | The website's notes beside a citation: read them again now that the citation prints above them (gallery, words) | OPEN | -- | 2026-10-17 |
+| ! | L-454 | A drawn device for edges that move: the magnetopause, the bow shock and their kind (orrery + gallery, design) | OPEN | -- | 2026-10-17 |
+| ! | L-455 | Typed numbers in the website's served words, with no row behind them (gallery, words) | OPEN | -- | 2026-10-17 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1230,8 +1237,46 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
+#### [L-454] A drawn device for edges that move: the magnetopause, the bow shock and their kind (orrery + gallery, design)
+<!-- L:454 status:OPEN upd:2026-10-17 section:A flag: rice: -->
+- **Tony's ruling, 2026-10-17,** splitting fuzzy boundaries three ways
+  (L-410): a real edge that moves is not drawn fuzzy; its motion gets "a
+  second drawn device like the movement cone we use for the dipole."
+  The model surface stays sharp.
+- **The kind:** the magnetopause and the bow shock first (the store
+  already holds where real crossings scatter: 1.23 and 0.69 Earth radii,
+  Shue et al. 1998 and Jelinek et al. 2012); the Alfven surface and the
+  heliosphere's edges are the same kind, in the Sun's slice.
+- **Split from today's design on purpose** (Tony: "I agree"): Earth's
+  fade was designed now; this is a new device with its own questions --
+  what it looks like, and what the spread actually measures. It goes
+  beside Earth's talk 2 on the field (L-356 with L-375), since both are
+  about Earth's magnetic field and how it moves.
+**Gap:** a design talk, on Earth's list (L-413) with talk 2.
+**Ref:** L-410; L-314 (the solar wind, which moves these edges); L-375
+(the dipole cone); `documentation/DESIGN_fades_rulings_20261017.md`.
+
+#### [L-455] Typed numbers in the website's served words, with no row behind them (gallery, words)
+<!-- L:455 status:OPEN upd:2026-10-17 section:A flag: rice: -->
+- **Recorded 2026-10-17,** reading the notes for L-452. One row for the
+  CLASS (The Braid); instances found so far, in
+  `data/objects_config.json`: the Crust's served `note`, "Crust
+  thickness (5-10 km oceanic, 30-50 km continental)", and its `about`
+  ("5 to 10 km under the oceans ... 30 to 50 km under the continents");
+  the magnetopause's served `note`, "it can fall inside geostationary
+  orbit (6.6 R_E)". None has a row in `constants_new.py`.
+- **Method:** source it or remove it, one number at a time (Fetched vs
+  Recalled; provenance-discipline 2.30, What a Visitor Reads); wording
+  changes go to Tony. Discovery here is not remediation: the instances
+  are the ones met, not a sweep.
+**Gap:** a sweep of the served words for typed numbers, then each
+sourced into a row or removed, when the Earth or Sun slice next opens
+these shells.
+**Ref:** L-452; L-411 (the same class in the Sun's hovers); gallery
+`data/objects_config.json`.
+
 #### [L-452] The website's notes beside a citation: read them again now that the citation prints above them (gallery, words)
-<!-- L:452 status:OPEN upd:2026-10-16 section:A flag: rice: -->
+<!-- L:452 status:OPEN upd:2026-10-17 section:A flag: rice: -->
 - **Ruled 2026-10-16 at Earth's design talk, round 1** (a rule, not 35
   rulings). Tony: "Wording that is relevant to the citation should be
   moved to the store.  Notes should be dropped unless they are drawing
@@ -1259,15 +1304,35 @@ as an archive of the prioritization thinking -- no cleanup on close.
   ends "(Tony, 2026-09-28)", a project attribution in words a visitor
   reads (the hover rule, interactive-exhibit: no project vocabulary).
   One instance in the config.
-**Gap:** the build, `documentation/HANDOFF_earth_round1_build_brief_20261016.md`:
-the moved wording in the orrery's rows (patch 2, with L-450), the notes
-removed and the Crust's attribution taken out through the store writer
-(patch 3); the list to Tony before either ships.
+- **Built 2026-10-17** after Tony approved the words
+  (`documentation/WORDS_earth_round1_20261017.md` and its revision 2):
+  the citation wording in the orrery's rows (patch 2,
+  `patch_L330_2_belts_words_citations_20261017.py`); the 35 notes kept,
+  reworded or removed through the store writer, which now edits a served
+  number's `source_note` and can remove one (patch 3,
+  `patch_L330_3_website_belts_words_20261017.py`). The Crust's served
+  `note` lost "(Tony, 2026-09-28)"; its `source_note` keeps the IAU
+  citation visible, as Tony asked ("our definition of Re does not change
+  and remains the standard IAU definition"). The bow shock's note:
+  "For a quiet solar wind, at the same pressure as the magnetopause."
+- **Ruled in the build, 2026-10-17:** the low-orbit inner edge is ESA's
+  180 km, a measured row (`EARTH_LEO_LOWER_ALTITUDE_KM`; Tony: "A, as
+  recommended. settled."), so its note could no longer say "chosen for
+  the picture". Two wordings Claude chose, for Tony's look: the low-orbit
+  note and the Crust's `source_note`
+  (`documentation/HANDOFF_earth_round1_build_20261017.md`, section 4).
+- **The principles behind the dispositions** went into
+  provenance-discipline 2.30, What a Visitor Reads (Tony: "my decision
+  based on principles should be implemented in the skill so that it is
+  uniformly applied").
+**Gap:** Tony's run of patches 2 and 3, a green run, and his look at the
+i panels and the two wordings. Typed numbers met in served words are
+L-455.
 **Ref:** L-421; L-450; gallery `data/objects_config.json`,
 `tools/store_writer.py`.
 
 #### [L-451] The sentences the Typed facts check holds open (gallery, words)
-<!-- L:451 status:OPEN upd:2026-10-16 section:A flag: rice: -->
+<!-- L:451 status:OPEN upd:2026-10-17 section:A flag: rice: -->
 - **Ruled 2026-10-16 at Earth's design talk, round 1.** Tony,
   "Confirmed as recommended": SERVE 1 to 5, each with its rows'
   source; ALLOW 6 (about the picture); REWORD 7 to "Where that is so,
@@ -1304,14 +1369,24 @@ removed and the Crust's attribution taken out through the store writer
      text says so."
   8. Earth's: "The radiation belts sit in Earth's equatorial plane, the
      daily average of the tilted magnetic equator they follow."
-**Gap:** the build moves each as ruled (patch 3 of
-`documentation/HANDOFF_earth_round1_build_brief_20261016.md`); closes
-when the check's OPEN list is empty on Tony's run.
+- **Built 2026-10-17, patch 3**
+  (`patch_L330_3_website_belts_words_20261017.py`): 1 as
+  `orientation.words.tilt_of_date`, 2 to 5 as their numbers'
+  `hover_line`, words unchanged; 6 and the reworded 7 on the check's
+  DESCRIPTIONS; 8 cut. OPEN is empty and the run says so; green in a
+  sandbox stand-in for the Daily Run.
+- **Found in the same build:** the Earth scene, re-recorded, put the Sun
+  Direction's orbital-period line (L-431 build 3) in front of the check
+  for the first time. Its body and centre are the orrery's served
+  labels; it is on ALLOWED by shape, as the page's account of its data,
+  and the check now consults ALLOWED for a number's own line.
+**Gap:** Tony's run of patch 3 and the Daily Run: closes when OPEN is
+empty on his run.
 **Ref:** L-421; gallery `documentation/smoke_typed_facts.js`,
 `gallery/feature_renderers.js`, `interactive.html`.
 
 #### [L-450] The orrery's citation texts carry store notes and miss locators (orrery, citations)
-<!-- L:450 status:OPEN upd:2026-10-16 section:A flag: rice: -->
+<!-- L:450 status:OPEN upd:2026-10-17 section:A flag: rice: -->
 - **Found 2026-10-16** building L-421 part 3. Since option A the
   website prints each row's `# Source:` text word for word, so words
   written as notes for the store reach a visitor's i panel:
@@ -1336,15 +1411,19 @@ when the check's OPEN list is empty on Tony's run.
   these same rows, so both are done in one pass through
   `constants_new.py`, patch 2 of
   `documentation/HANDOFF_earth_round1_build_brief_20261016.md`).
-**Gap:** each row's `# Source:` names the work and its locator, with
-store notes moved to the row's other comment lines; the IADC edition
-checked against the document read. One class; the rows are named
-above. In Earth's round-1 build, with L-452; the list to Tony first.
+- **Built 2026-10-17, patch 2**
+  (`patch_L330_2_belts_words_citations_20261017.py`), in Tony's approved
+  words: the store notes moved out of `# Source:` into the rows' other
+  lines; the arXiv number and the Nesvorny URL into their rows; the IADC
+  edition is Revision 2 (March 2020), the document read; the 660 km row
+  names Ishii et al. (2018), Sci. Rep. 8:6358, with its section.
+**Gap:** Tony's run of patch 2 with a green orrery run, and the export
+carrying the new citations to the website at the next Daily Run.
 **Ref:** L-421; L-452; `constants_new.py`; `export_constants.py`;
 provenance-discipline.
 
 #### [L-449] A cache build dropped the 82 build-run records it should have carried (gallery, cache builder)
-<!-- L:449 status:OPEN upd:2026-10-16 section:A flag: rice: -->
+<!-- L:449 status:OPEN upd:2026-10-17 section:A flag: rice: -->
 - **It happened again, 2026-10-16,** at L-421's gallery Daily Run:
   Tony, "there are 130 items, and again a long list of red deletes ...
   this is the second time in a row." Build 20261016T224259Z left one
@@ -1392,13 +1471,20 @@ provenance-discipline.
   one, since every Daily Run's push commits that night's record. Then,
   to keeping every record until the cause is found and then a
   deliberate limit, its number set then, each removal named: "Yes".
-**Gap:** the build, patch 1 of
-`documentation/HANDOFF_earth_round1_build_brief_20261016.md`: the
-builder prints what its copy step carried; the Daily Run compares
-`raw/runs/` with `data/solar-system.prev/` after the builder and stops,
-naming each lost record, before the maintenance run. (decide) at the
-build's start: stop and name, or put back from `.prev` and say so.
-Then the cause, from those prints on the next loss; then the limit.
+- **Ruled at the build's start, 2026-10-17:** stop and name (Tony:
+  "confirmed as recommended").
+- **Built 2026-10-17, patch 1** (gallery
+  `patch_L449_1_run_records_20261017.py`): the builder prints two
+  `[RUNS]` lines, the records before and after its copy, with both
+  paths; the Daily Run compares the new cache's records with the
+  replaced cache's after the builder and, on a loss, stops before the
+  maintenance run, naming each lost record and both copies' paths. Four
+  checks in the builder suite (238 then); not a new step, so no
+  dashboard button. gallery-cache-builder 1.11 records it.
+**Gap:** Tony's run of patch 1. The check part is then done; the item
+stays open for the CAUSE, read from the `[RUNS]` lines at the next
+loss; then the deliberate limit, its number set then, each removal
+named.
 **Ref:** gallery `tools/gallery_cache_builder.py` (`run_build`,
 `_write_run_manifest`), `data/cache_swap_log.jsonl`,
 `data/solar-system/raw/runs/`; L-446; L-216;
@@ -1446,8 +1532,8 @@ gallery `data/objects_config.json`.
 
 
 
-#### [L-410] Fuzzy boundaries for edges known only as ranges, the outer corona first (orrery + gallery, the Sun's slice)
-<!-- L:410 status:OPEN upd:2026-10-11 section:A flag: rice: -->
+#### [L-410] Fades where nature thins out: Earth's hydrogen designed, the outer corona next (orrery + gallery, the Sun and Earth)
+<!-- L:410 status:OPEN upd:2026-10-17 section:A flag: rice: -->
 - **Tony's idea, 2026-10-04**, deciding where the Roche limit is drawn:
   "What if we draw fuzzy boundaries instead of shells". It is Show the
   Envelope of the Unknowable as a drawing.
@@ -1481,9 +1567,46 @@ gallery `data/objects_config.json`.
   talk takes up the rule, not only the corona and the exosphere: which
   drawn edges are known only as ranges, and which of them a fade would
   teach better than a shell.
-**Gap:** a design talk before any build. The Sun slice's ninth item
-(L-412).
-**Ref:** L-131, L-241, L-371; `solar_visualization_shells.py`
+- **Ruled 2026-10-17, at the end of Earth's round-1 build** (design,
+  zero code). A drawn boundary is fuzzy for one of three reasons, each
+  drawn its own way. Tony: "Primarily 1. Because I don't think we
+  should illustrate uncertainty (3) with a fuzzy boundary rather with a
+  drawn choice and an explanation, and motion (2) with a second drawn
+  device like the movement cone we use for the dipole." So:
+  1. nature thins out with no edge -- a FADE (this item);
+  2. a real edge that moves -- sharp, with a drawn device for the
+     motion (L-454);
+  3. an edge known only as a range -- a drawn choice and words, as
+     today; never a fade.
+  It REPLACES this item's range idea above. Tony: "Yes it replaces the
+  range idea. Those examples still have fades." The inner corona and
+  the Oort cloud fade because nature thins there; an edge's range is
+  said in words. Edges sharp by definition stay sharp.
+- **The kind-1 list** (Tony: "This sounds right for type 1"): the inner
+  corona, the outer corona, the geocorona, the upper atmosphere into
+  the exosphere, the Oort cloud's outer reaches (partly done: the outer
+  cloud starts thin, L-421). A fade follows a measured fall-off where
+  one exists; otherwise its shape is a drawing choice and the hover
+  says so.
+- **Earth's fade, designed 2026-10-17** (Tony: "I agree. As
+  recommended"): the hydrogen as dots from 3 Earth radii, where
+  measurements start (the 600 km shell stays), to the 100 Earth radii
+  detection floor (`EARTH_GEOCORONA_RADII`; the sharp shell there goes);
+  thinning by Zoennchen et al. (2022)'s day-side profile to 15 Earth
+  radii and with the cube of distance beyond, which Baliukin et al.
+  (2019)'s densities support; drawn round, the hover saying the
+  hydrogen is measured somewhat denser along the Sun-Earth line on both
+  sides (Zoennchen et al. 2024), which the drawing does not show;
+  a stored drawing (L-434). Turning it like Mercury's sodium tail was
+  searched and declined: the measured day-night difference is tens of
+  percent, not one shape, and measured only to about 6 to 8 Earth
+  radii. Record: `documentation/DESIGN_fades_rulings_20261017.md`.
+**Gap:** Earth's fade built (the sources read in full first, each
+number a row); then the Sun's fades, the outer corona first with the
+dust cloud (L-131), in the Sun's slice (L-412). The range idea's
+pieces above (the Roche limit's band, L-241's torus wording) are
+re-read against the rule when the Sun's turn comes.
+**Ref:** L-131, L-241, L-371, L-454; `solar_visualization_shells.py`
 (`create_sun_streamer_band`, the fade to follow); gallery
 `gallery/feature_renderers.js`.
 
@@ -1539,6 +1662,13 @@ gallery `data/objects_config.json`; L-228, L-371.
   plan:** the scattered disk; the fuzzy boundaries before the rooms
   close; the comets' order and colours; the Hills cloud following its
   paper; where the Horizons check lives.
+- **2026-10-17, owed to interactive-exhibit's next version** (built in
+  gallery patch 3, method the skill does not yet say): a shell's
+  `panel_words`, sentences moved from its hover to its i panel for the
+  17-line limit; a number's own sentence served as its `hover_line`; a
+  belt's `details`, for the i panel; a served number's `source_note`
+  edited, and removed, by the store writer. Also owed: the fades rule
+  (L-410) as method for any room.
 **Gap:** each method line rides its skill's next version (One Session,
 One Bump), and leaves the page's Settled list once it is in the skill.
 **Ref:** `documentation/WHERE_WE_ARE.md` (Settled); L-401; L-395; L-421;
@@ -1848,7 +1978,7 @@ for each case and updates the skill's bullet to match.
 L-252; L-418.
 
 #### [L-413] Earth's list: the old Earth items, in the order Tony confirmed (Earth room)
-<!-- L:413 status:OPEN upd:2026-10-16 section:A flag: rice: -->
+<!-- L:413 status:OPEN upd:2026-10-17 section:A flag: rice: -->
 - **Confirmed by Tony, 2026-10-04,** after a sweep of the open items
   that touch the Earth room, read against the code at orrery cbde99dc
   and gallery e7ef96eb, and checked against the Claude Fable 5.1 ledger
@@ -1888,7 +2018,9 @@ L-252; L-418.
   1. L-330, the belts' shape (unblocked: L-231 is done for Earth).
   2. L-356 and L-375 together, IGRF-14 and the dipole's offset, since
      both change the same field rows; L-375 also carries whether the
-     website draws the dipole cone (re-homed from L-234).
+     website draws the dipole cone (re-homed from L-234). L-454, the
+     drawn device for the magnetopause's and bow shock's motion, joins
+     it (added 2026-10-17).
   3. L-321, the orrery's Earth hover strings into the cross-check.
   4. L-314, live solar wind, now carrying the aberration decision
      (re-homed from L-305).
@@ -1944,10 +2076,14 @@ L-252; L-418.
   talk 4's aberration taken early (L-314: unturned, said in the hover).
   `documentation/DESIGN_earth_round1_rulings_20261016.md`; the build:
   `documentation/HANDOFF_earth_round1_build_brief_20261016.md`.
-**Gap:** the round-1 build; then talks 2 to 6 in the order above, next
-L-356 with L-375 (which also carries the South Atlantic Anomaly: the
-curved belts, drawn centred, cannot show it). Talk 4 (L-314) keeps the
-solar-wind fetch; its aberration is ruled.
+- **2026-10-17, the round-1 build:** three patches (gallery patch 1,
+  orrery patch 2, gallery patch 3) built and tested, waiting on Tony's
+  run and look; and Earth's fade designed (L-410).
+  `documentation/HANDOFF_earth_round1_build_20261017.md`.
+**Gap:** Tony's runs and looks close L-330, L-451, L-452 and L-450;
+then Earth's fade built (L-410) or talk 2 (L-356 with L-375, and
+L-454), Tony's choice which first; then talks 3 to 6. Talk 4 (L-314)
+keeps the solar-wind fetch; its aberration is built.
 **Ref:** L-412 (the Sun's list, which resumes after this); the handles
 above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
 
@@ -4140,7 +4276,7 @@ one of the four).
 (STILL OPEN, item 1c).
 
 #### [L-330] Belt shape: the belts curved along the field lines, a density field (Earth exhibit)
-<!-- L:330 status:OPEN upd:2026-10-16 section:A flag: rice:3/3/60/3 -->
+<!-- L:330 status:OPEN upd:2026-10-17 section:A flag: rice:3/3/60/3 -->
 - **Separate from L-231 on purpose.** L-231 is which PLANE the belts sit
   in and is ruled. This is what SHAPE they are. They were separated so that
   the plane fix, which is nearly free and corrects something visible, is
@@ -4206,11 +4342,29 @@ because the physics is settled and the readability is not.
   flat, outer curved). Declined: the flat bands, B (an unmeasured tube
   height), and rings along the field lines. Record:
   `documentation/DESIGN_earth_round1_rulings_20261016.md`.
-**Gap:** the build,
-`documentation/HANDOFF_earth_round1_build_brief_20261016.md`: the
-render and Tony's look, then both instruments (orrery patch 2, gallery
-patch 3), the dipole relation's source read before it is drawn; closes
-on Tony's look in both.
+- **Tony's look at the throwaway render, 2026-10-17:** "Yes, random.
+  And it shows the density better too." On the inner belt: "it reads
+  okay". So the belts are random dots, both curved; option C (the inner
+  belt flat) is not used, and is struck here for that reason.
+- **Built 2026-10-17.** Orrery patch 2: `van_allen_belt_sampler.py`
+  places the dots along r = L cos^2(latitude) -- Koskinen and Kilpua
+  (2022), Physics of Earth's Radiation Belts, open, sec. 1.2.1, read
+  before drawing -- between each belt's edge rows, thickest at its
+  peak, seed 330, stored as `data/drawings/van_allen_belts.json`; the
+  approved hovers. Gallery patch 3: the website draws the stored dots
+  as given, scaled by the served Earth radius and turned to the pole,
+  shaded by weight; the field lines' citation in the i panel.
+- **The 17-line limit, ruled 2026-10-17:** Tony, "Move some lines to i
+  panel". The belts' plane sentence (the spin axis and the 2020 tilt)
+  moved to the i panel; the magnetopause's paper and solar wind, and
+  the bow shock's paper, pressure and where its drawing stops, the
+  same. Every hover is within 17 lines; the limit is not raised.
+- **Note:** the website keeps `evenBeltRings()` for a body with served
+  belt edges and no stored drawing -- none today, Jupiter having no edge
+  rows -- while the orrery removed its copy in patch 2. Re-read when
+  Jupiter's belts get rows (L-231's Jupiter half).
+**Gap:** Tony's look in both instruments, after his runs: the orrery
+plot (Mode 5) and the Earth room on the phone. Closes then.
 **Ref:** L-231 (the plane, ruled) is the prerequisite. L-181 for the belt
 and torus numbers being function-local literals. Raised 2026-09-15 from
 Fable's review of the plane question.
@@ -9399,6 +9553,12 @@ built.
   Neptune's turn is its field's 47 degree tilt and offset. Record:
   `documentation/DESIGN_earth_round1_rulings_20261016.md`; the
   sentence rides `documentation/HANDOFF_earth_round1_build_brief_20261016.md`.
+- **Built 2026-10-17:** the approved sentence in both instruments'
+  magnetopause and bow shock hovers (orrery patch 2, gallery patch 3):
+  "It is drawn along the line from the Sun to Earth; the real
+  boundary's nose is turned a few degrees toward the direction Earth
+  moves in its orbit, by an amount that depends on the solar wind's
+  speed." (and "the real shock's nose" for the bow shock).
 **Gap:** the whole item, now that L-305 has closed (2026-10-04); the
 aberration is applied when the fetch is designed (ruled 2026-10-16).
 On Earth's list (L-413), design talks.

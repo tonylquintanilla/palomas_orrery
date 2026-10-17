@@ -241,6 +241,9 @@ fetched, with plotting's own call, so the check compares it the same day.
 It is now the first row that needs the internet, and only on a day
 something is missing. CHECKERS gains Period fetch suite,
 test_period_fetch.py.)
+Module updated: October 17, 2026 with Anthropic's Claude Opus 5.5 (L-330:
+Drawings export watches data/drawings/van_allen_belts.json too, the
+radiation belts' dots, so the summary names it when it is written.)
 """
 
 import hashlib
@@ -299,7 +302,8 @@ GENERATORS = [
     # cloud's dots and the website draws the same dots, pulled from
     # data/drawings/ as it pulls the two exports above.
     ('Drawings export', ['export_drawings.py'],
-     ['data/drawings/hills_cloud.json']),
+     ['data/drawings/hills_cloud.json',
+      'data/drawings/van_allen_belts.json']),
     ('Module atlas',    ['module_atlas.py'],
      ['MODULE_ATLAS.md', 'MODULE_INDEX.md']),
     ('Data inventory',  ['data_inventory.py'],
