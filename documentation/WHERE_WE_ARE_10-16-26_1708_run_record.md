@@ -132,7 +132,7 @@ Not urgent, in your order:
 
 **Tony**: Run record:
 
-**Session: OPEN: 10-16-26 1118: Opus: L-421 build session handoff**
+**Session: DONE: 10-16-26 2053: Opus: L-421 build session handoff**
 
 Patch 1 is waiting for you in your orrery folder, and the gallery patch is built and tested here. It just needs your new orrery SHA before I can save it to your gallery folder.
 
@@ -1015,9 +1015,9 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-  2. Move this script into documentation/; commit; push. -- 
+  2. Move this script into documentation/; commit; push. -- 25a99eeb3cb6180106c37ec84f020f1c36b820ea
   3. Reinstall interactive-exhibit 1.16 (Settings > Skills), and copy
-     PROJECT_INSTRUCTIONS.md into the Project instructions.
+     PROJECT_INSTRUCTIONS.md into the Project instructions. -- done. can you confirm that your loaded skills are current? 
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
 What the patch does:
@@ -1029,7 +1029,7 @@ L-451: the eight sentences the new check is holding for your ruling.
 L-452: website notes that now repeat the citation printed just above them. The Crust’s note also ends “(Tony, 2026-09-28)”, which visitors can see.
 L-453: tonight’s blue type and “Radius:” fixes, recorded as done.
 Where We Are: updated, and still under its length cap. The run-record section at the bottom is only cleared if it matches the copy you saved. If you’ve added anything since, it’s left alone and the patch says so.
-Skill: interactive-exhibit 1.16 now records your decision that the orrery owns each citation, plus the new check, together with the protocol entry v3.101.
+Skill: interactive-exhibit 1.16 now records your decision that the orrery owns each citation, plus the new check, together with the protocol entry v3.101. -- please confirm the new check is in the dashboard. 
 
 Where this leaves us:
 
