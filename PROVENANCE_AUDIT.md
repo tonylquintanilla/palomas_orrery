@@ -2,9 +2,9 @@
 # Paloma's Orrery -- Provenance Audit
 
 Generated: October 17, 2026
-Files scanned: 163
-Total findings: 1127
-Constants: 194 | Dicts: 67 | Display strings: 866
+Files scanned: 162
+Total findings: 1130
+Constants: 194 | Dicts: 69 | Display strings: 867
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -20,12 +20,12 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T1 by domain | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|--------------|---:|---:|---:|--------:|
+| 20261017T222715Z | `fc2bb6f` | 162 | 1130 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 689 | 154 | 7 | 0 |
 | 20261017T204843Z | `da78b80` | 163 | 1127 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 686 | 154 | 7 | 0 |
 | 20261017T131817Z | `e63a207` | 160 | 1124 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 684 | 154 | 6 | 0 |
 | 20261017T014624Z | `6b97515` | 161 | 1124 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 684 | 154 | 6 | 0 |
 | 20261016T221523Z | `0d7211e` | 160 | 1124 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 684 | 154 | 6 | 0 |
 | 20261016T144821Z | `3cedfb7` | 160 | 1124 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 684 | 154 | 6 | 0 |
-| 20261016T141205Z | `6ad6975` | 162 | 1129 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 688 | 154 | 7 | 0 |
 
 Change since the previous run: total +3, Tier-1 +0.
 
@@ -61,7 +61,7 @@ No file's Tier-1 count rose.
 | Tier | Score | Action | Count |
 |------|-------|--------|------:|
 | 1 | 16-20 | FIX NOW | 280 |
-| 2 | 10-15 | REVIEW | 686 |
+| 2 | 10-15 | REVIEW | 689 |
 | 3 | 5-9 | LOW PRIORITY | 154 |
 | 4 | 1-4 | LOWEST PRIORITY | 7 |
 
@@ -139,7 +139,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `neptune_visualization_shells.py` | orrery | 0 | 28 | 0 | 0 | 28 |
 | `comet_visualization_shells.py` | orrery | 4 | 22 | 0 | 0 | 26 |
 | `uranus_visualization_shells.py` | orrery | 1 | 24 | 0 | 0 | 25 |
-| `earth_visualization_shells.py` | earth_science | 0 | 20 | 0 | 0 | 20 |
+| `earth_visualization_shells.py` | earth_science | 0 | 21 | 0 | 0 | 21 |
 | `jupiter_visualization_shells.py` | orrery | 0 | 19 | 0 | 0 | 19 |
 | `planet_visualization_utilities.py` | orrery | 4 | 12 | 1 | 0 | 17 |
 | `provenance_scanner.py` | dev_tools | 0 | 0 | 16 | 0 | 16 |
@@ -172,6 +172,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `coordinate_system_guide.py` | orrery | 2 | 2 | 0 | 0 | 4 |
 | `sgr_a_visualization_precession.py` | orrery | 4 | 0 | 0 | 0 | 4 |
 | `orbital_period.py` | orrery | 0 | 3 | 0 | 1 | 4 |
+| `patch_L330_4_leo_contrast_close_20261017.py` | unclassified | 0 | 3 | 0 | 1 | 4 |
 | `orrery_maintenance_run.py` | dev_tools | 0 | 0 | 4 | 0 | 4 |
 | `palomas_orrery_dashboard.py` | orrery | 0 | 0 | 4 | 0 | 4 |
 | `provenance_history.py` | dev_tools | 0 | 0 | 4 | 0 | 4 |
@@ -192,7 +193,6 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `plot_data_report_widget.py` | utilities | 2 | 0 | 0 | 0 | 2 |
 | `sgr_a_visualization_animation.py` | orrery | 1 | 0 | 1 | 0 | 2 |
 | `apsidal_markers.py` | orrery | 0 | 2 | 0 | 0 | 2 |
-| `patch_earth_round1_build_close_20261017.py` | unclassified | 0 | 1 | 0 | 1 | 2 |
 | `close_approach_data.py` | orrery | 0 | 1 | 1 | 0 | 2 |
 | `export_objects.py` | dev_tools | 0 | 0 | 2 | 0 | 2 |
 | `orbit_data_manager.py` | orrery | 0 | 0 | 2 | 0 | 2 |
@@ -233,16 +233,16 @@ Same data again, grouped by subject-matter domain rather than by individual file
 | Domain | Files | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |
 |--------|------:|-------:|-------:|-------:|-------:|------:|
 | Orrery (solar system + orbital mechanics) | 42 | 116 | 569 | 53 | 3 | 741 |
-| Earth System | 13 | 149 | 75 | 2 | 0 | 226 |
+| Earth System | 13 | 149 | 76 | 2 | 0 | 227 |
 | Dev Tools (audit, diagnostics, one-shot scripts) | 28 | 0 | 0 | 93 | 0 | 93 |
 | Stars (stellar neighborhood) | 12 | 13 | 41 | 6 | 3 | 63 |
 | Utilities (cross-domain shared helpers) | 1 | 2 | 0 | 0 | 0 | 2 |
 | Gallery | 0 | 0 | 0 | 0 | 0 | 0 |
-| Unclassified (no Domain: tag, or one outside the six) | 1 | 0 | 1 | 0 | 1 | 2 |
+| Unclassified (no Domain: tag, or one outside the six) | 1 | 0 | 3 | 0 | 1 | 4 |
 
 **Domain coverage gap (1):** these files have findings and no `Domain:` tag the report knows, so they are counted as unclassified rather than guessed into a domain. Add the tag to each module's own docstring (one of the six above); nothing in provenance_scanner.py needs editing:
 
-- `patch_earth_round1_build_close_20261017.py` -- no Domain: tag in its docstring
+- `patch_L330_4_leo_contrast_close_20261017.py` -- no Domain: tag in its docstring
 
 ---
 
@@ -1085,13 +1085,14 @@ is planned for a future session.
 | 908 | string | display string @ line 908 | (4 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 977 | string | display string @ line 977 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 1032 | string | display string @ line 1032 | (3 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1440 | string | display string @ line 1440 | (11 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1460 | string | display string @ line 1460 | (4 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1523 | string | display string @ line 1523 | (5 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1567 | string | display string @ line 1567 | (6 claims) | 3 | 4 | **12** | Cited, not cross-checked; date-sensitive | Public-facing display string (hover/INFO) |
-| 1581 | string | display string @ line 1581 | (7 claims) | 3 | 4 | **12** | Cited, not cross-checked; date-sensitive | Public-facing display string (hover/INFO) |
-| 1643 | string | display string @ line 1643 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1680 | string | display string @ line 1680 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1443 | string | display string @ line 1443 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1445 | string | display string @ line 1445 | (7 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1463 | string | display string @ line 1463 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1527 | string | display string @ line 1527 | (5 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1576 | string | display string @ line 1576 | (6 claims) | 3 | 4 | **12** | Cited, not cross-checked; date-sensitive | Public-facing display string (hover/INFO) |
+| 1590 | string | display string @ line 1590 | (7 claims) | 3 | 4 | **12** | Cited, not cross-checked; date-sensitive | Public-facing display string (hover/INFO) |
+| 1652 | string | display string @ line 1652 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1689 | string | display string @ line 1689 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 
 ### energy_imbalance.py
 
@@ -1431,11 +1432,13 @@ is planned for a future session.
 | 2341 | string | display string @ line 2341 | (5 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 2416 | string | display string @ line 2416 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 
-### patch_earth_round1_build_close_20261017.py
+### patch_L330_4_leo_contrast_close_20261017.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 62 | dict | NEW_FILES[...] | (2 entries) | 3 | 5 | **15** | Cited, not cross-checked; date-sensitive | UNDETERMINED -- could not be classified |
+| 61 | dict | FINGERPRINTS[...] | (2 entries) | 3 | 5 | **15** | Cited, not independently cross-checked | UNDETERMINED -- could not be classified |
+| 62 | dict | RESULTS[...] | (2 entries) | 3 | 5 | **15** | Cited, not independently cross-checked | UNDETERMINED -- could not be classified |
+| 64 | dict | NEW_FILES[...] | (1 entry) | 3 | 5 | **15** | Cited, not independently cross-checked | UNDETERMINED -- could not be classified |
 
 ### planet9_visualization_shells.py
 
@@ -1899,9 +1902,9 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 106 | dict | ROLE_MAP[...] | (155 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 402 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 425 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 106 | dict | ROLE_MAP[...] | (154 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 401 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 424 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### moon_visualization_shells.py
 
@@ -2167,11 +2170,11 @@ is planned for a future session.
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
 | 139 | dict | CENTRE_LABELS[...] | (23 entries) | 4 | 1 | **4** | No source citation (recalled) | Cosmetic (name vocabulary) |
 
-### patch_earth_round1_build_close_20261017.py
+### patch_L330_4_leo_contrast_close_20261017.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 58 | dict | MARKERS[...] | (1 entry) | 3 | 1 | **3** | Cited, not cross-checked; date-sensitive | Cosmetic (name vocabulary) |
+| 60 | dict | MARKERS[...] | (1 entry) | 3 | 1 | **3** | Cited, not independently cross-checked | Cosmetic (name vocabulary) |
 
 ### star_sphere_builder.py
 

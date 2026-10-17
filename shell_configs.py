@@ -2378,7 +2378,7 @@ CUSTOM_SHELLS = {
             'builder': 'earth_visualization_shells.create_earth_leo_shell',
             'tooltip': (
                 "SET MANUAL SCALE TO 0.003 AU TO VISUALIZE.\n\n"
-                f"Low Earth Orbit (LEO) is the region from roughly {row_text('EARTH_LEO_LOWER_ALTITUDE_KM', grouping=True)} km to {exact_text('EARTH_LEO_UPPER_ALTITUDE_KM', grouping=True)} km altitude\n"
+                f"Low Earth Orbit (LEO) is the region from {row_text('EARTH_LEO_LOWER_ALTITUDE_KM', grouping=True)} km to {exact_text('EARTH_LEO_UPPER_ALTITUDE_KM', grouping=True)} km altitude\n"
                 f"({EARTH_LEO_INNER_RADII:.2f} to {EARTH_LEO_OUTER_RADII:.2f} Earth radii), where satellites orbit at all inclinations.\n\n"
                 "Unlike geostationary orbit, LEO satellites travel at all angles relative to the equator --\n"
                 "forming a true shell around Earth rather than a ring. A LEO satellite completes\n"

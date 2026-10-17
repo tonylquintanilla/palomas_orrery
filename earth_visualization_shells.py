@@ -1436,10 +1436,13 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
 # Source: UCS Satellite Database, ESA Space Debris Office, NASA
 # Source+: Satellite/debris counts as of early 2026
 # Verified: April 2026 via Gemini fact-check
+# L-452 (2026-10-17): the altitudes read from the same rows as the hover
+# below, so the checkbox tooltip cannot keep an edge the store has moved
+# (it said "roughly 200 km" after the lower edge became ESA's row).
 earth_leo_shell_info = (
             "SET MANUAL SCALE TO 0.003 AU TO VISUALIZE.\n\n"
-            "Low Earth Orbit (LEO) is the region from roughly 200 km to 2,000 km altitude\n"
-            "(1.03 to 1.31 Earth radii), where satellites orbit at all inclinations.\n\n"
+            f"Low Earth Orbit (LEO) is the region from {row_text('EARTH_LEO_LOWER_ALTITUDE_KM')} km to {exact_text('EARTH_LEO_UPPER_ALTITUDE_KM', grouping=True)} km altitude\n"
+            f"({EARTH_LEO_INNER_RADII:.2f} to {EARTH_LEO_OUTER_RADII:.2f} Earth radii), where satellites orbit at all inclinations.\n\n"
             "Unlike geostationary orbit, LEO satellites travel at all angles relative to the equator --\n"
             "forming a true shell around Earth rather than a ring. A LEO satellite completes\n"
             "one orbit in 90-120 minutes and crosses the sky in about 6 minutes.\n\n"
@@ -1460,7 +1463,8 @@ def create_earth_leo_shell(center_position=(0, 0, 0)):
     """
     Creates a representation of Earth's Low Earth Orbit (LEO) shell.
 
-    LEO spans ~200 km to ~2,000 km altitude (1.03 to 1.31 Earth radii).
+    LEO spans the rows EARTH_LEO_LOWER_ALTITUDE_KM (ESA, the lowest height
+    satellites fly) to EARTH_LEO_UPPER_ALTITUDE_KM (IADC) above the surface.
     Unlike GEO, LEO objects orbit at all inclinations -- forming a true
     spherical shell. Points are distributed across the full sphere with
     slight density enhancement at the Starlink altitude (~550 km).
@@ -1542,10 +1546,15 @@ def create_earth_leo_shell(center_position=(0, 0, 0)):
         go.Scatter3d(
             x=x, y=y, z=z,
             mode='markers',
+            # L-330 round 1 (Tony's look, 2026-10-17, option A): full
+            # opacity and size 2.5, so the dots show against the inner
+            # belt's, which reach size 3 and full opacity at its peak and
+            # fill the same heights. Was size 1.5 at 35%. A rendering
+            # setting; the warm white keeps its meaning.
             marker=dict(
-                size=1.5,
+                size=2.5,
                 color='rgb(255, 248, 220)',   # Warm white -- visible satellites
-                opacity=0.35,
+                opacity=1.0,
                 symbol='circle',
             ),
             name='Earth: Low Earth Orbit (LEO)',

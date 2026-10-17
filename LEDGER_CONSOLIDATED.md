@@ -481,6 +481,12 @@ Module updated: October 17, 2026 with Anthropic's Claude Opus 5.5
 built in three patches, each waiting on Tony's run and look; the fades
 ruled and Earth's designed on L-410, retitled; L-454 and L-455 new;
 L-413 and L-435 updated), built on da78b80 and gallery f49b3e6.
+Module updated: October 17, 2026 with Anthropic's Claude Opus 5.5
+(Earth's round 1 closed on Tony's runs and looks: L-330, L-451, L-452
+and L-450 closed; L-449's check seen working; L-410's fade rows
+approved; the low-orbit dots made visible against the inner belt and
+the low-orbit tooltip's 200 km corrected; L-231, L-413 and L-455
+updated), built on fc2bb6f9 and gallery 44a6225c.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -698,7 +704,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*241 live items; 225 need attention (`!`); 167 RICE-scored; 207 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*237 live items; 221 need attention (`!`); 166 RICE-scored; 211 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -763,13 +769,12 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-218 | 22 Cross-checked lines attach to no unit | OPEN | 2.1 | 2026-08-19 |
 | ! | L-275 | The dashboard cannot launch a Node tool, so three gallery smoke suites have no button | OPEN | 1.9 | 2026-09-01 |
 | ! | L-284 | Retire the social export; the gallery owns publishing | OPEN | 1.9 | 2026-09-03 |
-| ! | L-231 | Radiation belts are drawn in the ecliptic; the magnetic tilt is an unbuilt intent | OPEN | 1.8 | 2026-09-16 |
+| ! | L-231 | Radiation belts are drawn in the ecliptic; the magnetic tilt is an unbuilt intent | OPEN | 1.8 | 2026-10-17 |
 |  | L-309 | The exhibit chrome keeps its sun* names after Earth joined it (rename deferred, with its reason) | DEFERRED | 1.8 | 2026-09-09 |
 | ! | L-187 | info_dictionary numeric-overlap enumeration | OPEN | 1.8 | 2026-08-07 |
 | ! | L-257 | Three enforcement builds the 2.8 skill text defers | OPEN | 1.8 | 2026-08-27 |
 | ! | L-313 | Recenter the camera on a chosen feature in the exhibit rooms | OPEN | 1.8 | 2026-09-10 |
 | ! | L-321 | The orrery's hover text joins the provenance braid, Earth first | OPEN | 1.8 | 2026-09-12 |
-| ! | L-330 | Belt shape: the belts curved along the field lines, a density field (Earth exhibit) | OPEN | 1.8 | 2026-10-17 |
 | ! | L-337 | A centre marker for bodies without shells in the exhibit rooms | OPEN | 1.8 | 2026-09-19 |
 |  | L-194 | Text-only assertions -- claims the scanner cannot see | DEFERRED | 1.4 | 2026-08-15 |
 | ! | L-297 | Earth-Moon Lagrange points: serving path sized, deferred from the Earth exhibit | OPEN | 1.4 | 2026-09-07 |
@@ -849,9 +854,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-435 | Standing rulings that are method, held only on Tony's page (skills, records) | OPEN | -- | 2026-10-12 |
 | ! | L-443 | The rest of the orrery's objects come to the website as plotted positions (gallery + orrery, objects) | OPEN | -- | 2026-10-14 |
 | ! | L-449 | A cache build dropped the 82 build-run records it should have carried (gallery, cache builder) | OPEN | -- | 2026-10-17 |
-| ! | L-450 | The orrery's citation texts carry store notes and miss locators (orrery, citations) | OPEN | -- | 2026-10-17 |
-| ! | L-451 | The sentences the Typed facts check holds open (gallery, words) | OPEN | -- | 2026-10-17 |
-| ! | L-452 | The website's notes beside a citation: read them again now that the citation prints above them (gallery, words) | OPEN | -- | 2026-10-17 |
 | ! | L-454 | A drawn device for edges that move: the magnetopause, the bow shock and their kind (orrery + gallery, design) | OPEN | -- | 2026-10-17 |
 | ! | L-455 | Typed numbers in the website's served words, with no row behind them (gallery, words) | OPEN | -- | 2026-10-17 |
 
@@ -1127,6 +1129,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-169 | Gallery/Studio track -- repo structure reference | DONE | 1.9 | 2026-07-28 |
 |  | L-108 | Master plan v10 -> v11: Phase 1b fetch-fresh pivot reconciliation | DONE | 1.8 | 2026-07-12 |
 |  | L-178 | Earth shadow constants -- EARTH_RADIUS_KM duplicate + mean vs equatorial mixing | DONE | 1.8 | 2026-08-05 |
+|  | L-330 | Belt shape: the belts curved along the field lines, a density field (Earth exhibit) | DONE | 1.8 | 2026-10-17 |
 |  | L-179 | Solar gravitational influence -- 150,000 vs 126,000 AU mismatch | DONE | 1.6 | 2026-08-07 |
 |  | L-002 | Protocol -> Skills refactor (process/tooling) | DONE | 1.5 | 2026-07-04 |
 |  | L-048 (#21/51) | Animation track 21/51 -- core complete pending the v4 gate | DONE | 1.5 | 2026-06-23 |
@@ -1207,6 +1210,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-446 | The website's Daily Run pulls the orrery's exports before it builds the cache (gallery, daily run) | DONE | -- | 2026-10-16 |
 |  | L-447 | The website's front page says what the site is (gallery, lobby) | DONE | -- | 2026-10-15 |
 |  | L-448 | The maintenance run writes a test file into the tracked tree (orrery, maintenance) | DONE | -- | 2026-10-16 |
+|  | L-450 | The orrery's citation texts carry store notes and miss locators (orrery, citations) | DONE | -- | 2026-10-17 |
+|  | L-451 | The sentences the Typed facts check holds open (gallery, words) | DONE | -- | 2026-10-17 |
+|  | L-452 | The website's notes beside a citation: read them again now that the citation prints above them (gallery, words) | DONE | -- | 2026-10-17 |
 |  | L-453 | The page's grey type turned blue, and the inner shells' radius named (gallery, the rooms' look) | DONE | -- | 2026-10-16 |
 
 ### W.Done -- Web Publication track, closed items
@@ -1269,158 +1275,19 @@ as an archive of the prioritization thinking -- no cleanup on close.
   Recalled; provenance-discipline 2.30, What a Visitor Reads); wording
   changes go to Tony. Discovery here is not remediation: the instances
   are the ones met, not a sweep.
+- **Met 2026-10-17 in the orrery's own low-orbit hover and tooltip**
+  (`earth_visualization_shells.py`; not served to the website, so the
+  orrery's form of this class): the satellite counts (about 11,000
+  active, about 7,000 Starlink, 35,000 tracked debris), the heights of
+  the ISS, Starlink and Hubble, the 90 to 120 minute orbit, and the
+  typed `STARLINK_KM = 6921.0` that places the dots. Their `# Source:`
+  comment names databases, not a read ("Verified: April 2026 via Gemini
+  fact-check"). Same method when the low-orbit shell is next opened.
 **Gap:** a sweep of the served words for typed numbers, then each
 sourced into a row or removed, when the Earth or Sun slice next opens
-these shells.
+these shells; the orrery's low-orbit numbers above with them.
 **Ref:** L-452; L-411 (the same class in the Sun's hovers); gallery
 `data/objects_config.json`.
-
-#### [L-452] The website's notes beside a citation: read them again now that the citation prints above them (gallery, words)
-<!-- L:452 status:OPEN upd:2026-10-17 section:A flag: rice: -->
-- **Ruled 2026-10-16 at Earth's design talk, round 1** (a rule, not 35
-  rulings). Tony: "Wording that is relevant to the citation should be
-  moved to the store.  Notes should be dropped unless they are drawing
-  choices." So: wording that bears on a citation moves to its row in
-  `constants_new.py` (`# Source:` when it is part of the citation,
-  other comment lines otherwise); a `source_note` stays only when it
-  describes a drawing choice; every other note is dropped. Stricter
-  than the option put to him, which kept a note saying what the number
-  is for. Claude's reading, said in the talk and not contradicted: the
-  Crust's served `note` is a drawing choice and stays, without "(Tony,
-  2026-09-28)". The edited words go to Tony before they ship. Method,
-  so interactive-exhibit's next version carries it. Record:
-  `documentation/DESIGN_earth_round1_rulings_20261016.md`.
-- **Found 2026-10-16 at L-421's close,** from Tony's two i panels.
-  Under option A the website's own words about a citation moved to
-  `source_note` by a mechanical rule (what followed " -- " in the old
-  citation, less what the orrery's citation already says); 35 notes.
-  Printed after the orrery's citation, some now repeat it. The Alfven
-  Surface's "first Parker Solar Probe crossing, 28 April 2021" follows
-  a citation that says "first crossing 28 April 2021"; measured by
-  shared words of four letters or more, 14 of the 35 share two thirds
-  or more of their words with their citation. Some of those add a locator the citation lacks ("sec. 1",
-  "Table 1 ... p. 17,698") and earn their place.
-- **The same panel shows a second class:** the Crust's served `note`
-  ends "(Tony, 2026-09-28)", a project attribution in words a visitor
-  reads (the hover rule, interactive-exhibit: no project vocabulary).
-  One instance in the config.
-- **Built 2026-10-17** after Tony approved the words
-  (`documentation/WORDS_earth_round1_20261017.md` and its revision 2):
-  the citation wording in the orrery's rows (patch 2,
-  `patch_L330_2_belts_words_citations_20261017.py`); the 35 notes kept,
-  reworded or removed through the store writer, which now edits a served
-  number's `source_note` and can remove one (patch 3,
-  `patch_L330_3_website_belts_words_20261017.py`). The Crust's served
-  `note` lost "(Tony, 2026-09-28)"; its `source_note` keeps the IAU
-  citation visible, as Tony asked ("our definition of Re does not change
-  and remains the standard IAU definition"). The bow shock's note:
-  "For a quiet solar wind, at the same pressure as the magnetopause."
-- **Ruled in the build, 2026-10-17:** the low-orbit inner edge is ESA's
-  180 km, a measured row (`EARTH_LEO_LOWER_ALTITUDE_KM`; Tony: "A, as
-  recommended. settled."), so its note could no longer say "chosen for
-  the picture". Two wordings Claude chose, for Tony's look: the low-orbit
-  note and the Crust's `source_note`
-  (`documentation/HANDOFF_earth_round1_build_20261017.md`, section 4).
-- **The principles behind the dispositions** went into
-  provenance-discipline 2.30, What a Visitor Reads (Tony: "my decision
-  based on principles should be implemented in the skill so that it is
-  uniformly applied").
-**Gap:** Tony's run of patches 2 and 3, a green run, and his look at the
-i panels and the two wordings. Typed numbers met in served words are
-L-455.
-**Ref:** L-421; L-450; gallery `data/objects_config.json`,
-`tools/store_writer.py`.
-
-#### [L-451] The sentences the Typed facts check holds open (gallery, words)
-<!-- L:451 status:OPEN upd:2026-10-17 section:A flag: rice: -->
-- **Ruled 2026-10-16 at Earth's design talk, round 1.** Tony,
-  "Confirmed as recommended": SERVE 1 to 5, each with its rows'
-  source; ALLOW 6 (about the picture); REWORD 7 to "Where that is so,
-  the text beside it says so." and ALLOW it (how to use the page; "Nobody
-  has measured those" was a claim about the world with no source); CUT
-  8 (curved belts no longer "sit in" the plane, L-330; the belts'
-  served `hovers_plane` already says the plane and its daily average,
-  read at gallery 2090a8b). Record:
-  `documentation/DESIGN_earth_round1_rulings_20261016.md`.
-- **Recorded 2026-10-16** building L-421 part 2. The Typed facts check
-  (`documentation/smoke_typed_facts.js`) fails on a typed sentence not
-  on its allowed list, and prints these eight without failing, for
-  Tony's ruling. Each: serve it with its feature's words and source,
-  allow it as a sentence about the picture, or cut it.
-- A number's own sentence whose typed words say more than a label (the
-  number is served and cited; the words around it are typed):
-  1. "Tilt: # deg on ###, measured against the orbit of the Earth-Moon
-     barycenter, the gravitational center of the Earth-Moon system,
-     around the Sun that day (JPL Horizons)."
-  2. "Earth turns once every # hours measured against the stars."
-  3. "Spacecraft found the tail stops widening about # Earth radii
-     behind Earth, plus or minus #, and is about # Earth radii wide
-     beyond there, plus or minus #."
-  4. "Spacecraft that cross the real boundary typically find it within
-     # Earth radii of this model."
-  5. "Spacecraft that cross the real shock typically find it within #
-     Earth radii of this model."
-- A room description's sentence that states a fact with no source in
-  the page:
-  6. The Sun's: "Some of what you see is drawn to show a shape rather
-     than measured - the streamer belt's warp, the clumping of the Oort
-     cloud, the thinning at the galactic plane."
-  7. The Sun's: "Nobody has measured those, and where that is so, the
-     text says so."
-  8. Earth's: "The radiation belts sit in Earth's equatorial plane, the
-     daily average of the tilted magnetic equator they follow."
-- **Built 2026-10-17, patch 3**
-  (`patch_L330_3_website_belts_words_20261017.py`): 1 as
-  `orientation.words.tilt_of_date`, 2 to 5 as their numbers'
-  `hover_line`, words unchanged; 6 and the reworded 7 on the check's
-  DESCRIPTIONS; 8 cut. OPEN is empty and the run says so; green in a
-  sandbox stand-in for the Daily Run.
-- **Found in the same build:** the Earth scene, re-recorded, put the Sun
-  Direction's orbital-period line (L-431 build 3) in front of the check
-  for the first time. Its body and centre are the orrery's served
-  labels; it is on ALLOWED by shape, as the page's account of its data,
-  and the check now consults ALLOWED for a number's own line.
-**Gap:** Tony's run of patch 3 and the Daily Run: closes when OPEN is
-empty on his run.
-**Ref:** L-421; gallery `documentation/smoke_typed_facts.js`,
-`gallery/feature_renderers.js`, `interactive.html`.
-
-#### [L-450] The orrery's citation texts carry store notes and miss locators (orrery, citations)
-<!-- L:450 status:OPEN upd:2026-10-17 section:A flag: rice: -->
-- **Found 2026-10-16** building L-421 part 3. Since option A the
-  website prints each row's `# Source:` text word for word, so words
-  written as notes for the store reach a visitor's i panel:
-  - "Converted to km^3 s^-2 here." (`EARTH_GM_KM3_S2`, and inherited
-    into the geostationary ring and Earth's Hill sphere);
-  - "IAU B3 rounds to 6378.1 km" (`EARTH_EQUATORIAL_RADIUS_KM`, and
-    inherited into the low-orbit and atmosphere rows);
-  - "4.0 is the TOP of that stated range, chosen so the drawn cusp does
-    not ..." (`HELMET_CUSP_RADII`).
-- **What the website's citations had and the orrery's lack,** read
-  before the mirror replaced them: the arXiv number 2009.04820 and the
-  Nesvorny paper's URL.
-- **One disagreement on the edition:** the website cited the IADC
-  guidelines at Revision 3 (June 2021); the orrery's rows cite REVISION
-  2 (March 2020). Which one was read decides which the rows should say.
-- **`EARTH_D660_DEPTH_KM`'s Source names no work:** "the 660-km seismic
-  discontinuity, ringwoodite dissociating to bridgmanite plus
-  ferropericlase; global average depth 660 km (2 sig figs ...)". Ishii
-  et al. (2019) is on its Ref line.
-- **2026-10-16, rides Earth's round-1 build** (the brief said so; L-452's
-  ruling of the same day moves the website notes' citation wording into
-  these same rows, so both are done in one pass through
-  `constants_new.py`, patch 2 of
-  `documentation/HANDOFF_earth_round1_build_brief_20261016.md`).
-- **Built 2026-10-17, patch 2**
-  (`patch_L330_2_belts_words_citations_20261017.py`), in Tony's approved
-  words: the store notes moved out of `# Source:` into the rows' other
-  lines; the arXiv number and the Nesvorny URL into their rows; the IADC
-  edition is Revision 2 (March 2020), the document read; the 660 km row
-  names Ishii et al. (2018), Sci. Rep. 8:6358, with its section.
-**Gap:** Tony's run of patch 2 with a green orrery run, and the export
-carrying the new citations to the website at the next Daily Run.
-**Ref:** L-421; L-452; `constants_new.py`; `export_constants.py`;
-provenance-discipline.
 
 #### [L-449] A cache build dropped the 82 build-run records it should have carried (gallery, cache builder)
 <!-- L:449 status:OPEN upd:2026-10-17 section:A flag: rice: -->
@@ -1481,10 +1348,15 @@ provenance-discipline.
   maintenance run, naming each lost record and both copies' paths. Four
   checks in the builder suite (238 then); not a new step, so no
   dashboard button. gallery-cache-builder 1.11 records it.
-**Gap:** Tony's run of patch 1. The check part is then done; the item
-stays open for the CAUSE, read from the `[RUNS]` lines at the next
-loss; then the deliberate limit, its number set then, each removal
-named.
+- **The check seen working, 2026-10-17** (Tony's Daily Run of 15:59,
+  his run record `documentation/WHERE_WE_ARE_10-16-26_2116_run_record.md`):
+  "[RUNS] before the copy: 86 run records in data\solar-system\raw\runs"
+  and "[RUNS] after the copy:  86 run records in
+  data\.staging_solar-system_20261017T205940Z\raw\runs"; nothing lost,
+  so nothing stopped. Its stop branch is tested by the builder suite's
+  planted loss. Pushed 44a6225c.
+**Gap:** the CAUSE, read from the `[RUNS]` lines at the next loss; then
+the deliberate limit, its number set then, each removal named.
 **Ref:** gallery `tools/gallery_cache_builder.py` (`run_build`,
 `_write_run_manifest`), `data/cache_swap_log.jsonl`,
 `data/solar-system/raw/runs/`; L-446; L-216;
@@ -1601,8 +1473,15 @@ gallery `data/objects_config.json`.
   searched and declined: the measured day-night difference is tens of
   percent, not one shape, and measured only to about 6 to 8 Earth
   radii. Record: `documentation/DESIGN_fades_rulings_20261017.md`.
-**Gap:** Earth's fade built (the sources read in full first, each
-number a row); then the Sun's fades, the outer corona first with the
+- **The fade's rows, approved 2026-10-17** (Tony: "read and approved"),
+  after the sources were read in full: seven rows from Zoennchen et al.
+  (2022), Ann. Geophys. 40:271, eqs. 7 to 9 --
+  EARTH_EXOSPHERE_H_FIT_INNER_RADII, _FIT_OUTER_RADII, _FIT_COEFF_CM3,
+  _FIT_OFFSET_RADII, _FIT_EXPONENT, _OUTER_EXPONENT and
+  _AT_10_RADII_CM3. Each row's value, quote and locator:
+  `documentation/SOURCES_earth_fade_20261017.md`. Not yet in
+  `constants_new.py`; the fade's build writes them.
+**Gap:** Earth's fade built from those rows; then the Sun's fades, the outer corona first with the
 dust cloud (L-131), in the Sun's slice (L-412). The range idea's
 pieces above (the Roche limit's band, L-241's torus wording) are
 re-read against the rule when the Sun's turn comes.
@@ -2080,9 +1959,14 @@ L-252; L-418.
   orrery patch 2, gallery patch 3) built and tested, waiting on Tony's
   run and look; and Earth's fade designed (L-410).
   `documentation/HANDOFF_earth_round1_build_20261017.md`.
-**Gap:** Tony's runs and looks close L-330, L-451, L-452 and L-450;
-then Earth's fade built (L-410) or talk 2 (L-356 with L-375, and
-L-454), Tony's choice which first; then talks 3 to 6. Talk 4 (L-314)
+- **2026-10-17, round 1 closed** on Tony's runs and looks: L-330,
+  L-451, L-452 and L-450 closed; L-449's check seen working, open for
+  its cause; Earth's fade rows approved (L-410). His orrery look found
+  the low-orbit dots lost against the inner belt: option A built in
+  `patch_L330_4_leo_contrast_close_20261017.py`.
+**Gap:** Tony's look at the low-orbit dots in his next orrery plot
+(Mode 5); then Earth's fade built (L-410) or talk 2 (L-356 with L-375,
+and L-454), Tony's choice which first; then talks 3 to 6. Talk 4 (L-314)
 keeps the solar-wind fetch; its aberration is built.
 **Ref:** L-412 (the Sun's list, which resumes after this); the handles
 above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
@@ -4274,100 +4158,6 @@ one of the four).
 `withTail`, `HOVER_TAIL`), `documentation/smoke_hover_budget.js`,
 `documentation/HANDOFF_L231_L305_magnetosphere_and_belts_20260915.md`
 (STILL OPEN, item 1c).
-
-#### [L-330] Belt shape: the belts curved along the field lines, a density field (Earth exhibit)
-<!-- L:330 status:OPEN upd:2026-10-17 section:A flag: rice:3/3/60/3 -->
-- **Separate from L-231 on purpose.** L-231 is which PLANE the belts sit
-  in and is ruled. This is what SHAPE they are. They were separated so that
-  the plane fix, which is nearly free and corrects something visible, is
-  not held hostage to a shape change that has to be judged by eye.
-  Build the plane first, look at it, then decide this.
-- **The gap.** Four edge rows are served and neither instrument reads them:
-  inner belt 1.1 to 2.0 R_E, outer 3.0 to 7.0 [verified @0d8e6044]. Both
-  draw a ring at the sourced peak with a typed half-width of 0.5 R_E. The
-  outer belt is served 4 R_E wide and drawn 0.5.
-- **The proposal, from Fable 2026-09-15.** Draw each belt as the region
-  between two dipole shells built from its served edges, using the dipole
-  L-shell relation r = L cos^2(latitude). It needs NO NEW NUMBER: the
-  edges are served, the relation is textbook, and the only declared
-  drawing choices are that the region is bounded by dipole field lines and
-  cut at the crust. The slot between about 2 and 3 R_E then appears by
-  itself rather than being drawn. The sourced peak rings can stay as
-  brighter lines inside the region so the peaks remain visible.
-- **Why it might be worth it.** It is why trapped particles reach high
-  latitudes and why the South Atlantic Anomaly exists, neither of which a
-  flat ring can show. For a layperson's learning tool that is the teaching
-  content of the whole feature.
-- **Why it might not.** The inner belt's inner edge at 1.1 R_E sits inside
-  the Low Earth Orbit shell and its field line reaches the surface at about
-  17 degrees latitude. Physically right, possibly unreadable against the
-  crust and LEO shells. Fable's own fallback: draw the inner belt as a
-  plain torus from its edges and keep the shells for the outer belt, whose
-  horns are the teaching point. MODE 5 DECIDES, and it cannot be decided
-  from code.
-- **A wrinkle neither the proposal nor the review resolves.** Dipole shells
-  are MAGNETIC geometry. Drawing them about the SPIN axis, as L-231 rules,
-  is a hybrid: the daily-average argument still holds but the hover has to
-  carry it, and it is a longer sentence than the one a ring needs.
-- **Smaller, and independent of all of the above.** The hover prints the
-  typed 0.5 R_E as "Band thickness" a few lines above a served note giving
-  the true span. That is fixed in L-231's pass, not here, because it is
-  wrong whatever shape is drawn.
-**Note:** RICE 3/3/60/3 -> 1.8 is Claude's proposed score. Confidence 60
-because the physics is settled and the readability is not.
-- **2026-10-04:** L-231 is built for Earth (its Gap now holds only
-  Jupiter's belts), so this item's prerequisite is met. First of
-  Earth's design talks (L-413).
-- **2026-10-16, read at HEAD before the design talk:** the "gap" bullet
-  above is out of date. Since L-322 Stage D (orrery D8 and D9,
-  2026-09-25; gallery patch 3, 2026-09-26) both instruments draw each
-  belt as evenly spaced flat rings from its served inner edge to its
-  served outer edge, peak ring brighter; the typed 0.5 and the "Band
-  thickness" line are gone from both [verified @48c84c3 and gallery
-  2090a8b]. The question left was the belts' curve. Also corrected in
-  the talk: drawn centred on the spin axis, the dipole shape does not
-  show the South Atlantic Anomaly; that needs the field's offset
-  (L-375).
-- **Ruled 2026-10-16 at Earth's design talk, round 1.** Tony: "Let's
-  start with A and see where we take it." Then, on the peak: "Thought:
-  what about a density field similar to the sun's streamer belt?"; and
-  on the comparison: "Wait I thought the comparison was a formula and
-  the random scatter." So a THROWAWAY RENDER in the orrery draws both
-  belts curved along dipole field lines (option A) as a density field,
-  two ways side by side: dots on a regular pattern thinning by a
-  formula, and dots scattered at random (which brings L-434's stored
-  drawing if chosen). Thickest at the peak in the equator; the fade is
-  a drawing choice the hover states. Tony's look decides regular or
-  random, and whether the inner belt reads or falls back to C (inner
-  flat, outer curved). Declined: the flat bands, B (an unmeasured tube
-  height), and rings along the field lines. Record:
-  `documentation/DESIGN_earth_round1_rulings_20261016.md`.
-- **Tony's look at the throwaway render, 2026-10-17:** "Yes, random.
-  And it shows the density better too." On the inner belt: "it reads
-  okay". So the belts are random dots, both curved; option C (the inner
-  belt flat) is not used, and is struck here for that reason.
-- **Built 2026-10-17.** Orrery patch 2: `van_allen_belt_sampler.py`
-  places the dots along r = L cos^2(latitude) -- Koskinen and Kilpua
-  (2022), Physics of Earth's Radiation Belts, open, sec. 1.2.1, read
-  before drawing -- between each belt's edge rows, thickest at its
-  peak, seed 330, stored as `data/drawings/van_allen_belts.json`; the
-  approved hovers. Gallery patch 3: the website draws the stored dots
-  as given, scaled by the served Earth radius and turned to the pole,
-  shaded by weight; the field lines' citation in the i panel.
-- **The 17-line limit, ruled 2026-10-17:** Tony, "Move some lines to i
-  panel". The belts' plane sentence (the spin axis and the 2020 tilt)
-  moved to the i panel; the magnetopause's paper and solar wind, and
-  the bow shock's paper, pressure and where its drawing stops, the
-  same. Every hover is within 17 lines; the limit is not raised.
-- **Note:** the website keeps `evenBeltRings()` for a body with served
-  belt edges and no stored drawing -- none today, Jupiter having no edge
-  rows -- while the orrery removed its copy in patch 2. Re-read when
-  Jupiter's belts get rows (L-231's Jupiter half).
-**Gap:** Tony's look in both instruments, after his runs: the orrery
-plot (Mode 5) and the Earth room on the phone. Closes then.
-**Ref:** L-231 (the plane, ruled) is the prerequisite. L-181 for the belt
-and torus numbers being function-local literals. Raised 2026-09-15 from
-Fable's review of the plane question.
 
 #### [L-001] Food Insecurity (Earth System track)
 <!-- L:001 status:OPEN upd:2026-10-07 section:A flag: rice:3/3/95/2 -->
@@ -6873,7 +6663,7 @@ exposed it); HANDOFF_20260819_alfven_and_the_swap.md, error 4.
   two bumps whose absence from the history exposed this).
 
 #### [L-231] Radiation belts are drawn in the ecliptic; the magnetic tilt is an unbuilt intent
-<!-- L:231 status:OPEN upd:2026-09-16 section:A flag: rice:2/2/90/2 -->
+<!-- L:231 status:OPEN upd:2026-10-17 section:A flag: rice:2/2/90/2 -->
 - **Found while porting the belts to the gallery, 2026-08-24, and the
   first reading of it was WRONG.** Claude reported it as L-229's defect
   class in two more places: `create_earth_radiation_belts` and Jupiter's
@@ -7030,7 +6820,10 @@ spin axis, warp removed, hover reworded -- to match the gallery. Tony,
 room's build must do it before the room ships. (The build Gap this
 replaced: spin-axis basis in both instruments, warp removed, hover
 reworded, both code comments corrected, one pass, then Mode 5 -- done for
-Earth.)
+Earth.) From L-330's close (2026-10-17): the website keeps
+`evenBeltRings()` for a body with served belt edges and no stored
+drawing, and the orrery removed its copy; re-read it when Jupiter's
+belts get edge rows.
 **Ref:** L-009 (closed) for the sourced tilts and the cone precedent;
 L-061 (open) for the rolling frame; L-305 for the typed 11 in the desktop
 magnetopause; L-330 (open) for the belt's SHAPE, deliberately separated
@@ -23925,6 +23718,285 @@ skills/interactive-exhibit/SKILL.md.
 **Gap:** none. Closed 2026-10-16.
 **Ref:** gallery `interactive.html`, `gallery/feature_renderers.js`,
 `documentation/smoke_display_figures.js`; L-421.
+
+#### [L-330] Belt shape: the belts curved along the field lines, a density field (Earth exhibit)
+<!-- L:330 status:DONE upd:2026-10-17 section:C flag: rice:3/3/60/3 -->
+- **Separate from L-231 on purpose.** L-231 is which PLANE the belts sit
+  in and is ruled. This is what SHAPE they are. They were separated so that
+  the plane fix, which is nearly free and corrects something visible, is
+  not held hostage to a shape change that has to be judged by eye.
+  Build the plane first, look at it, then decide this.
+- **The gap.** Four edge rows are served and neither instrument reads them:
+  inner belt 1.1 to 2.0 R_E, outer 3.0 to 7.0 [verified @0d8e6044]. Both
+  draw a ring at the sourced peak with a typed half-width of 0.5 R_E. The
+  outer belt is served 4 R_E wide and drawn 0.5.
+- **The proposal, from Fable 2026-09-15.** Draw each belt as the region
+  between two dipole shells built from its served edges, using the dipole
+  L-shell relation r = L cos^2(latitude). It needs NO NEW NUMBER: the
+  edges are served, the relation is textbook, and the only declared
+  drawing choices are that the region is bounded by dipole field lines and
+  cut at the crust. The slot between about 2 and 3 R_E then appears by
+  itself rather than being drawn. The sourced peak rings can stay as
+  brighter lines inside the region so the peaks remain visible.
+- **Why it might be worth it.** It is why trapped particles reach high
+  latitudes and why the South Atlantic Anomaly exists, neither of which a
+  flat ring can show. For a layperson's learning tool that is the teaching
+  content of the whole feature.
+- **Why it might not.** The inner belt's inner edge at 1.1 R_E sits inside
+  the Low Earth Orbit shell and its field line reaches the surface at about
+  17 degrees latitude. Physically right, possibly unreadable against the
+  crust and LEO shells. Fable's own fallback: draw the inner belt as a
+  plain torus from its edges and keep the shells for the outer belt, whose
+  horns are the teaching point. MODE 5 DECIDES, and it cannot be decided
+  from code.
+- **A wrinkle neither the proposal nor the review resolves.** Dipole shells
+  are MAGNETIC geometry. Drawing them about the SPIN axis, as L-231 rules,
+  is a hybrid: the daily-average argument still holds but the hover has to
+  carry it, and it is a longer sentence than the one a ring needs.
+- **Smaller, and independent of all of the above.** The hover prints the
+  typed 0.5 R_E as "Band thickness" a few lines above a served note giving
+  the true span. That is fixed in L-231's pass, not here, because it is
+  wrong whatever shape is drawn.
+**Note:** RICE 3/3/60/3 -> 1.8 is Claude's proposed score. Confidence 60
+because the physics is settled and the readability is not.
+- **2026-10-04:** L-231 is built for Earth (its Gap now holds only
+  Jupiter's belts), so this item's prerequisite is met. First of
+  Earth's design talks (L-413).
+- **2026-10-16, read at HEAD before the design talk:** the "gap" bullet
+  above is out of date. Since L-322 Stage D (orrery D8 and D9,
+  2026-09-25; gallery patch 3, 2026-09-26) both instruments draw each
+  belt as evenly spaced flat rings from its served inner edge to its
+  served outer edge, peak ring brighter; the typed 0.5 and the "Band
+  thickness" line are gone from both [verified @48c84c3 and gallery
+  2090a8b]. The question left was the belts' curve. Also corrected in
+  the talk: drawn centred on the spin axis, the dipole shape does not
+  show the South Atlantic Anomaly; that needs the field's offset
+  (L-375).
+- **Ruled 2026-10-16 at Earth's design talk, round 1.** Tony: "Let's
+  start with A and see where we take it." Then, on the peak: "Thought:
+  what about a density field similar to the sun's streamer belt?"; and
+  on the comparison: "Wait I thought the comparison was a formula and
+  the random scatter." So a THROWAWAY RENDER in the orrery draws both
+  belts curved along dipole field lines (option A) as a density field,
+  two ways side by side: dots on a regular pattern thinning by a
+  formula, and dots scattered at random (which brings L-434's stored
+  drawing if chosen). Thickest at the peak in the equator; the fade is
+  a drawing choice the hover states. Tony's look decides regular or
+  random, and whether the inner belt reads or falls back to C (inner
+  flat, outer curved). Declined: the flat bands, B (an unmeasured tube
+  height), and rings along the field lines. Record:
+  `documentation/DESIGN_earth_round1_rulings_20261016.md`.
+- **Tony's look at the throwaway render, 2026-10-17:** "Yes, random.
+  And it shows the density better too." On the inner belt: "it reads
+  okay". So the belts are random dots, both curved; option C (the inner
+  belt flat) is not used, and is struck here for that reason.
+- **Built 2026-10-17.** Orrery patch 2: `van_allen_belt_sampler.py`
+  places the dots along r = L cos^2(latitude) -- Koskinen and Kilpua
+  (2022), Physics of Earth's Radiation Belts, open, sec. 1.2.1, read
+  before drawing -- between each belt's edge rows, thickest at its
+  peak, seed 330, stored as `data/drawings/van_allen_belts.json`; the
+  approved hovers. Gallery patch 3: the website draws the stored dots
+  as given, scaled by the served Earth radius and turned to the pole,
+  shaded by weight; the field lines' citation in the i panel.
+- **The 17-line limit, ruled 2026-10-17:** Tony, "Move some lines to i
+  panel". The belts' plane sentence (the spin axis and the 2020 tilt)
+  moved to the i panel; the magnetopause's paper and solar wind, and
+  the bow shock's paper, pressure and where its drawing stops, the
+  same. Every hover is within 17 lines; the limit is not raised.
+- **Note:** the website keeps `evenBeltRings()` for a body with served
+  belt edges and no stored drawing -- none today, Jupiter having no edge
+  rows -- while the orrery removed its copy in patch 2. Re-read when
+  Jupiter's belts get rows (L-231's Jupiter half).
+- **Closed 2026-10-17 on Tony's looks** (his run record,
+  `documentation/WHERE_WE_ARE_10-16-26_2116_run_record.md`, saved again that
+  afternoon): the orrery plot, "looks good except that the color
+  contrast between the lower belt and the LEO is not enough to see LEO
+  dots"; the Earth room on the phone, "correct". Runs green: the orrery
+  31 of 31 gating, pushed fc2bb6f9; the Daily Run 29 of 29 gating with
+  Drawings 7 of 7, pushed 44a6225c; the live check green.
+- **The low-orbit dots, found at that look.** The inner belt's dots now
+  reach size 3 and full opacity and fill the same heights, so the
+  low-orbit dots (size 1.5 at 35%) were lost among them; the website
+  draws low orbit as two edge shells and was not affected. Tony chose
+  option A of three ("A. As recommended"): full opacity and size 2.5,
+  the warm white kept. A throwaway render set size 2.5 and size 3
+  against the belt; 3 crowded it. Built in
+  `patch_L330_4_leo_contrast_close_20261017.py`; Tony's next orrery
+  plot is the look, carried on L-413.
+- **Loose ends:** the website's `evenBeltRings()` note went to L-231's
+  Gap (Jupiter's half), which opens those rows.
+**Gap:** none. Closed.
+**Ref:** L-231 (the plane, ruled) is the prerequisite. L-181 for the belt
+and torus numbers being function-local literals. Raised 2026-09-15 from
+Fable's review of the plane question.
+
+#### [L-450] The orrery's citation texts carry store notes and miss locators (orrery, citations)
+<!-- L:450 status:DONE upd:2026-10-17 section:C flag: rice: -->
+- **Found 2026-10-16** building L-421 part 3. Since option A the
+  website prints each row's `# Source:` text word for word, so words
+  written as notes for the store reach a visitor's i panel:
+  - "Converted to km^3 s^-2 here." (`EARTH_GM_KM3_S2`, and inherited
+    into the geostationary ring and Earth's Hill sphere);
+  - "IAU B3 rounds to 6378.1 km" (`EARTH_EQUATORIAL_RADIUS_KM`, and
+    inherited into the low-orbit and atmosphere rows);
+  - "4.0 is the TOP of that stated range, chosen so the drawn cusp does
+    not ..." (`HELMET_CUSP_RADII`).
+- **What the website's citations had and the orrery's lack,** read
+  before the mirror replaced them: the arXiv number 2009.04820 and the
+  Nesvorny paper's URL.
+- **One disagreement on the edition:** the website cited the IADC
+  guidelines at Revision 3 (June 2021); the orrery's rows cite REVISION
+  2 (March 2020). Which one was read decides which the rows should say.
+- **`EARTH_D660_DEPTH_KM`'s Source names no work:** "the 660-km seismic
+  discontinuity, ringwoodite dissociating to bridgmanite plus
+  ferropericlase; global average depth 660 km (2 sig figs ...)". Ishii
+  et al. (2019) is on its Ref line.
+- **2026-10-16, rides Earth's round-1 build** (the brief said so; L-452's
+  ruling of the same day moves the website notes' citation wording into
+  these same rows, so both are done in one pass through
+  `constants_new.py`, patch 2 of
+  `documentation/HANDOFF_earth_round1_build_brief_20261016.md`).
+- **Built 2026-10-17, patch 2**
+  (`patch_L330_2_belts_words_citations_20261017.py`), in Tony's approved
+  words: the store notes moved out of `# Source:` into the rows' other
+  lines; the arXiv number and the Nesvorny URL into their rows; the IADC
+  edition is Revision 2 (March 2020), the document read; the 660 km row
+  names Ishii et al. (2018), Sci. Rep. 8:6358, with its section.
+- **Closed 2026-10-17 on Tony's runs** (his run record,
+  `documentation/WHERE_WE_ARE_10-16-26_2116_run_record.md`): patch 2 with the orrery
+  31 of 31 gating and 0 Tier-1 on the gate path, pushed fc2bb6f9; the
+  Daily Run's pulls carried the export ("PULLS: all 5 passed", the
+  Config mirror among them) and its run was 29 of 29 gating, pushed
+  44a6225c; the live check's store drift read orrery fc2bb6f9, 0 DRIFT.
+  No loose ends.
+**Gap:** none. Closed.
+**Ref:** L-421; L-452; `constants_new.py`; `export_constants.py`;
+provenance-discipline.
+
+#### [L-451] The sentences the Typed facts check holds open (gallery, words)
+<!-- L:451 status:DONE upd:2026-10-17 section:C flag: rice: -->
+- **Ruled 2026-10-16 at Earth's design talk, round 1.** Tony,
+  "Confirmed as recommended": SERVE 1 to 5, each with its rows'
+  source; ALLOW 6 (about the picture); REWORD 7 to "Where that is so,
+  the text beside it says so." and ALLOW it (how to use the page; "Nobody
+  has measured those" was a claim about the world with no source); CUT
+  8 (curved belts no longer "sit in" the plane, L-330; the belts'
+  served `hovers_plane` already says the plane and its daily average,
+  read at gallery 2090a8b). Record:
+  `documentation/DESIGN_earth_round1_rulings_20261016.md`.
+- **Recorded 2026-10-16** building L-421 part 2. The Typed facts check
+  (`documentation/smoke_typed_facts.js`) fails on a typed sentence not
+  on its allowed list, and prints these eight without failing, for
+  Tony's ruling. Each: serve it with its feature's words and source,
+  allow it as a sentence about the picture, or cut it.
+- A number's own sentence whose typed words say more than a label (the
+  number is served and cited; the words around it are typed):
+  1. "Tilt: # deg on ###, measured against the orbit of the Earth-Moon
+     barycenter, the gravitational center of the Earth-Moon system,
+     around the Sun that day (JPL Horizons)."
+  2. "Earth turns once every # hours measured against the stars."
+  3. "Spacecraft found the tail stops widening about # Earth radii
+     behind Earth, plus or minus #, and is about # Earth radii wide
+     beyond there, plus or minus #."
+  4. "Spacecraft that cross the real boundary typically find it within
+     # Earth radii of this model."
+  5. "Spacecraft that cross the real shock typically find it within #
+     Earth radii of this model."
+- A room description's sentence that states a fact with no source in
+  the page:
+  6. The Sun's: "Some of what you see is drawn to show a shape rather
+     than measured - the streamer belt's warp, the clumping of the Oort
+     cloud, the thinning at the galactic plane."
+  7. The Sun's: "Nobody has measured those, and where that is so, the
+     text says so."
+  8. Earth's: "The radiation belts sit in Earth's equatorial plane, the
+     daily average of the tilted magnetic equator they follow."
+- **Built 2026-10-17, patch 3**
+  (`patch_L330_3_website_belts_words_20261017.py`): 1 as
+  `orientation.words.tilt_of_date`, 2 to 5 as their numbers'
+  `hover_line`, words unchanged; 6 and the reworded 7 on the check's
+  DESCRIPTIONS; 8 cut. OPEN is empty and the run says so; green in a
+  sandbox stand-in for the Daily Run.
+- **Found in the same build:** the Earth scene, re-recorded, put the Sun
+  Direction's orbital-period line (L-431 build 3) in front of the check
+  for the first time. Its body and centre are the orrery's served
+  labels; it is on ALLOWED by shape, as the page's account of its data,
+  and the check now consults ALLOWED for a number's own line.
+- **Closed 2026-10-17 on Tony's Daily Run** (his run record,
+  `documentation/WHERE_WE_ARE_10-16-26_2116_run_record.md`): "TYPED FACTS: PASS
+  -- 0 typed facts in the Sun and Earth rooms; 17 number line(s), 27 of
+  27 allowed". Pushed 44a6225c. No loose ends.
+**Gap:** none. Closed.
+**Ref:** L-421; gallery `documentation/smoke_typed_facts.js`,
+`gallery/feature_renderers.js`, `interactive.html`.
+
+#### [L-452] The website's notes beside a citation: read them again now that the citation prints above them (gallery, words)
+<!-- L:452 status:DONE upd:2026-10-17 section:C flag: rice: -->
+- **Ruled 2026-10-16 at Earth's design talk, round 1** (a rule, not 35
+  rulings). Tony: "Wording that is relevant to the citation should be
+  moved to the store.  Notes should be dropped unless they are drawing
+  choices." So: wording that bears on a citation moves to its row in
+  `constants_new.py` (`# Source:` when it is part of the citation,
+  other comment lines otherwise); a `source_note` stays only when it
+  describes a drawing choice; every other note is dropped. Stricter
+  than the option put to him, which kept a note saying what the number
+  is for. Claude's reading, said in the talk and not contradicted: the
+  Crust's served `note` is a drawing choice and stays, without "(Tony,
+  2026-09-28)". The edited words go to Tony before they ship. Method,
+  so interactive-exhibit's next version carries it. Record:
+  `documentation/DESIGN_earth_round1_rulings_20261016.md`.
+- **Found 2026-10-16 at L-421's close,** from Tony's two i panels.
+  Under option A the website's own words about a citation moved to
+  `source_note` by a mechanical rule (what followed " -- " in the old
+  citation, less what the orrery's citation already says); 35 notes.
+  Printed after the orrery's citation, some now repeat it. The Alfven
+  Surface's "first Parker Solar Probe crossing, 28 April 2021" follows
+  a citation that says "first crossing 28 April 2021"; measured by
+  shared words of four letters or more, 14 of the 35 share two thirds
+  or more of their words with their citation. Some of those add a locator the citation lacks ("sec. 1",
+  "Table 1 ... p. 17,698") and earn their place.
+- **The same panel shows a second class:** the Crust's served `note`
+  ends "(Tony, 2026-09-28)", a project attribution in words a visitor
+  reads (the hover rule, interactive-exhibit: no project vocabulary).
+  One instance in the config.
+- **Built 2026-10-17** after Tony approved the words
+  (`documentation/WORDS_earth_round1_20261017.md` and its revision 2):
+  the citation wording in the orrery's rows (patch 2,
+  `patch_L330_2_belts_words_citations_20261017.py`); the 35 notes kept,
+  reworded or removed through the store writer, which now edits a served
+  number's `source_note` and can remove one (patch 3,
+  `patch_L330_3_website_belts_words_20261017.py`). The Crust's served
+  `note` lost "(Tony, 2026-09-28)"; its `source_note` keeps the IAU
+  citation visible, as Tony asked ("our definition of Re does not change
+  and remains the standard IAU definition"). The bow shock's note:
+  "For a quiet solar wind, at the same pressure as the magnetopause."
+- **Ruled in the build, 2026-10-17:** the low-orbit inner edge is ESA's
+  180 km, a measured row (`EARTH_LEO_LOWER_ALTITUDE_KM`; Tony: "A, as
+  recommended. settled."), so its note could no longer say "chosen for
+  the picture". Two wordings Claude chose, for Tony's look: the low-orbit
+  note and the Crust's `source_note`
+  (`documentation/HANDOFF_earth_round1_build_20261017.md`, section 4).
+- **The principles behind the dispositions** went into
+  provenance-discipline 2.30, What a Visitor Reads (Tony: "my decision
+  based on principles should be implemented in the skill so that it is
+  uniformly applied").
+- **Closed 2026-10-17 on Tony's runs and look** (his run record,
+  `documentation/WHERE_WE_ARE_10-16-26_2116_run_record.md`, saved again that
+  afternoon): patches 2 and 3 run; the orrery 31 of 31 gating, pushed
+  fc2bb6f9; the Daily Run 29 of 29 gating, pushed 44a6225c; the live
+  check green. The phone look, i panels included: "correct". The three
+  wordings Claude chose: "Approved."
+- **One copy the build missed, found at the close:** the orrery's
+  low-orbit checkbox tooltip (`earth_visualization_shells.py`,
+  `earth_leo_shell_info`) and its builder's docstring still said
+  "roughly 200 km". The tooltip now reads both edges from the rows the
+  hover reads; the docstring names the rows
+  (`patch_L330_4_leo_contrast_close_20261017.py`).
+- **Loose ends:** the typed numbers met in served words are L-455
+  (open), which now also holds the orrery's low-orbit numbers.
+**Gap:** none. Closed.
+**Ref:** L-421; L-450; gallery `data/objects_config.json`,
+`tools/store_writer.py`.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
