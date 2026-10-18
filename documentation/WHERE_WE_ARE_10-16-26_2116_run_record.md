@@ -630,6 +630,45 @@ Where this leaves us
 Earth’s round 1 is designed, built and closed.
 The next choice is yours: build Earth’s fade first, or hold design talk 2 on Earth’s magnetic field and its offset.
 
+==============================================================================================
+
+Now I'll build the patch on HEAD bc25fdc, dry-run it on a throwaway copy, and read it back from your folder after saving. That's the very rule it records.
+
+The ledger patch is in your orrery folder as `patch_round1_notes_20261017.py`. This time I read it back from your folder after saving it, and its fingerprint matches the copy I built byte for byte. Your ledger also matches the repository at bc25fdc, so the patch applies to what you have.
+
+It adds two notes and changes no code:
+
+- **On L-351** (the rules owed to future skill versions): a file saved into your folder is read back and compared before it's reported as delivered. The note records what happened to the build brief and that no harm came of it. It goes into the ledger skill's next version.
+- **On L-314** (the solar wind item): Jelinek's citation line gets "sec. 3" for the turned-frame statement, the next time that row is opened. The note quotes where the paper read recorded it.
+
+I ran it on a throwaway copy first. Five edits applied, the ledger index rebuilt cleanly, and a second run refused and wrote nothing.
+
+**Your steps:** 
+1. run the patch from VS Code, 
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_round1_notes_20261017.py
+ok  edit    LEDGER_CONSOLIDATED.md                       line 495: header stamp
+ok  edit    LEDGER_CONSOLIDATED.md                       line 3713: L-351 date
+ok  edit    LEDGER_CONSOLIDATED.md                       line 3832: L-351 read-back rule
+ok  edit    LEDGER_CONSOLIDATED.md                       line 9319: L-314 date
+ok  edit    LEDGER_CONSOLIDATED.md                       line 9422: L-314 locator owed
+stamps updated: the ledger's header
+
+patch applied (0 new files, 5 edits in 1 files, 0 deleted)
+
+NEXT:
+  1. Run orrery_maintenance_run.py: its ledger index picks up
+     the two dates.
+
+OK: 448 L-blocks parsed, no consistency problems.
+Index regenerated (237 live items) in C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\LEDGER_CONSOLIDATED.md.
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  2. Move this script into documentation/; commit; push. -- 
+Undo is Discard Changes in GitHub Desktop.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 **Session: DONE: 10-17-26 1915: Opus: Earth round 1 build session**

@@ -494,6 +494,9 @@ built on 785536e5 and gallery 44a6225c.
 Module updated: October 17, 2026 with Anthropic's Claude Opus 5.5
 (Earth's fade done on Tony's runs and looks: L-410 and L-413), built on
 adcc1851 and gallery da442bf2.
+Module updated: October 17, 2026 with Anthropic's Claude Opus 5.5
+(two notes from Earth's round 1: a rule owed on L-351, a locator owed
+on L-314), built on bc25fdc8 and gallery 44a6225c.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -785,7 +788,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-337 | A centre marker for bodies without shells in the exhibit rooms | OPEN | 1.8 | 2026-09-19 |
 |  | L-194 | Text-only assertions -- claims the scanner cannot see | DEFERRED | 1.4 | 2026-08-15 |
 | ! | L-297 | Earth-Moon Lagrange points: serving path sized, deferred from the Earth exhibit | OPEN | 1.4 | 2026-09-07 |
-| ! | L-314 | Live solar wind conditions for the magnetosphere shells (SWPC through the nightly builder) | OPEN | 1.3 | 2026-10-16 |
+| ! | L-314 | Live solar wind conditions for the magnetosphere shells (SWPC through the nightly builder) | OPEN | 1.3 | 2026-10-17 |
 | ! | L-253 | The 660 discontinuity's depth variation -- held unsourced | OPEN | 1.2 | 2026-08-26 |
 |  | L-308 | A shell-legend surface for static cards (deferred, with its trigger) | DEFERRED | 1.2 | 2026-10-04 |
 | ! | L-105 | merge_orbit_data source-side frame guard (desktop cache hardening) | OPEN | 1.0 | 2026-07-08 |
@@ -805,7 +808,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-346 | A derived row with empty inputs is invisible to a walk by inputs (checks) | OPEN | -- | 2026-09-22 |
 | ! | L-347 | The page re-derives the bow shock standoff to draw its shape (gallery) | OPEN | -- | 2026-09-22 |
 | ! | L-348 | Derived rows outside Earth were counted, not propagated (store) | OPEN | -- | 2026-09-22 |
-| ! | L-351 | Rules learned at C2, owed to the next bumps of their stores (skills, protocol) | OPEN | -- | 2026-10-16 |
+| ! | L-351 | Rules learned at C2, owed to the next bumps of their stores (skills, protocol) | OPEN | -- | 2026-10-17 |
 | ! | L-352 | The orrery's display sites format by fixed width, with no check reading them (orrery) | OPEN | -- | 2026-09-28 |
 | ! | L-353 | A count taken from a file's print resolution where a published error budget exists unopened (store) | OPEN | -- | 2026-09-22 |
 | ! | L-354 | Declared picks with their range in prose, on other bodies (store) | OPEN | -- | 2026-09-22 |
@@ -3711,7 +3714,7 @@ website's checks). The card exports and the two comments go with the next patch 
 **Ref:** `earth_visualization_shells.py`; `planet_visualization_utilities.py`; `documentation/NOTE_L322_C2a_orrery_words_20260922.md`; manifest sec. 17.7.
 
 #### [L-351] Rules learned at C2, owed to the next bumps of their stores (skills, protocol)
-<!-- L:351 status:OPEN upd:2026-10-16 section:A flag: rice: -->
+<!-- L:351 status:OPEN upd:2026-10-17 section:A flag: rice: -->
 - **Recorded, not built.** A class found while building L-322 Stage C2
   (orrery `26f26fdb`, gallery `813fc542`), one row per class under The
   Braid: it waits until the artifact on the critical path reaches it.
@@ -3831,6 +3834,20 @@ website's checks). The card exports and the two comments go with the next patch 
     run showed a traceback instead of its "ok" lines and read as a
     failure. The skill says nothing wrong today; it does not cover
     this, so it is carried here, not bumped.
+  - **2026-10-17, ledger-and-session-records, next bump (Tony's Local
+    Folders):** a file saved into Tony's folder through the link to his
+    computer is read back from his folder and compared (size or hash)
+    before it is reported delivered. On 2026-10-16 the design session
+    saved the round-1 build brief, then saved an amended copy under the
+    same name with Claude Fable 5.1's three review additions; the save
+    reported "written", but his folder held the first version's bytes
+    (13,613 against the amended 15,257, read back 2026-10-17), most
+    likely because the tool reused the copy it had already sent under
+    that name. His 23:06 push (e63a207) carries the first version, and
+    the session told him the additions were in it. No harm followed:
+    the build did the records check inside `daily_run.py` anyway, and
+    the other two rested on reads already on file. The skill says
+    nothing wrong; it does not cover this, so it is carried here.
 **Gap:** Each lands with its store's next bump.
 **Ref:** skills/interactive-exhibit/SKILL.md; skills/ledger-and-session-records/SKILL.md; PROJECT_INSTRUCTIONS.md; L-216, L-363, L-371, L-390, L-414.
 
@@ -9316,7 +9333,7 @@ patch, shared chrome.
 index.html (the Featured rule), `tools/sweep_report.py`.
 
 #### [L-314] Live solar wind conditions for the magnetosphere shells (SWPC through the nightly builder)
-<!-- L:314 status:OPEN upd:2026-10-16 section:A flag: rice:3/3/60/4 -->
+<!-- L:314 status:OPEN upd:2026-10-17 section:A flag: rice:3/3/60/4 -->
 - **Where this came from.** L-305's 2026-09-10 design round fixed the
   magnetosphere shells at DECLARED conditions -- p = 2 nPa, Bz = 0 nT,
   v_sw = 400 km/s -- because that is what the store can source today.
@@ -9419,8 +9436,19 @@ built.
   boundary's nose is turned a few degrees toward the direction Earth
   moves in its orbit, by an amount that depends on the solar wind's
   speed." (and "the real shock's nose" for the bow shock).
+- **2026-10-17, a locator owed when these rows are next opened.** The
+  served aberration sentence (built 2026-10-17) rests on both fits'
+  turned frames. Shue's row names where (theta "measured from the
+  aberrated Sun-Earth line", eq. 11, p. 17,697). Jelinek's does not:
+  `EARTH_BOW_SHOCK_JELINEK_R0_RADII`'s `# Source:` ends "Fitted from
+  Themis crossings, in aberrated GSE." with no locator for that
+  clause, though L-305's record of the 2026-09-10 read gives it: "Jelinek
+  is in aberrated GSE (sec. 3)". Add "sec. 3" to that clause when the
+  row is next opened (provenance-discipline 2.30, What a Visitor Reads:
+  a citation names what was read and where).
 **Gap:** the whole item, now that L-305 has closed (2026-10-04); the
-aberration is applied when the fetch is designed (ruled 2026-10-16).
+aberration is applied when the fetch is designed (ruled 2026-10-16);
+the Jelinek frame locator above rides the same opening.
 On Earth's list (L-413), design talks.
 **Ref:** L-305, tools/gallery_cache_builder.py, data/objects_config.json,
 gallery/feature_renderers.js, skills/gallery-cache-builder/SKILL.md.
