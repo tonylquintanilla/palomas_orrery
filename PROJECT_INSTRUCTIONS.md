@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.102 | October 17, 2026
+Tony Quintanilla, PE | Claude | v3.103 | October 17, 2026
 
-Cut from a73bc24a at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 6f4fc9b0 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -493,7 +493,7 @@ horizons-orbital-mechanics   1.8  Horizons queries, centers, frames, osculating
                                   (horizons_check.py, its period comparison and
                                   the data sheets' re-read), the period fetch
                                   before it (period_fetch.py)
-provenance-discipline        2.30 Scanner runs, audits, citations, constants,
+provenance-discipline        2.31 Scanner runs, audits, citations, constants,
                                   pre-push (Tier-1 = 0 on the active build
                                   path)
 provenance-cross-check       1.0  Cross-check worksheets and relay prompts,
@@ -1177,6 +1177,39 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.103 (October 17, 2026): No rule changed in this document. ONE
+skill bump, one version (L-411, in the Sun's numbers build, L-412):
+provenance-discipline 2.30 -> 2.31. A TEMPERATURE IS IN KELVIN.
+
+WHAT PROMPTED IT. The first wording list for the Sun's numbers gave
+the interior's temperatures in degrees Celsius, as NASA/Marshall
+prints them. Tony, 2026-10-17: "don't we standardize on degrees
+Kelvin? the conversion is routine." Then: "we should add this to the
+skill."
+
+WHAT CHANGED. provenance-discipline's The Unit Field gains one
+paragraph: a temperature is stored in kelvin, the store's one
+temperature token; a source in degrees Celsius is converted exactly,
+adding 273.15, the row saying so and keeping the source's place; the
+words a visitor reads give kelvin, and a Celsius or Fahrenheit figure
+typed into them is a typed number like any other. Its v2.27 entry
+moved to documentation/SKILL_HISTORIES.md, by the three-entry rule.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copy reads
+provenance-discipline 2.31 before provenance work. This session
+confirmed its loaded copies read provenance-discipline 2.30,
+interactive-exhibit 1.17 and gallery-cache-builder 1.11 (discharging
+v3.102's obligation), horizons-orbital-mechanics 1.8 (discharging
+v3.99's), ledger-and-session-records 1.21, safe-file-editing 1.13
+and agentic-pre-test 1.3, as the manifest expected.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.100 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.102 (October 17, 2026): No rule changed in this document. THREE
 skill bumps, one version each (Earth's round 1: L-452 with L-450,
 L-330, L-449): provenance-discipline 2.29 -> 2.30, interactive-exhibit
@@ -1268,44 +1301,6 @@ fired that skill.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.98 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.100 (October 16, 2026): No rule changed in this document. ONE
-skill bump, one version (L-446, with L-380 and L-388):
-gallery-cache-builder 1.9 -> 1.10. THE WEBSITE'S DAILY RUN PULLS
-BEFORE IT BUILDS.
-
-WHAT PROMPTED IT. Tony, 2026-10-15, after L-444's first live run:
-"Wait, shouldn't the horizons check come before the cache build?" The
-check already runs in the orrery, before the export; what came after
-the build was the website's pull of that export, so each build read
-the previous run's pull. Ruled the same day: the pulls run before the
-builder. At the build's start Tony chose option A for a pull that
-cannot reach the orrery: the Daily Run stops before the builder.
-
-WHAT CHANGED. gallery-cache-builder rewrites The Daily Run's Steps:
-four steps, the pulls (gallery_maintenance_run.py --pull, reading the
-one pull list in its GENERATORS) before the builder; a pull that
-cannot fetch fails by name and its mirror does not run; the Daily Run
-stops there; "Pull failures" tests those branches every run. Its
-description and trigger name the Daily Run's order. Its v1.8 entry
-moved to documentation/SKILL_HISTORIES.md, by the three-entry rule.
-Built at 77245ea8; rebuilt on 54c27d7 after L-445's build (v3.99)
-landed first, so this entry is v3.100.
-
-THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
-that session. The next session confirms its loaded copy reads
-gallery-cache-builder 1.10 before work that fires it. This session
-confirmed its loaded copies read gallery-cache-builder 1.9,
-safe-file-editing 1.13, agentic-pre-test 1.3 and
-ledger-and-session-records 1.21, as the manifest expected. v3.99's
-obligation, horizons-orbital-mechanics 1.8, still travels: no work
-this session fired that skill.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.97 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

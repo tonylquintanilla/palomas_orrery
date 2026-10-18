@@ -1,23 +1,23 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 17, 2026, late: the Sun's slice is next.
-- Written at orrery 88fedb3 and gallery da442bf.
+Last updated: October 17, 2026, night: the Sun's numbers are built.
+- Written at orrery 6f4fc9b and gallery da442bf.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The order: Earth's remaining design talks wait. The Sun's slice
->   (L-412, the Sun's list) goes next, its numbers before its drawings.
+> - The Sun's numbers are built: the Alfven ranges, the Sun's rows and
+>   its unlinked numbers done; the typed numbers done where a visitor
+>   reads them first. Temperatures are in kelvin.
 >
-> **Do next:** *The Sun's numbers: L-228 (the Alfven latitudes), L-411
-> (typed numbers in the Sun's hovers), L-386 (the Sun's unexported
-> rows), L-371 (the Sun room's unlinked numbers).*
+> **Do next:** *L-455 (typed numbers in the website's words): Earth's
+> share, the same method, the numbers' last item.*
 >
 > **Needs you now:**
-> - *Run this small patch, commit and push.*
-> - After the numbers: which drawings? You lean to the fades with the
->   dust cloud and the opening view; the ice lines wait.
+> - *Two patches, in the handoff's order: orrery first, push, then the
+>   website and the Daily Run.*
+> - After L-455: which of the Sun's drawings follow?
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
@@ -26,13 +26,13 @@ Last updated: October 17, 2026, late: the Sun's slice is next.
   1-4. [done]  The Sun, Earth and Solar System rooms are live; the orrery
                feeds the website and nothing is typed twice.
   5.   [next]  Earth's list (L-413): talks 2 to 6 wait behind the
-               Sun's numbers. << moved this session
+               Sun's slice.
   5b.  [NOW]   The scaffolding checks clear beside the slices: the
                dashboard (L-440) done; L-424, L-425, L-426 to come.
   6-6a.[done]  The typed facts, served and checked (Oct 16);
                orbital periods from JPL, orrery and website (Oct 14).
-  7.   [NOW]   *The Sun's slice (L-412): numbers first, then the drawings
-               you pick; the Solar System room's features close too.* << moved this session
+  7.   [NOW]   *The Sun's slice (L-412): L-455 (Earth's share) ends the
+               numbers; then your drawings; Solar System features too.*
   8-8c.[done]  The served objects checked against JPL, missing periods
                fetched first, Earth's from the Earth-Moon barycentre; the
                Daily Run pulls before it builds, L-446 (Oct 14-16).
@@ -62,9 +62,6 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
   words; a moving edge gets its own device. Replaces the range idea. (Oct 17)
 - A served body's missing period is fetched by the run, before the
   check, with the orrery's own code: orbit and period together. (Oct 14, 15)
-- Digits by the error JPL states; whole km and a plain sentence where it
-  states none; speeds to their distance's precision, or to one meter
-  per second where JPL states none. (Oct 11)
 - A spacecraft: by its own JPL data sheet; the Voyagers' sky angle,
   turned into km at their distance and said to be ours. (Oct 12)
 - "Surface": the solid surface, or one radius where there is none (a
@@ -88,16 +85,18 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
   A lost run record stops the Daily Run. Lines past a hover's 17 go to
   its i panel. What a visitor reads: in provenance-discipline. (Oct 17)
 - Earth's talks wait; the Sun's numbers, then its drawings, then the objects. (Oct 17)
+- Temperatures in kelvin. The Sun's numbers end with L-455. (Oct 17)
 
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
 - Last cache build: 20261018T000459Z, ok, every rename on the first try (gallery da442bf).
-- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, 88fedb3).
+- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, 6f4fc9b
+  with this session's patch).
   Whole tree: 280: orrery 116, Earth System 149, stars 13, utilities 2.
 - This page's date and the ledger's newest stamp: both Oct 17. Agree.
 
-## Waiting on you  **>> UPDATED THIS SESSION**
+## Waiting on you
 
 At the next design talk:
 - L-401 (the distance digits): a model with no stated accuracy (the
@@ -118,7 +117,8 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- *Next: L-412 (the Sun's list); Earth's talk 2 later: `HANDOFF_earth_fade_build_20261017.md` sec. 5*
+- *Next: L-455, then the Sun's drawings: `HANDOFF_L412_sun_numbers_20261017.md`*
+- Earth's talk 2, later: `HANDOFF_earth_fade_build_20261017.md` sec. 5
 - The fade's sources and rows: `SOURCES_earth_fade_20261017.md`
 - The fades: `DESIGN_fades_rulings_20261017.md`. Round 1's rulings:
   `DESIGN_earth_round1_rulings_20261016.md`; words: `WORDS_earth_round1_*`

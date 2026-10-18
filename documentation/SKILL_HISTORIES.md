@@ -483,6 +483,25 @@ scanner now reads, and A Breadcrumb Must Not Cite says where the window
 still applies.
 (Moved down 2026-10-17, when 2.30 made a fourth entry.)
 
+Earlier: 2.27 | 2026-10-08, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ b0b3df82. v2.27 (L-418) splits the skill, and no rule is
+reworded. The relay procedure, the Review-Repair Protocol, is now the
+skill provenance-cross-check. Rules 1 to 8 of the figure count moved to
+references/figures.md and the field notes to references/field-notes.md,
+each opened when its pointer says; the withdrawn derived-row rule moved
+to documentation/SKILL_HISTORIES.md. Every moved section is word for
+word apart from the edits the build patch lists. The file opens with a
+read plan, written by skills_index.py, because one read does not show
+it whole: the design session's viewer showed 16,000 characters, from
+the start and the end, and this session's reader showed lines 1 to
+1,106 and said it had stopped (2026-10-08). Riding this version: the
+range rule's examples name rows that exist, and a patch predicts the
+scanner's change rather than its total (both L-371); Rule 1 names the
+conversion marker and Rule 8 records the widening as built (L-390); and
+the examples in The Status Line and Report to the Figures You Have name
+rows as they now stand.
+(Moved down 2026-10-17, when 2.31 made a fourth entry.)
+
 ## interactive-exhibit
 
 Earlier: 1.8 | 2026-10-01, with Anthropic's Claude Opus 5.5, from

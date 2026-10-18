@@ -1,11 +1,9 @@
 {
   "send_back": [
     "constants_new.py::BENNU_RADIUS_KM",
-    "constants_new.py::CHROMOSPHERE_PHYSICAL_KM",
     "constants_new.py::EARTH_EQUATORIAL_RADIUS_KM",
     "constants_new.py::EARTH_POLAR_RADIUS_KM",
     "constants_new.py::GM_SUN_SI",
-    "constants_new.py::PARKER_CLOSEST_RADII",
     "constants_new.py::PARSEC_TO_AU",
     "eris_visualization_shells.py::eris_crust_info",
     "eris_visualization_shells.py::eris_hill_sphere_info",
@@ -42,6 +40,6 @@
     "venus_visualization_shells.py::venus_core_info::c2",
     "venus_visualization_shells.py::venus_hill_sphere_info"
   ],
-  "send_back_count": 41,
+  "send_back_count": 39,
   "written_by": "worksheet_checker.py"
 }

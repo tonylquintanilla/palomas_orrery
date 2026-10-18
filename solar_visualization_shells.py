@@ -15,6 +15,18 @@ Consumed by: planet_visualization.py (routing dispatcher),
 Role: rendering/shells
 Domain: orrery
 
+Module updated: October 17, 2026 with Anthropic's Claude Opus 5.5
+(the Sun's numbers, L-228 and L-411: the hovers print the Alfven
+surface's usual range, the coronagraph floor, Parker Solar Probe's
+closest approach, the inner corona, the helmets, the core, radiative
+zone and photosphere edges, the photosphere's thickness, the
+chromosphere's line and the termination shock's range, crossing and
+wind speeds from their rows, each with a citation the visitor sees.
+Sedna's farthest point is worked out from the period record the
+orrery fetched, measured from the solar system's centre of mass. The
+pole-and-streamer ranges, which had the shape backwards, are gone, and
+the Voyagers' line says both are past the heliopause. Words approved
+by Tony.)
 Module updated: October 11, 2026 with Anthropic's Claude Opus 5.5
 (L-421, the website half: the Hills cloud draws
 hills_cloud_sampler.drawn_hills_cloud(), seeded, so every plot is the
@@ -187,14 +199,46 @@ GRAVITATIONAL_INFLUENCE_SENTENCE = (
 CHROMOSPHERE_RADIUS_LINE = (
     f"* Radius: drawn at true scale, "
     f"{conversion_text('CHROMOSPHERE_PHYSICAL_RADII')} solar radii<br>"
-    f"  (~{SOLAR_RADIUS_AU:.5f} - {CHROMOSPHERE_PHYSICAL_RADII * SOLAR_RADIUS_AU:.5f} AU).<br>"
-    f"  The chromosphere is a skin about {CHROMOSPHERE_PHYSICAL_KM:,.0f} km deep on a star "
+    f"  ({row_text('SUN_RADIUS_KM', 'au')} to {row_text('CHROMOSPHERE_TOP_KM', 'au')} AU).<br>"
+    f"  The chromosphere is a skin about {row_text('CHROMOSPHERE_PHYSICAL_KM', grouping=True)} km deep on a star "
     f"{exact_text('SUN_RADIUS_KM', grouping=True)} km in radius --<br>"
     f"  roughly {format_prints(100.0 * CHROMOSPHERE_PHYSICAL_KM / SUN_RADIUS_KM, figures_of('CHROMOSPHERE_PHYSICAL_KM'))}% of the solar radius. At any scale that "
     f"also shows the corona<br>"
     f"  it is too thin to resolve, which is why this shell appears welded to the<br>"
     f"  photosphere.<br>"
 )
+
+# L-411 (2026-10-17): Sedna's farthest distance, printed from the orbit
+# the orrery fetched rather than typed (it was a typed 936 AU). Its orbit
+# is taken around the solar system's barycentre, the centre its period is
+# fetched around (horizons-orbital-mechanics, A Period Depends on Its
+# Centre); around the Sun the elements swing with the Sun's own wobble
+# (Sun-centred, its farthest point read 884 AU for JPL's 2018 solution
+# and 1,004 AU on 2026-10-10). The distance is a(1 + e) from the period
+# record's elements in data/osculating_cache.json; its error is a's,
+# carried from the period's own error by Kepler's third law, a going as
+# the period to the two-thirds, and it prints by the Report test
+# (orbital_period.format_by_error). With no barycentric record the
+# hover names Sedna's orbit and gives no number.
+# Source: JPL Horizons, Sedna's osculating elements around the solar
+# Source+: system barycentre (@0), saved by the period fetch.
+def _sedna_farthest():
+    try:
+        from orbital_period import _load_cache_quietly, format_by_error
+        rec = (_load_cache_quietly().get('Sedna') or {}).get('period') or {}
+        el = rec.get('elements') or {}
+        if rec.get('center') != '@0':
+            return ''
+        a, e = float(el['a']), float(el['e'])
+        err_a = (2.0 / 3.0) * a * float(rec['error_days']) / float(rec['days'])
+        far = format_by_error(a * (1.0 + e), err_a * (1.0 + e))
+        return (', which reaches about %s AU<br>from the solar system\'s center of mass '
+                '(JPL Horizons, %s)' % (far, rec.get('fetched', '')))
+    except Exception:
+        return ''
+
+
+_SEDNA_FARTHEST = _sedna_farthest()
 
 # Source: GRAVITATIONAL_INFLUENCE_SENTENCE above (derived); NASA Solar
 # Source+: System Exploration for the heliopause and Oort Cloud framing.
@@ -206,7 +250,7 @@ gravitational_influence_info = (
             f"The Solar System\'s extent is actually defined in multiple ways. The Heliopause ({_HELIOPAUSE} AU):<br>" 
             "Where the solar wind meets interstellar space.<br><br>" 
 
-            "Gravitational influence extends much further, including, Sedna\'s orbit (936 AU), the Hills Cloud/Inner<br>" 
+            f"Gravitational influence extends much further, including Sedna\'s orbit{_SEDNA_FARTHEST}, the Hills Cloud/Inner<br>" 
             f"Oort Cloud (from {_OORT_INNER_EDGE} AU), and the Outer Oort Cloud (to {_OORT_OUTER_EDGE} AU), one giving way to the<br>" 
             f"other {OORT_BAND_SENTENCE}.<br><br>" 
             + GRAVITATIONAL_INFLUENCE_SENTENCE + "<br><br>"
@@ -403,8 +447,8 @@ solar_wind_info = (
             "  creating phenomena like auroras. It can also affect the atmospheres of planets without strong magnetic fields.<br><br>"   
                          
             "Voyager Missions: Our most valuable information about the heliosheath comes from the Voyager 1 and Voyager 2 spacecraft,<br>" 
-            "which have been traveling through space since 1977. Both probes have crossed the termination shock and are currently<br>" 
-            "exploring the heliosheath, sending back valuable data about this mysterious region. Voyager 1 encountered the Heliopause<br>" 
+            "which have been traveling through space since 1977. Both probes crossed the termination shock and then the heliopause,<br>" 
+            "and both are now in interstellar space: Voyager 1 in 2012 (Gurnett et al. 2013), Voyager 2 in 2018 (NASA). Voyager 1 encountered the Heliopause<br>" 
             f"at {_HELIOPAUSE} AU. This is considered the end of the Sun's influence and the start of interstellar space.<br><br>" 
             
             f"* The heliosheath lies between the termination shock ({_TERMINATION_SHOCK} AU) and the heliopause<br>"
@@ -413,18 +457,22 @@ solar_wind_info = (
             "* Black body radiation at 2.897 nm falls within the X-ray region of the electromagnetic spectrum, which is invisible to the human eye."
         )
 
-# Source: constants_new.py TERMINATION_SHOCK_AU=94; Stone et al. (2005) Science -- Voyager 1 at 94 AU, Voyager 2 at 84 AU
+# Source: Stone et al. (2005), Science 309:2017 -- Voyager 1's crossing;
+# Source+: NASA SVS 20132 (2008) -- Voyager 2's; Treumann and Jaroschek,
+# Source+: arXiv:0807.4170 -- the 80-100 AU range; Li, Wang and Richardson
+# Source+: (2008), GRL 35:L19107 -- Voyager 2's speeds. All print from
+# Source+: their rows in constants_new.py (L-411).
 termination_shock_info = (
             "Solar Wind: Termination Shock:<br><br>"
 
-            "The Solar Wind Termination Shock extends from about 75 to 100 AU.<br><br>"
+            f"The Solar Wind Termination Shock lies about {row_text('TERMINATION_SHOCK_RANGE_LOW_AU')} to {row_text('TERMINATION_SHOCK_RANGE_HIGH_AU')} AU from the Sun (Treumann and Jaroschek 2008).<br><br>"
 
             "The Termination Shock is the region where the solar wind slows down from<br>"
             "supersonic to subsonic speeds due to interaction with the interstellar<br>"
             "medium. The kinetic energy transfers into heat, increasing abruptly.<br><br>"
 
-            f"Voyager 1 encountered the Termination Shock at {_TERMINATION_SHOCK} AU, while Voyager 2 at 84 AU.<br>"
-            "After the Termination Shock the speeds slow down to ~100 to 200 km/s."
+            f"Voyager 1 encountered the Termination Shock at {_TERMINATION_SHOCK} AU, and Voyager 2 at {row_text('VOYAGER2_TERMINATION_SHOCK_AU')} AU (NASA).<br>"
+            f"Voyager 2 measured the wind slowing from about {row_text('VOYAGER2_TS_UPSTREAM_SPEED_KM_S')} to about {row_text('VOYAGER2_TS_DOWNSTREAM_SPEED_KM_S')} km/s as it crossed (Li et al. 2008)."
         )
 
 # Source: constants_new.py OUTER_CORONA_RADII=50; Koutchmy (1994) F-corona review
@@ -436,16 +484,16 @@ outer_corona_info = (
     "At this distance the corona is extremely tenuous -- the F-corona (dust-scattered<br>"
     "sunlight showing Fraunhofer absorption lines) dominates over the electron K-corona.<br><br>"
 
-    "* Helmet streamers have two parts: closed loops below 2-4 R_sun, then<br>"
+    f"* Helmet streamers have two parts: closed loops below {row_text('HELMET_CUSP_LOW_RADII')}-{row_text('HELMET_CUSP_HIGH_RADII')} R_sun, then<br>"
     "  an open-field stalk reaching many R_sun (Suess & Nerney 2004).<br>"
-    "* The Alfven surface -- the true corona/solar wind boundary -- is ~10-20 R_sun.<br>"
+    "* The Alfven surface -- the true corona/solar wind boundary -- is most of the time<br>"
+    f"  between about {row_text('ALFVEN_SURFACE_RANGE_LOW_RADII')} and {row_text('ALFVEN_SURFACE_RANGE_HIGH_RADII')} solar radii from the Sun's center (Cranmer et al. 2023).<br>"
     f"  Parker Solar Probe measured this at {ALFVEN_SURFACE_RADII} R_sun on April 28, 2021.<br>"
     "* Beyond the Alfven surface, plasma is solar wind, not corona.<br>"
     f"* This {row_text('OUTER_CORONA_RADII')} R_sun shell represents the faint, extended F-corona envelope.<br><br>"
 
     "* Temperature: ~1-2 million K (the coronal heating paradox -- hotter than the surface)<br>"
-    "* The corona merges gradually into the solar wind beyond ~15-20 R_sun.<br>"
-    "* Parker Solar Probe's closest approach: ~8.8 R_sun as of 2024.<br>"
+    f"* Parker Solar Probe's closest approach: {row_text('PARKER_CLOSEST_KM', 'r_sun')} R_sun from the Sun's center, on December 24, 2024 (NASA).<br>"
     "* The corona radiates at ~1.159 nm average wavelength (extreme ultraviolet to X-ray)."
 )
 
@@ -520,8 +568,8 @@ photosphere_info = (
             "Sun: Photosphere<br><br>"
 
             "Solar Convective Zone and Photosphere, the visible surface.<br>"
-            "* The photosphere is the visible surface of the Sun. It's a relatively thin layer, only about 500 kilometers thick.<br>" 
-            "* Including both the Convective Zone and the Photosphere, the radius is from 0.7 to 1 Solar radii, or about 0.00465 AU.<br>"
+            f"* The photosphere is the visible surface of the Sun. It's a relatively thin layer, only about {row_text('PHOTOSPHERE_THICKNESS_KM')} kilometers thick.<br>" 
+            f"* Including both the Convective Zone and the Photosphere, the radius is from {row_text('RADIATIVE_ZONE_RADII')} to 1 solar radius, or about {row_text('SUN_RADIUS_KM', 'au')} AU.<br>"
             "* Temperature: from 2M K at the Radiative Zone to ~5,500K at the Photosphere.<br>"
             "* Convection transports energy to the visible \"surface\" of the Sun. The convection process starts at the Radiative Zone<br>"
             "* At the Photosphere, the energy is radiated as visible light. Radiation emits at a peak wavelength at 527.32 nm, which<br>" 
@@ -552,7 +600,7 @@ photosphere_info = (
 radiative_zone_info = (
             "Sun: Radiative Zone<br><br>"
 
-            "The Solar Radiative Zone extends from about 0.2 to 0.7 solar radii, about 0.00325 AU. Temperature ranges from about<br>" 
+            f"The Solar Radiative Zone extends from about {row_text('CORE_RADII')} to {row_text('RADIATIVE_ZONE_RADII')} solar radii, about {row_text('RADIATIVE_ZONE_RADII', 'au')} AU. Temperature ranges from about<br>" 
             "7M K near the core to about 2M K near the convective zone. Energy is transported by radiative diffusion, through photon<br>" 
             "absorption and re-emission.<br><br>"
 
@@ -619,7 +667,7 @@ gravitational_influence_info_hover = (
             f"The Solar System\'s extent is actually defined in multiple ways. The Heliopause ({_HELIOPAUSE} AU):<br>" 
             "Where the solar wind meets interstellar space.<br><br>" 
 
-            "Gravitational influence extends much further, including, Sedna\'s orbit (936 AU), the Hills Cloud/Inner<br>" 
+            f"Gravitational influence extends much further, including Sedna\'s orbit{_SEDNA_FARTHEST}, the Hills Cloud/Inner<br>" 
             f"Oort Cloud (from {_OORT_INNER_EDGE} AU), and the Outer Oort Cloud (to {_OORT_OUTER_EDGE} AU), one giving way to the<br>" 
             f"other {OORT_BAND_SENTENCE}.<br><br>" 
             + GRAVITATIONAL_INFLUENCE_SENTENCE + "<br><br>"
@@ -711,8 +759,8 @@ solar_wind_info_hover = (
             "  creating phenomena like auroras. It can also affect the atmospheres of planets without strong magnetic fields.<br><br>"   
                          
             "Voyager Missions: Our most valuable information about the heliosheath comes from the Voyager 1 and Voyager 2 spacecraft,<br>" 
-            "which have been traveling through space since 1977. Both probes have crossed the termination shock and are currently<br>" 
-            "exploring the heliosheath, sending back valuable data about this mysterious region. Voyager 1 encountered the Heliopause<br>" 
+            "which have been traveling through space since 1977. Both probes crossed the termination shock and then the heliopause,<br>" 
+            "and both are now in interstellar space: Voyager 1 in 2012 (Gurnett et al. 2013), Voyager 2 in 2018 (NASA). Voyager 1 encountered the Heliopause<br>" 
             f"at {_HELIOPAUSE} AU. This is considered the end of the Sun's influence and the start of interstellar space.<br><br>" 
             
             f"* The heliosheath lies between the termination shock ({_TERMINATION_SHOCK} AU) and the heliopause<br>"
@@ -721,19 +769,22 @@ solar_wind_info_hover = (
             "* Black body radiation at 2.897 nm falls within the X-ray region of the electromagnetic spectrum, which is invisible to the human eye."
         )
 
-# Source: Stone et al. (2005) Science -- Voyager 1/2 termination shock;
-# Source+: TERMINATION_SHOCK_AU=94 in constants_new.py
+# Source: Stone et al. (2005), Science 309:2017 -- Voyager 1's crossing;
+# Source+: NASA SVS 20132 (2008) -- Voyager 2's; Treumann and Jaroschek,
+# Source+: arXiv:0807.4170 -- the 80-100 AU range; Li, Wang and Richardson
+# Source+: (2008), GRL 35:L19107 -- Voyager 2's speeds. All print from
+# Source+: their rows in constants_new.py (L-411).
 termination_shock_info_hover = (
             "Solar Wind: Termination Shock:<br><br>"
 
-            "The Solar Wind Termination Shock extends from about 75 to 100 AU.<br><br>"
+            f"The Solar Wind Termination Shock lies about {row_text('TERMINATION_SHOCK_RANGE_LOW_AU')} to {row_text('TERMINATION_SHOCK_RANGE_HIGH_AU')} AU from the Sun (Treumann and Jaroschek 2008).<br><br>"
 
             "The Termination Shock is the region where the solar wind slows down from<br>"
             "supersonic to subsonic speeds due to interaction with the interstellar<br>"
             "medium. The kinetic energy transfers into heat, increasing abruptly.<br><br>"
 
-            f"Voyager 1 encountered the Termination Shock at {_TERMINATION_SHOCK} AU, while Voyager 2 at 84 AU.<br>"
-            "After the Termination Shock the speeds slow down to ~100 to 200 km/s."
+            f"Voyager 1 encountered the Termination Shock at {_TERMINATION_SHOCK} AU, and Voyager 2 at {row_text('VOYAGER2_TERMINATION_SHOCK_AU')} AU (NASA).<br>"
+            f"Voyager 2 measured the wind slowing from about {row_text('VOYAGER2_TS_UPSTREAM_SPEED_KM_S')} to about {row_text('VOYAGER2_TS_DOWNSTREAM_SPEED_KM_S')} km/s as it crossed (Li et al. 2008)."
         )
 
 outer_corona_info_hover = (
@@ -746,13 +797,15 @@ outer_corona_info_hover = (
     "Layer hierarchy within this shell:<br>"
     f"* Streamer belt: the helmets pinch at {row_text('HELMET_CUSP_RADII')} R_sun, and the stalk fades out<br>"
     "  across the Alfven surface (see Streamer Belt shell)<br>"
-    "* Alfven surface (corona/solar wind boundary): ~15-20 R_sun (see Alfven Surface shell)<br>"
+    f"* Alfven surface (corona/solar wind boundary): about {row_text('ALFVEN_SURFACE_RANGE_LOW_RADII')} to {row_text('ALFVEN_SURFACE_RANGE_HIGH_RADII')} solar radii<br>"
+    "  most of the time (Cranmer et al. 2023); see Alfven Surface shell<br>"
     f"  Parker Solar Probe first crossing: {ALFVEN_SURFACE_RADII} R_sun, April 28, 2021<br>"
     f"* F-corona (dust-scattered): {row_text('INNER_CORONA_RADII')}-{row_text('OUTER_CORONA_RADII')}+ R_sun -- this shell's extent<br><br>"
 
     "* Temperature: ~1-2 million K (coronal heating paradox)<br>"
     "* Beyond the Alfven surface, plasma is solar wind, not true corona<br>"
-    "* Parker Solar Probe closest approach: ~8.8 R_sun (2024)<br>"
+    f"* Parker Solar Probe closest approach: {row_text('PARKER_CLOSEST_KM', 'r_sun')} R_sun from the Sun's center<br>"
+    "  (December 24, 2024; NASA)<br>"
     "* Radiates at ~1.159 nm (extreme ultraviolet to X-ray)<br><br>"
 
     "MAPS C/2026 A1 entered SOHO/LASCO C3 field (~33 R_sun) on April 2, 2026,<br>"
@@ -776,8 +829,8 @@ streamer_belt_info = (
     "The streamer belt is the brightest, most structured region of the visible<br>"
     "solar corona, seen at total eclipse as a pearly white halo.<br><br>"
 
-    "IT HAS NO SINGLE OUTER RADIUS, and since 2026-08-22 it is no longer<br>"
-    "drawn as if it did. A streamer is two structures stacked. The HELMET,<br>"
+    "IT HAS NO SINGLE OUTER RADIUS, and it is not drawn as if it did.<br>"
+    "A streamer is two structures stacked. The HELMET,<br>"
     f"a dome of closed magnetic loops, reaches no higher than {row_text('HELMET_CUSP_LOW_RADII')}-{row_text('HELMET_CUSP_HIGH_RADII')} R_sun.<br>"
     "Above its cusp the field opens and the solar wind draws it out into a<br>"
     "STALK -- a thin current sheet reaching many solar radii, studied<br>"
@@ -869,9 +922,20 @@ roche_limit_info_hover = (
     "* The nucleus never reached the Roche limit intact"
 )
 
-# Source: Cranmer et al. (2007) -- solar corona boundary structure
-# Source+: the Alfven surface radius itself is ALFVEN_SURFACE_RADII in
-# Source+: constants_new.py, imported here rather than retyped (L-209)
+# Source: Cranmer, Chhiber, Gilly, Cairns, Colaninno, McComas, Raouafi,
+# Source+: Usmanov, Gibson and DeForest (2023), "The Sun's Alfven Surface:
+# Source+: Recent Insights and Prospects for the Polarimeter to Unify the
+# Source+: Corona and Heliosphere (PUNCH)" -- abstract, the surface's usual
+# Source+: range; sec. 3.1, its shape in global models.
+# Source+: https://arxiv.org/abs/2310.05887
+# Note: the Alfven surface's radius is ALFVEN_SURFACE_RADII and its usual
+# Note+: range the two ALFVEN_SURFACE_RANGE_ rows, all in constants_new.py
+# Note+: and printed from there (L-209, L-228).
+# Corrected: 2026-10-17 (L-228) -- cited Cranmer et al. (2007) until now.
+# Corrected+: The polar and streamer-belt ranges it was cited for are not
+# Corrected+: in that paper's text as far as its Section 8, and the 2023
+# Corrected+: review puts the surface's maxima over the polar holes, the
+# Corrected+: other way round; they are removed.
 alfven_surface_info = (
     "Sun: Alfven Surface:<br><br>"
 
@@ -879,12 +943,14 @@ alfven_surface_info = (
     "the solar wind accelerates past the local Alfven speed and plasma can no longer<br>"
     "communicate back to the Sun. Beyond it, the corona becomes the solar wind.<br><br>"
 
-    "* Location: ~10-20 solar radii, measured directly by NASA's Parker Solar Probe.<br>"
+    f"* Location: most of the time between about {row_text('ALFVEN_SURFACE_RANGE_LOW_RADII')} and {row_text('ALFVEN_SURFACE_RANGE_HIGH_RADII')} solar radii<br>"
+    "  from the Sun's center (Cranmer et al. 2023).<br>"
     f"  On April 28, 2021, Parker Solar Probe crossed inward at {ALFVEN_SURFACE_RADII} R_sun "
     f"({ALFVEN_SURFACE_RADII * SUN_RADIUS_KM / 1e6:.1f} million km from Sun center),<br>"
     "  spending ~5 hours inside the corona -- the first spacecraft to 'touch the Sun.'<br>"
     "* This is not a smooth sphere: it has spikes and valleys shaped by solar magnetic activity.<br>"
-    "  At polar coronal holes: ~12-15 R_sun. In the streamer belt: ~17-19 R_sun.<br><br>"
+    "  Computer models of the corona often put it farthest out above the large polar<br>"
+    "  coronal holes and closest in at the tops of the helmet streamers (Cranmer et al. 2023).<br><br>"
 
     "Why it matters:<br>"
     "* Inside the Alfven surface: plasma is magnetically connected to the Sun.<br>"
@@ -911,7 +977,8 @@ alfven_surface_info_hover = (
     f"({ALFVEN_SURFACE_RADII * SUN_RADIUS_KM / 1e6:.1f} million km from Sun center)<br>"
     "  First spacecraft to enter the corona -- 'touching the Sun' for ~5 hours.<br>"
     "* Not a smooth sphere: spikes and valleys from solar magnetic activity.<br>"
-    "  Polar coronal holes: ~12-15 R_sun | Streamer belt: ~17-19 R_sun<br><br>"
+    "  Computer models of the corona often put it farthest out above the large polar<br>"
+    "  coronal holes and closest in at the tops of the helmet streamers (Cranmer et al. 2023).<br><br>"
 
     "Why it matters:<br>"
     "* Inside: plasma magnetically connected to the Sun. Alfven waves propagate inward.<br>"
@@ -982,8 +1049,8 @@ photosphere_info_hover = (
             "Sun: Photosphere<br><br>"
 
             "Solar Convective Zone and Photosphere, the visible surface.<br>"
-            "* The photosphere is the visible surface of the Sun. It's a relatively thin layer, only about 500 kilometers thick.<br>" 
-            "* Including both the Convective Zone and the Photosphere, the radius is from 0.7 to 1 Solar radii, or about 0.00465 AU.<br>"
+            f"* The photosphere is the visible surface of the Sun. It's a relatively thin layer, only about {row_text('PHOTOSPHERE_THICKNESS_KM')} kilometers thick.<br>" 
+            f"* Including both the Convective Zone and the Photosphere, the radius is from {row_text('RADIATIVE_ZONE_RADII')} to 1 solar radius, or about {row_text('SUN_RADIUS_KM', 'au')} AU.<br>"
             "* Temperature: from 2M K at the Radiative Zone to ~5,500K at the Photosphere.<br>"
             "* Convection transports energy to the visible \"surface\" of the Sun. The convection process starts at the Radiative Zone<br>"
             "* At the Photosphere, the energy is radiated as visible light. Radiation emits at a peak wavelength at 527.32 nm, which<br>" 
@@ -1015,7 +1082,7 @@ photosphere_info_hover = (
 radiative_zone_info_hover = (
             "Sun: Radiative Zone<br><br>"
 
-            "The Solar Radiative Zone extends from about 0.2 to 0.7 solar radii, about 0.00325 AU. Temperature ranges from about<br>" 
+            f"The Solar Radiative Zone extends from about {row_text('CORE_RADII')} to {row_text('RADIATIVE_ZONE_RADII')} solar radii, about {row_text('RADIATIVE_ZONE_RADII', 'au')} AU. Temperature ranges from about<br>" 
             "7M K near the core to about 2M K near the convective zone. Energy is transported by radiative diffusion, through photon<br>" 
             "absorption and re-emission.<br><br>"
 
@@ -1075,13 +1142,13 @@ core_info_hover = (
 hover_text_sun_and_corona = (
     '<b>The Sun and Its Atmosphere</b><br><br>'
     'Five corona/boundary layers now visualized separately:<br>'
-    '* Inner Corona (K-corona): 1-3 R_sun, ~1-3 million K<br>'
+    f'* Inner Corona (K-corona): 1-{row_text('INNER_CORONA_RADII')} R_sun, ~1-3 million K<br>'
     f'* Roche Limit: about {row_text('ROCHE_LIMIT_RADII')} R_sun -- tidal disruption threshold for comets<br>'
     f'* Streamer Belt (Visible Corona): helmets pinch at {row_text('HELMET_CUSP_RADII')} R_sun, the stalk fades beyond<br>'
     f'* Alfven Surface: ~{ALFVEN_SURFACE_RADII} R_sun -- true corona/solar wind boundary<br>'
     '  (Parker Solar Probe first crossing: April 28, 2021)<br>'
     f'* Extended Corona (F-corona): {row_text('OUTER_CORONA_RADII')} R_sun, a boundary chosen for the drawing<br><br>'
-    'Parker Solar Probe closest approach: ~8.8 R_sun (2024)<br><br>'
+    f'Parker Solar Probe closest approach: {row_text('PARKER_CLOSEST_KM', 'r_sun')} R_sun from the Sun\'s center, December 24, 2024 (NASA)<br><br>'
     'The coronal heating paradox: the corona is 200x hotter than the photosphere<br>'
     'despite being farther from the energy source. Leading theories: Alfven waves,<br>'
     'nanoflares, and magnetic reconnection -- still actively debated.<br><br>'
@@ -1092,8 +1159,8 @@ hover_text_sun_and_corona = (
     'Streamer Belt / Roche Limit / Inner K-corona: crossed by DEBRIS ONLY -><br>'
     'Perihelion (April 4 14:22, 1.23 R_sun, 0.006 AU) as a ghost.<br>'
     'Ghost tracked by SOHO/LASCO ~36-40 hours outbound; dispersed by April 6.<br>'
-    'Parker Solar Probe closest approach: 8.8 R_sun (0.041 AU) --<br>'
-    'MAPS disintegrated at 8.33 R_sun (0.039 AU), just inside Parker\'s record.'
+    f'Parker Solar Probe closest approach: {row_text('PARKER_CLOSEST_KM', 'r_sun')} R_sun ({row_text('PARKER_CLOSEST_KM', 'au')} AU) --<br>'
+    'MAPS disintegrated at 8.33 R_sun (0.039 AU), closer to the Sun than Parker has flown.'
 )
 
 # Tkinter tooltip version (\n line breaks, no HTML tags)
@@ -1102,13 +1169,13 @@ hover_text_sun_and_corona = (
 hover_text_sun_and_corona_tooltip = (
     'The Sun and Its Atmosphere<br><br>'
     'Five corona/boundary layers now visualized separately:<br>'
-    '* Inner Corona (K-corona): 1-3 R_sun, ~1-3 million K<br>'
+    f'* Inner Corona (K-corona): 1-{row_text('INNER_CORONA_RADII')} R_sun, ~1-3 million K<br>'
     f'* Roche Limit: about {row_text('ROCHE_LIMIT_RADII')} R_sun -- tidal disruption threshold for comets<br>'
     f'* Streamer Belt (Visible Corona): helmets pinch at {row_text('HELMET_CUSP_RADII')} R_sun, the stalk fades beyond<br>'
     f'* Alfven Surface: ~{ALFVEN_SURFACE_RADII} R_sun -- true corona/solar wind boundary<br>'
     '  (Parker Solar Probe first crossing: April 28, 2021)<br>'
     f'* Extended Corona (F-corona): {row_text('OUTER_CORONA_RADII')} R_sun, a boundary chosen for the drawing<br><br>'
-    'Parker Solar Probe closest approach: ~8.8 R_sun (2024)<br><br>'
+    f'Parker Solar Probe closest approach: {row_text('PARKER_CLOSEST_KM', 'r_sun')} R_sun from the Sun\'s center, December 24, 2024 (NASA)<br><br>'
     'The coronal heating paradox: the corona is 200x hotter than the photosphere<br>'
     'despite being farther from the energy source. Leading theories: Alfven waves,<br>'
     'nanoflares, and magnetic reconnection -- still actively debated.<br><br>'
@@ -1119,8 +1186,8 @@ hover_text_sun_and_corona_tooltip = (
     'Streamer Belt / Roche Limit / Inner K-corona: crossed by DEBRIS ONLY -><br>'
     'Perihelion (April 4 14:22, 1.23 R_sun, 0.006 AU) as a ghost.<br>'
     'Ghost tracked by SOHO/LASCO ~36-40 hours outbound; dispersed by April 6.<br>'
-    'Parker Solar Probe closest approach: 8.8 R_sun (0.041 AU) --<br>'
-    'MAPS disintegrated at 8.33 R_sun (0.039 AU), just inside Parker\'s record.'
+    f'Parker Solar Probe closest approach: {row_text('PARKER_CLOSEST_KM', 'r_sun')} R_sun ({row_text('PARKER_CLOSEST_KM', 'au')} AU) --<br>'
+    'MAPS disintegrated at 8.33 R_sun (0.039 AU), closer to the Sun than Parker has flown.'
 )
 
 hover_text_sun = (
@@ -1959,13 +2026,8 @@ def create_sun_streamer_band(center_position=(0, 0, 0)):
     # array is what lets one trace fade to nothing.
     colors = ['rgba(255, 200, 80, %.4f)' % a for a in alphas]
 
-    # Figures interpolated from the constants, never typed, so the hover
-    # cannot drift from what is drawn (L-179 / L-180 convention).
-    def _km_au(r_solar):
-        return (r_solar * SUN_RADIUS_KM, r_solar * SOLAR_RADIUS_AU)
-
-    # L-371: the cusp and the fade print from their rows, at their counts.
-    fov_km, fov_au = _km_au(15.0)
+    # L-371: the cusp and the fade print from their rows, at their counts;
+    # L-411: so does the coronagraph's 15 R_sun floor, which was typed here.
 
     # Every line carries its own <br>: in this file the SOURCE wrap and
     # the RENDERED wrap are one act, and a line without a break renders
@@ -2003,7 +2065,7 @@ def create_sun_streamer_band(center_position=(0, 0, 0)):
         "settled, so the edge is drawn and its meaning is attributed.<br><br>"
 
         "DeForest, Howard & McComas (2014), ApJ 787:124 followed inbound<br>"
-        f"wave motion out to 15 R_sun ({fov_km:,.0f} km, {fov_au:.6f} AU).<br>"
+        f"wave motion out to {row_text('ALFVEN_SURFACE_STREAMER_FLOOR_RADII')} R_sun ({row_text('ALFVEN_SURFACE_STREAMER_FLOOR_RADII', 'km', grouping=True)} km, {row_text('ALFVEN_SURFACE_STREAMER_FLOOR_RADII', 'au')} AU).<br>"
         "That is the coronagraph's field of view, not an extent --<br>"
         "a floor, not an edge.<br><br>"
 

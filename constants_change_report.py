@@ -111,6 +111,10 @@ Module updated: September 12, 2026 with Anthropic's Claude Opus 5
     (L-324: a removal verdict is cross-checked against the working
     copy before it is printed. A name the diff dropped but the file
     still assigns is reported unreadable, not removed).
+Module updated: October 17, 2026 with Anthropic's Claude Opus 5.5
+    (L-411: a typed row rewritten as an expression over other rows is
+    reported NOW DERIVED, with its old value, instead of unreadable;
+    found when PARKER_CLOSEST_RADII became a conversion).
 """
 
 import os
@@ -533,6 +537,15 @@ def main():
     # re-checks it. L-324.
     present = working_copy_names(here)
     unreadable = []
+    # L-411 (2026-10-17): a typed row rewritten as an expression over
+    # other rows leaves the diff's literal list and comes back as a
+    # derived line, which read_changes() parses. It is neither removed
+    # nor unreadable, so it is named as such. Found when
+    # PARKER_CLOSEST_RADII, typed 9.86, became a conversion of
+    # PARKER_CLOSEST_KM.
+    became = set(n for n, _expr, _parents in derived_added)
+    now_derived = [(n, b) for n, b in removed if n in became]
+    removed = [(n, b) for n, b in removed if n not in became]
     if present is None:
         removal_note = ('working copy could not be parsed -- removal'
                         ' verdicts below are from the diff alone and'
@@ -574,6 +587,12 @@ def main():
         print('  %-30s NEW = %s' % (name, value))
         if not comment_moved:
             print('      added with no comment block -- needs a # Source:')
+        print()
+
+    for name, before in now_derived:
+        print('  %-30s NOW DERIVED (was %s)' % (name, before))
+        print('      Its typed value became an expression over other')
+        print('      rows; the derived line below names its parents.')
         print()
 
     for name, before in unreadable:

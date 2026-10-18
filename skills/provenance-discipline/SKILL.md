@@ -6,9 +6,16 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0 on 
 
 # Provenance Discipline
 
-Read this file in 5 parts: lines 1-299, 300-603, 604-861, 862-1144, 1145-1376.
+Read this file in 5 parts: lines 1-289, 290-607, 608-865, 866-1148, 1149-1380.
 
-Skill version: 2.30 | 2026-10-17, with Anthropic's Claude Opus 5.5, at
+Skill version: 2.31 | 2026-10-17, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 6f4fc9b0. v2.31 (L-411, the Sun's numbers) adds one
+paragraph to The Unit Field: a temperature is stored in kelvin, a
+source in degrees Celsius is converted exactly and the row says so,
+and the words a visitor reads give kelvin. Tony, 2026-10-17: "don't
+we standardize on degrees Kelvin? the conversion is routine", and "we
+should add this to the skill."
+Earlier: 2.30 | 2026-10-17, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ a73bc24a. v2.30 (L-452 with L-450, Earth's round 1)
 adds What a Visitor Reads: the five principles Tony approved one by one
 on 2026-10-17 for the words a visitor reads -- a citation names what was
@@ -31,26 +38,9 @@ audit and in the run history, where tier1_by_domain is the Tier-1
 split and domain_counts stays the all-tier count. Tony, 2026-10-12:
 "Can we separate this into meaningful groups, like orrery, earth
 science and stars in the checker report?"
-Earlier: 2.27 | 2026-10-08, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ b0b3df82. v2.27 (L-418) splits the skill, and no rule is
-reworded. The relay procedure, the Review-Repair Protocol, is now the
-skill provenance-cross-check. Rules 1 to 8 of the figure count moved to
-references/figures.md and the field notes to references/field-notes.md,
-each opened when its pointer says; the withdrawn derived-row rule moved
-to documentation/SKILL_HISTORIES.md. Every moved section is word for
-word apart from the edits the build patch lists. The file opens with a
-read plan, written by skills_index.py, because one read does not show
-it whole: the design session's viewer showed 16,000 characters, from
-the start and the end, and this session's reader showed lines 1 to
-1,106 and said it had stopped (2026-10-08). Riding this version: the
-range rule's examples name rows that exist, and a patch predicts the
-scanner's change rather than its total (both L-371); Rule 1 names the
-conversion marker and Rule 8 records the widening as built (L-390); and
-the examples in The Status Line and Report to the Figures You Have name
-rows as they now stand.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
 on 2026-10-05 and 2026-10-08 (L-418), 2026-10-09 (L-414),
-2026-10-13 (L-437) and 2026-10-17 (L-452).
+2026-10-13 (L-437) and 2026-10-17 (L-452 and L-411).
 
 ## Contents
 
@@ -497,6 +487,20 @@ in scope, `# Read:` (below) are all written at that single visit.
 (Tony's rulings, 2026-09-11 and 2026-09-14, recorded on L-322 and until
 this version living only there. In engineering he has always used
 units, not literals.)
+
+**A temperature is stored in kelvin, and a visitor reads kelvin.** `k`
+is the store's one temperature token. A source that prints degrees
+Celsius is converted exactly, by adding 273.15: the row's `# Source:`
+quotes the figure as the source prints it, a `# Note:` says it was
+converted, and the row keeps the source's place, so 5,400 degrees
+Celsius, known to the hundred, is stored as 5,700. At millions of
+degrees the addition changes no printed figure. The words a visitor
+reads give kelvin too, on both sites: a Celsius or Fahrenheit figure
+typed into them is a typed number like any other, sourced into a row
+or removed. (Tony, 2026-10-17, L-411: "don't we standardize on
+degrees Kelvin? the conversion is routine", and "we should add this
+to the skill." The Sun's words were converted that evening; Earth's
+still say Celsius, on L-455.)
 
 **Inside a dict, the status line attaches to the DICT when its entries
 share one kind and one source**, and an entry that differs carries its

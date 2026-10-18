@@ -502,6 +502,11 @@ notes on L-454 and L-356), built on 88fedb3f and gallery da442bf2.
 Module updated: October 17, 2026 with Anthropic's Claude Opus 5.5
 (two notes from Earth's round 1: a rule owed on L-351, a locator owed
 on L-314), built on bc25fdc8 and gallery 44a6225c.
+Module updated: October 17, 2026 with Anthropic's Claude Opus 5.5
+(the Sun's numbers, L-412's first half: L-228, L-386 and L-371 done;
+L-411's groups W, S, D and N done, its bulk left on it; L-455 the
+numbers' last item; provenance-discipline 2.31, temperatures in
+kelvin), built on 6f4fc9b0 and gallery da442bf2.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -719,7 +724,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*237 live items; 221 need attention (`!`); 166 RICE-scored; 211 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*234 live items; 218 need attention (`!`); 166 RICE-scored; 214 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -803,7 +808,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-319 | Focusing a smaller shell cuts larger lit shells flat at the frame's box | OPEN | 0.7 | 2026-09-10 |
 | ! | L-128 | Comet sublimation shell(s) -- solar-distance chemistry zones | OPEN | -- | 2026-10-17 |
 | ! | L-131 | Zodiacal dust solar shell | OPEN | -- | 2026-10-08 |
-| ! | L-228 | Alfven surface latitude ranges: source them or omit them | OPEN | -- | 2026-10-08 |
 | ! | L-235 | Checks that cannot fail, gallery side [three instances] | OPEN | -- | 2026-10-08 |
 | ! | L-237 | Artifact 1's golden record is stale and needs re-cutting | OPEN | -- | 2026-10-10 |
 | ! | L-241 | Hills torus hover states the cloud bounds, not the drawn ring | OPEN | -- | 2026-10-08 |
@@ -831,7 +835,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-367 | No checker opens a new room (checks, gallery) | OPEN | -- | 2026-10-16 |
 | ! | L-368 | Other bodies' typed poles disagree with their cited table or cite a withdrawn report (orrery, store) | OPEN | -- | 2026-09-28 |
 | ! | L-370 | Jupiter and Saturn numbers typed only in objects_config.json (gallery, store) | OPEN | -- | 2026-09-28 |
-| ! | L-371 | The Sun room's served numbers: 43 with no link, and radii printed with no count (gallery, the Sun's slice) | OPEN | -- | 2026-10-08 |
 | ! | L-372 | Two drawing settings live in constants_new.py (orrery, store) | OPEN | -- | 2026-09-28 |
 | ! | L-373 | A unit conversion by a bare number inside a constants_new.py expression (store) | OPEN | -- | 2026-09-28 |
 | ! | L-374 | Showing Earth's precession over time (orrery, idea) | OPEN | -- | 2026-09-28 |
@@ -843,7 +846,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-381 | The uncertainty field's pattern reads a sentence's full stop as a decimal point (export, checks) | OPEN | -- | 2026-09-28 |
 | ! | L-382 | Earth's magnetosphere costs about 42 percent more per orrery animation frame since D8 (orrery, rendering) | OPEN | -- | 2026-09-28 |
 | ! | L-385 | The orrery's Auto view of the Sun opens about 31 times wider since Stage D (orrery, Tony's eye) | OPEN | -- | 2026-10-17 |
-| ! | L-386 | The Sun's conversion rows, not yet exported (store, the Sun's slice) | OPEN | -- | 2026-10-09 |
 | ! | L-387 | The orrery's hovers print the conversion names by their own formats, not by the computed count (orrery) | OPEN | -- | 2026-09-28 |
 | ! | L-391 | Group clouds: the Trojans' sources, and the shapes of the three other groups (gallery, exhibits) | OPEN | -- | 2026-09-29 |
 | ! | L-393 | Encounter data: dates, spacecraft records centred on their targets, and how far the cache reaches in time (gallery, cache) | OPEN | -- | 2026-09-29 |
@@ -854,7 +856,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-402 | Choose a date, or animate, within the range the drawn bodies are trusted for (gallery, exhibits) | OPEN | -- | 2026-10-01 |
 | ! | L-403 | Numbers in the object list's descriptions carry no source (orrery, provenance) | OPEN | -- | 2026-10-01 |
 | ! | L-410 | Fades where nature thins out: Earth's hydrogen designed, the outer corona next (orrery + gallery, the Sun and Earth) | OPEN | -- | 2026-10-17 |
-| ! | L-411 | The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-04 |
+| ! | L-411 | The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-17 |
 | ! | L-412 | The Sun's slice: the order Tony confirmed (the Sun's slice) | OPEN | -- | 2026-10-17 |
 | ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-10-17 |
 | ! | L-423 | The website's checks: the order Tony confirmed (checks, gallery) | OPEN | -- | 2026-10-16 |
@@ -1180,15 +1182,18 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-055 | O14/O15 verdicts arrive with the v4 gate (comet legend churn; sodium particle count) | DONE | -- | 2026-06-17 |
 |  | L-057 | Animation auto-scale-vs-shells + Phase 3 tier decision -- CLOSED | DONE | -- | 2026-06-11 |
 |  | L-223 | A paste into the ledger is an unverified transfer | DONE | -- | 2026-08-21 |
+|  | L-228 | Alfven surface latitude ranges: source them or omit them | DONE | -- | 2026-10-17 |
 |  | L-262 | The framing smoke test has never run against the page | DONE | -- | 2026-10-16 |
 |  | L-345 | Unit-conversion rows multiply by shell: rows per shell, or the export converts? (store, DONE 2026-09-28) | DONE | -- | 2026-09-28 |
 |  | L-349 | The inner belt's hover says "where the measured particle flux peaks" (words, Tony's) | DONE | -- | 2026-10-06 |
 |  | L-350 | The magnetotail's observed extent is served and shown nowhere (gallery) | DONE | -- | 2026-10-04 |
 |  | L-362 | The master plan's two summaries are a month behind the plan (documentation) | DONE | -- | 2026-09-28 |
 |  | L-369 | Earth's obliquity typed outside constants_new.py (orrery, store) | DONE | -- | 2026-10-06 |
+|  | L-371 | The Sun room's served numbers: 43 with no link, and radii printed with no count (gallery, the Sun's slice) | DONE | -- | 2026-10-17 |
 |  | L-380 | The gallery maintenance routine pulls the constants export after the cache build (gallery, routine) | DONE | -- | 2026-10-16 |
 |  | L-383 | shell_configs.py's magnetosphere tooltip says nothing of the tail and puts the belts at the flux peak (orrery, words) | DONE | -- | 2026-10-04 |
 |  | L-384 | The scaling rule stops short of a single measured value scaled by an exact row (skills, store) | DONE | -- | 2026-09-28 |
+|  | L-386 | The Sun's conversion rows, not yet exported (store, the Sun's slice) | DONE | -- | 2026-10-17 |
 |  | L-388 | The gallery's export pull can print success when it could not fetch, and the mirror then writes from the old export (gallery, tooling) | DONE | -- | 2026-10-16 |
 |  | L-389 | Earth's atmosphere shells are measured from the equatorial radius, and the crust now sits at the mean radius (store, Tony's eye) | DONE | -- | 2026-10-05 |
 |  | L-390 | provenance-discipline does not yet name the conversion marker or say the widening is built (skills) | DONE | -- | 2026-10-08 |
@@ -1303,9 +1308,27 @@ Sun's numbers (L-412).
   typed `STARLINK_KM = 6921.0` that places the dots. Their `# Source:`
   comment names databases, not a read ("Verified: April 2026 via Gemini
   fact-check"). Same method when the low-orbit shell is next opened.
-**Gap:** a sweep of the served words for typed numbers, then each
-sourced into a row or removed, when the Earth or Sun slice next opens
-these shells; the orrery's low-orbit numbers above with them.
+- **2026-10-17, the Sun's share done** with L-411 (Claude Opus 5.5):
+  the Sun's served words print their numbers from rows or no longer
+  type them. A helper in `gallery/feature_renderers.js`,
+  `withShellWords`, fills a shell's {radius} and its linked numbers
+  into `about`, `note` and `description`, each citation beside them.
+  Tony's ruling the same evening: "the numbers half ends with Earth's
+  sweep (L-455), the same method" -- so Earth's share is the last item
+  of the Sun's numbers half (L-412), next session. It holds the Crust
+  and magnetopause notes above; Earth's interior and atmosphere
+  `about` paragraphs, which type temperatures in degrees Celsius
+  (provenance-discipline 2.31 now says kelvin); and the orrery's
+  low-orbit numbers. Those Celsius figures never went through the
+  store: they were condensed from the orrery's old Earth hover text
+  when the `about` paragraphs were written (L-331).
+- **One case the kelvin rule cannot settle alone, for Tony:** Earth's
+  surface temperatures, "minus 80 to 60 degrees Celsius", would read
+  as about 190 to 330 kelvin. **Tony-action (decide)** at the wording
+  list.
+**Gap:** Earth's share: discovery first, then each number sourced
+into a row or removed, every wording change to Tony as a list; the
+orrery's low-orbit numbers with them.
 **Ref:** L-452; L-411 (the same class in the Sun's hovers); gallery
 `data/objects_config.json`.
 
@@ -1567,7 +1590,7 @@ re-read against the rule when the Sun's turn comes.
 
 
 #### [L-411] The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice)
-<!-- L:411 status:OPEN upd:2026-10-04 section:A flag: rice: -->
+<!-- L:411 status:OPEN upd:2026-10-17 section:A flag: rice: -->
 - **Recorded 2026-10-04** while building L-371. The orrery's Sun
   hovers, and some of the gallery's served words, still type numbers
   that no row holds. One row per CLASS (The Braid); the instances live
@@ -1589,7 +1612,42 @@ re-read against the rule when the Sun's turn comes.
   `comet_visualization_shells.py` and missed it here. The other six
   Tier-1 findings in that file are the date-sensitive hovers this item
   already holds.
-**Gap:** the Sun slice's fifth item (L-412), straight after L-228.
+- **2026-10-17, the first four groups done** (Claude Opus 5.5; Tony's
+  scope ruling and his approval of the wording list, revision 2, the
+  same evening). Discovery first, apart from remediation:
+  `documentation/DISCOVERY_L411_sun_typed_numbers_20261017.md` lists
+  every number typed into the Sun's visitor text, by kind and by
+  string: 340 digit runs in 40 orrery strings, about 170 claims, and
+  15 numbers in 9 website word fields. Done: W, the website's Sun
+  words, which print their numbers from rows or no longer type them;
+  S, the numbers the store already held, printed through it, which
+  corrected Parker's closest approach (9.85 solar radii from the
+  Sun's centre; the 8.8 was its height) and the MAPS sentence built
+  on it; D, the Voyagers' heliopause line and the streamer belt's
+  ruling date; N, Voyager 2's 84 AU (NASA SVS), Sedna's farthest
+  point (937 AU, from the period record fetched around the solar
+  system's barycentre), the termination shock's 80 to 100 AU
+  (Treumann and Jaroschek 2008), the wind's speed across it (Li, Wang
+  and Richardson 2008) and the 15 solar radii floor. Removed for want
+  of a source: the core's "a third of its mass" and "the hottest
+  place in the solar system". Before and after:
+  `documentation/WORDS_L411_L386_sun_numbers_20261017.md`.
+- **Tony's two questions on revision 1:** kelvin, now a rule in
+  provenance-discipline 2.31; and "No source?" on three removals,
+  each of which had one. A search run once and stopped is not "no
+  source".
+- **Left on this item:** groups T (textbook figures: temperatures,
+  the wavelengths worked from them, the core's make-up, thicknesses,
+  speeds, the corona's extents, `hover_text_sun`, the Oort cloud's
+  counts), M (the comet MAPS's 2026 dates and distances,
+  observations that migrate to the store) and C (the comets that
+  survived inside the Roche limit); the streamer band's 7.25 degrees
+  (the solar pole, a dict with no rows); the Roche formula's typed
+  inputs; and the orrery photosphere's 5,500 K with the wavelength
+  worked from it, which move together. Tony, on the method:
+  "settle as much as possible by method rather than by judgement."
+**Gap:** groups T, M and C and the three leftovers above, one shell
+at a time. Not part of the Sun's numbers half, which ends with L-455.
 **Ref:** `solar_visualization_shells.py`, `comet_visualization_shells.py`;
 gallery `data/objects_config.json`; L-228, L-371.
 
@@ -2192,8 +2250,17 @@ above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
   - THEN L-443 (the objects to the website), its design session
     first; Earth's talks are no longer in front of it.
   Items 1, 2 and 8 were already done.
-**Gap:** the numbers first: L-228, L-411, L-386 and L-371's Gap; then
-Tony's choice of drawings; then L-443.
+- **2026-10-17, the numbers half built** (Claude Opus 5.5;
+  `documentation/HANDOFF_L412_sun_numbers_20261017.md`). L-228, L-386
+  and L-371 DONE; L-411's first four groups done, its bulk left on it
+  for later sessions. Tony then ruled: "the numbers half ends with
+  Earth's sweep (L-455), the same method." L-455 is next session, and
+  the twelve eyeballed shape numbers from L-371's Gap (the streamer
+  belt's seven, the clumpy Oort cloud's five) go with the drawings:
+  "confirmed as recommended."
+**Gap:** L-455 (Earth's share), the numbers half's last item; then
+Tony's choice of drawings, the streamer belt's and the clumps'
+eyeballed numbers with them; then L-443.
 **Ref:** L-371 (the slice's numbers); the handles above; L-413;
 `documentation/LEDGER_SWEEP_review_20261004.md`.
 
@@ -2739,34 +2806,6 @@ is enough. L-422 holds the shape; this item holds the check.
 **Gap:** The orrery prints each converted value through `constants_rows.conversion_text()` (or `conversions()` for a row with no conversion name); with L-352, since both are the orrery's display formatting.
 **Ref:** `shell_configs.py`; `earth_visualization_shells.py`; `constants_rows.py`; L-345; L-352.
 
-#### [L-386] The Sun's conversion rows, not yet exported (store, the Sun's slice)
-<!-- L:386 status:OPEN upd:2026-10-09 section:A flag: rice: -->
-- **Recorded, not built.** Under Tony's ruling of 2026-09-28 (L-345) a
-  value in another unit is computed, never stored. The Sun's rows are
-  not exported yet, and several are another row in a different unit:
-  `SOLAR_RADIUS_AU` (the solar radius in AU), `CORE_AU`,
-  `RADIATIVE_ZONE_AU`, the Oort cloud and termination shock rows in AU,
-  and their neighbours. The Sun room's photosphere points at
-  `SOLAR_RADIUS_AU` today.
-- Each is re-homed to the unit its source gives when the Sun's slice
-  walks it; the export then serves its other units as `"in"`.
-- The same class reaches every body not yet walked.
-- **2026-10-04, two re-homed (L-371):** HELIOPAUSE_AU (121, Gurnett)
-  with HELIOPAUSE_RADII its conversion, and GRAVITATIONAL_INFLUENCE_PC
-  (0.65, Portegies Zwart) with GRAVITATIONAL_INFLUENCE_AU its
-  conversion; KM_PER_PARSEC and the pc token added for it. The Oort
-  edges and the termination shock were already in their sources' unit.
-- **2026-10-09, SOLAR_RADIUS_AU's marker shown working** (test A3;
-  record `documentation/HANDOFF_L418_testing_20261009.md`). On a throwaway, replacing its two `# Derived:` lines
-  with `# Unit: au` and `# Conversion: of SUN_RADIUS_KM -- computed from
-  that row, which carries the source and the count.` cleared the one
-  UNMARKED CONVERSION test_derived_figures.py prints; 19 conversions
-  checked, none wrong. Not applied: that session edited no deliverable.
-**Gap:** the core, the radiative zone and the photosphere's AU row
-(CORE_AU, RADIATIVE_ZONE_AU, SOLAR_RADIUS_AU), still unexported: the
-Sun slice's seventh item (L-412).
-**Ref:** `constants_new.py`; gallery `data/objects_config.json`; L-345; L-371; L-322.
-
 #### [L-385] The orrery's Auto view of the Sun opens about 31 times wider since Stage D (orrery, Tony's eye)
 <!-- L:385 status:OPEN upd:2026-10-17 section:A flag: rice: -->
 **Tony:** (on Where We Are, 2026-09-30, how wide the Sun's opening view
@@ -2932,113 +2971,6 @@ overlays retire.)
   stays.
 **Gap:** Move the two marker sizes into the drawing code.
 **Ref:** `constants_new.py`; `palomas_orrery.py`; `palomas_orrery_helpers.py`.
-
-#### [L-371] The Sun room's served numbers: 43 with no link, and radii printed with no count (gallery, the Sun's slice)
-<!-- L:371 status:OPEN upd:2026-10-08 section:A flag: rice: -->
-- **Found 2026-09-22 and 2026-09-28.** In `data/objects_config.json`
-  the Sun carries 43 numbers with no link to a store row, not yet sorted
-  into measurements and drawing choices (manifest section 2.6). [per
-  chain]
-- The Sun room's "Radius:" line (the `r_sun` branch of
-  `feature_renderers.js`) prints each served value as it is, with no
-  figure count. The chromosphere and the photosphere are being fixed in
-  the gallery patch that finishes L-322 Stage D; the others, such as the
-  Alfven surface at 19.7, stay as they are until their rows carry
-  counts.
-- The Sun is the next body's slice, since its room is published.
-- **Note (2026-09-29, the order):** the Sun's slice now follows L-363's
-  Half 2 through Tony's Mode 5, on his ruling C; see L-322's note of
-  the same date.
-- **Sorted 2026-10-02** (Claude Opus 5.5; the test is the skill's --
-  does changing the number move WHERE something is drawn or only HOW
-  it looks). The 43 are exactly the four `drawing` blocks of the Sun's
-  hand-built shapes: streamer belt 18, Hills cloud torus 7, clumpy outer
-  Oort 10, galactic tide 8. None is a measurement, so none needs a row.
-  Rendering settings, 22, stay where they are: the streamer's four point
-  counts, jitter, seed, brightness and two marker sizes; and each Oort
-  shape's point counts, seed, opacity and marker size. Copies of linked
-  rows, 2: the streamer's base radius (the photosphere) and its outer
-  radius, 20.0 typed where the orrery works out 19.9955, past the
-  Alfven surface where nothing shows. Eyeballed shape numbers, 19, do
-  not promote: the streamer's two widths, helmet curve, stalk taper,
-  fade curve, warp and lobe count; the torus's thickness, flattening
-  and 10% scatter (borderline: it pushes points past the stated edges);
-  the clumps' count, two sizes and two concentration numbers; the
-  tide's spread, two cut-offs and asymmetry.
-- **The tide's four went on 2026-10-02 (L-406)**, replaced by sourced
-  rows and a sourced shape. Fifteen eyeballed numbers remain in the
-  streamer belt, the torus and the clumps, to be taken one drawing at a
-  time, each needing its own source hunt.
-- **The Sun's distance cards, 2026-10-03.** Tony, on the phone: the
-  km do not follow the figures rule ("= 299,195,741,400 km (2.00e+3
-  AU)"). 18 lines on 15 cards. km at every digit from an AU row (6):
-  Termination Shock, Heliopause, Inner Limit of Oort Cloud, Inner Oort
-  Cloud, Outer Oort Cloud, Gravitational Influence, each with its AU in
-  scientific form. km at every digit from solar radii (6 lines, 5
-  cards): Streamer Belt (two), Inner Corona, Roche Limit (Comets),
-  Alfven Surface, Outer Corona. AU as typed and km at three figures
-  (6 lines, 3 cards): Hills Cloud torus, Outer Oort clumps, Galactic
-  Tide. Cause: the 11 rows behind them carry no figure count, and 10
-  have no Unit line, so they are not exported.
-- **Sources read and Tony's rulings, 2026-10-02/03:** recorded in full
-  in `documentation/HANDOFF_L406_L407_L371_session_20261003.md`,
-  section 3 -- each row's source, what it prints, its figure count;
-  ruling A (draw one end of a range and say so, built by the skill's
-  range rule); the approved notes; Gravitational Influence as the
-  Sun's Hill radius, 0.65 pc (Portegies Zwart et al. 2021), on Tony's
-  correction that a Hill sphere is calculated, not chosen.
-- **2026-10-04, the distance cards BUILT** [verified @ orrery e38b86ad,
-  gallery ba688199]. Three patches: patch_L371_1 (orrery rows, the pc
-  token, `constants_rows.row_text()`, the orrery hovers by count, three
-  relation tests, exact_rows_report seeing `row_text()`), patch_L371_2
-  (ROCHE_LIMIT_DRAWN_RADII), patch_L371_3 (gallery links, Tony's notes
-  with their numbers from served range rows, `drawn_radius`, a far
-  shell's "Radius: <n> AU", the re-recorded hover fixture). Orrery 20
-  of 20, gallery 23 of 23 after the cache rebuild; Tony approved both
-  wording files and confirmed on the phone. Sources re-opened
-  2026-10-04: Stone et al. 2005 (94.01 AU), Gurnett et al. 2013 p. 1489
-  (121 AU; the 121.6 the old comment attributed to it is not in the
-  paper), NASA's Oort Cloud facts page, Portegies Zwart et al. 2021
-  (0.65 pc in the captions of Figs. 2 and 3 and sec. 5 -- not Fig. 4,
-  as the previous handoff said; and sec. 2.2 for the 20,000 AU edge,
-  because Duncan, Quinn and Tremaine's abstract does not print it),
-  Kasper et al. 2021 (19.7; its Table 1 says 19.8). The outer corona's
-  Mann et al. (2004) citation could not be found and is removed.
-- **Tony's rulings this session.** (1) The Roche limit, known to one
-  figure, is DRAWN at its formula's full 3.45 on both sites, option B,
-  because at 3 it would sit on the inner corona's line; which is
-  further out is not known. An interim until L-410. (2) The leading-1
-  shortcut is NOT adopted: the uncertainty test of 2026-09-28 is the
-  rule, and it prints 100,000 AU as 10,000,000,000,000 km and 3 solar
-  radii as 0.01 AU. Tony: "I don't want to violate my own rule!"
-- **Found, recorded, not fixed.** (a) EXACT_ROWS_PRINTED.md lists 11
-  gallery pointers to exact Sun rows as NOT FOLLOWED -- the cusp, the
-  corona, the Oort edges, the drawn Roche row, the galactic pole. The
-  website does print them by the served count, but the check cannot
-  confirm it until each has a PRINTS or DRAWN entry in
-  exact_rows_report.py. (b) The typed numbers left in the Sun's hovers
-  are L-411. (c) This session's rows and credit lines were first
-  stamped 2026-10-03; the work was 2026-10-04. The close patches
-  correct them; the patch file names keep 20261003.
-- **Carried to the skills' next versions.** provenance-discipline
-  cites GRAVITATIONAL_INFLUENCE_AU and its _RANGE_AU row as the worked
-  example of When the Source Gives a Range; the range row is gone, so
-  the example now belongs to the Oort edges or the helmet cusp. A
-  session following the old sentence looks for a row that does not
-  exist and finds the right rule nearby, so it is carried, not bumped.
-  And for any patch's "what the run should say": predict the
-  scanner's CHANGE, not its total (this machine and Tony's differ by
-  one), and expect the patch script itself to be scanned while it sits
-  in the root folder.
-- **2026-10-08, the two skill sentences landed** in
-  provenance-discipline 2.27 (L-418): the range rule's worked pair is
-  the helmet cusp's two rows, and a patch predicts the scanner's change,
-  not its total.
-**Gap:** (1) PRINTS or DRAWN entries for the 11 not-followed pointers.
-(2) The fifteen eyeballed shape numbers, one drawing at a time. The
-rest of the Sun's slice is ordered on L-412.
-**Ref:** gallery `data/objects_config.json`; gallery `gallery/feature_renderers.js`; L-322 Gap (3); L-345;
-`documentation/HANDOFF_L371_distance_cards_session_20261004.md`; L-386, L-410, L-411, L-412.
 
 #### [L-370] Jupiter and Saturn numbers typed only in objects_config.json (gallery, store)
 <!-- L:370 status:OPEN upd:2026-09-28 section:A flag: rice: -->
@@ -6699,60 +6631,6 @@ exposed it); HANDOFF_20260819_alfven_and_the_swap.md, error 4.
   `documentation/DESIGN_NOTE_20260822_braid_and_citation_kind.md`
   Section 4; `provenance-discipline` 2.6; L-221 (sequencing authority);
   L-224 (the session that surfaced it).
-
-#### [L-228] Alfven surface latitude ranges: source them or omit them
-<!-- L:228 status:OPEN upd:2026-10-08 section:A flag: rice: -->
-- **Note (2026-10-08):** RICE struck (was 2/3/60/2). This item is item 4 of L-412 (the Sun's slice),
-  and an item in an ordered list carries no score; the list's
-  order is its priority (Tony's rule of 2026-10-07, L-412).
-- **Surfaced 2026-08-23** while reading the hover strings for L-227.
-- **THE DRAWN VALUE IS NOT AT ISSUE.** `ALFVEN_SURFACE_RADII` is
-  interpolated into every hover that quotes it, including the derived
-  million-km figure, and carries a `# Source+:` leg saying so (L-209).
-  When it moved 18.8 -> 19.7 the hovers followed by construction. No
-  shadow constant. This item is about PROSE ranges only.
-- **Three different ranges are hardcoded across hover strings in one
-  module**, all for the same quantity: `~15-20 R_sun` in
-  `outer_corona_info_hover`; `~10-20 solar radii` in
-  `alfven_surface_info`; and `Polar coronal holes: ~12-15 R_sun |
-  Streamer belt: ~17-19 R_sun` in BOTH Alfven strings. The `# Source:`
-  above them reads Cranmer et al. (2007), with no position given.
-- **Why it is worth a look rather than a shrug.** `~17-19` sits close
-  to the 17 R_sun corrected at source on 2026-08-22, and DeForest,
-  Howard & McComas (2014) give 12 polar and 15 streamer-belt as
-  INSTRUMENTAL FLOORS -- a noise floor and a coronagraph field of view,
-  not a shape. A range that looks like a measured latitude variation
-  and is actually two instrument limits is the exact confusion the
-  citation-KIND rule was drafted for (design note 2026-08-22,
-  Section 2).
-- **Disposition is already decided; only the citation is open.**
-  Tony's rule, restated 2026-08-23: a range may be NOTED where it has
-  a citation, the VISUALIZATION uses the interpolated constant, and
-  where the citation is insufficient the values are OMITTED. So:
-  read Cranmer et al. (2007) for a locatable position stating the
-  latitude variation. If it carries it, cite it properly and keep the
-  range as prose. If it does not, remove all three ranges and note the
-  gap. Do not reconcile them against each other -- three unsourced
-  numbers agreeing is not evidence.
-- **2026-10-04: the Sun slice's fourth item (L-412).** Claude does the
-  read of Cranmer et al. (2007) itself, by web, and brings the result
-  and any wording change to Tony. Also carries L-229's loose end: a
-  citation for the streamer belt's orientation about the solar
-  equator, or the drawing stays declared.
-- ~~Tony-action (do): the source read.~~ Struck 2026-10-04: the note
-  above it (2026-10-04) has Claude do the read by web, and the two
-  disagreed (Fable 5.1 ledger sweep). The flag that put "[Tony]" on the
-  index row goes with it; the RICE (decide) below stays.
-- **Note:** RICE 2/3/60/2 -> 3.0 is Claude's proposed score.
-  Confidence is 60 because whether Cranmer carries the claim is
-  unknown until somebody reads it. **Tony-action (decide):** confirm
-  or redirect.
-- **Ref:** `solar_visualization_shells.py` (`outer_corona_info_hover`,
-  `alfven_surface_info`, `alfven_surface_info_hover`);
-  `constants_new.py::ALFVEN_SURFACE_RADII`; L-209 (the DeForest
-  correction and the interpolation leg); L-210;
-  `documentation/DESIGN_NOTE_20260822_braid_and_citation_kind.md`
-  Section 2 (value, source, KIND).
 
 #### [L-230] A skill bump does not reach the protocol's version history
 <!-- L:230 status:DEFERRED upd:2026-08-23 section:A flag: rice:3/3/85/2 -->
@@ -24149,6 +24027,241 @@ provenance-discipline.
 **Gap:** none. Closed.
 **Ref:** L-421; L-450; gallery `data/objects_config.json`,
 `tools/store_writer.py`.
+
+#### [L-228] Alfven surface latitude ranges: source them or omit them
+<!-- L:228 status:DONE upd:2026-10-17 section:C flag: rice: -->
+- **Note (2026-10-08):** RICE struck (was 2/3/60/2). This item is item 4 of L-412 (the Sun's slice),
+  and an item in an ordered list carries no score; the list's
+  order is its priority (Tony's rule of 2026-10-07, L-412).
+- **Surfaced 2026-08-23** while reading the hover strings for L-227.
+- **THE DRAWN VALUE IS NOT AT ISSUE.** `ALFVEN_SURFACE_RADII` is
+  interpolated into every hover that quotes it, including the derived
+  million-km figure, and carries a `# Source+:` leg saying so (L-209).
+  When it moved 18.8 -> 19.7 the hovers followed by construction. No
+  shadow constant. This item is about PROSE ranges only.
+- **Three different ranges are hardcoded across hover strings in one
+  module**, all for the same quantity: `~15-20 R_sun` in
+  `outer_corona_info_hover`; `~10-20 solar radii` in
+  `alfven_surface_info`; and `Polar coronal holes: ~12-15 R_sun |
+  Streamer belt: ~17-19 R_sun` in BOTH Alfven strings. The `# Source:`
+  above them reads Cranmer et al. (2007), with no position given.
+- **Why it is worth a look rather than a shrug.** `~17-19` sits close
+  to the 17 R_sun corrected at source on 2026-08-22, and DeForest,
+  Howard & McComas (2014) give 12 polar and 15 streamer-belt as
+  INSTRUMENTAL FLOORS -- a noise floor and a coronagraph field of view,
+  not a shape. A range that looks like a measured latitude variation
+  and is actually two instrument limits is the exact confusion the
+  citation-KIND rule was drafted for (design note 2026-08-22,
+  Section 2).
+- **Disposition is already decided; only the citation is open.**
+  Tony's rule, restated 2026-08-23: a range may be NOTED where it has
+  a citation, the VISUALIZATION uses the interpolated constant, and
+  where the citation is insufficient the values are OMITTED. So:
+  read Cranmer et al. (2007) for a locatable position stating the
+  latitude variation. If it carries it, cite it properly and keep the
+  range as prose. If it does not, remove all three ranges and note the
+  gap. Do not reconcile them against each other -- three unsourced
+  numbers agreeing is not evidence.
+- **2026-10-04: the Sun slice's fourth item (L-412).** Claude does the
+  read of Cranmer et al. (2007) itself, by web, and brings the result
+  and any wording change to Tony. Also carries L-229's loose end: a
+  citation for the streamer belt's orientation about the solar
+  equator, or the drawing stays declared.
+- ~~Tony-action (do): the source read.~~ Struck 2026-10-04: the note
+  above it (2026-10-04) has Claude do the read by web, and the two
+  disagreed (Fable 5.1 ledger sweep). The flag that put "[Tony]" on the
+  index row goes with it; the RICE (decide) below stays.
+- **Note:** RICE 2/3/60/2 -> 3.0 is Claude's proposed score.
+  Confidence is 60 because whether Cranmer carries the claim is
+  unknown until somebody reads it. **Tony-action (decide):** confirm
+  or redirect.
+- **2026-10-17, DONE** (Claude Opus 5.5, the Sun's numbers session;
+  Tony approved the wording list at 21:25, after asking that it meet
+  the five principles of What a Visitor Reads). Cranmer et al. (2007)
+  does not state these ranges: its arXiv copy, read up to Section 8,
+  gives no Alfven radius. The same first author's open review,
+  Cranmer et al. (2023), does: "between about 10 and 20 solar radii"
+  most of the time (abstract), now ALFVEN_SURFACE_RANGE_LOW_RADII and
+  _HIGH_RADII. Its sec. 3.1 says models often put the surface
+  farthest out above the polar coronal holes and closest in at the
+  streamer tops: the hovers had it the other way round, and so did the
+  website's Alfven words, corrected with L-411. The 12 and 15 were
+  DeForest, Howard and McComas (2014)'s "at least" floors; the 15,
+  the coronagraph's field of view, is ALFVEN_SURFACE_STREAMER_FLOOR_RADII.
+  The three typed ranges are gone; each changed line carries
+  "(Cranmer et al. 2023)". L-229's loose end is not in the review
+  either: the streamer belt's orientation stays a declared drawing
+  choice. The RICE question above lapsed with the rule of 2026-10-07.
+- **Ref:** `solar_visualization_shells.py` (`outer_corona_info_hover`,
+  `alfven_surface_info`, `alfven_surface_info_hover`);
+  `constants_new.py::ALFVEN_SURFACE_RADII`; L-209 (the DeForest
+  correction and the interpolation leg); L-210;
+  `documentation/DESIGN_NOTE_20260822_braid_and_citation_kind.md`
+  Section 2 (value, source, KIND).
+
+#### [L-371] The Sun room's served numbers: 43 with no link, and radii printed with no count (gallery, the Sun's slice)
+<!-- L:371 status:DONE upd:2026-10-17 section:C flag: rice: -->
+- **Found 2026-09-22 and 2026-09-28.** In `data/objects_config.json`
+  the Sun carries 43 numbers with no link to a store row, not yet sorted
+  into measurements and drawing choices (manifest section 2.6). [per
+  chain]
+- The Sun room's "Radius:" line (the `r_sun` branch of
+  `feature_renderers.js`) prints each served value as it is, with no
+  figure count. The chromosphere and the photosphere are being fixed in
+  the gallery patch that finishes L-322 Stage D; the others, such as the
+  Alfven surface at 19.7, stay as they are until their rows carry
+  counts.
+- The Sun is the next body's slice, since its room is published.
+- **Note (2026-09-29, the order):** the Sun's slice now follows L-363's
+  Half 2 through Tony's Mode 5, on his ruling C; see L-322's note of
+  the same date.
+- **Sorted 2026-10-02** (Claude Opus 5.5; the test is the skill's --
+  does changing the number move WHERE something is drawn or only HOW
+  it looks). The 43 are exactly the four `drawing` blocks of the Sun's
+  hand-built shapes: streamer belt 18, Hills cloud torus 7, clumpy outer
+  Oort 10, galactic tide 8. None is a measurement, so none needs a row.
+  Rendering settings, 22, stay where they are: the streamer's four point
+  counts, jitter, seed, brightness and two marker sizes; and each Oort
+  shape's point counts, seed, opacity and marker size. Copies of linked
+  rows, 2: the streamer's base radius (the photosphere) and its outer
+  radius, 20.0 typed where the orrery works out 19.9955, past the
+  Alfven surface where nothing shows. Eyeballed shape numbers, 19, do
+  not promote: the streamer's two widths, helmet curve, stalk taper,
+  fade curve, warp and lobe count; the torus's thickness, flattening
+  and 10% scatter (borderline: it pushes points past the stated edges);
+  the clumps' count, two sizes and two concentration numbers; the
+  tide's spread, two cut-offs and asymmetry.
+- **The tide's four went on 2026-10-02 (L-406)**, replaced by sourced
+  rows and a sourced shape. Fifteen eyeballed numbers remain in the
+  streamer belt, the torus and the clumps, to be taken one drawing at a
+  time, each needing its own source hunt.
+- **The Sun's distance cards, 2026-10-03.** Tony, on the phone: the
+  km do not follow the figures rule ("= 299,195,741,400 km (2.00e+3
+  AU)"). 18 lines on 15 cards. km at every digit from an AU row (6):
+  Termination Shock, Heliopause, Inner Limit of Oort Cloud, Inner Oort
+  Cloud, Outer Oort Cloud, Gravitational Influence, each with its AU in
+  scientific form. km at every digit from solar radii (6 lines, 5
+  cards): Streamer Belt (two), Inner Corona, Roche Limit (Comets),
+  Alfven Surface, Outer Corona. AU as typed and km at three figures
+  (6 lines, 3 cards): Hills Cloud torus, Outer Oort clumps, Galactic
+  Tide. Cause: the 11 rows behind them carry no figure count, and 10
+  have no Unit line, so they are not exported.
+- **Sources read and Tony's rulings, 2026-10-02/03:** recorded in full
+  in `documentation/HANDOFF_L406_L407_L371_session_20261003.md`,
+  section 3 -- each row's source, what it prints, its figure count;
+  ruling A (draw one end of a range and say so, built by the skill's
+  range rule); the approved notes; Gravitational Influence as the
+  Sun's Hill radius, 0.65 pc (Portegies Zwart et al. 2021), on Tony's
+  correction that a Hill sphere is calculated, not chosen.
+- **2026-10-04, the distance cards BUILT** [verified @ orrery e38b86ad,
+  gallery ba688199]. Three patches: patch_L371_1 (orrery rows, the pc
+  token, `constants_rows.row_text()`, the orrery hovers by count, three
+  relation tests, exact_rows_report seeing `row_text()`), patch_L371_2
+  (ROCHE_LIMIT_DRAWN_RADII), patch_L371_3 (gallery links, Tony's notes
+  with their numbers from served range rows, `drawn_radius`, a far
+  shell's "Radius: <n> AU", the re-recorded hover fixture). Orrery 20
+  of 20, gallery 23 of 23 after the cache rebuild; Tony approved both
+  wording files and confirmed on the phone. Sources re-opened
+  2026-10-04: Stone et al. 2005 (94.01 AU), Gurnett et al. 2013 p. 1489
+  (121 AU; the 121.6 the old comment attributed to it is not in the
+  paper), NASA's Oort Cloud facts page, Portegies Zwart et al. 2021
+  (0.65 pc in the captions of Figs. 2 and 3 and sec. 5 -- not Fig. 4,
+  as the previous handoff said; and sec. 2.2 for the 20,000 AU edge,
+  because Duncan, Quinn and Tremaine's abstract does not print it),
+  Kasper et al. 2021 (19.7; its Table 1 says 19.8). The outer corona's
+  Mann et al. (2004) citation could not be found and is removed.
+- **Tony's rulings this session.** (1) The Roche limit, known to one
+  figure, is DRAWN at its formula's full 3.45 on both sites, option B,
+  because at 3 it would sit on the inner corona's line; which is
+  further out is not known. An interim until L-410. (2) The leading-1
+  shortcut is NOT adopted: the uncertainty test of 2026-09-28 is the
+  rule, and it prints 100,000 AU as 10,000,000,000,000 km and 3 solar
+  radii as 0.01 AU. Tony: "I don't want to violate my own rule!"
+- **Found, recorded, not fixed.** (a) EXACT_ROWS_PRINTED.md lists 11
+  gallery pointers to exact Sun rows as NOT FOLLOWED -- the cusp, the
+  corona, the Oort edges, the drawn Roche row, the galactic pole. The
+  website does print them by the served count, but the check cannot
+  confirm it until each has a PRINTS or DRAWN entry in
+  exact_rows_report.py. (b) The typed numbers left in the Sun's hovers
+  are L-411. (c) This session's rows and credit lines were first
+  stamped 2026-10-03; the work was 2026-10-04. The close patches
+  correct them; the patch file names keep 20261003.
+- **Carried to the skills' next versions.** provenance-discipline
+  cites GRAVITATIONAL_INFLUENCE_AU and its _RANGE_AU row as the worked
+  example of When the Source Gives a Range; the range row is gone, so
+  the example now belongs to the Oort edges or the helmet cusp. A
+  session following the old sentence looks for a row that does not
+  exist and finds the right rule nearby, so it is carried, not bumped.
+  And for any patch's "what the run should say": predict the
+  scanner's CHANGE, not its total (this machine and Tony's differ by
+  one), and expect the patch script itself to be scanned while it sits
+  in the root folder.
+- **2026-10-08, the two skill sentences landed** in
+  provenance-discipline 2.27 (L-418): the range rule's worked pair is
+  the helmet cusp's two rows, and a patch predicts the scanner's change,
+  not its total.
+- **2026-10-17, DONE** (Claude Opus 5.5, the Sun's numbers session).
+  Gap (1): `exact_rows_report.py` follows every Sun pointer, with
+  PRINTS and DRAWN entries for the cusp, the two coronae, the
+  photosphere, the Oort edges, the Hills cloud's inner radius, the
+  clumps' and the tide's radii, the drawn Roche row, and the galactic
+  pole and plane. Two blind spots in the check were fixed on the way:
+  it did not count the website's served-count printers as print
+  lines, and it read a shell's count from the feature rather than its
+  served slot, and against the row's own unit. It now reads the slot
+  by the mirror's rule and compares a slot served in another unit
+  through the export's "in" counts. The run reads 12 of 40 exact rows
+  printed at 54 lines, 12 drawn only, 0 not followed, 0 map entries
+  broken; a planted wrong count was caught by name. Earth's stale
+  low-orbit entry is removed. Gap (2): twelve eyeballed numbers
+  remain, not fifteen; the Hills cloud's three went with its stored
+  drawing (L-421). The streamer belt's seven: two widths, the helmet's
+  curve, the stalk's taper, the fade's curve, the warp's angle and its
+  lobe count. The clumpy Oort cloud's five: the clump count, two
+  sizes and two concentration numbers. Each changes how a drawing
+  looks, so they go with the drawings, on L-412 (Tony, 2026-10-17).
+**Gap:** none here; the twelve eyeballed numbers are on L-412, with
+the drawings.
+**Ref:** gallery `data/objects_config.json`; gallery `gallery/feature_renderers.js`; L-322 Gap (3); L-345;
+`documentation/HANDOFF_L371_distance_cards_session_20261004.md`; L-386, L-410, L-411, L-412.
+
+#### [L-386] The Sun's conversion rows, not yet exported (store, the Sun's slice)
+<!-- L:386 status:DONE upd:2026-10-17 section:C flag: rice: -->
+- **Recorded, not built.** Under Tony's ruling of 2026-09-28 (L-345) a
+  value in another unit is computed, never stored. The Sun's rows are
+  not exported yet, and several are another row in a different unit:
+  `SOLAR_RADIUS_AU` (the solar radius in AU), `CORE_AU`,
+  `RADIATIVE_ZONE_AU`, the Oort cloud and termination shock rows in AU,
+  and their neighbours. The Sun room's photosphere points at
+  `SOLAR_RADIUS_AU` today.
+- Each is re-homed to the unit its source gives when the Sun's slice
+  walks it; the export then serves its other units as `"in"`.
+- The same class reaches every body not yet walked.
+- **2026-10-04, two re-homed (L-371):** HELIOPAUSE_AU (121, Gurnett)
+  with HELIOPAUSE_RADII its conversion, and GRAVITATIONAL_INFLUENCE_PC
+  (0.65, Portegies Zwart) with GRAVITATIONAL_INFLUENCE_AU its
+  conversion; KM_PER_PARSEC and the pc token added for it. The Oort
+  edges and the termination shock were already in their sources' unit.
+- **2026-10-09, SOLAR_RADIUS_AU's marker shown working** (test A3;
+  record `documentation/HANDOFF_L418_testing_20261009.md`). On a throwaway, replacing its two `# Derived:` lines
+  with `# Unit: au` and `# Conversion: of SUN_RADIUS_KM -- computed from
+  that row, which carries the source and the count.` cleared the one
+  UNMARKED CONVERSION test_derived_figures.py prints; 19 conversions
+  checked, none wrong. Not applied: that session edited no deliverable.
+- **2026-10-17, DONE** (Claude Opus 5.5, the Sun's numbers session).
+  Each row is in its source's unit: CORE_RADII, 0.25 (Hathaway, the
+  solar interior page: "the innermost 25%"), with CORE_AU its
+  conversion; RADIATIVE_ZONE_RADII, a measured 0.713 +/- 0.003
+  (Delahaye and Pinsonneault), with RADIATIVE_ZONE_AU its conversion;
+  SOLAR_RADIUS_AU marked a conversion of SUN_RADIUS_KM, as test A3 had
+  shown. The website's core, radiative zone and photosphere point at
+  CORE_RADII, RADIATIVE_ZONE_RADII and SUN_RADIUS_KM. The core is now
+  drawn at 0.25 solar radii on both sites, where the 0.2 rested on a
+  textbook nobody here can open; the radiative zone's edge prints
+  0.71, the figures its uncertainty supports.
+**Gap:** none. The same class on a body not yet walked is met in
+that body's slice.
+**Ref:** `constants_new.py`; gallery `data/objects_config.json`; L-345; L-371; L-322.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

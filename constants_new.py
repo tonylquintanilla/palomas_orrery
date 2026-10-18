@@ -168,6 +168,19 @@ which the body hover's speed goes through; and the Voyagers' predicted
 pointing uncertainties, four rows read from their Horizons data sheets,
 the only spacecraft sheets of the 26 the orrery draws that state one.
 No value changes.)
+Module updated: October 17, 2026 with Anthropic's Claude Opus 5.5
+(the Sun's numbers, L-228, L-411, L-386 and L-371: the Alfven
+surface's usual range as two rows and the coronagraph floor as a row,
+from Cranmer et al. (2023) and DeForest, Howard and McComas (2014); the
+core's radius and the photosphere's thickness and temperature from
+Hathaway's NASA/Marshall pages, and the radiative zone's edge as a
+measured row from Delahaye and Pinsonneault; Parker Solar Probe's
+closest approach as its altitude, its distance from the centre derived;
+the termination shock's range (Treumann and Jaroschek), Voyager 2's
+crossing (NASA SVS) and the wind's speed either side (Li, Wang and
+Richardson); the chromosphere's depth re-homed to an open source.
+CORE_AU, RADIATIVE_ZONE_AU, SOLAR_RADIUS_AU and PARKER_CLOSEST_RADII
+are conversions of their rows.)
 """
 
 import math
@@ -2129,8 +2142,8 @@ SPEED_OF_LIGHT_KM_S = 299792.458
 # consistency with the IAU primary definitions.
 
 SOLAR_RADIUS_AU = SUN_RADIUS_KM / KM_PER_AU
-# Derived: 695700 / 149597870.7 = 0.004650467...
-# Derived+: Previous hardcoded value was 0.00465047 (consistent to 6 sig figs)
+# Unit: au
+# Conversion: of SUN_RADIUS_KM -- computed from that row, which carries the source and the count.
 
 LIGHT_MINUTES_PER_AU = KM_PER_AU / SPEED_OF_LIGHT_KM_S / 60.0
 # Derived: 149597870.7 / 299792.458 / 60 = 8.31675...
@@ -2165,42 +2178,103 @@ CENTER_MARKER_SIZE = 10  # For central objects like the Sun
 # Cross-checked: Gemini 2026-08-02 -- Carroll & Ostlie (worksheet_gemini_constants_remaining.md)
 # Cross-checked: GPT 2026-08-02 -- NASA Sun Fact Sheet (constants_new_citation_verification_gpt.md)
 
-CORE_AU = 0.2 * SOLAR_RADIUS_AU
-# Visualization boundary at low end of conventional 0.2-0.25 R_sun core range
-# Source: Bahcall, Pinsonneault & Basu (2001), ApJ 555:990 (radial profiles)
-# Also: Carroll & Ostlie (2017), Ch. 11 gives 0.2-0.25 R_sun
-# Cross-checked: Gemini 2026-08-02 -- Carroll & Ostlie (worksheet_gemini_constants_remaining.md)
-# Cross-checked: GPT 2026-08-02 -- NASA solar structure (constants_remaining_independent_verification_gpt.md)
+CORE_RADII = 0.25
+# Unit: r_sun
+# Status: measured V_SOURCED 2026-10-17 -- open page
+# Figures: 2 -- the source prints "25%".
+# Read: the solar interior page, NASA/Marshall Solar Physics, 2026-10-17,
+# Read+: Claude Opus 5.5.
+# Source: Hathaway, D. H., "NASA/Marshall Solar Physics", the solar interior page -- energy is
+# Source+: generated in the core, the innermost 25%; the nuclear burning
+# Source+: is almost completely shut off beyond its outer edge, about 25%
+# Source+: of the distance to the surface. The temperature at the very
+# Source+: center is about 15,000,000 degrees C and the density about
+# Source+: 150 g/cm3. https://solarscience.msfc.nasa.gov/interior.shtml
+# Also: Bahcall, Pinsonneault and Basu (2001), "Solar Models: current
+# Also+: epoch and time dependences, neutrinos, and helioseismological
+# Also+: properties", ApJ 555:990, arXiv:astro-ph/0010346 -- the standard
+# Also+: model's center, 15.7 million K and 152.7 g/cm3 (Table 5), with a
+# Also+: hydrogen mass fraction of 0.340 there (sec. 3.4).
+# Access: open, https://solarscience.msfc.nasa.gov/interior.shtml
+# Access+: (2026-10-17).
+# Corrected: 2026-10-17 (L-386, L-411) -- was CORE_AU = 0.2 x the solar
+# Corrected+: radius, the low end of a 0.2-0.25 range in Carroll and
+# Corrected+: Ostlie (2017), a book no one here can open (the Access
+# Corrected+: Standard). The open source gives 25%, so the core is drawn
+# Corrected+: there. Now in the unit its source gives.
+# Cross-check retired: 2026-10-17 -- the Gemini and GPT legs of
+# Cross-check retired+: 2026-08-02 checked 0.2 against Carroll and Ostlie
+# Cross-check retired+: and a NASA structure page; the value and the
+# Cross-check retired+: citation have both moved.
 
-RADIATIVE_ZONE_AU = 0.713 * SOLAR_RADIUS_AU
-# Source: Christensen-Dalsgaard, Gough & Thompson (1991), ApJ 378:413,
-#   "The depth of the solar convection zone" -- convection-zone DEPTH
-#   measured at 0.287 +/- 0.003 solar radii.
-# Derived: base of the convection zone = 1 - 0.287 = 0.713 R_sun. A
-# Derived+: subtraction, so decimal PLACES govern: three, matching the
-# Derived+: stated +/- 0.003.
-# Status: measured V_SOURCED 2026-08-29 -- verified against the source
-# Access: free NASA ADS abstract, bibcode 1991ApJ...378..413C. Also
-#   corroborated in open arXiv text (astro-ph/0511779), which gives
-#   the 1991 estimate as 0.713 +/- 0.003 and Basu & Antia (2004) as
-#   0.7133 +/- 0.0005. The tighter figure is NOT adopted: it is a
-#   different work, and taking it is a re-sourcing, not a rounding.
-# Corrected: 2026-08-29 (L-258) -- held 0.7 beside a comment saying
-#   it rounded 0.713, which is the founding case for The Store
-#   Carries the Verified Figure (provenance-discipline 2.10). The
-#   comment also called this the helioseismic TACHOCLINE; the paper
-#   measures the base of the convection zone, and the tachocline is
-#   the shear layer at approximately that depth -- a neighbouring
-#   claim, not the cited one.
+CORE_AU = CORE_RADII * SUN_RADIUS_KM / KM_PER_AU
+# Unit: au
+# Conversion: of CORE_RADII -- computed from that row, which carries the source and the count.
+
+PHOTOSPHERE_THICKNESS_KM = 100
+# Unit: km
+# Status: measured V_SOURCED 2026-10-17 -- open page
+# Figures: 1 -- the source gives about 100 km; the zeros are placeholders.
+# Read: the photosphere page, NASA/Marshall Solar Physics, 2026-10-17,
+# Read+: Claude Opus 5.5.
+# Source: Hathaway, D. H., "NASA/Marshall Solar Physics", the photosphere page -- the
+# Source+: photosphere is not a solid surface but a layer about 100 km
+# Source+: thick. https://solarscience.msfc.nasa.gov/surface.shtml
+# Note: both instruments typed 500 km, with no source (L-411).
+
+PHOTOSPHERE_TEMPERATURE_K = 5700
+# Unit: k
+# Status: measured V_SOURCED 2026-10-17 -- open page
+# Figures: 2 -- the source prints 5,700 K; the zeros are placeholders.
+# Read: the solar interior page, NASA/Marshall Solar Physics, 2026-10-17,
+# Read+: Claude Opus 5.5.
+# Source: Hathaway, D. H., "NASA/Marshall Solar Physics", the solar interior page -- at the
+# Source+: visible surface the temperature has dropped to 5,700 K.
+# Source+: https://solarscience.msfc.nasa.gov/interior.shtml
+# Note: the website typed 5,500 kelvin, with no source (L-411). The
+# Note+: orrery's photosphere hover still types ~5,500 K beside a peak
+# Note+: wavelength worked out from it; the two move together when that
+# Note+: shell's typed figures are worked (L-411).
+
+RADIATIVE_ZONE_RADII = 0.713
+# Unit: r_sun
+# Status: measured V_SOURCED 2026-10-17 -- open full text
+# Figures: 2 -- uncertainty 0.003; the source prints 0.713, and that
+# Figures+: uncertainty reports to hundredths (the Report test).
+# Read: sec. 2.2, Delahaye and Pinsonneault, the arXiv PDF, 2026-10-17,
+# Read+: Claude Opus 5.5.
+# Source: Delahaye, F. and Pinsonneault, M. H., "The Solar Heavy Element
+# Source+: Abundances: I. Constraints from Stellar Interiors",
+# Source+: arXiv:astro-ph/0511779 -- sec. 2.2: the base of the convection
+# Source+: zone, in solar radii, is 0.7133 +/- 0.0005 (Basu and Antia 2004),
+# Source+: effectively identical to the 1991 estimate of 0.713 +/- 0.003.
+# Source+: Hathaway, D. H., "NASA/Marshall Solar Physics", the solar interior page -- the
+# Source+: radiative zone extends from the outer edge of the core to the
+# Source+: interface layer; the temperature falls from 7,000,000 degrees C
+# Source+: to about 2,000,000 degrees C over the same distance, and an
+# Source+: individual photon takes about a million years to reach the
+# Source+: interface layer. https://solarscience.msfc.nasa.gov/interior.shtml
+# Also: Christensen-Dalsgaard, Gough and Thompson (1991), "The depth of
+# Also+: the solar convection zone", ApJ 378:413 -- the 1991 estimate,
+# Also+: given in its abstract as a depth of 0.287 +/- 0.003 solar radii
+# Also+: (NASA ADS, bibcode 1991ApJ...378..413C).
+# Note: the 1991 figure is kept, not Basu and Antia's tighter 0.7133:
+# Note+: that is a different work, and taking it is a re-sourcing (The
+# Note+: Store Carries the Verified Figure).
+# Corrected: 2026-08-29 (L-258) -- held 0.7 beside a comment saying it
+# Corrected+: rounded 0.713, the founding case for The Store Carries the
+# Corrected+: Verified Figure (provenance-discipline 2.10). The comment
+# Corrected+: also called this the helioseismic TACHOCLINE; the work
+# Corrected+: measures the base of the convection zone. 2026-10-17
+# Corrected+: (L-386): moved from RADIATIVE_ZONE_AU into the unit its
+# Corrected+: source gives, and cited to the open text that states it.
 # Cross-check retired: 2026-08-29 -- two legs dated 2026-08-02 were
-#   stripped, per A Cross-Check Retires With Its Value or Its
-#   Citation. Both triggers fired at once: the value moved 0.7 ->
-#   0.713, and the source line was repaired. The GPT leg certified
-#   0.7 against "helioseismology literature" and a check of the old
-#   value is not a check of the new one. The Gemini leg cited
-#   Carroll & Ostlie, which is not the work this row cites, so it
-#   certified a neighbouring claim. Recorded rather than deleted
-#   silently: a removal leaves no trace otherwise.
+# Cross-check retired+: stripped when the value moved 0.7 -> 0.713 and
+# Cross-check retired+: the source line was repaired.
+
+RADIATIVE_ZONE_AU = RADIATIVE_ZONE_RADII * SUN_RADIUS_KM / KM_PER_AU
+# Unit: au
+# Conversion: of RADIATIVE_ZONE_RADII -- computed from that row, which carries the source and the count.
 
 # Solar atmosphere (in solar radii)
 # RETIRED 2026-08-16 -- CHROMOSPHERE_RADII = 1.1, the DRAWN shell radius.
@@ -2218,13 +2292,30 @@ RADIATIVE_ZONE_AU = 0.713 * SOLAR_RADIUS_AU
 
 CHROMOSPHERE_PHYSICAL_KM = 2000.0
 # Unit: km
-# Status: measured V_CROSS_CHECKED 2026-08-02
-# Figures: 1 -- Carroll & Ostlie give about 2,000 km, so the zeros are
+# Status: measured V_SOURCED 2026-10-17 -- open page
+# Figures: 1 -- the source gives approximately 2000 km, so the zeros are
 # Figures+: placeholders and only the 2 counts (Rule 2); good to
 # Figures+: thousands of kilometres.
-# Source: Carroll & Ostlie, An Introduction to Modern Astrophysics,
-# Source+: Ch. 11 -- chromosphere extends ~2000 km above the photosphere.
-# Cross-checked: Gemini 2026-08-02 -- Carroll & Ostlie (worksheet_gemini_constants_remaining.md)
+# Read: Yohkoh Public Outreach Project, "A 'Dancing' Layer of the Sun",
+# Read+: 2026-10-17, Claude Opus 5.5.
+# Source: Yohkoh Public Outreach Project, Montana State University Solar
+# Source+: Physics, "A 'Dancing' Layer of the Sun" -- above the photosphere
+# Source+: is a layer of gas, approximately 2000 km thick, known as the
+# Source+: chromosphere.
+# Source+: https://solar.physics.montana.edu/YPOP/Spotlight/SunInfo/Chromosph.html
+# Source+: Hathaway, D. H., "NASA/Marshall Solar Physics", the chromosphere page -- the
+# Source+: temperature rises from 6000 degrees C to about 20,000 degrees C;
+# Source+: at these temperatures hydrogen gives off a reddish light
+# Source+: (H-alpha), which gives the chromosphere its name.
+# Source+: https://solarscience.msfc.nasa.gov/chromos.shtml
+# Also: Carroll and Ostlie, An Introduction to Modern Astrophysics, Ch. 11,
+# Also+: the same figure (a book, not opened here). NASA's 2017 eclipse
+# Also+: page gives about 5,000 km, and the layer has no sharp top:
+# Also+: https://science.gsfc.nasa.gov/attic/eclipse2017.gsfc.nasa.gov/chromosphere.html
+# Corrected: 2026-10-17 (L-411) -- cited Carroll and Ostlie, which fails
+# Corrected+: the Access Standard; re-homed to an open page with the same
+# Corrected+: figure. The value is unchanged. The Gemini cross-check of
+# Corrected+: 2026-08-02 checked that citation and is stripped with it.
 # Note: the PHYSICAL extent, and since 2026-08-16 the drawn one too.
 # Note+: CHROMOSPHERE_TOP_KM below adds it to the Sun's radius, and
 # Note+: CHROMOSPHERE_PHYSICAL_RADII, a conversion of that row into solar
@@ -2431,8 +2522,9 @@ ALFVEN_SURFACE_RADII = 19.7
 # See+: with the paper's own 19.7 to rounding.
 # See+: PARKER_CLOSEST_RADII below carries the identical correction, made
 # See+: 2026-04-15: 8.86 was altitude, 9.86 is from Sun center.
-# See+: The surface is neither smooth nor fixed -- 10-20 R_sun varying with
-# See+: solar activity, and the 2021 crossing was into a boundary layer above
+# See+: The surface is neither smooth nor fixed (its usual range is the two
+# See+: ALFVEN_SURFACE_RANGE_ rows below), and the 2021 crossing was into a
+# See+: boundary layer above
 # See+: a pseudostreamer rather than a global shell. 19.7 is the measured
 # See+: first crossing, drawn here as a nominal sphere.
 # Also: https://www.nasa.gov/feature/goddard/2021/nasa-enters-the-solar-atmosphere
@@ -2464,6 +2556,55 @@ ALFVEN_SURFACE_RADII = 19.7
 #   stripped with it: a check of the old value is not a check of the new one.
 # Resolved: worksheet_claude-opus-5_pilot_constants_new_20260818.jsonl constants_new.py::ALFVEN_SURFACE_RADII -- origin mismatch, value and Source replaced (L-209)
 
+# The Alfven surface's usual range is two rows, so the hovers print it
+# from here rather than typing it (L-228, 2026-10-17).
+ALFVEN_SURFACE_RANGE_LOW_RADII = 10
+# Unit: r_sun
+# Status: measured V_SOURCED 2026-10-17 -- open full text
+# Figures: 1 -- the source prints "about 10 and 20"; the zero does not
+# Figures+: count.
+# Read: abstract, Cranmer et al. (2023), the arXiv PDF, 2026-10-17,
+# Read+: Claude Opus 5.5.
+# Source: Cranmer, Chhiber, Gilly, Cairns, Colaninno, McComas, Raouafi,
+# Source+: Usmanov, Gibson and DeForest (2023), "The Sun's Alfven Surface:
+# Source+: Recent Insights and Prospects for the Polarimeter to Unify the
+# Source+: Corona and Heliosphere (PUNCH)", abstract -- the Alfven surface
+# Source+: spends most of its time at heliocentric distances between about
+# Source+: 10 and 20 solar radii; sec. 3.1 -- in global models the
+# Source+: surface's local maxima sit near the centers of large polar
+# Source+: coronal holes and its minima at the tops of helmet streamers.
+# Source+: https://arxiv.org/abs/2310.05887
+# Note: the low end of that stated range. It replaces three ranges the
+# Note+: hovers typed, cited to Cranmer et al. (2007), whose text as far
+# Note+: as its Section 8 states no Alfven radius (L-228).
+# Access: open full text, https://arxiv.org/pdf/2310.05887 (2026-10-17).
+
+ALFVEN_SURFACE_RANGE_HIGH_RADII = 20
+# Unit: r_sun
+# Status: measured V_SOURCED 2026-10-17 -- open full text
+# Figures: 1 -- the source prints "about 10 and 20"; the zero does not
+# Figures+: count.
+# Read: as ALFVEN_SURFACE_RANGE_LOW_RADII, 2026-10-17, Claude Opus 5.5.
+# Source: as ALFVEN_SURFACE_RANGE_LOW_RADII.
+# Note: the high end of that stated range.
+# Access: as ALFVEN_SURFACE_RANGE_LOW_RADII.
+
+ALFVEN_SURFACE_STREAMER_FLOOR_RADII = 15
+# Unit: r_sun
+# Status: measured V_SOURCED 2026-10-17 -- open full text
+# Figures: 2 -- the source prints 15.
+# Read: abstract and sec. 5, DeForest, Howard and McComas (2014), the
+# Read+: arXiv PDF, 2026-10-17, Claude Opus 5.5.
+# Source: DeForest, Howard and McComas (2014), "Inbound Waves in the Solar
+# Source+: Corona: A Direct Indicator of Alfven Surface Location", ApJ
+# Source+: 787:124 -- abstract: the Alfven surface is at least 15 solar radii
+# Source+: from the Sun in the streamer belt; sec. 5: that bound is set by
+# Source+: the field of view of the instrument, the COR2 coronagraph on
+# Source+: STEREO-A. https://arxiv.org/pdf/1404.3235
+# Note: a lower bound, not an extent. Read the PDF, not the arXiv
+# Note+: listing page, whose abstract text gives 12.5 and 17 (see
+# Note+: ALFVEN_SURFACE_RADII's Review-note).
+
 
 # ============================================================
 # HELIOSPHERE BOUNDARIES (in AU)
@@ -2491,6 +2632,74 @@ TERMINATION_SHOCK_AU = 94.01
 # Cross-check retired: 2026-10-04 -- the Claude and GPT legs of 2026-08-02
 # Cross-check retired+: checked the value 94; a check of the old value is
 # Cross-check retired+: not a check of the new one.
+
+VOYAGER2_TERMINATION_SHOCK_AU = 84
+# Unit: au
+# Status: measured V_SOURCED 2026-10-17 -- open page
+# Figures: 2 -- the source prints 84.
+# Read: NASA SVS 20132, 2026-10-17, Claude Opus 5.5.
+# Source: NASA Scientific Visualization Studio, "Voyager 2 Proves Solar
+# Source+: System is Squashed" (23 January 2008) -- Voyager 1 encountered
+# Source+: the termination shock at 94 AU and Voyager 2 encountered it at
+# Source+: only 84 AU. https://svs.gsfc.nasa.gov/20132
+# Also: Li, Wang and Richardson (2008), "Properties of the termination
+# Also+: shock observed by Voyager 2", GRL 35:L19107 -- about 83.6 AU, on
+# Also+: August 30, 2007.
+# Note: the hovers typed 84 with no row, and their comments credited it
+# Note+: to Stone et al. (2005), which is Voyager 1's crossing only (L-411).
+
+TERMINATION_SHOCK_RANGE_LOW_AU = 80
+# Unit: au
+# Status: measured V_SOURCED 2026-10-17 -- open full text
+# Figures: 1 -- the source prints "80 AU and 100 AU" and "80-100 AU".
+# Read: secs. V.A and V.D.2, Treumann and Jaroschek, arXiv HTML,
+# Read+: 2026-10-17, Claude Opus 5.5.
+# Source: Treumann, R. A. and Jaroschek, C. H., "The Heliospheric
+# Source+: Termination Shock", arXiv:0807.4170 -- sec. V.A: depending on
+# Source+: the heliocentric distance of the termination shock between 80 AU
+# Source+: and 100 AU; sec. V.D.2: the location of the termination shock
+# Source+: at 80-100 AU. https://arxiv.org/abs/0807.4170
+# Note: the low end of that stated range. The hovers typed "about 75 to
+# Note+: 100 AU" with no source; 75 AU is where Voyager 2 entered the
+# Note+: shock's foreshock (Richardson et al. 2022, Space Sci. Rev. 218:35,
+# Note+: sec. 3), not an edge of the range (L-411).
+# Access: open, https://arxiv.org/html/0807.4170v1 (2026-10-17).
+
+TERMINATION_SHOCK_RANGE_HIGH_AU = 100
+# Unit: au
+# Status: measured V_SOURCED 2026-10-17 -- open full text
+# Figures: 1 -- the source prints "80 AU and 100 AU" and "80-100 AU".
+# Read: as TERMINATION_SHOCK_RANGE_LOW_AU, 2026-10-17, Claude Opus 5.5.
+# Source: as TERMINATION_SHOCK_RANGE_LOW_AU.
+# Note: the high end of that stated range.
+# Access: as TERMINATION_SHOCK_RANGE_LOW_AU.
+
+VOYAGER2_TS_UPSTREAM_SPEED_KM_S = 321.01
+# Unit: km_s
+# Status: measured V_SOURCED 2026-10-17 -- open full text
+# Figures: 2 -- uncertainty 2.84; the source prints 321.01, and that
+# Figures+: uncertainty reports to tens (the Report test).
+# Read: Table 1, Li, Wang and Richardson (2008), the authors' copy,
+# Read+: 2026-10-17, Claude Opus 5.5.
+# Source: Li, H., Wang, C. and Richardson, J. D. (2008), "Properties of
+# Source+: the termination shock observed by Voyager 2", GRL 35:L19107 --
+# Source+: Table 1, shock 1: the solar wind's radial speed averaged 321.01
+# Source+: +/- 2.84 km/s upstream and 184.67 +/- 23.38 km/s downstream.
+# Source+: https://www.spaceweather.ac.cn/~hli/papers/Li%20et%20al%202008%20GRL%20Properties%20of%20the%20termination%20shock%20observed%20by%20Voyager%202.pdf
+# Note: Voyager 2's first crossing, 30 August 2007; the +/- is the
+# Note+: table's standard deviation over the interval it averages.
+# Access: the authors' copy, open (2026-10-17).
+
+VOYAGER2_TS_DOWNSTREAM_SPEED_KM_S = 184.67
+# Unit: km_s
+# Status: measured V_SOURCED 2026-10-17 -- open full text
+# Figures: 1 -- uncertainty 23.38; the source prints 184.67, and that
+# Figures+: uncertainty reports to hundreds (the Report test).
+# Read: as VOYAGER2_TS_UPSTREAM_SPEED_KM_S, 2026-10-17, Claude Opus 5.5.
+# Source: as VOYAGER2_TS_UPSTREAM_SPEED_KM_S.
+# Note: the hovers typed "~100 to 200 km/s" and the website "a few
+# Note+: hundred kilometers a second", neither with a source (L-411).
+# Access: as VOYAGER2_TS_UPSTREAM_SPEED_KM_S.
 
 HELIOPAUSE_AU = 121
 # Unit: au
@@ -3088,17 +3297,38 @@ GRAVITATIONAL_INFLUENCE_AU = GRAVITATIONAL_INFLUENCE_PC * KM_PER_PARSEC / KM_PER
 # Note+: chosen).
 
 # Spacecraft reference
-PARKER_CLOSEST_RADII = 9.86
-# Source: https://parkersolarprobe.jhuapl.edu/The-Mission/index.php
-# See: Parker Solar Probe perihelion 22, Dec 24, 2024
-# Corrected: 2026-04-15 per Gemini review -- 8.86 was surface altitude,
-#   9.86 is distance from Sun center (consistent with other shell radii).
-#   Perihelion number corrected from 21 to 22.
-# Note: 9.86 from Sun center. NASA press reports ~3.83 Mkm above
-# Note+: the surface = 8.86 R_sun altitude. Same orbit, different reference.
-# Cross-checked: Claude 2026-08-02 -- JHUAPL/Riley et al. (worksheet_claude_constants_new.md)
-# Cross-checked: GPT 2026-08-02 -- NASA PSP mission data (constants_new_citation_verification_gpt.md)
-# 9.86 R_sun = 6.86 million km = 0.0459 AU
+PARKER_CLOSEST_ALTITUDE_KM = 6160000.0
+# Unit: km
+# Status: measured V_SOURCED 2026-10-17 -- open page
+# Figures: 3 -- the source prints "6.16 million kilometers".
+# Read: The Mission page, Parker Solar Probe, JHU/APL, and NASA SVS
+# Read+: 14741, 2026-10-17, Claude Opus 5.5.
+# Source: Johns Hopkins APL, Parker Solar Probe, "The Mission" -- coming
+# Source+: as close as 3.83 million miles (and 6.16 million kilometers) to
+# Source+: the Sun. NASA Scientific Visualization Studio, "Parker Solar
+# Source+: Probe: Humanity's Closest Encounter with the Sun" (27 December
+# Source+: 2024) -- on Dec. 24, 2024 it flew just 3.8 million miles above
+# Source+: the surface of the Sun.
+# Source+: https://parkersolarprobe.jhuapl.edu/The-Mission/index.php
+# Source+: https://svs.gsfc.nasa.gov/14741/
+# Note: above the photosphere, as the NASA page states;
+# Note+: PARKER_CLOSEST_KM adds the Sun's radius.
+# Corrected: 2026-10-17 (L-411) -- PARKER_CLOSEST_RADII held a typed
+# Corrected+: 9.86 (corrected 2026-04-15 from 8.86, the altitude), with no
+# Corrected+: unit or count, and the hovers typed 8.8 beside it. It is
+# Corrected+: now worked out from this row. The Claude and GPT legs of
+# Corrected+: 2026-08-02 checked 9.86 and are retired with it.
+
+PARKER_CLOSEST_KM = SUN_RADIUS_KM + PARKER_CLOSEST_ALTITUDE_KM
+# Unit: km
+# Status: derived -- inherits SUN_RADIUS_KM, PARKER_CLOSEST_ALTITUDE_KM
+# Figures: 3 -- set by PARKER_CLOSEST_ALTITUDE_KM (6160000, 3), good to
+# Figures+: ten-thousands of km; SUN_RADIUS_KM is exact.
+# Derived: 695700 + 6160000 = 6860000 km from the Sun's centre
+
+PARKER_CLOSEST_RADII = PARKER_CLOSEST_KM / SUN_RADIUS_KM
+# Unit: r_sun
+# Conversion: of PARKER_CLOSEST_KM -- computed from that row, which carries the source and the count.
 
 
 # ============================================================

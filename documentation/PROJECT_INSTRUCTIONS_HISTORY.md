@@ -2952,6 +2952,47 @@ resident.
 (Moved down from the resident protocol on 2026-10-17 when
 v3.102 made a fourth entry.)
 
+v3.100 (October 16, 2026): No rule changed in this document. ONE
+skill bump, one version (L-446, with L-380 and L-388):
+gallery-cache-builder 1.9 -> 1.10. THE WEBSITE'S DAILY RUN PULLS
+BEFORE IT BUILDS.
+
+WHAT PROMPTED IT. Tony, 2026-10-15, after L-444's first live run:
+"Wait, shouldn't the horizons check come before the cache build?" The
+check already runs in the orrery, before the export; what came after
+the build was the website's pull of that export, so each build read
+the previous run's pull. Ruled the same day: the pulls run before the
+builder. At the build's start Tony chose option A for a pull that
+cannot reach the orrery: the Daily Run stops before the builder.
+
+WHAT CHANGED. gallery-cache-builder rewrites The Daily Run's Steps:
+four steps, the pulls (gallery_maintenance_run.py --pull, reading the
+one pull list in its GENERATORS) before the builder; a pull that
+cannot fetch fails by name and its mirror does not run; the Daily Run
+stops there; "Pull failures" tests those branches every run. Its
+description and trigger name the Daily Run's order. Its v1.8 entry
+moved to documentation/SKILL_HISTORIES.md, by the three-entry rule.
+Built at 77245ea8; rebuilt on 54c27d7 after L-445's build (v3.99)
+landed first, so this entry is v3.100.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copy reads
+gallery-cache-builder 1.10 before work that fires it. This session
+confirmed its loaded copies read gallery-cache-builder 1.9,
+safe-file-editing 1.13, agentic-pre-test 1.3 and
+ledger-and-session-records 1.21, as the manifest expected. v3.99's
+obligation, horizons-orbital-mechanics 1.8, still travels: no work
+this session fired that skill.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.97 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-17 when
+v3.103 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

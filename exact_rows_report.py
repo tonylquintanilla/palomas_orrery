@@ -129,6 +129,11 @@ prints a row by its count in any unit. Without it a hover printing an
 exact row through row_text() was not counted as a print at all, so the
 check could not see it -- found when the patched tree reported fewer
 printed rows than before.)
+Module updated: October 17, 2026 with Anthropic's Claude Opus 5.5
+(L-371 Gap 1: the Sun room's fourteen pointers to exact rows followed
+-- eight printed, six read only to draw -- and the gallery's
+served-count printers counted as print lines. leo_inner's altitude
+entry removed: its row is measured since L-330.)
 """
 
 import os
@@ -152,7 +157,11 @@ GALLERY_PAGES = ['interactive.html']
 # A line in a gallery script that formats a number for display.
 GALLERY_PRINT_RE = re.compile(
     r'fmtServed\(|_fmtServed\(|sigFigures\(|kmAndAu\(|fmtKm\(|'
-    r'\.toFixed\(|\.toPrecision\(|toLocaleString\(')
+    r'\.toFixed\(|\.toPrecision\(|toLocaleString\(|'
+    # L-371 (2026-10-17): the helpers that print a served node at its
+    # served count. Without them a radius printed by servedText() was
+    # not a print line, and its pointer could not be followed.
+    r'servedText\(|fmtAuServed\(|kmAndAuServed\(|inText\(')
 
 # Where each gallery pointer to an exact row is printed. Key: the end
 # of the pointer node's path in data/objects_config.json. Value: the
@@ -179,10 +188,42 @@ PRINTS = {
         ('gallery/feature_renderers.js', 'renderMagnetosphere', 'bsS.cut_angle'),
     'van_allen_belts/outer_belt_distance':
         ('gallery/feature_renderers.js', 'renderBelts', 'distances[i]'),
-    'earth_orbital_zones/leo_inner/altitude':
-        ('gallery/feature_renderers.js', 'renderShellSet', 'km.altitudeKm'),
+    # L-371 (2026-10-17): leo_inner's altitude left this table. Its row,
+    # EARTH_LEO_LOWER_ALTITUDE_KM, became ESA's measured 180 km on
+    # 2026-10-17 (L-330) and is no longer exact, so no exact pointer
+    # reached the entry and it read BROKEN.
     'earth_orbital_zones/leo_outer/altitude':
         ('gallery/feature_renderers.js', 'renderShellSet', 'km.altitudeKm'),
+    # L-371 (2026-10-17): the Sun room's exact rows, each printed by its
+    # served count -- a shell's radius in solar radii, a far shell's in
+    # AU, the streamer belt's cusp, the Oort shapes' edges.
+    'solar_atmosphere/streamer_belt/cusp_radius':
+        ('gallery/feature_renderers.js', 'renderStreamerBand',
+         'servedText(cfg.cusp_radius)'),
+    'sun_structures/photosphere':
+        ('gallery/feature_renderers.js', 'renderShellSet',
+         'fmtServed(cfg.radius.value, sunF'),
+    'solar_atmosphere/inner_corona':
+        ('gallery/feature_renderers.js', 'renderShellSet',
+         'fmtServed(cfg.radius.value, sunF'),
+    'solar_atmosphere/outer_corona':
+        ('gallery/feature_renderers.js', 'renderShellSet',
+         'fmtServed(cfg.radius.value, sunF'),
+    'oort_cloud/inner_oort_limit':
+        ('gallery/feature_renderers.js', 'renderShellSet',
+         'servedText(cfg.radius) + " AU'),
+    'oort_cloud/outer_oort':
+        ('gallery/feature_renderers.js', 'renderShellSet',
+         'servedText(cfg.radius) + " AU'),
+    'oort_cloud/hills_cloud_torus/inner_radius':
+        ('gallery/feature_renderers.js', 'renderOortShape',
+         'fmtAuServed(cfg.inner_radius)'),
+    'oort_cloud/outer_oort_clumpy/outer_radius':
+        ('gallery/feature_renderers.js', 'bandLine',
+         'fmtAuServed(cfg.outer_radius)'),
+    'oort_cloud/galactic_tide/outer_radius':
+        ('gallery/feature_renderers.js', 'bandLine',
+         'fmtAuServed(cfg.outer_radius)'),
 }
 
 # Gallery pointers to exact rows that are read only to place a drawing
@@ -219,6 +260,26 @@ DRAWN = {
     # prints to; the row itself is never printed.
     'position_accuracy':
         ('gallery/solar_system_figures.js', 'sourcePlaceKm', 'node.value'),
+    # L-371 (2026-10-17): the Sun room's exact rows read only to draw.
+    # The Roche limit is drawn at its drawn_radius and reports `radius`;
+    # the galactic pole turns the tide and the galactic plane; the
+    # plane's ring radius sizes the ring and is never printed.
+    'solar_atmosphere/roche_limit/drawn_radius':
+        ('gallery/feature_renderers.js', 'renderShellSet',
+         'measuredRadiusAu(cfg.drawn_radius'),
+    'oort_cloud/galactic_tide/galactic_pole/ra':
+        ('gallery/feature_renderers.js', 'renderOortShape', 'measured(gp.ra'),
+    'oort_cloud/galactic_tide/galactic_pole/dec':
+        ('gallery/feature_renderers.js', 'renderOortShape', 'measured(gp.dec'),
+    'oort_cloud/galactic_plane/ring_radius':
+        ('gallery/feature_renderers.js', 'renderGalacticPlane',
+         'measuredAu(cfg.ring_radius'),
+    'oort_cloud/galactic_plane/galactic_pole/ra':
+        ('gallery/feature_renderers.js', 'renderGalacticPlane',
+         'measured(gp.ra'),
+    'oort_cloud/galactic_plane/galactic_pole/dec':
+        ('gallery/feature_renderers.js', 'renderGalacticPlane',
+         'measured(gp.dec'),
 }
 
 # A top-level function in a gallery script: two spaces of indent, which
@@ -295,6 +356,21 @@ def served_node(config, path):
         else:
             return None
     return node
+
+
+def served_slot(node):
+    """The slot a pointer governs, by the mirror's rule
+    (tools/mirror_constants.py, the slot of an entry): the entry itself
+    where it holds a value, otherwise its member that does -- a whole
+    shell's `radius`. L-371 (2026-10-17): until then the count was read
+    from the entry, so a shell whose pointer sits on the feature read
+    as served no count while its radius carried one."""
+    if not isinstance(node, dict) or 'value' in node:
+        return node
+    for child in node.values():
+        if isinstance(child, dict) and 'value' in child:
+            return child
+    return None
 
 
 def read_lines(path):
@@ -464,6 +540,13 @@ def main():
                   encoding='utf-8') as handle:
             config = json.load(handle)
         pointers = config_pointers(config, names)
+    export_rows = {}
+    export_path = os.path.join(HERE, 'data', 'constants_export.json')
+    if os.path.exists(export_path):
+        import json
+        with open(export_path, 'r', encoding='utf-8') as handle:
+            export_rows = json.load(handle).get('rows', {})
+    if gallery_read:
         g_sites, not_followed, broken, g_drawn = gallery_sites(pointers)
 
     printed = [n for n in names if o_sites[n] or g_sites.get(n)]
@@ -477,10 +560,22 @@ def main():
     not_served = []
     if gallery_read:
         for n in printed:
-            want = constants_rows.prints_of(n, HERE)
+            own = constants_rows.prints_of(n, HERE)
             for f, l, code, path in g_sites.get(n, []):
-                node = served_node(config, path)
+                node = served_slot(served_node(config, path))
                 got = node.get('prints') if isinstance(node, dict) else None
+                # L-371 (2026-10-17): a slot drawn in another unit than
+                # its row -- the photosphere, one solar radius, from the
+                # kilometre row -- is written from the row's value in that
+                # unit, so its count is the row's count there, as the
+                # orrery's export serves it, not the row's own.
+                want = own
+                unit = node.get('unit') if isinstance(node, dict) else None
+                served = export_rows.get(n) or {}
+                if unit and served.get('unit') and \
+                        unit.lower() != served['unit'].lower():
+                    want = ((served.get('in') or {}).get(unit.lower())
+                            or {}).get('prints')
                 if got != want:
                     not_served.append((n, f, l, path, got, want))
     failing = bool(no_count or by_width or not_served)
