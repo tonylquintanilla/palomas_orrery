@@ -132,7 +132,7 @@ Not urgent, in your order:
 
 **Tony**: Run record:
 
-**Session: OPEN: 10-15-26 2208: Fable: Coordination session next steps**
+**Session: DONE: 10-17-26 2002: Fable: Coordination session next steps**
 
 **Turn: 10-16-26 2113:**
 
@@ -185,7 +185,17 @@ small ledger patch, and the build brief for the session that follows,
 with L-449's check inside it.
 
 Confirm your loaded interactive-exhibit reads 1.16 before exhibit work.
-```
+
+``
+======================================================
+
+Nothing to do now; both are already on the ledger, pushed at 612a933 this evening.
+
+- The missing locator is a note on L-314 (the solar wind item), dated today: the bow shock row's citation gets "sec. 3" added the next time that row is opened, which the solar-wind talk does. It cannot be lost; the ledger index lists L-314 as touched today.
+- The save-and-read-back lesson from the brief that never reached your folder is a note on L-351, the item that holds rules owed to the next skill bump. It says: a file saved into your folder through the link is read back and compared before it is reported delivered. It goes into ledger-and-session-records at its next version.
+- L-455 (typed numbers in served words with no row behind them) is its own item with its instances named: the Crust's thickness figures, the magnetopause note's "6.6 R_E", and the orrery's low-orbit satellite counts and heights. Its Gap says when it is worked: when the Earth or Sun slice next opens those shells.
+
+So the ledger holds all three, each with a trigger that will bring it back. Doing them tonight would mean opening the bow shock row and the Crust's words for a locator and a handful of numbers, outside any slice that is open; the braid says record and wait, which is what happened. You can close.
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
