@@ -1977,11 +1977,130 @@ EARTH_GEOCORONA_RADII = 100.0
 # Source+: Res. Space Physics 124, 861-885, doi:10.1029/2018JA026136 --
 # Source+: the geocorona is detected to at least 100 Earth radii.
 # Note: a detection floor, not an edge -- the hydrogen thins without a
-# Note+: boundary. The shell is drawn at the sourced floor and its hover
-# Note+: says so. It encloses the Moon's orbit at about 60 radii.
-# Note+: The orrery draws it as its own shell since 2026-10-05
-# Note+: (SHELL_CONFIGS['Earth']['geocorona'], L-292), as the website
-# Note+: has since L-291.
+# Note+: boundary. It encloses the Moon's orbit at about 60 radii. Since
+# Note+: 2026-10-17 (L-410) it is where the exosphere's dots stop, in both
+# Note+: instruments: they thin out from EARTH_EXOSPHERE_H_FIT_INNER_RADII by
+# Note+: the profile below (earth_exosphere_sampler.py). From 2026-10-05 to
+# Note+: then it was drawn as a sharp shell (L-292).
+
+# L-410 (2026-10-17): Earth's hydrogen profile, the fade's seven rows,
+# approved by Tony on 2026-10-17 ("read and approved"). The quotations and
+# the checks of them are in documentation/SOURCES_earth_fade_20261017.md.
+EARTH_EXOSPHERE_H_FIT_INNER_RADII = 3.0
+# Unit: r_earth
+# Status: measured V_SOURCED 2026-10-17 -- open full text
+# Figures: 1 -- the paper gives the range as "3-15 RE", whole Earth radii.
+# Read: Zoennchen et al. (2022), sec. 6, p. 275 (eq. 7 and its range);
+# Read+: Zoennchen et al. (2024), abstract and sec. 3.2, 2026-10-17,
+# Read+: Claude Opus 5.5.
+# Source: Zoennchen, J. H., Connor, H. K., Jung, J., Nass, U. and Fahr,
+# Source+: H. J. (2022), "Terrestrial exospheric dayside H-density profile
+# Source+: at 3-15 RE from UVIS/HDAC and TWINS Lyman-alpha data combined",
+# Source+: Ann. Geophys. 40:271-279,
+# Source+: https://angeo.copernicus.org/articles/40/271/2022/ -- sec. 6,
+# Source+: eq. 7: the day-side hydrogen density fitted over the radial range
+# Source+: 3-15 RE. Day and night: Zoennchen, J. H., Cucho-Padin, G.,
+# Source+: Waldrop, L. and Fahr, H. J. (2024), "Comparison of terrestrial
+# Source+: exospheric hydrogen 3D distributions at solar minimum and maximum
+# Source+: using TWINS Lyman-alpha observations", Front. Astron. Space Sci.
+# Source+: 11:1409744, doi:10.3389/fspas.2024.1409744 -- abstract: "All models
+# Source+: showed a high concentration of atomic H on the dayside and
+# Source+: nightside near the Sun-Earth line".
+# Note: where the exosphere's dots start. The hydrogen continues inward to
+# Note+: the top of the upper atmosphere; the measured profile starts here.
+# Note+: The 2024 study's model covers 3.75 to 6 Earth radii (sec. 2.3 and
+# Note+: 2.2.1); the drawing is round and its hover says the real hydrogen
+# Note+: is not.
+
+EARTH_EXOSPHERE_H_FIT_OUTER_RADII = 15.0
+# Unit: r_earth
+# Status: measured V_SOURCED 2026-10-17 -- open full text
+# Figures: 2 -- "3-15 RE", whole Earth radii.
+# Read: Zoennchen et al. (2022), sec. 6, p. 275, 2026-10-17, Claude Opus 5.5.
+# Source: as EARTH_EXOSPHERE_H_FIT_INNER_RADII.
+# Note: where eq. 7 stops and the outer fall (EARTH_EXOSPHERE_H_OUTER_EXPONENT)
+# Note+: takes over, from eq. 7's value here. Eq. 7 gives 10.2 atoms per
+# Note+: cubic centimetre at 15 Earth radii and eq. 9 gives 10.3, so the
+# Note+: two agree at the join (our arithmetic, 2026-10-17).
+
+EARTH_EXOSPHERE_H_FIT_COEFF_CM3 = 370520.0
+# Unit: density_fit_coefficient
+# Status: measured V_SOURCED 2026-10-17 -- open full text
+# Figures: 5 -- eq. 7 prints "370 520"; the paper does not say the trailing
+# Figures+: zero is significant (Rule 2).
+# Read: Zoennchen et al. (2022), sec. 6, eq. 7, p. 275, 2026-10-17,
+# Read+: Claude Opus 5.5.
+# Source: Zoennchen et al. (2022), Ann. Geophys. 40:271-279, sec. 6, eq. 7:
+# Source+: nH(r) = 370 520 (r + 2.47)^-3.67 cm^-3, r geocentric in RE; "the
+# Source+: UVIS/HDAC observations can be calculated very precisely over the
+# Source+: entire radial range 3-15 RE within +/-2 % error."
+# Note: eq. 7's coefficient: atoms per cubic centimetre when the distance
+# Note+: is in Earth radii from Earth's centre.
+
+EARTH_EXOSPHERE_H_FIT_OFFSET_RADII = 2.47
+# Unit: r_earth
+# Status: measured V_SOURCED 2026-10-17 -- open full text
+# Figures: 3 -- eq. 7 prints 2.47.
+# Read: Zoennchen et al. (2022), sec. 6, eq. 7, p. 275, 2026-10-17,
+# Read+: Claude Opus 5.5.
+# Source: as EARTH_EXOSPHERE_H_FIT_COEFF_CM3.
+# Note: eq. 7's offset, added to the distance before the power is taken.
+
+EARTH_EXOSPHERE_H_FIT_EXPONENT = 3.67
+# Unit: falloff_exponent
+# Status: measured V_SOURCED 2026-10-17 -- open full text
+# Figures: 3 -- eq. 7 prints 3.67.
+# Read: Zoennchen et al. (2022), sec. 6, eq. 7, p. 275, 2026-10-17,
+# Read+: Claude Opus 5.5.
+# Source: as EARTH_EXOSPHERE_H_FIT_COEFF_CM3.
+# Note: eq. 7's exponent.
+
+EARTH_EXOSPHERE_H_OUTER_EXPONENT = 3.02
+# Unit: falloff_exponent
+# Status: measured V_SOURCED 2026-10-17 -- open full text
+# Figures: 3 -- eq. 9 prints 3.02.
+# Read: Zoennchen et al. (2022), abstract, p. 271, and sec. 6, eq. 9,
+# Read+: p. 276, 2026-10-17, Claude Opus 5.5.
+# Source: Zoennchen et al. (2022), Ann. Geophys. 40:271-279,
+# Source+: https://angeo.copernicus.org/articles/40/271/2022/ -- sec. 6,
+# Source+: eq. 9: nH(r) = 35.17 (10 RE / r)^3.02 cm^-3, "The fit of the
+# Source+: H-density profile between 9-15 RE delivers a r-3 fall"; abstract:
+# Source+: "a faster radial H-density decrease was found at distances above
+# Source+: 8 RE (~ r-3)".
+# Also: ESA, "Earth's atmosphere stretches out to the Moon -- and beyond",
+# Also+: on Baliukin et al. (2019): "70 atoms per cubic centimeter at 60 000
+# Also+: kilometers above Earth's surface" and "about 0.2 atoms at the Moon's
+# Also+: distance" -- between those, a fall as r^-3.3 (our arithmetic). Read
+# Also+: through ESA, a secondary source; the paper refused the reader.
+# Note: the drawing carries this fall from EARTH_EXOSPHERE_H_FIT_OUTER_RADII
+# Note+: out to EARTH_GEOCORONA_RADII. The paper fits it only to 15 Earth
+# Note+: radii; carrying it further is a drawing choice, said in the hover.
+
+EARTH_EXOSPHERE_H_AT_10_RADII_CM3 = 35.0
+# Unit: per_cm3
+# Status: measured V_SOURCED 2026-10-17 -- open full text
+# Figures: 2 -- the abstract prints 35.
+# Read: Zoennchen et al. (2022), abstract, p. 271, and sec. 6, p. 276,
+# Read+: 2026-10-17, Claude Opus 5.5.
+# Source: Zoennchen et al. (2022), Ann. Geophys. 40:271-279,
+# Source+: https://angeo.copernicus.org/articles/40/271/2022/ -- abstract:
+# Source+: the observations "constrained the neutral H density there at 10 RE
+# Source+: to a value of 35 cm-3"; sec. 6: the "found value of 35 cm-3 at
+# Source+: 10 RE is more likely to be a lower limit."
+# Note: for the hover only; the drawing does not use it. Sec. 6 also gives
+# Note+: an expected total error of about 25 percent. Eq. 7 gives 35.2 here.
+# Note+: Where it was measured is EARTH_EXOSPHERE_H_AT_RADII.
+
+EARTH_EXOSPHERE_H_AT_RADII = 10.0
+# Unit: r_earth
+# Status: measured V_SOURCED 2026-10-17 -- open full text
+# Figures: 2 -- the abstract prints "10 RE", whole Earth radii.
+# Read: Zoennchen et al. (2022), abstract, p. 271, 2026-10-17,
+# Read+: Claude Opus 5.5.
+# Source: as EARTH_EXOSPHERE_H_AT_10_RADII_CM3.
+# Note: the distance at which EARTH_EXOSPHERE_H_AT_10_RADII_CM3 is stated,
+# Note+: its own row so the hover does not type it (One Value, One Home;
+# Note+: added at the build, 2026-10-17).
 # --- end Earth exhibit block --------------------------------------------------
 
 JUPITER_EQUATORIAL_RADIUS_KM = 71492.0

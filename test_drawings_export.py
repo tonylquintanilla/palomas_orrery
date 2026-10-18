@@ -23,6 +23,10 @@ For every entry in export_drawings.DRAWINGS it checks:
                   none below the ground, and each belt thickest at its
                   peak at the equator, read from the file's own dots
                   (van_allen_belt_sampler.check_dots; for the belts)
+    the exosphere every dot between its two rows, the dots in five shells
+                  following the measured profile, and each dot's weight the
+                  one its distance gives, read from the file's own dots
+                  (earth_exosphere_sampler.check_dots; for the exosphere)
 
 A check that passes is only worth something if it can fail, so faults
 are planted first, each in memory, and each must be caught:
@@ -33,6 +37,9 @@ are planted first, each in memory, and each must be caught:
     git reporting the file as ignored        tracked
     a belt dot moved off its belt            the belts
     the outer belt's peak drawn at its edge  the belts
+    an exosphere dot moved inside 3 radii    the exosphere
+    the exosphere drawn with no fall-off     the exosphere
+    an exosphere dot's weight changed        the exosphere
 
 The last line starts "DRAWINGS EXPORT:", which the maintenance run
 quotes. It names each drawing, its dots, its tilt and its sha256.
@@ -53,6 +60,9 @@ the second drawing, Earth's radiation belts; the count reads each
 drawing's own settings, the tilt is checked where a drawing records one,
 and the belts' dots are checked against their rows, with two more faults
 planted)
+Module updated: October 17, 2026 with Anthropic's Claude Opus 5.5 (L-410:
+the third drawing, Earth's hydrogen exosphere, checked against its rows,
+with three more faults planted)
 """
 import hashlib
 import json
@@ -63,6 +73,7 @@ import sys
 import export_drawings as ed
 import hills_cloud_sampler as hcs
 import van_allen_belt_sampler as vab
+import earth_exosphere_sampler as ees
 
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -109,8 +120,10 @@ def check_one(name, text_on_disk, text_now, path, ignored=git_ignored):
     lengths = [len(content.get(axis, [])) for axis in axes]
     if "n_orbits" in settings:
         want = settings.get("n_orbits", 0) * settings.get("points_per_orbit", 0)
-    else:
+    elif "dots_inner" in settings:
         want = settings.get("dots_inner", 0) + settings.get("dots_outer", 0)
+    else:
+        want = settings.get("dots", 0)
     if lengths != [n] * len(axes) or n != want or axes[:3] != ["x", "y", "z"]:
         failures.append("%s: %s dots recorded, %s hold %s, settings give "
                         "%d" % (name, n, "/".join(axes), lengths, want))
@@ -125,6 +138,9 @@ def check_one(name, text_on_disk, text_now, path, ignored=git_ignored):
                 failures.append("%s: %s" % (name, line))
         except KeyError as exc:
             failures.append("%s: the file names no belt %s" % (name, exc))
+    elif name == "earth_exosphere":
+        for line in ees.check_dots(content, ees.rows_from_store()):
+            failures.append("%s: %s" % (name, line))
     tilt = None
     if lengths == [n] * len(axes) and n and "plane_tilt_deg" in content:
         tilt = hcs.plane_tilt_deg(*(list(map(float, content[axis]))
@@ -189,6 +205,33 @@ def _planted_belts(text_now):
     return out
 
 
+def _planted_exosphere(text_now):
+    """Three faults in the exosphere's file, each caught by the
+    exosphere's check (each planted text is compared with itself, as the
+    belts' are, so only that check can catch it)."""
+    out = []
+    moved = json.loads(text_now)
+    moved["x"][0], moved["y"][0], moved["z"][0] = 1.0, 0.0, 0.0
+    out.append(("an exosphere dot moved inside 3 radii", ed.render(moved),
+                "lie outside"))
+    flat = json.loads(text_now)
+    rows = ees.rows_from_store()
+    rows["EARTH_EXOSPHERE_H_FIT_EXPONENT"] = 0.0
+    rows["EARTH_EXOSPHERE_H_OUTER_EXPONENT"] = 0.0
+    other = ees.drawn_exosphere(rows)
+    for axis in ("x", "y", "z"):
+        flat[axis] = [round(v, 2) for v in other[axis]]
+    out.append(("the exosphere drawn with no fall-off", ed.render(flat),
+                "do not follow the profile"))
+    heavy = json.loads(text_now)
+    far = max(range(len(heavy["x"])), key=lambda k: heavy["x"][k] ** 2 +
+              heavy["y"][k] ** 2 + heavy["z"][k] ** 2)
+    heavy["w"][far] = 1.0
+    out.append(("an exosphere dot's weight changed", ed.render(heavy),
+                "carry a weight"))
+    return out
+
+
 def main():
     print("=" * 70)
     print("  DRAWINGS EXPORT CHECK -- data/drawings/ against the rows")
@@ -216,6 +259,17 @@ def main():
     for label, text, expect in belt_planted:
         failures, _ = check_one("van_allen_belts", text, text,
                                 ed.path_of(PROJECT_DIR, "van_allen_belts"),
+                                lambda _p: False)
+        hit = any(expect in line for line in failures)
+        print("  planted: %-36s %s" % (label, "caught" if hit else "MISSED"))
+        if hit:
+            caught += 1
+        else:
+            problems.append("planted fault not caught: " + label)
+    exo_planted = _planted_exosphere(texts_now["earth_exosphere"])
+    for label, text, expect in exo_planted:
+        failures, _ = check_one("earth_exosphere", text, text,
+                                ed.path_of(PROJECT_DIR, "earth_exosphere"),
                                 lambda _p: False)
         hit = any(expect in line for line in failures)
         print("  planted: %-36s %s" % (label, "caught" if hit else "MISSED"))
@@ -252,7 +306,8 @@ def main():
         print("DRAWINGS EXPORT: FAIL -- %d problem(s)" % len(problems))
         return 1
     print("DRAWINGS EXPORT: PASS -- %d of %d planted faults caught; %s"
-          % (caught, len(planted) + len(belt_planted), "; ".join(named)))
+          % (caught, len(planted) + len(belt_planted) + len(exo_planted),
+             "; ".join(named)))
     return 0
 
 

@@ -96,6 +96,9 @@ orbital period's years go through.)
 Module updated: October 12, 2026 with Anthropic's Claude Opus 5.5
 (L-401: s_per_d, for S_PER_DAY, the exact conversion the body hover's
 speed in AU per day goes through.)
+Module updated: October 17, 2026 with Anthropic's Claude Opus 5.5
+(L-410: per_cm3, falloff_exponent and density_fit_coefficient, for
+Earth's hydrogen profile from Zoennchen et al. (2022).)
 """
 
 TOKENS = {
@@ -282,6 +285,25 @@ TOKENS = {
         "defining_constant": None,
         "meaning": ("a count of the dots a published figure plots in one "
                     "cell, estimated by reading the figure"),
+    },
+    # L-410 (2026-10-17): Earth's hydrogen profile, Zoennchen et al. (2022).
+    "per_cm3": {
+        "dimension": "1 / cm3",
+        "defining_constant": None,
+        "meaning": "atoms per cubic centimetre, a number density",
+    },
+    "falloff_exponent": {
+        "dimension": "named number",
+        "defining_constant": None,
+        "meaning": ("the p in a power law r^-p: how fast a density falls "
+                    "with distance"),
+    },
+    "density_fit_coefficient": {
+        "dimension": "named number",
+        "defining_constant": None,
+        "meaning": ("the coefficient of a power-law density fit: atoms per "
+                    "cubic centimetre when the distance it is given is in "
+                    "the fit's own unit (Earth radii)"),
     },
 }
 

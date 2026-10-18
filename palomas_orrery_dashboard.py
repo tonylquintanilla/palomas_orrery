@@ -1145,11 +1145,12 @@ LAUNCH_GROUPS = {
          True),
         ("Drawings Export",
          "export_drawings.py",
-         "Write data/drawings/hills_cloud.json: the Hills cloud's 3,600 "
-         "dots, placed by hills_cloud_sampler.py from its rows with a "
-         "fixed seed, the same dots the orrery window draws. The website "
-         "pulls this file and draws these dots rather than placing its own "
-         "(L-421, Tony's option A). Writes only when the dots change.",
+         "Write data/drawings/: the dots the orrery places and the website "
+         "draws as given -- the Hills cloud (hills_cloud_sampler.py), Earth's "
+         "radiation belts (van_allen_belt_sampler.py) and Earth's hydrogen "
+         "exosphere (earth_exosphere_sampler.py), each from its rows with a "
+         "fixed seed, the same dots the orrery window draws (L-421, Tony's "
+         "option A). Writes only when the dots change.",
          SCRIPT_DIR,
          True,
          None,

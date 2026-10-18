@@ -487,6 +487,10 @@ and L-450 closed; L-449's check seen working; L-410's fade rows
 approved; the low-orbit dots made visible against the inner belt and
 the low-orbit tooltip's 200 km corrected; L-231, L-413 and L-455
 updated), built on fc2bb6f9 and gallery 44a6225c.
+Module updated: October 17, 2026 with Anthropic's Claude Opus 5.5
+(Earth's fade built in two patches, waiting on Tony's runs and looks:
+L-410; the low-orbit look recorded on L-413; L-434 and L-435 updated),
+built on 785536e5 and gallery 44a6225c.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -1481,7 +1485,49 @@ gallery `data/objects_config.json`.
   _AT_10_RADII_CM3. Each row's value, quote and locator:
   `documentation/SOURCES_earth_fade_20261017.md`. Not yet in
   `constants_new.py`; the fade's build writes them.
-**Gap:** Earth's fade built from those rows; then the Sun's fades, the outer corona first with the
+- **Built 2026-10-17** (orrery `patch_L410_1_earth_fade_orrery_20261017.py`,
+  gallery `patch_L410_2_earth_fade_website_20261017.py`), on Tony's word
+  "yes, let's complete earth's fade":
+  - `earth_exosphere_sampler.py` places 1,500 dots from 3 to 100 Earth
+    radii, distances drawn from n(r) r^2 (eq. 7 to 15 Earth radii, then
+    eq. 9's fall from eq. 7's value there), directions even on the
+    sphere, seed 410; each dot's weight is the log of its density between
+    100 (0) and 3 (1). Its checks: every dot between the rows, five
+    shells each holding the profile's share, each weight the one its
+    distance gives. Stored as `data/drawings/earth_exosphere.json`, the
+    third stored drawing; three planted faults (8 of 8 in all).
+  - The rows: the seven approved, and an eighth, `EARTH_EXOSPHERE_H_AT_RADII`
+    (10), the distance the 35 per cubic centimetre was measured at, so the
+    hover does not type it (One Value, One Home). Three unit tokens:
+    `per_cm3`, `falloff_exponent`, `density_fit_coefficient`. The 2024
+    paper's day-night sentence joins `EARTH_EXOSPHERE_H_FIT_INNER_RADII`'s
+    Source, read at its abstract and sec. 3.2, 2.2.1 and 2.3 (What a
+    Visitor Reads, principle 4).
+  - The orrery draws the dots (`create_earth_exosphere_shell`, now a
+    custom builder; the sphere shell is gone), shaded like the belts,
+    one info marker over the pole at 100 Earth radii. The website draws
+    the same dots as a `stored_fade` shape, its hover from each edge's
+    served `hover_line`, its i panel from the served `about` and `note`
+    with their numbers filled from served rows. The served name drops
+    "detected extent". The website's drawings check judges the dots by
+    their mechanism: between the served edges, centred on Earth,
+    thinning out; three planted faults (12 of 12 in all).
+  - Words sent to Tony with a render of both zooms before the patches
+    were saved; his answer is the gate for running them.
+  - Found and fixed: the live check's list of files the browser fetches
+    lacked the belts' drawing (patch 3 of L-330); it now names both
+    Earth drawings. The orrery dashboard's Drawings Export card named
+    only the Hills cloud; it names all three.
+  - Tested: the orrery run on the patched copy, gating checkers green
+    but Horizons confirmations, which the sandbox cannot reach JPL for:
+    Tony's Earth plot of 2026-10-17 refreshed Earth's elements
+    (785536e5), so any run now re-exports Earth's period and confirms it
+    with JPL, patch or not. Whole tree 280 Tier-1 as before, gate path 0. A sandbox stand-in for
+    the Daily Run: 29 of 29 gating. Both patches applied clean, on
+    Windows line endings, and refuse a second run.
+  Record: `documentation/HANDOFF_earth_fade_build_20261017.md`.
+**Gap:** Tony's runs, and his looks in both instruments, close Earth's
+fade; then the Sun's fades, the outer corona first with the
 dust cloud (L-131), in the Sun's slice (L-412). The range idea's
 pieces above (the Roche limit's band, L-241's torus wording) are
 re-read against the rule when the Sun's turn comes.
@@ -1547,7 +1593,10 @@ gallery `data/objects_config.json`; L-228, L-371.
   17-line limit; a number's own sentence served as its `hover_line`; a
   belt's `details`, for the i panel; a served number's `source_note`
   edited, and removed, by the store writer. Also owed: the fades rule
-  (L-410) as method for any room.
+  (L-410) as method for any room; and, from Earth's fade (2026-10-17), a
+  `stored_fade` shape: a shell drawn as the orrery's stored dots between
+  its served `inner_radius` and `radius`, each edge's sentence its
+  `hover_line`.
 **Gap:** each method line rides its skill's next version (One Session,
 One Bump), and leaves the page's Settled list once it is in the skill.
 **Ref:** `documentation/WHERE_WE_ARE.md` (Settled); L-401; L-395; L-421;
@@ -1581,6 +1630,8 @@ L-424; L-434; skills/*/SKILL.md.
   from fresh random numbers, so each plot differs (L-239). And each
   file is about 58 kB per 3,600 dots at whole AU, fetched by the phone
   with the room.
+- **2026-10-17:** Earth's hydrogen exosphere became the third stored
+  drawing (L-410), after the Hills cloud and the belts.
 **Gap:** a design talk on which shapes, in what order; L-239 for the
 clumps and the tide; then each shape's export, its served name and the
 website drawing it, with Tony's look.
@@ -1964,9 +2015,15 @@ L-252; L-418.
   its cause; Earth's fade rows approved (L-410). His orrery look found
   the low-orbit dots lost against the inner belt: option A built in
   `patch_L330_4_leo_contrast_close_20261017.py`.
-**Gap:** Tony's look at the low-orbit dots in his next orrery plot
-(Mode 5); then Earth's fade built (L-410) or talk 2 (L-356 with L-375,
-and L-454), Tony's choice which first; then talks 3 to 6. Talk 4 (L-314)
+- **2026-10-17, the low-orbit look:** "contrast and shape are good"
+  (Tony's run record, `documentation/WHERE_WE_ARE_10-16-26_2116_run_record.md`,
+  saved again that evening; pushed 785536e5). Then, Tony: "yes, let's
+  complete earth's fade. we can hold the design talk 2 for the handoff."
+  Earth's fade built the same evening (L-410), waiting on his runs and
+  looks.
+**Gap:** Tony's runs and looks at Earth's fade (L-410); then talk 2 (L-356
+with L-375, and L-454), next session, its agenda in section 5 of
+`documentation/HANDOFF_earth_fade_build_20261017.md`; then talks 3 to 6. Talk 4 (L-314)
 keeps the solar-wind fetch; its aberration is built.
 **Ref:** L-412 (the Sun's list, which resumes after this); the handles
 above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.

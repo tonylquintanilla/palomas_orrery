@@ -37,16 +37,16 @@ Rule 7: each printed exact row states a print count, each orrery line prints it 
 
 ### `EARTH_LEO_UPPER_ALTITUDE_KM`
 
-- orrery `earth_visualization_shells.py` line 1444: `f"Low Earth Orbit (LEO) is the region from {row_text('EARTH_LEO_LOWER_ALTITUDE_KM')} km to {e...`
-- orrery `earth_visualization_shells.py` line 1525: `f"Altitude range: {row_text('EARTH_LEO_LOWER_ALTITUDE_KM', grouping=True)} km to {exact_text(...`
-- orrery `shell_configs.py` line 2381: `f"Low Earth Orbit (LEO) is the region from {row_text('EARTH_LEO_LOWER_ALTITUDE_KM', grouping=...`
+- orrery `earth_visualization_shells.py` line 1521: `f"Low Earth Orbit (LEO) is the region from {row_text('EARTH_LEO_LOWER_ALTITUDE_KM')} km to {e...`
+- orrery `earth_visualization_shells.py` line 1602: `f"Altitude range: {row_text('EARTH_LEO_LOWER_ALTITUDE_KM', grouping=True)} km to {exact_text(...`
+- orrery `shell_configs.py` line 2378: `f"Low Earth Orbit (LEO) is the region from {row_text('EARTH_LEO_LOWER_ALTITUDE_KM', grouping=...`
 - gallery `gallery/feature_renderers.js` line 2835 (config `/objects/1/features/earth_orbital_zones/leo_outer/altitude`): `kmAndAu(km.altitudeKm, km.altitudeFigures)) + "<br>";`
 
 ### `EARTH_VAN_ALLEN_OUTER_RADII`
 
-- orrery `earth_visualization_shells.py` line 1354: `f"the poles, and they are thickest at L = {exact_text('EARTH_VAN_ALLEN_OUTER_RADII')}, about ...`
-- orrery `earth_visualization_shells.py` line 1364: `f"the L = {_band_low} to {_band_high} band; the drawn {exact_text('EARTH_VAN_ALLEN_OUTER_RADI...`
-- orrery `shell_configs.py` line 2370: `f"{exact_text('EARTH_VAN_ALLEN_OUTER_RADII')} Earth radii out (doi:10.1029/2024JA033504).\n"`
+- orrery `earth_visualization_shells.py` line 1382: `f"the poles, and they are thickest at L = {exact_text('EARTH_VAN_ALLEN_OUTER_RADII')}, about ...`
+- orrery `earth_visualization_shells.py` line 1392: `f"the L = {_band_low} to {_band_high} band; the drawn {exact_text('EARTH_VAN_ALLEN_OUTER_RADI...`
+- orrery `shell_configs.py` line 2358: `f"{exact_text('EARTH_VAN_ALLEN_OUTER_RADII')} Earth radii out (doi:10.1029/2024JA033504).\n"`
 - gallery `gallery/feature_renderers.js` line 1586 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `fmtServed(distances[i], counts[i], 1) +`
 - gallery `gallery/feature_renderers.js` line 1601 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `drawn: fmtServed(distances[i], counts[i], 1),`
 - gallery `gallery/feature_renderers.js` line 1607 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `? SOFT_BR + "(given as L = " + fmtServed(distances[i], counts[i], 1) +`
@@ -54,9 +54,9 @@ Rule 7: each printed exact row states a print count, each orrery line prints it 
 
 ### `EARTH_SOLAR_WIND_PRESSURE_NPA`
 
-- orrery `earth_visualization_shells.py` line 994: `f"Sun-facing side at a nominal solar wind pressure of {exact_text('EARTH_SOLAR_WIND_PRESSURE_...`
-- orrery `earth_visualization_shells.py` line 1177: `f"side at a nominal solar wind pressure of {exact_text('EARTH_SOLAR_WIND_PRESSURE_NPA')} nPa....`
-- orrery `earth_visualization_shells.py` line 1268: `f"Sun-facing side at a nominal solar wind pressure of {exact_text('EARTH_SOLAR_WIND_PRESSURE_...`
+- orrery `earth_visualization_shells.py` line 1022: `f"Sun-facing side at a nominal solar wind pressure of {exact_text('EARTH_SOLAR_WIND_PRESSURE_...`
+- orrery `earth_visualization_shells.py` line 1205: `f"side at a nominal solar wind pressure of {exact_text('EARTH_SOLAR_WIND_PRESSURE_NPA')} nPa....`
+- orrery `earth_visualization_shells.py` line 1296: `f"Sun-facing side at a nominal solar wind pressure of {exact_text('EARTH_SOLAR_WIND_PRESSURE_...`
 - gallery `gallery/feature_renderers.js` line 3102 (config `/objects/1/features/earth_magnetosphere/magnetopause/surface/pressure`): `pressure: fmtServed(dp, servedFigures(mpS.pressure), 1),`
 - gallery `gallery/feature_renderers.js` line 3324 (config `/objects/1/features/earth_magnetosphere/bow_shock/surface/pressure`): `pressure: fmtServed(bsP, servedFigures(bsS.pressure), 1),`
 

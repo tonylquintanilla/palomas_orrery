@@ -1549,21 +1549,9 @@ SHELL_CONFIGS = {
             'tooltip': earth_upper_atmosphere_info,
         },
 
-        # L-292 (2026-10-05): the exosphere, drawn at the geocorona's
-        # detection floor, as the website draws it since L-291. Colour,
-        # opacity, point count and marker size are rendering settings and
-        # match the website's. A fuzzy edge in place of this sharp shell
-        # is a candidate for L-410 (Tony, 2026-10-05).
-        'geocorona': {
-            'name': 'Exosphere (Geocorona)',
-            'radius_fraction': EARTH_GEOCORONA_RADII,  # the sourced detection floor
-            'color': 'rgb(200, 200, 255)',
-            'opacity': 0.15,
-            'n_points': 20,
-            'marker_size': 3.0,
-            'hover_text': earth_geocorona_info.replace('\n', '<br>'),
-            'tooltip': earth_geocorona_info,
-        },
+        # L-410 (2026-10-17): the exosphere moved to CUSTOM_SHELLS['Earth']
+        # ['geocorona'], drawn as dots that thin out to the detection floor.
+        # Until then a sphere shell here, at EARTH_GEOCORONA_RADII (L-292).
 
         'hill_sphere': {
             'name': 'Hill Sphere',
@@ -2372,6 +2360,15 @@ CUSTOM_SHELLS = {
                 "The same builder produces all four traces (separate legend entries):\n"
                 "Magnetosphere, Bow Shock, Inner Radiation Belt, Outer Radiation Belt."
             ),
+        },
+
+        # L-410 (2026-10-17): Earth's hydrogen exosphere as dots that thin
+        # out from 3 Earth radii to the detection floor at 100, the stored
+        # drawing earth_exosphere_sampler.py places. Was a sphere shell in
+        # SHELL_CONFIGS['Earth'] (L-292).
+        'geocorona': {
+            'builder': 'earth_visualization_shells.create_earth_exosphere_shell',
+            'tooltip': earth_geocorona_info,
         },
 
         'leo': {

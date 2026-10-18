@@ -1479,12 +1479,264 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
   2. Plot Earth with the magnetosphere and low Earth orbit on;
      look at the low-orbit dots against the inner belt. -- contrast and shape are good
-  3. Move this script into documentation/; commit; push. -- 
+  3. Move this script into documentation/; commit; push. -- 785536e5b700518d17c86d8381f0994a15d20bb7
 Undo is Discard Changes in GitHub Desktop.
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
 **Where this leaves us**
-- Earth's round 1 is closed; only your look at the low-orbit dots remains.
+- Earth's round 1 is closed; only your look at the low-orbit dots remains. -- good
 - After that look, the next choice is yours: build Earth's fade first, or hold design talk 2 on the magnetic field.
+
+======================================================================
+
+The low-orbit fix is confirmed. GitHub's latest commit is 785536e, the same commit you noted, so the push landed. Your run passed 31 of 31 checks, and your look found the contrast and shape good. Earth's round 1 is now fully closed.
+
+The ledger still lists your look at the low-orbit dots as the one thing left on Earth's list (L-413). The next session's patch will record it as done, quoting your note.
+
+**One decision, for whenever you're ready:** what comes next on Earth's list?
+- **Build Earth's fade (my recommendation).** This is the hydrogen thinning from 3 to 100 Earth radii. Its design is settled and you've approved its seven values. That makes it a build with no open questions, and it gives the design talk a finished drawing to look at.
+- **Hold design talk 2 first.** It covers the magnetic field's model and offset (L-356 with L-375), plus the drawn device for edges that move (L-454). It changes the field values the belts and the magnetopause are drawn from.
+
+**Where this leaves us**
+- Earth's round 1 is done in both the orrery and the website, and your looks have confirmed it.
+- Next is either Earth's fade or design talk 2.
+
+=====================================================================
+
+Earth’s fade is built for both the orrery and the website, and the three patches are saved in your folders. The look and the words I sent earlier are still waiting for your OK, so please don’t run anything until they read right to you.
+
+What it is: the hydrogen is now 1,500 dots that thin out from 3 to 100 Earth radii, where it was a sharp shell at 100. Both instruments draw the same dots. The website render in earth_fade_website_render.png matches the orrery’s.
+
+Your order once you’ve approved (also section 1 of the new handoff):
+
+1. In the orrery folder, run patch_L410_1_earth_fade_orrery_20261017.py, 
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L410_1_earth_fade_orrery_20261017.py
+ok  constants_new.py                                   1 edit(s)
+ok  constants_tokens.py                                2 edit(s)
+ok  earth_exosphere_sampler.py                         new file
+ok  earth_visualization_shells.py                      3 edit(s)
+ok  export_drawings.py                                 4 edit(s)
+ok  orrery_maintenance_run.py                          2 edit(s)
+ok  palomas_orrery_dashboard.py                        1 edit(s)
+ok  shell_configs.py                                   2 edit(s)
+ok  test_drawings_export.py                            9 edit(s)
+Stamps updated: each edited module's docstring.
+patch applied (9 file(s) written)
+
+NEXT (section 1 of documentation/HANDOFF_earth_fade_build_20261017.md,
+which the close patch adds):
+  1. Run patch_L410_3_earth_fade_close_20261017.py, in this folder.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L410_3_earth_fade_close_20261017.py
+ok  new     documentation/HANDOFF_earth_fade_build_20261017.md
+ok  edit    LEDGER_CONSOLIDATED.md                       header stamp
+ok  edit    LEDGER_CONSOLIDATED.md                       L-410 built
+ok  edit    LEDGER_CONSOLIDATED.md                       L-413 low orbit and fade
+ok  edit    LEDGER_CONSOLIDATED.md                       L-435 stored fade
+ok  edit    LEDGER_CONSOLIDATED.md                       L-434 third drawing
+ok  edit    documentation/WHERE_WE_ARE.md                date and box
+ok  edit    documentation/WHERE_WE_ARE.md                road stage 5
+ok  edit    documentation/WHERE_WE_ARE.md                signals
+ok  edit    documentation/WHERE_WE_ARE.md                details next
+stamps updated: the ledger's header; Where We Are's date
+
+patch applied (1 new file, 9 edits in 2 files)
+
+  1. Run the orrery maintenance run (dashboard). It writes
+     data/drawings/earth_exosphere.json and the export. Expect
+     'Drawings export check' to say 8 of 8 planted faults caught,
+     and the scanner's gate line 0 TIER-1.
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261017T222715Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 2.3s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Skill manifest               0.2s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             1.2s  rewrote data/constants_export.json
+  Period fetch                 0.3s  unchanged (1 checked, not written) --
+                                     NOTHING MISSING -- 13 served objects
+                                     examined, no query asked
+  Horizons check               0.8s  rewrote data/horizons_confirmations.json --
+                                     PASS -- 1 checked today, 1 queries
+  Objects export               0.3s  rewrote data/objects_export.json
+  Drawings export              0.9s  rewrote data/drawings/earth_exosphere.json
+  Module atlas                 7.9s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               5.7s  rewrote DATA_INVENTORY.md
+  Exact rows report            2.4s  rewrote EXACT_ROWS_PRINTED.md -- 12 of 40
+                                     exact rows printed at 44 lines (34 orrery,
+                                     10 gallery); 8 drawn only, 14 not followed,
+                                     1 map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.4s  0 removal verdict(s) cross-checked against
+                                     the 191 name(s) the working copy assigns
+  Constants relations          0.3s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              1.4s  No figure count exceeds its inputs: 36
+                                     derived row(s) read, 26 judged OK -- 26 OK,
+                                     10 NOT YET MIGRATED, 1 NO DERIVED LINE, 1
+                                     UNMARKED CONVERSION; 18 conversion(s)
+                                     checked.
+  Constants export check       1.9s  Export matches the store: sha256
+                                     4799aad10da5 on both sides; 135 rows
+                                     re-read, 56 not exported, 34 tokens; 340
+                                     conversions re-computed, 10 of 10 worked
+                                     cases hold; 135 citations worked out again,
+                                     8 of 8 worked cases hold.
+  Objects export check         0.3s  pass
+  Horizons confirmations       0.4s  pass -- 13 of 13 entries and 11 periods
+                                     confirmed, 26 sheets read, within 30 days
+  Horizons check suite         0.7s  pass -- 64 checks, every planted fault
+                                     caught by name
+  Period fetch suite           3.5s  pass -- 36 checks, every planted fault
+                                     caught (20 planted, 8 of them for Earth's
+                                     period, L-445)
+  Skill headers                0.3s  12 skills parsed, no consistency problems.
+  Exact rows by the count      2.5s  PASSING -- 12 printed exact rows each state
+                                     a count; 34 orrery lines print through
+                                     exact_text() or row_text(); 10 gallery lines
+                                     are served the count
+  Dimensions                   1.5s  No unit contradicts its arithmetic: 54
+                                     derived row(s) read -- 42 OK, 9 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.2s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.2s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 134 status lines in constants_new.py are
+                                     well formed; 54 rows carry none.
+  Row shape                    0.1s  All 191 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.3s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Scanner row run (L-414)      0.2s  16 of 16 pins hold -- each row reads its own
+                                     comment run, declared rows are named, the
+                                     gate path is read by name.
+  Reset completeness          20.8s  PASS -- all 311 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  2.3s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped; nothing left behind.
+  Earth pole of date           0.3s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Hills cloud sampler (L-421)    0.5s  PASS -- 4 of 4 planted faults caught; the
+                                     real rows pass, the dots' plane tilted 34.1
+                                     deg
+  Drawings export check        1.5s  PASS -- 8 of 8 planted faults caught;
+                                     hills_cloud 3600 dots, plane tilted 30.9
+                                     deg, sha256 a51e93118069; van_allen_belts
+                                     3200 dots, no plane recorded, sha256
+                                     75274e84f840; earth_exosphere 1500 dots, no
+                                     plane recorded, sha256 6112639fb2cd
+  Position digits (L-401)      2.8s  PASS -- 14 of 14 planted faults caught by
+                                     name; 23 hovers examined, 181 lines compared
+                                     against their errors; 5 pairs printed the
+                                     same from either end; 496 hovers of every
+                                     listed object from the Sun, Earth and
+                                     Neptune; 3 recorded 2xr answers read by
+                                     column name; 10 period sentences
+  Orbit markers (L-431, L-401)   11.3s  PASS -- 12 of 12 planted faults caught by
+                                     name; 4 ellipses, 1080 drawn points on their
+                                     period's centre; 14 markers, 9 dates, 53
+                                     printed distances against their errors; 6
+                                     elements as given; 3 Keplerian positions
+                                     half a year on; 1 parameters-window date
+                                     pairs; 2 Moon arcs; 2 perturbation checks; 1
+                                     perihelion osculating orbits; 2 frames; 2
+                                     sources read
+  Domain Split                 0.5s  PASS -- 6 of 6 planted faults caught; the
+                                     split reads each module's Domain: tag and
+                                     prints the same on the console, in the audit
+                                     and in the run history.
+  Maintenance report (L-269)    0.1s  PASS -- 4 of 4 planted faults caught by
+                                     name; 4 summaries; 2 risen file(s) named
+  Dashboard parity             0.3s  PASS -- 10 of 10 planted faults caught; 84
+                                     steps matched to their buttons by name and
+                                     script; 114 cards carry a short line; the
+                                     search finds 4 of 4 cases in any word order
+  Worksheet checker           10.7s  74 of 110 routed, 8 clean
+  Worksheet checker tests     17.3s  All 135 checks passed
+  Worksheet key round trip     1.2s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         21.6s  All 76 checks passed
+  Extractor pins               0.4s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          55.3s  0 TIER-1 -- the push gate holds; Whole tree,
+                                     Tier-1: 280: orrery 116, Earth System 149,
+                                     stars 13, utilities 2.
+
+======================================================================
+  31 of 31 gating checkers passed -- 183.2s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           74 of 110 routed, 8 clean
+    Provenance scanner          0 TIER-1 -- the push gate holds; Whole tree, Tier-1: 280: orrery 116, Earth System 149, stars 13, utilities 2.
+      No file's Tier-1 count rose since the previous run.
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2308 file(s) examined, 13 written, 1 created, 0 removed, 5 rewritten identically
+    written   DATA_INVENTORY.md
+    written   EXACT_ROWS_PRINTED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/constants_export.json
+    written   data/horizons_check_last_run.json
+    written   data/horizons_confirmations.json
+    written   data/objects_export.json
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    written   module_atlas.py
+    created   data/drawings/earth_exosphere.json
+    rewritten with identical bytes, no action needed:
+      LEDGER_CONSOLIDATED.md
+      PROJECT_INSTRUCTIONS.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      window_config.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  3. Plot Earth with the exosphere on (Mode 5). -- looks right. 
+  4. Move both scripts into documentation/; commit; push. The
+     website patch needs this push: its Daily Run pulls the dots. -- 
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+1. In the website folder, run patch_L410_2_earth_fade_website_20261017.py, 
+2. then the Daily Run, push, 
+3. the live check, 
+4. and your phone look.
+
+Test results:
+
+Every website check passed, 29 of 29, in my stand-in for your Daily Run.
+The orrery run passed every check here but one. The exception is “Horizons confirmations”, because this sandbox can’t reach JPL.
+That check isn’t caused by the fade. Your Earth plot this afternoon refreshed Earth’s orbit, which you committed. So your next orrery run will re-export Earth’s period and confirm it with JPL, with or without these patches.
+
+Three things fixed along the way:
+
+The website’s live check didn’t list the belts’ dot file among the files it fetches. Patch 3 missed it; it now lists the belts and the exosphere.
+The orrery dashboard’s Drawings Export card only mentioned the Hills cloud. It now names all three drawings.
+The “10 Earth radii” where the 35 atoms per cubic centimetre was measured now has its own row, so no hover types the number.
+
+The handoff also carries the plan for design talk 2, as you asked. It covers the newer magnetic field model (L-356), the field’s off-centre dipole (L-375), and a way to draw edges that move (L-454).
+
+Sources:
+
+Zoennchen et al. (2024), Frontiers in Astronomy and Space Sciences
 
 

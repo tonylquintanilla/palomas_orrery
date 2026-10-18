@@ -35,7 +35,8 @@ data/drawings/<name>.json for each entry in DRAWINGS:
     what          one sentence on what the dots are
     made_by       the function that places the dots
     frame         the frame the coordinates are in
-    unit          "au" (the Hills cloud) or "r_earth" (the belts)
+    unit          "au" (the Hills cloud) or "r_earth" (the belts, the
+                  exosphere)
     rounding      how each coordinate was rounded, and why that is safe
     settings      the drawing's settings: orbits, dots per orbit, seed
     rows          the constants_new.py rows the dots are placed from
@@ -50,8 +51,10 @@ data/drawings/<name>.json for each entry in DRAWINGS:
                   belt list numbers them
     x, y, z       the dots, one list each, whole AU (the Hills cloud) or
                   hundredths of an Earth radius (the belts)
-    w, belt       (the belts only) each dot's weight, 0 to 1, from the
-                  declared fade, and which belt it is in, 0 inner, 1 outer
+    w, belt       each dot's weight, 0 to 1 (the belts: from the declared
+                  fade; the exosphere: from the density at its distance),
+                  and (the belts only) which belt it is in, 0 inner,
+                  1 outer
 
 DETERMINISTIC ON PURPOSE
 ------------------------
@@ -80,6 +83,9 @@ radiation belts, from van_allen_belt_sampler.py, in Earth radii in
 Earth's body frame, with each dot's weight and belt; render() writes
 whichever of the lists x, y, z, w and belt a drawing carries, so the
 Hills cloud's file is unchanged byte for byte.)
+Module updated: October 17, 2026 with Anthropic's Claude Opus 5.5 (L-410:
+the third stored drawing, Earth's hydrogen exosphere, from
+earth_exosphere_sampler.py, in Earth radii, with each dot's weight.)
 """
 
 import hashlib
@@ -160,11 +166,43 @@ def _van_allen_belts():
     }
 
 
+def _earth_exosphere():
+    """Earth's hydrogen exosphere's file content, as a dict (L-410)."""
+    import earth_exosphere_sampler as ees
+    rows = ees.rows_from_store()
+    dots = ees.drawn_exosphere(rows)
+    return {
+        "schema": SCHEMA,
+        "drawing": "earth_exosphere",
+        "what": ("Earth's hydrogen exosphere, the geocorona, as dots from 3 "
+                 "to 100 Earth radii, thinning as Zoennchen et al. (2022) "
+                 "measured on the day side to 15 Earth radii and by their "
+                 "measured fall beyond. Drawn round; only the shape of the "
+                 "thinning is drawn, not a density."),
+        "made_by": "earth_exosphere_sampler.drawn_exosphere()",
+        "frame": ("Earth's body frame, centred on Earth: z along the spin "
+                  "axis. The drawing is round, so the frame changes nothing "
+                  "a visitor sees."),
+        "unit": "r_earth",
+        "rounding": ("each coordinate to 0.01 Earth radii, about 64 km, and "
+                     "each weight to 0.01: a drawing, not a measurement"),
+        "settings": dots["settings"],
+        "rows": list(ees.ROW_NAMES),
+        "rows_sha256": rows_sha256(rows),
+        "dots": len(dots["x"]),
+        "x": [round(v, 2) for v in dots["x"]],
+        "y": [round(v, 2) for v in dots["y"]],
+        "z": [round(v, 2) for v in dots["z"]],
+        "w": [round(v, 2) for v in dots["w"]],
+    }
+
+
 # name -> function returning the file's content. A new stored drawing
 # is one line here, and test_drawings_export.py checks every entry.
 DRAWINGS = {
     "hills_cloud": _hills_cloud,
     "van_allen_belts": _van_allen_belts,
+    "earth_exosphere": _earth_exosphere,
 }
 
 # The lists a drawing may carry, one line each in the file, in this

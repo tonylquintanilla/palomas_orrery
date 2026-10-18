@@ -112,6 +112,14 @@ October 17, 2026 (L-330, L-314, Earth round 1, Opus 5.5): the radiation
     180 km, from its row, and its hover cites ESA and the IADC revision
     actually read. All words approved by Tony.
 Module updated: October 17, 2026 with Anthropic's Claude Opus 5.5
+October 17, 2026, evening (L-410, Earth's fade, Opus 5.5): the exosphere
+    is drawn by create_earth_exosphere_shell() as dots that thin out from
+    3 to 100 Earth radii, earth_exosphere_sampler.py's stored drawing,
+    where it was a sphere shell at the detection floor; earth_geocorona_info
+    says what is measured and what is drawn by choice. The LEO dots are
+    full opacity and size 2.5, to show against the inner belt (Tony's
+    option A), and its tooltip reads both edges from their rows.
+Module updated: October 17, 2026 with Anthropic's Claude Opus 5.5
 """
 import numpy as np
 import math
@@ -867,27 +875,47 @@ earth_upper_atmosphere_info = (
             f"halo, the geocorona, is detected past {EARTH_GEOCORONA_RADII:.0f} Earth radii."
 )
 
-# L-292 (2026-10-05): Earth's exosphere, drawn as its own shell at the
-# geocorona's detection floor. Tony approved these words on 2026-10-05;
-# Source: every figure below is read from EARTH_GEOCORONA_RADII in
-# Source+: constants_new.py, and the words follow that row's source,
-# Source+: Baliukin et al. (2019), J. Geophys. Res. Space Physics 124,
-# Source+: 861-885, doi:10.1029/2018JA026136 -- its title (Lyman-alpha,
-# Source+: the ultraviolet glow) and abstract (detected to at least 100
-# Source+: Earth radii, encompassing the orbit of the Moon).
-# they follow the website's for the same shell. One string for the
-# checkbox tooltip and the plot hover (shell_configs.py derives <br>).
+# L-410 (2026-10-17): Earth's exosphere drawn as dots that thin out, from
+# EARTH_EXOSPHERE_H_FIT_INNER_RADII to EARTH_GEOCORONA_RADII
+# (earth_exosphere_sampler.py); until then a sharp shell at the detection
+# floor (L-292, 2026-10-05).
+# Source: every figure below is read from its row in constants_new.py,
+# Source+: where each carries its citation: Zoennchen et al. (2022), Ann.
+# Source+: Geophys. 40:271 (the profile, 3 to 15 Earth radii, and 35 per
+# Source+: cubic centimetre at 10); Zoennchen et al. (2024), Front. Astron.
+# Source+: Space Sci. 11:1409744 (denser near the Sun-Earth line, day and
+# Source+: night); Baliukin et al. (2019), J. Geophys. Res. Space Physics
+# Source+: 124:861 (the glow detected to at least 100 Earth radii).
+# One string for the checkbox tooltip and the plot hover (shell_configs.py
+# derives <br>).
 earth_geocorona_info = (
             "Exosphere / Geocorona: a faint halo of hydrogen gas around Earth, the outermost\n"
             "trace of the atmosphere. The exosphere has no top; it simply thins into space.\n"
             "Its hydrogen glows faintly in ultraviolet light, a halo called the geocorona.\n"
-            f"The shell is drawn at {row_text('EARTH_GEOCORONA_RADII')} Earth radii, "
+            "The dots thin out as the hydrogen does. Out to "
+            f"{row_text('EARTH_EXOSPHERE_H_FIT_OUTER_RADII')} Earth radii they follow a\n"
+            "profile measured by spacecraft on the side facing the Sun: about "
+            f"{row_text('EARTH_EXOSPHERE_H_AT_10_RADII_CM3')} atoms\n"
+            f"per cubic centimetre at {row_text('EARTH_EXOSPHERE_H_AT_RADII')} Earth radii, a lower limit.\n"
+            f"Beyond {row_text('EARTH_EXOSPHERE_H_FIT_OUTER_RADII')} Earth radii the measured rate of thinning "
+            "is carried on outward,\n"
+            "our choice for the picture.\n"
+            f"The dots start at {row_text('EARTH_EXOSPHERE_H_FIT_INNER_RADII')} Earth radii, "
+            f"about {row_text('EARTH_EXOSPHERE_H_FIT_INNER_RADII', 'km', grouping=True)} km "
+            f"({row_text('EARTH_EXOSPHERE_H_FIT_INNER_RADII', 'au')} AU), where the measurements start;\n"
+            "the hydrogen continues inward to the upper atmosphere.\n"
+            f"They stop at {row_text('EARTH_GEOCORONA_RADII')} Earth radii, "
             f"about {row_text('EARTH_GEOCORONA_RADII', 'km', grouping=True)} km "
-            f"({row_text('EARTH_GEOCORONA_RADII', 'au')} AU), where that\n"
-            "glow has been detected. That is not where the atmosphere ends, and it reaches\n"
-            "beyond the Moon's orbit. Zoom out past the Moon to see it.\n"
-            "Source: Baliukin et al. (2019), J. Geophys. Res. Space Physics 124:861."
+            f"({row_text('EARTH_GEOCORONA_RADII', 'au')} AU), where instruments\n"
+            "lose the glow -- not where the hydrogen ends. It reaches beyond the Moon's orbit.\n"
+            "The drawing is round. The real hydrogen is denser near the line from the Sun\n"
+            "to Earth, on both the day side and the night side.\n"
+            "Only the shape of the thinning is drawn; a dot is not a count of atoms.\n"
+            "Source: Zoennchen et al. (2022), Ann. Geophys. 40:271; Zoennchen et al. (2024),\n"
+            "Front. Astron. Space Sci. 11:1409744; Baliukin et al. (2019),\n"
+            "J. Geophys. Res. Space Physics 124:861."
 )
+
 
 def create_earth_upper_atmosphere_shell(center_position=(0, 0, 0)):
     """Creates Earth's upper atmosphere shell.
@@ -1431,6 +1459,55 @@ def create_earth_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
             border_color='white' if i == 0 else 'red'
         ))
 
+    return traces
+
+def create_earth_exosphere_shell(center_position=(0, 0, 0)):
+    """Earth's hydrogen exosphere, the geocorona, as dots that thin out.
+
+    L-410 (Tony's rulings of 2026-10-17): the dots are the stored drawing
+    earth_exosphere_sampler.drawn_exosphere() places, from
+    EARTH_EXOSPHERE_H_FIT_INNER_RADII to EARTH_GEOCORONA_RADII, in Earth
+    radii in Earth's body frame; scaled by EARTH_RADIUS_AU, turned to
+    Earth's pole like the belts (the drawing is round, so the turn
+    changes nothing a visitor sees), and shaded by each dot's weight.
+    The website draws the same dots from data/drawings/earth_exosphere.json.
+    One info marker, at the detection floor over the north pole, where
+    the sphere shell's sat until 2026-10-17.
+    """
+    from earth_exosphere_sampler import drawn_exosphere
+    center_x, center_y, center_z = center_position
+    dots = drawn_exosphere()
+    weights = np.array(dots['w'])
+    # Shading by the weight is a rendering setting, as for the belts:
+    # opacity and size rise toward the dense inner end.
+    alpha_low, alpha_high = 0.25, 0.9      # opacity at weight 0 and 1
+    size_low, size_high = 1.5, 3.0         # point size at weight 0 and 1
+    rgb = '200, 200, 255'
+    point_colors = ['rgba(%s, %.3f)' % (rgb, alpha_low +
+                                         (alpha_high - alpha_low) * w)
+                    for w in weights]
+    point_sizes = list(size_low + (size_high - size_low) * weights)
+    ex, ey, ez = orient_to_planet_pole(
+        np.array(dots['x']) * EARTH_RADIUS_AU,
+        np.array(dots['y']) * EARTH_RADIUS_AU,
+        np.array(dots['z']) * EARTH_RADIUS_AU, 'Earth')
+    name = 'Earth: Exosphere (Geocorona)'
+    traces = [go.Scatter3d(
+        x=np.array(ex) + center_x, y=np.array(ey) + center_y,
+        z=np.array(ez) + center_z,
+        mode='markers',
+        marker=dict(size=point_sizes, color=point_colors),
+        name=name, legendgroup=name, hoverinfo='skip', showlegend=True,
+    )]
+    r_info = EARTH_GEOCORONA_RADII * EARTH_RADIUS_AU * 1.05
+    mx, my, mz = orient_to_planet_pole(np.array([0.0]), np.array([0.0]),
+                                       np.array([r_info]), 'Earth')
+    traces.append(create_info_marker(
+        float(np.asarray(mx)[0]) + center_x,
+        float(np.asarray(my)[0]) + center_y,
+        float(np.asarray(mz)[0]) + center_z,
+        'rgb(200, 200, 255)', earth_geocorona_info.replace('\n', '<br>'),
+        name))
     return traces
 
 # Source: UCS Satellite Database, ESA Space Debris Office, NASA
