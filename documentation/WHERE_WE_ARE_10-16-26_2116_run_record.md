@@ -615,9 +615,24 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 Undo is Discard Changes in GitHub Desktop.
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
+====================================================================================
+
+Everything from the design talk is in the repository. My close patch went up in your push at a73bc24, and the two records are at HEAD beside it. The build session then closed round 1 at 785536e: the belts (L-330), the eight sentences (L-451), the website’s notes and the orrery’s citations (L-452, L-450), and your “good” on the low-orbit dots. The run records item (L-449) stays open on purpose, until the cause of the losses is found.
+
+One correction of my own. Last night I said Fable’s three additions were in the build brief in your folder. They never got there. The copy on your machine is the earlier version, and that’s the one your 23:06 push carries. I should have checked the file after saving it. It did no harm:
+
+The build put the run-records check inside the Daily Run script anyway, with no new step and no dashboard button.
+The aberration sentence rests on reads already on file. Shue’s frame is recorded at page 17,692, and Jelinek’s at section 3 of the paper, in the magnetosphere’s old ledger record. The only thing missing is that the bow shock’s citation line doesn’t name that section. It can be added the next time those rows are opened, at the solar wind talk.
+The belts came in at 3,200 dots against the Hills cloud’s 3,600. That’s closer than “well under”, but your look on the phone passed it.
+
+Where this leaves us
+
+Earth’s round 1 is designed, built and closed.
+The next choice is yours: build Earth’s fade first, or hold design talk 2 on Earth’s magnetic field and its offset.
+
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-**Session: OPEN: 10-17-26 0824: Opus: Earth round 1 build session**
+**Session: DONE: 10-17-26 1915: Opus: Earth round 1 build session**
 
 Welcome back. Here's your order. All four patches are in place: two in the website folder, two in the orrery folder.
 
@@ -2122,7 +2137,7 @@ Index regenerated (237 live items) in C:\Users\tonyq\OneDrive\Desktop\python_wor
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-3. move it into `documentation/`, then commit and push. -- 
+3. move it into `documentation/`, then commit and push. -- d9f73aa0008626468d9b2b0959e1b5b5849ade5a
 
 **Where this leaves us**
 - Earth's round 1 and Earth's fade are both done and live.
