@@ -491,6 +491,9 @@ Module updated: October 17, 2026 with Anthropic's Claude Opus 5.5
 (Earth's fade built in two patches, waiting on Tony's runs and looks:
 L-410; the low-orbit look recorded on L-413; L-434 and L-435 updated),
 built on 785536e5 and gallery 44a6225c.
+Module updated: October 17, 2026 with Anthropic's Claude Opus 5.5
+(Earth's fade done on Tony's runs and looks: L-410 and L-413), built on
+adcc1851 and gallery da442bf2.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -1526,8 +1529,15 @@ gallery `data/objects_config.json`.
     the Daily Run: 29 of 29 gating. Both patches applied clean, on
     Windows line endings, and refuse a second run.
   Record: `documentation/HANDOFF_earth_fade_build_20261017.md`.
-**Gap:** Tony's runs, and his looks in both instruments, close Earth's
-fade; then the Sun's fades, the outer corona first with the
+- **Earth's fade done, 2026-10-17,** on Tony's runs and looks (his run
+  record, `documentation/WHERE_WE_ARE_10-16-26_2116_run_record.md`, saved again that night):
+  the orrery run 31 of 31 gating, "Drawings export check" 8 of 8 planted
+  faults, the gate 0 TIER-1, pushed adcc1851; the orrery plot, "looks
+  right"; the Daily Run 29 of 29 gating, "Drawings" 12 of 12, "Typed
+  facts" 0 held open, pushed da442bf2; the live check 2 of 2, store drift
+  against orrery adcc1851 with 0 DRIFT; the Earth room on the phone,
+  "Looks good". The item stays open for the Sun's fades.
+**Gap:** the Sun's fades, the outer corona first with the
 dust cloud (L-131), in the Sun's slice (L-412). The range idea's
 pieces above (the Roche limit's band, L-241's torus wording) are
 re-read against the rule when the Sun's turn comes.
@@ -2021,8 +2031,8 @@ L-252; L-418.
   complete earth's fade. we can hold the design talk 2 for the handoff."
   Earth's fade built the same evening (L-410), waiting on his runs and
   looks.
-**Gap:** Tony's runs and looks at Earth's fade (L-410); then talk 2 (L-356
-with L-375, and L-454), next session, its agenda in section 5 of
+- **2026-10-17, Earth's fade done** (L-410) on Tony's runs and looks.
+**Gap:** talk 2 (L-356 with L-375, and L-454), next session, its agenda in section 5 of
 `documentation/HANDOFF_earth_fade_build_20261017.md`; then talks 3 to 6. Talk 4 (L-314)
 keeps the solar-wind fetch; its aberration is built.
 **Ref:** L-412 (the Sun's list, which resumes after this); the handles

@@ -1,24 +1,24 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 17, 2026, night: Earth's fade built.
-- Written at orrery 785536e and gallery 44a6225.
+Last updated: October 17, 2026, night: Earth's fade done.
+- Written at orrery adcc185 and gallery da442bf.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Earth's hydrogen now fades out from 3 to 100 Earth radii in both
->   instruments, where it was a sharp shell (L-410, the fades). Built,
->   waiting on your runs and looks.
+> - Earth's hydrogen fades out from 3 to 100 Earth radii in both
+>   instruments, live and looked at: "looks right", "Looks good"
+>   (L-410, the fades).
 > - The low-orbit look is done: "contrast and shape are good".
 >
-> **Do next:** *Your run order, section 1 of
+> **Do next:** *Earth's design talk 2, next session: section 5 of
 > HANDOFF_earth_fade_build_20261017.md.*
 >
 > **Needs you now:**
-> - *Two orrery patches, the run, push; the website patch, the Daily
->   Run, push; then the two looks.*
-> - Next session: Earth's design talk 2 (that handoff, section 5).
+> - *Run this small close patch, commit and push.*
+> - Talk 2 covers the field's newer model, its off-centre dipole, and
+>   a way to draw edges that move.
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
@@ -26,8 +26,8 @@ Last updated: October 17, 2026, night: Earth's fade built.
 
   1-4. [done]  The Sun, Earth and Solar System rooms are live; the orrery
                feeds the website and nothing is typed twice.
-  5.   [NOW]   *Earth's list (L-413): the fade built, your runs and
-               looks; then talk 2, next session.* << moved this session
+  5.   [NOW]   *Earth's list (L-413): the fade done; talk 2 next
+               session, then talks 3 to 6.* << moved this session
   5b.  [NOW]   The scaffolding checks clear beside the slices: the
                dashboard (L-440) done; L-424, L-425, L-426 to come.
   6-6a.[done]  The typed facts, served and checked (Oct 16);
@@ -92,8 +92,8 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261017T205940Z, ok, every rename on the first try (gallery 44a6225).
-- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, 785536e).
+- Last cache build: 20261018T000459Z, ok, every rename on the first try (gallery da442bf).
+- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, adcc185).
   Whole tree: 280: orrery 116, Earth System 149, stars 13, utilities 2.
 - This page's date and the ledger's newest stamp: both Oct 17. Agree.
 
@@ -118,7 +118,7 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- *Next: `HANDOFF_earth_fade_build_20261017.md` (your run order; talk 2)*
+- *Next: `HANDOFF_earth_fade_build_20261017.md`, section 5 (talk 2)*
 - The fade's sources and rows: `SOURCES_earth_fade_20261017.md`
 - The fades: `DESIGN_fades_rulings_20261017.md`. Round 1's rulings:
   `DESIGN_earth_round1_rulings_20261016.md`; words: `WORDS_earth_round1_*`
