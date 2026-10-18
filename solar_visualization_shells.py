@@ -15,6 +15,9 @@ Consumed by: planet_visualization.py (routing dispatcher),
 Role: rendering/shells
 Domain: orrery
 
+Module updated: October 18, 2026 with Anthropic's Claude Opus 5.5
+(L-411 follow-up: the termination shock's Voyager 2 line cites Li et
+al. 2008, the paper its wind speeds come from. Tony's word.)
 Module updated: October 17, 2026 with Anthropic's Claude Opus 5.5
 (the Sun's numbers, L-228 and L-411: the hovers print the Alfven
 surface's usual range, the coronagraph floor, Parker Solar Probe's
@@ -471,7 +474,7 @@ termination_shock_info = (
             "supersonic to subsonic speeds due to interaction with the interstellar<br>"
             "medium. The kinetic energy transfers into heat, increasing abruptly.<br><br>"
 
-            f"Voyager 1 encountered the Termination Shock at {_TERMINATION_SHOCK} AU, and Voyager 2 at {row_text('VOYAGER2_TERMINATION_SHOCK_AU')} AU (NASA).<br>"
+            f"Voyager 1 encountered the Termination Shock at {_TERMINATION_SHOCK} AU, and Voyager 2 at about {row_text('VOYAGER2_TERMINATION_SHOCK_AU')} AU (Li et al. 2008).<br>"
             f"Voyager 2 measured the wind slowing from about {row_text('VOYAGER2_TS_UPSTREAM_SPEED_KM_S')} to about {row_text('VOYAGER2_TS_DOWNSTREAM_SPEED_KM_S')} km/s as it crossed (Li et al. 2008)."
         )
 
@@ -783,7 +786,7 @@ termination_shock_info_hover = (
             "supersonic to subsonic speeds due to interaction with the interstellar<br>"
             "medium. The kinetic energy transfers into heat, increasing abruptly.<br><br>"
 
-            f"Voyager 1 encountered the Termination Shock at {_TERMINATION_SHOCK} AU, and Voyager 2 at {row_text('VOYAGER2_TERMINATION_SHOCK_AU')} AU (NASA).<br>"
+            f"Voyager 1 encountered the Termination Shock at {_TERMINATION_SHOCK} AU, and Voyager 2 at about {row_text('VOYAGER2_TERMINATION_SHOCK_AU')} AU (Li et al. 2008).<br>"
             f"Voyager 2 measured the wind slowing from about {row_text('VOYAGER2_TS_UPSTREAM_SPEED_KM_S')} to about {row_text('VOYAGER2_TS_DOWNSTREAM_SPEED_KM_S')} km/s as it crossed (Li et al. 2008)."
         )
 

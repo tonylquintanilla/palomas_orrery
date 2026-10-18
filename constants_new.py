@@ -181,6 +181,10 @@ crossing (NASA SVS) and the wind's speed either side (Li, Wang and
 Richardson); the chromosphere's depth re-homed to an open source.
 CORE_AU, RADIATIVE_ZONE_AU, SOLAR_RADIUS_AU and PARKER_CLOSEST_RADII
 are conversions of their rows.)
+Module updated: October 18, 2026 with Anthropic's Claude Opus 5.5
+(L-411 follow-up: Voyager 2's termination-shock crossing is read from
+Li, Wang and Richardson (2008), the paper its wind speeds come from, on
+Tony's word; the chromosphere's two citations are separated.)
 """
 
 import math
@@ -2302,7 +2306,7 @@ CHROMOSPHERE_PHYSICAL_KM = 2000.0
 # Source+: Physics, "A 'Dancing' Layer of the Sun" -- above the photosphere
 # Source+: is a layer of gas, approximately 2000 km thick, known as the
 # Source+: chromosphere.
-# Source+: https://solar.physics.montana.edu/YPOP/Spotlight/SunInfo/Chromosph.html
+# Source+: https://solar.physics.montana.edu/YPOP/Spotlight/SunInfo/Chromosph.html;
 # Source+: Hathaway, D. H., "NASA/Marshall Solar Physics", the chromosphere page -- the
 # Source+: temperature rises from 6000 degrees C to about 20,000 degrees C;
 # Source+: at these temperatures hydrogen gives off a reddish light
@@ -2633,18 +2637,27 @@ TERMINATION_SHOCK_AU = 94.01
 # Cross-check retired+: checked the value 94; a check of the old value is
 # Cross-check retired+: not a check of the new one.
 
-VOYAGER2_TERMINATION_SHOCK_AU = 84
+VOYAGER2_TERMINATION_SHOCK_AU = 83.6
 # Unit: au
-# Status: measured V_SOURCED 2026-10-17 -- open page
-# Figures: 2 -- the source prints 84.
-# Read: NASA SVS 20132, 2026-10-17, Claude Opus 5.5.
-# Source: NASA Scientific Visualization Studio, "Voyager 2 Proves Solar
-# Source+: System is Squashed" (23 January 2008) -- Voyager 1 encountered
-# Source+: the termination shock at 94 AU and Voyager 2 encountered it at
-# Source+: only 84 AU. https://svs.gsfc.nasa.gov/20132
-# Also: Li, Wang and Richardson (2008), "Properties of the termination
-# Also+: shock observed by Voyager 2", GRL 35:L19107 -- about 83.6 AU, on
-# Also+: August 30, 2007.
+# Status: measured V_SOURCED 2026-10-18 -- open page
+# Figures: 3 -- the source prints "about 83.6 AU".
+# Read: Li, Wang and Richardson (2008), the abstract and secs. 1 and 3,
+# Read+: 2026-10-18, Claude Opus 5.5.
+# Source: Li, H., Wang, C. and Richardson, J. D. (2008), "Properties of
+# Source+: the termination shock observed by Voyager 2", GRL 35:L19107 --
+# Source+: abstract: in August 2007, Voyager 2 reached the termination
+# Source+: shock and entered the heliosheath at a distance of about 83.6 AU.
+# Source+: https://www.spaceweather.ac.cn/~hli/papers/Li%20et%20al%202008%20GRL%20Properties%20of%20the%20termination%20shock%20observed%20by%20Voyager%202.pdf
+# Also: NASA Scientific Visualization Studio, "Voyager 2 Proves Solar
+# Also+: System is Squashed" (23 January 2008) -- 84 AU, whole AU.
+# Also+: https://svs.gsfc.nasa.gov/20132. Stone et al. (2008), "An
+# Also+: asymmetric solar wind termination shock", Nature 454:71, abstract
+# Also+: -- 83.7 au; the paper is not open. The shock moved, and Voyager 2
+# Also+: crossed it more than once.
+# Corrected: 2026-10-18 (L-411) -- was 84 from NASA SVS 20132, two
+# Corrected+: figures. Li et al. is the same paper and crossing as
+# Corrected+: VOYAGER2_TS_UPSTREAM_SPEED_KM_S and its downstream row
+# Corrected+: (Tony, 2026-10-18).
 # Note: the hovers typed 84 with no row, and their comments credited it
 # Note+: to Stone et al. (2005), which is Voyager 1's crossing only (L-411).
 

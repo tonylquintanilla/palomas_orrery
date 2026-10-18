@@ -1110,4 +1110,212 @@ The twelve eyeballed shape numbers will be handled along with the drawings.
 
 The question for the next session: after L-455, which of the Sun’s drawings follow?
 
+======================================================================================
+
+The two follow-up patches are in your folders. Neither one has been run, committed or pushed.
+
+**What they change:**
+- **Voyager 2's crossing** now comes from Li, Wang and Richardson (2008), the same paper the wind speeds come from:
+  - The orrery hover reads "Voyager 1 encountered the Termination Shock at 94.01 AU, and Voyager 2 at about 83.6 AU (Li et al. 2008)."
+  - The website's i panel reads "Voyager 1 crossed it at 94.01 AU and Voyager 2 at about 83.6 AU."
+  - The NASA page's 84 and Stone et al.'s 83.7 stay in the row as the other sources.
+- **The chromosphere's two citations** now have a semicolon between them.
+- **The chromosphere's typed name**, "(2,000 km skin)", is recorded on the ledger and not changed. The name is used as a key by the legend and by the checks, so it should change when that shell is next worked on.
+
+**How it was checked:**
+- Both patches are built on what you pushed: orrery f80a3ad and website 0be187e.
+- On throwaway copies, the orrery maintenance run passed 31 of 31 gating checks with 0 Tier-1. The website run passed 29 of 29, with a simulated rebuilt cache.
+- The file sizes in your folders match what I built.
+
+**Your steps:**
+1. **Orrery:** run `patch_L411_2_voyager2_20261018.py`, 
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L411_2_voyager2_20261018.py
+ok  base    constants_new.py matches f80a3ad0
+ok  base    solar_visualization_shells.py matches f80a3ad0
+ok  edit    constants_new.py                             Voyager 2 crossing from Li et al. (2008)
+ok  edit    constants_new.py                             chromosphere: its two citations separated
+ok  edit    constants_new.py                             credit line
+ok  edit    solar_visualization_shells.py                Voyager 2 line, both hovers
+ok  edit    solar_visualization_shells.py                credit line
+ok  edit    LEDGER_CONSOLIDATED.md                       header stamp
+ok  edit    LEDGER_CONSOLIDATED.md                       L-411 meta
+ok  edit    LEDGER_CONSOLIDATED.md                       L-411 follow-up
+
+patch applied (0 new files, 8 edits in 3 files)
+
+NEXT:
+  1. Run orrery_maintenance_run.py (dashboard). Expect 31 of 31
+     gating checkers passed and the gate line 0 TIER-1. It rewrites
+     the ledger index and the constants export.
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261018T044426Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 1.7s  rewrote LEDGER_CONSOLIDATED.md
+  Skill manifest               0.2s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             1.5s  rewrote data/constants_export.json
+  Period fetch                 0.2s  unchanged (1 checked, not written) --
+                                     NOTHING MISSING -- 13 served objects
+                                     examined, no query asked
+  Horizons check               0.3s  unchanged (2 checked, not written) --
+                                     NOTHING DUE -- 13 entries and 26 sheets
+                                     current, no query asked
+  Objects export               0.2s  unchanged (1 checked, not written)
+  Drawings export              0.8s  unchanged (3 checked, not written)
+  Module atlas                 6.9s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               5.3s  rewrote DATA_INVENTORY.md
+  Exact rows report            3.1s  rewrote EXACT_ROWS_PRINTED.md -- 12 of 40
+                                     exact rows printed at 54 lines (39 orrery,
+                                     15 gallery); 12 drawn only, 0 not followed,
+                                     0 map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.3s  0 removal verdict(s) cross-checked against
+                                     the 205 name(s) the working copy assigns
+  Constants relations          0.2s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              1.2s  No figure count exceeds its inputs: 34
+                                     derived row(s) read, 27 judged OK -- 27 OK,
+                                     7 NOT YET MIGRATED; 22 conversion(s)
+                                     checked.
+  Constants export check       2.7s  Export matches the store: sha256
+                                     4e517f3e6fb7 on both sides; 149 rows
+                                     re-read, 56 not exported, 34 tokens; 395
+                                     conversions re-computed, 10 of 10 worked
+                                     cases hold; 149 citations worked out again,
+                                     8 of 8 worked cases hold.
+  Objects export check         0.4s  pass
+  Horizons confirmations       0.4s  pass -- 13 of 13 entries and 11 periods
+                                     confirmed, 26 sheets read, within 30 days
+  Horizons check suite         0.8s  pass -- 64 checks, every planted fault
+                                     caught by name
+  Period fetch suite           4.0s  pass -- 36 checks, every planted fault
+                                     caught (20 planted, 8 of them for Earth's
+                                     period, L-445)
+  Skill headers                0.2s  12 skills parsed, no consistency problems.
+  Exact rows by the count      2.2s  PASSING -- 12 printed exact rows each state
+                                     a count; 39 orrery lines print through
+                                     exact_text() or row_text(); 15 gallery lines
+                                     are served the count
+  Dimensions                   1.5s  No unit contradicts its arithmetic: 56
+                                     derived row(s) read -- 47 OK, 6 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.2s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.2s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 147 status lines in constants_new.py are
+                                     well formed; 55 rows carry none.
+  Row shape                    0.1s  All 205 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.3s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Scanner row run (L-414)      0.3s  16 of 16 pins hold -- each row reads its own
+                                     comment run, declared rows are named, the
+                                     gate path is read by name.
+  Reset completeness          23.8s  PASS -- all 311 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  2.2s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped; nothing left behind.
+  Earth pole of date           0.3s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Hills cloud sampler (L-421)    0.4s  PASS -- 4 of 4 planted faults caught; the
+                                     real rows pass, the dots' plane tilted 34.1
+                                     deg
+  Drawings export check        1.3s  PASS -- 8 of 8 planted faults caught;
+                                     hills_cloud 3600 dots, plane tilted 30.9
+                                     deg, sha256 a51e93118069; van_allen_belts
+                                     3200 dots, no plane recorded, sha256
+                                     75274e84f840; earth_exosphere 1500 dots, no
+                                     plane recorded, sha256 6112639fb2cd
+  Position digits (L-401)      2.4s  PASS -- 14 of 14 planted faults caught by
+                                     name; 23 hovers examined, 181 lines compared
+                                     against their errors; 5 pairs printed the
+                                     same from either end; 496 hovers of every
+                                     listed object from the Sun, Earth and
+                                     Neptune; 3 recorded 2xr answers read by
+                                     column name; 10 period sentences
+  Orbit markers (L-431, L-401)   11.1s  PASS -- 12 of 12 planted faults caught by
+                                     name; 4 ellipses, 1080 drawn points on their
+                                     period's centre; 14 markers, 9 dates, 53
+                                     printed distances against their errors; 6
+                                     elements as given; 3 Keplerian positions
+                                     half a year on; 1 parameters-window date
+                                     pairs; 2 Moon arcs; 2 perturbation checks; 1
+                                     perihelion osculating orbits; 2 frames; 2
+                                     sources read
+  Domain Split                 0.5s  PASS -- 6 of 6 planted faults caught; the
+                                     split reads each module's Domain: tag and
+                                     prints the same on the console, in the audit
+                                     and in the run history.
+  Maintenance report (L-269)    0.1s  PASS -- 4 of 4 planted faults caught by
+                                     name; 4 summaries; 2 risen file(s) named
+  Dashboard parity             0.3s  PASS -- 10 of 10 planted faults caught; 84
+                                     steps matched to their buttons by name and
+                                     script; 114 cards carry a short line; the
+                                     search finds 4 of 4 cases in any word order
+  Worksheet checker            8.3s  72 of 107 routed, 8 clean
+  Worksheet checker tests     17.5s  All 135 checks passed
+  Worksheet key round trip     1.1s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         23.3s  All 76 checks passed
+  Extractor pins               0.4s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          63.8s  0 TIER-1 -- the push gate holds; Whole tree,
+                                     Tier-1: 280: orrery 116, Earth System 149,
+                                     stars 13, utilities 2.
+
+======================================================================
+  31 of 31 gating checkers passed -- 192.5s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           72 of 107 routed, 8 clean
+    Provenance scanner          0 TIER-1 -- the push gate holds; Whole tree, Tier-1: 280: orrery 116, Earth System 149, stars 13, utilities 2.
+      No file's Tier-1 count rose since the previous run.
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2320 file(s) examined, 11 written, 1 created, 0 removed, 3 rewritten identically
+    written   DATA_INVENTORY.md
+    written   EXACT_ROWS_PRINTED.md
+    written   LEDGER_CONSOLIDATED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/constants_export.json
+    written   data/horizons_check_last_run.json
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    created   documentation/patch_L191_1_tooltip_br_20261018.py
+    rewritten with identical bytes, no action needed:
+      PROJECT_INSTRUCTIONS.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  2. Move this script into documentation/; commit; push. -- 
+  3. Then the website: patch_L411_3_voyager2_words_20261018.py.
+Undo is Discard Changes in GitHub Desktop.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+
+1. **Website:** run `patch_L411_3_voyager2_words_20261018.py`, 
+2. then the Daily Run, 
+3. then commit the config and the cache together and push.
+
+**One thing from your last Daily Run:** the step that swaps the new cache in was refused once and went through on the second try. The swap log records this. Nothing was lost, but it's the OneDrive lock showing up again.
 

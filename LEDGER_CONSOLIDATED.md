@@ -507,6 +507,10 @@ Module updated: October 17, 2026 with Anthropic's Claude Opus 5.5
 L-411's groups W, S, D and N done, its bulk left on it; L-455 the
 numbers' last item; provenance-discipline 2.31, temperatures in
 kelvin), built on 6f4fc9b0 and gallery da442bf2.
+Module updated: October 18, 2026 with Anthropic's Claude Opus 5.5
+(L-411 follow-up on Tony's look: Voyager 2's crossing from Li et al.;
+the chromosphere's citations separated; its typed name recorded),
+built on f80a3ad0 and gallery 0be187ec.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -856,7 +860,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-402 | Choose a date, or animate, within the range the drawn bodies are trusted for (gallery, exhibits) | OPEN | -- | 2026-10-01 |
 | ! | L-403 | Numbers in the object list's descriptions carry no source (orrery, provenance) | OPEN | -- | 2026-10-01 |
 | ! | L-410 | Fades where nature thins out: Earth's hydrogen designed, the outer corona next (orrery + gallery, the Sun and Earth) | OPEN | -- | 2026-10-17 |
-| ! | L-411 | The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-17 |
+| ! | L-411 | The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-18 |
 | ! | L-412 | The Sun's slice: the order Tony confirmed (the Sun's slice) | OPEN | -- | 2026-10-17 |
 | ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-10-17 |
 | ! | L-423 | The website's checks: the order Tony confirmed (checks, gallery) | OPEN | -- | 2026-10-16 |
@@ -1590,7 +1594,7 @@ re-read against the rule when the Sun's turn comes.
 
 
 #### [L-411] The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice)
-<!-- L:411 status:OPEN upd:2026-10-17 section:A flag: rice: -->
+<!-- L:411 status:OPEN upd:2026-10-18 section:A flag: rice: -->
 - **Recorded 2026-10-04** while building L-371. The orrery's Sun
   hovers, and some of the gallery's served words, still type numbers
   that no row holds. One row per CLASS (The Braid); the instances live
@@ -1646,8 +1650,25 @@ re-read against the rule when the Sun's turn comes.
   inputs; and the orrery photosphere's 5,500 K with the wavelength
   worked from it, which move together. Tony, on the method:
   "settle as much as possible by method rather than by judgement."
-**Gap:** groups T, M and C and the three leftovers above, one shell
-at a time. Not part of the Sun's numbers half, which ends with L-455.
+- **2026-10-18, Tony's look at the two sampling lists.** "all read and
+  correct", with one question: why Voyager 1 at 94.01 AU and Voyager
+  2 at 84? Each printed its source's figures, and Voyager 2's source,
+  NASA SVS, gives whole AU. Li, Wang and Richardson (2008), already the
+  source of the wind speeds, give "about 83.6 AU" in their abstract
+  (Stone et al. 2008 give 83.7, but only the abstract is open). Tony:
+  "Yes." VOYAGER2_TERMINATION_SHOCK_AU is 83.6 from Li et al., and
+  both sites say "about 83.6 AU". Built the same morning with the
+  chromosphere's citations, which had run together with no break
+  (`patch_L411_2_voyager2_20261018.py`, website
+  `patch_L411_3_voyager2_words_20261018.py`).
+- **Recorded, not built:** the chromosphere's name types its depth,
+  "Chromosphere (2,000 km skin)", on both sites. The number agrees
+  with CHROMOSPHERE_PHYSICAL_KM, but it is typed. A name is a key: the
+  legend, the shell stamp and the display-figures fixture read it, so
+  it changes with the chromosphere's shell when that is next opened.
+**Gap:** groups T, M and C, the three leftovers above and the
+chromosphere's name, one shell at a time. Not part of the Sun's
+numbers half, which ends with L-455.
 **Ref:** `solar_visualization_shells.py`, `comet_visualization_shells.py`;
 gallery `data/objects_config.json`; L-228, L-371.
 
