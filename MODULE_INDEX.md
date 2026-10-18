@@ -11,15 +11,16 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 163  
-**Total Lines of Code (non-blank):** 128,793  
-**Total Public Functions/Classes:** 1,604
+**Total Python Files:** 164  
+**Total Lines of Code (non-blank):** 129,201  
+**Total Public Functions/Classes:** 1,608
 
 ## Classification Coverage
 
-**Undetermined role (8).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (9).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
+- `patch_L191_2_tooltip_br_20261018.py`
 - `patch_L411_2_voyager2_20261018.py`
 - `test_drawings_export.py`
 - `test_earth_pole_of_date.py`
@@ -28,8 +29,9 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
-**Undetermined domain (1).** No valid `Domain:` tag.
+**Undetermined domain (2).** No valid `Domain:` tag.
 
+- `patch_L191_2_tooltip_br_20261018.py`
 - `patch_L411_2_voyager2_20261018.py`
 
 
@@ -42,7 +44,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `earth_system_controller.py` | KMZ layer selector for Google Earth Pro. (131 lines) |
 | `earth_system_visualization_gui.py` | Earth System Visualization GUI for Paloma's Orrery Hub window with climate data visualizations (1,903 lines) |
 | `orbital_param_viz.py` | Interactive orbital element visualization tool. (1,965 lines) |
-| `palomas_orrery.py` | Main GUI and plotting engine for Paloma's Orrery. (9,668 lines) |
+| `palomas_orrery.py` | Main GUI and plotting engine for Paloma's Orrery. (9,679 lines) |
 | `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (3,090 lines) |
 | `star_visualization_gui.py` | Stellar visualization GUI for Paloma's Orrery. (1,409 lines) |
 
@@ -265,6 +267,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
+| `patch_L191_2_tooltip_br_20261018.py` | - the GUI's checkbox tooltips show a line break where their text says <br>. One line of code in the tooltip class, every tooltip at once, no string touched. Records it on L-191, L-412 and L-351, writes the manifest, and updates Where We Are. (397 lines) |
 | `patch_L411_2_voyager2_20261018.py` | - a follow-up to the Sun's numbers (L-411), on Tony's look of 2026-10-18: Voyager 2's termination-shock crossing is read from Li, Wang and Richardson (2008), "about 83.6 AU", the same paper and crossing as the wind speeds beside it; the chromosphere's two citati... (142 lines) |
 | `test_drawings_export.py` | Each stored drawing in data/drawings/ is the drawing its rows give today, git tracks it, and each check can fail. (288 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |

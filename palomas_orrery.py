@@ -92,6 +92,10 @@ after build 2's look: calculate_axis_range_from_orbits sizes the frame
 from each ellipse as drawn, so Sedna's, drawn around the solar system's
 center of mass, frames to its 937 au far end, not the 1,004 au of its
 Sun-centred elements. Both the static plot and the animation use it.)
+Module updated: October 18, 2026 with Anthropic's Claude Fable 5.1 (L-191:
+CreateToolTip shows a <br> in its text as a line break, so the 58 shell
+tooltip strings written with Plotly's <br> read as lines in the window
+until each body's strings are rewritten in the newline form.)
 
 """
 #Paloma's Orrery - Solar System Visualization Tool
@@ -3763,9 +3767,16 @@ class CreateToolTip(object):
             usable_height = screen_height - taskbar_height
 
             # Create the tooltip label
+            # L-191 (2026-10-18): the shell tooltip strings are written
+            # with Plotly's <br>, and a Tk label prints what it is given.
+            # Show each <br> as a line break here, at the Tk boundary, so
+            # every tooltip reads as lines now. The canonical form is
+            # still newlines (orrery-coding-conventions, Canonical Text
+            # Format); this is the backstop until each body's strings
+            # are rewritten that way in its own slice.
             label = tk.Label(
                 self.tw,
-                text=self.text,
+                text=self.text.replace('<br>', '\n'),
                 justify='left',
                 background='yellow',
                 relief='solid',

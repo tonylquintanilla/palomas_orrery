@@ -1,8 +1,8 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 17, 2026, night: the Sun's numbers are built.
-- Written at orrery 6f4fc9b and gallery da442bf.
+Last updated: October 18, 2026: the Sun's numbers pushed; the tooltips fixed.
+- Written at orrery f80a3ad and gallery 0be187e.
 
 > **READ THIS FIRST**
 >
@@ -10,13 +10,14 @@ Last updated: October 17, 2026, night: the Sun's numbers are built.
 > - The Sun's numbers are built: the Alfven ranges, the Sun's rows and
 >   its unlinked numbers done; the typed numbers done where a visitor
 >   reads them first. Temperatures are in kelvin.
+> - GUI checkbox tooltips show line breaks, not `<br>` (L-191, tooltip strings).
 >
 > **Do next:** *L-455 (typed numbers in the website's words): Earth's
 > share, the same method, the numbers' last item.*
 >
 > **Needs you now:**
-> - *Two patches, in the handoff's order: orrery first, push, then the
->   website and the Daily Run.*
+> - *Run patch_L191_2 (the tooltip fix); the orrery run; hover a Sun
+>   and a Jupiter checkbox; commit; push.*
 > - After L-455: which of the Sun's drawings follow?
 
 *Italic* lines are the must-reads. Marks reset at every update.
@@ -90,11 +91,10 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261018T000459Z, ok, every rename on the first try (gallery da442bf).
-- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, 6f4fc9b
-  with this session's patch).
+- Last cache build: 20261018T051313Z, ok; one rename needed a second try (gallery 0be187e).
+- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, f80a3ad).
   Whole tree: 280: orrery 116, Earth System 149, stars 13, utilities 2.
-- This page's date and the ledger's newest stamp: both Oct 17. Agree.
+- This page's date and the ledger's newest stamp: both Oct 18. Agree.
 
 ## Waiting on you
 

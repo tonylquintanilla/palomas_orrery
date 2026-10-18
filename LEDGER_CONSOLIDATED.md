@@ -507,6 +507,10 @@ Module updated: October 17, 2026 with Anthropic's Claude Opus 5.5
 L-411's groups W, S, D and N done, its bulk left on it; L-455 the
 numbers' last item; provenance-discipline 2.31, temperatures in
 kelvin), built on 6f4fc9b0 and gallery da442bf2.
+Module updated: October 18, 2026 with Anthropic's Claude Fable 5.1
+(L-191 confirmed by render and re-measured, the one-line tooltip fix
+built, its gap rewritten; the Sun's 19 strings onto L-412; a skill
+sentence carried on L-351), built on f80a3ad0 and gallery 0be187ec.
 Module updated: October 18, 2026 with Anthropic's Claude Opus 5.5
 (L-411 follow-up on Tony's look: Voyager 2's crossing from Li et al.;
 the chromosphere's citations separated; its typed name recorded),
@@ -777,7 +781,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-254 | 76 dead sphere-shell builders, unmarked, across 12 modules | OPEN | 2.8 | 2026-09-02 |
 | ! | L-240 | Split declared drawing parameters from measured values | OPEN | 2.8 | 2026-08-25 |
 | ! | L-176 | Shell hover text: add illustrated dimensions (radius_fraction -> km) | OPEN | 2.8 | 2026-08-04 |
-| ! | L-191 | Display-text duplication across the shell modules | OPEN | 2.8 | 2026-08-07 |
+| ! | L-191 | Display-text duplication across the shell modules | OPEN | 2.8 | 2026-10-18 |
 | ! | L-244 | Sweep for replicated conversion factors as a class [Fable candidate] | OPEN | 2.8 | 2026-08-25 |
 | ! | L-323 | A figure in prose needs a home (the Note is not a store) | OPEN | 2.8 | 2026-09-12 |
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-10-07 |
@@ -821,7 +825,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-346 | A derived row with empty inputs is invisible to a walk by inputs (checks) | OPEN | -- | 2026-09-22 |
 | ! | L-347 | The page re-derives the bow shock standoff to draw its shape (gallery) | OPEN | -- | 2026-09-22 |
 | ! | L-348 | Derived rows outside Earth were counted, not propagated (store) | OPEN | -- | 2026-09-22 |
-| ! | L-351 | Rules learned at C2, owed to the next bumps of their stores (skills, protocol) | OPEN | -- | 2026-10-17 |
+| ! | L-351 | Rules learned at C2, owed to the next bumps of their stores (skills, protocol) | OPEN | -- | 2026-10-18 |
 | ! | L-352 | The orrery's display sites format by fixed width, with no check reading them (orrery) | OPEN | -- | 2026-09-28 |
 | ! | L-353 | A count taken from a file's print resolution where a published error budget exists unopened (store) | OPEN | -- | 2026-09-22 |
 | ! | L-354 | Declared picks with their range in prose, on other bodies (store) | OPEN | -- | 2026-09-22 |
@@ -861,7 +865,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-403 | Numbers in the object list's descriptions carry no source (orrery, provenance) | OPEN | -- | 2026-10-01 |
 | ! | L-410 | Fades where nature thins out: Earth's hydrogen designed, the outer corona next (orrery + gallery, the Sun and Earth) | OPEN | -- | 2026-10-17 |
 | ! | L-411 | The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-18 |
-| ! | L-412 | The Sun's slice: the order Tony confirmed (the Sun's slice) | OPEN | -- | 2026-10-17 |
+| ! | L-412 | The Sun's slice: the order Tony confirmed (the Sun's slice) | OPEN | -- | 2026-10-18 |
 | ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-10-17 |
 | ! | L-423 | The website's checks: the order Tony confirmed (checks, gallery) | OPEN | -- | 2026-10-16 |
 | ! | L-424 | The checker reports one word for two different cases (worksheet checker) | OPEN | -- | 2026-10-11 |
@@ -2189,7 +2193,7 @@ above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
 `documentation/HANDOFF_decisions_20261008.md`.
 
 #### [L-412] The Sun's slice: the order Tony confirmed (the Sun's slice)
-<!-- L:412 status:OPEN upd:2026-10-17 section:A flag: rice: -->
+<!-- L:412 status:OPEN upd:2026-10-18 section:A flag: rice: -->
 - **Confirmed by Tony, 2026-10-04**, after a sweep of the open items that
   touch the Sun room. Smallest and most settled first:
   1. L-209, the Alfven surface look -- DONE 2026-10-04.
@@ -2279,9 +2283,16 @@ above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
   the twelve eyeballed shape numbers from L-371's Gap (the streamer
   belt's seven, the clumpy Oort cloud's five) go with the drawings:
   "confirmed as recommended."
+- **2026-10-18 (Tony, on L-191):** the Sun's 19 checkbox tooltip
+  strings in `solar_visualization_shells.py` join this slice: written
+  in newlines, their 14 `_info_hover` twins deleted, `<br>` derived at
+  the Plotly boundary, when that file is next open for the Sun's words
+  (L-411's remaining bulk, or the drawings half). Until then the
+  tooltip class shows them as lines (L-191's one-line fix).
 **Gap:** L-455 (Earth's share), the numbers half's last item; then
 Tony's choice of drawings, the streamer belt's and the clumps'
-eyeballed numbers with them; then L-443.
+eyeballed numbers with them, and L-191's 19 Sun strings when that
+file is open; then L-443.
 **Ref:** L-371 (the slice's numbers); the handles above; L-413;
 `documentation/LEDGER_SWEEP_review_20261004.md`.
 
@@ -3724,7 +3735,7 @@ of its own, at Tony's word; the hover states its epoch meanwhile.
 **Ref:** `earth_visualization_shells.py`; `planet_visualization_utilities.py`; `documentation/NOTE_L322_C2a_orrery_words_20260922.md`; manifest sec. 17.7.
 
 #### [L-351] Rules learned at C2, owed to the next bumps of their stores (skills, protocol)
-<!-- L:351 status:OPEN upd:2026-10-17 section:A flag: rice: -->
+<!-- L:351 status:OPEN upd:2026-10-18 section:A flag: rice: -->
 - **Recorded, not built.** A class found while building L-322 Stage C2
   (orrery `26f26fdb`, gallery `813fc542`), one row per class under The
   Braid: it waits until the artifact on the critical path reaches it.
@@ -3858,6 +3869,15 @@ of its own, at Tony's word; the hover states its epoch meanwhile.
     the build did the records check inside `daily_run.py` anyway, and
     the other two rested on reads already on file. The skill says
     nothing wrong; it does not cover this, so it is carried here.
+  - **2026-10-18, orrery-coding-conventions, next bump (Canonical Text
+    Format):** since L-191's one-line fix, `CreateToolTip` shows `<br>`
+    as a line break, so the sentence "A `tk.Label` renders text
+    literally, so `<br>` shows up on screen as the characters `<br>`"
+    is out of date. The canonical form stays `\n`; the Tk-side
+    conversion is a backstop, not a licence to write in `<br>`. A
+    session following the old sentence would do nothing wrong, so it
+    is carried here (A Wrong Sentence in a Skill: Bump Now, or Carry
+    It).
 **Gap:** Each lands with its store's next bump.
 **Ref:** skills/interactive-exhibit/SKILL.md; skills/ledger-and-session-records/SKILL.md; PROJECT_INSTRUCTIONS.md; L-216, L-363, L-371, L-390, L-414.
 
@@ -5841,7 +5861,7 @@ stated above, now with a count. See L-181, L-240.
 and the divergence check); L-156 (Batch 2 worksheet).
 
 #### [L-191] Display-text duplication across the shell modules
-<!-- L:191 status:OPEN upd:2026-08-07 section:A flag: rice:3/4/70/3 -->
+<!-- L:191 status:OPEN upd:2026-10-18 section:A flag: rice:3/4/70/3 -->
 - **Surfaced by Tony's Mode 5 pass, 2026-08-07.** Literal `<br>` tags
   visible in the Tkinter checkbox tooltips for the solar shells. Tony
   then spot-checked the asteroid belt and Earth tooltips, found them
@@ -6003,7 +6023,43 @@ and the divergence check); L-156 (Batch 2 worksheet).
   One string serving two surfaces means the boundary conversion is a
   one-line change rather than a per-string rewrite.
 
-**Gap (rewritten 2026-08-24 on the survey):** THREE JOBS, not two,
+- **2026-10-18, confirmed by render and re-measured** (Claude Fable
+  5.1, the coordination session). Tony, hovering the Sun's shell
+  checkboxes in the orrery's window: the tooltips show `<br>`. He
+  recalled it as fixed one to two months ago; it was diagnosed then and
+  never built. Every commit of `solar_visualization_shells.py` since
+  2026-08-22 carries `<br>` in its `_info` strings and all 14
+  `_info_hover` twins, and `CreateToolTip` shows its text as given.
+  Re-measured at f58f69f by both paths (the direct `CreateToolTip`
+  calls, and the names `build_shell_checkboxes` builds from
+  `SHELL_DEFINITIONS`), from raw source slices: 122 tooltip strings
+  examined, 58 carry `<br>` and no other tag: the Sun 19 (direct calls,
+  `solar_visualization_shells.py`), Jupiter 10, Saturn 10, Uranus 8,
+  Neptune 8, Planet 9 2, the Moon 1. Clean: Earth (its 11 are
+  newline-authored), the asteroid belt, the object checkboxes (`INFO`
+  in info_dictionary.py; its five `<br>` entries are star classes no
+  checkbox shows), and `orbital_param_viz.py`'s own two tooltips. The
+  August 58 reproduces exactly. Job (0) is done by Tony's look.
+- **Tony's ruling, 2026-10-18: "yes to both."** The one-line fix now:
+  `CreateToolTip.showtip` shows each `<br>` as a line break, every
+  tooltip at once, no string touched, the plots unreachable from that
+  class. And the structural fix per slice: the Sun's 19 strings join
+  the Sun's slice (L-412); the rest wait for their rooms. Built:
+  `documentation/patch_L191_2_tooltip_br_20261018.py`; record
+  `documentation/MANIFEST_L191_tooltip_fix_20261018.md`. The one-line
+  fix is the reverse of the canonical direction (orrery-coding-
+  conventions, Canonical Text Format): a backstop at the Tk boundary,
+  not a licence to write in `<br>`; the skill's sentence that a Tk
+  label shows `<br>` literally is carried on L-351 for its next bump.
+**Gap (rewritten 2026-10-18):** (0) done, by Tony's look. (1a) BUILT:
+the tooltip class shows `<br>` as a line break; Tony's look at a Sun
+and a Jupiter checkbox closes it. (1b) The structural fix, per slice:
+the Sun's 19 in the Sun's slice (L-412), written in newlines, their 14
+`_info_hover` twins deleted, `<br>` derived at the Plotly boundary as
+the gas-giant configs do; the gas giants' 36, Planet 9's 2 and the
+Moon's 1 when their rooms open. (2) Earth as below, when its talks
+come. The 2026-08-24 text follows, kept as the record.
+**Gap (rewritten 2026-08-24 on the survey; superseded above):** THREE JOBS, not two,
 and the first is a look rather than a build.
 (0) CONFIRM BY RENDER. Hover a Jupiter shell checkbox -- "-- Core"
 will do. A literal `<br>` there confirms the 58 by the surface

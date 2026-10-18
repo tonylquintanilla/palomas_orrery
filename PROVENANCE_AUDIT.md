@@ -20,14 +20,14 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T1 by domain | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|--------------|---:|---:|---:|--------:|
+| 20261018T183140Z | `1c254d4` | 164 | 1143 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 703 | 153 | 7 | 0 |
 | 20261018T180156Z | `f80a3ad` | 164 | 1143 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 703 | 153 | 7 | 0 |
 | 20261018T044426Z | `6f4fc9b` | 162 | 1140 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 701 | 153 | 6 | 0 |
 | 20261018T021028Z | `88fedb3` | 162 | 1135 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 695 | 154 | 6 | 0 |
 | 20261017T234538Z | `785536e` | 164 | 1137 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 696 | 154 | 7 | 0 |
 | 20261017T222715Z | `fc2bb6f` | 162 | 1130 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 689 | 154 | 7 | 0 |
-| 20261017T204843Z | `da78b80` | 163 | 1127 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 686 | 154 | 7 | 0 |
 
-Change since the previous run: total +3, Tier-1 +0.
+Change since the previous run: total +0, Tier-1 +0.
 
 No file's Tier-1 count rose.
 
@@ -224,7 +224,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `worksheet_keys.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `export_constants.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `export_orbit_cache.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
-| `patch_L191_1_tooltip_br_20261018.py` | unclassified | 0 | 0 | 0 | 1 | 1 |
+| `patch_L191_2_tooltip_br_20261018.py` | unclassified | 0 | 0 | 0 | 1 | 1 |
 
 ---
 
@@ -244,7 +244,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 **Domain coverage gap (2):** these files have findings and no `Domain:` tag the report knows, so they are counted as unclassified rather than guessed into a domain. Add the tag to each module's own docstring (one of the six above); nothing in provenance_scanner.py needs editing:
 
-- `patch_L191_1_tooltip_br_20261018.py` -- no Domain: tag in its docstring
+- `patch_L191_2_tooltip_br_20261018.py` -- no Domain: tag in its docstring
 - `patch_L411_2_voyager2_20261018.py` -- no Domain: tag in its docstring
 
 ---
@@ -1962,9 +1962,9 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 2260 | constant | PERFRAME_INDICATOR_RADIUS_FACTOR | 100.0 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 2293 | constant | PERFRAME_COORD_DECIMALS | 7 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 3894 | constant | BUTTON_WIDTH | 14 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 2264 | constant | PERFRAME_INDICATOR_RADIUS_FACTOR | 100.0 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 2297 | constant | PERFRAME_COORD_DECIMALS | 7 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 3905 | constant | BUTTON_WIDTH | 14 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
 
 ### palomas_orrery_dashboard.py
 
@@ -2191,11 +2191,11 @@ is planned for a future session.
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
 | 139 | dict | CENTRE_LABELS[...] | (23 entries) | 4 | 1 | **4** | No source citation (recalled) | Cosmetic (name vocabulary) |
 
-### patch_L191_1_tooltip_br_20261018.py
+### patch_L191_2_tooltip_br_20261018.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 46 | dict | MARKERS[...] | (1 entry) | 3 | 1 | **3** | Cited, not independently cross-checked | Cosmetic (name vocabulary) |
+| 53 | dict | MARKERS[...] | (1 entry) | 3 | 1 | **3** | Cited, not independently cross-checked | Cosmetic (name vocabulary) |
 
 ### star_sphere_builder.py
 
