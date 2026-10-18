@@ -1,24 +1,23 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 17, 2026, night: Earth's fade done.
-- Written at orrery adcc185 and gallery da442bf.
+Last updated: October 17, 2026, late: the Sun's slice is next.
+- Written at orrery 88fedb3 and gallery da442bf.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Earth's hydrogen fades out from 3 to 100 Earth radii in both
->   instruments, live and looked at: "looks right", "Looks good"
->   (L-410, the fades).
-> - The low-orbit look is done: "contrast and shape are good".
+> - The order: Earth's remaining design talks wait. The Sun's slice
+>   (L-412, the Sun's list) goes next, its numbers before its drawings.
 >
-> **Do next:** *Earth's design talk 2, next session: section 5 of
-> HANDOFF_earth_fade_build_20261017.md.*
+> **Do next:** *The Sun's numbers: L-228 (the Alfven latitudes), L-411
+> (typed numbers in the Sun's hovers), L-386 (the Sun's unexported
+> rows), L-371 (the Sun room's unlinked numbers).*
 >
 > **Needs you now:**
-> - *Run this small close patch, commit and push.*
-> - Talk 2 covers the field's newer model, its off-centre dipole, and
->   a way to draw edges that move.
+> - *Run this small patch, commit and push.*
+> - After the numbers: which drawings? You lean to the fades with the
+>   dust cloud and the opening view; the ice lines wait.
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
@@ -26,14 +25,14 @@ Last updated: October 17, 2026, night: Earth's fade done.
 
   1-4. [done]  The Sun, Earth and Solar System rooms are live; the orrery
                feeds the website and nothing is typed twice.
-  5.   [NOW]   *Earth's list (L-413): the fade done; talk 2 next
-               session, then talks 3 to 6.* << moved this session
+  5.   [next]  Earth's list (L-413): talks 2 to 6 wait behind the
+               Sun's numbers. << moved this session
   5b.  [NOW]   The scaffolding checks clear beside the slices: the
                dashboard (L-440) done; L-424, L-425, L-426 to come.
   6-6a.[done]  The typed facts, served and checked (Oct 16);
                orbital periods from JPL, orrery and website (Oct 14).
-  7.   [next]  The Sun's numbers get the checking Earth's got; the Solar
-               System room's features close with these rooms.
+  7.   [NOW]   *The Sun's slice (L-412): numbers first, then the drawings
+               you pick; the Solar System room's features close too.* << moved this session
   8-8c.[done]  The served objects checked against JPL, missing periods
                fetched first, Earth's from the Earth-Moon barycentre; the
                Daily Run pulls before it builds, L-446 (Oct 14-16).
@@ -88,12 +87,13 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 - Belts: random dots, both curved. Low orbit starts at ESA's 180 km.
   A lost run record stops the Daily Run. Lines past a hover's 17 go to
   its i panel. What a visitor reads: in provenance-discipline. (Oct 17)
+- Earth's talks wait; the Sun's numbers, then its drawings, then the objects. (Oct 17)
 
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
 - Last cache build: 20261018T000459Z, ok, every rename on the first try (gallery da442bf).
-- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, adcc185).
+- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, 88fedb3).
   Whole tree: 280: orrery 116, Earth System 149, stars 13, utilities 2.
 - This page's date and the ledger's newest stamp: both Oct 17. Agree.
 
@@ -118,7 +118,7 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- *Next: `HANDOFF_earth_fade_build_20261017.md`, section 5 (talk 2)*
+- *Next: L-412 (the Sun's list); Earth's talk 2 later: `HANDOFF_earth_fade_build_20261017.md` sec. 5*
 - The fade's sources and rows: `SOURCES_earth_fade_20261017.md`
 - The fades: `DESIGN_fades_rulings_20261017.md`. Round 1's rulings:
   `DESIGN_earth_round1_rulings_20261016.md`; words: `WORDS_earth_round1_*`

@@ -2,9 +2,9 @@
 # Paloma's Orrery -- Provenance Audit
 
 Generated: October 17, 2026
-Files scanned: 164
-Total findings: 1137
-Constants: 202 | Dicts: 67 | Display strings: 868
+Files scanned: 162
+Total findings: 1135
+Constants: 202 | Dicts: 65 | Display strings: 868
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -20,14 +20,14 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T1 by domain | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|--------------|---:|---:|---:|--------:|
+| 20261018T021028Z | `88fedb3` | 162 | 1135 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 695 | 154 | 6 | 0 |
 | 20261017T234538Z | `785536e` | 164 | 1137 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 696 | 154 | 7 | 0 |
 | 20261017T222715Z | `fc2bb6f` | 162 | 1130 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 689 | 154 | 7 | 0 |
 | 20261017T204843Z | `da78b80` | 163 | 1127 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 686 | 154 | 7 | 0 |
 | 20261017T131817Z | `e63a207` | 160 | 1124 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 684 | 154 | 6 | 0 |
 | 20261017T014624Z | `6b97515` | 161 | 1124 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 684 | 154 | 6 | 0 |
-| 20261016T221523Z | `0d7211e` | 160 | 1124 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 684 | 154 | 6 | 0 |
 
-Change since the previous run: total +7, Tier-1 +0.
+Change since the previous run: total -2, Tier-1 +0.
 
 No file's Tier-1 count rose.
 
@@ -61,9 +61,9 @@ No file's Tier-1 count rose.
 | Tier | Score | Action | Count |
 |------|-------|--------|------:|
 | 1 | 16-20 | FIX NOW | 280 |
-| 2 | 10-15 | REVIEW | 696 |
+| 2 | 10-15 | REVIEW | 695 |
 | 3 | 5-9 | LOW PRIORITY | 154 |
-| 4 | 1-4 | LOWEST PRIORITY | 7 |
+| 4 | 1-4 | LOWEST PRIORITY | 6 |
 
 **Whole tree, Tier-1: 280: orrery 116, Earth System 149, stars 13, utilities 2.** By each file's docstring `Domain:` tag; Findings by File Type below has every tier and every domain. The push gate is the Gate Path section, not this total.
 
@@ -192,7 +192,6 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `plot_data_report_widget.py` | utilities | 2 | 0 | 0 | 0 | 2 |
 | `sgr_a_visualization_animation.py` | orrery | 1 | 0 | 1 | 0 | 2 |
 | `apsidal_markers.py` | orrery | 0 | 2 | 0 | 0 | 2 |
-| `patch_L410_3_earth_fade_close_20261017.py` | unclassified | 0 | 1 | 0 | 1 | 2 |
 | `close_approach_data.py` | orrery | 0 | 1 | 1 | 0 | 2 |
 | `export_objects.py` | dev_tools | 0 | 0 | 2 | 0 | 2 |
 | `orbit_data_manager.py` | orrery | 0 | 0 | 2 | 0 | 2 |
@@ -239,11 +238,9 @@ Same data again, grouped by subject-matter domain rather than by individual file
 | Stars (stellar neighborhood) | 12 | 13 | 41 | 6 | 3 | 63 |
 | Utilities (cross-domain shared helpers) | 1 | 2 | 0 | 0 | 0 | 2 |
 | Gallery | 0 | 0 | 0 | 0 | 0 | 0 |
-| Unclassified (no Domain: tag, or one outside the six) | 1 | 0 | 1 | 0 | 1 | 2 |
+| Unclassified (no Domain: tag, or one outside the six) | 0 | 0 | 0 | 0 | 0 | 0 |
 
-**Domain coverage gap (1):** these files have findings and no `Domain:` tag the report knows, so they are counted as unclassified rather than guessed into a domain. Add the tag to each module's own docstring (one of the six above); nothing in provenance_scanner.py needs editing:
-
-- `patch_L410_3_earth_fade_close_20261017.py` -- no Domain: tag in its docstring
+**Domain coverage:** all 97 files with findings declare a `Domain:` tag the report knows.
 
 ---
 
@@ -1447,12 +1444,6 @@ is planned for a future session.
 | 2341 | string | display string @ line 2341 | (5 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 | 2416 | string | display string @ line 2416 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 
-### patch_L410_3_earth_fade_close_20261017.py
-
-| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
-|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 57 | dict | NEW_FILES[...] | (1 entry) | 3 | 5 | **15** | Cited, not independently cross-checked | UNDETERMINED -- could not be classified |
-
 ### planet9_visualization_shells.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
@@ -1915,9 +1906,9 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 106 | dict | ROLE_MAP[...] | (156 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 403 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 426 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 106 | dict | ROLE_MAP[...] | (155 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 402 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 425 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### moon_visualization_shells.py
 
@@ -2182,12 +2173,6 @@ is planned for a future session.
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
 | 139 | dict | CENTRE_LABELS[...] | (23 entries) | 4 | 1 | **4** | No source citation (recalled) | Cosmetic (name vocabulary) |
-
-### patch_L410_3_earth_fade_close_20261017.py
-
-| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
-|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 53 | dict | MARKERS[...] | (1 entry) | 3 | 1 | **3** | Cited, not independently cross-checked | Cosmetic (name vocabulary) |
 
 ### star_sphere_builder.py
 

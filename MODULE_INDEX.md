@@ -11,26 +11,21 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 164  
-**Total Lines of Code (non-blank):** 128,635  
-**Total Public Functions/Classes:** 1,607
+**Total Python Files:** 162  
+**Total Lines of Code (non-blank):** 128,249  
+**Total Public Functions/Classes:** 1,599
 
 ## Classification Coverage
 
-**Undetermined role (8).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (7).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
-- `patch_L410_3_earth_fade_close_20261017.py`
 - `test_drawings_export.py`
 - `test_earth_pole_of_date.py`
 - `test_extractor_pins.py`
 - `test_hills_cloud_sampler.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
-
-**Undetermined domain (1).** No valid `Domain:` tag.
-
-- `patch_L410_3_earth_fade_close_20261017.py`
 
 
 ---
@@ -226,9 +221,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `ledger_index.py` | Generate the at-a-glance INDEX for the consolidated ledger. (715 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (129 lines) |
-| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (993 lines) |
+| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (995 lines) |
 | `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (858 lines) |
-| `patch_L410_1_earth_fade_orrery_20261017.py` | - Earth's hydrogen fade, the orrery: the exosphere drawn as dots that thin out from 3 to 100 Earth radii, where it was a sharp shell at 100; the eight rows the profile is drawn and described from; the new hover words; and the stored drawing the website ... (214 lines) |
 | `period_fetch.py` | - fetch from JPL the orbital period of each object the website serves that has none fetched yet, with the same code the orrery uses when Tony plots, so the Horizons check can compare it with JPL the same day and the objects export can carry it to the website (L-444). (375 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (505 lines) |
 | `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (3,528 lines) |
@@ -266,7 +260,6 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
-| `patch_L410_3_earth_fade_close_20261017.py` | - the close of Earth's fade build: records the build on L-410 (waiting on Tony's runs and looks), the low-orbit look and the fade on L-413, the stored_fade method owed on L-435, the third stored drawing on L-434; updates Where We Are; and adds the sessio... (174 lines) |
 | `test_drawings_export.py` | Each stored drawing in data/drawings/ is the drawing its rows give today, git tracks it, and each check can fail. (288 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |

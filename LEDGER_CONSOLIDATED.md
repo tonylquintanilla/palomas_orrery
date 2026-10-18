@@ -494,6 +494,11 @@ built on 785536e5 and gallery 44a6225c.
 Module updated: October 17, 2026 with Anthropic's Claude Opus 5.5
 (Earth's fade done on Tony's runs and looks: L-410 and L-413), built on
 adcc1851 and gallery da442bf2.
+Module updated: October 17, 2026 with Anthropic's Claude Fable 5.1
+(the order after Earth's fade, Tony's ruling: Earth's talks 2 to 6
+wait, the Sun's slice next, its numbers first, then the drawings he
+picks, then the objects: L-412, L-413, L-443, L-410, L-385, L-128;
+notes on L-454 and L-356), built on 88fedb3f and gallery da442bf2.
 Module updated: October 17, 2026 with Anthropic's Claude Opus 5.5
 (two notes from Earth's round 1: a rule owed on L-351, a locator owed
 on L-314), built on bc25fdc8 and gallery 44a6225c.
@@ -796,7 +801,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-078 | Provenance scanner: systematic coverage via module_atlas role classification | OPEN | 0.9 | 2026-07-16 |
 | ! | L-070 | Food Insecurity -- regional multi-country assembly (Sudan crisis shed) | OPEN | 0.9 | 2026-10-07 |
 | ! | L-319 | Focusing a smaller shell cuts larger lit shells flat at the frame's box | OPEN | 0.7 | 2026-09-10 |
-| ! | L-128 | Comet sublimation shell(s) -- solar-distance chemistry zones | OPEN | -- | 2026-10-08 |
+| ! | L-128 | Comet sublimation shell(s) -- solar-distance chemistry zones | OPEN | -- | 2026-10-17 |
 | ! | L-131 | Zodiacal dust solar shell | OPEN | -- | 2026-10-08 |
 | ! | L-228 | Alfven surface latitude ranges: source them or omit them | OPEN | -- | 2026-10-08 |
 | ! | L-235 | Checks that cannot fail, gallery side [three instances] | OPEN | -- | 2026-10-08 |
@@ -813,7 +818,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-353 | A count taken from a file's print resolution where a published error budget exists unopened (store) | OPEN | -- | 2026-09-22 |
 | ! | L-354 | Declared picks with their range in prose, on other bodies (store) | OPEN | -- | 2026-09-22 |
 | ! | L-355 | Rate rows and angle rows on other bodies follow the two Rule 3 forms (store) | OPEN | -- | 2026-09-22 |
-| ! | L-356 | IGRF-14 as a re-sourcing of the six coefficient rows (store) | OPEN | -- | 2026-09-22 |
+| ! | L-356 | IGRF-14 as a re-sourcing of the six coefficient rows (store) | OPEN | -- | 2026-10-17 |
 | ! | L-357 | Stale gallery artifacts that no check reads (gallery) | OPEN | -- | 2026-10-08 |
 | ! | L-358 | The constants change report cannot read a formula that calls a function, or a literal that became a formula (checks) | OPEN | -- | 2026-09-22 |
 | ! | L-359 | Served text beside a served number can go stale where no tool may edit it (gallery) | OPEN | -- | 2026-09-22 |
@@ -837,7 +842,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-379 | The recorded Earth scene payload is aging, and three checks patch it piece by piece (checks, gallery) | OPEN | -- | 2026-10-06 |
 | ! | L-381 | The uncertainty field's pattern reads a sentence's full stop as a decimal point (export, checks) | OPEN | -- | 2026-09-28 |
 | ! | L-382 | Earth's magnetosphere costs about 42 percent more per orrery animation frame since D8 (orrery, rendering) | OPEN | -- | 2026-09-28 |
-| ! | L-385 | The orrery's Auto view of the Sun opens about 31 times wider since Stage D (orrery, Tony's eye) | OPEN | -- | 2026-10-04 |
+| ! | L-385 | The orrery's Auto view of the Sun opens about 31 times wider since Stage D (orrery, Tony's eye) | OPEN | -- | 2026-10-17 |
 | ! | L-386 | The Sun's conversion rows, not yet exported (store, the Sun's slice) | OPEN | -- | 2026-10-09 |
 | ! | L-387 | The orrery's hovers print the conversion names by their own formats, not by the computed count (orrery) | OPEN | -- | 2026-09-28 |
 | ! | L-391 | Group clouds: the Trojans' sources, and the shapes of the three other groups (gallery, exhibits) | OPEN | -- | 2026-09-29 |
@@ -850,7 +855,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-403 | Numbers in the object list's descriptions carry no source (orrery, provenance) | OPEN | -- | 2026-10-01 |
 | ! | L-410 | Fades where nature thins out: Earth's hydrogen designed, the outer corona next (orrery + gallery, the Sun and Earth) | OPEN | -- | 2026-10-17 |
 | ! | L-411 | The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-04 |
-| ! | L-412 | The Sun's slice: the order Tony confirmed (the Sun's slice) | OPEN | -- | 2026-10-11 |
+| ! | L-412 | The Sun's slice: the order Tony confirmed (the Sun's slice) | OPEN | -- | 2026-10-17 |
 | ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-10-17 |
 | ! | L-423 | The website's checks: the order Tony confirmed (checks, gallery) | OPEN | -- | 2026-10-16 |
 | ! | L-424 | The checker reports one word for two different cases (worksheet checker) | OPEN | -- | 2026-10-11 |
@@ -862,7 +867,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-432 | Objects drawn in the default goldenrod (orrery, colours) | OPEN | -- | 2026-10-11 |
 | ! | L-434 | Stored drawings for the other dot-cloud shells (orrery + gallery) | OPEN | -- | 2026-10-11 |
 | ! | L-435 | Standing rulings that are method, held only on Tony's page (skills, records) | OPEN | -- | 2026-10-12 |
-| ! | L-443 | The rest of the orrery's objects come to the website as plotted positions (gallery + orrery, objects) | OPEN | -- | 2026-10-14 |
+| ! | L-443 | The rest of the orrery's objects come to the website as plotted positions (gallery + orrery, objects) | OPEN | -- | 2026-10-17 |
 | ! | L-449 | A cache build dropped the 82 build-run records it should have carried (gallery, cache builder) | OPEN | -- | 2026-10-17 |
 | ! | L-454 | A drawn device for edges that move: the magnetopause, the bow shock and their kind (orrery + gallery, design) | OPEN | -- | 2026-10-17 |
 | ! | L-455 | Typed numbers in the website's served words, with no row behind them (gallery, words) | OPEN | -- | 2026-10-17 |
@@ -1268,7 +1273,12 @@ as an archive of the prioritization thinking -- no cleanup on close.
   what it looks like, and what the spread actually measures. It goes
   beside Earth's talk 2 on the field (L-356 with L-375), since both are
   about Earth's magnetic field and how it moves.
-**Gap:** a design talk, on Earth's list (L-413) with talk 2.
+**Note (Claude, 2026-10-17):** the Sun's slice now goes before Earth's
+talk 2 (L-412). Its Alfven surface (L-228) and its fades (L-410) are
+edges of this kind, so the device's questions may be met there first;
+Earth's talk 2 then takes what the Sun decided, or asks them fresh.
+**Gap:** a design talk, on Earth's list (L-413) with talk 2, after the
+Sun's numbers (L-412).
 **Ref:** L-410; L-314 (the solar wind, which moves these edges); L-375
 (the dipole cone); `documentation/DESIGN_fades_rulings_20261017.md`.
 
@@ -1373,7 +1383,7 @@ the deliberate limit, its number set then, each removal named.
 `documentation/HANDOFF_L446_daily_run_order_build_20261015.md`.
 
 #### [L-443] The rest of the orrery's objects come to the website as plotted positions (gallery + orrery, objects)
-<!-- L:443 status:OPEN upd:2026-10-14 section:A flag: rice: -->
+<!-- L:443 status:OPEN upd:2026-10-17 section:A flag: rice: -->
 - **Tony, 2026-10-13:** "I am anxious to add the symbols to the gallery
   too so visitors can at least plot positions." And his note of
   2026-10-10 on L-433: "then add the symbols for most if not all the
@@ -1405,7 +1415,12 @@ the deliberate limit, its number set then, each removal named.
   session included, waits until Earth's list (L-413) and the Sun's list
   (L-412) are worked through. L-444 (the missing periods) still goes
   first; its brief was already written.
-**Gap:** after the Earth and Sun slices close: the design session, from
+- **Tony, 2026-10-17:** "i would like to finish the sun slice and
+  then work on adding the symbols to the interactive." The order
+  holds, with Earth's remaining talks (L-413) moved out of its way:
+  this item follows the Sun's numbers and the drawings he picks
+  (L-412).
+**Gap:** after the Sun's numbers and its chosen drawings (L-412): the design session, from
 the brief: measure, propose the slices and the mechanism, and build the
 first slice only after Tony's word.
 **Ref:** `documentation/HANDOFF_L438_objects_to_website_brief_20261013.md`;
@@ -1541,7 +1556,9 @@ gallery `data/objects_config.json`.
   against orrery adcc1851 with 0 DRIFT; the Earth room on the phone,
   "Looks good". The item stays open for the Sun's fades.
 **Gap:** the Sun's fades, the outer corona first with the
-dust cloud (L-131), in the Sun's slice (L-412). The range idea's
+dust cloud (L-131), in the Sun's slice (L-412), after its numbers;
+Tony leans to doing them (2026-10-17), decided when the numbers are
+done. The range idea's
 pieces above (the Roche limit's band, L-241's torus wording) are
 re-read against the rule when the Sun's turn comes.
 **Ref:** L-131, L-241, L-371, L-454; `solar_visualization_shells.py`
@@ -2035,7 +2052,18 @@ L-252; L-418.
   Earth's fade built the same evening (L-410), waiting on his runs and
   looks.
 - **2026-10-17, Earth's fade done** (L-410) on Tony's runs and looks.
-**Gap:** talk 2 (L-356 with L-375, and L-454), next session, its agenda in section 5 of
+- **2026-10-17, later, Tony's ruling** (the coordination session):
+  the design talks 2 to 6 wait; the Sun's slice (L-412) goes first,
+  its numbers before its drawings. "i am thinking that maybe we should leave this aside for now and work on the sun slice. these ideas are recorded in the handoff. i would like to finish the sun slice and then work on adding the symbols to the interactive."
+  Talk 2's agenda stays where it is, section 5 of
+  `documentation/HANDOFF_earth_fade_build_20261017.md`, with its
+  starting prompt. This list's own text already allowed it: the
+  talks are "interleaved with the Sun's list rather than blocking
+  it" (2026-10-04).
+**Note (Claude, 2026-10-17):** the one dated thing a visitor meets
+meanwhile is the field's epoch (L-356), which the hover states.
+**Gap:** talks 2 to 6, after the Sun's numbers and the drawings Tony
+picks there (L-412): talk 2 (L-356 with L-375, and L-454), its agenda in section 5 of
 `documentation/HANDOFF_earth_fade_build_20261017.md`; then talks 3 to 6. Talk 4 (L-314)
 keeps the solar-wind fetch; its aberration is built.
 **Ref:** L-412 (the Sun's list, which resumes after this); the handles
@@ -2082,7 +2110,7 @@ above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
 `documentation/HANDOFF_decisions_20261008.md`.
 
 #### [L-412] The Sun's slice: the order Tony confirmed (the Sun's slice)
-<!-- L:412 status:OPEN upd:2026-10-11 section:A flag: rice: -->
+<!-- L:412 status:OPEN upd:2026-10-17 section:A flag: rice: -->
 - **Confirmed by Tony, 2026-10-04**, after a sweep of the open items that
   touch the Sun room. Smallest and most settled first:
   1. L-209, the Alfven surface look -- DONE 2026-10-04.
@@ -2143,7 +2171,29 @@ above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
 - **Added 2026-10-11:** L-401 (the orrery's distance digits) goes
   first, ahead of both lists, on Tony's word; worked once for both
   rooms.
-**Gap:** after L-413, work down the list from item 3.
+- **2026-10-17, Tony's ruling** in the coordination session, after
+  Earth's round 1 and Earth's fade closed: Earth's remaining design
+  talks (L-413, talks 2 to 6) wait, and this list goes next. His
+  words: "i am thinking that maybe we should leave this aside for now and work on the sun slice. these ideas are recorded in the handoff. i would like to finish the sun slice and then work on adding the symbols to the interactive."
+  Asked whether "finish the Sun" means the whole list or its numbers
+  first: "yes the numbers and we then decide which of the drawings we do as well. i would be inclined to do the fades, the dust cloud, the opening view and maybe wait on the ice lines."
+  So the list is worked in two halves, and the second is chosen when
+  the first is done:
+  - THE NUMBERS FIRST (road stage 7, the Sun's numbers getting the
+    checking Earth's got): item 4 (L-228, the Alfven latitudes), item
+    5 (L-411, the typed numbers in the Sun's hovers), item 7 (L-386,
+    the Sun's unexported rows), and L-371's own Gap (the Sun room's
+    unlinked numbers and the fifteen eyeballed shape numbers).
+  - THEN THE DRAWINGS TONY PICKS, decided when the numbers are done.
+    He leans to item 9 (L-410, the fades, with L-131, the dust cloud;
+    L-241, the Hills hover, rides inside L-410's design as before)
+    and item 3 (L-385, the opening view), with item 10 (L-128, the
+    comet ice lines) likely waiting.
+  - THEN L-443 (the objects to the website), its design session
+    first; Earth's talks are no longer in front of it.
+  Items 1, 2 and 8 were already done.
+**Gap:** the numbers first: L-228, L-411, L-386 and L-371's Gap; then
+Tony's choice of drawings; then L-443.
 **Ref:** L-371 (the slice's numbers); the handles above; L-413;
 `documentation/LEDGER_SWEEP_review_20261004.md`.
 
@@ -2718,7 +2768,7 @@ Sun slice's seventh item (L-412).
 **Ref:** `constants_new.py`; gallery `data/objects_config.json`; L-345; L-371; L-322.
 
 #### [L-385] The orrery's Auto view of the Sun opens about 31 times wider since Stage D (orrery, Tony's eye)
-<!-- L:385 status:OPEN upd:2026-10-04 section:A flag: rice: -->
+<!-- L:385 status:OPEN upd:2026-10-17 section:A flag: rice: -->
 **Tony:** (on Where We Are, 2026-09-30, how wide the Sun's opening view
 is in the orrery) "photosphere + 10%"
 - **Found 2026-09-24** building L-322 Stage D's orrery autoscale (D4).
@@ -2740,6 +2790,7 @@ is in the orrery) "photosphere + 10%"
   read together, and a Mode 5 look. The Sun slice's third item (L-412).
 **Gap:** read the Sun's autoscale with its default shells; propose how
 the view opens at photosphere + 10% and what the axis does; Tony's eye.
+After the Sun's numbers (L-412); Tony leans to doing it (2026-10-17).
 **Ref:** `documentation/HANDOFF_L322_D_orrery_pole_built_20260924.md` sec. 3; L-322.
 
 #### [L-382] Earth's magnetosphere costs about 42 percent more per orrery animation frame since D8 (orrery, rendering)
@@ -3643,7 +3694,7 @@ website's checks). The card exports and the two comments go with the next patch 
 **Ref:** gallery `documentation/`; gallery `gallery/feature_renderers.js`; manifest sec. 17.7.
 
 #### [L-356] IGRF-14 as a re-sourcing of the six coefficient rows (store)
-<!-- L:356 status:OPEN upd:2026-09-22 section:A flag: rice: -->
+<!-- L:356 status:OPEN upd:2026-10-17 section:A flag: rice: -->
 - **Recorded, not built.** A class found while building L-322 Stage C2
   (orrery `26f26fdb`, gallery `813fc542`), one row per class under The
   Braid: it waits until the artifact on the critical path reaches it.
@@ -3651,6 +3702,12 @@ website's checks). The card exports and the two comments go with the next patch 
   secular variation was a forecast for 2020 to 2025. IGRF-14 supersedes
   them and revises 2020.0 as definitive. The hover says "for 2020
   (IGRF-13 model)", so what is shown is honest; it is also dated.
+**Note (Claude, 2026-10-17):** with Earth's talk 2 now behind the
+Sun's slice (L-412, L-413), this re-sourcing need not wait for the
+talk: the talk-2 brief (section 5 of
+`documentation/HANDOFF_earth_fade_build_20261017.md`) says method
+already answers it once the model is read. A small build on an evening
+of its own, at Tony's word; the hover states its epoch meanwhile.
 **Gap:** Re-source the six rows to IGRF-14 and move the epoch; the hover words move with it.
 **Ref:** `constants_new.py`; gallery `gallery/feature_renderers.js`; L-361.
 
@@ -24663,7 +24720,7 @@ itself); L-112 (the remediation pass that verified DP flyby preservation).
   distances appear. `[per chain]`
 
 #### [L-128] Comet sublimation shell(s) -- solar-distance chemistry zones
-<!-- L:128 status:OPEN upd:2026-10-08 section:A flag: rice: -->
+<!-- L:128 status:OPEN upd:2026-10-17 section:A flag: rice: -->
 - **Note (2026-10-08):** RICE struck (was 2/2/50/2). This item is item 10 of L-412 (the Sun's slice),
   and an item in an ordered list carries no score; the list's
   order is its priority (Tony's rule of 2026-10-07, L-412).
@@ -24681,6 +24738,9 @@ sublimation distances, single vs. multi-shell, data source).
 - **2026-10-04 (Tony):** in the Sun's slice, its tenth item (L-412):
   a design talk after the dust cloud, since both are about what fills
   the space around the Sun.
+- **2026-10-17 (Tony):** "maybe wait on the ice lines": likely the
+  one Sun drawing that waits behind the objects (L-443); decided when
+  the Sun's numbers are done (L-412).
 **Ref:** to_do_ideas.md (pre-ledger, 4/16/26).
 
 #### [L-130] Restore six-elements + M0@J2000 plotting mode (educational, alt)
