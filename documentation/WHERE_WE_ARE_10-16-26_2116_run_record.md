@@ -189,7 +189,7 @@ Confirm your loaded interactive-exhibit reads 1.16 before exhibit work.
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-**Session: OPEN: 10-16-26 2138: Opus: Earth's design talk round 1 L330 L413 L449 L450 L451 L452**
+**Session: DONE: 10-17-26 1935: Opus: Earth's design talk round 1 L330 L413 L449 L450 L451 L452**
 
 I’ve saved the close of the design talk in your orrery folder. There are three files.
 
@@ -665,7 +665,7 @@ Index regenerated (237 live items) in C:\Users\tonyq\OneDrive\Desktop\python_wor
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-  2. Move this script into documentation/; commit; push. -- 
+  2. Move this script into documentation/; commit; push. -- 612a93373b3919890a21441990d7ec2b4407401a
 Undo is Discard Changes in GitHub Desktop.
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
