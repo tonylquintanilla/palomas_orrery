@@ -354,13 +354,10 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
   2. Open the orrery; hover a Sun shell checkbox and a Jupiter one:
      lines, not <br>. Your look is the gate. -- correct
-  3. Move this script into documentation/; commit; push.
+  3. Move this script into documentation/; commit; push. -- 64770e1ec2c105abc6e2ad75b9da32c2f9dcf0cb
 Undo is Discard Changes in GitHub Desktop.
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
-3. The orrery maintenance run from the dashboard: expect 31 of 31 gating, gate 0 TIER-1.
-4. Open the orrery and hover a Sun shell checkbox and a Jupiter one: lines, not `<br>`.
-5. Move the patch into documentation/; commit (with the L-411 follow-up); push.
 
 
 
