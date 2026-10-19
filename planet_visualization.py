@@ -29,6 +29,11 @@ Module updated: September 23, 2026 with Anthropic's Claude Opus 5.5
 (L-322 Stage D, patch D4: records fig._body_feature_extent_au, the reach
 of everything the dispatch drew for a body EXCEPT the Sun direction
 indicator, for the Auto scale in palomas_orrery.py)
+Module updated: October 19, 2026 with Anthropic's Claude Opus 5.5
+(L-385: the Auto view opens on the farthest shell drawn plus a margin,
+recorded per body in fig._body_shell_reach_au; the center body's rotation
+axis and dipole cone end just past that shell; low orbit and the other
+custom shells count as shells. Tony's rulings, 2026-10-18 and 2026-10-19.)
 
 Role: rendering
 Domain: orrery
@@ -345,8 +350,35 @@ def _append_inertial_note(trace):
         pass
 
 
-def auto_cube_half_width(shell_outermost_au, feature_extent_au):
+def auto_cube_half_width(shell_reach_au, feature_extent_au):
     """Half-width, in AU, of the Auto cube for a center body.
+
+    L-385, on Tony's rule of 2026-10-18 for every view: the farthest shell
+    drawn plus a margin, and the line toward the Sun ignored unless it is
+    the only feature drawn. The farthest shell is a sphere shell's radius
+    or the reach of a custom shell's geometry (low orbit, a magnetosphere,
+    a belt). The rotation axis and dipole cone do not set it; the dispatch
+    shortens them to end inside it. Only when no shell has a reach does
+    the cube fall back to everything else drawn (feature_extent_au). The
+    Sun direction arrow never sets it; it is fitted inside.
+
+    The rule this replaced (D4) took the larger of twice the outermost
+    sphere shell and the margin times every feature, so the Sun's long
+    rotation axis set its opening view, and low orbit's fallback size set
+    Earth's. It is kept below, retired, as _auto_cube_half_width_d4.
+    """
+    # A rendering setting (Tony, 2026-10-18: "plus say 20%"): it frames
+    # the drawing and moves nothing in it, so it stays here, where it is
+    # used, not in constants_new.py.
+    view_margin = 1.2
+    if shell_reach_au and shell_reach_au > 0:
+        return view_margin * shell_reach_au
+    return view_margin * (feature_extent_au or 0.0)
+
+
+def _auto_cube_half_width_d4(shell_outermost_au, feature_extent_au):
+    """RETIRED by L-385 (2026-10-19); no caller. The D4 rule, kept so the
+    change can be read against it.
 
     L-322 Stage D, patch D4, on Tony's ruling of 2026-09-23 that the Auto
     scale shows every rendered feature. The larger of two sizes: twice the
@@ -365,7 +397,8 @@ def auto_cube_half_width(shell_outermost_au, feature_extent_au):
 def create_celestial_body_visualization(fig, body_name, shell_vars, animate=False, frames=None,
                                         center_position=(0, 0, 0), sun_position=(0, 0, 0),
                                         object_type=None, center_object=None,
-                                        skip_elements=None, axis_range=None):
+                                        skip_elements=None, axis_range=None,
+                                        extra_shell_reach_au=0.0):
 
     """
     Unified config-driven dispatch for celestial body shell visualization.
@@ -400,6 +433,9 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
         sun_position (tuple): (x, y, z) AU position of the Sun. Default (0,0,0)
                             is correct for heliocentric views. Body-centered
                             views pass actual Sun offset. Phase D2.
+        extra_shell_reach_au (float): L-385. The reach of shells the caller
+                            draws itself, outside this dispatch (the Sun's
+                            asteroid belts), so they count as shells drawn.
 
     Returns:
         plotly.graph_objects.Figure: The updated figure
@@ -417,6 +453,11 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
     body_prefix = body_name.lower().replace(' ', '') + '_'
 
     outermost_radius_au = 0.0
+    # L-385: the farthest shell drawn, sphere or custom, measured from the
+    # geometry for a custom shell. Sets the opening view and the length of
+    # the center body's axis and cone.
+    shells_reach_au = max(0.0, extra_shell_reach_au or 0.0)
+    from shared_utilities import traces_extent_from_center
     # D3.1 follow-up (May 2026, Bug 1): track whether any custom shell was
     # rendered, so the Sun Direction indicator can fall back to a body-radius
     # based scale when only custom shells are selected.
@@ -452,6 +493,7 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
                 body_r = CENTER_BODY_RADII[body_name] / KM_PER_AU
                 shell_r = config['radius_fraction'] * body_r
             outermost_radius_au = max(outermost_radius_au, shell_r)
+            shells_reach_au = max(shells_reach_au, shell_r)
 
         elif shell_name in customs and shell_name not in ('rotation_axis', 'dipole_cone'):
             # 'rotation_axis' and 'dipole_cone' are intentionally NOT shell-triggered.
@@ -474,6 +516,9 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
             traces = builder(center_position, **kwargs)
             for t in traces:
                 fig.add_trace(t)
+            shells_reach_au = max(shells_reach_au,
+                                  traces_extent_from_center(list(traces),
+                                                            center_position))
             # D3.1 follow-up (May 2026, Bug 1): mark that a custom shell was
             # rendered, so the post-loop fallback can pick a sensible indicator
             # scale when no sphere shell tracked an outermost radius.
@@ -489,11 +534,23 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
     # are checked. The axis carries its own legend entry (showlegend=True on the
     # pole line) and toggles as a unit, so the user can still hide it via the
     # legend. Only the 11 bodies with a sourced spin pole have this entry.
+    # L-385 (Tony, 2026-10-19, "Confirmed as recommended"): for the plot's
+    # center body the axis and the dipole cone end just past the farthest
+    # shell drawn, never longer than their half_len_frac, so their tips and
+    # hover markers sit inside the opening view. Other bodies keep their
+    # length, as the animation engine draws them. axis_reach is a rendering
+    # setting, chosen so the spin arrow at the tip also stays inside the
+    # view's margin (auto_cube_half_width).
+    axis_reach = 1.1
+    _axis_cap = None
+    if center_object == body_name and shells_reach_au > 0:
+        _axis_cap = axis_reach * shells_reach_au
     if 'rotation_axis' in customs:
         axis_custom = customs['rotation_axis']
         axis_mod_path, axis_func = axis_custom['builder'].rsplit('.', 1)
         axis_builder = getattr(importlib.import_module(axis_mod_path), axis_func)
-        for t in axis_builder(center_position, planet_name=body_name):
+        for t in axis_builder(center_position, planet_name=body_name,
+                              max_half_len_au=_axis_cap):
             if animate:
                 _append_inertial_note(t)
             fig.add_trace(t)
@@ -507,7 +564,8 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
         dc_custom = customs['dipole_cone']
         dc_mod_path, dc_func = dc_custom['builder'].rsplit('.', 1)
         dc_builder = getattr(importlib.import_module(dc_mod_path), dc_func)
-        for t in dc_builder(center_position, planet_name=body_name):
+        for t in dc_builder(center_position, planet_name=body_name,
+                            max_half_len_au=_axis_cap):
             if animate:
                 _append_inertial_note(t)
             fig.add_trace(t)
@@ -520,8 +578,12 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
     # length and it is clamped to whatever cube it is drawn in, so fitting
     # the cube to it would shrink Earth to a speck (0.0012 AU against
     # 0.00016 AU with the crust alone) and it shows either way.
+    if shells_reach_au > 0:
+        if not hasattr(fig, '_body_shell_reach_au'):
+            fig._body_shell_reach_au = {}
+        if shells_reach_au > fig._body_shell_reach_au.get(body_name, 0.0):
+            fig._body_shell_reach_au[body_name] = shells_reach_au
     try:
-        from shared_utilities import traces_extent_from_center
         _feat_ext = traces_extent_from_center(
             list(fig.data)[_dispatch_start_idx:], center_position)
         if _feat_ext > 0:
@@ -547,9 +609,11 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
     # per-shell call pattern (e.g. 100 * EARTH_RADIUS_AU in the dormant
     # create_earth_magnetosphere_shell). The fallback only triggers when no
     # sphere shell was rendered AND at least one custom shell was rendered.
-    if outermost_radius_au == 0 and custom_rendered and body_name in CENTER_BODY_RADII:
-        body_r_au = CENTER_BODY_RADII[body_name] / KM_PER_AU
-        outermost_radius_au = 100.0 * body_r_au
+    # L-385 (2026-10-19): the fallback is now the custom shells' measured
+    # reach. The 100-body-radii guess set Earth's opening view to 200 Earth
+    # radii with low orbit alone, and drew the arrow 115 radii long.
+    if outermost_radius_au == 0 and custom_rendered:
+        outermost_radius_au = shells_reach_au
 
     if outermost_radius_au > 0 and not (skip_elements
             and 'sun_direction_indicator' in skip_elements):
@@ -562,7 +626,7 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
         _ind_range, _ind_fit = axis_range, False
         if axis_range is None and center_object == body_name:
             _half = auto_cube_half_width(
-                outermost_radius_au,
+                shells_reach_au,
                 getattr(fig, '_body_feature_extent_au', {}).get(body_name, 0.0))
             if _half > 0:
                 _ind_range, _ind_fit = [-_half, _half], True
@@ -594,7 +658,6 @@ def create_celestial_body_visualization(fig, body_name, shell_vars, animate=Fals
     # distance formula that left small shells invisible. Keyed per body so a
     # multi-body plot sizes each Fly To target correctly.
     try:
-        from shared_utilities import traces_extent_from_center
         _body_ext = traces_extent_from_center(
             list(fig.data)[_dispatch_start_idx:], center_position)
         if _body_ext > 0:

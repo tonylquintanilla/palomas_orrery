@@ -197,7 +197,7 @@ PLAN_NOT_YET = [
     # 55,000 characters), so none is cut today.
     # gallery-cache-builder left on 2026-10-10 with its 1.8 (L-216).
     # interactive-exhibit left on 2026-10-10 with its 1.13 (L-429).
-    'orrery-coding-conventions',
+    # orrery-coding-conventions left on 2026-10-19 with its 1.11 (L-385).
     'safe-file-editing',
 ]
 

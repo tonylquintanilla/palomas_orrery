@@ -6,9 +6,19 @@ fires_when: Cross-check worksheets and relay prompts, adjudicating returns, writ
 
 # Provenance Cross-Check
 
-Read this file in 2 parts: lines 1-287, 288-566.
+Read this file in 3 parts: lines 1-283, 284-610, 611-638.
 
-Skill version: 1.0 | 2026-10-08, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.1 | 2026-10-19, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 6e0cfacd. v1.1 (L-410) adds The Slice Relay: when a
+slice's design talk has read its own sources and drafted its words,
+one prompt goes to an outside model before the build, with a citation
+row for every source the session opened and a discovery row for every
+claim the words left out; the prompt's fixed shape and its two worked
+examples; and what happens to the return. Tony, 2026-10-19, on the
+second such prompt: "This is a good search method. Can we add it to
+the skill?" references/worksheets.md records how Gemini 4 did on the
+first.
+Earlier: 1.0 | 2026-10-08, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ b0b3df82. v1.0 (L-418) is provenance-discipline's
 Review-Repair Protocol, moved here word for word when that skill was
 split at 2.27, apart from the edits the build patch lists: four
@@ -36,6 +46,7 @@ if this list and the headings disagree (L-418).
   - The Two-Dispatch Rule [CRITICAL]
   - A Negative Verdict Shows Its Search [CRITICAL]
   - Route the Effort Tier by Job Type [QUALITY]
+  - The Slice Relay [QUALITY]
   - Quoting a Worksheet Is Transcription, Not Interpretation [CRITICAL]
   - Cross-Checked Annotation Format [CRITICAL]
   - The Exhibit Requirement [CRITICAL]
@@ -170,6 +181,67 @@ Supporting evidence only -- a High-tier leg on worksheet 1 opened Shue
 in full on Russell's UCLA site after Wiley blocked it, dropped one row
 to APPROX and added ISEE-3 to another, where the Medium leg had done
 none of those.)
+
+### The Slice Relay [QUALITY]
+
+**Before a slice is built, its sources go out once for an outside
+check, and its gaps go out with them.** The moment is after the design
+talk has read its own sources and drafted the words a visitor will
+read, and before the build writes any row. One prompt, carried by Tony
+to one outside model at its highest effort tier, carrying two kinds of
+row:
+
+- **A CITATION row for every source the session opened itself.** The
+  outside leg re-opens it, quotes it, and checks the value against a
+  second open source of its own choosing. No model is its own
+  verifier: this is what shows the session's reads were reads.
+- **A DISCOVERY row for every claim the slice wants and cannot yet
+  source.** Three places they come from: what the words list left out
+  pending a source; an old typed figure the new words drop for want of
+  a row (so the visitor gets it back if it can be sourced); and a
+  figure resting on an educational page where an agency or a paper is
+  wanted.
+
+**The prompt has a fixed shape, in this order:** the anchor line (both
+repositories' SHAs, and that the rows are not in either yet, so every
+value is written out); who the work is for (Tony, plainly); what is
+being drawn, in a paragraph; the rule files to read if the repository
+is imported, and the rules restated if it is not (open sources only,
+name what was opened, quote it, kelvin, prefer an agency or a paper);
+the pre-flight; the answer's header (model, effort tier, rule files
+read); the two kinds of row; the table and its verdict vocabulary
+(Worksheet Types, in `references/worksheets.md`); bare URLs in a code
+block; the worksheet's filename; the rows, numbered C1... and D1...;
+and what not to do (no wording, no combining rows, nothing from
+memory). The two worked examples are the templates; copy the newer
+one and change the rows:
+
+- `documentation/prompts/RELAY_L455_gemini_earth_sources_20261018.md`
+  (Earth's numbers, L-455)
+- `documentation/prompts/RELAY_L410_gemini_sun_fades_20261019.md`
+  (the Sun's corona and dust cloud, L-410)
+
+**The return.** The worksheet is saved as
+`documentation/worksheets/worksheet_<model>_<tier>_<handle>_<date>.md`;
+the authored file is the record (A Link Is an Object, Not Text). A
+review, `documentation/REVIEW_<handle>_<model>_worksheet_<date>.md`,
+says what it confirmed, what it found, where it held back, and how it
+did against the rules. A discovery find is a LEAD until the building
+session re-opens it: every figure adopted from the return is opened
+again before it becomes a row, and that row's `# Read:` line names
+both readers. A row the leg marked UNVERIFIED because it could not
+open the page stands on the session's own read, said in the review.
+
+This is not the Batch Worksheet Workflow (`references/worksheets.md`),
+which audits claims already in the code, two legs per file. The slice
+relay runs once per slice, on claims about to enter the store, and its
+discovery half is the point: the first one's finds replaced every
+educational-page figure on Earth's list.
+
+(Tony, 2026-10-19: "This is a good search method. Can we add it to the
+skill?" The first relay, L-455 on 2026-10-18, was his request: "this
+is also a good test of the new Gemini model and usefulness for mode
+3.")
 
 ### Quoting a Worksheet Is Transcription, Not Interpretation [CRITICAL]
 

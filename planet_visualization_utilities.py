@@ -39,6 +39,12 @@ Module updated: August 2026 with Anthropic's Claude Opus 5 (L-224:
 create_streamer_band_shape -- helmet-and-stalk band geometry for the
 solar streamer belt, per-point alpha so the stalk has no visible edge)
 
+Module updated: October 19, 2026 with Anthropic's Claude Opus 5.5 (L-385:
+build_rotation_axis_traces and build_dipole_cone_traces take
+max_half_len_au, so the center body's axis and cone end just past the
+farthest shell drawn; never longer than half_len_frac. Tony's ruling,
+2026-10-19.)
+
 Module updated: September 22, 2026 with Anthropic's Claude Opus 5 (L-322
 Stage C2: PLANET_DIPOLE['Earth']'s note prints the tilt, its epoch and
 its rate from constants_new.py at their declared counts, where it typed
@@ -600,7 +606,7 @@ _AXIS_COLOR = 'rgb(255, 209, 102)'  # warm gold, distinct from magnetosphere blu
 
 
 def build_rotation_axis_traces(center_position=(0, 0, 0), planet_name=None,
-                               sun_position=None):
+                               sun_position=None, max_half_len_au=None):
     """Build the rotation-axis primitive for one body.
 
     Returns a list of plotly traces (6): a spin-pole line through the body
@@ -613,6 +619,12 @@ def build_rotation_axis_traces(center_position=(0, 0, 0), planet_name=None,
     on which end of the axis is "north" -- the IAU-pole vs angular-momentum-pole
     convention never surfaces. sun_position is accepted and ignored for
     dispatch-signature uniformity.
+
+    max_half_len_au (L-385, 2026-10-19): when given, the axis is drawn no
+    longer than this, never longer than half_len_frac. The dispatch passes
+    it for the plot's center body so the axis ends just past the farthest
+    shell drawn and its tip marker stays inside the opening view. None
+    (the default, and every per-frame engine call) keeps half_len_frac.
 
     Bodies with no sourced spin data return [] (no axis); the omission is noted
     on the body hover via ROTATION_AXIS_OMITTED.
@@ -633,6 +645,8 @@ def build_rotation_axis_traces(center_position=(0, 0, 0), planet_name=None,
 
     body_r_au = CENTER_BODY_RADII.get(planet_name, 0.0) / KM_PER_AU
     half = info.get('half_len_frac', 2.0) * body_r_au
+    if max_half_len_au is not None and max_half_len_au > 0:
+        half = min(half, max_half_len_au)   # L-385: shorter, never longer
     if half <= 0:
         return []
 
@@ -835,7 +849,7 @@ _DIPOLE_COLOR = 'rgb(255, 93, 210)'  # magenta; distinct from rotation-axis gold
 
 
 def build_dipole_cone_traces(center_position=(0, 0, 0), planet_name=None,
-                             sun_position=None):
+                             sun_position=None, max_half_len_au=None):
     """Build the magnetic dipole-cone primitive for one body (Movement 2).
 
     Draws the cone the body-fixed dipole sweeps about the spin axis as the planet
@@ -867,6 +881,8 @@ def build_dipole_cone_traces(center_position=(0, 0, 0), planet_name=None,
     marker) for a near-zero-tilt body; or [] for bodies with no sourced dipole
     tilt (intentional omission, not a failure). sun_position is accepted and
     ignored for dispatch-signature uniformity with the other shared builders.
+    max_half_len_au (L-385, 2026-10-19) caps the cone's length exactly as it
+    caps the rotation axis's, so the two stay the same length.
 
     Module updated: June 2026 with Anthropic's Claude Opus 4.8.
     """
@@ -887,6 +903,8 @@ def build_dipole_cone_traces(center_position=(0, 0, 0), planet_name=None,
 
     body_r_au = CENTER_BODY_RADII.get(planet_name, 0.0) / KM_PER_AU
     half = rot.get('half_len_frac', 2.5) * body_r_au
+    if max_half_len_au is not None and max_half_len_au > 0:
+        half = min(half, max_half_len_au)   # L-385: shorter, never longer
     if half <= 0:
         return []
 

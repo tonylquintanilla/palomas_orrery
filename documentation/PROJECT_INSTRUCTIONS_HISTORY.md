@@ -2993,6 +2993,49 @@ resident.
 (Moved down from the resident protocol on 2026-10-17 when
 v3.103 made a fourth entry.)
 
+v3.101 (October 16, 2026): No rule changed in this document. ONE
+skill bump, one version (L-421 parts 2 and 3, with L-262):
+interactive-exhibit 1.15 -> 1.16. A CITATION IS SERVED LIKE A NUMBER,
+AND THE TYPED-FACT RULE IS A GATING CHECK.
+
+WHAT PROMPTED IT. L-421's Gap held two parts: whether each served
+number's citation in the website's config agrees with its row in
+constants_new.py, and the typed-facts survey as a check. The brief put
+one decision to Tony at the session's start: which side owns the
+citation. Tony, 2026-10-16: "Yes, A as ruled": the orrery does.
+
+WHAT CHANGED. interactive-exhibit adds three rules to its served-data
+provenance contract. The citation beside a served number is the
+orrery's: the export (schema 7) carries each row's source, own, through
+an "as <ROW>." pointer, or inherited from its inputs; the mirror writes
+it beside the number; the Config mirror check compares it word for word
+and fails on a difference. The website's own words about a citation
+are a served word, `source_note`, written by the store writer, never by
+the mirror, and the i panel prints them after the citation. And the
+typed-fact rule of 1.12 is now the gallery run's "Typed facts" row,
+which masks every served word, fails on a typed sentence not on its
+allowed list, and reads the served-word vocabulary from one home in
+store_writer.py. Its v1.13 entry moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copy reads
+interactive-exhibit 1.16 before exhibit work. This session confirmed
+its loaded copies read gallery-cache-builder 1.10 (discharging v3.100's
+obligation), interactive-exhibit 1.15 and ledger-and-session-records
+1.21, as the manifest expected. v3.99's obligation,
+horizons-orbital-mechanics 1.8, still travels: no work this session
+fired that skill.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.98 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-19 when
+v3.104 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

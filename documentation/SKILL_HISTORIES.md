@@ -698,6 +698,16 @@ the intended convention), the canonical `\n` direction for module _info
 strings, dual-pipeline detail added to the shell dispatch section, and
 layer-chain gap handling. Two field notes added.
 
+Moved here 2026-10-19 (L-385), when 1.11 made a fourth resident entry:
+
+v1.8 (L-317) adds Two Standards for the Info Marker's Outline -- Tony's
+Mode 5 ruling of May 28 and 29, 2026, which had lived only in the code
+and in shell_configs.py comments -- and corrects the Single Info Marker
+Pattern example, which still showed the size-6 white-border style that
+create_info_marker's own docstring records as retired in May 2026.
+Earned when the gallery drew every info marker red for two exhibit
+rooms, because the rule a marker session loads was not in this skill.
+
 ## ledger-and-session-records
 
 Sources: LEDGER_CONSOLIDATED.md header, ledger_index.py at HEAD, handoff

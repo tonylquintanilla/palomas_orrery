@@ -14,7 +14,7 @@ Rebuilt by `exact_rows_report.py` on every orrery maintenance run. An exact row 
 
 ## Printed by the count
 
-Rule 7: each printed exact row states a print count, each orrery line prints it through `exact_text()` or `row_text()`, and the gallery serves the count beside it. **FAILING -- the items below are named.**
+Rule 7: each printed exact row states a print count, each orrery line prints it through `exact_text()` or `row_text()`, and the gallery serves the count beside it. **PASSING: 12 rows, every one counted, on 54 lines.**
 
 - `SUN_RADIUS_KM`: prints 4
 - `EARTH_LEO_UPPER_ALTITUDE_KM`: prints 4
@@ -28,10 +28,6 @@ Rule 7: each printed exact row states a print count, each orrery line prints it 
 - `HELMET_CUSP_RADII`: prints 1
 - `INNER_LIMIT_OORT_CLOUD_AU`: prints 1
 - `OUTER_OORT_CLOUD_AU`: prints 1
-
-Gallery lines whose served entry does not carry the row's count ("prints" in `data/objects_config.json`):
-
-- `EARTH_LEO_UPPER_ALTITUDE_KM` at `gallery/feature_renderers.js` line 2249 (config `/objects/1/features/earth_orbital_zones/leo_inner/upper`): serves None, the row states 4
 
 ## Printed
 
@@ -117,7 +113,7 @@ Gallery lines whose served entry does not carry the row's count ("prints" in `da
 
 ### `INNER_LIMIT_OORT_CLOUD_AU`
 
-- orrery `palomas_orrery.py` line 10523: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
+- orrery `palomas_orrery.py` line 10598: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
 - orrery `solar_visualization_shells.py` line 152: `_OORT_INNER_EDGE = row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)`
 - orrery `solar_visualization_shells.py` line 1663: `f'From {_OORT_INNER_EDGE} AU ({row_text("INNER_LIMIT_OORT_CLOUD_AU", unit="km", grouping=True...`
 - gallery `gallery/feature_renderers.js` line 2334 (config `/objects/0/features/oort_cloud/hills_cloud_torus/inner_radius`): `hover += "From " + (fmtAuServed(cfg.inner_radius) || fmtAu(lo)) +`
@@ -125,7 +121,7 @@ Gallery lines whose served entry does not carry the row's count ("prints" in `da
 
 ### `OUTER_OORT_CLOUD_AU`
 
-- orrery `palomas_orrery.py` line 10523: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
+- orrery `palomas_orrery.py` line 10598: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
 - orrery `solar_visualization_shells.py` line 166: `_OORT_OUTER_EDGE = row_text('OUTER_OORT_CLOUD_AU', grouping=True)`
 - gallery `gallery/feature_renderers.js` line 2401 (config `/objects/0/features/oort_cloud/outer_oort_clumpy/outer_radius`): `var z = fmtAuServed(cfg.outer_radius) || fmtAu(hi);`
 - gallery `gallery/feature_renderers.js` line 2401 (config `/objects/0/features/oort_cloud/galactic_tide/outer_radius`): `var z = fmtAuServed(cfg.outer_radius) || fmtAu(hi);`
@@ -142,7 +138,7 @@ A tool logging a value is not a display a visitor sees, so these are not counted
 
 No display prints these exact rows. Under Rule 7 they carry no print count. The number is how many other orrery lines name the row, so a use that prints it through another name can still be found by reading those lines.
 
-- `KM_PER_AU`: named on 221 other orrery line(s).
+- `KM_PER_AU`: named on 220 other orrery line(s).
 - `PARSEC_TO_AU`: named on 10 other orrery line(s).
 - `S_PER_HOUR`: named on 3 other orrery line(s).
 - `S_PER_DAY`: named on 12 other orrery line(s).

@@ -89,6 +89,9 @@ Module updated: October 13, 2026 with Anthropic's Claude Opus 5.5 (L-431,
 Tony's ruling of the same day: Sedna's perturbation block is not printed
 at all while its orbit is drawn around the barycentre; the judge and its
 planted fault say so, and Mercury must keep its comparison.)
+Module updated: October 19, 2026 with Anthropic's Claude Opus 5.5 (L-385:
+the frame judge expects the one margin every view now opens with, 1.2,
+for Sedna and for Mercury alike.)
 """
 import contextlib
 import copy
@@ -804,7 +807,9 @@ def _axis_range_function(orrery_source):
 def judge_frame(findings, counts, orrery_source=None):
     """The plot's frame is sized from the ellipses as drawn: Sedna's far end
     is its barycentre aphelion moved by the barycentre's place (worked out
-    here), times the 1.1 margin the orrery gives beyond 100 au."""
+    here), times the view's margin, 1.2 at every scale since L-385
+    (2026-10-19; it was 1.1 beyond 100 au and 1.3 below 10 au)."""
+    margin = 1.2
     if orrery_source is None:
         with open(os.path.join(HERE, 'palomas_orrery.py'), encoding='utf-8') as f:
             orrery_source = f.read()
@@ -814,14 +819,14 @@ def judge_frame(findings, counts, orrery_source=None):
     with cache_is(fixture_cache()), contextlib.redirect_stdout(io.StringIO()):
         rng = fn([{'name': 'Sedna'}], {}, {'Sedna': dict(SEDNA)}, parent_planets, 'Sun')
     counts['frames'] += 1
-    if abs(rng[1] - 1.1 * far) > 1e-6 * far:
+    if abs(rng[1] - margin * far) > 1e-6 * far:
         findings.append(('FRAME SIZED FROM ANOTHER ORBIT',
                          "the frame reaches %.2f au; Sedna's drawn ellipse ends %.2f au from the "
-                         'Sun, so it should reach %.2f' % (rng[1], far, 1.1 * far)))
+                         'Sun, so it should reach %.2f' % (rng[1], far, margin * far)))
     # A body drawn as fetched keeps a(1+e).
     with cache_is(fixture_cache()), contextlib.redirect_stdout(io.StringIO()):
         rng = fn([{'name': 'Mercury'}], {}, {'Mercury': dict(MERCURY)}, parent_planets, 'Sun')
-    want = 1.3 * MERCURY['a'] * (1 + MERCURY['e'])
+    want = margin * MERCURY['a'] * (1 + MERCURY['e'])
     counts['frames'] += 1
     if abs(rng[1] - want) > 1e-9:
         findings.append(('FRAME SIZED FROM ANOTHER ORBIT',

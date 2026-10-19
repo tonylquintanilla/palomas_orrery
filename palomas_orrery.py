@@ -96,6 +96,14 @@ Module updated: October 18, 2026 with Anthropic's Claude Fable 5.1 (L-191:
 CreateToolTip shows a <br> in its text as a line break, so the 58 shell
 tooltip strings written with Plotly's <br> read as lines in the window
 until each body's strings are rewritten in the newline form.)
+Module updated: October 19, 2026 with Anthropic's Claude Opus 5.5 (L-385:
+the Auto view of a center body opens on its farthest shell drawn plus 20
+percent, read from the dispatch's fig._body_shell_reach_au; the Sun's
+asteroid belts count as shells drawn. Tony's rule, 2026-10-18. Then
+every view, still and animated, opens on the farthest thing drawn, shell
+or orbit, with that one margin at every scale; with nothing orbiting,
+the shells alone size the view, not the 1 AU default, and the
+animation's Sun arrow is clamped to that view. Tony, 2026-10-19.)
 
 """
 #Paloma's Orrery - Solar System Visualization Tool
@@ -690,10 +698,19 @@ def create_animation_dates(current_date, step, N):
 
 
 def calculate_axis_range_from_orbits(selected_objects, positions, planetary_params, 
-                                    parent_planets, center_object_name):
+                                    parent_planets, center_object_name,
+                                    none_if_empty=False):
     """
     Calculate appropriate axis range based on orbital parameters.
     Uses semi-major axis data when available, falls back to position data.
+
+    L-385 (Tony, 2026-10-19, "confirmed as recommended"): every view opens
+    on the farthest thing drawn plus 20 percent, in the still plot and the
+    animation alike. So the margin is one setting, view_margin, where it
+    was 1.5, 1.3, 1.2 or 1.1 by scale, and 1.5 for a barycentre's
+    children. With none_if_empty=True the function returns None when
+    nothing orbits, so a caller with shells drawn sizes the view from the
+    shells alone instead of from the 1 AU default.
     
     Parameters:
         selected_objects: List of selected object dictionaries
@@ -703,8 +720,13 @@ def calculate_axis_range_from_orbits(selected_objects, positions, planetary_para
         center_object_name: Name of the center object
     
     Returns:
-        list: [min_range, max_range] for axis scaling
+        list: [min_range, max_range] for axis scaling, or None when
+        none_if_empty is True and no orbit was found
     """
+    # A rendering setting: it frames the drawing and moves nothing in it
+    # (L-385). Written here because test_orbit_markers.py compiles this
+    # function on its own.
+    view_margin = 1.2
 
     # Special case: Pluto-Charon Barycenter centered view
     # Use fixed range appropriate for the binary planet system (~0.0005 AU scale)
@@ -746,7 +768,10 @@ def calculate_axis_range_from_orbits(selected_objects, positions, planetary_para
 
         if not has_non_children:
             child_distances = []
-            for child_name in children:
+            # L-385 (2026-10-19): only the children that are plotted. Every
+            # child used to count, so Earth with only its crust ticked
+            # opened on the Moon's orbit, which was not drawn.
+            for child_name in [c for c in children if c in selected_names]:
                 if child_name in planetary_params:
                     child_params = planetary_params[child_name]
                     child_a = child_params.get('a', 0)
@@ -757,7 +782,7 @@ def calculate_axis_range_from_orbits(selected_objects, positions, planetary_para
                         print(f"[SCALING] {center_object_name} child '{child_name}': a={child_a:.6f} AU, apoapsis={child_apoapsis:.6f} AU", flush=True)
             
             if child_distances:
-                max_range = max(child_distances) * 1.5  # 1.5x buffer for comfortable viewing
+                max_range = max(child_distances) * view_margin  # L-385: was 1.5
                 print(f"[SCALING] {center_object_name} mode: using range +/-{max_range:.6f} AU (based on children's orbits)", flush=True)
                 return [-max_range, max_range]
         else:
@@ -900,16 +925,10 @@ def calculate_axis_range_from_orbits(selected_objects, positions, planetary_para
     if max_distances:
         max_range = max(max_distances)
         
-        # Add appropriate buffer based on the scale
-        if max_range < 0.1:  # Very small systems (satellite systems)
-            buffer_factor = 1.5
-        elif max_range < 10:  # Inner solar system
-            buffer_factor = 1.3
-        elif max_range < 100:  # Outer solar system
-            buffer_factor = 1.2
-        else:  # Very distant objects
-            buffer_factor = 1.1
-            
+        # L-385: one margin at every scale. It was 1.5 below 0.1 AU, 1.3
+        # below 10 AU, 1.2 below 100 AU and 1.1 beyond.
+        buffer_factor = view_margin
+
         max_range_with_buffer = max_range * buffer_factor
         axis_range = [-max_range_with_buffer, max_range_with_buffer]
         
@@ -921,6 +940,9 @@ def calculate_axis_range_from_orbits(selected_objects, positions, planetary_para
         return axis_range
     else:
         # Fallback to default range if no orbital data available
+        if none_if_empty:
+            print("No orbital data available; the view is sized by what else is drawn", flush=True)
+            return None
         print("No orbital data available, using default range", flush=True)
         return [-1, 1]
 
@@ -944,10 +966,12 @@ def get_improved_axis_range(scale_var, custom_scale_entry, selected_objects, pos
             print("Invalid custom scale value, using default", flush=True)
             return [-1, 1]
         
-def get_animation_axis_range(scale_var, custom_scale_entry, objects, planetary_params, parent_planets, center_object_name):
+def get_animation_axis_range(scale_var, custom_scale_entry, objects, planetary_params, parent_planets, center_object_name,
+                             none_if_empty=False):
     """
     Get axis range for animations using the same logic as static plots.
     This ensures consistency between plot_objects() and animate_objects().
+    none_if_empty (L-385): passed through; None when nothing orbits.
     """
     if scale_var.get() == 'Auto':
         # Use the same orbital-based scaling as plot_objects()
@@ -955,7 +979,8 @@ def get_animation_axis_range(scale_var, custom_scale_entry, objects, planetary_p
         
         return calculate_axis_range_from_orbits(
             selected_objects, {}, planetary_params, 
-            parent_planets, center_object_name
+            parent_planets, center_object_name,
+            none_if_empty=none_if_empty
         )
     else:
         try:
@@ -2123,6 +2148,12 @@ def add_center_body_marker(fig, center_object_name, params=None):
 def _auto_center_half_range(fig, body_name):
     """Half-width of the Auto cube for a center body, in AU (0.0 if unknown).
 
+    L-385, 2026-10-19: the cube is the farthest shell drawn plus 20
+    percent (Tony, 2026-10-18), read from fig._body_shell_reach_au, which
+    the shell dispatch records; the rotation axis and dipole cone are
+    drawn to end inside it. auto_cube_half_width() holds the rule. The
+    D4 history below is kept for the record.
+
     Tony's ruling, 2026-09-23: Auto scale shows every rendered feature.
     Until then Auto sized the cube to twice the outermost SPHERE shell
     only, so anything drawn past it -- a rotation axis three body radii
@@ -2141,9 +2172,10 @@ def _auto_center_half_range(fig, body_name):
     they set how much empty space frames the drawing, not where anything
     is.
     """
-    shell_r = getattr(fig, '_shell_outermost_radius_au', 0.0) or 0.0
+    reaches = getattr(fig, '_body_shell_reach_au', None) or {}
     extents = getattr(fig, '_body_feature_extent_au', None) or {}
-    return auto_cube_half_width(shell_r, extents.get(body_name, 0.0))
+    return auto_cube_half_width(reaches.get(body_name, 0.0),
+                                extents.get(body_name, 0.0))
 
 
 def add_center_body_shells(fig, center_object_name, sun_shell_vars_map,
@@ -2177,6 +2209,21 @@ def add_center_body_shells(fig, center_object_name, sun_shell_vars_map,
     center_shells_added = False
 
     if center_object_name == 'Sun' and any(var.get() == 1 for var in sun_shell_vars_map.values()):
+        # L-385 (2026-10-19): the asteroid belts are built first, so their
+        # reach counts as a shell drawn -- for the opening view and for the
+        # Sun's axis length -- and added after the dispatch, as before.
+        # Until now a belt alone opened at the Sun's axis, 0.29 AU, inside
+        # the main belt's 2 AU.
+        _belt_traces = []
+        for _belt_key, _belt_fn in (
+                ('main_belt', lambda: create_main_asteroid_belt()),
+                ('hildas', lambda: create_hilda_group()),
+                ('trojans_greeks', lambda: create_jupiter_trojans_greeks(jupiter_angle=0)),
+                ('trojans_trojans', lambda: create_jupiter_trojans_trojans(jupiter_angle=0))):
+            if sun_shell_vars_map.get(_belt_key) and sun_shell_vars_map[_belt_key].get() == 1:
+                _belt_traces.extend(_belt_fn())
+        from shared_utilities import traces_extent_from_center
+        _belt_reach = traces_extent_from_center(_belt_traces, (0, 0, 0))
         fig = create_celestial_body_visualization(
             fig, 'Sun', sun_shell_vars_map,
             center_position=(0, 0, 0),
@@ -2184,6 +2231,7 @@ def add_center_body_shells(fig, center_object_name, sun_shell_vars_map,
             center_object='Sun',
             skip_elements=skip_elements,
             animate=animate,
+            extra_shell_reach_au=_belt_reach,
             # (Phase 4, O12) Clamp input for the indicator. Auto passes
             # None: the Auto range is widened to 2x shell extent AFTER
             # this dispatch runs, so clamping against the incoming
@@ -2196,23 +2244,18 @@ def add_center_body_shells(fig, center_object_name, sun_shell_vars_map,
         # Auto-scale the cube to fit every rendered feature (same as the
         # planet path). L-322 Stage D, patch D4: was 2x the outermost
         # sphere shell only.
+        # L-385 (2026-10-19): the larger of the shells and the orbits
+        # already in axis_range, so a plotted planet stays in view.
         if scale_value == 'Auto':
             shell_r = _auto_center_half_range(fig, 'Sun')
             if shell_r > 0:
+                if axis_range is not None:
+                    shell_r = max(shell_r, abs(axis_range[1]))
                 axis_range = [-shell_r, shell_r]
-        # Asteroid belts: standalone geometry, not part of unified shell dispatch
-        if sun_shell_vars_map.get('main_belt') and sun_shell_vars_map['main_belt'].get() == 1:
-            for t in create_main_asteroid_belt():
-                fig.add_trace(t)
-        if sun_shell_vars_map.get('hildas') and sun_shell_vars_map['hildas'].get() == 1:
-            for t in create_hilda_group():
-                fig.add_trace(t)
-        if sun_shell_vars_map.get('trojans_greeks') and sun_shell_vars_map['trojans_greeks'].get() == 1:
-            for t in create_jupiter_trojans_greeks(jupiter_angle=0):
-                fig.add_trace(t)
-        if sun_shell_vars_map.get('trojans_trojans') and sun_shell_vars_map['trojans_trojans'].get() == 1:
-            for t in create_jupiter_trojans_trojans(jupiter_angle=0):
-                fig.add_trace(t)
+        # Asteroid belts: standalone geometry, not part of unified shell
+        # dispatch; built above (L-385), added here in the same order.
+        for t in _belt_traces:
+            fig.add_trace(t)
         if log_prefix:
             print(f"{log_prefix}Added Sun shells ({len(fig.data)} static traces)", flush=True)
 
@@ -2243,6 +2286,9 @@ def add_center_body_shells(fig, center_object_name, sun_shell_vars_map,
             if scale_value == 'Auto':
                 shell_r = _auto_center_half_range(fig, center_object_name)
                 if shell_r > 0:
+                    # L-385: the larger of the shells and the orbits.
+                    if axis_range is not None:
+                        shell_r = max(shell_r, abs(axis_range[1]))
                     axis_range = [-shell_r, shell_r]
 
     return fig, center_shells_added, axis_range
@@ -2333,18 +2379,32 @@ def _perframe_optin_active(entry):
         return False
 
 
-def _animate_axis_range_hint(center_object_name):
+def _animate_axis_range_hint(center_object_name, center_shell_range=None):
     """(Phase 4, O12) The animation's axis range, computed from the same
     inputs the downstream computation uses (a pure function of GUI state
     and selections), so the sun-direction indicator can be clamped to the
     visible cube at allocation time -- the animate pipeline otherwise
     derives its range from ORBITAL extent, which can be smaller than the
     indicator's shell-scaled length (the O12 clip). None on any failure;
-    the clamp is then simply skipped."""
+    the clamp is then simply skipped.
+
+    L-385 (2026-10-19): the hint is the view the animation will open on,
+    the larger of the orbits and the center body's shells
+    (center_shell_range, from add_center_body_shells), so the arrow is
+    clamped inside the view that is actually drawn. With nothing orbiting
+    it was the 1 AU default, which let the arrow run past a shells-only
+    view."""
     try:
-        return get_animation_axis_range(scale_var, custom_scale_entry,
-                                        objects, planetary_params,
-                                        parent_planets, center_object_name)
+        _orbit = get_animation_axis_range(scale_var, custom_scale_entry,
+                                          objects, planetary_params,
+                                          parent_planets, center_object_name,
+                                          none_if_empty=True)
+        if center_shell_range is not None:
+            _half = abs(center_shell_range[1])
+            if _orbit is not None:
+                _half = max(_half, abs(_orbit[1]))
+            return [-_half, _half]
+        return _orbit if _orbit is not None else [-1, 1]
     except Exception:
         return None
 
@@ -2416,7 +2476,8 @@ def _normalize_perframe_visibility(traces):
 
 
 def collect_perframe_elements(center_object_name, candidate_body_names,
-                              center_shell_radius_au=None):
+                              center_shell_radius_au=None,
+                              center_shell_range=None):
     """(Phase 3) Element specs for engine-animatable primitives.
 
     A (body, element) pair activates when: the body is NOT the animation
@@ -2434,7 +2495,8 @@ def collect_perframe_elements(center_object_name, candidate_body_names,
     specs = []
     # (Phase 4, O12) One range hint for every indicator spec this call
     # produces -- the clamp input for create_sun_direction_indicator.
-    _range_hint = _animate_axis_range_hint(center_object_name)
+    _range_hint = _animate_axis_range_hint(center_object_name,
+                                           center_shell_range)  # L-385
     planet_map = get_planet_shell_vars_map()
     for body in candidate_body_names:
         if body == center_object_name:
@@ -5415,11 +5477,13 @@ def plot_objects():
             if scale_var.get() == 'Auto':
                 selected_objects = [obj for obj in objects if obj['var'].get() == 1]
 
+                # L-385: None when nothing orbits, so the shells alone can
+                # size the view; the 1 AU default is applied after them.
                 axis_range = calculate_axis_range_from_orbits(
             #        selected_objects, positions, planetary_params, 
                     selected_objects, positions, active_planetary_params,
 
-                    parent_planets, center_object_name
+                    parent_planets, center_object_name, none_if_empty=True
     )
 
             else:
@@ -5466,6 +5530,10 @@ def plot_objects():
                 fig, center_object_name, sun_shell_vars,
                 get_planet_shell_vars_map(), _sun_pos_tuple,
                 scale_var.get(), axis_range)
+            if axis_range is None:
+                # L-385: nothing orbits and no shell is drawn.
+                print("No orbit or shell to size the view; using default range", flush=True)
+                axis_range = [-1, 1]
 
             # (2a) The explicit center-marker block that lived here was REMOVED.
             # It was the second of two center-marker mechanisms (ledger N3: two
@@ -7666,7 +7734,8 @@ def animate_objects(step, label):
             _engine_specs = collect_perframe_elements(
                 center_object_name, list(positions_over_time.keys()),
                 center_shell_radius_au=getattr(
-                    fig, '_shell_outermost_radius_au', None))
+                    fig, '_shell_outermost_radius_au', None),
+                center_shell_range=_shell_axis_range)  # L-385
             _engine_sun_traj = positions_over_time.get('Sun')
             if (_engine_sun_traj is None
                     and any(s['needs_sun_position'] for s in _engine_specs)
@@ -8121,13 +8190,13 @@ def animate_objects(step, label):
                     axis_range = get_animation_axis_range(
             #            scale_var, custom_scale_entry, objects, planetary_params, 
                         scale_var, custom_scale_entry, objects, active_planetary_params,
-                        parent_planets, center_object_name
+                        parent_planets, center_object_name, none_if_empty=True
                     )
             else:
                 axis_range = get_animation_axis_range(
             #        scale_var, custom_scale_entry, objects, planetary_params, 
                     scale_var, custom_scale_entry, objects, active_planetary_params,
-                    parent_planets, center_object_name
+                    parent_planets, center_object_name, none_if_empty=True
                 )
 
             # (Session C) Auto scale honors center-shell extent: the cube must
@@ -8139,6 +8208,12 @@ def animate_objects(step, label):
             if _shell_axis_range is not None and axis_range is not None:
                 _half = max(abs(axis_range[1]), abs(_shell_axis_range[1]))
                 axis_range = [-_half, _half]
+            elif axis_range is None:
+                # L-385 (2026-10-19): nothing orbits. The shells alone size
+                # the view, where the 1 AU default used to win; with no
+                # shells either, the default stays.
+                axis_range = (list(_shell_axis_range) if _shell_axis_range is not None
+                              else [-1, 1])
 
             # Manual grid spacing (dtick) override -- item 19.3. Blank/0 -> None
             # (auto_dtick handles it); a positive value overrides the grid on

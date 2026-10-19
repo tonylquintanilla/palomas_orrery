@@ -1,23 +1,24 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 18, 2026, late: Earth's numbers pushed; your Mode 5 notes recorded.
-- Written at orrery e4d4a9e and gallery c5c05b5.
+Last updated: October 19, 2026: the opening views built; the Sun's two fades designed.
+- Written at orrery 6e0cfac and gallery 4fc320f.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Earth's numbers are pushed and checked on your phone (L-455).
-> - A new website check, Typed numbers, fails on any digit with no row.
-> - Your Mode 5 notes are recorded: every view opens on its farthest
->   shell plus 20% (L-385); body radii and sources listed with live
->   links in every room, Celsius for Earth's surface and air (L-456).
+> - The opening views (L-385): the Sun and Earth now open on their
+>   farthest shell plus 20%; your look: "perfect".
+> - Patch 2 makes every view do it, still and animated, orbits included.
+> - The Sun's fades are designed (L-410, L-131 (the dust cloud)): the
+>   corona as one plasma fade, the dust as its own cloud of dots.
 >
-> **Do next:** *the opening views, the Sun first, then Earth: the
-> handoff's section 7.*
+> **Do next:** *run patch 2, look at the Sun with Earth plotted, then
+> the records patch: the handoff's run order, section 1.*
 >
 > **Needs you now:**
-> - Nothing else. The Sun's drawings are in your order (the road, 7).
+> - Your look at patch 2 closes L-385 (the opening views).
+> - The fades' words, revision 2, when you have time: answer in place.
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
@@ -31,9 +32,9 @@ Last updated: October 18, 2026, late: Earth's numbers pushed; your Mode 5 notes 
                dashboard (L-440) done; L-424, L-425, L-426 to come.
   6-6a.[done]  The typed facts, served and checked (Oct 16);
                orbital periods from JPL, orrery and website (Oct 14).
-  7.   [NOW]   *The Sun's slice (L-412): numbers done (Oct 18); next the
-               opening view, then the corona fade with the dust cloud;
-               the ice lines wait.* << moved this session
+  7.   [NOW]   *The Sun's slice (L-412): numbers done (Oct 18); the
+               opening views built (Oct 19); next, the two fades as
+               designed; the ice lines wait.* << moved this session
   8-8c.[done]  The served objects checked against JPL, missing periods
                fetched first, Earth's from the Earth-Moon barycentre; the
                Daily Run pulls before it builds, L-446 (Oct 14-16).
@@ -57,20 +58,10 @@ Last updated: October 18, 2026, late: Earth's numbers pushed; your Mode 5 notes 
 Standing rulings. A line leaves after a few weeks, once it is habit.
 - L-401 build 3 parked: fly-to buttons, parameters window when next
   opened; animation with choosing a date; encounters, stage 12. (Oct 15)
-- The plan is strategy; the road here is the order; the ledger has
-  status. The plan's history and lineage: MASTER_PLAN_HISTORY.md. (Oct 13, 14)
 - A fade only where nature thins out; a range is a drawn choice and
   words; a moving edge gets its own device. Replaces the range idea. (Oct 17)
 - A served body's missing period is fetched by the run, before the
   check, with the orrery's own code: orbit and period together. (Oct 14, 15)
-- "Surface": the solid surface, or one radius where there is none (a
-  giant planet's 1-bar level, the Sun's photosphere). (Oct 12)
-- A checker's word names its case: two words for a moved value. The
-  citation location checks: all three levels now. (Oct 12)
-- The scattered disk: yes, in the Solar System room, after fuzzy
-  boundaries. A dashboard button is named what the run prints. (Oct 12)
-- The dashboard: a short line per card, the rest under "+ more"; the
-  website checks in your six headings; only the orrery opens a console. (Oct 13)
 - The order: finish Earth, then the Sun (fuzzy boundaries inside
   it), then the objects; no batch of objects first. (Oct 15)
 - A failed pull stops the Daily Run before the build: option A. (Oct 15)
@@ -86,22 +77,28 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 - The Sun's drawings: opening view, then corona fade with dust; ice lines wait. (Oct 18)
 - Every view opens on its farthest shell plus 20%. Every room: body radii,
   sources listed with live links. Kelvin stays; Celsius only for Earth's surface and air. (Oct 18)
+- Every view, still and animated, opens on the farthest thing drawn,
+  shell or orbit, plus 20%; the center body's axis and cone end just
+  past its farthest shell. (Oct 19)
+- The Sun's fades: the corona and the dust are two drawings; one plasma
+  fade out to the Alfven surface; dust dots, place for density and
+  brightness for sunlight, stopping at 5.2 AU. (Oct 19)
 
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261019T030849Z, ok, every rename on the first try (gallery c5c05b5).
-- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, e4d4a9e).
-  Whole tree: 280: orrery 116, Earth System 149, stars 13, utilities 2.
-- This page's date and the ledger's newest stamp: both Oct 18. Agree.
+- Last cache build: 20261019T132346Z, ok, every rename on the first try (gallery 4fc320f).
+- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, on the
+  patched copy of 6e0cfac). Whole tree: 280: orrery 116, Earth System
+  149, stars 13, utilities 2.
+- This page's date and the ledger's newest stamp: both Oct 19. Agree.
 
-## Waiting on you
+## Waiting on you  **>> UPDATED THIS SESSION**
 
 At the next design talk:
 - L-401 (the distance digits): a model with no stated accuracy (the
   Moon's analytical orbit) still reads as km precision at the floor;
   numbers that are not distances have no digits rule.
-- The Sun's fades, the outer corona first with the dust cloud: L-410 (fades).
 - Moving the highlighted row to the top of the list.
 - GO's arrow, only if the text box stays centred.
 - The tide's cone and brightness on the phone: L-412 (the Sun's list).
@@ -116,7 +113,9 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- *Next: the opening views (L-385): `HANDOFF_L455_earth_numbers_20261018.md` sec. 7*
+- *Next: `HANDOFF_L385_opening_views_20261019.md`, sec. 1 (your run order)*
+- The Sun's fades, designed: `SOURCES_L410_sun_corona_dust_20261019.md`;
+  their words for your review: `WORDS_L410_sun_fades_20261019.md`
 - Earth's words and Gemini 4: `WORDS_L455_*`, `REVIEW_L455_gemini4_*`
 - Earth's talk 2, later: `HANDOFF_earth_fade_build_20261017.md` sec. 5
 - The fade's sources and rows: `SOURCES_earth_fade_20261017.md`

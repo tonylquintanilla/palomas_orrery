@@ -1,12 +1,23 @@
 ---
 name: orrery-coding-conventions
-description: Coding and visual conventions for the Paloma's Orrery solar system visualization project (palomas_orrery.py, *_visualization_shells.py, SHELL_CONFIGS, plot_objects/animate_objects, planet_visualization*, star_visualization_gui, and companion orrery modules). Use whenever working in the Paloma's Orrery codebase on Plotly traces, markers, hover text, legends, legendgroups, 3D axes, shells, module docstrings, or any new or modified visual element -- even if no convention is named in the request. Covers the marker symbol taxonomy, single info marker pattern, hover-text AU convention, 3D axis dtick/range control, credit lines, module docstring standard, barycenter rule, and the live shell dispatch path. Do not use for projects other than Paloma's Orrery.
-fires_when: Markers, hover text, axes, shells, legendgroups, docstrings, new visuals
+description: Coding and visual conventions for the Paloma's Orrery solar system visualization project (palomas_orrery.py, *_visualization_shells.py, SHELL_CONFIGS, plot_objects/animate_objects, planet_visualization*, star_visualization_gui, and companion orrery modules). Use whenever working in the Paloma's Orrery codebase on Plotly traces, markers, hover text, legends, legendgroups, 3D axes, shells, module docstrings, or any new or modified visual element -- even if no convention is named in the request. Covers the marker symbol taxonomy, single info marker pattern, hover-text AU convention, 3D axis dtick/range control, the Auto scale's opening view (farthest thing drawn plus 20 percent), credit lines, module docstring standard, barycenter rule, and the live shell dispatch path. Do not use for projects other than Paloma's Orrery.
+fires_when: Markers, hover text, axes, the opening view (Auto scale), shells, legendgroups, docstrings, new visuals
 ---
 
 # Orrery Coding Conventions
 
-Skill version: 1.10 | 2026-10-05, with Anthropic's Claude Opus 5.5, at
+Read this file in 3 parts: lines 1-275, 276-575, 576-706.
+
+Skill version: 1.11 | 2026-10-19, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 6e0cfacd. v1.11 (L-385) adds The Opening View: every
+view, still or animated, opens on the farthest thing drawn, shell or
+orbit, plus 20 percent; the line toward the Sun counts only when
+nothing else is drawn; the center body's rotation axis and dipole cone
+end just past its farthest shell. Tony, 2026-10-18: "this should be
+the rule for all rooms or system views." The ledger had said the rule
+goes into this skill at its build. The file also gets its read plan,
+and leaves skills_index.py's PLAN_NOT_YET list.
+Earlier: 1.10 | 2026-10-05, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 72e3b558. v1.10 (L-418) changes no rule. A contents
 list now opens the skill, generated from its headings, and
 skills_index.py --check fails if the two disagree. Version history
@@ -22,15 +33,8 @@ standing rule of 2026-09-16, "In general we should avoid compressed
 language in the hovertext." It was ruled over the gallery's hovers and
 reaches the orrery's own next (L-321); a convention that is not in the
 skill does not travel, and this is the skill a hover session loads.
-v1.8 (L-317) adds Two Standards for the Info Marker's Outline -- Tony's
-Mode 5 ruling of May 28 and 29, 2026, which had lived only in the code
-and in shell_configs.py comments -- and corrects the Single Info Marker
-Pattern example, which still showed the size-6 white-border style that
-create_info_marker's own docstring records as retired in May 2026.
-Earned when the gallery drew every info marker red for two exhibit
-rooms, because the rule a marker session loads was not in this skill.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
-on 2026-10-05 (L-418).
+on 2026-10-05 (L-418) and 2026-10-19 (L-385).
 Criticality tiers ([CRITICAL]/[QUALITY]/[PRACTICE]) are defined in the
 resident protocol, Part 2.
 
@@ -47,6 +51,7 @@ if this list and the headings disagree (L-418).
   - Two Standards for the Info Marker's Outline [QUALITY]
 - Hover Text AU Convention [QUALITY]
 - 3D Axis Control Convention [QUALITY]
+- The Opening View [QUALITY]
 - Credit Line Convention [PRACTICE]
 - Module Docstring Standard [PRACTICE]
 - Barycenter Rule [QUALITY]
@@ -267,6 +272,52 @@ extent) overridden -- default AU-scale axes make Earth-neighborhood geometry
   _calculate_grid_dtick).
 - Gallery Studio at refinement time (range min/max + dtick fields, active
   when Show Axes is on).
+
+## The Opening View [QUALITY]
+
+**Every view opens on the farthest thing drawn, plus 20 percent.** The
+still plot and the animation alike, under Auto scale, for every center
+body and every system view. Tony's rule, 2026-10-18: "the auto scale
+should be set to the farthest shell drawn plus say 20%. the sun pointer
+should be ignored unless it is the only feature drawn ... this should
+be the rule for all rooms or system views." Widened to orbits on
+2026-10-19: "farthest thing drawn, shell or orbit".
+
+What counts as drawn:
+- **A shell**: a sphere shell's radius, or the reach of a custom
+  shell's geometry measured from what it drew (low orbit, a
+  magnetosphere, a belt). A guessed size never stands in for it.
+- **An orbit**: the aphelion of each plotted object's ellipse as drawn
+  (`calculate_axis_range_from_orbits`). A moon counts only when it is
+  plotted.
+- **Not**: the line toward the Sun, unless nothing else is drawn; it is
+  fitted inside the view instead. Nor the rotation axis or dipole
+  cone, which are drawn to the view, not the other way round.
+
+The center body's rotation axis and dipole cone end just past its
+farthest shell (1.1 times it), never longer than their `half_len_frac`,
+so their tips and hover markers sit inside the view (Tony,
+2026-10-19). Other bodies keep their set length.
+
+Both factors are rendering settings: they frame the drawing and move
+nothing in it. They stay in the drawing code, beside where they are
+used -- `auto_cube_half_width` and `create_celestial_body_visualization`
+in planet_visualization.py, `calculate_axis_range_from_orbits` in
+palomas_orrery.py -- not in constants_new.py (provenance-discipline,
+Three Kinds of Drawing Number). A margin chosen by scale (the old 50,
+30, 20 or 10 percent) is the thing this rule replaced.
+
+**The parallel paths.** The still plot (`plot_objects`, through
+`add_center_body_shells`) and the animation (`animate_objects`, which
+merges the shell range with `get_animation_axis_range` and sizes the
+Sun arrow's clamp from `_animate_axis_range_hint`) each apply it; a
+change to one is checked in the other. With nothing orbiting and no
+shell, the view falls back to 1 AU.
+
+(L-385. Found 2026-09-24 when Stage D's autoscale opened the Sun 62
+solar radii wide on its 52-radii axis; Earth with low orbit alone
+opened 200 Earth radii wide on a 100-radii fallback. Built
+2026-10-19; Tony's look at the Sun and Earth: "perfect.")
 
 ## Credit Line Convention [PRACTICE]
 

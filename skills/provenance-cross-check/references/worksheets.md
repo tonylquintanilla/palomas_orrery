@@ -57,6 +57,17 @@ three PDFs in full. So the constraint recorded at L-276 is about the
 interface and the tier, not about Gemini, and a Flash tier is not a
 citation checker at any prompt quality.
 
+**Gemini 4, high tier, as a slice-relay leg (L-455, 2026-10-18).** One
+dispatch, twenty citation rows and seven discovery rows: a quote and a
+locator on every row it verified; every page it could not open marked
+UNVERIFIED rather than filled from memory; a search log on every
+discovery row; and finds that replaced every educational-page figure
+on Earth's list. Review:
+`documentation/REVIEW_L455_gemini4_worksheet_20261018.md`. Set against
+the 2026-08 pilot's 1 percent, this is a different model at a
+different tier; one dispatch shows it can read, not that it always
+does, so the exhibit rules still decide each row.
+
 **A checker inside the Project is not independent for a rerun.** Once
 an instance has transcribed or reviewed a return, it has seen the
 answer, and past chats are searchable, so a fresh session in the same

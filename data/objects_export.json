@@ -1,8 +1,8 @@
 {
   "schema": 2,
   "source_sha256": "57ba8161e6f0a2104ed556a7cbf7cbaa46b3f7d95aa1e93da4c7dd412d12cc24",
-  "period_inputs_sha256": "875a10cecf841b6c3408efe4999c19a1c10690997bc93c775920cd7e06bea6fa",
-  "confirmations_sha256": "a0aac1538ac2ebfe5d2d5e4c6377cffca0aba6d2b713ae9a841d6b997874cfea",
+  "period_inputs_sha256": "7e9977026acac933aed79ec8dadad957656e094de44dd6a0d1d6faf9428b7872",
+  "confirmations_sha256": "cdc40a6e08cad57e1398173fbb60b7daab1a53a1a2c6f7d40abf2ed221c684ef",
   "cadence_days": 30,
   "objects": {
     "sun": {
@@ -170,7 +170,7 @@
         "target": "3",
         "target_label": "the Earth-Moon center of mass",
         "open_orbit": false,
-        "fetched": "2026-10-17",
+        "fetched": "2026-10-19",
         "words": null,
         "years": {
           "value": 1.0,
@@ -183,22 +183,22 @@
           "text": "365.25"
         },
         "record": {
-          "days": 365.2508912348993,
-          "error_days": 0.004160873911871477,
+          "days": 365.250533662001,
+          "error_days": 0.004353092905205358,
           "error_from": "year_change",
           "sbdb_status": "not a small body; SBDB not asked",
-          "epoch": "2026-10-17 17:29",
+          "epoch": "2026-10-19 18:27",
           "elements": {
-            "a": 0.9999900492941104,
-            "e": 0.01665826673195008,
-            "i": 0.003546958365125112,
-            "omega": 288.4467544969676,
-            "Omega": 174.6350747050899,
-            "TP": 2461409.577527808,
-            "MA": 282.7772999666461,
-            "TA": 280.9073940401355,
-            "q": 0.9833319483236732,
-            "epoch": "2026-10-17 17:29 osc."
+            "a": 0.9999893966479301,
+            "e": 0.01665944538905316,
+            "i": 0.003553463700063866,
+            "omega": 288.3886127462193,
+            "Omega": 174.6965131623468,
+            "TP": 2461409.580639243,
+            "MA": 284.7851061243859,
+            "TA": 282.92974788509,
+            "q": 0.9833301279048414,
+            "epoch": "2026-10-19 18:27 osc."
           }
         }
       },
@@ -210,12 +210,12 @@
           "horizons_name": "Earth"
         },
         "period": {
-          "confirmed": "2026-10-17",
+          "confirmed": "2026-10-19",
           "center": "@sun",
-          "epoch": "2026-10-17 17:29",
-          "days": 365.2508912348993,
-          "jpl_days": 365.2508912348993,
-          "error_days": 0.004160873911871477
+          "epoch": "2026-10-19 18:27",
+          "days": 365.250533662001,
+          "jpl_days": 365.250533662001,
+          "error_days": 0.004353092905205358
         }
       }
     },
