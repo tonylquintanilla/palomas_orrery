@@ -1,20 +1,20 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 18, 2026, evening: Earth's numbers built; the numbers half done.
-- Written at orrery 05cb185 and gallery 10508df.
+Last updated: October 18, 2026, late: Earth's numbers pushed; your Mode 5 notes recorded.
+- Written at orrery e4d4a9e and gallery c5c05b5.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Earth's numbers are built (L-455, typed numbers): every number in
->   Earth's words comes from a row with a source you can open.
+> - Earth's numbers are pushed and checked on your phone (L-455).
 > - A new website check, Typed numbers, fails on any digit with no row.
-> - The deep Earth's temperatures come from two open papers, which
->   Gemini 4 found; National Geographic's figures are gone.
+> - Your Mode 5 notes are recorded: every view opens on its farthest
+>   shell plus 20% (L-385); body radii and sources listed with live
+>   links in every room, Celsius for Earth's surface and air (L-456).
 >
-> **Do next:** *run the two L-455 patches in order: the handoff,
-> section 1.*
+> **Do next:** *the opening views, the Sun first, then Earth: the
+> handoff's section 7.*
 >
 > **Needs you now:**
 > - Nothing else. The Sun's drawings are in your order (the road, 7).
@@ -63,8 +63,6 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
   words; a moving edge gets its own device. Replaces the range idea. (Oct 17)
 - A served body's missing period is fetched by the run, before the
   check, with the orrery's own code: orbit and period together. (Oct 14, 15)
-- A spacecraft: by its own JPL data sheet; the Voyagers' sky angle,
-  turned into km at their distance and said to be ours. (Oct 12)
 - "Surface": the solid surface, or one radius where there is none (a
   giant planet's 1-bar level, the Sun's photosphere). (Oct 12)
 - A checker's word names its case: two words for a moved value. The
@@ -86,12 +84,14 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 - Temperatures in kelvin. The Sun's numbers end with L-455. (Oct 17)
 - Earth's deep temperatures from open papers; the mantle stays in two. (Oct 18)
 - The Sun's drawings: opening view, then corona fade with dust; ice lines wait. (Oct 18)
+- Every view opens on its farthest shell plus 20%. Every room: body radii,
+  sources listed with live links. Kelvin stays; Celsius only for Earth's surface and air. (Oct 18)
 
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261018T181330Z, ok; one rename needed a second try (gallery 10508df).
-- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, 05cb185).
+- Last cache build: 20261019T030849Z, ok, every rename on the first try (gallery c5c05b5).
+- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, e4d4a9e).
   Whole tree: 280: orrery 116, Earth System 149, stars 13, utilities 2.
 - This page's date and the ledger's newest stamp: both Oct 18. Agree.
 
@@ -116,7 +116,7 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- *Next: the Sun's opening view (L-385): `HANDOFF_L455_earth_numbers_20261018.md` sec. 6*
+- *Next: the opening views (L-385): `HANDOFF_L455_earth_numbers_20261018.md` sec. 7*
 - Earth's words and Gemini 4: `WORDS_L455_*`, `REVIEW_L455_gemini4_*`
 - Earth's talk 2, later: `HANDOFF_earth_fade_build_20261017.md` sec. 5
 - The fade's sources and rows: `SOURCES_earth_fade_20261017.md`

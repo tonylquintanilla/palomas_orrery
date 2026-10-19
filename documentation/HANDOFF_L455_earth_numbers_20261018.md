@@ -187,14 +187,49 @@ join it.
      eyeballed numbers with it.
   3. The comet ice lines (L-128) wait behind the objects (L-443).
 
+The starting prompt that stood here is replaced by section 7's.
+
+## 7. After the push: Tony's Mode 5 notes (added October 18, late)
+
+Pushed at orrery e4d4a9e318e25f66fe023d625879143af6a5ae2f and gallery
+c5c05b52cdc3ea2800813fd3c73ae36599188408. Tony's run record,
+`documentation/WHERE_WE_ARE_10-18-26_1326_run_record.md`, carries the
+runs and his verdicts; every number on the Earth room checked "correct".
+
+**One step did not go as this handoff said.** The orrery maintenance
+run (section 1, step 3) failed one check, "Exact rows by the count",
+on EARTH_LEO_UPPER_ALTITUDE_KM: "served prints None, the row states 4".
+The run order had the website patch in before that run, and the
+website's config is only filled in by the Daily Run, later. The sandbox
+test had run beside an already filled-in config, so it passed there. At
+the pushed pair the check passes; nothing wrong was pushed. The lesson
+is carried on L-351 for agentic-pre-test.
+
+**His notes, now rules:**
+- **Every view opens on its farthest shell drawn, plus 20 percent; the
+  line toward the Sun counts only when nothing else is drawn** (L-385,
+  widened from the Sun to every orrery view). "start with the initial
+  view of the sun. it should follow the earth pattern: fartherst shell
+  plus 20%. this should be the rule for all rooms or system views."
+  This replaces the 10 to 20 percent of section 6.
+- **What a visitor reads** (L-456, new). For every room: a shell inside
+  a body gives its radius in body radii first (the four Earth lines are
+  approved); the i panel lists its sources one per line, and their
+  links can be clicked. For Earth's surface and air only: degrees
+  Celsius in brackets after the kelvin, worked out from the row. Tony:
+  "It was a parenthetical addition for these earth shells only because
+  Celsius is familiar in terrestrial environments. The general kelvin
+  rule is unchanged."
+
 Starting prompt for the next session:
 
 ```
-Build session: the Sun's opening view in the orrery (L-385), the first
-of the Sun's drawings (L-412). The view opens at about the Sun's
-radius plus 10 to 20 percent, like the website's Sun room.
-Pull both repositories and say the SHAs; the handoff is
-documentation/HANDOFF_L455_earth_numbers_20261018.md, section 6.
+Build session: the opening views in the orrery (L-385), the first of
+the Sun's drawings (L-412). Every view opens on its farthest shell
+drawn plus 20 percent; the line toward the Sun counts only when
+nothing else is drawn. The Sun first, then Earth, then check the other
+views. Pull both repositories and say the SHAs; the handoff is
+documentation/HANDOFF_L455_earth_numbers_20261018.md, section 7.
 Confirm your loaded skills against the manifest before work that fires
 them. My eye is the gate. One question per message, plain speech.
 ```

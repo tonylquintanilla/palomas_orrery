@@ -1041,3 +1041,53 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 
 11. **(decided)** Which of the Sun's drawings follow: answered the same
    evening, "Yes in that order" (section 3). -- start with the initial view of the sun. it should follow the earth pattern: fartherst shell plus 20%. this should be the rule for all rooms or system views.  
+
+=======================================================================
+
+Your notes, now rules for every room:
+
+Opening view: every orrery view opens on its farthest shell drawn, plus 20%. The line toward the Sun only counts when nothing else is drawn. This widens the opening-view item (L-385) from the Sun to every view.
+What a visitor reads (L-456, new):
+A shell inside a body gives its radius in that body’s radii first. Your four approved Earth lines are written down word for word.
+Everyday temperatures show degrees Celsius in brackets beside the kelvin, worked out from the stored value, not typed.
+The i panel lists its sources one per line, and the links can be clicked.
+
+When the skills get them: each rule goes into its skill in the session that builds it. The opening-view rule goes into orrery-coding-conventions. The panel and the radius rule go into interactive-exhibit. The Celsius rule goes into provenance-discipline, because it changes the kelvin-only rule from yesterday. Writing a rule with the build that uses it means one version bump per skill instead of two.
+
+Next steps:
+
+1. Run  patch_L456_1_mode5_notes_20261018.py
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L456_1_mode5_notes_20261018.py
+ok  edit    LEDGER_CONSOLIDATED.md                       line 524: Module updated: October 18, 2026, late, 
+ok  edit    LEDGER_CONSOLIDATED.md                       line 1284: #### [L-456] What a visitor reads, from 
+ok  edit    LEDGER_CONSOLIDATED.md                       line 2346: **Gap:** the drawings in Tony's order: L
+ok  edit    LEDGER_CONSOLIDATED.md                       line 2933: - **2026-10-18, later, the rule for ever
+ok  edit    LEDGER_CONSOLIDATED.md                       line 3977: - **2026-10-18, agentic-pre-test, next b
+ok  edit    documentation/WHERE_WE_ARE.md                line 4: Last updated: October 18, 2026, late: Ea
+ok  edit    documentation/WHERE_WE_ARE.md                line 10: > - Earth's numbers are pushed and check
+ok  edit    documentation/WHERE_WE_ARE.md                line 12: > - Your Mode 5 notes are recorded: ever
+ok  edit    documentation/WHERE_WE_ARE.md                line 16: > **Do next:** *the opening views, the S
+ok  edit    documentation/WHERE_WE_ARE.md                line 66: - A spacecraft: by its own JPL data shee
+ok  edit    documentation/WHERE_WE_ARE.md                line 87: - Every view opens on its farthest shell
+ok  edit    documentation/WHERE_WE_ARE.md                line 93: - Last cache build: 20261019T030849Z, ok
+ok  edit    documentation/WHERE_WE_ARE.md                line 119: - *Next: the opening views (L-385): `HAN
+ok  edit    documentation/HANDOFF_L455_earth_numbers_20261018.md line 190: The starting prompt that stood here is r
+ok  edit    documentation/HANDOFF_L455_earth_numbers_20261018.md line 227: Build session: the opening views in the 
+ok  check   documentation/WHERE_WE_ARE.md                130 lines above the marker (cap 130)
+
+patch applied (0 new files, 15 edits in 3 files)
+
+NEXT:
+  1. Commit the run record copy with your Mode 5 notes
+     (documentation/WHERE_WE_ARE_10-18-26_1326_run_record.md), this
+     script moved into documentation/, and the three files; push.
+     No maintenance run is needed: no code changed. The next one
+     rebuilds the ledger index with L-456 in it.
+  2. Next session: the handoff's section 7 starting prompt.
+Undo is Discard Changes in GitHub Desktop.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+Next session: the handoff’s section 7 has the starting prompt. 
+It begins with the Sun’s opening view, then Earth’s.
+The website changes from your notes come after that. I’ll bring the Celsius wording to you as a list first.

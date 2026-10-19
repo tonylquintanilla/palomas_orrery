@@ -521,6 +521,11 @@ from open sources, the low orbit's hover, the approved words; its loose
 ends to L-413 and L-411; L-412's numbers half complete, and Tony's
 order for its drawings: L-385, then L-410 with L-131, L-128 waiting;
 a skill line carried on L-351), built on 05cb185a and gallery 10508dfc.
+Module updated: October 18, 2026, late, with Anthropic's Claude Opus 5.5
+(Tony's Mode 5 notes after L-455: the opening-view rule for every view
+on L-385; L-456 new, what a visitor reads, mostly for every room; a
+test-order lesson carried on L-351), built on e4d4a9e3 and gallery
+c5c05b52.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -1276,6 +1281,62 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ## DETAIL / RECORD
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
+
+#### [L-456] What a visitor reads, from Earth's Mode 5 look: body radii, sources as a list with live links, Celsius for Earth's surface and air (gallery + orrery)
+<!-- L:456 status:OPEN upd:2026-10-18 section:A flag: rice: -->
+- **Recorded 2026-10-18** from Tony's Mode 5 look at the Earth room
+  after L-455 was pushed (orrery e4d4a9e3, gallery c5c05b52), in his
+  run record `documentation/WHERE_WE_ARE_10-18-26_1326_run_record.md`.
+  Tony: "these should become the pattern for all rooms and maybe add
+  to the skill as needed."
+- **(1) A shell inside a body gives its radius in that body's radii
+  first.** On the inner core's hover: "it does not mention the radius
+  fraction." Then: "Yes, Re gives an intuitive sense of proportion.
+  Please add." The four lines, approved the same evening ("approved"),
+  each in the crust's form, Earth radii first:
+  inner core "Radius: 0.19151 Earth radii" / "= 1,221.5 km
+  (0.000008165 AU)"; outer core "Radius: 0.54561 Earth radii" /
+  "= 3,480.0 km (0.0000233 AU)"; lower mantle "Radius: 0.895 Earth
+  radii" / "= 5,710 km (0.0000382 AU)"; upper mantle "Radius: 0.99506
+  Earth radii" / "= 6,346.6 km (0.0000424 AU)". Each is already served
+  (the row's "in"), at its served count; the Earth radius is the
+  equatorial one, the unit the crust and the outer shells use.
+- **(2) Earth's surface and air temperatures add degrees Celsius in
+  brackets after the kelvin, for these Earth shells only.** The crust's
+  records: "for these surface temperatures, let's also add back degrees
+  Celsius parenthetically, in addition to degrees Kelvin." The lower
+  atmosphere: "add back degrees Celsius parenthetically." Then, on
+  being told this amended the kelvin rule: "this is not an amended
+  rule. It was a parenthetical addition for these earth shells only
+  because Celsius is familiar in terrestrial environments. The general
+  kelvin rule is unchanged." So provenance-discipline 2.31 stands as it
+  is, and no other room or shell gains Celsius from this. The Celsius
+  figures still come from their rows (kelvin minus 273.15, an exact
+  offset), not typed, as every served number does; the served
+  conversions today are factors only, so the build finds how. The
+  words come to Tony as a list.
+- **(3) The i panel's sources as a list:** "since the info panel
+  scrolls, can we organize the citations better so they are more
+  easily read? maybe instead of semicolons, separate with bullets."
+  Today a shell's citations are joined into one line with "; "
+  (`withShellWords`, `withGatheredSource` in
+  `gallery/feature_renderers.js`), and one citation can hold "; "
+  itself, so the list is carried as a list, not split from the line.
+- **(4) Live links:** "can we make source hyperlinks clickable? those
+  single lines are very difficult to select if copying to a browser."
+  The focus panel in `interactive.html` prints the Source line as plain
+  text.
+- (1), (3) and (4) are the pattern for every room ("these should
+  become the pattern for all rooms"): (3) and (4) are the panel's own
+  and reach every room at once; (1) is each room's words.
+  interactive-exhibit records them at the build. (2) is Earth's alone
+  and changes no skill.
+**Gap:** after the opening views (L-385): the four Earth-radii lines
+(approved); the Celsius words for Earth's surface and air as a list for
+Tony; the panel's list and live links; interactive-exhibit's bump.
+**Ref:** gallery `gallery/feature_renderers.js`, `interactive.html`;
+provenance-discipline (The Unit Field); interactive-exhibit; L-455,
+L-421, L-385.
 
 #### [L-454] A drawn device for edges that move: the magnetopause, the bow shock and their kind (orrery + gallery, design)
 <!-- L:454 status:OPEN upd:2026-10-17 section:A flag: rice: -->
@@ -2282,7 +2343,8 @@ above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
   item 9 (L-410's fade of the outer corona with L-131, the dust
   cloud; L-241 inside it); item 10 (L-128, the ice lines) waits
   behind L-443.
-**Gap:** the drawings in Tony's order: L-385, then L-410 with L-131
+**Gap:** the drawings in Tony's order: L-385 (now every view's
+opening, the Sun first, then Earth; 2026-10-18), then L-410 with L-131
 and L-241; the streamer belt's and the clumps' eyeballed numbers with
 them, and L-191's 19 Sun strings when that file is open; then L-443,
 with L-128 after it.
@@ -2868,6 +2930,23 @@ axis is what widens the view today, so whether it is shortened or
 simply runs past the view's edge is shown to Tony, not assumed.
 Tony's eye against his screenshot. The first of the Sun's drawings
 (L-412).
+- **2026-10-18, later, the rule for every view** (Tony's run record
+  `documentation/WHERE_WE_ARE_10-18-26_1326_run_record.md`). On the
+  orrery's low-orbit look: "the initial view of Earth has the same
+  issue as the Sun. the auto scale should be set to the farthest shell
+  drawn plus say 20%. the sun pointer should be ignored unless it is
+  the only feature drawn." Then: "start with the initial view of the
+  sun. it should follow the earth pattern: fartherst shell plus 20%.
+  this should be the rule for all rooms or system views." So this item
+  widens from the Sun to every orrery view, and the gap above is
+  replaced by the one below.
+**Gap (replaces the one above, 2026-10-18):** every orrery view opens
+on the farthest shell drawn plus 20 percent; the line drawn toward the
+Sun sets the view only when nothing else is drawn. Read the
+autoscale; build it for the Sun first, then Earth, then check the other
+views; whether the Sun's long rotation axis is shortened or runs past
+the view's edge is shown to Tony. The rule goes into
+orrery-coding-conventions at the build. Tony's eye.
 **Ref:** `documentation/HANDOFF_L322_D_orrery_pole_built_20260924.md` sec. 3; L-322.
 
 #### [L-382] Earth's magnetosphere costs about 42 percent more per orrery animation frame since D8 (orrery, rendering)
@@ -3895,6 +3974,17 @@ of its own, at Tony's word; the hover states its epoch meanwhile.
     today, so a room that gains served words joins it in the same
     build, as it joins Typed facts. The skill says nothing wrong; it
     does not name the check, so it is carried here.
+  - **2026-10-18, agentic-pre-test, next bump:** a patch pair is tested
+    in the order Tony runs it. L-455's order applied the website patch
+    before the orrery maintenance run. The sandbox ran that orrery run
+    beside a website copy whose config was already mirrored; on Tony's
+    machine it was not yet, since the Daily Run mirrors it later. So
+    "Exact rows by the count" failed there for
+    EARTH_LEO_UPPER_ALTITUDE_KM, "served prints None, the row states
+    4", where the handoff had promised 31 of 31. It passes at the pushed
+    pair (orrery e4d4a9e3, gallery c5c05b52), and nothing wrong was
+    pushed. The skill says nothing wrong; it does not cover a patch
+    pair, so it is carried here.
 **Gap:** Each lands with its store's next bump.
 **Ref:** skills/interactive-exhibit/SKILL.md; skills/ledger-and-session-records/SKILL.md; PROJECT_INSTRUCTIONS.md; L-216, L-363, L-371, L-390, L-414.
 
