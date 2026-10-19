@@ -358,6 +358,319 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 Undo is Discard Changes in GitHub Desktop.
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+**Session: OPEN: 10-18-26 1400: Opus: L-455 build session numbers**
 
+The run order has one change from usual: run the website patch straight after the orrery patch, before the orrery maintenance run. The orrery run’s dashboard check looks for the website’s new Typed numbers check, and it fails if that isn’t there yet. Hold the Daily Run until the orrery is pushed.
 
+In the orrery folder, run patch_L455_1_earth_numbers_20261018.py.
+In the website folder, run patch_L455_2_earth_words_20261018.py, but not the Daily Run yet.
+Run the orrery maintenance run. Expect 31 of 31 gating checks passed and 0 Tier-1 on the gate path.
+In the orrery, tick Earth’s Low Earth Orbit shell and read its tooltip and hover.
+Commit the orrery and push. Include Gemini 4’s worksheet; it’s already in your worksheets folder.
+Run the Daily Run. Until it has run, four website checks are red: Config mirror check, Cache in step, Typed numbers and Display figures. That’s expected, because the Daily Run’s pull fills in the new numbers. After it, every gating check should pass.
+Commit the website, push, and run the live checks.
+Look at the Earth room on your phone.
+
+I ran both patches on fresh copies of each repository. Every file they produced matched the tested versions exactly, and a second run of either patch refuses and changes nothing.
+
+Where this leaves us:
+
+Earth’s typed numbers (L-455) is closed. Every number a visitor reads in Earth’s words now comes from a row with a source anyone can open, and the new check fails on any digit that doesn’t.
+That finishes the numbers half of the Sun’s slice.
+What’s left over is recorded in the ledger and the handoff. The orrery’s other Earth hovers still type the old numbers; they go to Earth’s list for its later design talks.
+
+Which of the Sun’s drawings should come next?
+
+There are four drawings left on the Sun’s list. On October 17 you leaned toward the first three and toward letting the ice lines wait.
+
+The opening view (L-385). When you open the Sun in the orrery, the view starts about 31 times too wide. That has been true since an earlier build. This one is mostly a fix: I read how the view sizes itself, propose opening just outside the Sun’s surface, and your eye decides. It’s the smallest of the four.
+The fades, starting with the outer corona (L-410). The idea is to show the corona thinning out gradually instead of ending at a hard edge, the way Earth’s hydrogen glow already does. The rule for fades is settled: fade only where nature really thins out. What’s still open is how the corona’s fade should look. Two pieces ride along:
+The Hills cloud hover (L-241) states the cloud’s real bounds, not the ring that’s drawn. It gets fixed inside this design.
+The streamer belt’s seven eyeballed shape numbers get settled with this drawing too.
+The dust cloud (L-131). This is the zodiacal dust, the faint dust that fills the inner solar system. Nothing has been designed yet. It needs a design talk first: how far it reaches, how its density falls off, and what data it comes from. It belongs with the corona’s fade, because both are about what fills the space around the Sun.
+The comet ice lines (L-128). These are the distances from the Sun where different ices in a comet turn to gas. It’s also not designed yet: which ices, one shell or several, and what source. This is the one you suggested could wait until after the objects come to the website.
+
+Two other things are also waiting on the Sun’s list. Neither is one of the four drawings:
+
+The clumpy Oort cloud’s five eyeballed numbers, also left for the drawings half.
+The galactic tide’s cone and how bright it looks on the phone, which was never ruled. That’s the tide drawing from the Galactic Plane work, already in the Sun room.
+
+There’s also a small rider for whoever next edits the Sun’s code file: the Sun’s 19 checkbox tooltips get rewritten, from <br> to plain line breaks.
+
+The Sun’s drawings go in this order:
+
+The opening view, first. The target is your screenshot: the Sun fills the view, and its rotation axis is drawn short.
+The outer corona’s fade, with the dust cloud. The Hills cloud hover fix and the streamer belt’s seven eyeballed numbers go with it.
+The comet ice lines wait until after the other objects come to the website.
+
+The ledger, Where We Are and the handoff all carry this order. The handoff ends with a starting prompt for the opening-view session, ready to paste.
+
+Your run order is unchanged:
+
+1. Run the orrery patch first, 
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L455_1_earth_numbers_20261018.py
+ok  new     documentation/HANDOFF_L455_earth_numbers_20261018.md
+ok  new     documentation/DISCOVERY_L455_earth_typed_numbers_20261018.md
+ok  new     documentation/WORDS_L455_earth_numbers_20261018.md
+ok  new     documentation/REVIEW_L455_gemini4_worksheet_20261018.md
+ok  new     documentation/prompts/RELAY_L455_gemini_earth_sources_20261018.md
+ok  base    constants_new.py matches 05cb185a
+ok  base    constants_tokens.py matches 05cb185a
+ok  base    earth_visualization_shells.py matches 05cb185a
+ok  base    shell_configs.py matches 05cb185a
+ok  base    constants_change_report.py matches 05cb185a
+ok  base    exact_rows_report.py matches 05cb185a
+ok  base    palomas_orrery_dashboard.py matches 05cb185a
+ok  edit    constants_new.py                             line 188: Module updated: October 18, 2026 with An
+ok  edit    constants_new.py                             line 635: S_PER_MINUTE = 60.0 # Unit: s_per_min # 
+ok  edit    constants_new.py                             line 1069: # --------------------------------------
+ok  edit    constants_tokens.py                          line 102: Module updated: October 18, 2026 with An
+ok  edit    constants_tokens.py                          line 265: # L-455 (2026-10-18): minutes, for the l
+ok  edit    earth_visualization_shells.py                line 123: October 18, 2026 (L-455, Earth's typed n
+ok  edit    earth_visualization_shells.py                line 1519: # Source: every figure below is read fro
+ok  edit    earth_visualization_shells.py                line 1542: f"one orbit in about {row_text('EARTH_LE
+ok  edit    earth_visualization_shells.py                line 1544: f" * the International Space Station, {r
+ok  edit    earth_visualization_shells.py                line 1554: "most commonly Starlink trains. GEO sate
+ok  edit    earth_visualization_shells.py                line 1565: spherical shell. Points are spread evenl
+ok  edit    earth_visualization_shells.py                line 1591: STARLINK_KM = 6921.0 # ~550 km altitude 
+ok  edit    earth_visualization_shells.py                line 1601: # Radii drawn evenly across the band bet
+ok  edit    earth_visualization_shells.py                line 1609: # Source: every figure below is read fro
+ok  edit    earth_visualization_shells.py                line 1619: f"One orbit takes about {row_text('EARTH
+ok  edit    earth_visualization_shells.py                line 1621: f"The International Space Station flies 
+ok  edit    earth_visualization_shells.py                line 1634: f"below {row_text('EARTH_LEO_LOWER_ALTIT
+ok  edit    shell_configs.py                             line 83: Module updated: October 18, 2026 with An
+ok  edit    shell_configs.py                             line 166: earth_leo_shell_info,
+ok  edit    shell_configs.py                             line 2381: # L-455 (2026-10-18): the module's own t
+ok  edit    constants_change_report.py                   line 82: constants_new.py, and must reference at 
+ok  edit    constants_change_report.py                   line 120: Module updated: October 18, 2026 with An
+ok  edit    constants_change_report.py                   line 161: # L-455 (2026-10-18): the pure pieces of
+ok  edit    constants_change_report.py                   line 272: # L-455: math's constants and pure funct
+ok  edit    constants_change_report.py                   line 276: if (isinstance(node, ast.Attribute) and 
+ok  edit    exact_rows_report.py                         line 137: Module updated: October 18, 2026 with An
+ok  edit    exact_rows_report.py                         line 200: # L-455 (2026-10-18): the upper edge, li
+ok  edit    palomas_orrery_dashboard.py                  line 287: October 18, 2026 with Anthropic's Claude
+ok  edit    palomas_orrery_dashboard.py                  line 522: "hover budget, typed facts, typed number
+ok  edit    palomas_orrery_dashboard.py                  line 1013: True), ("Typed Numbers", os.path.join("d
+ok  edit    palomas_orrery_dashboard.py                  line 1928: ("Gallery -- checks and data", "Typed Nu
+ok  edit    LEDGER_CONSOLIDATED.md                       line 518: Module updated: October 18, 2026 with An
+ok  edit    LEDGER_CONSOLIDATED.md                       line 1305: <!-- L:455 status:DONE upd:2026-10-18 se
+ok  edit    LEDGER_CONSOLIDATED.md                       line 1343: - **2026-10-18, DONE** (Claude Opus 5.5,
+ok  edit    LEDGER_CONSOLIDATED.md                       line 1497: <!-- L:410 status:OPEN upd:2026-10-18 se
+ok  edit    LEDGER_CONSOLIDATED.md                       line 1623: dust cloud (L-131), in the Sun's slice (
+ok  edit    LEDGER_CONSOLIDATED.md                       line 1706: - **2026-10-18, held on the Typed number
+ok  edit    LEDGER_CONSOLIDATED.md                       line 2065: <!-- L:413 status:OPEN upd:2026-10-18 se
+ok  edit    LEDGER_CONSOLIDATED.md                       line 2187: - **2026-10-18, from L-455 at its close*
+ok  edit    LEDGER_CONSOLIDATED.md                       line 2345: - **2026-10-18, the numbers half complet
+ok  edit    LEDGER_CONSOLIDATED.md                       line 2907: <!-- L:385 status:OPEN upd:2026-10-18 se
+ok  edit    LEDGER_CONSOLIDATED.md                       line 2927: - **2026-10-18, the target, from Tony's 
+ok  edit    LEDGER_CONSOLIDATED.md                       line 3959: - **2026-10-18, interactive-exhibit, nex
+ok  edit    LEDGER_CONSOLIDATED.md                       line 25002: <!-- L:128 status:OPEN upd:2026-10-18 se
+ok  edit    LEDGER_CONSOLIDATED.md                       line 25023: - **2026-10-18 (Tony):** confirmed: the 
+ok  edit    documentation/WHERE_WE_ARE.md                line 4: Last updated: October 18, 2026, evening:
+ok  edit    documentation/WHERE_WE_ARE.md                line 10: > - Earth's numbers are built (L-455, ty
+ok  edit    documentation/WHERE_WE_ARE.md                line 16: > **Do next:** *run the two L-455 patche
+ok  edit    documentation/WHERE_WE_ARE.md                line 20: > - Nothing else. The Sun's drawings are
+ok  edit    documentation/WHERE_WE_ARE.md                line 34: 7. [NOW] *The Sun's slice (L-412): numbe
+ok  edit    documentation/WHERE_WE_ARE.md                line 76: - Dashboard search: each word anywhere o
+ok  edit    documentation/WHERE_WE_ARE.md                line 87: - Earth's deep temperatures from open pa
+ok  edit    documentation/WHERE_WE_ARE.md                line 93: - Last cache build: 20261018T181330Z, ok
+ok  edit    documentation/WHERE_WE_ARE.md                line 119: - *Next: the Sun's opening view (L-385):
+ok  check   documentation/WHERE_WE_ARE.md                130 lines above the marker (cap 130)
+
+patch applied (5 new files, 54 edits in 9 files)
+
+NEXT:
+  1. Run the website patch too, before step 2, in the website
+     folder: patch_L455_2_earth_words_20261018.py. The orrery run's
+     Dashboard parity reads the website's new Typed numbers check.
+     Do not run the Daily Run yet. -- done. lost the run record.
+
+  2. Run orrery_maintenance_run.py (dashboard). Expect 31 of 31
+     gating checkers passed, the gate line 0 TIER-1 with the whole
+     tree at 280; Exact rows with 0 not followed; the Constants
+     change report listing the new rows. It rewrites the ledger
+     index and the constants export.
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261018T183140Z, 1 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 2.6s  rewrote LEDGER_CONSOLIDATED.md
+  Skill manifest               0.3s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             2.6s  rewrote data/constants_export.json
+  Period fetch                 0.4s  unchanged (1 checked, not written) --
+                                     NOTHING MISSING -- 13 served objects
+                                     examined, no query asked
+  Horizons check               0.5s  unchanged (2 checked, not written) --
+                                     NOTHING DUE -- 13 entries and 26 sheets
+                                     current, no query asked
+  Objects export               0.3s  unchanged (1 checked, not written)
+  Drawings export              0.8s  unchanged (3 checked, not written)
+  Module atlas                 8.9s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               6.3s  rewrote DATA_INVENTORY.md
+  Exact rows report            3.2s  rewrote EXACT_ROWS_PRINTED.md -- 12 of 41
+                                     exact rows printed at 54 lines (38 orrery,
+                                     16 gallery); 12 drawn only, 0 not followed,
+                                     0 map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.4s  2 derived line(s): 0 changed, 2 added, 0
+                                     removed
+  Constants relations          0.3s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              1.4s  No figure count exceeds its inputs: 36
+                                     derived row(s) read, 29 judged OK -- 29 OK,
+                                     7 NOT YET MIGRATED; 22 conversion(s)
+                                     checked.
+  Constants export check       2.5s  Export matches the store: sha256
+                                     3794a86feb5a on both sides; 180 rows
+                                     re-read, 56 not exported, 38 tokens; 455
+                                     conversions re-computed, 10 of 10 worked
+                                     cases hold; 180 citations worked out again,
+                                     8 of 8 worked cases hold.
+  Objects export check         0.4s  pass
+  Horizons confirmations       0.4s  pass -- 13 of 13 entries and 11 periods
+                                     confirmed, 26 sheets read, within 30 days
+  Horizons check suite         0.8s  pass -- 64 checks, every planted fault
+                                     caught by name
+  Period fetch suite           3.8s  pass -- 36 checks, every planted fault
+                                     caught (20 planted, 8 of them for Earth's
+                                     period, L-445)
+  Skill headers                0.2s  12 skills parsed, no consistency problems.
+  Exact rows by the count      4.4s  FAILED (exit 1) -- FAILING -- 0 row(s)
+                                     with...
+  Dimensions                   3.0s  No unit contradicts its arithmetic: 58
+                                     derived row(s) read -- 49 OK, 6 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.2s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.2s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 178 status lines in constants_new.py are
+                                     well formed; 55 rows carry none.
+  Row shape                    0.1s  All 236 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.3s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Scanner row run (L-414)      0.3s  16 of 16 pins hold -- each row reads its own
+                                     comment run, declared rows are named, the
+                                     gate path is read by name.
+  Reset completeness          27.8s  PASS -- all 311 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  2.3s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped; nothing left behind.
+  Earth pole of date           0.3s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Hills cloud sampler (L-421)    0.4s  PASS -- 4 of 4 planted faults caught; the
+                                     real rows pass, the dots' plane tilted 34.1
+                                     deg
+  Drawings export check        1.3s  PASS -- 8 of 8 planted faults caught;
+                                     hills_cloud 3600 dots, plane tilted 30.9
+                                     deg, sha256 a51e93118069; van_allen_belts
+                                     3200 dots, no plane recorded, sha256
+                                     75274e84f840; earth_exosphere 1500 dots, no
+                                     plane recorded, sha256 6112639fb2cd
+  Position digits (L-401)      2.3s  PASS -- 14 of 14 planted faults caught by
+                                     name; 23 hovers examined, 181 lines compared
+                                     against their errors; 5 pairs printed the
+                                     same from either end; 496 hovers of every
+                                     listed object from the Sun, Earth and
+                                     Neptune; 3 recorded 2xr answers read by
+                                     column name; 10 period sentences
+  Orbit markers (L-431, L-401)   13.4s  PASS -- 12 of 12 planted faults caught by
+                                     name; 4 ellipses, 1080 drawn points on their
+                                     period's centre; 14 markers, 9 dates, 53
+                                     printed distances against their errors; 6
+                                     elements as given; 3 Keplerian positions
+                                     half a year on; 1 parameters-window date
+                                     pairs; 2 Moon arcs; 2 perturbation checks; 1
+                                     perihelion osculating orbits; 2 frames; 2
+                                     sources read
+  Domain Split                 0.7s  PASS -- 6 of 6 planted faults caught; the
+                                     split reads each module's Domain: tag and
+                                     prints the same on the console, in the audit
+                                     and in the run history.
+  Maintenance report (L-269)    0.1s  PASS -- 4 of 4 planted faults caught by
+                                     name; 4 summaries; 2 risen file(s) named
+  Dashboard parity             0.4s  PASS -- 10 of 10 planted faults caught; 85
+                                     steps matched to their buttons by name and
+                                     script; 115 cards carry a short line; the
+                                     search finds 4 of 4 cases in any word order
+  Worksheet checker           11.0s  72 of 107 routed, 8 clean
+  Worksheet checker tests     22.4s  All 135 checks passed
+  Worksheet key round trip     1.4s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         25.0s  All 76 checks passed
+  Extractor pins               0.5s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          73.5s  0 TIER-1 -- the push gate holds; Whole tree,
+                                     Tier-1: 280: orrery 116, Earth System 149,
+                                     stars 13, utilities 2.
+
+======================================================================
+  1 of 33 checkers FAILED -- 227.9s total
+  Exact rows by the count
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           72 of 107 routed, 8 clean
+    Provenance scanner          0 TIER-1 -- the push gate holds; Whole tree, Tier-1: 280: orrery 116, Earth System 149, stars 13, utilities 2.
+      No file's Tier-1 count rose since the previous run.
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2330 file(s) examined, 13 written, 1 created, 1 removed, 5 rewritten identically
+    written   DATA_INVENTORY.md
+    written   EXACT_ROWS_PRINTED.md
+    written   LEDGER_CONSOLIDATED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/constants_export.json
+    written   data/earth_pole_cache.json
+    written   data/provenance_history.json
+    written   data/worksheet_check_state.json
+    written   documentation/WHERE_WE_ARE_10-18-26_1326_run_record.md
+    written   documentation/prompts/citation_review.jsonl
+    created   documentation/patch_L455_1_earth_numbers_20261018.py
+    removed   patch_L455_1_earth_numbers_20261018.py
+    rewritten with identical bytes, no action needed:
+      PROJECT_INSTRUCTIONS.md
+      data/orbit_paths.json
+      data/orbit_paths.json.backup
+      data/orbit_paths.json.backup_old
+      data/worksheet_routed.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+----------------------------------------------------------------------
+Exact rows by the count -- FAILED (exit 1) -- FAILING -- 0 row(s) with...
+----------------------------------------------------------------------
+EXACT ROWS PRINTED: 12 of 41 exact rows printed at 54 lines (38 orrery, 16 gallery); 12 drawn only, 0 not followed, 0 map entries broken
+  FAIL EARTH_LEO_UPPER_ALTITUDE_KM: gallery gallery/feature_renderers.js line 2249, served prints None, the row states 4
+EXACT ROWS BY THE COUNT: FAILING -- 0 row(s) with no count, 0 orrery print(s) by a width, 1 gallery print(s) not served the count
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  3. Mode 5: tick Earth's Low Earth Orbit shell; read its tooltip
+     and hover (about 88 to 127 minutes; 15,900 and 28,015). -- correct. and the initial view of Earth has the same issue as the Sun. the auto scale should be set to the farthest shell drawn plus say 20%. the sun pointer should be ignored unless it is the only feature drawn. 
+  4. Move this script into documentation/; commit it with Gemini
+     4's worksheet; push. Push before the Daily Run: it pulls
+     these rows. -- 
+  5. Then the Daily Run: HANDOFF_L455_earth_numbers_20261018.md,
+     section 1, step 6.
+Undo is Discard Changes in GitHub Desktop.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+1. and the website commit and push.

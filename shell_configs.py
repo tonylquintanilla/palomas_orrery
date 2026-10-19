@@ -80,6 +80,10 @@ Module updated: October 17, 2026 with Anthropic's Claude Opus 5.5 (L-330
     their flux peaks, as their dots now are; the LEO tooltip prints its
     lower altitude through constants_rows.row_text(), since that row is
     ESA's measured 180 km and no longer an exact drawing floor.)
+Module updated: October 18, 2026 with Anthropic's Claude Opus 5.5
+    (L-455: the LEO entry's tooltip is earth_visualization_shells'
+    earth_leo_shell_info, the one copy, instead of a second copy that
+    still typed the satellite counts and the residents' altitudes.)
 """
 
 # Phase C4: Import hover text strings from body shell modules.
@@ -159,6 +163,7 @@ from earth_visualization_shells import (
     earth_lower_mantle_info, earth_upper_mantle_info,
     # 2026-10-05: one string each for the tooltip and the hover.
     earth_upper_atmosphere_info, earth_geocorona_info,
+    earth_leo_shell_info,
 )
 
 # Phase D1: Import Sun radius constants for radius_au expressions.
@@ -2373,25 +2378,10 @@ CUSTOM_SHELLS = {
 
         'leo': {
             'builder': 'earth_visualization_shells.create_earth_leo_shell',
-            'tooltip': (
-                "SET MANUAL SCALE TO 0.003 AU TO VISUALIZE.\n\n"
-                f"Low Earth Orbit (LEO) is the region from {row_text('EARTH_LEO_LOWER_ALTITUDE_KM', grouping=True)} km to {exact_text('EARTH_LEO_UPPER_ALTITUDE_KM', grouping=True)} km altitude\n"
-                f"({EARTH_LEO_INNER_RADII:.2f} to {EARTH_LEO_OUTER_RADII:.2f} Earth radii), where satellites orbit at all inclinations.\n\n"
-                "Unlike geostationary orbit, LEO satellites travel at all angles relative to the equator --\n"
-                "forming a true shell around Earth rather than a ring. A LEO satellite completes\n"
-                "one orbit in 90-120 minutes and crosses the sky in about 6 minutes.\n\n"
-                "Notable LEO residents:\n"
-                "  * ISS: ~400 km altitude, 51.6 deg inclination\n"
-                "  * Starlink: ~550 km altitude, multiple inclination shells\n"
-                "  * Hubble Space Telescope: ~540 km altitude\n"
-                "  * Most Earth observation and weather satellites\n\n"
-                "There are currently ~11,000 active satellites in LEO, with Starlink alone\n"
-                "operating nearly 7,000. The total debris population (defunct satellites, rocket\n"
-                "bodies, fragments >10 cm) exceeds 35,000 tracked objects.\n\n"
-                "The bright moving 'stars' visible at dusk and dawn are LEO objects --\n"
-                "most commonly Starlink trains. GEO satellites at 35,786 km are too faint\n"
-                "and too slow to see with the naked eye."
-            ),
+            # L-455 (2026-10-18): the module's own tooltip, not a second copy
+            # of it. This copy still typed the counts and altitudes the
+            # module's text dropped.
+            'tooltip': earth_leo_shell_info,
         },
 
         'geostationary_belt': {

@@ -120,6 +120,12 @@ October 17, 2026, evening (L-410, Earth's fade, Opus 5.5): the exosphere
     full opacity and size 2.5, to show against the inner belt (Tony's
     option A), and its tooltip reads both edges from their rows.
 Module updated: October 17, 2026 with Anthropic's Claude Opus 5.5
+October 18, 2026 (L-455, Earth's typed numbers, Opus 5.5): the LEO
+    tooltip and hover print the orbit periods, the residents' heights and
+    the satellite counts from their rows, and drop the six minutes across
+    the sky and the "5x"; the dots spread evenly between the two edges
+    instead of clustering at a typed Starlink height.
+Module updated: October 18, 2026 with Anthropic's Claude Opus 5.5
 """
 import numpy as np
 import math
@@ -1510,9 +1516,20 @@ def create_earth_exosphere_shell(center_position=(0, 0, 0)):
         name))
     return traces
 
-# Source: UCS Satellite Database, ESA Space Debris Office, NASA
-# Source+: Satellite/debris counts as of early 2026
-# Verified: April 2026 via Gemini fact-check
+# Source: every figure below is read from its row in constants_new.py,
+# Source+: where each carries its citation: ESA, "Types of orbits" (2020),
+# Source+: and IADC-02-01 Revision 2 (2020) for the two edges; the periods
+# Source+: are worked out from them and IERS GM_E.
+# Source+: The residents' heights: ESA, "ISS: International Space
+# Source+: Station"; NASA, "Hubble Space Telescope -- An Overview". The
+# Source+: counts: ESA Space Environment Statistics (14 October 2026) and
+# Source+: Jonathan's Space Report (15 October 2026); Starlink's height:
+# Source+: NASA Orbital Debris Quarterly News 29(3), September 2025.
+# L-455 (2026-10-18): the residents' heights and the counts are read
+# from their rows, each read today from an open page; they were typed,
+# under a stamp, from sources nobody here had read. The six minutes
+# across the sky are gone: no source was found. The periods are worked
+# out from the edges' rows (Kepler's third law).
 # L-452 (2026-10-17): the altitudes read from the same rows as the hover
 # below, so the checkbox tooltip cannot keep an edge the store has moved
 # (it said "roughly 200 km" after the lower edge became ESA's row).
@@ -1522,17 +1539,19 @@ earth_leo_shell_info = (
             f"({EARTH_LEO_INNER_RADII:.2f} to {EARTH_LEO_OUTER_RADII:.2f} Earth radii), where satellites orbit at all inclinations.\n\n"
             "Unlike geostationary orbit, LEO satellites travel at all angles relative to the equator --\n"
             "forming a true shell around Earth rather than a ring. A LEO satellite completes\n"
-            "one orbit in 90-120 minutes and crosses the sky in about 6 minutes.\n\n"
+            f"one orbit in about {row_text('EARTH_LEO_INNER_PERIOD_MIN')} to {row_text('EARTH_LEO_OUTER_PERIOD_MIN')} minutes.\n\n"
             "Notable LEO residents:\n"
-            "  * ISS: ~400 km altitude, 51.6 deg inclination\n"
-            "  * Starlink: ~550 km altitude, multiple inclination shells\n"
-            "  * Hubble Space Telescope: ~540 km altitude\n"
-            "  * Most Earth observation and weather satellites\n\n"
-            "There are currently ~11,000 active satellites in LEO, with Starlink alone\n"
-            "operating nearly 7,000. The total debris population (defunct satellites, rocket\n"
-            "bodies, fragments >10 cm) exceeds 35,000 tracked objects.\n\n"
+            f"  * the International Space Station, {row_text('ISS_ALTITUDE_LOW_KM')} to {row_text('ISS_ALTITUDE_HIGH_KM')} km up, inclined {row_text('ISS_INCLINATION_DEG')} deg\n"
+            f"  * the Hubble Space Telescope, about {row_text('HUBBLE_ALTITUDE_KM')} km up\n"
+            f"  * Starlink, {row_text('STARLINK_WORKING_COUNT', grouping=True)} satellites working, most near {row_text('STARLINK_PEAK_ALTITUDE_KM')} km\n"
+            "  * most Earth observation and weather satellites\n\n"
+            f"About {row_text('SATELLITES_FUNCTIONING_COUNT', grouping=True)} satellites are still working in all orbits, and\n"
+            f"{row_text('LEO_OBJECTS_TRACKED_COUNT', grouping=True)} objects are tracked and catalogued in low Earth orbit. (Counts: ESA,\n"
+            "Space Environment Statistics, 14 October 2026; Starlink: J. McDowell,\n"
+            "Jonathan's Space Report, 15 October 2026; its height: NASA Orbital Debris\n"
+            "Quarterly News, September 2025.)\n\n"
             "The bright moving 'stars' visible at dusk and dawn are LEO objects --\n"
-            "most commonly Starlink trains. GEO satellites at 35,786 km are too faint\n"
+            "most commonly Starlink trains. GEO satellites, much farther out, are too faint\n"
             "and too slow to see with the naked eye."
 )
 
@@ -1543,8 +1562,10 @@ def create_earth_leo_shell(center_position=(0, 0, 0)):
     LEO spans the rows EARTH_LEO_LOWER_ALTITUDE_KM (ESA, the lowest height
     satellites fly) to EARTH_LEO_UPPER_ALTITUDE_KM (IADC) above the surface.
     Unlike GEO, LEO objects orbit at all inclinations -- forming a true
-    spherical shell. Points are distributed across the full sphere with
-    slight density enhancement at the Starlink altitude (~550 km).
+    spherical shell. Points are spread evenly across the full sphere and
+    evenly in height between the two edges (L-455, 2026-10-18: the cluster
+    at a typed Starlink height, a radius the mean Earth radius plus 550 km
+    with a 150 km spread and a 60/40 mix, all chosen by eye, is gone).
 
     The contrast with the GEO ring is the whole point: LEO is what you
     see in the sky; GEO is invisible but controls global communications.
@@ -1567,7 +1588,6 @@ def create_earth_leo_shell(center_position=(0, 0, 0)):
     # both from the equatorial radius this shell is drawn against.
     LEO_LOW_KM  = EARTH_LEO_INNER_KM    # EARTH_LEO_LOWER_ALTITUDE_KM up
     LEO_HIGH_KM = EARTH_LEO_OUTER_KM    # EARTH_LEO_UPPER_ALTITUDE_KM up
-    STARLINK_KM = 6921.0   # ~550 km altitude -- densest population
 
     np.random.seed(7)      # Deterministic scatter
 
@@ -1578,24 +1598,17 @@ def create_earth_leo_shell(center_position=(0, 0, 0)):
     cos_theta_main = np.random.uniform(-1, 1, n_main)   # cos(theta) uniform -> uniform on sphere
     theta_main = np.arccos(cos_theta_main)
 
-    # Radii drawn from LEO band, weighted toward Starlink altitude
-    # Mix: 60% uniform across full band, 40% clustered near Starlink
-    n_uniform = int(n_main * 0.6)
-    n_starlink = n_main - n_uniform
-    r_uniform = np.random.uniform(LEO_LOW_KM, LEO_HIGH_KM, n_uniform)
-    r_starlink = np.random.normal(STARLINK_KM, 150, n_starlink)  # 150 km std dev around Starlink
-    r_starlink = np.clip(r_starlink, LEO_LOW_KM, LEO_HIGH_KM)
-    radii_km = np.concatenate([r_uniform, r_starlink])
-    np.random.shuffle(radii_km)
+    # Radii drawn evenly across the band between the two edges' rows.
+    radii_km = np.random.uniform(LEO_LOW_KM, LEO_HIGH_KM, n_main)
     radii_au = radii_km * AU_PER_KM
 
     x = radii_au * np.sin(theta_main) * np.cos(phi_main) + center_x
     y = radii_au * np.sin(theta_main) * np.sin(phi_main) + center_y
     z = radii_au * np.cos(theta_main) + center_z
 
-    # Source: UCS Satellite Database, ESA Space Debris Office (counts as of early 2026)
-    # Source+: SpaceX Starlink status; NASA (ISS, Hubble altitudes)
-    # Verified: April 2026 via Gemini fact-check
+    # Source: every figure below is read from its row in constants_new.py,
+    # Source+: where each carries its citation (L-455, 2026-10-18), and
+    # Source+: the hover's last lines name them.
     hover_text = (
         "Earth: Low Earth Orbit (LEO)<br><br>"
         "Low Earth Orbit (LEO)<br>"
@@ -1603,12 +1616,14 @@ def create_earth_leo_shell(center_position=(0, 0, 0)):
         f"Radius: {row_text('EARTH_LEO_INNER_KM', grouping=True)} km to {EARTH_LEO_OUTER_KM:,.0f} km from Earth's center "
         f"({EARTH_LEO_INNER_RADII:.2f} to {EARTH_LEO_OUTER_RADII:.2f} Earth radii)<br><br>"
         "LEO satellites orbit at all inclinations -- forming a true shell, not a ring.<br>"
-        "One orbit takes 90-120 minutes; a satellite crosses the sky in ~6 minutes.<br><br>"
+        f"One orbit takes about {row_text('EARTH_LEO_INNER_PERIOD_MIN')} to {row_text('EARTH_LEO_OUTER_PERIOD_MIN')} minutes.<br><br>"
         "The bright moving points visible at dusk and dawn are LEO objects.<br>"
-        "Starlink (~550 km), ISS (~400 km), and Hubble (~540 km) all live here.<br><br>"
-        "<b>Active satellites:</b> ~11,000 (Starlink alone: ~7,000)<br>"
-        "<b>Tracked debris objects (>10 cm):</b> 35,000+<br><br>"
-        f"Compare with the Geostationary Belt (GEO) at {EARTH_GEOSTATIONARY_RADIUS_KM:,.0f} km -- 5x farther out,<br>"
+        f"The International Space Station flies {row_text('ISS_ALTITUDE_LOW_KM')} to {row_text('ISS_ALTITUDE_HIGH_KM')} km up, inclined {row_text('ISS_INCLINATION_DEG')} deg;<br>"
+        f"the Hubble Space Telescope about {row_text('HUBBLE_ALTITUDE_KM')} km up; Starlink has {row_text('STARLINK_WORKING_COUNT', grouping=True)} satellites working,<br>"
+        f"most near {row_text('STARLINK_PEAK_ALTITUDE_KM')} km.<br>"
+        f"<b>Satellites still working, all orbits:</b> about {row_text('SATELLITES_FUNCTIONING_COUNT', grouping=True)}<br>"
+        f"<b>Objects tracked and catalogued in low Earth orbit:</b> {row_text('LEO_OBJECTS_TRACKED_COUNT', grouping=True)}<br><br>"
+        f"Compare with the Geostationary Belt (GEO) at {EARTH_GEOSTATIONARY_RADIUS_KM:,.0f} km from Earth's center, much farther out,<br>"
         "invisible to the naked eye, but controlling global communications.<br><br>"
         # L-330 round 1 (Tony, 2026-10-17, option A): the lower edge is
         # ESA's. The upper edge's revision was "Rev. 3 (2021)" here; the
@@ -1616,7 +1631,13 @@ def create_earth_leo_shell(center_position=(0, 0, 0)):
         "Source (upper edge): IADC Space Debris Mitigation Guidelines, IADC-02-01 Revision 2<br>"
         "(2020), sec. 3.3.2.<br>"
         "Source (lower edge): ESA, \"Types of orbits\" (2020) -- satellites generally do not fly<br>"
-        f"below {row_text('EARTH_LEO_LOWER_ALTITUDE_KM')} km, because of Earth's atmosphere."
+        f"below {row_text('EARTH_LEO_LOWER_ALTITUDE_KM')} km, because of Earth's atmosphere.<br>"
+        "Periods: a circular orbit at each edge, by Kepler's third law with Earth's<br>"
+        "gravitational constant from the IERS Conventions (2010).<br>"
+        "Residents: ESA, \"ISS: International Space Station\"; NASA, \"Hubble Space Telescope --<br>"
+        "An Overview\"; Starlink's height: NASA Orbital Debris Quarterly News, September 2025.<br>"
+        "Counts: ESA, Space Environment Statistics, 14 October 2026; Starlink: J. McDowell,<br>"
+        "Jonathan's Space Report, 15 October 2026."
     )
 
     traces = [

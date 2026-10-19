@@ -99,6 +99,10 @@ speed in AU per day goes through.)
 Module updated: October 17, 2026 with Anthropic's Claude Opus 5.5
 (L-410: per_cm3, falloff_exponent and density_fit_coefficient, for
 Earth's hydrogen profile from Zoennchen et al. (2022).)
+Module updated: October 18, 2026 with Anthropic's Claude Opus 5.5
+(L-455: min and s_per_min, for the low-orbit periods and S_PER_MINUTE;
+percent and count, for the atmosphere's mass share and the satellite
+counts.)
 """
 
 TOKENS = {
@@ -257,6 +261,29 @@ TOKENS = {
         "dimension": "s / h",
         "defining_constant": None,
         "meaning": "seconds per hour, an exact unit conversion",
+    },
+    # L-455 (2026-10-18): minutes, for the low-orbit periods, and seconds
+    # per minute, the exact conversion they go through.
+    "min": {
+        "dimension": "min",
+        "defining_constant": None,
+        "meaning": "minutes",
+    },
+    "s_per_min": {
+        "dimension": "s / min",
+        "defining_constant": None,
+        "meaning": "seconds per minute, an exact unit conversion",
+    },
+    # L-455 (2026-10-18): a share of a whole, and a count of things.
+    "percent": {
+        "dimension": "percent",
+        "defining_constant": None,
+        "meaning": "percent, a share of a whole",
+    },
+    "count": {
+        "dimension": "named number",
+        "defining_constant": None,
+        "meaning": "a count of things, such as satellites in orbit",
     },
     # L-431 (2026-10-11): days per Julian year, the conversion an orbital
     # period's years go through.

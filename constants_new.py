@@ -185,6 +185,14 @@ Module updated: October 18, 2026 with Anthropic's Claude Opus 5.5
 (L-411 follow-up: Voyager 2's termination-shock crossing is read from
 Li, Wang and Richardson (2008), the paper its wind speeds come from, on
 Tony's word; the chromosphere's two citations are separated.)
+Module updated: October 18, 2026 with Anthropic's Claude Opus 5.5
+(L-455, Earth's share of the typed numbers: twelve rows for numbers the
+website's Earth words typed -- the inner core's temperature, the crust's
+two thicknesses, the surface's coldest and hottest records, the
+troposphere's height and its two temperatures, the thermosphere's
+temperature, Apophis's 2029 height, and the two low-orbit periods worked
+out from the edges -- and S_PER_MINUTE, the exact conversion the periods
+go through. Each measured row was read from an open page today.)
 """
 
 import math
@@ -624,6 +632,21 @@ S_PER_DAY = 86400.0
 # Note: L-401. The body hover's speed converts from AU per day through
 # Note+: this row (position_accuracy.py), not a bare 24 or 86400.
 
+S_PER_MINUTE = 60.0
+# Unit: s_per_min
+# Status: declared 2026-10-18 -- an exact unit conversion, seconds in one
+# Status+: minute. Belongs to no body's slice.
+# Figures: exact -- a definition, not a measurement.
+# Read: Table 6, sec. 5.1.1, NIST Guide to the SI (SP 811), chapter 5,
+# Read+: row "minute -- time", 2026-10-18, Claude Opus 5.5, through the
+# Read+: chat's web-fetch tool
+# Source: NIST Special Publication 811, Guide for the Use of the SI, sec.
+# Source+: 5.1.1, Table 6 (units the CIPM accepts for use with the SI) --
+# Source+: the minute is 60 seconds, by definition.
+# Ref: https://www.nist.gov/pml/special-publication-811/nist-guide-si-chapter-5-units-outside-si
+# Note: L-455. The low-orbit periods convert through this row, not a bare
+# Note+: 60.
+
 D_PER_JULIAN_YEAR = 365.25
 # Unit: d_per_yr
 # Status: declared 2026-10-11 -- an exact unit conversion, days in one
@@ -1043,6 +1066,476 @@ EARTH_THERMOPAUSE_RADII = EARTH_THERMOPAUSE_RADIUS_KM / EARTH_EQUATORIAL_RADIUS_
 # Note+: their own hover text contradicted. Both shells now draw at these
 # Note+: two conversions. (Corrected in passing at patch D20: this note
 # Note+: still described the old drawing.)
+
+# ---------------------------------------------------------------------
+# L-455 (2026-10-18): Earth's numbers a visitor reads in the website's
+# words, each a row (provenance-discipline, One Value, One Home and What a
+# Visitor Reads). Until today they were typed into data/objects_config.json
+# with no row and no citation; the temperatures were in degrees Celsius,
+# condensed from the orrery's old Earth hover text (L-331). Temperatures
+# are in kelvin (provenance-discipline 2.31).
+# ---------------------------------------------------------------------
+
+EARTH_INNER_CORE_TEMPERATURE_K = 5600.0
+# Unit: k
+# Status: measured V_SOURCED 2026-10-18 -- open page
+# Figures: 2 -- the page prints "5,600 K", a round figure; its trailing
+# Figures+: zeros are placeholders (Rule 2), and the .0 is Python's.
+# Read: "A Guide to Cosmic Temperatures", NASA Scientific Visualization
+# Read+: Studio 14374 (August 3, 2023), the inner core's entry, 2026-10-18,
+# Read+: Claude Opus 5.5, through the chat's web-fetch tool.
+# Source: NASA Scientific Visualization Studio, "A Guide to Cosmic
+# Source+: Temperatures" (2023) -- Earth's inner core, a solid ball of iron
+# Source+: and nickel about 1,220 km in radius, reaches temperatures up to
+# Source+: 5,600 K. https://svs.gsfc.nasa.gov/14374/
+# Also: NASA Science, "Facts About Earth" (updated 2025-12-05) gives the
+# Also+: inner core as high as 5,400 degrees Celsius (5,673 K), which is the
+# Also+: figure the website typed until today; the SVS page prints the store's
+# Also+: unit and needs no conversion. The ESRF's 2013 laboratory result
+# Also+: (Anzellini et al., Science) puts the inner core boundary near
+# Also+: 6,000 +/- 500 degrees Celsius.
+# Note: the highest temperature, at the centre. The temperatures of the
+# Note+: outer core and the mantle were typed too (4,500 to 5,400, 2,200 to
+# Note+: 4,500 and 500 to 2,200 degrees Celsius); no open page carrying them
+# Note+: was found, so they came out of the website's words (L-455).
+
+EARTH_CRUST_OCEANIC_THICKNESS_KM = 5.0
+# Unit: km
+# Status: measured V_SOURCED 2026-10-18 -- open page
+# Figures: 1 -- the page prints "about 3 miles (5 kilometers)"; the .0 is
+# Figures+: Python's.
+# Read: "Facts About Earth", NASA Science, section "Structure", page
+# Read+: updated 2025-12-05, 2026-10-18, Claude Opus 5.5, through the chat's
+# Read+: web-fetch tool.
+# Source: NASA Science, "Facts About Earth" -- at the bottom of the ocean
+# Source+: the crust is thinner and extends about 5 km from the seafloor to
+# Source+: the top of the mantle. https://science.nasa.gov/earth/facts/
+# Note: replaces the website's typed 5 to 10 km.
+
+EARTH_CRUST_CONTINENTAL_THICKNESS_KM = 30.0
+# Unit: km
+# Status: measured V_SOURCED 2026-10-18 -- open page
+# Figures: 1 -- the page prints "about 19 miles (30 kilometers)"; the km
+# Figures+: figure is a round conversion and its zero a placeholder.
+# Read: as EARTH_CRUST_OCEANIC_THICKNESS_KM.
+# Source: NASA Science, "Facts About Earth" -- Earth's crust goes about
+# Source+: 30 km deep on average on land. https://science.nasa.gov/earth/facts/
+# Note: replaces the website's typed 30 to 50 km.
+
+EARTH_SURFACE_COLDEST_K = 184.0
+# Unit: k
+# Status: measured V_SOURCED 2026-10-18 -- open document
+# Figures: 4 -- tenths of a kelvin, the source's place. The source prints
+# Figures+: -89.2 degrees Celsius; adding 273.15 gives 183.95, which rounds
+# Figures+: half to even to 184.0 (Rule 5).
+# Read: "Records of Weather and Climate Extremes", World Meteorological
+# Read+: Organization, table as of 31 July 2025, row "Lowest temperature",
+# Read+: 2026-10-18, Claude Opus 5.5, through the chat's web-fetch tool.
+# Source: World Meteorological Organization, "Records of Weather and
+# Source+: Climate Extremes" (table as of 31 July 2025) -- lowest
+# Source+: temperature -89.2 degrees Celsius, Vostok, Antarctica, 21 July 1983.
+# Source+: https://wmo.int/sites/default/files/2025-07/Table_Records_25Jul2025.pdf
+# Note: converted from degrees Celsius by adding 273.15
+# Note+: (provenance-discipline 2.31). Replaces the website's typed "minus
+# Note+: 80" degrees Celsius.
+
+EARTH_SURFACE_HOTTEST_K = 329.8
+# Unit: k
+# Status: measured V_SOURCED 2026-10-18 -- open document
+# Figures: 4 -- tenths of a kelvin, the source's place. The source prints
+# Figures+: 56.7 degrees Celsius; adding 273.15 gives 329.85, which rounds
+# Figures+: half to even to 329.8 (Rule 5).
+# Read: as EARTH_SURFACE_COLDEST_K, row "Highest temperature".
+# Source: World Meteorological Organization, "Records of Weather and
+# Source+: Climate Extremes" (table as of 31 July 2025) -- highest
+# Source+: temperature 56.7 degrees Celsius, Furnace Creek (Greenland Ranch),
+# Source+: California, 10 July 1913.
+# Source+: https://wmo.int/sites/default/files/2025-07/Table_Records_25Jul2025.pdf
+# Note: converted from degrees Celsius by adding 273.15
+# Note+: (provenance-discipline 2.31). Replaces the website's typed 60
+# Note+: degrees Celsius.
+
+EARTH_TROPOPAUSE_ALTITUDE_KM = 12.0
+# Unit: km
+# Status: measured V_SOURCED 2026-10-18 -- open page
+# Figures: 2 -- the page prints "about 12 kilometers (7.5 miles)"; the .0
+# Figures+: is Python's.
+# Read: "Earth's Atmosphere: A Multi-layered Cake", NASA Science (2019,
+# Read+: updated 2024-10-22), section "Troposphere", 2026-10-18, Claude
+# Read+: Opus 5.5, through the chat's web-fetch tool.
+# Source: NASA Science, "Earth's Atmosphere: A Multi-layered Cake" -- the
+# Source+: troposphere extends from Earth's surface to, on average, about
+# Source+: 12 km.
+# Source+: https://science.nasa.gov/earth/earth-atmosphere/earths-atmosphere-a-multi-layered-cake/
+# Also: NOAA JetStream, "Layers of the Atmosphere", gives its height by
+# Also+: latitude: 18 to 20 km at the equator, 9 km at 50 degrees north and
+# Also+: south, just under 6 km at the poles.
+
+EARTH_SURFACE_MEAN_TEMPERATURE_K = 290.0
+# Unit: k
+# Status: measured V_SOURCED 2026-10-18 -- open page
+# Figures: 3 -- whole kelvin, the source's place. The page prints an
+# Figures+: average around 17 degrees Celsius (62 degrees Fahrenheit);
+# Figures+: adding 273.15 gives 290.15, 290 to the kelvin.
+# Read: "Layers of the Atmosphere", NOAA JetStream (last updated
+# Read+: 2026-02-17), section "Troposphere", 2026-10-18, Claude Opus 5.5,
+# Read+: through the chat's web-fetch tool.
+# Source: NOAA JetStream, "Layers of the Atmosphere" -- in the troposphere
+# Source+: the temperature drops from an average around 17 degrees Celsius
+# Source+: to -51 degrees Celsius at the tropopause.
+# Source+: https://www.noaa.gov/jetstream/atmosphere/layers-of-atmosphere
+# Note: converted from degrees Celsius by adding 273.15
+# Note+: (provenance-discipline 2.31). Replaces the website's typed 15
+# Note+: degrees Celsius "at sea level".
+
+EARTH_TROPOPAUSE_TEMPERATURE_K = 222.0
+# Unit: k
+# Status: measured V_SOURCED 2026-10-18 -- open page
+# Figures: 3 -- whole kelvin, the source's place. The page prints -51
+# Figures+: degrees Celsius (-60 degrees Fahrenheit); adding 273.15 gives
+# Figures+: 222.15, 222 to the kelvin.
+# Read: as EARTH_SURFACE_MEAN_TEMPERATURE_K.
+# Source: NOAA JetStream, "Layers of the Atmosphere" -- the temperature
+# Source+: is about -51 degrees Celsius at the tropopause.
+# Source+: https://www.noaa.gov/jetstream/atmosphere/layers-of-atmosphere
+# Note: converted from degrees Celsius by adding 273.15
+# Note+: (provenance-discipline 2.31). The website typed "minus 60" degrees
+# Note+: Celsius here; the page's -60 is in degrees Fahrenheit.
+
+EARTH_THERMOSPHERE_TOP_TEMPERATURE_K = 2000.0
+# Unit: k
+# Status: measured V_SOURCED 2026-10-18 -- open page
+# Figures: 1 -- thousands of kelvin, the source's place. The page prints
+# Figures+: 2,000 degrees Celsius, a round figure (Rule 2); adding 273.15
+# Figures+: gives 2,273.15, 2,000 to the thousand.
+# Read: as EARTH_SURFACE_MEAN_TEMPERATURE_K, section "Thermosphere".
+# Source: NOAA JetStream, "Layers of the Atmosphere" -- temperatures in
+# Source+: the thermosphere can reach as high as 2,000 degrees Celsius near
+# Source+: its top.
+# Source+: https://www.noaa.gov/jetstream/atmosphere/layers-of-atmosphere
+# Note: converted from degrees Celsius by adding 273.15
+# Note+: (provenance-discipline 2.31).
+
+EARTH_LEO_INNER_PERIOD_MIN = 2.0 * math.pi * math.sqrt(EARTH_LEO_INNER_KM ** 3 / EARTH_GM_KM3_S2) / S_PER_MINUTE
+# Derived: 2 pi sqrt(6558.1366^3 / 398600.4418) / 60 = 88 min, a
+# Derived+: circular orbit's period at the lower edge's radius (88.09 in full).
+# Unit: min
+# Status: derived 2026-10-18 -- inherits EARTH_LEO_INNER_KM,
+# Status+: EARTH_GM_KM3_S2, S_PER_MINUTE
+# Figures: 2 -- set by EARTH_LEO_INNER_KM (6560, 3), less one because the
+# Figures+: radius enters to the power three halves (Rule 3).
+# Note: the period of a satellite on a circular orbit at the lower edge of
+# Note+: low Earth orbit, from Kepler's third law with Earth alone. Replaces
+# Note+: the website's typed "about 90" minutes. The two pi stays a bare
+# Note+: number, as on EARTH_SIDEREAL_ROTATION_PERIOD_H.
+
+EARTH_LEO_OUTER_PERIOD_MIN = 2.0 * math.pi * math.sqrt(EARTH_LEO_OUTER_KM ** 3 / EARTH_GM_KM3_S2) / S_PER_MINUTE
+# Derived: 2 pi sqrt(8378.1366^3 / 398600.4418) / 60 = 127 min, at
+# Derived+: the upper edge's radius (127.20 in full).
+# Unit: min
+# Status: derived 2026-10-18 -- inherits EARTH_LEO_OUTER_KM,
+# Status+: EARTH_GM_KM3_S2, S_PER_MINUTE
+# Figures: 3 -- capped. EARTH_LEO_OUTER_KM carries 8 (the 2,000 km edge is
+# Figures+: exact), but the relation is approximate: a two-body circular
+# Figures+: period leaves out Earth's equatorial bulge, which changes a real
+# Figures+: satellite's period at this height by its inclination, so the
+# Figures+: figure is held to the minute (Rule 7, a cap with its reason).
+# Note: replaces the website's typed "120" minutes.
+
+APOPHIS_2029_APPROACH_ALTITUDE_KM = 32000.0
+# Unit: km
+# Status: measured V_SOURCED 2026-10-18 -- open page
+# Figures: 2 -- the page prints "about 20,000 miles (32,000 kilometers)";
+# Figures+: the trailing zeros are placeholders (Rule 2).
+# Read: "Apophis Facts", NASA Science (updated 2026-09-23), introduction
+# Read+: and section "Size and Distance", 2026-10-18, Claude Opus 5.5,
+# Read+: through the chat's web-fetch tool.
+# Source: NASA Science, "Apophis Facts" -- on April 13, 2029 the asteroid
+# Source+: Apophis will pass about 32,000 km from Earth's surface, closer than
+# Source+: many satellites in geosynchronous orbit, at about 36,000 km in
+# Source+: altitude. https://science.nasa.gov/solar-system/asteroids/apophis-facts
+# Note: a prediction from the asteroid's orbit, the height above the
+# Note+: surface at closest approach. The page gives 32,000 km twice; one
+# Note+: sentence of its own, in "What Will Happen in 2029", says 36,000 km
+# Note+: beside the same 20,000 miles, which is the geosynchronous figure
+# Note+: repeated; 20,000 miles is 32,187 km.
+
+EARTH_CORE_MANTLE_BOUNDARY_TEMPERATURE_K = 4100.0
+# Unit: k
+# Status: measured V_SOURCED 2026-10-18 -- open full text
+# Figures: 2 -- uncertainty 200 K, which places the figure to the hundred
+# Figures+: (the ceiling, Report test).
+# Read: Andrault, Monteux, Le Bars and Samuel (2016), "The deep Earth may
+# Read+: not be cooling down", sections 3.3 and 4, p. 198, 2026-10-18, Claude
+# Read+: Opus 5.5, through the chat's web-fetch tool; the same figure read
+# Read+: the same day by Gemini 4 (documentation/worksheets/worksheet_gemini4_high_l455_earth_20261018.md).
+# Source: Andrault, D., Monteux, J., Le Bars, M. and Samuel, H. (2016),
+# Source+: "The deep Earth may not be cooling down", Earth Planet. Sci. Lett.
+# Source+: 443, 195-203 -- sec. 4, p. 198: the core-mantle boundary
+# Source+: temperature is at, or just below, the solidus of the silicate
+# Source+: mantle, at 4100 (+/- 200) K.
+# Source+: https://www.ipgp.fr/~samuel/henriIPGP/Publications_files/Andrault_etal.2016.pdf
+# Also: Deschamps and Cobden (2022), Front. Earth Sci. 10:1031507, sec. 1,
+# Also+: give 3,850 to 4,600 K for an adiabatic outer core; Kawai and
+# Also+: Tsuchiya (2009), PNAS 106:22119, give 3,800 +/- 200 K.
+# Note: the top of the outer core and the bottom of the lower mantle: one
+# Note+: boundary, one temperature. Replaces the website's typed 4,500 and
+# Note+: 4,500 degrees Celsius at that boundary, which the papers found by
+# Note+: Gemini 4 put several hundred kelvin too high.
+
+EARTH_INNER_CORE_BOUNDARY_TEMPERATURE_K = 5580.0
+# Unit: k
+# Status: measured V_SOURCED 2026-10-18 -- open full text
+# Figures: 2 -- uncertainty 600 K, which places the figure to the hundred
+# Figures+: (the ceiling, Report test); prints 5,600.
+# Read: as EARTH_CORE_MANTLE_BOUNDARY_TEMPERATURE_K, sec. 3.3, p. 198.
+# Source: Andrault, D., Monteux, J., Le Bars, M. and Samuel, H. (2016),
+# Source+: "The deep Earth may not be cooling down", Earth Planet. Sci. Lett.
+# Source+: 443, 195-203 -- sec. 3.3, p. 198: the melting point of pure iron
+# Source+: at the inner core boundary, 6230 (+/- 500) K, lowered by about
+# Source+: 650 K for the outer core's light elements, gives an inner core
+# Source+: boundary temperature of 5580 (+/- 600) K.
+# Source+: https://www.ipgp.fr/~samuel/henriIPGP/Publications_files/Andrault_etal.2016.pdf
+# Also: Anzellini et al. (2013), Science 340:464, abstract: pure iron melts
+# Also+: at 6230 +/- 500 K at the inner core boundary (the ESRF's "6000
+# Also+: degrees"); Nimmo (2007), Treatise on Geophysics 9.09: 5650 +/- 600 K.
+# Note: the bottom of the outer core. Replaces the website's typed 5,400
+# Note+: degrees Celsius; agrees with EARTH_INNER_CORE_TEMPERATURE_K, NASA's
+# Note+: "up to 5,600 K" for the inner core.
+
+EARTH_UPPER_MANTLE_TOP_TEMPERATURE_K = 1646.0
+# Unit: k
+# Status: measured V_SOURCED 2026-10-18 -- open full text
+# Figures: 3 -- uncertainty 35 K, which places the figure to the ten
+# Figures+: (the ceiling, Report test); prints 1,650.
+# Read: Katsura (2022), "A Revised Adiabatic Temperature Profile for the
+# Read+: Mantle", abstract, 2026-10-18, Claude Opus 5.5, through the chat's
+# Read+: web-fetch tool; read the same day by Gemini 4 (documentation/worksheets/worksheet_gemini4_high_l455_earth_20261018.md).
+# Source: Katsura, T. (2022), "A Revised Adiabatic Temperature Profile for
+# Source+: the Mantle", J. Geophys. Res. Solid Earth 127, e2021JB023562,
+# Source+: doi:10.1029/2021JB023562 -- abstract: on the adiabat the mantle is
+# Source+: 1646 (35) K at a 50-km depth, 1994 (40) K just above the 660-km
+# Source+: discontinuity, 1960 (40) K just below it, and 2587 (60) K at a
+# Source+: 2,800-km depth. https://d-nb.info/1271218135/34
+# Note: near the top of the upper mantle, 50 km down. Replaces the
+# Note+: website's typed 500 degrees Celsius, and National Geographic's
+# Note+: 1000, which the paper puts several hundred kelvin too low.
+
+EARTH_UPPER_MANTLE_BASE_TEMPERATURE_K = 1994.0
+# Unit: k
+# Status: measured V_SOURCED 2026-10-18 -- open full text
+# Figures: 3 -- uncertainty 40 K, which places the figure to the ten
+# Figures+: (the ceiling, Report test); prints 1,990.
+# Read: as EARTH_UPPER_MANTLE_TOP_TEMPERATURE_K.
+# Source: Katsura, T. (2022), "A Revised Adiabatic Temperature Profile for
+# Source+: the Mantle", J. Geophys. Res. Solid Earth 127, e2021JB023562,
+# Source+: doi:10.1029/2021JB023562 -- abstract: 1994 (40) K just above the
+# Source+: 660-km discontinuity. https://d-nb.info/1271218135/34
+# Note: the base of the upper mantle. Replaces the website's typed 2,200
+# Note+: degrees Celsius.
+
+EARTH_LOWER_MANTLE_TOP_TEMPERATURE_K = 1960.0
+# Unit: k
+# Status: measured V_SOURCED 2026-10-18 -- open full text
+# Figures: 3 -- uncertainty 40 K, which places the figure to the ten
+# Figures+: (the ceiling, Report test); prints 1,960.
+# Read: as EARTH_UPPER_MANTLE_TOP_TEMPERATURE_K.
+# Source: Katsura, T. (2022), "A Revised Adiabatic Temperature Profile for
+# Source+: the Mantle", J. Geophys. Res. Solid Earth 127, e2021JB023562,
+# Source+: doi:10.1029/2021JB023562 -- abstract: 1960 (40) K just below the
+# Source+: 660-km discontinuity. https://d-nb.info/1271218135/34
+# Note: the top of the lower mantle; its bottom is
+# Note+: EARTH_CORE_MANTLE_BOUNDARY_TEMPERATURE_K. Replaces the website's
+# Note+: typed 2,200 degrees Celsius.
+
+EARTH_ATMOSPHERE_MASS_BELOW_STRATOPAUSE_PERCENT = 99.0
+# Unit: percent
+# Status: measured V_SOURCED 2026-10-18 -- open page
+# Figures: 2 -- the page prints "Over 99%".
+# Read: "Demonstrating the Thickness of Atmospheric Layers", UCAR Center
+# Read+: for Science Education, section "Background", 2026-10-18, Claude
+# Read+: Opus 5.5, through the chat's web-fetch tool; found and read the
+# Read+: same day by Gemini 4 (documentation/worksheets/worksheet_gemini4_high_l455_earth_20261018.md).
+# Source: UCAR Center for Science Education, "Demonstrating the Thickness
+# Source+: of Atmospheric Layers" -- over 99 percent of the mass of Earth's
+# Source+: atmosphere is in its two lowest layers, the troposphere and the
+# Source+: stratosphere. https://scied.ucar.edu/activity/atmospheric-layers
+# Note: "more than", as the page says "over"; the words print it so. The
+# Note+: share for the two layers the lower-atmosphere shell holds, up to
+# Note+: the stratopause. The website's "99 percent" was typed; this is its
+# Note+: source, found by Gemini 4.
+
+EARTH_THERMOPAUSE_LOW_KM = 500.0
+# Unit: km
+# Status: measured V_SOURCED 2026-10-18 -- open page
+# Figures: 1 -- the page prints "between 500 and 1,000 km", round figures.
+# Read: "Layers of Earth's Atmosphere" and "The Thermosphere", UCAR Center
+# Read+: for Science Education, 2026-10-18, Claude Opus 5.5, through the
+# Read+: chat's web-fetch tool.
+# Source: UCAR Center for Science Education, "Layers of Earth's
+# Source+: Atmosphere" -- the top of the thermosphere can be found anywhere
+# Source+: between 500 and 1,000 km above the ground, its height set by how
+# Source+: much energy comes from the Sun.
+# Source+: https://scied.ucar.edu/learning-zone/atmosphere/layers-earths-atmosphere
+# Note: the low end of the thermopause's range. The drawn shell sits at
+# Note+: EARTH_THERMOPAUSE_ALTITUDE_KM, NOAA's 600 km, inside it.
+
+EARTH_THERMOPAUSE_HIGH_KM = 1000.0
+# Unit: km
+# Status: measured V_SOURCED 2026-10-18 -- open page
+# Figures: 1 -- the page prints "between 500 and 1,000 km", round figures.
+# Read: as EARTH_THERMOPAUSE_LOW_KM.
+# Source: UCAR Center for Science Education, "Layers of Earth's
+# Source+: Atmosphere" -- the top of the thermosphere can be found anywhere
+# Source+: between 500 and 1,000 km above the ground, its height set by how
+# Source+: much energy comes from the Sun.
+# Source+: https://scied.ucar.edu/learning-zone/atmosphere/layers-earths-atmosphere
+# Note: the high end of the thermopause's range.
+
+EARTH_MAGNETOPAUSE_STORM_2005_RADII = 3.0
+# Unit: r_earth
+# Status: measured V_SOURCED 2026-10-18 -- open full text
+# Figures: 1 -- the abstract prints "~3 Re".
+# Read: abstract, Dmitriev et al., "Anomalous dynamics of the extremely
+# Read+: compressed magnetosphere during 21 January 2005 magnetic storm",
+# Read+: arXiv:1402.0927, 2026-10-18, Claude Opus 5.5, through the chat's
+# Read+: web-fetch tool.
+# Source: Dmitriev, A. V., Suvorova, A. V., Chao, J.-K., Wang, C. B.,
+# Source+: Rastaetter, L., Panasyuk, M. I., Lazutin, L. L., Kovtyukh, A. S.,
+# Source+: Veselovsky, I. S. and Myagkova, I. N. (2014), "Anomalous dynamics
+# Source+: of the extremely compressed magnetosphere during 21 January 2005
+# Source+: magnetic storm", J. Geophys. Res. Space Physics 119,
+# Source+: doi:10.1002/2013JA019534 -- abstract: during the storm the
+# Source+: subsolar magnetopause was continuously inside geosynchronous orbit
+# Source+: because of strong compression, at its closest about 3 Earth radii.
+# Source+: https://arxiv.org/abs/1402.0927
+# Note: the nose's distance from Earth's centre at its closest in that
+# Note+: storm, against the quiet standoff drawn. Brings back, with a
+# Note+: source, the website note's "under storm compression it can fall
+# Note+: inside geostationary orbit".
+
+MOON_SEMI_MAJOR_AXIS_KM = 384400.0
+# Unit: km
+# Status: measured V_SOURCED 2026-10-18 -- open page
+# Figures: 4 -- the sheet prints 0.3844 x 10^6 km.
+# Read: "Moon Fact Sheet", NASA NSSDCA (D. R. Williams, last updated
+# Read+: 2024-01-11), "Semimajor axis", 2026-10-18, Claude Opus 5.5, through
+# Read+: the chat's web-fetch tool.
+# Source: NASA Space Science Data Coordinated Archive, Moon Fact Sheet
+# Source+: (Williams) -- semimajor axis 0.3844 x 10^6 km.
+# Source+: https://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html
+# Note: the Moon's mean distance. The website's Hill sphere words print it
+# Note+: in Earth radii, from this row; the note typed "about 60".
+
+ISS_ALTITUDE_LOW_KM = 370.0
+# Unit: km
+# Status: measured V_SOURCED 2026-10-18 -- open page
+# Figures: 2 -- the page prints "370-460 km", round figures.
+# Read: "ISS: International Space Station", ESA, table "On orbit", rows
+# Read+: "Orbital altitude" and "Orbital inclination", 2026-10-18, Claude
+# Read+: Opus 5.5, through the chat's web-fetch tool.
+# Source: ESA, "ISS: International Space Station", table "On orbit" --
+# Source+: orbital altitude 370-460 km; orbital inclination 51.6 degrees.
+# Source+: https://www.esa.int/Our_Activities/Human_Spaceflight/International_Space_Station/ISS_International_Space_Station
+# Note: the low end of the station's height. Replaces the orrery's typed
+# Note+: "~400 km".
+
+ISS_ALTITUDE_HIGH_KM = 460.0
+# Unit: km
+# Status: measured V_SOURCED 2026-10-18 -- open page
+# Figures: 2 -- the page prints "370-460 km", round figures.
+# Read: as ISS_ALTITUDE_LOW_KM.
+# Source: ESA, "ISS: International Space Station", table "On orbit" --
+# Source+: orbital altitude 370-460 km.
+# Source+: https://www.esa.int/Our_Activities/Human_Spaceflight/International_Space_Station/ISS_International_Space_Station
+
+ISS_INCLINATION_DEG = 51.6
+# Unit: deg
+# Status: measured V_SOURCED 2026-10-18 -- open page
+# Figures: 3 -- the page prints 51.6.
+# Read: as ISS_ALTITUDE_LOW_KM.
+# Source: ESA, "ISS: International Space Station", table "On orbit" --
+# Source+: orbital inclination 51.6 degrees.
+# Source+: https://www.esa.int/Our_Activities/Human_Spaceflight/International_Space_Station/ISS_International_Space_Station
+
+HUBBLE_ALTITUDE_KM = 550.0
+# Unit: km
+# Status: measured V_SOURCED 2026-10-18 -- open document
+# Figures: 2 -- the sheet prints "about 340 miles", two figures; 340 miles
+# Figures+: is 547.2 km (1.609344 km to the mile, exact), 550 to two.
+# Read: "Hubble Space Telescope -- An Overview", NASA fact sheet,
+# Read+: 2026-10-18, Claude Opus 5.5, through the chat's web-fetch tool.
+# Source: NASA, "Hubble Space Telescope -- An Overview" (fact sheet) --
+# Source+: Hubble is currently located about 340 miles above Earth's
+# Source+: surface, and completes 15 orbits per day, about one every 95
+# Source+: minutes.
+# Source+: https://science.nasa.gov/wp-content/uploads/2023/04/hst_overview_fact_sheet.pdf
+# Note: converted from miles by the international mile's exact 1.609344
+# Note+: km. Replaces the orrery's typed "~540 km".
+
+SATELLITES_FUNCTIONING_COUNT = 15900.0
+# Unit: count
+# Status: measured V_SOURCED 2026-10-18 -- open page
+# Figures: 3 -- the page prints "About 15900".
+# Read: "Space Environment Statistics", ESA Space Debris Office, "By the
+# Read+: numbers", information last updated 14 October 2026, 2026-10-18,
+# Read+: Claude Opus 5.5, through the chat's web-fetch tool.
+# Source: ESA Space Debris Office, Space Environment Statistics, "By the
+# Source+: numbers" (14 October 2026) -- satellites still functioning in
+# Source+: Earth orbit, about 15900, in every orbit.
+# Source+: https://sdup.esoc.esa.int/discosweb/statistics/
+# Note: a count that changes every month; this row holds ESA's figure of
+# Note+: that date. Replaces the orrery's typed "~11,000 active satellites
+# Note+: in LEO", which named no source anyone here had read.
+
+LEO_OBJECTS_TRACKED_COUNT = 28015.0
+# Unit: count
+# Status: measured V_SOURCED 2026-10-18 -- open page
+# Figures: 5 -- a catalogue count, every digit meant.
+# Read: "Space Environment Statistics", ESA Space Debris Office, table
+# Read+: "Current number of orbiting objects per type and orbital regime",
+# Read+: row LEO, last update 14 October 2026, 2026-10-18, Claude Opus 5.5,
+# Read+: through the chat's web-fetch tool; found by Gemini 4
+# Read+: (documentation/worksheets/worksheet_gemini4_high_l455_earth_20261018.md).
+# Source: ESA Space Debris Office, Space Environment Statistics (14 October
+# Source+: 2026) -- catalogued objects in low Earth orbit, perigee and apogee
+# Source+: both below 2,000 km: 28015, of 47142 in all orbits.
+# Source+: https://sdup.esoc.esa.int/discosweb/statistics/
+# Note: a count that changes every month. Replaces the orrery's typed
+# Note+: "35,000 tracked objects" in low orbit, which ESA's table contradicts.
+
+STARLINK_PEAK_ALTITUDE_KM = 550.0
+# Unit: km
+# Status: measured V_SOURCED 2026-10-18 -- open document
+# Figures: 2 -- the newsletter prints "a peak at 550 km", a round figure.
+# Read: Matney and Liou, "Overview of the Cataloged Population Over the
+# Read+: Past 20 Years", Orbital Debris Quarterly News 29(3), September 2025,
+# Read+: p. 6, 2026-10-18, Claude Opus 5.5, through the chat's web-fetch
+# Read+: tool; found by Gemini 4 (documentation/worksheets/worksheet_gemini4_high_l455_earth_20261018.md).
+# Source: Matney, M. and Liou, J.-C. (2025), "Overview of the Cataloged
+# Source+: Population Over the Past 20 Years", NASA Orbital Debris Quarterly
+# Source+: News 29(3), p. 6 -- SpaceX's Starlink spacecraft operate mostly
+# Source+: below 600 km, with a peak at 550 km.
+# Source+: https://www.orbitaldebris.jsc.nasa.gov/quarterly-news/pdfs/ODQNv29i3.pdf
+# Also: FCC 21-48 (2021) authorizes Starlink's first-generation shells at
+# Also+: 540, 550, 560 and 570 km; FCC 22-91 (2022) the second's at 525 to
+# Also+: 535 km.
+# Note: where most Starlink satellites fly. Replaces the orrery's typed
+# Note+: "~550 km".
+
+STARLINK_WORKING_COUNT = 11140.0
+# Unit: count
+# Status: measured V_SOURCED 2026-10-18 -- open page
+# Figures: 5 -- a count from a satellite catalogue, every digit meant.
+# Read: "Space Statistics", Jonathan's Space Report (J. McDowell), the
+# Read+: Starlink summary table's "Total" row, data of 15 October 2026,
+# Read+: 2026-10-18, Claude Opus 5.5, through the chat's web-fetch tool.
+# Source: Jonathan McDowell, Jonathan's Space Report, Starlink statistics
+# Source+: (15 October 2026) -- Starlink satellites working in orbit:
+# Source+: 11,140 of 11,154 in orbit, 13,015 launched.
+# Source+: https://planet4589.org/space/con/star/stats.html
+# Note: a count that changes every week. Replaces the orrery's typed
+# Note+: "nearly 7,000", which was already stale.
 
 EARTH_VAN_ALLEN_INNER_RADII = 1.5
 # Unit: r_earth

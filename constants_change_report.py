@@ -79,8 +79,10 @@ parents and passed:
 The pass rests entirely on the parents being watched, so the test is
 strict. The expression must parse, must be built from nothing but
 numbers, arithmetic and names assigned at module level in
-constants_new.py, and must reference at least one such name. A function
-call, an attribute, a string, an unknown name -- any of those and the
+constants_new.py, and must reference at least one such name. A pure
+piece of the math module (math.pi, math.sqrt and the others named in
+MATH_PURE) and abs() are allowed by name (L-455). Any other function
+call or attribute, a string, an unknown name -- any of those and the
 line is not a derivation this tool can vouch for, so it goes back to
 announcing.
 
@@ -115,6 +117,10 @@ Module updated: October 17, 2026 with Anthropic's Claude Opus 5.5
     (L-411: a typed row rewritten as an expression over other rows is
     reported NOW DERIVED, with its old value, instead of unreadable;
     found when PARKER_CLOSEST_RADII became a conversion).
+Module updated: October 18, 2026 with Anthropic's Claude Opus 5.5
+    (L-455: math's pure constants and functions and abs() are allowed
+    in a derived line by name, so a row such as a circular orbit's
+    period, 2 pi sqrt(r^3 / GM), is understood instead of failing).
 """
 
 import os
@@ -152,6 +158,16 @@ DERIVED_NODES = (
     ast.Add, ast.Sub, ast.Mult, ast.Div, ast.FloorDiv,
     ast.Mod, ast.Pow, ast.USub, ast.UAdd,
 )
+
+# L-455 (2026-10-18): the pure pieces of Python's math module a derived
+# row may use, and abs(). Each gives the same number for the same inputs
+# and reads nothing else, so a line built from them and watched names is
+# still a derivation this tool can vouch for. The store already used
+# math.pi, math.sqrt, math.atan and abs() in rows this tool announced as
+# not understood; the low-orbit periods were the next.
+MATH_PURE = ('pi', 'tau', 'e', 'sqrt', 'atan', 'atan2', 'sin', 'cos',
+             'tan', 'exp', 'log', 'log10', 'radians', 'degrees')
+BUILTIN_PURE = ('abs',)
 
 
 def module_level_names(here, base):
@@ -253,7 +269,27 @@ def parse_derived(line, tracked):
     except SyntaxError:
         return None
     parents = set()
+    # L-455: math's constants and pure functions, and abs(), are allowed
+    # by name. Their Name and Attribute nodes are not parents.
+    pure = set()
     for node in ast.walk(tree):
+        if (isinstance(node, ast.Attribute) and isinstance(node.value, ast.Name)
+                and node.value.id == 'math'):
+            if node.attr not in MATH_PURE:
+                return None
+            pure.add(id(node)); pure.add(id(node.value))
+        elif isinstance(node, ast.Call):
+            f = node.func
+            if node.keywords or not (
+                    (isinstance(f, ast.Attribute) and isinstance(f.value, ast.Name)
+                     and f.value.id == 'math' and f.attr in MATH_PURE)
+                    or (isinstance(f, ast.Name) and f.id in BUILTIN_PURE)):
+                return None
+            if isinstance(f, ast.Name):
+                pure.add(id(f))
+    for node in ast.walk(tree):
+        if id(node) in pure or isinstance(node, (ast.Attribute, ast.Call)):
+            continue
         if isinstance(node, ast.Name):
             parents.add(node.id)
         elif isinstance(node, ast.Constant):

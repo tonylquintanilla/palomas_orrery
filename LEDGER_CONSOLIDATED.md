@@ -515,6 +515,12 @@ Module updated: October 18, 2026 with Anthropic's Claude Opus 5.5
 (L-411 follow-up on Tony's look: Voyager 2's crossing from Li et al.;
 the chromosphere's citations separated; its typed name recorded),
 built on f80a3ad0 and gallery 0be187ec.
+Module updated: October 18, 2026 with Anthropic's Claude Opus 5.5
+(L-455 DONE, Earth's share: the Typed numbers check, thirty Earth rows
+from open sources, the low orbit's hover, the approved words; its loose
+ends to L-413 and L-411; L-412's numbers half complete, and Tony's
+order for its drawings: L-385, then L-410 with L-131, L-128 waiting;
+a skill line carried on L-351), built on 05cb185a and gallery 10508dfc.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -732,7 +738,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*234 live items; 218 need attention (`!`); 166 RICE-scored; 214 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*233 live items; 217 need attention (`!`); 166 RICE-scored; 215 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -814,7 +820,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-078 | Provenance scanner: systematic coverage via module_atlas role classification | OPEN | 0.9 | 2026-07-16 |
 | ! | L-070 | Food Insecurity -- regional multi-country assembly (Sudan crisis shed) | OPEN | 0.9 | 2026-10-07 |
 | ! | L-319 | Focusing a smaller shell cuts larger lit shells flat at the frame's box | OPEN | 0.7 | 2026-09-10 |
-| ! | L-128 | Comet sublimation shell(s) -- solar-distance chemistry zones | OPEN | -- | 2026-10-17 |
+| ! | L-128 | Comet sublimation shell(s) -- solar-distance chemistry zones | OPEN | -- | 2026-10-18 |
 | ! | L-131 | Zodiacal dust solar shell | OPEN | -- | 2026-10-08 |
 | ! | L-235 | Checks that cannot fail, gallery side [three instances] | OPEN | -- | 2026-10-08 |
 | ! | L-237 | Artifact 1's golden record is stale and needs re-cutting | OPEN | -- | 2026-10-10 |
@@ -853,7 +859,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-379 | The recorded Earth scene payload is aging, and three checks patch it piece by piece (checks, gallery) | OPEN | -- | 2026-10-06 |
 | ! | L-381 | The uncertainty field's pattern reads a sentence's full stop as a decimal point (export, checks) | OPEN | -- | 2026-09-28 |
 | ! | L-382 | Earth's magnetosphere costs about 42 percent more per orrery animation frame since D8 (orrery, rendering) | OPEN | -- | 2026-09-28 |
-| ! | L-385 | The orrery's Auto view of the Sun opens about 31 times wider since Stage D (orrery, Tony's eye) | OPEN | -- | 2026-10-17 |
+| ! | L-385 | The orrery's Auto view of the Sun opens about 31 times wider since Stage D (orrery, Tony's eye) | OPEN | -- | 2026-10-18 |
 | ! | L-387 | The orrery's hovers print the conversion names by their own formats, not by the computed count (orrery) | OPEN | -- | 2026-09-28 |
 | ! | L-391 | Group clouds: the Trojans' sources, and the shapes of the three other groups (gallery, exhibits) | OPEN | -- | 2026-09-29 |
 | ! | L-393 | Encounter data: dates, spacecraft records centred on their targets, and how far the cache reaches in time (gallery, cache) | OPEN | -- | 2026-09-29 |
@@ -863,10 +869,10 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-401 | The orrery's own distance hovers print by fixed widths, not by the errors the position earns (orrery, provenance) | OPEN | -- | 2026-10-15 |
 | ! | L-402 | Choose a date, or animate, within the range the drawn bodies are trusted for (gallery, exhibits) | OPEN | -- | 2026-10-01 |
 | ! | L-403 | Numbers in the object list's descriptions carry no source (orrery, provenance) | OPEN | -- | 2026-10-01 |
-| ! | L-410 | Fades where nature thins out: Earth's hydrogen designed, the outer corona next (orrery + gallery, the Sun and Earth) | OPEN | -- | 2026-10-17 |
+| ! | L-410 | Fades where nature thins out: Earth's hydrogen designed, the outer corona next (orrery + gallery, the Sun and Earth) | OPEN | -- | 2026-10-18 |
 | ! | L-411 | The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-18 |
 | ! | L-412 | The Sun's slice: the order Tony confirmed (the Sun's slice) | OPEN | -- | 2026-10-18 |
-| ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-10-17 |
+| ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-10-18 |
 | ! | L-423 | The website's checks: the order Tony confirmed (checks, gallery) | OPEN | -- | 2026-10-16 |
 | ! | L-424 | The checker reports one word for two different cases (worksheet checker) | OPEN | -- | 2026-10-11 |
 | ! | L-425 | A citation's location record is checked only in part (provenance tooling) | OPEN | -- | 2026-10-09 |
@@ -880,7 +886,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-443 | The rest of the orrery's objects come to the website as plotted positions (gallery + orrery, objects) | OPEN | -- | 2026-10-17 |
 | ! | L-449 | A cache build dropped the 82 build-run records it should have carried (gallery, cache builder) | OPEN | -- | 2026-10-17 |
 | ! | L-454 | A drawn device for edges that move: the magnetopause, the bow shock and their kind (orrery + gallery, design) | OPEN | -- | 2026-10-17 |
-| ! | L-455 | Typed numbers in the website's served words, with no row behind them (gallery, words) | OPEN | -- | 2026-10-17 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1242,6 +1247,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-451 | The sentences the Typed facts check holds open (gallery, words) | DONE | -- | 2026-10-17 |
 |  | L-452 | The website's notes beside a citation: read them again now that the citation prints above them (gallery, words) | DONE | -- | 2026-10-17 |
 |  | L-453 | The page's grey type turned blue, and the inner shells' radius named (gallery, the rooms' look) | DONE | -- | 2026-10-16 |
+|  | L-455 | Typed numbers in the website's served words, with no row behind them (gallery, words) | DONE | -- | 2026-10-18 |
 
 ### W.Done -- Web Publication track, closed items
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1294,51 +1300,6 @@ Earth's talk 2 then takes what the Sun decided, or asks them fresh.
 Sun's numbers (L-412).
 **Ref:** L-410; L-314 (the solar wind, which moves these edges); L-375
 (the dipole cone); `documentation/DESIGN_fades_rulings_20261017.md`.
-
-#### [L-455] Typed numbers in the website's served words, with no row behind them (gallery, words)
-<!-- L:455 status:OPEN upd:2026-10-17 section:A flag: rice: -->
-- **Recorded 2026-10-17,** reading the notes for L-452. One row for the
-  CLASS (The Braid); instances found so far, in
-  `data/objects_config.json`: the Crust's served `note`, "Crust
-  thickness (5-10 km oceanic, 30-50 km continental)", and its `about`
-  ("5 to 10 km under the oceans ... 30 to 50 km under the continents");
-  the magnetopause's served `note`, "it can fall inside geostationary
-  orbit (6.6 R_E)". None has a row in `constants_new.py`.
-- **Method:** source it or remove it, one number at a time (Fetched vs
-  Recalled; provenance-discipline 2.30, What a Visitor Reads); wording
-  changes go to Tony. Discovery here is not remediation: the instances
-  are the ones met, not a sweep.
-- **Met 2026-10-17 in the orrery's own low-orbit hover and tooltip**
-  (`earth_visualization_shells.py`; not served to the website, so the
-  orrery's form of this class): the satellite counts (about 11,000
-  active, about 7,000 Starlink, 35,000 tracked debris), the heights of
-  the ISS, Starlink and Hubble, the 90 to 120 minute orbit, and the
-  typed `STARLINK_KM = 6921.0` that places the dots. Their `# Source:`
-  comment names databases, not a read ("Verified: April 2026 via Gemini
-  fact-check"). Same method when the low-orbit shell is next opened.
-- **2026-10-17, the Sun's share done** with L-411 (Claude Opus 5.5):
-  the Sun's served words print their numbers from rows or no longer
-  type them. A helper in `gallery/feature_renderers.js`,
-  `withShellWords`, fills a shell's {radius} and its linked numbers
-  into `about`, `note` and `description`, each citation beside them.
-  Tony's ruling the same evening: "the numbers half ends with Earth's
-  sweep (L-455), the same method" -- so Earth's share is the last item
-  of the Sun's numbers half (L-412), next session. It holds the Crust
-  and magnetopause notes above; Earth's interior and atmosphere
-  `about` paragraphs, which type temperatures in degrees Celsius
-  (provenance-discipline 2.31 now says kelvin); and the orrery's
-  low-orbit numbers. Those Celsius figures never went through the
-  store: they were condensed from the orrery's old Earth hover text
-  when the `about` paragraphs were written (L-331).
-- **One case the kelvin rule cannot settle alone, for Tony:** Earth's
-  surface temperatures, "minus 80 to 60 degrees Celsius", would read
-  as about 190 to 330 kelvin. **Tony-action (decide)** at the wording
-  list.
-**Gap:** Earth's share: discovery first, then each number sourced
-into a row or removed, every wording change to Tony as a list; the
-orrery's low-orbit numbers with them.
-**Ref:** L-452; L-411 (the same class in the Sun's hovers); gallery
-`data/objects_config.json`.
 
 #### [L-449] A cache build dropped the 82 build-run records it should have carried (gallery, cache builder)
 <!-- L:449 status:OPEN upd:2026-10-17 section:A flag: rice: -->
@@ -1461,7 +1422,7 @@ gallery `data/objects_config.json`.
 
 
 #### [L-410] Fades where nature thins out: Earth's hydrogen designed, the outer corona next (orrery + gallery, the Sun and Earth)
-<!-- L:410 status:OPEN upd:2026-10-17 section:A flag: rice: -->
+<!-- L:410 status:OPEN upd:2026-10-18 section:A flag: rice: -->
 - **Tony's idea, 2026-10-04**, deciding where the Roche limit is drawn:
   "What if we draw fuzzy boundaries instead of shells". It is Show the
   Envelope of the Unknowable as a drawing.
@@ -1587,9 +1548,9 @@ gallery `data/objects_config.json`.
   against orrery adcc1851 with 0 DRIFT; the Earth room on the phone,
   "Looks good". The item stays open for the Sun's fades.
 **Gap:** the Sun's fades, the outer corona first with the
-dust cloud (L-131), in the Sun's slice (L-412), after its numbers;
-Tony leans to doing them (2026-10-17), decided when the numbers are
-done. The range idea's
+dust cloud (L-131), in the Sun's slice (L-412), straight after the
+opening view (L-385): Tony's order, 2026-10-18, "Yes in that order".
+The range idea's
 pieces above (the Roche limit's band, L-241's torus wording) are
 re-read against the rule when the Sun's turn comes.
 **Ref:** L-131, L-241, L-371, L-454; `solar_visualization_shells.py`
@@ -1670,6 +1631,14 @@ re-read against the rule when the Sun's turn comes.
   with CHROMOSPHERE_PHYSICAL_KM, but it is typed. A name is a key: the
   legend, the shell stamp and the display-figures fixture read it, so
   it changes with the chromosphere's shell when that is next opened.
+- **2026-10-18, held on the Typed numbers check** (L-455): eight of
+  this item's sentences, in the core, the radiative zone, the
+  chromosphere (its name, hover and words), the Alfven surface and the
+  Hills cloud, are on the check's HELD list
+  (`documentation/smoke_typed_numbers.js` in the gallery), printed
+  every run with this handle. When one is sourced or removed, the
+  check marks it no longer found and it comes off HELD in the same
+  patch.
 **Gap:** groups T, M and C, the three leftovers above and the
 chromosphere's name, one shell at a time. Not part of the Sun's
 numbers half, which ends with L-455.
@@ -2021,7 +1990,7 @@ for each case and updates the skill's bullet to match.
 L-252; L-418.
 
 #### [L-413] Earth's list: the old Earth items, in the order Tony confirmed (Earth room)
-<!-- L:413 status:OPEN upd:2026-10-17 section:A flag: rice: -->
+<!-- L:413 status:OPEN upd:2026-10-18 section:A flag: rice: -->
 - **Confirmed by Tony, 2026-10-04,** after a sweep of the open items
   that touch the Earth room, read against the code at orrery cbde99dc
   and gallery e7ef96eb, and checked against the Claude Fable 5.1 ledger
@@ -2143,6 +2112,18 @@ L-252; L-418.
   starting prompt. This list's own text already allowed it: the
   talks are "interleaved with the Sun's list rather than blocking
   it" (2026-10-04).
+- **2026-10-18, from L-455 at its close** (the typed numbers): the
+  orrery's other Earth tooltips and hovers still type the figures the
+  website no longer does: the interior's Celsius temperatures and the
+  crust's thickness ranges (`earth_inner_core_info` through
+  `earth_crust_info`), the atmosphere's (`earth_atmosphere_info`, the
+  Earth atmosphere hover in `shell_configs.py`,
+  `earth_upper_atmosphere_info`), and the geostationary tooltip's
+  satellite count and Apophis figures. The rows L-455 added serve them
+  too. Also the geostationary height: the website prints 35,786.03 km,
+  its own subtraction of the rounded radius, while a row worked from
+  the store gives 35,786.04, so a row waits until the ring's hover is
+  settled with it. Each file opens in a talk on this list.
 **Note (Claude, 2026-10-17):** the one dated thing a visitor meets
 meanwhile is the field's epoch (L-356), which the hover states.
 **Gap:** talks 2 to 6, after the Sun's numbers and the drawings Tony
@@ -2289,10 +2270,22 @@ above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
   the Plotly boundary, when that file is next open for the Sun's words
   (L-411's remaining bulk, or the drawings half). Until then the
   tooltip class shows them as lines (L-191's one-line fix).
-**Gap:** L-455 (Earth's share), the numbers half's last item; then
-Tony's choice of drawings, the streamer belt's and the clumps'
-eyeballed numbers with them, and L-191's 19 Sun strings when that
-file is open; then L-443.
+- **2026-10-18, the numbers half complete:** L-455 (Earth's share)
+  DONE (Claude Opus 5.5;
+  `documentation/HANDOFF_L455_earth_numbers_20261018.md`).
+- **2026-10-18, Tony's choice of drawings,** asked whether the
+  opening view, then the corona fade with the dust cloud, come next
+  with the ice lines waiting: "Yes in that order". Before it he sent
+  the website's Sun room as it opens: "This is the opening view in
+  the interactive. The orrery could be similar." So: item 3 (L-385,
+  the opening view) first, matched to the website's Sun room; then
+  item 9 (L-410's fade of the outer corona with L-131, the dust
+  cloud; L-241 inside it); item 10 (L-128, the ice lines) waits
+  behind L-443.
+**Gap:** the drawings in Tony's order: L-385, then L-410 with L-131
+and L-241; the streamer belt's and the clumps' eyeballed numbers with
+them, and L-191's 19 Sun strings when that file is open; then L-443,
+with L-128 after it.
 **Ref:** L-371 (the slice's numbers); the handles above; L-413;
 `documentation/LEDGER_SWEEP_review_20261004.md`.
 
@@ -2839,7 +2832,7 @@ is enough. L-422 holds the shape; this item holds the check.
 **Ref:** `shell_configs.py`; `earth_visualization_shells.py`; `constants_rows.py`; L-345; L-352.
 
 #### [L-385] The orrery's Auto view of the Sun opens about 31 times wider since Stage D (orrery, Tony's eye)
-<!-- L:385 status:OPEN upd:2026-10-17 section:A flag: rice: -->
+<!-- L:385 status:OPEN upd:2026-10-18 section:A flag: rice: -->
 **Tony:** (on Where We Are, 2026-09-30, how wide the Sun's opening view
 is in the orrery) "photosphere + 10%"
 - **Found 2026-09-24** building L-322 Stage D's orrery autoscale (D4).
@@ -2859,9 +2852,22 @@ is in the orrery) "photosphere + 10%"
   set by whichever shells are on -- the inner corona alone is 3 solar
   radii. "Photosphere + 10%" needs the autoscale and the default shells
   read together, and a Mode 5 look. The Sun slice's third item (L-412).
-**Gap:** read the Sun's autoscale with its default shells; propose how
-the view opens at photosphere + 10% and what the axis does; Tony's eye.
-After the Sun's numbers (L-412); Tony leans to doing it (2026-10-17).
+- **2026-10-18, the target, from Tony's phone:** a screenshot of the
+  website's Sun room as it opens, with "This is the opening view in
+  the interactive. The orrery could be similar." The room opens with
+  only the photosphere ticked, its view fitted to what is drawn, and
+  the rotation axis drawn short, ending near the surface. In the
+  orrery the axis is drawn 52 solar radii long, which is what opens
+  the view about 31 times wider. Then, asked the order: the opening
+  view first among the Sun's drawings (L-412). Then, on what the
+  target is: "The view is basically Rsun + 10% or 20%".
+**Gap:** the orrery's Sun opens at about the Sun's radius plus 10 to
+20 percent, as the website's Sun room does. Read the Sun's autoscale
+with its default shells and make it open there; the long rotation
+axis is what widens the view today, so whether it is shortened or
+simply runs past the view's edge is shown to Tony, not assumed.
+Tony's eye against his screenshot. The first of the Sun's drawings
+(L-412).
 **Ref:** `documentation/HANDOFF_L322_D_orrery_pole_built_20260924.md` sec. 3; L-322.
 
 #### [L-382] Earth's magnetosphere costs about 42 percent more per orrery animation frame since D8 (orrery, rendering)
@@ -3878,6 +3884,17 @@ of its own, at Tony's word; the hover states its epoch meanwhile.
     session following the old sentence would do nothing wrong, so it
     is carried here (A Wrong Sentence in a Skill: Bump Now, or Carry
     It).
+  - **2026-10-18, interactive-exhibit, next bump (the served-data
+    provenance contract, beside the Typed facts check):** the gallery
+    run's "Typed numbers" row (`documentation/smoke_typed_numbers.js`,
+    L-455) masks every served citation and every served number and
+    fails on any digit left standing in the served words; a digit
+    passes only on its NAMES, LOCATORS or DATES lists, each printed
+    every run, and a known finding waits on HELD with its handle. It
+    builds the Sun and Earth rooms only, the two with served words
+    today, so a room that gains served words joins it in the same
+    build, as it joins Typed facts. The skill says nothing wrong; it
+    does not name the check, so it is carried here.
 **Gap:** Each lands with its store's next bump.
 **Ref:** skills/interactive-exhibit/SKILL.md; skills/ledger-and-session-records/SKILL.md; PROJECT_INSTRUCTIONS.md; L-216, L-363, L-371, L-390, L-414.
 
@@ -24339,6 +24356,78 @@ the drawings.
 **Gap:** none. The same class on a body not yet walked is met in
 that body's slice.
 **Ref:** `constants_new.py`; gallery `data/objects_config.json`; L-345; L-371; L-322.
+
+#### [L-455] Typed numbers in the website's served words, with no row behind them (gallery, words)
+<!-- L:455 status:DONE upd:2026-10-18 section:C flag: rice: -->
+- **Recorded 2026-10-17,** reading the notes for L-452. One row for the
+  CLASS (The Braid); instances found so far, in
+  `data/objects_config.json`: the Crust's served `note`, "Crust
+  thickness (5-10 km oceanic, 30-50 km continental)", and its `about`
+  ("5 to 10 km under the oceans ... 30 to 50 km under the continents");
+  the magnetopause's served `note`, "it can fall inside geostationary
+  orbit (6.6 R_E)". None has a row in `constants_new.py`.
+- **Method:** source it or remove it, one number at a time (Fetched vs
+  Recalled; provenance-discipline 2.30, What a Visitor Reads); wording
+  changes go to Tony. Discovery here is not remediation: the instances
+  are the ones met, not a sweep.
+- **Met 2026-10-17 in the orrery's own low-orbit hover and tooltip**
+  (`earth_visualization_shells.py`; not served to the website, so the
+  orrery's form of this class): the satellite counts (about 11,000
+  active, about 7,000 Starlink, 35,000 tracked debris), the heights of
+  the ISS, Starlink and Hubble, the 90 to 120 minute orbit, and the
+  typed `STARLINK_KM = 6921.0` that places the dots. Their `# Source:`
+  comment names databases, not a read ("Verified: April 2026 via Gemini
+  fact-check"). Same method when the low-orbit shell is next opened.
+- **2026-10-17, the Sun's share done** with L-411 (Claude Opus 5.5):
+  the Sun's served words print their numbers from rows or no longer
+  type them. A helper in `gallery/feature_renderers.js`,
+  `withShellWords`, fills a shell's {radius} and its linked numbers
+  into `about`, `note` and `description`, each citation beside them.
+  Tony's ruling the same evening: "the numbers half ends with Earth's
+  sweep (L-455), the same method" -- so Earth's share is the last item
+  of the Sun's numbers half (L-412), next session. It holds the Crust
+  and magnetopause notes above; Earth's interior and atmosphere
+  `about` paragraphs, which type temperatures in degrees Celsius
+  (provenance-discipline 2.31 now says kelvin); and the orrery's
+  low-orbit numbers. Those Celsius figures never went through the
+  store: they were condensed from the orrery's old Earth hover text
+  when the `about` paragraphs were written (L-331).
+- **One case the kelvin rule cannot settle alone, for Tony:** Earth's
+  surface temperatures, "minus 80 to 60 degrees Celsius", would read
+  as about 190 to 330 kelvin. **Tony-action (decide)** at the wording
+  list.
+- **2026-10-18, DONE** (Claude Opus 5.5, Earth's share;
+  `documentation/HANDOFF_L455_earth_numbers_20261018.md`). The
+  discovery is a check, as Tony asked in the starting prompt ("mask
+  every served number that has a row behind it and fail on any digit
+  left standing"): `documentation/smoke_typed_numbers.js`, the gallery
+  run's "Typed numbers" row, gating, which runs on every website
+  maintenance run over the Sun's and Earth's served words. Its first
+  output is `documentation/DISCOVERY_L455_earth_typed_numbers_20261018.md`.
+  Thirty Earth rows from open sources went into `constants_new.py`,
+  read here and, for the deep Earth, the atmosphere's mass and low
+  orbit's counts, found by Gemini 4
+  (`documentation/worksheets/worksheet_gemini4_high_l455_earth_20261018.md`,
+  reviewed in `documentation/REVIEW_L455_gemini4_worksheet_20261018.md`).
+  The deep Earth's temperatures are Andrault and others (2016) and
+  Katsura (2022), not the National Geographic figures of revision 2.
+  The orrery's low-orbit tooltip and hover print every number from its
+  row, its dots spread evenly between the two edges. Tony approved the
+  wording list, revision 3
+  (`documentation/WORDS_L455_earth_numbers_20261018.md`), asking only
+  whether the mantle should be split into upper and lower: yes, as
+  built, since both sites draw two layers and Katsura gives figures
+  either side of the boundary between them. The surface question above
+  was settled by the WMO's two records, 184.0 and 329.8 kelvin, which
+  replace the unsourced range.
+- **Loose ends, re-homed:** the orrery's other Earth tooltips and
+  hovers, which still type the old figures, and the geostationary
+  height's last digit, to L-413 (Earth's list); the check's eight held
+  Sun sentences stay on L-411; the check's place in interactive-exhibit
+  to L-351.
+**Gap:** none here; the loose ends are on L-413, L-411 and L-351.
+**Ref:** L-452; L-411 (the same class in the Sun's hovers); gallery
+`data/objects_config.json`.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
@@ -24910,7 +24999,7 @@ itself); L-112 (the remediation pass that verified DP flyby preservation).
   distances appear. `[per chain]`
 
 #### [L-128] Comet sublimation shell(s) -- solar-distance chemistry zones
-<!-- L:128 status:OPEN upd:2026-10-17 section:A flag: rice: -->
+<!-- L:128 status:OPEN upd:2026-10-18 section:A flag: rice: -->
 - **Note (2026-10-08):** RICE struck (was 2/2/50/2). This item is item 10 of L-412 (the Sun's slice),
   and an item in an ordered list carries no score; the list's
   order is its priority (Tony's rule of 2026-10-07, L-412).
@@ -24931,6 +25020,9 @@ sublimation distances, single vs. multi-shell, data source).
 - **2026-10-17 (Tony):** "maybe wait on the ice lines": likely the
   one Sun drawing that waits behind the objects (L-443); decided when
   the Sun's numbers are done (L-412).
+- **2026-10-18 (Tony):** confirmed: the ice lines wait, after the
+  opening view and the corona fade with the dust cloud ("Yes in that
+  order"), behind the objects (L-443).
 **Ref:** to_do_ideas.md (pre-ledger, 4/16/26).
 
 #### [L-130] Restore six-elements + M0@J2000 plotting mode (educational, alt)

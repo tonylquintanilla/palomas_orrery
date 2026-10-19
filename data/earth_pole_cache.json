@@ -166,5 +166,29 @@
    "query_target": "399",
    "retrieved": "2026-10-17T21:15:08.278237+00:00"
   }
+ },
+ "2026-10-18": {
+  "orbit": {
+   "incl_deg": 0.003547830747381049,
+   "node_deg": 174.6430417097197
+  },
+  "orbit_source": {
+   "center": "@sun",
+   "epoch_jd": 2461331.5,
+   "query_target": "3",
+   "refplane": "ecliptic",
+   "retrieved": "2026-10-19T03:03:04.670190+00:00"
+  },
+  "pole": {
+   "dec_deg": 89.84992,
+   "ra_deg": 0.67022
+  },
+  "pole_source": {
+   "epoch_jd_ut": 2461331.5,
+   "observer": "@sun",
+   "quantity": "32",
+   "query_target": "399",
+   "retrieved": "2026-10-19T03:03:04.670190+00:00"
+  }
  }
 }

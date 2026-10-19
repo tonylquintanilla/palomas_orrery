@@ -284,6 +284,10 @@ checks' rooms, in alphabetical place, with its short line, running
 through documentation/run_offline_check.py. The offline runner's
 description names it; Config Mirror Check says it compares the citation
 too. Fixed in passing: Mirror Suite said 42 checks, and it holds 77.
+October 18, 2026 with Anthropic's Claude Opus 5.5 (L-455): Typed Numbers,
+the website's new checker, gets its button after Typed Facts, with its
+short line, running through documentation/run_offline_check.py; the
+offline runner's description names it.
 """
 
 import os
@@ -515,7 +519,7 @@ LAUNCH_GROUPS = {
         "guest book updater, the Daily Run's steps, the artifact-1 "
         "assembler pin, and cache siblings (report only). Node: feature "
         "renderers, page framing, Sun shells, Earth scene geometry, "
-        "hover budget, typed facts, arrival, display figures, Solar "
+        "hover budget, typed facts, typed numbers, arrival, display figures, Solar "
         "System figures, the Solar System drawer, and the guest book. "
         "Three states rather than two: a suite that could not run -- "
         "Node missing, say -- reports UNREACHABLE and is never counted "
@@ -1006,6 +1010,24 @@ LAUNCH_GROUPS = {
         GALLERY_REPO_DIR,
         True,
         ["Typed facts"],
+        True),
+        ("Typed Numbers",
+        os.path.join("documentation", "run_offline_check.py"),
+        "Every number a visitor reads in the served words comes from a row "
+        "(L-455). It builds the Sun and Earth rooms from the config with "
+        "every served number scaled, and fails on any number in a served "
+        "word that did not move with its row, naming the room, the feature "
+        "and the sentence with the digit in brackets. A digit in a name, a "
+        "citation's page or year, or a date whose source is named beside "
+        "it is allowed, and each list prints in full. Findings already on "
+        "a ledger row are held and printed every run; they do not fail. "
+        "GATES the gallery runner. The check is Node, so this button runs "
+        "it through documentation/run_offline_check.py, which reads its "
+        "command from the gallery runner's own list. Runs from the gallery "
+        "repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        ["Typed numbers"],
         True),
         ("Gallery Maintenance Run -- live, AFTER a push",
         "gallery_maintenance_run.py",
@@ -1903,6 +1925,9 @@ CARD_LINES = {
     ("Gallery -- checks and data",
      "Typed Facts"):
         "Checks no fact about nature is typed in the rooms' code.",
+    ("Gallery -- checks and data",
+     "Typed Numbers"):
+        "Checks every number in the served words comes from a row.",
     ("Gallery -- checks and data",
      "Gallery Maintenance Run -- live, AFTER a push"):
         "After a push: checks what palomasorrery.com actually serves.",

@@ -1,24 +1,23 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 18, 2026: the Sun's numbers pushed; the tooltips fixed.
-- Written at orrery f80a3ad and gallery 0be187e.
+Last updated: October 18, 2026, evening: Earth's numbers built; the numbers half done.
+- Written at orrery 05cb185 and gallery 10508df.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The Sun's numbers are built: the Alfven ranges, the Sun's rows and
->   its unlinked numbers done; the typed numbers done where a visitor
->   reads them first. Temperatures are in kelvin.
-> - GUI checkbox tooltips show line breaks, not `<br>` (L-191, tooltip strings).
+> - Earth's numbers are built (L-455, typed numbers): every number in
+>   Earth's words comes from a row with a source you can open.
+> - A new website check, Typed numbers, fails on any digit with no row.
+> - The deep Earth's temperatures come from two open papers, which
+>   Gemini 4 found; National Geographic's figures are gone.
 >
-> **Do next:** *L-455 (typed numbers in the website's words): Earth's
-> share, the same method, the numbers' last item.*
+> **Do next:** *run the two L-455 patches in order: the handoff,
+> section 1.*
 >
 > **Needs you now:**
-> - *Run patch_L191_2 (the tooltip fix); the orrery run; hover a Sun
->   and a Jupiter checkbox; commit; push.*
-> - After L-455: which of the Sun's drawings follow?
+> - Nothing else. The Sun's drawings are in your order (the road, 7).
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
@@ -32,8 +31,9 @@ Last updated: October 18, 2026: the Sun's numbers pushed; the tooltips fixed.
                dashboard (L-440) done; L-424, L-425, L-426 to come.
   6-6a.[done]  The typed facts, served and checked (Oct 16);
                orbital periods from JPL, orrery and website (Oct 14).
-  7.   [NOW]   *The Sun's slice (L-412): L-455 (Earth's share) ends the
-               numbers; then your drawings; Solar System features too.*
+  7.   [NOW]   *The Sun's slice (L-412): numbers done (Oct 18); next the
+               opening view, then the corona fade with the dust cloud;
+               the ice lines wait.* << moved this session
   8-8c.[done]  The served objects checked against JPL, missing periods
                fetched first, Earth's from the Earth-Moon barycentre; the
                Daily Run pulls before it builds, L-446 (Oct 14-16).
@@ -73,9 +73,6 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
   boundaries. A dashboard button is named what the run prints. (Oct 12)
 - The dashboard: a short line per card, the rest under "+ more"; the
   website checks in your six headings; only the orrery opens a console. (Oct 13)
-- Dashboard search: each word anywhere on a card, in any order. (Oct 14)
-- Pluto-Charon's barycentre: "not yet fetched"; its period waits for
-  the objects work. (Oct 14)
 - The order: finish Earth, then the Sun (fuzzy boundaries inside
   it), then the objects; no batch of objects first. (Oct 15)
 - A failed pull stops the Daily Run before the build: option A. (Oct 15)
@@ -87,12 +84,14 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
   its i panel. What a visitor reads: in provenance-discipline. (Oct 17)
 - Earth's talks wait; the Sun's numbers, then its drawings, then the objects. (Oct 17)
 - Temperatures in kelvin. The Sun's numbers end with L-455. (Oct 17)
+- Earth's deep temperatures from open papers; the mantle stays in two. (Oct 18)
+- The Sun's drawings: opening view, then corona fade with dust; ice lines wait. (Oct 18)
 
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261018T051313Z, ok; one rename needed a second try (gallery 0be187e).
-- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, f80a3ad).
+- Last cache build: 20261018T181330Z, ok; one rename needed a second try (gallery 10508df).
+- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, 05cb185).
   Whole tree: 280: orrery 116, Earth System 149, stars 13, utilities 2.
 - This page's date and the ledger's newest stamp: both Oct 18. Agree.
 
@@ -117,7 +116,8 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- *Next: L-455, then the Sun's drawings: `HANDOFF_L412_sun_numbers_20261017.md`*
+- *Next: the Sun's opening view (L-385): `HANDOFF_L455_earth_numbers_20261018.md` sec. 6*
+- Earth's words and Gemini 4: `WORDS_L455_*`, `REVIEW_L455_gemini4_*`
 - Earth's talk 2, later: `HANDOFF_earth_fade_build_20261017.md` sec. 5
 - The fade's sources and rows: `SOURCES_earth_fade_20261017.md`
 - The fades: `DESIGN_fades_rulings_20261017.md`. Round 1's rulings:

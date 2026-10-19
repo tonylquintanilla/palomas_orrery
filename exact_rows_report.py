@@ -134,6 +134,9 @@ Module updated: October 17, 2026 with Anthropic's Claude Opus 5.5
 -- eight printed, six read only to draw -- and the gallery's
 served-count printers counted as print lines. leo_inner's altitude
 entry removed: its row is measured since L-330.)
+Module updated: October 18, 2026 with Anthropic's Claude Opus 5.5
+(L-455: the inner low-orbit shell's linked upper edge, printed by
+withShellWords at its served count, is followed.)
 """
 
 import os
@@ -194,6 +197,12 @@ PRINTS = {
     # reached the entry and it read BROKEN.
     'earth_orbital_zones/leo_outer/altitude':
         ('gallery/feature_renderers.js', 'renderShellSet', 'km.altitudeKm'),
+    # L-455 (2026-10-18): the upper edge, linked on the inner edge's
+    # shell so its words can name both edges; withShellWords prints every
+    # linked number a shell's words name at its served count.
+    'earth_orbital_zones/leo_inner/upper':
+        ('gallery/feature_renderers.js', 'withShellWords',
+         'vals[k] = servedText(n)'),
     # L-371 (2026-10-17): the Sun room's exact rows, each printed by its
     # served count -- a shell's radius in solar radii, a far shell's in
     # AU, the streamer belt's cusp, the Oort shapes' edges.
