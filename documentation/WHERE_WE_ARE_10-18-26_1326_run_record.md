@@ -1562,6 +1562,6 @@ FILES WRITTEN THIS RUN
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
 3. **Move** both `patch_L385_4_close_20261019.py` and `patch_L385_5_answers_and_review_20261019.py` into `documentation\`.
-4. **Commit and push.** That includes Gemini 4's worksheet in `worksheets\`.
+4. **Commit and push.** That includes Gemini 4's worksheet in `worksheets\`. -- 7965a9cdf542dad7f36042c3b2ad212a70830fed
 
 The next session marks the three drafts, then builds the two fades: the corona as one feature with its streamer belt, and the dust cloud.
