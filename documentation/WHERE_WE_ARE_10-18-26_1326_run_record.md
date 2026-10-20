@@ -1318,8 +1318,10 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-6. **Move** all three `patch_L385_*` scripts into `documentation\`. Then commit everything in GitHub Desktop and push. That includes Gemini's worksheet. -- 
-7. **Reinstall** two skills in Settings > Skills: orrery-coding-conventions (1.11) and provenance-cross-check (1.1).
+6. **Move** all three `patch_L385_*` scripts into `documentation\`. Then commit everything in GitHub Desktop and push. That includes Gemini's worksheet. -- e2a3465b99d552bb0d2bd3cf1ecbd987ddbe482c
+
+7. **Reinstall** two skills in Settings > Skills: orrery-coding-conventions (1.11) and provenance-cross-check (1.1). -- done 
+
 8. **When you have time**, answer the fades' words list in place: `documentation\WORDS_L410_sun_fades_20261019.md`, revision 2. Section 3 has three choices: leave forward scattering out, keep the dust's origin sentence, and whether to include the corona's temperature.
 
 The handoff's section 1 has the same list, `documentation\HANDOFF_L385_opening_views_20261019.md`, once patch 3 has run.
