@@ -467,6 +467,21 @@ two long procedures, Report to the Figures You Have and the
 Review-Repair Protocol for Cross-Checked Annotations, and the field
 notes last. Every section's text is unchanged.
 
+Earlier: 2.29 | 2026-10-13, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 70202e3b. v2.29 (L-437) gives a module's domain one
+home and makes the whole-tree Tier-1 total travel with its split.
+Report Domain Classification is rewritten: the scanner reads each
+module's docstring Domain: tag through module_atlas.py's reader, the
+hand list MODULE_DOMAIN_MAP is gone, and a file with no tag the report
+knows is counted as unclassified and named, never defaulted into
+orrery. Scanner Mechanics gains a bullet: the whole-tree total prints
+as "281: orrery 116, Earth System 149, ..." on the console, in the
+audit and in the run history, where tier1_by_domain is the Tier-1
+split and domain_counts stays the all-tier count. Tony, 2026-10-12:
+"Can we separate this into meaningful groups, like orrery, earth
+science and stars in the checker report?"
+(Moved down 2026-10-20, when 2.32 made a fourth entry.)
+
 Earlier: 2.28 | 2026-10-09, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ aa46bb10. v2.28 (L-414) settles how the scanner reads
 a row, under Scanner Mechanics and The Goal State. A row in

@@ -14,6 +14,11 @@ Type: DESIGN (zero code). Written October 19, 2026 by Anthropic's
 Claude Opus 5.5, during the design talk. Nothing here is in
 constants_new.py yet; the fades' build writes the rows, and each
 row's wording comes to Tony as a list first.
+Status, October 20, 2026: BUILT. The rows are in constants_new.py
+since orrery fcd191e9 (patch_L410_5); the website half is
+patch_L410_7 (gallery). How the open points below were settled is in the last
+section, "Settled at the build". Record:
+HANDOFF_L410_sun_fades_build_20261020.md.
 
 Every source below was opened in this session, from an open copy.
 "Read" means the page was fetched and the figure found at the place
@@ -106,6 +111,23 @@ changes here, each re-opened before being written down:
   the dust overlap between them.
 - The outer-corona checkbox's new name, and every visitor-facing word,
   come to Tony as a list before they ship.
+
+## Settled at the build (2026-10-19 to 20)
+
+- The depletion zone: the dust thins linearly from 19 solar radii to
+  nothing at 5, between Lamy et al.'s two edges. A drawing choice,
+  approved by Tony at the build; the corona's dots and the dust's
+  overlap there, as above.
+- The cloud is centred on the Sun. Kelsall et al.'s small offset of
+  its centre (0.013 AU) is not drawn: approved.
+- The checkbox names: "Corona" (the fade and the streamer belt, one
+  checkbox) and "Zodiacal Dust Cloud (F-corona)". Every word went to
+  Tony as a list: WORDS_L410_sun_fades_20261019.md (revision 3),
+  WORDS_L410_build_list_20261019.md and
+  WORDS_L410_website_list_20261020.md, all marked.
+- The Alfven surface's row now cites Kasper et al. (2021) with the
+  paper's address on its Source line (Tony's note on item 3 of the
+  website list; provenance-discipline 2.32).
 
 ## 1. What the two lights are
 

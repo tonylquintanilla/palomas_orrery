@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.104 | October 19, 2026
+Tony Quintanilla, PE | Claude | v3.105 | October 20, 2026
 
-Cut from 6e0cfacd at https://github.com/tonylquintanilla/palomas_orrery
+Cut from fcd191e9 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -494,7 +494,7 @@ horizons-orbital-mechanics   1.8  Horizons queries, centers, frames, osculating
                                   (horizons_check.py, its period comparison and
                                   the data sheets' re-read), the period fetch
                                   before it (period_fetch.py)
-provenance-discipline        2.31 Scanner runs, audits, citations, constants,
+provenance-discipline        2.32 Scanner runs, audits, citations, constants,
                                   pre-push (Tier-1 = 0 on the active build
                                   path)
 provenance-cross-check       1.1  Cross-check worksheets and relay prompts,
@@ -1178,6 +1178,42 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.105 (October 20, 2026): No rule changed in this document. ONE
+skill bump, one version (L-410 with L-131, the Sun's two fades):
+provenance-discipline 2.31 -> 2.32. A CITATION'S ADDRESS GOES ON ITS
+SOURCE LINE.
+
+WHAT PROMPTED IT. The website half of the Sun's fades sent Tony the
+labels of the i panel's citations. He answered: "the citation should
+have a live url link." The Alfven surface's citation, Kasper and
+others (2021), carried its open address only on its Access line, which
+no visitor reads. Asked whether to add it: "we should add this to the
+skill."
+
+WHAT CHANGED. provenance-discipline's What a Visitor Reads, principle
+1, gains a paragraph: the open copy's address goes on the Source line
+itself, as a web address a visitor can open, a DOI as its doi.org
+address, a bibcode as its ADS page; an address on the Access line alone
+stays in the store. The 98 served citations with no web address on
+2026-10-20 are one ledger class (L-456), and whether a written address
+still answers is L-266. Its v2.29 entry moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copy reads
+provenance-discipline 2.32 before provenance work. This session
+confirmed its loaded copies read orrery-coding-conventions 1.11 and
+provenance-cross-check 1.1 (discharging v3.104's obligation),
+provenance-discipline 2.31, interactive-exhibit 1.17,
+agentic-pre-test 1.3, safe-file-editing 1.13 and
+ledger-and-session-records 1.21, as the manifest expected.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.102 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.104 (October 19, 2026): No rule changed in this document. TWO
 skill bumps, one version each (L-385, the first of the Sun's drawings,
 L-412; and L-410, the Sun's fades designed): orrery-coding-conventions
@@ -1260,60 +1296,6 @@ and agentic-pre-test 1.3, as the manifest expected.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.100 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.102 (October 17, 2026): No rule changed in this document. THREE
-skill bumps, one version each (Earth's round 1: L-452 with L-450,
-L-330, L-449): provenance-discipline 2.29 -> 2.30, interactive-exhibit
-1.16 -> 1.17, gallery-cache-builder 1.10 -> 1.11. FIVE PRINCIPLES FOR
-WHAT A VISITOR READS; THE BELTS ARE STORED DOTS; THE RUN RECORDS ARE
-KEPT AND CHECKED.
-
-WHAT PROMPTED IT. Earth's design talk of 2026-10-16 and this build's
-words list. Tony, 2026-10-16: "Wording that is relevant to the citation
-should be moved to the store. Notes should be dropped unless they are
-drawing choices." Tony, 2026-10-17, on the belts' render: "Yes, random.
-And it shows the density better too." On a claim a visitor reads whose
-source would have moved out of sight: "why drop the source?" On a lost
-run record: stop and name, as recommended.
-
-WHAT CHANGED. provenance-discipline gains What a Visitor Reads: the
-five principles Tony approved for every word a visitor reads -- a
-citation names what was read and where; the store's bookkeeping never
-goes in a Source line; a website note says only what was chosen for the
-drawing; a claim a visitor reads keeps a citation the visitor can see,
-and a drawn thing with no source is settled in the build that finds it;
-one number in one place, in plain words. Tony: "my decision based on
-principles should be implemented in the skill so that it is uniformly
-applied." interactive-exhibit narrows `source_note` to a drawing
-choice beside a citation: wording that bears on a citation lives in the
-store, on the row; words written for the store never go in its
-`# Source:` line, which a visitor reads word for word; and a claim a
-visitor reads keeps a citation the visitor can see. It also records
-Earth's radiation belts as the second stored drawing, dots scattered at
-random along dipole field lines, which the website draws as given.
-gallery-cache-builder records the run records rule (every record kept
-until L-449's cause is found, then a limit with each removal named) and
-the Daily Run's records check after the builder, which stops on a loss
-and names each record. Each skill's oldest resident entry moved to
-documentation/SKILL_HISTORIES.md, by the three-entry rule.
-
-THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
-that session. The next session confirms its loaded copies read
-interactive-exhibit 1.17 and gallery-cache-builder 1.11 before work
-that fires them, and provenance-discipline 2.30 before provenance
-work. This session confirmed its loaded copies read
-interactive-exhibit 1.16 (discharging v3.101's obligation),
-gallery-cache-builder 1.10, orrery-coding-conventions 1.10,
-provenance-discipline 2.29, safe-file-editing 1.13, agentic-pre-test
-1.3 and ledger-and-session-records 1.21, as the manifest expected.
-v3.99's obligation, horizons-orbital-mechanics 1.8, still travels: no
-work this session fired that skill.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.99 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

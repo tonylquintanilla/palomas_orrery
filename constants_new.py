@@ -3015,10 +3015,18 @@ ALFVEN_SURFACE_RADII = 19.7
 # Read+: the interval's start as 19.8; the text's 19.7 is kept.
 # Access: open, https://doi.org/10.1103/PhysRevLett.127.255101
 # Access+: (2026-10-04).
-# Source: Kasper et al. (2021), Phys. Rev. Lett. 127:255101 -- Parker Solar
-# Source+: Probe's first crossing, 28 April 2021 09:33 UT; the sub-Alfvenic
-# Source+: interval spans 19.7 to
-# Source+: 18.4 solar radii from the center of the Sun
+# Source: Kasper, J. C. et al. (2021), "Parker Solar Probe Enters the
+# Source+: Magnetically Dominated Solar Corona", Phys. Rev. Lett. 127:255101,
+# Source+: https://link.aps.org/doi/10.1103/PhysRevLett.127.255101 -- Parker
+# Source+: Solar Probe's first crossing, 28 April 2021 09:33 UT; the
+# Source+: sub-Alfvenic interval spans 19.7 to 18.4 solar radii from the
+# Source+: center of the Sun
+# Corrected: 2026-10-20 (L-410) -- the citation gains the title as printed
+# Corrected+: and the open address, which until then sat only on the Access
+# Corrected+: line, where no visitor reads it (Tony: "the citation should
+# Corrected+: have a live url link"). Title and address read 2026-10-20 at
+# Corrected+: link.aps.org, Claude Opus 5.5; the quoted figures are the
+# Corrected+: 2026-10-04 read's.
 # See: HELIOCENTRIC, from Sun center, like every other shell radius in this
 # See+: file. The widely quoted 18.8 R_sun is the ALTITUDE above the
 # See+: photosphere, stated by the NASA/JHUAPL release of 14 December 2021;

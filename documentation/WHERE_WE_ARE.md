@@ -1,27 +1,25 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 19, 2026, evening: the opening views done and pushed; the Sun's two fades designed.
-- Written at orrery 59e1b65 and gallery 4fc320f.
+Last updated: October 20, 2026: the Sun's two fades built; the orrery's half pushed, the website's ready to run.
+- Written at orrery fcd191e and gallery e8f6dd5.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The opening views (L-385) are done and pushed: every view opens on
->   the farthest thing drawn plus 20%, still and animated; your looks:
->   "perfect", twice.
-> - The Sun's fades are designed (L-410, L-131 (the dust cloud)): the
->   corona as one plasma fade, the dust as its own cloud of dots.
+> - The Sun's two fades are built (L-410 (the corona), L-131 (the dust
+>   cloud)). The orrery's half is pushed; your look: "looks great".
+> - The website's half is a patch, with your marks on its words list.
+> - Comet-by-comet Roche limits are on the ledger as an idea, not
+>   urgent and not in the Sun's slice (L-457 (comet Roche limits)).
 >
-> **Do next:** *the Sun's two fades (L-410, the corona; L-131, the
-> dust cloud), built from your answers on the words list.*
+> **Do next:** *run the two patches in the order the handoff gives
+> (`HANDOFF_L410_sun_fades_build_20261020.md`, section 1), then look
+> at the Sun room on your phone.*
 >
 > **Needs you now:**
-> - Fades' words answered; revision 3's three drafts (the corona and
->   streamer belt now one feature) are marked at the build's start.
-> - Gemini 4 checked the Sun's numbers: they hold. One sentence is off:
->   the chromosphere's base is near 4,400 kelvin, not 6,000. New words
->   for it come to you as a list (L-411, the Sun's typed numbers).
+> - The run order, in the handoff's section 1.
+> - Reinstall provenance-discipline (2.32) in Settings > Skills.
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
@@ -35,9 +33,11 @@ Last updated: October 19, 2026, evening: the opening views done and pushed; the 
                dashboard (L-440) done; L-424, L-425, L-426 to come.
   6-6a.[done]  The typed facts, served and checked (Oct 16);
                orbital periods from JPL, orrery and website (Oct 14).
-  7.   [NOW]   *The Sun's slice (L-412): numbers done (Oct 18); the
-               opening views done (Oct 19); next, the two fades as
-               designed; the ice lines wait.* << moved this session
+  7.   [NOW]   *The Sun's slice (L-412): numbers (Oct 18), opening
+               views (Oct 19), the two fades built (Oct 20), the
+               website's half waiting on your run; next session,
+               the Sun's 14 hover and tooltip pairs (L-191); then
+               L-456; the ice lines wait.* << moved this session
   8-8c.[done]  The served objects checked against JPL, missing periods
                fetched first, Earth's from the Earth-Moon barycentre; the
                Daily Run pulls before it builds, L-446 (Oct 14-16).
@@ -59,15 +59,8 @@ Last updated: October 19, 2026, evening: the opening views done and pushed; the 
 ## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings. A line leaves after a few weeks, once it is habit.
-- L-401 build 3 parked: fly-to buttons, parameters window when next
-  opened; animation with choosing a date; encounters, stage 12. (Oct 15)
 - A fade only where nature thins out; a range is a drawn choice and
   words; a moving edge gets its own device. Replaces the range idea. (Oct 17)
-- A served body's missing period is fetched by the run, before the
-  check, with the orrery's own code: orbit and period together. (Oct 14, 15)
-- The order: finish Earth, then the Sun (fuzzy boundaries inside
-  it), then the objects; no batch of objects first. (Oct 15)
-- A failed pull stops the Daily Run before the build: option A. (Oct 15)
 - A served number's citation is the orrery's, word for word, its wording
   in the store; the website's note only for a drawing choice. Grey type
   is blue. All run records kept for now; magnetosphere unturned. (Oct 16)
@@ -85,14 +78,17 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 - The Sun's fades: the corona and the dust are two drawings; one plasma
   fade out to the Alfven surface; dust dots, place for density and
   brightness for sunlight, stopping at 5.2 AU. (Oct 19)
+- A citation's web address goes on its own Source line (2.32). Next
+  session: the Sun's 14 hover and tooltip pairs; then L-456, the Sun's
+  and Earth's panels first. (Oct 20)
 
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261019T132346Z, ok, every rename on the first try (gallery 4fc320f).
-- Tier-1 on the gate path: 0, by name (the scanner at 59e1b65).
+- Last cache build: 20261020T134520Z, ok, every rename on the first try (gallery e8f6dd5).
+- Tier-1 on the gate path: 0, by name (the scanner at fcd191e).
   Whole tree: 280: orrery 116, Earth System 149, stars 13, utilities 2.
-- This page's date and the ledger's newest stamp: both Oct 19. Agree.
+- This page's date and the ledger's newest stamp: both Oct 20. Agree.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
@@ -106,6 +102,9 @@ At the next design talk:
 - Stored drawings for the other dot clouds: L-434 (stored drawings).
 - Earth's talk 2: L-356 with L-375 (the field's model and offset), and
   L-454 (a device for edges that move).
+- How often the live-link check runs: 30, 60 or 90 days (L-266 (cited
+  links)).
+- New words for the chromosphere's base, near 4,400 kelvin (L-411).
 
 Not urgent, in your order:
 1. Whether the editor also edits the Solar System room's rows.
@@ -114,9 +113,9 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- *Next: the fades; start from `HANDOFF_L385_opening_views_20261019.md`, sec. 6*
-- The Sun's fades, designed: `SOURCES_L410_sun_corona_dust_20261019.md`;
-  their words for your review: `WORDS_L410_sun_fades_20261019.md`
+- *Next: start from `HANDOFF_L410_sun_fades_build_20261020.md`, sec. 6*
+- The Sun's fades: `SOURCES_L410_sun_corona_dust_20261019.md`; their
+  words, marked: `WORDS_L410_*` (three lists)
 - Earth's words and Gemini 4: `WORDS_L455_*`, `REVIEW_L455_gemini4_*`
 - Earth's talk 2, later: `HANDOFF_earth_fade_build_20261017.md` sec. 5
 - The fade's sources and rows: `SOURCES_earth_fade_20261017.md`

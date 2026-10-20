@@ -137,6 +137,10 @@ entry removed: its row is measured since L-330.)
 Module updated: October 18, 2026 with Anthropic's Claude Opus 5.5
 (L-455: the inner low-orbit shell's linked upper edge, printed by
 withShellWords at its served count, is followed.)
+Module updated: October 20, 2026 with Anthropic's Claude Opus 5.5
+(L-410 with L-131: the inner and outer corona spheres' two entries
+removed. The corona is one fade of dots now, and its edges are not
+exact rows.)
 """
 
 import os
@@ -212,12 +216,9 @@ PRINTS = {
     'sun_structures/photosphere':
         ('gallery/feature_renderers.js', 'renderShellSet',
          'fmtServed(cfg.radius.value, sunF'),
-    'solar_atmosphere/inner_corona':
-        ('gallery/feature_renderers.js', 'renderShellSet',
-         'fmtServed(cfg.radius.value, sunF'),
-    'solar_atmosphere/outer_corona':
-        ('gallery/feature_renderers.js', 'renderShellSet',
-         'fmtServed(cfg.radius.value, sunF'),
+    # L-410 (2026-10-20): the inner and outer corona spheres' entries went
+    # with the spheres; the corona is one fade now, and its edges are not
+    # exact rows.
     'oort_cloud/inner_oort_limit':
         ('gallery/feature_renderers.js', 'renderShellSet',
          'servedText(cfg.radius) + " AU'),

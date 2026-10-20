@@ -1,13 +1,15 @@
 """
 solar_visualization_shells.py - Sun interior, corona, and heliosphere shell traces.
 
-The largest shell module: 14 sphere shells from core to gravitational
+The largest shell module: 12 sphere shells from core to gravitational
 influence boundary, plus custom geometry for the Hills Cloud (a tilted
 disk of dots along orbits, from hills_cloud_sampler.py), Oort Cloud
-clumpy distribution, and galactic tide shell. Includes the v3.18 solar
-shell refactor: single-info-marker pattern, n_points=20/25, and the
-three inner corona shells (Streamer Belt, Roche Limit, Alfven Surface)
-added for the MAPS comet coronal journey.
+clumpy distribution, galactic tide shell, the corona (a fade of dots
+from sun_corona_sampler.py, with the streamer band under its legend
+entry) and the zodiacal dust cloud (dots from zodiacal_dust_sampler.py).
+Includes the v3.18 solar shell refactor: single-info-marker pattern,
+n_points=20/25, and the inner corona shells (Streamer Belt, Roche Limit,
+Alfven Surface) added for the MAPS comet coronal journey.
 
 Consumed by: planet_visualization.py (routing dispatcher),
              palomas_orrery.py (hover_text_sun import)
@@ -15,6 +17,10 @@ Consumed by: planet_visualization.py (routing dispatcher),
 Role: rendering/shells
 Domain: orrery
 
+Module updated: October 20, 2026 with Anthropic's Claude Opus 5.5
+(L-410, Tony's marks on the website list: the corona's hover gives the
+Alfven surface's distance in km beside AU, from its row; the module
+description names the corona and the dust cloud.)
 Module updated: October 19, 2026 with Anthropic's Claude Opus 5.5
 (L-410 with L-131, the Sun's two fades: the inner and outer corona
 spheres became one fade of dots, create_sun_corona, placed by
@@ -1993,9 +1999,9 @@ corona_hover_words = (
     "The Sun's outer atmosphere, a very thin gas of electrons and ions.\n"
     "It has no edge. It thins out with height, and at the Alfven surface,\n"
     f"about {row_text('ALFVEN_SURFACE_RADII')} solar radii "
-    f"({row_text('ALFVEN_SURFACE_RADII', 'au')} AU) from the Sun's center, "
-    "it becomes\n"
-    "the solar wind.\n"
+    f"({row_text('ALFVEN_SURFACE_RADII', 'km', grouping=True)} km, "
+    f"{row_text('ALFVEN_SURFACE_RADII', 'au')} AU) from the Sun's\n"
+    "center, it becomes the solar wind.\n"
     "Each dot's place shows how dense the gas is; its brightness shows\n"
     "how much sunlight reaches it.\n"
     "The streamer belt, drawn with it, is the part of the corona where\n"

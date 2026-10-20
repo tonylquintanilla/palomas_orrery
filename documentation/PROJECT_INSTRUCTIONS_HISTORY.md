@@ -3036,6 +3036,63 @@ resident.
 (Moved down from the resident protocol on 2026-10-19 when
 v3.104 made a fourth entry.)
 
+v3.102 (October 17, 2026): No rule changed in this document. THREE
+skill bumps, one version each (Earth's round 1: L-452 with L-450,
+L-330, L-449): provenance-discipline 2.29 -> 2.30, interactive-exhibit
+1.16 -> 1.17, gallery-cache-builder 1.10 -> 1.11. FIVE PRINCIPLES FOR
+WHAT A VISITOR READS; THE BELTS ARE STORED DOTS; THE RUN RECORDS ARE
+KEPT AND CHECKED.
+
+WHAT PROMPTED IT. Earth's design talk of 2026-10-16 and this build's
+words list. Tony, 2026-10-16: "Wording that is relevant to the citation
+should be moved to the store. Notes should be dropped unless they are
+drawing choices." Tony, 2026-10-17, on the belts' render: "Yes, random.
+And it shows the density better too." On a claim a visitor reads whose
+source would have moved out of sight: "why drop the source?" On a lost
+run record: stop and name, as recommended.
+
+WHAT CHANGED. provenance-discipline gains What a Visitor Reads: the
+five principles Tony approved for every word a visitor reads -- a
+citation names what was read and where; the store's bookkeeping never
+goes in a Source line; a website note says only what was chosen for the
+drawing; a claim a visitor reads keeps a citation the visitor can see,
+and a drawn thing with no source is settled in the build that finds it;
+one number in one place, in plain words. Tony: "my decision based on
+principles should be implemented in the skill so that it is uniformly
+applied." interactive-exhibit narrows `source_note` to a drawing
+choice beside a citation: wording that bears on a citation lives in the
+store, on the row; words written for the store never go in its
+`# Source:` line, which a visitor reads word for word; and a claim a
+visitor reads keeps a citation the visitor can see. It also records
+Earth's radiation belts as the second stored drawing, dots scattered at
+random along dipole field lines, which the website draws as given.
+gallery-cache-builder records the run records rule (every record kept
+until L-449's cause is found, then a limit with each removal named) and
+the Daily Run's records check after the builder, which stops on a loss
+and names each record. Each skill's oldest resident entry moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copies read
+interactive-exhibit 1.17 and gallery-cache-builder 1.11 before work
+that fires them, and provenance-discipline 2.30 before provenance
+work. This session confirmed its loaded copies read
+interactive-exhibit 1.16 (discharging v3.101's obligation),
+gallery-cache-builder 1.10, orrery-coding-conventions 1.10,
+provenance-discipline 2.29, safe-file-editing 1.13, agentic-pre-test
+1.3 and ledger-and-session-records 1.21, as the manifest expected.
+v3.99's obligation, horizons-orbital-mechanics 1.8, still travels: no
+work this session fired that skill.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.99 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-20 when
+v3.105 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

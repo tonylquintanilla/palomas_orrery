@@ -6,9 +6,16 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0 on 
 
 # Provenance Discipline
 
-Read this file in 5 parts: lines 1-289, 290-607, 608-865, 866-1148, 1149-1380.
+Read this file in 6 parts: lines 1-284, 285-602, 603-860, 861-1075, 1076-1359, 1360-1388.
 
-Skill version: 2.31 | 2026-10-17, with Anthropic's Claude Opus 5.5, at
+Skill version: 2.32 | 2026-10-20, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ fcd191e9. v2.32 (L-410, the Sun's fades) adds to What
+a Visitor Reads, principle 1: the open copy's address goes on the
+Source line itself, as a web address a visitor can open, because the
+Source line is the one a visitor reads; an address on the row's Access
+line alone never reaches the i panel. Tony, 2026-10-20: "the citation
+should have a live url link", and "we should add this to the skill."
+Earlier: 2.31 | 2026-10-17, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 6f4fc9b0. v2.31 (L-411, the Sun's numbers) adds one
 paragraph to The Unit Field: a temperature is stored in kelvin, a
 source in degrees Celsius is converted exactly and the row says so,
@@ -25,22 +32,10 @@ visitor reads keeps a citation the visitor can see, and a drawn thing
 with no source is settled in the build that finds it; one number in
 one place, in plain words. Tony: "my decision based on principles
 should be implemented in the skill so that it is uniformly applied."
-Earlier: 2.29 | 2026-10-13, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 70202e3b. v2.29 (L-437) gives a module's domain one
-home and makes the whole-tree Tier-1 total travel with its split.
-Report Domain Classification is rewritten: the scanner reads each
-module's docstring Domain: tag through module_atlas.py's reader, the
-hand list MODULE_DOMAIN_MAP is gone, and a file with no tag the report
-knows is counted as unclassified and named, never defaulted into
-orrery. Scanner Mechanics gains a bullet: the whole-tree total prints
-as "281: orrery 116, Earth System 149, ..." on the console, in the
-audit and in the run history, where tier1_by_domain is the Tier-1
-split and domain_counts stays the all-tier count. Tony, 2026-10-12:
-"Can we separate this into meaningful groups, like orrery, earth
-science and stars in the checker report?"
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
 on 2026-10-05 and 2026-10-08 (L-418), 2026-10-09 (L-414),
-2026-10-13 (L-437) and 2026-10-17 (L-452 and L-411).
+2026-10-13 (L-437), 2026-10-17 (L-452 and L-411) and 2026-10-20
+(L-410).
 
 ## Contents
 
@@ -961,6 +956,19 @@ in the store, where only we read it.
    says there, and the address of an open copy where there is one (The
    Access Standard). A paper that corroborates but was not re-read goes
    on an `# Also:` line, never in the citation.
+   THE ADDRESS GOES ON THE SOURCE LINE ITSELF (v2.32), written as a web
+   address a visitor can open -- a DOI as `https://doi.org/...` or the
+   publisher's own `https://` page, a bibcode as its ADS page -- not
+   only as `doi:` or a bibcode. The `# Source:` line is the one the
+   visitor reads; an address on the row's `# Access:` line alone stays in
+   the store. The worked case: the Alfven surface's citation, Kasper et
+   al. (2021), carried its open address only on its Access line, so the
+   website's i panel printed the paper with no way to reach it (found
+   2026-10-20; Tony: "the citation should have a live url link"). On
+   that day 98 served citations carried no `https://` address, many with
+   a `doi:` only; they are one ledger class (L-456), settled as the
+   braid reaches each row. That a written address still answers is a
+   check of its own (L-266).
 2. **The store's bookkeeping never goes in `# Source:`.** "This row",
    "this file", "here", a figure count, a unit we converted, the
    history of a correction, our own check or arithmetic: each goes to

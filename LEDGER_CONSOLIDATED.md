@@ -526,6 +526,14 @@ Module updated: October 18, 2026, late, with Anthropic's Claude Opus 5.5
 on L-385; L-456 new, what a visitor reads, mostly for every room; a
 test-order lesson carried on L-351), built on e4d4a9e3 and gallery
 c5c05b52.
+Module updated: October 20, 2026 with Anthropic's Claude Opus 5.5
+(L-410 with L-131 built: the Sun's corona and dust cloud as fades,
+orrery and website; Tony's website marks onto L-456 and L-266; L-457
+new, Roche limits comet by comet; L-191's Sun strings 3 of 19, Tony's
+ruling to leave the rest for the next session, the fourteen pairs
+measured;
+provenance-discipline 2.32, the address on the Source line), built on
+fcd191e9 and gallery e8f6dd5e.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -743,14 +751,14 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*233 live items; 217 need attention (`!`); 166 RICE-scored; 216 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*234 live items; 218 need attention (`!`); 166 RICE-scored; 216 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-251 | The galactic centre button served a cached HTML for seven months | OPEN | 15.2 | 2026-08-25 |
 | ! | L-238 | radius_fraction > 1.0 assumes every shell is above the surface | OPEN | 14.2 | 2026-08-25 |
-| ! | L-266 | Nothing checks that a cited link still resolves | OPEN | 9.0 | 2026-08-30 |
+| ! | L-266 | Nothing checks that a cited link still resolves | OPEN | 9.0 | 2026-10-20 |
 | ! | L-185 | Source discipline for the assembler's own constants | OPEN | 8.1 | 2026-08-06 |
 | ! | L-340 | The exhibit store editor: what the first screenshot showed, and the Mode 5 pass | OPEN | 8.1 | 2026-09-22 |
 | ! | L-269 | A report names its items, not how many there are | OPEN | 6.0 | 2026-10-13 |
@@ -792,7 +800,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-254 | 76 dead sphere-shell builders, unmarked, across 12 modules | OPEN | 2.8 | 2026-09-02 |
 | ! | L-240 | Split declared drawing parameters from measured values | OPEN | 2.8 | 2026-08-25 |
 | ! | L-176 | Shell hover text: add illustrated dimensions (radius_fraction -> km) | OPEN | 2.8 | 2026-08-04 |
-| ! | L-191 | Display-text duplication across the shell modules | OPEN | 2.8 | 2026-10-18 |
+| ! | L-191 | Display-text duplication across the shell modules | OPEN | 2.8 | 2026-10-20 |
 | ! | L-244 | Sweep for replicated conversion factors as a class [Fable candidate] | OPEN | 2.8 | 2026-08-25 |
 | ! | L-323 | A figure in prose needs a home (the Note is not a store) | OPEN | 2.8 | 2026-09-12 |
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-10-07 |
@@ -826,7 +834,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-070 | Food Insecurity -- regional multi-country assembly (Sudan crisis shed) | OPEN | 0.9 | 2026-10-07 |
 | ! | L-319 | Focusing a smaller shell cuts larger lit shells flat at the frame's box | OPEN | 0.7 | 2026-09-10 |
 | ! | L-128 | Comet sublimation shell(s) -- solar-distance chemistry zones | OPEN | -- | 2026-10-18 |
-| ! | L-131 | Zodiacal dust solar shell | OPEN | -- | 2026-10-19 |
+| ! | L-131 | Zodiacal dust solar shell | OPEN | -- | 2026-10-20 |
 | ! | L-235 | Checks that cannot fail, gallery side [three instances] | OPEN | -- | 2026-10-08 |
 | ! | L-237 | Artifact 1's golden record is stale and needs re-cutting | OPEN | -- | 2026-10-10 |
 | ! | L-241 | Hills torus hover states the cloud bounds, not the drawn ring | OPEN | -- | 2026-10-08 |
@@ -873,9 +881,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-401 | The orrery's own distance hovers print by fixed widths, not by the errors the position earns (orrery, provenance) | OPEN | -- | 2026-10-15 |
 | ! | L-402 | Choose a date, or animate, within the range the drawn bodies are trusted for (gallery, exhibits) | OPEN | -- | 2026-10-01 |
 | ! | L-403 | Numbers in the object list's descriptions carry no source (orrery, provenance) | OPEN | -- | 2026-10-01 |
-| ! | L-410 | Fades where nature thins out: Earth's hydrogen designed, the outer corona next (orrery + gallery, the Sun and Earth) | OPEN | -- | 2026-10-19 |
-| ! | L-411 | The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-18 |
-| ! | L-412 | The Sun's slice: the order Tony confirmed (the Sun's slice) | OPEN | -- | 2026-10-18 |
+| ! | L-410 | Fades where nature thins out: Earth's hydrogen designed, the outer corona next (orrery + gallery, the Sun and Earth) | OPEN | -- | 2026-10-20 |
+| ! | L-411 | The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-20 |
+| ! | L-412 | The Sun's slice: the order Tony confirmed (the Sun's slice) | OPEN | -- | 2026-10-20 |
 | ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-10-18 |
 | ! | L-423 | The website's checks: the order Tony confirmed (checks, gallery) | OPEN | -- | 2026-10-16 |
 | ! | L-424 | The checker reports one word for two different cases (worksheet checker) | OPEN | -- | 2026-10-11 |
@@ -890,7 +898,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-443 | The rest of the orrery's objects come to the website as plotted positions (gallery + orrery, objects) | OPEN | -- | 2026-10-17 |
 | ! | L-449 | A cache build dropped the 82 build-run records it should have carried (gallery, cache builder) | OPEN | -- | 2026-10-17 |
 | ! | L-454 | A drawn device for edges that move: the magnetopause, the bow shock and their kind (orrery + gallery, design) | OPEN | -- | 2026-10-17 |
-| ! | L-456 | What a visitor reads, from Earth's Mode 5 look: body radii, sources as a list with live links, Celsius for Earth's surface and air (gallery + orrery) | OPEN | -- | 2026-10-18 |
+| ! | L-456 | What a visitor reads, from Earth's Mode 5 look: body radii, sources as a list with live links, Celsius for Earth's surface and air (gallery + orrery) | OPEN | -- | 2026-10-20 |
 
 ### B. Pending Action (Tony-side)
 
@@ -951,6 +959,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-130 | Restore six-elements + M0@J2000 plotting mode (educational, alt) | OPEN | 1.0 | 2026-07-17 |
 | ! | L-136 | Solar "scattered disk" shell | OPEN | 1.0 | 2026-10-11 |
 | ! | L-045 (#N14) | Miranda inclination tooltip | OPEN | 0.9 | 2026-06-23 |
+| ! | L-457 | Roche limits comet by comet (orrery + gallery, an idea) | OPEN | -- | 2026-10-20 |
 
 ### D.Feature-C -- Bucket C (architecture)
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1284,7 +1293,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
 #### [L-456] What a visitor reads, from Earth's Mode 5 look: body radii, sources as a list with live links, Celsius for Earth's surface and air (gallery + orrery)
-<!-- L:456 status:OPEN upd:2026-10-18 section:A flag: rice: -->
+<!-- L:456 status:OPEN upd:2026-10-20 section:A flag: rice: -->
 - **Recorded 2026-10-18** from Tony's Mode 5 look at the Earth room
   after L-455 was pushed (orrery e4d4a9e3, gallery c5c05b52), in his
   run record `documentation/WHERE_WE_ARE_10-18-26_1326_run_record.md`.
@@ -1335,6 +1344,28 @@ as an archive of the prioritization thinking -- no cleanup on close.
 **Gap:** after the opening views (L-385): the four Earth-radii lines
 (approved); the Celsius words for Earth's surface and air as a list for
 Tony; the panel's list and live links; interactive-exhibit's bump.
+- **2026-10-20, from the Sun's fades** (Tony's marks in
+  `documentation/WORDS_L410_website_list_20261020.md`). On the panel's
+  Source labels: "yes, and we should note that the citation should
+  have a live url link." On the ".; " that appears where the panel
+  joins a citation ending in a full stop: "yes, but we should do this
+  on a priority basis since the earth and sun slices are the
+  template." So the Sun's and Earth's panels come first when (3) and
+  (4) are built, and the list form removes the ".; " with the
+  semicolons: no separate fix.
+- **Found the same day:** 98 citations the website serves carry no
+  https address on their Source line, so a live link has nothing to
+  open (measured at gallery e8f6dd5e). One class; the fix is at each
+  row's Source line in the orrery, by the rule now in
+  provenance-discipline 2.32. The Alfven surface's is fixed.
+**Gap (replaces the one above, 2026-10-20):** after L-191's
+reconciliation of the Sun's fourteen hover and tooltip pairs (Tony,
+2026-10-20: "The session after this one reconciles them; L-456 comes
+after that."): the four Earth-radii lines
+(approved); the Celsius words for Earth's surface and air as a list for
+Tony; the panel's list and live links, the Sun's and Earth's rooms
+first; the 98 Source lines without an address, by room;
+interactive-exhibit's bump.
 **Ref:** gallery `gallery/feature_renderers.js`, `interactive.html`;
 provenance-discipline (The Unit Field); interactive-exhibit; L-455,
 L-421, L-385.
@@ -1484,7 +1515,7 @@ gallery `data/objects_config.json`.
 
 
 #### [L-410] Fades where nature thins out: Earth's hydrogen designed, the outer corona next (orrery + gallery, the Sun and Earth)
-<!-- L:410 status:OPEN upd:2026-10-19 section:A flag: rice: -->
+<!-- L:410 status:OPEN upd:2026-10-20 section:A flag: rice: -->
 - **Tony's idea, 2026-10-04**, deciding where the Roche limit is drawn:
   "What if we draw fuzzy boundaries instead of shells". It is Show the
   Envelope of the Unknowable as a drawing.
@@ -1673,13 +1704,58 @@ as designed: the plasma corona (this item) and the dust cloud (L-131),
 each written twice, Python and JavaScript, after Tony's answers on the
 words list. Open points for the build are in the sources record's last
 section. The Roche limit's band and L-241's wording are re-read then.
-**Ref:** L-131, L-241, L-371, L-454; `solar_visualization_shells.py`
+- **The Sun's two fades built, 2026-10-19 to 20** (Claude Opus 5.5;
+  record `documentation/HANDOFF_L410_sun_fades_build_20261020.md`).
+  Revision 3's three drafts were marked first ("yes, 1d confirmed";
+  the streamer belt and the Alfven surface reworded, "yes, clearer.
+  approved"); the build list in
+  `documentation/WORDS_L410_build_list_20261019.md` answered item by
+  item.
+  - The orrery, `patch_L410_5_sun_fades_orrery_20261020.py`, pushed
+    fcd191e9. The corona: 2,500 dots from the Sun's surface to the
+    Alfven surface, placed by the electron density of Mann et al.
+    (2023)'s solar wind model (`sun_corona_sampler.py`), each dot's
+    brightness the sunlight it receives. The streamer belt is drawn
+    with it: one checkbox, one legend entry, "Corona". The inner and
+    outer corona spheres are gone, with their strings. The dust cloud
+    (L-131) the same way. Eighteen rows; two stored drawings,
+    `data/drawings/sun_corona.json` and `zodiacal_dust.json`. Tony's
+    looks: "the colors and shapes look great", then "looks great".
+  - The website, `patch_L410_7_sun_fades_website_20261020.py`: the
+    stored fade drawn in solar radii and in AU as well as Earth radii,
+    the dust tilted to the ecliptic, the two corona spheres' entries
+    gone, the streamer belt switched with the corona. Its words in
+    `documentation/WORDS_L410_website_list_20261020.md`, marked by
+    Tony on 2026-10-20: the hover alone, "yes"; kilometres beside the
+    Alfven surface's distance on both sites, "yes"; the Source labels,
+    "yes", with live links wanted (L-456, L-266); the dust cloud's
+    Wikipedia link, "yes", and the corona's, "accepted" once its
+    reason was given (L-265's exception of 2026-09-02: NASA's only
+    corona page is written for children); the Roche limit's note
+    reworded to "the true limit could lie a little nearer the Sun or
+    farther out", and comet-by-comet limits recorded as L-457; ".; "
+    in joined citations, "yes, but we should do this on a priority
+    basis since the earth and sun slices are the template" (L-456).
+  - The Alfven surface's Source line now names Kasper et al. (2021)
+    with its address; its old wording held the address only where no
+    visitor reads it. Tony: "we should add this to the skill":
+    provenance-discipline 2.32.
+  - The Roche limit's band, re-read against the rule of 2026-10-17:
+    it is an edge known only as a range (kind 3), so it stays a drawn
+    choice with words; no fade. L-241's torus wording is not part of
+    this build and stays on L-241.
+**Gap (replaces the one above, 2026-10-20):** Tony's runs of the
+website half: the website patch, the Daily Run, the Sun room on the
+phone, the live check. Then L-410 and L-131 DONE. The kind-1 list's
+others (the upper atmosphere into the exosphere, the Oort cloud's outer
+reaches) wait for their rooms.
+**Ref:** L-131, L-241, L-371, L-454, L-457; `solar_visualization_shells.py`
 (`create_sun_streamer_band`, the fade to follow); gallery
 `gallery/feature_renderers.js`.
 
 
 #### [L-411] The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice)
-<!-- L:411 status:OPEN upd:2026-10-18 section:A flag: rice: -->
+<!-- L:411 status:OPEN upd:2026-10-20 section:A flag: rice: -->
 - **Recorded 2026-10-04** while building L-371. The orrery's Sun
   hovers, and some of the gallery's served words, still type numbers
   that no row holds. One row per CLASS (The Braid); the instances live
@@ -1783,9 +1859,20 @@ section. The Roche limit's band and L-241's wording are re-read then.
   (Bahcall et al. 2001, Table 5 and sec. 3.3) and for Parker's first
   crossing (Kasper et al. 2021: 28 April 2021, 19.7 to 18.4 solar radii
   from the centre). Re-opening caught Gemini misquoting the Fact Sheet.
+- **2026-10-20, in the Sun's fades (L-410):** Parker's first crossing
+  is now on the Alfven surface's row: its Source line names Kasper et
+  al. (2021) with the paper's address, and the 19.7 solar radii the
+  corona's hover prints is that row's value. Two places still name the
+  inner K-corona that is no longer drawn: the MAPS paragraph in
+  `solar_visualization_shells.py`, and the comet hovers in
+  `comet_visualization_shells.py`. Their words come to Tony with this
+  item's. One sentence waits for a source: "over the Sun's magnetic
+  equator", dropped from the streamer belt's words on Tony's ruling of
+  2026-10-19 ("drop for now but keep a breadcrumb"); the breadcrumb is
+  in `documentation/WORDS_L410_sun_fades_20261019.md`, item 1c.
 **Gap:** the held sentences first, from Gemini 4's return (review
-above): rows for the core's centre, the convection zone's base and
-Parker's first crossing; new words for the chromosphere's temperature;
+above): rows for the core's centre and the convection zone's base
+(Parker's first crossing is done, above); new words for the chromosphere's temperature;
 the chromosphere's name from its row. Then groups T, M and C, the three
 leftovers above, one shell at a time. Not part of the Sun's
 numbers half, which ends with L-455.
@@ -2321,7 +2408,7 @@ above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
 `documentation/HANDOFF_decisions_20261008.md`.
 
 #### [L-412] The Sun's slice: the order Tony confirmed (the Sun's slice)
-<!-- L:412 status:OPEN upd:2026-10-18 section:A flag: rice: -->
+<!-- L:412 status:OPEN upd:2026-10-20 section:A flag: rice: -->
 - **Confirmed by Tony, 2026-10-04**, after a sweep of the open items that
   touch the Sun room. Smallest and most settled first:
   1. L-209, the Alfven surface look -- DONE 2026-10-04.
@@ -2429,7 +2516,19 @@ above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
   item 9 (L-410's fade of the outer corona with L-131, the dust
   cloud; L-241 inside it); item 10 (L-128, the ice lines) waits
   behind L-443.
-**Gap:** the drawings in Tony's order: L-385 (now every view's
+- **2026-10-20, item 9 built:** L-410 with L-131, the corona and the
+  dust cloud, orrery pushed at fcd191e9, the website half waiting on
+  Tony's runs (`documentation/HANDOFF_L410_sun_fades_build_20261020.md`).
+  L-191's Sun strings: the three for the corona spheres and the
+  streamer belt went with the spheres, and the two new strings are
+  written in newlines; the other 16 are not done. The streamer belt's
+  and the clumps' eyeballed numbers were not taken up.
+**Gap (replaces the one above, 2026-10-20):** the website half of
+L-410 with L-131 (Tony's runs); the next session reconciles the Sun's
+fourteen hover and tooltip pairs (L-191; Tony's ruling of 2026-10-20),
+and L-456 comes after that; the streamer belt's and the clumps'
+eyeballed numbers; L-241; then L-443, with L-128 after it.
+**Gap (2026-10-18, superseded above):** the drawings in Tony's order: L-385 (now every view's
 opening, the Sun first, then Earth; 2026-10-18), then L-410 with L-131
 and L-241; the streamer belt's and the clumps' eyeballed numbers with
 them, and L-191's 19 Sun strings when that file is open; then L-443,
@@ -5998,7 +6097,7 @@ stated above, now with a count. See L-181, L-240.
 and the divergence check); L-156 (Batch 2 worksheet).
 
 #### [L-191] Display-text duplication across the shell modules
-<!-- L:191 status:OPEN upd:2026-10-18 section:A flag: rice:3/4/70/3 -->
+<!-- L:191 status:OPEN upd:2026-10-20 section:A flag: rice:3/4/70/3 -->
 - **Surfaced by Tony's Mode 5 pass, 2026-08-07.** Literal `<br>` tags
   visible in the Tkinter checkbox tooltips for the solar shells. Tony
   then spot-checked the asteroid belt and Earth tooltips, found them
@@ -6188,6 +6287,46 @@ and the divergence check); L-156 (Batch 2 worksheet).
   conventions, Canonical Text Format): a backstop at the Tk boundary,
   not a licence to write in `<br>`; the skill's sentence that a Tk
   label shows `<br>` literally is carried on L-351 for its next bump.
+- **2026-10-20, in the Sun's fades (L-410):** three of the Sun's 19
+  went with the corona spheres: `inner_corona_info`,
+  `outer_corona_info` and `streamer_belt_info`, with the two spheres'
+  `_info_hover` twins. The corona's and the dust cloud's new strings
+  are written in newlines. 16 of the 19 remain, with 12 twins.
+- **Tony's ruling, 2026-10-20, from the coordination session:** "do not
+  touch the Sun's sixteen tooltip strings tonight." The session after
+  the Sun's fades reconciles them; L-456 comes after that. The finding
+  he gave to record: the Sun's fourteen `_info_hover` twins are live
+  (`shell_configs.py` and `planet_visualization.py` read them for the
+  plot's hovers; the `_info` strings feed the checkbox tooltips); "all
+  fourteen pairs now differ in content, not only in format"; and "the
+  Alfven surface's hover still types the latitude ranges L-228 sourced
+  into rows on the tooltip side". The fourteen: gravitational_influence,
+  outer_oort, inner_oort, inner_limit_oort, solar_wind,
+  termination_shock, roche_limit, alfven_surface, chromosphere,
+  photosphere, radiative_zone, core, corona, zodiacal_dust.
+- **Measured at fcd191e9 the same day** (Claude Opus 5.5, each pair's
+  two strings compared with `<br>`, newlines and spacing set aside):
+  - All fourteen twins are live: confirmed. `shell_configs.py` reads
+    twelve (all but the corona's and the dust cloud's),
+    `planet_visualization.py` imports ten, and the corona's and the
+    dust cloud's are read by their own builders in
+    `solar_visualization_shells.py`.
+  - FIVE pairs differ in content: gravitational_influence,
+    roche_limit, alfven_surface, corona, zodiacal_dust. The corona's
+    and the dust cloud's differ by design: the hover is Tony's approved
+    hover words (1c and 2c), the tooltip those words with the panel's.
+  - NINE pairs are byte-identical: outer_oort, inner_oort,
+    inner_limit_oort, solar_wind, termination_shock, chromosphere,
+    photosphere, radiative_zone, core. Two copies of the same text,
+    both written in `<br>`, each typed out in full.
+  - The Alfven surface's hover types no latitude range. What it lacks
+    is the range itself: the tooltip prints "between about 10 and 20
+    solar radii" from L-228's rows (`ALFVEN_SURFACE_RANGE_LOW_RADII`,
+    `_HIGH_RADII`); the hover leaves it out. Both carry Cranmer et al.
+    (2023)'s sentence on where it lies farthest out. The hover's own
+    typed numbers are "~5 hours", "300-800 km/s", "1-2 million K" and
+    "~20 hours".
+  These two differences from the finding as given went to Tony.
 **Gap (rewritten 2026-10-18):** (0) done, by Tony's look. (1a) BUILT:
 the tooltip class shows `<br>` as a line break; Tony's look at a Sun
 and a Jupiter checkbox closes it. (1b) The structural fix, per slice:
@@ -7910,7 +8049,7 @@ status pass; (b) and (c) are gated on it.
 resident protocol Part 3.
 
 #### [L-266] Nothing checks that a cited link still resolves
-<!-- L:266 status:OPEN upd:2026-08-30 section:A flag: rice:5/4/90/2 -->
+<!-- L:266 status:OPEN upd:2026-10-20 section:A flag: rice:5/4/90/2 -->
 - **Raised by Tony, 2026-08-30**, on being told that link rot would be
   invisible: "That would be a helpful check from the scanner: is named
   link dead."
@@ -7958,9 +8097,17 @@ resident protocol Part 3.
   pointer; nothing checks the source text, and a URL there is in the
   same position as the roughly 470 in the orrery's Python. Whatever
   shape this item takes should read that file as a second corpus.
+- **Tony, 2026-10-20**, on the Sun's fades' website list
+  (`documentation/WORDS_L410_website_list_20261020.md`, item 3): "we
+  should add a 30-day or 60-day or 90-day live link checker to the
+  maintenance run similar to the cache checker. another session
+  created a ledger item too." This is that item. His words point to
+  shape (b): a check in the maintenance run, on a schedule of its own
+  rather than every run, the way the cache's age is checked. The
+  interval is his to choose.
 - **Ref:** L-265 (what makes it urgent); L-236 (the gallery runner and
   its three-state convention); L-235 (checks that cannot fail,
-  gallery side); provenance-discipline 2.8, The Access Standard --
+  gallery side); L-456 (the live links); provenance-discipline 2.8, The Access Standard --
   reachability is already a stated precondition of a citation, with
   nothing enforcing it.
 
@@ -25262,7 +25409,31 @@ sublimation distances, single vs. multi-shell, data source).
 - **2026-10-18 (Tony):** confirmed: the ice lines wait, after the
   opening view and the corona fade with the dust cloud ("Yes in that
   order"), behind the objects (L-443).
-**Ref:** to_do_ideas.md (pre-ledger, 4/16/26).
+**Ref:** to_do_ideas.md (pre-ledger, 4/16/26); L-457.
+
+#### [L-457] Roche limits comet by comet (orrery + gallery, an idea)
+<!-- L:457 status:OPEN upd:2026-10-20 section:D.Feature-B flag: rice: -->
+- **Tony's idea, 2026-10-20**, on the Roche limit's note in the Sun's
+  fades' website list
+  (`documentation/WORDS_L410_website_list_20261020.md`, item 5):
+  "something to think about: whether specific comets could also draw
+  their specific Roche limits."
+- **What it needs.** A Roche limit depends on the comet's own density.
+  Density is measured for only a few comets (Rosetta's for 67P, for
+  example), and the orrery holds no comet densities today. So each
+  comet drawn this way needs its own sourced density row first.
+- **Tony, the same day:** "this may not be practical except for those
+  few cases as an exception." And: "not an urgent idea. it does not
+  have to be carried in the sun slice."
+- **Until then** the Sun's one Roche limit stays drawn at 3.45 solar
+  radii (L-371), its note saying the true limit could lie a little
+  nearer the Sun or farther out.
+**Gap:** not scoped: a design talk when the comets' rooms come
+(encounters, the road's stage 12), starting with which comets have a
+measured density.
+**Ref:** L-128 (the comet ice lines, its neighbour here); L-371 (the
+Sun's Roche limit); L-410 (the rule that a range is a drawn choice
+and words).
 
 #### [L-130] Restore six-elements + M0@J2000 plotting mode (educational, alt)
 <!-- L:130 status:OPEN upd:2026-07-17 section:D.Feature-B flag: rice:2/2/50/2 -->
@@ -25277,7 +25448,7 @@ from git history or needs rebuilding; decide where it lives.
 **Ref:** to_do_ideas.md (pre-ledger, 4/16/26).
 
 #### [L-131] Zodiacal dust solar shell
-<!-- L:131 status:OPEN upd:2026-10-19 section:A flag: rice: -->
+<!-- L:131 status:OPEN upd:2026-10-20 section:A flag: rice: -->
 - **Note (2026-10-08):** RICE struck (was 2/2/50/2). This item is item 9 of L-412 (the Sun's slice),
   and an item in an ordered list carries no score; the list's
   order is its priority (Tony's rule of 2026-10-07, L-412).
@@ -25313,6 +25484,20 @@ from git history or needs rebuilding; decide where it lives.
     sums: declared, the hover saying the cloud has no edge. "Confirmed."
 **Gap (replaces "not scoped", 2026-10-19):** build as designed, with
 L-410's corona fade. Open points in the sources record.
+- **Built 2026-10-19 to 20, with L-410** (record
+  `documentation/HANDOFF_L410_sun_fades_build_20261020.md`). 3,000
+  dots by Kelsall et al. (1998)'s smooth cloud
+  (`zodiacal_dust_sampler.py`), tilted 2.03 degrees with its node at
+  77.7 degrees, thinning linearly from 19 solar radii to nothing at 5,
+  stopping at 5.2 AU; brightness the sunlight each dot receives. Two
+  method choices Tony approved at the build: the linear thinning
+  between Lamy et al.'s two edges, and the cloud centred on the Sun
+  (Kelsall's small offset not drawn). The checkbox reads "Zodiacal
+  Dust Cloud (F-corona)". Orrery pushed fcd191e9; Tony: "the colors
+  and shapes look great". The website half is in the same patch as
+  L-410's.
+**Gap (replaces the one above, 2026-10-20):** Tony's runs of the
+website half, with L-410's; then DONE.
 **Ref:** to_do_ideas.md (pre-ledger, 4/17/26); L-410.
 
 #### [L-136] Solar "scattered disk" shell
