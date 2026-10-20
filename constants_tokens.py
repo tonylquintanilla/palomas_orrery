@@ -103,6 +103,9 @@ Module updated: October 18, 2026 with Anthropic's Claude Opus 5.5
 (L-455: min and s_per_min, for the low-orbit periods and S_PER_MINUTE;
 percent and count, for the atmosphere's mass share and the satellite
 counts.)
+Module updated: October 20, 2026 with Anthropic's Claude Opus 5.5
+(L-410: j_per_k, kg, per_s, mean_molecular_weight and fan_shape_parameter,
+for the corona's density model and the dust cloud's shape.)
 """
 
 TOKENS = {
@@ -318,6 +321,37 @@ TOKENS = {
         "dimension": "1 / cm3",
         "defining_constant": None,
         "meaning": "atoms per cubic centimetre, a number density",
+    },
+    # L-410 (2026-10-19): five tokens for the corona's density model
+    # and the zodiacal dust cloud's shape.
+    "j_per_k": {
+        "dimension": "J / K",
+        "defining_constant": None,
+        "meaning": "joules per kelvin, the Boltzmann constant's unit",
+    },
+    "kg": {
+        "dimension": "kg",
+        "defining_constant": None,
+        "meaning": "kilograms",
+    },
+    "per_s": {
+        "dimension": "1 / s",
+        "defining_constant": None,
+        "meaning": ("per second: a number of particles leaving through "
+                    "each steradian every second"),
+    },
+    "mean_molecular_weight": {
+        "dimension": "named number",
+        "defining_constant": None,
+        "meaning": ("the mean mass of a gas particle in proton masses, "
+                    "which sets a gas's sound speed"),
+    },
+    "fan_shape_parameter": {
+        "dimension": "named number",
+        "defining_constant": None,
+        "meaning": ("one of the three pure numbers (beta, gamma, mu) that "
+                    "shape Kelsall et al.'s widened fan: how the dust "
+                    "thins above and below the cloud's middle plane"),
     },
     "falloff_exponent": {
         "dimension": "named number",

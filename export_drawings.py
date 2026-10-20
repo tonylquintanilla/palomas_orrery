@@ -35,8 +35,8 @@ data/drawings/<name>.json for each entry in DRAWINGS:
     what          one sentence on what the dots are
     made_by       the function that places the dots
     frame         the frame the coordinates are in
-    unit          "au" (the Hills cloud) or "r_earth" (the belts, the
-                  exosphere)
+    unit          "au" (the Hills cloud, the dust cloud), "r_earth" (the
+                  belts, the exosphere) or "r_sun" (the corona)
     rounding      how each coordinate was rounded, and why that is safe
     settings      the drawing's settings: orbits, dots per orbit, seed
     rows          the constants_new.py rows the dots are placed from
@@ -52,7 +52,9 @@ data/drawings/<name>.json for each entry in DRAWINGS:
     x, y, z       the dots, one list each, whole AU (the Hills cloud) or
                   hundredths of an Earth radius (the belts)
     w, belt       each dot's weight, 0 to 1 (the belts: from the declared
-                  fade; the exosphere: from the density at its distance),
+                  fade; the exosphere: from the density at its distance;
+                  the corona and the dust cloud: from the sunlight at its
+                  distance),
                   and (the belts only) which belt it is in, 0 inner,
                   1 outer
 
@@ -86,6 +88,11 @@ Hills cloud's file is unchanged byte for byte.)
 Module updated: October 17, 2026 with Anthropic's Claude Opus 5.5 (L-410:
 the third stored drawing, Earth's hydrogen exosphere, from
 earth_exosphere_sampler.py, in Earth radii, with each dot's weight.)
+Module updated: October 19, 2026 with Anthropic's Claude Opus 5.5 (L-410
+with L-131: the fourth and fifth stored drawings, the Sun's corona from
+sun_corona_sampler.py, in solar radii, and the zodiacal dust cloud from
+zodiacal_dust_sampler.py, in AU in the ecliptic frame, each dot with its
+weight, the sunlight reaching it.)
 """
 
 import hashlib
@@ -197,12 +204,79 @@ def _earth_exosphere():
     }
 
 
+def _sun_corona():
+    """The Sun's corona's file content, as a dict (L-410, 2026-10-19)."""
+    import sun_corona_sampler as scs
+    rows = scs.rows_from_store()
+    dots = scs.drawn_corona(rows)
+    return {
+        "schema": SCHEMA,
+        "drawing": "sun_corona",
+        "what": ("The Sun's corona as dots from the Sun's surface to the "
+                 "Alfven surface. A dot's place follows the electron "
+                 "density of Mann et al. (2023)'s solar wind model; its "
+                 "weight, the sunlight reaching it, which falls with the "
+                 "square of distance. Drawn round, the model's long-term "
+                 "average; only the shape of the thinning is drawn."),
+        "made_by": "sun_corona_sampler.drawn_corona()",
+        "frame": ("centred on the Sun. The drawing is round, so no frame "
+                  "turn changes what a visitor sees."),
+        "unit": "r_sun",
+        "rounding": ("each coordinate to 0.001 solar radii, about 700 km, "
+                     "and each weight to 0.01: a drawing, not a "
+                     "measurement"),
+        "settings": dots["settings"],
+        "rows": list(scs.ROW_NAMES),
+        "rows_sha256": rows_sha256(rows),
+        "dots": len(dots["x"]),
+        "x": [round(v, 3) for v in dots["x"]],
+        "y": [round(v, 3) for v in dots["y"]],
+        "z": [round(v, 3) for v in dots["z"]],
+        "w": [round(v, 2) for v in dots["w"]],
+    }
+
+
+def _zodiacal_dust():
+    """The zodiacal dust cloud's file content, as a dict (L-131,
+    2026-10-19)."""
+    import zodiacal_dust_sampler as zds
+    rows = zds.rows_from_store()
+    dots = zds.drawn_dust(rows)
+    return {
+        "schema": SCHEMA,
+        "drawing": "zodiacal_dust",
+        "what": ("The zodiacal dust cloud as dots from the edge of the "
+                 "dust-free zone to 5.2 AU. A dot's place follows the "
+                 "smooth cloud of Kelsall et al. (1998)'s COBE model, "
+                 "flattened toward a middle plane tilted to the ecliptic, "
+                 "thinning near the Sun between the edges Lamy et al. "
+                 "(2022) give; its weight, the sunlight reaching it, which "
+                 "falls with the square of distance."),
+        "made_by": "zodiacal_dust_sampler.drawn_dust()",
+        "frame": ("ecliptic and equinox of J2000, centred on the Sun, the "
+                  "orrery's drawing frame"),
+        "unit": "au",
+        "rounding": ("each coordinate to 0.0001 AU, about 15,000 km, and "
+                     "each weight to 0.01: a drawing, not a measurement"),
+        "settings": dots["settings"],
+        "rows": list(zds.ROW_NAMES),
+        "rows_sha256": rows_sha256(rows),
+        "dots": len(dots["x"]),
+        "x": [round(v, 4) for v in dots["x"]],
+        "y": [round(v, 4) for v in dots["y"]],
+        "z": [round(v, 4) for v in dots["z"]],
+        "w": [round(v, 2) for v in dots["w"]],
+    }
+
+
 # name -> function returning the file's content. A new stored drawing
 # is one line here, and test_drawings_export.py checks every entry.
 DRAWINGS = {
     "hills_cloud": _hills_cloud,
     "van_allen_belts": _van_allen_belts,
     "earth_exosphere": _earth_exosphere,
+    "sun_corona": _sun_corona,
+    "zodiacal_dust": _zodiacal_dust,
 }
 
 # The lists a drawing may carry, one line each in the file, in this

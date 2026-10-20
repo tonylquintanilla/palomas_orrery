@@ -19,6 +19,8 @@ Module updated: October 12, 2026 with Anthropic's Claude Opus 5.5 (L-401,
 build 1: fetch_trajectory marks a frame it interpolated, or copied from
 another date, 'not_fetched_for_date', so the body hover states no
 accuracy for it.)
+Module updated: October 20, 2026 with Anthropic's Claude Opus 5.5 (L-410:
+the two corona spheres' tooltip strings are no longer imported.)
 """
 #Paloma's Orrery - Solar System Visualization Tool
 
@@ -164,8 +166,6 @@ from solar_visualization_shells import (
     inner_limit_oort_info,
     solar_wind_info,
     termination_shock_info,
-    outer_corona_info,
-    inner_corona_info,
     chromosphere_info,
     photosphere_info,
     radiative_zone_info,

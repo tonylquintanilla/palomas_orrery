@@ -174,7 +174,9 @@ ROLE_MAP = {
     'pole_frames':                            'computation',
     'position_accuracy':                      'computation',
     'simbad_manager':                         'computation',
+    'sun_corona_sampler':                     'computation',
     'van_allen_belt_sampler':                 'computation',
+    'zodiacal_dust_sampler':                  'computation',
 
     # data
     'celestial_objects':                      'data',

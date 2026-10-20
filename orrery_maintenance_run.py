@@ -246,6 +246,9 @@ Drawings export watches data/drawings/van_allen_belts.json too, the
 radiation belts' dots, so the summary names it when it is written.)
 Module updated: October 17, 2026 with Anthropic's Claude Opus 5.5 (L-410:
 and data/drawings/earth_exosphere.json, Earth's hydrogen exosphere.)
+Module updated: October 20, 2026 with Anthropic's Claude Opus 5.5 (L-410
+with L-131: and data/drawings/sun_corona.json and zodiacal_dust.json, the
+Sun's corona and the zodiacal dust cloud.)
 """
 
 import hashlib
@@ -306,7 +309,9 @@ GENERATORS = [
     ('Drawings export', ['export_drawings.py'],
      ['data/drawings/hills_cloud.json',
       'data/drawings/van_allen_belts.json',
-      'data/drawings/earth_exosphere.json']),
+      'data/drawings/earth_exosphere.json',
+      'data/drawings/sun_corona.json',
+      'data/drawings/zodiacal_dust.json']),
     ('Module atlas',    ['module_atlas.py'],
      ['MODULE_ATLAS.md', 'MODULE_INDEX.md']),
     ('Data inventory',  ['data_inventory.py'],

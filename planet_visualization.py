@@ -34,6 +34,9 @@ Module updated: October 19, 2026 with Anthropic's Claude Opus 5.5
 recorded per body in fig._body_shell_reach_au; the center body's rotation
 axis and dipole cone end just past that shell; low orbit and the other
 custom shells count as shells. Tony's rulings, 2026-10-18 and 2026-10-19.)
+Module updated: October 20, 2026 with Anthropic's Claude Opus 5.5
+(L-410: the two corona spheres' builders and hover strings are no longer
+imported; they are gone.)
 
 Role: rendering
 Domain: orrery
@@ -59,8 +62,6 @@ from solar_visualization_shells import (
     inner_limit_oort_info_hover,
     solar_wind_info_hover,
     termination_shock_info_hover,
-    outer_corona_info_hover,
-    inner_corona_info_hover,
     chromosphere_info_hover,
     photosphere_info_hover,
     radiative_zone_info_hover,
@@ -95,10 +96,8 @@ from solar_visualization_shells import (create_sun_core_shell,
                                         create_sun_radiative_shell,
                                         create_sun_photosphere_shell,
                                         create_sun_chromosphere_shell,
-                                        create_sun_inner_corona_shell,
                                         create_sun_roche_limit_shell,
-                                        create_sun_alfven_surface_shell,                                        
-                                        create_sun_outer_corona_shell,
+                                        create_sun_alfven_surface_shell,
                                         create_sun_termination_shock_shell,
                                         create_sun_heliopause_shell,
 

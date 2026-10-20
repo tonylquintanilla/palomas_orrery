@@ -104,6 +104,12 @@ every view, still and animated, opens on the farthest thing drawn, shell
 or orbit, with that one margin at every scale; with nothing orbiting,
 the shells alone size the view, not the 1 AU default, and the
 animation's Sun arrow is clamped to that view. Tony, 2026-10-19.)
+Module updated: October 20, 2026 with Anthropic's Claude Opus 5.5 (L-410
+with L-131: one "-- Corona" checkbox, sun_corona_var, for the corona's
+fade and its streamer belt, replacing Inner Corona, Streamer Belt and
+Extended Corona; and "-- Zodiacal Dust Cloud (F-corona)",
+sun_zodiacal_dust_var. The animation's static-only legend placeholders
+are one per checkbox. Tony's approved words, 2026-10-19 and 2026-10-20.)
 
 """
 #Paloma's Orrery - Solar System Visualization Tool
@@ -309,9 +315,8 @@ from solar_visualization_shells import (
 
     solar_wind_info,
     termination_shock_info,
-    outer_corona_info,
-    inner_corona_info,
-    streamer_belt_info,
+    corona_info,
+    zodiacal_dust_info,
     roche_limit_info,
     alfven_surface_info,
     chromosphere_info,
@@ -2840,7 +2845,13 @@ def add_static_only_legend_placeholders(fig, center_object_name):
 
     n_before = len(fig.data)
     if center_object_name != 'Sun':
+        # L-410 (2026-10-19): the corona's two drawings share one checkbox
+        # ('corona' and 'streamer_belt'), so one placeholder per checkbox.
+        _seen_vars = set()
         for key, var in sun_shell_vars.items():
+            if id(var) in _seen_vars:
+                continue
+            _seen_vars.add(id(var))
             if var.get() == 1 and not _engine_animates('Sun', key):
                 _placeholder('Sun', key)
     for body, shell_vars in get_planet_shell_vars_map().items():
@@ -2986,9 +2997,11 @@ sun_core_var = tk.IntVar(value=0)
 sun_radiative_var = tk.IntVar(value=0)
 sun_photosphere_var = tk.IntVar(value=0)
 sun_chromosphere_var = tk.IntVar(value=0)
-sun_inner_corona_var = tk.IntVar(value=0)
-sun_outer_corona_var = tk.IntVar(value=0)
-sun_streamer_belt_var  = tk.IntVar(value=0)
+# L-410 (2026-10-19): one checkbox for the corona's fade and its streamer
+# belt, which replaces Inner Corona, Extended Corona and Streamer Belt;
+# and one for the zodiacal dust cloud (L-131).
+sun_corona_var = tk.IntVar(value=0)
+sun_zodiacal_dust_var = tk.IntVar(value=0)
 sun_roche_limit_var    = tk.IntVar(value=0)
 sun_alfven_surface_var = tk.IntVar(value=0)
 sun_termination_shock_var = tk.IntVar(value=0)
@@ -3508,9 +3521,10 @@ sun_shell_vars = {
 
     'main_belt': asteroid_belt_main_var,
 
-    'outer_corona': sun_outer_corona_var,
-    'inner_corona': sun_inner_corona_var,
-    'streamer_belt':  sun_streamer_belt_var,
+    'zodiacal_dust': sun_zodiacal_dust_var,
+    # L-410: the corona's two drawings share one checkbox.
+    'corona': sun_corona_var,
+    'streamer_belt':  sun_corona_var,
     'roche_limit':    sun_roche_limit_var,
     'alfven_surface': sun_alfven_surface_var,    
     'chromosphere': sun_chromosphere_var,
@@ -8720,9 +8734,8 @@ def toggle_all_shells():
     sun_radiative_var.set(state)
     sun_photosphere_var.set(state)
     sun_chromosphere_var.set(state)
-    sun_inner_corona_var.set(state)
-    sun_outer_corona_var.set(state)
-    sun_streamer_belt_var.set(state)
+    sun_corona_var.set(state)
+    sun_zodiacal_dust_var.set(state)
     sun_roche_limit_var.set(state)
     sun_alfven_surface_var.set(state)    
 
@@ -9290,28 +9303,23 @@ sun_chromosphere_checkbutton = tk.Checkbutton(shell_options_frame, text="-- Chro
 sun_chromosphere_checkbutton.pack(anchor='w')
 CreateToolTip(sun_chromosphere_checkbutton, chromosphere_info)
 
-sun_inner_corona_checkbutton = tk.Checkbutton(shell_options_frame, text="-- Inner Corona", variable=sun_inner_corona_var)
-sun_inner_corona_checkbutton.pack(anchor='w')
-CreateToolTip(sun_inner_corona_checkbutton, inner_corona_info)
+sun_corona_checkbutton = tk.Checkbutton(shell_options_frame, text="-- Corona", variable=sun_corona_var)
+sun_corona_checkbutton.pack(anchor='w')
+CreateToolTip(sun_corona_checkbutton, corona_info)
 
 sun_roche_limit_checkbutton = tk.Checkbutton(shell_options_frame,
     text="-- Roche Limit (Comets)", variable=sun_roche_limit_var)
 sun_roche_limit_checkbutton.pack(anchor='w')
 CreateToolTip(sun_roche_limit_checkbutton, roche_limit_info)
 
-sun_streamer_belt_checkbutton = tk.Checkbutton(shell_options_frame,
-    text="-- Streamer Belt", variable=sun_streamer_belt_var)
-sun_streamer_belt_checkbutton.pack(anchor='w')
-CreateToolTip(sun_streamer_belt_checkbutton, streamer_belt_info)
-
 sun_alfven_surface_checkbutton = tk.Checkbutton(shell_options_frame,
     text="-- Alfven Surface", variable=sun_alfven_surface_var)
 sun_alfven_surface_checkbutton.pack(anchor='w')
 CreateToolTip(sun_alfven_surface_checkbutton, alfven_surface_info)
 
-sun_outer_corona_checkbutton = tk.Checkbutton(shell_options_frame, text="-- Extended Corona (F-corona)", variable=sun_outer_corona_var)
-sun_outer_corona_checkbutton.pack(anchor='w')
-CreateToolTip(sun_outer_corona_checkbutton, outer_corona_info)
+sun_zodiacal_dust_checkbutton = tk.Checkbutton(shell_options_frame, text="-- Zodiacal Dust Cloud (F-corona)", variable=sun_zodiacal_dust_var)
+sun_zodiacal_dust_checkbutton.pack(anchor='w')
+CreateToolTip(sun_zodiacal_dust_checkbutton, zodiacal_dust_info)
 
 asteroid_belt_label = tk.Label(shell_options_frame, text="-- Asteroid Belt Structure:", font=("Arial", 9, "bold"))
 asteroid_belt_label.pack(anchor='w', pady=(5, 0))

@@ -84,6 +84,11 @@ Module updated: October 18, 2026 with Anthropic's Claude Opus 5.5
     (L-455: the LEO entry's tooltip is earth_visualization_shells'
     earth_leo_shell_info, the one copy, instead of a second copy that
     still typed the satellite counts and the residents' altitudes.)
+Module updated: October 20, 2026 with Anthropic's Claude Opus 5.5
+    (L-410 with L-131: the Sun's inner and outer corona spheres are gone;
+    CUSTOM_SHELLS['Sun'] gains 'corona', the fade, and 'zodiacal_dust',
+    each a stored drawing, and the streamer belt's tooltip is the
+    corona's.)
 """
 
 # Phase C4: Import hover text strings from body shell modules.
@@ -109,17 +114,16 @@ from solar_visualization_shells import (
     # hover_text (Plotly hover, <br> line breaks)
     core_info_hover, radiative_zone_info_hover,
     photosphere_info_hover, chromosphere_info_hover,
-    inner_corona_info_hover,
     roche_limit_info_hover, alfven_surface_info_hover,
-    outer_corona_info_hover, termination_shock_info_hover,
+    termination_shock_info_hover,
     solar_wind_info_hover,                      # heliopause hover (legacy name)
     inner_limit_oort_info_hover,                # inner_oort_limit hover (swapped naming)
     inner_oort_info_hover, outer_oort_info_hover,
     gravitational_influence_info_hover,
     # tooltip (Tk GUI, \n line breaks)
     core_info, radiative_zone_info, photosphere_info, chromosphere_info,
-    inner_corona_info, streamer_belt_info, roche_limit_info, alfven_surface_info,
-    outer_corona_info, termination_shock_info,
+    corona_info, zodiacal_dust_info, roche_limit_info, alfven_surface_info,
+    termination_shock_info,
     solar_wind_info,                            # heliopause tooltip (legacy name)
     inner_limit_oort_info,                      # inner_oort_limit tooltip (swapped naming)
     inner_oort_info, outer_oort_info,
@@ -169,7 +173,7 @@ from earth_visualization_shells import (
 # Phase D1: Import Sun radius constants for radius_au expressions.
 from planet_visualization_utilities import (
     SOLAR_RADIUS_AU, CORE_AU, RADIATIVE_ZONE_AU,
-    CHROMOSPHERE_PHYSICAL_RADII, INNER_CORONA_RADII, OUTER_CORONA_RADII,
+    CHROMOSPHERE_PHYSICAL_RADII,
     ROCHE_LIMIT_RADII, ALFVEN_SURFACE_RADII,
     TERMINATION_SHOCK_AU, HELIOPAUSE_RADII,
     INNER_LIMIT_OORT_CLOUD_AU, INNER_OORT_CLOUD_AU, OUTER_OORT_CLOUD_AU,
@@ -2007,16 +2011,11 @@ SHELL_CONFIGS = {
             'tooltip': chromosphere_info,
         },
 
-        'inner_corona': {
-            'name': 'Inner Corona',
-            'radius_au': INNER_CORONA_RADII * SOLAR_RADIUS_AU,
-            'color': 'rgb(0, 0, 255)',
-            'opacity': 0.45,
-            'n_points': 20,
-            'marker_size': 3.0,
-            'hover_text': inner_corona_info_hover,
-            'tooltip': inner_corona_info,
-        },
+        # 'inner_corona' and 'outer_corona' MOVED to CUSTOM_SHELLS['Sun']
+        # on 2026-10-19 (L-410) as ONE fade, 'corona': nature thins out
+        # there with no edge, so the two spheres at a declared 3 and 50
+        # solar radii became dots following the measured electron density
+        # from the surface to the Alfven surface. Do not re-add them here.
 
         # 'streamer_belt' MOVED to CUSTOM_SHELLS['Sun'] on 2026-08-22
         # (L-224). It is no longer a sphere: helmet streamers form only
@@ -2047,17 +2046,6 @@ SHELL_CONFIGS = {
             'marker_size': 3.5,
             'hover_text': alfven_surface_info_hover,
             'tooltip': alfven_surface_info,
-        },
-
-        'outer_corona': {
-            'name': 'Outer Corona',
-            'radius_au': OUTER_CORONA_RADII * SOLAR_RADIUS_AU,
-            'color': 'rgb(25, 25, 112)',
-            'opacity': 0.5,
-            'n_points': 20,
-            'marker_size': 3.5,
-            'hover_text': outer_corona_info_hover,
-            'tooltip': outer_corona_info,
         },
 
         'termination_shock': {
@@ -2810,9 +2798,23 @@ CUSTOM_SHELLS = {
     # Module updated: May 2026 with Anthropic's Claude Opus 4.6
     'Sun': {
 
+        # L-410 (Tony, 2026-10-19): the corona is ONE feature, the fade
+        # and the streamer belt, switched by one checkbox ("-- Corona"):
+        # palomas_orrery.py binds both keys to sun_corona_var.
+        'corona': {
+            'builder': 'solar_visualization_shells.create_sun_corona',
+            'tooltip': corona_info,
+        },
+
         'streamer_belt': {
             'builder': 'solar_visualization_shells.create_sun_streamer_band',
-            'tooltip': streamer_belt_info,
+            'tooltip': corona_info,
+        },
+
+        # L-131 (2026-10-19): the zodiacal dust cloud, stored dots.
+        'zodiacal_dust': {
+            'builder': 'solar_visualization_shells.create_sun_zodiacal_dust',
+            'tooltip': zodiacal_dust_info,
         },
 
         'rotation_axis': {

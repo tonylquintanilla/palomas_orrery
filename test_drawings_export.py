@@ -27,6 +27,14 @@ For every entry in export_drawings.DRAWINGS it checks:
                   following the measured profile, and each dot's weight the
                   one its distance gives, read from the file's own dots
                   (earth_exosphere_sampler.check_dots; for the exosphere)
+    the corona    every dot between the Sun's surface and the Alfven
+                  surface, the dots in five shells following the electron
+                  density, and each dot's weight the sunlight its distance
+                  gives (sun_corona_sampler.check_dots)
+    the dust      every dot between the dust-free zone and 5.2 AU, the
+                  dots following the radial and the vertical profiles, and
+                  each dot's weight the sunlight its distance gives
+                  (zodiacal_dust_sampler.check_dots)
 
 A check that passes is only worth something if it can fail, so faults
 are planted first, each in memory, and each must be caught:
@@ -40,6 +48,12 @@ are planted first, each in memory, and each must be caught:
     an exosphere dot moved inside 3 radii    the exosphere
     the exosphere drawn with no fall-off     the exosphere
     an exosphere dot's weight changed        the exosphere
+    a corona dot moved past the Alfven surface   the corona
+    the corona drawn with no fall-off        the corona
+    a corona dot's weight changed            the corona
+    a dust dot moved inside the dust-free zone   the dust
+    the dust drawn with no flattening        the dust
+    a dust dot's weight changed              the dust
 
 The last line starts "DRAWINGS EXPORT:", which the maintenance run
 quotes. It names each drawing, its dots, its tilt and its sha256.
@@ -63,6 +77,10 @@ planted)
 Module updated: October 17, 2026 with Anthropic's Claude Opus 5.5 (L-410:
 the third drawing, Earth's hydrogen exosphere, checked against its rows,
 with three more faults planted)
+Module updated: October 19, 2026 with Anthropic's Claude Opus 5.5 (L-410
+with L-131: the fourth and fifth drawings, the Sun's corona and the
+zodiacal dust cloud, checked against their rows, with six more faults
+planted)
 """
 import hashlib
 import json
@@ -74,6 +92,8 @@ import export_drawings as ed
 import hills_cloud_sampler as hcs
 import van_allen_belt_sampler as vab
 import earth_exosphere_sampler as ees
+import sun_corona_sampler as scs
+import zodiacal_dust_sampler as zds
 
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -140,6 +160,12 @@ def check_one(name, text_on_disk, text_now, path, ignored=git_ignored):
             failures.append("%s: the file names no belt %s" % (name, exc))
     elif name == "earth_exosphere":
         for line in ees.check_dots(content, ees.rows_from_store()):
+            failures.append("%s: %s" % (name, line))
+    elif name == "sun_corona":
+        for line in scs.check_dots(content, scs.rows_from_store()):
+            failures.append("%s: %s" % (name, line))
+    elif name == "zodiacal_dust":
+        for line in zds.check_dots(content, zds.rows_from_store()):
             failures.append("%s: %s" % (name, line))
     tilt = None
     if lengths == [n] * len(axes) and n and "plane_tilt_deg" in content:
@@ -232,6 +258,62 @@ def _planted_exosphere(text_now):
     return out
 
 
+def _planted_corona(text_now):
+    """Three faults in the corona's file, each caught by the corona's
+    check (each planted text is compared with itself, as the belts' are,
+    so only that check can catch it)."""
+    out = []
+    moved = json.loads(text_now)
+    moved["x"][0], moved["y"][0], moved["z"][0] = 40.0, 0.0, 0.0
+    out.append(("a corona dot moved past the Alfven surface",
+                ed.render(moved), "lie outside"))
+    flat = json.loads(text_now)
+    inner, outer = scs.span(scs.rows_from_store())
+    import numpy as np
+    rng = np.random.default_rng(1)
+    n = len(flat["x"])
+    radii = rng.uniform(inner, outer, n)
+    cos_t = rng.uniform(-1.0, 1.0, n)
+    for k in range(n):
+        s = (1.0 - cos_t[k] ** 2) ** 0.5
+        flat["x"][k] = round(float(radii[k] * s), 3)
+        flat["y"][k] = 0.0
+        flat["z"][k] = round(float(radii[k] * cos_t[k]), 3)
+    out.append(("the corona drawn with no fall-off", ed.render(flat),
+                "do not follow the profile"))
+    heavy = json.loads(text_now)
+    far = max(range(len(heavy["x"])), key=lambda k: heavy["x"][k] ** 2 +
+              heavy["y"][k] ** 2 + heavy["z"][k] ** 2)
+    heavy["w"][far] = 1.0
+    out.append(("a corona dot's weight changed", ed.render(heavy),
+                "carry a weight"))
+    return out
+
+
+def _planted_dust(text_now):
+    """Three faults in the dust cloud's file, each caught by its check."""
+    out = []
+    moved = json.loads(text_now)
+    moved["x"][0], moved["y"][0], moved["z"][0] = 0.01, 0.0, 0.0
+    out.append(("a dust dot moved inside the dust-free zone",
+                ed.render(moved), "lie outside"))
+    round_cloud = json.loads(text_now)
+    rows = zds.rows_from_store()
+    rows["ZODIACAL_DUST_BETA"] = 0.0
+    other = zds.drawn_dust(rows)
+    for axis in ("x", "y", "z"):
+        round_cloud[axis] = [round(v, 4) for v in other[axis]]
+    out.append(("the dust drawn with no flattening", ed.render(round_cloud),
+                "vertical profile"))
+    heavy = json.loads(text_now)
+    far = max(range(len(heavy["x"])), key=lambda k: heavy["x"][k] ** 2 +
+              heavy["y"][k] ** 2 + heavy["z"][k] ** 2)
+    heavy["w"][far] = 1.0
+    out.append(("a dust dot's weight changed", ed.render(heavy),
+                "carry a weight"))
+    return out
+
+
 def main():
     print("=" * 70)
     print("  DRAWINGS EXPORT CHECK -- data/drawings/ against the rows")
@@ -277,6 +359,20 @@ def main():
             caught += 1
         else:
             problems.append("planted fault not caught: " + label)
+    sun_planted = ([("sun_corona", p) for p in
+                    _planted_corona(texts_now["sun_corona"])] +
+                   [("zodiacal_dust", p) for p in
+                    _planted_dust(texts_now["zodiacal_dust"])])
+    for name, (label, text, expect) in sun_planted:
+        failures, _ = check_one(name, text, text,
+                                ed.path_of(PROJECT_DIR, name),
+                                lambda _p: False)
+        hit = any(expect in line for line in failures)
+        print("  planted: %-36s %s" % (label, "caught" if hit else "MISSED"))
+        if hit:
+            caught += 1
+        else:
+            problems.append("planted fault not caught: " + label)
     print("")
 
     named = []
@@ -306,7 +402,8 @@ def main():
         print("DRAWINGS EXPORT: FAIL -- %d problem(s)" % len(problems))
         return 1
     print("DRAWINGS EXPORT: PASS -- %d of %d planted faults caught; %s"
-          % (caught, len(planted) + len(belt_planted) + len(exo_planted),
+          % (caught, len(planted) + len(belt_planted) + len(exo_planted)
+             + len(sun_planted),
              "; ".join(named)))
     return 0
 

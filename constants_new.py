@@ -193,6 +193,14 @@ troposphere's height and its two temperatures, the thermosphere's
 temperature, Apophis's 2029 height, and the two low-orbit periods worked
 out from the edges -- and S_PER_MINUTE, the exact conversion the periods
 go through. Each measured row was read from an open page today.)
+Module updated: October 20, 2026 with Anthropic's Claude Opus 5.5
+(L-410 with L-131, the Sun's two fades: the corona's density model, three
+rows from Mann et al. (2023), with Boltzmann's constant and the proton's
+mass from CODATA 2022; the corona's temperature from NASA; the dust
+cloud's shape, seven rows from Kelsall et al. (1998); the dust-free and
+depletion zones from Lamy et al. (2022); where the dust comes from,
+three rows from Nesvorny et al. (2010). Each read 2026-10-19 from an
+open copy; citations approved by Tony.)
 """
 
 import math
@@ -3104,6 +3112,245 @@ ALFVEN_SURFACE_STREAMER_FLOOR_RADII = 15
 
 
 # ============================================================
+# THE CORONA'S FADE AND THE ZODIACAL DUST CLOUD
+# L-410 with L-131, designed 2026-10-19 (Tony's rulings in
+# documentation/SOURCES_L410_sun_corona_dust_20261019.md), built
+# 2026-10-19. Two stored drawings: the corona's dots placed by the
+# electron density of Mann et al. (2023), and the dust's dots placed by
+# the COBE model of Kelsall et al. (1998). sun_corona_sampler.py and
+# zodiacal_dust_sampler.py read these rows; no number is typed there.
+# ============================================================
+
+CORONA_MODEL_TEMPERATURE_K = 1.18e6
+# Unit: k
+# Status: measured V_SOURCED 2026-10-19 -- open full text
+# Figures: 3 -- the source prints 1.18 MK.
+# Read: Sect. 3, Mann, Warmuth, Vocks and Rouillard (2023), the A&A
+# Read+: article page, 2026-10-19, Claude Opus 5.5.
+# Source: Mann, Warmuth, Vocks and Rouillard (2023), "A heliospheric
+# Source+: density and magnetic field model", A&A 679, A64,
+# Source+: https://www.aanda.org/articles/aa/full_html/2023/11/aa45050-22/aa45050-22.html
+# Source+: -- Sect. 3: the solar wind's density from Parker's equation
+# Source+: (eqs. 9 and 10), "from the bottom of the corona up to a
+# Source+: heliocentric distance of 250 solar radii", "in the sense of a
+# Source+: long-term average global model"; "point M is given by Ce =
+# Source+: 9.127 x 10^34 s^-1 and T = 1.18 MK."
+# Note: the model's one temperature, the same everywhere: a setting of
+# Note+: the density model, not the corona's measured temperature, which
+# Note+: CORONA_TEMPERATURE_MAX_K gives. 1 MK is a million kelvin, so the
+# Note+: source's figure is kelvin as printed.
+# Note: the density the sampler works out from this row,
+# Note+: CORONA_MODEL_MEAN_MOLECULAR_WEIGHT, CORONA_MODEL_ELECTRON_FLUX_PER_S,
+# Note+: BOLTZMANN_CONSTANT_J_PER_K, PROTON_MASS_KG and GM_SUN_SI lies 0.9
+# Note+: to 1.6 percent above the article's Table 8 at every one of its
+# Note+: 2,491 distances, 1 to 250 solar radii (table8.dat, CDS catalogue
+# Note+: J/A+A/679/A64, sha256 385845be881b7ec569d6a02f3950bdea019a2d79
+# Note+: 8c992ee750d3515b6e73a319, saved by Tony Quintanilla and read by
+# Note+: Claude Opus 5.5 on 2026-10-19). The drawing uses only the
+# Note+: profile's shape, and a near-constant factor moves no dot.
+
+CORONA_MODEL_MEAN_MOLECULAR_WEIGHT = 0.57
+# Unit: mean_molecular_weight
+# Status: measured V_SOURCED 2026-10-19 -- open full text
+# Figures: 2 -- the source prints 0.57.
+# Read: Sect. 2, Mann et al. (2023), the A&A article page, 2026-10-19,
+# Read+: Claude Opus 5.5.
+# Source: Mann, Warmuth, Vocks and Rouillard (2023), A&A 679, A64 -- Sect.
+# Source+: 2: "the mean value of 0.058 can be considered as typical for the
+# Source+: ratio nu, leading to mu = 0.57".
+# Note: the mean mass per particle in proton masses, from the share of
+# Note+: helium in the solar wind; it sets the model's sound speed.
+
+CORONA_MODEL_ELECTRON_FLUX_PER_S = 9.127e34
+# Unit: per_s
+# Status: measured V_SOURCED 2026-10-19 -- open full text
+# Figures: 4 -- the source prints 9.127 x 10^34.
+# Read: Sect. 3, Mann et al. (2023), the A&A article page, 2026-10-19,
+# Read+: Claude Opus 5.5.
+# Source: as CORONA_MODEL_TEMPERATURE_K.
+# Note: the model's constant Ce, r^2 N_e v, the electrons leaving
+# Note+: through each steradian every second (Sect. 3, eq. 10).
+
+CORONA_TEMPERATURE_MAX_K = 2e6
+# Unit: k
+# Status: measured V_SOURCED 2026-10-19 -- agency page, open
+# Figures: 1 -- the source prints 2 million.
+# Read: "Sun: Facts - NASA Science", 2026-10-19, Claude Opus 5.5.
+# Source: NASA Science, "Sun: Facts", https://science.nasa.gov/sun/facts/
+# Source+: -- the corona reaches up to 2 million degrees Celsius, "much,
+# Source+: much hotter than the photosphere".
+# Note: converted from degrees Celsius by adding 273.15, which changes no
+# Note+: figure printed at a million (provenance-discipline, The Unit Field).
+
+ZODIACAL_DUST_DENSITY_EXPONENT = 1.34
+# Unit: falloff_exponent
+# Status: measured V_SOURCED 2026-10-19 -- open full text
+# Figures: 3 -- Table 1 prints 1.34, uncertainty 0.022.
+# Read: Sect. 4.2 and Table 1, Kelsall et al. (1998), the arXiv PDF,
+# Read+: 2026-10-19, Claude Opus 5.5.
+# Source: Kelsall, Weiland, Franz, Reach, Arendt, Dwek, Freudenreich,
+# Source+: Hauser, Moseley, Odegard, Silverberg and Wright (1998), "The
+# Source+: COBE Diffuse Infrared Background Experiment Search for the
+# Source+: Cosmic Infrared Background: II. Model of the Interplanetary Dust
+# Source+: Cloud", ApJ 508, 44, https://arxiv.org/abs/astro-ph/9806250 --
+# Source+: Sect. 4.2, eqs. 6 and 7: the smooth cloud's density, n0 R^-alpha
+# Source+: f(zeta), with f(zeta) = exp(-beta g^gamma); Table 1, "Density and
+# Source+: Geometrical Parameters of the IPD Model": alpha, the radial
+# Source+: power-law exponent, 1.34.
+# Note: alpha, how fast the dust thins with distance from the Sun.
+
+ZODIACAL_DUST_BETA = 4.14
+# Unit: fan_shape_parameter
+# Status: measured V_SOURCED 2026-10-19 -- open full text
+# Figures: 3 -- Table 1 prints 4.14, uncertainty 0.067.
+# Read: as ZODIACAL_DUST_DENSITY_EXPONENT, 2026-10-19, Claude Opus 5.5.
+# Source: Kelsall, Weiland, Franz, Reach, Arendt, Dwek, Freudenreich,
+# Source+: Hauser, Moseley, Odegard, Silverberg and Wright (1998), "The
+# Source+: COBE Diffuse Infrared Background Experiment Search for the
+# Source+: Cosmic Infrared Background: II. Model of the Interplanetary Dust
+# Source+: Cloud", ApJ 508, 44, https://arxiv.org/abs/astro-ph/9806250 --
+# Source+: Sect. 4.2, eqs. 6 and 7, the smooth cloud; Table 1, "Density and
+# Source+: Geometrical Parameters of the IPD Model": beta, the vertical shape
+# Source+: parameter, 4.14.
+# Note: beta, the vertical shape: how fast the dust thins above and
+# Note+: below the cloud's middle plane.
+
+ZODIACAL_DUST_GAMMA = 0.942
+# Unit: fan_shape_parameter
+# Status: measured V_SOURCED 2026-10-19 -- open full text
+# Figures: 3 -- Table 1 prints 0.942, uncertainty 0.025.
+# Read: as ZODIACAL_DUST_DENSITY_EXPONENT, 2026-10-19, Claude Opus 5.5.
+# Source: Kelsall, Weiland, Franz, Reach, Arendt, Dwek, Freudenreich,
+# Source+: Hauser, Moseley, Odegard, Silverberg and Wright (1998), "The
+# Source+: COBE Diffuse Infrared Background Experiment Search for the
+# Source+: Cosmic Infrared Background: II. Model of the Interplanetary Dust
+# Source+: Cloud", ApJ 508, 44, https://arxiv.org/abs/astro-ph/9806250 --
+# Source+: Sect. 4.2, eqs. 6 and 7, the smooth cloud; Table 1, "Density and
+# Source+: Geometrical Parameters of the IPD Model": gamma, the vertical
+# Source+: power-law exponent, 0.942.
+# Note: gamma, the vertical power-law exponent.
+
+ZODIACAL_DUST_MU = 0.189
+# Unit: fan_shape_parameter
+# Status: measured V_SOURCED 2026-10-19 -- open full text
+# Figures: 3 -- Table 1 prints 0.189, uncertainty 0.014.
+# Read: as ZODIACAL_DUST_DENSITY_EXPONENT, 2026-10-19, Claude Opus 5.5.
+# Source: Kelsall, Weiland, Franz, Reach, Arendt, Dwek, Freudenreich,
+# Source+: Hauser, Moseley, Odegard, Silverberg and Wright (1998), "The
+# Source+: COBE Diffuse Infrared Background Experiment Search for the
+# Source+: Cosmic Infrared Background: II. Model of the Interplanetary Dust
+# Source+: Cloud", ApJ 508, 44, https://arxiv.org/abs/astro-ph/9806250 --
+# Source+: Sect. 4.2, eqs. 6 and 7, the smooth cloud; Table 1, "Density and
+# Source+: Geometrical Parameters of the IPD Model": mu, the widening
+# Source+: parameter, 0.189.
+# Note: mu, the widening parameter, which rounds the fan's crest.
+
+ZODIACAL_DUST_TILT_DEG = 2.03
+# Unit: deg
+# Status: measured V_SOURCED 2026-10-19 -- open full text
+# Figures: 3 -- Table 1 prints 2.03, uncertainty 0.017.
+# Read: as ZODIACAL_DUST_DENSITY_EXPONENT, 2026-10-19, Claude Opus 5.5.
+# Source: Kelsall, Weiland, Franz, Reach, Arendt, Dwek, Freudenreich,
+# Source+: Hauser, Moseley, Odegard, Silverberg and Wright (1998), "The
+# Source+: COBE Diffuse Infrared Background Experiment Search for the
+# Source+: Cosmic Infrared Background: II. Model of the Interplanetary Dust
+# Source+: Cloud", ApJ 508, 44, https://arxiv.org/abs/astro-ph/9806250 --
+# Source+: Sect. 4.2, eqs. 6 and 7, the smooth cloud; Table 1, "Density and
+# Source+: Geometrical Parameters of the IPD Model": i, the inclination of
+# Source+: the midplane, 2.03 deg; the model is computed in heliocentric
+# Source+: ecliptic coordinates (Sect. 4.2).
+# Note: the tilt of the cloud's middle plane to the ecliptic.
+
+ZODIACAL_DUST_NODE_DEG = 77.7
+# Unit: deg
+# Status: measured V_SOURCED 2026-10-19 -- open full text
+# Figures: 3 -- Table 1 prints 77.7, uncertainty 0.6.
+# Read: as ZODIACAL_DUST_DENSITY_EXPONENT, 2026-10-19, Claude Opus 5.5.
+# Source: Kelsall, Weiland, Franz, Reach, Arendt, Dwek, Freudenreich,
+# Source+: Hauser, Moseley, Odegard, Silverberg and Wright (1998), "The
+# Source+: COBE Diffuse Infrared Background Experiment Search for the
+# Source+: Cosmic Infrared Background: II. Model of the Interplanetary Dust
+# Source+: Cloud", ApJ 508, 44, https://arxiv.org/abs/astro-ph/9806250 --
+# Source+: Sect. 4.2, eqs. 6 and 7, the smooth cloud; Table 1, "Density and
+# Source+: Geometrical Parameters of the IPD Model": Omega, the ascending
+# Source+: node of the midplane, 77.7 deg.
+# Note: where the cloud's middle plane crosses the ecliptic going north.
+# Note+: Near the Sun the plane is warped and its node differs (87.6 deg,
+# Note+: Lamy et al. 2022); the drawing follows Kelsall's fit throughout,
+# Note+: because its shape parameters were fitted together.
+
+ZODIACAL_DUST_OUTER_AU = 5.2
+# Unit: au
+# Status: declared 2026-10-19 -- the drawing stops where the COBE model
+# Status+: stops adding up its light; the cloud itself has no edge.
+# Figures: 2 -- the source prints 5.2.
+# Read: Sect. 4.2, Kelsall et al. (1998), the arXiv PDF, 2026-10-19,
+# Read+: Claude Opus 5.5.
+# Source: Kelsall, Weiland, Franz, Reach, Arendt, Dwek, Freudenreich,
+# Source+: Hauser, Moseley, Odegard, Silverberg and Wright (1998), "The
+# Source+: COBE Diffuse Infrared Background Experiment Search for the
+# Source+: Cosmic Infrared Background: II. Model of the Interplanetary Dust
+# Source+: Cloud", ApJ 508, 44, https://arxiv.org/abs/astro-ph/9806250 --
+# Source+: Sect. 4.2: "an outer radial cutoff of 5.2 AU from the Sun, which
+# Source+: roughly corresponds to the orbit of Jupiter."
+
+DUST_DEPLETION_OUTER_RADII = 19
+# Unit: r_sun
+# Status: measured V_SOURCED 2026-10-19 -- abstract, open
+# Figures: 2 -- the source prints 19.
+# Read: abstract, Lamy, Gilardy and Llebaria (2022), the arXiv listing,
+# Read+: 2026-10-19, Claude Opus 5.5.
+# Source: Lamy, Gilardy and Llebaria (2022), "Observations of the Solar
+# Source+: F-corona from Space", Space Sci. Rev., doi
+# Source+: 10.1007/s11214-022-00918-y, https://arxiv.org/abs/2202.11533 --
+# Source+: abstract: "The outer border of the depletion zone where
+# Source+: interplanetary dust particles start to be affected by sublimation
+# Source+: appears well constrained at 19Rsun. This zone extends down to
+# Source+: 5Rsun, thus defining the boundary of the dust-free zone".
+
+DUST_FREE_ZONE_RADII = 5
+# Unit: r_sun
+# Status: measured V_SOURCED 2026-10-19 -- abstract, open
+# Figures: 1 -- the source prints 5.
+# Read: as DUST_DEPLETION_OUTER_RADII, 2026-10-19, Claude Opus 5.5.
+# Source: as DUST_DEPLETION_OUTER_RADII. Parker Solar Probe's first signs
+# Source+: of it: Howard, Vourlidas, Bothmer et al. (2019), "Near-Sun
+# Source+: observations of an F-corona decrease and K-corona fine
+# Source+: structure", Nature 576, 232-236,
+# Source+: https://www.nature.com/articles/s41586-019-1807-x -- abstract:
+# Source+: the F-corona's intensity falls at short elongations,
+# Source+: "suggestive of the long-sought dust-free zone".
+
+ZODIACAL_DUST_JFC_LOW_PERCENT = 85
+# Unit: percent
+# Status: measured V_SOURCED 2026-10-19 -- abstract, open
+# Figures: 2 -- the source prints 85-95%.
+# Read: abstract, Nesvorny, Jenniskens, Levison, Bottke and Vokrouhlicky
+# Read+: (2010), the arXiv listing, 2026-10-19, Claude Opus 5.5.
+# Source: Nesvorny, Jenniskens, Levison, Bottke and Vokrouhlicky (2010),
+# Source+: "Cometary Origin of the Zodiacal Cloud and Carbonaceous
+# Source+: Micrometeorites", ApJ 713, 816, https://arxiv.org/abs/0909.4322 --
+# Source+: abstract: "We find that 85-95% of the observed mid-infrared
+# Source+: emission is produced by particles from the Jupiter-family comets
+# Source+: (JFCs) and <10% by dust from long period comets. Asteroidal dust
+# Source+: is found to be present at <10%."
+
+ZODIACAL_DUST_JFC_HIGH_PERCENT = 95
+# Unit: percent
+# Status: measured V_SOURCED 2026-10-19 -- abstract, open
+# Figures: 2 -- the source prints 85-95%.
+# Read: as ZODIACAL_DUST_JFC_LOW_PERCENT, 2026-10-19, Claude Opus 5.5.
+# Source: as ZODIACAL_DUST_JFC_LOW_PERCENT.
+
+ZODIACAL_DUST_ASTEROID_MAX_PERCENT = 10
+# Unit: percent
+# Status: measured V_SOURCED 2026-10-19 -- abstract, open
+# Figures: 1 -- the source prints <10%; the zero does not count.
+# Read: as ZODIACAL_DUST_JFC_LOW_PERCENT, 2026-10-19, Claude Opus 5.5.
+# Source: as ZODIACAL_DUST_JFC_LOW_PERCENT.
+# Note: an upper limit: the asteroids' share is less than this.
+
+# ============================================================
 # HELIOSPHERE BOUNDARIES (in AU)
 # ============================================================
 
@@ -4669,6 +4916,27 @@ GM_SUN_SI = 1.3271244e20
 # Cross-checked: Claude 2026-08-25 -- IAU 2015 B3 (worksheet_claude-opus-5_L247_sgr_a_constants_20260825.md)
 # Cross-checked: GPT 2026-08-25 -- IAU 2015 B3 (worksheet_gpt-5.6-sol_L247_sgr_a_constants_20260825.md)
 # Cross-checked: Gemini 2026-08-25 -- IAU 2015 B3 (worksheet_gemini-2.5-pro_L247_sgr_a_constants_20260825.md)
+
+BOLTZMANN_CONSTANT_J_PER_K = 1.380649e-23
+# Unit: j_per_k
+# Status: measured V_SOURCED 2026-10-19 -- agency page, open
+# Figures: exact -- prints 7. Exact by the definition of the kelvin.
+# Read: "CODATA Recommended Values of the Fundamental Physical Constants:
+# Read+: 2022", NIST wall chart PDF, 2026-10-19, Claude Opus 5.5.
+# Source: NIST, "CODATA Recommended Values of the Fundamental Physical
+# Source+: Constants: 2022", https://www.physics.nist.gov/cuu/pdf/wall_2022.pdf
+# Source+: -- "Boltzmann constant k 1.380 649 x 10^-23 (exact) J K^-1".
+# Note: belongs to no body's slice; added for the corona's density model
+# Note+: (L-410), with PROTON_MASS_KG.
+
+PROTON_MASS_KG = 1.67262192595e-27
+# Unit: kg
+# Status: measured V_SOURCED 2026-10-19 -- agency page, open
+# Figures: 12 -- the source prints 1.672 621 925 95(52) x 10^-27, uncertainty 5.2e-37.
+# Read: as BOLTZMANN_CONSTANT_J_PER_K, 2026-10-19, Claude Opus 5.5.
+# Source: NIST, "CODATA Recommended Values of the Fundamental Physical
+# Source+: Constants: 2022", https://www.physics.nist.gov/cuu/pdf/wall_2022.pdf
+# Source+: -- "proton mass m_p 1.672 621 925 95(52) x 10^-27 kg".
 
 M3_PER_KM3 = 1.0e9
 # Unit: m3_per_km3

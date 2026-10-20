@@ -15,6 +15,15 @@ Consumed by: planet_visualization.py (routing dispatcher),
 Role: rendering/shells
 Domain: orrery
 
+Module updated: October 19, 2026 with Anthropic's Claude Opus 5.5
+(L-410 with L-131, the Sun's two fades: the inner and outer corona
+spheres became one fade of dots, create_sun_corona, placed by
+sun_corona_sampler.py from Mann et al. (2023)'s density, and the
+streamer belt joined it under one legend entry; the zodiacal dust cloud
+is new, create_sun_zodiacal_dust, placed by zodiacal_dust_sampler.py
+from Kelsall et al. (1998)'s model. Their words are Tony's approved
+list, written in newlines. The two corona spheres, their four strings
+and the streamer belt's tooltip are gone.)
 Module updated: October 18, 2026 with Anthropic's Claude Opus 5.5
 (L-411 follow-up: the termination shock's Voyager 2 line cites Li et
 al. 2008, the paper its wind speeds come from. Tony's word.)
@@ -478,59 +487,9 @@ termination_shock_info = (
             f"Voyager 2 measured the wind slowing from about {row_text('VOYAGER2_TS_UPSTREAM_SPEED_KM_S')} to about {row_text('VOYAGER2_TS_DOWNSTREAM_SPEED_KM_S')} km/s as it crossed (Li et al. 2008)."
         )
 
-# Source: constants_new.py OUTER_CORONA_RADII=50; Koutchmy (1994) F-corona review
-outer_corona_info = (
-    "Sun: Extended Corona (F-corona / Outer):<br><br>"
+# outer_corona_info was DELETED 2026-10-19 (L-410), with its checkbox.
 
-    f"This shell marks the extended outer solar corona at {row_text('OUTER_CORONA_RADII')} solar radii ({row_text('OUTER_CORONA_RADII', 'au')} AU).<br>"
-    "A boundary chosen for the drawing; the faint outer corona has no sharp edge.<br>"
-    "At this distance the corona is extremely tenuous -- the F-corona (dust-scattered<br>"
-    "sunlight showing Fraunhofer absorption lines) dominates over the electron K-corona.<br><br>"
-
-    f"* Helmet streamers have two parts: closed loops below {row_text('HELMET_CUSP_LOW_RADII')}-{row_text('HELMET_CUSP_HIGH_RADII')} R_sun, then<br>"
-    "  an open-field stalk reaching many R_sun (Suess & Nerney 2004).<br>"
-    "* The Alfven surface -- the true corona/solar wind boundary -- is most of the time<br>"
-    f"  between about {row_text('ALFVEN_SURFACE_RANGE_LOW_RADII')} and {row_text('ALFVEN_SURFACE_RANGE_HIGH_RADII')} solar radii from the Sun's center (Cranmer et al. 2023).<br>"
-    f"  Parker Solar Probe measured this at {ALFVEN_SURFACE_RADII} R_sun on April 28, 2021.<br>"
-    "* Beyond the Alfven surface, plasma is solar wind, not corona.<br>"
-    f"* This {row_text('OUTER_CORONA_RADII')} R_sun shell represents the faint, extended F-corona envelope.<br><br>"
-
-    "* Temperature: ~1-2 million K (the coronal heating paradox -- hotter than the surface)<br>"
-    f"* Parker Solar Probe's closest approach: {row_text('PARKER_CLOSEST_KM', 'r_sun')} R_sun from the Sun's center, on December 24, 2024 (NASA).<br>"
-    "* The corona radiates at ~1.159 nm average wavelength (extreme ultraviolet to X-ray)."
-)
-
-# Source: constants_new.py INNER_CORONA_RADII=3; NASA Solar Dynamics Observatory
-inner_corona_info = (
-            "Sun: Inner Corona:<br><br>"
-
-            "The solar inner corona is the region of the Sun's atmosphere that lies closest to its surface. It's a dynamic and complex<br>" 
-            "environment, with temperatures reaching millions of degrees Celsius and a variety of fascinating features:<br>"
-            "* Temperature: While still incredibly hot (around 1-3 million Kelvin), the inner corona is slightly cooler<br>" 
-            "than the outer corona. This temperature difference is one of the factors that drives the solar wind.<br>"
-            "* Density: The inner corona is denser than the outer corona, but still much less dense than the Sun's surface,<br>" 
-            "the photosphere. This low density makes it difficult to observe directly, except during a solar eclipse or<br>" 
-            "with specialized instruments.<br><br>" 
-            
-            "Magnetic field: The inner corona is dominated by the Sun's magnetic field, which shapes and controls the<br>" 
-            "plasma in this region. The magnetic field lines create a variety of structures, including:<br>" 
-            "* Coronal loops: These are closed loops of magnetic flux that trap hot plasma, forming bright arcs that<br>" 
-            "  can be seen in ultraviolet and X-ray images.<br>" 
-            "* Coronal holes: These are areas where the magnetic field lines are open, allowing plasma to escape into<br>" 
-            "  space and contribute to the solar wind.<br>" 
-            "* Streamers: These are large, elongated structures that extend outward from the Sun, often associated with<br>" 
-            "  active regions and coronal mass ejections (CMEs).<br>" 
-            "* Dynamic activity: The inner corona is a constantly changing environment, with features evolving and erupting<br>" 
-            "  on different timescales. This activity is driven by the interplay between the magnetic field and the plasma,<br>" 
-            "  leading to phenomena like:<br>" 
-            "  * Solar flares: These are sudden, intense bursts of energy and radiation caused by the release of magnetic energy.<br>" 
-            "  * CMEs: These are massive eruptions of plasma and magnetic field from the corona, which can travel through space<br>" 
-            "    and impact Earth, disrupting satellites, communication systems, and power grids.<br><br>"
-            
-            f"* Solar Inner Corona (extends to 2-3 solar radii; drawn at {row_text('INNER_CORONA_RADII')}, about {row_text('INNER_CORONA_RADII', 'au')} AU)<br>"
-            "* Temperature: 1-2M K, or an average of about 1.5M K<br>"
-            "* It radiates at an average wavelength of 1.93 nm, within the extreme ultraviolet to soft X-ray regions."
-        )
+# inner_corona_info was DELETED 2026-10-19 (L-410), with its checkbox.
 
 # Source: constants_new.py CHROMOSPHERE_PHYSICAL_KM = 2000 (physical extent,
 # Source+: Carroll & Ostlie Ch. 11, ~1.003 R_sun, and since 2026-08-16 the
@@ -790,77 +749,13 @@ termination_shock_info_hover = (
             f"Voyager 2 measured the wind slowing from about {row_text('VOYAGER2_TS_UPSTREAM_SPEED_KM_S')} to about {row_text('VOYAGER2_TS_DOWNSTREAM_SPEED_KM_S')} km/s as it crossed (Li et al. 2008)."
         )
 
-outer_corona_info_hover = (
-    "Sun: Extended Corona (F-corona / Outer):<br><br>"
+# outer_corona_info_hover was DELETED 2026-10-19 (L-410), with its sphere;
+# the corona's words are corona_info and corona_info_hover, below.
 
-    f"Extended outer solar corona at {row_text('OUTER_CORONA_RADII')} solar radii ({row_text('OUTER_CORONA_RADII', 'au')} AU).<br>"
-    "A boundary chosen for the drawing; the faint outer corona has no sharp edge.<br>"
-    "F-corona (dust-scattered sunlight with Fraunhofer lines) dominates at this distance.<br><br>"
-
-    "Layer hierarchy within this shell:<br>"
-    f"* Streamer belt: the helmets pinch at {row_text('HELMET_CUSP_RADII')} R_sun, and the stalk fades out<br>"
-    "  across the Alfven surface (see Streamer Belt shell)<br>"
-    f"* Alfven surface (corona/solar wind boundary): about {row_text('ALFVEN_SURFACE_RANGE_LOW_RADII')} to {row_text('ALFVEN_SURFACE_RANGE_HIGH_RADII')} solar radii<br>"
-    "  most of the time (Cranmer et al. 2023); see Alfven Surface shell<br>"
-    f"  Parker Solar Probe first crossing: {ALFVEN_SURFACE_RADII} R_sun, April 28, 2021<br>"
-    f"* F-corona (dust-scattered): {row_text('INNER_CORONA_RADII')}-{row_text('OUTER_CORONA_RADII')}+ R_sun -- this shell's extent<br><br>"
-
-    "* Temperature: ~1-2 million K (coronal heating paradox)<br>"
-    "* Beyond the Alfven surface, plasma is solar wind, not true corona<br>"
-    f"* Parker Solar Probe closest approach: {row_text('PARKER_CLOSEST_KM', 'r_sun')} R_sun from the Sun's center<br>"
-    "  (December 24, 2024; NASA)<br>"
-    "* Radiates at ~1.159 nm (extreme ultraviolet to X-ray)<br><br>"
-
-    "MAPS C/2026 A1 entered SOHO/LASCO C3 field (~33 R_sun) on April 2, 2026,<br>"
-    "already inside this shell and approaching the Alfven surface."
-)
-
-# Source: constants_new.py HELMET_CUSP_RADII=4.0 -- Suess & Nerney 2004,
-#   Adv. Space Res. 33:668-675, helmets reach no higher than 2-4 R_sun.
-#   Further ranges quoted below: Suess & Nerney 2005, Solar Wind 11 /
-#   SOHO 16 (boundaries and stalks studied 2-10 R_sun); Decraemer et al.
-#   2019, ApJ 883:152 (stalk as a plasma slab around a current sheet).
-#   See documentation/worksheets/
-#   worksheet_gemini-3-1-pro_streamer_extent_20260820.md and
-#   documentation/SOURCE_suess_nerney_2004_helmet_extent_20260821.md
-# L-191 note: this string reaches a Tk tooltip and carries literal <br>.
-#   Left as-is deliberately -- it is one of 58 such strings and the sweep
-#   is L-191's, not this item's. Fixing one out of step would hide it.
-streamer_belt_info = (
-    "Sun: Streamer Belt / Visible Corona:<br><br>"
-
-    "The streamer belt is the brightest, most structured region of the visible<br>"
-    "solar corona, seen at total eclipse as a pearly white halo.<br><br>"
-
-    "IT HAS NO SINGLE OUTER RADIUS, and it is not drawn as if it did.<br>"
-    "A streamer is two structures stacked. The HELMET,<br>"
-    f"a dome of closed magnetic loops, reaches no higher than {row_text('HELMET_CUSP_LOW_RADII')}-{row_text('HELMET_CUSP_HIGH_RADII')} R_sun.<br>"
-    "Above its cusp the field opens and the solar wind draws it out into a<br>"
-    "STALK -- a thin current sheet reaching many solar radii, studied<br>"
-    "between 2 and 10. The band drawn here is ONE object with both: wide<br>"
-    f"and dense at the base, pinching at the cusp at {row_text('HELMET_CUSP_RADII')} R_sun where the<br>"
-    "loops open, then thinning and dissolving across the Alfven surface.<br>"
-    "It has no drawn outer edge, because there is no edge to draw.<br>"
-    "(Suess & Nerney 2004, Adv. Space Res. 33:668; 2005, Solar Wind 11.)<br><br>"
-
-    "What you see at eclipse is a BRIGHTNESS boundary, and it divides two<br>"
-    "flow regimes rather than separating plasma from empty space. There is<br>"
-    "no surface there to get right.<br><br>"
-
-    "Three components of white-light corona:<br>"
-    "* K-corona (kontinuierlich): Sunlight scattered off free electrons. Dominates within 2-3 R_sun.<br>"
-    "  Spectrum is continuous (blurred absorption lines) -- electrons move too fast to preserve them.<br>"
-    "* F-corona (Fraunhofer): Sunlight scattered off dust particles. Shows Fraunhofer absorption lines.<br>"
-    "  Dominates beyond ~3 R_sun and extends to ~15 R_sun. Has an oval shape.<br>"
-    "* E-corona (emission): Line emission from highly ionized Fe, Ni, Ca atoms. Visible to ~2 R_sun.<br><br>"
-
-    "* Helmet streamers: Bottle-shaped, dense magnetic structures. The closed<br>"
-    f"  helmet stays below {row_text('HELMET_CUSP_LOW_RADII')}-{row_text('HELMET_CUSP_HIGH_RADII')} R_sun; its stalk continues far beyond.<br>"
-    "  Source of slow solar wind. Visible in coronagraphs and at eclipse.<br>"
-    "* Temperature: ~1-2 million K<br>"
-    "* MAPS C/2026 A1 was first detected in SOHO/LASCO C3 at ~0.15 AU (~33 R_sun) on April 2, 2026.<br>"
-    "  By April 3-4 it was passing through this visible streamer belt region."
-)
+# streamer_belt_info was DELETED 2026-10-19 (L-410): the streamer belt
+# has no checkbox of its own now. It is drawn with the corona, under the
+# one "-- Corona" checkbox, whose tooltip is corona_info; the band keeps
+# its own hover in create_sun_streamer_band.
 
 # streamer_belt_info_hover was DELETED 2026-08-22 (L-224). It fed only
 # create_sun_streamer_belt_shell, which was dead code; the live band
@@ -995,28 +890,8 @@ alfven_surface_info_hover = (
     "  nanoflares, and magnetic reconnection are leading candidate mechanisms)."
 )
 
-inner_corona_info_hover = (
-    "Sun: Inner Corona (K-corona):<br><br>"
-
-    "The solar inner corona closest to the surface. Dominated by the K-corona --<br>"
-    "sunlight scattered off free electrons. Extends to ~2-3 solar radii.<br><br>"
-
-    "* Temperature: 1-3 million K (increases with altitude -- the coronal heating paradox)<br>"
-    "* K-corona dominates within ~2.3 R_sun; F-corona (dust) takes over beyond ~3 R_sun<br>"
-    "* Density: much denser than outer corona, but still far less than photosphere<br>"
-    "* Magnetic structures: coronal loops, coronal holes, streamers<br>"
-    "* Solar flares and CMEs originate here<br><br>"
-
-    "Roche limit proximity:<br>"
-    f"* The fluid Roche limit for comets (about {row_text('ROCHE_LIMIT_RADII')} R_sun) lies just outside this shell.<br>"
-    "* Any Kreutz sungrazer penetrating the inner K-corona is at or inside the tidal<br>"
-    "  disruption threshold. MAPS C/2026 A1 perihelion reached 1.23 R_sun --<br>"
-    "  deep inside both the inner corona and the Roche limit simultaneously.<br><br>"
-
-    f"* Solar Inner Corona (extends to 2-3 solar radii; drawn at {row_text('INNER_CORONA_RADII')}, about {row_text('INNER_CORONA_RADII', 'au')} AU)<br>"
-    "* Temperature: 1-2M K, or an average of about 1.5M K<br>"
-    "* Radiates at an average wavelength of 1.93 nm, extreme ultraviolet to soft X-ray."
-)
+# inner_corona_info_hover was DELETED 2026-10-19 (L-410), with its sphere;
+# the corona's words are corona_info and corona_info_hover, below.
 
 # Source: NASA solar interior model; Golub & Pasachoff (2010) The Solar Corona;
 # Source+: Bahcall et al. standard solar model; SUN_RADIUS_KM=695700 in constants_new.py
@@ -1144,13 +1019,14 @@ core_info_hover = (
 
 hover_text_sun_and_corona = (
     '<b>The Sun and Its Atmosphere</b><br><br>'
-    'Five corona/boundary layers now visualized separately:<br>'
-    f'* Inner Corona (K-corona): 1-{row_text('INNER_CORONA_RADII')} R_sun, ~1-3 million K<br>'
+    'The corona, the boundaries in it, and the dust beyond, each drawn on its own:<br>'
+    '* Corona: dots from the surface to the Alfven surface, thinning with height<br>'
     f'* Roche Limit: about {row_text('ROCHE_LIMIT_RADII')} R_sun -- tidal disruption threshold for comets<br>'
     f'* Streamer Belt (Visible Corona): helmets pinch at {row_text('HELMET_CUSP_RADII')} R_sun, the stalk fades beyond<br>'
     f'* Alfven Surface: ~{ALFVEN_SURFACE_RADII} R_sun -- true corona/solar wind boundary<br>'
     '  (Parker Solar Probe first crossing: April 28, 2021)<br>'
-    f'* Extended Corona (F-corona): {row_text('OUTER_CORONA_RADII')} R_sun, a boundary chosen for the drawing<br><br>'
+    f'* Zodiacal Dust Cloud (F-corona): dust out to {row_text('ZODIACAL_DUST_OUTER_AU')} AU ({row_text('ZODIACAL_DUST_OUTER_AU', 'km', grouping=True)} km),<br>'
+    '  flattened toward the planets\' plane<br><br>'
     f'Parker Solar Probe closest approach: {row_text('PARKER_CLOSEST_KM', 'r_sun')} R_sun from the Sun\'s center, December 24, 2024 (NASA)<br><br>'
     'The coronal heating paradox: the corona is 200x hotter than the photosphere<br>'
     'despite being farther from the energy source. Leading theories: Alfven waves,<br>'
@@ -1171,13 +1047,14 @@ hover_text_sun_and_corona = (
 # Tkinter CreateToolTip renders tags literally. This version is for GUI.
 hover_text_sun_and_corona_tooltip = (
     'The Sun and Its Atmosphere<br><br>'
-    'Five corona/boundary layers now visualized separately:<br>'
-    f'* Inner Corona (K-corona): 1-{row_text('INNER_CORONA_RADII')} R_sun, ~1-3 million K<br>'
+    'The corona, the boundaries in it, and the dust beyond, each drawn on its own:<br>'
+    '* Corona: dots from the surface to the Alfven surface, thinning with height<br>'
     f'* Roche Limit: about {row_text('ROCHE_LIMIT_RADII')} R_sun -- tidal disruption threshold for comets<br>'
     f'* Streamer Belt (Visible Corona): helmets pinch at {row_text('HELMET_CUSP_RADII')} R_sun, the stalk fades beyond<br>'
     f'* Alfven Surface: ~{ALFVEN_SURFACE_RADII} R_sun -- true corona/solar wind boundary<br>'
     '  (Parker Solar Probe first crossing: April 28, 2021)<br>'
-    f'* Extended Corona (F-corona): {row_text('OUTER_CORONA_RADII')} R_sun, a boundary chosen for the drawing<br><br>'
+    f'* Zodiacal Dust Cloud (F-corona): dust out to {row_text('ZODIACAL_DUST_OUTER_AU')} AU ({row_text('ZODIACAL_DUST_OUTER_AU', 'km', grouping=True)} km),<br>'
+    '  flattened toward the planets\' plane<br><br>'
     f'Parker Solar Probe closest approach: {row_text('PARKER_CLOSEST_KM', 'r_sun')} R_sun from the Sun\'s center, December 24, 2024 (NASA)<br><br>'
     'The coronal heating paradox: the corona is 200x hotter than the photosphere<br>'
     'despite being farther from the energy source. Leading theories: Alfven waves,<br>'
@@ -1377,52 +1254,13 @@ def create_sun_termination_shock_shell():
     return [shell_trace, info_trace]
 
 
-def create_sun_outer_corona_shell():
-    """Creates the Sun's extended outer corona (F-corona) shell."""
-    x, y, z = create_sphere_points(OUTER_CORONA_RADII * SOLAR_RADIUS_AU, n_points=20)
-    r_info = OUTER_CORONA_RADII * SOLAR_RADIUS_AU * 1.05
-
-    shell_trace = go.Scatter3d(
-        x=x, y=y, z=z,
-        mode='markers',
-        marker=dict(size=3.5, color='rgb(25, 25, 112)', opacity=0.5),
-        name='Sun: Outer Corona',
-        legendgroup='Sun: Outer Corona',
-        hoverinfo='skip',
-        showlegend=True
-    )
-    # Phase 1 re-pipe (May 28, 2026): factory-routed.
-    info_trace = create_info_marker(
-        0, 0, r_info,
-        'rgb(25, 25, 112)',
-        f"Sun: Outer Corona<br><br>{outer_corona_info_hover}",
-        'Sun: Outer Corona'
-    )
-    return [shell_trace, info_trace]
+# create_sun_outer_corona_shell was DELETED 2026-10-19 (L-410): the outer
+# corona sphere became part of the corona's one fade, create_sun_corona,
+# and the dust whose light it was became create_sun_zodiacal_dust.
 
 
-def create_sun_inner_corona_shell():
-    """Creates the Sun's inner corona (K-corona) shell."""
-    x, y, z = create_sphere_points(INNER_CORONA_RADII * SOLAR_RADIUS_AU, n_points=20)
-    r_info = INNER_CORONA_RADII * SOLAR_RADIUS_AU * 1.05
-
-    shell_trace = go.Scatter3d(
-        x=x, y=y, z=z,
-        mode='markers',
-        marker=dict(size=3.0, color='rgb(0, 0, 255)', opacity=0.45),
-        name='Sun: Inner Corona',
-        legendgroup='Sun: Inner Corona',
-        hoverinfo='skip',
-        showlegend=True
-    )
-    # Phase 1 re-pipe (May 28, 2026): factory-routed.
-    info_trace = create_info_marker(
-        0, 0, r_info,
-        'rgb(0, 0, 255)',
-        f"Sun: Inner Corona<br><br>{inner_corona_info_hover}",
-        'Sun: Inner Corona'
-    )
-    return [shell_trace, info_trace]
+# create_sun_inner_corona_shell was DELETED 2026-10-19 (L-410): the inner
+# corona sphere became part of the corona's one fade, create_sun_corona.
 
 
 # create_sun_streamer_belt_shell was DELETED 2026-08-22 (L-224). It was
@@ -2087,14 +1925,17 @@ def create_sun_streamer_band(center_position=(0, 0, 0)):
         "exists (L-224)."
     )
 
+    # L-410 (Tony, 2026-10-19): the corona is ONE feature, the fade and
+    # this band, under one checkbox and one legend entry, so the band
+    # joins the corona's legend group and shows no entry of its own.
     band_trace = go.Scatter3d(
         x=x_au, y=y_au, z=z_au,
         mode='markers',
         marker=dict(size=sizes, color=colors, symbol='circle'),
-        name='Sun: Streamer Belt',
-        legendgroup='Sun: Streamer Belt',
+        name=CORONA_LEGEND,
+        legendgroup=CORONA_LEGEND,
         hoverinfo='skip',
-        showlegend=True
+        showlegend=False
     )
 
     # Info marker: at the cusp, at the longitude where the warp peaks,
@@ -2114,8 +1955,219 @@ def create_sun_streamer_band(center_position=(0, 0, 0)):
         mx, my, mz,
         'rgb(255, 200, 80)',
         f"Sun: Streamer Belt<br><br>{band_hover}",
-        'Sun: Streamer Belt',
+        CORONA_LEGEND,
         customdata='Streamer Belt'
     )
     return [band_trace, info_trace]
 
+
+
+#####################################
+# The corona's fade and the zodiacal dust cloud (L-410 with L-131)
+#####################################
+# Built 2026-10-19 on Tony's rulings of that day (design record:
+# documentation/SOURCES_L410_sun_corona_dust_20261019.md). The words are
+# Tony's approved list, documentation/WORDS_L410_sun_fades_20261019.md,
+# items 1a to 1e, 2a to 2e, 3b and 3c, written once here in newlines and
+# turned to <br> only at the Plotly boundary (L-191's canonical form).
+# The checkbox tooltip carries the hover's words and the panel's; the
+# website serves the same words from data/objects_config.json.
+#
+# Source: every figure below is read from its row in constants_new.py,
+# Source+: where each carries its citation: Kasper et al. (2021) for the
+# Source+: Alfven surface; NASA, "Sun: Facts", for the corona's
+# Source+: temperature; Kelsall et al. (1998) for the dust cloud's
+# Source+: density exponent, tilt and outer cutoff; Lamy, Gilardy and
+# Source+: Llebaria (2022) for the depletion and dust-free zones; Nesvorny
+# Source+: et al. (2010) for where the dust comes from. The words also
+# Source+: name Boe et al. (2021), Mann et al. (2023) and Howard et al.
+# Source+: (2019), each carried on its row's Source line.
+
+def _temperature_text(name):
+    """A temperature row in kelvin, grouped by thousands."""
+    return row_text(name, grouping=True)
+
+
+# 1c, the corona's hover (the glance).
+corona_hover_words = (
+    "The Sun's outer atmosphere, a very thin gas of electrons and ions.\n"
+    "It has no edge. It thins out with height, and at the Alfven surface,\n"
+    f"about {row_text('ALFVEN_SURFACE_RADII')} solar radii "
+    f"({row_text('ALFVEN_SURFACE_RADII', 'au')} AU) from the Sun's center, "
+    "it becomes\n"
+    "the solar wind.\n"
+    "Each dot's place shows how dense the gas is; its brightness shows\n"
+    "how much sunlight reaches it.\n"
+    "The streamer belt, drawn with it, is the part of the corona where\n"
+    "the Sun's magnetic field closes in loops."
+)
+
+# 1d with 3c, the corona's panel text.
+corona_panel_words = (
+    "The corona's glow, seen at a total eclipse, is sunlight scattered by\n"
+    "its free electrons, called the K-corona (Boe and others, 2021). How\n"
+    "dense the gas is at each height comes from a model of the solar wind\n"
+    "from the Sun's surface out past Earth's orbit (Mann and others, 2023).\n"
+    "The dots follow it: crowded at the surface, sparse by the Alfven\n"
+    "surface. Farther out a second, fainter light takes over, sunlight\n"
+    "scattered by dust, the F-corona; that dust is drawn as its own cloud.\n"
+    "The corona is very hot, up to about "
+    f"{_temperature_text('CORONA_TEMPERATURE_MAX_K')} kelvin, far hotter\n"
+    "than the surface below it (NASA)."
+)
+
+# 1e, the drawing note.
+corona_note_words = (
+    "The corona is drawn in two parts. The dots show how dense its gas is\n"
+    "at each height, on average, drawn the same in every direction. The\n"
+    "streamer belt, drawn as a band, shows the brightest part of the\n"
+    "corona, where the Sun's magnetic field closes in loops. The dots stop\n"
+    "at the Alfven surface, the outer edge of the Sun's atmosphere, where\n"
+    "the gas becomes the solar wind."
+)
+
+# The checkbox tooltip, "-- Corona": all three, in newlines.
+corona_info = (corona_hover_words + "\n\n" + corona_panel_words + "\n\n"
+               + corona_note_words)
+corona_info_hover = "Sun: Corona\n\n" + corona_hover_words
+
+# 2c, the dust cloud's hover.
+zodiacal_dust_hover_words = (
+    "Dust spread through the inner solar system, flattened toward the\n"
+    "plane the planets move in. It thins with distance from the Sun and\n"
+    f"has no edge; the drawing stops at {row_text('ZODIACAL_DUST_OUTER_AU')} AU "
+    f"({row_text('ZODIACAL_DUST_OUTER_AU', 'km', grouping=True)} km).\n"
+    "Each dot's place shows how dense the dust is; its brightness shows\n"
+    "how much sunlight reaches it.\n"
+    "Near the Sun this dust is seen as the F-corona."
+)
+
+# 2d with 3b, the dust cloud's panel text.
+zodiacal_dust_panel_words = (
+    "This dust scatters sunlight. Near the Sun that light is the F-corona,\n"
+    "the part of the zodiacal light closest to the Sun (Boe and others,\n"
+    "2021). The cloud's shape follows the model fitted to the COBE\n"
+    "satellite's infrared sky: its density falls with distance from the\n"
+    f"Sun to the power {row_text('ZODIACAL_DUST_DENSITY_EXPONENT')}, and it is "
+    "flattened toward a middle\n"
+    f"plane tilted {row_text('ZODIACAL_DUST_TILT_DEG')} degrees to Earth's "
+    "orbit (Kelsall and others, 1998).\n"
+    "Close to the Sun the dust thins from about "
+    f"{row_text('DUST_DEPLETION_OUTER_RADII')} solar radii inward\n"
+    f"and is gone by about {row_text('DUST_FREE_ZONE_RADII')}, the dust-free "
+    "zone (Lamy and others, 2022);\n"
+    "Parker Solar Probe saw the first signs of it (Howard and others, 2019).\n"
+    "There, the cloud's middle plane is also warped (Lamy and others, 2022),\n"
+    "which the drawing does not show.\n"
+    "Judged by its infrared glow, most of this dust comes from comets whose\n"
+    "orbits Jupiter shapes, the Jupiter-family comets: "
+    f"{row_text('ZODIACAL_DUST_JFC_LOW_PERCENT')} to "
+    f"{row_text('ZODIACAL_DUST_JFC_HIGH_PERCENT')}\n"
+    "percent. Asteroids give less than "
+    f"{row_text('ZODIACAL_DUST_ASTEROID_MAX_PERCENT')} percent "
+    "(Nesvorny and others, 2010)."
+)
+
+# 2e, the dust cloud's drawing note.
+zodiacal_dust_note_words = (
+    "The cloud has no edge. The dots stop at "
+    f"{row_text('ZODIACAL_DUST_OUTER_AU')} AU, where the COBE model\n"
+    "stops adding up its light. Only the model's smooth cloud is drawn, not\n"
+    "the narrow dust bands it also includes."
+)
+
+zodiacal_dust_info = (zodiacal_dust_hover_words + "\n\n"
+                      + zodiacal_dust_panel_words + "\n\n"
+                      + zodiacal_dust_note_words)
+zodiacal_dust_info_hover = ("Sun: Zodiacal Dust Cloud (F-corona)\n\n"
+                            + zodiacal_dust_hover_words)
+
+# One legend entry for the corona's two drawings (Tony, 2026-10-19: the
+# corona is ONE feature, the fade and the streamer belt, one name, one
+# checkbox, one legend entry, one colour family).
+CORONA_LEGEND = 'Sun: Corona'
+ZODIACAL_DUST_LEGEND = 'Sun: Zodiacal Dust Cloud (F-corona)'
+
+
+def _shaded_dots(weights, rgb, alpha_low, alpha_high, size_low, size_high):
+    """Per-dot colours and sizes from weights 0 to 1: brighter and larger
+    toward weight 1, the sunlit end. Rendering settings."""
+    colors = ['rgba(%s, %.3f)' % (rgb, alpha_low + (alpha_high - alpha_low) * w)
+              for w in weights]
+    sizes = [size_low + (size_high - size_low) * w for w in weights]
+    return colors, sizes
+
+
+def create_sun_corona(center_position=(0, 0, 0)):
+    """The Sun's corona as dots that thin out with distance (L-410).
+
+    The dots are the stored drawing sun_corona_sampler.drawn_corona()
+    places, in solar radii, from the Sun's surface to the Alfven surface:
+    a dot's place follows the electron density of Mann et al. (2023), its
+    weight the sunlight reaching it. Scaled by SOLAR_RADIUS_AU; drawn
+    round. The website draws the same dots from
+    data/drawings/sun_corona.json. One info marker, over the north pole
+    at the Alfven surface, stepped 20 degrees off the pole so it does not
+    sit on the Alfven surface's own marker (Marker Separation for
+    Near-Equal Radii). The streamer band joins this legend entry.
+    """
+    from sun_corona_sampler import drawn_corona
+    cx, cy, cz = center_position
+    dots = drawn_corona()
+    # Colour family of the streamer band, rgb(255, 200, 80), paler, and
+    # the shading by weight: rendering settings.
+    colors, sizes = _shaded_dots(dots['w'], '255, 225, 150', 0.15, 0.85,
+                                 1.2, 3.0)
+    scale = SOLAR_RADIUS_AU
+    traces = [go.Scatter3d(
+        x=[v * scale + cx for v in dots['x']],
+        y=[v * scale + cy for v in dots['y']],
+        z=[v * scale + cz for v in dots['z']],
+        mode='markers',
+        marker=dict(size=sizes, color=colors, symbol='circle'),
+        name=CORONA_LEGEND, legendgroup=CORONA_LEGEND,
+        hoverinfo='skip', showlegend=True,
+    )]
+    info_polar_deg = 20.0
+    r_info = ALFVEN_SURFACE_RADII * SOLAR_RADIUS_AU * 1.05
+    traces.append(create_info_marker(
+        r_info * math.sin(math.radians(info_polar_deg)) + cx, cy,
+        r_info * math.cos(math.radians(info_polar_deg)) + cz,
+        'rgb(255, 225, 150)', corona_info_hover.replace('\n', '<br>'),
+        CORONA_LEGEND, customdata='Corona'))
+    return traces
+
+
+def create_sun_zodiacal_dust(center_position=(0, 0, 0)):
+    """The zodiacal dust cloud as dots (L-131).
+
+    The dots are the stored drawing zodiacal_dust_sampler.drawn_dust()
+    places, in AU in the ecliptic frame, from the edge of the dust-free
+    zone to 5.2 AU: a dot's place follows Kelsall et al. (1998)'s smooth
+    cloud, its weight the sunlight reaching it. The website draws the
+    same dots from data/drawings/zodiacal_dust.json. One info marker, in
+    the cloud's middle plane just past its outer edge, toward the plane's
+    ascending node: on the cloud, clear of the poles where it is empty.
+    """
+    from zodiacal_dust_sampler import drawn_dust, rows_from_store, to_ecliptic
+    cx, cy, cz = center_position
+    dots = drawn_dust()
+    colors, sizes = _shaded_dots(dots['w'], '215, 190, 150', 0.2, 0.9,
+                                 1.2, 3.0)
+    traces = [go.Scatter3d(
+        x=[v + cx for v in dots['x']],
+        y=[v + cy for v in dots['y']],
+        z=[v + cz for v in dots['z']],
+        mode='markers',
+        marker=dict(size=sizes, color=colors, symbol='circle'),
+        name=ZODIACAL_DUST_LEGEND, legendgroup=ZODIACAL_DUST_LEGEND,
+        hoverinfo='skip', showlegend=True,
+    )]
+    rows = rows_from_store()
+    mx, my, mz = to_ecliptic(rows['ZODIACAL_DUST_OUTER_AU'] * 1.03, 0.0, 0.0,
+                             rows)
+    traces.append(create_info_marker(
+        mx + cx, my + cy, mz + cz, 'rgb(215, 190, 150)',
+        zodiacal_dust_info_hover.replace('\n', '<br>'),
+        ZODIACAL_DUST_LEGEND, customdata='Zodiacal Dust Cloud'))
+    return traces

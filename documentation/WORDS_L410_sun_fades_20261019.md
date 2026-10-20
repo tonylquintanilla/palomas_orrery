@@ -173,9 +173,26 @@ Drafts for the next session, for Tony to mark there:
 The streamer belt, drawn with it, is the part of the corona that the
 Sun's magnetic field holds in loops over its magnetic equator.
 
+**1c, marked 2026-10-19 (build session).** No source we have opened
+says the helmets sit over the magnetic equator: Suess and Nerney
+(2004) say only that they are the closed-field regions, and neither
+Gemini worksheet of 2026-10-19 has a row on the streamer belt. Tony:
+"drop for now but keep a breadcrumb." Approved line:
+The streamer belt, drawn with it, is the part of the corona where the
+Sun's magnetic field closes in loops.
+Breadcrumb: "over the Sun's magnetic equator" waits for a source; it
+is recorded on the ledger (L-410) so a later relay can ask for it.
+
 **1d, the sentence 3c adds at the end of the panel text.**
 The corona is very hot, up to about {CORONA_TEMPERATURE_MAX_K} kelvin,
 far hotter than the surface below it (NASA).
+
+**1d, marked 2026-10-19 (build session).** Confirmed by Tony as
+drafted. The page was re-opened before marking: "Sun: Facts - NASA
+Science", https://science.nasa.gov/sun/facts/ -- "The corona reaches
+up to 3.5 million deg F (2 million deg C) - much, much hotter than the
+photosphere." 2 million degrees Celsius is 2 million kelvin to the one
+figure printed.
 
 **1e, reworded** (Tony's question: "how does the corona differ from
 the streamer belt. this suggests they are connected." They are: the
@@ -187,6 +204,20 @@ in the helmets of the streamer belt, which reach about
 {HELMET_CUSP_LOW_RADII} to {HELMET_CUSP_HIGH_RADII} solar radii (Suess
 and Nerney, 2004) and are drawn with this one. The dots stop at the
 Alfven surface.
+
+**1e, marked 2026-10-19 (build session).** Tony: "it's a bit
+confusing. the same issue arises here, distinguishing between the
+corona 'dots' and the streamer belt. also, the alfven surface is not
+defined." The helmet heights move to the streamer belt's own words,
+where their citation prints (a website note holds only drawing
+choices); "over the Sun's magnetic equator" goes, as in 1c. Approved,
+"yes, clearer. approved.":
+The corona is drawn in two parts. The dots show how dense its gas is
+at each height, on average, drawn the same in every direction. The
+streamer belt, drawn as a band, shows the brightest part of the
+corona, where the Sun's magnetic field closes in loops. The dots stop
+at the Alfven surface, the outer edge of the Sun's atmosphere, where
+the gas becomes the solar wind.
 
 **The streamer belt's own words** change too: today it is a separate
 checkbox and entry. The build brings them as a list, with its seven

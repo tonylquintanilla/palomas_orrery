@@ -1169,8 +1169,10 @@ LAUNCH_GROUPS = {
          "export_drawings.py",
          "Write data/drawings/: the dots the orrery places and the website "
          "draws as given -- the Hills cloud (hills_cloud_sampler.py), Earth's "
-         "radiation belts (van_allen_belt_sampler.py) and Earth's hydrogen "
-         "exosphere (earth_exosphere_sampler.py), each from its rows with a "
+         "radiation belts (van_allen_belt_sampler.py), Earth's hydrogen "
+         "exosphere (earth_exosphere_sampler.py), the Sun's corona "
+         "(sun_corona_sampler.py) and the zodiacal dust cloud "
+         "(zodiacal_dust_sampler.py), each from its rows with a "
          "fixed seed, the same dots the orrery window draws (L-421, Tony's "
          "option A). Writes only when the dots change.",
          SCRIPT_DIR,
