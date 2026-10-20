@@ -14,7 +14,13 @@ DONE. The website is not touched. Added at the close: a Gemini prompt
 for the Sun's numbers,
 `prompts/RELAY_L411_gemini_sun_numbers_20261019.md` (L-411); carry it
 to Gemini 4 Argon at its highest thinking level, and save the worksheet
-in `documentation/worksheets/`.
+in `documentation/worksheets/`. Done the same night: reviewed in
+`REVIEW_L411_gemini4_worksheet_20261019.md`. Its one real find, the
+chromosphere's base temperature in kelvin, needs new words from you.
+Your answers on the fades' words came back the same night; revision 3
+of the list
+records them, with the ruling that the corona and the streamer belt
+are one feature, and drafts for 1c, 1d and 1e to mark next session.
 Tony's local folders: orrery
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\
 gallery

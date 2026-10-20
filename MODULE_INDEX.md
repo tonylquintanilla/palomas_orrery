@@ -11,29 +11,21 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 166  
-**Total Lines of Code (non-blank):** 130,037  
-**Total Public Functions/Classes:** 1,614
+**Total Python Files:** 162  
+**Total Lines of Code (non-blank):** 129,382  
+**Total Public Functions/Classes:** 1,600
 
 ## Classification Coverage
 
-**Undetermined role (11).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (7).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
-- `patch_L385_1_opening_views_20261019.py`
-- `patch_L385_2_every_view_20261019.py`
-- `patch_L385_3_session_close_20261019.py`
-- `patch_L456_1_mode5_notes_20261018.py`
 - `test_drawings_export.py`
 - `test_earth_pole_of_date.py`
 - `test_extractor_pins.py`
 - `test_hills_cloud_sampler.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
-
-**Undetermined domain (1).** No valid `Domain:` tag.
-
-- `patch_L456_1_mode5_notes_20261018.py`
 
 
 ---
@@ -268,10 +260,6 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
-| `patch_L385_1_opening_views_20261019.py` | - the orrery's opening views (L-385), the first of the Sun's drawings (L-412). Every center body's Auto view opens on its farthest shell drawn plus 20 percent; the center body's rotation axis and dipole cone are drawn to end just past that shell; low orbit ... (156 lines) |
-| `patch_L385_2_every_view_20261019.py` | - the orrery's opening views (L-385), part 2: every view, still and animated, opens on the farthest thing drawn, shell or orbit, plus 20 percent. (132 lines) |
-| `patch_L385_3_session_close_20261019.py` | - the session's records: the opening views (L-385) and the Sun's two fades designed (L-410, L-131). (219 lines) |
-| `patch_L456_1_mode5_notes_20261018.py` | - records only: Tony's Mode 5 notes after L-455, written where the next sessions read them. No code changes. (148 lines) |
 | `test_drawings_export.py` | Each stored drawing in data/drawings/ is the drawing its rows give today, git tracks it, and each check can fail. (288 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |

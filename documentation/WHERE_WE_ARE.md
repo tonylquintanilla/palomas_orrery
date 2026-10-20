@@ -17,8 +17,11 @@ Last updated: October 19, 2026, evening: the opening views done and pushed; the 
 > dust cloud), built from your answers on the words list.*
 >
 > **Needs you now:**
-> - The fades' words, revision 2, before that build: answer in place in
->   `WORDS_L410_sun_fades_20261019.md`, section 3 especially.
+> - Fades' words answered; revision 3's three drafts (the corona and
+>   streamer belt now one feature) are marked at the build's start.
+> - Gemini 4 checked the Sun's numbers: they hold. One sentence is off:
+>   the chromosphere's base is near 4,400 kelvin, not 6,000. New words
+>   for it come to you as a list (L-411, the Sun's typed numbers).
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
@@ -71,7 +74,6 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 - Belts: random dots, both curved. Low orbit starts at ESA's 180 km.
   A lost run record stops the Daily Run. Lines past a hover's 17 go to
   its i panel. What a visitor reads: in provenance-discipline. (Oct 17)
-- Earth's talks wait; the Sun's numbers, then its drawings, then the objects. (Oct 17)
 - Temperatures in kelvin. The Sun's numbers end with L-455. (Oct 17)
 - Earth's deep temperatures from open papers; the mantle stays in two. (Oct 18)
 - The Sun's drawings: opening view, then corona fade with dust; ice lines wait. (Oct 18)

@@ -1,5 +1,7 @@
 <!-- Doc-Kind: hand | The words a visitor will read for the Sun's two fades (L-410 with L-131), revision 1, for Tony's review before the build. -->
-# Words: the Sun's corona and dust cloud, revision 2
+# Words: the Sun's corona and dust cloud, revision 3
+
+**Tony:** -- annotations -- 
 
 Built on orrery 6e0cfacd0b6aa42cb09b0ca765be94e68aab6f70 at
 https://github.com/tonylquintanilla/palomas_orrery and gallery
@@ -39,11 +41,11 @@ dust.
 ## 1. The corona (replaces "Inner Corona" and "Extended Corona")
 
 **1a. Name.** Corona
-(orrery checkbox: "-- Corona"; the two old checkboxes go)
+(orrery checkbox: "-- Corona"; the two old checkboxes go) -- yes
 
 **1b. Description** (website, one line).
 The Sun's outer atmosphere: a very thin gas that thins out with height
-until it becomes the solar wind.
+until it becomes the solar wind. -- yes
 
 **1c. Hover.**
 Corona
@@ -52,7 +54,7 @@ It has no edge. It thins out with height, and at the Alfven surface,
 about {ALFVEN_SURFACE_RADII} solar radii ({ALFVEN_SURFACE_RADII in AU} AU)
 from the Sun's center, it becomes the solar wind.
 Each dot's place shows how dense the gas is; its brightness shows how
-much sunlight reaches it.
+much sunlight reaches it. -- yes
 
 **1d. Panel text** (website "about"; orrery checkbox tooltip).
 The corona's glow, seen at a total eclipse, is sunlight scattered by
@@ -62,21 +64,21 @@ from the Sun's surface out past Earth's orbit (Mann and others, 2023).
 The dots follow it: crowded at the surface,
 sparse by the Alfven surface. Farther out a second, fainter light
 takes over, sunlight scattered by dust, the F-corona; that dust is
-drawn as its own cloud.
+drawn as its own cloud. -- yes
 
 **1e. Drawing note** (website `source_note`; the orrery says the same
 in its tooltip).
 The dots show the model's smooth average, drawn the same in every
 direction. The real corona is lumpy, shaped by the Sun's magnetic
 field into streamers and holes; the streamer belt is drawn
-separately. The dots stop at the Alfven surface.
+separately. The dots stop at the Alfven surface. -- discuss: how does the corona differ from the streamer belt. this suggests they are connected. 
 
 **What goes.** The two old hovers and tooltips, and the website's
 "Inner Corona" and "Outer Corona" entries. Their temperatures ("1-3
 million K", "one to three million kelvin"), the "~2.3" and "~3 R_sun"
 crossover, and the "1.93 nm" and "1.159 nm" wavelengths have no row
 behind them and are not carried. If you want a temperature back, it
-needs a source and a row first.
+needs a source and a row first. -- discuss: i thought we found temperature sources?
 
 ## 2. The dust cloud (new)
 
@@ -85,7 +87,7 @@ needs a source and a row first.
 
 **2b. Description** (website, one line).
 Dust spread through the inner solar system in a flattened cloud. Near
-the Sun its scattered sunlight is the F-corona.
+the Sun its scattered sunlight is the F-corona. -- yes
 
 **2c. Hover.**
 Zodiacal Dust Cloud
@@ -94,7 +96,7 @@ the planets move in. It thins with distance from the Sun and has no
 edge; the drawing stops at {ZODIACAL_DUST_OUTER_AU} AU.
 Each dot's place shows how dense the dust is; its brightness shows how
 much sunlight reaches it.
-Near the Sun this dust is seen as the F-corona.
+Near the Sun this dust is seen as the F-corona. -- yes
 
 **2d. Panel text.**
 This dust scatters sunlight. Near the Sun that light is the F-corona,
@@ -108,12 +110,12 @@ thins from about {DUST_DEPLETION_OUTER_RADII} solar radii inward and
 is gone by about {DUST_FREE_ZONE_RADII}, the dust-free zone (Lamy and
 others, 2022); Parker Solar Probe saw the first signs of it (Howard
 and others, 2019). There, the cloud's middle plane is also warped
-(Lamy and others, 2022), which the drawing does not show.
+(Lamy and others, 2022), which the drawing does not show. -- yes
 
 **2e. Drawing note.**
 The cloud has no edge. The dots stop at {ZODIACAL_DUST_OUTER_AU} AU,
 where the COBE model stops adding up its light. Only the model's
-smooth cloud is drawn, not the narrow dust bands it also includes.
+smooth cloud is drawn, not the narrow dust bands it also includes. -- yes
 
 ## 3. Left out on purpose, for you to decide
 
@@ -122,12 +124,12 @@ nearly straight on, which is why the F-corona is brightest just beside
 the Sun, and it depends on where the viewer stands, so no drawing of
 the cloud can show it. I would like to say this in the panel, but the
 sources read so far do not state it in words, so it is out until one
-does. Keep looking for a source, or leave it out?
+does. Keep looking for a source, or leave it out? -- leave out
 
 **3a, after Gemini.** Still unsourced. Its sources were a paper about
 dust on a telescope's own lenses, a paper not re-opened, and a
 commercial web page; a review re-opened here does not say it either.
-Recommended: leave it out.
+Recommended: leave it out. -- yes
 
 **3b. Where the dust comes from: now sourced.** Proposed for the end of
 2d:
@@ -136,7 +138,7 @@ whose orbits Jupiter shapes, the Jupiter-family comets:
 {ZODIACAL_DUST_JFC_LOW_PERCENT} to {ZODIACAL_DUST_JFC_HIGH_PERCENT}
 percent. Asteroids give less than {ZODIACAL_DUST_ASTEROID_MAX_PERCENT}
 (Nesvorny and others, 2010).
-Keep, change, or leave out?
+Keep, change, or leave out? -- keep
 
 **3c. A temperature for the corona (optional).** NASA's "Our Sun:
 Facts" page gives the corona as reaching up to 2 million degrees
@@ -144,7 +146,52 @@ Celsius, which is 2 million kelvin to the figure printed. Proposed for
 the end of 1d: "The corona is very hot, up to about
 {CORONA_TEMPERATURE_MAX_K} kelvin, far hotter than the surface below
 it (NASA)." The page is re-opened at the build before it becomes a
-row. Keep it, or leave the temperature out?
+row. Keep it, or leave the temperature out? -- keep. this may answer my discussion question above.
+
+## 5. Revision 3, from Tony's answers (2026-10-19, late)
+
+Tony answered every item; his marks stay where he wrote them above. 2a,
+the dust cloud's name, had no mark and is taken as "yes"; say if not.
+
+**Ruled.** The corona is ONE feature built from two drawings: the fade
+and the streamer belt, one name ("Corona"), one checkbox, one legend
+entry, one colour family, switched on and off together, with the hover
+explaining that the belt is part of the corona. Tony: "yes, with the
+hover explaining." A single density model that varies with latitude
+would merge them into one drawing; no open source for one has a stated
+range, so that waits.
+
+**3c kept**, which answers the temperature question under "What goes":
+the corona's one temperature is NASA's, up to about 2 million kelvin,
+from a row. The old "1 to 3 million", the wavelengths worked from it,
+and the dust-overtakes-electrons distance (sources range from 2.3 to 6
+solar radii) stay out.
+
+Drafts for the next session, for Tony to mark there:
+
+**1c, one line added at the end of the hover.**
+The streamer belt, drawn with it, is the part of the corona that the
+Sun's magnetic field holds in loops over its magnetic equator.
+
+**1d, the sentence 3c adds at the end of the panel text.**
+The corona is very hot, up to about {CORONA_TEMPERATURE_MAX_K} kelvin,
+far hotter than the surface below it (NASA).
+
+**1e, reworded** (Tony's question: "how does the corona differ from
+the streamer belt. this suggests they are connected." They are: the
+belt is part of the corona).
+The dots show the model's smooth average, drawn the same in every
+direction. The real corona is shaped by the Sun's magnetic field. Over
+the Sun's magnetic equator the field closes in loops that hold the gas
+in the helmets of the streamer belt, which reach about
+{HELMET_CUSP_LOW_RADII} to {HELMET_CUSP_HIGH_RADII} solar radii (Suess
+and Nerney, 2004) and are drawn with this one. The dots stop at the
+Alfven surface.
+
+**The streamer belt's own words** change too: today it is a separate
+checkbox and entry. The build brings them as a list, with its seven
+numbers set by eye (L-411), which come up when its shape is next
+touched.
 
 ## 4. The rows these words need (written at the build)
 

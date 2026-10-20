@@ -1655,6 +1655,19 @@ re-read against the rule when the Sun's turn comes.
     origin is now sourced (Nesvorny et al. 2010); forward scattering is
     not. Re-opening caught two papers it named under the wrong authors.
     The words go to revision 2.
+  - **Tony's answers on the words, 2026-10-19 late** (in place in
+    `documentation/WORDS_L410_sun_fades_20261019.md`): every item yes but
+    two, discussed. On 1e, "how does the corona differ from the
+    streamer belt. this suggests they are connected": they are; the belt
+    is the part of the corona the magnetic field holds in loops. Then
+    Tony's question, "should we redraw the corona to include the
+    streamer belt as one feature rather than two", and on the
+    recommendation: "yes, with the hover explaining." So the corona is
+    ONE feature from two drawings (the fade and the streamer belt): one
+    name, one checkbox, one legend entry, switched together. Forward
+    scattering left out; the dust's origin kept; NASA's corona
+    temperature kept. Revision 3 holds the rulings and drafts for 1c,
+    1d and 1e, marked at the next session.
 **Gap (replaces the one above, 2026-10-19):** build the Sun's two fades
 as designed: the plasma corona (this item) and the dust cloud (L-131),
 each written twice, Python and JavaScript, after Tony's answers on the
@@ -1758,8 +1771,23 @@ section. The Roche limit's band and L-241's wording are re-read then.
   cloud model's year). The chromosphere's name already has a row and
   needs printing from it, not a source. The orrery-only groups T, M and
   C wait for their own slice.
-**Gap:** groups T, M and C, the three leftovers above and the
-chromosphere's name, one shell at a time. Not part of the Sun's
+- **2026-10-19, Gemini 4's return** (high setting), reviewed in
+  `documentation/REVIEW_L411_gemini4_worksheet_20261019.md`. The
+  fourteen numbers held up; three rows it could not open stand on this
+  project's own reads. One real find, re-opened and confirmed: the
+  website's chromosphere sentence says "about 6,000 kelvin at the
+  bottom", but NASA's Sun Fact Sheet gives 4,400 K at the top of the
+  photosphere and about 30,000 K at the top of the chromosphere;
+  NASA/Marshall's 6,000 is degrees Celsius. New words to Tony. Sources
+  now opened for the held core and convection-zone temperatures
+  (Bahcall et al. 2001, Table 5 and sec. 3.3) and for Parker's first
+  crossing (Kasper et al. 2021: 28 April 2021, 19.7 to 18.4 solar radii
+  from the centre). Re-opening caught Gemini misquoting the Fact Sheet.
+**Gap:** the held sentences first, from Gemini 4's return (review
+above): rows for the core's centre, the convection zone's base and
+Parker's first crossing; new words for the chromosphere's temperature;
+the chromosphere's name from its row. Then groups T, M and C, the three
+leftovers above, one shell at a time. Not part of the Sun's
 numbers half, which ends with L-455.
 **Ref:** `solar_visualization_shells.py`, `comet_visualization_shells.py`;
 gallery `data/objects_config.json`; L-228, L-371.
