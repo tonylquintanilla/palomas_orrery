@@ -743,7 +743,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*234 live items; 218 need attention (`!`); 166 RICE-scored; 215 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*233 live items; 217 need attention (`!`); 166 RICE-scored; 216 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -864,7 +864,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-379 | The recorded Earth scene payload is aging, and three checks patch it piece by piece (checks, gallery) | OPEN | -- | 2026-10-06 |
 | ! | L-381 | The uncertainty field's pattern reads a sentence's full stop as a decimal point (export, checks) | OPEN | -- | 2026-09-28 |
 | ! | L-382 | Earth's magnetosphere costs about 42 percent more per orrery animation frame since D8 (orrery, rendering) | OPEN | -- | 2026-09-28 |
-| ! | L-385 | The orrery's Auto view of the Sun opens about 31 times wider since Stage D (orrery, Tony's eye) | OPEN | -- | 2026-10-19 |
 | ! | L-387 | The orrery's hovers print the conversion names by their own formats, not by the computed count (orrery) | OPEN | -- | 2026-09-28 |
 | ! | L-391 | Group clouds: the Trojans' sources, and the shapes of the three other groups (gallery, exhibits) | OPEN | -- | 2026-09-29 |
 | ! | L-393 | Encounter data: dates, spacecraft records centred on their targets, and how far the cache reaches in time (gallery, cache) | OPEN | -- | 2026-09-29 |
@@ -1212,6 +1211,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-380 | The gallery maintenance routine pulls the constants export after the cache build (gallery, routine) | DONE | -- | 2026-10-16 |
 |  | L-383 | shell_configs.py's magnetosphere tooltip says nothing of the tail and puts the belts at the flux peak (orrery, words) | DONE | -- | 2026-10-04 |
 |  | L-384 | The scaling rule stops short of a single measured value scaled by an exact row (skills, store) | DONE | -- | 2026-09-28 |
+|  | L-385 | The orrery's Auto view of the Sun opens about 31 times wider since Stage D (orrery, Tony's eye) | DONE | -- | 2026-10-19 |
 |  | L-386 | The Sun's conversion rows, not yet exported (store, the Sun's slice) | DONE | -- | 2026-10-17 |
 |  | L-388 | The gallery's export pull can print success when it could not fetch, and the mirror then writes from the old export (gallery, tooling) | DONE | -- | 2026-10-16 |
 |  | L-389 | Earth's atmosphere shells are measured from the equatorial radius, and the crust now sits at the mean radius (store, Tony's eye) | DONE | -- | 2026-10-05 |
@@ -1746,6 +1746,18 @@ section. The Roche limit's band and L-241's wording are re-read then.
   every run with this handle. When one is sourced or removed, the
   check marks it no longer found and it comes off HELD in the same
   patch.
+- **2026-10-19, an outside check asked for** (Tony: "are there any
+  already approved words that would benefit from a cross check or
+  words that we omitted from lack of sources where Gemini 4 could
+  help?"). The Sun's fourteen numbers of 2026-10-17 and 18 had one
+  reader only. A slice relay (provenance-cross-check 1.1):
+  `documentation/prompts/RELAY_L411_gemini_sun_numbers_20261019.md`,
+  eleven citation rows (those numbers) and five discovery rows (the
+  core's, the radiative zone's and the chromosphere's held temperatures
+  and density, Parker's 2021 crossing of the Alfven surface, the Hills
+  cloud model's year). The chromosphere's name already has a row and
+  needs printing from it, not a source. The orrery-only groups T, M and
+  C wait for their own slice.
 **Gap:** groups T, M and C, the three leftovers above and the
 chromosphere's name, one shell at a time. Not part of the Sun's
 numbers half, which ends with L-455.
@@ -2938,110 +2950,6 @@ is enough. L-422 holds the shape; this item holds the check.
   export's value for the unit, when this item is built.
 **Gap:** The orrery prints each converted value through `constants_rows.conversion_text()` (or `conversions()` for a row with no conversion name); with L-352, since both are the orrery's display formatting.
 **Ref:** `shell_configs.py`; `earth_visualization_shells.py`; `constants_rows.py`; L-345; L-352.
-
-#### [L-385] The orrery's Auto view of the Sun opens about 31 times wider since Stage D (orrery, Tony's eye)
-<!-- L:385 status:OPEN upd:2026-10-19 section:A flag: rice: -->
-**Tony:** (on Where We Are, 2026-09-30, how wide the Sun's opening view
-is in the orrery) "photosphere + 10%"
-- **Found 2026-09-24** building L-322 Stage D's orrery autoscale (D4).
-  With its inner shells on, the Sun's view opens about 31 times wider
-  than before: its half-width goes from 0.0093 AU to 0.29 AU, because
-  its rotation axis is drawn 52 solar radii long (`half_len_frac` 50 in
-  `PLANET_ROTATION`). Mercury with every shell opens about 9 times
-  wider, set by its sodium tail. Both follow the autoscale ruling
-  literally. [per chain]
-- Carried as an open decision through four Stage D handoffs with no
-  ledger row; filed 2026-09-28.
-- **Tony-action (decide):** whether the Sun's axis should be drawn
-  shorter. A drawing choice for Tony's eye.
-- **2026-10-04: not one line.** Planned for this session's close and
-  held back. `half_len_frac` is the rotation axis's length; at 1.1 the
-  axis barely clears the photosphere, and the opening width is then
-  set by whichever shells are on -- the inner corona alone is 3 solar
-  radii. "Photosphere + 10%" needs the autoscale and the default shells
-  read together, and a Mode 5 look. The Sun slice's third item (L-412).
-- **2026-10-18, the target, from Tony's phone:** a screenshot of the
-  website's Sun room as it opens, with "This is the opening view in
-  the interactive. The orrery could be similar." The room opens with
-  only the photosphere ticked, its view fitted to what is drawn, and
-  the rotation axis drawn short, ending near the surface. In the
-  orrery the axis is drawn 52 solar radii long, which is what opens
-  the view about 31 times wider. Then, asked the order: the opening
-  view first among the Sun's drawings (L-412). Then, on what the
-  target is: "The view is basically Rsun + 10% or 20%".
-**Gap:** the orrery's Sun opens at about the Sun's radius plus 10 to
-20 percent, as the website's Sun room does. Read the Sun's autoscale
-with its default shells and make it open there; the long rotation
-axis is what widens the view today, so whether it is shortened or
-simply runs past the view's edge is shown to Tony, not assumed.
-Tony's eye against his screenshot. The first of the Sun's drawings
-(L-412).
-- **2026-10-18, later, the rule for every view** (Tony's run record
-  `documentation/WHERE_WE_ARE_10-18-26_1326_run_record.md`). On the
-  orrery's low-orbit look: "the initial view of Earth has the same
-  issue as the Sun. the auto scale should be set to the farthest shell
-  drawn plus say 20%. the sun pointer should be ignored unless it is
-  the only feature drawn." Then: "start with the initial view of the
-  sun. it should follow the earth pattern: fartherst shell plus 20%.
-  this should be the rule for all rooms or system views." So this item
-  widens from the Sun to every orrery view, and the gap above is
-  replaced by the one below.
-**Gap (replaces the one above, 2026-10-18):** every orrery view opens
-on the farthest shell drawn plus 20 percent; the line drawn toward the
-Sun sets the view only when nothing else is drawn. Read the
-autoscale; build it for the Sun first, then Earth, then check the other
-views; whether the Sun's long rotation axis is shortened or runs past
-the view's edge is shown to Tony. The rule goes into
-orrery-coding-conventions at the build. Tony's eye.
-- **Built 2026-10-19** (session record
-  `documentation/HANDOFF_L385_opening_views_20261019.md`), on orrery
-  6e0cfacd. Measured first: the Sun with only the photosphere opened 62
-  solar radii wide, set by its 52-radii rotation axis; Earth with only
-  the crust 3.7 Earth radii, set by its axis and dipole cone; Earth with
-  only low orbit 200 Earth radii, because the dispatch did not count a
-  custom shell and fell back to 100 body radii, doubled, with the Sun
-  arrow drawn out to match. [verified @6e0cfacd, sandbox]
-  - **Tony, 2026-10-19, on the axis:** shorten it or let it run off the
-    view's edge? "Confirmed as recommended": the center body's rotation
-    axis and dipole cone end just past the farthest shell (1.1 times
-    it), never longer than their set length.
-  - **Patch 1**, `patch_L385_1_opening_views_20261019.py`: the Auto view
-    is the farthest shell drawn times 1.2, a custom shell measured by
-    what it draws, the Sun's asteroid belts counted, the axis and cone
-    shortened for the center body. Tony's look, in his run record
-    `documentation/WHERE_WE_ARE_10-18-26_1326_run_record.md` (session of
-    10-19): the Sun, photosphere only, "perfect. the rotation axis is
-    within the cube"; Earth, crust only, "perfect. the sun direction,
-    rotation axis and magnetic cone are inside the cube." His saved
-    plots open at 0.00558 AU (1.2 solar radii) and 1.2 Earth radii.
-  - **Tony, 2026-10-19, on the other views:** "confirmed as
-    recommended": every view, still and animated, opens on the farthest
-    thing drawn, shell or orbit, plus 20 percent. Until then the still
-    plot ignored orbits when a shell was ticked, the animation fell back
-    to 1 AU with nothing orbiting, and orbit views used 50, 30, 20 or 10
-    percent by scale.
-  - **Patch 2**, `patch_L385_2_every_view_20261019.py`, on top of patch
-    1: one margin at every scale; the still plot takes the larger of the
-    shells and the orbits, as the animation does; with nothing orbiting
-    the shells alone size the view; a moon counts only when plotted
-    (found in the build: every child counted, which would have opened
-    Earth's crust on the Moon's orbit, 76 Earth radii); the animation's
-    Sun arrow clamped to the view it opens on. test_orbit_markers.py's
-    frame check expects the one margin.
-  - Checked: both patches in order on a clean copy, byte for byte
-    against the tested files, and on Windows line endings; a second run
-    refuses. The orrery run on the patched copy 31 of 31 gating, gate
-    path 0 Tier-1, whole tree 280 unchanged. The live dispatch, headless:
-    the Sun photosphere 1.2 solar radii; photosphere with Earth plotted
-    1.22 AU; Earth crust 1.2 Earth radii; crust with the Moon the Moon's
-    orbit times 1.2; nothing drawn 1 AU.
-  - The rule is in orrery-coding-conventions 1.11, The Opening View
-    (protocol v3.104).
-**Gap (replaces the one above, 2026-10-19):** Tony's look at patch 2:
-the Sun with only the photosphere and
-Earth plotted, still and animated; then the push. Close on that look.
-**Ref:** `documentation/HANDOFF_L322_D_orrery_pole_built_20260924.md` sec. 3; L-322;
-`documentation/HANDOFF_L385_opening_views_20261019.md`.
 
 #### [L-382] Earth's magnetosphere costs about 42 percent more per orrery animation frame since D8 (orrery, rendering)
 <!-- L:382 status:OPEN upd:2026-09-28 section:A flag: rice: -->
@@ -24612,6 +24520,125 @@ that body's slice.
 **Gap:** none here; the loose ends are on L-413, L-411 and L-351.
 **Ref:** L-452; L-411 (the same class in the Sun's hovers); gallery
 `data/objects_config.json`.
+
+#### [L-385] The orrery's Auto view of the Sun opens about 31 times wider since Stage D (orrery, Tony's eye)
+<!-- L:385 status:DONE upd:2026-10-19 section:C flag: rice: -->
+**Tony:** (on Where We Are, 2026-09-30, how wide the Sun's opening view
+is in the orrery) "photosphere + 10%"
+- **Found 2026-09-24** building L-322 Stage D's orrery autoscale (D4).
+  With its inner shells on, the Sun's view opens about 31 times wider
+  than before: its half-width goes from 0.0093 AU to 0.29 AU, because
+  its rotation axis is drawn 52 solar radii long (`half_len_frac` 50 in
+  `PLANET_ROTATION`). Mercury with every shell opens about 9 times
+  wider, set by its sodium tail. Both follow the autoscale ruling
+  literally. [per chain]
+- Carried as an open decision through four Stage D handoffs with no
+  ledger row; filed 2026-09-28.
+- **Tony-action (decide):** whether the Sun's axis should be drawn
+  shorter. A drawing choice for Tony's eye.
+- **2026-10-04: not one line.** Planned for this session's close and
+  held back. `half_len_frac` is the rotation axis's length; at 1.1 the
+  axis barely clears the photosphere, and the opening width is then
+  set by whichever shells are on -- the inner corona alone is 3 solar
+  radii. "Photosphere + 10%" needs the autoscale and the default shells
+  read together, and a Mode 5 look. The Sun slice's third item (L-412).
+- **2026-10-18, the target, from Tony's phone:** a screenshot of the
+  website's Sun room as it opens, with "This is the opening view in
+  the interactive. The orrery could be similar." The room opens with
+  only the photosphere ticked, its view fitted to what is drawn, and
+  the rotation axis drawn short, ending near the surface. In the
+  orrery the axis is drawn 52 solar radii long, which is what opens
+  the view about 31 times wider. Then, asked the order: the opening
+  view first among the Sun's drawings (L-412). Then, on what the
+  target is: "The view is basically Rsun + 10% or 20%".
+**Gap:** the orrery's Sun opens at about the Sun's radius plus 10 to
+20 percent, as the website's Sun room does. Read the Sun's autoscale
+with its default shells and make it open there; the long rotation
+axis is what widens the view today, so whether it is shortened or
+simply runs past the view's edge is shown to Tony, not assumed.
+Tony's eye against his screenshot. The first of the Sun's drawings
+(L-412).
+- **2026-10-18, later, the rule for every view** (Tony's run record
+  `documentation/WHERE_WE_ARE_10-18-26_1326_run_record.md`). On the
+  orrery's low-orbit look: "the initial view of Earth has the same
+  issue as the Sun. the auto scale should be set to the farthest shell
+  drawn plus say 20%. the sun pointer should be ignored unless it is
+  the only feature drawn." Then: "start with the initial view of the
+  sun. it should follow the earth pattern: fartherst shell plus 20%.
+  this should be the rule for all rooms or system views." So this item
+  widens from the Sun to every orrery view, and the gap above is
+  replaced by the one below.
+**Gap (replaces the one above, 2026-10-18):** every orrery view opens
+on the farthest shell drawn plus 20 percent; the line drawn toward the
+Sun sets the view only when nothing else is drawn. Read the
+autoscale; build it for the Sun first, then Earth, then check the other
+views; whether the Sun's long rotation axis is shortened or runs past
+the view's edge is shown to Tony. The rule goes into
+orrery-coding-conventions at the build. Tony's eye.
+- **Built 2026-10-19** (session record
+  `documentation/HANDOFF_L385_opening_views_20261019.md`), on orrery
+  6e0cfacd. Measured first: the Sun with only the photosphere opened 62
+  solar radii wide, set by its 52-radii rotation axis; Earth with only
+  the crust 3.7 Earth radii, set by its axis and dipole cone; Earth with
+  only low orbit 200 Earth radii, because the dispatch did not count a
+  custom shell and fell back to 100 body radii, doubled, with the Sun
+  arrow drawn out to match. [verified @6e0cfacd, sandbox]
+  - **Tony, 2026-10-19, on the axis:** shorten it or let it run off the
+    view's edge? "Confirmed as recommended": the center body's rotation
+    axis and dipole cone end just past the farthest shell (1.1 times
+    it), never longer than their set length.
+  - **Patch 1**, `patch_L385_1_opening_views_20261019.py`: the Auto view
+    is the farthest shell drawn times 1.2, a custom shell measured by
+    what it draws, the Sun's asteroid belts counted, the axis and cone
+    shortened for the center body. Tony's look, in his run record
+    `documentation/WHERE_WE_ARE_10-18-26_1326_run_record.md` (session of
+    10-19): the Sun, photosphere only, "perfect. the rotation axis is
+    within the cube"; Earth, crust only, "perfect. the sun direction,
+    rotation axis and magnetic cone are inside the cube." His saved
+    plots open at 0.00558 AU (1.2 solar radii) and 1.2 Earth radii.
+  - **Tony, 2026-10-19, on the other views:** "confirmed as
+    recommended": every view, still and animated, opens on the farthest
+    thing drawn, shell or orbit, plus 20 percent. Until then the still
+    plot ignored orbits when a shell was ticked, the animation fell back
+    to 1 AU with nothing orbiting, and orbit views used 50, 30, 20 or 10
+    percent by scale.
+  - **Patch 2**, `patch_L385_2_every_view_20261019.py`, on top of patch
+    1: one margin at every scale; the still plot takes the larger of the
+    shells and the orbits, as the animation does; with nothing orbiting
+    the shells alone size the view; a moon counts only when plotted
+    (found in the build: every child counted, which would have opened
+    Earth's crust on the Moon's orbit, 76 Earth radii); the animation's
+    Sun arrow clamped to the view it opens on. test_orbit_markers.py's
+    frame check expects the one margin.
+  - Checked: both patches in order on a clean copy, byte for byte
+    against the tested files, and on Windows line endings; a second run
+    refuses. The orrery run on the patched copy 31 of 31 gating, gate
+    path 0 Tier-1, whole tree 280 unchanged. The live dispatch, headless:
+    the Sun photosphere 1.2 solar radii; photosphere with Earth plotted
+    1.22 AU; Earth crust 1.2 Earth radii; crust with the Moon the Moon's
+    orbit times 1.2; nothing drawn 1 AU.
+  - The rule is in orrery-coding-conventions 1.11, The Opening View
+    (protocol v3.104).
+- **DONE 2026-10-19,** on Tony's runs and look, in his run record
+  (`documentation/WHERE_WE_ARE_10-18-26_1326_run_record.md`, session of
+  10-19): patch 2 applied (2 files); the Sun with the photosphere and
+  Earth plotted, still and animated, and Earth with its crust and the
+  Moon: "perfect"; patch 3 applied (14 files); the orrery run 31 of 31
+  gating, gate 0 Tier-1, whole tree 284 with the three patch scripts
+  still in the root (2 each, dev tools), 280 once moved; the two skills
+  reinstalled. Pushed at orrery e2a3465b99d552bb0d2bd3cf1ecbd987ddbe482c
+  ("L385 L456 L410"), then 59e1b656 ("v3.104", the protocol's archived
+  copy). The next session confirms its loaded copies read
+  orrery-coding-conventions 1.11 and provenance-cross-check 1.1.
+- **Loose end re-homed** (A Closing Item Re-homes Its Loose Ends): the
+  handoff's note that, when orbits widen the final view, the Sun
+  direction arrow keeps the length it was given inside the shells' view
+  and can read short. It stays inside the view, and Tony's look at
+  that view read "perfect"; recorded here so a later look that finds
+  it short knows where it comes from. Nothing is open on it.
+**Gap:** none. Closed.
+**Ref:** `documentation/HANDOFF_L322_D_orrery_pole_built_20260924.md` sec. 3; L-322;
+`documentation/HANDOFF_L385_opening_views_20261019.md`.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

@@ -1325,3 +1325,47 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 8. **When you have time**, answer the fades' words list in place: `documentation\WORDS_L410_sun_fades_20261019.md`, revision 2. Section 3 has three choices: leave forward scattering out, keep the dust's origin sentence, and whether to include the corona's temperature.
 
 The handoff's section 1 has the same list, `documentation\HANDOFF_L385_opening_views_20261019.md`, once patch 3 has run.
+
+===========================================================================================
+
+Your list, picking up from the last push (orrery 59e1b65). Everything is in your orrery folder, and the website isn't touched.
+
+**Tonight or next time at your machine:**
+
+1. **Run** `patch_L385_4_close_20261019.py`. Expect "patch applied (5 files)". It closes the opening-view item and records both Gemini reviews, including tonight's.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L385_4_close_20261019.py
+ok  LEDGER_CONSOLIDATED.md
+ok  documentation/WHERE_WE_ARE.md
+ok  documentation/HANDOFF_L385_opening_views_20261019.md
+ok  documentation/prompts/RELAY_L411_gemini_sun_numbers_20261019.md
+patch applied (4 files).
+Next: the orrery maintenance run (it moves L-385 to the closed
+section), move this script into documentation/, commit, push.
+Undo is Discard Changes in GitHub Desktop.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+2. **Run** the orrery maintenance run from the dashboard. Expect 31 of 31 gating checks and the gate at 0. It moves the opening-view item into the ledger's closed section. The whole-tree count reads 282 until step 3, because the patch script is still in the root.
+
+CONSISTENCY PROBLEMS:
+  - [auto-fix] L-385: belongs in closed bucket 'C' but is not physically located in its destination heading
+Physically moved 1 block(s) into their bucket's destination heading.
+Index regenerated (233 live items) in C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\LEDGER_CONSOLIDATED.md.
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+OK: 449 L-blocks parsed, no consistency problems.
+Index regenerated (233 live items) in C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\LEDGER_CONSOLIDATED.md.
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+3. **Move** `patch_L385_4_close_20261019.py` into `documentation\`.
+4. **Commit and push** in GitHub Desktop. That includes Gemini 4's new worksheet, already saved in `documentation\worksheets\`. -- 
+
+**Before the next build session:**
+
+5. **Answer the fades' words list** in place: `documentation\WORDS_L410_sun_fades_20261019.md`, revision 2. Section 3 has three choices: leave forward scattering out, keep the dust's origin sentence, and whether to include the corona's temperature.
+
+**The next session itself:**
+
+6. The Sun's two fades, built from your answers. It also brings you new words for the chromosphere's temperature sentence (its base is near 4,400 kelvin, not 6,000). The build ends in your Mode 5 look.

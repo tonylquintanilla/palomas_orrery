@@ -1,24 +1,24 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 19, 2026: the opening views built; the Sun's two fades designed.
-- Written at orrery 6e0cfac and gallery 4fc320f.
+Last updated: October 19, 2026, evening: the opening views done and pushed; the Sun's two fades designed.
+- Written at orrery 59e1b65 and gallery 4fc320f.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The opening views (L-385): the Sun and Earth now open on their
->   farthest shell plus 20%; your look: "perfect".
-> - Patch 2 makes every view do it, still and animated, orbits included.
+> - The opening views (L-385) are done and pushed: every view opens on
+>   the farthest thing drawn plus 20%, still and animated; your looks:
+>   "perfect", twice.
 > - The Sun's fades are designed (L-410, L-131 (the dust cloud)): the
 >   corona as one plasma fade, the dust as its own cloud of dots.
 >
-> **Do next:** *run patch 2, look at the Sun with Earth plotted, then
-> the records patch: the handoff's run order, section 1.*
+> **Do next:** *the Sun's two fades (L-410, the corona; L-131, the
+> dust cloud), built from your answers on the words list.*
 >
 > **Needs you now:**
-> - Your look at patch 2 closes L-385 (the opening views).
-> - The fades' words, revision 2, when you have time: answer in place.
+> - The fades' words, revision 2, before that build: answer in place in
+>   `WORDS_L410_sun_fades_20261019.md`, section 3 especially.
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
@@ -33,7 +33,7 @@ Last updated: October 19, 2026: the opening views built; the Sun's two fades des
   6-6a.[done]  The typed facts, served and checked (Oct 16);
                orbital periods from JPL, orrery and website (Oct 14).
   7.   [NOW]   *The Sun's slice (L-412): numbers done (Oct 18); the
-               opening views built (Oct 19); next, the two fades as
+               opening views done (Oct 19); next, the two fades as
                designed; the ice lines wait.* << moved this session
   8-8c.[done]  The served objects checked against JPL, missing periods
                fetched first, Earth's from the Earth-Moon barycentre; the
@@ -88,9 +88,8 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 
 Read from files when this page was written, not typed from memory.
 - Last cache build: 20261019T132346Z, ok, every rename on the first try (gallery 4fc320f).
-- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, on the
-  patched copy of 6e0cfac). Whole tree: 280: orrery 116, Earth System
-  149, stars 13, utilities 2.
+- Tier-1 on the gate path: 0, by name (the scanner at 59e1b65).
+  Whole tree: 280: orrery 116, Earth System 149, stars 13, utilities 2.
 - This page's date and the ledger's newest stamp: both Oct 19. Agree.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
@@ -113,7 +112,7 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- *Next: `HANDOFF_L385_opening_views_20261019.md`, sec. 1 (your run order)*
+- *Next: the fades; start from `HANDOFF_L385_opening_views_20261019.md`, sec. 6*
 - The Sun's fades, designed: `SOURCES_L410_sun_corona_dust_20261019.md`;
   their words for your review: `WORDS_L410_sun_fades_20261019.md`
 - Earth's words and Gemini 4: `WORDS_L455_*`, `REVIEW_L455_gemini4_*`
