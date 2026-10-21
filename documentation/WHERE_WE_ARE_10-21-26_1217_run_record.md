@@ -1999,11 +1999,8 @@ FILES WRITTEN THIS RUN
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
   3. Commit and push the orrery. This commit also carries the close
-     patch's changes, which were not in the last push (b3c3e2a5). -- 
+     patch's changes, which were not in the last push (b3c3e2a5). -- 822862227636dbb3062edc9621ea63cc78a4ecdc
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
-
-2. Run the maintenance run. Every check should pass, including dashboard parity.
-3. Commit and push.
 
 **Where this leaves us**
 - The Sun room's three phone problems are fixed and checked on your phone.
