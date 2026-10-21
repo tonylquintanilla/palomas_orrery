@@ -541,6 +541,18 @@ for the missing addresses; L-458 new, a "report a problem" link through
 the guest book's form; L-459 new, a monthly run started by the Daily
 Run; L-266's 30 days and its home; interactive-exhibit 1.18), built on
 e8e714da and gallery ca5339fd.
+Module updated: October 21, 2026, morning, with Anthropic's Claude Opus
+5.5 (the design talks of 2026-10-20 recorded: L-401, L-411, L-412,
+L-363, L-434, L-239, L-224, L-356, L-375, L-454, L-413; L-456's phone
+look, Gemini's answers and two notes for the address build; L-460 new,
+every room's drawer ordered by where each shell begins), built on
+6a8d04c2 and gallery 30db99fb.
+Module updated: October 21, 2026, later, with Anthropic's Claude Opus
+5.5 (L-456's addresses: the Sun's 16 works and Earth's 23 re-opened,
+addresses on their rows and on the website's seven own citations; three
+works to Tony's reading list, none missing a link; the Roche limit
+re-homed to Rappaport et al. (2013), so no GPT prompt; L-412's
+Gap), built on 6a8d04c2 and gallery 30db99fb.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -758,7 +770,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*236 live items; 220 need attention (`!`); 166 RICE-scored; 216 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*237 live items; 221 need attention (`!`); 166 RICE-scored; 216 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -792,7 +804,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-186 | Cross-check annotation issues -- clear before Batch 2 | OPEN | 3.6 | 2026-08-07 |
 | ! | L-210 | Pilot citation findings -- four rows in constants_new.py | OPEN | 3.6 | 2026-08-21 |
 | ! | L-215 | Ledger cleanup by topic, not by age | OPEN | 3.6 | 2026-08-19 |
-| ! | L-239 | Seed the three Oort builders so a render is reproducible | OPEN | 3.6 | 2026-10-11 |
+| ! | L-239 | Seed the three Oort builders so a render is reproducible | OPEN | 3.6 | 2026-10-21 |
 | ! | L-285 | index.html adopts the shared navigation cluster; the fake-wheel dolly retires | OPEN | 3.6 | 2026-09-04 |
 | ! | L-324 | One assignment per line in constants_new.py | OPEN | 3.6 | 2026-09-12 |
 | ! | L-181 | Complete the single-source-of-truth constant layer | OPEN | 3.5 | 2026-10-04 |
@@ -856,13 +868,13 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-353 | A count taken from a file's print resolution where a published error budget exists unopened (store) | OPEN | -- | 2026-09-22 |
 | ! | L-354 | Declared picks with their range in prose, on other bodies (store) | OPEN | -- | 2026-09-22 |
 | ! | L-355 | Rate rows and angle rows on other bodies follow the two Rule 3 forms (store) | OPEN | -- | 2026-09-22 |
-| ! | L-356 | IGRF-14 as a re-sourcing of the six coefficient rows (store) | OPEN | -- | 2026-10-17 |
+| ! | L-356 | IGRF-14 as a re-sourcing of the six coefficient rows (store) | OPEN | -- | 2026-10-21 |
 | ! | L-357 | Stale gallery artifacts that no check reads (gallery) | OPEN | -- | 2026-10-08 |
 | ! | L-358 | The constants change report cannot read a formula that calls a function, or a literal that became a formula (checks) | OPEN | -- | 2026-09-22 |
 | ! | L-359 | Served text beside a served number can go stale where no tool may edit it (gallery) | OPEN | -- | 2026-09-22 |
 | ! | L-360 | The hover budget measures recorded payloads, so it cannot see a line added by newly served data (checks) | OPEN | -- | 2026-10-08 |
 | ! | L-361 | An epoch typed in the page, with no store row (gallery, store) | OPEN | -- | 2026-09-22 |
-| ! | L-363 | The Solar System room: the bodies as symbols, and the gallery's front door (gallery, exhibits) | OPEN | -- | 2026-10-11 |
+| ! | L-363 | The Solar System room: the bodies as symbols, and the gallery's front door (gallery, exhibits) | OPEN | -- | 2026-10-21 |
 | ! | L-364 | A comet's own trust window can exclude today while the served window passes the scene (gallery, trust) | OPEN | -- | 2026-09-29 |
 | ! | L-365 | The assembler leaves out a body it cannot draw, without a warning (gallery, assembler) | OPEN | -- | 2026-09-29 |
 | ! | L-366 | An orbit's info marker describes an arbitrary point on the orbit (gallery, assembler) | OPEN | -- | 2026-09-26 |
@@ -872,7 +884,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-372 | Two drawing settings live in constants_new.py (orrery, store) | OPEN | -- | 2026-09-28 |
 | ! | L-373 | A unit conversion by a bare number inside a constants_new.py expression (store) | OPEN | -- | 2026-09-28 |
 | ! | L-374 | Showing Earth's precession over time (orrery, idea) | OPEN | -- | 2026-09-28 |
-| ! | L-375 | Earth's eccentric dipole offset is not drawn (store, Earth) | OPEN | -- | 2026-10-04 |
+| ! | L-375 | Earth's eccentric dipole offset is not drawn (store, Earth) | OPEN | -- | 2026-10-21 |
 | ! | L-376 | Other bodies' dipole-cone hovers: typed offsets and abbreviated radii (orrery, words) | OPEN | -- | 2026-09-28 |
 | ! | L-377 | The provenance scanner's proximity rule can count a string as cited by a neighbour's source (checks) | OPEN | -- | 2026-09-28 |
 | ! | L-378 | Phone behaviour of the rooms has no automated check (checks, gallery) | OPEN | -- | 2026-10-08 |
@@ -885,13 +897,13 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-394 | A card cannot say which body it belongs to (gallery, Studio) | OPEN | -- | 2026-09-29 |
 | ! | L-396 | Tony's page: WHERE_WE_ARE.md, the big picture in plain words (documentation, skills) | OPEN | -- | 2026-10-07 |
 | ! | L-399 | Small bodies: fetch each one's own position uncertainty from Horizons (gallery, builder) | OPEN | -- | 2026-10-01 |
-| ! | L-401 | The orrery's own distance hovers print by fixed widths, not by the errors the position earns (orrery, provenance) | OPEN | -- | 2026-10-15 |
+| ! | L-401 | The orrery's own distance hovers print by fixed widths, not by the errors the position earns (orrery, provenance) | OPEN | -- | 2026-10-21 |
 | ! | L-402 | Choose a date, or animate, within the range the drawn bodies are trusted for (gallery, exhibits) | OPEN | -- | 2026-10-01 |
 | ! | L-403 | Numbers in the object list's descriptions carry no source (orrery, provenance) | OPEN | -- | 2026-10-01 |
 | ! | L-410 | Fades where nature thins out: Earth's hydrogen designed, the outer corona next (orrery + gallery, the Sun and Earth) | OPEN | -- | 2026-10-20 |
-| ! | L-411 | The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-20 |
-| ! | L-412 | The Sun's slice: the order Tony confirmed (the Sun's slice) | OPEN | -- | 2026-10-20 |
-| ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-10-18 |
+| ! | L-411 | The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-21 |
+| ! | L-412 | The Sun's slice: the order Tony confirmed (the Sun's slice) | OPEN | -- | 2026-10-21 |
+| ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-10-21 |
 | ! | L-423 | The website's checks: the order Tony confirmed (checks, gallery) | OPEN | -- | 2026-10-16 |
 | ! | L-424 | The checker reports one word for two different cases (worksheet checker) | OPEN | -- | 2026-10-11 |
 | ! | L-425 | A citation's location record is checked only in part (provenance tooling) | OPEN | -- | 2026-10-09 |
@@ -900,14 +912,15 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-429 | The room button on the row, in the Solar System room's list (gallery, exhibits) | OPEN | -- | 2026-10-10 |
 | ! | L-430 | Uncited lines in the orrery's Oort cloud tooltips and the Sun's reach text (orrery, words) | OPEN | -- | 2026-10-10 |
 | ! | L-432 | Objects drawn in the default goldenrod (orrery, colours) | OPEN | -- | 2026-10-11 |
-| ! | L-434 | Stored drawings for the other dot-cloud shells (orrery + gallery) | OPEN | -- | 2026-10-11 |
+| ! | L-434 | Stored drawings for the other dot-cloud shells (orrery + gallery) | OPEN | -- | 2026-10-21 |
 | ! | L-435 | Standing rulings that are method, held only on Tony's page (skills, records) | OPEN | -- | 2026-10-12 |
 | ! | L-443 | The rest of the orrery's objects come to the website as plotted positions (gallery + orrery, objects) | OPEN | -- | 2026-10-17 |
 | ! | L-449 | A cache build dropped the 82 build-run records it should have carried (gallery, cache builder) | OPEN | -- | 2026-10-17 |
-| ! | L-454 | A drawn device for edges that move: the magnetopause, the bow shock and their kind (orrery + gallery, design) | OPEN | -- | 2026-10-17 |
-| ! | L-456 | What a visitor reads, from Earth's Mode 5 look: body radii, sources as a list with live links, Celsius for Earth's surface and air (gallery + orrery) | OPEN | -- | 2026-10-20 |
+| ! | L-454 | A drawn device for edges that move: the magnetopause, the bow shock and their kind (orrery + gallery, design) | OPEN | -- | 2026-10-21 |
+| ! | L-456 | What a visitor reads, from Earth's Mode 5 look: body radii, sources as a list with live links, Celsius for Earth's surface and air (gallery + orrery) | OPEN | -- | 2026-10-21 |
 | ! | L-458 | A "report a problem" link in every room's i panel (gallery, interactive) | OPEN | -- | 2026-10-20 |
 | ! | L-459 | A monthly run for slow checks, started by the Daily Run (gallery + orrery, maintenance) | OPEN | -- | 2026-10-20 |
+| ! | L-460 | Every room's drawer orders its shells by where each begins (gallery, exhibits; method for interactive-exhibit 1.19) | OPEN | -- | 2026-10-21 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1145,7 +1158,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-326 | provenance-discipline 2.11 -> 2.12, taken before the build it serves | DONE | 4.0 | 2026-09-14 |
 |  | L-214 | The request builder drops the comment lines that matter | DONE | 3.8 | 2026-08-21 |
 |  | L-216 | Gallery swap fails under a filesystem lock (OneDrive) | DONE | 3.8 | 2026-10-08 |
-|  | L-224 | Streamer belt: one warped band, not a sphere | DONE | 3.8 | 2026-10-04 |
+|  | L-224 | Streamer belt: one warped band, not a sphere | DONE | 3.8 | 2026-10-21 |
 |  | L-232 | The gallery's served constants carry sources that nothing checks | DONE | 3.8 | 2026-09-16 |
 |  | L-287 | Gallery editor: the room tree, the storage room, the featured flag | DONE | 3.8 | 2026-09-05 |
 |  | L-227 | Streamer band hover rendered as one 378-character line | DONE | 3.8 | 2026-10-04 |
@@ -1301,6 +1314,35 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
+#### [L-460] Every room's drawer orders its shells by where each begins (gallery, exhibits; method for interactive-exhibit 1.19)
+<!-- L:460 status:OPEN upd:2026-10-21 section:A flag: rice: -->
+- **Tony's ruling, 2026-10-20,** at his phone look at the i panel (run
+  record `documentation/WHERE_WE_ARE_10-18-26_1326_run_record.md`, the session of 10-20): "Also check the order of the sun
+  shells, they should be ordered by lower distance limit." And in
+  chat, as the coordination brief of 2026-10-21 carries it (`documentation/BRIEF_L456_addresses_build_20261021.md`,
+  section 5): in every room each shell takes its place in the drawer at
+  the distance where it begins, "basically when we reach that shell's
+  distance, that is its place in the order."
+- **Method, not a one-off:** the same answer next month for another
+  room, so it goes into interactive-exhibit as one rule at 1.19, with
+  its protocol entry and the manifest run (Method Belongs to the Skill).
+- **The build:** each room's drawer order is read from its rows' lower
+  edges rather than from a hand list, so a new shell lands in place by
+  itself; the headless room checks (gallery `tools/headless`) assert
+  the order per room. The Sun first, its order listed for Tony to look
+  at before it ships.
+- **What his look caught:** the corona's row took the streamer belt's
+  old place at the top of the Sun's drawer when the belt joined it on
+  2026-10-20. The brief's reading of the Sun's order by lower edge, not
+  yet checked against the served rows: chromosphere, corona, Roche
+  limit, zodiacal dust cloud, Alfven surface.
+- The Solar System room's drawer already runs outward from the Sun,
+  and L-363's ruling of 2026-10-20 keeps it so.
+**Gap:** the build (gallery) with interactive-exhibit 1.19, in the
+Sun's slice (L-412).
+**Ref:** gallery `interactive.html`, `data/objects_config.json`,
+`tools/headless/`; interactive-exhibit; L-363; L-412; L-456.
+
 #### [L-459] A monthly run for slow checks, started by the Daily Run (gallery + orrery, maintenance)
 <!-- L:459 status:OPEN upd:2026-10-20 section:A flag: rice: -->
 - **Tony, 2026-10-20**, in a design chat on verification: "add a monthly
@@ -1371,7 +1413,7 @@ guest book: its form, sheet and updater); L-265 (the i panel's links);
 L-459 (the monthly run).
 
 #### [L-456] What a visitor reads, from Earth's Mode 5 look: body radii, sources as a list with live links, Celsius for Earth's surface and air (gallery + orrery)
-<!-- L:456 status:OPEN upd:2026-10-20 section:A flag: rice: -->
+<!-- L:456 status:OPEN upd:2026-10-21 section:A flag: rice: -->
 - **Recorded 2026-10-18** from Tony's Mode 5 look at the Earth room
   after L-455 was pushed (orrery e4d4a9e3, gallery c5c05b52), in his
   run record `documentation/WHERE_WE_ARE_10-18-26_1326_run_record.md`.
@@ -1483,7 +1525,100 @@ from his phone, with a screenshot of the corona's i panel: "As you can
   Hill sphere for one) arrives as one joined line and stays one bullet.
   Splitting it safely needs the export to serve the inherited citations
   as a list. One class; recorded, not chased.
-**Gap (replaces the one above, 2026-10-20):** Tony's run of the gallery
+- **2026-10-20, Tony's look on his phone** (run record `documentation/WHERE_WE_ARE_10-18-26_1326_run_record.md`, the session of 10-20),
+  the corona's i panel and Earth's inner core's: "excellent, well
+  organized, all links open except in Earth inner core: Dziewonski and
+  Anderson." Expected: that citation has no web address until E5
+  (PREM) gets one in the address build. Gallery pushed at 4778944f,
+  orrery at 23f70886; interactive-exhibit 1.18 reinstalled.
+- **Gemini's answers.** The Sun's 16 works are filed,
+  `documentation/worksheets/worksheet_gemini4_medium_l456_sun_20261020.md`
+  (pushed at 23f70886). Earth's 23 came 2026-10-21,
+  `worksheet_gemini4_medium_L456_earth_20261021.md`, and its
+  pre-flight FAILED: asked to open arXiv:2202.11533 and quote a
+  sentence, it described a Gaia lensed-quasar paper by Jalan and
+  others; the page is Lamy, Gilardy and Llebaria, "Observations of the
+  Solar F-corona from Space" (opened 2026-10-21 by Claude Fable 5.1;
+  the Sun's run reported it correctly). Its rows are leads, nothing
+  more. Every row of both is re-opened in the address build anyway
+  (provenance-cross-check 1.1, The Slice Relay).
+- **Tony's ruling, 2026-10-21** (the coordination brief, `documentation/BRIEF_L456_addresses_build_20261021.md`):
+  no Gemini re-run and no full GPT pass. The build re-opens
+  everything; a short GPT prompt goes out only for works that do not
+  open and whose address is itself unknown. A work with a known
+  address that refuses automated readers goes on a reading list for
+  Tony instead ("if all else fails I can try to open the papers myself
+  and save them in papers/").
+- **Two notes for the address build, from the same brief:**
+  - S8, Murray (1989), A&A 218, 325: Tony's scan is in the orrery's
+    `papers/` as `1989A&A...218..325M.pdf` (gitignored), read through
+    the device mount. Its galactic axes, in section 7, are given as
+    direction cosines, to check against the pole figures cited through
+    Liu, Zhu and Hu.
+  - S12, the Roche limit: the contents page of Murray and Dermott,
+    "Solar System Dynamics", puts the Roche zone at section 4.8, not
+    the 4.6 the row names; the chapter text is not open.
+- **Built 2026-10-21, the addresses** (Claude Opus 5.5; record `documentation/HANDOFF_L456_addresses_build_20261021.md`;
+  review `documentation/REVIEW_L456_gemini4_worksheets_20261021.md`;
+  orrery patches `patch_L456_4_addresses_orrery_20261021.py` and
+  `patch_L456_4b_roche_rehome_20261021.py`, the second written after an
+  earlier copy of the first had run; website patches
+  `patch_L456_5_addresses_website_20261021.py` and
+  `patch_L456_6_sun_pole_website_20261021.py`, the same way). Every one of the 39 works
+  was re-opened by this session, not taken from Gemini; papers that
+  refuse automated readers were read from Tony's copies in `papers/`
+  (Murray 1989, Shue et al. 1998, Jelinek et al. 2012, the IADC
+  guidelines); Slavin et al. (1985) and Baliukin et al. (2019) by Tony,
+  their abstracts pasted from his phone. 36 works opened (the Roche
+  limit re-homed to Rappaport et al. (2013), arXiv:1307.4080, eq. (1),
+  the same fluid formula; the Sun's
+  pole re-homed to NASA NAIF's kernel, which carries the IAU report's
+  values; Tony read the report's abstract): the address
+  went onto 63 rows' Source
+  lines and into the website's seven own citations, each row with a
+  `# Read:` line naming this session, and Gemini where its quote matched
+  (the Sun's half only: Earth's run failed its pre-flight, so it earns
+  no reader's credit; its 23 rows are compared in the review). Distinct
+  served citation texts with a link, before and after, worked out on a
+  copy: the Sun 23 of 40 to 40; Earth 33 of 73 to 73. The gallery run's
+  Source list check: the Sun 24 of 43 to 43.
+  - Corrected on re-opening: the Roche limit's book section, 4.6 to
+    4.8 (Gemini was right); the book has no open copy, so the row is
+    re-homed and the book kept as an Also line. Kept: Alken et al.'s Table 4 (a Gemini claim of
+    Table 3, carried by the brief, was wrong: Table 3 lists
+    observatories). PREM re-homed to its open tabulation (Table A.1 at
+    P. Shearer's UCSD page); the 1981 paper is walled. Murray (1989)
+    read directly: his sect. 7.1 pole and his eq. (33) direction cosines
+    agree with the two pole rows to 0.0004 arcseconds.
+  - Did not open, to Tony's reading list, none of them missing a link
+    (`documentation/READING_L456_tony_20261021.md`): Delsemme (1987),
+    the Hipparcos volume's sec.
+    1.5.3, Maezawa et al.
+    (1997).
+  - No GPT prompt was needed (the brief's job 3): every work that
+    refused either had a known address for Tony or was re-homed.
+  - Found while building, recorded and not chased: the Source list
+    check counts the Earth room from `documentation/payload_earth_scene.json`,
+    which only `tools/record_earth_scene.py` remakes and the Daily Run
+    does not, so Earth's count there stays at 9 of 29 until it is
+    re-recorded (the live room draws from the cache and is not
+    affected). And the Earth room's fallback-pole citation, written by
+    the website, carries project words ("cited here until 2026-09-26"),
+    against provenance-discipline's What a Visitor Reads, principle 5.
+**Gap (replaces the one below, 2026-10-21, later):** Tony's three
+papers, read by the next session from `papers/` and written onto their
+rows and the website's words; the two findings above; the
+Celsius words for Earth's surface and air as a list for Tony; the
+export serving inherited citations as a list. Then L-460 and L-191
+(the Sun's slice, L-412).
+**Gap (2026-10-21, superseded above):** the addresses for the
+Sun's 16 works and Earth's 23, each re-opened, onto their rows' Source
+lines in the orrery, with a reading list for Tony for what refuses and
+a GPT prompt for what has no known address; the Celsius words for
+Earth's surface and air as a list for Tony; the export serving
+inherited citations as a list. Then L-191's reconciliation of the
+Sun's fourteen pairs.
+**Gap (2026-10-20, superseded above):** Tony's run of the gallery
 patch, the Daily Run and his look on the phone; the addresses, from
 Gemini's two answers, each re-opened, onto their rows in the orrery,
 the Sun's and Earth's first; the Celsius words for Earth's surface and
@@ -1494,7 +1629,7 @@ list. Then L-191's reconciliation of the Sun's fourteen pairs.
 interactive-exhibit 1.18; L-455, L-421, L-385, L-458, L-266.
 
 #### [L-454] A drawn device for edges that move: the magnetopause, the bow shock and their kind (orrery + gallery, design)
-<!-- L:454 status:OPEN upd:2026-10-17 section:A flag: rice: -->
+<!-- L:454 status:OPEN upd:2026-10-21 section:A flag: rice: -->
 - **Tony's ruling, 2026-10-17,** splitting fuzzy boundaries three ways
   (L-410): a real edge that moves is not drawn fuzzy; its motion gets "a
   second drawn device like the movement cone we use for the dipole."
@@ -1512,8 +1647,16 @@ interactive-exhibit 1.18; L-455, L-421, L-385, L-458, L-266.
 talk 2 (L-412). Its Alfven surface (L-228) and its fades (L-410) are
 edges of this kind, so the device's questions may be met there first;
 Earth's talk 2 then takes what the Sun decided, or asks them fresh.
-**Gap:** a design talk, on Earth's list (L-413) with talk 2, after the
-Sun's numbers (L-412).
+- **2026-10-20, not reached** at the design talks (record `documentation/DESIGN_talks_rulings_20261020.md`):
+  stopped by the Stale Skill gate, since it decides what the Earth room
+  draws and the talk had loaded interactive-exhibit 1.17. The question
+  for the next talk: the Sun chose a fade edge for the Alfven surface
+  (`DESIGN_fades_rulings_20261017.md` and the L-410 handoff); does
+  Earth take the same device for the magnetopause and the bow shock?
+  The store holds their crossings' scatter about each model, 1.23 and
+  0.69 Earth radii.
+**Gap (2026-10-21):** the next design talk, which loads
+interactive-exhibit 1.18, on Earth's list (L-413).
 **Ref:** L-410; L-314 (the solar wind, which moves these edges); L-375
 (the dipole cone); `documentation/DESIGN_fades_rulings_20261017.md`.
 
@@ -1878,7 +2021,7 @@ reaches) wait for their rooms.
 
 
 #### [L-411] The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice)
-<!-- L:411 status:OPEN upd:2026-10-20 section:A flag: rice: -->
+<!-- L:411 status:OPEN upd:2026-10-21 section:A flag: rice: -->
 - **Recorded 2026-10-04** while building L-371. The orrery's Sun
   hovers, and some of the gallery's served words, still type numbers
   that no row holds. One row per CLASS (The Braid); the instances live
@@ -1993,9 +2136,40 @@ reaches) wait for their rooms.
   equator", dropped from the streamer belt's words on Tony's ruling of
   2026-10-19 ("drop for now but keep a breadcrumb"); the breadcrumb is
   in `documentation/WORDS_L410_sun_fades_20261019.md`, item 1c.
+- **2026-10-20, design talks** (talk 1; record `documentation/DESIGN_talks_rulings_20261020.md`): the
+  chromosphere's temperature words approved. Tony: "Approved." They
+  come from Carlsson, M. (2007), "Modeling the Solar Chromosphere",
+  arXiv:0704.1509, https://arxiv.org/pdf/0704.1509. The three summary
+  pages (NASA's Sun Fact Sheet, NASA/Marshall, Montana State)
+  disagreed and named no source; the 20,000 to 30,000 K they call
+  "the top" is the old VAL3 model's plateau at the foot of the climb
+  to the corona, which later models dropped.
+  - Website: "its temperature rises with height, from about 4,000
+    kelvin at the bottom to about 7,000 near the top, and then climbs
+    steeply into the much hotter corona." Its citation moves from
+    NASA/Marshall's page to Carlsson (2007), the open address on the
+    Source line.
+  - Orrery, the longer sentence: "from about 4,000 Kelvin at its
+    bottom to about 7,000 Kelvin near its top. Above that it climbs
+    steeply into the corona, which is far hotter." The summary line:
+    "Temperature: about 4,000 K at the bottom to about 7,000 K near the
+    top." The unsourced 10,000 K average and the ~290 nm wavelength
+    worked out from it are removed.
+  - Two rows in `constants_new.py`, in kelvin, each cited to Carlsson
+    (2007) with its section, a `# Read:` line and one figure; the paper
+    re-opened at the build (the talk read it through the fetch tool's
+    summary, not the PDF's bytes).
+  - "Much hotter" stays (Tony: "Yes"); the corona's own words carry
+    its temperature.
+- **Proposed as method, not yet ruled which** (the same talk): an
+  agency summary page that names no source for a figure is read one
+  layer down, to the scientific work, before the figure becomes a row.
+  Tony-action (decide), at the next design talk: is this his ruling,
+  or a line on provenance-discipline's next version?
 **Gap:** the held sentences first, from Gemini 4's return (review
 above): rows for the core's centre and the convection zone's base
-(Parker's first crossing is done, above); new words for the chromosphere's temperature;
+(Parker's first crossing is done, above); the chromosphere's approved
+words and their two rows from Carlsson (2007) (ruled 2026-10-20);
 the chromosphere's name from its row. Then groups T, M and C, the three
 leftovers above, one shell at a time. Not part of the Sun's
 numbers half, which ends with L-455.
@@ -2042,7 +2216,7 @@ One Bump), and leaves the page's Settled list once it is in the skill.
 L-424; L-434; skills/*/SKILL.md.
 
 #### [L-434] Stored drawings for the other dot-cloud shells (orrery + gallery)
-<!-- L:434 status:OPEN upd:2026-10-11 section:A flag: rice: -->
+<!-- L:434 status:OPEN upd:2026-10-21 section:A flag: rice: -->
 - **Tony's question, 2026-10-11**, having chosen for the Hills cloud
   that the orrery places the dots and the website draws them as given
   (L-421): "would this approach of stored drawings apply to other
@@ -2071,9 +2245,21 @@ L-424; L-434; skills/*/SKILL.md.
   with the room.
 - **2026-10-17:** Earth's hydrogen exosphere became the third stored
   drawing (L-410), after the Hills cloud and the belts.
-**Gap:** a design talk on which shapes, in what order; L-239 for the
-clumps and the tide; then each shape's export, its served name and the
-website drawing it, with Tony's look.
+- **2026-10-20, design talks** (talk 5; record `documentation/DESIGN_talks_rulings_20261020.md`): which
+  shapes, ruled. The galactic tide and the Oort cloud's clumps become
+  stored drawings, together, which also settles the orrery's unseeded
+  draws (L-239). The streamer band (L-224) stays worked out by the
+  website from its served numbers: a grid set by about twenty numbers
+  with a small jitter, not random scatter. Tony: "Confirmed". The
+  tide's stored dots are the orrery's 5,000 of L-420, so talk 2's
+  phone look (L-412) and this build are one build; its cone is worked
+  out by the website. Measured at the talk: the tide about 80 kB
+  stored, the clumps (15 of 50 to 200 dots, about 1,900) about 30 kB.
+  This departs from the brief's order, which put the band first.
+**Gap (2026-10-21):** the build, in the Sun's slice (L-412): the tide
+and the clumps placed once by the orrery from a seed (L-239), exported,
+served by name and drawn by the website, with the tide's phone look
+(L-412) and Tony's look.
 **Ref:** L-421; L-239; L-224; L-410; L-351 (the served-drawing contract,
 owed to interactive-exhibit); `documentation/HANDOFF_L421_oort_gallery_20261011.md`.
 
@@ -2347,7 +2533,7 @@ for each case and updates the skill's bullet to match.
 L-252; L-418.
 
 #### [L-413] Earth's list: the old Earth items, in the order Tony confirmed (Earth room)
-<!-- L:413 status:OPEN upd:2026-10-18 section:A flag: rice: -->
+<!-- L:413 status:OPEN upd:2026-10-21 section:A flag: rice: -->
 - **Confirmed by Tony, 2026-10-04,** after a sweep of the open items
   that touch the Earth room, read against the code at orrery cbde99dc
   and gallery e7ef96eb, and checked against the Claude Fable 5.1 ledger
@@ -2483,10 +2669,18 @@ L-252; L-418.
   settled with it. Each file opens in a talk on this list.
 **Note (Claude, 2026-10-17):** the one dated thing a visitor meets
 meanwhile is the field's epoch (L-356), which the hover states.
-**Gap:** talks 2 to 6, after the Sun's numbers and the drawings Tony
-picks there (L-412): talk 2 (L-356 with L-375, and L-454), its agenda in section 5 of
-`documentation/HANDOFF_earth_fade_build_20261017.md`; then talks 3 to 6. Talk 4 (L-314)
-keeps the solar-wind fetch; its aberration is built.
+- **2026-10-20, design talks** (talk 6; record `documentation/DESIGN_talks_rulings_20261020.md`): talk 2
+  held in part. IGRF-14 confirmed (L-356), and the dipole's offset
+  ruled, in words (L-375). Carried to the next talk: whether the
+  website draws the dipole cone (L-375), and the device for edges that
+  move (L-454). Both decide what the Earth room draws, so they need
+  interactive-exhibit 1.18; the talk had loaded 1.17 and the Stale
+  Skill gate stopped them.
+**Gap (2026-10-21):** talk 2's last two questions (L-375's cone,
+L-454) at the next design talk; then talks 3 to 6, which wait behind
+the Sun's slice (L-412). Talk 4 (L-314) keeps the solar-wind fetch; its
+aberration is built. L-356's build may come on any evening (Tony,
+2026-10-20).
 **Ref:** L-412 (the Sun's list, which resumes after this); the handles
 above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
 
@@ -2531,7 +2725,7 @@ above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
 `documentation/HANDOFF_decisions_20261008.md`.
 
 #### [L-412] The Sun's slice: the order Tony confirmed (the Sun's slice)
-<!-- L:412 status:OPEN upd:2026-10-20 section:A flag: rice: -->
+<!-- L:412 status:OPEN upd:2026-10-21 section:A flag: rice: -->
 - **Confirmed by Tony, 2026-10-04**, after a sweep of the open items that
   touch the Sun room. Smallest and most settled first:
   1. L-209, the Alfven surface look -- DONE 2026-10-04.
@@ -2646,7 +2840,29 @@ above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
   streamer belt went with the spheres, and the two new strings are
   written in newlines; the other 16 are not done. The streamer belt's
   and the clumps' eyeballed numbers were not taken up.
-**Gap (replaces the one above, 2026-10-20):** the website half of
+- **2026-10-20, design talks** (talk 2; record `documentation/DESIGN_talks_rulings_20261020.md`): the
+  galactic tide on the phone. A correction to the talk's brief: the
+  website draws no cone; the cone and the brighter tide are the
+  orrery's (L-420). Tony's look on his phone: "one needs to look for
+  it. The orrery's drawing is more clear." Ruled "Yes": the phone
+  takes the orrery's look, its 5,000 dots at twice the size and
+  opacity, the pink double cone worked out by the website from served
+  numbers, and the orrery's approved cone line. Built with L-434's
+  tide drawing; the website's tide hover goes to Tony old beside new.
+- **2026-10-20, the corona's colour is kept as it is, with no colour
+  set by temperature.** Tony, after the corona's white light was
+  explained as scattered sunlight: "Keep as is." Closed in the talk.
+- **2026-10-20, the website half of L-410 with L-131 and L-456's
+  panel pushed** (gallery 4778944f, orrery 23f70886); Tony's look at
+  the panel found the Sun's drawer out of order (L-460).
+**Gap (replaces the one below, 2026-10-21):** L-456's addresses (built
+2026-10-21, later; every Sun and Earth source linked); then the
+drawer order by where each shell begins
+(L-460) and the Sun's fourteen hover and tooltip pairs (L-191); the
+tide and the clumps as stored drawings with the tide's phone look
+(L-434); the streamer belt's and the clumps' eyeballed numbers; L-241;
+then L-443, with L-128 after it.
+**Gap (2026-10-20, superseded above):** the website half of
 L-410 with L-131 (Tony's runs); L-456 first, by Tony's word that
 evening (the panel built; the addresses next), then the Sun's fourteen
 hover and tooltip pairs (L-191); the streamer belt's and the clumps'
@@ -2706,7 +2922,7 @@ with L-128 after it.
 tools/gallery_cache_builder.py (trust); L-149; L-150; L-363; L-398.
 
 #### [L-401] The orrery's own distance hovers print by fixed widths, not by the errors the position earns (orrery, provenance)
-<!-- L:401 status:OPEN upd:2026-10-15 section:A flag: rice: -->
+<!-- L:401 status:OPEN upd:2026-10-21 section:A flag: rice: -->
 - **Recorded 2026-10-01, closing L-398**, as one row for the class under
   The Braid: recorded, not chased. provenance-discipline 2.23 says every
   computed position a display prints goes to the place the larger of
@@ -3006,9 +3222,34 @@ tools/gallery_cache_builder.py (trust); L-149; L-150; L-363; L-398.
     close-approach hover prints nine decimals of an AU beside JPL's own
     3-sigma range from the same record. Where the typed mission figures
     came from is a provenance question of its own.
-**Gap:** Builds 1 and 2 are built and accepted. Build 3 is parked
-(2026-10-15): each of its four parts opens with its feature, as above.
-The two questions above go to the design talk.
+- **2026-10-20, design talks** (talk 3; record `documentation/DESIGN_talks_rulings_20261020.md`): the two
+  questions answered.
+  - (a) The analytical Moon's average distance, Tony: "A". It is
+    sourced to NASA's Moon Fact Sheet,
+    https://nssdc.gsfc.nasa.gov/planetary/factsheet/moonfact.html
+    ("Semimajor axis (10^6 km) 0.3844"), and printed to the source's
+    four figures, 384,400 km (0.002570 AU), the AU worked out from the
+    kilometre row. The typed, unsourced 0.002570 AU in
+    `idealized_orbits.calculate_moon_orbital_elements` goes.
+  - (b) Numbers that are not distances or speeds: method, not a ruling.
+    They print by the existing digit rules (provenance-discipline
+    `references/figures.md`, Rules 2, 3 and 7); nothing new goes into
+    the skill. Tony: "Yes, and by the braid rule we should do this in
+    the Moon slice, correct?" Confirmed.
+  - The analytical Moon's three numbers (distance, eccentricity, tilt)
+    are sourced to the Fact Sheet and fixed together in the Moon's
+    slice, not yet on the road (Tony: "Probably after the symbols
+    integration into the website", his leaning, not a ruling). The
+    comparison box's Delta-e and Delta-i go with the parameters
+    window's part of build 3.
+  - Method for provenance-discipline's `references/figures.md` at its
+    next version: a number from an average model prints to its
+    source's figures; the whole-kilometre floor stays for positions
+    JPL gives without an error.
+**Gap (2026-10-21):** Builds 1 and 2 are built and accepted. Build 3
+stays parked: each of its four parts opens with its feature, as above.
+The Moon's three numbers wait for the Moon's slice; the figures.md line
+waits for provenance-discipline's next version.
 **Ref:** `documentation/DESIGN_L401_distance_digits_rulings_20261011.md`;
 `documentation/REVIEW_L401_distance_digits_comparison_20261011.md`;
 `documentation/HANDOFF_L401_distance_build1_brief_20261011.md`;
@@ -3294,7 +3535,7 @@ overlays retire.)
 **Ref:** `planet_visualization_utilities.py`; L-352; L-322.
 
 #### [L-375] Earth's eccentric dipole offset is not drawn (store, Earth)
-<!-- L:375 status:OPEN upd:2026-10-04 section:A flag: rice: -->
+<!-- L:375 status:OPEN upd:2026-10-21 section:A flag: rice: -->
 - **Found 2026-09-24** building L-322 D5. Earth's magnetic dipole sits
   off the planet's centre. A source to start from: Koochak and
   Fraser-Smith (2017), Earth and Space Science 4, 626,
@@ -3309,7 +3550,22 @@ overlays retire.)
   website was found. Same question as the offset: what to show when
   the instant depends on a rotation phase neither instrument models.
   Earth's list, design talks (L-413).
-**Gap:** Read the source; then decide how, or whether, to show an offset that depends on a rotation phase the orrery does not model; and whether the website draws the cone.
+- **2026-10-20, design talks** (talk 6 (b); record `documentation/DESIGN_talks_rulings_20261020.md`): the
+  offset ruled, Tony: "A". Said in the dipole's hover, not drawn: the
+  field's centre sits about N km from Earth's centre, turning with
+  Earth. N is worked out from IGRF-14's 2025.0 coefficients (the first
+  eight, degrees 1 and 2) by Laundal, K. M. and Richmond, A. D. (2017),
+  "Magnetic Coordinate Systems", Space Science Reviews,
+  arXiv:1611.10321, https://arxiv.org/pdf/1611.10321, Sect. 3.3, Eqs.
+  23 to 28: a derived row cited to the paper and the coefficient file,
+  not typed, and not the paper's 2015 figure. Rides with L-356's build;
+  the hover's words go to Tony side by side. Koochak and Fraser-Smith
+  (2017) could not be reached; to Tony's reading list for his machine,
+  not needed for the ruling.
+**Gap (2026-10-21):** the offset's row and sentence, with L-356's
+build; whether the website draws the dipole cone, at the next design
+talk (it needs interactive-exhibit 1.18 loaded).
+**Gap (2026-10-04, superseded above):** Read the source; then decide how, or whether, to show an offset that depends on a rotation phase the orrery does not model; and whether the website draws the cone.
 **Ref:** `earth_visualization_shells.py`; `constants_new.py`; L-356 (IGRF-14).
 
 #### [L-374] Showing Earth's precession over time (orrery, idea)
@@ -3463,7 +3719,7 @@ overlays retire.)
 **Ref:** gallery `tools/gallery_cache_builder.py` (served_window, M2 section 5.5); gallery `gallery/assembler/resolver.py`, step 3; skills/gallery-assembler/SKILL.md; L-363.
 
 #### [L-363] The Solar System room: the bodies as symbols, and the gallery's front door (gallery, exhibits)
-<!-- L:363 status:OPEN upd:2026-10-11 section:A flag: rice: -->
+<!-- L:363 status:OPEN upd:2026-10-21 section:A flag: rice: -->
 - **2026-10-10, the drawer's room button moves onto its row, under
   L-429 (the room button on the row):** a body with a room shows
   "Enter the ... room" beside GO, always.
@@ -3903,6 +4159,19 @@ name?"
   may pick the wrong one (design question 7).
 **Gap (2026-09-26; SUPERSEDED):** Half 2 (above), after L-322 section 6 pushes; then Tony's decision on the default.
 **Gap (2026-09-29; SUPERSEDED 2026-10-04):** Half 2 as section 4 of `documentation/HANDOFF_L363_three_strands_integrated_20260929.md` sets it out. All of it is built.
+- **2026-10-20, design talks** (talk 4; record `documentation/DESIGN_talks_rulings_20261020.md`): Gap (c)
+  answered.
+  - The highlighted row: the drawer keeps its outward order and
+    scrolls the highlighted row into view when it opens. Tony: "A.
+    That's what I was thinking of not B that would be confusing."
+  - GO's arrow: on the upright phone the page draws a line from the
+    centred text box to its body, redrawn from the live camera as the
+    HUD is, hidden when the body is off screen or behind the box. The
+    box stays centred (the ruling of 2026-10-04 holds); the desktop
+    and a sideways phone keep Plotly's arrow. Tony: "Yes, as
+    recommended".
+  - Both are shared chrome: the headless comparison over every room,
+    then the phone.
 **Gap (2026-10-04):** (a) the swap: a bare `interactive.html` link
 opens this room and the Explorer gets its own address, after the Sun's
 slice and the gallery's checks (L-412); (b) the arrival block's
@@ -3910,9 +4179,9 @@ slice and the gallery's checks (L-412); (b) the arrival block's
 distance" where the rule is 1.2 [verified @ gallery e7ef96eb,
 `data/objects_config.json`] -- listed as a small fix on 2026-10-02, it
 did not ride patch_L363_14; FIXED 2026-10-11, one word, by gallery
-patch_L421_7, pushed at e5a3d13f; (c) the design-talk items: the highlighted
-row at the top of the list, and GO's arrow only if the text box stays
-centred; (d) whether the editor edits the rows' own words, re-homed
+patch_L421_7, pushed at e5a3d13f; (c) ANSWERED 2026-10-20 (above): build the
+scroll to the highlighted row and the page-drawn arrow on the upright
+phone; (d) whether the editor edits the rows' own words, re-homed
 from L-404.
 **Ref:** `documentation/HANDOFF_L363_three_strands_integrated_20260929.md`; `documentation/DESIGN_solar_system_room_front_door_20260929.md`; `documentation/HANDOFF_L363_half1_done_half2_after_stage_d_20260928.md`; `documentation/HANDOFF_explorer_symbols_half1_20260926.md` (rev 2); gallery `documentation/patch_solar_system_room_half1_20260926.py` and `patch_L363_2` to `_6`; L-286; L-099; L-322; L-364 to L-367; L-391 to L-395.
 
@@ -3995,7 +4264,7 @@ website's checks). The card exports and the two comments go with the next patch 
 **Ref:** gallery `documentation/`; gallery `gallery/feature_renderers.js`; manifest sec. 17.7.
 
 #### [L-356] IGRF-14 as a re-sourcing of the six coefficient rows (store)
-<!-- L:356 status:OPEN upd:2026-10-17 section:A flag: rice: -->
+<!-- L:356 status:OPEN upd:2026-10-21 section:A flag: rice: -->
 - **Recorded, not built.** A class found while building L-322 Stage C2
   (orrery `26f26fdb`, gallery `813fc542`), one row per class under The
   Braid: it waits until the artifact on the critical path reaches it.
@@ -4009,7 +4278,19 @@ talk: the talk-2 brief (section 5 of
 `documentation/HANDOFF_earth_fade_build_20261017.md`) says method
 already answers it once the model is read. A small build on an evening
 of its own, at Tony's word; the hover states its epoch meanwhile.
-**Gap:** Re-source the six rows to IGRF-14 and move the epoch; the hover words move with it.
+- **2026-10-20, design talks** (talk 6 (a); record `documentation/DESIGN_talks_rulings_20261020.md`):
+  confirmed. Tony: "Confirmed and it can be done when convenient",
+  which lifts it out of the wait behind the Sun's slice: a small build
+  of its own, on any evening. The six coefficient rows are re-sourced
+  to IGRF-14's 2025.0 column and its 2025-30 drift, with `# Read:`
+  lines, and the hovers say "for 2025 (IGRF-14 model)". The file
+  read: NOAA NCEI / IAGA, IGRF-14 coefficients,
+  https://www.ngdc.noaa.gov/IAGA/vmod/coeffs/igrf14coeffs.txt; its
+  2025.0 and 2025-30 degree-1 values in the record. Method decides the
+  rows' names and figure counts.
+**Gap (2026-10-21):** the build, whenever convenient: the six rows to
+IGRF-14's 2025.0 column and 2025-30 drift, the hovers to "for 2025
+(IGRF-14 model)"; L-375's offset sentence rides with it.
 **Ref:** `constants_new.py`; gallery `gallery/feature_renderers.js`; L-361.
 
 #### [L-355] Rate rows and angle rows on other bodies follow the two Rule 3 forms (store)
@@ -7440,7 +7721,7 @@ layers.
 `documentation/TESTING_PROTOCOL.md`; L-234 (the Earth half).
 
 #### [L-239] Seed the three Oort builders so a render is reproducible
-<!-- L:239 status:OPEN upd:2026-10-11 section:A flag: rice:2/2/90/1 -->
+<!-- L:239 status:OPEN upd:2026-10-21 section:A flag: rice:2/2/90/1 -->
 - **Orrery-side recommendation from assembler work, 2026-08-25.**
   `create_sun_hills_cloud_torus`, `create_sun_outer_oort_clumpy` and
   `create_sun_galactic_tide` in `solar_visualization_shells.py` draw
@@ -7456,8 +7737,12 @@ layers.
   from seed 421, the orrery window and the exported file alike, so the
   website draws the orrery's own dots. Orrery 1bbd9fe1. The clumps and
   the tide still draw from the global random generator.
-**Gap:** the clumps and the tide. L-434 (stored drawings for the other
-dot-cloud shells) needs them seeded first.
+- **2026-10-20, settled by L-434's ruling** (design talks, talk 5;
+  record `documentation/DESIGN_talks_rulings_20261020.md`): the clumps and the tide become stored
+  drawings, so the orrery places them once from a seed and the website
+  draws the orrery's own dots, as for the Hills cloud.
+**Gap (2026-10-21):** the clumps and the tide, seeded in L-434's build
+(the Sun's slice).
 - **Note:** RICE 2/2/90/1 -> 3.6 is Claude's proposed score.
   **Tony-action (decide):** confirm or redirect.
 **Ref:** `solar_visualization_shells.py` lines ~1411, ~1475, ~1551
@@ -19595,7 +19880,7 @@ governs a session document contradicting a settled decision, not a
 ledger field that predates the event it is silent about).
 
 #### [L-224] Streamer belt: one warped band, not a sphere
-<!-- L:224 status:DONE upd:2026-10-04 section:C flag: rice:3/3/85/2 -->
+<!-- L:224 status:DONE upd:2026-10-21 section:C flag: rice:3/3/85/2 -->
 - **What is on screen now, and why it is wrong twice.**
   `create_sun_streamer_belt_shell` draws a full sphere of points at
   `STREAMER_BELT_RADII = 6.0`. Helmet streamers form only over the
@@ -19692,6 +19977,9 @@ rather than a decision: the fade curve, and whether the cusp pinch
 reads at all at 4.0 against `INNER_CORONA_RADII` at 3.0 and
 `ROCHE_LIMIT_RADII` at 3.45. Marker separation, if needed, is angular
 and never radial.
+- **2026-10-20, design talks** (talk 5, L-434's ruling; record `documentation/DESIGN_talks_rulings_20261020.md`):
+  the streamer band stays drawn by the website from its served numbers;
+  it is not a stored drawing. Tony: "Confirmed".
 **Ref:** `solar_visualization_shells.py::create_sun_streamer_belt_
 shell`; `constants_new.py::STREAMER_BELT_RADII`;
 `planet_visualization_utilities.py::create_magnetosphere_shape` and

@@ -201,6 +201,11 @@ cloud's shape, seven rows from Kelsall et al. (1998); the dust-free and
 depletion zones from Lamy et al. (2022); where the dust comes from,
 three rows from Nesvorny et al. (2010). Each read 2026-10-19 from an
 open copy; citations approved by Tony.)
+Module updated: October 21, 2026 with Anthropic's Claude Opus 5.5
+(L-456, what a visitor reads: the open address of the copy read goes on
+the Source line of 63 rows, the Sun's and Earth's, each re-opened this
+day and given a Read line; PREM's three rows re-homed to the model's
+open tabulation; the Roche limit re-homed to Rappaport et al. (2013).)
 """
 
 import math
@@ -227,7 +232,13 @@ KM_PER_AU = 149597870.7
 # Figures+: exactly, so every digit is known.
 # Read: Resolution B2, "on the re-definition of the astronomical unit of
 # Read+: length", IAU 2012 resolutions text, 2026-09-19, Claude Opus 5
-# Source: IAU 2012 Resolution B2 -- exact definition
+# Read+: Re-read in the IAU's own PDF of the 2012 resolutions, the address
+# Read+: on the Source line, 2026-10-21, Claude Opus 5.5: "that the
+# Read+: astronomical unit be re-defined to be a conventional unit of
+# Read+: length equal to 149 597 870 700 m exactly".
+# Source: IAU 2012 Resolution B2,
+# Source+: https://www.iau.org/static/resolutions/IAU2012_English.pdf --
+# Source+: exact definition
 # Ref: https://syrte.obspm.fr/IAU_resolutions/Res_IAU2012_B2.pdf
 # Also: https://nssdc.gsfc.nasa.gov/planetary/factsheet/fact_notes.html
 # Cross-checked: Claude 2026-08-02 -- IAU B2 (worksheet_claude_constants_new.md)
@@ -285,7 +296,13 @@ SUN_RADIUS_KM = 695700.0
 # Figures+: km). IAU 2015 Resolution B3 defines the nominal solar radius
 # Figures+: as exactly 6.957 x 10^8 m, a conversion constant, so every
 # Figures+: digit is known; the .0 is Python's (Rule 2).
-# Source: IAU 2015 Resolution B3 -- nominal solar radius
+# Source: IAU 2015 Resolution B3 -- nominal solar radius,
+# Source+: https://www.iau.org/common/Uploaded%20files/IAUGA2015-Resolution-B3-recommended-nominal-conversion.pdf
+# Read: "Resolution B3 on recommended nominal conversion constants for
+# Read+: selected solar and planetary properties", Recommends 3, Solar
+# Read+: conversion constants: 1 R_sun^N = 6.957 x 10^8 m; the IAU's PDF,
+# Read+: 2026-10-21, Claude Opus 5.5. Gemini 4 (medium) quoted the same line
+# Read+: there (worksheet_gemini4_medium_l456_sun_20261020.md, S5).
 # Ref: Prsa et al. 2016, AJ 152:41 (arXiv:1605.09788)
 # Also: https://nssdc.gsfc.nasa.gov/planetary/factsheet/sunfact.html
 # Cross-checked: Claude 2026-08-02 -- IAU B3 (worksheet_claude_constants_new.md)
@@ -304,8 +321,10 @@ EARTH_EQUATORIAL_RADIUS_KM = 6378.1366
 # Figures+: (L-322 C2); the words after it are unchanged.
 # Read: Table 1.1 "IERS numerical standards", IERS Technical Note 36
 # Read+: p. 18, 2026-09-19, Claude Opus 5
+# Read+: Re-read at the IERS Conventions Centre's copy, the address on the
+# Read+: Source line, 2026-10-21, Claude Opus 5.5: the same table line.
 # Source: IERS Conventions (2010), Petit & Luzum (eds.), IERS Technical
-# Source+: Note No. 36, Table 1.1
+# Source+: Note No. 36, Table 1.1, https://iers-conventions.obspm.fr/content/tn36.pdf
 # Ref: Prsa et al. 2016, AJ 152:41 (arXiv:1605.09788)
 # Also: https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html
 # Note: IERS publishes 6378136.6 +/- 0.1 m. IAU B3's 6.3781e6 m is an
@@ -387,7 +406,12 @@ EARTH_MEAN_RADIUS_KM = 6371.0
 # Figures+: 6371 km, to four, for its own purposes.
 # Read: Earth Fact Sheet, bulk parameters, volumetric mean radius,
 # Read+: 2026-09-19, Claude Opus 5
-# Source: NASA Planetary Fact Sheet, Earth -- volumetric mean radius
+# Read+: Re-read at the address on the Source line, 2026-10-21, Claude Opus
+# Read+: 5.5: "Volumetric mean radius (km) 6371.000" (last updated 15
+# Read+: November 2024).
+# Source: NASA Planetary Fact Sheet, Earth,
+# Source+: https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html --
+# Source+: volumetric mean radius
 # Ref: https://nssdc.gsfc.nasa.gov/planetary/factsheet/earthfact.html
 # Note: the reference sphere that PREM and the seismological depth scale
 # Note+: are quoted against, and since patch D20 the radius the orrery
@@ -401,8 +425,19 @@ EARTH_INNER_CORE_KM = 1221.5
 # Figures: 5 -- PREM Table I gives the inner-core boundary as 1221.5 km.
 # Read: Table I, "Preliminary reference Earth model", Phys. Earth Planet.
 # Read+: Inter. 25:297-356, p. 308, 2026-09-19, Claude Opus 5
+# Read+: The 1981 paper is walled (Caltech's record of it is metadata
+# Read+: only). Its tabulation was read instead, 2026-10-21, Claude Opus
+# Read+: 5.5, at the address on the Source line: Table A.1, "Preliminary
+# Read+: Reference Earth Model (isotropic version)", attributed to "the
+# Read+: Preliminary Reference Earth Model (PREM) of Dziewonski and
+# Read+: Anderson (1981)", radius 1221.5 km on two rows, the boundary. The
+# Read+: page names no book or author; its address is P. Shearer's at UCSD
+# Read+: (L-456, The Access Standard: re-home to an open copy of the same
+# Read+: result).
 # Source: Dziewonski, A. M. & Anderson, D. L. (1981), "Preliminary
-# Source+: reference Earth model", Phys. Earth Planet. Inter. 25:297-356
+# Source+: reference Earth model", Phys. Earth Planet. Inter. 25:297-356;
+# Source+: the model's tabulation, open: the appendix "The PREM Model",
+# Source+: Table A.1, https://igpppublic.ucsd.edu/~shearer/ED2/appendices.pdf
 # Source+: -- inner core boundary (ICB) at r = 1221.5 km.
 # Note: the shell previously carried radius_fraction 0.19, an
 # Note+: approximate value taken by hand when the shells were first
@@ -427,8 +462,19 @@ EARTH_OUTER_CORE_KM = 3480.0
 # Figures+: clause, which Tony named as the reference.
 # Read: Table I, "Preliminary reference Earth model", Phys. Earth Planet.
 # Read+: Inter. 25:297-356, p. 308, 2026-09-19, Claude Opus 5
+# Read+: The 1981 paper is walled (Caltech's record of it is metadata
+# Read+: only). Its tabulation was read instead, 2026-10-21, Claude Opus
+# Read+: 5.5, at the address on the Source line: Table A.1, "Preliminary
+# Read+: Reference Earth Model (isotropic version)", attributed to "the
+# Read+: Preliminary Reference Earth Model (PREM) of Dziewonski and
+# Read+: Anderson (1981)", radius 3480.0 km on two rows, the boundary. The
+# Read+: page names no book or author; its address is P. Shearer's at UCSD
+# Read+: (L-456, The Access Standard: re-home to an open copy of the same
+# Read+: result).
 # Source: Dziewonski & Anderson (1981), PREM, Phys. Earth Planet. Inter.
-# Source+: 25:297-356 -- core-mantle boundary (CMB) at r = 3480 km.
+# Source+: 25:297-356; the model's tabulation, open: the appendix "The PREM Model",
+# Source+: Table A.1, https://igpppublic.ucsd.edu/~shearer/ED2/appendices.pdf
+# Source+: -- core-mantle boundary (CMB) at r = 3480 km.
 # Note: the NASA Earth Fact Sheet lists a core radius of 3485 km. PREM is
 # Note+: preferred because the other three boundaries in this nested
 # Note+: stack are PREM's, and mixing reference models across one stack
@@ -455,9 +501,12 @@ EARTH_D660_DEPTH_KM = 660.0
 # Read+: discontinuity is 660 +/- 10 km", 2026-09-19, Claude Opus 5;
 # Read+: re-read for the title, authors, DOI and section through the open
 # Read+: PMC copy, 2026-10-17, Claude Opus 5.5.
+# Read+: Re-read 2026-10-21, Claude Opus 5.5 at Scientific Reports' own
+# Read+: open page, where the DOI resolves: "the global average depth of
+# Read+: the discontinuity is 660 +/- 10 km".
 # Source: Ishii, T., Huang, R., Fei, H. et al. (2018), "Complete agreement
 # Source+: of the post-spinel transition with the 660-km seismic
-# Source+: discontinuity", Sci. Rep. 8:6358, doi:10.1038/s41598-018-24832-y
+# Source+: discontinuity", Sci. Rep. 8:6358, https://doi.org/10.1038/s41598-018-24832-y
 # Source+: -- section "New results of the post-spinel transition pressure in
 # Source+: complete agreement with the discontinuity depth": the global
 # Source+: average depth of the discontinuity is 660 +/- 10 km.
@@ -506,8 +555,19 @@ EARTH_UPPER_MANTLE_KM = 6346.6
 # Figures: 5 -- PREM Table I gives the crust/LID boundary as 6346.6 km.
 # Read: Table I, "Preliminary reference Earth model", Phys. Earth Planet.
 # Read+: Inter. 25:297-356, p. 308, 2026-09-19, Claude Opus 5
+# Read+: The 1981 paper is walled (Caltech's record of it is metadata
+# Read+: only). Its tabulation was read instead, 2026-10-21, Claude Opus
+# Read+: 5.5, at the address on the Source line: Table A.1, "Preliminary
+# Read+: Reference Earth Model (isotropic version)", attributed to "the
+# Read+: Preliminary Reference Earth Model (PREM) of Dziewonski and
+# Read+: Anderson (1981)", radius 6346.6 km on two rows, the boundary. The
+# Read+: page names no book or author; its address is P. Shearer's at UCSD
+# Read+: (L-456, The Access Standard: re-home to an open copy of the same
+# Read+: result).
 # Source: Dziewonski & Anderson (1981), PREM, Phys. Earth Planet. Inter.
-# Source+: 25:297-356 -- base of the crust (Mohorovicic discontinuity) in
+# Source+: 25:297-356; the model's tabulation, open: the appendix "The PREM Model",
+# Source+: Table A.1, https://igpppublic.ucsd.edu/~shearer/ED2/appendices.pdf
+# Source+: -- base of the crust (Mohorovicic discontinuity) in
 # Source+: the reference model, r = 6346.6 km.
 # Note: the Moho is not a sphere. It lies about 5-10 km below ocean
 # Note+: basins, 30-50 km below continents, and as deep as 70 km below
@@ -540,7 +600,9 @@ EARTH_GM_KM3_S2 = 398600.4418
 # Figures+: is that 8e5 m^3 s^-2 in this row's own unit (L-322 C2).
 # Read: Table 1.1 "IERS numerical standards", IERS Technical Note 36
 # Read+: p. 18, 2026-09-19, Claude Opus 5
-# Source: IERS Conventions (2010), IERS Technical Note 36, Table 1.1 --
+# Read+: Re-read at the IERS Conventions Centre's copy, the address on the
+# Read+: Source line, 2026-10-21, Claude Opus 5.5: the same table line.
+# Source: IERS Conventions (2010), IERS Technical Note 36, Table 1.1, https://iers-conventions.obspm.fr/content/tn36.pdf --
 # Source+: geocentric gravitational constant GM_E = 3.986004418e14 m^3 s^-2
 # Source+: (uncertainty 8e5 m^3 s^-2).
 # Ref: https://iers-conventions.obspm.fr/content/tn36.pdf
@@ -557,7 +619,10 @@ EARTH_ROTATION_RATE_RAD_S = 7.292115e-5
 # Figures: 7 -- as printed.
 # Read: Table 1.2 "Parameters of the Geodetic Reference System GRS80",
 # Read+: IERS Technical Note 36 p. 19, 2026-09-19, Claude Opus 5
-# Source: IERS Conventions (2010), IERS Technical Note 36, Table 1.2
+# Read+: Re-read at the IERS Conventions Centre's copy, the address on the
+# Read+: Source line, 2026-10-21, Claude Opus 5.5: the same table line.
+# Source: IERS Conventions (2010), IERS Technical Note 36, Table 1.2,
+# Source+: https://iers-conventions.obspm.fr/content/tn36.pdf
 # Source+: "Parameters of the Geodetic Reference System GRS80" -- nominal
 # Source+: mean Earth angular velocity, 7.292115e-5 rad s^-1.
 # Corrected: 2026-09-19 -- the old line said Table 1.1, which has no
@@ -615,7 +680,12 @@ S_PER_HOUR = 3600.0
 # Figures: exact -- a definition, not a measurement.
 # Read: Table 6, sec. 5.1.1, NIST Guide to the SI (SP 811), chapter 5,
 # Read+: 2026-09-23, Claude Opus 5.5
-# Source: NIST Special Publication 811, Guide for the Use of the SI, sec.
+# Read+: Re-read at the address on the Source line, 2026-10-21, Claude Opus
+# Read+: 5.5: Table 6's rows for the minute, the hour and the day, and the
+# Read+: minute and second of arc. Gemini 4 (medium) quoted the same rows
+# Read+: (worksheet_gemini4_medium_l456_sun_20261020.md, S11).
+# Source: NIST Special Publication 811, Guide for the Use of the SI,
+# Source+: https://www.nist.gov/pml/special-publication-811/nist-guide-si-chapter-5-units-outside-si, sec.
 # Source+: 5.1.1, Table 6 (units the CIPM accepts for use with the SI) --
 # Source+: the hour is 60 minutes, 3600 seconds, by definition.
 # Ref: https://www.nist.gov/pml/special-publication-811/nist-guide-si-chapter-5-units-outside-si
@@ -633,7 +703,12 @@ S_PER_DAY = 86400.0
 # Figures: exact -- a definition, not a measurement.
 # Read: Table 6, sec. 5.1.1, NIST Guide to the SI (SP 811), chapter 5,
 # Read+: 2026-10-12, Claude Opus 5.5, through the chat's web-fetch tool
-# Source: NIST Special Publication 811, Guide for the Use of the SI, sec.
+# Read+: Re-read at the address on the Source line, 2026-10-21, Claude Opus
+# Read+: 5.5: Table 6's rows for the minute, the hour and the day, and the
+# Read+: minute and second of arc. Gemini 4 (medium) quoted the same rows
+# Read+: (worksheet_gemini4_medium_l456_sun_20261020.md, S11).
+# Source: NIST Special Publication 811, Guide for the Use of the SI,
+# Source+: https://www.nist.gov/pml/special-publication-811/nist-guide-si-chapter-5-units-outside-si, sec.
 # Source+: 5.1.1, Table 6 (units the CIPM accepts for use with the SI) --
 # Source+: the day is 24 hours, 86 400 seconds, by definition.
 # Ref: https://www.nist.gov/pml/special-publication-811/nist-guide-si-chapter-5-units-outside-si
@@ -648,7 +723,12 @@ S_PER_MINUTE = 60.0
 # Read: Table 6, sec. 5.1.1, NIST Guide to the SI (SP 811), chapter 5,
 # Read+: row "minute -- time", 2026-10-18, Claude Opus 5.5, through the
 # Read+: chat's web-fetch tool
-# Source: NIST Special Publication 811, Guide for the Use of the SI, sec.
+# Read+: Re-read at the address on the Source line, 2026-10-21, Claude Opus
+# Read+: 5.5: Table 6's rows for the minute, the hour and the day, and the
+# Read+: minute and second of arc. Gemini 4 (medium) quoted the same rows
+# Read+: (worksheet_gemini4_medium_l456_sun_20261020.md, S11).
+# Source: NIST Special Publication 811, Guide for the Use of the SI,
+# Source+: https://www.nist.gov/pml/special-publication-811/nist-guide-si-chapter-5-units-outside-si, sec.
 # Source+: 5.1.1, Table 6 (units the CIPM accepts for use with the SI) --
 # Source+: the minute is 60 seconds, by definition.
 # Ref: https://www.nist.gov/pml/special-publication-811/nist-guide-si-chapter-5-units-outside-si
@@ -700,12 +780,19 @@ EARTH_POLE_RA_J2000_DEG = 0.0
 # Read+: "Reference Frames", sections "International Celestial Reference
 # Read+: Frame (ICRF)" and "Ecliptic of Standard Epoch", 2026-09-23, Claude
 # Read+: Opus 5.5.
-# Source: IERS Conventions (2010), IERS Technical Note 36, sec. 2.1.1 -- the
+# Read+: Re-read 2026-10-21, Claude Opus 5.5: sec. 2.1.1 at the IERS copy
+# Read+: on the Source line (the mean pole's offsets, 17.1 and 5.0 mas, and
+# Read+: 16.6 and 6.8 mas); the Horizons manual's "International Celestial
+# Read+: Reference Frame (ICRF)" section, "differ from the previous
+# Read+: FK5/J2000 dynamical system by at most 0.02 arcseconds".
+# Source: IERS Conventions (2010), IERS Technical Note 36, sec. 2.1.1,
+# Source+: https://iers-conventions.obspm.fr/content/tn36.pdf -- the
 # Source+: ICRS principal plane is held close to the mean equator at
 # Source+: J2000.0, and the mean pole at J2000.0 sits 17.1 mas toward 12h and
 # Source+: 5.0 mas toward 18h from the ICRS pole (IERS 1996 nutation), or
 # Source+: 16.6 mas and 6.8 mas (MHB2000): about 0.02 arcseconds, some five
-# Source+: millionths of a degree. The Horizons manual: the ICRF was built to
+# Source+: millionths of a degree. The Horizons manual,
+# Source+: https://ssd.jpl.nasa.gov/horizons/manual.html: the ICRF was built to
 # Source+: align with FK5/J2000 and differs from it by at most 0.02
 # Source+: arcseconds.
 # Ref: https://iers-conventions.obspm.fr/content/tn36.pdf
@@ -734,7 +821,12 @@ ARCSEC_PER_DEG = 3600.0
 # Figures: exact -- a definition, not a measurement.
 # Read: Table 6, sec. 5.1.1, NIST Guide to the SI (SP 811), chapter 5,
 # Read+: 2026-09-23, Claude Opus 5.5
-# Source: NIST Special Publication 811, sec. 5.1.1, Table 6 -- the second
+# Read+: Re-read at the address on the Source line, 2026-10-21, Claude Opus
+# Read+: 5.5: Table 6's rows for the minute, the hour and the day, and the
+# Read+: minute and second of arc. Gemini 4 (medium) quoted the same rows
+# Read+: (worksheet_gemini4_medium_l456_sun_20261020.md, S11).
+# Source: NIST Special Publication 811, sec. 5.1.1, Table 6,
+# Source+: https://www.nist.gov/pml/special-publication-811/nist-guide-si-chapter-5-units-outside-si -- the second
 # Source+: of arc is one sixtieth of the minute of arc, which is one
 # Source+: sixtieth of the degree, so a degree is 3600 arcseconds by
 # Source+: definition.
@@ -757,7 +849,11 @@ EARTH_OBLIQUITY_J2000_ARCSEC = 84381.448
 # Read: the Horizons manual, "General Definitions", "Ecliptic", and
 # Read+: "Reference Frames", "Ecliptic of Standard Epoch (J2000 or B1950)",
 # Read+: 2026-09-23, Claude Opus 5.5.
-# Source: JPL Horizons manual -- Horizons turns the ICRF into its ecliptic
+# Read+: The manual re-opened at the address on the Source line,
+# Read+: 2026-10-21, Claude Opus 5.5, for the reference frames section
+# Read+: only; the obliquity's own section stands on the 2026-09-23 read.
+# Source: JPL Horizons manual, https://ssd.jpl.nasa.gov/horizons/manual.html --
+# Source+: Horizons turns the ICRF into its ecliptic
 # Source+: of J2000 with the fixed IAU 1976/1980 obliquity of 84381.448
 # Source+: arcseconds at the J2000.0 epoch, a rotation about the ICRF x-axis.
 # Ref: https://ssd.jpl.nasa.gov/horizons/manual.html
@@ -791,15 +887,31 @@ GALACTIC_NORTH_POLE_RA_J2000_DEG = 192.85948125
 # Declared+: inclined 0.4 to 0.6 degrees more than this one, far below
 # Declared+: anything the drawing shows.
 # Read: eq. (2), sec. 1, of the document named in the Source line,
-# Read+: 2026-10-02, Claude Opus 5.5.
+# Read+: 2026-10-02, Claude Opus 5.5. Re-read 2026-10-21, Claude Opus 5.5,
+# Read+: in A&A's own full text, free to read, where the DOI resolves:
+# Read+: "Constructing a Galactic coordinate system based on near-infrared
+# Read+: and radio catalogs", J.-C. Liu, Z. Zhu and B. Hu, the same eq. (2).
+# Read+: The layer below read too, the same day: Murray, C. A., "The
+# Read+: transformation of coordinates between the systems of B1950.0 and
+# Read+: J2000.0, and the principal galactic axes referred to J2000.0",
+# Read+: A&A 218, 325-329 (1989), from the ADS scan in Tony's papers/
+# Read+: folder. Sect. 7.1, p. 329: the pole of J2000.0 is 12h 51m
+# Read+: 26.2755s, +27 deg 7' 41.704", the same figures; the third column
+# Read+: of eq. (33), its direction cosines (-0.867666136, -0.198076390,
+# Read+: 0.455983795), gives RA 192.8594812 and Dec 27.1282512 deg, within
+# Read+: 0.0004" of this row and the declination row. Gemini 4 (medium)
+# Read+: could not open Murray (worksheet_gemini4_medium_l456_sun_20261020.md, S8). The
+# Read+: Hipparcos volume's sec. 1.5.3 (p. 91) has not been read.
 # Source: Liu, Zhu and Hu, "Constructing a Galactic coordinate system
-# Source+: based on near-infrared and radio catalogs", arXiv:1110.6268,
+# Source+: based on near-infrared and radio catalogs", A&A 536, A102,
+# Source+: https://doi.org/10.1051/0004-6361/201116947 (arXiv:1110.6268),
 # Source+: eq. (2) -- the north galactic pole at J2000.0, alpha =
 # Source+: 12h 51m 26.2755s, delta = +27 deg 07' 41.704", as derived by
 # Source+: Murray (1989) and adopted by the Hipparcos team as the
 # Source+: standard transformation. The layer below: Murray, C. A. 1989,
-# Source+: A&A 218, 325; ESA 1997, The Hipparcos and Tycho Catalogues,
-# Source+: ESA SP-1200.
+# Source+: A&A 218, 325, sect. 7.1,
+# Source+: https://ui.adsabs.harvard.edu/abs/1989A&A...218..325M/abstract;
+# Source+: ESA 1997, The Hipparcos and Tycho Catalogues, ESA SP-1200.
 # Ref: https://arxiv.org/pdf/1110.6268
 # Note: added 2026-10-02 (L-406). Until then the galactic tide was drawn
 # Note+: about the ecliptic while its words said the galaxy's plane.
@@ -833,14 +945,22 @@ SGR_A_STAR_RA_ICRS_ARCSEC = 959100.6
 # Figures+: digits within that resolution, so they count. Times 15, an
 # Figures+: exact conversion, that is 959,100.600 arcseconds.
 # Read: eq. (8), sec. 3.2, of the document named in the Source line, read
-# Read+: as the ar5iv HTML rendering, 2026-10-06, Claude Opus 5.5.
+# Read+: as the ar5iv HTML rendering, 2026-10-06, Claude Opus 5.5. Re-read
+# Read+: in A&A's own full text, free to read, where the DOI resolves,
+# Read+: 2026-10-21, Claude Opus 5.5: the same eq. (8), attributed to Reid and
+# Read+: Brunthaler. Their paper's arXiv page opened the same day: "The
+# Read+: Proper Motion of Sgr A*: II. The Mass of Sgr A*", M. J. Reid and
+# Read+: A. Brunthaler. Gemini 4 (medium) quoted both (worksheet_gemini4_medium_l456_sun_20261020.md,
+# Read+: S7 and S10).
 # Source: Liu, Zhu and Hu, "Constructing a Galactic coordinate system
-# Source+: based on near-infrared and radio catalogs", arXiv:1110.6268,
+# Source+: based on near-infrared and radio catalogs", A&A 536, A102,
+# Source+: https://doi.org/10.1051/0004-6361/201116947 (arXiv:1110.6268),
 # Source+: sec. 3.2, eq. (8) -- the absolute position of Sgr A*, referred
 # Source+: to the ICRS, derived by Reid and Brunthaler from Very Long
 # Source+: Baseline Array measurements: alpha = 17h 45m 40.0400s,
 # Source+: delta = -29 deg 00' 28.138". The layer below: Reid, M. J. and
-# Source+: Brunthaler, A. 2004, ApJ 616, 872.
+# Source+: Brunthaler, A. 2004, ApJ 616, 872,
+# Source+: https://arxiv.org/abs/astro-ph/0408107.
 # Ref: https://ar5iv.arxiv.org/html/1110.6268
 # Note: added 2026-10-06 (L-420), the direction of the galactic centre
 # Note+: in the Star Background. The same paper's eq. (7) gives the point
@@ -931,8 +1051,14 @@ EARTH_LEO_UPPER_ALTITUDE_KM = 2000.0
 # Read+: the revision error corrected below. Detail, and where Tony's
 # Read+: local copies of the paper and his image of the paragraph sit,
 # Read+: are in documentation/L322_earth_read_record_20260919.md.
-# Source: IADC Space Debris Mitigation Guidelines, IADC-02-01 REVISION
-# Source+: 2, March 2020, section 3.3.2 (1) -- the LEO Protected Region
+# Read+: Re-read at NASA's Orbital Debris Program Office copy, the address
+# Read+: on the Source line, and in Tony's copy in papers/, 2026-10-21,
+# Read+: Claude Opus 5.5: cover "IADC-02-01 Revision 2, Mar 2020"; 3.3.1,
+# Read+: "the equatorial radius of the Earth is taken as 6,378 km"; 3.3.2
+# Read+: (1), "up to an altitude (Z) of 2,000 km", p. 8.
+# Source: IADC Space Debris Mitigation Guidelines, IADC-02-01 REVISION 2,
+# Source+: https://orbitaldebris.jsc.nasa.gov/library/IADC-Space-Debris-Guidelines-Revision-2.pdf
+# Source+: (NASA's Orbital Debris Program Office copy), March 2020, section 3.3.2 (1) -- the LEO Protected Region
 # Source+: extends from the Earth's surface to an altitude of 2,000 km.
 # Source+: Section 3.3.1 takes the equatorial radius as the reference
 # Source+: surface and gives it as 6,378 km.
@@ -1007,9 +1133,15 @@ EARTH_STRATOPAUSE_ALTITUDE_KM = 50.0
 # Figures+: (50 km)"; 31 miles is 49.9 km, so two figures is what it says.
 # Read: "Layers of the Atmosphere", NOAA JetStream, stratosphere section,
 # Read+: 2026-09-19, Claude Opus 5
-# Source: NOAA JetStream, "Layers of the Atmosphere" -- stratosphere to
-# Source+: about 50 km; and NASA, "Earth's Atmospheric Layers" -- the
-# Source+: stratosphere extends to 50 km.
+# Read+: Re-read at both addresses on the Source line, 2026-10-21, Claude
+# Read+: Opus 5.5: NOAA, "to around 31 miles (50 km)"; NASA's "Earth's
+# Read+: Atmospheric Layers" (January 22, 2013), "extends to 50 kilometers
+# Read+: (31 miles) high".
+# Source: NOAA JetStream, "Layers of the Atmosphere",
+# Source+: https://www.noaa.gov/jetstream/atmosphere/layers-of-atmosphere --
+# Source+: stratosphere to about 50 km; and NASA, "Earth's Atmospheric
+# Source+: Layers", https://www.nasa.gov/image-article/earths-atmospheric-layers-3/
+# Source+: -- the stratosphere extends to 50 km.
 # Ref: https://www.noaa.gov/jetstream/atmosphere/layers-of-atmosphere
 # Ref: https://www.nasa.gov/image-article/earths-atmospheric-layers-3/
 EARTH_THERMOPAUSE_ALTITUDE_KM = 600.0
@@ -1019,9 +1151,16 @@ EARTH_THERMOPAUSE_ALTITUDE_KM = 600.0
 # Figures+: 375 miles is 603.5 km, so the km figure carries two.
 # Read: "Layers of the Atmosphere", NOAA JetStream, thermosphere and
 # Read+: exosphere sections, 2026-09-19, Claude Opus 5
-# Source: NOAA JetStream, same page -- thermosphere from about 85 km to
-# Source+: about 600 km, the exosphere beyond; NASA, same page -- the
-# Source+: thermosphere extends to 600 km.
+# Read+: Re-read at both addresses on the Source line, 2026-10-21, Claude
+# Read+: Opus 5.5: NOAA, "Between about 53 miles (85 km) and 375 miles (600
+# Read+: km) lies the thermosphere"; NASA, "extends to 600 kilometers (372
+# Read+: miles) high".
+# Source: NOAA JetStream, same page,
+# Source+: https://www.noaa.gov/jetstream/atmosphere/layers-of-atmosphere --
+# Source+: thermosphere from about 85 km to about 600 km, the exosphere
+# Source+: beyond; NASA, same page,
+# Source+: https://www.nasa.gov/image-article/earths-atmospheric-layers-3/
+# Source+: -- the thermosphere extends to 600 km.
 # Note: a nominal figure. The thermopause moves with solar activity over
 # Note+: roughly 500 to 1,000 km; the drawn shell is not that precise.
 EARTH_STRATOPAUSE_RADIUS_KM = EARTH_EQUATORIAL_RADIUS_KM + EARTH_STRATOPAUSE_ALTITUDE_KM
@@ -1551,9 +1690,12 @@ EARTH_VAN_ALLEN_INNER_RADII = 1.5
 # Figures: 2 -- the source prints 1.5.
 # Read: sec. 2, Baker et al. (2018) at the Springer link below,
 # Read+: 2026-09-21, Claude Opus 5
+# Read+: Re-read 2026-10-21, Claude Opus 5.5 at the Springer page the DOI
+# Read+: resolves to, full text open: sec. 2, "near the geocentric radial
+# Read+: distance of r~1.5R_E at which the inner zone proton fluxes peak".
 # Source: Baker, D. N. et al. (2018), "Space Weather Effects in the
 # Source+: Earth's Radiation Belts", Space Sci. Rev. 214:17,
-# Source+: doi:10.1007/s11214-017-0452-7 -- sec. 2: inner-zone proton fluxes
+# Source+: https://doi.org/10.1007/s11214-017-0452-7 -- sec. 2: inner-zone proton fluxes
 # Source+: peak near geocentric r ~ 1.5 R_E.
 # Access: open full text,
 # Access+: https://link.springer.com/article/10.1007/s11214-017-0452-7
@@ -1583,11 +1725,15 @@ EARTH_VAN_ALLEN_OUTER_BAND_LOW_L = 4.0
 # Figures: 1 -- the source prints "4".
 # Read: sec. 1 para. 1, p. 1, the par.nsf.gov copy of Li et al. (2025),
 # Read+: 2026-09-22, Claude Opus 5
+# Read+: Re-read at the NSF copy on the Source line, 2026-10-21, Claude
+# Read+: Opus 5.5: sec. 1 para. 1, "the outer radiation belt which is most
+# Read+: intense around L = 4 and 5".
 # Source: Li, X., Xiang, Z., Mei, Y., O'Brien, D., Brennan, D., Zhao, H.,
 # Source+: Baker, D. N. and Temerin, M. A. (2025), "A New Electron and
 # Source+: Proton Radiation Belt Identified by CIRBE/REPTile-2 Measurements
 # Source+: After the Magnetic Super Storm of 10 May 2024", J. Geophys. Res.
-# Source+: Space Physics 130, e2024JA033504, doi:10.1029/2024JA033504 --
+# Source+: Space Physics 130, e2024JA033504, doi:10.1029/2024JA033504,
+# Source+: https://par.nsf.gov/servlets/purl/10575739 --
 # Source+: sec. 1: the outer radiation belt is most intense around L = 4
 # Source+: and 5.
 # Also: Li et al. (2015), doi:10.1002/2014JA020777, sec. 1 -- greatest
@@ -1611,7 +1757,11 @@ EARTH_VAN_ALLEN_OUTER_BAND_HIGH_L = 5.0
 # Figures: 1 -- the source prints "5".
 # Read: sec. 1 para. 1, p. 1, the par.nsf.gov copy of Li et al. (2025),
 # Read+: 2026-09-22, Claude Opus 5
-# Source: Li et al. (2025), doi:10.1029/2024JA033504 -- sec. 1: the outer
+# Read+: Re-read at the NSF copy on the Source line, 2026-10-21, Claude
+# Read+: Opus 5.5: sec. 1 para. 1, "the outer radiation belt which is most
+# Read+: intense around L = 4 and 5".
+# Source: Li et al. (2025), doi:10.1029/2024JA033504,
+# Source+: https://par.nsf.gov/servlets/purl/10575739 -- sec. 1: the outer
 # Source+: radiation belt is most intense around L = 4 and 5.
 # Note: the upper end of that band; corroborated as the row above (its
 # Note+: Also lines).
@@ -1696,7 +1846,14 @@ EARTH_VAN_ALLEN_INNER_BELT_OUTER_EDGE = 2.0
 # Figures+: (Rule 2). The float keeps 2.0; the count says it is one figure.
 # Read: introduction para. 1, Meredith et al. (2014), read through the Wiley
 # Read+: article page, 2026-09-21, Claude Opus 5
-# Source: Meredith et al. (2014), doi:10.1002/2014JA020064 -- introduction,
+# Read+: Re-read 2026-10-21, Claude Opus 5.5: the NERC archive's copy of
+# Read+: Meredith et al. (2014), "Global morphology and spectral properties
+# Read+: of EMIC waves derived from CRRES observations", introduction para.
+# Read+: 1, the inner belt "from approximately 1.1 to 2 Earth radii" and
+# Read+: the outer "from 3 to 7 RE"; and the NSF copy of Li, Tu et al.
+# Read+: (2024), "extends from approximately 3 to 7 Earth radii (RE)".
+# Source: Meredith et al. (2014), doi:10.1002/2014JA020064,
+# Source+: https://nora.nerc.ac.uk/id/eprint/507469/1/jgra51120.pdf -- introduction,
 # Source+: first paragraph, the outer end of the same stated span.
 # Access: open full text,
 # Access+: https://nora.nerc.ac.uk/id/eprint/507469/1/jgra51120.pdf
@@ -1742,8 +1899,16 @@ EARTH_VAN_ALLEN_OUTER_BELT_OUTER_EDGE = 7.0
 # Read: introduction para. 1, Meredith et al. (2014), read through the Wiley
 # Read+: article page, and introduction para. 1, Li, Tu et al. (2024) at
 # Read+: par.nsf.gov, 2026-09-21, Claude Opus 5
-# Source: Meredith et al. (2014), doi:10.1002/2014JA020064, and Li, Tu et
-# Source+: al. (2024), doi:10.1029/2023JA032171 -- both state the outer belt
+# Read+: Re-read 2026-10-21, Claude Opus 5.5: the NERC archive's copy of
+# Read+: Meredith et al. (2014), "Global morphology and spectral properties
+# Read+: of EMIC waves derived from CRRES observations", introduction para.
+# Read+: 1, the inner belt "from approximately 1.1 to 2 Earth radii" and
+# Read+: the outer "from 3 to 7 RE"; and the NSF copy of Li, Tu et al.
+# Read+: (2024), "extends from approximately 3 to 7 Earth radii (RE)".
+# Source: Meredith et al. (2014), doi:10.1002/2014JA020064,
+# Source+: https://nora.nerc.ac.uk/id/eprint/507469/1/jgra51120.pdf, and Li, Tu et
+# Source+: al. (2024), doi:10.1029/2023JA032171,
+# Source+: https://par.nsf.gov/servlets/purl/10578577 -- both state the outer belt
 # Source+: extending to 7 Earth radii, in their introductions.
 # Access: open full text,
 # Access+: https://nora.nerc.ac.uk/id/eprint/507469/1/jgra51120.pdf and
@@ -1808,11 +1973,15 @@ EARTH_IGRF13_G10_NT = -29404.8
 # Figures+: on L-322 as a class.
 # Read: row "g 1 0", column 2020.0, igrf13coeffs.txt, 2026-09-21,
 # Read+: Claude Opus 5
-# Source: IGRF-13 coefficient file igrf13coeffs.txt (IAGA Working Group
+# Read+: Re-read at NOAA NCEI's copy of the file, the address on the Source
+# Read+: line, 2026-10-21, Claude Opus 5.5: g 1 0 -29404.8 and 5.7, g 1 1
+# Read+: -1450.9 and 7.4, h 1 1 4652.5 and -25.9 (2020.0, and SV 2020-25).
+# Source: IGRF-13 coefficient file igrf13coeffs.txt, https://www.ngdc.noaa.gov/IAGA/vmod/coeffs/igrf13coeffs.txt
+# Source+: (IAGA Working Group
 # Source+: V-MOD, served by NOAA NCEI) -- g(1,0) at epoch 2020.0 is
 # Source+: -29404.8 nT. The model is Alken, P. et al. (2021), "International
 # Source+: Geomagnetic Reference Field: the thirteenth generation", Earth
-# Source+: Planets Space 73:49, doi:10.1186/s40623-020-01288-x, which names
+# Source+: Planets Space 73:49, https://doi.org/10.1186/s40623-020-01288-x, which names
 # Source+: this file as the digital form of its Table 2.
 # Access: open, https://www.ngdc.noaa.gov/IAGA/vmod/coeffs/igrf13coeffs.txt
 # Access+: (2026-09-21).
@@ -1823,9 +1992,13 @@ EARTH_IGRF13_G11_NT = -1450.9
 # Figures: 5 -- the file prints the 2020.0 column to 0.1 nT, as above.
 # Read: row "g 1 1", column 2020.0, igrf13coeffs.txt, 2026-09-21,
 # Read+: Claude Opus 5
-# Source: IGRF-13 coefficient file igrf13coeffs.txt -- g(1,1) at epoch
+# Read+: Re-read at NOAA NCEI's copy of the file, the address on the Source
+# Read+: line, 2026-10-21, Claude Opus 5.5: g 1 0 -29404.8 and 5.7, g 1 1
+# Read+: -1450.9 and 7.4, h 1 1 4652.5 and -25.9 (2020.0, and SV 2020-25).
+# Source: IGRF-13 coefficient file igrf13coeffs.txt,
+# Source+: https://www.ngdc.noaa.gov/IAGA/vmod/coeffs/igrf13coeffs.txt -- g(1,1) at epoch
 # Source+: 2020.0 is -1450.9 nT. Alken et al. (2021),
-# Source+: doi:10.1186/s40623-020-01288-x.
+# Source+: https://doi.org/10.1186/s40623-020-01288-x.
 # Access: open, https://www.ngdc.noaa.gov/IAGA/vmod/coeffs/igrf13coeffs.txt
 # Access+: (2026-09-21).
 
@@ -1835,9 +2008,13 @@ EARTH_IGRF13_H11_NT = 4652.5
 # Figures: 5 -- the file prints the 2020.0 column to 0.1 nT, as above.
 # Read: row "h 1 1", column 2020.0, igrf13coeffs.txt, 2026-09-21,
 # Read+: Claude Opus 5
-# Source: IGRF-13 coefficient file igrf13coeffs.txt -- h(1,1) at epoch
+# Read+: Re-read at NOAA NCEI's copy of the file, the address on the Source
+# Read+: line, 2026-10-21, Claude Opus 5.5: g 1 0 -29404.8 and 5.7, g 1 1
+# Read+: -1450.9 and 7.4, h 1 1 4652.5 and -25.9 (2020.0, and SV 2020-25).
+# Source: IGRF-13 coefficient file igrf13coeffs.txt,
+# Source+: https://www.ngdc.noaa.gov/IAGA/vmod/coeffs/igrf13coeffs.txt -- h(1,1) at epoch
 # Source+: 2020.0 is 4652.5 nT. Alken et al. (2021),
-# Source+: doi:10.1186/s40623-020-01288-x.
+# Source+: https://doi.org/10.1186/s40623-020-01288-x.
 # Access: open, https://www.ngdc.noaa.gov/IAGA/vmod/coeffs/igrf13coeffs.txt
 # Access+: (2026-09-21).
 
@@ -1848,9 +2025,13 @@ EARTH_IGRF13_G10_SV_NT_PER_YEAR = 5.7
 # Figures+: per year.
 # Read: row "g 1 0", column "SV 2020-25", igrf13coeffs.txt, 2026-09-21,
 # Read+: Claude Opus 5
-# Source: IGRF-13 coefficient file igrf13coeffs.txt -- the predicted rate
+# Read+: Re-read at NOAA NCEI's copy of the file, the address on the Source
+# Read+: line, 2026-10-21, Claude Opus 5.5: g 1 0 -29404.8 and 5.7, g 1 1
+# Read+: -1450.9 and 7.4, h 1 1 4652.5 and -25.9 (2020.0, and SV 2020-25).
+# Source: IGRF-13 coefficient file igrf13coeffs.txt,
+# Source+: https://www.ngdc.noaa.gov/IAGA/vmod/coeffs/igrf13coeffs.txt -- the predicted rate
 # Source+: of change of g(1,0) over 2020-2025 is 5.7 nT per year. Alken et
-# Source+: al. (2021), doi:10.1186/s40623-020-01288-x.
+# Source+: al. (2021), https://doi.org/10.1186/s40623-020-01288-x.
 # Access: open, https://www.ngdc.noaa.gov/IAGA/vmod/coeffs/igrf13coeffs.txt
 # Access+: (2026-09-21).
 
@@ -1861,9 +2042,13 @@ EARTH_IGRF13_G11_SV_NT_PER_YEAR = 7.4
 # Figures+: per year.
 # Read: row "g 1 1", column "SV 2020-25", igrf13coeffs.txt, 2026-09-21,
 # Read+: Claude Opus 5
-# Source: IGRF-13 coefficient file igrf13coeffs.txt -- the predicted rate
+# Read+: Re-read at NOAA NCEI's copy of the file, the address on the Source
+# Read+: line, 2026-10-21, Claude Opus 5.5: g 1 0 -29404.8 and 5.7, g 1 1
+# Read+: -1450.9 and 7.4, h 1 1 4652.5 and -25.9 (2020.0, and SV 2020-25).
+# Source: IGRF-13 coefficient file igrf13coeffs.txt,
+# Source+: https://www.ngdc.noaa.gov/IAGA/vmod/coeffs/igrf13coeffs.txt -- the predicted rate
 # Source+: of change of g(1,1) over 2020-2025 is 7.4 nT per year. Alken et
-# Source+: al. (2021), doi:10.1186/s40623-020-01288-x.
+# Source+: al. (2021), https://doi.org/10.1186/s40623-020-01288-x.
 # Access: open, https://www.ngdc.noaa.gov/IAGA/vmod/coeffs/igrf13coeffs.txt
 # Access+: (2026-09-21).
 
@@ -1874,9 +2059,13 @@ EARTH_IGRF13_H11_SV_NT_PER_YEAR = -25.9
 # Figures+: per year.
 # Read: row "h 1 1", column "SV 2020-25", igrf13coeffs.txt, 2026-09-21,
 # Read+: Claude Opus 5
-# Source: IGRF-13 coefficient file igrf13coeffs.txt -- the predicted rate
+# Read+: Re-read at NOAA NCEI's copy of the file, the address on the Source
+# Read+: line, 2026-10-21, Claude Opus 5.5: g 1 0 -29404.8 and 5.7, g 1 1
+# Read+: -1450.9 and 7.4, h 1 1 4652.5 and -25.9 (2020.0, and SV 2020-25).
+# Source: IGRF-13 coefficient file igrf13coeffs.txt,
+# Source+: https://www.ngdc.noaa.gov/IAGA/vmod/coeffs/igrf13coeffs.txt -- the predicted rate
 # Source+: of change of h(1,1) over 2020-2025 is -25.9 nT per year. Alken
-# Source+: et al. (2021), doi:10.1186/s40623-020-01288-x.
+# Source+: et al. (2021), https://doi.org/10.1186/s40623-020-01288-x.
 # Access: open, https://www.ngdc.noaa.gov/IAGA/vmod/coeffs/igrf13coeffs.txt
 # Access+: (2026-09-21).
 
@@ -1894,11 +2083,17 @@ EARTH_DIPOLE_TILT_DEG = math.atan(math.sqrt(EARTH_IGRF13_G11_NT**2 + EARTH_IGRF1
 # Figures+: (provenance-discipline 2.17, Show or cap).
 # Source: Alken et al. (2021), "International Geomagnetic Reference Field:
 # Source+: the thirteenth generation", Earth Planets Space 73:49,
-# Source+: doi:10.1186/s40623-020-01288-x -- the geomagnetic poles, and so
+# Source+: https://doi.org/10.1186/s40623-020-01288-x -- the geomagnetic poles, and so
 # Source+: the dipole's tilt, are computed from the three degree-1 Gauss
 # Source+: coefficients; the paper prints no tilt of its own. Its Table 4
 # Source+: gives the 2020.0 north geomagnetic pole at 80.65 N, -72.68 E.
 # Read: Table 4, 2026-09-21, Claude Opus 5.
+# Read+: Re-read 2026-10-21, Claude Opus 5.5 in the journal's own open
+# Read+: page, where the DOI resolves: Table 4, "Magnetic pole position
+# Read+: since 1900 determined from IGRF-13", row 2020.0, north geomagnetic
+# Read+: pole 80.65, -72.68. Table 3 lists magnetic observatories, so Table
+# Read+: 4 stands (the coordination brief of 2026-10-21 carried a Gemini
+# Read+: claim of Table 3).
 # Access: open full text,
 # Access+: https://link.springer.com/article/10.1186/s40623-020-01288-x
 # Access+: (2026-09-21).
@@ -1982,11 +2177,18 @@ EARTH_MAGNETOPAUSE_SHUE_A1_RADII = 10.22
 # Status: measured V_SOURCED 2026-09-11 -- open full text
 # Figures: 4 -- Table 1 prints 10.22, uncertainty 0.10
 # Read: Table 1 "After Fit", p. 17,698, 2026-09-11, Claude Fable 5.1
+# Read+: Re-read 2026-10-21, Claude Opus 5.5 in Tony's copy of the paper in
+# Read+: papers/, downloaded from the DOI on the Source line, which AGU
+# Read+: serves free to read but refuses automated readers: Table 1 "After
+# Read+: Fit", a1 10.22 +/- 0.10, a2 1.29 +/- 0.06, a3 0.184 +/- 0.007, a4
+# Read+: 8.14 +/- 0.39, a5 6.6 +/- 0.5, a6 0.58 +/- 0.01, a7 -0.007 +/-
+# Read+: 0.0005, a8 0.024 +/- 0.0004; p. 17,697, the improved model's
+# Read+: uncertainty 1.23 R_E.
 # Source: Shue, J.-H., Song, P., Russell, C. T., Steinberg, J. T., Chao,
 # Source+: J. K., Zastenker, G., Vaisberg, O. L., Kokubun, S., Singer, H. J.,
 # Source+: Detman, T. R. and Kawano, H. (1998), "Magnetopause location under
 # Source+: extreme solar wind conditions", J. Geophys. Res. 103(A8),
-# Source+: 17691-17700, doi:10.1029/98JA01103 -- Table 1 "After Fit" row a1,
+# Source+: 17691-17700, https://doi.org/10.1029/98JA01103 -- Table 1 "After Fit" row a1,
 # Source+: p. 17,698: 10.22 +/- 0.10 R_E. The leading term of eq. 10.
 # Access: open full text, https://doi.org/10.1029/98JA01103, read from the
 # Access+: PDF 2026-09-11. Sandbox fetches of the DOI page are refused by bot
@@ -2002,7 +2204,14 @@ EARTH_MAGNETOPAUSE_SHUE_A2_RADII = 1.29
 # Status: measured V_SOURCED 2026-09-11 -- open full text
 # Figures: 3 -- Table 1 prints 1.29, uncertainty 0.06
 # Read: Table 1 "After Fit", p. 17,698, 2026-09-11, Claude Fable 5.1
-# Source: Shue et al. (1998), doi:10.1029/98JA01103 -- Table 1 "After Fit"
+# Read+: Re-read 2026-10-21, Claude Opus 5.5 in Tony's copy of the paper in
+# Read+: papers/, downloaded from the DOI on the Source line, which AGU
+# Read+: serves free to read but refuses automated readers: Table 1 "After
+# Read+: Fit", a1 10.22 +/- 0.10, a2 1.29 +/- 0.06, a3 0.184 +/- 0.007, a4
+# Read+: 8.14 +/- 0.39, a5 6.6 +/- 0.5, a6 0.58 +/- 0.01, a7 -0.007 +/-
+# Read+: 0.0005, a8 0.024 +/- 0.0004; p. 17,697, the improved model's
+# Read+: uncertainty 1.23 R_E.
+# Source: Shue et al. (1998), https://doi.org/10.1029/98JA01103 -- Table 1 "After Fit"
 # Source+: row a2, p. 17,698: 1.29 +/- 0.06 R_E. The amplitude of eq. 10's
 # Source+: Bz term.
 # Access: open full text, https://doi.org/10.1029/98JA01103 (2026-09-11).
@@ -2012,7 +2221,14 @@ EARTH_MAGNETOPAUSE_SHUE_A3_PER_NT = 0.184
 # Status: measured V_SOURCED 2026-09-11 -- open full text
 # Figures: 3 -- Table 1 prints 0.184, uncertainty 0.007
 # Read: Table 1 "After Fit", p. 17,698, 2026-09-11, Claude Fable 5.1
-# Source: Shue et al. (1998), doi:10.1029/98JA01103 -- Table 1 "After Fit"
+# Read+: Re-read 2026-10-21, Claude Opus 5.5 in Tony's copy of the paper in
+# Read+: papers/, downloaded from the DOI on the Source line, which AGU
+# Read+: serves free to read but refuses automated readers: Table 1 "After
+# Read+: Fit", a1 10.22 +/- 0.10, a2 1.29 +/- 0.06, a3 0.184 +/- 0.007, a4
+# Read+: 8.14 +/- 0.39, a5 6.6 +/- 0.5, a6 0.58 +/- 0.01, a7 -0.007 +/-
+# Read+: 0.0005, a8 0.024 +/- 0.0004; p. 17,697, the improved model's
+# Read+: uncertainty 1.23 R_E.
+# Source: Shue et al. (1998), https://doi.org/10.1029/98JA01103 -- Table 1 "After Fit"
 # Source+: row a3, p. 17,698: 0.184 +/- 0.007 per nT. The scale inside
 # Source+: eq. 10's hyperbolic tangent.
 # Access: open full text, https://doi.org/10.1029/98JA01103 (2026-09-11).
@@ -2022,7 +2238,14 @@ EARTH_MAGNETOPAUSE_SHUE_A4_NT = 8.14
 # Status: measured V_SOURCED 2026-09-11 -- open full text
 # Figures: 3 -- Table 1 prints 8.14, uncertainty 0.39
 # Read: Table 1 "After Fit", p. 17,698, 2026-09-11, Claude Fable 5.1
-# Source: Shue et al. (1998), doi:10.1029/98JA01103 -- Table 1 "After Fit"
+# Read+: Re-read 2026-10-21, Claude Opus 5.5 in Tony's copy of the paper in
+# Read+: papers/, downloaded from the DOI on the Source line, which AGU
+# Read+: serves free to read but refuses automated readers: Table 1 "After
+# Read+: Fit", a1 10.22 +/- 0.10, a2 1.29 +/- 0.06, a3 0.184 +/- 0.007, a4
+# Read+: 8.14 +/- 0.39, a5 6.6 +/- 0.5, a6 0.58 +/- 0.01, a7 -0.007 +/-
+# Read+: 0.0005, a8 0.024 +/- 0.0004; p. 17,697, the improved model's
+# Read+: uncertainty 1.23 R_E.
+# Source: Shue et al. (1998), https://doi.org/10.1029/98JA01103 -- Table 1 "After Fit"
 # Source+: row a4, p. 17,698: 8.14 +/- 0.39 nT. The Bz offset inside
 # Source+: eq. 10's hyperbolic tangent.
 # Access: open full text, https://doi.org/10.1029/98JA01103 (2026-09-11).
@@ -2032,7 +2255,14 @@ EARTH_MAGNETOPAUSE_SHUE_A5 = 6.6
 # Status: measured V_SOURCED 2026-09-11 -- open full text
 # Figures: 2 -- Table 1 prints 6.6, uncertainty 0.5
 # Read: Table 1 "After Fit", p. 17,698, 2026-09-11, Claude Fable 5.1
-# Source: Shue et al. (1998), doi:10.1029/98JA01103 -- Table 1 "After Fit"
+# Read+: Re-read 2026-10-21, Claude Opus 5.5 in Tony's copy of the paper in
+# Read+: papers/, downloaded from the DOI on the Source line, which AGU
+# Read+: serves free to read but refuses automated readers: Table 1 "After
+# Read+: Fit", a1 10.22 +/- 0.10, a2 1.29 +/- 0.06, a3 0.184 +/- 0.007, a4
+# Read+: 8.14 +/- 0.39, a5 6.6 +/- 0.5, a6 0.58 +/- 0.01, a7 -0.007 +/-
+# Read+: 0.0005, a8 0.024 +/- 0.0004; p. 17,697, the improved model's
+# Read+: uncertainty 1.23 R_E.
+# Source: Shue et al. (1998), https://doi.org/10.1029/98JA01103 -- Table 1 "After Fit"
 # Source+: row a5, p. 17,698: 6.6 +/- 0.5. The pressure exponent, r0 varying
 # Source+: as Dp^(-1/a5).
 # Access: open full text, https://doi.org/10.1029/98JA01103 (2026-09-11).
@@ -2047,7 +2277,14 @@ EARTH_MAGNETOPAUSE_SHUE_A6 = 0.58
 # Status: measured V_SOURCED 2026-09-11 -- open full text
 # Figures: 2 -- Table 1 prints 0.58, uncertainty 0.01
 # Read: Table 1 "After Fit", p. 17,698, 2026-09-11, Claude Fable 5.1
-# Source: Shue et al. (1998), doi:10.1029/98JA01103 -- Table 1 "After Fit"
+# Read+: Re-read 2026-10-21, Claude Opus 5.5 in Tony's copy of the paper in
+# Read+: papers/, downloaded from the DOI on the Source line, which AGU
+# Read+: serves free to read but refuses automated readers: Table 1 "After
+# Read+: Fit", a1 10.22 +/- 0.10, a2 1.29 +/- 0.06, a3 0.184 +/- 0.007, a4
+# Read+: 8.14 +/- 0.39, a5 6.6 +/- 0.5, a6 0.58 +/- 0.01, a7 -0.007 +/-
+# Read+: 0.0005, a8 0.024 +/- 0.0004; p. 17,697, the improved model's
+# Read+: uncertainty 1.23 R_E.
+# Source: Shue et al. (1998), https://doi.org/10.1029/98JA01103 -- Table 1 "After Fit"
 # Source+: row a6, p. 17,698: 0.58 +/- 0.01. The leading term of eq. 11.
 # Access: open full text, https://doi.org/10.1029/98JA01103 (2026-09-11).
 # Note: eq. 11, p. 17,697, is the flaring --
@@ -2060,7 +2297,14 @@ EARTH_MAGNETOPAUSE_SHUE_A7_PER_NT = -0.007
 # Status: measured V_SOURCED 2026-09-11 -- open full text
 # Figures: 1 -- Table 1 prints -0.007, uncertainty 0.0005
 # Read: Table 1 "After Fit", p. 17,698, 2026-09-11, Claude Fable 5.1
-# Source: Shue et al. (1998), doi:10.1029/98JA01103 -- Table 1 "After Fit"
+# Read+: Re-read 2026-10-21, Claude Opus 5.5 in Tony's copy of the paper in
+# Read+: papers/, downloaded from the DOI on the Source line, which AGU
+# Read+: serves free to read but refuses automated readers: Table 1 "After
+# Read+: Fit", a1 10.22 +/- 0.10, a2 1.29 +/- 0.06, a3 0.184 +/- 0.007, a4
+# Read+: 8.14 +/- 0.39, a5 6.6 +/- 0.5, a6 0.58 +/- 0.01, a7 -0.007 +/-
+# Read+: 0.0005, a8 0.024 +/- 0.0004; p. 17,697, the improved model's
+# Read+: uncertainty 1.23 R_E.
+# Source: Shue et al. (1998), https://doi.org/10.1029/98JA01103 -- Table 1 "After Fit"
 # Source+: row a7, p. 17,698: -0.007 +/- 0.0005 per nT.
 # Note: eq. 11 prints it as the subtraction (0.58 - 0.007 Bz); the table
 # Note+: carries the sign, so the stored coefficient is negative and adds
@@ -2072,7 +2316,14 @@ EARTH_MAGNETOPAUSE_SHUE_A8 = 0.024
 # Status: measured V_SOURCED 2026-09-11 -- open full text
 # Figures: 2 -- Table 1 prints 0.024, uncertainty 0.0004
 # Read: Table 1 "After Fit", p. 17,698, 2026-09-11, Claude Fable 5.1
-# Source: Shue et al. (1998), doi:10.1029/98JA01103 -- Table 1 "After Fit"
+# Read+: Re-read 2026-10-21, Claude Opus 5.5 in Tony's copy of the paper in
+# Read+: papers/, downloaded from the DOI on the Source line, which AGU
+# Read+: serves free to read but refuses automated readers: Table 1 "After
+# Read+: Fit", a1 10.22 +/- 0.10, a2 1.29 +/- 0.06, a3 0.184 +/- 0.007, a4
+# Read+: 8.14 +/- 0.39, a5 6.6 +/- 0.5, a6 0.58 +/- 0.01, a7 -0.007 +/-
+# Read+: 0.0005, a8 0.024 +/- 0.0004; p. 17,697, the improved model's
+# Read+: uncertainty 1.23 R_E.
+# Source: Shue et al. (1998), https://doi.org/10.1029/98JA01103 -- Table 1 "After Fit"
 # Source+: row a8, p. 17,698: 0.024 +/- 0.0004. The pressure term of eq. 11.
 # Access: open full text, https://doi.org/10.1029/98JA01103 (2026-09-11).
 # Note: the Kumar and Pulkkinen EGUsphere preprint (2024-1113) prints this
@@ -2116,10 +2367,16 @@ EARTH_BOW_SHOCK_JELINEK_R0_RADII = 15.02
 # Status: measured V_SOURCED 2026-09-10 -- open full text
 # Figures: 4 -- eq. 14 prints 15.02.
 # Read: eq. 14, p. 5, 2026-09-11, Claude Fable 5.1
+# Read+: Re-read 2026-10-21, Claude Opus 5.5 in Tony's copy of the paper in
+# Read+: papers/, downloaded from the DOI on the Source line, which AGU
+# Read+: serves free to read but refuses automated readers: eq. 14, R_BS =
+# Read+: 15.02 p^(-1/6.55); sec. 4, lambda_BS = 1.17; Fig. 7(a), p. 7, its
+# Read+: legend, "standard deviation: 0.69 [Re]" for the bow shock (0.76
+# Read+: for the magnetopause, panel b).
 # Source: Jelinek, K., Nemecek, Z. and Safrankova, J. (2012), "A new
 # Source+: approach to magnetopause and bow shock modeling based on automated
 # Source+: region identification", J. Geophys. Res. 117, A05208,
-# Source+: doi:10.1029/2011JA017252 -- eq. 14, p. 5: R_BS = 15.02 p^(-1/6.55),
+# Source+: https://doi.org/10.1029/2011JA017252 -- eq. 14, p. 5: R_BS = 15.02 p^(-1/6.55),
 # Source+: so 15.02 R_E is the bow shock stand-off at p = 1 nPa. Fitted from
 # Source+: Themis crossings, in aberrated GSE.
 # Access: open full text, https://doi.org/10.1029/2011JA017252, read from the
@@ -2137,7 +2394,13 @@ EARTH_BOW_SHOCK_JELINEK_EPS = 6.55
 # Status: measured V_SOURCED 2026-09-10 -- open full text
 # Figures: 3 -- eq. 14 prints 6.55.
 # Read: eq. 14, p. 5, 2026-09-11, Claude Fable 5.1
-# Source: Jelinek et al. (2012), doi:10.1029/2011JA017252 -- eq. 14, p. 5:
+# Read+: Re-read 2026-10-21, Claude Opus 5.5 in Tony's copy of the paper in
+# Read+: papers/, downloaded from the DOI on the Source line, which AGU
+# Read+: serves free to read but refuses automated readers: eq. 14, R_BS =
+# Read+: 15.02 p^(-1/6.55); sec. 4, lambda_BS = 1.17; Fig. 7(a), p. 7, its
+# Read+: legend, "standard deviation: 0.69 [Re]" for the bow shock (0.76
+# Read+: for the magnetopause, panel b).
+# Source: Jelinek et al. (2012), https://doi.org/10.1029/2011JA017252 -- eq. 14, p. 5:
 # Source+: the pressure exponent of R_BS = 15.02 p^(-1/6.55).
 # Access: open full text, https://doi.org/10.1029/2011JA017252 (2026-09-10).
 
@@ -2146,7 +2409,13 @@ EARTH_BOW_SHOCK_JELINEK_LAMBDA = 1.17
 # Status: measured V_SOURCED 2026-09-10 -- open full text
 # Figures: 3 -- sec. 4 prints 1.17.
 # Read: sec. 4, text after eq. 11, p. 4, 2026-09-11, Claude Fable 5.1
-# Source: Jelinek et al. (2012), doi:10.1029/2011JA017252 -- sec. 4, in the
+# Read+: Re-read 2026-10-21, Claude Opus 5.5 in Tony's copy of the paper in
+# Read+: papers/, downloaded from the DOI on the Source line, which AGU
+# Read+: serves free to read but refuses automated readers: eq. 14, R_BS =
+# Read+: 15.02 p^(-1/6.55); sec. 4, lambda_BS = 1.17; Fig. 7(a), p. 7, its
+# Read+: legend, "standard deviation: 0.69 [Re]" for the bow shock (0.76
+# Read+: for the magnetopause, panel b).
+# Source: Jelinek et al. (2012), https://doi.org/10.1029/2011JA017252 -- sec. 4, in the
 # Source+: text after eq. 11: lambda = 1.17 for the bow shock.
 # Note: the same sentence gives 1.54 for the magnetopause, which this file
 # Note+: does not store because the magnetopause is Shue's (in the Source
@@ -2173,7 +2442,13 @@ EARTH_BOW_SHOCK_CUT_ANGLE_DEG = 105.0
 # Figures+: (7 h x 15 deg/h = 105 degrees). A declared drawing limit; the
 # Figures+: .0 is Python's (Rule 2).
 # Read: sec. 2 para. 9, p. 2, 2026-09-11, Claude Fable 5.1
-# Source: Jelinek et al. (2012), doi:10.1029/2011JA017252 -- sec. 2 para. 9,
+# Read+: Re-read 2026-10-21, Claude Opus 5.5 in Tony's copy of the paper in
+# Read+: papers/, downloaded from the DOI on the Source line, which AGU
+# Read+: serves free to read but refuses automated readers: eq. 14, R_BS =
+# Read+: 15.02 p^(-1/6.55); sec. 4, lambda_BS = 1.17; Fig. 7(a), p. 7, its
+# Read+: legend, "standard deviation: 0.69 [Re]" for the bow shock (0.76
+# Read+: for the magnetopause, panel b).
+# Source: Jelinek et al. (2012), https://doi.org/10.1029/2011JA017252 -- sec. 2 para. 9,
 # Source+: p. 2: the regions are identified on the whole dayside and toward
 # Source+: the flanks within +/- 7 hours of local time about local noon.
 # Source+: That envelope is the extent over which the fit is supported.
@@ -2188,7 +2463,14 @@ EARTH_MAGNETOPAUSE_SHUE_SCATTER_RADII = 1.23
 # Status: measured V_SOURCED 2026-09-14 -- open full text
 # Figures: 3 -- p. 17,697 prints 1.23.
 # Read: p. 17,697, 2026-09-11, Claude Fable 5.1
-# Source: Shue et al. (1998), doi:10.1029/98JA01103, p. 17,697 -- the
+# Read+: Re-read 2026-10-21, Claude Opus 5.5 in Tony's copy of the paper in
+# Read+: papers/, downloaded from the DOI on the Source line, which AGU
+# Read+: serves free to read but refuses automated readers: Table 1 "After
+# Read+: Fit", a1 10.22 +/- 0.10, a2 1.29 +/- 0.06, a3 0.184 +/- 0.007, a4
+# Read+: 8.14 +/- 0.39, a5 6.6 +/- 0.5, a6 0.58 +/- 0.01, a7 -0.007 +/-
+# Read+: 0.0005, a8 0.024 +/- 0.0004; p. 17,697, the improved model's
+# Read+: uncertainty 1.23 R_E.
+# Source: Shue et al. (1998), https://doi.org/10.1029/98JA01103, p. 17,697 -- the
 # Source+: improved model's standard deviation against the observed
 # Source+: magnetopause crossings it was fitted to is 1.23 R_E.
 # Access: open full text, https://doi.org/10.1029/98JA01103, read from the
@@ -2261,8 +2543,14 @@ EARTH_BOW_SHOCK_JELINEK_SCATTER_RADII = 0.69
 # Status: measured V_SOURCED 2026-09-14 -- open full text
 # Figures: 2 -- fig. 7 prints 0.69.
 # Read: fig. 7, 2026-09-11, Claude Fable 5.1
+# Read+: Re-read 2026-10-21, Claude Opus 5.5 in Tony's copy of the paper in
+# Read+: papers/, downloaded from the DOI on the Source line, which AGU
+# Read+: serves free to read but refuses automated readers: eq. 14, R_BS =
+# Read+: 15.02 p^(-1/6.55); sec. 4, lambda_BS = 1.17; Fig. 7(a), p. 7, its
+# Read+: legend, "standard deviation: 0.69 [Re]" for the bow shock (0.76
+# Read+: for the magnetopause, panel b).
 # Source: Jelinek, Nemecek and Safrankova (2012), J. Geophys. Res. 117,
-# Source+: A05208, doi:10.1029/2011JA017252 -- fig. 7: the scatter of
+# Source+: A05208, https://doi.org/10.1029/2011JA017252 -- fig. 7: the scatter of
 # Source+: observed crossings about the bow shock model is 0.69 R_E. The
 # Source+: same figure gives 0.76 R_E for their magnetopause.
 # Access: open full text, https://doi.org/10.1029/2011JA017252 (2026-09-10).
@@ -2387,11 +2675,17 @@ EARTH_MAGNETOTAIL_FLARE_END_RADII = 120.0
 # Read: abstract, the Wiley abstract page of Slavin et al. (1985) as a web
 # Read+: search returned it (the page blocks a direct fetch), 2026-09-25,
 # Read+: Claude Opus 5.5
+# Read+: Re-read 2026-10-21 by Tony Quintanilla at the address on the
+# Read+: Source line, the abstract free to read (the paper is not), pasted
+# Read+: to Claude Opus 5.5 the same day: "On the basis of 756 magnetopause
+# Read+: crossings a low-latitude magnetotail diameter of 60+/-5 RE at |X|
+# Read+: = 130 - 225 RE is determined"; "Flaring ceases on average at |X| =
+# Read+: 120 +/- 10 RE".
 # Source: Slavin, J. A., Smith, E. J., Sibeck, D. G., Baker, D. N.,
 # Source+: Zwickl, R. D. and Akasofu, S.-I. (1985), "An ISEE 3 study of
 # Source+: average and substorm conditions in the distant magnetotail",
 # Source+: J. Geophys. Res. 90(A11), 10875-10895,
-# Source+: doi:10.1029/JA090iA11p10875 -- abstract: flaring ceases on
+# Source+: https://doi.org/10.1029/JA090iA11p10875 -- abstract: flaring ceases on
 # Source+: average at |X| = 120 +/- 10 R_E.
 # Access: abstract, open,
 # Access+: https://agupubs.onlinelibrary.wiley.com/doi/abs/10.1029/ja090ia11p10875
@@ -2420,7 +2714,13 @@ EARTH_MAGNETOTAIL_DIAMETER_RADII = 60.0
 # Read: abstract, the Wiley abstract page of Slavin et al. (1985) as a web
 # Read+: search returned it (the page blocks a direct fetch), 2026-09-25,
 # Read+: Claude Opus 5.5
-# Source: Slavin et al. (1985), doi:10.1029/JA090iA11p10875 -- abstract:
+# Read+: Re-read 2026-10-21 by Tony Quintanilla at the address on the
+# Read+: Source line, the abstract free to read (the paper is not), pasted
+# Read+: to Claude Opus 5.5 the same day: "On the basis of 756 magnetopause
+# Read+: crossings a low-latitude magnetotail diameter of 60+/-5 RE at |X|
+# Read+: = 130 - 225 RE is determined"; "Flaring ceases on average at |X| =
+# Read+: 120 +/- 10 RE".
+# Source: Slavin et al. (1985), https://doi.org/10.1029/JA090iA11p10875 -- abstract:
 # Source+: from 756 magnetopause crossings, a low-latitude magnetotail
 # Source+: diameter of 60 +/- 5 R_E at |X| = 130 - 225 R_E.
 # Access: abstract, open, as EARTH_MAGNETOTAIL_FLARE_END_RADII (2026-09-25).
@@ -2489,10 +2789,15 @@ EARTH_GEOCORONA_RADII = 100.0
 # Read: abstract, Baliukin et al. (2019), J. Geophys. Res. Space Physics
 # Read+: 124:861-885 -- "found to extend at least up to 100 Earth Radii
 # Read+: ... encompassing the orbit of the Moon", 2026-09-19, Claude Opus 5
+# Read+: Re-read 2026-10-21 by Tony Quintanilla at the address on the
+# Read+: Source line, where the paper is free to read, the abstract pasted
+# Read+: to Claude Opus 5.5 the same day: "The geocorona was found to
+# Read+: extend at least up to 100 Earth radii (RE) with an intensity of 5
+# Read+: Rayleigh".
 # Source: Baliukin, I. I., Bertaux, J.-L., Quemerais, E., Izmodenov, V.
 # Source+: V. & Schmidt, W. (2019), "SWAN/SOHO Lyman-alpha mapping: the
 # Source+: hydrogen geocorona extends well beyond the Moon", J. Geophys.
-# Source+: Res. Space Physics 124, 861-885, doi:10.1029/2018JA026136 --
+# Source+: Res. Space Physics 124, 861-885, https://doi.org/10.1029/2018JA026136 --
 # Source+: the geocorona is detected to at least 100 Earth radii.
 # Note: a detection floor, not an edge -- the hydrogen thins without a
 # Note+: boundary. It encloses the Moon's orbit at about 60 radii. Since
@@ -2897,9 +3202,17 @@ HELMET_CUSP_LOW_RADII = 2
 # Read: abstract, Suess and Nerney (2004), at NASA ADS, 2026-08-21, Tony
 # Read+: Quintanilla; record:
 # Read+: documentation/SOURCE_suess_nerney_2004_helmet_extent_20260821.md
+# Read+: The same abstract's first sentence re-read at NASA NTRS,
+# Read+: https://ntrs.nasa.gov/citations/20040066095, "Flow In Streamer
+# Read+: Boundaries, and Streamer Stability", Suess, S. T. and Nerney, S.,
+# Read+: 2026-10-21, Claude Opus 5.5; Gemini 4 (medium) quoted the same sentence
+# Read+: there (worksheet_gemini4_medium_l456_sun_20261020.md, S16). The ADS address below is
+# Read+: the one Tony opened.
 # Source: Suess & Nerney (2004), Adv. Space Res. 33:668-675, bibcode
-# Source+: 2004AdSpR..33..668S -- the closed field regions, or helmets,
-# Source+: reach no higher than 2-4 solar radii.
+# Source+: 2004AdSpR..33..668S,
+# Source+: https://ui.adsabs.harvard.edu/abs/2004AdSpR..33..668S/abstract --
+# Source+: the closed field regions, or helmets, reach no higher than 2-4
+# Source+: solar radii.
 # Note: the low end of that stated range. Moved out of the Source line
 # Note+: 2026-10-17 (L-450): a visitor reads that line, and has no "row".
 # Access: abstract, open,
@@ -2928,8 +3241,10 @@ HELMET_CUSP_RADII = HELMET_CUSP_HIGH_RADII
 # Declared+: the helmet. Until 2026-10-04 it was typed 4.0 with the
 # Declared+: range in the Source line below.
 # Source: Suess & Nerney (2004), Adv. Space Res. 33:668-675, bibcode
-#   2004AdSpR..33..668S -- "the closed field regions, or helmets, reach
-#   no higher than 2-4 solar radii".
+#   2004AdSpR..33..668S,
+#   https://ui.adsabs.harvard.edu/abs/2004AdSpR..33..668S/abstract --
+#   "the closed field regions, or helmets, reach no higher than 2-4
+#   solar radii".
 # Note: this is the CUSP -- where the closed loops open -- not an outer
 #   edge of the streamer belt. The belt has no outer edge: above the
 #   cusp an open stalk continues into the slow solar wind. The renderer
@@ -2981,7 +3296,29 @@ ROCHE_LIMIT_RADII = 3.45
 # Note+: sourcing the comet density is recorded on L-371. Printed at one
 # Note+: figure; drawn through ROCHE_LIMIT_DRAWN_RADII below, at its full
 # Note+: digits.
-# Source: Murray & Dermott, "Solar System Dynamics" (1999), Sec. 4.6
+# Source: Rappaport, S., Sanchis-Ojeda, R., Rogers, L. A., Levine, A. and
+# Source+: Winn, J. N. (2013), "The Roche limit for close-orbiting planets:
+# Source+: Minimum density, composition constraints, and application to the
+# Source+: 4.2-hour planet KOI 1843.03", doi:10.1088/2041-8205/773/1/L15,
+# Source+: https://arxiv.org/abs/1307.4080 -- sec. 2, eq. (1): the Roche
+# Source+: limit of a body of incompressible fluid orbiting a star is about
+# Source+: 2.44 R (rho_s/rho_p)^(1/3), R the star's radius and rho_s and
+# Source+: rho_p the mean densities of the star and the body.
+# Read: sec. 2, eq. (1), the arXiv PDF of the paper on the Source line,
+# Read+: 2026-10-21, Claude Opus 5.5: "The Roche limiting distance for a body comprised
+# Read+: of an incompressible fluid", a_min = 2.44 R (rho_s/rho_p)^(1/3), "R
+# Read+: is the radius of the parent star". The comet stands for the planet
+# Read+: and the Sun for the star; the formula is the same.
+# Also: Murray & Dermott, "Solar System Dynamics" (1999), Sec. 4.8 ("The
+# Also+: Roche zone"), not read: no open copy exists.
+# Corrected: 2026-10-21 (L-456) -- re-homed from Murray & Dermott, cited
+# Corrected+: here as Sec. 4.6, to an open paper stating the same formula (The
+# Corrected+: Access Standard). The book's contents put the Roche zone at
+# Corrected+: 4.8, and 4.6 is the Darwin-Radau relation: read on the authors'
+# Corrected+: book site, https://ssdbook.maths.qmul.ac.uk/toc.html, and in the
+# Corrected+: printed contents Gemini 4 (medium) quoted (worksheet_gemini4_medium_l456_sun_20261020.md,
+# Corrected+: S12). The comet density the value is worked out from stays
+# Corrected+: unsourced (L-371).
 # Derived: Fluid Roche limit formula: d = 2.44 * R * (rho_sun/rho_comet)^(1/3)
 # Calculation: 2.44 * 1.0 * (1408/500)^(1/3) = 3.45 R_sun
 # Calculation+: Using rho_sun = 1408 kg/m3, rho_comet ~ 500 kg/m3
@@ -3367,12 +3704,18 @@ TERMINATION_SHOCK_AU = 94.01
 # Status: measured V_SOURCED 2026-10-04 -- abstract, open
 # Figures: 4 -- the source prints 94.01.
 # Read: abstract, Stone et al. (2005), at NASA ADS, 2026-10-04, Claude
-# Read+: Opus 5.5
+# Read+: Opus 5.5. Re-read 2026-10-21, Claude Opus 5.5, at Caltech's
+# Read+: record of the paper, the address below: the same title, authors
+# Read+: and abstract sentence. Gemini 4 (medium) quoted the same sentence
+# Read+: at PubMed (worksheet_gemini4_medium_l456_sun_20261020.md, S15), which refused this
+# Read+: session.
 # Source: Stone, E. C., Cummings, A. C., McDonald, F. B., Heikkila, B. C.,
 # Source+: Lal, N. and Webber, W. R. (2005), "Voyager 1 explores the
 # Source+: termination shock region and the heliosheath beyond", Science
-# Source+: 309, 2017-2020, doi:10.1126/science.1117684 -- abstract: Voyager
-# Source+: 1 crossed the termination shock on 16 December 2004 at 94.01 AU.
+# Source+: 309, 2017-2020, doi:10.1126/science.1117684,
+# Source+: https://authors.library.caltech.edu/records/rb184-jnt10 --
+# Source+: abstract: Voyager 1 crossed the termination shock on 16 December
+# Source+: 2004 at 94.01 AU.
 # Access: abstract, open,
 # Access+: https://ui.adsabs.harvard.edu/abs/2005Sci...309.2017S/abstract
 # Access+: (2026-10-04).
@@ -3467,15 +3810,20 @@ HELIOPAUSE_AU = 121
 # Status: measured V_SOURCED 2026-10-04 -- open full text
 # Figures: 3 -- the source prints 121.
 # Read: p. 1489, second column, Gurnett et al. (2013), the authors' copy at
-# Read+: space.physics.uiowa.edu, 2026-10-04, Claude Opus 5.5
+# Read+: space.physics.uiowa.edu, 2026-10-04, Claude Opus 5.5. Re-read at
+# Read+: the address below, 2026-10-21, Claude Opus 5.5: the same title,
+# Read+: authors and two sentences on p. 1489. Gemini 4 (medium) quoted
+# Read+: them there too (worksheet_gemini4_medium_l456_sun_20261020.md, S4).
 # Source: Gurnett, D. A., Kurth, W. S., Burlaga, L. F. and Ness, N. F.
 # Source+: (2013), "In situ observations of interstellar plasma with
-# Source+: Voyager 1", Science 341, 1489-1492, doi:10.1126/science.1241681
+# Source+: Voyager 1", Science 341, 1489-1492, doi:10.1126/science.1241681,
+# Source+: https://space.physics.uiowa.edu/~dag/publications/2013_InSituObservationsOfInterstellarPlasmaWaveVoyager1_SCIENCE.pdf
 # Source+: -- p. 1489: the first sign of the heliopause came on 28 July 2012,
 # Source+: at 121 AU; the last of five crossings was on 25 August 2012.
-# Access: open full text,
-# Access+: https://space.physics.uiowa.edu/~dag/publications/2013_InSituObservationsOfInterstellarPlasmaWaveVoyager_Science.pdf
-# Access+: (2026-10-04).
+# Access: open full text, the address on the Source line (2026-10-21).
+# Access+: The address this line held until then,
+# Access+: .../2013_InSituObservationsOfInterstellarPlasmaWaveVoyager_Science.pdf,
+# Access+: differs from it in two places and was not re-opened.
 # Note: one spacecraft's crossing of a surface that is not round; it is
 # Note+: drawn as a sphere at that distance. The paper gives no distance
 # Note+: for 25 August. The 121.6 AU this file's comment attributed to it
@@ -3509,9 +3857,13 @@ OORT_CLOUD_INNER_EDGE_LOW_AU = 2000
 # Figures+: states to thousands; the trailing zeros are placeholders
 # Figures+: (Rule 2).
 # Read: "Oort Cloud Facts", NASA Science, the paragraph on the inner and
-# Read+: outer edges, 2026-10-04, Claude Opus 5.5
-# Source: NASA Science, "Oort Cloud Facts" -- the inner edge of the Oort
-# Source+: cloud is thought to lie between 2,000 and 5,000 AU from the Sun.
+# Read+: outer edges, 2026-10-04, Claude Opus 5.5. Re-read under "Scale and
+# Read+: Distance", 2026-10-21, Claude Opus 5.5; Gemini 4 (medium) quoted the
+# Read+: same sentence (worksheet_gemini4_medium_l456_sun_20261020.md, S13).
+# Source: NASA Science, "Oort Cloud Facts",
+# Source+: https://science.nasa.gov/solar-system/oort-cloud/facts/ -- the
+# Source+: inner edge of the Oort cloud is thought to lie between 2,000 and
+# Source+: 5,000 AU from the Sun.
 # Access: open, https://science.nasa.gov/solar-system/oort-cloud/facts
 # Access+: (2026-10-04).
 
@@ -3544,10 +3896,14 @@ INNER_OORT_CLOUD_AU = 20000
 # Status: measured V_SOURCED 2026-10-04 -- open full text
 # Figures: 1 -- the source prints "20 000" as a bound, to tens of thousands.
 # Read: sec. 2.2, Portegies Zwart et al. (2021), arXiv:2105.12816v2,
-# Read+: 2026-10-04, Claude Opus 5.5
+# Read+: 2026-10-04, Claude Opus 5.5. Re-read in A&A's own full text, free
+# Read+: to read, where the DOI resolves, 2026-10-21, Claude Opus 5.5: the
+# Read+: same sentence, "(<~20 000 au)". Gemini 4 (medium) quoted it from
+# Read+: arXiv (worksheet_gemini4_medium_l456_sun_20261020.md, S14).
 # Source: Portegies Zwart, S., Torres, S., Cai, M. X. and Brown, A. G. A.
 # Source+: (2021), "Oort cloud Ecology II: the chronology of the formation
-# Source+: of the Oort cloud", A&A 652, A144, doi:10.1051/0004-6361/202040096
+# Source+: of the Oort cloud", A&A 652, A144,
+# Source+: https://doi.org/10.1051/0004-6361/202040096
 # Source+: -- sec. 2.2: the Hills cloud lies between the outer edge of the
 # Source+: parking zone and the inner edge of the Oort cloud, at about
 # Source+: 20,000 au or less.
@@ -3567,8 +3923,10 @@ OORT_CLOUD_OUTER_EDGE_LOW_AU = 10000
 # Figures: 1 -- the source prints "10,000", the low end of a range it
 # Figures+: states to tens of thousands.
 # Read: as OORT_CLOUD_INNER_EDGE_LOW_AU, 2026-10-04, Claude Opus 5.5.
-# Source: NASA Science, "Oort Cloud Facts" -- the outer edge of the Oort
-# Source+: cloud is thought to lie between 10,000 and 100,000 AU from the Sun.
+# Source: NASA Science, "Oort Cloud Facts",
+# Source+: https://science.nasa.gov/solar-system/oort-cloud/facts/ -- the
+# Source+: outer edge of the Oort cloud is thought to lie between 10,000 and
+# Source+: 100,000 AU from the Sun.
 # Access: as OORT_CLOUD_INNER_EDGE_LOW_AU.
 
 OORT_CLOUD_OUTER_EDGE_HIGH_AU = 100000
@@ -4029,9 +4387,13 @@ GRAVITATIONAL_INFLUENCE_PC = 0.65
 # Status: measured V_SOURCED 2026-10-04 -- open full text
 # Figures: 2 -- the source prints 0.65.
 # Read: sec. 2.3, the captions of Figs. 2 and 3, and sec. 5, Portegies
-# Read+: Zwart et al. (2021), arXiv:2105.12816v2, 2026-10-04, Claude Opus 5.5
+# Read+: Zwart et al. (2021), arXiv:2105.12816v2, 2026-10-04, Claude Opus 5.5.
+# Read+: Re-read, the two captions' "about 0.65 pc", at arXiv,
+# Read+: 2026-10-21, Claude Opus 5.5; the DOI below resolves to A&A's own full
+# Read+: text, free to read, opened the same day. Gemini 4 (medium) quoted
+# Read+: the same captions (worksheet_gemini4_medium_l456_sun_20261020.md, S14).
 # Source: Portegies Zwart et al. (2021), A&A 652, A144,
-# Source+: doi:10.1051/0004-6361/202040096 -- the Hill radius of the Sun in
+# Source+: https://doi.org/10.1051/0004-6361/202040096 -- the Hill radius of the Sun in
 # Source+: the Galactic potential is about 0.65 pc (Fig. 2 and Fig. 3
 # Source+: captions; sec. 5); the outer limit of the Oort cloud is taken to
 # Source+: coincide with it (sec. 2.3).
@@ -4740,9 +5102,16 @@ DE430_TERRESTRIAL_POSITION_PLACE_KM = 1.0
 # Figures+: "a few hundred meters" reports to by the Report test; 0.2 to
 # Figures+: 0.999 km all give whole kilometres
 # Read: abstract, p. 1, 2026-10-01, Claude Opus 5.5
+# Read+: Re-read at JPL's own PDF of the report, the address on the Source
+# Read+: line, 2026-10-21, Claude Opus 5.5: "The Planetary and Lunar
+# Read+: Ephemerides DE430 and DE431", William M. Folkner, James G.
+# Read+: Williams, Dale H. Boggs, Ryan S. Park and Petr Kuchynka, the
+# Read+: abstract.
 # Source: Folkner, W. M., Williams, J. G., Boggs, D. H., Park, R. S. &
 # Source+: Kuchynka, P. (2014), "The Planetary and Lunar Ephemerides
-# Source+: DE430 and DE431", IPN Progress Report 42-196 -- abstract: the
+# Source+: DE430 and DE431", IPN Progress Report 42-196,
+# Source+: https://ipnpr.jpl.nasa.gov/progress_report/42-196/196C.pdf --
+# Source+: abstract: the
 # Source+: inner planets' orbits are known to subkilometer accuracy, and
 # Source+: the frame tie limits the terrestrial planets to orbit
 # Source+: uncertainties of a few hundred meters.
@@ -4761,9 +5130,16 @@ DE430_JUPITER_SATURN_POSITION_PLACE_KM = 100.0
 # Figures+: "tens of kilometers" reports to by the Report test; 10 to
 # Figures+: 15 km give tens, 16 to 99 km give hundreds
 # Read: abstract, p. 1, 2026-10-01, Claude Opus 5.5
+# Read+: Re-read at JPL's own PDF of the report, the address on the Source
+# Read+: line, 2026-10-21, Claude Opus 5.5: "The Planetary and Lunar
+# Read+: Ephemerides DE430 and DE431", William M. Folkner, James G.
+# Read+: Williams, Dale H. Boggs, Ryan S. Park and Petr Kuchynka, the
+# Read+: abstract.
 # Source: Folkner, W. M., Williams, J. G., Boggs, D. H., Park, R. S. &
 # Source+: Kuchynka, P. (2014), "The Planetary and Lunar Ephemerides
-# Source+: DE430 and DE431", IPN Progress Report 42-196 -- abstract: the
+# Source+: DE430 and DE431", IPN Progress Report 42-196,
+# Source+: https://ipnpr.jpl.nasa.gov/progress_report/42-196/196C.pdf --
+# Source+: abstract: the
 # Source+: orbits of Jupiter and Saturn are determined to accuracies of
 # Source+: tens of kilometers.
 # Ref: https://ipnpr.jpl.nasa.gov/progress_report/42-196/196C.pdf
@@ -4778,9 +5154,16 @@ DE430_URANUS_NEPTUNE_PLUTO_POSITION_PLACE_KM = 10000.0
 # Figures+: "several thousand kilometers" reports to by the Report test;
 # Figures+: 2,000 to 9,999 km all give ten-thousands
 # Read: abstract, p. 1, 2026-10-01, Claude Opus 5.5
+# Read+: Re-read at JPL's own PDF of the report, the address on the Source
+# Read+: line, 2026-10-21, Claude Opus 5.5: "The Planetary and Lunar
+# Read+: Ephemerides DE430 and DE431", William M. Folkner, James G.
+# Read+: Williams, Dale H. Boggs, Ryan S. Park and Petr Kuchynka, the
+# Read+: abstract.
 # Source: Folkner, W. M., Williams, J. G., Boggs, D. H., Park, R. S. &
 # Source+: Kuchynka, P. (2014), "The Planetary and Lunar Ephemerides
-# Source+: DE430 and DE431", IPN Progress Report 42-196 -- abstract: the
+# Source+: DE430 and DE431", IPN Progress Report 42-196,
+# Source+: https://ipnpr.jpl.nasa.gov/progress_report/42-196/196C.pdf --
+# Source+: abstract: the
 # Source+: orbits of Uranus, Neptune and Pluto are determined mainly
 # Source+: from astrometry, which limits position accuracies to several
 # Source+: thousand kilometers.
@@ -4800,9 +5183,16 @@ DE430_MOON_POSITION_PLACE_KM = 0.001
 # Figures+: still, so the row is one meter, written in kilometers
 # Read: abstract, p. 1, 2026-10-12, Claude Opus 5.5, through the chat's
 # Read+: web-fetch tool
+# Read+: Re-read at JPL's own PDF of the report, the address on the Source
+# Read+: line, 2026-10-21, Claude Opus 5.5: "The Planetary and Lunar
+# Read+: Ephemerides DE430 and DE431", William M. Folkner, James G.
+# Read+: Williams, Dale H. Boggs, Ryan S. Park and Petr Kuchynka, the
+# Read+: abstract.
 # Source: Folkner, W. M., Williams, J. G., Boggs, D. H., Park, R. S. &
 # Source+: Kuchynka, P. (2014), "The Planetary and Lunar Ephemerides
-# Source+: DE430 and DE431", IPN Progress Report 42-196 -- abstract: the
+# Source+: DE430 and DE431", IPN Progress Report 42-196,
+# Source+: https://ipnpr.jpl.nasa.gov/progress_report/42-196/196C.pdf --
+# Source+: abstract: the
 # Source+: present-day lunar orbit is known to submeter accuracy through
 # Source+: fitting lunar laser ranging data.
 # Ref: https://ipnpr.jpl.nasa.gov/progress_report/42-196/196C.pdf
