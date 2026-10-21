@@ -1,14 +1,22 @@
 ---
 name: interactive-exhibit
 description: How an interactive exhibit (a room in interactive.html such as ?exhibit=sun) is designed, built, verified and carded for the Paloma's Orrery gallery. Covers the exhibit switch and boot path, the assembler driver spec, the JS feature handoff, the shared chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent gate, back link), what is per-body, the served-data provenance contract, what a room opens on (the arrival block) and the shell-key stamp the renderers apply, who may write data/objects_config.json, the Mode 5 phone sequence, and carding an exhibit through Studio. Use when adding or changing an exhibit (Earth, Jupiter, the stars), touching sun* chrome in interactive.html, deciding what an exhibit may render, or editing the served words with store_writer or exhibit_store_editor. Not for propagation math (gallery-assembler), the nightly builder (gallery-cache-builder), or the Studio/converter chain (gallery-pipeline). Do not use for projects other than Paloma's Orrery.
-fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, See more, Home's order and its framing; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia); a served number's citation and its source_note; the Typed facts check (smoke_typed_facts.js); a feature drawn as stored dots (the Hills cloud, Earth's radiation belts)
+fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, See more, Home's order and its framing; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia); a served number's citation and its source_note; the Typed facts check (smoke_typed_facts.js); a feature drawn as stored dots (the Hills cloud, Earth's radiation belts); the i panel's source list and its links (source_list.js)
 ---
 
 # Interactive Exhibit
 
-Read this file in 5 parts: lines 1-137, 138-363, 364-632, 633-873, 874-891.
+Read this file in 6 parts: lines 1-138, 139-142, 143-385, 386-658, 659-899, 900-917.
 
-Skill version: 1.17 | 2026-10-17, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.18 | 2026-10-20, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ e8e714da and gallery @ ca5339fd. v1.18 (L-456) records
+that the i panel lists a feature's sources one to a line, each after its
+label, every web address a link a visitor can tap: the renderers serve
+gathered citations as a list, `source_items`, beside the joined
+`source` line, and gallery/source_list.js decides what the list holds
+and where an address ends (Tony from his phone, 2026-10-20: "need
+hyperlinks" and "need some kind of itemization for readability").
+Earlier: 1.17 | 2026-10-17, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ a73bc24a and gallery @ f49b3e69. v1.17 (L-452 and
 L-450, L-330; Earth's round 1) narrows `source_note` to a drawing choice
 beside a citation: wording that bears on a citation lives in the store,
@@ -27,16 +35,9 @@ it word for word, and the website's own words about a citation live in
 fact rule is now a gating check, Typed facts, which builds the Sun and
 Earth rooms with every served word masked and fails on a sentence that
 survives and is not on its allowed list.
-Earlier: 1.15 | 2026-10-14, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 5cd63cce and gallery @ 4b2b660a. v1.15 (L-431 build
-3) records what a room prints for a body's orbital period and where it
-comes from: the orrery's period, copied by the mirror, printed at its
-served figure count in one of three forms, read from the config so it
-reaches a visitor on the push; and the orbit drawn around a period's
-centre, which is served in the cache and needs the builder.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
 on 2026-10-05 (L-418), 2026-10-10 (L-429), 2026-10-14 (L-431),
-2026-10-16 (L-421) and 2026-10-17 (L-452).
+2026-10-16 (L-421), 2026-10-17 (L-452) and 2026-10-20 (L-456).
 
 ## Contents
 
@@ -184,6 +185,31 @@ page:
   carries neither (Tony's split of 2026-09-15). These are three of the
   five principles in provenance-discipline, What a Visitor Reads,
   which hold every word a visitor reads in either instrument.
+- **The i panel lists its sources, one to a line, every address a
+  link** (v1.18, L-456; Tony from his phone, 2026-10-20: "need
+  hyperlinks" and "need some kind of itemization for readability").
+  Under the link out, "Source:" or "Sources:" and a bulleted list: each
+  citation after its label in bold where it has one, the website's
+  note after a dash, and every `http://` or `https://` address in it a
+  link that opens in a new tab, long addresses wrapping on the phone.
+  A renderer that GATHERS citations -- `withGatheredSource()`,
+  `withShellWords()`, the exosphere's fade, Earth's four drawn guides
+  -- serves them as a list, `source_items` ({label, text, note}),
+  beside the joined `source` line, and `stampLink()` carries it into
+  the trace's meta. The joined line stays exactly as it was, because
+  every other check reads it. The list is never split out of the
+  joined line: one citation can hold "; " itself. A citation the
+  orrery's export built from other rows' citations (a derived row's
+  `source_inherited`) arrives already joined and stays one bullet until
+  the export serves it as a list. `gallery/source_list.js` decides what
+  the list holds (`panelSources`) and where an address ends
+  (`pieces`): a sentence's full stop or comma is not the address's, a
+  closing bracket is only when the address opened one. A DOI written
+  without its address stays text; its address belongs on the row's
+  Source line in the orrery (provenance-discipline 2.32). The gallery
+  run's "Source list" check (`documentation/smoke_source_list.js`)
+  names, for every feature in the Sun and Earth rooms, how many
+  citations it lists and how many carry a link.
 - **Scattered dots are the orrery's stored drawing** (v1.17, L-330;
   the rule L-434 set for the Hills cloud). Earth's two radiation belts
   are dots scattered at random along dipole field lines (r = L

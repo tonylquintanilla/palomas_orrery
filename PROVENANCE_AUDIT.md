@@ -20,12 +20,12 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T1 by domain | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|--------------|---:|---:|---:|--------:|
+| 20261021T035426Z | `e8e714d` | 164 | 1175 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 733 | 156 | 6 | 0 |
+| 20261020T200934Z | `e8e714d` | 164 | 1175 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 733 | 156 | 6 | 0 |
 | 20261020T191147Z | `fcd191e` | 164 | 1175 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 733 | 156 | 6 | 0 |
 | 20261020T135620Z | `905c759` | 164 | 1175 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 733 | 156 | 6 | 0 |
 | 20261020T035008Z | `5541200` | 162 | 1164 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 722 | 156 | 6 | 0 |
 | 20261019T233611Z | `6e0cfac` | 166 | 1170 | 284 | orrery 116, Earth System 149, stars 13, utilities 2, dev tools 4 | 723 | 156 | 7 | 0 |
-| 20261019T030226Z | `05cb185` | 162 | 1164 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 722 | 156 | 6 | 0 |
-| 20261018T183140Z | `1c254d4` | 164 | 1143 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 703 | 153 | 7 | 0 |
 
 Change since the previous run: total +0, Tier-1 +0.
 
@@ -2007,10 +2007,10 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 320 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 321 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 2233 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 2364 | dict | SECTION_SYMBOLS[...] | (8 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
+| 327 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 328 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 2276 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 2407 | dict | SECTION_SYMBOLS[...] | (8 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
 
 ### planet_visualization_utilities.py
 

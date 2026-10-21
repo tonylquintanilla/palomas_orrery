@@ -288,6 +288,13 @@ October 18, 2026 with Anthropic's Claude Opus 5.5 (L-455): Typed Numbers,
 the website's new checker, gets its button after Typed Facts, with its
 short line, running through documentation/run_offline_check.py; the
 offline runner's description names it.
+October 20, 2026 with Anthropic's Claude Opus 5.5 (L-456, L-266): Source
+List, the website's new checker, gets its button after Solar System
+Figures, with its short line, running through
+documentation/run_offline_check.py. And Horizons Check -- everything,
+now, in Tools and Caches: horizons_check.py --all, which confirms every
+object and data sheet today rather than only what is due (Tony,
+2026-10-20).
 """
 
 import os
@@ -977,6 +984,22 @@ LAUNCH_GROUPS = {
         GALLERY_REPO_DIR,
         True,
         None,
+        True),
+        ("Source List",
+        os.path.join("documentation", "run_offline_check.py"),
+        "The i panel lists each feature's sources one to a line, every web "
+        "address a link a visitor can tap (L-456). It works where an "
+        "address ends and what the list holds, builds the Sun room and "
+        "Earth's recorded scene, and names for every feature how many "
+        "citations it lists and how many carry a link. It fails if a "
+        "listed citation disagrees with the joined line, or an address is "
+        "lost from the list. It breaks its own file two ways first, to "
+        "show it can fail. GATES the gallery runner. The check is Node, so "
+        "this button runs it through documentation/run_offline_check.py. "
+        "Runs from the gallery repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        ["Source list"],
         True),
         ("Sun Shells",
         os.path.join("documentation", "run_offline_check.py"),
@@ -1723,6 +1746,20 @@ LAUNCH_GROUPS = {
          "web-servable orbit/position files for the interactive gallery.",
          SCRIPT_DIR,
          True),
+        ("Horizons Check -- everything, now",
+         "horizons_check.py",
+         "The Horizons Check for EVERY keyed object, fetched period and "
+         "spacecraft data sheet at once, whatever their dates (L-266, "
+         "Tony's request of 2026-10-20). The Horizons Check in the "
+         "maintenance run asks only what is due, each part every 30 days, "
+         "so on most days it asks JPL nothing; this button is for when you "
+         "want everything confirmed today. It records the answers the same "
+         "way, so each date starts again from today. Needs the internet "
+         "and takes a few minutes; if JPL cannot be reached it says "
+         "UNREACHABLE and asks nothing more.",
+         SCRIPT_DIR,
+         True,
+         ["--all"]),
         ("Osculating Cache Manager",
          "osculating_cache_manager.py",
          "Load and report on the osculating orbital elements cache "
@@ -1922,6 +1959,9 @@ CARD_LINES = {
      "Solar System Figures"):
         "Checks the Solar System room prints distances only to earned digits.",
     ("Gallery -- checks and data",
+     "Source List"):
+        "Checks the i panel lists sources one to a line, with links.",
+    ("Gallery -- checks and data",
      "Sun Shells"):
         "Checks the Sun room's shells are built and shaped as configured.",
     ("Gallery -- checks and data",
@@ -2113,6 +2153,9 @@ CARD_LINES = {
     ("Tools and Caches",
      "Export Orbit Cache"):
         "Writes web-servable orbit files from the local orbit caches.",
+    ("Tools and Caches",
+     "Horizons Check -- everything, now"):
+        "Asks Horizons about every served object now, not only what's due.",
     ("Tools and Caches",
      "Osculating Cache Manager"):
         "Loads and reports on the osculating orbital elements cache.",

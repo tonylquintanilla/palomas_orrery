@@ -1,25 +1,28 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 20, 2026: the Sun's two fades built; the orrery's half pushed, the website's ready to run.
-- Written at orrery fcd191e and gallery e8f6dd5.
+Last updated: October 20, 2026, evening: the i panel's sources as a linked list, ready to run; the Sun's fades pushed.
+- Written at orrery e8e714d and gallery ca5339f.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The Sun's two fades are built (L-410 (the corona), L-131 (the dust
->   cloud)). The orrery's half is pushed; your look: "looks great".
-> - The website's half is a patch, with your marks on its words list.
-> - Comet-by-comet Roche limits are on the ledger as an idea, not
->   urgent and not in the Sun's slice (L-457 (comet Roche limits)).
+> - The Sun's two fades are pushed, orrery and website (L-410, L-131).
+> - The i panel's sources: a bulleted list, every address a link,
+>   every room; Earth's four inner shells in Earth radii first. A
+>   website patch, waiting on your run (L-456 (what a visitor reads)).
+> - Two Gemini prompts for the 39 works with no web address.
+> - New: a monthly run for slow checks (L-459) and a "report a
+>   problem" link through the guest book's form (L-458).
 >
-> **Do next:** *run the two patches in the order the handoff gives
-> (`HANDOFF_L410_sun_fades_build_20261020.md`, section 1), then look
-> at the Sun room on your phone.*
+> **Do next:** *run the website patch, the Daily Run, look on your
+> phone; then the orrery's closing patch
+> (`HANDOFF_L456_source_list_20261020.md`, section 1).*
 >
 > **Needs you now:**
-> - The run order, in the handoff's section 1.
-> - Reinstall provenance-discipline (2.32) in Settings > Skills.
+> - The run order, in that handoff's section 1.
+> - Gemini's two answers, when they're done.
+> - Reinstall interactive-exhibit (1.18) in Settings > Skills.
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
@@ -33,11 +36,10 @@ Last updated: October 20, 2026: the Sun's two fades built; the orrery's half pus
                dashboard (L-440) done; L-424, L-425, L-426 to come.
   6-6a.[done]  The typed facts, served and checked (Oct 16);
                orbital periods from JPL, orrery and website (Oct 14).
-  7.   [NOW]   *The Sun's slice (L-412): numbers (Oct 18), opening
-               views (Oct 19), the two fades built (Oct 20), the
-               website's half waiting on your run; next session,
-               the Sun's 14 hover and tooltip pairs (L-191); then
-               L-456; the ice lines wait.* << moved this session
+  7.   [NOW]   *The Sun's slice (L-412): numbers, opening views, the
+               two fades (Oct 18-20); now L-456, the panel built, the
+               addresses next; then the Sun's 14 hover and tooltip
+               pairs (L-191); the ice lines wait.* << moved this session
   8-8c.[done]  The served objects checked against JPL, missing periods
                fetched first, Earth's from the Earth-Moon barycentre; the
                Daily Run pulls before it builds, L-446 (Oct 14-16).
@@ -67,7 +69,6 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 - Belts: random dots, both curved. Low orbit starts at ESA's 180 km.
   A lost run record stops the Daily Run. Lines past a hover's 17 go to
   its i panel. What a visitor reads: in provenance-discipline. (Oct 17)
-- Temperatures in kelvin. The Sun's numbers end with L-455. (Oct 17)
 - Earth's deep temperatures from open papers; the mantle stays in two. (Oct 18)
 - The Sun's drawings: opening view, then corona fade with dust; ice lines wait. (Oct 18)
 - Every view opens on its farthest shell plus 20%. Every room: body radii,
@@ -78,15 +79,16 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 - The Sun's fades: the corona and the dust are two drawings; one plasma
   fade out to the Alfven surface; dust dots, place for density and
   brightness for sunlight, stopping at 5.2 AU. (Oct 19)
-- A citation's web address goes on its own Source line (2.32). Next
-  session: the Sun's 14 hover and tooltip pairs; then L-456, the Sun's
-  and Earth's panels first. (Oct 20)
+- A citation's web address goes on its own Source line (2.32). L-456
+  before the Sun's 14 pairs. Links checked every 30 days, by a monthly
+  run the Daily Run starts, or by hand. Problem reports through the
+  guest book's form, into the Daily Run. (Oct 20)
 
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261020T134520Z, ok, every rename on the first try (gallery e8f6dd5).
-- Tier-1 on the gate path: 0, by name (the scanner at fcd191e).
+- Last cache build: 20261020T191617Z, ok, every rename on the first try (gallery ca5339f).
+- Tier-1 on the gate path: 0, by name (the scanner at e8e714d).
   Whole tree: 280: orrery 116, Earth System 149, stars 13, utilities 2.
 - This page's date and the ledger's newest stamp: both Oct 20. Agree.
 
@@ -102,8 +104,6 @@ At the next design talk:
 - Stored drawings for the other dot clouds: L-434 (stored drawings).
 - Earth's talk 2: L-356 with L-375 (the field's model and offset), and
   L-454 (a device for edges that move).
-- How often the live-link check runs: 30, 60 or 90 days (L-266 (cited
-  links)).
 - New words for the chromosphere's base, near 4,400 kelvin (L-411).
 
 Not urgent, in your order:
@@ -113,7 +113,8 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- *Next: start from `HANDOFF_L410_sun_fades_build_20261020.md`, sec. 6*
+- *Next: start from `HANDOFF_L456_source_list_20261020.md`, sec. 6*
+- The Gemini prompts for the addresses: `prompts/RELAY_L456_*` (two)
 - The Sun's fades: `SOURCES_L410_sun_corona_dust_20261019.md`; their
   words, marked: `WORDS_L410_*` (three lists)
 - Earth's words and Gemini 4: `WORDS_L455_*`, `REVIEW_L455_gemini4_*`

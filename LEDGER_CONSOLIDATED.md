@@ -534,6 +534,13 @@ ruling to leave the rest for the next session, the fourteen pairs
 measured;
 provenance-discipline 2.32, the address on the Source line), built on
 fcd191e9 and gallery e8f6dd5e.
+Module updated: October 20, 2026, evening, with Anthropic's Claude Opus
+5.5 (L-456 parts 1, 3 and 4 built: the i panel's sources as a list with
+live links, Earth's four inner shells in Earth radii; the Gemini prompts
+for the missing addresses; L-458 new, a "report a problem" link through
+the guest book's form; L-459 new, a monthly run started by the Daily
+Run; L-266's 30 days and its home; interactive-exhibit 1.18), built on
+e8e714da and gallery ca5339fd.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -751,7 +758,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*234 live items; 218 need attention (`!`); 166 RICE-scored; 216 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*236 live items; 220 need attention (`!`); 166 RICE-scored; 216 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -899,6 +906,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-449 | A cache build dropped the 82 build-run records it should have carried (gallery, cache builder) | OPEN | -- | 2026-10-17 |
 | ! | L-454 | A drawn device for edges that move: the magnetopause, the bow shock and their kind (orrery + gallery, design) | OPEN | -- | 2026-10-17 |
 | ! | L-456 | What a visitor reads, from Earth's Mode 5 look: body radii, sources as a list with live links, Celsius for Earth's surface and air (gallery + orrery) | OPEN | -- | 2026-10-20 |
+| ! | L-458 | A "report a problem" link in every room's i panel (gallery, interactive) | OPEN | -- | 2026-10-20 |
+| ! | L-459 | A monthly run for slow checks, started by the Daily Run (gallery + orrery, maintenance) | OPEN | -- | 2026-10-20 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1292,6 +1301,75 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
+#### [L-459] A monthly run for slow checks, started by the Daily Run (gallery + orrery, maintenance)
+<!-- L:459 status:OPEN upd:2026-10-20 section:A flag: rice: -->
+- **Tony, 2026-10-20**, in a design chat on verification: "add a monthly
+  run for monthly checks like this in addition to the daily run."
+  Brought to this session as a draft; Claude's recommendation, one
+  monthly run rather than a 30-day counter in each check, "Yes, as
+  recommended."
+- **Started by the Daily Run, never remembered** (A Check That Cannot
+  Fail Is Not Passing: put the check where it runs). The run keeps the
+  date of its last run in a file. Each Daily Run reads it and starts the
+  monthly run once 30 days or more have passed, so a missed day or a
+  month away still fires on the next run. On other days it prints one
+  line: when the monthly run last ran and when it is next due, so a
+  monthly run that stopped happening shows as an old date.
+- **Also run by hand, any time** (Tony: "Can I run the checker at
+  another time optionally?"): a dashboard button, "Monthly Run -- now",
+  runs everything in it at once and resets the date. Tony asked for the
+  30-day checks on the dashboard; the Horizons Check's "everything,
+  now" button was added the same evening (L-266).
+- **First job: L-266, the link check.** Others join when each is ruled
+  on.
+- **The Horizons Check is not moved into it.** It already keeps its own
+  dates for each object and data sheet, asks again from day 25, and
+  runs in every maintenance run asking JPL nothing on most days.
+**Gap:** build it with L-266's link check: where the date file lives,
+which repository's Daily Run starts it, how its findings reach the run
+record.
+**Ref:** L-266 (its first job); L-395 (the Horizons Check's own dates);
+L-446 (the Daily Run's order); L-416 (a dashboard button per step).
+
+#### [L-458] A "report a problem" link in every room's i panel (gallery, interactive)
+<!-- L:458 status:OPEN upd:2026-10-20 section:A flag: rice: -->
+- **Tony's idea, 2026-10-20**, in a design chat on verification: the
+  live source links in the i panel let a visitor check a claim, and "if
+  they see something off, they could report it. You know, that could be
+  me, or that could be somebody else." Brought to this session as a
+  draft.
+- **For any problem, not only a dead link** (Tony: "In fact the problem
+  report could report not just a broken link but any problem the
+  visitor sees, perhaps an expert would see a problem we have not
+  caught."). Dead links are the monthly run's (L-459); this is the
+  outside check only a visitor can make: a number, a sentence, a
+  source, a link or the drawing.
+- **Where it lands: Tony's Daily Run report** (Tony: "in the daily
+  maintenance report").
+- **How: the guest book's form, pre-filled** (Tony: "instead of
+  creating a second sheet couldn't have the function preformat a
+  message for the visitor to send or amend as a comment?"; then
+  "Confirmed"). The link opens the guest book's Google Form with its
+  message box already written, naming the room and the feature, for
+  the visitor to edit and send. It lands in the guest book's sheet; the
+  Daily Run's guest book step shows it to Tony. A message beginning
+  "Problem report" is shown as a report, kept private, and never offered
+  for the lobby. No second form, no second sheet, and the visitor needs
+  no account. First draft of the message, for Tony's words list at the
+  build: "Problem report -- Sun room, Corona. What looks wrong (a
+  number, a sentence, a source, a link, or the drawing)? If you know a
+  better source, please name it:"
+- **Tony-action (do), at the build:** in the guest book form's editor,
+  "Get pre-filled link" once, so the link knows the hidden name of the
+  message box. Steps given then.
+**Gap:** the build: the link in the shared i-panel chrome, so every
+room has it at once (interactive-exhibit); the guest book updater
+telling a report from a greeting; the message's words as a list for
+Tony first.
+**Ref:** L-456 (the panel's sources as a list with links); L-281 (the
+guest book: its form, sheet and updater); L-265 (the i panel's links);
+L-459 (the monthly run).
+
 #### [L-456] What a visitor reads, from Earth's Mode 5 look: body radii, sources as a list with live links, Celsius for Earth's surface and air (gallery + orrery)
 <!-- L:456 status:OPEN upd:2026-10-20 section:A flag: rice: -->
 - **Recorded 2026-10-18** from Tony's Mode 5 look at the Earth room
@@ -1366,9 +1444,54 @@ after that."): the four Earth-radii lines
 Tony; the panel's list and live links, the Sun's and Earth's rooms
 first; the 98 Source lines without an address, by room;
 interactive-exhibit's bump.
-**Ref:** gallery `gallery/feature_renderers.js`, `interactive.html`;
-provenance-discipline (The Unit Field); interactive-exhibit; L-455,
-L-421, L-385.
+- **2026-10-20, Tony moved this item ahead of L-191's reconciliation**,
+from his phone, with a screenshot of the corona's i panel: "As you can
+  see the source info is very hard to read: 1) need hyperlinks 2) need
+  some kind of itemization for readability." Then: "can we do L456 in
+  this session so we are ready for the sun's 14 pairs?" And on the
+  addresses: "ask Gemini to do the search and Claude checks they are
+  correct."
+- **Built 2026-10-20, parts (1), (3) and (4)** (Claude Opus 5.5; record
+  `documentation/HANDOFF_L456_source_list_20261020.md`; gallery patch
+  `patch_L456_1_source_list_website_20261020.py`, built on ca5339fd):
+  - (3) and (4): the i panel prints "Sources:" and a bulleted list, each
+    citation after its label, every web address a link that opens in a
+    new tab, long addresses wrapping. New `gallery/source_list.js`
+    decides what the list holds and where an address ends. The
+    renderers serve gathered citations as a list, `source_items`,
+    beside the joined `source` line, which is unchanged. The ".; " goes
+    with the joining. Every room at once.
+  - (1): Earth's inner core, outer core, lower mantle and upper mantle
+    give "Radius: 0.19151 Earth radii" (0.54561, 0.895, 0.99506) and then
+    "= 1,221.5 km (0.000008165 AU)" and so on, from each row's served
+    "in", as approved on 2026-10-18.
+  - The gallery run's new gating check, "Source list"
+    (`documentation/smoke_source_list.js`), names for every feature in
+    the Sun room and Earth's recorded scene how many citations it lists
+    and how many carry a link: at ca5339fd, the Sun 22 of 43, Earth 9 of
+    29. The orrery's dashboard gets its button.
+  - interactive-exhibit 1.18 (protocol v3.106).
+- **The addresses, part of the 98 class:** in the Sun and Earth rooms,
+  59 different citation texts carry no web address (18 the Sun's, 41
+  Earth's), naming 39 works. Two Gemini prompts went to Tony,
+  `documentation/prompts/RELAY_L456_gemini_addresses_sun_20261020.md`
+  (16 works) and `..._earth_20261020.md` (23), split so a dropped answer
+  costs less. Each address that comes back is opened again by Claude
+  before it goes on its row's Source line in the orrery.
+- **Found while building:** a citation the orrery's export builds from
+  other rows' citations (a derived row's `source_inherited`, Earth's
+  Hill sphere for one) arrives as one joined line and stays one bullet.
+  Splitting it safely needs the export to serve the inherited citations
+  as a list. One class; recorded, not chased.
+**Gap (replaces the one above, 2026-10-20):** Tony's run of the gallery
+patch, the Daily Run and his look on the phone; the addresses, from
+Gemini's two answers, each re-opened, onto their rows in the orrery,
+the Sun's and Earth's first; the Celsius words for Earth's surface and
+air as a list for Tony; the export serving inherited citations as a
+list. Then L-191's reconciliation of the Sun's fourteen pairs.
+**Ref:** gallery `gallery/feature_renderers.js`, `gallery/source_list.js`,
+`interactive.html`; provenance-discipline (The Unit Field, 2.32);
+interactive-exhibit 1.18; L-455, L-421, L-385, L-458, L-266.
 
 #### [L-454] A drawn device for edges that move: the magnetopause, the bow shock and their kind (orrery + gallery, design)
 <!-- L:454 status:OPEN upd:2026-10-17 section:A flag: rice: -->
@@ -2524,9 +2647,9 @@ above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
   written in newlines; the other 16 are not done. The streamer belt's
   and the clumps' eyeballed numbers were not taken up.
 **Gap (replaces the one above, 2026-10-20):** the website half of
-L-410 with L-131 (Tony's runs); the next session reconciles the Sun's
-fourteen hover and tooltip pairs (L-191; Tony's ruling of 2026-10-20),
-and L-456 comes after that; the streamer belt's and the clumps'
+L-410 with L-131 (Tony's runs); L-456 first, by Tony's word that
+evening (the panel built; the addresses next), then the Sun's fourteen
+hover and tooltip pairs (L-191); the streamer belt's and the clumps'
 eyeballed numbers; L-241; then L-443, with L-128 after it.
 **Gap (2026-10-18, superseded above):** the drawings in Tony's order: L-385 (now every view's
 opening, the Sun first, then Earth; 2026-10-18), then L-410 with L-131
@@ -6327,6 +6450,10 @@ and the divergence check); L-156 (Batch 2 worksheet).
     typed numbers are "~5 hours", "300-800 km/s", "1-2 million K" and
     "~20 hours".
   These two differences from the finding as given went to Tony.
+- **2026-10-20, later:** Tony moved L-456's panel work ahead of this
+  reconciliation ("can we do L456 in this session so we are ready for
+  the sun's 14 pairs?"); it was built that evening. The fourteen pairs
+  are next after L-456's addresses.
 **Gap (rewritten 2026-10-18):** (0) done, by Tony's look. (1a) BUILT:
 the tooltip class shows `<br>` as a line break; Tony's look at a Sun
 and a Jupiter checkbox closes it. (1b) The structural fix, per slice:
@@ -8105,9 +8232,33 @@ resident protocol Part 3.
   shape (b): a check in the maintenance run, on a schedule of its own
   rather than every run, the way the cache's age is checked. The
   interval is his to choose.
+- **Ruled 2026-10-20: every 30 days, automatically, and by hand any
+  time.** Tony asked for a recommendation; Claude recommended 30 days,
+  the Horizons Check's rhythm, a dead link visible to visitors for at
+  most a month, and a minute or two once a month. Tony: "Yes." Then:
+  "to confirm then 30-day counter is automatic and the checker fires
+  automatically? Can I run the checker at another time optionally?" --
+  yes to both. Then "Can you add the 30-day Checkers to the dashboard?"
+- **Its home is the monthly run, L-459** (Tony: "Yes, as recommended"),
+  started by the Daily Run when 30 days have passed, with a "now"
+  button on the dashboard that runs it at once and resets the date. It
+  runs on Tony's machine: the sandbox cannot reach most of these sites.
+  So shape (b) above, the gallery's maintenance run, reading both
+  repositories' links, since the scale (about 470 addresses in the
+  orrery, and the website's) is why it belongs in a monthly run.
+- **States, as above, with one change:** a link that fails is tried
+  once more a few seconds later in the same run, and only a link that
+  fails both times is reported dead, by name. A redirect is reported
+  with where it now goes. A site that cannot be reached is counted
+  apart and does not fail the run.
+- **Built the same evening, its neighbour:** the dashboard's "Horizons
+  Check -- everything, now" button (`horizons_check.py --all`), in
+  Tools and Caches.
 - **Ref:** L-265 (what makes it urgent); L-236 (the gallery runner and
   its three-state convention); L-235 (checks that cannot fail,
-  gallery side); L-456 (the live links); provenance-discipline 2.8, The Access Standard --
+  gallery side); L-456 (the live links); L-459 (the monthly run, its
+  home); L-458 (the visitor's report); provenance-discipline 2.8, The
+  Access Standard --
   reachability is already a stated precondition of a citation, with
   nothing enforcing it.
 

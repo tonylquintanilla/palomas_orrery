@@ -519,6 +519,13 @@ rows as they now stand.
 
 ## interactive-exhibit
 
+Earlier: 1.15 | 2026-10-14, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 5cd63cce and gallery @ 4b2b660a. v1.15 (L-431 build
+3) records what a room prints for a body's orbital period and where it
+comes from: the orrery's period, copied by the mirror, printed at its
+served figure count in one of three forms, read from the config so it
+reaches a visitor on the push; and the orbit drawn around a period's
+centre, which is served in the cache and needs the builder.
 Earlier: 1.8 | 2026-10-01, with Anthropic's Claude Opus 5.5, from
 orrery @ feb5e369 and gallery @ 43993b49. v1.8 (L-395) records that a
 body's name, Horizons id, description and NASA link on the website are

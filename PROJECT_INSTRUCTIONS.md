@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.105 | October 20, 2026
+Tony Quintanilla, PE | Claude | v3.106 | October 20, 2026
 
-Cut from fcd191e9 at https://github.com/tonylquintanilla/palomas_orrery
+Cut from e8e714da at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -523,7 +523,7 @@ gallery-cache-builder        1.11 Nightly builder, atomic swap and its
                                   builder testing layers, the Daily Run's order
                                   and a failed pull, the run records and their
                                   check
-interactive-exhibit          1.17 adding or changing an exhibit in
+interactive-exhibit          1.18 adding or changing an exhibit in
                                   interactive.html; any edit to the Sun's
                                   chrome (drawer, nav cluster, frame zoom,
                                   i-panel, HUD, consent, back link); "Earth
@@ -542,7 +542,8 @@ interactive-exhibit          1.17 adding or changing an exhibit in
                                   its source_note; the Typed facts check
                                   (smoke_typed_facts.js); a feature drawn as
                                   stored dots (the Hills cloud, Earth's
-                                  radiation belts)
+                                  radiation belts); the i panel's source list
+                                  and its links (source_list.js)
 <!-- SKILL-MANIFEST:END -->
 
 Session-Start Repo Pull and the SHA Round Trip [CRITICAL]
@@ -1178,6 +1179,40 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.106 (October 20, 2026): No rule changed in this document. ONE
+skill bump, one version (L-456, what a visitor reads):
+interactive-exhibit 1.17 -> 1.18. THE I PANEL LISTS ITS SOURCES, ONE
+TO A LINE, EVERY ADDRESS A LINK.
+
+WHAT PROMPTED IT. Tony, 2026-10-20, from his phone, looking at the
+corona's i panel, where the sources ran as one paragraph: "need
+hyperlinks" and "need some kind of itemization for readability." Then:
+"can we do L456 in this session so we are ready for the sun's 14
+pairs?"
+
+WHAT CHANGED. interactive-exhibit's Provenance is part of the build
+gains one rule: the i panel prints "Sources:" and a bulleted list, each
+citation after its label, every web address a link; a renderer that
+gathers citations serves them as a list, source_items, beside the
+joined source line, which stays as it was; gallery/source_list.js
+decides what the list holds and where an address ends; the gallery
+run's Source list check names each feature's count of citations and
+links. Its trigger names the source list. Its v1.15 entry moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copy reads
+interactive-exhibit 1.18 before exhibit work, and provenance-discipline
+2.32 before provenance work (v3.105's obligation). This session
+confirmed its loaded copies read interactive-exhibit 1.17 and
+provenance-cross-check 1.1, as the manifest expected.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.103 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.105 (October 20, 2026): No rule changed in this document. ONE
 skill bump, one version (L-410 with L-131, the Sun's two fades):
 provenance-discipline 2.31 -> 2.32. A CITATION'S ADDRESS GOES ON ITS
@@ -1263,39 +1298,6 @@ ledger-and-session-records 1.21, as the manifest expected.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.101 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.103 (October 17, 2026): No rule changed in this document. ONE
-skill bump, one version (L-411, in the Sun's numbers build, L-412):
-provenance-discipline 2.30 -> 2.31. A TEMPERATURE IS IN KELVIN.
-
-WHAT PROMPTED IT. The first wording list for the Sun's numbers gave
-the interior's temperatures in degrees Celsius, as NASA/Marshall
-prints them. Tony, 2026-10-17: "don't we standardize on degrees
-Kelvin? the conversion is routine." Then: "we should add this to the
-skill."
-
-WHAT CHANGED. provenance-discipline's The Unit Field gains one
-paragraph: a temperature is stored in kelvin, the store's one
-temperature token; a source in degrees Celsius is converted exactly,
-adding 273.15, the row saying so and keeping the source's place; the
-words a visitor reads give kelvin, and a Celsius or Fahrenheit figure
-typed into them is a typed number like any other. Its v2.27 entry
-moved to documentation/SKILL_HISTORIES.md, by the three-entry rule.
-
-THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
-that session. The next session confirms its loaded copy reads
-provenance-discipline 2.31 before provenance work. This session
-confirmed its loaded copies read provenance-discipline 2.30,
-interactive-exhibit 1.17 and gallery-cache-builder 1.11 (discharging
-v3.102's obligation), horizons-orbital-mechanics 1.8 (discharging
-v3.99's), ledger-and-session-records 1.21, safe-file-editing 1.13
-and agentic-pre-test 1.3, as the manifest expected.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.100 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

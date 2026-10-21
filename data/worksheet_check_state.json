@@ -50,6 +50,7 @@
     "worksheet_gemini-3-1-pro_streamer_extent_20260820.md",
     "worksheet_gemini4_high_l411_sun_numbers_20261019.md",
     "worksheet_gemini4_high_l455_earth_20261018.md",
+    "worksheet_gemini4_medium_l456_sun_20261020.md",
     "worksheet_gemini4_standard_L410_sun_fades_20261019.md",
     "worksheet_gpt-5-6-sol_pilot_constants_new_20260818.jsonl",
     "worksheet_gpt-6-medium_L321_bow_shock_20260913.md",
@@ -59,5 +60,5 @@
     "worksheet_mars_visualization.md",
     "worksheet_mercury_visualization.md"
   ],
-  "uncited_changed": "2026-10-19"
+  "uncited_changed": "2026-10-20"
 }
