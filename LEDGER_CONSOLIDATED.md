@@ -553,6 +553,12 @@ addresses on their rows and on the website's seven own citations; three
 works to Tony's reading list, none missing a link; the Roche limit
 re-homed to Rappaport et al. (2013), so no GPT prompt; L-412's
 Gap), built on 6a8d04c2 and gallery 30db99fb.
+Module updated: October 21, 2026, afternoon, with Anthropic's Claude
+Opus 5.5 (the close: L-456 pushed and Tony's phone look; L-461 new,
+the Daily Run checks the orrery it pulled; L-462 new, a short form of
+the maintenance run; L-463 and L-464 new, the Sun room's phone
+findings; talks part 2's lines on L-375, L-454, L-314, L-413, L-412,
+L-458 and L-411), built on 5102188c and gallery 1dd25994.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -770,7 +776,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*237 live items; 221 need attention (`!`); 166 RICE-scored; 216 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*241 live items; 225 need attention (`!`); 166 RICE-scored; 216 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -844,7 +850,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-337 | A centre marker for bodies without shells in the exhibit rooms | OPEN | 1.8 | 2026-09-19 |
 |  | L-194 | Text-only assertions -- claims the scanner cannot see | DEFERRED | 1.4 | 2026-08-15 |
 | ! | L-297 | Earth-Moon Lagrange points: serving path sized, deferred from the Earth exhibit | OPEN | 1.4 | 2026-09-07 |
-| ! | L-314 | Live solar wind conditions for the magnetosphere shells (SWPC through the nightly builder) | OPEN | 1.3 | 2026-10-17 |
+| ! | L-314 | Live solar wind conditions for the magnetosphere shells (SWPC through the nightly builder) | OPEN | 1.3 | 2026-10-21 |
 | ! | L-253 | The 660 discontinuity's depth variation -- held unsourced | OPEN | 1.2 | 2026-08-26 |
 |  | L-308 | A shell-legend surface for static cards (deferred, with its trigger) | DEFERRED | 1.2 | 2026-10-04 |
 | ! | L-105 | merge_orbit_data source-side frame guard (desktop cache hardening) | OPEN | 1.0 | 2026-07-08 |
@@ -918,9 +924,13 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-449 | A cache build dropped the 82 build-run records it should have carried (gallery, cache builder) | OPEN | -- | 2026-10-17 |
 | ! | L-454 | A drawn device for edges that move: the magnetopause, the bow shock and their kind (orrery + gallery, design) | OPEN | -- | 2026-10-21 |
 | ! | L-456 | What a visitor reads, from Earth's Mode 5 look: body radii, sources as a list with live links, Celsius for Earth's surface and air (gallery + orrery) | OPEN | -- | 2026-10-21 |
-| ! | L-458 | A "report a problem" link in every room's i panel (gallery, interactive) | OPEN | -- | 2026-10-20 |
+| ! | L-458 | A "report a problem" link in every room's i panel (gallery, interactive) | OPEN | -- | 2026-10-21 |
 | ! | L-459 | A monthly run for slow checks, started by the Daily Run (gallery + orrery, maintenance) | OPEN | -- | 2026-10-20 |
 | ! | L-460 | Every room's drawer orders its shells by where each begins (gallery, exhibits; method for interactive-exhibit 1.19) | OPEN | -- | 2026-10-21 |
+| ! | L-461 | The Daily Run confirms the orrery it pulled is the one Tony pushed (gallery, Daily Run) | OPEN | -- | 2026-10-21 |
+| ! | L-462 | The orrery maintenance run, a short form for small patches (orrery, maintenance) | OPEN | -- | 2026-10-21 |
+| ! | L-463 | A pink band or sheet across the Sun room on Tony's phone (gallery, rendering) | OPEN | -- | 2026-10-21 |
+| ! | L-464 | The Sun room's own row: no info link, and the pole's citation has nowhere to show (gallery, interactive) | OPEN | -- | 2026-10-21 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1314,6 +1324,128 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
+#### [L-464] The Sun room's own row: no info link, and the pole's citation has nowhere to show (gallery, interactive)
+<!-- L:464 status:OPEN upd:2026-10-21 section:A flag: rice: -->
+- **Tony, 2026-10-21,** at his phone look after L-456's addresses were
+  pushed (orrery 5102188c, gallery 1dd25994; run record
+  `documentation/WHERE_WE_ARE_10-21-26_1217_run_record.md`): "also i do not see the sun's
+  pole. and the sun drawerer does not have a link, either nasa or
+  wikipedia."
+- **Read the same day on the served site, not yet traced in code:** the
+  Sun's own drawer row (the centre body, legend group "center") opens
+  an i panel reading "No link on file for this shell.", though the
+  Sun's entry in `data/objects_config.json` carries `info_url`
+  https://science.nasa.gov/sun/. The panel code's own comment says
+  every shell in the Sun and Earth rooms has a link; the centre row is
+  the one it missed.
+- The Sun's pole is served with its re-homed citation (NASA NAIF's
+  pck00011.tpc; gallery `patch_L456_6_sun_pole_website_20261021.py`),
+  but no row or panel was found that shows it to a visitor.
+- Not caused by the address build: between gallery 30db99f and 1dd25994
+  only citation text changed in the served config.
+- **Found and fixed the same day** (gallery
+  `patch_L463_1_sun_room_fixes_20261021.py`): the Sun room never gave
+  the assembler's centre marker any words, while the Solar System room
+  gives the same marker the Sun's description and link. The Sun room
+  now gives it the Sun's description and NASA link from the orrery's
+  object list and, as its source, the pole's citation, which turns the
+  room's drawings but had no row of its own. All three are served
+  words; the Typed facts check passes. In a headless run every one of
+  the Sun room's 19 rows now has a link and a source. Earth's room has
+  no centre row: its pole has its own row, Rotation Axis and Equator,
+  with a link and a source.
+**Gap:** Tony's phone, after the push: the Sun's own row shows NASA's
+link and the pole's source. Then this item closes.
+**Ref:** gallery `interactive.html`, `data/objects_config.json`,
+`gallery/source_list.js`; interactive-exhibit; L-456; L-412.
+
+#### [L-463] A pink band or sheet across the Sun room on Tony's phone (gallery, rendering)
+<!-- L:463 status:OPEN upd:2026-10-21 section:A flag: rice: -->
+- **Tony, 2026-10-21,** the same look: "there are a number of issues,
+  there is a pink band that appears in various views." Three
+  screenshots from his phone, 13:25 to 13:27, sent in chat and not
+  saved: at the 0.1 AU grid, a pale pink sheet across most of the
+  view, edged in purple; at the 50 AU grid with the Heliopause
+  selected, a pink band crossing the view diagonally through the Sun.
+- **Read the same day, not yet reproduced:** a fresh load of the Sun
+  room in a desktop browser drew no band. The room's code draws no
+  filled surfaces (no mesh3d, no surfaceaxis in gallery `gallery/` or
+  `interactive.html`). The band's purple edge is the colour of the
+  Galactic Plane ring, rgb(175, 135, 235), a line of 181 points: a
+  guess, not a finding, that the phone draws that ring filled.
+- Not caused by the address build: only citation text changed in the
+  served config that day.
+- **Cause confirmed, 2026-10-21, 14:03, Tony's test on his phone:** with
+  the Galactic Plane ticked, Go To on the Corona brought the band back
+  (a fifth screenshot, at the 0.02 AU grid). At the 50,000 AU grid the
+  same rows drew cleanly. So the band is the Galactic Plane's ring and
+  pole line, at 100,000 AU, drawn by the phone when the view is close
+  in: hundreds to millions of times past the view's edge.
+- **Fix built the same day:** gallery
+  `patch_L463_1_sun_room_fixes_20261021.py`. The page cuts any line
+  reaching more than 20 times past the view to the view's edge before
+  it is drawn, and again at every frame change (`gallery/far_lines.js`);
+  a desktop sees no change, because gl-plot3d already hid that part.
+  The point count never changes, so per-point hover text stays lined
+  up. Checked: the new gating check "Far lines"
+  (`documentation/smoke_far_lines.js`, its self-test breaking the file
+  three ways first); every other website check passing; a headless
+  walk of the Sun room (the Galactic Plane ticked, then Go To on the
+  Corona: its lines reach 0.102 AU, the view's edge, where before they
+  reached 100,000 AU); and every room's drawer behaving exactly as
+  before (`tools/headless/compare_rooms.js`, the Sun, Earth and Solar
+  System rooms). Not yet seen on the phone.
+**Gap:** Tony's phone, after the push: the Galactic Plane ticked, Go To
+on the Corona, no band. Then this item closes.
+**Ref:** gallery `gallery/feature_renderers.js`, `interactive.html`;
+L-412; L-460.
+
+#### [L-462] The orrery maintenance run, a short form for small patches (orrery, maintenance)
+<!-- L:462 status:OPEN upd:2026-10-21 section:A flag: rice: -->
+- **Tony, 2026-10-21,** after `patch_L456_4b_roche_rehome_20261021.py`:
+  "the orrery maintenance runner takes a long time. if only one or two
+  sub-files is needed that would make things quicker." Then: "i don't
+  mean now, i've already started it, but going forward."
+- **Proposed in chat the same day, not ruled:** each patch names the
+  steps it needs (for a citation-only patch, the constants export and
+  the provenance gate); a short form of the run does only those and
+  ends by naming every check it skipped, so a skipped check cannot
+  read as a pass (A Check That Cannot Fail Is Not Passing). The full
+  run stays the routine before a session's first push and for any
+  patch that touches code.
+**Gap:** a design talk: which steps a patch may name, where the short
+form is started (the dashboard), and whether the push gate accepts it.
+**Ref:** `orrery_maintenance_run.py`, `palomas_orrery_dashboard.py`;
+L-188 (the maintenance run); L-459 (the monthly run).
+
+#### [L-461] The Daily Run confirms the orrery it pulled is the one Tony pushed (gallery, Daily Run)
+<!-- L:461 status:OPEN upd:2026-10-21 section:A flag: rice: -->
+- **What happened, 2026-10-21** (run record
+  `documentation/WHERE_WE_ARE_10-21-26_1217_run_record.md`): the orrery's patches
+  ran and passed but were not pushed; the website's patch, Daily Run
+  and push went ahead (gallery 53f17b6), and its pull brought the
+  orrery's old export (the Pointer join line: "against orrery
+  6a8d04c2"), so the phone showed citations without links. Tony: "i
+  think what happened is that i got impatient and ran the website
+  patch before committing the orrery patch." Put right the same day:
+  orrery 5102188c, gallery 1dd25994.
+- **Tony, 2026-10-21:** "even after pushing, the push can take a bit to
+  complete in github. it is not immediate." So a pull straight after a
+  push can still bring the old export.
+- **Proposed in chat, not ruled:** the Daily Run compares the orrery
+  version its pull brought with the newest commit in Tony's orrery
+  folder, and stops with a plain message when they differ: work not
+  pushed, or a push GitHub has not finished serving. Until it is
+  built, the check by eye: the Pointer join line's "against orrery"
+  code matches the start of the code GitHub Desktop shows for the
+  orrery push.
+**Gap:** the build (gallery `daily_run.py`, the pull step), with its
+rule in gallery-cache-builder; whether a difference stops the run or
+waits and tries again.
+**Ref:** gallery `daily_run.py`, `gallery_maintenance_run.py` (the
+pulls); gallery-cache-builder; L-446 (the Daily Run pulls before it
+builds); L-456.
+
 #### [L-460] Every room's drawer orders its shells by where each begins (gallery, exhibits; method for interactive-exhibit 1.19)
 <!-- L:460 status:OPEN upd:2026-10-21 section:A flag: rice: -->
 - **Tony's ruling, 2026-10-20,** at his phone look at the i panel (run
@@ -1374,7 +1506,7 @@ record.
 L-446 (the Daily Run's order); L-416 (a dashboard button per step).
 
 #### [L-458] A "report a problem" link in every room's i panel (gallery, interactive)
-<!-- L:458 status:OPEN upd:2026-10-20 section:A flag: rice: -->
+<!-- L:458 status:OPEN upd:2026-10-21 section:A flag: rice: -->
 - **Tony's idea, 2026-10-20**, in a design chat on verification: the
   live source links in the i panel let a visitor check a claim, and "if
   they see something off, they could report it. You know, that could be
@@ -1404,7 +1536,18 @@ L-446 (the Daily Run's order); L-416 (a dashboard button per step).
 - **Tony-action (do), at the build:** in the guest book form's editor,
   "Get pre-filled link" once, so the link knows the hidden name of the
   message box. Steps given then.
-**Gap:** the build: the link in the shared i-panel chrome, so every
+- **2026-10-21, talks part 2, talk D:** the words approved (Tony,
+  "Approved"), as listed in `documentation/DESIGN_talks2_rulings_20261021.md`
+  talk D; plus an "About this gallery" line under the link opening the
+  front page's About card, shared not copied (Tony, "please add the
+  same info button that is in the front page that has my name and
+  email", then "A"); plus "Page: <address>" as the message's last
+  line (Tony, "Yes").
+**Gap (2026-10-21):** the build: the link in the shared i-panel
+chrome, so every room has it at once (interactive-exhibit); the guest
+book updater telling a report from a greeting. The words list is no
+longer a gap.
+**Gap (superseded above):** the build: the link in the shared i-panel chrome, so every
 room has it at once (interactive-exhibit); the guest book updater
 telling a report from a greeting; the message's words as a list for
 Tony first.
@@ -1605,6 +1748,18 @@ from his phone, with a screenshot of the corona's i panel: "As you can
     affected). And the Earth room's fallback-pole citation, written by
     the website, carries project words ("cited here until 2026-09-26"),
     against provenance-discipline's What a Visitor Reads, principle 5.
+- **Pushed 2026-10-21** (orrery 5102188c, gallery 1dd25994), after a
+  first website push (53f17b6) that ran before the orrery's and served
+  the old citations (L-461). Two follow-up patches:
+  `patch_L456_4b_roche_rehome_20261021.py` (orrery; an earlier copy of
+  patch 4 had run, before the Roche limit's re-home) and
+  `patch_L456_6_sun_pole_website_20261021.py` (website; the Sun's pole,
+  missing from the earlier copy of patch 5). The live run: "the served
+  export is the orrery's at 5102188c, byte for byte". Tony's phone
+  look (run record `documentation/WHERE_WE_ARE_10-21-26_1217_run_record.md`): the
+  galactic tide's and plane's links "perfect", the Earth inner core's
+  "correct". Found there and not from the build: L-463 (a pink band)
+  and L-464 (the Sun's own row and its pole).
 **Gap (replaces the one below, 2026-10-21, later):** Tony's three
 papers, read by the next session from `papers/` and written onto their
 rows and the website's words; the two findings above; the
@@ -1655,7 +1810,21 @@ Earth's talk 2 then takes what the Sun decided, or asks them fresh.
   Earth take the same device for the magnetopause and the bow shock?
   The store holds their crossings' scatter about each model, 1.23 and
   0.69 Earth radii.
-**Gap (2026-10-21):** the next design talk, which loads
+- **2026-10-21, talks part 2, talk B:** option 2, after a draft
+  drawing. Tony: "That looks right and yes separate the two rows so
+  they don't clash by default. And please keep option 4 for future
+  consideration." Each model stays sharp, with two faint surfaces at
+  the ends of its own paper's fitted range (Shue 0.5 and 8.5 nPa;
+  Jelinek 0.6 and 11 nPa); each pair on its own row; by kind, so the
+  Sun's Alfven surface takes 10 and 20 solar radii from its existing
+  rows. Option 1 (a scatter band) and option 3 (words only) declined.
+  Record: `documentation/DESIGN_talks2_rulings_20261021.md`, talk B. The design half
+  is done; the item stays open for the build.
+**Gap (replaces the one below, 2026-10-21, later):** four measured
+rows for the two papers' ranges, read at the build; the faint
+surfaces in both instruments; the Sun's slice applies it to the
+Alfven surface and the heliosphere's edges.
+**Gap (2026-10-21, superseded above):** the next design talk, which loads
 interactive-exhibit 1.18, on Earth's list (L-413).
 **Ref:** L-410; L-314 (the solar wind, which moves these edges); L-375
 (the dipole cone); `documentation/DESIGN_fades_rulings_20261017.md`.
@@ -2166,6 +2335,13 @@ reaches) wait for their rooms.
   layer down, to the scientific work, before the figure becomes a row.
   Tony-action (decide), at the next design talk: is this his ruling,
   or a line on provenance-discipline's next version?
+- **Ruled 2026-10-21, talks part 2, talk C:** Tony, "The skill's and
+  ask in your design to amend the skill not just add to the ledger."
+  So it is method, for provenance-discipline 2.33: the paragraph to add
+  to The Access Standard is written out in
+  `documentation/DESIGN_talks2_rulings_20261021.md` talk C; it rides the next
+  build that bumps provenance-discipline (one session, one bump), with
+  the four-step binding rule. The Tony-action above is answered.
 **Gap:** the held sentences first, from Gemini 4's return (review
 above): rows for the core's centre and the convection zone's base
 (Parker's first crossing is done, above); the chromosphere's approved
@@ -2676,7 +2852,15 @@ meanwhile is the field's epoch (L-356), which the hover states.
   move (L-454). Both decide what the Earth room draws, so they need
   interactive-exhibit 1.18; the talk had loaded 1.17 and the Stale
   Skill gate stopped them.
-**Gap (2026-10-21):** talk 2's last two questions (L-375's cone,
+- **2026-10-21, talks part 2:** L-375's website cone and L-454's device
+  ruled; both are builds on this list now. Talks 3 to 6 are unchanged
+  and still wait behind the Sun's slice.
+**Gap (replaces the one below, 2026-10-21, later):** talks 3 to 6,
+which wait behind the Sun's slice (L-412); the builds of L-375's cone
+and L-454's device. Talk 4 (L-314) keeps the solar-wind fetch; its
+aberration is built. L-356's build may come on any evening (Tony,
+2026-10-20).
+**Gap (2026-10-21, superseded above):** talk 2's last two questions (L-375's cone,
 L-454) at the next design talk; then talks 3 to 6, which wait behind
 the Sun's slice (L-412). Talk 4 (L-314) keeps the solar-wind fetch; its
 aberration is built. L-356's build may come on any evening (Tony,
@@ -2855,7 +3039,24 @@ above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
 - **2026-10-20, the website half of L-410 with L-131 and L-456's
   panel pushed** (gallery 4778944f, orrery 23f70886); Tony's look at
   the panel found the Sun's drawer out of order (L-460).
-**Gap (replaces the one below, 2026-10-21):** L-456's addresses (built
+- **2026-10-21, talks part 2:** L-454's device applies to the Alfven
+  surface, two faint surfaces at ALFVEN_SURFACE_RANGE_LOW and _HIGH (10
+  and 20 solar radii), no new talk; check on the phone whether the
+  faint 20 reads apart from the drawn 19.7.
+- **2026-10-21, L-456's addresses pushed** (orrery 5102188c, gallery
+  1dd25994): every Sun and Earth source linked. Tony's phone look the
+  same afternoon found a pink band across the Sun room (L-463), and the
+  Sun's own row without a link and the pole's citation unseen (L-464);
+  neither from the build.
+**Gap (replaces the one below, 2026-10-21, later; the order proposed,
+for Tony's word):** the Sun room's phone findings, fixed the same day
+and waiting on his phone (L-463, L-464); then the drawer order
+by where each shell begins (L-460) and the Sun's fourteen hover and
+tooltip pairs (L-191); L-454's two faint surfaces on the Alfven
+surface; the tide and the clumps as stored drawings with the tide's
+phone look (L-434); the streamer belt's and the clumps' eyeballed
+numbers; L-241; then L-443, with L-128 after it.
+**Gap (2026-10-21, superseded above):** L-456's addresses (built
 2026-10-21, later; every Sun and Earth source linked); then the
 drawer order by where each shell begins
 (L-460) and the Sun's fourteen hover and tooltip pairs (L-191); the
@@ -3562,7 +3763,16 @@ overlays retire.)
   the hover's words go to Tony side by side. Koochak and Fraser-Smith
   (2017) could not be reached; to Tony's reading list for his machine,
   not needed for the ruling.
-**Gap (2026-10-21):** the offset's row and sentence, with L-356's
+- **2026-10-21, talks part 2, talk A:** Tony, "draw Earth's dipole
+  cone, as a new drawer row starting unticked". The website has no
+  dipole feature today; the cone is a new served feature with its own
+  row, shell key and served words, its tilt pointing at
+  EARTH_DIPOLE_TILT_DEG. Build notes in
+  `documentation/DESIGN_talks2_rulings_20261021.md` talk A.
+**Gap (replaces the one below, 2026-10-21, later):** read the offset's
+source (unchanged); the offset's row and sentence, with L-356's
+build; build the website's cone, on Earth's list (L-413).
+**Gap (2026-10-21, superseded above):** the offset's row and sentence, with L-356's
 build; whether the website draws the dipole cone, at the next design
 talk (it needs interactive-exhibit 1.18 loaded).
 **Gap (2026-10-04, superseded above):** Read the source; then decide how, or whether, to show an offset that depends on a rotation phase the orrery does not model; and whether the website draws the cone.
@@ -10065,7 +10275,7 @@ patch, shared chrome.
 index.html (the Featured rule), `tools/sweep_report.py`.
 
 #### [L-314] Live solar wind conditions for the magnetosphere shells (SWPC through the nightly builder)
-<!-- L:314 status:OPEN upd:2026-10-17 section:A flag: rice:3/3/60/4 -->
+<!-- L:314 status:OPEN upd:2026-10-21 section:A flag: rice:3/3/60/4 -->
 - **Where this came from.** L-305's 2026-09-10 design round fixed the
   magnetosphere shells at DECLARED conditions -- p = 2 nPa, Bz = 0 nT,
   v_sw = 400 km/s -- because that is what the store can source today.
@@ -10178,6 +10388,9 @@ built.
   is in aberrated GSE (sec. 3)". Add "sec. 3" to that clause when the
   row is next opened (provenance-discipline 2.30, What a Visitor Reads:
   a citation names what was read and where).
+- **2026-10-21:** kept for future consideration as the moving version
+  of the device for edges that move (L-454 option 4; Tony, "please
+  keep option 4 for future consideration"). Not declined; not moved up.
 **Gap:** the whole item, now that L-305 has closed (2026-10-04); the
 aberration is applied when the fetch is designed (ruled 2026-10-16);
 the Jelinek frame locator above rides the same opening.

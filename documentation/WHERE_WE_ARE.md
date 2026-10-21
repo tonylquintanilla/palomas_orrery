@@ -1,21 +1,19 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 21, 2026, later: the Sun's and Earth's sources carry links; three papers for you to open.
-- Written at orrery 6a8d04c and gallery 30db99f.
+Last updated: October 21, 2026, afternoon: the links are live; the Sun room's phone problems fixed, to check.
+- Written at orrery 5102188 and gallery 1dd2599.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The Sun's and Earth's sources: 36 of the 39 works re-opened and
->   linked; in the i panel, the Sun 40 of 40, Earth 73 of 73
->   (L-456 (what a visitor reads)).
-> - The links go live after the orrery push; the Roche limit cites an open paper.
-> - The design talks of Oct 20 are on the ledger (this morning).
+> - Every Sun and Earth source is linked and live (L-456 (what a visitor reads)).
+> - Your phone's three Sun-room problems: cause found, fixes built
+>   (L-463 (pink band), L-464 (the Sun's own row and pole)).
+> - Talks part 2: Earth's dipole cone and a moving-edge device ruled.
 >
-> **Do next:** *orrery: patch 4b, the maintenance run, commit AND push;
-> then the website: patch 6, the Daily Run, push; then your phone
-> (`HANDOFF_L456_addresses_build_20261021.md`, section 1).*
+> **Do next:** *website: patch_L463_1, its run, push, then your phone;
+> orrery: this close patch, the maintenance run, commit, push.*
 >
 > **Needs you now:**
 > - Three papers into `papers/` when convenient, none missing a link
@@ -27,16 +25,17 @@ Last updated: October 21, 2026, later: the Sun's and Earth's sources carry links
 
   1-4. [done]  The Sun, Earth and Solar System rooms are live; the orrery
                feeds the website and nothing is typed twice.
-  5.   [next]  Earth's list (L-413): talk 2 partly held (Oct 20); its
-               last two questions, then talks 3 to 6, wait behind the
-               Sun's slice. << moved this session
+  5.   [next]  Earth's list (L-413): talk 2 settled (Oct 20-21), the
+               dipole cone and the moving-edge device to build; talks
+               3 to 6 wait behind the Sun's slice. << moved this session
   5b.  [NOW]   The scaffolding checks clear beside the slices: the
                dashboard (L-440) done; L-424, L-425, L-426 to come.
   6-6a.[done]  The typed facts, served and checked (Oct 16);
                orbital periods from JPL, orrery and website (Oct 14).
   7.   [NOW]   *The Sun's slice (L-412): numbers, views, fades, source
-               list, addresses (Oct 18-21); now the
-               drawer order (L-460), the 14 hover and tooltip pairs
+               list, addresses (Oct 18-21); the phone's three
+               problems fixed (L-463, L-464); now the drawer order
+               (L-460), the 14 hover and tooltip pairs
                (L-191), the tide and clumps stored (L-434); the ice
                lines wait.* << moved this session
   8-8c.[done]  The served objects checked against JPL, missing periods
@@ -85,24 +84,25 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 - Chromosphere under about 7,000 K, from Carlsson (2007); the corona's
   colour kept; the streamer band not stored; IGRF-14 for 2025; a
   shell's drawer place is where it begins. (Oct 20)
+- Earth's dipole cone drawn, unticked. Moving edges: sharp model plus
+  two faint surfaces at its fitted range, own row; live solar wind later.
+  Agency pages read one layer down (skill). Report words approved. (Oct 21)
 
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261021T134110Z, ok, every rename on the first try (gallery 30db99f).
-- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md at 6a8d04c).
+- Last cache build: 20261021T181821Z, ok; the swap took 3 tries, absorbed (gallery 1dd2599).
+- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md at 5102188).
   Whole tree: 280: orrery 116, Earth System 149, stars 13, utilities 2.
 - This page's date and the ledger's newest stamp: both Oct 21. Agree.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
 At the next design talk:
-- Whether the website draws Earth's dipole cone: L-375 (the dipole's
-  offset).
-- The device for edges that move: L-454 (edges that move).
-- Mine or the skill's? An agency page that names no source is read one
-  layer down, to the scientific work, before its figure becomes a row
-  (L-411 (the Sun's typed numbers)).
+- A short form of the maintenance run for small patches (L-462 (a
+  shorter run)).
+- The Daily Run checking the orrery it pulled is the one you pushed
+  (L-461 (pull matches push)).
 
 Not urgent, in your order:
 1. Whether the editor also edits the Solar System room's rows.
@@ -113,7 +113,7 @@ Not urgent, in your order:
 - Every item: `LEDGER_CONSOLIDATED.md`.
 - *Next: start from `HANDOFF_L456_addresses_build_20261021.md`, sec. 6*
 - The addresses: `REVIEW_L456_gemini4_*`; your papers `READING_L456_tony_*`
-- Oct 20's talks: `DESIGN_talks_rulings_20261020.md`, `HANDOFF_design_talks_*`
+- Talks: `DESIGN_talks_rulings_20261020.md`, `DESIGN_talks2_rulings_20261021.md`
 - Addresses: `prompts/RELAY_L456_*`; answers `worksheets/*gemini4_medium_*456*`
 - The Sun's fades: `SOURCES_L410_sun_corona_dust_20261019.md`; their
   words, marked: `WORDS_L410_*` (three lists)

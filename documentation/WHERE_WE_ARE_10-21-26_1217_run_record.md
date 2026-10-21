@@ -1524,22 +1524,293 @@ CHECKERS -- the verdict informs the push call
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 
-  3. Commit and push; wait a few minutes; then the live run. Expect
+  3. Commit and push; -- b334077cd17cd57dff029fd2e3e6bbea445be4aa
+  4. wait a few minutes; then the live run. Expect
      gallery/far_lines.js among the served files.
 
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
 
-     
+LIVE -- what the deployed site actually serves
+
+  fetching 22 files from https://palomasorrery.com/
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches (the working copy is CRLF)
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+    SERVED   gallery/arrival.js                             matches the working copy
+    SERVED   gallery/nav_cluster.js                         matches the working copy
+    SERVED   gallery/solar_system_figures.js                matches the working copy
+    SERVED   gallery/solar_system_drawer.js                 matches the working copy
+    SERVED   data/objects_config.json                       matches the working copy
+    SERVED   gallery/guestbook.js                           matches the working copy
+    SERVED   data/guestbook.json                            matches the working copy
+    SERVED   data/solar-system/drawings/hills_cloud.json    matches the working copy
+    SERVED   data/solar-system/drawings/van_allen_belts.json matches the working copy
+    SERVED   data/solar-system/drawings/earth_exosphere.json matches the working copy
+    SERVED   data/solar-system/drawings/sun_corona.json     matches the working copy
+    SERVED   data/solar-system/drawings/zodiacal_dust.json  matches the working copy
+    SERVED   gallery/source_list.js                         matches the working copy
+    SERVED   gallery/far_lines.js                           matches the working copy
+
+  PASS Served reachability       3.0s  all 22 files served and
+                                    byte-identical to the working copy
+
+  orrery export pinned at 5102188c
+
+  PASS Export freshness          0.2s  the served export is the orrery's
+                                    at 5102188c, byte for byte
+
+  orrery HEAD b3c3e2a5
+  examining 4 of 168 links; the other 164 are served from the export
+    NOT IN STORE  planet_poles['Sun']              not a top-level constant in the store
+                  /objects/0/features/orientation
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  4 pointers: 1 match, 0 DRIFT, 0 UNIT MISMATCH, 3 could not be examined.
+
+  PASS Store drift               1.6s  4 pointers against orrery b3c3e2a5
+                                    -- 1 match, 0 DRIFT, 0 UNIT
+                                    MISMATCH, 3 could not be examined.
+
+======================================================================
+  2 of 2 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Store drift            4 pointers against orrery b3c3e2a5 -- 1
+  last swap 2026-10-21T18:18:23.201956+00:00: succeeded after a refused rename -- staging_to_live took 3 attempts -- a refusal this build absorbed
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
   4. Your phone, Sun room: tick Galactic Plane, Go To on the Corona:
      no pink band. Then tap the Sun's own row: NASA's link and the
-     pole's source (NASA NAIF).
+     pole's source (NASA NAIF). -- correct. thanks. 
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
 
-2. **Your phone:** tick Galactic Plane, then Go To on the Corona. There should be no band. Then tap the Sun's own row: you should see the NASA link and the pole's source.
-3. **Orrery folder:** run `patch_L456_7_close_20261021.py`, then the maintenance run, commit and push. I updated it before you ran it, so it now records your test, the cause and the fixes.
+1. **Orrery folder:** run `patch_L456_7_close_20261021.py`, 
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L456_7_close_20261021.py
+ok  LEDGER_CONSOLIDATED.md                             12 edit(s)
+ok  documentation/WHERE_WE_ARE.md                      8 edit(s)
+ok  documentation/HANDOFF_L456_addresses_build_20261021.md 2 edit(s)
+patch applied (3 file(s) written, 0 removed)
+
+NEXT:
+  1. Move this script into documentation/ now, before the
+     maintenance run, which would otherwise list it as a module.
+  2. Run the orrery maintenance run (dashboard). Expect 31 of 31
+     gating and the gate line 0 TIER-1; it rewrites the ledger's
+     index (L-461 to L-464 new).
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261021T181156Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 2.5s  rewrote LEDGER_CONSOLIDATED.md
+  Skill manifest               0.3s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             2.2s  unchanged (1 checked, not written)
+  Period fetch                 0.3s  unchanged (1 checked, not written) --
+                                     NOTHING MISSING -- 13 served objects
+                                     examined, no query asked
+  Horizons check               0.5s  unchanged (2 checked, not written) --
+                                     NOTHING DUE -- 13 entries and 26 sheets
+                                     current, no query asked
+  Objects export               0.4s  unchanged (1 checked, not written)
+  Drawings export              2.3s  unchanged (5 checked, not written)
+  Module atlas                 7.7s  unchanged (2 of 2 rewritten, content
+                                     identical)
+  Data inventory               5.6s  rewrote DATA_INVENTORY.md
+  Exact rows report            3.7s  rewrote EXACT_ROWS_PRINTED.md -- 11 of 42
+                                     exact rows printed at 42 lines (26 orrery,
+                                     16 gallery); 12 drawn only, 0 not followed,
+                                     0 map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.2s  No changes to constants_new.py since HEAD.
+  Constants relations          0.3s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              1.9s  No figure count exceeds its inputs: 36
+                                     derived row(s) read, 29 judged OK -- 29 OK,
+                                     7 NOT YET MIGRATED; 22 conversion(s)
+                                     checked.
+  Constants export check       3.6s  Export matches the store: sha256
+                                     6771b8a9e5a1 on both sides; 198 rows
+                                     re-read, 56 not exported, 43 tokens; 470
+                                     conversions re-computed, 10 of 10 worked
+                                     cases hold; 198 citations worked out again,
+                                     8 of 8 worked cases hold.
+  Objects export check         0.4s  pass
+  Horizons confirmations       0.6s  pass -- 13 of 13 entries and 11 periods
+                                     confirmed, 26 sheets read, within 30 days
+  Horizons check suite         1.1s  pass -- 64 checks, every planted fault
+                                     caught by name
+  Period fetch suite           3.5s  pass -- 36 checks, every planted fault
+                                     caught (20 planted, 8 of them for Earth's
+                                     period, L-445)
+  Skill headers                0.2s  12 skills parsed, no consistency problems.
+  Exact rows by the count      3.4s  PASSING -- 11 printed exact rows each state
+                                     a count; 26 orrery lines print through
+                                     exact_text() or row_text(); 16 gallery lines
+                                     are served the count
+  Dimensions                   1.9s  No unit contradicts its arithmetic: 58
+                                     derived row(s) read -- 49 OK, 6 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.1s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.1s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 196 status lines in constants_new.py are
+                                     well formed; 55 rows carry none.
+  Row shape                    0.1s  All 254 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.3s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Scanner row run (L-414)      0.2s  16 of 16 pins hold -- each row reads its own
+                                     comment run, declared rows are named, the
+                                     gate path is read by name.
+  Reset completeness          27.2s  PASS -- all 310 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  2.1s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped; nothing left behind.
+  Earth pole of date           0.4s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Hills cloud sampler (L-421)    0.6s  PASS -- 4 of 4 planted faults caught; the
+                                     real rows pass, the dots' plane tilted 34.1
+                                     deg
+  Drawings export check       23.4s  PASS -- 14 of 14 planted faults caught;
+                                     hills_cloud 3600 dots, plane tilted 30.9
+                                     deg, sha256 a51e93118069; van_allen_belts
+                                     3200 dots, no plane recorded, sha256
+                                     75274e84f840; earth_exosphere 1500 dots, no
+                                     plane recorded, sha256 6112639fb2cd;
+                                     sun_corona 2500 dots, no plane recorded,
+                                     sha256 700a2ca0a457; zodiacal_dust 3000
+                                     dots, no plane recorded, sha256 995f13a056e8
+  Position digits (L-401)      1.8s  PASS -- 14 of 14 planted faults caught by
+                                     name; 23 hovers examined, 181 lines compared
+                                     against their errors; 5 pairs printed the
+                                     same from either end; 496 hovers of every
+                                     listed object from the Sun, Earth and
+                                     Neptune; 3 recorded 2xr answers read by
+                                     column name; 10 period sentences
+  Orbit markers (L-431, L-401)   11.9s  PASS -- 12 of 12 planted faults caught by
+                                     name; 4 ellipses, 1080 drawn points on their
+                                     period's centre; 14 markers, 9 dates, 53
+                                     printed distances against their errors; 6
+                                     elements as given; 3 Keplerian positions
+                                     half a year on; 1 parameters-window date
+                                     pairs; 2 Moon arcs; 2 perturbation checks; 1
+                                     perihelion osculating orbits; 2 frames; 2
+                                     sources read
+  Domain Split                 0.4s  PASS -- 6 of 6 planted faults caught; the
+                                     split reads each module's Domain: tag and
+                                     prints the same on the console, in the audit
+                                     and in the run history.
+  Maintenance report (L-269)    0.1s  PASS -- 4 of 4 planted faults caught by
+                                     name; 4 summaries; 2 risen file(s) named
+  Dashboard parity             0.3s  FAILED (exit 1) -- FAIL -- 1 finding(s);
+                                     10...
+  Worksheet checker            7.0s  72 of 107 routed, 8 clean
+  Worksheet checker tests     17.6s  All 135 checks passed
+  Worksheet key round trip     1.1s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         24.4s  All 76 checks passed
+  Extractor pins               0.5s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          73.4s  0 TIER-1 -- the push gate holds; Whole tree,
+                                     Tier-1: 280: orrery 116, Earth System 149,
+                                     stars 13, utilities 2.
+
+======================================================================
+  1 of 33 checkers FAILED -- 235.5s total
+  Dashboard parity
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           72 of 107 routed, 8 clean
+    Provenance scanner          0 TIER-1 -- the push gate holds; Whole tree, Tier-1: 280: orrery 116, Earth System 149, stars 13, utilities 2.
+      No file's Tier-1 count rose since the previous run.
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2385 file(s) examined, 7 written, 0 created, 0 removed, 6 rewritten identically
+    written   DATA_INVENTORY.md
+    written   EXACT_ROWS_PRINTED.md
+    written   LEDGER_CONSOLIDATED.md
+    written   PROVENANCE_AUDIT.md
+    written   data/provenance_history.json
+    written   documentation/WHERE_WE_ARE_10-21-26_1217_run_record.md
+    written   documentation/prompts/citation_review.jsonl
+    rewritten with identical bytes, no action needed:
+      MODULE_ATLAS.md
+      MODULE_INDEX.md
+      PROJECT_INSTRUCTIONS.md
+      WORKSHEET_CHECK.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+----------------------------------------------------------------------
+Dashboard parity -- FAILED (exit 1) -- FAIL -- 1 finding(s); 10...
+----------------------------------------------------------------------
+DASHBOARD PARITY -- run steps against dashboard buttons (L-440)
+  dashboard: C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\palomas_orrery_dashboard.py
+  orrery run: C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\orrery_maintenance_run.py
+  website repo: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io
+
+Planted faults, each must be caught by its own kind of finding:
+  caught a step with no button                -> NO BUTTON
+  caught a renamed button                     -> NO BUTTON
+  caught a button running the wrong script    -> WRONG SCRIPT
+  caught a missing script                     -> NOT FOUND
+  caught a card with no line                  -> NO LINE
+  caught a line over twelve words             -> LINE TOO LONG
+  caught a line for no card                   -> LINE FOR NO CARD
+  caught an indented button naming no step    -> NAMES NO STEP
+  caught an unreadable runner                 -> UNREADABLE
+  caught a search matching the whole phrase only -> SEARCH
+
+Compared 44 orrery steps, 39 website steps and 4 Daily Run steps against 117 buttons in 8 groups; 117 short lines read.
+Covered by a differently named button, on purpose (4):
+  gallery "Config mirror" -> "Config Mirror -- report only": the same tool without --write: the run does the writing, the button only reports (2026-09-17)
+  gallery "Guest book" -> "Guest Book Checks": both guest book checks behind one button (L-281)
+  gallery "Guest book updater" -> "Guest Book Checks": both guest book checks behind one button (L-281)
+  gallery "Objects mirror" -> "Objects Mirror Check": the same tool without --write, which is also the checker step "Objects mirror check"
+Not compared: the website's live checks, which are functions inside the live run (Served reachability, Export freshness, Store drift).
+
+FINDINGS (1):
+  NO BUTTON        gallery step "Far lines" (documentation/smoke_far_lines.js) has no button named so in "Gallery -- checks and data"
+
+DASHBOARD PARITY: FAIL -- 1 finding(s); 10 of 10 planted faults caught
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  3. Commit and push the orrery. Nothing to run on the website.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+1. I updated it before you ran it, so it now records your test, the cause and the fixes.
 
 **Where this leaves us**
 - The pink band's cause is confirmed and fixed. Your phone check will close it.
-- The Sun's own row has its link and the pole's source.
+- The Sun's own row has its link and the pole's source. -- can we show the pole and the sun's rotational direction like the orrery? and note missing far lines button in the dashboard.
 - Next: the drawer order.
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++

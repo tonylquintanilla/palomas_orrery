@@ -23,6 +23,49 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\
   interactive-exhibit 1.18. That last one discharges the obligation
   v3.106 carried: the loaded copy reads 1.18.
 
+## 0. Closed (October 21, 2026, afternoon)
+
+All of section 1 has run. The orrery is pushed at
+5102188c51547113c206d12168971c77795ea5f9 and the website at
+1dd25994e60fa063a44814a14d196ba705547c70; the live run read "the
+served export is the orrery's at 5102188c, byte for byte". Your phone
+look (run record
+`documentation/WHERE_WE_ARE_10-21-26_1217_run_record.md`): the
+galactic tide's and plane's links work, and so does the Earth inner
+core's.
+
+Found on your phone after the push, none of it from this build (the
+served config changed only in citation text between gallery 30db99f
+and 1dd25994):
+
+- **A pink band** across the Sun room in several views (L-463). Your
+  test at 14:03 confirmed the cause: the Galactic Plane's ring and pole
+  line, at 100,000 AU, drawn by the phone when the view is close in.
+- **The Sun's own drawer row had no link** ("No link on file for this
+  shell"), though the Sun has a NASA page on file (L-464).
+- **The Sun's pole citation showed nowhere** a visitor can see, though
+  it is served (L-464).
+
+All three are fixed in the website patch
+`patch_L463_1_sun_room_fixes_20261021.py`, waiting on your run and
+your phone: tick Galactic Plane, Go To on the Corona, no band; tap the
+Sun's own row, NASA's link and the pole's source.
+
+Two process items from this afternoon, each its own ledger item:
+
+- **L-461:** the website's Daily Run ran before the orrery was pushed,
+  so it served the old citations. The Daily Run should compare the
+  orrery it pulled with your orrery folder's newest commit. A push also
+  takes a few minutes to show on GitHub (your note). Until it is built,
+  compare the Pointer join line's "against orrery" code with the code
+  GitHub Desktop shows for the orrery push.
+- **L-462:** a short form of the orrery maintenance run for small
+  patches, naming every check it skipped. For a design talk.
+
+This close patch also carries the ledger lines and Where We Are
+changes from `HANDOFF_talks2_20261021.md` (talks part 2), as that
+handoff asked of this session.
+
 ## 1. Run order (in this order)
 
 What already ran, from Tony's run record of 12:17: patch 3, then an
@@ -153,6 +196,9 @@ remake (section 4).
 ## 6. For the next session
 
 1. Confirm both repositories' HEADs and read Tony's newest run record.
+   Then, proposed for Tony's word: the Sun room's phone findings first,
+   with his phone in hand (L-463, the pink band; L-464, the Sun's own
+   row and its pole), before the drawer order.
 2. If Tony has saved papers from the reading list into `papers/`, read
    each through the device link and write its row's `# Read:` line with
    his name as the one who opened it; addresses for the website's own

@@ -74,7 +74,7 @@ Repo copies stale/absent; this reflects the live local stores.
 
 Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
-**Total size:** 454.0 MB (842 files)
+**Total size:** 454.1 MB (847 files)
 
 **GitHub Pages headroom:** 570 MB remaining of 1024 MB ceiling (44.3% used)
 
@@ -82,13 +82,13 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
 | ext | count | total | biggest | newest |
 |---|---|---|---|---|
-| .json | 460 | 422.5 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-10-21 |
+| .json | 462 | 422.5 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-10-21 |
 | .kmz | 39 | 14.4 MB | western_heatwave_march_21_blockbuster.kmz (904.7 KB) | 2026-06-30 |
-| .py | 253 | 8.3 MB | patch_L330_3_website_belts_words_20261017.py (451.6 KB) | 2026-10-21 |
+| .py | 254 | 8.3 MB | patch_L330_3_website_belts_words_20261017.py (451.6 KB) | 2026-10-21 |
 | .png | 2 | 6.3 MB | palomas_orrery_logo.png (5.1 MB) | 2026-09-24 |
-| .jsonl | 35 | 1.2 MB | encke.jsonl (46.3 KB) | 2026-10-21 |
-| .js | 24 | 575.2 KB | feature_renderers.js (184.7 KB) | 2026-10-20 |
-| .html | 5 | 464.2 KB | interactive.html (221.8 KB) | 2026-10-20 |
+| .jsonl | 35 | 1.2 MB | encke.jsonl (46.6 KB) | 2026-10-21 |
+| .js | 26 | 592.2 KB | feature_renderers.js (184.7 KB) | 2026-10-21 |
+| .html | 5 | 469.6 KB | interactive.html (227.1 KB) | 2026-10-21 |
 | .jpg | 2 | 137.9 KB | palomas_orrery_wall.jpg (95.2 KB) | 2026-10-04 |
 | .ico | 1 | 137.3 KB | favicon.ico (137.3 KB) | 2025-11-28 |
 | .md | 6 | 74.6 KB | MODULE_ATLAS.md (52.5 KB) | 2026-10-21 |
@@ -129,7 +129,7 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
 | repo | served size | ceiling | headroom | used |
 |---|---|---|---|---|
-| gallery | 454.0 MB | 1024 MB | 570 MB | 44.3% |
+| gallery | 454.1 MB | 1024 MB | 570 MB | 44.3% |
 | orrery (gitignored data) | 968.0 MB | n/a (not served) | -- | -- |
 
 Note: orrery data is local/gitignored. If orbit cache files are pushed to either repo for web serving, re-run this inventory to update headroom.

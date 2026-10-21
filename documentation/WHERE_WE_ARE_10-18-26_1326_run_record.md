@@ -3167,7 +3167,7 @@ One question: which goes first next session, the fourteen pairs or the Sun's add
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-**Session: OPEN: 10-20-26 1705: Opus: Talk session only**
+**Session: DONE: 10-20-26 2321: Opus: Talk session only**
 
 Here are the handoff and the design record. Both go in the orrery's documentation/ folder.
 
