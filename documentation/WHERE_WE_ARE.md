@@ -1,19 +1,18 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 21, 2026, afternoon: the links are live; the Sun room's phone problems fixed, to check.
-- Written at orrery 5102188 and gallery 1dd2599.
+Last updated: October 21, 2026, evening: the Sun room's three phone problems fixed and checked.
+- Written at orrery b3c3e2a and gallery b334077.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
 > - Every Sun and Earth source is linked and live (L-456 (what a visitor reads)).
-> - Your phone's three Sun-room problems: cause found, fixes built
->   (L-463 (pink band), L-464 (the Sun's own row and pole)).
+> - The pink band and the Sun's own row: fixed, checked on your phone.
 > - Talks part 2: Earth's dipole cone and a moving-edge device ruled.
 >
-> **Do next:** *website: patch_L463_1, its run, push, then your phone;
-> orrery: this close patch, the maintenance run, commit, push.*
+> **Do next:** *orrery: patch_L463_2, the maintenance run, commit AND
+> push (the close patch's changes go with it: not in the last push).*
 >
 > **Needs you now:**
 > - Three papers into `papers/` when convenient, none missing a link
@@ -33,8 +32,8 @@ Last updated: October 21, 2026, afternoon: the links are live; the Sun room's ph
   6-6a.[done]  The typed facts, served and checked (Oct 16);
                orbital periods from JPL, orrery and website (Oct 14).
   7.   [NOW]   *The Sun's slice (L-412): numbers, views, fades, source
-               list, addresses (Oct 18-21); the phone's three
-               problems fixed (L-463, L-464); now the drawer order
+               list, addresses, the phone's three problems (Oct
+               18-21); now the drawer order
                (L-460), the 14 hover and tooltip pairs
                (L-191), the tide and clumps stored (L-434); the ice
                lines wait.* << moved this session
@@ -103,6 +102,7 @@ At the next design talk:
   shorter run)).
 - The Daily Run checking the orrery it pulled is the one you pushed
   (L-461 (pull matches push)).
+- The Sun's pole and spin on the website (L-465 (the Sun's axis)).
 
 Not urgent, in your order:
 1. Whether the editor also edits the Solar System room's rows.

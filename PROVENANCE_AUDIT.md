@@ -20,12 +20,12 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T1 by domain | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|--------------|---:|---:|---:|--------:|
+| 20261021T213829Z | `bbc80ab` | 164 | 1175 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 733 | 156 | 6 | 0 |
 | 20261021T211516Z | `b3c3e2a` | 164 | 1175 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 733 | 156 | 6 | 0 |
 | 20261021T181156Z | `6a8d04c` | 164 | 1175 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 733 | 156 | 6 | 0 |
 | 20261021T172506Z | `6a8d04c` | 164 | 1175 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 733 | 156 | 6 | 0 |
 | 20261021T035426Z | `e8e714d` | 164 | 1175 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 733 | 156 | 6 | 0 |
 | 20261020T200934Z | `e8e714d` | 164 | 1175 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 733 | 156 | 6 | 0 |
-| 20261020T191147Z | `fcd191e` | 164 | 1175 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 733 | 156 | 6 | 0 |
 
 Change since the previous run: total +0, Tier-1 +0.
 
@@ -2009,8 +2009,8 @@ is planned for a future session.
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
 | 327 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
 | 328 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 2276 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 2407 | dict | SECTION_SYMBOLS[...] | (8 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
+| 2295 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 2426 | dict | SECTION_SYMBOLS[...] | (8 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
 
 ### planet_visualization_utilities.py
 

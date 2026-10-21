@@ -559,6 +559,10 @@ the Daily Run checks the orrery it pulled; L-462 new, a short form of
 the maintenance run; L-463 and L-464 new, the Sun room's phone
 findings; talks part 2's lines on L-375, L-454, L-314, L-413, L-412,
 L-458 and L-411), built on 5102188c and gallery 1dd25994.
+Module updated: October 21, 2026, evening, with Anthropic's Claude Opus
+5.5 (L-463 and L-464 closed on Tony's phone; L-465 new, the Sun's pole
+and spin drawn on the website; the Far lines dashboard button), built
+on b3c3e2a5 and gallery b334077c.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -776,7 +780,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*241 live items; 225 need attention (`!`); 166 RICE-scored; 216 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*240 live items; 224 need attention (`!`); 166 RICE-scored; 218 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -929,8 +933,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-460 | Every room's drawer orders its shells by where each begins (gallery, exhibits; method for interactive-exhibit 1.19) | OPEN | -- | 2026-10-21 |
 | ! | L-461 | The Daily Run confirms the orrery it pulled is the one Tony pushed (gallery, Daily Run) | OPEN | -- | 2026-10-21 |
 | ! | L-462 | The orrery maintenance run, a short form for small patches (orrery, maintenance) | OPEN | -- | 2026-10-21 |
-| ! | L-463 | A pink band or sheet across the Sun room on Tony's phone (gallery, rendering) | OPEN | -- | 2026-10-21 |
-| ! | L-464 | The Sun room's own row: no info link, and the pole's citation has nowhere to show (gallery, interactive) | OPEN | -- | 2026-10-21 |
+| ! | L-465 | The Sun room draws the Sun's pole and its direction of spin, as the orrery does (gallery, the Sun room) | OPEN | -- | 2026-10-21 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1295,6 +1298,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-452 | The website's notes beside a citation: read them again now that the citation prints above them (gallery, words) | DONE | -- | 2026-10-17 |
 |  | L-453 | The page's grey type turned blue, and the inner shells' radius named (gallery, the rooms' look) | DONE | -- | 2026-10-16 |
 |  | L-455 | Typed numbers in the website's served words, with no row behind them (gallery, words) | DONE | -- | 2026-10-18 |
+|  | L-463 | A pink band or sheet across the Sun room on Tony's phone (gallery, rendering, DONE 2026-10-21) | DONE | -- | 2026-10-21 |
+|  | L-464 | The Sun room's own row: no info link, and the pole's citation has nowhere to show (gallery, interactive, DONE 2026-10-21) | DONE | -- | 2026-10-21 |
 
 ### W.Done -- Web Publication track, closed items
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1324,81 +1329,31 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
-#### [L-464] The Sun room's own row: no info link, and the pole's citation has nowhere to show (gallery, interactive)
-<!-- L:464 status:OPEN upd:2026-10-21 section:A flag: rice: -->
-- **Tony, 2026-10-21,** at his phone look after L-456's addresses were
-  pushed (orrery 5102188c, gallery 1dd25994; run record
-  `documentation/WHERE_WE_ARE_10-21-26_1217_run_record.md`): "also i do not see the sun's
-  pole. and the sun drawerer does not have a link, either nasa or
-  wikipedia."
-- **Read the same day on the served site, not yet traced in code:** the
-  Sun's own drawer row (the centre body, legend group "center") opens
-  an i panel reading "No link on file for this shell.", though the
-  Sun's entry in `data/objects_config.json` carries `info_url`
-  https://science.nasa.gov/sun/. The panel code's own comment says
-  every shell in the Sun and Earth rooms has a link; the centre row is
-  the one it missed.
-- The Sun's pole is served with its re-homed citation (NASA NAIF's
-  pck00011.tpc; gallery `patch_L456_6_sun_pole_website_20261021.py`),
-  but no row or panel was found that shows it to a visitor.
-- Not caused by the address build: between gallery 30db99f and 1dd25994
-  only citation text changed in the served config.
-- **Found and fixed the same day** (gallery
-  `patch_L463_1_sun_room_fixes_20261021.py`): the Sun room never gave
-  the assembler's centre marker any words, while the Solar System room
-  gives the same marker the Sun's description and link. The Sun room
-  now gives it the Sun's description and NASA link from the orrery's
-  object list and, as its source, the pole's citation, which turns the
-  room's drawings but had no row of its own. All three are served
-  words; the Typed facts check passes. In a headless run every one of
-  the Sun room's 19 rows now has a link and a source. Earth's room has
-  no centre row: its pole has its own row, Rotation Axis and Equator,
-  with a link and a source.
-**Gap:** Tony's phone, after the push: the Sun's own row shows NASA's
-link and the pole's source. Then this item closes.
-**Ref:** gallery `interactive.html`, `data/objects_config.json`,
-`gallery/source_list.js`; interactive-exhibit; L-456; L-412.
-
-#### [L-463] A pink band or sheet across the Sun room on Tony's phone (gallery, rendering)
-<!-- L:463 status:OPEN upd:2026-10-21 section:A flag: rice: -->
-- **Tony, 2026-10-21,** the same look: "there are a number of issues,
-  there is a pink band that appears in various views." Three
-  screenshots from his phone, 13:25 to 13:27, sent in chat and not
-  saved: at the 0.1 AU grid, a pale pink sheet across most of the
-  view, edged in purple; at the 50 AU grid with the Heliopause
-  selected, a pink band crossing the view diagonally through the Sun.
-- **Read the same day, not yet reproduced:** a fresh load of the Sun
-  room in a desktop browser drew no band. The room's code draws no
-  filled surfaces (no mesh3d, no surfaceaxis in gallery `gallery/` or
-  `interactive.html`). The band's purple edge is the colour of the
-  Galactic Plane ring, rgb(175, 135, 235), a line of 181 points: a
-  guess, not a finding, that the phone draws that ring filled.
-- Not caused by the address build: only citation text changed in the
-  served config that day.
-- **Cause confirmed, 2026-10-21, 14:03, Tony's test on his phone:** with
-  the Galactic Plane ticked, Go To on the Corona brought the band back
-  (a fifth screenshot, at the 0.02 AU grid). At the 50,000 AU grid the
-  same rows drew cleanly. So the band is the Galactic Plane's ring and
-  pole line, at 100,000 AU, drawn by the phone when the view is close
-  in: hundreds to millions of times past the view's edge.
-- **Fix built the same day:** gallery
-  `patch_L463_1_sun_room_fixes_20261021.py`. The page cuts any line
-  reaching more than 20 times past the view to the view's edge before
-  it is drawn, and again at every frame change (`gallery/far_lines.js`);
-  a desktop sees no change, because gl-plot3d already hid that part.
-  The point count never changes, so per-point hover text stays lined
-  up. Checked: the new gating check "Far lines"
-  (`documentation/smoke_far_lines.js`, its self-test breaking the file
-  three ways first); every other website check passing; a headless
-  walk of the Sun room (the Galactic Plane ticked, then Go To on the
-  Corona: its lines reach 0.102 AU, the view's edge, where before they
-  reached 100,000 AU); and every room's drawer behaving exactly as
-  before (`tools/headless/compare_rooms.js`, the Sun, Earth and Solar
-  System rooms). Not yet seen on the phone.
-**Gap:** Tony's phone, after the push: the Galactic Plane ticked, Go To
-on the Corona, no band. Then this item closes.
-**Ref:** gallery `gallery/feature_renderers.js`, `interactive.html`;
-L-412; L-460.
+#### [L-465] The Sun room draws the Sun's pole and its direction of spin, as the orrery does (gallery, the Sun room)
+<!-- L:465 status:OPEN upd:2026-10-21 section:A flag: rice: -->
+- **Tony, 2026-10-21,** in his run record after the Sun's own row was
+  fixed (`documentation/WHERE_WE_ARE_10-21-26_1217_run_record.md`): "can we show the
+  pole and the sun's rotational direction like the orrery?"
+- **What the orrery draws, read at orrery b3c3e2a5:**
+  `build_rotation_axis_traces` in `planet_visualization_utilities.py`
+  draws a centre body's spin-pole line, a curved arrow for the direction
+  of spin and one info marker, from the same pole matrix that turns the
+  streamer belt. Its hover gives the sidereal rotation period, the
+  direction (prograde) and the tilt; for the Sun those are typed strings
+  in that file ("25.38 d sidereal", "7.25 deg to ecliptic"), sourced in
+  its comments, not rows in `constants_new.py`.
+- **What the website has:** the Sun's pole is served (`orientation`, NASA
+  NAIF's pck00011.tpc) and turns the room's drawings, and since L-464
+  its citation shows on the Sun's own row; nothing draws the axis. The
+  Earth room's axis is its own drawer row, Rotation Axis and Equator,
+  which is the website's existing form for this.
+**Gap:** a design talk: the row and what it draws; the numbers its hover
+prints, which need rows in the store with sources before the website may
+print them (the period and the tilt); the hover's words to Tony before
+they ship. Then the build, in the Sun's slice (L-412).
+**Ref:** orrery `planet_visualization_utilities.py`; gallery
+`gallery/earth_geometry.js` (Earth's axis row), `interactive.html`;
+L-464; L-412.
 
 #### [L-462] The orrery maintenance run, a short form for small patches (orrery, maintenance)
 <!-- L:462 status:OPEN upd:2026-10-21 section:A flag: rice: -->
@@ -3049,8 +3004,7 @@ above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
   Sun's own row without a link and the pole's citation unseen (L-464);
   neither from the build.
 **Gap (replaces the one below, 2026-10-21, later; the order proposed,
-for Tony's word):** the Sun room's phone findings, fixed the same day
-and waiting on his phone (L-463, L-464); then the drawer order
+for Tony's word):** the drawer order
 by where each shell begins (L-460) and the Sun's fourteen hover and
 tooltip pairs (L-191); L-454's two faint surfaces on the Alfven
 surface; the tide and the clumps as stored drawings with the tide's
@@ -11610,6 +11564,97 @@ skills/gallery-assembler/SKILL.md, skills/interactive-exhibit/SKILL.md.
 ## PENDING ACTION (Tony-side)
 
 ## C. RECONCILED LEDGER -- DONE (closed; for the record, do not re-do)
+
+#### [L-464] The Sun room's own row: no info link, and the pole's citation has nowhere to show (gallery, interactive, DONE 2026-10-21)
+<!-- L:464 status:DONE upd:2026-10-21 section:C flag: rice: -->
+- **Tony, 2026-10-21,** at his phone look after L-456's addresses were
+  pushed (orrery 5102188c, gallery 1dd25994; run record
+  `documentation/WHERE_WE_ARE_10-21-26_1217_run_record.md`): "also i do not see the sun's
+  pole. and the sun drawerer does not have a link, either nasa or
+  wikipedia."
+- **Read the same day on the served site, not yet traced in code:** the
+  Sun's own drawer row (the centre body, legend group "center") opens
+  an i panel reading "No link on file for this shell.", though the
+  Sun's entry in `data/objects_config.json` carries `info_url`
+  https://science.nasa.gov/sun/. The panel code's own comment says
+  every shell in the Sun and Earth rooms has a link; the centre row is
+  the one it missed.
+- The Sun's pole is served with its re-homed citation (NASA NAIF's
+  pck00011.tpc; gallery `patch_L456_6_sun_pole_website_20261021.py`),
+  but no row or panel was found that shows it to a visitor.
+- Not caused by the address build: between gallery 30db99f and 1dd25994
+  only citation text changed in the served config.
+- **Found and fixed the same day** (gallery
+  `patch_L463_1_sun_room_fixes_20261021.py`): the Sun room never gave
+  the assembler's centre marker any words, while the Solar System room
+  gives the same marker the Sun's description and link. The Sun room
+  now gives it the Sun's description and NASA link from the orrery's
+  object list and, as its source, the pole's citation, which turns the
+  room's drawings but had no row of its own. All three are served
+  words; the Typed facts check passes. In a headless run every one of
+  the Sun room's 19 rows now has a link and a source. Earth's room has
+  no centre row: its pole has its own row, Rotation Axis and Equator,
+  with a link and a source.
+- **Closed 2026-10-21** on Tony's phone, after gallery b334077c was
+  pushed and its live run passed: the Sun's own row shows NASA's link
+  and the pole's source, NASA NAIF (run record
+  `documentation/WHERE_WE_ARE_10-21-26_1217_run_record.md`: "correct. thanks."). His
+  next question, the pole and the spin drawn as the orrery draws them,
+  is L-465.
+**Gap:** none.
+**Ref:** gallery `interactive.html`, `data/objects_config.json`,
+`gallery/source_list.js`; interactive-exhibit; L-456; L-412.
+
+#### [L-463] A pink band or sheet across the Sun room on Tony's phone (gallery, rendering, DONE 2026-10-21)
+<!-- L:463 status:DONE upd:2026-10-21 section:C flag: rice: -->
+- **Tony, 2026-10-21,** the same look: "there are a number of issues,
+  there is a pink band that appears in various views." Three
+  screenshots from his phone, 13:25 to 13:27, sent in chat and not
+  saved: at the 0.1 AU grid, a pale pink sheet across most of the
+  view, edged in purple; at the 50 AU grid with the Heliopause
+  selected, a pink band crossing the view diagonally through the Sun.
+- **Read the same day, not yet reproduced:** a fresh load of the Sun
+  room in a desktop browser drew no band. The room's code draws no
+  filled surfaces (no mesh3d, no surfaceaxis in gallery `gallery/` or
+  `interactive.html`). The band's purple edge is the colour of the
+  Galactic Plane ring, rgb(175, 135, 235), a line of 181 points: a
+  guess, not a finding, that the phone draws that ring filled.
+- Not caused by the address build: only citation text changed in the
+  served config that day.
+- **Cause confirmed, 2026-10-21, 14:03, Tony's test on his phone:** with
+  the Galactic Plane ticked, Go To on the Corona brought the band back
+  (a fifth screenshot, at the 0.02 AU grid). At the 50,000 AU grid the
+  same rows drew cleanly. So the band is the Galactic Plane's ring and
+  pole line, at 100,000 AU, drawn by the phone when the view is close
+  in: hundreds to millions of times past the view's edge.
+- **Fix built the same day:** gallery
+  `patch_L463_1_sun_room_fixes_20261021.py`. The page cuts any line
+  reaching more than 20 times past the view to the view's edge before
+  it is drawn, and again at every frame change (`gallery/far_lines.js`);
+  a desktop sees no change, because gl-plot3d already hid that part.
+  The point count never changes, so per-point hover text stays lined
+  up. Checked: the new gating check "Far lines"
+  (`documentation/smoke_far_lines.js`, its self-test breaking the file
+  three ways first); every other website check passing; a headless
+  walk of the Sun room (the Galactic Plane ticked, then Go To on the
+  Corona: its lines reach 0.102 AU, the view's edge, where before they
+  reached 100,000 AU); and every room's drawer behaving exactly as
+  before (`tools/headless/compare_rooms.js`, the Sun, Earth and Solar
+  System rooms). Not yet seen on the phone.
+- **Closed 2026-10-21** on Tony's phone, after gallery b334077c was
+  pushed: the Galactic Plane ticked, Go To on the Corona, no band (run
+  record `documentation/WHERE_WE_ARE_10-21-26_1217_run_record.md`: "correct.
+  thanks."). The live run served `gallery/far_lines.js` matching the
+  working copy.
+- **Missed in the build, caught by its check:** the website patch added
+  the "Far lines" step to the gallery run without its dashboard
+  button. The orrery run's Dashboard parity check failed on it, by name
+  ("gallery step \"Far lines\" ... has no button"), and Tony noted it;
+  `patch_L463_2_far_lines_button_20261021.py` adds the button. The
+  rule is L-416's: every run step has a button.
+**Gap:** none.
+**Ref:** gallery `gallery/feature_renderers.js`, `interactive.html`;
+L-412; L-460.
 
 #### [L-345] Unit-conversion rows multiply by shell: rows per shell, or the export converts? (store, DONE 2026-09-28)
 <!-- L:345 status:DONE upd:2026-09-28 section:C flag: rice: -->

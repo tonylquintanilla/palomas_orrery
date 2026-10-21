@@ -906,6 +906,22 @@ LAUNCH_GROUPS = {
         True,
         ["Earth scene geometry"],
         True),
+        ("Far Lines",
+        os.path.join("documentation", "run_offline_check.py"),
+        "A drawn line that reaches far past the view is cut to the view's "
+        "edge before a phone draws it (L-463). The Galactic Plane's ring "
+        "and pole line, at 100,000 AU, drew as a wide pink band on Tony's "
+        "phone whenever the Sun room was zoomed in close. It works six "
+        "cases by hand, builds the Sun room from the served config and "
+        "names the lines it looks after, and checks every drawn point "
+        "lies inside the box. It breaks its own file three ways first, to "
+        "show it can fail. GATES the gallery runner. The check is Node, so "
+        "this button runs it through documentation/run_offline_check.py. "
+        "Runs from the gallery repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        ["Far lines"],
+        True),
         ("Feature Renderers",
         os.path.join("documentation", "run_offline_check.py"),
         "Smoke test for gallery/feature_renderers.js, the code that "
@@ -1943,6 +1959,9 @@ CARD_LINES = {
     ("Gallery -- checks and data",
      "Earth Scene Geometry"):
         "Checks the Earth room's tilt, rings, terminator and Moon on recorded data.",
+    ("Gallery -- checks and data",
+     "Far Lines"):
+        "Checks lines far past the view are cut to its edge.",
     ("Gallery -- checks and data",
      "Feature Renderers"):
         "Checks the code that draws every shell, ring, belt and magnetosphere.",

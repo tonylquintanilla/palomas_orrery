@@ -1803,7 +1803,7 @@ DASHBOARD PARITY: FAIL -- 1 finding(s); 10 of 10 planted faults caught
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-  3. Commit and push the orrery. Nothing to run on the website.
+  3. Commit and push the orrery. Nothing to run on the website. -- bbc80abbf4336c171c756901742227caf9d9f798
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
 1. I updated it before you ran it, so it now records your test, the cause and the fixes.
@@ -1812,6 +1812,203 @@ PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 - The pink band's cause is confirmed and fixed. Your phone check will close it.
 - The Sun's own row has its link and the pole's source. -- can we show the pole and the sun's rotational direction like the orrery? and note missing far lines button in the dashboard.
 - Next: the drawer order.
+
+===================================================
+
+It was a good run: your phone shows no pink band, and the Sun's own row has its NASA link and the pole's source. I've closed both items on the ledger.
+
+**One thing to know about the orrery push.** Your last orrery commit (b3c3e2a) went in before the close patch ran. It holds only your run record and the patch file itself. The close patch's ledger and Where We Are changes are in your folder but not yet pushed. They'll go up with the next commit.
+
+**Your two notes:**
+- **The missing dashboard button.** That was my miss: I added the "Far lines" check to the website without its button on the dashboard. The dashboard parity check caught it, which is what that check is for. The new patch adds the button, and I ran the parity check on a copy with the button in place, and it passes.
+- **The Sun's pole and its spin, as the orrery draws them.** Yes, the website can do it, and it's now a new ledger item, L-465. The orrery draws a pole line, a curved arrow for the direction of spin, and a hover with the rotation period and tilt. The pole is already on the website, but the period (25.38 days) and the tilt (7.25 degrees) are typed straight into the orrery's drawing code rather than kept as sourced values. They have to become sourced values in the orrery before the website can show them. So it needs a short design talk, and I've put it on your list for the next one.
+
+**To run** `patch_L463_2_far_lines_button_20261021.py` (in your orrery folder):
+1. Run it, then move it into `documentation/`.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L463_2_far_lines_button_20261021.py
+ok  palomas_orrery_dashboard.py                        2 edit(s)
+ok  LEDGER_CONSOLIDATED.md                             4 edit(s)
+ok  documentation/WHERE_WE_ARE.md                      5 edit(s)
+ok  documentation/HANDOFF_L456_addresses_build_20261021.md 1 edit(s)
+patch applied (4 file(s) written, 0 removed)
+
+NEXT:
+  1. Move this script into documentation/ now, before the
+     maintenance run, which would otherwise list it as a module. 
+  2. Run the orrery maintenance run (dashboard). Expect every
+     checker to pass, Dashboard parity included, and the gate line
+     0 TIER-1; it rewrites the ledger's index (L-465 new).
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261021T211516Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 2.4s  rewrote LEDGER_CONSOLIDATED.md
+  Skill manifest               0.3s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             1.7s  unchanged (1 checked, not written)
+  Period fetch                 0.3s  unchanged (1 checked, not written) --
+                                     NOTHING MISSING -- 13 served objects
+                                     examined, no query asked
+  Horizons check               0.4s  unchanged (2 checked, not written) --
+                                     NOTHING DUE -- 13 entries and 26 sheets
+                                     current, no query asked
+  Objects export               0.3s  unchanged (1 checked, not written)
+  Drawings export              1.8s  unchanged (5 checked, not written)
+  Module atlas                 7.1s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               4.1s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Exact rows report            3.0s  unchanged (1 checked, not written) -- 11 of
+                                     42 exact rows printed at 42 lines (26
+                                     orrery, 16 gallery); 12 drawn only, 0 not
+                                     followed, 0 map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.2s  No changes to constants_new.py since HEAD.
+  Constants relations          0.2s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              1.4s  No figure count exceeds its inputs: 36
+                                     derived row(s) read, 29 judged OK -- 29 OK,
+                                     7 NOT YET MIGRATED; 22 conversion(s)
+                                     checked.
+  Constants export check       2.5s  Export matches the store: sha256
+                                     6771b8a9e5a1 on both sides; 198 rows
+                                     re-read, 56 not exported, 43 tokens; 470
+                                     conversions re-computed, 10 of 10 worked
+                                     cases hold; 198 citations worked out again,
+                                     8 of 8 worked cases hold.
+  Objects export check         0.2s  pass
+  Horizons confirmations       0.3s  pass -- 13 of 13 entries and 11 periods
+                                     confirmed, 26 sheets read, within 30 days
+  Horizons check suite         0.5s  pass -- 64 checks, every planted fault
+                                     caught by name
+  Period fetch suite           2.6s  pass -- 36 checks, every planted fault
+                                     caught (20 planted, 8 of them for Earth's
+                                     period, L-445)
+  Skill headers                0.2s  12 skills parsed, no consistency problems.
+  Exact rows by the count      2.8s  PASSING -- 11 printed exact rows each state
+                                     a count; 26 orrery lines print through
+                                     exact_text() or row_text(); 16 gallery lines
+                                     are served the count
+  Dimensions                   1.7s  No unit contradicts its arithmetic: 58
+                                     derived row(s) read -- 49 OK, 6 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.1s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.1s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 196 status lines in constants_new.py are
+                                     well formed; 55 rows carry none.
+  Row shape                    0.1s  All 254 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.2s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Scanner row run (L-414)      0.2s  16 of 16 pins hold -- each row reads its own
+                                     comment run, declared rows are named, the
+                                     gate path is read by name.
+  Reset completeness          20.7s  PASS -- all 310 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  2.5s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped; nothing left behind.
+  Earth pole of date           0.4s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Hills cloud sampler (L-421)    0.5s  PASS -- 4 of 4 planted faults caught; the
+                                     real rows pass, the dots' plane tilted 34.1
+                                     deg
+  Drawings export check       24.8s  PASS -- 14 of 14 planted faults caught;
+                                     hills_cloud 3600 dots, plane tilted 30.9
+                                     deg, sha256 a51e93118069; van_allen_belts
+                                     3200 dots, no plane recorded, sha256
+                                     75274e84f840; earth_exosphere 1500 dots, no
+                                     plane recorded, sha256 6112639fb2cd;
+                                     sun_corona 2500 dots, no plane recorded,
+                                     sha256 700a2ca0a457; zodiacal_dust 3000
+                                     dots, no plane recorded, sha256 995f13a056e8
+  Position digits (L-401)      2.4s  PASS -- 14 of 14 planted faults caught by
+                                     name; 23 hovers examined, 181 lines compared
+                                     against their errors; 5 pairs printed the
+                                     same from either end; 496 hovers of every
+                                     listed object from the Sun, Earth and
+                                     Neptune; 3 recorded 2xr answers read by
+                                     column name; 10 period sentences
+  Orbit markers (L-431, L-401)   11.4s  PASS -- 12 of 12 planted faults caught by
+                                     name; 4 ellipses, 1080 drawn points on their
+                                     period's centre; 14 markers, 9 dates, 53
+                                     printed distances against their errors; 6
+                                     elements as given; 3 Keplerian positions
+                                     half a year on; 1 parameters-window date
+                                     pairs; 2 Moon arcs; 2 perturbation checks; 1
+                                     perihelion osculating orbits; 2 frames; 2
+                                     sources read
+  Domain Split                 0.5s  PASS -- 6 of 6 planted faults caught; the
+                                     split reads each module's Domain: tag and
+                                     prints the same on the console, in the audit
+                                     and in the run history.
+  Maintenance report (L-269)    0.1s  PASS -- 4 of 4 planted faults caught by
+                                     name; 4 summaries; 2 risen file(s) named
+  Dashboard parity             0.3s  PASS -- 10 of 10 planted faults caught; 87
+                                     steps matched to their buttons by name and
+                                     script; 118 cards carry a short line; the
+                                     search finds 4 of 4 cases in any word order
+  Worksheet checker            9.1s  72 of 107 routed, 8 clean
+  Worksheet checker tests     17.0s  All 135 checks passed
+  Worksheet key round trip     1.3s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         24.8s  All 76 checks passed
+  Extractor pins               0.5s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          69.0s  0 TIER-1 -- the push gate holds; Whole tree,
+                                     Tier-1: 280: orrery 116, Earth System 149,
+                                     stars 13, utilities 2.
+
+======================================================================
+  31 of 31 gating checkers passed -- 220.1s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           72 of 107 routed, 8 clean
+    Provenance scanner          0 TIER-1 -- the push gate holds; Whole tree, Tier-1: 280: orrery 116, Earth System 149, stars 13, utilities 2.
+      No file's Tier-1 count rose since the previous run.
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2386 file(s) examined, 6 written, 0 created, 0 removed, 6 rewritten identically
+    written   LEDGER_CONSOLIDATED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    rewritten with identical bytes, no action needed:
+      DATA_INVENTORY.md
+      PROJECT_INSTRUCTIONS.md
+      WORKSHEET_CHECK.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      window_config.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  3. Commit and push the orrery. This commit also carries the close
+     patch's changes, which were not in the last push (b3c3e2a5). -- 
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+2. Run the maintenance run. Every check should pass, including dashboard parity.
+3. Commit and push.
+
+**Where this leaves us**
+- The Sun room's three phone problems are fixed and checked on your phone.
+- The Sun's pole and spin on the website is waiting for a design talk.
+- Next build: the drawer order.
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 

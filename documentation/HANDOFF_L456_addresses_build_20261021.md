@@ -62,6 +62,13 @@ Two process items from this afternoon, each its own ledger item:
 - **L-462:** a short form of the orrery maintenance run for small
   patches, naming every check it skipped. For a design talk.
 
+Closed the same evening on your phone (run record): no band with the
+Galactic Plane ticked and Go To on the Corona; the Sun's own row shows
+NASA's link and the pole's source. L-463 and L-464 are DONE. The
+dashboard button the website patch missed is added by
+`patch_L463_2_far_lines_button_20261021.py`. Your next question, the
+Sun's pole and spin drawn as the orrery does, is L-465.
+
 This close patch also carries the ledger lines and Where We Are
 changes from `HANDOFF_talks2_20261021.md` (talks part 2), as that
 handoff asked of this session.
