@@ -3165,5 +3165,17 @@ So the side-by-side choice is needed for only five pairs. The nine are the easy 
 
 One question: which goes first next session, the fourteen pairs or the Sun's addresses? I recommend the pairs first. That job is self-contained, while the addresses can wait for Earth's Gemini answer tomorrow, so both rooms' addresses go in together in one build.
 
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+**Session: OPEN: 10-20-26 1705: Opus: Talk session only**
 
+Here are the handoff and the design record. Both go in the orrery's documentation/ folder.
+
+The handoff's first job for the next session is the ledger and Where We Are patch, built on top of this afternoon's patches. Your rulings are recorded in the ledger only once that runs.
+
+Thank you, it was a good session. The chromosphere question was the best of it: three fact sheets disagreed and cited nothing, and asking where they got their numbers led to the real answer.
+
+Where this leaves us:
+- Talks 1 to 5 are settled, and two of Earth's magnetic-field questions are settled.
+- The last two questions, the website's dipole cone and the moving edges, wait for a session that loads the room skill at 1.18.
+- Before then: reinstall interactive-exhibit 1.18 in Settings > Skills.
