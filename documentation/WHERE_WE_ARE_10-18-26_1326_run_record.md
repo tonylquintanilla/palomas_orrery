@@ -133,7 +133,7 @@ Not urgent, in your order:
 
 **Tony**: Run record:
 
-**Session: OPEN: 10-17-26 2018: Fable: Coordination -- Sun slice and interactive symbols**
+**Session: DONE: 10-20-26 1357: Fable: Coordination -- Sun slice and interactive symbols**
 
 Now the measurement: every string a GUI tooltip shows, by both paths, checked for `<br>` and other HTML tags at HEAD.
 
@@ -1568,7 +1568,7 @@ The next session marks the three drafts, then builds the two fades: the corona a
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-**Session: OPEN: 10-19-26 2304: Opus: Sun fades build session L456 L410 L385 L191**
+**Session: DONE: 10-20-26 2324: Opus: Sun fades build session L456 L410 L385 L191**
 
 Got it, thanks. Being gitignored doesn't matter, because I read the file straight from your folder.
 
@@ -3103,7 +3103,7 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-  3. Commit; push.
+  3. Commit; push. -- 23f708869e8d2b06bb5e206574a8c9b59d3d2cfa
   4. Reinstall interactive-exhibit (1.18) in Settings > Skills. -- done. v3.106
   5. Gemini's two answers, when they're done, into
      documentation/worksheets/. -- i was able to complete the sun search and part of the earth search before i hit my daily limit. will do the earth search tomorrow. see the sun worksheet in worksheets/
@@ -3124,5 +3124,46 @@ The website patch has to go first. The orrery patch adds a dashboard button for 
 
 **How it was checked:** on a copy with the website patch beside it, the orrery's maintenance run passed 31 of 31, including the dashboard check. On a Windows-line-endings copy, a note I added below the run-record line came through untouched.
 
-Gemini's two answers can come whenever they're ready. Re-opening those addresses is the next session's first job.
+=======================================================================
+**Tony:**
+thanks. do we need to update the closing patch? 
+
+here is an item for the next build session from the Fable coordination session for the patch. 
+
+Build session: the Sun's tooltip and hover twins (L-191, the Sun's
+share), one evening. In solar_visualization_shells.py fourteen shells
+have two live strings each: an _info string the checkbox tooltip
+shows and an _info_hover string the plot's hover shows, and every pair
+differs in content. For each pair, show me the two texts side by side
+with the breaks stripped; I pick the survivor, the default being the
+copy that prints from rows. Then one string per shell, written in
+newlines, the twin deleted, <br> derived at the Plotly boundary with
+.replace('\n', '<br>') as the gas-giant configs already do; the Tk
+backstop in CreateToolTip stays. Breaks-only where the text does not
+change, proved byte for byte with the breaks stripped. Pull both
+repositories and say the SHAs; read L-191, L-411 and L-412 at HEAD.
+Confirm your loaded skills against the manifest before work that fires
+them. My look: each shell's tooltip and its plot hover, the same words.
+At the close: L-191's Sun share done, the fourteen named; the other 39
+strings stay with their rooms; then L-456 is next. One question per
+message, plain speech.
+
+**Claude:**
+No, the closing patch doesn't need updating. It was run and pushed (23f70886), and everything since is in your run record:
+- your phone look;
+- the drawer-order rule;
+- Gemini's Sun worksheet;
+- the Murray scan.
+
+The next session reads your latest run record first and records all of it on the ledger at its close.
+
+On the Fable item, one correction to carry in. It says every one of the fourteen pairs differs in content. I measured them this afternoon, and that measurement is already on L-191 in the pushed ledger:
+- **Five pairs differ in content:** gravitational influence, Roche limit, Alfven surface, corona, and zodiacal dust. The corona's and the dust cloud's differ on purpose: the tooltip adds the panel's words to the hover's.
+- **Nine pairs are identical copies:** outer Oort, inner Oort, inner Oort limit, solar wind, termination shock, chromosphere, photosphere, radiative zone, and core.
+
+So the side-by-side choice is needed for only five pairs. The nine are the easy kind: keep one copy and delete the other, checked letter for letter. The item's method fits both cases as written. The next session should just start from L-191's measured list, not the "every pair differs" wording.
+
+One question: which goes first next session, the fourteen pairs or the Sun's addresses? I recommend the pairs first. That job is self-contained, while the addresses can wait for Earth's Gemini answer tomorrow, so both rooms' addresses go in together in one build.
+
+
 
