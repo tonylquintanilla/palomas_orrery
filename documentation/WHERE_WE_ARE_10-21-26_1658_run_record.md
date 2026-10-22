@@ -135,6 +135,8 @@ Not urgent, in your order:
 
 **Session: OPEN: 10-20-26 1624: Fable: Coordination session -- Pending patches and design talks**
 
+Your reading list: three of six papers left (Delsemme, the Hipparcos volume, Maezawa), none missing a link, so no hurry. -- i was only able to download the hypparcos and tycho documentation, a large file of over 500 pages to papers/ . The Delsemme paper from Harvard timed out, and Maezawa was paywalled. documented in the reading md.
+
 The brief is in `HANDOFF_sun_drawer_pairs_build_brief_20261021.md`. Three jobs:
 
 - **The drawer order (L-460).** Every room but the Solar System room; the Sun first. The session traces where the order is set today, defines "where a shell begins" as its served inner edge with tie rules written into the skill, reads the order from the rows at page load, and lists the result for every room with each shell's starting distance for your look before the patch ships. The rule goes into interactive-exhibit 1.19 with its protocol entry.
@@ -142,6 +144,43 @@ The brief is in `HANDOFF_sun_drawer_pairs_build_brief_20261021.md`. Three jobs:
 - **The close**, on the HEAD after your job-1 push.
 
 Two things it tells the session not to do: touch the Solar System room's drawer (your Oct 20 ruling keeps its outward order), and bump provenance-discipline unless job 2 forces it, so the "one layer down" paragraph waits for a bump that is actually earned.
+
+=======================================================================================================
+
+I'll read the run record and both repos at HEAD.
+
+Read, with both repos at HEAD (orrery 1c591cf, gallery 90cefa5). Everything in the run record is pushed; the maintenance run passed 31 of 31 at the close and you reinstalled both skills (interactive-exhibit 1.19, provenance-discipline 2.33, protocol v3.107).
+
+**Done last night:**
+- The drawer order (L-460): every room lists its shells where each begins, read from the rows at page load, with a standing check. Your phone confirmed the Sun's.
+- The fourteen pairs (L-191, the Sun's share): one string per shell; the nine copies folded, your five choices built, the manual-scale line dropped.
+- Your question "we should check all the drawings" became a discovery pass over all 35 drawings in the Sun and Earth rooms, then a standing check (L-466, "Drawn ends"). Two drawings were wrong by their own sources and are fixed: the corona now starts 3,000 km up, where Mann et al. put its base, so it sits after the chromosphere; the Hills cloud's dots no longer reach inside its 2,000 AU edge. Two rules went into the skills.
+- The Sun's slice is now down to one build: the tide and the clumps as stored drawings (L-434).
+
+**Carried from your phone look, not yet fixed (L-468):**
+- The corona's drawer row opens the streamer belt's words, because the belt shares the row and the drawer opens the row's first tap cross. Goes in the next website patch.
+- The Hills cloud's tap cross sits on the x axis just past the cloud's edge. A design-talk item.
+
+**Two small things the record and the page disagree on:**
+- The reading list in the repo still shows the Hipparcos, Delsemme and Maezawa lines blank. Your notes (Hipparcos saved, Delsemme timed out, Maezawa paywalled) are in your local copy, not pushed yet. They go with your next commit; nothing else to do, since none of the three is missing a link.
+- Your look in the orrery itself, a few Sun checkboxes' tooltips beside their markers' hovers reading the same, is the one Tony-action from the close I cannot find marked in the record. That closes L-191's Sun share. -- accepted
+
+**Next steps, in order:**
+1. The next build session: L-434, the tide and the clumps placed once by the orrery from a seed and served to the website, with the tide's phone look; its website patch also fixes the corona's drawer text (L-468) and the magnetotail's drawer reading (L-460's last loose end). Then L-454's two faint surfaces on the Alfven surface, which the ledger lists next in the Sun's slice. That ends the Sun's slice except the ice lines, which wait.
+2. The design-talk items now number four: L-461 (the Daily Run checking it pulled what you pushed), L-462 (a shorter maintenance run), L-465 (the Sun's pole and spin on the website), and L-468's cross placement. The first two can be ruled in a chat like this; the other two want a short talk.
+3. After the Sun: Earth's three builds (the dipole cone, the moving-edge surfaces, IGRF-14 with the offset sentence) and the report link.
+
+One question: do you want the brief for step 1 now? -- yes
+
+=====================================================================
+
+The brief is in `HANDOFF_L434_stored_drawings_build_brief_20261022.md`. Two jobs and a close:
+
+- **Job 1, the tide and the clumps stored.** Every ruling it needs is already made, so the session asks you nothing about the design: the orrery places both from a seed as the Hills cloud is, every dot between its rows' edges, the clumps starting at their row's 10,000 AU; the website draws the stored dots at the orrery's size and opacity and works out the pink cone itself. The same website patch fixes the corona's drawer row opening the belt's words (L-468) and the magnetotail's drawer reading (L-460). Two things come to you: the tide's website hover old and new side by side before it ships, and your looks, in the orrery and on the phone.
+- **Job 2, if the evening allows:** the Alfven surface's two faint surfaces at 10 and 20 solar radii (L-454's Sun share), with one Mode 5 question held for you: whether the outer faint surface at 20 can be told from the drawn one at 19.7. Earth's two pairs are kept for the Earth session.
+- **The close**, with the Sun's slice ending at L-128's ice lines, which wait.
+
+One thing the brief asks the session to raise at the start: your look in the orrery at a few Sun checkboxes' tooltips beside their hovers, which was the one action from last night's close I could not find marked in your record. It closes L-191's Sun share. -- accepted
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
