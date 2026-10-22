@@ -214,6 +214,12 @@ corona's dots and the streamer belt start there.)
 Module updated: October 22, 2026 with Anthropic's Claude Opus 5.5
 (L-434: no value changed. GALACTIC_NORTH_POLE_RA_J2000_DEG's Declared
 note names where the tide is now placed, galactic_tide_sampler.py.)
+Module updated: October 22, 2026 with Anthropic's Claude Opus 5.5
+(L-465, the Sun's rotation axis on the website: SUN_POLE_RA_J2000_DEG
+and SUN_POLE_DEC_J2000_DEG, the Sun's pole as rows of its own, which
+planet_poles now reads; SUN_ROTATION_RATE_DEG_PER_DAY from NASA NAIF's
+pck00011, read this day; DEG_PER_TURN; and two derived rows the website
+prints, SUN_SIDEREAL_ROTATION_PERIOD_D and SUN_EQUATOR_TILT_DEG.)
 """
 
 import math
@@ -1013,6 +1019,43 @@ SGR_A_STAR_DEC_ICRS_DEG = SGR_A_STAR_DEC_ICRS_ARCSEC / ARCSEC_PER_DEG
 # Figures+: divisor is exact.
 # Note: drawn, never printed, so it carries no print count.
 
+# The Sun's pole, as two rows of its own (L-465, 2026-10-22): the website
+# draws the Sun's rotation axis about it, and the Sun's equator's tilt,
+# SUN_EQUATOR_TILT_DEG, is worked out from it. Until this day the two
+# numbers were typed in planet_poles below, which now reads them.
+
+SUN_POLE_RA_J2000_DEG = 286.13
+# Unit: deg
+# Status: measured V_SOURCED 2026-10-22
+# Figures: 5 -- the kernel prints 286.13, to hundredths of a degree.
+# Read: the kernel's text at the address on the Source line, the line
+# Read+: "BODY10_POLE_RA = ( 286.13 0. 0. )" and the Sun section's note
+# Read+: "Values are unchanged in the 2015 IAU report.", 2026-10-22,
+# Read+: Claude Opus 5.5.
+# Source: NASA NAIF, planetary constants kernel pck00011.tpc,
+# Source+: https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc
+# Source+: -- BODY10_POLE_RA = 286.13 degrees, the right ascension of the
+# Source+: Sun's north pole in the ICRF, with no change over time. The
+# Source+: kernel says the Sun's values are unchanged in the 2015 report of
+# Source+: the IAU Working Group on Cartographic Coordinates and Rotational
+# Source+: Elements (Archinal et al. 2018, Cel. Mech. Dyn. Astron. 130:22).
+# Ref: https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc
+# Note: drawn, never printed, so the website prints no pole; the tilt it
+# Note+: prints is SUN_EQUATOR_TILT_DEG.
+
+SUN_POLE_DEC_J2000_DEG = 63.87
+# Unit: deg
+# Status: measured V_SOURCED 2026-10-22
+# Figures: 4 -- the kernel prints 63.87, to hundredths of a degree.
+# Read: as SUN_POLE_RA_J2000_DEG, the line "BODY10_POLE_DEC = ( 63.87 0.
+# Read+: 0. )", 2026-10-22, Claude Opus 5.5.
+# Source: NASA NAIF, planetary constants kernel pck00011.tpc,
+# Source+: https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc
+# Source+: -- BODY10_POLE_DEC = 63.87 degrees, the declination of the Sun's
+# Source+: north pole in the ICRF, with no change over time; unchanged in
+# Source+: the IAU working group's 2015 report (Archinal et al. 2018).
+# Ref: https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc
+
 # The pole directions of the bodies the orrery draws with an axis, as ICRF
 # right ascension and declination in degrees. Moved here from
 # idealized_orbits.py on 2026-09-23 (L-322 ruling (a) of 2026-09-14), which
@@ -1033,7 +1076,7 @@ SGR_A_STAR_DEC_ICRS_DEG = SGR_A_STAR_DEC_ICRS_ARCSEC / ARCSEC_PER_DEG
 # Note+: comment said six entries cross-check exactly against the table; for
 # Note+: Uranus and Neptune that was false, and it is removed.
 planet_poles = {
-    'Sun': {'ra': 286.13, 'dec': 63.87},      # Source: IAU 2018 (Archinal et al.)
+    'Sun': {'ra': SUN_POLE_RA_J2000_DEG, 'dec': SUN_POLE_DEC_J2000_DEG},  # the two rows above (L-465)
     'Mercury': {'ra': 281.01, 'dec': 61.45},  # Source: IAU 2018 (MESSENGER-updated)
     'Venus': {'ra': 272.76, 'dec': 67.16},    # Source: IAU 2018 (retrograde; pole is IAU-north)
     'Earth': {'ra': EARTH_POLE_RA_J2000_DEG, 'dec': EARTH_POLE_DEC_J2000_DEG},  # the frame's axis; fallback only
@@ -1972,6 +2015,92 @@ DEG_PER_RAD = 180.0 / math.pi
 # Note+: angle computed from a pure number cannot take np.degrees under the
 # Note+: unit check, so the tilt and its rate multiply by this row instead
 # Note+: (provenance-discipline 2.17, Rule 3).
+
+# --- The Sun's turning and the tilt of its equator (L-465, 2026-10-22) ----
+# The website's Sun room draws the Sun's rotation axis, as the orrery does,
+# and its hover prints the two numbers below. Both come from the IAU's
+# rotational elements for the Sun as NASA NAIF's kernel carries them: the
+# pole above (SUN_POLE_RA_J2000_DEG, SUN_POLE_DEC_J2000_DEG) and the rate
+# here. The orrery's own axis hover still types its Sun numbers in
+# planet_visualization_utilities.py, PLANET_ROTATION; that is L-465's Gap.
+
+DEG_PER_TURN = 360.0
+# Unit: deg
+# Status: declared 2026-10-22 -- an exact unit conversion, degrees in one
+# Status+: full turn. Belongs to no body's slice.
+# Figures: exact -- a definition, not a measurement.
+# Read: Table 6, sec. 5.1.1, NIST Guide to the SI (SP 811), chapter 5,
+# Read+: "Non-SI units accepted for use with the SI by the CIPM and this
+# Read+: Guide", the row "degree -- plane angle", 1 deg = (pi/180) rad,
+# Read+: at the address on the Source line, 2026-10-22, Claude Opus 5.5.
+# Source: NIST Special Publication 811, sec. 5.1.1, Table 6,
+# Source+: https://www.nist.gov/pml/special-publication-811/nist-guide-si-chapter-5-units-outside-si
+# Source+: -- the degree is pi/180 radian, so a full turn, 2 pi radians,
+# Source+: is 360 degrees by definition.
+# Ref: https://www.nist.gov/pml/special-publication-811/nist-guide-si-chapter-5-units-outside-si
+# Note: exists so the Sun's period below divides a turn by the rate
+# Note+: through a row and not a bare 360. Neither checker judges this row;
+# Note+: its unit is asserted here, as DEG_PER_RAD's is.
+
+SUN_ROTATION_RATE_DEG_PER_DAY = 14.1844
+# Unit: deg_per_day
+# Status: measured V_SOURCED 2026-10-22
+# Figures: 6 -- the kernel prints 14.18440. Its trailing zero is not
+# Figures+: counted: the kernel writes its rates to a fixed number of
+# Figures+: places, and nothing in it says the IAU's rate was measured to
+# Figures+: that place, so the row claims no more than the digits before it.
+# Read: the kernel's text at the address on the Source line, the line
+# Read+: "BODY10_PM = ( 84.176 14.18440 0. )", 2026-10-22, Claude Opus 5.5.
+# Read+: The sense: the correction to the IAU working group's 2015 report,
+# Read+: "Correction to: Report of the IAU Working Group on Cartographic
+# Read+: Coordinates and Rotational Elements: 2015", B. A. Archinal, C. H.
+# Read+: Acton, A. Conrad and others, its Fig. 1 caption at Springer's
+# Read+: page, the address on the Source line, 2026-10-22, Claude Opus 5.5.
+# Source: NASA NAIF, planetary constants kernel pck00011.tpc,
+# Source+: https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc
+# Source+: -- BODY10_PM, the angle W of the Sun's prime meridian,
+# Source+: 84.176 + 14.18440 d degrees, d in days from J2000; the Sun's
+# Source+: values are unchanged in the IAU working group's 2015 report. The
+# Source+: sense of the turning: Archinal et al. (2019), Correction to:
+# Source+: Report of the IAU Working Group on Cartographic Coordinates and
+# Source+: Rotational Elements: 2015, Cel. Mech. Dyn. Astron. 131:61,
+# Source+: https://doi.org/10.1007/s10569-019-9925-1 -- Fig. 1 caption:
+# Source+: where W increases with time, the body's rotation is prograde.
+# Ref: https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc
+# Ref: https://doi.org/10.1007/s10569-019-9925-1
+# Note: the IAU's rate for the Sun's map frame. The Sun is not solid and
+# Note+: does not turn at one rate; this is the rate the frame is defined
+# Note+: by. A sentence saying so waits for a source a visitor can open
+# Note+: (L-465).
+
+SUN_SIDEREAL_ROTATION_PERIOD_D = DEG_PER_TURN / SUN_ROTATION_RATE_DEG_PER_DAY
+# Derived: one full turn divided by the rate, 360 / 14.1844
+# Derived+: = 25.3800
+# Unit: days
+# Status: derived 2026-10-22 -- inherits DEG_PER_TURN,
+# Status+: SUN_ROTATION_RATE_DEG_PER_DAY
+# Figures: 6 -- set by SUN_ROTATION_RATE_DEG_PER_DAY (14.1844, 6)
+# Note: the SIDEREAL period, one turn measured against the stars. Printed
+# Note+: in the website's Sun room, on the rotation axis's hover.
+
+SUN_EQUATOR_TILT_DEG = math.acos(math.sin(SUN_POLE_DEC_J2000_DEG / DEG_PER_RAD) * math.cos(EARTH_OBLIQUITY_J2000_DEG / DEG_PER_RAD) - math.cos(SUN_POLE_DEC_J2000_DEG / DEG_PER_RAD) * math.sin(EARTH_OBLIQUITY_J2000_DEG / DEG_PER_RAD) * math.sin(SUN_POLE_RA_J2000_DEG / DEG_PER_RAD)) * DEG_PER_RAD
+# Derived: the angle between the Sun's pole and the pole of the drawing's
+# Derived+: ecliptic of J2000, which is the tilt of the Sun's equator from
+# Derived+: the plane of Earth's orbit. The ecliptic pole sits at right
+# Derived+: ascension 270 degrees and declination 90 degrees less the
+# Derived+: frame's obliquity, so the cosine of the angle is
+# Derived+: sin(dec) cos(eps) - cos(dec) sin(eps) sin(ra) = 7.25
+# Unit: deg
+# Status: derived 2026-10-22 -- inherits SUN_POLE_DEC_J2000_DEG,
+# Status+: EARTH_OBLIQUITY_J2000_DEG, SUN_POLE_RA_J2000_DEG, DEG_PER_RAD
+# Figures: 3 -- hundredths of a degree, the place of SUN_POLE_RA_J2000_DEG
+# Figures+: (286.13) and SUN_POLE_DEC_J2000_DEG (63.87). The tilt is an
+# Figures+: angle between two directions and moves degree for degree with
+# Figures+: the pole, so it keeps the pole's place; counting the pole's four
+# Figures+: figures would claim thousandths, a place finer than the pole is
+# Figures+: given to (provenance-discipline, Rule 3: a function that
+# Figures+: magnifies its input's uncertainty drops a figure, said here).
+# Note: printed in the website's Sun room, on the rotation axis's hover.
 
 EARTH_IGRF13_G10_NT = -29404.8
 # Unit: nt

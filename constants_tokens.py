@@ -106,6 +106,9 @@ counts.)
 Module updated: October 20, 2026 with Anthropic's Claude Opus 5.5
 (L-410: j_per_k, kg, per_s, mean_molecular_weight and fan_shape_parameter,
 for the corona's density model and the dust cloud's shape.)
+Module updated: October 22, 2026 with Anthropic's Claude Opus 5.5
+(L-465: deg_per_day and days, for the Sun's rotation rate and its
+sidereal period.)
 """
 
 TOKENS = {
@@ -290,6 +293,17 @@ TOKENS = {
     },
     # L-431 (2026-10-11): days per Julian year, the conversion an orbital
     # period's years go through.
+    # L-465 (2026-10-22): the Sun's rotation rate and its period.
+    "deg_per_day": {
+        "dimension": "deg / d",
+        "defining_constant": None,
+        "meaning": "degrees of angle per day",
+    },
+    "days": {
+        "dimension": "d",
+        "defining_constant": None,
+        "meaning": "days",
+    },
     "d_per_yr": {
         "dimension": "d / yr",
         "defining_constant": None,

@@ -121,6 +121,9 @@ Module updated: October 18, 2026 with Anthropic's Claude Opus 5.5
     (L-455: math's pure constants and functions and abs() are allowed
     in a derived line by name, so a row such as a circular orbit's
     period, 2 pi sqrt(r^3 / GM), is understood instead of failing).
+Module updated: October 22, 2026 with Anthropic's Claude Opus 5.5
+    (L-465: asin and acos join math's pure functions, so the Sun's
+    equator tilt, an angle worked out with acos, is understood).
 """
 
 import os
@@ -165,8 +168,11 @@ DERIVED_NODES = (
 # still a derivation this tool can vouch for. The store already used
 # math.pi, math.sqrt, math.atan and abs() in rows this tool announced as
 # not understood; the low-orbit periods were the next.
+# L-465 (2026-10-22): asin and acos too, as pure as the rest;
+# SUN_EQUATOR_TILT_DEG is the first row to use one.
 MATH_PURE = ('pi', 'tau', 'e', 'sqrt', 'atan', 'atan2', 'sin', 'cos',
-             'tan', 'exp', 'log', 'log10', 'radians', 'degrees')
+             'tan', 'asin', 'acos', 'exp', 'log', 'log10', 'radians',
+             'degrees')
 BUILTIN_PURE = ('abs',)
 
 

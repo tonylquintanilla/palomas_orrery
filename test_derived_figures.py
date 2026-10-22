@@ -178,6 +178,9 @@ are checked by constants_rows.conversion_problem() and listed; a row
 shaped like one and not marked is UNMARKED CONVERSION, a named gap that
 fails inside a closed slice. Nine fixtures test both, and the check is
 shown failing on the real store before it is trusted.)
+Module updated: October 22, 2026 with Anthropic's Claude Opus 5.5
+(L-465: asin and acos join the functions a derived row may use, as
+test_dimensions.py already allowed; SUN_EQUATOR_TILT_DEG is the first.)
 """
 
 import ast
@@ -418,6 +421,11 @@ class Figures(object):
              "exp": math.exp, "log": math.log, "log10": math.log10,
              "sqrt": math.sqrt, "sin": math.sin, "cos": math.cos,
              "tan": math.tan, "atan": math.atan, "arctan": math.atan,
+             # L-465 (2026-10-22): the inverse sine and cosine, which
+             # test_dimensions.py already knows; SUN_EQUATOR_TILT_DEG is
+             # the first row to use one.
+             "asin": math.asin, "arcsin": math.asin,
+             "acos": math.acos, "arccos": math.acos,
              "radians": math.radians, "degrees": math.degrees,
              "abs": abs, "fabs": abs, "cbrt": lambda x: math.copysign(
                  abs(x) ** (1.0 / 3.0), x)}

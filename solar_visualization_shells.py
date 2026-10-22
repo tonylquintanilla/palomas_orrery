@@ -1,8 +1,8 @@
 """
 solar_visualization_shells.py - Sun interior, corona, and heliosphere shell traces.
 
-The largest shell module: 12 sphere shells from core to gravitational
-influence boundary, plus custom geometry for the Hills Cloud (a tilted
+The largest shell module: sphere shells from core to gravitational
+influence boundary (the three Oort cloud spheres went on 2026-10-22), plus custom geometry for the Hills Cloud (a tilted
 disk of dots along orbits, from hills_cloud_sampler.py), the outer Oort
 cloud, loose dots with clumps (from outer_oort_sampler.py), the galactic tide (from
 galactic_tide_sampler.py, with its double cone worked out here), the corona (a fade of dots
@@ -28,6 +28,20 @@ dots through its band beside its clumps, Tony's choice of 2026-10-22,
 so it begins near its row; _outer_cloud_keep moved to
 outer_oort_sampler.band_keep. The tide's cone comment says where the
 cone is drawn. No word a visitor reads changed.)
+Module updated: October 22, 2026 with Anthropic's Claude Opus 5.5
+(L-434, Tony's ruling of this day: the three Oort cloud spheres are gone,
+create_sun_inner_oort_limit_shell, create_sun_inner_oort_shell and
+create_sun_outer_oort_shell with their strings; an uncertain edge is drawn
+as a cloud across its range. The Hills cloud fills in across its inner
+edge's range and says so, OORT_INNER_EDGE_SENTENCE; the outer cloud's
+words give its outer edge's range, OORT_OUTER_EDGE_SENTENCE. Tony's
+approved words.)
+Module updated: October 22, 2026 with Anthropic's Claude Opus 5.5
+(L-454, the Sun's share: the Alfven surface's usual range, two dashed
+circles in the Sun's equator at ALFVEN_SURFACE_RANGE_LOW_RADII and
+_HIGH_RADII,
+create_sun_alfven_surface_range, with its own checkbox and words,
+alfven_surface_range_info, Tony's approved words of this day.)
 Module updated: October 21, 2026 with Anthropic's Claude Opus 5.5
 (L-191, the Sun's share: one string per shell. The fourteen
 <shell>_info_hover twins are gone; each <shell>_info is written with
@@ -169,6 +183,9 @@ from constants_new import (GALACTIC_NORTH_POLE_RA_J2000_DEG,
 from constants_new import INNER_OORT_DISK_OUTER_AU
 # L-460: where the corona, and the streamer belt drawn with it, begins.
 from constants_new import CORONA_BASE_RADII
+# L-454: the ends of the Alfven surface's usual range, the faint pair.
+from constants_new import (ALFVEN_SURFACE_RANGE_LOW_RADII,
+                           ALFVEN_SURFACE_RANGE_HIGH_RADII)
 
 #####################################
 # Sun Visualization Functions
@@ -195,25 +212,28 @@ _OORT_HILLS_EDGE = row_text('INNER_OORT_CLOUD_AU', grouping=True)
 _OORT_DISK_EDGE = row_text('INNER_OORT_DISK_OUTER_AU', grouping=True)
 _HILLS_TILT = row_text('HILLS_CLOUD_TILT_DEG')
 OORT_BAND_SENTENCE = f"between {_OORT_DISK_EDGE} and {_OORT_HILLS_EDGE} AU"
-INNER_OORT_BAND_NOTE = (
-    f"The inner cloud gives way to the round outer cloud {OORT_BAND_SENTENCE};<br>"
-    f"this sphere is drawn at {_OORT_HILLS_EDGE} AU, the far end."
-)
 _OORT_OUTER_EDGE = row_text('OUTER_OORT_CLOUD_AU', grouping=True)
 _HELIOPAUSE = row_text('HELIOPAUSE_AU')
 _TERMINATION_SHOCK = row_text('TERMINATION_SHOCK_AU')
-# Tony's approved notes for the two ranged edges, 2026-10-03.
-OORT_INNER_EDGE_NOTE = (
-    f"Thought to lie between "
-    f"{row_text('OORT_CLOUD_INNER_EDGE_LOW_AU', grouping=True)} and "
-    f"{row_text('OORT_CLOUD_INNER_EDGE_HIGH_AU', grouping=True)} AU; "
-    f"drawn at {_OORT_INNER_EDGE}."
+# The two ranged edges, now drawn as clouds across their ranges (L-434,
+# Tony's ruling of 2026-10-22: the three Oort spheres are gone, and an
+# uncertain edge is drawn as a cloud across its range). Tony's approved
+# words of 2026-10-22; until then each was a sphere's note, "Thought to
+# lie between ... AU; drawn at ...", his approved words of 2026-10-03.
+# The numbers print from OORT_CLOUD_INNER_EDGE_LOW_AU (as
+# INNER_LIMIT_OORT_CLOUD_AU), OORT_CLOUD_INNER_EDGE_HIGH_AU,
+# OORT_CLOUD_OUTER_EDGE_LOW_AU and OORT_CLOUD_OUTER_EDGE_HIGH_AU; the
+# sources are on the rows.
+_OORT_INNER_FULL = row_text('OORT_CLOUD_INNER_EDGE_HIGH_AU', grouping=True)
+OORT_INNER_EDGE_SENTENCE = (
+    f"Its inner edge is thought to lie between {_OORT_INNER_EDGE} and<br>"
+    f"{_OORT_INNER_FULL} AU; the dots fill in across that range."
 )
-OORT_OUTER_EDGE_NOTE = (
-    f"Thought to lie between "
-    f"{row_text('OORT_CLOUD_OUTER_EDGE_LOW_AU', grouping=True)} and "
+OORT_OUTER_EDGE_SENTENCE = (
+    "Its outer edge is thought to lie between "
+    f"{row_text('OORT_CLOUD_OUTER_EDGE_LOW_AU', grouping=True)} and<br>"
     f"{row_text('OORT_CLOUD_OUTER_EDGE_HIGH_AU', grouping=True)} AU; "
-    f"drawn at {_OORT_OUTER_EDGE}."
+    "it is drawn out to the far end."
 )
 
 # Source: GRAVITATIONAL_INFLUENCE_PC in constants_new.py -- the Sun's
@@ -310,64 +330,6 @@ gravitational_influence_info = (
             "to the Oort Cloud population."
         )
 
-# Source: Dones et al. (2004); OUTER_OORT_CLOUD_AU=100000 in constants_new.py
-outer_oort_info = (
-            "Oort Cloud: Outer Limit of Outer Oort Cloud:\n\n"
-            
-            "The Oort Cloud is a theoretical, vast, spherical shell of icy objects that surrounds the\n" 
-            f"Solar System at distances ranging from approximately {_OORT_INNER_EDGE} AU to {_OORT_OUTER_EDGE} AU from the Sun.\n\n"
-
-            "Predominantly composed of cometary nuclei-small, icy bodies made of water ice, ammonia, and methane.\n" 
-            "Believed to be the source of long-period comets that enter the inner Solar System with orbital\n" 
-            "periods exceeding 200 years.\n\n" 
-
-            "Oort Cloud's Outer Edge:\n" 
-            f"{OORT_OUTER_EDGE_NOTE}\n" 
-            f"At {_OORT_OUTER_EDGE} AU it is about {format_prints(OUTER_OORT_CLOUD_AU / AU_PER_LIGHT_YEAR, 1)} light-years from the Sun, marking the boundary\n" 
-            "between the Solar System and interstellar space.\n\n" 
-
-            "The Outer Oort Cloud is the primary source of long-period comets. Objects here are more loosely bound and more\n" 
-            "susceptible to external gravitational perturbations."
-        )
-
-# Source: INNER_OORT_CLOUD_AU (Portegies Zwart et al. 2021) and
-# Source+: INNER_OORT_DISK_OUTER_AU (Nesvorny et al. 2025) in constants_new.py,
-# Source+: the band's two ends; the comment here named Hills (1981), which
-# Source+: does not print the number (corrected L-421, 2026-10-10, as L-371
-# Source+: corrected the row).
-inner_oort_info = (
-            "Oort Cloud: Outer Limit of Inner Oort Cloud:\n\n"
-            f"{INNER_OORT_BAND_NOTE}\n\n"
-
-            "The Oort Cloud is a theoretical, vast, spherical shell of icy objects that surrounds the\n" 
-            f"Solar System at distances ranging from approximately {_OORT_INNER_EDGE} AU to {_OORT_OUTER_EDGE} AU from the Sun.\n" 
-            "Predominantly composed of cometary nuclei-small, icy bodies made of water ice, ammonia, and methane.\n" 
-            "Believed to be the source of long-period comets that enter the inner Solar System with orbital\n" 
-            "periods exceeding 200 years.\n\n" 
-
-            f"Inner Oort Cloud (Hills Cloud): Extends from about {_OORT_INNER_EDGE} AU and gives way to the round outer cloud\n" 
-            f"{OORT_BAND_SENTENCE}. More tightly bound to the\n" 
-            "Sun. More tightly bound to the Solar System compared to the outer Oort Cloud. It serves as an\n" 
-            "intermediate zone between the Kuiper Belt and the outer Oort Cloud."
-        )
-
-# Source: Dones et al. (2004); INNER_LIMIT_OORT_CLOUD_AU=2000 in constants_new.py
-inner_limit_oort_info = (
-            "Oort Cloud: Inner Limit:\n\n"
-            f"{OORT_INNER_EDGE_NOTE}\n\n"
-
-            "The Oort Cloud is a theoretical, vast, spherical shell of icy objects that surrounds the\n" 
-            f"Solar System at distances ranging from approximately {_OORT_INNER_EDGE} AU to {_OORT_OUTER_EDGE} AU from the Sun.\n" 
-            "Predominantly composed of cometary nuclei-small, icy bodies made of water ice, ammonia, and methane.\n" 
-            "Believed to be the source of long-period comets that enter the inner Solar System with orbital\n" 
-            "periods exceeding 200 years.\n\n" 
-
-            f"Inner Oort Cloud (Hills Cloud): Extends from about {_OORT_INNER_EDGE} AU and gives way to the round outer cloud\n" 
-            f"{OORT_BAND_SENTENCE}. More tightly bound to the\n" 
-            "Sun. More tightly bound to the Solar System compared to the outer Oort Cloud. It serves as an\n" 
-            "intermediate zone between the Kuiper Belt and the outer Oort Cloud."
-        )
-
 # Source: Nesvorny, D., Dones, L., Vokrouhlicky, D., Levison, H. F., Beauge, C.,
 # Source+: Faherty, J., Emmart, C. and Parker, J. P. (2025), "A Spiral Structure
 # Source+: in the Inner Oort Cloud", arXiv:2502.11252v1 -- sec. 1, p. 1 (inferred
@@ -389,7 +351,9 @@ hills_cloud_torus_info = (
             "The inner part of the Oort cloud: icy bodies far beyond the planets,<br>"
             "gathered in a slightly warped disk.<br><br>"
 
-            f"From {_OORT_INNER_EDGE} AU to {_OORT_DISK_EDGE} AU, thinning out by {_OORT_HILLS_EDGE} AU.<br><br>"
+            f"From {_OORT_INNER_EDGE} AU, filling in by {_OORT_INNER_FULL} AU, to {_OORT_DISK_EDGE} AU,<br>"
+            f"thinning out by {_OORT_HILLS_EDGE} AU.<br>"
+            f"{OORT_INNER_EDGE_SENTENCE}<br><br>"
 
             "The Oort cloud is a vast swarm of icy bodies surrounding the solar system, the source<br>"
             "of the long-period comets. Its inner part, the Hills cloud, is more tightly bound to the<br>"
@@ -419,6 +383,7 @@ outer_oort_clumpy_info = (
             f"* Hills Cloud (Inner Oort): from {_OORT_INNER_EDGE} AU, a disk tilted about {_HILLS_TILT} degrees to the ecliptic<br>"
             f"* Outer Oort Cloud: to {_OORT_OUTER_EDGE}+ AU, roughly spherical but clumpy<br>" 
             f"* The two give way to each other {OORT_BAND_SENTENCE}<br>" 
+            f"{OORT_OUTER_EDGE_SENTENCE}<br>"
             "Key Characteristics:<br>" 
             "* Not uniform shells but complex, structured regions<br>" 
             "* Density varies significantly throughout<br>" 
@@ -749,6 +714,35 @@ alfven_surface_info = (
     "  this is where the Sun 'feels' the comet and vice versa."
 )
 
+# Source: Cranmer, Chhiber, Gilly, Cairns, Colaninno, McComas, Raouafi,
+# Source+: Usmanov, Gibson and DeForest (2023), "The Sun's Alfven Surface:
+# Source+: Recent Insights and Prospects for the Polarimeter to Unify the
+# Source+: Corona and Heliosphere (PUNCH)" -- abstract, the surface's usual
+# Source+: range; sec. 3.1, its shape in global models.
+# Source+: https://arxiv.org/abs/2310.05887
+# Note: L-454, the Sun's share (Tony's ruling of 2026-10-21, talk B: every
+# Note+: real edge that moves keeps its sharp surface and gets two faint
+# Note+: ones at the ends of its range, on a row of its own). The two ends
+# Note+: are ALFVEN_SURFACE_RANGE_LOW_RADII and _HIGH_RADII, printed from
+# Note+: their rows. Tony's approved words, 2026-10-22; the last line, the
+# Note+: citation, is the orrery's, which has no i panel to carry it.
+alfven_surface_range_info = (
+    "Sun: Alfven Surface, usual range\n\n"
+    "The Alfven surface moves. Most of the time it lies between about\n"
+    f"{row_text('ALFVEN_SURFACE_RANGE_LOW_RADII')} and "
+    f"{row_text('ALFVEN_SURFACE_RANGE_HIGH_RADII')} solar radii from the Sun's center\n"
+    f"({row_text('ALFVEN_SURFACE_RANGE_LOW_RADII', 'km', grouping=True)} to "
+    f"{row_text('ALFVEN_SURFACE_RANGE_HIGH_RADII', 'km', grouping=True)} km, "
+    f"{row_text('ALFVEN_SURFACE_RANGE_LOW_RADII', 'au')} to "
+    f"{row_text('ALFVEN_SURFACE_RANGE_HIGH_RADII', 'au')} AU).\n"
+    "The two dashed circles, in the plane of the Sun's equator, mark those\n"
+    "two ends.\n"
+    "This is not the limit of a model's fit: it is where the surface spends\n"
+    "most of its time. Computer models put it closest in over the tops of the\n"
+    "helmet streamers and farthest out over the large polar coronal holes.\n\n"
+    "Cranmer and others (2023), https://arxiv.org/abs/2310.05887"
+)
+
 # inner_corona_info_hover was DELETED 2026-10-19 (L-410), with its sphere;
 # the corona's words are corona_info, below (one string
 # since 2026-10-21, L-191).
@@ -857,84 +851,6 @@ def create_sun_gravitational_shell():
         'rgb(102, 187, 106)',
         "Sun: Gravitational Influence<br><br>" + gravitational_influence_info.replace('\n', '<br>'),
         'Sun: Gravitational Influence'
-    )
-    return [shell_trace, info_trace]
-
-
-def create_sun_outer_oort_shell():
-    """Creates the Sun's outer Oort cloud shell."""
-    x, y, z = create_sphere_points(OUTER_OORT_CLOUD_AU, n_points=20)
-    r_info = OUTER_OORT_CLOUD_AU * 1.05
-
-    shell_trace = go.Scatter3d(
-        x=x, y=y, z=z,
-        mode='markers',
-        marker=dict(size=3.0, color='white', opacity=0.3),
-        name='Sun: Outer Oort Cloud',
-        legendgroup='Sun: Outer Oort Cloud',
-        hoverinfo='skip',
-        showlegend=True
-    )
-    # Phase 1 re-pipe (May 28, 2026): factory-routed; size 6->8 and
-    # gray border -> red (factory default; gray was inherited inline choice).
-    info_trace = create_info_marker(
-        0, 0, r_info,
-        'white',
-        "Sun: Outer Oort Cloud<br><br>" + outer_oort_info.replace('\n', '<br>'),
-        'Sun: Outer Oort Cloud',
-        customdata='Outer Oort Cloud'
-    )
-    return [shell_trace, info_trace]
-
-
-def create_sun_inner_oort_shell():
-    """Creates the Sun's inner Oort cloud shell."""
-    x, y, z = create_sphere_points(INNER_OORT_CLOUD_AU, n_points=20)
-    r_info = INNER_OORT_CLOUD_AU * 1.05
-
-    shell_trace = go.Scatter3d(
-        x=x, y=y, z=z,
-        mode='markers',
-        marker=dict(size=3.0, color='white', opacity=0.35),
-        name='Sun: Inner Oort Cloud',
-        legendgroup='Sun: Inner Oort Cloud',
-        hoverinfo='skip',
-        showlegend=True
-    )
-    # Phase 1 re-pipe (May 28, 2026): factory-routed; size 6->8 and
-    # gray border -> red (factory default; gray was inherited inline choice).
-    info_trace = create_info_marker(
-        0, 0, r_info,
-        'white',
-        "Sun: Inner Oort Cloud<br><br>" + inner_oort_info.replace('\n', '<br>'),
-        'Sun: Inner Oort Cloud',
-        customdata='Inner Oort Cloud'
-    )
-    return [shell_trace, info_trace]
-
-
-def create_sun_inner_oort_limit_shell():
-    """Creates the inner limit of the Sun's Oort cloud shell."""
-    x, y, z = create_sphere_points(INNER_LIMIT_OORT_CLOUD_AU, n_points=20)
-    r_info = INNER_LIMIT_OORT_CLOUD_AU * 1.05
-
-    shell_trace = go.Scatter3d(
-        x=x, y=y, z=z,
-        mode='markers',
-        marker=dict(size=3.0, color='white', opacity=0.35),
-        name='Sun: Inner Limit of Oort Cloud',
-        legendgroup='Sun: Inner Limit of Oort Cloud',
-        hoverinfo='skip',
-        showlegend=True
-    )
-    # Phase 1 re-pipe (May 28, 2026): factory-routed; size 6->8 and
-    # gray border -> red (factory default; gray was inherited inline choice).
-    info_trace = create_info_marker(
-        0, 0, r_info,
-        'white',
-        "Sun: Inner Limit of Oort Cloud<br><br>" + inner_limit_oort_info.replace('\n', '<br>'),
-        'Sun: Inner Limit of Oort Cloud',
-        customdata='Inner Limit of Oort Cloud'
     )
     return [shell_trace, info_trace]
 
@@ -1234,9 +1150,11 @@ def create_sun_hills_cloud_torus(center_position=(0, 0, 0)):
     hills_hover = (
         'The inner part of the Oort cloud: icy bodies far beyond the planets,<br>'
         'gathered in a slightly warped disk.<br><br>'
-        f'From {_OORT_INNER_EDGE} AU ({row_text("INNER_LIMIT_OORT_CLOUD_AU", unit="km", grouping=True)} km)<br>'
+        f'From {_OORT_INNER_EDGE} AU ({row_text("INNER_LIMIT_OORT_CLOUD_AU", unit="km", grouping=True)} km),<br>'
+        f'filling in by {_OORT_INNER_FULL} AU ({row_text("OORT_CLOUD_INNER_EDGE_HIGH_AU", unit="km", grouping=True)} km),<br>'
         f'to {_OORT_DISK_EDGE} AU ({row_text("INNER_OORT_DISK_OUTER_AU", unit="km", grouping=True)} km),<br>'
         f'thinning out by {_OORT_HILLS_EDGE} AU ({row_text("INNER_OORT_CLOUD_AU", unit="km", grouping=True)} km).<br>'
+        f'{OORT_INNER_EDGE_SENTENCE}<br>'
         'A 2025 computer model (Nesvorny and others) finds the disk tilted<br>'
         f'about {_HILLS_TILT} degrees to the ecliptic, the plane of Earth\'s orbit, with<br>'
         'two spiral arms. The dots follow orbits like the model\'s; how stretched<br>'
@@ -1307,6 +1225,7 @@ def create_sun_outer_oort_clumpy(center_position=(0, 0, 0)):
     clumpy_hover = (
         'Outer Oort Cloud: Clumpy, asymmetric structure<br>'
         f'From {_OORT_DISK_EDGE} AU, filling in by {_OORT_HILLS_EDGE} AU, to {_OORT_OUTER_EDGE}+ AU<br>'
+        f'{OORT_OUTER_EDGE_SENTENCE}<br>'
         'It begins where the inner cloud\'s disk thins out<br>'
         'Source of long-period comets<br>'
         'Influenced by galactic tides and stellar encounters'
@@ -1849,4 +1768,64 @@ def create_sun_zodiacal_dust(center_position=(0, 0, 0)):
         mx + cx, my + cy, mz + cz, 'rgb(215, 190, 150)',
         zodiacal_dust_info.replace('\n', '<br>'),
         ZODIACAL_DUST_LEGEND, customdata='Zodiacal Dust Cloud'))
+    return traces
+
+
+# =========================================================================
+# The Alfven surface's usual range -- CUSTOM_SHELLS builder (L-454)
+# =========================================================================
+# Wired via CUSTOM_SHELLS['Sun']['alfven_surface_range']; its own
+# checkbox, "-- Alfven Surface, usual range", so it shows only when asked
+# (Tony's ruling of 2026-10-21, talk B: each pair on its own row). Drawn
+# as two dashed circles in the Sun's equator (Tony, 2026-10-22).
+ALFVEN_RANGE_LEGEND = 'Sun: Alfven Surface, usual range'
+
+
+def create_sun_alfven_surface_range(center_position=(0, 0, 0)):
+    """
+    Two dashed circles at the ends of the Alfven surface's usual range,
+    ALFVEN_SURFACE_RANGE_LOW_RADII and ALFVEN_SURFACE_RANGE_HIGH_RADII,
+    beside the Alfven surface drawn as dots at ALFVEN_SURFACE_RADII (L-454,
+    the Sun's share; Tony's ruling of 2026-10-21, talk B).
+
+    The look is Tony's, 2026-10-22: two faint spheres were tried first,
+    and the outer one, 1.5 percent outside the drawn surface, could not be
+    told from it. "First shape then color": one set of two dashed circles,
+    in the plane of the Sun's equator, the Alfven surface's own colour so
+    the two read as one feature. The equator is the one the streamer band
+    and the rotation axis use, from the same matrix
+    (idealized_orbits.create_planet_transformation_matrix('Sun'), the IAU
+    2018 solar pole); laying the circles there is a drawing choice, as the
+    band's is. The range is where the surface spends most of its time
+    (Cranmer et al. 2023), not the limits of a model's fit, and the words
+    say so. The point count, width and opacity are rendering settings.
+    The info marker sits just outside the inner circle, in the equator.
+
+    Parameters:
+    - center_position: Sun position tuple (default: (0, 0, 0)).
+    """
+    from idealized_orbits import create_planet_transformation_matrix
+    M = np.asarray(create_planet_transformation_matrix('Sun'), dtype=float)
+    cx, cy, cz = center_position
+    color = 'rgb(0, 200, 200)'
+    t = np.linspace(0.0, 2.0 * np.pi, 145)
+    traces = []
+    for k, row in enumerate((ALFVEN_SURFACE_RANGE_LOW_RADII,
+                             ALFVEN_SURFACE_RANGE_HIGH_RADII)):
+        r = row * SOLAR_RADIUS_AU
+        ring = M @ np.vstack([r * np.cos(t), r * np.sin(t), 0.0 * t])
+        traces.append(go.Scatter3d(
+            x=ring[0] + cx, y=ring[1] + cy, z=ring[2] + cz,
+            mode='lines',
+            line=dict(color=color, width=2, dash='dash'),
+            opacity=0.7,
+            name=ALFVEN_RANGE_LEGEND, legendgroup=ALFVEN_RANGE_LEGEND,
+            hoverinfo='skip', showlegend=(k == 0),
+        ))
+    mx, my, mz = M @ np.array([ALFVEN_SURFACE_RANGE_LOW_RADII
+                               * SOLAR_RADIUS_AU * 1.05, 0.0, 0.0])
+    traces.append(create_info_marker(
+        mx + cx, my + cy, mz + cz, color,
+        alfven_surface_range_info.replace('\n', '<br>'),
+        ALFVEN_RANGE_LEGEND, customdata='Alfven Surface, usual range'))
     return traces

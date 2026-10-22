@@ -110,6 +110,12 @@ fade and its streamer belt, replacing Inner Corona, Streamer Belt and
 Extended Corona; and "-- Zodiacal Dust Cloud (F-corona)",
 sun_zodiacal_dust_var. The animation's static-only legend placeholders
 are one per checkbox. Tony's approved words, 2026-10-19 and 2026-10-20.)
+Module updated: October 22, 2026 with Anthropic's Claude Opus 5.5 (L-454,
+the Sun's share: "-- Alfven Surface, usual range", sun_alfven_surface_range_var,
+the Alfven surface's two dashed circles at the ends of its usual range,
+with Tony's approved words of this day. And L-434: the three Oort cloud
+spheres' checkboxes, Inner Limit of Oort Cloud, Inner Oort Cloud and
+Outer Oort Cloud, are gone, Tony's ruling of this day.)
 
 """
 #Paloma's Orrery - Solar System Visualization Tool
@@ -309,9 +315,6 @@ from solar_visualization_shells import (
     hills_cloud_torus_info,
     outer_oort_clumpy_info,
 
-    outer_oort_info,
-    inner_oort_info,
-    inner_limit_oort_info,
 
     solar_wind_info,
     termination_shock_info,
@@ -319,6 +322,7 @@ from solar_visualization_shells import (
     zodiacal_dust_info,
     roche_limit_info,
     alfven_surface_info,
+    alfven_surface_range_info,
     chromosphere_info,
     photosphere_info,
     radiative_zone_info,
@@ -3004,12 +3008,13 @@ sun_corona_var = tk.IntVar(value=0)
 sun_zodiacal_dust_var = tk.IntVar(value=0)
 sun_roche_limit_var    = tk.IntVar(value=0)
 sun_alfven_surface_var = tk.IntVar(value=0)
+# L-454 (2026-10-22): the Alfven surface's usual range, its own checkbox.
+sun_alfven_surface_range_var = tk.IntVar(value=0)
 sun_termination_shock_var = tk.IntVar(value=0)
 sun_heliopause_var = tk.IntVar(value=0)
 
-sun_inner_oort_limit_var = tk.IntVar(value=0)
-sun_inner_oort_var = tk.IntVar(value=0)
-sun_outer_oort_var = tk.IntVar(value=0)
+# L-434 (2026-10-22): the three Oort cloud spheres' checkboxes are gone;
+# the clouds show the edges across their ranges (Tony's ruling).
 
 sun_hills_cloud_torus_var = tk.IntVar(value=0)
 sun_outer_oort_clumpy_var = tk.IntVar(value=0)
@@ -3508,9 +3513,6 @@ sun_shell_vars = {
     'outer_oort_clumpy': sun_outer_oort_clumpy_var,         # New
     'hills_cloud_torus': sun_hills_cloud_torus_var,        # New
     'galactic_tide': sun_galactic_tide_var,                 # New
-    'outer_oort': sun_outer_oort_var,
-    'inner_oort': sun_inner_oort_var,
-    'inner_oort_limit': sun_inner_oort_limit_var,
 
     'heliopause': sun_heliopause_var,
     'termination_shock': sun_termination_shock_var,
@@ -3527,6 +3529,7 @@ sun_shell_vars = {
     'streamer_belt':  sun_corona_var,
     'roche_limit':    sun_roche_limit_var,
     'alfven_surface': sun_alfven_surface_var,    
+    'alfven_surface_range': sun_alfven_surface_range_var,
     'chromosphere': sun_chromosphere_var,
 
     'photosphere': sun_photosphere_var,
@@ -8738,6 +8741,7 @@ def toggle_all_shells():
     sun_zodiacal_dust_var.set(state)
     sun_roche_limit_var.set(state)
     sun_alfven_surface_var.set(state)    
+    sun_alfven_surface_range_var.set(state)
 
     # Asteroid belt shells
     asteroid_belt_main_var.set(state)
@@ -8748,9 +8752,6 @@ def toggle_all_shells():
     sun_termination_shock_var.set(state)
     sun_heliopause_var.set(state)
 
-    sun_inner_oort_limit_var.set(state)
-    sun_inner_oort_var.set(state)
-    sun_outer_oort_var.set(state)
 
     sun_hills_cloud_torus_var.set(state) 
     sun_outer_oort_clumpy_var.set(state)           
@@ -9317,6 +9318,13 @@ sun_alfven_surface_checkbutton = tk.Checkbutton(shell_options_frame,
 sun_alfven_surface_checkbutton.pack(anchor='w')
 CreateToolTip(sun_alfven_surface_checkbutton, alfven_surface_info)
 
+# L-454 (2026-10-22): two dashed circles at the ends of the Alfven surface's
+# usual range, on their own checkbox (Tony's ruling of 2026-10-21).
+sun_alfven_surface_range_checkbutton = tk.Checkbutton(shell_options_frame,
+    text="-- Alfven Surface, usual range", variable=sun_alfven_surface_range_var)
+sun_alfven_surface_range_checkbutton.pack(anchor='w')
+CreateToolTip(sun_alfven_surface_range_checkbutton, alfven_surface_range_info)
+
 sun_zodiacal_dust_checkbutton = tk.Checkbutton(shell_options_frame, text="-- Zodiacal Dust Cloud (F-corona)", variable=sun_zodiacal_dust_var)
 sun_zodiacal_dust_checkbutton.pack(anchor='w')
 CreateToolTip(sun_zodiacal_dust_checkbutton, zodiacal_dust_info)
@@ -9363,17 +9371,9 @@ CreateToolTip(sun_heliopause_checkbutton, solar_wind_info)
 oort_cloud_label = tk.Label(shell_options_frame, text="-- Oort Cloud Structures:", font=("Arial", 9, "bold"))
 oort_cloud_label.pack(anchor='w', pady=(5, 0))
 
-sun_inner_oort_limit_checkbutton = tk.Checkbutton(shell_options_frame, text="-- Inner Limit of Oort Cloud", variable=sun_inner_oort_limit_var)
-sun_inner_oort_limit_checkbutton.pack(anchor='w')
-CreateToolTip(sun_inner_oort_limit_checkbutton, inner_limit_oort_info)
-
 sun_hills_cloud_torus_checkbutton = tk.Checkbutton(shell_options_frame, text="-- Hills Cloud (tilted disk)", variable=sun_hills_cloud_torus_var)  # L-421: no longer drawn as a torus
 sun_hills_cloud_torus_checkbutton.pack(anchor='w')
 CreateToolTip(sun_hills_cloud_torus_checkbutton, hills_cloud_torus_info)
-
-sun_inner_oort_checkbutton = tk.Checkbutton(shell_options_frame, text="-- Inner Oort Cloud", variable=sun_inner_oort_var)
-sun_inner_oort_checkbutton.pack(anchor='w')
-CreateToolTip(sun_inner_oort_checkbutton, inner_oort_info)
 
 sun_outer_oort_clumpy_checkbutton = tk.Checkbutton(shell_options_frame, text="-- Clumpy Oort Cloud", variable=sun_outer_oort_clumpy_var)
 sun_outer_oort_clumpy_checkbutton.pack(anchor='w')
@@ -9383,9 +9383,6 @@ sun_galactic_tide_checkbutton = tk.Checkbutton(shell_options_frame, text="-- Gal
 sun_galactic_tide_checkbutton.pack(anchor='w')
 CreateToolTip(sun_galactic_tide_checkbutton, galactic_tide_info)
 
-sun_outer_oort_checkbutton = tk.Checkbutton(shell_options_frame, text="-- Outer Oort Cloud", variable=sun_outer_oort_var)
-sun_outer_oort_checkbutton.pack(anchor='w')
-CreateToolTip(sun_outer_oort_checkbutton, outer_oort_info)
 
 
 hill_sphere_label = tk.Label(shell_options_frame, text="-- Hill Sphere Structure:", font=("Arial", 9, "bold"))

@@ -90,10 +90,6 @@ from solar_visualization_shells import (create_sun_core_shell,
                                         create_sun_termination_shock_shell,
                                         create_sun_heliopause_shell,
 
-                                        create_sun_inner_oort_limit_shell,
-                                        create_sun_inner_oort_shell,
-                                        create_sun_outer_oort_shell,
-
                                         create_sun_hills_cloud_torus,
                                         create_sun_outer_oort_clumpy,
                                         create_sun_galactic_tide,

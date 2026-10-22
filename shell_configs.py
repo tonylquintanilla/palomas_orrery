@@ -89,6 +89,14 @@ Module updated: October 20, 2026 with Anthropic's Claude Opus 5.5
     CUSTOM_SHELLS['Sun'] gains 'corona', the fade, and 'zodiacal_dust',
     each a stored drawing, and the streamer belt's tooltip is the
     corona's.)
+Module updated: October 22, 2026 with Anthropic's Claude Opus 5.5
+    (L-434: the three Oort cloud spheres, SHELL_CONFIGS['Sun']
+    'inner_oort_limit', 'inner_oort' and 'outer_oort', are gone, Tony's
+    ruling: the clouds show the edges across their ranges.)
+Module updated: October 22, 2026 with Anthropic's Claude Opus 5.5
+    (L-454, the Sun's share: CUSTOM_SHELLS['Sun'] gains
+    'alfven_surface_range', the Alfven surface's two dashed circles at the
+    ends of its usual range, on a checkbox of its own.)
 """
 
 # Phase C4: Import hover text strings from body shell modules.
@@ -116,10 +124,9 @@ from solar_visualization_shells import (
     # (L-191, 2026-10-21; the _info_hover twins are gone).
     core_info, radiative_zone_info, photosphere_info, chromosphere_info,
     corona_info, zodiacal_dust_info, roche_limit_info, alfven_surface_info,
+    alfven_surface_range_info,
     termination_shock_info,
     solar_wind_info,                            # heliopause tooltip (legacy name)
-    inner_limit_oort_info,                      # inner_oort_limit tooltip (swapped naming)
-    inner_oort_info, outer_oort_info,
     gravitational_influence_info,
     # custom shell tooltips (source strings, not composed)
     hills_cloud_torus_info, outer_oort_clumpy_info, galactic_tide_info,
@@ -2063,39 +2070,6 @@ SHELL_CONFIGS = {
             'tooltip': solar_wind_info,
         },
 
-        'inner_oort_limit': {
-            'name': 'Inner Limit of Oort Cloud',
-            'radius_au': INNER_LIMIT_OORT_CLOUD_AU,
-            'color': 'white',
-            'opacity': 0.35,
-            'n_points': 20,
-            'marker_size': 3.0,
-            'hover_text': inner_limit_oort_info.replace('\n', '<br>'),
-            'tooltip': inner_limit_oort_info,
-        },
-
-        'inner_oort': {
-            'name': 'Inner Oort Cloud',
-            'radius_au': INNER_OORT_CLOUD_AU,
-            'color': 'white',
-            'opacity': 0.35,
-            'n_points': 20,
-            'marker_size': 3.0,
-            'hover_text': inner_oort_info.replace('\n', '<br>'),
-            'tooltip': inner_oort_info,
-        },
-
-        'outer_oort': {
-            'name': 'Outer Oort Cloud',
-            'radius_au': OUTER_OORT_CLOUD_AU,
-            'color': 'white',
-            'opacity': 0.3,
-            'n_points': 20,
-            'marker_size': 3.0,
-            'hover_text': outer_oort_info.replace('\n', '<br>'),
-            'tooltip': outer_oort_info,
-        },
-
         'gravitational': {
             'name': 'Gravitational Influence',
             'radius_au': GRAVITATIONAL_INFLUENCE_AU,
@@ -2808,6 +2782,13 @@ CUSTOM_SHELLS = {
         'zodiacal_dust': {
             'builder': 'solar_visualization_shells.create_sun_zodiacal_dust',
             'tooltip': zodiacal_dust_info,
+        },
+
+        # L-454 (2026-10-22): the Alfven surface's usual range, two dashed
+        # circles on a checkbox of their own (Tony's ruling of 2026-10-21).
+        'alfven_surface_range': {
+            'builder': 'solar_visualization_shells.create_sun_alfven_surface_range',
+            'tooltip': alfven_surface_range_info,
         },
 
         'rotation_axis': {

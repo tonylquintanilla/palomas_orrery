@@ -303,6 +303,11 @@ October 21, 2026, night, with Anthropic's Claude Opus 5.5 (L-460,
 L-466): Drawn Ends, the website's new checker, gets its button after
 Drawer Order, with its short line, running through
 documentation/run_offline_check.py.
+October 22, 2026 with Anthropic's Claude Opus 5.5 (L-468, L-465): Label
+Words, the website's new checker (gallery patch L434_3), gets its button
+after Hover Budget, with its short line; the Far Lines text says what
+that check holds since the same patch, and the Arrival text names the
+Sun's rotation axis, a drawn guide that must carry no shell key.
 """
 
 import os
@@ -862,8 +867,9 @@ LAUNCH_GROUPS = {
         "room's shells and the Earth room's scene with the real "
         "renderers, applies gallery/arrival.js with the real "
         "data/objects_config.json, and compares what is drawn on "
-        "opening against its list; it also fails on any trace with no "
-        "shell key. It first makes itself fail on purpose four ways. "
+        "opening against its list; it also fails on any shell trace with "
+        "no shell key, and on a drawn guide (the Sun's rotation axis) "
+        "that carries one. It first makes itself fail on purpose four ways. "
         "GATES the gallery runner. The check is Node, so this button "
         "runs it through documentation/run_offline_check.py, which "
         "reads its command from the gallery runner's own list: the two "
@@ -952,8 +958,9 @@ LAUNCH_GROUPS = {
         "and pole line, at 100,000 AU, drew as a wide pink band on Tony's "
         "phone whenever the Sun room was zoomed in close. It works six "
         "cases by hand, builds the Sun room from the served config and "
-        "names the lines it looks after, and checks every drawn point "
-        "lies inside the box. It breaks its own file three ways first, to "
+        "names the lines it looks after, and checks every line that "
+        "reaches far past the view is cut to the box and every other line "
+        "is left as served. It breaks its own file three ways first, to "
         "show it can fail. GATES the gallery runner. The check is Node, so "
         "this button runs it through documentation/run_offline_check.py. "
         "Runs from the gallery repo ROOT.",
@@ -993,6 +1000,21 @@ LAUNCH_GROUPS = {
         GALLERY_REPO_DIR,
         True,
         None,
+        True),
+        ("Label Words",
+        os.path.join("documentation", "run_offline_check.py"),
+        "Naming a shell in a room's drawer opens that shell's own words "
+        "(L-468). Builds the Sun and Earth rooms with the real renderers "
+        "and checks, for every shell row, that the marker the drawer "
+        "opens is the row's own: the corona's row had opened the streamer "
+        "belt's words, because the two are drawn as one feature. It "
+        "breaks its own pick first, to show it can fail. GATES the "
+        "gallery runner. The check is Node, so this button runs it "
+        "through documentation/run_offline_check.py. Runs from the "
+        "gallery repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        ["Label words"],
         True),
         ("Page Framing",
         os.path.join("documentation", "run_offline_check.py"),
@@ -2013,6 +2035,9 @@ CARD_LINES = {
     ("Gallery -- checks and data",
      "Hover Budget"):
         "Counts the lines in every room hover and names the ten longest.",
+    ("Gallery -- checks and data",
+     "Label Words"):
+        "Checks naming a drawer row opens that shell's own words.",
     ("Gallery -- checks and data",
      "Page Framing"):
         "Checks the page's framing helpers give the right axis ranges.",

@@ -18,7 +18,8 @@ For every entry in export_drawings.DRAWINGS it checks:
     the tilt      the plane through the file's own dots is tilted as the
                   file records, and within the sampler's tolerance of
                   HILLS_CLOUD_TILT_DEG, the paper's "about 30" (for the
-                  Hills cloud)
+                  Hills cloud); and its dots rise across the inner edge's
+                  range (hills_cloud_sampler.fill_in_failures, L-434)
     the belts     every dot on a field line between its belt's edge rows,
                   none below the ground, and each belt thickest at its
                   peak at the equator, read from the file's own dots
@@ -63,6 +64,7 @@ are planted first, each in memory, and each must be caught:
     a dust dot moved inside the dust-free zone   the dust
     the dust drawn with no flattening        the dust
     a dust dot's weight changed              the dust
+    the Hills cloud drawn full from 2,000 AU the fill-in
     an outer cloud dot moved inside its row  the outer cloud
     a tide dot moved past the outer edge     the tide
     the tide drawn about the ecliptic's pole the tide
@@ -100,7 +102,8 @@ Module updated: October 22, 2026 with Anthropic's Claude Opus 5.5 (L-434:
 the sixth and seventh drawings, the outer Oort cloud and the galactic
 tide, checked against their rows, with three more faults planted: an
 outer cloud dot inside where its row says it begins, a tide dot past
-the outer edge, and the tide drawn about the wrong pole)
+the outer edge, and the tide drawn about the wrong pole; and the Hills
+cloud's fill-in across its inner edge's range, with its planted fault)
 """
 import hashlib
 import json
@@ -208,6 +211,8 @@ def check_one(name, text_on_disk, text_now, path, ignored=git_ignored):
                             "%.1f deg, the file records %s"
                             % (name, tilt, content.get("plane_tilt_deg")))
         if name == "hills_cloud":
+            for line in hcs.fill_in_failures(content, hcs.rows_from_store()):
+                failures.append("%s: %s" % (name, line))
             paper = hcs.rows_from_store()["HILLS_CLOUD_TILT_DEG"]
             if abs(tilt - paper) > 10.0:
                 failures.append("%s: the dots' plane is tilted %.1f deg, not "
@@ -237,6 +242,17 @@ def _planted(text_now, path):
                 git_ignored, "is not the drawing"))
     out.append(("git reporting the file as ignored", text_now, text_now,
                 lambda _p: True, "git ignores"))
+    # L-434: the disk drawn full from the inner edge's low end, as it was
+    # until 2026-10-22; compared with itself, so only the fill-in catches it.
+    full = hcs.rows_from_store()
+    full["OORT_CLOUD_INNER_EDGE_HIGH_AU"] = full["INNER_LIMIT_OORT_CLOUD_AU"] + 1e-6
+    hcs.rows_from_store = lambda: dict(full)
+    try:
+        flat = ed.render(ed.DRAWINGS["hills_cloud"]())
+    finally:
+        hcs.rows_from_store = real
+    out.append(("the Hills cloud drawn full from 2,000 AU", flat, flat,
+                git_ignored, "fill-in:"))
     return out
 
 

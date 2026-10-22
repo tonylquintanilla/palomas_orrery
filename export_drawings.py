@@ -104,7 +104,9 @@ so.)
 Module updated: October 22, 2026 with Anthropic's Claude Opus 5.5 (L-434:
 the sixth and seventh stored drawings, the outer Oort cloud from
 outer_oort_sampler.py and the galactic tide from galactic_tide_sampler.py,
-each in whole AU in the ecliptic frame, each placed once from a seed.)
+each in whole AU in the ecliptic frame, each placed once from a seed.
+The Hills cloud's description says it fills in across its inner edge's
+range, Tony's ruling of the same day.)
 """
 
 import hashlib
@@ -131,7 +133,8 @@ def _hills_cloud():
         "what": ("The Hills cloud, the inner Oort cloud, as dots along "
                  "orbits following Nesvorny et al. (2025), Fig. 3 "
                  "(arXiv:2502.11252): a disk tilted to the ecliptic, "
-                 "with two arms."),
+                 "with two arms, filling in across the range where its "
+                 "inner edge is thought to lie."),
         "made_by": "hills_cloud_sampler.drawn_hills_cloud()",
         "frame": ("ecliptic and equinox of J2000, centred on the Sun, "
                   "the orrery's drawing frame"),

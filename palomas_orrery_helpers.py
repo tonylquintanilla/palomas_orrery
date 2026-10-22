@@ -161,9 +161,6 @@ from planet_visualization import (
 
 from solar_visualization_shells import (
     gravitational_influence_info,
-    outer_oort_info,
-    inner_oort_info,
-    inner_limit_oort_info,
     solar_wind_info,
     termination_shock_info,
     chromosphere_info,

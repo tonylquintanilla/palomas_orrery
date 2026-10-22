@@ -17,15 +17,24 @@ HOW THE DOTS ARE PLACED (every number is a row in constants_new.py):
   galactic inclination).
 - Its argument of perihelion is picked evenly in one of the two bands the
   Fig. 2 caption gives (the two arms), half the orbits in each.
-- Its far end (aphelion) is picked evenly between the cloud's inner edge
-  (INNER_LIMIT_OORT_CLOUD_AU) and the near end of the band
-  (INNER_OORT_DISK_OUTER_AU), and across the band with a chance falling
-  evenly to nothing at its far end (INNER_OORT_CLOUD_AU): so the disk is
-  full to the band and thins out across it, from the orbit sample alone.
+- Its far end (aphelion) is picked with a chance rising evenly from
+  nothing at the cloud's inner edge (INNER_LIMIT_OORT_CLOUD_AU, the low
+  end of the inner edge's range) to full at the range's high end
+  (OORT_CLOUD_INNER_EDGE_HIGH_AU), even from there to the near end of the
+  band (INNER_OORT_DISK_OUTER_AU), and falling evenly to nothing at the
+  band's far end (INNER_OORT_CLOUD_AU): so the disk fills in across the
+  inner edge's range, is full to the band and thins out across it.
+  ADDED 2026-10-22 (L-434, Tony's ruling): the inner edge is uncertain,
+  thought to lie between those two rows, and an uncertain edge is drawn
+  as a cloud across its range; until then the disk was full from 2,000 AU
+  and a sphere marked the edge.
 - Every orbit has the eccentricity HILLS_CLOUD_ECCENTRICITY, a declared
   pick. Dots go along each orbit evenly in TIME, so they gather at the
   far ends, where a body spends most of its time, and that is where the
-  arms show. They go only on the part of each orbit inside the cloud,
+  arms show. Across the inner edge's range a dot is kept with the same
+  rising chance at its own distance, drawn again along its orbit until
+  kept, so the fill-in shows in the dots and not only in the orbits.
+  They go only on the part of each orbit inside the cloud,
   no nearer the Sun than its inner edge (INNER_LIMIT_OORT_CLOUD_AU): the
   paper places the inner cloud by distance from the Sun (sec. 1, p. 2,
   the row INNER_OORT_DISK_OUTER_AU), so no dot is drawn closer in.
@@ -47,6 +56,12 @@ it and shows each check failing on a planted fault):
 - The tilt: the plane through the dots must lie within 10 degrees of
   HILLS_CLOUD_TILT_DEG, the paper's "about 30". The tilt is printed, never
   set.
+- The edges: every dot between INNER_LIMIT_OORT_CLOUD_AU and
+  INNER_OORT_CLOUD_AU (L-460).
+- The fill-in: across the inner edge's range, from
+  INNER_LIMIT_OORT_CLOUD_AU to OORT_CLOUD_INNER_EDGE_HIGH_AU, the dots in
+  four equal shells must rise shell by shell (L-434). Drawn full from the
+  low end, as before 2026-10-22, they fall instead.
 
 Pure Python and numpy: no Plotly, no Tk. The gallery's builder computes
 served geometry in Python too, so this module can be carried there; which
@@ -88,6 +103,12 @@ Module updated: October 21, 2026 with Anthropic's Claude Opus 5.5 (L-460:
 dots only on the part of each orbit inside the cloud's inner edge, still
 evenly in time there; a fourth check, the edges, that every dot lies
 between the inner edge and INNER_OORT_CLOUD_AU)
+Module updated: October 22, 2026 with Anthropic's Claude Opus 5.5 (L-434,
+Tony's ruling that an uncertain edge is drawn as a cloud across its
+range: the disk fills in across the inner edge's range, from
+INNER_LIMIT_OORT_CLOUD_AU to OORT_CLOUD_INNER_EDGE_HIGH_AU, in the
+orbits' far ends and in the dots, fill_in(); the sphere that marked the
+edge is gone. A fifth check, the fill-in.)
 """
 import math
 
@@ -96,7 +117,8 @@ import numpy as np
 from pole_frames import create_pole_transformation_matrix
 
 ROW_NAMES = (
-    'INNER_LIMIT_OORT_CLOUD_AU', 'INNER_OORT_DISK_OUTER_AU',
+    'INNER_LIMIT_OORT_CLOUD_AU', 'OORT_CLOUD_INNER_EDGE_HIGH_AU',
+    'INNER_OORT_DISK_OUTER_AU',
     'INNER_OORT_CLOUD_AU', 'HILLS_CLOUD_TILT_DEG',
     'ECLIPTIC_NODE_GALACTIC_LON_DEG',
     'HILLS_CLOUD_PERI_ARG_BAND1_LOW_DEG', 'HILLS_CLOUD_PERI_ARG_BAND1_HIGH_DEG',
@@ -144,16 +166,31 @@ def _cells(rows):
     return keys, counts / counts.sum()
 
 
-def _aphelia(n, inner, near, far, rng):
-    """Evenly from inner to near, then a chance falling evenly to nothing
-    at far: inverse of the cumulative share of that shape."""
-    flat = near - inner
-    ramp = (far - near) / 2.0
-    u = rng.random(n) * (flat + ramp)
-    v = np.maximum(u - flat, 0.0)
-    return np.where(u < flat, inner + u,
-                    far - np.sqrt(np.maximum((far - near) ** 2
-                                             - 2.0 * v * (far - near), 0.0)))
+def _aphelia(n, inner, full, near, far, rng):
+    """A chance rising evenly from nothing at inner to full at full, even
+    to near, then falling evenly to nothing at far: inverse of the
+    cumulative share of that trapezoid. L-434 (2026-10-22): the rise
+    across the inner edge's range is new; with full == inner it is the
+    earlier shape exactly."""
+    rise = (full - inner) / 2.0
+    flat = near - full
+    fall = (far - near) / 2.0
+    u = rng.random(n) * (rise + flat + fall)
+    w = np.maximum(u - rise - flat, 0.0)
+    up = inner + np.sqrt(np.maximum(2.0 * u * (full - inner), 0.0))
+    mid = full + (u - rise)
+    down = far - np.sqrt(np.maximum((far - near) ** 2
+                                    - 2.0 * w * (far - near), 0.0))
+    return np.where(u < rise, up, np.where(u < rise + flat, mid, down))
+
+
+def fill_in(r, rows):
+    """Chance of keeping a dot at distance r across the inner edge's
+    range (L-434): nothing at INNER_LIMIT_OORT_CLOUD_AU, rising evenly to
+    all of them at OORT_CLOUD_INNER_EDGE_HIGH_AU, and all of them beyond."""
+    lo = float(rows['INNER_LIMIT_OORT_CLOUD_AU'])
+    hi = float(rows['OORT_CLOUD_INNER_EDGE_HIGH_AU'])
+    return np.clip((np.asarray(r, dtype=float) - lo) / (hi - lo), 0.0, 1.0)
 
 
 def _eccentric_anomaly(mean_anomaly, e):
@@ -189,6 +226,7 @@ def sample_hills_cloud(n_orbits, points_per_orbit, rows=None, seed=None):
 
     e = float(rows['HILLS_CLOUD_ECCENTRICITY'])
     aphelion = _aphelia(n_orbits, float(rows['INNER_LIMIT_OORT_CLOUD_AU']),
+                        float(rows['OORT_CLOUD_INNER_EDGE_HIGH_AU']),
                         float(rows['INNER_OORT_DISK_OUTER_AU']),
                         float(rows['INNER_OORT_CLOUD_AU']), rng)
     a = aphelion / (1.0 + e)
@@ -204,6 +242,29 @@ def sample_hills_cloud(n_orbits, points_per_orbit, rows=None, seed=None):
     share = rng.uniform(0, 1, (n_orbits, points_per_orbit))
     mean_anomaly = m0[:, None] + share * (2 * np.pi - 2 * m0[:, None])
     big_e = _eccentric_anomaly(mean_anomaly, e)
+    # L-434 (2026-10-22): across the inner edge's range a dot is kept with
+    # fill_in's chance at its distance; one not kept is drawn again along
+    # its own orbit, evenly in time on the same part, until kept, so the
+    # count is unchanged. An orbit always reaches past the range's high
+    # end or close to it, so this ends; the cap is a guard, never reached
+    # in the drawing or the check.
+    pending = np.ones(big_e.shape, dtype=bool)
+    span_m = np.broadcast_to(2 * np.pi - 2 * m0[:, None], big_e.shape)
+    start_m = np.broadcast_to(m0[:, None], big_e.shape)
+    semi = np.broadcast_to(a[:, None], big_e.shape)
+    for _ in range(100000):
+        idx = np.nonzero(pending)
+        r_now = semi[idx] * (1.0 - e * np.cos(big_e[idx]))
+        kept = rng.random(r_now.shape) < fill_in(r_now, rows)
+        pending[tuple(i[kept] for i in idx)] = False
+        if not pending.any():
+            break
+        idx = np.nonzero(pending)
+        mean_anomaly[idx] = start_m[idx] + rng.uniform(0, 1, idx[0].size) * span_m[idx]
+        big_e[idx] = _eccentric_anomaly(mean_anomaly[idx], e)
+    else:
+        raise RuntimeError('hills cloud: dots could not be placed across the '
+                           'inner edge\'s range')
     in_x = a[:, None] * (np.cos(big_e) - e)
     in_y = a[:, None] * math.sqrt(1.0 - e * e) * np.sin(big_e)
 
@@ -335,6 +396,21 @@ def edge_failures(sample, rows, slack_au=1.0):
     return out
 
 
+def fill_in_failures(sample, rows):
+    """The fill-in check (L-434): across the inner edge's range the dots
+    in four equal shells rise shell by shell. A list of failure sentences,
+    each starting "fill-in:"."""
+    lo = float(rows['INNER_LIMIT_OORT_CLOUD_AU'])
+    hi = float(rows['OORT_CLOUD_INNER_EDGE_HIGH_AU'])
+    r = np.sqrt(np.asarray(sample['x']) ** 2 + np.asarray(sample['y']) ** 2
+                + np.asarray(sample['z']) ** 2)
+    counts, _edges = np.histogram(r, bins=np.linspace(lo, hi, 5))
+    if not all(counts[k] < counts[k + 1] for k in range(len(counts) - 1)):
+        return ['fill-in: the dots in four shells from %g to %g AU do not '
+                'rise outward: %s' % (lo, hi, ', '.join(str(c) for c in counts))]
+    return []
+
+
 def check(rows=None, seed=421, frame_tolerance_deg=1.0, tilt_tolerance_deg=10.0):
     """The four checks, as a list of failure sentences (empty: all pass),
     and the description they were judged on, from 4,000 orbits so the
@@ -349,6 +425,8 @@ def check(rows=None, seed=421, frame_tolerance_deg=1.0, tilt_tolerance_deg=10.0)
     info = describe(sample, rows)
     failures += edge_failures(sample, rows)
     failures += edge_failures(drawn_hills_cloud(rows), rows)
+    failures += fill_in_failures(sample, rows)
+    failures += fill_in_failures(drawn_hills_cloud(rows), rows)
     lon, lat = info['sgr_a_galactic_lon_lat_deg']
     if abs(lon) > frame_tolerance_deg or abs(lat) > frame_tolerance_deg:
         failures.append('frame: Sgr A* falls at galactic longitude %.2f, '
@@ -394,7 +472,7 @@ def main():
         for line in failures:
             print('FAIL: ' + line)
         return 1
-    print('PASS: frame, reading, tilt and edges')
+    print('PASS: frame, reading, tilt, edges and fill-in')
     return 0
 
 

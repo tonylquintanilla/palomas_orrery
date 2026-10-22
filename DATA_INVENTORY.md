@@ -74,21 +74,21 @@ Repo copies stale/absent; this reflects the live local stores.
 
 Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
-**Total size:** 454.5 MB (860 files)
+**Total size:** 454.7 MB (865 files)
 
-**GitHub Pages headroom:** 570 MB remaining of 1024 MB ceiling (44.4% used)
+**GitHub Pages headroom:** 569 MB remaining of 1024 MB ceiling (44.4% used)
 
 ### By extension
 
 | ext | count | total | biggest | newest |
 |---|---|---|---|---|
-| .json | 467 | 422.6 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-10-22 |
+| .json | 469 | 422.6 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-10-22 |
 | .kmz | 39 | 14.4 MB | western_heatwave_march_21_blockbuster.kmz (904.7 KB) | 2026-06-30 |
-| .py | 257 | 8.5 MB | patch_L330_3_website_belts_words_20261017.py (451.6 KB) | 2026-10-22 |
+| .py | 259 | 8.7 MB | patch_L330_3_website_belts_words_20261017.py (451.6 KB) | 2026-10-22 |
 | .png | 2 | 6.3 MB | palomas_orrery_logo.png (5.1 MB) | 2026-09-24 |
 | .jsonl | 35 | 1.2 MB | encke.jsonl (47.3 KB) | 2026-10-22 |
-| .js | 30 | 631.4 KB | feature_renderers.js (185.4 KB) | 2026-10-21 |
-| .html | 5 | 471.5 KB | interactive.html (229.1 KB) | 2026-10-21 |
+| .js | 31 | 666.5 KB | feature_renderers.js (200.7 KB) | 2026-10-22 |
+| .html | 5 | 471.5 KB | interactive.html (229.0 KB) | 2026-10-22 |
 | .jpg | 2 | 137.9 KB | palomas_orrery_wall.jpg (95.2 KB) | 2026-10-04 |
 | .ico | 1 | 137.3 KB | favicon.ico (137.3 KB) | 2025-11-28 |
 | .md | 7 | 79.3 KB | MODULE_ATLAS.md (52.6 KB) | 2026-10-22 |
@@ -129,7 +129,7 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
 | repo | served size | ceiling | headroom | used |
 |---|---|---|---|---|
-| gallery | 454.5 MB | 1024 MB | 570 MB | 44.4% |
+| gallery | 454.7 MB | 1024 MB | 569 MB | 44.4% |
 | orrery (gitignored data) | 968.2 MB | n/a (not served) | -- | -- |
 
 Note: orrery data is local/gitignored. If orbit cache files are pushed to either repo for web serving, re-run this inventory to update headroom.

@@ -141,6 +141,9 @@ Module updated: October 20, 2026 with Anthropic's Claude Opus 5.5
 (L-410 with L-131: the inner and outer corona spheres' two entries
 removed. The corona is one fade of dots now, and its edges are not
 exact rows.)
+Module updated: October 22, 2026 with Anthropic's Claude Opus 5.5
+(L-434: the inner limit's and the outer Oort cloud's entries removed with
+their spheres, Tony's ruling; the clouds show those edges now.)
 """
 
 import os
@@ -219,12 +222,8 @@ PRINTS = {
     # L-410 (2026-10-20): the inner and outer corona spheres' entries went
     # with the spheres; the corona is one fade now, and its edges are not
     # exact rows.
-    'oort_cloud/inner_oort_limit':
-        ('gallery/feature_renderers.js', 'renderShellSet',
-         'servedText(cfg.radius) + " AU'),
-    'oort_cloud/outer_oort':
-        ('gallery/feature_renderers.js', 'renderShellSet',
-         'servedText(cfg.radius) + " AU'),
+    # L-434 (2026-10-22): the inner limit's and the outer Oort cloud's
+    # entries went with their spheres; the clouds show those edges now.
     'oort_cloud/hills_cloud_torus/inner_radius':
         ('gallery/feature_renderers.js', 'renderOortShape',
          'fmtAuServed(cfg.inner_radius)'),

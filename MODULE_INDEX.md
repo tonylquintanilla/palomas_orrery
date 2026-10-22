@@ -11,9 +11,9 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 166  
-**Total Lines of Code (non-blank):** 131,341  
-**Total Public Functions/Classes:** 1,638
+**Total Python Files:** 167  
+**Total Lines of Code (non-blank):** 131,709  
+**Total Public Functions/Classes:** 1,639
 
 ## Classification Coverage
 
@@ -37,8 +37,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `earth_system_controller.py` | KMZ layer selector for Google Earth Pro. (131 lines) |
 | `earth_system_visualization_gui.py` | Earth System Visualization GUI for Paloma's Orrery Hub window with climate data visualizations (1,903 lines) |
 | `orbital_param_viz.py` | Interactive orbital element visualization tool. (1,965 lines) |
-| `palomas_orrery.py` | Main GUI and plotting engine for Paloma's Orrery. (9,760 lines) |
-| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (3,224 lines) |
+| `palomas_orrery.py` | Main GUI and plotting engine for Paloma's Orrery. (9,758 lines) |
+| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (3,249 lines) |
 | `star_visualization_gui.py` | Stellar visualization GUI for Paloma's Orrery. (1,409 lines) |
 
 ---
@@ -56,7 +56,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `paleoclimate_visualization.py` | Paleoclimate Visualization for Paloma's Orrery Cenozoic temperature and CO₂ reconstruction (66 Ma - present) (480 lines) |
 | `paleoclimate_visualization_full.py` | Paleoclimate Visualization for Paloma's Orrery Phanerozoic temperature reconstruction (540 Ma - present) (1,489 lines) |
 | `paleoclimate_wet_bulb_full.py` | Paleoclimate + Wet Bulb Visualization for Paloma's Orrery Phanerozoic temperature reconstruction (540 Ma - present) with human survivability context (2,226 lines) |
-| `planet_visualization.py` | High-level planet and Sun visualization orchestration. (811 lines) |
+| `planet_visualization.py` | High-level planet and Sun visualization orchestration. (808 lines) |
 | `planet_visualization_utilities.py` | Shared geometry helpers and body-radius aliases. (1,042 lines) |
 | `planetarium_apparent_magnitude.py` | Create 3D visualization for stars brighter than specified apparent magnitude. (355 lines) |
 | `planetarium_distance.py` | 3D star field pipeline for distance-based queries. (401 lines) |
@@ -89,7 +89,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `planet9_visualization_shells.py` | Hypothetical Planet 9 shell traces. (269 lines) |
 | `pluto_visualization_shells.py` | Pluto interior and atmosphere shell traces. (615 lines) |
 | `saturn_visualization_shells.py` | Saturn interior, ring, and magnetosphere shell traces. (1,088 lines) |
-| `solar_visualization_shells.py` | Sun interior, corona, and heliosphere shell traces. (1,653 lines) |
+| `solar_visualization_shells.py` | Sun interior, corona, and heliosphere shell traces. (1,645 lines) |
 | `uranus_visualization_shells.py` | Uranus interior, ring, and magnetosphere shell traces. (1,083 lines) |
 | `venus_visualization_shells.py` | Venus interior and atmosphere shell traces. (711 lines) |
 
@@ -111,7 +111,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `fetch_climate_data.py` | Climate Data Fetcher - Paloma's Orrery Preserves critical climate datasets for future reference (763 lines) |
 | `fetch_paleoclimate_data.py` | Paleoclimate Data Fetcher for Paloma's Orrery Fetches and caches paleoclimate proxy data from authoritative sources (171 lines) |
 | `galactic_tide_sampler.py` | Where the galaxy's tide sends comets in from: dots in the outer Oort cloud about the galaxy's pole, placed once from a seed, sparse at the galaxy's plane and at its poles, thickest halfway. (230 lines) |
-| `hills_cloud_sampler.py` | The Hills cloud (the inner Oort cloud) as dots along orbits, following Nesvorny et al. (2025), Fig. 3. (353 lines) |
+| `hills_cloud_sampler.py` | The Hills cloud (the inner Oort cloud) as dots along orbits, following Nesvorny et al. (2025), Fig. 3. (427 lines) |
 | `idealized_orbits.py` | Keplerian orbit ellipse construction and satellite orbit models. Computes and plots idealized (Keplerian) orbit paths from orbital elements, with osculating element support for high-accuracy visualization. Handles elliptical, parabolic, and hyperbolic orbits. Includes specia... (6,751 lines) |
 | `object_type_analyzer.py` | Object Type Analysis and Report Generation Module Provides comprehensive analysis of astronomical data including object types, data quality metrics, and full report generation. (756 lines) |
 | `orbital_elements.py` | Standalone data module containing orbital element dictionaries. NO IMPORTS - Pure data only to avoid circular dependencies. (1,296 lines) |
@@ -132,8 +132,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `celestial_objects.py` | Celestial object definitions for Paloma's Orrery. (1,270 lines) |
 | `close_approach_data.py` | JPL CAD API client for small-body close approach data. (512 lines) |
-| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (5,208 lines) |
-| `constants_tokens.py` | - what each "# Unit:" token in constants_new.py means. (361 lines) |
+| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (5,329 lines) |
+| `constants_tokens.py` | - what each "# Unit:" token in constants_new.py means. (375 lines) |
 | `earth_pole_of_date.py` | Earth's rotation pole and tilt for the date of a plot. (269 lines) |
 | `exoplanet_coordinates.py` | Stellar Positioning and Coordinate Transformations (412 lines) |
 | `exoplanet_stellar_properties.py` | Stellar Properties for Exoplanet Host Stars (484 lines) |
@@ -141,7 +141,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `info_dictionary.py` | Descriptive text and narrative content for Paloma's Orrery. (2,054 lines) |
 | `messier_catalog.py` | Static catalog of Messier objects and bright deep-sky objects. (406 lines) |
 | `sgr_a_star_data.py` | S-star catalog and orbital mechanics for Sagittarius A*. (590 lines) |
-| `shell_configs.py` | Shell configuration data for all celestial bodies. (2,641 lines) |
+| `shell_configs.py` | Shell configuration data for all celestial bodies. (2,624 lines) |
 | `spacecraft_encounters.py` | Tagged encounter data for spacecraft missions in Paloma's Orrery. (1,298 lines) |
 | `star_notes.py` | Curated hover text annotations for notable stars. (1,158 lines) |
 | `star_properties.py` | SIMBAD stellar property queries with local caching. (340 lines) |
@@ -192,7 +192,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `constants_rows.py` | - read constants_new.py as rows: each top-level assignment, its right-hand side, and the comment fields beneath it. (864 lines) |
 | `earth_system_common.py` | Shared, engine-agnostic helpers for the Earth System KMZ generators (climate/heat and food insecurity). (134 lines) |
 | `formatting_utils.py` | Basic formatting utilities used by both palomas_orrery.py and visualization_utils.py. (19 lines) |
-| `palomas_orrery_helpers.py` | Support functions extracted from the main orrery monolith. (750 lines) |
+| `palomas_orrery_helpers.py` | Support functions extracted from the main orrery monolith. (747 lines) |
 | `report_manager.py` | Scientific Report Manager for Astronomical Data Analysis Manages generation, storage, and retrieval of analysis reports. (126 lines) |
 | `shared_utilities.py` | Small shared helpers used across shell visualization modules. (216 lines) |
 | `shutdown_handler.py` | Graceful shutdown and safe figure display for Plotly. (75 lines) |
@@ -205,7 +205,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 |--------|-------------|
 | `add_docstrings.py` | Two related tools for module-level docstrings. (1,210 lines) |
 | `check_horizons_confirmations.py` | - every object the website takes from the orrery's list has been confirmed against JPL Horizons, recently, and has not changed since; each fetched period too; and every spacecraft data sheet a row quotes still gives the row's figure (L-395, L-431). (157 lines) |
-| `constants_change_report.py` | - what moved in constants_new.py, and why. (631 lines) |
+| `constants_change_report.py` | - what moved in constants_new.py, and why. (637 lines) |
 | `convert_hot_ph_to_json.py` | Convert HOT ocean pH data to JSON format Manual converter for ocean acidification visualization (199 lines) |
 | `create_cache_backups.py` | One-shot script to create timestamped backups of star data caches. (10 lines) |
 | `create_ephemeris_database.py` | Create satellite_ephemerides.json from multiple sources (246 lines) |
@@ -214,10 +214,10 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `diagnose_bcodmo.py` | Diagnostic script to examine BCO-DMO pH data structure (67 lines) |
 | `doc_index.py` | - regenerate README.md's key-documents table from the documents themselves. (193 lines) |
 | `earth_system_generator.py` | Paloma's Orrery: Earth System Generator Engine Architecture: The Teaser (Plotly) & Blockbuster (KMZ) Pipeline (673 lines) |
-| `exact_rows_report.py` | - which exact rows a display prints, and where. (707 lines) |
+| `exact_rows_report.py` | - which exact rows a display prints, and where. (706 lines) |
 | `examine_hot_csv.py` | Examine the HOT CSV file structure (47 lines) |
 | `export_constants.py` | - write data/constants_export.json from constants_new.py. The orrery is the producer of its numbers; the gallery reads this file and never reads orrery source. (531 lines) |
-| `export_drawings.py` | - write the orrery's stored drawings into data/drawings/, one file per drawing, for the website to pull and draw. (398 lines) |
+| `export_drawings.py` | - write the orrery's stored drawings into data/drawings/, one file per drawing, for the website to pull and draw. (401 lines) |
 | `export_objects.py` | - write data/objects_export.json from the object list in celestial_objects.py. The orrery is the one definition of each object; the gallery reads this file and never reads orrery source. (585 lines) |
 | `export_orbit_cache.py` | Phase 1b desktop devtool: read the local orbit caches and write web-servable orbit/position files for the interactive gallery. (617 lines) |
 | `food_insecurity_generator.py` | IPC acute food-insecurity KMZ layer (Sudan, current period). (702 lines) |
@@ -225,8 +225,9 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `ledger_index.py` | Generate the at-a-glance INDEX for the consolidated ledger. (715 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (129 lines) |
-| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (996 lines) |
+| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (998 lines) |
 | `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (868 lines) |
+| `patch_L434_4_close_20261022.py` | The close of October 22's build: the ledger, Where We Are, three skills, the protocol, the closing report and Claude Fable 5.1's coordination record. (123 lines) |
 | `period_fetch.py` | - fetch from JPL the orbital period of each object the website serves that has none fetched yet, with the same code the orrery uses when Tony plots, so the Horizons check can compare it with JPL the same day and the objects export can carry it to the website (L-444). (375 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (505 lines) |
 | `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (3,528 lines) |
@@ -236,7 +237,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `test_constants_provenance.py` | Regression tests for verified numeric constants. (476 lines) |
 | `test_cross_checked.py` | Regression tests for cross-check annotations. (501 lines) |
 | `test_dashboard_parity.py` | Every step the maintenance runs and the Daily Run take has a dashboard button with the same name and the same script, every button under a runner names one of its steps, every button's script is on disk, and every card carries its short line; and proof that this check c... (498 lines) |
-| `test_derived_figures.py` | - a derived constant declares no more significant figures than its inputs support, and names every derived row it cannot judge. (1,239 lines) |
+| `test_derived_figures.py` | - a derived constant declares no more significant figures than its inputs support, and names every derived row it cannot judge. (1,247 lines) |
 | `test_dimensions.py` | - a derived constant's unit follows from its arithmetic. (591 lines) |
 | `test_domain_split.py` | Checks for L-437: the provenance scanner's whole-tree Tier-1 total prints with its domain split, and a module's domain is read from its own docstring Domain: tag. (406 lines) |
 | `test_horizons_check.py` | - the Horizons check (L-395, L-431) on JPL's recorded answers, with no network: every entry agrees, and every planted fault is caught by name. (588 lines) |
@@ -264,10 +265,10 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
-| `test_drawings_export.py` | Each stored drawing in data/drawings/ is the drawing its rows give today, git tracks it, and each check can fail. (450 lines) |
+| `test_drawings_export.py` | Each stored drawing in data/drawings/ is the drawing its rows give today, git tracks it, and each check can fail. (466 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
-| `test_hills_cloud_sampler.py` | The Hills cloud's three checks, and proof that each one can fail. (85 lines) |
+| `test_hills_cloud_sampler.py` | The Hills cloud's three checks, and proof that each one can fail. (95 lines) |
 | `test_worksheet_keys.py` | Round trip: every annotated site mints a key that resolves back. (301 lines) |
 | `worksheet_key_aliases.py` | Retired worksheet keys and what replaced them. (67 lines) |
 

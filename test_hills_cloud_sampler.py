@@ -8,7 +8,8 @@ and latitude 0), the reading of the paper's Fig. 3 (most of its dots inside the
 caption's ranges), and the tilt (the plane through the dots within 10
 degrees of the paper's "about 30") and, since L-460, the edges (every
 dot between the cloud's inner edge and the far end of its band, in the
-large sample and in the drawing). A check that passes is only worth
+large sample and in the drawing) and, since L-434, the fill-in (the dots
+rising across the inner edge's range). A check that passes is only worth
 something if it can fail, so this file first plants a fault for each one
 and requires the right check to catch it, then runs the real rows:
 
@@ -18,6 +19,7 @@ and requires the right check to catch it, then runs the real rows:
     the reading moved 120 deg along   reading
     the tilt row set to 60 deg        tilt
     one drawn dot moved to 257 AU     edges
+    the disk drawn full from 2,000 AU fill-in
 
 The last line starts "HILLS CLOUD:", which the maintenance run quotes.
 
@@ -30,6 +32,9 @@ Domain: orrery
 Module updated: October 10, 2026 with Anthropic's Claude Opus 5.5 (L-421)
 Module updated: October 21, 2026 with Anthropic's Claude Opus 5.5 (L-460:
 the edges check, and its planted fault)
+Module updated: October 22, 2026 with Anthropic's Claude Opus 5.5 (L-434:
+the fill-in check, and its planted fault: the disk drawn full from the
+inner edge's low end, as it was until this day)
 """
 import sys
 
@@ -54,10 +59,16 @@ def _planted():
     steep = dict(rows)
     steep['HILLS_CLOUD_TILT_DEG'] = 60
 
+    # L-434: the range collapsed onto its low end, which draws the disk
+    # full from there, as it was drawn until 2026-10-22.
+    full = dict(rows)
+    full['OORT_CLOUD_INNER_EDGE_HIGH_AU'] = rows['INNER_LIMIT_OORT_CLOUD_AU'] + 1e-6
+
     return [('the pole\'s RA and Dec swapped', swapped, 'frame'),
             ('the ecliptic node row set to 0', no_node, 'frame'),
             ('the reading moved 120 deg along', moved, 'reading'),
-            ('the tilt row set to 60 deg', steep, 'tilt')]
+            ('the tilt row set to 60 deg', steep, 'tilt'),
+            ('the disk drawn full from 2,000 AU', full, 'fill-in')]
 
 
 def main():
@@ -95,7 +106,7 @@ def main():
             print('FAIL: ' + line)
         print('HILLS CLOUD: FAIL -- %d problem(s)' % len(problems))
         return 1
-    print('HILLS CLOUD: PASS -- 5 of 5 planted faults caught; the real rows '
+    print('HILLS CLOUD: PASS -- 6 of 6 planted faults caught; the real rows '
           'pass, the dots\' plane tilted %.1f deg' % info['plane_tilt_deg'])
     return 0
 
