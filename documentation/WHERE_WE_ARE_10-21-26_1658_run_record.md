@@ -384,7 +384,73 @@ CHECKERS -- the verdict informs the push call
 C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 
 4. Commit and push, then do the live run. -- 72c3c403a3207ea62184e68d100164911cbb3677
-5. On your phone, open the Sun room's drawer, then Earth's.
+
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 23 files from https://palomasorrery.com/
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches (the working copy is CRLF)
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+    SERVED   gallery/arrival.js                             matches the working copy
+    SERVED   gallery/nav_cluster.js                         matches the working copy
+    SERVED   gallery/solar_system_figures.js                matches the working copy
+    SERVED   gallery/solar_system_drawer.js                 matches the working copy
+    SERVED   data/objects_config.json                       matches the working copy
+    SERVED   gallery/guestbook.js                           matches the working copy
+    SERVED   data/guestbook.json                            matches the working copy
+    SERVED   data/solar-system/drawings/hills_cloud.json    matches the working copy
+    SERVED   data/solar-system/drawings/van_allen_belts.json matches the working copy
+    SERVED   data/solar-system/drawings/earth_exosphere.json matches the working copy
+    SERVED   data/solar-system/drawings/sun_corona.json     matches the working copy
+    SERVED   data/solar-system/drawings/zodiacal_dust.json  matches the working copy
+    SERVED   gallery/source_list.js                         matches the working copy
+    SERVED   gallery/far_lines.js                           matches the working copy
+    SERVED   gallery/drawer_order.js                        matches the working copy
+
+  PASS Served reachability       3.4s  all 23 files served and
+                                    byte-identical to the working copy
+
+  orrery export pinned at c0feb228
+
+  PASS Export freshness          0.1s  the served export is the orrery's
+                                    at c0feb228, byte for byte
+
+  orrery HEAD 4a40d27c
+  examining 4 of 168 links; the other 164 are served from the export
+    NOT IN STORE  planet_poles['Sun']              not a top-level constant in the store
+                  /objects/0/features/orientation
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  4 pointers: 1 match, 0 DRIFT, 0 UNIT MISMATCH, 3 could not be examined.
+
+  PASS Store drift               1.7s  4 pointers against orrery 4a40d27c
+                                    -- 1 match, 0 DRIFT, 0 UNIT
+                                    MISMATCH, 3 could not be examined.
+
+======================================================================
+  2 of 2 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Store drift            4 pointers against orrery 4a40d27c -- 1
+  last swap 2026-10-21T18:18:23.201956+00:00: succeeded after a refused rename -- staging_to_live took 3 attempts -- a refusal this build absorbed
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+5. On your phone, open the Sun room's drawer, then Earth's. -- it's unclear why the corona comes before the chromosphere, which starts at the photosphere. the corona hover does not indicate a starting point, but i understand it is not at the surface. 
 
 Nothing changes on the website until the push.
 
@@ -394,6 +460,343 @@ I haven't committed or pushed anything, and I won't. These changes reach the web
 
 When you've run the website patch and pushed, tell me. I'll read the new head of the website and then show you the first of the five pairs.
 
+===============================================================================
 
+The corona's own source agrees with you. The drawing starts at the wrong place. -- we should check all the drawings to be sure they reflect sourced distances. i thought we had done this already. thanks.
 
+Mann et al. (2023) is the paper the corona's dots follow. In its Section 2 it says: "The base of the corona is defined as the level at which the temperature exceeds 1 × 10^6 K … This occurs at about 3 Mm above the photosphere … Hence, the bottom of the corona is located at a radial distance of 1.0043 R⊙ ≈ 1 R⊙." Its model is then extended down to 1 solar radius purely for convenience.
 
+The chromosphere's row says that layer reaches about 2,000 km above the photosphere. So by the sources, the chromosphere runs from the visible surface to 2,000 km. The corona begins at 3,000 km, above it.
+
+The error is in the orrery's corona sampler. It took the paper's "≈ 1 R⊙" as the inner end and called that "a definition, not a measurement". The paper's measured base is 3,000 km higher.
+
+What I'll do in this session's orrery work:
+- Add the corona's base as a sourced row: 3,000 km above the photosphere, quoting Mann et al. Section 2.
+- Start the corona's dots there, and re-export the drawing.
+
+Once that is pushed and the website's Daily Run pulls the new drawing, the drawer will list the corona after the chromosphere on its own. The website patch you have stays as it is.
+
+The corona hover will also need one sentence saying where it begins. That changes words a visitor reads, so I'll show you that sentence before it ships.
+
+========================================================================================
+
+Agreed, and the corona shows how to look for it. That drawing had an edge no sourced row set: its inner end was simply "one solar radius".
+
+So I'll check for that across both rooms now. This is a discovery pass: a list, no fixes, so it has a clear end. For every feature drawn in the Sun and Earth rooms, it records where the drawing actually starts and stops. It then names the served row behind each end, or flags the end if no row sets it. The flagged ends are where a drawing may disagree with its source. I'll put the list in a file, and record the follow-up on the ledger as one item.
+
+The check of the drawings is done, and the list is in DISCOVERY_drawn_ends_20261021.md. It covers the 35 features drawn in the Sun and Earth rooms. Of those, 25 start and stop exactly where a served row says.
+
+Only one drawing is wrong by its own source: the corona's inner end, which I'm fixing now.
+
+One drawing doesn't do what its row says. The row for the Oort cloud's clumps says they begin thinly at 10,000 AU, but the 15 clumps are placed at random and the nearest falls at 21,360 AU.
+
+Three drawings place dots past a sourced edge because of a drawing choice written on their rows:
+- The Hills cloud's stretched orbits reach in to 257 AU, inside its 2,000 AU inner edge.
+- Earth's two belts follow their field lines all the way down to the ground. No row says how far down the trapped particles really reach.
+- The streamer belt runs to 20 solar radii, just past the Alfven surface at 19.7.
+
+The rest are consistent: their ends are set by sampling or by cut angles, which are served rows.
+
+None of these need you now. I'll put them on the ledger as one item, to be settled when each room's slice reaches them. -- we are in the sun slice now so we should do this now. 
+
+Now the first of the five hover and tooltip pairs.
+
+**Gravitational influence.** Apart from one line, the checkbox tooltip and the plot hover are word for word the same. The tooltip opens with a line the hover doesn't have:
+
+> SELECT A MANUAL SCALE OF AT LEAST 160,000 AU TO VISUALIZE. -- remove. this is a legacy aid to manual scaling using old typed distances. remove.
+
+Everything after it is identical: the heliopause, the Hills and Oort clouds, the Sun's Hill radius of 134,000 AU, and the paragraphs about Sedna.
+
+I'd keep the hover's version and drop that line, for two reasons:
+- Its 160,000 AU is typed in rather than printed from a row.
+- Auto scale now opens on the farthest shell drawn plus 20 percent, which is 160,800 AU when this shell is ticked. So you no longer need to set a manual scale to see it. -- yes, drop
+
+**Keep the hover's words for gravitational influence, without the scale line?** -- yes
+
+I haven't committed or pushed anything. That stays your step, through the patches. I've moved my working files out of both repositories again, so nothing sits there uncommitted.
+
+One question is still waiting for you: should I keep the hover's words for gravitational influence and drop the "SELECT A MANUAL SCALE" line? -- yes
+
+====================================================================================================
+
+Approved. Building the orrery's corona-base patch now. It's built on the state your pairs patch leaves, so it runs after that one.
+
+Now the sampler, its export entry, its planted faults, the streamer belt's base and the three word changes.
+
+The corona's base is ready as `patch_L460_2_corona_base_20261021.py`, in your orrery folder. It's built on what the pairs patch leaves, so run it second.
+
+It adds the corona's base as a sourced row: 3,000 km above the photosphere, from Mann et al. (2023), Section 2, which I read today. It does three things with it:
+- Starts the corona's dots and the streamer belt there.
+- Puts in your three approved word changes.
+- Tightens the drawing's check. The old check would have let a dot at the Sun's surface pass, so I added that fault, and the check now catches it.
+
+The re-exported corona has its nearest dot at 1.0043 solar radii, above the chromosphere's 1.003. Here, all 31 maintenance checks passed and the scanner count didn't move.
+
+**Run order:**
+1. The pairs patch, if you haven't already.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L191_1_sun_pairs_20261021.py
+ok  outer_oort               the copies agreed; one kept, written with newlines
+ok  inner_oort               the copies agreed; one kept, written with newlines
+ok  inner_limit_oort         the copies agreed; one kept, written with newlines
+ok  solar_wind               the copies agreed; one kept, written with newlines
+ok  termination_shock        the copies agreed; one kept, written with newlines
+ok  chromosphere             the copies agreed; one kept, written with newlines
+ok  photosphere              the copies agreed; one kept, written with newlines
+ok  radiative_zone           the copies agreed; one kept, written with newlines
+ok  core                     the copies agreed; one kept, written with newlines
+ok  gravitational_influence  kept the hover's words
+ok  roche_limit              kept the tooltip's words
+ok  alfven_surface           kept the tooltip's words
+ok  corona                   kept hover+panel
+ok  zodiacal_dust            kept hover+panel
+ok  shell_configs.py: twelve hover_text entries made from <shell>_info
+ok  planet_visualization.py: an import nothing used, removed
+ok  palomas_orrery_dashboard.py: Drawer Order button, short line, stamp
+ok  the check: every kept string is the picked text, breaks only
+wrote solar_visualization_shells.py (105597 bytes)
+wrote shell_configs.py (175379 bytes)
+wrote planet_visualization.py (48675 bytes)
+wrote palomas_orrery_dashboard.py (158644 bytes)
+stamp: solar_visualization_shells.py Module updated, October 21, 2026
+scanner, what to expect: the whole-tree Tier-1 count falls by 3, all
+  three in hover_text_sun_and_corona: the Parker closest-approach line,
+  the MAPS crossing sequence and the perihelion line. NOT a clearing:
+  with the twins gone, those lines sit within the scanner's 60-line
+  window of the Alfven surface's citation (Cranmer et al. 2023), which
+  is not their source. The gate path stays at 0. Recorded on the ledger.
+patch applied
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+2. This one.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L460_2_corona_base_20261021.py
+ok  constants_new.py: 2 edit(s)
+ok  sun_corona_sampler.py: 10 edit(s)
+ok  export_drawings.py: 2 edit(s)
+ok  test_drawings_export.py: 4 edit(s)
+ok  solar_visualization_shells.py: 5 edit(s)
+ok  planet_visualization_utilities.py: 2 edit(s)
+Next: the orrery maintenance run (it re-exports the corona drawing and the constants), then commit and push.
+patch applied
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+3. Move both into `documentation/`.
+4. One orrery maintenance run. It rewrites the corona's drawing and the exported rows.
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261021T213829Z, 1 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 2.2s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Skill manifest               0.2s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             2.2s  rewrote data/constants_export.json
+  Period fetch                 0.3s  unchanged (1 checked, not written) --
+                                     NOTHING MISSING -- 13 served objects
+                                     examined, no query asked
+  Horizons check               0.4s  unchanged (2 checked, not written) --
+                                     NOTHING DUE -- 13 entries and 26 sheets
+                                     current, no query asked
+  Objects export               0.3s  unchanged (1 checked, not written)
+  Drawings export              2.2s  rewrote data/drawings/sun_corona.json
+  Module atlas                 8.0s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               5.3s  rewrote DATA_INVENTORY.md
+  Exact rows report            3.8s  rewrote EXACT_ROWS_PRINTED.md -- 11 of 42
+                                     exact rows printed at 41 lines (25 orrery,
+                                     16 gallery); 12 drawn only, 0 not followed,
+                                     0 map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.4s  2 derived line(s): 0 changed, 2 added, 0
+                                     removed
+  Constants relations          0.3s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              2.1s  No figure count exceeds its inputs: 37
+                                     derived row(s) read, 30 judged OK -- 30 OK,
+                                     7 NOT YET MIGRATED; 23 conversion(s)
+                                     checked.
+  Constants export check       3.5s  Export matches the store: sha256
+                                     7b6606416e0d on both sides; 200 rows
+                                     re-read, 57 not exported, 43 tokens; 480
+                                     conversions re-computed, 10 of 10 worked
+                                     cases hold; 200 citations worked out again,
+                                     8 of 8 worked cases hold.
+  Objects export check         0.4s  pass
+  Horizons confirmations       0.4s  pass -- 13 of 13 entries and 11 periods
+                                     confirmed, 26 sheets read, within 30 days
+  Horizons check suite         0.8s  pass -- 64 checks, every planted fault
+                                     caught by name
+  Period fetch suite           3.2s  pass -- 36 checks, every planted fault
+                                     caught (20 planted, 8 of them for Earth's
+                                     period, L-445)
+  Skill headers                0.2s  12 skills parsed, no consistency problems.
+  Exact rows by the count      4.1s  PASSING -- 11 printed exact rows each state
+                                     a count; 25 orrery lines print through
+                                     exact_text() or row_text(); 16 gallery lines
+                                     are served the count
+  Dimensions                   2.2s  No unit contradicts its arithmetic: 60
+                                     derived row(s) read -- 51 OK, 6 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.2s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.2s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 198 status lines in constants_new.py are
+                                     well formed; 56 rows carry none.
+  Row shape                    0.1s  All 257 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.5s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Scanner row run (L-414)      0.4s  16 of 16 pins hold -- each row reads its own
+                                     comment run, declared rows are named, the
+                                     gate path is read by name.
+  Reset completeness          30.6s  PASS -- all 310 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  2.3s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped; nothing left behind.
+  Earth pole of date           0.3s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Hills cloud sampler (L-421)    0.5s  PASS -- 4 of 4 planted faults caught; the
+                                     real rows pass, the dots' plane tilted 34.1
+                                     deg
+  Drawings export check       30.9s  PASS -- 15 of 15 planted faults caught;
+                                     hills_cloud 3600 dots, plane tilted 30.9
+                                     deg, sha256 a51e93118069; van_allen_belts
+                                     3200 dots, no plane recorded, sha256
+                                     75274e84f840; earth_exosphere 1500 dots, no
+                                     plane recorded, sha256 6112639fb2cd;
+                                     sun_corona 2500 dots, no plane recorded,
+                                     sha256 e2b57ccbc8a4; zodiacal_dust 3000
+                                     dots, no plane recorded, sha256 995f13a056e8
+  Position digits (L-401)      2.2s  PASS -- 14 of 14 planted faults caught by
+                                     name; 23 hovers examined, 181 lines compared
+                                     against their errors; 5 pairs printed the
+                                     same from either end; 496 hovers of every
+                                     listed object from the Sun, Earth and
+                                     Neptune; 3 recorded 2xr answers read by
+                                     column name; 10 period sentences
+  Orbit markers (L-431, L-401)    9.7s  PASS -- 12 of 12 planted faults caught by
+                                     name; 4 ellipses, 1080 drawn points on their
+                                     period's centre; 14 markers, 9 dates, 53
+                                     printed distances against their errors; 6
+                                     elements as given; 3 Keplerian positions
+                                     half a year on; 1 parameters-window date
+                                     pairs; 2 Moon arcs; 2 perturbation checks; 1
+                                     perihelion osculating orbits; 2 frames; 2
+                                     sources read
+  Domain Split                 0.5s  PASS -- 6 of 6 planted faults caught; the
+                                     split reads each module's Domain: tag and
+                                     prints the same on the console, in the audit
+                                     and in the run history.
+  Maintenance report (L-269)    0.1s  PASS -- 4 of 4 planted faults caught by
+                                     name; 4 summaries; 2 risen file(s) named
+  Dashboard parity             0.3s  PASS -- 10 of 10 planted faults caught; 88
+                                     steps matched to their buttons by name and
+                                     script; 119 cards carry a short line; the
+                                     search finds 4 of 4 cases in any word order
+  Worksheet checker            7.7s  72 of 107 routed, 8 clean
+  Worksheet checker tests     19.3s  All 135 checks passed
+  Worksheet key round trip     1.2s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         23.0s  All 76 checks passed
+  Extractor pins               0.5s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          57.0s  0 TIER-1 -- the push gate holds; Whole tree,
+                                     Tier-1: 277: orrery 113, Earth System 149,
+                                     stars 13, utilities 2.
+
+======================================================================
+  31 of 31 gating checkers passed -- 230.0s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           72 of 107 routed, 8 clean
+    Provenance scanner          0 TIER-1 -- the push gate holds; Whole tree, Tier-1: 277: orrery 113, Earth System 149, stars 13, utilities 2.
+      No file's Tier-1 count rose since the previous run.
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2393 file(s) examined, 11 written, 0 created, 0 removed, 4 rewritten identically
+    written   DATA_INVENTORY.md
+    written   EXACT_ROWS_PRINTED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/constants_export.json
+    written   data/drawings/sun_corona.json
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    written   module_atlas.py
+    rewritten with identical bytes, no action needed:
+      LEDGER_CONSOLIDATED.md
+      PROJECT_INSTRUCTIONS.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+5. Commit and push. -- 
+
+After your push, the website needs a small patch of its own: the same base for its streamer belt, and the same three word changes. I'll build it on your new orrery head. Meanwhile I'll work on the Hills cloud.
+
+Now the Hills cloud. Reading how its sampler places the dots along each orbit.
+
+The Hills cloud patch is in your orrery folder as `patch_L460_3_hills_inside_edges_20261021.py`. It touches different files from the other two, so the order doesn't matter.
+
+The dots now go only on the part of each orbit outside the cloud's 2,000 AU inner edge. They're still placed evenly in time there, so the arms still gather at the far ends. A new check holds every dot between the inner edge and 20,000 AU, and it catches a planted dot at 257 AU. The re-exported cloud's nearest dot is at 2,000 AU. The plane through the dots now tilts 34 degrees against the paper's "about 30", inside the check's 10-degree tolerance. Here, all 31 maintenance checks passed.
+
+When you open the orrery, the inside of the disk will be empty out to 2,000 AU. That's the visual change to look at.
+
+That leaves the clumps. Fixing them so they start at 10,000 AU is the build ledger item L-434 already calls for: the clumps and the galactic tide become stored drawings that the orrery places once from a seed. It's a full build in both repositories, and it includes the tide's phone look. It would take most of a session on its own, and the session's close (ledger, skills, handoff) still has to be done tonight.
+
+**Should L-434, with the clumps, be built tonight before the close, or be the first job of the next session?** I'd make it next session's first job.
+
+While you decide, I'll prepare the website side of the corona's base. First, how the website fills a number into the words and how a linked row in another unit is served.
+
+The website patch for the corona's base is in your website folder as `patch_L460_2_corona_base_website_20261021.py`. It also brings in the standing check you asked for, "Drawn ends". It measures where every drawing in the Sun and Earth rooms starts and stops, and fails on any end that no served row gives unless that end is held with a written reason. Eleven ends are held. Three of them are open: the clumps (L-434) and Earth's two belts. It also fixes a website check that had *required* a Hills cloud dot inside the 2,000 AU edge, which is how the 257 AU dots got past it.
+
+I tested the patch on a copy of the website with the cache rebuilt the way the Daily Run will rebuild it. All 34 checks passed, and the drawer then lists the chromosphere before the corona.
+
+**Tonight's run order:**
+1. **Orrery:** run the three patches (pairs, then corona base, then Hills; the Hills one can go anywhere). Move them into `documentation/`. Do one orrery maintenance run, then commit and push.
+2. **Website:** run the corona-base patch, then the Daily Run. The Daily Run pulls the orrery's new rows and drawings and rebuilds the cache. Then the gallery maintenance run, commit and push, and the live run.
+3. **Your phone:** in the Sun room's drawer, the chromosphere now comes before the corona. The corona's hover says where it begins. The Hills cloud is empty inside 2,000 AU.
+
+The website run has to come after the Daily Run. Before it, four checks fail ("Drawn ends", "Sun shells", "Display figures" and "Cache in step"), because the served cache still holds the old drawings.
+
+While you run these, I'll write the close: the ledger, Where We Are, the two skill updates, the protocol entry and the handoff. Still open from my last message: should L-434 (the clumps) be built tonight, or as the next session's first job?
+
+Now the close. First I'll read the ledger items it touches and Where We Are as it stands.
+
+I'll draft the close now, assuming the clumps (L-434) wait for the next session, and adjust if you say otherwise. Reading the two skills' current text where the new rules go.
+
+Now the driver that builds the close once both pushes land.
+
+The session's closing patch is written and tested, but I haven't sent it yet. It has to be rebuilt on top of your two pushes, and neither has reached GitHub: the orrery is still at 4a40d27 and the website at 72c3c40.
+
+It's ready and tested against a copy of the orrery with your three patches applied. It covers:
+- **The ledger:** the drawer order is built and stays open until your phone look. The Sun's fourteen pairs are done. Two new items: L-466 (every drawing starts and stops where its rows say) and L-467 (the scanner counting three lines as cited only because they sit near a citation).
+- **Where We Are**, updated section by section. Your notes elsewhere in that file and in the ledger are left alone. The page is 130 lines above the marker, which is the cap.
+- **The two skills:**
+  - interactive-exhibit 1.19: the drawer order rule.
+  - provenance-discipline 2.33: a drawing starts and stops where a row says, plus the "read one layer down" paragraph.
+- **The protocol, v3.107**, with its manifest regenerated.
+- **A Drawn Ends button** on the dashboard.
+- **The drawings record and the handoff.**
+
+I took the Oort cloud's clumps (L-434) as the next session's first job. Tell me if you'd rather do it tonight.
+
+I found one more small thing. The website places Earth's magnetotail by its width (30 Earth radii) instead of where it starts (30.6). The drawer order comes out the same either way, so I recorded it and the fix will go with the next website patch.
+
+**Tell me when both pushes are done, the orrery's and then the website's.** I'll rebuild the patch on top of them, read the signals for Where We Are from the files, and put it in your orrery folder.

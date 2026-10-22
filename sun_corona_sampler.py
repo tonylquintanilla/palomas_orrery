@@ -1,6 +1,6 @@
 """
 sun_corona_sampler.py - the Sun's corona as dots that thin out with
-distance, from the Sun's surface to the Alfven surface.
+distance, from the base of the corona to the Alfven surface.
 
 Tony's rulings of 2026-10-19 (L-410, with L-131): the inner and outer
 corona spheres become ONE plasma fade, following the measured electron
@@ -31,9 +31,13 @@ WHAT IS DRAWN BY CHOICE (said in the website's drawing note, 1e):
 - the model's long-term average, drawn the same in every direction: the
   real corona is shaped by the Sun's magnetic field, and the streamer
   belt, drawn with it, shows its brightest part;
-- the dots start at the Sun's surface, one solar radius (the unit), and
-  stop at the Alfven surface (ALFVEN_SURFACE_RADII), where the gas
-  becomes the solar wind;
+- the dots start at the base of the corona (CORONA_BASE_KM, about 3,000
+  km above the visible surface, Mann et al. (2023), Sect. 2) and stop at
+  the Alfven surface (ALFVEN_SURFACE_RADII), where the gas becomes the
+  solar wind. FIXED 2026-10-21 (L-460): they started at the Sun's
+  surface, one solar radius, which the article reaches only by extending
+  its model down for convenience; that put the corona under the
+  chromosphere, whose top is 2,000 km up;
 - only the SHAPE of the thinning is drawn, never a density: dots per
   unit volume follow N_e(r), so the count in each shell of thickness dr
   follows N_e(r) r^2 dr.
@@ -42,7 +46,7 @@ HOW THE DOTS ARE PLACED. Each dot's distance is drawn from N_e(r) r^2 by
 inverting its cumulative sum on a fine grid; its direction is uniform on
 the sphere. Each dot carries a weight from 0 to 1 for its brightness:
 the logarithm of the sunlight at its distance, which falls as 1 / r^2,
-scaled between the Alfven surface (0) and the surface (1). The seed, the
+scaled between the Alfven surface (0) and the corona's base (1). The seed, the
 dot count and the grid are rendering settings (drawn_corona's defaults),
 not measurements.
 
@@ -56,7 +60,8 @@ Key functions:
 
 THE CHECKS (check_dots() returns what fails; test_drawings_export.py
 plants a fault in each):
-- every dot lies between the surface and the Alfven surface;
+- every dot lies between the corona's base and the Alfven surface, to the
+  file's rounding;
 - the dots follow the profile: in shells between the two, each shell's
   count is the profile's share within a tolerance that allows for chance
   (four standard deviations, or 15 percent, whichever is larger);
@@ -73,6 +78,9 @@ Role: computation
 Domain: orrery
 
 Module created: October 19, 2026 with Anthropic's Claude Opus 5.5 (L-410)
+Module updated: October 21, 2026 with Anthropic's Claude Opus 5.5 (L-460:
+the dots start at the base of the corona, CORONA_BASE_KM, not the Sun's
+surface; the check's slack tightened so a dot at the surface fails)
 """
 import math
 import sys
@@ -89,6 +97,7 @@ ROW_NAMES = (
     'GM_SUN_SI',
     'SUN_RADIUS_KM',
     'ALFVEN_SURFACE_RADII',
+    'CORONA_BASE_KM',
 )
 
 
@@ -110,9 +119,10 @@ def rows_from_store():
 
 def span(rows):
     """(inner, outer) of the drawing, in solar radii. The inner end is the
-    Sun's surface, one solar radius: the drawing's own unit, so a
-    definition, not a measurement."""
-    return (1.0, rows['ALFVEN_SURFACE_RADII'])
+    base of the corona, CORONA_BASE_KM from the Sun's centre (L-460); the
+    outer, the Alfven surface."""
+    return (rows['CORONA_BASE_KM'] / rows['SUN_RADIUS_KM'],
+            rows['ALFVEN_SURFACE_RADII'])
 
 
 def _critical(rows):
@@ -159,7 +169,7 @@ def density(r, rows):
 
 
 def weight(r, rows):
-    """0 at the Alfven surface, 1 at the Sun's surface, by the log of the
+    """0 at the Alfven surface, 1 at the corona's base, by the log of the
     sunlight reaching distance r, which falls as 1 / r^2."""
     inner, outer = span(rows)
     w = 1.0 - math.log(r / inner) / math.log(outer / inner)
@@ -168,7 +178,7 @@ def weight(r, rows):
 
 def _cdf(rows, grid):
     """The radii and the cumulative share of dots inside each, from
-    N_e(r) r^2 on a grid of `grid` steps, finer near the surface where
+    N_e(r) r^2 on a grid of `grid` steps, finer near the base where
     the density falls fastest."""
     inner, outer = span(rows)
     r = inner * (outer / inner) ** np.linspace(0.0, 1.0, grid + 1)
@@ -207,16 +217,20 @@ def drawn_corona(rows=None, seed=410, dots=2500, grid=4000):
             'settings': {'dots': dots, 'seed': seed, 'grid': grid}}
 
 
-# Shells between the surface and the Alfven surface for the profile
+# Shells between the corona's base and the Alfven surface for the profile
 # check, edges in solar radii, the two ends added at run time. Few
 # enough that chance does not move the answer at 2,500 dots.
 CHECK_EDGES = (1.1, 1.3, 2.0, 5.0)
 
 
-def check_dots(dots, rows, slack=0.02, w_slack=0.011):
+def check_dots(dots, rows, slack=0.002, w_slack=0.011):
     """Failures for a set of drawn dots, as sentences. slack allows for
     the stored file's rounding of each coordinate, w_slack for a
-    weight's."""
+    weight's. The file rounds each coordinate to three decimals, which
+    moves a dot's distance by less than a thousandth, so slack is 0.002:
+    tight enough that a dot at the Sun's surface, about four thousandths
+    below the corona's base, fails (L-460; until 2026-10-21 it was 0.02,
+    which would have passed exactly that error)."""
     failures = []
     inner, outer = span(rows)
     radii = [math.sqrt(x * x + y * y + z * z)

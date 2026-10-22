@@ -54,19 +54,8 @@ from shell_configs import SHELL_CONFIGS, CUSTOM_SHELLS
 from shared_utilities import create_sun_direction_indicator
 import importlib
 
-from solar_visualization_shells import (
-    # Sun information texts
-    gravitational_influence_info_hover,
-    outer_oort_info_hover,
-    inner_oort_info_hover,
-    inner_limit_oort_info_hover,
-    solar_wind_info_hover,
-    termination_shock_info_hover,
-    chromosphere_info_hover,
-    photosphere_info_hover,
-    radiative_zone_info_hover,
-    core_info_hover
-)  
+# The Sun's ten _info_hover strings were imported here and used nowhere;
+# the import went with the strings (L-191, 2026-10-21).
 
 from planet_visualization_utilities import (
     # Solar structure and atmosphere

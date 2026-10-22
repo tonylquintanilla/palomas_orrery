@@ -206,6 +206,11 @@ Module updated: October 21, 2026 with Anthropic's Claude Opus 5.5
 the Source line of 63 rows, the Sun's and Earth's, each re-opened this
 day and given a Read line; PREM's three rows re-homed to the model's
 open tabulation; the Roche limit re-homed to Rappaport et al. (2013).)
+Module updated: October 21, 2026 with Anthropic's Claude Opus 5.5
+(L-460: CORONA_BASE_HEIGHT_KM, where the corona begins, 3,000 km above
+the photosphere, from Mann et al. (2023), Sect. 2, read this day; with
+CORONA_BASE_KM from the Sun's centre and CORONA_BASE_RADII. The
+corona's dots and the streamer belt start there.)
 """
 
 import math
@@ -3151,6 +3156,50 @@ CHROMOSPHERE_PHYSICAL_RADII = CHROMOSPHERE_TOP_KM / SUN_RADIUS_KM
 # Note+: is thousandths of a solar radius (provenance-discipline 2.21 and
 # Note+: 2.22, Rule 3). The shell draws at this value. Until patch D20 it
 # Note+: was its own row, the sum written over the radius (patch D17).
+
+CORONA_BASE_HEIGHT_KM = 3000.0
+# Unit: km
+# Status: measured V_SOURCED 2026-10-21 -- open full text
+# Figures: 1 -- the source gives about 3 Mm, so the zeros are
+# Figures+: placeholders and only the 3 counts (Rule 2); good to
+# Figures+: thousands of kilometres.
+# Read: Sect. 2, Mann, Warmuth, Vocks and Rouillard (2023), the A&A
+# Read+: article page, 2026-10-21, Claude Opus 5.5.
+# Source: Mann, Warmuth, Vocks and Rouillard (2023), "A heliospheric
+# Source+: density and magnetic field model", A&A 679, A64,
+# Source+: https://www.aanda.org/articles/aa/full_html/2023/11/aa45050-22/aa45050-22.html
+# Source+: -- Sect. 2: the base of the corona is defined as the level
+# Source+: where the temperature exceeds a million kelvin, about 3 Mm
+# Source+: above the photosphere, so the bottom of the corona lies 1.0043
+# Source+: solar radii from the Sun's centre.
+# Also: the article takes the 3 Mm from Priest (1982), Solar
+# Also+: Magnetohydrodynamics (a book, not opened here).
+# Note: the height above the visible surface where the corona begins,
+# Note+: above the chromosphere's top (CHROMOSPHERE_PHYSICAL_KM). The
+# Note+: article's density model is then extended down to 1 solar radius
+# Note+: for convenience (the article rounds 1.0043 to 1); the dots
+# Note+: start here, at the measured base, not at that extension
+# Note+: (L-460, 2026-10-21: until then the drawing began at the Sun's
+# Note+: surface, under the chromosphere).
+
+CORONA_BASE_KM = SUN_RADIUS_KM + CORONA_BASE_HEIGHT_KM
+# Unit: km
+# Status: derived -- inherits SUN_RADIUS_KM, CORONA_BASE_HEIGHT_KM
+# Figures: 3 -- set by CORONA_BASE_HEIGHT_KM (3000, 1), good to
+# Figures+: thousands; SUN_RADIUS_KM is exact.
+# Derived: 695700 + 3000 = 699000 km from the Sun's centre, to its
+# Derived+: three figures
+# Note: where the corona's dots and the streamer belt begin, from the
+# Note+: Sun's centre.
+
+CORONA_BASE_RADII = CORONA_BASE_KM / SUN_RADIUS_KM
+# Unit: r_sun
+# Conversion: of CORONA_BASE_KM -- computed from that row, which carries the
+# Conversion+: source and the count; the export serves this value as
+# Conversion+: that row's "in" (provenance-discipline 2.22, Rule 3).
+# Note: served as 1.004 solar radii at four figures, as the chromosphere's
+# Note+: 1.003 is: the sum is good to thousands of km, which is thousandths
+# Note+: of a solar radius. The drawings use the full value.
 
 INNER_CORONA_RADII = 3
 # Unit: r_sun

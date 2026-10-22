@@ -93,6 +93,9 @@ with L-131: the fourth and fifth stored drawings, the Sun's corona from
 sun_corona_sampler.py, in solar radii, and the zodiacal dust cloud from
 zodiacal_dust_sampler.py, in AU in the ecliptic frame, each dot with its
 weight, the sunlight reaching it.)
+Module updated: October 21, 2026 with Anthropic's Claude Opus 5.5 (L-460:
+the corona's drawing starts at the base of the corona, and its file says
+so.)
 """
 
 import hashlib
@@ -212,8 +215,8 @@ def _sun_corona():
     return {
         "schema": SCHEMA,
         "drawing": "sun_corona",
-        "what": ("The Sun's corona as dots from the Sun's surface to the "
-                 "Alfven surface. A dot's place follows the electron "
+        "what": ("The Sun's corona as dots from the base of the corona to "
+                 "the Alfven surface. A dot's place follows the electron "
                  "density of Mann et al. (2023)'s solar wind model; its "
                  "weight, the sunlight reaching it, which falls with the "
                  "square of distance. Drawn round, the model's long-term "

@@ -27,7 +27,7 @@ For every entry in export_drawings.DRAWINGS it checks:
                   following the measured profile, and each dot's weight the
                   one its distance gives, read from the file's own dots
                   (earth_exosphere_sampler.check_dots; for the exosphere)
-    the corona    every dot between the Sun's surface and the Alfven
+    the corona    every dot between the corona's base and the Alfven
                   surface, the dots in five shells following the electron
                   density, and each dot's weight the sunlight its distance
                   gives (sun_corona_sampler.check_dots)
@@ -49,6 +49,7 @@ are planted first, each in memory, and each must be caught:
     the exosphere drawn with no fall-off     the exosphere
     an exosphere dot's weight changed        the exosphere
     a corona dot moved past the Alfven surface   the corona
+    a corona dot moved to the Sun's surface  the corona
     the corona drawn with no fall-off        the corona
     a corona dot's weight changed            the corona
     a dust dot moved inside the dust-free zone   the dust
@@ -81,6 +82,9 @@ Module updated: October 19, 2026 with Anthropic's Claude Opus 5.5 (L-410
 with L-131: the fourth and fifth drawings, the Sun's corona and the
 zodiacal dust cloud, checked against their rows, with six more faults
 planted)
+Module updated: October 21, 2026 with Anthropic's Claude Opus 5.5 (L-460:
+a corona dot moved to the Sun's surface is planted, and must be caught
+now that the drawing starts at the corona's base)
 """
 import hashlib
 import json
@@ -267,6 +271,12 @@ def _planted_corona(text_now):
     moved["x"][0], moved["y"][0], moved["z"][0] = 40.0, 0.0, 0.0
     out.append(("a corona dot moved past the Alfven surface",
                 ed.render(moved), "lie outside"))
+    # L-460: the drawing began at the Sun's surface, under the
+    # chromosphere; a dot back there must fail.
+    low = json.loads(text_now)
+    low["x"][0], low["y"][0], low["z"][0] = 1.0, 0.0, 0.0
+    out.append(("a corona dot moved to the Sun's surface",
+                ed.render(low), "lie outside"))
     flat = json.loads(text_now)
     inner, outer = scs.span(scs.rows_from_store())
     import numpy as np

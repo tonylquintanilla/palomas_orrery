@@ -111,16 +111,9 @@ from neptune_visualization_shells import (
 
 # Phase D1: Import Sun hover text and tooltip strings.
 from solar_visualization_shells import (
-    # hover_text (Plotly hover, <br> line breaks)
-    core_info_hover, radiative_zone_info_hover,
-    photosphere_info_hover, chromosphere_info_hover,
-    roche_limit_info_hover, alfven_surface_info_hover,
-    termination_shock_info_hover,
-    solar_wind_info_hover,                      # heliopause hover (legacy name)
-    inner_limit_oort_info_hover,                # inner_oort_limit hover (swapped naming)
-    inner_oort_info_hover, outer_oort_info_hover,
-    gravitational_influence_info_hover,
-    # tooltip (Tk GUI, \n line breaks)
+    # One string per shell, with \n line breaks: the Tk tooltip as it
+    # is, and the Plotly hover_text with each \n made <br> below
+    # (L-191, 2026-10-21; the _info_hover twins are gone).
     core_info, radiative_zone_info, photosphere_info, chromosphere_info,
     corona_info, zodiacal_dust_info, roche_limit_info, alfven_surface_info,
     termination_shock_info,
@@ -1972,7 +1965,7 @@ SHELL_CONFIGS = {
             'opacity': 1.0,
             'n_points': 25,
             'marker_size': 10,
-            'hover_text': core_info_hover,
+            'hover_text': core_info.replace('\n', '<br>'),
             'tooltip': core_info,
         },
 
@@ -1983,7 +1976,7 @@ SHELL_CONFIGS = {
             'opacity': 1.0,
             'n_points': 25,
             'marker_size': 7,
-            'hover_text': radiative_zone_info_hover,
+            'hover_text': radiative_zone_info.replace('\n', '<br>'),
             'tooltip': radiative_zone_info,
         },
 
@@ -1996,7 +1989,7 @@ SHELL_CONFIGS = {
             'mesh_resolution': 24,
             'n_points': 25,
             'marker_size': 7.0,
-            'hover_text': photosphere_info_hover,
+            'hover_text': photosphere_info.replace('\n', '<br>'),
             'tooltip': photosphere_info,
         },
 
@@ -2007,7 +2000,7 @@ SHELL_CONFIGS = {
             'opacity': 0.5,
             'n_points': 25,
             'marker_size': 3.0,
-            'hover_text': chromosphere_info_hover,
+            'hover_text': chromosphere_info.replace('\n', '<br>'),
             'tooltip': chromosphere_info,
         },
 
@@ -2033,7 +2026,7 @@ SHELL_CONFIGS = {
             'n_points': 20,
             'marker_size': 3.0,
             'info_border': 'white',  # two-standards (May 29, 2026): dense red fill rgb(200,60,60)
-            'hover_text': roche_limit_info_hover,
+            'hover_text': roche_limit_info.replace('\n', '<br>'),
             'tooltip': roche_limit_info,
         },
 
@@ -2044,7 +2037,7 @@ SHELL_CONFIGS = {
             'opacity': 0.35,
             'n_points': 20,
             'marker_size': 3.5,
-            'hover_text': alfven_surface_info_hover,
+            'hover_text': alfven_surface_info.replace('\n', '<br>'),
             'tooltip': alfven_surface_info,
         },
 
@@ -2055,7 +2048,7 @@ SHELL_CONFIGS = {
             'opacity': 0.4,
             'n_points': 20,
             'marker_size': 3.0,
-            'hover_text': termination_shock_info_hover,
+            'hover_text': termination_shock_info.replace('\n', '<br>'),
             'tooltip': termination_shock_info,
         },
 
@@ -2066,7 +2059,7 @@ SHELL_CONFIGS = {
             'opacity': 0.4,
             'n_points': 20,
             'marker_size': 3.0,
-            'hover_text': solar_wind_info_hover,
+            'hover_text': solar_wind_info.replace('\n', '<br>'),
             'tooltip': solar_wind_info,
         },
 
@@ -2077,7 +2070,7 @@ SHELL_CONFIGS = {
             'opacity': 0.35,
             'n_points': 20,
             'marker_size': 3.0,
-            'hover_text': inner_limit_oort_info_hover,
+            'hover_text': inner_limit_oort_info.replace('\n', '<br>'),
             'tooltip': inner_limit_oort_info,
         },
 
@@ -2088,7 +2081,7 @@ SHELL_CONFIGS = {
             'opacity': 0.35,
             'n_points': 20,
             'marker_size': 3.0,
-            'hover_text': inner_oort_info_hover,
+            'hover_text': inner_oort_info.replace('\n', '<br>'),
             'tooltip': inner_oort_info,
         },
 
@@ -2099,7 +2092,7 @@ SHELL_CONFIGS = {
             'opacity': 0.3,
             'n_points': 20,
             'marker_size': 3.0,
-            'hover_text': outer_oort_info_hover,
+            'hover_text': outer_oort_info.replace('\n', '<br>'),
             'tooltip': outer_oort_info,
         },
 
@@ -2110,7 +2103,7 @@ SHELL_CONFIGS = {
             'opacity': 0.3,
             'n_points': 20,
             'marker_size': 3.0,
-            'hover_text': gravitational_influence_info_hover,
+            'hover_text': gravitational_influence_info.replace('\n', '<br>'),
             'tooltip': gravitational_influence_info,
         },
 

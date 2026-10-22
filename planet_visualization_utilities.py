@@ -67,6 +67,9 @@ the line about the drawn instant is in plain words; the typed centre
 offset is removed, the cone's apex goes back to Earth's centre, and the
 hover says the offset is not drawn and why. And every cone hover wraps
 long lines.)
+Module updated: October 21, 2026 with Anthropic's Claude Opus 5.5 (L-460:
+the streamer band's default base keeps 1.0, and its comment says the
+Sun's band passes the corona's base, CORONA_BASE_RADII, instead.)
 
 Role: rendering
 Domain: orrery
@@ -1056,7 +1059,7 @@ def build_dipole_cone_traces(center_position=(0, 0, 0), planet_name=None,
 
 STREAMER_BAND_DEFAULTS = {
     # --- radial structure -------------------------------------------
-    'base_radius': 1.0,        # photosphere; the band starts at the surface
+    'base_radius': 1.0,        # the Sun's band passes the corona's base (L-460)
     'cusp_radius': 4.0,        # the pinch -- where closed loops open
     'fade_radius': 19.7,       # alpha reaches ZERO here (Alfven surface)
     'outer_radius': 20.0,      # last generated point, already invisible

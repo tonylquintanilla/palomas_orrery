@@ -295,6 +295,10 @@ documentation/run_offline_check.py. And Horizons Check -- everything,
 now, in Tools and Caches: horizons_check.py --all, which confirms every
 object and data sheet today rather than only what is due (Tony,
 2026-10-20).
+October 21, 2026 with Anthropic's Claude Opus 5.5 (L-460): Drawer
+Order, the website's new checker, gets its button after Display
+Figures, with its short line, running through
+documentation/run_offline_check.py.
 """
 
 import os
@@ -889,6 +893,21 @@ LAUNCH_GROUPS = {
         GALLERY_REPO_DIR,
         True,
         ["Display figures"],
+        True),
+        ("Drawer Order",
+        os.path.join("documentation", "run_offline_check.py"),
+        "Each room's drawer lists its shells at the nearest part of "
+        "each as drawn, read from its served row (L-460). Builds the Sun "
+        "and Earth rooms with the real renderers and holds the page's "
+        "order to one it works out from the same rows, each stored "
+        "drawing's nearest dot read from its file. Moves one row's "
+        "edge and breaks its own file first, to show it can fail. GATES "
+        "the gallery runner. The check is Node, so this button runs it "
+        "through documentation/run_offline_check.py. Runs from the "
+        "gallery repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        ["Drawer order"],
         True),
         ("Earth Scene Geometry",
         os.path.join("documentation", "run_offline_check.py"),
@@ -1956,6 +1975,9 @@ CARD_LINES = {
     ("Gallery -- checks and data",
      "Display Figures"):
         "Checks every number in an Earth hover shows only the figures earned.",
+    ("Gallery -- checks and data",
+     "Drawer Order"):
+        "Checks each room's drawer lists shells where each begins.",
     ("Gallery -- checks and data",
      "Earth Scene Geometry"):
         "Checks the Earth room's tilt, rings, terminator and Moon on recorded data.",
