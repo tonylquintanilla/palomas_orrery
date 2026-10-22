@@ -3129,6 +3129,61 @@ resident.
 (Moved down from the resident protocol on 2026-10-20 when
 v3.106 made a fourth entry.)
 
+v3.104 (October 19, 2026): No rule changed in this document. TWO
+skill bumps, one version each (L-385, the first of the Sun's drawings,
+L-412; and L-410, the Sun's fades designed): orrery-coding-conventions
+1.10 -> 1.11, provenance-cross-check 1.0 -> 1.1. EVERY VIEW OPENS ON
+THE FARTHEST THING DRAWN, PLUS 20 PERCENT; A SLICE'S SOURCES GO OUT
+ONCE FOR AN OUTSIDE CHECK BEFORE ITS BUILD.
+
+WHAT PROMPTED IT. Tony, 2026-10-18, in his run record: "the auto
+scale should be set to the farthest shell drawn plus say 20%. the sun
+pointer should be ignored unless it is the only feature drawn," and
+"this should be the rule for all rooms or system views." On
+2026-10-19 he confirmed that the center body's rotation axis and
+dipole cone end just past the farthest shell, and that orbits count
+as drawn, in the still plot and the animation alike. The ledger had
+said the rule goes into this skill at its build. Then, after the
+second Gemini prompt of its kind (the Sun's fades): "This is a good
+search method. Can we add it to the skill?"
+
+WHAT CHANGED. orrery-coding-conventions gains The Opening View: what
+counts as drawn (a shell's radius or a custom shell's measured reach;
+a plotted object's orbit; a moon only when plotted), what does not
+(the line toward the Sun unless nothing else is drawn; the axis and
+cone, which are drawn to the view), where the two rendering settings
+live, and the two parallel paths that apply it. Its description and
+trigger name the opening view. The file gets its read plan and leaves
+skills_index.py's PLAN_NOT_YET list. Its v1.8 entry moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule.
+provenance-cross-check gains The Slice Relay: after a slice's design
+talk has read its sources and drafted its words, and before the build,
+one prompt goes to an outside model at its highest tier, with a
+citation row for every source the session opened and a discovery row
+for every claim the slice wants and cannot yet source; the prompt's
+fixed shape, with RELAY_L455 and RELAY_L410 as its templates; the
+return saved, reviewed, and every adopted figure re-opened before it
+becomes a row. Its worksheets reference records how Gemini 4 did on
+the first.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copies read
+orrery-coding-conventions 1.11 and provenance-cross-check 1.1 before
+work that fires them. This session confirmed its loaded copies read
+orrery-coding-conventions 1.10, provenance-cross-check 1.0,
+provenance-discipline 2.31 (discharging v3.103's obligation),
+safe-file-editing 1.13, agentic-pre-test 1.3 and
+ledger-and-session-records 1.21, as the manifest expected.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.101 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-21 when
+v3.107 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

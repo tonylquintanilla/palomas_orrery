@@ -1,14 +1,24 @@
 ---
 name: interactive-exhibit
-description: How an interactive exhibit (a room in interactive.html such as ?exhibit=sun) is designed, built, verified and carded for the Paloma's Orrery gallery. Covers the exhibit switch and boot path, the assembler driver spec, the JS feature handoff, the shared chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent gate, back link), what is per-body, the served-data provenance contract, what a room opens on (the arrival block) and the shell-key stamp the renderers apply, who may write data/objects_config.json, the Mode 5 phone sequence, and carding an exhibit through Studio. Use when adding or changing an exhibit (Earth, Jupiter, the stars), touching sun* chrome in interactive.html, deciding what an exhibit may render, or editing the served words with store_writer or exhibit_store_editor. Not for propagation math (gallery-assembler), the nightly builder (gallery-cache-builder), or the Studio/converter chain (gallery-pipeline). Do not use for projects other than Paloma's Orrery.
-fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, See more, Home's order and its framing; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia); a served number's citation and its source_note; the Typed facts check (smoke_typed_facts.js); a feature drawn as stored dots (the Hills cloud, Earth's radiation belts); the i panel's source list and its links (source_list.js)
+description: How an interactive exhibit (a room in interactive.html such as ?exhibit=sun) is designed, built, verified and carded for the Paloma's Orrery gallery. Covers the exhibit switch and boot path, the assembler driver spec, the JS feature handoff, the shared chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent gate, back link), what is per-body, the served-data provenance contract, what a room opens on (the arrival block) and the shell-key stamp the renderers apply, the drawer order, who may write data/objects_config.json, the Mode 5 phone sequence, and carding an exhibit through Studio. Use when adding or changing an exhibit (Earth, Jupiter, the stars), touching sun* chrome in interactive.html, deciding what an exhibit may render, or editing the served words with store_writer or exhibit_store_editor. Not for propagation math (gallery-assembler), the nightly builder (gallery-cache-builder), or the Studio/converter chain (gallery-pipeline). Do not use for projects other than Paloma's Orrery.
+fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, See more, Home's order and its framing; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia); a served number's citation and its source_note; the Typed facts check (smoke_typed_facts.js); a feature drawn as stored dots (the Hills cloud, Earth's radiation belts); the i panel's source list and its links (source_list.js); the order a room's drawer lists its shells in, where each begins (drawer_order.js, the Drawer order check)
 ---
 
 # Interactive Exhibit
 
-Read this file in 6 parts: lines 1-138, 139-142, 143-385, 386-658, 659-899, 900-917.
+Read this file in 6 parts: lines 1-140, 141-144, 145-387, 388-658, 659-904, 905-997.
 
-Skill version: 1.18 | 2026-10-20, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.19 | 2026-10-21, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 645558e2 and gallery @ 90cefa57. v1.19 (L-460) records
+that a room's drawer lists its shells where each begins: the nearest
+part of each feature as it is drawn from its served rows, read by
+gallery/drawer_order.js when the page opens, so a new shell takes its
+place by itself; the Solar System room's drawer is not ordered this
+way. Tony, 2026-10-20: "basically when we reach that shell's
+distance, that is its place in the order"; and 2026-10-21: "this is
+not a visual judgement." The order is only as right as the drawing,
+so it rests on the gallery run's Drawn ends check.
+Earlier: 1.18 | 2026-10-20, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ e8e714da and gallery @ ca5339fd. v1.18 (L-456) records
 that the i panel lists a feature's sources one to a line, each after its
 label, every web address a link a visitor can tap: the renderers serve
@@ -25,19 +35,10 @@ see (Tony, 2026-10-16 and 2026-10-17). And it records Earth's radiation
 belts as the second stored drawing: dots scattered at random along
 dipole field lines, placed by the orrery and drawn by the website as
 given (Tony, 2026-10-17: "Yes, random").
-Earlier: 1.16 | 2026-10-16, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 6b975155 and gallery @ 2090a8b7. v1.16 (L-421 parts 2
-and 3; Tony's option A, 2026-10-16) records that a number's citation is
-served like the number: the orrery's export carries each row's source,
-the mirror writes it beside the number, the Config mirror check compares
-it word for word, and the website's own words about a citation live in
-`source_note`, which the i panel prints after it. And that the typed-
-fact rule is now a gating check, Typed facts, which builds the Sun and
-Earth rooms with every served word masked and fails on a sentence that
-survives and is not on its allowed list.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
 on 2026-10-05 (L-418), 2026-10-10 (L-429), 2026-10-14 (L-431),
-2026-10-16 (L-421), 2026-10-17 (L-452) and 2026-10-20 (L-456).
+2026-10-16 (L-421), 2026-10-17 (L-452), 2026-10-20 (L-456) and
+2026-10-21 (L-460).
 
 ## Contents
 
@@ -52,6 +53,7 @@ if this list and the headings disagree (L-418).
   - Provenance is part of the build [CRITICAL]
   - What a room opens on is SERVED, not coded [QUALITY]
   - The Solar System room's drawer: bodies, not shells [QUALITY]
+  - A room's drawer lists its shells where each begins [QUALITY]
   - A shell trace carries its key [CRITICAL]
   - Only two tools write the served config [QUALITY]
   - One check reads the file the browser fetches [CRITICAL]
@@ -500,6 +502,82 @@ first summary that said the two framings differ only for stretched
 orbits -- wrong: in a square box they also differ wherever a body sits
 toward a corner, by about a third for Jupiter under the tightest rule.
 
+### A room's drawer lists its shells where each begins [QUALITY]
+v1.19, L-460. Tony's ruling of 2026-10-20: in every room each shell
+takes its place in the drawer at the distance where it begins,
+"basically when we reach that shell's distance, that is its place in
+the order." And on 2026-10-21, looking at the list: "the order goes by
+the distance of the nearest part of the feature. if the visualization
+is displayed according to the sourced distance data, then they are
+correct. this is not a visual judgement."
+
+So the order is READ, never typed. `gallery/drawer_order.js`
+(`DrawerOrder.plan`) reads it from the room's served rows when the page
+opens, before anything is cut to the view, and `buildSunDrawer` lists
+the legend groups in that order. A new shell takes its place with
+nothing else to change. The Solar System room is not ordered here: its
+rows are bodies, served outward from the Sun (the section above), and
+the page never calls the file for it.
+
+WHERE A SHELL BEGINS is the first of these its served row has, each
+the nearest part of the feature as it is drawn:
+1. `inner_radius`, the row's own inner edge (the Hills cloud, the
+   clumps, the tide, Earth's exosphere);
+2. `drawing.dots`, a stored drawing: its nearest dot as drawn (the
+   corona, the zodiacal dust cloud, Earth's radiation belts);
+3. `standoff`, a surface fitted to the solar wind, at its nose (the
+   magnetopause, the bow shock);
+4. `drawn_radius`, a shell drawn at a distance other than the one it
+   reports, where it is drawn (the Roche limit: drawn at its formula's
+   full answer, 3.45 solar radii, where its row reports 3);
+5. `radius`, a sphere or a ring;
+6. `range.low`, a band at its near end;
+7. a shape in `FRAME_SHAPES` (the galactic plane): a reference across
+   the frame, not a region, so it has no distance and keeps its place;
+8. otherwise the nearest point the page drew.
+Lengths are compared in AU, converted as the renderers convert them:
+km by the served KM_PER_AU, solar and Earth radii by the body radius
+the shell's own group serves.
+
+One reading at 1.19's cut is not what the list means: Earth's
+magnetotail carries `drawn_radius` for its WIDTH about its axis, 30
+Earth radii, and is placed by it, where it begins at 30.6. The order is
+the same either way; the fix is on L-460's Gap.
+
+TIES AND PLACES:
+- A drawing whose nearest dot lies at or under its body's surface
+  begins AT the surface, and sorts after every shell drawn at the
+  surface or inside it.
+- Two shells that begin at the same distance keep their present order
+  (the config's).
+- A row that is not a shell -- the centre body, the Moon, the axis, the
+  Sun direction, the terminator, a frame shape -- keeps its place in
+  the list, and the shells fill the other places in order.
+- A shell whose distance cannot be read keeps its place and is named in
+  the room's notes. It is never guessed.
+
+THE ORDER IS ONLY AS RIGHT AS THE DRAWING. Tony's rule makes the
+drawing the measure, so a drawing that starts where no row says puts
+its row in the wrong place, and no order check can see it. The corona
+was the case: its dots began at the Sun's surface, under the
+chromosphere, so the drawer listed the corona first. The paper its dots
+follow puts the base of the corona 3,000 km above the surface (Mann et
+al. 2023); the drawing was moved there, and the drawer now lists the
+chromosphere first. So the order rests on the gallery run's Drawn ends
+check, which holds every drawing's ends to its rows
+(provenance-discipline, What a Visitor Reads, principle 4).
+
+THE CHECKS. The gallery run's "Drawer order" row
+(`documentation/smoke_drawer_order.js`) builds the Sun and Earth rooms
+with the real renderers and holds the page's order to one it works out
+from the same rows by its own arithmetic, each stored drawing's nearest
+dot read from its file; first it moves the Roche limit's edge and
+breaks its own file, and must go red on both. It prints both rooms'
+order every run. `tools/headless/walk_drawer_order.js` boots the real
+page and compares the drawer's rows, with the same planted fault
+(Claude-only, the headless recipe below). The order as first shipped:
+gallery `documentation/DRAWER_ORDER_L460_20261021.md`.
+
 ### A shell trace carries its key [CRITICAL]
 `gallery/feature_renderers.js` stamps `meta.shell_key` on every trace
 belonging to a served shell -- the key it sits under in the object's
@@ -914,4 +992,6 @@ installed; the next session confirms its loaded copy reads 1.14.
 1.16 was cut in a session that loaded 1.15; the next session confirms
 its loaded copy reads 1.16 before exhibit work. 1.17 was cut in a
 session that loaded 1.16; the next session confirms its loaded copy
-reads 1.17 before exhibit work.
+reads 1.17 before exhibit work. 1.19 was cut in a session that loaded
+1.18; the next session confirms its loaded copy reads 1.19 before
+exhibit work.

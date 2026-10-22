@@ -517,6 +517,18 @@ the examples in The Status Line and Report to the Figures You Have name
 rows as they now stand.
 (Moved down 2026-10-17, when 2.31 made a fourth entry.)
 
+Earlier: 2.30 | 2026-10-17, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ a73bc24a. v2.30 (L-452 with L-450, Earth's round 1)
+adds What a Visitor Reads: the five principles Tony approved one by one
+on 2026-10-17 for the words a visitor reads -- a citation names what was
+read and where; the store's bookkeeping never goes in a Source line; a
+website note says only what was chosen for the drawing; a claim a
+visitor reads keeps a citation the visitor can see, and a drawn thing
+with no source is settled in the build that finds it; one number in
+one place, in plain words. Tony: "my decision based on principles
+should be implemented in the skill so that it is uniformly applied."
+(Moved down 2026-10-21, when 2.33 made a fourth entry.)
+
 ## interactive-exhibit
 
 Earlier: 1.15 | 2026-10-14, with Anthropic's Claude Opus 5.5, at
@@ -667,6 +679,18 @@ to its right, and a long name wraps rather than being cut. A second
 version in one session, against One Session, One Bump, because the
 ruling came after 1.13 was in use.
 (Moved down 2026-10-17, when 1.17 made a fourth entry.)
+
+Earlier: 1.16 | 2026-10-16, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 6b975155 and gallery @ 2090a8b7. v1.16 (L-421 parts 2
+and 3; Tony's option A, 2026-10-16) records that a number's citation is
+served like the number: the orrery's export carries each row's source,
+the mirror writes it beside the number, the Config mirror check compares
+it word for word, and the website's own words about a citation live in
+`source_note`, which the i panel prints after it. And that the typed-
+fact rule is now a gating check, Typed facts, which builds the Sun and
+Earth rooms with every served word masked and fails on a sentence that
+survives and is not on its allowed list.
+(Moved down 2026-10-21, when 1.19 made a fourth entry.)
 
 ## safe-file-editing
 

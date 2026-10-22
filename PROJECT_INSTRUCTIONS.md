@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.106 | October 20, 2026
+Tony Quintanilla, PE | Claude | v3.107 | October 21, 2026
 
-Cut from e8e714da at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 645558e2 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -494,7 +494,7 @@ horizons-orbital-mechanics   1.8  Horizons queries, centers, frames, osculating
                                   (horizons_check.py, its period comparison and
                                   the data sheets' re-read), the period fetch
                                   before it (period_fetch.py)
-provenance-discipline        2.32 Scanner runs, audits, citations, constants,
+provenance-discipline        2.33 Scanner runs, audits, citations, constants,
                                   pre-push (Tier-1 = 0 on the active build
                                   path)
 provenance-cross-check       1.1  Cross-check worksheets and relay prompts,
@@ -523,7 +523,7 @@ gallery-cache-builder        1.11 Nightly builder, atomic swap and its
                                   builder testing layers, the Daily Run's order
                                   and a failed pull, the run records and their
                                   check
-interactive-exhibit          1.18 adding or changing an exhibit in
+interactive-exhibit          1.19 adding or changing an exhibit in
                                   interactive.html; any edit to the Sun's
                                   chrome (drawer, nav cluster, frame zoom,
                                   i-panel, HUD, consent, back link); "Earth
@@ -543,7 +543,10 @@ interactive-exhibit          1.18 adding or changing an exhibit in
                                   (smoke_typed_facts.js); a feature drawn as
                                   stored dots (the Hills cloud, Earth's
                                   radiation belts); the i panel's source list
-                                  and its links (source_list.js)
+                                  and its links (source_list.js); the order a
+                                  room's drawer lists its shells in, where each
+                                  begins (drawer_order.js, the Drawer order
+                                  check)
 <!-- SKILL-MANIFEST:END -->
 
 Session-Start Repo Pull and the SHA Round Trip [CRITICAL]
@@ -1179,6 +1182,52 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.107 (October 21, 2026): No rule changed in this document. TWO
+skill bumps, one version each (L-460, the drawer order, with L-466,
+where drawings end; and L-411's talk C ruling):
+interactive-exhibit 1.18 -> 1.19, provenance-discipline 2.32 -> 2.33.
+A ROOM'S DRAWER LISTS ITS SHELLS WHERE EACH BEGINS; A DRAWING STARTS
+AND STOPS WHERE A SERVED ROW SAYS.
+
+WHAT PROMPTED IT. Tony, 2026-10-20, at his phone look at the Sun's i
+panel: "check the order of the sun shells, they should be ordered by
+lower distance limit." On 2026-10-21, looking at the order: "the order
+goes by the distance of the nearest part of the feature ... this is
+not a visual judgement." His look at the drawer then found the corona
+before the chromosphere: the corona's dots began at the Sun's surface,
+where the paper they follow puts its base 3,000 km up. Then: "we
+should check all the drawings to be sure they reflect sourced
+distances," and "after the sun please double check the earth too and
+this should be added to the skill."
+
+WHAT CHANGED. interactive-exhibit gains A room's drawer lists its
+shells where each begins: the order read from the served rows by
+gallery/drawer_order.js when the page opens, which field says where a
+shell begins, the ties, and the Drawer order check; its description
+and trigger name the drawer order. provenance-discipline's What a
+Visitor Reads, principle 4, gains a paragraph: a drawing starts and
+stops where a served row says, an end no row sets is held by name with
+its reason, and the gallery run's Drawn ends check holds both rooms to
+it. Its Access Standard gains the paragraph Tony ruled method on
+2026-10-21 (talks part 2, talk C): an agency summary that names no
+source is a lead; read one layer down. Each skill's oldest entry moved
+to documentation/SKILL_HISTORIES.md, by the three-entry rule
+(interactive-exhibit 1.16, provenance-discipline 2.30).
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copies read
+interactive-exhibit 1.19 and provenance-discipline 2.33 before work
+that fires them. This session confirmed its loaded copies read
+interactive-exhibit 1.18 and provenance-discipline 2.32 (discharging
+v3.106's and v3.105's obligations) and ledger-and-session-records
+1.21, as the manifest expected.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.104 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.106 (October 20, 2026): No rule changed in this document. ONE
 skill bump, one version (L-456, what a visitor reads):
 interactive-exhibit 1.17 -> 1.18. THE I PANEL LISTS ITS SOURCES, ONE
@@ -1246,58 +1295,6 @@ ledger-and-session-records 1.21, as the manifest expected.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.102 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.104 (October 19, 2026): No rule changed in this document. TWO
-skill bumps, one version each (L-385, the first of the Sun's drawings,
-L-412; and L-410, the Sun's fades designed): orrery-coding-conventions
-1.10 -> 1.11, provenance-cross-check 1.0 -> 1.1. EVERY VIEW OPENS ON
-THE FARTHEST THING DRAWN, PLUS 20 PERCENT; A SLICE'S SOURCES GO OUT
-ONCE FOR AN OUTSIDE CHECK BEFORE ITS BUILD.
-
-WHAT PROMPTED IT. Tony, 2026-10-18, in his run record: "the auto
-scale should be set to the farthest shell drawn plus say 20%. the sun
-pointer should be ignored unless it is the only feature drawn," and
-"this should be the rule for all rooms or system views." On
-2026-10-19 he confirmed that the center body's rotation axis and
-dipole cone end just past the farthest shell, and that orbits count
-as drawn, in the still plot and the animation alike. The ledger had
-said the rule goes into this skill at its build. Then, after the
-second Gemini prompt of its kind (the Sun's fades): "This is a good
-search method. Can we add it to the skill?"
-
-WHAT CHANGED. orrery-coding-conventions gains The Opening View: what
-counts as drawn (a shell's radius or a custom shell's measured reach;
-a plotted object's orbit; a moon only when plotted), what does not
-(the line toward the Sun unless nothing else is drawn; the axis and
-cone, which are drawn to the view), where the two rendering settings
-live, and the two parallel paths that apply it. Its description and
-trigger name the opening view. The file gets its read plan and leaves
-skills_index.py's PLAN_NOT_YET list. Its v1.8 entry moved to
-documentation/SKILL_HISTORIES.md, by the three-entry rule.
-provenance-cross-check gains The Slice Relay: after a slice's design
-talk has read its sources and drafted its words, and before the build,
-one prompt goes to an outside model at its highest tier, with a
-citation row for every source the session opened and a discovery row
-for every claim the slice wants and cannot yet source; the prompt's
-fixed shape, with RELAY_L455 and RELAY_L410 as its templates; the
-return saved, reviewed, and every adopted figure re-opened before it
-becomes a row. Its worksheets reference records how Gemini 4 did on
-the first.
-
-THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
-that session. The next session confirms its loaded copies read
-orrery-coding-conventions 1.11 and provenance-cross-check 1.1 before
-work that fires them. This session confirmed its loaded copies read
-orrery-coding-conventions 1.10, provenance-cross-check 1.0,
-provenance-discipline 2.31 (discharging v3.103's obligation),
-safe-file-editing 1.13, agentic-pre-test 1.3 and
-ledger-and-session-records 1.21, as the manifest expected.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.101 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

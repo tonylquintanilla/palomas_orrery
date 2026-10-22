@@ -6,9 +6,20 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0 on 
 
 # Provenance Discipline
 
-Read this file in 6 parts: lines 1-284, 285-602, 603-860, 861-1075, 1076-1359, 1360-1388.
+Read this file in 6 parts: lines 1-304, 305-622, 623-880, 881-1120, 1121-1404, 1405-1433.
 
-Skill version: 2.32 | 2026-10-20, with Anthropic's Claude Opus 5.5, at
+Skill version: 2.33 | 2026-10-21, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 645558e2. v2.33 (L-460 with L-466, and L-411) adds two
+rules. To What a Visitor Reads, principle 4: a drawing starts and
+stops where a served row says; an end no row sets is held by name,
+with its reason, and the gallery run's Drawn ends check holds both
+rooms to it. Tony, 2026-10-21: "we should check all the drawings to
+be sure they reflect sourced distances", and "after the sun please
+double check the earth too and this should be added to the skill."
+And to The Access Standard: an agency summary that names no source is
+a lead, not a source; read one layer down (Tony's ruling of
+2026-10-21, that it is method).
+Earlier: 2.32 | 2026-10-20, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ fcd191e9. v2.32 (L-410, the Sun's fades) adds to What
 a Visitor Reads, principle 1: the open copy's address goes on the
 Source line itself, as a web address a visitor can open, because the
@@ -22,20 +33,10 @@ source in degrees Celsius is converted exactly and the row says so,
 and the words a visitor reads give kelvin. Tony, 2026-10-17: "don't
 we standardize on degrees Kelvin? the conversion is routine", and "we
 should add this to the skill."
-Earlier: 2.30 | 2026-10-17, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ a73bc24a. v2.30 (L-452 with L-450, Earth's round 1)
-adds What a Visitor Reads: the five principles Tony approved one by one
-on 2026-10-17 for the words a visitor reads -- a citation names what was
-read and where; the store's bookkeeping never goes in a Source line; a
-website note says only what was chosen for the drawing; a claim a
-visitor reads keeps a citation the visitor can see, and a drawn thing
-with no source is settled in the build that finds it; one number in
-one place, in plain words. Tony: "my decision based on principles
-should be implemented in the skill so that it is uniformly applied."
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
 on 2026-10-05 and 2026-10-08 (L-418), 2026-10-09 (L-414),
-2026-10-13 (L-437), 2026-10-17 (L-452 and L-411) and 2026-10-20
-(L-410).
+2026-10-13 (L-437), 2026-10-17 (L-452 and L-411), 2026-10-20
+(L-410) and 2026-10-21 (L-460).
 
 ## Contents
 
@@ -227,6 +228,25 @@ Usanova 2014 and Ganushkina 2011. The PDFs at those URLs are Meredith
 et al. 2014 and Li, Tu et al. 2024, each citing the named paper in its
 introduction. Two of three load-bearing rows; the third had opened a
 paper that cites the one it was asked to check.)
+
+**An agency summary that names no source is a lead, not a source.**
+A page from an agency or a university that states a figure and names
+no work it comes from -- a fact sheet, an outreach page, a course
+page -- is not cited for that figure where a scientific work behind
+it exists. Read one layer down: find the paper, model or data set the
+figure comes from, open it, and cite that, under the rules above. An
+agency page that names its source stays a good copy to open, and
+where the agency itself made the measurement its page is the source.
+When summary pages disagree and none names a source, that is the
+signal to go down a layer, not to pick one. Where no work behind the
+figure can be found or opened, the figure is removed and the gap
+noted (Fetched vs Recalled).
+
+(Tony's ruling, 2026-10-21, that this is method. The case, 2026-10-20:
+the chromosphere's temperature, where NASA's Sun Fact Sheet,
+NASA/Marshall and Montana State gave different figures and none named
+a source; the figure came from Carlsson (2007), the model they
+summarise.)
 
 **When a source fails access, re-home the citation to an accessible
 authority carrying the same result. Delete only when none exists.** Most
@@ -989,6 +1009,31 @@ in the store, where only we read it.
    notes. if drawn we need to settle it"). The low-orbit floor was the
    case: a declared 200 km with an unsourced reason became ESA's
    180 km.
+   A DRAWING STARTS AND STOPS WHERE A SERVED ROW SAYS (v2.33). Its
+   nearest and its farthest drawn point are each a length on its own
+   row -- an edge, a radius, a base -- not wherever the drawing method
+   happened to put them. Dots placed evenly in time along a stretched
+   orbit, or down a field line, wander past a row's edge unless the
+   placement is held to it, and nothing in the picture says so. An end
+   no row sets is HELD, by name, with its reason and the distance it
+   was measured at: a drawing choice the rows explain (a surface cut at
+   its served angle, dots thinning to nothing before an edge), or an
+   OPEN finding with its ledger handle, settled in the slice that owns
+   it. The gallery run's "Drawn ends" check
+   (`documentation/smoke_drawn_ends.js`, gallery repo) measures both
+   ends of every drawing in the Sun and Earth rooms against its row,
+   prints every held end every run, and fails on an end that matches no
+   row and is not held, or on a held end that moves; it plants a corona
+   dot at the Sun's surface and a Hills cloud dot at 257 AU first. A
+   new room joins it before its green is trusted, and a new drawing in
+   the orrery checks its own ends where it is placed, with a planted
+   fault (`sun_corona_sampler.py`, `hills_cloud_sampler.py`). The
+   cases, found on 2026-10-21 when Tony asked for every drawing to be
+   checked: the corona drawn from the Sun's surface, where the paper its
+   dots follow puts the base 3,000 km up (Mann et al. 2023), and the
+   Hills cloud's dots reaching 257 AU against its 2,000 AU inner edge;
+   both moved to their rows the same night. The record:
+   `documentation/DISCOVERY_drawn_ends_20261021.md` (L-466).
 5. **A number lives in one place, and a visitor reads plain words.** A
    note or sentence does not retype a number its row serves (One Value,
    One Home); it carries no project words -- no names, no dates of

@@ -133,7 +133,7 @@ Not urgent, in your order:
 
 **Tony**: Run record:
 
-**Session: OPEN: 10-21-26 0949: Opus: Gemini earth sheet**
+**Session: DONE: 10-21-26 1620: Opus: Gemini earth sheet**
 
 Yes, we're done, and it's safe to close. Everything this session made is saved in your folders: the three patches, and the documents patch 4 adds (the handoff, the review and your reading list). The next session picks up from the handoff.
 

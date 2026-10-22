@@ -299,6 +299,10 @@ October 21, 2026 with Anthropic's Claude Opus 5.5 (L-460): Drawer
 Order, the website's new checker, gets its button after Display
 Figures, with its short line, running through
 documentation/run_offline_check.py.
+October 21, 2026, night, with Anthropic's Claude Opus 5.5 (L-460,
+L-466): Drawn Ends, the website's new checker, gets its button after
+Drawer Order, with its short line, running through
+documentation/run_offline_check.py.
 """
 
 import os
@@ -908,6 +912,22 @@ LAUNCH_GROUPS = {
         GALLERY_REPO_DIR,
         True,
         ["Drawer order"],
+        True),
+        ("Drawn Ends",
+        os.path.join("documentation", "run_offline_check.py"),
+        "Every drawing in the Sun and Earth rooms starts and stops where "
+        "its served row says (L-460, L-466). Builds both rooms with the "
+        "real renderers and the served drawings, measures each drawing's "
+        "nearest and farthest point, and fails on an end no row explains "
+        "unless it is held by name with its reason; prints every held "
+        "end. Plants a corona dot at the Sun's surface and a Hills cloud "
+        "dot at 257 AU first, to show it can fail. GATES the gallery "
+        "runner. The check is Node, so this button runs it through "
+        "documentation/run_offline_check.py. Runs from the gallery repo "
+        "ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        ["Drawn ends"],
         True),
         ("Earth Scene Geometry",
         os.path.join("documentation", "run_offline_check.py"),
@@ -1978,6 +1998,9 @@ CARD_LINES = {
     ("Gallery -- checks and data",
      "Drawer Order"):
         "Checks each room's drawer lists shells where each begins.",
+    ("Gallery -- checks and data",
+     "Drawn Ends"):
+        "Checks every drawing starts and stops where its rows say.",
     ("Gallery -- checks and data",
      "Earth Scene Geometry"):
         "Checks the Earth room's tilt, rings, terminator and Moon on recorded data.",

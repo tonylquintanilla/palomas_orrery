@@ -32,6 +32,8 @@ twelve ends between them that match no row, in four kinds.
   3 Mm above the photosphere; the model is only extended down to 1 R_sun.
   The sampler took that as "a definition, not a measurement." Being
   fixed this session: a sourced row for the base, the dots start there.
+  The streamer belt, drawn with the corona, also starts at 1 solar
+  radius (its declared base_radius), and moves to the same base.
 
 **2. The drawing does not reach where its row says it begins (one).**
 - **Outer Oort Cloud (clumps), inner end:** the row says the clumps are
@@ -40,7 +42,7 @@ twelve ends between them that match no row, in four kinds.
   edges, and none falls that close. The far end is on its row.
 
 **3. Ends set by a declared drawing choice, with its reason on the row
-(four). Each places dots past a sourced edge.**
+(three). Each places dots past a sourced edge.**
 - **Hills Cloud, inner end:** dots reach 257 AU, inside the cloud's
   sourced inner edge of 2,000 AU. Every orbit is drawn with the declared
   eccentricity HILLS_CLOUD_ECCENTRICITY = 0.8, and the sampler's note
@@ -52,12 +54,7 @@ twelve ends between them that match no row, in four kinds.
   ("each belt stops at the ground", a declared choice in
   van_allen_belt_sampler.py). Where along a field line the trapped
   particles actually stop, above the atmosphere, is set by no row.
-- **Corona, outer end (the streamer belt drawn with it):** 20 solar
-  radii, the belt's declared outer_radius, past the Alfven surface at
-  19.7 where its row says the band dissolves. The corona's dots stop at
-  19.66.
-
-**4. Ends set by rows that are not lengths, or by sampling (six).
+**4. Ends set by rows that are not lengths, or by sampling (seven).
 Consistent with their rows.**
 - **Magnetopause and Bow Shock, far ends:** 23.3 and 30.0 Earth radii,
   where each fitted surface is cut at its served cut angle.
@@ -70,6 +67,17 @@ Consistent with their rows.**
   10,000 AU, where the drawing begins thin.
 - **Hills Cloud, outer end:** farthest dot 19,280 AU against its row's
   20,000 AU, where the disk thins to nothing.
+- **Corona, outer end:** 20 solar radii, the streamer belt's last
+  points. They are drawn with no opacity past its fade radius, the
+  Alfven surface at 19.7, where its row says the band fades to nothing;
+  the visible band ends there. (Corrected on a second look: the first
+  version of this list counted the belt as reaching past its row.)
+
+## Tony's ruling
+
+"we are in the sun slice now so we should do this now" (2026-10-21):
+the Sun's items are settled in this slice, not deferred. The belts are
+Earth's, in Earth's slice.
 
 ## Not checked here
 
@@ -78,3 +86,23 @@ provenance work already under way slice by slice; this list checks only
 that each drawing ends where a row says it does. The orrery's own
 drawings were not measured separately: the website draws the orrery's
 stored dots as given, and its spheres from the same rows.
+
+## What followed, the same night
+
+Added at the session's close; the list above is as it was found.
+- **Corona, inner end:** fixed. A sourced row for the base
+  (`CORONA_BASE_HEIGHT_KM`, 3,000 km, Mann et al. 2023); the dots and
+  the streamer belt start there (L-460).
+- **Hills Cloud, inner end:** fixed, on the rule that a drawing ends
+  where its row says. The dots now go only on the part of each orbit
+  past the 2,000 AU edge; nearest dot 2,000 AU (L-466).
+- **Clumps, inner end:** OPEN, with the clumps' stored drawing (L-434).
+- **The two radiation belts, inner ends:** OPEN, in Earth's slice
+  (L-413): where the trapped particles stop along a field line needs a
+  row, or a declared drawing choice put to Tony.
+- **The kind 4 ends:** held as they are, each with its reason.
+- **The check:** the website's gallery run gained "Drawn ends"
+  (`documentation/smoke_drawn_ends.js`), which measures every end on
+  each run, holds eleven by name, and matches within half a percent
+  rather than this list's 1.5 percent. The rule is in
+  provenance-discipline 2.33, What a Visitor Reads, principle 4.

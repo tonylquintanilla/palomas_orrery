@@ -563,6 +563,13 @@ Module updated: October 21, 2026, evening, with Anthropic's Claude Opus
 5.5 (L-463 and L-464 closed on Tony's phone; L-465 new, the Sun's pole
 and spin drawn on the website; the Far lines dashboard button), built
 on b3c3e2a5 and gallery b334077c.
+Module updated: October 21, 2026, night, with Anthropic's Claude Opus
+5.5 (the close of the drawer and pairs build: L-460 built, Tony's
+phone look done, the magnetotail's reading left; L-191's Sun share
+built; L-466 new, every drawing's ends checked; L-467 new, the
+scanner's positional credit; L-468 new, the phone look's findings;
+L-412, L-434 and L-411 updated; interactive-exhibit 1.19 and
+provenance-discipline 2.33), built on 645558e2 and gallery 90cefa57.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -780,7 +787,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*240 live items; 224 need attention (`!`); 166 RICE-scored; 218 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*243 live items; 227 need attention (`!`); 166 RICE-scored; 218 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -829,7 +836,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-254 | 76 dead sphere-shell builders, unmarked, across 12 modules | OPEN | 2.8 | 2026-09-02 |
 | ! | L-240 | Split declared drawing parameters from measured values | OPEN | 2.8 | 2026-08-25 |
 | ! | L-176 | Shell hover text: add illustrated dimensions (radius_fraction -> km) | OPEN | 2.8 | 2026-08-04 |
-| ! | L-191 | Display-text duplication across the shell modules | OPEN | 2.8 | 2026-10-20 |
+| ! | L-191 | Display-text duplication across the shell modules | OPEN | 2.8 | 2026-10-21 |
 | ! | L-244 | Sweep for replicated conversion factors as a class [Fable candidate] | OPEN | 2.8 | 2026-08-25 |
 | ! | L-323 | A figure in prose needs a home (the Note is not a store) | OPEN | 2.8 | 2026-09-12 |
 | ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-10-07 |
@@ -934,6 +941,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-461 | The Daily Run confirms the orrery it pulled is the one Tony pushed (gallery, Daily Run) | OPEN | -- | 2026-10-21 |
 | ! | L-462 | The orrery maintenance run, a short form for small patches (orrery, maintenance) | OPEN | -- | 2026-10-21 |
 | ! | L-465 | The Sun room draws the Sun's pole and its direction of spin, as the orrery does (gallery, the Sun room) | OPEN | -- | 2026-10-21 |
+| ! | L-466 | Every drawing starts and stops where a served row says (orrery + gallery, the Sun's slice and Earth's) | OPEN | -- | 2026-10-21 |
+| ! | L-467 | The scanner credits a display line with a citation it only sits near (orrery, provenance scanner) | OPEN | -- | 2026-10-21 |
+| ! | L-468 | The Sun room's phone look of 2026-10-21, night: the corona's drawer text and the Hills cloud's cross (gallery, the Sun room) | OPEN | -- | 2026-10-21 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1329,6 +1339,113 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
+#### [L-468] The Sun room's phone look of 2026-10-21, night: the corona's drawer text and the Hills cloud's cross (gallery, the Sun room)
+<!-- L:468 status:OPEN upd:2026-10-21 section:A flag: rice: -->
+- **Tony, 2026-10-21, night,** in his run record
+  (`documentation/WHERE_WE_ARE_10-21-26_1658_run_record.md`, step 8),
+  with three phone screenshots: "the corona's hover when clicking the
+  drawer and when tapping the cross are not the same. it seems that the
+  drawer hover is the older streamer text."
+  - **Read at gallery 90cefa57, headless:** the corona's drawer row
+    holds two info crosses since the streamer belt joined it
+    (`drawn_with`, L-410, 2026-10-20): the belt's, first in trace
+    order, and the corona's. Naming a row opens the FIRST cross the
+    group holds (`sunLabelMarker` in `interactive.html`), so the drawer
+    opens the belt's words; a tap on the corona's own cross opens the
+    corona's. Not from tonight's build. The fix has one right answer:
+    a row opens its own feature's words, so a member drawn with another
+    yields the row to the host's cross.
+- **And:** "very minor: the cross to tap the hover is right on the
+  x-axis and at the very edge of the dot cloud and can be a bit
+  confusing." Read: the Hills cloud's info cross sits at 20,400 AU on
+  the x axis, just past the cloud's 20,000 AU outer edge.
+**Gap:** the corona's drawer text, with L-434's website patch, with a
+headless check that each row opens its own feature's words. The Hills
+cloud's cross: where it goes, at the next design talk.
+**Ref:** gallery `interactive.html` (`sunLabelMarker`),
+`gallery/feature_renderers.js` (`joinedGroup`); L-410; L-460; L-434.
+
+#### [L-467] The scanner credits a display line with a citation it only sits near (orrery, provenance scanner)
+<!-- L:467 status:OPEN upd:2026-10-21 section:A flag: rice: -->
+- **Found 2026-10-21** building L-191's Sun share: deleting the Sun's
+  fourteen `_info_hover` twins moved three uncited lines of
+  `hover_text_sun_and_corona` in `solar_visualization_shells.py` -- the
+  Parker Solar Probe's closest approach, the MAPS comet's crossing
+  sequence and its perihelion -- to within the scanner's 60-line window
+  of the Alfven surface's citation (Cranmer et al. 2023), which is not
+  their source. The whole-tree Tier-1 count fell by 3 (280 to 277 in
+  the sandbox) and nothing was sourced. The patch,
+  `patch_L191_1_sun_pairs_20261021.py`, predicted the drop by name and
+  said it was not a clearing. Keeping the survivors where the twins had
+  been did not help: the core's citation then sat inside the window.
+- One class: a display string credited by its position
+  (provenance-discipline, Scanner Mechanics: "Everywhere else the
+  window still applies"). `constants_new.py` rows left the window at
+  v2.28 (L-414).
+**Gap:** the three lines sourced into rows or removed when the braid
+reaches that hover (L-411's typed numbers); and, for a design talk,
+whether a display string should carry its citation the way a
+`constants_new.py` row does, so no window is needed.
+**Ref:** `provenance_scanner.py`, `solar_visualization_shells.py`;
+L-414; L-411; L-191.
+
+#### [L-466] Every drawing starts and stops where a served row says (orrery + gallery, the Sun's slice and Earth's)
+<!-- L:466 status:OPEN upd:2026-10-21 section:A flag: rice: -->
+- **Tony, 2026-10-21,** after the corona was found drawn from the Sun's
+  surface (L-460): "confirmed. but this makes me think that we should
+  double check our drawings for correct distances." In his run record
+  (`documentation/WHERE_WE_ARE_10-21-26_1658_run_record.md`): "we should
+  check all the drawings to be sure they reflect sourced distances. i
+  thought we had done this already"; on whether it waits, "we are in
+  the sun slice now so we should do this now." And in chat: "after the
+  sun please double check the earth too and this should be added to the
+  skill."
+- **Discovery, 2026-10-21** (`documentation/DISCOVERY_drawn_ends_20261021.md`):
+  every drawn feature in the Sun and Earth rooms, 35, measured at both
+  ends against its served rows; 25 on rows. Two were wrong, and both
+  were fixed the same night in the Sun's slice:
+  - the corona, drawn from the Sun's surface where the paper its dots
+    follow puts its base 3,000 km up (Mann et al. 2023; L-460);
+  - the Hills cloud, whose dots reached 257 AU against its 2,000 AU
+    inner edge, because they were placed evenly in time along orbits
+    stretched by its declared eccentricity 0.8. Orrery
+    `hills_cloud_sampler.py` now places them only on the part of each
+    orbit past the edge, still evenly in time there, with a fourth
+    check of the edges and a planted fault
+    (`patch_L460_3_hills_inside_edges_20261021.py`). Nearest dot
+    2,000 AU.
+- **The check, built** (website patch
+  `patch_L460_2_corona_base_website_20261021.py`): the gallery run's
+  "Drawn ends" row (`documentation/smoke_drawn_ends.js`) measures both
+  ends of every drawing in both rooms against its row, holds eleven ends
+  by name with their reasons, prints them every run, and fails on an
+  end matching no row or a held end that moves; it plants a corona dot
+  at the surface and a Hills dot at 257 AU first. The orrery's dashboard
+  has its button. The rule is in provenance-discipline 2.33, What a
+  Visitor Reads, principle 4.
+- **The eleven held ends, by kind:**
+  - the corona's base, served as a height above the surface, not a
+    distance from the centre;
+  - sampling, three: the dust thinning to its dust-free zone, the Hills
+    disk thinning before 20,000 AU, the tide thin at 10,000 AU;
+  - Earth's fitted surfaces, four: the magnetopause and the bow shock
+    cut at their served angle, the magnetotail continued from the cut
+    and its far rim;
+  - OPEN, three: the Oort cloud's clumps (L-434), and Earth's two
+    radiation belts, whose dots follow field lines from the belts'
+    equatorial edges down toward the ground, where no row says how far
+    down the trapped particles reach.
+**Gap:** the clumps, with L-434's build. Earth's belts in Earth's slice
+(L-413): a sourced lower end for the field lines, or a declared drawing
+choice put to Tony with its reason (principle 4). Each held end leaves
+the check's list when its row arrives or its drawing is fixed.
+**Ref:** gallery `documentation/smoke_drawn_ends.js`,
+`gallery_maintenance_run.py`; orrery `sun_corona_sampler.py`,
+`hills_cloud_sampler.py`, `constants_new.py` (CORONA_BASE_HEIGHT_KM,
+CORONA_BASE_KM, CORONA_BASE_RADII); `palomas_orrery_dashboard.py`;
+`documentation/DISCOVERY_drawn_ends_20261021.md`; L-460; L-434; L-413;
+L-330.
+
 #### [L-465] The Sun room draws the Sun's pole and its direction of spin, as the orrery does (gallery, the Sun room)
 <!-- L:465 status:OPEN upd:2026-10-21 section:A flag: rice: -->
 - **Tony, 2026-10-21,** in his run record after the Sun's own row was
@@ -1425,8 +1542,44 @@ builds); L-456.
   limit, zodiacal dust cloud, Alfven surface.
 - The Solar System room's drawer already runs outward from the Sun,
   and L-363's ruling of 2026-10-20 keeps it so.
-**Gap:** the build (gallery) with interactive-exhibit 1.19, in the
-Sun's slice (L-412).
+- **Built 2026-10-21** (gallery 72c3c403):
+  `gallery/drawer_order.js` reads each room's order from its served rows
+  when the page opens; the gallery run's "Drawer order" check and the
+  headless walk hold it, each with a planted fault. The order as listed
+  for Tony: gallery `documentation/DRAWER_ORDER_L460_20261021.md`. The
+  rule is in interactive-exhibit 1.19.
+- **Tony's look at the list, 2026-10-21, in chat:** "the rule is the
+  order goes by the distance of the nearest part of the feature. if the
+  visualization is displayed according to the sourced distance data,
+  then they are correct. this is not a visual judgement." The Roche
+  limit was then placed where it is drawn, 3.45 solar radii, rather
+  than at the 3 its row reports; its place in the list is the same.
+- **His look at the drawer, the same day,** in his run record
+  (`documentation/WHERE_WE_ARE_10-21-26_1658_run_record.md`): "it's
+  unclear why the corona comes before the chromosphere, which starts at
+  the photosphere." Then, in chat: "again, the issue is sourced
+  distances, not my call." Read: Mann et al. (2023), Sect. 2, the paper the corona's dots
+  follow, puts the base of the corona about 3 Mm above the photosphere.
+  New rows `CORONA_BASE_HEIGHT_KM` (3,000 km) and `CORONA_BASE_KM`; the
+  corona's dots and the streamer belt begin there, and the corona's
+  hover and panel words say so (Tony: "Approved"). Orrery
+  `patch_L460_2_corona_base_20261021.py`, website
+  `patch_L460_2_corona_base_website_20261021.py`. The drawer now lists
+  the chromosphere (1.003 solar radii) before the corona (1.0043).
+- **Then every drawing checked**, on his word: L-466.
+- **Found in the close:** Earth's magnetotail is placed by its
+  `drawn_radius`, which for the tail is its width about its axis, 30
+  Earth radii, where it begins at 30.6. The order is the same; the
+  reading is not what the rule means.
+- **Tony's phone look after the pushes** (orrery 645558e2, gallery
+  90cefa57; same run record, step 8): the drawer lists the chromosphere,
+  then the corona, and the corona's marker opens the new words. His
+  two findings from that look are L-468.
+**Gap:** with L-434's website patch: `drawn_radius` read only on a row
+that also reports a `radius`, so the magnetotail is placed where it is
+drawn. Then DONE.
+**Gap (2026-10-21, before the build; superseded above):** the build
+(gallery) with interactive-exhibit 1.19, in the Sun's slice (L-412).
 **Ref:** gallery `interactive.html`, `data/objects_config.json`,
 `tools/headless/`; interactive-exhibit; L-363; L-412; L-456.
 
@@ -2297,6 +2450,9 @@ reaches) wait for their rooms.
   `documentation/DESIGN_talks2_rulings_20261021.md` talk C; it rides the next
   build that bumps provenance-discipline (one session, one bump), with
   the four-step binding rule. The Tony-action above is answered.
+- **2026-10-21, night:** talk C's paragraph is in
+  provenance-discipline 2.33, The Access Standard, as written in the
+  design record; it rode L-460's bump.
 **Gap:** the held sentences first, from Gemini 4's return (review
 above): rows for the core's centre and the convection zone's base
 (Parker's first crossing is done, above); the chromosphere's approved
@@ -2387,7 +2543,19 @@ L-424; L-434; skills/*/SKILL.md.
   out by the website. Measured at the talk: the tide about 80 kB
   stored, the clumps (15 of 50 to 200 dots, about 1,900) about 30 kB.
   This departs from the brief's order, which put the band first.
-**Gap (2026-10-21):** the build, in the Sun's slice (L-412): the tide
+- **2026-10-21, night: the clumps' near end held OPEN** (L-466). The
+  15 clumps are placed at random, and the nearest dot lands at
+  21,363 AU, where the row says the clumps begin at 10,000 AU; the
+  website's Drawn ends check holds it by name until the clumps are a
+  stored drawing. The tide's near end, 10,563 AU against its 10,000 AU
+  edge, is held as sampling.
+**Gap (2026-10-21, night):** the build, next in the Sun's slice
+(L-412): the tide and the clumps placed once by the orrery from a
+seed (L-239), between their rows' edges and checked there, exported,
+served by name and drawn by the website, with the tide's phone look
+(L-412) and Tony's look; the clumps' held end then leaves the Drawn
+ends check.
+**Gap (2026-10-21; superseded above):** the build, in the Sun's slice (L-412): the tide
 and the clumps placed once by the orrery from a seed (L-239), exported,
 served by name and drawn by the website, with the tide's phone look
 (L-412) and Tony's look.
@@ -3003,8 +3171,18 @@ above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
   same afternoon found a pink band across the Sun room (L-463), and the
   Sun's own row without a link and the pole's citation unseen (L-464);
   neither from the build.
-**Gap (replaces the one below, 2026-10-21, later; the order proposed,
-for Tony's word):** the drawer order
+- **2026-10-21, night: the drawer order (L-460) and the fourteen pairs
+  (L-191) built**, and with them the corona drawn from its sourced base
+  and the Hills cloud kept inside its edges (L-466), on Tony's word that
+  drawings reflect sourced distances: "we are in the sun slice now so we
+  should do this now."
+**Gap (replaces the one below, 2026-10-21, night):** the tide and the clumps as stored
+drawings with the tide's phone look (L-434), which also ends the
+clumps' held end (L-466), and in its website patch the corona's
+drawer text (L-468) and the magnetotail's reading (L-460); L-454's two faint surfaces on the Alfven
+surface; the streamer belt's and the clumps' eyeballed numbers; L-241;
+then L-443, with L-128 after it.
+**Gap (2026-10-21, later; superseded above):** the drawer order
 by where each shell begins (L-460) and the Sun's fourteen hover and
 tooltip pairs (L-191); L-454's two faint surfaces on the Alfven
 surface; the tide and the clumps as stored drawings with the tide's
@@ -6665,7 +6843,7 @@ stated above, now with a count. See L-181, L-240.
 and the divergence check); L-156 (Batch 2 worksheet).
 
 #### [L-191] Display-text duplication across the shell modules
-<!-- L:191 status:OPEN upd:2026-10-20 section:A flag: rice:3/4/70/3 -->
+<!-- L:191 status:OPEN upd:2026-10-21 section:A flag: rice:3/4/70/3 -->
 - **Surfaced by Tony's Mode 5 pass, 2026-08-07.** Literal `<br>` tags
   visible in the Tkinter checkbox tooltips for the solar shells. Tony
   then spot-checked the asteroid belt and Earth tooltips, found them
@@ -6899,7 +7077,34 @@ and the divergence check); L-156 (Batch 2 worksheet).
   reconciliation ("can we do L456 in this session so we are ready for
   the sun's 14 pairs?"); it was built that evening. The fourteen pairs
   are next after L-456's addresses.
-**Gap (rewritten 2026-10-18):** (0) done, by Tony's look. (1a) BUILT:
+- **2026-10-21, the Sun's share built** (orrery
+  `patch_L191_1_sun_pairs_20261021.py`, on 4a40d27c). Re-measured at
+  HEAD first: five pairs differ, nine are copies, as on 2026-10-20. Each
+  of the fourteen Sun shells keeps ONE string, `<shell>_info`, written
+  with newlines; the fourteen `_info_hover` twins are deleted, and the
+  plot's hover is made from the string with `.replace('\n', '<br>')` at
+  the Plotly boundary, as the gas giants' configs do. The nine copies
+  kept one, checked letter for letter. The five that differed, each
+  Tony's choice, one per message:
+  - gravitational influence: the hover's words, its scale line dropped
+    (Tony: "remove. this is a legacy aid to manual scaling using old
+    typed distances");
+  - the Roche limit: the tooltip's ("Confirmed");
+  - the Alfven surface: the tooltip's ("Confirmed");
+  - the corona and the zodiacal dust cloud: the hover's words with the
+    panel's ("Confirmed", twice).
+  Each twin's own citation lines moved to the survivor. No number was
+  typed; the patch proves breaks-only byte for byte. On the patched
+  orrery 14 of 14 tooltips read as their hovers, against 9 of 14
+  before. The scanner's change was predicted by name: the whole tree
+  falls by 3, which is not a clearing (L-467). The dashboard's Drawer
+  Order button rode the same patch.
+**Gap (rewritten 2026-10-21):** (0) and (1a) done. (1b) The Sun's share
+BUILT (above); Tony's look in the orrery, each Sun checkbox's tooltip
+beside its marker's hover, closes it. The gas giants' 36, Planet 9's 2
+and the Moon's 1 when their rooms open. (2) Earth as below, when its
+talks come.
+**Gap (rewritten 2026-10-18; superseded above):** (0) done, by Tony's look. (1a) BUILT:
 the tooltip class shows `<br>` as a line break; Tony's look at a Sun
 and a Jupiter checkbox closes it. (1b) The structural fix, per slice:
 the Sun's 19 in the Sun's slice (L-412), written in newlines, their 14
