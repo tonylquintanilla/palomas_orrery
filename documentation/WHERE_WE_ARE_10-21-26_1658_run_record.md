@@ -746,7 +746,7 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-5. Commit and push. -- 
+5. Commit and push. -- f66f66debad4673d3612090b073c3a3266039754
 
 After your push, the website needs a small patch of its own: the same base for its streamer belt, and the same three word changes. I'll build it on your new orrery head. Meanwhile I'll work on the Hills cloud.
 
@@ -769,9 +769,179 @@ The website patch for the corona's base is in your website folder as `patch_L460
 I tested the patch on a copy of the website with the cache rebuilt the way the Daily Run will rebuild it. All 34 checks passed, and the drawer then lists the chromosphere before the corona.
 
 **Tonight's run order:**
-1. **Orrery:** run the three patches (pairs, then corona base, then Hills; the Hills one can go anywhere). Move them into `documentation/`. Do one orrery maintenance run, then commit and push.
-2. **Website:** run the corona-base patch, then the Daily Run. The Daily Run pulls the orrery's new rows and drawings and rebuilds the cache. Then the gallery maintenance run, commit and push, and the live run.
-3. **Your phone:** in the Sun room's drawer, the chromosphere now comes before the corona. The corona's hover says where it begins. The Hills cloud is empty inside 2,000 AU.
+1. **Orrery:** run the three patches (pairs, then corona base, then Hills; the Hills one can go anywhere). 
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L460_3_hills_inside_edges_20261021.py
+ok  hills_cloud_sampler.py: 6 edit(s)
+ok  test_hills_cloud_sampler.py: 5 edit(s)
+Next: the orrery maintenance run (it re-exports the Hills cloud), then commit and push.
+patch applied
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+2. Move them into `documentation/`. Do one orrery maintenance run, then commit and push. -- 
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261022T040348Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 2.0s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Skill manifest               0.2s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             2.0s  unchanged (1 checked, not written)
+  Period fetch                 0.4s  unchanged (1 checked, not written) --
+                                     NOTHING MISSING -- 13 served objects
+                                     examined, no query asked
+  Horizons check               0.6s  unchanged (2 checked, not written) --
+                                     NOTHING DUE -- 13 entries and 26 sheets
+                                     current, no query asked
+  Objects export               0.4s  unchanged (1 checked, not written)
+  Drawings export              1.9s  rewrote data/drawings/hills_cloud.json
+  Module atlas                 8.3s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               4.6s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Exact rows report            3.3s  unchanged (1 checked, not written) -- 11 of
+                                     42 exact rows printed at 41 lines (25
+                                     orrery, 16 gallery); 12 drawn only, 0 not
+                                     followed, 0 map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.2s  No changes to constants_new.py since HEAD.
+  Constants relations          0.3s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              1.7s  No figure count exceeds its inputs: 37
+                                     derived row(s) read, 30 judged OK -- 30 OK,
+                                     7 NOT YET MIGRATED; 23 conversion(s)
+                                     checked.
+  Constants export check       3.2s  Export matches the store: sha256
+                                     7b6606416e0d on both sides; 200 rows
+                                     re-read, 57 not exported, 43 tokens; 480
+                                     conversions re-computed, 10 of 10 worked
+                                     cases hold; 200 citations worked out again,
+                                     8 of 8 worked cases hold.
+  Objects export check         0.3s  pass
+  Horizons confirmations       0.4s  pass -- 13 of 13 entries and 11 periods
+                                     confirmed, 26 sheets read, within 30 days
+  Horizons check suite         0.6s  pass -- 64 checks, every planted fault
+                                     caught by name
+  Period fetch suite           2.3s  pass -- 36 checks, every planted fault
+                                     caught (20 planted, 8 of them for Earth's
+                                     period, L-445)
+  Skill headers                0.2s  12 skills parsed, no consistency problems.
+  Exact rows by the count      3.5s  PASSING -- 11 printed exact rows each state
+                                     a count; 25 orrery lines print through
+                                     exact_text() or row_text(); 16 gallery lines
+                                     are served the count
+  Dimensions                   2.4s  No unit contradicts its arithmetic: 60
+                                     derived row(s) read -- 51 OK, 6 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.2s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.2s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 198 status lines in constants_new.py are
+                                     well formed; 56 rows carry none.
+  Row shape                    0.1s  All 257 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.3s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Scanner row run (L-414)      0.2s  16 of 16 pins hold -- each row reads its own
+                                     comment run, declared rows are named, the
+                                     gate path is read by name.
+  Reset completeness          28.3s  PASS -- all 310 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  2.0s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped; nothing left behind.
+  Earth pole of date           0.3s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Hills cloud sampler (L-421)    0.5s  PASS -- 5 of 5 planted faults caught; the
+                                     real rows pass, the dots' plane tilted 34.1
+                                     deg
+  Drawings export check       26.5s  PASS -- 15 of 15 planted faults caught;
+                                     hills_cloud 3600 dots, plane tilted 30.9
+                                     deg, sha256 d36afafadb2a; van_allen_belts
+                                     3200 dots, no plane recorded, sha256
+                                     75274e84f840; earth_exosphere 1500 dots, no
+                                     plane recorded, sha256 6112639fb2cd;
+                                     sun_corona 2500 dots, no plane recorded,
+                                     sha256 e2b57ccbc8a4; zodiacal_dust 3000
+                                     dots, no plane recorded, sha256 995f13a056e8
+  Position digits (L-401)      2.5s  PASS -- 14 of 14 planted faults caught by
+                                     name; 23 hovers examined, 181 lines compared
+                                     against their errors; 5 pairs printed the
+                                     same from either end; 496 hovers of every
+                                     listed object from the Sun, Earth and
+                                     Neptune; 3 recorded 2xr answers read by
+                                     column name; 10 period sentences
+  Orbit markers (L-431, L-401)    9.9s  PASS -- 12 of 12 planted faults caught by
+                                     name; 4 ellipses, 1080 drawn points on their
+                                     period's centre; 14 markers, 9 dates, 53
+                                     printed distances against their errors; 6
+                                     elements as given; 3 Keplerian positions
+                                     half a year on; 1 parameters-window date
+                                     pairs; 2 Moon arcs; 2 perturbation checks; 1
+                                     perihelion osculating orbits; 2 frames; 2
+                                     sources read
+  Domain Split                 0.6s  PASS -- 6 of 6 planted faults caught; the
+                                     split reads each module's Domain: tag and
+                                     prints the same on the console, in the audit
+                                     and in the run history.
+  Maintenance report (L-269)    0.1s  PASS -- 4 of 4 planted faults caught by
+                                     name; 4 summaries; 2 risen file(s) named
+  Dashboard parity             0.5s  PASS -- 10 of 10 planted faults caught; 88
+                                     steps matched to their buttons by name and
+                                     script; 119 cards carry a short line; the
+                                     search finds 4 of 4 cases in any word order
+  Worksheet checker            8.5s  72 of 107 routed, 8 clean
+  Worksheet checker tests     19.6s  All 135 checks passed
+  Worksheet key round trip     1.5s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         22.7s  All 76 checks passed
+  Extractor pins               0.5s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          61.2s  0 TIER-1 -- the push gate holds; Whole tree,
+                                     Tier-1: 277: orrery 113, Earth System 149,
+                                     stars 13, utilities 2.
+
+======================================================================
+  31 of 31 gating checkers passed -- 225.0s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           72 of 107 routed, 8 clean
+    Provenance scanner          0 TIER-1 -- the push gate holds; Whole tree, Tier-1: 277: orrery 113, Earth System 149, stars 13, utilities 2.
+      No file's Tier-1 count rose since the previous run.
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2393 file(s) examined, 8 written, 0 created, 0 removed, 5 rewritten identically
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/drawings/hills_cloud.json
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    written   module_atlas.py
+    rewritten with identical bytes, no action needed:
+      DATA_INVENTORY.md
+      LEDGER_CONSOLIDATED.md
+      PROJECT_INSTRUCTIONS.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+    20 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+3. **Website:** run the corona-base patch, then the Daily Run. The Daily Run pulls the orrery's new rows and drawings and rebuilds the cache. Then the gallery maintenance run, commit and push, and the live run.
+4. **Your phone:** in the Sun room's drawer, the chromosphere now comes before the corona. The corona's hover says where it begins. The Hills cloud is empty inside 2,000 AU.
 
 The website run has to come after the Daily Run. Before it, four checks fail ("Drawn ends", "Sun shells", "Display figures" and "Cache in step"), because the served cache still holds the old drawings.
 

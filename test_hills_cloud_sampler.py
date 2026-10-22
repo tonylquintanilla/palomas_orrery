@@ -3,10 +3,12 @@ test_hills_cloud_sampler.py - the Hills cloud's three checks, and proof
 that each one can fail.
 
 hills_cloud_sampler.check() judges the sample drawn from constants_new.py
-on three things: the frame (Sgr A* within a degree of galactic longitude
+on four things: the frame (Sgr A* within a degree of galactic longitude
 and latitude 0), the reading of the paper's Fig. 3 (most of its dots inside the
 caption's ranges), and the tilt (the plane through the dots within 10
-degrees of the paper's "about 30"). A check that passes is only worth
+degrees of the paper's "about 30") and, since L-460, the edges (every
+dot between the cloud's inner edge and the far end of its band, in the
+large sample and in the drawing). A check that passes is only worth
 something if it can fail, so this file first plants a fault for each one
 and requires the right check to catch it, then runs the real rows:
 
@@ -15,6 +17,7 @@ and requires the right check to catch it, then runs the real rows:
     the ecliptic node row set to 0    frame
     the reading moved 120 deg along   reading
     the tilt row set to 60 deg        tilt
+    one drawn dot moved to 257 AU     edges
 
 The last line starts "HILLS CLOUD:", which the maintenance run quotes.
 
@@ -25,6 +28,8 @@ Role: dev_tools
 Domain: orrery
 
 Module updated: October 10, 2026 with Anthropic's Claude Opus 5.5 (L-421)
+Module updated: October 21, 2026 with Anthropic's Claude Opus 5.5 (L-460:
+the edges check, and its planted fault)
 """
 import sys
 
@@ -57,6 +62,17 @@ def _planted():
 
 def main():
     problems = []
+    # L-460: a dot back where the drawing used to put one, 257 AU out.
+    rows = hcs.rows_from_store()
+    dots = hcs.drawn_hills_cloud(rows)
+    dots['x'][0], dots['y'][0], dots['z'][0] = 257.0, 0.0, 0.0
+    caught = [f for f in hcs.edge_failures(dots, rows) if f.startswith('edges:')]
+    if caught:
+        print('planted: %-34s caught by edges' % 'one drawn dot moved to 257 AU')
+    else:
+        problems.append('planted fault "one drawn dot moved to 257 AU" was NOT '
+                        'caught by the edges check')
+        print('planted: %-34s NOT CAUGHT' % 'one drawn dot moved to 257 AU')
     for label, rows, expected in _planted():
         failures, _info = hcs.check(rows)
         caught = [f for f in failures if f.startswith(expected + ':')]
@@ -79,7 +95,7 @@ def main():
             print('FAIL: ' + line)
         print('HILLS CLOUD: FAIL -- %d problem(s)' % len(problems))
         return 1
-    print('HILLS CLOUD: PASS -- 4 of 4 planted faults caught; the real rows '
+    print('HILLS CLOUD: PASS -- 5 of 5 planted faults caught; the real rows '
           'pass, the dots\' plane tilted %.1f deg' % info['plane_tilt_deg'])
     return 0
 

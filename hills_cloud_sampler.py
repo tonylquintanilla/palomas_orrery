@@ -25,8 +25,13 @@ HOW THE DOTS ARE PLACED (every number is a row in constants_new.py):
 - Every orbit has the eccentricity HILLS_CLOUD_ECCENTRICITY, a declared
   pick. Dots go along each orbit evenly in TIME, so they gather at the
   far ends, where a body spends most of its time, and that is where the
-  arms show. Dots near an orbit's near end can fall inside the cloud's
-  inner edge, as a real body on that orbit would.
+  arms show. They go only on the part of each orbit inside the cloud,
+  no nearer the Sun than its inner edge (INNER_LIMIT_OORT_CLOUD_AU): the
+  paper places the inner cloud by distance from the Sun (sec. 1, p. 2,
+  the row INNER_OORT_DISK_OUTER_AU), so no dot is drawn closer in.
+  FIXED 2026-10-21 (L-460): until then dots near an orbit's near end
+  fell inside the edge, to 257 AU, which no row allowed; a drawing ends
+  where a sourced row says it does (Tony, 2026-10-21).
 - The galactic angles are turned into the drawing's frame, the ecliptic
   of J2000, by the matrix pole_frames.create_pole_transformation_matrix
   builds about the north galactic pole (the rows the galactic tide is
@@ -79,6 +84,10 @@ Module updated: October 10, 2026 with Anthropic's Claude Opus 5.5 (L-421)
 Module updated: October 11, 2026 with Anthropic's Claude Opus 5.5 (L-421,
 the website half: drawn_hills_cloud() and its three settings, so the
 orrery and the website draw the same seeded dots)
+Module updated: October 21, 2026 with Anthropic's Claude Opus 5.5 (L-460:
+dots only on the part of each orbit inside the cloud's inner edge, still
+evenly in time there; a fourth check, the edges, that every dot lies
+between the inner edge and INNER_OORT_CLOUD_AU)
 """
 import math
 
@@ -184,7 +193,16 @@ def sample_hills_cloud(n_orbits, points_per_orbit, rows=None, seed=None):
                         float(rows['INNER_OORT_CLOUD_AU']), rng)
     a = aphelion / (1.0 + e)
 
-    mean_anomaly = rng.uniform(0, 2 * np.pi, (n_orbits, points_per_orbit))
+    # L-460: evenly in time, but only on the part of the orbit no nearer
+    # the Sun than the cloud's inner edge. r = a (1 - e cos E) >= r_in
+    # where cos E <= (1 - r_in / a) / e; E0 is where that starts, and the
+    # mean anomaly M0 = E0 - e sin E0. A whole orbit outside the edge has
+    # E0 = 0, so nothing changes for it.
+    r_in = float(rows['INNER_LIMIT_OORT_CLOUD_AU'])
+    big_e0 = np.arccos(np.clip((1.0 - r_in / a) / e, -1.0, 1.0))
+    m0 = big_e0 - e * np.sin(big_e0)
+    share = rng.uniform(0, 1, (n_orbits, points_per_orbit))
+    mean_anomaly = m0[:, None] + share * (2 * np.pi - 2 * m0[:, None])
     big_e = _eccentric_anomaly(mean_anomaly, e)
     in_x = a[:, None] * (np.cos(big_e) - e)
     in_y = a[:, None] * math.sqrt(1.0 - e * e) * np.sin(big_e)
@@ -294,8 +312,31 @@ def describe(sample, rows=None):
     }
 
 
+def edge_failures(sample, rows, slack_au=1.0):
+    """The edges check: every dot between the cloud's inner edge
+    (INNER_LIMIT_OORT_CLOUD_AU) and the far end of its band
+    (INNER_OORT_CLOUD_AU). slack_au allows for the stored file's rounding
+    of each coordinate to the whole AU (L-460)."""
+    r = np.sqrt(np.asarray(sample['x']) ** 2 + np.asarray(sample['y']) ** 2
+                + np.asarray(sample['z']) ** 2)
+    lo = rows['INNER_LIMIT_OORT_CLOUD_AU'] - slack_au
+    hi = rows['INNER_OORT_CLOUD_AU'] + slack_au
+    out = []
+    inside = r < lo
+    beyond = r > hi
+    if inside.any():
+        out.append('edges: %d dot(s) inside the cloud\'s inner edge of %s AU, '
+                   'the nearest at %.0f AU' % (int(inside.sum()),
+                   rows['INNER_LIMIT_OORT_CLOUD_AU'], float(r.min())))
+    if beyond.any():
+        out.append('edges: %d dot(s) beyond %s AU, the farthest at %.0f AU'
+                   % (int(beyond.sum()), rows['INNER_OORT_CLOUD_AU'],
+                      float(r.max())))
+    return out
+
+
 def check(rows=None, seed=421, frame_tolerance_deg=1.0, tilt_tolerance_deg=10.0):
-    """The three checks, as a list of failure sentences (empty: all pass),
+    """The four checks, as a list of failure sentences (empty: all pass),
     and the description they were judged on, from 4,000 orbits so the
     tilt barely moves between runs. The two tolerances are the checks'
     own settings, not read from a source: a degree is well above how far
@@ -304,7 +345,10 @@ def check(rows=None, seed=421, frame_tolerance_deg=1.0, tilt_tolerance_deg=10.0)
     catching a frame or a reading gone wrong."""
     rows = rows_from_store() if rows is None else rows
     failures = []
-    info = describe(sample_hills_cloud(4000, 6, rows, seed=seed), rows)
+    sample = sample_hills_cloud(4000, 6, rows, seed=seed)
+    info = describe(sample, rows)
+    failures += edge_failures(sample, rows)
+    failures += edge_failures(drawn_hills_cloud(rows), rows)
     lon, lat = info['sgr_a_galactic_lon_lat_deg']
     if abs(lon) > frame_tolerance_deg or abs(lat) > frame_tolerance_deg:
         failures.append('frame: Sgr A* falls at galactic longitude %.2f, '
@@ -350,7 +394,7 @@ def main():
         for line in failures:
             print('FAIL: ' + line)
         return 1
-    print('PASS: frame, reading and tilt')
+    print('PASS: frame, reading, tilt and edges')
     return 0
 
 

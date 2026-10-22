@@ -2,9 +2,9 @@
 # Paloma's Orrery -- Provenance Audit
 
 Generated: October 21, 2026
-Files scanned: 165
-Total findings: 1173
-Constants: 260 | Dicts: 66 | Display strings: 847
+Files scanned: 164
+Total findings: 1172
+Constants: 260 | Dicts: 65 | Display strings: 847
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -20,18 +20,16 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T1 by domain | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|--------------|---:|---:|---:|--------:|
+| 20261022T041206Z | `f66f66d` | 164 | 1172 | 277 | orrery 113, Earth System 149, stars 13, utilities 2 | 733 | 156 | 6 | 0 |
 | 20261022T040348Z | `4a40d27` | 165 | 1173 | 277 | orrery 113, Earth System 149, stars 13, utilities 2 | 733 | 157 | 6 | 0 |
 | 20261021T213829Z | `bbc80ab` | 164 | 1175 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 733 | 156 | 6 | 0 |
 | 20261021T211516Z | `b3c3e2a` | 164 | 1175 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 733 | 156 | 6 | 0 |
 | 20261021T181156Z | `6a8d04c` | 164 | 1175 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 733 | 156 | 6 | 0 |
 | 20261021T172506Z | `6a8d04c` | 164 | 1175 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 733 | 156 | 6 | 0 |
-| 20261021T035426Z | `e8e714d` | 164 | 1175 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 733 | 156 | 6 | 0 |
 
-Change since the previous run: total -2, Tier-1 -3.
+Change since the previous run: total -1, Tier-1 +0.
 
 No file's Tier-1 count rose.
-
-Tier-1 moved by domain: orrery 116 -> 113.
 
 ---
 
@@ -64,7 +62,7 @@ Tier-1 moved by domain: orrery 116 -> 113.
 |------|-------|--------|------:|
 | 1 | 16-20 | FIX NOW | 277 |
 | 2 | 10-15 | REVIEW | 733 |
-| 3 | 5-9 | LOW PRIORITY | 157 |
+| 3 | 5-9 | LOW PRIORITY | 156 |
 | 4 | 1-4 | LOWEST PRIORITY | 6 |
 
 **Whole tree, Tier-1: 277: orrery 113, Earth System 149, stars 13, utilities 2.** By each file's docstring `Domain:` tag; Findings by File Type below has every tier and every domain. The push gate is the Gate Path section, not this total.
@@ -220,7 +218,6 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `data_inventory.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `export_drawings.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `osculating_cache_manager.py` | orrery | 0 | 0 | 1 | 0 | 1 |
-| `patch_L460_3_hills_inside_edges_20261021.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `test_dimensions.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `test_domain_split.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `test_objects_export.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
@@ -241,13 +238,13 @@ Same data again, grouped by subject-matter domain rather than by individual file
 |--------|------:|-------:|-------:|-------:|-------:|------:|
 | Orrery (solar system + orbital mechanics) | 45 | 113 | 618 | 55 | 3 | 789 |
 | Earth System | 13 | 149 | 74 | 2 | 0 | 225 |
-| Dev Tools (audit, diagnostics, one-shot scripts) | 29 | 0 | 0 | 94 | 0 | 94 |
+| Dev Tools (audit, diagnostics, one-shot scripts) | 28 | 0 | 0 | 93 | 0 | 93 |
 | Stars (stellar neighborhood) | 12 | 13 | 41 | 6 | 3 | 63 |
 | Utilities (cross-domain shared helpers) | 1 | 2 | 0 | 0 | 0 | 2 |
 | Gallery | 0 | 0 | 0 | 0 | 0 | 0 |
 | Unclassified (no Domain: tag, or one outside the six) | 0 | 0 | 0 | 0 | 0 | 0 |
 
-**Domain coverage:** all 100 files with findings declare a `Domain:` tag the report knows.
+**Domain coverage:** all 99 files with findings declare a `Domain:` tag the report knows.
 
 ---
 
@@ -1200,7 +1197,7 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 1 | string | display string @ line 1 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1 | string | display string @ line 1 | (3 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 
 ### idealized_orbits.py
 
@@ -1960,9 +1957,9 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 106 | dict | ROLE_MAP[...] | (158 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 405 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 428 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 106 | dict | ROLE_MAP[...] | (157 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 404 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 427 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### moon_visualization_shells.py
 
@@ -2011,12 +2008,6 @@ is planned for a future session.
 | 332 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
 | 2317 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
 | 2448 | dict | SECTION_SYMBOLS[...] | (8 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
-
-### patch_L460_3_hills_inside_edges_20261021.py
-
-| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
-|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 49 | dict | FINGERPRINTS[...] | (2 entries) | 4 | 2 | **8** | No source citation; date-sensitive (recalled) | Internal (role 'devtool') |
 
 ### planet_visualization_utilities.py
 
