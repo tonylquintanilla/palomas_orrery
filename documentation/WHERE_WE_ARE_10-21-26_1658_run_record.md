@@ -1733,8 +1733,8 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-4. Commit and push. -- 
-5. Reinstall interactive-exhibit and provenance-discipline from `skills/` (Settings > Skills).
+4. Commit and push. -- eb9caff7a801f1a1bb5b21e48374002d05182217
+5. Reinstall interactive-exhibit and provenance-discipline from `skills/` (Settings > Skills). -- done and v3.107
 
 **Where this leaves us**
 - Every room's drawer follows the distances its rows give, and your phone confirmed the Sun's order.
