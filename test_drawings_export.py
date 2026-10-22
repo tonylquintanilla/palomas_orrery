@@ -35,6 +35,14 @@ For every entry in export_drawings.DRAWINGS it checks:
                   dots following the radial and the vertical profiles, and
                   each dot's weight the sunlight its distance gives
                   (zodiacal_dust_sampler.check_dots)
+    the outer cloud  every dot between where the outer cloud begins and its
+                  outer edge (outer_oort_sampler.check_dots); the count is
+                  whatever the seed gives, held by the re-draw above
+    the tide      every dot between the same two edges, the dots in four
+                  distance shells following the band's rule, and in five
+                  latitude shells following |sin b cos b| about the
+                  galactic pole as its rows give it, worked out a second
+                  way (galactic_tide_sampler.check_dots)
 
 A check that passes is only worth something if it can fail, so faults
 are planted first, each in memory, and each must be caught:
@@ -55,6 +63,9 @@ are planted first, each in memory, and each must be caught:
     a dust dot moved inside the dust-free zone   the dust
     the dust drawn with no flattening        the dust
     a dust dot's weight changed              the dust
+    an outer cloud dot moved inside its row  the outer cloud
+    a tide dot moved past the outer edge     the tide
+    the tide drawn about the ecliptic's pole the tide
 
 The last line starts "DRAWINGS EXPORT:", which the maintenance run
 quotes. It names each drawing, its dots, its tilt and its sha256.
@@ -85,6 +96,11 @@ planted)
 Module updated: October 21, 2026 with Anthropic's Claude Opus 5.5 (L-460:
 a corona dot moved to the Sun's surface is planted, and must be caught
 now that the drawing starts at the corona's base)
+Module updated: October 22, 2026 with Anthropic's Claude Opus 5.5 (L-434:
+the sixth and seventh drawings, the outer Oort cloud and the galactic
+tide, checked against their rows, with three more faults planted: an
+outer cloud dot inside where its row says it begins, a tide dot past
+the outer edge, and the tide drawn about the wrong pole)
 """
 import hashlib
 import json
@@ -98,6 +114,8 @@ import van_allen_belt_sampler as vab
 import earth_exosphere_sampler as ees
 import sun_corona_sampler as scs
 import zodiacal_dust_sampler as zds
+import outer_oort_sampler as oos
+import galactic_tide_sampler as gts
 
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -146,6 +164,10 @@ def check_one(name, text_on_disk, text_now, path, ignored=git_ignored):
         want = settings.get("n_orbits", 0) * settings.get("points_per_orbit", 0)
     elif "dots_inner" in settings:
         want = settings.get("dots_inner", 0) + settings.get("dots_outer", 0)
+    elif "n_clumps" in settings:
+        # L-434: how many dots the outer cloud keeps is what the seed gives, not
+        # a setting; the re-draw above holds the count to the rows.
+        want = n
     else:
         want = settings.get("dots", 0)
     if lengths != [n] * len(axes) or n != want or axes[:3] != ["x", "y", "z"]:
@@ -170,6 +192,12 @@ def check_one(name, text_on_disk, text_now, path, ignored=git_ignored):
             failures.append("%s: %s" % (name, line))
     elif name == "zodiacal_dust":
         for line in zds.check_dots(content, zds.rows_from_store()):
+            failures.append("%s: %s" % (name, line))
+    elif name == "outer_oort_cloud":
+        for line in oos.check_dots(content, oos.rows_from_store()):
+            failures.append("%s: %s" % (name, line))
+    elif name == "galactic_tide":
+        for line in gts.check_dots(content, gts.rows_from_store()):
             failures.append("%s: %s" % (name, line))
     tilt = None
     if lengths == [n] * len(axes) and n and "plane_tilt_deg" in content:
@@ -324,6 +352,36 @@ def _planted_dust(text_now):
     return out
 
 
+def _planted_outer_cloud(cloud_now, tide_now):
+    """Three faults in the outer cloud's and the tide's files (L-434), each
+    caught by its own check (each planted text is compared with itself,
+    as the belts' are, so only that check can catch it)."""
+    out = []
+    near = oos.rows_from_store()["INNER_OORT_DISK_OUTER_AU"]
+    inside = json.loads(cloud_now)
+    inside["x"][0], inside["y"][0], inside["z"][0] = int(near) - 500, 0, 0
+    out.append(("outer_oort_cloud", "an outer cloud dot moved inside its row",
+                ed.render(inside), "where the outer cloud's row says it begins"))
+    far = gts.rows_from_store()["OUTER_OORT_CLOUD_AU"]
+    past = json.loads(tide_now)
+    past["x"][0], past["y"][0], past["z"][0] = int(far) + 5000, 0, 0
+    out.append(("galactic_tide", "a tide dot moved past the outer edge",
+                ed.render(past), "edges:"))
+    # The error L-406 replaced: the tide drawn about the ecliptic's pole
+    # (RA 270 deg, Dec 90 deg less the obliquity) instead of the galaxy's.
+    rows = gts.rows_from_store()
+    rows["GALACTIC_NORTH_POLE_RA_J2000_DEG"] = 270.0
+    rows["GALACTIC_NORTH_POLE_DEC_J2000_DEG"] = (
+        90.0 - rows["EARTH_OBLIQUITY_J2000_DEG"])
+    other = gts.drawn_tide(rows)
+    tilted = json.loads(tide_now)
+    for axis in ("x", "y", "z"):
+        tilted[axis] = [int(round(float(v))) for v in other[axis]]
+    out.append(("galactic_tide", "the tide drawn about the ecliptic's pole",
+                ed.render(tilted), "tilt:"))
+    return out
+
+
 def main():
     print("=" * 70)
     print("  DRAWINGS EXPORT CHECK -- data/drawings/ against the rows")
@@ -373,6 +431,9 @@ def main():
                     _planted_corona(texts_now["sun_corona"])] +
                    [("zodiacal_dust", p) for p in
                     _planted_dust(texts_now["zodiacal_dust"])])
+    sun_planted += [(name, (label, text, expect)) for name, label, text,
+                    expect in _planted_outer_cloud(texts_now["outer_oort_cloud"],
+                                                   texts_now["galactic_tide"])]
     for name, (label, text, expect) in sun_planted:
         failures, _ = check_one(name, text, text,
                                 ed.path_of(PROJECT_DIR, name),

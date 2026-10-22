@@ -249,6 +249,9 @@ and data/drawings/earth_exosphere.json, Earth's hydrogen exosphere.)
 Module updated: October 20, 2026 with Anthropic's Claude Opus 5.5 (L-410
 with L-131: and data/drawings/sun_corona.json and zodiacal_dust.json, the
 Sun's corona and the zodiacal dust cloud.)
+Module updated: October 22, 2026 with Anthropic's Claude Opus 5.5 (L-434:
+and data/drawings/outer_oort_cloud.json and galactic_tide.json, the outer
+Oort cloud and the galactic tide.)
 """
 
 import hashlib
@@ -311,7 +314,9 @@ GENERATORS = [
       'data/drawings/van_allen_belts.json',
       'data/drawings/earth_exosphere.json',
       'data/drawings/sun_corona.json',
-      'data/drawings/zodiacal_dust.json']),
+      'data/drawings/zodiacal_dust.json',
+      'data/drawings/outer_oort_cloud.json',
+      'data/drawings/galactic_tide.json']),
     ('Module atlas',    ['module_atlas.py'],
      ['MODULE_ATLAS.md', 'MODULE_INDEX.md']),
     ('Data inventory',  ['data_inventory.py'],

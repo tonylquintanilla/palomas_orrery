@@ -22,9 +22,12 @@ website draws the dots it is given and places none itself. So there is
 one way of placing them, the orrery's, and the website's cloud is the
 orrery's cloud. A shape that is a few numbers and a formula (a sphere,
 a ring) is not stored: the numbers are the drawing, and the website
-computes it from the served rows. The other scattered-dot shells (the
-streamer band, the outer cloud's clumps, the galactic tide) can join
-this list later; that work is its own ledger item.
+computes it from the served rows. The outer Oort cloud (loose dots
+with clumps) and the galactic tide joined the list on 2026-10-22 (L-434, Tony's ruling
+of 2026-10-20, talk 5); the streamer band does not, because it is a
+grid from served numbers with a small jitter, and the website works it
+out. The tide's double cone is not stored either: it is rows and a
+formula.
 
 WHAT IT WRITES
 --------------
@@ -35,8 +38,9 @@ data/drawings/<name>.json for each entry in DRAWINGS:
     what          one sentence on what the dots are
     made_by       the function that places the dots
     frame         the frame the coordinates are in
-    unit          "au" (the Hills cloud, the dust cloud), "r_earth" (the
-                  belts, the exosphere) or "r_sun" (the corona)
+    unit          "au" (the Hills cloud, the dust cloud, the outer cloud,
+                  the tide), "r_earth" (the belts, the exosphere) or "r_sun"
+                  (the corona)
     rounding      how each coordinate was rounded, and why that is safe
     settings      the drawing's settings: orbits, dots per orbit, seed
     rows          the constants_new.py rows the dots are placed from
@@ -49,8 +53,9 @@ data/drawings/<name>.json for each entry in DRAWINGS:
                   served dots
     belts         (the belts only) the belts' names, in the order the
                   belt list numbers them
-    x, y, z       the dots, one list each, whole AU (the Hills cloud) or
-                  hundredths of an Earth radius (the belts)
+    x, y, z       the dots, one list each, whole AU (the Hills cloud, the
+                  outer cloud, the tide) or hundredths of an Earth radius (the
+                  belts)
     w, belt       each dot's weight, 0 to 1 (the belts: from the declared
                   fade; the exosphere: from the density at its distance;
                   the corona and the dust cloud: from the sunlight at its
@@ -96,6 +101,10 @@ weight, the sunlight reaching it.)
 Module updated: October 21, 2026 with Anthropic's Claude Opus 5.5 (L-460:
 the corona's drawing starts at the base of the corona, and its file says
 so.)
+Module updated: October 22, 2026 with Anthropic's Claude Opus 5.5 (L-434:
+the sixth and seventh stored drawings, the outer Oort cloud from
+outer_oort_sampler.py and the galactic tide from galactic_tide_sampler.py,
+each in whole AU in the ecliptic frame, each placed once from a seed.)
 """
 
 import hashlib
@@ -272,6 +281,76 @@ def _zodiacal_dust():
     }
 
 
+def _outer_oort_cloud():
+    """The outer Oort cloud's file content, as a dict (L-434,
+    2026-10-22)."""
+    import outer_oort_sampler as oos
+    rows = oos.rows_from_store()
+    dots = oos.drawn_cloud(rows)
+    return {
+        "schema": SCHEMA,
+        "drawing": "outer_oort_cloud",
+        "what": ("The outer Oort cloud as loose dots with clumps among "
+                 "them, placed at random to show the cloud is not smooth; "
+                 "where the clumps really are is not known. Every dot lies "
+                 "between where the outer cloud begins and its outer edge, "
+                 "thin at its near end and full where the inner cloud's "
+                 "band ends. The loose dots come first in the lists, then "
+                 "the clumps'."),
+        "made_by": "outer_oort_sampler.drawn_cloud()",
+        "frame": ("ecliptic and equinox of J2000, centred on the Sun, the "
+                  "orrery's drawing frame. The dots are placed in random "
+                  "directions, so the frame changes nothing a visitor "
+                  "sees."),
+        "unit": "au",
+        "rounding": ("each coordinate to the nearest whole AU: a drawing, "
+                     "not a measurement, and half an AU is invisible at "
+                     "this scale"),
+        "settings": dots["settings"],
+        "rows": list(oos.ROW_NAMES),
+        "rows_sha256": rows_sha256(rows),
+        "dots": len(dots["x"]),
+        "x": [int(round(v)) for v in dots["x"]],
+        "y": [int(round(v)) for v in dots["y"]],
+        "z": [int(round(v)) for v in dots["z"]],
+    }
+
+
+def _galactic_tide():
+    """The galactic tide's file content, as a dict (L-434, 2026-10-22)."""
+    import galactic_tide_sampler as gts
+    rows = gts.rows_from_store()
+    dots = gts.drawn_tide(rows)
+    return {
+        "schema": SCHEMA,
+        "drawing": "galactic_tide",
+        "what": ("Where the galaxy's tide sends comets in from: dots in the "
+                 "outer Oort cloud about the north galactic pole, as many "
+                 "per piece of sky as |sin b cos b| gives, b the galactic "
+                 "latitude (none at the galaxy's plane or its poles, most "
+                 "halfway), thin at the cloud's near end and full where the "
+                 "inner cloud's band ends. Each dot stands for the far end "
+                 "of an orbit; where real comets are is not known. The "
+                 "double cone drawn with it is not stored: each instrument "
+                 "works it out from the rows."),
+        "made_by": "galactic_tide_sampler.drawn_tide()",
+        "frame": ("ecliptic and equinox of J2000, centred on the Sun, the "
+                  "orrery's drawing frame, turned from the galactic pole's "
+                  "rows"),
+        "unit": "au",
+        "rounding": ("each coordinate to the nearest whole AU: a drawing, "
+                     "not a measurement, and half an AU is invisible at "
+                     "this scale"),
+        "settings": dots["settings"],
+        "rows": list(gts.ROW_NAMES),
+        "rows_sha256": rows_sha256(rows),
+        "dots": len(dots["x"]),
+        "x": [int(round(float(v))) for v in dots["x"]],
+        "y": [int(round(float(v))) for v in dots["y"]],
+        "z": [int(round(float(v))) for v in dots["z"]],
+    }
+
+
 # name -> function returning the file's content. A new stored drawing
 # is one line here, and test_drawings_export.py checks every entry.
 DRAWINGS = {
@@ -280,6 +359,8 @@ DRAWINGS = {
     "earth_exosphere": _earth_exosphere,
     "sun_corona": _sun_corona,
     "zodiacal_dust": _zodiacal_dust,
+    "outer_oort_cloud": _outer_oort_cloud,
+    "galactic_tide": _galactic_tide,
 }
 
 # The lists a drawing may carry, one line each in the file, in this

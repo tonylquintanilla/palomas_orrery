@@ -211,6 +211,9 @@ Module updated: October 21, 2026 with Anthropic's Claude Opus 5.5
 the photosphere, from Mann et al. (2023), Sect. 2, read this day; with
 CORONA_BASE_KM from the Sun's centre and CORONA_BASE_RADII. The
 corona's dots and the streamer belt start there.)
+Module updated: October 22, 2026 with Anthropic's Claude Opus 5.5
+(L-434: no value changed. GALACTIC_NORTH_POLE_RA_J2000_DEG's Declared
+note names where the tide is now placed, galactic_tide_sampler.py.)
 """
 
 import math
@@ -886,8 +889,9 @@ GALACTIC_NORTH_POLE_RA_J2000_DEG = 192.85948125
 # Declared+: the IAU in 1958 and carried to J2000 by Murray's 1989
 # Declared+: transformation, which the Hipparcos team adopted as the
 # Declared+: standard. It sets the plane the galactic tide is drawn
-# Declared+: about (solar_visualization_shells.create_sun_galactic_tide
-# Declared+: and the gallery's tide_field). The source also reports that
+# Declared+: about (galactic_tide_sampler.py places the tide's stored dots
+# Declared+: about it, and both instruments draw the tide's cone about
+# Declared+: it; L-434). The source also reports that
 # Declared+: the plane fitted to modern 2MASS and radio catalogues is
 # Declared+: inclined 0.4 to 0.6 degrees more than this one, far below
 # Declared+: anything the drawing shows.

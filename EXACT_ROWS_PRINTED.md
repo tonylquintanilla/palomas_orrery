@@ -32,9 +32,9 @@ Rule 7: each printed exact row states a print count, each orrery line prints it 
 
 ### `SUN_RADIUS_KM`
 
-- orrery `solar_visualization_shells.py` line 230: `f" ({row_text('SUN_RADIUS_KM', 'au')} to {row_text('CHROMOSPHERE_TOP_KM', 'au')} AU).<br>"`
-- orrery `solar_visualization_shells.py` line 232: `f"{exact_text('SUN_RADIUS_KM', grouping=True)} km in radius --<br>"`
-- orrery `solar_visualization_shells.py` line 557: `f"* Including both the Convective Zone and the Photosphere, the radius is from {row_text('RAD...`
+- orrery `solar_visualization_shells.py` line 241: `f" ({row_text('SUN_RADIUS_KM', 'au')} to {row_text('CHROMOSPHERE_TOP_KM', 'au')} AU).<br>"`
+- orrery `solar_visualization_shells.py` line 243: `f"{exact_text('SUN_RADIUS_KM', grouping=True)} km in radius --<br>"`
+- orrery `solar_visualization_shells.py` line 568: `f"* Including both the Convective Zone and the Photosphere, the radius is from {row_text('RAD...`
 - gallery `gallery/feature_renderers.js` line 3164 (config `/objects/0/features/sun_structures/photosphere`): `? fmtServed(cfg.radius.value, sunF, 0) : String(cfg.radius.value);`
 
 ### `EARTH_LEO_UPPER_ALTITUDE_KM`
@@ -85,24 +85,24 @@ Rule 7: each printed exact row states a print count, each orrery line prints it 
 - orrery `comet_visualization_shells.py` line 562: `f"Inside the helmet cusp (~{row_text('HELMET_CUSP_RADII')} R_sun, "`
 - orrery `comet_visualization_shells.py` line 563: `f"~{row_text('HELMET_CUSP_RADII', 'au')} AU): {helmet_status}<br>"`
 - orrery `comet_visualization_shells.py` line 737: `f"({row_text('HELMET_CUSP_RADII')} R_sun, {row_text('HELMET_CUSP_RADII', 'au')} AU),<br>"`
-- orrery `solar_visualization_shells.py` line 750: `f'* Streamer Belt (Visible Corona): helmets pinch at {row_text('HELMET_CUSP_RADII')} R_sun, t...`
-- orrery `solar_visualization_shells.py` line 778: `f'* Streamer Belt (Visible Corona): helmets pinch at {row_text('HELMET_CUSP_RADII')} R_sun, t...`
-- orrery `solar_visualization_shells.py` line 1609: `f"higher than {row_text('HELMET_CUSP_LOW_RADII')}-{row_text('HELMET_CUSP_HIGH_RADII')} R_sun,...`
-- orrery `solar_visualization_shells.py` line 1610: `f"({row_text('HELMET_CUSP_RADII', 'km', grouping=True)} km, {row_text('HELMET_CUSP_RADII', 'a...`
+- orrery `solar_visualization_shells.py` line 761: `f'* Streamer Belt (Visible Corona): helmets pinch at {row_text('HELMET_CUSP_RADII')} R_sun, t...`
+- orrery `solar_visualization_shells.py` line 789: `f'* Streamer Belt (Visible Corona): helmets pinch at {row_text('HELMET_CUSP_RADII')} R_sun, t...`
+- orrery `solar_visualization_shells.py` line 1553: `f"higher than {row_text('HELMET_CUSP_LOW_RADII')}-{row_text('HELMET_CUSP_HIGH_RADII')} R_sun,...`
+- orrery `solar_visualization_shells.py` line 1554: `f"({row_text('HELMET_CUSP_RADII', 'km', grouping=True)} km, {row_text('HELMET_CUSP_RADII', 'a...`
 - gallery `gallery/feature_renderers.js` line 2045 (config `/objects/0/features/solar_atmosphere/streamer_belt/cusp_radius`): `"Cusp: " + (servedText(cfg.cusp_radius) || cuspR) + " solar radii<br>= " +`
 
 ### `INNER_LIMIT_OORT_CLOUD_AU`
 
 - orrery `palomas_orrery.py` line 10606: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
-- orrery `solar_visualization_shells.py` line 177: `_OORT_INNER_EDGE = row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)`
-- orrery `solar_visualization_shells.py` line 1226: `f'From {_OORT_INNER_EDGE} AU ({row_text("INNER_LIMIT_OORT_CLOUD_AU", unit="km", grouping=True...`
+- orrery `solar_visualization_shells.py` line 188: `_OORT_INNER_EDGE = row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)`
+- orrery `solar_visualization_shells.py` line 1237: `f'From {_OORT_INNER_EDGE} AU ({row_text("INNER_LIMIT_OORT_CLOUD_AU", unit="km", grouping=True...`
 - gallery `gallery/feature_renderers.js` line 2383 (config `/objects/0/features/oort_cloud/hills_cloud_torus/inner_radius`): `hover += "From " + (fmtAuServed(cfg.inner_radius) || fmtAu(lo)) +`
 - gallery `gallery/feature_renderers.js` line 3170 (config `/objects/0/features/oort_cloud/inner_oort_limit`): `hover += "Radius: " + servedText(cfg.radius) + " AU<br>";`
 
 ### `OUTER_OORT_CLOUD_AU`
 
 - orrery `palomas_orrery.py` line 10606: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
-- orrery `solar_visualization_shells.py` line 191: `_OORT_OUTER_EDGE = row_text('OUTER_OORT_CLOUD_AU', grouping=True)`
+- orrery `solar_visualization_shells.py` line 202: `_OORT_OUTER_EDGE = row_text('OUTER_OORT_CLOUD_AU', grouping=True)`
 - gallery `gallery/feature_renderers.js` line 2450 (config `/objects/0/features/oort_cloud/outer_oort_clumpy/outer_radius`): `var z = fmtAuServed(cfg.outer_radius) || fmtAu(hi);`
 - gallery `gallery/feature_renderers.js` line 2450 (config `/objects/0/features/oort_cloud/galactic_tide/outer_radius`): `var z = fmtAuServed(cfg.outer_radius) || fmtAu(hi);`
 - gallery `gallery/feature_renderers.js` line 3170 (config `/objects/0/features/oort_cloud/outer_oort`): `hover += "Radius: " + servedText(cfg.radius) + " AU<br>";`
@@ -130,12 +130,12 @@ No display prints these exact rows. Under Rule 7 they carry no print count. The 
   - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 998 (config `/objects/1/features/orientation/pole/dec`): `var dec = measured(pole.dec, "deg", slug + "/orientation/pole/dec", warn);`
 - `ARCSEC_PER_DEG`: named on 2 other orrery line(s).
 - `EARTH_OBLIQUITY_J2000_ARCSEC`: named on 0 other orrery line(s).
-- `EARTH_OBLIQUITY_J2000_DEG`: named on 18 other orrery line(s).
-- `GALACTIC_NORTH_POLE_RA_J2000_DEG`: named on 9 other orrery line(s).
+- `EARTH_OBLIQUITY_J2000_DEG`: named on 19 other orrery line(s).
+- `GALACTIC_NORTH_POLE_RA_J2000_DEG`: named on 10 other orrery line(s).
   - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 2415 (config `/objects/0/features/oort_cloud/galactic_tide/galactic_pole/ra`): `var gra = measured(gp.ra, "deg", where + "/galactic_pole/ra", warn);`
   - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 2480 (config `/objects/0/features/oort_cloud/galactic_plane/galactic_pole/ra`): `var gra = measured(gp.ra, "deg", where + "/galactic_pole/ra", warn);`
 - `GALACTIC_NORTH_POLE_DEC_J2000_ARCSEC`: named on 0 other orrery line(s).
-- `GALACTIC_NORTH_POLE_DEC_J2000_DEG`: named on 8 other orrery line(s).
+- `GALACTIC_NORTH_POLE_DEC_J2000_DEG`: named on 9 other orrery line(s).
   - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 2416 (config `/objects/0/features/oort_cloud/galactic_tide/galactic_pole/dec`): `var gdec = measured(gp.dec, "deg", where + "/galactic_pole/dec", warn);`
   - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 2481 (config `/objects/0/features/oort_cloud/galactic_plane/galactic_pole/dec`): `var gdec = measured(gp.dec, "deg", where + "/galactic_pole/dec", warn);`
 - `DEG_PER_RAD`: named on 2 other orrery line(s).

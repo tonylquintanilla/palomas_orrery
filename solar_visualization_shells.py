@@ -3,8 +3,9 @@ solar_visualization_shells.py - Sun interior, corona, and heliosphere shell trac
 
 The largest shell module: 12 sphere shells from core to gravitational
 influence boundary, plus custom geometry for the Hills Cloud (a tilted
-disk of dots along orbits, from hills_cloud_sampler.py), Oort Cloud
-clumpy distribution, galactic tide shell, the corona (a fade of dots
+disk of dots along orbits, from hills_cloud_sampler.py), the outer Oort
+cloud, loose dots with clumps (from outer_oort_sampler.py), the galactic tide (from
+galactic_tide_sampler.py, with its double cone worked out here), the corona (a fade of dots
 from sun_corona_sampler.py, with the streamer band under its legend
 entry) and the zodiacal dust cloud (dots from zodiacal_dust_sampler.py).
 Includes the v3.18 solar shell refactor: single-info-marker pattern,
@@ -17,6 +18,16 @@ Consumed by: planet_visualization.py (routing dispatcher),
 Role: rendering/shells
 Domain: orrery
 
+Module updated: October 22, 2026 with Anthropic's Claude Opus 5.5
+(L-434, with L-239: the outer Oort cloud and the galactic tide draw
+stored drawings, outer_oort_sampler.drawn_cloud() and
+galactic_tide_sampler.drawn_tide(), each placed once from a fixed seed,
+so every plot is the same cloud and the website draws the same dots.
+Their rules moved with them unchanged, and the outer cloud gains loose
+dots through its band beside its clumps, Tony's choice of 2026-10-22,
+so it begins near its row; _outer_cloud_keep moved to
+outer_oort_sampler.band_keep. The tide's cone comment says where the
+cone is drawn. No word a visitor reads changed.)
 Module updated: October 21, 2026 with Anthropic's Claude Opus 5.5
 (L-191, the Sun's share: one string per shell. The fourteen
 <shell>_info_hover twins are gone; each <shell>_info is written with
@@ -1258,76 +1269,40 @@ def create_sun_hills_cloud_torus(center_position=(0, 0, 0)):
     return [shell_trace, info_trace]
 
 
-def _outer_cloud_keep(distance):
-    """Chance of keeping a point of the round outer cloud at `distance`
-    AU (L-421, 2026-10-10): nothing at the band's near end,
-    INNER_OORT_DISK_OUTER_AU, rising evenly to all of them at its far end,
-    INNER_OORT_CLOUD_AU, and all of them beyond. The Hills cloud thins out
-    across the same band, so the two overlap inside it (Tony's ruling of
-    2026-10-09, a fuzzy boundary)."""
-    near, far = float(INNER_OORT_DISK_OUTER_AU), float(INNER_OORT_CLOUD_AU)
-    return np.clip((np.asarray(distance, dtype=float) - near) / (far - near), 0.0, 1.0)
-
-
-def create_sun_outer_oort_clumpy(center_position=(0, 0, 0), radius_min=None, radius_max=None, n_clumps=15):
+def create_sun_outer_oort_clumpy(center_position=(0, 0, 0)):
     """
-    Create a clumpy, asymmetric outer Oort Cloud with density variations.
-    FIXED VERSION - Returns proper Plotly trace objects.
+    The outer Oort cloud, drawn as loose dots with clumps among them, to
+    show it is not smooth; where the clumps really are is not known.
+
+    L-434 (2026-10-22, Tony's ruling of 2026-10-20, talk 5): a stored
+    drawing. The dots come from outer_oort_sampler.drawn_cloud(), placed
+    once from a fixed seed, so every plot is the same cloud and the
+    website draws the same dots from data/drawings/outer_oort_cloud.json
+    (L-239, for this builder). The clumps' rule is unchanged: centres
+    between INNER_OORT_DISK_OUTER_AU and OUTER_OORT_CLOUD_AU, thin at
+    the band's near end and full by INNER_OORT_CLOUD_AU, and every dot
+    between the two edges. Loose dots by the same band rule join them
+    (Tony's choice, 2026-10-22): fifteen clumps alone never reached the
+    row where the cloud begins. The settings (the loose dots, the 15
+    clumps, their dots and sizes) live in the sampler, where the
+    drawing is made. The
+    radius_min, radius_max and n_clumps parameters are gone: nothing
+    passed them, and a drawing made in one place has one set of
+    settings.
 
     Parameters:
     - center_position: Sun position tuple (default: (0, 0, 0)).
       Accepted for interface uniformity with the unified dispatch
       contract. Geometry translation deferred to switchover phase.
-    - radius_min: Inner boundary in AU (default: INNER_OORT_DISK_OUTER_AU,
-      the near end of the band where the outer cloud begins thin)
-    - radius_max: Outer boundary in AU (default: OUTER_OORT_CLOUD_AU)
-    - n_clumps: Number of density clumps (default: 15)
-
-    L-421 (2026-10-10): the defaults were typed, 20000 and 100000; they
-    read the rows now. The cloud is thin at the band's near end and full
-    by its far end, INNER_OORT_CLOUD_AU (_outer_cloud_keep): a clump's
-    centre and each of its points are kept with that chance. The clumps'
-    sizes and point counts are unchanged, a drawing choice.
     """
     # Phase D1: center_position accepted for interface uniformity;
     # geometry translation deferred to switchover phase.
-    radius_min = INNER_OORT_DISK_OUTER_AU if radius_min is None else radius_min
-    radius_max = OUTER_OORT_CLOUD_AU if radius_max is None else radius_max
-    points_x, points_y, points_z = [], [], []
-    
-    for i in range(n_clumps):
-        clump_radius = np.random.uniform(radius_min, radius_max)
-        while np.random.random() >= _outer_cloud_keep(clump_radius):
-            clump_radius = np.random.uniform(radius_min, radius_max)
-        theta = np.random.uniform(0, 2*np.pi)
-        phi = np.random.uniform(-np.pi/2, np.pi/2)
-        
-        clump_center_x = clump_radius * np.cos(phi) * np.cos(theta)
-        clump_center_y = clump_radius * np.cos(phi) * np.sin(theta)
-        clump_center_z = clump_radius * np.sin(phi)
-        
-        n_points_in_clump = np.random.randint(50, 200)
-        clump_size = np.random.uniform(5000, 15000)
-        
-        for j in range(n_points_in_clump):
-            r = clump_size * np.random.beta(2, 5)
-            theta_local = np.random.uniform(0, 2*np.pi)
-            phi_local = np.random.uniform(-np.pi/2, np.pi/2)
-            
-            x = clump_center_x + r * np.cos(phi_local) * np.cos(theta_local)
-            y = clump_center_y + r * np.cos(phi_local) * np.sin(theta_local)
-            z = clump_center_z + r * np.sin(phi_local)
-            
-            distance = np.sqrt(x**2 + y**2 + z**2)
-            if (radius_min <= distance <= radius_max
-                    and np.random.random() < _outer_cloud_keep(distance)):
-                points_x.append(x)
-                points_y.append(y)
-                points_z.append(z)
-    
-    x = np.array(points_x)
-    y = np.array(points_y)
-    z = np.array(points_z)
+    from outer_oort_sampler import drawn_cloud
+    dots = drawn_cloud()
+    x = np.array(dots['x'])
+    y = np.array(dots['y'])
+    z = np.array(dots['z'])
+    radius_max = OUTER_OORT_CLOUD_AU
 
     clumpy_hover = (
         'Outer Oort Cloud: Clumpy, asymmetric structure<br>'
@@ -1358,90 +1333,53 @@ def create_sun_outer_oort_clumpy(center_position=(0, 0, 0), radius_min=None, rad
     return [shell_trace, info_trace]
 
 
-def create_sun_galactic_tide(center_position=(0, 0, 0), n_points=5000):
+def create_sun_galactic_tide(center_position=(0, 0, 0)):
     """
     Where the galaxy's tide sends comets in from: points in the outer Oort
     cloud, tilted into the galaxy's plane, sparse at the plane and at the
     galactic poles and thickest halfway between.
 
     THE DRAWING IS A CHOICE RESTING ON WHAT CAN BE CITED (L-406, Tony's
-    rulings of 2026-10-02):
-    - The plane. Points are placed about the north galactic pole of J2000,
-      GALACTIC_NORTH_POLE_RA_J2000_DEG / _DEC_J2000_DEG in constants_new.py,
-      and turned into the drawing's frame by the same matrix a planet's
-      pole uses (idealized_orbits.create_pole_transformation_matrix).
-    - The density. The number of points per piece of sky goes as
-      |sin b cos b|, b the galactic latitude: none at the plane or the
-      poles, most at 45 degrees. The sources are in the comments beside
-      the code that does it.
-    - The distance. From INNER_OORT_DISK_OUTER_AU, thin there and full
-      by INNER_OORT_CLOUD_AU, the band where the inner cloud's disk gives
-      way to the round outer cloud (L-421, 2026-10-10), then evenly to
-      OUTER_OORT_CLOUD_AU; the clumpy outer Oort cloud uses the same band.
-      It replaced a typed 50,000 AU with a typed spread and cut-offs
-      (L-406).
+    rulings of 2026-10-02). Since L-434 (2026-10-22, Tony's rulings of
+    2026-10-20, talks 2 and 5) the points are a stored drawing, placed
+    once from a fixed seed by galactic_tide_sampler.drawn_tide(), so every
+    plot is the same cloud and the website draws the same 5,000 dots from
+    data/drawings/galactic_tide.json (L-239, for this builder). How they
+    are placed is unchanged, and the sampler's docstring says it:
+    - The plane. About the north galactic pole of J2000,
+      GALACTIC_NORTH_POLE_RA_J2000_DEG / _DEC_J2000_DEG in constants_new.py.
+    - The density. Points per piece of sky go as |sin b cos b|, b the
+      galactic latitude: none at the plane or the poles, most at 45
+      degrees. The sources are in the sampler, beside the code.
+    - The distance. From INNER_OORT_DISK_OUTER_AU, thin there and full by
+      INNER_OORT_CLOUD_AU, then evenly to OUTER_OORT_CLOUD_AU, the same
+      band the clumpy outer cloud uses.
     - Each point stands for the far end of an orbit. Where any real comet
       is, is not known and is not claimed.
     - The cone (L-420, Tony's choice of 2026-10-06). A faint double cone
       through the Sun, at the galactic latitude where |sin b cos b| is
-      largest, between the same two edges. It marks where the density
-      above peaks, so the shape reads from the side as an hourglass.
-      It is not a surface any comet is on.
+      largest, from where the cloud is full, INNER_OORT_CLOUD_AU, to its
+      outer edge. It marks where the density above peaks, so the shape
+      reads from the side as an hourglass. It is not a surface any comet
+      is on, and it is not stored: it is the rows and a formula, worked
+      out here.
 
     Parameters:
     - center_position: Sun position tuple (default: (0, 0, 0)).
       Accepted for interface uniformity with the unified dispatch
       contract. Geometry translation deferred to switchover phase.
-    - n_points: Number of random points (default: 5000, up from 2000
-      after Tony's look of 2026-10-06), a rendering setting.
+      The n_points parameter is gone (L-434): the count is the stored
+      drawing's, set in galactic_tide_sampler.py, and nothing passed it.
     """
     # Phase D1: center_position accepted for interface uniformity;
     # geometry translation deferred to switchover phase.
     from idealized_orbits import create_pole_transformation_matrix
+    from galactic_tide_sampler import drawn_tide
     M = np.asarray(create_pole_transformation_matrix(
         GALACTIC_NORTH_POLE_RA_J2000_DEG, GALACTIC_NORTH_POLE_DEC_J2000_DEG),
         dtype=float)
-
-    # Source: Matese and Whitmire, "Persistent Evidence of a Jovian Mass
-    #   Solar Companion in the Oort Cloud", arXiv:1004.4584, sec. 2.2 --
-    #   the dominant disk tidal term goes as |sin B cos B| (Matese et al.
-    #   1999), so if the tide dominates, the aphelia of new comets avoid
-    #   the galactic poles and equator and peak near B = +/-45 degrees.
-    # Source: Delsemme, "Galactic tides affect the Oort cloud: an
-    #   observational confirmation", A&A 187, 913 (1987), summary -- the
-    #   aphelia of 152 comets with periods over ten thousand years avoid
-    #   the two galactic polar caps and a strip along the galactic equator.
-    # Note: not everyone reads it this way. Higuchi, "Anisotropy of
-    #   Long-period Comets Explained by Their Formation Process",
-    #   arXiv:2008.04324 (AJ 160, 134), explains the same depletions by
-    #   comets gathering near the ecliptic and a second plane; and Rickman
-    #   et al. (2008), as Matese and Whitmire report, take the term to go
-    #   as |sin B|.
-    # Galactic latitude by rejection. Drawing sin(b) evenly gives every
-    # piece of sky the same chance; keeping a draw with probability
-    # |2 sin b cos b| = |sin 2b| (at most 1, at b = 45 degrees) makes the
-    # points per piece of sky go as |sin b cos b|.
-    sin_b = np.empty(0)
-    while sin_b.size < n_points:
-        u = np.random.uniform(-1.0, 1.0, 2 * n_points)
-        keep = np.random.uniform(0.0, 1.0, u.size) < 2.0 * np.abs(u) * np.sqrt(1.0 - u * u)
-        sin_b = np.concatenate([sin_b, u[keep]])
-    sin_b = sin_b[:n_points]
-    cos_b = np.sqrt(1.0 - sin_b * sin_b)
-    lon = np.random.uniform(0, 2 * np.pi, n_points)
-    # L-421 (2026-10-10): from the band's near end, INNER_OORT_DISK_OUTER_AU,
-    # thin there and full by INNER_OORT_CLOUD_AU (_outer_cloud_keep), the
-    # same band the Hills cloud thins out across. Same number of points.
-    r = np.empty(0)
-    while r.size < n_points:
-        draw = np.random.uniform(INNER_OORT_DISK_OUTER_AU, OUTER_OORT_CLOUD_AU, 2 * n_points)
-        r = np.concatenate([r, draw[np.random.uniform(0.0, 1.0, draw.size) < _outer_cloud_keep(draw)]])
-    r = r[:n_points]
-
-    galactic = np.vstack([r * cos_b * np.cos(lon),
-                          r * cos_b * np.sin(lon),
-                          r * sin_b])
-    x, y, z = M @ galactic
+    dots = drawn_tide()
+    x, y, z = dots['x'], dots['y'], dots['z']
 
     # Tony's approved words, 2026-10-02 (L-406). The distances are the
     # rows', printed as the clumps' hover prints them.
@@ -1467,9 +1405,15 @@ def create_sun_galactic_tide(center_position=(0, 0, 0), n_points=5000):
     )
     # The cone (L-420, 2026-10-06). |sin b cos b| is largest where
     # sin b equals cos b, so at b = arctan(1), north and south. Each half
-    # is a band of triangles between the two edges the points use,
-    # turned by the same matrix M. Faint, no hover: the tide's info
+    # is a band of triangles from where the cloud is full,
+    # INNER_OORT_CLOUD_AU, to its outer edge, turned by the same matrix M
+    # the points are placed with. Faint, no hover: the tide's info
     # marker carries its words. It toggles with the tide.
+    # FIXED 2026-10-22 (L-434): this comment said "between the two edges
+    # the points use"; since L-421 the points begin at
+    # INNER_OORT_DISK_OUTER_AU, thin, and the cone was left where the
+    # cloud is full. The drawing is unchanged; the comment says what it
+    # draws.
     b_peak = np.arctan(1.0)
     n_around = 72                      # a rendering setting
     phi = np.linspace(0, 2 * np.pi, n_around, endpoint=False)
