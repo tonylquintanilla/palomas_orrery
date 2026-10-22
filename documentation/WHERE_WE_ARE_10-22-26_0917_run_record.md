@@ -133,7 +133,7 @@ Not urgent, in your order:
 
 **Tony**: Run record:
 
-**Session: OPEN: 10-22-26 0748: Opus: Build from brief L-434**
+**Session: DONE: 10-22-26 1520: Opus: Build from brief L-434**
 
 The orrery patch is ready (attached). It’s built on the orrery at ff38c7b; I tested it on a clean copy of that commit, and on one with Windows line endings. Both times the files came out identical to my working copy.
 
@@ -381,9 +381,7 @@ In the Sun room, tick the Oort rows. The tide should be pink, with its X and con
 Tap the corona’s drawer row. It should open the corona’s words.
 Earth’s drawer should look unchanged.
 
-+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-**Session: OPEN: 10-22-26 0748: Opus: Build from brief L-434**
+==================================================================================================
 
 The close patch is ready. It writes the ledger lines and Where We Are changes from Fable's record, adjusted for what was built today.
 
@@ -1293,9 +1291,9 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-4. Commit and push. 
-5. Reinstall interactive-exhibit, provenance-discipline and ledger-and-session-records from the skills/ folder. The new versions are 1.20, 2.34 and 1.22.
-6. Replace the Project instructions with the new PROJECT_INSTRUCTIONS.md. It should read v3.108 at the top.
+4. Commit and push. -- 0634d8952f7e5dd899e3b8fad6db5a0e4f57867c
+5. Reinstall interactive-exhibit, provenance-discipline and ledger-and-session-records from the skills/ folder. The new versions are 1.20, 2.34 and 1.22. -- done
+6. Replace the Project instructions with the new PROJECT_INSTRUCTIONS.md. It should read v3.108 at the top. -- done
 
 **Your two questions:**
 
