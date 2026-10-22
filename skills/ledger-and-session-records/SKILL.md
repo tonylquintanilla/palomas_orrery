@@ -6,9 +6,17 @@ fires_when: Ledger edits, ledger_index.py, RICE, handoffs, manifests, atlas, dep
 
 # Ledger and Session Records
 
-Read this file in 4 parts: lines 1-196, 197-446, 447-622, 623-799.
+Read this file in 4 parts: lines 1-199, 200-454, 455-630, 631-807.
 
-Skill version: 1.21 | 2026-10-14, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.22 | 2026-10-22, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ b995472a. v1.22 (L-469) gives Where We Are a DEFERRED
+section, between Settled and Signals: one line per item waiting behind
+the current work, its handle with its label, the date it was deferred
+and what it waits behind; a line leaves when the item is picked up.
+Tony, 2026-10-22, in the coordination session Claude Fable 5.1
+recorded: "keep the deferred list prominent so we can come back to
+it."
+Earlier: 1.21 | 2026-10-14, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 9248845c. v1.21 (L-442) carries Tony's seven kinds of
 document. The Document Stack is rewritten as the seven, each with when
 it is read: strategy (the master plan), tactics (Where We Are and its
@@ -27,15 +35,10 @@ computer saves its patch where he runs it (Anchor Requirement, Handoff
 Structure, Tony's Local Folders). Tony, 2026-10-10: "since we are using
 cowork, the location of the local files should be included in the
 handoff header along with the github info."
-Earlier: 1.19 | 2026-10-10, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 32619f8d. v1.19 (L-395), on Tony's request: Tony's
-Local Folders, under Where a File Goes, names the two repositories'
-folders on his machine, so a session linked to it saves a patch where
-he runs it. Tony, 2026-10-10: "palomas_orrery_for_github is the repo
-folder."
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
 on 2026-10-05 (L-418), 2026-10-07 (L-422), 2026-10-08 (L-418),
-2026-10-10 (L-395), 2026-10-11 (L-421) and 2026-10-14 (L-442).
+2026-10-10 (L-395), 2026-10-11 (L-421), 2026-10-14 (L-442) and
+2026-10-22 (L-469).
 
 Note: READING the ledger at session start is resident Part-1 behavior,
 not this skill's job. This skill carries the maintenance mechanics.
@@ -258,7 +261,12 @@ written for the work, and they move only at design builds.
   done stages folded into one line, marked [done], [NOW], [next],
   [later] or [goal]; SETTLED, one dated line per standing ruling from
   the last few sessions so a session does not re-raise it, each line
-  leaving after a few weeks once it is habit; SIGNALS, three numbers
+  leaving after a few weeks once it is habit; DEFERRED (v1.22, L-469;
+  Tony, 2026-10-22: "keep the deferred list prominent so we can come
+  back to it"), one line per item designed or recorded and waiting
+  behind the current work, its handle with its label, the date it was
+  deferred and what it waits behind, a line leaving when its item is
+  picked up, the length cap unchanged; SIGNALS, three numbers
   READ FROM FILES when the page is written, never typed from memory --
   the last cache build and whether a rename needed a retry (gallery
   `data/cache_swap_log.jsonl`), the Tier-1 count on the files the push

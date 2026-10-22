@@ -11,9 +11,9 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 167  
-**Total Lines of Code (non-blank):** 131,709  
-**Total Public Functions/Classes:** 1,639
+**Total Python Files:** 166  
+**Total Lines of Code (non-blank):** 131,587  
+**Total Public Functions/Classes:** 1,638
 
 ## Classification Coverage
 
@@ -225,9 +225,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `ledger_index.py` | Generate the at-a-glance INDEX for the consolidated ledger. (715 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (129 lines) |
-| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (998 lines) |
+| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (999 lines) |
 | `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (868 lines) |
-| `patch_L434_4_close_20261022.py` | The close of October 22's build: the ledger, Where We Are, three skills, the protocol, the closing report and Claude Fable 5.1's coordination record. (123 lines) |
 | `period_fetch.py` | - fetch from JPL the orbital period of each object the website serves that has none fetched yet, with the same code the orrery uses when Tony plots, so the Horizons check can compare it with JPL the same day and the objects export can carry it to the website (L-444). (375 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (505 lines) |
 | `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (3,528 lines) |

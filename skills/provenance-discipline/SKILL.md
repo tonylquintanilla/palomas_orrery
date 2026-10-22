@@ -6,9 +6,18 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0 on 
 
 # Provenance Discipline
 
-Read this file in 6 parts: lines 1-304, 305-622, 623-880, 881-1120, 1121-1404, 1405-1433.
+Read this file in 6 parts: lines 1-306, 307-627, 628-912, 913-1152, 1153-1436, 1437-1465.
 
-Skill version: 2.33 | 2026-10-21, with Anthropic's Claude Opus 5.5, at
+Skill version: 2.34 | 2026-10-22, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ b995472a. v2.34 (L-434 with L-454) adds How a range
+is drawn, under When the source gives a range: an edge nobody can
+place is drawn as a cloud across its range; an edge that moves keeps
+its surface sharp and gets the range's two ends as whiskers; the hover
+says which. Tony, 2026-10-22: "Edges are better drawn with a cloud
+across the range. While a fluctuation is more like graph whiskers so
+there the concentric circles would be a graphical device. In both
+cases the hover should explain."
+Earlier: 2.33 | 2026-10-21, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 645558e2. v2.33 (L-460 with L-466, and L-411) adds two
 rules. To What a Visitor Reads, principle 4: a drawing starts and
 stops where a served row says; an end no row sets is held by name,
@@ -26,17 +35,10 @@ Source line itself, as a web address a visitor can open, because the
 Source line is the one a visitor reads; an address on the row's Access
 line alone never reaches the i panel. Tony, 2026-10-20: "the citation
 should have a live url link", and "we should add this to the skill."
-Earlier: 2.31 | 2026-10-17, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 6f4fc9b0. v2.31 (L-411, the Sun's numbers) adds one
-paragraph to The Unit Field: a temperature is stored in kelvin, a
-source in degrees Celsius is converted exactly and the row says so,
-and the words a visitor reads give kelvin. Tony, 2026-10-17: "don't
-we standardize on degrees Kelvin? the conversion is routine", and "we
-should add this to the skill."
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
 on 2026-10-05 and 2026-10-08 (L-418), 2026-10-09 (L-414),
 2026-10-13 (L-437), 2026-10-17 (L-452 and L-411), 2026-10-20
-(L-410) and 2026-10-21 (L-460).
+(L-410), 2026-10-21 (L-460) and 2026-10-22 (L-434).
 
 ## Contents
 
@@ -347,6 +349,36 @@ construction, Rule 2 -- and the display shows the range from those
 rows. Earth's outer-belt peak, typed 4.5 with its L = 4 to 5 band in
 prose and the band typed again as literal text in the orrery's own
 hover, was the corrected case at L-322 C2.
+
+**How a range is drawn depends on WHY the source gives a range** (v2.34,
+L-434 with L-454). Two kinds, and the hover says which, in words:
+
+- **An edge nobody can place** -- the range is the source's uncertainty
+  about where the edge is. It is drawn as a CLOUD ACROSS THE RANGE: the
+  dots thin in from one end and are full by the other, or thin out
+  across it. The Oort cloud's inner edge, 2,000 to 5,000 AU: the Hills
+  cloud's dots fill in across it (`hills_cloud_sampler.py`, whose
+  fill-in check fails if the disk is drawn full from 2,000 AU); its
+  outer edge's range is named in the outer cloud's hover, and the
+  cloud reaches across it.
+- **An edge that moves** -- the range is how far the real edge swings
+  with outside conditions (the solar wind, for one). The surface stays
+  SHARP at its model value, and the range's two ends are a graphical
+  device, like a graph's whiskers: two dashed circles in the body's
+  equator, in the surface's colour, on a row of their own. The Alfven
+  surface's usual range, 10 to 20 solar radii, is the case
+  (`create_sun_alfven_surface_range` in the orrery,
+  `renderRangePair` on the website). Earth's magnetopause and bow
+  shock take it when their pairs are built (L-454).
+
+A sphere drawn at one end of an uncertain range is neither, and does
+not come back. The orrery's three Oort spheres (Inner Limit of Oort
+Cloud, Inner Oort Cloud, Outer Oort Cloud) were that, and were removed
+from both instruments on 2026-10-22. Tony: "the concentric spheres were
+an early attempt at this idea. They can be removed." The question to
+ask first is his: "Are we drawing inner and outer edges or range of
+the surface based fluctuation due to external factors?" It is method,
+not a ruling per case (Method Belongs to the Skill).
 
 ## A Drawing Approximation Does Not Promote [CRITICAL]
 

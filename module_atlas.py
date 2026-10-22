@@ -253,7 +253,6 @@ ROLE_MAP = {
     'measure_perframe_elements':              'devtool',
     'module_atlas':                           'devtool',
     'orrery_maintenance_run':                 'devtool',
-    'patch_L434_4_close_20261022':            'devtool',
     'period_fetch':                           'devtool',
     'provenance_history':                     'devtool',
     'provenance_scanner':                     'devtool',

@@ -6,9 +6,21 @@ fires_when: adding or changing an exhibit in interactive.html; any edit to the S
 
 # Interactive Exhibit
 
-Read this file in 6 parts: lines 1-140, 141-144, 145-387, 388-658, 659-904, 905-997.
+Read this file in 6 parts: lines 1-143, 144-147, 148-389, 390-643, 644-868, 869-1037.
 
-Skill version: 1.19 | 2026-10-21, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.20 | 2026-10-22, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ b995472a and gallery @ d7195704. v1.20 (L-434, L-465,
+L-468, L-460) records four things from one day's build. The galactic
+tide and the outer Oort cloud are stored drawings now, placed once by
+the orrery from a seed, and the stored drawings are named. A drawer
+row opens its own feature's words, held by the gallery run's Label
+words check (L-468). A drawn guide the renderers build, the Sun's
+rotation axis (L-465; Tony from his phone: "The sun's pole and
+rotational axis like the orrery?"), is a frame element: always drawn,
+no shell key, marked `meta.frame_element`. And the drawer-order note
+on Earth's magnetotail is replaced, its reading having been fixed
+(L-460).
+Earlier: 1.19 | 2026-10-21, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 645558e2 and gallery @ 90cefa57. v1.19 (L-460) records
 that a room's drawer lists its shells where each begins: the nearest
 part of each feature as it is drawn from its served rows, read by
@@ -26,19 +38,10 @@ gathered citations as a list, `source_items`, beside the joined
 `source` line, and gallery/source_list.js decides what the list holds
 and where an address ends (Tony from his phone, 2026-10-20: "need
 hyperlinks" and "need some kind of itemization for readability").
-Earlier: 1.17 | 2026-10-17, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ a73bc24a and gallery @ f49b3e69. v1.17 (L-452 and
-L-450, L-330; Earth's round 1) narrows `source_note` to a drawing choice
-beside a citation: wording that bears on a citation lives in the store,
-on the row, and a claim a visitor reads keeps a citation the visitor can
-see (Tony, 2026-10-16 and 2026-10-17). And it records Earth's radiation
-belts as the second stored drawing: dots scattered at random along
-dipole field lines, placed by the orrery and drawn by the website as
-given (Tony, 2026-10-17: "Yes, random").
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
 on 2026-10-05 (L-418), 2026-10-10 (L-429), 2026-10-14 (L-431),
-2026-10-16 (L-421), 2026-10-17 (L-452), 2026-10-20 (L-456) and
-2026-10-21 (L-460).
+2026-10-16 (L-421), 2026-10-17 (L-452), 2026-10-20 (L-456),
+2026-10-21 (L-460) and 2026-10-22 (L-434).
 
 ## Contents
 
@@ -227,6 +230,19 @@ page:
   so: drawn to show the shape, not measured. A shape that is a few
   numbers and a formula (a sphere, a ring) is not stored; the website
   computes it from the served rows.
+  THE STORED DRAWINGS at gallery d7195704 with the L-434 patches, each
+  `data/drawings/<name>.json`, named by its feature's `drawing.dots`:
+  the Sun's corona (`sun_corona`), its zodiacal dust cloud
+  (`zodiacal_dust`), the Hills cloud (`hills_cloud`), the outer Oort
+  cloud (`outer_oort_cloud`) and the galactic tide (`galactic_tide`);
+  Earth's radiation belts (`van_allen_belts`) and its exosphere
+  (`earth_exosphere`). The tide and the outer cloud joined on
+  2026-10-22 (L-434): placed once from seed 434 by the orrery's
+  `galactic_tide_sampler.py` and `outer_oort_sampler.py`, each checked
+  at its rows' edges where it is placed, the website's own generators
+  for them gone. The tide's cone is not stored: two numbers and a
+  formula, the website works it out from the served rows. The streamer
+  band is not stored either: a grid set by about twenty served numbers.
 - The live maintenance run (`gallery_maintenance_run.py --live`, Store
   drift) follows every pointer into the orrery store at orrery HEAD and
   reports MATCH, DRIFT, or NOT IN STORE, by name. A new exhibit's
@@ -539,10 +555,20 @@ Lengths are compared in AU, converted as the renderers convert them:
 km by the served KM_PER_AU, solar and Earth radii by the body radius
 the shell's own group serves.
 
-One reading at 1.19's cut is not what the list means: Earth's
-magnetotail carries `drawn_radius` for its WIDTH about its axis, 30
-Earth radii, and is placed by it, where it begins at 30.6. The order is
-the same either way; the fix is on L-460's Gap.
+`drawn_radius` is read only on a row that also reports a `radius`
+(L-460, 2026-10-22): Earth's magnetotail carries `drawn_radius` for its
+WIDTH about its axis, 30 Earth radii, and reports no `radius`, so it
+is placed by the nearest point drawn, where it begins at 30.6.
+
+A ROW OPENS ITS OWN WORDS (L-468, 2026-10-22). Naming a row opens the
+info cross of the row's OWN feature, not the first cross the group
+holds: a member served `drawn_with` another (the streamer belt, drawn
+with the corona) yields the row to its host's cross.
+`GalleryFeatures.labelTraceIndex(traces, indices)` makes the pick and
+`sunLabelMarker` in `interactive.html` asks it; the gallery run's
+"Label words" check (`documentation/smoke_label_words.js`) holds every
+shell row in both rooms to it, with a planted fault. Tony's phone look
+of 2026-10-21 found the corona's row opening the belt's old words.
 
 TIES AND PLACES:
 - A drawing whose nearest dot lies at or under its body's surface
@@ -589,6 +615,19 @@ The arrival rule tells three kinds of trace apart by that stamp: a
 SERVED SHELL carries a key and is drawn only if `drawn` names it; the
 MOON is legend group `moon`; a FRAME ELEMENT carries no key and is
 always drawn.
+
+A FRAME ELEMENT THE RENDERERS DRAW (v1.20, L-465) says so: every trace
+of it carries `meta.frame_element: true` and no shell key. The Sun's
+rotation axis is the first, drawn by `renderRotationAxis` in
+`gallery/feature_renderers.js` from the orientation block's served
+words (the period and tilt rows with their sentences, `words.axis`,
+`words.not_animated`), first in the list so the drawer keeps it after
+the body. Earth's guides are built by `gallery/earth_geometry.js` and
+never pass through the renderers. `smoke_arrival.js` sets marked
+traces aside from the stamp check and FAILS on one that carries a key,
+because the arrival rule would then hide a guide that says it is
+always drawn. A guide the renderers draw unmarked fails the stamp
+check, as before.
 
 THAT IS WHY THIS IS CRITICAL. A shell trace that loses its stamp reads
 as a frame element and is DRAWN -- the failure is a room opening on more
@@ -994,4 +1033,5 @@ its loaded copy reads 1.16 before exhibit work. 1.17 was cut in a
 session that loaded 1.16; the next session confirms its loaded copy
 reads 1.17 before exhibit work. 1.19 was cut in a session that loaded
 1.18; the next session confirms its loaded copy reads 1.19 before
-exhibit work.
+exhibit work. 1.20 was cut in a session that loaded 1.19; the next
+session confirms its loaded copy reads 1.20 before exhibit work.

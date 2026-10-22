@@ -2,9 +2,9 @@
 # Paloma's Orrery -- Provenance Audit
 
 Generated: October 22, 2026
-Files scanned: 167
-Total findings: 1175
-Constants: 263 | Dicts: 67 | Display strings: 845
+Files scanned: 166
+Total findings: 1173
+Constants: 263 | Dicts: 65 | Display strings: 845
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -20,18 +20,16 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T1 by domain | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|--------------|---:|---:|---:|--------:|
+| 20261022T204543Z | `d73d1f2` | 166 | 1173 | 276 | orrery 112, Earth System 149, stars 13, utilities 2 | 735 | 156 | 6 | 0 |
 | 20261022T195957Z | `b995472` | 167 | 1175 | 276 | orrery 112, Earth System 149, stars 13, utilities 2 | 735 | 158 | 6 | 0 |
 | 20261022T142907Z | `ff38c7b` | 166 | 1172 | 277 | orrery 113, Earth System 149, stars 13, utilities 2 | 733 | 156 | 6 | 0 |
 | 20261022T045418Z | `645558e` | 164 | 1172 | 277 | orrery 113, Earth System 149, stars 13, utilities 2 | 733 | 156 | 6 | 0 |
 | 20261022T041206Z | `f66f66d` | 164 | 1172 | 277 | orrery 113, Earth System 149, stars 13, utilities 2 | 733 | 156 | 6 | 0 |
 | 20261022T040348Z | `4a40d27` | 165 | 1173 | 277 | orrery 113, Earth System 149, stars 13, utilities 2 | 733 | 157 | 6 | 0 |
-| 20261021T213829Z | `bbc80ab` | 164 | 1175 | 280 | orrery 116, Earth System 149, stars 13, utilities 2 | 733 | 156 | 6 | 0 |
 
-Change since the previous run: total +3, Tier-1 -1.
+Change since the previous run: total -2, Tier-1 +0.
 
 No file's Tier-1 count rose.
-
-Tier-1 moved by domain: orrery 113 -> 112.
 
 ---
 
@@ -64,7 +62,7 @@ Tier-1 moved by domain: orrery 113 -> 112.
 |------|-------|--------|------:|
 | 1 | 16-20 | FIX NOW | 276 |
 | 2 | 10-15 | REVIEW | 735 |
-| 3 | 5-9 | LOW PRIORITY | 158 |
+| 3 | 5-9 | LOW PRIORITY | 156 |
 | 4 | 1-4 | LOWEST PRIORITY | 6 |
 
 **Whole tree, Tier-1: 276: orrery 112, Earth System 149, stars 13, utilities 2.** By each file's docstring `Domain:` tag; Findings by File Type below has every tier and every domain. The push gate is the Gate Path section, not this total.
@@ -202,7 +200,6 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `orbit_data_manager.py` | orrery | 0 | 0 | 2 | 0 | 2 |
 | `test_dashboard_parity.py` | dev_tools | 0 | 0 | 2 | 0 | 2 |
 | `worksheet_request_builder.py` | dev_tools | 0 | 0 | 2 | 0 | 2 |
-| `patch_L434_4_close_20261022.py` | dev_tools | 0 | 0 | 2 | 0 | 2 |
 | `orbital_elements.py` | orrery | 1 | 0 | 0 | 0 | 1 |
 | `data_acquisition.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `exoplanet_orbits.py` | stars | 1 | 0 | 0 | 0 | 1 |
@@ -242,13 +239,13 @@ Same data again, grouped by subject-matter domain rather than by individual file
 |--------|------:|-------:|-------:|-------:|-------:|------:|
 | Orrery (solar system + orbital mechanics) | 45 | 112 | 620 | 55 | 3 | 790 |
 | Earth System | 13 | 149 | 74 | 2 | 0 | 225 |
-| Dev Tools (audit, diagnostics, one-shot scripts) | 29 | 0 | 0 | 95 | 0 | 95 |
+| Dev Tools (audit, diagnostics, one-shot scripts) | 28 | 0 | 0 | 93 | 0 | 93 |
 | Stars (stellar neighborhood) | 12 | 13 | 41 | 6 | 3 | 63 |
 | Utilities (cross-domain shared helpers) | 1 | 2 | 0 | 0 | 0 | 2 |
 | Gallery | 0 | 0 | 0 | 0 | 0 | 0 |
 | Unclassified (no Domain: tag, or one outside the six) | 0 | 0 | 0 | 0 | 0 | 0 |
 
-**Domain coverage:** all 100 files with findings declare a `Domain:` tag the report knows.
+**Domain coverage:** all 99 files with findings declare a `Domain:` tag the report knows.
 
 ---
 
@@ -1962,9 +1959,9 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 106 | dict | ROLE_MAP[...] | (160 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 407 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 430 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 106 | dict | ROLE_MAP[...] | (159 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 406 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 429 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### moon_visualization_shells.py
 
@@ -2013,13 +2010,6 @@ is planned for a future session.
 | 341 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
 | 2365 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
 | 2496 | dict | SECTION_SYMBOLS[...] | (8 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
-
-### patch_L434_4_close_20261022.py
-
-| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
-|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 59 | dict | FINGERPRINTS[...] | (8 entries) | 3 | 2 | **6** | Cited, not cross-checked; date-sensitive | Internal (role 'devtool') |
-| 61 | dict | NEW_FILES[...] | (2 entries) | 3 | 2 | **6** | Cited, not cross-checked; date-sensitive | Internal (role 'devtool') |
 
 ### planet_visualization_utilities.py
 

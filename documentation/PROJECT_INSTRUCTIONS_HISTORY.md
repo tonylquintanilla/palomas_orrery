@@ -3184,6 +3184,45 @@ resident.
 (Moved down from the resident protocol on 2026-10-21 when
 v3.107 made a fourth entry.)
 
+v3.105 (October 20, 2026): No rule changed in this document. ONE
+skill bump, one version (L-410 with L-131, the Sun's two fades):
+provenance-discipline 2.31 -> 2.32. A CITATION'S ADDRESS GOES ON ITS
+SOURCE LINE.
+
+WHAT PROMPTED IT. The website half of the Sun's fades sent Tony the
+labels of the i panel's citations. He answered: "the citation should
+have a live url link." The Alfven surface's citation, Kasper and
+others (2021), carried its open address only on its Access line, which
+no visitor reads. Asked whether to add it: "we should add this to the
+skill."
+
+WHAT CHANGED. provenance-discipline's What a Visitor Reads, principle
+1, gains a paragraph: the open copy's address goes on the Source line
+itself, as a web address a visitor can open, a DOI as its doi.org
+address, a bibcode as its ADS page; an address on the Access line alone
+stays in the store. The 98 served citations with no web address on
+2026-10-20 are one ledger class (L-456), and whether a written address
+still answers is L-266. Its v2.29 entry moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copy reads
+provenance-discipline 2.32 before provenance work. This session
+confirmed its loaded copies read orrery-coding-conventions 1.11 and
+provenance-cross-check 1.1 (discharging v3.104's obligation),
+provenance-discipline 2.31, interactive-exhibit 1.17,
+agentic-pre-test 1.3, safe-file-editing 1.13 and
+ledger-and-session-records 1.21, as the manifest expected.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.102 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-22 when
+v3.108 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

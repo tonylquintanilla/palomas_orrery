@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.107 | October 21, 2026
+Tony Quintanilla, PE | Claude | v3.108 | October 22, 2026
 
-Cut from 645558e2 at https://github.com/tonylquintanilla/palomas_orrery
+Cut from b995472a at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -494,7 +494,7 @@ horizons-orbital-mechanics   1.8  Horizons queries, centers, frames, osculating
                                   (horizons_check.py, its period comparison and
                                   the data sheets' re-read), the period fetch
                                   before it (period_fetch.py)
-provenance-discipline        2.33 Scanner runs, audits, citations, constants,
+provenance-discipline        2.34 Scanner runs, audits, citations, constants,
                                   pre-push (Tier-1 = 0 on the active build
                                   path)
 provenance-cross-check       1.1  Cross-check worksheets and relay prompts,
@@ -504,7 +504,7 @@ earth-system-pipeline        1.2  KMZ layers, ERA5/ERDDAP/IPC, scenarios, ANY
                                   human-cost visualization or text
 gallery-pipeline             1.2  Gallery Studio, json_converter, index.html
                                   viewer, gallery cards
-ledger-and-session-records   1.21 Ledger edits, ledger_index.py, RICE,
+ledger-and-session-records   1.22 Ledger edits, ledger_index.py, RICE,
                                   handoffs, manifests, atlas, dep_trace,
                                   WHERE_WE_ARE.md at every session's end
 gallery-assembler            1.3  render_orbits.py, resolver.py,
@@ -523,7 +523,7 @@ gallery-cache-builder        1.11 Nightly builder, atomic swap and its
                                   builder testing layers, the Daily Run's order
                                   and a failed pull, the run records and their
                                   check
-interactive-exhibit          1.19 adding or changing an exhibit in
+interactive-exhibit          1.20 adding or changing an exhibit in
                                   interactive.html; any edit to the Sun's
                                   chrome (drawer, nav cluster, frame zoom,
                                   i-panel, HUD, consent, back link); "Earth
@@ -1182,6 +1182,53 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.108 (October 22, 2026): No rule changed in this document. THREE
+skill bumps, one version each (L-434 with L-454, L-465 with L-468, and
+L-469): interactive-exhibit 1.19 -> 1.20, provenance-discipline 2.33 ->
+2.34, ledger-and-session-records 1.21 -> 1.22. HOW A RANGE IS DRAWN;
+THE STORED DRAWINGS NAMED; A GUIDE THE RENDERERS DRAW; A DEFERRED LIST.
+
+WHAT PROMPTED IT. The day's build stored the galactic tide and the
+outer Oort cloud, and added the Alfven surface's usual range. At his
+first look at the orrery's Oort plot Tony said the five Oort features,
+some clouds and some spheres, were confusing, then gave the principle:
+"Edges are better drawn with a cloud across the range. While a
+fluctuation is more like graph whiskers so there the concentric
+circles would be a graphical device. In both cases the hover should
+explain." And: "the concentric spheres were an early attempt at this
+idea. They can be removed." From his phone the same day: "The sun's
+pole and rotational axis like the orrery?" And in the coordination
+session Claude Fable 5.1 recorded the same morning: "keep the deferred
+list prominent so we can come back to it."
+
+WHAT CHANGED. provenance-discipline, under When the source gives a
+range, gains How a range is drawn: an edge nobody can place is a cloud
+across its range; an edge that moves stays sharp with two dashed
+circles at its range's ends; the hover says which. interactive-exhibit
+names the stored drawings, records that a drawer row opens its own
+feature's words (the Label words check), records a frame element the
+renderers draw (the Sun's rotation axis, marked meta.frame_element,
+never a shell key), and replaces its note on Earth's magnetotail,
+whose reading was fixed. ledger-and-session-records gives Where We Are
+a Deferred section between Settled and Signals. Each skill's oldest
+entry moved to documentation/SKILL_HISTORIES.md, by the three-entry
+rule (interactive-exhibit 1.17, provenance-discipline 2.31,
+ledger-and-session-records 1.19).
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copies read
+interactive-exhibit 1.20, provenance-discipline 2.34 and
+ledger-and-session-records 1.22 before work that fires them. This
+session confirmed its loaded copies read interactive-exhibit 1.19 and
+provenance-discipline 2.33 (discharging v3.107's obligation) and
+ledger-and-session-records 1.21, as the manifest expected.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.105 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.107 (October 21, 2026): No rule changed in this document. TWO
 skill bumps, one version each (L-460, the drawer order, with L-466,
 where drawings end; and L-411's talk C ruling):
@@ -1259,42 +1306,6 @@ provenance-cross-check 1.1, as the manifest expected.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.103 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.105 (October 20, 2026): No rule changed in this document. ONE
-skill bump, one version (L-410 with L-131, the Sun's two fades):
-provenance-discipline 2.31 -> 2.32. A CITATION'S ADDRESS GOES ON ITS
-SOURCE LINE.
-
-WHAT PROMPTED IT. The website half of the Sun's fades sent Tony the
-labels of the i panel's citations. He answered: "the citation should
-have a live url link." The Alfven surface's citation, Kasper and
-others (2021), carried its open address only on its Access line, which
-no visitor reads. Asked whether to add it: "we should add this to the
-skill."
-
-WHAT CHANGED. provenance-discipline's What a Visitor Reads, principle
-1, gains a paragraph: the open copy's address goes on the Source line
-itself, as a web address a visitor can open, a DOI as its doi.org
-address, a bibcode as its ADS page; an address on the Access line alone
-stays in the store. The 98 served citations with no web address on
-2026-10-20 are one ledger class (L-456), and whether a written address
-still answers is L-266. Its v2.29 entry moved to
-documentation/SKILL_HISTORIES.md, by the three-entry rule.
-
-THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
-that session. The next session confirms its loaded copy reads
-provenance-discipline 2.32 before provenance work. This session
-confirmed its loaded copies read orrery-coding-conventions 1.11 and
-provenance-cross-check 1.1 (discharging v3.104's obligation),
-provenance-discipline 2.31, interactive-exhibit 1.17,
-agentic-pre-test 1.3, safe-file-editing 1.13 and
-ledger-and-session-records 1.21, as the manifest expected.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.102 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

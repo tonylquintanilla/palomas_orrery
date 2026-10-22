@@ -529,6 +529,15 @@ one place, in plain words. Tony: "my decision based on principles
 should be implemented in the skill so that it is uniformly applied."
 (Moved down 2026-10-21, when 2.33 made a fourth entry.)
 
+Earlier: 2.31 | 2026-10-17, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 6f4fc9b0. v2.31 (L-411, the Sun's numbers) adds one
+paragraph to The Unit Field: a temperature is stored in kelvin, a
+source in degrees Celsius is converted exactly and the row says so,
+and the words a visitor reads give kelvin. Tony, 2026-10-17: "don't
+we standardize on degrees Kelvin? the conversion is routine", and "we
+should add this to the skill."
+(Moved down 2026-10-22, when 2.34 made a fourth entry.)
+
 ## interactive-exhibit
 
 Earlier: 1.15 | 2026-10-14, with Anthropic's Claude Opus 5.5, at
@@ -691,6 +700,17 @@ fact rule is now a gating check, Typed facts, which builds the Sun and
 Earth rooms with every served word masked and fails on a sentence that
 survives and is not on its allowed list.
 (Moved down 2026-10-21, when 1.19 made a fourth entry.)
+
+Earlier: 1.17 | 2026-10-17, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ a73bc24a and gallery @ f49b3e69. v1.17 (L-452 and
+L-450, L-330; Earth's round 1) narrows `source_note` to a drawing choice
+beside a citation: wording that bears on a citation lives in the store,
+on the row, and a claim a visitor reads keeps a citation the visitor can
+see (Tony, 2026-10-16 and 2026-10-17). And it records Earth's radiation
+belts as the second stored drawing: dots scattered at random along
+dipole field lines, placed by the orrery and drawn by the website as
+given (Tony, 2026-10-17: "Yes, random").
+(Moved down 2026-10-22, when 1.20 made a fourth entry.)
 
 ## safe-file-editing
 
@@ -868,6 +888,15 @@ that skills_index.py writes, and a skill's extra files live in its
 references folder, each named in its SKILL.md. The Anchor Requirement
 names provenance-cross-check for a review prompt carried to another
 model.
+
+The skill's v1.19 entry, moved here word for word on 2026-10-22 when
+v1.22 made a fourth entry (L-469):
+Earlier: 1.19 | 2026-10-10, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 32619f8d. v1.19 (L-395), on Tony's request: Tony's
+Local Folders, under Where a File Goes, names the two repositories'
+folders on his machine, so a session linked to it saves a patch where
+he runs it. Tony, 2026-10-10: "palomas_orrery_for_github is the repo
+folder."
 
 ## gallery-cache-builder
 
