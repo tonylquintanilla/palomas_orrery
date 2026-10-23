@@ -1,14 +1,24 @@
 ---
 name: horizons-orbital-mechanics
-description: JPL Horizons API and orbital mechanics reference for the Paloma's Orrery project (astroquery Horizons queries, orbit_data_manager, osculating_cache_manager, idealized_orbits, apsidal_markers, spacecraft_encounters, close_approach_data, position_accuracy, orbital_period, period_fetch). Use for any Paloma's Orrery task involving Horizons queries or ephemerides, coordinate center bodies, reference frames, osculating elements, orbit caches, a small body's position uncertainty (VEC_TABLE 2xr), orbital periods and the centre they are taken around, the drawn orbit and its markers' dates, encounter or flyby resolution, or whenever a rendered orbit looks wrong or an ephemeris API returns empty. Do not use for projects other than Paloma's Orrery.
-fires_when: Horizons queries, centers, frames, osculating elements, encounters, comet record pinning, 2xr uncertainties, periods, the drawn orbit's centre, the Horizons check (horizons_check.py, its period comparison and the data sheets' re-read), the period fetch before it (period_fetch.py)
+description: JPL Horizons API and orbital mechanics reference for the Paloma's Orrery project (astroquery Horizons queries, orbit_data_manager, osculating_cache_manager, idealized_orbits, apsidal_markers, spacecraft_encounters, close_approach_data, position_accuracy, orbital_period, period_fetch). Use for any Paloma's Orrery task involving Horizons queries or ephemerides, coordinate center bodies, reference frames, osculating elements, orbit caches, a small body's position uncertainty (VEC_TABLE 2xr), orbital periods and the centre they are taken around, the drawn orbit and its markers' dates, which Horizons record serves a body (helio_id, a pinned comet record, a skip list), encounter or flyby resolution, or whenever a rendered orbit looks wrong or an ephemeris API returns empty. Do not use for projects other than Paloma's Orrery.
+fires_when: Horizons queries, centers, frames, osculating elements, encounters, comet record pinning, 2xr uncertainties, periods, the drawn orbit's centre, the Horizons check (horizons_check.py, its period comparison and the data sheets' re-read), the period fetch before it (period_fetch.py), which record serves a body (helio_id, re-pinning a comet, JPL's exact name, a body on a skip list)
 ---
 
 # Horizons and Orbital Mechanics Reference
 
-Read this file in 2 parts: lines 1-233, 234-342.
+Read this file in 2 parts: lines 1-216, 217-408.
 
-Skill version: 1.8 | 2026-10-15, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.9 | 2026-10-22, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ bfb6c474. v1.9 (L-443, with L-470) adds Which Record
+Serves a Body: around the Sun a body with a helio_id is asked by it, in
+every reader; a TNO's small-body record is JPL's "integrated barycenter";
+a pinned comet is re-pinned to its newest record on Tony's word; JPL's
+exact name is read for each entry before it is served; an orbit JPL
+classes as open is not drawn as an ellipse; and a name on a skip list
+says which record failed around which centre, and is tested before it
+comes off (Tony, 2026-10-22: "some idiosyncrasies in Horizons are
+addressed with specific record numbers, which can change").
+Earlier: 1.8 | 2026-10-15, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 77245ea8. v1.8 (L-445) adds one bullet under A Period
 Depends on Its Centre: a body's period may be asked of another target
 than the body. Earth's, around the Sun, is asked of the Earth-Moon
@@ -20,19 +30,9 @@ Check Lives, and What It Compares: period_fetch.py runs just before the
 check and fetches, with plotting's own call and save, the period of
 each served object that has none fetched, so the check compares it with
 JPL the same day.
-Earlier: 1.6 | 2026-10-14, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 5cd63cce and gallery @ 4b2b660a. v1.6 (L-431 build 3,
-with L-395's move) records where the Horizons check lives now and what
-it compares, under Where the Check Lives, and What It Compares: it runs
-in the orrery's maintenance run beside the objects export, asks JPL
-only what is due, compares each fetched period with JPL's PR within the
-period's own error, and re-reads each spacecraft's data sheet on the
-same 30-day cycle. It corrects the line under Small-Body Record Pinning
-that put the check in the website's Daily Run. It is the first version long enough
-for more than one read, so it opens with its read plan (L-418).
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
-on 2026-10-12, 2026-10-13 and 2026-10-14 (L-431), and 2026-10-15
-(L-444, L-445).
+on 2026-10-12, 2026-10-13 and 2026-10-14 (L-431), 2026-10-15
+(L-444, L-445) and 2026-10-22 (L-443).
 
 ## Horizons Center Body Rules
 
@@ -49,6 +49,72 @@ Only NUMERIC IDs can be coordinate centers.
 - 20XXXXXX = barycenter; 920XXXXXX = primary; 120XXXXXX = secondary.
 - Derive the primary's position from the secondary via the mass ratio when
   Horizons serves only one member.
+
+## Which Record Serves a Body (L-443)
+
+Learned bringing 50 of the orrery's bodies to the website, 2026-10-22.
+Design record: documentation/DESIGN_L443_objects_rulings_20261022.md;
+JPL's answers: documentation/CHECK_L443_jpl_names_20261022.md and
+CHECK_L443_classes_pairs_20261022.md. A record number is JPL's
+bookkeeping, not the body: it can be re-solved, replaced by a newer
+one, or answer only for some centres. So the method is to know which
+record each question asks, and to ask the same one everywhere.
+
+- ONE RECORD PER BODY AND CENTRE, IN EVERY READER. Around the Sun, a
+  body with a `helio_id` is asked by its helio_id, as a small body
+  (`helio_id_type`, else 'smallbody'), by every reader: the orrery's
+  position fetch, its elements pre-fetch at both sites (the static plot
+  and the animation), `export_objects.served_identity`, `period_fetch.py`
+  and the website's builder. Until 2026-10-22 the pre-fetch asked the
+  body's own `id`, so the orrery drew the orbit from one record and the
+  marker from another. Around any other centre the body's `id` serves.
+- A TNO'S SMALL-BODY RECORD IS THE PAIR'S CENTRE. JPL's Lookup names
+  every helio_id record served here (Eris, Haumea, Makemake, Gonggong,
+  Quaoar, Orcus, Patroclus) "integrated barycenter": the small-body
+  solution follows the shared centre of the body and its moons. So it
+  serves the system around the Sun. The system-barycentre numbers for
+  Orcus (20090482) and Patroclus (20000617) are found in BOTH of JPL's
+  indexes, which the Horizons check reads as a wrong id_type (Checking
+  an Entry Against JPL, below); the small-body records 2004 DW and
+  A906 UL are found in one. Whether the drawing says "shared centre" is
+  the barycenter rule's, in orrery-coding-conventions.
+- A PINNED COMET GOES STALE. Three periodic comets were pinned to a
+  record that was no longer their newest: Schaumasse, Howell and
+  Churyumov-Gerasimenko, re-pinned on Tony's word of 2026-10-22
+  ("Re-pin to the newest") to 90000356, 90000901 and 90000703. List a
+  comet's records with COMMAND='DES=<desig>;' and take the newest
+  apparition's. The check reports a newer record; only Tony's word
+  re-pins (Small-Body Record Pinning, below).
+- JPL'S EXACT NAME, READ BEFORE SERVING. Every served entry carries
+  `horizons_name`, JPL's own form of its name, read from the Lookup (or
+  the main service, for a pinned record) the day the entry is keyed,
+  never typed from memory. The check then holds it to JPL.
+- AN OPEN ORBIT IS NOT AN ELLIPSE. The website draws an orbit from its
+  elements with an elliptic solver (render_orbits.solve_kepler,
+  sweep_conic), so a comet JPL classes hyperbolic (SBDB class HYP, as
+  Wierzchos) or one fitted with e near 1 waits for a path drawing and is
+  not served as an orbit. Read SBDB's class; do not judge from the name.
+- A SKIP NAMES WHAT FAILED. Six lists in palomas_orrery.py keep a body
+  out of a Horizons question: SKIP_HORIZONS_PREFETCH in plot_objects and
+  in animate_objects, SKIP_HORIZONS_TRAJECTORY in the static plot's
+  trajectory worker, and the fallbacks ANALYTICAL_POSITION_FALLBACK
+  (plot_actual_orbits and the static worker) and
+  ANALYTICAL_ANIMATION_FALLBACK (animation_worker), which act only when
+  Horizons returned nothing. period_fetch.py copies the pre-fetch list
+  as SKIP_NAMES. A name goes on a list with a comment naming the record
+  that failed, the centre it failed around, and the date. Gonggong
+  (id 920225088, its body-centre record; helio_id 2007 OR10) is on all
+  six, every line from 2026-02-04 (commit c60572d), with no such
+  comment, so it has no fetched period (L-470). The lists' own comment
+  speaks only for the moons.
+- TAKING A NAME OFF A SKIP LIST IS A TEST. Ask each record the orrery
+  would ask, around each centre the body is plotted from: around the
+  Sun, the helio_id; around any other centre, the id. If every one
+  answers, the name comes off every list that names it, in one patch,
+  and the period fetch then fetches its period. If one fails, the name
+  stays and gains its comment. A skip kept for some centres and not
+  others is not in this method yet; it is written here before it is
+  built.
 
 ## Small-Body Record Pinning (periodic comets)
 

@@ -1,27 +1,26 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 22, 2026, evening: slice 1 of the objects
-designed and built, 50 bodies in folding groups.
-- Written at orrery bfb6c47 and gallery 0bb3434, with the day's patches.
+Last updated: October 22, 2026, late evening: slice 1 in the orrery;
+one fix before the website goes.
+- Written at orrery d91dc1d and gallery 0bb3434, with patch 4.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Slice 1 of L-443 (the objects to the website) is designed and
->   built: 50 bodies, in six groups that fold open in the drawer.
-> - Every comet is drawn from today's orbit, Halley and Encke too.
-> - A bare interactive.html link opens the Solar System room; the
->   Explorer has its own address.
+> - Slice 1 of L-443 (the objects to the website) is in the orrery,
+>   pushed: 50 bodies, in six groups that fold open in the drawer.
+> - The website's check caught one wrong figure count, 2025 PN7's
+>   period; the fix is the orrery's, in patch 4.
+> - The method for choosing JPL's records is in a skill now.
 >
-> **Do next:** *run slice 1's patches and runs in order (the handoff,
-> sec. 2), then your look on the phone.*
+> **Do next:** *patch 4, the orrery run and push, then the Daily Run
+> and the website's push (the handoff, sec. 9).*
 >
 > **Needs you now:**
-> - *(decide) The info panel's two rewritten sentences (the handoff,
->   sec. 3), before the website patch.*
-> - *Reinstall interactive-exhibit 1.21.*
-> - Three papers into `papers/` (`READING_L456_tony_20261021.md`).
+> - *(do) Patch 4 and the runs, in order (the handoff, sec. 9).*
+> - *Reinstall interactive-exhibit 1.21, horizons-orbital-mechanics 1.9.*
+> - Two papers left to try (`READING_L456_tony_20261021.md`).
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
@@ -91,14 +90,13 @@ Waiting behind the objects (Oct 22); a line leaves when picked up.
 - L-413 (Earth's list): talks 3 to 6, already waiting.
 - The streamer belt's and the clumps' eyeballed numbers (in L-412
   (the Sun's slice)).
-- L-470 (entries the website cannot serve): 6AC4721, Gonggong's
-  period; and a drawn main-belt cloud (L-443). Behind slice 2.
+- A drawn main-belt cloud (L-443 (the objects)), behind slice 2.
 
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261022T200533Z, ok, the swap's second try
-  (gallery 0bb3434).
+- Last cache build: 20261023T021052Z, ok, first try (on gallery
+  0bb3434, not yet pushed).
 - Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md after the
   day's orrery patches). Whole tree: 276: orrery 112, Earth System 149,
   stars 13, utilities 2.
@@ -107,6 +105,8 @@ Read from files when this page was written, not typed from memory.
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
 At the next design talk:
+- "Gonggong skipped but needs discussion" (your run record, Oct 22;
+  L-470 (entries the website cannot serve)).
 - The Daily Run checking the orrery it pulled is the one you pushed
   (L-461 (pull matches push)): not built with slice 1; with slice 2.
 - The orrery's own Sun axis hover still types its period and tilt;
@@ -120,7 +120,7 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- *Next: `HANDOFF_L443_slice1_build_20261022.md`, sec. 2.*
+- *Next: `HANDOFF_L443_slice1_build_20261022.md`, sec. 9.*
 - The objects' rulings: `DESIGN_L443_objects_rulings_20261022.md`;
   the words: `WORDS_L443_slice1_20261022.md`
 - Drawn ends: `DISCOVERY_drawn_ends_20261021.md`; drawer: gallery `DRAWER_ORDER_L460_*`

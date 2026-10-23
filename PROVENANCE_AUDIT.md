@@ -20,14 +20,14 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T1 by domain | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|--------------|---:|---:|---:|--------:|
+| 20261023T030636Z | `d91dc1d` | 166 | 1164 | 276 | orrery 112, Earth System 149, stars 13, utilities 2 | 726 | 156 | 6 | 0 |
 | 20261023T014626Z | `bfb6c47` | 166 | 1164 | 276 | orrery 112, Earth System 149, stars 13, utilities 2 | 726 | 156 | 6 | 0 |
 | 20261022T204543Z | `d73d1f2` | 166 | 1173 | 276 | orrery 112, Earth System 149, stars 13, utilities 2 | 735 | 156 | 6 | 0 |
 | 20261022T195957Z | `b995472` | 167 | 1175 | 276 | orrery 112, Earth System 149, stars 13, utilities 2 | 735 | 158 | 6 | 0 |
 | 20261022T142907Z | `ff38c7b` | 166 | 1172 | 277 | orrery 113, Earth System 149, stars 13, utilities 2 | 733 | 156 | 6 | 0 |
 | 20261022T045418Z | `645558e` | 164 | 1172 | 277 | orrery 113, Earth System 149, stars 13, utilities 2 | 733 | 156 | 6 | 0 |
-| 20261022T041206Z | `f66f66d` | 164 | 1172 | 277 | orrery 113, Earth System 149, stars 13, utilities 2 | 733 | 156 | 6 | 0 |
 
-Change since the previous run: total -9, Tier-1 +0.
+Change since the previous run: total +0, Tier-1 +0.
 
 No file's Tier-1 count rose.
 
@@ -1428,9 +1428,9 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 97 | constant | OPEN_ORBIT_PLACEHOLDER_FLOOR | 1e+90 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'computation') |
-| 112 | dict | VIEW_TO_OSCULATING_CENTRE[...] | (7 entries) | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'computation') |
-| 134 | dict | PERIOD_TARGETS[...] | (1 entry) | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 101 | constant | OPEN_ORBIT_PLACEHOLDER_FLOOR | 1e+90 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'computation') |
+| 116 | dict | VIEW_TO_OSCULATING_CENTRE[...] | (7 entries) | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'computation') |
+| 138 | dict | PERIOD_TARGETS[...] | (1 entry) | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
 
 ### orrery_rendering.py
 
@@ -2119,7 +2119,7 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 97 | dict | SELF_TEST_RECORD[...] | (8 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 102 | dict | SELF_TEST_RECORD[...] | (8 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### test_orbit_markers.py
 
@@ -2216,7 +2216,7 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 139 | dict | CENTRE_LABELS[...] | (23 entries) | 4 | 1 | **4** | No source citation (recalled) | Cosmetic (name vocabulary) |
+| 143 | dict | CENTRE_LABELS[...] | (23 entries) | 4 | 1 | **4** | No source citation (recalled) | Cosmetic (name vocabulary) |
 
 ### star_sphere_builder.py
 

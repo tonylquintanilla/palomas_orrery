@@ -82,6 +82,10 @@ into the record, does not compare the elements fetch's PR with another
 body's, and drops a previous record asked of another target. The hover
 and the parameters window say whose period it is; another body's
 elements are never drawn as this body's orbit.)
+Module updated: October 22, 2026 with Anthropic's Claude Opus 5.5 (L-443:
+figures_by_error() counts the figures of the number as printed, so a
+period just under a power of ten, which gains a digit when it rounds,
+is served with the count its print shows.)
 """
 
 import math
@@ -245,14 +249,22 @@ def print_place(value, err):
 
 def figures_by_error(value, err):
     """How many significant figures format_by_error prints value with:
-    the leading digit's place down to print_place. For the website's
-    copy of a period, which prints a served value at its served count
-    (L-431, build 3)."""
+    the printed number's leading digit's place down to print_place. For
+    the website's copy of a period, which prints a served value at its
+    served count (L-431, build 3)."""
     if value is None:
         return None
     if value == 0:
         return 1
-    top = int(math.floor(math.log10(abs(value))))
+    # FIXED 2026-10-22 (L-443): counted from the number as printed, not
+    # before rounding. A value just under a power of ten gains a digit
+    # when it rounds: 2025 PN7's 0.9963 years prints "1.00", three
+    # figures, which the count before rounding called two, so the website
+    # printed "1.0". The Solar System figures check caught it.
+    shown = float(format_by_error(value, err).replace(',', ''))
+    if shown == 0:
+        return 1
+    top = int(math.floor(math.log10(abs(shown))))
     return top - print_place(value, err) + 1
 
 

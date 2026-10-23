@@ -2,7 +2,7 @@
 PROJECT INSTRUCTIONS
 Tony Quintanilla, PE | Claude | v3.109 | October 22, 2026
 
-Cut from bfb6c474 at https://github.com/tonylquintanilla/palomas_orrery
+Cut from d91dc1d0 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -487,13 +487,15 @@ safe-file-editing            1.13 Editing existing files, patch scripts,
                                   sed/regex edits, encoding checks (portable)
 agentic-pre-test             1.3  BEFORE delivering complete files/agentic
                                   code; after data-content sweeps
-horizons-orbital-mechanics   1.8  Horizons queries, centers, frames, osculating
+horizons-orbital-mechanics   1.9  Horizons queries, centers, frames, osculating
                                   elements, encounters, comet record pinning,
                                   2xr uncertainties, periods, the drawn orbit's
                                   centre, the Horizons check
                                   (horizons_check.py, its period comparison and
                                   the data sheets' re-read), the period fetch
-                                  before it (period_fetch.py)
+                                  before it (period_fetch.py), which record
+                                  serves a body (helio_id, re-pinning a comet,
+                                  JPL's exact name, a body on a skip list)
 provenance-discipline        2.34 Scanner runs, audits, citations, constants,
                                   pre-push (Tier-1 = 0 on the active build
                                   path)
@@ -1184,10 +1186,12 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
-v3.109 (October 22, 2026): No rule changed in this document. ONE
-skill bump, one version (L-443, slice 1 of the objects):
-interactive-exhibit 1.20 -> 1.21. THE DRAWER'S GROUPS FOLD OPEN; EVERY
-COMET IS DRAWN FROM TODAY; A BARE LINK OPENS THE SOLAR SYSTEM ROOM.
+v3.109 (October 22, 2026): No rule changed in this document. TWO
+skill bumps, one version each (L-443, slice 1 of the objects, with
+L-470): interactive-exhibit 1.20 -> 1.21, horizons-orbital-mechanics
+1.8 -> 1.9. THE DRAWER'S GROUPS FOLD OPEN; EVERY COMET IS DRAWN FROM
+TODAY; A BARE LINK OPENS THE SOLAR SYSTEM ROOM; ONE RECORD SERVES A
+BODY, AND A SKIP SAYS WHAT FAILED.
 
 WHAT PROMPTED IT. L-443's design session. Tony, at the drawer mock-up:
 "B. this is the right view. the "room" would only apply if the object
@@ -1195,6 +1199,12 @@ has additional features beyond the symbol." Asked whether the comets
 should be drawn from their elements of today, since a perihelion anchor
 is trusted only near its date and Encke's and Halley's spans had ended:
 "Yes." And stage 10, his ruling of 2026-10-01, built with the slice.
+Asked why Gonggong has no period, and whether the next session should
+test taking it off the skip list: "yes but only if it accords with our
+method or requires a method revision. and we should document our
+method developed in this session in the skill. ... some idiosyncrasies
+in Horizons are addressed with specific record numbers, which can
+change"
 
 WHAT CHANGED. interactive-exhibit's The Solar System room's drawer
 gains three bullets: groups fold open, with what a group row is, does
@@ -1203,10 +1213,18 @@ from today; the front door. Its rooms-section paragraph names the group
 rows, and the anatomy table's default room is corrected from the
 Explorer to the Solar System room. Its v1.18 entry moved to
 documentation/SKILL_HISTORIES.md, by the three-entry rule.
+horizons-orbital-mechanics gains Which Record Serves a Body: one record
+per body and centre in every reader, the helio_id around the Sun; a
+TNO's small-body record as the pair's centre; a pinned comet re-pinned
+to its newest record on Tony's word; JPL's exact name read before
+serving; an open orbit not served as an ellipse; a skip list's name
+saying which record failed around which centre, and the test for
+taking one off. Its v1.6 entry moved to documentation/SKILL_HISTORIES.md.
 
 THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
-that session. The next session confirms its loaded copy reads
-interactive-exhibit 1.21 before exhibit work. This session confirmed
+that session. The next session confirms its loaded copies read
+interactive-exhibit 1.21 before exhibit work and horizons-orbital-mechanics
+1.9 before Horizons work. This session confirmed
 its loaded copies read interactive-exhibit 1.20, provenance-discipline
 2.34 and ledger-and-session-records 1.22 (discharging v3.108's
 obligation), gallery-cache-builder 1.11, horizons-orbital-mechanics

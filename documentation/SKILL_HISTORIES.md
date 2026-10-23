@@ -996,3 +996,15 @@ the comparison stays Sun-centred; for a body as far out as Sedna that
 mostly measures the Sun's own wobble. A second version in one session, as interactive-exhibit 1.14
 was, because the ruling came after 1.4 was installed.
 (Moved down 2026-10-15, when 1.8 made a fourth entry.)
+
+Earlier: 1.6 | 2026-10-14, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 5cd63cce and gallery @ 4b2b660a. v1.6 (L-431 build 3,
+with L-395's move) records where the Horizons check lives now and what
+it compares, under Where the Check Lives, and What It Compares: it runs
+in the orrery's maintenance run beside the objects export, asks JPL
+only what is due, compares each fetched period with JPL's PR within the
+period's own error, and re-reads each spacecraft's data sheet on the
+same 30-day cycle. It corrects the line under Small-Body Record Pinning
+that put the check in the website's Daily Run. It is the first version long enough
+for more than one read, so it opens with its read plan (L-418).
+(Moved down 2026-10-22, when 1.9 made a fourth entry.)

@@ -58,6 +58,8 @@ WHAT MAKES IT FAIL
       Sun-centred set and no reason
     - a fetched period that names no target, the id it was asked of
       (L-445)
+    - a period that rounds up to a power of ten served with the count
+      it had before rounding (L-443)
     - the self-test did not produce the refusals it must
 
 Role: devtool
@@ -78,6 +80,9 @@ Module updated: October 15, 2026 with Anthropic's Claude Opus 5.5 (L-445,
 Earth's period: a fetched period must name its target, the id it was
 asked of; a record naming none, and an exported block naming none, are
 each refused, shown failing on a planted fault first.)
+Module updated: October 22, 2026 with Anthropic's Claude Opus 5.5 (L-443:
+a period that rounds up to a power of ten is served with its print's
+count, 2025 PN7's "1.00" years at 3 figures.)
 """
 
 import json
@@ -241,6 +246,15 @@ def self_test():
     if not period_problems(bare):
         problems.append("an exported period with no centre was not "
                         "refused")
+    # L-443: a period just under a power of ten gains a digit when it
+    # rounds, and its count must be the print's. 2025 PN7, 2026-10-22:
+    # 363.9 days, 1.5 days of error; its years print "1.00", 3 figures.
+    yrs = ex._printed(363.9 / 365.25, 1.5 / 365.25)
+    if yrs != {"value": 1.0, "figures": 3, "text": "1.00"}:
+        problems.append("a period that rounds up to a power of ten was "
+                        "served as %r, not 1.00 at 3 figures" % (yrs,))
+    if dict(yrs, figures=2) == {"value": 1.0, "figures": 3, "text": "1.00"}:
+        problems.append("a count taken before rounding was not noticed")
     redated = json.loads(json.dumps(with_period))
     redated["objects"]["mars"]["confirmation"]["identity"]["confirmed"] = (
         "2026-10-11")
@@ -334,7 +348,9 @@ def main():
           "naming no target, a period that differs from its record, a "
           "period printed to more figures, a barycentre period with no "
           "Sun-centred set, an exported period with no centre, one naming "
-          "no target and a changed confirmation date were each refused.")
+          "no target and a changed confirmation date were each refused; "
+          "a period that rounds up to 1.00 years is served at 3 figures, "
+          "and a count taken before rounding is noticed.")
     print("Scanned %d entries in OBJECT_DEFINITIONS for repeated fields: "
           "%d found." % (scanned, len(repeats)))
     if fresh is not None:

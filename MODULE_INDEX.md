@@ -12,7 +12,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 166  
-**Total Lines of Code (non-blank):** 131,672  
+**Total Lines of Code (non-blank):** 131,700  
 **Total Public Functions/Classes:** 1,639
 
 ## Classification Coverage
@@ -115,7 +115,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `idealized_orbits.py` | Keplerian orbit ellipse construction and satellite orbit models. Computes and plots idealized (Keplerian) orbit paths from orbital elements, with osculating element support for high-accuracy visualization. Handles elliptical, parabolic, and hyperbolic orbits. Includes specia... (6,751 lines) |
 | `object_type_analyzer.py` | Object Type Analysis and Report Generation Module Provides comprehensive analysis of astronomical data including object types, data quality metrics, and full report generation. (756 lines) |
 | `orbital_elements.py` | Standalone data module containing orbital element dictionaries. NO IMPORTS - Pure data only to avoid circular dependencies. (1,296 lines) |
-| `orbital_period.py` | A body's orbital period from JPL, printed to the digits its errors earn. (903 lines) |
+| `orbital_period.py` | A body's orbital period from JPL, printed to the digits its errors earn. (915 lines) |
 | `outer_oort_sampler.py` | The outer Oort cloud as a thin scatter of loose dots with clumps among them, placed once from a seed, between the rows' edges. (202 lines) |
 | `pole_frames.py` | The matrix that turns coordinates measured about a pole into the drawing's frame, the ecliptic of J2000. (72 lines) |
 | `position_accuracy.py` | How well JPL knows a plotted position, and the hover's distances and speeds printed to the digits that knowledge earns. (730 lines) |
@@ -241,7 +241,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `test_domain_split.py` | Checks for L-437: the provenance scanner's whole-tree Tier-1 total prints with its domain split, and a module's domain is read from its own docstring Domain: tag. (406 lines) |
 | `test_horizons_check.py` | - the Horizons check (L-395, L-431) on JPL's recorded answers, with no network: every entry agrees, and every planted fault is caught by name. (588 lines) |
 | `test_maintenance_report.py` | The maintenance run's summary names every file whose Tier-1 rose since the scanner's previous run; and proof that this check can fail. (218 lines) |
-| `test_objects_export.py` | - data/objects_export.json says what the object list in celestial_objects.py holds, and no entry in the list writes a field twice. (343 lines) |
+| `test_objects_export.py` | - data/objects_export.json says what the object list in celestial_objects.py holds, and no entry in the list writes a field twice. (359 lines) |
 | `test_orbit_cache.py` | Comprehensive test suite for orbit data caching and repair (251 lines) |
 | `test_orbit_markers.py` | Each orbit is drawn around its period's centre, each marker's date comes from the period JPL gave, and every orbit and marker hover prints by the errors JPL states; and proof that this check can fail. (890 lines) |
 | `test_period_fetch.py` | - the period fetch (L-444) on recorded answers, with no network: it asks only for what is missing, with plotting's own call, writes the record plotting writes, and names a failure; and every planted fault is caught by name. (906 lines) |

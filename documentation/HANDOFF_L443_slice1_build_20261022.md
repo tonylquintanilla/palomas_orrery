@@ -3,7 +3,8 @@
 
 Built on bfb6c474 at https://github.com/tonylquintanilla/palomas_orrery
 and 0bb34344 at https://github.com/tonylquintanilla/tonyquintanilla.github.io
-(branch main of each). Pushed at: (Tony's pushes, after section 2).
+(branch main of each). Pushed at: orrery d91dc1d0 (section 2's steps
+1 to 3); the website, after section 9.
 
 Tony's local folders: orrery
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\
@@ -98,8 +99,8 @@ In the WEBSITE folder:
      fits as open would do this.
    Then the offline run: green apart from anything those two lines
    named. Commit, push, and the live run.
-6. Reinstall interactive-exhibit 1.21 (Settings > Skills), from the
-   orrery's skills/ folder.
+6. Reinstall interactive-exhibit 1.21 and horizons-orbital-mechanics
+   1.9 (Settings > Skills), from the orrery's skills/ folder.
 7. Your look, on the phone: the Solar System room from a bare
    interactive.html link; See more; open Comets and the Trans-Neptunian
    objects; tick a group's box (the view widens to hold them); hover
@@ -132,6 +133,11 @@ In your words, in the design record, section 1, and on L-443.
 
 ## 5. Found and fixed along the way
 
+- This session's way of choosing which JPL record serves a body is now
+  in horizons-orbital-mechanics 1.9, Which Record Serves a Body, on your
+  word ("we should document our method developed in this session in the
+  skill").
+
 - Deep Space 1 flew past comet Borrelly in 2001, not Tempel 2: the
   description and the code comment are corrected.
 - Chariklo was called retrograde (JPL: inclination 23.4 degrees), and
@@ -147,24 +153,34 @@ In your words, in the design record, section 1, and on L-443.
 
 ## 6. Next session
 
-- **The obligation.** The next session confirms its loaded copy reads
-  interactive-exhibit 1.21 before exhibit work.
+- **The obligation.** The next session confirms its loaded copies read
+  interactive-exhibit 1.21 before exhibit work and
+  horizons-orbital-mechanics 1.9 before Horizons work.
+- **The Gonggong test** (L-470), by the method now in
+  horizons-orbital-mechanics 1.9, Which Record Serves a Body: ask each
+  record the orrery would ask, around each centre; take Gonggong off
+  every skip list only if each answers. You can test it in the orrery
+  too.
 - **Slice 2: the spacecraft and the 14 comets on open paths**, which
   need the spacecraft's path drawing; with it L-461 (pull matches
   push), which this slice did not build.
-- **Carried, not chased:** L-470 (6AC4721, Gonggong's period); two
+- **Carried, not chased:** L-470 (Gonggong's period); two
   gallery-cache-builder sentences for its next version (L-443); the
   walk's Pluto check on stand-in data (L-443).
 
 ## 7. Tony-actions, all in one place
 
 - (decide) The info panel's two sentences, section 3, before step 4.
-- (do) Section 2, steps 1 to 5, in order.
-- (do) Reinstall interactive-exhibit 1.21 (step 6).
+- (do) Section 2, steps 1 to 5, in order. Done to step 5; then
+  section 9, steps 1 to 4.
+- (do) Reinstall interactive-exhibit 1.21 and horizons-orbital-mechanics
+  1.9 (step 6).
 - (do) Your look (step 7).
-- (do) Three papers into `papers/` (`READING_L456_tony_20261021.md`),
-  carried from before.
-- (decide, not urgent) 6AC4721: retire or merge it with MAPS (L-470).
+- (do) Two papers still to try, Delsemme (timed out) and Maezawa
+  (paywalled) (`READING_L456_tony_20261021.md`). The Hipparcos volume
+  is in `papers/`.
+- Decided 2026-10-22: 6AC4721, the pre-Horizons estimate for MAPS,
+  stays off the website (L-470). Nothing to build.
 
 ## 8. The Settled line this close took off Where We Are
 
@@ -174,5 +190,54 @@ Kept here word for word, to keep the page under its line cap:
   website's note only for a drawing choice. Belts: random dots. A lost
   run record stops the Daily Run. Lines past a hover's 17 go to its i
   panel. (Oct 16-17)
+
+## 9. After your runs (read 2026-10-22, 21:26)
+
+Read from your run record,
+`documentation/WHERE_WE_ARE_10-22-26_2027_run_record.md`.
+
+What your runs showed:
+- Patch 1 and patch 3 ran (the first of patch 3's copies). The orrery's
+  maintenance run passed 31 of 31, fetched 48 periods, confirmed 63 of
+  63 entries with JPL; you pushed it at d91dc1d0.
+- Patch 2 ran. The Daily Run built 69 objects; the swap worked first
+  try; the served window is 88.0 days, set by Mercury, the shortest of
+  62 bodies' spans. No trust measurement failed, no null window.
+- Six comets carry a warning that is not new: their period is around
+  the solar system's centre of mass while their orbit is drawn around
+  the Sun (Halley has said so since October 14). Recorded on L-443
+  (the objects to the website), not a stop.
+- One check failed: Solar System figures, on 2025 PN7. Its period,
+  363.9 days, prints as "1.00" years, which is three figures. The
+  orrery counted the figures before rounding and served two, so the
+  website printed "1.0". The website was right; the orrery's count was
+  wrong. Patch 4 fixes the count; it changes only PN7's in the export.
+
+Patch 3's two later copies never ran (you had already run the first).
+Patch 4 carries what they added -- your word on 6AC4721, the papers,
+and the method in horizons-orbital-mechanics 1.9 -- and deletes the
+unrun copy left in the orrery's root folder.
+
+Your notes, read: "6AC4721 is retired" is on L-470 (entries the
+website cannot serve); "Gonggong skipped but needs discussion" is on
+Where We Are's design-talk list. Your run record below Where We Are's
+marker is left as it is: tonight's website steps still go there, and
+the next session's close reads it.
+
+Your run order now. Don't commit the website's changes until step 3.
+
+In the ORRERY folder:
+1. `patch_L443_4_period_count_20261022.py`, then move it to
+   documentation/.
+2. The orrery maintenance run. Expect: Objects export rewritten; the
+   Objects export check passes; the rest as before. Commit and push.
+
+In the WEBSITE folder:
+3. The Daily Run again. Its pull brings the new export, and the mirror
+   changes 2025 PN7's figure count from 2 to 3. Expect the Solar
+   System figures check to pass, PN7 printing "1.00 years (364 days)".
+   Then commit, push, and the live run.
+4. Reinstall interactive-exhibit 1.21 and horizons-orbital-mechanics
+   1.9; then your look on the phone (section 2, step 7).
 
 Session written October 2026 with Anthropic's Claude Opus 5.5.

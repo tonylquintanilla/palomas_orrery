@@ -36,7 +36,7 @@ you know you have the right paper.
   observational confirmation", A&A 187, 913.
 - The row expects: the aphelia of 152 long-period comets avoid both
   galactic polar caps and a strip along the galactic equator.
-- Your note: -- could not open, timed out
+- Your note: -- could not open, timed out (again 2026-10-22)
 
 **2. Archinal et al. (2018), the Sun's north pole (Sun room).**
 - Open: https://doi.org/10.1007/s10569-017-9805-5
@@ -56,7 +56,7 @@ you know you have the right paper.
 - The row expects: the north galactic pole at about RA 192.85948 deg,
   Dec +27.12825 deg (the same pole Murray 1989 gives, which is now
   read).
-- Your note: -- downloaded 500+ pages to papers/
+- Your note: DONE 2026-10-22: the volume is in papers/.
 
 **4. Baliukin et al. (2019), the hydrogen geocorona (Earth room).**
 - Open: https://doi.org/10.1029/2018JA026136
@@ -88,7 +88,8 @@ you know you have the right paper.
 - The row expects: in the abstract, GEOTAIL found the distant tail
   (beyond about 150 Earth radii) about the same size in both directions
   under average conditions.
-- Your note: -- paywalled
+- Your note: -- paywalled (2026-10-22). If the page shows the
+  abstract, pasting it works, as it did for Slavin et al.
 
 ## Not on this list
 

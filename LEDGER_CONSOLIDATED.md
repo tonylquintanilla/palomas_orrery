@@ -1362,13 +1362,34 @@ as an archive of the prioritization thinking -- no cleanup on close.
     designation as 6AC4721". It is MAPS under its temporary name. A
     duplicate to retire or merge: Tony's call, since it removes a
     checkbox from the orrery.
+    Tony, 2026-10-22: "this was the prehorizons estimate so we can drop
+    it from the website." Nothing to build: the entry has no 'key', so
+    the export never sends it. It stays in the orrery. His run record
+    the same evening (`documentation/WHERE_WE_ARE_10-22-26_2027_run_record.md`):
+    "6AC4721 is retired. Gonggong skipped but needs discussion."
   - **Gonggong**: on plotting's skip list (palomas_orrery.py's
     pre-fetch, copied by period_fetch.py as SKIP_NAMES), so no period
     is fetched for it and the website prints "Orbital period: not yet
     fetched from JPL." Its helio_id (2007 OR10) may now serve, since the
     pre-fetch asks a helio_id around the Sun (L-443); whether to take it
     off the list is a test on Tony's machine.
-**Gap:** Tony's word on 6AC4721; a plot of Gonggong around the Sun.
+- **Tony, 2026-10-22, on testing Gonggong:** "yes but only if it accords
+  with our method or requires a method revision. and we should document
+  our method developed in this session in the skill. and i can test in
+  the orrery too." The method is horizons-orbital-mechanics 1.9, Which
+  Record Serves a Body: Gonggong is on all six of palomas_orrery.py's
+  skip lists, every line from 2026-02-04 (commit c60572d), with no
+  record of what failed. The test asks 2007 OR10 around the Sun and
+  920225088 around each other centre Gonggong is plotted from; if each
+  answers, one patch takes the name off every list. A skip kept for
+  some centres only would be a method revision, written into the skill
+  first.
+**Gap (replaces the one below, 2026-10-22, evening):** the Gonggong test,
+by the skill's method, in a session and on Tony's orrery.
+**Gap (superseded above):** a plot of Gonggong around
+the Sun.
+**Gap (superseded above):** Tony's word on 6AC4721; a plot of Gonggong
+around the Sun.
 **Ref:** L-443; `celestial_objects.py`; `period_fetch.py` (SKIP_NAMES).
 
 #### [L-468] The Sun room's phone look of 2026-10-21, night: the corona's drawer text and the Hills cloud's cross (gallery, the Sun room)
@@ -1886,6 +1907,9 @@ from his phone, with a screenshot of the corona's i panel: "As you can
     the Hipparcos volume's sec.
     1.5.3, Maezawa et al.
     (1997).
+  - Tony, 2026-10-22: the Hipparcos volume is in `papers/`; Delsemme's
+    ADS page timed out; Maezawa et al. is paywalled. The next Sun-room
+    or Earth-room session reads the Hipparcos section from his copy.
   - No GPT prompt was needed (the brief's job 3): every work that
     refused either had a known address for Tony or was re-homed.
   - Found while building, recorded and not chased: the Source list
@@ -2186,7 +2210,36 @@ the deliberate limit, its number set then, each removal named.
     served cache. Recorded, not chased.
   - Not asked, recorded: whether the Lagrange points and the exoplanet
     entries are ever served.
-**Gap (replaces the one below, 2026-10-22, evening):** Tony's runs of
+- **2026-10-22, late evening: Tony's runs, read** (his run record,
+  `documentation/WHERE_WE_ARE_10-22-26_2027_run_record.md`). Patches 1 and 3 ran
+  (patch 3's first copy); the orrery's maintenance run passed 31 of 31,
+  fetched 48 periods, confirmed 63 of 63 entries with JPL, and was
+  pushed at d91dc1d0. Patch 2 ran; the Daily Run built 69 objects, the
+  swap first try, the served window 88.0 days set by Mercury, the
+  shortest of 62 bodies' spans; no trust measurement failed.
+  - **One gate failed, and it was the orrery's:** Solar System figures,
+    on 2025 PN7. Its period, 363.9 days, prints "1.00" years, three
+    figures, but `orbital_period.figures_by_error` counted the figures
+    before rounding and served two, so the website printed "1.0".
+    Counted from the number as printed now
+    (`patch_L443_4_period_count_20261022.py`), with a case in
+    test_objects_export.py; only PN7's count changes in the export.
+    The website's printer was right and is unchanged.
+  - **Recorded, not chased:** six comets (halley, ikeya_seki,
+    hale_bopp, hyakutake, neowise, lemmon) carry the builder's warning
+    "its period is around @0, but a comet is drawn from its elements
+    around the Sun": the hover's period and the drawn ellipse use
+    different centres. Halley carried it since L-431 build 3; the
+    others joined with slice 1. Against L-431's ruling 7 (one orbit
+    for hover and drawing); for the comets' next design look.
+  - Patch 3's two later copies (the 6AC4721 ruling, the papers, the
+    horizons-orbital-mechanics 1.9 method) never ran: Tony had run the
+    first. Patch 4 carries them and removes the unrun copy at the root.
+**Gap (replaces the one below, 2026-10-22, late evening):** patch 4 and
+the orrery maintenance run, pushed; the Daily Run again and the website
+pushed; Tony's look; then slice 2, the spacecraft and the open-path
+comets.
+**Gap (superseded above):** Tony's runs of
 the two slice-1 patches, the orrery maintenance run (JPL confirms and
 fetches the 50), the Daily Run, and his look; then slice 2, the
 spacecraft and the open-path comets.
