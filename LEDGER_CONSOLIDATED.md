@@ -580,6 +580,10 @@ L-454, L-466 and L-468, L-461 with the objects; L-469 new, the
 Deferred section; interactive-exhibit 1.20, provenance-discipline 2.34,
 ledger-and-session-records 1.22), built on b995472a and gallery
 d7195704 with the day's patches.
+Module updated: October 23, 2026 with Anthropic's Claude Opus 5.5 (the
+records of Tony's phone look of slice 1: L-472 new, the view fix;
+L-473, L-474 and L-475 new, the three drawer and panel changes; L-443
+and L-470 updated), built on ee4e333 and gallery 25e4d24.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -1351,6 +1355,120 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
+#### [L-475] The About link at the bottom of every room's i panel (gallery, the rooms' shared chrome)
+<!-- L:475 status:OPEN upd:2026-10-23 section:A flag: rice: -->
+- **Found 2026-10-22, Tony's phone look of slice 1 (L-443 (the objects
+  to the website)), checklist item 2**
+  (`documentation/WHERE_WE_ARE_10-22-26_2027_run_record.md`). Tony: "i
+  cannot find the link to the "about" page that one accesses by tapping
+  the i button on the front page, the lobby. this should be on every
+  info panel at the bottom."
+- **What the code says, read at gallery b93072eb (not run).** The About
+  card is the lobby's: index.html's `.about-overlay`, opened by its
+  `.footer-about-btn`. interactive.html has no link to it. The lobby's
+  address routes (`#room=`) open rooms, not the card, so the link needs
+  an address that opens it.
+- An edit to the rooms' shared i panel, so one line serves every room
+  (interactive-exhibit, One chrome, many rooms); every room is a Mode 5
+  target.
+**Gap:** an address that opens the About card; the link at the bottom
+of the i panel; Tony's look on the phone.
+**Ref:** L-443; L-458 (report a problem: another line for the same
+panel); gallery `index.html`, `interactive.html` (`renderSunInfo`).
+
+#### [L-474] See more / See fewer at the top of the Solar System room's drawer (gallery, the drawer)
+<!-- L:474 status:OPEN upd:2026-10-23 section:A flag: rice: -->
+- **Found 2026-10-22, after Tony's phone look of slice 1.** His note of
+  that night, as Claude worded it in the run record
+  (`documentation/WHERE_WE_ARE_10-22-26_2027_run_record.md`): "Move See
+  more / See fewer to the top of the drawer, where it's easier to find."
+- Today the button sits between the ticked rows and the rest
+  (interactive.html near line 4873, read at gallery b93072eb).
+- Mode 5: Claude builds it, Tony judges it on the phone.
+**Gap:** the build, with L-472 (the view fix) or before it (Tony's
+call); Tony's look.
+**Ref:** L-443; gallery `interactive.html` (`renderSunDrawer`),
+`gallery/solar_system_drawer.js`.
+
+#### [L-473] A group in the Solar System room's drawer opens with its bodies unticked (gallery, the drawer)
+<!-- L:473 status:OPEN upd:2026-10-23 section:A flag: rice: -->
+- **Found 2026-10-22, Tony's phone look of slice 1, checklist item 4**
+  (`documentation/WHERE_WE_ARE_10-22-26_2027_run_record.md`). Tony: "i
+  think that when we open a group the specific checkboxes should be off
+  not on by default. let the user select the bodies to plot. if they
+  want all they can do that from the none/all button. the same should
+  apply to all groups, just as we ask the user to tap see more to see
+  all the special groups."
+- **What the code says, read at gallery b93072eb (not run).** `ssFold`
+  only folds the group and redraws the drawer; the comment above
+  `ssGroupTick` says a group's name "folds it open or shut, and moves
+  nothing." A group's bodies are ticked only from its row's box (the
+  `.pick` span) or its "All / none in <label>" button. So either the
+  tap landed on the box rather than the name, or the phone ticks on
+  folding in a way the code reading does not show.
+**Gap:** settle which on the phone before any code. If the tap target
+is the cause, the fix may be the row's layout rather than its logic.
+Then the build, with L-472 (the view fix) or before it (Tony's call).
+**Ref:** L-443; gallery `interactive.html` (`ssFold`, `ssGroupTick`),
+`gallery/solar_system_drawer.js`; interactive-exhibit 1.21, Groups fold
+open.
+
+#### [L-472] The Solar System room's view: a far body drawn in the wrong place when zoomed in (gallery, the Solar System room)
+<!-- L:472 status:OPEN upd:2026-10-23 section:A flag: rice: -->
+- **Found 2026-10-22, Tony's phone look of slice 1 (L-443 (the objects
+  to the website)), checklist item 9**
+  (`documentation/WHERE_WE_ARE_10-22-26_2027_run_record.md`). Tony: "the
+  orbit of Halley does not look correct. for "now" halley is near its
+  apohelion but the render makes it look like it is near perihelion
+  approaching the orbit of mars. that's not right for today's date."
+  His screenshot was at a 1 AU grid. Halley was 35.01 AU from the Sun
+  (coverage_index.json, the Oct 22 build). The session that night found
+  the position right whenever the box holds Halley, as it does with
+  Neptune's orbit drawn, and wrong only when the box is smaller than
+  Halley's distance.
+- **The rule, as recorded that night,** in Claude's words in the run
+  record, from Tony's notes: "Always size the view to the farthest
+  orbit of anything ticked, so a far body is never drawn outside the
+  box." Claude then proposed a second part: "zooming moves the camera
+  closer and never shrinks the box below what it has to hold." The
+  second part is Claude's proposal; the design talk confirms or changes
+  it.
+- **What the code says, read at gallery b93072eb (not run).** Ticking
+  already frames on the farthest body ticked: `ssTick` and
+  `ssGroupTick` in interactive.html end in `sunApplyVisibility(true,
+  sunOutermostShown())`, and the room's row carries `frameOnPosition:
+  true, frameMargin: 1.2`. The zoom buttons are the other half:
+  `navFrameZoom` shrinks the axis range by 1.6 a tap, floored at 1e-5
+  AU, with nothing to stop it below a ticked body's distance.
+  `gallery/far_lines.js` (L-463 (the pink band)) cuts a LINE whose far
+  point lies more than 20 half-widths out, because a phone's graphics
+  chip draws such points in the wrong place; its header says "Markers
+  are not touched." Halley's marker at 35 AU in a 1 AU box is 35
+  half-widths out. The likeliest cause is L-463's failure again, for a
+  marker: a hypothesis for the phone test, not a finding.
+- **Two rulings to reconcile before code.** Tony's ruling of
+  2026-09-03, in `navFrameZoom`'s comment: "+/- step the FRAME, not the
+  camera", so the Sun room's shells stay readable across six decades.
+  The rule above has the Solar System room's zoom move the camera.
+  Three shapes for the talk, none recommended (the brief, sec. 4): A,
+  per room, a floor under the Solar System room's zoom-in; B, frame
+  zoom down to that floor, then the camera; C, a far marker treated as
+  far_lines.js treats a far line, the HUD counting ticked bodies out of
+  view.
+- **The phone test before any code,** whichever shape wins: tick Halley
+  with Neptune drawn and confirm it sits at 35 AU; zoom in by the
+  buttons to a 1 AU grid and watch where Halley's marker goes, and
+  whether the visible part of its orbit is the perihelion end cut at
+  the box. The three cases Claude listed that night: tick a far body
+  without Go To; Go To Halley, then zoom in on Earth step by step; zoom
+  in very far with a far body ticked and watch whether its dot jumps.
+**Gap:** the design talk (which shape, and whether the rule is per
+room), the phone test, then the build. Slice 2 of L-443 waits behind
+it, since slice 2 adds the far bodies this bug mis-draws.
+**Ref:** L-443; L-463; `documentation/HANDOFF_L443_view_and_drawer_brief_20261023.md`,
+secs. 3 and 4; gallery `interactive.html` (`navFrameZoom`, `ssTick`,
+`ssGroupTick`), `gallery/far_lines.js`.
+
 #### [L-471] A delivered patch is final (safe-file-editing, next version)
 <!-- L:471 status:OPEN upd:2026-10-22 section:A flag: rice: -->
 - **Found 2026-10-22, closing L-443's slice 1** (Tony's run records,
@@ -1380,7 +1498,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 **Ref:** L-443; `documentation/patch_L443_4_period_count_20261022.py`.
 
 #### [L-470] Orrery entries the website cannot serve as they stand (orrery, objects)
-<!-- L:470 status:OPEN upd:2026-10-22 section:A flag: rice: -->
+<!-- L:470 status:OPEN upd:2026-10-23 section:A flag: rice: -->
 - **Found 2026-10-22, counting slice 1 of L-443 (the objects to the
   website).** One class: an entry in `celestial_objects.py` whose own
   fields stop it being served, recorded here rather than chased (The
@@ -1412,6 +1530,11 @@ as an archive of the prioritization thinking -- no cleanup on close.
   answers, one patch takes the name off every list. A skip kept for
   some centres only would be a method revision, written into the skill
   first.
+- **2026-10-23: the discussion is still owed.** Tony's phone-look note
+  of 2026-10-22, "Gonggong skipped but needs discussion", stands on
+  Where We Are's design-talk list. Not part of the view fix
+  (`documentation/HANDOFF_L443_view_and_drawer_brief_20261023.md`,
+  sec. 3, item 5).
 **Gap (replaces the one below, 2026-10-22, evening):** the Gonggong test,
 by the skill's method, in a session and on Tony's orrery.
 **Gap (superseded above):** a plot of Gonggong around
@@ -2268,7 +2391,18 @@ the deliberate limit, its number set then, each removal named.
   Solar System figures among them; the website pushed at b93072eb; the
   live run found all 25 files served as committed. Tony reinstalled
   interactive-exhibit 1.21 and horizons-orbital-mechanics 1.9.
-**Gap (replaces the one below, 2026-10-22, 22:50):** Tony's phone look
+- **2026-10-22, night: Tony's phone look done.** His answers are in
+  `documentation/WHERE_WE_ARE_10-22-26_2027_run_record.md`. Items 1,
+  3, 5, 6, 7, 8 and 10 a plain yes. Item 9 found Halley drawn in the
+  wrong place when zoomed in: L-472 (the view fix). Item 4: a group
+  should open with its bodies unticked, L-473. Item 2: the About link
+  missing from the i panels, L-475. A later note: See more / See
+  fewer at the top of the drawer, L-474. And "Gonggong skipped but
+  needs discussion", on L-470.
+**Gap (replaces the one below, 2026-10-23):** the view fix first
+(L-472), with the three drawer and panel changes (L-473, L-474,
+L-475); then slice 2, the spacecraft and the open-path comets.
+**Gap (superseded above):** Tony's phone look
 (the handoff, sec. 10); then slice 2, the spacecraft and the
 open-path comets.
 **Gap (superseded above):** patch 4 and

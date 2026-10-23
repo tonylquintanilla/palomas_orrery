@@ -1,24 +1,24 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 22, 2026, late evening: slice 1 is live, 50
-bodies in folding groups.
-- Written at orrery f10e859 and gallery b93072e, with patch 5.
+Last updated: October 23, 2026: your phone look is done; the view fix
+comes before slice 2.
+- Written at orrery ee4e333 and gallery 25e4d24, with patch 6.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Slice 1 of L-443 (the objects to the website) is live: 50 bodies,
->   in six groups that fold open in the drawer.
-> - The website's check caught one wrong figure count, 2025 PN7's
->   period; the fix is the orrery's, in patch 4.
-> - The method for choosing JPL's records is in a skill now.
+> - Your phone look is done. Halley is drawn in the wrong place when
+>   the view is zoomed in (L-472 (the view fix)); that is fixed
+>   before slice 2.
+> - Three smaller changes: L-473 (groups open unticked), L-474 (See
+>   more on top), L-475 (the About link in every i panel).
 >
-> **Do next:** *your phone look (the handoff, sec. 10); then slice 2,
-> the spacecraft and the comets on open paths.*
+> **Do next:** *the view design talk: how the zoom buttons work in
+> the Solar System room; then one test on your phone.*
 >
 > **Needs you now:**
-> - *(do) Your phone look (the handoff, sec. 10).*
+> - *(do) Run patch 6, then commit and push.*
 > - Two papers left to try (`READING_L456_tony_20261021.md`).
 
 *Italic* lines are the must-reads. Marks reset at every update.
@@ -42,9 +42,9 @@ bodies in folding groups.
   9.   [next]  L-423 (the website's checks): items 1 and 2 done (Oct 16);
                next, item 3, L-357 (stale leftovers).
  10-11.[NOW]   *The orrery's objects come to the website (L-443 (the
-               objects to the website)): slice 1, 50 bodies, built Oct 22;
-               next, slice 2, the spacecraft and the comets on open paths;
-               then the moons.* The bare link opens the room. << moved this session
+               objects to the website)): slice 1, 50 bodies, live Oct 22;
+               the view fix first; then slice 2, the spacecraft and the
+               comets on open paths; then the moons.* << moved this session
  12.   [later] Encounters: comets and spacecraft at the dates that matter.
  13.   [later] The inner planets' rooms (Mercury, Venus, Mars), from the
                template; Jupiter and Saturn follow (L-433).
@@ -59,8 +59,6 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 - Every view, still and animated, opens on the farthest thing drawn,
   shell or orbit, plus 20%; the center body's axis and cone end just
   past its farthest shell. Kelvin stays. (Oct 18-19)
-- A citation's web address goes on its own Source line. Links checked
-  every 30 days. Problem reports through the guest book's form. (Oct 20)
 - Earth's dipole cone drawn, unticked. Agency pages read one layer
   down. Report words approved. (Oct 21)
 - Drawer order: nearest part as drawn from sourced rows. Drawings end
@@ -74,7 +72,7 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
   its symbol. Every body fetched every build. Every comet drawn from
   today's orbit. Open-path comets go with the spacecraft. (Oct 22)
 
-## Deferred  **>> UPDATED THIS SESSION**
+## Deferred
 
 Waiting behind the objects (Oct 22); a line leaves when picked up.
 - L-454 (moving edges): Earth's two pairs with their four rows; the
@@ -95,16 +93,19 @@ Waiting behind the objects (Oct 22); a line leaves when picked up.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261023T032713Z, ok, first try (gallery
-  b93072e).
-- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md after the
-  day's orrery patches). Whole tree: 276: orrery 112, Earth System 149,
+- Last cache build: 20261023T165105Z, ok, first try (gallery
+  25e4d24).
+- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md at orrery
+  ee4e333). Whole tree: 276: orrery 112, Earth System 149,
   stars 13, utilities 2.
-- This page's date and the ledger's newest stamp: both Oct 22. Agree.
+- This page's date and the ledger's newest stamp: both Oct 23. Agree.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
 At the next design talk:
+- *The view fix (L-472 (the view fix)): which of three shapes, and
+  whether the zoom rule differs by room (the brief, sec. 4).*
+- Whether the three smaller changes go with it, or first.
 - "Gonggong skipped but needs discussion" (your run record, Oct 22;
   L-470 (entries the website cannot serve)).
 - The Daily Run checking the orrery it pulled is the one you pushed
@@ -120,10 +121,10 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- *Next: `HANDOFF_L443_slice1_build_20261022.md`, sec. 9.*
+- *Next: `HANDOFF_L443_view_and_drawer_brief_20261023.md`, sec. 4.*
+- Your phone look: `WHERE_WE_ARE_10-22-26_2027_run_record.md`
 - The objects' rulings: `DESIGN_L443_objects_rulings_20261022.md`;
   the words: `WORDS_L443_slice1_20261022.md`
-- Drawn ends: `DISCOVERY_drawn_ends_20261021.md`; drawer: gallery `DRAWER_ORDER_L460_*`
 - Talks: `DESIGN_talks_rulings_20261020.md`, `DESIGN_talks2_rulings_20261021.md`
 - The strategy behind the road: `MASTER_PLAN_INTERACTIVE_GALLERY.md`
 
