@@ -1503,7 +1503,7 @@ patch applied: L-443 close records (3 files)
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
 - 2. move it to documentation/, 
-- 3. then commit and push. It doesn't need a maintenance run tonight. -- 
+- 3. then commit and push. It doesn't need a maintenance run tonight. -- 89876203b34b758632d882e10e65d733ccda4aa7
 
 One note from the live run: it couldn't examine two links, for Jupiter's and Saturn's poles. That check doesn't block anything, and today's changes didn't touch either.
 
@@ -1512,4 +1512,18 @@ One note from the live run: it couldn't examine two links, for Jupiter's and Sat
 - Your phone look is next. Then comes slice 2, the spacecraft and the comets on open paths.
 - The Gonggong question and L-471 wait their turn on Where We Are.
 
-It was a great run. Thanks, Tony.
+It was a great run. Thanks, Tony. -- Thanks, Claude! We got it! :)
+
+========================================================================
+
+That confirms it. Halley's position is right whenever the view's box is big enough to hold it, as it is with Neptune's orbit drawn. It goes wrong only when the box is smaller than Halley's distance from the Sun. Your fix removes the problem entirely: the box always holds the farthest orbit of anything ticked, so zooming in to Earth never moves a far body.
+
+One thing to settle when the next session designs this: Sedna's orbit reaches far past Halley's, so a box that holds it makes the inner planets tiny. Zooming in would then have to move the camera closer rather than shrink the box. That's a design question for the session, not one for tonight.
+
+Your two new notes are only in this chat so far:
+- Always size the view to the farthest orbit of anything ticked, so a far body is never drawn outside the box.
+- Move See more / See fewer to the top of the drawer, where it's easier to find.
+
+**Could you add those two lines to your run record?** The next session reads it first, so they'll be picked up with your other three notes.
+
+Good night, Tony.
