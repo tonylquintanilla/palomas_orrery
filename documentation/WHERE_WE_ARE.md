@@ -1,25 +1,24 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 22, 2026, late evening: slice 1 in the orrery;
-one fix before the website goes.
-- Written at orrery d91dc1d and gallery 0bb3434, with patch 4.
+Last updated: October 22, 2026, late evening: slice 1 is live, 50
+bodies in folding groups.
+- Written at orrery f10e859 and gallery b93072e, with patch 5.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Slice 1 of L-443 (the objects to the website) is in the orrery,
->   pushed: 50 bodies, in six groups that fold open in the drawer.
+> - Slice 1 of L-443 (the objects to the website) is live: 50 bodies,
+>   in six groups that fold open in the drawer.
 > - The website's check caught one wrong figure count, 2025 PN7's
 >   period; the fix is the orrery's, in patch 4.
 > - The method for choosing JPL's records is in a skill now.
 >
-> **Do next:** *patch 4, the orrery run and push, then the Daily Run
-> and the website's push (the handoff, sec. 9).*
+> **Do next:** *your phone look (the handoff, sec. 10); then slice 2,
+> the spacecraft and the comets on open paths.*
 >
 > **Needs you now:**
-> - *(do) Patch 4 and the runs, in order (the handoff, sec. 9).*
-> - *Reinstall interactive-exhibit 1.21, horizons-orbital-mechanics 1.9.*
+> - *(do) Your phone look (the handoff, sec. 10).*
 > - Two papers left to try (`READING_L456_tony_20261021.md`).
 
 *Italic* lines are the must-reads. Marks reset at every update.
@@ -91,12 +90,13 @@ Waiting behind the objects (Oct 22); a line leaves when picked up.
 - The streamer belt's and the clumps' eyeballed numbers (in L-412
   (the Sun's slice)).
 - A drawn main-belt cloud (L-443 (the objects)), behind slice 2.
+- L-471 (a delivered patch is final): safe-file-editing's next version.
 
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261023T021052Z, ok, first try (on gallery
-  0bb3434, not yet pushed).
+- Last cache build: 20261023T032713Z, ok, first try (gallery
+  b93072e).
 - Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md after the
   day's orrery patches). Whole tree: 276: orrery 112, Earth System 149,
   stars 13, utilities 2.

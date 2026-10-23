@@ -1351,6 +1351,34 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
+#### [L-471] A delivered patch is final (safe-file-editing, next version)
+<!-- L:471 status:OPEN upd:2026-10-22 section:A flag: rice: -->
+- **Found 2026-10-22, closing L-443's slice 1** (Tony's run records,
+  `documentation/WHERE_WE_ARE_10-22-26_2027_run_record.md`). One class:
+  how a patch reaches Tony and what happens when it meets his folder.
+  Three rules for safe-file-editing's next version, method rather than
+  rulings (the protocol's Method Belongs to the Skill):
+  - **A delivered patch is final.** Claude never replaces a patch once
+    it is in Tony's folder; an addition goes in the next numbered
+    patch. Patch 3 was replaced twice after Tony had run its first
+    copy, leaving an unrun copy in the orrery's root that patch 4 had
+    to remove. Tony: "part of the problem is that I ran these patches
+    while you were still amending them. That's a lesson learned for
+    me." The fix is Claude's: a patch is delivered only when it is
+    ready to run, and Claude says so.
+  - **One route per document.** A document a patch writes is not also
+    handed to Tony to download, or he is told the patch will place it.
+    His downloaded copy of the design brief made patch 3 refuse; he
+    deleted it and ran it again. Tony: "why does a patch refuse when it
+    sees a document you gave to me as an artifact?"
+  - **A refusal says what to do, and a match is not a conflict.** When
+    a file the patch would write new already exists, the refusal names
+    the likely cause and the fix ("a copy of the same document you
+    downloaded: delete it and run again"); a file already holding
+    exactly what the patch would write is accepted.
+**Gap:** safe-file-editing's next version carries the three.
+**Ref:** L-443; `documentation/patch_L443_4_period_count_20261022.py`.
+
 #### [L-470] Orrery entries the website cannot serve as they stand (orrery, objects)
 <!-- L:470 status:OPEN upd:2026-10-22 section:A flag: rice: -->
 - **Found 2026-10-22, counting slice 1 of L-443 (the objects to the
@@ -2235,7 +2263,15 @@ the deliberate limit, its number set then, each removal named.
   - Patch 3's two later copies (the 6AC4721 ruling, the papers, the
     horizons-orbital-mechanics 1.9 method) never ran: Tony had run the
     first. Patch 4 carries them and removes the unrun copy at the root.
-**Gap (replaces the one below, 2026-10-22, late evening):** patch 4 and
+- **2026-10-22, 22:50: live.** Orrery pushed at f10e859f (patch 4,
+  maintenance run 31 of 31); the second Daily Run passed 35 of 35,
+  Solar System figures among them; the website pushed at b93072eb; the
+  live run found all 25 files served as committed. Tony reinstalled
+  interactive-exhibit 1.21 and horizons-orbital-mechanics 1.9.
+**Gap (replaces the one below, 2026-10-22, 22:50):** Tony's phone look
+(the handoff, sec. 10); then slice 2, the spacecraft and the
+open-path comets.
+**Gap (superseded above):** patch 4 and
 the orrery maintenance run, pushed; the Daily Run again and the website
 pushed; Tony's look; then slice 2, the spacecraft and the open-path
 comets.

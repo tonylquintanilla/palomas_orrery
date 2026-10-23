@@ -4,7 +4,7 @@
 Built on bfb6c474 at https://github.com/tonylquintanilla/palomas_orrery
 and 0bb34344 at https://github.com/tonylquintanilla/tonyquintanilla.github.io
 (branch main of each). Pushed at: orrery d91dc1d0 (section 2's steps
-1 to 3); the website, after section 9.
+1 to 3) and f10e859f (section 9); the website b93072eb.
 
 Tony's local folders: orrery
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\
@@ -239,5 +239,25 @@ In the WEBSITE folder:
    Then commit, push, and the live run.
 4. Reinstall interactive-exhibit 1.21 and horizons-orbital-mechanics
    1.9; then your look on the phone (section 2, step 7).
+
+## 10. Your look on the phone (Mode 5)
+
+The website went live at b93072eb; the live run found all 25 files
+served as committed. Each line is a yes or a no; note anything that
+looks wrong beside it.
+
+1. A bare palomasorrery.com/interactive.html link opens the Solar
+   System room.
+2. The i panel's two new sentences read as you approved them.
+3. See more shows the six groups in their places along the list.
+4. Tap Comets: it folds open with 13 comets. Tap it again: it closes.
+5. Open the trans-Neptunian objects: 15 bodies, by their average
+   distance from the Sun.
+6. Tick a group's box: its bodies draw and the view widens to hold
+   them. All / none clears them, and the Sun stays.
+7. Hover Orcus: the shared-centre sentence. Hover Eris: none.
+8. Hover 2025 PN7: "Orbital period: 1.00 years (364 days)".
+9. Hover a comet, then find Halley: where it is now, far out.
+10. The Explorer opens from its gallery card.
 
 Session written October 2026 with Anthropic's Claude Opus 5.5.
