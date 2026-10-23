@@ -133,7 +133,7 @@ Not urgent, in your order:
 
 **Tony**: Run record:
 
-**Session: OPEN: 10-22-26 1559: Opus: Astronomical object view categories L-443**
+**Session: DONE: 10-23-26 0853: Opus: Astronomical object view categories L-443**
 
 Recorded: all 13 comets are drawn from today's orbit, and Halley and Encke join the comets group. Now writing the website's 50 entries. First I'm looking at how the file is laid out so the new rows match it.
 
@@ -1527,3 +1527,24 @@ Your two new notes are only in this chat so far:
 **Could you add those two lines to your run record?** The next session reads it first, so they'll be picked up with your other three notes.
 
 Good night, Tony.
+
+==========================================================
+
+Mostly yes, but there are two gaps.
+
+- **Ticking without Go To.** A visitor can tick Halley and never tap Go To. The box should still grow to hold anything ticked, not only the Go To body.
+- **Zooming in after that.** Your screenshot was at a 1 AU grid, so the zoom buttons had shrunk the box below Halley's distance. If zooming keeps shrinking the box, the error comes back however the view was first sized.
+
+So the rule needs one more part: zooming moves the camera closer and never shrinks the box below what it has to hold.
+
+The next session should test that on your phone before building it.
+
+========================================================================
+
+Yes, that's the job for the design session. Three cases to test on your phone:
+
+- Tick a far body without tapping Go To.
+- Go To Halley, then zoom in on Earth step by step.
+- Zoom in very far with a far body ticked, and watch whether its dot jumps.
+
+A note of this beside your other notes in the run record would carry it to the next session.

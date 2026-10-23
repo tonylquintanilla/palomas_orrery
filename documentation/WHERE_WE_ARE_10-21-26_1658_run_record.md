@@ -133,7 +133,7 @@ Not urgent, in your order:
 
 **Tony**: Run record:
 
-**Session: OPEN: 10-20-26 1624: Fable: Coordination session -- Pending patches and design talks**
+**Session: DONE: 10-22-26 1321: Fable: Coordination session -- Pending patches and design talks**
 
 Your reading list: three of six papers left (Delsemme, the Hipparcos volume, Maezawa), none missing a link, so no hurry. -- i was only able to download the hypparcos and tycho documentation, a large file of over 500 pages to papers/ . The Delsemme paper from Harvard timed out, and Maezawa was paywalled. documented in the reading md.
 
