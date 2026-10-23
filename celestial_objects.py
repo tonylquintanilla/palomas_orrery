@@ -29,6 +29,12 @@ Module updated: October 10, 2026 with Anthropic's Claude Opus 5.5 (L-395,
 the Horizons check: 'horizons_name' on the thirteen keyed entries; Halley
 keyed, with Tony's words of 2026-10-08 and NASA's 1P/Halley page; Encke's
 own entry, record 90000091, which until now only the website defined).
+Module updated: October 22, 2026 with Anthropic's Claude Opus 5.5 (L-443,
+slice 1 of the objects to the website: 50 entries keyed, each with JPL's
+name; their descriptions sourced or trimmed and their links one per body,
+by the words list Tony approved; Schaumasse, Howell and
+Churyumov-Gerasimenko re-pinned to JPL's newest records; a wrong Deep
+Space 1 comment on Tempel 2 corrected).
 """
 
 from datetime import datetime
@@ -82,11 +88,11 @@ OBJECT_DEFINITIONS = [
     # Lucy L4 Trojan Targets (Leading Jupiter Trojans)
     # All have center_id to enable asteroid-centered flyby visualization
     
-    {'name': 'Eurybates', 'id': '1973 SO', 'var_name': 'eurybates_var', 'color_key': 'Eurybates', 'symbol': 'circle-open', 'object_type': 'orbital', 
+    {'name': 'Eurybates', 'key': 'eurybates', 'id': '1973 SO', 'horizons_name': '3548 Eurybates', 'var_name': 'eurybates_var', 'color_key': 'Eurybates', 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody',
     'center_id': '920003548',  # Numeric ID for use as Horizons center (3548 Eurybates)
-    'mission_info': 'Lucy flyby: Aug 12, 2027. D~64 km, C-type. Has satellite Queta (~1 km). First C-type Trojan to be visited.', 
-    'mission_url': 'https://lucy.swri.edu/Eurybates.html'},
+    'mission_info': 'Lucy flies past it on August 11, 2027. A C-type (carbon-rich) asteroid with a small moon, Queta.', 
+    'mission_url': 'https://en.wikipedia.org/wiki/3548_Eurybates'},
 
     # Patroclus-Menoetius Binary System (Lucy Mission target - flyby March 2, 2033)
     # Source: JPL Horizons satellite solution (JPL#82), Brozovic et al. 2024 (AJ 167:104)
@@ -99,15 +105,15 @@ OBJECT_DEFINITIONS = [
      'mission_info': 'Center of mass for Patroclus-Menoetius binary Trojan system. Lucy flyby: March 3, 2033.',
      'mission_url': 'https://lucy.swri.edu/targets/Patroclus-Menoetius.html'},
 
-    {'name': 'Patroclus', 'id': '920000617', 'var_name': 'patroclus_var', 'color_key': 'Patroclus', 
+    {'name': 'Patroclus', 'key': 'patroclus', 'id': '920000617', 'horizons_name': '617 Patroclus', 'var_name': 'patroclus_var', 'color_key': 'Patroclus', 
      'symbol': 'circle-open', 'object_type': 'orbital',  # Changed to satellite - orbits barycenter
      'id_type': 'majorbody',
      'helio_id': 'A906 UL',           # For Sun-centered plots (smallbody solution)
      'helio_id_type': 'smallbody',
      'center_id': '920000617',  # Patroclus body center (for Lucy trajectory)
      'start_date': datetime(2000, 1, 1, 12, 0), 'end_date': datetime(2050, 12, 1, 0, 0),
-     'mission_info': 'Primary body of binary Trojan. D=113 km. Binary period: 4.28 days. Lucy flyby: March 3, 2033.',
-     'mission_url': 'https://lucy.swri.edu/targets/Patroclus-Menoetius.html'},
+     'mission_info': 'Two Jupiter Trojans of nearly the same size, Patroclus and Menoetius, orbiting each other. Lucy flies past them in March 2033.',
+     'mission_url': 'https://en.wikipedia.org/wiki/617_Patroclus'},
 
     {'name': 'Menoetius', 'id': '120000617', 'var_name': 'menoetius_var', 'color_key': 'Menoetius', 
      'symbol': 'circle-open', 'object_type': 'orbital',
@@ -117,23 +123,23 @@ OBJECT_DEFINITIONS = [
      'mission_info': 'Secondary body of binary Trojan. D=104 km. Binary period: 4.28 days. Named for Patroclus\'s father.',
      'mission_url': 'https://lucy.swri.edu/targets/Patroclus-Menoetius.html'},   
 
-    {'name': 'Polymele', 'id': '1999 WB2', 'var_name': 'polymele_var', 'color_key': 'Polymele', 'symbol': 'circle-open', 'object_type': 'orbital', 
+    {'name': 'Polymele', 'key': 'polymele', 'id': '1999 WB2', 'horizons_name': '15094 Polymele', 'var_name': 'polymele_var', 'color_key': 'Polymele', 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody',
     'center_id': '920015094',  # Numeric ID for use as Horizons center (15094 Polymele)
-    'mission_info': 'Lucy flyby: Sep 15, 2027. D~21 km, P-type. Has satellite Shaun (~5 km, discovered 2022 via occultation).', 
-    'mission_url': 'https://lucy.swri.edu/Polymele.html'},
+    'mission_info': 'Lucy flies past it in September 2027. A P-type (primitive) asteroid with a small moon, Shaun, found in 2022 when Polymele passed in front of a star.', 
+    'mission_url': 'https://en.wikipedia.org/wiki/15094_Polymele'},
 
-    {'name': 'Leucus', 'id': '1997 TS25', 'var_name': 'leucus_var', 'color_key': 'Leucus', 'symbol': 'circle-open', 'object_type': 'orbital', 
+    {'name': 'Leucus', 'key': 'leucus', 'id': '1997 TS25', 'horizons_name': '11351 Leucus', 'var_name': 'leucus_var', 'color_key': 'Leucus', 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody',
     'center_id': '20011351',  # Numeric ID for use as Horizons center (11351 Leucus)
-    'mission_info': 'Lucy flyby: Apr 18, 2028. D~40 km, D-type. Extremely slow rotator (~446 hours). Dark, primitive surface.', 
-    'mission_url': 'https://lucy.swri.edu/Leucus.html'},
+    'mission_info': 'Lucy flies past it on April 18, 2028. A D-type asteroid with a dark, primitive surface, which rotates very slowly.', 
+    'mission_url': 'https://en.wikipedia.org/wiki/11351_Leucus'},
 
-    {'name': 'Orus', 'id': '1999 VQ10', 'var_name': 'orus_var', 'color_key': 'Orus', 'symbol': 'circle-open', 'object_type': 'orbital', 
+    {'name': 'Orus', 'key': 'orus', 'id': '1999 VQ10', 'horizons_name': '21900 Orus', 'var_name': 'orus_var', 'color_key': 'Orus', 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody',
     'center_id': '20021900',  # Numeric ID for use as Horizons center (21900 Orus)
-    'mission_info': 'Lucy flyby: Nov 11, 2028. D~51 km, D-type. Last L4 Trojan visit before heading to L5.', 
-    'mission_url': 'https://lucy.swri.edu/Orus.html'},
+    'mission_info': 'Lucy flies past it on November 11, 2028, its last stop among the Trojans that lead Jupiter. A D-type asteroid.', 
+    'mission_url': 'https://en.wikipedia.org/wiki/21900_Orus'},
 
     {'name': 'Saturn', 'key': 'saturn', 'id': '699', 'horizons_name': 'Saturn', 'var_name': 'saturn_var', 'color_key': 'Saturn', 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': None, 
@@ -158,9 +164,9 @@ OBJECT_DEFINITIONS = [
 
 # Centaurs asteroids
 
-    {'name': 'Chariklo', 'id': '1997 CU26', 'var_name': 'chariklo_var', 'color_key': 'Chariklo', 'symbol': 'circle-open', 'object_type': 'orbital', 
+    {'name': 'Chariklo', 'key': 'chariklo', 'id': '1997 CU26', 'horizons_name': '10199 Chariklo', 'var_name': 'chariklo_var', 'color_key': 'Chariklo', 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
-    'mission_info': 'Horizons: 1997 CU26. Large Centaur. Retrograde (left-handed) orbit.', 
+    'mission_info': 'Horizons: 1997 CU26. Large Centaur.', 
     'mission_url': 'https://science.nasa.gov/solar-system/asteroids/10199-chariklo/'},
 
 # Dwarf planets
@@ -178,11 +184,11 @@ OBJECT_DEFINITIONS = [
      'mission_info': 'Center of mass for Pluto-Charon binary planet system.',
      'mission_url': 'https://science.nasa.gov/dwarf-planets/pluto/'},
 
-    {'name': 'Ceres', 'id': 'A801 AA', 'var_name': 'ceres_var', 'color_key': 'Ceres', 'symbol': 'circle', 'object_type': 'orbital', 
+    {'name': 'Ceres', 'key': 'ceres', 'id': 'A801 AA', 'horizons_name': '1 Ceres', 'var_name': 'ceres_var', 'color_key': 'Ceres', 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
     'center_id': '2000001',  # Numeric ID for use as Horizons center    
-    'mission_info': 'Horizons: A801 AA. NASA: "Ceres was the first object discovered in the main asteroid belt. Dawn spacecraft orbited Ceres from 2015 to 2018."', 
-    'mission_url': 'https://science.nasa.gov/mission/dawn/science/ceres/'},
+    'mission_info': 'Horizons: A801 AA. NASA: "Ceres was the first object discovered in the main asteroid belt and is named for the Roman goddess of agriculture." NASA\'s Dawn spacecraft went into orbit around it in 2015.', 
+    'mission_url': 'https://science.nasa.gov/dwarf-planets/ceres/'},
 
 #    {'name': 'Haumea', 'id': '2003 EL61', 'var_name': 'haumea_var', 'color_key': 'Haumea', 'symbol': 'circle', 'object_type': 'orbital', 
 #    'id_type': 'smallbody', 
@@ -196,13 +202,13 @@ OBJECT_DEFINITIONS = [
 #     'id_type': 'majorbody',
 #     'mission_info': 'Center of mass for Haumea triple system. Moon periods: Hi\'iaka 49 days, Namaka 18 days.'},
 
-    {'name': 'Haumea', 'id': '920136108', 'var_name': 'haumea_var', 
+    {'name': 'Haumea', 'key': 'haumea', 'id': '920136108', 'horizons_name': '136108 Haumea', 'var_name': 'haumea_var', 
     'color_key': 'Haumea', 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': 'majorbody',
     'helio_id': '2003 EL61',  # For Sun-centered plots (smallbody solution)
     'helio_id_type': 'smallbody',
     'center_id': '920136108',  # Haumea body center (for centered views)
-    'mission_info': 'Horizons: 136108 Haumea. Egg-shaped dwarf planet with rings. Moon periods: Hi\'iaka 49 days, Namaka 18 days. Rotation: 3.9 hours.', 
+    'mission_info': 'Horizons: 136108 Haumea. A dwarf planet with rings, spinning about once every 4 hours, fast enough to stretch it into an oval like a football.', 
     'mission_url': 'https://science.nasa.gov/dwarf-planets/haumea/'},    
 
     # Eris-Dysnomia Binary System (136199 Eris)
@@ -212,12 +218,12 @@ OBJECT_DEFINITIONS = [
 #     'id_type': 'majorbody',
 #     'mission_info': 'Center of mass for Eris-Dysnomia system. Binary period: 15.79 days.'},
 
-    {'name': 'Eris', 'id': '920136199', 'var_name': 'eris_var', 'color_key': 'Eris', 'symbol': 'circle', 'object_type': 'orbital', 
+    {'name': 'Eris', 'key': 'eris', 'id': '920136199', 'horizons_name': '136199 Eris', 'var_name': 'eris_var', 'color_key': 'Eris', 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': 'majorbody',
     'helio_id': '2003 UB313',  # For Sun-centered plots (smallbody solution)
     'helio_id_type': 'smallbody',
     'center_id': '920136199',  # Eris body center (for centered views)
-    'mission_info': 'Horizons: 136199 Eris. Most massive dwarf planet (27% more than Pluto). Binary period with Dysnomia: 15.79 days.', 
+    'mission_info': 'Horizons: 136199 Eris. The most massive known dwarf planet, about the same size as Pluto.', 
     'mission_url': 'https://science.nasa.gov/dwarf-planets/eris/'},
 
 #    {'name': 'Eris/Dysnomia', 'id': '20136199', 'var_name': 'eris2_var', 'color_key': 'Eris', 'symbol': 'circle', 'object_type': 'satellite', 
@@ -236,15 +242,15 @@ OBJECT_DEFINITIONS = [
     #  'id_type': 'majorbody',
     #  'mission_info': 'Center of mass for Gonggong-Xiangliu system. Binary period: 25.22 days.'},
 
-    {'name': 'Gonggong', 'id': '920225088', 'var_name': 'gonggong_var', 'color_key': 'Gonggong', 'symbol': 'circle', 'object_type': 'orbital', 
+    {'name': 'Gonggong', 'key': 'gonggong', 'id': '920225088', 'horizons_name': '225088 Gonggong', 'var_name': 'gonggong_var', 'color_key': 'Gonggong', 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': 'majorbody',
     'helio_id': '2007 OR10',  # For Sun-centered plots (smallbody solution)
     'helio_id_type': 'smallbody',
     'center_id': '920225088',  # Gonggong body center (for centered views)
-    'mission_info': 'Horizons: 225088 Gonggong. Dwarf planet with highly inclined orbit. Binary period with Xiangliu: 25.22 days.', 
+    'mission_info': 'Horizons: 225088 Gonggong. Dwarf planet with a highly inclined orbit.', 
     'mission_url': 'https://en.wikipedia.org/wiki/Gonggong_(dwarf_planet)'},
 
-    {'name': 'Makemake', 'id': '20136472', 'var_name': 'makemake_var', 'color_key': 'Makemake', 'symbol': 'circle', 'object_type': 'orbital', 
+    {'name': 'Makemake', 'key': 'makemake', 'id': '20136472', 'horizons_name': '136472 Makemake', 'var_name': 'makemake_var', 'color_key': 'Makemake', 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': 'majorbody',
     'helio_id': '2005 FY9',  # For Sun-centered plots; 
     'mission_info': 'Horizons: 2005 FY9. Makemake is a dwarf planet slightly smaller than Pluto, and is the second-brightest object in the Kuiper Belt.', 
@@ -257,19 +263,19 @@ OBJECT_DEFINITIONS = [
 #    'mission_info': 'Horizons: 136472 Makemake. Second-brightest Kuiper Belt object. Has one known moon (MK2).', 
 #    'mission_url': 'https://science.nasa.gov/dwarf-planets/makemake/'},    
 
-    {'name': 'Mani', 'id': '2002 MS4', 'var_name': 'ms4_var', 'color_key': 'MS4', 'symbol': 'circle', 'object_type': 'orbital', 
+    {'name': 'Mani', 'key': 'mani', 'id': '2002 MS4', 'horizons_name': '307261 Mani', 'var_name': 'ms4_var', 'color_key': 'MS4', 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
-    'mission_info': 'Horizons: 2002 MS4. One of the largest unnumbered Kuiper Belt Objects with no known moons.', 
-    'mission_url': 'https://www.minorplanetcenter.net/db_search/show_object?object_id=2002+MS4'},
+    'mission_info': 'Horizons: 2002 MS4. One of the largest Kuiper Belt objects with no known moons.', 
+    'mission_url': 'https://en.wikipedia.org/wiki/307261_Mani'},
 
-    {'name': 'Orcus', 'id': '920090482', 'var_name': 'orcus_var', 'color_key': 'Orcus', 'symbol': 'circle', 'object_type': 'orbital', 
+    {'name': 'Orcus', 'key': 'orcus', 'id': '920090482', 'horizons_name': '90482 Orcus', 'var_name': 'orcus_var', 'color_key': 'Orcus', 'symbol': 'circle', 'object_type': 'orbital', 
     'center_id': '920090482', # PRIMARY body ID for use as Horizons center (not small body designation)
     'helio_id': '2004 DW',
     'helio_id_type': 'smallbody',
 #    {'name': 'Orcus', 'id': '2004 DW', 'var_name': 'orcus_var', 'color_key': 'Orcus', 'symbol': 'circle', 'object_type': 'orbital', 
 #    'id_type': 'smallbody', 
 #    'center_id': '2090482', # Numeric ID for use as Horizons center; Orcus's moon Vanth
-    'mission_info': 'Horizons: 90482 Orcus. Dwarf planet with moon Vanth. Binary period: 9.54 days. Highest mass ratio (~16%) of any known binary.', 
+    'mission_info': 'Horizons: 90482 Orcus. A dwarf planet with a large moon, Vanth, about 16% of its mass: the highest share of any known planet or dwarf planet and its moon.', 
     'mission_url': 'https://en.wikipedia.org/wiki/Orcus_(dwarf_planet)'},
 
     # NEW: Orcus-Vanth Barycenter - HIGHEST mass ratio binary system in the solar system!
@@ -284,28 +290,28 @@ OBJECT_DEFINITIONS = [
     # only ~7 km from Quaoar's center (inside the 1,090 km body). Not visually meaningful.
     # Use Quaoar-centered mode instead (Weywot orbiting Quaoar).
 
-    {'name': 'Quaoar', 'id': '920050000', 'var_name': 'quaoar_var', 'color_key': 'Quaoar', 'symbol': 'circle', 'object_type': 'orbital', 
+    {'name': 'Quaoar', 'key': 'quaoar', 'id': '920050000', 'horizons_name': '50000 Quaoar', 'var_name': 'quaoar_var', 'color_key': 'Quaoar', 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': 'majorbody',
     'helio_id': '2002 LM60',  # For Sun-centered plots (smallbody solution)
     'helio_id_type': 'smallbody',
     'center_id': '920050000',  # Quaoar body center (for centered views)
-    'mission_info': 'Horizons: 50000 Quaoar. Kuiper Belt dwarf planet with ring system (discovered 2023). Binary period with Weywot: 12.44 days.', 
-    'mission_url': 'https://solarsystem.nasa.gov/planets/dwarf-planets/quaoar/in-depth/'},
+    'mission_info': 'Horizons: 50000 Quaoar. Kuiper Belt dwarf planet with a ring system, announced in 2023.', 
+    'mission_url': 'https://en.wikipedia.org/wiki/50000_Quaoar'},
 
-    {'name': 'Sedna', 'id': '2003 VB12', 'var_name': 'sedna_var', 'color_key': 'Sedna', 'symbol': 'circle', 'object_type': 'orbital', 
+    {'name': 'Sedna', 'key': 'sedna', 'id': '2003 VB12', 'horizons_name': '90377 Sedna', 'var_name': 'sedna_var', 'color_key': 'Sedna', 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
     'mission_info': 'Horizons: 2003 VB12. A distant trans-Neptunian dwarf planet with an extremely long orbit.', 
-    'mission_url': 'https://solarsystem.nasa.gov/planets/dwarf-planets/sedna/in-depth/'},
+    'mission_url': 'https://en.wikipedia.org/wiki/Sedna_(dwarf_planet)'},
 
-    {'name': 'Leleakuhonua', 'id': '2015 TG387', 'var_name': 'leleakuhonua_var', 'color_key': 'Leleakuhonua', 'symbol': 'circle', 'object_type': 'orbital', 
+    {'name': 'Leleakuhonua', 'key': 'leleakuhonua', 'id': '2015 TG387', 'horizons_name': '541132 Leleakuhonua', 'var_name': 'leleakuhonua_var', 'color_key': 'Leleakuhonua', 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
     'mission_info': 'Horizons: 2015 TG387. A distant trans-Neptunian dwarf planet with an extremely long orbit.', 
     'mission_url': 'https://en.wikipedia.org/wiki/541132_Lele%C4%81k%C5%ABhonua'},
 
-    {'name': '2017 OF201', 'id': '2017 OF201', 'var_name': 'of201_var', 'color_key': '2017 OF201', 'symbol': 'circle', 'object_type': 'orbital', 
+    {'name': '2017 OF201', 'key': 'tno_2017_of201', 'id': '2017 OF201', 'horizons_name': '(2017 OF201)', 'var_name': 'of201_var', 'color_key': '2017 OF201', 'symbol': 'circle', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
-    'mission_info': 'Horizons: 2017 OF201. A extreme trans-Neptunian object with an extremely long orbit.', 
-    'mission_url': 'https://en.wikipedia.org/wiki/2017_OF201#:~:text=2017%20OF201%20is%20an,have%20a%20directly%20estimated%20size.'},
+    'mission_info': 'Horizons: 2017 OF201. An extreme trans-Neptunian object with an extremely long orbit.', 
+    'mission_url': 'https://en.wikipedia.org/wiki/2017_OF201'},
 
     # Lagrange Points
     # Earth-Moon Lagrange Points
@@ -362,40 +368,40 @@ OBJECT_DEFINITIONS = [
 
     # Near-Earth Asteroids
 
-    {'name': '2025 PN7', 'id': '2025 PN7', 'var_name': 'pn7_var', 'color_key': '2025 PN7', 'symbol': 'circle-open', 'object_type': 'orbital',
+    {'name': '2025 PN7', 'key': 'asteroid_2025_pn7', 'id': '2025 PN7', 'horizons_name': '(2025 PN7)', 'var_name': 'pn7_var', 'color_key': '2025 PN7', 'symbol': 'circle-open', 'object_type': 'orbital',
     'id_type': 'smallbody', 
     # 'start_date': datetime(2024, 8, 2), 'end_date': datetime(2032, 12, 31),   # full date range
     'mission_info': '2025 PN7 is a small near-Earth asteroid and the most recently discovered quasi-satellite of Earth.',
     'mission_url': 'https://en.wikipedia.org/wiki/2025_PN7'},
 
-    {'name': '2024 PT5', 'id': '2024 PT5', 'var_name': 'pt5_var', 'color_key': '2024 PT5', 'symbol': 'circle-open', 'object_type': 'orbital',
+    {'name': '2024 PT5', 'key': 'asteroid_2024_pt5', 'id': '2024 PT5', 'horizons_name': '(2024 PT5)', 'var_name': 'pt5_var', 'color_key': '2024 PT5', 'symbol': 'circle-open', 'object_type': 'orbital',
     'id_type': 'smallbody', 'start_date': datetime(2024, 8, 2), 'end_date': datetime(2032, 12, 31), 
-    'mission_info': 'Horizons: 2024 PT5. Closest approach to Earth 8-9-2024.',
-    'mission_url': 'https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2024%20PT5'},
+    'mission_info': 'Horizons: 2024 PT5. Passed closest to Earth on August 8, 2024.',
+    'mission_url': 'https://science.nasa.gov/blogs/planetary-defense/2024/10/02/nasa-to-track-asteroid-2024-pt5-on-next-close-pass-january-2025/'},
 
-    {'name': '2025 PY1', 'id': '2025 PY1', 'var_name': 'py1_var', 'color_key': '2025 PY1', 'symbol': 'circle-open', 'object_type': 'orbital',
+    {'name': '2025 PY1', 'key': 'asteroid_2025_py1', 'id': '2025 PY1', 'horizons_name': '(2025 PY1)', 'var_name': 'py1_var', 'color_key': '2025 PY1', 'symbol': 'circle-open', 'object_type': 'orbital',
     'id_type': 'smallbody', 
 #    'start_date': datetime(2024, 8, 2), 'end_date': datetime(2032, 12, 31), 
     'mission_info': 'Horizons: 2025 PY1. Near-Earth asteroid.',
-    'mission_url': 'https://www.jpl.nasa.gov/asteroid-watch/next-five-approaches/'},    
+    'mission_url': 'https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2025%20PY1'},    
 
-    {'name': '2023 JF', 'id': '2023 JF', 'var_name': 'asteroid2023jf_var', 'color_key': '2023 JF', 'symbol': 'circle-open', 'object_type': 'orbital', 
+    {'name': '2023 JF', 'key': 'asteroid_2023_jf', 'id': '2023 JF', 'horizons_name': '(2023 JF)', 'var_name': 'asteroid2023jf_var', 'color_key': '2023 JF', 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody', 'start_date': datetime(1962, 1, 20), 'end_date': datetime(2025, 10, 4),
     # EOP coverage    : DATA-BASED 1962-JAN-20 TO 2025-JUL-09. PREDICTS-> 2025-OCT-04
     'mission_info': 'Horizons: 2023 JF. Asteroid 2023 JF flew past Earth on May 9, 2023.', 
-    'mission_url': 'https://www.nasa.gov/solar-system/near-earth-object-observations-program/#:~:text=The%20NEO%20Observations%20Program%20sponsors,the%20sky%20to%20determine%20their'},
+    'mission_url': 'https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2023%20JF'},
 
-    {'name': '2024 DW', 'id': '2024 DW', 'var_name': 'asteroid_dw_var', 'color_key': '2024 DW', 'symbol': 'circle-open', 'object_type': 'orbital',
+    {'name': '2024 DW', 'key': 'asteroid_2024_dw', 'id': '2024 DW', 'horizons_name': '(2024 DW)', 'var_name': 'asteroid_dw_var', 'color_key': '2024 DW', 'symbol': 'circle-open', 'object_type': 'orbital',
     'id_type': 'smallbody', 'start_date': datetime(2024, 2, 19), 'end_date': datetime(2032, 12, 31), 
-    'mission_info': 'Horizons: 2024 DW. Closest approach to Earth 2-22-2024 approximately 5 UTC. Keplerian orbit perturbation from Jupiter.',
+    'mission_info': 'Horizons: 2024 DW. Passed closest to Earth on February 22, 2024.',
     'mission_url': 'https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2024%20DW'},
 
-    {'name': '2024 YR4', 'id': '2024 YR4', 'var_name': 'yr4_var', 'color_key': '2024 YR4', 'symbol': 'circle-open', 'object_type': 'orbital',
+    {'name': '2024 YR4', 'key': 'asteroid_2024_yr4', 'id': '2024 YR4', 'horizons_name': '(2024 YR4)', 'var_name': 'yr4_var', 'color_key': '2024 YR4', 'symbol': 'circle-open', 'object_type': 'orbital',
     'id_type': 'smallbody', 'start_date': datetime(2024, 12, 24), 'end_date': datetime(2032, 12, 31), 
-    'mission_info': 'Closest approach to Earth 12-25-2024 4:46 UTC.',
+    'mission_info': 'Passed close to Earth on December 25, 2024, two days before it was discovered.',
     'mission_url': 'https://science.nasa.gov/solar-system/asteroids/2024-yr4/'},
 
-    {'name': 'Kamo oalewa', 'id': '2016 HO3', 'var_name': 'kamooalewa_var', 'color_key': 'Kamo oalewa', 'symbol': 'circle-open', 'object_type': 'orbital',
+    {'name': 'Kamo oalewa', 'key': 'kamo_oalewa', 'id': '2016 HO3', 'horizons_name': '469219 Kamo`oalewa', 'var_name': 'kamooalewa_var', 'color_key': 'Kamo oalewa', 'symbol': 'circle-open', 'object_type': 'orbital',
     'id_type': 'smallbody', 'start_date': datetime(1962, 1, 21), 'end_date': datetime(2032, 12, 31), 
     # EOP coverage    : DATA-BASED 1962-JAN-20 TO 2025-JUL-04. PREDICTS-> 2025-SEP-29
     'mission_info': 'Horizons: 2016 HO3. Kamo\'oalewa is a very small, elongated asteroid belonging to the Apollo group of near-Earth objects.', 
@@ -403,11 +409,11 @@ OBJECT_DEFINITIONS = [
 
     # Main Belt Asteroids
 
-    {'name': '16 Psyche', 'id': 'A852 FA', 'var_name': 'psyche16_var', 'color_key': '16 Psyche', 'symbol': 'circle-open', 'object_type': 'orbital',
+    {'name': '16 Psyche', 'key': 'psyche', 'id': 'A852 FA', 'horizons_name': '16 Psyche', 'var_name': 'psyche16_var', 'color_key': '16 Psyche', 'symbol': 'circle-open', 'object_type': 'orbital',
     'id_type': 'smallbody', 
     'center_id': '20000016',  # Numeric ID for use as Horizons center
-    'mission_info': 'Horizons: A852 FA. A metal-rich asteroid located in the main asteroid belt. The NASA Psyche mission will reach the asteroid in August 2029', 
-    'mission_url': 'https://news.arizona.edu/news/large-craters-offer-clues-origin-asteroid-16-psyche'},
+    'mission_info': "Horizons: A852 FA. A metal-rich asteroid in the main asteroid belt. NASA's Psyche spacecraft begins its main mission there in August 2029.", 
+    'mission_url': 'https://science.nasa.gov/solar-system/asteroids/16-psyche/'},
 
     {'name': 'Apophis', 'key': 'apophis', 'id': '2004 MN4', 'horizons_name': '99942 Apophis', 'var_name': 'apophis_var', 'color_key': 'Apophis', 'symbol': 'circle-open', 'object_type': 'orbital',
     'id_type': 'smallbody', 
@@ -415,7 +421,7 @@ OBJECT_DEFINITIONS = [
     'mission_info': 'Horizons: 2004 MN4. A near-Earth asteroid that will make a close approach in 2029. Future OSIRIS-APEX target.', 
     'mission_url': 'https://cneos.jpl.nasa.gov/apophis/'},
 
-    {'name': 'Bennu', 'id': '1999 RQ36', 'var_name': 'bennu_var', 'color_key': 'Bennu', 'symbol': 'circle-open', 'object_type': 'orbital', 
+    {'name': 'Bennu', 'key': 'bennu', 'id': '1999 RQ36', 'horizons_name': '101955 Bennu', 'var_name': 'bennu_var', 'color_key': 'Bennu', 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
     'center_id': '2101955',  # Numeric ID for use as Horizons center
     'mission_info': 'Horizons: 1999 RQ36. Studied by NASA\'s OSIRIS-REx mission.', 
@@ -426,76 +432,76 @@ OBJECT_DEFINITIONS = [
 #    'mission_info': 'Studied by NASA\'s OSIRIS-REx mission.', 
 #    'mission_url': 'https://science.nasa.gov/solar-system/asteroids/101955-bennu/'},
 
-    {'name': 'Eros', 'id': 'A898 PA', 'var_name': 'eros_var', 'color_key': 'Eros', 'symbol': 'circle-open', 'object_type': 'orbital', 
+    {'name': 'Eros', 'key': 'eros', 'id': 'A898 PA', 'horizons_name': '433 Eros', 'var_name': 'eros_var', 'color_key': 'Eros', 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody',
     'center_id': '2000433',  # Numeric ID for use as Horizons center 
     'mission_info': 'Horizons: A898 PA. First asteroid to be orbited and landed on by NASA\'s NEAR Shoemaker spacecraft in 2000-2001.', 
     'mission_url': 'https://science.nasa.gov/solar-system/asteroids/433-eros/'},
 
-    {'name': 'Dinkinesh', 'id': '1999 VD57', 'var_name': 'dinkinesh_var', 'color_key': 'Dinkinesh', 'symbol': 'circle-open', 'object_type': 'orbital', 
+    {'name': 'Dinkinesh', 'key': 'dinkinesh', 'id': '1999 VD57', 'horizons_name': '152830 Dinkinesh', 'var_name': 'dinkinesh_var', 'color_key': 'Dinkinesh', 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody',
     'center_id': '20152830',  # Numeric ID for use as Horizons center
     'mission_info': 'Horizons: 1999 VD57. Dinkinesh was visited by the mission Lucy.', 
     'mission_url': 'https://science.nasa.gov/solar-system/asteroids/dinkinesh/'},
 
-    {'name': 'Itokawa', 'id': '1998 SF36', 'var_name': 'itokawa_var', 'color_key': 'Itokawa', 'symbol': 'circle-open', 'object_type': 'orbital', 
+    {'name': 'Itokawa', 'key': 'itokawa', 'id': '1998 SF36', 'horizons_name': '25143 Itokawa', 'var_name': 'itokawa_var', 'color_key': 'Itokawa', 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody',
     'center_id': '2025143',  # Numeric ID for use as Horizons center 
     'mission_info': 'Horizons: 1998 SF36. First asteroid from which samples were returned to Earth by JAXA\'s Hayabusa mission in 2010.', 
-    'mission_url': 'https://en.wikipedia.org/wiki/25143_Itokawa'},
+    'mission_url': 'https://science.nasa.gov/solar-system/asteroids/25143-itokawa/'},
 
-    {'name': 'Lutetia', 'id': 'A852 VA', 'var_name': 'lutetia_var', 'color_key': 'Lutetia', 'symbol': 'circle-open', 'object_type': 'orbital', 
+    {'name': 'Lutetia', 'key': 'lutetia', 'id': 'A852 VA', 'horizons_name': '21 Lutetia', 'var_name': 'lutetia_var', 'color_key': 'Lutetia', 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
     'mission_info': 'Horizons: A852 VA. Studied by European Space Agency\'s Rosetta mission.', 
     'mission_url': 'https://www.nasa.gov/image-article/asteroid-lutetia/'},
 
-    {'name': 'Ryugu', 'id': '1999 JU3', 'var_name': 'ryugu_var', 'color_key': 'Ryugu', 'symbol': 'circle-open', 'object_type': 'orbital', 
+    {'name': 'Ryugu', 'key': 'ryugu', 'id': '1999 JU3', 'horizons_name': '162173 Ryugu', 'var_name': 'ryugu_var', 'color_key': 'Ryugu', 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody',
     'center_id': '2162173',  # Numeric ID for use as Horizons center  
     'mission_info': 'Horizons: 1999 JU3. Target of JAXA\'s Hayabusa2 mission which returned samples to Earth in 2020.', 
     'mission_url': 'https://en.wikipedia.org/wiki/162173_Ryugu'},
 
-    {'name': 'Steins', 'id': '1969 VC', 'var_name': 'steins_var', 'color_key': 'Steins', 'symbol': 'circle-open', 'object_type': 'orbital', 
+    {'name': 'Steins', 'key': 'steins', 'id': '1969 VC', 'horizons_name': '2867 Steins', 'var_name': 'steins_var', 'color_key': 'Steins', 'symbol': 'circle-open', 'object_type': 'orbital', 
      'id_type': 'smallbody',
      'mission_info': 'Horizons: 1969 VC. Visited by European Space Agency\'s Rosetta spacecraft.', 
-     'mission_url': 'https://www.esa.int/Science_Exploration/Space_Science/Rosetta'},
+     'mission_url': 'https://en.wikipedia.org/wiki/2867_%C5%A0teins'},
 
-    {'name': 'Donaldjohanson', 'id': '1981 EQ5', 'var_name': 'donaldjohanson_var', 'color_key': 'Donaldjohanson', 'symbol': 'circle-open', 'object_type': 'orbital', 
+    {'name': 'Donaldjohanson', 'key': 'donaldjohanson', 'id': '1981 EQ5', 'horizons_name': '52246 Donaldjohanson', 'var_name': 'donaldjohanson_var', 'color_key': 'Donaldjohanson', 'symbol': 'circle-open', 'object_type': 'orbital', 
      'id_type': 'smallbody',
      'center_id': '20052246',  # Numeric ID for use as Horizons center (52246 Donaldjohanson)
-     'mission_info': 'Lucy flyby: Apr 20, 2025. D~4 km, C-type. Named for paleoanthropologist who discovered "Lucy" fossil.', 
+     'mission_info': 'Lucy flew past it on April 20, 2025. It is about 8 km long and 3.5 km wide, a C-type (carbon-rich) asteroid, named for the paleoanthropologist who discovered the "Lucy" fossil.', 
      'mission_url': 'https://science.nasa.gov/solar-system/asteroids/donaldjohanson/'},
 
-    {'name': 'Vesta', 'id': 'A807 FA', 'var_name': 'vesta_var', 'color_key': 'Vesta', 'symbol': 'circle-open', 'object_type': 'orbital', 
+    {'name': 'Vesta', 'key': 'vesta', 'id': 'A807 FA', 'horizons_name': '4 Vesta', 'var_name': 'vesta_var', 'color_key': 'Vesta', 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody',
     'center_id': '2000004',  # Numeric ID for use as Horizons center 
     'mission_info': 'Horizons: A807 FA. One of the largest objects in the asteroid belt, visited by NASA\'s Dawn mission.', 
-    'mission_url': 'https://dawn.jpl.nasa.gov/'},
+    'mission_url': 'https://science.nasa.gov/solar-system/asteroids/4-vesta/'},
 
     # Kuiper Belt Objects or Trans-Neptunian Objects (TNOs)
 
-    {'name': 'Arrokoth', 'id': '2014 MU69', 'var_name': 'arrokoth_var', 'color_key': 'Arrokoth', 'symbol': 'circle-open', 'object_type': 'orbital', 
+    {'name': 'Arrokoth', 'key': 'arrokoth', 'id': '2014 MU69', 'horizons_name': '486958 Arrokoth', 'var_name': 'arrokoth_var', 'color_key': 'Arrokoth', 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody',
     'center_id': '2486958', 
     'mission_info': 'Horizons: 2014 MU69. Arrokoth flyby from New Horizons on January 1, 2019.', 
-    'mission_url': 'https://science.nasa.gov/resource/arrokoth-2014-mu69-in-3d/'},
+    'mission_url': 'https://en.wikipedia.org/wiki/486958_Arrokoth'},
 
-    {'name': 'Ixion', 'id': '2001 KX76', 'var_name': 'ixion_var', 'color_key': 'Ixion', 'symbol': 'circle-open', 'object_type': 'orbital', 
+    {'name': 'Ixion', 'key': 'ixion', 'id': '2001 KX76', 'horizons_name': '28978 Ixion', 'var_name': 'ixion_var', 'color_key': 'Ixion', 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
     'mission_info': 'Horizons: 2001 KX76. A large Kuiper Belt object without a known moon.', 
     'mission_url': 'https://en.wikipedia.org/wiki/28978_Ixion'},
 
-    {'name': 'GV9', 'id': '2004 GV9', 'var_name': 'gv9_var', 'color_key': 'GV9', 'symbol': 'circle-open', 'object_type': 'orbital', 
+    {'name': 'GV9', 'key': 'goibniu', 'id': '2004 GV9', 'horizons_name': '90568 Goibniu', 'var_name': 'gv9_var', 'color_key': 'GV9', 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
     'mission_info': 'Horizons: 2004 GV9. A binary Kuiper Belt Object providing precise mass measurements through its moon.', 
-    'mission_url': 'https://en.wikipedia.org/wiki/(90568)_2004_GV9'},
+    'mission_url': 'https://en.wikipedia.org/wiki/90568_Goibniu'},
 
-    {'name': 'Varuna', 'id': '2000 WR106', 'var_name': 'varuna_var', 'color_key': 'Varuna', 'symbol': 'circle-open', 'object_type': 'orbital', 
+    {'name': 'Varuna', 'key': 'varuna', 'id': '2000 WR106', 'horizons_name': '20000 Varuna', 'var_name': 'varuna_var', 'color_key': 'Varuna', 'symbol': 'circle-open', 'object_type': 'orbital', 
     'id_type': 'smallbody', 
     'mission_info': 'Horizons: 2000 WR106. A significant Kuiper Belt Object with a rapid rotation period.', 
     'mission_url': 'https://en.wikipedia.org/wiki/20000_Varuna'},
 
-    {'name': 'Ammonite', 'id': '2023 KQ14', 'var_name': 'ammonite_var', 'color_key': 'Ammonite', 'symbol': 'circle-open', 'object_type': 'orbital', 
+    {'name': 'Ammonite', 'key': 'ammonite', 'id': '2023 KQ14', 'horizons_name': '(2023 KQ14)', 'var_name': 'ammonite_var', 'color_key': 'Ammonite', 'symbol': 'circle-open', 'object_type': 'orbital', 
     # 136199 primary (required for Sun centered plots)
     'id_type': 'smallbody', 
     'mission_info': 'Horizons: 2023 KQ14. Ammonite is classified as a sednoid, after Sedna.', 
@@ -503,39 +509,48 @@ OBJECT_DEFINITIONS = [
 
     # Comets
 
-    {'name': 'Tempel 2', 'id': '90000214', 'var_name': 'comet_tempel2_var', 'color_key': 'Tempel 2', 'symbol': 'diamond',
+    {'name': 'Tempel 2', 'key': 'tempel_2', 'id': '90000214', 'horizons_name': '10P/Tempel 2', 'var_name': 'comet_tempel2_var', 'color_key': 'Tempel 2', 'symbol': 'diamond',
     'object_type': 'orbital', 'id_type': 'smallbody',
     # Jupiter-family periodic comet, period 5.37 years. Nucleus ~16x9 km (well-studied).
     # Perihelion: Aug 2, 2026 at 1.42 AU. Discovered 1873 by Wilhelm Tempel.
-    # Deep Space 1 flyby in 2001.
-    # ID: Record 90000214 (2013 epoch) - most recent solution. '10P' is ambiguous (22 records).
-    'mission_info': 'Horizons: 10P. Jupiter-family comet, 5.37-year period. Discovered 1873 by Wilhelm Tempel. Deep Space 1 flyby 2001.',
+    # Corrected 2026-10-22 (L-443): no Deep Space 1 flyby. Deep Space 1 flew
+    # past 19P/Borrelly in 2001 (NASA's Borrelly page), not 10P.
+    # ID: Record 90000214, epoch-year 2017, the newest of JPL's 22 records for
+    # 10P, read 2026-10-22 (L-443). '10P' alone is ambiguous.
+    'mission_info': 'Horizons: 10P. A Jupiter-family comet, discovered in 1873 by Wilhelm Tempel.',
     'mission_url': 'https://en.wikipedia.org/wiki/10P/Tempel'},
 
-    {'name': 'Schaumasse', 'id': '90000355', 'var_name': 'comet_schaumasse_var', 'color_key': 'Schaumasse', 'symbol': 'diamond',
+    {'name': 'Schaumasse', 'key': 'schaumasse', 'id': '90000356', 'horizons_name': '24P/Schaumasse', 'var_name': 'comet_schaumasse_var', 'color_key': 'Schaumasse', 'symbol': 'diamond',
     'object_type': 'orbital', 'id_type': 'smallbody',
     # Jupiter-family periodic comet, period 8.252 years. Nucleus ~2.6 km.
     # Perihelion: Jan 8, 2026 at 1.18 AU. Discovered 1911 by Alexandre Schaumasse.
-    # ID: Record 90000355 (2021 epoch) - most recent solution. '24P' is ambiguous (12 records).
-    'mission_info': 'Horizons: 24P. Jupiter-family comet, 8.25-year period. Discovered 1911. Perihelion Jan 8, 2026 at 1.18 AU.',
+    # ID: Record 90000356, epoch-year 2024, the newest of JPL's 12 records for
+    # 24P, read 2026-10-22 (L-443; 90000355, epoch-year 2015, until then).
+    # '24P' alone is ambiguous.
+    'mission_info': 'Horizons: 24P. A Jupiter-family comet, discovered in 1911.',
     'mission_url': 'https://en.wikipedia.org/wiki/24P/Schaumasse'},
 
-    {'name': 'Howell', 'id': '90000897', 'var_name': 'comet_howell_var', 'color_key': 'Howell', 'symbol': 'diamond',
+    {'name': 'Howell', 'key': 'howell', 'id': '90000901', 'horizons_name': '88P/Howell', 'var_name': 'comet_howell_var', 'color_key': 'Howell', 'symbol': 'diamond',
     'object_type': 'orbital', 'id_type': 'smallbody',
     # Jupiter-family periodic comet, period ~5.5 years.
     # Perihelion: Mar 18, 2026 at ~1.41 AU. Discovered 1981 by Ellen Howell.
-    # ID: Record 90000897 (2019 epoch) - most recent solution. '88P' is ambiguous (9 records).
-    'mission_info': 'Horizons: 88P. Jupiter-family comet, 5.5-year period. Discovered 1981 by Ellen Howell. Perihelion Mar 18, 2026.',
+    # ID: Record 90000901, epoch-year 2021, the newest of JPL's 9 records for
+    # 88P, read 2026-10-22 (L-443; 90000897, epoch-year 1997, until then).
+    # '88P' alone is ambiguous.
+    'mission_info': 'Horizons: 88P. A Jupiter-family comet, discovered in 1981 by Ellen Howell.',
     'mission_url': 'https://en.wikipedia.org/wiki/88P/Howell'},
 
-    {'name': 'Churyumov', 'id': '90000699', 'var_name': 'comet_Churyumov_Gerasimenko_var', 'color_key': 'Churyumov', # 67P/Churyumov-Gerasimenko
+    {'name': 'Churyumov', 'key': 'churyumov', 'id': '90000703', 'horizons_name': '67P/Churyumov-Gerasimenko', 'var_name': 'comet_Churyumov_Gerasimenko_var', 'color_key': 'Churyumov', # 67P/Churyumov-Gerasimenko
     'symbol': 'diamond', 'object_type': 'orbital', 'id_type': 'smallbody', 
     #'start_date': datetime(2008, 6, 2), 'end_date': datetime(2023, 4, 25), 
     # data arc: 2008-06-01 to 2023-04-26; Epoch: 2015-Oct-10; 67P; previously rec 90000704; record number needed to fetch Horizons data.
+    # ID: Record 90000703, epoch-year 2015 (the Rosetta visit), the newest of
+    # JPL's 9 records for 67P, read 2026-10-22 (L-443; 90000699, epoch-year
+    # 1995, with no covariance, until then).
     'mission_info': 'Horizons: 67P. 67P/Churyumov-Gerasimenko is the comet visited by the Rosetta spacecraft, August 2014 through September 2016.', 
     'mission_url': 'https://science.nasa.gov/solar-system/comets/67p-churyumov-gerasimenko/'},
 
-    {'name': 'Hale-Bopp', 'id': 'C/1995 O1', 'var_name': 'comet_hale_bopp_var', 'color_key': 'Hale-Bopp', 'symbol': 'diamond', 
+    {'name': 'Hale-Bopp', 'key': 'hale_bopp', 'id': 'C/1995 O1', 'horizons_name': 'Hale-Bopp (C/1995 O1)', 'var_name': 'comet_hale_bopp_var', 'color_key': 'Hale-Bopp', 'symbol': 'diamond', 
     'object_type': 'orbital', 'id_type': 'smallbody', 'start_date': datetime(1993, 4, 28), 'end_date': datetime(2022, 7, 9),
     # data arc: 1993-04-27 to 2022-07-09 
     'mission_info': 'Horizons: C/1995 O1. Visible to the naked eye for a record 18 months.', 
@@ -560,32 +575,32 @@ OBJECT_DEFINITIONS = [
     'mission_info': 'Horizons: 2P/Encke. A short-period comet whose dust trail is the source of the Taurid meteor showers.',
     'mission_url': 'https://science.nasa.gov/solar-system/comets/2p-encke/'},
 
-    {'name': 'Hyakutake', 'id': 'C/1996 B2', 'var_name': 'comet_hyakutake_var', 'color_key': 'Hyakutake', 'symbol': 'diamond', 
+    {'name': 'Hyakutake', 'key': 'hyakutake', 'id': 'C/1996 B2', 'horizons_name': 'Hyakutake (C/1996 B2)', 'var_name': 'comet_hyakutake_var', 'color_key': 'Hyakutake', 'symbol': 'diamond', 
     'object_type': 'orbital', 'id_type': 'smallbody', 
     #'start_date': datetime(1996, 1, 2), 'end_date': datetime(1996, 11, 1),
     # data arc: 1996-01-01 to 1996-11-02 
-    'mission_info': 'Horizons: C/1996 B2. Retrograde. Passed very close to Earth in 1996. Retrograde (left-handed) orbit.', 
-    'mission_url': 'https://science.nasa.gov/mission/ulysses/'},
+    'mission_info': 'Horizons: C/1996 B2. Passed very close to Earth in 1996. It goes around the Sun in the opposite direction to the planets.', 
+    'mission_url': 'https://nssdc.gsfc.nasa.gov/planetary/hyakutake.html'},
 
-    {'name': 'Lemmon', 'id': 'C/2025 A6', 'var_name': 'comet_lemmon_var', 'color_key': 'Lemmon', 'symbol': 'diamond', 
+    {'name': 'Lemmon', 'key': 'lemmon', 'id': 'C/2025 A6', 'horizons_name': 'Lemmon (C/2025 A6)', 'var_name': 'comet_lemmon_var', 'color_key': 'Lemmon', 'symbol': 'diamond', 
     'object_type': 'orbital', 'id_type': 'smallbody', 
     # 'start_date': datetime(2024, 11, 12), 'end_date': datetime(2029, 12, 31), # all dates are valid in Horizons
     #  data arc: 2024-11-12 to 2025-10-03
     # PREDICTS-> 2025-DEC-29    Rec #:90004893 (+COV) Soln.date: 2025-Oct-03_14:42:16    # obs: 758 (2024-2025)
-    'mission_info': 'Horizons: C/2025 A6. Retrograde. In Fall 2025, Comet Lemmon is brightening and moving into morning northern skies.', 
+    'mission_info': 'Horizons: C/2025 A6. In fall 2025 it brightened in the morning northern sky. It goes around the Sun in the opposite direction to the planets.', 
     'mission_url': 'https://apod.nasa.gov/apod/ap250930.html'},      
 
-    {'name': 'Ikeya-Seki', 'id': 'C/1965 S1-A', 'var_name': 'comet_ikeya_seki_var', 'color_key': 'Ikeya-Seki', 'symbol': 'diamond', 
+    {'name': 'Ikeya-Seki', 'key': 'ikeya_seki', 'id': 'C/1965 S1-A', 'horizons_name': 'Ikeya-Seki (C/1965 S1-A)', 'var_name': 'comet_ikeya_seki_var', 'color_key': 'Ikeya-Seki', 'symbol': 'diamond', 
     'object_type': 'orbital', 'id_type': 'smallbody', 
     #'start_date': datetime(1965, 9, 22), 'end_date': datetime(1966, 1, 14), 
-    'mission_info': 'Horizons: C/1965 S1-A. Retrograde. One of the brightest comets of the 20th century. Retrograde (left-handed) orbit.', 
-    'mission_url': 'https://sites.google.com/view/tony-quintanilla/comets/ikeya-seki-1965'},
+    'mission_info': 'Horizons: C/1965 S1-A. One of the brightest comets seen in the last thousand years. It goes around the Sun in the opposite direction to the planets.', 
+    'mission_url': 'https://en.wikipedia.org/wiki/Comet_Ikeya%E2%80%93Seki'},
 
-    {'name': 'NEOWISE', 'id': 'C/2020 F3', 'var_name': 'comet_neowise_var', 'color_key': 'NEOWISE', 'symbol': 'diamond', # C/2020 F3
+    {'name': 'NEOWISE', 'key': 'neowise', 'id': 'C/2020 F3', 'horizons_name': 'NEOWISE (C/2020 F3)', 'var_name': 'comet_neowise_var', 'color_key': 'NEOWISE', 'symbol': 'diamond', # C/2020 F3
     'object_type': 'orbital', 'id_type': 'smallbody', 
     #'start_date': datetime(2020, 3, 28), 'end_date': datetime(2021, 6, 1), 
-    'mission_info': 'Horizons: C/2020 F3. Retrograde. Brightest comet visible from the Northern Hemisphere in decades. Retrograde (left-handed) orbit.', 
-    'mission_url': 'https://www.nasa.gov/missions/neowise/nasas-neowise-celebrates-10-years-plans-end-of-mission/'},
+    'mission_info': 'Horizons: C/2020 F3. The brightest comet seen from the Northern Hemisphere since Hale-Bopp in 1997. It goes around the Sun in the opposite direction to the planets.', 
+    'mission_url': 'https://www.nasa.gov/centers-and-facilities/jpl/comet-neowise-sizzles-as-it-slides-by-the-sun-providing-a-treat-for-observers/'},
 
     {'name': 'Wierzchos', 'id': 'C/2024 E1', 'var_name': 'comet_wierzchos_var', 'color_key': 'Wierzchos', 'symbol': 'diamond',
     'object_type': 'orbital', 'id_type': 'smallbody',
@@ -595,11 +610,11 @@ OBJECT_DEFINITIONS = [
     'mission_info': 'Horizons: C/2024 E1. CO2-driven Oort Cloud comet. Perihelion Jan 20, 2026 at 0.56 AU. Multiple dust tails post-perihelion.',
     'mission_url': 'https://apod.nasa.gov/apod/ap260217.html'},
 
-    {'name': 'SWAN', 'id': 'C/2025 R2', 'var_name': 'comet_c2025r2_var', 'color_key': 'SWAN', 'symbol': 'diamond', 
+    {'name': 'SWAN', 'key': 'swan', 'id': 'C/2025 R2', 'horizons_name': 'SWAN (C/2025 R2)', 'var_name': 'comet_c2025r2_var', 'color_key': 'SWAN', 'symbol': 'diamond', 
     'object_type': 'orbital', 'id_type': 'smallbody', 
     #'start_date': datetime(2025, 8, 14), 'end_date': datetime(2025, 9, 14),
     # data arc: data arc: 2025-08-13 to 2025-09-14;  EOP coverage    : DATA-BASED 1962-JAN-20 TO 2025-SEP-19. PREDICTS-> 2025-DEC-15
-    'mission_info': 'Horizons: C/2025 R2 (SWAN). This is a non-periodic comet that was discovered on September 11, 2025.', 
+    'mission_info': 'Horizons: C/2025 R2 (SWAN). A long-period comet, discovered on September 11, 2025.', 
     'mission_url': 'https://en.wikipedia.org/wiki/C/2025_R2_(SWAN)'},     
 
     {'name': '6AC4721', 'id': 'none', 'var_name': 'comet_6ac4721_var', 'color_key': '6AC4721', 'symbol': 'diamond',    # C/2026 A1 in Horizons
@@ -608,7 +623,7 @@ OBJECT_DEFINITIONS = [
     'mission_info': 'Kreutz sungrazer found at an unusually large distance from the Sun. Discovered by the 6AC4721 survey.',  
     'mission_url': 'https://en.wikipedia.org/wiki/C/2026_A1_(MAPS)'},      
 
-    {'name': 'MAPS', 'id': 'C/2026 A1', 'var_name': 'comet_c2026a1_var', 'color_key': 'MAPS', 'symbol': 'diamond',    # C/2026 A1 in Horizons
+    {'name': 'MAPS', 'key': 'maps', 'id': 'C/2026 A1', 'horizons_name': 'MAPS (C/2026 A1)', 'var_name': 'comet_c2026a1_var', 'color_key': 'MAPS', 'symbol': 'diamond',    # C/2026 A1 in Horizons
     'object_type': 'orbital', 'id_type': 'smallbody', 
     'mission_info': 'Kreutz sungrazer comet discovered on 13 January 2026 from the AMACS1 Observatory in the Atacama Desert, Chile.', 
     'mission_url': 'https://en.wikipedia.org/wiki/C/2026_A1_(MAPS)'},      

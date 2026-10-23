@@ -1,14 +1,25 @@
 ---
 name: interactive-exhibit
 description: How an interactive exhibit (a room in interactive.html such as ?exhibit=sun) is designed, built, verified and carded for the Paloma's Orrery gallery. Covers the exhibit switch and boot path, the assembler driver spec, the JS feature handoff, the shared chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent gate, back link), what is per-body, the served-data provenance contract, what a room opens on (the arrival block) and the shell-key stamp the renderers apply, the drawer order, who may write data/objects_config.json, the Mode 5 phone sequence, and carding an exhibit through Studio. Use when adding or changing an exhibit (Earth, Jupiter, the stars), touching sun* chrome in interactive.html, deciding what an exhibit may render, or editing the served words with store_writer or exhibit_store_editor. Not for propagation math (gallery-assembler), the nightly builder (gallery-cache-builder), or the Studio/converter chain (gallery-pipeline). Do not use for projects other than Paloma's Orrery.
-fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, See more, Home's order and its framing; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia); a served number's citation and its source_note; the Typed facts check (smoke_typed_facts.js); a feature drawn as stored dots (the Hills cloud, Earth's radiation belts); the i panel's source list and its links (source_list.js); the order a room's drawer lists its shells in, where each begins (drawer_order.js, the Drawer order check)
+fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, See more, its group rows, Home's order and its framing; a bare interactive.html link and the Explorer's address; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia); a served number's citation and its source_note; the Typed facts check (smoke_typed_facts.js); a feature drawn as stored dots (the Hills cloud, Earth's radiation belts); the i panel's source list and its links (source_list.js); the order a room's drawer lists its shells in, where each begins (drawer_order.js, the Drawer order check)
 ---
 
 # Interactive Exhibit
 
-Read this file in 6 parts: lines 1-143, 144-147, 148-389, 390-643, 644-868, 869-1037.
+Read this file in 6 parts: lines 1-146, 147-150, 151-392, 393-652, 653-914, 915-1085.
 
-Skill version: 1.20 | 2026-10-22, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.21 | 2026-10-22, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ bfb6c474 and gallery @ 0bb34344. v1.21 (L-443, slice 1
+of the objects) records three of Tony's rulings of the day. The Solar
+System room's drawer has GROUP rows that fold open to list their bodies
+("B. this is the right view"), each group JPL's own class for its
+bodies, a room being for a body with more than its symbol. Every comet
+is drawn from its elements of today, Encke and Halley too, since a
+perihelion anchor is trusted only near its date. And a bare
+interactive.html link opens the Solar System room; the Explorer is at
+?exhibit=solar-system-explorer (stage 10). The anatomy table's
+"default solar-system-explorer" is corrected.
+Earlier: 1.20 | 2026-10-22, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ b995472a and gallery @ d7195704. v1.20 (L-434, L-465,
 L-468, L-460) records four things from one day's build. The galactic
 tide and the outer Oort cloud are stored drawings now, placed once by
@@ -30,18 +41,10 @@ way. Tony, 2026-10-20: "basically when we reach that shell's
 distance, that is its place in the order"; and 2026-10-21: "this is
 not a visual judgement." The order is only as right as the drawing,
 so it rests on the gallery run's Drawn ends check.
-Earlier: 1.18 | 2026-10-20, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ e8e714da and gallery @ ca5339fd. v1.18 (L-456) records
-that the i panel lists a feature's sources one to a line, each after its
-label, every web address a link a visitor can tap: the renderers serve
-gathered citations as a list, `source_items`, beside the joined
-`source` line, and gallery/source_list.js decides what the list holds
-and where an address ends (Tony from his phone, 2026-10-20: "need
-hyperlinks" and "need some kind of itemization for readability").
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
 on 2026-10-05 (L-418), 2026-10-10 (L-429), 2026-10-14 (L-431),
 2026-10-16 (L-421), 2026-10-17 (L-452), 2026-10-20 (L-456),
-2026-10-21 (L-460) and 2026-10-22 (L-434).
+2026-10-21 (L-460) and 2026-10-22 (L-434, L-443).
 
 ## Contents
 
@@ -99,7 +102,7 @@ the new exhibit brings its own.
 
 | Piece | Where | Shared or per-body |
 |---|---|---|
-| `EXHIBIT` switch: `?exhibit=` lower-cased, default `solar-system-explorer`; `EX = EXHIBITS[EXHIBIT]` is the room | interactive.html, `const EXHIBITS` | shared; a new room adds one ROW to `EXHIBITS` -- title, sceneTitle, pngName, halfRangeAu, driver, infoHtml, compose (since Earth step 3, L-291; at fc8d9fb3 it was one `EXHIBIT === "<key>"` branch per room) |
+| `EXHIBIT` switch: `?exhibit=` lower-cased, default `solar-system` since 2026-10-22 (L-443, stage 10; until then `solar-system-explorer`); `EX = EXHIBITS[EXHIBIT]` is the room, and a key that is no room opens the Explorer, whose card links to `EXPLORER_EXHIBIT`, `solar-system-explorer` | interactive.html, `const EXHIBITS` | shared; a new room adds one ROW to `EXHIBITS` -- title, sceneTitle, pngName, halfRangeAu, driver, infoHtml, compose (since Earth step 3, L-291; at fc8d9fb3 it was one `EXHIBIT === "<key>"` branch per room) |
 | `body.sun-exhibit` class and `.sun-chrome` show/hide rule, added for EVERY room | `applySunChrome()`, CSS | shared; the name stays `sun` until the rename (L-309) -- at fc8d9fb3 this row read per-body `body.<key>-exhibit` |
 | Assembler modules list and the DRIVER: `assemble_scene({domain, content_type, objects, center, epoch}, Catalog(objects_config), CacheReader(coverage_index))` | `SUN_ASSEMBLER_MODULES`, `SUN_DRIVER` | shared code; per-body spec (`objects`, `center`) |
 | Data read at boot: `data/solar-system/coverage_index.json`, `data/objects_config.json` | `initSunExhibit()` | shared |
@@ -432,7 +435,9 @@ top-level `"rooms"` section** (v1.7; Tony's ruling of 2026-09-30,
 The Solar System room's entry holds `arrival` -- `drawn`, the slugs
 ticked on opening, and `highlight`, the row highlighted and named on the
 closed drawer's handle -- and `drawer.rows`, its rows by slug in order
-outward from the Sun, each optionally `see_more`. A row may carry the
+outward from the Sun, each optionally `see_more`. Since v1.21 a row may
+be a GROUP row, `group` and `label`, and a body row names its group in
+`in` (the next section). A row may carry the
 WORDS a visitor sees for it: `label`, the name shown when it is not the
 served name; `about`, a sentence for the text box and the panel; and
 `source_note`, what the Horizons id in the source line is. Pluto's row
@@ -501,6 +506,47 @@ Plotly.
 - **Rows are found by the group they name** (`data-k`), never by their
   place in the list: opened rows and the See more button sit between
   them. `renderSunDrawer` does this for every room.
+- **Groups fold open** (v1.21, L-443; Tony, 2026-10-22, at the mock-up:
+  "B. this is the right view. the "room" would only apply if the
+  object has additional features beyond the symbol such as future moon
+  shells, or spacecraft encounters, or comet perihelion encounters, or
+  asteroid near earth encounters, etc."). A served row `{group, label}`
+  gathers the body rows that name it in `in`, listed after it. It sits
+  behind See more when served so, and shows while any of its bodies is
+  ticked. Its name folds it open or shut and moves nothing; folded, its
+  bodies hide, open, they show indented under it with an "All / none in
+  <label>" button. Its box ticks every body in it if any is off, else
+  unticks them all, and the frame then holds everything drawn. Its line
+  counts its bodies, and how many are ticked. A group is never a body:
+  it is not counted, ticked by All / none, or offered a room.
+  `"order": "a"` lists its bodies by their served semi-major axis,
+  nearest first (`orderGroups`, from each body's `a_au`, which the
+  driver now hands the page); without it they keep the served order,
+  the comets' by first apparition. Each group is JPL's own class for
+  its bodies (the Small-Body Database's orbit class: TNO, MBA, APO and
+  AMO, TJN, CEN, JFc and COM), not a judgement. This supersedes the
+  front-door design's line that a group's bodies appear only in the
+  group's room (2026-09-29): a group may still get a room, with a cloud
+  drawn, when it has more than its bodies to show. The logic is in
+  `gallery/solar_system_drawer.js` (`rowsFromServed`, `rowVisible`,
+  `groupCount`, `groupToggle`, `orderGroups`); the page's part is
+  `ssBuildRows`, `ssGroupTick`, `ssFold`. Checked by the drawer check's
+  section 4, with two planted faults, and walked headlessly
+  (`walk_solar_system_drawer.js`, section 15).
+- **Every comet is drawn from its elements of today** (v1.21; Tony's
+  ruling of 2026-10-22, "Yes"). A comet anchored at perihelion
+  (`overrides.comet.anchor: "Tp"`) is trusted only for a span around
+  that date: Encke's had ended in May 2025 and Halley's in February
+  2024, which is why neither was in the drawer. Anchored at today, the
+  marker is where the comet is now, and the ellipse is today's orbit.
+  The builder keeps the perihelion path, held by its offline tests on a
+  copy of the config; a comet's own room can show the perihelion orbit
+  later.
+- **The front door** (v1.21, stage 10; Tony's ruling of 2026-10-01): a
+  bare `interactive.html` opens this room. The Explorer's card links to
+  `interactive.html?exhibit=solar-system-explorer`, and
+  `tools/json_converter.py`'s scene list reads the page's
+  `EXPLORER_EXHIBIT` to offer it.
 
 **FRAMING, Tony's ruling of 2026-10-02** ("B but with a buffer of
 20%"): the room frames on how far each body is from the Sun NOW, not
@@ -1034,4 +1080,6 @@ session that loaded 1.16; the next session confirms its loaded copy
 reads 1.17 before exhibit work. 1.19 was cut in a session that loaded
 1.18; the next session confirms its loaded copy reads 1.19 before
 exhibit work. 1.20 was cut in a session that loaded 1.19; the next
-session confirms its loaded copy reads 1.20 before exhibit work.
+session confirms its loaded copy reads 1.20 before exhibit work. 1.21
+was cut in a session that loaded 1.20; the next session confirms its
+loaded copy reads 1.21 before exhibit work.

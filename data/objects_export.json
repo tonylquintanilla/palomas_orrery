@@ -1,8 +1,8 @@
 {
   "schema": 2,
-  "source_sha256": "57ba8161e6f0a2104ed556a7cbf7cbaa46b3f7d95aa1e93da4c7dd412d12cc24",
-  "period_inputs_sha256": "97ee8ccfc2972cef170fd3adae1b9a7e33d01cd4067bce4e8ad15cfc7a0d7ae4",
-  "confirmations_sha256": "881563c5576713866394d82c6f34d38ea69ec8cfbb54af80286dad898e93517a",
+  "source_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+  "period_inputs_sha256": "c3079ced513385218f81bb3feee806fa4389e93f7775aeeb3f6735c9e722669a",
+  "confirmations_sha256": "58e8def00dea8385ed62cd7b384adb49cd837c6d3188282e2425258dd80e862f",
   "cadence_days": 30,
   "objects": {
     "sun": {
@@ -349,6 +349,379 @@
         }
       }
     },
+    "eurybates": {
+      "name": "Eurybates",
+      "horizons_id": "1973 SO",
+      "horizons_name": "3548 Eurybates",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "Lucy flies past it on August 11, 2027. A C-type (carbon-rich) asteroid with a small moon, Queta.",
+      "info_url": "https://en.wikipedia.org/wiki/3548_Eurybates",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@0",
+        "center_label": "the solar system's center of mass",
+        "target": "1973 SO",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 11.919,
+          "figures": 5,
+          "text": "11.919"
+        },
+        "days": {
+          "value": 4353.0,
+          "figures": 4,
+          "text": "4353"
+        },
+        "record": {
+          "days": 4353.268679654878,
+          "error_days": 0.3779520956313718,
+          "error_from": "year_change",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 5.220019810266435,
+            "e": 0.09050339529746884,
+            "i": 8.05037605033011,
+            "omega": 28.45440515862585,
+            "Omega": 43.59713728850317,
+            "TP": 2459676.427008433,
+            "MA": 137.2705364492556,
+            "TA": 143.7525255340553,
+            "q": 4.747590293917274,
+            "epoch": "2026-10-22 20:37 osc."
+          },
+          "paired": true,
+          "sun_elements": {
+            "a": 5.218096254059823,
+            "e": 0.09043107750690757,
+            "i": 8.050824951696217,
+            "omega": 28.73052264634445,
+            "Omega": 43.55977848936051,
+            "epoch": "2026-10-22 20:37 osc.",
+            "TP": 2459679.977669028,
+            "MA": 136.9607984676256,
+            "TA": 143.4781830710924
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "1973 SO",
+          "id_type": "smallbody",
+          "horizons_name": "3548 Eurybates"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@0",
+          "epoch": "2026-10-22 20:37",
+          "days": 4353.268679654878,
+          "jpl_days": 4353.268679654878,
+          "error_days": 0.3779520956313718
+        }
+      }
+    },
+    "patroclus": {
+      "name": "Patroclus",
+      "horizons_id": "A906 UL",
+      "horizons_name": "617 Patroclus",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "Two Jupiter Trojans of nearly the same size, Patroclus and Menoetius, orbiting each other. Lucy flies past them in March 2033.",
+      "info_url": "https://en.wikipedia.org/wiki/617_Patroclus",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@sun",
+        "center_label": "the Sun",
+        "target": "A906 UL",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 11.879,
+          "figures": 5,
+          "text": "11.879"
+        },
+        "days": {
+          "value": 4338.9,
+          "figures": 5,
+          "text": "4338.9"
+        },
+        "record": {
+          "days": 4338.918430996448,
+          "error_days": 0.13339161562544177,
+          "error_from": "year_change",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 5.206214282283972,
+            "e": 0.138988445299818,
+            "i": 22.06241280777391,
+            "omega": 308.8897330286732,
+            "Omega": 44.34795858827933,
+            "TP": 2460493.663158033,
+            "MA": 69.91846422855483,
+            "TA": 85.62308820028183,
+            "q": 4.482610653291616,
+            "epoch": "2026-10-22 20:37 osc."
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "A906 UL",
+          "id_type": "smallbody",
+          "horizons_name": "617 Patroclus"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@sun",
+          "epoch": "2026-10-22 20:37",
+          "days": 4338.918430996448,
+          "jpl_days": 4338.918430996448,
+          "error_days": 0.13339161562544177
+        }
+      }
+    },
+    "polymele": {
+      "name": "Polymele",
+      "horizons_id": "1999 WB2",
+      "horizons_name": "15094 Polymele",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "Lucy flies past it in September 2027. A P-type (primitive) asteroid with a small moon, Shaun, found in 2022 when Polymele passed in front of a star.",
+      "info_url": "https://en.wikipedia.org/wiki/15094_Polymele",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@0",
+        "center_label": "the solar system's center of mass",
+        "target": "1999 WB2",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 11.83,
+          "figures": 5,
+          "text": "11.830"
+        },
+        "days": {
+          "value": 4321.0,
+          "figures": 4,
+          "text": "4321"
+        },
+        "record": {
+          "days": 4320.940289044181,
+          "error_days": 0.36346864523511613,
+          "error_from": "year_change",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 5.194144326340649,
+            "e": 0.09593549443230882,
+            "i": 12.97403604838625,
+            "omega": 5.626659358418658,
+            "Omega": 50.36474802343164,
+            "TP": 2459475.61299872,
+            "MA": 155.0284256783413,
+            "TA": 159.2092688719824,
+            "q": 4.695841522240388,
+            "epoch": "2026-10-22 20:37 osc."
+          },
+          "paired": true,
+          "sun_elements": {
+            "a": 5.192235501587458,
+            "e": 0.09574708022554287,
+            "i": 12.97634558614215,
+            "omega": 5.865111966717409,
+            "Omega": 50.33270575994106,
+            "epoch": "2026-10-22 20:37 osc.",
+            "TP": 2459478.742110314,
+            "MA": 154.7492874587641,
+            "TA": 158.9672199691536
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "1999 WB2",
+          "id_type": "smallbody",
+          "horizons_name": "15094 Polymele"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@0",
+          "epoch": "2026-10-22 20:37",
+          "days": 4320.940289044181,
+          "jpl_days": 4320.940289044181,
+          "error_days": 0.36346864523511613
+        }
+      }
+    },
+    "leucus": {
+      "name": "Leucus",
+      "horizons_id": "1997 TS25",
+      "horizons_name": "11351 Leucus",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "Lucy flies past it on April 18, 2028. A D-type asteroid with a dark, primitive surface, which rotates very slowly.",
+      "info_url": "https://en.wikipedia.org/wiki/11351_Leucus",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@0",
+        "center_label": "the solar system's center of mass",
+        "target": "1997 TS25",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 12.237,
+          "figures": 5,
+          "text": "12.237"
+        },
+        "days": {
+          "value": 4470.0,
+          "figures": 4,
+          "text": "4470"
+        },
+        "record": {
+          "days": 4469.563443306468,
+          "error_days": 0.3586617740129441,
+          "error_from": "year_change",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 5.312577034255686,
+            "e": 0.06532007808146166,
+            "i": 11.53691469941435,
+            "omega": 161.9572492526816,
+            "Omega": 251.113803750177,
+            "TP": 2459466.603294726,
+            "MA": 150.5990623998238,
+            "TA": 154.0270083938613,
+            "q": 4.965559087564325,
+            "epoch": "2026-10-22 20:37 osc."
+          },
+          "paired": true,
+          "sun_elements": {
+            "a": 5.312953408371887,
+            "e": 0.06479930483999624,
+            "i": 11.54305597161913,
+            "omega": 162.3798263658123,
+            "Omega": 251.0821032312511,
+            "epoch": "2026-10-22 20:37 osc.",
+            "TP": 2459470.816091997,
+            "MA": 150.1430768887008,
+            "TA": 153.5944525587777
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "1997 TS25",
+          "id_type": "smallbody",
+          "horizons_name": "11351 Leucus"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@0",
+          "epoch": "2026-10-22 20:37",
+          "days": 4469.563443306468,
+          "jpl_days": 4469.563443306468,
+          "error_days": 0.3586617740129441
+        }
+      }
+    },
+    "orus": {
+      "name": "Orus",
+      "horizons_id": "1999 VQ10",
+      "horizons_name": "21900 Orus",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "Lucy flies past it on November 11, 2028, its last stop among the Trojans that lead Jupiter. A D-type asteroid.",
+      "info_url": "https://en.wikipedia.org/wiki/21900_Orus",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@0",
+        "center_label": "the solar system's center of mass",
+        "target": "1999 VQ10",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 11.5742,
+          "figures": 6,
+          "text": "11.5742"
+        },
+        "days": {
+          "value": 4227.5,
+          "figures": 5,
+          "text": "4227.5"
+        },
+        "record": {
+          "days": 4227.481372278889,
+          "error_days": 0.03285546479128243,
+          "error_from": "year_change",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 5.118974562549122,
+            "e": 0.0371015547903291,
+            "i": 8.46465983378839,
+            "omega": 180.874125641602,
+            "Omega": 258.5886595735502,
+            "TP": 2460039.803997069,
+            "MA": 110.4108498539456,
+            "TA": 114.3289371525413,
+            "q": 4.929052647346406,
+            "epoch": "2026-10-22 20:37 osc."
+          },
+          "paired": true,
+          "sun_elements": {
+            "a": 5.123124669163655,
+            "e": 0.03658556528171578,
+            "i": 8.468679798506047,
+            "omega": 182.6643550802878,
+            "Omega": 258.5488072456443,
+            "epoch": "2026-10-22 20:37 osc.",
+            "TP": 2460058.50122867,
+            "MA": 108.6136016526526,
+            "TA": 112.5264746058388
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "1999 VQ10",
+          "id_type": "smallbody",
+          "horizons_name": "21900 Orus"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@0",
+          "epoch": "2026-10-22 20:37",
+          "days": 4227.481372278889,
+          "jpl_days": 4227.481372278889,
+          "error_days": 0.03285546479128243
+        }
+      }
+    },
     "saturn": {
       "name": "Saturn",
       "horizons_id": "699",
@@ -580,6 +953,83 @@
         }
       }
     },
+    "chariklo": {
+      "name": "Chariklo",
+      "horizons_id": "1997 CU26",
+      "horizons_name": "10199 Chariklo",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "Large Centaur.",
+      "info_url": "https://science.nasa.gov/solar-system/asteroids/10199-chariklo/",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@0",
+        "center_label": "the solar system's center of mass",
+        "target": "1997 CU26",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 62.486,
+          "figures": 5,
+          "text": "62.486"
+        },
+        "days": {
+          "value": 22823.0,
+          "figures": 5,
+          "text": "22,823"
+        },
+        "record": {
+          "days": 22822.87186136115,
+          "error_days": 0.27082879884983413,
+          "error_from": "year_change",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 15.75343858925072,
+            "e": 0.1703568363073771,
+            "i": 23.396136262077,
+            "omega": 241.6527257682798,
+            "Omega": 300.4195194033537,
+            "TP": 2452984.100354278,
+            "MA": 131.7456076836082,
+            "TA": 144.393718546654,
+            "q": 13.06973263022342,
+            "epoch": "2026-10-22 20:37 osc."
+          },
+          "paired": true,
+          "sun_elements": {
+            "a": 15.73241969550315,
+            "e": 0.1710867325910595,
+            "i": 23.43133593753792,
+            "omega": 241.2230466851185,
+            "Omega": 300.4762387754826,
+            "epoch": "2026-10-22 20:37 osc.",
+            "TP": 2452966.951481651,
+            "MA": 132.1921008753839,
+            "TA": 144.7860600153438
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "1997 CU26",
+          "id_type": "smallbody",
+          "horizons_name": "10199 Chariklo"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@0",
+          "epoch": "2026-10-22 20:37",
+          "days": 22822.87186136115,
+          "jpl_days": 22822.87186136115,
+          "error_days": 0.27082879884983413
+        }
+      }
+    },
     "pluto_barycenter": {
       "name": "Pluto-Charon Barycenter",
       "horizons_id": "9",
@@ -607,6 +1057,1333 @@
           "horizons_name": "Pluto Barycenter"
         },
         "period": null
+      }
+    },
+    "ceres": {
+      "name": "Ceres",
+      "horizons_id": "A801 AA",
+      "horizons_name": "1 Ceres",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "NASA: \"Ceres was the first object discovered in the main asteroid belt and is named for the Roman goddess of agriculture.\" NASA's Dawn spacecraft went into orbit around it in 2015.",
+      "info_url": "https://science.nasa.gov/dwarf-planets/ceres/",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@sun",
+        "center_label": "the Sun",
+        "target": "A801 AA",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 4.6,
+          "figures": 3,
+          "text": "4.60"
+        },
+        "days": {
+          "value": 1680.0,
+          "figures": 4,
+          "text": "1680"
+        },
+        "record": {
+          "days": 1680.408249057453,
+          "error_days": 1.0816514196978915,
+          "error_from": "year_change",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 2.766161836683337,
+            "e": 0.07979402100342009,
+            "i": 10.58710753327099,
+            "omega": 73.15727541096646,
+            "Omega": 80.24880532877276,
+            "TP": 2461599.285109748,
+            "MA": 303.6723846348406,
+            "TA": 295.6449612266621,
+            "q": 2.545438660988168,
+            "epoch": "2026-10-22 20:37 osc."
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "A801 AA",
+          "id_type": "smallbody",
+          "horizons_name": "1 Ceres"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@sun",
+          "epoch": "2026-10-22 20:37",
+          "days": 1680.408249057453,
+          "jpl_days": 1680.408249057453,
+          "error_days": 1.0816514196978915
+        }
+      }
+    },
+    "haumea": {
+      "name": "Haumea",
+      "horizons_id": "2003 EL61",
+      "horizons_name": "136108 Haumea",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "A dwarf planet with rings, spinning about once every 4 hours, fast enough to stretch it into an oval like a football.",
+      "info_url": "https://science.nasa.gov/dwarf-planets/haumea/",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@0",
+        "center_label": "the solar system's center of mass",
+        "target": "2003 EL61",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 282.793,
+          "figures": 6,
+          "text": "282.793"
+        },
+        "days": {
+          "value": 103290.2,
+          "figures": 7,
+          "text": "103,290.2"
+        },
+        "record": {
+          "days": 103290.2392277069,
+          "error_days": 0.14556,
+          "error_from": "sigma",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 43.10239063164502,
+            "e": 0.1950262430263202,
+            "i": 28.20482534828446,
+            "omega": 239.9473689778698,
+            "Omega": 121.9464077445815,
+            "TP": 2500198.436562946,
+            "MA": 224.553049569202,
+            "TA": 211.3202642937111,
+            "q": 34.69629332130244,
+            "epoch": "2026-10-22 20:37 osc."
+          },
+          "paired": true,
+          "sun_elements": {
+            "a": 43.0919048428331,
+            "e": 0.1937406258877409,
+            "i": 28.20847632868146,
+            "omega": 240.5497403421181,
+            "Omega": 121.7860536187065,
+            "epoch": "2026-10-22 20:37 osc.",
+            "TP": 2500419.975236276,
+            "MA": 223.8225255006678,
+            "TA": 210.8549978704146
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "2003 EL61",
+          "id_type": "smallbody",
+          "horizons_name": "136108 Haumea"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@0",
+          "epoch": "2026-10-22 20:37",
+          "days": 103290.2392277069,
+          "jpl_days": 103290.2392277069,
+          "error_days": 0.14556
+        }
+      }
+    },
+    "eris": {
+      "name": "Eris",
+      "horizons_id": "2003 UB313",
+      "horizons_name": "136199 Eris",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "The most massive known dwarf planet, about the same size as Pluto.",
+      "info_url": "https://science.nasa.gov/dwarf-planets/eris/",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@0",
+        "center_label": "the solar system's center of mass",
+        "target": "2003 UB313",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 558.34,
+          "figures": 5,
+          "text": "558.34"
+        },
+        "days": {
+          "value": 203934.0,
+          "figures": 6,
+          "text": "203,934"
+        },
+        "record": {
+          "days": 203933.7197943077,
+          "error_days": 1.1493,
+          "error_from": "sigma",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 67.83510948927646,
+            "e": 0.4384310461903749,
+            "i": 43.99297011391076,
+            "omega": 151.2211385886349,
+            "Omega": 35.97647443790755,
+            "TP": 2545669.897035162,
+            "MA": 211.1277403595622,
+            "TA": 193.721409515248,
+            "q": 38.09409146745436,
+            "epoch": "2026-10-22 20:37 osc."
+          },
+          "paired": true,
+          "sun_elements": {
+            "a": 67.8992341311219,
+            "e": 0.4388844330241655,
+            "i": 43.95818781973733,
+            "omega": 150.8417445117369,
+            "Omega": 35.9921645589212,
+            "epoch": "2026-10-22 20:37 osc.",
+            "TP": 2545368.474398772,
+            "MA": 211.9692100535334,
+            "TA": 194.0915249236448
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "2003 UB313",
+          "id_type": "smallbody",
+          "horizons_name": "136199 Eris"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@0",
+          "epoch": "2026-10-22 20:37",
+          "days": 203933.7197943077,
+          "jpl_days": 203933.7197943077,
+          "error_days": 1.1493
+        }
+      }
+    },
+    "gonggong": {
+      "name": "Gonggong",
+      "horizons_id": "2007 OR10",
+      "horizons_name": "225088 Gonggong",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "Dwarf planet with a highly inclined orbit.",
+      "info_url": "https://en.wikipedia.org/wiki/Gonggong_(dwarf_planet)",
+      "period": {
+        "kind": "typed",
+        "typed": true,
+        "center": null,
+        "center_label": null,
+        "open_orbit": false,
+        "fetched": null,
+        "words": "Typed value, not fetched from JPL.",
+        "years": {
+          "value": 550.33662,
+          "figures": 8,
+          "text": "550.33662"
+        },
+        "days": {
+          "value": 201010.45,
+          "figures": 8,
+          "text": "201010.45"
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "2007 OR10",
+          "id_type": "smallbody",
+          "horizons_name": "225088 Gonggong"
+        },
+        "period": null
+      }
+    },
+    "makemake": {
+      "name": "Makemake",
+      "horizons_id": "2005 FY9",
+      "horizons_name": "136472 Makemake",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "Makemake is a dwarf planet slightly smaller than Pluto, and is the second-brightest object in the Kuiper Belt.",
+      "info_url": "https://science.nasa.gov/dwarf-planets/makemake/",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@0",
+        "center_label": "the solar system's center of mass",
+        "target": "2005 FY9",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 306.701,
+          "figures": 6,
+          "text": "306.701"
+        },
+        "days": {
+          "value": 112022.0,
+          "figures": 6,
+          "text": "112,022"
+        },
+        "record": {
+          "days": 112022.3651480326,
+          "error_days": 0.19844,
+          "error_from": "sigma",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 45.49863086938659,
+            "e": 0.1603880453617346,
+            "i": 29.00208590800032,
+            "omega": 296.0652914538066,
+            "Omega": 79.44143372887075,
+            "TP": 2407946.416440787,
+            "MA": 171.5762678811298,
+            "TA": 173.8204011746032,
+            "q": 38.2011943976106,
+            "epoch": "2026-10-22 20:37 osc."
+          },
+          "paired": true,
+          "sun_elements": {
+            "a": 45.60147008210138,
+            "e": 0.1580961747082298,
+            "i": 29.02455206512045,
+            "omega": 297.0624837796373,
+            "Omega": 79.31371955981835,
+            "epoch": "2026-10-22 20:37 osc.",
+            "TP": 2408095.100808964,
+            "MA": 170.4057005269634,
+            "TA": 172.9296505111648
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "2005 FY9",
+          "id_type": "smallbody",
+          "horizons_name": "136472 Makemake"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@0",
+          "epoch": "2026-10-22 20:37",
+          "days": 112022.3651480326,
+          "jpl_days": 112022.3651480326,
+          "error_days": 0.19844
+        }
+      }
+    },
+    "mani": {
+      "name": "Mani",
+      "horizons_id": "2002 MS4",
+      "horizons_name": "307261 Mani",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "One of the largest Kuiper Belt objects with no known moons.",
+      "info_url": "https://en.wikipedia.org/wiki/307261_Mani",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@0",
+        "center_label": "the solar system's center of mass",
+        "target": "2002 MS4",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 269.467,
+          "figures": 6,
+          "text": "269.467"
+        },
+        "days": {
+          "value": 98422.7,
+          "figures": 6,
+          "text": "98,422.7"
+        },
+        "record": {
+          "days": 98422.6762328787,
+          "error_days": 0.10043,
+          "error_from": "sigma",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 41.7373895634387,
+            "e": 0.1452750229253031,
+            "i": 17.69305874176331,
+            "omega": 214.5796264303133,
+            "Omega": 216.0736082842284,
+            "TP": 2496405.258059175,
+            "MA": 231.7287099424991,
+            "TA": 220.0647190277699,
+            "q": 35.67398933776784,
+            "epoch": "2026-10-22 20:37 osc."
+          },
+          "paired": true,
+          "sun_elements": {
+            "a": 41.59168166153932,
+            "e": 0.1479041846843357,
+            "i": 17.69765708452086,
+            "omega": 215.5834335719686,
+            "Omega": 216.113755705158,
+            "epoch": "2026-10-22 20:37 osc.",
+            "TP": 2496530.97294351,
+            "MA": 230.6785520151866,
+            "TA": 219.0262492869087
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "2002 MS4",
+          "id_type": "smallbody",
+          "horizons_name": "307261 Mani"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@0",
+          "epoch": "2026-10-22 20:37",
+          "days": 98422.6762328787,
+          "jpl_days": 98422.6762328787,
+          "error_days": 0.10043
+        }
+      }
+    },
+    "orcus": {
+      "name": "Orcus",
+      "horizons_id": "2004 DW",
+      "horizons_name": "90482 Orcus",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "A dwarf planet with a large moon, Vanth, about 16% of its mass: the highest share of any known planet or dwarf planet and its moon.",
+      "info_url": "https://en.wikipedia.org/wiki/Orcus_(dwarf_planet)",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@0",
+        "center_label": "the solar system's center of mass",
+        "target": "2004 DW",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 246.02,
+          "figures": 6,
+          "text": "246.020"
+        },
+        "days": {
+          "value": 89858.8,
+          "figures": 6,
+          "text": "89,858.8"
+        },
+        "record": {
+          "days": 89858.84252528189,
+          "error_days": 0.075379,
+          "error_from": "sigma",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 39.27978027780237,
+            "e": 0.2238480806020022,
+            "i": 20.56753279310847,
+            "omega": 73.0227323616761,
+            "Omega": 268.5830762026716,
+            "TP": 2503697.438452526,
+            "MA": 190.2895055807236,
+            "TA": 186.7042039057086,
+            "q": 30.48707685614793,
+            "epoch": "2026-10-22 20:37 osc."
+          },
+          "paired": true,
+          "sun_elements": {
+            "a": 39.39623507692652,
+            "e": 0.2199755199514517,
+            "i": 20.55787253175957,
+            "omega": 73.46320517930754,
+            "Omega": 268.4219646593126,
+            "epoch": "2026-10-22 20:37 osc.",
+            "TP": 2504045.873030025,
+            "MA": 189.7658748747855,
+            "TA": 186.4083834020195
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "2004 DW",
+          "id_type": "smallbody",
+          "horizons_name": "90482 Orcus"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@0",
+          "epoch": "2026-10-22 20:37",
+          "days": 89858.84252528189,
+          "jpl_days": 89858.84252528189,
+          "error_days": 0.075379
+        }
+      }
+    },
+    "quaoar": {
+      "name": "Quaoar",
+      "horizons_id": "2002 LM60",
+      "horizons_name": "50000 Quaoar",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "Kuiper Belt dwarf planet with a ring system, announced in 2023.",
+      "info_url": "https://en.wikipedia.org/wiki/50000_Quaoar",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@0",
+        "center_label": "the solar system's center of mass",
+        "target": "2002 LM60",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 285.085,
+          "figures": 6,
+          "text": "285.085"
+        },
+        "days": {
+          "value": 104127.2,
+          "figures": 7,
+          "text": "104,127.2"
+        },
+        "record": {
+          "days": 104127.2108388088,
+          "error_days": 0.10339,
+          "error_from": "sigma",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 43.334919420903,
+            "e": 0.03693084461313904,
+            "i": 7.990820326872258,
+            "omega": 157.5557845389652,
+            "Omega": 188.9125968118242,
+            "TP": 2478981.745686332,
+            "MA": 298.9944362678347,
+            "TA": 295.2109934521555,
+            "q": 41.73452424544673,
+            "epoch": "2026-10-22 20:37 osc."
+          },
+          "paired": true,
+          "sun_elements": {
+            "a": 43.16858592731569,
+            "e": 0.03494080623870918,
+            "i": 7.991719002347415,
+            "omega": 162.5441371163219,
+            "Omega": 188.8957978561196,
+            "epoch": "2026-10-22 20:37 osc.",
+            "TP": 2480339.544129247,
+            "MA": 293.9643072066607,
+            "TA": 290.2421254660933
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "2002 LM60",
+          "id_type": "smallbody",
+          "horizons_name": "50000 Quaoar"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@0",
+          "epoch": "2026-10-22 20:37",
+          "days": 104127.2108388088,
+          "jpl_days": 104127.2108388088,
+          "error_days": 0.10339
+        }
+      }
+    },
+    "sedna": {
+      "name": "Sedna",
+      "horizons_id": "2003 VB12",
+      "horizons_name": "90377 Sedna",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "A distant trans-Neptunian dwarf planet with an extremely long orbit.",
+      "info_url": "https://en.wikipedia.org/wiki/Sedna_(dwarf_planet)",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@0",
+        "center_label": "the solar system's center of mass",
+        "target": "2003 VB12",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-13",
+        "words": null,
+        "years": {
+          "value": 11390.0,
+          "figures": 4,
+          "text": "11,390"
+        },
+        "days": {
+          "value": 4160000.0,
+          "figures": 3,
+          "text": "4,160,000"
+        },
+        "record": {
+          "days": 4160095.697859893,
+          "error_days": 1864.0,
+          "error_from": "sigma",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-13 08:30",
+          "elements": {
+            "a": 506.4431683682394,
+            "e": 0.8495556766736537,
+            "i": 11.9285243144565,
+            "omega": 311.2847686456936,
+            "Omega": 144.4015796171602,
+            "TP": 2479347.791187431,
+            "MA": 358.4405317092074,
+            "TA": 325.6561038249131,
+            "q": 76.19149976841034,
+            "epoch": "2026-10-13 08:30 osc."
+          },
+          "paired": true,
+          "sun_elements": {
+            "a": 539.86766160435,
+            "e": 0.8589151344821513,
+            "i": 11.92504465447922,
+            "omega": 311.1465469274596,
+            "Omega": 144.5156403933569,
+            "epoch": "2026-10-13 08:30 osc.",
+            "TP": 2479295.979438646,
+            "MA": 358.5881126742782,
+            "TA": 325.6837181683986
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "2003 VB12",
+          "id_type": "smallbody",
+          "horizons_name": "90377 Sedna"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@0",
+          "epoch": "2026-10-13 08:30",
+          "days": 4160095.697859893,
+          "jpl_days": 4160095.697859893,
+          "error_days": 1864.0
+        }
+      }
+    },
+    "leleakuhonua": {
+      "name": "Leleakuhonua",
+      "horizons_id": "2015 TG387",
+      "horizons_name": "541132 Leleakuhonua",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "A distant trans-Neptunian dwarf planet with an extremely long orbit.",
+      "info_url": "https://en.wikipedia.org/wiki/541132_Lele%C4%81k%C5%ABhonua",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@0",
+        "center_label": "the solar system's center of mass",
+        "target": "2015 TG387",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 42000.0,
+          "figures": 2,
+          "text": "42,000"
+        },
+        "days": {
+          "value": 15400000.0,
+          "figures": 3,
+          "text": "15,400,000"
+        },
+        "record": {
+          "days": 15404152.60983637,
+          "error_days": 131420.0,
+          "error_from": "sigma",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 1212.142591298203,
+            "e": 0.9465688646302948,
+            "i": 11.6701209805385,
+            "omega": 118.2571932872492,
+            "Omega": 300.9806164806926,
+            "TP": 2480270.155953794,
+            "MA": 359.5575110773044,
+            "TA": 315.0225215829017,
+            "q": 64.76615488303914,
+            "epoch": "2026-10-22 20:37 osc."
+          },
+          "paired": true,
+          "sun_elements": {
+            "a": 1307.962230885164,
+            "e": 0.9505543191552057,
+            "i": 11.67880103516345,
+            "omega": 118.2691090066983,
+            "Omega": 301.133315579982,
+            "epoch": "2026-10-22 20:37 osc.",
+            "TP": 2480308.675894513,
+            "MA": 359.6046956091575,
+            "TA": 314.8645755515364
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "2015 TG387",
+          "id_type": "smallbody",
+          "horizons_name": "541132 Leleakuhonua"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@0",
+          "epoch": "2026-10-22 20:37",
+          "days": 15404152.60983637,
+          "jpl_days": 15404152.60983637,
+          "error_days": 131420.0
+        }
+      }
+    },
+    "tno_2017_of201": {
+      "name": "2017 OF201",
+      "horizons_id": "2017 OF201",
+      "horizons_name": "(2017 OF201)",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "An extreme trans-Neptunian object with an extremely long orbit.",
+      "info_url": "https://en.wikipedia.org/wiki/2017_OF201",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@0",
+        "center_label": "the solar system's center of mass",
+        "target": "2017 OF201",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 23800.0,
+          "figures": 3,
+          "text": "23,800"
+        },
+        "days": {
+          "value": 8700000.0,
+          "figures": 2,
+          "text": "8,700,000"
+        },
+        "record": {
+          "days": 8704810.133733368,
+          "error_days": 43319.0,
+          "error_from": "sigma",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 828.5169001315345,
+            "e": 0.9457800052179337,
+            "i": 16.20513684868753,
+            "omega": 337.7299165836891,
+            "Omega": 328.591720300591,
+            "TP": 2426273.681520242,
+            "MA": 1.450067687725585,
+            "TA": 92.7099841180391,
+            "q": 44.9221820019855,
+            "epoch": "2026-10-22 20:37 osc."
+          },
+          "paired": true,
+          "sun_elements": {
+            "a": 813.7431737716689,
+            "e": 0.944574959158618,
+            "i": 16.22245266266817,
+            "omega": 337.7456261623025,
+            "Omega": 328.7751785496569,
+            "epoch": "2026-10-22 20:37 osc.",
+            "TP": 2426220.794207165,
+            "MA": 1.490983009626448,
+            "TA": 92.52009980290758
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "2017 OF201",
+          "id_type": "smallbody",
+          "horizons_name": "(2017 OF201)"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@0",
+          "epoch": "2026-10-22 20:37",
+          "days": 8704810.133733368,
+          "jpl_days": 8704810.133733368,
+          "error_days": 43319.0
+        }
+      }
+    },
+    "asteroid_2025_pn7": {
+      "name": "2025 PN7",
+      "horizons_id": "2025 PN7",
+      "horizons_name": "(2025 PN7)",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "2025 PN7 is a small near-Earth asteroid and the most recently discovered quasi-satellite of Earth.",
+      "info_url": "https://en.wikipedia.org/wiki/2025_PN7",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@sun",
+        "center_label": "the Sun",
+        "target": "2025 PN7",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 1.0,
+          "figures": 2,
+          "text": "1.00"
+        },
+        "days": {
+          "value": 364.0,
+          "figures": 3,
+          "text": "364"
+        },
+        "record": {
+          "days": 364.3987087951941,
+          "error_days": 0.8793929706984045,
+          "error_from": "year_change",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 0.9984330189749976,
+            "e": 0.1086277442492562,
+            "i": 1.968131648662071,
+            "omega": 78.34124750600691,
+            "Omega": 111.8711640357161,
+            "TP": 2461508.415681501,
+            "MA": 190.0202666872356,
+            "TA": 188.1111640724194,
+            "q": 0.8899754923397689,
+            "epoch": "2026-10-22 20:37 osc."
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "2025 PN7",
+          "id_type": "smallbody",
+          "horizons_name": "(2025 PN7)"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@sun",
+          "epoch": "2026-10-22 20:37",
+          "days": 364.3987087951941,
+          "jpl_days": 364.3987087951941,
+          "error_days": 0.8793929706984045
+        }
+      }
+    },
+    "asteroid_2024_pt5": {
+      "name": "2024 PT5",
+      "horizons_id": "2024 PT5",
+      "horizons_name": "(2024 PT5)",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "Passed closest to Earth on August 8, 2024.",
+      "info_url": "https://science.nasa.gov/blogs/planetary-defense/2024/10/02/nasa-to-track-asteroid-2024-pt5-on-next-close-pass-january-2025/",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@sun",
+        "center_label": "the Sun",
+        "target": "2024 PT5",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 1.034,
+          "figures": 4,
+          "text": "1.034"
+        },
+        "days": {
+          "value": 377.6,
+          "figures": 4,
+          "text": "377.6"
+        },
+        "record": {
+          "days": 377.5685856602425,
+          "error_days": 0.11143425240499027,
+          "error_from": "year_change",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 1.022346899320242,
+            "e": 0.01514234688147947,
+            "i": 1.713174433234174,
+            "omega": 196.7387053425832,
+            "Omega": 288.558178139304,
+            "TP": 2461455.048087773,
+            "MA": 246.8336423605473,
+            "TA": 245.2503671224607,
+            "q": 1.006866167937529,
+            "epoch": "2026-10-22 20:37 osc."
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "2024 PT5",
+          "id_type": "smallbody",
+          "horizons_name": "(2024 PT5)"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@sun",
+          "epoch": "2026-10-22 20:37",
+          "days": 377.5685856602425,
+          "jpl_days": 377.5685856602425,
+          "error_days": 0.11143425240499027
+        }
+      }
+    },
+    "asteroid_2025_py1": {
+      "name": "2025 PY1",
+      "horizons_id": "2025 PY1",
+      "horizons_name": "(2025 PY1)",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "Near-Earth asteroid.",
+      "info_url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2025%20PY1",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@sun",
+        "center_label": "the Sun",
+        "target": "2025 PY1",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 1.166,
+          "figures": 5,
+          "text": "1.1660"
+        },
+        "days": {
+          "value": 425.88,
+          "figures": 5,
+          "text": "425.88"
+        },
+        "record": {
+          "days": 425.8790928323511,
+          "error_days": 0.007478151786472154,
+          "error_from": "year_change",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 1.107792946566927,
+            "e": 0.2281410466059805,
+            "i": 4.333328916198614,
+            "omega": 260.8057994776127,
+            "Omega": 145.3565139860837,
+            "TP": 2461398.008410644,
+            "MA": 307.8871393189795,
+            "TA": 283.6752508333117,
+            "q": 0.8550599043144249,
+            "epoch": "2026-10-22 20:37 osc."
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "2025 PY1",
+          "id_type": "smallbody",
+          "horizons_name": "(2025 PY1)"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@sun",
+          "epoch": "2026-10-22 20:37",
+          "days": 425.8790928323511,
+          "jpl_days": 425.8790928323511,
+          "error_days": 0.007478151786472154
+        }
+      }
+    },
+    "asteroid_2023_jf": {
+      "name": "2023 JF",
+      "horizons_id": "2023 JF",
+      "horizons_name": "(2023 JF)",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "Asteroid 2023 JF flew past Earth on May 9, 2023.",
+      "info_url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2023%20JF",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@sun",
+        "center_label": "the Sun",
+        "target": "2023 JF",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 2.072,
+          "figures": 4,
+          "text": "2.072"
+        },
+        "days": {
+          "value": 757.0,
+          "figures": 3,
+          "text": "757"
+        },
+        "record": {
+          "days": 756.6317538257155,
+          "error_days": 0.17146,
+          "error_from": "sigma",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 1.625015188088778,
+            "e": 0.3913991863424853,
+            "i": 3.434967437463226,
+            "omega": 201.4153164558683,
+            "Omega": 49.89940341378298,
+            "TP": 2461606.990861427,
+            "MA": 231.2353008965297,
+            "TA": 205.3512787689496,
+            "q": 0.9889855656766495,
+            "epoch": "2026-10-22 20:37 osc."
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "2023 JF",
+          "id_type": "smallbody",
+          "horizons_name": "(2023 JF)"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@sun",
+          "epoch": "2026-10-22 20:37",
+          "days": 756.6317538257155,
+          "jpl_days": 756.6317538257155,
+          "error_days": 0.17146
+        }
+      }
+    },
+    "asteroid_2024_dw": {
+      "name": "2024 DW",
+      "horizons_id": "2024 DW",
+      "horizons_name": "(2024 DW)",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "Passed closest to Earth on February 22, 2024.",
+      "info_url": "https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=2024%20DW",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@sun",
+        "center_label": "the Sun",
+        "target": "2024 DW",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 3.61,
+          "figures": 3,
+          "text": "3.61"
+        },
+        "days": {
+          "value": 1320.0,
+          "figures": 3,
+          "text": "1320"
+        },
+        "record": {
+          "days": 1319.493367559023,
+          "error_days": 1.948,
+          "error_from": "sigma",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 2.354358116383666,
+            "e": 0.6872411650601091,
+            "i": 1.176429197332846,
+            "omega": 245.8338936163733,
+            "Omega": 335.0183396105999,
+            "TP": 2461723.38570409,
+            "MA": 254.406742089043,
+            "TA": 200.7408404714024,
+            "q": 0.7363463015114315,
+            "epoch": "2026-10-22 20:37 osc."
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "2024 DW",
+          "id_type": "smallbody",
+          "horizons_name": "(2024 DW)"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@sun",
+          "epoch": "2026-10-22 20:37",
+          "days": 1319.493367559023,
+          "jpl_days": 1319.493367559023,
+          "error_days": 1.948
+        }
+      }
+    },
+    "asteroid_2024_yr4": {
+      "name": "2024 YR4",
+      "horizons_id": "2024 YR4",
+      "horizons_name": "(2024 YR4)",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "Passed close to Earth on December 25, 2024, two days before it was discovered.",
+      "info_url": "https://science.nasa.gov/solar-system/asteroids/2024-yr4/",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@sun",
+        "center_label": "the Sun",
+        "target": "2024 YR4",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 3.991,
+          "figures": 4,
+          "text": "3.991"
+        },
+        "days": {
+          "value": 1458.0,
+          "figures": 4,
+          "text": "1458"
+        },
+        "record": {
+          "days": 1457.74810558693,
+          "error_days": 0.42090620401904744,
+          "error_from": "year_change",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 2.51606992103943,
+            "e": 0.6612613219310606,
+            "i": 3.407949051468282,
+            "omega": 134.3625127248052,
+            "Omega": 271.3695136834542,
+            "TP": 2460636.749172975,
+            "MA": 172.7730235173092,
+            "TA": 178.0340857492776,
+            "q": 0.8522901989819178,
+            "epoch": "2026-10-22 20:37 osc."
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "2024 YR4",
+          "id_type": "smallbody",
+          "horizons_name": "(2024 YR4)"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@sun",
+          "epoch": "2026-10-22 20:37",
+          "days": 1457.74810558693,
+          "jpl_days": 1457.74810558693,
+          "error_days": 0.42090620401904744
+        }
+      }
+    },
+    "kamo_oalewa": {
+      "name": "Kamo oalewa",
+      "horizons_id": "2016 HO3",
+      "horizons_name": "469219 Kamo`oalewa",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "Kamo'oalewa is a very small, elongated asteroid belonging to the Apollo group of near-Earth objects.",
+      "info_url": "https://www.jpl.nasa.gov/news/small-asteroid-is-earths-constant-companion/",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@sun",
+        "center_label": "the Sun",
+        "target": "2016 HO3",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 1.001,
+          "figures": 4,
+          "text": "1.001"
+        },
+        "days": {
+          "value": 365.8,
+          "figures": 4,
+          "text": "365.8"
+        },
+        "record": {
+          "days": 365.7710228507339,
+          "error_days": 0.08267874381704132,
+          "error_from": "year_change",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 1.000938159763224,
+            "e": 0.1022565594537319,
+            "i": 7.80378204897333,
+            "omega": 304.3121475218499,
+            "Omega": 65.56037316226556,
+            "TP": 2461318.892406824,
+            "MA": 17.19103797339894,
+            "TA": 21.129758804895,
+            "q": 0.8985856673198871,
+            "epoch": "2026-10-22 20:37 osc."
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "2016 HO3",
+          "id_type": "smallbody",
+          "horizons_name": "469219 Kamo`oalewa"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@sun",
+          "epoch": "2026-10-22 20:37",
+          "days": 365.7710228507339,
+          "jpl_days": 365.7710228507339,
+          "error_days": 0.08267874381704132
+        }
+      }
+    },
+    "psyche": {
+      "name": "16 Psyche",
+      "horizons_id": "A852 FA",
+      "horizons_name": "16 Psyche",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "A metal-rich asteroid in the main asteroid belt. NASA's Psyche spacecraft begins its main mission there in August 2029.",
+      "info_url": "https://science.nasa.gov/solar-system/asteroids/16-psyche/",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@0",
+        "center_label": "the solar system's center of mass",
+        "target": "A852 FA",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 4.97,
+          "figures": 3,
+          "text": "4.97"
+        },
+        "days": {
+          "value": 1820.0,
+          "figures": 3,
+          "text": "1820"
+        },
+        "record": {
+          "days": 1816.533486695136,
+          "error_days": 3.1234027012651495,
+          "error_from": "year_change",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 2.914903008759678,
+            "e": 0.1379524735981109,
+            "i": 3.103203630204124,
+            "omega": 229.0645305828253,
+            "Omega": 150.0122050373043,
+            "TP": 2460794.721747299,
+            "MA": 107.341495436528,
+            "TA": 121.5463300675072,
+            "q": 2.512784928402704,
+            "epoch": "2026-10-22 20:37 osc."
+          },
+          "paired": true,
+          "sun_elements": {
+            "a": 2.926051320294956,
+            "e": 0.135508528805588,
+            "i": 3.10131124103363,
+            "omega": 230.1139639002216,
+            "Omega": 149.9565001307822,
+            "epoch": "2026-10-22 20:37 osc.",
+            "TP": 2460796.067365221,
+            "MA": 106.3921122562892,
+            "TA": 120.4664349388903
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "A852 FA",
+          "id_type": "smallbody",
+          "horizons_name": "16 Psyche"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@0",
+          "epoch": "2026-10-22 20:37",
+          "days": 1816.533486695136,
+          "jpl_days": 1816.533486695136,
+          "error_days": 3.1234027012651495
+        }
       }
     },
     "apophis": {
@@ -671,6 +2448,1313 @@
           "days": 323.5420892338735,
           "jpl_days": 323.5420892338735,
           "error_days": 0.0034301412194395198
+        }
+      }
+    },
+    "bennu": {
+      "name": "Bennu",
+      "horizons_id": "1999 RQ36",
+      "horizons_name": "101955 Bennu",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "Studied by NASA's OSIRIS-REx mission.",
+      "info_url": "https://science.nasa.gov/solar-system/asteroids/101955-bennu/",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@sun",
+        "center_label": "the Sun",
+        "target": "1999 RQ36",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 1.19472,
+          "figures": 6,
+          "text": "1.19472"
+        },
+        "days": {
+          "value": 436.37,
+          "figures": 5,
+          "text": "436.37"
+        },
+        "record": {
+          "days": 436.3732719920993,
+          "error_days": 0.0019433282031400267,
+          "error_from": "year_change",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 1.125917259968258,
+            "e": 0.2036754010043099,
+            "i": 6.033001050507137,
+            "omega": 66.401057082928,
+            "Omega": 1.966238702833154,
+            "TP": 2461549.037379089,
+            "MA": 184.544234521045,
+            "TA": 183.0714828329726,
+            "q": 0.8965956105465495,
+            "epoch": "2026-10-22 20:37 osc."
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "1999 RQ36",
+          "id_type": "smallbody",
+          "horizons_name": "101955 Bennu"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@sun",
+          "epoch": "2026-10-22 20:37",
+          "days": 436.3732719920993,
+          "jpl_days": 436.3732719920993,
+          "error_days": 0.0019433282031400267
+        }
+      }
+    },
+    "eros": {
+      "name": "Eros",
+      "horizons_id": "A898 PA",
+      "horizons_name": "433 Eros",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "First asteroid to be orbited and landed on by NASA's NEAR Shoemaker spacecraft in 2000-2001.",
+      "info_url": "https://science.nasa.gov/solar-system/asteroids/433-eros/",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@sun",
+        "center_label": "the Sun",
+        "target": "A898 PA",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 1.761,
+          "figures": 5,
+          "text": "1.7610"
+        },
+        "days": {
+          "value": 643.2,
+          "figures": 4,
+          "text": "643.2"
+        },
+        "record": {
+          "days": 643.215817786095,
+          "error_days": 0.02121394579239677,
+          "error_from": "year_change",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 1.458273082210407,
+            "e": 0.2228470967463607,
+            "i": 10.82858281840264,
+            "omega": 178.9243554499736,
+            "Omega": 304.2679013252965,
+            "TP": 2461088.81476174,
+            "MA": 138.5474879650999,
+            "TA": 152.3876678674816,
+            "q": 1.133301159576451,
+            "epoch": "2026-10-22 20:37 osc."
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "A898 PA",
+          "id_type": "smallbody",
+          "horizons_name": "433 Eros"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@sun",
+          "epoch": "2026-10-22 20:37",
+          "days": 643.215817786095,
+          "jpl_days": 643.215817786095,
+          "error_days": 0.02121394579239677
+        }
+      }
+    },
+    "dinkinesh": {
+      "name": "Dinkinesh",
+      "horizons_id": "1999 VD57",
+      "horizons_name": "152830 Dinkinesh",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "Dinkinesh was visited by the mission Lucy.",
+      "info_url": "https://science.nasa.gov/solar-system/asteroids/dinkinesh/",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@sun",
+        "center_label": "the Sun",
+        "target": "1999 VD57",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 3.244,
+          "figures": 4,
+          "text": "3.244"
+        },
+        "days": {
+          "value": 1184.9,
+          "figures": 5,
+          "text": "1184.9"
+        },
+        "record": {
+          "days": 1184.854324196151,
+          "error_days": 0.14147547631500856,
+          "error_from": "year_change",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 2.191346329352554,
+            "e": 0.1126861146913365,
+            "i": 2.093331299342452,
+            "omega": 66.80256226794997,
+            "Omega": 21.34374622075784,
+            "TP": 2461102.718826649,
+            "MA": 70.98802839182129,
+            "TA": 83.67737418624074,
+            "q": 1.944412025554693,
+            "epoch": "2026-10-22 20:37 osc."
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "1999 VD57",
+          "id_type": "smallbody",
+          "horizons_name": "152830 Dinkinesh"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@sun",
+          "epoch": "2026-10-22 20:37",
+          "days": 1184.854324196151,
+          "jpl_days": 1184.854324196151,
+          "error_days": 0.14147547631500856
+        }
+      }
+    },
+    "itokawa": {
+      "name": "Itokawa",
+      "horizons_id": "1998 SF36",
+      "horizons_name": "25143 Itokawa",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "First asteroid from which samples were returned to Earth by JAXA's Hayabusa mission in 2010.",
+      "info_url": "https://science.nasa.gov/solar-system/asteroids/25143-itokawa/",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@sun",
+        "center_label": "the Sun",
+        "target": "1998 SF36",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 1.5237,
+          "figures": 5,
+          "text": "1.5237"
+        },
+        "days": {
+          "value": 556.5,
+          "figures": 4,
+          "text": "556.5"
+        },
+        "record": {
+          "days": 556.5365233045601,
+          "error_days": 0.027878473067630694,
+          "error_from": "year_change",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 1.324128589260795,
+            "e": 0.2801171372527769,
+            "i": 1.620938464527289,
+            "omega": 162.831894267394,
+            "Omega": 69.07503263221214,
+            "TP": 2461493.196052069,
+            "MA": 258.5487449958945,
+            "TA": 230.3089673416617,
+            "q": 0.953217479482503,
+            "epoch": "2026-10-22 20:37 osc."
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "1998 SF36",
+          "id_type": "smallbody",
+          "horizons_name": "25143 Itokawa"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@sun",
+          "epoch": "2026-10-22 20:37",
+          "days": 556.5365233045601,
+          "jpl_days": 556.5365233045601,
+          "error_days": 0.027878473067630694
+        }
+      }
+    },
+    "lutetia": {
+      "name": "Lutetia",
+      "horizons_id": "A852 VA",
+      "horizons_name": "21 Lutetia",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "Studied by European Space Agency's Rosetta mission.",
+      "info_url": "https://www.nasa.gov/image-article/asteroid-lutetia/",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@sun",
+        "center_label": "the Sun",
+        "target": "A852 VA",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 3.799,
+          "figures": 4,
+          "text": "3.799"
+        },
+        "days": {
+          "value": 1388.0,
+          "figures": 4,
+          "text": "1388"
+        },
+        "record": {
+          "days": 1387.517316461594,
+          "error_days": 0.3317053983239475,
+          "error_from": "year_change",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 2.434594612791638,
+            "e": 0.164790787361821,
+            "i": 3.064360403577798,
+            "omega": 249.8577215585289,
+            "Omega": 80.83821137884154,
+            "TP": 2461436.39733807,
+            "MA": 334.0444380202422,
+            "TA": 323.9753981448926,
+            "q": 2.033395849642855,
+            "epoch": "2026-10-22 20:37 osc."
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "A852 VA",
+          "id_type": "smallbody",
+          "horizons_name": "21 Lutetia"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@sun",
+          "epoch": "2026-10-22 20:37",
+          "days": 1387.517316461594,
+          "jpl_days": 1387.517316461594,
+          "error_days": 0.3317053983239475
+        }
+      }
+    },
+    "ryugu": {
+      "name": "Ryugu",
+      "horizons_id": "1999 JU3",
+      "horizons_name": "162173 Ryugu",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "Target of JAXA's Hayabusa2 mission which returned samples to Earth in 2020.",
+      "info_url": "https://en.wikipedia.org/wiki/162173_Ryugu",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@sun",
+        "center_label": "the Sun",
+        "target": "1999 JU3",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 1.2997,
+          "figures": 5,
+          "text": "1.2997"
+        },
+        "days": {
+          "value": 474.7,
+          "figures": 4,
+          "text": "474.7"
+        },
+        "record": {
+          "days": 474.6984819744807,
+          "error_days": 0.019960414921115444,
+          "error_from": "year_change",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 1.190911833602118,
+            "e": 0.1910397686449846,
+            "i": 5.866448617429954,
+            "omega": 211.6077547890407,
+            "Omega": 251.2891538308098,
+            "TP": 2461118.290040491,
+            "MA": 165.3783157188904,
+            "TA": 169.8576419180289,
+            "q": 0.963400312434195,
+            "epoch": "2026-10-22 20:37 osc."
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "1999 JU3",
+          "id_type": "smallbody",
+          "horizons_name": "162173 Ryugu"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@sun",
+          "epoch": "2026-10-22 20:37",
+          "days": 474.6984819744807,
+          "jpl_days": 474.6984819744807,
+          "error_days": 0.019960414921115444
+        }
+      }
+    },
+    "steins": {
+      "name": "Steins",
+      "horizons_id": "1969 VC",
+      "horizons_name": "2867 Steins",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "Visited by European Space Agency's Rosetta spacecraft.",
+      "info_url": "https://en.wikipedia.org/wiki/2867_%C5%A0teins",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@sun",
+        "center_label": "the Sun",
+        "target": "1969 VC",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 3.633,
+          "figures": 4,
+          "text": "3.633"
+        },
+        "days": {
+          "value": 1327.0,
+          "figures": 4,
+          "text": "1327"
+        },
+        "record": {
+          "days": 1326.971343961377,
+          "error_days": 0.29205353167594694,
+          "error_from": "year_change",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 2.36324498513771,
+            "e": 0.1468304283787431,
+            "i": 9.924577990361104,
+            "omega": 251.4252332401239,
+            "Omega": 55.29376099634797,
+            "TP": 2461512.265086233,
+            "MA": 312.2776574400452,
+            "TA": 298.2304762182304,
+            "q": 2.016248711606024,
+            "epoch": "2026-10-22 20:37 osc."
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "1969 VC",
+          "id_type": "smallbody",
+          "horizons_name": "2867 Steins"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@sun",
+          "epoch": "2026-10-22 20:37",
+          "days": 1326.971343961377,
+          "jpl_days": 1326.971343961377,
+          "error_days": 0.29205353167594694
+        }
+      }
+    },
+    "donaldjohanson": {
+      "name": "Donaldjohanson",
+      "horizons_id": "1981 EQ5",
+      "horizons_name": "52246 Donaldjohanson",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "Lucy flew past it on April 20, 2025. It is about 8 km long and 3.5 km wide, a C-type (carbon-rich) asteroid, named for the paleoanthropologist who discovered the \"Lucy\" fossil.",
+      "info_url": "https://science.nasa.gov/solar-system/asteroids/donaldjohanson/",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@sun",
+        "center_label": "the Sun",
+        "target": "1981 EQ5",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 3.681,
+          "figures": 4,
+          "text": "3.681"
+        },
+        "days": {
+          "value": 1344.4,
+          "figures": 5,
+          "text": "1344.4"
+        },
+        "record": {
+          "days": 1344.447146625269,
+          "error_days": 0.11634819676987718,
+          "error_from": "year_change",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 2.3839485113776,
+            "e": 0.1868140805415048,
+            "i": 4.424912058409525,
+            "omega": 212.8991098722938,
+            "Omega": 262.7750766394226,
+            "TP": 2461992.853073852,
+            "MA": 184.211864944035,
+            "TA": 182.9382095014585,
+            "q": 1.938593362166305,
+            "epoch": "2026-10-22 20:37 osc."
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "1981 EQ5",
+          "id_type": "smallbody",
+          "horizons_name": "52246 Donaldjohanson"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@sun",
+          "epoch": "2026-10-22 20:37",
+          "days": 1344.447146625269,
+          "jpl_days": 1344.447146625269,
+          "error_days": 0.11634819676987718
+        }
+      }
+    },
+    "vesta": {
+      "name": "Vesta",
+      "horizons_id": "A807 FA",
+      "horizons_name": "4 Vesta",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "One of the largest objects in the asteroid belt, visited by NASA's Dawn mission.",
+      "info_url": "https://science.nasa.gov/solar-system/asteroids/4-vesta/",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@sun",
+        "center_label": "the Sun",
+        "target": "A807 FA",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 3.628,
+          "figures": 4,
+          "text": "3.628"
+        },
+        "days": {
+          "value": 1325.0,
+          "figures": 4,
+          "text": "1325"
+        },
+        "record": {
+          "days": 1325.244321538131,
+          "error_days": 0.1694796937990759,
+          "error_from": "year_change",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 2.361194067753576,
+            "e": 0.0902351679091567,
+            "i": 7.143881100805092,
+            "omega": 151.4238832865418,
+            "Omega": 103.6995766294826,
+            "TP": 2460901.46051382,
+            "MA": 118.1393215425728,
+            "TA": 126.7634975406636,
+            "q": 2.148131324583728,
+            "epoch": "2026-10-22 20:37 osc."
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "A807 FA",
+          "id_type": "smallbody",
+          "horizons_name": "4 Vesta"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@sun",
+          "epoch": "2026-10-22 20:37",
+          "days": 1325.244321538131,
+          "jpl_days": 1325.244321538131,
+          "error_days": 0.1694796937990759
+        }
+      }
+    },
+    "arrokoth": {
+      "name": "Arrokoth",
+      "horizons_id": "2014 MU69",
+      "horizons_name": "486958 Arrokoth",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "Arrokoth flyby from New Horizons on January 1, 2019.",
+      "info_url": "https://en.wikipedia.org/wiki/486958_Arrokoth",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@0",
+        "center_label": "the solar system's center of mass",
+        "target": "2014 MU69",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 294.0,
+          "figures": 4,
+          "text": "294.0"
+        },
+        "days": {
+          "value": 107400.0,
+          "figures": 4,
+          "text": "107,400"
+        },
+        "record": {
+          "days": 107374.0040195076,
+          "error_days": 36.584,
+          "error_from": "sigma",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 44.23111987711615,
+            "e": 0.03778601524107439,
+            "i": 2.449953766558703,
+            "omega": 183.8404155994542,
+            "Omega": 159.0465035736832,
+            "TP": 2474345.065294792,
+            "MA": 316.3848410153888,
+            "TA": 313.2938962409994,
+            "q": 42.55980210730966,
+            "epoch": "2026-10-22 20:37 osc."
+          },
+          "paired": true,
+          "sun_elements": {
+            "a": 44.05599275356392,
+            "e": 0.0352862672945785,
+            "i": 2.451162523175596,
+            "omega": 188.3125004621294,
+            "Omega": 159.0257223195053,
+            "epoch": "2026-10-22 20:37 osc.",
+            "TP": 2475594.060530497,
+            "MA": 311.9441676345799,
+            "TA": 308.8468884286122
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "2014 MU69",
+          "id_type": "smallbody",
+          "horizons_name": "486958 Arrokoth"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@0",
+          "epoch": "2026-10-22 20:37",
+          "days": 107374.0040195076,
+          "jpl_days": 107374.0040195076,
+          "error_days": 36.584
+        }
+      }
+    },
+    "ixion": {
+      "name": "Ixion",
+      "horizons_id": "2001 KX76",
+      "horizons_name": "28978 Ixion",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "A large Kuiper Belt object without a known moon.",
+      "info_url": "https://en.wikipedia.org/wiki/28978_Ixion",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@0",
+        "center_label": "the solar system's center of mass",
+        "target": "2001 KX76",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 248.06,
+          "figures": 6,
+          "text": "248.060"
+        },
+        "days": {
+          "value": 90604.0,
+          "figures": 5,
+          "text": "90,604"
+        },
+        "record": {
+          "days": 90604.04383513043,
+          "error_days": 0.1835694756882731,
+          "error_from": "year_change",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 39.49664659326574,
+            "e": 0.2440491852122872,
+            "i": 19.63015980051355,
+            "omega": 299.8637890019625,
+            "Omega": 71.03051437597155,
+            "TP": 2477365.853341823,
+            "MA": 296.3094878683667,
+            "TA": 268.5004941866991,
+            "q": 29.85752217356158,
+            "epoch": "2026-10-22 20:37 osc."
+          },
+          "paired": true,
+          "sun_elements": {
+            "a": 39.35117657080775,
+            "e": 0.2432339692281844,
+            "i": 19.65723720093356,
+            "omega": 300.566304473642,
+            "Omega": 71.07247938939405,
+            "epoch": "2026-10-22 20:37 osc.",
+            "TP": 2477482.590347025,
+            "MA": 295.5328218022357,
+            "TA": 267.7615010789102
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "2001 KX76",
+          "id_type": "smallbody",
+          "horizons_name": "28978 Ixion"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@0",
+          "epoch": "2026-10-22 20:37",
+          "days": 90604.04383513043,
+          "jpl_days": 90604.04383513043,
+          "error_days": 0.1835694756882731
+        }
+      }
+    },
+    "goibniu": {
+      "name": "GV9",
+      "horizons_id": "2004 GV9",
+      "horizons_name": "90568 Goibniu",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "A binary Kuiper Belt Object providing precise mass measurements through its moon.",
+      "info_url": "https://en.wikipedia.org/wiki/90568_Goibniu",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@0",
+        "center_label": "the solar system's center of mass",
+        "target": "2004 GV9",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 271.479,
+          "figures": 6,
+          "text": "271.479"
+        },
+        "days": {
+          "value": 99158.0,
+          "figures": 5,
+          "text": "99,158"
+        },
+        "record": {
+          "days": 99157.79563354861,
+          "error_days": 0.24326324129651766,
+          "error_from": "year_change",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 41.9449562086923,
+            "e": 0.07664389496943329,
+            "i": 21.9833561172806,
+            "omega": 292.1152556454851,
+            "Omega": 250.6046606928976,
+            "TP": 2447508.206464425,
+            "MA": 50.20417094793535,
+            "TA": 57.37290829991414,
+            "q": 38.73013139053582,
+            "epoch": "2026-10-22 20:37 osc."
+          },
+          "paired": true,
+          "sun_elements": {
+            "a": 41.89239445912737,
+            "e": 0.07757743117241322,
+            "i": 22.02191354674527,
+            "omega": 290.5404639621194,
+            "Omega": 250.5849806449399,
+            "epoch": "2026-10-22 20:37 osc.",
+            "TP": 2447147.914180322,
+            "MA": 51.57462678858089,
+            "TA": 58.96371794913824
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "2004 GV9",
+          "id_type": "smallbody",
+          "horizons_name": "90568 Goibniu"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@0",
+          "epoch": "2026-10-22 20:37",
+          "days": 99157.79563354861,
+          "jpl_days": 99157.79563354861,
+          "error_days": 0.24326324129651766
+        }
+      }
+    },
+    "varuna": {
+      "name": "Varuna",
+      "horizons_id": "2000 WR106",
+      "horizons_name": "20000 Varuna",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "A significant Kuiper Belt Object with a rapid rotation period.",
+      "info_url": "https://en.wikipedia.org/wiki/20000_Varuna",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@0",
+        "center_label": "the solar system's center of mass",
+        "target": "2000 WR106",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 281.28,
+          "figures": 6,
+          "text": "281.280"
+        },
+        "days": {
+          "value": 102738.0,
+          "figures": 6,
+          "text": "102,738"
+        },
+        "record": {
+          "days": 102737.6404443444,
+          "error_days": 0.22860600349667948,
+          "error_from": "year_change",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 42.9485224809911,
+            "e": 0.05390161454741742,
+            "i": 17.17475232290112,
+            "omega": 267.3095522904362,
+            "Omega": 97.29810558731766,
+            "TP": 2426452.663151128,
+            "MA": 122.2349516815802,
+            "TA": 127.271644929131,
+            "q": 40.63352777683964,
+            "epoch": "2026-10-22 20:37 osc."
+          },
+          "paired": true,
+          "sun_elements": {
+            "a": 43.20475768416689,
+            "e": 0.05116796422106717,
+            "i": 17.14306410549076,
+            "omega": 273.2496274645194,
+            "Omega": 97.22168735932335,
+            "epoch": "2026-10-22 20:37 osc.",
+            "TP": 2427828.150804572,
+            "MA": 116.2941634128957,
+            "TA": 121.3991754766362
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "2000 WR106",
+          "id_type": "smallbody",
+          "horizons_name": "20000 Varuna"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@0",
+          "epoch": "2026-10-22 20:37",
+          "days": 102737.6404443444,
+          "jpl_days": 102737.6404443444,
+          "error_days": 0.22860600349667948
+        }
+      }
+    },
+    "ammonite": {
+      "name": "Ammonite",
+      "horizons_id": "2023 KQ14",
+      "horizons_name": "(2023 KQ14)",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "Ammonite is classified as a sednoid, after Sedna.",
+      "info_url": "https://en.wikipedia.org/wiki/2023_KQ14",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@0",
+        "center_label": "the solar system's center of mass",
+        "target": "2023 KQ14",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 4000.0,
+          "figures": 3,
+          "text": "4000"
+        },
+        "days": {
+          "value": 1461000.0,
+          "figures": 4,
+          "text": "1,461,000"
+        },
+        "record": {
+          "days": 1461191.327376826,
+          "error_days": 1378.9,
+          "error_from": "sigma",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 252.1157013170493,
+            "e": 0.7386246434533359,
+            "i": 10.98019336714794,
+            "omega": 198.7370061077229,
+            "Omega": 72.10407136640359,
+            "TP": 2474735.181124394,
+            "MA": 356.6988744975367,
+            "TA": 328.7940477927859,
+            "q": 65.89683132275592,
+            "epoch": "2026-10-22 20:37 osc."
+          },
+          "paired": true,
+          "sun_elements": {
+            "a": 248.5097716023832,
+            "e": 0.7346703730339478,
+            "i": 10.9972923687135,
+            "omega": 198.6386028756291,
+            "Omega": 72.08343522976755,
+            "epoch": "2026-10-22 20:37 osc.",
+            "TP": 2474714.963292034,
+            "MA": 356.6341118801409,
+            "TA": 328.9114170941015
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "2023 KQ14",
+          "id_type": "smallbody",
+          "horizons_name": "(2023 KQ14)"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@0",
+          "epoch": "2026-10-22 20:37",
+          "days": 1461191.327376826,
+          "jpl_days": 1461191.327376826,
+          "error_days": 1378.9
+        }
+      }
+    },
+    "tempel_2": {
+      "name": "Tempel 2",
+      "horizons_id": "90000214",
+      "horizons_name": "10P/Tempel 2",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "A Jupiter-family comet, discovered in 1873 by Wilhelm Tempel.",
+      "info_url": "https://en.wikipedia.org/wiki/10P/Tempel",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@sun",
+        "center_label": "the Sun",
+        "target": "90000214",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 5.37,
+          "figures": 3,
+          "text": "5.37"
+        },
+        "days": {
+          "value": 1960.0,
+          "figures": 4,
+          "text": "1960"
+        },
+        "record": {
+          "days": 1959.815586031509,
+          "error_days": 1.0749873119598305,
+          "error_from": "year_change",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 3.064863851459802,
+            "e": 0.5374210492974997,
+            "i": 12.02705781404508,
+            "omega": 195.4697114362962,
+            "Omega": 117.7967301324345,
+            "TP": 2461254.615706567,
+            "MA": 15.01549219507677,
+            "TA": 53.27616897516403,
+            "q": 1.4177415044543,
+            "epoch": "2026-10-22 20:37 osc."
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "90000214",
+          "id_type": "smallbody",
+          "horizons_name": "10P/Tempel 2"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@sun",
+          "epoch": "2026-10-22 20:37",
+          "days": 1959.815586031509,
+          "jpl_days": 1959.815586031509,
+          "error_days": 1.0749873119598305
+        }
+      }
+    },
+    "schaumasse": {
+      "name": "Schaumasse",
+      "horizons_id": "90000356",
+      "horizons_name": "24P/Schaumasse",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "A Jupiter-family comet, discovered in 1911.",
+      "info_url": "https://en.wikipedia.org/wiki/24P/Schaumasse",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@sun",
+        "center_label": "the Sun",
+        "target": "90000356",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 8.17,
+          "figures": 3,
+          "text": "8.17"
+        },
+        "days": {
+          "value": 2990.0,
+          "figures": 3,
+          "text": "2990"
+        },
+        "record": {
+          "days": 2985.728485198871,
+          "error_days": 2.1519159749759638,
+          "error_from": "year_change",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 4.05789921553525,
+            "e": 0.7081948670856745,
+            "i": 11.50144636448739,
+            "omega": 58.4927858431379,
+            "Omega": 78.27002567500608,
+            "TP": 2461048.843751182,
+            "MA": 34.66674886471796,
+            "TA": 122.1516411101144,
+            "q": 1.184115819942201,
+            "epoch": "2026-10-22 20:37 osc."
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "90000356",
+          "id_type": "smallbody",
+          "horizons_name": "24P/Schaumasse"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@sun",
+          "epoch": "2026-10-22 20:37",
+          "days": 2985.728485198871,
+          "jpl_days": 2985.728485198871,
+          "error_days": 2.1519159749759638
+        }
+      }
+    },
+    "howell": {
+      "name": "Howell",
+      "horizons_id": "90000901",
+      "horizons_name": "88P/Howell",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "A Jupiter-family comet, discovered in 1981 by Ellen Howell.",
+      "info_url": "https://en.wikipedia.org/wiki/88P/Howell",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@sun",
+        "center_label": "the Sun",
+        "target": "90000901",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 5.48,
+          "figures": 3,
+          "text": "5.48"
+        },
+        "days": {
+          "value": 2002.0,
+          "figures": 4,
+          "text": "2002"
+        },
+        "record": {
+          "days": 2002.204541274829,
+          "error_days": 1.1753806260658166,
+          "error_from": "year_change",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 3.108899455461578,
+            "e": 0.563284820323979,
+            "i": 4.381960728052835,
+            "omega": 235.8446902420017,
+            "Omega": 56.67739992133874,
+            "TP": 2461118.24817986,
+            "MA": 39.21672518050666,
+            "TA": 105.3247389648813,
+            "q": 1.357703584286587,
+            "epoch": "2026-10-22 20:37 osc."
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "90000901",
+          "id_type": "smallbody",
+          "horizons_name": "88P/Howell"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@sun",
+          "epoch": "2026-10-22 20:37",
+          "days": 2002.204541274829,
+          "jpl_days": 2002.204541274829,
+          "error_days": 1.1753806260658166
+        }
+      }
+    },
+    "churyumov": {
+      "name": "Churyumov",
+      "horizons_id": "90000703",
+      "horizons_name": "67P/Churyumov-Gerasimenko",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "67P/Churyumov-Gerasimenko is the comet visited by the Rosetta spacecraft, August 2014 through September 2016.",
+      "info_url": "https://science.nasa.gov/solar-system/comets/67p-churyumov-gerasimenko/",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@sun",
+        "center_label": "the Sun",
+        "target": "90000703",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 6.433,
+          "figures": 4,
+          "text": "6.433"
+        },
+        "days": {
+          "value": 2350.0,
+          "figures": 4,
+          "text": "2350"
+        },
+        "record": {
+          "days": 2349.755907776515,
+          "error_days": 0.3264399822260202,
+          "error_from": "year_change",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 3.458991930707809,
+            "e": 0.6494765633350791,
+            "i": 3.86603214457126,
+            "omega": 22.23879169229411,
+            "Omega": 36.28665280390051,
+            "TP": 2461871.055498542,
+            "MA": 278.0805423925294,
+            "TA": 212.4319809923377,
+            "q": 1.212457738947931,
+            "epoch": "2026-10-22 20:37 osc."
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "90000703",
+          "id_type": "smallbody",
+          "horizons_name": "67P/Churyumov-Gerasimenko"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@sun",
+          "epoch": "2026-10-22 20:37",
+          "days": 2349.755907776515,
+          "jpl_days": 2349.755907776515,
+          "error_days": 0.3264399822260202
+        }
+      }
+    },
+    "hale_bopp": {
+      "name": "Hale-Bopp",
+      "horizons_id": "C/1995 O1",
+      "horizons_name": "Hale-Bopp (C/1995 O1)",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "Visible to the naked eye for a record 18 months.",
+      "info_url": "https://science.nasa.gov/solar-system/comets/c-1995-o1-hale-bopp/",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@0",
+        "center_label": "the solar system's center of mass",
+        "target": "C/1995 O1",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 2399.0,
+          "figures": 4,
+          "text": "2399"
+        },
+        "days": {
+          "value": 876400.0,
+          "figures": 4,
+          "text": "876,400"
+        },
+        "record": {
+          "days": 876356.1111669387,
+          "error_days": 60.568,
+          "error_from": "sigma",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 179.3008091122662,
+            "e": 0.9948750424185592,
+            "i": 89.364836760454,
+            "omega": 130.6621677481205,
+            "Omega": 282.5472270597821,
+            "TP": 2450539.803403046,
+            "MA": 4.435137697309094,
+            "TA": 165.7389835126109,
+            "q": 0.9189090410183484,
+            "epoch": "2026-10-22 20:37 osc."
+          },
+          "paired": true,
+          "sun_elements": {
+            "a": 181.19948713432,
+            "e": 0.9948885693880674,
+            "i": 89.73314066910328,
+            "omega": 130.7327480593921,
+            "Omega": 281.810764028995,
+            "epoch": "2026-10-22 20:37 osc.",
+            "TP": 2450536.52421936,
+            "MA": 4.364010033214926,
+            "TA": 165.6694201895467
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "C/1995 O1",
+          "id_type": "smallbody",
+          "horizons_name": "Hale-Bopp (C/1995 O1)"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@0",
+          "epoch": "2026-10-22 20:37",
+          "days": 876356.1111669387,
+          "jpl_days": 876356.1111669387,
+          "error_days": 60.568
         }
       }
     },
@@ -815,11 +3899,560 @@
           "error_days": 0.15083758920104628
         }
       }
+    },
+    "hyakutake": {
+      "name": "Hyakutake",
+      "horizons_id": "C/1996 B2",
+      "horizons_name": "Hyakutake (C/1996 B2)",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "Passed very close to Earth in 1996. It goes around the Sun in the opposite direction to the planets.",
+      "info_url": "https://nssdc.gsfc.nasa.gov/planetary/hyakutake.html",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@0",
+        "center_label": "the solar system's center of mass",
+        "target": "C/1996 B2",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 72000.0,
+          "figures": 2,
+          "text": "72,000"
+        },
+        "days": {
+          "value": 26000000.0,
+          "figures": 2,
+          "text": "26,000,000"
+        },
+        "record": {
+          "days": 26361894.16382161,
+          "error_days": 539130.0,
+          "error_from": "sigma",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 1734.254823582418,
+            "e": 0.999867918923147,
+            "i": 124.7689406977184,
+            "omega": 130.4012857115156,
+            "Omega": 188.4581031922859,
+            "TP": 2450205.505591799,
+            "MA": 0.1520037677130246,
+            "TA": 172.622079309189,
+            "q": 0.2290622446351944,
+            "epoch": "2026-10-22 20:37 osc."
+          },
+          "paired": true,
+          "sun_elements": {
+            "a": 2322.616206412653,
+            "e": 0.999896763975973,
+            "i": 124.5113842727079,
+            "omega": 130.854456037957,
+            "Omega": 188.9278116985898,
+            "epoch": "2026-10-22 20:37 osc.",
+            "TP": 2450209.275930538,
+            "MA": 0.09797589223988716,
+            "TA": 172.4358013816347
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "C/1996 B2",
+          "id_type": "smallbody",
+          "horizons_name": "Hyakutake (C/1996 B2)"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@0",
+          "epoch": "2026-10-22 20:37",
+          "days": 26361894.16382161,
+          "jpl_days": 26361894.16382161,
+          "error_days": 539130.0
+        }
+      }
+    },
+    "lemmon": {
+      "name": "Lemmon",
+      "horizons_id": "C/2025 A6",
+      "horizons_name": "Lemmon (C/2025 A6)",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "In fall 2025 it brightened in the morning northern sky. It goes around the Sun in the opposite direction to the planets.",
+      "info_url": "https://apod.nasa.gov/apod/ap250930.html",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@0",
+        "center_label": "the solar system's center of mass",
+        "target": "C/2025 A6",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 1170.0,
+          "figures": 3,
+          "text": "1170"
+        },
+        "days": {
+          "value": 430000.0,
+          "figures": 2,
+          "text": "430,000"
+        },
+        "record": {
+          "days": 426377.2010872945,
+          "error_days": 2910.299623222032,
+          "error_from": "year_change",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 110.9152219526721,
+            "e": 0.9951968436305862,
+            "i": 143.6928383579353,
+            "omega": 132.8140934117618,
+            "Omega": 107.9038891669898,
+            "TP": 2460987.650852979,
+            "MA": 0.2944222688439022,
+            "TA": 142.0885252813678,
+            "q": 0.5327431547869262,
+            "epoch": "2026-10-22 20:37 osc."
+          },
+          "paired": true,
+          "sun_elements": {
+            "a": 120.5158283859964,
+            "e": 0.995603915666997,
+            "i": 143.663763693564,
+            "omega": 132.9543902544337,
+            "Omega": 108.0984965816415,
+            "epoch": "2026-10-22 20:37 osc.",
+            "TP": 2460988.024463594,
+            "MA": 0.259498295023554,
+            "TA": 142.1589245662267
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "C/2025 A6",
+          "id_type": "smallbody",
+          "horizons_name": "Lemmon (C/2025 A6)"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@0",
+          "epoch": "2026-10-22 20:37",
+          "days": 426377.2010872945,
+          "jpl_days": 426377.2010872945,
+          "error_days": 2910.299623222032
+        }
+      }
+    },
+    "ikeya_seki": {
+      "name": "Ikeya-Seki",
+      "horizons_id": "C/1965 S1-A",
+      "horizons_name": "Ikeya-Seki (C/1965 S1-A)",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "One of the brightest comets seen in the last thousand years. It goes around the Sun in the opposite direction to the planets.",
+      "info_url": "https://en.wikipedia.org/wiki/Comet_Ikeya%E2%80%93Seki",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@0",
+        "center_label": "the solar system's center of mass",
+        "target": "C/1965 S1-A",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 795.159,
+          "figures": 6,
+          "text": "795.159"
+        },
+        "days": {
+          "value": 290431.7,
+          "figures": 7,
+          "text": "290,431.7"
+        },
+        "record": {
+          "days": 290431.658953062,
+          "error_days": 0.12710247660288587,
+          "error_from": "year_change",
+          "sbdb_status": "SBDB gives no sigma for the period",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 85.86664084938988,
+            "e": 0.9999082778289845,
+            "i": 142.7068355338792,
+            "omega": 71.61523310788714,
+            "Omega": 350.2029110116965,
+            "TP": 2439054.990428302,
+            "MA": 27.61852039383812,
+            "TA": 179.1480608010287,
+            "q": 0.007875874716470499,
+            "epoch": "2026-10-22 20:37 osc."
+          },
+          "paired": true,
+          "sun_elements": {
+            "a": 85.90278452202527,
+            "e": 0.999943886832376,
+            "i": 140.468060027404,
+            "omega": 64.65560271225628,
+            "Omega": 341.5639935376046,
+            "epoch": "2026-10-22 20:37 osc.",
+            "TP": 2439041.650337759,
+            "MA": 27.59910594067527,
+            "TA": 179.3334250169154
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "C/1965 S1-A",
+          "id_type": "smallbody",
+          "horizons_name": "Ikeya-Seki (C/1965 S1-A)"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@0",
+          "epoch": "2026-10-22 20:37",
+          "days": 290431.658953062,
+          "jpl_days": 290431.658953062,
+          "error_days": 0.12710247660288587
+        }
+      }
+    },
+    "neowise": {
+      "name": "NEOWISE",
+      "horizons_id": "C/2020 F3",
+      "horizons_name": "NEOWISE (C/2020 F3)",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "The brightest comet seen from the Northern Hemisphere since Hale-Bopp in 1997. It goes around the Sun in the opposite direction to the planets.",
+      "info_url": "https://www.nasa.gov/centers-and-facilities/jpl/comet-neowise-sizzles-as-it-slides-by-the-sun-providing-a-treat-for-observers/",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@0",
+        "center_label": "the solar system's center of mass",
+        "target": "C/2020 F3",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 6830.0,
+          "figures": 3,
+          "text": "6830"
+        },
+        "days": {
+          "value": 2500000.0,
+          "figures": 3,
+          "text": "2,500,000"
+        },
+        "record": {
+          "days": 2495048.759533776,
+          "error_days": 3852.2,
+          "error_from": "sigma",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 360.175798658499,
+            "e": 0.9991890506121295,
+            "i": 128.7512262159043,
+            "omega": 37.13131548657608,
+            "Omega": 60.87970557421758,
+            "TP": 2459034.531174107,
+            "MA": 0.3321209752534982,
+            "TA": 165.8649950616756,
+            "q": 0.2920843434479995,
+            "epoch": "2026-10-22 20:37 osc."
+          },
+          "paired": true,
+          "sun_elements": {
+            "a": 408.7448686517067,
+            "e": 0.9992862818635841,
+            "i": 128.9649034453334,
+            "omega": 37.22556953730795,
+            "Omega": 60.99167382332552,
+            "epoch": "2026-10-22 20:37 osc.",
+            "TP": 2459036.031566097,
+            "MA": 0.274356508687439,
+            "TA": 165.8497687580404
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "C/2020 F3",
+          "id_type": "smallbody",
+          "horizons_name": "NEOWISE (C/2020 F3)"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@0",
+          "epoch": "2026-10-22 20:37",
+          "days": 2495048.759533776,
+          "jpl_days": 2495048.759533776,
+          "error_days": 3852.2
+        }
+      }
+    },
+    "swan": {
+      "name": "SWAN",
+      "horizons_id": "C/2025 R2",
+      "horizons_name": "SWAN (C/2025 R2)",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "A long-period comet, discovered on September 11, 2025.",
+      "info_url": "https://en.wikipedia.org/wiki/C/2025_R2_(SWAN)",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@sun",
+        "center_label": "the Sun",
+        "target": "C/2025 R2",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 800.0,
+          "figures": 1,
+          "text": "800"
+        },
+        "days": {
+          "value": 290000.0,
+          "figures": 2,
+          "text": "290,000"
+        },
+        "record": {
+          "days": 289076.9822466811,
+          "error_days": 7106.544594796898,
+          "error_from": "year_change",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 85.56117177017629,
+            "e": 0.9941063912850986,
+            "i": 4.47286790347787,
+            "omega": 308.3702647048365,
+            "Omega": 335.3162684731608,
+            "TP": 2460931.300964545,
+            "MA": 0.504436228821829,
+            "TA": 145.3528103917187,
+            "q": 0.5042640676018921,
+            "epoch": "2026-10-22 20:37 osc."
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "C/2025 R2",
+          "id_type": "smallbody",
+          "horizons_name": "SWAN (C/2025 R2)"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@sun",
+          "epoch": "2026-10-22 20:37",
+          "days": 289076.9822466811,
+          "jpl_days": 289076.9822466811,
+          "error_days": 7106.544594796898
+        }
+      }
+    },
+    "maps": {
+      "name": "MAPS",
+      "horizons_id": "C/2026 A1",
+      "horizons_name": "MAPS (C/2026 A1)",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "Kreutz sungrazer comet discovered on 13 January 2026 from the AMACS1 Observatory in the Atacama Desert, Chile.",
+      "info_url": "https://en.wikipedia.org/wiki/C/2026_A1_(MAPS)",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@sun",
+        "center_label": "the Sun",
+        "target": "C/2026 A1",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-22",
+        "words": null,
+        "years": {
+          "value": 1900.0,
+          "figures": 2,
+          "text": "1900"
+        },
+        "days": {
+          "value": 700000.0,
+          "figures": 1,
+          "text": "700,000"
+        },
+        "record": {
+          "days": 693761.814793487,
+          "error_days": 43312.7321063705,
+          "error_from": "year_change",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-22 20:37",
+          "elements": {
+            "a": 153.3703152465897,
+            "e": 0.9999627947547763,
+            "i": 144.5159072703869,
+            "omega": 86.52814191877404,
+            "Omega": 8.125291470493265,
+            "TP": 2461135.099961861,
+            "MA": 0.1044353583393545,
+            "TA": 175.5641768194516,
+            "q": 0.005706180188903473,
+            "epoch": "2026-10-22 20:37 osc."
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-22",
+          "horizons_id": "C/2026 A1",
+          "id_type": "smallbody",
+          "horizons_name": "MAPS (C/2026 A1)"
+        },
+        "period": {
+          "confirmed": "2026-10-22",
+          "center": "@sun",
+          "epoch": "2026-10-22 20:37",
+          "days": 693761.814793487,
+          "jpl_days": 693761.814793487,
+          "error_days": 43312.7321063705
+        }
+      }
     }
   },
   "numbers": {
+    "eurybates": [
+      "11",
+      "2027"
+    ],
+    "patroclus": [
+      "2033"
+    ],
+    "polymele": [
+      "2027",
+      "2022"
+    ],
+    "leucus": [
+      "18",
+      "2028"
+    ],
+    "orus": [
+      "11",
+      "2028"
+    ],
+    "ceres": [
+      "2015"
+    ],
+    "haumea": [
+      "4"
+    ],
+    "orcus": [
+      "16"
+    ],
+    "quaoar": [
+      "2023"
+    ],
+    "asteroid_2025_pn7": [
+      "2025",
+      "7"
+    ],
+    "asteroid_2024_pt5": [
+      "8",
+      "2024"
+    ],
+    "asteroid_2023_jf": [
+      "2023",
+      "9",
+      "2023"
+    ],
+    "asteroid_2024_dw": [
+      "22",
+      "2024"
+    ],
+    "asteroid_2024_yr4": [
+      "25",
+      "2024"
+    ],
+    "psyche": [
+      "2029"
+    ],
     "apophis": [
       "2029"
+    ],
+    "eros": [
+      "2000",
+      "2001"
+    ],
+    "itokawa": [
+      "2010"
+    ],
+    "ryugu": [
+      "2",
+      "2020"
+    ],
+    "donaldjohanson": [
+      "20",
+      "2025",
+      "8",
+      "3.5"
+    ],
+    "arrokoth": [
+      "1",
+      "2019"
+    ],
+    "tempel_2": [
+      "1873"
+    ],
+    "schaumasse": [
+      "1911"
+    ],
+    "howell": [
+      "1981"
+    ],
+    "churyumov": [
+      "67",
+      "2014",
+      "2016"
+    ],
+    "hale_bopp": [
+      "18"
+    ],
+    "hyakutake": [
+      "1996"
+    ],
+    "lemmon": [
+      "2025"
+    ],
+    "neowise": [
+      "1997"
+    ],
+    "swan": [
+      "11",
+      "2025"
+    ],
+    "maps": [
+      "13",
+      "2026",
+      "1"
     ]
   }
 }

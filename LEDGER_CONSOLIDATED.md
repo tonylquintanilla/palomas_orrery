@@ -797,7 +797,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*240 live items; 224 need attention (`!`); 165 RICE-scored; 222 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*241 live items; 225 need attention (`!`); 165 RICE-scored; 222 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -951,6 +951,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-466 | Every drawing starts and stops where a served row says (orrery + gallery, the Sun's slice and Earth's) | OPEN | -- | 2026-10-22 |
 | ! | L-467 | The scanner credits a display line with a citation it only sits near (orrery, provenance scanner) | OPEN | -- | 2026-10-21 |
 | ! | L-468 | The Sun room's phone look of 2026-10-21, night: the corona's drawer text and the Hills cloud's cross (gallery, the Sun room) | OPEN | -- | 2026-10-22 |
+| ! | L-470 | Orrery entries the website cannot serve as they stand (orrery, objects) | OPEN | -- | 2026-10-22 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1349,6 +1350,26 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ## DETAIL / RECORD
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
+
+#### [L-470] Orrery entries the website cannot serve as they stand (orrery, objects)
+<!-- L:470 status:OPEN upd:2026-10-22 section:A flag: rice: -->
+- **Found 2026-10-22, counting slice 1 of L-443 (the objects to the
+  website).** One class: an entry in `celestial_objects.py` whose own
+  fields stop it being served, recorded here rather than chased (The
+  Braid). Two instances:
+  - **6AC4721**: id 'none', and its link is MAPS's Wikipedia page,
+    which says C/2026 A1 (MAPS) was "formerly known by its temporary
+    designation as 6AC4721". It is MAPS under its temporary name. A
+    duplicate to retire or merge: Tony's call, since it removes a
+    checkbox from the orrery.
+  - **Gonggong**: on plotting's skip list (palomas_orrery.py's
+    pre-fetch, copied by period_fetch.py as SKIP_NAMES), so no period
+    is fetched for it and the website prints "Orbital period: not yet
+    fetched from JPL." Its helio_id (2007 OR10) may now serve, since the
+    pre-fetch asks a helio_id around the Sun (L-443); whether to take it
+    off the list is a test on Tony's machine.
+**Gap:** Tony's word on 6AC4721; a plot of Gonggong around the Sun.
+**Ref:** L-443; `celestial_objects.py`; `period_fetch.py` (SKIP_NAMES).
 
 #### [L-468] The Sun room's phone look of 2026-10-21, night: the corona's drawer text and the Hills cloud's cross (gallery, the Sun room)
 <!-- L:468 status:OPEN upd:2026-10-22 section:A flag: rice: -->
@@ -2103,7 +2124,73 @@ the deliberate limit, its number set then, each removal named.
   come back to it." His reason: "I am anxious to add the symbols to
   the website. We could keep going with this backlog but we may be at
   diminishing returns and could defer some items."
-**Gap (replaces the one below, 2026-10-22):** the design session, then
+- **2026-10-22, the design session and slice 1's build** (Claude Opus
+  5.5; the record is `documentation/DESIGN_L443_objects_rulings_20261022.md`,
+  the build's `documentation/HANDOFF_L443_slice1_build_20261022.md`).
+  Tony's rulings, in his words:
+  - The drawer, at the mock-up: "B. this is the right view. the "room"
+    would only apply if the object has additional features beyond the
+    symbol such as future moon shells, or spacecraft encounters, or
+    comet perihelion encounters, or asteroid near earth encounters,
+    etc. another group not shown that could be added is the main
+    asteroid belt." Groups fold open in the drawer; this supersedes the
+    2026-09-29 line that a group's bodies appear only in its room. The
+    main belt is a group row; a drawn belt cloud is later.
+  - Fetch every body on every build: "yes". Measured: the day's first
+    build takes 20 to 34 seconds for 19 objects, so about one to two
+    minutes more with slice 1; the first real build confirms it.
+  - Slice 1 is the bodies the website can draw now; the comets on open
+    paths go with the spacecraft: "Yes. Confirmed as recommended". 50
+    bodies, JPL's classes: comets 11, near-Earth asteroids 11, main belt
+    7, Jupiter Trojans 5, centaurs 1, trans-Neptunian objects 15.
+    Wierzchos (JPL: hyperbolic) joined the 13 open-path comets.
+  - The words list, `documentation/WORDS_L443_slice1_20261022.md`:
+    "Confirmed". The three stale comet pins: "Re-pin to the newest
+    (Recommended)" (Schaumasse 90000356, Howell 90000901,
+    Churyumov-Gerasimenko 90000703). Ikeya-Seki's link: "[No
+    preference]", so the one-link rule's Wikipedia.
+  - Every comet drawn from its elements of today, Halley and Encke too:
+    "Yes". Their perihelion-anchored spans had ended (Encke May 2025,
+    Halley February 2024).
+- **Built** (patches `patch_L443_1_slice1_orrery_20261022.py`,
+  `patch_L443_2_slice1_website_20261022.py`): the 50 entries keyed with
+  JPL's names, their descriptions sourced or trimmed and their links one
+  per body; a body with a helio_id served by it (export, period fetch,
+  and plotting's elements pre-fetch around the Sun); 50 rows in
+  `data/objects_config.json`, the drawer's six group rows, Halley and
+  Encke anchored at today; stage 10, a bare interactive.html link
+  opening this room and the Explorer at
+  ?exhibit=solar-system-explorer; interactive-exhibit 1.21. Shared
+  centres outside the bigger body: Orcus-Vanth and Patroclus-Menoetius,
+  which carry Pluto's kind of sentence; the other five pairs inside.
+  The info panel's two sentences about what the room holds were
+  rewritten for the slice (the handoff lists them for Tony's word).
+- **Loose ends, re-homed:**
+  - The 14 open-path comets: slice 2, with the spacecraft, which
+    builds the path drawing for them.
+  - 6AC4721 and Gonggong's missing period: L-470.
+  - **Watch the first real build:** a comet whose fetched eccentricity
+    is 1 or more nulls the served window for the whole room (the
+    builder's FLAG-3 rule), and a near-Earth asteroid with a short trust
+    window narrows it for every visitor. The handoff tells Tony what to
+    read, and either comes to him by name before the push.
+  - Two skill sentences, carried for gallery-cache-builder's next
+    version (they would mislead, not act wrongly): The Builder Reads the
+    Period's Centre says a comet is drawn "from its elements at
+    perihelion"; and Adding a New Object says --first-build is
+    required for a new non-spacecraft object, while the room draws an
+    analytic body from its elements and never reads the backfilled
+    positions, so a Daily Run onboards it.
+  - The headless walk's Pluto frame check fails on the stand-in data
+    (it fails the same way on the untouched base); it holds on the
+    served cache. Recorded, not chased.
+  - Not asked, recorded: whether the Lagrange points and the exoplanet
+    entries are ever served.
+**Gap (replaces the one below, 2026-10-22, evening):** Tony's runs of
+the two slice-1 patches, the orrery maintenance run (JPL confirms and
+fetches the 50), the Daily Run, and his look; then slice 2, the
+spacecraft and the open-path comets.
+**Gap (superseded above):** the design session, then
 the first slice on Tony's word.
 **Gap (superseded above):** after the Sun's numbers and its chosen drawings (L-412): the design session, from
 the brief: measure, propose the slices and the mechanism, and build the

@@ -57,7 +57,8 @@ THE FETCH IS PLOTTING'S
     save_cache. The arguments are the ones palomas_orrery.py's pre-fetch
     passes for a Sun-centred view: the entry's 'id', its 'id_type' with
     'smallbody' when the entry writes none (a None written out stays
-    None, as for the planets), no centre override. So a period fetched
+    None, as for the planets), or its 'helio_id' as a small body where it
+    has one (L-443), no centre override. So a period fetched
     here is the record plotting would write. Each body whose elements
     were already cached is named as refreshed.
 
@@ -116,6 +117,9 @@ Module updated: October 15, 2026 with Anthropic's Claude Opus 5.5 (L-445,
 Earth's period: a fetched period asked of another target than the map
 now names is missing too, named with the reason, and the read-back
 requires the new target.)
+Module updated: October 22, 2026 with Anthropic's Claude Opus 5.5 (L-443:
+an entry with a helio_id is fetched by it, as a small body, as plotting's
+pre-fetch now does around the Sun and as the export serves it.)
 """
 
 import ast
@@ -133,7 +137,8 @@ LINE = "=" * 70
 PLOTTED_TYPES = ("orbital", "satellite", "trajectory", "lagrange_point")
 SKIP_NAMES = ("MK2", "Xiangliu", "Vanth", "Gonggong")
 
-READ_FIELDS = ("name", "key", "id", "id_type", "object_type", "is_mission")
+READ_FIELDS = ("name", "key", "id", "id_type", "object_type", "is_mission",
+               "helio_id", "helio_id_type")
 
 
 class ListError(Exception):
@@ -168,13 +173,20 @@ def served_entries(root):
         if "key" not in fields:
             continue
         name = fields.get("name")
+        # palomas_orrery.py: obj_dict.get('id', obj_name) and
+        # obj_dict.get('id_type', 'smallbody'); around the Sun, the
+        # helio_id where the entry has one, as a small body (L-443), the
+        # record the export serves (export_objects.served_identity)
+        horizons_id = str(fields.get("id", name))
+        id_type = fields.get("id_type", "smallbody")
+        if fields.get("helio_id") is not None:
+            horizons_id = str(fields["helio_id"])
+            id_type = fields.get("helio_id_type") or "smallbody"
         out.append({
             "name": name,
             "key": fields["key"],
-            # palomas_orrery.py: obj_dict.get('id', obj_name) and
-            # obj_dict.get('id_type', 'smallbody')
-            "horizons_id": str(fields.get("id", name)),
-            "id_type": fields.get("id_type", "smallbody"),
+            "horizons_id": horizons_id,
+            "id_type": id_type,
             "object_type": fields.get("object_type"),
             "is_mission": bool(fields.get("is_mission", False)),
         })

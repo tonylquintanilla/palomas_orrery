@@ -116,6 +116,11 @@ the Alfven surface's two dashed circles at the ends of its usual range,
 with Tony's approved words of this day. And L-434: the three Oort cloud
 spheres' checkboxes, Inner Limit of Oort Cloud, Inner Oort Cloud and
 Outer Oort Cloud, are gone, Tony's ruling of this day.)
+Module updated: October 22, 2026 with Anthropic's Claude Opus 5.5 (L-443:
+the elements pre-fetch, static and animated, asks a body's elements of
+its helio_id when the Sun is the centre, as the position fetch already
+did, so a body's orbit and marker come from one record, the one the
+website serves.)
 
 """
 #Paloma's Orrery - Solar System Visualization Tool
@@ -4706,6 +4711,15 @@ def plot_objects():
                 if obj_dict:
                     horizons_id = obj_dict.get('id', obj_name)
                     id_type = obj_dict.get('id_type', 'smallbody')
+                    # FIXED 2026-10-22 (L-443): around the Sun, a body's
+                    # elements are asked of its helio_id, as this file's
+                    # position fetch already asks its position. Until now
+                    # the orbit came from the body's own centre and the
+                    # marker from its helio_id; the website serves the
+                    # helio_id record, so both instruments agree.
+                    if center_object_name == 'Sun' and 'helio_id' in obj_dict:
+                        horizons_id = obj_dict['helio_id']
+                        id_type = obj_dict.get('helio_id_type') or 'smallbody'
                     
                     # Determine if this object needs barycentric elements
                     # Pluto system objects need center_body when viewing from barycenter
@@ -6461,6 +6475,15 @@ def animate_objects(step, label):
                 if obj_dict:
                     horizons_id = obj_dict.get('id', obj_name)
                     id_type = obj_dict.get('id_type', 'smallbody')
+                    # FIXED 2026-10-22 (L-443): around the Sun, a body's
+                    # elements are asked of its helio_id, as this file's
+                    # position fetch already asks its position. Until now
+                    # the orbit came from the body's own centre and the
+                    # marker from its helio_id; the website serves the
+                    # helio_id record, so both instruments agree.
+                    if center_object_name == 'Sun' and 'helio_id' in obj_dict:
+                        horizons_id = obj_dict['helio_id']
+                        id_type = obj_dict.get('helio_id_type') or 'smallbody'
                     
                     print(f"[ANIMATION PRE-FETCH] Using Horizons ID: {horizons_id} (type: {id_type})", flush=True)
                     

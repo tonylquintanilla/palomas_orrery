@@ -3223,6 +3223,43 @@ resident.
 (Moved down from the resident protocol on 2026-10-22 when
 v3.108 made a fourth entry.)
 
+v3.106 (October 20, 2026): No rule changed in this document. ONE
+skill bump, one version (L-456, what a visitor reads):
+interactive-exhibit 1.17 -> 1.18. THE I PANEL LISTS ITS SOURCES, ONE
+TO A LINE, EVERY ADDRESS A LINK.
+
+WHAT PROMPTED IT. Tony, 2026-10-20, from his phone, looking at the
+corona's i panel, where the sources ran as one paragraph: "need
+hyperlinks" and "need some kind of itemization for readability." Then:
+"can we do L456 in this session so we are ready for the sun's 14
+pairs?"
+
+WHAT CHANGED. interactive-exhibit's Provenance is part of the build
+gains one rule: the i panel prints "Sources:" and a bulleted list, each
+citation after its label, every web address a link; a renderer that
+gathers citations serves them as a list, source_items, beside the
+joined source line, which stays as it was; gallery/source_list.js
+decides what the list holds and where an address ends; the gallery
+run's Source list check names each feature's count of citations and
+links. Its trigger names the source list. Its v1.15 entry moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copy reads
+interactive-exhibit 1.18 before exhibit work, and provenance-discipline
+2.32 before provenance work (v3.105's obligation). This session
+confirmed its loaded copies read interactive-exhibit 1.17 and
+provenance-cross-check 1.1, as the manifest expected.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.103 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-22 when
+v3.109 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

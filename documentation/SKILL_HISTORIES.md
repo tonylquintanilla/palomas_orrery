@@ -712,6 +712,16 @@ dipole field lines, placed by the orrery and drawn by the website as
 given (Tony, 2026-10-17: "Yes, random").
 (Moved down 2026-10-22, when 1.20 made a fourth entry.)
 
+Earlier: 1.18 | 2026-10-20, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ e8e714da and gallery @ ca5339fd. v1.18 (L-456) records
+that the i panel lists a feature's sources one to a line, each after its
+label, every web address a link a visitor can tap: the renderers serve
+gathered citations as a list, `source_items`, beside the joined
+`source` line, and gallery/source_list.js decides what the list holds
+and where an address ends (Tony from his phone, 2026-10-20: "need
+hyperlinks" and "need some kind of itemization for readability").
+(Moved down 2026-10-22, when 1.21 made a fourth entry.)
+
 ## safe-file-editing
 
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons;

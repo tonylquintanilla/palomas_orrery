@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.108 | October 22, 2026
+Tony Quintanilla, PE | Claude | v3.109 | October 22, 2026
 
-Cut from b995472a at https://github.com/tonylquintanilla/palomas_orrery
+Cut from bfb6c474 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -523,7 +523,7 @@ gallery-cache-builder        1.11 Nightly builder, atomic swap and its
                                   builder testing layers, the Daily Run's order
                                   and a failed pull, the run records and their
                                   check
-interactive-exhibit          1.20 adding or changing an exhibit in
+interactive-exhibit          1.21 adding or changing an exhibit in
                                   interactive.html; any edit to the Sun's
                                   chrome (drawer, nav cluster, frame zoom,
                                   i-panel, HUD, consent, back link); "Earth
@@ -534,8 +534,10 @@ interactive-exhibit          1.20 adding or changing an exhibit in
                                   moon); meta.shell_key and the trace stamp;
                                   editing the served words with store_writer or
                                   exhibit_store_editor; the Solar System room's
-                                  drawer, See more, Home's order and its
-                                  framing; testing a room headlessly
+                                  drawer, See more, its group rows, Home's
+                                  order and its framing; a bare
+                                  interactive.html link and the Explorer's
+                                  address; testing a room headlessly
                                   (tools/headless); carding an exhibit in
                                   Studio; choosing a feature's info link (NASA
                                   or Wikipedia); a served number's citation and
@@ -1182,6 +1184,41 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.109 (October 22, 2026): No rule changed in this document. ONE
+skill bump, one version (L-443, slice 1 of the objects):
+interactive-exhibit 1.20 -> 1.21. THE DRAWER'S GROUPS FOLD OPEN; EVERY
+COMET IS DRAWN FROM TODAY; A BARE LINK OPENS THE SOLAR SYSTEM ROOM.
+
+WHAT PROMPTED IT. L-443's design session. Tony, at the drawer mock-up:
+"B. this is the right view. the "room" would only apply if the object
+has additional features beyond the symbol." Asked whether the comets
+should be drawn from their elements of today, since a perihelion anchor
+is trusted only near its date and Encke's and Halley's spans had ended:
+"Yes." And stage 10, his ruling of 2026-10-01, built with the slice.
+
+WHAT CHANGED. interactive-exhibit's The Solar System room's drawer
+gains three bullets: groups fold open, with what a group row is, does
+and never is, and where its logic and checks live; every comet is drawn
+from today; the front door. Its rooms-section paragraph names the group
+rows, and the anatomy table's default room is corrected from the
+Explorer to the Solar System room. Its v1.18 entry moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copy reads
+interactive-exhibit 1.21 before exhibit work. This session confirmed
+its loaded copies read interactive-exhibit 1.20, provenance-discipline
+2.34 and ledger-and-session-records 1.22 (discharging v3.108's
+obligation), gallery-cache-builder 1.11, horizons-orbital-mechanics
+1.8, gallery-assembler 1.3, safe-file-editing 1.13 and agentic-pre-test
+1.3, as the manifest expected.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.106 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.108 (October 22, 2026): No rule changed in this document. THREE
 skill bumps, one version each (L-434 with L-454, L-465 with L-468, and
 L-469): interactive-exhibit 1.19 -> 1.20, provenance-discipline 2.33 ->
@@ -1272,40 +1309,6 @@ v3.106's and v3.105's obligations) and ledger-and-session-records
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.104 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.106 (October 20, 2026): No rule changed in this document. ONE
-skill bump, one version (L-456, what a visitor reads):
-interactive-exhibit 1.17 -> 1.18. THE I PANEL LISTS ITS SOURCES, ONE
-TO A LINE, EVERY ADDRESS A LINK.
-
-WHAT PROMPTED IT. Tony, 2026-10-20, from his phone, looking at the
-corona's i panel, where the sources ran as one paragraph: "need
-hyperlinks" and "need some kind of itemization for readability." Then:
-"can we do L456 in this session so we are ready for the sun's 14
-pairs?"
-
-WHAT CHANGED. interactive-exhibit's Provenance is part of the build
-gains one rule: the i panel prints "Sources:" and a bulleted list, each
-citation after its label, every web address a link; a renderer that
-gathers citations serves them as a list, source_items, beside the
-joined source line, which stays as it was; gallery/source_list.js
-decides what the list holds and where an address ends; the gallery
-run's Source list check names each feature's count of citations and
-links. Its trigger names the source list. Its v1.15 entry moved to
-documentation/SKILL_HISTORIES.md, by the three-entry rule.
-
-THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
-that session. The next session confirms its loaded copy reads
-interactive-exhibit 1.18 before exhibit work, and provenance-discipline
-2.32 before provenance work (v3.105's obligation). This session
-confirmed its loaded copies read interactive-exhibit 1.17 and
-provenance-cross-check 1.1, as the manifest expected.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.103 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

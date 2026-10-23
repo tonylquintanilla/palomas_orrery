@@ -165,6 +165,17 @@ def self_test():
             problems.append("the entry with no horizons_name was refused "
                             "for the wrong reason: %s" % exc)
 
+    # L-443: an entry with a helio_id is served by it, as a small body.
+    helio = good.replace(" 'horizons_name': 'Mars',",
+                         " 'horizons_name': 'Mars', 'helio_id': 'A123 BC',")
+    served = ex.build_export(helio)["objects"]["mars"]
+    if (served["horizons_id"], served["id_type"]) != ("A123 BC", "smallbody"):
+        problems.append("an entry with a helio_id was not served by it, as a "
+                        "small body: %r" % ((served["horizons_id"],
+                                             served["id_type"]),))
+    if (export["objects"]["mars"]["horizons_id"] != "499"):
+        problems.append("an entry with no helio_id was not served by its id")
+
     # L-431, build 3: the periods.
     cache = {"Mars": {"period": dict(SELF_TEST_RECORD),
                       "elements": dict(SELF_TEST_RECORD["elements"]),

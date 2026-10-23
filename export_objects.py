@@ -47,14 +47,20 @@ One JSON file, data/objects_export.json:
                     two repositories cannot disagree about the cycle
     objects         one entry per key, in list order:
                       name         the entry's 'name'
-                      horizons_id  the entry's 'id'
+                      horizons_id  the entry's 'id', or its 'helio_id'
+                                   where it has one: the record the
+                                   orrery plots a body by when the Sun
+                                   is the centre, which the Sun-centred
+                                   rooms serve (L-443)
                       horizons_name the entry's 'horizons_name', JPL's
                                    exact name for the object. The
                                    Horizons check compares it (L-395)
                       object_type  the entry's 'object_type'. The check
                                    compares it for "barycenter" and the
                                    Sun's "fixed" only
-                      id_type      the entry's 'id_type', or null where
+                      id_type      the entry's 'id_type' ('helio_id_type',
+                                   else 'smallbody', for a helio_id), or
+                                   null where
                                    the entry leaves it blank. A blank is
                                    not a value: the gallery keeps its own
                                    where the list states none
@@ -207,6 +213,11 @@ Earth's period: a fetched period's block names its target, the id the
 period was asked of, and its target_label when that is not the body;
 a period asked of another body is never paired with this body's
 elements; a record with no target and no horizons_id is refused.)
+Module updated: October 22, 2026 with Anthropic's Claude Opus 5.5 (L-443,
+slice 1: a keyed entry with a 'helio_id' is served by it, as a small
+body, through served_identity, so the Sun-centred rooms take the record
+the orrery plots a body by around the Sun. No keyed entry had one
+before.)
 """
 
 import ast
@@ -226,7 +237,23 @@ KEY_PATTERN = re.compile(r"^[a-z][a-z0-9_]*$")
 OPENING = re.compile(r"^Horizons:[^.]*\.\s*")
 NUMBER = re.compile(r"\d[\d,.]*\d|\d")
 FIELDS = ("name", "id", "id_type", "mission_info", "mission_url",
-          "horizons_name", "object_type")
+          "horizons_name", "object_type", "helio_id", "helio_id_type")
+
+
+def served_identity(f):
+    """(horizons_id, id_type) the website serves for an entry's fields:
+    its 'helio_id' where it has one, as a small-body designation
+    ('helio_id_type', else 'smallbody', the type plotting gives a
+    helio_id), else its 'id' and 'id_type'. The rooms are Sun-centred,
+    and a helio_id is the record the orrery itself plots a body by when
+    the Sun is the centre (L-443, Tony's ruling of 2026-10-22: a small
+    body is served by its helio_id). period_fetch.py asks the period of
+    the same record, so the period and the identity describe one body."""
+    helio = f.get("helio_id")
+    if helio is not None:
+        return str(helio), f.get("helio_id_type") or "smallbody"
+    hid = f.get("id")
+    return (None if hid is None else str(hid)), f.get("id_type")
 
 
 class ExportError(Exception):
@@ -330,11 +357,12 @@ def build_objects(text):
         if "Horizons:" in description:
             raise ExportError("%s: its description still says 'Horizons:' "
                               "after the opening is removed" % key)
+        served_id, served_type = served_identity(f)
         objects[key] = {
             "name": f.get("name"),
-            "horizons_id": None if f.get("id") is None else str(f["id"]),
+            "horizons_id": served_id,
             "horizons_name": horizons_name,
-            "id_type": f.get("id_type"),
+            "id_type": served_type,
             "object_type": f.get("object_type"),
             "description": description or None,
             "info_url": f.get("mission_url"),
