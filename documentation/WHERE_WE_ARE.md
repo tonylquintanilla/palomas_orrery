@@ -19,8 +19,8 @@ view and drawer changes built; slice 2 designed.
 > the spacecraft and the comets on open paths.*
 >
 > **Needs you now:**
-> - *(do) Patch 1 on the website; patches 2 and 3 on the orrery, in
->   order; the runs and pushes; then your phone look.*
+> - *(do) Patch 1 on the website; patches 2, 3 and L470_1 on the
+>   orrery, in order; the runs and pushes; then your phone look.*
 > - Two papers left to try (`READING_L456_tony_20261021.md`).
 
 *Italic* lines are the must-reads. Marks reset at every update.
@@ -73,6 +73,7 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
   outside the view, never names them. (Oct 23)
 - Paths: one rule, planned in the orrery; nearest approaches place the
   fine steps; solid to today, dashed after. (Oct 23)
+- Gonggong off the skip lists; the maintenance run is its test. (Oct 23)
 
 ## Deferred
 
@@ -105,8 +106,6 @@ Read from files when this page was written, not typed from memory.
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
 At the next design talk:
-- "Gonggong skipped but needs discussion" (your run record, Oct 22;
-  L-470 (entries the website cannot serve)).
 - The Daily Run checking the orrery it pulled is the one you pushed
   (L-461 (pull matches push)): not built with slice 1; with slice 2.
 - The orrery's own Sun axis hover still types its period and tilt;

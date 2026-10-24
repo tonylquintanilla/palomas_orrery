@@ -120,6 +120,10 @@ requires the new target.)
 Module updated: October 22, 2026 with Anthropic's Claude Opus 5.5 (L-443:
 an entry with a helio_id is fetched by it, as a small body, as plotting's
 pre-fetch now does around the Sun and as the export serves it.)
+Module updated: October 23, 2026 with Anthropic's Claude Opus 5.5 (L-470:
+Gonggong comes off SKIP_NAMES with palomas_orrery.py's two pre-fetch
+lists, so its period is fetched, around the Sun by its helio_id, 2007
+OR10, and the Horizons check confirms it.)
 """
 
 import ast
@@ -135,7 +139,10 @@ LINE = "=" * 70
 # the animation): the object types it asks elements for, and the names it
 # never asks. Copied, and held to the source by test_period_fetch.py.
 PLOTTED_TYPES = ("orbital", "satellite", "trajectory", "lagrange_point")
-SKIP_NAMES = ("MK2", "Xiangliu", "Vanth", "Gonggong")
+# Gonggong came off both copies on 2026-10-23 (L-470): no failure was on
+# record, and the maintenance run is the test (Tony: "just take it off the
+# skip list and see if it fails").
+SKIP_NAMES = ("MK2", "Xiangliu", "Vanth")
 
 READ_FIELDS = ("name", "key", "id", "id_type", "object_type", "is_mission",
                "helio_id", "helio_id_type")

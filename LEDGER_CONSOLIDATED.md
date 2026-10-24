@@ -593,6 +593,10 @@ Module updated: October 23, 2026, evening, with Anthropic's Claude Opus
 DESIGN_L443_slice2_rulings_20261023.md; L-476 new, the orrery's plots by
 the same path plan), built on b90d895 and gallery 25e4d24 with patches
 L472_1 and L472_2.
+Module updated: October 23, 2026, evening, with Anthropic's Claude Opus
+5.5 (L-470: Gonggong off the six skip lists and SKIP_NAMES, the
+maintenance run the test, by Tony's ruling in the coordination note),
+built on b90d895 with patches L472_2 and L472_3.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -810,7 +814,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*241 live items; 225 need attention (`!`); 165 RICE-scored; 222 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*247 live items; 230 need attention (`!`); 165 RICE-scored; 222 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -952,7 +956,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-432 | Objects drawn in the default goldenrod (orrery, colours) | OPEN | -- | 2026-10-11 |
 | ! | L-434 | Stored drawings for the other dot-cloud shells (orrery + gallery) | OPEN | -- | 2026-10-22 |
 | ! | L-435 | Standing rulings that are method, held only on Tony's page (skills, records) | OPEN | -- | 2026-10-12 |
-| ! | L-443 | The rest of the orrery's objects come to the website as plotted positions (gallery + orrery, objects) | OPEN | -- | 2026-10-22 |
+| ! | L-443 | The rest of the orrery's objects come to the website as plotted positions (gallery + orrery, objects) | OPEN | -- | 2026-10-23 |
 | ! | L-449 | A cache build dropped the 82 build-run records it should have carried (gallery, cache builder) | OPEN | -- | 2026-10-17 |
 | ! | L-454 | A drawn device for edges that move: the magnetopause, the bow shock and their kind (orrery + gallery, design) | OPEN | -- | 2026-10-22 |
 | ! | L-456 | What a visitor reads, from Earth's Mode 5 look: body radii, sources as a list with live links, Celsius for Earth's surface and air (gallery + orrery) | OPEN | -- | 2026-10-21 |
@@ -964,7 +968,13 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-466 | Every drawing starts and stops where a served row says (orrery + gallery, the Sun's slice and Earth's) | OPEN | -- | 2026-10-22 |
 | ! | L-467 | The scanner credits a display line with a citation it only sits near (orrery, provenance scanner) | OPEN | -- | 2026-10-21 |
 | ! | L-468 | The Sun room's phone look of 2026-10-21, night: the corona's drawer text and the Hills cloud's cross (gallery, the Sun room) | OPEN | -- | 2026-10-22 |
-| ! | L-470 | Orrery entries the website cannot serve as they stand (orrery, objects) | OPEN | -- | 2026-10-22 |
+| ! | L-470 | Orrery entries the website cannot serve as they stand (orrery, objects) | OPEN | -- | 2026-10-23 |
+| ! | L-471 | A delivered patch is final (safe-file-editing, next version) | OPEN | -- | 2026-10-22 |
+| ! | L-472 | The Solar System room's view: a far body drawn in the wrong place when zoomed in (gallery, the Solar System room) | OPEN | -- | 2026-10-23 |
+|  | L-473 | A group in the Solar System room's drawer opens with its bodies unticked (gallery, the drawer) | PARKED | -- | 2026-10-23 |
+| ! | L-474 | See more / See fewer at the top of the Solar System room's drawer (gallery, the drawer) | OPEN | -- | 2026-10-23 |
+| ! | L-475 | The About link at the bottom of every room's i panel (gallery, the rooms' shared chrome) | OPEN | -- | 2026-10-23 |
+| ! | L-476 | The orrery's whole-path plots draw by the same path plan as the website (orrery, spacecraft and comets) | OPEN | -- | 2026-10-23 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1626,7 +1636,28 @@ secs. 3 and 4; gallery `interactive.html` (`navFrameZoom`, `ssTick`,
   Where We Are's design-talk list. Not part of the view fix
   (`documentation/HANDOFF_L443_view_and_drawer_brief_20261023.md`,
   sec. 3, item 5).
-**Gap (replaces the one below, 2026-10-22, evening):** the Gonggong test,
+- **2026-10-23, evening: discussed and ruled.** In the coordination
+  session (`documentation/COORD_L470_gonggong_ruling_20261023.md`), Tony: "I'm not
+  aware of any problem." and "Yes, or just take it off the skip list
+  and see if it fails." The skip came in with commit c60572d,
+  2026-02-04, beside Weywot's comment; nothing records a failure. The
+  test runs through the checks that already exist.
+- **Built 2026-10-23,** `patch_L470_1_gonggong_off_skip_lists_20261023.py`:
+  Gonggong off all six lists in palomas_orrery.py (the two pre-fetch
+  lists, the static trajectory list, the three analytical fallbacks)
+  and off SKIP_NAMES in period_fetch.py, each with a dated comment.
+  Checked in the sandbox, which cannot reach JPL: the period fetch's
+  suite passes 36 of 36 and goes red, naming both lists, with only one
+  side changed; the period fetch on a throwaway copy lists Gonggong as
+  the one body missing a fetched period and asks 2007 OR10 around the
+  Sun, saving nothing (UNREACHABLE); the orrery starts headlessly.
+**Gap (replaces the one below, 2026-10-23, evening):** Tony's maintenance
+run: Period fetch and Horizons check answer for Gonggong, or name the
+failure (then Discard Changes, and the skip goes back with its comment:
+record, centre, date); one look in the orrery with Gonggong as the
+centre; then the website's Daily Run pulls the fetched period, and
+L-470's Gonggong instance closes.
+**Gap (superseded above):** the Gonggong test,
 by the skill's method, in a session and on Tony's orrery.
 **Gap (superseded above):** a plot of Gonggong around
 the Sun.

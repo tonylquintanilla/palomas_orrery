@@ -1,8 +1,8 @@
 {
   "schema": 2,
   "source_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
-  "period_inputs_sha256": "c3079ced513385218f81bb3feee806fa4389e93f7775aeeb3f6735c9e722669a",
-  "confirmations_sha256": "58e8def00dea8385ed62cd7b384adb49cd837c6d3188282e2425258dd80e862f",
+  "period_inputs_sha256": "596f71af92b79fb3e0c798ca699418f837b50b1c8c190ac56bc4a7a1cd277c4b",
+  "confirmations_sha256": "342ba6e78d25a04aeaad78f36833d263db33a658d443c1e9be89bb8e23f9f30f",
   "cadence_days": 30,
   "objects": {
     "sun": {
@@ -1287,22 +1287,55 @@
       "description": "Dwarf planet with a highly inclined orbit.",
       "info_url": "https://en.wikipedia.org/wiki/Gonggong_(dwarf_planet)",
       "period": {
-        "kind": "typed",
-        "typed": true,
-        "center": null,
-        "center_label": null,
+        "kind": "fetched",
+        "typed": false,
+        "center": "@0",
+        "center_label": "the solar system's center of mass",
+        "target": "2007 OR10",
+        "target_label": null,
         "open_orbit": false,
-        "fetched": null,
-        "words": "Typed value, not fetched from JPL.",
+        "fetched": "2026-10-23",
+        "words": null,
         "years": {
-          "value": 550.33662,
-          "figures": 8,
-          "text": "550.33662"
+          "value": 548.9,
+          "figures": 4,
+          "text": "548.9"
         },
         "days": {
-          "value": 201010.45,
-          "figures": 8,
-          "text": "201010.45"
+          "value": 200480.0,
+          "figures": 5,
+          "text": "200,480"
+        },
+        "record": {
+          "days": 200476.3596847122,
+          "error_days": 9.386,
+          "error_from": "sigma",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-23 21:36",
+          "elements": {
+            "a": 67.06623836017965,
+            "e": 0.5034108878843083,
+            "i": 30.8027048425668,
+            "omega": 206.9901635467511,
+            "Omega": 336.8394951223004,
+            "TP": 2399391.717545004,
+            "MA": 111.2372836321973,
+            "TA": 151.6179422547229,
+            "q": 33.30436376022094,
+            "epoch": "2026-10-23 21:36 osc."
+          },
+          "paired": true,
+          "sun_elements": {
+            "a": 66.86134082851292,
+            "e": 0.5047779676450614,
+            "i": 30.91298387744561,
+            "omega": 206.6299033373185,
+            "Omega": 336.8376336052839,
+            "epoch": "2026-10-23 21:36 osc.",
+            "TP": 2399301.498297978,
+            "MA": 111.8367532733966,
+            "TA": 151.9825493579732
+          }
         }
       },
       "confirmation": {
@@ -1312,7 +1345,14 @@
           "id_type": "smallbody",
           "horizons_name": "225088 Gonggong"
         },
-        "period": null
+        "period": {
+          "confirmed": "2026-10-23",
+          "center": "@0",
+          "epoch": "2026-10-23 21:36",
+          "days": 200476.3596847122,
+          "jpl_days": 200476.3596847122,
+          "error_days": 9.386
+        }
       }
     },
     "makemake": {

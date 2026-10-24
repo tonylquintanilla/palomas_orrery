@@ -633,16 +633,202 @@ patch applied: L-443 slice 2 design (3 files)
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
 2. Move it to documentation/, 
-3. then commit and push. No maintenance run is needed. I've moved this ahead of the Gonggong step on purpose: if Gonggong fails, you'll want to discard only the Gonggong changes, so these records go in first. -- 
+3. then commit and push. No maintenance run is needed. I've moved this ahead of the Gonggong step on purpose: if Gonggong fails, you'll want to discard only the Gonggong changes, so these records go in first. -- 95be388ee4d2a94894fc233864d1978c733c9d34
 4. **Run `patch_L470_1_gonggong_off_skip_lists_20261023.py`.** Don't commit yet.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L470_1_gonggong_off_skip_lists_20261023.py
+ok  palomas_orrery.py (7 edits)
+ok  period_fetch.py (2 edits)
+ok  LEDGER_CONSOLIDATED.md (2 edits)
+ok  documentation/WHERE_WE_ARE.md (3 edits)
+patch applied: L-470 Gonggong off the skip lists (4 files)
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
 5. **Do the maintenance run, and read two lines.**
    - Period fetch should say it fetched Gonggong.
-   - Horizons check should pass.
-   - If either names Gonggong as failing, use Discard Changes in GitHub Desktop and bring me the line. That's the end of it for tonight.
-6. **If both passed, open the orrery with Gonggong as the centre body and plot it.** Does it draw?
-7. **If it draws,** move the patch to documentation/, then commit and push.
 
-8. **Then the website folder:** the Daily Run, which pulls Gonggong's new period, 
-9.  then commit and push as usual. Tomorrow's Daily Run would do the same if it's late.
+  Period fetch                 4.7s  rewrote data/osculating_cache.json -- PASS
+                                     -- fetched 1: Gonggong; elements refreshed
+                                     for: Gonggong
+
+   - Horizons check should pass.
+
+  Horizons check               0.9s  rewrote data/horizons_confirmations.json --
+                                     PASS -- 1 checked today, 1 queries
+
+   - If either names Gonggong as failing, use Discard Changes in GitHub Desktop and bring me the line. That's the end of it for tonight. -- both passed
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261023T030636Z, 1 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 2.6s  rewrote LEDGER_CONSOLIDATED.md
+  Skill manifest               0.2s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             1.9s  unchanged (1 checked, not written)
+  Period fetch                 4.7s  rewrote data/osculating_cache.json -- PASS
+                                     -- fetched 1: Gonggong; elements refreshed
+                                     for: Gonggong
+  Horizons check               0.9s  rewrote data/horizons_confirmations.json --
+                                     PASS -- 1 checked today, 1 queries
+  Objects export               0.3s  rewrote data/objects_export.json
+  Drawings export              2.6s  unchanged (7 checked, not written)
+  Module atlas                 7.6s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               5.1s  rewrote DATA_INVENTORY.md
+  Exact rows report            3.4s  rewrote EXACT_ROWS_PRINTED.md -- 11 of 43
+                                     exact rows printed at 40 lines (25 orrery,
+                                     15 gallery); 12 drawn only, 0 not followed,
+                                     0 map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.2s  No changes to constants_new.py since HEAD.
+  Constants relations          0.2s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              1.8s  No figure count exceeds its inputs: 39
+                                     derived row(s) read, 32 judged OK -- 32 OK,
+                                     7 NOT YET MIGRATED; 23 conversion(s)
+                                     checked.
+  Constants export check       3.9s  Export matches the store: sha256
+                                     a60a8fed6a19 on both sides; 206 rows
+                                     re-read, 57 not exported, 44 tokens; 480
+                                     conversions re-computed, 10 of 10 worked
+                                     cases hold; 206 citations worked out again,
+                                     8 of 8 worked cases hold.
+  Objects export check         0.3s  pass
+  Horizons confirmations       0.4s  pass -- 63 of 63 entries and 61 periods
+                                     confirmed, 26 sheets read, within 30 days
+  Horizons check suite         0.8s  pass -- 64 checks, every planted fault
+                                     caught by name
+  Period fetch suite           2.9s  pass -- 36 checks, every planted fault
+                                     caught (20 planted, 8 of them for Earth's
+                                     period, L-445)
+  Skill headers                0.2s  12 skills parsed, no consistency problems.
+  Exact rows by the count      3.8s  PASSING -- 11 printed exact rows each state
+                                     a count; 25 orrery lines print through
+                                     exact_text() or row_text(); 15 gallery lines
+                                     are served the count
+  Dimensions                   2.3s  No unit contradicts its arithmetic: 62
+                                     derived row(s) read -- 53 OK, 6 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.2s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.2s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 204 status lines in constants_new.py are
+                                     well formed; 56 rows carry none.
+  Row shape                    0.1s  All 263 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.3s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Scanner row run (L-414)      0.3s  16 of 16 pins hold -- each row reads its own
+                                     comment run, declared rows are named, the
+                                     gate path is read by name.
+  Reset completeness          26.8s  PASS -- all 308 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  2.2s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped; nothing left behind.
+  Earth pole of date           0.3s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Hills cloud sampler (L-421)    1.0s  PASS -- 6 of 6 planted faults caught; the
+                                     real rows pass, the dots' plane tilted 34.0
+                                     deg
+  Drawings export check       25.8s  PASS -- 19 of 19 planted faults caught;
+                                     hills_cloud 3600 dots, plane tilted 31.0
+                                     deg, sha256 4d3e85616645; van_allen_belts
+                                     3200 dots, no plane recorded, sha256
+                                     75274e84f840; earth_exosphere 1500 dots, no
+                                     plane recorded, sha256 6112639fb2cd;
+                                     sun_corona 2500 dots, no plane recorded,
+                                     sha256 e2b57ccbc8a4; zodiacal_dust 3000
+                                     dots, no plane recorded, sha256
+                                     995f13a056e8; outer_oort_cloud 2736 dots, no
+                                     plane recorded, sha256 2f7ab88ee113;
+                                     galactic_tide 5000 dots, no plane recorded,
+                                     sha256 950a7511f0b5
+  Position digits (L-401)      2.1s  PASS -- 14 of 14 planted faults caught by
+                                     name; 23 hovers examined, 181 lines compared
+                                     against their errors; 5 pairs printed the
+                                     same from either end; 496 hovers of every
+                                     listed object from the Sun, Earth and
+                                     Neptune; 3 recorded 2xr answers read by
+                                     column name; 10 period sentences
+  Orbit markers (L-431, L-401)    9.2s  PASS -- 12 of 12 planted faults caught by
+                                     name; 4 ellipses, 1080 drawn points on their
+                                     period's centre; 14 markers, 9 dates, 53
+                                     printed distances against their errors; 6
+                                     elements as given; 3 Keplerian positions
+                                     half a year on; 1 parameters-window date
+                                     pairs; 2 Moon arcs; 2 perturbation checks; 1
+                                     perihelion osculating orbits; 2 frames; 2
+                                     sources read
+  Domain Split                 0.5s  PASS -- 6 of 6 planted faults caught; the
+                                     split reads each module's Domain: tag and
+                                     prints the same on the console, in the audit
+                                     and in the run history.
+  Maintenance report (L-269)    0.1s  PASS -- 4 of 4 planted faults caught by
+                                     name; 4 summaries; 2 risen file(s) named
+  Dashboard parity             0.3s  PASS -- 10 of 10 planted faults caught; 90
+                                     steps matched to their buttons by name and
+                                     script; 121 cards carry a short line; the
+                                     search finds 4 of 4 cases in any word order
+  Worksheet checker            8.0s  72 of 107 routed, 8 clean
+  Worksheet checker tests     18.1s  All 135 checks passed
+  Worksheet key round trip     1.1s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         22.2s  All 76 checks passed
+  Extractor pins               0.5s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          55.9s  0 TIER-1 -- the push gate holds; Whole tree,
+                                     Tier-1: 276: orrery 112, Earth System 149,
+                                     stars 13, utilities 2.
+
+======================================================================
+  31 of 31 gating checkers passed -- 221.6s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           72 of 107 routed, 8 clean
+    Provenance scanner          0 TIER-1 -- the push gate holds; Whole tree, Tier-1: 276: orrery 112, Earth System 149, stars 13, utilities 2.
+      No file's Tier-1 count rose since the previous run.
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2435 file(s) examined, 16 written, 0 created, 0 removed, 3 rewritten identically
+    written   DATA_INVENTORY.md
+    written   EXACT_ROWS_PRINTED.md
+    written   LEDGER_CONSOLIDATED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/horizons_check_last_run.json
+    written   data/horizons_confirmations.json
+    written   data/objects_export.json
+    written   data/osculating_cache.json
+    written   data/osculating_cache_backup.json
+    written   data/osculating_cache_backup_old.json
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    written   module_atlas.py
+    rewritten with identical bytes, no action needed:
+      PROJECT_INSTRUCTIONS.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+    21 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+1. **If both passed, open the orrery with Gonggong as the centre body and plot it.** Does it draw? -- yes
+2. **If it draws,** move the patch to documentation/, then commit and push. -- 
+
+3. **Then the website folder:** the Daily Run, which pulls Gonggong's new period, 
+4.  then commit and push as usual. Tomorrow's Daily Run would do the same if it's late.
 
 Your phone look found five things: the drawer's three buttons, groups opening ticked, the count line crowding the right side, Sedna's orbit cut off, and the About card leaving you in the lobby. I'll take them up one at a time once these runs are done.

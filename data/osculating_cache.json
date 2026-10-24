@@ -2272,24 +2272,63 @@
   },
   "Gonggong": {
     "elements": {
-      "a": 66.88646716399916,
-      "e": 0.503418896926206,
-      "i": 30.87406828765567,
-      "omega": 206.6354270819585,
-      "Omega": 336.8396548719409,
-      "epoch": "2026-01-06 osc.",
-      "TP": 2399186.248332347,
-      "MA": 111.4572618679292,
-      "TA": 151.724147911973
+      "a": 66.86134082851292,
+      "e": 0.5047779676450614,
+      "i": 30.91298387744561,
+      "omega": 206.6299033373185,
+      "Omega": 336.8376336052839,
+      "epoch": "2026-10-23 21:36 osc.",
+      "TP": 2399301.498297978,
+      "MA": 111.8367532733966,
+      "TA": 151.9825493579732
     },
     "metadata": {
-      "fetched": "2026-01-06T00:32:54.348297",
+      "fetched": "2026-10-23T21:35:31.527998",
       "source": "JPL Horizons",
-      "solution_date": "2026-01-06",
+      "solution_date": "2026-10-23",
       "horizons_id": "2007 OR10",
       "display_name": "Gonggong",
       "refresh_interval_days": 30,
       "center_body": "@sun"
+    },
+    "period": {
+      "days": 200476.3596847122,
+      "open_orbit": false,
+      "center": "@0",
+      "epoch": "2026-10-23 21:36",
+      "fetched": "2026-10-23",
+      "source": "JPL Horizons PR (sidereal orbit period)",
+      "year_change_days": 0.009687070007203147,
+      "year_step_days": 365.25,
+      "sbdb_sigma_days": 9.386,
+      "sbdb_status": "SBDB sigma",
+      "sbdb_fullname": "225088 Gonggong (2007 OR10)",
+      "error_days": 9.386,
+      "error_from": "sigma",
+      "test": {
+        "@sun": 132.8029440723185,
+        "@0": 0.009687070007203147,
+        "run": "2026-10-23"
+      },
+      "horizons_targetname": "225088 Gonggong (2007 OR10)",
+      "target": "2007 OR10",
+      "target_label": null,
+      "agrees_with_elements_fetch": null,
+      "elements_fetch_not_compared": null,
+      "elements": {
+        "a": 67.06623836017965,
+        "e": 0.5034108878843083,
+        "i": 30.8027048425668,
+        "omega": 206.9901635467511,
+        "Omega": 336.8394951223004,
+        "TP": 2399391.717545004,
+        "MA": 111.2372836321973,
+        "TA": 151.6179422547229,
+        "q": 33.30436376022094,
+        "epoch": "2026-10-23 21:36 osc."
+      },
+      "elements_fetch_days": 199692.1759533987,
+      "elements_fetch_center": "@sun"
     }
   },
   "Orcus": {

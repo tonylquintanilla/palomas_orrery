@@ -121,6 +121,12 @@ the elements pre-fetch, static and animated, asks a body's elements of
 its helio_id when the Sun is the centre, as the position fetch already
 did, so a body's orbit and marker come from one record, the one the
 website serves.)
+Module updated: October 23, 2026 with Anthropic's Claude Opus 5.5 (L-470:
+Gonggong comes off all six Horizons skip lists, the two pre-fetch lists,
+the static trajectory list and the three analytical fallbacks. No failure
+was on record; it went on in commit c60572d, 2026-02-04, with Weywot's
+comment beside it. Tony's ruling of this day: "just take it off the skip
+list and see if it fails", so the maintenance run is the test.)
 
 """
 #Paloma's Orrery - Solar System Visualization Tool
@@ -4458,7 +4464,7 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
             if not x:
 
             #    ANALYTICAL_POSITION_FALLBACK = ['MK2', 'Xiangliu', 'Vanth', 'Weywot', '6AC4721']
-                ANALYTICAL_POSITION_FALLBACK = ['MK2', 'Xiangliu', 'Vanth', 'Gonggong', '6AC4721']  # Weywot removed - JPL data works at Quaoar
+                ANALYTICAL_POSITION_FALLBACK = ['MK2', 'Xiangliu', 'Vanth', '6AC4721']  # Weywot removed - JPL data works at Quaoar; Gonggong removed 2026-10-23 (L-470): no failure on record; the maintenance run is the test
                 if planet in ANALYTICAL_POSITION_FALLBACK:
                     from orbital_elements import planetary_params
                     if planet in planetary_params:
@@ -4684,7 +4690,7 @@ def plot_objects():
 
     # These TNO moons have no usable JPL parent-centered ephemeris
 #    SKIP_HORIZONS_PREFETCH = ['MK2', 'Xiangliu', 'Vanth', 'Weywot']
-    SKIP_HORIZONS_PREFETCH = ['MK2', 'Xiangliu', 'Vanth', 'Gonggong']  # Weywot removed - JPL data works at Quaoar
+    SKIP_HORIZONS_PREFETCH = ['MK2', 'Xiangliu', 'Vanth']  # Weywot removed - JPL data works at Quaoar; Gonggong removed 2026-10-23 (L-470): no failure on record; the maintenance run is the test
 
     # Filter objects that need osculating elements
     pre_fetch_objects = [
@@ -4895,7 +4901,7 @@ def plot_objects():
 
                 # These TNO moons have no usable JPL parent-centered ephemeris
         #        SKIP_HORIZONS_TRAJECTORY = ['MK2', 'Xiangliu', 'Vanth', 'Weywot']
-                SKIP_HORIZONS_TRAJECTORY = ['MK2', 'Xiangliu', 'Vanth', 'Gonggong']  # Weywot removed - JPL data works at Quaoar
+                SKIP_HORIZONS_TRAJECTORY = ['MK2', 'Xiangliu', 'Vanth']  # Weywot removed - JPL data works at Quaoar; Gonggong removed 2026-10-23 (L-470): no failure on record; the maintenance run is the test
                 
                 for obj in selected_objects:
                     # Skip exoplanet objects - they don't use JPL Horizons
@@ -5845,7 +5851,7 @@ def plot_objects():
 
                 # Fallback for objects without JPL ephemeris (e.g., MK2, 6AC4721)
             #    ANALYTICAL_POSITION_FALLBACK = ['MK2', 'Xiangliu', 'Vanth', 'Weywot', '6AC4721']
-                ANALYTICAL_POSITION_FALLBACK = ['MK2', 'Xiangliu', 'Vanth', 'Gonggong', '6AC4721']  # Weywot removed - JPL data works at Quaoar
+                ANALYTICAL_POSITION_FALLBACK = ['MK2', 'Xiangliu', 'Vanth', '6AC4721']  # Weywot removed - JPL data works at Quaoar; Gonggong removed 2026-10-23 (L-470): no failure on record; the maintenance run is the test
                 if obj_data is None and obj['name'] in ANALYTICAL_POSITION_FALLBACK:
                     from orbital_elements import planetary_params
                     if obj['name'] in planetary_params:
@@ -6452,7 +6458,7 @@ def animate_objects(step, label):
 
     # These TNO moons have no usable JPL parent-centered ephemeris
 #    SKIP_HORIZONS_PREFETCH = ['MK2', 'Xiangliu', 'Vanth', 'Weywot']
-    SKIP_HORIZONS_PREFETCH = ['MK2', 'Xiangliu', 'Vanth', 'Gonggong']  
+    SKIP_HORIZONS_PREFETCH = ['MK2', 'Xiangliu', 'Vanth']  # Gonggong removed 2026-10-23 (L-470): no failure on record; the maintenance run is the test
 
     pre_fetch_objects = [
         obj['name'] for obj in selected_objects_for_prefetch 
@@ -6943,7 +6949,7 @@ def animate_objects(step, label):
                         # ===================================================================
 
                 #        ANALYTICAL_ANIMATION_FALLBACK = ['MK2', 'Xiangliu', 'Vanth', 'Weywot', '6AC4721']  # Objects without usable JPL ephemeris
-                        ANALYTICAL_ANIMATION_FALLBACK = ['MK2', 'Xiangliu', 'Vanth', 'Gonggong', '6AC4721']  # Weywot removed - JPL data works at Quaoar
+                        ANALYTICAL_ANIMATION_FALLBACK = ['MK2', 'Xiangliu', 'Vanth', '6AC4721']  # Weywot removed - JPL data works at Quaoar; Gonggong removed 2026-10-23 (L-470): no failure on record; the maintenance run is the test
 
                         if obj['name'] in ANALYTICAL_ANIMATION_FALLBACK:
                             # Check if fetch_trajectory returned empty/None

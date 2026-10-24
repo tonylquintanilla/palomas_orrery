@@ -459,7 +459,17 @@
       "queries": [
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2007%20OR10&group=sb&format=text",
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2007%20OR10&group=mb&format=text"
-      ]
+      ],
+      "period": {
+        "confirmed": "2026-10-23",
+        "center": "@0",
+        "target": "2007 OR10",
+        "epoch": "2026-10-23 21:36",
+        "days": 200476.3596847122,
+        "error_days": 9.386,
+        "jpl_days": 200476.3596847122,
+        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='2007%20OR10%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@0'&TLIST='2461337.400000000'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
+      }
     },
     "makemake": {
       "confirmed": "2026-10-22",
