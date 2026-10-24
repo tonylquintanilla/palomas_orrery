@@ -606,6 +606,11 @@ Module updated: October 24, 2026, noon, with Anthropic's Claude Opus 5.5
 (the build of L-477 to L-480 in gallery patch_L477_2, interactive-exhibit
 1.21 -> 1.22, protocol v3.110, the record HANDOFF_L477_build_20261024.md),
 built on 82fa04c and gallery 2c2057d.
+Module updated: October 24, 2026, afternoon, with Anthropic's Claude Opus
+5.5 (Tony's phone look of the L-477 build: L-477 to L-480 closed; L-481
+new, his three readability asks, built in gallery patch_L481_1; L-482 new,
+the Sun and Earth rooms' Reset, a question), built on faa965e and gallery
+ea83ef0.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -823,7 +828,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*247 live items; 231 need attention (`!`); 165 RICE-scored; 226 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*245 live items; 229 need attention (`!`); 165 RICE-scored; 230 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -980,10 +985,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-470 | Orrery entries the website cannot serve as they stand (orrery, objects) | OPEN | -- | 2026-10-23 |
 | ! | L-471 | A delivered patch is final (safe-file-editing, next version) | OPEN | -- | 2026-10-22 |
 | ! | L-476 | The orrery's whole-path plots draw by the same path plan as the website (orrery, spacecraft and comets) | OPEN | -- | 2026-10-23 |
-| ! | L-477 | The Solar System room's drawer: no See more, no "All", a group row only opens, and Reset (gallery, the drawer) | OPEN | -- | 2026-10-24 |
-| ! | L-478 | The count line moves to the left, above the object label (gallery, the Solar System room's HUD) | OPEN | -- | 2026-10-24 |
-| ! | L-479 | A far orbit's frame: Go To fits the whole orbit, and every body's hover gives its orbit's near and far distance (gallery, the Solar System room) | OPEN | -- | 2026-10-24 |
-| ! | L-480 | Closing the About card goes back to the room the visitor came from (gallery, the lobby's About card) | OPEN | -- | 2026-10-24 |
+| ! | L-481 | Readability: bullets in the Solar System room's hovers, JPL Horizons' address in the i panels, the closing paragraph a list (gallery, the rooms' words) | OPEN | -- | 2026-10-24 |
+| ! | L-482 | Whether the Sun and Earth rooms' All / none becomes Reset too (gallery, the rooms' shared chrome) | OPEN | -- | 2026-10-24 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1358,6 +1361,10 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-473 | A group in the Solar System room's drawer opens with its bodies unticked (gallery, the drawer) | DONE | -- | 2026-10-24 |
 |  | L-474 | See more / See fewer at the top of the Solar System room's drawer (gallery, the drawer) | DONE | -- | 2026-10-24 |
 |  | L-475 | The About link at the bottom of every room's i panel (gallery, the rooms' shared chrome) | DONE | -- | 2026-10-24 |
+|  | L-477 | The Solar System room's drawer: no See more, no "All", a group row only opens, and Reset (gallery, the drawer) | DONE | -- | 2026-10-24 |
+|  | L-478 | The count line moves to the left, above the object label (gallery, the Solar System room's HUD) | DONE | -- | 2026-10-24 |
+|  | L-479 | A far orbit's frame: Go To fits the whole orbit, and every body's hover gives its orbit's near and far distance (gallery, the Solar System room) | DONE | -- | 2026-10-24 |
+|  | L-480 | Closing the About card goes back to the room the visitor came from (gallery, the lobby's About card) | DONE | -- | 2026-10-24 |
 
 ### W.Done -- Web Publication track, closed items
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1387,225 +1394,64 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
-#### [L-480] Closing the About card goes back to the room the visitor came from (gallery, the lobby's About card)
-<!-- L:480 status:OPEN upd:2026-10-24 section:A flag: rice: -->
-- **Found 2026-10-23, Tony's phone look of patch_L472_1, checklist item
-  5** (`documentation/WHERE_WE_ARE_10-23-26_1402_run_record.md`). Tony: "correct.
-  but closing it takes you to the lobby. to get back to the render we
-  need to use the back button <"
-- **What the code says, read at gallery b0f50ce (not run).** The i
-  panel's last line (`mountAboutLink`, L-475) opens `index.html#about`,
-  the lobby with its About card showing; the card's close button closes
-  the card and leaves the visitor in the lobby.
-- **2026-10-24, method, Claude's pick at the design talk,** put to Tony
-  with "you can overrule" and not overruled (`documentation/DESIGN_L477_drawer_and_view_rulings_20261024.md`,
-  sec. 4): closing the card steps back to the page the visitor came
-  from, through the browser's history, as the Gallery button already
-  does. From a room, the visitor lands back in that room; arriving at
-  the lobby directly, the close stays in the lobby as now.
-- **2026-10-24: built,** as ruled: index.html knows when a room's About
-  line sent the visitor (`aboutFromRoom`: the page opened at #about from
-  interactive.html on this site), and closing the card then steps back
-  through the browser's history; otherwise the close stays in the lobby,
-  as before. gallery `patch_L477_2_drawer_view_build_20261024.py`; the
-  record `documentation/HANDOFF_L477_build_20261024.md`. Checked: the
-  drawer check, seven planted faults; the figures check's part 6, three;
-  the headless walk, 105 checks, red on the old page; the Sun and Earth
-  rooms driven in the old page and the new, identical; the offline
-  maintenance run on a copy, 35 of 35 gating checkers (its five pulls
-  cannot reach GitHub from the sandbox).
-**Gap (replaces the one below, 2026-10-24):** Tony's run of gallery
-patch_L477_2, its maintenance run, push and live run; then his phone
-look, on which this closes.
-**Gap (superseded above):** the build in the gallery, with L-477, L-478 and L-479; then
-Tony's look on the phone.
-**Ref:** L-475 (closed; the link itself); L-443; gallery `index.html`
-(`.about-overlay`), `interactive.html` (`mountAboutLink`).
+#### [L-482] Whether the Sun and Earth rooms' All / none becomes Reset too (gallery, the rooms' shared chrome)
+<!-- L:482 status:OPEN upd:2026-10-24 section:A flag: rice: -->
+- **Raised 2026-10-24, building L-477.** Tony's ruling of the day, that
+  All / none becomes Reset and nothing ticks many things at once, was
+  made for the Solar System room, whose rows are bodies and their
+  orbits ("All" is very confusing with too many orbits all at once").
+  The Sun and Earth rooms share the same top-bar button, and there it
+  still ticks or unticks every shell. The build left them unchanged and
+  asked rather than assumed (`documentation/HANDOFF_L477_build_20261024.md`,
+  sec. 5).
+**Gap:** Tony's word at the next design talk; then, if it is yes, the
+build in the shared chrome, with both rooms walked headlessly and on the
+phone.
+**Ref:** L-477 (closed; the ruling); gallery `interactive.html`
+(`wireSunDrawer`, `sun-drawer-all`); interactive-exhibit, One chrome,
+many rooms.
 
-#### [L-479] A far orbit's frame: Go To fits the whole orbit, and every body's hover gives its orbit's near and far distance (gallery, the Solar System room)
-<!-- L:479 status:OPEN upd:2026-10-24 section:A flag: rice: -->
-- **Found 2026-10-23, Tony's phone look of patch_L472_1, checklist item
-  3** (`documentation/WHERE_WE_ARE_10-23-26_1402_run_record.md`). Tony: "the initial
-  view of the sedna orbit is cut off. it does show the object but not
-  the entire orbit which is a closed orbit. one has to zoom out to 200
-  au to see the whole orbit. when zooming in to 20 au the orbit is out
-  of sight, not just the object, because the orbit is so wide, and the
-  1 ticked body label does appear."
-- **Measured, 2026-10-24.** The room frames on where each ticked body
-  is now, plus 20% (Tony's ruling of 2026-10-02). Sedna is 82.8 AU out
-  (the Oct 22 run, as the brief gives it), so the view reaches about 99
-  AU; its served orbit (a = 539.58 AU, e = 0.8588, coverage_index.json
-  at gallery b0f50ce) runs from 76 to about 1,000 AU, so a view holding
-  all of it is about twelve times wider. Sedna itself is in view, so
-  the count line (L-472) says nothing. Go To (`ssGo`) frames the body
-  and then opens its text box (`sunLabelShow`).
-- **Tony's rulings, 2026-10-24, at the design talk** (`documentation/DESIGN_L477_drawer_and_view_rulings_20261024.md`,
-  sec. 3). Offered A (keep the Oct 2 rule), B (Go To fits the whole
-  orbit) and C (ticking one body fits it), Claude leaning B: "B may work
-  but now it activates the hover". Offered B1 (keep the text box, one
-  tap closes it, every Go To alike) and B2 (Go To only moves the view):
-  "Let's try B1". So, AS A TRIAL: Go To fits the body's whole orbit and
-  opens its text box, the same for every body; ticking keeps the Oct 2
-  rule. His phone look after the build decides whether it stays.
-- **And the orbit's near and far distance.** Offered "Its orbit runs
-  from 76 to 1,000 AU from the Sun.": "It would be informative but may
-  be too long. It would also give an intuitive sense of the
-  eccentricity." Offered one short line, "Orbit: 76 to 1,000 AU from
-  the Sun.": "Yes". Every body on a closed orbit gets that line.
-- **Method for the build** (the design record, sec. 3): Go To's frame
-  is the drawn orbit's farthest point from the Sun times the room's
-  margin, 1.2; the two distances are worked out from the served a and
-  e, never typed, their figures and citation by provenance-discipline's
-  rules for a computed number; a body drawn around the barycentre
-  (`drawn_orbit`) needs the build to say which elements the line reads;
-  an open path is slice 2's to decide; the hover-length check holds
-  every hover, and a body pushed over its ceiling comes back to Tony.
-- **2026-10-24: built,** as ruled: Go To fits the body's whole drawn
-  orbit at the room's 20% and opens its text box, the same for every
-  body (`ssGo` passing `whole` through `sunApplyVisibility`,
-  `sunFocusOn`, `sunFrameOn` and `sunGroupRadius`); ticking, Home and
-  Reset still frame on positions. Every body's hover ends with "Orbit: q
-  to Q AU from the Sun." (`SolarSystemFigures.orbitLine`, from the
-  served a and e, which the driver now passes): three figures, never
-  finer than the distance line's error earns -- Sedna 76.2 to 1,000,
-  Earth 0.983 to 1.02, Halley 0.571 to 35.1. The longest body hover is
-  10 lines (Orcus), the ceiling 17. Found and fixed in passing: a
-  zoom-out tap could shrink a view Go To set past the buttons' 5,000 AU
-  cap; no orbit served today reaches it. gallery
-  `patch_L477_2_drawer_view_build_20261024.py`; the record
-  `documentation/HANDOFF_L477_build_20261024.md`. Checked: the drawer
-  check, seven planted faults; the figures check's part 6, three; the
-  headless walk, 105 checks, red on the old page; the Sun and Earth
-  rooms driven in the old page and the new, identical; the offline
-  maintenance run on a copy, 35 of 35 gating checkers (its five pulls
-  cannot reach GitHub from the sandbox).
-**Gap (replaces the one below, 2026-10-24):** Tony's run of gallery
-patch_L477_2, its maintenance run, push and live run; then his phone
-look, which settles the trial and closes this.
-**Gap (superseded above):** the build in the gallery, with L-477, L-478 and L-480; then
-Tony's look on the phone, which settles the trial.
-**Ref:** L-472 (closed; the count line); L-443; Tony's rulings of
-2026-10-02 (framing on position) and 2026-10-10 (Go To and the hover);
-gallery `interactive.html` (`ssGo`, `sunLabelShow`, `sunGroupRadius`,
-`sunFrameMargin`), `gallery/feature_renderers.js`,
-`gallery/solar_system_figures.js`, `documentation/smoke_hover_budget.js`.
-
-#### [L-478] The count line moves to the left, above the object label (gallery, the Solar System room's HUD)
-<!-- L:478 status:OPEN upd:2026-10-24 section:A flag: rice: -->
-- **Found 2026-10-23, Tony's phone look of patch_L472_1, checklist items
-  2 and 4** (`documentation/WHERE_WE_ARE_10-23-26_1402_run_record.md`). Tony: "correct,
-  but now the right side is getting crowded. would this line fit above
-  the object label on the left? maybe with a smaller grid line? or a
-  right justified grid line?" And: "mostly, although the aries symbol
-  is partially covered, that is why i am thinking we could move the
-  ticked body count to the left side above the object label."
-- **2026-10-24, settled at the design talk** (`documentation/DESIGN_L477_drawer_and_view_rulings_20261024.md`,
-  sec. 2). Claude proposed taking his suggestion as it stands, the
-  placement being method: "Yes".
-- The line (`#ss-outside`, `ssOutsideUpdate`) moves from above the grid
-  chip at the lower right to the left side, above the object label, in
-  the same type. The build checks on the phone that it does not collide
-  with the object label at its longest or with an open text box.
-- **2026-10-24: built,** as ruled: the line is a page element of its
-  own at the lower left, above the drawer's handle, at the height of the
-  HUD on the right, in the same type, hidden while the drawer is open.
-  Whether it meets the handle or an open text box at a long name is the
-  phone's to say. gallery `patch_L477_2_drawer_view_build_20261024.py`;
-  the record `documentation/HANDOFF_L477_build_20261024.md`. Checked:
-  the drawer check, seven planted faults; the figures check's part 6,
-  three; the headless walk, 105 checks, red on the old page; the Sun and
-  Earth rooms driven in the old page and the new, identical; the offline
-  maintenance run on a copy, 35 of 35 gating checkers (its five pulls
-  cannot reach GitHub from the sandbox).
-**Gap (replaces the one below, 2026-10-24):** Tony's run of gallery
-patch_L477_2, its maintenance run, push and live run; then his phone
-look, on which this closes.
-**Gap (superseded above):** the build in the gallery, with L-477, L-479 and L-480; then
-Tony's look on the phone.
-**Ref:** L-472 (closed; the line itself); gallery `interactive.html`
-(`#ss-outside`, `.ss-outside`, `ssOutsideUpdate`, the HUD).
-
-#### [L-477] The Solar System room's drawer: no See more, no "All", a group row only opens, and Reset (gallery, the drawer)
-<!-- L:477 status:OPEN upd:2026-10-24 section:A flag: rice: -->
-- **Found 2026-10-23, Tony's phone look of patch_L472_1, checklist item
-  1** (`documentation/WHERE_WE_ARE_10-23-26_1402_run_record.md`). Tony: "correct. but
-  now we have three options, which are a bit confusing, "all/none" on
-  the top bar and "See more" above the drawers. all/none opens or
-  closes all the objects. see more, just shows all the objects.
-  thoughts? consider using Design for a better layout. ... realistically
-  only See more and None will be used. a similar issue arises in the
-  group drawers. upon clicking comets or tno drawer all the objects are
-  selected. one then has to remove them all to select only one. or the
-  top all/none."
-- **What the code says, read at gallery b0f50ce (not run).** A group
-  row is one button with two zones: a tap in its `.pick` span, the
-  row's whole left end, about 65 px, runs `ssGroupTick` and ticks every
-  body; anywhere else runs `ssFold`. The left end is made wide on
-  purpose for body rows (L-318 round 3), and on a group row it is where
-  a thumb reaching for the name lands. So the comets opened unticked on
-  the afternoon of Oct 23 and ticked that night.
-- **2026-10-24, the design talk** (`documentation/DESIGN_L477_drawer_and_view_rulings_20261024.md`,
-  sec. 1). A mock-up at his request, "Drawer controls mock-up", a
-  Design canvas in his artifacts. Tony's finding: "What's confusing is
-  the the referent is different. See more/fewer rows all/none celestial
-  objects." See more acts on the list, All / none on the picture, and a
-  group row mixes the two; so each control acts on one thing.
-- **Tony's rulings, 2026-10-24.** "I think so. No "see more" Let that
-  be permanent. And change all/none to "Reset" that resets the view to
-  the starting view when the visitor wants a fresh start. Simple." And:
-  "Actually I think we should use the same logic for the groups. The
-  starting view is unticked. The visitor tries some objects. A Reset
-  button can bring back the original unticked list. "All" is very
-  confusing with too many orbits all at once. It is better for the
-  visitor to develop the view."
-- So: See more is removed for good, the six groups always listed and
-  folded; a group row only folds, its box gone; the top bar's All /
-  none becomes Reset, the room as a visitor first finds it (the served
-  ticks, Earth highlighted, every group folded, the opening view); each
-  open group's All / none becomes "Reset <group>", unticking its bodies
-  (Claude's reading, shown in the mock-up's option 1, for the phone
-  look to confirm); nothing ticks many bodies at once.
-- **Method for the build** (the design record, sec. 1): Reset and Home
-  stay distinct (Home keeps the ticks); a group's Reset shows only
-  while one of its bodies is ticked and leaves the group open; the
-  served rows lose `see_more`; the See more code and `toggleAll` and
-  `groupToggle` go; the drawer check and the headless walk change with
-  it, each new check shown red on a broken copy first.
-- **Carried for interactive-exhibit's next version, which rides this
-  build:** The Solar System room's drawer section names See more, the
-  group's box and All / none in several places, and a session following
-  it would build the old drawer (a wrong sentence, so a bump of its
-  own). The descriptions L-472 carried (the count line, now at the left
-  by L-478; the About line, with L-480's return) ride the same version.
-- **2026-10-24: built,** as ruled: See more and the groups' All / none
-  are gone; every group is listed, folded, and a group row only folds,
-  its arrow where a body has its box; the top bar's button reads Reset
-  in this room and puts back what it opened on, every group folded; an
-  open group's "Reset <group>" unticks its bodies once one is ticked;
-  the six group rows lose see_more in data/objects_config.json. The
-  room's i panel words follow, for Tony's word (in the record). The Sun
-  and Earth rooms keep All / none: whether they follow is his to say.
-  interactive-exhibit 1.22 records it, with protocol v3.110, in orrery
-  patch_L477_3. gallery `patch_L477_2_drawer_view_build_20261024.py`;
-  the record `documentation/HANDOFF_L477_build_20261024.md`. Checked:
-  the drawer check, seven planted faults; the figures check's part 6,
-  three; the headless walk, 105 checks, red on the old page; the Sun and
-  Earth rooms driven in the old page and the new, identical; the offline
-  maintenance run on a copy, 35 of 35 gating checkers (its five pulls
-  cannot reach GitHub from the sandbox).
-**Gap (replaces the one below, 2026-10-24):** Tony's run of gallery
-patch_L477_2, its maintenance run, push and live run; then his phone
-look, on which this closes. And the reinstall of interactive-exhibit
-1.22; the next session confirms its loaded copy reads 1.22.
-**Gap (superseded above):** the build in the gallery, with L-478, L-479 and L-480, and
-interactive-exhibit's next version; then Tony's phone look.
-**Ref:** L-443; L-473 and L-474 (closed into this); gallery
-`interactive.html` (`ssBuildRows`, `ssGroupTick`, `ssFold`,
-`ssAddSeeMore`, `sun-drawer-all`), `gallery/solar_system_drawer.js`
-(`toggleAll`, `groupToggle`, `seeMoreLabel`, `visible`),
-`data/objects_config.json` (the rooms section),
-`documentation/smoke_solar_system_drawer.js`,
-`tools/headless/walk_solar_system_drawer.js`.
+#### [L-481] Readability: bullets in the Solar System room's hovers, JPL Horizons' address in the i panels, the closing paragraph a list (gallery, the rooms' words)
+<!-- L:481 status:OPEN upd:2026-10-24 section:A flag: rice: -->
+- **Asked 2026-10-24, Tony's phone look of the L-477 build**
+  (`documentation/WHERE_WE_ARE_10-24-26_1140_run_record.md`, item 6, and his
+  note with the copy): "everything is correct. my one suggestion is to
+  add bullets to the sentences in the hover to improve readability in
+  dense text. i would also suggest adding the url to the JPL Horizons
+  sources in the info panels. at the bottom of the panel, the standard
+  paragraph, Part of Paloma's Orrery, revise "inventor's" to
+  "creator's", and also add bullets to each sentence for readability."
+- **Built the same afternoon,** gallery
+  `patch_L481_1_readability_build_20261024.py`; the record
+  `documentation/HANDOFF_L481_readability_20261024.md`:
+  - In the Solar System room each line of a body's hover after its name
+    is a bullet. Written as the number entity, `&#8226;`: Plotly 2.35.2
+    converts only eight named entities in text (mu, amp, lt, gt, nbsp,
+    times, plusmn, deg; read from its bundle), so `&bull;` would have
+    shown as written.
+  - Every source line naming JPL Horizons carries its address,
+    https://ssd.jpl.nasa.gov/horizons/ (fetched live 2026-10-24, the
+    page titled "Horizons System"), which the i panel makes a link: each
+    body's in the Solar System room, and Earth's Sun direction, Moon arc
+    and pole of date. The closing paragraphs that name Horizons link it.
+  - Each room's closing paragraph, the Explorer's too, is a bulleted
+    list, one sentence to a bullet, and reads "the creator's daughter".
+  - Checked: the figures check names all four, and goes red on the
+    morning's site on each; the walk, 108 checks, holds Sedna's four
+    bullets, its source line's address, and the closing list; the
+    typed-facts check reads the new sentences (its list updated:
+    "creator's", and the three Earth source lines with the address);
+    the Sun and Earth rooms differ from the morning's only in their
+    panels' text; the offline maintenance run, 35 of 35.
+- **Carried for interactive-exhibit's next version** (descriptions to
+  add, not wrong sentences): the Solar System room's hover bullets and
+  why the entity is numeric; JPL Horizons' address on source lines; the
+  closing paragraph as a list.
+**Gap:** Tony's run of gallery patch_L481_1, its runs and push; his look
+on the phone, on which this closes.
+**Ref:** L-477 to L-480 (closed the same day); gallery `interactive.html`
+(the room's compose, `solarSystemSourceLine`, the four closing
+paragraphs), `gallery/earth_geometry.js`, `documentation/smoke_typed_facts.js`.
 
 #### [L-476] The orrery's whole-path plots draw by the same path plan as the website (orrery, spacecraft and comets)
 <!-- L:476 status:OPEN upd:2026-10-23 section:A flag: rice: -->
@@ -26682,6 +26528,241 @@ patch_L472_1, then his look on the phone.
 of the i panel; Tony's look on the phone.
 **Ref:** L-443; L-458 (report a problem: another line for the same
 panel); gallery `index.html`, `interactive.html` (`renderSunInfo`).
+
+#### [L-477] The Solar System room's drawer: no See more, no "All", a group row only opens, and Reset (gallery, the drawer)
+<!-- L:477 status:DONE upd:2026-10-24 section:C flag: rice: -->
+- **Found 2026-10-23, Tony's phone look of patch_L472_1, checklist item
+  1** (`documentation/WHERE_WE_ARE_10-23-26_1402_run_record.md`). Tony: "correct. but
+  now we have three options, which are a bit confusing, "all/none" on
+  the top bar and "See more" above the drawers. all/none opens or
+  closes all the objects. see more, just shows all the objects.
+  thoughts? consider using Design for a better layout. ... realistically
+  only See more and None will be used. a similar issue arises in the
+  group drawers. upon clicking comets or tno drawer all the objects are
+  selected. one then has to remove them all to select only one. or the
+  top all/none."
+- **What the code says, read at gallery b0f50ce (not run).** A group
+  row is one button with two zones: a tap in its `.pick` span, the
+  row's whole left end, about 65 px, runs `ssGroupTick` and ticks every
+  body; anywhere else runs `ssFold`. The left end is made wide on
+  purpose for body rows (L-318 round 3), and on a group row it is where
+  a thumb reaching for the name lands. So the comets opened unticked on
+  the afternoon of Oct 23 and ticked that night.
+- **2026-10-24, the design talk** (`documentation/DESIGN_L477_drawer_and_view_rulings_20261024.md`,
+  sec. 1). A mock-up at his request, "Drawer controls mock-up", a
+  Design canvas in his artifacts. Tony's finding: "What's confusing is
+  the the referent is different. See more/fewer rows all/none celestial
+  objects." See more acts on the list, All / none on the picture, and a
+  group row mixes the two; so each control acts on one thing.
+- **Tony's rulings, 2026-10-24.** "I think so. No "see more" Let that
+  be permanent. And change all/none to "Reset" that resets the view to
+  the starting view when the visitor wants a fresh start. Simple." And:
+  "Actually I think we should use the same logic for the groups. The
+  starting view is unticked. The visitor tries some objects. A Reset
+  button can bring back the original unticked list. "All" is very
+  confusing with too many orbits all at once. It is better for the
+  visitor to develop the view."
+- So: See more is removed for good, the six groups always listed and
+  folded; a group row only folds, its box gone; the top bar's All /
+  none becomes Reset, the room as a visitor first finds it (the served
+  ticks, Earth highlighted, every group folded, the opening view); each
+  open group's All / none becomes "Reset <group>", unticking its bodies
+  (Claude's reading, shown in the mock-up's option 1, for the phone
+  look to confirm); nothing ticks many bodies at once.
+- **Method for the build** (the design record, sec. 1): Reset and Home
+  stay distinct (Home keeps the ticks); a group's Reset shows only
+  while one of its bodies is ticked and leaves the group open; the
+  served rows lose `see_more`; the See more code and `toggleAll` and
+  `groupToggle` go; the drawer check and the headless walk change with
+  it, each new check shown red on a broken copy first.
+- **Carried for interactive-exhibit's next version, which rides this
+  build:** The Solar System room's drawer section names See more, the
+  group's box and All / none in several places, and a session following
+  it would build the old drawer (a wrong sentence, so a bump of its
+  own). The descriptions L-472 carried (the count line, now at the left
+  by L-478; the About line, with L-480's return) ride the same version.
+- **2026-10-24: built,** as ruled: See more and the groups' All / none
+  are gone; every group is listed, folded, and a group row only folds,
+  its arrow where a body has its box; the top bar's button reads Reset
+  in this room and puts back what it opened on, every group folded; an
+  open group's "Reset <group>" unticks its bodies once one is ticked;
+  the six group rows lose see_more in data/objects_config.json. The
+  room's i panel words follow, for Tony's word (in the record). The Sun
+  and Earth rooms keep All / none: whether they follow is his to say.
+  interactive-exhibit 1.22 records it, with protocol v3.110, in orrery
+  patch_L477_3. gallery `patch_L477_2_drawer_view_build_20261024.py`;
+  the record `documentation/HANDOFF_L477_build_20261024.md`. Checked:
+  the drawer check, seven planted faults; the figures check's part 6,
+  three; the headless walk, 105 checks, red on the old page; the Sun and
+  Earth rooms driven in the old page and the new, identical; the offline
+  maintenance run on a copy, 35 of 35 gating checkers (its five pulls
+  cannot reach GitHub from the sandbox).
+- **2026-10-24: closed on Tony's phone look** (`documentation/WHERE_WE_ARE_10-24-26_1140_run_record.md`):
+  the drawer, the group rows, Reset and the group's Reset, each "yes"; the
+  i panel's three reworded sentences approved with "everything is
+  correct". Re-homed: his readability asks to L-481; the Sun and Earth rooms'
+  Reset to L-482; the skill's descriptions rode 1.22.
+**Gap (closed 2026-10-24):** none.
+**Gap (superseded above):** Tony's run of gallery
+patch_L477_2, its maintenance run, push and live run; then his phone
+look, on which this closes. And the reinstall of interactive-exhibit
+1.22; the next session confirms its loaded copy reads 1.22.
+**Gap (superseded above):** the build in the gallery, with L-478, L-479 and L-480, and
+interactive-exhibit's next version; then Tony's phone look.
+**Ref:** L-443; L-473 and L-474 (closed into this); gallery
+`interactive.html` (`ssBuildRows`, `ssGroupTick`, `ssFold`,
+`ssAddSeeMore`, `sun-drawer-all`), `gallery/solar_system_drawer.js`
+(`toggleAll`, `groupToggle`, `seeMoreLabel`, `visible`),
+`data/objects_config.json` (the rooms section),
+`documentation/smoke_solar_system_drawer.js`,
+`tools/headless/walk_solar_system_drawer.js`.
+
+#### [L-478] The count line moves to the left, above the object label (gallery, the Solar System room's HUD)
+<!-- L:478 status:DONE upd:2026-10-24 section:C flag: rice: -->
+- **Found 2026-10-23, Tony's phone look of patch_L472_1, checklist items
+  2 and 4** (`documentation/WHERE_WE_ARE_10-23-26_1402_run_record.md`). Tony: "correct,
+  but now the right side is getting crowded. would this line fit above
+  the object label on the left? maybe with a smaller grid line? or a
+  right justified grid line?" And: "mostly, although the aries symbol
+  is partially covered, that is why i am thinking we could move the
+  ticked body count to the left side above the object label."
+- **2026-10-24, settled at the design talk** (`documentation/DESIGN_L477_drawer_and_view_rulings_20261024.md`,
+  sec. 2). Claude proposed taking his suggestion as it stands, the
+  placement being method: "Yes".
+- The line (`#ss-outside`, `ssOutsideUpdate`) moves from above the grid
+  chip at the lower right to the left side, above the object label, in
+  the same type. The build checks on the phone that it does not collide
+  with the object label at its longest or with an open text box.
+- **2026-10-24: built,** as ruled: the line is a page element of its
+  own at the lower left, above the drawer's handle, at the height of the
+  HUD on the right, in the same type, hidden while the drawer is open.
+  Whether it meets the handle or an open text box at a long name is the
+  phone's to say. gallery `patch_L477_2_drawer_view_build_20261024.py`;
+  the record `documentation/HANDOFF_L477_build_20261024.md`. Checked:
+  the drawer check, seven planted faults; the figures check's part 6,
+  three; the headless walk, 105 checks, red on the old page; the Sun and
+  Earth rooms driven in the old page and the new, identical; the offline
+  maintenance run on a copy, 35 of 35 gating checkers (its five pulls
+  cannot reach GitHub from the sandbox).
+- **2026-10-24: closed on Tony's phone look** (`documentation/WHERE_WE_ARE_10-24-26_1140_run_record.md`):
+  "yes". Re-homed: his readability asks to L-481.
+**Gap (closed 2026-10-24):** none.
+**Gap (superseded above):** Tony's run of gallery
+patch_L477_2, its maintenance run, push and live run; then his phone
+look, on which this closes.
+**Gap (superseded above):** the build in the gallery, with L-477, L-479 and L-480; then
+Tony's look on the phone.
+**Ref:** L-472 (closed; the line itself); gallery `interactive.html`
+(`#ss-outside`, `.ss-outside`, `ssOutsideUpdate`, the HUD).
+
+#### [L-479] A far orbit's frame: Go To fits the whole orbit, and every body's hover gives its orbit's near and far distance (gallery, the Solar System room)
+<!-- L:479 status:DONE upd:2026-10-24 section:C flag: rice: -->
+- **Found 2026-10-23, Tony's phone look of patch_L472_1, checklist item
+  3** (`documentation/WHERE_WE_ARE_10-23-26_1402_run_record.md`). Tony: "the initial
+  view of the sedna orbit is cut off. it does show the object but not
+  the entire orbit which is a closed orbit. one has to zoom out to 200
+  au to see the whole orbit. when zooming in to 20 au the orbit is out
+  of sight, not just the object, because the orbit is so wide, and the
+  1 ticked body label does appear."
+- **Measured, 2026-10-24.** The room frames on where each ticked body
+  is now, plus 20% (Tony's ruling of 2026-10-02). Sedna is 82.8 AU out
+  (the Oct 22 run, as the brief gives it), so the view reaches about 99
+  AU; its served orbit (a = 539.58 AU, e = 0.8588, coverage_index.json
+  at gallery b0f50ce) runs from 76 to about 1,000 AU, so a view holding
+  all of it is about twelve times wider. Sedna itself is in view, so
+  the count line (L-472) says nothing. Go To (`ssGo`) frames the body
+  and then opens its text box (`sunLabelShow`).
+- **Tony's rulings, 2026-10-24, at the design talk** (`documentation/DESIGN_L477_drawer_and_view_rulings_20261024.md`,
+  sec. 3). Offered A (keep the Oct 2 rule), B (Go To fits the whole
+  orbit) and C (ticking one body fits it), Claude leaning B: "B may work
+  but now it activates the hover". Offered B1 (keep the text box, one
+  tap closes it, every Go To alike) and B2 (Go To only moves the view):
+  "Let's try B1". So, AS A TRIAL: Go To fits the body's whole orbit and
+  opens its text box, the same for every body; ticking keeps the Oct 2
+  rule. His phone look after the build decides whether it stays.
+- **And the orbit's near and far distance.** Offered "Its orbit runs
+  from 76 to 1,000 AU from the Sun.": "It would be informative but may
+  be too long. It would also give an intuitive sense of the
+  eccentricity." Offered one short line, "Orbit: 76 to 1,000 AU from
+  the Sun.": "Yes". Every body on a closed orbit gets that line.
+- **Method for the build** (the design record, sec. 3): Go To's frame
+  is the drawn orbit's farthest point from the Sun times the room's
+  margin, 1.2; the two distances are worked out from the served a and
+  e, never typed, their figures and citation by provenance-discipline's
+  rules for a computed number; a body drawn around the barycentre
+  (`drawn_orbit`) needs the build to say which elements the line reads;
+  an open path is slice 2's to decide; the hover-length check holds
+  every hover, and a body pushed over its ceiling comes back to Tony.
+- **2026-10-24: built,** as ruled: Go To fits the body's whole drawn
+  orbit at the room's 20% and opens its text box, the same for every
+  body (`ssGo` passing `whole` through `sunApplyVisibility`,
+  `sunFocusOn`, `sunFrameOn` and `sunGroupRadius`); ticking, Home and
+  Reset still frame on positions. Every body's hover ends with "Orbit: q
+  to Q AU from the Sun." (`SolarSystemFigures.orbitLine`, from the
+  served a and e, which the driver now passes): three figures, never
+  finer than the distance line's error earns -- Sedna 76.2 to 1,000,
+  Earth 0.983 to 1.02, Halley 0.571 to 35.1. The longest body hover is
+  10 lines (Orcus), the ceiling 17. Found and fixed in passing: a
+  zoom-out tap could shrink a view Go To set past the buttons' 5,000 AU
+  cap; no orbit served today reaches it. gallery
+  `patch_L477_2_drawer_view_build_20261024.py`; the record
+  `documentation/HANDOFF_L477_build_20261024.md`. Checked: the drawer
+  check, seven planted faults; the figures check's part 6, three; the
+  headless walk, 105 checks, red on the old page; the Sun and Earth
+  rooms driven in the old page and the new, identical; the offline
+  maintenance run on a copy, 35 of 35 gating checkers (its five pulls
+  cannot reach GitHub from the sandbox).
+- **2026-10-24: closed on Tony's phone look** (`documentation/WHERE_WE_ARE_10-24-26_1140_run_record.md`):
+  "yes": the trial stands, Go To fits the whole orbit. Re-homed: his readability asks to L-481.
+**Gap (closed 2026-10-24):** none.
+**Gap (superseded above):** Tony's run of gallery
+patch_L477_2, its maintenance run, push and live run; then his phone
+look, which settles the trial and closes this.
+**Gap (superseded above):** the build in the gallery, with L-477, L-478 and L-480; then
+Tony's look on the phone, which settles the trial.
+**Ref:** L-472 (closed; the count line); L-443; Tony's rulings of
+2026-10-02 (framing on position) and 2026-10-10 (Go To and the hover);
+gallery `interactive.html` (`ssGo`, `sunLabelShow`, `sunGroupRadius`,
+`sunFrameMargin`), `gallery/feature_renderers.js`,
+`gallery/solar_system_figures.js`, `documentation/smoke_hover_budget.js`.
+
+#### [L-480] Closing the About card goes back to the room the visitor came from (gallery, the lobby's About card)
+<!-- L:480 status:DONE upd:2026-10-24 section:C flag: rice: -->
+- **Found 2026-10-23, Tony's phone look of patch_L472_1, checklist item
+  5** (`documentation/WHERE_WE_ARE_10-23-26_1402_run_record.md`). Tony: "correct.
+  but closing it takes you to the lobby. to get back to the render we
+  need to use the back button <"
+- **What the code says, read at gallery b0f50ce (not run).** The i
+  panel's last line (`mountAboutLink`, L-475) opens `index.html#about`,
+  the lobby with its About card showing; the card's close button closes
+  the card and leaves the visitor in the lobby.
+- **2026-10-24, method, Claude's pick at the design talk,** put to Tony
+  with "you can overrule" and not overruled (`documentation/DESIGN_L477_drawer_and_view_rulings_20261024.md`,
+  sec. 4): closing the card steps back to the page the visitor came
+  from, through the browser's history, as the Gallery button already
+  does. From a room, the visitor lands back in that room; arriving at
+  the lobby directly, the close stays in the lobby as now.
+- **2026-10-24: built,** as ruled: index.html knows when a room's About
+  line sent the visitor (`aboutFromRoom`: the page opened at #about from
+  interactive.html on this site), and closing the card then steps back
+  through the browser's history; otherwise the close stays in the lobby,
+  as before. gallery `patch_L477_2_drawer_view_build_20261024.py`; the
+  record `documentation/HANDOFF_L477_build_20261024.md`. Checked: the
+  drawer check, seven planted faults; the figures check's part 6, three;
+  the headless walk, 105 checks, red on the old page; the Sun and Earth
+  rooms driven in the old page and the new, identical; the offline
+  maintenance run on a copy, 35 of 35 gating checkers (its five pulls
+  cannot reach GitHub from the sandbox).
+- **2026-10-24: closed on Tony's phone look** (`documentation/WHERE_WE_ARE_10-24-26_1140_run_record.md`):
+  "yes". Re-homed: his readability asks to L-481.
+**Gap (closed 2026-10-24):** none.
+**Gap (superseded above):** Tony's run of gallery
+patch_L477_2, its maintenance run, push and live run; then his phone
+look, on which this closes.
+**Gap (superseded above):** the build in the gallery, with L-477, L-478 and L-479; then
+Tony's look on the phone.
+**Ref:** L-475 (closed; the link itself); L-443; gallery `index.html`
+(`.about-overlay`), `interactive.html` (`mountAboutLink`).
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
