@@ -584,6 +584,10 @@ Module updated: October 23, 2026 with Anthropic's Claude Opus 5.5 (the
 records of Tony's phone look of slice 1: L-472 new, the view fix;
 L-473, L-474 and L-475 new, the three drawer and panel changes; L-443
 and L-470 updated), built on ee4e333 and gallery 25e4d24.
+Module updated: October 23, 2026, afternoon, with Anthropic's Claude Opus
+5.5 (the view design talk: L-472, nothing drawn wrong, Tony's ruling the
+count line, built with L-474 and L-475 in gallery patch_L472_1; L-473
+parked; L-443's Gap), built on b90d895 and gallery 25e4d24.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -1371,7 +1375,17 @@ as an archive of the prioritization thinking -- no cleanup on close.
 - An edit to the rooms' shared i panel, so one line serves every room
   (interactive-exhibit, One chrome, many rooms); every room is a Mode 5
   target.
-**Gap:** an address that opens the About card; the link at the bottom
+- **2026-10-23: built,** words approved ("yes, please"): the last line
+  of every room's i panel, the Explorer's too, reads "About Paloma's
+  Orrery" and links to index.html#about, which opens the lobby with
+  its About card showing; closing the card goes back to the lobby's
+  own address. Gallery `patch_L472_1_view_drawer_panel_20261023.py`;
+  `mountAboutLink` in interactive.html. The Sun and Earth rooms were
+  driven headlessly in the old page and the new: identical but for the
+  panel's 21 added characters.
+**Gap (replaces the one below, 2026-10-23):** Tony's runs and push of
+patch_L472_1, then his look on the phone.
+**Gap (superseded above):** an address that opens the About card; the link at the bottom
 of the i panel; Tony's look on the phone.
 **Ref:** L-443; L-458 (report a problem: another line for the same
 panel); gallery `index.html`, `interactive.html` (`renderSunInfo`).
@@ -1385,13 +1399,19 @@ panel); gallery `index.html`, `interactive.html` (`renderSunInfo`).
 - Today the button sits between the ticked rows and the rest
   (interactive.html near line 4873, read at gallery b93072eb).
 - Mode 5: Claude builds it, Tony judges it on the phone.
-**Gap:** the build, with L-472 (the view fix) or before it (Tony's
+- **2026-10-23: built,** riding with L-472 by Tony's word ("yes,
+  please"): See more / See fewer is the first item of the room's
+  drawer list (`ssAddSeeMore`). Gallery
+  `patch_L472_1_view_drawer_panel_20261023.py`.
+**Gap (replaces the one below, 2026-10-23):** Tony's runs and push,
+then his look on the phone.
+**Gap (superseded above):** the build, with L-472 (the view fix) or before it (Tony's
 call); Tony's look.
 **Ref:** L-443; gallery `interactive.html` (`renderSunDrawer`),
 `gallery/solar_system_drawer.js`.
 
 #### [L-473] A group in the Solar System room's drawer opens with its bodies unticked (gallery, the drawer)
-<!-- L:473 status:OPEN upd:2026-10-23 section:A flag: rice: -->
+<!-- L:473 status:PARKED upd:2026-10-23 section:A flag: rice: -->
 - **Found 2026-10-22, Tony's phone look of slice 1, checklist item 4**
   (`documentation/WHERE_WE_ARE_10-22-26_2027_run_record.md`). Tony: "i
   think that when we open a group the specific checkboxes should be off
@@ -1406,7 +1426,14 @@ call); Tony's look.
   `.pick` span) or its "All / none in <label>" button. So either the
   tap landed on the box rather than the name, or the phone ticks on
   folding in a way the code reading does not show.
-**Gap:** settle which on the phone before any code. If the tap target
+- **2026-10-23: the drawer already does this.** Asked whether, at the
+  day's test, all 13 comet boxes were empty until he ticked Halley,
+  Tony: "yes". So the tap of Oct 22 most likely landed on the group
+  row's box. Tony: "let's let this go for now. if the problem recurs,
+  we can address it." Parked; nothing built.
+**Gap (replaces the one below, 2026-10-23):** none while parked. If it
+happens again, the row's box and name made harder to confuse.
+**Gap (superseded above):** settle which on the phone before any code. If the tap target
 is the cause, the fix may be the row's layout rather than its logic.
 Then the build, with L-472 (the view fix) or before it (Tony's call).
 **Ref:** L-443; gallery `interactive.html` (`ssFold`, `ssGroupTick`),
@@ -1462,7 +1489,43 @@ open.
   the box. The three cases Claude listed that night: tick a far body
   without Go To; Go To Halley, then zoom in on Earth step by step; zoom
   in very far with a far body ticked and watch whether its dot jumps.
-**Gap:** the design talk (which shape, and whether the rule is per
+- **2026-10-23: nothing is drawn wrong.** Tony's test of the day
+  (`documentation/WHERE_WE_ARE_10-23-26_1402_run_record.md`): zoomed to
+  a 1 AU grid, the Halley-coloured mark near the inner planets hovers
+  "Halley's orbit": the orbit's info cross, which render_orbits.build_orbit_traces
+  puts at sweep index 10, ten degrees past perihelion, 0.58 AU from the
+  Sun. Halley itself, 35 AU out, was outside the box. On the desktop:
+  "exactly the same", so the phone's graphics chip is not involved
+  (L-463's failure ruled out). The orbit's near end and its cross,
+  correctly drawn inside a zoomed box, read as the body.
+- **Tony's ruling, 2026-10-23.** Offered A (say what is outside), B (the
+  box always holds what is ticked) and C (frame zoom to that floor,
+  then the camera), Claude leaning A: "actually i'm leaning to, do
+  nothing. with this solution, we could have many objects outside the
+  view and this could get complicated." Offered a line that counts and
+  never names: "The count line. good solution." So zooming stays a
+  cutout in every room, the Sept 3 frame-zoom ruling stands, and the
+  Oct 22 rule's second part (Claude's proposal, zoom moving the camera)
+  is not adopted.
+- **Built 2026-10-23,** words approved ("yes, please"): in the Solar
+  System room, a line above the grid chip, "1 ticked body is outside
+  this view" or "N ticked bodies are outside this view", hidden at
+  zero, updated at the end of every frame change (`ssOutsideUpdate`,
+  from `sunHudUpdate`); a body is outside when its marker is past the
+  box on any axis (`SolarSystemDrawer.outsideCount`). Gallery
+  `patch_L472_1_view_drawer_panel_20261023.py`, with L-474 and L-475.
+  Checked: the drawer check's section 5 with a sixth planted fault; the
+  headless walk's sections 16 to 18 (91 checks), each new check shown
+  red on a broken copy; the Sun and Earth rooms identical but for the
+  i panel's new line; the offline maintenance run, 35 of 35 gating
+  checkers on a copy (its five pulls could not reach GitHub's API from
+  the sandbox).
+- **Carried for interactive-exhibit's next version** (a description to
+  add, not a wrong sentence): the count line, See more at the top of
+  the drawer, and the About line with index.html#about.
+**Gap (replaces the one below, 2026-10-23):** Tony's runs and push of
+patch_L472_1, then his look on the phone; closes on his look.
+**Gap (superseded above):** the design talk (which shape, and whether the rule is per
 room), the phone test, then the build. Slice 2 of L-443 waits behind
 it, since slice 2 adds the far bodies this bug mis-draws.
 **Ref:** L-443; L-463; `documentation/HANDOFF_L443_view_and_drawer_brief_20261023.md`,
@@ -2253,7 +2316,7 @@ the deliberate limit, its number set then, each removal named.
 `documentation/HANDOFF_L446_daily_run_order_build_20261015.md`.
 
 #### [L-443] The rest of the orrery's objects come to the website as plotted positions (gallery + orrery, objects)
-<!-- L:443 status:OPEN upd:2026-10-22 section:A flag: rice: -->
+<!-- L:443 status:OPEN upd:2026-10-23 section:A flag: rice: -->
 - **Tony, 2026-10-13:** "I am anxious to add the symbols to the gallery
   too so visitors can at least plot positions." And his note of
   2026-10-10 on L-433: "then add the symbols for most if not all the
@@ -2399,7 +2462,14 @@ the deliberate limit, its number set then, each removal named.
   missing from the i panels, L-475. A later note: See more / See
   fewer at the top of the drawer, L-474. And "Gonggong skipped but
   needs discussion", on L-470.
-**Gap (replaces the one below, 2026-10-23):** the view fix first
+- **2026-10-23: the view talk done.** Nothing was drawn wrong; a count
+  line for ticked bodies outside the view, See more at the top and the
+  About line built in gallery patch_L472_1 (L-472, L-474, L-475);
+  L-473 parked, the drawer already opening groups unticked.
+**Gap (replaces the one below, 2026-10-23, afternoon):** Tony's runs of
+patch_L472_1 and his phone look; then slice 2, the spacecraft and the
+open-path comets.
+**Gap (superseded above):** the view fix first
 (L-472), with the three drawer and panel changes (L-473, L-474,
 L-475); then slice 2, the spacecraft and the open-path comets.
 **Gap (superseded above):** Tony's phone look

@@ -1,24 +1,25 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 23, 2026: your phone look is done; the view fix
-comes before slice 2.
-- Written at orrery ee4e333 and gallery 25e4d24, with patch 6.
+Last updated: October 23, 2026, afternoon: Halley was drawn right; a
+count line, See more on top, the About line built.
+- Written at orrery b90d895 and gallery 25e4d24, with patches 1 and 2.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Your phone look is done. Halley is drawn in the wrong place when
->   the view is zoomed in (L-472 (the view fix)); that is fixed
->   before slice 2.
-> - Three smaller changes: L-473 (groups open unticked), L-474 (See
->   more on top), L-475 (the About link in every i panel).
+> - Halley was drawn right. Zoomed in, its orbit's near end and cross
+>   stay in view while Halley does not. A line now counts the ticked
+>   bodies outside the view (L-472 (the view fix)).
+> - Built with it: L-474 (See more on top), L-475 (the About link in
+>   every i panel). L-473 (groups open unticked) parked: they do.
 >
-> **Do next:** *the view design talk: how the zoom buttons work in
-> the Solar System room; then one test on your phone.*
+> **Do next:** *your phone look of the three changes; then slice 2,
+> the spacecraft and the comets on open paths.*
 >
 > **Needs you now:**
-> - *(do) Run patch 6, then commit and push.*
+> - *(do) Patch 1 on the website and patch 2 on the orrery, the runs
+>   and pushes; then your phone look.*
 > - Two papers left to try (`READING_L456_tony_20261021.md`).
 
 *Italic* lines are the must-reads. Marks reset at every update.
@@ -43,8 +44,9 @@ comes before slice 2.
                next, item 3, L-357 (stale leftovers).
  10-11.[NOW]   *The orrery's objects come to the website (L-443 (the
                objects to the website)): slice 1, 50 bodies, live Oct 22;
-               the view fix first; then slice 2, the spacecraft and the
-               comets on open paths; then the moons.* << moved this session
+               the view's count line built Oct 23; then slice 2, the
+               spacecraft and the comets on open paths; then the moons.*
+               << moved this session
  12.   [later] Encounters: comets and spacecraft at the dates that matter.
  13.   [later] The inner planets' rooms (Mercury, Venus, Mars), from the
                template; Jupiter and Saturn follow (L-433).
@@ -59,8 +61,6 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 - Every view, still and animated, opens on the farthest thing drawn,
   shell or orbit, plus 20%; the center body's axis and cone end just
   past its farthest shell. Kelvin stays. (Oct 18-19)
-- Earth's dipole cone drawn, unticked. Agency pages read one layer
-  down. Report words approved. (Oct 21)
 - Drawer order: nearest part as drawn from sourced rows. Drawings end
   where a row says, Earth too. (Oct 21)
 - An edge nobody can place: a cloud across its range. An edge that
@@ -71,6 +71,8 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 - Groups fold open in the drawer; a room is for a body with more than
   its symbol. Every body fetched every build. Every comet drawn from
   today's orbit. Open-path comets go with the spacecraft. (Oct 22)
+- Zooming in stays a cutout; one line counts the ticked bodies
+  outside the view, never names them. (Oct 23)
 
 ## Deferred
 
@@ -90,7 +92,7 @@ Waiting behind the objects (Oct 22); a line leaves when picked up.
 - A drawn main-belt cloud (L-443 (the objects)), behind slice 2.
 - L-471 (a delivered patch is final): safe-file-editing's next version.
 
-## Signals  **>> UPDATED THIS SESSION**
+## Signals
 
 Read from files when this page was written, not typed from memory.
 - Last cache build: 20261023T165105Z, ok, first try (gallery
@@ -103,9 +105,6 @@ Read from files when this page was written, not typed from memory.
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
 At the next design talk:
-- *The view fix (L-472 (the view fix)): which of three shapes, and
-  whether the zoom rule differs by room (the brief, sec. 4).*
-- Whether the three smaller changes go with it, or first.
 - "Gonggong skipped but needs discussion" (your run record, Oct 22;
   L-470 (entries the website cannot serve)).
 - The Daily Run checking the orrery it pulled is the one you pushed
@@ -121,8 +120,8 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- *Next: `HANDOFF_L443_view_and_drawer_brief_20261023.md`, sec. 4.*
-- Your phone look: `WHERE_WE_ARE_10-22-26_2027_run_record.md`
+- *Next, after your look: slice 2, `HANDOFF_L443_slice1_build_20261022.md`.*
+- Today's test and rulings: `WHERE_WE_ARE_10-23-26_1402_run_record.md`
 - The objects' rulings: `DESIGN_L443_objects_rulings_20261022.md`;
   the words: `WORDS_L443_slice1_20261022.md`
 - Talks: `DESIGN_talks_rulings_20261020.md`, `DESIGN_talks2_rulings_20261021.md`
