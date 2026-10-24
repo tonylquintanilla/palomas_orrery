@@ -224,7 +224,7 @@ Index regenerated (247 live items) in C:\Users\tonyq\OneDrive\Desktop\python_wor
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
 3. **(do)** Move the patch to `documentation\`, 
-4. then commit and push. Include the Oct 23 close note, `HANDOFF_L472_session_close_20261023.md`, in the same commit. -- 
+4. then commit and push. Include the Oct 23 close note, `HANDOFF_L472_session_close_20261023.md`, in the same commit. -- 7b7f651d96a069bb3d10669033e44b0957721ed3
 
 **Where this leaves us**
 - Your Oct 23 look's five findings are ruled.
