@@ -1,9 +1,9 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 23, 2026, afternoon: Halley was drawn right; a
-count line, See more on top, the About line built.
-- Written at orrery b90d895 and gallery 25e4d24, with patches 1 and 2.
+Last updated: October 23, 2026, evening: Halley was drawn right; the
+view and drawer changes built; slice 2 designed.
+- Written at orrery b90d895 and gallery 25e4d24, with patches 1 to 3.
 
 > **READ THIS FIRST**
 >
@@ -13,13 +13,14 @@ count line, See more on top, the About line built.
 >   bodies outside the view (L-472 (the view fix)).
 > - Built with it: L-474 (See more on top), L-475 (the About link in
 >   every i panel). L-473 (groups open unticked) parked: they do.
+> - Slice 2 is designed: `DESIGN_L443_slice2_rulings_20261023.md`.
 >
 > **Do next:** *your phone look of the three changes; then slice 2,
 > the spacecraft and the comets on open paths.*
 >
 > **Needs you now:**
-> - *(do) Patch 1 on the website and patch 2 on the orrery, the runs
->   and pushes; then your phone look.*
+> - *(do) Patch 1 on the website; patches 2 and 3 on the orrery, in
+>   order; the runs and pushes; then your phone look.*
 > - Two papers left to try (`READING_L456_tony_20261021.md`).
 
 *Italic* lines are the must-reads. Marks reset at every update.
@@ -58,9 +59,6 @@ count line, See more on top, the About line built.
 ## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings. A line leaves after a few weeks, once it is habit.
-- Every view, still and animated, opens on the farthest thing drawn,
-  shell or orbit, plus 20%; the center body's axis and cone end just
-  past its farthest shell. Kelvin stays. (Oct 18-19)
 - Drawer order: nearest part as drawn from sourced rows. Drawings end
   where a row says, Earth too. (Oct 21)
 - An edge nobody can place: a cloud across its range. An edge that
@@ -73,6 +71,8 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
   today's orbit. Open-path comets go with the spacecraft. (Oct 22)
 - Zooming in stays a cutout; one line counts the ticked bodies
   outside the view, never names them. (Oct 23)
+- Paths: one rule, planned in the orrery; nearest approaches place the
+  fine steps; solid to today, dashed after. (Oct 23)
 
 ## Deferred
 

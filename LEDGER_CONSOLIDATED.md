@@ -588,6 +588,11 @@ Module updated: October 23, 2026, afternoon, with Anthropic's Claude Opus
 5.5 (the view design talk: L-472, nothing drawn wrong, Tony's ruling the
 count line, built with L-474 and L-475 in gallery patch_L472_1; L-473
 parked; L-443's Gap), built on b90d895 and gallery 25e4d24.
+Module updated: October 23, 2026, evening, with Anthropic's Claude Opus
+5.5 (slice 2's design talk: its rulings on L-443, the record
+DESIGN_L443_slice2_rulings_20261023.md; L-476 new, the orrery's plots by
+the same path plan), built on b90d895 and gallery 25e4d24 with patches
+L472_1 and L472_2.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -1358,6 +1363,29 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ## DETAIL / RECORD
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
+
+#### [L-476] The orrery's whole-path plots draw by the same path plan as the website (orrery, spacecraft and comets)
+<!-- L:476 status:OPEN upd:2026-10-23 section:A flag: rice: -->
+- **Tony, 2026-10-23, at slice 2's design talk** (`documentation/DESIGN_L443_slice2_rulings_20261023.md`):
+  "if there are better approaches for the orrery maybe we can implement
+  them there also so the two are as Consistent as possible." And, on
+  drawing the part after today dashed: "But the orrery does not do this
+  today."
+- Today the orrery's ordinary plot spreads an even count of points
+  across a spacecraft's dates (palomas_orrery.py,
+  `create_dates_list_for_object`); the curvature rule serves only its
+  encounter views (spacecraft_encounters.py,
+  `_calculate_encounter_resolution`).
+- The change: the orrery's whole-path plots fetch and draw by the plan
+  slice 2 makes and serves (a backbone thinned where straight, fine
+  steps around each nearest approach or perihelion), solid to today and
+  dashed after. A change to plotting, so the five parallel consumers
+  are mapped first (Check All Parallel Pipelines), and it is judged by
+  Tony's eyes on its own.
+**Gap:** after slice 2's build: the design of the change in the
+orrery's plots, then the build.
+**Ref:** L-443; `documentation/DESIGN_L443_slice2_rulings_20261023.md`, rulings 2 and 6;
+`spacecraft_encounters.py`; `palomas_orrery.py`.
 
 #### [L-475] The About link at the bottom of every room's i panel (gallery, the rooms' shared chrome)
 <!-- L:475 status:OPEN upd:2026-10-23 section:A flag: rice: -->
@@ -2466,7 +2494,25 @@ the deliberate limit, its number set then, each removal named.
   line for ticked bodies outside the view, See more at the top and the
   About line built in gallery patch_L472_1 (L-472, L-474, L-475);
   L-473 parked, the drawer already opening groups unticked.
-**Gap (replaces the one below, 2026-10-23, afternoon):** Tony's runs of
+- **2026-10-23, evening: slice 2 designed,** from Tony's phone. Seven
+  rulings, in his words in `documentation/DESIGN_L443_slice2_rulings_20261023.md`:
+  one path rule, the orrery's (a backbone thinned where straight, fine
+  steps around each event), its plan made in the orrery and served;
+  the first set the twelve spacecraft still flying among the planets,
+  with the 14 open-path comets; an event placed by the nearest
+  approach found in JPL's positions, a sourced date only extra words;
+  a flyby later in the room of the body flown past, its sharply
+  curving part and nearest approach or approaches; solid to today,
+  dashed after, for spacecraft and comets alike, the future part
+  JPL's own plan or prediction; that part fetched again on the 30-day
+  cycle. The orrery's own plots follow on L-476.
+- **Carried for the build:** gallery `render_orbits.py`'s comment that
+  a 3D line cannot be dashed is wrong (Plotly 2.35.2's schema gives
+  six dash styles); corrected when slice 2 opens the file.
+**Gap (replaces the one below, 2026-10-23, evening):** Tony's runs of
+patch_L472_1 and patch_L472_2 and his phone look; then slice 2's
+build, by `documentation/DESIGN_L443_slice2_rulings_20261023.md`.
+**Gap (superseded above):** Tony's runs of
 patch_L472_1 and his phone look; then slice 2, the spacecraft and the
 open-path comets.
 **Gap (superseded above):** the view fix first

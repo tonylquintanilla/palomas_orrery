@@ -612,3 +612,37 @@ I've built the Gonggong patch and saved it in your orrery folder as `patch_L470_
 - Four patches wait in your folders, in this order: patch 1 on the website, then patches 2, 3 and L470_1 on the orrery.
 - Gonggong is ruled and built. Your maintenance run is the test.
 - After that come your phone look, then the slice 2 build.
+
+====================================================================
+
+Both repos have moved past the commits in your run record, so I'll check what landed after them before giving you the order.
+
+Both pushes landed. The only later commits are your run record and the two spent website patches moved to documentation/, and neither touches what's left.
+
+**Done:** website patch 1 with its runs, push and live check; orrery patch 2, pushed; your phone look.
+
+**Left, all in the orrery folder, in this order:**
+
+1. **Run `patch_L472_3_slice2_design_20261023.py`.** 
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L472_3_slice2_design_20261023.py
+ok  documentation/DESIGN_L443_slice2_rulings_20261023.md (new, 8872 bytes)
+ok  LEDGER_CONSOLIDATED.md (3 edits)
+ok  documentation/WHERE_WE_ARE.md (5 edits)
+patch applied: L-443 slice 2 design (3 files)
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+2. Move it to documentation/, 
+3. then commit and push. No maintenance run is needed. I've moved this ahead of the Gonggong step on purpose: if Gonggong fails, you'll want to discard only the Gonggong changes, so these records go in first. -- 
+4. **Run `patch_L470_1_gonggong_off_skip_lists_20261023.py`.** Don't commit yet.
+5. **Do the maintenance run, and read two lines.**
+   - Period fetch should say it fetched Gonggong.
+   - Horizons check should pass.
+   - If either names Gonggong as failing, use Discard Changes in GitHub Desktop and bring me the line. That's the end of it for tonight.
+6. **If both passed, open the orrery with Gonggong as the centre body and plot it.** Does it draw?
+7. **If it draws,** move the patch to documentation/, then commit and push.
+
+8. **Then the website folder:** the Daily Run, which pulls Gonggong's new period, 
+9.  then commit and push as usual. Tomorrow's Daily Run would do the same if it's late.
+
+Your phone look found five things: the drawer's three buttons, groups opening ticked, the count line crowding the right side, Sedna's orbit cut off, and the About card leaving you in the lobby. I'll take them up one at a time once these runs are done.
