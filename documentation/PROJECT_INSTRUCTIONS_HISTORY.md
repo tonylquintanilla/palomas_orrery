@@ -3260,6 +3260,55 @@ resident.
 (Moved down from the resident protocol on 2026-10-22 when
 v3.109 made a fourth entry.)
 
+v3.107 (October 21, 2026): No rule changed in this document. TWO
+skill bumps, one version each (L-460, the drawer order, with L-466,
+where drawings end; and L-411's talk C ruling):
+interactive-exhibit 1.18 -> 1.19, provenance-discipline 2.32 -> 2.33.
+A ROOM'S DRAWER LISTS ITS SHELLS WHERE EACH BEGINS; A DRAWING STARTS
+AND STOPS WHERE A SERVED ROW SAYS.
+
+WHAT PROMPTED IT. Tony, 2026-10-20, at his phone look at the Sun's i
+panel: "check the order of the sun shells, they should be ordered by
+lower distance limit." On 2026-10-21, looking at the order: "the order
+goes by the distance of the nearest part of the feature ... this is
+not a visual judgement." His look at the drawer then found the corona
+before the chromosphere: the corona's dots began at the Sun's surface,
+where the paper they follow puts its base 3,000 km up. Then: "we
+should check all the drawings to be sure they reflect sourced
+distances," and "after the sun please double check the earth too and
+this should be added to the skill."
+
+WHAT CHANGED. interactive-exhibit gains A room's drawer lists its
+shells where each begins: the order read from the served rows by
+gallery/drawer_order.js when the page opens, which field says where a
+shell begins, the ties, and the Drawer order check; its description
+and trigger name the drawer order. provenance-discipline's What a
+Visitor Reads, principle 4, gains a paragraph: a drawing starts and
+stops where a served row says, an end no row sets is held by name with
+its reason, and the gallery run's Drawn ends check holds both rooms to
+it. Its Access Standard gains the paragraph Tony ruled method on
+2026-10-21 (talks part 2, talk C): an agency summary that names no
+source is a lead; read one layer down. Each skill's oldest entry moved
+to documentation/SKILL_HISTORIES.md, by the three-entry rule
+(interactive-exhibit 1.16, provenance-discipline 2.30).
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copies read
+interactive-exhibit 1.19 and provenance-discipline 2.33 before work
+that fires them. This session confirmed its loaded copies read
+interactive-exhibit 1.18 and provenance-discipline 2.32 (discharging
+v3.106's and v3.105's obligations) and ledger-and-session-records
+1.21, as the manifest expected.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.104 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-24 when
+v3.110 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

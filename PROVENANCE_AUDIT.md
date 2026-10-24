@@ -1,7 +1,7 @@
 <!-- Doc-Kind: generated | The provenance audit: every numeric claim scored against its citation, rebuilt by provenance_scanner.py on each run. Do not hand-edit. -->
 # Paloma's Orrery -- Provenance Audit
 
-Generated: October 23, 2026
+Generated: October 24, 2026
 Files scanned: 167
 Total findings: 1164
 Constants: 263 | Dicts: 65 | Display strings: 836
@@ -20,12 +20,12 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T1 by domain | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|--------------|---:|---:|---:|--------:|
+| 20261024T183534Z | `82fa04c` | 167 | 1164 | 276 | orrery 112, Earth System 149, stars 13, utilities 2 | 726 | 156 | 6 | 0 |
 | 20261024T023809Z | `95be388` | 167 | 1164 | 276 | orrery 112, Earth System 149, stars 13, utilities 2 | 726 | 156 | 6 | 0 |
 | 20261023T030636Z | `d91dc1d` | 166 | 1164 | 276 | orrery 112, Earth System 149, stars 13, utilities 2 | 726 | 156 | 6 | 0 |
 | 20261023T014626Z | `bfb6c47` | 166 | 1164 | 276 | orrery 112, Earth System 149, stars 13, utilities 2 | 726 | 156 | 6 | 0 |
 | 20261022T204543Z | `d73d1f2` | 166 | 1173 | 276 | orrery 112, Earth System 149, stars 13, utilities 2 | 735 | 156 | 6 | 0 |
 | 20261022T195957Z | `b995472` | 167 | 1175 | 276 | orrery 112, Earth System 149, stars 13, utilities 2 | 735 | 158 | 6 | 0 |
-| 20261022T142907Z | `ff38c7b` | 166 | 1172 | 277 | orrery 113, Earth System 149, stars 13, utilities 2 | 733 | 156 | 6 | 0 |
 
 Change since the previous run: total +0, Tier-1 +0.
 
@@ -1950,9 +1950,9 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 106 | dict | ROLE_MAP[...] | (160 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 407 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 430 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 106 | dict | ROLE_MAP[...] | (159 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 406 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 429 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### moon_visualization_shells.py
 

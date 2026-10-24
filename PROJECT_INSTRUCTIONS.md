@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.109 | October 22, 2026
+Tony Quintanilla, PE | Claude | v3.110 | October 24, 2026
 
-Cut from d91dc1d0 at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 82fa04cc at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -525,7 +525,7 @@ gallery-cache-builder        1.11 Nightly builder, atomic swap and its
                                   builder testing layers, the Daily Run's order
                                   and a failed pull, the run records and their
                                   check
-interactive-exhibit          1.21 adding or changing an exhibit in
+interactive-exhibit          1.22 adding or changing an exhibit in
                                   interactive.html; any edit to the Sun's
                                   chrome (drawer, nav cluster, frame zoom,
                                   i-panel, HUD, consent, back link); "Earth
@@ -536,8 +536,10 @@ interactive-exhibit          1.21 adding or changing an exhibit in
                                   moon); meta.shell_key and the trace stamp;
                                   editing the served words with store_writer or
                                   exhibit_store_editor; the Solar System room's
-                                  drawer, See more, its group rows, Home's
-                                  order and its framing; a bare
+                                  drawer, its group rows, its two Resets,
+                                  Home's order and its framing; Go To fitting a
+                                  body's whole orbit and the orbit line in a
+                                  body's hover; the count line's place; a bare
                                   interactive.html link and the Explorer's
                                   address; testing a room headlessly
                                   (tools/headless); carding an exhibit in
@@ -1186,6 +1188,43 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.110 (October 24, 2026): No rule changed in this document. ONE
+skill bump, one version (L-477, L-478, L-479, L-480):
+interactive-exhibit 1.21 -> 1.22. THE SOLAR SYSTEM ROOM HAS NO SEE MORE
+AND NO "ALL"; RESET PUTS IT BACK; GO TO FITS THE WHOLE ORBIT.
+
+WHAT PROMPTED IT. Tony's phone look of Oct 23 found five things, ruled
+at the design talk of Oct 24
+(documentation/DESIGN_L477_drawer_and_view_rulings_20261024.md). On the
+controls: "What's confusing is the the referent is different. See
+more/fewer rows all/none celestial objects." Then: "No "see more" Let
+that be permanent. And change all/none to "Reset" that resets the view
+to the starting view when the visitor wants a fresh start. Simple." And
+for the groups: ""All" is very confusing with too many orbits all at
+once. It is better for the visitor to develop the view." On Sedna's
+orbit cut off: "Let's try B1." The same day's build made them.
+
+WHAT CHANGED. interactive-exhibit's The Solar System room's drawer
+replaces its See more bullet with No See more and One body at a time,
+and Reset; its Groups fold open bullet loses the group's box; it gains
+the count line (with L-478's place) and the orbit line; FRAMING gains
+Go To fits the whole orbit; the anatomy table's drawer and i-panel rows
+name Reset and the About line's return. Its v1.19 entry moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copy reads
+interactive-exhibit 1.22 before exhibit work. This session confirmed
+its loaded copies read interactive-exhibit 1.21 (discharging v3.109's
+obligation), ledger-and-session-records 1.22, safe-file-editing 1.13
+and provenance-discipline 2.34, as the manifest expected.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.107 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.109 (October 22, 2026): No rule changed in this document. TWO
 skill bumps, one version each (L-443, slice 1 of the objects, with
 L-470): interactive-exhibit 1.20 -> 1.21, horizons-orbital-mechanics
@@ -1281,52 +1320,6 @@ ledger-and-session-records 1.21, as the manifest expected.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.105 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.107 (October 21, 2026): No rule changed in this document. TWO
-skill bumps, one version each (L-460, the drawer order, with L-466,
-where drawings end; and L-411's talk C ruling):
-interactive-exhibit 1.18 -> 1.19, provenance-discipline 2.32 -> 2.33.
-A ROOM'S DRAWER LISTS ITS SHELLS WHERE EACH BEGINS; A DRAWING STARTS
-AND STOPS WHERE A SERVED ROW SAYS.
-
-WHAT PROMPTED IT. Tony, 2026-10-20, at his phone look at the Sun's i
-panel: "check the order of the sun shells, they should be ordered by
-lower distance limit." On 2026-10-21, looking at the order: "the order
-goes by the distance of the nearest part of the feature ... this is
-not a visual judgement." His look at the drawer then found the corona
-before the chromosphere: the corona's dots began at the Sun's surface,
-where the paper they follow puts its base 3,000 km up. Then: "we
-should check all the drawings to be sure they reflect sourced
-distances," and "after the sun please double check the earth too and
-this should be added to the skill."
-
-WHAT CHANGED. interactive-exhibit gains A room's drawer lists its
-shells where each begins: the order read from the served rows by
-gallery/drawer_order.js when the page opens, which field says where a
-shell begins, the ties, and the Drawer order check; its description
-and trigger name the drawer order. provenance-discipline's What a
-Visitor Reads, principle 4, gains a paragraph: a drawing starts and
-stops where a served row says, an end no row sets is held by name with
-its reason, and the gallery run's Drawn ends check holds both rooms to
-it. Its Access Standard gains the paragraph Tony ruled method on
-2026-10-21 (talks part 2, talk C): an agency summary that names no
-source is a lead; read one layer down. Each skill's oldest entry moved
-to documentation/SKILL_HISTORIES.md, by the three-entry rule
-(interactive-exhibit 1.16, provenance-discipline 2.30).
-
-THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
-that session. The next session confirms its loaded copies read
-interactive-exhibit 1.19 and provenance-discipline 2.33 before work
-that fires them. This session confirmed its loaded copies read
-interactive-exhibit 1.18 and provenance-discipline 2.32 (discharging
-v3.106's and v3.105's obligations) and ledger-and-session-records
-1.21, as the manifest expected.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.104 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

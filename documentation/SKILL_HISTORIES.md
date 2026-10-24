@@ -722,6 +722,18 @@ and where an address ends (Tony from his phone, 2026-10-20: "need
 hyperlinks" and "need some kind of itemization for readability").
 (Moved down 2026-10-22, when 1.21 made a fourth entry.)
 
+Earlier: 1.19 | 2026-10-21, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 645558e2 and gallery @ 90cefa57. v1.19 (L-460) records
+that a room's drawer lists its shells where each begins: the nearest
+part of each feature as it is drawn from its served rows, read by
+gallery/drawer_order.js when the page opens, so a new shell takes its
+place by itself; the Solar System room's drawer is not ordered this
+way. Tony, 2026-10-20: "basically when we reach that shell's
+distance, that is its place in the order"; and 2026-10-21: "this is
+not a visual judgement." The order is only as right as the drawing,
+so it rests on the gallery run's Drawn ends check.
+(Moved down 2026-10-24, when 1.22 made a fourth entry.)
+
 ## safe-file-editing
 
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons;

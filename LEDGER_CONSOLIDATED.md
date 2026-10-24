@@ -602,6 +602,10 @@ Module updated: October 24, 2026 with Anthropic's Claude Opus 5.5
 L-478, L-479 and L-480 new, the record
 DESIGN_L477_drawer_and_view_rulings_20261024.md; L-472, L-473, L-474
 and L-475 closed; L-443's Gap), built on 991425b and gallery b0f50ce.
+Module updated: October 24, 2026, noon, with Anthropic's Claude Opus 5.5
+(the build of L-477 to L-480 in gallery patch_L477_2, interactive-exhibit
+1.21 -> 1.22, protocol v3.110, the record HANDOFF_L477_build_20261024.md),
+built on 82fa04c and gallery 2c2057d.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -1399,7 +1403,21 @@ as an archive of the prioritization thinking -- no cleanup on close.
   from, through the browser's history, as the Gallery button already
   does. From a room, the visitor lands back in that room; arriving at
   the lobby directly, the close stays in the lobby as now.
-**Gap:** the build in the gallery, with L-477, L-478 and L-479; then
+- **2026-10-24: built,** as ruled: index.html knows when a room's About
+  line sent the visitor (`aboutFromRoom`: the page opened at #about from
+  interactive.html on this site), and closing the card then steps back
+  through the browser's history; otherwise the close stays in the lobby,
+  as before. gallery `patch_L477_2_drawer_view_build_20261024.py`; the
+  record `documentation/HANDOFF_L477_build_20261024.md`. Checked: the
+  drawer check, seven planted faults; the figures check's part 6, three;
+  the headless walk, 105 checks, red on the old page; the Sun and Earth
+  rooms driven in the old page and the new, identical; the offline
+  maintenance run on a copy, 35 of 35 gating checkers (its five pulls
+  cannot reach GitHub from the sandbox).
+**Gap (replaces the one below, 2026-10-24):** Tony's run of gallery
+patch_L477_2, its maintenance run, push and live run; then his phone
+look, on which this closes.
+**Gap (superseded above):** the build in the gallery, with L-477, L-478 and L-479; then
 Tony's look on the phone.
 **Ref:** L-475 (closed; the link itself); L-443; gallery `index.html`
 (`.about-overlay`), `interactive.html` (`mountAboutLink`).
@@ -1442,7 +1460,29 @@ Tony's look on the phone.
   (`drawn_orbit`) needs the build to say which elements the line reads;
   an open path is slice 2's to decide; the hover-length check holds
   every hover, and a body pushed over its ceiling comes back to Tony.
-**Gap:** the build in the gallery, with L-477, L-478 and L-480; then
+- **2026-10-24: built,** as ruled: Go To fits the body's whole drawn
+  orbit at the room's 20% and opens its text box, the same for every
+  body (`ssGo` passing `whole` through `sunApplyVisibility`,
+  `sunFocusOn`, `sunFrameOn` and `sunGroupRadius`); ticking, Home and
+  Reset still frame on positions. Every body's hover ends with "Orbit: q
+  to Q AU from the Sun." (`SolarSystemFigures.orbitLine`, from the
+  served a and e, which the driver now passes): three figures, never
+  finer than the distance line's error earns -- Sedna 76.2 to 1,000,
+  Earth 0.983 to 1.02, Halley 0.571 to 35.1. The longest body hover is
+  10 lines (Orcus), the ceiling 17. Found and fixed in passing: a
+  zoom-out tap could shrink a view Go To set past the buttons' 5,000 AU
+  cap; no orbit served today reaches it. gallery
+  `patch_L477_2_drawer_view_build_20261024.py`; the record
+  `documentation/HANDOFF_L477_build_20261024.md`. Checked: the drawer
+  check, seven planted faults; the figures check's part 6, three; the
+  headless walk, 105 checks, red on the old page; the Sun and Earth
+  rooms driven in the old page and the new, identical; the offline
+  maintenance run on a copy, 35 of 35 gating checkers (its five pulls
+  cannot reach GitHub from the sandbox).
+**Gap (replaces the one below, 2026-10-24):** Tony's run of gallery
+patch_L477_2, its maintenance run, push and live run; then his phone
+look, which settles the trial and closes this.
+**Gap (superseded above):** the build in the gallery, with L-477, L-478 and L-480; then
 Tony's look on the phone, which settles the trial.
 **Ref:** L-472 (closed; the count line); L-443; Tony's rulings of
 2026-10-02 (framing on position) and 2026-10-10 (Go To and the hover);
@@ -1466,7 +1506,21 @@ gallery `interactive.html` (`ssGo`, `sunLabelShow`, `sunGroupRadius`,
   chip at the lower right to the left side, above the object label, in
   the same type. The build checks on the phone that it does not collide
   with the object label at its longest or with an open text box.
-**Gap:** the build in the gallery, with L-477, L-479 and L-480; then
+- **2026-10-24: built,** as ruled: the line is a page element of its
+  own at the lower left, above the drawer's handle, at the height of the
+  HUD on the right, in the same type, hidden while the drawer is open.
+  Whether it meets the handle or an open text box at a long name is the
+  phone's to say. gallery `patch_L477_2_drawer_view_build_20261024.py`;
+  the record `documentation/HANDOFF_L477_build_20261024.md`. Checked:
+  the drawer check, seven planted faults; the figures check's part 6,
+  three; the headless walk, 105 checks, red on the old page; the Sun and
+  Earth rooms driven in the old page and the new, identical; the offline
+  maintenance run on a copy, 35 of 35 gating checkers (its five pulls
+  cannot reach GitHub from the sandbox).
+**Gap (replaces the one below, 2026-10-24):** Tony's run of gallery
+patch_L477_2, its maintenance run, push and live run; then his phone
+look, on which this closes.
+**Gap (superseded above):** the build in the gallery, with L-477, L-479 and L-480; then
 Tony's look on the phone.
 **Ref:** L-472 (closed; the line itself); gallery `interactive.html`
 (`#ss-outside`, `.ss-outside`, `ssOutsideUpdate`, the HUD).
@@ -1523,7 +1577,27 @@ Tony's look on the phone.
   it would build the old drawer (a wrong sentence, so a bump of its
   own). The descriptions L-472 carried (the count line, now at the left
   by L-478; the About line, with L-480's return) ride the same version.
-**Gap:** the build in the gallery, with L-478, L-479 and L-480, and
+- **2026-10-24: built,** as ruled: See more and the groups' All / none
+  are gone; every group is listed, folded, and a group row only folds,
+  its arrow where a body has its box; the top bar's button reads Reset
+  in this room and puts back what it opened on, every group folded; an
+  open group's "Reset <group>" unticks its bodies once one is ticked;
+  the six group rows lose see_more in data/objects_config.json. The
+  room's i panel words follow, for Tony's word (in the record). The Sun
+  and Earth rooms keep All / none: whether they follow is his to say.
+  interactive-exhibit 1.22 records it, with protocol v3.110, in orrery
+  patch_L477_3. gallery `patch_L477_2_drawer_view_build_20261024.py`;
+  the record `documentation/HANDOFF_L477_build_20261024.md`. Checked:
+  the drawer check, seven planted faults; the figures check's part 6,
+  three; the headless walk, 105 checks, red on the old page; the Sun and
+  Earth rooms driven in the old page and the new, identical; the offline
+  maintenance run on a copy, 35 of 35 gating checkers (its five pulls
+  cannot reach GitHub from the sandbox).
+**Gap (replaces the one below, 2026-10-24):** Tony's run of gallery
+patch_L477_2, its maintenance run, push and live run; then his phone
+look, on which this closes. And the reinstall of interactive-exhibit
+1.22; the next session confirms its loaded copy reads 1.22.
+**Gap (superseded above):** the build in the gallery, with L-478, L-479 and L-480, and
 interactive-exhibit's next version; then Tony's phone look.
 **Ref:** L-443; L-473 and L-474 (closed into this); gallery
 `interactive.html` (`ssBuildRows`, `ssGroupTick`, `ssFold`,
@@ -2533,7 +2607,10 @@ the deliberate limit, its number set then, each removal named.
   Go To fits a body's whole orbit, and every hover gives its orbit's
   near and far distance (L-479); closing the About card goes back to
   the room (L-480). Built before slice 2.
-**Gap (replaces the one below, 2026-10-24):** the build of L-477 to
+**Gap (replaces the one below, 2026-10-24, noon):** L-477 to L-480 are
+built (gallery patch_L477_2); Tony's runs, pushes and phone look; then
+slice 2's build, by `documentation/DESIGN_L443_slice2_rulings_20261023.md`.
+**Gap (superseded above):** the build of L-477 to
 L-480 and Tony's phone look; then slice 2's build, by
 `documentation/DESIGN_L443_slice2_rulings_20261023.md`.
 **Gap (superseded above):** Tony's runs of

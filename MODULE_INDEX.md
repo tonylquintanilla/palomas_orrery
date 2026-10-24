@@ -1,7 +1,7 @@
 <!-- Doc-Kind: generated | The human-browsable module index, rebuilt by module_atlas.py alongside the atlas. Do not hand-edit. -->
 # Paloma's Orrery - Module Index
 
-**Generated:** October 23, 2026 by `module_atlas.py`  
+**Generated:** October 24, 2026 by `module_atlas.py`  
 **Repository:** Paloma's Orrery - Solar System Visualization Suite  
 **Philosophy:** Data Preservation is Climate Action
 
@@ -12,20 +12,25 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 167  
-**Total Lines of Code (non-blank):** 131,852  
+**Total Lines of Code (non-blank):** 131,798  
 **Total Public Functions/Classes:** 1,641
 
 ## Classification Coverage
 
-**Undetermined role (7).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (8).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
+- `patch_L477_3_build_records_20261024.py`
 - `test_drawings_export.py`
 - `test_earth_pole_of_date.py`
 - `test_extractor_pins.py`
 - `test_hills_cloud_sampler.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
+
+**Undetermined domain (1).** No valid `Domain:` tag.
+
+- `patch_L477_3_build_records_20261024.py`
 
 
 ---
@@ -225,9 +230,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `ledger_index.py` | Generate the at-a-glance INDEX for the consolidated ledger. (715 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (129 lines) |
-| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (998 lines) |
+| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (999 lines) |
 | `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (868 lines) |
-| `patch_L470_1_gonggong_off_skip_lists_20261023.py` | - Gonggong comes off the orrery's Horizons skip lists, by Tony's ruling of Oct 23 ("Yes, or just take it off the skip list and see if it fails"), so the maintenance run is the test (L-470). (139 lines) |
 | `period_fetch.py` | - fetch from JPL the orbital period of each object the website serves that has none fetched yet, with the same code the orrery uses when Tony plots, so the Horizons check can compare it with JPL the same day and the objects export can carry it to the website (L-444). (394 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (505 lines) |
 | `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (3,528 lines) |
@@ -265,6 +269,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
+| `patch_L477_3_build_records_20261024.py` | The records of the L-477 to L-480 build, in the orrery repository: the exhibit skill's version 1.22, the protocol's v3.110 entry, the ledger, Where We Are, and the build record. The build itself is the gallery's patch_L477_2_drawer_view_build_20261024.py. (84 lines) |
 | `test_drawings_export.py` | Each stored drawing in data/drawings/ is the drawing its rows give today, git tracks it, and each check can fail. (466 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |

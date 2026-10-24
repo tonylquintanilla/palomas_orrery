@@ -1,27 +1,27 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 24, 2026, morning: your Oct 23 phone look's
-five findings ruled; the build of them next, then slice 2.
-- Written at orrery 991425b and gallery b0f50ce, with patch_L477_1.
+Last updated: October 24, 2026, noon: the four rulings built; your
+phone look next, then slice 2.
+- Written at orrery 82fa04c and gallery 2c2057d, with patches L477_2, L477_3.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Your Oct 23 look's five findings, ruled today:
->   `DESIGN_L477_drawer_and_view_rulings_20261024.md`.
+> - Today's four rulings are built (`HANDOFF_L477_build_20261024.md`).
 > - The drawer: no See more, no "All"; a group row only opens; Reset
 >   puts things back (L-477 (the drawer's controls)).
-> - The count line moves left (L-478 (the count line)). Go To fits the
->   whole orbit, a trial (L-479 (a far orbit)). About returns to the
->   room (L-480 (About's return)).
+> - The count line at the left (L-478 (the count line)); Go To fits the
+>   whole orbit, and each hover ends with its orbit's near and far
+>   distance (L-479 (a far orbit)); About returns to the room (L-480).
 >
-> **Do next:** *the build of today's four rulings, then your phone
-> look; then slice 2.*
+> **Do next:** *your phone look of the build; then slice 2.*
 >
 > **Needs you now:**
-> - *(do) Run patch_L477_1 on the orrery, then ledger_index.py; push,
->   with the Oct 23 close note.*
+> - *(do) patch_L477_2 on the website, then its runs and push;
+>   patch_L477_3 on the orrery, then its runs and push; reinstall the
+>   exhibit skill. Steps in the build record.*
+> - *(decide) The room's new i panel words (in the build record).*
 > - Two papers left to try (`READING_L456_tony_20261021.md`).
 
 *Italic* lines are the must-reads. Marks reset at every update.
@@ -46,8 +46,8 @@ five findings ruled; the build of them next, then slice 2.
                next, item 3, L-357 (stale leftovers).
  10-11.[NOW]   *The orrery's objects come to the website (L-443 (the
                objects to the website)): slice 1, 50 bodies, live Oct 22;
-               next, the drawer and view rulings of Oct 24; then slice 2,
-               the spacecraft and the comets on open paths; the moons.*
+               the drawer and view rulings built Oct 24, your look next;
+               then slice 2, spacecraft and open-path comets; the moons.*
                << moved this session
  12.   [later] Encounters: comets and spacecraft at the dates that matter.
  13.   [later] The inner planets' rooms (Mercury, Venus, Mars), from the
@@ -57,7 +57,7 @@ five findings ruled; the build of them next, then slice 2.
  15.   [goal]  The website does what the desktop orrery does, with a date
                to choose, within the range the data covers.
 
-## Settled  **>> UPDATED THIS SESSION**
+## Settled
 
 Standing rulings. A line leaves after a few weeks, once it is habit.
 - The drawer: no See more and no "All"; a group row only opens; Reset
@@ -73,7 +73,6 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
   outside the view, never names them. (Oct 23)
 - Paths: one rule, planned in the orrery; nearest approaches place the
   fine steps; solid to today, dashed after. (Oct 23)
-- Gonggong off the skip lists; the maintenance run is its test. (Oct 23)
 
 ## Deferred
 
@@ -96,16 +95,18 @@ Waiting behind the objects (Oct 22); a line leaves when picked up.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261024T025518Z, ok, first try (gallery
-  b0f50ce).
+- Last cache build: 20261024T163249Z, ok, first try (gallery
+  2c2057d).
 - Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md at orrery
-  991425b). Whole tree: 276: orrery 112, Earth System 149,
+  82fa04c). Whole tree: 276: orrery 112, Earth System 149,
   stars 13, utilities 2.
 - This page's date and the ledger's newest stamp: both Oct 24. Agree.
 
-## Waiting on you
+## Waiting on you  **>> UPDATED THIS SESSION**
 
 At the next design talk:
+- Whether the Sun and Earth rooms' All / none becomes Reset too: the
+  ruling was the Solar System room's (L-477 (the drawer's controls)).
 - The Daily Run checking the orrery it pulled is the one you pushed
   (L-461 (pull matches push)): not built with slice 1; with slice 2.
 - The orrery's own Sun axis hover still types its period and tilt;
@@ -119,9 +120,9 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- *Next: the build of `DESIGN_L477_drawer_and_view_rulings_20261024.md`;
-  then slice 2, `DESIGN_L443_slice2_rulings_20261023.md`.*
-- The Oct 23 test: `WHERE_WE_ARE_10-23-26_1402_run_record.md`
+- *Next: your look, by `HANDOFF_L477_build_20261024.md`; then slice 2,
+  `DESIGN_L443_slice2_rulings_20261023.md`.*
+- Today's rulings: `DESIGN_L477_drawer_and_view_rulings_20261024.md`
 - The objects' rulings: `DESIGN_L443_objects_rulings_20261022.md`;
   the words: `WORDS_L443_slice1_20261022.md`
 - Talks: `DESIGN_talks_rulings_20261020.md`, `DESIGN_talks2_rulings_20261021.md`
