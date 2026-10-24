@@ -1,26 +1,27 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 23, 2026, evening: Halley was drawn right; the
-view and drawer changes built; slice 2 designed.
-- Written at orrery b90d895 and gallery 25e4d24, with patches 1 to 3.
+Last updated: October 24, 2026, morning: your Oct 23 phone look's
+five findings ruled; the build of them next, then slice 2.
+- Written at orrery 991425b and gallery b0f50ce, with patch_L477_1.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Halley was drawn right. Zoomed in, its orbit's near end and cross
->   stay in view while Halley does not. A line now counts the ticked
->   bodies outside the view (L-472 (the view fix)).
-> - Built with it: L-474 (See more on top), L-475 (the About link in
->   every i panel). L-473 (groups open unticked) parked: they do.
-> - Slice 2 is designed: `DESIGN_L443_slice2_rulings_20261023.md`.
+> - Your Oct 23 look's five findings, ruled today:
+>   `DESIGN_L477_drawer_and_view_rulings_20261024.md`.
+> - The drawer: no See more, no "All"; a group row only opens; Reset
+>   puts things back (L-477 (the drawer's controls)).
+> - The count line moves left (L-478 (the count line)). Go To fits the
+>   whole orbit, a trial (L-479 (a far orbit)). About returns to the
+>   room (L-480 (About's return)).
 >
-> **Do next:** *your phone look of the three changes; then slice 2,
-> the spacecraft and the comets on open paths.*
+> **Do next:** *the build of today's four rulings, then your phone
+> look; then slice 2.*
 >
 > **Needs you now:**
-> - *(do) Patch 1 on the website; patches 2, 3 and L470_1 on the
->   orrery, in order; the runs and pushes; then your phone look.*
+> - *(do) Run patch_L477_1 on the orrery, then ledger_index.py; push,
+>   with the Oct 23 close note.*
 > - Two papers left to try (`READING_L456_tony_20261021.md`).
 
 *Italic* lines are the must-reads. Marks reset at every update.
@@ -45,8 +46,8 @@ view and drawer changes built; slice 2 designed.
                next, item 3, L-357 (stale leftovers).
  10-11.[NOW]   *The orrery's objects come to the website (L-443 (the
                objects to the website)): slice 1, 50 bodies, live Oct 22;
-               the view's count line built Oct 23; then slice 2, the
-               spacecraft and the comets on open paths; then the moons.*
+               next, the drawer and view rulings of Oct 24; then slice 2,
+               the spacecraft and the comets on open paths; the moons.*
                << moved this session
  12.   [later] Encounters: comets and spacecraft at the dates that matter.
  13.   [later] The inner planets' rooms (Mercury, Venus, Mars), from the
@@ -59,11 +60,10 @@ view and drawer changes built; slice 2 designed.
 ## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings. A line leaves after a few weeks, once it is habit.
-- Drawer order: nearest part as drawn from sourced rows. Drawings end
-  where a row says, Earth too. (Oct 21)
-- An edge nobody can place: a cloud across its range. An edge that
-  moves: sharp, with two dashed circles at its range's ends. The hover
-  says which. The Oort spheres removed. (Oct 22)
+- The drawer: no See more and no "All"; a group row only opens; Reset
+  puts back the room, or one group, as it opened. (Oct 24)
+- Go To fits a body's whole orbit, text box and all (a trial); each
+  hover gives its orbit's near and far distance. (Oct 24)
 - The objects go next; the deferred list kept in view. The tide pink
   with its cone; the outer cloud loose dots with clumps. (Oct 22)
 - Groups fold open in the drawer; a room is for a body with more than
@@ -93,17 +93,17 @@ Waiting behind the objects (Oct 22); a line leaves when picked up.
 - A drawn main-belt cloud (L-443 (the objects)), behind slice 2.
 - L-471 (a delivered patch is final): safe-file-editing's next version.
 
-## Signals
+## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261023T165105Z, ok, first try (gallery
-  25e4d24).
+- Last cache build: 20261024T025518Z, ok, first try (gallery
+  b0f50ce).
 - Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md at orrery
-  ee4e333). Whole tree: 276: orrery 112, Earth System 149,
+  991425b). Whole tree: 276: orrery 112, Earth System 149,
   stars 13, utilities 2.
-- This page's date and the ledger's newest stamp: both Oct 23. Agree.
+- This page's date and the ledger's newest stamp: both Oct 24. Agree.
 
-## Waiting on you  **>> UPDATED THIS SESSION**
+## Waiting on you
 
 At the next design talk:
 - The Daily Run checking the orrery it pulled is the one you pushed
@@ -119,8 +119,9 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- *Next, after your look: slice 2, `HANDOFF_L443_slice1_build_20261022.md`.*
-- Today's test and rulings: `WHERE_WE_ARE_10-23-26_1402_run_record.md`
+- *Next: the build of `DESIGN_L477_drawer_and_view_rulings_20261024.md`;
+  then slice 2, `DESIGN_L443_slice2_rulings_20261023.md`.*
+- The Oct 23 test: `WHERE_WE_ARE_10-23-26_1402_run_record.md`
 - The objects' rulings: `DESIGN_L443_objects_rulings_20261022.md`;
   the words: `WORDS_L443_slice1_20261022.md`
 - Talks: `DESIGN_talks_rulings_20261020.md`, `DESIGN_talks2_rulings_20261021.md`
