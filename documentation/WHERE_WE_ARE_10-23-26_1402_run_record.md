@@ -533,16 +533,82 @@ patch applied: L-472 records (2 files)
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
 7. move it to documentation/, 
-8. then commit and push. It records today's test and your two rulings on the ledger, parks L-473, and updates Where We Are.
+8. then commit and push. It records today's test and your two rulings on the ledger, parks L-473, and updates Where We Are. -- 485d5ecb3c75cf090763c6736d4863d056cfb41a
 
 **Your phone look (upright, after the push):**
-1. Open palomasorrery.com/interactive.html fresh and open the drawer. See more should be at the top. Tap it: it should read See fewer and stay at the top.
-2. Open Comets and tick Halley. The view widens, with no count line. Tap plus until the grid reads 1 AU: the line should read "1 ticked body is outside this view". Tap Home: the line goes away.
-3. Also tick Sedna from the trans-Neptunian objects, then zoom in to 1 AU. The line should read "2 ticked bodies are outside this view".
-4. Is the line easy to read, and clear of the small x-y-z axes above it?
-5. Tap the i button. The last line should be "About Paloma's Orrery". Tap it: the lobby should open with the About card. Close it.
-6. Enter the Sun room and check that its i panel ends with the same line.
+1. Open palomasorrery.com/interactive.html fresh and open the drawer. See more should be at the top. Tap it: it should read See fewer and stay at the top. -- correct. but now we have three options, which are a bit confusing, "all/none" on the top bar and "See more" above the drawers. all/none opens or closes all the objects. see more, just shows all the objects. thoughts? consider using Design for a better layout. maybe "See more objects" on the top bar, and "Select all objects/Close all objects" on the line below it? but that is ackward too. realistically only See more and None will be used. a similar issue arises in the group drawers. upon clicking comets or tno drawer all the objects are selected. one then has to remove them all to select only one. or the top all/none. 
+2. Open Comets and tick Halley. The view widens, with no count line. Tap plus until the grid reads 1 AU: the line should read "1 ticked body is outside this view". Tap Home: the line goes away. -- correct, but now the right side is getting crowded. would this line fit above the object label on the left? maybe with a smaller grid line? or a right justified grid line?
+3. Also tick Sedna from the trans-Neptunian objects, then zoom in to 1 AU. The line should read "2 ticked bodies are outside this view". -- the initial view of the sedna orbit is cut off. it does show the object but not the entire orbit which is a closed orbit. one has to zoom out to 200 au to see the whole orbit. when zooming in to 20 au the orbit is out of sight, not just the object, because the orbit is so wide, and the 1 ticked body label does appear. 
+4. Is the line easy to read, and clear of the small x-y-z axes above it? -- mostly, although the aries symbol is partially covered, that is why i am thinking we could move the ticked body count to the left side above the object label. 
+5. Tap the i button. The last line should be "About Paloma's Orrery". Tap it: the lobby should open with the About card. Close it. -- correct. but closing it takes you to the lobby. to get back to the render we need to use the back button <
+6. Enter the Sun room and check that its i panel ends with the same line. -- correct
 
 **Where this leaves us**
 - Halley was drawn correctly all along. The view now tells you when ticked bodies are out of sight.
 - After your phone look, slice 2 is next: the spacecraft and the comets on open paths.
+
+========================================================================================
+
+I'll write it up now: the design record, a new ledger item for the orrery's side, and the updates to L-443 and Where We Are. It all goes in one patch, which runs after patch 2.
+
+The page holds at 129 lines. Three Settled lines have left it today for the length limit, so I'll keep them word for word at the end of the design record, as the slice 1 close did.
+
+Patch 3 refuses cleanly if patch 2 hasn't run, applies after it, and refuses a second run. The ledger's index tool reads all 469 items, the new L-476 among them. Saving it to your orrery folder.
+
+I've written slice 2's design up and saved it in your orrery folder as `patch_L472_3_slice2_design_20261023.py`. It's ready to run, and nothing will replace it.
+
+**What it records:**
+- **A new design record,** `DESIGN_L443_slice2_rulings_20261023.md`. It holds your seven rulings in your own words, what I measured to put each question to you, and the parts the build decides by method. It also keeps, word for word, the three Settled lines today's patches took off Where We Are for the length limit.
+- **A new ledger item, L-476:** the orrery's own whole-path plots will draw by the same plan, including the dashed part after today. It comes after slice 2.
+- **L-443 and Where We Are** now say slice 2 is designed.
+
+**Your steps when you're back, in this order:**
+1. **Website folder:** run patch 1, then the gallery maintenance run (offline). Commit and push, then do the live run.
+2. **Orrery folder:** run patch 2, then patch 3. If you run patch 3 first, it says so and writes nothing. Then move both to documentation/, commit and push. No maintenance run is needed.
+3. **Your phone look** of the three changes, using the checklist from my earlier message.
+
+**Where this leaves us**
+- Halley was drawn correctly. The view now counts the ticked bodies it can't show.
+- Slice 2 is designed: twelve spacecraft and fourteen comets, solid up to today and dashed after.
+- The slice 2 build comes after your phone look.
+
+================================================================
+
+Nothing outside those seven lists skips Gonggong. Before I make a code patch for the orrery, the protocol has me load the pre-delivery test skill.
+
+Now the edits, on a working copy of the orrery.
+
+The period fetch's test needs the orrery's Python libraries, which this sandbox doesn't have yet. Installing them.
+
+Tk was installed for Python 3.12, but the sandbox runs 3.13. Finding the matching package.
+
+There's no Tk package for 3.13 here, but 3.12 now has it. I'll install the orrery's libraries for 3.12 and run the tests with that.
+
+The test passes on the changed copy, so the three lists agree. Now I'll show it can go red: take Gonggong off only one side and confirm the test names the difference.
+
+The ledger differs only because I'd run the ledger's index tool on the copy I built from. The difference should lie entirely inside the index zone, which that tool rewrites. Confirming.
+
+The ledgers match outside the generated index, so the patch writes exactly what I tested. Saving it to your orrery folder.
+
+I've built the Gonggong patch and saved it in your orrery folder as `patch_L470_1_gonggong_off_skip_lists_20261023.py`. It follows the coordinator's note step for step, it's ready to run, and nothing will replace it.
+
+**What it changes:**
+- Gonggong comes off all six skip lists in `palomas_orrery.py`, and off `period_fetch.py`'s copy in the same patch. Each list gets a dated comment saying why.
+- L-470 records your ruling and the build, and Where We Are takes Gonggong off the design-talk list.
+
+**How I tested it.** This sandbox can't reach JPL, so the real answer comes from your run.
+- **The period fetch's test** passes all 36 checks with the change. With only one side changed it goes red and names both lists, so the lists can't drift apart unnoticed.
+- **The period fetch itself** now lists Gonggong as the one body missing a period, and asks JPL for record 2007 OR10 around the Sun. From here it could only report that JPL is unreachable, and it saved nothing.
+- **The orrery** starts headlessly with no errors.
+- **The patch's safeguards:** it refuses with a plain message if patches 2 and 3 haven't run, and it refuses to run twice.
+
+**Your steps, after patches 2 and 3:**
+1. **Run the patch.**
+2. **Do the maintenance run, and read two lines.** Period fetch should say it fetched Gonggong. Horizons check should pass. If either names Gonggong as failing, don't commit: use Discard Changes in GitHub Desktop and bring me the line.
+3. **Look at the orrery with Gonggong as the centre body.** The maintenance run only asks around the Sun.
+4. **Commit and push.** The website's next Daily Run replaces the typed 550.34 years with JPL's period.
+
+**Where this leaves us**
+- Four patches wait in your folders, in this order: patch 1 on the website, then patches 2, 3 and L470_1 on the orrery.
+- Gonggong is ruled and built. Your maintenance run is the test.
+- After that come your phone look, then the slice 2 build.
