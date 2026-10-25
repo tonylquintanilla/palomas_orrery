@@ -625,6 +625,11 @@ decisions in slice 2's words, the orrery's date list, a check that the
 website and the orrery agree; C/2025 K1 fixed in the orrery (L-470);
 L-483 and L-484 new), built on 206f96c after patches L481_3, L443_7 and
 L443_8.
+Module updated: October 24, 2026, later that night, with Anthropic's
+Claude Opus 5.5 (L-443: the path plan prints as it goes, saves each plan
+as it is made and keeps to a time limit, on Tony's ask; orrery
+patch_L443_10), built on 206f96c after patches L481_3 and L443_7 to
+L443_9.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -2650,12 +2655,33 @@ the deliberate limit, its number set then, each removal named.
 - **Carried for slice 2's next skill bump:** none; L-481's three
   descriptions and L-482's rule rode interactive-exhibit 1.23 this
   session.
-**Gap (replaces the one below, 2026-10-24, late night):** Tony's runs,
-patch_L443_9 right after patch_L443_8, and the preview's output pasted
-into the chat; then build B: the twelve keyed with their website entries
+- **2026-10-24, later that night: the preview sat silent.** Tony started
+  the dashboard's preview at 20:44; at 20:55 the window was still blank,
+  because the plan printed only at its end. Tony, 21:00: "i was wondering
+  if we can break this up so that we can get interim reports, especially
+  an initial report that says that we are pinging jpl at least.
+  especially if this runs automatically every 30 days, a long pause may
+  be an issue." And 21:06: "yes, and maybe patch and rerun before the
+  website patch?" Found with it: the maintenance run stops any one step
+  at 900 seconds, and the plan saved only at its end, so a first full
+  plan in that run would have been cut off with nothing saved, every
+  time. Built in orrery `patch_L443_10_path_plan_as_it_goes_20261024.py`:
+  a first line before JPL is asked anything, then a line with the
+  seconds since the start for each path's span, each body's data sheet
+  and positions, each body's near approaches and each flyby; each plan
+  saved as it is made; a 10-minute limit (TIME_LIMIT_SECONDS) after
+  which nothing new starts, what is left named in the verdict and taken
+  up by the next run; --no-limit for the dashboard's preview. The suite
+  gains checks 10 to 12, two with a planted fault (20 of 20).
+**Gap (replaces the one below, 2026-10-24, later that night):** Tony's
+run of patch_L443_10, and the preview run again with it, its report
+pasted into the chat; then build B: the twelve keyed with their website entries
 and their words, the builder fetching by the plan, the room
 drawing each path solid to today and dashed after, the hover words to
 Tony first, with L-461; then the open-path comets by the span ruling.
+**Gap (superseded above, 2026-10-24, late night):** Tony's runs,
+patch_L443_9 right after patch_L443_8, and the preview's output pasted
+into the chat; then build B, as above.
 **Gap (superseded above, 2026-10-24, night):** Tony's run of the
 path plan patch and its preview, pasted into the chat; his words
 approvals and the four decisions; his answer on a comet's span; then

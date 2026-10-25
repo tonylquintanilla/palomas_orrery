@@ -314,6 +314,10 @@ and Path Plan Suite, its new checker, after Orbit Markers, each with its
 short line. And Path Plan -- preview of slice 2, in Tools and Caches:
 path_plan.py --preview, which plans the twelve spacecraft by name before
 they are keyed; temporary, it goes when they are keyed.
+October 24, 2026, late night, with Anthropic's Claude Opus 5.5 (L-443):
+the preview runs with --no-limit, and both Path Plan texts say it prints
+a line as it goes, saves each plan as it is made, and, without
+--no-limit, starts nothing new after 10 minutes.
 """
 
 import os
@@ -1347,8 +1351,11 @@ LAUNCH_GROUPS = {
          "positions, with its moment, distance and speed, and the window "
          "and step to fetch around it. Writes data/path_plans.json. On a "
          "30-day cycle, so most runs ask JPL nothing; --all asks for every "
-         "path now. If JPL cannot be reached it keeps each plan as it was "
-         "and says UNREACHABLE.",
+         "path now. It prints a line as it goes, saves each plan as it is "
+         "made, and starts nothing new after 10 minutes: what is left is "
+         "named and taken up by the next run, or by pressing this again. "
+         "If JPL cannot be reached it keeps each plan as it was and says "
+         "UNREACHABLE.",
          SCRIPT_DIR,
          True,
          None,
@@ -1880,11 +1887,12 @@ LAUNCH_GROUPS = {
          "reads, so the website sees nothing. It prints every flyby it "
          "finds in JPL's positions, with its moment, distance and speed. "
          "Needs the internet; the first run asks JPL a few hundred "
-         "questions and can take a quarter of an hour. Paste its output "
-         "into the chat.",
+         "questions and can take the better part of an hour, with no time "
+         "limit. It prints a line as it goes and saves each spacecraft's "
+         "plan as it is made. Paste its output into the chat.",
          SCRIPT_DIR,
          True,
-         ["--preview"]),
+         ["--preview", "--no-limit"]),
         ("Osculating Cache Manager",
          "osculating_cache_manager.py",
          "Load and report on the osculating orbital elements cache "

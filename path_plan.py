@@ -114,17 +114,42 @@ RUN COMMAND
 
     Open this file in VS Code and click Run. It takes no arguments.
 
-        python path_plan.py            what is due
+        python path_plan.py            what is due, within the time
+                                       limit
         python path_plan.py --all      every path, now
+        python path_plan.py --no-limit no time limit (the first full plan)
         python path_plan.py --preview  TEMPORARY: slice 2's twelve
                                        spacecraft by name, before they are
                                        keyed, into data/path_plans_preview.
                                        json, which the export never reads
                                        (the dashboard's "Path Plan --
-                                       preview of slice 2" button)
+                                       preview of slice 2" button, which
+                                       adds --no-limit)
 
     orrery_maintenance_run.py runs it as a GENERATOR, before the objects
     export, which carries each plan to the website.
+
+AS IT GOES, AND ITS TIME LIMIT
+
+    Tony, 2026-10-24, after the first preview sat 20 minutes on a blank
+    window: "i was wondering if we can break this up so that we can get
+    interim reports, especially an initial report that says that we are
+    pinging jpl at least. especially if this runs automatically every 30
+    days, a long pause may be an issue." So:
+      - A first line before JPL is asked anything: the time, how many
+        paths are listed and which are due. Then a line, with the seconds
+        since the start, as each path's span comes back, as each body's
+        data sheet and daily positions arrive, as each body's near
+        approaches are looked at closely, and for each flyby found.
+      - Each path's plan is saved as soon as it is made, so a run that
+        stops keeps what it finished, and the next run asks only what is
+        left.
+      - A time limit, 10 minutes (TIME_LIMIT_SECONDS), below the
+        maintenance run's 15 for any one step. After it no new path is
+        started, and a path being looked at when it passes is left as its
+        previous plan said; each is named in the verdict as left for the
+        next run, which takes it up. --no-limit lifts it, for the first
+        full plan from the dashboard, where nothing stops the run.
 
     The last line is the verdict: "PATH PLAN: ..." naming each path, how
     many events it has, and what was asked.
@@ -134,6 +159,10 @@ Domain: dev_tools
 
 Module created: October 24, 2026 with Anthropic's Claude Opus 5.5
 (L-443, slice 2).
+Module updated: October 24, 2026, late night, with Anthropic's Claude
+Opus 5.5 (L-443, Tony's ask of that night: a line as it goes, each plan
+saved as it is made, a 10-minute limit unless --no-limit; see AS IT GOES,
+AND ITS TIME LIMIT).
 """
 
 import ast
@@ -170,6 +199,9 @@ CADENCE_DAYS = 30
 KEEP_PAST_DAYS = 30        # events older than this are carried, not re-found
 OVERLAP_DAYS = 3           # the re-search starts this much before them
 PAUSE_SECONDS = 1.0
+# The maintenance run stops any one step at 900 s (TOOL_TIMEOUT_SECONDS in
+# orrery_maintenance_run.py); the plan starts nothing new after 600.
+TIME_LIMIT_SECONDS = 600
 
 # The backbone: Voyager 1's proven numbers (gallery config, 2026-07-11),
 # now in one place for every path.
@@ -427,6 +459,36 @@ def jd_to_calendar(jd):
                                          minutes // 60, minutes % 60)
 
 
+# ------------------------------------------------------------- as it goes
+
+class TimeUp(Exception):
+    """The time limit passed while a path was being planned."""
+
+
+class Progress(object):
+    """The lines a run prints as it goes, each with the seconds since it
+    began, and its time limit (None: no limit). With no out it is silent,
+    which is how the suite runs it unless it is looking at the lines."""
+
+    def __init__(self, out=None, clock=time.monotonic, limit=None):
+        self.out, self.clock, self.limit = out, clock, limit
+        self.t0 = clock()
+
+    def elapsed(self):
+        return self.clock() - self.t0
+
+    def say(self, text):
+        if self.out is not None:
+            self.out("  [%5.0f s] %s" % (self.elapsed(), text))
+
+    def over(self):
+        return self.limit is not None and self.elapsed() > self.limit
+
+    def check(self):
+        if self.over():
+            raise TimeUp("the %d-second limit passed" % self.limit)
+
+
 # ------------------------------------------------------------- geometry
 
 def ideal_step_seconds(dist_km, v_kms):
@@ -579,10 +641,11 @@ class BodyRows(object):
     across every due path's span and shared. A body JPL gives nothing
     for is named once and left out, and never stops the run."""
 
-    def __init__(self, fetch, first, last, pause):
+    def __init__(self, fetch, first, last, pause, progress=None):
         self.fetch, self.pause = fetch, pause
         self.first, self.last = ymd(first), ymd(last)
         self.rows, self.refused, self.gms = {}, {}, {}
+        self.progress = progress or Progress()
 
     def gm(self, body):
         """JPL's GM for the body, read once from its sheet; None (and the
@@ -600,6 +663,11 @@ class BodyRows(object):
                 self.refused[k] = ("%s: its JPL data sheet gives no GM, so "
                                    "it has no Hill sphere to pass inside"
                                    % body[0])
+                self.progress.say("%s: data sheet read; no GM, so not "
+                                  "searched" % body[0])
+            else:
+                self.progress.say("%s: data sheet read; GM found"
+                                  % body[0])
         return self.gms[k]
 
     def get(self, body):
@@ -611,21 +679,29 @@ class BodyRows(object):
             if k in self.refused:
                 return None
         if k not in self.rows:
+            self.progress.say("%s: asking JPL for its daily positions, %s "
+                              "to %s" % (body[0], self.first, self.last))
             try:
                 self.rows[k] = ask(self.fetch, vectors_url(
                     body[2], body[3], "500@10", self.first, self.last,
                     COARSE_STEP), self.pause)
             except Refused as exc:
                 self.refused[k] = "%s: %s" % (body[0], exc)
+                self.progress.say("%s: JPL gave no positions; not searched"
+                                  % body[0])
                 return None
+            self.progress.say("%s: %d days received" % (body[0],
+                                                         len(self.rows[k])))
         return self.rows[k]
 
 
 def make_plan(fetch, path, bodies, today, rows, previous=None, pause=0.0,
-              found=None):
+              found=None, progress=None):
     """One path's plan. found is (rows, start, end) from
     path_rows_and_span, or None for a path with nothing left to search.
-    Raises Unreachable."""
+    Raises Unreachable, and TimeUp when the progress's limit passes before
+    a near approach is looked at closely."""
+    progress = progress or Progress()
     inputs = plan_inputs(path, bodies)
     if found is None:
         span = previous["span"]
@@ -671,7 +747,12 @@ def make_plan(fetch, path, bodies, today, rows, previous=None, pause=0.0,
                 if b is None or p is None:
                     return 0.0
                 return hill_km(b, p, gm_b, gm_p)
-        for jd, _, _ in candidates(path_rows, body_rows, gate):
+        near = candidates(path_rows, body_rows, gate)
+        if near:
+            progress.say("%s: %d near approach(es) to %s to look at closely"
+                         % (path["name"], len(near), body[0]))
+        for jd, _, _ in near:
+            progress.check()
             try:
                 fjd, d, v = refine(fetch, path, body, jd, pause)
             except Refused as exc:
@@ -694,6 +775,9 @@ def make_plan(fetch, path, bodies, today, rows, previous=None, pause=0.0,
                            "ideal_step_s": round(ideal, 1),
                            "hill_km": None if hill is None else round(hill),
                            "window": [w0, w1], "step": step})
+            progress.say("%s: flyby of %s, %s TDB, %s km, %.3f km/s"
+                         % (path["name"], body[0], jd_to_calendar(fjd),
+                            "{:,.0f}".format(d), v))
     events.sort(key=lambda e: e["jd"])
     return {"name": path["name"], "horizons_id": path["id"],
             "id_type": path.get("id_type"), "kind": "spacecraft",
@@ -708,10 +792,32 @@ def render(plans):
     return json.dumps(plans, indent=1, sort_keys=True) + "\n"
 
 
+def write_plans(path_file, plans):
+    """Write the plans file when its content changes; returns the dict
+    written."""
+    out = {"schema": SCHEMA, "cadence_days": CADENCE_DAYS,
+           "backbone": {"step": BACKBONE_STEP, "thin_tol_au": THIN_TOL_AU},
+           "plans": plans}
+    content = render(out)
+    os.makedirs(os.path.dirname(path_file), exist_ok=True)
+    before = None
+    if os.path.exists(path_file):
+        with open(path_file, "rb") as handle:
+            before = handle.read().replace(b"\r\n", b"\n")
+    if before != content.encode("utf-8"):
+        with open(path_file, "w", encoding="utf-8", newline="") as handle:
+            handle.write(content)
+    return out
+
+
 def run(root, fetch, today, check_all=False, pause=PAUSE_SECONDS,
-        preview=False):
-    """(verdict, lines, plans). Writes data/path_plans.json when it changes;
-    with preview, data/path_plans_preview.json for PREVIEW_NAMES instead."""
+        preview=False, progress=None):
+    """(verdict, lines, plans). Writes data/path_plans.json when it changes,
+    after each plan is made and at the end; with preview,
+    data/path_plans_preview.json for PREVIEW_NAMES instead. progress
+    prints as it goes and holds the time limit (Progress; silent and
+    unlimited when None)."""
+    progress = progress or Progress()
     with open(os.path.join(root, SOURCE), "r", encoding="utf-8") as handle:
         entries = keyed_entries(handle.read(), preview)
     paths = [f for f in entries if is_spacecraft(f)]
@@ -745,9 +851,18 @@ def run(root, fetch, today, check_all=False, pause=PAUSE_SECONDS,
         else:
             lines.append("  %-22s current (%s), %d events"
                          % (key, why, len(plans[key]["events"])))
-    found, firsts, lasts = {}, [], []
+    progress.say("started %s: %d path(s) listed, %d due%s"
+                 % (datetime.datetime.now().strftime("%H:%M:%S"), len(paths),
+                    len(todo),
+                    (" (%s); asking JPL for each one's span first"
+                     % ", ".join(f["name"] for f, _ in todo)) if todo
+                    else "; JPL is not asked"))
+    found, firsts, lasts, left = {}, [], [], []
     for f, why in todo:
         key, prev = f["key"], plans.get(f["key"])
+        if progress.over():
+            left.append(key)
+            continue
         inputs = plan_inputs(f, bodies)
         if (prev is not None and prev.get("inputs_sha256")
                 == inputs_sha256(inputs)
@@ -768,12 +883,21 @@ def run(root, fetch, today, check_all=False, pause=PAUSE_SECONDS,
                          "%s" % (key, exc))
             continue
         found[key] = got
+        progress.say("%s: JPL has positions from %s to %s"
+                     % (f["name"], ymd(got[1]), ymd(got[2])))
         firsts.append(search_start(f, prev, inputs, today, got[1], got[2])[0])
         lasts.append(got[2])
-    rows = BodyRows(fetch, min(firsts), max(lasts), pause) if firsts else None
+    rows = (BodyRows(fetch, min(firsts), max(lasts), pause, progress)
+            if firsts else None)
     for f, why in todo:
         key = f["key"]
         if key in not_planned:
+            continue
+        if key in left or (progress.over() and found.get(key) is not None):
+            if key not in left:
+                left.append(key)
+            lines.append("  %-22s left for the next run (the time limit); "
+                         "its previous plan is kept" % key)
             continue
         if any(u.startswith(key + " (") for u in unreachable):
             lines.append("  %-22s UNREACHABLE; its previous plan is kept"
@@ -785,14 +909,24 @@ def run(root, fetch, today, check_all=False, pause=PAUSE_SECONDS,
             continue
         try:
             plan = make_plan(fetch, f, bodies, today, rows, plans.get(key),
-                             pause, found[key])
+                             pause, found[key], progress)
         except Unreachable as exc:
             unreachable.append("%s (%s)" % (key, exc))
             lines.append("  %-22s UNREACHABLE: %s; its previous plan is "
                          "kept" % (key, exc))
             continue
+        except TimeUp:
+            left.append(key)
+            progress.say("%s: the time limit passed while it was being "
+                         "looked at; left for the next run" % f["name"])
+            lines.append("  %-22s left for the next run (the time limit); "
+                         "its previous plan is kept" % key)
+            continue
         plans[key] = plan
         asked.append(key)
+        write_plans(path_file, plans)
+        progress.say("%s: planned, %d flyby(s); saved" % (
+            f["name"], len(plan["events"])))
         lines.append("  %-22s planned (%s): %d events, %d carried, "
                      "searched from %s" % (key, why, len(plan["events"]),
                                            plan["carried"],
@@ -804,18 +938,7 @@ def run(root, fetch, today, check_all=False, pause=PAUSE_SECONDS,
     if rows is not None and rows.refused:
         lines.append("  Not searched: "
                      + "; ".join(sorted(rows.refused.values())))
-    out = {"schema": SCHEMA, "cadence_days": CADENCE_DAYS,
-           "backbone": {"step": BACKBONE_STEP, "thin_tol_au": THIN_TOL_AU},
-           "plans": plans}
-    content = render(out)
-    os.makedirs(os.path.dirname(path_file), exist_ok=True)
-    before = None
-    if os.path.exists(path_file):
-        with open(path_file, "rb") as handle:
-            before = handle.read().replace(b"\r\n", b"\n")
-    if before != content.encode("utf-8"):
-        with open(path_file, "w", encoding="utf-8", newline="") as handle:
-            handle.write(content)
+    out = write_plans(path_file, plans)
     names = ", ".join("%s %d" % (k, len(plans[k]["events"]))
                       for k in sorted(plans)) or "none"
     if preview and missing:
@@ -823,6 +946,9 @@ def run(root, fetch, today, check_all=False, pause=PAUSE_SECONDS,
                                      for m in missing]
     tail = (" Not planned: %s." % ", ".join(not_planned)) if not_planned \
         else ""
+    if left:
+        tail += (" Left for the next run (the %d-minute limit): %s."
+                 % (progress.limit // 60, ", ".join(left)))
     if unreachable:
         verdict = ("PATH PLAN: UNREACHABLE -- %s; kept as they were. "
                    "Paths and events: %s.%s" % ("; ".join(unreachable),
@@ -837,14 +963,22 @@ def run(root, fetch, today, check_all=False, pause=PAUSE_SECONDS,
 def main(argv):
     check_all = "--all" in argv
     preview = "--preview" in argv
+    limit = None if "--no-limit" in argv else TIME_LIMIT_SECONDS
     today = datetime.date.today()
-    verdict, lines, _ = run(ROOT, hc.live_fetch, today, check_all,
-                            preview=preview)
     print(LINE)
     print("PATH PLAN -- where each served path needs finer steps (L-443)%s"
           % (" -- PREVIEW of slice 2's twelve, into %s" % PREVIEW.replace(
               os.sep, "/") if preview else ""))
-    print(LINE)
+    print("  %s; a line as it goes, then the report" % (
+        "no time limit" if limit is None
+        else "time limit %d minutes" % (limit // 60)))
+    print(LINE, flush=True)
+    progress = Progress(out=lambda text: print(text, flush=True),
+                        limit=limit)
+    verdict, lines, _ = run(ROOT, hc.live_fetch, today, check_all,
+                            preview=preview, progress=progress)
+    print()
+    print("REPORT")
     for line in lines:
         print(line)
     print()

@@ -3,7 +3,7 @@
 
 Last updated: October 24, 2026, late night: Reset in every room built;
 slice 2's orrery half built; your rulings recorded; C/2025 K1 fixed.
-- Written at orrery 206f96c and gallery 96173b8, with five patches.
+- Written at orrery 206f96c and gallery 96173b8, with six patches.
 
 > **READ THIS FIRST**
 >
@@ -20,8 +20,8 @@ slice 2's orrery half built; your rulings recorded; C/2025 K1 fixed.
 > preview's flyby list into the chat.*
 >
 > **Needs you now:**
-> - *(do) Five patches: the handoff's order, with patch_L443_9 right
->   after patch_L443_8. Paste what it says about the cached K1 path.*
+> - *(do) patch_L443_10, then the preview again from the dashboard; it
+>   prints as it goes now. Paste its report into the chat.*
 > - Two papers left to try (`READING_L456_tony_20261021.md`).
 
 *Italic* lines are the must-reads. Marks reset at every update.

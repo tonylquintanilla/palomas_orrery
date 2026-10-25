@@ -36,6 +36,16 @@ WHAT IT CHECKS
       7. Two planted faults must fail check 1: the backbone's step set to
          nothing (so no flyby can need finer steps), and the fine passes
          skipped (so the nearest minute is not found).
+     10. As it goes: the first line comes before JPL is asked anything and
+         names the paths due; then a line for each path's span, each
+         body's positions and each flyby found.
+     11. Each plan is saved as it is made: when Craft B is first looked
+         at closely, Craft A's plan is already on disk. Planted fault:
+         the plans written only at the end.
+     12. The time limit: when it has passed, the next path is not started
+         but named as left for the next run, and a run with no limit then
+         plans it and asks nothing about the path already planned.
+         Planted fault: the limit never passing.
 
 RUN COMMAND
 
@@ -52,6 +62,9 @@ Domain: dev_tools
 
 Module created: October 24, 2026 with Anthropic's Claude Opus 5.5
 (L-443, slice 2).
+Module updated: October 24, 2026, late night, with Anthropic's Claude
+Opus 5.5 (L-443: checks 10 to 12, the lines as it goes, each plan saved
+as it is made, the time limit, two of them with a planted fault).
 """
 
 import datetime
@@ -348,6 +361,107 @@ def suite(today=datetime.date(2026, 10, 24), plant=None):
         shutil.rmtree(root, ignore_errors=True)
 
 
+def as_it_goes():
+    """Check 10. One list holds JPL's questions and the lines, in order."""
+    root = make_root()
+    try:
+        seen = []
+
+        class Logged(FakeJPL):
+            def __call__(self, url):
+                seen.append(("ask", url))
+                return FakeJPL.__call__(self, url)
+
+        progress = pp.Progress(out=lambda t: seen.append(("say", t)))
+        pp.run(root, Logged(refuse=("X2",)), datetime.date(2026, 10, 24),
+               pause=0.0, progress=progress)
+        said = [t for k, t in seen if k == "say"]
+        first = seen[0] if seen else ("none", "")
+        want = ["Craft A: JPL has positions", "Craft B: JPL has positions",
+                "Earth: asking JPL for its daily positions",
+                "Earth: ", "days received", "flyby of Earth",
+                "flyby of Testroid", "Craft A: planned", "saved"]
+        missing = [w for w in want if not any(w in t for t in said)]
+        ok = (first[0] == "say" and "started" in first[1]
+              and "2 due" in first[1] and "Craft A" in first[1]
+              and not missing)
+        return ok, ("first: %s; missing: %s" % (first[1][:70],
+                                                ", ".join(missing) or "none"))
+    finally:
+        shutil.rmtree(root, ignore_errors=True)
+
+
+def saved_as_it_goes(plant=False):
+    """Check 11. Looks at the file on disk when Craft B is first looked at
+    closely (its first hourly question)."""
+    root = make_root()
+    real = pp.write_plans
+    try:
+        on_disk = []
+
+        class Watching(FakeJPL):
+            def __call__(self, url):
+                if "-902" in url and "1h" in url and not on_disk:
+                    path = os.path.join(root, pp.PLANS)
+                    if os.path.exists(path):
+                        with open(path, "r", encoding="utf-8") as h:
+                            on_disk.append(sorted(json.load(h)["plans"]))
+                    else:
+                        on_disk.append([])
+                return FakeJPL.__call__(self, url)
+
+        if plant:
+            pp.write_plans = lambda path_file, plans: {
+                "schema": pp.SCHEMA, "plans": plans}
+        pp.run(root, Watching(refuse=("X2",)), datetime.date(2026, 10, 24),
+               pause=0.0)
+        got = on_disk[0] if on_disk else None
+        return got == ["craft_a"], "on disk then: %s" % got
+    finally:
+        pp.write_plans = real
+        shutil.rmtree(root, ignore_errors=True)
+
+
+def time_limit(plant=False):
+    """Check 12. The clock passes the limit the moment Craft A's plan is
+    saved; Craft B is then left. A second run with no limit plans it."""
+    root = make_root()
+    real_write, real_over = pp.write_plans, pp.Progress.over
+    try:
+        now = [0.0]
+        progress = pp.Progress(clock=lambda: now[0], limit=600)
+
+        def write_then_late(path_file, plans):
+            out = real_write(path_file, plans)
+            if "craft_a" in plans:
+                now[0] = 10000.0
+            return out
+
+        pp.write_plans = write_then_late
+        if plant:
+            pp.Progress.over = lambda self: False
+        jpl = FakeJPL(refuse=("X2",))
+        verdict, lines, out = pp.run(root, jpl, datetime.date(2026, 10, 24),
+                                     pause=0.0, progress=progress)
+        pp.write_plans, pp.Progress.over = real_write, real_over
+        b_asked = [u for u in jpl.calls if "-902" in u and "1h" in u]
+        first_ok = (sorted(out["plans"]) == ["craft_a"]
+                    and "Left for the next run" in verdict
+                    and "craft_b" in verdict.split("Left for the next run")[1]
+                    and not b_asked)
+        jpl2 = FakeJPL(refuse=("X2",))
+        v2, _, out2 = pp.run(root, jpl2, datetime.date(2026, 10, 24),
+                             pause=0.0)
+        a_asked = [u for u in jpl2.calls if "-901" in u]
+        second_ok = (sorted(out2["plans"]) == ["craft_a", "craft_b"]
+                     and not a_asked and "Left for" not in v2)
+        return (first_ok and second_ok,
+                "first run: %s; then: %s" % (verdict[:120], v2[:80]))
+    finally:
+        pp.write_plans, pp.Progress.over = real_write, real_over
+        shutil.rmtree(root, ignore_errors=True)
+
+
 def plant_no_backbone():
     old = pp.BACKBONE_STEP_SECONDS
     pp.BACKBONE_STEP_SECONDS = 0.0
@@ -368,6 +482,18 @@ def plant_no_fine_pass():
 
 def main():
     suite()
+    ok, why = as_it_goes()
+    check(ok, "10. a first line before JPL is asked, then a line for each "
+              "span, each body's positions and each flyby (%s)" % why)
+    ok, why = saved_as_it_goes()
+    check(ok, "11. each plan saved as it is made (%s)" % why)
+    check(not saved_as_it_goes(plant=True)[0],
+          "11. planted fault caught: the plans written only at the end")
+    ok, why = time_limit()
+    check(ok, "12. past the time limit the next path is left for the next "
+              "run, which plans it (%s)" % why)
+    check(not time_limit(plant=True)[0],
+          "12. planted fault caught: the limit never passing")
     for name, plant in (("the backbone's step set to nothing",
                          plant_no_backbone),
                         ("the fine pass skipped", plant_no_fine_pass)):

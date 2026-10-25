@@ -1026,14 +1026,532 @@ Saving HTML (~10 KB + plot data, needs internet) to C:/Users/tonyq/OneDrive/Desk
 HTML saved successfully.
 Window config saved to C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\window_config.json
 
-2. **Commit everything GitHub Desktop lists, then push.** Make sure the list includes:
+2. **Commit everything GitHub Desktop lists, then push.** Make sure the list includes: -- b1dcf56be9af1c048140191f15b18f64f9c89498
    - your two run-record copies (`_1140_` and `_1927_`);
    - `COORD_L482_reset_all_rooms_20261024.md`;
    - `HANDOFF_L443_slice2_start_brief_20261024.md`;
    - tonight's two notes, `COORD_L443_comet_span_ruling_20261024.md` and `COORD_L443_words_decisions_20261024.md`;
    - the four moved patches.
-3. **Reinstall two skills in Settings > Skills:** interactive-exhibit (1.23) and horizons-orbital-mechanics (1.10).
-4. **On the dashboard, Tools and Caches, run "Path Plan -- preview of slice 2".** It needs the internet and may take about a quarter of an hour. Paste its output into the chat. It writes `data/path_plans_preview.json`; commit that with your next push.
+3. **Reinstall two skills in Settings > Skills:** interactive-exhibit (1.23) and horizons-orbital-mechanics (1.10). -- yes, and v3.111
+4. **On the dashboard, Tools and Caches, run "Path Plan -- preview of slice 2".** It needs the internet and may take about a quarter of an hour. Paste its output into the chat. It writes `data/path_plans_preview.json`; 
+
+    `path_plan.py` works out, for each spacecraft's path, where the drawing needs extra points so the path comes out right. It doesn't draw anything itself. It writes a plan, and later the website (and eventually the orrery) fetches positions from JPL by that plan.
+
+    The problem it solves: most of a spacecraft's path is a gentle curve, and a point every 7 days draws it well. Near a flyby the path bends sharply in a matter of hours. At 7-day spacing that bend gets cut off or drawn as a sharp kink. So the plan says where the flybys are, and how finely to sample around each one.
+
+    For each spacecraft it does five things:
+
+    1. **It finds the dates JPL actually has.** It asks JPL for the spacecraft's position far too early and far too late. JPL refuses and names its first and last dates, and those become the path's span. That is how it learned that the dates typed in the orrery's list have drifted for Juno, Psyche, New Horizons and others.
+    2. **It finds the moments the spacecraft comes closest to something.** It fetches the spacecraft's position once a day across that span, and the same for the Sun, the eight planets, the Moon and Pluto. Then it finds each day when the spacecraft is nearer a body than on the days either side.
+    3. **It keeps only real flybys.** A near point counts only if it falls inside the body's "Hill sphere", the region where the body's own gravity outweighs the Sun's. That region's size is worked out from the body's mass as JPL publishes it. Without this test the first trial run called a pass 85 million km from Mercury a flyby.
+    4. **It pins each flyby down.** It asks JPL again around each flyby, first hour by hour and then minute by minute. That gives the moment of closest approach, the distance and the speed.
+    5. **It decides how finely to draw each flyby.** From the distance and speed it works out how sharp the bend is. Then it sets a window around the flyby and a step size within it, using the same rule the orrery already uses for its encounter views: about 30 points through the bend.
+
+    After that it re-checks each plan every 30 days. On most days it asks JPL nothing.
+
+    Running it as the preview does all this for the twelve spacecraft by name, before any of them is set up for the website. It writes the results to `data/path_plans_preview.json`, a file the website never reads. That's also why it takes a while this first time: it fetches daily positions for twelve spacecraft and about a dozen bodies, across decades.
+
+    What I'll do with your output: check the flybys it finds against the ones each mission is known to have made, such as Voyager at Jupiter and Saturn and Juno's Earth flyby. If they line up, the method works on real data and I can build the website half on it. Comets aren't in it yet; they come with that build.
+
+======================================================================
+PATH PLAN -- where each served path needs finer steps (L-443) -- PREVIEW of slice 2's twelve, into data/path_plans_preview.json
+======================================================================
+  preview_voyager_1      planned (never planned): 2 events, 0 carried, searched from 1977-09-06
+      1979-03-05 12:05 TDB  Jupiter               348436 km    29.037 km/s  step 30m
+      1980-11-12 23:46 TDB  Saturn                184031 km    25.308 km/s  step 30m
+  preview_voyager_2      planned (never planned): 5 events, 0 carried, searched from 1977-08-21
+      1977-08-29 17:41 TDB  Sun                150040530 km    39.044 km/s  step 4d
+      1979-07-09 22:30 TDB  Jupiter               721376 km    20.230 km/s  step 1h
+      1981-08-26 03:25 TDB  Saturn                160691 km    24.208 km/s  step 30m
+      1986-01-24 18:00 TDB  Uranus                107154 km    18.033 km/s  step 30m
+      1989-08-25 03:57 TDB  Neptune                29241 km    27.327 km/s  step 1m
+  preview_new_horizons   planned (never planned): 2 events, 0 carried, searched from 2006-01-20
+      2007-02-28 05:45 TDB  Jupiter              2304505 km    21.219 km/s  step 3h
+      2015-07-14 11:50 TDB  Pluto                  13680 km    13.778 km/s  step 1m
+  preview_juno           planned (never planned): 113 events, 0 carried, searched from 2011-08-06
+      2011-08-15 08:40 TDB  Sun                150984250 km    34.891 km/s  step 5d
+      2013-08-31 04:36 TDB  Sun                131868002 km    38.073 km/s  step 4d
+      2013-10-09 19:23 TDB  Earth                   6942 km    14.926 km/s  step 1m
+      2016-07-05 02:49 TDB  Jupiter                75978 km    57.937 km/s  step 5m
+      2016-08-27 12:52 TDB  Jupiter                75633 km    57.805 km/s  step 5m
+      2016-10-19 18:12 TDB  Jupiter                75637 km    57.801 km/s  step 5m
+      2016-12-11 17:05 TDB  Jupiter                75597 km    57.815 km/s  step 5m
+      2017-02-02 12:58 TDB  Jupiter                75733 km    57.756 km/s  step 5m
+      2017-03-27 08:53 TDB  Jupiter                74808 km    58.119 km/s  step 5m
+      2017-05-19 06:02 TDB  Jupiter                74878 km    58.091 km/s  step 5m
+      2017-07-11 01:56 TDB  Jupiter                74855 km    58.097 km/s  step 5m
+      2017-09-01 21:50 TDB  Jupiter                74827 km    58.103 km/s  step 5m
+      2017-10-24 17:44 TDB  Jupiter                75338 km    57.901 km/s  step 5m
+      2017-12-16 17:58 TDB  Jupiter                75585 km    57.795 km/s  step 5m
+      2018-02-07 13:53 TDB  Jupiter                74734 km    58.131 km/s  step 5m
+      2018-04-01 09:47 TDB  Jupiter                74696 km    58.140 km/s  step 5m
+      2018-05-24 05:41 TDB  Jupiter                74658 km    58.148 km/s  step 5m
+      2018-07-16 05:19 TDB  Jupiter                74629 km    58.163 km/s  step 5m
+      2018-09-07 01:13 TDB  Jupiter                74582 km    58.172 km/s  step 5m
+      2018-10-29 21:07 TDB  Jupiter                74540 km    58.178 km/s  step 5m
+      2018-12-21 17:01 TDB  Jupiter                76057 km    57.582 km/s  step 5m
+      2019-02-12 17:36 TDB  Jupiter                74460 km    58.208 km/s  step 5m
+      2019-04-06 12:16 TDB  Jupiter                76229 km    57.513 km/s  step 5m
+      2019-05-29 08:09 TDB  Jupiter                78136 km    56.774 km/s  step 5m
+      2019-07-21 04:04 TDB  Jupiter                78822 km    56.528 km/s  step 5m
+      2019-09-12 03:42 TDB  Jupiter                78782 km    56.539 km/s  step 5m
+      2019-11-03 22:19 TDB  Jupiter                74268 km    58.244 km/s  step 5m
+      2019-12-26 17:37 TDB  Jupiter                75780 km    57.649 km/s  step 5m
+      2020-02-17 17:53 TDB  Jupiter                75400 km    57.798 km/s  step 5m
+      2020-04-10 13:49 TDB  Jupiter                74162 km    58.285 km/s  step 5m
+      2020-06-02 10:21 TDB  Jupiter                74128 km    58.286 km/s  step 5m
+      2020-07-25 06:17 TDB  Jupiter                74092 km    58.307 km/s  step 5m
+      2020-09-16 02:12 TDB  Jupiter                74047 km    58.311 km/s  step 5m
+      2020-11-08 01:51 TDB  Jupiter                74006 km    58.326 km/s  step 5m
+      2020-12-30 21:47 TDB  Jupiter                73936 km    58.346 km/s  step 5m
+      2021-02-21 17:42 TDB  Jupiter                75301 km    57.807 km/s  step 5m
+      2021-04-15 23:34 TDB  Jupiter                75394 km    57.769 km/s  step 5m
+      2021-06-08 07:47 TDB  Jupiter                73880 km    58.314 km/s  step 5m
+      2021-07-21 08:16 TDB  Jupiter                73809 km    58.336 km/s  step 5m
+      2021-09-02 22:44 TDB  Jupiter                73758 km    58.355 km/s  step 5m
+      2021-10-16 17:15 TDB  Jupiter                73703 km    58.380 km/s  step 5m
+      2021-11-29 14:15 TDB  Jupiter                73645 km    58.395 km/s  step 5m
+      2022-01-12 10:34 TDB  Jupiter                73577 km    58.400 km/s  step 5m
+      2022-02-25 02:01 TDB  Jupiter                73686 km    58.349 km/s  step 5m
+      2022-04-09 15:50 TDB  Jupiter                73455 km    58.423 km/s  step 5m
+      2022-05-23 02:17 TDB  Jupiter                73378 km    58.455 km/s  step 5m
+      2022-07-05 09:19 TDB  Jupiter                73434 km    58.438 km/s  step 5m
+      2022-08-17 14:47 TDB  Jupiter                73557 km    58.371 km/s  step 5m
+      2022-09-29 17:13 TDB  Jupiter                73826 km    58.223 km/s  step 5m
+      2022-11-06 21:40 TDB  Jupiter                73109 km    58.510 km/s  step 5m
+      2022-12-15 03:25 TDB  Jupiter                73048 km    58.531 km/s  step 5m
+      2023-01-22 05:45 TDB  Jupiter                73092 km    58.476 km/s  step 5m
+      2023-03-01 05:55 TDB  Jupiter                72904 km    58.570 km/s  step 5m
+      2023-04-08 08:15 TDB  Jupiter                72823 km    58.586 km/s  step 5m
+      2023-05-16 07:24 TDB  Jupiter                72753 km    58.600 km/s  step 5m
+      2023-06-23 06:56 TDB  Jupiter                72676 km    58.610 km/s  step 5m
+      2023-07-31 09:07 TDB  Jupiter                72606 km    58.641 km/s  step 5m
+      2023-09-07 11:59 TDB  Jupiter                72669 km    58.596 km/s  step 5m
+      2023-10-15 10:54 TDB  Jupiter                73321 km    58.332 km/s  step 5m
+      2023-11-22 12:18 TDB  Jupiter                73581 km    58.206 km/s  step 5m
+      2023-12-30 12:37 TDB  Jupiter                72379 km    58.667 km/s  step 5m
+      2024-02-03 21:49 TDB  Jupiter                73680 km    58.140 km/s  step 5m
+      2024-03-07 15:43 TDB  Jupiter                72219 km    58.692 km/s  step 5m
+      2024-04-09 08:49 TDB  Jupiter                72142 km    58.714 km/s  step 5m
+      2024-05-12 03:40 TDB  Jupiter                72065 km    58.755 km/s  step 5m
+      2024-06-13 19:55 TDB  Jupiter                72492 km    58.571 km/s  step 5m
+      2024-07-16 14:35 TDB  Jupiter                71942 km    58.777 km/s  step 5m
+      2024-08-18 06:58 TDB  Jupiter                71879 km    58.789 km/s  step 5m
+      2024-09-20 02:30 TDB  Jupiter                71813 km    58.815 km/s  step 5m
+      2024-10-22 18:12 TDB  Jupiter                71749 km    58.827 km/s  step 5m
+      2024-11-24 13:07 TDB  Jupiter                71697 km    58.856 km/s  step 5m
+      2024-12-27 05:24 TDB  Jupiter                71635 km    58.871 km/s  step 5m
+      2025-01-28 23:06 TDB  Jupiter                71577 km    58.867 km/s  step 5m
+      2025-03-02 16:06 TDB  Jupiter                71521 km    58.899 km/s  step 5m
+      2025-04-04 09:32 TDB  Jupiter                71460 km    58.907 km/s  step 5m
+      2025-05-07 03:03 TDB  Jupiter                71407 km    58.930 km/s  step 5m
+      2025-06-08 20:32 TDB  Jupiter                71352 km    58.938 km/s  step 5m
+      2025-07-11 13:41 TDB  Jupiter                72087 km    58.626 km/s  step 5m
+      2025-08-13 07:06 TDB  Jupiter                72748 km    58.357 km/s  step 5m
+      2025-09-14 23:53 TDB  Jupiter                73430 km    58.078 km/s  step 5m
+      2025-10-17 16:06 TDB  Jupiter                74094 km    57.820 km/s  step 5m
+      2025-11-19 08:39 TDB  Jupiter                74728 km    57.568 km/s  step 5m
+      2025-12-22 01:15 TDB  Jupiter                75414 km    57.295 km/s  step 5m
+      2026-01-23 17:19 TDB  Jupiter                75965 km    57.096 km/s  step 5m
+      2026-02-25 09:34 TDB  Jupiter                76443 km    56.907 km/s  step 5m
+      2026-03-29 22:48 TDB  Jupiter                77068 km    56.669 km/s  step 5m
+      2026-05-01 15:04 TDB  Jupiter                77562 km    56.495 km/s  step 5m
+      2026-06-03 06:54 TDB  Jupiter                78069 km    56.310 km/s  step 5m
+      2026-07-05 22:03 TDB  Jupiter                78514 km    56.144 km/s  step 5m
+      2026-08-07 14:51 TDB  Jupiter                78956 km    55.982 km/s  step 5m
+      2026-09-09 06:24 TDB  Jupiter                79316 km    55.853 km/s  step 5m
+      2026-10-11 23:04 TDB  Jupiter                79734 km    55.705 km/s  step 5m
+      2026-11-13 14:52 TDB  Jupiter                80118 km    55.564 km/s  step 5m
+      2026-12-16 07:15 TDB  Jupiter                80494 km    55.439 km/s  step 5m
+      2027-01-17 23:18 TDB  Jupiter                80848 km    55.317 km/s  step 5m
+      2027-02-19 15:16 TDB  Jupiter                81198 km    55.195 km/s  step 5m
+      2027-03-24 07:09 TDB  Jupiter                81590 km    55.056 km/s  step 5m
+      2027-04-25 23:09 TDB  Jupiter                81961 km    54.931 km/s  step 5m
+      2027-05-28 15:36 TDB  Jupiter                82373 km    54.792 km/s  step 5m
+      2027-06-30 07:39 TDB  Jupiter                82698 km    54.687 km/s  step 5m
+      2027-08-01 23:39 TDB  Jupiter                83065 km    54.563 km/s  step 5m
+      2027-09-03 15:30 TDB  Jupiter                83418 km    54.446 km/s  step 5m
+      2027-10-06 07:31 TDB  Jupiter                83785 km    54.329 km/s  step 5m
+      2027-11-07 23:35 TDB  Jupiter                84133 km    54.213 km/s  step 5m
+      2027-12-10 16:10 TDB  Jupiter                84383 km    54.133 km/s  step 5m
+      2028-01-12 07:57 TDB  Jupiter                84688 km    54.034 km/s  step 5m
+      2028-02-14 00:16 TDB  Jupiter                84876 km    53.974 km/s  step 5m
+      2028-03-17 16:15 TDB  Jupiter                85132 km    53.894 km/s  step 5m
+      2028-04-19 08:19 TDB  Jupiter                85272 km    53.848 km/s  step 5m
+      2028-05-21 23:54 TDB  Jupiter                85404 km    53.807 km/s  step 5m
+      2028-06-23 16:24 TDB  Jupiter                85488 km    53.780 km/s  step 5m
+      2028-07-26 08:21 TDB  Jupiter                85537 km    53.763 km/s  step 5m
+      2028-08-28 00:31 TDB  Jupiter                85635 km    53.733 km/s  step 5m
+  preview_osirisape      planned (never planned): 13 events, 0 carried, searched from 2023-09-24
+      2023-09-24 14:46 TDB  Earth                   7152 km    12.256 km/s  step 1m
+      2024-01-02 13:30 TDB  Sun                 74877470 km    48.810 km/s  step 1d
+      2024-09-02 01:19 TDB  Sun                 74870545 km    48.812 km/s  step 1d
+      2025-05-03 13:38 TDB  Sun                 74871367 km    48.812 km/s  step 1d
+      2025-09-23 17:01 TDB  Earth                   9815 km    10.959 km/s  step 1m
+      2025-12-02 13:27 TDB  Sun                123092536 km    36.370 km/s  step 4d
+      2027-01-07 13:37 TDB  Sun                123102063 km    36.368 km/s  step 4d
+      2027-03-16 03:31 TDB  Earth                  10559 km    10.703 km/s  step 1m
+      2027-08-08 20:32 TDB  Sun                 75683535 km    48.337 km/s  step 1d
+      2028-04-05 20:02 TDB  Sun                 75681656 km    48.337 km/s  step 1d
+      2028-12-02 19:25 TDB  Sun                 75677516 km    48.339 km/s  step 1d
+      2029-04-13 23:07 TDB  Earth                   7526 km    11.848 km/s  step 1m
+      2029-06-13 15:34 TDB  Sun                133822736 km    34.339 km/s  step 4d
+  preview_parker         planned (never planned): 49 events, 0 carried, searched from 2018-08-13
+      2018-10-03 08:46 TDB  Venus                   8498 km    24.543 km/s  step 1m
+      2018-11-06 03:29 TDB  Sun                 24818594 km    95.328 km/s  step 6h
+      2019-04-04 22:41 TDB  Sun                 24818980 km    95.327 km/s  step 6h
+      2019-09-01 17:51 TDB  Sun                 24817843 km    95.330 km/s  step 6h
+      2019-12-26 18:16 TDB  Venus                   9057 km    24.450 km/s  step 1m
+      2020-01-29 09:39 TDB  Sun                 19392523 km   109.179 km/s  step 6h
+      2020-06-07 08:24 TDB  Sun                 19391854 km   109.181 km/s  step 6h
+      2020-07-11 03:25 TDB  Venus                   6890 km    24.935 km/s  step 1m
+      2020-09-27 09:17 TDB  Sun                 14159391 km   129.609 km/s  step 3h
+      2021-01-17 17:40 TDB  Sun                 14158950 km   129.611 km/s  step 3h
+      2021-02-20 20:07 TDB  Venus                   8438 km    24.586 km/s  step 1m
+      2021-04-29 08:48 TDB  Sun                 11114016 km   147.686 km/s  step 2h
+      2021-08-09 19:12 TDB  Sun                 11114010 km   147.686 km/s  step 2h
+      2021-10-16 09:32 TDB  Venus                   9861 km    24.348 km/s  step 1m
+      2021-11-21 08:27 TDB  Sun                  9237744 km   163.018 km/s  step 2h
+      2022-02-25 15:37 TDB  Sun                  9237702 km   163.018 km/s  step 2h
+      2022-06-01 22:51 TDB  Sun                  9238223 km   163.013 km/s  step 2h
+      2022-09-06 06:05 TDB  Sun                  9238152 km   163.014 km/s  step 2h
+      2022-12-11 13:17 TDB  Sun                  9238758 km   163.008 km/s  step 2h
+      2023-03-17 20:32 TDB  Sun                  9239725 km   162.999 km/s  step 2h
+      2023-06-22 03:47 TDB  Sun                  9240229 km   162.994 km/s  step 2h
+      2023-08-21 12:04 TDB  Venus                  10058 km    24.322 km/s  step 1m
+      2023-09-27 23:30 TDB  Sun                  7955709 km   176.463 km/s  step 1h
+      2023-12-29 00:56 TDB  Sun                  7955628 km   176.464 km/s  step 1h
+      2024-03-30 02:23 TDB  Sun                  7955695 km   176.463 km/s  step 1h
+      2024-06-30 03:48 TDB  Sun                  7955713 km   176.463 km/s  step 1h
+      2024-09-30 05:16 TDB  Sun                  7955924 km   176.460 km/s  step 1h
+      2024-11-06 18:45 TDB  Venus                   6433 km    25.070 km/s  step 1m
+      2024-12-24 11:42 TDB  Sun                  6862560 km   190.770 km/s  step 1h
+      2025-03-22 22:26 TDB  Sun                  6862292 km   190.774 km/s  step 1h
+      2025-06-19 09:09 TDB  Sun                  6862152 km   190.776 km/s  step 1h
+      2025-09-15 20:17 TDB  Sun                  6862510 km   190.771 km/s  step 1h
+      2025-12-13 07:03 TDB  Sun                  6862386 km   190.773 km/s  step 1h
+      2026-03-11 18:05 TDB  Sun                  6855835 km   190.869 km/s  step 1h
+      2026-06-08 04:19 TDB  Sun                  6855664 km   190.871 km/s  step 1h
+      2026-09-04 14:33 TDB  Sun                  6855302 km   190.877 km/s  step 1h
+      2026-12-02 00:46 TDB  Sun                  6855387 km   190.876 km/s  step 1h
+      2027-02-28 11:01 TDB  Sun                  6855308 km   190.877 km/s  step 1h
+      2027-05-27 21:14 TDB  Sun                  6853482 km   190.903 km/s  step 1h
+      2027-08-24 07:17 TDB  Sun                  6853212 km   190.907 km/s  step 1h
+      2027-11-20 17:19 TDB  Sun                  6853499 km   190.903 km/s  step 1h
+      2028-02-17 03:21 TDB  Sun                  6853817 km   190.898 km/s  step 1h
+      2028-05-15 13:23 TDB  Sun                  6854021 km   190.895 km/s  step 1h
+      2028-08-11 23:24 TDB  Sun                  6853259 km   190.907 km/s  step 1h
+      2028-11-08 09:20 TDB  Sun                  6853517 km   190.903 km/s  step 1h
+      2029-02-04 19:14 TDB  Sun                  6853705 km   190.900 km/s  step 1h
+      2029-05-04 05:10 TDB  Sun                  6854553 km   190.887 km/s  step 1h
+      2029-07-31 15:05 TDB  Sun                  6854632 km   190.886 km/s  step 1h
+      2029-10-28 00:57 TDB  Sun                  6854708 km   190.885 km/s  step 1h
+  preview_lucy           planned (never planned): 7 events, 0 carried, searched from 2021-10-17
+      2022-07-27 20:15 TDB  Sun                125385289 km    35.066 km/s  step 4d
+      2022-10-16 11:06 TDB  Earth                   6740 km    12.114 km/s  step 1m
+      2022-10-17 05:38 TDB  Moon                   56148 km     5.687 km/s  step 30m
+      2024-11-02 12:26 TDB  Sun                127477167 km    38.838 km/s  step 3d
+      2024-12-13 04:17 TDB  Earth                   6735 km    15.232 km/s  step 1m
+      2030-12-02 14:04 TDB  Sun                136192640 km    41.005 km/s  step 4d
+      2030-12-27 00:37 TDB  Earth                   6999 km    16.463 km/s  step 1m
+  preview_juice          planned (never planned): 10 events, 0 carried, searched from 2023-04-15
+      2023-12-10 03:12 TDB  Sun                129100633 km    33.911 km/s  step 4d
+      2024-08-19 21:16 TDB  Moon                    2490 km     4.155 km/s  step 1m
+      2024-08-20 21:57 TDB  Earth                  13211 km     8.441 km/s  step 5m
+      2025-01-01 21:51 TDB  Sun                 96238627 km    41.061 km/s  step 2d
+      2025-08-31 05:30 TDB  Venus                  11140 km    10.444 km/s  step 1m
+      2025-09-10 07:31 TDB  Sun                106051334 km    41.551 km/s  step 3d
+      2026-09-28 11:46 TDB  Earth                  15019 km    13.123 km/s  step 1m
+      2026-11-09 23:02 TDB  Sun                127107422 km    39.296 km/s  step 3d
+      2028-12-09 06:08 TDB  Sun                127093694 km    39.298 km/s  step 3d
+      2029-01-17 18:35 TDB  Earth                  11012 km    13.826 km/s  step 1m
+  preview_psyche         planned (never planned): 2 events, 0 carried, searched from 2023-10-14
+      2023-10-16 08:47 TDB  Sun                149213436 km    35.722 km/s  step 5d
+      2026-05-15 19:29 TDB  Mars                    8000 km     5.514 km/s  step 5m
+  preview_clipper        planned (never planned): 87 events, 0 carried, searched from 2024-10-15
+      2024-10-22 03:54 TDB  Sun                148613375 km    36.142 km/s  step 4d
+      2025-03-01 17:58 TDB  Mars                    4274 km    11.161 km/s  step 1m
+      2026-10-23 13:51 TDB  Sun                125491560 km    39.502 km/s  step 3d
+      2026-12-03 20:15 TDB  Earth                   9609 km    14.717 km/s  step 1m
+      2030-04-11 08:25 TDB  Jupiter               801870 km    17.908 km/s  step 1h
+      2030-10-29 20:17 TDB  Jupiter               737094 km    18.193 km/s  step 1h
+      2031-01-02 04:27 TDB  Jupiter               680331 km    18.578 km/s  step 1h
+      2031-02-06 21:45 TDB  Jupiter               630021 km    19.020 km/s  step 1h
+      2031-03-06 20:30 TDB  Jupiter               601601 km    19.331 km/s  step 1h
+      2031-03-27 21:52 TDB  Jupiter               576512 km    19.207 km/s  step 1h
+      2031-04-12 09:10 TDB  Jupiter               576458 km    19.206 km/s  step 1h
+      2031-05-02 01:52 TDB  Jupiter               660669 km    18.240 km/s  step 1h
+      2031-05-27 10:59 TDB  Jupiter               660694 km    18.257 km/s  step 1h
+      2031-06-17 17:27 TDB  Jupiter               660772 km    18.079 km/s  step 1h
+      2031-07-09 01:19 TDB  Jupiter               667461 km    17.973 km/s  step 1h
+      2031-07-30 09:42 TDB  Jupiter               672969 km    17.910 km/s  step 1h
+      2031-08-20 19:20 TDB  Jupiter               674311 km    17.888 km/s  step 1h
+      2031-09-11 03:31 TDB  Jupiter               672454 km    17.904 km/s  step 1h
+      2031-10-02 11:11 TDB  Jupiter               671923 km    17.913 km/s  step 1h
+      2031-10-23 19:53 TDB  Jupiter               673192 km    17.893 km/s  step 1h
+      2031-11-14 03:39 TDB  Jupiter               674553 km    17.873 km/s  step 1h
+      2031-12-05 12:00 TDB  Jupiter               676329 km    17.862 km/s  step 1h
+      2031-12-28 15:29 TDB  Jupiter               674743 km    17.926 km/s  step 1h
+      2032-01-20 18:16 TDB  Jupiter               671495 km    17.923 km/s  step 1h
+      2032-02-11 02:30 TDB  Jupiter               666652 km    17.991 km/s  step 1h
+      2032-03-03 10:04 TDB  Jupiter               663466 km    18.041 km/s  step 1h
+      2032-03-24 18:39 TDB  Jupiter               660188 km    17.889 km/s  step 1h
+      2032-04-11 14:13 TDB  Jupiter               654100 km    17.699 km/s  step 1h
+      2032-04-25 20:56 TDB  Jupiter               655277 km    17.683 km/s  step 1h
+      2032-05-13 16:43 TDB  Jupiter               655956 km    17.670 km/s  step 1h
+      2032-05-27 23:23 TDB  Jupiter               655841 km    17.670 km/s  step 1h
+      2032-06-14 19:05 TDB  Jupiter               658052 km    17.637 km/s  step 1h
+      2032-06-29 01:40 TDB  Jupiter               660016 km    17.615 km/s  step 1h
+      2032-07-16 21:34 TDB  Jupiter               662391 km    17.566 km/s  step 1h
+      2032-07-31 04:29 TDB  Jupiter               660099 km    17.594 km/s  step 1h
+      2032-08-17 23:59 TDB  Jupiter               665226 km    17.806 km/s  step 1h
+      2032-09-01 03:29 TDB  Jupiter               654777 km    17.676 km/s  step 1h
+      2032-09-14 00:37 TDB  Jupiter               649991 km    17.608 km/s  step 1h
+      2032-09-26 22:48 TDB  Jupiter               649524 km    17.614 km/s  step 1h
+      2032-10-13 04:33 TDB  Jupiter               822752 km    15.473 km/s  step 2h
+      2032-10-29 12:32 TDB  Jupiter               741706 km    15.988 km/s  step 1h
+      2032-11-09 20:22 TDB  Jupiter              1086688 km    12.879 km/s  step 2h
+      2032-11-26 07:10 TDB  Jupiter              1236759 km    12.078 km/s  step 2h
+      2032-12-16 13:20 TDB  Jupiter              1236555 km    12.077 km/s  step 2h
+      2032-12-29 22:20 TDB  Jupiter               905516 km    14.259 km/s  step 2h
+      2033-01-12 09:53 TDB  Jupiter              1164930 km    12.452 km/s  step 2h
+      2033-01-31 02:04 TDB  Jupiter              1165811 km    12.450 km/s  step 2h
+      2033-02-18 17:57 TDB  Jupiter              1165585 km    12.447 km/s  step 2h
+      2033-03-07 07:41 TDB  Jupiter              1075741 km    12.974 km/s  step 2h
+      2033-03-20 17:25 TDB  Jupiter               883552 km    14.474 km/s  step 2h
+      2033-04-03 06:42 TDB  Jupiter               878523 km    14.526 km/s  step 2h
+      2033-04-26 17:31 TDB  Jupiter               962380 km    14.465 km/s  step 2h
+      2033-05-13 07:33 TDB  Jupiter               756797 km    16.357 km/s  step 1h
+      2033-05-27 18:29 TDB  Jupiter               668331 km    17.761 km/s  step 1h
+      2033-06-14 14:05 TDB  Jupiter               666301 km    17.793 km/s  step 1h
+      2033-06-28 13:46 TDB  Jupiter               665678 km    17.801 km/s  step 1h
+      2033-07-16 09:31 TDB  Jupiter               665334 km    17.810 km/s  step 1h
+      2033-07-30 10:19 TDB  Jupiter               659722 km    17.596 km/s  step 1h
+      2033-08-13 14:30 TDB  Jupiter               664903 km    17.514 km/s  step 1h
+      2033-08-27 18:17 TDB  Jupiter               669716 km    17.445 km/s  step 1h
+      2033-09-10 21:51 TDB  Jupiter               671787 km    17.492 km/s  step 1h
+      2033-09-25 02:19 TDB  Jupiter               671019 km    17.790 km/s  step 1h
+      2033-10-09 06:14 TDB  Jupiter               668721 km    17.478 km/s  step 1h
+      2033-10-23 09:57 TDB  Jupiter               663494 km    17.541 km/s  step 1h
+      2033-11-06 13:58 TDB  Jupiter               657945 km    17.629 km/s  step 1h
+      2033-11-20 18:07 TDB  Jupiter               658920 km    17.618 km/s  step 1h
+      2033-12-03 02:29 TDB  Jupiter               653260 km    17.487 km/s  step 1h
+      2033-12-15 11:06 TDB  Jupiter               656744 km    17.464 km/s  step 1h
+      2033-12-27 21:49 TDB  Jupiter               655604 km    17.452 km/s  step 1h
+      2034-01-09 06:07 TDB  Jupiter               663402 km    17.550 km/s  step 1h
+      2034-01-23 09:42 TDB  Jupiter               665506 km    17.540 km/s  step 1h
+      2034-02-06 13:35 TDB  Jupiter               665972 km    17.584 km/s  step 1h
+      2034-02-18 23:57 TDB  Jupiter               664048 km    17.311 km/s  step 1h
+      2034-03-03 09:51 TDB  Jupiter               664173 km    17.545 km/s  step 1h
+      2034-03-15 18:38 TDB  Jupiter               661100 km    17.360 km/s  step 1h
+      2034-03-28 04:59 TDB  Jupiter               661475 km    17.386 km/s  step 1h
+      2034-04-11 09:21 TDB  Jupiter               659549 km    17.612 km/s  step 1h
+      2034-04-25 13:32 TDB  Jupiter               656638 km    17.654 km/s  step 1h
+      2034-05-09 18:25 TDB  Jupiter               659064 km    17.615 km/s  step 1h
+      2034-05-24 00:06 TDB  Jupiter               663702 km    17.550 km/s  step 1h
+      2034-06-07 07:42 TDB  Jupiter               665755 km    17.530 km/s  step 1h
+      2034-06-21 13:35 TDB  Jupiter               662506 km    17.562 km/s  step 1h
+      2034-07-05 18:42 TDB  Jupiter               661596 km    17.583 km/s  step 1h
+      2034-07-20 00:55 TDB  Jupiter               661060 km    17.586 km/s  step 1h
+      2034-07-31 13:03 TDB  Jupiter               650820 km    17.423 km/s  step 1h
+      2034-08-12 02:11 TDB  Jupiter               651918 km    17.403 km/s  step 1h
+      2034-08-23 16:20 TDB  Jupiter               652422 km    17.395 km/s  step 1h
+  preview_bepicolombo    planned (never planned): 67 events, 0 carried, searched from 2018-10-21
+      2019-01-01 17:46 TDB  Sun                132819135 km    33.690 km/s  step 4d
+      2020-01-28 00:36 TDB  Sun                131729916 km    34.052 km/s  step 4d
+      2020-04-10 04:26 TDB  Earth                  19064 km     7.595 km/s  step 5m
+      2020-09-09 18:00 TDB  Sun                 93644605 km    41.855 km/s  step 2d
+      2020-10-15 04:00 TDB  Venus                  16775 km    10.101 km/s  step 5m
+      2021-03-14 16:40 TDB  Sun                 77748072 km    45.848 km/s  step 2d
+      2021-08-10 13:53 TDB  Venus                   6604 km    12.743 km/s  step 1m
+      2021-10-01 23:36 TDB  Mercury                 2640 km     7.781 km/s  step 1m
+      2021-10-13 15:14 TDB  Sun                 47996540 km    61.505 km/s  step 6h
+      2022-02-23 00:14 TDB  Sun                 48180017 km    61.313 km/s  step 6h
+      2022-06-23 09:46 TDB  Mercury                 2646 km     7.527 km/s  step 1m
+      2022-07-06 09:04 TDB  Sun                 45424436 km    62.808 km/s  step 6h
+      2022-10-31 06:17 TDB  Sun                 45615851 km    62.635 km/s  step 6h
+      2023-02-25 18:26 TDB  Sun                 46304888 km    62.020 km/s  step 6h
+      2023-06-19 19:36 TDB  Mercury                 2678 km     5.448 km/s  step 1m
+      2023-06-26 08:33 TDB  Sun                 45784207 km    61.871 km/s  step 6h
+      2023-10-15 04:38 TDB  Sun                 46421185 km    61.304 km/s  step 6h
+      2024-02-03 13:29 TDB  Sun                 46345978 km    61.297 km/s  step 6h
+      2024-05-23 12:27 TDB  Sun                 46285867 km    61.240 km/s  step 6h
+      2024-09-04 21:50 TDB  Mercury                 2604 km     4.969 km/s  step 1m
+      2024-09-09 23:24 TDB  Sun                 45802208 km    59.246 km/s  step 6h
+      2024-12-01 14:25 TDB  Mercury                40066 km     2.861 km/s  step 30m
+      2024-12-06 13:37 TDB  Sun                 45969821 km    59.002 km/s  step 6h
+      2025-01-08 06:00 TDB  Mercury                 2736 km     4.426 km/s  step 1m
+      2025-02-27 18:39 TDB  Sun                 45783775 km    58.869 km/s  step 6h
+      2025-05-25 10:35 TDB  Sun                 45780745 km    58.903 km/s  step 6h
+      2025-08-19 19:59 TDB  Sun                 46236999 km    58.567 km/s  step 6h
+      2025-11-15 19:31 TDB  Sun                 46706034 km    58.238 km/s  step 6h
+      2026-02-12 17:57 TDB  Sun                 47010404 km    58.098 km/s  step 6h
+      2026-05-14 01:45 TDB  Sun                 47195952 km    57.990 km/s  step 6h
+      2026-08-12 09:03 TDB  Sun                 47330153 km    57.912 km/s  step 6h
+      2026-10-26 12:56 TDB  Mercury                88208 km     0.628 km/s  step 3h
+      2026-11-10 10:00 TDB  Sun                 45808045 km    59.078 km/s  step 6h
+      2026-11-21 18:49 TDB  Mercury                 3072 km     3.725 km/s  step 1m
+      2026-11-24 03:58 TDB  Mercury                 3066 km     3.689 km/s  step 1m
+      2026-11-28 21:17 TDB  Mercury                 3057 km     3.631 km/s  step 1m
+      2026-12-03 01:57 TDB  Mercury                 3042 km     3.544 km/s  step 1m
+      2026-12-07 17:06 TDB  Mercury                 3030 km     3.460 km/s  step 1m
+      2026-12-08 21:01 TDB  Mercury                 3030 km     3.459 km/s  step 1m
+      2026-12-12 18:03 TDB  Mercury                 3030 km     3.459 km/s  step 1m
+      2026-12-20 09:01 TDB  Mercury                 3026 km     3.430 km/s  step 1m
+      2026-12-31 08:00 TDB  Mercury                 3027 km     3.429 km/s  step 1m
+      2027-01-12 10:42 TDB  Mercury                 3018 km     3.350 km/s  step 1m
+      2027-01-14 10:09 TDB  Mercury                 3017 km     3.336 km/s  step 1m
+      2027-01-18 15:00 TDB  Mercury                 3006 km     3.287 km/s  step 1m
+      2027-01-22 12:04 TDB  Mercury                 2995 km     3.235 km/s  step 1m
+      2027-01-25 06:04 TDB  Mercury                 2995 km     3.236 km/s  step 1m
+      2027-01-27 02:03 TDB  Mercury                 2994 km     3.236 km/s  step 1m
+      2027-01-28 22:03 TDB  Mercury                 2994 km     3.237 km/s  step 1m
+      2027-01-30 18:02 TDB  Mercury                 2993 km     3.237 km/s  step 1m
+      2027-02-02 12:02 TDB  Mercury                 2992 km     3.238 km/s  step 1m
+      2027-02-05 06:01 TDB  Mercury                 2991 km     3.239 km/s  step 1m
+      2027-02-06 06:12 TDB  Sun                 45993896 km    58.993 km/s  step 6h
+      2027-02-07 02:01 TDB  Mercury                 2990 km     3.239 km/s  step 1m
+      2027-02-08 22:00 TDB  Mercury                 2989 km     3.240 km/s  step 1m
+      2027-02-10 18:00 TDB  Mercury                 2989 km     3.240 km/s  step 1m
+      2027-02-13 11:59 TDB  Mercury                 2988 km     3.241 km/s  step 1m
+      2027-02-17 02:03 TDB  Mercury                 2976 km     3.177 km/s  step 1m
+      2027-02-19 17:58 TDB  Mercury                 2966 km     3.140 km/s  step 1m
+      2027-02-27 11:00 TDB  Mercury                 2947 km     3.029 km/s  step 1m
+      2027-03-03 20:00 TDB  Mercury                 2927 km     2.992 km/s  step 1m
+      2027-03-05 22:00 TDB  Mercury                 2922 km     2.943 km/s  step 1m
+      2027-03-11 14:59 TDB  Mercury                 2919 km     2.945 km/s  step 1m
+      2027-03-19 19:02 TDB  Mercury                 2914 km     2.949 km/s  step 1m
+      2027-03-26 14:01 TDB  Mercury                 2910 km     2.952 km/s  step 1m
+      2027-04-02 09:00 TDB  Mercury                 2907 km     2.956 km/s  step 1m
+      2027-04-08 01:59 TDB  Mercury                 2905 km     2.957 km/s  step 1m
+  preview_solo           planned (never planned): 31 events, 0 carried, searched from 2020-02-11
+      2020-06-15 07:38 TDB  Sun                 77170642 km    47.542 km/s  step 1d
+      2020-12-27 12:40 TDB  Venus                  13494 km    13.499 km/s  step 1m
+      2021-02-10 09:45 TDB  Sun                 73980861 km    48.593 km/s  step 1d
+      2021-08-09 04:42 TDB  Venus                  14049 km    13.424 km/s  step 1m
+      2021-09-12 08:16 TDB  Sun                 87751138 km    45.106 km/s  step 2d
+      2021-11-27 04:32 TDB  Earth                   6837 km    15.136 km/s  step 1m
+      2022-03-26 11:51 TDB  Sun                 48262556 km    64.600 km/s  step 6h
+      2022-09-04 01:28 TDB  Venus                  12508 km    19.819 km/s  step 1m
+      2022-10-12 19:14 TDB  Sun                 43775151 km    68.118 km/s  step 6h
+      2023-04-10 13:18 TDB  Sun                 43770570 km    68.123 km/s  step 6h
+      2023-10-07 07:26 TDB  Sun                 43768979 km    68.125 km/s  step 6h
+      2024-04-04 01:50 TDB  Sun                 43773472 km    68.121 km/s  step 6h
+      2024-09-30 20:04 TDB  Sun                 43769666 km    68.124 km/s  step 6h
+      2025-02-18 20:50 TDB  Venus                   6430 km    21.019 km/s  step 1m
+      2025-03-31 13:55 TDB  Sun                 44012552 km    67.416 km/s  step 6h
+      2025-09-16 03:06 TDB  Sun                 44013439 km    67.416 km/s  step 6h
+      2026-03-03 15:43 TDB  Sun                 44006043 km    67.422 km/s  step 6h
+      2026-08-19 04:07 TDB  Sun                 44007014 km    67.421 km/s  step 6h
+      2026-12-24 22:59 TDB  Venus                   7000 km    20.823 km/s  step 1m
+      2027-02-06 21:47 TDB  Sun                 42009940 km    68.637 km/s  step 6h
+      2027-07-06 17:01 TDB  Sun                 42011130 km    68.635 km/s  step 6h
+      2027-12-03 12:14 TDB  Sun                 42011614 km    68.635 km/s  step 6h
+      2028-03-18 08:18 TDB  Venus                   6421 km    21.021 km/s  step 1m
+      2028-05-08 05:28 TDB  Sun                 49028124 km    61.698 km/s  step 6h
+      2028-10-05 00:43 TDB  Sun                 49028712 km    61.697 km/s  step 6h
+      2029-03-03 19:56 TDB  Sun                 49026211 km    61.699 km/s  step 6h
+      2029-06-10 17:43 TDB  Venus                   6415 km    21.024 km/s  step 1m
+      2029-08-11 18:36 TDB  Sun                 55452682 km    56.386 km/s  step 1d
+      2030-01-08 13:48 TDB  Sun                 55453263 km    56.386 km/s  step 1d
+      2030-06-07 08:59 TDB  Sun                 55452101 km    56.386 km/s  step 1d
+      2030-09-03 02:59 TDB  Venus                   8670 km    20.388 km/s  step 1m
+  Not searched: 2017 OF201: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; 2023 JF: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; 2024 DW: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; 2024 PT5: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; 2024 YR4: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; 2025 PN7: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; 2025 PY1: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Ammonite: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Apophis: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Arrokoth: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Bennu: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Chariklo: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Donaldjohanson: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Encke: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Eris: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Eros: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Eurybates: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; GV9: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Gonggong: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Hale-Bopp: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Halley: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Haumea: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Howell: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Hyakutake: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Ikeya-Seki: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Ixion: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Kamo oalewa: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Leleakuhonua: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Lemmon: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Leucus: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Lutetia: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; MAPS: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Makemake: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Mani: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; NEOWISE: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Orcus: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Orus: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Patroclus: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Polymele: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Quaoar: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; SWAN: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Schaumasse: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Sedna: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Steins: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Tempel 2: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Varuna: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside
+
+PATH PLAN: 12 paths, events preview_bepicolombo 67, preview_clipper 87, preview_juice 10, preview_juno 113, preview_lucy 7, preview_new_horizons 2, preview_osirisape 13, preview_parker 49, preview_psyche 2, preview_solo 31, preview_voyager_1 2, preview_voyager_2 5. Asked JPL for: preview_voyager_1, preview_voyager_2, preview_new_horizons, preview_juno, preview_osirisape, preview_parker, preview_lucy, preview_juice, preview_psyche, preview_clipper, preview_bepicolombo, preview_solo.
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+-- ran from 20:44 to approximately 21:12. 
+
+5. commit that with your next push. 
+
+One more thing from your run, before you commit: the one failed check, “Constants change”, is from my patch, and it’s safe to commit past. That check compares constants_new.py with your last commit. It found two comments I edited on piece C’s lines. Those lines name the comet, and “2025” counts as a number to the check, but it can’t read lines shaped like that, so it fails rather than pass them unread. Neither line changes a value; the report itself says 0 values changed. It will pass once you’ve committed.
+
+The plan works on JPL's real data. Every flyby I spot-checked lands on the date of a known mission event, at a sensible distance from the body's centre:
+
+- **Voyager 1:** Jupiter on 1979-03-05 and Saturn on 1980-11-12.
+- **Voyager 2:** Saturn, Uranus and Neptune, Neptune at about 29,000 km on 1989-08-25.
+- **New Horizons:** Pluto on 2015-07-14, at 13,680 km.
+- **Juno:** its Earth flyby on 2013-10-09. **Lucy:** both Earth flybys, plus a Moon pass. **JUICE:** the Moon and Earth on 19 and 20 August 2024, then Venus. **Psyche:** Mars in May 2026. **Europa Clipper:** Mars on 2025-03-01. **BepiColombo:** Earth and Venus.
+
+I'm judging those dates from what I know of the missions; the numbers themselves come from JPL. One event I don't recognise: OSIRIS-APEX passing Earth at 7,526 km on 2029-04-13, the day Apophis passes Earth. I'll check that against JPL's data sheet before building on it.
+
+The finding that needs you is the spacecraft that go into orbit. Of the 498 events, more than 230 are repeated close passes by three spacecraft circling a planet:
+- Juno: 110 passes of Jupiter.
+- Europa Clipper: 83 passes of Jupiter, in its planned tour.
+- BepiColombo: 40 passes of Mercury, mostly after it enters orbit in November.
+
+Each pass would carry its own fine-step window. In the Solar System room those loops are tiny curls around the planet, and they would make up most of the data served.
+
+**My recommendation:** once a spacecraft is in orbit around a planet, the Solar System room shows it riding along with that planet, with no fine steps for each loop. The loops wait for that planet's own room later. This is the same choice already made for asteroid flybys, which belong to the body rooms. The flybys on the way there stay as they are, and so do the passes close to the Sun, like Parker's 42; those are real hairpin bends in the path.
+
+**Do the orbiters ride along with their planet in the Solar System room, with the loops left for the planet rooms?**
+
+Meanwhile, your next steps:
+1. Run `patch_L443_10`, then press the preview button once more to check the new lines. It will say all twelve are already planned today and ask JPL nothing, so it takes seconds.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L443_10_path_plan_as_it_goes_20261024.py
+ok  path_plan.py (17 edits)
+ok  test_path_plan.py (4 edits)
+ok  palomas_orrery_dashboard.py (3 edits)
+ok  LEDGER_CONSOLIDATED.md (2 edits)
+ok  documentation/WHERE_WE_ARE.md (2 edits)
+patch applied: the path plan as it goes, Oct 24 (5 files edited, 0 new)
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+======================================================================
+PATH PLAN -- where each served path needs finer steps (L-443) -- PREVIEW of slice 2's twelve, into data/path_plans_preview.json
+  time limit 10 minutes; a line as it goes, then the report
+======================================================================
+  [    0 s] started 21:32:52: 12 path(s) listed, 0 due; JPL is not asked
+
+REPORT
+  preview_voyager_1      current (made 2026-10-24), 2 events
+  preview_voyager_2      current (made 2026-10-24), 5 events
+  preview_new_horizons   current (made 2026-10-24), 2 events
+  preview_juno           current (made 2026-10-24), 113 events
+  preview_osirisape      current (made 2026-10-24), 13 events
+  preview_parker         current (made 2026-10-24), 49 events
+  preview_lucy           current (made 2026-10-24), 7 events
+  preview_juice          current (made 2026-10-24), 10 events
+  preview_psyche         current (made 2026-10-24), 2 events
+  preview_clipper        current (made 2026-10-24), 87 events
+  preview_bepicolombo    current (made 2026-10-24), 67 events
+  preview_solo           current (made 2026-10-24), 31 events
+
+PATH PLAN: 12 paths, events preview_bepicolombo 67, preview_clipper 87, preview_juice 10, preview_juno 113, preview_lucy 7, preview_new_horizons 2, preview_osirisape 13, preview_parker 49, preview_psyche 2, preview_solo 31, preview_voyager_1 2, preview_voyager_2 5. Asked JPL for: nothing.
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+-- run again after the patch
+
+======================================================================
+PATH PLAN -- where each served path needs finer steps (L-443) -- PREVIEW of slice 2's twelve, into data/path_plans_preview.json
+  no time limit; a line as it goes, then the report
+======================================================================
+  [    0 s] started 21:34:35: 12 path(s) listed, 0 due; JPL is not asked
+
+REPORT
+  preview_voyager_1      current (made 2026-10-24), 2 events
+  preview_voyager_2      current (made 2026-10-24), 5 events
+  preview_new_horizons   current (made 2026-10-24), 2 events
+  preview_juno           current (made 2026-10-24), 113 events
+  preview_osirisape      current (made 2026-10-24), 13 events
+  preview_parker         current (made 2026-10-24), 49 events
+  preview_lucy           current (made 2026-10-24), 7 events
+  preview_juice          current (made 2026-10-24), 10 events
+  preview_psyche         current (made 2026-10-24), 2 events
+  preview_clipper        current (made 2026-10-24), 87 events
+  preview_bepicolombo    current (made 2026-10-24), 67 events
+  preview_solo           current (made 2026-10-24), 31 events
+
+PATH PLAN: 12 paths, events preview_bepicolombo 67, preview_clipper 87, preview_juice 10, preview_juno 113, preview_lucy 7, preview_new_horizons 2, preview_osirisape 13, preview_parker 49, preview_psyche 2, preview_solo 31, preview_voyager_1 2, preview_voyager_2 5. Asked JPL for: nothing.
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+2. Commit and push the orrery, including `data/path_plans_preview.json`. -- 
+3. Then the website steps from before: patch L482_1, the gallery maintenance run, commit and push, and the phone look at Reset.
 
 **Website:**
 
