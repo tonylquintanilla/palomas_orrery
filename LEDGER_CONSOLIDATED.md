@@ -611,6 +611,10 @@ Module updated: October 24, 2026, afternoon, with Anthropic's Claude Opus
 new, his three readability asks, built in gallery patch_L481_1; L-482 new,
 the Sun and Earth rooms' Reset, a question), built on faa965e and gallery
 ea83ef0.
+Module updated: October 24, 2026, evening, with Anthropic's Claude Opus 5.5
+(the session's close: L-481 closed on Tony's look, its three skill
+descriptions re-homed to L-443 for slice 2), built on 206f96c and gallery
+96173b8.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -828,7 +832,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*245 live items; 229 need attention (`!`); 165 RICE-scored; 230 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*244 live items; 228 need attention (`!`); 165 RICE-scored; 231 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -985,7 +989,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-470 | Orrery entries the website cannot serve as they stand (orrery, objects) | OPEN | -- | 2026-10-23 |
 | ! | L-471 | A delivered patch is final (safe-file-editing, next version) | OPEN | -- | 2026-10-22 |
 | ! | L-476 | The orrery's whole-path plots draw by the same path plan as the website (orrery, spacecraft and comets) | OPEN | -- | 2026-10-23 |
-| ! | L-481 | Readability: bullets in the Solar System room's hovers, JPL Horizons' address in the i panels, the closing paragraph a list (gallery, the rooms' words) | OPEN | -- | 2026-10-24 |
 | ! | L-482 | Whether the Sun and Earth rooms' All / none becomes Reset too (gallery, the rooms' shared chrome) | OPEN | -- | 2026-10-24 |
 
 ### B. Pending Action (Tony-side)
@@ -1365,6 +1368,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-478 | The count line moves to the left, above the object label (gallery, the Solar System room's HUD) | DONE | -- | 2026-10-24 |
 |  | L-479 | A far orbit's frame: Go To fits the whole orbit, and every body's hover gives its orbit's near and far distance (gallery, the Solar System room) | DONE | -- | 2026-10-24 |
 |  | L-480 | Closing the About card goes back to the room the visitor came from (gallery, the lobby's About card) | DONE | -- | 2026-10-24 |
+|  | L-481 | Readability: bullets in the Solar System room's hovers, JPL Horizons' address in the i panels, the closing paragraph a list (gallery, the rooms' words) | DONE | -- | 2026-10-24 |
 
 ### W.Done -- Web Publication track, closed items
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1410,48 +1414,6 @@ phone.
 **Ref:** L-477 (closed; the ruling); gallery `interactive.html`
 (`wireSunDrawer`, `sun-drawer-all`); interactive-exhibit, One chrome,
 many rooms.
-
-#### [L-481] Readability: bullets in the Solar System room's hovers, JPL Horizons' address in the i panels, the closing paragraph a list (gallery, the rooms' words)
-<!-- L:481 status:OPEN upd:2026-10-24 section:A flag: rice: -->
-- **Asked 2026-10-24, Tony's phone look of the L-477 build**
-  (`documentation/WHERE_WE_ARE_10-24-26_1140_run_record.md`, item 6, and his
-  note with the copy): "everything is correct. my one suggestion is to
-  add bullets to the sentences in the hover to improve readability in
-  dense text. i would also suggest adding the url to the JPL Horizons
-  sources in the info panels. at the bottom of the panel, the standard
-  paragraph, Part of Paloma's Orrery, revise "inventor's" to
-  "creator's", and also add bullets to each sentence for readability."
-- **Built the same afternoon,** gallery
-  `patch_L481_1_readability_build_20261024.py`; the record
-  `documentation/HANDOFF_L481_readability_20261024.md`:
-  - In the Solar System room each line of a body's hover after its name
-    is a bullet. Written as the number entity, `&#8226;`: Plotly 2.35.2
-    converts only eight named entities in text (mu, amp, lt, gt, nbsp,
-    times, plusmn, deg; read from its bundle), so `&bull;` would have
-    shown as written.
-  - Every source line naming JPL Horizons carries its address,
-    https://ssd.jpl.nasa.gov/horizons/ (fetched live 2026-10-24, the
-    page titled "Horizons System"), which the i panel makes a link: each
-    body's in the Solar System room, and Earth's Sun direction, Moon arc
-    and pole of date. The closing paragraphs that name Horizons link it.
-  - Each room's closing paragraph, the Explorer's too, is a bulleted
-    list, one sentence to a bullet, and reads "the creator's daughter".
-  - Checked: the figures check names all four, and goes red on the
-    morning's site on each; the walk, 108 checks, holds Sedna's four
-    bullets, its source line's address, and the closing list; the
-    typed-facts check reads the new sentences (its list updated:
-    "creator's", and the three Earth source lines with the address);
-    the Sun and Earth rooms differ from the morning's only in their
-    panels' text; the offline maintenance run, 35 of 35.
-- **Carried for interactive-exhibit's next version** (descriptions to
-  add, not wrong sentences): the Solar System room's hover bullets and
-  why the entity is numeric; JPL Horizons' address on source lines; the
-  closing paragraph as a list.
-**Gap:** Tony's run of gallery patch_L481_1, its runs and push; his look
-on the phone, on which this closes.
-**Ref:** L-477 to L-480 (closed the same day); gallery `interactive.html`
-(the room's compose, `solarSystemSourceLine`, the four closing
-paragraphs), `gallery/earth_geometry.js`, `documentation/smoke_typed_facts.js`.
 
 #### [L-476] The orrery's whole-path plots draw by the same path plan as the website (orrery, spacecraft and comets)
 <!-- L:476 status:OPEN upd:2026-10-23 section:A flag: rice: -->
@@ -2453,7 +2415,21 @@ the deliberate limit, its number set then, each removal named.
   Go To fits a body's whole orbit, and every hover gives its orbit's
   near and far distance (L-479); closing the About card goes back to
   the room (L-480). Built before slice 2.
-**Gap (replaces the one below, 2026-10-24, noon):** L-477 to L-480 are
+- **2026-10-24, evening: L-477 to L-481 closed on Tony's look**
+  (`documentation/WHERE_WE_ARE_10-24-26_1140_run_record.md`). Slice 2 builds on gallery
+  96173b8 and orrery 206f96c.
+- **Carried for interactive-exhibit's next version, from L-481**
+  (closed 2026-10-24; descriptions to add, not wrong sentences): in the
+  Solar System room each hover line after the name is a bullet, written
+  `&#8226;` because Plotly 2.35.2 converts only eight named entities;
+  every source line naming JPL Horizons carries
+  https://ssd.jpl.nasa.gov/horizons/, which the i panel makes a link;
+  each room's closing paragraph is a bulleted list, "the creator's
+  daughter". Slice 2's skill bump carries them.
+**Gap (replaces the one below, 2026-10-24, evening):** slice 2's build,
+by `documentation/DESIGN_L443_slice2_rulings_20261023.md`, after the
+next design talk (L-482, L-461, L-465).
+**Gap (superseded above, 2026-10-24, noon):** L-477 to L-480 are
 built (gallery patch_L477_2); Tony's runs, pushes and phone look; then
 slice 2's build, by `documentation/DESIGN_L443_slice2_rulings_20261023.md`.
 **Gap (superseded above):** the build of L-477 to
@@ -26763,6 +26739,59 @@ look, on which this closes.
 Tony's look on the phone.
 **Ref:** L-475 (closed; the link itself); L-443; gallery `index.html`
 (`.about-overlay`), `interactive.html` (`mountAboutLink`).
+
+#### [L-481] Readability: bullets in the Solar System room's hovers, JPL Horizons' address in the i panels, the closing paragraph a list (gallery, the rooms' words)
+<!-- L:481 status:DONE upd:2026-10-24 section:C flag: rice: -->
+- **Asked 2026-10-24, Tony's phone look of the L-477 build**
+  (`documentation/WHERE_WE_ARE_10-24-26_1140_run_record.md`, item 6, and his
+  note with the copy): "everything is correct. my one suggestion is to
+  add bullets to the sentences in the hover to improve readability in
+  dense text. i would also suggest adding the url to the JPL Horizons
+  sources in the info panels. at the bottom of the panel, the standard
+  paragraph, Part of Paloma's Orrery, revise "inventor's" to
+  "creator's", and also add bullets to each sentence for readability."
+- **Built the same afternoon,** gallery
+  `patch_L481_1_readability_build_20261024.py`; the record
+  `documentation/HANDOFF_L481_readability_20261024.md`:
+  - In the Solar System room each line of a body's hover after its name
+    is a bullet. Written as the number entity, `&#8226;`: Plotly 2.35.2
+    converts only eight named entities in text (mu, amp, lt, gt, nbsp,
+    times, plusmn, deg; read from its bundle), so `&bull;` would have
+    shown as written.
+  - Every source line naming JPL Horizons carries its address,
+    https://ssd.jpl.nasa.gov/horizons/ (fetched live 2026-10-24, the
+    page titled "Horizons System"), which the i panel makes a link: each
+    body's in the Solar System room, and Earth's Sun direction, Moon arc
+    and pole of date. The closing paragraphs that name Horizons link it.
+  - Each room's closing paragraph, the Explorer's too, is a bulleted
+    list, one sentence to a bullet, and reads "the creator's daughter".
+  - Checked: the figures check names all four, and goes red on the
+    morning's site on each; the walk, 108 checks, holds Sedna's four
+    bullets, its source line's address, and the closing list; the
+    typed-facts check reads the new sentences (its list updated:
+    "creator's", and the three Earth source lines with the address);
+    the Sun and Earth rooms differ from the morning's only in their
+    panels' text; the offline maintenance run, 35 of 35.
+- **Carried for interactive-exhibit's next version** (descriptions to
+  add, not wrong sentences): the Solar System room's hover bullets and
+  why the entity is numeric; JPL Horizons' address on source lines; the
+  closing paragraph as a list.
+- **2026-10-24, evening: run, pushed and closed on Tony's look** (`documentation/WHERE_WE_ARE_10-24-26_1140_run_record.md`):
+  gallery patch_L481_1, the offline run "35 of 35 gating checkers
+  passed", pushed at 96173b8, the live run "2 of 2" with every served
+  file byte-identical; orrery patch_L481_2 and ledger_index.py ("OK: 475
+  L-blocks parsed"), pushed at 206f96c. His look: the hover bullets "--
+  yes", JPL Horizons' address "-- yes", the closing paragraph "-- yes";
+  and with the copy, "all correct".
+- **Loose ends, re-homed:** the three descriptions carried for
+  interactive-exhibit's next version go to L-443, whose slice 2 opens
+  the skill. Nothing else is left open.
+**Gap (closed 2026-10-24):** none.
+**Gap (superseded above):** Tony's run of gallery patch_L481_1, its runs and push; his look
+on the phone, on which this closes.
+**Ref:** L-477 to L-480 (closed the same day); gallery `interactive.html`
+(the room's compose, `solarSystemSourceLine`, the four closing
+paragraphs), `gallery/earth_geometry.js`, `documentation/smoke_typed_facts.js`.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

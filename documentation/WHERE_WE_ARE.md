@@ -1,24 +1,24 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 24, 2026, afternoon: your look found the build
-correct; your three readability asks built; then slice 2.
-- Written at orrery faa965e and gallery ea83ef0, with patches L481_1, L481_2.
+Last updated: October 24, 2026, evening: the day's work all correct on
+your look; the next design talk, then slice 2.
+- Written at orrery 206f96c and gallery 96173b8, with the close patch.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Your look: the drawer, Reset, the count line, Go To and About all
->   correct; L-477 to L-480 closed.
-> - Your three asks built (L-481 (readability)): bullets in a body's
->   hover; JPL Horizons' address in the i panels; the closing paragraph
->   a list, "creator's" (`HANDOFF_L481_readability_20261024.md`).
+> - Your look found the readability changes correct: bullets in a
+>   body's hover, JPL Horizons' address as a link, the closing
+>   paragraph a list with "creator's". L-481 (readability) closed.
+> - With it, all of today's work is done: the drawer, Reset, the count
+>   line, Go To and About (L-477 to L-480).
 >
-> **Do next:** *your look at the three; then slice 2.*
+> **Do next:** *the next design talk (below), then slice 2: the
+> spacecraft and the comets on open paths.*
 >
 > **Needs you now:**
-> - *(do) patch_L481_1 on the website, then its runs and push;
->   patch_L481_2 on the orrery, then ledger_index.py and push.*
+> - *(do) The close patch on the orrery, then ledger_index.py and push.*
 > - Two papers left to try (`READING_L456_tony_20261021.md`).
 
 *Italic* lines are the must-reads. Marks reset at every update.
@@ -43,8 +43,8 @@ correct; your three readability asks built; then slice 2.
                next, item 3, L-357 (stale leftovers).
  10-11.[NOW]   *The orrery's objects come to the website (L-443 (the
                objects to the website)): slice 1, 50 bodies, live Oct 22;
-               the drawer and view rulings built and looked at Oct 24;
-               then slice 2, spacecraft and open-path comets; the moons.*
+               the drawer, view and readability work done Oct 24;
+               next slice 2, spacecraft and open-path comets; the moons.*
                << moved this session
  12.   [later] Encounters: comets and spacecraft at the dates that matter.
  13.   [later] The inner planets' rooms (Mercury, Venus, Mars), from the
@@ -54,20 +54,20 @@ correct; your three readability asks built; then slice 2.
  15.   [goal]  The website does what the desktop orrery does, with a date
                to choose, within the range the data covers.
 
-## Settled
+## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings. A line leaves after a few weeks, once it is habit.
 - The drawer: no See more and no "All"; a group row only opens; Reset
   puts back the room, or one group, as it opened. (Oct 24)
 - Go To fits a body's whole orbit, text box and all (a trial); each
   hover gives its orbit's near and far distance. (Oct 24)
+- A body's hover in bullets; a Horizons source carries its address,
+  linked; the closing paragraph a list, "creator's". (Oct 24)
 - The objects go next; the deferred list kept in view. The tide pink
   with its cone; the outer cloud loose dots with clumps. (Oct 22)
 - Groups fold open in the drawer; a room is for a body with more than
   its symbol. Every body fetched every build. Every comet drawn from
   today's orbit. Open-path comets go with the spacecraft. (Oct 22)
-- Zooming in stays a cutout; one line counts the ticked bodies
-  outside the view, never names them. (Oct 23)
 - Paths: one rule, planned in the orrery; nearest approaches place the
   fine steps; solid to today, dashed after. (Oct 23)
 
@@ -89,7 +89,7 @@ Waiting behind the objects (Oct 22); a line leaves when picked up.
 - A drawn main-belt cloud (L-443 (the objects)), behind slice 2.
 - L-471 (a delivered patch is final): safe-file-editing's next version.
 
-## Signals  **>> UPDATED THIS SESSION**
+## Signals
 
 Read from files when this page was written, not typed from memory.
 - Last cache build: 20261024T163249Z, ok, first try (gallery
@@ -99,7 +99,7 @@ Read from files when this page was written, not typed from memory.
   stars 13, utilities 2.
 - This page's date and the ledger's newest stamp: both Oct 24. Agree.
 
-## Waiting on you  **>> UPDATED THIS SESSION**
+## Waiting on you
 
 At the next design talk:
 - Whether the Sun and Earth rooms' All / none becomes Reset too: the
@@ -117,8 +117,9 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- *Next: your look, by `HANDOFF_L481_readability_20261024.md`; then
-  slice 2, `DESIGN_L443_slice2_rulings_20261023.md`.*
+- *Next: slice 2, `DESIGN_L443_slice2_rulings_20261023.md`.*
+- Today's close: `HANDOFF_L481_session_close_20261024.md`; your run
+  record: `WHERE_WE_ARE_10-24-26_1140_run_record.md`.
 - Today's rulings: `DESIGN_L477_drawer_and_view_rulings_20261024.md`
 - The objects' rulings: `DESIGN_L443_objects_rulings_20261022.md`;
   the words: `WORDS_L443_slice1_20261022.md`

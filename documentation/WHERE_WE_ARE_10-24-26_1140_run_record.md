@@ -1077,16 +1077,71 @@ Index regenerated (245 live items) in C:\Users\tonyq\OneDrive\Desktop\python_wor
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-8. move the patch to `documentation\`, and commit and push. -- 96173b88e4da9661fcfe3a389a96c6bab19b60cc
+8. move the patch to `documentation\`, and commit and push. -- 206f96c988569496d9cf12b9e3e45d73e61132d4
 9.  **(do)** A short phone look: four steps, in the record.
 
 What changed:
-- **Hover bullets.** In the Solar System room, every line of a body's hover after its name starts with a bullet: the distance, its note, the period and the orbit line.
-- **JPL Horizons' address.** Every source line in an info panel that names JPL Horizons now carries https://ssd.jpl.nasa.gov/horizons/, as a link. That covers each body in the Solar System room, plus the Earth room's Sun direction, Moon arc and pole. I confirmed the address answers live: it's JPL's "Horizons System" page.
-- **The closing paragraph.** In every room it's now a bulleted list, one sentence per bullet, and it reads "named for the creator's daughter". Where it names JPL Horizons, that's a link too.
+- **Hover bullets.** In the Solar System room, every line of a body's hover after its name starts with a bullet: the distance, its note, the period and the orbit line. -- yes
+- **JPL Horizons' address.** Every source line in an info panel that names JPL Horizons now carries https://ssd.jpl.nasa.gov/horizons/, as a link. That covers each body in the Solar System room, plus the Earth room's Sun direction, Moon arc and pole. I confirmed the address answers live: it's JPL's "Horizons System" page. -- yes
+- **The closing paragraph.** In every room it's now a bulleted list, one sentence per bullet, and it reads "named for the creator's daughter". Where it names JPL Horizons, that's a link too. -- yes
 
 **Where this leaves us**
 - The drawer and view work is done and approved; only your quick look at the three readability changes remains.
 - Next is slice 2: the spacecraft and the comets on open paths.
+
+============================================================================
+
+Your look closes L-481. I'll write the closing records: L-481 done, and Where We Are set for the next session. First, a fresh read of both repos.
+
+Skill confirms the count line is written there. Now testing the patch on throwaway copies: plain, Windows line endings, a second run, then the ledger tool.
+
+Everything from today is now done and approved. `patch_L481_3_session_close_20261024.py` writes that into the records.
+
+What the patch records:
+- **The ledger:** L-481 (readability) is closed. Its record quotes your three "yes" answers and your "all correct", and names the run-record file they came from.
+- **One leftover moved:** three notes were waiting for the next version of the exhibit skill, describing the hover bullets, the Horizons link and the bulleted closing paragraph. They now sit on L-443 (the objects), because slice 2 will update that skill anyway.
+- **Where We Are:**
+  - It now says today's work is finished, and that the next step is the design talk, then slice 2.
+  - One older Settled line came off so the page stays under its 130-line limit. It's now written in the skill, and the close note keeps the exact wording.
+- **A short close note**, `HANDOFF_L481_session_close_20261024.md`. It sums up the day and lists what the next session checks first.
+
+I ran the patch on test copies, including one with Windows line endings. It gave exactly the files I built, refused a second run, and the ledger tool read the result cleanly.
+
+Your steps:
+1. **(do)** Save the patch in `palomas_orrery_for_github\` and run it.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L481_3_session_close_20261024.py
+ok  LEDGER_CONSOLIDATED.md (4 edits)
+ok  documentation/WHERE_WE_ARE.md (8 edits)
+ok  documentation/HANDOFF_L481_session_close_20261024.md: new
+patch applied: L-481 session close (2 files edited, 1 new)
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+2. **(do)** Run `ledger_index.py`.
+
+CONSISTENCY PROBLEMS:
+  - [auto-fix] L-481: status DONE, tagged 'A', but not physically inside any track's own span, so the general archive -- correct tag is 'C'
+  - [auto-fix] L-481: belongs in closed bucket 'C' but is not physically located in its destination heading
+Retagged 1 block(s) to their correct closed bucket; physically moved 1 block(s) into their bucket's destination heading.
+Index regenerated (244 live items) in C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\LEDGER_CONSOLIDATED.md.
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+OK: 475 L-blocks parsed, no consistency problems.
+Index regenerated (244 live items) in C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\LEDGER_CONSOLIDATED.md.
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+3. **(do)** Move the patch to `documentation\`, then commit and push. -- 
+4. Put your updated `WHERE_WE_ARE_10-24-26_1140_run_record.md` in the same commit. GitHub has only this morning's version of it, and the ledger now quotes this afternoon's lines.
+
+**Where this leaves us**
+- The drawer, the view and the readability changes are finished and approved.
+- Next is a design talk on three questions:
+  - Do the Sun and Earth rooms get Reset too (L-482)?
+  - Should the Daily Run check that the orrery copy it downloads matches what you pushed (L-461)?
+  - Should the orrery's Sun-axis hover read its numbers from the stored data (L-465)?
+- Then slice 2: the spacecraft and the comets on open paths.
+
 
 
