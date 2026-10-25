@@ -1486,7 +1486,7 @@ Each pass would carry its own fine-step window. In the Solar System room those l
 
 **My recommendation:** once a spacecraft is in orbit around a planet, the Solar System room shows it riding along with that planet, with no fine steps for each loop. The loops wait for that planet's own room later. This is the same choice already made for asteroid flybys, which belong to the body rooms. The flybys on the way there stay as they are, and so do the passes close to the Sun, like Parker's 42; those are real hairpin bends in the path.
 
-**Do the orbiters ride along with their planet in the Solar System room, with the loops left for the planet rooms?**
+**Do the orbiters ride along with their planet in the Solar System room, with the loops left for the planet rooms?** -- i can see this being an issue. this becomes even more with an orbiter or a lander like the mars lander. i am not sure how to handle this mechanically. the initial entry and exit may be important, a landing, a takeoff, but routine orbits for observations could be omitted. but what would be the logic? 
 
 Meanwhile, your next steps:
 1. Run `patch_L443_10`, then press the preview button once more to check the new lines. It will say all twelve are already planned today and ask JPL nothing, so it takes seconds.
@@ -1548,14 +1548,220 @@ REPORT
 
 PATH PLAN: 12 paths, events preview_bepicolombo 67, preview_clipper 87, preview_juice 10, preview_juno 113, preview_lucy 7, preview_new_horizons 2, preview_osirisape 13, preview_parker 49, preview_psyche 2, preview_solo 31, preview_voyager_1 2, preview_voyager_2 5. Asked JPL for: nothing.
 
+-- i am thinking of revising the idea of an automated run at midnight every day, with all the daily and 30-day run routines except the messages. i would still have to look at these daily, unless the autorun just reports any new messages and continues. now with the rerun fix this should work. the question is whether this would require my machine to be on all night. not impossible. 
+
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-2. Commit and push the orrery, including `data/path_plans_preview.json`. -- 
+2. Commit and push the orrery, including `data/path_plans_preview.json`. -- b35e81278f6a0bc190f1e19c732f38dbc6087836
 3. Then the website steps from before: patch L482_1, the gallery maintenance run, commit and push, and the phone look at Reset.
 
 **Website:**
 
 7. **Run `patch_L482_1_reset_every_room_20261024.py`** from the gallery folder. It prints an "ok" line per file, then "patch applied".
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L482_1_reset_every_room_20261024.py
+ok  interactive.html (8 edits)
+ok  tools/headless/compare_rooms.js (1 edits)
+ok  tools/headless/walk_shell_reset.js: new
+stamped: interactive.html's change log (October 24, evening, L-482)
+patch applied: L-482 Reset in every room (2 files edited, 1 new)
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
+
 8. **Run `gallery_maintenance_run.py`.**
-9. **Move that patch into the gallery's `documentation\`, then commit and push.**
+
+======================================================================
+  gallery maintenance run -- OFFLINE (before a commit)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Module atlas              2.1s  rewrote MODULE_ATLAS.md,
+                                    MODULE_INDEX.md
+  PASS Constants export pull     0.8s  rewrote
+                                    data/constants_export.json,
+                                    data/constants_export.sha
+  PASS Config mirror             0.1s  no change to
+                                    data/objects_config.json
+  PASS Objects export pull       0.7s  rewrote data/objects_export.json,
+                                    data/objects_export.sha
+  PASS Objects mirror            0.2s  no change to
+                                    data/objects_config.json
+  PASS Drawings pull             1.9s  rewrote
+                                    data/drawings/pulled_at.sha
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite      65.8s  PASS (390 checks, 0 failures)
+  PASS Pole of date              0.3s  POLE OF DATE: all 11 checks passed
+                                    (frame angle, orrery, ERFA, block
+                                    checker, and each shown able to
+                                    fail).
+  PASS Mirror suite              0.2s  All 77 mirror checks passed:
+                                    served, spelling, relabel refused
+                                    and accepted, conflict refused,
+                                    definition as exactly 1, fallback
+                                    and absent named, no-slot refused,
+                                    five shapes, formatting kept,
+                                    idempotent, report writes nothing,
+                                    uncertainty written as served,
+                                    Earth's pole served, print count
+                                    written as served, "in" written as
+                                    served and a slot served in
+                                    another unit from it, and the
+                                    citation written as served, a
+                                    website-only citation named, an
+                                    old export refused.
+  PASS Store writer suite       27.4s  All 442 store-writer checks
+                                    passed: an allow list that lets
+                                    through only a shell's words, a
+                                    belt's words and the arrival
+                                    settings, the rooms section's
+                                    included; a no-edit round trip;
+                                    one line per change; empty words
+                                    handled; a refused batch writing
+                                    nothing; awkward text; and the
+                                    shell list matching the cache
+                                    check's rule.
+  PASS Store editor suite        0.2s  All 377 store-editor checks
+                                    passed: every box the form offers
+                                    is one the writer allows; the word
+                                    list and the tick list differ by
+                                    the belts, on purpose; nothing
+                                    typed saves nothing; the save
+                                    message does not promise a visitor
+                                    sees what they cannot yet; and a
+                                    red Cache in step is explained
+                                    rather than just shown.
+  PASS Objects mirror suite      0.2s  MIRROR OBJECTS SUITE: pass
+  PASS Objects mirror check      0.1s  OBJECTS MIRROR: pass
+  PASS Config mirror check       0.1s  Every served link holds the
+                                    export's value, unit, figure count
+                                    and citation; 166 link(s)
+                                    compared, 162 citation(s) word for
+                                    word, 4 declared with none, 3 not
+                                    served; store 7b6358d39781.
+  PASS Pull failures             0.6s  PULL FAILURES: all 13 checks
+                                    passed (3 pulls x 3 ways to fail,
+                                    the run after a failed pull, and 3
+                                    planted faults caught)
+  PASS Horizons confirmations    0.1s  HORIZONS CONFIRMATIONS: pass -- 63
+                                    of 63 confirmed, and 61 periods,
+                                    within 30 days
+  PASS Pointer join              0.2s  Every link is accounted for: 169
+                                    link(s) against orrery b35e8127, 1
+                                    fallback named; read check: 66 of
+                                    66 measured rows reached carry a
+                                    read.
+  PASS Cache in step             0.2s  The served cache holds the
+                                    config's 69 object(s) and their
+                                    features exactly: 4 object(s) with
+                                    34 named shell(s), in both cache
+                                    files.
+  PASS Drawn orbit               3.1s  DRAWN ORBIT: pass -- 18 checks,
+                                    every planted fault caught
+  PASS Drawings                  1.0s  DRAWINGS: PASS -- 30 of 30 planted
+                                    faults caught; pulled at orrery
+                                    b35e8127; earth_exosphere 1500
+                                    dots, round, sha256 6112639fb2cd;
+                                    galactic_tide 5000 dots, about the
+                                    galactic pole, sha256
+                                    950a7511f0b5; hills_cloud 3600
+                                    dots, tilt 31.0 deg, sha256
+                                    4d3e85616645; outer_oort_cloud
+                                    2736 dots, between its edges,
+                                    sha256 2f7ab88ee113; sun_corona
+                                    2500 dots, round, sha256
+                                    e2b57ccbc8a4; van_allen_belts 3200
+                                    dots, tilt 0.4 deg, sha256
+                                    75274e84f840; zodiacal_dust 3000
+                                    dots, tilt 2.8 deg, sha256
+                                    995f13a056e8
+  PASS Collapsed features        0.1s  32 stored as themselves, 16
+                                    collapsed, 0 unclassified.
+  PASS Feature renderers         1.2s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.2s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.4s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.3s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.3s  === ALL CHECKS PASSED ===
+  PASS Typed facts               0.3s  TYPED FACTS: PASS -- 0 typed facts
+                                    in the Sun and Earth rooms; 17
+                                    number line(s), 28 of 28 allowed
+                                    sentence(s) seen, 0 held open
+                                    (L-451); 26 word field(s) masked.
+  PASS Typed numbers             0.4s  TYPED NUMBERS: PASS -- 0 typed
+                                    numbers in the Sun and Earth
+                                    rooms' served words; 310 number(s)
+                                    masked, 8 held.
+  PASS Arrival                   0.4s  Arrival: both rooms open on the
+                                    right things; every shell trace
+                                    carries its key; the fallback with
+                                    no arrival block is unchanged.
+  PASS Display figures           0.4s  === PASS: 61 hover(s) and 305
+                                    number(s) examined; 14 graded, 7
+                                    graded by line, 47 held to the
+                                    fixture ===
+  PASS Solar System figures      0.1s  === PASS: 6 worked cases, 63
+                                    drawer rows matched to their
+                                    accuracy rows, 62 served
+                                    distances; Uranus, Neptune and
+                                    Pluto print to JPL's ten-thousands
+                                    place; 6 period cases and 62
+                                    served periods printed as the
+                                    orrery printed them; 5 orbit-line
+                                    cases and 62 served orbit lines
+                                    ===
+  PASS Far lines                 0.2s  === PASS: far lines are cut to the
+                                    view's box ===
+  PASS Solar System drawer       0.1s  === PASS: the Sun is never ticked,
+                                    every row and group is listed, the
+                                    handle names the last body ticked,
+                                    nothing ticks many bodies at once,
+                                    rooms are offered only where they
+                                    exist, groups fold and reset their
+                                    bodies, the count line counts
+                                    ticked bodies outside the view,
+                                    and the page asks this file ===
+  PASS Source list               0.2s  === PASS: the i panel's sources
+                                    are a list, every address a link
+                                    ===
+  PASS Drawer order              0.3s  === DRAWER ORDER: both rooms list
+                                    their shells where each begins;
+                                    self-test red twice
+  PASS Drawn ends                0.4s  === DRAWN ENDS: every drawing
+                                    starts and stops on a served row
+                                    or a held end; self-test red three
+                                    times
+  PASS Label words               0.3s  === LABEL WORDS: all 33 shell rows
+                                    in both rooms open their own
+                                    feature's words; self-test red
+                                    once
+  PASS Guest book                0.1s  === GUEST BOOK: all 8 checks
+                                    passed
+  PASS Guest book updater        0.4s  === GUEST BOOK UPDATER: all 43
+                                    checks passed (6 scripted runs,
+                                    self-test first)
+  PASS Daily run steps           0.1s  === DAILY RUN: all 4 step scripts
+                                    found
+  PASS Artifact 1 assembler      0.3s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.1s  RESULT: 2 directories in data/ the
+                                    builder did not make: solar-system
+                                    (1), solar-system (2). Check
+                                    whether they belong there; the
+                                    newer .gitignore rules keep the
+                                    known conflict-copy shapes out of
+                                    git but do not remove anything.
+
+======================================================================
+  35 of 35 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: 2 directories in data/ the
+  last swap 2026-10-24T16:32:58.761811+00:00: succeeded first time
+======================================================================
+
+  After you push: python gallery_maintenance_run.py --live
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+9. **Move that patch into the gallery's `documentation\`, then commit and push.** -- 
 10. **Phone look**, in the Sun room and then the Earth room: tick a few shells, zoom in, turn the view, tap a shell's name to open its text box, then press Reset. The room should look exactly as it did when it opened. Then press Reset in the Solar System room, which should work as it did before.
