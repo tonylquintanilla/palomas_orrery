@@ -1,14 +1,27 @@
 ---
 name: interactive-exhibit
 description: How an interactive exhibit (a room in interactive.html such as ?exhibit=sun) is designed, built, verified and carded for the Paloma's Orrery gallery. Covers the exhibit switch and boot path, the assembler driver spec, the JS feature handoff, the shared chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent gate, back link), what is per-body, the served-data provenance contract, what a room opens on (the arrival block) and the shell-key stamp the renderers apply, the drawer order, who may write data/objects_config.json, the Mode 5 phone sequence, and carding an exhibit through Studio. Use when adding or changing an exhibit (Earth, Jupiter, the stars), touching sun* chrome in interactive.html, deciding what an exhibit may render, or editing the served words with store_writer or exhibit_store_editor. Not for propagation math (gallery-assembler), the nightly builder (gallery-cache-builder), or the Studio/converter chain (gallery-pipeline). Do not use for projects other than Paloma's Orrery.
-fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, its group rows, its two Resets, the Reset in every room's top bar, Home's order and its framing; Go To fitting a body's whole orbit and the orbit line in a body's hover; the count line's place; a bare interactive.html link and the Explorer's address; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia); a served number's citation and its source_note; the Typed facts check (smoke_typed_facts.js); a feature drawn as stored dots (the Hills cloud, Earth's radiation belts); the i panel's source list and its links (source_list.js); the order a room's drawer lists its shells in, where each begins (drawer_order.js, the Drawer order check)
+fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, its group rows, its two Resets, the Reset in every room's top bar, Home's order and its framing; Go To fitting a body's whole orbit and the orbit line in a body's hover; the count line's place; a bare interactive.html link and the Explorer's address; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia); a served number's citation and its source_note; the Typed facts check (smoke_typed_facts.js); a feature drawn as stored dots (the Hills cloud, Earth's radiation belts); the i panel's source list and its links (source_list.js); the order a room's drawer lists its shells in, where each begins (drawer_order.js, the Drawer order check); a spacecraft's path in the Solar System room (its positions file, solid and dashed, its text box); whether the website and the orrery agree on an object
 ---
 
 # Interactive Exhibit
 
-Read this file in 7 parts: lines 1-152, 153-156, 157-398, 399-640, 641-895, 896-1152, 1153-1177.
+Read this file in 8 parts: lines 1-154, 155-158, 159-400, 401-498, 499-691, 692-946, 947-1131, 1132-1232.
 
-Skill version: 1.23 | 2026-10-24, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.24 | 2026-10-25, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 0c27f47a and gallery @ b1a4ce6c. v1.24 (L-443 build B,
+L-484) adds the spacecraft to the Solar System room: a Spacecraft group
+after Earth's row (Tony, 2026-10-24: "i would suggest putting the
+spacecraft drawer after earth's as the comets are after the sun's");
+each path drawn from its served positions file, which the page fetches,
+solid to the minute shown and dashed after (ruling 6 of the slice 2
+design, "Solid to today, dashed after"); its text box in Tony's words of
+2026-10-25; Go To fitting the whole path; and a row the served cache does
+not hold named, not stopping the room. And L-484's rule under
+Provenance: the website and the orrery agree on every object both draw,
+or the difference is written down (Tony, 2026-10-24); its check is still
+to be designed.
+Earlier: 1.23 | 2026-10-24, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 206f96c9 and gallery @ 96173b88. v1.23 (L-482, with
 the descriptions L-481 carried) records Tony's ruling of the day: "Yes
 all rooms should use the same Reset button and no 'see more'." The top
@@ -35,22 +48,11 @@ B1"), and every body's hover gives its orbit's near and far distance
 (L-479). Closing the About card a room opened steps back to the room
 (L-480). The descriptions L-472 carried -- the count line, the About
 line -- are added.
-Earlier: 1.21 | 2026-10-22, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ bfb6c474 and gallery @ 0bb34344. v1.21 (L-443, slice 1
-of the objects) records three of Tony's rulings of the day. The Solar
-System room's drawer has GROUP rows that fold open to list their bodies
-("B. this is the right view"), each group JPL's own class for its
-bodies, a room being for a body with more than its symbol. Every comet
-is drawn from its elements of today, Encke and Halley too, since a
-perihelion anchor is trusted only near its date. And a bare
-interactive.html link opens the Solar System room; the Explorer is at
-?exhibit=solar-system-explorer (stage 10). The anatomy table's
-"default solar-system-explorer" is corrected.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
 on 2026-10-05 (L-418), 2026-10-10 (L-429), 2026-10-14 (L-431),
 2026-10-16 (L-421), 2026-10-17 (L-452), 2026-10-20 (L-456),
-2026-10-21 (L-460), 2026-10-22 (L-434, L-443) and 2026-10-24
-(L-477, L-482).
+2026-10-21 (L-460), 2026-10-22 (L-434, L-443), 2026-10-24
+(L-477, L-482) and 2026-10-25 (L-443).
 
 ## Contents
 
@@ -408,6 +410,18 @@ page:
   its warnings say the builder has not run. It is cache data, so it
   needs the builder; `tools/check_cache_in_step.py` fails until it has
   run.
+- **The website and the orrery agree on every object both draw, or the
+  difference is written down** (v1.24, L-484; Tony, 2026-10-24: "we
+  should add to the skill a check that the website and the orrery agree
+  or we have a documented exception"). For each object both instruments
+  draw they agree on its JPL record, its name, its dates and its words,
+  or the difference is a documented exception. The check that holds this
+  is not built: it is to find every disagreement and name it, object by
+  object, fail on an undocumented one and print a documented one every
+  run with its reason. Its first known findings are C/2025 K1's record
+  (L-470, fixed) and the orrery's typed dates for each path and comet,
+  which L-476 replaces with the path plan's. Until it is built, a build
+  that serves an object compares the two by hand and says what it found.
 - The Artifact Bounds the Audit, and The Braid orders it: the new
   exhibit's pointers are the slice; a provenance gap found elsewhere
   while building it is recorded, one ledger row per CLASS, not chased.
@@ -607,6 +621,42 @@ Plotly.
   uses. An open orbit prints no line and the room's notes say why.
   Checked by the figures check's part 6, with three planted faults, which
   prints every body's line.
+- **The spacecraft** (v1.24, L-443 build B, 2026-10-25). A group row,
+  Spacecraft, right after Earth's row (Tony, 2026-10-24), the twelve in
+  launch order, each with the label a visitor reads where the orrery's
+  name is shorthand (OSIRIS-APEX, Parker Solar Probe, Solar Orbiter,
+  Psyche spacecraft, Europa Clipper). A spacecraft is drawn from its
+  served positions file (`positions/<slug>.json`), which the page
+  fetches for the room's own rows before the driver runs
+  (`solarSystemPositionFiles`, the room's `servedPositions: true`) and
+  hands to the assembler through the CacheReader as `POS_JSON`; the
+  assembler opens no file. `gallery/assembler/render_spacecraft.py`
+  splits the path at the minute shown: solid behind, dashed ahead --
+  JPL's predicted part, never a line extended -- the two
+  meeting at the marker, the orrery's diamond-open, in the orrery's
+  colours. The marker is worked out on the parabola through the three
+  served points nearest the minute, and its error is that parabola's
+  distance from the straight chord between the two points either side;
+  near today the builder serves a point a day. The text box, Tony's
+  words of 2026-10-25: the distance to the place that error earns, never
+  finer than whole kilometres (`SolarSystemFigures.pathDistanceLine`);
+  the sentence that JPL's own uncertainty is not yet included, always,
+  since a spacecraft's is not served; and "Its path is solid where it
+  has already flown, and dashed where JPL's predicted path takes it next,
+  as far as <the served path's last day>." No period line and no orbit
+  line. Its source line (`spacecraftSourceLine`) names the Horizons id,
+  the span drawn, the day retrieved and the plan's step. The panel shows
+  the orrery's description and link, as for any body. A row the served
+  cache does not hold yet -- before the builder has served a new body,
+  or when its first fetch failed -- is named in the room's notes and left
+  out, rather than stopping the room. Checked by the figures check's
+  part 7 (three worked cases, two planted faults, every served
+  spacecraft) and walked headlessly (`walk_solar_system_drawer.js`,
+  section 20, shown failing once on a predicted part drawn solid).
+  "Predicted" is JPL's own word, by Tony's ruling of 2026-10-25 ("use
+  the word JPL uses"): Juno's data sheet calls its part after
+  2026-09-23 "a planning prediction"; Voyager 1's speaks of "a new
+  solution and prediction".
 
 **FRAMING, Tony's ruling of 2026-10-02** ("B but with a buffer of
 20%"): the room frames on how far each body is from the Sun NOW, not
@@ -635,8 +685,9 @@ traces as the Sun and Earth rooms do), and opens its text box as
 before; one tap on the picture closes the box. Ticking, Home and Reset
 still frame on where the bodies are now. A zoom-out tap never makes a
 view smaller, even one Go To set past the buttons' 5,000 AU cap
-(`navFrameZoom`). An open path has no whole orbit; slice 2 decides what
-its Go To fits.
+(`navFrameZoom`). A spacecraft's Go To fits its whole drawn path, flown
+and predicted, the same way (v1.24); a comet's open path waits for its
+part of slice 2.
 
 ### A room's drawer lists its shells where each begins [QUALITY]
 v1.19, L-460. Tony's ruling of 2026-10-20: in every room each shell
@@ -1034,7 +1085,8 @@ needs no ruling; whether a feature is drawn at all is Tony's.
    does not. jsdom is not in the gallery; `npm install jsdom@24` in a
    scratch folder and run with `NODE_PATH=<scratch>/node_modules`.
    - `run_room_driver.py <DRIVER> <EPOCH> <out.json>` runs a room's REAL
-     driver in plain CPython on the served cache. The driver is ordinary
+     driver in plain CPython on the served cache, handing it the Solar
+     System room's spacecraft positions files as the page does (v1.24). The driver is ordinary
      Python over `gallery/assembler/`; only Pyodide is missing.
    - `page_harness.js` boots the REAL `interactive.html` in jsdom with
      the real gallery files, that payload, and a stand-in Plotly that
@@ -1174,4 +1226,7 @@ session confirms its loaded copy reads 1.20 before exhibit work. 1.21
 was cut in a session that loaded 1.20; the next session confirms its
 loaded copy reads 1.21 before exhibit work. 1.22 was cut in a session
 that loaded 1.21; the next session confirms its loaded copy reads 1.22
-before exhibit work.
+before exhibit work. 1.23 was cut in a session that loaded 1.22, and
+the session of 2026-10-25 confirmed its loaded copy read 1.23. 1.24 was
+cut in that session; the next session confirms its loaded copy reads
+1.24 before exhibit work.

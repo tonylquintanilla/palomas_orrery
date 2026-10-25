@@ -748,6 +748,19 @@ on Earth's magnetotail is replaced, its reading having been fixed
 (L-460).
 (Moved down 2026-10-24, when 1.23 made a fourth entry.)
 
+Earlier: 1.21 | 2026-10-22, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ bfb6c474 and gallery @ 0bb34344. v1.21 (L-443, slice 1
+of the objects) records three of Tony's rulings of the day. The Solar
+System room's drawer has GROUP rows that fold open to list their bodies
+("B. this is the right view"), each group JPL's own class for its
+bodies, a room being for a body with more than its symbol. Every comet
+is drawn from its elements of today, Encke and Halley too, since a
+perihelion anchor is trusted only near its date. And a bare
+interactive.html link opens the Solar System room; the Explorer is at
+?exhibit=solar-system-explorer (stage 10). The anatomy table's
+"default solar-system-explorer" is corrected.
+(Moved down 2026-10-25, when 1.24 made a fourth entry.)
+
 ## safe-file-editing
 
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons;
@@ -978,6 +991,16 @@ Horizons check left it for the orrery's maintenance run (The Daily
 Run's Steps). A config change's exceptions now name the period too.
 (Moved down 2026-10-17, when 1.11 made a fourth entry.)
 
+Earlier: 1.7 | 2026-10-05, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 72e3b558. v1.7 (L-418) changes no rule. A contents
+list now opens the skill, generated from its headings, and
+skills_index.py --check fails if the two disagree. Version history
+older than the two entries below moved to
+documentation/SKILL_HISTORIES.md. Both because a plain read of a
+long file shows its start and end and leaves out its middle, where
+the rules are (Tony, 2026-10-05).
+(Moved down 2026-10-25, when 1.12 made a fourth entry.)
+
 ## horizons-orbital-mechanics
 
 Earlier: 1.2 | 2026-10-10, with Anthropic's Claude Opus 5.5, at
@@ -1042,3 +1065,11 @@ check and fetches, with plotting's own call and save, the period of
 each served object that has none fetched, so the check compares it with
 JPL the same day.
 (Moved down 2026-10-24, when 1.10 made a fourth entry.)
+
+Earlier: 1.8 | 2026-10-15, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 77245ea8. v1.8 (L-445) adds one bullet under A Period
+Depends on Its Centre: a body's period may be asked of another target
+than the body. Earth's, around the Sun, is asked of the Earth-Moon
+barycentre, target 3; the record carries the target, and every reader
+takes it from the record.
+(Moved down 2026-10-25, when 1.11 made a fourth entry.)

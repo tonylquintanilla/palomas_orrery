@@ -31,8 +31,9 @@ WHAT IT CHECKS
       9. Each span is JPL's own, read from its refusals: Craft A's list
          end runs past the made-up JPL's data and is clipped, Craft B's
          list start comes before it and moves on.
-      8. --preview plans a named, unkeyed spacecraft into its own file,
-         names one not in the list, and leaves data/path_plans.json alone.
+      8. An unkeyed spacecraft is not planned (until 2026-10-25 a
+         --preview flag planned some by name; it went when slice 2's
+         twelve were keyed).
       7. Two planted faults must fail check 1: the backbone's step set to
          nothing (so no flyby can need finer steps), and the fine passes
          skipped (so the nearest minute is not found).
@@ -46,6 +47,15 @@ WHAT IT CHECKS
          but named as left for the next run, and a run with no limit then
          plans it and asks nothing about the path already planned.
          Planted fault: the limit never passing.
+     13. The orbiter rule, on two made-up orbiters around Mars: Craft D
+         loops five times and leaves, and has exactly an arrival at its
+         first nearest approach and a departure at its last, each to the
+         minute; Craft E is still looping when its data ends, and has
+         one arrival, marked as staying, and no departure. Planted
+         fault: every nearest approach inside the Hill sphere kept, as
+         rule 1 did.
+     14. Every event names its kind (a flyby says "flyby"), and a plan
+         made by the older rule is made again.
 
 RUN COMMAND
 
@@ -65,6 +75,10 @@ Module created: October 24, 2026 with Anthropic's Claude Opus 5.5
 Module updated: October 24, 2026, late night, with Anthropic's Claude
 Opus 5.5 (L-443: checks 10 to 12, the lines as it goes, each plan saved
 as it is made, the time limit, two of them with a planted fault).
+Module updated: October 25, 2026 with Anthropic's Claude Opus 5.5
+(L-443, build B: checks 13 and 14, the orbiter rule with a planted
+fault, and each event's kind; check 8 now holds that an unkeyed entry is
+not planned, the --preview flag it checked having gone).
 """
 
 import datetime
@@ -109,7 +123,9 @@ FLYBY_B = {"jd": hc.calendar_jd("2026-02-10 06:43"), "b_km": 500.0,
 # Where the made-up JPL has positions for each craft, in its own words.
 # Craft A's ends before the list's end_date (2025-06-01), as Juno's did
 # on 2026-10-24; Craft B's starts after the list's start_date.
-LIMITS = {"-901": ("2025-01-01 00:00", "2025-05-20 12:00", "Craft A"),
+LIMITS = {"-904": ("2025-01-01 00:00", "2025-09-01 00:00", "Craft D"),
+          "-905": ("2025-01-01 00:00", "2025-06-01 00:00", "Craft E"),
+          "-901": ("2025-01-01 00:00", "2025-05-20 12:00", "Craft A"),
           "-902": ("2025-11-05 10:00", "2026-05-01 06:00", "Craft B"),
           "-903": ("2025-01-01 00:00", "2025-06-01 00:00", "Craft C")}
 
@@ -166,7 +182,55 @@ def body_state(ident, jd):
     return circle(CIRCLES[ident], jd, phase=0.3 * len(ident), inc=0.02)
 
 
+# Two orbiters around Mars (check 13). Each comes in along a straight
+# line, loops N times between PERI and PERI + LOOP km every PERIOD days,
+# nearest at T0 + k x PERIOD (off the hour, so the minute pass is
+# needed), then leaves along a straight line -- or, for Craft E, is
+# still looping when its data ends. Mars's Hill sphere at 1.524 AU is
+# about 1.08 million km, so every loop lies inside it. By rule 1 each
+# loop's nearest approach was an event: D had 5, E 7.
+ORBITERS = {
+    "-904": {"t0": hc.calendar_jd("2025-03-10 05:23"), "period": 9.7,
+             "loops": 5, "peri": 20000.0, "loop": 600000.0, "vt": 3.0,
+             "out": 1.0e6},
+    "-905": {"t0": hc.calendar_jd("2025-03-10 05:23"), "period": 9.7,
+             "loops": 99, "peri": 20000.0, "loop": 600000.0, "vt": 3.0,
+             "out": 1.0e6},
+}
+
+LIST_ORBIT = '''from datetime import datetime
+OBJECT_DEFINITIONS = [
+    {'name': 'Craft D', 'key': 'craft_d', 'id': '-904', 'id_type': 'id',
+     'object_type': 'trajectory', 'start_date': datetime(2025, 1, 1),
+     'end_date': datetime(2025, 9, 1)},
+    {'name': 'Craft E', 'key': 'craft_e', 'id': '-905', 'id_type': 'id',
+     'object_type': 'trajectory', 'start_date': datetime(2025, 1, 1),
+     'end_date': datetime(2025, 6, 1)},
+]
+'''
+
+
+def orbiter_rel(o, jd):
+    """[r, dr/dt in km/day] of an orbiter around Mars."""
+    t_in = o["t0"] - o["period"] / 2.0
+    t_out = o["t0"] + (o["loops"] - 1) * o["period"] + o["period"] / 2.0
+    top = o["peri"] + o["loop"]
+    if jd < t_in:
+        return top + o["out"] * (t_in - jd), -o["out"]
+    if jd > t_out:
+        return top + o["out"] * (jd - t_out), o["out"]
+    ph = 2 * math.pi * (jd - o["t0"]) / o["period"]
+    return (o["peri"] + o["loop"] * (1 - math.cos(ph)) / 2.0,
+            o["loop"] * math.pi / o["period"] * math.sin(ph))
+
+
 def craft_state(ident, jd):
+    if ident in ORBITERS:
+        o = ORBITERS[ident]
+        base = body_state("499", jd)
+        r, dr = orbiter_rel(o, jd)
+        rel = [r / AU, 0.0, 0.0, dr / AU, o["vt"] * DAY / AU, 0.0]
+        return [base[i] + rel[i] for i in range(6)]
     fly = FLYBY_A if ident == "-901" else FLYBY_B
     base = body_state(fly["around"], jd)
     v_au_d = fly["v"] * DAY / AU
@@ -340,20 +404,10 @@ def suite(today=datetime.date(2026, 10, 24), plant=None):
               and len(jpl5.calls) == 1,
               "5. JPL down: UNREACHABLE by name, plans kept, one question "
               "asked (%d)" % len(jpl5.calls))
-        old_names = pp.PREVIEW_NAMES
-        pp.PREVIEW_NAMES = ("Craft C", "Nobody")
-        try:
-            jpl6 = FakeJPL(refuse=("X2",))
-            v6, l6, out6 = pp.run(root, jpl6, today, pause=0.0, preview=True)
-        finally:
-            pp.PREVIEW_NAMES = old_names
-        with open(os.path.join(root, pp.PLANS), "rb") as h:
-            plans_after = h.read()
-        check(list(out6["plans"]) == ["preview_craft_c"]
-              and os.path.exists(os.path.join(root, pp.PREVIEW))
-              and plans_after == after and "Nobody (not in the list)" in v6,
-              "8. --preview plans an unkeyed name into its own file, names "
-              "the one not in the list, and leaves the plans untouched")
+        check("craft_c" not in out5["plans"]
+              and "preview_craft_c" not in out5["plans"],
+              "8. an entry with no key is not planned: Craft C, unkeyed, "
+              "has no plan")
         print("  first run asked JPL %d questions" % n_first)
         for line in lines:
             print("  " + line)
@@ -462,6 +516,84 @@ def time_limit(plant=False):
         shutil.rmtree(root, ignore_errors=True)
 
 
+def orbiters(plant=False):
+    """Check 13. Craft D loops 5 times around Mars and leaves; Craft E is
+    still looping when its data ends. Planted fault: the orbiter rule
+    off, every nearest approach inside the Hill sphere kept (rule 1)."""
+    root = make_root(LIST_ORBIT)
+    real = pp.orbiter_rule
+    try:
+        if plant:
+            pp.orbiter_rule = lambda series, gate: [
+                (i, "flyby", False) for i, k, st in real(series, None)]
+        verdict, lines, out = pp.run(root, FakeJPL(), datetime.date(
+            2026, 10, 24), pause=0.0)
+        plans = out["plans"]
+        probs = []
+        for key, ident, kinds in (("craft_d", "-904",
+                                   [("arrival", False), ("departure",
+                                                         False)]),
+                                  ("craft_e", "-905", [("arrival", True)])):
+            o = ORBITERS[ident]
+            ev = [e for e in plans.get(key, {"events": []})["events"]
+                  if e["body"] == "Mars"]
+            got = [(e.get("kind"), e.get("stays")) for e in ev]
+            if got != kinds:
+                probs.append("%s: %s" % (key, got))
+                continue
+            want = [pp.jd_to_calendar(o["t0"])]
+            if len(kinds) == 2:
+                want.append(pp.jd_to_calendar(
+                    o["t0"] + (o["loops"] - 1) * o["period"]))
+            if [e["closest"] for e in ev] != want:
+                probs.append("%s at %s, not %s" % (
+                    key, [e["closest"] for e in ev], want))
+            if any(abs(e["dist_km"] - o["peri"]) > 1.0
+                   or abs(e["v_kms"] - o["vt"]) > 1e-3 for e in ev):
+                probs.append("%s: distance or speed" % key)
+        stray = [e["body"] for k in plans for e in plans[k]["events"]
+                 if e["body"] not in ("Mars", "Sun")]
+        if stray:
+            probs.append("stray events: %s" % stray)
+        return not probs, "; ".join(probs) or (
+            "craft_d %s; craft_e %s" % (
+                [(e["kind"], e["closest"]) for e in plans["craft_d"]
+                 ["events"] if e["body"] == "Mars"],
+                [(e["kind"], e["stays"]) for e in plans["craft_e"]
+                 ["events"] if e["body"] == "Mars"]))
+    finally:
+        pp.orbiter_rule = real
+        shutil.rmtree(root, ignore_errors=True)
+
+
+def kinds_named():
+    """Check 14. A flyby says it is one, and a plan made by the old rule is
+    made again."""
+    root = make_root()
+    try:
+        _, _, out = pp.run(root, FakeJPL(refuse=("X2",)),
+                           datetime.date(2026, 10, 24), pause=0.0)
+        kinds = sorted(set(e.get("kind") for k in out["plans"]
+                           for e in out["plans"][k]["events"]))
+        path = os.path.join(root, pp.PLANS)
+        with open(path, "r", encoding="utf-8") as h:
+            data = json.load(h)
+        bodies = pp.searched_bodies(pp.keyed_entries(LIST))
+        ent = [f for f in pp.keyed_entries(LIST) if f["key"] == "craft_a"][0]
+        old = pp.plan_inputs(ent, bodies)
+        old["rule"] = 1
+        data["plans"]["craft_a"]["inputs_sha256"] = pp.inputs_sha256(old)
+        with open(path, "w", encoding="utf-8") as h:
+            json.dump(data, h)
+        _, lines, _ = pp.run(root, FakeJPL(refuse=("X2",)),
+                             datetime.date(2026, 10, 25), pause=0.0)
+        remade = any("craft_a" in l and "changed" in l for l in lines)
+        return ("flyby" in kinds and None not in kinds and remade,
+                "kinds %s; rule-1 plan made again: %s" % (kinds, remade))
+    finally:
+        shutil.rmtree(root, ignore_errors=True)
+
+
 def plant_no_backbone():
     old = pp.BACKBONE_STEP_SECONDS
     pp.BACKBONE_STEP_SECONDS = 0.0
@@ -494,6 +626,16 @@ def main():
               "run, which plans it (%s)" % why)
     check(not time_limit(plant=True)[0],
           "12. planted fault caught: the limit never passing")
+    ok, why = orbiters()
+    check(ok, "13. the orbiter rule: an orbiter that leaves has one "
+              "arrival and one departure, one that stays has one arrival "
+              "and no departure, each at its minute (%s)" % why)
+    check(not orbiters(plant=True)[0],
+          "13. planted fault caught: every nearest approach inside the "
+          "Hill sphere kept (rule 1)")
+    ok, why = kinds_named()
+    check(ok, "14. every event names its kind, and a plan made by the "
+              "older rule is made again (%s)" % why)
     for name, plant in (("the backbone's step set to nothing",
                          plant_no_backbone),
                         ("the fine pass skipped", plant_no_fine_pass)):

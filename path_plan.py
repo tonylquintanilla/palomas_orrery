@@ -44,12 +44,17 @@ WHAT A PLAN IS
                 0.02 AU. The website's builder applies them.
       events    each nearest approach that needs finer steps than the
                 backbone gives, with the body, the moment, the distance
-                and the speed, and the window and step to fetch around it.
+                and the speed, and the window and step to fetch around it;
+                and its kind, by the orbiter rule below: flyby, arrival
+                (stays true when it never leaves), departure, or
+                perihelion (a pass of the Sun).
       searched  every body whose nearest approaches were looked for.
       made      the day the plan was made.
 
-    Comets on open paths are not planned yet: how much of a comet's path
-    to draw is Tony's question of 2026-10-24, and they wait for it.
+    Comets on open paths are not planned yet. How much of a comet's path
+    is drawn was ruled on 2026-10-24
+    (documentation/COORD_L443_comet_span_ruling_20261024.md); they are
+    planned in the part of build B after the spacecraft.
 
 HOW AN EVENT IS FOUND
 
@@ -84,6 +89,22 @@ HOW AN EVENT IS FOUND
     distance less half a day's travel; nothing that could pass is
     dropped.
 
+    THE ORBITER RULE (Tony's ruling of 2026-10-24, L-443). The days a
+    path spends inside one body's Hill sphere form a stretch. A stretch
+    with one nearest approach is a flyby. A stretch with more than one is
+    a capture: its first nearest approach, the arrival, is an event, and
+    its last before the spacecraft leaves, the departure; the approaches
+    between are not events, because in the Solar System room the
+    spacecraft rides with the body there, and the loops wait for that
+    body's room. A capture that runs to the end of JPL's data is an
+    arrival with no departure (a landing, or a mission's end). Passes of
+    the Sun are not captures, having no Hill-sphere gate, and stay
+    events. So Juno's 110 passes of Jupiter were one arrival, Europa
+    Clipper's 83 one arrival, BepiColombo's 40 at Mercury its flybys and
+    one arrival (the preview of 2026-10-24). The rule a plan was made by
+    is among its inputs (RULE), so a plan made by an older rule is made
+    again.
+
     A candidate is then found exactly in two passes, the orrery's
     resolve_encounter_time numbers: hourly for a day and a half either
     side, then each minute for an hour and a half either side of the
@@ -117,14 +138,14 @@ RUN COMMAND
         python path_plan.py            what is due, within the time
                                        limit
         python path_plan.py --all      every path, now
-        python path_plan.py --no-limit no time limit (the first full plan)
-        python path_plan.py --preview  TEMPORARY: slice 2's twelve
-                                       spacecraft by name, before they are
-                                       keyed, into data/path_plans_preview.
-                                       json, which the export never reads
-                                       (the dashboard's "Path Plan --
-                                       preview of slice 2" button, which
-                                       adds --no-limit)
+        python path_plan.py --no-limit no time limit (a first full plan)
+
+    The dashboard's "Path Plan -- every path, now" button runs it with
+    --all --no-limit, for when a new spacecraft is keyed or the rule
+    changes and every plan must be made at once. The --preview flag, which
+    planned slice 2's twelve by name before they were keyed, went when
+    they were keyed (L-443 build B, 2026-10-25); their plans were carried
+    from its file into data/path_plans.json by the patch that keyed them.
 
     orrery_maintenance_run.py runs it as a GENERATOR, before the objects
     export, which carries each plan to the website.
@@ -163,6 +184,12 @@ Module updated: October 24, 2026, late night, with Anthropic's Claude
 Opus 5.5 (L-443, Tony's ask of that night: a line as it goes, each plan
 saved as it is made, a 10-minute limit unless --no-limit; see AS IT GOES,
 AND ITS TIME LIMIT).
+Module updated: October 25, 2026 with Anthropic's Claude Opus 5.5
+(L-443, build B: the orbiter rule; each event names its kind; RULE 2
+among a plan's inputs).
+Module updated: October 25, 2026 with Anthropic's Claude Opus 5.5
+(L-443, build B: the twelve keyed, so the temporary --preview flag and
+its list are gone; see RUN COMMAND).
 """
 
 import ast
@@ -182,19 +209,14 @@ from export_objects import served_identity
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SOURCE = "celestial_objects.py"
 PLANS = os.path.join("data", "path_plans.json")
-PREVIEW = os.path.join("data", "path_plans_preview.json")
-
-# TEMPORARY, until the twelve are keyed (L-443 slice 2, the website half):
-# group A of documentation/DESIGN_L443_slice2_rulings_20261023.md, by the
-# list's own names. A key in the export with no website entry stops the
-# website's objects mirror, so the keys land with the website's entries;
-# meanwhile --preview plans these by name, into PREVIEW, which the export
-# never reads, so the first real flyby list comes from Tony's machine.
-# Remove this list, the flag and its dashboard button when they are keyed.
-PREVIEW_NAMES = ("Voyager 1", "Voyager 2", "New Horizons", "Juno", "Lucy",
-                 "JUICE", "Psyche", "Clipper", "BepiColombo", "SolO",
-                 "Parker", "OSIRISAPE")
 SCHEMA = 1
+# The rule a plan was made by, among its inputs, so a plan made by an
+# older rule is made again: 1, every nearest approach inside a Hill
+# sphere (2026-10-24); 2, the orbiter rule (orbiter_rule, same night).
+RULE = 2
+# How a run's lines name each kind of event.
+WORD = {"flyby": "flyby", "arrival": "arrival", "departure": "departure",
+        "perihelion": "pass of the Sun"}
 CADENCE_DAYS = 30
 KEEP_PAST_DAYS = 30        # events older than this are carried, not re-found
 OVERLAP_DAYS = 3           # the re-search starts this much before them
@@ -248,9 +270,8 @@ FIELDS = ("name", "key", "id", "id_type", "helio_id", "helio_id_type",
           "object_type", "start_date", "end_date")
 
 
-def keyed_entries(text, preview=False):
-    """[{fields}] for every entry with a 'key', in list order. With
-    preview, also each entry named in PREVIEW_NAMES, keyed by its name."""
+def keyed_entries(text):
+    """[{fields}] for every entry with a 'key', in list order."""
     tree = ast.parse(text)
     node = next(n for n in tree.body if isinstance(n, ast.Assign) and any(
         getattr(t, "id", None) == "OBJECT_DEFINITIONS" for t in n.targets))
@@ -261,10 +282,6 @@ def keyed_entries(text, preview=False):
             if isinstance(k, ast.Constant) and k.value in FIELDS:
                 f[k.value] = _value(v)
         if f.get("key"):
-            out.append(f)
-        elif preview and f.get("name") in PREVIEW_NAMES:
-            f["key"] = "preview_" + re.sub(r"[^a-z0-9]+", "_",
-                                           f["name"].lower()).strip("_")
             out.append(f)
     return out
 
@@ -516,13 +533,8 @@ def hill_km(body_row, primary_row, gm, gm_primary):
     return r * (gm / (3.0 * gm_primary)) ** (1.0 / 3.0)
 
 
-def candidates(path_rows, body_rows, gate=None):
-    """[(jd, dist_km, v_kms)] at each day nearer than the days either side
-    that could be a pass needing finer steps than the backbone: inside the
-    body's Hill sphere (gate(jd) gives its radius, None for the Sun), and
-    bending faster than the backbone draws by the curvature rule. A daily
-    sample can sit up to half a day's travel from the true nearest moment,
-    so both tests use the distance less half a day's travel."""
+def daily_series(path_rows, body_rows):
+    """[(jd, dist_km, v_kms)] for each day both have a position."""
     by_jd = dict((round(r[0], 4), r) for r in body_rows)
     series = []
     for r in path_rows:
@@ -530,16 +542,87 @@ def candidates(path_rows, body_rows, gate=None):
         if b is not None:
             d, v = _rel(r, b)
             series.append((r[0], d, v))
+    return series
+
+
+def _lower(d, v):
+    """The distance less half a day's travel: as near as the true nearest
+    moment can be, when the daily sample sits up to half a day off it."""
+    return max(d - v * DAY_S / 2.0, 1.0)
+
+
+def nearest_days(series):
+    """The index of each day nearer than the days either side."""
+    return [i for i in range(1, len(series) - 1)
+            if series[i][1] < series[i - 1][1]
+            and series[i][1] <= series[i + 1][1] and series[i][2] > 0]
+
+
+def stretches(series, gate):
+    """[(first, last)] index runs of days inside the body's Hill sphere,
+    each day tested at the distance less half a day's travel."""
+    out, start = [], None
+    for i, (jd, d, v) in enumerate(series):
+        hill = gate(jd)
+        inside = hill is not None and _lower(d, v) <= hill
+        if inside and start is None:
+            start = i
+        if not inside and start is not None:
+            out.append((start, i - 1))
+            start = None
+    if start is not None:
+        out.append((start, len(series) - 1))
+    return out
+
+
+def orbiter_rule(series, gate):
+    """[(index, kind, stays)]: which nearest approaches can be events,
+    by the orbiter rule (Tony's ruling of 2026-10-24, L-443).
+
+    Around the Sun, which has no Hill sphere here, every nearest approach
+    can be one, kind 'perihelion' (Parker's 42 among them). Around any
+    other body, the days inside its Hill sphere fall into stretches:
+      - one nearest approach in a stretch is a FLYBY, as before;
+      - more than one is a CAPTURE: its first nearest approach is the
+        ARRIVAL, its last before the spacecraft leaves the DEPARTURE,
+        and the approaches between are not events (in the Solar System
+        room the spacecraft rides with the body; the loops wait for the
+        body's own room);
+      - a capture that runs to the end of the days searched is an
+        arrival with no departure (stays True: a landing, or the end of
+        JPL's data);
+      - a capture already under way on the first day searched (a plan
+        made again carries its arrival) gives no new arrival."""
+    days = nearest_days(series)
+    if gate is None:
+        return [(i, "perihelion", False) for i in days]
     out = []
-    for i in range(1, len(series) - 1):
+    last = len(series) - 1
+    for a, b in stretches(series, gate):
+        inside = [i for i in days if a <= i <= b]
+        if len(inside) == 1:
+            out.append((inside[0], "flyby", False))
+        elif len(inside) > 1:
+            if a > 0:
+                out.append((inside[0], "arrival", b == last))
+            if b < last:
+                out.append((inside[-1], "departure", False))
+    return out
+
+
+def candidates(path_rows, body_rows, gate=None):
+    """[(jd, dist_km, v_kms, kind, stays)] at each nearest approach the
+    orbiter rule lets be an event (orbiter_rule) that bends faster than
+    the backbone draws, by the curvature rule. gate(jd) gives the body's
+    Hill sphere radius; None for the Sun. A daily sample can sit up to
+    half a day's travel from the true nearest moment, so both tests use
+    the distance less half a day's travel."""
+    series = daily_series(path_rows, body_rows)
+    out = []
+    for i, kind, stays in orbiter_rule(series, gate):
         jd, d, v = series[i]
-        if d < series[i - 1][1] and d <= series[i + 1][1] and v > 0:
-            lower = max(d - v * DAY_S / 2.0, 1.0)
-            hill = gate(jd) if gate else None
-            if hill is not None and lower > hill:
-                continue
-            if ideal_step_seconds(lower, v) < BACKBONE_STEP_SECONDS:
-                out.append((jd, d, v))
+        if ideal_step_seconds(_lower(d, v), v) < BACKBONE_STEP_SECONDS:
+            out.append((jd, d, v, kind, stays))
     return out
 
 
@@ -591,7 +674,7 @@ def window_and_step(jd, dist_km, v_kms):
 # ------------------------------------------------------------- planning
 
 def plan_inputs(path, bodies):
-    return {"id": path["id"], "id_type": path.get("id_type"),
+    return {"rule": RULE, "id": path["id"], "id_type": path.get("id_type"),
             "span": [ymd(path["start_date"]), ymd(path["end_date"])],
             "searched": [b[2] for b in bodies]}
 
@@ -751,7 +834,7 @@ def make_plan(fetch, path, bodies, today, rows, previous=None, pause=0.0,
         if near:
             progress.say("%s: %d near approach(es) to %s to look at closely"
                          % (path["name"], len(near), body[0]))
-        for jd, _, _ in near:
+        for jd, _, _, kind, stays in near:
             progress.check()
             try:
                 fjd, d, v = refine(fetch, path, body, jd, pause)
@@ -769,15 +852,16 @@ def make_plan(fetch, path, bodies, today, rows, previous=None, pause=0.0,
                 continue
             w0, w1, step = window_and_step(fjd, d, v)
             events.append({"body": body[0], "body_id": body[2],
+                           "kind": kind, "stays": stays,
                            "closest": jd_to_calendar(fjd),
                            "jd": round(fjd, 6), "dist_km": round(d, 1),
                            "v_kms": round(v, 3),
                            "ideal_step_s": round(ideal, 1),
                            "hill_km": None if hill is None else round(hill),
                            "window": [w0, w1], "step": step})
-            progress.say("%s: flyby of %s, %s TDB, %s km, %.3f km/s"
-                         % (path["name"], body[0], jd_to_calendar(fjd),
-                            "{:,.0f}".format(d), v))
+            progress.say("%s: %s of %s, %s TDB, %s km, %.3f km/s"
+                         % (path["name"], WORD[kind], body[0],
+                            jd_to_calendar(fjd), "{:,.0f}".format(d), v))
     events.sort(key=lambda e: e["jd"])
     return {"name": path["name"], "horizons_id": path["id"],
             "id_type": path.get("id_type"), "kind": "spacecraft",
@@ -786,6 +870,17 @@ def make_plan(fetch, path, bodies, today, rows, previous=None, pause=0.0,
             "backbone": {"step": BACKBONE_STEP, "thin_tol_au": THIN_TOL_AU},
             "events": events, "carried": len(carried),
             "searched_from": ymd(begin), "searched": searched}
+
+
+def kind_label(event):
+    """The run's word for an event's kind; a plan made by rule 1 has
+    none."""
+    kind = event.get("kind")
+    if kind is None:
+        return ""
+    if kind == "arrival" and event.get("stays"):
+        return "arrival (stays to the end of JPL's data)"
+    return WORD.get(kind, kind)
 
 
 def render(plans):
@@ -811,22 +906,16 @@ def write_plans(path_file, plans):
 
 
 def run(root, fetch, today, check_all=False, pause=PAUSE_SECONDS,
-        preview=False, progress=None):
+        progress=None):
     """(verdict, lines, plans). Writes data/path_plans.json when it changes,
-    after each plan is made and at the end; with preview,
-    data/path_plans_preview.json for PREVIEW_NAMES instead. progress
-    prints as it goes and holds the time limit (Progress; silent and
-    unlimited when None)."""
+    after each plan is made and at the end. progress prints as it goes and
+    holds the time limit (Progress; silent and unlimited when None)."""
     progress = progress or Progress()
     with open(os.path.join(root, SOURCE), "r", encoding="utf-8") as handle:
-        entries = keyed_entries(handle.read(), preview)
+        entries = keyed_entries(handle.read())
     paths = [f for f in entries if is_spacecraft(f)]
-    if preview:
-        paths = [f for f in paths if f["name"] in PREVIEW_NAMES]
-        missing = sorted(set(PREVIEW_NAMES) - set(f["name"] for f in paths))
-    bodies = searched_bodies([f for f in entries
-                              if not f["key"].startswith("preview_")])
-    path_file = os.path.join(root, PREVIEW if preview else PLANS)
+    bodies = searched_bodies(entries)
+    path_file = os.path.join(root, PLANS)
     old = {}
     if os.path.exists(path_file):
         with open(path_file, "r", encoding="utf-8") as handle:
@@ -925,7 +1014,7 @@ def run(root, fetch, today, check_all=False, pause=PAUSE_SECONDS,
         plans[key] = plan
         asked.append(key)
         write_plans(path_file, plans)
-        progress.say("%s: planned, %d flyby(s); saved" % (
+        progress.say("%s: planned, %d event(s); saved" % (
             f["name"], len(plan["events"])))
         lines.append("  %-22s planned (%s): %d events, %d carried, "
                      "searched from %s" % (key, why, len(plan["events"]),
@@ -933,17 +1022,15 @@ def run(root, fetch, today, check_all=False, pause=PAUSE_SECONDS,
                                            plan["searched_from"]))
         for e in plan["events"]:
             lines.append("      %s TDB  %-14s %13.0f km  %8.3f km/s  "
-                         "step %s" % (e["closest"], e["body"], e["dist_km"],
-                                      e["v_kms"], e["step"]))
+                         "step %-4s %s" % (
+                             e["closest"], e["body"], e["dist_km"],
+                             e["v_kms"], e["step"], kind_label(e)))
     if rows is not None and rows.refused:
         lines.append("  Not searched: "
                      + "; ".join(sorted(rows.refused.values())))
     out = write_plans(path_file, plans)
     names = ", ".join("%s %d" % (k, len(plans[k]["events"]))
                       for k in sorted(plans)) or "none"
-    if preview and missing:
-        not_planned = not_planned + ["%s (not in the list)" % m
-                                     for m in missing]
     tail = (" Not planned: %s." % ", ".join(not_planned)) if not_planned \
         else ""
     if left:
@@ -962,13 +1049,10 @@ def run(root, fetch, today, check_all=False, pause=PAUSE_SECONDS,
 
 def main(argv):
     check_all = "--all" in argv
-    preview = "--preview" in argv
     limit = None if "--no-limit" in argv else TIME_LIMIT_SECONDS
     today = datetime.date.today()
     print(LINE)
-    print("PATH PLAN -- where each served path needs finer steps (L-443)%s"
-          % (" -- PREVIEW of slice 2's twelve, into %s" % PREVIEW.replace(
-              os.sep, "/") if preview else ""))
+    print("PATH PLAN -- where each served path needs finer steps (L-443)")
     print("  %s; a line as it goes, then the report" % (
         "no time limit" if limit is None
         else "time limit %d minutes" % (limit // 60)))
@@ -976,7 +1060,7 @@ def main(argv):
     progress = Progress(out=lambda text: print(text, flush=True),
                         limit=limit)
     verdict, lines, _ = run(ROOT, hc.live_fetch, today, check_all,
-                            preview=preview, progress=progress)
+                            progress=progress)
     print()
     print("REPORT")
     for line in lines:

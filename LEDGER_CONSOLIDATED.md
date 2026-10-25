@@ -635,6 +635,11 @@ Claude Opus 5.5 (L-482 closed on Tony's look; the preview's report and
 the orbiter rule on L-443; C/2025 K1 and Gonggong done on L-470; L-485
 and L-486 new; the brief for build B), built on 0b93a25 and gallery
 b1a4ce6.
+Module updated: October 25, 2026 with Anthropic's Claude Opus 5.5 (build
+B of slice 2, cut after the spacecraft, on L-443: the orbiter rule, the
+twelve keyed and served, drawn solid then dashed; L-461 built; L-470's
+two rules and L-484's into their skills; L-471 done), built on 0c27f47
+and gallery b1a4ce6.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -852,7 +857,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*247 live items; 231 need attention (`!`); 165 RICE-scored; 232 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*246 live items; 230 need attention (`!`); 165 RICE-scored; 233 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -994,23 +999,22 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-432 | Objects drawn in the default goldenrod (orrery, colours) | OPEN | -- | 2026-10-11 |
 | ! | L-434 | Stored drawings for the other dot-cloud shells (orrery + gallery) | OPEN | -- | 2026-10-22 |
 | ! | L-435 | Standing rulings that are method, held only on Tony's page (skills, records) | OPEN | -- | 2026-10-12 |
-| ! | L-443 | The rest of the orrery's objects come to the website as plotted positions (gallery + orrery, objects) | OPEN | -- | 2026-10-24 |
+| ! | L-443 | The rest of the orrery's objects come to the website as plotted positions (gallery + orrery, objects) | OPEN | -- | 2026-10-25 |
 | ! | L-449 | A cache build dropped the 82 build-run records it should have carried (gallery, cache builder) | OPEN | -- | 2026-10-17 |
 | ! | L-454 | A drawn device for edges that move: the magnetopause, the bow shock and their kind (orrery + gallery, design) | OPEN | -- | 2026-10-22 |
 | ! | L-456 | What a visitor reads, from Earth's Mode 5 look: body radii, sources as a list with live links, Celsius for Earth's surface and air (gallery + orrery) | OPEN | -- | 2026-10-21 |
 | ! | L-458 | A "report a problem" link in every room's i panel (gallery, interactive) | OPEN | -- | 2026-10-22 |
 | ! | L-459 | A monthly run for slow checks, started by the Daily Run (gallery + orrery, maintenance) | OPEN | -- | 2026-10-20 |
-| ! | L-461 | The Daily Run confirms the orrery it pulled is the one Tony pushed (gallery, Daily Run) | OPEN | -- | 2026-10-22 |
+| ! | L-461 | The Daily Run confirms the orrery it pulled is the one Tony pushed (gallery, Daily Run) | OPEN | -- | 2026-10-25 |
 | ! | L-462 | The orrery maintenance run, a short form for small patches (orrery, maintenance) | OPEN | -- | 2026-10-22 |
 | ! | L-465 | The Sun room draws the Sun's pole and its direction of spin, as the orrery does (gallery, the Sun room) | OPEN | -- | 2026-10-22 |
 | ! | L-466 | Every drawing starts and stops where a served row says (orrery + gallery, the Sun's slice and Earth's) | OPEN | -- | 2026-10-22 |
 | ! | L-467 | The scanner credits a display line with a citation it only sits near (orrery, provenance scanner) | OPEN | -- | 2026-10-21 |
 | ! | L-468 | The Sun room's phone look of 2026-10-21, night: the corona's drawer text and the Hills cloud's cross (gallery, the Sun room) | OPEN | -- | 2026-10-22 |
-| ! | L-470 | Orrery entries the website cannot serve as they stand (orrery, objects) | OPEN | -- | 2026-10-24 |
-| ! | L-471 | A delivered patch is final (safe-file-editing, next version) | OPEN | -- | 2026-10-22 |
+| ! | L-470 | Orrery entries the website cannot serve as they stand (orrery, objects) | OPEN | -- | 2026-10-25 |
 | ! | L-476 | The orrery's whole-path plots draw by the same path plan as the website (orrery, spacecraft and comets) | OPEN | -- | 2026-10-24 |
 | ! | L-483 | A room for C/2025 K1 and its pieces, the first comet room (gallery, exhibits) | OPEN | -- | 2026-10-24 |
-| ! | L-484 | The website and the orrery agree on every object both draw, or the difference is written down (orrery + gallery, objects; method for interactive-exhibit) | OPEN | -- | 2026-10-24 |
+| ! | L-484 | The website and the orrery agree on every object both draw, or the difference is written down (orrery + gallery, objects; method for interactive-exhibit) | OPEN | -- | 2026-10-25 |
 | ! | L-485 | A nightly unattended run of the routines (orrery + gallery, maintenance) | OPEN | -- | 2026-10-24 |
 | ! | L-486 | A view carried into a room (gallery, the rooms) | OPEN | -- | 2026-10-24 |
 
@@ -1383,6 +1387,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-463 | A pink band or sheet across the Sun room on Tony's phone (gallery, rendering, DONE 2026-10-21) | DONE | -- | 2026-10-21 |
 |  | L-464 | The Sun room's own row: no info link, and the pole's citation has nowhere to show (gallery, interactive, DONE 2026-10-21) | DONE | -- | 2026-10-21 |
 |  | L-469 | Where We Are gains a Deferred section (records; ledger-and-session-records 1.22, DONE 2026-10-22) | DONE | -- | 2026-10-22 |
+|  | L-471 | A delivered patch is final (safe-file-editing, next version) | DONE | -- | 2026-10-25 |
 |  | L-472 | The Solar System room's view: a far body drawn in the wrong place when zoomed in (gallery, the Solar System room) | DONE | -- | 2026-10-24 |
 |  | L-473 | A group in the Solar System room's drawer opens with its bodies unticked (gallery, the drawer) | DONE | -- | 2026-10-24 |
 |  | L-474 | See more / See fewer at the top of the Solar System room's drawer (gallery, the drawer) | DONE | -- | 2026-10-24 |
@@ -1472,7 +1477,7 @@ Where We Are).
 L-462.
 
 #### [L-484] The website and the orrery agree on every object both draw, or the difference is written down (orrery + gallery, objects; method for interactive-exhibit)
-<!-- L:484 status:OPEN upd:2026-10-24 section:A flag: rice: -->
+<!-- L:484 status:OPEN upd:2026-10-25 section:A flag: rice: -->
 - **Tony, 2026-10-24, 17:35, in chat**
   (`documentation/COORD_L443_words_decisions_20261024.md`, sec. 7): "And
   we should add to the skill a check that the website and the orrery
@@ -1485,7 +1490,14 @@ L-462.
 - Its first findings were already known when it was ruled: C/2025 K1's
   record (L-470, fixed in the orrery the same night) and the orrery's
   typed date list (L-476).
-**Gap:** the rule into interactive-exhibit at its next version (this
+- **2026-10-25:** the rule is in interactive-exhibit 1.24, under
+  Provenance, with the check named as not yet built. Build B compared
+  the twelve by hand: names, ids and words come from the orrery's list
+  through the mirror; the dates differ, the orrery's typed against the
+  plan's, which is L-476's.
+**Gap (replaces the one below, 2026-10-25):** the check's design, then
+its build, with a planted fault; where its exceptions live.
+**Gap (superseded above):** the rule into interactive-exhibit at its next version (this
 session already moved it to 1.23); the check's design, then its build,
 with a planted fault; where its exceptions live.
 **Ref:** L-443; L-470; L-476; `export_objects.py`; gallery
@@ -1563,36 +1575,8 @@ orrery's plots, then the build.
 **Ref:** L-443; `documentation/DESIGN_L443_slice2_rulings_20261023.md`, rulings 2 and 6;
 `spacecraft_encounters.py`; `palomas_orrery.py`.
 
-#### [L-471] A delivered patch is final (safe-file-editing, next version)
-<!-- L:471 status:OPEN upd:2026-10-22 section:A flag: rice: -->
-- **Found 2026-10-22, closing L-443's slice 1** (Tony's run records,
-  `documentation/WHERE_WE_ARE_10-22-26_2027_run_record.md`). One class:
-  how a patch reaches Tony and what happens when it meets his folder.
-  Three rules for safe-file-editing's next version, method rather than
-  rulings (the protocol's Method Belongs to the Skill):
-  - **A delivered patch is final.** Claude never replaces a patch once
-    it is in Tony's folder; an addition goes in the next numbered
-    patch. Patch 3 was replaced twice after Tony had run its first
-    copy, leaving an unrun copy in the orrery's root that patch 4 had
-    to remove. Tony: "part of the problem is that I ran these patches
-    while you were still amending them. That's a lesson learned for
-    me." The fix is Claude's: a patch is delivered only when it is
-    ready to run, and Claude says so.
-  - **One route per document.** A document a patch writes is not also
-    handed to Tony to download, or he is told the patch will place it.
-    His downloaded copy of the design brief made patch 3 refuse; he
-    deleted it and ran it again. Tony: "why does a patch refuse when it
-    sees a document you gave to me as an artifact?"
-  - **A refusal says what to do, and a match is not a conflict.** When
-    a file the patch would write new already exists, the refusal names
-    the likely cause and the fix ("a copy of the same document you
-    downloaded: delete it and run again"); a file already holding
-    exactly what the patch would write is accepted.
-**Gap:** safe-file-editing's next version carries the three.
-**Ref:** L-443; `documentation/patch_L443_4_period_count_20261022.py`.
-
 #### [L-470] Orrery entries the website cannot serve as they stand (orrery, objects)
-<!-- L:470 status:OPEN upd:2026-10-24 section:A flag: rice: -->
+<!-- L:470 status:OPEN upd:2026-10-25 section:A flag: rice: -->
 - **Found 2026-10-22, counting slice 1 of L-443 (the objects to the
   website).** One class: an entry in `celestial_objects.py` whose own
   fields stop it being served, recorded here rather than chased (The
@@ -1708,7 +1692,11 @@ orrery's plots, then the build.
   B on 320 shared dates. Gonggong's period is fetched, 548.9 years
   (the objects export at 0b93a25), and Horizons confirmations pass, 61
   periods. The two instances close; West remains.
-**Gap (replaces the one below, 2026-10-24, close of the night):**
+- **2026-10-25:** the two rules are in horizons-orbital-mechanics 1.11,
+  under Which Record Serves a Body.
+**Gap (replaces the one below, 2026-10-25):** West's id (C/1975 V1-A),
+with the comets' part of L-443's build B.
+**Gap (superseded above, 2026-10-24, close of the night):**
 West's id (C/1975 V1-A); the two skill rules above at
 horizons-orbital-mechanics' next version.
 **Gap (superseded above, 2026-10-24, late night):** Tony's runs:
@@ -1957,7 +1945,7 @@ form is started (the dashboard), and whether the push gate accepts it.
 L-188 (the maintenance run); L-459 (the monthly run).
 
 #### [L-461] The Daily Run confirms the orrery it pulled is the one Tony pushed (gallery, Daily Run)
-<!-- L:461 status:OPEN upd:2026-10-22 section:A flag: rice: -->
+<!-- L:461 status:OPEN upd:2026-10-25 section:A flag: rice: -->
 - **What happened, 2026-10-21** (run record
   `documentation/WHERE_WE_ARE_10-21-26_1217_run_record.md`): the orrery's patches
   ran and passed but were not pushed; the website's patch, Daily Run
@@ -1984,7 +1972,23 @@ L-188 (the maintenance run); L-459 (the monthly run).
   (L-443), since this session's slice 2 work was the orrery's half.
   The open question stands and goes to Tony with build B: whether a
   difference stops the run or waits and tries again.
-**Gap:** the build (gallery `daily_run.py`, the pull step), with its
+- **Tony, 2026-10-25, 08:38:** "stop. confirmed."
+  (`documentation/COORD_L461_stop_ruling_20261025.md`), put to him with
+  the reasoning he confirmed: the one time it happened the cause was an
+  unpushed orrery, which waiting cannot fix; GitHub's delay after a push
+  is a minute at most; a run that waits hides the common cause behind
+  the rare one.
+- **Built 2026-10-25** (gallery patch_L443_15, with L-443's build B):
+  after the pulls, `daily_run.py` compares each pull's recorded orrery
+  commit (the three .sha files) with the newest commit in the orrery
+  folder beside the website's, read from its .git folder; a difference
+  stops the run before the builder, naming both commits, the two likely
+  causes and what to do; a folder it cannot read stops it too. `--check`
+  runs five made-up cases and two planted faults. The rule is in
+  gallery-cache-builder 1.12.
+**Gap (replaces the one below, 2026-10-25):** the first Daily Run after
+the push shows its "Pull matches push" line; then DONE.
+**Gap (superseded above):** the build (gallery `daily_run.py`, the pull step), with its
 rule in gallery-cache-builder; whether a difference stops the run or
 waits and tries again.
 **Ref:** gallery `daily_run.py`, `gallery_maintenance_run.py` (the
@@ -2452,7 +2456,7 @@ the deliberate limit, its number set then, each removal named.
 `documentation/HANDOFF_L446_daily_run_order_build_20261015.md`.
 
 #### [L-443] The rest of the orrery's objects come to the website as plotted positions (gallery + orrery, objects)
-<!-- L:443 status:OPEN upd:2026-10-24 section:A flag: rice: -->
+<!-- L:443 status:OPEN upd:2026-10-25 section:A flag: rice: -->
 - **Tony, 2026-10-13:** "I am anxious to add the symbols to the gallery
   too so visitors can at least plot positions." And his note of
   2026-10-10 on L-433: "then add the symbols for most if not all the
@@ -2750,7 +2754,56 @@ the deliberate limit, its number set then, each removal named.
   comets go with the spacecraft"); and the drawer's order, read as a
   Spacecraft group row right after Earth's, as the Comets group follows
   the Sun.
-**Gap (replaces the one below, 2026-10-24, close of the night):** build
+- **2026-10-25, build B, cut after the spacecraft**
+  (`documentation/HANDOFF_L443_slice2_buildB_spacecraft_20261025.md`).
+  The brief's three questions were answered before the session by
+  `COORD_L443_drawer_groups_ruling_20261024.md` (Tony, 22:49 and 23:27:
+  a separate group, not a room; the spacecraft group after Earth's row;
+  every group by JPL's classification, minor planets too) and
+  `COORD_L461_stop_ruling_20261025.md`. Built:
+  - The OSIRIS-APEX Earth pass of 2029-04-13 checked: NASA's
+    retargeting page gives "six close Sun passes" and "three gravity
+    assists from Earth"; the plan's six Sun passes near 0.5 AU and
+    three Earth passes after the sample drop match; the April 2029 pass
+    is the third assist. JPL's sheet lists no dates.
+  - The orbiter rule in `path_plan.py` (orrery patch_L443_12): stretches
+    of days inside a Hill sphere; one nearest approach a flyby, more a
+    capture with its arrival and departure; a capture to the end of the
+    data an arrival that stays; Sun passes stay; each event names its
+    kind; RULE 2 among a plan's inputs. Suite 23 of 23, two made-up
+    orbiters, a planted fault. Tony runs the preview again with it.
+  - The twelve keyed (orrery patch_L443_13) with JPL's names and the
+    approved words (BepiColombo's with no date; Juno's silent on its
+    end); a spacecraft serves no period; the preview flag and list go,
+    and "Path Plan -- every path, now" (--all --no-limit) takes the
+    button's place; the patch carries each preview plan made by the
+    orbiter rule into data/path_plans.json under its key.
+  - The website (gallery patch_L443_15): eleven entries beside Voyager 1,
+    whose typed windows go; a Spacecraft group after Earth's row, in
+    launch order, five labelled; the mirror copies each plan; the
+    builder fetches each path by its plan, whole again on a new plan,
+    each window thinned at its own scale (1% of the passing distance;
+    the first simulated build served about 1.7 MB before, 68 KB after),
+    as_of_today today's point, a re-fetch held out of the shrink gate by
+    name, the sanity bound 1,000 AU; the room fetches each positions
+    file and draws the path solid to the minute shown and dashed after,
+    its marker worked out between points with that error printed by;
+    the text box and source line in Tony's words of 2026-10-25, the
+    dashed part named "predicted", JPL's own word, by his ruling ("use
+    the word JPL uses"; Juno's data sheet: "a planning prediction"); a row
+    the cache lacks named, not fatal; the figures check's part 7 and the
+    drawer walk's section 20. Simulated end to end in the sandbox on
+    straight fake paths; the real build and the phone have not seen it.
+  - L-461 with it (`daily_run.py`).
+  - Skills: horizons-orbital-mechanics 1.11, gallery-cache-builder 1.12,
+    interactive-exhibit 1.24, safe-file-editing 1.14 (protocol v3.112).
+**Gap (replaces the one below, 2026-10-25):** Tony's runs (the handoff,
+sec. 2), the preview's report, the Daily Run and his phone look; then
+build B's second part, the comets, from the handoff's section 6: the
+plan for open-path comets by the span ruling, the fourteen keyed, the
+three groups by JPL's class, the words to Tony first; and every drawer
+group checked against its bodies' SBDB classes.
+**Gap (superseded above, 2026-10-24, close of the night):** build
 B, a fresh session, from
 `documentation/HANDOFF_L443_slice2_buildB_brief_20261024.md`: Tony's
 word on a room of their own and on the drawer's order; the OSIRIS-APEX
@@ -27180,6 +27233,39 @@ phone.
 **Ref:** L-477 (closed; the ruling); gallery `interactive.html`
 (`wireSunDrawer`, `sun-drawer-all`); interactive-exhibit, One chrome,
 many rooms.
+
+#### [L-471] A delivered patch is final (safe-file-editing, next version)
+<!-- L:471 status:DONE upd:2026-10-25 section:C flag: rice: -->
+- **Found 2026-10-22, closing L-443's slice 1** (Tony's run records,
+  `documentation/WHERE_WE_ARE_10-22-26_2027_run_record.md`). One class:
+  how a patch reaches Tony and what happens when it meets his folder.
+  Three rules for safe-file-editing's next version, method rather than
+  rulings (the protocol's Method Belongs to the Skill):
+  - **A delivered patch is final.** Claude never replaces a patch once
+    it is in Tony's folder; an addition goes in the next numbered
+    patch. Patch 3 was replaced twice after Tony had run its first
+    copy, leaving an unrun copy in the orrery's root that patch 4 had
+    to remove. Tony: "part of the problem is that I ran these patches
+    while you were still amending them. That's a lesson learned for
+    me." The fix is Claude's: a patch is delivered only when it is
+    ready to run, and Claude says so.
+  - **One route per document.** A document a patch writes is not also
+    handed to Tony to download, or he is told the patch will place it.
+    His downloaded copy of the design brief made patch 3 refuse; he
+    deleted it and ran it again. Tony: "why does a patch refuse when it
+    sees a document you gave to me as an artifact?"
+  - **A refusal says what to do, and a match is not a conflict.** When
+    a file the patch would write new already exists, the refusal names
+    the likely cause and the fix ("a copy of the same document you
+    downloaded: delete it and run again"); a file already holding
+    exactly what the patch would write is accepted.
+- **Done 2026-10-25:** the three rules are safe-file-editing 1.14's A
+  Delivered Patch Is Final, which also brings its read plan and takes
+  it off skills_index.py's PLAN_NOT_YET. Followed the same day: patches
+  13 and 15 were held until Tony's word on the spacecraft's words
+  rather than delivered and amended. Nothing left open.
+**Gap (closed 2026-10-25):** safe-file-editing's next version carries the three.
+**Ref:** L-443; `documentation/patch_L443_4_period_count_20261022.py`.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

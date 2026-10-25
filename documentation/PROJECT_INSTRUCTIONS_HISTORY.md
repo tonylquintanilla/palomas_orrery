@@ -3359,6 +3359,60 @@ resident.
 (Moved down from the resident protocol on 2026-10-24 when
 v3.111 made a fourth entry.)
 
+v3.109 (October 22, 2026): No rule changed in this document. TWO
+skill bumps, one version each (L-443, slice 1 of the objects, with
+L-470): interactive-exhibit 1.20 -> 1.21, horizons-orbital-mechanics
+1.8 -> 1.9. THE DRAWER'S GROUPS FOLD OPEN; EVERY COMET IS DRAWN FROM
+TODAY; A BARE LINK OPENS THE SOLAR SYSTEM ROOM; ONE RECORD SERVES A
+BODY, AND A SKIP SAYS WHAT FAILED.
+
+WHAT PROMPTED IT. L-443's design session. Tony, at the drawer mock-up:
+"B. this is the right view. the "room" would only apply if the object
+has additional features beyond the symbol." Asked whether the comets
+should be drawn from their elements of today, since a perihelion anchor
+is trusted only near its date and Encke's and Halley's spans had ended:
+"Yes." And stage 10, his ruling of 2026-10-01, built with the slice.
+Asked why Gonggong has no period, and whether the next session should
+test taking it off the skip list: "yes but only if it accords with our
+method or requires a method revision. and we should document our
+method developed in this session in the skill. ... some idiosyncrasies
+in Horizons are addressed with specific record numbers, which can
+change"
+
+WHAT CHANGED. interactive-exhibit's The Solar System room's drawer
+gains three bullets: groups fold open, with what a group row is, does
+and never is, and where its logic and checks live; every comet is drawn
+from today; the front door. Its rooms-section paragraph names the group
+rows, and the anatomy table's default room is corrected from the
+Explorer to the Solar System room. Its v1.18 entry moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule.
+horizons-orbital-mechanics gains Which Record Serves a Body: one record
+per body and centre in every reader, the helio_id around the Sun; a
+TNO's small-body record as the pair's centre; a pinned comet re-pinned
+to its newest record on Tony's word; JPL's exact name read before
+serving; an open orbit not served as an ellipse; a skip list's name
+saying which record failed around which centre, and the test for
+taking one off. Its v1.6 entry moved to documentation/SKILL_HISTORIES.md.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copies read
+interactive-exhibit 1.21 before exhibit work and horizons-orbital-mechanics
+1.9 before Horizons work. This session confirmed
+its loaded copies read interactive-exhibit 1.20, provenance-discipline
+2.34 and ledger-and-session-records 1.22 (discharging v3.108's
+obligation), gallery-cache-builder 1.11, horizons-orbital-mechanics
+1.8, gallery-assembler 1.3, safe-file-editing 1.13 and agentic-pre-test
+1.3, as the manifest expected.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.106 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-25 when
+v3.112 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

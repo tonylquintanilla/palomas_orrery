@@ -6,7 +6,17 @@ fires_when: Editing existing files, patch scripts, sed/regex edits, encoding che
 
 # Safe File Editing
 
-Skill version: 1.13 | 2026-10-05, with Anthropic's Claude Opus 5.5, at
+Read this file in 3 parts: lines 1-306, 307-579, 580-765.
+
+Skill version: 1.14 | 2026-10-25, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 0c27f47a. v1.14 (L-471) adds A Delivered Patch Is
+Final, three rules learned closing L-443's slice 1 on 2026-10-22: a
+patch in Tony's folder is never replaced, and an addition goes in the
+next numbered patch; one route per document, so a document a patch
+writes is not also handed over to download; and a refusal says what to
+do, while a file already holding exactly what the patch would write is
+accepted, not refused.
+Earlier: 1.13 | 2026-10-05, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 72e3b558. v1.13 (L-418) changes no rule. A contents
 list now opens the skill, generated from its headings, and
 skills_index.py --check fails if the two disagree. Version history
@@ -54,6 +64,7 @@ if this list and the headings disagree (L-418).
   - A Guard Must Not Fence What a Generator Rewrites [QUALITY]
 - Delivery Format -- Runnable by Tony, Not Just Reviewable [CRITICAL]
   - Naming and Archiving a Patch Script [QUALITY]
+  - A Delivered Patch Is Final [QUALITY]
   - A Paste Is An Unverified Transfer [QUALITY]
 - Encoding Gate [QUALITY]
   - Fix In Passing, Report It [QUALITY]
@@ -346,6 +357,41 @@ EVERY file, not just the last one. A later, unrelated success (a passing
 test suite, a clean compile) does not confirm an earlier patch actually
 executed; each deliverable needs its own confirmed evidence.
 
+
+### A Delivered Patch Is Final [QUALITY]
+
+Three rules about how a patch reaches the person who runs it, and what
+happens when it meets their folder (L-471).
+
+**A patch, once delivered, is never replaced.** An addition or a fix
+goes in the NEXT numbered patch. So a patch is delivered only when it
+is ready to run, and the deliverer says so; anything still waiting on
+a decision is held back until the decision is made, not delivered and
+amended. A replaced patch leaves two copies with one name, one of them
+possibly already run, and the next patch has to clean up after it.
+
+**One route per document.** A document a patch writes is not also
+handed over as a download or an attachment. If it must be seen before
+the patch runs, say that the patch will place it, and where. A
+downloaded copy saved into the folder the patch writes makes the patch
+refuse its own document.
+
+**A refusal says what to do, and a match is not a conflict.** When a
+file the patch would create already exists, the patch compares it:
+a file already holding exactly what the patch would write is accepted
+and reported ("already there, identical"); any other is refused, with
+the likely cause and the fix named ("a copy of the same document saved
+from a download: delete it and run again"). A refusal that only says
+"already exists" leaves the person to diagnose a state the patch
+author could have named.
+
+(Origin, 2026-10-22, closing L-443's slice 1. A patch was replaced
+twice after its first copy had been run, leaving an unrun copy in the
+orrery's root that the next patch had to remove; and a design brief
+handed over as a download made the patch that wrote it refuse. Tony:
+"part of the problem is that I ran these patches while you were still
+amending them" -- and the fix is the deliverer's; and "why does a patch
+refuse when it sees a document you gave to me as an artifact?")
 
 ### A Paste Is An Unverified Transfer [QUALITY]
 

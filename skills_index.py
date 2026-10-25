@@ -113,6 +113,9 @@ In write mode the tool rewrites every plan it finds before reading the
 skills, and names each one it changed. Annotation examples are now also
 read from reference files. A SKILL.md must not write another skill's
 references/ path, because the check would read it as its own.)
+Module updated: October 25, 2026 with Anthropic's Claude Opus 5.5 (L-471:
+safe-file-editing leaves PLAN_NOT_YET with its 1.14, which carries its
+read plan.)
 
 Role: devtool
 Domain: dev_tools
@@ -198,7 +201,7 @@ PLAN_NOT_YET = [
     # gallery-cache-builder left on 2026-10-10 with its 1.8 (L-216).
     # interactive-exhibit left on 2026-10-10 with its 1.13 (L-429).
     # orrery-coding-conventions left on 2026-10-19 with its 1.11 (L-385).
-    'safe-file-editing',
+    # safe-file-editing left on 2026-10-25 with its 1.14 (L-471).
 ]
 
 

@@ -2,14 +2,25 @@
 name: gallery-cache-builder
 description: Nightly data-serving pipeline for the Paloma's Orrery web gallery (Phase 1b, ledger L-098). Use for any task touching tools/gallery_cache_builder.py, tools/test_gallery_cache_builder_offline.py, inspect_staging.py, debug_encke_tp.py, gallery_cleanup.py, data/objects_config.json, the data/solar-system/ serving cache (coverage_index.json, feature_configs.json, positions/, raw/), atomic-swap / .prev / .staging_* / .quarantine_* semantics, Guard v2, dry-run / first-build / nightly modes, documentation/TESTING_PROTOCOL.md layers, or wiring interactive.html to the served data; for the rule that a config change is not deployed until the cache is rebuilt; and whenever a rename or a delete under data/ is refused with "Access is denied" (WinError 5), or the swap log data/cache_swap_log.jsonl is being read or written; and for daily_run.py's order, a failed pull and the run records check. Do NOT use for the Studio/converter/viewer curation chain (that is gallery-pipeline) or for projects other than Paloma's Orrery.
 fires_when: Nightly builder, atomic swap and its retry/roll-back/swap log, "Access is denied" under data/, coverage_index, serving cache, objects_config, dry-run/first-build/nightly, builder testing layers, the Daily
-  Run's order and a failed pull, the run records and their check
+  Run's order and a failed pull, the run records and their check, a spacecraft fetched by its path plan, a pull that does not match the push
 ---
 
 # Gallery Cache Builder (Phase 1b data serving)
 
-Read this file in 3 parts: lines 1-272, 273-552, 553-579.
+Read this file in 3 parts: lines 1-276, 277-453, 454-655.
 
-Skill version: 1.11 | 2026-10-17, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.12 | 2026-10-25, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 0c27f47a and gallery @ b1a4ce6c. v1.12 (L-443 build B,
+L-461) adds A Spacecraft Is Fetched by Its Plan: the builder fetches each
+spacecraft by the path plan the orrery makes, which the objects mirror
+copies onto its entry -- JPL's whole span, the predicted part included,
+each event's window at its own step and thinned at its own scale --
+whole again when the plan is a new one; its as_of_today is today's
+point; a re-fetch by a new plan is held out of the shrink gate by name.
+And under The Daily Run's Steps, Tony's ruling of 2026-10-25 on L-461,
+"stop. confirmed.": a pull that does not match the push is a failed
+pull, and the Daily Run stops before the builder.
+Earlier: 1.11 | 2026-10-17, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ a73bc24a and gallery @ f49b3e69. v1.11 (L-449) records
 the run records rule and its check. Every record is kept until the
 cause of the losses of 2026-10-15 and 10-16 is found; then a deliberate
@@ -26,17 +37,9 @@ carries today's export into the build. A pull that cannot reach the
 orrery fails by name, its mirror does not run, and the Daily Run stops
 before the builder: Tony's option A of 2026-10-15 (The Daily Run's
 Steps).
-Earlier: 1.7 | 2026-10-05, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 72e3b558. v1.7 (L-418) changes no rule. A contents
-list now opens the skill, generated from its headings, and
-skills_index.py --check fails if the two disagree. Version history
-older than the two entries below moved to
-documentation/SKILL_HISTORIES.md. Both because a plain read of a
-long file shows its start and end and leaves out its middle, where
-the rules are (Tony, 2026-10-05).
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
-on 2026-10-05 (L-418), 2026-10-14 (L-431), 2026-10-15 (L-446) and
-2026-10-17 (L-449).
+on 2026-10-05 (L-418), 2026-10-14 (L-431), 2026-10-15 (L-446),
+2026-10-17 (L-449) and 2026-10-25 (L-443).
 
 The standalone builder that fetches fresh JPL Horizons data and deploys the
 web gallery's served cache. Tony runs it MANUALLY and commits the result
@@ -60,6 +63,7 @@ if this list and the headings disagree (L-418).
 - The sibling report names what the builder did not make [QUALITY]
 - A config change is not deployed until the cache is rebuilt [CRITICAL]
 - The Builder Reads the Period's Centre [QUALITY]
+- A Spacecraft Is Fetched by Its Plan [QUALITY]
 - The Daily Run's Steps [QUALITY]
 - Validation stance
 - Commit with round-trip verify
@@ -393,6 +397,60 @@ calls The Drawn Orbit Follows the Period's Centre.
   come from a planet whose period the orrery fetches around '@0' when
   Tony plots it.
 
+## A Spacecraft Is Fetched by Its Plan [QUALITY]
+
+Built 2026-10-25 (L-443 build B), on the method horizons-orbital-mechanics
+calls How a Path's Events Are Found. Design: ruling 1 of
+`documentation/DESIGN_L443_slice2_rulings_20261023.md`, "One path rule,
+the orrery's."
+
+- THE PLAN IS THE ORRERY'S. `path_plan.py` makes each served
+  spacecraft's plan in the orrery's maintenance run; the objects export
+  carries it; `tools/mirror_objects.py` copies onto the entry in
+  `data/objects_config.json` what the builder and the room need: its
+  `made` date, its `span` (JPL's own, launch to the end of JPL's data),
+  its `backbone` (step and thinning), and each event's body, kind,
+  moment, distance, window and step. Never by hand.
+- THE WHOLE PATH, WHEN THE PLAN IS NEW (`fetch_path_by_plan`): the
+  backbone across the span at its step (7 days), thinned by
+  Douglas-Peucker at its tolerance (0.02 AU); each event's window at the
+  event's own step, clipped to the span, thinned at the event's own
+  scale (`WINDOW_THIN_FRACTION`, 1% of its passing distance) and merged
+  after the backbone's thinning so a flyby is never thinned away; then
+  the daily tail. JPL's predicted part is fetched with the rest; nothing
+  is extended past the span. "New" means the raw archive's `plan_made`
+  or `plan_span` differs from the entry's, or a first build, or
+  --refresh-spacecraft; the archive is cleared first, since JPL revises
+  the predicted part.
+- OTHERWISE, ONLY THE TAIL (`fetch_path_tail`): daily from the freeze
+  window before today to two days after (`PATH_TAIL_AHEAD_DAYS`), inside
+  the span, so the room, drawing the minute it is opened, finds a point
+  either side of it until the next build.
+- EVERY POINT IS KEYED TO THE MINUTE (`MINUTE_KEY`), since a window's
+  step can be a minute; every other object keeps day keys.
+- AS_OF_TODAY IS TODAY'S POINT, the latest at or before today, not the
+  path's last (which may be in 2100); none when no point lies within two
+  days before today, so a path whose data ended serves no "you are here"
+  and passes #T.
+- THE SHRINK GATE HOLDS A RE-FETCH BY A NEW PLAN OUT OF ITS COUNT, and
+  names it, old count and new: its count is its plan's, not the old one.
+  The suite shows the gate refusing the same re-fetch without the
+  exemption.
+- THE SPACECRAFT SANITY BOUND IS 1,000 AU (`SPACECRAFT_SANITY_AU`); the
+  Voyagers' JPL data runs to 2100, past 400 AU.
+- NO PLAN AND NO TYPED START: the object fails by name ("no path plan
+  is served for this spacecraft yet") and is served last-good, never
+  asked from 1970. A spacecraft with a typed `overrides.spacecraft`
+  start and no plan keeps the old fetch; none does since 2026-10-25,
+  Voyager 1's typed windows having been replaced by its plan's events.
+- THE OFFLINE SUITE gives a spacecraft with no plan a stand-in plan, as
+  it gives stand-in drawings, so it does not depend on a pull: in the
+  config as committed, a plan arrives only when the mirror copies it.
+- SIZE: the first simulated build of 2026-10-25, on fake straight paths,
+  served 68 KB of positions for the twelve; before the windows were
+  thinned at their own scale it was about 1.7 MB. The real paths curve,
+  so the first real build measures it.
+
 ## The Daily Run's Steps [QUALITY]
 
 `daily_run.py`, Tony's design of 2026-09-27 (L-281), is FOUR steps
@@ -434,6 +492,24 @@ in red -- was declined. `tools/test_pull_failures.py` ("Pull failures",
 gating) runs each pull with its network replaced by one that fails,
 three ways, so these branches are tested every day and not only on the
 day the network is down.
+
+A PULL THAT DOES NOT MATCH THE PUSH IS A FAILED PULL (L-461; Tony,
+2026-10-25: "stop. confirmed."). After the pulls, `daily_run.py`
+compares each pull's recorded orrery commit (`data/constants_export.sha`,
+`data/objects_export.sha`, `data/drawings/pulled_at.sha`) with the newest
+commit in Tony's orrery folder, the folder `palomas_orrery_for_github`
+beside the website's, read from its `.git` folder (HEAD, then the
+branch's loose ref or packed-refs), so no git command is needed. When
+they differ, the run STOPS before the builder, naming both commits and
+the two likely causes -- the orrery's work is not pushed, or GitHub has
+not finished serving a push -- and says to push, or wait a minute if the
+push just went, then run the Daily Run again. No retry, no wait: the one
+time it happened (2026-10-21) the cause was an unpushed orrery, which
+waiting cannot fix, and a run that waits hides the common cause behind
+the rare one. A folder or commit it cannot read stops it too, saying
+where it looked. `python daily_run.py --check` runs the comparison on
+five made-up cases and two planted faults (one that always matches, one
+that ignores the drawings' pull).
 
 THE RUN RECORDS ARE KEPT, AND CHECKED AFTER THE BUILDER (L-449). Each
 build writes one record to `raw/runs/`, and the builder copies the old

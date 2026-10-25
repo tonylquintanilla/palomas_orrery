@@ -78,7 +78,9 @@ One JSON file, data/objects_export.json:
                       period       the body's orbital period, by the
                                    orrery's fallback order (L-431, Tony's
                                    ruling 5): see PERIOD below. null for
-                                   the Sun, which orbits nothing here
+                                   the Sun, which orbits nothing here,
+                                   and for a spacecraft, which has no
+                                   orbital period (L-443 build B)
                       path         a spacecraft's only (a trajectory whose
                                    id starts with '-'): its plan from
                                    data/path_plans.json -- made, span,
@@ -226,6 +228,9 @@ Module updated: October 24, 2026 with Anthropic's Claude Opus 5.5 (L-443,
 slice 2: schema 3. Each served spacecraft carries its path's plan, which
 path_plan.py writes in the maintenance run just before this runs; the
 plans file is an input now, and fingerprinted.)
+Module updated: October 25, 2026 with Anthropic's Claude Opus 5.5 (L-443,
+build B: a spacecraft serves no period, null as the Sun's is, where the
+period block would have said "Not yet fetched from JPL".)
 Module updated: October 22, 2026 with Anthropic's Claude Opus 5.5 (L-443,
 slice 1: a keyed entry with a 'helio_id' is served by it, as a small
 body, through served_identity, so the Sun-centred rooms take the record
@@ -623,8 +628,16 @@ def build_export(text, cache=None, typed_table=None, confirmations=None,
     records = (confirmations or {}).get("objects") or {}
     period_inputs = {}
     for key, obj in objects.items():
-        period, inputs = period_block(obj["name"], obj["object_type"],
-                                      cache, typed_table)
+        if is_path(obj):
+            # L-443 build B: a spacecraft has no orbital period to serve.
+            # plotting never asks elements for a mission (is_mission), so
+            # the period block would read "Not yet fetched from JPL", which
+            # is not true of a spacecraft; it serves none, as the Sun does,
+            # and the website prints no period line for it.
+            period, inputs = None, None
+        else:
+            period, inputs = period_block(obj["name"], obj["object_type"],
+                                          cache, typed_table)
         obj["period"] = period
         obj["confirmation"] = confirmation_of(records.get(key))
         period_inputs[key] = inputs
@@ -646,7 +659,7 @@ def build_export(text, cache=None, typed_table=None, confirmations=None,
 def period_summary(key, period):
     """One line naming an exported period, for the run's output."""
     if period is None:
-        return "%s: no period (the centre)" % key
+        return "%s: no period (the centre, or a spacecraft)" % key
     if period["kind"] == "none":
         return "%s: none (not yet fetched)" % key
     if period["open_orbit"]:

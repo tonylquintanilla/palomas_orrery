@@ -1,14 +1,28 @@
 ---
 name: horizons-orbital-mechanics
 description: JPL Horizons API and orbital mechanics reference for the Paloma's Orrery project (astroquery Horizons queries, orbit_data_manager, osculating_cache_manager, idealized_orbits, apsidal_markers, spacecraft_encounters, close_approach_data, position_accuracy, orbital_period, period_fetch, path_plan). Use for any Paloma's Orrery task involving Horizons queries or ephemerides, coordinate center bodies, reference frames, osculating elements, orbit caches, a small body's position uncertainty (VEC_TABLE 2xr), orbital periods and the centre they are taken around, the drawn orbit and its markers' dates, which Horizons record serves a body (helio_id, a pinned comet record, a skip list), encounter or flyby resolution, or whenever a rendered orbit looks wrong or an ephemeris API returns empty. Do not use for projects other than Paloma's Orrery.
-fires_when: Horizons queries, centers, frames, osculating elements, encounters, comet record pinning, 2xr uncertainties, periods, the drawn orbit's centre, the Horizons check (horizons_check.py, its period comparison and the data sheets' re-read), the period fetch before it (period_fetch.py), which record serves a body (helio_id, re-pinning a comet, JPL's exact name, a body on a skip list), a spacecraft path's plan and its flybys (path_plan.py -- the Hill sphere, JPL's GM, the window and step)
+fires_when: Horizons queries, centers, frames, osculating elements, encounters, comet record pinning, 2xr uncertainties, periods, the drawn orbit's centre, the Horizons check (horizons_check.py, its period comparison and the data sheets' re-read), the period fetch before it (period_fetch.py), which record serves a body (helio_id, re-pinning a comet, JPL's exact name, a body on a skip list), a spacecraft path's plan and its flybys (path_plan.py -- the Hill sphere, JPL's GM, the window and step, the orbiter rule for an arrival, a departure, a capture), a comet whose designation matches its own pieces
 ---
 
 # Horizons and Orbital Mechanics Reference
 
-Read this file in 2 parts: lines 1-220, 221-477.
+Read this file in 3 parts: lines 1-234, 235-414, 415-560.
 
-Skill version: 1.10 | 2026-10-24, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.11 | 2026-10-25, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 0c27f47a. v1.11 (L-443 build B, with L-470) adds the
+orbiter rule to How a Path's Events Are Found, by Tony's ruling of
+2026-10-24 ("yes that would work well"): the days a path spends inside
+one body's Hill sphere form a stretch; one nearest approach in it is a
+flyby, more than one a capture, whose first and last nearest approaches
+are the events, and a capture running to the end of JPL's data is an
+arrival with no departure; passes of the Sun stay events; the rule is
+among a plan's inputs. Also: a long JPL run prints as it goes, saves as
+it goes and keeps under the maintenance run's 15 minutes; the twelve
+are keyed, so KEYING loses its preview. And two rules from C/2025 K1 to
+Which Record Serves a Body: a comet whose designation also matches its
+own pieces is asked by JPL's permanent number for it; a path cache keyed
+by name does not notice a new record.
+Earlier: 1.10 | 2026-10-24, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 206f96c9. v1.10 (L-443, slice 2) adds How a Path's
 Events Are Found, the method path_plan.py was built on: an event is a
 nearest approach inside the body's Hill sphere, from JPL's own GM, that
@@ -28,15 +42,30 @@ classes as open is not drawn as an ellipse; and a name on a skip list
 says which record failed around which centre, and is tested before it
 comes off (Tony, 2026-10-22: "some idiosyncrasies in Horizons are
 addressed with specific record numbers, which can change").
-Earlier: 1.8 | 2026-10-15, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 77245ea8. v1.8 (L-445) adds one bullet under A Period
-Depends on Its Centre: a body's period may be asked of another target
-than the body. Earth's, around the Sun, is asked of the Earth-Moon
-barycentre, target 3; the record carries the target, and every reader
-takes it from the record.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
 on 2026-10-12, 2026-10-13 and 2026-10-14 (L-431), 2026-10-15
-(L-444, L-445), 2026-10-22 (L-443) and 2026-10-24 (L-443).
+(L-444, L-445), 2026-10-22 (L-443), 2026-10-24 (L-443) and 2026-10-25
+(L-443).
+
+## Contents
+
+Generated from this file's headings. skills_index.py --check fails
+if this list and the headings disagree (L-418).
+
+- Horizons Center Body Rules
+- JPL Binary System IDs
+- Which Record Serves a Body (L-443)
+- Small-Body Record Pinning (periodic comets)
+- A Small Body's Uncertainty Comes With Its Position (L-401)
+- A Period Depends on Its Centre (L-431)
+- The Drawn Orbit Follows the Period's Centre (L-431, build 2)
+- Checking an Entry Against JPL (L-395)
+- Where the Check Lives, and What It Compares (L-395, L-431 build 3)
+- How a Path's Events Are Found (L-443)
+- Reference Frame Diagnostic
+- Query Mechanics
+- Encounter and Flyby Resolution
+- Field Notes
 
 ## Horizons Center Body Rules
 
@@ -119,6 +148,24 @@ record each question asks, and to ask the same one everywhere.
   stays and gains its comment. A skip kept for some centres and not
   others is not in this method yet; it is written here before it is
   built.
+- A COMET WHOSE DESIGNATION MATCHES ITS OWN PIECES IS ASKED BY JPL'S
+  PERMANENT NUMBER (L-470, Tony's ruling of 2026-10-24, "B"). After
+  C/2025 K1 broke up, asking for "C/2025 K1" returned four records, the
+  comet and its pieces B, C and D; the record number the entry had been
+  pinned to instead (90004912) was later given to another comet,
+  PANSTARRS (C/2025 B1), so the orrery drew the wrong comet. JPL's
+  permanent number for the comet, asked as DES=1004075;, returns exactly
+  its newest fit. Each piece is asked by its own designation (C/2025
+  K1-B and so on), which returns one record. A record number is pinned
+  only for a periodic comet whose designation alone is ambiguous across
+  apparitions.
+- A PATH CACHE KEYED BY NAME DOES NOT NOTICE A NEW RECORD (L-470). The
+  orrery's path cache, data/orbit_paths.json on Tony's machine, is keyed
+  by name and centre, so when an entry's id changes, a path cached under
+  the old id is still served under the name. After an id change, compare
+  the cached path with the new record's positions at shared dates before
+  trusting it (the C/2025 K1 patch did, and found it was the comet,
+  within 0.024 AU of piece B on 320 dates).
 
 ## Small-Body Record Pinning (periodic comets)
 
@@ -422,13 +469,49 @@ first run against JPL is Tony's.
 - TIMES. Horizons labels a vector table's times TDB (its JDTDB column);
   the plan writes its moments in that scale. The first live run is the
   test that the windows' START and STOP times are read in the same.
+- THE ORBITER RULE (Tony's ruling of 2026-10-24, L-443; built
+  2026-10-25, `orbiter_rule`). The days a path spends inside one body's
+  Hill sphere, each day tested at its distance less half a day's travel,
+  form a STRETCH. One nearest approach in a stretch is a FLYBY. More than
+  one is a CAPTURE: its first nearest approach, the ARRIVAL, is an
+  event, and its last before the spacecraft leaves, the DEPARTURE; the
+  approaches between are not, because in the Solar System room the
+  spacecraft rides with the body and the loops wait for the body's own
+  room. A capture that runs to the end of the days searched is an
+  arrival with no departure (`stays`: a landing, or the end of JPL's
+  data); one already under way on the first day searched gives no new
+  arrival (a plan made again carries it). The Sun has no Hill-sphere
+  gate, so every nearest approach to it can be an event, kind
+  `perihelion` (Parker's 42 among them). Each event names its kind:
+  flyby, arrival, departure or perihelion. On the preview of 2026-10-24
+  the rule turns Juno's 110 passes of Jupiter and Europa Clipper's 83
+  into one arrival each.
+- THE RULE IS AMONG A PLAN'S INPUTS (`RULE`, now 2), so a plan made by
+  an older rule is made again at once, like one whose id or span
+  changed.
+- A LONG RUN PRINTS AS IT GOES, SAVES AS IT GOES, AND KEEPS UNDER THE
+  MAINTENANCE RUN'S 15 MINUTES (Tony, 2026-10-24, after a first preview
+  sat 20 minutes on a blank window). A first line before JPL is asked
+  anything; a line, with the seconds since the start, as each answer
+  arrives and each event is found; each plan saved as it is made; and a
+  10-minute limit after which nothing new is started, what is left
+  named and taken up by the next run. The dashboard's "Path Plan --
+  every path, now" lifts the limit (--all --no-limit). The same shape
+  suits any JPL run that can take minutes.
 - KEYING. A key in the objects export with no website entry stops the
   website's objects mirror, and with it the Daily Run's pulls. So a
-  spacecraft is keyed in the same round as its website entry. Until
-  slice 2's are, `path_plan.py --preview` plans the twelve by name into
-  data/path_plans_preview.json, which the export never reads
-  (temporary; the list, the flag and its dashboard button go when they
-  are keyed).
+  spacecraft is keyed in the same round as its website entry. The twelve
+  were keyed on 2026-10-25 (orrery patch_L443_13), and the temporary
+  --preview flag that planned them by name before then went with it;
+  that patch carried each preview plan made by the orbiter rule into
+  data/path_plans.json under its new key, so no second half-hour run was
+  needed. A spacecraft serves no orbital period in the export.
+- ON THE WEBSITE the builder thins each event's window at the event's
+  own scale, a point kept where the path bends away from the chord by
+  more than 1% of the passing distance (gallery-cache-builder, A
+  Spacecraft Is Fetched by Its Plan): the encounter rule's window for a
+  pass of the Sun at 0.3 AU runs about 50 days either side at 6-hour
+  steps, some 400 points for a gentle curve.
 
 ## Reference Frame Diagnostic
 

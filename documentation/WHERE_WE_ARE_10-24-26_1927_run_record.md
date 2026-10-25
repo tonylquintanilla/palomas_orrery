@@ -1977,3 +1977,1289 @@ FILES WRITTEN THIS RUN
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
 3. Move the patch into `documentation\`, then commit and push, with this note included. -- b050701612492e233325a746f04f1c96e81a6d8f
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+**Session: OPEN: 10-25-26 0841: Opus: Slice 2 Build B (L-443)**
+
+I'll read the build B brief and the two ruling notes from your orrery folder, pull the repo at 0c27f47, and then start at the brief's section 0.
+
+The orrery folder is `orrery`. Let me find the notes in its documentation folder.
+
+This is the live orrery folder. Staging the three notes.
+
+Both repos are where the brief expects: orrery at 0c27f47 (close patch pushed), gallery at b1a4ce6. Now the skill version check and the reading list.
+
+Loaded skills read interactive-exhibit 1.23 and horizons-orbital-mechanics 1.10, matching the manifest, so v3.111's obligation is discharged. Now the reading list.
+
+I've read the brief, both notes, the run record and the design records. Before building, the one check owed before anything is served: OSIRIS-APEX's Earth pass on 2029-04-13.
+
+Now the suite, to see how the made-up solar system is built before I add the orbiter rule.
+
+The suite builds a fake JPL from simple motions, so an orbiter fits in as two more made-up spacecraft. Let me look at the last patch for its house form before writing the orbiter rule.
+
+The patches are generated from a working copy as all-or-nothing anchor edits. Loading the two skills that govern editing and pre-delivery testing.
+
+Now the orbiter rule. I'll keep a pristine clone and edit a working copy, so the patch can be generated from the difference.
+
+The suite passes as it stands (20 of 20). Now let me see how the export carries plans, since the orbiter rule adds a field to each event.
+
+Events travel to the website whole, so a `kind` field on each event reaches the builder with no export change. Writing the orbiter rule.
+
+Now the suite: two made-up orbiters around Mars in their own list, one that leaves and one that stays to the end of its data.
+
+The planted fault fails for the right reason: five separate "flybys" for the orbiter that leaves. Checking nothing else pins the old count or the old line wording.
+
+Generating patch A (the orbiter rule) and testing it on a clean copy of the repo, then on copies of the files staged from your folder.
+
+Now against the copies in your folder, to confirm they match GitHub.
+
+Your folder matches GitHub, so patch A applies there as tested. Placing it in your orrery folder.
+
+**Patch A is in your orrery folder: `patch_L443_12_orbiter_rule_20261025.py`.** It teaches the path plan the orbiter rule you ruled last night. While you run it, I'll build the rest.
+
+Two notes first:
+- **OSIRIS-APEX checked, nothing owed.** NASA says its route to Apophis takes "six close Sun passes" and "three gravity assists from Earth". The plan found exactly that. The April 13, 2029 Earth pass is the third gravity assist.
+- **Skills confirmed:** interactive-exhibit loads as 1.23 and horizons-orbital-mechanics as 1.10, as the manifest expects.
+
+Your steps, in the orrery folder, each with the Run button:
+1. Run `patch_L443_12_orbiter_rule_20261025.py`. It prints two "ok" lines, then "patch applied".
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L443_12_orbiter_rule_20261025.py
+ok  path_plan.py (13 edits)
+ok  test_path_plan.py (6 edits)
+patch applied: the orbiter rule, Oct 25 (2 files edited, 0 new)
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+2. Run `test_path_plan.py`. The last line should read "23 of 23 checks passed".
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/test_path_plan.py
+  first run asked JPL 36 questions
+    craft_a                planned (never planned): 1 events, 0 carried, searched from 2025-01-01
+        2025-03-01 12:17 TDB  Earth                  30000 km    10.000 km/s  step 10m  flyby
+    craft_b                planned (never planned): 1 events, 0 carried, searched from 2025-11-06
+        2026-02-10 06:43 TDB  Testroid                 500 km     5.000 km/s  step 1m   flyby
+    Not searched: Gone: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside
+  ok    1. Craft A's Earth flyby found exactly (ok)
+  ok    9. each span is JPL's own: a list end past JPL's data is clipped, a start JPL refuses moves on ({'start': '2025-01-01', 'end': '2025-05-20'}, {'start': '2025-11-06', 'end': '2026-05-01'})
+  ok    1. no distant body is reported as a pass (none)
+  ok    1. Craft B's Testroid flyby found exactly (ok)
+  ok    1. Earth's flyby asked centred on Earth (2), the asteroid's around the Sun (1)
+  ok    6. the refused body is named as not searched
+  ok    verdict names the paths: PATH PLAN: 2 paths, events craft_a 1, craft_b 1. Asked JPL for: craft_a, craft_b.
+  ok    2. a second run the same day asks nothing (0 calls)
+  ok    3. 31 days later the old events are carried, none doubled (1 carried, 1 events)
+  ok    3. ... and no carried flyby is asked again
+  ok    4. a changed list entry makes the plan again in full, and the span stays JPL's
+  ok    5. JPL down: UNREACHABLE by name, plans kept, one question asked (1)
+  ok    8. --preview plans an unkeyed name into its own file, names the one not in the list, and leaves the plans untouched
+  ok    10. a first line before JPL is asked, then a line for each span, each body's positions and each flyby (first:   [    0 s] started 10:30:26: 2 path(s) listed, 2 due (Craft A, Craft ; missing: none)
+  ok    11. each plan saved as it is made (on disk then: ['craft_a'])
+  ok    11. planted fault caught: the plans written only at the end
+  ok    12. past the time limit the next path is left for the next run, which plans it (first run: PATH PLAN: 1 paths, events craft_a 1. Asked JPL for: craft_a. Left for the next run (the 10-minute limit): craft_b.; then: PATH PLAN: 2 paths, events craft_a 1, craft_b 1. Asked JPL for: craft_b.)
+  ok    12. planted fault caught: the limit never passing
+  ok    13. the orbiter rule: an orbiter that leaves has one arrival and one departure, one that stays has one arrival and no departure, each at its minute (craft_d [('arrival', '2025-03-10 05:23'), ('departure', '2025-04-18 00:35')]; craft_e [('arrival', True)])
+  ok    13. planted fault caught: every nearest approach inside the Hill sphere kept (rule 1)
+  ok    14. every event names its kind, and a plan made by the older rule is made again (kinds ['flyby']; rule-1 plan made again: True)
+  ok    7. planted fault caught: the backbone's step set to nothing
+  ok    7. planted fault caught: the fine pass skipped
+
+PATH PLAN SUITE: 23 of 23 checks passed
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+3. On the dashboard, Tools and Caches, press **"Path Plan -- preview of slice 2"**. The rule changed, so all twelve plans are made again. It asks JPL for everything and takes about half an hour.
+
+======================================================================
+PATH PLAN -- where each served path needs finer steps (L-443) -- PREVIEW of slice 2's twelve, into data/path_plans_preview.json
+  no time limit; a line as it goes, then the report
+======================================================================
+  [    0 s] started 11:58:44: 12 path(s) listed, 12 due (Voyager 1, Voyager 2, New Horizons, Juno, OSIRISAPE, Parker, Lucy, JUICE, Psyche, Clipper, BepiColombo, SolO); asking JPL for each one's span first
+  [    3 s] Voyager 1: JPL has positions from 1977-09-06 to 2100-01-01
+  [    6 s] Voyager 2: JPL has positions from 1977-08-21 to 2100-01-01
+  [   10 s] New Horizons: JPL has positions from 2006-01-20 to 2049-12-31
+  [   13 s] Juno: JPL has positions from 2011-08-06 to 2028-09-02
+  [   17 s] OSIRISAPE: JPL has positions from 2023-09-24 to 2030-03-22
+  [   21 s] Parker: JPL has positions from 2018-08-13 to 2029-12-31
+  [   24 s] Lucy: JPL has positions from 2021-10-17 to 2033-04-02
+  [   27 s] JUICE: JPL has positions from 2023-04-15 to 2031-07-21
+  [   30 s] Psyche: JPL has positions from 2023-10-14 to 2029-02-11
+  [   33 s] Clipper: JPL has positions from 2024-10-15 to 2034-09-03
+  [   36 s] BepiColombo: JPL has positions from 2018-10-21 to 2027-04-10
+  [   39 s] SolO: JPL has positions from 2020-02-11 to 2030-11-20
+  [   39 s] Sun: asking JPL for its daily positions, 1977-08-21 to 2100-01-01
+  [   42 s] Sun: 44694 days received
+  [   43 s] Mercury: data sheet read; GM found
+  [   43 s] Mercury: asking JPL for its daily positions, 1977-08-21 to 2100-01-01
+  [   46 s] Mercury: 44694 days received
+  [   47 s] Sun: data sheet read; GM found
+  [   49 s] Venus: data sheet read; GM found
+  [   49 s] Venus: asking JPL for its daily positions, 1977-08-21 to 2100-01-01
+  [   52 s] Venus: 44694 days received
+  [   53 s] Earth: data sheet read; GM found
+  [   53 s] Earth: asking JPL for its daily positions, 1977-08-21 to 2100-01-01
+  [   56 s] Earth: 44694 days received
+  [   58 s] Moon: data sheet read; GM found
+  [   58 s] Moon: asking JPL for its daily positions, 1977-08-21 to 2100-01-01
+  [   60 s] Moon: 44694 days received
+  [   62 s] Mars: data sheet read; GM found
+  [   62 s] Mars: asking JPL for its daily positions, 1977-08-21 to 2100-01-01
+  [   65 s] Mars: 44694 days received
+  [   66 s] Jupiter: data sheet read; GM found
+  [   66 s] Jupiter: asking JPL for its daily positions, 1977-08-21 to 2100-01-01
+  [   69 s] Jupiter: 44694 days received
+  [   69 s] Voyager 1: 1 near approach(es) to Jupiter to look at closely
+  [   73 s] Voyager 1: flyby of Jupiter, 1979-03-05 12:05 TDB, 348,436 km, 29.037 km/s
+  [   75 s] Saturn: data sheet read; GM found
+  [   75 s] Saturn: asking JPL for its daily positions, 1977-08-21 to 2100-01-01
+  [   78 s] Saturn: 44694 days received
+  [   78 s] Voyager 1: 1 near approach(es) to Saturn to look at closely
+  [   81 s] Voyager 1: flyby of Saturn, 1980-11-12 23:46 TDB, 184,031 km, 25.308 km/s
+  [   82 s] Uranus: data sheet read; GM found
+  [   82 s] Uranus: asking JPL for its daily positions, 1977-08-21 to 2100-01-01
+  [   85 s] Uranus: 44694 days received
+  [   86 s] Neptune: data sheet read; GM found
+  [   86 s] Neptune: asking JPL for its daily positions, 1977-08-21 to 2100-01-01
+  [   89 s] Neptune: 44694 days received
+  [   91 s] Pluto: data sheet read; GM found
+  [   91 s] Pluto: asking JPL for its daily positions, 1977-08-21 to 2100-01-01
+  [   94 s] Pluto: 44694 days received
+  [   95 s] Eurybates: data sheet read; no GM, so not searched
+  [   97 s] Patroclus: data sheet read; no GM, so not searched
+  [   98 s] Polymele: data sheet read; no GM, so not searched
+  [   99 s] Leucus: data sheet read; no GM, so not searched
+  [  101 s] Orus: data sheet read; no GM, so not searched
+  [  102 s] Chariklo: data sheet read; no GM, so not searched
+  [  103 s] Ceres: data sheet read; GM found
+  [  103 s] Ceres: asking JPL for its daily positions, 1977-08-21 to 2100-01-01
+  [  107 s] Ceres: 44694 days received
+  [  108 s] Haumea: data sheet read; no GM, so not searched
+  [  110 s] Eris: data sheet read; no GM, so not searched
+  [  111 s] Gonggong: data sheet read; no GM, so not searched
+  [  112 s] Makemake: data sheet read; no GM, so not searched
+  [  114 s] Mani: data sheet read; no GM, so not searched
+  [  115 s] Orcus: data sheet read; no GM, so not searched
+  [  116 s] Quaoar: data sheet read; no GM, so not searched
+  [  118 s] Sedna: data sheet read; no GM, so not searched
+  [  119 s] Leleakuhonua: data sheet read; no GM, so not searched
+  [  121 s] 2017 OF201: data sheet read; no GM, so not searched
+  [  122 s] 2025 PN7: data sheet read; no GM, so not searched
+  [  123 s] 2024 PT5: data sheet read; no GM, so not searched
+  [  125 s] 2025 PY1: data sheet read; no GM, so not searched
+  [  126 s] 2023 JF: data sheet read; no GM, so not searched
+  [  128 s] 2024 DW: data sheet read; no GM, so not searched
+  [  129 s] 2024 YR4: data sheet read; no GM, so not searched
+  [  130 s] Kamo oalewa: data sheet read; no GM, so not searched
+  [  132 s] 16 Psyche: data sheet read; GM found
+  [  132 s] 16 Psyche: asking JPL for its daily positions, 1977-08-21 to 2100-01-01
+  [  135 s] 16 Psyche: 44694 days received
+  [  137 s] Apophis: data sheet read; no GM, so not searched
+  [  138 s] Bennu: data sheet read; no GM, so not searched
+  [  139 s] Eros: data sheet read; no GM, so not searched
+  [  141 s] Dinkinesh: data sheet read; GM found
+  [  141 s] Dinkinesh: asking JPL for its daily positions, 1977-08-21 to 2100-01-01
+  [  144 s] Dinkinesh: 44694 days received
+  [  145 s] Itokawa: data sheet read; GM found
+  [  145 s] Itokawa: asking JPL for its daily positions, 1977-08-21 to 2100-01-01
+  [  149 s] Itokawa: 44694 days received
+  [  150 s] Lutetia: data sheet read; no GM, so not searched
+  [  152 s] Ryugu: data sheet read; GM found
+  [  152 s] Ryugu: asking JPL for its daily positions, 1977-08-21 to 2100-01-01
+  [  155 s] Ryugu: 44694 days received
+  [  156 s] Steins: data sheet read; no GM, so not searched
+  [  158 s] Donaldjohanson: data sheet read; no GM, so not searched
+  [  159 s] Vesta: data sheet read; GM found
+  [  159 s] Vesta: asking JPL for its daily positions, 1977-08-21 to 2100-01-01
+  [  162 s] Vesta: 44694 days received
+  [  164 s] Arrokoth: data sheet read; no GM, so not searched
+  [  165 s] Ixion: data sheet read; no GM, so not searched
+  [  166 s] GV9: data sheet read; no GM, so not searched
+  [  168 s] Varuna: data sheet read; no GM, so not searched
+  [  169 s] Ammonite: data sheet read; no GM, so not searched
+  [  171 s] Tempel 2: data sheet read; no GM, so not searched
+  [  172 s] Schaumasse: data sheet read; no GM, so not searched
+  [  173 s] Howell: data sheet read; no GM, so not searched
+  [  174 s] Churyumov: data sheet read; GM found
+  [  174 s] Churyumov: asking JPL for its daily positions, 1977-08-21 to 2100-01-01
+  [  177 s] Churyumov: 44694 days received
+  [  179 s] Hale-Bopp: data sheet read; no GM, so not searched
+  [  180 s] Halley: data sheet read; no GM, so not searched
+  [  181 s] Encke: data sheet read; no GM, so not searched
+  [  183 s] Hyakutake: data sheet read; no GM, so not searched
+  [  184 s] Lemmon: data sheet read; no GM, so not searched
+  [  186 s] Ikeya-Seki: data sheet read; no GM, so not searched
+  [  187 s] NEOWISE: data sheet read; no GM, so not searched
+  [  188 s] SWAN: data sheet read; no GM, so not searched
+  [  190 s] MAPS: data sheet read; no GM, so not searched
+  [  190 s] Voyager 1: planned, 2 event(s); saved
+  [  190 s] Voyager 2: 1 near approach(es) to Sun to look at closely
+  [  193 s] Voyager 2: pass of the Sun of Sun, 1977-08-29 17:41 TDB, 150,040,530 km, 39.044 km/s
+  [  194 s] Voyager 2: 1 near approach(es) to Jupiter to look at closely
+  [  197 s] Voyager 2: flyby of Jupiter, 1979-07-09 22:30 TDB, 721,375 km, 20.230 km/s
+  [  197 s] Voyager 2: 1 near approach(es) to Saturn to look at closely
+  [  200 s] Voyager 2: flyby of Saturn, 1981-08-26 03:25 TDB, 160,691 km, 24.208 km/s
+  [  200 s] Voyager 2: 1 near approach(es) to Uranus to look at closely
+  [  203 s] Voyager 2: flyby of Uranus, 1986-01-24 18:00 TDB, 107,154 km, 18.033 km/s
+  [  203 s] Voyager 2: 1 near approach(es) to Neptune to look at closely
+  [  206 s] Voyager 2: flyby of Neptune, 1989-08-25 03:57 TDB, 29,241 km, 27.327 km/s
+  [  207 s] Voyager 2: planned, 5 event(s); saved
+  [  208 s] New Horizons: 1 near approach(es) to Jupiter to look at closely
+  [  211 s] New Horizons: flyby of Jupiter, 2007-02-28 05:45 TDB, 2,304,505 km, 21.219 km/s
+  [  211 s] New Horizons: 1 near approach(es) to Pluto to look at closely
+  [  214 s] New Horizons: flyby of Pluto, 2015-07-14 11:50 TDB, 13,680 km, 13.778 km/s
+  [  215 s] New Horizons: planned, 2 event(s); saved
+  [  215 s] Juno: 2 near approach(es) to Sun to look at closely
+  [  217 s] Juno: pass of the Sun of Sun, 2011-08-15 08:40 TDB, 150,984,250 km, 34.891 km/s
+  [  220 s] Juno: pass of the Sun of Sun, 2013-08-31 04:36 TDB, 131,868,002 km, 38.073 km/s
+  [  220 s] Juno: 1 near approach(es) to Earth to look at closely
+  [  223 s] Juno: flyby of Earth, 2013-10-09 19:23 TDB, 6,942 km, 14.926 km/s
+  [  223 s] Juno: 1 near approach(es) to Moon to look at closely
+  [  226 s] Juno: 1 near approach(es) to Jupiter to look at closely
+  [  229 s] Juno: arrival of Jupiter, 2016-07-05 02:49 TDB, 75,979 km, 57.937 km/s
+  [  229 s] Juno: planned, 4 event(s); saved
+  [  230 s] OSIRISAPE: 9 near approach(es) to Sun to look at closely
+  [  234 s] OSIRISAPE: pass of the Sun of Sun, 2024-01-02 13:30 TDB, 74,877,471 km, 48.810 km/s
+  [  238 s] OSIRISAPE: pass of the Sun of Sun, 2024-09-02 01:19 TDB, 74,870,545 km, 48.812 km/s
+  [  243 s] OSIRISAPE: pass of the Sun of Sun, 2025-05-03 13:38 TDB, 74,871,367 km, 48.812 km/s
+  [  247 s] OSIRISAPE: pass of the Sun of Sun, 2025-12-02 13:27 TDB, 123,092,536 km, 36.370 km/s
+  [  252 s] OSIRISAPE: pass of the Sun of Sun, 2027-01-07 13:37 TDB, 123,102,063 km, 36.368 km/s
+  [  256 s] OSIRISAPE: pass of the Sun of Sun, 2027-08-08 20:32 TDB, 75,683,535 km, 48.337 km/s
+  [  261 s] OSIRISAPE: pass of the Sun of Sun, 2028-04-05 20:02 TDB, 75,681,656 km, 48.337 km/s
+  [  265 s] OSIRISAPE: pass of the Sun of Sun, 2028-12-02 19:25 TDB, 75,677,515 km, 48.339 km/s
+  [  270 s] OSIRISAPE: pass of the Sun of Sun, 2029-06-13 15:34 TDB, 133,822,736 km, 34.339 km/s
+  [  270 s] OSIRISAPE: 4 near approach(es) to Earth to look at closely
+  [  275 s] OSIRISAPE: flyby of Earth, 2023-09-24 14:46 TDB, 7,152 km, 12.256 km/s
+  [  279 s] OSIRISAPE: flyby of Earth, 2025-09-23 17:01 TDB, 9,815 km, 10.959 km/s
+  [  284 s] OSIRISAPE: flyby of Earth, 2027-03-16 03:31 TDB, 10,559 km, 10.703 km/s
+  [  288 s] OSIRISAPE: flyby of Earth, 2029-04-13 23:07 TDB, 7,526 km, 11.848 km/s
+  [  288 s] OSIRISAPE: 4 near approach(es) to Moon to look at closely
+  [  307 s] OSIRISAPE: planned, 13 event(s); saved
+  [  307 s] Parker: 42 near approach(es) to Sun to look at closely
+  [  310 s] Parker: pass of the Sun of Sun, 2018-11-06 03:29 TDB, 24,818,594 km, 95.328 km/s
+  [  313 s] Parker: pass of the Sun of Sun, 2019-04-04 22:41 TDB, 24,818,980 km, 95.327 km/s
+  [  315 s] Parker: pass of the Sun of Sun, 2019-09-01 17:51 TDB, 24,817,843 km, 95.330 km/s
+  [  318 s] Parker: pass of the Sun of Sun, 2020-01-29 09:39 TDB, 19,392,523 km, 109.179 km/s
+  [  321 s] Parker: pass of the Sun of Sun, 2020-06-07 08:24 TDB, 19,391,854 km, 109.181 km/s
+  [  323 s] Parker: pass of the Sun of Sun, 2020-09-27 09:17 TDB, 14,159,391 km, 129.609 km/s
+  [  326 s] Parker: pass of the Sun of Sun, 2021-01-17 17:40 TDB, 14,158,950 km, 129.611 km/s
+  [  329 s] Parker: pass of the Sun of Sun, 2021-04-29 08:48 TDB, 11,114,016 km, 147.686 km/s
+  [  332 s] Parker: pass of the Sun of Sun, 2021-08-09 19:12 TDB, 11,114,010 km, 147.686 km/s
+  [  334 s] Parker: pass of the Sun of Sun, 2021-11-21 08:27 TDB, 9,237,744 km, 163.018 km/s
+  [  337 s] Parker: pass of the Sun of Sun, 2022-02-25 15:37 TDB, 9,237,702 km, 163.018 km/s
+  [  340 s] Parker: pass of the Sun of Sun, 2022-06-01 22:51 TDB, 9,238,223 km, 163.013 km/s
+  [  342 s] Parker: pass of the Sun of Sun, 2022-09-06 06:05 TDB, 9,238,152 km, 163.014 km/s
+  [  345 s] Parker: pass of the Sun of Sun, 2022-12-11 13:17 TDB, 9,238,759 km, 163.008 km/s
+  [  348 s] Parker: pass of the Sun of Sun, 2023-03-17 20:32 TDB, 9,239,725 km, 162.999 km/s
+  [  351 s] Parker: pass of the Sun of Sun, 2023-06-22 03:47 TDB, 9,240,229 km, 162.994 km/s
+  [  353 s] Parker: pass of the Sun of Sun, 2023-09-27 23:30 TDB, 7,955,709 km, 176.463 km/s
+  [  356 s] Parker: pass of the Sun of Sun, 2023-12-29 00:56 TDB, 7,955,628 km, 176.464 km/s
+  [  359 s] Parker: pass of the Sun of Sun, 2024-03-30 02:23 TDB, 7,955,695 km, 176.463 km/s
+  [  362 s] Parker: pass of the Sun of Sun, 2024-06-30 03:48 TDB, 7,955,713 km, 176.463 km/s
+  [  364 s] Parker: pass of the Sun of Sun, 2024-09-30 05:16 TDB, 7,955,924 km, 176.460 km/s
+  [  367 s] Parker: pass of the Sun of Sun, 2024-12-24 11:42 TDB, 6,862,560 km, 190.770 km/s
+  [  370 s] Parker: pass of the Sun of Sun, 2025-03-22 22:26 TDB, 6,862,292 km, 190.774 km/s
+  [  372 s] Parker: pass of the Sun of Sun, 2025-06-19 09:09 TDB, 6,862,152 km, 190.776 km/s
+  [  375 s] Parker: pass of the Sun of Sun, 2025-09-15 20:17 TDB, 6,862,510 km, 190.771 km/s
+  [  378 s] Parker: pass of the Sun of Sun, 2025-12-13 07:03 TDB, 6,862,386 km, 190.773 km/s
+  [  381 s] Parker: pass of the Sun of Sun, 2026-03-11 18:05 TDB, 6,855,835 km, 190.869 km/s
+  [  383 s] Parker: pass of the Sun of Sun, 2026-06-08 04:19 TDB, 6,855,664 km, 190.871 km/s
+  [  386 s] Parker: pass of the Sun of Sun, 2026-09-04 14:33 TDB, 6,855,303 km, 190.877 km/s
+  [  389 s] Parker: pass of the Sun of Sun, 2026-12-02 00:46 TDB, 6,855,387 km, 190.876 km/s
+  [  392 s] Parker: pass of the Sun of Sun, 2027-02-28 11:01 TDB, 6,855,308 km, 190.877 km/s
+  [  394 s] Parker: pass of the Sun of Sun, 2027-05-27 21:14 TDB, 6,853,482 km, 190.903 km/s
+  [  397 s] Parker: pass of the Sun of Sun, 2027-08-24 07:17 TDB, 6,853,212 km, 190.907 km/s
+  [  400 s] Parker: pass of the Sun of Sun, 2027-11-20 17:19 TDB, 6,853,499 km, 190.903 km/s
+  [  402 s] Parker: pass of the Sun of Sun, 2028-02-17 03:21 TDB, 6,853,817 km, 190.898 km/s
+  [  405 s] Parker: pass of the Sun of Sun, 2028-05-15 13:23 TDB, 6,854,021 km, 190.895 km/s
+  [  408 s] Parker: pass of the Sun of Sun, 2028-08-11 23:24 TDB, 6,853,259 km, 190.907 km/s
+  [  411 s] Parker: pass of the Sun of Sun, 2028-11-08 09:20 TDB, 6,853,517 km, 190.903 km/s
+  [  413 s] Parker: pass of the Sun of Sun, 2029-02-04 19:14 TDB, 6,853,705 km, 190.900 km/s
+  [  416 s] Parker: pass of the Sun of Sun, 2029-05-04 05:10 TDB, 6,854,553 km, 190.887 km/s
+  [  419 s] Parker: pass of the Sun of Sun, 2029-07-31 15:05 TDB, 6,854,632 km, 190.886 km/s
+  [  421 s] Parker: pass of the Sun of Sun, 2029-10-28 00:57 TDB, 6,854,708 km, 190.885 km/s
+  [  422 s] Parker: 8 near approach(es) to Venus to look at closely
+  [  424 s] Parker: flyby of Venus, 2018-10-03 08:46 TDB, 8,498 km, 24.543 km/s
+  [  427 s] Parker: flyby of Venus, 2019-12-26 18:16 TDB, 9,057 km, 24.450 km/s
+  [  430 s] Parker: flyby of Venus, 2020-07-11 03:25 TDB, 6,890 km, 24.935 km/s
+  [  433 s] Parker: flyby of Venus, 2021-02-20 20:07 TDB, 8,438 km, 24.586 km/s
+  [  435 s] Parker: flyby of Venus, 2021-10-16 09:32 TDB, 9,861 km, 24.348 km/s
+  [  438 s] Parker: flyby of Venus, 2023-08-21 12:04 TDB, 10,058 km, 24.322 km/s
+  [  441 s] Parker: flyby of Venus, 2024-11-06 18:45 TDB, 6,433 km, 25.070 km/s
+  [  444 s] Parker: planned, 49 event(s); saved
+  [  444 s] Lucy: 3 near approach(es) to Sun to look at closely
+  [  447 s] Lucy: pass of the Sun of Sun, 2022-07-27 20:15 TDB, 125,385,289 km, 35.066 km/s
+  [  450 s] Lucy: pass of the Sun of Sun, 2024-11-02 12:26 TDB, 127,477,167 km, 38.838 km/s
+  [  453 s] Lucy: pass of the Sun of Sun, 2030-12-02 14:04 TDB, 136,192,640 km, 41.005 km/s
+  [  453 s] Lucy: 3 near approach(es) to Earth to look at closely
+  [  456 s] Lucy: flyby of Earth, 2022-10-16 11:06 TDB, 6,740 km, 12.114 km/s
+  [  458 s] Lucy: flyby of Earth, 2024-12-13 04:17 TDB, 6,735 km, 15.232 km/s
+  [  461 s] Lucy: flyby of Earth, 2030-12-27 00:37 TDB, 6,999 km, 16.463 km/s
+  [  461 s] Lucy: 3 near approach(es) to Moon to look at closely
+  [  464 s] Lucy: flyby of Moon, 2022-10-17 05:38 TDB, 56,149 km, 5.687 km/s
+  [  470 s] Lucy: 1 near approach(es) to Dinkinesh to look at closely
+  [  476 s] Lucy: planned, 7 event(s); saved
+  [  476 s] JUICE: 5 near approach(es) to Sun to look at closely
+  [  479 s] JUICE: pass of the Sun of Sun, 2023-12-10 03:12 TDB, 129,100,633 km, 33.911 km/s
+  [  482 s] JUICE: pass of the Sun of Sun, 2025-01-01 21:51 TDB, 96,238,627 km, 41.061 km/s
+  [  484 s] JUICE: pass of the Sun of Sun, 2025-09-10 07:31 TDB, 106,051,335 km, 41.551 km/s
+  [  487 s] JUICE: pass of the Sun of Sun, 2026-11-09 23:02 TDB, 127,107,422 km, 39.296 km/s
+  [  490 s] JUICE: pass of the Sun of Sun, 2028-12-09 06:08 TDB, 127,093,694 km, 39.298 km/s
+  [  490 s] JUICE: 1 near approach(es) to Venus to look at closely
+  [  493 s] JUICE: flyby of Venus, 2025-08-31 05:30 TDB, 11,140 km, 10.444 km/s
+  [  493 s] JUICE: 3 near approach(es) to Earth to look at closely
+  [  495 s] JUICE: flyby of Earth, 2024-08-20 21:57 TDB, 13,211 km, 8.441 km/s
+  [  498 s] JUICE: flyby of Earth, 2026-09-28 11:46 TDB, 15,019 km, 13.123 km/s
+  [  501 s] JUICE: flyby of Earth, 2029-01-17 18:35 TDB, 11,012 km, 13.826 km/s
+  [  501 s] JUICE: 3 near approach(es) to Moon to look at closely
+  [  504 s] JUICE: flyby of Moon, 2024-08-19 21:16 TDB, 2,490 km, 4.155 km/s
+  [  510 s] JUICE: planned, 10 event(s); saved
+  [  510 s] Psyche: 1 near approach(es) to Sun to look at closely
+  [  513 s] Psyche: pass of the Sun of Sun, 2023-10-16 08:47 TDB, 149,213,436 km, 35.722 km/s
+  [  513 s] Psyche: 1 near approach(es) to Mars to look at closely
+  [  516 s] Psyche: flyby of Mars, 2026-05-15 19:29 TDB, 8,000 km, 5.514 km/s
+  [  517 s] Psyche: planned, 2 event(s); saved
+  [  517 s] Clipper: 2 near approach(es) to Sun to look at closely
+  [  519 s] Clipper: pass of the Sun of Sun, 2024-10-22 03:54 TDB, 148,613,375 km, 36.142 km/s
+  [  522 s] Clipper: pass of the Sun of Sun, 2026-10-23 13:51 TDB, 125,491,560 km, 39.502 km/s
+  [  522 s] Clipper: 1 near approach(es) to Earth to look at closely
+  [  525 s] Clipper: flyby of Earth, 2026-12-03 20:15 TDB, 9,609 km, 14.717 km/s
+  [  525 s] Clipper: 1 near approach(es) to Moon to look at closely
+  [  528 s] Clipper: 1 near approach(es) to Mars to look at closely
+  [  531 s] Clipper: flyby of Mars, 2025-03-01 17:58 TDB, 4,275 km, 11.161 km/s
+  [  531 s] Clipper: 1 near approach(es) to Jupiter to look at closely
+  [  533 s] Clipper: arrival of Jupiter, 2030-04-11 08:25 TDB, 801,870 km, 17.908 km/s
+  [  534 s] Clipper: planned, 5 event(s); saved
+  [  534 s] BepiColombo: 24 near approach(es) to Sun to look at closely
+  [  537 s] BepiColombo: pass of the Sun of Sun, 2019-01-01 17:46 TDB, 132,819,135 km, 33.690 km/s
+  [  540 s] BepiColombo: pass of the Sun of Sun, 2020-01-28 00:36 TDB, 131,729,916 km, 34.052 km/s
+  [  542 s] BepiColombo: pass of the Sun of Sun, 2020-09-09 18:00 TDB, 93,644,605 km, 41.855 km/s
+  [  545 s] BepiColombo: pass of the Sun of Sun, 2021-03-14 16:40 TDB, 77,748,071 km, 45.848 km/s
+  [  548 s] BepiColombo: pass of the Sun of Sun, 2021-10-13 15:14 TDB, 47,996,540 km, 61.505 km/s
+  [  550 s] BepiColombo: pass of the Sun of Sun, 2022-02-23 00:14 TDB, 48,180,017 km, 61.313 km/s
+  [  553 s] BepiColombo: pass of the Sun of Sun, 2022-07-06 09:04 TDB, 45,424,436 km, 62.808 km/s
+  [  556 s] BepiColombo: pass of the Sun of Sun, 2022-10-31 06:17 TDB, 45,615,851 km, 62.635 km/s
+  [  559 s] BepiColombo: pass of the Sun of Sun, 2023-02-25 18:26 TDB, 46,304,888 km, 62.020 km/s
+  [  561 s] BepiColombo: pass of the Sun of Sun, 2023-06-26 08:33 TDB, 45,784,207 km, 61.871 km/s
+  [  564 s] BepiColombo: pass of the Sun of Sun, 2023-10-15 04:38 TDB, 46,421,185 km, 61.304 km/s
+  [  567 s] BepiColombo: pass of the Sun of Sun, 2024-02-03 13:29 TDB, 46,345,978 km, 61.297 km/s
+  [  569 s] BepiColombo: pass of the Sun of Sun, 2024-05-23 12:27 TDB, 46,285,867 km, 61.240 km/s
+  [  572 s] BepiColombo: pass of the Sun of Sun, 2024-09-09 23:24 TDB, 45,802,209 km, 59.246 km/s
+  [  575 s] BepiColombo: pass of the Sun of Sun, 2024-12-06 13:37 TDB, 45,969,821 km, 59.002 km/s
+  [  577 s] BepiColombo: pass of the Sun of Sun, 2025-02-27 18:39 TDB, 45,783,775 km, 58.869 km/s
+  [  580 s] BepiColombo: pass of the Sun of Sun, 2025-05-25 10:35 TDB, 45,780,745 km, 58.903 km/s
+  [  583 s] BepiColombo: pass of the Sun of Sun, 2025-08-19 19:59 TDB, 46,236,999 km, 58.567 km/s
+  [  586 s] BepiColombo: pass of the Sun of Sun, 2025-11-15 19:31 TDB, 46,706,034 km, 58.238 km/s
+  [  588 s] BepiColombo: pass of the Sun of Sun, 2026-02-12 17:57 TDB, 47,010,404 km, 58.098 km/s
+  [  591 s] BepiColombo: pass of the Sun of Sun, 2026-05-14 01:45 TDB, 47,195,952 km, 57.990 km/s
+  [  594 s] BepiColombo: pass of the Sun of Sun, 2026-08-12 09:03 TDB, 47,330,153 km, 57.912 km/s
+  [  597 s] BepiColombo: pass of the Sun of Sun, 2026-11-10 10:00 TDB, 45,808,045 km, 59.078 km/s
+  [  599 s] BepiColombo: pass of the Sun of Sun, 2027-02-06 06:12 TDB, 45,993,896 km, 58.993 km/s
+  [  599 s] BepiColombo: 8 near approach(es) to Mercury to look at closely
+  [  602 s] BepiColombo: flyby of Mercury, 2021-10-01 23:36 TDB, 2,640 km, 7.781 km/s
+  [  605 s] BepiColombo: flyby of Mercury, 2022-06-23 09:46 TDB, 2,646 km, 7.527 km/s
+  [  608 s] BepiColombo: flyby of Mercury, 2023-06-19 19:36 TDB, 2,678 km, 5.448 km/s
+  [  610 s] BepiColombo: flyby of Mercury, 2024-09-04 21:50 TDB, 2,604 km, 4.969 km/s
+  [  613 s] BepiColombo: flyby of Mercury, 2024-12-01 14:25 TDB, 40,066 km, 2.861 km/s
+  [  616 s] BepiColombo: flyby of Mercury, 2025-01-08 06:00 TDB, 2,736 km, 4.426 km/s
+  [  619 s] BepiColombo: flyby of Mercury, 2026-10-26 12:56 TDB, 88,207 km, 0.628 km/s
+  [  621 s] BepiColombo: arrival of Mercury, 2026-11-21 18:49 TDB, 3,072 km, 3.725 km/s
+  [  621 s] BepiColombo: 2 near approach(es) to Venus to look at closely
+  [  624 s] BepiColombo: flyby of Venus, 2020-10-15 04:00 TDB, 16,775 km, 10.101 km/s
+  [  627 s] BepiColombo: flyby of Venus, 2021-08-10 13:53 TDB, 6,604 km, 12.743 km/s
+  [  627 s] BepiColombo: 1 near approach(es) to Earth to look at closely
+  [  630 s] BepiColombo: flyby of Earth, 2020-04-10 04:26 TDB, 19,064 km, 7.595 km/s
+  [  631 s] BepiColombo: planned, 35 event(s); saved
+  [  631 s] SolO: 22 near approach(es) to Sun to look at closely
+  [  633 s] SolO: pass of the Sun of Sun, 2020-06-15 07:38 TDB, 77,170,642 km, 47.542 km/s
+  [  636 s] SolO: pass of the Sun of Sun, 2021-02-10 09:45 TDB, 73,980,861 km, 48.593 km/s
+  [  639 s] SolO: pass of the Sun of Sun, 2021-09-12 08:16 TDB, 87,751,138 km, 45.106 km/s
+  [  641 s] SolO: pass of the Sun of Sun, 2022-03-26 11:51 TDB, 48,262,556 km, 64.600 km/s
+  [  644 s] SolO: pass of the Sun of Sun, 2022-10-12 19:14 TDB, 43,775,151 km, 68.118 km/s
+  [  647 s] SolO: pass of the Sun of Sun, 2023-04-10 13:18 TDB, 43,770,570 km, 68.123 km/s
+  [  650 s] SolO: pass of the Sun of Sun, 2023-10-07 07:26 TDB, 43,768,979 km, 68.125 km/s
+  [  652 s] SolO: pass of the Sun of Sun, 2024-04-04 01:50 TDB, 43,773,472 km, 68.121 km/s
+  [  655 s] SolO: pass of the Sun of Sun, 2024-09-30 20:04 TDB, 43,769,666 km, 68.124 km/s
+  [  658 s] SolO: pass of the Sun of Sun, 2025-03-31 13:55 TDB, 44,012,552 km, 67.416 km/s
+  [  660 s] SolO: pass of the Sun of Sun, 2025-09-16 03:06 TDB, 44,013,439 km, 67.416 km/s
+  [  663 s] SolO: pass of the Sun of Sun, 2026-03-03 15:43 TDB, 44,006,043 km, 67.422 km/s
+  [  666 s] SolO: pass of the Sun of Sun, 2026-08-19 04:07 TDB, 44,007,014 km, 67.421 km/s
+  [  669 s] SolO: pass of the Sun of Sun, 2027-02-06 21:47 TDB, 42,009,940 km, 68.637 km/s
+  [  672 s] SolO: pass of the Sun of Sun, 2027-07-06 17:01 TDB, 42,011,130 km, 68.635 km/s
+  [  675 s] SolO: pass of the Sun of Sun, 2027-12-03 12:14 TDB, 42,011,614 km, 68.635 km/s
+  [  678 s] SolO: pass of the Sun of Sun, 2028-05-08 05:28 TDB, 49,028,124 km, 61.698 km/s
+  [  680 s] SolO: pass of the Sun of Sun, 2028-10-05 00:43 TDB, 49,028,711 km, 61.697 km/s
+  [  683 s] SolO: pass of the Sun of Sun, 2029-03-03 19:56 TDB, 49,026,211 km, 61.699 km/s
+  [  686 s] SolO: pass of the Sun of Sun, 2029-08-11 18:36 TDB, 55,452,682 km, 56.386 km/s
+  [  688 s] SolO: pass of the Sun of Sun, 2030-01-08 13:48 TDB, 55,453,263 km, 56.386 km/s
+  [  691 s] SolO: pass of the Sun of Sun, 2030-06-07 08:59 TDB, 55,452,101 km, 56.386 km/s
+  [  691 s] SolO: 8 near approach(es) to Venus to look at closely
+  [  694 s] SolO: flyby of Venus, 2020-12-27 12:40 TDB, 13,494 km, 13.499 km/s
+  [  697 s] SolO: flyby of Venus, 2021-08-09 04:42 TDB, 14,049 km, 13.424 km/s
+  [  700 s] SolO: flyby of Venus, 2022-09-04 01:28 TDB, 12,508 km, 19.819 km/s
+  [  702 s] SolO: flyby of Venus, 2025-02-18 20:50 TDB, 6,430 km, 21.019 km/s
+  [  705 s] SolO: flyby of Venus, 2026-12-24 22:59 TDB, 7,000 km, 20.823 km/s
+  [  708 s] SolO: flyby of Venus, 2028-03-18 08:18 TDB, 6,421 km, 21.021 km/s
+  [  711 s] SolO: flyby of Venus, 2029-06-10 17:43 TDB, 6,415 km, 21.024 km/s
+  [  713 s] SolO: flyby of Venus, 2030-09-03 02:59 TDB, 8,670 km, 20.388 km/s
+  [  713 s] SolO: 1 near approach(es) to Earth to look at closely
+  [  716 s] SolO: flyby of Earth, 2021-11-27 04:32 TDB, 6,837 km, 15.136 km/s
+  [  716 s] SolO: 1 near approach(es) to Moon to look at closely
+  [  720 s] SolO: planned, 31 event(s); saved
+
+REPORT
+  preview_voyager_1      planned (what it was made from changed): 2 events, 0 carried, searched from 1977-09-06
+      1979-03-05 12:05 TDB  Jupiter               348436 km    29.037 km/s  step 30m  flyby
+      1980-11-12 23:46 TDB  Saturn                184031 km    25.308 km/s  step 30m  flyby
+  preview_voyager_2      planned (what it was made from changed): 5 events, 0 carried, searched from 1977-08-21
+      1977-08-29 17:41 TDB  Sun                150040530 km    39.044 km/s  step 4d   pass of the Sun
+      1979-07-09 22:30 TDB  Jupiter               721376 km    20.230 km/s  step 1h   flyby
+      1981-08-26 03:25 TDB  Saturn                160691 km    24.208 km/s  step 30m  flyby
+      1986-01-24 18:00 TDB  Uranus                107154 km    18.033 km/s  step 30m  flyby
+      1989-08-25 03:57 TDB  Neptune                29241 km    27.327 km/s  step 1m   flyby
+  preview_new_horizons   planned (what it was made from changed): 2 events, 0 carried, searched from 2006-01-20
+      2007-02-28 05:45 TDB  Jupiter              2304505 km    21.219 km/s  step 3h   flyby
+      2015-07-14 11:50 TDB  Pluto                  13680 km    13.778 km/s  step 1m   flyby
+  preview_juno           planned (what it was made from changed): 4 events, 0 carried, searched from 2011-08-06
+      2011-08-15 08:40 TDB  Sun                150984250 km    34.891 km/s  step 5d   pass of the Sun
+      2013-08-31 04:36 TDB  Sun                131868002 km    38.073 km/s  step 4d   pass of the Sun
+      2013-10-09 19:23 TDB  Earth                   6942 km    14.926 km/s  step 1m   flyby
+      2016-07-05 02:49 TDB  Jupiter                75978 km    57.937 km/s  step 5m   arrival (stays to the end of JPL's data)
+  preview_osirisape      planned (what it was made from changed): 13 events, 0 carried, searched from 2023-09-24
+      2023-09-24 14:46 TDB  Earth                   7152 km    12.256 km/s  step 1m   flyby
+      2024-01-02 13:30 TDB  Sun                 74877470 km    48.810 km/s  step 1d   pass of the Sun
+      2024-09-02 01:19 TDB  Sun                 74870545 km    48.812 km/s  step 1d   pass of the Sun
+      2025-05-03 13:38 TDB  Sun                 74871367 km    48.812 km/s  step 1d   pass of the Sun
+      2025-09-23 17:01 TDB  Earth                   9815 km    10.959 km/s  step 1m   flyby
+      2025-12-02 13:27 TDB  Sun                123092536 km    36.370 km/s  step 4d   pass of the Sun
+      2027-01-07 13:37 TDB  Sun                123102063 km    36.368 km/s  step 4d   pass of the Sun
+      2027-03-16 03:31 TDB  Earth                  10559 km    10.703 km/s  step 1m   flyby
+      2027-08-08 20:32 TDB  Sun                 75683535 km    48.337 km/s  step 1d   pass of the Sun
+      2028-04-05 20:02 TDB  Sun                 75681656 km    48.337 km/s  step 1d   pass of the Sun
+      2028-12-02 19:25 TDB  Sun                 75677516 km    48.339 km/s  step 1d   pass of the Sun
+      2029-04-13 23:07 TDB  Earth                   7526 km    11.848 km/s  step 1m   flyby
+      2029-06-13 15:34 TDB  Sun                133822736 km    34.339 km/s  step 4d   pass of the Sun
+  preview_parker         planned (what it was made from changed): 49 events, 0 carried, searched from 2018-08-13
+      2018-10-03 08:46 TDB  Venus                   8498 km    24.543 km/s  step 1m   flyby
+      2018-11-06 03:29 TDB  Sun                 24818594 km    95.328 km/s  step 6h   pass of the Sun
+      2019-04-04 22:41 TDB  Sun                 24818980 km    95.327 km/s  step 6h   pass of the Sun
+      2019-09-01 17:51 TDB  Sun                 24817843 km    95.330 km/s  step 6h   pass of the Sun
+      2019-12-26 18:16 TDB  Venus                   9057 km    24.450 km/s  step 1m   flyby
+      2020-01-29 09:39 TDB  Sun                 19392523 km   109.179 km/s  step 6h   pass of the Sun
+      2020-06-07 08:24 TDB  Sun                 19391854 km   109.181 km/s  step 6h   pass of the Sun
+      2020-07-11 03:25 TDB  Venus                   6890 km    24.935 km/s  step 1m   flyby
+      2020-09-27 09:17 TDB  Sun                 14159391 km   129.609 km/s  step 3h   pass of the Sun
+      2021-01-17 17:40 TDB  Sun                 14158950 km   129.611 km/s  step 3h   pass of the Sun
+      2021-02-20 20:07 TDB  Venus                   8438 km    24.586 km/s  step 1m   flyby
+      2021-04-29 08:48 TDB  Sun                 11114016 km   147.686 km/s  step 2h   pass of the Sun
+      2021-08-09 19:12 TDB  Sun                 11114010 km   147.686 km/s  step 2h   pass of the Sun
+      2021-10-16 09:32 TDB  Venus                   9861 km    24.348 km/s  step 1m   flyby
+      2021-11-21 08:27 TDB  Sun                  9237744 km   163.018 km/s  step 2h   pass of the Sun
+      2022-02-25 15:37 TDB  Sun                  9237702 km   163.018 km/s  step 2h   pass of the Sun
+      2022-06-01 22:51 TDB  Sun                  9238223 km   163.013 km/s  step 2h   pass of the Sun
+      2022-09-06 06:05 TDB  Sun                  9238152 km   163.014 km/s  step 2h   pass of the Sun
+      2022-12-11 13:17 TDB  Sun                  9238758 km   163.008 km/s  step 2h   pass of the Sun
+      2023-03-17 20:32 TDB  Sun                  9239725 km   162.999 km/s  step 2h   pass of the Sun
+      2023-06-22 03:47 TDB  Sun                  9240229 km   162.994 km/s  step 2h   pass of the Sun
+      2023-08-21 12:04 TDB  Venus                  10058 km    24.322 km/s  step 1m   flyby
+      2023-09-27 23:30 TDB  Sun                  7955709 km   176.463 km/s  step 1h   pass of the Sun
+      2023-12-29 00:56 TDB  Sun                  7955628 km   176.464 km/s  step 1h   pass of the Sun
+      2024-03-30 02:23 TDB  Sun                  7955695 km   176.463 km/s  step 1h   pass of the Sun
+      2024-06-30 03:48 TDB  Sun                  7955713 km   176.463 km/s  step 1h   pass of the Sun
+      2024-09-30 05:16 TDB  Sun                  7955924 km   176.460 km/s  step 1h   pass of the Sun
+      2024-11-06 18:45 TDB  Venus                   6433 km    25.070 km/s  step 1m   flyby
+      2024-12-24 11:42 TDB  Sun                  6862560 km   190.770 km/s  step 1h   pass of the Sun
+      2025-03-22 22:26 TDB  Sun                  6862292 km   190.774 km/s  step 1h   pass of the Sun
+      2025-06-19 09:09 TDB  Sun                  6862152 km   190.776 km/s  step 1h   pass of the Sun
+      2025-09-15 20:17 TDB  Sun                  6862510 km   190.771 km/s  step 1h   pass of the Sun
+      2025-12-13 07:03 TDB  Sun                  6862386 km   190.773 km/s  step 1h   pass of the Sun
+      2026-03-11 18:05 TDB  Sun                  6855835 km   190.869 km/s  step 1h   pass of the Sun
+      2026-06-08 04:19 TDB  Sun                  6855664 km   190.871 km/s  step 1h   pass of the Sun
+      2026-09-04 14:33 TDB  Sun                  6855302 km   190.877 km/s  step 1h   pass of the Sun
+      2026-12-02 00:46 TDB  Sun                  6855387 km   190.876 km/s  step 1h   pass of the Sun
+      2027-02-28 11:01 TDB  Sun                  6855308 km   190.877 km/s  step 1h   pass of the Sun
+      2027-05-27 21:14 TDB  Sun                  6853482 km   190.903 km/s  step 1h   pass of the Sun
+      2027-08-24 07:17 TDB  Sun                  6853212 km   190.907 km/s  step 1h   pass of the Sun
+      2027-11-20 17:19 TDB  Sun                  6853499 km   190.903 km/s  step 1h   pass of the Sun
+      2028-02-17 03:21 TDB  Sun                  6853817 km   190.898 km/s  step 1h   pass of the Sun
+      2028-05-15 13:23 TDB  Sun                  6854021 km   190.895 km/s  step 1h   pass of the Sun
+      2028-08-11 23:24 TDB  Sun                  6853259 km   190.907 km/s  step 1h   pass of the Sun
+      2028-11-08 09:20 TDB  Sun                  6853517 km   190.903 km/s  step 1h   pass of the Sun
+      2029-02-04 19:14 TDB  Sun                  6853705 km   190.900 km/s  step 1h   pass of the Sun
+      2029-05-04 05:10 TDB  Sun                  6854553 km   190.887 km/s  step 1h   pass of the Sun
+      2029-07-31 15:05 TDB  Sun                  6854632 km   190.886 km/s  step 1h   pass of the Sun
+      2029-10-28 00:57 TDB  Sun                  6854708 km   190.885 km/s  step 1h   pass of the Sun
+  preview_lucy           planned (what it was made from changed): 7 events, 0 carried, searched from 2021-10-17
+      2022-07-27 20:15 TDB  Sun                125385289 km    35.066 km/s  step 4d   pass of the Sun
+      2022-10-16 11:06 TDB  Earth                   6740 km    12.114 km/s  step 1m   flyby
+      2022-10-17 05:38 TDB  Moon                   56148 km     5.687 km/s  step 30m  flyby
+      2024-11-02 12:26 TDB  Sun                127477167 km    38.838 km/s  step 3d   pass of the Sun
+      2024-12-13 04:17 TDB  Earth                   6735 km    15.232 km/s  step 1m   flyby
+      2030-12-02 14:04 TDB  Sun                136192640 km    41.005 km/s  step 4d   pass of the Sun
+      2030-12-27 00:37 TDB  Earth                   6999 km    16.463 km/s  step 1m   flyby
+  preview_juice          planned (what it was made from changed): 10 events, 0 carried, searched from 2023-04-15
+      2023-12-10 03:12 TDB  Sun                129100633 km    33.911 km/s  step 4d   pass of the Sun
+      2024-08-19 21:16 TDB  Moon                    2490 km     4.155 km/s  step 1m   flyby
+      2024-08-20 21:57 TDB  Earth                  13211 km     8.441 km/s  step 5m   flyby
+      2025-01-01 21:51 TDB  Sun                 96238627 km    41.061 km/s  step 2d   pass of the Sun
+      2025-08-31 05:30 TDB  Venus                  11140 km    10.444 km/s  step 1m   flyby
+      2025-09-10 07:31 TDB  Sun                106051334 km    41.551 km/s  step 3d   pass of the Sun
+      2026-09-28 11:46 TDB  Earth                  15019 km    13.123 km/s  step 1m   flyby
+      2026-11-09 23:02 TDB  Sun                127107422 km    39.296 km/s  step 3d   pass of the Sun
+      2028-12-09 06:08 TDB  Sun                127093694 km    39.298 km/s  step 3d   pass of the Sun
+      2029-01-17 18:35 TDB  Earth                  11012 km    13.826 km/s  step 1m   flyby
+  preview_psyche         planned (what it was made from changed): 2 events, 0 carried, searched from 2023-10-14
+      2023-10-16 08:47 TDB  Sun                149213436 km    35.722 km/s  step 5d   pass of the Sun
+      2026-05-15 19:29 TDB  Mars                    8000 km     5.514 km/s  step 5m   flyby
+  preview_clipper        planned (what it was made from changed): 5 events, 0 carried, searched from 2024-10-15
+      2024-10-22 03:54 TDB  Sun                148613375 km    36.142 km/s  step 4d   pass of the Sun
+      2025-03-01 17:58 TDB  Mars                    4274 km    11.161 km/s  step 1m   flyby
+      2026-10-23 13:51 TDB  Sun                125491560 km    39.502 km/s  step 3d   pass of the Sun
+      2026-12-03 20:15 TDB  Earth                   9609 km    14.717 km/s  step 1m   flyby
+      2030-04-11 08:25 TDB  Jupiter               801870 km    17.908 km/s  step 1h   arrival (stays to the end of JPL's data)
+  preview_bepicolombo    planned (what it was made from changed): 35 events, 0 carried, searched from 2018-10-21
+      2019-01-01 17:46 TDB  Sun                132819135 km    33.690 km/s  step 4d   pass of the Sun
+      2020-01-28 00:36 TDB  Sun                131729916 km    34.052 km/s  step 4d   pass of the Sun
+      2020-04-10 04:26 TDB  Earth                  19064 km     7.595 km/s  step 5m   flyby
+      2020-09-09 18:00 TDB  Sun                 93644605 km    41.855 km/s  step 2d   pass of the Sun
+      2020-10-15 04:00 TDB  Venus                  16775 km    10.101 km/s  step 5m   flyby
+      2021-03-14 16:40 TDB  Sun                 77748072 km    45.848 km/s  step 2d   pass of the Sun
+      2021-08-10 13:53 TDB  Venus                   6604 km    12.743 km/s  step 1m   flyby
+      2021-10-01 23:36 TDB  Mercury                 2640 km     7.781 km/s  step 1m   flyby
+      2021-10-13 15:14 TDB  Sun                 47996540 km    61.505 km/s  step 6h   pass of the Sun
+      2022-02-23 00:14 TDB  Sun                 48180017 km    61.313 km/s  step 6h   pass of the Sun
+      2022-06-23 09:46 TDB  Mercury                 2646 km     7.527 km/s  step 1m   flyby
+      2022-07-06 09:04 TDB  Sun                 45424436 km    62.808 km/s  step 6h   pass of the Sun
+      2022-10-31 06:17 TDB  Sun                 45615851 km    62.635 km/s  step 6h   pass of the Sun
+      2023-02-25 18:26 TDB  Sun                 46304888 km    62.020 km/s  step 6h   pass of the Sun
+      2023-06-19 19:36 TDB  Mercury                 2678 km     5.448 km/s  step 1m   flyby
+      2023-06-26 08:33 TDB  Sun                 45784207 km    61.871 km/s  step 6h   pass of the Sun
+      2023-10-15 04:38 TDB  Sun                 46421185 km    61.304 km/s  step 6h   pass of the Sun
+      2024-02-03 13:29 TDB  Sun                 46345978 km    61.297 km/s  step 6h   pass of the Sun
+      2024-05-23 12:27 TDB  Sun                 46285867 km    61.240 km/s  step 6h   pass of the Sun
+      2024-09-04 21:50 TDB  Mercury                 2604 km     4.969 km/s  step 1m   flyby
+      2024-09-09 23:24 TDB  Sun                 45802208 km    59.246 km/s  step 6h   pass of the Sun
+      2024-12-01 14:25 TDB  Mercury                40066 km     2.861 km/s  step 30m  flyby
+      2024-12-06 13:37 TDB  Sun                 45969821 km    59.002 km/s  step 6h   pass of the Sun
+      2025-01-08 06:00 TDB  Mercury                 2736 km     4.426 km/s  step 1m   flyby
+      2025-02-27 18:39 TDB  Sun                 45783775 km    58.869 km/s  step 6h   pass of the Sun
+      2025-05-25 10:35 TDB  Sun                 45780745 km    58.903 km/s  step 6h   pass of the Sun
+      2025-08-19 19:59 TDB  Sun                 46236999 km    58.567 km/s  step 6h   pass of the Sun
+      2025-11-15 19:31 TDB  Sun                 46706034 km    58.238 km/s  step 6h   pass of the Sun
+      2026-02-12 17:57 TDB  Sun                 47010404 km    58.098 km/s  step 6h   pass of the Sun
+      2026-05-14 01:45 TDB  Sun                 47195952 km    57.990 km/s  step 6h   pass of the Sun
+      2026-08-12 09:03 TDB  Sun                 47330153 km    57.912 km/s  step 6h   pass of the Sun
+      2026-10-26 12:56 TDB  Mercury                88208 km     0.628 km/s  step 3h   flyby
+      2026-11-10 10:00 TDB  Sun                 45808045 km    59.078 km/s  step 6h   pass of the Sun
+      2026-11-21 18:49 TDB  Mercury                 3072 km     3.725 km/s  step 1m   arrival (stays to the end of JPL's data)
+      2027-02-06 06:12 TDB  Sun                 45993896 km    58.993 km/s  step 6h   pass of the Sun
+  preview_solo           planned (what it was made from changed): 31 events, 0 carried, searched from 2020-02-11
+      2020-06-15 07:38 TDB  Sun                 77170642 km    47.542 km/s  step 1d   pass of the Sun
+      2020-12-27 12:40 TDB  Venus                  13494 km    13.499 km/s  step 1m   flyby
+      2021-02-10 09:45 TDB  Sun                 73980861 km    48.593 km/s  step 1d   pass of the Sun
+      2021-08-09 04:42 TDB  Venus                  14049 km    13.424 km/s  step 1m   flyby
+      2021-09-12 08:16 TDB  Sun                 87751138 km    45.106 km/s  step 2d   pass of the Sun
+      2021-11-27 04:32 TDB  Earth                   6837 km    15.136 km/s  step 1m   flyby
+      2022-03-26 11:51 TDB  Sun                 48262556 km    64.600 km/s  step 6h   pass of the Sun
+      2022-09-04 01:28 TDB  Venus                  12508 km    19.819 km/s  step 1m   flyby
+      2022-10-12 19:14 TDB  Sun                 43775151 km    68.118 km/s  step 6h   pass of the Sun
+      2023-04-10 13:18 TDB  Sun                 43770570 km    68.123 km/s  step 6h   pass of the Sun
+      2023-10-07 07:26 TDB  Sun                 43768979 km    68.125 km/s  step 6h   pass of the Sun
+      2024-04-04 01:50 TDB  Sun                 43773472 km    68.121 km/s  step 6h   pass of the Sun
+      2024-09-30 20:04 TDB  Sun                 43769666 km    68.124 km/s  step 6h   pass of the Sun
+      2025-02-18 20:50 TDB  Venus                   6430 km    21.019 km/s  step 1m   flyby
+      2025-03-31 13:55 TDB  Sun                 44012552 km    67.416 km/s  step 6h   pass of the Sun
+      2025-09-16 03:06 TDB  Sun                 44013439 km    67.416 km/s  step 6h   pass of the Sun
+      2026-03-03 15:43 TDB  Sun                 44006043 km    67.422 km/s  step 6h   pass of the Sun
+      2026-08-19 04:07 TDB  Sun                 44007014 km    67.421 km/s  step 6h   pass of the Sun
+      2026-12-24 22:59 TDB  Venus                   7000 km    20.823 km/s  step 1m   flyby
+      2027-02-06 21:47 TDB  Sun                 42009940 km    68.637 km/s  step 6h   pass of the Sun
+      2027-07-06 17:01 TDB  Sun                 42011130 km    68.635 km/s  step 6h   pass of the Sun
+      2027-12-03 12:14 TDB  Sun                 42011614 km    68.635 km/s  step 6h   pass of the Sun
+      2028-03-18 08:18 TDB  Venus                   6421 km    21.021 km/s  step 1m   flyby
+      2028-05-08 05:28 TDB  Sun                 49028124 km    61.698 km/s  step 6h   pass of the Sun
+      2028-10-05 00:43 TDB  Sun                 49028712 km    61.697 km/s  step 6h   pass of the Sun
+      2029-03-03 19:56 TDB  Sun                 49026211 km    61.699 km/s  step 6h   pass of the Sun
+      2029-06-10 17:43 TDB  Venus                   6415 km    21.024 km/s  step 1m   flyby
+      2029-08-11 18:36 TDB  Sun                 55452682 km    56.386 km/s  step 1d   pass of the Sun
+      2030-01-08 13:48 TDB  Sun                 55453263 km    56.386 km/s  step 1d   pass of the Sun
+      2030-06-07 08:59 TDB  Sun                 55452101 km    56.386 km/s  step 1d   pass of the Sun
+      2030-09-03 02:59 TDB  Venus                   8670 km    20.388 km/s  step 1m   flyby
+  Not searched: 2017 OF201: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; 2023 JF: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; 2024 DW: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; 2024 PT5: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; 2024 YR4: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; 2025 PN7: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; 2025 PY1: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Ammonite: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Apophis: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Arrokoth: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Bennu: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Chariklo: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Donaldjohanson: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Encke: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Eris: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Eros: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Eurybates: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; GV9: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Gonggong: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Hale-Bopp: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Halley: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Haumea: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Howell: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Hyakutake: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Ikeya-Seki: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Ixion: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Kamo oalewa: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Leleakuhonua: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Lemmon: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Leucus: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Lutetia: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; MAPS: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Makemake: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Mani: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; NEOWISE: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Orcus: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Orus: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Patroclus: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Polymele: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Quaoar: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; SWAN: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Schaumasse: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Sedna: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Steins: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Tempel 2: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside; Varuna: its JPL data sheet gives no GM, so it has no Hill sphere to pass inside
+
+PATH PLAN: 12 paths, events preview_bepicolombo 35, preview_clipper 5, preview_juice 10, preview_juno 4, preview_lucy 7, preview_new_horizons 2, preview_osirisape 13, preview_parker 49, preview_psyche 2, preview_solo 31, preview_voyager_1 2, preview_voyager_2 5. Asked JPL for: preview_voyager_1, preview_voyager_2, preview_new_horizons, preview_juno, preview_osirisape, preview_parker, preview_lucy, preview_juice, preview_psyche, preview_clipper, preview_bepicolombo, preview_solo.
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+4. Paste its output here. You should see the counts fall: Juno's 113 events should drop to about 4, Clipper's 87 to about 5.
+
+Don't commit yet. The next patch picks up the preview's results, so no second half-hour run is needed.
+
+Patch A is delivered. Now the larger part: keying the twelve with their website entries. Starting with how slice 1 keyed bodies in the orrery and how the gallery mirrors them.
+
+Voyager 1 is served today but drawn only in the Explorer, not in the Solar System room. Reading the builder's spacecraft path and the renderer.
+
+The builder fetches a spacecraft's flown arc only, with Voyager 1's two typed windows. Now the mirror that copies the orrery's export into the config, since the plan will travel the same way.
+
+The mirror can carry each plan into the config the same way it carries periods. Now the room: how the Solar System room's driver chooses objects and how a spacecraft is drawn today.
+
+Nothing draws Voyager 1 today; the page never fetches position files. Let me read how the page boots a room and composes the Solar System room, to see where position files should be loaded.
+
+The identity check reads a spacecraft's name from JPL's Lookup service, which may differ from the data sheet's "Target body name". Reading the Lookup's own answer for two of the twelve before keying.
+
+The Lookup names match the data sheets' names without the id (BepiColombo is "(Spacecraft)" with a capital S, as JPL writes it). Reading what the export requires of a keyed entry.
+
+The export's requirements are clear. Now the approved links for the twelve, from the sources check.
+
+I have what I need to put the visitor words to you while I build. One question, with the lines in it.
+
+**One thing to approve: the words a visitor reads for a spacecraft in the Solar System room.** I'm building around them now; nothing ships until you say.
+
+**Drawer:** a group row named **Spacecraft**, right after Earth's row, holding the twelve.
+
+**Text box** (Voyager 1 as the example; the numbers are placeholders):
+> Voyager 1
+> • 169.9 AU from the Sun (25,420,000,000 km)
+> • JPL's own uncertainty for this position is not yet included.
+> • Its path is solid where it has already flown, and dashed where JPL's planned path takes it next, as far as 1 January 2100.
+
+The second line is the sentence you approved for asteroids on Oct 1. It prints for the same reason here: JPL's uncertainty for a spacecraft isn't served yet.
+
+**Info panel source line:**
+> JPL Horizons (https://ssd.jpl.nasa.gov/horizons/), Horizons id: -31. Positions measured from the Sun's centre, from 5 September 1977 to 1 January 2100, as far as JPL's data runs, retrieved 25 October 2026. A point every 7 days, closer together around each flyby, with the straightest stretches thinned. The position shown is worked out from the points on either side of the minute under the title.
+
+**The room's own panel:** "The spacecraft join later." becomes "The spacecraft are a group after Earth. Each path is solid where the spacecraft has flown and dashed where JPL plans it to go."
+
+One wording point: for Voyager 1 and 2 the dashed part is JPL's prediction of a coasting craft, not a planned course. "Planned" still reads true to me for a visitor, but you may prefer "planned or predicted".
+
+Approve as written, or mark what to change.
+
+While you look at the words, I'll key the twelve in the orrery. Reading their current entries.
+
+Writing the keys, JPL names, approved descriptions and links into the twelve entries.
+
+Now the export: a spacecraft gets no period (it has none to fetch), so the website prints no period line for it, as for the Sun.
+
+Now the dashboard button.
+
+Now the website half, starting with the builder: how a failed object is handled and what the served "today" point is checked against, since spacecraft paths will now run into the future.
+
+Writing the builder's fetch-by-plan now.
+
+Expected, from the raised bound. Updating that check and adding the path-by-plan checks.
+
+The builder suite passes, 400 of 400, with the eight new checks. Now the mirror copies each plan onto its entry.
+
+I'll copy only what the builder and room use from each plan (its date, span, backbone, and each event's body, kind, moment, window and step), keeping the config lean for the phone.
+
+Now the config: eleven new spacecraft entries beside Voyager 1, and the Spacecraft group in the drawer after Earth. Reading the exact text around Voyager 1's entry and Earth's row.
+
+Before changing Voyager 1's entry, let me read the Daily Run's order, both for L-461 and to confirm the mirror runs before the builder.
+
+Seeding works on the simulated rule-2 preview. Checking that the maintenance run's Path plan row then asks JPL nothing, and that the real (old-rule) preview file is refused.
+
+Both directions behave. Now the website side of the simulation: the export pulled into a gallery copy, the mirror writing the plans, then the builder suite on that config.
+
+The mirror writes all twelve plans and no period, as intended. Running the builder suite on that config.
+
+The builder suite passes on the simulated config, 433 of 433. Now the room's drawing side. Reading the assembler's orbit and marker renderers for units and trace conventions.
+
+Spacecraft colours should follow the orrery's palette. Reading the orrery's colour map for the twelve, and how the room finds a body's position marker when it frames the view.
+
+The design record asked that this wrong comment be corrected when slice 2 opened the assembler. Correcting it.
+
+Now the driver and boot step in the page.
+
+Now the text box itself. Replacing the distance/period/orbit block with a branch: spacecraft get their own three lines and source line, every other body keeps exactly what it had.
+
+Now testing the page headlessly. Reading the headless tools to see how they feed the driver, since this room now needs the position files too.
+
+The headless runner doesn't hand the driver any position files, so I'll teach it to, the same way the page does. Then I'll build a simulated served cache (fake straight-line paths) to drive it.
+
+Base config passes (434 of 434). Rebuilding the simulated cache to see the sizes with window thinning, then running the room's driver on it.
+
+One expected failure: the room's panel now has four bullets in its second list, not three. Updating that expectation, then adding a spacecraft section to the walk.
+
+Only my test's filter: it counted the group row itself. Fixing the filter.
+
+The walk passes 121 checks. Showing it can fail: a planted fault drawing the planned part solid.
+
+Three failures to understand. Reading each.
+
+The figures check knows each drawer body's accuracy group, distance and period; spacecraft have none of those, by design. Reading the check to add a spacecraft part rather than exempt them silently.
+
+I'll add a part 7 to this check for the spacecraft (worked cases, two planted faults, and every served spacecraft's line from the real cache), and keep parts 2 to 6 to the bodies that have orbits.
+
+Part 7 passes on the simulation. Now confirming the Sun and Earth rooms are untouched: the headless comparison drives every row and button in the old and new page and requires identical results.
+
+Now L-461: the Daily Run stops when the orrery it pulled is not the one in your orrery folder. Reading the pull step.
+
+The pulls record which orrery commit they fetched (the .sha files). To compare with your orrery folder I need its location; checking whether the gallery already knows it.
+
+Works, including reading the real clone's commit. One docstring backslash to remove.
+
+I'll add the eleven new positions files to that list (Voyager 1's is already there).
+
+Both stamped. Checking the export's own suite in the simulated orrery, where the export has been regenerated with the twelve.
+
+Both behave. Now generating the two build-B patches and testing each on clean copies. First confirming your gallery folder's copies of the files I edit match GitHub.
+
+Every file matches GitHub. Checking how earlier L-443 gallery patches were named, so the numbering follows.
+
+Patch 13 behaves in both cases, and refuses a second run. Now patch 14, the website.
+
+Before writing records, reading the ledger items this close touches: L-443, L-461, L-471 and L-484.
+
+Next free handle is L-487, though no new item seems needed. Now the four skill bumps the brief lists. Reading how each skill file and the histories file are laid out.
+
+Before writing the skill text, checking what last night's records say about "the path cache, keyed by name" so I record it accurately.
+
+Writing horizons-orbital-mechanics 1.11: the orbiter rule, the long-run behaviour, the keying paragraph now that the preview is gone, and last night's two record rules.
+
+The skill is written; only the history file's anchor missed (a leading space). Fixing that.
+
+Now gallery-cache-builder 1.12: fetching a spacecraft by its plan, and L-461's rule under the Daily Run.
+
+Now interactive-exhibit 1.24: the spacecraft in the Solar System room, and L-484's rule.
+
+Now safe-file-editing 1.14 with L-471's three rules.
+
+I'll generate horizons' contents list from its headings, fix the order in safe-file-editing and give it the read-plan seed, then let the index tool write the plans and the manifest.
+
+A colon in my description line breaks the YAML header. Fixing it and stamping the index tool.
+
+The skills check is clean. Now the protocol's version entry (v3.112), which moves v3.109 down into the history file. Reading where entries go there.
+
+Now the ledger: L-443's record and gap, L-461 built, L-470's two rules carried, L-471 done, L-484's rule in the skill, and the header stamp.
+
+Now Where We Are, edited section by section.
+
+135 lines above the marker; the cap is 130. Trimming: the orbiter line leaves Settled (it's built and in its skill), and two box bullets merge.
+
+Checking your folder's copies of the files the records patch edits.
+
+All match. Generating the records patch (14) and testing it, so everything is ready the moment you answer on the words.
+
+All three remaining patches are built and tested. Patch 13 (the keys) doesn't depend on your answer about the words, so I'll place it now; 14 and 15 carry the words and wait for you.
+
+I've built the spacecraft half of build B and cut there, before the comets, as you allowed. Two of the four patches are in your orrery folder. The other two, 14 (the records) and 15 (the website), are built and tested; I'm holding them until you answer on the visitor words I sent earlier, because they contain those words and a delivered patch is final.
+
+**One thing I need from you:** approve the spacecraft words, or mark changes. Five drawer labels are part of the same approval: OSIRIS-APEX, Parker Solar Probe, Solar Orbiter, Psyche spacecraft and Europa Clipper. The asteroid row stays "Psyche".
+
+**What's done:**
+- **The orbiter rule** is in the path plan (patch 12). A spacecraft that goes into orbit keeps only its arrival and its departure as events. The loops in between are dropped.
+- **The twelve spacecraft get their website names** (patch 13). They now carry their website keys, JPL's names and your approved descriptions. Patch 13 also copies your preview's flyby lists into the plans the website uses, so there's no second half-hour run. If you run it before the new preview finishes, it says so and points you to the dashboard button that rebuilds the lists.
+- **The website, ready in patch 15:**
+  - A Spacecraft group sits right after Earth's row.
+  - Each path is solid where the spacecraft has flown and dashed where JPL plans it to go.
+  - Go To shows a spacecraft's whole path.
+  - The nightly build downloads each path following its flyby list.
+- **L-461 (pull matches push)** is built into the Daily Run. If the orrery it pulls isn't your newest commit, it stops before the build and tells you to push.
+- **Four skills bumped** (protocol v3.112), and the records are written.
+
+**What has been checked so far:**
+- I ran the whole website chain here on made-up straight-line paths, because this sandbox can't reach JPL. The test suites pass, the Sun and Earth rooms behave exactly as before, and the website's offline checks pass except one that needs your orrery run to reach JPL.
+- Real paths, their real file sizes, and the phone haven't been tested yet. Your Daily Run and phone look are the first real test.
+- The download for one spacecraft was too big. The first simulated build came to about 1.7 MB, mostly from long fine-step stretches around each pass of the Sun. Each stretch now keeps only the points needed to show its curve: 68 KB on the test paths. The real size shows on your first Daily Run.
+
+**Your steps now:**
+1. Run patch 12, then `test_path_plan.py` (it should end "23 of 23 checks passed").
+2. Press "Path Plan -- preview of slice 2" on the dashboard and paste its output here. Juno should drop from 113 events to about 4.
+3. Don't run patch 13 until that preview has finished.
+
+The full run order is in the handoff that patch 14 writes. The comets come next session.
+
+Sources:
+- [NASA: asteroid sampling mission renamed OSIRIS-APEX](https://www.nasa.gov/solar-system/nasa-asteroid-sampling-mission-renamed-osiris-apex-for-new-journey/)
+- [JPL Horizons data sheet for -64](https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27-64%27&OBJ_DATA=YES&MAKE_EPHEM=NO)
+
+===========================================================================================
+
+Step 1 is done. Patch 12 applied, the test passed 23 of 23, and the preview ran. Its counts fell as expected: Juno went from 113 events to 4, and Europa Clipper from 87 to 5. I also tested patch 13's carry-over step on your actual preview file, and all twelve plans carry across, so you don't need to run the half-hour plan again.
+
+Here is the rest. Each one is the Run button in VS Code unless it says otherwise.
+
+**Orrery folder**
+
+2. Close the dashboard. Run `patch_L443_13_keys_20261025.py`. It prints an "ok" line for each file. Then it prints a line naming the twelve plans it carried, and a line saying it removed `data/path_plans_preview.json`. It ends with "patch applied".
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L443_13_keys_20261025.py
+ok  celestial_objects.py (8 edits)
+ok  export_objects.py (4 edits)
+ok  path_plan.py (10 edits)
+ok  test_path_plan.py (3 edits)
+ok  palomas_orrery_dashboard.py (3 edits)
+ok  data/path_plans.json: carried from the preview: voyager_1 2 events, voyager_2 5 events, new_horizons 2 events, juno 4 events, osiris_apex 13 events, parker_solar_probe 49 events, lucy 7 events, juice 10 events, psyche_spacecraft 2 events, europa_clipper 5 events, bepicolombo 35 events, solar_orbiter 31 events
+ok  data/path_plans_preview.json: removed (every plan in it carried)
+patch applied: the twelve spacecraft keyed, Oct 25 (5 files edited, 0 new)
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+3. Run `patch_L443_14_session_close_20261025.py`. This writes today's records and the four skill updates. It prints the same kind of output.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L443_14_session_close_20261025.py
+ok  LEDGER_CONSOLIDATED.md (10 edits)
+ok  documentation/WHERE_WE_ARE.md (6 edits)
+ok  PROJECT_INSTRUCTIONS.md (8 edits)
+ok  documentation/PROJECT_INSTRUCTIONS_HISTORY.md (1 edits)
+ok  documentation/SKILL_HISTORIES.md (3 edits)
+ok  skills/horizons-orbital-mechanics/SKILL.md (4 edits)
+ok  skills/gallery-cache-builder/SKILL.md (5 edits)
+ok  skills/interactive-exhibit/SKILL.md (7 edits)
+ok  skills/safe-file-editing/SKILL.md (3 edits)
+ok  skills_index.py (2 edits)
+ok  documentation/HANDOFF_L443_slice2_buildB_spacecraft_20261025.md: new
+patch applied: the close of Oct 25 (10 files edited, 1 new)
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+4. Run `orrery_maintenance_run.py`, with the internet on. The Horizons check will ask JPL about the twelve spacecraft, because they are new. The Path plan row should say twelve paths and "Asked JPL for: nothing".
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261025T043933Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 2.7s  rewrote LEDGER_CONSOLIDATED.md
+  Skill manifest               0.3s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             1.5s  unchanged (1 checked, not written)
+  Period fetch                 0.3s  unchanged (1 checked, not written) --
+                                     NOTHING MISSING -- 75 served objects
+                                     examined, no query asked
+  Horizons check               3.2s  exit 1 -- UNREACHABLE -- JPL could not be
+                                     reached (first at voyager_1's identity); not
+                                     checked, and still due: voyager_1's
+                                     identity, voyager_2's identity,
+                                     new_horizons's identity, juno's identity,
+                                     osiris_apex's identity, parker_solar_probe's
+                                     identity, lucy's identity, juice's identity,
+                                     psyche_spacecraft's identity,
+                                     europa_clipper's identity, bepicolombo's
+                                     identity, solar_orbiter's identity
+  Path plan                    0.3s  unchanged (1 checked, not written) -- 12
+                                     paths, events bepicolombo 35, europa_clipper
+                                     5, juice 10, juno 4, lucy 7, new_horizons 2,
+                                     osiris_apex 13, parker_solar_probe 49,
+                                     psyche_spacecraft 2, solar_orbiter 31,
+                                     voyager_1 2, voyager_2 5. Asked JPL for:
+                                     nothing.
+  Objects export               0.3s  rewrote data/objects_export.json
+  Drawings export              2.0s  unchanged (7 checked, not written)
+  Module atlas                 8.7s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               5.5s  rewrote DATA_INVENTORY.md
+  Exact rows report            4.0s  unchanged (1 checked, not written) -- 11 of
+                                     43 exact rows printed at 40 lines (25
+                                     orrery, 15 gallery); 12 drawn only, 0 not
+                                     followed, 0 map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.2s  No changes to constants_new.py since HEAD.
+  Constants relations          0.3s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              1.7s  No figure count exceeds its inputs: 39
+                                     derived row(s) read, 32 judged OK -- 32 OK,
+                                     7 NOT YET MIGRATED; 23 conversion(s)
+                                     checked.
+  Constants export check       3.3s  Export matches the store: sha256
+                                     7b6358d39781 on both sides; 206 rows
+                                     re-read, 57 not exported, 44 tokens; 480
+                                     conversions re-computed, 10 of 10 worked
+                                     cases hold; 206 citations worked out again,
+                                     8 of 8 worked cases hold.
+  Objects export check         0.3s  pass
+  Horizons confirmations       0.4s  FAILED (exit 1) -- UNREACHABLE --
+                                     voyager_1;...
+  Horizons check suite         0.7s  pass -- 64 checks, every planted fault
+                                     caught by name
+  Period fetch suite           3.7s  pass -- 36 checks, every planted fault
+                                     caught (20 planted, 8 of them for Earth's
+                                     period, L-445)
+  Path plan suite              3.8s  23 of 23 checks passed
+  Skill headers                0.2s  12 skills parsed, no consistency problems.
+  Exact rows by the count      2.9s  PASSING -- 11 printed exact rows each state
+                                     a count; 25 orrery lines print through
+                                     exact_text() or row_text(); 15 gallery lines
+                                     are served the count
+  Dimensions                   1.7s  No unit contradicts its arithmetic: 62
+                                     derived row(s) read -- 53 OK, 6 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.1s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.1s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 204 status lines in constants_new.py are
+                                     well formed; 56 rows carry none.
+  Row shape                    0.1s  All 263 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.3s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Scanner row run (L-414)      0.3s  16 of 16 pins hold -- each row reads its own
+                                     comment run, declared rows are named, the
+                                     gate path is read by name.
+  Reset completeness          27.9s  PASS -- all 308 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  2.0s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped; nothing left behind.
+  Earth pole of date           0.3s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Hills cloud sampler (L-421)    1.0s  PASS -- 6 of 6 planted faults caught; the
+                                     real rows pass, the dots' plane tilted 34.0
+                                     deg
+  Drawings export check       27.6s  PASS -- 19 of 19 planted faults caught;
+                                     hills_cloud 3600 dots, plane tilted 31.0
+                                     deg, sha256 4d3e85616645; van_allen_belts
+                                     3200 dots, no plane recorded, sha256
+                                     75274e84f840; earth_exosphere 1500 dots, no
+                                     plane recorded, sha256 6112639fb2cd;
+                                     sun_corona 2500 dots, no plane recorded,
+                                     sha256 e2b57ccbc8a4; zodiacal_dust 3000
+                                     dots, no plane recorded, sha256
+                                     995f13a056e8; outer_oort_cloud 2736 dots, no
+                                     plane recorded, sha256 2f7ab88ee113;
+                                     galactic_tide 5000 dots, no plane recorded,
+                                     sha256 950a7511f0b5
+  Position digits (L-401)      1.8s  PASS -- 14 of 14 planted faults caught by
+                                     name; 23 hovers examined, 181 lines compared
+                                     against their errors; 5 pairs printed the
+                                     same from either end; 496 hovers of every
+                                     listed object from the Sun, Earth and
+                                     Neptune; 3 recorded 2xr answers read by
+                                     column name; 10 period sentences
+  Orbit markers (L-431, L-401)    9.0s  PASS -- 12 of 12 planted faults caught by
+                                     name; 4 ellipses, 1080 drawn points on their
+                                     period's centre; 14 markers, 9 dates, 53
+                                     printed distances against their errors; 6
+                                     elements as given; 3 Keplerian positions
+                                     half a year on; 1 parameters-window date
+                                     pairs; 2 Moon arcs; 2 perturbation checks; 1
+                                     perihelion osculating orbits; 2 frames; 2
+                                     sources read
+  Domain Split                 0.5s  PASS -- 6 of 6 planted faults caught; the
+                                     split reads each module's Domain: tag and
+                                     prints the same on the console, in the audit
+                                     and in the run history.
+  Maintenance report (L-269)    0.1s  PASS -- 4 of 4 planted faults caught by
+                                     name; 4 summaries; 2 risen file(s) named
+  Dashboard parity             0.3s  PASS -- 10 of 10 planted faults caught; 92
+                                     steps matched to their buttons by name and
+                                     script; 124 cards carry a short line; the
+                                     search finds 4 of 4 cases in any word order
+  Worksheet checker            7.2s  72 of 107 routed, 8 clean
+  Worksheet checker tests     18.6s  All 135 checks passed
+  Worksheet key round trip     1.1s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         26.2s  All 76 checks passed
+  Extractor pins               0.5s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          56.3s  0 TIER-1 -- the push gate holds; Whole tree,
+                                     Tier-1: 276: orrery 112, Earth System 149,
+                                     stars 13, utilities 2.
+
+======================================================================
+  1 of 34 checkers FAILED -- 229.2s total
+  Horizons confirmations
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           72 of 107 routed, 8 clean
+    Provenance scanner          0 TIER-1 -- the push gate holds; Whole tree, Tier-1: 276: orrery 112, Earth System 149, stars 13, utilities 2.
+      No file's Tier-1 count rose since the previous run.
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2472 file(s) examined, 10 written, 0 created, 0 removed, 3 rewritten identically
+    written   DATA_INVENTORY.md
+    written   LEDGER_CONSOLIDATED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/horizons_check_last_run.json
+    written   data/objects_export.json
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    rewritten with identical bytes, no action needed:
+      PROJECT_INSTRUCTIONS.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+    21 file(s) over 2 MB compared by size and mtime only
+
+----------------------------------------------------------------------
+Horizons check -- exit 1 -- UNREACHABLE -- JPL could not be reached (first at voyager_1's identity); not checked, and still due: voyager_1's identity, voyager_2's identity, new_horizons's identity, juno's identity, osiris_apex's identity, parker_solar_probe's identity, lucy's identity, juice's identity, psyche_spacecraft's identity, europa_clipper's identity, bepicolombo's identity, solar_orbiter's identity
+----------------------------------------------------------------------
+======================================================================
+  HORIZONS CHECK -- 2026-10-25
+======================================================================
+Read celestial_objects.py (2007d3d4...) through export_objects.py, data/horizons_confirmations.json and data/spacecraft_sheets.json.
+Examined 75 keyed entries and 26 spacecraft sheets: 12 due, 2 queries asked of JPL.
+
+  sun                identity not due (confirmed on 2026-10-10, 15 days ago)
+  mercury            identity not due (confirmed on 2026-10-10, 15 days ago)
+  mercury            period confirmed on 2026-10-20, 5 days ago, not due
+  venus              identity not due (confirmed on 2026-10-10, 15 days ago)
+  venus              period confirmed on 2026-10-20, 5 days ago, not due
+  earth              identity not due (confirmed on 2026-10-10, 15 days ago)
+  earth              period confirmed on 2026-10-20, 5 days ago, not due
+  mars               identity not due (confirmed on 2026-10-10, 15 days ago)
+  mars               period confirmed on 2026-10-20, 5 days ago, not due
+  jupiter            identity not due (confirmed on 2026-10-10, 15 days ago)
+  jupiter            period confirmed on 2026-10-20, 5 days ago, not due
+  eurybates          identity not due (confirmed on 2026-10-22, 3 days ago)
+  eurybates          period confirmed on 2026-10-22, 3 days ago, not due
+  patroclus          identity not due (confirmed on 2026-10-22, 3 days ago)
+  patroclus          period confirmed on 2026-10-22, 3 days ago, not due
+  polymele           identity not due (confirmed on 2026-10-22, 3 days ago)
+  polymele           period confirmed on 2026-10-22, 3 days ago, not due
+  leucus             identity not due (confirmed on 2026-10-22, 3 days ago)
+  leucus             period confirmed on 2026-10-22, 3 days ago, not due
+  orus               identity not due (confirmed on 2026-10-22, 3 days ago)
+  orus               period confirmed on 2026-10-22, 3 days ago, not due
+  saturn             identity not due (confirmed on 2026-10-10, 15 days ago)
+  saturn             period confirmed on 2026-10-20, 5 days ago, not due
+  uranus             identity not due (confirmed on 2026-10-10, 15 days ago)
+  uranus             period confirmed on 2026-10-15, 10 days ago, not due
+  neptune            identity not due (confirmed on 2026-10-10, 15 days ago)
+  neptune            period confirmed on 2026-10-15, 10 days ago, not due
+  chariklo           identity not due (confirmed on 2026-10-22, 3 days ago)
+  chariklo           period confirmed on 2026-10-22, 3 days ago, not due
+  pluto_barycenter   identity not due (confirmed on 2026-10-10, 15 days ago)
+  ceres              identity not due (confirmed on 2026-10-22, 3 days ago)
+  ceres              period confirmed on 2026-10-22, 3 days ago, not due
+  haumea             identity not due (confirmed on 2026-10-22, 3 days ago)
+  haumea             period confirmed on 2026-10-22, 3 days ago, not due
+  eris               identity not due (confirmed on 2026-10-22, 3 days ago)
+  eris               period confirmed on 2026-10-22, 3 days ago, not due
+  gonggong           identity not due (confirmed on 2026-10-22, 3 days ago)
+  gonggong           period confirmed on 2026-10-23, 2 days ago, not due
+  makemake           identity not due (confirmed on 2026-10-22, 3 days ago)
+  makemake           period confirmed on 2026-10-22, 3 days ago, not due
+  mani               identity not due (confirmed on 2026-10-22, 3 days ago)
+  mani               period confirmed on 2026-10-22, 3 days ago, not due
+  orcus              identity not due (confirmed on 2026-10-22, 3 days ago)
+  orcus              period confirmed on 2026-10-22, 3 days ago, not due
+  quaoar             identity not due (confirmed on 2026-10-22, 3 days ago)
+  quaoar             period confirmed on 2026-10-22, 3 days ago, not due
+  sedna              identity not due (confirmed on 2026-10-22, 3 days ago)
+  sedna              period confirmed on 2026-10-22, 3 days ago, not due
+  leleakuhonua       identity not due (confirmed on 2026-10-22, 3 days ago)
+  leleakuhonua       period confirmed on 2026-10-22, 3 days ago, not due
+  tno_2017_of201     identity not due (confirmed on 2026-10-22, 3 days ago)
+  tno_2017_of201     period confirmed on 2026-10-22, 3 days ago, not due
+  asteroid_2025_pn7  identity not due (confirmed on 2026-10-22, 3 days ago)
+  asteroid_2025_pn7  period confirmed on 2026-10-22, 3 days ago, not due
+  asteroid_2024_pt5  identity not due (confirmed on 2026-10-22, 3 days ago)
+  asteroid_2024_pt5  period confirmed on 2026-10-22, 3 days ago, not due
+  asteroid_2025_py1  identity not due (confirmed on 2026-10-22, 3 days ago)
+  asteroid_2025_py1  period confirmed on 2026-10-22, 3 days ago, not due
+  asteroid_2023_jf   identity not due (confirmed on 2026-10-22, 3 days ago)
+  asteroid_2023_jf   period confirmed on 2026-10-22, 3 days ago, not due
+  asteroid_2024_dw   identity not due (confirmed on 2026-10-22, 3 days ago)
+  asteroid_2024_dw   period confirmed on 2026-10-22, 3 days ago, not due
+  asteroid_2024_yr4  identity not due (confirmed on 2026-10-22, 3 days ago)
+  asteroid_2024_yr4  period confirmed on 2026-10-22, 3 days ago, not due
+  kamo_oalewa        identity not due (confirmed on 2026-10-22, 3 days ago)
+  kamo_oalewa        period confirmed on 2026-10-22, 3 days ago, not due
+  psyche             identity not due (confirmed on 2026-10-22, 3 days ago)
+  psyche             period confirmed on 2026-10-22, 3 days ago, not due
+  apophis            identity not due (confirmed on 2026-10-10, 15 days ago)
+  apophis            period confirmed on 2026-10-15, 10 days ago, not due
+  bennu              identity not due (confirmed on 2026-10-22, 3 days ago)
+  bennu              period confirmed on 2026-10-22, 3 days ago, not due
+  eros               identity not due (confirmed on 2026-10-22, 3 days ago)
+  eros               period confirmed on 2026-10-22, 3 days ago, not due
+  dinkinesh          identity not due (confirmed on 2026-10-22, 3 days ago)
+  dinkinesh          period confirmed on 2026-10-22, 3 days ago, not due
+  itokawa            identity not due (confirmed on 2026-10-22, 3 days ago)
+  itokawa            period confirmed on 2026-10-22, 3 days ago, not due
+  lutetia            identity not due (confirmed on 2026-10-22, 3 days ago)
+  lutetia            period confirmed on 2026-10-22, 3 days ago, not due
+  ryugu              identity not due (confirmed on 2026-10-22, 3 days ago)
+  ryugu              period confirmed on 2026-10-22, 3 days ago, not due
+  steins             identity not due (confirmed on 2026-10-22, 3 days ago)
+  steins             period confirmed on 2026-10-22, 3 days ago, not due
+  donaldjohanson     identity not due (confirmed on 2026-10-22, 3 days ago)
+  donaldjohanson     period confirmed on 2026-10-22, 3 days ago, not due
+  vesta              identity not due (confirmed on 2026-10-22, 3 days ago)
+  vesta              period confirmed on 2026-10-22, 3 days ago, not due
+  arrokoth           identity not due (confirmed on 2026-10-22, 3 days ago)
+  arrokoth           period confirmed on 2026-10-22, 3 days ago, not due
+  ixion              identity not due (confirmed on 2026-10-22, 3 days ago)
+  ixion              period confirmed on 2026-10-22, 3 days ago, not due
+  goibniu            identity not due (confirmed on 2026-10-22, 3 days ago)
+  goibniu            period confirmed on 2026-10-22, 3 days ago, not due
+  varuna             identity not due (confirmed on 2026-10-22, 3 days ago)
+  varuna             period confirmed on 2026-10-22, 3 days ago, not due
+  ammonite           identity not due (confirmed on 2026-10-22, 3 days ago)
+  ammonite           period confirmed on 2026-10-22, 3 days ago, not due
+  tempel_2           identity not due (confirmed on 2026-10-22, 3 days ago)
+  tempel_2           period confirmed on 2026-10-22, 3 days ago, not due
+  schaumasse         identity not due (confirmed on 2026-10-22, 3 days ago)
+  schaumasse         period confirmed on 2026-10-22, 3 days ago, not due
+  howell             identity not due (confirmed on 2026-10-22, 3 days ago)
+  howell             period confirmed on 2026-10-22, 3 days ago, not due
+  churyumov          identity not due (confirmed on 2026-10-22, 3 days ago)
+  churyumov          period confirmed on 2026-10-22, 3 days ago, not due
+  hale_bopp          identity not due (confirmed on 2026-10-22, 3 days ago)
+  hale_bopp          period confirmed on 2026-10-22, 3 days ago, not due
+  halley             identity not due (confirmed on 2026-10-10, 15 days ago)
+  halley             period confirmed on 2026-10-15, 10 days ago, not due
+  encke              identity not due (confirmed on 2026-10-10, 15 days ago)
+  encke              period confirmed on 2026-10-14, 11 days ago, not due
+  hyakutake          identity not due (confirmed on 2026-10-22, 3 days ago)
+  hyakutake          period confirmed on 2026-10-22, 3 days ago, not due
+  lemmon             identity not due (confirmed on 2026-10-22, 3 days ago)
+  lemmon             period confirmed on 2026-10-22, 3 days ago, not due
+  ikeya_seki         identity not due (confirmed on 2026-10-22, 3 days ago)
+  ikeya_seki         period confirmed on 2026-10-22, 3 days ago, not due
+  neowise            identity not due (confirmed on 2026-10-22, 3 days ago)
+  neowise            period confirmed on 2026-10-22, 3 days ago, not due
+  swan               identity not due (confirmed on 2026-10-22, 3 days ago)
+  swan               period confirmed on 2026-10-22, 3 days ago, not due
+  maps               identity not due (confirmed on 2026-10-22, 3 days ago)
+  maps               period confirmed on 2026-10-22, 3 days ago, not due
+  sheets             26 of 26 not due
+  voyager_1          identity could not reach JPL -- the Lookup answer names no object and does not say 'no matches found'  [due: never confirmed]
+  voyager_2          identity not asked -- JPL could not be reached for voyager_1's identity earlier in this run  [due: never confirmed]
+  new_horizons       identity not asked -- JPL could not be reached for voyager_1's identity earlier in this run  [due: never confirmed]
+  juno               identity not asked -- JPL could not be reached for voyager_1's identity earlier in this run  [due: never confirmed]
+  osiris_apex        identity not asked -- JPL could not be reached for voyager_1's identity earlier in this run  [due: never confirmed]
+  parker_solar_probe identity not asked -- JPL could not be reached for voyager_1's identity earlier in this run  [due: never confirmed]
+  lucy               identity not asked -- JPL could not be reached for voyager_1's identity earlier in this run  [due: never confirmed]
+  juice              identity not asked -- JPL could not be reached for voyager_1's identity earlier in this run  [due: never confirmed]
+  psyche_spacecraft  identity not asked -- JPL could not be reached for voyager_1's identity earlier in this run  [due: never confirmed]
+  europa_clipper     identity not asked -- JPL could not be reached for voyager_1's identity earlier in this run  [due: never confirmed]
+  bepicolombo        identity not asked -- JPL could not be reached for voyager_1's identity earlier in this run  [due: never confirmed]
+  solar_orbiter      identity not asked -- JPL could not be reached for voyager_1's identity earlier in this run  [due: never confirmed]
+
+Periods not compared, which the website marks as not from JPL: pluto_barycenter (no period fetched from JPL); voyager_1 (no period fetched from JPL); voyager_2 (no period fetched from JPL); new_horizons (no period fetched from JPL); juno (typed, not fetched from JPL); osiris_apex (no period fetched from JPL); parker_solar_probe (no period fetched from JPL); lucy (no period fetched from JPL); juice (no period fetched from JPL); psyche_spacecraft (no period fetched from JPL); europa_clipper (no period fetched from JPL); bepicolombo (no period fetched from JPL); solar_orbiter (no period fetched from JPL).
+
+  voyager_1 (identity): could not reach JPL (the Lookup answer names no object and does not say 'no matches found').
+    query:  https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-31&group=sb&format=text
+
+Nothing in the list or in constants_new.py is edited here. A simple error is fixed by a session's patch; a choice goes to Tony.
+HORIZONS CHECK: UNREACHABLE -- JPL could not be reached (first at voyager_1's identity); not checked, and still due: voyager_1's identity, voyager_2's identity, new_horizons's identity, juno's identity, osiris_apex's identity, parker_solar_probe's identity, lucy's identity, juice's identity, psyche_spacecraft's identity, europa_clipper's identity, bepicolombo's identity, solar_orbiter's identity
+
+----------------------------------------------------------------------
+Horizons confirmations -- FAILED (exit 1) -- UNREACHABLE -- voyager_1;...
+----------------------------------------------------------------------
+Read celestial_objects.py (75 keyed entries), data/horizons_confirmations.json (63) and data/spacecraft_sheets.json (26 sheets), 2026-10-25.
+  sun                ok   -- identity confirmed on 2026-10-10, 15 days ago; period no period fetched from JPL, not compared
+  mercury            ok   -- identity confirmed on 2026-10-10, 15 days ago; period confirmed on 2026-10-20, 5 days ago
+  venus              ok   -- identity confirmed on 2026-10-10, 15 days ago; period confirmed on 2026-10-20, 5 days ago
+  earth              ok   -- identity confirmed on 2026-10-10, 15 days ago; period confirmed on 2026-10-20, 5 days ago
+  mars               ok   -- identity confirmed on 2026-10-10, 15 days ago; period confirmed on 2026-10-20, 5 days ago
+  jupiter            ok   -- identity confirmed on 2026-10-10, 15 days ago; period confirmed on 2026-10-20, 5 days ago
+  eurybates          ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  patroclus          ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  polymele           ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  leucus             ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  orus               ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  saturn             ok   -- identity confirmed on 2026-10-10, 15 days ago; period confirmed on 2026-10-20, 5 days ago
+  uranus             ok   -- identity confirmed on 2026-10-10, 15 days ago; period confirmed on 2026-10-15, 10 days ago
+  neptune            ok   -- identity confirmed on 2026-10-10, 15 days ago; period confirmed on 2026-10-15, 10 days ago
+  chariklo           ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  pluto_barycenter   ok   -- identity confirmed on 2026-10-10, 15 days ago; period no period fetched from JPL, not compared
+  ceres              ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  haumea             ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  eris               ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  gonggong           ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-23, 2 days ago
+  makemake           ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  mani               ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  orcus              ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  quaoar             ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  sedna              ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  leleakuhonua       ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  tno_2017_of201     ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  asteroid_2025_pn7  ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  asteroid_2024_pt5  ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  asteroid_2025_py1  ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  asteroid_2023_jf   ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  asteroid_2024_dw   ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  asteroid_2024_yr4  ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  kamo_oalewa        ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  psyche             ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  apophis            ok   -- identity confirmed on 2026-10-10, 15 days ago; period confirmed on 2026-10-15, 10 days ago
+  bennu              ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  eros               ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  dinkinesh          ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  itokawa            ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  lutetia            ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  ryugu              ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  steins             ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  donaldjohanson     ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  vesta              ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  arrokoth           ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  ixion              ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  goibniu            ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  varuna             ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  ammonite           ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  tempel_2           ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  schaumasse         ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  howell             ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  churyumov          ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  hale_bopp          ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  halley             ok   -- identity confirmed on 2026-10-10, 15 days ago; period confirmed on 2026-10-15, 10 days ago
+  encke              ok   -- identity confirmed on 2026-10-10, 15 days ago; period confirmed on 2026-10-14, 11 days ago
+  hyakutake          ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  lemmon             ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  ikeya_seki         ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  neowise            ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  swan               ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  maps               ok   -- identity confirmed on 2026-10-22, 3 days ago; period confirmed on 2026-10-22, 3 days ago
+  voyager_1          FAIL -- never confirmed
+  voyager_2          FAIL -- never confirmed
+  new_horizons       FAIL -- never confirmed
+  juno               FAIL -- never confirmed
+  osiris_apex        FAIL -- never confirmed
+  parker_solar_probe FAIL -- never confirmed
+  lucy               FAIL -- never confirmed
+  juice              FAIL -- never confirmed
+  psyche_spacecraft  FAIL -- never confirmed
+  europa_clipper     FAIL -- never confirmed
+  bepicolombo        FAIL -- never confirmed
+  solar_orbiter      FAIL -- never confirmed
+  sheets             26 of 26 current, each figure a row quotes as the sheet gives it
+Today's Horizons check: UNREACHABLE, 12 due, 2 queries asked.
+Periods not compared, which the website marks as not from JPL: pluto_barycenter (no period fetched from JPL); voyager_1 (no period fetched from JPL); voyager_2 (no period fetched from JPL); new_horizons (no period fetched from JPL); juno (typed, not fetched from JPL); osiris_apex (no period fetched from JPL); parker_solar_probe (no period fetched from JPL); lucy (no period fetched from JPL); juice (no period fetched from JPL); psyche_spacecraft (no period fetched from JPL); europa_clipper (no period fetched from JPL); bepicolombo (no period fetched from JPL); solar_orbiter (no period fetched from JPL).
+FAILURES (13):
+  - voyager_1: never confirmed
+  - voyager_2: never confirmed
+  - new_horizons: never confirmed
+  - juno: never confirmed
+  - osiris_apex: never confirmed
+  - parker_solar_probe: never confirmed
+  - lucy: never confirmed
+  - juice: never confirmed
+  - psyche_spacecraft: never confirmed
+  - europa_clipper: never confirmed
+  - bepicolombo: never confirmed
+  - solar_orbiter: never confirmed
+  - UNREACHABLE: JPL could not be reached today; still due: voyager_1's identity, voyager_2's identity, new_horizons's identity, juno's identity, osiris_apex's identity, parker_solar_probe's identity, lucy's identity, juice's identity, psyche_spacecraft's identity, europa_clipper's identity, bepicolombo's identity, solar_orbiter's identity
+Run the maintenance run on a machine that reaches JPL; a disagreement is fixed by a session's patch.
+HORIZONS CONFIRMATIONS: UNREACHABLE -- voyager_1; voyager_2; new_horizons; juno; osiris_apex; parker_solar_probe; lucy; juice; psyche_spacecraft; europa_clipper; bepicolombo; solar_orbiter; UNREACHABLE
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+5. Move patches 12, 13 and 14 into `documentation\`.
+6. In GitHub Desktop, commit everything and push. The commit will also show `COORD_L461_stop_ruling_20261025.md` and the removal of the preview file. Both are expected. -- 
+7. In Settings > Skills, reinstall four skills:
+   - horizons-orbital-mechanics (1.11)
+   - gallery-cache-builder (1.12)
+   - interactive-exhibit (1.24)
+   - safe-file-editing (1.14)
+
+**Website folder**
+
+8. Run `patch_L443_15_spacecraft_room_20261025.py`. It prints an "ok" line for each file, then "patch applied". Move it into `documentation\`.
+9. On the dashboard, press **Daily Run**, not just the maintenance run. After the pulls, look for a new line that starts "Pull matches push". This build fetches the twelve paths for the first time, so it will take a few minutes longer than usual.
+10. In GitHub Desktop, commit and push. Then run the live maintenance run.
+11. Check the Solar System room on your phone:
+    - Open the Spacecraft group.
+    - Tick Voyager 1, then Juno, then Parker Solar Probe, one at a time. Each path should be solid behind the spacecraft and dashed ahead of it. Check that each text box reads right.
+    - Press Go To on Voyager 1. The view should hold its whole path.
+    - Press Reset.
+
+Please paste the output from steps 2 to 4 here when you have it, so I can check them before you commit in step 6.

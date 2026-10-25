@@ -42,6 +42,13 @@ comet, PANSTARRS (C/2025 B1), and its designation returns the comet and
 its three pieces. The pieces' record comments corrected; four claims no
 page supports taken out of the four descriptions; "hyperbolic" kept with
 plain words for what it means, by Tony's rulings of this day.)
+Module updated: October 25, 2026 with Anthropic's Claude Opus 5.5 (L-443,
+build B of slice 2: the twelve spacecraft still flying among the planets
+keyed for the website -- Voyager 1 and 2, New Horizons, Juno, Lucy, JUICE,
+Psyche, Europa Clipper, BepiColombo, Solar Orbiter, Parker Solar Probe and
+OSIRIS-APEX -- each with JPL's name and the description and link Tony
+approved, BepiColombo's with no date, Juno's with nothing about when it
+ends. Their dates are unchanged here; L-476 reads them from the path plan.)
 """
 
 from datetime import datetime
@@ -781,15 +788,15 @@ OBJECT_DEFINITIONS = [
     'mission_url': 'https://www.nasa.gov/centers/ames/missions/archive/pioneer.html', 
     'mission_info': 'Horizons: -24. First spacecraft to encounter Saturn and study its rings.'},
 
-    {'name': 'Voyager 1', 'id': '-31', 'var_name': 'voyager1_var', 'color_key': 'Voyager 1', 'symbol': 'diamond-open', 
+    {'name': 'Voyager 1', 'key': 'voyager_1', 'id': '-31', 'horizons_name': 'Voyager 1 (spacecraft)', 'var_name': 'voyager1_var', 'color_key': 'Voyager 1', 'symbol': 'diamond-open', 
     'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(1977, 9, 6), 'end_date': datetime(2029, 12, 31), 
     'mission_url': 'https://voyager.jpl.nasa.gov/mission/', 
-    'mission_info': 'Horizons: -31. Launched in 1977, Voyager 1 is the farthest spacecraft from Earth.'},
+    'mission_info': 'Horizons: -31. Launched in 1977, Voyager 1 is the farthest spacecraft from Earth. In 2012 it became the first spacecraft to reach interstellar space.'},
 
-    {'name': 'Voyager 2', 'id': '-32', 'var_name': 'voyager2_var', 'color_key': 'Voyager 2', 'symbol': 'diamond-open', 
+    {'name': 'Voyager 2', 'key': 'voyager_2', 'id': '-32', 'horizons_name': 'Voyager 2 (spacecraft)', 'var_name': 'voyager2_var', 'color_key': 'Voyager 2', 'symbol': 'diamond-open', 
     'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(1977, 8, 21), 'end_date': datetime(2029, 12, 31), 
     'mission_url': 'https://voyager.jpl.nasa.gov/mission/', 
-    'mission_info': 'Horizons: -32. Launched in 1977, Voyager 2 explored all four giant planets.'},
+    'mission_info': 'Horizons: -32. Launched in 1977, Voyager 2 is the only spacecraft to have visited all four giant planets, and the only one to visit Uranus and Neptune.'},
 
     {'name': 'Galileo', 'id': '-77', 'var_name': 'galileo_var', 'color_key': 'Galileo', 'symbol': 'diamond-open', 'object_type': 'trajectory', 
     'id_type': 'id', 'is_mission': True, 'start_date': datetime(1989, 10, 20), 'end_date': datetime(2003, 9, 29),
@@ -817,12 +824,12 @@ OBJECT_DEFINITIONS = [
     'mission_url': 'https://rosetta.esa.int/', 
     'mission_info': 'Horizons: -226. European Space Agency mission to study Comet 67P/Churyumov-Gerasimenko.'},
 
-    {'name': 'New Horizons', 'id': '-98', 'var_name': 'new_horizons_var', 'color_key': 'New Horizons', 'symbol': 'diamond-open', 
+    {'name': 'New Horizons', 'key': 'new_horizons', 'id': '-98', 'horizons_name': 'New Horizons (spacecraft)', 'var_name': 'new_horizons_var', 'color_key': 'New Horizons', 'symbol': 'diamond-open', 
     'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2006, 1, 20), 'end_date': datetime(2029, 12, 31), 
     # No ephemeris for target "New Horizons (spacecraft)" prior to A.D. 2006-JAN-19 19:50:13.1460 UT
     # No ephemeris for target "New Horizons (spacecraft)" after A.D. 2030-JAN-01 11:58:50.8161 UT
-    'mission_url': 'https://www.nasa.gov/mission_pages/newhorizons/main/index.html', 
-    'mission_info': 'Horizons: -98. New Horizons flew past Pluto in 2015 and continues into the Kuiper Belt.'},
+    'mission_url': 'https://science.nasa.gov/mission/new-horizons/', 
+    'mission_info': 'Horizons: -98. New Horizons flew past Pluto in July 2015 and past Arrokoth on January 1, 2019. It is still travelling outward through the Kuiper Belt.'},
 
     {'name': 'Akatsuki', 'id': '-5', 'var_name': 'akatsuki_var', 'color_key': 'Akatsuki', 'symbol': 'diamond-open',
     # Akatsuki / VCO / Planet-C (spacecraft)           -5 
@@ -832,12 +839,12 @@ OBJECT_DEFINITIONS = [
     'mission_info': 'Horizons: -5. JAXA mission to study the atmospheric circulation of Venus', 
     'mission_url': 'https://en.wikipedia.org/wiki/Akatsuki_(spacecraft)'},
 
-    {'name': 'Juno', 'id': '-61', 'var_name': 'juno_var', 'color_key': 'Juno', 'symbol': 'diamond-open', 'object_type': 'trajectory', 
+    {'name': 'Juno', 'key': 'juno', 'id': '-61', 'horizons_name': 'Juno (spacecraft)', 'var_name': 'juno_var', 'color_key': 'Juno', 'symbol': 'diamond-open', 'object_type': 'trajectory', 
     'id_type': 'id', 'is_mission': True, 'start_date': datetime(2011, 8, 6), 'end_date': datetime(2028, 9, 30), 
     # No ephemeris for target "Juno (spacecraft)" prior to A.D. 2011-AUG-05 17:18:06.0000 UT
     # No ephemeris for target "Juno (spacecraft)" after A.D. 2028-SEP-30 23:58:50.8177 UT
-    'mission_url': 'https://www.nasa.gov/mission_pages/juno/main/index.html', 
-    'mission_info': 'Horizons: -61. Juno studies Jupiter\'s atmosphere and magnetosphere.'},
+    'mission_url': 'https://science.nasa.gov/mission/juno/', 
+    'mission_info': 'Horizons: -61. NASA\'s Juno has orbited Jupiter since July 2016, studying its interior, its atmosphere and the region its magnetic field controls, the magnetosphere.'},
 
     {'name': 'Gaia', 'id': '-139479', 'var_name': 'gaia_var', 'color_key': 'Gaia', 'symbol': 'diamond-open', 'object_type': 'trajectory', 
     'id_type': 'id', 'is_mission': True, 'start_date': datetime(2013, 12, 20), 'end_date': datetime(2025, 3, 28),    # end of mission 2025-3-28
@@ -858,17 +865,17 @@ OBJECT_DEFINITIONS = [
     'mission_url': 'https://science.nasa.gov/mission/osiris-rex/', 
     'mission_info': 'Horizons: -64. OSIRIS-REx is NASA\'s mission to collect samples from asteroid Bennu.'},
 
-    {'name': 'OSIRISAPE', 'id': '-64', 'var_name': 'osiris_apex_var', 'color_key': 'OSIRIS', 'symbol': 'diamond-open', 
+    {'name': 'OSIRISAPE', 'key': 'osiris_apex', 'id': '-64', 'horizons_name': 'OSIRIS-REx (spacecraft)', 'var_name': 'osiris_apex_var', 'color_key': 'OSIRIS', 'symbol': 'diamond-open', 
     'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2023, 9, 24), 'end_date': datetime(2030, 3, 1),
     # No ephemeris for target "OSIRIS-REx (spacecraft)" after A.D. 2030-MAR-01 19:58:50.8146 UT 
-    'mission_url': 'https://science.nasa.gov/category/missions/osiris-apex/', 
-    'mission_info': 'Horizons: -64. OSIRIS-APEX is NASA\'s mission to study asteroid Apophis.'},
+    'mission_url': 'https://science.nasa.gov/mission/osiris-apex/', 
+    'mission_info': 'Horizons: -64. OSIRIS-APEX, formerly OSIRIS-REx, is on its way to asteroid Apophis. It reaches Apophis in June 2029, soon after the asteroid passes close to Earth in April 2029.'},
 
-    {'name': 'Parker', 'id': '-96', 'var_name': 'parker_solar_probe_var', 'color_key': 'Parker Solar Probe', 
+    {'name': 'Parker', 'key': 'parker_solar_probe', 'id': '-96', 'horizons_name': 'Parker Solar Probe (spacecraft)', 'var_name': 'parker_solar_probe_var', 'color_key': 'Parker Solar Probe', 
     'symbol': 'diamond-open', 'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2018, 8, 13), 'end_date': datetime(2029, 1, 31), 
     # No ephemeris for target "Parker Solar Probe (spacecraft)" after A.D. 2029-FEB-01 00:00:00.0000 UT
-    'mission_url': 'https://www.nasa.gov/content/goddard/parker-solar-probe', 
-    'mission_info': 'Horizons: -96. The Parker Solar Probe mission is to study the outer corona of the Sun.'},
+    'mission_url': 'https://science.nasa.gov/mission/parker-solar-probe/', 
+    'mission_info': 'Horizons: -96. NASA\'s Parker Solar Probe, launched in August 2018, became the first spacecraft to fly through the corona, the Sun\'s upper atmosphere, in 2021. It studies how the corona is heated and what speeds up the solar wind.'},
 
     {'name': 'MarsRover', 'id': '-168', 'var_name': 'perse_var', 'color_key': 'MarsRover', 'symbol': 'diamond-open', # Perseverance
     'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2020, 7, 31), 'end_date': datetime(2026, 2, 19),    # end ephemeris
@@ -880,12 +887,12 @@ OBJECT_DEFINITIONS = [
     'Mars reference systems. JPL Horizons uses one elevation datum, while scientific publications often use the MOLA reference areoid.',
     'mission_url': 'https://tonylquintanilla.github.io/palomas_orrery/mars_milestone.html'},  # Local HTML milestone graphic (contains link to NASA)
 
-    {'name': 'Lucy', 'id': '-49', 'var_name': 'lucy_var', 'color_key': 'Lucy', 'symbol': 'diamond-open', 'object_type': 'trajectory', 
+    {'name': 'Lucy', 'key': 'lucy', 'id': '-49', 'horizons_name': 'Lucy (spacecraft)', 'var_name': 'lucy_var', 'color_key': 'Lucy', 'symbol': 'diamond-open', 'object_type': 'trajectory', 
     'id_type': 'id', 'is_mission': True, 'start_date': datetime(2021, 10, 17), 'end_date': datetime(2033, 4, 2), 
     # 2021-10-16 10:33:08.283 (min. for current target body)
     # 2033-04-02 17:27:41.343 (max. for current target body)
-    'mission_info': 'Horizons: -49. Exploring Trojan asteroids around Jupiter.', 
-    'mission_url': 'https://www.nasa.gov/lucy'},
+    'mission_info': 'Horizons: -49. NASA\'s Lucy, launched in October 2021, is on its way to the Trojan asteroids, which share an orbit around the Sun with Jupiter.', 
+    'mission_url': 'https://science.nasa.gov/mission/lucy/'},
 
     {'name': 'DART', 'id': '-135', 'var_name': 'dart_var', 'color_key': 'DART', 'symbol': 'diamond-open', 'object_type': 'trajectory', 
     'id_type': 'id', 'is_mission': True, 'start_date': datetime(2021, 11, 25), 'end_date': datetime(2022, 9, 26), 
@@ -901,45 +908,45 @@ OBJECT_DEFINITIONS = [
     'mission_url': 'https://science.nasa.gov/mission/webb/', 
     'mission_info': 'Horizons: -170. The James Webb Space Telescope is NASA\'s flagship infrared space telescope.'},
 
-    {'name': 'JUICE', 'id': '-28', 'var_name': 'juice_var', 'color_key': 'JUICE', 'symbol': 'diamond-open', 
+    {'name': 'JUICE', 'key': 'juice', 'id': '-28', 'horizons_name': 'JUICE (spacecraft)', 'var_name': 'juice_var', 'color_key': 'JUICE', 'symbol': 'diamond-open', 
     'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2023, 4, 15), 'end_date': datetime(2031, 7, 21), 
     # 2023-04-14 12:43:26.843 (min. for current target body)
     # 2031-07-21 06:31:30.022 (max. for current target body)
-    'mission_url': 'https://www.esa.int/esearch?q=juice', 
-    'mission_info': 'Horizons: -28. JUICE (Jupiter Icy Moons Explorer) is an ESA mission to study Jupiter and its moons.'},
+    'mission_url': 'https://www.esa.int/Science_Exploration/Space_Science/Juice', 
+    'mission_info': 'Horizons: -28. ESA\'s Juice (Jupiter Icy Moons Explorer), launched in April 2023, reaches Jupiter in July 2031. It will study the planet and its three large moons that hold oceans: Ganymede, Callisto and Europa.'},
 
-    {'name': 'Psyche', 'id': '-255', 'var_name': 'psyche_var', 'color_key': 'Psyche', 'symbol': 'diamond-open', 
+    {'name': 'Psyche', 'key': 'psyche_spacecraft', 'id': '-255', 'horizons_name': 'Psyche (spacecraft)', 'var_name': 'psyche_var', 'color_key': 'Psyche', 'symbol': 'diamond-open', 
     'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2023, 10, 14), 'end_date': datetime(2029, 6, 26), 
     # 2023-10-13 15:22:57.139 (min. for current target body)
     # 2029-06-26 14:29:49.496 (max. for current target body)
-    'mission_url': 'https://psyche.ssl.berkeley.edu/', 
-    'mission_info': 'Horizons: -255. The NASA Psyche mission is a journey to metal-rich asteroid 16 Psyche, located in the main asteroid belt. Arrival phase ends June 2029.'},
+    'mission_url': 'https://science.nasa.gov/mission/psyche/', 
+    'mission_info': 'Horizons: -255. NASA\'s Psyche spacecraft, launched in October 2023, is on its way to the metal-rich asteroid 16 Psyche in the main asteroid belt. It begins exploring the asteroid by August 2029.'},
 
-    {'name': 'Clipper', 'id': '-159', 'var_name': 'europa_clipper_var', 'color_key': 'Clipper', 'symbol': 'diamond-open', 
+    {'name': 'Clipper', 'key': 'europa_clipper', 'id': '-159', 'horizons_name': 'Europa Clipper (spacecraft)', 'var_name': 'europa_clipper_var', 'color_key': 'Clipper', 'symbol': 'diamond-open', 
     'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2024, 10, 15), 'end_date': datetime(2031, 2, 7), 
     # 2024-10-14 16:15:03.712 (min. for current target body)
     # 2031-02-07 18:17:27.695 (max. for current target body)
     # No ephemeris for target "Europa Clipper (spacecraft)" after A.D. 2031-FEB-07 18:16:18.5105 UT
-    'mission_url': 'https://europa.nasa.gov/', 
-    'mission_info': 'Horizons: -159. Europa Clipper will conduct detailed reconnaissance of Jupiter\'s moon Europa.'},
+    'mission_url': 'https://science.nasa.gov/mission/europa-clipper/', 
+    'mission_info': 'Horizons: -159. NASA\'s Europa Clipper, launched in October 2024, reaches Jupiter in April 2030. It will fly past Jupiter\'s moon Europa 49 times, to learn whether the ocean thought to lie under its ice could support life.'},
 
-    {'name': 'BepiColombo', 'id': '-121', 'var_name': 'bepicolombo_var', 'color_key': 'BepiColombo', 'symbol': 'diamond-open', 
+    {'name': 'BepiColombo', 'key': 'bepicolombo', 'id': '-121', 'horizons_name': 'BepiColombo (Spacecraft)', 'var_name': 'bepicolombo_var', 'color_key': 'BepiColombo', 'symbol': 'diamond-open', 
     # 'id': '-121', 2018-080A
     'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True,
     'start_date': datetime(2018, 10, 21), 'end_date': datetime(2027, 4, 7), 
     # 2018-10-20 02:13:28.719 (min. for current target body)
     # 2027-04-07 00:01:09.186 (max. for current target body)
     # No ephemeris for target "BepiColombo (Spacecraft)" after A.D. 2027-APR-06 23:59:59.9998 UT
-    'mission_url': 'https://sci.esa.int/web/bepicolombo', 
-    'mission_info': 'Horizons: -121. BepiColombo is the joint ESA/JAXA mission to study Mercury, arriving in 2025.'},
+    'mission_url': 'https://www.esa.int/Science_Exploration/Space_Science/BepiColombo', 
+    'mission_info': 'Horizons: -121. BepiColombo, led by ESA with Japan\'s space agency JAXA, launched in October 2018 to study Mercury from orbit.'},
 
-    {'name': 'SolO', 'id': '-144', 'var_name': 'solarorbiter_var', 'color_key': 'SolO', 'symbol': 'diamond-open', 
+    {'name': 'SolO', 'key': 'solar_orbiter', 'id': '-144', 'horizons_name': 'Solar Orbiter (spacecraft)', 'var_name': 'solarorbiter_var', 'color_key': 'SolO', 'symbol': 'diamond-open', 
     'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2020, 2, 11), 'end_date': datetime(2030, 11, 20),
     # 2020-02-10 04:56:58.855 (min. for current target body)
     # 2030-11-20 04:03:15.162 (max. for current target body)
     # No ephemeris for target "Solar Orbiter (spacecraft)" after A.D. 2030-NOV-20 04:02:05.9789 UT 
-    'mission_url': 'https://en.wikipedia.org/wiki/Solar_Orbiter', 
-    'mission_info': 'Horizons: -144. Solar Orbiter ("SolO"), an ESA/NASA solar probe mission'},
+    'mission_url': 'https://www.esa.int/Science_Exploration/Space_Science/Solar_Orbiter', 
+    'mission_info': 'Horizons: -144. Solar Orbiter, an ESA mission with a NASA contribution, launched in February 2020 to study the Sun up close. It has taken the first close-up pictures of the Sun\'s poles.'},
         
     # Artemis II / Orion "Integrity" (Spacecraft) -1024
     # Trajectory starts post-ICPS separation (3h24m after launch)

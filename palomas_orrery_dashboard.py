@@ -318,6 +318,11 @@ October 24, 2026, late night, with Anthropic's Claude Opus 5.5 (L-443):
 the preview runs with --no-limit, and both Path Plan texts say it prints
 a line as it goes, saves each plan as it is made, and, without
 --no-limit, starts nothing new after 10 minutes.
+October 25, 2026 with Anthropic's Claude Opus 5.5 (L-443, build B): the
+twelve spacecraft are keyed, so Path Plan -- preview of slice 2 goes;
+Path Plan -- every path, now takes its place in Tools and Caches,
+path_plan.py --all --no-limit, for a full plan when a spacecraft is
+newly keyed or the rule changes.
 """
 
 import os
@@ -1877,22 +1882,21 @@ LAUNCH_GROUPS = {
          SCRIPT_DIR,
          True,
          ["--all"]),
-        ("Path Plan -- preview of slice 2",
+        ("Path Plan -- every path, now",
          "path_plan.py",
-         "TEMPORARY, until slice 2's twelve spacecraft are keyed (L-443): "
-         "the Path Plan for them by name -- Voyager 1 and 2, New Horizons, "
-         "Juno, Lucy, JUICE, Psyche, Europa Clipper, BepiColombo, Solar "
-         "Orbiter, Parker and OSIRIS-APEX -- into "
-         "data/path_plans_preview.json, which the objects export never "
-         "reads, so the website sees nothing. It prints every flyby it "
-         "finds in JPL's positions, with its moment, distance and speed. "
-         "Needs the internet; the first run asks JPL a few hundred "
-         "questions and can take the better part of an hour, with no time "
-         "limit. It prints a line as it goes and saves each spacecraft's "
-         "plan as it is made. Paste its output into the chat.",
+         "The Path Plan for EVERY served spacecraft at once, whatever its "
+         "date, with no time limit (L-443). The Path Plan in the "
+         "maintenance run makes only what is due, every 30 days, and "
+         "starts nothing new after 10 minutes, so a long first plan is "
+         "spread over several runs; this button makes them all now: when "
+         "a spacecraft is newly keyed, or the rule plans are made by "
+         "changes. It prints every flyby, arrival, departure and pass of "
+         "the Sun it finds in JPL's positions, a line as it goes, and saves "
+         "each plan as it is made. Needs the internet; making all twelve "
+         "asks JPL a few hundred questions and takes about half an hour.",
          SCRIPT_DIR,
          True,
-         ["--preview", "--no-limit"]),
+         ["--all", "--no-limit"]),
         ("Osculating Cache Manager",
          "osculating_cache_manager.py",
          "Load and report on the osculating orbital elements cache "
@@ -2308,8 +2312,8 @@ CARD_LINES = {
      "Horizons Check -- everything, now"):
         "Asks Horizons about every served object now, not only what's due.",
     ("Tools and Caches",
-     "Path Plan -- preview of slice 2"):
-        "Finds the twelve spacecraft's flybys in JPL's positions, before keying.",
+     "Path Plan -- every path, now"):
+        "Makes every spacecraft's path plan now, with no time limit.",
     ("Tools and Caches",
      "Osculating Cache Manager"):
         "Loads and reports on the osculating orbital elements cache.",
