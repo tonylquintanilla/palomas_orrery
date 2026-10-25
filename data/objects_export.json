@@ -1,8 +1,9 @@
 {
-  "schema": 2,
-  "source_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+  "schema": 3,
+  "source_sha256": "56e334eaca12f0004f948fa8c8b2fb4230d2ae0215c5f46b0c834c51ac66d362",
   "period_inputs_sha256": "596f71af92b79fb3e0c798ca699418f837b50b1c8c190ac56bc4a7a1cd277c4b",
   "confirmations_sha256": "342ba6e78d25a04aeaad78f36833d263db33a658d443c1e9be89bb8e23f9f30f",
+  "paths_sha256": "70ed9a588f428c88a93dae0c31b841527358f79d0f362047bc0e43c1b34ee356",
   "cadence_days": 30,
   "objects": {
     "sun": {

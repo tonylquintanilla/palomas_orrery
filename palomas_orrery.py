@@ -127,6 +127,13 @@ the static trajectory list and the three analytical fallbacks. No failure
 was on record; it went on in commit c60572d, 2026-02-04, with Weywot's
 comment beside it. Tony's ruling of this day: "just take it off the skip
 list and see if it fails", so the maintenance run is the test.)
+Module updated: October 24, 2026 with Anthropic's Claude Opus 5.5 (L-470:
+C/2025 K1's pieces' checkboxes say hyperbolic or near-parabolic, no more:
+JPL's numbers cannot tell whether C's path is closed, and an open path
+around the Sun is not by itself an escape from the solar system.
+The close-approach and perihelion-orbit passes take id_type 'designation'
+too, and _is_comet knows a comet by a name beginning C/, so C/2025 K1,
+asked by its permanent number now, keeps both osculating orbits.)
 
 """
 #Paloma's Orrery - Solar System Visualization Tool
@@ -1541,7 +1548,9 @@ def _add_close_approach_extras(fig, selected_objects, objects, center_object_nam
 
         # Only process smallbody objects (asteroids, comets, not planets/moons)
     #    if obj_info.get('id_type') not in ('smallbody',):
-        if obj_info.get('id_type') not in ('smallbody', 'id'):    
+        # 'designation' since 2026-10-24: C/2025 K1 is asked as DES=1004075;
+        # and keeps its hyperbolic osculating orbit (L-470).
+        if obj_info.get('id_type') not in ('smallbody', 'id', 'designation'):
             continue
 
         designation = obj_info.get('id', obj_name)
@@ -1700,6 +1709,11 @@ def _is_comet(obj_info):
     # A/ designation (interstellar objects before reclassification)
     if obj_id.startswith('A/'):
         return True
+
+    # A comet asked by JPL's permanent number, whose name is its
+    # designation: C/2025 K1, id '1004075', since 2026-10-24 (L-470)
+    if name.startswith('C/'):
+        return True
     
     # Interstellar objects by name pattern (1I/, 2I/, 3I/, etc.)
     if len(name) >= 3 and name[0].isdigit() and name[1:3] == 'I/':
@@ -1749,7 +1763,8 @@ def _add_perihelion_osculating_orbit(fig, selected_objects, objects, color_map,
 
         # Only process smallbody objects
     #    if obj_info.get('id_type') not in ('smallbody',):
-        if obj_info.get('id_type') not in ('smallbody', 'id'):    
+        # 'designation' since 2026-10-24, for C/2025 K1 (L-470).
+        if obj_info.get('id_type') not in ('smallbody', 'id', 'designation'):
             continue
 
         # Only process comets (detected by ID pattern)
@@ -10342,9 +10357,9 @@ create_interstellar_checkbutton("C/2025_K1", comet_2025k1_var, "(2025-04-08 to 2
 
 # C/2025 K1 fragment checkboxes (indented under parent)
 for frag_name, frag_var, frag_label in [
-    ("C/2025_K1-B", comet_2025k1b_var, "Fragment B (hyperbolic, escaping)"),
-    ("C/2025_K1-C", comet_2025k1c_var, "Fragment C (bound! e=0.99999)"),
-    ("C/2025_K1-D", comet_2025k1d_var, "Fragment D (hyperbolic, most divergent)"),
+    ("C/2025_K1-B", comet_2025k1b_var, "Fragment B (hyperbolic)"),
+    ("C/2025_K1-C", comet_2025k1c_var, "Fragment C (near-parabolic)"),
+    ("C/2025_K1-D", comet_2025k1d_var, "Fragment D (hyperbolic)"),
 ]:
     cb = tk.Checkbutton(
         interstellar_frame,

@@ -83,6 +83,9 @@ each refused, shown failing on a planted fault first.)
 Module updated: October 22, 2026 with Anthropic's Claude Opus 5.5 (L-443:
 a period that rounds up to a power of ten is served with its print's
 count, 2025 PN7's "1.00" years at 3 figures.)
+Module updated: October 24, 2026 with Anthropic's Claude Opus 5.5 (L-443,
+slice 2: the fresh export is built with the path plans too, and a held
+export made from an older data/path_plans.json is named.)
 """
 
 import json
@@ -278,6 +281,7 @@ def differences(held, fresh):
                          "the orbit cache's period records or the typed "
                          "periods"),
                         ("confirmations_sha256", ex.CONFIRMATIONS),
+                        ("paths_sha256", ex.PATHS),
                         ("cadence_days", "the check's cadence")):
         if held.get(field) != fresh.get(field):
             out.append("made from older %s (run export_objects.py)" % what)
@@ -322,8 +326,9 @@ def main():
     if not repeats:
         try:
             cache, typed, confirmations, conf_raw = ex.load_inputs(root)
+            paths, paths_raw = ex.load_paths(root)
             fresh = ex.build_export(text, cache, typed, confirmations,
-                                    conf_raw)
+                                    conf_raw, paths, paths_raw)
         except ex.ExportError as exc:
             failures.append(str(exc))
 

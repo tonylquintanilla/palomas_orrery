@@ -308,6 +308,12 @@ Words, the website's new checker (gallery patch L434_3), gets its button
 after Hover Budget, with its short line; the Far Lines text says what
 that check holds since the same patch, and the Arrival text names the
 Sun's rotation axis, a drawn guide that must carry no shell key.
+October 24, 2026 with Anthropic's Claude Opus 5.5 (L-443, slice 2): Path
+Plan, the orrery's new generator, gets its button after Horizons Check,
+and Path Plan Suite, its new checker, after Orbit Markers, each with its
+short line. And Path Plan -- preview of slice 2, in Tools and Caches:
+path_plan.py --preview, which plans the twelve spacecraft by name before
+they are keyed; temporary, it goes when they are keyed.
 """
 
 import os
@@ -1332,6 +1338,21 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
+        ("Path Plan",
+         "path_plan.py",
+         "Makes the plan for drawing each spacecraft path the website "
+         "serves (L-443, slice 2): the span JPL has positions for, and each "
+         "flyby that needs finer steps than the path's weekly backbone -- a "
+         "nearest approach inside a body's Hill sphere, found in JPL's own "
+         "positions, with its moment, distance and speed, and the window "
+         "and step to fetch around it. Writes data/path_plans.json. On a "
+         "30-day cycle, so most runs ask JPL nothing; --all asks for every "
+         "path now. If JPL cannot be reached it keeps each plan as it was "
+         "and says UNREACHABLE.",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
         ("Objects Export",
          "export_objects.py",
          "Write data/objects_export.json from the object list in "
@@ -1631,6 +1652,18 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
+        ("Path Plan Suite",
+         "test_path_plan.py",
+         "The Path Plan against a made-up solar system answered in JPL's "
+         "own format, with no network: two flybys found to the minute, "
+         "distance and speed, no distant body called a pass, the 30-day "
+         "cycle asking nothing when nothing is due, an outage keeping the "
+         "old plans, and two planted faults caught. "
+         "Ends on \"PATH PLAN SUITE: 15 of 15 checks passed\" (L-443).",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
         ("Period Fetch Suite",
          "test_period_fetch.py",
          "The Period Fetch on recorded answers, with no network "
@@ -1837,6 +1870,21 @@ LAUNCH_GROUPS = {
          SCRIPT_DIR,
          True,
          ["--all"]),
+        ("Path Plan -- preview of slice 2",
+         "path_plan.py",
+         "TEMPORARY, until slice 2's twelve spacecraft are keyed (L-443): "
+         "the Path Plan for them by name -- Voyager 1 and 2, New Horizons, "
+         "Juno, Lucy, JUICE, Psyche, Europa Clipper, BepiColombo, Solar "
+         "Orbiter, Parker and OSIRIS-APEX -- into "
+         "data/path_plans_preview.json, which the objects export never "
+         "reads, so the website sees nothing. It prints every flyby it "
+         "finds in JPL's positions, with its moment, distance and speed. "
+         "Needs the internet; the first run asks JPL a few hundred "
+         "questions and can take a quarter of an hour. Paste its output "
+         "into the chat.",
+         SCRIPT_DIR,
+         True,
+         ["--preview"]),
         ("Osculating Cache Manager",
          "osculating_cache_manager.py",
          "Load and report on the osculating orbital elements cache "
@@ -2120,6 +2168,12 @@ CARD_LINES = {
      "Period Fetch"):
         "Fetches from JPL each served object's missing orbital period.",
     ("Maintenance Run",
+     "Path Plan"):
+        "Finds each spacecraft path's flybys in JPL's positions, every 30 days.",
+    ("Maintenance Run",
+     "Path Plan Suite"):
+        "Checks the path plan on a made-up solar system; two planted faults.",
+    ("Maintenance Run",
      "Skill Manifest"):
         "Regenerates the protocol's skill table from skills/*/SKILL.md.",
     ("Maintenance Run",
@@ -2245,6 +2299,9 @@ CARD_LINES = {
     ("Tools and Caches",
      "Horizons Check -- everything, now"):
         "Asks Horizons about every served object now, not only what's due.",
+    ("Tools and Caches",
+     "Path Plan -- preview of slice 2"):
+        "Finds the twelve spacecraft's flybys in JPL's positions, before keying.",
     ("Tools and Caches",
      "Osculating Cache Manager"):
         "Loads and reports on the osculating orbital elements cache.",

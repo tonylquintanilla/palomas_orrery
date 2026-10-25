@@ -252,6 +252,11 @@ Sun's corona and the zodiacal dust cloud.)
 Module updated: October 22, 2026 with Anthropic's Claude Opus 5.5 (L-434:
 and data/drawings/outer_oort_cloud.json and galactic_tide.json, the outer
 Oort cloud and the galactic tide.)
+Module updated: October 24, 2026 with Anthropic's Claude Opus 5.5 (L-443,
+slice 2: GENERATORS gains Path plan, path_plan.py, after Horizons check
+and before Objects export: each served spacecraft's path plan, found in
+JPL's positions on a 30-day cycle. CHECKERS gains Path plan suite,
+test_path_plan.py.)
 """
 
 import hashlib
@@ -299,6 +304,13 @@ GENERATORS = [
     ('Horizons check', ['horizons_check.py'],
      ['data/horizons_confirmations.json', 'data/spacecraft_sheets.json'],
      'HORIZONS CHECK:'),
+    # L-443 slice 2 (2026-10-24): each served spacecraft's path plan --
+    # its span, and each flyby that needs finer steps than the backbone,
+    # found in JPL's own positions -- made on a 30-day cycle, so most runs
+    # ask JPL nothing. Before the objects export, which carries the plans
+    # to the website. UNREACHABLE by name when JPL could not be reached.
+    ('Path plan', ['path_plan.py'],
+     ['data/path_plans.json'], 'PATH PLAN:'),
     # L-395 (2026-10-01): the orrery's object list is the one definition
     # of each object the website serves. The entries carrying a 'key'
     # are exported, and the gallery pulls the file as it pulls the
@@ -380,6 +392,11 @@ CHECKERS = [
     # them a record written by another path than plotting's.
     ('Period fetch suite', ['test_period_fetch.py'],
      'PERIOD FETCH SUITE:'),
+    # L-443 slice 2: the path plan against a made-up solar system in JPL's
+    # vector format, no network: two flybys found to the minute, the
+    # 30-day cycle, an outage, and two planted faults caught.
+    ('Path plan suite', ['test_path_plan.py'],
+     'PATH PLAN SUITE:'),
     # Rule 7's exact row, built: every printed exact row states a print
     # count, every orrery line prints it through exact_text(), and the
     # gallery serves the count. The same script as the Exact rows report

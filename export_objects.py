@@ -26,8 +26,9 @@ WHAT IT WRITES
 --------------
 One JSON file, data/objects_export.json:
 
-    schema          2 (1 until L-431's build 3, 2026-10-14, which added
-                    each object's period and confirmation)
+    schema          3 (2 from L-431's build 3, 2026-10-14, which added
+                    each object's period and confirmation; 3 from L-443's
+                    slice 2, 2026-10-24, which added each path's plan)
     source_sha256   the sha256 of celestial_objects.py, CRLF normalised
                     to LF, so test_objects_export.py can tell whether the
                     list moved after the export was made
@@ -42,6 +43,8 @@ One JSON file, data/objects_export.json:
                     the sha256 of data/horizons_confirmations.json, CRLF
                     normalised, which horizons_check.py writes just
                     before this runs in the maintenance run
+    paths_sha256    the sha256 of data/path_plans.json, CRLF normalised,
+                    which path_plan.py writes just before this runs
     cadence_days    30: how often JPL re-confirms each entry. The
                     website's offline check reads it from here, so the
                     two repositories cannot disagree about the cycle
@@ -76,6 +79,12 @@ One JSON file, data/objects_export.json:
                                    orrery's fallback order (L-431, Tony's
                                    ruling 5): see PERIOD below. null for
                                    the Sun, which orbits nothing here
+                      path         a spacecraft's only (a trajectory whose
+                                   id starts with '-'): its plan from
+                                   data/path_plans.json -- made, span,
+                                   backbone, events, searched -- or null
+                                   until path_plan.py has made one
+                                   (L-443 slice 2)
                       confirmation when JPL last confirmed the entry and
                                    what it confirmed, copied from
                                    data/horizons_confirmations.json:
@@ -213,6 +222,10 @@ Earth's period: a fetched period's block names its target, the id the
 period was asked of, and its target_label when that is not the body;
 a period asked of another body is never paired with this body's
 elements; a record with no target and no horizons_id is refused.)
+Module updated: October 24, 2026 with Anthropic's Claude Opus 5.5 (L-443,
+slice 2: schema 3. Each served spacecraft carries its path's plan, which
+path_plan.py writes in the maintenance run just before this runs; the
+plans file is an input now, and fingerprinted.)
 Module updated: October 22, 2026 with Anthropic's Claude Opus 5.5 (L-443,
 slice 1: a keyed entry with a 'helio_id' is served by it, as a small
 body, through served_identity, so the Sun-centred rooms take the record
@@ -231,7 +244,8 @@ SOURCE = "celestial_objects.py"
 TARGET = os.path.join("data", "objects_export.json")
 CACHE = os.path.join("data", "osculating_cache.json")
 CONFIRMATIONS = os.path.join("data", "horizons_confirmations.json")
-SCHEMA = 2
+PATHS = os.path.join("data", "path_plans.json")
+SCHEMA = 3
 CADENCE_DAYS = 30
 KEY_PATTERN = re.compile(r"^[a-z][a-z0-9_]*$")
 OPENING = re.compile(r"^Horizons:[^.]*\.\s*")
@@ -565,11 +579,45 @@ def load_inputs(root):
     return cache, dict(typed), confirmations, raw
 
 
+def load_paths(root):
+    """(plans, raw) from data/path_plans.json, which path_plan.py writes
+    just before this runs; ({}, b"") when it does not exist yet. Raises
+    ExportError when it cannot be read."""
+    path = os.path.join(root, PATHS)
+    if not os.path.exists(path):
+        return {}, b""
+    try:
+        with open(path, "rb") as handle:
+            raw = handle.read()
+        return (json.loads(raw.decode("utf-8")).get("plans") or {}), raw
+    except (OSError, ValueError) as exc:
+        raise ExportError("%s could not be read: %s"
+                          % (PATHS.replace(os.sep, "/"), exc))
+
+
+# What of a plan the website reads; the rest is path_plan.py's own
+# bookkeeping (what it was made from, what it carried, where it looked).
+PATH_FIELDS = ("made", "span", "backbone", "events", "searched")
+
+
+def is_path(obj):
+    """A spacecraft: a trajectory whose Horizons id starts with '-'."""
+    return (obj.get("object_type") == "trajectory"
+            and str(obj.get("horizons_id") or "").startswith("-"))
+
+
+def path_of(plan):
+    if not plan:
+        return None
+    return dict((f, plan.get(f)) for f in PATH_FIELDS)
+
+
 def build_export(text, cache=None, typed_table=None, confirmations=None,
-                 confirmations_raw=b""):
-    """The export dict for the list's source text and the period inputs.
-    Raises ExportError."""
+                 confirmations_raw=b"", paths=None, paths_raw=b""):
+    """The export dict for the list's source text, the period inputs and
+    the path plans. Raises ExportError."""
     objects, numbers = build_objects(text)
+    paths = paths or {}
     cache = cache or {}
     typed_table = typed_table or {}
     records = (confirmations or {}).get("objects") or {}
@@ -580,12 +628,15 @@ def build_export(text, cache=None, typed_table=None, confirmations=None,
         obj["period"] = period
         obj["confirmation"] = confirmation_of(records.get(key))
         period_inputs[key] = inputs
+        if is_path(obj):
+            obj["path"] = path_of(paths.get(key))
     return {
         "schema": SCHEMA,
         "source_sha256": source_sha256(text.encode("utf-8")),
         "period_inputs_sha256": hashlib.sha256(
             _canonical(period_inputs).encode("ascii")).hexdigest(),
         "confirmations_sha256": source_sha256(confirmations_raw),
+        "paths_sha256": source_sha256(paths_raw),
         "cadence_days": CADENCE_DAYS,
         "objects": objects,
         "numbers": numbers,
@@ -628,8 +679,10 @@ def main():
         raw = handle.read()
     try:
         cache, typed, confirmations, conf_raw = load_inputs(root)
+        paths, paths_raw = load_paths(root)
         export = build_export(raw.decode("utf-8").replace("\r\n", "\n"),
-                              cache, typed, confirmations, conf_raw)
+                              cache, typed, confirmations, conf_raw,
+                              paths, paths_raw)
     except ExportError as exc:
         print("FAIL: %s. NOTHING was written." % exc)
         return 1
@@ -655,6 +708,14 @@ def main():
                   for k, v in export["numbers"].items()))
     else:
         print("Numbers in exported descriptions: none.")
+    served_paths = [(k, o) for k, o in export["objects"].items()
+                    if "path" in o]
+    if served_paths:
+        print("Paths exported (L-443): %s." % "; ".join(
+            "%s %s" % (k, ("%d events, made %s" % (len(o["path"]["events"]),
+                                                   o["path"]["made"]))
+                       if o["path"] else "NO PLAN YET (run path_plan.py)")
+            for k, o in served_paths))
     print("Periods exported (L-431):")
     for key, obj in export["objects"].items():
         print("  " + period_summary(key, obj["period"]))

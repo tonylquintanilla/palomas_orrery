@@ -35,6 +35,13 @@ name; their descriptions sourced or trimmed and their links one per body,
 by the words list Tony approved; Schaumasse, Howell and
 Churyumov-Gerasimenko re-pinned to JPL's newest records; a wrong Deep
 Space 1 comment on Tempel 2 corrected).
+Module updated: October 24, 2026 with Anthropic's Claude Opus 5.5 (L-470:
+C/2025 K1 is asked by JPL's permanent number for the comet, 1004075, as
+DES=1004075; -- record 90004912, which it asked before, now holds another
+comet, PANSTARRS (C/2025 B1), and its designation returns the comet and
+its three pieces. The pieces' record comments corrected; four claims no
+page supports taken out of the four descriptions; "hyperbolic" kept with
+plain words for what it means, by Tony's rulings of this day.)
 """
 
 from datetime import datetime
@@ -658,51 +665,59 @@ OBJECT_DEFINITIONS = [
     'mission_info': 'Horizons: C/2024 G3. Retrograde. Hyperbolic. The Great Comet of 2025. Comet C/2024 G3 (ATLAS) created quite a buzz in the Southern Hemisphere!', 
     'mission_url': 'https://en.wikipedia.org/wiki/C/2024_G3_(ATLAS)'},
 
-#    {'name': 'C/2025_K1', 'id': 'C/2025 K1', 'var_name': 'comet_2025k1_var', 'color_key': 'C/2025_K1', 'symbol': 'diamond', 
-    {'name': 'C/2025_K1', 'id': '90004912', 'var_name': 'comet_2025k1_var', 'color_key': 'C/2025_K1', 'symbol': 'diamond',     
-    # ATLAS (C/2025 K1) 2025-Jul-11 21:59:05; data arc: 2025-04-08 to 2025-07-10
-#    'object_type': 'trajectory', 'id_type': 'smallbody', 
-    'object_type': 'trajectory', 'id_type': 'id',
-    # 'start_date': datetime(2025, 4, 8), 'end_date': datetime(2025, 7, 10), 
-    'mission_info': 'Horizons: C/2025 K1. Retrograde. Hyperbolic (e=1.00026). Perihelion Oct 8, 2025 at 0.33 AU.<br>'
-                    'Nucleus fragmented ~Oct 16 into at least 4 pieces (Hubble, published Icarus Feb 2026).<br>'
-                    'This record is Fragment A (main body, non-gravitational forces modeled). See K1-B, K1-C, K1-D.<br>'
-                    'Fragment separation at perihelion is a backward-extrapolation artifact (comet was still intact Oct 8).',                      
-    'mission_url': 'https://theskylive.com/c2025k1-info'}, 
+    # Asked by JPL's permanent number for the comet, 1004075, sent as
+    # DES=1004075; (id_type 'designation'). Its designation, C/2025 K1,
+    # returns four records (the comet and its pieces B, C, D), and a
+    # record number goes to another comet when JPL renumbers: 90004912,
+    # asked until 2026-10-24, now holds PANSTARRS (C/2025 B1). On
+    # 2026-10-24, DES=1004075; returned one record, 90004925, ATLAS
+    # (C/2025 K1), data arc 2025-04-08 to 2026-01-11, with a
+    # non-gravitational model (L-470; Tony's ruling of 2026-10-24).
+    {'name': 'C/2025_K1', 'id': '1004075', 'var_name': 'comet_2025k1_var', 'color_key': 'C/2025_K1', 'symbol': 'diamond',
+    'object_type': 'trajectory', 'id_type': 'designation',
+    # 'start_date': datetime(2025, 4, 8), 'end_date': datetime(2025, 7, 10),
+    'mission_info': 'Horizons: C/2025 K1. Retrograde. Hyperbolic (e=1.00026): an open path around the Sun,<br>'
+                    'not a closed loop. Perihelion Oct 8, 2025 at 0.33 AU.<br>'
+                    'Hubble caught it breaking into at least four pieces about a month after perihelion. See K1-B, K1-C, K1-D.<br>'
+                    'Each piece\'s path before the break-up is its orbit traced backward; the comet was one body then.',
+    'mission_url': 'https://science.nasa.gov/asset/hubble/fragmenting-comet-c-2025-k1/'},
 
-    # C/2025 K1 FRAGMENTS - Hubble observed breakup ~Oct 16, 2025 (8 days post-perihelion)
-    # Parent record (C/2025 K1, Rec #90004912) IS Fragment A - same SPK-ID, full arc with non-grav forces
-    # Fragments B, C, D have independent orbital solutions starting from Nov 2025 observations
-    # All four share nearly identical perihelion time (Oct 8.44-8.46) but diverge outbound
-    # Fragment C is unique: e=0.99999 (bound!), while B and D are hyperbolic (escaping)
+    # C/2025 K1's PIECES. Hubble caught the comet breaking into at least four
+    # pieces about a month after perihelion, in images of Nov 8 to 10, 2025
+    # (NASA's page above; STScI's release of 2026-03-18 gives no break-up
+    # date). Pieces B, C, D have their own orbit solutions from Nov 2025 on.
+    # Each is asked by its own designation, which returns one record, the
+    # right one: do not switch them to record numbers, which JPL reassigns
+    # (2026-10-24: 90004913 now holds Borisov, C/2025 B2).
+    # JPL's eccentricities, 2026-10-24: B 1.00203 and D 1.00246, hyperbolic;
+    # C 0.999994 with SBDB's sigma 3.1e-05, near-parabolic: JPL's numbers
+    # cannot yet tell a closed path from an open one.
     # Convergence minimum ~Nov 24 (~70,000 km), then slow divergence outbound
 
-    # The three fragments should be fine as-is (C/2025 K1-B etc. are unambiguous designations), but if you want consistency, 
-    # you could switch them to numeric IDs too (90004913, 90004914, 90004915 with id_type: 'id').     
-
     {'name': 'C/2025_K1-B', 'id': 'C/2025 K1-B', 'var_name': 'comet_2025k1b_var', 'color_key': 'C/2025_K1-B', 'symbol': 'diamond',
-    # Rec #90004913, JPL#13, data arc: 2025-11-05 to 2026-01-06, 278 obs
+    # Rec #90004926 on 2026-10-24 (was 90004913), JPL#13, data arc: 2025-11-05 to 2026-01-06, 278 obs
     'object_type': 'trajectory', 'id_type': 'smallbody', 'show_tails': False,
-    'mission_info': 'Horizons: C/2025 K1-B. Fragment B of comet C/2025 K1 (ATLAS). Hyperbolic (e=1.00203).<br>'
-                    'Breakup observed by Hubble ~Oct 16, 2025, 8 days post-perihelion. Escaping the solar system.<br>'
-                    'Positions before ~Oct 16 are backward-extrapolated (comet was still intact at perihelion).',                   
-    'mission_url': 'https://theskylive.com/c2025k1-info'},
+    'mission_info': 'Horizons: C/2025 K1-B. Piece B of comet C/2025 K1 (ATLAS).<br>'
+                    'Hyperbolic (e=1.00203): an open path around the Sun, not a closed loop.<br>'
+                    'Its path before the break-up is its orbit traced backward; the comet was one body then.',
+    'mission_url': 'https://science.nasa.gov/asset/hubble/fragmenting-comet-c-2025-k1/'},
 
     {'name': 'C/2025_K1-C', 'id': 'C/2025 K1-C', 'var_name': 'comet_2025k1c_var', 'color_key': 'C/2025_K1-C', 'symbol': 'diamond',
-    # Rec #90004914, JPL#14, data arc: 2025-11-25 to 2026-01-10, 158 obs
+    # Rec #90004927 on 2026-10-24 (was 90004914), JPL#14, data arc: 2025-11-25 to 2026-01-10, 158 obs
     'object_type': 'trajectory', 'id_type': 'smallbody', 'show_tails': False,
-    'mission_info': 'Horizons: C/2025 K1-C. Fragment C - the stubborn one. Elliptical (e=0.99999, still bound!).<br>'
-                    'While siblings escape, C remains gravitationally bound. Return period ~13 million years.<br>'
-                    'Positions before ~Oct 16 are backward-extrapolated (comet was still intact at perihelion).',                    
-    'mission_url': 'https://theskylive.com/c2025k1-info'},
+    'mission_info': 'Horizons: C/2025 K1-C. Piece C of comet C/2025 K1 (ATLAS).<br>'
+                    'Near-parabolic (e=0.999994, give or take 0.00003): JPL\'s numbers cannot yet tell<br>'
+                    'whether its path is a very long closed loop or an open one.<br>'
+                    'Its path before the break-up is its orbit traced backward; the comet was one body then.',
+    'mission_url': 'https://science.nasa.gov/asset/hubble/fragmenting-comet-c-2025-k1/'},
 
     {'name': 'C/2025_K1-D', 'id': 'C/2025 K1-D', 'var_name': 'comet_2025k1d_var', 'color_key': 'C/2025_K1-D', 'symbol': 'diamond',
-    # Rec #90004915, JPL#5, data arc: 2025-11-26 to 2025-12-29, 107 obs (shortest arc, 33 days)
+    # Rec #90004928 on 2026-10-24 (was 90004915), JPL#5, data arc: 2025-11-26 to 2025-12-29, 107 obs (shortest arc, 33 days)
     'object_type': 'trajectory', 'id_type': 'smallbody', 'show_tails': False,
-    'mission_info': 'Horizons: C/2025 K1-D. Fragment D of comet C/2025 K1 (ATLAS). Hyperbolic (e=1.00246, most divergent).<br>'
-                    'Shortest observation arc (33 days). Escaping the solar system.<br>'
-                    'Positions before ~Oct 16 are backward-extrapolated (comet was still intact at perihelion).',                    
-    'mission_url': 'https://theskylive.com/c2025k1-info'},
+    'mission_info': 'Horizons: C/2025 K1-D. Piece D of comet C/2025 K1 (ATLAS). Shortest observation arc (33 days).<br>'
+                    'Hyperbolic (e=1.00246): an open path around the Sun, not a closed loop.<br>'
+                    'Its path before the break-up is its orbit traced backward; the comet was one body then.',
+    'mission_url': 'https://science.nasa.gov/asset/hubble/fragmenting-comet-c-2025-k1/'},
 
     {'name': 'PANSTARRS', 'id': 'C/2025 R3', 'var_name': 'comet_c2025r3_var', 'color_key': 'PANSTARRS', 'symbol': 'diamond',     # PANSTARRS (C/2025 R3)
     'object_type': 'trajectory', 'id_type': 'smallbody',

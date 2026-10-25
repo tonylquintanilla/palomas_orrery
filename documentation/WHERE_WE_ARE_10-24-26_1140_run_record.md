@@ -131,7 +131,7 @@ Not urgent, in your order:
 
 **Tony**: Run record:
 
-**Session: OPEN: 10-24-26 0901: Opus: Mock-up request L472 L473 L477 L478 L479 L480 L481**
+**Session: DONE: 10-24-26 1430: Opus: Mock-up request L472 L473 L477 L478 L479 L480 L481**
 
 All four questions are settled. Now I'll write them into the records. First the two skills that govern ledger edits and patch scripts.
 
@@ -1132,7 +1132,7 @@ Index regenerated (244 live items) in C:\Users\tonyq\OneDrive\Desktop\python_wor
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-3. **(do)** Move the patch to `documentation\`, then commit and push. -- 
+3. **(do)** Move the patch to `documentation\`, then commit and push. -- 6187246cffd0241f4bd0e06743a18f2e3f3c2246
 4. Put your updated `WHERE_WE_ARE_10-24-26_1140_run_record.md` in the same commit. GitHub has only this morning's version of it, and the ledger now quotes this afternoon's lines.
 
 **Where this leaves us**

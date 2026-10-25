@@ -32,6 +32,12 @@ Provenance audit identified by Anthropic's Claude Opus 4.7.
 Module updated: October 10, 2026 with Anthropic's Claude Opus 5.5 (L-395:
 INFO['Encke'] for the list's new Encke entry, in the words Tony approved
 on 2026-10-08.)
+Module updated: October 24, 2026 with Anthropic's Claude Opus 5.5 (L-470:
+C/2025 K1 and its pieces. Four claims no page supports are taken out: a
+break-up date of about October 16, publication in Icarus in February
+2026, the comet's record being "Fragment A", and piece C bound on a
+13-million-year orbit. The source comments name the pages opened on
+2026-10-24. The other lines are unchanged and unchecked.)
 """
 
 # Shell radii are read from constants_new.py, never retyped here (L-209).
@@ -1882,7 +1888,9 @@ INFO = {
         
         'NEOWISE': 'Horizons: C/2020 F3. retrograde > 90. Brightest comet visible from the Northern Hemisphere in decades.',
 
-        # Source: Auburn University / Icarus (Feb 2026) -- fragmentation Oct 2025, 4 Hubble fragments; JPL Horizons (orbital elements)
+        # Source: NASA Science, "Fragmenting Comet C/2025 K1", https://science.nasa.gov/asset/hubble/fragmenting-comet-c-2025-k1/
+        # (at least four pieces, a month after perihelion, images of Nov 8-10, 2025); STScI news release
+        # 2026-010, 2026-03-18 (published in Icarus); JPL Horizons and SBDB (orbits), read 2026-10-24.
         'C/2025_K1': 'Horizons: C/2025 K1. Retrograde > 90. Comet C/2025 K1 (ATLAS) is a recently discovered comet that is expected to become a notable object for \n' 
         'observation in late 2025. Here\'s a breakdown of what we know:\n' 
         '* Discovery and Classification: It was discovered on May 25, 2025, by the Asteroid Terrestrial-impact Last Alert System (ATLAS) \n' 
@@ -1892,10 +1900,10 @@ INFO = {
         '* Closest approach to Earth: November 24, 2025, at a distance of about 0.40 AU.\n' 
         '* Eccentricity (e): The orbit is highly eccentric, 1.000251464554613 (July 11, 2025), indicating an unbound or nearly parabolic orbit.\n' 
         '* Inclination (i): The orbital plane is highly inclined, 147.864867556013 degrees.\n' 
-        '* Fragmentation: Nucleus fragmented ~October 16, 2025, approximately 8 days after perihelion at 0.33 AU\n'
-        '  (inside Mercury\'s orbit). Hubble Space Telescope observed at least 4 fragments, each with a distinct coma,\n'
-        '  on Nov 8-10, 2025 (published Icarus, Feb 2026, Auburn University). This is Fragment A (main body).\n'
-        '  Fragment C is unique: e=0.99999 (gravitationally bound, ~13 million year return) while B and D escape.\n'
+        '* Fragmentation: about a month after perihelion, Hubble caught the nucleus breaking into at least\n'
+        '  four pieces, each with a distinct coma, in images of Nov 8-10, 2025 (published in Icarus).\n'
+        '  Pieces B and D are hyperbolic, on open paths; piece C is near-parabolic, and JPL\'s\n'
+        '  numbers cannot yet tell whether its path is closed or open.\n'
         '* Visibility and Brightness: As of early July 2025, it\'s around magnitude 14-15, requiring a telescope for observation.\n' 
         '* Predicted Peak Brightness: It\'s expected to brighten significantly as it approaches perihelion. Predictions suggest it could \n' 
         '  reach a magnitude of around 5.2 to 8 in early October 2025.\n' 
@@ -1911,36 +1919,33 @@ INFO = {
         '  cluster size (~70,000 km) occurs around Nov 25, well after the actual breakup.',
         
         'C/2025_K1-B': 'Horizons: C/2025 K1-B. Fragment B of comet C/2025 K1 (ATLAS).\n'
-        '* One of four fragments observed by Hubble Space Telescope in November 2025 (published Icarus, Feb 2026).\n'
-        '* The breakup occurred ~October 16, 2025, approximately 8 days after perihelion at 0.33 AU.\n'
-        '* Orbital characteristics: Hyperbolic (e=1.00203), escaping the solar system.\n'
+        '* One of four pieces Hubble caught breaking apart in November 2025, about a month after perihelion.\n'
+        '* Orbital characteristics: Hyperbolic (e=1.00203): an open path around the Sun, not a closed loop.\n'
         '* Perihelion: October 8.45, 2025, at 0.336 AU - nearly identical to parent.\n'
-        '* No non-gravitational forces modeled (unlike parent Fragment A).\n'
+        '* No non-gravitational forces modeled (unlike the comet\'s own record).\n'
         '* Data arc: 2025-11-05 to 2026-01-06 (278 observations, JPL solution #13).\n'
         '* VISUALIZATION NOTE: Plotted position at perihelion is backward-extrapolated from\n'
-        '  post-breakup observations. The comet was still intact on Oct 8; breakup occurred ~Oct 16.',
+        '  post-breakup observations. The comet was still one body on Oct 8.',
 
-        'C/2025_K1-C': 'Horizons: C/2025 K1-C. Fragment C of comet C/2025 K1 (ATLAS) - the stubborn one.\n'
-        '* The ONLY fragment that remains gravitationally bound to the Sun (e=0.99999).\n'
-        '* While fragments A, B, and D escape the solar system on hyperbolic orbits,\n'
-        '  Fragment C is on an extremely long-period elliptical orbit (~13 million years).\n'
+        'C/2025_K1-C': 'Horizons: C/2025 K1-C. Fragment C of comet C/2025 K1 (ATLAS).\n'
+        '* Near-parabolic (e=0.999994, give or take 0.00003): JPL\'s numbers cannot yet tell\n'
+        '  whether its path is a very long closed loop or an open one. Pieces B and D are hyperbolic.\n'
         '* Its orbital elements are closest to the parent body, suggesting it may be\n'
         '  the most massive fragment or the one least affected by outgassing forces.\n'
         '* Perihelion: October 8.44, 2025, at 0.334 AU.\n'
         '* Chemically unusual: ground-based observations show extreme depletion of carbon-bearing species.\n'
         '* Data arc: 2025-11-25 to 2026-01-10 (158 observations, JPL solution #14).',
 
-        # Source: Auburn University / Icarus (Feb 2026) -- Hubble HST observed 4 fragments Nov 2025; JPL solution #5
+        # Source: NASA Science, "Fragmenting Comet C/2025 K1" (Hubble, Nov 2025); JPL Horizons, solution #5, read 2026-10-24
         'C/2025_K1-D': 'Horizons: C/2025 K1-D. Fragment D of comet C/2025 K1 (ATLAS).\n'
-        '* One of four fragments observed by Hubble Space Telescope in November 2025 (published Icarus, Feb 2026).\n'
-        '* The most divergent fragment - highest eccentricity (e=1.00246) of all four pieces.\n'
+        '* One of four pieces Hubble caught breaking apart in November 2025, about a month after perihelion.\n'
+        '* Hyperbolic (e=1.00246, the highest of the four): an open path around the Sun, not a closed loop.\n'
         '* Also the faintest and least observed, with the shortest data arc (33 days).\n'
         '* Perihelion: October 8.46, 2025, at 0.336 AU.\n'
-        '* By March 2026, Fragment D leads the divergence at ~911,000 km from Fragment A.\n'
         '* No non-gravitational forces modeled.\n'
         '* Data arc: 2025-11-26 to 2025-12-29 (107 observations, JPL solution #5).\n'
         '* VISUALIZATION NOTE: Plotted position at perihelion is backward-extrapolated from\n'
-        '  post-breakup observations. The comet was still intact on Oct 8; breakup occurred ~Oct 16.',
+        '  post-breakup observations. The comet was still one body on Oct 8.',
 
         'Borisov': 
         '*** SET MANUAL SCALE TO AT LEAST 50 AU TO SEE FULL HYPERBOLIC ORBIT AS ESTIMATED SO FAR BY JPL***\n\n'

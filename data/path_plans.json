@@ -1,0 +1,9 @@
+{
+ "backbone": {
+  "step": "7d",
+  "thin_tol_au": 0.02
+ },
+ "cadence_days": 30,
+ "plans": {},
+ "schema": 1
+}

@@ -615,6 +615,16 @@ Module updated: October 24, 2026, evening, with Anthropic's Claude Opus 5.5
 (the session's close: L-481 closed on Tony's look, its three skill
 descriptions re-homed to L-443 for slice 2), built on 206f96c and gallery
 96173b8.
+Module updated: October 24, 2026, night, with Anthropic's Claude Opus 5.5
+(L-482 built; slice 2 split in two and its orrery half, build A, the
+path plan, built; L-461, L-465, L-470 and L-476 noted), built on 206f96c
+and gallery 96173b8, after the close patch.
+Module updated: October 24, 2026, late night, with Anthropic's Claude
+Opus 5.5 (Tony's rulings of the evening, in chat: a comet's span, the four
+decisions in slice 2's words, the orrery's date list, a check that the
+website and the orrery agree; C/2025 K1 fixed in the orrery (L-470);
+L-483 and L-484 new), built on 206f96c after patches L481_3, L443_7 and
+L443_8.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -832,7 +842,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*244 live items; 228 need attention (`!`); 165 RICE-scored; 231 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*246 live items; 230 need attention (`!`); 165 RICE-scored; 231 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -986,10 +996,12 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-466 | Every drawing starts and stops where a served row says (orrery + gallery, the Sun's slice and Earth's) | OPEN | -- | 2026-10-22 |
 | ! | L-467 | The scanner credits a display line with a citation it only sits near (orrery, provenance scanner) | OPEN | -- | 2026-10-21 |
 | ! | L-468 | The Sun room's phone look of 2026-10-21, night: the corona's drawer text and the Hills cloud's cross (gallery, the Sun room) | OPEN | -- | 2026-10-22 |
-| ! | L-470 | Orrery entries the website cannot serve as they stand (orrery, objects) | OPEN | -- | 2026-10-23 |
+| ! | L-470 | Orrery entries the website cannot serve as they stand (orrery, objects) | OPEN | -- | 2026-10-24 |
 | ! | L-471 | A delivered patch is final (safe-file-editing, next version) | OPEN | -- | 2026-10-22 |
-| ! | L-476 | The orrery's whole-path plots draw by the same path plan as the website (orrery, spacecraft and comets) | OPEN | -- | 2026-10-23 |
+| ! | L-476 | The orrery's whole-path plots draw by the same path plan as the website (orrery, spacecraft and comets) | OPEN | -- | 2026-10-24 |
 | ! | L-482 | Whether the Sun and Earth rooms' All / none becomes Reset too (gallery, the rooms' shared chrome) | OPEN | -- | 2026-10-24 |
+| ! | L-483 | A room for C/2025 K1 and its pieces, the first comet room (gallery, exhibits) | OPEN | -- | 2026-10-24 |
+| ! | L-484 | The website and the orrery agree on every object both draw, or the difference is written down (orrery + gallery, objects; method for interactive-exhibit) | OPEN | -- | 2026-10-24 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1398,6 +1410,47 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
+#### [L-484] The website and the orrery agree on every object both draw, or the difference is written down (orrery + gallery, objects; method for interactive-exhibit)
+<!-- L:484 status:OPEN upd:2026-10-24 section:A flag: rice: -->
+- **Tony, 2026-10-24, 17:35, in chat**
+  (`documentation/COORD_L443_words_decisions_20261024.md`, sec. 7): "And
+  we should add to the skill a check that the website and the orrery
+  agree or we have a documented exception."
+- The rule: for each object both instruments draw, they agree on its
+  JPL record, its name, its dates and its words, or the difference is a
+  documented exception. A check finds every disagreement and names it,
+  object by object; an undocumented one fails, and a documented one is
+  printed every run with its reason.
+- Its first findings were already known when it was ruled: C/2025 K1's
+  record (L-470, fixed in the orrery the same night) and the orrery's
+  typed date list (L-476).
+**Gap:** the rule into interactive-exhibit at its next version (this
+session already moved it to 1.23); the check's design, then its build,
+with a planted fault; where its exceptions live.
+**Ref:** L-443; L-470; L-476; `export_objects.py`; gallery
+`data/objects_config.json`.
+
+#### [L-483] A room for C/2025 K1 and its pieces, the first comet room (gallery, exhibits)
+<!-- L:483 status:OPEN upd:2026-10-24 section:A flag: rice: -->
+- **Tony, 2026-10-24, 17:20, in chat**
+  (`documentation/COORD_L443_words_decisions_20261024.md`, sec. 2a):
+  "And for the comet can we create our first comet room for its
+  pieces?"
+- It fits the room rule of 2026-10-22: a room is for a body with more
+  than its symbol. The comet broke into at least four pieces about a
+  month after perihelion, seen by Hubble in images of Nov 8 to 10, 2025
+  (NASA Science, "Fragmenting Comet C/2025 K1"), and JPL serves the
+  comet and pieces B, C and D as four records.
+- The room needs each piece's path, which slice 2 serves for the
+  open-path comets (L-443), and its words, which are the orrery's
+  descriptions as corrected on 2026-10-24 (L-470) and checked again for
+  the room. The orrery's longer tooltips (`info_dictionary.py`) carry
+  lines not yet checked against a source: the discovery, the Earth
+  approach, the brightness forecasts, the non-gravitational note, the
+  pieces' distances.
+**Gap:** a design talk, after slice 2 draws the comets; then the build.
+**Ref:** L-443; L-470; `celestial_objects.py`; `info_dictionary.py`.
+
 #### [L-482] Whether the Sun and Earth rooms' All / none becomes Reset too (gallery, the rooms' shared chrome)
 <!-- L:482 status:OPEN upd:2026-10-24 section:A flag: rice: -->
 - **Raised 2026-10-24, building L-477.** Tony's ruling of the day, that
@@ -1408,7 +1461,26 @@ as an archive of the prioritization thinking -- no cleanup on close.
   still ticks or unticks every shell. The build left them unchanged and
   asked rather than assumed (`documentation/HANDOFF_L477_build_20261024.md`,
   sec. 5).
-**Gap:** Tony's word at the next design talk; then, if it is yes, the
+- **Ruled 2026-10-24, 15:26** (`documentation/COORD_L482_reset_all_rooms_20261024.md`):
+  "Yes all rooms should use the same Reset button and no 'see more'."
+- **Built the same night** (gallery `patch_L482_1_reset_every_room_20261024.py`,
+  `documentation/HANDOFF_L443_slice2_buildA_20261024.md`): the top bar's
+  button reads Reset in every room. In the Sun and Earth rooms it puts
+  back what the room opened on -- every shell ticked or unticked as the
+  served arrival block left it, recorded once at boot from the drawer
+  (`sunOpening`), the text box closed, the opening frame and angle, the
+  drawer closed -- instead of ticking or unticking every shell. The
+  Solar System room's Reset is unchanged. No room had a See more left;
+  confirmed by reading. Checked headlessly: a new walk,
+  `tools/headless/walk_shell_reset.js`, 33 of 33 in each room and 20
+  of 33 failing in each on the page before the patch; every tick step the same as
+  before in all three rooms (compare_rooms); the website's offline run
+  35 of 35. The phone has not seen it. Recorded in interactive-exhibit
+  1.23.
+**Gap (replaces the one below, 2026-10-24, night):** Tony's run of
+gallery patch_L482_1, the website's maintenance run and push; his phone
+look at Reset in the Sun and Earth rooms, on which this closes.
+**Gap (superseded above):** Tony's word at the next design talk; then, if it is yes, the
 build in the shared chrome, with both rooms walked headlessly and on the
 phone.
 **Ref:** L-477 (closed; the ruling); gallery `interactive.html`
@@ -1416,7 +1488,7 @@ phone.
 many rooms.
 
 #### [L-476] The orrery's whole-path plots draw by the same path plan as the website (orrery, spacecraft and comets)
-<!-- L:476 status:OPEN upd:2026-10-23 section:A flag: rice: -->
+<!-- L:476 status:OPEN upd:2026-10-24 section:A flag: rice: -->
 - **Tony, 2026-10-23, at slice 2's design talk** (`documentation/DESIGN_L443_slice2_rulings_20261023.md`):
   "if there are better approaches for the orrery maybe we can implement
   them there also so the two are as Consistent as possible." And, on
@@ -1433,7 +1505,35 @@ many rooms.
   dashed after. A change to plotting, so the five parallel consumers
   are mapped first (Check All Parallel Pipelines), and it is judged by
   Tony's eyes on its own.
-**Gap:** after slice 2's build: the design of the change in the
+- **2026-10-24, found building slice 2's path plan:** the list's
+  start_date and end_date for the spacecraft have drifted from JPL's
+  data. Juno's (2028-09-30) and Psyche's (2029-06-26) run past what
+  JPL serves (2028-09-02, 2029-02-11); New Horizons', Europa Clipper's,
+  Parker's, OSIRIS-APEX's and BepiColombo's stop before it. The path
+  plan reads JPL's own limits instead; the orrery's plots still use the
+  list's dates, so this change takes the span from the plan too.
+  JPL's dates: `documentation/WORDS_L443_slice2_draft_20261024.md`.
+- **Tony, 2026-10-24, 17:26, in chat**
+  (`documentation/COORD_L443_words_decisions_20261024.md`, sec. 6): "And
+  the orrery's object list for served windows should be updated to
+  match the website." Read as: the dates beside each spacecraft and
+  comet in the orrery's object list, and the windows it fetches, are
+  the ones the website serves: a spacecraft's span as JPL serves it, a
+  comet's window by the ruling of
+  `documentation/COORD_L443_comet_span_ruling_20261024.md`. Today they
+  are typed by hand in the checkbox labels (51 of them) and in
+  `celestial_objects.py`'s start and end dates, and several have gone
+  stale against JPL's spans read on 2026-10-24: Juno 2028-9-30 (JPL
+  2028-09-02), Psyche 2029-06-26 (2029-02-11), New Horizons 2029-12-31
+  (2050-01-01), Europa Clipper 2031-02-07 (2034-09-03), BepiColombo
+  2027-4-7 (2027-04-11), Parker 2029-1-31 (2030-01-01), OSIRIS APEX
+  2030-3-1 (2030-03-22). By method the orrery reads them from the plan
+  the website uses (`data/path_plans.json`), not a second typed copy,
+  so they cannot go stale again. L-484's check holds the two to it.
+**Gap (replaces the one below, 2026-10-24, late night):** after slice
+2's build B, which writes the plans: the design of the change in the
+orrery's plots and its date list, then the build.
+**Gap (superseded above):** after slice 2's build: the design of the change in the
 orrery's plots, then the build.
 **Ref:** L-443; `documentation/DESIGN_L443_slice2_rulings_20261023.md`, rulings 2 and 6;
 `spacecraft_encounters.py`; `palomas_orrery.py`.
@@ -1467,7 +1567,7 @@ orrery's plots, then the build.
 **Ref:** L-443; `documentation/patch_L443_4_period_count_20261022.py`.
 
 #### [L-470] Orrery entries the website cannot serve as they stand (orrery, objects)
-<!-- L:470 status:OPEN upd:2026-10-23 section:A flag: rice: -->
+<!-- L:470 status:OPEN upd:2026-10-24 section:A flag: rice: -->
 - **Found 2026-10-22, counting slice 1 of L-443 (the objects to the
   website).** One class: an entry in `celestial_objects.py` whose own
   fields stop it being served, recorded here rather than chased (The
@@ -1519,7 +1619,66 @@ orrery's plots, then the build.
   side changed; the period fetch on a throwaway copy lists Gonggong as
   the one body missing a fetched period and asks 2007 OR10 around the
   Sun, saving nothing (UNREACHABLE); the orrery starts headlessly.
-**Gap (replaces the one below, 2026-10-23, evening):** Tony's maintenance
+- **Two more instances, found 2026-10-24 reading JPL for slice 2's words**
+  (`documentation/CHECK_L443_slice2_sources_20261024.md`):
+  - **C/2025 K1**: the orrery's entry asks JPL for record 90004912,
+    which now holds another comet, PANSTARRS (C/2025 B1); the comet and
+    its three pieces are now records 90004925 to 90004928, and its
+    designation returns all four. JPL's object number 1004075 returns
+    exactly the right one. So the orrery draws the wrong comet today.
+    Tony-action (decide): pin 90004925, or ask by 1004075; the skill has
+    no rule yet for a comet whose designation matches its own pieces.
+  - **West**: JPL has one record, "West (C/1975 V1-A)", piece A, fitted
+    after the split; the entry's id must read C/1975 V1-A to pass the
+    Horizons check.
+- **C/2025 K1: ruled and fixed, 2026-10-24, late night.** Tony, 17:15,
+  in chat (`documentation/COORD_L443_words_decisions_20261024.md`,
+  sec. 1): "B and what do we do with the pieces. We normally used a
+  record number only when the id did not work as intended maybe because
+  of the pieces?" Ruled B: ask by JPL's permanent number. Built in
+  orrery `patch_L443_9_k1_and_rulings_20261024.py`:
+  - `celestial_objects.py`: the comet's id '1004075', id_type
+    'designation', which astroquery sends as DES=1004075;. The pieces
+    are asked by their own designations, each returning one record, and
+    are unchanged; their record comments now read 90004926 to 90004928.
+  - Four claims no page supports taken out wherever they stood (the
+    comet's and pieces' descriptions, the tooltips in
+    `info_dictionary.py`, piece C's checkbox, two comments in
+    `constants_new.py`): a break-up of about October 16 (NASA: about a
+    month after perihelion, images of Nov 8 to 10; STScI gives no date);
+    "Icarus Feb 2026" (STScI's release of 2026-03-18 says published in
+    Icarus); the comet's record as "Fragment A"; piece C bound on a
+    13-million-year orbit (JPL's e 0.999994, SBDB's sigma 3.1e-05,
+    cannot tell). "Hyperbolic" kept with plain words, "an open path
+    around the Sun, not a closed loop", by Tony's ruling of 17:35; the
+    escape claims went with it, since an open path around the Sun is
+    not by itself an escape. Piece C is near-parabolic. The theskylive
+    links, which no longer load, became NASA's page.
+  - `palomas_orrery.py`: the close-approach and perihelion-orbit passes
+    take id_type 'designation', and `_is_comet` knows a comet by a name
+    beginning C/, so the comet keeps both osculating orbits under its
+    new id. Without them it would have dropped out of both.
+  - `orbital_period.py`, `test_orbit_markers.py`,
+    `ADDING_OBJECTS_GUIDE.md`: the record-number example no longer
+    names the comet; the rule stays for a future pin.
+  - Found, not fixed: the orrery's path cache, `data/orbit_paths.json`
+    on Tony's machine, is keyed by name and centre, so it does not see
+    a changed id. A path cached under C/2025_K1 before tonight, or
+    extended while the entry asked 90004912 after JPL renumbered, may
+    hold PANSTARRS (C/2025 B1). The patch reads the cache, changes
+    nothing, and compares the cached path with piece B's at shared
+    dates; its output says which.
+  - For horizons-orbital-mechanics' next version (this session already
+    moved it to 1.10): a comet whose designation also matches its own
+    pieces is asked by JPL's permanent number for it; and a path cache
+    keyed by name does not notice a new record.
+**Gap (replaces the one below, 2026-10-24, late night):** Tony's runs:
+the maintenance run, Period fetch and Horizons check answering for
+Gonggong; patch_L443_9's report on the cached C/2025 K1 path, and if it
+holds another body, the cache entry cleared before a plot; one look in
+the orrery at C/2025 K1 and its pieces; West's id; the two skill rules
+at horizons-orbital-mechanics' next version.
+**Gap (superseded above, 2026-10-23, evening):** Tony's maintenance
 run: Period fetch and Horizons check answer for Gonggong, or name the
 failure (then Discard Changes, and the skip goes back with its comment:
 record, centre, date); one look in the orrery with Gonggong as the
@@ -1719,6 +1878,13 @@ L-330.
   next opened. (c) The constants change report cannot follow numbers
   out of a dictionary entry into rows: it names planet_poles' Sun line
   once, on this patch, and Tony is told to expect it.
+- **2026-10-24, night: (a) not built.** The brief for the session called
+  it a small fix with no open question, to ride any orrery patch the
+  session opened. It is not: wiring the orrery's Sun-axis hover to the
+  store rows changes words a visitor reads, which go to Tony before they
+  ship, and its "differential 24.5-35 d" still needs a source a visitor
+  can open. So it stays on Where We Are's list, with the words to be
+  drafted for Tony.
 **Gap (replaces the one below, 2026-10-22):** Tony's runs and his phone
 look (the axis, its arrows, the opening view, the hover); then (a)
 and (b) above are re-homed and the item closes.
@@ -1775,6 +1941,10 @@ L-188 (the maintenance run); L-459 (the monthly run).
 - **2026-10-22:** not deferred; built before or with L-443's first
   slice, since the nightly fetch grows with it (Tony's ruling in the
   coordination session, carried into this close).
+- **2026-10-24, night:** moves with slice 2's website half, build B
+  (L-443), since this session's slice 2 work was the orrery's half.
+  The open question stands and goes to Tony with build B: whether a
+  difference stops the run or waits and tries again.
 **Gap:** the build (gallery `daily_run.py`, the pull step), with its
 rule in gallery-cache-builder; whether a difference stops the run or
 waits and tries again.
@@ -2426,7 +2596,74 @@ the deliberate limit, its number set then, each removal named.
   https://ssd.jpl.nasa.gov/horizons/, which the i panel makes a link;
   each room's closing paragraph is a bulleted list, "the creator's
   daughter". Slice 2's skill bump carries them.
-**Gap (replaces the one below, 2026-10-24, evening):** slice 2's build,
+- **2026-10-24, night: slice 2 split in two; build A built**
+  (`documentation/HANDOFF_L443_slice2_buildA_20261024.md`). The orrery's
+  objects export cannot carry a key the website has no entry for: the
+  website's objects mirror refuses it, which would stop the Daily Run's
+  pulls. So the twelve spacecraft are keyed in the same round as their
+  website entries (build B). Build A is the orrery's path plan
+  (orrery `patch_L443_7_slice2_path_plan_orrery_20261024.py`):
+  `path_plan.py` and its suite (15 of 15), the export's schema 3
+  carrying each served spacecraft's plan, two run rows and three
+  dashboard buttons, one of them a temporary preview that plans the
+  twelve by name so the first real flyby list comes from Tony's
+  machine. Two things the design record did not say, decided by method
+  and written into horizons-orbital-mechanics 1.10: a flyby must lie
+  inside the body's Hill sphere, worked out from JPL's own GM (without
+  it the first offline run took nearest approaches 85 million km from
+  Mercury for events), and a path's span is read from JPL's own limits,
+  since the list's end dates had gone stale (Juno's and Psyche's past
+  JPL's data, New Horizons' 21 years short of it).
+- **The words for build B, drafted for Tony**
+  (`documentation/WORDS_L443_slice2_draft_20261024.md`, the reads in
+  `CHECK_L443_slice2_sources_20261024.md`): JPL's exact name and data
+  span for all twelve spacecraft, every number in a description read
+  on a page opened that day or removed, a link for each. It carries
+  four decisions: C/2025 K1's record (L-470), BepiColombo's arrival
+  date, whether Juno's planned part is drawn, and the word
+  "Hyperbolic".
+- **Asked of Tony, 2026-10-24, in chat:** how much of a comet's path the
+  website draws. Recommended: from one year before perihelion, solid
+  to today, dashed for one more year.
+- **Answered, 17:07** (`documentation/COORD_L443_comet_span_ruling_20261024.md`):
+  "On the comet window, yes but within the JPL served window which may
+  be less." A comet's path runs from one year before perihelion to one
+  year after today, solid to today, dashed after, both ends clipped to
+  what JPL serves for its record, read from JPL's refusals as the path
+  plan reads a spacecraft's span; nothing is extended. The two margins
+  are drawing choices, and the hover says so.
+- **The four decisions in the words, ruled the same evening**
+  (`documentation/COORD_L443_words_decisions_20261024.md`):
+  1. C/2025 K1's record: asked by JPL's permanent number, 1004075
+     (17:15; built on L-470).
+  2. BepiColombo: "B for Bepi Colombo." No arrival date in its
+     description; the drawn path carries the timing.
+  3. Juno: "Confirmed in Juno." Drawn by ruling 6 to where JPL's data
+     ends, 2028-09-02, solid to today and dashed after; the description
+     says nothing about the mission's end.
+  4. "Use hyperbolic because that's the scientific term and the plain
+     words to say what it means." (17:35)
+  The rest of the words come to Tony again beside build B's hover
+  words, before they are served.
+- **Two more, the same evening:** a room for C/2025 K1 and its pieces
+  (L-483), and a check that the website and the orrery agree (L-484).
+- **Carried for slice 2's next skill bump:** none; L-481's three
+  descriptions and L-482's rule rode interactive-exhibit 1.23 this
+  session.
+**Gap (replaces the one below, 2026-10-24, late night):** Tony's runs,
+patch_L443_9 right after patch_L443_8, and the preview's output pasted
+into the chat; then build B: the twelve keyed with their website entries
+and their words, the builder fetching by the plan, the room
+drawing each path solid to today and dashed after, the hover words to
+Tony first, with L-461; then the open-path comets by the span ruling.
+**Gap (superseded above, 2026-10-24, night):** Tony's run of the
+path plan patch and its preview, pasted into the chat; his words
+approvals and the four decisions; his answer on a comet's span; then
+build B: the twelve keyed with their website entries, the builder
+fetching by the plan, the room drawing each path solid to today and
+dashed after, the hover words to Tony first, with L-461; then the
+comets.
+**Gap (superseded above, 2026-10-24, evening):** slice 2's build,
 by `documentation/DESIGN_L443_slice2_rulings_20261023.md`, after the
 next design talk (L-482, L-461, L-465).
 **Gap (superseded above, 2026-10-24, noon):** L-477 to L-480 are

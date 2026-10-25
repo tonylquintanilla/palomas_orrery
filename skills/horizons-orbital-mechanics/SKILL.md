@@ -1,14 +1,24 @@
 ---
 name: horizons-orbital-mechanics
-description: JPL Horizons API and orbital mechanics reference for the Paloma's Orrery project (astroquery Horizons queries, orbit_data_manager, osculating_cache_manager, idealized_orbits, apsidal_markers, spacecraft_encounters, close_approach_data, position_accuracy, orbital_period, period_fetch). Use for any Paloma's Orrery task involving Horizons queries or ephemerides, coordinate center bodies, reference frames, osculating elements, orbit caches, a small body's position uncertainty (VEC_TABLE 2xr), orbital periods and the centre they are taken around, the drawn orbit and its markers' dates, which Horizons record serves a body (helio_id, a pinned comet record, a skip list), encounter or flyby resolution, or whenever a rendered orbit looks wrong or an ephemeris API returns empty. Do not use for projects other than Paloma's Orrery.
-fires_when: Horizons queries, centers, frames, osculating elements, encounters, comet record pinning, 2xr uncertainties, periods, the drawn orbit's centre, the Horizons check (horizons_check.py, its period comparison and the data sheets' re-read), the period fetch before it (period_fetch.py), which record serves a body (helio_id, re-pinning a comet, JPL's exact name, a body on a skip list)
+description: JPL Horizons API and orbital mechanics reference for the Paloma's Orrery project (astroquery Horizons queries, orbit_data_manager, osculating_cache_manager, idealized_orbits, apsidal_markers, spacecraft_encounters, close_approach_data, position_accuracy, orbital_period, period_fetch, path_plan). Use for any Paloma's Orrery task involving Horizons queries or ephemerides, coordinate center bodies, reference frames, osculating elements, orbit caches, a small body's position uncertainty (VEC_TABLE 2xr), orbital periods and the centre they are taken around, the drawn orbit and its markers' dates, which Horizons record serves a body (helio_id, a pinned comet record, a skip list), encounter or flyby resolution, or whenever a rendered orbit looks wrong or an ephemeris API returns empty. Do not use for projects other than Paloma's Orrery.
+fires_when: Horizons queries, centers, frames, osculating elements, encounters, comet record pinning, 2xr uncertainties, periods, the drawn orbit's centre, the Horizons check (horizons_check.py, its period comparison and the data sheets' re-read), the period fetch before it (period_fetch.py), which record serves a body (helio_id, re-pinning a comet, JPL's exact name, a body on a skip list), a spacecraft path's plan and its flybys (path_plan.py -- the Hill sphere, JPL's GM, the window and step)
 ---
 
 # Horizons and Orbital Mechanics Reference
 
-Read this file in 2 parts: lines 1-216, 217-408.
+Read this file in 2 parts: lines 1-220, 221-477.
 
-Skill version: 1.9 | 2026-10-22, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.10 | 2026-10-24, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 206f96c9. v1.10 (L-443, slice 2) adds How a Path's
+Events Are Found, the method path_plan.py was built on: an event is a
+nearest approach inside the body's Hill sphere, from JPL's own GM, that
+needs finer steps than the weekly backbone by the orrery's curvature
+rule; found from daily positions around the Sun, then to the minute in
+two passes; its window and step by spacecraft_encounters' own rule; made
+again on a 30-day cycle with the past carried. The Hill sphere was not
+in the design record: without it the first offline run took nearest
+approaches tens of millions of km from Mercury and the Moon for events.
+Earlier: 1.9 | 2026-10-22, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ bfb6c474. v1.9 (L-443, with L-470) adds Which Record
 Serves a Body: around the Sun a body with a helio_id is asked by it, in
 every reader; a TNO's small-body record is JPL's "integrated barycenter";
@@ -24,15 +34,9 @@ Depends on Its Centre: a body's period may be asked of another target
 than the body. Earth's, around the Sun, is asked of the Earth-Moon
 barycentre, target 3; the record carries the target, and every reader
 takes it from the record.
-Earlier: 1.7 | 2026-10-15, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ ffd6c36a. v1.7 (L-444) adds one bullet under Where the
-Check Lives, and What It Compares: period_fetch.py runs just before the
-check and fetches, with plotting's own call and save, the period of
-each served object that has none fetched, so the check compares it with
-JPL the same day.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
 on 2026-10-12, 2026-10-13 and 2026-10-14 (L-431), 2026-10-15
-(L-444, L-445) and 2026-10-22 (L-443).
+(L-444, L-445), 2026-10-22 (L-443) and 2026-10-24 (L-443).
 
 ## Horizons Center Body Rules
 
@@ -360,6 +364,71 @@ build's record, documentation/HANDOFF_L431_build3_website_20261014.md.
   three cache entries, the carried confirmations, the seeded sheets):
   a test that read the live records would fail on the day the check
   first worked.
+
+## How a Path's Events Are Found (L-443)
+
+Built 2026-10-24 for slice 2's paths, in `path_plan.py`; the rulings are
+1, 5 and 7 of documentation/DESIGN_L443_slice2_rulings_20261023.md
+("One path rule, the orrery's"; the nearest approach, "which is
+mechanical"; the 30-day cycle). The offline suite, `test_path_plan.py`,
+runs on a made-up solar system written in JPL's vector format; the
+first run against JPL is Tony's.
+
+- AN EVENT is a nearest approach that needs finer steps than the path's
+  backbone, a point every 7 days (Voyager 1's proven step). Two tests:
+  - it is a PASS: the nearest approach lies inside the body's Hill
+    sphere, r x (GM / (3 GM of the primary)) ** (1/3), r the body's
+    distance from its primary at that moment. The Moon's primary is
+    Earth; every other body's is the Sun. The Sun, the drawing's own
+    centre, has no gate. Without this test the curvature rule alone took
+    nearest approaches 85 million km from Mercury and 103 million km
+    from the Moon for events (the first offline run): it cannot tell a
+    pass from two bodies merely being nearest each other.
+  - the CURVATURE RULE: about 30 points through a half circle at the
+    passing distance and speed, so an ideal step of pi x d / v / 30
+    (spacecraft_encounters._calculate_encounter_resolution), shorter
+    than the backbone's.
+  A daily sample can sit up to half a day of travel from the true
+  nearest moment, so both tests are first put to the distance less half
+  a day's travel, then again at the nearest minute.
+- GM IS JPL'S, read from the body's data sheet (OBJ_DATA=YES,
+  MAKE_EPHEM=NO) when a plan is made. A major body's sheet prints it
+  three ways, read 2026-10-24 for 399, 599, 301, 10 and 999:
+  "GM, km^3/s^2 = ...", "GM (km^3/s^2) = ..." and "GM (planet) km^3/s^2
+  = ...". A small body's prints "GM= <value>" or "GM= n.a.". Never the
+  "GM 1-sigma" line, which can come first. A body whose sheet gives no
+  GM has no Hill sphere to pass inside and is named as not searched;
+  that is most small bodies, so a spacecraft's asteroid flybys are not
+  events of the drawing (they bend nothing a Sun-centred room shows).
+- WHERE THE NUMBERS COME FROM. Each body's position, and each path's,
+  daily around the Sun, one fetch per body shared by every due path;
+  the distance is worked out here. The nearest minute in two passes,
+  resolve_encounter_time's numbers: hourly for 1.5 days either side,
+  then each minute for 90 minutes either side of the nearest hour.
+  Around a major body the path is asked centred on it ('500@<id>');
+  around a small body, which Horizons cannot centre on by its
+  designation, both are asked around the Sun and differenced.
+- THE WINDOW AND THE STEP are spacecraft_encounters' own (half-width
+  four times the distance, the crossing time times 1.5, about 30 points
+  through the half circle), so the orrery's encounter views and the
+  website use one rule. Its steps stop at six hours; where the ideal is
+  a day or more the step is whole days, never more than the ideal.
+- THE 30-DAY CYCLE. A plan is made again when it is 30 days old, or at
+  once when its inputs change (id, id_type, span, the bodies searched).
+  Events more than 30 days old are carried, not asked again, and the
+  search starts 3 days before them; a path whose span ended before that
+  asks nothing. A failure to reach JPL keeps every plan as it was and
+  says UNREACHABLE by name.
+- TIMES. Horizons labels a vector table's times TDB (its JDTDB column);
+  the plan writes its moments in that scale. The first live run is the
+  test that the windows' START and STOP times are read in the same.
+- KEYING. A key in the objects export with no website entry stops the
+  website's objects mirror, and with it the Daily Run's pulls. So a
+  spacecraft is keyed in the same round as its website entry. Until
+  slice 2's are, `path_plan.py --preview` plans the twelve by name into
+  data/path_plans_preview.json, which the export never reads
+  (temporary; the list, the flag and its dashboard button go when they
+  are keyed).
 
 ## Reference Frame Diagnostic
 

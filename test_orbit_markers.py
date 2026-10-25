@@ -92,6 +92,9 @@ planted fault say so, and Mercury must keep its comparison.)
 Module updated: October 19, 2026 with Anthropic's Claude Opus 5.5 (L-385:
 the frame judge expects the one margin every view now opens with, 1.2,
 for Sedna and for Mercury alike.)
+Module updated: October 24, 2026 with Anthropic's Claude Opus 5.5 (L-470:
+the record-number check names no body; C/2025_K1 is asked by JPL's
+permanent number now, and the rule it checks stays for a future pin.)
 """
 import contextlib
 import copy
@@ -725,10 +728,11 @@ def judge_dispatch(findings, counts, orrery_source=None):
             findings.append(('DISPATCH', 'plot_idealized_orbits no longer asks drawing_orbit '
                              'for the elements to draw'))
     counts['sources'] += 2
-    # The record number is a small body; the declined update keeps the
-    # view's own elements.
+    # A pinned record number is a small body whatever its id_type; the
+    # declined update keeps the view's own elements. (C/2025_K1 was the
+    # case, as record 90004912; since 2026-10-24 it asks 1004075.)
     if not orbital_period._is_small_body('90004912', 'id'):
-        findings.append(('DISPATCH', "C/2025_K1's record 90004912 (id_type 'id') is not a small body"))
+        findings.append(('DISPATCH', "a pinned record number (id_type 'id') is not a small body"))
     with cache_is(fixture_cache()), contextlib.redirect_stdout(io.StringIO()):
         got = osculating_cache_manager.get_fallback_elements('Charon', '@9')
     if got.get('a') != 0.000130:

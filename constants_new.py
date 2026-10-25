@@ -220,6 +220,9 @@ and SUN_POLE_DEC_J2000_DEG, the Sun's pole as rows of its own, which
 planet_poles now reads; SUN_ROTATION_RATE_DEG_PER_DAY from NASA NAIF's
 pck00011, read this day; DEG_PER_TURN; and two derived rows the website
 prints, SUN_SIDEREAL_ROTATION_PERIOD_D and SUN_EQUATOR_TILT_DEG.)
+Module updated: October 24, 2026 with Anthropic's Claude Opus 5.5
+(L-470: no value changed. Two comments on C/2025 K1's piece C no longer
+call it bound: JPL's e of 0.999994, give or take 0.00003, cannot tell.)
 """
 
 import math
@@ -4967,7 +4970,7 @@ KNOWN_ORBITAL_PERIODS = {
     'West': None,           # West (C/1975 V1-A);  Parabolic comet - effectively infinite period  
     'C/2025_K1': None,      # Hyperbolic comet - effectively infinite period
     'C/2025_K1-B': None,    # Hyperbolic fragment - escaping solar system
-    'C/2025_K1-C': None,    # Technically ~13M year period, effectively infinite
+    'C/2025_K1-C': None,    # Near-parabolic: JPL cannot yet tell a closed path from an open one
     'C/2025_K1-D': None,    # Hyperbolic fragment - escaping solar system    
     'Borisov': None,        # Hyperbolic comet - effectively infinite period    
     'McNaught': None,       # Hyperbolic comet - effectively infinite period 
@@ -5110,7 +5113,7 @@ def color_map(planet):
         'NEOWISE': 'red',
         'C/2025_K1': 'cyan',
         'C/2025_K1-B': 'rgb(0, 200, 220)',          # Teal - darker cyan variant
-        'C/2025_K1-C': 'magenta',           # magenta - the bound fragment (special!)
+        'C/2025_K1-C': 'magenta',           # magenta - the near-parabolic piece
         'C/2025_K1-D': 'rgb(100, 180, 255)',          # Sky blue - cooler variant        
         'Borisov': 'green',        
         'Tsuchinshan': 'cyan',

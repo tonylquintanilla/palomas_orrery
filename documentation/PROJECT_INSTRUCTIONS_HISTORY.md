@@ -3309,6 +3309,56 @@ resident.
 (Moved down from the resident protocol on 2026-10-24 when
 v3.110 made a fourth entry.)
 
+v3.108 (October 22, 2026): No rule changed in this document. THREE
+skill bumps, one version each (L-434 with L-454, L-465 with L-468, and
+L-469): interactive-exhibit 1.19 -> 1.20, provenance-discipline 2.33 ->
+2.34, ledger-and-session-records 1.21 -> 1.22. HOW A RANGE IS DRAWN;
+THE STORED DRAWINGS NAMED; A GUIDE THE RENDERERS DRAW; A DEFERRED LIST.
+
+WHAT PROMPTED IT. The day's build stored the galactic tide and the
+outer Oort cloud, and added the Alfven surface's usual range. At his
+first look at the orrery's Oort plot Tony said the five Oort features,
+some clouds and some spheres, were confusing, then gave the principle:
+"Edges are better drawn with a cloud across the range. While a
+fluctuation is more like graph whiskers so there the concentric
+circles would be a graphical device. In both cases the hover should
+explain." And: "the concentric spheres were an early attempt at this
+idea. They can be removed." From his phone the same day: "The sun's
+pole and rotational axis like the orrery?" And in the coordination
+session Claude Fable 5.1 recorded the same morning: "keep the deferred
+list prominent so we can come back to it."
+
+WHAT CHANGED. provenance-discipline, under When the source gives a
+range, gains How a range is drawn: an edge nobody can place is a cloud
+across its range; an edge that moves stays sharp with two dashed
+circles at its range's ends; the hover says which. interactive-exhibit
+names the stored drawings, records that a drawer row opens its own
+feature's words (the Label words check), records a frame element the
+renderers draw (the Sun's rotation axis, marked meta.frame_element,
+never a shell key), and replaces its note on Earth's magnetotail,
+whose reading was fixed. ledger-and-session-records gives Where We Are
+a Deferred section between Settled and Signals. Each skill's oldest
+entry moved to documentation/SKILL_HISTORIES.md, by the three-entry
+rule (interactive-exhibit 1.17, provenance-discipline 2.31,
+ledger-and-session-records 1.19).
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copies read
+interactive-exhibit 1.20, provenance-discipline 2.34 and
+ledger-and-session-records 1.22 before work that fires them. This
+session confirmed its loaded copies read interactive-exhibit 1.19 and
+provenance-discipline 2.33 (discharging v3.107's obligation) and
+ledger-and-session-records 1.21, as the manifest expected.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.105 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-24 when
+v3.111 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

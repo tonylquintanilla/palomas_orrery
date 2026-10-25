@@ -1,14 +1,26 @@
 ---
 name: interactive-exhibit
 description: How an interactive exhibit (a room in interactive.html such as ?exhibit=sun) is designed, built, verified and carded for the Paloma's Orrery gallery. Covers the exhibit switch and boot path, the assembler driver spec, the JS feature handoff, the shared chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent gate, back link), what is per-body, the served-data provenance contract, what a room opens on (the arrival block) and the shell-key stamp the renderers apply, the drawer order, who may write data/objects_config.json, the Mode 5 phone sequence, and carding an exhibit through Studio. Use when adding or changing an exhibit (Earth, Jupiter, the stars), touching sun* chrome in interactive.html, deciding what an exhibit may render, or editing the served words with store_writer or exhibit_store_editor. Not for propagation math (gallery-assembler), the nightly builder (gallery-cache-builder), or the Studio/converter chain (gallery-pipeline). Do not use for projects other than Paloma's Orrery.
-fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, its group rows, its two Resets, Home's order and its framing; Go To fitting a body's whole orbit and the orbit line in a body's hover; the count line's place; a bare interactive.html link and the Explorer's address; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia); a served number's citation and its source_note; the Typed facts check (smoke_typed_facts.js); a feature drawn as stored dots (the Hills cloud, Earth's radiation belts); the i panel's source list and its links (source_list.js); the order a room's drawer lists its shells in, where each begins (drawer_order.js, the Drawer order check)
+fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, its group rows, its two Resets, the Reset in every room's top bar, Home's order and its framing; Go To fitting a body's whole orbit and the orbit line in a body's hover; the count line's place; a bare interactive.html link and the Explorer's address; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia); a served number's citation and its source_note; the Typed facts check (smoke_typed_facts.js); a feature drawn as stored dots (the Hills cloud, Earth's radiation belts); the i panel's source list and its links (source_list.js); the order a room's drawer lists its shells in, where each begins (drawer_order.js, the Drawer order check)
 ---
 
 # Interactive Exhibit
 
-Read this file in 7 parts: lines 1-152, 153-156, 157-398, 399-632, 633-887, 888-1128, 1129-1153.
+Read this file in 7 parts: lines 1-152, 153-156, 157-398, 399-640, 641-895, 896-1152, 1153-1177.
 
-Skill version: 1.22 | 2026-10-24, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.23 | 2026-10-24, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 206f96c9 and gallery @ 96173b88. v1.23 (L-482, with
+the descriptions L-481 carried) records Tony's ruling of the day: "Yes
+all rooms should use the same Reset button and no 'see more'." The top
+bar's button reads Reset in every room. In the Sun and Earth rooms it
+puts back the room's arrival -- every shell ticked as the served arrival
+block left it, the text box closed, the opening frame and angle, the
+drawer closed -- and no longer ticks or unticks every shell. No room has
+a See more. And three descriptions, built and approved on his look the
+same day: each line of a Solar System room hover after the name is a
+bullet; a source line naming JPL Horizons carries its address, which the
+i panel makes a link; each room's closing paragraph is a bulleted list.
+Earlier: 1.22 | 2026-10-24, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 82fa04cc and gallery @ 2c2057d7. v1.22 (L-477, L-478,
 L-479, L-480) records Tony's four rulings of the day on his Oct 23 phone
 look. The Solar System room's drawer has no See more and nothing that
@@ -34,23 +46,11 @@ perihelion anchor is trusted only near its date. And a bare
 interactive.html link opens the Solar System room; the Explorer is at
 ?exhibit=solar-system-explorer (stage 10). The anatomy table's
 "default solar-system-explorer" is corrected.
-Earlier: 1.20 | 2026-10-22, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ b995472a and gallery @ d7195704. v1.20 (L-434, L-465,
-L-468, L-460) records four things from one day's build. The galactic
-tide and the outer Oort cloud are stored drawings now, placed once by
-the orrery from a seed, and the stored drawings are named. A drawer
-row opens its own feature's words, held by the gallery run's Label
-words check (L-468). A drawn guide the renderers build, the Sun's
-rotation axis (L-465; Tony from his phone: "The sun's pole and
-rotational axis like the orrery?"), is a frame element: always drawn,
-no shell key, marked `meta.frame_element`. And the drawer-order note
-on Earth's magnetotail is replaced, its reading having been fixed
-(L-460).
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
 on 2026-10-05 (L-418), 2026-10-10 (L-429), 2026-10-14 (L-431),
 2026-10-16 (L-421), 2026-10-17 (L-452), 2026-10-20 (L-456),
 2026-10-21 (L-460), 2026-10-22 (L-434, L-443) and 2026-10-24
-(L-477).
+(L-477, L-482).
 
 ## Contents
 
@@ -115,7 +115,7 @@ the new exhibit brings its own.
 | Feature handoff: `GalleryFeatures.buildFeatureTraces(features, positions, {sceneHalfRangeAu})`; anything larger than the frame goes to the drawer, not dropped | feature_renderers.js | shared |
 | Arrival frame: measure every trace once (`sunTraceExtentAu`), half-range = 1.1 x the largest visible, floored at the body's constant (`SUN_HALF_RANGE_AU` 0.25) | initSunExhibit | mechanism shared; the floor and what is visible on arrival are per-body rulings |
 | Layout builder: aspect 1:1:1 unless the body's physics says otherwise (the Sun's shells are spheres); axes state their unit; `tick0` 0 and `dtick` from `sunGridDtick(span)` | `buildSunLayout()` | per-body values, shared rules |
-| Drawer replacing the legend: rows from `legendgroup`, `legendonly` hides, All / none (in the Solar System room, Reset: L-477), focus row. A row's whole left end -- edge, box and colour dot, the full row height, about 65 px -- ticks and unticks; rows are at least 44 px tall; the name or GO on an UNTICKED shell ticks it and then frames it (L-318 round 3, amending L-267's G2 in that one case; GO still never hides anything). Since L-429 (Tony, 2026-10-10: "For uniformity rename the Go buttons in all rooms to Go To and center") the button reads GO TO and sits in the true middle of every room's row: the row is a three-column grid, the left end and the name in the first, Go To in the second, the room button (Solar System room) in the third; a long name wraps onto more lines rather than being cut. Naming a DRAWN shell also opens its hover text as a text box: on the desktop and a landscape phone a scene annotation pinned to its info marker with an arrow; on a portrait phone (`sunPhonePortrait()`) a page annotation centred in the view with no arrow, same text and width (L-318 round 5). A tap in the scene, on the box, or on the backdrop closes it; the backdrop also closes the drawer; unticking closes it too (L-318) | `buildSunDrawer`, `sunApplyVisibility`, `sunFocusOn`, `sunLabelShow`, `sunLabelInstall`, `sunPhonePortrait`; knobs `SUN_LABEL_WRAP_CHARS` (34), `SUN_LABEL_PHONE_X` / `_Y` (0.5), `SUN_LABEL_FONT_PX` (12) | shared |
+| Drawer replacing the legend: rows from `legendgroup`, `legendonly` hides, Reset in every room (L-477, L-482: the Solar System room's puts back its served opening and folds its groups, `ssReset`; the Sun's and Earth's put back their arrival, `sunReset`), focus row. A row's whole left end -- edge, box and colour dot, the full row height, about 65 px -- ticks and unticks; rows are at least 44 px tall; the name or GO on an UNTICKED shell ticks it and then frames it (L-318 round 3, amending L-267's G2 in that one case; GO still never hides anything). Since L-429 (Tony, 2026-10-10: "For uniformity rename the Go buttons in all rooms to Go To and center") the button reads GO TO and sits in the true middle of every room's row: the row is a three-column grid, the left end and the name in the first, Go To in the second, the room button (Solar System room) in the third; a long name wraps onto more lines rather than being cut. Naming a DRAWN shell also opens its hover text as a text box: on the desktop and a landscape phone a scene annotation pinned to its info marker with an arrow; on a portrait phone (`sunPhonePortrait()`) a page annotation centred in the view with no arrow, same text and width (L-318 round 5). A tap in the scene, on the box, or on the backdrop closes it; the backdrop also closes the drawer; unticking closes it too (L-318) | `buildSunDrawer`, `sunApplyVisibility`, `sunFocusOn`, `sunLabelShow`, `sunLabelInstall`, `sunPhonePortrait`; knobs `SUN_LABEL_WRAP_CHARS` (34), `SUN_LABEL_PHONE_X` / `_Y` (0.5), `SUN_LABEL_FONT_PX` (12) | shared |
 | Nav cluster: + / - / Home = FRAME zoom (range and dtick change together; the grid re-labels), plus four arrow buttons that turn the camera by a step scaled to the live eye distance, so a tap moves the same slice of screen at any zoom (L-310); on a portrait phone 768 px or narrower the arrow cross, Home with it, moves apart from + and - into its own holder, and the in-frame title stays (L-316). WHICH corner is set only by the `.nav-cross-apart` CSS rule in `nav_cluster.js` -- top right since round 4, after a round at the bottom left -- and the method that moves it, `crossApart(on)`, says nothing about the corner, so the next move is one CSS edit. The open drawer hides the cluster and the holder both. The page decides WHEN: `navPlaceCross()` asks `sunPhonePortrait()`, the same test the text box uses | gallery/nav_cluster.js (`crossApart`, `.nav-cross-apart`), `navFrameZoom`, `navHome`, `navCameraStep`, `navPlaceCross`, `sunPhonePortrait` | shared |
 | Click deferral: `plotly_click` -> `setTimeout(0)` -> focus | initSunExhibit | shared, CRITICAL (L-278) |
 | i-panel follows the focus; curated link per feature stamped into trace `meta` by `stampLink`; its last line, in every room, is "About Paloma's Orrery", opening the lobby's About card at index.html#about (L-475), and closing the card steps back to the room that opened it (L-480, index.html's `aboutFromRoom`) | `renderSunInfo`, feature_renderers.js | shared mechanism; per-body copy and links |
@@ -517,8 +517,16 @@ Plotly.
   opening frame and angle, the drawer closed. Inside an open group, once
   one of its bodies is ticked, "Reset <group>" unticks them all and no
   other (`groupReset`, `groupResetOffered`; `ssGroupReset`). Nothing
-  ticks many bodies at once. The Sun and Earth rooms keep All / none:
-  the ruling was this room's, and whether theirs follow is Tony's to say.
+  ticks many bodies at once. Since v1.23 the Sun and Earth rooms have
+  the same button (L-482; Tony, 2026-10-24: "Yes all rooms should use
+  the same Reset button and no 'see more'"). There it puts back the
+  room's arrival: every shell ticked or unticked as the room opened,
+  recorded once at boot from the drawer as the served arrival block left
+  it (`sunOpening`, `sunOpeningState`), so the opening has one
+  definition and Reset never reads the block a second time; then the
+  text box closes and Home runs, the opening frame and angle with the
+  drawer closed (`sunReset`). It replaced All / none, which ticked or
+  unticked every shell. No room has a See more.
 - **Home remembers the tick order**, for the open tab only: the last
   body ticked that is still ticked, at the opening angle, drawer closed,
   falling back through the order. With nothing ticked it puts back the
@@ -952,6 +960,16 @@ pointer line under each hover (L-231); the hover is the glance. Reworded
 hovers go to Tony before they ship. (L-331; the orrery's own hovers
 follow under orrery-coding-conventions 1.9 and L-321.)
 
+**Readability, Tony's three asks of 2026-10-24** (v1.23, L-481; built at
+gallery 96173b8 and approved on his phone look the same day). In the
+Solar System room each line of a body's hover after its name is a
+bullet, written `&#8226;`, because Plotly 2.35.2 converts only eight
+named entities. Every source line that names JPL Horizons carries its
+address, https://ssd.jpl.nasa.gov/horizons/, which the i panel makes a
+link (`gallery/source_list.js`). Each room's closing paragraph, "Part
+of Paloma's Orrery", is a bulleted list, one sentence to a bullet, and
+reads "named for the creator's daughter".
+
 ### A feature's info link: NASA if specific, else Wikipedia [QUALITY]
 Every drawn feature carries exactly one link, its `info_url` in
 `data/objects_config.json` (Earth's two belts carry the parallel list
@@ -1024,10 +1042,16 @@ needs no ruling; whether a feature is drawn at all is Tony's.
      -- rows, ticks, focus, frames, Home -- and nothing a visitor sees.
    - `compare_rooms.js <before> <after> <room> <payload>`: when SHARED
      chrome changes, drive every other room the same way in the old and
-     the new copy -- every row's box in turn, All / none, Home -- and
-     require the two to be identical. "Both rooms are Mode 5 targets"
+     the new copy -- every row's box in turn, the top bar's button
+     twice, Home -- and require the two to be identical. "Both rooms are Mode 5 targets"
      (One chrome, many rooms) still holds; this makes the first pass
      cheap and exact.
+   - `walk_shell_reset.js <root> <sun|earth> <payload>` (L-482): reads
+     what the room opened on from the traces as first plotted, moves
+     every tick, the frame, the camera and the text box away from it,
+     presses Reset twice, and holds each result to that opening. Run
+     against the page from before L-482 it fails 20 checks of 33 in
+     each room.
    - A walk per room (`walk_solar_system_drawer.js`) checks each step
      against values worked out in the walk itself, not by the page's own
      helpers, and is run once against a deliberately broken copy to show

@@ -734,6 +734,20 @@ not a visual judgement." The order is only as right as the drawing,
 so it rests on the gallery run's Drawn ends check.
 (Moved down 2026-10-24, when 1.22 made a fourth entry.)
 
+Earlier: 1.20 | 2026-10-22, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ b995472a and gallery @ d7195704. v1.20 (L-434, L-465,
+L-468, L-460) records four things from one day's build. The galactic
+tide and the outer Oort cloud are stored drawings now, placed once by
+the orrery from a seed, and the stored drawings are named. A drawer
+row opens its own feature's words, held by the gallery run's Label
+words check (L-468). A drawn guide the renderers build, the Sun's
+rotation axis (L-465; Tony from his phone: "The sun's pole and
+rotational axis like the orrery?"), is a frame element: always drawn,
+no shell key, marked `meta.frame_element`. And the drawer-order note
+on Earth's magnetotail is replaced, its reading having been fixed
+(L-460).
+(Moved down 2026-10-24, when 1.23 made a fourth entry.)
+
 ## safe-file-editing
 
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons;
@@ -1020,3 +1034,11 @@ same 30-day cycle. It corrects the line under Small-Body Record Pinning
 that put the check in the website's Daily Run. It is the first version long enough
 for more than one read, so it opens with its read plan (L-418).
 (Moved down 2026-10-22, when 1.9 made a fourth entry.)
+
+Earlier: 1.7 | 2026-10-15, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ ffd6c36a. v1.7 (L-444) adds one bullet under Where the
+Check Lives, and What It Compares: period_fetch.py runs just before the
+check and fetches, with plotting's own call and save, the period of
+each served object that has none fetched, so the check compares it with
+JPL the same day.
+(Moved down 2026-10-24, when 1.10 made a fourth entry.)

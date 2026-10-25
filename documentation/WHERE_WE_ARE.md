@@ -1,24 +1,27 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 24, 2026, evening: the day's work all correct on
-your look; the next design talk, then slice 2.
-- Written at orrery 206f96c and gallery 96173b8, with the close patch.
+Last updated: October 24, 2026, late night: Reset in every room built;
+slice 2's orrery half built; your rulings recorded; C/2025 K1 fixed.
+- Written at orrery 206f96c and gallery 96173b8, with five patches.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Your look found the readability changes correct: bullets in a
->   body's hover, JPL Horizons' address as a link, the closing
->   paragraph a list with "creator's". L-481 (readability) closed.
-> - With it, all of today's work is done: the drawer, Reset, the count
->   line, Go To and About (L-477 to L-480).
+> - The Sun and Earth rooms' All / none is Reset now, as you ruled:
+>   it puts the room back as it opened (L-482 (their Reset)).
+> - Slice 2 is two builds. This one: the orrery's path plan, which
+>   finds each spacecraft's flybys in JPL's positions. Next: the
+>   website draws the paths (L-443 (the objects to the website)).
+> - Your four rulings on the words are recorded; the orrery asks
+>   C/2025 K1 by JPL's number for it now (L-470 (entries to fix)).
 >
-> **Do next:** *the next design talk (below), then slice 2: the
-> spacecraft and the comets on open paths.*
+> **Do next:** *your runs, in the handoff's order; then paste the
+> preview's flyby list into the chat.*
 >
 > **Needs you now:**
-> - *(do) The close patch on the orrery, then ledger_index.py and push.*
+> - *(do) Five patches: the handoff's order, with patch_L443_9 right
+>   after patch_L443_8. Paste what it says about the cached K1 path.*
 > - Two papers left to try (`READING_L456_tony_20261021.md`).
 
 *Italic* lines are the must-reads. Marks reset at every update.
@@ -43,8 +46,8 @@ your look; the next design talk, then slice 2.
                next, item 3, L-357 (stale leftovers).
  10-11.[NOW]   *The orrery's objects come to the website (L-443 (the
                objects to the website)): slice 1, 50 bodies, live Oct 22;
-               the drawer, view and readability work done Oct 24;
-               next slice 2, spacecraft and open-path comets; the moons.*
+               slice 2's path plan built Oct 24; next the website draws
+               the spacecraft, then the open-path comets; the moons.*
                << moved this session
  12.   [later] Encounters: comets and spacecraft at the dates that matter.
  13.   [later] The inner planets' rooms (Mercury, Venus, Mars), from the
@@ -57,19 +60,19 @@ your look; the next design talk, then slice 2.
 ## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings. A line leaves after a few weeks, once it is habit.
-- The drawer: no See more and no "All"; a group row only opens; Reset
-  puts back the room, or one group, as it opened. (Oct 24)
+- Every room: one Reset, no See more, nothing ticks many at once; a
+  group row only opens; Reset puts back the room as it opened. (Oct 24)
 - Go To fits a body's whole orbit, text box and all (a trial); each
   hover gives its orbit's near and far distance. (Oct 24)
 - A body's hover in bullets; a Horizons source carries its address,
   linked; the closing paragraph a list, "creator's". (Oct 24)
-- The objects go next; the deferred list kept in view. The tide pink
-  with its cone; the outer cloud loose dots with clumps. (Oct 22)
 - Groups fold open in the drawer; a room is for a body with more than
   its symbol. Every body fetched every build. Every comet drawn from
   today's orbit. Open-path comets go with the spacecraft. (Oct 22)
 - Paths: one rule, planned in the orrery; nearest approaches place the
   fine steps; solid to today, dashed after. (Oct 23)
+- A comet from a year before perihelion to a year past today, in JPL's
+  span; "hyperbolic" in plain words; the two agree or say why. (Oct 24)
 
 ## Deferred
 
@@ -88,6 +91,7 @@ Waiting behind the objects (Oct 22); a line leaves when picked up.
   (the Sun's slice)).
 - A drawn main-belt cloud (L-443 (the objects)), behind slice 2.
 - L-471 (a delivered patch is final): safe-file-editing's next version.
+- L-483 (a comet room), after slice 2; L-484 (the two agree), next.
 
 ## Signals
 
@@ -99,16 +103,13 @@ Read from files when this page was written, not typed from memory.
   stars 13, utilities 2.
 - This page's date and the ledger's newest stamp: both Oct 24. Agree.
 
-## Waiting on you
+## Waiting on you  **>> UPDATED THIS SESSION**
 
 At the next design talk:
-- Whether the Sun and Earth rooms' All / none becomes Reset too: the
-  ruling was the Solar System room's (L-482 (their Reset)).
-- The Daily Run checking the orrery it pulled is the one you pushed
-  (L-461 (pull matches push)): not built with slice 1; with slice 2.
-- The orrery's own Sun axis hover still types its period and tilt;
-  reading them from the new rows changes its words (L-465 (the Sun's
-  axis)).
+- When the Daily Run's pull and your push differ: stop, or wait and
+  try again (L-461 (pull matches push)), built with the website half.
+- The orrery's own Sun axis hover: words to you first, and a source
+  for its "differential 24.5-35 d" (L-465 (the Sun's axis)).
 
 Not urgent, in your order:
 1. Whether the editor also edits the Solar System room's rows.
@@ -117,13 +118,13 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- *Next: slice 2, `DESIGN_L443_slice2_rulings_20261023.md`.*
-- Today's close: `HANDOFF_L481_session_close_20261024.md`; your run
-  record: `WHERE_WE_ARE_10-24-26_1140_run_record.md`.
+- *Tonight's build and your run order:
+  `HANDOFF_L443_slice2_buildA_20261024.md`.*
+- Slice 2's rulings: `DESIGN_L443_slice2_rulings_20261023.md`;
+  tonight's: `COORD_L443_words_decisions_20261024.md`.
+- Today's earlier close: `HANDOFF_L481_session_close_20261024.md`;
+  your run record: `WHERE_WE_ARE_10-24-26_1140_run_record.md`.
 - Today's rulings: `DESIGN_L477_drawer_and_view_rulings_20261024.md`
-- The objects' rulings: `DESIGN_L443_objects_rulings_20261022.md`;
-  the words: `WORDS_L443_slice1_20261022.md`
-- Talks: `DESIGN_talks_rulings_20261020.md`, `DESIGN_talks2_rulings_20261021.md`
 - The strategy behind the road: `MASTER_PLAN_INTERACTIVE_GALLERY.md`
 
 --- Your run record below this line. No patch edits it; the length cap

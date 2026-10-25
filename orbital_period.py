@@ -64,7 +64,8 @@ drawing_orbit() and period_for_computation() hand them, with their
 period, to the drawing and the markers; VIEW_TO_OSCULATING_CENTRE is the
 one home of the view-to-centre map, which palomas_orrery.py now reads;
 _is_small_body counts a pinned record number as a small body whatever
-its id_type, so C/2025_K1 is asked of the Small-Body Database.)
+its id_type, so a comet pinned by a record number is asked of the
+Small-Body Database.)
 Module updated: October 13, 2026 with Anthropic's Claude Opus 5.5 (L-431,
 after build 2's look: drawn_aphelion_distance(), how far a drawn ellipse
 moved to another centre reaches from the plot's centre, so the frame is
@@ -86,6 +87,9 @@ Module updated: October 22, 2026 with Anthropic's Claude Opus 5.5 (L-443:
 figures_by_error() counts the figures of the number as printed, so a
 period just under a power of ten, which gains a digit when it rounds,
 is served with the count its print shows.)
+Module updated: October 24, 2026 with Anthropic's Claude Opus 5.5 (L-470:
+no code changed. C/2025_K1 is no longer the example of a pinned record
+number: it is asked by JPL's permanent number, id_type 'designation'.)
 """
 
 import math
@@ -417,8 +421,9 @@ def fetch_sbdb_period_sigma(search):
 def _is_small_body(horizons_id, id_type):
     """An asteroid or comet, by its id_type, or by a pinned Horizons
     small-body record number (9 followed by seven digits), whatever its
-    id_type: C/2025_K1 is listed as record 90004912 with id_type 'id'
-    (L-431, build 2; found at L-401's review)."""
+    id_type. Found at L-401's review, when C/2025_K1 was listed as record
+    90004912 with id_type 'id' (L-431, build 2); since 2026-10-24 it is
+    asked by JPL's permanent number, id_type 'designation' (L-470)."""
     if id_type in ('smallbody', 'designation', 'asteroid_name', 'comet_name'):
         return not str(horizons_id).startswith('-')
     return bool(re.match(r'^9\d{7}$', str(horizons_id).strip()))
