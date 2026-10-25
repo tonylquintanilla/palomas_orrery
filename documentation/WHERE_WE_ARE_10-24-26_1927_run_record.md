@@ -159,6 +159,29 @@ Deliver patches by placing them in my folders when the session is linked to my c
 
 Two notes on it. It names the files rather than restating their contents, because the session can read them and you shouldn't have to carry them. And it leaves the L-482 ordering to the builder, since that's a method call, not yours.
 
+=============================================================================
+
+A lot indeed: the protocol is at v3.111 now, with two skill bumps from this evening. Let me read your run record and check it against the repos.
+
+Everything you ran landed, and the repos agree with your record: the orrery is at b755415 with your run record pushed after it, the website at b1a4ce6. Here's where that leaves things.
+
+**Done tonight, verified.** Reset is the one button in every room, and your phone look said "correct." Slice 2's orrery half is built: the path plan read JPL's real positions for all twelve spacecraft and found the flybys where the missions actually made them, Voyager 2 at Neptune at 29,000 km, New Horizons at Pluto at 13,680 km, Juno's Earth pass. C/2025 K1 is asked by JPL's permanent number again and your look confirmed it sits with its pieces. Two skills bumped and reinstalled, protocol at v3.111. Gonggong's period came through the maintenance run as yesterday's ruling intended.
+
+**Not yet captured.** The session hasn't closed: the Where We Are page at HEAD still says "paste the preview's flyby list," which you did. Four things of yours exist only in the run record:
+
+1. The orbiter question, with your answer being a question back: entry and exit matter, a landing or takeoff matters, routine orbits don't, "but what would be the logic?"
+2. Your idea of an automated run at midnight, everything except the guest-book messages, if the machine can stay on.
+3. Your idea of carrying a view into a room: plot the inner planets in the Solar System room, enter the Sun room, and keep them while adding the dust cloud.
+4. Piece C's checkbox reading "Keplerian orbit" where the others say hyperbolic or near-parabolic.
+
+Plus one thing Opus owes: checking the OSIRIS-APEX Earth pass of April 2029 against JPL's sheet before building on it.
+
+**Next steps.** A short records close for tonight puts those four on the ledger and resets the page. Then the orbiter ruling, which stands before slice 2's website half because it decides what gets served: more than 230 of the 498 events are Juno, Clipper and BepiColombo circling their planets. Then the website half. Ideas 2 and 3 go on the Deferred list; both are real and neither blocks slice 2.
+
+**On your question, "what would be the logic?"** The path plan already has the piece it needs. It only counts a close pass as a flyby when the spacecraft is inside the body's Hill sphere, the region where that body's gravity beats the Sun's. An orbiter is simply a spacecraft that enters a Hill sphere and doesn't leave. So the rule could be: the first entry into a body's Hill sphere is an event, kept with its fine steps; a departure is an event, kept; everything between, while the spacecraft stays inside, is captured, and in the Solar System room it rides with the planet, no fine steps. A landing is the case where JPL's data ends inside the sphere, so there is an entry and no exit. The loops themselves wait for that planet's room. Nothing is typed by hand; it falls out of the positions the plan already fetches.
+
+Does that rule answer your question, or does it miss a case you have in mind? -- yes that would work well. thanks. 
+
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 **Session: OPEN: 10-24-26 1605: Opus: L443 slice 2 handoff brief**
@@ -1767,3 +1790,190 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 10. **Phone look**, in the Sun room and then the Earth room: tick a few shells, zoom in, turn the view, tap a shell's name to open its text box, then press Reset. The room should look exactly as it did when it opened. Then press Reset in the Solar System room, which should work as it did before. -- correct. 
 
 -- an idea for consideration. in the orrery, the sun features can be combined with other objects, like say the earth's orbit. in the website we start in the solar system room, but if we then enter the sun room, or the earth room, those views are completely reset. this would also apply to any other sub-rooms, other planets, satellites, encounters, comet breakups, etc. What i am wondering is if we could enable a way to retain a view we create before entering a room and keep it. for example. let's say we are in the solar system and we have the inner planets plotted. and then we move to the sun room, an option to keep the inner planet orbits view when selecting sun features, like the dust cloud. another example, we plot a comet, we enter the comet's room and plot its perihelion encounter, then the roche limit. specific encounter events could be duplicated of course, like perihelion events in the sun room, or close encounter asteroids in the earth room. or spacecraft flybys. so for many events, these duplicates would do the job. the exception would be sun features without sun encounters. 
+
+====================================================================
+
+I've recorded the ruling: every group in the drawer follows JPL's classification, and that includes the minor planets. After the Sun the order is Comets (with piece C), then Hyperbolic comets (ten), then Interstellar objects (the three with the IAU's "I" names). The spacecraft come right after Earth's row.
+
+The note in your `documentation\` folder, `COORD_L443_drawer_groups_ruling_20261024.md`, now carries the whole exchange: your first answer, the revision and your words for both. It replaces the single group I'd written down at 22:49.
+
+There's one thing for build B to check, because of the minor planets. The drawer's current groups mostly match JPL already, but one of them gathers several of JPL's classes. "Near-Earth asteroids" covers JPL's Atira, Aten, Apollo and Amor classes. Build B will check every body against its JPL class and list any that don't fit their group. Whether a group like that stays one row or splits into JPL's finer classes is a question for you then, with the list in hand.
+
+Nothing else changes tonight:
+1. Run `patch_L443_11_session_close_20261024.py`.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L443_11_session_close_20261024.py
+ok  LEDGER_CONSOLIDATED.md (6 edits)
+ok  documentation/WHERE_WE_ARE.md (5 edits)
+ok  documentation/HANDOFF_L443_slice2_buildB_brief_20261024.md: new
+patch applied: the close of Oct 24's night (2 files edited, 1 new)
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+2. Run `orrery_maintenance_run.py`.
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261025T004948Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 3.3s  rewrote LEDGER_CONSOLIDATED.md
+  Skill manifest               0.3s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             1.9s  unchanged (1 checked, not written)
+  Period fetch                 0.3s  unchanged (1 checked, not written) --
+                                     NOTHING MISSING -- 63 served objects
+                                     examined, no query asked
+  Horizons check               0.4s  unchanged (2 checked, not written) --
+                                     NOTHING DUE -- 63 entries and 26 sheets
+                                     current, no query asked
+  Path plan                    0.4s  unchanged (1 checked, not written) -- 0
+                                     paths, events none. Asked JPL for: nothing.
+  Objects export               0.3s  unchanged (1 checked, not written)
+  Drawings export              2.2s  unchanged (7 checked, not written)
+  Module atlas                 7.5s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               5.8s  rewrote DATA_INVENTORY.md
+  Exact rows report            4.2s  rewrote EXACT_ROWS_PRINTED.md -- 11 of 43
+                                     exact rows printed at 40 lines (25 orrery,
+                                     15 gallery); 12 drawn only, 0 not followed,
+                                     0 map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.2s  No changes to constants_new.py since HEAD.
+  Constants relations          0.3s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              2.4s  No figure count exceeds its inputs: 39
+                                     derived row(s) read, 32 judged OK -- 32 OK,
+                                     7 NOT YET MIGRATED; 23 conversion(s)
+                                     checked.
+  Constants export check       3.5s  Export matches the store: sha256
+                                     7b6358d39781 on both sides; 206 rows
+                                     re-read, 57 not exported, 44 tokens; 480
+                                     conversions re-computed, 10 of 10 worked
+                                     cases hold; 206 citations worked out again,
+                                     8 of 8 worked cases hold.
+  Objects export check         0.3s  pass
+  Horizons confirmations       0.4s  pass -- 63 of 63 entries and 61 periods
+                                     confirmed, 26 sheets read, within 30 days
+  Horizons check suite         0.6s  pass -- 64 checks, every planted fault
+                                     caught by name
+  Period fetch suite           3.5s  pass -- 36 checks, every planted fault
+                                     caught (20 planted, 8 of them for Earth's
+                                     period, L-445)
+  Path plan suite              3.8s  20 of 20 checks passed
+  Skill headers                0.2s  12 skills parsed, no consistency problems.
+  Exact rows by the count      4.0s  PASSING -- 11 printed exact rows each state
+                                     a count; 25 orrery lines print through
+                                     exact_text() or row_text(); 15 gallery lines
+                                     are served the count
+  Dimensions                   2.1s  No unit contradicts its arithmetic: 62
+                                     derived row(s) read -- 53 OK, 6 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.1s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.1s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 204 status lines in constants_new.py are
+                                     well formed; 56 rows carry none.
+  Row shape                    0.1s  All 263 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.3s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Scanner row run (L-414)      0.2s  16 of 16 pins hold -- each row reads its own
+                                     comment run, declared rows are named, the
+                                     gate path is read by name.
+  Reset completeness          22.4s  PASS -- all 308 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  2.0s  All 6 orbit cache tests passed: cache loads,
+                                     old formats convert, corrupted entries are
+                                     dropped; nothing left behind.
+  Earth pole of date           0.3s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Hills cloud sampler (L-421)    1.0s  PASS -- 6 of 6 planted faults caught; the
+                                     real rows pass, the dots' plane tilted 34.0
+                                     deg
+  Drawings export check       30.2s  PASS -- 19 of 19 planted faults caught;
+                                     hills_cloud 3600 dots, plane tilted 31.0
+                                     deg, sha256 4d3e85616645; van_allen_belts
+                                     3200 dots, no plane recorded, sha256
+                                     75274e84f840; earth_exosphere 1500 dots, no
+                                     plane recorded, sha256 6112639fb2cd;
+                                     sun_corona 2500 dots, no plane recorded,
+                                     sha256 e2b57ccbc8a4; zodiacal_dust 3000
+                                     dots, no plane recorded, sha256
+                                     995f13a056e8; outer_oort_cloud 2736 dots, no
+                                     plane recorded, sha256 2f7ab88ee113;
+                                     galactic_tide 5000 dots, no plane recorded,
+                                     sha256 950a7511f0b5
+  Position digits (L-401)      2.9s  PASS -- 14 of 14 planted faults caught by
+                                     name; 23 hovers examined, 181 lines compared
+                                     against their errors; 5 pairs printed the
+                                     same from either end; 496 hovers of every
+                                     listed object from the Sun, Earth and
+                                     Neptune; 3 recorded 2xr answers read by
+                                     column name; 10 period sentences
+  Orbit markers (L-431, L-401)    9.9s  PASS -- 12 of 12 planted faults caught by
+                                     name; 4 ellipses, 1080 drawn points on their
+                                     period's centre; 14 markers, 9 dates, 53
+                                     printed distances against their errors; 6
+                                     elements as given; 3 Keplerian positions
+                                     half a year on; 1 parameters-window date
+                                     pairs; 2 Moon arcs; 2 perturbation checks; 1
+                                     perihelion osculating orbits; 2 frames; 2
+                                     sources read
+  Domain Split                 0.5s  PASS -- 6 of 6 planted faults caught; the
+                                     split reads each module's Domain: tag and
+                                     prints the same on the console, in the audit
+                                     and in the run history.
+  Maintenance report (L-269)    0.1s  PASS -- 4 of 4 planted faults caught by
+                                     name; 4 summaries; 2 risen file(s) named
+  Dashboard parity             0.3s  PASS -- 10 of 10 planted faults caught; 92
+                                     steps matched to their buttons by name and
+                                     script; 124 cards carry a short line; the
+                                     search finds 4 of 4 cases in any word order
+  Worksheet checker            8.6s  72 of 107 routed, 8 clean
+  Worksheet checker tests     20.9s  All 135 checks passed
+  Worksheet key round trip     1.2s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         21.7s  All 76 checks passed
+  Extractor pins               0.4s  RESULT: 29 string sites carry the pinned 73
+                                     claims and 14 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          68.7s  0 TIER-1 -- the push gate holds; Whole tree,
+                                     Tier-1: 276: orrery 112, Earth System 149,
+                                     stars 13, utilities 2.
+
+======================================================================
+  32 of 32 gating checkers passed -- 240.0s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           72 of 107 routed, 8 clean
+    Provenance scanner          0 TIER-1 -- the push gate holds; Whole tree, Tier-1: 276: orrery 112, Earth System 149, stars 13, utilities 2.
+      No file's Tier-1 count rose since the previous run.
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2467 file(s) examined, 9 written, 0 created, 0 removed, 4 rewritten identically
+    written   DATA_INVENTORY.md
+    written   EXACT_ROWS_PRINTED.md
+    written   LEDGER_CONSOLIDATED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    rewritten with identical bytes, no action needed:
+      PROJECT_INSTRUCTIONS.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      documentation/WHERE_WE_ARE_10-24-26_1927_run_record.md
+    21 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+3. Move the patch into `documentation\`, then commit and push, with this note included. -- 

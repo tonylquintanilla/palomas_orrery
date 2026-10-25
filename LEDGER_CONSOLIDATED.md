@@ -630,6 +630,11 @@ Claude Opus 5.5 (L-443: the path plan prints as it goes, saves each plan
 as it is made and keeps to a time limit, on Tony's ask; orrery
 patch_L443_10), built on 206f96c after patches L481_3 and L443_7 to
 L443_9.
+Module updated: October 24, 2026, close of the night, with Anthropic's
+Claude Opus 5.5 (L-482 closed on Tony's look; the preview's report and
+the orbiter rule on L-443; C/2025 K1 and Gonggong done on L-470; L-485
+and L-486 new; the brief for build B), built on 0b93a25 and gallery
+b1a4ce6.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -847,7 +852,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*246 live items; 230 need attention (`!`); 165 RICE-scored; 231 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*247 live items; 231 need attention (`!`); 165 RICE-scored; 232 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1004,9 +1009,10 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-470 | Orrery entries the website cannot serve as they stand (orrery, objects) | OPEN | -- | 2026-10-24 |
 | ! | L-471 | A delivered patch is final (safe-file-editing, next version) | OPEN | -- | 2026-10-22 |
 | ! | L-476 | The orrery's whole-path plots draw by the same path plan as the website (orrery, spacecraft and comets) | OPEN | -- | 2026-10-24 |
-| ! | L-482 | Whether the Sun and Earth rooms' All / none becomes Reset too (gallery, the rooms' shared chrome) | OPEN | -- | 2026-10-24 |
 | ! | L-483 | A room for C/2025 K1 and its pieces, the first comet room (gallery, exhibits) | OPEN | -- | 2026-10-24 |
 | ! | L-484 | The website and the orrery agree on every object both draw, or the difference is written down (orrery + gallery, objects; method for interactive-exhibit) | OPEN | -- | 2026-10-24 |
+| ! | L-485 | A nightly unattended run of the routines (orrery + gallery, maintenance) | OPEN | -- | 2026-10-24 |
+| ! | L-486 | A view carried into a room (gallery, the rooms) | OPEN | -- | 2026-10-24 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1386,6 +1392,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-479 | A far orbit's frame: Go To fits the whole orbit, and every body's hover gives its orbit's near and far distance (gallery, the Solar System room) | DONE | -- | 2026-10-24 |
 |  | L-480 | Closing the About card goes back to the room the visitor came from (gallery, the lobby's About card) | DONE | -- | 2026-10-24 |
 |  | L-481 | Readability: bullets in the Solar System room's hovers, JPL Horizons' address in the i panels, the closing paragraph a list (gallery, the rooms' words) | DONE | -- | 2026-10-24 |
+|  | L-482 | Whether the Sun and Earth rooms' All / none becomes Reset too (gallery, the rooms' shared chrome) | DONE | -- | 2026-10-24 |
 
 ### W.Done -- Web Publication track, closed items
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1414,6 +1421,55 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ## DETAIL / RECORD
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
+
+#### [L-486] A view carried into a room (gallery, the rooms)
+<!-- L:486 status:OPEN upd:2026-10-24 section:A flag: rice: -->
+- **Tony, 2026-10-24, night,** in his run record (`documentation/WHERE_WE_ARE_10-24-26_1927_run_record.md`):
+  "an idea for consideration. in the orrery, the sun features can be
+  combined with other objects, like say the earth's orbit. in the
+  website we start in the solar system room, but if we then enter the
+  sun room, or the earth room, those views are completely reset. this
+  would also apply to any other sub-rooms, other planets, satellites,
+  encounters, comet breakups, etc. What i am wondering is if we could
+  enable a way to retain a view we create before entering a room and
+  keep it." His examples: the inner planets' orbits kept when the Sun
+  room's dust cloud is added; a comet carried into its own room, with
+  its perihelion and its Roche limit. "specific encounter events could
+  be duplicated of course, like perihelion events in the sun room, or
+  close encounter asteroids in the earth room. or spacecraft flybys. so
+  for many events, these duplicates would do the job. the exception
+  would be sun features without sun encounters."
+- **Claude, the same night:** the hard part is that each room draws at
+  its own scale and around its own centre. The Sun room works in solar
+  radii, the inner planets' orbits are about 200 times wider, and the
+  Earth room is centred on Earth. Carrying a selection means a room
+  learns to draw the other room's objects at its scale. The duplicated
+  events Tony names are things a room already knows how to draw.
+**Gap:** a design talk of its own, after slice 2 (Deferred on Where We
+Are).
+**Ref:** gallery `interactive.html` (the rooms, `?exhibit=`); L-483.
+
+#### [L-485] A nightly unattended run of the routines (orrery + gallery, maintenance)
+<!-- L:485 status:OPEN upd:2026-10-24 section:A flag: rice: -->
+- **Tony, 2026-10-24, night,** in his run record (`documentation/WHERE_WE_ARE_10-24-26_1927_run_record.md`): "i am
+  thinking of revising the idea of an automated run at midnight every
+  day, with all the daily and 30-day run routines except the messages.
+  i would still have to look at these daily, unless the autorun just
+  reports any new messages and continues. now with the rerun fix this
+  should work. the question is whether this would require my machine
+  to be on all night. not impossible."
+- **Claude, the same night:** Windows' Task Scheduler can wake a
+  sleeping computer to run a task, though not one that is shut down.
+  Since patch_L443_10 the path plan saves as it goes and keeps under
+  the maintenance run's 15 minutes, so it cannot hang such a run. The
+  line to hold: the run fetches, generates and checks unattended;
+  committing and pushing stay Tony's, from a short report in the
+  morning.
+**Gap:** a design talk: which routines, in what order, the morning
+report's form, and how the machine wakes; after slice 2 (Deferred on
+Where We Are).
+**Ref:** `orrery_maintenance_run.py`; gallery `daily_run.py`; L-461;
+L-462.
 
 #### [L-484] The website and the orrery agree on every object both draw, or the difference is written down (orrery + gallery, objects; method for interactive-exhibit)
 <!-- L:484 status:OPEN upd:2026-10-24 section:A flag: rice: -->
@@ -1455,42 +1511,6 @@ with a planted fault; where its exceptions live.
   pieces' distances.
 **Gap:** a design talk, after slice 2 draws the comets; then the build.
 **Ref:** L-443; L-470; `celestial_objects.py`; `info_dictionary.py`.
-
-#### [L-482] Whether the Sun and Earth rooms' All / none becomes Reset too (gallery, the rooms' shared chrome)
-<!-- L:482 status:OPEN upd:2026-10-24 section:A flag: rice: -->
-- **Raised 2026-10-24, building L-477.** Tony's ruling of the day, that
-  All / none becomes Reset and nothing ticks many things at once, was
-  made for the Solar System room, whose rows are bodies and their
-  orbits ("All" is very confusing with too many orbits all at once").
-  The Sun and Earth rooms share the same top-bar button, and there it
-  still ticks or unticks every shell. The build left them unchanged and
-  asked rather than assumed (`documentation/HANDOFF_L477_build_20261024.md`,
-  sec. 5).
-- **Ruled 2026-10-24, 15:26** (`documentation/COORD_L482_reset_all_rooms_20261024.md`):
-  "Yes all rooms should use the same Reset button and no 'see more'."
-- **Built the same night** (gallery `patch_L482_1_reset_every_room_20261024.py`,
-  `documentation/HANDOFF_L443_slice2_buildA_20261024.md`): the top bar's
-  button reads Reset in every room. In the Sun and Earth rooms it puts
-  back what the room opened on -- every shell ticked or unticked as the
-  served arrival block left it, recorded once at boot from the drawer
-  (`sunOpening`), the text box closed, the opening frame and angle, the
-  drawer closed -- instead of ticking or unticking every shell. The
-  Solar System room's Reset is unchanged. No room had a See more left;
-  confirmed by reading. Checked headlessly: a new walk,
-  `tools/headless/walk_shell_reset.js`, 33 of 33 in each room and 20
-  of 33 failing in each on the page before the patch; every tick step the same as
-  before in all three rooms (compare_rooms); the website's offline run
-  35 of 35. The phone has not seen it. Recorded in interactive-exhibit
-  1.23.
-**Gap (replaces the one below, 2026-10-24, night):** Tony's run of
-gallery patch_L482_1, the website's maintenance run and push; his phone
-look at Reset in the Sun and Earth rooms, on which this closes.
-**Gap (superseded above):** Tony's word at the next design talk; then, if it is yes, the
-build in the shared chrome, with both rooms walked headlessly and on the
-phone.
-**Ref:** L-477 (closed; the ruling); gallery `interactive.html`
-(`wireSunDrawer`, `sun-drawer-all`); interactive-exhibit, One chrome,
-many rooms.
 
 #### [L-476] The orrery's whole-path plots draw by the same path plan as the website (orrery, spacecraft and comets)
 <!-- L:476 status:OPEN upd:2026-10-24 section:A flag: rice: -->
@@ -1677,7 +1697,21 @@ orrery's plots, then the build.
     moved it to 1.10): a comet whose designation also matches its own
     pieces is asked by JPL's permanent number for it; and a path cache
     keyed by name does not notice a new record.
-**Gap (replaces the one below, 2026-10-24, late night):** Tony's runs:
+- **2026-10-24, night: C/2025 K1 and Gonggong done.** Tony's look in
+  the orrery (`documentation/WHERE_WE_ARE_10-24-26_1927_run_record.md`): the comet sits with its pieces, "yes";
+  its hover reads as written, "yes"; the pieces' checkboxes as
+  written, "yes, except that C reads Keplerian orbit, same thing" (the
+  orrery draws piece C, e just under 1, as a closed ellipse and names
+  it so; for L-483's words); its perihelion orbit drawn, "yes"; the
+  console showed "ID: 1004075 | Type: designation". The patch's cache
+  check found the cached path is this comet, within 0.024 AU of piece
+  B on 320 shared dates. Gonggong's period is fetched, 548.9 years
+  (the objects export at 0b93a25), and Horizons confirmations pass, 61
+  periods. The two instances close; West remains.
+**Gap (replaces the one below, 2026-10-24, close of the night):**
+West's id (C/1975 V1-A); the two skill rules above at
+horizons-orbital-mechanics' next version.
+**Gap (superseded above, 2026-10-24, late night):** Tony's runs:
 the maintenance run, Period fetch and Horizons check answering for
 Gonggong; patch_L443_9's report on the cached C/2025 K1 path, and if it
 holds another body, the cache entry cleared before a plot; one look in
@@ -2673,7 +2707,58 @@ the deliberate limit, its number set then, each removal named.
   which nothing new starts, what is left named in the verdict and taken
   up by the next run; --no-limit for the dashboard's preview. The suite
   gains checks 10 to 12, two with a planted fault (20 of 20).
-**Gap (replaces the one below, 2026-10-24, later that night):** Tony's
+- **2026-10-24, the preview on JPL's real data** (Tony's run, 20:44 to
+  about 21:12; its report in `documentation/WHERE_WE_ARE_10-24-26_1927_run_record.md`): 12 paths, 498 events.
+  The flybys spot-checked land on the missions' known dates, as Claude
+  knows them; the numbers are JPL's: Voyager 1 at Jupiter and Saturn,
+  Voyager 2 at Saturn, Uranus and Neptune, New Horizons at Pluto, and
+  Juno's, Lucy's, JUICE's, Psyche's, Clipper's and BepiColombo's
+  passes of Earth, the Moon, Venus and Mars. One not recognised:
+  OSIRIS-APEX passing Earth at 7,526 km on 2029-04-13, the day Apophis
+  passes Earth; Claude checks it against JPL's sheet before it is
+  served. More than 230 events are three orbiters' repeated passes:
+  Juno 110 of Jupiter, Clipper 83 of Jupiter, BepiColombo 40 of
+  Mercury. After patch_L443_10, two runs of the preview printed their
+  first line at once and asked JPL nothing (21:32, 21:34).
+- **The orbiters, ruled 2026-10-24, night.** Tony, asked whether an
+  orbiter rides with its planet (`documentation/WHERE_WE_ARE_10-24-26_1927_run_record.md`): "i can see this being
+  an issue. this becomes even more with an orbiter or a lander like the
+  mars lander. i am not sure how to handle this mechanically. the
+  initial entry and exit may be important, a landing, a takeoff, but
+  routine orbits for observations could be omitted. but what would be
+  the logic?" Claude Fable 5.1, in the coordinating session the same
+  evening, recorded in the same copy: the first entry into a body's
+  Hill sphere is an event, kept with its fine steps; a departure is an
+  event, kept; everything between, while the spacecraft stays inside,
+  is captured, and in the Solar System room it rides with the planet,
+  with no fine steps; a landing is an entry with no exit; the loops
+  wait for that planet's room. Tony: "yes that would work well.
+  thanks." As method for build B: a stretch of days inside a body's
+  Hill sphere with one nearest approach is a flyby, as now; with more
+  than one it is a capture, whose first nearest approach and whose
+  last before leaving are the events; a stretch running to the end of
+  JPL's data is an arrival with no departure. Passes of the Sun stay
+  events. For horizons-orbital-mechanics' next version.
+- **Tony, 2026-10-24, 22:26, in chat:** "build 3 would implement the
+  spacecraft and hyperbolic comets and interstellar objects? Perhaps
+  those should go in their own room? And i would suggest putting the
+  spacecraft drawer after earth's as the comets are after the sun's."
+  Both are asked first in build B's session
+  (`documentation/HANDOFF_L443_slice2_buildB_brief_20261024.md`, sec.
+  3): a room of their own against the Solar System room, where the
+  planets already frame their paths (Settled, Oct 22: "Open-path
+  comets go with the spacecraft"); and the drawer's order, read as a
+  Spacecraft group row right after Earth's, as the Comets group follows
+  the Sun.
+**Gap (replaces the one below, 2026-10-24, close of the night):** build
+B, a fresh session, from
+`documentation/HANDOFF_L443_slice2_buildB_brief_20261024.md`: Tony's
+word on a room of their own and on the drawer's order; the OSIRIS-APEX
+pass checked; the orbiter rule in the path plan; the twelve keyed with
+their website entries and words; the builder fetching by the plan; the
+room drawing each path solid to today and dashed after, the hover words
+to Tony first; L-461; then the open-path comets by the span ruling.
+**Gap (superseded above, 2026-10-24, later that night):** Tony's
 run of patch_L443_10, and the preview run again with it, its report
 pasted into the chat; then build B: the twelve keyed with their website entries
 and their words, the builder fetching by the plan, the room
@@ -27055,6 +27140,46 @@ on the phone, on which this closes.
 **Ref:** L-477 to L-480 (closed the same day); gallery `interactive.html`
 (the room's compose, `solarSystemSourceLine`, the four closing
 paragraphs), `gallery/earth_geometry.js`, `documentation/smoke_typed_facts.js`.
+
+#### [L-482] Whether the Sun and Earth rooms' All / none becomes Reset too (gallery, the rooms' shared chrome)
+<!-- L:482 status:DONE upd:2026-10-24 section:C flag: rice: -->
+- **Raised 2026-10-24, building L-477.** Tony's ruling of the day, that
+  All / none becomes Reset and nothing ticks many things at once, was
+  made for the Solar System room, whose rows are bodies and their
+  orbits ("All" is very confusing with too many orbits all at once").
+  The Sun and Earth rooms share the same top-bar button, and there it
+  still ticks or unticks every shell. The build left them unchanged and
+  asked rather than assumed (`documentation/HANDOFF_L477_build_20261024.md`,
+  sec. 5).
+- **Ruled 2026-10-24, 15:26** (`documentation/COORD_L482_reset_all_rooms_20261024.md`):
+  "Yes all rooms should use the same Reset button and no 'see more'."
+- **Built the same night** (gallery `patch_L482_1_reset_every_room_20261024.py`,
+  `documentation/HANDOFF_L443_slice2_buildA_20261024.md`): the top bar's
+  button reads Reset in every room. In the Sun and Earth rooms it puts
+  back what the room opened on -- every shell ticked or unticked as the
+  served arrival block left it, recorded once at boot from the drawer
+  (`sunOpening`), the text box closed, the opening frame and angle, the
+  drawer closed -- instead of ticking or unticking every shell. The
+  Solar System room's Reset is unchanged. No room had a See more left;
+  confirmed by reading. Checked headlessly: a new walk,
+  `tools/headless/walk_shell_reset.js`, 33 of 33 in each room and 20
+  of 33 failing in each on the page before the patch; every tick step the same as
+  before in all three rooms (compare_rooms); the website's offline run
+  35 of 35. The phone has not seen it. Recorded in interactive-exhibit
+  1.23.
+- **Closed 2026-10-24, night, on Tony's phone look** (`documentation/WHERE_WE_ARE_10-24-26_1927_run_record.md`,
+  step 10): "correct." The website pushed at b1a4ce6; its offline run 35
+  of 35 gating checks.
+**Gap (closed 2026-10-24):** none.
+**Gap (superseded above, 2026-10-24, night):** Tony's run of
+gallery patch_L482_1, the website's maintenance run and push; his phone
+look at Reset in the Sun and Earth rooms, on which this closes.
+**Gap (superseded above):** Tony's word at the next design talk; then, if it is yes, the
+build in the shared chrome, with both rooms walked headlessly and on the
+phone.
+**Ref:** L-477 (closed; the ruling); gallery `interactive.html`
+(`wireSunDrawer`, `sun-drawer-all`); interactive-exhibit, One chrome,
+many rooms.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

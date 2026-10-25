@@ -116,7 +116,7 @@ A tool logging a value is not a display a visitor sees, so these are not counted
 
 No display prints these exact rows. Under Rule 7 they carry no print count. The number is how many other orrery lines name the row, so a use that prints it through another name can still be found by reading those lines.
 
-- `KM_PER_AU`: named on 222 other orrery line(s).
+- `KM_PER_AU`: named on 223 other orrery line(s).
 - `PARSEC_TO_AU`: named on 10 other orrery line(s).
 - `S_PER_HOUR`: named on 3 other orrery line(s).
 - `S_PER_DAY`: named on 12 other orrery line(s).

@@ -132,7 +132,7 @@ Not urgent, in your order:
 
 **Tony**: Run record:
 
-**Session: OPEN: 10-23-26 1351: Opus: L-443 View and Drawer**
+**Session: DONE: 10-23-26 2214: Opus: L-443 View and Drawer**
 
 I'll start the session the way the brief lays out. That means reading your run record, checking both repos at their current state, and confirming the two skill versions. Then I'll propose the records patch.
 
