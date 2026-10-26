@@ -1,25 +1,24 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 26, 2026, afternoon: the comets, built to run.
-- Written at orrery 5398439 and gallery 9223cd1; patches L485_1, L443_20, L443_21.
+Last updated: October 26, 2026, evening: the comets are live.
+- Written at orrery 140db0a and gallery dd9d0fa; patch L443_24 to run.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The fourteen comets are built: a year before perihelion to a year
->   after today, solid then dashed (L-443 (the objects)).
-> - One JPL class to a drawer row; JPL's words kept and explained.
->   interactive-exhibit 1.26; protocol v3.114.
-> - Nucleus sizes sourced: nine kept, six removed (L-491 (the nucleus
->   sizes)). New: L-492 (the stale scale sentences).
+> - The fourteen comets are live, ATLAS gold, each group's name
+>   explained (L-443 (the objects)). protocol v3.114.
+> - A comet ticks the farthest planet it has reached so far, your
+>   ruling; built, to run (patch L443_24).
+> - New: L-493 (a drawer search box), L-494 (the i button's pointer).
 >
-> **Do next:** *your runs, in the order in
-> `HANDOFF_L443_slice2_buildB_comets_20261026.md`; then slice 2 closes.*
+> **Do next:** *patch L443_24 (website), push, the phone look; then
+> slice 2 closes.*
 >
 > **Needs you now:**
-> - *(do) patch_L485_1, patch_L443_20 and the orrery maintenance run,
->   push; patch_L443_21 and the Daily Run, push; the phone look.*
+> - *(do) patch_L443_24 and the website's maintenance run, push. On
+>   the phone: tick West, Pluto comes too; Go To 3I/ATLAS, Saturn.*
 > - Two papers left to try (`READING_L456_tony_20261021.md`).
 
 *Italic* lines are the must-reads. Marks reset at every update.
@@ -45,7 +44,7 @@ Last updated: October 26, 2026, afternoon: the comets, built to run.
  10-11.[NOW]   *The orrery's objects come to the website (L-443 (the
                objects to the website)): slice 1, 50 bodies, live Oct 22;
                slice 2's spacecraft live Oct 26, companions and all;
-               the open-path comets built Oct 26, to run.*
+               the open-path comets live Oct 26.*
                << moved this session
  11b.  [next]  The nightly run, on GitHub's computers (L-485 (a nightly
                run)), after slice 2.
@@ -99,10 +98,10 @@ Waiting behind the objects (Oct 22); a line leaves when picked up.
 ## Signals
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261026T143207Z, ok, first try (gallery 9223cd1).
+- Last cache build: 20261026T200851Z, ok, one retry (gallery dd9d0fa).
 - Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md at orrery
-  5398439, generated Oct 26).
-  Whole tree: 276: orrery 112, Earth System 149, stars 13, utilities 2.
+  140db0a). Whole tree: 277: orrery 112, Earth System 149, stars 13,
+  utilities 2, and 1 from a patch then in the root.
 - This page's date and the ledger's newest stamp: both Oct 26. Agree.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
@@ -110,6 +109,7 @@ Read from files when this page was written, not typed from memory.
 At the next design talk:
 - The orrery's own Sun axis hover: words to you first, and a source
   for its "differential 24.5-35 d" (L-465 (the Sun's axis)).
+- L-493 (a drawer search box) and L-494 (the i button's pointer).
 - Compositions (L-489 (compositions)): the noun, "view" or "scene";
   and the first one to build, Voyager 1 with its planets recommended.
 - When a 30-day check disagrees at night, does that body keep its last
@@ -123,7 +123,7 @@ Not urgent, in your order:
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
 - *Next, and today's run order: `HANDOFF_L443_slice2_buildB_comets_20261026.md`.*
-- Your run record: `WHERE_WE_ARE_10-24-26_1927_run_record.md`.
+- Your run record: `WHERE_WE_ARE_10-26-26_1451_run_record.md`.
 - Today's words, classes and sizes: `WORDS_L443_comets_20261026.md`,
   `CHECK_L443_drawer_classes_20261026.md`, `CHECK_L491_comet_nucleus_sizes_20261026.md`.
 - The strategy behind the road: `MASTER_PLAN_INTERACTIVE_GALLERY.md`

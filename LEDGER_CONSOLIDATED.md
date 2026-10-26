@@ -659,6 +659,12 @@ and done in the same build; L-492, the stale scale and file-size
 sentences, new; L-490's first question named; interactive-exhibit
 1.26, horizons-orbital-mechanics 1.12, gallery-cache-builder 1.13,
 protocol v3.114), built on 5398439 and gallery 9223cd1.
+Module updated: October 26, 2026, evening, with Anthropic's Claude Opus
+5.5 (Tony's runs and phone look of the comets recorded on L-443, with
+the gold comet, the class words, and a comet's planets "so far"; L-493,
+a search box for the drawer, and L-494, the pointer to the i button,
+new; L-491 left with its one Tony-action), built on 140db0a and gallery
+dd9d0fa.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -876,7 +882,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*252 live items; 236 need attention (`!`); 165 RICE-scored; 233 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*254 live items; 238 need attention (`!`); 165 RICE-scored; 233 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1042,6 +1048,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-490 | What the website leans on outside its two repositories, for when Tony cannot work it (orrery + gallery, legacy) | OPEN | -- | 2026-10-26 |
 | ! | L-491 | The comet nucleus sizes the orrery's comet hover prints, sourced (orrery, the words a visitor reads) | OPEN | -- | 2026-10-26 |
 | ! | L-492 | The orrery's stale "manual scale" and "MB per frame" sentences come out of its hovers, as a class (orrery, the words a visitor reads) | OPEN | -- | 2026-10-26 |
+| ! | L-493 | A search box to find a row in the Solar System room's drawer (gallery, the drawer) | OPEN | -- | 2026-10-26 |
+| ! | L-494 | A pointer to the i button, so a visitor knows where more information is (gallery, the rooms' chrome) | OPEN | -- | 2026-10-26 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1452,6 +1460,32 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
+#### [L-494] A pointer to the i button, so a visitor knows where more information is (gallery, the rooms' chrome)
+<!-- L:494 status:OPEN upd:2026-10-26 section:A flag: rice: -->
+- **Tony, 2026-10-26,** at his phone look of the comets: "we should add
+  back the pointer to the i button for the visitor to know where to
+  look for more info either in the hover text box or maybe better in
+  the top banner next to the i button, like: "More information: (i)""
+  (`documentation/WHERE_WE_ARE_10-26-26_1451_run_record.md`).
+- "Add back": the Sun and Earth rooms' hovers carry one pointer line to
+  the i panel (L-231); the Solar System room's text boxes do not.
+**Gap:** a design talk: where the pointer goes (the top banner beside
+the i button, Tony's preference, or the text box), its words, and
+whether every room gets it; words to Tony first.
+**Ref:** gallery `interactive.html` (the top bar, the i button, the
+text boxes); L-231; L-443.
+
+#### [L-493] A search box to find a row in the Solar System room's drawer (gallery, the drawer)
+<!-- L:493 status:OPEN upd:2026-10-26 section:A flag: rice: -->
+- **Tony, 2026-10-26,** at his phone look of the comets: "as we create
+  more objects in the website, could we add a search window to find the
+  right row?" The drawer lists 94 bodies in 15 groups since slice 2.
+**Gap:** a design talk: where the box sits, what it matches (the label,
+JPL's name, the designation), and what a match does (open its group,
+scroll to the row); then a build with its own drawer check.
+**Ref:** gallery `interactive.html` (the drawer),
+`gallery/solar_system_drawer.js`; L-443; L-477.
+
 #### [L-492] The orrery's stale "manual scale" and "MB per frame" sentences come out of its hovers, as a class (orrery, the words a visitor reads)
 <!-- L:492 status:OPEN upd:2026-10-26 section:A flag: rice: -->
 - **Opened 2026-10-26** from
@@ -1532,7 +1566,15 @@ Tony-action (decide): any line the split leaves unclear, from the list.
   findings and the exceptions file; the nine rows score as sourced. The
   table was already an exception, so the whole tree's count does not
   move (276 in the session's run).
-**Gap:** Tony's run of patch_L443_20 and the orrery maintenance run;
+- **Tony's runs, 2026-10-26:** patch_L443_20 and the maintenance run,
+  pushed at 140db0a. The scanner at that run: 0 Tier-1 on the gate path;
+  the nine rows score 15, cited; `COMET_NUCLEUS_SIZES` is named only in
+  the exceptions entry's history.
+**Gap (replaces the one below, 2026-10-26, evening):** Tony-action (do),
+not blocking: re-export through Gallery Studio the gallery cards that
+carry a comet hover, which were exported with the old sizes; then this
+closes.
+**Gap (superseded above, 2026-10-26, evening):** Tony's run of patch_L443_20 and the orrery maintenance run;
 then this closes. Tony-action (do), not blocking: the gallery cards
 that carry a comet hover were exported with the old sizes and change
 only when re-exported through Gallery Studio.
@@ -3288,7 +3330,66 @@ the deliberate limit, its number set then, each removal named.
     reach JPL. The comets' real paths are Tony's runs.
   - **Not done here, by name:** the comets' companions (none; a
     comet's own room is L-483); the ten gallery cards' sizes (L-491).
-**Gap (replaces the one below, 2026-10-26):** Tony's runs, in order:
+    Corrected the same evening: the comets' companions were built, by
+    Tony's ruling below.
+- **The same afternoon, before Tony's runs, two more website patches:**
+  - patch_L443_22: ATLAS (C/2024 G3), the one white comet, goldenrod.
+    Tony: "change all white comets to gold for contrast." The orrery
+    keeps its white.
+  - patch_L443_23: each drawer group's JPL or IAU class name explained
+    in plain words, the first bullet in the text box and the i panel of
+    every body in the group, from a served "about" on the group's row;
+    and a comet's perihelion explained in its span sentence. Tony's
+    "Yes" to drafting them, after Claude Fable 5.1's
+    `COORD_jpl_words_ruling_20261026.md`, and "Approved" to
+    `documentation/WORDS_L443_glosses_20261026.md`, whose sources are
+    JPL's Small-Body Database orbit classes, the IAU's announcement
+    ann17045 and the Horizons manual.
+  - Tony asked whether "aphelion" in his ruling was autocorrect's: it is
+    JPL's own word (the Horizons manual: "Aphelion distance (au)").
+- **Tony's runs, 2026-10-26, afternoon**
+  (`documentation/WHERE_WE_ARE_10-26-26_1451_run_record.md`). The orrery
+  pushed at 140db0a: the path plan asked JPL for the fourteen and made a
+  plan for each, one perihelion event apiece, the spacecraft plans
+  unchanged; the Horizons check confirmed the fourteen, 89 of 89
+  entries in all. The website pushed at dd9d0fa: the Daily Run's pull
+  matched the push and the build served all fourteen paths, each 2.5 to
+  4.5 KB of positions (West's plan runs from 1975, a year before its
+  perihelion); the swap took two tries, absorbed. One check was red, the
+  builder suite's: its span check had typed the stand-in plan's dates and
+  failed on the real ones, with the builder right; fixed in
+  patch_L443_24.
+- **His phone look:** the groups in their places, "yes"; ATLAS gold,
+  "yes"; Go To on 3I/ATLAS fits its whole path, "yes". C/2025 K1's
+  space: he had not seen the underscore the orrery keys it by, which is
+  the change working. And: "i thought we were adding the farthest
+  planetary orbit for perspective? that would be saturn now." Asked
+  whether a comet's farthest planet counts the path so far or the whole
+  drawn path, the dashed year included as a spacecraft's does: "so far".
+  So a comet on an open path ticks, as a spacecraft does, the farthest
+  planet whose perihelion its served path has passed up to the minute
+  shown: West, McNaught, 'Oumuamua and 2I/Borisov tick Pluto; 3I/ATLAS
+  Saturn (its whole path would reach Uranus); the rest Jupiter. Built in
+  gallery patch_L443_24, walked on the real served cache (142 checks);
+  the website's maintenance run in the sandbox, 35 of 35 gating checks,
+  its pulls aside (no orrery folder there).
+  - Two more asks, opened as items for a design talk: L-493 (a search
+    box for the drawer) and L-494 (the pointer to the i button).
+- **For the skills' next versions, carried here:** interactive-exhibit
+  1.26 says a comet on an open path has no companions, which patch 24
+  makes wrong; its next version says a comet ticks the farthest planet
+  its path has reached so far, and that a group row's about explains
+  its class first in each member's text box and panel. This session
+  already bumped interactive-exhibit once (One Session, One Bump), so the
+  correction is the next session's first skill work, before any other
+  work that fires the skill. provenance-discipline's What a Visitor
+  Reads takes the JPL-words rule, as above.
+**Gap (replaces the one below, 2026-10-26, evening):** Tony's run of
+gallery patch_L443_24 and the website's maintenance run, push; his phone
+look: tick West and see Pluto come with it; Go To on 3I/ATLAS and see
+Saturn. Then slice 2 closes. Next session first: interactive-exhibit
+1.27, as above.
+**Gap (superseded above, 2026-10-26, evening):** Tony's runs, in order:
 patch_L443_20 and the orrery maintenance run (the path plan's comets
 and the Horizons check confirming the fourteen), push; patch_L443_21
 and the Daily Run, push; his phone look at the comets. Then slice 2
