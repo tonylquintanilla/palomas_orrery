@@ -40,7 +40,10 @@ WHAT IT CHECKS
        off by one character; a stale pin; a pin whose record number JPL
        gave to another comet; a wrong object_type on the barycentre; JPL
        unreachable; an answer that is not JPL's; a comet whose record
-       list cannot be fetched.
+       list cannot be fetched. (L-443) A spacecraft, Voyager 1, agrees:
+       the small-body index answers its id with JPL's header alone, which
+       is no matches; planted: the same header with any other line is
+       still JPL not read, never a pass.
     3. The period (L-431): Mercury, Jupiter and Encke agree with JPL's PR
        at their own date and centre. Planted: a PR farther from the
        served period than its error (the check must not pass a period
@@ -96,6 +99,9 @@ Module updated: October 15, 2026 with Anthropic's Claude Opus 5.5 (L-445,
 Earth's period: the period is asked of its record's target, shown with a
 planted copy of the check asking the body's own id, on JPL's answers for
 target 3 in documentation/worksheets/period_answers_L445.json.)
+Module updated: October 25, 2026 with Anthropic's Claude Opus 5.5 (L-443,
+a spacecraft's identity on JPL's two Lookup answers for -31, fetched that
+day through the chat's web-fetch tool and kept in VOYAGER_1_LOOKUP.)
 """
 
 import datetime
@@ -146,6 +152,25 @@ TESTED = {
 SPACECRAFT = (("Voyager 1", "-31"), ("Voyager 2", "-32"),
               ("Pioneer 10", "-23"))
 FETCHED = ("Mercury", "Jupiter", "Encke")
+
+# L-443, 2026-10-25: JPL's Lookup answers for Voyager 1 (-31), fetched
+# that day through the chat's web-fetch tool, word for word. The
+# small-body index answers a spacecraft's id with its header alone.
+VOYAGER_1 = ("Voyager 1", "-31", None, "Voyager 1 (spacecraft)",
+             "trajectory")
+VOYAGER_1_LOOKUP = {
+    hc.lookup_url("-31", "mb"): (
+        "API VERSION: 1.1\n"
+        "API SOURCE: NASA/JPL Horizons Lookup API\n\n"
+        "Object name        = Voyager 1 (spacecraft)\n"
+        "Type               = spacecraft\n"
+        "Primary SPKID      = -31\n"
+        "Primary designation= 1977-084A\n"
+        "Aliases            = \n"),
+    hc.lookup_url("-31", "sb"): (
+        "API VERSION: 1.1\n"
+        "API SOURCE: NASA/JPL Horizons Lookup API\n"),
+}
 
 
 def entry(spec):
@@ -326,6 +351,20 @@ def main():
     t.check(r["status"] == "could not reach JPL",
             "a pinned comet whose record list cannot be fetched: %s"
             % r["status"])
+    r = hc.check_entry("voyager_1", entry(VOYAGER_1),
+                       recorded_fetch({}, extra=VOYAGER_1_LOOKUP))
+    t.check(r["status"] == "agrees"
+            and r["jpl"].get("name") == "Voyager 1 (spacecraft)",
+            "a spacecraft agrees, the small-body index answering its id "
+            "with JPL's header alone: %s (JPL: %s)"
+            % (r["status"], r["jpl"].get("name") or r["error"]))
+    odd = dict(VOYAGER_1_LOOKUP)
+    odd[hc.lookup_url("-31", "sb")] += "ERROR: something JPL said\n"
+    r = hc.check_entry("voyager_1", entry(VOYAGER_1),
+                       recorded_fetch({}, extra=odd))
+    t.check(r["status"] == "could not reach JPL",
+            "planted: JPL's header with any other line is not read as no "
+            "matches: %s" % r["status"])
 
     tmp = tempfile.mkdtemp(prefix="horizons_check_test_")
     try:

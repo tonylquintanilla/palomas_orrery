@@ -129,6 +129,10 @@ and re-reads the spacecraft data sheets on the same 30-day cycle.)
 Module updated: October 15, 2026 with Anthropic's Claude Opus 5.5 (L-445,
 Earth's period: the period is asked of the target its record names, and
 the confirmation records that target.)
+Module updated: October 25, 2026 with Anthropic's Claude Opus 5.5 (L-443,
+the twelve spacecraft: JPL's answer of its header alone, which is how
+the Lookup answers a spacecraft's id in the small-body index, is read as
+no matches instead of as JPL unreachable.)
 """
 
 import datetime
@@ -243,10 +247,25 @@ def parse_lookup(text):
             current["spkid"] = value
         elif current is not None and key == "Primary designation":
             current["designation"] = value
-    if not found and "no matches found" not in text:
+    if not found and "no matches found" not in text and not bare(text):
         raise Unreachable("the Lookup answer names no object and does not "
                           "say 'no matches found'")
     return found
+
+
+def bare(text):
+    """True when JPL's answer is its two header lines and nothing else.
+
+    L-443, 2026-10-25: JPL's Lookup answers a spacecraft's id (negative,
+    -31 for Voyager 1) in the small-body index with its header alone --
+    "API VERSION: 1.1" and "API SOURCE: NASA/JPL Horizons Lookup API",
+    no object and no "no matches found" notice (fetched that day, -31 and
+    -61 in group=sb). That is an empty index, not a failed fetch; until
+    then the first spacecraft stopped the whole run as UNREACHABLE. Any
+    other line still means the answer was not read, and still fails."""
+    lines = [ln.strip() for ln in text.splitlines() if ln.strip()]
+    return bool(lines) and all(ln.startswith(("API VERSION:", "API SOURCE:"))
+                               for ln in lines)
 
 
 def keep(matches, ident, group):

@@ -177,6 +177,12 @@ Kept here word for word, to keep the page under its line cap:
 ## 6. The next session: the comets (build B, part 2)
 
 Read this, the brief's sections 2.5 and 4, and the drawer-groups note.
+- Added the same evening, after Tony's runs: two fixes followed (orrery
+  patch_L443_16, the Horizons check reading JPL's empty answer for a
+  spacecraft; gallery patch_L443_17, the builder stopping at JPL's last
+  minute, so the Voyagers are fetched; Voyager 1 goldenrod). Their
+  record is on L-443. Confirm from Tony's run record that both ran, the
+  Horizons check confirmed the twelve, and both Voyagers drew.
 - Confirm the loaded skills read horizons-orbital-mechanics 1.11,
   gallery-cache-builder 1.12, interactive-exhibit 1.24 and
   safe-file-editing 1.14 before work that fires them.

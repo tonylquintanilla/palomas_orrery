@@ -1544,6 +1544,174 @@
         "jpl_days": 693761.814793487,
         "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='C%2F2026%20A1%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461336.359027778'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
       }
+    },
+    "voyager_1": {
+      "confirmed": "2026-10-25",
+      "horizons_id": "-31",
+      "id_type": "id",
+      "horizons_name": "Voyager 1 (spacecraft)",
+      "object_type": "trajectory",
+      "list_sha256": "2007d3d415cf317408e5a272aa768c16cdd703cbd14a155e7850ad44ca16b59b",
+      "jpl_name": "Voyager 1 (spacecraft)",
+      "jpl_type": "spacecraft",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-31&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-31&group=sb&format=text"
+      ]
+    },
+    "voyager_2": {
+      "confirmed": "2026-10-25",
+      "horizons_id": "-32",
+      "id_type": "id",
+      "horizons_name": "Voyager 2 (spacecraft)",
+      "object_type": "trajectory",
+      "list_sha256": "2007d3d415cf317408e5a272aa768c16cdd703cbd14a155e7850ad44ca16b59b",
+      "jpl_name": "Voyager 2 (spacecraft)",
+      "jpl_type": "spacecraft",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-32&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-32&group=sb&format=text"
+      ]
+    },
+    "new_horizons": {
+      "confirmed": "2026-10-25",
+      "horizons_id": "-98",
+      "id_type": "id",
+      "horizons_name": "New Horizons (spacecraft)",
+      "object_type": "trajectory",
+      "list_sha256": "2007d3d415cf317408e5a272aa768c16cdd703cbd14a155e7850ad44ca16b59b",
+      "jpl_name": "New Horizons (spacecraft)",
+      "jpl_type": "spacecraft",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-98&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-98&group=sb&format=text"
+      ]
+    },
+    "juno": {
+      "confirmed": "2026-10-25",
+      "horizons_id": "-61",
+      "id_type": "id",
+      "horizons_name": "Juno (spacecraft)",
+      "object_type": "trajectory",
+      "list_sha256": "2007d3d415cf317408e5a272aa768c16cdd703cbd14a155e7850ad44ca16b59b",
+      "jpl_name": "Juno (spacecraft)",
+      "jpl_type": "spacecraft",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-61&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-61&group=sb&format=text"
+      ]
+    },
+    "osiris_apex": {
+      "confirmed": "2026-10-25",
+      "horizons_id": "-64",
+      "id_type": "id",
+      "horizons_name": "OSIRIS-REx (spacecraft)",
+      "object_type": "trajectory",
+      "list_sha256": "2007d3d415cf317408e5a272aa768c16cdd703cbd14a155e7850ad44ca16b59b",
+      "jpl_name": "OSIRIS-REx (spacecraft)",
+      "jpl_type": "spacecraft",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-64&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-64&group=sb&format=text"
+      ]
+    },
+    "parker_solar_probe": {
+      "confirmed": "2026-10-25",
+      "horizons_id": "-96",
+      "id_type": "id",
+      "horizons_name": "Parker Solar Probe (spacecraft)",
+      "object_type": "trajectory",
+      "list_sha256": "2007d3d415cf317408e5a272aa768c16cdd703cbd14a155e7850ad44ca16b59b",
+      "jpl_name": "Parker Solar Probe (spacecraft)",
+      "jpl_type": "spacecraft",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-96&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-96&group=sb&format=text"
+      ]
+    },
+    "lucy": {
+      "confirmed": "2026-10-25",
+      "horizons_id": "-49",
+      "id_type": "id",
+      "horizons_name": "Lucy (spacecraft)",
+      "object_type": "trajectory",
+      "list_sha256": "2007d3d415cf317408e5a272aa768c16cdd703cbd14a155e7850ad44ca16b59b",
+      "jpl_name": "Lucy (spacecraft)",
+      "jpl_type": "spacecraft",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-49&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-49&group=sb&format=text"
+      ]
+    },
+    "juice": {
+      "confirmed": "2026-10-25",
+      "horizons_id": "-28",
+      "id_type": "id",
+      "horizons_name": "JUICE (spacecraft)",
+      "object_type": "trajectory",
+      "list_sha256": "2007d3d415cf317408e5a272aa768c16cdd703cbd14a155e7850ad44ca16b59b",
+      "jpl_name": "JUICE (spacecraft)",
+      "jpl_type": "spacecraft",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-28&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-28&group=sb&format=text"
+      ]
+    },
+    "psyche_spacecraft": {
+      "confirmed": "2026-10-25",
+      "horizons_id": "-255",
+      "id_type": "id",
+      "horizons_name": "Psyche (spacecraft)",
+      "object_type": "trajectory",
+      "list_sha256": "2007d3d415cf317408e5a272aa768c16cdd703cbd14a155e7850ad44ca16b59b",
+      "jpl_name": "Psyche (spacecraft)",
+      "jpl_type": "spacecraft",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-255&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-255&group=sb&format=text"
+      ]
+    },
+    "europa_clipper": {
+      "confirmed": "2026-10-25",
+      "horizons_id": "-159",
+      "id_type": "id",
+      "horizons_name": "Europa Clipper (spacecraft)",
+      "object_type": "trajectory",
+      "list_sha256": "2007d3d415cf317408e5a272aa768c16cdd703cbd14a155e7850ad44ca16b59b",
+      "jpl_name": "Europa Clipper (spacecraft)",
+      "jpl_type": "spacecraft",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-159&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-159&group=sb&format=text"
+      ]
+    },
+    "bepicolombo": {
+      "confirmed": "2026-10-25",
+      "horizons_id": "-121",
+      "id_type": "id",
+      "horizons_name": "BepiColombo (Spacecraft)",
+      "object_type": "trajectory",
+      "list_sha256": "2007d3d415cf317408e5a272aa768c16cdd703cbd14a155e7850ad44ca16b59b",
+      "jpl_name": "BepiColombo (Spacecraft)",
+      "jpl_type": "spacecraft",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-121&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-121&group=sb&format=text"
+      ]
+    },
+    "solar_orbiter": {
+      "confirmed": "2026-10-25",
+      "horizons_id": "-144",
+      "id_type": "id",
+      "horizons_name": "Solar Orbiter (spacecraft)",
+      "object_type": "trajectory",
+      "list_sha256": "2007d3d415cf317408e5a272aa768c16cdd703cbd14a155e7850ad44ca16b59b",
+      "jpl_name": "Solar Orbiter (spacecraft)",
+      "jpl_type": "spacecraft",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-144&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-144&group=sb&format=text"
+      ]
     }
   }
 }

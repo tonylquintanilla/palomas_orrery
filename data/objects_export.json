@@ -2,7 +2,7 @@
   "schema": 3,
   "source_sha256": "2007d3d415cf317408e5a272aa768c16cdd703cbd14a155e7850ad44ca16b59b",
   "period_inputs_sha256": "1ce20f823f52d6fc499ada1e178d712c8d075cd1bb84e30c85fb0f9657791a65",
-  "confirmations_sha256": "342ba6e78d25a04aeaad78f36833d263db33a658d443c1e9be89bb8e23f9f30f",
+  "confirmations_sha256": "ba25600c23e889920a6f585899065169c3a03893a65a6578c9f03dc100a29170",
   "paths_sha256": "9d8a1170972fc19f8f26db516635087bf1f781fd131cf7b4898cddc03a26a839",
   "cadence_days": 30,
   "objects": {
@@ -4389,7 +4389,12 @@
       "info_url": "https://voyager.jpl.nasa.gov/mission/",
       "period": null,
       "confirmation": {
-        "identity": null,
+        "identity": {
+          "confirmed": "2026-10-25",
+          "horizons_id": "-31",
+          "id_type": "id",
+          "horizons_name": "Voyager 1 (spacecraft)"
+        },
         "period": null
       },
       "path": {
@@ -4470,7 +4475,12 @@
       "info_url": "https://voyager.jpl.nasa.gov/mission/",
       "period": null,
       "confirmation": {
-        "identity": null,
+        "identity": {
+          "confirmed": "2026-10-25",
+          "horizons_id": "-32",
+          "id_type": "id",
+          "horizons_name": "Voyager 2 (spacecraft)"
+        },
         "period": null
       },
       "path": {
@@ -4602,7 +4612,12 @@
       "info_url": "https://science.nasa.gov/mission/new-horizons/",
       "period": null,
       "confirmation": {
-        "identity": null,
+        "identity": {
+          "confirmed": "2026-10-25",
+          "horizons_id": "-98",
+          "id_type": "id",
+          "horizons_name": "New Horizons (spacecraft)"
+        },
         "period": null
       },
       "path": {
@@ -4683,7 +4698,12 @@
       "info_url": "https://science.nasa.gov/mission/juno/",
       "period": null,
       "confirmation": {
-        "identity": null,
+        "identity": {
+          "confirmed": "2026-10-25",
+          "horizons_id": "-61",
+          "id_type": "id",
+          "horizons_name": "Juno (spacecraft)"
+        },
         "period": null
       },
       "path": {
@@ -4798,7 +4818,12 @@
       "info_url": "https://science.nasa.gov/mission/osiris-apex/",
       "period": null,
       "confirmation": {
-        "identity": null,
+        "identity": {
+          "confirmed": "2026-10-25",
+          "horizons_id": "-64",
+          "id_type": "id",
+          "horizons_name": "OSIRIS-REx (spacecraft)"
+        },
         "period": null
       },
       "path": {
@@ -5066,7 +5091,12 @@
       "info_url": "https://science.nasa.gov/mission/parker-solar-probe/",
       "period": null,
       "confirmation": {
-        "identity": null,
+        "identity": {
+          "confirmed": "2026-10-25",
+          "horizons_id": "-96",
+          "id_type": "id",
+          "horizons_name": "Parker Solar Probe (spacecraft)"
+        },
         "period": null
       },
       "path": {
@@ -5946,7 +5976,12 @@
       "info_url": "https://science.nasa.gov/mission/lucy/",
       "period": null,
       "confirmation": {
-        "identity": null,
+        "identity": {
+          "confirmed": "2026-10-25",
+          "horizons_id": "-49",
+          "id_type": "id",
+          "horizons_name": "Lucy (spacecraft)"
+        },
         "period": null
       },
       "path": {
@@ -6112,7 +6147,12 @@
       "info_url": "https://www.esa.int/Science_Exploration/Space_Science/Juice",
       "period": null,
       "confirmation": {
-        "identity": null,
+        "identity": {
+          "confirmed": "2026-10-25",
+          "horizons_id": "-28",
+          "id_type": "id",
+          "horizons_name": "JUICE (spacecraft)"
+        },
         "period": null
       },
       "path": {
@@ -6329,7 +6369,12 @@
       "info_url": "https://science.nasa.gov/mission/psyche/",
       "period": null,
       "confirmation": {
-        "identity": null,
+        "identity": {
+          "confirmed": "2026-10-25",
+          "horizons_id": "-255",
+          "id_type": "id",
+          "horizons_name": "Psyche (spacecraft)"
+        },
         "period": null
       },
       "path": {
@@ -6410,7 +6455,12 @@
       "info_url": "https://science.nasa.gov/mission/europa-clipper/",
       "period": null,
       "confirmation": {
-        "identity": null,
+        "identity": {
+          "confirmed": "2026-10-25",
+          "horizons_id": "-159",
+          "id_type": "id",
+          "horizons_name": "Europa Clipper (spacecraft)"
+        },
         "period": null
       },
       "path": {
@@ -6542,7 +6592,12 @@
       "info_url": "https://www.esa.int/Science_Exploration/Space_Science/BepiColombo",
       "period": null,
       "confirmation": {
-        "identity": null,
+        "identity": {
+          "confirmed": "2026-10-25",
+          "horizons_id": "-121",
+          "id_type": "id",
+          "horizons_name": "BepiColombo (Spacecraft)"
+        },
         "period": null
       },
       "path": {
@@ -7184,7 +7239,12 @@
       "info_url": "https://www.esa.int/Science_Exploration/Space_Science/Solar_Orbiter",
       "period": null,
       "confirmation": {
-        "identity": null,
+        "identity": {
+          "confirmed": "2026-10-25",
+          "horizons_id": "-144",
+          "id_type": "id",
+          "horizons_name": "Solar Orbiter (spacecraft)"
+        },
         "period": null
       },
       "path": {

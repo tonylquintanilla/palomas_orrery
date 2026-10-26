@@ -1,26 +1,25 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 25, 2026: the spacecraft join the Solar System
-room; the Daily Run stops when the pull and the push differ.
-- Written at orrery 0c27f47 and gallery b1a4ce6, with the close patch.
+Last updated: October 25, 2026, evening: ten spacecraft drew in the
+Solar System room; two fixes bring the Voyagers.
+- Written at orrery d80aed3 and gallery 191d68f, with the fix patches.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The twelve spacecraft are built for the Solar System room, each
->   path solid where flown, dashed where predicted; an orbiter keeps only
->   its arrival and departure (L-443 (the objects)). Not yet run.
-> - The Daily Run stops when its pull is not your pushed orrery
->   (L-461 (pull matches push)). Four skills bumped; protocol v3.112.
+> - The spacecraft are in the Solar System room, each path solid where
+>   flown and dashed where predicted (L-443 (the objects)). Ten drew on
+>   your first run; the two Voyagers come with this evening's fix.
+> - The Horizons check now reads JPL's empty answer for a spacecraft,
+>   and the builder stops at JPL's last minute. Voyager 1 is gold.
 >
 > **Do next:** *the comets, build B's second part, in a fresh session,
 > from `HANDOFF_L443_slice2_buildB_spacecraft_20261025.md`, section 6.*
 >
 > **Needs you now:**
-> - *(do) The run order in that handoff, section 2: three orrery
->   patches, the maintenance run, push; the website patch, the Daily
->   Run, push; then the phone look.*
+> - *(do) patch_L443_16, the orrery maintenance run, push; then
+>   patch_L443_17, the Daily Run, push; then look at Voyager 1 again.*
 > - Two papers left to try (`READING_L456_tony_20261021.md`).
 
 *Italic* lines are the must-reads. Marks reset at every update.
@@ -110,6 +109,8 @@ At the next design talk:
   one group: with the class check's list in hand.
 - The orrery's own Sun axis hover: words to you first, and a source
   for its "differential 24.5-35 d" (L-465 (the Sun's axis)).
+- Each body's description in the i panel as one bullet per sentence,
+  for every object (L-487 (i panel bullets)).
 
 Not urgent, in your order:
 1. Whether the editor also edits the Solar System room's rows.

@@ -11,18 +11,16 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 171  
-**Total Lines of Code (non-blank):** 133,827  
-**Total Public Functions/Classes:** 1,704
+**Total Python Files:** 169  
+**Total Lines of Code (non-blank):** 133,604  
+**Total Public Functions/Classes:** 1,700
 
 ## Classification Coverage
 
-**Undetermined role (10).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (8).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
-- `patch_L443_12_orbiter_rule_20261025.py`
-- `patch_L443_13_keys_20261025.py`
-- `patch_L443_14_session_close_20261025.py`
+- `patch_L443_16_horizons_check_spacecraft_20261025.py`
 - `test_drawings_export.py`
 - `test_earth_pole_of_date.py`
 - `test_extractor_pins.py`
@@ -30,11 +28,9 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
-**Undetermined domain (3).** No valid `Domain:` tag.
+**Undetermined domain (1).** No valid `Domain:` tag.
 
-- `patch_L443_12_orbiter_rule_20261025.py`
-- `patch_L443_13_keys_20261025.py`
-- `patch_L443_14_session_close_20261025.py`
+- `patch_L443_16_horizons_check_spacecraft_20261025.py`
 
 
 ---
@@ -230,7 +226,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `export_objects.py` | - write data/objects_export.json from the object list in celestial_objects.py. The orrery is the one definition of each object; the gallery reads this file and never reads orrery source. (677 lines) |
 | `export_orbit_cache.py` | Phase 1b desktop devtool: read the local orbit caches and write web-servable orbit/position files for the interactive gallery. (617 lines) |
 | `food_insecurity_generator.py` | IPC acute food-insecurity KMZ layer (Sudan, current period). (702 lines) |
-| `horizons_check.py` | - check each object the website serves against JPL Horizons: that its entry names exactly one object, that the object's id, index and name are what the orrery's list says, and that the orbital period the website prints is the one JPL gives. And re-read each spacecraft's Horizon... (987 lines) |
+| `horizons_check.py` | - check each object the website serves against JPL Horizons: that its entry names exactly one object, that the object's id, index and name are what the orrery's list says, and that the orbital period the website prints is the one JPL gives. And re-read each spacecraft's Horizon... (1,003 lines) |
 | `ledger_index.py` | Generate the at-a-glance INDEX for the consolidated ledger. (715 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (129 lines) |
@@ -249,7 +245,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `test_derived_figures.py` | - a derived constant declares no more significant figures than its inputs support, and names every derived row it cannot judge. (1,247 lines) |
 | `test_dimensions.py` | - a derived constant's unit follows from its arithmetic. (591 lines) |
 | `test_domain_split.py` | Checks for L-437: the provenance scanner's whole-tree Tier-1 total prints with its domain split, and a module's domain is read from its own docstring Domain: tag. (406 lines) |
-| `test_horizons_check.py` | - the Horizons check (L-395, L-431) on JPL's recorded answers, with no network: every entry agrees, and every planted fault is caught by name. (588 lines) |
+| `test_horizons_check.py` | - the Horizons check (L-395, L-431) on JPL's recorded answers, with no network: every entry agrees, and every planted fault is caught by name. (626 lines) |
 | `test_maintenance_report.py` | The maintenance run's summary names every file whose Tier-1 rose since the scanner's previous run; and proof that this check can fail. (218 lines) |
 | `test_objects_export.py` | - data/objects_export.json says what the object list in celestial_objects.py holds, and no entry in the list writes a field twice. (364 lines) |
 | `test_orbit_cache.py` | Comprehensive test suite for orbit data caching and repair (251 lines) |
@@ -275,9 +271,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
-| `patch_L443_12_orbiter_rule_20261025.py` | The path plan learns the orbiter rule (L-443, build B of slice 2; Tony's ruling of Oct 24). (97 lines) |
-| `patch_L443_13_keys_20261025.py` | The twelve spacecraft are keyed for the website (L-443, build B of slice 2), with JPL's names and the words Tony approved. (167 lines) |
-| `patch_L443_14_session_close_20261025.py` | The records of Oct 25's session: build B of slice 2 cut after the spacecraft (L-443), L-461 built, four skill bumps (protocol v3.112). (108 lines) |
+| `patch_L443_16_horizons_check_spacecraft_20261025.py` | - the Horizons check reads JPL's empty answer for a spacecraft (L-443), and the evening's record. (95 lines) |
 | `test_drawings_export.py` | Each stored drawing in data/drawings/ is the drawing its rows give today, git tracks it, and each check can fail. (466 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |

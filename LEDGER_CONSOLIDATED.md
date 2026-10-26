@@ -640,6 +640,10 @@ B of slice 2, cut after the spacecraft, on L-443: the orbiter rule, the
 twelve keyed and served, drawn solid then dashed; L-461 built; L-470's
 two rules and L-484's into their skills; L-471 done), built on 0c27f47
 and gallery b1a4ce6.
+Module updated: October 25, 2026, evening, with Anthropic's Claude Opus
+5.5 (Tony's runs of build B on L-443: two fixes, the Horizons check and
+the builder's span end; Voyager 1 goldenrod; L-487 new), built on
+d80aed3 and gallery 191d68f.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -857,7 +861,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*246 live items; 230 need attention (`!`); 165 RICE-scored; 233 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*247 live items; 231 need attention (`!`); 165 RICE-scored; 233 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1017,6 +1021,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-484 | The website and the orrery agree on every object both draw, or the difference is written down (orrery + gallery, objects; method for interactive-exhibit) | OPEN | -- | 2026-10-25 |
 | ! | L-485 | A nightly unattended run of the routines (orrery + gallery, maintenance) | OPEN | -- | 2026-10-24 |
 | ! | L-486 | A view carried into a room (gallery, the rooms) | OPEN | -- | 2026-10-24 |
+| ! | L-487 | Each body's description in the i panel, one bullet per sentence (gallery, the i panel) | OPEN | -- | 2026-10-25 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1426,6 +1431,18 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ## DETAIL / RECORD
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
+
+#### [L-487] Each body's description in the i panel, one bullet per sentence (gallery, the i panel)
+<!-- L:487 status:OPEN upd:2026-10-25 section:A flag: rice: -->
+- **Tony, 2026-10-25, evening,** at his phone look of the spacecraft
+  (run record `documentation/WHERE_WE_ARE_10-24-26_1927_run_record.md`):
+  "i would suggest bulleting each sentence in the info panel object
+  descriptions, for all objects."
+**Gap:** a design talk: whether every body's description becomes one
+bullet per sentence, and whether the words are split where they are
+stored (the orrery's mission_info) or where the room shows them.
+**Ref:** gallery `interactive.html` (the i panel); orrery
+`celestial_objects.py` (mission_info); L-443.
 
 #### [L-486] A view carried into a room (gallery, the rooms)
 <!-- L:486 status:OPEN upd:2026-10-24 section:A flag: rice: -->
@@ -2797,7 +2814,44 @@ the deliberate limit, its number set then, each removal named.
   - L-461 with it (`daily_run.py`).
   - Skills: horizons-orbital-mechanics 1.11, gallery-cache-builder 1.12,
     interactive-exhibit 1.24, safe-file-editing 1.14 (protocol v3.112).
-**Gap (replaces the one below, 2026-10-25):** Tony's runs (the handoff,
+- **Tony's runs, 2026-10-25, evening** (his run record,
+  `documentation/WHERE_WE_ARE_10-24-26_1927_run_record.md`). Patches 12
+  to 15 ran; orrery pushed at d80aed3, gallery at 191d68f. The preview
+  made by the orbiter rule: Juno 113 events to 4, Europa Clipper 87 to
+  5; patch 13 carried all twelve plans. Ten spacecraft built and drew;
+  his phone look: "juno looks correct. solid to today and dashed
+  predicted with both a hover text and info card"; Parker "correct".
+  Two failures, both fixed the same evening:
+  - **The Horizons check stopped at the first spacecraft as UNREACHABLE.**
+    JPL was reached. Its Lookup answers a spacecraft's id in the
+    small-body index with its two header lines alone (fetched that
+    evening for -31 and -61, group=sb), and the check read that as a
+    failed fetch. It now reads JPL's header alone as no matches (orrery
+    patch_L443_16, `horizons_check.py`, with a recorded Voyager 1 case
+    and a planted fault in its suite). The twelve names were checked
+    against JPL's Lookup the same evening; all twelve match.
+  - **Both Voyagers' paths were refused by JPL** ("No ephemeris for
+    target ... after A.D. 2100-JAN-01 00:00:00.0000 TD"). Their data ends
+    at that minute exactly; the builder adds 69 s to every time it asks
+    (UTC to TDB), so the stop asked was 00:01. The span's end is now
+    taken back by the same 69 s (gallery patch_L443_17,
+    `gallery_cache_builder.py` `_plan_span`, with a check and a planted
+    fault in its suite). The other ten end later in their last day.
+    Voyager 1 was drawn from an old path with no marker, hover or panel
+    words; Voyager 2 was dropped.
+  - **Voyager 1 goldenrod**, not the orrery's white: "the white line
+    does not contrast with the white grid"; asked whether to share
+    Parker's gold, Tony chose "Gold, like Parker" (gallery
+    `presentation.py`, in patch_L443_17).
+  - His other notes: the TNO group opened with a lag; the failed fetches
+    are listed at the foot of the i panel, as intended; the description
+    bullets are L-487.
+**Gap (replaces the one below, 2026-10-25, evening):** Tony's runs of
+patch_L443_16 and the orrery maintenance run (the Horizons check
+confirming the twelve), push; patch_L443_17 and the Daily Run (both
+Voyagers fetched), push; his look at Voyager 1. Then build B's second
+part, the comets, from the handoff's section 6, as below.
+**Gap (superseded above, 2026-10-25):** Tony's runs (the handoff,
 sec. 2), the preview's report, the Daily Run and his phone look; then
 build B's second part, the comets, from the handoff's section 6: the
 plan for open-path comets by the span ruling, the fourteen keyed, the

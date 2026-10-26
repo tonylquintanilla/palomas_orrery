@@ -151,26 +151,26 @@ No display prints these exact rows. Under Rule 7 they carry no print count. The 
 - `HILLS_CLOUD_PLANES_READ`: named on 6 other orrery line(s).
 - `HILLS_CLOUD_ECCENTRICITY`: named on 4 other orrery line(s).
 - `DE430_TERRESTRIAL_POSITION_PLACE_KM`: named on 10 other orrery line(s).
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 124 (config `/objects/1/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 125 (config `/objects/1/position_accuracy`): `v = node.value;`
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 124 (config `/objects/4/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 125 (config `/objects/4/position_accuracy`): `v = node.value;`
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 124 (config `/objects/5/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 125 (config `/objects/5/position_accuracy`): `v = node.value;`
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 124 (config `/objects/6/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 125 (config `/objects/6/position_accuracy`): `v = node.value;`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 132 (config `/objects/1/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 133 (config `/objects/1/position_accuracy`): `v = node.value;`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 132 (config `/objects/4/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 133 (config `/objects/4/position_accuracy`): `v = node.value;`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 132 (config `/objects/5/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 133 (config `/objects/5/position_accuracy`): `v = node.value;`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 132 (config `/objects/6/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 133 (config `/objects/6/position_accuracy`): `v = node.value;`
 - `DE430_JUPITER_SATURN_POSITION_PLACE_KM`: named on 8 other orrery line(s).
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 124 (config `/objects/2/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 125 (config `/objects/2/position_accuracy`): `v = node.value;`
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 124 (config `/objects/3/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 125 (config `/objects/3/position_accuracy`): `v = node.value;`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 132 (config `/objects/2/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 133 (config `/objects/2/position_accuracy`): `v = node.value;`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 132 (config `/objects/3/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 133 (config `/objects/3/position_accuracy`): `v = node.value;`
 - `DE430_URANUS_NEPTUNE_PLUTO_POSITION_PLACE_KM`: named on 8 other orrery line(s).
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 124 (config `/objects/7/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 125 (config `/objects/7/position_accuracy`): `v = node.value;`
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 124 (config `/objects/8/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 125 (config `/objects/8/position_accuracy`): `v = node.value;`
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 124 (config `/objects/12/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 125 (config `/objects/12/position_accuracy`): `v = node.value;`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 132 (config `/objects/7/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 133 (config `/objects/7/position_accuracy`): `v = node.value;`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 132 (config `/objects/8/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 133 (config `/objects/8/position_accuracy`): `v = node.value;`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 132 (config `/objects/12/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 133 (config `/objects/12/position_accuracy`): `v = node.value;`
 - `DE430_MOON_POSITION_PLACE_KM`: named on 5 other orrery line(s).
 - `GM_SUN_SI`: named on 2 other orrery line(s).
 - `BOLTZMANN_CONSTANT_J_PER_K`: named on 2 other orrery line(s).
