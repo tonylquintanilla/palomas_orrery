@@ -644,6 +644,10 @@ Module updated: October 25, 2026, evening, with Anthropic's Claude Opus
 5.5 (Tony's runs of build B on L-443: two fixes, the Horizons check and
 the builder's span end; Voyager 1 goldenrod; L-487 new), built on
 d80aed3 and gallery 191d68f.
+Module updated: October 25, 2026, late, with Anthropic's Claude Opus 5.5
+(a spacecraft's companions on L-443; L-487 built; L-488 new;
+interactive-exhibit 1.25, protocol v3.113), built on 967d150 and gallery
+82a7ab1.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -861,7 +865,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*247 live items; 231 need attention (`!`); 165 RICE-scored; 233 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*248 live items; 232 need attention (`!`); 165 RICE-scored; 233 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1022,6 +1026,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-485 | A nightly unattended run of the routines (orrery + gallery, maintenance) | OPEN | -- | 2026-10-24 |
 | ! | L-486 | A view carried into a room (gallery, the rooms) | OPEN | -- | 2026-10-24 |
 | ! | L-487 | Each body's description in the i panel, one bullet per sentence (gallery, the i panel) | OPEN | -- | 2026-10-25 |
+| ! | L-488 | Solar features beside a spacecraft in the Solar System room, such as the heliopause (gallery, the rooms) | OPEN | -- | 2026-10-25 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1432,15 +1437,53 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
+#### [L-488] Solar features beside a spacecraft in the Solar System room, such as the heliopause (gallery, the rooms)
+<!-- L:488 status:OPEN upd:2026-10-25 section:A flag: rice: -->
+- **Tony, 2026-10-25, night,** after his look at Voyager 1: "Another
+  thought for voyager and maybe future missions add relevant solar
+  feature like the heliopause."
+- **Claude, the same night:** the crossings are what Voyager's path
+  means -- the termination shock, then the heliopause into interstellar
+  space. But the heliopause is one of the Sun's shells, and the Solar
+  System room's i panel says each body's shells live in its own room;
+  drawing it here is a Sun shell outside the Sun room, the question
+  L-486 asks for any room. Tony: "Yes please on all your suggestions,"
+  which included keeping this for a design talk.
+**Gap:** a design talk, with L-486: which Sun features a spacecraft
+brings into the Solar System room, at that room's scale, and whether the
+rule that a body's shells live in its own room changes.
+**Ref:** gallery `interactive.html` (the Solar System room, the Sun
+room's heliopause and termination shock); L-486; L-443.
+
 #### [L-487] Each body's description in the i panel, one bullet per sentence (gallery, the i panel)
 <!-- L:487 status:OPEN upd:2026-10-25 section:A flag: rice: -->
 - **Tony, 2026-10-25, evening,** at his phone look of the spacecraft
   (run record `documentation/WHERE_WE_ARE_10-24-26_1927_run_record.md`):
   "i would suggest bulleting each sentence in the info panel object
   descriptions, for all objects."
-**Gap:** a design talk: whether every body's description becomes one
-bullet per sentence, and whether the words are split where they are
-stored (the orrery's mission_info) or where the room shows them.
+- **Tony, 2026-10-25, night,** at his look at Voyager 1 with the fixes:
+  "put bullets on all sentences for readability including the source
+  paragraph." Claude proposed cutting where the room shows the words,
+  never where they are stored, since a body's description is the
+  orrery's own; Tony: "Yes please on all your suggestions."
+- **Built the same night** (gallery patch_L443_19): every description,
+  note, detail and citation in every room's i panel is a list, one
+  sentence to a bullet, each web address a link, a citation's label on
+  its first sentence and the website's note after its last
+  (`gallery/source_list.js` `sentences` and `sourceBullets`;
+  `interactive.html` `sunSentenceList`). A sentence does not end at a
+  common abbreviation, initials, a Roman numeral or a journal's
+  abbreviated name. The Source list check's part 5 cuts all 483 served
+  texts (122 into more than one sentence) and names any piece that
+  starts with a small letter or loses text; two breaks. Rule written
+  into interactive-exhibit 1.25.
+**Gap (replaces the one below, 2026-10-25, night):** Tony's phone look:
+a body's panel in the Solar System room and a shell's in the Sun room.
+Closes on that look.
+**Gap (superseded above, 2026-10-25):** a design talk: whether every
+body's description becomes one bullet per sentence, and whether the
+words are split where they are stored (the orrery's mission_info) or
+where the room shows them.
 **Ref:** gallery `interactive.html` (the i panel); orrery
 `celestial_objects.py` (mission_info); L-443.
 
@@ -2846,7 +2889,34 @@ the deliberate limit, its number set then, each removal named.
   - His other notes: the TNO group opened with a lag; the failed fetches
     are listed at the foot of the i panel, as intended; the description
     bullets are L-487.
-**Gap (replaces the one below, 2026-10-25, evening):** Tony's runs of
+- **Tony's runs, 2026-10-25, night.** Both fixes ran; orrery pushed at
+  967d150, gallery at 82a7ab1. The Horizons check confirmed the twelve;
+  the Daily Run fetched both Voyagers. His look: "Looks great." Voyager
+  1 gold, with its marker, text box and panel words.
+- **A spacecraft's companions** (gallery patch_L443_19). Tony: "in
+  addition to the default inner planets, add the farthest planet orbit
+  that the object has reached. For Juno that is obviously Jupiter. For
+  Voyager that would be Pluto (include as the last commonly known minor
+  planet). This gives perspective to a spacecraft plot," then "Maybe
+  flyby planets too." Claude's rule, which he approved ("Yes please on
+  all your suggestions"): ticking a spacecraft also ticks, among the
+  drawer's top-level body rows (the planets and Pluto), every one its
+  plan names as a flyby, arrival or departure, and the farthest whose
+  perihelion its whole drawn path goes beyond, Pluto the last; ordinary
+  ticks, which Reset puts back. On the served cache: Voyager 1, Jupiter,
+  Saturn, Pluto; Voyager 2, Jupiter to Neptune and Pluto; New Horizons,
+  Jupiter and Pluto; Juno, Lucy, JUICE, Europa Clipper, Jupiter; Psyche,
+  Mars; the four inner craft, nothing past what is drawn. The driver
+  serves each craft's plan bodies and the farthest its path goes
+  (`path_events`, `path_reach_au`); `SolarSystemDrawer.companions`
+  decides; the drawer check's section 7 (seven cases, two breaks) and the
+  walk's section 20 hold it. Rule written into interactive-exhibit 1.25.
+  The heliopause Tony asked about next is L-488.
+**Gap (replaces the one below, 2026-10-25, night):** Tony's runs of
+patch_L443_18 and patch_L443_19, push, and his phone look at the
+companions (Voyager 2, Juno). Then build B's second part, the comets,
+from the handoff's section 6.
+**Gap (superseded above, 2026-10-25, evening):** Tony's runs of
 patch_L443_16 and the orrery maintenance run (the Horizons check
 confirming the twelve), push; patch_L443_17 and the Daily Run (both
 Voyagers fetched), push; his look at Voyager 1. Then build B's second

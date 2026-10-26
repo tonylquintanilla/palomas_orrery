@@ -1,25 +1,25 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 25, 2026, evening: ten spacecraft drew in the
-Solar System room; two fixes bring the Voyagers.
-- Written at orrery d80aed3 and gallery 191d68f, with the fix patches.
+Last updated: October 25, 2026, night: a spacecraft brings its planets,
+and the i panel reads one sentence to a bullet.
+- Written at orrery 967d150 and gallery 82a7ab1, with patches 18 and 19.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The spacecraft are in the Solar System room, each path solid where
->   flown and dashed where predicted (L-443 (the objects)). Ten drew on
->   your first run; the two Voyagers come with this evening's fix.
-> - The Horizons check now reads JPL's empty answer for a spacecraft,
->   and the builder stops at JPL's last minute. Voyager 1 is gold.
+> - All twelve spacecraft draw, the Voyagers too. Ticking one also
+>   ticks its flyby planets and the farthest planet it reaches
+>   (L-443 (the objects)). interactive-exhibit 1.25; protocol v3.113.
+> - The i panel reads one sentence to a bullet, in every room
+>   (L-487 (i panel bullets)).
 >
 > **Do next:** *the comets, build B's second part, in a fresh session,
 > from `HANDOFF_L443_slice2_buildB_spacecraft_20261025.md`, section 6.*
 >
 > **Needs you now:**
-> - *(do) patch_L443_16, the orrery maintenance run, push; then
->   patch_L443_17, the Daily Run, push; then look at Voyager 1 again.*
+> - *(do) patch_L443_18 (orrery), push; patch_L443_19 (website), push;
+>   then the phone look: Voyager 2, Juno, and a Sun room shell's panel.*
 > - Two papers left to try (`READING_L456_tony_20261021.md`).
 
 *Italic* lines are the must-reads. Marks reset at every update.
@@ -109,8 +109,8 @@ At the next design talk:
   one group: with the class check's list in hand.
 - The orrery's own Sun axis hover: words to you first, and a source
   for its "differential 24.5-35 d" (L-465 (the Sun's axis)).
-- Each body's description in the i panel as one bullet per sentence,
-  for every object (L-487 (i panel bullets)).
+- The heliopause and other Sun features beside the Voyagers in the
+  Solar System room, with L-486 (L-488 (the heliopause)).
 
 Not urgent, in your order:
 1. Whether the editor also edits the Solar System room's rows.

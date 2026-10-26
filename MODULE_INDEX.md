@@ -1,7 +1,7 @@
 <!-- Doc-Kind: generated | The human-browsable module index, rebuilt by module_atlas.py alongside the atlas. Do not hand-edit. -->
 # Paloma's Orrery - Module Index
 
-**Generated:** October 25, 2026 by `module_atlas.py`  
+**Generated:** October 26, 2026 by `module_atlas.py`  
 **Repository:** Paloma's Orrery - Solar System Visualization Suite  
 **Philosophy:** Data Preservation is Climate Action
 
@@ -12,7 +12,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 169  
-**Total Lines of Code (non-blank):** 133,604  
+**Total Lines of Code (non-blank):** 133,599  
 **Total Public Functions/Classes:** 1,700
 
 ## Classification Coverage
@@ -20,7 +20,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 **Undetermined role (8).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
-- `patch_L443_16_horizons_check_spacecraft_20261025.py`
+- `patch_L443_18_companions_records_20261025.py`
 - `test_drawings_export.py`
 - `test_earth_pole_of_date.py`
 - `test_extractor_pins.py`
@@ -30,7 +30,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 **Undetermined domain (1).** No valid `Domain:` tag.
 
-- `patch_L443_16_horizons_check_spacecraft_20261025.py`
+- `patch_L443_18_companions_records_20261025.py`
 
 
 ---
@@ -271,7 +271,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
-| `patch_L443_16_horizons_check_spacecraft_20261025.py` | - the Horizons check reads JPL's empty answer for a spacecraft (L-443), and the evening's record. (95 lines) |
+| `patch_L443_18_companions_records_20261025.py` | - the records for tonight's two changes on the website: interactive-exhibit 1.25, protocol v3.113. (90 lines) |
 | `test_drawings_export.py` | Each stored drawing in data/drawings/ is the drawing its rows give today, git tracks it, and each check can fail. (466 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |

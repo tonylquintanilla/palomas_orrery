@@ -761,6 +761,23 @@ interactive.html link opens the Solar System room; the Explorer is at
 "default solar-system-explorer" is corrected.
 (Moved down 2026-10-25, when 1.24 made a fourth entry.)
 
+Earlier: 1.22 | 2026-10-24, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 82fa04cc and gallery @ 2c2057d7. v1.22 (L-477, L-478,
+L-479, L-480) records Tony's four rulings of the day on his Oct 23 phone
+look. The Solar System room's drawer has no See more and nothing that
+ticks many bodies at once: every group is listed, folded, and a group
+row only folds; the top bar's All / none reads Reset there and puts
+back what the room opened on, and an open group's "Reset <group>"
+unticks its bodies. Tony: "No "see more" Let that be permanent," and
+""All" is very confusing with too many orbits all at once. It is better
+for the visitor to develop the view." The count line moves to the lower
+left (L-478). Go To fits a body's whole orbit, a trial ("Let's try
+B1"), and every body's hover gives its orbit's near and far distance
+(L-479). Closing the About card a room opened steps back to the room
+(L-480). The descriptions L-472 carried -- the count line, the About
+line -- are added.
+(Moved down 2026-10-25, evening, when 1.25 made a fourth entry.)
+
 ## safe-file-editing
 
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons;

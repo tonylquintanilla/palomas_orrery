@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.112 | October 25, 2026
+Tony Quintanilla, PE | Claude | v3.113 | October 25, 2026
 
-Cut from 0c27f47a at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 967d1503 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -531,7 +531,7 @@ gallery-cache-builder        1.12 Nightly builder, atomic swap and its
                                   and a failed pull, the run records and their
                                   check, a spacecraft fetched by its path plan,
                                   a pull that does not match the push
-interactive-exhibit          1.24 adding or changing an exhibit in
+interactive-exhibit          1.25 adding or changing an exhibit in
                                   interactive.html; any edit to the Sun's
                                   chrome (drawer, nav cluster, frame zoom,
                                   i-panel, HUD, consent, back link); "Earth
@@ -562,7 +562,10 @@ interactive-exhibit          1.24 adding or changing an exhibit in
                                   check); a spacecraft's path in the Solar
                                   System room (its positions file, solid and
                                   dashed, its text box); whether the website
-                                  and the orrery agree on an object
+                                  and the orrery agree on an object; the
+                                  planets ticked with a spacecraft
+                                  (companions); the i panel's words one
+                                  sentence to a bullet
 <!-- SKILL-MANIFEST:END -->
 
 Session-Start Repo Pull and the SHA Round Trip [CRITICAL]
@@ -1198,6 +1201,39 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.113 (October 25, 2026, evening): No rule changed in this document.
+ONE skill bump, one version (L-443, L-487): interactive-exhibit 1.24 ->
+1.25. A SPACECRAFT TICKS ITS COMPANIONS; THE I PANEL IS ONE SENTENCE TO
+A BULLET.
+
+WHAT PROMPTED IT. Tony's phone look of the spacecraft, the evening of
+Oct 25, after orrery patch_L443_16 and gallery patch_L443_17 had brought
+the Voyagers: "put bullets on all sentences for readability including
+the source paragraph," and "in addition to the default inner planets,
+add the farthest planet orbit that the object has reached ... This
+gives perspective to a spacecraft plot," then "Maybe flyby planets too."
+Asked to approve the two rules: "Yes please on all your suggestions."
+
+WHAT CHANGED. interactive-exhibit: the Solar System room's drawer gains
+A spacecraft's companions, and One body at a time names its one
+exception; Hover text is written for the visitor gains The i panel, one
+sentence to a bullet. Its v1.22 entry moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copies read
+interactive-exhibit 1.25, horizons-orbital-mechanics 1.11,
+gallery-cache-builder 1.12 and safe-file-editing 1.14 before work that
+fires them. This session bumped interactive-exhibit twice (1.24 at the
+close, 1.25 this evening) and worked from the repo's copy of each, which
+it wrote.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.110 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.112 (October 25, 2026): No rule changed in this document. FOUR
 skill bumps, one version each (L-443 build B, L-461, L-470, L-471,
 L-484): horizons-orbital-mechanics 1.10 -> 1.11, gallery-cache-builder
@@ -1287,43 +1323,6 @@ manifest expected.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.108 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.110 (October 24, 2026): No rule changed in this document. ONE
-skill bump, one version (L-477, L-478, L-479, L-480):
-interactive-exhibit 1.21 -> 1.22. THE SOLAR SYSTEM ROOM HAS NO SEE MORE
-AND NO "ALL"; RESET PUTS IT BACK; GO TO FITS THE WHOLE ORBIT.
-
-WHAT PROMPTED IT. Tony's phone look of Oct 23 found five things, ruled
-at the design talk of Oct 24
-(documentation/DESIGN_L477_drawer_and_view_rulings_20261024.md). On the
-controls: "What's confusing is the the referent is different. See
-more/fewer rows all/none celestial objects." Then: "No "see more" Let
-that be permanent. And change all/none to "Reset" that resets the view
-to the starting view when the visitor wants a fresh start. Simple." And
-for the groups: ""All" is very confusing with too many orbits all at
-once. It is better for the visitor to develop the view." On Sedna's
-orbit cut off: "Let's try B1." The same day's build made them.
-
-WHAT CHANGED. interactive-exhibit's The Solar System room's drawer
-replaces its See more bullet with No See more and One body at a time,
-and Reset; its Groups fold open bullet loses the group's box; it gains
-the count line (with L-478's place) and the orbit line; FRAMING gains
-Go To fits the whole orbit; the anatomy table's drawer and i-panel rows
-name Reset and the About line's return. Its v1.19 entry moved to
-documentation/SKILL_HISTORIES.md, by the three-entry rule.
-
-THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
-that session. The next session confirms its loaded copy reads
-interactive-exhibit 1.22 before exhibit work. This session confirmed
-its loaded copies read interactive-exhibit 1.21 (discharging v3.109's
-obligation), ledger-and-session-records 1.22, safe-file-editing 1.13
-and provenance-discipline 2.34, as the manifest expected.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.107 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

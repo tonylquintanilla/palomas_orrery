@@ -1,14 +1,26 @@
 ---
 name: interactive-exhibit
 description: How an interactive exhibit (a room in interactive.html such as ?exhibit=sun) is designed, built, verified and carded for the Paloma's Orrery gallery. Covers the exhibit switch and boot path, the assembler driver spec, the JS feature handoff, the shared chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent gate, back link), what is per-body, the served-data provenance contract, what a room opens on (the arrival block) and the shell-key stamp the renderers apply, the drawer order, who may write data/objects_config.json, the Mode 5 phone sequence, and carding an exhibit through Studio. Use when adding or changing an exhibit (Earth, Jupiter, the stars), touching sun* chrome in interactive.html, deciding what an exhibit may render, or editing the served words with store_writer or exhibit_store_editor. Not for propagation math (gallery-assembler), the nightly builder (gallery-cache-builder), or the Studio/converter chain (gallery-pipeline). Do not use for projects other than Paloma's Orrery.
-fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, its group rows, its two Resets, the Reset in every room's top bar, Home's order and its framing; Go To fitting a body's whole orbit and the orbit line in a body's hover; the count line's place; a bare interactive.html link and the Explorer's address; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia); a served number's citation and its source_note; the Typed facts check (smoke_typed_facts.js); a feature drawn as stored dots (the Hills cloud, Earth's radiation belts); the i panel's source list and its links (source_list.js); the order a room's drawer lists its shells in, where each begins (drawer_order.js, the Drawer order check); a spacecraft's path in the Solar System room (its positions file, solid and dashed, its text box); whether the website and the orrery agree on an object
+fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, its group rows, its two Resets, the Reset in every room's top bar, Home's order and its framing; Go To fitting a body's whole orbit and the orbit line in a body's hover; the count line's place; a bare interactive.html link and the Explorer's address; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia); a served number's citation and its source_note; the Typed facts check (smoke_typed_facts.js); a feature drawn as stored dots (the Hills cloud, Earth's radiation belts); the i panel's source list and its links (source_list.js); the order a room's drawer lists its shells in, where each begins (drawer_order.js, the Drawer order check); a spacecraft's path in the Solar System room (its positions file, solid and dashed, its text box); whether the website and the orrery agree on an object; the planets ticked with a spacecraft (companions); the i panel's words one sentence to a bullet
 ---
 
 # Interactive Exhibit
 
-Read this file in 8 parts: lines 1-154, 155-158, 159-400, 401-498, 499-691, 692-946, 947-1131, 1132-1232.
+Read this file in 8 parts: lines 1-151, 152-155, 156-397, 398-495, 496-712, 713-967, 968-1167, 1168-1268.
 
-Skill version: 1.24 | 2026-10-25, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.25 | 2026-10-25, evening, with Anthropic's Claude Opus
+5.5, at palomas_orrery @ 967d1503 and gallery @ 82a7ab13. v1.25 (L-443,
+L-487) records Tony's two asks from his phone look of the spacecraft,
+approved the same evening ("Yes please on all your suggestions"). Ticking
+a spacecraft ticks its companions: the planets its plan passes by and the
+farthest planet whose perihelion its path goes beyond, Pluto the last
+("add the farthest planet orbit that the object has reached ... This
+gives perspective to a spacecraft plot," and "Maybe flyby planets too");
+the one exception to nothing ticking many bodies at once. And the i panel
+shows every description, note and citation one sentence to a bullet, in
+every room ("put bullets on all sentences for readability including the
+source paragraph"), cut where the room shows the words.
+Earlier: 1.24 | 2026-10-25, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 0c27f47a and gallery @ b1a4ce6c. v1.24 (L-443 build B,
 L-484) adds the spacecraft to the Solar System room: a Spacecraft group
 after Earth's row (Tony, 2026-10-24: "i would suggest putting the
@@ -33,26 +45,11 @@ a See more. And three descriptions, built and approved on his look the
 same day: each line of a Solar System room hover after the name is a
 bullet; a source line naming JPL Horizons carries its address, which the
 i panel makes a link; each room's closing paragraph is a bulleted list.
-Earlier: 1.22 | 2026-10-24, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 82fa04cc and gallery @ 2c2057d7. v1.22 (L-477, L-478,
-L-479, L-480) records Tony's four rulings of the day on his Oct 23 phone
-look. The Solar System room's drawer has no See more and nothing that
-ticks many bodies at once: every group is listed, folded, and a group
-row only folds; the top bar's All / none reads Reset there and puts
-back what the room opened on, and an open group's "Reset <group>"
-unticks its bodies. Tony: "No "see more" Let that be permanent," and
-""All" is very confusing with too many orbits all at once. It is better
-for the visitor to develop the view." The count line moves to the lower
-left (L-478). Go To fits a body's whole orbit, a trial ("Let's try
-B1"), and every body's hover gives its orbit's near and far distance
-(L-479). Closing the About card a room opened steps back to the room
-(L-480). The descriptions L-472 carried -- the count line, the About
-line -- are added.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
 on 2026-10-05 (L-418), 2026-10-10 (L-429), 2026-10-14 (L-431),
 2026-10-16 (L-421), 2026-10-17 (L-452), 2026-10-20 (L-456),
 2026-10-21 (L-460), 2026-10-22 (L-434, L-443), 2026-10-24
-(L-477, L-482) and 2026-10-25 (L-443).
+(L-477, L-482) and 2026-10-25 (L-443, twice).
 
 ## Contents
 
@@ -531,7 +528,8 @@ Plotly.
   opening frame and angle, the drawer closed. Inside an open group, once
   one of its bodies is ticked, "Reset <group>" unticks them all and no
   other (`groupReset`, `groupResetOffered`; `ssGroupReset`). Nothing
-  ticks many bodies at once. Since v1.23 the Sun and Earth rooms have
+  ticks many bodies at once, save a spacecraft and its companions
+  (v1.25, below). Since v1.23 the Sun and Earth rooms have
   the same button (L-482; Tony, 2026-10-24: "Yes all rooms should use
   the same Reset button and no 'see more'"). There it puts back the
   room's arrival: every shell ticked or unticked as the room opened,
@@ -657,6 +655,29 @@ Plotly.
   the word JPL uses"): Juno's data sheet calls its part after
   2026-09-23 "a planning prediction"; Voyager 1's speaks of "a new
   solution and prediction".
+- **A spacecraft's companions** (v1.25, L-443; Tony, 2026-10-25: "in
+  addition to the default inner planets, add the farthest planet orbit
+  that the object has reached ... This gives perspective to a spacecraft
+  plot," then "Maybe flyby planets too," and "Yes" to the rule). Ticking a
+  spacecraft, or Go To on one not ticked, also ticks among the drawer's
+  top-level body rows -- the planets and Pluto, the rows no group
+  gathers, so no list of planets is typed -- every one its path plan
+  names as a flyby, arrival or departure (matched by any name the row
+  goes by: Pluto by its label), and the farthest whose perihelion
+  a(1 - e) its path goes beyond, Pluto the last. The path is the whole
+  one drawn, predicted part included; its reach is the farthest served
+  point from the Sun, worked out by the driver (`path_reach_au`, beside
+  `path_events`), never typed. The logic is
+  `SolarSystemDrawer.companions`; compose works each spacecraft's out and
+  hands them to the drawer (`drawer.companions`); `ssTickCompanions`
+  ticks them before the spacecraft in Home's order, so the handle names
+  the spacecraft. They are ordinary ticks: unticking the spacecraft
+  leaves them, and Reset puts the room back as it opened. A plan's name
+  no row goes by (the Moon) is reported by the logic and ticks nothing.
+  Voyager 1: Jupiter, Saturn, Pluto; Voyager 2: Jupiter to Neptune and
+  Pluto; Juno, Lucy, JUICE and Europa Clipper: Jupiter. Checked by the
+  drawer check's section 7 (seven cases, two breaks) and walked
+  (section 20: Juno, and Voyager 1 by Go To).
 
 **FRAMING, Tony's ruling of 2026-10-02** ("B but with a buffer of
 20%"): the room frames on how far each body is from the Sun NOW, not
@@ -1020,6 +1041,21 @@ address, https://ssd.jpl.nasa.gov/horizons/, which the i panel makes a
 link (`gallery/source_list.js`). Each room's closing paragraph, "Part
 of Paloma's Orrery", is a bulleted list, one sentence to a bullet, and
 reads "named for the creator's daughter".
+
+**The i panel, one sentence to a bullet** (v1.25, L-487; Tony,
+2026-10-25: "put bullets on all sentences for readability including the
+source paragraph," for all objects). A focused feature's description,
+its notes, its detail and each of its citations are lists, a sentence to
+a line, every web address a link; a citation's label sits on its first
+sentence and the website's note after its last. The words are cut where
+the room shows them (`GallerySources.sentences`, `sourceBullets`;
+`sunSentenceList`), never where they are stored: a body's description is
+the orrery's own. A sentence does not end at a common abbreviation,
+initials ("J.", "U.S."), a Roman numeral ("II.") or a journal's
+abbreviated name in a citation ("Celest. Mech. Dyn. Astron."), whose
+words are capitalised. Checked by the Source list check's part 5, which
+cuts every served text and names any piece that starts with a small
+letter or loses text, with two breaks; and walked (section 20).
 
 ### A feature's info link: NASA if specific, else Wikipedia [QUALITY]
 Every drawn feature carries exactly one link, its `info_url` in

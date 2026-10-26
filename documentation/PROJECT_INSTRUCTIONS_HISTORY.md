@@ -3413,6 +3413,46 @@ resident.
 (Moved down from the resident protocol on 2026-10-25 when
 v3.112 made a fourth entry.)
 
+v3.110 (October 24, 2026): No rule changed in this document. ONE
+skill bump, one version (L-477, L-478, L-479, L-480):
+interactive-exhibit 1.21 -> 1.22. THE SOLAR SYSTEM ROOM HAS NO SEE MORE
+AND NO "ALL"; RESET PUTS IT BACK; GO TO FITS THE WHOLE ORBIT.
+
+WHAT PROMPTED IT. Tony's phone look of Oct 23 found five things, ruled
+at the design talk of Oct 24
+(documentation/DESIGN_L477_drawer_and_view_rulings_20261024.md). On the
+controls: "What's confusing is the the referent is different. See
+more/fewer rows all/none celestial objects." Then: "No "see more" Let
+that be permanent. And change all/none to "Reset" that resets the view
+to the starting view when the visitor wants a fresh start. Simple." And
+for the groups: ""All" is very confusing with too many orbits all at
+once. It is better for the visitor to develop the view." On Sedna's
+orbit cut off: "Let's try B1." The same day's build made them.
+
+WHAT CHANGED. interactive-exhibit's The Solar System room's drawer
+replaces its See more bullet with No See more and One body at a time,
+and Reset; its Groups fold open bullet loses the group's box; it gains
+the count line (with L-478's place) and the orbit line; FRAMING gains
+Go To fits the whole orbit; the anatomy table's drawer and i-panel rows
+name Reset and the About line's return. Its v1.19 entry moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copy reads
+interactive-exhibit 1.22 before exhibit work. This session confirmed
+its loaded copies read interactive-exhibit 1.21 (discharging v3.109's
+obligation), ledger-and-session-records 1.22, safe-file-editing 1.13
+and provenance-discipline 2.34, as the manifest expected.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.107 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-25, evening, when
+v3.113 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

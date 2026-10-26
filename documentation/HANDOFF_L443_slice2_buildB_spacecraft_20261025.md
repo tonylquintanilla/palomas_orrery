@@ -183,6 +183,12 @@ Read this, the brief's sections 2.5 and 4, and the drawer-groups note.
   minute, so the Voyagers are fetched; Voyager 1 goldenrod). Their
   record is on L-443. Confirm from Tony's run record that both ran, the
   Horizons check confirmed the twelve, and both Voyagers drew.
+- Added later that night: a spacecraft ticks its companions (its flyby
+  planets and the farthest it reaches) and the i panel reads one
+  sentence to a bullet (orrery patch_L443_18, gallery patch_L443_19;
+  interactive-exhibit 1.25, protocol v3.113). Confirm the loaded
+  interactive-exhibit reads 1.25, and Tony's phone look, before the
+  comets. The heliopause beside the Voyagers is L-488, for a design talk.
 - Confirm the loaded skills read horizons-orbital-mechanics 1.11,
   gallery-cache-builder 1.12, interactive-exhibit 1.24 and
   safe-file-editing 1.14 before work that fires them.
