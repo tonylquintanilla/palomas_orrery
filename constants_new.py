@@ -223,6 +223,10 @@ prints, SUN_SIDEREAL_ROTATION_PERIOD_D and SUN_EQUATOR_TILT_DEG.)
 Module updated: October 24, 2026 with Anthropic's Claude Opus 5.5
 (L-470: no value changed. Two comments on C/2025 K1's piece C no longer
 call it bound: JPL's e of 0.999994, give or take 0.00003, cannot tell.)
+Module updated: October 26, 2026 with Anthropic's Claude Opus 5.5
+(L-491: nine comet nucleus sizes, each sourced to a page opened that
+day, in a section of their own; they replace a table typed from memory
+in comet_visualization_shells.py.)
 """
 
 import math
@@ -5448,6 +5452,171 @@ VOYAGER_2_POINTING_DEC_2030_ARCSEC = 3.715
 # Source+: revised Aug 19, 2022 -- "DEC +/- 3.715 arcseconds", in the same
 # Source+: sentence as the RA figure above.
 # Ref: https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-32'&OBJ_DATA='YES'&MAKE_EPHEM='NO'
+
+# ============================================================
+# COMET NUCLEUS SIZES (L-491)
+# The size of each comet's nucleus that the orrery's comet hover prints,
+# in the form its source gives it, a radius or a diameter. Until
+# 2026-10-26 these were a table typed from memory in
+# comet_visualization_shells.py (COMET_NUCLEUS_SIZES, sixteen values with
+# no source). Each was looked for that day in JPL's Small-Body Database
+# and in open papers (Tony, 2026-10-26: "bring the sourcing into the
+# ledger and into this slice"). Nine are here. Six had no size anywhere
+# that could be opened -- only upper limits, unpublished data, or agency
+# pages naming no work -- and came out: NEOWISE, ISON, West, Lemmon,
+# Wierzchos, PANSTARRS. Their hovers print no size. The search, with
+# each figure found and what disagrees: documentation/CHECK_L491_comet_
+# nucleus_sizes_20261026.md.
+# ============================================================
+
+COMET_HALLEY_NUCLEUS_RADIUS_KM = 5.5
+# Unit: km
+# Status: measured V_SOURCED 2026-10-26 -- open full text
+# Figures: 2 -- the table prints 5.5
+# Read: Table 1A, column r_n, row 1P/Halley, 2026-10-26, Claude Opus 5.5,
+# Read+: twice through the chat's web-fetch tool
+# Access: open, https://arxiv.org/pdf/2304.09309
+# Source: Knight, M. M., Kokotanekova, R. and Samarasinha, N. H. (2023),
+# Source+: "Physical and Surface Properties of Comet Nuclei from Remote
+# Source+: Observations", https://arxiv.org/pdf/2304.09309 -- Table 1A gives
+# Source+: 1P/Halley's nucleus radius as 5.5 km, after Lamy et al. (2004).
+# Also: JPL's Small-Body Database gives an effective diameter of 11.0 km,
+# Also+: after the same Lamy et al. (2004), and the axes 14.9 x 8.2 km,
+# Also+: after Keller et al. (1987), not opened. The table typed before
+# Also+: read "15x8x8 km", which matches neither.
+
+COMET_HALE_BOPP_NUCLEUS_RADIUS_KM = 37
+# Unit: km
+# Status: measured V_SOURCED 2026-10-26 -- open full text
+# Figures: 2 -- the paper prints 37 +/- 3
+# Read: the abstract and section 3, 2026-10-26, Claude Opus 5.5 (a helper
+# Read+: session of the comets build), through the chat's web-fetch tool
+# Access: open, https://arxiv.org/pdf/1210.2785
+# Source: Szabo, G. M., Kiss, L. L., Pal, A., Kiss, C., Sarneczky, K.,
+# Source+: Juhasz, A. and Hogerheijde, M. R. (2012), "Evidence for Fresh
+# Source+: Frost Layer on the Bare Nucleus of Comet Hale-Bopp at 32 AU
+# Source+: Distance", https://arxiv.org/pdf/1210.2785 -- "The STM solution
+# Source+: is centered at 37+/-3 km size and 8.1+/-0.9% albedo"; a model
+# Source+: body of 37 km radius.
+# Also: Knight et al. (2023), Table 1A, gives the same 37 km radius after
+# Also+: this paper. JPL's Small-Body Database gives an effective diameter
+# Also+: of 60 +/- 20 km, after Fernandez (2002), not opened: 30 km as a
+# Also+: radius, which this paper's 37 +/- 3 does not reach.
+
+COMET_IKEYA_SEKI_NUCLEUS_RADIUS_KM = 4.3
+# Unit: km
+# Status: measured V_SOURCED 2026-10-26 -- open full text, an estimate
+# Figures: 2 -- the table prints 4.3
+# Read: Table 1 and its note, 2026-10-26, Claude Opus 5.5 (a helper
+# Read+: session of the comets build), through the chat's web-fetch tool
+# Access: open, https://www.astro.umd.edu/~mmk8a/docs/knightetal2010.pdf
+# Source: Knight, A'Hearn, Biesecker, Faury, Hamilton, Lamy and Llebaria
+# Source+: (2010), "Photometric Study of the Kreutz
+# Source+: Comets Observed by SOHO from 1996 to 2005", The Astronomical
+# Source+: Journal 139:926-949,
+# Source+: https://www.astro.umd.edu/~mmk8a/docs/knightetal2010.pdf --
+# Source+: Table 1 gives C/1965 S1 (Ikeya-Seki), before perihelion, a
+# Source+: nucleus radius of 4.3 km, estimated from its light curve after
+# Source+: Sekanina (2002).
+
+COMET_HYAKUTAKE_NUCLEUS_RADIUS_KM = 2.4
+# Unit: km
+# Status: measured V_SOURCED 2026-10-26 -- open full text
+# Figures: 2 -- the table prints 2.4 +/- 0.5
+# Read: Table 1A, column r_n, row C/1996 B2 (Hyakutake), 2026-10-26,
+# Read+: Claude Opus 5.5, twice through the chat's web-fetch tool
+# Access: open, https://arxiv.org/pdf/2304.09309
+# Source: Knight, M. M., Kokotanekova, R. and Samarasinha, N. H. (2023),
+# Source+: "Physical and Surface Properties of Comet Nuclei from Remote
+# Source+: Observations", https://arxiv.org/pdf/2304.09309 -- Table 1A gives
+# Source+: C/1996 B2 (Hyakutake)'s nucleus radius as 2.4 +/- 0.5 km, after
+# Source+: Lisse et al. (1999).
+# Also: Schleicher and Woodney (Icarus, accepted 2002; preprint
+# Also+: https://ftp.lowell.edu/pub/dgs/hyadustpreprint.pdf) find "that
+# Also+: Hyakutake's nucleus radius was indeed close to 2.4 km". JPL's
+# Also+: Small-Body Database gives a 4.2 km diameter it marks "value
+# Also+: unverified".
+
+COMET_3I_ATLAS_NUCLEUS_RADIUS_KM = 1.3
+# Unit: km
+# Status: measured V_SOURCED 2026-10-26 -- open full text, albedo assumed
+# Figures: 2 -- the paper prints 1.3+/-0.2
+# Read: the abstract, 2026-10-26, Claude Opus 5.5 (a helper session of the
+# Read+: comets build), through the chat's web-fetch tool
+# Access: open, https://arxiv.org/html/2601.21569v2
+# Source: Hui, Jewitt, Mutchler, Agarwal and Kim (2026), "Nucleus and Postperihelion Activity of Interstellar
+# Source+: Object 3I/ATLAS Observed by Hubble Space Telescope",
+# Source+: https://arxiv.org/html/2601.21569v2 -- "an effective radius of
+# Source+: 1.3+/-0.2 km if assuming a comet-like albedo pV=0.04".
+# Also: before perihelion only upper limits were published (Jewitt et
+# Also+: al. 2025, 2.8 km; https://arxiv.org/html/2508.02934v1); Cloete,
+# Also+: Loeb and Veres (2025) give a lower limit on the diameter of 5 km
+# Also+: from a model (https://arxiv.org/html/2509.21408v1), which this
+# Also+: measurement does not meet. The table typed before read 8 km.
+
+COMET_MAPS_NUCLEUS_DIAMETER_KM = 0.4
+# Unit: km
+# Status: measured V_SOURCED 2026-10-26 -- open full text, reported
+# Figures: 1 -- the paper prints 0.4
+# Read: the introduction, 2026-10-26, Claude Opus 5.5 (a helper session of
+# Read+: the comets build), through the chat's web-fetch tool
+# Access: open, https://arxiv.org/pdf/2607.25939. The estimate's own paper,
+# Access+: Zhang et al. (2026), Research Notes of the AAS 10(3):57, could
+# Access+: not be opened (its publisher refused the fetch).
+# Source: Sekanina and Krolikowska (2026), "Orbital Motion and
+# Source+: History of Sungrazing Comet C/2026 A1 (MAPS)",
+# Source+: https://arxiv.org/pdf/2607.25939 -- "the diameter of the nucleus
+# Source+: was estimated at 0.4 km by Zhang et al. (2026), based on their
+# Source+: infrared imaging of the comet with the James Webb Space
+# Source+: Telescope (JWST) on 2026 February 6-7".
+# Corrected: 2026-10-26 (L-491) -- the table typed before said "JWST,
+# Corrected+: March 2026"; the imaging was February 6-7.
+
+COMET_SCHAUMASSE_NUCLEUS_DIAMETER_KM = 2.6
+# Unit: km
+# Status: measured V_SOURCED 2026-10-26 -- open database page
+# Figures: 2 -- JPL prints 2.6
+# Read: phys_par, 2026-10-26, Claude Opus 5.5 (a helper session of the
+# Read+: comets build), through the chat's web-fetch tool
+# Access: open, https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=24P&phys-par=1.
+# Access+: The work it names, Scotti (1994), Bulletin of the AAS
+# Access+: 26:1375, could not be opened.
+# Source: JPL Small-Body Database, 24P/Schaumasse,
+# Source+: https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=24P&phys-par=1 --
+# Source+: "effective body diameter" 2.6 km, after Scotti (1994).
+
+COMET_HOWELL_NUCLEUS_DIAMETER_KM = 4.4
+# Unit: km
+# Status: measured V_SOURCED 2026-10-26 -- open database page
+# Figures: 2 -- JPL prints 4.4
+# Read: phys_par, 2026-10-26, Claude Opus 5.5, twice through the chat's
+# Read+: web-fetch tool
+# Access: open, https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=88P&phys-par=1.
+# Access+: The work it names, Scotti (1994), Bulletin of the AAS
+# Access+: 26:1375, could not be opened.
+# Source: JPL Small-Body Database, 88P/Howell,
+# Source+: https://ssd-api.jpl.nasa.gov/sbdb.api?sstr=88P&phys-par=1 --
+# Source+: "effective body diameter" 4.4 km, after Scotti (1994).
+# Corrected: 2026-10-26 (L-491) -- the table typed before read 3 km.
+
+COMET_TEMPEL_2_NUCLEUS_RADIUS_KM = 5.98
+# Unit: km
+# Status: measured V_SOURCED 2026-10-26 -- open full text
+# Figures: 3 -- the table prints 5.98 +/- 0.04
+# Read: Table 1A, column r_n, row 10P/Tempel 2, 2026-10-26, Claude Opus
+# Read+: 5.5, twice through the chat's web-fetch tool
+# Access: open, https://arxiv.org/pdf/2304.09309
+# Source: Knight, M. M., Kokotanekova, R. and Samarasinha, N. H. (2023),
+# Source+: "Physical and Surface Properties of Comet Nuclei from Remote
+# Source+: Observations", https://arxiv.org/pdf/2304.09309 -- Table 1A gives
+# Source+: 10P/Tempel 2's nucleus radius as 5.98 +/- 0.04 km, after Lamy et
+# Source+: al. (2009).
+# Also: Lamy, Toth, Fernandez and Weaver (2004), "The Sizes, Shapes,
+# Also+: Albedos, and Colors of Cometary Nuclei" (open,
+# Also+: https://physics.ucf.edu/~yfernandez/papers/comets2chapter/comets2reprint.pdf),
+# Also+: give semi-axes of 8 to 8.15 km and 4 to 4.3 km; JPL's Small-Body
+# Also+: Database an effective diameter of 10.6 km after them. The table
+# Also+: typed before read "16x9 km".
 
 # ============================================================
 # SAGITTARIUS A* AND GALACTIC-SCALE CONSTANTS

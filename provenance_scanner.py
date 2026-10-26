@@ -191,9 +191,11 @@ Known limitations and accepted residuals:
            stellar parameters verified against SIMBAD/Gaia DR3 April
            2026. V_STALE flag reflects real staleness risk as catalogs
            improve. Review when adding new stars, not standalone task.
-         - comet_visualization_shells.py COMET_NUCLEUS_SIZES and
-           COMET_FEATURE_THRESHOLDS: rendering geometry dicts, low
-           user-visible impact. Deferred until comet shell refactor.
+         - comet_visualization_shells.py COMET_FEATURE_THRESHOLDS:
+           a rendering geometry dict, low user-visible impact. Deferred
+           until comet shell refactor. (COMET_NUCLEUS_SIZES stood here
+           until 2026-10-26; it was printed in hovers, and L-491
+           replaced it with sourced rows in constants_new.py.)
          - constants_new.py Tier-2 items: all V_SOURCED (score 10 =
            V_SOURCED x C_PROPAGATING). Cited, not errors.
 
@@ -345,6 +347,9 @@ moves between tiers. Measured at 70202e3b: whole tree 281 either way;
 data_acquisition.py's one Tier-1 moves from orrery to stars, and the
 unrun patch_L436_1 in the root, which has no tag, moves from orrery to
 unclassified.)
+Module updated: October 26, 2026 with Anthropic's Claude Opus 5.5 (L-491:
+the known-exceptions list above no longer names COMET_NUCLEUS_SIZES,
+which is gone; no code changed.)
 
 Role: devtool
 Domain: dev_tools

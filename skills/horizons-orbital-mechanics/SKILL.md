@@ -1,14 +1,26 @@
 ---
 name: horizons-orbital-mechanics
 description: JPL Horizons API and orbital mechanics reference for the Paloma's Orrery project (astroquery Horizons queries, orbit_data_manager, osculating_cache_manager, idealized_orbits, apsidal_markers, spacecraft_encounters, close_approach_data, position_accuracy, orbital_period, period_fetch, path_plan). Use for any Paloma's Orrery task involving Horizons queries or ephemerides, coordinate center bodies, reference frames, osculating elements, orbit caches, a small body's position uncertainty (VEC_TABLE 2xr), orbital periods and the centre they are taken around, the drawn orbit and its markers' dates, which Horizons record serves a body (helio_id, a pinned comet record, a skip list), encounter or flyby resolution, or whenever a rendered orbit looks wrong or an ephemeris API returns empty. Do not use for projects other than Paloma's Orrery.
-fires_when: Horizons queries, centers, frames, osculating elements, encounters, comet record pinning, 2xr uncertainties, periods, the drawn orbit's centre, the Horizons check (horizons_check.py, its period comparison and the data sheets' re-read), the period fetch before it (period_fetch.py), which record serves a body (helio_id, re-pinning a comet, JPL's exact name, a body on a skip list), a spacecraft path's plan and its flybys (path_plan.py -- the Hill sphere, JPL's GM, the window and step, the orbiter rule for an arrival, a departure, a capture), a comet whose designation matches its own pieces
+fires_when: Horizons queries, centers, frames, osculating elements, encounters, comet record pinning, 2xr uncertainties, periods, the drawn orbit's centre, the Horizons check (horizons_check.py, its period comparison and the data sheets' re-read), the period fetch before it (period_fetch.py), which record serves a body (helio_id, re-pinning a comet, JPL's exact name, a body on a skip list), a spacecraft path's plan and its flybys (path_plan.py -- the Hill sphere, JPL's GM, the window and step, the orbiter rule for an arrival, a departure, a capture), a comet whose designation matches its own pieces, a comet on an open path's plan (its span, its TP, its perihelion), an entry asked by JPL's number in the Horizons check
 ---
 
 # Horizons and Orbital Mechanics Reference
 
-Read this file in 3 parts: lines 1-234, 235-414, 415-560.
+Read this file in 3 parts: lines 1-237, 238-426, 427-609.
 
-Skill version: 1.11 | 2026-10-25, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.12 | 2026-10-26, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 5398439. v1.12 (L-443, slice 2, build B part 2) adds A
+Comet on an Open Path to How a Path's Events Are Found: a comet marked
+open_path is planned by Tony's span ruling of 2026-10-24, from a year
+before its perihelion to a year after today, inside JPL's data; its
+record's TP, read from its data sheet in either of JPL's two forms, only
+places the first ask; the perihelion is found in JPL's daily positions
+and refined to the minute, and is the plan's one event. Comets are not
+among the bodies the spacecraft plans search, so keying them did not
+remake those. And to Where the Check Lives: an entry asked by a
+designation that is JPL's number is looked for in the small-body index
+by that number, and a path serves no period to confirm.
+Earlier: 1.11 | 2026-10-25, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 0c27f47a. v1.11 (L-443 build B, with L-470) adds the
 orbiter rule to How a Path's Events Are Found, by Tony's ruling of
 2026-10-24 ("yes that would work well"): the days a path spends inside
@@ -32,20 +44,10 @@ two passes; its window and step by spacecraft_encounters' own rule; made
 again on a 30-day cycle with the past carried. The Hill sphere was not
 in the design record: without it the first offline run took nearest
 approaches tens of millions of km from Mercury and the Moon for events.
-Earlier: 1.9 | 2026-10-22, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ bfb6c474. v1.9 (L-443, with L-470) adds Which Record
-Serves a Body: around the Sun a body with a helio_id is asked by it, in
-every reader; a TNO's small-body record is JPL's "integrated barycenter";
-a pinned comet is re-pinned to its newest record on Tony's word; JPL's
-exact name is read for each entry before it is served; an orbit JPL
-classes as open is not drawn as an ellipse; and a name on a skip list
-says which record failed around which centre, and is tested before it
-comes off (Tony, 2026-10-22: "some idiosyncrasies in Horizons are
-addressed with specific record numbers, which can change").
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
 on 2026-10-12, 2026-10-13 and 2026-10-14 (L-431), 2026-10-15
-(L-444, L-445), 2026-10-22 (L-443), 2026-10-24 (L-443) and 2026-10-25
-(L-443).
+(L-444, L-445), 2026-10-22 (L-443), 2026-10-24 (L-443), 2026-10-25
+(L-443) and 2026-10-26 (L-443).
 
 ## Contents
 
@@ -62,6 +64,7 @@ if this list and the headings disagree (L-418).
 - Checking an Entry Against JPL (L-395)
 - Where the Check Lives, and What It Compares (L-395, L-431 build 3)
 - How a Path's Events Are Found (L-443)
+  - A Comet on an Open Path (v1.12)
 - Reference Frame Diagnostic
 - Query Mechanics
 - Encounter and Flyby Resolution
@@ -382,6 +385,15 @@ build's record, documentation/HANDOFF_L431_build3_website_20261014.md.
   confirmation until day 30. The data sheets keep 30.
 - A small body's COMMAND ends with ';', sent as %3B, as JPL's own
   examples send it; a bare ';' in a URL can end the parameter early.
+- AN ENTRY ASKED BY A DESIGNATION THAT IS JPL'S NUMBER (v1.12, id_type
+  'designation' with a numeric id: C/2025 K1 as 1004075, by v1.11's
+  rule) is a small body, and is looked for in JPL's small-body lookup by
+  that number (its SPKID), whose name for 1004075 is "ATLAS (C/2025
+  K1)". Read as a major body it would fail.
+- A PATH SERVES NO PERIOD (v1.12): a spacecraft, or a comet on an open
+  path, has its period set to none before the check, so no period is
+  confirmed for a path. The check had confirmed periods for K1's pieces
+  from their cached elements.
 - The period: for an entry whose period was fetched, one ELEMENTS query
   as the orrery asked it -- the same COMMAND, CENTER the period's own
   centre, TLIST the period's own date written as a calendar Julian day,
@@ -512,6 +524,43 @@ first run against JPL is Tony's.
   Spacecraft Is Fetched by Its Plan): the encounter rule's window for a
   pass of the Sun at 0.3 AU runs about 50 days either side at 6-hour
   steps, some 400 points for a gentle curve.
+
+### A Comet on an Open Path (v1.12)
+
+Built 2026-10-26 (L-443, slice 2, build B part 2), in `path_plan.py`'s
+comets section, for the fourteen comets the orrery's object list marks
+`open_path`: ten hyperbolic comets, the three interstellar objects and
+piece C of C/2025 K1. An ellipse means nothing for an orbit that is
+open, so the website draws the comet's path from JPL's positions, as it
+does a spacecraft's.
+
+- THE SPAN is Tony's ruling of 2026-10-24
+  (documentation/COORD_L443_comet_span_ruling_20261024.md): "On the
+  comet window, yes but within the JPL served window which may be
+  less." From a year before its perihelion to a year after today, both
+  ends clipped to what JPL serves (`jpl_limit`, as for a spacecraft).
+  The two years are drawing choices, and the website's words say so. A
+  comet whose perihelion is more than a year after today is refused by
+  name: none of its path would be drawn.
+- THE PERIHELION IS FOUND, NOT READ. The record's TP, from the comet's
+  data sheet, only says where to look. JPL prints it as a Julian date
+  ("TP= 2460956.9397878055", C/2025 K1's record) or as a calendar day
+  with its fraction ("TP= 2007-Jan-12.7988436329", McNaught's, read
+  2026-10-26); `parse_tp` reads both. The first ask runs from three days
+  more than a year before that TP (`COMET_TP_SLACK_DAYS`) to a year
+  after today, daily, around the Sun. The nearest day to the Sun in it
+  is refined to the minute by the same two passes as a flyby, and that
+  minute places the span. A record with no TP is refused by name.
+- ONE EVENT, the perihelion, kind `perihelion`, with the window and
+  step of the encounter rule; the plan's kind is `comet`, and it keeps
+  `tp_jd` and `span_rule` (with whether each end was clipped to JPL).
+- ITS INPUTS are the id, id_type, the two margins and `COMET_RULE`
+  (now 1); the 30-day cycle is a spacecraft's.
+- COMETS ARE NOT SEARCHED BODIES. The spacecraft plans search the
+  bodies the object list names; a comet on an open path is left out
+  (`is_comet_path`). Without that, keying the fourteen would have
+  changed every spacecraft plan's inputs and remade all twelve, half an
+  hour of JPL. A comet's own plan searches only the Sun.
 
 ## Reference Frame Diagnostic
 

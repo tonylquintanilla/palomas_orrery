@@ -1,7 +1,7 @@
 """
 path_plan.py -- the orrery's plan for drawing each path the website
 serves: a spacecraft's flown and planned trajectory, and a comet on an
-open path (L-443, slice 2).
+open path around its perihelion (L-443, slice 2).
 
 WHY IT EXISTS
 
@@ -51,10 +51,20 @@ WHAT A PLAN IS
       searched  every body whose nearest approaches were looked for.
       made      the day the plan was made.
 
-    Comets on open paths are not planned yet. How much of a comet's path
-    is drawn was ruled on 2026-10-24
-    (documentation/COORD_L443_comet_span_ruling_20261024.md); they are
-    planned in the part of build B after the spacecraft.
+    A COMET ON AN OPEN PATH (an entry the list marks 'open_path': JPL
+    classes its orbit hyperbolic, or so near parabolic that its numbers
+    cannot tell) has a plan too, by Tony's ruling of 2026-10-24
+    (documentation/COORD_L443_comet_span_ruling_20261024.md): "On the
+    comet window, yes but within the JPL served window which may be
+    less." Its one event is its perihelion: the nearest day to the Sun in
+    JPL's daily positions, found to the minute by the same two passes,
+    with the encounter rule's window and step. Its span runs from a year
+    before that perihelion to a year after today (two drawing choices,
+    which the website's words say), both ends clipped to the limits JPL
+    names when it refuses. The record's own time of perihelion, TP from
+    its data sheet, only says where to ask; JPL's positions decide. A
+    comet is not searched for a spacecraft's flybys (its sheet gives no
+    GM), and is planned again every 30 days, its end moving with today.
 
 HOW AN EVENT IS FOUND
 
@@ -190,6 +200,9 @@ among a plan's inputs).
 Module updated: October 25, 2026 with Anthropic's Claude Opus 5.5
 (L-443, build B: the twelve keyed, so the temporary --preview flag and
 its list are gone; see RUN COMMAND).
+Module updated: October 26, 2026 with Anthropic's Claude Opus 5.5
+(L-443, build B part 2: comets on open paths, by the span ruling; see
+WHAT A PLAN IS).
 """
 
 import ast
@@ -267,7 +280,7 @@ def _value(node):
 
 
 FIELDS = ("name", "key", "id", "id_type", "helio_id", "helio_id_type",
-          "object_type", "start_date", "end_date")
+          "object_type", "start_date", "end_date", "open_path")
 
 
 def keyed_entries(text):
@@ -291,6 +304,13 @@ def is_spacecraft(f):
             and str(f.get("id", "")).startswith("-"))
 
 
+def is_comet_path(f):
+    """A comet drawn as a path: an entry the list marks 'open_path' (JPL
+    classes its orbit hyperbolic, or so near parabolic that its numbers
+    cannot tell; L-443, slice 2's comets)."""
+    return bool(f.get("open_path")) and not is_spacecraft(f)
+
+
 # Whose gravity a body's Hill sphere is reckoned against: the Moon's
 # against Earth's, every other body's against the Sun's.
 PRIMARY = {"301": "399"}
@@ -302,7 +322,7 @@ def searched_bodies(entries):
     out = [(n, "major", i, None) for n, i in MAJOR_BODIES]
     majors = set(i for _, i in MAJOR_BODIES)
     for f in entries:
-        if is_spacecraft(f):
+        if is_spacecraft(f) or is_comet_path(f):
             continue
         ident, id_type = served_identity(f)
         if ident is None or ident in majors:
@@ -872,6 +892,165 @@ def make_plan(fetch, path, bodies, today, rows, previous=None, pause=0.0,
             "searched_from": ymd(begin), "searched": searched}
 
 
+# ------------------------------------------------------------- comets
+
+# The span ruling of 2026-10-24 (documentation/COORD_L443_comet_span_
+# ruling_20261024.md): "On the comet window, yes but within the JPL served
+# window which may be less." A comet's path runs from a year before its
+# perihelion to a year after today, both ends clipped to JPL's data. The
+# two margins are drawing choices, and the website's words say so.
+COMET_BEFORE_PERIHELION_DAYS = 365
+COMET_AFTER_TODAY_DAYS = 365
+# How far either side of the record's own TP the first ask reaches, so
+# the perihelion found in JPL's positions lies inside it.
+COMET_TP_SLACK_DAYS = 3
+# The rule a comet's plan was made by, among its inputs.
+COMET_RULE = 1
+
+# A small body's data sheet prints its time of perihelion as a Julian date
+# ("TP= 2460956.9397878055", C/2025 K1's record, 2026-10-24) or as a
+# calendar day with its fraction ("TP= 2007-Jan-12.7988436329", McNaught's,
+# read 2026-10-26).
+TP = re.compile(r"\bTP=\s*(\d{4}-[A-Za-z]{3}-\d{1,2}(?:\.\d*)?|"
+                r"\d+\.\d*)")
+
+
+def parse_tp(text):
+    """JPL's time of perihelion from a small body's data sheet, as a
+    Julian date, or None where it gives none. Raises Unreachable when the
+    answer is not JPL's. It only says where to look: the perihelion
+    itself is found in JPL's positions."""
+    if "API VERSION" not in text:
+        raise Unreachable("the answer is not one of JPL's")
+    m = TP.search(text)
+    if not m:
+        return None
+    s = m.group(1)
+    if "-" not in s:
+        return float(s)
+    y, mon, day = s.split("-")
+    month = MONTHS.index(mon.upper()) + 1
+    whole = int(float(day))
+    return (hc.calendar_jd("%04d-%02d-%02d" % (int(y), month, whole))
+            + float(day) - whole)
+
+
+def jd_day(jd):
+    """The calendar day a Julian date falls on."""
+    return datetime.date.fromisoformat(jd_to_calendar(jd)[:10])
+
+
+def comet_inputs(path):
+    return {"rule": COMET_RULE, "id": path["id"],
+            "id_type": path.get("id_type"),
+            "span_rule": [COMET_BEFORE_PERIHELION_DAYS,
+                          COMET_AFTER_TODAY_DAYS],
+            "searched": ["10"]}
+
+
+def comet_rows_and_span(fetch, path, today, pause):
+    """(rows, first day, last day, tp_jd): the comet's daily positions
+    around the Sun from a year (and COMET_TP_SLACK_DAYS) before its
+    record's TP to a year after today, clipped to the limits JPL names
+    when it refuses. Raises Unreachable, or Refused."""
+    try:
+        sheet = fetch(sheet_url(path["id"], path.get("id_type")))
+    except hc.Unreachable as exc:
+        raise Unreachable(str(exc))
+    if pause:
+        time.sleep(pause)
+    tp = parse_tp(sheet)
+    if tp is None:
+        raise Refused("its JPL data sheet gives no time of perihelion (TP)")
+    tp_day = jd_day(tp)
+    if tp_day > today + datetime.timedelta(days=COMET_AFTER_TODAY_DAYS):
+        raise Refused("its perihelion, %s, is more than a year after today, "
+                      "past the end of what is drawn" % ymd(tp_day))
+    first = tp_day - datetime.timedelta(
+        days=COMET_BEFORE_PERIHELION_DAYS + COMET_TP_SLACK_DAYS)
+    last = today + datetime.timedelta(days=COMET_AFTER_TODAY_DAYS)
+    for _ in range(4):
+        try:
+            text = fetch(vectors_url(path["id"], path.get("id_type"),
+                                     "500@10", ymd(first), ymd(last),
+                                     COARSE_STEP))
+        except hc.Unreachable as exc:
+            raise Unreachable(str(exc))
+        if pause:
+            time.sleep(pause)
+        try:
+            return parse_vectors(text), first, last, tp
+        except ValueError as exc:
+            raise Unreachable("JPL's answer could not be read: %s" % exc)
+        except Refused as exc:
+            limit = jpl_limit(text)
+            if limit is None:
+                raise
+            if limit[0] == "after":
+                last = limit[1]
+            else:
+                first = limit[1]
+            if first >= last:
+                raise Refused("JPL's limits leave no span: %s" % exc)
+    raise Refused("JPL kept refusing the span after four tries")
+
+
+def make_comet_plan(fetch, path, today, found, pause=0.0, progress=None):
+    """One comet's plan: its perihelion, the nearest day to the Sun in
+    JPL's daily positions, found to the minute by the two passes, is its
+    one event, with the window and step of the encounter rule; its span
+    runs from a year before that perihelion to a year after today, inside
+    JPL's data. Raises Unreachable, Refused, and TimeUp."""
+    progress = progress or Progress()
+    rows, first, last, tp = found
+    origin = [(r[0],) + (0.0,) * 6 for r in rows]
+    series = daily_series(rows, origin)
+    days = nearest_days(series)
+    if not days:
+        raise Refused("its perihelion is not inside JPL's data, %s to %s"
+                      % (ymd(first), ymd(last)))
+    i = min(days, key=lambda k: series[k][1])
+    progress.check()
+    sun = ("Sun", "major", "10", None)
+    try:
+        fjd, d, v = refine(fetch, path, sun, series[i][0], pause)
+    except Refused as exc:
+        raise Unreachable("JPL gave no positions around its perihelion near "
+                          "%s (%s)" % (jd_to_calendar(series[i][0]), exc))
+    peri = jd_day(fjd)
+    start = max(first, peri - datetime.timedelta(
+        days=COMET_BEFORE_PERIHELION_DAYS))
+    end = min(last, today + datetime.timedelta(days=COMET_AFTER_TODAY_DAYS))
+    w0, w1, step = window_and_step(fjd, d, v)
+    event = {"body": "Sun", "body_id": "10", "kind": "perihelion",
+             "stays": False, "closest": jd_to_calendar(fjd),
+             "jd": round(fjd, 6), "dist_km": round(d, 1),
+             "v_kms": round(v, 3),
+             "ideal_step_s": round(ideal_step_seconds(d, v), 1),
+             "hill_km": None, "window": [w0, w1], "step": step}
+    progress.say("%s: perihelion %s TDB, %s km from the Sun, %.3f km/s"
+                 % (path["name"], jd_to_calendar(fjd),
+                    "{:,.0f}".format(d), v))
+    return {"name": path["name"], "horizons_id": path["id"],
+            "id_type": path.get("id_type"), "kind": "comet",
+            "made": ymd(today),
+            "inputs_sha256": inputs_sha256(comet_inputs(path)),
+            "span": {"start": ymd(start), "end": ymd(end)},
+            "span_rule": {"before_perihelion_days":
+                          COMET_BEFORE_PERIHELION_DAYS,
+                          "after_today_days": COMET_AFTER_TODAY_DAYS,
+                          "clipped_to_jpl": [start == first and start
+                                             > peri - datetime.timedelta(
+                                                 days=COMET_BEFORE_PERIHELION_DAYS),
+                                             end == last and end < today
+                                             + datetime.timedelta(
+                                                 days=COMET_AFTER_TODAY_DAYS)]},
+            "tp_jd": round(tp, 6),
+            "backbone": {"step": BACKBONE_STEP, "thin_tol_au": THIN_TOL_AU},
+            "events": [event], "carried": 0, "searched_from": ymd(first),
+            "searched": ["Sun"]}
+
+
 def kind_label(event):
     """The run's word for an event's kind; a plan made by rule 1 has
     none."""
@@ -914,6 +1093,7 @@ def run(root, fetch, today, check_all=False, pause=PAUSE_SECONDS,
     with open(os.path.join(root, SOURCE), "r", encoding="utf-8") as handle:
         entries = keyed_entries(handle.read())
     paths = [f for f in entries if is_spacecraft(f)]
+    comets = [f for f in entries if is_comet_path(f)]
     bodies = searched_bodies(entries)
     path_file = os.path.join(root, PLANS)
     old = {}
@@ -922,7 +1102,7 @@ def run(root, fetch, today, check_all=False, pause=PAUSE_SECONDS,
             old = json.load(handle)
     plans = dict(old.get("plans") or {})
     lines, asked, unreachable, not_planned = [], [], [], []
-    for gone in sorted(set(plans) - set(f["key"] for f in paths)):
+    for gone in sorted(set(plans) - set(f["key"] for f in paths + comets)):
         del plans[gone]
         lines.append("  %-22s removed: no longer a served path" % gone)
     todo = []
@@ -940,11 +1120,22 @@ def run(root, fetch, today, check_all=False, pause=PAUSE_SECONDS,
         else:
             lines.append("  %-22s current (%s), %d events"
                          % (key, why, len(plans[key]["events"])))
+    comets_todo = []
+    for f in comets:
+        key = f["key"]
+        is_due, why = due(plans.get(key), comet_inputs(f), today)
+        if is_due or check_all:
+            comets_todo.append((f, why if is_due else "asked with --all"))
+        else:
+            lines.append("  %-22s current (%s), its perihelion %s"
+                         % (key, why, plans[key]["events"][0]["closest"]
+                            if plans[key].get("events") else "not found"))
+    every = todo + comets_todo
     progress.say("started %s: %d path(s) listed, %d due%s"
-                 % (datetime.datetime.now().strftime("%H:%M:%S"), len(paths),
-                    len(todo),
+                 % (datetime.datetime.now().strftime("%H:%M:%S"),
+                    len(paths) + len(comets), len(every),
                     (" (%s); asking JPL for each one's span first"
-                     % ", ".join(f["name"] for f, _ in todo)) if todo
+                     % ", ".join(f["name"] for f, _ in every)) if every
                     else "; JPL is not asked"))
     found, firsts, lasts, left = {}, [], [], []
     for f, why in todo:
@@ -1025,6 +1216,45 @@ def run(root, fetch, today, check_all=False, pause=PAUSE_SECONDS,
                          "step %-4s %s" % (
                              e["closest"], e["body"], e["dist_km"],
                              e["v_kms"], e["step"], kind_label(e)))
+    for f, why in comets_todo:
+        key = f["key"]
+        if progress.over():
+            left.append(key)
+            lines.append("  %-22s left for the next run (the time limit); "
+                         "its previous plan is kept" % key)
+            continue
+        if unreachable:
+            lines.append("  %-22s not asked: JPL was unreachable earlier "
+                         "this run; its previous plan is kept" % key)
+            continue
+        try:
+            got = comet_rows_and_span(fetch, f, today, pause)
+            progress.say("%s: JPL has positions from %s to %s"
+                         % (f["name"], ymd(got[1]), ymd(got[2])))
+            plan = make_comet_plan(fetch, f, today, got, pause, progress)
+        except Unreachable as exc:
+            unreachable.append("%s (%s)" % (key, exc))
+            lines.append("  %-22s UNREACHABLE: %s; its previous plan is "
+                         "kept" % (key, exc))
+            continue
+        except Refused as exc:
+            not_planned.append(key)
+            lines.append("  %-22s NOT PLANNED: %s" % (key, exc))
+            continue
+        except TimeUp:
+            left.append(key)
+            lines.append("  %-22s left for the next run (the time limit); "
+                         "its previous plan is kept" % key)
+            continue
+        plans[key] = plan
+        asked.append(key)
+        write_plans(path_file, plans)
+        progress.say("%s: planned; saved" % f["name"])
+        e = plan["events"][0]
+        lines.append("  %-22s planned (%s): span %s to %s, perihelion %s "
+                     "TDB, %.0f km, %.3f km/s, step %s"
+                     % (key, why, plan["span"]["start"], plan["span"]["end"],
+                        e["closest"], e["dist_km"], e["v_kms"], e["step"]))
     if rows is not None and rows.refused:
         lines.append("  Not searched: "
                      + "; ".join(sorted(rows.refused.values())))

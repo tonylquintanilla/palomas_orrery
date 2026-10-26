@@ -648,6 +648,17 @@ Module updated: October 25, 2026, late, with Anthropic's Claude Opus 5.5
 (a spacecraft's companions on L-443; L-487 built; L-488 new;
 interactive-exhibit 1.25, protocol v3.113), built on 967d150 and gallery
 82a7ab1.
+Module updated: October 26, 2026 with Anthropic's Claude Opus 5.5 (the
+two design talks of Oct 25 recorded: L-485 brought up to its rulings,
+L-462 reconsidered; L-489, compositions, new, with L-486 and L-488
+under it; L-490, the legacy list, new), built on 5398439 and gallery
+9223cd1.
+Module updated: October 26, 2026 with Anthropic's Claude Opus 5.5 (the
+comets of slice 2 built, on L-443; L-491, the comet nucleus sizes, new
+and done in the same build; L-492, the stale scale and file-size
+sentences, new; L-490's first question named; interactive-exhibit
+1.26, horizons-orbital-mechanics 1.12, gallery-cache-builder 1.13,
+protocol v3.114), built on 5398439 and gallery 9223cd1.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -865,7 +876,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*248 live items; 232 need attention (`!`); 165 RICE-scored; 233 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*252 live items; 236 need attention (`!`); 165 RICE-scored; 233 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1007,14 +1018,14 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-432 | Objects drawn in the default goldenrod (orrery, colours) | OPEN | -- | 2026-10-11 |
 | ! | L-434 | Stored drawings for the other dot-cloud shells (orrery + gallery) | OPEN | -- | 2026-10-22 |
 | ! | L-435 | Standing rulings that are method, held only on Tony's page (skills, records) | OPEN | -- | 2026-10-12 |
-| ! | L-443 | The rest of the orrery's objects come to the website as plotted positions (gallery + orrery, objects) | OPEN | -- | 2026-10-25 |
+| ! | L-443 | The rest of the orrery's objects come to the website as plotted positions (gallery + orrery, objects) | OPEN | -- | 2026-10-26 |
 | ! | L-449 | A cache build dropped the 82 build-run records it should have carried (gallery, cache builder) | OPEN | -- | 2026-10-17 |
 | ! | L-454 | A drawn device for edges that move: the magnetopause, the bow shock and their kind (orrery + gallery, design) | OPEN | -- | 2026-10-22 |
 | ! | L-456 | What a visitor reads, from Earth's Mode 5 look: body radii, sources as a list with live links, Celsius for Earth's surface and air (gallery + orrery) | OPEN | -- | 2026-10-21 |
 | ! | L-458 | A "report a problem" link in every room's i panel (gallery, interactive) | OPEN | -- | 2026-10-22 |
 | ! | L-459 | A monthly run for slow checks, started by the Daily Run (gallery + orrery, maintenance) | OPEN | -- | 2026-10-20 |
 | ! | L-461 | The Daily Run confirms the orrery it pulled is the one Tony pushed (gallery, Daily Run) | OPEN | -- | 2026-10-25 |
-| ! | L-462 | The orrery maintenance run, a short form for small patches (orrery, maintenance) | OPEN | -- | 2026-10-22 |
+| ! | L-462 | The orrery maintenance run, a short form for small patches (orrery, maintenance) | OPEN | -- | 2026-10-26 |
 | ! | L-465 | The Sun room draws the Sun's pole and its direction of spin, as the orrery does (gallery, the Sun room) | OPEN | -- | 2026-10-22 |
 | ! | L-466 | Every drawing starts and stops where a served row says (orrery + gallery, the Sun's slice and Earth's) | OPEN | -- | 2026-10-22 |
 | ! | L-467 | The scanner credits a display line with a citation it only sits near (orrery, provenance scanner) | OPEN | -- | 2026-10-21 |
@@ -1023,10 +1034,14 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-476 | The orrery's whole-path plots draw by the same path plan as the website (orrery, spacecraft and comets) | OPEN | -- | 2026-10-24 |
 | ! | L-483 | A room for C/2025 K1 and its pieces, the first comet room (gallery, exhibits) | OPEN | -- | 2026-10-24 |
 | ! | L-484 | The website and the orrery agree on every object both draw, or the difference is written down (orrery + gallery, objects; method for interactive-exhibit) | OPEN | -- | 2026-10-25 |
-| ! | L-485 | A nightly unattended run of the routines (orrery + gallery, maintenance) | OPEN | -- | 2026-10-24 |
-| ! | L-486 | A view carried into a room (gallery, the rooms) | OPEN | -- | 2026-10-24 |
+| ! | L-485 | A nightly unattended run of the routines (orrery + gallery, maintenance) | OPEN | -- | 2026-10-26 |
+| ! | L-486 | A view carried into a room (gallery, the rooms) | OPEN | -- | 2026-10-26 |
 | ! | L-487 | Each body's description in the i panel, one bullet per sentence (gallery, the i panel) | OPEN | -- | 2026-10-25 |
-| ! | L-488 | Solar features beside a spacecraft in the Solar System room, such as the heliopause (gallery, the rooms) | OPEN | -- | 2026-10-25 |
+| ! | L-488 | Solar features beside a spacecraft in the Solar System room, such as the heliopause (gallery, the rooms) | OPEN | -- | 2026-10-26 |
+| ! | L-489 | Compositions: a curated view within a room, authored in the editor (gallery, the rooms) | OPEN | -- | 2026-10-26 |
+| ! | L-490 | What the website leans on outside its two repositories, for when Tony cannot work it (orrery + gallery, legacy) | OPEN | -- | 2026-10-26 |
+| ! | L-491 | The comet nucleus sizes the orrery's comet hover prints, sourced (orrery, the words a visitor reads) | OPEN | -- | 2026-10-26 |
+| ! | L-492 | The orrery's stale "manual scale" and "MB per frame" sentences come out of its hovers, as a class (orrery, the words a visitor reads) | OPEN | -- | 2026-10-26 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1437,8 +1452,206 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
+#### [L-492] The orrery's stale "manual scale" and "MB per frame" sentences come out of its hovers, as a class (orrery, the words a visitor reads)
+<!-- L:492 status:OPEN upd:2026-10-26 section:A flag: rice: -->
+- **Opened 2026-10-26** from
+  `documentation/COORD_stale_scale_sentences_ruling_20261026.md`
+  (Claude Fable 5.1's coordination note, zero code), which asked for an
+  item at the next records patch.
+- **Tony, Oct 26, 11:23:** "we are near the end of the symbols slice
+  and we still have over 100 tier 1 in the orrery. Are these missing
+  sources really tier 1?" Then, at 11:30, asked whether the stale
+  manual-scale and file-size sentences should come out of the hovers as
+  a class, in a small patch at the next convenient session: "Yes."
+- **The ruling is removal, not an exception:** the two sentence classes
+  leave the orrery's visitor-facing hover and info text; nothing is
+  added to `data/provenance_exceptions.json`.
+- **Why they are stale:** since Tony's ruling of Oct 18-19 every orrery
+  view opens on the farthest thing drawn plus 20 percent, so nobody sets
+  a manual scale to see a shell; and a frame's export size is a note for
+  the author, not a fact about a body.
+- **The class, by file, counted by lines at 5398439 (the note's section
+  3):**
+  - Manual-scale instructions, about 110 lines: info_dictionary.py 58;
+    shell_configs.py 35; jupiter 5; earth, mercury, neptune, saturn,
+    uranus 4 each; asteroid_belt, eris, planet9, pluto 3 each; mars,
+    venus 2 each; moon 1 (each a *_visualization_shells.py).
+  - File-size notes, about 85 lines: shell_configs.py 26; saturn,
+    jupiter 8 each; neptune, uranus 7 each; pluto 6; eris 5;
+    asteroid_belt 4; planet9 2; info_dictionary.py 7.
+  - Left alone: code comments that discuss manual scale as a mode
+    (palomas_orrery.py, shared_utilities.py, spacecraft_encounters.py,
+    save_utils.py); the star GUI's "Manual Scale (Light-Years):" label,
+    a control; worksheet_checker.py's pattern and its test fixture,
+    which exist to recognise this class.
+- **What the build checks first (the note's section 4):** a line that
+  also says what to plot with ("PLOT WITH JUPITER AND SATURN") keeps
+  that half, the orrery's form of the website's companions; a line that
+  cannot be split cleanly goes to Tony as a list. What
+  `save_utils.py` does with the asterisked lines it calls useful. No
+  dangling breaks in a hover. The scanner's change predicted by name.
+  ASCII and LF.
+**Gap:** its own small orrery session after slice 2's comets: the
+agentic pre-test on a throwaway copy, one patch, the maintenance run,
+Tony's look at three hovers (a Pluto, a Venus and a spacecraft), push.
+Tony-action (decide): any line the split leaves unclear, from the list.
+**Ref:** `documentation/COORD_stale_scale_sentences_ruling_20261026.md`;
+`info_dictionary.py`; `shell_configs.py`; the
+`*_visualization_shells.py` files; `save_utils.py`; L-491.
+
+#### [L-491] The comet nucleus sizes the orrery's comet hover prints, sourced (orrery, the words a visitor reads)
+<!-- L:491 status:OPEN upd:2026-10-26 section:A flag: rice: -->
+- **Opened and built 2026-10-26, to run** in the comets session of slice 2
+  (L-443). Tony, asking about the orrery's Tier-1 findings: "Will these
+  tier 1 sources be addressed in this slice?", quoting Claude's note
+  that `COMET_NUCLEUS_SIZES`, sixteen sizes typed from memory in
+  `comet_visualization_shells.py`, was "the nearest of the 112 to live
+  work". Then: "Yes on all and bring the sourcing into the ledger and
+  into this slice."
+- **Built** (orrery patch_L443_20): each size was looked for in JPL's
+  Small-Body Database and in papers that can be opened. Nine are rows
+  in `constants_new.py`, section COMET NUCLEUS SIZES, each in the form
+  its source gives, a radius or a diameter, with its Read, Access and
+  Source lines: Halley 5.5 km radius, Hale-Bopp 37, Ikeya-Seki 4.3 (an
+  estimate from its brightness before perihelion), Hyakutake 2.4,
+  3I/ATLAS 1.3 (measured by Hubble after perihelion, assuming a dark
+  surface), Tempel 2 5.98; MAPS 0.4 km diameter (from James Webb Space
+  Telescope images), Schaumasse 2.6, Howell 4.4. Six had no size
+  anywhere that could be opened and came out: NEOWISE, ISON, West,
+  Lemmon, Wierzchos and PANSTARRS; their hovers print no size. Four
+  typed values were wrong against every source: Halley, Tempel 2,
+  Howell and 3I/ATLAS. The hover now says radius or diameter;
+  `nucleus_size_line` builds it from the rows. The table's entry left
+  `data/provenance_exceptions.json`. The search, the disagreements and
+  what could not be opened:
+  `documentation/CHECK_L491_comet_nucleus_sizes_20261026.md`.
+- **Checked in the session:** the comet's traces, built on the live
+  path for every comet in the table at four distances, are the same as
+  before, name for name; only the hover's size line changed.
+- **The scanner's change, by name:** `COMET_NUCLEUS_SIZES` leaves the
+  findings and the exceptions file; the nine rows score as sourced. The
+  table was already an exception, so the whole tree's count does not
+  move (276 in the session's run).
+**Gap:** Tony's run of patch_L443_20 and the orrery maintenance run;
+then this closes. Tony-action (do), not blocking: the gallery cards
+that carry a comet hover were exported with the old sizes and change
+only when re-exported through Gallery Studio.
+**Ref:** `documentation/CHECK_L491_comet_nucleus_sizes_20261026.md`;
+`constants_new.py` (COMET NUCLEUS SIZES); `comet_visualization_shells.py`;
+`data/provenance_exceptions.json`; L-443; L-492.
+
+#### [L-490] What the website leans on outside its two repositories, for when Tony cannot work it (orrery + gallery, legacy)
+<!-- L:490 status:OPEN upd:2026-10-26 section:A flag: rice: -->
+- **The first question, 2026-10-26** (Claude Fable 5.1's note on this
+  item, carried by Tony): who besides Tony can hold the accounts, the
+  GitHub account and the Google sign-in. It is Tony's and Paloma's to
+  settle, and it comes before the rest of the list. Discovery and
+  repair stay apart.
+- **Tony, 2026-10-25,** at L-485's design talk
+  (`documentation/DESIGN_L485_nightly_run_rulings_20261025.md`, section
+  6): "This website is a legacy gift for Paloma."
+- **From the record:** beyond the nightly run (L-485), the things the
+  site leans on that are not in these two repositories, each to be
+  named, its failure mode written down, and its failure made visible
+  rather than silent (L-485's R4). The record's first names: who
+  besides Tony can hold the GitHub account and the Google sign-in;
+  JPL Horizons' interface; the Plotly library served from an outside
+  address; GitHub Pages itself; GitHub's pause of scheduled workflows
+  in a repository with no commits for sixty days.
+- Discovery first, one list; remediation later, in slices (The Braid).
+  Tony's to shape at a talk of its own.
+- **Opened 2026-10-26** in the records patch for L-485 and L-489, on
+  Tony's answer in chat that it be an item of its own.
+**Gap:** Tony-action (decide): who besides you can hold the accounts,
+with Paloma, first. Tony-action (decide): when the legacy talk happens;
+it does not block L-485. Then discovery: one list, each entry with its
+failure mode and how its failure shows.
+**Ref:** `documentation/DESIGN_L485_nightly_run_rulings_20261025.md`
+(sections 4 and 6); L-485.
+
+#### [L-489] Compositions: a curated view within a room, authored in the editor (gallery, the rooms)
+<!-- L:489 status:OPEN upd:2026-10-26 section:A flag: rice: -->
+- **Opened 2026-10-26** from the design talk of Oct 25, evening
+  (`documentation/DESIGN_compositions_rulings_20261025.md`, Claude
+  Fable 5.1's record, zero code). Prompted by build B's finding that
+  drawing the Sun's far shells with Voyager's path breaks the Solar
+  System room's rule that a body's shells live in its own room (L-488).
+- **Tony, in the talk:** "The difference is that the objects list in
+  the orrery is basically flat. We can combine any object and feature.
+  In the website the room structure is not flat. Thoughts?" Then:
+  "What's new here is the curatorial element. Up to now it's all
+  general rules for all rooms. Specific curatorial decisions by room is
+  a new approach. Perhaps this could be part of gallery editor." His two
+  examples: "solar system room, spacecraft, voyager 1 room: object +
+  sun, earth, mars, Jupiter, Saturn, Uranus, Neptune, Pluto." And: "sun
+  room, major planets + Pluto, voyager 1 and 2 room: earth, mars,
+  Jupiter, Saturn, Uranus, Pluto, f corona, Alfven surface, termination
+  shock, heliopause."
+- **Tony's rulings, Oct 25:**
+  - C1, the shape, put to him and confirmed ("Yes"): a composition is a
+    named selection from what its host room can draw, authored in the
+    editor, served as data, with its own address.
+  - C2, an interpretation. Tony: "and a way to explain what it shows,
+    an interpretation. Maybe in the info panel." Each composition
+    carries words saying what the view shows and why it matters, in the
+    i panel, beside the sources that back it.
+  - C3, a spacecraft is a story. Tony: "spacecraft are not just
+    missions they are stories, why there were made, what they find,
+    etc. they weave together the astronomy and the human exploration.
+    And yes we can source that story from nasa, esa, etc." The story is
+    sourced, not recalled, under the provenance rules already in force:
+    a claim about what a mission found is cited to the agency's page; an
+    agency summary that names no source is a lead, read one layer down
+    (Tony's ruling of Oct 21); a number in it is a served number; a
+    claim that cannot be sourced is left out with the gap noted.
+- **The principle, from the record:** the orrery is flat because its
+  user is its author; the website is not, because its user is a visitor
+  on a phone, and the rooms are the curation. General rules for every
+  room stay method, in the skills; compositions are curation, Tony's,
+  and are data.
+- **Claude's reading in the record, for the design talk, not ruled:**
+  a composition is a served list (its host room, the keys it ticks, the
+  frame it opens on, a title, the interpretation), read as the arrival
+  block is read, with no room built in code for it. The exhibit store
+  editor (`tools/exhibit_store_editor.py`, writing through
+  `tools/store_writer.py`) gains a section that writes it, under the
+  same checks as the served words, plus a cache check that it names
+  only keys the cache serves. A composition picks only from what its
+  host room can draw: example 1 costs almost nothing once slice 2 is
+  live; example 2 needs the Sun room to draw planets and paths, which
+  is a build. "Room" stays the code-level thing; a composition gets its
+  own noun and its own address. The room rule is restated, not broken:
+  a shell may be listed in several compositions and is stored once.
+- **Under this item:**
+  - L-486 (a view carried into a room): largely answered, by the
+    record's reading: a composition is a carried view the author
+    composed once, on purpose.
+  - L-488 (the heliopause beside a spacecraft): Voyager at the
+    heliopause is the first composition that needs the Sun's far shells
+    in the Solar System room, or the planets and paths in the Sun room;
+    which host is Tony's curatorial call, with the discovery list in
+    hand.
+  - L-483 (a comet room) would become, by the record's reading, the
+    second composition, hosted in the Solar System room once it draws
+    the comet and its pieces. Not ruled; L-483 keeps its own Gap.
+- **Sequence, from the record:** after slice 2 (L-443). Discovery first
+  (The Braid): one list of what each room can draw today against what
+  the first few compositions need, so the gap is countable before
+  anything is built. Then the editor's section and the served shape,
+  with example 1 first; then the Sun room's growth, if example 2 still
+  wants it.
+**Gap:** Tony-action (decide): the noun, "view", "scene" or another
+word. Tony-action (decide): the first composition to build, example 1
+(Voyager 1 with its planets, in the Solar System room) recommended.
+Then the discovery list; then the build. Deferred on Where We Are,
+after slice 2.
+**Ref:** `documentation/DESIGN_compositions_rulings_20261025.md`;
+gallery `interactive.html` (the rooms, the arrival block),
+`tools/exhibit_store_editor.py`, `tools/store_writer.py`; L-486; L-488;
+L-483; L-443.
+
 #### [L-488] Solar features beside a spacecraft in the Solar System room, such as the heliopause (gallery, the rooms)
-<!-- L:488 status:OPEN upd:2026-10-25 section:A flag: rice: -->
+<!-- L:488 status:OPEN upd:2026-10-26 section:A flag: rice: -->
 - **Tony, 2026-10-25, night,** after his look at Voyager 1: "Another
   thought for voyager and maybe future missions add relevant solar
   feature like the heliopause."
@@ -1449,11 +1662,20 @@ as an archive of the prioritization thinking -- no cleanup on close.
   drawing it here is a Sun shell outside the Sun room, the question
   L-486 asks for any room. Tony: "Yes please on all your suggestions,"
   which included keeping this for a design talk.
-**Gap:** a design talk, with L-486: which Sun features a spacecraft
+- **2026-10-26: under L-489 (compositions),** opened from the design
+  talk of Oct 25, evening
+  (`documentation/DESIGN_compositions_rulings_20261025.md`). By that
+  record's reading, Voyager at the heliopause is the first composition
+  that needs the Sun's far shells in the Solar System room, or the
+  planets and paths in the Sun room.
+**Gap (replaces the one below, 2026-10-26):** carried by L-489: which
+room hosts Voyager at the heliopause, Tony's curatorial call, with
+L-489's discovery list in hand.
+**Gap (superseded above, 2026-10-26):** a design talk, with L-486: which Sun features a spacecraft
 brings into the Solar System room, at that room's scale, and whether the
 rule that a body's shells live in its own room changes.
 **Ref:** gallery `interactive.html` (the Solar System room, the Sun
-room's heliopause and termination shock); L-486; L-443.
+room's heliopause and termination shock); L-486; L-489; L-443.
 
 #### [L-487] Each body's description in the i panel, one bullet per sentence (gallery, the i panel)
 <!-- L:487 status:OPEN upd:2026-10-25 section:A flag: rice: -->
@@ -1488,7 +1710,7 @@ where the room shows them.
 `celestial_objects.py` (mission_info); L-443.
 
 #### [L-486] A view carried into a room (gallery, the rooms)
-<!-- L:486 status:OPEN upd:2026-10-24 section:A flag: rice: -->
+<!-- L:486 status:OPEN upd:2026-10-26 section:A flag: rice: -->
 - **Tony, 2026-10-24, night,** in his run record (`documentation/WHERE_WE_ARE_10-24-26_1927_run_record.md`):
   "an idea for consideration. in the orrery, the sun features can be
   combined with other objects, like say the earth's orbit. in the
@@ -1510,12 +1732,22 @@ where the room shows them.
   Earth room is centred on Earth. Carrying a selection means a room
   learns to draw the other room's objects at its scale. The duplicated
   events Tony names are things a room already knows how to draw.
-**Gap:** a design talk of its own, after slice 2 (Deferred on Where We
+- **2026-10-26: under L-489 (compositions),** opened from the design
+  talk of Oct 25, evening
+  (`documentation/DESIGN_compositions_rulings_20261025.md`). That
+  record's reading: this item is largely answered by a composition, a
+  view the author composed once, on purpose, instead of one a visitor
+  carries in at the wrong scale.
+**Gap (replaces the one below, 2026-10-26):** carried by L-489: settled
+at its design talk; this item closes with it, or keeps whatever a
+composition does not answer.
+**Gap (superseded above, 2026-10-26):** a design talk of its own, after slice 2 (Deferred on Where We
 Are).
-**Ref:** gallery `interactive.html` (the rooms, `?exhibit=`); L-483.
+**Ref:** gallery `interactive.html` (the rooms, `?exhibit=`); L-483;
+L-489.
 
 #### [L-485] A nightly unattended run of the routines (orrery + gallery, maintenance)
-<!-- L:485 status:OPEN upd:2026-10-24 section:A flag: rice: -->
+<!-- L:485 status:OPEN upd:2026-10-26 section:A flag: rice: -->
 - **Tony, 2026-10-24, night,** in his run record (`documentation/WHERE_WE_ARE_10-24-26_1927_run_record.md`): "i am
   thinking of revising the idea of an automated run at midnight every
   day, with all the daily and 30-day run routines except the messages.
@@ -1530,11 +1762,93 @@ Are).
   line to hold: the run fetches, generates and checks unattended;
   committing and pushing stay Tony's, from a short report in the
   morning.
-**Gap:** a design talk: which routines, in what order, the morning
+- **Corrected 2026-10-26:** the note above is overturned twice by
+  Tony's rulings of Oct 25. The checkers, not Tony, gate the nightly
+  push (R1, below), and no machine of his wakes: the run is on GitHub's
+  computers (R3). The note is kept as the record of the first idea.
+- **The design talk, 2026-10-25**
+  (`documentation/DESIGN_L485_nightly_run_rulings_20261025.md`, Claude
+  Fable 5.1's record, zero code). The purpose, Tony at 13:11: "There are
+  really only two reasons for automation: keeping a cadence of midnight
+  runs and fully automated in the event I cannot work the website. So I
+  would want to move the 30 day checks to the automated run not just
+  the maintenance run. This website is a legacy gift for Paloma."
+  Earlier in the talk, on a run that would still need his push each
+  morning: "Well if I'm pushing anyway there's really no gain."
+- **Tony's rulings, Oct 25:**
+  - R1, the checkers are the gate for the nightly push. Tony: "I think
+    we have enough safeguards." Put to him and confirmed by his going on
+    to the next question: the push happens only on a clean run (every
+    gating checker passes and the cache swap succeeded; one red line
+    and nothing is committed, and the previous cache stays live); the
+    nightly commit touches only what the tools write (the served cache
+    under `data/solar-system/`, the run records, the swap log, the
+    pulled export and its mirror, the guest book file; in the orrery,
+    the data files its 30-day tools write), never code, a page or a word
+    a visitor reads, and a run that would change anything else fails
+    instead of committing; a failed night is visible, in a dated log and
+    the dashboard's last-run line.
+  - R2, the 30-day checks move inside the automation: the Horizons
+    check, the period fetch, the path plan's re-check, the link check.
+    Otherwise the website's own gate, Horizons confirmations within 30
+    days, would stop every push a month after Tony's last orrery run.
+  - R3, it runs on GitHub's computers (GitHub Actions), not Tony's.
+    Tony: "Yes on running on GitHub." The plan to wake a sleeping
+    machine is not built.
+  - R4, outside failure points are reported, never halting. Tony: "the
+    other failure points are beyond our control and should be reported
+    but not halt the rest of the run or future runs." The guest book's
+    Google sign-in expiring, JPL changing its interface or being down, a
+    source address no longer answering, an outside library's address
+    failing: each is logged, and the rest of the run and the next
+    night's go on.
+  - R5, the guest book step reports and continues: the run lists the
+    form's new messages in the log; approving, replying and pinning stay
+    Tony's. From his note of Oct 24, above: "unless the autorun just
+    reports any new messages and continues."
+- **Proposed by Claude in the talk, not ruled:**
+  - P1, awaiting Tony's word at the build's design talk: when a 30-day
+    check disagrees (a Horizons DISAGREES, a comet with a newer record,
+    a period JPL now gives differently), that body keeps its last
+    confirmed values, whose fetched date the hover and the i panel
+    already print, and the disagreement is logged where a reader finds
+    it. The automation never decides one.
+  - P2, the orrery tools that run at night: period_fetch.py,
+    horizons_check.py, path_plan.py, export_objects.py,
+    export_constants.py, export_drawings.py and the link check. Not the
+    parts of the maintenance run that judge code: the provenance scanner
+    as a gate, the constants change report, the reset-completeness test.
+  - P3, two workflows, one per repository: the orrery's first, the
+    website's about an hour later, each pushing only to its own
+    repository with GitHub's built-in token, so no cross-repository
+    credential exists to renew; scheduled off the hour (for example
+    23:17 and 00:47 UTC).
+  - P4, the run pushes from night one, and Tony reads its log each
+    morning for the first week.
+- **Before the design is trusted, the build session verifies** (the
+  record's section 4): whether the nightly commits count as activity
+  against GitHub's pause of scheduled workflows in a repository with no
+  commits for sixty days (if not, a keep-alive, recorded on L-490); the
+  runners' tools (Python with the orrery's libraries, node and a
+  headless Chromium) and each job's time against GitHub's limits, the
+  path plan's full re-check having run 28 minutes on Tony's machine on
+  Oct 24; that the built-in token may push and GitHub Pages redeploys on
+  the workflow's commit; that the orrery's tools write LF and ASCII on
+  Linux and assume no Windows paths; how the guest book's Google sign-in
+  is stored for a runner, and that its expiry fails soft (R4).
+- The method the record names goes to gallery-cache-builder at its next
+  version. L-462 (a shorter run) is reconsidered in this light, on its
+  own block. The record's legacy item is L-490.
+**Gap (replaces the one below, 2026-10-26):** a build session after
+slice 2 (L-443), on the road: the record's section 4 checked first, then
+the two workflows. Tony-action (decide): P1, at the build's design talk.
+**Gap (superseded above, 2026-10-26):** a design talk: which routines, in what order, the morning
 report's form, and how the machine wakes; after slice 2 (Deferred on
 Where We Are).
-**Ref:** `orrery_maintenance_run.py`; gallery `daily_run.py`; L-461;
-L-462.
+**Ref:** `orrery_maintenance_run.py`; gallery `daily_run.py`;
+`documentation/DESIGN_L485_nightly_run_rulings_20261025.md`;
+`documentation/COORD_L461_stop_ruling_20261025.md`; L-461; L-462;
+L-490.
 
 #### [L-484] The website and the orrery agree on every object both draw, or the difference is written down (orrery + gallery, objects; method for interactive-exhibit)
 <!-- L:484 status:OPEN upd:2026-10-25 section:A flag: rice: -->
@@ -1984,7 +2298,7 @@ they ship. Then the build, in the Sun's slice (L-412).
 L-464; L-412.
 
 #### [L-462] The orrery maintenance run, a short form for small patches (orrery, maintenance)
-<!-- L:462 status:OPEN upd:2026-10-22 section:A flag: rice: -->
+<!-- L:462 status:OPEN upd:2026-10-26 section:A flag: rice: -->
 - **Tony, 2026-10-21,** after `patch_L456_4b_roche_rehome_20261021.py`:
   "the orrery maintenance runner takes a long time. if only one or two
   sub-files is needed that would make things quicker." Then: "i don't
@@ -1999,8 +2313,13 @@ L-464; L-412.
 - **2026-10-22:** deferred behind L-443 (the objects), Tony's ruling in the
   coordination session (Claude Fable 5.1's record, carried into this
   close); listed under Deferred on Where We Are.
+- **2026-10-25, reconsidered** at L-485's design talk
+  (`documentation/DESIGN_L485_nightly_run_rulings_20261025.md`, section
+  5): a shorter manual run matters less once the nightly run exists.
+  Tony-action (decide): whether this item stays.
 **Gap:** a design talk: which steps a patch may name, where the short
-form is started (the dashboard), and whether the push gate accepts it.
+form is started (the dashboard), and whether the push gate accepts it;
+first, whether the item stays (above).
 **Ref:** `orrery_maintenance_run.py`, `palomas_orrery_dashboard.py`;
 L-188 (the maintenance run); L-459 (the monthly run).
 
@@ -2516,7 +2835,7 @@ the deliberate limit, its number set then, each removal named.
 `documentation/HANDOFF_L446_daily_run_order_build_20261015.md`.
 
 #### [L-443] The rest of the orrery's objects come to the website as plotted positions (gallery + orrery, objects)
-<!-- L:443 status:OPEN upd:2026-10-25 section:A flag: rice: -->
+<!-- L:443 status:OPEN upd:2026-10-26 section:A flag: rice: -->
 - **Tony, 2026-10-13:** "I am anxious to add the symbols to the gallery
   too so visitors can at least plot positions." And his note of
   2026-10-10 on L-433: "then add the symbols for most if not all the
@@ -2912,7 +3231,69 @@ the deliberate limit, its number set then, each removal named.
   decides; the drawer check's section 7 (seven cases, two breaks) and the
   walk's section 20 hold it. Rule written into interactive-exhibit 1.25.
   The heliopause Tony asked about next is L-488.
-**Gap (replaces the one below, 2026-10-25, night):** Tony's runs of
+- **Tony's runs, 2026-10-26, morning.** patch_L443_18 and _19 ran and
+  were pushed (orrery 5398439, gallery 9223cd1); his phone look of the
+  companions and the bullets: "correct."
+- **The comets, build B part 2, 2026-10-26** (orrery patch_L443_20,
+  gallery patch_L443_21; the handoff,
+  `documentation/HANDOFF_L443_slice2_buildB_comets_20261026.md`).
+  - **The class check** (`documentation/CHECK_L443_drawer_classes_20261026.md`):
+    every drawer group's bodies and the fourteen comets against JPL's
+    orbit class, read live. No body sat in the wrong group; Comets
+    gathered four classes and Near-Earth asteroids three. Tony: "Split
+    with asteroids in the correct order among the planets." So one JPL
+    class to a row: Encke-type, Jupiter-family, Halley-type and Comets,
+    then Hyperbolic comets and Interstellar objects, after the Sun; Aten
+    asteroids after Venus; Apollo and Amor asteroids after the
+    Spacecraft group.
+  - **The words** (`documentation/WORDS_L443_comets_20261026.md`),
+    approved: "Yes on all." On the first draft Tony: "I don't want to
+    drop JPL's words, Ellipse, Predicted, hyperbolic, perihelion,
+    aphelion, etc. We should keep these correct words and explain them
+    when they should be explained." Claude Fable 5.1 recorded the same
+    ruling at 11:44 as method for both instruments
+    (`documentation/COORD_jpl_words_ruling_20261026.md`): "we should
+    always keep the correct JPL words and explain them when needed."
+    Written into interactive-exhibit 1.26; provenance-discipline's What
+    a Visitor Reads takes it at its next version. The orbit line now
+    reads "Orbit: perihelion q AU, its closest to the Sun, to aphelion Q
+    AU, its farthest."
+  - **The orrery:** the fourteen keyed, each marked `open_path`, with
+    its JPL name and its approved description; West asked as
+    C/1975 V1-A. `path_plan.py` plans each by the span ruling, a year
+    before its perihelion to a year after today, clipped to JPL; the
+    perihelion found in JPL's daily positions and refined to the
+    minute, its one event; the record's TP only places the first ask.
+    Comets are not searched bodies of the spacecraft plans, so the
+    twelve plans did not change. The export and the period fetch serve
+    no period for a path. The Horizons check looks for an entry asked
+    by JPL's number in the small-body lookup (C/2025 K1 as 1004075,
+    shown failing on the old code) and confirms no period for a path.
+    And L-491, the nucleus sizes, sourced.
+  - **The website:** the builder fetches a comet on an open path by its
+    plan (`is_path_body`); the mirror copies `open_path`; the assembler
+    draws any body served positions and no elements as a path, a comet
+    with its diamond; the room's text box and source line, in the
+    approved words; the room's second list a bullet for them; a name
+    the orrery keys with an underscore shown with a space (C/2025 K1);
+    the maintenance run's live check fetches the fourteen positions
+    files.
+  - **Checked in the session:** the orrery's suites (path plan 27,
+    Horizons check 68, period fetch 36, objects export) and its
+    headless run; the builder's offline suite, 482 checks, with four new
+    for the comets; the figures, drawer and drawer-order smokes; the
+    drawer walk, 140 checks, with a new section 21 for the comets; the
+    Sun and Earth rooms driven in both copies and found the same; all
+    on stand-in plans and straight-line paths, since the sandbox cannot
+    reach JPL. The comets' real paths are Tony's runs.
+  - **Not done here, by name:** the comets' companions (none; a
+    comet's own room is L-483); the ten gallery cards' sizes (L-491).
+**Gap (replaces the one below, 2026-10-26):** Tony's runs, in order:
+patch_L443_20 and the orrery maintenance run (the path plan's comets
+and the Horizons check confirming the fourteen), push; patch_L443_21
+and the Daily Run, push; his phone look at the comets. Then slice 2
+closes.
+**Gap (superseded above, 2026-10-25, night):** Tony's runs of
 patch_L443_18 and patch_L443_19, push, and his phone look at the
 companions (Voyager 2, Juno). Then build B's second part, the comets,
 from the handoff's section 6.

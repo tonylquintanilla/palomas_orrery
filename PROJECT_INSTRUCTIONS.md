@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.113 | October 25, 2026
+Tony Quintanilla, PE | Claude | v3.114 | October 26, 2026
 
-Cut from 967d1503 at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 53984395 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -487,7 +487,7 @@ safe-file-editing            1.14 Editing existing files, patch scripts,
                                   sed/regex edits, encoding checks (portable)
 agentic-pre-test             1.3  BEFORE delivering complete files/agentic
                                   code; after data-content sweeps
-horizons-orbital-mechanics   1.11 Horizons queries, centers, frames, osculating
+horizons-orbital-mechanics   1.12 Horizons queries, centers, frames, osculating
                                   elements, encounters, comet record pinning,
                                   2xr uncertainties, periods, the drawn orbit's
                                   centre, the Horizons check
@@ -500,7 +500,10 @@ horizons-orbital-mechanics   1.11 Horizons queries, centers, frames, osculating
                                   (path_plan.py -- the Hill sphere, JPL's GM,
                                   the window and step, the orbiter rule for an
                                   arrival, a departure, a capture), a comet
-                                  whose designation matches its own pieces
+                                  whose designation matches its own pieces, a
+                                  comet on an open path's plan (its span, its
+                                  TP, its perihelion), an entry asked by JPL's
+                                  number in the Horizons check
 provenance-discipline        2.34 Scanner runs, audits, citations, constants,
                                   pre-push (Tier-1 = 0 on the active build
                                   path)
@@ -523,15 +526,17 @@ gallery-assembler            1.3  render_orbits.py, resolver.py,
                                   unresponsive, it worked yesterday, a console
                                   error appears, or Claude is about to hand
                                   Tony a test to run
-gallery-cache-builder        1.12 Nightly builder, atomic swap and its
+gallery-cache-builder        1.13 Nightly builder, atomic swap and its
                                   retry/roll-back/swap log, "Access is denied"
                                   under data/, coverage_index, serving cache,
                                   objects_config, dry-run/first-build/nightly,
                                   builder testing layers, the Daily Run's order
                                   and a failed pull, the run records and their
                                   check, a spacecraft fetched by its path plan,
-                                  a pull that does not match the push
-interactive-exhibit          1.25 adding or changing an exhibit in
+                                  a pull that does not match the push, a comet
+                                  on an open path fetched by its plan
+                                  (is_path_body, open_path)
+interactive-exhibit          1.26 adding or changing an exhibit in
                                   interactive.html; any edit to the Sun's
                                   chrome (drawer, nav cluster, frame zoom,
                                   i-panel, HUD, consent, back link); "Earth
@@ -565,7 +570,10 @@ interactive-exhibit          1.25 adding or changing an exhibit in
                                   and the orrery agree on an object; the
                                   planets ticked with a spacecraft
                                   (companions); the i panel's words one
-                                  sentence to a bullet
+                                  sentence to a bullet; a comet on an open path
+                                  in the Solar System room; the drawer's groups
+                                  one JPL class to a row; JPL's terms in the
+                                  words a visitor reads
 <!-- SKILL-MANIFEST:END -->
 
 Session-Start Repo Pull and the SHA Round Trip [CRITICAL]
@@ -1201,6 +1209,53 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.114 (October 26, 2026): No rule changed in this document. THREE
+skill bumps, one version each (L-443, slice 2, build B part 2):
+interactive-exhibit 1.25 -> 1.26, horizons-orbital-mechanics 1.11 ->
+1.12, gallery-cache-builder 1.12 -> 1.13. THE COMETS ON OPEN PATHS;
+ONE JPL CLASS TO A DRAWER ROW; JPL'S TERMS KEPT AND EXPLAINED.
+
+WHAT PROMPTED IT. Build B's second part, the comets, from
+documentation/HANDOFF_L443_slice2_buildB_spacecraft_20261025.md section
+6, and Tony's rulings of Oct 26 in chat: the class check's split, "Split
+with asteroids in the correct order among the planets"; on the comets'
+words, "I don't want to drop JPL's words, Ellipse, Predicted,
+hyperbolic, perihelion, aphelion, etc. We should keep these correct
+words and explain them when they should be explained"; and "Yes on all
+and bring the sourcing into the ledger and into this slice," which made
+L-491 (the comet nucleus sizes).
+
+WHAT CHANGED. interactive-exhibit: the comets on open paths in the
+Solar System room, the groups one JPL class to a row, the orbit line's
+new words, a name keyed with an underscore shown with a space, and
+JPL's terms kept and explained under Hover text is written for the
+visitor. horizons-orbital-mechanics: A Comet on an Open Path, under How
+a Path's Events Are Found, and two lines on the Horizons check (an
+entry asked by JPL's number; a path serves no period).
+gallery-cache-builder: a comet on an open path is a path body. Each
+skill's oldest of four version entries moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copies read
+interactive-exhibit 1.26, horizons-orbital-mechanics 1.12 and
+gallery-cache-builder 1.13 before work that fires them. This session
+confirmed its loaded copies of gallery-cache-builder 1.12 (discharging
+that part of v3.113's obligation), gallery-assembler 1.3,
+agentic-pre-test 1.3, ledger-and-session-records 1.22 and
+safe-file-editing 1.14 (discharging that part), as the manifest
+expected. It worked from the repo's copies of interactive-exhibit 1.25
+and horizons-orbital-mechanics 1.11, at the manifest's versions, by
+Tony's instruction to go by the manifest; it did not load them, so
+v3.113's obligation for those two is not discharged and passes to the
+1.26 and 1.12 above.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.111 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.113 (October 25, 2026, evening): No rule changed in this document.
 ONE skill bump, one version (L-443, L-487): interactive-exhibit 1.24 ->
 1.25. A SPACECRAFT TICKS ITS COMPANIONS; THE I PANEL IS ONE SENTENCE TO
@@ -1281,48 +1336,6 @@ manifest expected.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.109 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.111 (October 24, 2026): No rule changed in this document. TWO
-skill bumps, one version each (L-482 with L-481's descriptions; L-443,
-slice 2): interactive-exhibit 1.22 -> 1.23, horizons-orbital-mechanics
-1.9 -> 1.10. RESET IN EVERY ROOM; HOW A PATH'S FLYBYS ARE FOUND.
-
-WHAT PROMPTED IT. Tony's ruling of Oct 24, 15:26, on L-482: "Yes all
-rooms should use the same Reset button and no 'see more'."
-(documentation/COORD_L482_reset_all_rooms_20261024.md). The same
-evening's build made it (gallery patch_L482_1). And slice 2's orrery
-half, build A (orrery patch_L443_7): the path plan, by rulings 1, 5 and
-7 of documentation/DESIGN_L443_slice2_rulings_20261023.md. Its first
-offline run found that the curvature rule alone takes nearest
-approaches tens of millions of km away for flybys, so a flyby must lie
-inside the body's Hill sphere, worked out from JPL's own GM.
-
-WHAT CHANGED. interactive-exhibit: the drawer's One body at a time,
-and Reset bullet says the Sun and Earth rooms have the same button,
-putting back their arrival (sunReset, from sunOpening, recorded once at
-boot); the anatomy table's drawer row names Reset in every room; the
-headless recipe names walk_shell_reset.js; Hover text is written for
-the visitor gains L-481's three readability descriptions. Its v1.20
-entry moved to documentation/SKILL_HISTORIES.md, by the three-entry
-rule. horizons-orbital-mechanics gains How a Path's Events Are Found:
-the Hill sphere gate from JPL's GM, the curvature rule, the two passes,
-the window and step, the 30-day cycle, and why a spacecraft is keyed
-in the same round as its website entry. Its v1.7 entry moved down.
-
-THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
-that session. The next session confirms its loaded copies read
-interactive-exhibit 1.23 and horizons-orbital-mechanics 1.10 before
-work that fires them. This session confirmed its loaded copies read
-interactive-exhibit 1.22 (discharging v3.110's obligation),
-horizons-orbital-mechanics 1.9, gallery-cache-builder 1.11,
-safe-file-editing 1.13 and ledger-and-session-records 1.22, as the
-manifest expected.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.108 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

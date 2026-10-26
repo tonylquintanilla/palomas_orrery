@@ -1497,6 +1497,20 @@
         "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='C%2F2020%20F3%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@0'&TLIST='2461336.359027778'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
       }
     },
+    "wierzchos": {
+      "confirmed": "2026-10-26",
+      "horizons_id": "C/2024 E1",
+      "id_type": "smallbody",
+      "horizons_name": "Wierzchos (C/2024 E1)",
+      "object_type": "orbital",
+      "list_sha256": "6230404d4faf8adee45321d78f656c3d46e9e941902f58a90f36932359e022ba",
+      "jpl_name": "Wierzchos (C/2024 E1)",
+      "jpl_type": "comet (integrated barycenter)",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F2024%20E1&group=sb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F2024%20E1&group=mb&format=text"
+      ]
+    },
     "swan": {
       "confirmed": "2026-10-22",
       "horizons_id": "C/2025 R2",
@@ -1544,6 +1558,188 @@
         "jpl_days": 693761.814793487,
         "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='C%2F2026%20A1%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461336.359027778'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
       }
+    },
+    "west": {
+      "confirmed": "2026-10-26",
+      "horizons_id": "C/1975 V1-A",
+      "id_type": "smallbody",
+      "horizons_name": "West (C/1975 V1-A)",
+      "object_type": "trajectory",
+      "list_sha256": "6230404d4faf8adee45321d78f656c3d46e9e941902f58a90f36932359e022ba",
+      "jpl_name": "West (C/1975 V1-A)",
+      "jpl_type": "comet (integrated barycenter)",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F1975%20V1-A&group=sb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F1975%20V1-A&group=mb&format=text"
+      ]
+    },
+    "mcnaught": {
+      "confirmed": "2026-10-26",
+      "horizons_id": "C/2006 P1",
+      "id_type": "smallbody",
+      "horizons_name": "McNaught (C/2006 P1)",
+      "object_type": "trajectory",
+      "list_sha256": "6230404d4faf8adee45321d78f656c3d46e9e941902f58a90f36932359e022ba",
+      "jpl_name": "McNaught (C/2006 P1)",
+      "jpl_type": "comet (integrated barycenter)",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F2006%20P1&group=sb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F2006%20P1&group=mb&format=text"
+      ]
+    },
+    "tsuchinshan_atlas": {
+      "confirmed": "2026-10-26",
+      "horizons_id": "C/2023 A3",
+      "id_type": "smallbody",
+      "horizons_name": "Tsuchinshan-ATLAS (C/2023 A3)",
+      "object_type": "orbital",
+      "list_sha256": "6230404d4faf8adee45321d78f656c3d46e9e941902f58a90f36932359e022ba",
+      "jpl_name": "Tsuchinshan-ATLAS (C/2023 A3)",
+      "jpl_type": "comet (integrated barycenter)",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F2023%20A3&group=sb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F2023%20A3&group=mb&format=text"
+      ]
+    },
+    "atlas_2024_g3": {
+      "confirmed": "2026-10-26",
+      "horizons_id": "C/2024 G3",
+      "id_type": "smallbody",
+      "horizons_name": "ATLAS (C/2024 G3)",
+      "object_type": "orbital",
+      "list_sha256": "6230404d4faf8adee45321d78f656c3d46e9e941902f58a90f36932359e022ba",
+      "jpl_name": "ATLAS (C/2024 G3)",
+      "jpl_type": "comet (integrated barycenter)",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F2024%20G3&group=sb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F2024%20G3&group=mb&format=text"
+      ]
+    },
+    "c2025_k1": {
+      "confirmed": "2026-10-26",
+      "horizons_id": "1004075",
+      "id_type": "designation",
+      "horizons_name": "ATLAS (C/2025 K1)",
+      "object_type": "trajectory",
+      "list_sha256": "6230404d4faf8adee45321d78f656c3d46e9e941902f58a90f36932359e022ba",
+      "jpl_name": "ATLAS (C/2025 K1)",
+      "jpl_type": "comet (integrated barycenter)",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=1004075&group=sb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=1004075&group=mb&format=text"
+      ]
+    },
+    "c2025_k1_b": {
+      "confirmed": "2026-10-26",
+      "horizons_id": "C/2025 K1-B",
+      "id_type": "smallbody",
+      "horizons_name": "ATLAS (C/2025 K1-B)",
+      "object_type": "trajectory",
+      "list_sha256": "6230404d4faf8adee45321d78f656c3d46e9e941902f58a90f36932359e022ba",
+      "jpl_name": "ATLAS (C/2025 K1-B)",
+      "jpl_type": "comet (integrated barycenter)",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F2025%20K1-B&group=sb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F2025%20K1-B&group=mb&format=text"
+      ]
+    },
+    "c2025_k1_c": {
+      "confirmed": "2026-10-26",
+      "horizons_id": "C/2025 K1-C",
+      "id_type": "smallbody",
+      "horizons_name": "ATLAS (C/2025 K1-C)",
+      "object_type": "trajectory",
+      "list_sha256": "6230404d4faf8adee45321d78f656c3d46e9e941902f58a90f36932359e022ba",
+      "jpl_name": "ATLAS (C/2025 K1-C)",
+      "jpl_type": "comet (integrated barycenter)",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F2025%20K1-C&group=sb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F2025%20K1-C&group=mb&format=text"
+      ]
+    },
+    "c2025_k1_d": {
+      "confirmed": "2026-10-26",
+      "horizons_id": "C/2025 K1-D",
+      "id_type": "smallbody",
+      "horizons_name": "ATLAS (C/2025 K1-D)",
+      "object_type": "trajectory",
+      "list_sha256": "6230404d4faf8adee45321d78f656c3d46e9e941902f58a90f36932359e022ba",
+      "jpl_name": "ATLAS (C/2025 K1-D)",
+      "jpl_type": "comet (integrated barycenter)",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F2025%20K1-D&group=sb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F2025%20K1-D&group=mb&format=text"
+      ]
+    },
+    "panstarrs_2025_r3": {
+      "confirmed": "2026-10-26",
+      "horizons_id": "C/2025 R3",
+      "id_type": "smallbody",
+      "horizons_name": "PANSTARRS (C/2025 R3)",
+      "object_type": "trajectory",
+      "list_sha256": "6230404d4faf8adee45321d78f656c3d46e9e941902f58a90f36932359e022ba",
+      "jpl_name": "PANSTARRS (C/2025 R3)",
+      "jpl_type": "comet (integrated barycenter)",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F2025%20R3&group=sb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F2025%20R3&group=mb&format=text"
+      ]
+    },
+    "borisov_2025_v1": {
+      "confirmed": "2026-10-26",
+      "horizons_id": "C/2025 V1",
+      "id_type": "smallbody",
+      "horizons_name": "Borisov (C/2025 V1)",
+      "object_type": "trajectory",
+      "list_sha256": "6230404d4faf8adee45321d78f656c3d46e9e941902f58a90f36932359e022ba",
+      "jpl_name": "Borisov (C/2025 V1)",
+      "jpl_type": "comet (integrated barycenter)",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F2025%20V1&group=sb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F2025%20V1&group=mb&format=text"
+      ]
+    },
+    "oumuamua": {
+      "confirmed": "2026-10-26",
+      "horizons_id": "A/2017 U1",
+      "id_type": "smallbody",
+      "horizons_name": "'Oumuamua",
+      "object_type": "trajectory",
+      "list_sha256": "6230404d4faf8adee45321d78f656c3d46e9e941902f58a90f36932359e022ba",
+      "jpl_name": "'Oumuamua",
+      "jpl_type": "asteroid (integrated barycenter)",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=A%2F2017%20U1&group=sb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=A%2F2017%20U1&group=mb&format=text"
+      ]
+    },
+    "borisov_2i": {
+      "confirmed": "2026-10-26",
+      "horizons_id": "C/2019 Q4",
+      "id_type": "smallbody",
+      "horizons_name": "Borisov (C/2019 Q4)",
+      "object_type": "trajectory",
+      "list_sha256": "6230404d4faf8adee45321d78f656c3d46e9e941902f58a90f36932359e022ba",
+      "jpl_name": "Borisov (C/2019 Q4)",
+      "jpl_type": "comet (integrated barycenter)",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F2019%20Q4&group=sb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F2019%20Q4&group=mb&format=text"
+      ]
+    },
+    "atlas_3i": {
+      "confirmed": "2026-10-26",
+      "horizons_id": "C/2025 N1",
+      "id_type": "smallbody",
+      "horizons_name": "ATLAS (C/2025 N1)",
+      "object_type": "trajectory",
+      "list_sha256": "6230404d4faf8adee45321d78f656c3d46e9e941902f58a90f36932359e022ba",
+      "jpl_name": "ATLAS (C/2025 N1)",
+      "jpl_type": "comet (integrated barycenter)",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F2025%20N1&group=sb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F2025%20N1&group=mb&format=text"
+      ]
     },
     "voyager_1": {
       "confirmed": "2026-10-25",

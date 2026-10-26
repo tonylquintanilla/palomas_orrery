@@ -207,9 +207,9 @@
     {
       "file": "comet_visualization_shells.py",
       "tier": 2,
-      "names": ["COMET_NUCLEUS_SIZES", "COMET_FEATURE_THRESHOLDS"],
+      "names": ["COMET_FEATURE_THRESHOLDS"],
       "category": "Rendering geometry dicts",
-      "reason": "Nucleus sizes and feature thresholds drive shell rendering geometry. Low user-visible impact if slightly off. Deferred until comet shell refactor."
+      "reason": "Feature thresholds drive shell rendering geometry. Low user-visible impact if slightly off. Deferred until comet shell refactor. (2026-10-26, L-491: COMET_NUCLEUS_SIZES left this entry; it was printed in hovers, not geometry, and is now sourced rows in constants_new.py.)"
     }
   ]
 }

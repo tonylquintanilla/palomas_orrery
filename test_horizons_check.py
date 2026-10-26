@@ -43,7 +43,10 @@ WHAT IT CHECKS
        list cannot be fetched. (L-443) A spacecraft, Voyager 1, agrees:
        the small-body index answers its id with JPL's header alone, which
        is no matches; planted: the same header with any other line is
-       still JPL not read, never a pass.
+       still JPL not read, never a pass. C/2025 K1, asked by JPL's
+       number for it (id_type 'designation'), agrees, found in the
+       small-body index by its primary SPKID; planted: the same comet
+       under another name disagrees.
     3. The period (L-431): Mercury, Jupiter and Encke agree with JPL's PR
        at their own date and centre. Planted: a PR farther from the
        served period than its error (the check must not pass a period
@@ -102,6 +105,11 @@ target 3 in documentation/worksheets/period_answers_L445.json.)
 Module updated: October 25, 2026 with Anthropic's Claude Opus 5.5 (L-443,
 a spacecraft's identity on JPL's two Lookup answers for -31, fetched that
 day through the chat's web-fetch tool and kept in VOYAGER_1_LOOKUP.)
+Module updated: October 26, 2026 with Anthropic's Claude Opus 5.5 (L-443,
+the comets: C/2025 K1, asked by JPL's number for it, agrees on JPL's two
+Lookup answers for 1004075, fetched that day and kept in K1_LOOKUP; the
+check before this change found it in neither index. Planted: the same
+comet under another name disagrees.)
 """
 
 import datetime
@@ -170,6 +178,26 @@ VOYAGER_1_LOOKUP = {
     hc.lookup_url("-31", "sb"): (
         "API VERSION: 1.1\n"
         "API SOURCE: NASA/JPL Horizons Lookup API\n"),
+}
+
+# L-443, slice 2's comets: C/2025 K1, asked by JPL's permanent number for
+# it since L-470 (id_type 'designation'). The small-body Lookup for 1004075,
+# fetched 2026-10-26 through the chat's web-fetch tool, word for word.
+K1 = ("C/2025_K1", "1004075", "designation", "ATLAS (C/2025 K1)",
+      "trajectory")
+K1_LOOKUP = {
+    hc.lookup_url("1004075", "sb"): (
+        "API VERSION: 1.1\n"
+        "API SOURCE: NASA/JPL Horizons Lookup API\n\n"
+        "Object name        = ATLAS (C/2025 K1)\n"
+        "Type               = comet (integrated barycenter)\n"
+        "Primary SPKID      = 1004075\n"
+        "Primary designation= C/2025 K1\n"
+        "Aliases            = K25K010\n"),
+    hc.lookup_url("1004075", "mb"): (
+        "API VERSION: 1.1\n"
+        "API SOURCE: NASA/JPL Horizons Lookup API\n\n"
+        "NOTICE: no matches found"),
 }
 
 
@@ -358,6 +386,21 @@ def main():
             "a spacecraft agrees, the small-body index answering its id "
             "with JPL's header alone: %s (JPL: %s)"
             % (r["status"], r["jpl"].get("name") or r["error"]))
+    r = hc.check_entry("c2025_k1", entry(K1),
+                       recorded_fetch({}, extra=K1_LOOKUP))
+    t.check(r["status"] == "agrees"
+            and r["jpl"].get("name") == "ATLAS (C/2025 K1)",
+            "a comet asked by JPL's number for it agrees, found in the "
+            "small-body index by its primary SPKID: %s (JPL: %s)"
+            % (r["status"], r["jpl"].get("name") or r["error"]))
+    wrong = ("C/2025_K1", "1004075",
+             "designation",
+             "ATLAS (C/2025 K1-B)", "trajectory")
+    r = hc.check_entry("c2025_k1", entry(wrong),
+                       recorded_fetch({}, extra=K1_LOOKUP))
+    t.check(r["status"] == "DISAGREES",
+            "planted: the same comet under another name disagrees: %s"
+            % r["status"])
     odd = dict(VOYAGER_1_LOOKUP)
     odd[hc.lookup_url("-31", "sb")] += "ERROR: something JPL said\n"
     r = hc.check_entry("voyager_1", entry(VOYAGER_1),

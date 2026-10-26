@@ -80,9 +80,15 @@ One JSON file, data/objects_export.json:
                                    ruling 5): see PERIOD below. null for
                                    the Sun, which orbits nothing here,
                                    and for a spacecraft, which has no
-                                   orbital period (L-443 build B)
-                      path         a spacecraft's only (a trajectory whose
-                                   id starts with '-'): its plan from
+                                   orbital period (L-443 build B), or a
+                                   comet on an open path (slice 2's
+                                   comets)
+                      open_path    true for a comet the list marks
+                                   open_path, drawn as a path by its plan;
+                                   absent on every other entry
+                      path         a spacecraft's (a trajectory whose
+                                   id starts with '-') and a comet's on an
+                                   open path: its plan from
                                    data/path_plans.json -- made, span,
                                    backbone, events, searched -- or null
                                    until path_plan.py has made one
@@ -236,6 +242,9 @@ slice 1: a keyed entry with a 'helio_id' is served by it, as a small
 body, through served_identity, so the Sun-centred rooms take the record
 the orrery plots a body by around the Sun. No keyed entry had one
 before.)
+Module updated: October 26, 2026 with Anthropic's Claude Opus 5.5 (L-443,
+slice 2's comets: an entry marked open_path is served as a path, with
+its plan and no period, and carries open_path in the export.)
 """
 
 import ast
@@ -256,7 +265,8 @@ KEY_PATTERN = re.compile(r"^[a-z][a-z0-9_]*$")
 OPENING = re.compile(r"^Horizons:[^.]*\.\s*")
 NUMBER = re.compile(r"\d[\d,.]*\d|\d")
 FIELDS = ("name", "id", "id_type", "mission_info", "mission_url",
-          "horizons_name", "object_type", "helio_id", "helio_id_type")
+          "horizons_name", "object_type", "helio_id", "helio_id_type",
+          "open_path")
 
 
 def served_identity(f):
@@ -386,6 +396,11 @@ def build_objects(text):
             "description": description or None,
             "info_url": f.get("mission_url"),
         }
+        # L-443, slice 2's comets: a comet the list marks open_path is
+        # drawn as a path, by its plan, as a spacecraft is. Written only
+        # where it is set, so no other entry changes.
+        if f.get("open_path"):
+            objects[key]["open_path"] = True
         found = NUMBER.findall(description)
         if found:
             numbers[key] = found
@@ -606,9 +621,12 @@ PATH_FIELDS = ("made", "span", "backbone", "events", "searched")
 
 
 def is_path(obj):
-    """A spacecraft: a trajectory whose Horizons id starts with '-'."""
-    return (obj.get("object_type") == "trajectory"
-            and str(obj.get("horizons_id") or "").startswith("-"))
+    """A body drawn as a path, by its plan: a spacecraft (a trajectory
+    whose Horizons id starts with '-'), or a comet the list marks
+    open_path (L-443, slice 2's comets)."""
+    return ((obj.get("object_type") == "trajectory"
+             and str(obj.get("horizons_id") or "").startswith("-"))
+            or bool(obj.get("open_path")))
 
 
 def path_of(plan):
@@ -629,7 +647,10 @@ def build_export(text, cache=None, typed_table=None, confirmations=None,
     period_inputs = {}
     for key, obj in objects.items():
         if is_path(obj):
-            # L-443 build B: a spacecraft has no orbital period to serve.
+            # L-443 build B: a spacecraft has no orbital period to serve,
+            # and (slice 2's comets) nor does a comet on an open path: an
+            # open orbit has none, and piece C of C/2025 K1, which JPL's
+            # numbers cannot yet tell from open, is drawn as a path too.
             # plotting never asks elements for a mission (is_mission), so
             # the period block would read "Not yet fetched from JPL", which
             # is not true of a spacecraft; it serves none, as the Sun does,
@@ -659,7 +680,7 @@ def build_export(text, cache=None, typed_table=None, confirmations=None,
 def period_summary(key, period):
     """One line naming an exported period, for the run's output."""
     if period is None:
-        return "%s: no period (the centre, or a spacecraft)" % key
+        return "%s: no period (the centre, or a path)" % key
     if period["kind"] == "none":
         return "%s: none (not yet fetched)" % key
     if period["open_orbit"]:

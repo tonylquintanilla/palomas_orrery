@@ -124,6 +124,9 @@ Module updated: October 23, 2026 with Anthropic's Claude Opus 5.5 (L-470:
 Gonggong comes off SKIP_NAMES with palomas_orrery.py's two pre-fetch
 lists, so its period is fetched, around the Sun by its helio_id, 2007
 OR10, and the Horizons check confirms it.)
+Module updated: October 26, 2026 with Anthropic's Claude Opus 5.5 (L-443,
+slice 2's comets: an entry marked open_path, a comet drawn as a path by
+its plan, serves no period, so none is fetched for it.)
 """
 
 import ast
@@ -145,7 +148,7 @@ PLOTTED_TYPES = ("orbital", "satellite", "trajectory", "lagrange_point")
 SKIP_NAMES = ("MK2", "Xiangliu", "Vanth")
 
 READ_FIELDS = ("name", "key", "id", "id_type", "object_type", "is_mission",
-               "helio_id", "helio_id_type")
+               "helio_id", "helio_id_type", "open_path")
 
 
 class ListError(Exception):
@@ -196,6 +199,7 @@ def served_entries(root):
             "id_type": id_type,
             "object_type": fields.get("object_type"),
             "is_mission": bool(fields.get("is_mission", False)),
+            "open_path": bool(fields.get("open_path", False)),
         })
     return out
 
@@ -228,6 +232,12 @@ def classify(entries, cache, typed):
     [entry], skipped is [(entry, why)]."""
     missing, have, skipped = [], [], []
     for entry in entries:
+        if entry.get("open_path"):
+            # L-443, slice 2's comets: drawn as a path by its plan; the
+            # export serves no period for it, so none is fetched.
+            skipped.append((entry, "a comet on an open path serves no "
+                                   "period"))
+            continue
         block, _inputs = export_objects.period_block(
             entry["name"], entry["object_type"], cache, typed)
         if block is None:

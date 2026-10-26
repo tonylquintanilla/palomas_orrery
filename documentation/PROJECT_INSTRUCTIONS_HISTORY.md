@@ -3453,6 +3453,51 @@ resident.
 (Moved down from the resident protocol on 2026-10-25, evening, when
 v3.113 made a fourth entry.)
 
+v3.111 (October 24, 2026): No rule changed in this document. TWO
+skill bumps, one version each (L-482 with L-481's descriptions; L-443,
+slice 2): interactive-exhibit 1.22 -> 1.23, horizons-orbital-mechanics
+1.9 -> 1.10. RESET IN EVERY ROOM; HOW A PATH'S FLYBYS ARE FOUND.
+
+WHAT PROMPTED IT. Tony's ruling of Oct 24, 15:26, on L-482: "Yes all
+rooms should use the same Reset button and no 'see more'."
+(documentation/COORD_L482_reset_all_rooms_20261024.md). The same
+evening's build made it (gallery patch_L482_1). And slice 2's orrery
+half, build A (orrery patch_L443_7): the path plan, by rulings 1, 5 and
+7 of documentation/DESIGN_L443_slice2_rulings_20261023.md. Its first
+offline run found that the curvature rule alone takes nearest
+approaches tens of millions of km away for flybys, so a flyby must lie
+inside the body's Hill sphere, worked out from JPL's own GM.
+
+WHAT CHANGED. interactive-exhibit: the drawer's One body at a time,
+and Reset bullet says the Sun and Earth rooms have the same button,
+putting back their arrival (sunReset, from sunOpening, recorded once at
+boot); the anatomy table's drawer row names Reset in every room; the
+headless recipe names walk_shell_reset.js; Hover text is written for
+the visitor gains L-481's three readability descriptions. Its v1.20
+entry moved to documentation/SKILL_HISTORIES.md, by the three-entry
+rule. horizons-orbital-mechanics gains How a Path's Events Are Found:
+the Hill sphere gate from JPL's GM, the curvature rule, the two passes,
+the window and step, the 30-day cycle, and why a spacecraft is keyed
+in the same round as its website entry. Its v1.7 entry moved down.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copies read
+interactive-exhibit 1.23 and horizons-orbital-mechanics 1.10 before
+work that fires them. This session confirmed its loaded copies read
+interactive-exhibit 1.22 (discharging v3.110's obligation),
+horizons-orbital-mechanics 1.9, gallery-cache-builder 1.11,
+safe-file-editing 1.13 and ledger-and-session-records 1.22, as the
+manifest expected.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.108 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-26 when
+v3.114 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

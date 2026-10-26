@@ -182,6 +182,26 @@ Plus one thing Opus owes: checking the OSIRIS-APEX Earth pass of April 2029 agai
 
 Does that rule answer your question, or does it miss a case you have in mind? -- yes that would work well. thanks. 
 
+=====================================================================================
+Good morning. The record has grown a lot since yesterday morning's copy; I'll read only what's new, and check the repos.
+
+Everything from the record landed. Both repos are where it says: the orrery at 5398439 (this morning's companion records) and the website at 9223cd1 (the companions and sentences build, after today's Daily Run). The Horizons check confirmed the twelve spacecraft once JPL was reachable again, and your three phone checks this morning all read "correct." Nothing is owed from this morning's runs.
+
+**Where we are.** Slice 2's spacecraft half is live: all twelve draw, the Voyagers in gold, each ticking its flyby planets and the farthest planet it reaches, with the i panel one sentence to a bullet in every room. Protocol v3.113, interactive-exhibit 1.25. What remains of slice 2 is the comets: the fourteen on open paths, in three drawer groups by JPL's class, each path solid to today and dashed after. The spacecraft handoff's section 6 is their brief, and it's complete.
+
+**One gap, from yesterday's talks.** Both design records we wrote are pushed, but neither has reached the ledger, and the skill's rule is that a ruling in a design record isn't recorded until it does. So L-485 still says "committing and pushing stay Tony's" and asks how the machine wakes, which your rulings yesterday overturned: the checkers gate the push, the 30-day checks move inside, and it runs on GitHub's computers. The compositions talk has no item at all, while L-488, the heliopause beside Voyager, was opened separately and is really the first composition. Where We Are's Deferred list still says both talks are "after slice 2." A short records patch fixes all of that: L-485 brought up to its rulings, a new item for compositions with L-486 and L-488 linked under it, and the page's lines corrected. It's twenty minutes and no code, and the comets session can do it as its first patch so you run one thing, not two.
+
+**Next steps, in order.**
+1. The comets session, opening with that records patch, then build B part 2 from the handoff's section 6. Two decisions are yours inside it, as the handoff says: the comets' words, with "hyperbolic" in plain language, and whether Near-Earth asteroids stays one group once the class check lists what's in it.
+2. Your phone look of the comets; then slice 2 closes.
+3. After that, two designed items are ready for build sessions of their own: the nightly run on GitHub (L-485), and compositions, starting with its discovery list of what each room can draw.
+
+**The prompt for the comets session**, ready to paste once it's linked to your computer:
+
+> Build B of slice 2, part 2: the comets (L-443). Read `documentation/HANDOFF_L443_slice2_buildB_spacecraft_20261025.md` in my orrery folder and start at its section 6; the spacecraft are live and my phone look of the companions and the bullets was correct. Before the comets, one records patch: bring L-485 up to the rulings in `documentation/DESIGN_L485_nightly_run_rulings_20261025.md`, and open a new item for compositions from `documentation/DESIGN_compositions_rulings_20261025.md`, with L-486 and L-488 linked under it; correct Where We Are's Deferred and Waiting lines to match. Go by the manifest for skill versions: interactive-exhibit 1.25. Deliver patches by placing them in my folders; a delivered patch is final. Bring me the comets' words and the class check's list before building on either.
+
+One thing I noticed in the handoff for that session: its section 6 names interactive-exhibit 1.25 in one line and 1.24 in another. The manifest says 1.25, and the prompt says so, so the session won't stop on it.
+
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 **Session: OPEN: 10-24-26 1605: Opus: L443 slice 2 handoff brief**
@@ -5164,12 +5184,222 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-3. Move the patch into `documentation\`, then commit and push.
+3. Move the patch into `documentation\`, then commit and push. -- 5398439591f35979c4df1791e25477ac37119b01
 4. In Settings > Skills, reinstall interactive-exhibit (1.25). -- v3.113
 5. Website: run patch 19, 
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L443_19_companions_and_sentences_20261025.py
+ok  interactive.html (14 edits)
+ok  gallery/source_list.js (2 edits)
+ok  gallery/solar_system_drawer.js (3 edits)
+ok  documentation/smoke_solar_system_drawer.js (9 edits)
+ok  documentation/smoke_source_list.js (6 edits)
+ok  tools/headless/walk_solar_system_drawer.js (3 edits)
+patch applied: a spacecraft's planets and one sentence to a bullet, Oct 25 (6 files edited, 0 new)
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
+
 6. then `gallery_maintenance_run.py`. You don't need the Daily Run, because the served data hasn't changed. 
-7. Move the patch into `documentation\`, then commit and push.
-8. On your phone, tick Voyager 2 and check that Jupiter, Saturn, Uranus, Neptune and Pluto come with it. Then tick Juno and check that Jupiter comes with it. Then open a shell in the Sun room and see how its bulleted panel reads.
+
+======================================================================
+  gallery maintenance run -- OFFLINE (before a commit)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Module atlas              2.5s  no change to MODULE_ATLAS.md,
+                                    MODULE_INDEX.md
+  PASS Constants export pull     1.1s  rewrote data/constants_export.sha
+  PASS Config mirror             0.2s  no change to
+                                    data/objects_config.json
+  PASS Objects export pull       0.7s  rewrote data/objects_export.sha
+  PASS Objects mirror            0.2s  no change to
+                                    data/objects_config.json
+  PASS Drawings pull             1.9s  rewrote
+                                    data/drawings/pulled_at.sha
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite      93.3s  PASS (436 checks, 0 failures)
+  PASS Pole of date              0.2s  POLE OF DATE: all 11 checks passed
+                                    (frame angle, orrery, ERFA, block
+                                    checker, and each shown able to
+                                    fail).
+  PASS Mirror suite              0.2s  All 77 mirror checks passed:
+                                    served, spelling, relabel refused
+                                    and accepted, conflict refused,
+                                    definition as exactly 1, fallback
+                                    and absent named, no-slot refused,
+                                    five shapes, formatting kept,
+                                    idempotent, report writes nothing,
+                                    uncertainty written as served,
+                                    Earth's pole served, print count
+                                    written as served, "in" written as
+                                    served and a slot served in
+                                    another unit from it, and the
+                                    citation written as served, a
+                                    website-only citation named, an
+                                    old export refused.
+  PASS Store writer suite       32.6s  All 454 store-writer checks
+                                    passed: an allow list that lets
+                                    through only a shell's words, a
+                                    belt's words and the arrival
+                                    settings, the rooms section's
+                                    included; a no-edit round trip;
+                                    one line per change; empty words
+                                    handled; a refused batch writing
+                                    nothing; awkward text; and the
+                                    shell list matching the cache
+                                    check's rule.
+  PASS Store editor suite        0.3s  All 377 store-editor checks
+                                    passed: every box the form offers
+                                    is one the writer allows; the word
+                                    list and the tick list differ by
+                                    the belts, on purpose; nothing
+                                    typed saves nothing; the save
+                                    message does not promise a visitor
+                                    sees what they cannot yet; and a
+                                    red Cache in step is explained
+                                    rather than just shown.
+  PASS Objects mirror suite      0.2s  MIRROR OBJECTS SUITE: pass
+  PASS Objects mirror check      0.1s  OBJECTS MIRROR: pass
+  PASS Config mirror check       0.1s  Every served link holds the
+                                    export's value, unit, figure count
+                                    and citation; 166 link(s)
+                                    compared, 162 citation(s) word for
+                                    word, 4 declared with none, 3 not
+                                    served; store 7b6358d39781.
+  PASS Pull failures             0.5s  PULL FAILURES: all 13 checks
+                                    passed (3 pulls x 3 ways to fail,
+                                    the run after a failed pull, and 3
+                                    planted faults caught)
+  PASS Horizons confirmations    0.1s  HORIZONS CONFIRMATIONS: pass -- 75
+                                    of 75 confirmed, and 61 periods,
+                                    within 30 days
+  PASS Pointer join              0.1s  Every link is accounted for: 169
+                                    link(s) against orrery 53984395, 1
+                                    fallback named; read check: 66 of
+                                    66 measured rows reached carry a
+                                    read.
+  PASS Cache in step             0.1s  The served cache holds the
+                                    config's 80 object(s) and their
+                                    features exactly: 4 object(s) with
+                                    34 named shell(s), in both cache
+                                    files.
+  PASS Drawn orbit               2.5s  DRAWN ORBIT: pass -- 18 checks,
+                                    every planted fault caught
+  PASS Drawings                  0.7s  DRAWINGS: PASS -- 30 of 30 planted
+                                    faults caught; pulled at orrery
+                                    53984395; earth_exosphere 1500
+                                    dots, round, sha256 6112639fb2cd;
+                                    galactic_tide 5000 dots, about the
+                                    galactic pole, sha256
+                                    950a7511f0b5; hills_cloud 3600
+                                    dots, tilt 31.0 deg, sha256
+                                    4d3e85616645; outer_oort_cloud
+                                    2736 dots, between its edges,
+                                    sha256 2f7ab88ee113; sun_corona
+                                    2500 dots, round, sha256
+                                    e2b57ccbc8a4; van_allen_belts 3200
+                                    dots, tilt 0.4 deg, sha256
+                                    75274e84f840; zodiacal_dust 3000
+                                    dots, tilt 2.8 deg, sha256
+                                    995f13a056e8
+  PASS Collapsed features        0.1s  32 stored as themselves, 16
+                                    collapsed, 0 unclassified.
+  PASS Feature renderers         1.0s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.1s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.3s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.2s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.2s  === ALL CHECKS PASSED ===
+  PASS Typed facts               0.2s  TYPED FACTS: PASS -- 0 typed facts
+                                    in the Sun and Earth rooms; 17
+                                    number line(s), 28 of 28 allowed
+                                    sentence(s) seen, 0 held open
+                                    (L-451); 26 word field(s) masked.
+  PASS Typed numbers             0.3s  TYPED NUMBERS: PASS -- 0 typed
+                                    numbers in the Sun and Earth
+                                    rooms' served words; 310 number(s)
+                                    masked, 8 held.
+  PASS Arrival                   0.3s  Arrival: both rooms open on the
+                                    right things; every shell trace
+                                    carries its key; the fallback with
+                                    no arrival block is unchanged.
+  PASS Display figures           0.3s  === PASS: 61 hover(s) and 305
+                                    number(s) examined; 14 graded, 7
+                                    graded by line, 47 held to the
+                                    fixture ===
+  PASS Solar System figures      0.1s  === PASS: 6 worked cases, 63
+                                    drawer rows matched to their
+                                    accuracy rows, 62 served
+                                    distances; Uranus, Neptune and
+                                    Pluto print to JPL's ten-thousands
+                                    place; 6 period cases and 62
+                                    served periods printed as the
+                                    orrery printed them; 5 orbit-line
+                                    cases and 62 served orbit lines; 3
+                                    spacecraft cases and 12 served
+                                    spacecraft ===
+  PASS Far lines                 0.3s  === PASS: far lines are cut to the
+                                    view's box ===
+  PASS Solar System drawer       0.2s  === PASS: the Sun is never ticked,
+                                    every row and group is listed, the
+                                    handle names the last body ticked,
+                                    nothing ticks many bodies at once
+                                    but a spacecraft with its
+                                    companions, rooms are offered only
+                                    where they exist, groups fold and
+                                    reset their bodies, the count line
+                                    counts ticked bodies outside the
+                                    view, and the page asks this file
+                                    ===
+  PASS Source list               0.3s  === PASS: the i panel's sources
+                                    are a list, every address a link,
+                                    and its words are one sentence to
+                                    a bullet ===
+  PASS Drawer order              0.3s  === DRAWER ORDER: both rooms list
+                                    their shells where each begins;
+                                    self-test red twice
+  PASS Drawn ends                0.3s  === DRAWN ENDS: every drawing
+                                    starts and stops on a served row
+                                    or a held end; self-test red three
+                                    times
+  PASS Label words               0.2s  === LABEL WORDS: all 33 shell rows
+                                    in both rooms open their own
+                                    feature's words; self-test red
+                                    once
+  PASS Guest book                0.1s  === GUEST BOOK: all 8 checks
+                                    passed
+  PASS Guest book updater        0.3s  === GUEST BOOK UPDATER: all 43
+                                    checks passed (6 scripted runs,
+                                    self-test first)
+  PASS Daily run steps           0.3s  === DAILY RUN: all 4 step scripts
+                                    found; the pull-match check passed
+                                    7 of 7 fixture checks (L-461)
+  PASS Artifact 1 assembler      0.3s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.1s  RESULT: 2 directories in data/ the
+                                    builder did not make: solar-system
+                                    (1), solar-system (2). Check
+                                    whether they belong there; the
+                                    newer .gitignore rules keep the
+                                    known conflict-copy shapes out of
+                                    git but do not remove anything.
+
+======================================================================
+  35 of 35 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: 2 directories in data/ the
+  last swap 2026-10-26T14:32:20.664726+00:00: succeeded first time
+======================================================================
+
+  After you push: python gallery_maintenance_run.py --live
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+7. Move the patch into `documentation\`, then commit and push. -- 9223cd165422bf2616715e65ca59410b8245f9e5
+8. On your phone, tick Voyager 2 and check that Jupiter, Saturn, Uranus, Neptune and Pluto come with it. -- correct
+9. Then tick Juno and check that Jupiter comes with it. -- correct
+10. Then open a shell in the Sun room and see how its bulleted panel reads. -- correct
 
 After that, the comets are next, in a fresh session.
 

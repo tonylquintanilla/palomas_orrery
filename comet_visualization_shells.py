@@ -11,7 +11,9 @@ traces for C/2026 A1 (MAPS): disintegration marker and ghost tail arc.
 Key functions:
     add_comet_tails_to_figure() - Master dispatch: adds all tail traces to fig
     calculate_tail_activity_factor() - Activity scaling by heliocentric distance
-    create_comet_nucleus() - Scaled sphere marker at comet position
+    create_comet_nucleus() - One marker at the comet's position; its hover
+        prints the nucleus size from the comet's row in constants_new.py
+        (COMET_NUCLEUS_ROWS), or none where no size is sourced
     create_comet_ion_tail() - Straight anti-sunward ion tail
     create_comet_dust_tail() - Curved dust tail with radiation pressure offset
     create_maps_ghost_tail_trace() - Post-disintegration debris arc
@@ -21,6 +23,13 @@ Consumed by: palomas_orrery.py (plot_objects, animate_objects)
 Role: rendering/shells
 Domain: orrery
 
+Module updated: October 26, 2026 with Anthropic's Claude Opus 5.5 (L-491:
+COMET_NUCLEUS_SIZES, a table typed from memory, is gone. Nine nucleus
+sizes are sourced rows in constants_new.py, printed through
+nucleus_size_line() as a radius or a diameter, as each source gives it;
+six comets with no sourced size, and the old 5 km default, print none.
+create_comet_nucleus() takes the comet's name for its size, not a
+number.)
 Module updated: October 4, 2026 with Anthropic's Claude Opus 5.5 (L-371:
 the MAPS hovers print the helmet cusp, the Roche limit and the inner
 corona from their rows at their counts, through constants_rows.row_text(),
@@ -49,25 +58,43 @@ from planet_visualization_utilities import (
 # L-371: the Sun's distance rows printed at their counts.
 from constants_rows import row_text
 
-# Comet nucleus sizes (approximate, in km)
-COMET_NUCLEUS_SIZES = {
-    'Halley': 15,  # 15x8x8 km
-    'Hale-Bopp': 60,  # ~60 km diameter
-    'NEOWISE': 5,  # ~5 km
-    'ISON': 2,  # ~2 km (before breakup)
-    'West': 5,  # ~5 km
-    'Ikeya-Seki': 5,  # ~5 km
-    'Hyakutake': 4,  # ~4 km
-    'Lemmon': 3,  # ~3 km (estimated) C/2025 A6
-    '3I/ATLAS': 8,  # ~8 km (estimated, interstellar object)
-    'Wierzchos': 5,  # ~2-10 km (JWST estimates), using midpoint
-    'MAPS': 0.4,   # ~400 m diameter (JWST, March 2026)
-    'Schaumasse': 3,  # ~2.6 km nucleus
-    'Howell': 3,  # ~3 km (estimated)
-    'Tempel 2': 16,  # ~16x9 km, elongated nucleus (well-studied by Deep Space 1)
-    'PANSTARRS': 3,   # ~few km (APOD Apr 14, 2026); no precise measurement published    
-    'default': 5  # Default size for generic comets
+# L-491 (2026-10-26): a comet's nucleus size is its row in constants_new.py,
+# sourced to a page opened that day, in the form the source gives it, a
+# radius or a diameter. The table that stood here (COMET_NUCLEUS_SIZES,
+# sixteen sizes typed from memory, with a default of 5 km for any comet
+# not in it) is gone; a comet with no sourced size prints none. The size
+# is words only: the nucleus is drawn as one marker of fixed size.
+# Each entry: the row, "radius" or "diameter", and what the source says
+# about how the size was found, where it is not a plain measurement.
+COMET_NUCLEUS_ROWS = {
+    'Halley': ('COMET_HALLEY_NUCLEUS_RADIUS_KM', 'radius', None),
+    'Hale-Bopp': ('COMET_HALE_BOPP_NUCLEUS_RADIUS_KM', 'radius', None),
+    'Ikeya-Seki': ('COMET_IKEYA_SEKI_NUCLEUS_RADIUS_KM', 'radius',
+                   'estimated from its brightness before perihelion'),
+    'Hyakutake': ('COMET_HYAKUTAKE_NUCLEUS_RADIUS_KM', 'radius', None),
+    '3I/ATLAS': ('COMET_3I_ATLAS_NUCLEUS_RADIUS_KM', 'radius',
+                 'measured by Hubble after perihelion, assuming a surface '
+                 'as dark as a typical comet\'s'),
+    'MAPS': ('COMET_MAPS_NUCLEUS_DIAMETER_KM', 'diameter',
+             'estimated from James Webb Space Telescope images'),
+    'Schaumasse': ('COMET_SCHAUMASSE_NUCLEUS_DIAMETER_KM', 'diameter', None),
+    'Howell': ('COMET_HOWELL_NUCLEUS_DIAMETER_KM', 'diameter', None),
+    'Tempel 2': ('COMET_TEMPEL_2_NUCLEUS_RADIUS_KM', 'radius', None),
 }
+
+
+def nucleus_size_line(comet_name):
+    """The hover's size line for a comet's nucleus, from its row, or ""
+    for a comet with no sourced size."""
+    entry = COMET_NUCLEUS_ROWS.get(comet_name)
+    if entry is None:
+        return ""
+    row, kind, how = entry
+    line = f"Nucleus {kind}: {row_text(row)} km"
+    if how:
+        line += f", {how}"
+    return line + "<br>"
+
 
 # Historical peak tail lengths (in millions of km)
 # 
@@ -449,7 +476,8 @@ def calculate_tail_activity_factor(current_distance_au, perihelion_distance_au, 
     return min(1.0, activity)
 
 
-def create_comet_nucleus(center_position=(0, 0, 0), nucleus_size_km=5, comet_name="Generic"):
+def create_comet_nucleus(center_position=(0, 0, 0), comet_name="Generic",
+                         size_name=None):
     """
     Creates a comet nucleus visualization as a single point.
     
@@ -460,14 +488,15 @@ def create_comet_nucleus(center_position=(0, 0, 0), nucleus_size_km=5, comet_nam
     -----------
     center_position : tuple
         (x, y, z) position in AU
-    nucleus_size_km : float
-        Diameter of nucleus in kilometers (for info only, not visual scale)
     comet_name : str
         Name of the comet for labeling
+    size_name : str
+        The comet's name in COMET_NUCLEUS_ROWS, where it differs from the
+        label (L-491); its sourced size, if any, is printed
     """
     description = (
         f"Nucleus of {comet_name}<br>"
-        f"Approximate size: {nucleus_size_km} km<br>"
+        f"{nucleus_size_line(size_name or comet_name)}"
         f"Cometary nuclei are 'dirty snowballs' - irregular chunks of ice, rock, and dust.<br>"
         f"As they approach the Sun, surface ice sublimates, releasing gas and dust.<br>"
         f"Note: The nucleus is far too small to show at scale with the coma."
@@ -1435,8 +1464,6 @@ def create_complete_comet_visualization(comet_name='Halley', center_position=(0,
         comet_name_key = comet_name
     
     comet_data = HISTORICAL_TAIL_DATA[comet_name_key]
-    nucleus_size = COMET_NUCLEUS_SIZES.get(comet_name, COMET_NUCLEUS_SIZES['default'])
-    
     # Calculate current distance if not provided
     if current_distance_au is None:
         cx, cy, cz = center_position
@@ -1450,7 +1477,7 @@ def create_complete_comet_visualization(comet_name='Halley', center_position=(0,
     traces = []
     
     # 1. Nucleus
-    traces.extend(create_comet_nucleus(center_position, nucleus_size, comet_name))
+    traces.extend(create_comet_nucleus(center_position, comet_name))
     
     # 2. Coma (only if somewhat active)
     if activity_factor > 0.1:
@@ -1827,8 +1854,7 @@ def add_comet_tails_to_figure(fig, comet_name, position_data,
     
     # If comet is very far, show nucleus + legend entries for missing features
     if distance_au > COMET_FEATURE_THRESHOLDS['coma']:
-        nucleus_size = COMET_NUCLEUS_SIZES.get(db_name, COMET_NUCLEUS_SIZES['default'])
-        nucleus_traces = create_comet_nucleus(position_au, nucleus_size, comet_name)
+        nucleus_traces = create_comet_nucleus(position_au, comet_name, db_name)
         for trace in nucleus_traces:
             fig.add_trace(trace)
         
@@ -1877,7 +1903,6 @@ def add_comet_tails_to_figure(fig, comet_name, position_data,
     # Comet is active - create visualization with available features
     try:
         comet_data = HISTORICAL_TAIL_DATA.get(db_name, HISTORICAL_TAIL_DATA['default'])
-        nucleus_size = COMET_NUCLEUS_SIZES.get(db_name, COMET_NUCLEUS_SIZES['default'])
         perihelion_distance = comet_data['perihelion_distance_au']
         activity_perihelion = comet_data.get('perihelion_distance_au_activity', perihelion_distance)
         max_active = comet_data.get('max_active_distance_au', 3.0)
@@ -1886,7 +1911,7 @@ def add_comet_tails_to_figure(fig, comet_name, position_data,
         traces = []
         
         # 1. Nucleus (always)
-        traces.extend(create_comet_nucleus(position_au, nucleus_size, comet_name))
+        traces.extend(create_comet_nucleus(position_au, comet_name, db_name))
         
         # 2. Coma (if close enough and active)
         if features_visible['coma'] and activity_factor > 0.1:

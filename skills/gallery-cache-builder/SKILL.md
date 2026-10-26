@@ -2,14 +2,22 @@
 name: gallery-cache-builder
 description: Nightly data-serving pipeline for the Paloma's Orrery web gallery (Phase 1b, ledger L-098). Use for any task touching tools/gallery_cache_builder.py, tools/test_gallery_cache_builder_offline.py, inspect_staging.py, debug_encke_tp.py, gallery_cleanup.py, data/objects_config.json, the data/solar-system/ serving cache (coverage_index.json, feature_configs.json, positions/, raw/), atomic-swap / .prev / .staging_* / .quarantine_* semantics, Guard v2, dry-run / first-build / nightly modes, documentation/TESTING_PROTOCOL.md layers, or wiring interactive.html to the served data; for the rule that a config change is not deployed until the cache is rebuilt; and whenever a rename or a delete under data/ is refused with "Access is denied" (WinError 5), or the swap log data/cache_swap_log.jsonl is being read or written; and for daily_run.py's order, a failed pull and the run records check. Do NOT use for the Studio/converter/viewer curation chain (that is gallery-pipeline) or for projects other than Paloma's Orrery.
 fires_when: Nightly builder, atomic swap and its retry/roll-back/swap log, "Access is denied" under data/, coverage_index, serving cache, objects_config, dry-run/first-build/nightly, builder testing layers, the Daily
-  Run's order and a failed pull, the run records and their check, a spacecraft fetched by its path plan, a pull that does not match the push
+  Run's order and a failed pull, the run records and their check, a spacecraft fetched by its path plan, a pull that does not match the push, a comet on an open path fetched by its plan (is_path_body, open_path)
 ---
 
 # Gallery Cache Builder (Phase 1b data serving)
 
-Read this file in 3 parts: lines 1-276, 277-453, 454-655.
+Read this file in 3 parts: lines 1-236, 237-469, 470-671.
 
-Skill version: 1.12 | 2026-10-25, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.13 | 2026-10-26, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 5398439 and gallery @ 9223cd1. v1.13 (L-443, slice 2,
+build B part 2) adds to A Spacecraft Is Fetched by Its Plan that a
+comet the orrery marks open_path is a path body too (is_path_body):
+fetched by its plan, served positions and no elements, open_path
+carried to the served entry, its trust measured from its positions, and
+named and not fetched when it has no plan yet. Its plan's span is a year
+before its perihelion to a year after today, not JPL's whole data.
+Earlier: 1.12 | 2026-10-25, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 0c27f47a and gallery @ b1a4ce6c. v1.12 (L-443 build B,
 L-461) adds A Spacecraft Is Fetched by Its Plan: the builder fetches each
 spacecraft by the path plan the orrery makes, which the objects mirror
@@ -29,17 +37,9 @@ The builder prints what its copy carried, and the Daily Run compares
 the new cache's records with the replaced cache's after the builder and
 stops on a loss, naming each record and its copy (Tony, 2026-10-17:
 stop and name). See The Daily Run's Steps.
-Earlier: 1.10 | 2026-10-15, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 54c27d7f and gallery @ 95713f49. v1.10 (L-446, with
-L-380 and L-388) records the Daily Run's new order. It is four steps:
-the pulls from the orrery now run BEFORE the builder, so one Daily Run
-carries today's export into the build. A pull that cannot reach the
-orrery fails by name, its mirror does not run, and the Daily Run stops
-before the builder: Tony's option A of 2026-10-15 (The Daily Run's
-Steps).
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
 on 2026-10-05 (L-418), 2026-10-14 (L-431), 2026-10-15 (L-446),
-2026-10-17 (L-449) and 2026-10-25 (L-443).
+2026-10-17 (L-449), 2026-10-25 (L-443) and 2026-10-26 (L-443).
 
 The standalone builder that fetches fresh JPL Horizons data and deploys the
 web gallery's served cache. Tony runs it MANUALLY and commits the result
@@ -450,6 +450,22 @@ the orrery's."
   served 68 KB of positions for the twelve; before the windows were
   thinned at their own scale it was about 1.7 MB. The real paths curve,
   so the first real build measures it.
+- A COMET ON AN OPEN PATH IS A PATH BODY (v1.13, L-443, slice 2, build
+  B part 2). `is_path_body` is one test, a spacecraft or an entry with
+  `open_path`, and every place above that asked "is this a spacecraft?"
+  asks it: the fetch by the plan, last-good serving, structural check
+  #2, the trust branch (`fetched_positions`, no window) and the floor on
+  points. Such a comet is served positions and no `osculating` block,
+  with `open_path: true` on its served entry, which the room reads to
+  draw it as a path. Its plan comes from the orrery like a
+  spacecraft's (horizons-orbital-mechanics, A Comet on an Open Path);
+  its span is a year before its perihelion to a year after today, so
+  "nothing extended past the span" means past that. With no plan yet it
+  fails by name, "no path plan is served for this comet yet". The
+  mirror copies `open_path` from the export (`INSERTED`). The offline
+  suite gives such a comet a stand-in plan and the fake answers it with
+  a straight line past the Sun; four checks hold it, among them one
+  fetched inside its plan's span and no further.
 
 ## The Daily Run's Steps [QUALITY]
 

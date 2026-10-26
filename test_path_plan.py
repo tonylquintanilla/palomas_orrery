@@ -56,6 +56,18 @@ WHAT IT CHECKS
          rule 1 did.
      14. Every event names its kind (a flyby says "flyby"), and a plan
          made by the older rule is made again.
+     15. Two made-up comets on open paths, each a straight line past the
+         Sun: each has one event, its perihelion, found in JPL's
+         positions to the minute (Comet One's data sheet writes TP 1.3
+         days early, as a calendar day; Comet Two's as a Julian date),
+         with the encounter rule's window and step; Comet One's span runs
+         a year before its perihelion to a year after today, Comet Two's
+         is clipped at both ends to JPL's data. A comet not marked
+         open_path is not planned, and no spacecraft searches a comet.
+     16. The same day asks nothing; 31 days later each comet is planned
+         again, Comet One's end moved 31 days, Comet Two's still JPL's.
+     17. Two planted faults must fail check 15: the perihelion taken from
+         the data sheet's TP, and JPL's limits ignored.
 
 RUN COMMAND
 
@@ -79,6 +91,9 @@ Module updated: October 25, 2026 with Anthropic's Claude Opus 5.5
 (L-443, build B: checks 13 and 14, the orbiter rule with a planted
 fault, and each event's kind; check 8 now holds that an unkeyed entry is
 not planned, the --preview flag it checked having gone).
+Module updated: October 26, 2026 with Anthropic's Claude Opus 5.5
+(L-443, build B part 2: checks 15 to 17, comets on open paths, with two
+planted faults).
 """
 
 import datetime
@@ -241,6 +256,44 @@ def craft_state(ident, jd):
     return [base[i] + rel[i] for i in range(6)]
 
 
+# Two made-up comets on open paths (checks 15 to 17). Each moves along a
+# straight line past the Sun, so its perihelion -- the nearest moment, its
+# distance and speed -- is known exactly. Comet One's perihelion falls off
+# the hour; its data sheet writes TP as a calendar day 1.3 days early (an
+# osculating TP is not the nearest moment), so the plan must find the
+# perihelion in the positions, not take the TP. Comet Two's sheet writes TP
+# as a Julian date, and JPL's data for it begins after a year before its
+# perihelion and ends before a year after today, so both ends are clipped.
+COMETS = {
+    "C/2025 Z9": {"t0": hc.calendar_jd("2026-01-15 03:41"), "q": 0.4,
+                  "v": 50.0, "tp": "TP= 2026-Jan-13.95"},
+    "C/2024 Z8": {"t0": hc.calendar_jd("2024-06-02 17:09"), "q": 1.2,
+                  "v": 30.0, "tp": "TP= 2460464.2"},
+}
+LIMITS["C/2024 Z8"] = ("2023-09-01 00:00", "2027-03-01 00:00", "Comet Two")
+
+LIST_COMET = """from datetime import datetime
+OBJECT_DEFINITIONS = [
+    {'name': 'Craft A', 'key': 'craft_a', 'id': '-901', 'id_type': 'id',
+     'object_type': 'trajectory', 'start_date': datetime(2025, 1, 1),
+     'end_date': datetime(2025, 6, 1)},
+    {'name': 'Comet One', 'key': 'comet_one', 'id': 'C/2025 Z9',
+     'id_type': 'smallbody', 'object_type': 'trajectory', 'open_path': True},
+    {'name': 'Comet Two', 'key': 'comet_two', 'id': 'C/2024 Z8',
+     'id_type': 'smallbody', 'object_type': 'orbital', 'open_path': True},
+    {'name': 'Comet Closed', 'key': 'comet_closed', 'id': 'C/2020 Z7',
+     'id_type': 'smallbody', 'object_type': 'orbital'},
+]
+"""
+
+
+def comet_state(ident, jd):
+    c = COMETS[ident]
+    v_au_d = c["v"] * DAY / AU
+    t = jd - c["t0"]
+    return [v_au_d * t, c["q"], 0.0, v_au_d, 0.0, 0.0]
+
+
 def parse_step(step):
     m = re.match(r"^(\d+)([dhm])$", step)
     n, u = int(m.group(1)), m.group(2)
@@ -260,6 +313,9 @@ class FakeJPL(object):
         val = lambda k: urllib.parse.unquote(q[k][0]).strip("'")
         cmd = val("COMMAND").rstrip(";")
         if val("MAKE_EPHEM") == "NO":
+            if cmd in COMETS:
+                return ("API VERSION: 1.2\n   %s\n   GM= n.a.\n"
+                        % COMETS[cmd]["tp"])
             return SHEETS.get(cmd, "API VERSION: 1.2\n  GM= n.a.\n")
         center = val("CENTER").split("@")[1]
         if cmd in self.refuse:
@@ -269,16 +325,19 @@ class FakeJPL(object):
         jd1 = hc.calendar_jd(val("STOP_TIME"))
         if cmd in LIMITS:
             lo, hi, label = LIMITS[cmd]
+            what = "spacecraft" if cmd.startswith("-") else cmd
+            scale = "UT" if cmd.startswith("-") else "TDB"
             if jd0 < hc.calendar_jd(lo):
                 return ('API VERSION: 1.2\nNo ephemeris for target "%s '
-                        '(spacecraft)" prior to A.D. %s:00.0000 UT\n'
-                        % (label, mon(lo)))
+                        '(%s)" prior to A.D. %s:00.0000 %s\n'
+                        % (label, what, mon(lo), scale))
             if jd1 > hc.calendar_jd(hi):
                 return ('API VERSION: 1.2\nNo ephemeris for target "%s '
-                        '(spacecraft)" after A.D. %s:00.0000 UT\n'
-                        % (label, mon(hi)))
+                        '(%s)" after A.D. %s:00.0000 %s\n'
+                        % (label, what, mon(hi), scale))
         step = parse_step(val("STEP_SIZE"))
-        state = craft_state if cmd.startswith("-") else body_state
+        state = (craft_state if cmd.startswith("-") else
+                 comet_state if cmd in COMETS else body_state)
         lines = ["API VERSION: 1.2", "$$SOE"]
         n = int(round((jd1 - jd0) / step))
         for i in range(n + 1):
@@ -594,6 +653,115 @@ def kinds_named():
         shutil.rmtree(root, ignore_errors=True)
 
 
+def comets(plant=None, today=datetime.date(2026, 10, 24)):
+    """Checks 15 to 17: two comets on open paths. Returns (ok, why,
+    plans, lines, calls)."""
+    root = make_root(LIST_COMET)
+    saved = plant() if plant else None
+    try:
+        jpl = FakeJPL()
+        verdict, lines, out = pp.run(root, jpl, today, pause=0.0)
+        plans = out["plans"]
+        probs = []
+        for key, ident, span in (
+                ("comet_one", "C/2025 Z9",
+                 {"start": "2025-01-15", "end": "2027-10-24"}),
+                ("comet_two", "C/2024 Z8",
+                 {"start": "2023-09-02", "end": "2027-02-28"})):
+            c = COMETS[ident]
+            plan = plans.get(key)
+            if not plan:
+                probs.append("%s not planned" % key)
+                continue
+            ev = plan["events"]
+            if len(ev) != 1 or ev[0]["kind"] != "perihelion" \
+                    or ev[0]["body"] != "Sun":
+                probs.append("%s events %s" % (key, [(e["body"], e["kind"])
+                                                   for e in ev]))
+                continue
+            e = ev[0]
+            want = pp.jd_to_calendar(c["t0"])
+            d_km = c["q"] * AU
+            w0, w1, step = pp.window_and_step(c["t0"], d_km, c["v"])
+            if e["closest"] != want:
+                probs.append("%s perihelion %s, not %s" % (key, e["closest"],
+                                                           want))
+            if abs(e["dist_km"] - d_km) > d_km * 1e-6 \
+                    or abs(e["v_kms"] - c["v"]) > 1e-3:
+                probs.append("%s distance or speed" % key)
+            if [w0, w1, step] != e["window"] + [e["step"]]:
+                probs.append("%s window %s %s, not %s %s" % (
+                    key, e["window"], e["step"], [w0, w1], step))
+            if plan["span"] != span:
+                probs.append("%s span %s, not %s" % (key, plan["span"], span))
+            if plan["kind"] != "comet":
+                probs.append("%s kind %s" % (key, plan["kind"]))
+        if "comet_closed" in plans:
+            probs.append("a comet not marked open_path was planned")
+        sa = plans.get("craft_a", {}).get("searched", [])
+        if any(n.startswith("Comet") for n in sa):
+            probs.append("Craft A searched a comet: %s" % sa)
+        return (not probs, "; ".join(probs) or "both perihelia to the minute, "
+                "spans %s and %s" % (plans["comet_one"]["span"],
+                                     plans["comet_two"]["span"]),
+                plans, lines, jpl.calls, root)
+    finally:
+        if saved:
+            saved()
+
+
+def comet_cycle():
+    """Check 16. The same day asks nothing; 31 days later each comet is
+    planned again and its span's end has moved 31 days."""
+    ok, why, plans, lines, calls, root = comets()
+    try:
+        jpl2 = FakeJPL()
+        _, _, out2 = pp.run(root, jpl2, datetime.date(2026, 10, 24),
+                            pause=0.0)
+        same = not jpl2.calls and out2["plans"] == plans
+        jpl3 = FakeJPL()
+        _, l3, out3 = pp.run(root, jpl3, datetime.date(2026, 11, 24),
+                             pause=0.0)
+        one = out3["plans"]["comet_one"]
+        moved = (one["span"]["end"] == "2027-11-24"
+                 and one["events"][0]["closest"]
+                 == plans["comet_one"]["events"][0]["closest"])
+        two = out3["plans"]["comet_two"]["span"]["end"] == "2027-02-28"
+        return (ok and same and moved and two,
+                "same day %d calls; 31 days later comet_one ends %s, "
+                "comet_two %s" % (len(jpl2.calls), one["span"]["end"],
+                                  out3["plans"]["comet_two"]["span"]["end"]))
+    finally:
+        shutil.rmtree(root, ignore_errors=True)
+
+
+def plant_tp_taken():
+    """The perihelion taken from the data sheet's TP, not found in JPL's
+    positions."""
+    real = pp.make_comet_plan
+
+    def fake(fetch, path, today, found, pause=0.0, progress=None):
+        plan = real(fetch, path, today, found, pause, progress)
+        tp = found[3]
+        plan["events"][0]["closest"] = pp.jd_to_calendar(tp)
+        return plan
+    pp.make_comet_plan = fake
+
+    def restore():
+        pp.make_comet_plan = real
+    return restore
+
+
+def plant_no_clip():
+    """JPL's limits ignored, so a span JPL refuses is not moved."""
+    real = pp.jpl_limit
+    pp.jpl_limit = lambda text: None
+
+    def restore():
+        pp.jpl_limit = real
+    return restore
+
+
 def plant_no_backbone():
     old = pp.BACKBONE_STEP_SECONDS
     pp.BACKBONE_STEP_SECONDS = 0.0
@@ -636,6 +804,25 @@ def main():
     ok, why = kinds_named()
     check(ok, "14. every event names its kind, and a plan made by the "
               "older rule is made again (%s)" % why)
+    ok, why, _, lines, _, root = comets()
+    shutil.rmtree(root, ignore_errors=True)
+    check(ok, "15. each comet on an open path has its perihelion found in "
+              "JPL's positions to the minute, as its one event, and its "
+              "span from a year before it to a year after today, clipped "
+              "to JPL's data; a comet not marked is not planned, and no "
+              "spacecraft searches a comet (%s)" % why)
+    for line in lines:
+        if "comet" in line:
+            print("  " + line)
+    ok, why = comet_cycle()
+    check(ok, "16. a comet's plan is not asked again the same day, and 31 "
+              "days later is made again with its end moved (%s)" % why)
+    for name, plant in (("the perihelion taken from the data sheet's TP",
+                         plant_tp_taken),
+                        ("JPL's limits ignored", plant_no_clip)):
+        got = comets(plant=plant)
+        shutil.rmtree(got[5], ignore_errors=True)
+        check(not got[0], "17. planted fault caught: %s" % name)
     for name, plant in (("the backbone's step set to nothing",
                          plant_no_backbone),
                         ("the fine pass skipped", plant_no_fine_pass)):

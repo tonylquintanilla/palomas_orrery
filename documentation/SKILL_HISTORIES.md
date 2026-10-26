@@ -777,6 +777,18 @@ B1"), and every body's hover gives its orbit's near and far distance
 (L-480). The descriptions L-472 carried -- the count line, the About
 line -- are added.
 (Moved down 2026-10-25, evening, when 1.25 made a fourth entry.)
+Earlier: 1.23 | 2026-10-24, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 206f96c9 and gallery @ 96173b88. v1.23 (L-482, with
+the descriptions L-481 carried) records Tony's ruling of the day: "Yes
+all rooms should use the same Reset button and no 'see more'." The top
+bar's button reads Reset in every room. In the Sun and Earth rooms it
+puts back the room's arrival -- every shell ticked as the served arrival
+block left it, the text box closed, the opening frame and angle, the
+drawer closed -- and no longer ticks or unticks every shell. No room has
+a See more. And three descriptions, built and approved on his look the
+same day: each line of a Solar System room hover after the name is a
+bullet; a source line naming JPL Horizons carries its address, which the
+i panel makes a link; each room's closing paragraph is a bulleted list.
 
 ## safe-file-editing
 
@@ -1017,6 +1029,14 @@ documentation/SKILL_HISTORIES.md. Both because a plain read of a
 long file shows its start and end and leaves out its middle, where
 the rules are (Tony, 2026-10-05).
 (Moved down 2026-10-25, when 1.12 made a fourth entry.)
+Earlier: 1.10 | 2026-10-15, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 54c27d7f and gallery @ 95713f49. v1.10 (L-446, with
+L-380 and L-388) records the Daily Run's new order. It is four steps:
+the pulls from the orrery now run BEFORE the builder, so one Daily Run
+carries today's export into the build. A pull that cannot reach the
+orrery fails by name, its mirror does not run, and the Daily Run stops
+before the builder: Tony's option A of 2026-10-15 (The Daily Run's
+Steps).
 
 ## horizons-orbital-mechanics
 
@@ -1090,3 +1110,14 @@ than the body. Earth's, around the Sun, is asked of the Earth-Moon
 barycentre, target 3; the record carries the target, and every reader
 takes it from the record.
 (Moved down 2026-10-25, when 1.11 made a fourth entry.)
+Earlier: 1.9 | 2026-10-22, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ bfb6c474. v1.9 (L-443, with L-470) adds Which Record
+Serves a Body: around the Sun a body with a helio_id is asked by it, in
+every reader; a TNO's small-body record is JPL's "integrated barycenter";
+a pinned comet is re-pinned to its newest record on Tony's word; JPL's
+exact name is read for each entry before it is served; an orbit JPL
+classes as open is not drawn as an ellipse; and a name on a skip list
+says which record failed around which centre, and is tested before it
+comes off (Tony, 2026-10-22: "some idiosyncrasies in Horizons are
+addressed with specific record numbers, which can change").
+

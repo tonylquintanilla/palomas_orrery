@@ -4,7 +4,8 @@ celestial_objects.py - Celestial object definitions for Paloma's Orrery.
 Master catalog of 183 objects queried from JPL Horizons. Each entry is a
 dict carrying the Horizons ID, object type, display symbol, hover text, and
 URL. An entry the website serves also carries 'key', the website's name
-for it (export_objects.py writes only keyed entries), and 'horizons_name',
+for it (export_objects.py writes only keyed entries), a comet the website
+draws as a path 'open_path' (path_plan.py plans it), and 'horizons_name',
 JPL's exact name for the object, which nothing in the orrery reads: the
 gallery's Horizons check compares it with JPL's answer (L-395). 'name'
 stays the orrery's own choice. Separated from the GUI so palomas_orrery.py
@@ -49,6 +50,13 @@ Psyche, Europa Clipper, BepiColombo, Solar Orbiter, Parker Solar Probe and
 OSIRIS-APEX -- each with JPL's name and the description and link Tony
 approved, BepiColombo's with no date, Juno's with nothing about when it
 ends. Their dates are unchanged here; L-476 reads them from the path plan.)
+Module updated: October 26, 2026 with Anthropic's Claude Opus 5.5 (L-443,
+build B part 2: the fourteen comets on open paths keyed for the website,
+each with JPL's exact name, the description Tony approved (JPL's terms
+kept and explained: hyperbolic, near-parabolic, retrograde, perihelion)
+and its link, and marked 'open_path', which the path plan and the export
+read. West is asked as C/1975 V1-A, JPL's one record for it; McNaught's,
+PANSTARRS's, Borisov (C/2025 V1)'s and Wierzchos's links replaced.)
 """
 
 from datetime import datetime
@@ -616,13 +624,20 @@ OBJECT_DEFINITIONS = [
     'mission_info': 'Horizons: C/2020 F3. The brightest comet seen from the Northern Hemisphere since Hale-Bopp in 1997. It goes around the Sun in the opposite direction to the planets.', 
     'mission_url': 'https://www.nasa.gov/centers-and-facilities/jpl/comet-neowise-sizzles-as-it-slides-by-the-sun-providing-a-treat-for-observers/'},
 
-    {'name': 'Wierzchos', 'id': 'C/2024 E1', 'var_name': 'comet_wierzchos_var', 'color_key': 'Wierzchos', 'symbol': 'diamond',
+    {'name': 'Wierzchos', 'key': 'wierzchos', 'horizons_name': 'Wierzchos (C/2024 E1)', 'id': 'C/2024 E1', 'var_name': 'comet_wierzchos_var', 'color_key': 'Wierzchos', 'symbol': 'diamond',
     'object_type': 'orbital', 'id_type': 'smallbody',
     # data arc: 2024-02-15 to 2026+; near-parabolic, outbound period ~200,000 years
     # Perihelion: Jan 20, 2026 at 0.562 AU. Closest to Earth: Feb 17, 2026 at ~1.0 AU.
     # CO2-driven activity (JWST confirmed). Reached mag ~6.8 post-perihelion.
-    'mission_info': 'Horizons: C/2024 E1. CO2-driven Oort Cloud comet. Perihelion Jan 20, 2026 at 0.56 AU. Multiple dust tails post-perihelion.',
-    'mission_url': 'https://apod.nasa.gov/apod/ap260217.html'},
+    'mission_info': ('Horizons: C/2024 E1. A comet from the Oort cloud, the far-off cloud '
+        'of icy bodies thought to surround the solar system, discovered in '
+        'March 2024 by Kacper Wierzchos. Its activity has been driven by '
+        'carbon dioxide. After its perihelion, its closest pass by the Sun, '
+        'it showed three dust tails. Hyperbolic: its orbit is an open curve, '
+        "not an ellipse like a planet's, so on its present path it does not "
+        'loop back around the Sun.'),
+    'open_path': True,
+    'mission_url': 'https://en.wikipedia.org/wiki/C/2024_E1_(Wierzchos)'},
 
     {'name': 'SWAN', 'key': 'swan', 'id': 'C/2025 R2', 'horizons_name': 'SWAN (C/2025 R2)', 'var_name': 'comet_c2025r2_var', 'color_key': 'SWAN', 'symbol': 'diamond', 
     'object_type': 'orbital', 'id_type': 'smallbody', 
@@ -647,29 +662,55 @@ OBJECT_DEFINITIONS = [
 
 # Hyperbolic solar
 
-    {'name': 'West', 'id': 'C/1975 V1', 'var_name': 'comet_west_var', 'color_key': 'Comet West', 'symbol': 'diamond', 
+    {'name': 'West', 'key': 'west', 'horizons_name': 'West (C/1975 V1-A)', 'id': 'C/1975 V1-A', 'var_name': 'comet_west_var', 'color_key': 'Comet West', 'symbol': 'diamond', 
     'object_type': 'trajectory', 'id_type': 'smallbody', 'start_date': datetime(1975, 11, 6), 'end_date': datetime(1976, 6, 1), 
-    'mission_info': 'Horizons: C/1975 V1. Hyperbolic. Notable for its bright and impressive tail.', 
+    'mission_info': ('Horizons: C/1975 V1-A. One of the brightest objects to pass through '
+        'the inner solar system in 1976. As it passed close to the Sun its '
+        "nucleus split into four pieces; the path drawn is piece A's, the one "
+        'JPL tracks. Hyperbolic: its orbit is an open curve, not an ellipse '
+        "like a planet's, so on its present path it does not loop back around "
+        'the Sun.'),
+    'open_path': True,
     'mission_url': 'https://en.wikipedia.org/wiki/Comet_West'},
 
-    {'name': 'McNaught', 'id': 'C/2006 P1', 'var_name': 'comet_mcnaught_var', 'color_key': 'McNaught', 'symbol': 'diamond', 
+    {'name': 'McNaught', 'key': 'mcnaught', 'horizons_name': 'McNaught (C/2006 P1)', 'id': 'C/2006 P1', 'var_name': 'comet_mcnaught_var', 'color_key': 'McNaught', 'symbol': 'diamond', 
     'object_type': 'trajectory', 'id_type': 'smallbody', 'start_date': datetime(2006, 8, 8), 'end_date': datetime(2007, 7, 10), 
     # data arc: 2006-08-07 to 2007-07-11
-    'mission_info': 'Horizons: C/2006 P1. Hyperbolic. Known as the Great Comet of 2007. Retrograde (left-handed) orbit.', 
-    'mission_url': 'https://science.nasa.gov/solar-system/comets/'},  
+    'mission_info': ('Horizons: C/2006 P1. Discovered in August 2006 by Robert McNaught '
+        'and called the Great Comet of 2007, it was the brightest comet in '
+        'over 40 years, easily seen with the naked eye from the Southern '
+        'Hemisphere in January and February 2007. Hyperbolic: its orbit is an '
+        "open curve, not an ellipse like a planet's, so on its present path "
+        'it does not loop back around the Sun.'),
+    'open_path': True,
+    'mission_url': 'https://en.wikipedia.org/wiki/C/2006_P1_(McNaught)'},  
 
-     {'name': 'Tsuchinshan', 'id': 'C/2023 A3', 'var_name': 'comet_tsuchinshan_atlas_var', 'color_key': 'Tsuchinsh', 
+     {'name': 'Tsuchinshan', 'key': 'tsuchinshan_atlas', 'horizons_name': 'Tsuchinshan-ATLAS (C/2023 A3)', 'id': 'C/2023 A3', 'var_name': 'comet_tsuchinshan_atlas_var', 'color_key': 'Tsuchinsh', 
     'symbol': 'diamond', 'object_type': 'orbital', 'id_type': 'smallbody', # check object type should be 'trajectory'
     'start_date': datetime(2023, 1, 10), 'end_date': datetime(2029, 12, 31), 
-    'mission_info': 'Horizons: C/2023 A3. Retrograde. Hyperbolic. Tsuchinshan-ATLAS is a new comet discovered in 2023, expected to become bright in 2024.', 
+    'mission_info': ('Horizons: C/2023 A3. Discovered in January 2023, it became known as '
+        'the Great Comet of 2024, visible to the naked eye around its '
+        'perihelion, its closest pass by the Sun, in late September 2024. '
+        'Hyperbolic: its orbit is an open curve, not an ellipse like a '
+        "planet's, so on its present path it does not loop back around the "
+        'Sun. Retrograde: it moves around the Sun in the opposite direction '
+        'to the planets.'),
+    'open_path': True,
     'mission_url': 'https://en.wikipedia.org/wiki/C/2023_A3_(Tsuchinshan-ATLAS)'},      
 
-    {'name': 'ATLAS', 'id': 'C/2024 G3', 'var_name': 'comet_atlas_var', 'color_key': 'ATLAS', 'symbol': 'diamond', 
+    {'name': 'ATLAS', 'key': 'atlas_2024_g3', 'horizons_name': 'ATLAS (C/2024 G3)', 'id': 'C/2024 G3', 'var_name': 'comet_atlas_var', 'color_key': 'ATLAS', 'symbol': 'diamond', 
     'object_type': 'orbital', 'id_type': 'smallbody', # check object type should be 'trajectory'
     # 'start_date': datetime(2024, 6, 18), 'end_date': datetime(2029, 12, 31), # all dates are valid in Horizons
     # EOP coverage    : DATA-BASED 1962-JAN-20 TO 2025-OCT-03. PREDICTS-> 2025-DEC-29
     # data arc: 2024-04-05 to 2025-01-01
-    'mission_info': 'Horizons: C/2024 G3. Retrograde. Hyperbolic. The Great Comet of 2025. Comet C/2024 G3 (ATLAS) created quite a buzz in the Southern Hemisphere!', 
+    'mission_info': ('Horizons: C/2024 G3. Discovered in April 2024 and called the Great '
+        'Comet of 2025, the brightest comet of that year. After its '
+        'perihelion, its closest pass by the Sun, it was clearly visible to '
+        'the naked eye from the Southern Hemisphere. Hyperbolic: its orbit is '
+        "an open curve, not an ellipse like a planet's, so on its present "
+        'path it does not loop back around the Sun. Retrograde: it moves '
+        'around the Sun in the opposite direction to the planets.'),
+    'open_path': True,
     'mission_url': 'https://en.wikipedia.org/wiki/C/2024_G3_(ATLAS)'},
 
     # Asked by JPL's permanent number for the comet, 1004075, sent as
@@ -680,13 +721,18 @@ OBJECT_DEFINITIONS = [
     # 2026-10-24, DES=1004075; returned one record, 90004925, ATLAS
     # (C/2025 K1), data arc 2025-04-08 to 2026-01-11, with a
     # non-gravitational model (L-470; Tony's ruling of 2026-10-24).
-    {'name': 'C/2025_K1', 'id': '1004075', 'var_name': 'comet_2025k1_var', 'color_key': 'C/2025_K1', 'symbol': 'diamond',
+    {'name': 'C/2025_K1', 'key': 'c2025_k1', 'horizons_name': 'ATLAS (C/2025 K1)', 'id': '1004075', 'var_name': 'comet_2025k1_var', 'color_key': 'C/2025_K1', 'symbol': 'diamond',
     'object_type': 'trajectory', 'id_type': 'designation',
     # 'start_date': datetime(2025, 4, 8), 'end_date': datetime(2025, 7, 10),
-    'mission_info': 'Horizons: C/2025 K1. Retrograde. Hyperbolic (e=1.00026): an open path around the Sun,<br>'
-                    'not a closed loop. Perihelion Oct 8, 2025 at 0.33 AU.<br>'
-                    'Hubble caught it breaking into at least four pieces about a month after perihelion. See K1-B, K1-C, K1-D.<br>'
-                    'Each piece\'s path before the break-up is its orbit traced backward; the comet was one body then.',
+    'mission_info': ('Horizons: C/2025 K1. A comet that broke apart about a month after its '
+        "perihelion, its closest pass by the Sun: in November 2025 NASA's "
+        'Hubble Space Telescope caught it splitting into at least four '
+        "pieces. This path is the comet's own, worked out from sightings "
+        'before and after the break-up. Hyperbolic: its orbit is an open '
+        "curve, not an ellipse like a planet's, so on its present path it "
+        'does not loop back around the Sun. Retrograde: it moves around the '
+        'Sun in the opposite direction to the planets.'),
+    'open_path': True,
     'mission_url': 'https://science.nasa.gov/asset/hubble/fragmenting-comet-c-2025-k1/'},
 
     # C/2025 K1's PIECES. Hubble caught the comet breaking into at least four
@@ -701,69 +747,107 @@ OBJECT_DEFINITIONS = [
     # cannot yet tell a closed path from an open one.
     # Convergence minimum ~Nov 24 (~70,000 km), then slow divergence outbound
 
-    {'name': 'C/2025_K1-B', 'id': 'C/2025 K1-B', 'var_name': 'comet_2025k1b_var', 'color_key': 'C/2025_K1-B', 'symbol': 'diamond',
+    {'name': 'C/2025_K1-B', 'key': 'c2025_k1_b', 'horizons_name': 'ATLAS (C/2025 K1-B)', 'id': 'C/2025 K1-B', 'var_name': 'comet_2025k1b_var', 'color_key': 'C/2025_K1-B', 'symbol': 'diamond',
     # Rec #90004926 on 2026-10-24 (was 90004913), JPL#13, data arc: 2025-11-05 to 2026-01-06, 278 obs
     'object_type': 'trajectory', 'id_type': 'smallbody', 'show_tails': False,
-    'mission_info': 'Horizons: C/2025 K1-B. Piece B of comet C/2025 K1 (ATLAS).<br>'
-                    'Hyperbolic (e=1.00203): an open path around the Sun, not a closed loop.<br>'
-                    'Its path before the break-up is its orbit traced backward; the comet was one body then.',
+    'mission_info': ('Horizons: C/2025 K1-B. Piece B of comet C/2025 K1 (ATLAS), one of at '
+        'least four pieces Hubble saw in November 2025. Its path is worked '
+        'out from sightings after the break-up, so the part drawn before then '
+        'is traced backwards. Hyperbolic: its orbit is an open curve, not an '
+        "ellipse like a planet's, so on its present path it does not loop "
+        'back around the Sun. Retrograde: it moves around the Sun in the '
+        'opposite direction to the planets.'),
+    'open_path': True,
     'mission_url': 'https://science.nasa.gov/asset/hubble/fragmenting-comet-c-2025-k1/'},
 
-    {'name': 'C/2025_K1-C', 'id': 'C/2025 K1-C', 'var_name': 'comet_2025k1c_var', 'color_key': 'C/2025_K1-C', 'symbol': 'diamond',
+    {'name': 'C/2025_K1-C', 'key': 'c2025_k1_c', 'horizons_name': 'ATLAS (C/2025 K1-C)', 'id': 'C/2025 K1-C', 'var_name': 'comet_2025k1c_var', 'color_key': 'C/2025_K1-C', 'symbol': 'diamond',
     # Rec #90004927 on 2026-10-24 (was 90004914), JPL#14, data arc: 2025-11-25 to 2026-01-10, 158 obs
     'object_type': 'trajectory', 'id_type': 'smallbody', 'show_tails': False,
-    'mission_info': 'Horizons: C/2025 K1-C. Piece C of comet C/2025 K1 (ATLAS).<br>'
-                    'Near-parabolic (e=0.999994, give or take 0.00003): JPL\'s numbers cannot yet tell<br>'
-                    'whether its path is a very long closed loop or an open one.<br>'
-                    'Its path before the break-up is its orbit traced backward; the comet was one body then.',
+    'mission_info': ('Horizons: C/2025 K1-C. Piece C of comet C/2025 K1 (ATLAS), one of at '
+        'least four pieces Hubble saw in November 2025. Its path is worked '
+        'out from sightings after the break-up, so the part drawn before then '
+        'is traced backwards. Near-parabolic: its orbit is so close to the '
+        "line between an ellipse and an open curve that JPL's numbers cannot "
+        'yet tell which it is. Retrograde: it moves around the Sun in the '
+        'opposite direction to the planets.'),
+    'open_path': True,
     'mission_url': 'https://science.nasa.gov/asset/hubble/fragmenting-comet-c-2025-k1/'},
 
-    {'name': 'C/2025_K1-D', 'id': 'C/2025 K1-D', 'var_name': 'comet_2025k1d_var', 'color_key': 'C/2025_K1-D', 'symbol': 'diamond',
+    {'name': 'C/2025_K1-D', 'key': 'c2025_k1_d', 'horizons_name': 'ATLAS (C/2025 K1-D)', 'id': 'C/2025 K1-D', 'var_name': 'comet_2025k1d_var', 'color_key': 'C/2025_K1-D', 'symbol': 'diamond',
     # Rec #90004928 on 2026-10-24 (was 90004915), JPL#5, data arc: 2025-11-26 to 2025-12-29, 107 obs (shortest arc, 33 days)
     'object_type': 'trajectory', 'id_type': 'smallbody', 'show_tails': False,
-    'mission_info': 'Horizons: C/2025 K1-D. Piece D of comet C/2025 K1 (ATLAS). Shortest observation arc (33 days).<br>'
-                    'Hyperbolic (e=1.00246): an open path around the Sun, not a closed loop.<br>'
-                    'Its path before the break-up is its orbit traced backward; the comet was one body then.',
+    'mission_info': ('Horizons: C/2025 K1-D. Piece D of comet C/2025 K1 (ATLAS), one of at '
+        'least four pieces Hubble saw in November 2025. It was followed for '
+        'only 33 days, the shortest of the four, so the part drawn before the '
+        'break-up is traced backwards. Hyperbolic: its orbit is an open '
+        "curve, not an ellipse like a planet's, so on its present path it "
+        'does not loop back around the Sun. Retrograde: it moves around the '
+        'Sun in the opposite direction to the planets.'),
+    'open_path': True,
     'mission_url': 'https://science.nasa.gov/asset/hubble/fragmenting-comet-c-2025-k1/'},
 
-    {'name': 'PANSTARRS', 'id': 'C/2025 R3', 'var_name': 'comet_c2025r3_var', 'color_key': 'PANSTARRS', 'symbol': 'diamond',     # PANSTARRS (C/2025 R3)
+    {'name': 'PANSTARRS', 'key': 'panstarrs_2025_r3', 'horizons_name': 'PANSTARRS (C/2025 R3)', 'id': 'C/2025 R3', 'var_name': 'comet_c2025r3_var', 'color_key': 'PANSTARRS', 'symbol': 'diamond',     # PANSTARRS (C/2025 R3)
     'object_type': 'trajectory', 'id_type': 'smallbody',
-    'mission_info': 'Horizons: C/2025 R3 (PANSTARRS). Retrograde. Hyperbolic. Oort Cloud origin.<br>'
-                    'Inbound orbit ~170,000 yr ellipse; Jupiter gravitational slingshot this pass<br>'
-                    'pushed e > 1.0 -- comet now exceeds solar escape velocity. One-way ejection.<br>'
-                    'Perihelion: Apr 19, 2026 at 0.499 AU. Earth closest approach: Apr 26 at 0.489 AU.<br>'
-                    'Gas-rich, dust-poor. Ion tail exceeded 10 deg by Apr 8; naked eye (mag 5.1) Apr 11.',
-    'mission_url': 'https://in-the-sky.org/data/object.php?id=CK25R030'},
+    'mission_info': ('Horizons: C/2025 R3. A comet from the Oort cloud, the far-off cloud '
+        'of icy bodies thought to surround the solar system, discovered in '
+        'September 2025. On April 11, 2026 it was seen with the naked eye. '
+        'Hyperbolic: its orbit is an open curve, not an ellipse like a '
+        "planet's, so on its present path it does not loop back around the "
+        'Sun. Retrograde: it moves around the Sun in the opposite direction '
+        'to the planets.'),
+    'open_path': True,
+    'mission_url': 'https://en.wikipedia.org/wiki/C/2025_R3_(PanSTARRS)'},
 
-    {'name': 'Borisov', 'id': 'C/2025 V1', 'var_name': 'comet_2025v1_var', 'color_key': 'Borisov', 'symbol': 'diamond', 
+    {'name': 'Borisov', 'key': 'borisov_2025_v1', 'horizons_name': 'Borisov (C/2025 V1)', 'id': 'C/2025 V1', 'var_name': 'comet_2025v1_var', 'color_key': 'Borisov', 'symbol': 'diamond', 
     # Borisov (C/2025 V1) 2025-Nov-11 16:37:03; data arc: 2025-10-29 to 2025-11-05
     'object_type': 'trajectory', 'id_type': 'smallbody', 
     # 'start_date': datetime(2025, 4, 8), 'end_date': datetime(2025, 7, 10), 
-    'mission_info': 'Horizons: C/2025 V1. Retrograde. Hyperbolic. Discovered 11-2-2025. Most likely originated from the Oort Cloud.', 
-    'mission_url': 'https://theskylive.com/planetarium?obj=c2025v1'},
+    'mission_info': ('Horizons: C/2025 V1. A comet discovered in 2025. Hyperbolic: its '
+        "orbit is an open curve, not an ellipse like a planet's, so on its "
+        'present path it does not loop back around the Sun. Retrograde: it '
+        'moves around the Sun in the opposite direction to the planets.'),
+    'open_path': True,
+    'mission_url': 'https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=C%2F2025%20V1'},
 
 # Hyperbolic and interstellar
 
-    {'name': '1I/Oumuamua', 'id': 'A/2017 U1', 'var_name': 'oumuamua_var', 'color_key': '1I/Oumuamua', 'symbol': 'diamond', 
+    {'name': '1I/Oumuamua', 'key': 'oumuamua', 'horizons_name': "'Oumuamua", 'id': 'A/2017 U1', 'var_name': 'oumuamua_var', 'color_key': '1I/Oumuamua', 'symbol': 'diamond', 
     'object_type': 'trajectory', 'id_type': 'smallbody', 'start_date': datetime(2017, 10, 15), 'end_date': datetime(2018, 1, 1),
     # data arc from 2017 October 14 to 2018 January 2 
-    'mission_info': 'Horizons: A/2017 U1. Retrograde. Hyperbolic. First known interstellar object detected passing through<br>' 
-    'the Solar System. Retrograde (left-handed) orbit.', 
+    'mission_info': ('Horizons: A/2017 U1. The first known interstellar object, one that '
+        'came from another star system, seen passing through ours; discovered '
+        "in October 2017 by the University of Hawaii's Pan-STARRS1 telescope. "
+        'JPL lists it as an asteroid. Hyperbolic: its orbit is an open curve, '
+        "not an ellipse like a planet's, so on its present path it does not "
+        'loop back around the Sun. Retrograde: it moves around the Sun in the '
+        'opposite direction to the planets.'),
+    'open_path': True,
     'mission_url': 'https://www.jpl.nasa.gov/news/solar-systems-first-interstellar-visitor-dazzles-scientists/'},
 
-    {'name': '2I/Borisov', 'id': 'C/2019 Q4', 'var_name': 'comet_borisov_var', 'color_key': '2I/Borisov', 'symbol': 'diamond', 
+    {'name': '2I/Borisov', 'key': 'borisov_2i', 'horizons_name': 'Borisov (C/2019 Q4)', 'id': 'C/2019 Q4', 'var_name': 'comet_borisov_var', 'color_key': '2I/Borisov', 'symbol': 'diamond', 
     'object_type': 'trajectory', 'id_type': 'smallbody', 'start_date': datetime(2019, 2, 25), 'end_date': datetime(2020, 9, 29), 
     # data arc: 2019-02-24 to 2020-09-30
-    'mission_info': 'Horizons: C/2019 Q4. Hyperbolic. The second interstellar object detected, after \'1I/Oumuamua.', 
+    'mission_info': ('Horizons: C/2019 Q4. The first confirmed interstellar comet, one '
+        'that came from another star system, and only the second interstellar '
+        "visitor of any kind, after 'Oumuamua. Discovered by Gennady Borisov "
+        'in August 2019. Hyperbolic: its orbit is an open curve, not an '
+        "ellipse like a planet's, so on its present path it does not loop "
+        'back around the Sun.'),
+    'open_path': True,
     'mission_url': 'https://science.nasa.gov/solar-system/comets/2i-borisov/'},
 
-    {'name': '3I/ATLAS', 'id': 'C/2025 N1', 'var_name': 'atlas3i_var', 'color_key': '3I/ATLAS', 'symbol': 'diamond', 
+    {'name': '3I/ATLAS', 'key': 'atlas_3i', 'horizons_name': 'ATLAS (C/2025 N1)', 'id': 'C/2025 N1', 'var_name': 'atlas3i_var', 'color_key': '3I/ATLAS', 'symbol': 'diamond', 
     # JPL/HORIZONS                  ATLAS (C/2025 N1)            2025-Oct-28 14:32:30
     'object_type': 'trajectory', 'id_type': 'smallbody', 
     'start_date': datetime(2025, 5, 15), 'end_date': datetime(2032, 12, 31),
     # data arc: 2025-05-15 to 2025-09-21
-    'mission_info': 'Horizons: C/2025 N1. Retrograde. Hyperbolic. Third known interstellar object detected passing through<br>'  
-    'the Solar System. Retrograde (left-handed) orbit.', 
+    'mission_info': ('Horizons: C/2025 N1. The third known interstellar object, one from '
+        'outside our solar system, first reported on July 1, 2025 by the '
+        'NASA-funded ATLAS survey telescope in Chile. Hyperbolic: its orbit '
+        "is an open curve, not an ellipse like a planet's, so on its present "
+        'path it does not loop back around the Sun. Retrograde: it moves '
+        'around the Sun in the opposite direction to the planets.'),
+    'open_path': True,
     'mission_url': 'https://science.nasa.gov/blogs/planetary-defense/2025/07/02/nasa-discovers-interstellar-comet-moving-through-solar-system/'},
 
     # NASA Missions -- start date moved up by one day to avoid fetching errors, and default end date is 2025-01-01

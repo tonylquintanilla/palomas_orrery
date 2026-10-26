@@ -40,7 +40,9 @@ WHAT IS ASKED, AND WHEN
       an ordinary entry through JPL's Lookup service: the index its
       id_type points at must hold exactly one object whose primary id
       (major bodies) or primary designation (small bodies) is the id,
-      and the other index none;
+      and the other index none; a comet asked by JPL's permanent number
+      for it (id_type 'designation', a number) is in the small-body
+      index under that primary SPKID;
       a pinned comet record (an id of eight digits starting 9) through
       Horizons' main service: the record must exist under the entry's
       horizons_name and be the newest for its comet, or the pin is
@@ -133,6 +135,12 @@ Module updated: October 25, 2026 with Anthropic's Claude Opus 5.5 (L-443,
 the twelve spacecraft: JPL's answer of its header alone, which is how
 the Lookup answers a spacecraft's id in the small-body index, is read as
 no matches instead of as JPL unreachable.)
+Module updated: October 26, 2026 with Anthropic's Claude Opus 5.5 (L-443,
+the comets: an entry asked by JPL's permanent number for a comet, id_type
+'designation', is looked for in the small-body index by its primary
+SPKID; C/2025 K1, asked as 1004075 since L-470, is the first. A path,
+a spacecraft or a comet on an open path, has no period here, as in the
+export.)
 """
 
 import datetime
@@ -387,10 +395,19 @@ def check_entry(key, obj, fetch, pause=0.0):
                                  % (newest, year, len(rows), designation),
                                  lurl)
         else:
-            group = "sb" if id_type == "smallbody" else "mb"
+            # L-443, slice 2's comets: an entry asked by JPL's permanent
+            # number for a comet (id_type 'designation', sent as DES=<n>;,
+            # L-470: C/2025 K1, 1004075) is a small body, found in the
+            # small-body index by its primary SPKID, as the Lookup answers
+            # it (read 2026-10-26: sstr=1004075, group=sb, gives ATLAS
+            # (C/2025 K1), Primary SPKID 1004075).
+            group = ("sb" if id_type in ("smallbody", "designation")
+                     else "mb")
             other = "mb" if group == "sb" else "sb"
             url = lookup_url(ident, group)
-            here = keep(parse_lookup(ask(url)), ident, group)
+            by_spkid = id_type == "designation" and str(ident).isdigit()
+            here = keep(parse_lookup(ask(url)), ident,
+                        "mb" if by_spkid else group)
             ourl = lookup_url(ident, other)
             there = keep(parse_lookup(ask(ourl)), ident, other)
             if len(here) > 1:
@@ -808,6 +825,13 @@ def current_entries(root):
     for obj in objects.values():
         obj["period"], _inputs = export_objects.period_block(
             obj["name"], obj["object_type"], cache, typed)
+        # L-443, slice 2's comets: as the export serves it, a path (a
+        # spacecraft, or a comet on an open path) has no period, so none is
+        # compared or confirmed. Until this line the export and this check
+        # disagreed for C/2025 K1 and its pieces, whose orbit cache holds a
+        # period record.
+        if export_objects.is_path(obj):
+            obj["period"] = None
     sha = export_objects.source_sha256(text.encode("utf-8"))
     return objects, sha, spacecraft_entries(text)
 

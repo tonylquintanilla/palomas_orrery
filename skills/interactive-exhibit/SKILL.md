@@ -1,14 +1,27 @@
 ---
 name: interactive-exhibit
 description: How an interactive exhibit (a room in interactive.html such as ?exhibit=sun) is designed, built, verified and carded for the Paloma's Orrery gallery. Covers the exhibit switch and boot path, the assembler driver spec, the JS feature handoff, the shared chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent gate, back link), what is per-body, the served-data provenance contract, what a room opens on (the arrival block) and the shell-key stamp the renderers apply, the drawer order, who may write data/objects_config.json, the Mode 5 phone sequence, and carding an exhibit through Studio. Use when adding or changing an exhibit (Earth, Jupiter, the stars), touching sun* chrome in interactive.html, deciding what an exhibit may render, or editing the served words with store_writer or exhibit_store_editor. Not for propagation math (gallery-assembler), the nightly builder (gallery-cache-builder), or the Studio/converter chain (gallery-pipeline). Do not use for projects other than Paloma's Orrery.
-fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, its group rows, its two Resets, the Reset in every room's top bar, Home's order and its framing; Go To fitting a body's whole orbit and the orbit line in a body's hover; the count line's place; a bare interactive.html link and the Explorer's address; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia); a served number's citation and its source_note; the Typed facts check (smoke_typed_facts.js); a feature drawn as stored dots (the Hills cloud, Earth's radiation belts); the i panel's source list and its links (source_list.js); the order a room's drawer lists its shells in, where each begins (drawer_order.js, the Drawer order check); a spacecraft's path in the Solar System room (its positions file, solid and dashed, its text box); whether the website and the orrery agree on an object; the planets ticked with a spacecraft (companions); the i panel's words one sentence to a bullet
+fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, its group rows, its two Resets, the Reset in every room's top bar, Home's order and its framing; Go To fitting a body's whole orbit and the orbit line in a body's hover; the count line's place; a bare interactive.html link and the Explorer's address; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia); a served number's citation and its source_note; the Typed facts check (smoke_typed_facts.js); a feature drawn as stored dots (the Hills cloud, Earth's radiation belts); the i panel's source list and its links (source_list.js); the order a room's drawer lists its shells in, where each begins (drawer_order.js, the Drawer order check); a spacecraft's path in the Solar System room (its positions file, solid and dashed, its text box); whether the website and the orrery agree on an object; the planets ticked with a spacecraft (companions); the i panel's words one sentence to a bullet; a comet on an open path in the Solar System room; the drawer's groups one JPL class to a row; JPL's terms in the words a visitor reads
 ---
 
 # Interactive Exhibit
 
-Read this file in 8 parts: lines 1-151, 152-155, 156-397, 398-495, 496-712, 713-967, 968-1167, 1168-1268.
+Read this file in 8 parts: lines 1-152, 153-156, 157-398, 399-496, 497-723, 724-1010, 1011-1222, 1223-1323.
 
-Skill version: 1.25 | 2026-10-25, evening, with Anthropic's Claude Opus
+Skill version: 1.26 | 2026-10-26, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 5398439 and gallery @ 9223cd1. v1.26 (L-443, slice 2,
+build B part 2) adds the fourteen comets on open paths to the Solar
+System room, drawn from served positions as a spacecraft is, from a year
+before perihelion to a year after today (the span ruling of 2026-10-24),
+with no companions; splits every drawer group that gathered several of
+JPL's classes into a row per class, the asteroids in their places among
+the planets (Tony, 2026-10-26: "Split with asteroids in the correct
+order among the planets"); and records his rule on JPL's words: "We
+should keep these correct words and explain them when they should be
+explained." The orbit line now reads "Orbit: perihelion q AU, its
+closest to the Sun, to aphelion Q AU, its farthest." A name the orrery
+keys with an underscore is shown with JPL's space.
+Earlier: 1.25 | 2026-10-25, evening, with Anthropic's Claude Opus
 5.5, at palomas_orrery @ 967d1503 and gallery @ 82a7ab13. v1.25 (L-443,
 L-487) records Tony's two asks from his phone look of the spacecraft,
 approved the same evening ("Yes please on all your suggestions"). Ticking
@@ -33,23 +46,11 @@ not hold named, not stopping the room. And L-484's rule under
 Provenance: the website and the orrery agree on every object both draw,
 or the difference is written down (Tony, 2026-10-24); its check is still
 to be designed.
-Earlier: 1.23 | 2026-10-24, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 206f96c9 and gallery @ 96173b88. v1.23 (L-482, with
-the descriptions L-481 carried) records Tony's ruling of the day: "Yes
-all rooms should use the same Reset button and no 'see more'." The top
-bar's button reads Reset in every room. In the Sun and Earth rooms it
-puts back the room's arrival -- every shell ticked as the served arrival
-block left it, the text box closed, the opening frame and angle, the
-drawer closed -- and no longer ticks or unticks every shell. No room has
-a See more. And three descriptions, built and approved on his look the
-same day: each line of a Solar System room hover after the name is a
-bullet; a source line naming JPL Horizons carries its address, which the
-i panel makes a link; each room's closing paragraph is a bulleted list.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
 on 2026-10-05 (L-418), 2026-10-10 (L-429), 2026-10-14 (L-431),
 2026-10-16 (L-421), 2026-10-17 (L-452), 2026-10-20 (L-456),
 2026-10-21 (L-460), 2026-10-22 (L-434, L-443), 2026-10-24
-(L-477, L-482) and 2026-10-25 (L-443, twice).
+(L-477, L-482), 2026-10-25 (L-443, twice) and 2026-10-26 (L-443).
 
 ## Contents
 
@@ -571,8 +572,21 @@ Plotly.
   nearest first (`orderGroups`, from each body's `a_au`, which the
   driver now hands the page); without it they keep the served order,
   the comets' by first apparition. Each group is JPL's own class for
-  its bodies (the Small-Body Database's orbit class: TNO, MBA, APO and
-  AMO, TJN, CEN, JFc and COM), not a judgement. This supersedes the
+  its bodies (the Small-Body Database's orbit class), not a judgement,
+  and one class to a row (v1.26; Tony, 2026-10-26: "Split with asteroids
+  in the correct order among the planets"). The rows, in the drawer's
+  order: after the Sun, Encke-type comets (ETc), Jupiter-family comets
+  (JFc), Halley-type comets (HTC), Comets (COM), Hyperbolic comets (HYP)
+  and Interstellar objects (the IAU's "I" numbers; JPL gives HYP, and
+  HYA for 'Oumuamua); Aten asteroids (ATE) after Venus; Spacecraft after
+  Earth; Apollo (APO) and Amor (AMO) asteroids after the Spacecraft;
+  Main asteroid belt (MBA) after Mars; Jupiter Trojans (TJN) after
+  Jupiter; Centaurs (CEN) after Saturn; Trans-Neptunian objects (TNO)
+  after Pluto. A comet group without "order": "a" lists its bodies by
+  designation, which is the order they were found. The classes were
+  read live for every body on 2026-10-26
+  (documentation/CHECK_L443_drawer_classes_20261026.md); no body sat in
+  the wrong group, and two groups had gathered several classes. This supersedes the
   front-door design's line that a group's bodies appear only in the
   group's room (2026-09-29): a group may still get a room, with a cloud
   drawn, when it has more than its bodies to show. The logic is in
@@ -609,8 +623,10 @@ Plotly.
   drawer is open.
 - **The orbit line** (v1.22, L-479; Tony, 2026-10-24: "It would also
   give an intuitive sense of the eccentricity," then "Yes" to one short
-  line). Every body on a closed orbit ends its hover with "Orbit: q to Q
-  AU from the Sun.", perihelion a(1 - e) and aphelion a(1 + e) from its
+  line). Every body on a closed orbit ends its hover with "Orbit:
+  perihelion q AU, its closest to the Sun, to aphelion Q AU, its
+  farthest." (the words since v1.26; JPL's terms kept and explained,
+  below), perihelion a(1 - e) and aphelion a(1 + e) from its
   served Sun-centred elements (the driver passes `e` beside `a_au`),
   never typed: `SolarSystemFigures.orbitLine`. Three significant
   figures, the length of the AU in brackets on the shell hovers (a
@@ -678,6 +694,33 @@ Plotly.
   Pluto; Juno, Lucy, JUICE and Europa Clipper: Jupiter. Checked by the
   drawer check's section 7 (seven cases, two breaks) and walked
   (section 20: Juno, and Voyager 1 by Go To).
+- **The comets on open paths** (v1.26, L-443, slice 2, build B part
+  2). Fourteen comets whose orbit is open, or too near open for an
+  ellipse to mean anything -- ten hyperbolic comets, the three
+  interstellar objects and piece C of C/2025 K1 -- carry `open_path`,
+  marked in the orrery's object list and copied by the mirror. Each is
+  fetched by its own path plan, as a spacecraft is (horizons-orbital-
+  mechanics, How a Path's Events Are Found; gallery-cache-builder, A
+  Spacecraft Is Fetched by Its Plan), and drawn the same way: solid
+  behind the minute shown, dashed after, meeting at the comet's diamond,
+  through the same `render_spacecraft.py` with the comet's symbol
+  (`symbol_for`). The span is Tony's ruling of 2026-10-24: a year before
+  its perihelion to a year after today, inside JPL's data. Its driver
+  kind is `comet_path`. The text box, Tony's words of 2026-10-26
+  (documentation/WORDS_L443_comets_20261026.md): the distance line and
+  its note, as a spacecraft's; "Its path is solid where it has already
+  travelled, and dashed where JPL predicts it will go, as far as <the
+  last day>."; and "It is drawn from a year before its perihelion to a
+  year after today, or less where JPL's path stops sooner; those two
+  years are our choice for the picture." The source line names no "as
+  far as JPL's data runs" and says the points are closer together around
+  its perihelion. No period, no orbit line, no companions. The room's
+  second list has a bullet for them. Walked (section 21: the groups'
+  places, West, C/2025 K1's name, Go To on 3I/ATLAS, Reset).
+- **A name keyed with an underscore** (v1.26). The orrery keys the four
+  pieces of C/2025 K1 as "C/2025_K1", "C/2025_K1-B" and so on; the
+  room's driver shows every served name with a space where it has an
+  underscore, and looks nothing up by name.
 
 **FRAMING, Tony's ruling of 2026-10-02** ("B but with a buffer of
 20%"): the room frames on how far each body is from the Sun NOW, not
@@ -707,8 +750,8 @@ before; one tap on the picture closes the box. Ticking, Home and Reset
 still frame on where the bodies are now. A zoom-out tap never makes a
 view smaller, even one Go To set past the buttons' 5,000 AU cap
 (`navFrameZoom`). A spacecraft's Go To fits its whole drawn path, flown
-and predicted, the same way (v1.24); a comet's open path waits for its
-part of slice 2.
+and predicted, the same way (v1.24), and so does a comet's open path
+(v1.26).
 
 ### A room's drawer lists its shells where each begins [QUALITY]
 v1.19, L-460. Tony's ruling of 2026-10-20: in every room each shell
@@ -1041,6 +1084,18 @@ address, https://ssd.jpl.nasa.gov/horizons/, which the i panel makes a
 link (`gallery/source_list.js`). Each room's closing paragraph, "Part
 of Paloma's Orrery", is a bulleted list, one sentence to a bullet, and
 reads "named for the creator's daughter".
+
+**JPL's terms, kept and explained** (v1.26, L-443; Tony, 2026-10-26:
+"I don't want to drop JPL's words, Ellipse, Predicted, hyperbolic,
+perihelion, aphelion, etc. We should keep these correct words and
+explain them when they should be explained."). Plain words are not
+simpler words. A term JPL uses is the correct word and stays;
+where a visitor first meets it, the same sentence says what it means:
+"perihelion q AU, its closest to the Sun"; "hyperbolic orbits, open
+curves rather than ellipses". Explain a term once, where it is met, not
+every time it recurs. Replacing JPL's word with a paraphrase is the
+failure this rule exists to stop: the visitor loses the word they would
+search for.
 
 **The i panel, one sentence to a bullet** (v1.25, L-487; Tony,
 2026-10-25: "put bullets on all sentences for readability including the

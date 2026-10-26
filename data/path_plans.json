@@ -5,6 +5,104 @@
  },
  "cadence_days": 30,
  "plans": {
+  "atlas_2024_g3": {
+   "backbone": {
+    "step": "7d",
+    "thin_tol_au": 0.02
+   },
+   "carried": 0,
+   "events": [
+    {
+     "body": "Sun",
+     "body_id": "10",
+     "closest": "2025-01-13 10:18",
+     "dist_km": 13993412.4,
+     "hill_km": null,
+     "ideal_step_s": 10640.0,
+     "jd": 2460688.929167,
+     "kind": "perihelion",
+     "stays": false,
+     "step": "2h",
+     "v_kms": 137.724,
+     "window": [
+      "2025-01-06 08:57",
+      "2025-01-20 11:38"
+     ]
+    }
+   ],
+   "horizons_id": "C/2024 G3",
+   "id_type": "smallbody",
+   "inputs_sha256": "776142226d4948877864b6239a59234cc4f3f73384d2472ab96cef708dce332f",
+   "kind": "comet",
+   "made": "2026-10-26",
+   "name": "ATLAS",
+   "searched": [
+    "Sun"
+   ],
+   "searched_from": "2024-01-11",
+   "span": {
+    "end": "2027-10-26",
+    "start": "2024-01-14"
+   },
+   "span_rule": {
+    "after_today_days": 365,
+    "before_perihelion_days": 365,
+    "clipped_to_jpl": [
+     false,
+     false
+    ]
+   },
+   "tp_jd": 2460688.924324
+  },
+  "atlas_3i": {
+   "backbone": {
+    "step": "7d",
+    "thin_tol_au": 0.02
+   },
+   "carried": 0,
+   "events": [
+    {
+     "body": "Sun",
+     "body_id": "10",
+     "closest": "2025-10-29 11:35",
+     "dist_km": 202921926.6,
+     "hill_km": null,
+     "ideal_step_s": 310983.4,
+     "jd": 2460977.982639,
+     "kind": "perihelion",
+     "stays": false,
+     "step": "3d",
+     "v_kms": 68.331,
+     "window": [
+      "2025-04-06 06:07",
+      "2026-05-23 17:02"
+     ]
+    }
+   ],
+   "horizons_id": "C/2025 N1",
+   "id_type": "smallbody",
+   "inputs_sha256": "31c124043cba1fa21607622bfc9115c6b2f69596084b921c5f90f1bf5bcf5bab",
+   "kind": "comet",
+   "made": "2026-10-26",
+   "name": "3I/ATLAS",
+   "searched": [
+    "Sun"
+   ],
+   "searched_from": "2024-10-26",
+   "span": {
+    "end": "2027-10-26",
+    "start": "2024-10-29"
+   },
+   "span_rule": {
+    "after_today_days": 365,
+    "before_perihelion_days": 365,
+    "clipped_to_jpl": [
+     false,
+     false
+    ]
+   },
+   "tp_jd": 2460977.941796
+  },
   "bepicolombo": {
    "backbone": {
     "step": "7d",
@@ -640,6 +738,300 @@
     "start": "2018-10-21"
    }
   },
+  "borisov_2025_v1": {
+   "backbone": {
+    "step": "7d",
+    "thin_tol_au": 0.02
+   },
+   "carried": 0,
+   "events": [
+    {
+     "body": "Sun",
+     "body_id": "10",
+     "closest": "2025-11-16 13:02",
+     "dist_km": 69215655.5,
+     "hill_km": null,
+     "ideal_step_s": 116822.5,
+     "jd": 2460996.043056,
+     "kind": "perihelion",
+     "stays": false,
+     "step": "1d",
+     "v_kms": 62.045,
+     "window": [
+      "2025-08-31 01:44",
+      "2026-02-02 00:19"
+     ]
+    }
+   ],
+   "horizons_id": "C/2025 V1",
+   "id_type": "smallbody",
+   "inputs_sha256": "3ac74cd8e08dd0a8cc78dfa214948b6d3c8d323902f2234dae716d9440e07217",
+   "kind": "comet",
+   "made": "2026-10-26",
+   "name": "Borisov",
+   "searched": [
+    "Sun"
+   ],
+   "searched_from": "2024-11-13",
+   "span": {
+    "end": "2027-10-26",
+    "start": "2024-11-16"
+   },
+   "span_rule": {
+    "after_today_days": 365,
+    "before_perihelion_days": 365,
+    "clipped_to_jpl": [
+     false,
+     false
+    ]
+   },
+   "tp_jd": 2460996.042901
+  },
+  "borisov_2i": {
+   "backbone": {
+    "step": "7d",
+    "thin_tol_au": 0.02
+   },
+   "carried": 0,
+   "events": [
+    {
+     "body": "Sun",
+     "body_id": "10",
+     "closest": "2019-12-08 13:17",
+     "dist_km": 300171607.2,
+     "hill_km": null,
+     "ideal_step_s": 716241.4,
+     "jd": 2458826.053472,
+     "kind": "perihelion",
+     "stays": false,
+     "step": "8d",
+     "v_kms": 43.887,
+     "window": [
+      "2018-08-20 13:56",
+      "2021-03-27 12:37"
+     ]
+    }
+   ],
+   "horizons_id": "C/2019 Q4",
+   "id_type": "smallbody",
+   "inputs_sha256": "b2490640780a6aa2ea77a3d73e30674542d57cd6f5ac2c9e9c62aecbaf70c874",
+   "kind": "comet",
+   "made": "2026-10-26",
+   "name": "2I/Borisov",
+   "searched": [
+    "Sun"
+   ],
+   "searched_from": "2018-12-05",
+   "span": {
+    "end": "2027-10-26",
+    "start": "2018-12-08"
+   },
+   "span_rule": {
+    "after_today_days": 365,
+    "before_perihelion_days": 365,
+    "clipped_to_jpl": [
+     false,
+     false
+    ]
+   },
+   "tp_jd": 2458826.052846
+  },
+  "c2025_k1": {
+   "backbone": {
+    "step": "7d",
+    "thin_tol_au": 0.02
+   },
+   "carried": 0,
+   "events": [
+    {
+     "body": "Sun",
+     "body_id": "10",
+     "closest": "2025-10-08 10:33",
+     "dist_km": 49997834.6,
+     "hill_km": null,
+     "ideal_step_s": 71855.7,
+     "jd": 2460956.939583,
+     "kind": "perihelion",
+     "stays": false,
+     "step": "6h",
+     "v_kms": 72.865,
+     "window": [
+      "2025-08-21 18:55",
+      "2025-11-25 02:10"
+     ]
+    }
+   ],
+   "horizons_id": "1004075",
+   "id_type": "designation",
+   "inputs_sha256": "3f60768b1174d50a34ec13a4cc7b2419b669e04369ca1030861fb28cf7c89052",
+   "kind": "comet",
+   "made": "2026-10-26",
+   "name": "C/2025_K1",
+   "searched": [
+    "Sun"
+   ],
+   "searched_from": "2024-10-05",
+   "span": {
+    "end": "2027-10-26",
+    "start": "2024-10-08"
+   },
+   "span_rule": {
+    "after_today_days": 365,
+    "before_perihelion_days": 365,
+    "clipped_to_jpl": [
+     false,
+     false
+    ]
+   },
+   "tp_jd": 2460956.939788
+  },
+  "c2025_k1_b": {
+   "backbone": {
+    "step": "7d",
+    "thin_tol_au": 0.02
+   },
+   "carried": 0,
+   "events": [
+    {
+     "body": "Sun",
+     "body_id": "10",
+     "closest": "2025-10-08 10:52",
+     "dist_km": 50234650.0,
+     "hill_km": null,
+     "ideal_step_s": 72334.0,
+     "jd": 2460956.952778,
+     "kind": "perihelion",
+     "stays": false,
+     "step": "6h",
+     "v_kms": 72.726,
+     "window": [
+      "2025-08-21 11:38",
+      "2025-11-25 10:05"
+     ]
+    }
+   ],
+   "horizons_id": "C/2025 K1-B",
+   "id_type": "smallbody",
+   "inputs_sha256": "a8c78eed46ff212d93d8bb5e1aa2b594a1c316fc3c8ee283fba284ed20e04e6c",
+   "kind": "comet",
+   "made": "2026-10-26",
+   "name": "C/2025_K1-B",
+   "searched": [
+    "Sun"
+   ],
+   "searched_from": "2024-10-05",
+   "span": {
+    "end": "2027-10-26",
+    "start": "2024-10-08"
+   },
+   "span_rule": {
+    "after_today_days": 365,
+    "before_perihelion_days": 365,
+    "clipped_to_jpl": [
+     false,
+     false
+    ]
+   },
+   "tp_jd": 2460956.952482
+  },
+  "c2025_k1_c": {
+   "backbone": {
+    "step": "7d",
+    "thin_tol_au": 0.02
+   },
+   "carried": 0,
+   "events": [
+    {
+     "body": "Sun",
+     "body_id": "10",
+     "closest": "2025-10-08 10:33",
+     "dist_km": 49948760.3,
+     "hill_km": null,
+     "ideal_step_s": 71753.9,
+     "jd": 2460956.939583,
+     "kind": "perihelion",
+     "stays": false,
+     "step": "6h",
+     "v_kms": 72.897,
+     "window": [
+      "2025-08-21 20:33",
+      "2025-11-25 00:32"
+     ]
+    }
+   ],
+   "horizons_id": "C/2025 K1-C",
+   "id_type": "smallbody",
+   "inputs_sha256": "27fdd2c8fef5acc33db1129e17988d90adc14dca427c64aff835d50eb805a75c",
+   "kind": "comet",
+   "made": "2026-10-26",
+   "name": "C/2025_K1-C",
+   "searched": [
+    "Sun"
+   ],
+   "searched_from": "2024-10-05",
+   "span": {
+    "end": "2027-10-26",
+    "start": "2024-10-08"
+   },
+   "span_rule": {
+    "after_today_days": 365,
+    "before_perihelion_days": 365,
+    "clipped_to_jpl": [
+     false,
+     false
+    ]
+   },
+   "tp_jd": 2460956.939894
+  },
+  "c2025_k1_d": {
+   "backbone": {
+    "step": "7d",
+    "thin_tol_au": 0.02
+   },
+   "carried": 0,
+   "events": [
+    {
+     "body": "Sun",
+     "body_id": "10",
+     "closest": "2025-10-08 10:55",
+     "dist_km": 50308609.2,
+     "hill_km": null,
+     "ideal_step_s": 72486.0,
+     "jd": 2460956.954861,
+     "kind": "perihelion",
+     "stays": false,
+     "step": "6h",
+     "v_kms": 72.68,
+     "window": [
+      "2025-08-21 09:15",
+      "2025-11-25 12:34"
+     ]
+    }
+   ],
+   "horizons_id": "C/2025 K1-D",
+   "id_type": "smallbody",
+   "inputs_sha256": "2a0fccf1387c0d8841857a293e36568d510850731003c90ab5ec99f91a3bd59c",
+   "kind": "comet",
+   "made": "2026-10-26",
+   "name": "C/2025_K1-D",
+   "searched": [
+    "Sun"
+   ],
+   "searched_from": "2024-10-05",
+   "span": {
+    "end": "2027-10-26",
+    "start": "2024-10-08"
+   },
+   "span_rule": {
+    "after_today_days": 365,
+    "before_perihelion_days": 365,
+    "clipped_to_jpl": [
+     false,
+     false
+    ]
+   },
+   "tp_jd": 2460956.955266
+  },
   "europa_clipper": {
    "backbone": {
     "step": "7d",
@@ -1242,6 +1634,55 @@
     "start": "2021-10-17"
    }
   },
+  "mcnaught": {
+   "backbone": {
+    "step": "7d",
+    "thin_tol_au": 0.02
+   },
+   "carried": 0,
+   "events": [
+    {
+     "body": "Sun",
+     "body_id": "10",
+     "closest": "2007-01-12 19:10",
+     "dist_km": 25541227.7,
+     "hill_km": null,
+     "ideal_step_s": 26237.3,
+     "jd": 2454113.298611,
+     "kind": "perihelion",
+     "stays": false,
+     "step": "6h",
+     "v_kms": 101.942,
+     "window": [
+      "2006-12-26 09:35",
+      "2007-01-30 04:44"
+     ]
+    }
+   ],
+   "horizons_id": "C/2006 P1",
+   "id_type": "smallbody",
+   "inputs_sha256": "e9d3c7ee8617a0a78f74218ac6259ce9343aad3ea88d6bc65b4f7df6a83b9d03",
+   "kind": "comet",
+   "made": "2026-10-26",
+   "name": "McNaught",
+   "searched": [
+    "Sun"
+   ],
+   "searched_from": "2006-01-09",
+   "span": {
+    "end": "2027-10-26",
+    "start": "2006-01-12"
+   },
+   "span_rule": {
+    "after_today_days": 365,
+    "before_perihelion_days": 365,
+    "clipped_to_jpl": [
+     false,
+     false
+    ]
+   },
+   "tp_jd": 2454113.298844
+  },
   "new_horizons": {
    "backbone": {
     "step": "7d",
@@ -1576,6 +2017,104 @@
     "end": "2030-03-22",
     "start": "2023-09-24"
    }
+  },
+  "oumuamua": {
+   "backbone": {
+    "step": "7d",
+    "thin_tol_au": 0.02
+   },
+   "carried": 0,
+   "events": [
+    {
+     "body": "Sun",
+     "body_id": "10",
+     "closest": "2017-09-09 11:52",
+     "dist_km": 38304585.9,
+     "hill_km": null,
+     "ideal_step_s": 45950.8,
+     "jd": 2458005.994444,
+     "kind": "perihelion",
+     "stays": false,
+     "step": "6h",
+     "v_kms": 87.294,
+     "window": [
+      "2017-08-10 00:32",
+      "2017-10-09 23:11"
+     ]
+    }
+   ],
+   "horizons_id": "A/2017 U1",
+   "id_type": "smallbody",
+   "inputs_sha256": "32f742c27b34dcbd425cabc3e8692e37b3dd1fc3829ea2e3b46232fe98c96399",
+   "kind": "comet",
+   "made": "2026-10-26",
+   "name": "1I/Oumuamua",
+   "searched": [
+    "Sun"
+   ],
+   "searched_from": "2016-09-06",
+   "span": {
+    "end": "2027-10-26",
+    "start": "2016-09-09"
+   },
+   "span_rule": {
+    "after_today_days": 365,
+    "before_perihelion_days": 365,
+    "clipped_to_jpl": [
+     false,
+     false
+    ]
+   },
+   "tp_jd": 2458006.007321
+  },
+  "panstarrs_2025_r3": {
+   "backbone": {
+    "step": "7d",
+    "thin_tol_au": 0.02
+   },
+   "carried": 0,
+   "events": [
+    {
+     "body": "Sun",
+     "body_id": "10",
+     "closest": "2026-04-19 21:27",
+     "dist_km": 74592011.3,
+     "hill_km": null,
+     "ideal_step_s": 130935.4,
+     "jd": 2461150.39375,
+     "kind": "perihelion",
+     "stays": false,
+     "step": "1d",
+     "v_kms": 59.657,
+     "window": [
+      "2026-01-23 01:32",
+      "2026-07-15 17:21"
+     ]
+    }
+   ],
+   "horizons_id": "C/2025 R3",
+   "id_type": "smallbody",
+   "inputs_sha256": "b8a2198cfcc096e412fbfb69084f9cc11487443f432ac86812426f501124b41e",
+   "kind": "comet",
+   "made": "2026-10-26",
+   "name": "PANSTARRS",
+   "searched": [
+    "Sun"
+   ],
+   "searched_from": "2025-04-16",
+   "span": {
+    "end": "2027-10-26",
+    "start": "2025-04-19"
+   },
+   "span_rule": {
+    "after_today_days": 365,
+    "before_perihelion_days": 365,
+    "clipped_to_jpl": [
+     false,
+     false
+    ]
+   },
+   "tp_jd": 2461150.39429
   },
   "parker_solar_probe": {
    "backbone": {
@@ -3091,6 +3630,55 @@
     "start": "2020-02-11"
    }
   },
+  "tsuchinshan_atlas": {
+   "backbone": {
+    "step": "7d",
+    "thin_tol_au": 0.02
+   },
+   "carried": 0,
+   "events": [
+    {
+     "body": "Sun",
+     "body_id": "10",
+     "closest": "2024-09-27 17:49",
+     "dist_km": 58556036.5,
+     "hill_km": null,
+     "ideal_step_s": 91077.9,
+     "jd": 2460581.242361,
+     "kind": "perihelion",
+     "stays": false,
+     "step": "1d",
+     "v_kms": 67.327,
+     "window": [
+      "2024-07-29 08:16",
+      "2024-11-27 03:21"
+     ]
+    }
+   ],
+   "horizons_id": "C/2023 A3",
+   "id_type": "smallbody",
+   "inputs_sha256": "45ce007c92605f12b5c9e510256c4eeeee1bb536cca1d1cfec520e24640d50a9",
+   "kind": "comet",
+   "made": "2026-10-26",
+   "name": "Tsuchinshan",
+   "searched": [
+    "Sun"
+   ],
+   "searched_from": "2023-09-25",
+   "span": {
+    "end": "2027-10-26",
+    "start": "2023-09-28"
+   },
+   "span_rule": {
+    "after_today_days": 365,
+    "before_perihelion_days": 365,
+    "clipped_to_jpl": [
+     false,
+     false
+    ]
+   },
+   "tp_jd": 2460581.240845
+  },
   "voyager_1": {
    "backbone": {
     "step": "7d",
@@ -3289,6 +3877,104 @@
     "end": "2100-01-01",
     "start": "1977-08-21"
    }
+  },
+  "west": {
+   "backbone": {
+    "step": "7d",
+    "thin_tol_au": 0.02
+   },
+   "carried": 0,
+   "events": [
+    {
+     "body": "Sun",
+     "body_id": "10",
+     "closest": "1976-02-25 05:19",
+     "dist_km": 29411034.0,
+     "hill_km": null,
+     "ideal_step_s": 32420.6,
+     "jd": 2442833.721528,
+     "kind": "perihelion",
+     "stays": false,
+     "step": "6h",
+     "v_kms": 94.999,
+     "window": [
+      "1976-02-03 17:19",
+      "1976-03-17 17:18"
+     ]
+    }
+   ],
+   "horizons_id": "C/1975 V1-A",
+   "id_type": "smallbody",
+   "inputs_sha256": "8d913133091bafd2c2b994a6319d8b0a398f28adabdef7506b7619405726190b",
+   "kind": "comet",
+   "made": "2026-10-26",
+   "name": "West",
+   "searched": [
+    "Sun"
+   ],
+   "searched_from": "1975-02-22",
+   "span": {
+    "end": "2027-10-26",
+    "start": "1975-02-25"
+   },
+   "span_rule": {
+    "after_today_days": 365,
+    "before_perihelion_days": 365,
+    "clipped_to_jpl": [
+     false,
+     false
+    ]
+   },
+   "tp_jd": 2442833.721978
+  },
+  "wierzchos": {
+   "backbone": {
+    "step": "7d",
+    "thin_tol_au": 0.02
+   },
+   "carried": 0,
+   "events": [
+    {
+     "body": "Sun",
+     "body_id": "10",
+     "closest": "2026-01-20 18:27",
+     "dist_km": 84689248.4,
+     "hill_km": null,
+     "ideal_step_s": 158423.0,
+     "jd": 2461061.26875,
+     "kind": "perihelion",
+     "stays": false,
+     "step": "1d",
+     "v_kms": 55.981,
+     "window": [
+      "2025-10-07 17:04",
+      "2026-05-05 19:49"
+     ]
+    }
+   ],
+   "horizons_id": "C/2024 E1",
+   "id_type": "smallbody",
+   "inputs_sha256": "6b78d060b75da48655c28cddfd007d76628bb637f83f39189337e22859ff6113",
+   "kind": "comet",
+   "made": "2026-10-26",
+   "name": "Wierzchos",
+   "searched": [
+    "Sun"
+   ],
+   "searched_from": "2025-01-17",
+   "span": {
+    "end": "2027-10-26",
+    "start": "2025-01-20"
+   },
+   "span_rule": {
+    "after_today_days": 365,
+    "before_perihelion_days": 365,
+    "clipped_to_jpl": [
+     false,
+     false
+    ]
+   },
+   "tp_jd": 2461061.263165
   }
  },
  "schema": 1
