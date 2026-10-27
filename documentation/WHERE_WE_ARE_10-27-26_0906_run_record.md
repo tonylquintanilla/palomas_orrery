@@ -161,9 +161,45 @@ Here are the steps for the first Code session, one at a time. Do each before rea
 
 Stop and ask me at any step that doesn't look like this.
 
+==========================================================================
+
+Confirmed: the remote reads 8268df9, with the plan at v37, L-498, and today's L-413 and L-412 edits.
+
+On your observation: that division is the right one, and it is what the coordinating role is for. Code is the builder; it reads the files in front of it and reports what it did, in the builder's register. You should not have to translate that. Two things make it lighter. First, keep doing what you did today: I write the prompt, you paste it, you paste Code's report back here, I check it against the repo and tell you in plain words whether to commit. Second, a short addition to CLAUDE.md telling Code how to report to you: the claim first, plain words, every ledger handle with its label in parentheses, one question per report. The protocol has that rule, but Code is reading a 1,300-line file through an import and the rule is not landing. I'll put the addition in the next brief, and the next Code session makes the edit as its first step.
+
+**What's next, in order**
+
+1. **The design talk, with me, now or whenever you like, from your phone.** Four items, one at a time: P1 on the nightly run (when a 30-day check disagrees with JPL at night, does the body keep its last confirmed values?); L-496, which words find a group in the search; the compositions noun, "view" or "scene"; and L-465, the Sun axis hover's words and its source. Plus one confirmation: the four kinds of session as the brief's section 4 describes them, which Code has now carried into the plan pending your word. The talk's rulings go into a design record in your folder.
+2. **Your five phone looks on the Sun room**, ten minutes, any time: the tide's cone and the outer cloud's clumps, the Sun's axis with its arrows and the opening view, the corona's drawer row, the Alfven circles. Answer each with a yes or a note. Then one short orrery Code session closes the Sun's slice and re-homes its twelve numbers.
+3. **Two small Code builds:** the gallery (L-497 left-aligned text, L-458 the report-a-problem link; L-496 after its talk), then the orrery (L-492, the stale scale sentences).
+4. **L-485, the nightly run build,** once P1 is decided.
+
+I'll revise the brief after the talk so it carries the rulings and the CLAUDE.md addition in one place.
+
+Shall we start the talk with P1?
+
+=====================================================
+
+Here is the order, one step at a time.
+
+**Before Code**
+1. In File Explorer, copy the `.claude` folder from `palomas_orrery_for_github` into `tonyquintanilla.github.io`. -- done
+2. GitHub Desktop, orrery repo: the change list should show the two records (`DESIGN_talk_20261027_rulings.md`, `COORD_next_sessions_brief_20261027.md`). Commit and push. -- 
+3. GitHub Desktop, gallery repo: the change list should show `CLAUDE.md` and `.claude\settings.json`. Commit and push.
+
+**In Code**
+4. Claude desktop app, Code tab, Local, Open folder, `palomas_orrery_for_github`.
+5. First message: `Read CLAUDE.md and start the session.`
+6. It should answer with the base SHA, the skills it read with their versions, and one sentence on the job, then wait. Where We Are's "Do next" line still names the design talk, so your second message is: `The talk is done; the job is session 1 of documentation/COORD_next_sessions_brief_20261027.md. Read it and documentation/DESIGN_talk_20261027_rulings.md first.`
+7. It should come back with its plan for session 1 in one sentence and wait again. Say go.
+8. It works through the brief's session 1: the reporting section into CLAUDE.md, the talk's records, the Sun axis rows and hover, the Sun's close-out, and the stale scale sentences if it has room. It asks before edits and commands; say yes to each.
+9. It runs the maintenance run itself and should tell you the result as a line it read. If it says "should be green", ask it to run it.
+10. Its final report: the file list, your run order, the rollup. Paste the report back here and I check it against the files before you commit.
+11. After my check: copy the report into Where We Are below the marker, save the timestamped copy, review the change list in GitHub Desktop, commit and push, and send me the SHA.
+
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-**Code Session:**
+**10-27-26: Code Session**
 
 Now the ledger skill and the two skills being bumped.
 
