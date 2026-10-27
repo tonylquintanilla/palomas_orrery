@@ -3551,6 +3551,42 @@ resident.
 (Moved down from the resident protocol on 2026-10-26, night, when
 v3.115 made a fourth entry.)
 
+v3.113 (October 25, 2026, evening): No rule changed in this document.
+ONE skill bump, one version (L-443, L-487): interactive-exhibit 1.24 ->
+1.25. A SPACECRAFT TICKS ITS COMPANIONS; THE I PANEL IS ONE SENTENCE TO
+A BULLET.
+
+WHAT PROMPTED IT. Tony's phone look of the spacecraft, the evening of
+Oct 25, after orrery patch_L443_16 and gallery patch_L443_17 had brought
+the Voyagers: "put bullets on all sentences for readability including
+the source paragraph," and "in addition to the default inner planets,
+add the farthest planet orbit that the object has reached ... This
+gives perspective to a spacecraft plot," then "Maybe flyby planets too."
+Asked to approve the two rules: "Yes please on all your suggestions."
+
+WHAT CHANGED. interactive-exhibit: the Solar System room's drawer gains
+A spacecraft's companions, and One body at a time names its one
+exception; Hover text is written for the visitor gains The i panel, one
+sentence to a bullet. Its v1.22 entry moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copies read
+interactive-exhibit 1.25, horizons-orbital-mechanics 1.11,
+gallery-cache-builder 1.12 and safe-file-editing 1.14 before work that
+fires them. This session bumped interactive-exhibit twice (1.24 at the
+close, 1.25 this evening) and worked from the repo's copy of each, which
+it wrote.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.110 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-27 when
+v3.116 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

@@ -323,6 +323,11 @@ twelve spacecraft are keyed, so Path Plan -- preview of slice 2 goes;
 Path Plan -- every path, now takes its place in Tools and Caches,
 path_plan.py --all --no-limit, for a full plan when a spacecraft is
 newly keyed or the rule changes.
+October 27, 2026 with Anthropic's Claude Opus 5.5 (L-495): Direction
+Arrows, the website's new checker (gallery patch L494_3), gets its
+button after Collapsed Features, with its short line, running through
+documentation/run_offline_check.py. The Dashboard parity check had
+found it missing on the run after patch_L494_4.
 """
 
 import os
@@ -903,6 +908,23 @@ LAUNCH_GROUPS = {
         GALLERY_REPO_DIR,
         True,
         None,
+        True),
+        ("Direction Arrows",
+        os.path.join("documentation", "run_offline_check.py"),
+        "The small arrowhead on each body's orbit or path in the Solar "
+        "System room, pointing the way the body travels (L-495). It sits "
+        "five arrowhead lengths ahead of the body, its direction read from "
+        "the order the served points come in, and is not drawn when its "
+        "tip falls outside the view or the line is too short for it at "
+        "that scale. Works six cases by hand and checks the page gives "
+        "each body one arrow with no hover. It breaks its own file three "
+        "ways first, to show it can fail. GATES the gallery runner. The "
+        "check is Node, so this button runs it through "
+        "documentation/run_offline_check.py. Runs from the gallery repo "
+        "ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        ["Direction arrows"],
         True),
         ("Display Figures",
         os.path.join("documentation", "run_offline_check.py"),
@@ -2074,6 +2096,9 @@ CARD_LINES = {
     ("Gallery -- checks and data",
      "Collapsed Features"):
         "Sorts every served feature group; fails on one it cannot classify.",
+    ("Gallery -- checks and data",
+     "Direction Arrows"):
+        "Checks each body's direction arrow points its way, inside the view.",
     ("Gallery -- checks and data",
      "Display Figures"):
         "Checks every number in an Earth hover shows only the figures earned.",

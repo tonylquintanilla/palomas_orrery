@@ -1,14 +1,27 @@
 ---
 name: interactive-exhibit
 description: How an interactive exhibit (a room in interactive.html such as ?exhibit=sun) is designed, built, verified and carded for the Paloma's Orrery gallery. Covers the exhibit switch and boot path, the assembler driver spec, the JS feature handoff, the shared chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent gate, back link), what is per-body, the served-data provenance contract, what a room opens on (the arrival block) and the shell-key stamp the renderers apply, the drawer order, who may write data/objects_config.json, the Mode 5 phone sequence, and carding an exhibit through Studio. Use when adding or changing an exhibit (Earth, Jupiter, the stars), touching sun* chrome in interactive.html, deciding what an exhibit may render, or editing the served words with store_writer or exhibit_store_editor. Not for propagation math (gallery-assembler), the nightly builder (gallery-cache-builder), or the Studio/converter chain (gallery-pipeline). Do not use for projects other than Paloma's Orrery.
-fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, its group rows, its two Resets, the Reset in every room's top bar, Home's order and its framing; Go To fitting a body's whole orbit and the orbit line in a body's hover; the count line's place; a bare interactive.html link and the Explorer's address; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia); a served number's citation and its source_note; the Typed facts check (smoke_typed_facts.js); a feature drawn as stored dots (the Hills cloud, Earth's radiation belts); the i panel's source list and its links (source_list.js); the order a room's drawer lists its shells in, where each begins (drawer_order.js, the Drawer order check); a spacecraft's path in the Solar System room (its positions file, solid and dashed, its text box); whether the website and the orrery agree on an object; the planets ticked with a spacecraft (companions); the i panel's words one sentence to a bullet; a comet on an open path in the Solar System room; the drawer's groups one JPL class to a row; JPL's terms in the words a visitor reads
+fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, its group rows, its two Resets, the Reset in every room's top bar, Home's order and its framing; Go To fitting a body's whole orbit and the orbit line in a body's hover; the count line's place; a bare interactive.html link and the Explorer's address; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia); a served number's citation and its source_note; the Typed facts check (smoke_typed_facts.js); a feature drawn as stored dots (the Hills cloud, Earth's radiation belts); the i panel's source list and its links (source_list.js); the order a room's drawer lists its shells in, where each begins (drawer_order.js, the Drawer order check); a spacecraft's path in the Solar System room (its positions file, solid and dashed, its text box); whether the website and the orrery agree on an object; the planets ticked with a spacecraft (companions); the i panel's words one sentence to a bullet; a comet on an open path in the Solar System room; the drawer's groups one JPL class to a row; JPL's terms in the words a visitor reads; a comet's companions; the drawer's Find a body box; the direction arrows on the orbits; the grid chip's AU note and the triad's frame note; the i button's first-visit note and hovers without a pointer line
 ---
 
 # Interactive Exhibit
 
-Read this file in 8 parts: lines 1-152, 153-156, 157-398, 399-496, 497-723, 724-1010, 1011-1222, 1223-1323.
+Read this file in 8 parts: lines 1-153, 154-157, 158-399, 400-497, 498-737, 738-989, 990-1217, 1218-1415.
 
-Skill version: 1.26 | 2026-10-26, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.27 | 2026-10-27, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 8d334e7 and gallery @ 7d422e5. v1.27 (L-443, carrying
+L-493, L-494 and L-495) records the night of 2026-10-26. It corrects a
+wrong sentence: no website hover ends with a pointer to the i panel any
+more, and a first visit gets a note under the i button (Tony's option
+C, L-494). A comet ticks a companion planet: on an open path the
+farthest its path has reached so far (Tony: "so far"), on a closed
+orbit the farthest its orbit reaches, by its aphelion; no asteroid or
+dwarf planet ticks one (Tony: "only spacecraft and comets"). A group's
+class is explained first in each member's text box and panel. And the
+Find a body box, the grid chip's AU note, the whole triad opening the
+frame note, the orbit line wrapped at 60, the direction arrows, and a
+candidate for the headless recipe.
+Earlier: 1.26 | 2026-10-26, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 5398439 and gallery @ 9223cd1. v1.26 (L-443, slice 2,
 build B part 2) adds the fourteen comets on open paths to the Solar
 System room, drawn from served positions as a spacecraft is, from a year
@@ -33,24 +46,12 @@ the one exception to nothing ticking many bodies at once. And the i panel
 shows every description, note and citation one sentence to a bullet, in
 every room ("put bullets on all sentences for readability including the
 source paragraph"), cut where the room shows the words.
-Earlier: 1.24 | 2026-10-25, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 0c27f47a and gallery @ b1a4ce6c. v1.24 (L-443 build B,
-L-484) adds the spacecraft to the Solar System room: a Spacecraft group
-after Earth's row (Tony, 2026-10-24: "i would suggest putting the
-spacecraft drawer after earth's as the comets are after the sun's");
-each path drawn from its served positions file, which the page fetches,
-solid to the minute shown and dashed after (ruling 6 of the slice 2
-design, "Solid to today, dashed after"); its text box in Tony's words of
-2026-10-25; Go To fitting the whole path; and a row the served cache does
-not hold named, not stopping the room. And L-484's rule under
-Provenance: the website and the orrery agree on every object both draw,
-or the difference is written down (Tony, 2026-10-24); its check is still
-to be designed.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
 on 2026-10-05 (L-418), 2026-10-10 (L-429), 2026-10-14 (L-431),
 2026-10-16 (L-421), 2026-10-17 (L-452), 2026-10-20 (L-456),
 2026-10-21 (L-460), 2026-10-22 (L-434, L-443), 2026-10-24
-(L-477, L-482), 2026-10-25 (L-443, twice) and 2026-10-26 (L-443).
+(L-477, L-482), 2026-10-25 (L-443, twice), 2026-10-26 (L-443) and
+2026-10-27 (L-443).
 
 ## Contents
 
@@ -119,7 +120,7 @@ the new exhibit brings its own.
 | Nav cluster: + / - / Home = FRAME zoom (range and dtick change together; the grid re-labels), plus four arrow buttons that turn the camera by a step scaled to the live eye distance, so a tap moves the same slice of screen at any zoom (L-310); on a portrait phone 768 px or narrower the arrow cross, Home with it, moves apart from + and - into its own holder, and the in-frame title stays (L-316). WHICH corner is set only by the `.nav-cross-apart` CSS rule in `nav_cluster.js` -- top right since round 4, after a round at the bottom left -- and the method that moves it, `crossApart(on)`, says nothing about the corner, so the next move is one CSS edit. The open drawer hides the cluster and the holder both. The page decides WHEN: `navPlaceCross()` asks `sunPhonePortrait()`, the same test the text box uses | gallery/nav_cluster.js (`crossApart`, `.nav-cross-apart`), `navFrameZoom`, `navHome`, `navCameraStep`, `navPlaceCross`, `sunPhonePortrait` | shared |
 | Click deferral: `plotly_click` -> `setTimeout(0)` -> focus | initSunExhibit | shared, CRITICAL (L-278) |
 | i-panel follows the focus; curated link per feature stamped into trace `meta` by `stampLink`; its last line, in every room, is "About Paloma's Orrery", opening the lobby's About card at index.html#about (L-475), and closing the card steps back to the room that opened it (L-480, index.html's `aboutFromRoom`) | `renderSunInfo`, feature_renderers.js | shared mechanism; per-body copy and links |
-| Frame HUD: camera-following triad, Aries glyph with the frame note and its source, grid chip | `sunHud*` | shared; reads the camera, never calls Plotly |
+| Frame HUD: camera-following triad, Aries glyph with the frame note and its source, grid chip. A tap or hover anywhere on the triad opens the frame note, not on the Aries glyph alone; the grid chip opens a note on what an AU is, its kilometres the served KM_PER_AU (IAU 2012 Resolution B2), its words resting on the IAU's Measuring the Universe page, both linked (v1.27, L-495) | `sunHud*`, `sunAuNote*`, `#sun-au-note` | shared; reads the camera, never calls Plotly |
 | Consent gate and Pyodide load | `loadPyodideRuntime`, `CONSENT_KEY` | shared |
 | Back link: "Gallery" steps back in history when the gallery is behind it | BACK TO THE GALLERY block | shared |
 
@@ -529,8 +530,8 @@ Plotly.
   opening frame and angle, the drawer closed. Inside an open group, once
   one of its bodies is ticked, "Reset <group>" unticks them all and no
   other (`groupReset`, `groupResetOffered`; `ssGroupReset`). Nothing
-  ticks many bodies at once, save a spacecraft and its companions
-  (v1.25, below). Since v1.23 the Sun and Earth rooms have
+  ticks many bodies at once, save a spacecraft or a comet and its
+  companions (v1.25 and v1.27, below). Since v1.23 the Sun and Earth rooms have
   the same button (L-482; Tony, 2026-10-24: "Yes all rooms should use
   the same Reset button and no 'see more'"). There it puts back the
   room's arrival: every shell ticked or unticked as the room opened,
@@ -634,7 +635,11 @@ Plotly.
   than the Report test's place for the error the body's distance line
   uses. An open orbit prints no line and the room's notes say why.
   Checked by the figures check's part 6, with three planted faults, which
-  prints every body's line.
+  prints every body's line. The line is wrapped at 60 characters like
+  every other bullet (v1.27, L-495): it was the one left unwrapped, and
+  Halley's ran 88, so the box Plotly opens on a tap came out wider than
+  a phone's view and was cut on both sides (Tony: "The hover tapping the
+  object overruns its box").
 - **The spacecraft** (v1.24, L-443 build B, 2026-10-25). A group row,
   Spacecraft, right after Earth's row (Tony, 2026-10-24), the twelve in
   launch order, each with the label a visitor reads where the orrery's
@@ -690,6 +695,8 @@ Plotly.
   the spacecraft. They are ordinary ticks: unticking the spacecraft
   leaves them, and Reset puts the room back as it opened. A plan's name
   no row goes by (the Moon) is reported by the logic and ticks nothing.
+  A comet ticks companions by the same logic, reached by a different
+  rule (A comet's companions, below).
   Voyager 1: Jupiter, Saturn, Pluto; Voyager 2: Jupiter to Neptune and
   Pluto; Juno, Lucy, JUICE and Europa Clipper: Jupiter. Checked by the
   drawer check's section 7 (seven cases, two breaks) and walked
@@ -714,13 +721,63 @@ Plotly.
   year after today, or less where JPL's path stops sooner; those two
   years are our choice for the picture." The source line names no "as
   far as JPL's data runs" and says the points are closer together around
-  its perihelion. No period, no orbit line, no companions. The room's
+  its perihelion. No period and no orbit line; its companions are the
+  bullet after next (until v1.27 this said it had none). The room's
   second list has a bullet for them. Walked (section 21: the groups'
   places, West, C/2025 K1's name, Go To on 3I/ATLAS, Reset).
 - **A name keyed with an underscore** (v1.26). The orrery keys the four
   pieces of C/2025 K1 as "C/2025_K1", "C/2025_K1-B" and so on; the
   room's driver shows every served name with a space where it has an
   underscore, and looks nothing up by name.
+- **A comet's companions** (v1.27, L-443 and L-495). A comet ticks a
+  companion planet as a spacecraft does, by the same logic
+  (`SolarSystemDrawer.companions`), and no other kind of body does
+  (Tony, 2026-10-26: "Not every body, not minor planets, only spacecraft
+  and comets"); an asteroid or a dwarf planet ticks nothing with it. A
+  comet on an OPEN PATH ticks the farthest planet whose perihelion its
+  path has passed SO FAR, up to the minute shown: its dashed year ahead
+  is a drawing choice, not JPL's plan, so it does not count (Tony: "so
+  far"; `_path_reach_au` with the moment shown, in the room's driver).
+  West, McNaught, 'Oumuamua and 2I/Borisov bring Pluto; 3I/ATLAS
+  Saturn; the rest Jupiter. A comet on a CLOSED ORBIT ticks the farthest
+  planet its orbit reaches, judged by its aphelion a(1 + e) from the
+  served elements, since its whole orbit is drawn (`closedComet` in the
+  room's compose): Ikeya-Seki, Halley, Hale-Bopp and the other long
+  orbits bring Pluto; Churyumov-Gerasimenko and Schaumasse Jupiter;
+  Encke, Tempel 2 and Howell Mars, already ticked.
+- **The Find a body box** (v1.27, L-493; Tony, 2026-10-26: "as we create
+  more objects in the website, could we add a search window to find the
+  right row?"). At the top of the Solar System room's drawer. It matches
+  a body's four names: the drawer's label, the orrery's name, JPL's name
+  (`horizons_name`, copied by the objects mirror from the orrery's
+  export) and the Horizons id where that id is a designation, not a bare
+  number. It ignores capitals, spaces and punctuation, and matches part
+  of a name. A group with a match opens and says how many of its bodies
+  show ("1 of 10 shown"); a body found only by JPL's name or its id says
+  which, under its name ("JPL's name: ATLAS (C/2025 K1)"). The clear
+  button or Reset empties the box. The logic is the drawer file's FIND
+  (`searchKey`, `searchNames`, `searchHits`, `searchVisible`,
+  `searchGroupCount`, `searchVia`); checked by the drawer check, with two
+  planted breaks, and walked. Finding a GROUP by a word such as "comet"
+  is not built; it waits on a design talk (L-496).
+- **The direction arrows** (v1.27, L-495; Tony, 2026-10-26: "a small
+  directional arrow right on the orbit line near the objects showing the
+  direction of travel of objects. This is to make clear what the orbit
+  is"). A flat arrowhead in the orbit's own plane, on each drawn body's
+  orbit or path, its tip five arrowhead lengths ahead of the body (Tony
+  chose the style and the distance from renders of the real room). Its
+  direction is never typed: an orbit is served in order of true anomaly
+  (`render_orbits.sweep_conic`), which grows the way the body moves, and
+  a path in time order, so the arrow points from each point to the
+  next; Halley and Ikeya-Seki point clockwise. Its size is a fraction of
+  the view's width, so it keeps its size on screen, and it is placed
+  again at every frame change, outside the Plotly event (L-278). It is
+  not drawn when its tip falls outside the view, or when the line is too
+  short for it at that scale. It sits in its body's legend group with
+  no hover. `gallery/direction_arrows.js`, checked by the gallery run's
+  Direction arrows check (`documentation/smoke_direction_arrows.js`: six
+  worked cases, and the real file broken three ways first), which
+  gates; the orrery's dashboard has its button.
 
 **FRAMING, Tony's ruling of 2026-10-02** ("B but with a buffer of
 20%"): the room frames on how far each body is from the Sun NOW, not
@@ -1070,10 +1127,30 @@ compression: a visitor has not been through the conversation that gave
 them meaning. The rule changes the WORDS, not the facts or the caveats.
 A caveat stays beside its number, in words a visitor can use -- "It is
 not a measured distance" rather than "DECLARED -- ... Not a measurement."
-Citations, equations and served caveats live in the i panel, with one
-pointer line under each hover (L-231); the hover is the glance. Reworded
-hovers go to Tony before they ship. (L-331; the orrery's own hovers
-follow under orrery-coding-conventions 1.9 and L-321.)
+Citations, equations and served caveats live in the i panel (L-231);
+the hover is the glance. Reworded hovers go to Tony before they ship.
+(L-331; the orrery's own hovers follow under orrery-coding-conventions
+and L-321.)
+
+**No website hover ends with a pointer to the i panel** (v1.27, L-494;
+Tony's option C of 2026-10-26, from four drawn on a design canvas: "Or
+remove the sentence everywhere and just add the banner"). Until then the
+Sun and Earth rooms' hovers each ended with one pointer line (L-231),
+and the Solar System room's did not. Now none does. A visitor's first
+visit is greeted instead by a note under the i button, "More information
+and the sources for everything you see are here.", with a Got it
+button; Got it, or a tap on the i button, puts it away for good in that
+browser. The Hover budget check fails on a hover that still ends with
+the old sentence. The orrery's own hovers keep their pointer line
+(orrery-coding-conventions 1.12).
+
+**A group's class is explained first** (v1.27, L-443; Tony's "Approved"
+of 2026-10-26 to documentation/WORDS_L443_glosses_20261026.md). A drawer
+group row serves an `about`: what its JPL or IAU class name means, in
+plain words. It is the first bullet in the text box and the i panel of
+every body in the group, before the body's own words
+(`classAbout` in the room's compose). The class name stays JPL's; the
+`about` is its gloss, by the rule below.
 
 **Readability, Tony's three asks of 2026-10-24** (v1.23, L-481; built at
 gallery 96173b8 and approved on his phone look the same day). In the
@@ -1164,7 +1241,9 @@ needs no ruling; whether a feature is drawn at all is Tony's.
    hover's lines (soft breaks count; hard breaks inside sentences fail),
    holds every hover under `CEILING` (17, a ratchet that only comes
    down), measures the phone's text boxes with the page's own wrapper,
-   and checks that each hover points at the i panel. It builds the Earth
+   and fails on a hover that still ends with the old sentence pointing at
+   the i panel (since v1.27, L-494; until then it checked that each hover
+   carried that pointer). It builds the Earth
    scene, Jupiter and Saturn; at b375cfe1 it does NOT build the Sun
    room, and four Sun hovers missed the move to the panel because of it
    (L-331). A checker passes on what it does not look at: when adding a
@@ -1200,6 +1279,15 @@ needs no ruling; whether a feature is drawn at all is Tony's.
      helpers, and is run once against a deliberately broken copy to show
      it can fail. It fixes its own opening, so a change to what the room
      opens on does not break it.
+   - A CANDIDATE, not yet a file in either repository (v1.27, L-495):
+     real pictures before a build. On the night of 2026-10-26 the
+     direction arrows' styles and distances were rendered in the
+     sandbox's Chromium from the real page, with the pinned Plotly bundle
+     and the room's payload handed to the page in place of Pyodide, and
+     Tony chose from those renders before anything was built. It shows
+     what a visitor would see, which jsdom cannot; it is still not the
+     phone. Until it is a file, say in the handoff that it was used and
+     how.
    The page's CDN scripts are refused by the harness's loader, which
    serves the stand-in Plotly instead. Say in the handoff what was run
    this way and that the phone has not seen it.
@@ -1320,4 +1408,8 @@ that loaded 1.21; the next session confirms its loaded copy reads 1.22
 before exhibit work. 1.23 was cut in a session that loaded 1.22, and
 the session of 2026-10-25 confirmed its loaded copy read 1.23. 1.24 was
 cut in that session; the next session confirms its loaded copy reads
-1.24 before exhibit work.
+1.24 before exhibit work. 1.25 and 1.26 were cut in the sessions of
+2026-10-25 and 2026-10-26, each from the repo's copy. 1.27 was cut on
+2026-10-27 in a Claude Code session, which reads the skills as files in
+the repo, so its loaded copy of 1.26 was the repo's own; a session that
+loads the account's copy confirms it reads 1.27 before exhibit work.

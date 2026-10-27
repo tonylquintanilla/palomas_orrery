@@ -141,7 +141,7 @@ Here are the steps for the first Code session, one at a time. Do each before rea
 
 2. **Commit and push.** Open GitHub Desktop with the orrery repo selected. The change list should show three new files: `CLAUDE.md`, `.claude\settings.json`, and `documentation\COORD_next_sessions_brief_20261026.md`. Commit them with a message like "Claude Code door: CLAUDE.md, settings, brief" and push. -- c8551250c3456e3f3ebd27755b2fa2877c6656d2 CLAUDE.md and document previously pushed.
 
-3. **Open Code.** In the Claude desktop app, click the Code tab. Choose Local. Click Open folder and pick `palomas_orrery_for_github`. Not python_work, not orrery.
+3. **Open Code.** In the Claude desktop app, click the Code tab. Choose Local. Click Open folder and pick `palomas_orrery_for_github`. Not python_work, not orrery. -- 
 
 4. **Start the session.** Type this as the first message: `Read CLAUDE.md and start the session.`
 
@@ -163,4 +163,106 @@ Stop and ask me at any step that doesn't look like this.
 
 +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+**Code Session:**
 
+Now the ledger skill and the two skills being bumped.
+
+I've verified four skills against the manifest so far, and I'll check ledger-items and provenance-discipline next. First though, I need to add a dashboard button for the website's new Direction arrows check, since last night's maintenance run flagged red without it.
+
+Adding the dashboard button now. First I'm checking what the arrows file actually does, so the button's description is right.
+
+Bottom-up: short line first, then the button, then the docstring note.
+
+Dashboard parity now passes fully — all 10 planted faults caught and every website step has its button. Next, I'll verify the interactive-exhibit skill text by checking each fact against the website's code.
+
+I've checked every fact against the website's code. Now I'm writing the interactive-exhibit 1.27 text.
+
+Good, the panel shows it first too. Now the drawer section's bullets.
+
+Now the version line, the fires-when line, and moving the oldest entry to the history file.
+
+The skills index wants the read plan rebuilt for the longer file. I'll reset it to the seed line and let the tool rewrite it.
+
+Now the protocol's version entry (v3.116), with the oldest of its three entries moving to the history file.
+
+Protocol entry is in. Now the records: ledger first.
+
+Ledger done. Before editing Where We Are, the records skill says to read your latest run record copy first.
+
+I'll start the orrery maintenance run now, since it takes several minutes, and write Where We Are while it runs. First a check that it won't stop to ask questions.
+
+While that runs, I'm updating Where We Are, one section at a time.
+
+That grep didn't work in this shell. Checking with Python instead.
+
+All ASCII, all LF. Where We Are has 139 lines above the run-record marker, under the 130-line cap's spirit? Let me check that number properly while the run finishes.
+
+139 is over the page's 130-line cap. I'll tighten the new text.
+
+Where We Are is now 129 lines above the marker, under the cap. The maintenance run is still going (it takes several minutes). Once it finishes I'll read its result, then fill in the page's Signals section from the files it rewrites.
+
+The run is green: "32 of 32 gating checkers passed", plus two report-only rows. It also says it wrote `WHERE_WE_ARE.md`, so I'm checking what it changed there.
+
+That "written" line is just my own Where We Are edits during the run; the run itself didn't change the page. Now the Signals section, from the files.
+
+All three jobs from the brief are done, and the maintenance run I ran myself is green. Nothing is committed: that's yours.
+
+**Skills I read, with the version each carries** (every one matches the manifest):
+- Read in full: safe-file-editing 1.14, agentic-pre-test 1.3, ledger-and-session-records 1.22, interactive-exhibit 1.26 and provenance-discipline 2.34.
+- Version line only, because this work didn't use them: orrery-coding-conventions 1.12, horizons-orbital-mechanics 1.12 and gallery-cache-builder 1.13.
+
+**What changed, in plain words**
+- **Last night's red check is fixed.** The orrery's dashboard now has a Direction Arrows button for the website's new arrows check. The check that compares the two (Dashboard parity) now passes.
+- **interactive-exhibit is at 1.27.** It describes what was built last night:
+  - the Find a body box;
+  - a comet's companion planet (on an open path, the farthest planet it has reached so far; on a closed orbit, the farthest its orbit reaches);
+  - each group's class explained first;
+  - the AU note and the whole triad opening the frame note;
+  - the orbit line wrapped at 60 characters;
+  - the direction arrows.
+- **It also had one wrong sentence**, saying every website hover ends by pointing at the i button. A session following it would have put that pointer back. It's corrected. I checked every new fact against the website's code before writing it.
+- **provenance-discipline is at 2.35.** It carries your rule: keep JPL's words and explain them, never replace them. I put it inside principle 5, so the five principles you approved stay five.
+- **The test result**, read from the run's output: "32 of 32 gating checkers passed". The push gate holds at 0 Tier-1 findings.
+
+**Files changed, for your run record**
+```
+ok palomas_orrery_dashboard.py (3 edits)
+ok skills/interactive-exhibit/SKILL.md (14 edits)
+ok skills/provenance-discipline/SKILL.md (4 edits)
+ok documentation/SKILL_HISTORIES.md (2 edits)
+ok PROJECT_INSTRUCTIONS.md (5 edits, one of them the manifest rebuilt by skills_index.py)
+ok documentation/PROJECT_INSTRUCTIONS_HISTORY.md (1 edit)
+ok LEDGER_CONSOLIDATED.md (5 edits, plus the index rebuilt by ledger_index.py)
+ok documentation/WHERE_WE_ARE.md (7 edits, one per section)
+rewritten by the maintenance run: DATA_INVENTORY.md, MODULE_ATLAS.md, MODULE_INDEX.md,
+  PROVENANCE_AUDIT.md, README.md, data/provenance_history.json,
+  documentation/prompts/citation_review.jsonl
+yours, untouched by me: documentation/WHERE_WE_ARE_10-27-26_0906_run_record.md
+```
+
+**Your run order**
+1. In GitHub Desktop, look over the change list. It should show the 16 files above.
+2. Copy this report into Where We Are below the run-record marker and save your timestamped copy.
+3. Commit and push.
+
+**Tony-action rollup**
+- **(do)** Review, commit and push, as above. -- 
+- **(do)** Reinstall interactive-exhibit 1.27 and provenance-discipline 2.35 in Settings > Skills. The chat and Cowork sessions load the account copies.
+- **(decide)** At the design talk, P1 on L-485 (the nightly run) comes first, because it gates that build.
+
+=========================================
+
+CLAUDE.md now has its Doc-Kind line, and README's row reads:
+
+`| [CLAUDE.md](CLAUDE.md) | hand-written | The door into the protocol for a Claude Code session: it points at PROJECT_INSTRUCTIONS.md and the skills, and states what a Code session writes. |`
+
+The indexer moved CLAUDE.md into the hand-written group, which now has 10 documents. None are untagged any more. It printed "Document index regenerated (19 documents) in README.md".
+
+I put the line above the heading, in your exact words, and the file stays ASCII with LF endings. These two lines are for your run record:
+
+```
+ok CLAUDE.md (1 edit)
+ok README.md (regenerated by doc_index.py)
+```
+
+Both go in with the same commit as the rest of this session's files.

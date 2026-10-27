@@ -1,7 +1,7 @@
 <!-- Doc-Kind: generated | The provenance audit: every numeric claim scored against its citation, rebuilt by provenance_scanner.py on each run. Do not hand-edit. -->
 # Paloma's Orrery -- Provenance Audit
 
-Generated: October 26, 2026
+Generated: October 27, 2026
 Files scanned: 168
 Total findings: 1189
 Constants: 287 | Dicts: 69 | Display strings: 833
@@ -20,12 +20,12 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T1 by domain | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|--------------|---:|---:|---:|--------:|
+| 20261027T145449Z | `8d334e7` | 168 | 1189 | 276 | orrery 112, Earth System 149, stars 13, utilities 2 | 731 | 176 | 6 | 0 |
 | 20261027T012531Z | `8f4173c` | 168 | 1189 | 276 | orrery 112, Earth System 149, stars 13, utilities 2 | 731 | 176 | 6 | 0 |
 | 20261026T213028Z | `140db0a` | 168 | 1189 | 276 | orrery 112, Earth System 149, stars 13, utilities 2 | 731 | 176 | 6 | 0 |
 | 20261026T200107Z | `5398439` | 170 | 1191 | 277 | orrery 112, Earth System 149, stars 13, utilities 2, unclassified 1 | 731 | 177 | 6 | 0 |
 | 20261026T143725Z | `288e83f` | 168 | 1178 | 276 | orrery 112, Earth System 149, stars 13, utilities 2 | 724 | 172 | 6 | 0 |
 | 20261026T012932Z | `d80aed3` | 169 | 1179 | 277 | orrery 112, Earth System 149, stars 13, utilities 2, unclassified 1 | 724 | 172 | 6 | 0 |
-| 20261025T234511Z | `0c27f47` | 171 | 1181 | 276 | orrery 112, Earth System 149, stars 13, utilities 2 | 725 | 174 | 6 | 0 |
 
 Change since the previous run: total +0, Tier-1 +0.
 
@@ -2018,10 +2018,10 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 355 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 356 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 2434 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 2565 | dict | SECTION_SYMBOLS[...] | (8 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
+| 360 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 361 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 2459 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 2590 | dict | SECTION_SYMBOLS[...] | (8 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
 
 ### path_plan.py
 

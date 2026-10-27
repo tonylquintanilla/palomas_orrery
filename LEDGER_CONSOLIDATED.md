@@ -665,6 +665,11 @@ the gold comet, the class words, and a comet's planets "so far"; L-493,
 a search box for the drawer, and L-494, the pointer to the i button,
 new; L-491 left with its one Tony-action), built on 140db0a and gallery
 dd9d0fa.
+Module updated: October 27, 2026 with Anthropic's Claude Opus 5.5 (the
+first Claude Code session: L-443's skill text written,
+interactive-exhibit 1.27 and provenance-discipline 2.35, protocol
+v3.116; L-495, the dashboard's Direction Arrows button), built on
+8d334e7 and gallery 7d422e5.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -1024,7 +1029,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-432 | Objects drawn in the default goldenrod (orrery, colours) | OPEN | -- | 2026-10-11 |
 | ! | L-434 | Stored drawings for the other dot-cloud shells (orrery + gallery) | OPEN | -- | 2026-10-22 |
 | ! | L-435 | Standing rulings that are method, held only on Tony's page (skills, records) | OPEN | -- | 2026-10-12 |
-| ! | L-443 | The rest of the orrery's objects come to the website as plotted positions (gallery + orrery, objects) | OPEN | -- | 2026-10-26 |
+| ! | L-443 | The rest of the orrery's objects come to the website as plotted positions (gallery + orrery, objects) | OPEN | -- | 2026-10-27 |
 | ! | L-449 | A cache build dropped the 82 build-run records it should have carried (gallery, cache builder) | OPEN | -- | 2026-10-17 |
 | ! | L-454 | A drawn device for edges that move: the magnetopause, the bow shock and their kind (orrery + gallery, design) | OPEN | -- | 2026-10-22 |
 | ! | L-456 | What a visitor reads, from Earth's Mode 5 look: body radii, sources as a list with live links, Celsius for Earth's surface and air (gallery + orrery) | OPEN | -- | 2026-10-21 |
@@ -1433,7 +1438,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-482 | Whether the Sun and Earth rooms' All / none becomes Reset too (gallery, the rooms' shared chrome) | DONE | -- | 2026-10-24 |
 |  | L-493 | A search box to find a row in the Solar System room's drawer (gallery, the drawer) | DONE | -- | 2026-10-26 |
 |  | L-494 | A pointer to the i button, so a visitor knows where more information is (gallery, the rooms' chrome) | DONE | -- | 2026-10-26 |
-|  | L-495 | Tony's phone look of the night of Oct 26: the wrapped orbit line, the AU note, a comet's farthest planet on a closed orbit, the whole triad, the direction arrows (gallery, the rooms) | DONE | -- | 2026-10-26 |
+|  | L-495 | Tony's phone look of the night of Oct 26: the wrapped orbit line, the AU note, a comet's farthest planet on a closed orbit, the whole triad, the direction arrows (gallery, the rooms) | DONE | -- | 2026-10-27 |
 
 ### W.Done -- Web Publication track, closed items
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -2883,7 +2888,7 @@ the deliberate limit, its number set then, each removal named.
 `documentation/HANDOFF_L446_daily_run_order_build_20261015.md`.
 
 #### [L-443] The rest of the orrery's objects come to the website as plotted positions (gallery + orrery, objects)
-<!-- L:443 status:OPEN upd:2026-10-26 section:A flag: rice: -->
+<!-- L:443 status:OPEN upd:2026-10-27 section:A flag: rice: -->
 - **Tony, 2026-10-13:** "I am anxious to add the symbols to the gallery
   too so visitors can at least plot positions." And his note of
   2026-10-10 on L-433: "then add the symbols for most if not all the
@@ -3416,7 +3421,26 @@ the deliberate limit, its number set then, each removal named.
     the sandbox's Chromium with the pinned Plotly bundle and the room's
     payload handed to the page in place of Pyodide, so Tony judged real
     pictures before a build. Not yet a file in either repository.
-**Gap (replaces the one below, 2026-10-26, night):** slice 2 is closed.
+- **2026-10-27, the skill text written** (protocol v3.116; the first
+  session run in Claude Code, built on orrery 8d334e7 and gallery
+  7d422e5). interactive-exhibit 1.26 -> 1.27 carries every line of both
+  lists above: the pointer sentence corrected (the wrong one), a comet's
+  companions on an open path and on a closed orbit, a group's class
+  explained first, the Find a body box, the AU note and the whole
+  triad, the orbit line wrapped at 60, the direction arrows, and the
+  headless candidate, recorded as a candidate. The Hover budget check's
+  description in the skill's pre-test step said it checks that each
+  hover points at the i panel; corrected in the same bump. Each fact was
+  read from the website's code at 7d422e5 before it was written.
+  provenance-discipline 2.34 -> 2.35 takes the JPL-words rule into What
+  a Visitor Reads, principle 5, from
+  `documentation/COORD_jpl_words_ruling_20261026.md`; the five
+  principles Tony approved stay five.
+**Gap (replaces the one below, 2026-10-27):** slice 2 is closed and its
+skill text is written. What waits on this item is on Where We Are's
+Deferred list (a drawn main-belt cloud). The road's next stage is L-485
+(a nightly run), which opens with a design talk.
+**Gap (superseded above, 2026-10-26, night):** slice 2 is closed.
 Next session first: interactive-exhibit 1.27 with everything carried
 above, and provenance-discipline's JPL-words rule; then the road's next
 stage, L-485 (a nightly run), which opens with a design talk.
@@ -27977,7 +28001,7 @@ first.
 text boxes); L-231; L-443; L-495.
 
 #### [L-495] Tony's phone look of the night of Oct 26: the wrapped orbit line, the AU note, a comet's farthest planet on a closed orbit, the whole triad, the direction arrows (gallery, the rooms)
-<!-- L:495 status:DONE upd:2026-10-26 section:C flag: rice: -->
+<!-- L:495 status:DONE upd:2026-10-27 section:C flag: rice: -->
 - **Asked at his phone looks that night,** each in his words, and each
   built the same night:
   - "The hover tapping the object overruns its box." The orbit line was
@@ -28024,6 +28048,15 @@ text boxes); L-231; L-443; L-495.
 - **Carried on:** his two remarks to L-496 (groups in the search) and
   L-497 (left-aligned text); the skill text to interactive-exhibit 1.27,
   on L-443.
+- **The dashboard button, 2026-10-27.** The orrery maintenance run after
+  patch_L494_4 read "1 of 34 checkers FAILED", Dashboard parity: the
+  Direction arrows check gates the website's run, and the orrery's
+  dashboard had no button for it. Added that day:
+  `palomas_orrery_dashboard.py` gains Direction Arrows in "Gallery --
+  checks and data", after Collapsed Features, running through
+  `documentation/run_offline_check.py`, with its short line. The parity
+  check then read PASS, 10 of 10 planted faults caught.
+  Written into interactive-exhibit 1.27 the same day (L-443).
 **Ref:** gallery `interactive.html`, `gallery/direction_arrows.js`,
 `documentation/smoke_direction_arrows.js`,
 `tools/headless/walk_solar_system_drawer.js`; L-443, L-493, L-494.

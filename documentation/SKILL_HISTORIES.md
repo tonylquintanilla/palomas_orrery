@@ -537,6 +537,13 @@ and the words a visitor reads give kelvin. Tony, 2026-10-17: "don't
 we standardize on degrees Kelvin? the conversion is routine", and "we
 should add this to the skill."
 (Moved down 2026-10-22, when 2.34 made a fourth entry.)
+Earlier: 2.32 | 2026-10-20, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ fcd191e9. v2.32 (L-410, the Sun's fades) adds to What
+a Visitor Reads, principle 1: the open copy's address goes on the
+Source line itself, as a web address a visitor can open, because the
+Source line is the one a visitor reads; an address on the row's Access
+line alone never reaches the i panel. Tony, 2026-10-20: "the citation
+should have a live url link", and "we should add this to the skill."
 
 ## interactive-exhibit
 
@@ -789,6 +796,19 @@ a See more. And three descriptions, built and approved on his look the
 same day: each line of a Solar System room hover after the name is a
 bullet; a source line naming JPL Horizons carries its address, which the
 i panel makes a link; each room's closing paragraph is a bulleted list.
+Earlier: 1.24 | 2026-10-25, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 0c27f47a and gallery @ b1a4ce6c. v1.24 (L-443 build B,
+L-484) adds the spacecraft to the Solar System room: a Spacecraft group
+after Earth's row (Tony, 2026-10-24: "i would suggest putting the
+spacecraft drawer after earth's as the comets are after the sun's");
+each path drawn from its served positions file, which the page fetches,
+solid to the minute shown and dashed after (ruling 6 of the slice 2
+design, "Solid to today, dashed after"); its text box in Tony's words of
+2026-10-25; Go To fitting the whole path; and a row the served cache does
+not hold named, not stopping the room. And L-484's rule under
+Provenance: the website and the orrery agree on every object both draw,
+or the difference is written down (Tony, 2026-10-24); its check is still
+to be designed.
 
 ## safe-file-editing
 

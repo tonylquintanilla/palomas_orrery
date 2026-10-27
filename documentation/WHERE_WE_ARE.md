@@ -1,39 +1,39 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 26, 2026, night: slice 2 closed; the search box,
-the i button's note and the direction arrows are live.
-- Written at orrery 8f4173c and gallery b7e2edd.
+Last updated: October 27, 2026: the first Code session; skills written.
+- Written at orrery 8d334e7 and gallery 7d422e5.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Slice 2 closed on your phone look (L-443 (the objects)).
-> - Live tonight: the search box (L-493 (the search box)); the i
->   button's note (L-494 (the i button's note)); direction arrows, the
->   AU note, the whole triad, wrapped orbit lines, comets' planets
->   (L-495 (the night's changes)). orrery-coding-conventions 1.12.
+> - Last night's red check is fixed: the dashboard has its Direction
+>   Arrows button, so Dashboard parity passes.
+> - interactive-exhibit 1.27 describes last night's builds, and fixes a
+>   wrong sentence that would have put the i button pointer back in the
+>   hovers (L-443 (the objects)).
+> - provenance-discipline 2.35 carries your rule: keep JPL's words and
+>   explain them, never replace them.
+> - This session ran in Claude Code: files edited directly, no patch.
 >
-> **Do next:** *next session's first job: interactive-exhibit 1.27 and
-> provenance-discipline's JPL-words rule (both carried on L-443); then
-> L-485 (a nightly run), which opens with a design talk.*
+> **Do next:** *the design talk, P1 on L-485 (a nightly run) first, as it
+> gates that build. The small builds L-497 (left-aligned text) and L-492
+> (the stale scale sentences) can go beside it.*
 >
 > **Needs you now:**
-> - *(do) this records patch and the orrery maintenance run, push,
->   with tonight's run record copy.*
-> - *(do) reinstall orrery-coding-conventions 1.12 (Settings > Skills).*
+> - *(do) review the change list in GitHub Desktop; commit and push.*
+> - *(do) reinstall interactive-exhibit 1.27, provenance-discipline 2.35.*
 > - Two papers left to try (`READING_L456_tony_20261021.md`).
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
-## The road  **>> UPDATED THIS SESSION**
+## The road
 
   1-11.[done]  All but 5, 5b and 9: the three rooms live, fed by the
                orrery; typed facts and periods checked (Oct 14-16); the
                Sun's slice (Oct 22); the objects checked against JPL; the
                objects on the website (L-443 (the objects)), slice 1 (Oct
                22) and slice 2, spacecraft and comets (Oct 26).
-               << moved this session
   5.   [later] Earth's list (L-413 (Earth's list)): deferred behind the
                objects (Oct 22); see Deferred.
   5b.  [NOW]   The scaffolding checks clear beside the slices: the
@@ -50,7 +50,7 @@ the i button's note and the direction arrows are live.
  15.   [goal]  The website does what the desktop orrery does, with a date
                to choose, within the range the data covers.
 
-## Settled  **>> UPDATED THIS SESSION**
+## Settled
 
 Standing rulings. A line leaves after a few weeks, once it is habit.
 - Only spacecraft and comets bring planets: a path by its reach so far,
@@ -69,7 +69,7 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 - A comet from a year before perihelion to a year past today, in JPL's
   span; "hyperbolic" in plain words; the two agree or say why. (Oct 24)
 
-## Deferred  **>> UPDATED THIS SESSION**
+## Deferred
 
 Waiting behind the objects (Oct 22); a line leaves when picked up.
 - L-454 (moving edges): Earth's two pairs with their four rows; the
@@ -93,16 +93,16 @@ Waiting behind the objects (Oct 22); a line leaves when picked up.
 - L-492 (the stale scale sentences): a small session after the comets.
 - L-497 (left-aligned text): a small build, after the skill work.
 
-## Signals
+## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261026T200851Z, ok, one retry (gallery b7e2edd).
-- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md at orrery
-  8f4173c). Whole tree: 276: orrery 112, Earth System 149, stars 13,
-  utilities 2.
-- This page's date and the ledger's newest stamp: both Oct 26. Agree.
+- Last cache build: 20261027T140105Z, ok, no retry (gallery 7d422e5).
+- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, this
+  session's run on 8d334e7). Whole tree: 276: orrery 112, Earth System
+  149, stars 13, utilities 2.
+- This page's date and the ledger's newest stamp: both Oct 27. Agree.
 
-## Waiting on you  **>> UPDATED THIS SESSION**
+## Waiting on you
 
 At the next design talk:
 - The orrery's own Sun axis hover: words to you first, and a source
@@ -121,11 +121,10 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- *Next: the ledger's L-443, its list for interactive-exhibit 1.27.*
-- Today's build: `HANDOFF_L443_slice2_buildB_comets_20261026.md`.
-- Your run record, all of today: `WHERE_WE_ARE_10-26-26_1451_run_record.md`.
-- Today's words, classes and sizes: `WORDS_L443_comets_20261026.md`,
-  `CHECK_L443_drawer_classes_20261026.md`, `CHECK_L491_comet_nucleus_sizes_20261026.md`.
+- *Next: the design talk, item 4 of `COORD_next_sessions_brief_20261026.md`.*
+- Today's work: the ledger's L-443 and L-495; protocol v3.116.
+- Your run records: last night's, `WHERE_WE_ARE_10-26-26_1451_run_record.md`;
+  this morning's, `WHERE_WE_ARE_10-27-26_0906_run_record.md`.
 - The strategy behind the road: `MASTER_PLAN_INTERACTIVE_GALLERY.md`
 
 --- Your run record below this line. No patch edits it; the length cap

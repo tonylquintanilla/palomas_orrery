@@ -6,9 +6,16 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0 on 
 
 # Provenance Discipline
 
-Read this file in 6 parts: lines 1-306, 307-627, 628-912, 913-1152, 1153-1436, 1437-1465.
+Read this file in 6 parts: lines 1-307, 308-628, 629-913, 914-1181, 1182-1465, 1466-1494.
 
-Skill version: 2.34 | 2026-10-22, with Anthropic's Claude Opus 5.5, at
+Skill version: 2.35 | 2026-10-27, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 8d334e7. v2.35 (L-443) adds to What a Visitor Reads,
+principle 5: plain words keep the authority's word. Where JPL or the
+IAU has a term for a thing, the visitor reads it, with a plain
+explanation where it is not everyday English; it is never replaced by a
+paraphrase. Tony, 2026-10-26: "we should always keep the correct JPL
+words and explain them when needed."
+Earlier: 2.34 | 2026-10-22, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ b995472a. v2.34 (L-434 with L-454) adds How a range
 is drawn, under When the source gives a range: an edge nobody can
 place is drawn as a cloud across its range; an edge that moves keeps
@@ -28,17 +35,11 @@ double check the earth too and this should be added to the skill."
 And to The Access Standard: an agency summary that names no source is
 a lead, not a source; read one layer down (Tony's ruling of
 2026-10-21, that it is method).
-Earlier: 2.32 | 2026-10-20, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ fcd191e9. v2.32 (L-410, the Sun's fades) adds to What
-a Visitor Reads, principle 1: the open copy's address goes on the
-Source line itself, as a web address a visitor can open, because the
-Source line is the one a visitor reads; an address on the row's Access
-line alone never reaches the i panel. Tony, 2026-10-20: "the citation
-should have a live url link", and "we should add this to the skill."
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
 on 2026-10-05 and 2026-10-08 (L-418), 2026-10-09 (L-414),
 2026-10-13 (L-437), 2026-10-17 (L-452 and L-411), 2026-10-20
-(L-410), 2026-10-21 (L-460) and 2026-10-22 (L-434).
+(L-410), 2026-10-21 (L-460), 2026-10-22 (L-434) and 2026-10-27
+(L-443).
 
 ## Contents
 
@@ -1071,6 +1072,34 @@ in the store, where only we read it.
    One Home); it carries no project words -- no names, no dates of
    rulings, no handles (orrery-coding-conventions, Hover Text Is
    Written for the Visitor).
+   PLAIN WORDS KEEP THE AUTHORITY'S WORD (v2.35). Where JPL, the IAU or
+   another authority has a word for a thing, the visitor reads that
+   word, and a plain explanation follows it where the word is not
+   everyday English: "Hyperbolic: an open path around the Sun, not a
+   closed loop," never "open path" in its place. The same for
+   perihelion, aphelion, osculating, barycentre, Keplerian,
+   near-parabolic, "predicted", JPL's class names (HYP, COM, Apollo,
+   Amor, Centaur, TNO) and the IAU's "I" designations. Two reasons.
+   It is the word a visitor meets everywhere else -- in JPL's pages, in
+   the agency's story, in a search -- and a site that renames it teaches
+   a private vocabulary. And it is provenance: the word is part of what
+   was read, and the Source line the i panel prints uses it.
+   The explanation follows the rules above: plain words, no project
+   words, no number that is not served, and it says what the term
+   means, not what we decided about it. Explain a term once, where a
+   visitor first meets it. Where two of our own words name one thing,
+   the authority's is kept and the other becomes its gloss or goes:
+   piece C of C/2025 K1 read "Keplerian orbit" where its siblings read
+   "near-parabolic" (Tony, 2026-10-24: "same thing"). Applied forward,
+   to every string a build touches, in both instruments; an instance
+   found outside the slice is recorded by class (The Braid). (Tony,
+   2026-10-26: "we should always keep the correct JPL words and explain
+   them when needed," recorded by Claude Fable 5.1 in
+   `documentation/COORD_jpl_words_ruling_20261026.md`; and, on the
+   comets' words the same day, "I don't want to drop JPL's words,
+   Ellipse, Predicted, hyperbolic, perihelion, aphelion, etc."
+   interactive-exhibit carries the same rule for the website's words,
+   under Hover text is written for the visitor.)
 
 Applied FORWARD: to every row and string a build touches, and to the
 slice being worked. An instance found outside it is recorded by class,

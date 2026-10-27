@@ -1,3 +1,4 @@
+<!-- Doc-Kind: hand | The door into the protocol for a Claude Code session: it points at PROJECT_INSTRUCTIONS.md and the skills, and states what a Code session writes. -->
 # Paloma's Orrery: how a Claude Code session works here
 
 This file is the door into the project's rules for a session that runs

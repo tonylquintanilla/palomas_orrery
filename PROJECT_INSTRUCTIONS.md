@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.115 | October 26, 2026
+Tony Quintanilla, PE | Claude | v3.116 | October 27, 2026
 
-Cut from 8f4173c4 at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 8d334e71 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -504,7 +504,7 @@ horizons-orbital-mechanics   1.12 Horizons queries, centers, frames, osculating
                                   comet on an open path's plan (its span, its
                                   TP, its perihelion), an entry asked by JPL's
                                   number in the Horizons check
-provenance-discipline        2.34 Scanner runs, audits, citations, constants,
+provenance-discipline        2.35 Scanner runs, audits, citations, constants,
                                   pre-push (Tier-1 = 0 on the active build
                                   path)
 provenance-cross-check       1.1  Cross-check worksheets and relay prompts,
@@ -536,7 +536,7 @@ gallery-cache-builder        1.13 Nightly builder, atomic swap and its
                                   a pull that does not match the push, a comet
                                   on an open path fetched by its plan
                                   (is_path_body, open_path)
-interactive-exhibit          1.26 adding or changing an exhibit in
+interactive-exhibit          1.27 adding or changing an exhibit in
                                   interactive.html; any edit to the Sun's
                                   chrome (drawer, nav cluster, frame zoom,
                                   i-panel, HUD, consent, back link); "Earth
@@ -573,7 +573,12 @@ interactive-exhibit          1.26 adding or changing an exhibit in
                                   sentence to a bullet; a comet on an open path
                                   in the Solar System room; the drawer's groups
                                   one JPL class to a row; JPL's terms in the
-                                  words a visitor reads
+                                  words a visitor reads; a comet's companions;
+                                  the drawer's Find a body box; the direction
+                                  arrows on the orbits; the grid chip's AU note
+                                  and the triad's frame note; the i button's
+                                  first-visit note and hovers without a pointer
+                                  line
 <!-- SKILL-MANIFEST:END -->
 
 Session-Start Repo Pull and the SHA Round Trip [CRITICAL]
@@ -1209,6 +1214,60 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.116 (October 27, 2026): No rule changed in this document. TWO skill
+bumps, one version each (L-443, carrying L-493, L-494 and L-495):
+interactive-exhibit 1.26 -> 1.27, provenance-discipline 2.34 -> 2.35.
+THE NIGHT OF OCTOBER 26 WRITTEN INTO THE SKILLS; JPL'S WORDS KEPT IN
+BOTH INSTRUMENTS.
+
+WHAT PROMPTED IT. The night's website builds (gallery patch_L494_1 to
+patch_L494_3, pushed at ab8f6b5e, 1e6f6691 and b7e2edd4) left
+interactive-exhibit 1.26 saying that a website hover ends with a
+pointer line to the i panel, which a session following it would put
+back, and that a comet on an open path ticks no companions. It had been
+bumped once that day, so under One Session, One Bump its corrections
+waited for this session, carried on L-443. Tony's ruling of Oct 26, "we
+should always keep the correct JPL words and explain them when needed"
+(documentation/COORD_jpl_words_ruling_20261026.md), waited for
+provenance-discipline's next version the same way. This is the first
+session run in Claude Code, by the door CLAUDE.md opened on Oct 26.
+
+WHAT CHANGED. interactive-exhibit: no website hover ends with a
+pointer, and a first visit gets a note under the i button; a comet
+ticks a companion planet (on an open path the farthest its path has
+reached so far, on a closed orbit the farthest its orbit reaches by its
+aphelion), and no asteroid or dwarf planet does; a group's class is
+explained first in each member's text box and panel; the Find a body
+box; the grid chip's AU note and the whole triad opening the frame
+note; the orbit line wrapped at 60; the direction arrows; a candidate
+for the headless recipe; and the Hover budget check's description
+corrected. provenance-discipline: What a Visitor Reads, principle 5,
+plain words keep the authority's word, explained, never replaced. Each
+skill's oldest of four version entries moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule. Not a skill:
+the orrery dashboard gained its Direction Arrows button, which the
+Dashboard parity check had found missing on the run after patch_L494_4.
+
+THE OBLIGATION TRAVELS. A Claude Code session reads each skill as the
+file in the repo, so its loaded copy is the repo's. This one read in
+full safe-file-editing 1.14, agentic-pre-test 1.3,
+ledger-and-session-records 1.22, interactive-exhibit 1.26 and
+provenance-discipline 2.34, each as the manifest expected, and read the
+version lines of orrery-coding-conventions 1.12,
+horizons-orbital-mechanics 1.12 and gallery-cache-builder 1.13, which
+this work did not fire. The account's installed copies cannot be seen
+from Code. The next session that loads skills from the account confirms
+its copies read interactive-exhibit 1.27 and provenance-discipline
+2.35, and, from v3.114 and v3.115, orrery-coding-conventions 1.12,
+horizons-orbital-mechanics 1.12 and gallery-cache-builder 1.13, before
+work that fires them.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.113 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.115 (October 26, 2026, night): No rule changed in this document. ONE
 skill bump, one version (L-494): orrery-coding-conventions 1.11 ->
 1.12. THE WEBSITE'S HOVERS END WITHOUT A POINTER.
@@ -1299,39 +1358,6 @@ v3.113's obligation for those two is not discharged and passes to the
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.111 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.113 (October 25, 2026, evening): No rule changed in this document.
-ONE skill bump, one version (L-443, L-487): interactive-exhibit 1.24 ->
-1.25. A SPACECRAFT TICKS ITS COMPANIONS; THE I PANEL IS ONE SENTENCE TO
-A BULLET.
-
-WHAT PROMPTED IT. Tony's phone look of the spacecraft, the evening of
-Oct 25, after orrery patch_L443_16 and gallery patch_L443_17 had brought
-the Voyagers: "put bullets on all sentences for readability including
-the source paragraph," and "in addition to the default inner planets,
-add the farthest planet orbit that the object has reached ... This
-gives perspective to a spacecraft plot," then "Maybe flyby planets too."
-Asked to approve the two rules: "Yes please on all your suggestions."
-
-WHAT CHANGED. interactive-exhibit: the Solar System room's drawer gains
-A spacecraft's companions, and One body at a time names its one
-exception; Hover text is written for the visitor gains The i panel, one
-sentence to a bullet. Its v1.22 entry moved to
-documentation/SKILL_HISTORIES.md, by the three-entry rule.
-
-THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
-that session. The next session confirms its loaded copies read
-interactive-exhibit 1.25, horizons-orbital-mechanics 1.11,
-gallery-cache-builder 1.12 and safe-file-editing 1.14 before work that
-fires them. This session bumped interactive-exhibit twice (1.24 at the
-close, 1.25 this evening) and worked from the repo's copy of each, which
-it wrote.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.110 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 
