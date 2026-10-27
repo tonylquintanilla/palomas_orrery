@@ -246,8 +246,8 @@ yours, untouched by me: documentation/WHERE_WE_ARE_10-27-26_0906_run_record.md
 3. Commit and push.
 
 **Tony-action rollup**
-- **(do)** Review, commit and push, as above. -- 
-- **(do)** Reinstall interactive-exhibit 1.27 and provenance-discipline 2.35 in Settings > Skills. The chat and Cowork sessions load the account copies.
+- **(do)** Review, commit and push, as above. -- 9537d4f21ba5f7c42357bc616b37088de0e140c1
+- **(do)** Reinstall interactive-exhibit 1.27 and provenance-discipline 2.35 in Settings > Skills. The chat and Cowork sessions load the account copies. -- v3.116 done
 - **(decide)** At the design talk, P1 on L-485 (the nightly run) comes first, because it gates that build.
 
 =========================================
