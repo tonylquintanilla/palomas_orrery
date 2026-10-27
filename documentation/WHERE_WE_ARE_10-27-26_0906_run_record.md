@@ -139,7 +139,7 @@ Here are the steps for the first Code session, one at a time. Do each before rea
 
 1. **Save the settings file.** In File Explorer, open `palomas_orrery_for_github`. Make a new folder named `.claude` (dot, then claude). Put the `settings.json` I sent you inside it. -- done
 
-2. **Commit and push.** Open GitHub Desktop with the orrery repo selected. The change list should show three new files: `CLAUDE.md`, `.claude\settings.json`, and `documentation\COORD_next_sessions_brief_20261026.md`. Commit them with a message like "Claude Code door: CLAUDE.md, settings, brief" and push.
+2. **Commit and push.** Open GitHub Desktop with the orrery repo selected. The change list should show three new files: `CLAUDE.md`, `.claude\settings.json`, and `documentation\COORD_next_sessions_brief_20261026.md`. Commit them with a message like "Claude Code door: CLAUDE.md, settings, brief" and push. -- c8551250c3456e3f3ebd27755b2fa2877c6656d2 CLAUDE.md and document previously pushed.
 
 3. **Open Code.** In the Claude desktop app, click the Code tab. Choose Local. Click Open folder and pick `palomas_orrery_for_github`. Not python_work, not orrery.
 
