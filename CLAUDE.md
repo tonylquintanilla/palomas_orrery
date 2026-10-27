@@ -70,3 +70,20 @@ disagree, stop and say so (the protocol's Stale Skill = Stop gate).
   the way a patch prints "ok <file> (n edits)", so Tony can paste it
   into his run record; then his run order (what to look at, what to
   commit), then the Tony-action rollup.
+
+## How to report to Tony
+
+Tony reads your reports on his phone, between other things. He
+is not a programmer and cannot follow compressed language (the
+protocol's Register Rule, Part 2). So every report to him:
+- Leads with the claim in one plain sentence; detail after.
+- Says the thing, not the name of the thing: a ledger handle
+  always carries its short label in parentheses, "L-412 (the
+  Sun's slice)", and a file is named with what it is for.
+- Puts one question to him per report. A finding, a
+  recommendation, an uncertainty and a question are four things;
+  send the one that is due and put the rest in the records.
+- Ends with the file list for his run record, his run order, and
+  the Tony-action rollup, in that order.
+Tony, Oct 27, 2026: "Code is difficult to follow and technical."
+This section is the answer.

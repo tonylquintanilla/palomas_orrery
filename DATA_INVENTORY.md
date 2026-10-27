@@ -74,7 +74,7 @@ Repo copies stale/absent; this reflects the live local stores.
 
 Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
-**Total size:** 460.0 MB (1214 files)
+**Total size:** 460.0 MB (1216 files)
 
 **GitHub Pages headroom:** 564 MB remaining of 1024 MB ceiling (44.9% used)
 
@@ -82,7 +82,7 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
 | ext | count | total | biggest | newest |
 |---|---|---|---|---|
-| .json | 700 | 426.4 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-10-27 |
+| .json | 701 | 426.4 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-10-27 |
 | .kmz | 39 | 14.4 MB | western_heatwave_march_21_blockbuster.kmz (904.7 KB) | 2026-06-30 |
 | .py | 274 | 9.6 MB | patch_L330_3_website_belts_words_20261017.py (451.6 KB) | 2026-10-26 |
 | .png | 2 | 6.3 MB | palomas_orrery_logo.png (5.1 MB) | 2026-09-24 |
@@ -91,7 +91,7 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 | .html | 5 | 533.9 KB | interactive.html (289.2 KB) | 2026-10-26 |
 | .jpg | 2 | 137.9 KB | palomas_orrery_wall.jpg (95.2 KB) | 2026-10-04 |
 | .ico | 1 | 137.3 KB | favicon.ico (137.3 KB) | 2025-11-28 |
-| .md | 7 | 81.1 KB | MODULE_ATLAS.md (54.4 KB) | 2026-10-27 |
+| .md | 8 | 85.9 KB | MODULE_ATLAS.md (54.4 KB) | 2026-10-27 |
 | .diff | 2 | 27.6 KB | gallery_cache_builder.py.diff (20.4 KB) | 2026-07-16 |
 | .patch | 3 | 11.7 KB | phaseb_studio.patch (7.0 KB) | 2026-07-29 |
 | .txt | 2 | 7.8 KB | requirements.txt (4.2 KB) | 2026-09-04 |

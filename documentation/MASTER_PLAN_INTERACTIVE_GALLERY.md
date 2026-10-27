@@ -82,7 +82,8 @@ Section 5 is the phases. Section 5a is the shape of the work: the end
 goal, one pipeline in one direction, the five segments, the braid and
 the direction. Section 6 is the prep work and Section 7 the
 architectural decisions, both with their history. Section 11 opens
-with one paragraph on the four kinds of session that do the work now.
+with one paragraph on the three kinds of session that do the work now
+(it said four at v37; corrected 2026-10-27, evening, L-499).
 The plan's dated history is in `documentation/MASTER_PLAN_HISTORY.md`:
 the critical path's session record from August 23 to September 29,
 2026, and the lineage (formerly Section 10). The status block below is
@@ -1724,17 +1725,23 @@ Moved on 2026-10-14, word for word, to
 **How sessions run, at v37.** How the work is done is the protocol's
 and the skills', not this plan's, and the rules are not restated here.
 One fact is recorded because it changes how this plan's work reaches
-the two repositories. Since October 2026 sessions come in four kinds,
+the two repositories. Since October 2026 sessions come in three kinds,
 told apart by what each may write: a coordinating session, which
-verifies and writes rulings and briefs but no patch; a build session,
-which writes patches and a closing records patch; a talk-only session,
-which writes design records that Tony saves by hand; and, since
-2026-10-26, a Claude Code session, a build session that edits the
-files directly with no patch file and runs the tests itself, its door
-`CLAUDE.md` in the orrery's root. The description is the coordination
-brief's, `documentation/COORD_next_sessions_brief_20261026.md`,
-section 4; it waits on Tony's confirmation before the protocol's Mode 7
-text is written. The rules: `PROJECT_INSTRUCTIONS.md`.
+verifies against both repositories, runs design talks and writes
+rulings and briefs, but no patch and no code; a talk-only session,
+which writes design records that Tony saves by hand; and a build
+session, which writes code in one of two forms. In the patch form
+(Cowork) it writes a patch file Tony runs, and the spent patch is the
+record. In the direct form (Claude Code, since 2026-10-26, its door
+`CLAUDE.md` in the orrery's root) it edits the files in place and runs
+the tests itself, and the change list in GitHub Desktop is the record.
+Either way Tony commits and pushes. Tony confirmed the three kinds and
+two forms at the talk of 2026-10-27
+(`documentation/DESIGN_talk_20261027_rulings.md`, section 7; L-499).
+At v37 this paragraph said four kinds, the Claude Code session counted
+apart, from the coordination brief of 2026-10-26, section 4; corrected
+2026-10-27, evening. The protocol's Mode 7 text follows at a later
+session. The rules: `PROJECT_INSTRUCTIONS.md`.
 
 The rest of this section is the Phase 0 review as it was written.
 
