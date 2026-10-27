@@ -1,28 +1,28 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 27, 2026: the first Code session; skills written.
-- Written at orrery 8d334e7 and gallery 7d422e5.
+Last updated: October 27, 2026, later: the master plan restamped as v37.
+- Written at orrery 7c61e7f and gallery 7d422e5.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Last night's red check is fixed: the dashboard has its Direction
->   Arrows button, so Dashboard parity passes.
-> - interactive-exhibit 1.27 describes last night's builds, and fixes a
->   wrong sentence that would have put the i button pointer back in the
->   hovers (L-443 (the objects)).
-> - provenance-discipline 2.35 carries your rule: keep JPL's words and
->   explain them, never replace them.
-> - This session ran in Claude Code: files edited directly, no patch.
+> - The master plan is now v37 (L-498 (the plan's restamp)). Its front
+>   page is rewritten for today: the objects are on the website.
+> - Its direction adds compositions, the legacy list for Paloma, and
+>   the nightly run, the old midnight schedule back on GitHub's computers.
+> - The Sun's slice stays open: L-412 (the Sun's slice) now names your
+>   five phone looks, twelve shape numbers, and two hover questions.
 >
 > **Do next:** *the design talk, P1 on L-485 (a nightly run) first, as it
 > gates that build. The small builds L-497 (left-aligned text) and L-492
 > (the stale scale sentences) can go beside it.*
 >
 > **Needs you now:**
-> - *(do) review the change list in GitHub Desktop; commit and push.*
-> - *(do) reinstall interactive-exhibit 1.27, provenance-discipline 2.35.*
+> - *(do) read the plan's front page and Section 5a; commit and push.*
+> - *(do) your five phone looks; then L-412 (the Sun's slice) closes.*
+> - *(do) reinstall interactive-exhibit 1.27, provenance-discipline 2.35,
+>   if not done yet.*
 > - Two papers left to try (`READING_L456_tony_20261021.md`).
 
 *Italic* lines are the must-reads. Marks reset at every update.
@@ -98,7 +98,7 @@ Waiting behind the objects (Oct 22); a line leaves when picked up.
 Read from files when this page was written, not typed from memory.
 - Last cache build: 20261027T140105Z, ok, no retry (gallery 7d422e5).
 - Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, this
-  session's run on 8d334e7). Whole tree: 276: orrery 112, Earth System
+  session's run on 7c61e7f). Whole tree: 276: orrery 112, Earth System
   149, stars 13, utilities 2.
 - This page's date and the ledger's newest stamp: both Oct 27. Agree.
 
@@ -122,10 +122,10 @@ Not urgent, in your order:
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
 - *Next: the design talk, item 4 of `COORD_next_sessions_brief_20261026.md`.*
-- Today's work: the ledger's L-443 and L-495; protocol v3.116.
+- Today's work: the ledger's L-443, L-495 and L-498; protocol v3.116.
+- The plan, restamped: `MASTER_PLAN_INTERACTIVE_GALLERY.md` v37.
 - Your run records: last night's, `WHERE_WE_ARE_10-26-26_1451_run_record.md`;
   this morning's, `WHERE_WE_ARE_10-27-26_0906_run_record.md`.
-- The strategy behind the road: `MASTER_PLAN_INTERACTIVE_GALLERY.md`
 
 --- Your run record below this line. No patch edits it; the length cap
 --- stops here; the close reads your timestamped copy and clears this.

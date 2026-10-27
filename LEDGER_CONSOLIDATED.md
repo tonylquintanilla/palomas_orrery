@@ -670,6 +670,9 @@ first Claude Code session: L-443's skill text written,
 interactive-exhibit 1.27 and provenance-discipline 2.35, protocol
 v3.116; L-495, the dashboard's Direction Arrows button), built on
 8d334e7 and gallery 7d422e5.
+Module updated: October 27, 2026, later, with Anthropic's Claude Opus
+5.5 (L-498 opened: the master plan restamped as v37 at slice 2's
+close), built on 7c61e7f and gallery 7d422e5.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -887,7 +890,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*254 live items; 238 need attention (`!`); 165 RICE-scored; 236 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*255 live items; 239 need attention (`!`); 165 RICE-scored; 236 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -912,7 +915,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-190 | Scanner reach: anything rendered must be reachable | OPEN | 4.3 | 2026-08-25 |
 | ! | L-281 | The guest book: no-account comments, approve-before-show | OPEN | 4.2 | 2026-09-27 |
 | ! | L-247 | Sgr A* constants migrated to the single source of truth | OPEN | 4.0 | 2026-08-25 |
-| ! | L-331 | Visitor-facing text: stale info text, four Sun hovers outside the i-panel move, and hovers in plain language (exhibits) | OPEN | 4.0 | 2026-09-16 |
+| ! | L-331 | Visitor-facing text: stale info text, four Sun hovers outside the i-panel move, and hovers in plain language (exhibits) | OPEN | 4.0 | 2026-10-27 |
 | ! | L-177 | Mercury Hill sphere radius_fraction convention error (Opus 5 self-flag) | OPEN | 4.0 | 2026-08-04 |
 | ! | L-184 | Interactive build-path push gate | OPEN | 4.0 | 2026-10-09 |
 | ! | L-211 | UNKNOWN -- the verdict for "checked, could not determine" | OPEN | 3.8 | 2026-08-19 |
@@ -1017,8 +1020,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-403 | Numbers in the object list's descriptions carry no source (orrery, provenance) | OPEN | -- | 2026-10-01 |
 | ! | L-410 | Fades where nature thins out: Earth's hydrogen designed, the outer corona next (orrery + gallery, the Sun and Earth) | OPEN | -- | 2026-10-20 |
 | ! | L-411 | The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-21 |
-| ! | L-412 | The Sun's slice: the order Tony confirmed (the Sun's slice) | OPEN | -- | 2026-10-22 |
-| ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-10-22 |
+| ! | L-412 | The Sun's slice: the order Tony confirmed (the Sun's slice) | OPEN | -- | 2026-10-27 |
+| ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-10-27 |
 | ! | L-423 | The website's checks: the order Tony confirmed (checks, gallery) | OPEN | -- | 2026-10-16 |
 | ! | L-424 | The checker reports one word for two different cases (worksheet checker) | OPEN | -- | 2026-10-11 |
 | ! | L-425 | A citation's location record is checked only in part (provenance tooling) | OPEN | -- | 2026-10-09 |
@@ -1055,6 +1058,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-492 | The orrery's stale "manual scale" and "MB per frame" sentences come out of its hovers, as a class (orrery, the words a visitor reads) | OPEN | -- | 2026-10-26 |
 | ! | L-496 | The drawer's search box finds groups too, such as "comet", "planet" or "asteroid" (gallery, the drawer) | OPEN | -- | 2026-10-26 |
 | ! | L-497 | Left-aligned text in every text box (gallery, the rooms) | OPEN | -- | 2026-10-26 |
+| ! | L-498 | The master plan restamped as v37 at slice 2's close (documentation) | OPEN | -- | 2026-10-27 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1467,6 +1471,64 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ## DETAIL / RECORD
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
+
+#### [L-498] The master plan restamped as v37 at slice 2's close (documentation)
+<!-- L:498 status:OPEN upd:2026-10-27 section:A flag: rice: -->
+- **Tony, 2026-10-26, 21:47,** in the coordination brief
+  (`documentation/COORD_next_sessions_brief_20261026.md`, queue item
+  4a): "we should add to this brief a review and update of the
+  strategic master plan as we conclude slice 2." Built 2026-10-27 in a
+  Claude Code session, at Tony's direction, as a DOCUMENTATION build
+  like v36 (L-442). No code changed. Built on orrery 7c61e7f and
+  gallery 7d422e5, both read live.
+- **What v37 changed** in `documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md`:
+  - The executive summary, rewritten from the current state: the
+    anchor; the five segments (the objects on the website, slice 1's
+    fifty bodies on 2026-10-22, slice 2's twelve spacecraft and fourteen
+    comets on open paths on 2026-10-25 and 26); the direction; the
+    signals read from files (cache build 20261027T140105Z, first try;
+    Tier-1 on the gate path 0; whole tree 276).
+  - Section 5a, The direction: the objects done, and the three new kinds
+    of work in Tony's words from their items: compositions (L-489), the
+    nightly run on GitHub's computers (L-485), which revives the retired
+    Layer 3 by a different mechanism and says so, and the legacy list
+    (L-490), "a legacy gift for Paloma".
+  - Section 11: one paragraph on the four kinds of session, from the
+    brief's section 4, pointing to the protocol.
+  - The Last updated line gains v37 and drops v34. The frozen status
+    block is not updated, and the summary says so.
+- **Sections 6 and 7 against the ledger, one pass.** One line was wrong:
+  Section 7, decision 13, gave `palomas_orrery_dashboard.py` line 253
+  for the dormant exporter's launcher entry; the entry is still there,
+  near line 1888, and the line says so. Checked and in agreement, or
+  still open in the ledger: L-080, L-068, L-087, L-162, L-170 to L-173,
+  L-176, L-177, L-181, L-190.
+- **Found and recorded, not chased:**
+  - L-412 (the Sun's slice) still reads OPEN, its Gap waiting on Tony's
+    looks at the builds of 2026-10-22, while the road on Where We Are
+    counts the Sun's slice done on Oct 22. The ledger wins on status, so
+    the summary says the slice was built through Oct 22 and its item
+    still reads open. Tony, 2026-10-27, at his read: L-412 does not
+    close yet; its Gap now names what remains.
+  - Section 6's Attribution page still reads "[ ] Not started", and
+    "required before any publicly reachable interactive page". Its
+    ledger item exists: L-086 (Attribution / credits page), PROPOSED
+    since 2026-07-03, which Section 6 names ("Attribution gate (L-086)").
+    It has never been started. The rooms went public on 2026-08-29
+    without it, and L-086 stays proposed. (Corrected 2026-10-27 at
+    Tony's read: this line first said the page had no ledger item, as
+    L-442's note at v36 did; both were wrong.)
+- **Left out of the plan, as detail rather than direction:** L-496
+  (groups in the search), L-497 (left-aligned text) and L-492 (the stale
+  scale sentences) are small builds, on the road and Deferred; L-483
+  (a comet room) and L-488 (the heliopause beside a spacecraft) sit
+  under L-489 and are not ruled; L-484 (the two instruments agree) is
+  method, in interactive-exhibit.
+**Gap:** Tony's read of the plan's new front page and Section 5a, then
+commit and push. Then DONE.
+**Ref:** `documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md` v37;
+`documentation/COORD_next_sessions_brief_20261026.md`; L-442; L-443;
+L-485; L-489; L-490; L-412.
 
 #### [L-497] Left-aligned text in every text box (gallery, the rooms)
 <!-- L:497 status:OPEN upd:2026-10-26 section:A flag: rice: -->
@@ -4347,7 +4409,7 @@ for each case and updates the skill's bullet to match.
 L-252; L-418.
 
 #### [L-413] Earth's list: the old Earth items, in the order Tony confirmed (Earth room)
-<!-- L:413 status:OPEN upd:2026-10-22 section:A flag: rice: -->
+<!-- L:413 status:OPEN upd:2026-10-27 section:A flag: rice: -->
 - **Confirmed by Tony, 2026-10-04,** after a sweep of the open items
   that touch the Earth room, read against the code at orrery cbde99dc
   and gallery e7ef96eb, and checked against the Claude Fable 5.1 ledger
@@ -4497,7 +4559,15 @@ meanwhile is the field's epoch (L-356), which the hover states.
   pairs, L-356) are deferred behind L-443 with talks 3 to 6 (Tony,
   2026-10-22, the coordination session); listed under Deferred on
   Where We Are.
-**Gap (replaces the one below, 2026-10-22):** all of it waits behind
+- **2026-10-27, Tony:** L-331's hovers in `gallery/earth_geometry.js`
+  (the page's own Earth hovers, still saying "not served" where a
+  value is missing) ride with this list when it opens.
+**Gap (replaces the one below, 2026-10-27, Tony):** Earth's list is
+unblocked. What it waited behind, L-443's slice 2 (the objects), closed
+on 2026-10-26; L-443 itself stays open only for the drawn main-belt
+cloud, which this list does not wait on. Its talks 3 to 6 come after
+the design talk on Where We Are's list.
+**Gap (2026-10-22, superseded above):** all of it waits behind
 L-443 (Deferred on Where We Are).
 **Gap (2026-10-21, later; superseded above):** talks 3 to 6,
 which wait behind the Sun's slice (L-412); the builds of L-375's cone
@@ -4553,7 +4623,7 @@ above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
 `documentation/HANDOFF_decisions_20261008.md`.
 
 #### [L-412] The Sun's slice: the order Tony confirmed (the Sun's slice)
-<!-- L:412 status:OPEN upd:2026-10-22 section:A flag: rice: -->
+<!-- L:412 status:OPEN upd:2026-10-27 section:A flag: rice: -->
 - **Confirmed by Tony, 2026-10-04**, after a sweep of the open items that
   touch the Sun room. Smallest and most settled first:
   1. L-209, the Alfven surface look -- DONE 2026-10-04.
@@ -4709,7 +4779,21 @@ above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
   rest of the list waits behind L-443 with L-128: the streamer belt's
   and the clumps' eyeballed numbers. L-241 closes, overtaken (the
   Hills cloud is no torus). See the Deferred section on Where We Are.
-**Gap (replaces the one below, 2026-10-22):** Tony's looks at the day's
+- **2026-10-27, Tony, at his read of v37 (L-498):** L-412 does not
+  close yet. The Gap below replaces the one of 2026-10-22 with what
+  actually remains.
+**Gap (replaces the one below, 2026-10-27):**
+  (a) Tony's five phone looks, asked for on Oct 22 and not yet
+  recorded: the tide's cone and the outer cloud's clumps (L-434); the
+  Sun's axis with its arrows, opening view and hover (L-465); the
+  corona's drawer row (L-468); the Alfven circles (L-454).
+  (b) The streamer belt's seven and the clumps' five eyeballed shape
+  numbers. Their item, L-371, closed on Oct 17, so this item is now
+  their only home; when it closes it must re-home them.
+  (c) L-465's two questions, on Tony's design-talk list: the axis
+  hover's words, and the source for "differential 24.5 to 35 days".
+  The slice closes after those looks and a records edit.
+**Gap (2026-10-22, superseded above):** Tony's looks at the day's
 builds (L-434, L-454's circles, L-465, L-468); then the slice closes.
 What waits is on Deferred.
 **Gap (2026-10-21, night; superseded above):** the tide and the clumps as stored
@@ -6642,7 +6726,7 @@ IGRF-14's 2025.0 column and 2025-30 drift, the hovers to "for 2025
   gallery `gallery/feature_renderers.js` (`infoMarker`), `interactive.html`.
 
 #### [L-331] Visitor-facing text: stale info text, four Sun hovers outside the i-panel move, and hovers in plain language (exhibits)
-<!-- L:331 status:OPEN upd:2026-09-16 section:A flag: rice:3/3/90/2 -->
+<!-- L:331 status:OPEN upd:2026-10-27 section:A flag: rice:3/3/90/2 -->
 - **Found 2026-09-15/16, reading the code for the 2026-09-15 handoff's
   change (c).** The handoff named one stale sentence. There are more, in
   `interactive.html` [verified @ gallery `52e953a7`]:
@@ -6655,7 +6739,8 @@ IGRF-14's 2025.0 column and 2025-30 drift, the hovers to "for 2025
     panel carries them;
   - the drawer sentence ("Tap one and it draws; the view rescales to hold
     it") should be re-read against L-318 round 3.
-- **Four Sun hovers missed that move.** `renderStreamerBand` and
+- **STRUCK 2026-10-27: fixed on 2026-09-16** (gallery `744ad578`,
+  patch_L331_1, below). **Four Sun hovers missed that move.** `renderStreamerBand` and
   `renderOortShape` in `gallery/feature_renderers.js` never call
   `withTail`. So the Streamer Belt, the Hills Cloud torus, the Outer Oort
   Cloud clumps and the Galactic Tide keep their citations in the hover
@@ -6783,7 +6868,25 @@ raised from 1 by the plain-language pass.
   the assembler's, `render_orbits.py`, and is L-321's neighbour. The
   Galactic Tide's served `source` string still reads "DECLARED -- ..."
   and shows in the panel's Source line.
-**Gap:** the four `earth_geometry.js` hovers and the Moon's, in plain
+- **2026-10-27, Tony, at his read of v37 (L-498):** the four Sun hovers
+  are struck as fixed on 2026-09-16, and what remains is listed by
+  file. Read at gallery `7d422e5`:
+  - `gallery/earth_geometry.js`: the page's own hovers; their lines
+    still say "not served" where a value is missing (the tilt, the
+    pole's source, the rotation period). These ride with L-413 (Earth's
+    list) when it opens.
+  - `gallery/assembler/render_orbits.py`: the Moon's hover, which
+    still names its orbit "osculating orbit". Under Tony's JPL-words
+    ruling of 2026-10-26 (provenance-discipline 2.35) that word may
+    stay, explained; the Moon's hover is decided when this is picked up.
+  - `data/objects_config.json`: the Galactic Tide's source wording.
+    "DECLARED -- ..." is no longer in the store; it left at gallery
+    `6ba42f0` (2026-10-02, L-406). What is left is to read the tide's
+    panel once and strike this line.
+**Gap (replaces the one below, 2026-10-27):** the three parts above, by
+file; wording to Tony first; the ceiling comes down with the tallest
+hover.
+**Gap (2026-09-16, superseded above):** the four `earth_geometry.js` hovers and the Moon's, in plain
 words, wording to Tony first; the Galactic Tide's served source string;
 the ceiling comes down with the tallest hover (17, the rotation axis --
 one of the four).

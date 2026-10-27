@@ -1,13 +1,13 @@
 <!-- Doc-Kind: hand | The strategy for the interactive gallery: what the website is for, how it is built, and where the work goes over months. The order of the work is the road on WHERE_WE_ARE.md; status is the ledger's. -->
 # MASTER PLAN: Paloma's Orrery Interactive Gallery
 
-## Executive summary -- v36, October 14, 2026
+## Executive summary -- v37, October 27, 2026
 
-Built on orrery `9248845ca8516dcee3498f07c554e6a24426c23c` at
+Built on orrery `7c61e7fd5813f61e7f776beebf92c70c2c3f7b6c` at
 https://github.com/tonylquintanilla/palomas_orrery and gallery
-`86ef2df6313f956f5c9e49611e6a2bdd0e95da29` at
+`7d422e57e6411e552317b4e836ef06a0f502e12f` at
 https://github.com/tonylquintanilla/tonyquintanilla.github.io, read live
-on 2026-10-14. This summary is rewritten at every restamp, never
+on 2026-10-27. This summary is rewritten at every restamp, never
 carried forward.
 
 **What this plan is, and what it is not.** It is the strategy for the
@@ -38,45 +38,58 @@ orrery does, for anyone, with nothing to install, and with a date to
 choose within the range the data covers.
 
 **Where the work stands, by the five segments of Section 5a.**
-- Segment 3, the website draws: done. Three rooms are live: the Sun
-  (2026-08-29), Earth (2026-09-10), and the Solar System room, the
-  gallery's front door. Each was accepted on Tony's phone and desktop.
+- Segment 3, the website draws: done, and the orrery's objects are on
+  it. Three rooms are live: the Sun (2026-08-29), Earth (2026-09-10),
+  and the Solar System room, which a bare `interactive.html` link opens
+  since 2026-10-22. The rest of the orrery's objects came to that room
+  in two slices (L-443): fifty bodies on 2026-10-22; then twelve
+  spacecraft on 2026-10-25 and fourteen comets on open paths on
+  2026-10-26, each drawn from its own path plan. Slice 2 closed on
+  Tony's phone look of 2026-10-26.
 - Segment 2, the numbers reach the website without a hand copy: done.
-  The orrery exports its constants and its objects, and the website
-  pulls both. The newest are the orbital periods: JPL's own, in the
-  orrery and on the website since 2026-10-14.
+  The orrery exports its constants, its objects and its stored
+  drawings, and the website pulls them. JPL's orbital periods have
+  travelled that way since 2026-10-14, and each path's plan since slice
+  2, on the orrery's object list.
 - Segment 1, the orrery's numbers are right: worked room by room, never
   as one sweep. Earth is the first closed slice (2026-09-22). The Sun's
-  is open.
-- Segment 5, shipping: the three rooms are shipped. The Solar System
-  room becomes the page a bare link opens once every room it leads
-  into prints only served numbers.
-- Segment 4, Jupiter and Saturn's golden artifact: no longer next. It
-  falls in the shells phase, after the orrery's objects reach the
-  website.
+  slice was built through 2026-10-22; its ledger item, L-412, still
+  reads open, waiting on Tony's looks at that day's builds.
+- Segment 5, shipping: the three rooms are shipped, and the Solar
+  System room is the gallery's front door.
+- Segment 4, Jupiter and Saturn's golden artifact: not next. Their
+  rooms follow the inner planets' (Section 5a, The direction).
 
-**The direction** (Tony, 2026-10-10 and 2026-10-12; L-433). Section
-5a, The direction, has the paragraph. In short: finish the Sun and
-Earth rooms, with the Solar System room's features, as the template
-for every body's room; bring the rest of the orrery's objects to the
-website; then the inner planets' rooms, with the Earth System layers
-beside them.
+**The direction** (Tony, 2026-10-10 and 2026-10-12, L-433; and since
+v36, L-485, L-489 and L-490). Section 5a, The direction, has it. In
+short: the objects are done. Next on the plan's horizon are the inner
+planets' rooms, with the Earth System layers beside them, and
+encounters as a path to choose. Three new kinds of work opened since
+v36: compositions, a curated view within a room with its own address
+and an interpretation (L-489); the nightly run on GitHub's computers,
+which brings back the retired nightly schedule by a different
+mechanism (L-485); and the legacy list of what the site leans on
+outside its two repositories, "a legacy gift for Paloma" (L-490).
 
-**Signals, read from files.** Last cache build: 20261014T225537Z,
+**Signals, read from files.** Last cache build: 20261027T140105Z,
 swapped in first time (gallery `data/cache_swap_log.jsonl`). Tier-1 on
-what leaves the orrery: 0 (`PROVENANCE_AUDIT.md`). Whole tree: 280:
-orrery 116, Earth System 149, stars 13, utilities 2.
+what leaves the orrery: 0 (`PROVENANCE_AUDIT.md`, generated
+2026-10-27). Whole tree: 276: orrery 112, Earth System 149, stars 13,
+utilities 2.
 
 **How to read the rest.** Sections 1 to 4 are the architecture.
 Section 5 is the phases. Section 5a is the shape of the work: the end
 goal, one pipeline in one direction, the five segments, the braid and
 the direction. Section 6 is the prep work and Section 7 the
-architectural decisions, both with their history. The plan's dated
-history moved out on 2026-10-14 to
-`documentation/MASTER_PLAN_HISTORY.md`: the critical path's session
-record from August 23 to September 29, 2026, and the lineage (formerly
-Section 10). The status block below is the running record the
-restamps kept from July to v35; it is not updated.
+architectural decisions, both with their history. Section 11 opens
+with one paragraph on the four kinds of session that do the work now.
+The plan's dated history is in `documentation/MASTER_PLAN_HISTORY.md`:
+the critical path's session record from August 23 to September 29,
+2026, and the lineage (formerly Section 10). The status block below is
+the running record the restamps kept from July to v35; it is not
+updated, except for its Last updated line, which carries the three
+latest restamps. Where it and this summary disagree, this summary and
+Section 5a are current.
 
 ---
 
@@ -179,7 +192,16 @@ text here read "enabled with a known open issue", contradicting its own
 header forty lines below. L-151 (gallery-assembler skill) DONE
 2026-07-27; L-150 (multi-orbit binaries) still decided, not yet built.)
 **Date begun:** July 3, 2026
-**Last updated:** October 14, 2026 (v36: a DOCUMENTATION build, L-442,
+**Last updated:** October 27, 2026 (v37: a DOCUMENTATION build, L-498,
+at Tony's direction, at slice 2's close: queue item 4a of
+`documentation/COORD_next_sessions_brief_20261026.md`. The executive
+summary is rewritten; Section 5a, The direction, records the objects
+done and the three new kinds of work, compositions (L-489), the nightly
+run on GitHub's computers (L-485, which revives Layer 3 by a different
+mechanism) and the legacy list (L-490); Section 11 gains one paragraph
+on the four kinds of session; Sections 6 and 7 get one pass against the
+ledger; the first restamp made in a Claude Code session, with
+Anthropic's Claude Opus 5.5. v36, October 14, 2026: a DOCUMENTATION build, L-442,
 at Tony's direction. The plan becomes strategy only, on his ruling of
 2026-10-13: the road on Where We Are carries the order and the ledger
 the status. The executive summary is rewritten; Section 5a keeps the
@@ -196,16 +218,7 @@ orrery's objects rebuilt in the gallery from its own dictionary and
 checked against Horizons, then encounters, then shells and slices. The
 executive summary is rewritten and Section 5a gains the 2026-09-29
 subsection; with Anthropic's Claude Opus 5.5, from a review Claude
-Fable 5.1 did in parallel. v34, September 28, 2026: a DESIGN BUILD, L-345,
-which finished L-322 Stage D. A value in another unit is computed from
-its one source row and never stored as a second row: the orrery
-exports each row's value in every length unit as "in" (patch D19),
-the gallery prints from it (gallery `52da593c`), and the store's
-fifteen conversion rows became names computed from their rows (patch
-D20). Earth's crust is drawn at the mean radius. The plan gains an
-executive summary and absorbs its two companions, which are retired;
-Section 5a gains the 2026-09-23 to 28 subsection; with Anthropic's
-Claude Opus 5.5.)
+Fable 5.1 did in parallel.)
 **Participants:** Tony Quintanilla, Claude Opus 4.6, Claude Opus 4.8,
 Claude Opus 5, Claude Opus 5.5, Claude Fable 5, Claude Fable 5.1,
 Claude Sonnet 5, Claude Sonnet 5.5, GPT
@@ -1160,6 +1173,57 @@ in front of them when they close. The end of the road is the website
 doing what the desktop orrery does, with a date to choose, within the
 range the data covers.
 
+**At v37 the objects are done.** The rest of the orrery's objects are on
+the website (L-443): slice 1's fifty bodies on 2026-10-22, and slice 2's
+twelve spacecraft on 2026-10-25 and fourteen comets on open paths on
+2026-10-26, each spacecraft and open-path comet drawn from its own path
+plan. Slice 2 closed on Tony's phone look of 2026-10-26. Encounters, the
+inner planets' rooms, and the Earth System layers beside them stay as
+the paragraph above says.
+
+**Three new kinds of work opened since v36.** Each is in the ledger
+with Tony's rulings; what follows quotes them and adds no strategy of
+its own.
+
+- **Compositions, the curatorial layer (L-489).** Tony, 2026-10-25:
+  "What's new here is the curatorial element. Up to now it's all general
+  rules for all rooms. Specific curatorial decisions by room is a new
+  approach. Perhaps this could be part of gallery editor." His rulings:
+  a composition is a named selection from what its host room can draw,
+  authored in the editor, served as data, with its own address (C1);
+  it carries an interpretation, "a way to explain what it shows ... Maybe
+  in the info panel" (C2); and a spacecraft is a story, "they weave
+  together the astronomy and the human exploration," sourced from the
+  agencies, not recalled (C3). The general rules for every room stay
+  method, in the skills; compositions are curation, Tony's, and data. Its
+  noun ("view" or "scene") and the first one to build are still his to
+  decide.
+- **The nightly run, on GitHub's computers (L-485).** Its purpose, Tony,
+  2026-10-25: "There are really only two reasons for automation: keeping
+  a cadence of midnight runs and fully automated in the event I cannot
+  work the website." His rulings: the checkers are the gate for the
+  nightly push, which touches only what the tools write (R1); the 30-day
+  checks move inside it (R2); it runs on GitHub Actions, not on his
+  machine, "Yes on running on GitHub" (R3); outside failures are reported
+  and never halt it (R4); the guest book step reports and continues (R5).
+  This REVIVES LAYER 3 BY A DIFFERENT MECHANISM. The status block below
+  records Layer 3, the nightly Task Scheduler on Tony's machine, as
+  retired on 2026-08-10, and says in the same place that its history
+  "becomes live again the moment the build runs unattended by ANY
+  mechanism, including a GitHub Action." L-485 is that case. The status
+  block is not updated; this paragraph is the current word. The build
+  waits on Tony's decision of P1 (whether a body keeps its last
+  confirmed values when a 30-day check disagrees at night) and on the
+  checks its design record lists first.
+- **The legacy list (L-490).** Its purpose, from L-485's talk, Tony:
+  "This website is a legacy gift for Paloma." What the website leans on
+  outside its two repositories, for when Tony cannot work it: each thing
+  named, its failure mode written down, and its failure made visible
+  rather than silent. The first question is who besides Tony can hold
+  the accounts, the GitHub account and the Google sign-in, and it is
+  Tony's and Paloma's to settle. Discovery first, one list; repair later,
+  in slices.
+
 ### Where the order and the history are
 
 - The order of the work: the road on `documentation/WHERE_WE_ARE.md`.
@@ -1501,7 +1565,8 @@ reads each module's own Domain: tag. Corrected at v36.)
     tooling maps classify it `dev_tools`; the gallery references it only
     as a historical porting source at orrery `4e2629c`. One live pointer
     remains -- `palomas_orrery_dashboard.py` line 253 advertises it in
-    the launcher menu (Fable round 2). That entry, and the exporter's own
+    the launcher menu (Fable round 2; the entry is still there at v37,
+    now near line 1888). That entry, and the exporter's own
     `feature_configs.json` output, belong in a retirement note so no
     future session reads them as live.
 14. ~~**L-179 and L-180 values.**~~ **RESOLVED 2026-08-07, pushed at
@@ -1655,6 +1720,23 @@ Moved on 2026-10-14, word for word, to
 ---
 
 ## Section 11 -- Protocol & Skills Review (from Phase 0)
+
+**How sessions run, at v37.** How the work is done is the protocol's
+and the skills', not this plan's, and the rules are not restated here.
+One fact is recorded because it changes how this plan's work reaches
+the two repositories. Since October 2026 sessions come in four kinds,
+told apart by what each may write: a coordinating session, which
+verifies and writes rulings and briefs but no patch; a build session,
+which writes patches and a closing records patch; a talk-only session,
+which writes design records that Tony saves by hand; and, since
+2026-10-26, a Claude Code session, a build session that edits the
+files directly with no patch file and runs the tests itself, its door
+`CLAUDE.md` in the orrery's root. The description is the coordination
+brief's, `documentation/COORD_next_sessions_brief_20261026.md`,
+section 4; it waits on Tony's confirmation before the protocol's Mode 7
+text is written. The rules: `PROJECT_INSTRUCTIONS.md`.
+
+The rest of this section is the Phase 0 review as it was written.
 
 Phase 0 stress-tested the protocol across three models in a single day.
 Detailed findings in `PROTOCOL_SKILLS_REVIEW_PHASE0.md`. Summary:
