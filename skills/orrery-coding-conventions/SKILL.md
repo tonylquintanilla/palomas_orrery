@@ -6,9 +6,16 @@ fires_when: Markers, hover text, axes, the opening view (Auto scale), shells, le
 
 # Orrery Coding Conventions
 
-Read this file in 3 parts: lines 1-275, 276-575, 576-706.
+Read this file in 3 parts: lines 1-274, 275-574, 575-710.
 
-Skill version: 1.11 | 2026-10-19, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.12 | 2026-10-26, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 8f4173c4. v1.12 (L-494) corrects one sentence, under
+Hover Text Is Written for the Visitor: the website's hovers no longer
+end with a pointer to the i panel. Tony chose option C that evening,
+"remove the sentence everywhere and just add the banner"; a session
+following the old sentence would have put the pointer back. The
+orrery's own hovers keep theirs.
+Earlier: 1.11 | 2026-10-19, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 6e0cfacd. v1.11 (L-385) adds The Opening View: every
 view, still or animated, opens on the farthest thing drawn, shell or
 orbit, plus 20 percent; the line toward the Sun counts only when
@@ -25,16 +32,8 @@ older than the two entries below moved to
 documentation/SKILL_HISTORIES.md. Both because a plain read of a
 long file shows its start and end and leaves out its middle, where
 the rules are (Tony, 2026-10-05).
-Earlier: 1.9 | Cut from palomas_orrery @ d99d8db1 (v1.9),
-earlier @ 1fa413d9 (v1.8), 04bba3ca (v1.7), 3faa72a0 (v1.6),
-earlier @ 15741822 (v1.5), 86f529a (v1.4), 3398970 (v1.3) | 2026-09-16
-v1.9 (L-331) adds Hover Text Is Written for the Visitor -- Tony's
-standing rule of 2026-09-16, "In general we should avoid compressed
-language in the hovertext." It was ruled over the gallery's hovers and
-reaches the orrery's own next (L-321); a convention that is not in the
-skill does not travel, and this is the skill a hover session loads.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
-on 2026-10-05 (L-418) and 2026-10-19 (L-385).
+on 2026-10-05 (L-418), 2026-10-19 (L-385) and 2026-10-26 (L-494).
 Criticality tiers ([CRITICAL]/[QUALITY]/[PRACTICE]) are defined in the
 resident protocol, Part 2.
 
@@ -604,7 +603,12 @@ why, in words a visitor can use.
 
 Two things follow. A hover is the glance; the citation, the equation
 and the served or sourced detail belong in the i panel (gallery) or the
-`_info` text (orrery), with a pointer under the hover -- the L-231 move.
+`_info` text (orrery) -- the L-231 move. In the orrery a pointer line
+under the hover says where. On the website it does not, since
+2026-10-26 (L-494, Tony's option C): no hover ends with a pointer, and
+a visitor's first visit is greeted by a note on the i button instead;
+the website's Hover budget check fails on a hover that still ends with
+the old sentence.
 And a reworded hover is a visitor-facing change: it goes to Tony before
 it ships, with the old and the new side by side.
 

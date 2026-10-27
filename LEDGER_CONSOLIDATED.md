@@ -882,7 +882,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*254 live items; 238 need attention (`!`); 165 RICE-scored; 233 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*254 live items; 238 need attention (`!`); 165 RICE-scored; 236 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1048,8 +1048,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-490 | What the website leans on outside its two repositories, for when Tony cannot work it (orrery + gallery, legacy) | OPEN | -- | 2026-10-26 |
 | ! | L-491 | The comet nucleus sizes the orrery's comet hover prints, sourced (orrery, the words a visitor reads) | OPEN | -- | 2026-10-26 |
 | ! | L-492 | The orrery's stale "manual scale" and "MB per frame" sentences come out of its hovers, as a class (orrery, the words a visitor reads) | OPEN | -- | 2026-10-26 |
-| ! | L-493 | A search box to find a row in the Solar System room's drawer (gallery, the drawer) | OPEN | -- | 2026-10-26 |
-| ! | L-494 | A pointer to the i button, so a visitor knows where more information is (gallery, the rooms' chrome) | OPEN | -- | 2026-10-26 |
+| ! | L-496 | The drawer's search box finds groups too, such as "comet", "planet" or "asteroid" (gallery, the drawer) | OPEN | -- | 2026-10-26 |
+| ! | L-497 | Left-aligned text in every text box (gallery, the rooms) | OPEN | -- | 2026-10-26 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1431,6 +1431,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-480 | Closing the About card goes back to the room the visitor came from (gallery, the lobby's About card) | DONE | -- | 2026-10-24 |
 |  | L-481 | Readability: bullets in the Solar System room's hovers, JPL Horizons' address in the i panels, the closing paragraph a list (gallery, the rooms' words) | DONE | -- | 2026-10-24 |
 |  | L-482 | Whether the Sun and Earth rooms' All / none becomes Reset too (gallery, the rooms' shared chrome) | DONE | -- | 2026-10-24 |
+|  | L-493 | A search box to find a row in the Solar System room's drawer (gallery, the drawer) | DONE | -- | 2026-10-26 |
+|  | L-494 | A pointer to the i button, so a visitor knows where more information is (gallery, the rooms' chrome) | DONE | -- | 2026-10-26 |
+|  | L-495 | Tony's phone look of the night of Oct 26: the wrapped orbit line, the AU note, a comet's farthest planet on a closed orbit, the whole triad, the direction arrows (gallery, the rooms) | DONE | -- | 2026-10-26 |
 
 ### W.Done -- Web Publication track, closed items
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1460,31 +1463,34 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
-#### [L-494] A pointer to the i button, so a visitor knows where more information is (gallery, the rooms' chrome)
-<!-- L:494 status:OPEN upd:2026-10-26 section:A flag: rice: -->
-- **Tony, 2026-10-26,** at his phone look of the comets: "we should add
-  back the pointer to the i button for the visitor to know where to
-  look for more info either in the hover text box or maybe better in
-  the top banner next to the i button, like: "More information: (i)""
-  (`documentation/WHERE_WE_ARE_10-26-26_1451_run_record.md`).
-- "Add back": the Sun and Earth rooms' hovers carry one pointer line to
-  the i panel (L-231); the Solar System room's text boxes do not.
-**Gap:** a design talk: where the pointer goes (the top banner beside
-the i button, Tony's preference, or the text box), its words, and
-whether every room gets it; words to Tony first.
-**Ref:** gallery `interactive.html` (the top bar, the i button, the
-text boxes); L-231; L-443.
+#### [L-497] Left-aligned text in every text box (gallery, the rooms)
+<!-- L:497 status:OPEN upd:2026-10-26 section:A flag: rice: -->
+- **Tony, 2026-10-26, night,** at his phone look of the wrapped orbit
+  line (`documentation/WHERE_WE_ARE_10-26-26_1451_run_record.md`, the second website patch's
+  phone look): "we should standardize text on left justified."
+- What his screenshots of Halley showed that evening: the box Plotly
+  opens on a tap on a marker drew its lines centred, while the page's
+  own text box, the one the drawer opens, is drawn left-aligned
+  (`align: "left"` in sunLabelRefresh).
+**Gap:** a small build: Plotly's own box left-aligned in every room,
+the Sun's and Earth's too; then Tony's phone look.
+**Ref:** gallery `interactive.html` (the layouts' hover label,
+sunLabelRefresh); L-495.
 
-#### [L-493] A search box to find a row in the Solar System room's drawer (gallery, the drawer)
-<!-- L:493 status:OPEN upd:2026-10-26 section:A flag: rice: -->
-- **Tony, 2026-10-26,** at his phone look of the comets: "as we create
-  more objects in the website, could we add a search window to find the
-  right row?" The drawer lists 94 bodies in 15 groups since slice 2.
-**Gap:** a design talk: where the box sits, what it matches (the label,
-JPL's name, the designation), and what a match does (open its group,
-scroll to the row); then a build with its own drawer check.
-**Ref:** gallery `interactive.html` (the drawer),
-`gallery/solar_system_drawer.js`; L-443; L-477.
+#### [L-496] The drawer's search box finds groups too, such as "comet", "planet" or "asteroid" (gallery, the drawer)
+<!-- L:496 status:OPEN upd:2026-10-26 section:A flag: rice: -->
+- **Tony, 2026-10-26, night,** at his phone look of the search box
+  (`documentation/WHERE_WE_ARE_10-26-26_1451_run_record.md`, the first website patch's phone look):
+  "the user should also be able to find groups, like "comet" or
+  "planet" or "asteroid" not just individual bodies."
+- Since L-493 the box matches each body's four names; a group's row
+  name and its class words are not searched.
+**Gap:** a design talk: what a group match shows (the group open with
+all its bodies, or its row alone), and which words find a group (its
+row's name, JPL's class name, plain words such as "planet"); words to
+Tony first; then a build with the drawer check's planted breaks.
+**Ref:** gallery `gallery/solar_system_drawer.js` (searchHits),
+`interactive.html` (the drawer); L-493.
 
 #### [L-492] The orrery's stale "manual scale" and "MB per frame" sentences come out of its hovers, as a class (orrery, the words a visitor reads)
 <!-- L:492 status:OPEN upd:2026-10-26 section:A flag: rice: -->
@@ -3384,7 +3390,37 @@ the deliberate limit, its number set then, each removal named.
   correction is the next session's first skill work, before any other
   work that fires the skill. provenance-discipline's What a Visitor
   Reads takes the JPL-words rule, as above.
-**Gap (replaces the one below, 2026-10-26, evening):** Tony's run of
+- **2026-10-26, night: slice 2 closed on Tony's phone look**
+  (`documentation/WHERE_WE_ARE_10-26-26_1451_run_record.md`, item 7: tick West and Pluto comes; Go To
+  on 3I/ATLAS and Saturn comes: "-- correct"). L-493 (the search box)
+  and L-494 (the i button's note) were built and closed the same night,
+  and L-495 records five changes from his phone look, among them a comet
+  on a closed orbit ticking the farthest planet its orbit reaches (Tony:
+  "only spacecraft and comets").
+- **Carried for interactive-exhibit 1.27, adding to the list above**
+  (all from 2026-10-26, night; the first is a wrong sentence):
+  - Under Hover text is written for the visitor, "one pointer line
+    under each hover (L-231)" is wrong since L-494: no website hover
+    ends with a pointer; a first visit gets the i button's note.
+    (orrery-coding-conventions corrected the same sentence at 1.12.)
+  - A comet on a closed orbit ticks the farthest planet its orbit
+    reaches, by its aphelion; no asteroid or dwarf planet ticks one
+    (L-495).
+  - The drawer's Find a body box and the four names it matches (L-493).
+  - The grid chip's AU note; the whole triad opens the frame note; the
+    orbit line wrapped at 60 like the other bullets (L-495).
+  - The direction arrows: `gallery/direction_arrows.js`, the Direction
+    arrows check, five arrowhead lengths ahead, not drawn outside the
+    view or when longer than the orbit at that scale (L-495).
+  - A candidate for the headless recipe: the night's renders came from
+    the sandbox's Chromium with the pinned Plotly bundle and the room's
+    payload handed to the page in place of Pyodide, so Tony judged real
+    pictures before a build. Not yet a file in either repository.
+**Gap (replaces the one below, 2026-10-26, night):** slice 2 is closed.
+Next session first: interactive-exhibit 1.27 with everything carried
+above, and provenance-discipline's JPL-words rule; then the road's next
+stage, L-485 (a nightly run), which opens with a design talk.
+**Gap (superseded above, 2026-10-26, night):** Tony's run of
 gallery patch_L443_24 and the website's maintenance run, push; his phone
 look: tick West and see Pluto come with it; Go To on 3I/ATLAS and see
 Saturn. Then slice 2 closes. Next session first: interactive-exhibit
@@ -27872,6 +27908,125 @@ many rooms.
   rather than delivered and amended. Nothing left open.
 **Gap (closed 2026-10-25):** safe-file-editing's next version carries the three.
 **Ref:** L-443; `documentation/patch_L443_4_period_count_20261022.py`.
+
+#### [L-493] A search box to find a row in the Solar System room's drawer (gallery, the drawer)
+<!-- L:493 status:DONE upd:2026-10-26 section:C flag: rice: -->
+- **Tony, 2026-10-26,** at his phone look of the comets: "as we create
+  more objects in the website, could we add a search window to find the
+  right row?" The drawer lists 94 bodies in 15 groups since slice 2.
+- **Built 2026-10-26, night,** from the design canvas's two search
+  screens, which Tony did not ask to change: gallery patch_L494_1
+  (pushed at ab8f6b5e). A "Find a body" box at the top of the Solar
+  System room's drawer matches a body's four names, the drawer's label,
+  the orrery's name, JPL's name and the Horizons id, ignoring capitals,
+  spaces and punctuation. JPL's name is copied by the website's objects
+  mirror from the orrery's export (`horizons_name`, now on each linked
+  object in `data/objects_config.json`). A group with a match opens and
+  says, for example, "1 of 10 shown"; a row found by JPL's name says so;
+  the clear button or Reset empties the box. Checked by the Solar System
+  drawer check (two planted breaks caught) and Claude's walk.
+- **Tony's phone look** (`documentation/WHERE_WE_ARE_10-26-26_1451_run_record.md`): "yr4" finds 2024 YR4
+  alone, "--yes"; "atlas" finds seven comets and C/2025 K1 shows "JPL's
+  name: ATLAS (C/2025 K1)", "--yes".
+- **Loose end re-homed:** finding groups by name, his note at the same
+  look, is L-496.
+**Gap (closed 2026-10-26, night):** none.
+**Gap (superseded, 2026-10-26, evening):** a design talk: where the box
+sits, what it matches (the label, JPL's name, the designation), and what
+a match does (open its group, scroll to the row); then a build with its
+own drawer check.
+**Ref:** gallery `interactive.html` (the drawer),
+`gallery/solar_system_drawer.js`; L-443; L-477; L-496.
+
+#### [L-494] A pointer to the i button, so a visitor knows where more information is (gallery, the rooms' chrome)
+<!-- L:494 status:DONE upd:2026-10-26 section:C flag: rice: -->
+- **Tony, 2026-10-26,** at his phone look of the comets: "we should add
+  back the pointer to the i button for the visitor to know where to
+  look for more info either in the hover text box or maybe better in
+  the top banner next to the i button, like: "More information: (i)""
+  (`documentation/WHERE_WE_ARE_10-26-26_1451_run_record.md`).
+- "Add back": the Sun and Earth rooms' hovers carry one pointer line to
+  the i panel (L-231); the Solar System room's text boxes do not.
+- **Tony, the same evening:** "Wait, the reason i suggested a pointer
+  was because the comet hovers did not have that pointer sentence. But
+  the others do?", then "Or remove the sentence everywhere and just add
+  the banner. Can you ask Design for suggestions?" Claude drew four
+  options on a design canvas ("More information and search", among his
+  artifacts); Tony: "C".
+- **Built that night,** gallery patch_L494_1 (pushed at ab8f6b5e): no
+  website hover ends with the pointer sentence any more (44 hovers in the
+  Sun and Earth rooms lost exactly that sentence and nothing else; the
+  hover record re-written as
+  `documentation/fixture_hovers_L494_on_dae4a7cd.json`, the old one
+  kept). A first visit is greeted by a note under the i button, "More
+  information and the sources for everything you see are here.", with a
+  Got it button; Got it or the i button puts it away for good in that
+  browser. L-231's pointer line under each website hover is retired;
+  the orrery's own hovers keep theirs.
+- **Tony's phone look** (`documentation/WHERE_WE_ARE_10-26-26_1451_run_record.md`): the note shows and
+  Got it puts it away, "-- yes".
+- **Skills:** orrery-coding-conventions 1.12 (protocol v3.115) corrects
+  its sentence the same night; interactive-exhibit's ("one pointer line
+  under each hover") rides 1.27, carried on L-443.
+**Gap (closed 2026-10-26, night):** none.
+**Gap (superseded, 2026-10-26, evening):** a design talk: where the
+pointer goes (the top banner beside the i button, Tony's preference, or
+the text box), its words, and whether every room gets it; words to Tony
+first.
+**Ref:** gallery `interactive.html` (the top bar, the i button, the
+text boxes); L-231; L-443; L-495.
+
+#### [L-495] Tony's phone look of the night of Oct 26: the wrapped orbit line, the AU note, a comet's farthest planet on a closed orbit, the whole triad, the direction arrows (gallery, the rooms)
+<!-- L:495 status:DONE upd:2026-10-26 section:C flag: rice: -->
+- **Asked at his phone looks that night,** each in his words, and each
+  built the same night:
+  - "The hover tapping the object overruns its box." The orbit line was
+    the one bullet not wrapped at 60; Halley's ran 88 characters, so the
+    box Plotly opens on a tap came out wider than a phone's view and was
+    cut on both sides. 62 bodies had it. Wrapped at 60 like the others.
+  - "we could use a hover for the grid au label explaining what au is."
+    The grid chip opens a note, as the Aries mark does. Its km figure is
+    the served KM_PER_AU (IAU 2012 Resolution B2, exact); "about the
+    distance from the Sun to Earth" rests on the IAU's Measuring the
+    Universe page, "a unit of length approximating the Sun-Earth
+    distance" (fetched 2026-10-26). Tony: "AU note and hover text fix
+    approved."
+  - "Selecting ikeya seki from the search window does not plot its
+    nearest planet orbit." The search was right; the companions rule
+    covered spacecraft and comets on open paths only. Tony: "Not every
+    body, not minor planets, only spacecraft and comets." A comet on a
+    closed orbit ticks the farthest planet its orbit reaches, judged by
+    its aphelion, a(1 + e) from the served elements: Ikeya-Seki, Halley,
+    Hale-Bopp, Hyakutake, NEOWISE, Lemmon, SWAN and MAPS bring Pluto;
+    Churyumov-Gerasimenko and Schaumasse Jupiter; Encke, Tempel 2 and
+    Howell Mars, already ticked. "The planet orbit works."
+  - "On the triad hover could you expand the tap area to the entire
+    triad not just the V symbol?" The whole triad opens the frame note.
+  - "couldn't add a small directional arrow right on the orbit line near
+    the objects showing the direction of travel of objects. This is to
+    make clear what the orbit is." Two styles rendered from the real
+    room; Tony: "B and double the distance from the object so that the
+    arrow is not interpreted as part of the object but as a directional
+    arrow", then "B" again from two renders of the opening view: a flat
+    arrowhead in the orbit's plane, 5 arrowhead lengths ahead of the
+    body, sized to the view. Its direction is read from the served
+    points: an orbit's run in true anomaly (render_orbits.sweep_conic),
+    a path's in time, so Halley and Ikeya-Seki point clockwise.
+    `gallery/direction_arrows.js`, with its check
+    `documentation/smoke_direction_arrows.js` (six worked cases; a
+    self-test breaks the file three ways), which gates.
+- **Built** in gallery patch_L494_2 (pushed at 1e6f6691) and
+  patch_L494_3 (pushed at b7e2edd4). The website's maintenance run 35
+  and then 36 of 36 gating checks; Claude's walk of the room, 171 checks
+  on the real served data; the Sun and Earth rooms compared unchanged.
+- **Tony's phone looks:** every line "-- yes" (`documentation/WHERE_WE_ARE_10-26-26_1451_run_record.md`); "all
+  correct."
+- **Carried on:** his two remarks to L-496 (groups in the search) and
+  L-497 (left-aligned text); the skill text to interactive-exhibit 1.27,
+  on L-443.
+**Ref:** gallery `interactive.html`, `gallery/direction_arrows.js`,
+`documentation/smoke_direction_arrows.js`,
+`tools/headless/walk_solar_system_drawer.js`; L-443, L-493, L-494.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

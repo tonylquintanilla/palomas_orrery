@@ -131,7 +131,7 @@ Not urgent, in your order:
 
 **Tony**: Run record:
 
-**Session: OPEN: 10-23-26 1147: Fable: Coordinating session next steps**
+**Session: DONE: 10-26-26 1503: Fable: Coordinating session next steps**
 
 Here it is, ready to paste. It assumes you've run the close patch and pushed first; if you haven't, the first line tells the session to wait for that.
 
@@ -204,7 +204,7 @@ One thing I noticed in the handoff for that session: its section 6 names interac
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-**Session: OPEN: 10-24-26 1605: Opus: L443 slice 2 handoff brief**
+**Session: DONE: 10-24-26 2330: Opus: L443 slice 2 handoff brief**
 
 Building the patch now.
 
@@ -2000,7 +2000,7 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-**Session: OPEN: 10-25-26 0841: Opus: Slice 2 Build B (L-443)**
+**Session: DONE: 10-25-26 2145: Opus: Slice 2 Build B (L-443)**
 
 I'll read the build B brief and the two ruling notes from your orrery folder, pull the repo at 0c27f47, and then start at the brief's section 0.
 

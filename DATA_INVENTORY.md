@@ -74,7 +74,7 @@ Repo copies stale/absent; this reflects the live local stores.
 
 Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
-**Total size:** 459.5 MB (1178 files)
+**Total size:** 459.8 MB (1184 files)
 
 **GitHub Pages headroom:** 564 MB remaining of 1024 MB ceiling (44.9% used)
 
@@ -82,16 +82,16 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
 | ext | count | total | biggest | newest |
 |---|---|---|---|---|
-| .json | 669 | 426.3 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-10-26 |
+| .json | 670 | 426.3 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-10-26 |
 | .kmz | 39 | 14.4 MB | western_heatwave_march_21_blockbuster.kmz (904.7 KB) | 2026-06-30 |
-| .py | 271 | 9.3 MB | patch_L330_3_website_belts_words_20261017.py (451.6 KB) | 2026-10-26 |
+| .py | 274 | 9.6 MB | patch_L330_3_website_belts_words_20261017.py (451.6 KB) | 2026-10-26 |
 | .png | 2 | 6.3 MB | palomas_orrery_logo.png (5.1 MB) | 2026-09-24 |
 | .jsonl | 135 | 1.6 MB | encke.jsonl (50.9 KB) | 2026-10-26 |
-| .js | 32 | 750.1 KB | feature_renderers.js (200.7 KB) | 2026-10-26 |
-| .html | 5 | 512.6 KB | interactive.html (267.8 KB) | 2026-10-26 |
+| .js | 34 | 791.7 KB | feature_renderers.js (201.4 KB) | 2026-10-26 |
+| .html | 5 | 533.9 KB | interactive.html (289.2 KB) | 2026-10-26 |
 | .jpg | 2 | 137.9 KB | palomas_orrery_wall.jpg (95.2 KB) | 2026-10-04 |
 | .ico | 1 | 137.3 KB | favicon.ico (137.3 KB) | 2025-11-28 |
-| .md | 7 | 82.2 KB | MODULE_ATLAS.md (55.1 KB) | 2026-10-26 |
+| .md | 7 | 81.9 KB | MODULE_ATLAS.md (54.9 KB) | 2026-10-26 |
 | .diff | 2 | 27.6 KB | gallery_cache_builder.py.diff (20.4 KB) | 2026-07-16 |
 | .patch | 3 | 11.7 KB | phaseb_studio.patch (7.0 KB) | 2026-07-29 |
 | .txt | 2 | 7.8 KB | requirements.txt (4.2 KB) | 2026-09-04 |
@@ -129,7 +129,7 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
 | repo | served size | ceiling | headroom | used |
 |---|---|---|---|---|
-| gallery | 459.5 MB | 1024 MB | 564 MB | 44.9% |
+| gallery | 459.8 MB | 1024 MB | 564 MB | 44.9% |
 | orrery (gitignored data) | 968.8 MB | n/a (not served) | -- | -- |
 
 Note: orrery data is local/gitignored. If orbit cache files are pushed to either repo for web serving, re-run this inventory to update headroom.

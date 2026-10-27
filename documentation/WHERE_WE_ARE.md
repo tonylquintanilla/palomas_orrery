@@ -1,53 +1,47 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 26, 2026, evening: the comets are live.
-- Written at orrery 140db0a and gallery dd9d0fa; patch L443_24 to run.
+Last updated: October 26, 2026, night: slice 2 closed; the search box,
+the i button's note and the direction arrows are live.
+- Written at orrery 8f4173c and gallery b7e2edd.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The fourteen comets are live, ATLAS gold, each group's name
->   explained (L-443 (the objects)). protocol v3.114.
-> - A comet ticks the farthest planet it has reached so far, your
->   ruling; built, to run (patch L443_24).
-> - New: L-493 (a drawer search box), L-494 (the i button's pointer).
+> - Slice 2 closed on your phone look (L-443 (the objects)).
+> - Live tonight: the search box (L-493 (the search box)); the i
+>   button's note (L-494 (the i button's note)); direction arrows, the
+>   AU note, the whole triad, wrapped orbit lines, comets' planets
+>   (L-495 (the night's changes)). orrery-coding-conventions 1.12.
 >
-> **Do next:** *patch L443_24 (website), push, the phone look; then
-> slice 2 closes.*
+> **Do next:** *next session's first job: interactive-exhibit 1.27 and
+> provenance-discipline's JPL-words rule (both carried on L-443); then
+> L-485 (a nightly run), which opens with a design talk.*
 >
 > **Needs you now:**
-> - *(do) patch_L443_24 and the website's maintenance run, push. On
->   the phone: tick West, Pluto comes too; Go To 3I/ATLAS, Saturn.*
+> - *(do) this records patch and the orrery maintenance run, push,
+>   with tonight's run record copy.*
+> - *(do) reinstall orrery-coding-conventions 1.12 (Settings > Skills).*
 > - Two papers left to try (`READING_L456_tony_20261021.md`).
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
 ## The road  **>> UPDATED THIS SESSION**
 
-  1-4. [done]  The Sun, Earth and Solar System rooms are live; the orrery
-               feeds the website and nothing is typed twice.
+  1-11.[done]  All but 5, 5b and 9: the three rooms live, fed by the
+               orrery; typed facts and periods checked (Oct 14-16); the
+               Sun's slice (Oct 22); the objects checked against JPL; the
+               objects on the website (L-443 (the objects)), slice 1 (Oct
+               22) and slice 2, spacecraft and comets (Oct 26).
+               << moved this session
   5.   [later] Earth's list (L-413 (Earth's list)): deferred behind the
                objects (Oct 22); see Deferred.
   5b.  [NOW]   The scaffolding checks clear beside the slices: the
                dashboard (L-440) done; L-424, L-425, L-426 to come.
-  6-6a.[done]  The typed facts, served and checked (Oct 16);
-               orbital periods from JPL, orrery and website (Oct 14).
-  7.   [done]  The Sun's slice (L-412 (the Sun's slice)), ending with the
-               stored tide and outer cloud (Oct 22); the ice lines
-               deferred.
-  8-8c.[done]  The served objects checked against JPL, missing periods
-               fetched first, Earth's from the Earth-Moon barycentre; the
-               Daily Run pulls before it builds, L-446 (Oct 14-16).
   9.   [next]  L-423 (the website's checks): items 1 and 2 done (Oct 16);
                next, item 3, L-357 (stale leftovers).
- 10-11.[NOW]   *The orrery's objects come to the website (L-443 (the
-               objects to the website)): slice 1, 50 bodies, live Oct 22;
-               slice 2's spacecraft live Oct 26, companions and all;
-               the open-path comets live Oct 26.*
-               << moved this session
- 11b.  [next]  The nightly run, on GitHub's computers (L-485 (a nightly
-               run)), after slice 2.
+ 11b.  [next]  *The nightly run, on GitHub's computers (L-485 (a nightly
+               run)), after the skill work; a design talk first.*
  12.   [later] Encounters: comets and spacecraft at the dates that matter.
  13.   [later] The inner planets' rooms (Mercury, Venus, Mars), from the
                template; Jupiter and Saturn follow (L-433).
@@ -59,6 +53,10 @@ Last updated: October 26, 2026, evening: the comets are live.
 ## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings. A line leaves after a few weeks, once it is habit.
+- Only spacecraft and comets bring planets: a path by its reach so far,
+  a closed orbit by its farthest point; arrows 5 lengths ahead. (Oct 26)
+- No website hover ends with a pointer; the i button greets a first
+  visit instead. (Oct 26)
 - Spacecraft after Earth; one JPL class to a row, the asteroids among
   the planets (Oct 24, 26); JPL's words stay, explained. (Oct 26)
 - The Daily Run's pull is not your pushed orrery: it stops. (Oct 25)
@@ -76,8 +74,7 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 Waiting behind the objects (Oct 22); a line leaves when picked up.
 - L-454 (moving edges): Earth's two pairs with their four rows; the
   heliosphere's edges.
-- L-375 (the dipole's offset): the website's dipole cone.
-- L-356 (IGRF-14), with the offset sentence.
+- L-375 (the dipole's offset), the website's cone; L-356 (IGRF-14).
 - L-466 (drawn ends): Earth's two belts' held lower ends.
 - L-458 (report a problem): the link, words approved.
 - L-462 (a shorter run): whether it stays, now the nightly run exists.
@@ -94,14 +91,15 @@ Waiting behind the objects (Oct 22); a line leaves when picked up.
 - L-490 (the legacy list): first, who besides you can hold the
   accounts, you and Paloma; then a talk, beside L-485.
 - L-492 (the stale scale sentences): a small session after the comets.
+- L-497 (left-aligned text): a small build, after the skill work.
 
 ## Signals
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261026T200851Z, ok, one retry (gallery dd9d0fa).
+- Last cache build: 20261026T200851Z, ok, one retry (gallery b7e2edd).
 - Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md at orrery
-  140db0a). Whole tree: 277: orrery 112, Earth System 149, stars 13,
-  utilities 2, and 1 from a patch then in the root.
+  8f4173c). Whole tree: 276: orrery 112, Earth System 149, stars 13,
+  utilities 2.
 - This page's date and the ledger's newest stamp: both Oct 26. Agree.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
@@ -109,7 +107,8 @@ Read from files when this page was written, not typed from memory.
 At the next design talk:
 - The orrery's own Sun axis hover: words to you first, and a source
   for its "differential 24.5-35 d" (L-465 (the Sun's axis)).
-- L-493 (a drawer search box) and L-494 (the i button's pointer).
+- L-496 (groups in the search): what a group match shows, and which
+  words find a group: "comet", "planet", "asteroid", your examples.
 - Compositions (L-489 (compositions)): the noun, "view" or "scene";
   and the first one to build, Voyager 1 with its planets recommended.
 - When a 30-day check disagrees at night, does that body keep its last
@@ -122,8 +121,9 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- *Next, and today's run order: `HANDOFF_L443_slice2_buildB_comets_20261026.md`.*
-- Your run record: `WHERE_WE_ARE_10-26-26_1451_run_record.md`.
+- *Next: the ledger's L-443, its list for interactive-exhibit 1.27.*
+- Today's build: `HANDOFF_L443_slice2_buildB_comets_20261026.md`.
+- Your run record, all of today: `WHERE_WE_ARE_10-26-26_1451_run_record.md`.
 - Today's words, classes and sizes: `WORDS_L443_comets_20261026.md`,
   `CHECK_L443_drawer_classes_20261026.md`, `CHECK_L491_comet_nucleus_sizes_20261026.md`.
 - The strategy behind the road: `MASTER_PLAN_INTERACTIVE_GALLERY.md`

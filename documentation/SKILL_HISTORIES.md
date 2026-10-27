@@ -852,6 +852,17 @@ create_info_marker's own docstring records as retired in May 2026.
 Earned when the gallery drew every info marker red for two exhibit
 rooms, because the rule a marker session loads was not in this skill.
 
+Moved here 2026-10-26 (L-494), when 1.12 made a fourth resident entry:
+
+Earlier: 1.9 | Cut from palomas_orrery @ d99d8db1 (v1.9),
+earlier @ 1fa413d9 (v1.8), 04bba3ca (v1.7), 3faa72a0 (v1.6),
+earlier @ 15741822 (v1.5), 86f529a (v1.4), 3398970 (v1.3) | 2026-09-16
+v1.9 (L-331) adds Hover Text Is Written for the Visitor -- Tony's
+standing rule of 2026-09-16, "In general we should avoid compressed
+language in the hovertext." It was ruled over the gallery's hovers and
+reaches the orrery's own next (L-321); a convention that is not in the
+skill does not travel, and this is the skill a hover session loads.
+
 ## ledger-and-session-records
 
 Sources: LEDGER_CONSOLIDATED.md header, ledger_index.py at HEAD, handoff

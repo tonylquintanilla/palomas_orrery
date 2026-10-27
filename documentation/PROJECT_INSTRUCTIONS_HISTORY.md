@@ -3498,6 +3498,59 @@ resident.
 (Moved down from the resident protocol on 2026-10-26 when
 v3.114 made a fourth entry.)
 
+v3.112 (October 25, 2026): No rule changed in this document. FOUR
+skill bumps, one version each (L-443 build B, L-461, L-470, L-471,
+L-484): horizons-orbital-mechanics 1.10 -> 1.11, gallery-cache-builder
+1.11 -> 1.12, interactive-exhibit 1.23 -> 1.24, safe-file-editing 1.13
+-> 1.14. THE ORBITER RULE; A SPACECRAFT FETCHED BY ITS PLAN AND DRAWN
+SOLID THEN DASHED; A PULL THAT DOES NOT MATCH THE PUSH STOPS THE DAILY
+RUN; A DELIVERED PATCH IS FINAL.
+
+WHAT PROMPTED IT. Build B of slice 2, from
+documentation/HANDOFF_L443_slice2_buildB_brief_20261024.md, with the
+night's two notes: COORD_L443_drawer_groups_ruling_20261024.md (the
+spacecraft a group after Earth's row; every group by JPL's class) and
+COORD_L461_stop_ruling_20261025.md (Tony, 08:38: "stop. confirmed.").
+The orbiter rule is Tony's of 2026-10-24 ("yes that would work well").
+The spacecraft's visitor words are his of 2026-10-25. L-470's two
+record rules and L-471's three patch rules were carried to these
+versions by their items; L-484's rule by its own.
+
+WHAT CHANGED. horizons-orbital-mechanics: How a Path's Events Are Found
+gains the orbiter rule, the rule among a plan's inputs, a long run that
+prints, saves and keeps under 15 minutes, and KEYING without its
+preview; Which Record Serves a Body gains a comet whose designation
+matches its own pieces, asked by JPL's permanent number, and a path
+cache keyed by name that does not notice a new record; past 500 lines,
+it opens with a contents list. gallery-cache-builder: A Spacecraft Is
+Fetched by Its Plan, new; under The Daily Run's Steps, a pull that does
+not match the push is a failed pull. interactive-exhibit: the
+spacecraft in the Solar System room's drawer section, Go To on a whole
+path, and the L-484 rule under Provenance. safe-file-editing: A
+Delivered Patch Is Final, new, and its read plan, leaving
+skills_index.py's PLAN_NOT_YET. Each skill's oldest of four version
+entries moved to documentation/SKILL_HISTORIES.md, by the three-entry
+rule (safe-file-editing had two).
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copies read
+horizons-orbital-mechanics 1.11, gallery-cache-builder 1.12,
+interactive-exhibit 1.24 and safe-file-editing 1.14 before work that
+fires them. This session confirmed its loaded copies read
+interactive-exhibit 1.23 and horizons-orbital-mechanics 1.10
+(discharging v3.111's obligation), safe-file-editing 1.13,
+agentic-pre-test 1.3 and ledger-and-session-records 1.22, as the
+manifest expected.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.109 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-26, night, when
+v3.115 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

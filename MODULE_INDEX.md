@@ -11,26 +11,21 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 169  
-**Total Lines of Code (non-blank):** 134,360  
-**Total Public Functions/Classes:** 1,712
+**Total Python Files:** 168  
+**Total Lines of Code (non-blank):** 134,262  
+**Total Public Functions/Classes:** 1,710
 
 ## Classification Coverage
 
-**Undetermined role (8).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (7).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
-- `patch_L443_25_records_20261026.py`
 - `test_drawings_export.py`
 - `test_earth_pole_of_date.py`
 - `test_extractor_pins.py`
 - `test_hills_cloud_sampler.py`
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
-
-**Undetermined domain (1).** No valid `Domain:` tag.
-
-- `patch_L443_25_records_20261026.py`
 
 
 ---
@@ -271,7 +266,6 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
-| `patch_L443_25_records_20261026.py` | - the records of the comets' runs and phone look, Oct 26, evening (L-443): the gold comet, the class words, a comet's planets "so far"; L-493 (a drawer search box) and L-494 (the i button's pointer) opened; L-491 left with its one Tony-action. (98 lines) |
 | `test_drawings_export.py` | Each stored drawing in data/drawings/ is the drawing its rows give today, git tracks it, and each check can fail. (466 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |
 | `test_extractor_pins.py` | The instruction filter keeps and drops what it kept and dropped. (278 lines) |
