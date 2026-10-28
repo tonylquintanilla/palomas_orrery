@@ -639,6 +639,30 @@
         "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='2017%20OF201%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@0'&TLIST='2461336.359027778'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
       }
     },
+    "tno_2026_ed138": {
+      "confirmed": "2026-10-28",
+      "horizons_id": "2026 ED138",
+      "id_type": "smallbody",
+      "horizons_name": "(2026 ED138)",
+      "object_type": "orbital",
+      "list_sha256": "97bc47ec162bbbaa3e8c58e81611a1beffabc7f64edab9199460f020349eae63",
+      "jpl_name": "(2026 ED138)",
+      "jpl_type": "asteroid (integrated barycenter)",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2026%20ED138&group=sb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2026%20ED138&group=mb&format=text"
+      ],
+      "period": {
+        "confirmed": "2026-10-28",
+        "center": "@0",
+        "target": "2026 ED138",
+        "epoch": "2026-10-28 13:09",
+        "days": 103248.9414365557,
+        "error_days": 10.294,
+        "jpl_days": 103248.9414365557,
+        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='2026%20ED138%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@0'&TLIST='2461342.047916667'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
+      }
+    },
     "asteroid_2025_pn7": {
       "confirmed": "2026-10-22",
       "horizons_id": "2025 PN7",

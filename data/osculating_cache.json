@@ -5438,5 +5438,66 @@
       "elements_fetch_days": 3018400.730374208,
       "elements_fetch_center": "@sun"
     }
+  },
+  "2026 ED138": {
+    "elements": {
+      "a": 42.97030270802088,
+      "e": 0.1416203937290264,
+      "i": 24.47354058411529,
+      "omega": 168.2029779020769,
+      "Omega": 322.4931496436529,
+      "epoch": "2026-10-28 13:09 osc.",
+      "TP": 2424605.19447433,
+      "MA": 128.5444735329199,
+      "TA": 139.8984335441359
+    },
+    "metadata": {
+      "fetched": "2026-10-28T13:08:57.363439",
+      "source": "JPL Horizons",
+      "solution_date": "2026-10-28",
+      "horizons_id": "2026 ED138",
+      "display_name": "2026 ED138",
+      "refresh_interval_days": 30,
+      "center_body": "@sun"
+    },
+    "period": {
+      "days": 103248.9414365557,
+      "open_orbit": false,
+      "center": "@0",
+      "epoch": "2026-10-28 13:09",
+      "fetched": "2026-10-28",
+      "source": "JPL Horizons PR (sidereal orbit period)",
+      "year_change_days": 0.03551225700357463,
+      "year_step_days": 365.25,
+      "sbdb_sigma_days": 10.294,
+      "sbdb_status": "SBDB sigma",
+      "sbdb_fullname": "(2026 ED138)",
+      "error_days": 10.294,
+      "error_from": "sigma",
+      "test": {
+        "@sun": 306.97639844829973,
+        "@0": 0.03551225700357463,
+        "run": "2026-10-28"
+      },
+      "horizons_targetname": "(2026 ED138)",
+      "target": "2026 ED138",
+      "target_label": null,
+      "agrees_with_elements_fetch": null,
+      "elements_fetch_not_compared": null,
+      "elements": {
+        "a": 43.09090098733694,
+        "e": 0.1387347415313999,
+        "i": 24.43389681047544,
+        "omega": 168.7011193974809,
+        "Omega": 322.6059013275876,
+        "TP": 2424612.925510735,
+        "MA": 128.0641126404224,
+        "TA": 139.2966225794416,
+        "q": 37.1126959765036,
+        "epoch": "2026-10-28 13:09 osc."
+      },
+      "elements_fetch_days": 102884.7594591776,
+      "elements_fetch_center": "@sun"
+    }
   }
 }

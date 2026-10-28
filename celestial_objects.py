@@ -57,6 +57,10 @@ kept and explained: hyperbolic, near-parabolic, retrograde, perihelion)
 and its link, and marked 'open_path', which the path plan and the export
 read. West is asked as C/1975 V1-A, JPL's one record for it; McNaught's,
 PANSTARRS's, Borisov (C/2025 V1)'s and Wierzchos's links replaced.)
+Module updated: October 28, 2026 with Anthropic's Claude Opus 5.5 (L-501:
+2026 ED138, the first dwarf-planet candidate from the Rubin Observatory,
+added and keyed for the website, with JPL's exact name, the words Tony
+approved with their orbit figures left out, and its Wikipedia link.)
 """
 
 from datetime import datetime
@@ -334,6 +338,53 @@ OBJECT_DEFINITIONS = [
     'id_type': 'smallbody', 
     'mission_info': 'Horizons: 2017 OF201. An extreme trans-Neptunian object with an extremely long orbit.', 
     'mission_url': 'https://en.wikipedia.org/wiki/2017_OF201'},
+
+    # 2026 ED138, added 2026-10-28 (L-501), by documentation/
+    # COORD_2026_ED138_words_20261028.md and Tony's ruling of that day
+    # ("B, words only"): the words carry no orbit figure, because the
+    # hover's own lines print its period, distance and orbit from JPL's
+    # record. JPL's Lookup, read 2026-10-28: "(2026 ED138)", asteroid
+    # (integrated barycenter), primary SPKID 54667839; the mb index finds
+    # nothing. SBDB, read 2026-10-28: orbit class TNO, solution of
+    # 2026-10-27, 74 observations 2016-02-25 to 2026-07-11.
+    # Source: NSF-DOE Vera C. Rubin Observatory news release, 2026-10-27,
+    # "NSF-DOE Vera C. Rubin Observatory Reveals Its First Dwarf Planet
+    # Candidate in Our Solar System",
+    # https://rubinobservatory.org/news/rubin-first-dwarf-planet-candidate
+    # (read 2026-10-28): the first three sentences, the class and the
+    # tilt's cause, and the size sentence.
+    # Source: Minor Planet Center, MPEC 2026-U85, issued 2026 October 27,
+    # https://www.minorplanetcenter.net/mpec/K26/K26U85.html (read
+    # 2026-10-28): the announcement date.
+    # Source: JPL Small-Body Database, solution of 2026-10-27 (read
+    # 2026-10-28): its perihelion passage (tp) in 1925, so it is past
+    # perihelion and moving outward. The Pluto sentence compares this
+    # record with Pluto's cached orbit and PLUTO_RADIUS_KM (L-501).
+    # Left out by Tony's ruling: the perihelion year and the 600 to 1,500
+    # km size range, which the Typed numbers check does not allow in the
+    # Solar System room's words (it reads only the Sun and Earth rooms).
+    {'name': '2026 ED138', 'key': 'tno_2026_ed138', 'id': '2026 ED138', 'horizons_name': '(2026 ED138)', 'var_name': 'ed138_var', 'color_key': '2026 ED138', 'symbol': 'circle', 'object_type': 'orbital',
+    'id_type': 'smallbody',
+    'mission_info': ('Horizons: 2026 ED138. 2026 ED138 is a trans-Neptunian object, a body '
+        'orbiting beyond Neptune, and the first dwarf-planet candidate found in '
+        'data from the Vera C. Rubin Observatory. Announced October 27, 2026. '
+        'Matthew Holman of the Center for Astrophysics found it on October 13, '
+        "2026, with search code he wrote with Kevin Napier, in Rubin's "
+        'observations of March 4 to July 11, 2026; older images from the Dark '
+        'Energy Camera then showed it as far back as 2016. '
+        "Its orbit is tilted steeply to the plane of Earth's orbit; the Rubin "
+        "Observatory calls it a hot classical TNO, 'hot' for the tilt, which "
+        "Neptune's pull is thought to have given it. "
+        'It has passed its perihelion, its closest point to the Sun, and is now '
+        'moving outward. '
+        'Its size is not known: the Rubin Observatory estimates it from its '
+        'brightness and a guessed reflectivity, and finds it large enough that '
+        'an icy body would be expected to be round, which is what makes it a '
+        'dwarf-planet candidate; infrared observations are needed to settle it. '
+        "Its whole orbit lies inside Pluto's range of distances from the Sun; "
+        "its year is longer than Pluto's, its orbit is tilted more steeply, and "
+        'it is smaller than Pluto, whatever its size turns out to be.'),
+    'mission_url': 'https://en.wikipedia.org/wiki/2026_ED138'},
 
     # Lagrange Points
     # Earth-Moon Lagrange Points

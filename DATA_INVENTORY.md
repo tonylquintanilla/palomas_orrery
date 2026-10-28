@@ -9,9 +9,9 @@ Repo copies stale/absent; this reflects the live local stores.
 |---|---|---|---|---|
 | .vot | 4 | 295.1 MB | gaia_data_magnitude.vot (284.4 MB) | 2026-02-08 |
 | .nc | 18 | 161.1 MB | era5_clim_march_day22.nc (27.4 MB) | 2026-04-07 |
-| .json | 65 | 134.1 MB | orbit_paths.json (131.1 MB) | 2026-10-27 |
-| .backup | 4 | 131.4 MB | orbit_paths.json.backup (131.1 MB) | 2026-10-23 |
-| .backup_old | 1 | 131.1 MB | orbit_paths.json.backup_old (131.1 MB) | 2026-10-19 |
+| .json | 65 | 134.1 MB | orbit_paths.json (131.1 MB) | 2026-10-28 |
+| .backup | 4 | 131.5 MB | orbit_paths.json.backup (131.1 MB) | 2026-10-24 |
+| .backup_old | 1 | 131.1 MB | orbit_paths.json.backup_old (131.1 MB) | 2026-10-23 |
 | .csv | 15 | 34.9 MB | 3773_v3_niskin_hot001_yr01_to_hot348_yr35.csv (30.8 MB) | 2026-04-07 |
 | .pkl | 2 | 33.6 MB | star_properties_magnitude.pkl (31.1 MB) | 2025-09-16 |
 | .png | 159 | 14.6 MB | 2026-03-21_heatmap_western_heatwave_march_21.png (807.0 KB) | 2026-06-30 |
@@ -24,7 +24,7 @@ Repo copies stale/absent; this reflects the live local stores.
 ## orbit_paths.json
 
 - entries: 1502, formats: {'data_points': 1502}
-- points/entry: min 2, max 24479, total 1526255
+- points/entry: min 2, max 24479, total 1526339
 - sample 'Mercury_Sun':
 ```
 {
@@ -74,7 +74,7 @@ Repo copies stale/absent; this reflects the live local stores.
 
 Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
-**Total size:** 460.0 MB (1216 files)
+**Total size:** 460.1 MB (1109 files)
 
 **GitHub Pages headroom:** 564 MB remaining of 1024 MB ceiling (44.9% used)
 
@@ -82,13 +82,13 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
 | ext | count | total | biggest | newest |
 |---|---|---|---|---|
-| .json | 701 | 426.4 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-10-27 |
+| .json | 593 | 426.4 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-10-27 |
 | .kmz | 39 | 14.4 MB | western_heatwave_march_21_blockbuster.kmz (904.7 KB) | 2026-06-30 |
-| .py | 274 | 9.6 MB | patch_L330_3_website_belts_words_20261017.py (451.6 KB) | 2026-10-26 |
+| .py | 274 | 9.6 MB | patch_L330_3_website_belts_words_20261017.py (451.6 KB) | 2026-10-27 |
 | .png | 2 | 6.3 MB | palomas_orrery_logo.png (5.1 MB) | 2026-09-24 |
-| .jsonl | 135 | 1.7 MB | encke.jsonl (51.2 KB) | 2026-10-27 |
-| .js | 34 | 791.7 KB | feature_renderers.js (201.4 KB) | 2026-10-26 |
-| .html | 5 | 533.9 KB | interactive.html (289.2 KB) | 2026-10-26 |
+| .jsonl | 135 | 1.7 MB | encke.jsonl (51.5 KB) | 2026-10-27 |
+| .js | 35 | 816.5 KB | feature_renderers.js (204.6 KB) | 2026-10-27 |
+| .html | 5 | 543.3 KB | interactive.html (298.5 KB) | 2026-10-27 |
 | .jpg | 2 | 137.9 KB | palomas_orrery_wall.jpg (95.2 KB) | 2026-10-04 |
 | .ico | 1 | 137.3 KB | favicon.ico (137.3 KB) | 2025-11-28 |
 | .md | 8 | 85.9 KB | MODULE_ATLAS.md (54.4 KB) | 2026-10-27 |
@@ -129,7 +129,7 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
 | repo | served size | ceiling | headroom | used |
 |---|---|---|---|---|
-| gallery | 460.0 MB | 1024 MB | 564 MB | 44.9% |
-| orrery (gitignored data) | 968.8 MB | n/a (not served) | -- | -- |
+| gallery | 460.1 MB | 1024 MB | 564 MB | 44.9% |
+| orrery (gitignored data) | 968.9 MB | n/a (not served) | -- | -- |
 
 Note: orrery data is local/gitignored. If orbit cache files are pushed to either repo for web serving, re-run this inventory to update headroom.

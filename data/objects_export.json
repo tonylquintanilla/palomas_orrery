@@ -1,9 +1,9 @@
 {
   "schema": 3,
-  "source_sha256": "6230404d4faf8adee45321d78f656c3d46e9e941902f58a90f36932359e022ba",
-  "period_inputs_sha256": "2324d3c7d8238926d8a3b65556653cad13605f602ccdef42a507bf3329425026",
-  "confirmations_sha256": "a21f2cf63f29b86fb5a6bbc41e399d3025968663ddccfd1460fcd83fb4096831",
-  "paths_sha256": "2e31cd040bd2c36da86e9c9f8b5aef625f0ac673431c01bc37fa6b3d598ca39a",
+  "source_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
+  "period_inputs_sha256": "c669ffdee7c994f399307f570ade34b02482bc2b672edd305af7cdbf790b73a4",
+  "confirmations_sha256": "ce9b881405a0386edbaa54f1f48bfe0577522a96789bc7d737c79bcb0e0fcd02",
+  "paths_sha256": "90f7037eba6ab557c7774046ce4c90387489b6857fe0b69a4c797e1abf03c00f",
   "cadence_days": 30,
   "objects": {
     "sun": {
@@ -1892,6 +1892,83 @@
           "days": 8704810.133733368,
           "jpl_days": 8704810.133733368,
           "error_days": 43319.0
+        }
+      }
+    },
+    "tno_2026_ed138": {
+      "name": "2026 ED138",
+      "horizons_id": "2026 ED138",
+      "horizons_name": "(2026 ED138)",
+      "id_type": "smallbody",
+      "object_type": "orbital",
+      "description": "2026 ED138 is a trans-Neptunian object, a body orbiting beyond Neptune, and the first dwarf-planet candidate found in data from the Vera C. Rubin Observatory. Announced October 27, 2026. Matthew Holman of the Center for Astrophysics found it on October 13, 2026, with search code he wrote with Kevin Napier, in Rubin's observations of March 4 to July 11, 2026; older images from the Dark Energy Camera then showed it as far back as 2016. Its orbit is tilted steeply to the plane of Earth's orbit; the Rubin Observatory calls it a hot classical TNO, 'hot' for the tilt, which Neptune's pull is thought to have given it. It has passed its perihelion, its closest point to the Sun, and is now moving outward. Its size is not known: the Rubin Observatory estimates it from its brightness and a guessed reflectivity, and finds it large enough that an icy body would be expected to be round, which is what makes it a dwarf-planet candidate; infrared observations are needed to settle it. Its whole orbit lies inside Pluto's range of distances from the Sun; its year is longer than Pluto's, its orbit is tilted more steeply, and it is smaller than Pluto, whatever its size turns out to be.",
+      "info_url": "https://en.wikipedia.org/wiki/2026_ED138",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@0",
+        "center_label": "the solar system's center of mass",
+        "target": "2026 ED138",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-10-28",
+        "words": null,
+        "years": {
+          "value": 282.7,
+          "figures": 4,
+          "text": "282.7"
+        },
+        "days": {
+          "value": 103250.0,
+          "figures": 5,
+          "text": "103,250"
+        },
+        "record": {
+          "days": 103248.9414365557,
+          "error_days": 10.294,
+          "error_from": "sigma",
+          "sbdb_status": "SBDB sigma",
+          "epoch": "2026-10-28 13:09",
+          "elements": {
+            "a": 43.09090098733694,
+            "e": 0.1387347415313999,
+            "i": 24.43389681047544,
+            "omega": 168.7011193974809,
+            "Omega": 322.6059013275876,
+            "TP": 2424612.925510735,
+            "MA": 128.0641126404224,
+            "TA": 139.2966225794416,
+            "q": 37.1126959765036,
+            "epoch": "2026-10-28 13:09 osc."
+          },
+          "paired": true,
+          "sun_elements": {
+            "a": 42.97030270802088,
+            "e": 0.1416203937290264,
+            "i": 24.47354058411529,
+            "omega": 168.2029779020769,
+            "Omega": 322.4931496436529,
+            "epoch": "2026-10-28 13:09 osc.",
+            "TP": 2424605.19447433,
+            "MA": 128.5444735329199,
+            "TA": 139.8984335441359
+          }
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-10-28",
+          "horizons_id": "2026 ED138",
+          "id_type": "smallbody",
+          "horizons_name": "(2026 ED138)"
+        },
+        "period": {
+          "confirmed": "2026-10-28",
+          "center": "@0",
+          "epoch": "2026-10-28 13:09",
+          "days": 103248.9414365557,
+          "jpl_days": 103248.9414365557,
+          "error_days": 10.294
         }
       }
     },
@@ -5140,7 +5217,7 @@
         "period": null
       },
       "path": {
-        "made": "2026-10-25",
+        "made": "2026-10-28",
         "span": {
           "end": "2100-01-01",
           "start": "1977-09-06"
@@ -5226,7 +5303,7 @@
         "period": null
       },
       "path": {
-        "made": "2026-10-25",
+        "made": "2026-10-28",
         "span": {
           "end": "2100-01-01",
           "start": "1977-08-21"
@@ -5363,7 +5440,7 @@
         "period": null
       },
       "path": {
-        "made": "2026-10-25",
+        "made": "2026-10-28",
         "span": {
           "end": "2049-12-31",
           "start": "2006-01-20"
@@ -5449,7 +5526,7 @@
         "period": null
       },
       "path": {
-        "made": "2026-10-25",
+        "made": "2026-10-28",
         "span": {
           "end": "2028-09-02",
           "start": "2011-08-06"
@@ -5569,7 +5646,7 @@
         "period": null
       },
       "path": {
-        "made": "2026-10-25",
+        "made": "2026-10-28",
         "span": {
           "end": "2030-03-22",
           "start": "2023-09-24"
@@ -8582,6 +8659,18 @@
     ],
     "quaoar": [
       "2023"
+    ],
+    "tno_2026_ed138": [
+      "2026",
+      "138",
+      "27",
+      "2026",
+      "13",
+      "2026",
+      "4",
+      "11",
+      "2026",
+      "2016"
     ],
     "asteroid_2025_pn7": [
       "2025",

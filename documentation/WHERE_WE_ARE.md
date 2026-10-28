@@ -1,29 +1,24 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 27, 2026, late night: the website's small builds.
-- Written at orrery d46f204 and gallery 7a4a03a.
+Last updated: October 28, 2026: 2026 ED138 added to the orrery.
+- Written at orrery 45d475b and gallery 3dc5bb3.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - On the website a tap opens the Go To text box, bulleted, in the
->   feature's colour; the belt has its own row (L-497 (one text box)).
-> - Each i panel has "Report a problem" (L-458 (report a problem)).
-> - Search finds groups: "comet" lists them (L-496 (groups)).
-> - The Sun axis box has your five bullets (L-465 (the Sun's axis));
->   the F corona's cross is off the axis; the Alfven dashes are heavier.
-> - L-492 (the stale scale sentences) is closed on your "seem correct".
+> - 2026 ED138 is in the orrery, its name and period confirmed by JPL;
+>   its words carry no orbit numbers (L-501 (2026 ED138)).
+> - The website needs two hand edits first; until then the Daily Run stops.
+> - Your four looks are recorded; your triad ask is L-502 (the triad).
 >
-> **Do next:** *the Daily Run before you commit, because the cache must
-> be rebuilt for most of tonight's changes; then commit, push and look.*
+> **Do next:** *commit and push the orrery; then a gallery session for
+> 2026 ED138's two config edits, before the Daily Run.*
 >
 > **Needs you now:**
-> - *(do) run the Daily Run from the dashboard, before committing.*
-> - *(do) in GitHub Desktop, commit and push the gallery, then the
->   orrery (its ledger and this page).*
-> - *(do) the live run; then look on your phone (the list is in the
->   gallery session's report and on each ledger item).*
+> - *(do) in GitHub Desktop, commit and push the orrery.*
+> - *(do) open a gallery session for the two edits; hold the Daily Run
+>   until it is done.*
 > - (do) read the plan's front page and Section 5a, if not done yet.
 > - Two papers left to try (`READING_L456_tony_20261021.md`).
 
@@ -40,8 +35,11 @@ In the talk's order of Oct 27 (`DESIGN_talk_20261027_rulings.md`).
                the coordinating session, then their builds.*
  5c.   [next]  Beside 5, no talk needed: the small builds. L-492
                (stale scale sentences) done; L-497 (one text box),
-               L-458 (report a problem), L-496 (groups) built, waiting
-               on your look << moved this session.
+               L-458 (report a problem), L-496 (groups) looked at,
+               "correct"; ready to close << moved this session.
+ 5d.   [next]  Beside 5: 2026 ED138 (L-501 (2026 ED138)), the test of
+               the object pipeline. Orrery done; the gallery's two
+               edits, then the runs and your look << new this session.
  11b.  [next]  Beside 5: the nightly run (L-485 (a nightly run)), P1
                decided; two sessions, orrery then gallery.
   5b.  [beside] Housekeeping when a session has room: L-424, L-425,
@@ -57,6 +55,8 @@ In the talk's order of Oct 27 (`DESIGN_talk_20261027_rulings.md`).
 ## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings. A line leaves after a few weeks, once it is habit.
+- A new body's words carry no orbit numbers; its hover's own lines
+  print them from JPL's record (Oct 28, "B, words only").
 - The website's Sun axis box carries the orrery's five bullets, from the
   served rows, in the one text box. (Oct 27)
 - A night's check that disagrees: that body keeps its last confirmed
@@ -75,7 +75,7 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 - A comet from a year before perihelion to a year past today, in JPL's
   span; "hyperbolic" in plain words; the two agree or say why. (Oct 24)
 
-## Deferred  **>> UPDATED THIS SESSION**
+## Deferred
 
 Waiting behind other work; a line leaves when picked up.
 - L-462 (a shorter run): whether it stays, now the nightly run exists.
@@ -95,19 +95,20 @@ Waiting behind other work; a line leaves when picked up.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261027T140105Z, ok, no retry; the next is due.
-- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md of Oct 27;
-  tonight's gallery work touched no orrery code). Whole tree: 275:
-  orrery 111, Earth System 149, stars 13, utilities 2.
-- This page's date and the ledger's newest stamp: both Oct 27. Agree.
+- Last cache build: 20261028T043105Z, ok, no retry; the next waits on
+  the gallery's two edits for 2026 ED138.
+- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md of Oct 28).
+  Whole tree: 275: orrery 111, Earth System 149, stars 13, utilities 2.
+- This page's date and the ledger's newest stamp: both Oct 28. Agree.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
 Decisions, one at a time:
-- Nothing waiting: the Sun axis box was your "same five bullets".
+- Nothing waiting: 2026 ED138's words were your "B, words only".
 
-At the next design talk: nothing waiting; the talk of Oct 27 settled
-every item.
+At the next design talk:
+- L-502 (the triad's spot): moving the triad's hover away from the
+  thumb, and info crosses out of dense drawing (Oct 28).
 
 Not urgent, in your order:
 1. Whether the editor also edits the Solar System room's rows.
@@ -119,13 +120,13 @@ Not urgent, in your order:
 - *Next: after your look, Earth's list (L-413 (Earth's list)), session
   3 of `COORD_next_sessions_brief_20261027.md`.*
 - The talk's rulings: `DESIGN_talk_20261027_rulings.md`.
-- Tonight's record: the ledger's L-497 (one text box), L-458 (report a
-  problem), L-496 (groups), L-465 (the Sun's axis), L-468 (the F
-  corona's cross), L-454 (the Alfven dashes): what to look at.
+- Today's record: the ledger's L-501 (2026 ED138), with the gallery's
+  two edits, the Pluto sentence's numbers and the findings; the brief,
+  `COORD_2026_ED138_words_20261028.md`.
 - Four sentences in the interactive-exhibit skill are now wrong; L-497
   lists them for the next orrery session's skill update.
-- Your run records: last night's, `WHERE_WE_ARE_10-26-26_1451_run_record.md`;
-  this morning's, `WHERE_WE_ARE_10-27-26_0906_run_record.md`.
+- Your run records: `WHERE_WE_ARE_10-27-26_0906_run_record.md`, its
+  looks now on the ledger.
 
 --- Your run record below this line. No patch edits it; the length cap
 --- stops here; the close reads your timestamped copy and clears this.

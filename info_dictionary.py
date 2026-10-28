@@ -41,6 +41,9 @@ break-up date of about October 16, publication in Icarus in February
 Module updated: October 27, 2026 with Anthropic's Claude Opus 5.5 (L-492:
     the stale "set manual scale" and "MB per frame" sentences removed
     from the hover and info text; the opening view frames every shell).
+Module updated: October 28, 2026 with Anthropic's Claude Opus 5.5 (L-501:
+INFO['2026 ED138'], the checkbox's tooltip, the opening of the object's
+description.)
 """
 
 # Shell radii are read from constants_new.py, never retyped here (L-209).
@@ -1085,6 +1088,11 @@ INFO = {
 
         '2017 OF201':
         'Horizons: 2017 OF201. An extreme trans-Neptunian object and dwarf planet candidate, estimated to be at least 500 kilometres in diameter.',
+
+        # L-501: the opening of its description in celestial_objects.py,
+        # where its sources are named (the Rubin Observatory's release).
+        '2026 ED138':
+        'Horizons: 2026 ED138. A trans-Neptunian object, and the first dwarf-planet candidate found in data from the Vera C. Rubin Observatory.',
 
         'Varuna': 'Horizons: 2000 WR106. A significant Kuiper Belt Object with a rapid rotation period.',
 

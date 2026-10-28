@@ -691,6 +691,10 @@ Module updated: October 27, 2026, late night, with Anthropic's Claude Opus
 L-497, L-458, L-468, L-454, L-496 and L-465's gallery half built, each
 waiting on Tony's phone look; L-492 closed on his "seem correct"), built
 on gallery 7a4a03a and orrery d46f204.
+Module updated: October 28, 2026 with Anthropic's Claude Opus 5.5 (L-501
+opened: 2026 ED138 added to the orrery and keyed for the website, words
+only by Tony's ruling; the gallery's two hand edits recorded as
+findings; a line on L-484), built on 45d475b0 and gallery 3dc5bb30.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -908,7 +912,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*252 live items; 236 need attention (`!`); 165 RICE-scored; 241 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*254 live items; 238 need attention (`!`); 165 RICE-scored; 241 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1048,20 +1052,20 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-435 | Standing rulings that are method, held only on Tony's page (skills, records) | OPEN | -- | 2026-10-12 |
 | ! | L-443 | The rest of the orrery's objects come to the website as plotted positions (gallery + orrery, objects) | OPEN | -- | 2026-10-27 |
 | ! | L-449 | A cache build dropped the 82 build-run records it should have carried (gallery, cache builder) | OPEN | -- | 2026-10-17 |
-| ! | L-454 | A drawn device for edges that move: the magnetopause, the bow shock and their kind (orrery + gallery, design) | OPEN | -- | 2026-10-27 |
+| ! | L-454 | A drawn device for edges that move: the magnetopause, the bow shock and their kind (orrery + gallery, design) | OPEN | -- | 2026-10-28 |
 | ! | L-456 | What a visitor reads, from Earth's Mode 5 look: body radii, sources as a list with live links, Celsius for Earth's surface and air (gallery + orrery) | OPEN | -- | 2026-10-21 |
-| ! | L-458 | A "report a problem" link in every room's i panel (gallery, interactive) | OPEN | -- | 2026-10-27 |
+| ! | L-458 | A "report a problem" link in every room's i panel (gallery, interactive) | OPEN | -- | 2026-10-28 |
 | ! | L-459 | A monthly run for slow checks, started by the Daily Run (gallery + orrery, maintenance) | OPEN | -- | 2026-10-20 |
 | ! | L-461 | The Daily Run confirms the orrery it pulled is the one Tony pushed (gallery, Daily Run) | OPEN | -- | 2026-10-25 |
 | ! | L-462 | The orrery maintenance run, a short form for small patches (orrery, maintenance) | OPEN | -- | 2026-10-26 |
-| ! | L-465 | The Sun room draws the Sun's pole and its direction of spin, as the orrery does (gallery, the Sun room) | OPEN | -- | 2026-10-27 |
+| ! | L-465 | The Sun room draws the Sun's pole and its direction of spin, as the orrery does (gallery, the Sun room) | OPEN | -- | 2026-10-28 |
 | ! | L-466 | Every drawing starts and stops where a served row says (orrery + gallery, the Sun's slice and Earth's) | OPEN | -- | 2026-10-22 |
 | ! | L-467 | The scanner credits a display line with a citation it only sits near (orrery, provenance scanner) | OPEN | -- | 2026-10-21 |
-| ! | L-468 | The Sun room's phone look of 2026-10-21, night: the corona's drawer text and the Hills cloud's cross (gallery, the Sun room) | OPEN | -- | 2026-10-27 |
+| ! | L-468 | The Sun room's phone look of 2026-10-21, night: the corona's drawer text and the Hills cloud's cross (gallery, the Sun room) | OPEN | -- | 2026-10-28 |
 | ! | L-470 | Orrery entries the website cannot serve as they stand (orrery, objects) | OPEN | -- | 2026-10-25 |
 | ! | L-476 | The orrery's whole-path plots draw by the same path plan as the website (orrery, spacecraft and comets) | OPEN | -- | 2026-10-24 |
 | ! | L-483 | A room for C/2025 K1 and its pieces, the first comet room (gallery, exhibits) | OPEN | -- | 2026-10-24 |
-| ! | L-484 | The website and the orrery agree on every object both draw, or the difference is written down (orrery + gallery, objects; method for interactive-exhibit) | OPEN | -- | 2026-10-25 |
+| ! | L-484 | The website and the orrery agree on every object both draw, or the difference is written down (orrery + gallery, objects; method for interactive-exhibit) | OPEN | -- | 2026-10-28 |
 | ! | L-485 | A nightly unattended run of the routines (orrery + gallery, maintenance) | OPEN | -- | 2026-10-27 |
 | ! | L-486 | A view carried into a room (gallery, the rooms) | OPEN | -- | 2026-10-26 |
 | ! | L-487 | Each body's description in the i panel, one bullet per sentence (gallery, the i panel) | OPEN | -- | 2026-10-25 |
@@ -1069,11 +1073,13 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-489 | Compositions: a curated view within a room, authored in the editor (gallery, the rooms) | OPEN | -- | 2026-10-27 |
 | ! | L-490 | What the website leans on outside its two repositories, for when Tony cannot work it (orrery + gallery, legacy) | OPEN | -- | 2026-10-26 |
 | ! | L-491 | The comet nucleus sizes the orrery's comet hover prints, sourced (orrery, the words a visitor reads) | OPEN | -- | 2026-10-26 |
-| ! | L-496 | The drawer's search box finds groups too, such as "comet", "planet" or "asteroid" (gallery, the drawer) | OPEN | -- | 2026-10-27 |
-| ! | L-497 | Left-aligned text in every text box (gallery, the rooms) | OPEN | -- | 2026-10-27 |
+| ! | L-496 | The drawer's search box finds groups too, such as "comet", "planet" or "asteroid" (gallery, the drawer) | OPEN | -- | 2026-10-28 |
+| ! | L-497 | Left-aligned text in every text box (gallery, the rooms) | OPEN | -- | 2026-10-28 |
 | ! | L-498 | The master plan restamped as v37 at slice 2's close (documentation) | OPEN | -- | 2026-10-27 |
 | ! | L-499 | The kinds of session: three, told apart by what each writes, with the build session in two forms (protocol, Mode 7) | OPEN | -- | 2026-10-27 |
 | ! | L-500 | The Sun's twelve eyeballed shape numbers: the streamer belt's seven and the outer cloud's clumps' five (orrery + gallery, the Sun's drawings) | OPEN | -- | 2026-10-27 |
+| ! | L-501 | 2026 ED138, the Rubin Observatory's first dwarf-planet candidate, added to the orrery as a test of the object pipeline (orrery + gallery, objects) | OPEN | -- | 2026-10-28 |
+| ! | L-502 | The triad's hover spot, and info crosses in crowded places (gallery, the rooms) | OPEN | -- | 2026-10-28 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1492,6 +1498,107 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
+#### [L-502] The triad's hover spot, and info crosses in crowded places (gallery, the rooms)
+<!-- L:502 status:OPEN upd:2026-10-28 section:A flag: rice: -->
+- **Tony, in his run record** (`documentation/WHERE_WE_ARE_10-27-26_0906_run_record.md`, his look at
+  item 1): "minor issue: the triad hover is now easy to trip where it is at on
+  the bottom right. one's thumb easily goes there. could we relocate it in
+  the bottom center above the row label to the left of the grid label? in
+  general can we move the hover crosses away from the most dense areas where
+  they get lost in the glare?"
+- Captured on first mention by the L-501 session, which built nothing
+  on the website.
+**Gap:** a design talk: where the triad sits on a phone, and a rule for
+placing an info cross clear of dense drawing.
+**Ref:** L-497; interactive-exhibit, the anatomy (the frame HUD); L-318.
+
+#### [L-501] 2026 ED138, the Rubin Observatory's first dwarf-planet candidate, added to the orrery as a test of the object pipeline (orrery + gallery, objects)
+<!-- L:501 status:OPEN upd:2026-10-28 section:A flag: rice: -->
+- **Opened 2026-10-28** in a Claude Code session built on orrery 45d475b0
+  and gallery 3dc5bb30, by
+  `documentation/COORD_2026_ED138_words_20261028.md` (sections 4 and 5).
+  Tony, 08:58: "adding this object to our orrery and website would be a
+  great test of our methods!"; 09:11, a comparison to Pluto.
+- **Built (orrery):** `celestial_objects.py` entry keyed
+  `tno_2026_ed138`, id '2026 ED138', id_type 'smallbody', horizons_name
+  '(2026 ED138)', read from JPL's Lookup on 2026-10-28 (asteroid,
+  integrated barycenter; SPKID 54667839; the major-body index finds
+  nothing). Its link is Wikipedia's "2026 ED138", live that day; NASA has
+  no page of its own for it (interactive-exhibit, A feature's info link).
+  A checkbox among the Kuiper Belt objects (`palomas_orrery.py`) and a
+  tooltip (`info_dictionary.py`). No typed elements, no typed period.
+- **Tony's ruling, 2026-10-28, on how its numbers reach the hover:** "B,
+  words only." The story sentences stay with their sources; the orbit
+  figures come out, because the hover's own lines print the period, the
+  distance and the orbit from JPL's record. The 1925 perihelion and the
+  600 to 1,500 km size range were to stay only if the Typed numbers check
+  allows a cited date and range in this room's words. It does not: it
+  reads only the Sun and Earth rooms, and by its rules a typed range
+  fails. Both came out. The perihelion sentence now says only that it has
+  passed perihelion and is moving outward (JPL's tp, read 2026-10-28).
+- **One wording corrected, for Tony to see:** the approved words said
+  "JPL calls it a hot classical TNO". JPL's class is TNO; "hot classical"
+  is the Rubin Observatory's, which the note itself named as that
+  sentence's source. The served sentence says "the Rubin Observatory
+  calls it a hot classical TNO".
+- **Sources read 2026-10-28:** the Rubin Observatory release of
+  2026-10-27 (https://rubinobservatory.org/news/rubin-first-dwarf-planet-candidate),
+  which supports every sentence citing it; MPEC 2026-U85, issued 2026
+  October 27, 18:17 UT, observations from 2016 (Dark Energy Camera, W84)
+  and 2026 (Rubin, X05). Each is named in the entry's comments.
+- **The Pluto sentence's numbers** (words only, none printed): 2026
+  ED138 from its fetched record, around the solar system's centre of
+  mass, 2026-10-28: perihelion 37.11 AU, aphelion 49.07 AU, tilt 24.43
+  deg, period 103,249 days (about 283 years), error 10.3 days. Pluto
+  from the orrery's cached orbit around the Sun (epoch 2026-06-05):
+  perihelion 29.62 AU, aphelion 49.44 AU, tilt 17.40 deg, and a year of
+  about 248.5 years worked out from its cached a of 39.53 AU by Kepler's
+  third law, since no period for Pluto is fetched. Pluto's diameter, 2 x
+  PLUTO_RADIUS_KM = 2,376.6 km, is larger than the release's top
+  estimate of 1,500 km. All four comparisons hold; the nearest margin is
+  the aphelion, 0.4 AU.
+- **The maintenance run of 2026-10-28:** the period fetch fetched 2026
+  ED138 (one new cache entry); the Horizons check confirmed its identity
+  and its period, JPL's PR equal to the fetched one; the objects export
+  carries it; the provenance gate held at 0 Tier-1, no file's count
+  rising. The pre-test loaded the orrery with its window loop off: one
+  entry, its checkbox, its tooltip.
+- **Findings (orrery):**
+  - The Constants change check fails on any changed line in
+    `constants_new.py` that holds a digit and is not a value it reads,
+    so a new body's colour in `color_map` turns the run red. The colour
+    was taken out, and 2026 ED138 draws in the default, goldenrod. A
+    colour is a drawing setting (provenance-discipline, Three Kinds of
+    Drawing Number), so the class is the colour table's place: in the
+    drawing code, or a shape the check reads.
+  - Pluto's served period is "Not yet fetched from JPL" (the
+    pluto_barycenter entry; the Pluto-Charon Barycenter has no cache
+    entry). So on the website a visitor does not see Pluto's year on its
+    own line, as the Pluto sentence assumes.
+  - An object's words on the website show no citation for the sentences
+    a source supports, only the link and the Horizons source line
+    (provenance-discipline, What a Visitor Reads, principle 4). Recorded
+    as a class, not chased.
+- **Findings (gallery), reported, not fixed, by the brief:** for 2026
+  ED138 to appear in the Solar System room's TNO row, two hand edits to
+  `data/objects_config.json`: (1) an object block with slug
+  `tno_2026_ed138` and the fields no tool writes (category, availability,
+  parent, the centre and frame, trajectory_of, trace_policy, features),
+  as 2017 OF201's block has; (2) a drawer row `{ "slug":
+  "tno_2026_ed138", "in": "tno" }` in the Solar System room's rows. Until
+  (1) exists, the objects mirror refuses the export ("a key in the export
+  with no object of that slug in the config"), and the Daily Run stops at
+  its pulls step. And the Typed numbers check does not read the Solar
+  System room's words, so the discovery dates in this object's words are
+  held by no check.
+**Gap:** the gallery session's two edits, then the Daily Run, the
+website's maintenance runs, both pushes, the live run and Tony's phone
+look: the TNO row lists 2026 ED138, its words read as bullets, Go To
+fits its orbit. Closes on that look.
+**Ref:** `documentation/COORD_2026_ED138_words_20261028.md`; L-443;
+L-484; `celestial_objects.py`; `constants_change_report.py`; gallery
+`tools/mirror_objects.py`, `documentation/smoke_typed_numbers.js`.
+
 #### [L-500] The Sun's twelve eyeballed shape numbers: the streamer belt's seven and the outer cloud's clumps' five (orrery + gallery, the Sun's drawings)
 <!-- L:500 status:OPEN upd:2026-10-27 section:A flag: rice: -->
 - **Opened 2026-10-27, evening,** to re-home them from L-412 (the Sun's
@@ -1622,7 +1729,7 @@ commit and push. Then DONE.
 L-485; L-489; L-490; L-412.
 
 #### [L-497] Left-aligned text in every text box (gallery, the rooms)
-<!-- L:497 status:OPEN upd:2026-10-27 section:A flag: rice: -->
+<!-- L:497 status:OPEN upd:2026-10-28 section:A flag: rice: -->
 - **Tony, 2026-10-26, night,** at his phone look of the wrapped orbit
   line (`documentation/WHERE_WE_ARE_10-26-26_1451_run_record.md`, the second website patch's
   phone look): "we should standardize text on left justified."
@@ -1694,6 +1801,8 @@ anatomy table's drawer row, which says only naming a shell opens the text
 box (a tap does too). Also new to record: `gallery/text_box.js`, the
 `find` words on the drawer's rows, and the "Report a problem" link
 (L-458).
+- **Tony's look, recorded 2026-10-28** from `documentation/WHERE_WE_ARE_10-27-26_0906_run_record.md`: "In the Sun room, tap a cross, then use Go To on the same
+  feature. -- correct." His further ask in the same line is L-502.
 **Gap (replaces the one below, 2026-10-27, late night):** the Daily Run
 to rebuild the cache, then commit and push; then Tony's phone look of
 the box (a tap, Go To, the colour border, the bullets, the belt's own
@@ -1708,7 +1817,7 @@ the Sun's and Earth's too; then Tony's phone look.
 sunLabelRefresh); L-495.
 
 #### [L-496] The drawer's search box finds groups too, such as "comet", "planet" or "asteroid" (gallery, the drawer)
-<!-- L:496 status:OPEN upd:2026-10-27 section:A flag: rice: -->
+<!-- L:496 status:OPEN upd:2026-10-28 section:A flag: rice: -->
 - **Tony, 2026-10-26, night,** at his phone look of the search box
   (`documentation/WHERE_WE_ARE_10-26-26_1451_run_record.md`, the first website patch's phone look):
   "the user should also be able to find groups, like "comet" or
@@ -1747,6 +1856,8 @@ still found by its own names.
   (GROUPS FOUND); the drawer check's section 8b, with two planted
   breaks, both red. Tried in a real browser: "comet" lists six groups
   closed, "jfc" opens Jupiter-family comets whole, "planet" lists eight.
+- **Tony's look, recorded 2026-10-28** from `documentation/WHERE_WE_ARE_10-27-26_0906_run_record.md`: "In the Solar System room, search "comet" and choose a
+  group; then try "planet" and "probe". -- correct"
 **Gap (replaces the one below, 2026-10-27, late night):** commit and
 push; then Tony's phone look. Then DONE.
 **Gap (2026-10-27; superseded above):** the build, in the
@@ -2151,7 +2262,7 @@ Where We Are).
 L-490.
 
 #### [L-484] The website and the orrery agree on every object both draw, or the difference is written down (orrery + gallery, objects; method for interactive-exhibit)
-<!-- L:484 status:OPEN upd:2026-10-25 section:A flag: rice: -->
+<!-- L:484 status:OPEN upd:2026-10-28 section:A flag: rice: -->
 - **Tony, 2026-10-24, 17:35, in chat**
   (`documentation/COORD_L443_words_decisions_20261024.md`, sec. 7): "And
   we should add to the skill a check that the website and the orrery
@@ -2169,6 +2280,11 @@ L-490.
   the twelve by hand: names, ids and words come from the orrery's list
   through the mirror; the dates differ, the orrery's typed against the
   plan's, which is L-476's.
+- **2026-10-28:** 2026 ED138 (L-501) is the first object added since
+  this rule was made. The orrery serves its record, name, words and
+  period; the website cannot hold it until its config gains the object
+  and its drawer row by hand, so the two do not yet agree, by L-501's
+  gallery findings.
 **Gap (replaces the one below, 2026-10-25):** the check's design, then
 its build, with a planted fault; where its exceptions live.
 **Gap (superseded above):** the rule into interactive-exhibit at its next version (this
@@ -2394,7 +2510,7 @@ around the Sun.
 **Ref:** L-443; `celestial_objects.py`; `period_fetch.py` (SKIP_NAMES).
 
 #### [L-468] The Sun room's phone look of 2026-10-21, night: the corona's drawer text and the Hills cloud's cross (gallery, the Sun room)
-<!-- L:468 status:OPEN upd:2026-10-27 section:A flag: rice: -->
+<!-- L:468 status:OPEN upd:2026-10-28 section:A flag: rice: -->
 - **Tony, 2026-10-21, night,** in his run record
   (`documentation/WHERE_WE_ARE_10-21-26_1658_run_record.md`, step 8),
   with three phone screenshots: "the corona's hover when clicking the
@@ -2446,6 +2562,8 @@ around the Sun.
   cloud's and the galactic tide's crosses also sit on the x axis, at
   about 102,000 AU, beside the Hills cloud's at 20,400 AU. They wait
   with the Hills cloud's (Deferred on Where We Are).
+- **Tony's look, recorded 2026-10-28** from `documentation/WHERE_WE_ARE_10-27-26_0906_run_record.md`: "Look at the belt's row, the axis box, the F corona's cross
+  and the dashes. -- correct" (the F corona's cross is this item's part).
 **Gap (replaces the one below, 2026-10-27, late night):** the Daily Run
 to rebuild the cache, commit and push, then Tony's phone look at the F
 corona's cross; the Hills cloud's, the outer cloud's and the tide's
@@ -2562,7 +2680,7 @@ CORONA_BASE_KM, CORONA_BASE_RADII); `palomas_orrery_dashboard.py`;
 L-330.
 
 #### [L-465] The Sun room draws the Sun's pole and its direction of spin, as the orrery does (gallery, the Sun room)
-<!-- L:465 status:OPEN upd:2026-10-27 section:A flag: rice: -->
+<!-- L:465 status:OPEN upd:2026-10-28 section:A flag: rice: -->
 - **Tony, 2026-10-21,** in his run record after the Sun's own row was
   fixed (`documentation/WHERE_WE_ARE_10-21-26_1217_run_record.md`): "can we show the
   pole and the sun's rotational direction like the orrery?"
@@ -2742,6 +2860,8 @@ L-330.
   citations, and a cache without the four rows), Typed numbers, Typed
   facts, Hover budget (17 lines, at the ceiling; the blank line under
   the title dropped to fit).
+- **Tony's look, recorded 2026-10-28** from `documentation/WHERE_WE_ARE_10-27-26_0906_run_record.md`: "Look at the belt's row, the axis box, the F corona's cross
+  and the dashes. -- correct" (the axis box is this item's part).
 **Gap (replaces the one below, 2026-10-27, late night):** the Daily Run
 to rebuild the cache (the rows reach a visitor only then), commit and
 push; then Tony's phone look of the axis box. Then DONE.
@@ -2880,7 +3000,7 @@ record.
 L-446 (the Daily Run's order); L-416 (a dashboard button per step).
 
 #### [L-458] A "report a problem" link in every room's i panel (gallery, interactive)
-<!-- L:458 status:OPEN upd:2026-10-27 section:A flag: rice: -->
+<!-- L:458 status:OPEN upd:2026-10-28 section:A flag: rice: -->
 - **Tony's idea, 2026-10-20**, in a design chat on verification: the
   live source links in the i panel let a visitor check a claim, and "if
   they see something off, they could report it. You know, that could be
@@ -2940,6 +3060,8 @@ L-446 (the Daily Run's order); L-416 (a dashboard button per step).
     be reviewed for the public lobby"; a report is not, by the updater.
   - Tried in a real browser: the Earth row's link carried "Problem report
     -- Solar System room, Earth" and the page address.
+- **Tony's look, recorded 2026-10-28** from `documentation/WHERE_WE_ARE_10-27-26_0906_run_record.md`: "Tap "Report a problem" in an i panel. -- correct. tested
+  the read also."
 **Gap (replaces the one below, 2026-10-27, late night):** commit and
 push; then Tony's look: open a room's i panel on his phone, tap Report
 a problem, see the form open with the note started (send a test report
@@ -3189,7 +3311,7 @@ list. Then L-191's reconciliation of the Sun's fourteen pairs.
 interactive-exhibit 1.18; L-455, L-421, L-385, L-458, L-266.
 
 #### [L-454] A drawn device for edges that move: the magnetopause, the bow shock and their kind (orrery + gallery, design)
-<!-- L:454 status:OPEN upd:2026-10-27 section:A flag: rice: -->
+<!-- L:454 status:OPEN upd:2026-10-28 section:A flag: rice: -->
 - **Tony's ruling, 2026-10-17,** splitting fuzzy boundaries three ways
   (L-410): a real edge that moves is not drawn fuzzy; its motion gets "a
   second drawn device like the movement cone we use for the dipole."
@@ -3261,6 +3383,8 @@ Earth's talk 2 then takes what the Sun decided, or asks them fresh.
   from line width 2 and opacity 0.7 to width 4 and opacity 1.0. The
   colour stays the surface's own, Tony's choice of 2026-10-22; only the
   weight and the opacity moved, as a first proposal for his eye.
+- **Tony's look, recorded 2026-10-28** from `documentation/WHERE_WE_ARE_10-27-26_0906_run_record.md`: "Look at the belt's row, the axis box, the F corona's cross
+  and the dashes. -- correct" (the dashes are this item's part).
 **Gap (replaces the one below, 2026-10-27, late night):** the Daily Run
 to rebuild the cache, commit and push, then Tony's phone look at the
 dashes (if still lost, the colour next). Earth's pairs and the

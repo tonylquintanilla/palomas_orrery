@@ -134,6 +134,9 @@ around the Sun is not by itself an escape from the solar system.
 The close-approach and perihelion-orbit passes take id_type 'designation'
 too, and _is_comet knows a comet by a name beginning C/, so C/2025 K1,
 asked by its permanent number now, keeps both osculating orbits.)
+Module updated: October 28, 2026 with Anthropic's Claude Opus 5.5 (L-501:
+a checkbox for 2026 ED138 among the Kuiper Belt objects; its orbit is
+fetched from JPL like any body's, with no typed elements or period.)
 
 """
 #Paloma's Orrery - Solar System Visualization Tool
@@ -3507,6 +3510,8 @@ sedna_var = tk.IntVar(value=0)
 leleakuhonua_var = tk.IntVar(value=0)
 
 of201_var = tk.IntVar(value=0)
+
+ed138_var = tk.IntVar(value=0)    # 2026 ED138 (L-501)
 
 chariklo_var = tk.IntVar(value=0)
 
@@ -9697,6 +9702,8 @@ create_celestial_checkbutton("Quaoar", quaoar_var)          # params
 create_celestial_checkbutton("- Weywot", weywot_var)           
 
 create_celestial_checkbutton("Arrokoth", arrokoth_var)      # params
+
+create_celestial_checkbutton("2026 ED138", ed138_var)       # L-501: elements fetched from JPL, none typed
 
 create_celestial_checkbutton("Makemake", makemake_var)      # params
 create_celestial_checkbutton("- MK2", mk2_var)              # Makemake moon
