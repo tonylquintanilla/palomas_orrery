@@ -1591,10 +1591,95 @@ placing an info cross clear of dense drawing.
   its pulls step. And the Typed numbers check does not read the Solar
   System room's words, so the discovery dates in this object's words are
   held by no check.
-**Gap:** the gallery session's two edits, then the Daily Run, the
-website's maintenance runs, both pushes, the live run and Tony's phone
-look: the TNO row lists 2026 ED138, its words read as bullets, Go To
-fits its orbit. Closes on that look.
+- **Built (gallery), 2026-10-28,** in a Claude Code session built on
+  gallery 3dc5bb30 and orrery 777a8dee (both read live with git
+  ls-remote; Tony's go-ahead in chat, "Go ahead"). Three edits, made
+  directly in the working copy:
+  - `data/objects_config.json`: the object block for `tno_2026_ed138`
+    after Arrokoth's, holding only the fields no tool writes, as 2017
+    OF201's does (category asteroid, availability analytic, parent sun,
+    canonical_center @sun, center_slug sun, canonical_frame
+    heliocentric, trajectory_of null, trace_policy none, features {}),
+    with name, horizons_id and id_type, which the objects mirror
+    replaces but needs present.
+  - the same file: the drawer row `{ "slug": "tno_2026_ed138", "in":
+    "tno" }`, last in the TNO group, which lists by served semi-major
+    axis ("order": "a").
+  - `tools/test_gallery_cache_builder_offline.py`: a stand-in for the
+    fake Horizons, ELEMS '2026 ED138' a 42.948, e 0.14174 (the brief's
+    JPL read), and its stamp. The brief named two edits; the third is
+    gallery-cache-builder's Adding a new object, step (2): without it
+    the suite's fake_elements fails on a body it has no answer for.
+- **These edits are the website's AUTHOR STEP for a new body** (Tony's
+  instruction, 2026-10-28, in this session's opening prompt; the reading
+  is the coordinating session's, in his run record
+  `documentation/WHERE_WE_ARE_10-28-26_1344_run_record.md`: "this stop
+  is by design, not a defect"). The website is curated: a
+  room shows what its author put in it, and the objects mirror refusing
+  an export that names a body the config lacks is the same rule as the
+  Daily Run stopping on a pull that is not the push. Neither tool the
+  skills allow to write the config can make them: `mirror_constants.py`
+  writes numbers and their citations, `store_writer.py` words and a
+  room's arrival. So the only route today is a hand edit (here) or a
+  patch (L-443 slice 1's 50 bodies, patch_L443_2). Everything else the
+  body carries -- its description, link, period and JPL's name -- the
+  objects mirror wrote from the orrery's export on the run below.
+  **Follow-up:** the exhibit store editor (`tools/exhibit_store_editor.py`
+  over `tools/store_writer.py`) should offer these two edits as a form:
+  a new body's block from its orrery key, and its drawer row in a
+  group. It joins the question already on Where We Are, whether the
+  editor also edits the Solar System room's rows, and the editor work
+  queued for compositions (L-489 (compositions)).
+- **The maintenance run, offline, 2026-10-28:** 34 of 36 gating checkers
+  passed. The pulls fetched the orrery's exports at 777a8dee; the
+  objects mirror linked 90 objects and wrote 2026 ED138's description,
+  info_url, period (fetched, around the solar system's centre of mass,
+  282.7 years, 103,250 days) and horizons_name "(2026 ED138)"; a second
+  mirror check read "every linked field already matches". The cache
+  builder's offline suite passed, 485 checks. Two red, ONE cause, the
+  cache not yet rebuilt: Cache in step ("tno_2026_ed138 is in the config
+  and not in" coverage_index.json and feature_configs.json), which
+  gallery-cache-builder calls correct straight after a config change;
+  and Solar System figures ("tno_2026_ed138: the served cache has no
+  as_of_today or trust"). Both clear when the Daily Run's builder runs.
+- **Findings (gallery):**
+  - The Solar System figures check also goes red on a body the cache
+    does not hold yet, while the room itself names such a row in its
+    notes and leaves it out. The skill names only Cache in step as red
+    after a config change; the figures check's red is the second, for
+    interactive-exhibit's next version (it would only tell a session
+    the run is red for one reason, not two).
+  - gallery-cache-builder 1.13 says a new non-spacecraft body needs
+    --first-build, not nightly. The Daily Run builds nightly, and slice
+    1's 50 bodies went in that way and draw from their elements; the
+    sentence is for that skill's next version, carried here, not acted
+    on.
+  - The mirror also moved five spacecraft plans' `made` date from
+    2026-10-25 to 2026-10-28 (Voyager 1 and 2, New Horizons, Juno,
+    OSIRIS-APEX), span and events unchanged: the orrery's run re-made
+    them. By the builder's rule a new `made` is a new plan, so the Daily
+    Run fetches those five paths whole again, and the shrink gate names
+    them. By design; the run takes longer.
+- **Tony's questions in his run record, answered:**
+  - "is our test correct if it differs from JPL?" Yes. JPL's
+    Small-Body Database gives 102,806 days around the Sun; the orrery
+    takes every period around the solar system's centre of mass ('@0'),
+    and from there JPL's own figure is 103,249 days. The Horizons check
+    compares the fetched period with JPL's at that same centre, and they
+    agreed. For a body this far out the two centres give different
+    years because the Sun itself moves around the centre of mass.
+  - Pluto's year "not yet fetched": the period fetch skips the
+    Pluto-Charon barycentre on purpose, because plotting's pre-fetch
+    does not fetch it either (`period_fetch.py`, docstring, "Today that
+    is the Pluto-Charon barycentre, which L-443 carries"). So it reports
+    nothing missing, and the website's Pluto row prints "not yet
+    fetched". The fix belongs to L-443 (the objects), an orrery session.
+  - The colour: "okay"; 2026 ED138 stays the default goldenrod.
+**Gap:** Tony's Daily Run (its builder serves 2026 ED138 and clears the
+two reds), the website's maintenance run, the gallery commit and push,
+the live run, and his phone look: the TNO row lists 2026 ED138, its
+words read as bullets, Go To fits its orbit. Closes on that look. The
+editor form is the follow-up above, not this item's gap.
 **Ref:** `documentation/COORD_2026_ED138_words_20261028.md`; L-443;
 L-484; `celestial_objects.py`; `constants_change_report.py`; gallery
 `tools/mirror_objects.py`, `documentation/smoke_typed_numbers.js`.

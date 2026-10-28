@@ -246,4 +246,494 @@ All 32 gating checkers passed and the provenance gate shows 0 Tier-1 issues — 
 
 Shall I start a gallery session for 2026 ED138's two config edits?
 
+**Tony:** orrery head moved to 777a8deecca63847155e46ded06ed33bbb567371
 
+**Fable:**
+The test did what a test is for: it found the one place the chain needs a hand. Everything on the orrery side went through by itself: JPL confirmed the name and the period, the pre-test found the checkbox on the live path, the gate held at 0, and the run was green. The website side stops: its objects mirror refuses an orrery export that names a body the website's config does not have, so the Daily Run halts at the pull until someone adds the entry and its row in the TNO group.
+
+My reading is that this stop is by design, not a defect. The website is curated: a room shows what its author put in it, and the Daily Run stopping rather than inventing a config entry is the same rule as "the pull is not your push: it stops" (Oct 25). What the test shows is that adding a body to the website is an author's act of two edits, and the right follow-up is to make those two edits a form in the exhibit store editor rather than a hand edit, which fits the editor work already queued for compositions. I'd record it that way on L-501.
+
+So the answer to Code is yes, with you opening the gallery session yourself; Code cannot open one. Commit and push the orrery first, then open Code on the gallery folder and paste:
+
+```
+Read CLAUDE.md and start the session. The job is 2026 ED138's two
+website edits, from the orrery's ledger item L-501 (2026 ED138): its
+entry in data/objects_config.json and its row in the Solar System
+room's TNO group, made the way the gallery-cache-builder and
+interactive-exhibit skills say the config may be written. Then the
+gallery maintenance run offline. Record on L-501 that these two edits
+are the website's author step for a new body, with the follow-up that
+the exhibit store editor should offer them as a form. Tony runs the
+Daily Run and the live run after your report.
+```
+
+Three smaller things from Code's report, for the record rather than for action now:
+- The period it fetched, 103,249 days, differs from JPL's database figure of 102,806 because the orrery takes the period around the solar system's centre of mass, as it does for every body; the Horizons check compared the two and passed. -- is our test correct if it differs from JPL?
+- Pluto's year reads "not yet fetched" on the website while the period fetch reports nothing missing. Those two cannot both be right; one line for the next orrery session to look at. -- unclear why this would be. Pluto's data is fetched from JPL too. 
+- The colour: the constants checker treats any changed line with a digit as a value change, so Code could not give the object its own colour and it draws in the default gold. If you want it marked out, that is a Mode 5 choice for the gallery session, or it stays gold. -- okay
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+**Session: OPEN: 10-28-26 1432: Opus: Code: 2026 ED138 website edits**
+
+I've read the protocol and Where We Are; now reading the 2026 ED138 brief, L-501, and the skills.
+
+Skills read so far match the manifest (gallery-cache-builder 1.13, interactive-exhibit 1.27). Now checking which tool, if any, can write a new object block and a drawer row.
+
+Still in the start-up reads. I've found how the earlier fifty bodies reached the website; now checking the offline test suite and the orrery's push state.
+
+Base recorded: gallery 3dc5bb3, local and GitHub agree, nothing waiting. Reading the last four skills now.
+
+I'm ready to add 2026 ED138 to the website. One thing needs your go-ahead first: the job takes three edits, not the two on L-501 (2026 ED138).
+
+**Skills I read, each matching the protocol's list:** interactive-exhibit 1.27, gallery-cache-builder 1.13, gallery-assembler 1.3, ledger-and-session-records 1.22, safe-file-editing 1.14 and agentic-pre-test 1.3. I also checked gallery-pipeline's version line (1.2). This job doesn't use it.
+
+**Starting point:** your website folder and GitHub both sit at 3dc5bb3, with nothing waiting to commit. The orrery's push of 2026 ED138 (777a8de) is on GitHub, so the website can fetch it.
+
+**What I'll do:**
+1. **The object's entry in `data/objects_config.json`.** I'll write only the fields no tool writes, copied from 2017 OF201's entry. The objects mirror (the tool that copies each body's words and period from the orrery) then fills in the description, the link and the period.
+2. **Its row in the Solar System room's list of trans-Neptunian objects.** It goes at the end; the room sorts that list by distance from the Sun anyway.
+3. **A stand-in orbit in the cache builder's offline test** (`tools/test_gallery_cache_builder_offline.py`). The gallery-cache-builder skill's steps for adding a new body require this. Without it the test breaks on a body it has never seen.
+
+**Why the config edits are by hand:** neither of the two tools the skills allow to write the config can add a new body or a new row. One writes numbers, the other writes words and what a room opens on. So writing these fields by hand is the only route today. That is exactly the gap your follow-up on L-501 names: the exhibit store editor should offer these edits as a form. The 50 bodies added on October 22 went in the same way, by a patch.
+
+**After the edits:** I run the offline maintenance run (`gallery_maintenance_run.py`). One check, "Cache in step", will show red until your Daily Run rebuilds the cache. The skill says that red is correct right after a config change, and I'll say so in my report.
+
+**Files changed:** none yet.
+**Your run order:** nothing yet. After my report it's the Daily Run, then commit and push the website, then the live run.
+**Needs you:** (decide) go ahead with the three edits.
+
+Session start is done: the rules and all seven skills are read, every version matches the protocol's list, and the website folder matches GitHub at 3dc5bb3 with nothing waiting. Nothing has been edited yet.
+Go ahead with the three edits and the offline maintenance run?
+**Tony:** Go ahead
+
+**Tony:** Note that the daily run was omitted this morning intentionally waiting for this build. Question: in the orrery object menu in the gui, is it placed in order of semi-major axis? Arrokoth's semi major axis is longer than ED138's. 
+
+=======================================================================================================
+
+Bottom edit first (the drawer row), then the object entry above it.
+
+The three edits are in; the maintenance run finished with exit 1, so I'm reading which rows went red.
+
+Both red rows have one cause: the served cache hasn't been rebuilt with 2026 ED138 yet. Checking what the objects mirror wrote.
+
+The mirror filled in 2026 ED138's words, link and period from the orrery. Before writing the records I'm reading your latest run record, as the close requires.
+
+Your run record has two questions in it, on the period and on Pluto's year. I'm checking both quickly so the ledger can answer them.
+
+Both answered: the period difference is the centre it's measured around, and the Pluto barycentre is skipped on purpose. Writing L-501 now.
+
+Ledger is written and its index rebuilt, ASCII and LF. Now Where We Are, section by section; first reading the swap log for its signal line.
+
+2026 ED138 is now on the website's list of bodies, in the TNO group of the Solar System room. Visitors will see it once your Daily Run builds the cache.
+
+**What I did**
+- I wrote 2026 ED138's entry in the website's config, holding only the fields no tool writes. I also added its row to the TNO group.
+- The objects mirror (the tool that copies each body's words from the orrery) then filled in the description, the Wikipedia link, JPL's name and the period. The period is 282.7 years, around the solar system's centre of mass.
+- I added the third edit: a stand-in orbit in the cache builder's offline test. That test passed all 485 of its checks.
+
+**The maintenance run, offline:** 34 of 36 checks passed. Both red checks have one cause: the cache hasn't been rebuilt with 2026 ED138 yet.
+- "Cache in step" says the body is in the config but not in the served cache. The skill calls this red correct right after a config change.
+- "Solar System figures" says the cache has no position for it yet.
+- Your Daily Run's builder clears both.
+
+**Your two questions from the run record, answered on L-501 (2026 ED138)**
+- **Is the test correct when the period differs from JPL's database?** Yes. The database figure, 102,806 days, is the year measured around the Sun. The orrery measures every year around the solar system's centre of mass, and from there JPL gives 103,249 days. The check compares like with like, and the two agreed. The two figures differ because the Sun itself moves around that centre.
+- **Why does Pluto's year read "not yet fetched"?** The period fetch skips the Pluto-Charon barycentre on purpose, the same way plotting does. So it reports nothing missing. The fix waits on L-443 (the objects), in an orrery session.
+
+**Also recorded on L-501:** these two edits are the website's author step for a new body. The follow-up is to make them a form in the exhibit store editor. It's on Where We Are's "not urgent" list too.
+
+**Something you'll notice tonight:** the orrery re-made five spacecraft path plans today: Voyager 1 and 2, New Horizons, Juno and OSIRIS-APEX. The Daily Run will fetch those five paths from scratch, so it will take longer. The builder is designed to do that.
+
+**Files changed**
+- Website folder:
+  - ok data/objects_config.json (2 edits; then the mirror wrote 2026 ED138's 4 fields and the 5 plans' dates)
+  - ok tools/test_gallery_cache_builder_offline.py (2 edits)
+  - Rewritten by the run: MODULE_ATLAS.md, MODULE_INDEX.md, data/objects_export.json, data/objects_export.sha, data/constants_export.sha, data/drawings/pulled_at.sha
+- Orrery folder:
+  - ok LEDGER_CONSOLIDATED.md (2 edits, plus the index the indexer rebuilt)
+  - ok documentation/WHERE_WE_ARE.md (8 edits, in 6 sections; nothing below your run-record line touched)
+  - Yours, not edited by me: documentation/WHERE_WE_ARE_10-28-26_1344_run_record.md
+
+**Your run order**
+1. The Daily Run, from the dashboard. Run it before committing anything in the orrery. Otherwise its check that the website's copy matches your latest orrery commit will stop it. Its last step, the maintenance run, should come back all green.
+2. In GitHub Desktop, commit and push the website, config and cache together.
+3. Commit and push the orrery: the ledger, Where We Are and your run record.
+4. The live run.
+5. Your phone look: the TNO row lists 2026 ED138, its words read as bullets, and Go To fits its orbit.
+
+**Tony-action rollup**
+- (do) The Daily Run.
+- (do) Commit and push the website, then the orrery.
+- (do) The live run, then your phone look; L-501 closes on that look.
+- (do) Read the plan's front page and Section 5a, if you haven't yet.
+- (do) Two papers left to try (`READING_L456_tony_20261021.md`).
+
+=========================================================================
+
+**Fable:**
+
+You are in the right state. The push you made, 777a8de, is the one the orrery's export carries its stamp from, and the Daily Run checks that stamp against your orrery folder's newest commit. If you commit the orrery again before the Daily Run (the gallery session edited the ledger and Where We Are there), the newest commit moves and that check stops the run. So Code's "don't commit the orrery yet" means those two record files, not the push you already did.
+
+The order from here:
+1. The Daily Run, from the dashboard. It will take longer than usual because five spacecraft path plans were remade today and their paths are fetched afresh. Its last step should come back all green, with "Cache in step" and "Solar System figures" now passing.
+
+======================================================================
+  DAILY RUN -- Wednesday October 28, 2026  14:51
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io
+======================================================================
+Daily Run steps, from C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io:
+  1. Guest book updater                 tools\guestbook_updater.py  found
+  2. Pulls from the orrery              gallery_maintenance_run.py  found
+  3. Cache builder                      tools\gallery_cache_builder.py  found
+  4. Gallery maintenance run, offline   gallery_maintenance_run.py  found
+  pull-match fixtures: 5 of 5 cases right; planted faults caught 2 of 2
+=== DAILY RUN: all 4 step scripts found; the pull-match check passed 7 of 7 fixture checks (L-461)
+Last cache build: 2026-10-28 04:34 UTC, ok, 0 days ago.
+
+======================================================================
+  DAILY RUN step 1 of 4: Guest book updater
+======================================================================
+======================================================================
+  guest book updater -- C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io
+======================================================================
+1 entry in the guest book; 172 gallery pages a link may point at.
+
+Fetching the form's responses...
+No new messages.
+
+w write, r reply, x remove, p pin/unpin, f form address, s sheet address, q finish > q
+
+======================================================================
+  approved 0, declined 0, waiting 0, problem reports read 0; the guest book now has 1 entry
+  No change to data/guestbook.json.
+======================================================================
+
+======================================================================
+  DAILY RUN step 2 of 4: Pulls from the orrery
+======================================================================
+======================================================================
+  gallery maintenance run -- PULLS (before the cache builder)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Constants export pull     0.8s  no change to
+                                    data/constants_export.json,
+                                    data/constants_export.sha
+  PASS Config mirror             0.2s  no change to
+                                    data/objects_config.json
+  PASS Objects export pull       0.7s  no change to
+                                    data/objects_export.json,
+                                    data/objects_export.sha
+  PASS Objects mirror            0.2s  no change to
+                                    data/objects_config.json
+  PASS Drawings pull             1.5s  no change to
+                                    data/drawings/hills_cloud.json,
+                                    data/drawings/van_allen_belts.json,
+                                    data/drawings/earth_exosphere.json,
+                                    data/drawings/pulled_at.sha
+
+======================================================================
+
+=== PULLS: all 5 passed -- Constants export pull, Config mirror, Objects export pull, Objects mirror, Drawings pull
+
+Pull matches push: the orrery pulled is 777a8dee, the newest commit in your orrery folder.
+
+======================================================================
+  DAILY RUN step 3 of 4: Cache builder
+======================================================================
+[RECOVER] removed retained data\solar-system.prev (cleared read-only on 7 entries)
+[sweep] no sibling directories present
+[RUNS] before the copy: 113 run records in data\solar-system\raw\runs
+[RUNS] after the copy:  113 run records in data\.staging_solar-system_20261028T195212Z\raw\runs
+C:\Users\tonyq\AppData\Local\Programs\Python\Python313\Lib\site-packages\erfa\core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+C:\Users\tonyq\AppData\Local\Programs\Python\Python313\Lib\site-packages\erfa\core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+C:\Users\tonyq\AppData\Local\Programs\Python\Python313\Lib\site-packages\erfa\core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+C:\Users\tonyq\AppData\Local\Programs\Python\Python313\Lib\site-packages\erfa\core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+C:\Users\tonyq\AppData\Local\Programs\Python\Python313\Lib\site-packages\erfa\core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+C:\Users\tonyq\AppData\Local\Programs\Python\Python313\Lib\site-packages\erfa\core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+C:\Users\tonyq\AppData\Local\Programs\Python\Python313\Lib\site-packages\erfa\core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+[POLE] earth: pole of 2026-10-28 served (RA 0.64820, Dec 89.84982 deg); tilt 23.43788 deg
+[window] served window: 88.0 days either side of today, set by mercury, the shortest of 63 bodies' trusted spans
+[SWAP] the new cache is in place; every rename worked on the first try. Recorded in data/cache_swap_log.jsonl
+[warn] sun: features-only entry; no Horizons fetch
+[warn] voyager_1: DP thin backbone 6383 -> 29 points (tol=0.02 AU)
+[warn] voyager_2: DP thin backbone 6385 -> 48 points (tol=0.02 AU)
+[warn] new_horizons: DP thin backbone 2293 -> 19 points (tol=0.02 AU)
+[warn] juno: DP thin backbone 891 -> 180 points (tol=0.02 AU)
+[warn] osiris_apex: DP thin backbone 339 -> 187 points (tol=0.02 AU)
+[warn] halley: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] ikeya_seki: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] hale_bopp: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] hyakutake: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] neowise: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] lemmon: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] shrink gate: juno, new_horizons, osiris_apex, voyager_1, voyager_2 fetched again by a new path plan; held out of the count (old 277, 41, 607, 71, 133, new 273, 39, 605, 69, 131)
+[done] run 20261028T195212Z (nightly): 95 objects
+
+----------------------------------------------------------------------
+WHAT TO DO NEXT, before you commit anything:
+
+  1. Run the gallery maintenance run, from this same folder:
+         python gallery_maintenance_run.py
+     Every gating checker should pass. Its LAST line reads the
+     swap log back and should agree with the [SWAP] line above.
+  2. In GitHub Desktop, look at the change list. A good build
+     shows changed and added files and NO pile of deletions.
+  3. Commit and push.
+  4. After the push, check what the live site serves:
+         python gallery_maintenance_run.py --live
+
+TONY-ACTION ROLLUP for this run:
+  (do)     steps 1 to 4 above, in that order.
+----------------------------------------------------------------------
+
+Run records: carried 113 of 113, plus tonight's: 20261028T195212Z.json.
+  compared C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\data\solar-system\raw\runs
+  with     C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\data\solar-system.prev\raw\runs
+
+The builder's next steps start with the maintenance run.
+The Daily Run runs it now.
+
+======================================================================
+  DAILY RUN step 4 of 4: Gallery maintenance run, offline
+======================================================================
+======================================================================
+  gallery maintenance run -- OFFLINE (before a commit)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Module atlas              1.7s  no change to MODULE_ATLAS.md,
+                                    MODULE_INDEX.md
+  PASS Constants export pull     0.7s  no change to
+                                    data/constants_export.json,
+                                    data/constants_export.sha
+  PASS Config mirror             0.2s  no change to
+                                    data/objects_config.json
+  PASS Objects export pull       0.6s  no change to
+                                    data/objects_export.json,
+                                    data/objects_export.sha
+  PASS Objects mirror            0.2s  no change to
+                                    data/objects_config.json
+  PASS Drawings pull             1.0s  no change to
+                                    data/drawings/hills_cloud.json,
+                                    data/drawings/van_allen_belts.json,
+                                    data/drawings/earth_exosphere.json,
+                                    data/drawings/pulled_at.sha
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite      82.0s  PASS (485 checks, 0 failures)
+  PASS Pole of date              0.3s  POLE OF DATE: all 11 checks passed
+                                    (frame angle, orrery, ERFA, block
+                                    checker, and each shown able to
+                                    fail).
+  PASS Mirror suite              0.3s  All 77 mirror checks passed:
+                                    served, spelling, relabel refused
+                                    and accepted, conflict refused,
+                                    definition as exactly 1, fallback
+                                    and absent named, no-slot refused,
+                                    five shapes, formatting kept,
+                                    idempotent, report writes nothing,
+                                    uncertainty written as served,
+                                    Earth's pole served, print count
+                                    written as served, "in" written as
+                                    served and a slot served in
+                                    another unit from it, and the
+                                    citation written as served, a
+                                    website-only citation named, an
+                                    old export refused.
+  PASS Store writer suite       48.2s  All 469 store-writer checks
+                                    passed: an allow list that lets
+                                    through only a shell's words, a
+                                    belt's words and the arrival
+                                    settings, the rooms section's
+                                    included; a no-edit round trip;
+                                    one line per change; empty words
+                                    handled; a refused batch writing
+                                    nothing; awkward text; and the
+                                    shell list matching the cache
+                                    check's rule.
+  PASS Store editor suite        0.5s  All 377 store-editor checks
+                                    passed: every box the form offers
+                                    is one the writer allows; the word
+                                    list and the tick list differ by
+                                    the belts, on purpose; nothing
+                                    typed saves nothing; the save
+                                    message does not promise a visitor
+                                    sees what they cannot yet; and a
+                                    red Cache in step is explained
+                                    rather than just shown.
+  PASS Objects mirror suite      0.6s  MIRROR OBJECTS SUITE: pass
+  PASS Objects mirror check      0.3s  OBJECTS MIRROR: pass
+  PASS Config mirror check       0.2s  Every served link holds the
+                                    export's value, unit, figure count
+                                    and citation; 170 link(s)
+                                    compared, 166 citation(s) word for
+                                    word, 4 declared with none, 3 not
+                                    served; store 37fc0fb07a32.
+  PASS Pull failures             0.6s  PULL FAILURES: all 13 checks
+                                    passed (3 pulls x 3 ways to fail,
+                                    the run after a failed pull, and 3
+                                    planted faults caught)
+  PASS Horizons confirmations    0.1s  HORIZONS CONFIRMATIONS: pass -- 90
+                                    of 90 confirmed, and 62 periods,
+                                    within 30 days
+  PASS Pointer join              0.1s  Every link is accounted for: 173
+                                    link(s) against orrery 777a8dee, 1
+                                    fallback named; read check: 66 of
+                                    66 measured rows reached carry a
+                                    read.
+  PASS Cache in step             0.1s  The served cache holds the
+                                    config's 95 object(s) and their
+                                    features exactly: 4 object(s) with
+                                    34 named shell(s), in both cache
+                                    files.
+  PASS Drawn orbit               2.6s  DRAWN ORBIT: pass -- 18 checks,
+                                    every planted fault caught
+  PASS Drawings                  0.8s  DRAWINGS: PASS -- 30 of 30 planted
+                                    faults caught; pulled at orrery
+                                    777a8dee; earth_exosphere 1500
+                                    dots, round, sha256 6112639fb2cd;
+                                    galactic_tide 5000 dots, about the
+                                    galactic pole, sha256
+                                    950a7511f0b5; hills_cloud 3600
+                                    dots, tilt 31.0 deg, sha256
+                                    4d3e85616645; outer_oort_cloud
+                                    2736 dots, between its edges,
+                                    sha256 2f7ab88ee113; sun_corona
+                                    2500 dots, round, sha256
+                                    e2b57ccbc8a4; van_allen_belts 3200
+                                    dots, tilt 0.4 deg, sha256
+                                    75274e84f840; zodiacal_dust 3000
+                                    dots, tilt 2.8 deg, sha256
+                                    995f13a056e8
+  PASS Collapsed features        0.1s  32 stored as themselves, 16
+                                    collapsed, 0 unclassified.
+  PASS Feature renderers         0.2s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.1s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.3s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.3s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.2s  === ALL CHECKS PASSED ===
+  PASS Typed facts               0.2s  TYPED FACTS: PASS -- 0 typed facts
+                                    in the Sun and Earth rooms; 17
+                                    number line(s), 28 of 28 allowed
+                                    sentence(s) seen, 0 held open
+                                    (L-451); 26 word field(s) masked.
+  PASS Typed numbers             0.3s  TYPED NUMBERS: PASS -- 0 typed
+                                    numbers in the Sun and Earth
+                                    rooms' served words; 315 number(s)
+                                    masked, 8 held.
+  PASS Arrival                   0.3s  Arrival: both rooms open on the
+                                    right things; every shell trace
+                                    carries its key; the fallback with
+                                    no arrival block is unchanged.
+  PASS Display figures           0.2s  === PASS: 61 hover(s) and 312
+                                    number(s) examined; 14 graded, 7
+                                    graded by line, 47 held to the
+                                    fixture ===
+  PASS Solar System figures      0.1s  === PASS: 6 worked cases, 64
+                                    drawer rows matched to their
+                                    accuracy rows, 63 served
+                                    distances; Uranus, Neptune and
+                                    Pluto print to JPL's ten-thousands
+                                    place; 6 period cases and 63
+                                    served periods printed as the
+                                    orrery printed them; 5 orbit-line
+                                    cases and 63 served orbit lines; 3
+                                    path cases and 26 served paths,
+                                    spacecraft and comets ===
+  PASS Far lines                 0.1s  === PASS: far lines are cut to the
+                                    view's box ===
+  PASS Direction arrows          0.1s  === PASS: the arrows point the way
+                                    the points run, sit ahead of the
+                                    body, stay in the view, and the
+                                    page places them ===
+  PASS Solar System drawer       0.1s  === PASS: the Sun is never ticked,
+                                    every row and group is listed, the
+                                    handle names the last body ticked,
+                                    nothing ticks many bodies at once
+                                    but a spacecraft with its
+                                    companions, rooms are offered only
+                                    where they exist, groups fold and
+                                    reset their bodies, the count line
+                                    counts ticked bodies outside the
+                                    view, a search finds a body by any
+                                    of its names and a group by its
+                                    label or words, and the page asks
+                                    this file ===
+  PASS Source list               0.2s  === PASS: the i panel's sources
+                                    are a list, every address a link,
+                                    and its words are one sentence to
+                                    a bullet ===
+  PASS Drawer order              0.2s  === DRAWER ORDER: both rooms list
+                                    their shells where each begins;
+                                    self-test red twice
+  PASS Drawn ends                0.3s  === DRAWN ENDS: every drawing
+                                    starts and stops on a served row
+                                    or a held end; self-test red three
+                                    times
+  PASS Label words               0.2s  === LABEL WORDS: all 34 shell rows
+                                    in both rooms open their own
+                                    feature's words; self-test red
+                                    once
+  PASS Guest book                0.1s  === GUEST BOOK: all 8 checks
+                                    passed
+  PASS Guest book updater        0.3s  === GUEST BOOK UPDATER: all 49
+                                    checks passed (8 scripted runs,
+                                    self-test first)
+  PASS Daily run steps           0.3s  === DAILY RUN: all 4 step scripts
+                                    found; the pull-match check passed
+                                    7 of 7 fixture checks (L-461)
+  PASS Artifact 1 assembler      0.3s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.1s  RESULT: 3 directories in data/ the
+                                    builder did not make: solar-system
+                                    (1), solar-system (2),
+                                    solar-system (3). Check whether
+                                    they belong there; the newer
+                                    .gitignore rules keep the known
+                                    conflict-copy shapes out of git
+                                    but do not remove anything.
+
+======================================================================
+  36 of 36 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: 3 directories in data/ the
+  last swap 2026-10-28T19:52:52.233050+00:00: succeeded first time
+======================================================================
+
+  After you push: python gallery_maintenance_run.py --live
+
+======================================================================
+  DAILY RUN -- summary
+======================================================================
+  Guest book updater           ok
+  Pulls from the orrery        ok
+  Pull matches push            ok
+  Cache builder                ok
+  Run records                  ok: carried 113 of 113, plus 1 new
+  Maintenance run, offline     ok
+
+  NEXT:
+    1. GitHub Desktop: look at the change list, then commit and push.
+    2. Then the dashboard's Gallery Maintenance Run -- live, AFTER a push.
+======================================================================
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+2. GitHub Desktop, gallery: commit and push. -- acbf206b6a9d34da02f256ebbe3f66b46f76ec61
+3. GitHub Desktop, orrery: commit and push the ledger, Where We Are and your run record. -- 
+4. The live run.
+5. Your phone look in the Solar System room: 2026 ED138 in the TNO row, its hover as bullets, Go To fitting its orbit.
+
+Two of your questions were answered on the ledger by the gallery session, and I agree with both. The period differs from JPL's database figure because the orrery measures every year around the solar system's centre of mass, which the Sun itself moves around, and the check compared like with like. Pluto's year reads "not yet fetched" because the period fetch skips the Pluto–Charon barycentre on purpose, the same way plotting does; the fix is an orrery item carried on L-443. -- we should complete L-443. 

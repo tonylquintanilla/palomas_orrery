@@ -1,24 +1,23 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 28, 2026: 2026 ED138 added to the orrery.
-- Written at orrery 45d475b and gallery 3dc5bb3.
+Last updated: October 28, 2026: 2026 ED138's two website edits made.
+- Written at orrery 777a8de and gallery 3dc5bb3.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - 2026 ED138 is in the orrery, its name and period confirmed by JPL;
->   its words carry no orbit numbers (L-501 (2026 ED138)).
-> - The website needs two hand edits first; until then the Daily Run stops.
-> - Your four looks are recorded; your triad ask is L-502 (the triad).
+> - 2026 ED138's website entry and its TNO row are in; its words, link
+>   and period came from the orrery (L-501 (2026 ED138)).
+> - Two checks stay red until your Daily Run builds the cache. Expected.
+> - A new body on the website is an author's two edits; next, a form.
 >
-> **Do next:** *commit and push the orrery; then a gallery session for
-> 2026 ED138's two config edits, before the Daily Run.*
+> **Do next:** *the Daily Run; then commit and push the website and the
+> orrery's records; the live run; your phone look at the TNO row.*
 >
 > **Needs you now:**
-> - *(do) in GitHub Desktop, commit and push the orrery.*
-> - *(do) open a gallery session for the two edits; hold the Daily Run
->   until it is done.*
+> - *(do) the Daily Run; five spacecraft paths are fetched whole again.*
+> - *(do) commit and push both folders; then the live run, and look.*
 > - (do) read the plan's front page and Section 5a, if not done yet.
 > - Two papers left to try (`READING_L456_tony_20261021.md`).
 
@@ -36,10 +35,10 @@ In the talk's order of Oct 27 (`DESIGN_talk_20261027_rulings.md`).
  5c.   [next]  Beside 5, no talk needed: the small builds. L-492
                (stale scale sentences) done; L-497 (one text box),
                L-458 (report a problem), L-496 (groups) looked at,
-               "correct"; ready to close << moved this session.
+               "correct"; ready to close.
  5d.   [next]  Beside 5: 2026 ED138 (L-501 (2026 ED138)), the test of
-               the object pipeline. Orrery done; the gallery's two
-               edits, then the runs and your look << new this session.
+               the object pipeline. Orrery and the website's edits
+               done; the Daily Run, pushes, your look << moved this session.
  11b.  [next]  Beside 5: the nightly run (L-485 (a nightly run)), P1
                decided; two sessions, orrery then gallery.
   5b.  [beside] Housekeeping when a session has room: L-424, L-425,
@@ -52,7 +51,7 @@ In the talk's order of Oct 27 (`DESIGN_talk_20261027_rulings.md`).
  15.   [goal]  The website does what the desktop orrery does, with a date
                to choose, within the range the data covers.
 
-## Settled  **>> UPDATED THIS SESSION**
+## Settled
 
 Standing rulings. A line leaves after a few weeks, once it is habit.
 - A new body's words carry no orbit numbers; its hover's own lines
@@ -95,8 +94,8 @@ Waiting behind other work; a line leaves when picked up.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261028T043105Z, ok, no retry; the next waits on
-  the gallery's two edits for 2026 ED138.
+- Last cache build: 20261028T043105Z, ok, no retry; the next is your
+  Daily Run, the first to serve 2026 ED138.
 - Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md of Oct 28).
   Whole tree: 275: orrery 111, Earth System 149, stars 13, utilities 2.
 - This page's date and the ledger's newest stamp: both Oct 28. Agree.
@@ -104,14 +103,15 @@ Read from files when this page was written, not typed from memory.
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
 Decisions, one at a time:
-- Nothing waiting: 2026 ED138's words were your "B, words only".
+- Nothing waiting: your two run-record questions are answered on L-501.
 
 At the next design talk:
 - L-502 (the triad's spot): moving the triad's hover away from the
   thumb, and info crosses out of dense drawing (Oct 28).
 
 Not urgent, in your order:
-1. Whether the editor also edits the Solar System room's rows.
+1. Whether the editor also edits the Solar System room's rows, and
+   adds a new body as a form (L-501 (2026 ED138)).
 2. Choosing a date, and animation.
 
 ## Where the details are  **>> UPDATED THIS SESSION**
@@ -120,13 +120,12 @@ Not urgent, in your order:
 - *Next: after your look, Earth's list (L-413 (Earth's list)), session
   3 of `COORD_next_sessions_brief_20261027.md`.*
 - The talk's rulings: `DESIGN_talk_20261027_rulings.md`.
-- Today's record: the ledger's L-501 (2026 ED138), with the gallery's
-  two edits, the Pluto sentence's numbers and the findings; the brief,
-  `COORD_2026_ED138_words_20261028.md`.
+- Today's record: the ledger's L-501 (2026 ED138), both sessions, with
+  the edits, the findings and your questions answered.
 - Four sentences in the interactive-exhibit skill are now wrong; L-497
   lists them for the next orrery session's skill update.
-- Your run records: `WHERE_WE_ARE_10-27-26_0906_run_record.md`, its
-  looks now on the ledger.
+- Your run records: `WHERE_WE_ARE_10-28-26_1344_run_record.md`, its
+  questions now on the ledger.
 
 --- Your run record below this line. No patch edits it; the length cap
 --- stops here; the close reads your timestamped copy and clears this.
