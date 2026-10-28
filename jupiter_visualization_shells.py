@@ -21,6 +21,9 @@ May 27, 2026: Stage 3 info-marker standard sweep + Sun Direction cleanup
     (Opus 4.7). 6 info markers brought to red-border standard;
     2 dormant sun_direction calls removed (upper_atmosphere, hill_sphere
     -- v9 Residual Cleanup item 1); dead import removed.
+Module updated: October 27, 2026 with Anthropic's Claude Opus 5.5 (L-492:
+    the stale "set manual scale" and "MB per frame" sentences removed
+    from the hover and info text; the opening view frames every shell).
 """
 import numpy as np
 import math
@@ -74,7 +77,6 @@ def create_ring_points_jupiter (inner_radius, outer_radius, n_points=100, thickn
 # Source: NASA Juno Mission; Wahl et al. (2017)
 # Verified: April 2026 via Gemini fact-check
 jupiter_core_info = (
-            "2.4 MB PER FRAME FOR HTML.<br><br>"
             "Jupiter's core is believed to be a dense mixture of rock, metal, and hydrogen compounds.<br>"
             "It may be up to 10 times the mass of Earth. Recent models suggest the core might be<br>"
             "partially dissolved or 'fuzzy' rather than a distinct solid structure. Its temperature<br>"
@@ -145,7 +147,6 @@ def create_jupiter_core_shell(center_position=(0, 0, 0)):
 # Source: NASA Jupiter Fact Sheet; Juno Science Results
 # Verified: April 2026 via Gemini fact-check
 jupiter_metallic_hydrogen_info = (
-            "2.1 MB PER FRAME FOR HTML.<br><br>"
             "Under extreme pressure, hydrogen transitions to a metallic state in this layer.<br>"
             "It behaves like an electrical conductor and is responsible for generating<br>"
             "Jupiter's powerful magnetic field. Temperatures in this region may reach 10,000K."
@@ -215,7 +216,6 @@ def create_jupiter_metallic_hydrogen_shell(center_position=(0, 0, 0)):
 # Source: NASA Jupiter Fact Sheet; Juno Science Results
 # Verified: April 2026 via Gemini fact-check
 jupiter_molecular_hydrogen_info = (
-            "2.5 MB PER FRAME FOR HTML.<br><br>"
             "This layer consists of hydrogen in its molecular form. The transition from metallic<br>"
             "to molecular hydrogen is gradual. This layer makes up the bulk of Jupiter's mass<br>"
             "and is marked by decreasing temperature and pressure as you move outward. The temperature<br>"
@@ -287,8 +287,6 @@ def create_jupiter_molecular_hydrogen_shell(center_position=(0, 0, 0)):
 # Source: NASA Jupiter Fact Sheet; Galileo Probe Results
 # Verified: April 2026 via Gemini fact-check
 jupiter_cloud_layer_info = (
-            "USE MANUAL SCALED OF 0.005 AU TO VIEW CLOSELY."
-            "4.6 MB PER FRAME FOR HTML.<br><br>"
             "Jupiter's visible cloud layer consists of bands of different colors, caused by<br>"
             "variations in chemical composition and atmospheric dynamics. The clouds are primarily<br>"
             "composed of ammonia, ammonium hydrosulfide, and water. The famous Great Red Spot<br>"
@@ -444,7 +442,6 @@ def create_jupiter_cloud_layer_shell(center_position=(0, 0, 0)):
 # Source: NASA Jupiter Fact Sheet; Juno Science Results
 # Verified: April 2026 via Gemini fact-check
 jupiter_upper_atmosphere_info = (
-            "2.7 MB PER FRAME FOR HTML.<br><br>"
             "Jupiter's upper atmosphere includes the stratosphere and thermosphere.<br>"
             "It's less dense than the cloud layer below and contains hydrocarbon haze<br>"
             "produced by solar ultraviolet radiation. Aurora activity can be observed<br>"
@@ -621,7 +618,7 @@ def create_jupiter_magnetosphere(center_position=(0, 0, 0), sun_position=(0, 0, 
 
     return traces
 
-jupiter_io_plasma_torus_info = ("634 KB PER FRAME FOR HTML.<br><br>"
+jupiter_io_plasma_torus_info = (
               "Donut-shaped region of charged particles from Jupiter's moon Io")
 
 def create_jupiter_io_plasma_torus(center_position=(0, 0, 0)):
@@ -699,8 +696,6 @@ def create_jupiter_io_plasma_torus(center_position=(0, 0, 0)):
 # Source: NASA Jupiter Magnetosphere Overview; Juno Mission
 # Verified: April 2026 via Gemini fact-check
 jupiter_radiation_belts_info = (
-            "560 KB PER FRAME FOR HTML.<br><br>"
-            "Vizualize at a manual scale of 0.005 AU.<br><br>"
             "Zones of trapped high-energy particles in Jupiter's magnetosphere"                     
 )
 
@@ -789,8 +784,6 @@ def create_jupiter_radiation_belts(center_position=(0, 0, 0)):
 # Source: NASA Solar System Dynamics
 # Verified: April 2026 via Gemini fact-check
 jupiter_hill_sphere_info = (
-            "SELECT MANUAL SCALE OF AT LEAST 0.5 AU TO VISUALIZE.<br>" 
-            "1.3 MB PER FRAME FOR HTML.<br><br>"
             "Jupiter's Hill Sphere (extends to ~740 Jupiter radii, about 0.35 AU or ~53 million km)"                      
 )
 
@@ -803,7 +796,6 @@ def create_jupiter_hill_sphere_shell(center_position=(0, 0, 0)):
         'opacity': 0.25,
         'name': 'Hill Sphere',
         'description': (
-            "SET MANUAL SCALE OF AT LEAST 0.5 AU TO VISUALIZE.<br><br>"
             "Jupiter's Hill Sphere (extends to ~740 Jupiter radii, ~0.35 AU or ~53 million km)<br><br>"
                 "The Hill sphere is the region around a body where its own gravity is the dominant force in attracting satellites. For <br>" 
                 "a planet orbiting a star, it's the region where the planet's gravity is stronger than the star's tidal forces.<br><br>" 
@@ -866,7 +858,6 @@ def create_jupiter_hill_sphere_shell(center_position=(0, 0, 0)):
     return traces
 
 jupiter_ring_system_info = (
-                "22.2 MB PER FRAME FOR HTML.<br><br>"
 
                 "The main ring is reddish and composed of dust ejected from Jupiter's small inner moons,<br>"
                 "Metis and Adrastea, due to high-speed impacts by micrometeoroids.<br><br>"
@@ -1028,8 +1019,6 @@ def create_jupiter_ring_system(center_position=(0, 0, 0)):
 # Source: NASA Jupiter Magnetosphere Overview; Juno Mission
 # Verified: April 2026 via Gemini fact-check
 jupiter_magnetosphere_info = (
-            "SELECT MANUAL SCALE OF AT LEAST 0.4 AU TO VISUALIZE.<br>"
-            "1.4 MB PER FRAME FOR HTML.<br><br>"
 
             "Jupiter's magnetosphere extends up to 100 Jupiter radii on the sunward side<br>"
             "and forms a magnetotail stretching beyond Saturn's orbit in the opposite direction.<br>"

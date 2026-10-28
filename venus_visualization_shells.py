@@ -31,6 +31,9 @@ September 1, 2026 (L-254, Opus 5): the six dead create_venus_*_shell
     note above the section names the one that is live
     (create_venus_magnetosphere_shell). Annotation only -- no function
     removed and no behaviour changed.
+Module updated: October 27, 2026 with Anthropic's Claude Opus 5.5 (L-492:
+    the stale "set manual scale" and "MB per frame" sentences removed
+    from the hover and info text; the opening view frames every shell).
 """
 import numpy as np
 import math
@@ -591,7 +594,6 @@ def create_venus_upper_atmosphere_shell(center_position=(0, 0, 0)):
 # Cross-checked: Claude 2026-08-03 -- Zhang 2007 / Shan 2015 (worksheet_claude_batch1_tier2.md)
 # Cross-checked: GPT 2026-08-03 -- Zhang 2007 / Shan 2015 (batch1_tier2_cross_check_gpt.md)
 venus_magnetosphere_info = (
-            "SET MANUAL SCALE TO AT LEAST 0.005 AU TO VISUALIZE.\n\n" 
 
             "Venus has a very weak, induced magnetosphere. Unlike Earth's magnetic field, which is generated internally by its \n" 
             "liquid iron core, Venus's weak magnetosphere is formed by the interaction of the solar wind with the planet's \n" 
@@ -744,7 +746,6 @@ def create_venus_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(0,
 # Cross-checked: GPT 2026-08-03 -- derived Hill radius (batch1_tier2_followup_gpt.md)
 # Cross-checked: Claude 2026-08-03 -- derived Hill radius (worksheet_claude_batch1_tier2.md)
 venus_hill_sphere_info = (
-            "SET MANUAL SCALE TO AT LEAST 0.01 AU TO VISUALIZE.\n\n" 
             "Venus's Hill Sphere is the region where its gravitational influence is dominant over the gravitational influence of \n" 
             "the Sun. The size of the Hill sphere depends on its mass and its distance from the Sun. Venus's Hill sphere extends \n" 
             "to approximately 1 million kilometers from the planet. Within this sphere, Venus's gravity is the primary force \n" 

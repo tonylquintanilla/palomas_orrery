@@ -20,6 +20,9 @@ Module updated: May 2026 with Anthropic's Claude Opus 4.7
     April 17, 2026: provenance audit source citations added, Gemini fact-check applied.
     Sodium tail decimal error corrected (2.4 Mkm -> 24 Mkm).
     Provenance audit identified by Anthropic's Claude Opus 4.7
+Module updated: October 27, 2026 with Anthropic's Claude Opus 5.5 (L-492:
+    the stale "set manual scale" and "MB per frame" sentences removed
+    from the hover and info text; the opening view frames every shell).
 """
 import numpy as np
 import math
@@ -94,8 +97,7 @@ mercury_atmosphere_info = (
 # Cross-checked: Claude 2026-08-03 -- Baumgardner et al. 2008 (worksheet_claude_batch1_blind_lookup.md)
 # Cross-checked: GPT 2026-08-03 -- Baumgardner et al. 2008 (batch1_blind_source_lookup_gpt.md)
 mercury_sodium_tail_info = (
-            "TO VISUALIZE CLOSE UP SET MANUAL SCALE TO AT LEAST 0.002 AU TO VISUALIZE.\n"
-            "TO VISUALIZE THE COMPLETE TAIL INCLUDE VENUS IN THE PLOT OR SET MANUAL SCALE TO 1.0 AU\n\n" 
+            "TO VISUALIZE THE COMPLETE TAIL INCLUDE VENUS IN THE PLOT.\n\n" 
 
             "Sodium Tail: Mercury has a remarkable sodium tail. Observations place its extent in the range \n"
             "~120 to ~1,400 Mercury radii (approximately 0.3 to 3.4 million kilometers), varying strongly \n"
@@ -251,7 +253,6 @@ def create_mercury_sodium_tail(center_position=(0, 0, 0), sun_position=(0, 0, 0)
 # Cross-checked: Claude 2026-08-03 -- Winslow et al. 2013 (worksheet_claude_batch1_tier2.md)
 # Cross-checked: GPT 2026-08-03 -- Winslow et al. 2013 (batch1_tier2_cross_check_gpt.md)
 mercury_magnetosphere_info = (
-            "SET MANUAL SCALE TO AT LEAST 0.002 AU TO VISUALIZE.\n\n" 
 
             "Magnetosphere: Mercury has a surprisingly active magnetosphere, given its small size and slow rotation. However, it is \n" 
             "significantly weaker and smaller than Earth's magnetosphere."
@@ -421,7 +422,6 @@ def create_mercury_magnetosphere_shell(center_position=(0, 0, 0), sun_position=(
 # Cross-checked: Claude 2026-08-03 -- NSSDCA-derived Hill radius (worksheet_claude_batch1_tier2.md)
 # Cross-checked: GPT 2026-08-03 -- NSSDCA-derived Hill radius (batch1_tier2_followup_gpt.md)
 mercury_hill_sphere_info = (
-            "SET MANUAL SCALE TO AT LEAST 0.005 AU TO VISUALIZE.\n\n" 
             "Hill Sphere: Every celestial body has a Hill sphere (also known as the Roche sphere), which is the region around it \n" 
             "where its gravity is the dominant gravitational force. Mercury certainly has a Hill sphere, but its size depends on \n" 
             "its mass and its distance from the Sun. Being the closest planet to the Sun, the Sun's powerful gravity limits the \n" 

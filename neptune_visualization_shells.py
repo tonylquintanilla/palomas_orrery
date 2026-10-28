@@ -23,6 +23,9 @@ May 27, 2026: Stage 3 info-marker standard sweep (Opus 4.7). 5 info
     markers brought to red-border standard; no red-on-red exceptions
     (no pure red fills in Neptune's layer palette). No dormant
     sun_direction deletions (Neptune cleaned in prior session per v9).
+Module updated: October 27, 2026 with Anthropic's Claude Opus 5.5 (L-492:
+    the stale "set manual scale" and "MB per frame" sentences removed
+    from the hover and info text; the opening view frames every shell).
 """
 import numpy as np
 import math
@@ -37,7 +40,6 @@ from shared_utilities import create_sun_direction_indicator
 # Source: NASA Neptune Fact Sheet; Podolak et al. (1995);
 # Source+: core ~1.2 Earth masses, ~700-800 GPa, ~5,100 degC; iron/nickel/silicate composition confirmed.
 neptune_core_info = (
-            "2.4 MB PER FRAME FOR HTML.<br><br>"
             "Neptune core: At Neptune's center lies a relatively small, rocky core composed primarily of iron, nickel, and silicates. <br>" 
             "Its mass is estimated to be about 1.2 times that of Earth. The pressure at the core is immense, reaching about 7 million <br>" 
             "bars (700 GPa), and the temperature could be as high as 5,100  degC."
@@ -110,7 +112,6 @@ def create_neptune_core_shell(center_position=(0, 0, 0)):
 # Source: NASA Solar System Exploration; Kraus et al. (2017, Nature Astronomy);
 # Source+: superionic water and diamond rain confirmed by high-pressure experiments; 10-15 Earth masses confirmed.
 neptune_mantle_info = (
-            "2.1 MB PER FRAME FOR HTML.<br><br>"
             "Mantle: Surrounding the core is a dense mantle made up of a hot, highly compressed fluid of water, methane, and ammonia. <br> " 
             "This layer constitutes the majority of Neptune's mass, about 10 to 15 Earth masses. The high pressure and temperature create <br>" 
             "an environment where these \"icy\" materials exist in exotic phases, possibly including ionic water and superionic water. <br>" 
@@ -194,8 +195,6 @@ def create_neptune_mantle_shell(center_position=(0, 0, 0)):
 # Source: NASA Neptune Fact Sheet; Chavez et al. (2023, Icarus); cloud cover solar cycle correlation confirmed.
 # Source+: Wind speed 2,100 km/h is solar system record; H2/He/CH4 composition confirmed.
 neptune_cloud_layer_info = (
-            "USE MANUAL SCALED OF 0.005 AU TO VIEW CLOSELY."
-            "4.6 MB PER FRAME FOR HTML.<br><br>"
             "Atmosphere: Neptune's atmosphere is primarily composed of hydrogen (around 80%) and helium (around 19%), with a small <br>" 
             "amount of methane (about 1.5%). It's the methane that absorbs red light and reflects blue light, giving Neptune its <br>" 
             "characteristic vivid blue color. The atmosphere extends to great depths, gradually merging into the fluid mantle below.<br>" 
@@ -367,7 +366,6 @@ def create_neptune_cloud_layer_shell(center_position=(0, 0, 0)):
     return [surface_trace, hover_trace]
 
 neptune_upper_atmosphere_info = (
-            "2.7 MB PER FRAME FOR HTML.<br><br>"
             "Upper Atmosphere: Above the troposphere lies the stratosphere, where temperature increases with altitude. Higher still <br>" 
             "is the thermosphere, characterized by lower pressures. The outermost layer is the exosphere, which gradually fades into space."
 )
@@ -459,8 +457,6 @@ def create_neptune_upper_atmosphere_shell(center_position=(0, 0, 0)):
 # Source: Voyager 2 Mission Archive (NASA/JPL); Ness et al. (1989, Science);
 # Source+: 47 deg tilt and 0.55 R_N offset discovered by Voyager 2, 1989.
 neptune_magnetosphere_info = (
-            "SELECT MANUAL SCALE OF AT LEAST 0.2 AU TO VISUALIZE.<br>"
-            "1.4 MB PER FRAME FOR HTML.<br><br>"
 
             "Magnetosphere: Neptune possesses a significant and unusual magnetosphere. Unlike Earth's magnetic field, which is <br>" 
             "roughly aligned with its rotational axis, Neptune's magnetic axis is tilted by about 47 degrees relative to its rotation <br>" 
@@ -822,7 +818,6 @@ def create_neptune_magnetic_poles(center_position, offset_distance, tilt, azimut
 
 
 neptune_radiation_belts_info = (
-                "560 KB PER FRAME FOR HTML.<br><br>"
                 "Zones of trapped high-energy particles in neptune's magnetosphere"                     
 )
 
@@ -1168,7 +1163,6 @@ def create_field_aligned_currents(mag_center_x, mag_center_y, mag_center_z, tilt
 # Source+: Neptune has 5 named rings (Galle, Le Verrier, Lassell, Arago, Adams) plus diffuse sheets.
 # Source+: "13 known rings" is a high estimate; updated to 5 primary named rings per current consensus.
 neptune_ring_system_info = (
-                "22.2 MB PER FRAME FOR HTML.<br><br>"
 
                 "Neptune has 5 named rings plus several diffuse dusty sheets. The rings are generally very narrow, dark (reflecting <br>"
                 "very little light, similar to charcoal), and composed of dust and larger particles that are icy and darkened by rock. <br>"
@@ -1680,8 +1674,6 @@ def create_neptune_ring_system(center_position=(0, 0, 0)):
 
 # Source: NASA Solar System Dynamics (SSD); Hill sphere ~116 million km / ~4,685 Neptune radii confirmed.
 neptune_hill_sphere_info = (
-            "SELECT MANUAL SCALE OF AT LEAST 1.0 AU TO VISUALIZE.<br>" 
-            "1.3 MB PER FRAME FOR HTML.<br><br>"
 
             "Neptune's Hill sphere is the region around the planet where its gravitational influence dominates over that of the Sun. <br>" 
             "Any moon or other object orbiting Neptune within this sphere is more likely to remain bound to it rather than being pulled <br>" 
@@ -1700,7 +1692,6 @@ def create_neptune_hill_sphere_shell(center_position=(0, 0, 0)):
         'name': 'Hill Sphere',
         'description': (
             # Source: NASA Solar System Dynamics (SSD); ~4,685 Neptune radii / ~116 million km confirmed.
-            "SET MANUAL SCALE OF AT LEAST 0.3 AU TO VISUALIZE.<br><br>"
             "Neptune's Hill sphere is the region around the planet where its gravitational influence dominates over that of the Sun. <br>" 
             "Any moon or other object orbiting Neptune within this sphere is more likely to remain bound to it rather than being pulled <br>" 
             "away by the Sun's gravity. Neptune's Hill sphere extends to a staggering approximately 4685 times the radius of Neptune. <br>" 

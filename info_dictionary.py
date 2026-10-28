@@ -38,6 +38,9 @@ break-up date of about October 16, publication in Icarus in February
 2026, the comet's record being "Fragment A", and piece C bound on a
 13-million-year orbit. The source comments name the pages opened on
 2026-10-24. The other lines are unchanged and unchecked.)
+Module updated: October 27, 2026 with Anthropic's Claude Opus 5.5 (L-492:
+    the stale "set manual scale" and "MB per frame" sentences removed
+    from the hover and info text; the opening view frames every shell).
 """
 
 # Shell radii are read from constants_new.py, never retyped here (L-209).
@@ -295,9 +298,9 @@ INFO = {
         'Solar Shells': 'Solar structure and atmosphere, Oort cloud, and gravitational reach.',
 
         # Source: NASA Solar System Exploration (solarsystem.nasa.gov/planets/mercury) -- smallest planet, mission list
-        'Mercury': '***IF MERCURY IS THE CENTER OBJECT SET MANUAL SCALE TO 0.2 AU FOR BEST VISUALIZATION.***'
+        'Mercury':
         'Horizons: 199. The smallest planet and closest to the Sun.\n' 
-        '* Mercury-centered: do not select Mercury; visualize shells at manual scale 0.002 AU.\n' 
+        '* Mercury-centered: do not select Mercury.\n' 
         '* Heliocentric: select Mercury with or without shells.\n' 
         '* Missions: Mariner 10, Messenger, BepiColombo',
 
@@ -352,7 +355,6 @@ INFO = {
         '  * Lunar Gateway: A planned international space station in lunar orbit, supporting future human missions.',
 
         'Earth-Moon Barycenter': 
-        '***SET MANUAL SCALE TO .003 AU TO SEE EARTH-MOON BINARY ORBITS***\n'
         'Center of mass for the Earth-Moon system -- the highest mass ratio of any PLANET-moon system!\n\n'
         'BINARY SYSTEM:\n'
         '* Mass ratio: Moon/Earth = 1.23% (vs Charon/Pluto = 12.2%, Vanth/Orcus = 16%)\n'
@@ -669,7 +671,7 @@ INFO = {
         'asteroids that are composed of rock or ice, Psyche appears to be made largely of nickel and iron -- similar to the core of Earth.',
 
         # Source: NASA CNEOS (cneos.jpl.nasa.gov/apophis) -- size 370m, Aten-type, 2029 flyby 31600 km, OSIRIS-APEX/RAMSES missions
-        'Apophis': '***SET MANUAL SCALE TO 0.005 AU TO SEE THE CLOSE APPROACH TO EARTH AND MOON***\n\n'
+        'Apophis':
         'Horizons: 2004 MN4. The most famous Near-Earth Asteroid - an Aten-type that orbits mostly inside\n'
         ' Earth\'s orbit but crosses outward.\n'
         '* Size: Approximately 370 meters (1,210 feet) in diameter.\n'
@@ -761,15 +763,11 @@ INFO = {
         '* Eurybates has a small satellite named Queta, discovered in 2021 from Hubble Space Telescope images. '
         '* Lucy flyby: Aug 12, 2027. D~64 km, C-type. Has satellite Queta (~1 km). First C-type Trojan to be visited.',
 
-        'Patroclus-Menoetius Barycenter': '***SET MANUAL SCALE TO 0.000005 AU TO VISUALIZE THE BARYCENTRIC ORBITS***,',
-
-        'Patroclus': '***SET MANUAL SCALE TO 10 TO SEE JUPITER AND CLOSEST LUCY APPROACHES IN MARCH 2033***\n'
-        '***SET MANUAL SCALE TO 0.000005 AU TO VISUALIZE THE BARYCENTRIC ORBITS***\n'
+        'Patroclus':
         '***TO SEE CLOSEST LUCY APPROACH SET DATES NEAR MARCH 3, 2033 17:27, WITH BARYCENTER***\n\n'
         'Horizons: A906 UL. A trojan asteroid that will be visited by the Lucy spacecraft. Binary companion to Menoetius.',
 
-        'Menoetius': '***SET MANUAL SCALE TO 10 TO SEE JUPITER AND CLOSEST LUCY APPROACHES IN MARCH 2033***\n'
-        '***SET MANUAL SCALE TO 0.000005 AU TO VISUALIZE THE BARYCENTRIC ORBITS***\n'
+        'Menoetius':
         '***TO SEE CLOSEST LUCY APPROACH SET DATES NEAR MARCH 3, 2033 17:27, WITH BARYCENTER***\n\n'
         'Horizons: 2010 TT191. A trojan asteroid that will be visited by the Lucy spacecraft. Binary companion to Patroclus.',
 
@@ -791,8 +789,7 @@ INFO = {
         '* Jupiter-centered: do not select Jupiter; visualize shells at 0.5 AU.\n'
         '* Heliocentric: select Jupiter with or without shells.\n'
         '* Missions: Pioneer 10 and 11; Voyager 1 and 2; Ulysses; Cassini-Huygens; New Horizons; Galileo;\n' 
-        '  Juno; JUpiter ICy moons Explorer (JUICE); Europa Clipper.\n\n'
-        'HTML VISUALIZATION 21.9 MB PER FRAME FOR ALL SHELLS AND MOONS.',
+        '  Juno; JUpiter ICy moons Explorer (JUICE); Europa Clipper.',
 
         'Metis': 'Horizons: 516. Jupiter moon. Innermost known moon, orbits within Jupiter\'s main ring, contributing dust to it.',
         'Adrastea': 'Horizons: 515. Jupiter moon. Tiny moon orbiting near the outer edge of Jupiter\'s main ring, source of ring material.',
@@ -807,8 +804,7 @@ INFO = {
         'Saturn': 'Horizons: 699. Known for its beautiful ring system, the sixth planet from the Sun.'
         '* Saturn-centered: do not select Saturn; visualize shells at 0.5 AU.\n'
         '* Heliocentric: select Saturn with or without shells.\n'
-        '* Missions: Pioneer 11; Voyager 1 and 2; Cassini-Huygens; Dragonfly (2028).\n\n'
-        'HTML VISUALIZATION 21.9 MB PER FRAME FOR ALL SHELLS AND MOONS.',
+        '* Missions: Pioneer 11; Voyager 1 and 2; Cassini-Huygens; Dragonfly (2028).',
 
         'Titan': 'Horizons: 606. Saturn moon. The second-largest moon in the Solar System, with a thick atmosphere.',
 
@@ -847,8 +843,7 @@ INFO = {
         'Uranus': 'Horizons: 799. The ice giant with a unique tilt, orbits the Sun on its side.'
         '* Uranus-centered: do not select Uranus; visualize shells at 0.5 AU.\n'
         '* Heliocentric: select Uranus with or without shells.\n'
-        '* Missions: Voyager 2; Uranus Orbiter and Probe (planned).\n\n'
-        'HTML VISUALIZATION 21.9 MB PER FRAME FOR ALL SHELLS AND MOONS.',
+        '* Missions: Voyager 2; Uranus Orbiter and Probe (planned).',
 
         'Titania': 'Horizons: 701. Uranus moon. The largest moon of Uranus, with a mix of heavily cratered and relatively younger regions.',    
 
@@ -868,8 +863,7 @@ INFO = {
         'Neptune': 'Horizons: 899. The eighth and farthest known planet in the solar system.\n'
         '* Neptune-centered: do not select Neptune; visualize shells at 1 AU.\n'
         '* Heliocentric: select Neptune with or without shells.\n'
-        '* Missions: Voyager 2; Neptune Orbiter and Probe (possible).\n\n'
-        'HTML VISUALIZATION 21.9 MB PER FRAME FOR ALL SHELLS AND MOONS.',
+        '* Missions: Voyager 2; Neptune Orbiter and Probe (possible).',
 
         'Triton': 'Horizons: 801. Retrograde, i > 90. Neptune\'s largest moon, has a retrograde orbit and geysers suggesting geological activity.',
 
@@ -877,12 +871,7 @@ INFO = {
 
         'Galatea': 'Horizons: 806. Irregularly shaped, with an expected icy and grayish appearance, thought to shepherd the Adams ring arc.',
 
-        'Pluto-Charon Barycenter':
-        '***SET MANUAL SCALE TO .0005 AU TO SEE PLUTO, ITS MOONS AND OSCULATING ORBITS***',
-
         'Pluto': 
-        '***SET MANUAL SCALE TO .0005 AU TO SEE PLUTO, ITS MOONS AND OSCULATING ORBITS***\n'
-        '***VISUALIZE PLUTO\'S FULL STRUCTURE WITH SHELLS AT 0.1 AU***\n\n'
         'Horizons: 999. Dwarf planet in a TRUE BINARY system with Charon.\n\n'
         'ORBITAL RESONANCE:\n'
         '* Pluto is a PLUTINO - locked in 3:2 resonance with Neptune.\n'
@@ -906,63 +895,54 @@ INFO = {
         '* Pluto orbits barycenter: ~2,100 km radius\n'
         '* Charon orbits barycenter: ~17,500 km radius (same period: 6.387 days)\n'
         '* Compare: Earth-Moon barycenter is inside Earth - not a true binary.\n\n'
-        'Missions: New Horizons (2015 flyby); Pluto Orbiter concept under study.\n\n'
-        'HTML: ~22 MB per frame with all shells/moons.',        
+        'Missions: New Horizons (2015 flyby); Pluto Orbiter concept under study.',
 
         # Source: ALMA Brown & Butler 2018 (Orcus-Vanth mass ratio 14.2%)
-        'Charon': '***SET MANUAL SCALE TO .0005 AU TO SEE PLUTO, ITS MOONS AND OSCULATING ORBITS***\n\n'
+        'Charon':
         'Horizons: 901. Pluto\'s largest moon is tidally locked with it, forming a binary dwarf planet system.\n'
         'Period: 6.387 days. Distance: 19,596 km. Mass ratio to Pluto: 12% (highest known until Orcus-Vanth at 14.2%).',
 
-        'Styx': '***SET MANUAL SCALE TO .0005 AU TO SEE PLUTO, ITS MOONS AND OSCULATING ORBITS***\n\n'
+        'Styx':
         'Horizons: 905. The smallest and innermost of Pluto\'s known moons is irregularly shaped and orbits between Charon and Nix.',        
 
-        'Nix': '***SET MANUAL SCALE TO .0005 AU TO SEE PLUTO, ITS MOONS AND OSCULATING ORBITS***\n\n'
+        'Nix':
         'Horizons: 902. A small, elongated moon of Pluto with a chaotic rotation.',
 
-        'Kerberos': '***SET MANUAL SCALE TO .0005 AU TO SEE PLUTO, ITS MOONS AND OSCULATING ORBITS***\n\n'
+        'Kerberos':
         'Horizons: 904. Pluto\'s second-smallest moon is thought to have a double-lobed shape.',
 
-        'Hydra': '***SET MANUAL SCALE TO .0005 AU TO SEE PLUTO, ITS MOONS AND OSCULATING ORBITS***\n\n'
+        'Hydra':
         'Horizons: 903. The outermost known moon of Pluto is elongated and has a highly reflective, icy surface.',
 
         'Haumea': 
-        '***SET MANUAL SCALE, NOT AUTO SCALE, TO 0.0006 AU TO SEE HAUMEA, ITS MOONS, AND ORBITS***\n'
     #    '***ZOOM TO 0.000002 AU TO THE BARYCENTER AND HAUMEA\'S ORBIT***\n'
         '***JPL DOES NOT HAVE DATA FOR THIS OBJECT PAST 2030-1-31***\n\n'
         'Horizons: 2003 EL61. A dwarf planet known for its elongated shape and fast rotation.',
 
-        "Hi'iaka": '***SET MANUAL SCALE, NOT AUTO SCALE, TO 0.0006 AU TO SEE HAUMEA, ITS MOONS, AND ORBITS***\n'
+        "Hi'iaka":
         'Haumea\'s outer moon. Period: 49 days. Diameter ~310 km. Named for Hawaiian goddess.',
         
-        'Namaka': '***SET MANUAL SCALE, NOT AUTO SCALE, TO 0.0006 AU TO SEE HAUMEA, ITS MOONS, AND ORBITS***\n'
+        'Namaka':
         'Haumea\'s inner moon. Period: 18 days. Diameter ~170 km. Orbit perturbed by Hi\'iaka.',        
         
         'Makemake': 'Horizons: 2005 FY9. Dwarf planet in the Kuiper Belt, second-brightest KBO after Pluto. Has one known moon (MK2).',
         'MK2': 'Makemake\'s moon (S/2015 (136472) 1). Period: 18.0 days. Distance: ~22,250 km. Orbit edge-on to Earth. Very dark surface ' 
         '(~4% reflectivity), diameter ~175 km. No JPL ephemeris - uses 2025 Hubble orbital solution.',
 
-        # Source: Brown et al. (2005) ApJL (Eris discovery); Sicardy et al. (2011) Nature (Dysnomia period 15.79d, tidal lock)
-        'Eris-Dysnomia Barycenter':
-        '***SET MANUAL SCALE TO 0.0003 AU TO SEE ERIS, DYSNOMIA, BARYCENTER, AND ORBITS***',
-
         # Source: Brown et al. (2005) ApJL (discovery, more massive than Pluto)
         'Eris': 
-        '***SET MANUAL SCALE TO 0.0003 AU TO SEE ERIS, DYSNOMIA, BARYCENTER, AND ORBITS***\n'
         '***JPL DOES NOT HAVE DATA FOR THIS OBJECT PAST 2030-1-31***\n\n'        
         'Horizons: 2003 UB313. A distant dwarf planet, more massive than Pluto.\n'
         '* Eris-centered: do not select Eris; visualize shells at 0.1 AU.\n'
         '* Heliocentric: select Eris with or without shells.\n'
-        '* Missions: Proposed.\n\n'
-        'HTML VISUALIZATION 21.9 MB PER FRAME FOR ALL SHELLS AND MOONS.',
+        '* Missions: Proposed.',
 
         # Source: EBSCO Science Reference Starters / occultation data (diameter uncertain, 700 km not supported)
         'Dysnomia':
-        '***SET MANUAL SCALE TO 0.0003 AU TO SEE ERIS, DYSNOMIA, BARYCENTER, AND ORBITS***\n\n' 
         'Eris\'s moon. Period: 15.79 days. Diameter ~150-400 km (uncertain; current occultation data). Both bodies tidally locked.',
 
         # Source: Trujillo & Brown (2002) ApJL (discovery); Morgado et al. (2023) Nature (rings beyond Roche limit)
-        'Quaoar': '***SET MANUAL SCALE TO 0.0002 AU TO SEE QUAOAR, WEYWOT, BARYCENTER, AND ORBITS***\n'
+        'Quaoar':
         'Horizons: 2002 LM60. Available dates: 1999-12-31 to 2030-01-02.\n\n'
         'A classical Kuiper Belt cubewano (~1090 km diameter) with TWO rings discovered 2023. '
         'Named after the Tongva (Native American) creator god. Surface has crystalline water ice. '
@@ -970,7 +950,7 @@ INFO = {
         'Discovered June 2002 by Trujillo and Brown. Orbital period: 286 years. Low eccentricity (0.04). '
         'Potentially has a second small moon detected in 2025 occultation.',
 
-        'Weywot': '***SET MANUAL SCALE TO 0.0002 AU TO SEE QUAOAR, WEYWOT, BARYCENTER, AND ORBITS***\n'
+        'Weywot':
         'Quaoar\'s confirmed moon, named after the Tongva sky god (son of Quaoar). '
         'Discovered Feb 2006 by Brown in Hubble images. '
         'Period: 12.4 days. Distance: ~13,300 km. Diameter: ~170 km. Very dark (albedo ~4%). '
@@ -1025,7 +1005,7 @@ INFO = {
         'means it\'s relatively close to its perihelion (closest point) and is currently moving closer to the Sun.',
 
         # Source: Sheppard et al. (2019) AJ (discovery, semi-major axis ~1090 AU, Sednoid class)
-        'Leleakuhonua': '**SET MANUAL SCALE TO 2000 AU FOR FULL ORBIT**\n'
+        'Leleakuhonua':
         'Horizons: 2015 TG387. Discovered in 2015, this object has one of the largest known semi-major axes at approximately 1,090 AU, ' 
         'meaning its average distance from the Sun is immense. It is one of four confirmed members of the Sednoid class. ' 
         'Extreme orbits make Sednoids "detached objects," meaning they are not significantly influenced by the gravity of the giant ' 
@@ -1046,8 +1026,6 @@ INFO = {
         '  * These two rings are separated by a 9-kilometer gap and orbit at a distance of about 400 kilometers from Chariklo\'s center.',
 
         'Orcus': 
-        '***SET MANUAL SCALE TO .00008 AU TO SEE ORCUS-VANTH BINARY ORBITS***\n'
-        '***TO SEE FULL ORCUS ORBIT, SET MANUAL SCALE TO 1500 AU***\n\n'        
         'Horizons: 2004 DW. The "ANTI-PLUTO" - a plutino in 3:2 Neptune resonance.\n\n'
         'ORBITAL RESONANCE:\n'
         '* Same 3:2 resonance as Pluto, but 180 deg OUT OF PHASE!\n'
@@ -1069,7 +1047,7 @@ INFO = {
         'Named after the Etruscan god of the underworld.',
 
         # Source: ALMA Brown & Butler 2018 (mass ratio 14.2%); occultation 2017 (diameter 443 km)
-        'Vanth': '***SET MANUAL SCALE TO .00008 AU TO SEE ORCUS-VANTH BINARY ORBITS***\n'
+        'Vanth':
         'Horizons: 120090482. Orcus\'s moon, forming the HIGHEST MASS RATIO binary in the solar system!\n\n'
         'BINARY SYSTEM PHYSICS:\n'
         '* Mass ratio: 14.2% of Orcus (higher than Charon\'s 12% of Pluto!)\n'
@@ -1088,7 +1066,7 @@ INFO = {
         'Diameter: ~443 km (occultation 2017). Named after Etruscan psychopomp (guide of the dead).',
 
         # Source: ALMA Brown & Butler 2018 (mass ratio 14.2%)
-        'Orcus-Vanth Barycenter': '***SET MANUAL SCALE TO .00008 AU TO SEE ORCUS-VANTH BINARY ORBITS***\n'
+        'Orcus-Vanth Barycenter':
         'Center of mass for the Orcus-Vanth binary system - the HIGHEST MASS RATIO binary in the solar system!\n\n'
         'BINARY SYSTEM:\n'
         '* Mass ratio: Vanth/Orcus = 14.2% (vs Charon/Pluto = 12%)\n'
@@ -1105,7 +1083,7 @@ INFO = {
         'Select this as center, then select Orcus and Vanth to see\n'
         'both objects orbiting their common center of mass.',
 
-        '2017 OF201': '**USE A MANUAL SCALE OF AT LEAST 1500 AU TO SEE THE FULL ORBIT**\n' 
+        '2017 OF201':
         'Horizons: 2017 OF201. An extreme trans-Neptunian object and dwarf planet candidate, estimated to be at least 500 kilometres in diameter.',
 
         'Varuna': 'Horizons: 2000 WR106. A significant Kuiper Belt Object with a rapid rotation period.',
@@ -1115,17 +1093,15 @@ INFO = {
         'GV9': 'Horizons: 2004 GV9. A binary Kuiper Belt Object providing precise mass measurements through its moon.',
         'Mani': 'Horizons: 2002 MS4. A large unnumbered Kuiper Belt Object with no known moons.',  
 
-        'Gonggong-Xiangliu Barycenter': '***SET MANUAL SCALE TO 0.0003 AU TO SEE GONGGONG AND XIANGLIU ORBITS***',
-
         # Source: Wikipedia/MPC (aphelion ~101 AU, current position ~89 AU); Kiss et al. 2017 (Xiangliu)
-        'Gonggong': '***SET MANUAL SCALE TO 0.0003 AU TO SEE GONGGONG AND XIANGLIU ORBITS***\n'
+        'Gonggong':
         'Horizons: 2007 OR10. One of the largest known Kuiper Belt Objects (~1230 km diameter) with a highly inclined orbit (30.9 deg). '
         'Named after the Chinese water god known for causing floods and chaos. '
         'Surface is extremely red due to tholins and water ice, suggesting possible past cryovolcanism. '
         'Slow rotation period (~22 hours) likely caused by tidal forces from its moon Xiangliu. '
         'Currently at ~89 AU and moving toward aphelion (~101 AU, late 21st century). Orbital period: 550 years. Eccentricity: 0.50.',
 
-        'Xiangliu': '***SET MANUAL SCALE TO 0.0003 AU TO SEE GONGGONG AND XIANGLIU ORBITS***\n'
+        'Xiangliu':
         'Gonggong\'s only moon, named after the nine-headed serpent minister in Chinese mythology. '
         'Discovered 2016 by Kiss et al. in Hubble images from 2010. '
         'Period: 25.22 days. Distance: ~24,000 km. Diameter: ~100 km (albedo-dependent). '
@@ -1144,14 +1120,13 @@ INFO = {
         '* Planet 9-centered: do not select Planet 9; visualize shells at 8 AU.\n'
         '* Heliocentric: select Planet 9 with or without shells at 800 AU.\n'
         '* Missions: None.\n\n'
-        'HTML VISUALIZATION 21.9 MB PER FRAME FOR ALL SHELLS AND MOONS.'
         'NOTE: The ideal orbit and estimated position will display in static plots. In animated plots, only the ideal orbit will display.\n\n' 
         'NOTE: This visualization is our estimate and neither the ideal orbit nor position are fetched from JPL Horizons.\n\n' 
         'Select manual scaling of 800 AU to fully display the estimated orbit.', 
 # Missions
 
         # Source: NASA Voyager mission (voyager.jpl.nasa.gov) -- launch/encounter dates, heliopause crossing Aug 2012, interstellar status
-        'Voyager 1': '***SET MANUAL SCALE TO 170 AU TO PLOT THE COMPLETE TRAJECTORY. PLOT WITH JUPITER AND SATURN.***\n'
+        'Voyager 1': '***PLOT WITH JUPITER AND SATURN.***\n'
         'Horizons: -31. The farthest human-made object from Earth, exploring interstellar space. Voyager 1 is a ' 
         'space probe that was launched by NASA on September 5, 1977, to study the outer Solar System and interstellar space. It is the ' 
         'farthest human-made object from Earth, at a distance of 165.2 AU (24.7 billion km; 15.4 billion mi) as of October 2024.\n ' 
@@ -1168,10 +1143,10 @@ INFO = {
         'it.',
 
         # Source: NASA Voyager mission (voyager.jpl.nasa.gov) -- only spacecraft to visit all four gas giants
-        'Voyager 2': '***SET MANUAL SCALE TO 150 AU TO PLOT THE COMPLETE TRAJECTORY. PLOT WITH JUPITER, SATURN, URANUS AND NEPTUNE.***\n'
+        'Voyager 2': '***PLOT WITH JUPITER, SATURN, URANUS AND NEPTUNE.***\n'
         'Horizons: -32. The only spacecraft to visit all four gas giants: Jupiter, Saturn, Uranus, and Neptune.',
 
-        'Cassini': '***SET MANUAL SCALE TO 15 AU. PLOT WITH VENUS, EARTH, JUPITER AND SATURN.***\n'
+        'Cassini': '***PLOT WITH VENUS, EARTH, JUPITER AND SATURN.***\n'
         'Horizons: -82. NASA: "A joint endeavor of NASA, ESA, and the Italian space agency (ASI), Cassini was a sophisticated robotic ' 
         'spacecraft sent to study Saturn and its complex system of rings and moons in unprecedented detail. Cassini carried a probe ' 
         'called Huygens to the Saturn system. The probe, which was built by ESA, parachuted to the surface of Saturn\'s largest moon, ' 
@@ -1188,8 +1163,7 @@ INFO = {
         '* Final transmission: September 15, 2017',
 
         'New Horizons': 
-        '***SET MANUAL SCALE TO 70 AU PLOT WITH JUPITER, PLUTO AND ARROKOTH.***\n'
-        '***SET MANUAL SCALE TO 0.0003 AU TO PLOT NEW HORIZONS-ARROKOTH FLYBY ON 2019-1-1.\n\n'
+        '***PLOT WITH JUPITER, PLUTO AND ARROKOTH.***\n'
         'Horizons: -98. New Horizons flew past Pluto in 2015, now exploring the Kuiper Belt.\n' 
         '* The New Horizons space probe is an interplanetary space probe built by the Applied Physics Laboratory of Johns Hopkins\n' 
         'University for NASA.\n' 
@@ -1208,7 +1182,7 @@ INFO = {
 
         # Source: NASA New Horizons / Stern et al. (2019) Science (flyby Jan 1 2019, 3537.7 km, 36 km size); PNAS (2024) ionizing radiation sugars study
         'Arrokoth': 
-        '***SET MANUAL SCALE TO 70 AU PLOT WITH JUPITER, PLUTO AND ARROKOTH.***\n' 
+        '***PLOT WITH JUPITER, PLUTO AND ARROKOTH.***\n' 
         '  * Official Name: Arrokoth (formerly known as Ultima Thule)\n' 
         '  * JPL Horizons Designation: (486958) 2014 MU69\n' 
         '  * Location: Kuiper Belt, a region beyond Neptune populated by icy bodies\n' 
@@ -1260,11 +1234,11 @@ INFO = {
         '    and its moons, providing valuable insights into the formation and evolution of our solar system.',
 
         # Source: NASA JPL Galileo mission (studied Jupiter, Europa, Ganymede 1995-2003)
-        'Galileo': '***SET MANUAL SCALE TO 6 AU. PLOT WITH JUPITER.***\n'
+        'Galileo': '***PLOT WITH JUPITER.***\n'
         'Horizons: -77. Studied Jupiter and its major moons, including Europa and Ganymede.',
 
         'Apollo 11 S-IVB': 
-        '***PLOT WITH THE EARTH AS CENTER AND THE MOON OR MANUALLY SCALE TO 0.01 AU***\n'
+        '***PLOT WITH THE EARTH AS CENTER AND THE MOON***\n'
         '* SPACECRAFT TRAJECTORY: Horizons: -399110. The trajectory here is a reconstruction of the Apollo 11 S-IVB stage Earth departure trajectory ' 
         'developed by Daniel R. Adamo. The trajectory spans the time interval from 1969-Jul-16 16:40 to July 28 00:06 GMT/UTC.\n' 
         '* The Apollo 11 S-IVB spacecraft, as defined in this JPL Horizons ephemeris, refers to the third stage of the Saturn V rocket ' 
@@ -1339,7 +1313,7 @@ INFO = {
         'Horizons: -24. The first spacecraft to encounter Saturn and study its rings.',
         
         # Source: ESA JUICE factsheet (esa.int/Science_Exploration/Space_Science/Juice/Juice_factsheet) -- launch, arrival, Ganymede orbit, Europa flyby
-        'JUICE': '***SET MANUAL SCALE TO 5 AU. PLOT WITH EARTH, MARS, AND JUPITER (EUROPA, GANYMEDE, CALLISTO).***\n' 
+        'JUICE': '***PLOT WITH EARTH, MARS, AND JUPITER (EUROPA, GANYMEDE, CALLISTO).***\n' 
         'Horizons: -28.   The JUICE orbiter will investigate Ganymede and evaluate its potential to support life.\n' 
         '* The Jupiter Icy moons Explorer ("JUICE") is an ESA mission launched April 14, 2023 @ 12:14 UTC from French Guiana (ELA-3) on ' 
         'an Ariane 5. Its period and area of operations will overlap with NASA\'s Europa Clipper mission launching in 2024.\n' 
@@ -1369,7 +1343,7 @@ INFO = {
         '  * 2029 Oct: Asteroid 223 Rosa [PROPOSED]\n'
         '  * 2031+   : more then 25 gravity assists, two Europa flybys',
 
-        'Europa-Clipper': '***SET MANUAL SCALE TO 5 AU. PLOT WITH EARTH, MARS, AND JUPITER (EUROPA, GANYMEDE, CALLISTO).***\n' 
+        'Europa-Clipper': '***PLOT WITH EARTH, MARS, AND JUPITER (EUROPA, GANYMEDE, CALLISTO).***\n' 
         'Horizons: -159. NASA\'s Europa Clipper spacecraft will carry a suite of science instruments to assess habitability of ' 
         'Jupiter\'s ice-covered moon Europa (502) while confirming the existence and nature of an expected sub-surface ocean.\n' 
         '* Launched: 2024-Oct-14 16:06 UTC (SpaceX Falcon Heavy, KSC LC-39A)\n' 
@@ -1399,8 +1373,6 @@ INFO = {
         'as close as 75-km from the asteroid\'s surface.', 
 
         'OSIRIS REx': 
-        '***SET MANUAL SCALE TO 2 AU TO SEE FULL TRAJECTORY***\n'
-        '***SET MANUAL SCALE TO 0.00003 AU TO SEE ARRIVAL AT BENNU***\n\n'
         'Horizons: -64. OSIRIS-REx is a NASA mission that collected samples from asteroid Bennu and returned to Earth.\n' 
         '* NASA information: "OSIRIS-REx ("Origins, Spectral Interpretation, Resource Identification, and Security-Regolith Explorer") explored 101955 ' 
         'Bennu (1999 RQ36), a carbonaceous B-type asteroid whose regolith may provide insights on the early history of the solar ' 
@@ -1437,7 +1409,7 @@ INFO = {
         'Apophis mission trajectory as object \'2099942\'',
 
         # Source: NASA OSIRIS-APEX mission (nasa.gov/osiris-apex) -- Apophis rendezvous post-2029 flyby
-        'OSIRIS APEX': '***SET MANUAL SCALE TO 2 AU TO SEE FULL TRAJECTORY***\n'
+        'OSIRIS APEX':
         'OSIRIS-APEX is a NASA mission that will study the asteroid Apophis.\n' 
         '* OSIRIS-REx\'s Legacy: OSIRIS-REx was a NASA mission that successfully traveled to the asteroid Bennu, collected a sample ' 
         'of its surface material, and returned it to Earth in September 2023. This was a landmark achievement in asteroid exploration.\n' 
@@ -1496,7 +1468,7 @@ INFO = {
         'James Webb Space Telescope': 'Horizons: -170. The James Webb Space Telescope is NASA\'s flagship infrared space telescope, orbiting Lagrange point 2.',
         
         # Source: ESA Rosetta mission (esa.int/Science_Exploration/Space_Science/Rosetta) -- launch 2004, 67P arrival/Philae/end 2016
-        'Rosetta': '***SET MANUAL SCALE TO 6 AU. PLOT WITH EARTH, MARS, STEINS, LUTETIA AND COMET 67P/Churyumov-Gerasimenko.***\n'
+        'Rosetta': '***PLOT WITH EARTH, MARS, STEINS, LUTETIA AND COMET 67P/Churyumov-Gerasimenko.***\n'
         'Horizons: -226. European Space Agency mission that studied Comet 67p/Churyumov-Gerasimenko. The Rosetta mission significantly ' 
         'advanced our understanding of comets and their role in the early solar system. Its data continues to be analyzed, providing ' 
         'valuable information for planetary science.\n' 
@@ -1527,7 +1499,7 @@ INFO = {
         'Its data continues to be analyzed, providing valuable information for planetary science.', 
 
         # Source: ESA BepiColombo mission (esa.int/Science_Exploration/Space_Science/BepiColombo) -- MPO/Mio orbiters, Mercury arrival
-        'BepiColombo': '***SET MANUAL SCALE TO 1.5AU. PLOT WITH EARTH, VENUS AND MERCURY.***\n' 
+        'BepiColombo': '***PLOT WITH EARTH, VENUS AND MERCURY.***\n' 
         'Horizons: -121. BepiColombo is a mission to explore Mercury, the innermost and smallest planet in our solar system! ' 
         'It\'s a joint endeavor by the European Space Agency (ESA) and the Japan Aerospace Exploration Agency (JAXA).\n ' 
         '* The mission consists of two main spacecraft that journeyed to Mercury together: Mercury Planetary Orbiter (MPO) ' 
@@ -1576,11 +1548,11 @@ INFO = {
         'It\'s a complex dance with gravity, but this intricate approach is necessary to get BepiColombo into the right ' 
         'position to study Mercury effectively!',
         
-        'SOHO Solar Observatory': '***SET MANUAL SCALE TO 1.5 AU. PLOT WITH EARTH AND L1.***\n'
+        'SOHO Solar Observatory': '***PLOT WITH EARTH AND L1.***\n'
         'Horizons: -21. The Solar and Heliospheric Observatory is located at the L1 Lagrange point.',
 
         # Source: ESA Solar Orbiter mission (esa.int/Science_Exploration/Space_Science/Solar_Orbiter) -- launch, flyby dates, orbital parameters
-        'Solar Orbiter': '***SET MANUAL SCALE TO AT LEAST 1.5 AU. PLOT WITH EARTH AND VENUS.***\n'
+        'Solar Orbiter': '***PLOT WITH EARTH AND VENUS.***\n'
         'Horizons: -144. From JPL Horizons: Solar Orbiter ("Solo"), an ESA/NASA mission, was launched 2020-Feb-10 at 4:03 UTC from ' 
         'Cape Canaveral, Florida\n' 
         '* The 7-year mission will provide close-up, high-latitude observations of the Sun from a highly elliptic orbit that ranges ' 
@@ -1607,7 +1579,7 @@ INFO = {
         'Horizons: -139479. European Space Agency mission at L2 mapping the Milky Way.\n' 
         'Scientific observations ceased on 2025-1-15 (fuel exhausted), but Horizons ephemeris is projected through 2125-3-28.',
         
-        'Hayabusa 2': '***PLOT WITH ASTEROID RYUGU OR SET MANUAL SCALE TO 1.5 AU TO SEE FULL TRAJECTORY***\n'
+        'Hayabusa 2': '***PLOT WITH ASTEROID RYUGU TO SEE FULL TRAJECTORY***\n'
         'Horizons: -37. Japan JAXA mission that returned samples from Ryugu.', 
                 
         # Source: NASA Mars 2020 mission (mars.nasa.gov/mars2020) -- launch/landing dates, Jezero crater, Ingenuity
@@ -1714,7 +1686,6 @@ INFO = {
 
         'Artemis II':
         '***PLOT WITH EARTH-MOON BARYCENTER AS CENTER. SELECT MOON. ADD EARTH AND MOON SHELLS FOR SCALE.***\n'
-        '***MANUALLY SCALE TO 0.003 AU TO SEE FULL TRAJECTORY***\n'
         'Horizons: -1024. Artemis II -- First crewed mission of NASA\'s Artemis program.\n'
         'Spacecraft: Orion capsule "Integrity" atop Space Launch System (SLS).\n'
         'Crew: Reid Wiseman (Commander), Victor Glover (Pilot), Christina Koch (Mission Specialist),\n'
@@ -1878,11 +1849,11 @@ INFO = {
         
         'Hyakutake': 'Horizons: C/1996 B2. Retrograde > 90. Comet passed very close to Earth in 1996. Retrograde (left-handed) orbit.',
         
-        'Hale-Bopp': '**SET MANUAL SCALE TO 360 AU FOR FULL ORBIT**\n' 
+        'Hale-Bopp':
 
         'Horizons: C/1995 O1. Comet Hale-Bopp: Visible to the naked eye for 18 months.',
         
-        'McNaught': '**USE MANUAL SCALE AT 40 AU TO SEE THE CURRENT POSITION**\n' 
+        'McNaught':
 
         'Horizons: C/2006 P1. Known as the Great Comet of 2007. January 12, 2007.',
         
@@ -1948,7 +1919,6 @@ INFO = {
         '  post-breakup observations. The comet was still one body on Oct 8.',
 
         'Borisov': 
-        '*** SET MANUAL SCALE TO AT LEAST 50 AU TO SEE FULL HYPERBOLIC ORBIT AS ESTIMATED SO FAR BY JPL***\n\n'
         'Horizons: C/2025 V1. Retrograde > 90. Comet C/2025 V1 (Borisov) was just discovered on November 2, 2025. It was \n' 
         'found by the same Crimean astronomer, Gennadiy Borisov, who discovered the famous interstellar comet 2I/Borisov back in 2019.\n' 
         '* Discovery: Found on November 2, 2025.\n' 
@@ -2038,7 +2008,7 @@ INFO = {
         '* Note: Tail length measurements are preliminary and model-based; official measurements pending ESA/NOIRLab/HST data releases.',        
 
         # Source: Wikipedia / Universe Space Tech (Jan 2025) -- nucleus disintegrated ~Jan 13 2025; brightest comet 2025
-        'ATLAS': '***HYPERBOLIC TRAJECTORY. TO VISUALIZE CURRENT POSITION PLOT OTHER OBJECTS OR MANUAL SCALE TO AT LEAST 5 AU***\n\n'
+        'ATLAS': '***HYPERBOLIC TRAJECTORY. TO VISUALIZE CURRENT POSITION PLOT OTHER OBJECTS***\n\n'
         'Horizons: C/2024 G3. Retrograde > 90. The Great Comet of 2025. Comet C/2024 G3 (ATLAS) created quite a buzz in the Southern Hemisphere!\n'
         '* Comet C/2024 G3 (ATLAS) is a non-periodic comet that gained attention as it approached the Sun in early 2025. It was considered ' 
         'the brightest comet of 2025 and was even visible to the naked eye.\n' 
@@ -2057,7 +2027,7 @@ INFO = {
         'While the bright pseudo-nucleus disappeared, the comet\'s tail remained a stunning sight for observers. Despite this, it\'s ' 
         'believed that the comet has survived a similar close approach to the Sun before, with an orbital period estimated at around 160,000 years.', 
 
-        'SWAN': '***TO VISUALIZE THE COMPLETE ORBIT, SET MANUAL SCALE TO AT LEAST 1500 AU***\n\n'
+        'SWAN':
         'Horizons: C/2025 R2. Comet C/2025 R2 (SWAN) is a non-periodic comet that was discovered on September 11, 2025.\n' 
         '* The discovery was made by Ukrainian amateur astronomer Vladimir Bezugly, who identified the comet in images from the Solar Wind ' 
         'Anisotropies (SWAN) instrument aboard the Solar and Heliospheric Observatory (SOHO) spacecraft.\n' 
@@ -2091,7 +2061,7 @@ INFO = {
         '  transitioning to the Southern Hemisphere as it recedes into deep space.\n'
         '* Nucleus: Estimated at 3-5 km; no precise measurement published as of late April 2026.\n',
 
-        '6AC4721': '***TO VISUALIZE THE COMPLETE ORBIT SET THE MANUAL SCALE TO AT LEAST 200 AU.***\n\n'
+        '6AC4721':
         'Provisional designation for C/2026 A1 (MAPS) before JPL assigned a formal Horizons ID.\n'
         'Discovered January 13, 2026 from the AMACS1 Observatory, Atacama Desert, Chile.\n\n'
         'Paloma\'s Orrery began tracking this object under the provisional designation 6AC4721\n'
@@ -2103,7 +2073,7 @@ INFO = {
         'See MAPS (C/2026 A1) entry for the complete story.',
 
         # Source: MPEC 2026-A49 (orbital elements); SOHO/LASCO/CCOR-1 observations (disintegration Apr 4 2026, perihelion 1.23 R_sun)
-        'MAPS': '***TO VISUALIZE THE COMPLETE ORBIT SET THE MANUAL SCALE TO AT LEAST 200 AU.***\n\n'
+        'MAPS':
         'Horizons: C/2026 A1. Comet MAPS (C/2026 A1) was a Kreutz sungrazer discovered January 13, 2026\n'
         'from the AMACS1 Observatory in the Atacama Desert, Chile, by Maury, Attard, Parrott and Signoret.\n'
         'It holds the record as the most distant Kreutz sungrazer ever detected at discovery -- found\n'
@@ -2148,7 +2118,7 @@ INFO = {
         'marks the moment the nucleus was lost. The outbound arc is the ghost.\n\n'
         'Module updated: April 2026 with Anthropic\'s Claude Sonnet 4.6. In memoriam C/2026 A1.',
 
-        'Lemmon': '***TO VISUALIZE THE COMPLETE ORBIT SET THE MANUAL SCALE TO AT LEAST 250 AU.***\n\n'
+        'Lemmon':
         'Horizons: C/2025 A6. Retrograde orbit; i>90. Comet C/2025 A6 (Lemmon) is a non-periodic comet discovered by the Mount Lemmon Survey. It\'s ' 
         'currently inbound, making it one of the most anticipated comets of 2025 for Northern Hemisphere observers.\n'
         '* The comet was initially spotted as a faint asteroid-like object on January 3, 2025, but pre-discovery images from as far ' 

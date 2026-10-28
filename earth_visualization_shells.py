@@ -126,6 +126,9 @@ October 18, 2026 (L-455, Earth's typed numbers, Opus 5.5): the LEO
     the sky and the "5x"; the dots spread evenly between the two edges
     instead of clustering at a typed Starlink height.
 Module updated: October 18, 2026 with Anthropic's Claude Opus 5.5
+Module updated: October 27, 2026 with Anthropic's Claude Opus 5.5 (L-492:
+    the stale "set manual scale" and "MB per frame" sentences removed
+    from the hover and info text; the opening view frames every shell).
 """
 import numpy as np
 import math
@@ -1008,7 +1011,6 @@ def create_earth_upper_atmosphere_shell(center_position=(0, 0, 0)):
 # Note+: page. They are arithmetic on the belt rows now, which is why the
 # Note+: outer figure changed. L-305 item 7.
 earth_magnetosphere_info = (
-            "SET MANUAL SCALE TO AT LEAST 0.01 AU TO VISUALIZE.\n\n" 
 
             f"Earth's magnetosphere extends about {_declared('EARTH_MAGNETOPAUSE_STANDOFF_RADII')} Earth radii on the Sun-facing side\n"
             "and stretches into a long magnetotail on the night side. It deflects the solar\n"
@@ -1534,7 +1536,6 @@ def create_earth_exosphere_shell(center_position=(0, 0, 0)):
 # below, so the checkbox tooltip cannot keep an edge the store has moved
 # (it said "roughly 200 km" after the lower edge became ESA's row).
 earth_leo_shell_info = (
-            "SET MANUAL SCALE TO 0.003 AU TO VISUALIZE.\n\n"
             f"Low Earth Orbit (LEO) is the region from {row_text('EARTH_LEO_LOWER_ALTITUDE_KM')} km to {exact_text('EARTH_LEO_UPPER_ALTITUDE_KM', grouping=True)} km altitude\n"
             f"({EARTH_LEO_INNER_RADII:.2f} to {EARTH_LEO_OUTER_RADII:.2f} Earth radii), where satellites orbit at all inclinations.\n\n"
             "Unlike geostationary orbit, LEO satellites travel at all angles relative to the equator --\n"
@@ -1671,7 +1672,6 @@ def create_earth_leo_shell(center_position=(0, 0, 0)):
     return traces
 
 earth_geostationary_belt_info = (
-            "SET MANUAL SCALE TO 0.003 AU TO VISUALIZE.\n\n"
             "The geostationary belt (GEO) is a ring of orbital space at 42,164 km from Earth's center\n"
             "(35,786 km altitude), where satellites orbit at exactly Earth's rotation rate\n"
             "and appear stationary over a fixed point on the equator.\n\n"
@@ -1784,7 +1784,6 @@ def create_earth_geostationary_belt_shell(center_position=(0, 0, 0)):
 # Source: NASA Solar System Dynamics
 # Verified: April 2026 via Gemini fact-check
 earth_hill_sphere_info = (
-            "SET MANUAL SCALE TO AT LEAST 0.02 AU TO VISUALIZE.\n\n" 
             f"Earth's Hill Sphere (extends to about {EARTH_HILL_SPHERE_RADII:.0f} Earth radii or about {EARTH_HILL_SPHERE_KM / 1e6:.1f} million km)."
 )
 

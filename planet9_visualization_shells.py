@@ -23,6 +23,9 @@ May 27, 2026: Stage 3 info-marker standard sweep (Opus 4.7). 2 info
 May 27, 2026 (Thread 1 cleanup, Opus 4.7): hill_sphere per-shell
     sun_direction call removed -- duplicate of the unified dispatch's
     post-loop indicator. Dead import removed.
+Module updated: October 27, 2026 with Anthropic's Claude Opus 5.5 (L-492:
+    the stale "set manual scale" and "MB per frame" sentences removed
+    from the hover and info text; the opening view frames every shell).
 """
 import numpy as np
 import math
@@ -35,8 +38,6 @@ from planet_visualization_utilities import (PLANET9_RADIUS_AU, create_sphere_poi
 # Source+: radius 3-4 Earth radii (~3.7 R_E) from thermal evolution models for 5-10 Earth mass ice giant.
 # Source+: Planet Nine is hypothetical -- all values are model predictions, not confirmed observations.
 planet9_surface_info = (
-            "USE MANUAL SCALED OF 0.005 AU TO VIEW CLOSELY."
-            "4.6 MB PER FRAME FOR HTML.<br><br>"
             "The estimation of Planet Nine's radius being between 3 and 4 Earth radii, with a specific estimate of around 3.7 Earth <br>" 
             "radii (or 23,500 - 24,000 km), appears in several scientific discussions. This size estimate is often linked to the <br>" 
             "assumption that Planet Nine is likely an ice giant, similar in composition to Uranus and Neptune, but potentially a <br>" 
@@ -212,8 +213,6 @@ def create_planet9_surface_shell(center_position=(0, 0, 0)):
 # Source+: Note: 2021 refinement favors a=460 +/- 100 AU as central estimate; 600 AU remains valid for visualization.
 # Source+: Planet Nine is hypothetical -- all values are model predictions, not confirmed observations.
 planet9_hill_sphere_info = (
-            "SELECT MANUAL SCALE OF AT LEAST 8 AU TO VISUALIZE PLANET 9 CENTERED OR 800 AU HELIOCENTRIC.<br>" 
-            "1.3 MB PER FRAME FOR HTML.<br><br>"
 
             "Hill Sphere: Planet 9's Hill sphere, or Roche sphere, is the region around it where its gravitational influence dominates <br>" 
             "over the Sun's. The radius of Planet 9's Hill sphere is very large, approximately 7.6 AU."                     
@@ -232,7 +231,6 @@ def create_planet9_hill_sphere_shell(center_position=(0, 0, 0)):
         # Source+: Using perihelion distance in Hill sphere formula is more physically accurate for satellite stability.
         # Source+: Planet Nine is hypothetical -- all values are model predictions.
         'description': (
-            "SELECT MANUAL SCALE OF AT LEAST 8 AU TO VISUALIZE PLANET 9 CENTERED OR 800 AU HELIOCENTRIC.<br><br>"
             "Hill Sphere: Planet 9's Hill sphere, or Roche sphere, is the region around it where its gravitational influence dominates <br><br>" 
             "over the Sun's. The radius of Planet 9's Hill sphere is very large, approximately 7.6 AU.<br>" 
             "To arrive at the Hill sphere estimate of 7.6 AU, we made the following key assumptions about Planet Nine: <br>" 

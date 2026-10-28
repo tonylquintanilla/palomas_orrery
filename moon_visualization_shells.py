@@ -25,6 +25,9 @@ May 28, 2026: Phase 1 re-pipe (Opus 4.7). 1 live inline info marker
     change beyond factory routing. Moon outer_core dense-red case is
     handled via SHELL_CONFIGS info_border='white' override (Tony's
     two-standards: shell-color fill, white outline for reddish shells).
+Module updated: October 27, 2026 with Anthropic's Claude Opus 5.5 (L-492:
+    the stale "set manual scale" and "MB per frame" sentences removed
+    from the hover and info text; the opening view frames every shell).
 """
 import numpy as np
 import math
@@ -583,7 +586,6 @@ def create_moon_exosphere_shell(center_position=(0, 0, 0)):
 #       range. GPT and Gemini converged on method and inputs but did not publish
 #       this range. A second independent leg is still owed for V2 scoring.
 moon_hill_sphere_info = (
-            "SET MANUAL SCALE TO AT LEAST 0.001 AU TO VISUALIZE.<br><br>" 
             "The Moon's Hill sphere (also known as the Roche sphere in this context) is the region around it where its own gravity <br>" 
             "is the dominant force attracting satellites, as opposed to the much stronger gravitational pull of the Earth. If an <br>" 
             "object is outside the Moon\'s Hill sphere, it would typically end up orbiting Earth instead of the Moon.<br>" 

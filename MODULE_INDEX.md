@@ -12,7 +12,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 168  
-**Total Lines of Code (non-blank):** 134,483  
+**Total Lines of Code (non-blank):** 134,347  
 **Total Public Functions/Classes:** 1,710
 
 ## Classification Coverage
@@ -57,7 +57,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `paleoclimate_visualization_full.py` | Paleoclimate Visualization for Paloma's Orrery Phanerozoic temperature reconstruction (540 Ma - present) (1,489 lines) |
 | `paleoclimate_wet_bulb_full.py` | Paleoclimate + Wet Bulb Visualization for Paloma's Orrery Phanerozoic temperature reconstruction (540 Ma - present) with human survivability context (2,226 lines) |
 | `planet_visualization.py` | High-level planet and Sun visualization orchestration. (808 lines) |
-| `planet_visualization_utilities.py` | Shared geometry helpers and body-radius aliases. (1,117 lines) |
+| `planet_visualization_utilities.py` | Shared geometry helpers and body-radius aliases. (1,120 lines) |
 | `planetarium_apparent_magnitude.py` | Create 3D visualization for stars brighter than specified apparent magnitude. (355 lines) |
 | `planetarium_distance.py` | 3D star field pipeline for distance-based queries. (401 lines) |
 | `plot_data_report_widget.py` | Embedded report panel for star visualization results. (562 lines) |
@@ -77,21 +77,21 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `asteroid_belt_visualization_shells.py` | Asteroid Belt Visualization Module Functions for creating visualizations of asteroid belt structures in 3D plots. Includes Main Belt, Hildas, Trojans, and Greeks. Also includes helper functions for dynamic Trojan positioning based on Jupiter's location. (403 lines) |
+| `asteroid_belt_visualization_shells.py` | Asteroid Belt Visualization Module Functions for creating visualizations of asteroid belt structures in 3D plots. Includes Main Belt, Hildas, Trojans, and Greeks. Also includes helper functions for dynamic Trojan positioning based on Jupiter's location. (400 lines) |
 | `comet_visualization_shells.py` | Comet visual components for 3D orrery plots. (1,907 lines) |
-| `earth_visualization_shells.py` | Earth interior and orbital shell traces. (1,660 lines) |
-| `eris_visualization_shells.py` | Eris interior and boundary shell traces. (482 lines) |
-| `jupiter_visualization_shells.py` | Jupiter interior, ring, and magnetosphere shell traces. (897 lines) |
-| `mars_visualization_shells.py` | Mars interior and remnant field shell traces. (884 lines) |
+| `earth_visualization_shells.py` | Earth interior and orbital shell traces. (1,659 lines) |
+| `eris_visualization_shells.py` | Eris interior and boundary shell traces. (477 lines) |
+| `jupiter_visualization_shells.py` | Jupiter interior, ring, and magnetosphere shell traces. (886 lines) |
+| `mars_visualization_shells.py` | Mars interior and remnant field shell traces. (885 lines) |
 | `mercury_visualization_shells.py` | Mercury interior, exosphere, and unique feature traces. (368 lines) |
-| `moon_visualization_shells.py` | Lunar interior and exosphere shell traces. (571 lines) |
-| `neptune_visualization_shells.py` | Neptune interior, ring, and magnetosphere shell traces. (1,559 lines) |
-| `planet9_visualization_shells.py` | Hypothetical Planet 9 shell traces. (269 lines) |
-| `pluto_visualization_shells.py` | Pluto interior and atmosphere shell traces. (615 lines) |
-| `saturn_visualization_shells.py` | Saturn interior, ring, and magnetosphere shell traces. (1,088 lines) |
+| `moon_visualization_shells.py` | Lunar interior and exosphere shell traces. (573 lines) |
+| `neptune_visualization_shells.py` | Neptune interior, ring, and magnetosphere shell traces. (1,550 lines) |
+| `planet9_visualization_shells.py` | Hypothetical Planet 9 shell traces. (267 lines) |
+| `pluto_visualization_shells.py` | Pluto interior and atmosphere shell traces. (609 lines) |
+| `saturn_visualization_shells.py` | Saturn interior, ring, and magnetosphere shell traces. (1,078 lines) |
 | `solar_visualization_shells.py` | Sun interior, corona, and heliosphere shell traces. (1,645 lines) |
-| `uranus_visualization_shells.py` | Uranus interior, ring, and magnetosphere shell traces. (1,083 lines) |
-| `venus_visualization_shells.py` | Venus interior and atmosphere shell traces. (711 lines) |
+| `uranus_visualization_shells.py` | Uranus interior, ring, and magnetosphere shell traces. (1,074 lines) |
+| `venus_visualization_shells.py` | Venus interior and atmosphere shell traces. (712 lines) |
 
 ---
 
@@ -138,10 +138,10 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `exoplanet_coordinates.py` | Stellar Positioning and Coordinate Transformations (412 lines) |
 | `exoplanet_stellar_properties.py` | Stellar Properties for Exoplanet Host Stars (484 lines) |
 | `exoplanet_systems.py` | Hardcoded Exoplanet System Catalog (572 lines) |
-| `info_dictionary.py` | Descriptive text and narrative content for Paloma's Orrery. (2,059 lines) |
+| `info_dictionary.py` | Descriptive text and narrative content for Paloma's Orrery. (2,033 lines) |
 | `messier_catalog.py` | Static catalog of Messier objects and bright deep-sky objects. (406 lines) |
 | `sgr_a_star_data.py` | S-star catalog and orbital mechanics for Sagittarius A*. (590 lines) |
-| `shell_configs.py` | Shell configuration data for all celestial bodies. (2,624 lines) |
+| `shell_configs.py` | Shell configuration data for all celestial bodies. (2,563 lines) |
 | `spacecraft_encounters.py` | Tagged encounter data for spacecraft missions in Paloma's Orrery. (1,298 lines) |
 | `star_notes.py` | Curated hover text annotations for notable stars. (1,158 lines) |
 | `star_properties.py` | SIMBAD stellar property queries with local caching. (340 lines) |

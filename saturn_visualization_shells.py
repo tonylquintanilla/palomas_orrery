@@ -23,6 +23,9 @@ May 27, 2026: Stage 3 info-marker standard sweep + Sun Direction cleanup
     previously all rings shared one degenerate X-axis-rotated marker);
     2 dormant sun_direction calls removed (upper_atmosphere, hill_sphere
     -- v9 Residual Cleanup item 1); dead import removed.
+Module updated: October 27, 2026 with Anthropic's Claude Opus 5.5 (L-492:
+    the stale "set manual scale" and "MB per frame" sentences removed
+    from the hover and info text; the opening view frames every shell).
 """
 import numpy as np
 import math
@@ -36,7 +39,6 @@ from idealized_orbits import orient_to_planet_pole  # N15: pole-vector ring orie
 # Source: NASA Saturn Fact Sheet; Mankovich & Fuller (2021, Nature Astronomy);
 # Source+: fuzzy core to ~60% R, ~17 Earth masses rock/ice (~55 total with H/He), ~11,700-12,000 K confirmed.
 saturn_core_info = (
-            "2.4 MB PER FRAME FOR HTML.<br><br>"
             "Saturn likely has a dense core composed of metallic elements like iron and nickel, surrounded by rocky material and <br>" 
             "other compounds solidified by immense pressure and heat. This core is estimated to be about 10 to 15 times the mass <br>" 
             "of Earth. It's smaller relative to the planet's overall size compared to Jupiter's core."
@@ -122,7 +124,6 @@ def create_saturn_core_shell(center_position=(0, 0, 0)):
     return traces
 
 saturn_metallic_hydrogen_info = (
-            "2.1 MB PER FRAME FOR HTML.<br><br>"
             "Surrounding the core is a thick layer of liquid metallic hydrogen, similar to Jupiter. Above this is a layer of liquid <br>" 
             "hydrogen and helium, which gradually transitions to a gaseous atmosphere with increasing altitude. Due to lower pressure <br>" 
             "and a smaller metallic hydrogen zone, Saturn's magnetic field is weaker than Jupiter's."
@@ -199,7 +200,6 @@ def create_saturn_metallic_hydrogen_shell(center_position=(0, 0, 0)):
     return traces
 
 saturn_molecular_hydrogen_info = (
-            "2.5 MB PER FRAME FOR HTML.<br><br>"
             "Liquid Molecular Hydrogen Layer: Approximately 0.8 - 0.9 R to around 1.0 R, at the level where the atmosphere is <br>" 
             "considered mostly gaseous. This layer lies above the metallic hydrogen and gradually transitions into the gaseous <br>" 
             "atmosphere. The 1.0 R here is a nominal boundary often taken at the cloud tops, which are a distinct layer."
@@ -275,8 +275,6 @@ def create_saturn_molecular_hydrogen_shell(center_position=(0, 0, 0)):
 # Source: NASA Saturn Fact Sheet; Cassini Mission Results;
 # Source+: ~75% H2, ~25% He, winds 1,800 km/h, north pole hexagon, cloud deck order all confirmed.
 saturn_cloud_layer_info = (
-            "USE MANUAL SCALED OF 0.005 AU TO VIEW CLOSELY."
-            "4.6 MB PER FRAME FOR HTML.<br><br>"
             "Saturn's atmosphere is primarily hydrogen (about 75%) and helium (about 25%), with trace amounts of methane, ammonia, <br>" 
             "and water ice. Like Jupiter, it exhibits banded structures due to strong east-west winds, but these bands are much <br>" 
             "fainter and less distinct due to a hazy upper atmosphere. Saturn is one of the windiest places in the Solar System, <br>" 
@@ -482,7 +480,6 @@ def create_saturn_cloud_layer_shell(center_position=(0, 0, 0)):
     return [surface_trace, hover_trace]
 
 saturn_upper_atmosphere_info = (
-            "2.7 MB PER FRAME FOR HTML.<br><br>"
             "While the colorful cloud bands are the most visually prominent feature of Saturn, there's a significant and complex <br>" 
             "structure of gases extending far above them, each layer with its own characteristics and processes. The Cassini mission <br>" 
             "provided a wealth of information about these upper atmospheric layers."
@@ -704,7 +701,7 @@ def create_saturn_magnetosphere(center_position=(0, 0, 0), sun_position=(0, 0, 0
 
     return traces
 
-saturn_enceladus_plasma_torus_info = ("634 KB PER FRAME FOR HTML.<br><br>"
+saturn_enceladus_plasma_torus_info = (
               "Donut-shaped region of charged particles from saturn's moon Io")
 
 def create_saturn_enceladus_plasma_torus(center_position=(0, 0, 0)):
@@ -808,7 +805,6 @@ def create_saturn_enceladus_plasma_torus(center_position=(0, 0, 0)):
     return traces
 
 saturn_radiation_belts_info = (
-            "560 KB PER FRAME FOR HTML.<br><br>"
             "Zones of trapped high-energy particles in Saturn's magnetosphere"                     
 )
 
@@ -929,8 +925,6 @@ def create_saturn_radiation_belts(center_position=(0, 0, 0)):
 # Source: NASA Solar System Dynamics (SSD);
 # Source+: Hill sphere ~91 million km / ~151 Saturn radii confirmed.
 saturn_hill_sphere_info = (
-            "SELECT MANUAL SCALE OF AT LEAST 0.6 AU TO VISUALIZE.<br>" 
-            "1.3 MB PER FRAME FOR HTML.<br><br>"
 
             "Saturn: Its Hill sphere, the region around the planet where its gravity dominates over the Sun's, has a radius of <br>" 
             "approximately 91 million kilometers (about 151 Saturn radii). This is smaller than Jupiter's Hill sphere due to <br>" 
@@ -949,7 +943,6 @@ def create_saturn_hill_sphere_shell(center_position=(0, 0, 0)):
         # Source: NASA Solar System Dynamics (SSD);
         # Source+: Hill sphere ~91 million km / ~151 Saturn radii at semi-major axis confirmed.
         'description': (
-            "SET MANUAL SCALE OF AT LEAST 0.3 AU TO VISUALIZE.<br><br>"
             "Saturn: Its Hill sphere, the region around the planet where its gravity dominates over the Sun's, has a radius of <br>" 
             "approximately 91 million kilometers (about 151 Saturn radii). This is smaller than Jupiter's Hill sphere due to <br>" 
             "Saturn's lower mass. The Hill sphere is crucial for determining the maximum distance at which a moon can stably orbit <br>" 
@@ -1010,7 +1003,6 @@ def create_saturn_hill_sphere_shell(center_position=(0, 0, 0)):
     return traces
 
 saturn_ring_system_info = (
-                "22.2 MB PER FRAME FOR HTML.<br><br>"
 
                 "The main ring is reddish and composed of dust ejected from Saturn's small inner moons,<br>"
                 "Metis and Adrastea, due to high-speed impacts by micrometeoroids.<br><br>"
@@ -1228,8 +1220,6 @@ def create_saturn_ring_system(center_position=(0, 0, 0)):
 # Source: NASA Cassini Mission; Saturn Magnetosphere Overview;
 # Source+: magnetic axis tilt <0.1 deg (unique among planets), Enceladus as dominant plasma source confirmed.
 saturn_magnetosphere_info = (
-            "SELECT MANUAL SCALE OF AT LEAST 0.2 AU TO VISUALIZE.<br>"
-            "1.4 MB PER FRAME FOR HTML.<br><br>"
 
             "Saturn has a large magnetosphere, the region of space dominated by its magnetic field. Saturn's magnetic field is <br>" 
             "unique because its magnetic axis is almost perfectly aligned with its rotational axis. The magnetosphere deflects <br>" 

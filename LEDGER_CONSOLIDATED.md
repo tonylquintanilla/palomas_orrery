@@ -681,6 +681,11 @@ Module updated: October 27, 2026, evening, with Anthropic's Claude Opus
 5.5 (the talk of Oct 27 recorded: L-485, L-496, L-489, L-465, L-497;
 the Sun's slice closed, L-412 and L-434, with L-468's and L-454's Sun
 halves; L-499 and L-500 opened), built on d4ce9b7 and gallery 7a4a03a.
+Module updated: October 27, 2026, late, with Anthropic's Claude Opus 5.5
+(L-492 built: the stale manual-scale and file-size sentences out of the
+orrery's hover and info text, the extractor pins re-pinned; Tony's look
+at the Sun axis hover recorded on L-465), built on 94258f2 and gallery
+7a4a03a.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -1059,7 +1064,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-489 | Compositions: a curated view within a room, authored in the editor (gallery, the rooms) | OPEN | -- | 2026-10-27 |
 | ! | L-490 | What the website leans on outside its two repositories, for when Tony cannot work it (orrery + gallery, legacy) | OPEN | -- | 2026-10-26 |
 | ! | L-491 | The comet nucleus sizes the orrery's comet hover prints, sourced (orrery, the words a visitor reads) | OPEN | -- | 2026-10-26 |
-| ! | L-492 | The orrery's stale "manual scale" and "MB per frame" sentences come out of its hovers, as a class (orrery, the words a visitor reads) | OPEN | -- | 2026-10-26 |
+| ! | L-492 | The orrery's stale "manual scale" and "MB per frame" sentences come out of its hovers, as a class (orrery, the words a visitor reads) | OPEN | -- | 2026-10-27 |
 | ! | L-496 | The drawer's search box finds groups too, such as "comet", "planet" or "asteroid" (gallery, the drawer) | OPEN | -- | 2026-10-27 |
 | ! | L-497 | Left-aligned text in every text box (gallery, the rooms) | OPEN | -- | 2026-10-27 |
 | ! | L-498 | The master plan restamped as v37 at slice 2's close (documentation) | OPEN | -- | 2026-10-27 |
@@ -1678,7 +1683,7 @@ Tony first; then a build with the drawer check's planted breaks.
 `interactive.html` (the drawer); L-493.
 
 #### [L-492] The orrery's stale "manual scale" and "MB per frame" sentences come out of its hovers, as a class (orrery, the words a visitor reads)
-<!-- L:492 status:OPEN upd:2026-10-26 section:A flag: rice: -->
+<!-- L:492 status:OPEN upd:2026-10-27 section:A flag: rice: -->
 - **Opened 2026-10-26** from
   `documentation/COORD_stale_scale_sentences_ruling_20261026.md`
   (Claude Fable 5.1's coordination note, zero code), which asked for an
@@ -1720,7 +1725,85 @@ Tony first; then a build with the drawer check's planted breaks.
   next job after the hover, in this session if there is room, otherwise
   first thing next session." Not reached in that session; it is first
   next session.
-**Gap:** first thing next orrery session (Tony, 2026-10-27): the
+- **2026-10-27, late, built** (Claude Opus 5.5, Claude Code, no patch
+  file; built on 94258f2), with the stale Carrington comment Fable found
+  in `planet_visualization_utilities.py` deleted beside it:
+  - 227 edits across 15 files, nearly all a literal removed whole: every "SET /
+    SELECT / USE MANUAL SCALE ... TO VISUALIZE", "USE MANUAL SCALED OF
+    ... TO VIEW CLOSELY", "PLOT WITH MANUAL SCALE AT LEAST n AU", "n MB
+    PER FRAME FOR HTML" and "HTML VISUALIZATION 21.9 MB PER FRAME" line.
+    By file: info_dictionary.py 68 edits, shell_configs.py 64, jupiter
+    15, saturn 14, neptune 12, uranus 12, pluto 9, eris 8, asteroid_belt
+    7, planet9 5, earth 4, mercury 4, mars 2, venus 2, moon 1.
+  - Same class, other words, found beyond the note's grep and removed:
+    "n KB PER FRAME FOR HTML" (11 lines: shell_configs.py 5, Jupiter 2,
+    Saturn 2, Uranus 1, Neptune 1), "MANUALLY SCALE TO 0.003 AU" (Akatsuki),
+    and Pluto's "VISUALIZE PLUTO'S FULL STRUCTURE WITH SHELLS AT 0.1 AU".
+  - Split, the scale words out and the rest kept (the note's rule: keep
+    the "plot with"): Voyager 1, Voyager 2, Cassini, New Horizons,
+    Arrokoth, Galileo, JUICE, Europa-Clipper, Rosetta, BepiColombo,
+    SOHO, Solar Orbiter now open "***PLOT WITH ...***"; Mercury's
+    "do not select Mercury" kept. Five where the plot-with half was
+    offered as an alternative to the scale ("... OR SET MANUAL SCALE"),
+    kept the same way, for Tony to see: the asteroid belt's "PLOT WITH
+    JUPITER", Mercury's sodium tail "INCLUDE VENUS IN THE PLOT", Hayabusa
+    2 "PLOT WITH ASTEROID RYUGU TO SEE FULL TRAJECTORY", ATLAS "HYPERBOLIC
+    TRAJECTORY. TO VISUALIZE CURRENT POSITION PLOT OTHER OBJECTS", and
+    Apollo 11 S-IVB's "PLOT WITH THE EARTH AS CENTER AND THE MOON".
+  - Removed whole although it named something: Patroclus's and
+    Menoetius's "TO SEE JUPITER AND CLOSEST LUCY APPROACHES IN MARCH
+    2033" (the next line keeps the Lucy date); New Horizons' "TO PLOT
+    NEW HORIZONS-ARROKOTH FLYBY ON 2019-1-1" (the entry's own bullet
+    keeps the flyby date); Haumea's "SET MANUAL SCALE, NOT AUTO SCALE".
+  - Four INFO entries whose only text was the sentence are gone, so the
+    orrery's checkbox tooltip falls back to "No information available":
+    Patroclus-Menoetius Barycenter, Pluto-Charon Barycenter (with its
+    Source comment), Eris-Dysnomia Barycenter, Gonggong-Xiangliu
+    Barycenter.
+  - Consumers read first: `save_utils.py` strips "***ALL CAPS***" lines
+    from exported HTML; the kept "***PLOT WITH ...***" lines are stripped
+    there as before. `worksheet_checker.py`'s instruction pattern and
+    its test fixture are untouched, as the note asked.
+  - Checked: every string constant in the 17 files compared, HEAD
+    against the working copy, by a check that fails on a planted added
+    word and a planted removed fact (6,092 strings; 175 changed in place,
+    8 removed whole, the four keys and their values; nothing changed but
+    the class, its breaks and spaces, and one full stop). ASCII and LF;
+    every file compiles; nothing of the class left in the tree but the
+    two left alone. Three hovers built on the live path, before and
+    after: Pluto's Hill sphere through build_sphere_shell now opens on
+    its science; Venus's magnetosphere checkbox tooltip
+    (venus_magnetosphere_info) loses the sentence, its plotted hover
+    never had it; Voyager 1's checkbox tooltip opens "***PLOT WITH
+    JUPITER AND SATURN.***". The headless GUI run was not run (Windows,
+    no xvfb).
+  - The scanner, predicted by name before the run: one Tier-1 finding
+    clears, the Pluto crust entry's `tooltip` in shell_configs.py (HEAD
+    line 722), whose only claim was "0.005 AU" in the removed sentence.
+    Read: shell_configs.py 35 -> 34, whole tree 276 -> 275 (orrery 112
+    -> 111), gate path 0; 51 fewer findings in all tiers. Thirteen other
+    Tier-1 strings lost a stale number and keep a real claim; they stay.
+  - Extractor pins (`L192_extractor_pins.txt`, Tony's freeze of
+    2026-08-14) failed on the first run, as it should: nine sites'
+    instruction drops went 1 or 2 to 0, and four sites with no kept
+    claim left the corpus (mercury_hill_sphere_info,
+    mercury_magnetosphere_info, pluto_crust_info,
+    venus_magnetosphere_info). Re-pinned from the test's own REPIN
+    output, after checking its header is the frozen one byte for byte
+    and every surviving site keeps identical kept claims. The extractor
+    did not change, so EXTRACTOR_VERSION stays 2 and no issued ordinal
+    moves (they count kept claims); the key round trip passed, 52 of 52.
+  - Maintenance run on the final files: 32 of 32 gating checkers passed.
+- **2026-10-27, late, Tony on the five "or" lines** (in the Code
+  session, asked whether to keep them or remove them whole): "Keep
+  them". They stay as built.
+**Gap (replaces the one below, 2026-10-27, late):** Tony's look at three
+hovers in the orrery (Pluto's Hill sphere hover, the Venus magnetosphere
+checkbox tooltip, the Voyager 1 checkbox tooltip), then push; then DONE.
+**Gap (2026-10-27, late; superseded above):** Tony's look at three
+hovers in the orrery, and the five "or" lines kept above, then push;
+then DONE. Tony-action (decide): any of the five he wants removed whole.
+**Gap (superseded above):** first thing next orrery session (Tony, 2026-10-27): the
 agentic pre-test on a throwaway copy, one patch, the maintenance run,
 Tony's look at three hovers (a Pluto, a Venus and a spacecraft), push.
 Tony-action (decide): any line the split leaves unclear, from the list.
@@ -2669,7 +2752,14 @@ L-330.
     interactive-exhibit, which this orrery session did not load.
     Recommended: yes, in the gallery session that builds L-497's one
     text box, since the axis hover is one of the boxes it rebuilds.
-**Gap (replaces the one below, 2026-10-27, night):** Tony's look at the
+- **2026-10-27, Tony's look at the orrery's Sun axis hover**, in his run
+  record `documentation/WHERE_WE_ARE_10-27-26_0906_run_record.md`
+  (run order step 1, "Check the five bullets."): "-- correct"; pushed
+  at 94258f2 (step 3). Recorded by the L-492 session.
+**Gap (replaces the one below, 2026-10-27, late):** whether the
+website's axis hover takes the five bullets, in the gallery session
+(Tony-action (decide)); and this closes.
+**Gap (2026-10-27, night; superseded above):** Tony's look at the
 orrery's Sun axis hover (the Sun plotted with its axis). Then whether
 the website's axis hover takes the five bullets, in the gallery session
 (Tony-action (decide)); and this closes.

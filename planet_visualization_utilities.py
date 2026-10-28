@@ -75,6 +75,9 @@ Module updated: October 27, 2026 with Anthropic's Claude Opus 5.5 (L-465
 2026-10-27, every number printed from a row in constants_new.py at its
 declared count by _row_text(); the typed period and tilt, and the
 unsourced differential range, are gone.)
+Module updated: October 27, 2026 with Anthropic's Claude Opus 5.5 (L-492:
+    the rotation block's stale "Sun sidereal: Carrington (1863)" source
+    note deleted; the Sun's rows are cited in constants_new.py).
 
 Role: rendering
 Domain: orrery
@@ -547,7 +550,7 @@ def create_sun_direction_indicator_old(center_position=(0, 0, 0)):
 # Sheet (D. R. Williams, NASA GSFC). Spin sense: NSSDCA signed rotation period +
 # IAU WGCCRE prograde/retrograde W-dot convention (Archinal et al. 2018, Cel.
 # Mech. Dyn. Astron. 130:22). Giants cross-checked to Voyager 2 (Uranus: Desch
-# et al. 1986; Neptune: Lecacheux et al. 1993). Sun sidereal: Carrington (1863).
+# et al. 1986; Neptune: Lecacheux et al. 1993).
 # half_len_frac is a Mode-5 knob: axis half-length as a multiple of body radius,
 # sized to reach each body's outermost physical/field structure (Sun ~50 R_sun
 # reaches the outer corona); excludes Hill sphere by construction.

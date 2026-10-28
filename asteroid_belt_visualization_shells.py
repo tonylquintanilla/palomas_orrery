@@ -22,6 +22,9 @@ May 28, 2026: Phase 1 re-pipe (Opus 4.7). 4 live inline info markers
 May 29, 2026: Trojan L4/L5 info markers given border_color='white' for
     contrast against their reddish dot fields (Mode 5). Main belt and
     Hilda keep the factory default red border.
+Module updated: October 27, 2026 with Anthropic's Claude Opus 5.5 (L-492:
+    the stale "set manual scale" and "MB per frame" sentences removed
+    from the hover and info text; the opening view frames every shell).
 """
 
 import numpy as np
@@ -129,8 +132,6 @@ KIRKWOOD_GAPS = [
 #####################################
 
 main_belt_info = (
-    "***PLOT WITH MANUAL SCALE AT LEAST 4 AU***\n"
-    "15-25 MB PER FRAME FOR HTML.\n\n"
     "The main asteroid belt is located between Mars and Jupiter, roughly 2.2 to 3.2 AU from the Sun.\n"
     "It contains millions of rocky bodies ranging from dust particles to dwarf planet Ceres (940 km diameter).\n"
     "Despite its large number of objects, the total mass is only about 4% of the Moon's mass.\n"
@@ -245,8 +246,6 @@ def create_main_asteroid_belt(center_position=(0, 0, 0)):
 #####################################
 
 hilda_group_info = (
-    "***PLOT WITH MANUAL SCALE AT LEAST 5 AU***\n"
-    "8-12 MB PER FRAME FOR HTML.\n\n"
     "The Hilda family is a dynamical group of asteroids in a 3:2 orbital resonance with Jupiter.\n"
     "Located at approximately 3.97 AU, they orbit the Sun three times for every two Jupiter orbits.\n"
     "The group forms a distinctive triangular pattern when viewed from above, with concentrations\n"
@@ -332,8 +331,7 @@ def create_hilda_group(center_position=(0, 0, 0)):
 # Source: MPC Jupiter Trojan census; NASA Lucy mission; Marchis et al. (2006) -- Patroclus binary;
 # Gemini fact-check Apr 2026: all claims correct (Hektor ~225-250 km, Achilles first discovered 1906)
 jupiter_trojans_greeks_info = (
-    "***PLOT WITH JUPITER OR MANUAL SCALE AT LEAST 6 AU***\n"
-    "10-15 MB PER FRAME FOR HTML.\n\n"
+    "***PLOT WITH JUPITER***\n"
     "The Jupiter Trojans at the L4 Lagrange point (leading Jupiter by 60 deg) are traditionally\n"
     "called the 'Greek camp' after Greek heroes from the Iliad. This stable gravitational point\n"
     "at Jupiter's orbital distance (~5.2 AU) traps thousands of asteroids in a cloud formation.\n"
@@ -420,7 +418,6 @@ def create_jupiter_trojans_greeks(center_position=(0, 0, 0), jupiter_angle=0):
 #####################################
 
 jupiter_trojans_trojans_info = (
-    "10-15 MB PER FRAME FOR HTML.\n\n"
     "The Jupiter Trojans at the L5 Lagrange point (trailing Jupiter by 60 deg) are traditionally\n"
     "called the 'Trojan camp' after Trojan heroes from the Iliad. This stable gravitational point\n"
     "at Jupiter's orbital distance (~5.2 AU) is slightly less populated than L4. Notable members\n"

@@ -439,10 +439,87 @@ All edited files are ASCII only with LF line endings.
 **Your run order:**
 1. In the orrery, plot the Sun and hover the cross at the tip of its gold axis. Check the five bullets. -- correct
 2. In GitHub Desktop, look at the orrery change list: the 12 files above.
-3. Commit and push.
+3. Commit and push. -- 94258f2e22f7f6cf76c41fde565ba61b49bc81ab
 4. After the next Daily Run, the website's Sun room will list the NASA Sun Fact Sheet beside NASA NAIF for the period and the tilt. The export now serves that citation and the four new rows.
 
 **Tony-actions:**
-- (do) Look at the Sun's axis hover in the orrery.
-- (do) Commit and push the orrery change list.
+- (do) Look at the Sun's axis hover in the orrery. -- yes
+- (do) Commit and push the orrery change list. -- yes
 - (decide, at the gallery session) Whether the website's Sun axis hover takes the same five bullets. I recommend yes.
+
+=================================================================================
+
+**Fable:**
+
+Verifying your push at 94258f2 against the remote, and reading the new rows and the hover as they landed.
+
+Your push at 94258f2 holds up. I read the four new rows and the hover as they landed.
+
+- Each new row (the 16 degrees latitude, 25 days at the equator, 35 at the poles, the 27.28-day Carrington turn) carries a Read line quoting the sentence it came from, the same sentences I read on those two NASA pages this afternoon, so the citations are true, not just present. The two SOHO rows are marked as an agency lead with no source of its own, which is the honest status.
+- The hover prints the five bullets from the rows, with the Carrington bullet as reworded. The old "24.5-35 d" and the "1863" are gone from the hover.
+- L-410 (the fades) and L-131 (the dust cloud) are DONE, with the Oct 20 commits named.
+- Code's slip with the scanner count (seven findings appearing because a comment moved away from the table it cites) was caught by its own second run and undone; the count is back to 276. That is the maintenance run doing its job inside the session, which is the point of the direct form.
+
+One small leftover for the next orrery session: a comment line at line 550 of planet_visualization_utilities.py still reads "Sun sidereal: Carrington (1863)", the old claim, in a sources note. Harmless to a visitor, wrong on the page; one line to delete.
+
+**Next:** the orrery session for L-492 (the stale scale sentences), which Code sized at about 195 lines across fifteen files with its own pre-test. Open Code on the orrery folder and paste:
+
+```
+Read CLAUDE.md and start the session. The job is L-492 (the stale scale
+sentences), from documentation/COORD_stale_scale_sentences_ruling_20261026.md
+and the brief's session 1, step e. Also delete the stale comment "Sun
+sidereal: Carrington (1863)" near line 550 of
+planet_visualization_utilities.py, left behind by the hover build.
+```
+
+The gallery session comes after it. Its one decision is already on the table: whether the website's Sun axis hover takes the same five bullets. I'd say yes, since the website prints the same rows the orrery does now; say yes or no whenever you like and I'll put it in the brief.
+
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+**Session: OPEN: 10-27-26 2020: Opus: Code: Stale scale sentences L-492**
+
+Recording your ruling on L-492 (the stale scale sentences) and taking the question off the page.
+
+I've recorded your "Keep them", so the five "plot with" lines stay as they are now.
+
+- **The ledger:** L-492 (the stale scale sentences) quotes your words. All that's left before it closes is your look at the three hovers and the push.
+- **Where We Are:** the question is off the "Waiting on you" list, and the box notes your ruling. The page is now 126 lines above the marker, under the 130-line cap.
+- **Checks:** the ledger index rebuilt cleanly ("493 L-blocks parsed, no consistency problems"). Both files are ASCII with LF line endings.
+
+**Files changed, for your run record** (the ledger and the page change again; the rest of the list from my last report is unchanged):
+- ok LEDGER_CONSOLIDATED.md (2 more edits, then its index rebuilt; 9 this session)
+- ok documentation/WHERE_WE_ARE.md (2 more edits; 12 this session; your run-record zone untouched)
+
+**Your run order:**
+1. In the orrery, plot Pluto with its shells and hover the Hill sphere's cross. Then hover the Venus Magnetosphere checkbox and the Voyager 1 checkbox. -- seem correct. 
+2. Look at the change list in GitHub Desktop.
+3. Commit and push.
+
+**Tony-actions:**
+- (do) Look at the three hovers.
+- (do) Commit and push.
+- (decide, at the gallery session) Whether the website's Sun axis hover takes the same five bullets. I recommend yes.
+
+> **READ THIS FIRST**
+>
+> **Changed since you last read this:**
+> - The orrery's hovers and checkbox notes no longer tell you to set a
+>   manual scale or how many MB a frame takes. Every view now opens on
+>   the farthest thing drawn, so those sentences were out of date
+>   (L-492 (the stale scale sentences)). -- 
+> - Where one also said what to plot with, that half stays (your
+>   "Keep them", for the five offered instead of a scale). -- 
+> - One provenance warning cleared: the orrery's count is 111.
+> - The old Carrington (1863) note is deleted; your "correct" on the
+>   Sun's axis hover is in the ledger. -- 
+>
+> **Do next:** *your look at three hovers (below); then session 2 of
+> `COORD_next_sessions_brief_20261027.md`, the website's small builds.*
+>
+> **Needs you now:**
+> - *(do) in the orrery, look at three hovers: Pluto's Hill sphere
+>   (plot Pluto with its shells, hover the cross); the tooltip on Venus's
+>   Magnetosphere checkbox; the tooltip on the Voyager 1 checkbox.*
+> - *(do) look at the change list in GitHub Desktop; commit and push.*
+> - (do) read the plan's front page and Section 5a, if not done yet.
+> - Two papers left to try (`READING_L456_tony_20261021.md`).

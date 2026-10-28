@@ -1,29 +1,29 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 27, 2026, night: the Sun axis hover built; the fades closed.
-- Written at orrery 25e1a53 and gallery 7a4a03a.
+Last updated: October 27, 2026, late: the stale scale sentences are out.
+- Written at orrery 94258f2 and gallery 7a4a03a.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The Sun's slice is closed. Your phone looks finished it; what they
->   raised went to the website's next builds.
-> - Today's talk is in the ledger: the nightly run keeps a body's last
->   good values when a check disagrees; the search finds groups;
->   compositions are "scenes", after the Sun and Earth.
-> - The orrery's Sun axis hover is built in your five bullets, your
->   Carrington words included, every number from a sourced row.
-> - The fades and the dust cloud are closed: both halves were pushed on
->   Oct 20 (L-410 (the fades), L-131 (the dust cloud)).
-> - Code reports now follow a "How to report" section in CLAUDE.md.
+> - The orrery's hovers and checkbox notes no longer tell you to set a
+>   manual scale or how many MB a frame takes. Every view now opens on
+>   the farthest thing drawn, so those sentences were out of date
+>   (L-492 (the stale scale sentences)).
+> - Where one also said what to plot with, that half stays (your
+>   "Keep them", for the five offered instead of a scale).
+> - One provenance warning cleared: the orrery's count is 111.
+> - The old Carrington (1863) note is deleted; your "correct" on the
+>   Sun's axis hover is in the ledger.
 >
-> **Do next:** *L-492 (the stale scale sentences), first thing next
-> orrery session; then session 2 of `COORD_next_sessions_brief_20261027.md`,
-> the website's small builds.*
+> **Do next:** *your look at three hovers (below); then session 2 of
+> `COORD_next_sessions_brief_20261027.md`, the website's small builds.*
 >
 > **Needs you now:**
-> - *(do) look at the Sun's axis hover in the orrery (plot the Sun).*
+> - *(do) in the orrery, look at three hovers: Pluto's Hill sphere
+>   (plot Pluto with its shells, hover the cross); the tooltip on Venus's
+>   Magnetosphere checkbox; the tooltip on the Voyager 1 checkbox.*
 > - *(do) look at the change list in GitHub Desktop; commit and push.*
 > - (do) read the plan's front page and Section 5a, if not done yet.
 > - Two papers left to try (`READING_L456_tony_20261021.md`).
@@ -35,27 +35,27 @@ Last updated: October 27, 2026, night: the Sun axis hover built; the fades close
 In the talk's order of Oct 27 (`DESIGN_talk_20261027_rulings.md`).
   1-11.[done]  All but 5, 5b and 9: the three rooms live; typed facts
                and periods checked (Oct 14-16); the Sun's slice, closed
-               Oct 27 << new this session; the objects on the website
+               Oct 27; the objects on the website
                (L-443 (the objects)), slices 1 and 2 (Oct 22, 26).
   5.   [NOW]   *Earth's list (L-413 (Earth's list)): talks 3 to 6 with
-               the coordinating session, then their builds.* << moved
-               this session
- 5c.   [next]  Beside 5, no talk needed: the small builds, L-492
-               (stale scale sentences) first, then L-497 (one text
-               box), L-458 (report a problem), L-496 (groups).
+               the coordinating session, then their builds.*
+ 5c.   [next]  Beside 5, no talk needed: the small builds. L-492
+               (stale scale sentences) built, waiting on your look
+               << moved this session; then L-497 (one text box), L-458
+               (report a problem), L-496 (groups).
  11b.  [next]  Beside 5: the nightly run (L-485 (a nightly run)), P1
                decided; two sessions, orrery then gallery.
   5b.  [beside] Housekeeping when a session has room: L-424, L-425,
                L-426; L-423 (the website's checks) item 3, L-357.
  12.   [later] Compositions (L-489 (compositions)), after 5; first, do
-               encounters come on their own or as scenes? << moved
+               encounters come on their own or as scenes?
  13.   [later] The inner planets' rooms, from the template; Jupiter and
                Saturn follow (L-433).
  14.   [later] The Earth System layers, beside 13; cards meanwhile.
  15.   [goal]  The website does what the desktop orrery does, with a date
                to choose, within the range the data covers.
 
-## Settled  **>> UPDATED THIS SESSION**
+## Settled
 
 Standing rulings. A line leaves after a few weeks, once it is habit.
 - A night's check that disagrees: that body keeps its last confirmed
@@ -74,7 +74,7 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 - A comet from a year before perihelion to a year past today, in JPL's
   span; "hyperbolic" in plain words; the two agree or say why. (Oct 24)
 
-## Deferred  **>> UPDATED THIS SESSION**
+## Deferred
 
 Waiting behind other work; a line leaves when picked up.
 - L-462 (a shorter run): whether it stays, now the nightly run exists.
@@ -96,8 +96,8 @@ Waiting behind other work; a line leaves when picked up.
 Read from files when this page was written, not typed from memory.
 - Last cache build: 20261027T140105Z, ok, no retry (gallery 7d422e5).
 - Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, this
-  session's run on 25e1a53). Whole tree: 276: orrery 112, Earth System
-  149, stars 13, utilities 2.
+  session's run on 94258f2 plus this session's edits). Whole tree: 275:
+  orrery 111, Earth System 149, stars 13, utilities 2.
 - This page's date and the ledger's newest stamp: both Oct 27. Agree.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
@@ -118,8 +118,9 @@ Not urgent, in your order:
 - Every item: `LEDGER_CONSOLIDATED.md`.
 - *Next: session 2 of `COORD_next_sessions_brief_20261027.md`.*
 - The talk's rulings: `DESIGN_talk_20261027_rulings.md`.
-- This evening's records: the ledger's L-412, L-434, L-465, L-485,
-  L-489, L-496, L-497, L-499, L-500; tonight's, L-410, L-131, L-492.
+- Tonight's record: the ledger's L-492 (the stale scale sentences),
+  every line removed or split, by file; L-465 (the Sun's axis), your
+  look.
 - Your run records: last night's, `WHERE_WE_ARE_10-26-26_1451_run_record.md`;
   this morning's, `WHERE_WE_ARE_10-27-26_0906_run_record.md`.
 

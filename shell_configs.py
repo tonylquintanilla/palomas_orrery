@@ -97,6 +97,9 @@ Module updated: October 22, 2026 with Anthropic's Claude Opus 5.5
     (L-454, the Sun's share: CUSTOM_SHELLS['Sun'] gains
     'alfven_surface_range', the Alfven surface's two dashed circles at the
     ends of its usual range, on a checkbox of its own.)
+Module updated: October 27, 2026 with Anthropic's Claude Opus 5.5 (L-492:
+    the stale "set manual scale" and "MB per frame" sentences removed
+    from the hover and info text; the opening view frames every shell).
 """
 
 # Phase C4: Import hover text strings from body shell modules.
@@ -328,7 +331,6 @@ SHELL_CONFIGS = {
                 "cube root of (planet mass / [3 x solar mass]) to find the boundary within which the planet's gravity dominates over the Sun's."
             ),
             'tooltip': (
-                "SET MANUAL SCALE TO AT LEAST 0.005 AU TO VISUALIZE.\n\n"
                 "Hill Sphere: Every celestial body has a Hill sphere (also known as the Roche sphere), which is the region around it \n"
                 "where its gravity is the dominant gravitational force. Mercury's Hill sphere extends to about 94 Mercury radii."
             ),
@@ -521,7 +523,6 @@ SHELL_CONFIGS = {
                 "* The estimated radius of the Moon's Hill sphere is approximately 60,000 kilometers, approximately 34.53 lunar radii."
             ),
             'tooltip': (
-                "SET MANUAL SCALE TO AT LEAST 0.001 AU TO VISUALIZE.\n\n"
                 "The Moon's Hill sphere (also known as the Roche sphere in this context) is the region around it where its own gravity \n"
                 "is the dominant force attracting satellites, as opposed to the much stronger gravitational pull of the Earth. If an \n"
                 "object is outside the Moon's Hill sphere, it would typically end up orbiting Earth instead of the Moon.\n"
@@ -576,8 +577,6 @@ SHELL_CONFIGS = {
                 "<br><br><b>Rotation axis omitted:</b> hypothetical body -- no measured spin or pole."
             ),
             'tooltip': (
-                "USE MANUAL SCALED OF 0.005 AU TO VIEW CLOSELY."
-                "4.6 MB PER FRAME FOR HTML.\n\n"
                 "The estimation of Planet Nine's radius being between 3 and 4 Earth radii, with a specific estimate of around 3.7 Earth \n"
                 "radii (or 23,500 - 24,000 km), appears in several scientific discussions. This size estimate is often linked to the \n"
                 "assumption that Planet Nine is likely an ice giant, similar in composition to Uranus and Neptune, but potentially a \n"
@@ -593,7 +592,6 @@ SHELL_CONFIGS = {
             'n_points': 20,
             'marker_size': 2.0,
             'hover_text': (
-                "SELECT MANUAL SCALE OF AT LEAST 8 AU TO VISUALIZE PLANET 9 CENTERED OR 800 AU HELIOCENTRIC.<br><br>"
                 "Hill Sphere: Planet 9's Hill sphere, or Roche sphere, is the region around it where its gravitational influence dominates <br><br>"
                 "over the Sun's. The radius of Planet 9's Hill sphere is very large, approximately 7.6 AU.<br>"
                 "To arrive at the Hill sphere estimate of 7.6 AU, we made the following key assumptions about Planet Nine: <br>"
@@ -612,8 +610,6 @@ SHELL_CONFIGS = {
                 "  what the Hill sphere represents."
             ),
             'tooltip': (
-                "SELECT MANUAL SCALE OF AT LEAST 8 AU TO VISUALIZE PLANET 9 CENTERED OR 800 AU HELIOCENTRIC.\n"
-                "1.3 MB PER FRAME FOR HTML.\n\n"
                 "Hill Sphere: Planet 9's Hill sphere, or Roche sphere, is the region around it where its gravitational influence dominates \n"
                 "over the Sun's. The radius of Planet 9's Hill sphere is very large, approximately 7.6 AU."
             ),
@@ -656,7 +652,6 @@ SHELL_CONFIGS = {
                 "  the dwarf planet. "
             ),
             'tooltip': (
-                "2.4 MB PER FRAME FOR HTML.\n\n"
                 "Pluto core: Scientists believe Pluto has a dense, rocky core, likely composed of silicates and iron. The core's diameter \n" 
                 "is hypothesized to be about 1700 km, which is approximately 70% of Pluto's total diameter. Heat generated from the decay \n" 
                 "of radioactive elements within the core may still be present today."
@@ -686,7 +681,6 @@ SHELL_CONFIGS = {
                 "  kilometers."
             ),
             'tooltip': (
-                "2.1 MB PER FRAME FOR HTML.\n\n"
                 "Mantle: Surrounding the rocky core is a mantle made of water ice. There's a compelling theory that a subsurface ocean \n" 
                 "of liquid water, possibly mixed with ammonia, exists at the boundary between the core and the ice mantle. This ocean \n" 
                 "could be 100 to 180 km thick. The presence of this ocean is supported by geological features observed on Pluto's surface."
@@ -719,8 +713,6 @@ SHELL_CONFIGS = {
                 "  young (possibly less than 10 million years old)."
             ),
             'tooltip': (
-                "USE MANUAL SCALED OF 0.005 AU TO VIEW CLOSELY."
-                "4.6 MB PER FRAME FOR HTML.\n\n"
                 "Crust (Surface Layer): This is the outermost layer, composed of more volatile ices: primarily nitrogen ice, with smaller\n" 
                 "amounts of methane and carbon monoxide ice. The thickness of this layer likely varies but is estimated to be relatively \n" 
                 "thin in many regions, perhaps ranging from a few to tens of kilometers. In the deep Sputnik Planitia basin, the nitrogen \n" 
@@ -766,7 +758,6 @@ SHELL_CONFIGS = {
                 "  the distinct haze layers reach about 0.17 Pluto radii above the surface." 
             ),
             'tooltip': (
-                "2.7 MB PER FRAME FOR HTML.\n\n"
                 "Atmosphere: Pluto has a very thin atmosphere, about 1/100,000th the surface pressure of Earth's. It's primarily composed \n" 
                 "of nitrogen (N2), with smaller amounts of methane (CH4) and carbon monoxide (CO). This atmosphere is dynamic and changes \n" 
                 "with Pluto's orbit around the Sun. As Pluto moves farther away, the atmosphere freezes and falls to the surface as ice. \n" 
@@ -808,7 +799,6 @@ SHELL_CONFIGS = {
                 "If you consider the more diffuse outer limits, it could be even larger."
             ),
             'tooltip': (
-                "2.7 MB PER FRAME FOR HTML.\n\n"
                 "Atmosphere: Pluto has a very thin atmosphere, about 1/100,000th the surface pressure of Earth's. It's primarily composed \n" 
                 "of nitrogen (N2), with smaller amounts of methane (CH4) and carbon monoxide (CO). This atmosphere is dynamic and changes \n" 
                 "with Pluto's orbit around the Sun. As Pluto moves farther away, the atmosphere freezes and falls to the surface as ice. \n" 
@@ -827,7 +817,6 @@ SHELL_CONFIGS = {
             'n_points': 20,
             'marker_size': 2.0,
             'hover_text': (
-                "SET MANUAL SCALE OF AT LEAST 0.05 AU TO VISUALIZE.<br><br>"
                 "Hill Sphere: Pluto's Hill sphere, or Roche sphere, is the region around it where its gravitational influence dominates <br>" 
                 "over the Sun's. The radius of Pluto's Hill sphere is quite large, approximately 5.99 million kilometers (0.04 AU). This is <br>" 
                 "significantly larger than Earth's Hill sphere in terms of volume. Any moon orbiting Pluto within this sphere is <br>" 
@@ -835,8 +824,6 @@ SHELL_CONFIGS = {
                 "its Hill sphere."          
             ),
             'tooltip': (
-                "SELECT MANUAL SCALE OF AT LEAST 0.1 AU TO VISUALIZE.\n" 
-                "1.3 MB PER FRAME FOR HTML.\n\n"
                 "Hill Sphere: Pluto's Hill sphere, or Roche sphere, is the region around it where its gravitational influence dominates \n" 
                 "over the Sun's. The radius of Pluto's Hill sphere is quite large, approximately 5.99 million kilometers (0.04 AU). This is \n" 
                 "significantly larger than Earth's Hill sphere in terms of volume. Any moon orbiting Pluto within this sphere is \n" 
@@ -891,7 +878,6 @@ SHELL_CONFIGS = {
                 "<br><br><b>Rotation axis omitted:</b> rotation contested (possibly tidally locked to Dysnomia); pole poorly constrained."
             ),
             'tooltip': (
-                "2.4 MB PER FRAME FOR HTML.\n\n"
                 "Eris, a dwarf planet in the Kuiper Belt, has a structure that scientists have been piecing together through observations \n" 
                 "and theoretical modeling. Here's what we currently understand:\n" 
                 "Core: Eris is believed to have a rocky core. Its high bulk density (around 2.5 g/cm^3) suggests a \n" 
@@ -916,7 +902,6 @@ SHELL_CONFIGS = {
                 "ocean within Eris.<br>"
             ),
             'tooltip': (
-                "2.1 MB PER FRAME FOR HTML.\n\n"
                 "Mantle: Surrounding the rocky core is a substantial mantle made of water ice. Unlike Pluto's ice shell, Eris's ice \n" 
                 "mantle is thought to be convecting. This means that the warmer ice closer to the core rises, while the colder ice near \n" 
                 "the surface sinks, a process that helps dissipate the internal heat generated by the core. The thickness of this ice \n" 
@@ -945,8 +930,6 @@ SHELL_CONFIGS = {
                 "  transient atmosphere could have slightly altered the light scattering and thus the observed color."
             ),
             'tooltip': (
-                "USE MANUAL SCALED OF 0.005 AU TO VIEW CLOSELY."
-                "4.6 MB PER FRAME FOR HTML.\n\n"
                 "Crust: The outermost layer is a crust of frozen gases, primarily nitrogen and methane ice. Eris has a very high albedo \n" 
                 "(reflectivity), reflecting about 96% of the sunlight that hits it. This bright surface is likely due to a frost layer \n" 
                 "formed from the condensation of its atmosphere when it is far from the Sun."
@@ -986,7 +969,6 @@ SHELL_CONFIGS = {
                 "  sustained atmosphere at its current distance from the Sun."
             ),
             'tooltip': (
-                "2.7 MB PER FRAME FOR HTML.\n\n"
                 "Atmosphere: Eris has a very tenuous atmosphere that is dynamic. When Eris is at its farthest point from the Sun \n" 
                 "(aphelion), the extremely cold temperatures cause its atmosphere, likely composed of nitrogen and methane, to freeze \n" 
                 "and fall as snow onto the surface. As Eris moves closer to the Sun in its highly elliptical orbit (perihelion), the \n" 
@@ -1004,7 +986,6 @@ SHELL_CONFIGS = {
             'n_points': 20,
             'marker_size': 2.0,
             'hover_text': (
-                "SET MANUAL SCALE OF AT LEAST 0.05 AU TO VISUALIZE.<br><br>"
                 "Hill Sphere: The Hill sphere, or Roche sphere, of Eris is the region around it where its own gravity is the dominant <br>" 
                 "force attracting satellites. At Eris's average orbital distance (~67.8 AU), the Hill sphere radius is approximately <br>" 
                 "14.3 million kilometers (~0.095 AU). The shell shown here uses the perihelion distance (~38 AU), giving ~8.0 million km. <br>" 
@@ -1013,8 +994,6 @@ SHELL_CONFIGS = {
                 "  Eris radii from its center (perihelion-based)."          
             ),
             'tooltip': (
-                "SELECT MANUAL SCALE OF AT LEAST 0.1 AU TO VISUALIZE.\n" 
-                "1.3 MB PER FRAME FOR HTML.\n\n"
                 "Hill Sphere: At Eris's average orbital distance (~67.8 AU), the Hill sphere radius is approximately \n" 
                 "14.3 million kilometers (~0.095 AU). The shell shown uses the perihelion distance (~38 AU), \n" 
                 "giving ~8.0 million km. Dysnomia orbits at ~37,000 km, well within either estimate."
@@ -1168,7 +1147,6 @@ SHELL_CONFIGS = {
                 "cube root of (planet mass / [3 x solar mass]) to find the boundary within which the planet's gravity dominates over the Sun's."
             ),
             'tooltip': (
-                "SET MANUAL SCALE TO AT LEAST 0.01 AU TO VISUALIZE.\n\n" 
                 "Venus's Hill Sphere is the region where its gravitational influence is dominant over the gravitational influence of \n" 
                 "the Sun. The size of the Hill sphere depends on its mass and its distance from the Sun. Venus's Hill sphere extends \n" 
                 "to approximately 1 million kilometers from the planet. Within this sphere, Venus's gravity is the primary force \n" 
@@ -1403,7 +1381,6 @@ SHELL_CONFIGS = {
                 "cube root of (planet mass / [3 x solar mass]) to find the boundary within which the planet's gravity dominates over the Sun's."               
             ),
             'tooltip': (
-                "SET MANUAL SCALE TO AT LEAST 0.01 AU TO VISUALIZE.\n\n" 
                 "Mars's Hill Sphere (extends to ~319.2 Mars radii or about 1.08 million km), which defines the region of its \n" 
                 "gravitational influence and encompasses its two moons."
             ),
@@ -1580,7 +1557,6 @@ SHELL_CONFIGS = {
                 "<br><br>Source (radius): derived from GM_Earth (IERS Conventions 2010) and GM_Sun (IAU 2015 B3) at a = 1 AU."                  
             ),
             'tooltip': (
-                "SET MANUAL SCALE TO AT LEAST 0.02 AU TO VISUALIZE.\n\n" 
                 f"Earth's Hill Sphere (extends to about {EARTH_HILL_SPHERE_RADII:.0f} Earth radii or about {EARTH_HILL_SPHERE_KM / 1e6:.1f} million km)."
             ),
         },
@@ -1610,7 +1586,6 @@ SHELL_CONFIGS = {
                 "is estimated at about 20,000K and up to 40,000K. The color chosen approximates a black body."
             ),
             'tooltip': (
-                "2.4 MB PER FRAME FOR HTML.\n\n"
                 "Jupiter's core is believed to be a dense mixture of rock, metal, and hydrogen compounds.\n"
                 "It may be up to 10 times the mass of Earth. Recent models suggest the core might be\n"
                 "partially dissolved or 'fuzzy' rather than a distinct solid structure. Its temperature\n"
@@ -1632,7 +1607,6 @@ SHELL_CONFIGS = {
                 "Jupiter's powerful magnetic field. Temperatures in this region may reach 10,000K."
             ),
             'tooltip': (
-                "2.1 MB PER FRAME FOR HTML.\n\n"
                 "Under extreme pressure, hydrogen transitions to a metallic state in this layer.\n"
                 "It behaves like an electrical conductor and is responsible for generating\n"
                 "Jupiter's powerful magnetic field. Temperatures in this region may reach 10,000K."
@@ -1654,7 +1628,6 @@ SHELL_CONFIGS = {
                 "ranges from about 5,000K (outer) to 10,000K (inner)."
             ),
             'tooltip': (
-                "2.5 MB PER FRAME FOR HTML.\n\n"
                 "This layer consists of hydrogen in its molecular form. The transition from metallic\n"
                 "to molecular hydrogen is gradual. This layer makes up the bulk of Jupiter's mass\n"
                 "and is marked by decreasing temperature and pressure as you move outward. The temperature\n"
@@ -1679,8 +1652,6 @@ SHELL_CONFIGS = {
                 "the highest ammonia ice clouds to about 200 K in the lower ammonium hydrosulfide clouds."
             ),
             'tooltip': (
-                "USE MANUAL SCALED OF 0.005 AU TO VIEW CLOSELY."
-                "4.6 MB PER FRAME FOR HTML.\n\n"
                 "Jupiter's visible cloud layer consists of bands of different colors, caused by\n"
                 "variations in chemical composition and atmospheric dynamics. The clouds are primarily\n"
                 "composed of ammonia, ammonium hydrosulfide, and water. The famous Great Red Spot\n"
@@ -1704,7 +1675,6 @@ SHELL_CONFIGS = {
                 "ranges from 200K in the stratosphere to 1000K in the thermosphere and exosphere."
             ),
             'tooltip': (
-                "2.7 MB PER FRAME FOR HTML.\n\n"
                 "Jupiter's upper atmosphere includes the stratosphere and thermosphere.\n"
                 "It's less dense than the cloud layer below and contains hydrocarbon haze\n"
                 "produced by solar ultraviolet radiation. Aurora activity can be observed\n"
@@ -1721,7 +1691,6 @@ SHELL_CONFIGS = {
             'n_points': 20,
             'marker_size': 2.0,
             'hover_text': (
-                "SET MANUAL SCALE OF AT LEAST 0.5 AU TO VISUALIZE.<br><br>"
                 "Jupiter's Hill Sphere (extends to ~740 Jupiter radii, ~0.35 AU or ~53 million km)<br><br>"
                 "The Hill sphere is the region around a body where its own gravity is the dominant force in attracting satellites. For <br>" 
                 "a planet orbiting a star, it's the region where the planet's gravity is stronger than the star's tidal forces.<br><br>" 
@@ -1731,8 +1700,6 @@ SHELL_CONFIGS = {
                 "cube root of (planet mass / [3 x solar mass]) to find the boundary within which the planet's gravity dominates over the Sun's."            
             ),
             'tooltip': (
-                "SELECT MANUAL SCALE OF AT LEAST 0.5 AU TO VISUALIZE.\n" 
-                "1.3 MB PER FRAME FOR HTML.\n\n"
                 "Jupiter's Hill Sphere (extends to ~740 Jupiter radii, about 0.35 AU or ~53 million km)"                      
             ),
         },
@@ -2166,7 +2133,6 @@ CUSTOM_SHELLS = {
             'builder': 'mercury_visualization_shells.create_mercury_sodium_tail',
             'needs_sun_position': True,
             'tooltip': (
-                "TO VISUALIZE CLOSE UP SET MANUAL SCALE TO AT LEAST 0.002 AU TO VISUALIZE.\n"
                 "Sodium Tail: Mercury has a remarkable sodium tail. Observations place its extent in the range \n"
                 "~120 to ~1,400 Mercury radii (approximately 0.3 to 3.4 million kilometers), varying strongly \n"
                 "with orbital position and solar activity. This tail is created when sodium atoms from Mercury's exosphere \n"
@@ -2182,7 +2148,6 @@ CUSTOM_SHELLS = {
             'per_frame': True,          # Phase 4: animates via the per-frame engine
             'per_frame_opt_in': True,   # gated by the 'Animate magnetospheres' checkbox
             'tooltip': (
-                "SET MANUAL SCALE TO AT LEAST 0.002 AU TO VISUALIZE.\n\n"
                 "Magnetosphere: Mercury has a surprisingly active magnetosphere, given its small size and slow rotation. However, it is \n"
                 "significantly weaker and smaller than Earth's magnetosphere."
             ),
@@ -2215,7 +2180,6 @@ CUSTOM_SHELLS = {
             'per_frame': True,          # Phase 4: animates via the per-frame engine
             'per_frame_opt_in': True,   # gated by the 'Animate magnetospheres' checkbox
             'tooltip': (
-                "SET MANUAL SCALE TO AT LEAST 0.005 AU TO VISUALIZE.\n\n"
                 "Venus has a very weak, induced magnetosphere. Unlike Earth's magnetic field, which is generated internally by its \n"
                 "liquid iron core, Venus's weak magnetosphere is formed by the interaction of the solar wind with the planet's \n"
                 "ionosphere (the upper layer of its atmosphere containing charged particles). This induced magnetosphere is not as \n"
@@ -2252,7 +2216,6 @@ CUSTOM_SHELLS = {
             'per_frame': True,          # Phase 4: animates via the per-frame engine
             'per_frame_opt_in': True,   # gated by the 'Animate magnetospheres' checkbox
             'tooltip': (
-                "SET MANUAL SCALE TO AT LEAST 0.005 AU TO VISUALIZE.\n\n"
                 "Unlike Earth, Mars lacks a global magnetic field generated by its core. Instead, it has:\n"
                 "1. Induced Magnetosphere: Created by the interaction between the solar wind and Mars' ionosphere.\n"
                 "2. Bow Shock: Forms where the solar wind first encounters Mars' atmosphere/ionosphere (~1.64 Mars radii).\n"
@@ -2306,7 +2269,6 @@ CUSTOM_SHELLS = {
             'per_frame': True,          # Phase 4: animates via the per-frame engine
             'per_frame_opt_in': True,   # gated by the 'Animate magnetospheres' checkbox
             'tooltip': (
-                "SET MANUAL SCALE TO AT LEAST 0.01 AU TO VISUALIZE.\n\n"
                 f"Earth's magnetosphere extends about {EARTH_MAGNETOPAUSE_STANDOFF_RADII:.{figures_of('EARTH_MAGNETOPAUSE_STANDOFF_RADII')}g} Earth radii on the Sun-facing side\n"
                 "and stretches into a long magnetotail on the night side. It protects Earth\n"
                 "from solar radiation and cosmic rays, making complex life possible.\n\n"
@@ -2342,7 +2304,6 @@ CUSTOM_SHELLS = {
         'geostationary_belt': {
             'builder': 'earth_visualization_shells.create_earth_geostationary_belt_shell',
             'tooltip': (
-                "SET MANUAL SCALE TO 0.003 AU TO VISUALIZE.\n\n"
                 f"The geostationary belt (GEO) is a ring of orbital space at {EARTH_GEOSTATIONARY_RADIUS_KM:,.0f} km from Earth's center\n"
                 f"({EARTH_GEOSTATIONARY_RADIUS_KM - EARTH_EQUATORIAL_RADIUS_KM:,.0f} km altitude), where satellites orbit at exactly Earth's rotation rate\n"
                 "and appear stationary over a fixed point on the equator.\n\n"
@@ -2400,8 +2361,6 @@ CUSTOM_SHELLS = {
             'per_frame': True,          # Phase 4: animates via the per-frame engine
             'per_frame_opt_in': True,   # gated by the 'Animate magnetospheres' checkbox
             'tooltip': (
-                "SET MANUAL SCALE TO AT LEAST 0.5 AU TO VISUALIZE.\n"
-                "1.3 MB PER FRAME FOR HTML.\n\n"
                 "Jupiter's magnetosphere is the largest in the solar system, extending up to\n"
                 "~100 Jupiter radii on the sunward side and forming a magnetotail stretching\n"
                 "beyond Saturn's orbit in the opposite direction. It traps charged particles,\n"
@@ -2415,8 +2374,6 @@ CUSTOM_SHELLS = {
         'io_plasma_torus': {
             'builder': 'jupiter_visualization_shells.create_jupiter_io_plasma_torus',
             'tooltip': (
-                "SET MANUAL SCALE TO AT LEAST 0.005 AU TO VISUALIZE.\n"
-                "634 KB PER FRAME FOR HTML.\n\n"
                 "Donut-shaped region of charged particles from Jupiter's moon Io.\n"
                 "Volcanic eruptions on Io eject sulfur and oxygen ions that become trapped\n"
                 "in Jupiter's magnetic field, forming this distinctive structure at Io's\n"
@@ -2428,7 +2385,6 @@ CUSTOM_SHELLS = {
         'radiation_belts': {
             'builder': 'jupiter_visualization_shells.create_jupiter_radiation_belts',
             'tooltip': (
-                "SET MANUAL SCALE TO AT LEAST 0.005 AU TO VISUALIZE.\n\n"
                 "Jupiter has three distinct radiation belts (Inner, Middle, Outer) at\n"
                 "approximately 1.5, 3.0, and 6.0 Jupiter radii. Together they form the\n"
                 "most intense radiation environment in the solar system -- thousands of\n"
@@ -2444,7 +2400,6 @@ CUSTOM_SHELLS = {
         'ring_system': {
             'builder': 'jupiter_visualization_shells.create_jupiter_ring_system',
             'tooltip': (
-                "SET MANUAL SCALE TO AT LEAST 0.003 AU TO VISUALIZE.\n\n"
                 "Jupiter's ring system is faint and dusty, discovered by Voyager 1 in 1979.\n"
                 "It consists of four components:\n"
                 "  * Main Ring (122,500-129,000 km): bright thin ring, dust from Metis and Adrastea\n"
@@ -2501,8 +2456,6 @@ CUSTOM_SHELLS = {
             'per_frame': True,          # Phase 4: animates via the per-frame engine
             'per_frame_opt_in': True,   # gated by the 'Animate magnetospheres' checkbox
             'tooltip': (
-                "SET MANUAL SCALE TO AT LEAST 0.2 AU TO VISUALIZE.\n"
-                "1.4 MB PER FRAME FOR HTML.\n\n"
                 "Saturn has a large magnetosphere, the region of space dominated by its\n"
                 "magnetic field. Saturn's magnetic field is unique because its magnetic\n"
                 "axis is almost perfectly aligned with its rotational axis (~0 deg tilt).\n"
@@ -2519,8 +2472,6 @@ CUSTOM_SHELLS = {
         'enceladus_plasma_torus': {
             'builder': 'saturn_visualization_shells.create_saturn_enceladus_plasma_torus',
             'tooltip': (
-                "SET MANUAL SCALE TO AT LEAST 0.005 AU TO VISUALIZE.\n"
-                "634 KB PER FRAME FOR HTML.\n\n"
                 "Donut-shaped region of charged particles primarily sourced from Saturn's\n"
                 "moon Enceladus. Water vapor and icy particles vented from south-polar\n"
                 "geysers (hundreds of kg/s) are ionized by UV radiation and electron\n"
@@ -2533,7 +2484,6 @@ CUSTOM_SHELLS = {
         'radiation_belts': {
             'builder': 'saturn_visualization_shells.create_saturn_radiation_belts',
             'tooltip': (
-                "SET MANUAL SCALE TO AT LEAST 0.01 AU TO VISUALIZE.\n\n"
                 "Saturn has multiple distinct radiation belts trapped within its\n"
                 "magnetosphere. Unlike Earth's relatively simple Van Allen belt structure,\n"
                 "Saturn's belts are heavily shaped by its rings and moons, which absorb\n"
@@ -2550,8 +2500,6 @@ CUSTOM_SHELLS = {
         'ring_system': {
             'builder': 'saturn_visualization_shells.create_saturn_ring_system',
             'tooltip': (
-                "SET MANUAL SCALE TO AT LEAST 0.005 AU TO VISUALIZE.\n"
-                "22.2 MB PER FRAME FOR HTML.\n\n"
                 "Saturn's spectacular ring system is composed primarily of water ice\n"
                 "particles with some rocky debris and dust. The rings extend hundreds of\n"
                 "thousands of kilometers from the planet but are typically only about\n"
@@ -2617,8 +2565,6 @@ CUSTOM_SHELLS = {
             'per_frame': True,          # Phase 4: animates via the per-frame engine
             'per_frame_opt_in': True,   # gated by the 'Animate magnetospheres' checkbox
             'tooltip': (
-                "SET MANUAL SCALE TO AT LEAST 0.5 AU TO VISUALIZE.\n"
-                "560 KB PER FRAME FOR HTML.\n\n"
                 "Uranus's magnetosphere has the most extreme geometry of any planet:\n"
                 "the magnetic axis is tilted 60 degrees from the rotation axis, and\n"
                 "Uranus itself is tilted 97.77 degrees from its orbital plane. The\n"
@@ -2632,7 +2578,6 @@ CUSTOM_SHELLS = {
         'radiation_belts': {
             'builder': 'uranus_visualization_shells.create_uranus_radiation_belts',
             'tooltip': (
-                "560 KB PER FRAME FOR HTML.\n\n"
                 "Uranus has two main radiation belt regions (Inner and Outer) at\n"
                 "approximately 3-10 R_U. Voyager 2 (1986) measurements showed\n"
                 "Uranus's electron belts are surprisingly intense -- comparable to\n"
@@ -2648,7 +2593,6 @@ CUSTOM_SHELLS = {
         'ring_system': {
             'builder': 'uranus_visualization_shells.create_uranus_ring_system',
             'tooltip': (
-                "SET MANUAL SCALE TO AT LEAST 0.001 AU TO VISUALIZE.\n\n"
                 "Uranus has 13 known rings, discovered in 1977 via stellar\n"
                 "occultation and confirmed by Voyager 2 in 1986. The rings are\n"
                 "narrow, dark, and arranged in Uranus's near-vertical equatorial\n"
@@ -2707,8 +2651,6 @@ CUSTOM_SHELLS = {
             'per_frame': True,          # Phase 4: animates via the per-frame engine
             'per_frame_opt_in': True,   # gated by the 'Animate magnetospheres' checkbox
             'tooltip': (
-                "SET MANUAL SCALE TO AT LEAST 0.5 AU TO VISUALIZE.\n"
-                "1.0 MB PER FRAME FOR HTML.\n\n"
                 "Neptune's magnetosphere is dramatically tilted (47 degrees from\n"
                 "the rotation axis) and significantly offset (more than half a\n"
                 "Neptune radius from the planet's center). The result is an extremely\n"
@@ -2726,7 +2668,6 @@ CUSTOM_SHELLS = {
         'radiation_belts': {
             'builder': 'neptune_visualization_shells.create_neptune_radiation_belts',
             'tooltip': (
-                "560 KB PER FRAME FOR HTML.\n\n"
                 "Neptune has a complex radiation belt environment shaped by its\n"
                 "47-degree-tilted, offset magnetic field. The belts include inner\n"
                 "and outer regions plus a cusp region, with field-aligned currents\n"
@@ -2741,8 +2682,6 @@ CUSTOM_SHELLS = {
         'ring_system': {
             'builder': 'neptune_visualization_shells.create_neptune_ring_system',
             'tooltip': (
-                "SET MANUAL SCALE TO AT LEAST 0.001 AU TO VISUALIZE.\n"
-                "22.2 MB PER FRAME FOR HTML.\n\n"
                 "Neptune has 5 named rings (Galle, Le Verrier, Lassell, Arago, Adams)\n"
                 "plus diffuse outer dust. The Adams Ring is famous for its arc\n"
                 "structure -- five named arcs (Courage, Liberte, Egalite 1, Egalite 2,\n"
