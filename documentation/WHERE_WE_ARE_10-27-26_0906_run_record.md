@@ -947,13 +947,106 @@ CHECKERS -- the verdict informs the push call
 C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 
 2. In GitHub Desktop, commit and push the gallery, -- 3dc5bb3036f8b8a2f35a666fb494660dcf247e5c
-3. then the orrery.
-4. The live run, from the dashboard.
+3. then the orrery. -- eeb196588e38a0d8391b023740b16650b60e56e6
+4. The live run, from the dashboard. 
+
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 52 files from https://palomasorrery.com/
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches (the working copy is CRLF)
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+    SERVED   gallery/arrival.js                             matches the working copy
+    SERVED   gallery/nav_cluster.js                         matches the working copy
+    SERVED   gallery/solar_system_figures.js                matches the working copy
+    SERVED   gallery/solar_system_drawer.js                 matches the working copy
+    SERVED   data/objects_config.json                       matches the working copy
+    SERVED   gallery/guestbook.js                           matches the working copy
+    SERVED   data/guestbook.json                            matches the working copy
+    SERVED   data/solar-system/drawings/hills_cloud.json    matches the working copy
+    SERVED   data/solar-system/drawings/van_allen_belts.json matches the working copy
+    SERVED   data/solar-system/drawings/earth_exosphere.json matches the working copy
+    SERVED   data/solar-system/drawings/sun_corona.json     matches the working copy
+    SERVED   data/solar-system/drawings/zodiacal_dust.json  matches the working copy
+    SERVED   data/solar-system/drawings/outer_oort_cloud.json matches the working copy
+    SERVED   data/solar-system/drawings/galactic_tide.json  matches the working copy
+    SERVED   gallery/source_list.js                         matches the working copy
+    SERVED   gallery/far_lines.js                           matches the working copy
+    SERVED   gallery/direction_arrows.js                    matches the working copy
+    SERVED   gallery/drawer_order.js                        matches the working copy
+    SERVED   gallery/text_box.js                            matches the working copy
+    SERVED   data/solar-system/positions/voyager_2.json     matches the working copy
+    SERVED   data/solar-system/positions/new_horizons.json  matches the working copy
+    SERVED   data/solar-system/positions/juno.json          matches the working copy
+    SERVED   data/solar-system/positions/osiris_apex.json   matches the working copy
+    SERVED   data/solar-system/positions/parker_solar_probe.json matches the working copy
+    SERVED   data/solar-system/positions/bepicolombo.json   matches the working copy
+    SERVED   data/solar-system/positions/solar_orbiter.json matches the working copy
+    SERVED   data/solar-system/positions/lucy.json          matches the working copy
+    SERVED   data/solar-system/positions/juice.json         matches the working copy
+    SERVED   data/solar-system/positions/psyche_spacecraft.json matches the working copy
+    SERVED   data/solar-system/positions/europa_clipper.json matches the working copy
+    SERVED   data/solar-system/positions/wierzchos.json     matches the working copy
+    SERVED   data/solar-system/positions/west.json          matches the working copy
+    SERVED   data/solar-system/positions/mcnaught.json      matches the working copy
+    SERVED   data/solar-system/positions/tsuchinshan_atlas.json matches the working copy
+    SERVED   data/solar-system/positions/atlas_2024_g3.json matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1.json      matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1_b.json    matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1_c.json    matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1_d.json    matches the working copy
+    SERVED   data/solar-system/positions/panstarrs_2025_r3.json matches the working copy
+    SERVED   data/solar-system/positions/borisov_2025_v1.json matches the working copy
+    SERVED   data/solar-system/positions/oumuamua.json      matches the working copy
+    SERVED   data/solar-system/positions/borisov_2i.json    matches the working copy
+    SERVED   data/solar-system/positions/atlas_3i.json      matches the working copy
+
+  PASS Served reachability       6.3s  all 52 files served and
+                                    byte-identical to the working copy
+
+  orrery export pinned at d46f204f
+
+  PASS Export freshness          0.2s  the served export is the orrery's
+                                    at d46f204f, byte for byte
+
+  orrery HEAD eeb19658
+  examining 3 of 173 links; the other 170 are served from the export
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  3 pointers: 1 match, 0 DRIFT, 0 UNIT MISMATCH, 2 could not be examined.
+
+  PASS Store drift               2.0s  3 pointers against orrery eeb19658
+                                    -- 1 match, 0 DRIFT, 0 UNIT
+                                    MISMATCH, 2 could not be examined.
+
+======================================================================
+  2 of 2 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Store drift            3 pointers against orrery eeb19658 -- 1
+  last swap 2026-10-28T04:34:34.846429+00:00: succeeded first time
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
 On your phone:
-1. In the Sun room, tap a cross, then use Go To on the same feature.
-2. Look at the belt’s row, the axis box, the F corona’s cross and the dashes.
-3. In the Solar System room, search “comet” and choose a group; then try “planet” and “probe”.
-4. Tap “Report a problem” in an i panel.
+1. In the Sun room, tap a cross, then use Go To on the same feature. -- correct. minor issue: the triad hover is now easy to trip where it is at on the bottom right. one's thumb easily goes there. could we relocate it in the bottom center above the row label to the left of the grid label? in general can we move the hover crosses away from the most dense areas where they get lost in the glare? 
+2. Look at the belt’s row, the axis box, the F corona’s cross and the dashes. -- correct
+3. In the Solar System room, search “comet” and choose a group; then try “planet” and “probe”. -- correct
+4. Tap “Report a problem” in an i panel. -- correct. tested the read also. 
 Tony-actions:
 
 (do) The Daily Run, before you commit.

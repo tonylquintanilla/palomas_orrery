@@ -1,7 +1,7 @@
 <!-- Doc-Kind: hand | Brief from the coordinating session of Oct 26-27, 2026 (Claude Fable 5.1) to the next build sessions: the queue after the talk of Oct 27, each session's job, and the two Code files for the gallery. Supersedes the queue of the Oct 26 brief. Zero code. -->
 # Brief for the next sessions: October 27, 2026
 
-Tony Quintanilla, PE | Claude Fable 5.1 (coordinating session) | October 27, 2026, 16:10, revised 16:55, after the looks
+Tony Quintanilla, PE | Claude Fable 5.1 (coordinating session) | October 27, 2026, 16:10, revised 16:55 after the looks, and Oct 28, 00:10 after session 2
 
 Built on orrery 8268df91a4db5b5ca067830f723ce19d1e8f6b66 at
 https://github.com/tonylquintanilla/palomas_orrery (branch main) and
@@ -110,6 +110,34 @@ session in the gallery folder; section 3 below must be done first.
       beside each group label, in the store.
    The tests are the gallery maintenance run offline, then the Daily
    Run and the live run after Tony's push.
+   DONE Oct 27, 22:46 to 23:59 (Opus, Code, gallery): pushed at
+   gallery 3dc5bb3 and orrery eeb1965; Tony's phone look of 23:59, all
+   four correct, in `WHERE_WE_ARE_10-27-26_0906_run_record.md`. Items
+   L-497, L-458, L-496 and L-465 stay open until the next session
+   quotes those verdicts and closes them.
+
+**2b. Gallery follow-ups from Tony's phone look of Oct 27, 23:59.**
+One small gallery Code session, Tony's phone the judge:
+   a. The triad's tap target moves. Tony: "the triad hover is now easy
+      to trip where it is at on the bottom right. one's thumb easily
+      goes there. could we relocate it in the bottom center above the
+      row label to the left of the grid label?" Rides L-497's close.
+   b. Crosses out of the glare. Tony: "in general can we move the
+      hover crosses away from the most dense areas where they get lost
+      in the glare?" Becomes the rule on L-468 (where a cross goes):
+      off the axis lines and out of the dense, bright region near the
+      Sun. Covers the three crosses the session found still on the x
+      axis (the Hills cloud, the outer Oort cloud, the galactic tide).
+   c. Noted, not ruled: the Sun's axis box runs 33 lines on a portrait
+      phone, longer than the screen (Tony did not object); the
+      desktop's mouse hover opening the box was Code's call.
+   d. Close L-497, L-458, L-496 and L-465 on Tony's verdicts.
+
+**2c. Orrery follow-up: interactive-exhibit 1.27 -> 1.28.** Four
+sentences in the skill are wrong since the one-text-box build; L-497
+lists them. A session following them would do the wrong thing, so the
+next orrery session corrects them (one bump, with the protocol entry),
+and carries the records of 2b.
 
 **3. Earth's list (L-413): talks 3 to 6** with the coordinating
 session, then their builds. The ledger item carries the talks' order.
