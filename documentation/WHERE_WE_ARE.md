@@ -1,8 +1,8 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 27, 2026, evening: the talk's records; the Sun's slice closed.
-- Written at orrery d4ce9b7 and gallery 7a4a03a.
+Last updated: October 27, 2026, night: the Sun axis hover built; the fades closed.
+- Written at orrery 25e1a53 and gallery 7a4a03a.
 
 > **READ THIS FIRST**
 >
@@ -12,16 +12,18 @@ Last updated: October 27, 2026, evening: the talk's records; the Sun's slice clo
 > - Today's talk is in the ledger: the nightly run keeps a body's last
 >   good values when a check disagrees; the search finds groups;
 >   compositions are "scenes", after the Sun and Earth.
-> - The Sun axis hover is not built. Its Carrington bullet disagrees
->   with the NASA page it rests on, so it waits for your word.
+> - The orrery's Sun axis hover is built in your five bullets, your
+>   Carrington words included, every number from a sourced row.
+> - The fades and the dust cloud are closed: both halves were pushed on
+>   Oct 20 (L-410 (the fades), L-131 (the dust cloud)).
 > - Code reports now follow a "How to report" section in CLAUDE.md.
 >
-> **Do next:** *session 2 of `COORD_next_sessions_brief_20261027.md`:
-> the website's small builds, in Code on the gallery folder.*
+> **Do next:** *L-492 (the stale scale sentences), first thing next
+> orrery session; then session 2 of `COORD_next_sessions_brief_20261027.md`,
+> the website's small builds.*
 >
 > **Needs you now:**
-> - *(decide) the Sun axis hover's Carrington bullet and its 25-to-35
->   source (L-465 (the Sun's axis)).*
+> - *(do) look at the Sun's axis hover in the orrery (plot the Sun).*
 > - *(do) look at the change list in GitHub Desktop; commit and push.*
 > - (do) read the plan's front page and Section 5a, if not done yet.
 > - Two papers left to try (`READING_L456_tony_20261021.md`).
@@ -38,9 +40,9 @@ In the talk's order of Oct 27 (`DESIGN_talk_20261027_rulings.md`).
   5.   [NOW]   *Earth's list (L-413 (Earth's list)): talks 3 to 6 with
                the coordinating session, then their builds.* << moved
                this session
- 5c.   [next]  Beside 5, no talk needed: the small builds, L-497
-               (one text box), L-458 (report a problem), L-496 (groups
-               in the search), L-492 (stale scale sentences).
+ 5c.   [next]  Beside 5, no talk needed: the small builds, L-492
+               (stale scale sentences) first, then L-497 (one text
+               box), L-458 (report a problem), L-496 (groups).
  11b.  [next]  Beside 5: the nightly run (L-485 (a nightly run)), P1
                decided; two sessions, orrery then gallery.
   5b.  [beside] Housekeeping when a session has room: L-424, L-425,
@@ -94,17 +96,15 @@ Waiting behind other work; a line leaves when picked up.
 Read from files when this page was written, not typed from memory.
 - Last cache build: 20261027T140105Z, ok, no retry (gallery 7d422e5).
 - Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md, this
-  session's run on d4ce9b7). Whole tree: 276: orrery 112, Earth System
+  session's run on 25e1a53). Whole tree: 276: orrery 112, Earth System
   149, stars 13, utilities 2.
 - This page's date and the ledger's newest stamp: both Oct 27. Agree.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
 Decisions, one at a time:
-- The Sun axis hover (L-465 (the Sun's axis)): the Carrington bullet,
-  dropped or reworded to NASA SOHO's 27.28 days from 1853; and the
-  25-to-35 days, cited to the SOHO page or said without numbers.
-  The two findings are on the ledger item.
+- At the gallery session: whether the website's Sun axis hover takes
+  the same five bullets (L-465 (the Sun's axis)); recommended yes.
 
 At the next design talk: nothing waiting; the talk of Oct 27 settled
 every item.
@@ -119,7 +119,7 @@ Not urgent, in your order:
 - *Next: session 2 of `COORD_next_sessions_brief_20261027.md`.*
 - The talk's rulings: `DESIGN_talk_20261027_rulings.md`.
 - This evening's records: the ledger's L-412, L-434, L-465, L-485,
-  L-489, L-496, L-497, L-499, L-500.
+  L-489, L-496, L-497, L-499, L-500; tonight's, L-410, L-131, L-492.
 - Your run records: last night's, `WHERE_WE_ARE_10-26-26_1451_run_record.md`;
   this morning's, `WHERE_WE_ARE_10-27-26_0906_run_record.md`.
 

@@ -349,5 +349,100 @@ All edited files are ASCII only with LF line endings. Nothing has been committed
 
 **Tony-actions:**
 - (decide) The Carrington bullet: drop it, or reword it to the SOHO page. The box below asks this. -- please verify which source to use or correct
-- (do) Commit and push the orrery change list. -- 
+- (do) Commit and push the orrery change list. -- 25e1a530d3615bbeaef26e09510c041d186c04ff
 - (do) Read the plan's front page and Section 5a, if you haven't yet. -- yes
+
+======================================================================================
+
+orrery-coding-conventions reads 1.12, which matches the manifest. Reading it in full.
+
+orrery-coding-conventions 1.12 read in full. Now the figures reference, which provenance-discipline says to read before writing a Figures line.
+
+The figures reference is read. Checking which unit tokens exist before writing the rows.
+
+I'm adding the Sun rotation rows to `constants_new.py`, then I'll wire the hover to print from them.
+
+Continuation lines join whatever Read line came last, so I'm moving the new Read lines up beside the existing ones, so each row reads in order.
+
+I noticed the Carrington row's note relies on a year length I pulled from memory, which violates the rule against recalled figures. I'll reword it to clearly state what was actually read versus not.
+
+The rows are in and compile. Now the hover in `planet_visualization_utilities.py`.
+
+Now I'll write the hover code.
+
+Compiled. Now the smoke test on the live path. First, how the Sun's axis is actually dispatched.
+
+Both the still plot and the animation reach the same builder through `CUSTOM_SHELLS`. Running the still-plot path for the Sun and reading the hover it produces.
+
+The hover now builds correctly from the live path with all five bullets, each number pulled from its row—period shows 25.3800 at full precision, and the stray "24.5" is fixed, with the longest line at 68 characters and Earth/Mars/Uranus hovers unaffected. Next I'll check L-410 (the fades) against the repositories.
+
+Both commits (fcd191e and 7de9724) are confirmed on main from Oct 20. Now verifying the website patch actually applied and reviewing the open items around L-131 (dust cloud) and L-410.
+
+The website half also landed (commit 4778944, Oct 20), confirming L-410 closes and resolves L-131 as well, leaving only Earth's upper atmosphere/exosphere as a loose end. I'll check the anchors for that now.
+
+I'll close L-131 as well, since its Gap is the same runs and nothing else. Writing the ledger edits.
+
+I'll save L-492 (the stale scale sentences, ~195 lines across fifteen files) for next session since it needs its own pre-test rather than a rushed fit at the end. Applying the ledger edits now.
+
+Now Where We Are, section by section.
+
+Records are done. Now the maintenance run, in the background, with a wait that ends when it exits.
+
+The maintenance run is going in the background; it took about four minutes last time. The harness notifies me when it exits, and then I'll read its result line and write the file list.
+
+All 32 gating checkers passed, and the gate path is still 0. But the whole-tree Tier-1 count rose from 276 to 283, all of it in the orrery. Finding which lines were added.
+
+Seven new Tier-1 findings, all in `planet_visualization_utilities.py` (4 to 11). Reading what they are.
+
+My inserted block shifted six planets' tilts out of the scanner's citation window—no actual sourcing changed, just code position. Now checking which four findings existed before this shift.
+
+Found two issues: the docstring quoted the old numbers (which the scanner picks up), and my block's placement broke the NASA fact-sheet attribution for `PLANET_ROTATION`. I'll strip the numbers from the docstring and move my block further down so the Sun entry references it correctly.
+
+The hover is the same (five bullets; my "6" counted the title line too), and the comment sits directly above the table again. Running the maintenance run once more to confirm the count goes back.
+
+The run is going; it takes about four minutes. When it finishes I'll make two small stamp corrections. You committed my first batch mid-session (25e1a53), so tonight's work sits on that commit, not d4ce9b7.
+
+The count's back to 276 with the same four findings, and all 32 gating checkers pass with a 0 gate path. Next I'll add the two stamp corrections plus a note on L-467 (scanner window) since this session hit and fixed that issue before it landed.
+
+All three are done or placed. The Sun axis hover is built with your Carrington wording, L-410 (the fades) is closed, and L-492 (the stale scale sentences) goes first next session. The maintenance run ended with **"32 of 32 gating checkers passed -- 245.7s total"**, **"GATE PATH: 0 TIER-1 -- the push gate holds"**, and "No file's Tier-1 count rose since the previous run."
+
+**1. The Sun axis hover.** When you plot the Sun, its axis hover shows your five bullets. Every number comes from a row in the store that cites the page it was read from.
+- **Four new rows:** the 16 degrees latitude, the 25 days at the equator, the 35 days near the poles, and the 27.28-day Carrington turn. I read the NASA pages myself this evening for each one. The 25-to-35 pair is two rows, one for each end, the way the store holds other ranges.
+- **Fact sheet citations:** the NASA Sun Fact Sheet now sits beside the existing NASA NAIF citation on the rotation rate and the pole rows. No value changed.
+- **The period prints 25.3800, not your 25.38.** The skill's rule is that a number prints all six figures its row declares, and the website's hover already prints it that way.
+- **"Sources:" line:** the Carrington bullet ends with one, as the other bullets end with theirs.
+- **"1863" is gone,** along with the old typed "24.5-35 d".
+- **Other bodies:** Earth's, Mars's and Uranus's axis hovers are unchanged.
+- **The website's axis hover** doesn't have these bullets. I recommend it gets them in the gallery session that builds the one text box. That decision belongs to the gallery's skill, so it's recorded on L-465 (the Sun's axis) for that session.
+
+**One slip, caught and undone.** My first placement of the new code moved six planets' tilts out from under the NASA comment that cites them, and the scanner's whole-tree count rose from 276 to 283. Nothing had been sourced or unsourced; only the code's position had changed. I moved the block, and the next run read 276 again, with the same four findings in that file.
+
+**2. L-410 (the fades): closed.**
+- **Orrery:** commit fcd191e, Oct 20, "L410 sun fades and words".
+- **Website:** the patch was committed at 7de9724 and its result pushed at 4778944, Oct 20. The served corona and dust drawings are in the gallery at HEAD.
+- **L-131 (the dust cloud)** closed with it, because its Gap waited on the same runs.
+- **One loose end:** the fade where Earth's air thins into space now waits on L-413 (Earth's list).
+- I found no record of a separate live check. The nightly builds since Oct 20 have all swapped in ok.
+
+**3. L-492 (the stale scale sentences): first thing next session.** It touches about 195 lines in roughly fifteen files and needs its own pre-test, so I didn't start it at the end of this one.
+
+**Files changed, for your run record:**
+- ok constants_new.py (10 edits)
+- ok planet_visualization_utilities.py (8 edits)
+- ok LEDGER_CONSOLIDATED.md (15 edits, then its index rebuilt; L-410 and L-131 moved to the closed section)
+- ok documentation/WHERE_WE_ARE.md (7 edits; your run-record zone untouched)
+- written by the maintenance run: MODULE_ATLAS.md, MODULE_INDEX.md, PROVENANCE_AUDIT.md, WORKSHEET_CHECK.md, data/constants_export.json, data/provenance_history.json, documentation/prompts/citation_review.jsonl
+- your own edit, left alone: documentation/WHERE_WE_ARE_10-27-26_0906_run_record.md
+
+All edited files are ASCII only with LF line endings.
+
+**Your run order:**
+1. In the orrery, plot the Sun and hover the cross at the tip of its gold axis. Check the five bullets. -- correct
+2. In GitHub Desktop, look at the orrery change list: the 12 files above.
+3. Commit and push.
+4. After the next Daily Run, the website's Sun room will list the NASA Sun Fact Sheet beside NASA NAIF for the period and the tilt. The export now serves that citation and the four new rows.
+
+**Tony-actions:**
+- (do) Look at the Sun's axis hover in the orrery.
+- (do) Commit and push the orrery change list.
+- (decide, at the gallery session) Whether the website's Sun axis hover takes the same five bullets. I recommend yes.

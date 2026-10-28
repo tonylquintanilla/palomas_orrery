@@ -70,6 +70,11 @@ long lines.)
 Module updated: October 21, 2026 with Anthropic's Claude Opus 5.5 (L-460:
 the streamer band's default base keeps 1.0, and its comment says the
 Sun's band passes the corona's base, CORONA_BASE_RADII, instead.)
+Module updated: October 27, 2026 with Anthropic's Claude Opus 5.5 (L-465
+(a): the Sun's axis hover is five bullets in the words Tony confirmed on
+2026-10-27, every number printed from a row in constants_new.py at its
+declared count by _row_text(); the typed period and tilt, and the
+unsourced differential range, are gone.)
 
 Role: rendering
 Domain: orrery
@@ -90,6 +95,10 @@ from constants_new import (
     EARTH_DIPOLE_TILT_RATE_DEG_PER_YEAR,
     # L-322 Stage D: Earth's sidereal period, printed on the axis hover.
     EARTH_SIDEREAL_ROTATION_PERIOD_H,
+    # L-465 (a), 2026-10-27: the Sun's axis hover prints these six rows.
+    SUN_SIDEREAL_ROTATION_PERIOD_D, SUN_EQUATOR_TILT_DEG,
+    SUN_ADOPTED_PERIOD_LATITUDE_DEG, SUN_DIFFERENTIAL_ROTATION_EQUATOR_D,
+    SUN_DIFFERENTIAL_ROTATION_POLE_D, SUN_CARRINGTON_SYNODIC_PERIOD_D,
     # L-162 (2026-07-29): named directly in constants_new.py now; these
     # nine no longer derive from a CENTER_BODY_RADII lookup below.
     MERCURY_RADIUS_KM, VENUS_RADIUS_KM, MOON_RADIUS_KM, MARS_RADIUS_KM,
@@ -544,9 +553,10 @@ def create_sun_direction_indicator_old(center_position=(0, 0, 0)):
 # reaches the outer corona); excludes Hill sphere by construction.
 # ---------------------------------------------------------------------------
 PLANET_ROTATION = {
-    'Sun':     {'period_str': '25.38 d sidereal (Carrington; differential 24.5-35 d)',
-                'sense': 'prograde', 'obliquity_str': '7.25 deg to ecliptic',
-                'note': 'Differential rotation; a gaseous body has no single solid-body day.',
+    # L-465 (a), 2026-10-27: the Sun's hover is its bullets, printed from
+    # the store; the typed period, tilt and "differential 24.5-35 d" went.
+    'Sun':     {'hover_bullets': None,   # _SUN_AXIS_BULLETS, set below
+                'sense': 'prograde',
                 'half_len_frac': 50.0},
     'Mercury': {'period_str': '58.65 d (3:2 spin-orbit resonance)',
                 'sense': 'prograde', 'obliquity_str': '0.034 deg',
@@ -700,18 +710,25 @@ def build_rotation_axis_traces(center_position=(0, 0, 0), planet_name=None,
             name=legend, legendgroup=legend, showlegend=False, hoverinfo='skip'))
 
     # 4) single info marker at the north tip (hub of the spin ring)
-    obliquity_text = info['obliquity_str']
-    if planet_name == 'Earth':
-        # L-322 Stage D, patch D3: the tilt of the plot's date, or why
-        # none is shown.
-        import earth_pole_of_date
-        obliquity_text = earth_pole_of_date.tilt_hover_text()
-    hover = ('<b>%s -- Rotation Axis</b><br>'
-             'Sidereal rotation: %s<br>'
-             'Direction: %s<br>'
-             'Obliquity: %s<br>'
-             '%s') % (planet_name, info['period_str'], info['sense'],
-                      obliquity_text, info['note'])
+    if info.get('hover_bullets'):
+        # L-465 (a): a body whose hover is bullets (the Sun) prints them,
+        # one sentence group to a bullet, each wrapped.
+        hover = '<b>%s -- Rotation Axis</b><br>%s' % (
+            planet_name,
+            '<br>'.join(_hover_bullet(b) for b in info['hover_bullets']))
+    else:
+        obliquity_text = info['obliquity_str']
+        if planet_name == 'Earth':
+            # L-322 Stage D, patch D3: the tilt of the plot's date, or why
+            # none is shown.
+            import earth_pole_of_date
+            obliquity_text = earth_pole_of_date.tilt_hover_text()
+        hover = ('<b>%s -- Rotation Axis</b><br>'
+                 'Sidereal rotation: %s<br>'
+                 'Direction: %s<br>'
+                 'Obliquity: %s<br>'
+                 '%s') % (planet_name, info['period_str'], info['sense'],
+                          obliquity_text, info['note'])
     traces.append(go.Scatter3d(
         x=[p_hi[0]], y=[p_hi[1]], z=[p_hi[2]], mode='markers',
         marker=dict(size=5, color=color, symbol='cross',
@@ -750,6 +767,72 @@ _EARTH_DIPOLE_NOTE = ('The tilt is for epoch 2020.0 (IGRF-13) and is %s by '
     'decreasing' if EARTH_DIPOLE_TILT_RATE_DEG_PER_YEAR < 0 else 'increasing',
     _declared_count('EARTH_DIPOLE_TILT_RATE_DEG_PER_YEAR',
                     abs(EARTH_DIPOLE_TILT_RATE_DEG_PER_YEAR)))
+
+
+def _row_text(name, value):
+    """`value` as text at the figure count store row `name` declares,
+    trailing zeros kept: 25.3800 at six figures, not 25.38.
+
+    L-465 (a), 2026-10-27. _declared_count() below drops trailing zeros
+    ('%g'), which prints a six-figure 25.3800 as 25.38, one figure fewer
+    than the row declares (provenance-discipline, Rule 7). '%#g' keeps
+    them; the decimal point it leaves on a whole number is taken off.
+    """
+    return ('%#.*g' % (figures_of(name), value)).rstrip('.')
+
+
+def _hover_bullet(text, width=66):
+    """One bullet of an axis hover: '- ' and the text wrapped at `width`,
+    each source line its own rendered line, continued under the text."""
+    return '<br>  '.join(textwrap.wrap('- ' + text, width))
+
+
+# The Sun's five bullets, in the words Tony confirmed at the talk of
+# 2026-10-27 (documentation/DESIGN_talk_20261027_rulings.md, section 5);
+# the Carrington bullet is his rewording of that evening (L-465). Every
+# number is a row in constants_new.py, printed at its declared count.
+# Source: NASA Sun Fact Sheet,
+# Source+: https://nssdc.gsfc.nasa.gov/planetary/factsheet/sunfact.html --
+# Source+: the period, its 16 degrees and the tilt. NASA SOHO, "Differential
+# Source+: Rotation of the Sun",
+# Source+: https://soho.nascom.nasa.gov/explore/lessons/diffrot9_12.html --
+# Source+: the turn at the equator and the poles, the Carrington count's
+# Source+: 27.28 days and its start, "numbered starting with 9 November 1853".
+_SUN_AXIS_BULLETS = [
+    ('Rotation period: %s days, sidereal (measured against the stars), the '
+     'adopted period at %s degrees latitude. Source: NASA Sun Fact Sheet.') % (
+        _row_text('SUN_SIDEREAL_ROTATION_PERIOD_D',
+                  SUN_SIDEREAL_ROTATION_PERIOD_D),
+        _row_text('SUN_ADOPTED_PERIOD_LATITUDE_DEG',
+                  SUN_ADOPTED_PERIOD_LATITUDE_DEG)),
+    ('The Sun is gas, not solid, so it does not turn as one piece: about %s '
+     'days at the equator, up to %s days near the poles. This is called '
+     'differential rotation. Source: NASA SOHO, Differential Rotation of '
+     'the Sun.') % (
+        _row_text('SUN_DIFFERENTIAL_ROTATION_EQUATOR_D',
+                  SUN_DIFFERENTIAL_ROTATION_EQUATOR_D),
+        _row_text('SUN_DIFFERENTIAL_ROTATION_POLE_D',
+                  SUN_DIFFERENTIAL_ROTATION_POLE_D)),
+    ("Carrington rotation: the standard count of the Sun's turns, numbered "
+     'from November 9, 1853. One turn is %s days as sunspots are seen to '
+     'come round from Earth, which is %s days against the stars, because '
+     'Earth moves along its orbit meanwhile. Named for Richard Carrington, '
+     'who first noted that sunspots rotate. Sources: NASA SOHO, '
+     'Differential Rotation of the Sun; NASA Sun Fact Sheet.') % (
+        _row_text('SUN_CARRINGTON_SYNODIC_PERIOD_D',
+                  SUN_CARRINGTON_SYNODIC_PERIOD_D),
+        _row_text('SUN_SIDEREAL_ROTATION_PERIOD_D',
+                  SUN_SIDEREAL_ROTATION_PERIOD_D)),
+    ("Tilt: %s degrees to the ecliptic, the plane of Earth's orbit. "
+     'Source: NASA Sun Fact Sheet.') % (
+        _row_text('SUN_EQUATOR_TILT_DEG', SUN_EQUATOR_TILT_DEG),),
+    'Spin: prograde, the same way the planets go round the Sun.',
+]
+
+# Kept here, below PLANET_ROTATION rather than inside it, so the NASA
+# fact sheet comment above that table stays directly above it (L-465 (a),
+# 2026-10-27).
+PLANET_ROTATION['Sun']['hover_bullets'] = _SUN_AXIS_BULLETS
 
 
 # ---------------------------------------------------------------------------

@@ -673,6 +673,10 @@ v3.116; L-495, the dashboard's Direction Arrows button), built on
 Module updated: October 27, 2026, later, with Anthropic's Claude Opus
 5.5 (L-498 opened: the master plan restamped as v37 at slice 2's
 close), built on 7c61e7f and gallery 7d422e5.
+Module updated: October 27, 2026, night, with Anthropic's Claude Opus
+5.5 (L-465 (a) built: the orrery's Sun axis hover from the rows; L-410
+and L-131 closed on fcd191e and gallery 4778944; L-492 next), built on
+25e1a53 (Tony's commit of the evening's records) and gallery 7a4a03a.
 Module updated: October 27, 2026, evening, with Anthropic's Claude Opus
 5.5 (the talk of Oct 27 recorded: L-485, L-496, L-489, L-465, L-497;
 the Sun's slice closed, L-412 and L-434, with L-468's and L-454's Sun
@@ -894,7 +898,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*255 live items; 239 need attention (`!`); 165 RICE-scored; 238 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*253 live items; 237 need attention (`!`); 165 RICE-scored; 240 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -976,7 +980,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-070 | Food Insecurity -- regional multi-country assembly (Sudan crisis shed) | OPEN | 0.9 | 2026-10-07 |
 | ! | L-319 | Focusing a smaller shell cuts larger lit shells flat at the frame's box | OPEN | 0.7 | 2026-09-10 |
 | ! | L-128 | Comet sublimation shell(s) -- solar-distance chemistry zones | OPEN | -- | 2026-10-22 |
-| ! | L-131 | Zodiacal dust solar shell | OPEN | -- | 2026-10-20 |
 | ! | L-235 | Checks that cannot fail, gallery side [three instances] | OPEN | -- | 2026-10-08 |
 | ! | L-237 | Artifact 1's golden record is stale and needs re-cutting | OPEN | -- | 2026-10-10 |
 | ! | L-292 | Earth shells the orrery does not draw | OPEN | -- | 2026-10-08 |
@@ -1022,7 +1025,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-401 | The orrery's own distance hovers print by fixed widths, not by the errors the position earns (orrery, provenance) | OPEN | -- | 2026-10-21 |
 | ! | L-402 | Choose a date, or animate, within the range the drawn bodies are trusted for (gallery, exhibits) | OPEN | -- | 2026-10-01 |
 | ! | L-403 | Numbers in the object list's descriptions carry no source (orrery, provenance) | OPEN | -- | 2026-10-01 |
-| ! | L-410 | Fades where nature thins out: Earth's hydrogen designed, the outer corona next (orrery + gallery, the Sun and Earth) | OPEN | -- | 2026-10-20 |
 | ! | L-411 | The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-21 |
 | ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-10-27 |
 | ! | L-423 | The website's checks: the order Tony confirmed (checks, gallery) | OPEN | -- | 2026-10-16 |
@@ -1373,6 +1375,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-054 | Gate 5(b): full resolution ships, rounded -- render-confirmed | DONE | -- | 2026-06-13 |
 |  | L-055 | O14/O15 verdicts arrive with the v4 gate (comet legend churn; sodium particle count) | DONE | -- | 2026-06-17 |
 |  | L-057 | Animation auto-scale-vs-shells + Phase 3 tier decision -- CLOSED | DONE | -- | 2026-06-11 |
+|  | L-131 | Zodiacal dust solar shell | DONE | -- | 2026-10-27 |
 |  | L-223 | A paste into the ledger is an unverified transfer | DONE | -- | 2026-08-21 |
 |  | L-228 | Alfven surface latitude ranges: source them or omit them | DONE | -- | 2026-10-17 |
 |  | L-241 | Hills torus hover states the cloud bounds, not the drawn ring (DONE 2026-10-22, overtaken) | DONE | -- | 2026-10-22 |
@@ -1402,6 +1405,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-407 | A skill's header is checked as YAML (orrery, skills) | DONE | -- | 2026-10-04 |
 |  | L-408 | A Galactic Plane toggle in the Sun room (gallery, the Sun's slice) | DONE | -- | 2026-10-11 |
 |  | L-409 | The licenses: the orrery's recognized by GitHub, the website's written (orrery, gallery) | DONE | -- | 2026-10-04 |
+|  | L-410 | Fades where nature thins out: Earth's hydrogen designed, the outer corona next (orrery + gallery, the Sun and Earth) | DONE | -- | 2026-10-27 |
 |  | L-412 | The Sun's slice: the order Tony confirmed (the Sun's slice) | DONE | -- | 2026-10-27 |
 |  | L-414 | The scanner misses a Source line past its window, and scores declared rows as uncited (provenance tooling) | DONE | -- | 2026-10-10 |
 |  | L-415 | A patch writes LF and reports: safe-file-editing 1.12 (skills) | DONE | -- | 2026-10-06 |
@@ -1712,7 +1716,11 @@ Tony first; then a build with the drawer check's planted breaks.
   `save_utils.py` does with the asterisked lines it calls useful. No
   dangling breaks in a hover. The scanner's change predicted by name.
   ASCII and LF.
-**Gap:** its own small orrery session after slice 2's comets: the
+- **2026-10-27, night, Tony:** "L-492 (the stale scale sentences) is the
+  next job after the hover, in this session if there is room, otherwise
+  first thing next session." Not reached in that session; it is first
+  next session.
+**Gap:** first thing next orrery session (Tony, 2026-10-27): the
 agentic pre-test on a throwaway copy, one patch, the maintenance run,
 Tony's look at three hovers (a Pluto, a Venus and a spacecraft), push.
 Tony-action (decide): any line the split leaves unclear, from the list.
@@ -2426,6 +2434,11 @@ cloud's cross: where it goes, at the next design talk.
   (provenance-discipline, Scanner Mechanics: "Everywhere else the
   window still applies"). `constants_new.py` rows left the window at
   v2.28 (L-414).
+- **Met again 2026-10-27, night** (L-465 (a)): code inserted between
+  PLANET_ROTATION in `planet_visualization_utilities.py` and the NASA
+  fact sheet comment above it raised that file's Tier-1 from 4 to 11
+  with nothing changed in any citation; moving the code back below the
+  table restored 4. The same class, the other direction.
 **Gap:** the three lines sourced into rows or removed when the braid
 reaches that hover (L-411's typed numbers); and, for a design talk,
 whether a display string should carry its citation the way a
@@ -2599,7 +2612,68 @@ L-330.
      1.56 sin4 L) deg/day, matched no published fit found.
   The build rows checked first, as the brief asked: the period and the
   tilt already have rows (above); the pair has none.
-**Gap (replaces the one below, 2026-10-27, evening):** (a) the
+- **2026-10-27, night, Tony's word on the two findings** (in the Code
+  session, pasted): "The Carrington bullet: reword, keep it." His text:
+  "Carrington rotation: the standard count of the Sun's turns, numbered
+  from November 9, 1853. One turn is 27.28 days as sunspots are seen to
+  come round from Earth, which is 25.38 days against the stars, because
+  Earth moves along its orbit meanwhile. Named for Richard Carrington,
+  who first noted that sunspots rotate." Sources: NASA SOHO for 27.28
+  days and 1853, the NASA Sun Fact Sheet for 25.38 days; "1863" dropped.
+  The other four bullets confirmed as they stand, with the SOHO page
+  for the differential pair.
+- **2026-10-27, night, (a) built** (Claude Opus 5.5, Claude Code, no
+  patch file):
+  - `constants_new.py`: four rows, each with its Read line, read that
+    evening: SUN_ADOPTED_PERIOD_LATITUDE_DEG (16, the fact sheet),
+    SUN_DIFFERENTIAL_ROTATION_EQUATOR_D (25) and _POLE_D (35) (the SOHO
+    page), SUN_CARRINGTON_SYNODIC_PERIOD_D (27.28, the SOHO page). The
+    pair is two rows, not one, by the store's range convention (a LOW
+    and a HIGH row). Each SOHO row says in a Note that the page names
+    no source of its own and is cited on Tony's ruling. The fact sheet
+    joined the Source of SUN_ROTATION_RATE_DEG_PER_DAY (its 609.12 hours
+    at 16 degrees) and of the two pole rows (the same pole, and its
+    7.25 deg tilt), beside the IAU's. No value changed.
+  - `planet_visualization_utilities.py`: PLANET_ROTATION['Sun'] carries
+    the five bullets, every number printed from its row at its declared
+    count by `_row_text()`, which keeps trailing zeros; the typed
+    "25.38 d", "7.25 deg" and "24.5-35 d" are gone.
+    `build_rotation_axis_traces` prints a body's `hover_bullets` where
+    it has them; every other body's hover is unchanged.
+  - Two choices the rules made, for Tony to see: the period prints
+    25.3800, the row's six figures, where his words said 25.38
+    (provenance-discipline, Rule 7: a display prints the declared
+    count, as the website's hover already does); and the Carrington
+    bullet ends "Sources: NASA SOHO, Differential Rotation of the Sun;
+    NASA Sun Fact Sheet.", as the other bullets end with theirs. The
+    date the count starts is words on the hover, cited where the hover
+    is built.
+  - Checked on the live path: `create_celestial_body_visualization`
+    for the Sun builds one axis info marker with the five bullets; its
+    longest line 68 characters; no "24.5"; Earth's, Mars's and
+    Uranus's axis hovers unchanged. The headless GUI run of
+    agentic-pre-test was not run (Windows, no xvfb); the maintenance run
+    was: 32 of 32 gating checkers, gate path 0.
+  - The scanner's window, met and undone (L-467's class): the first
+    placement of the bullets sat between PLANET_ROTATION and the NASA
+    fact sheet comment above it, and the docstring note quoted the old
+    typed numbers. The whole tree's Tier-1 rose 276 to 283, all in this
+    file (4 to 11): six planets' typed tilts no longer under the comment,
+    and the docstring. Nothing had been sourced or unsourced. The block
+    moved below the table and the docstring lost the numbers; the next
+    run read 276, the same four findings in the file by name.
+  - The website's axis hover (the check the brief asked for): it prints
+    the period and the tilt from their served rows in its own approved
+    words. To carry the same five bullets it would need the four new
+    rows exported and served; that is the gallery's to decide under
+    interactive-exhibit, which this orrery session did not load.
+    Recommended: yes, in the gallery session that builds L-497's one
+    text box, since the axis hover is one of the boxes it rebuilds.
+**Gap (replaces the one below, 2026-10-27, night):** Tony's look at the
+orrery's Sun axis hover (the Sun plotted with its axis). Then whether
+the website's axis hover takes the five bullets, in the gallery session
+(Tony-action (decide)); and this closes.
+**Gap (2026-10-27, evening; superseded above):** (a) the
 orrery's Sun axis hover printing from the rows, after Tony's word on
 the two findings above: Tony-action (decide), the Carrington bullet
 (dropped, or reworded to what the SOHO page says) and the citation
@@ -3812,245 +3886,6 @@ gallery `data/objects_config.json`.
 
 
 
-#### [L-410] Fades where nature thins out: Earth's hydrogen designed, the outer corona next (orrery + gallery, the Sun and Earth)
-<!-- L:410 status:OPEN upd:2026-10-20 section:A flag: rice: -->
-- **Tony's idea, 2026-10-04**, deciding where the Roche limit is drawn:
-  "What if we draw fuzzy boundaries instead of shells". It is Show the
-  Envelope of the Unknowable as a drawing.
-- **Where it fits.** An edge given as a sourced range becomes a band
-  that fades between the two rows: the inner corona (2-3 solar radii),
-  each Oort edge (L-371's range rows). An edge with no edge at all --
-  the outer corona -- fades by a declared rate, said on its card, as
-  the streamer band already does. A single measured crossing (the
-  termination shock, the heliopause) stays a sharp shell.
-- **The Roche limit needs a source first:** a published range of comet
-  densities. The 2.7 to 4.3 solar radii in the session's chat was
-  arithmetic on a guessed factor of two, not a source.
-- **Order (Tony, 2026-10-04):** the outer corona first, designed WITH
-  the dust cloud (L-131), since its glow is that dust. It is the
-  simplest shape and the website already has the fading machinery. The
-  Oort edges are the biggest payoff after it. Written twice -- Python
-  and JavaScript -- and checked on the phone.
-- **Until then:** the Roche limit stays drawn at 3.45 (L-371, option B),
-  and L-241's torus wording waits for this design.
-- **Tony, 2026-10-05:** "the exosphere would be another good candidate
-  for a fuzzy boundary" -- Earth's geocorona, drawn as a sharp shell at
-  its detection floor of 100 Earth radii (L-292), has no edge at all.
-- **Tony, 2026-10-10, in his run record** (`documentation/WHERE_WE_ARE_10-10-26_2019_run_record.md` at 6fc3648): "before we close the
-  sun and earth rooms, i would like to implement fuzzy boundaries."
-  So this item belongs to finishing those two rooms (L-433).
-- **Tony, 2026-10-14**, in his run record
-  (`documentation/WHERE_WE_ARE_10-14-26_2250_run_record.md`, at 2b0e54c),
-  beside "The fuzzy outer corona, with the dust cloud; the exosphere the
-  same way": "in general we should implement fuzzy boundaries where they
-  are meaningful." Confirmed in chat the same night: "yes". So the design
-  talk takes up the rule, not only the corona and the exosphere: which
-  drawn edges are known only as ranges, and which of them a fade would
-  teach better than a shell.
-- **Ruled 2026-10-17, at the end of Earth's round-1 build** (design,
-  zero code). A drawn boundary is fuzzy for one of three reasons, each
-  drawn its own way. Tony: "Primarily 1. Because I don't think we
-  should illustrate uncertainty (3) with a fuzzy boundary rather with a
-  drawn choice and an explanation, and motion (2) with a second drawn
-  device like the movement cone we use for the dipole." So:
-  1. nature thins out with no edge -- a FADE (this item);
-  2. a real edge that moves -- sharp, with a drawn device for the
-     motion (L-454);
-  3. an edge known only as a range -- a drawn choice and words, as
-     today; never a fade.
-  It REPLACES this item's range idea above. Tony: "Yes it replaces the
-  range idea. Those examples still have fades." The inner corona and
-  the Oort cloud fade because nature thins there; an edge's range is
-  said in words. Edges sharp by definition stay sharp.
-- **The kind-1 list** (Tony: "This sounds right for type 1"): the inner
-  corona, the outer corona, the geocorona, the upper atmosphere into
-  the exosphere, the Oort cloud's outer reaches (partly done: the outer
-  cloud starts thin, L-421). A fade follows a measured fall-off where
-  one exists; otherwise its shape is a drawing choice and the hover
-  says so.
-- **Earth's fade, designed 2026-10-17** (Tony: "I agree. As
-  recommended"): the hydrogen as dots from 3 Earth radii, where
-  measurements start (the 600 km shell stays), to the 100 Earth radii
-  detection floor (`EARTH_GEOCORONA_RADII`; the sharp shell there goes);
-  thinning by Zoennchen et al. (2022)'s day-side profile to 15 Earth
-  radii and with the cube of distance beyond, which Baliukin et al.
-  (2019)'s densities support; drawn round, the hover saying the
-  hydrogen is measured somewhat denser along the Sun-Earth line on both
-  sides (Zoennchen et al. 2024), which the drawing does not show;
-  a stored drawing (L-434). Turning it like Mercury's sodium tail was
-  searched and declined: the measured day-night difference is tens of
-  percent, not one shape, and measured only to about 6 to 8 Earth
-  radii. Record: `documentation/DESIGN_fades_rulings_20261017.md`.
-- **The fade's rows, approved 2026-10-17** (Tony: "read and approved"),
-  after the sources were read in full: seven rows from Zoennchen et al.
-  (2022), Ann. Geophys. 40:271, eqs. 7 to 9 --
-  EARTH_EXOSPHERE_H_FIT_INNER_RADII, _FIT_OUTER_RADII, _FIT_COEFF_CM3,
-  _FIT_OFFSET_RADII, _FIT_EXPONENT, _OUTER_EXPONENT and
-  _AT_10_RADII_CM3. Each row's value, quote and locator:
-  `documentation/SOURCES_earth_fade_20261017.md`. Not yet in
-  `constants_new.py`; the fade's build writes them.
-- **Built 2026-10-17** (orrery `patch_L410_1_earth_fade_orrery_20261017.py`,
-  gallery `patch_L410_2_earth_fade_website_20261017.py`), on Tony's word
-  "yes, let's complete earth's fade":
-  - `earth_exosphere_sampler.py` places 1,500 dots from 3 to 100 Earth
-    radii, distances drawn from n(r) r^2 (eq. 7 to 15 Earth radii, then
-    eq. 9's fall from eq. 7's value there), directions even on the
-    sphere, seed 410; each dot's weight is the log of its density between
-    100 (0) and 3 (1). Its checks: every dot between the rows, five
-    shells each holding the profile's share, each weight the one its
-    distance gives. Stored as `data/drawings/earth_exosphere.json`, the
-    third stored drawing; three planted faults (8 of 8 in all).
-  - The rows: the seven approved, and an eighth, `EARTH_EXOSPHERE_H_AT_RADII`
-    (10), the distance the 35 per cubic centimetre was measured at, so the
-    hover does not type it (One Value, One Home). Three unit tokens:
-    `per_cm3`, `falloff_exponent`, `density_fit_coefficient`. The 2024
-    paper's day-night sentence joins `EARTH_EXOSPHERE_H_FIT_INNER_RADII`'s
-    Source, read at its abstract and sec. 3.2, 2.2.1 and 2.3 (What a
-    Visitor Reads, principle 4).
-  - The orrery draws the dots (`create_earth_exosphere_shell`, now a
-    custom builder; the sphere shell is gone), shaded like the belts,
-    one info marker over the pole at 100 Earth radii. The website draws
-    the same dots as a `stored_fade` shape, its hover from each edge's
-    served `hover_line`, its i panel from the served `about` and `note`
-    with their numbers filled from served rows. The served name drops
-    "detected extent". The website's drawings check judges the dots by
-    their mechanism: between the served edges, centred on Earth,
-    thinning out; three planted faults (12 of 12 in all).
-  - Words sent to Tony with a render of both zooms before the patches
-    were saved; his answer is the gate for running them.
-  - Found and fixed: the live check's list of files the browser fetches
-    lacked the belts' drawing (patch 3 of L-330); it now names both
-    Earth drawings. The orrery dashboard's Drawings Export card named
-    only the Hills cloud; it names all three.
-  - Tested: the orrery run on the patched copy, gating checkers green
-    but Horizons confirmations, which the sandbox cannot reach JPL for:
-    Tony's Earth plot of 2026-10-17 refreshed Earth's elements
-    (785536e5), so any run now re-exports Earth's period and confirms it
-    with JPL, patch or not. Whole tree 280 Tier-1 as before, gate path 0. A sandbox stand-in for
-    the Daily Run: 29 of 29 gating. Both patches applied clean, on
-    Windows line endings, and refuse a second run.
-  Record: `documentation/HANDOFF_earth_fade_build_20261017.md`.
-- **Earth's fade done, 2026-10-17,** on Tony's runs and looks (his run
-  record, `documentation/WHERE_WE_ARE_10-16-26_2116_run_record.md`, saved again that night):
-  the orrery run 31 of 31 gating, "Drawings export check" 8 of 8 planted
-  faults, the gate 0 TIER-1, pushed adcc1851; the orrery plot, "looks
-  right"; the Daily Run 29 of 29 gating, "Drawings" 12 of 12, "Typed
-  facts" 0 held open, pushed da442bf2; the live check 2 of 2, store drift
-  against orrery adcc1851 with 0 DRIFT; the Earth room on the phone,
-  "Looks good". The item stays open for the Sun's fades.
-**Gap:** the Sun's fades, the outer corona first with the
-dust cloud (L-131), in the Sun's slice (L-412), straight after the
-opening view (L-385): Tony's order, 2026-10-18, "Yes in that order".
-The range idea's
-pieces above (the Roche limit's band, L-241's torus wording) are
-re-read against the rule when the Sun's turn comes.
-- **The Sun's fades designed, 2026-10-19** (design, zero code; record
-  `documentation/SOURCES_L410_sun_corona_dust_20261019.md`, every
-  source opened that day). Tony's rulings, one at a time:
-  - Two drawings, not one. Claude had proposed one dust cloud standing
-    for the outer corona; Tony: "I thought the corona is radiation and
-    the dust cloud is dust so connected but not the same physics." So:
-    the corona is plasma, its glow sunlight scattered by free electrons
-    (the K-corona); the F-corona is sunlight scattered by dust, the
-    innermost part of the zodiacal light (Boe et al. 2021). "Yes."
-  - The inner corona and outer corona spheres become ONE plasma fade,
-    following the measured electron density, from the surface out to
-    the Alfven surface, which stays drawn. "Confirmed as recommended."
-    The 50 solar radii sphere goes.
-  - The dust is its own drawing (L-131), below.
-  - The corona's dots follow the dust's rule: place for the electron
-    density, brightness for the sunlight each receives. "Yes confirmed."
-    The density from Leblanc et al. (1998) as given by Mann et al.
-    (2023), open, covering the whole drawn range.
-  - The words, revision 1, drafted for Tony's review:
-    `documentation/WORDS_L410_sun_fades_20261019.md`.
-  - Tony asked for a Gemini prompt to cross-check the sources and find
-    the missing ones, as for Earth's (L-455):
-    `documentation/prompts/RELAY_L410_gemini_sun_fades_20261019.md`,
-    eleven citation rows and six discovery rows (forward scattering, the
-    dust's origin, the inner density exponent, one density model from
-    the surface out, the corona's temperature, where the dust's light
-    overtakes the electrons').
-  - Tony, on that prompt: "This is a good search method. Can we add it
-    to the skill?" Added as provenance-cross-check 1.1, The Slice Relay
-    (protocol v3.104).
-  - Gemini's worksheet came back the same evening (header: Gemini 3.1
-    Pro, standard tier); reviewed in
-    `documentation/REVIEW_L410_gemini_worksheet_20261019.md`. Its one
-    real find, re-opened and confirmed: the Leblanc model holds only
-    beyond about 1.8 solar radii (Zic, Vrsnak and Temmer, arXiv
-    1506.08582), so by the one-model method the corona's fade follows
-    Mann et al. (2023)'s own model, 1 to 250 solar radii. The dust's
-    origin is now sourced (Nesvorny et al. 2010); forward scattering is
-    not. Re-opening caught two papers it named under the wrong authors.
-    The words go to revision 2.
-  - **Tony's answers on the words, 2026-10-19 late** (in place in
-    `documentation/WORDS_L410_sun_fades_20261019.md`): every item yes but
-    two, discussed. On 1e, "how does the corona differ from the
-    streamer belt. this suggests they are connected": they are; the belt
-    is the part of the corona the magnetic field holds in loops. Then
-    Tony's question, "should we redraw the corona to include the
-    streamer belt as one feature rather than two", and on the
-    recommendation: "yes, with the hover explaining." So the corona is
-    ONE feature from two drawings (the fade and the streamer belt): one
-    name, one checkbox, one legend entry, switched together. Forward
-    scattering left out; the dust's origin kept; NASA's corona
-    temperature kept. Revision 3 holds the rulings and drafts for 1c,
-    1d and 1e, marked at the next session.
-**Gap (replaces the one above, 2026-10-19):** build the Sun's two fades
-as designed: the plasma corona (this item) and the dust cloud (L-131),
-each written twice, Python and JavaScript, after Tony's answers on the
-words list. Open points for the build are in the sources record's last
-section. The Roche limit's band and L-241's wording are re-read then.
-- **The Sun's two fades built, 2026-10-19 to 20** (Claude Opus 5.5;
-  record `documentation/HANDOFF_L410_sun_fades_build_20261020.md`).
-  Revision 3's three drafts were marked first ("yes, 1d confirmed";
-  the streamer belt and the Alfven surface reworded, "yes, clearer.
-  approved"); the build list in
-  `documentation/WORDS_L410_build_list_20261019.md` answered item by
-  item.
-  - The orrery, `patch_L410_5_sun_fades_orrery_20261020.py`, pushed
-    fcd191e9. The corona: 2,500 dots from the Sun's surface to the
-    Alfven surface, placed by the electron density of Mann et al.
-    (2023)'s solar wind model (`sun_corona_sampler.py`), each dot's
-    brightness the sunlight it receives. The streamer belt is drawn
-    with it: one checkbox, one legend entry, "Corona". The inner and
-    outer corona spheres are gone, with their strings. The dust cloud
-    (L-131) the same way. Eighteen rows; two stored drawings,
-    `data/drawings/sun_corona.json` and `zodiacal_dust.json`. Tony's
-    looks: "the colors and shapes look great", then "looks great".
-  - The website, `patch_L410_7_sun_fades_website_20261020.py`: the
-    stored fade drawn in solar radii and in AU as well as Earth radii,
-    the dust tilted to the ecliptic, the two corona spheres' entries
-    gone, the streamer belt switched with the corona. Its words in
-    `documentation/WORDS_L410_website_list_20261020.md`, marked by
-    Tony on 2026-10-20: the hover alone, "yes"; kilometres beside the
-    Alfven surface's distance on both sites, "yes"; the Source labels,
-    "yes", with live links wanted (L-456, L-266); the dust cloud's
-    Wikipedia link, "yes", and the corona's, "accepted" once its
-    reason was given (L-265's exception of 2026-09-02: NASA's only
-    corona page is written for children); the Roche limit's note
-    reworded to "the true limit could lie a little nearer the Sun or
-    farther out", and comet-by-comet limits recorded as L-457; ".; "
-    in joined citations, "yes, but we should do this on a priority
-    basis since the earth and sun slices are the template" (L-456).
-  - The Alfven surface's Source line now names Kasper et al. (2021)
-    with its address; its old wording held the address only where no
-    visitor reads it. Tony: "we should add this to the skill":
-    provenance-discipline 2.32.
-  - The Roche limit's band, re-read against the rule of 2026-10-17:
-    it is an edge known only as a range (kind 3), so it stays a drawn
-    choice with words; no fade. L-241's torus wording is not part of
-    this build and stays on L-241.
-**Gap (replaces the one above, 2026-10-20):** Tony's runs of the
-website half: the website patch, the Daily Run, the Sun room on the
-phone, the live check. Then L-410 and L-131 DONE. The kind-1 list's
-others (the upper atmosphere into the exosphere, the Oort cloud's outer
-reaches) wait for their rooms.
-**Ref:** L-131, L-241, L-371, L-454, L-457; `solar_visualization_shells.py`
-(`create_sun_streamer_band`, the fade to follow); gallery
-`gallery/feature_renderers.js`.
-
 
 #### [L-411] The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice)
 <!-- L:411 status:OPEN upd:2026-10-21 section:A flag: rice: -->
@@ -4689,6 +4524,10 @@ meanwhile is the field's epoch (L-356), which the hover states.
   after the Sun's close-out. Talks 3 to 6 with the coordinating
   session, then their builds: L-375 (the dipole's offset cone), L-356
   (IGRF-14), L-454's Earth pairs, L-466 (the belts' lower ends).
+- **2026-10-27, night, from L-410 at its close:** its kind-1 list's
+  "upper atmosphere into the exosphere", a fade where Earth's air thins
+  into its hydrogen, waits for this list (Earth's hydrogen itself was
+  built 2026-10-17).
 **Gap (replaces the one below, 2026-10-27, evening):** talks 3 to 6
 with the coordinating session, then their builds as above, with
 L-331's hovers in `gallery/earth_geometry.js` and the shared axis
@@ -28431,6 +28270,332 @@ served by name and drawn by the website, with the tide's phone look
 (L-412) and Tony's look.
 **Ref:** L-421; L-239; L-224; L-410; L-351 (the served-drawing contract,
 owed to interactive-exhibit); `documentation/HANDOFF_L421_oort_gallery_20261011.md`.
+
+#### [L-131] Zodiacal dust solar shell
+<!-- L:131 status:DONE upd:2026-10-27 section:C flag: rice: -->
+- **Note (2026-10-08):** RICE struck (was 2/2/50/2). This item is item 9 of L-412 (the Sun's slice),
+  and an item in an ordered list carries no score; the list's
+  order is its priority (Tony's rule of 2026-10-07, L-412).
+- **Idea (Tony, 4/17/26, pre-ledger note).** Add a solar shell for the
+  zodiacal dust cloud (interplanetary dust concentrated near the ecliptic).
+- **Cross-ref:** groups with L-128, L-136.
+- **2026-10-04, into the Sun's slice (Tony), designed with L-410.**
+  The outer corona's faint glow is sunlight scattered by this same
+  dust, so the outer corona's fuzzy edge may be where the drawing
+  hands over to the dust cloud rather than fading into nothing. The
+  cloud is flattened toward the planets' plane: a thick disk, not a
+  sphere. Tony: this "conforms to our braid principle and grouping of
+  thematic content". The Sun slice's ninth item (L-412).
+- **2026-10-04:** moved to section A; it is the Sun slice's ninth
+  item, with L-410 (L-412). Its July score was set as a loose idea; a
+  re-score is among the questions L-412 records.
+- **Designed 2026-10-19, with L-410** (record
+  `documentation/SOURCES_L410_sun_corona_dust_20261019.md`). Tony's
+  rulings:
+  - The dust is its own drawing, a stored cloud of dots: Kelsall et
+    al. (1998)'s COBE model, density falling as distance to the power
+    1.34, the widened fan shape flattened toward a midplane tilted
+    2.03 degrees. Near the Sun it thins from about 19 solar radii and
+    is gone by about 5 (Lamy et al. 2022), the dust-free zone Parker
+    Solar Probe saw signs of (Howard et al. 2019). Its hover says that
+    near the Sun this dust is seen as the F-corona.
+  - A dot's PLACE shows the dust's density; its BRIGHTNESS shows the
+    sunlight it receives, falling with the square of distance. "Confirmed
+    as recommend." The forward scattering, which depends on where the
+    viewer stands, is said in words, not drawn. Tony asked whether light
+    falls with the cube; it is the square, "Confirmed".
+  - The dots stop at 5.2 AU, where Kelsall et al.'s model stops its
+    sums: declared, the hover saying the cloud has no edge. "Confirmed."
+**Gap (replaces "not scoped", 2026-10-19):** build as designed, with
+L-410's corona fade. Open points in the sources record.
+- **Built 2026-10-19 to 20, with L-410** (record
+  `documentation/HANDOFF_L410_sun_fades_build_20261020.md`). 3,000
+  dots by Kelsall et al. (1998)'s smooth cloud
+  (`zodiacal_dust_sampler.py`), tilted 2.03 degrees with its node at
+  77.7 degrees, thinning linearly from 19 solar radii to nothing at 5,
+  stopping at 5.2 AU; brightness the sunlight each dot receives. Two
+  method choices Tony approved at the build: the linear thinning
+  between Lamy et al.'s two edges, and the cloud centred on the Sun
+  (Kelsall's small offset not drawn). The checkbox reads "Zodiacal
+  Dust Cloud (F-corona)". Orrery pushed fcd191e9; Tony: "the colors
+  and shapes look great". The website half is in the same patch as
+  L-410's.
+- **Closed 2026-10-27, night, with L-410,** on the same check of both
+  repositories: orrery fcd191e and gallery 4778944, both 2026-10-20 and
+  on main; the served `drawings/zodiacal_dust.json` at gallery 7a4a03a.
+  See L-410. Loose ends: none.
+**Gap (2026-10-27, night):** none.
+**Gap (2026-10-20; superseded above):** Tony's runs of the
+website half, with L-410's; then DONE.
+**Ref:** to_do_ideas.md (pre-ledger, 4/17/26); L-410.
+
+#### [L-410] Fades where nature thins out: Earth's hydrogen designed, the outer corona next (orrery + gallery, the Sun and Earth)
+<!-- L:410 status:DONE upd:2026-10-27 section:C flag: rice: -->
+- **Tony's idea, 2026-10-04**, deciding where the Roche limit is drawn:
+  "What if we draw fuzzy boundaries instead of shells". It is Show the
+  Envelope of the Unknowable as a drawing.
+- **Where it fits.** An edge given as a sourced range becomes a band
+  that fades between the two rows: the inner corona (2-3 solar radii),
+  each Oort edge (L-371's range rows). An edge with no edge at all --
+  the outer corona -- fades by a declared rate, said on its card, as
+  the streamer band already does. A single measured crossing (the
+  termination shock, the heliopause) stays a sharp shell.
+- **The Roche limit needs a source first:** a published range of comet
+  densities. The 2.7 to 4.3 solar radii in the session's chat was
+  arithmetic on a guessed factor of two, not a source.
+- **Order (Tony, 2026-10-04):** the outer corona first, designed WITH
+  the dust cloud (L-131), since its glow is that dust. It is the
+  simplest shape and the website already has the fading machinery. The
+  Oort edges are the biggest payoff after it. Written twice -- Python
+  and JavaScript -- and checked on the phone.
+- **Until then:** the Roche limit stays drawn at 3.45 (L-371, option B),
+  and L-241's torus wording waits for this design.
+- **Tony, 2026-10-05:** "the exosphere would be another good candidate
+  for a fuzzy boundary" -- Earth's geocorona, drawn as a sharp shell at
+  its detection floor of 100 Earth radii (L-292), has no edge at all.
+- **Tony, 2026-10-10, in his run record** (`documentation/WHERE_WE_ARE_10-10-26_2019_run_record.md` at 6fc3648): "before we close the
+  sun and earth rooms, i would like to implement fuzzy boundaries."
+  So this item belongs to finishing those two rooms (L-433).
+- **Tony, 2026-10-14**, in his run record
+  (`documentation/WHERE_WE_ARE_10-14-26_2250_run_record.md`, at 2b0e54c),
+  beside "The fuzzy outer corona, with the dust cloud; the exosphere the
+  same way": "in general we should implement fuzzy boundaries where they
+  are meaningful." Confirmed in chat the same night: "yes". So the design
+  talk takes up the rule, not only the corona and the exosphere: which
+  drawn edges are known only as ranges, and which of them a fade would
+  teach better than a shell.
+- **Ruled 2026-10-17, at the end of Earth's round-1 build** (design,
+  zero code). A drawn boundary is fuzzy for one of three reasons, each
+  drawn its own way. Tony: "Primarily 1. Because I don't think we
+  should illustrate uncertainty (3) with a fuzzy boundary rather with a
+  drawn choice and an explanation, and motion (2) with a second drawn
+  device like the movement cone we use for the dipole." So:
+  1. nature thins out with no edge -- a FADE (this item);
+  2. a real edge that moves -- sharp, with a drawn device for the
+     motion (L-454);
+  3. an edge known only as a range -- a drawn choice and words, as
+     today; never a fade.
+  It REPLACES this item's range idea above. Tony: "Yes it replaces the
+  range idea. Those examples still have fades." The inner corona and
+  the Oort cloud fade because nature thins there; an edge's range is
+  said in words. Edges sharp by definition stay sharp.
+- **The kind-1 list** (Tony: "This sounds right for type 1"): the inner
+  corona, the outer corona, the geocorona, the upper atmosphere into
+  the exosphere, the Oort cloud's outer reaches (partly done: the outer
+  cloud starts thin, L-421). A fade follows a measured fall-off where
+  one exists; otherwise its shape is a drawing choice and the hover
+  says so.
+- **Earth's fade, designed 2026-10-17** (Tony: "I agree. As
+  recommended"): the hydrogen as dots from 3 Earth radii, where
+  measurements start (the 600 km shell stays), to the 100 Earth radii
+  detection floor (`EARTH_GEOCORONA_RADII`; the sharp shell there goes);
+  thinning by Zoennchen et al. (2022)'s day-side profile to 15 Earth
+  radii and with the cube of distance beyond, which Baliukin et al.
+  (2019)'s densities support; drawn round, the hover saying the
+  hydrogen is measured somewhat denser along the Sun-Earth line on both
+  sides (Zoennchen et al. 2024), which the drawing does not show;
+  a stored drawing (L-434). Turning it like Mercury's sodium tail was
+  searched and declined: the measured day-night difference is tens of
+  percent, not one shape, and measured only to about 6 to 8 Earth
+  radii. Record: `documentation/DESIGN_fades_rulings_20261017.md`.
+- **The fade's rows, approved 2026-10-17** (Tony: "read and approved"),
+  after the sources were read in full: seven rows from Zoennchen et al.
+  (2022), Ann. Geophys. 40:271, eqs. 7 to 9 --
+  EARTH_EXOSPHERE_H_FIT_INNER_RADII, _FIT_OUTER_RADII, _FIT_COEFF_CM3,
+  _FIT_OFFSET_RADII, _FIT_EXPONENT, _OUTER_EXPONENT and
+  _AT_10_RADII_CM3. Each row's value, quote and locator:
+  `documentation/SOURCES_earth_fade_20261017.md`. Not yet in
+  `constants_new.py`; the fade's build writes them.
+- **Built 2026-10-17** (orrery `patch_L410_1_earth_fade_orrery_20261017.py`,
+  gallery `patch_L410_2_earth_fade_website_20261017.py`), on Tony's word
+  "yes, let's complete earth's fade":
+  - `earth_exosphere_sampler.py` places 1,500 dots from 3 to 100 Earth
+    radii, distances drawn from n(r) r^2 (eq. 7 to 15 Earth radii, then
+    eq. 9's fall from eq. 7's value there), directions even on the
+    sphere, seed 410; each dot's weight is the log of its density between
+    100 (0) and 3 (1). Its checks: every dot between the rows, five
+    shells each holding the profile's share, each weight the one its
+    distance gives. Stored as `data/drawings/earth_exosphere.json`, the
+    third stored drawing; three planted faults (8 of 8 in all).
+  - The rows: the seven approved, and an eighth, `EARTH_EXOSPHERE_H_AT_RADII`
+    (10), the distance the 35 per cubic centimetre was measured at, so the
+    hover does not type it (One Value, One Home). Three unit tokens:
+    `per_cm3`, `falloff_exponent`, `density_fit_coefficient`. The 2024
+    paper's day-night sentence joins `EARTH_EXOSPHERE_H_FIT_INNER_RADII`'s
+    Source, read at its abstract and sec. 3.2, 2.2.1 and 2.3 (What a
+    Visitor Reads, principle 4).
+  - The orrery draws the dots (`create_earth_exosphere_shell`, now a
+    custom builder; the sphere shell is gone), shaded like the belts,
+    one info marker over the pole at 100 Earth radii. The website draws
+    the same dots as a `stored_fade` shape, its hover from each edge's
+    served `hover_line`, its i panel from the served `about` and `note`
+    with their numbers filled from served rows. The served name drops
+    "detected extent". The website's drawings check judges the dots by
+    their mechanism: between the served edges, centred on Earth,
+    thinning out; three planted faults (12 of 12 in all).
+  - Words sent to Tony with a render of both zooms before the patches
+    were saved; his answer is the gate for running them.
+  - Found and fixed: the live check's list of files the browser fetches
+    lacked the belts' drawing (patch 3 of L-330); it now names both
+    Earth drawings. The orrery dashboard's Drawings Export card named
+    only the Hills cloud; it names all three.
+  - Tested: the orrery run on the patched copy, gating checkers green
+    but Horizons confirmations, which the sandbox cannot reach JPL for:
+    Tony's Earth plot of 2026-10-17 refreshed Earth's elements
+    (785536e5), so any run now re-exports Earth's period and confirms it
+    with JPL, patch or not. Whole tree 280 Tier-1 as before, gate path 0. A sandbox stand-in for
+    the Daily Run: 29 of 29 gating. Both patches applied clean, on
+    Windows line endings, and refuse a second run.
+  Record: `documentation/HANDOFF_earth_fade_build_20261017.md`.
+- **Earth's fade done, 2026-10-17,** on Tony's runs and looks (his run
+  record, `documentation/WHERE_WE_ARE_10-16-26_2116_run_record.md`, saved again that night):
+  the orrery run 31 of 31 gating, "Drawings export check" 8 of 8 planted
+  faults, the gate 0 TIER-1, pushed adcc1851; the orrery plot, "looks
+  right"; the Daily Run 29 of 29 gating, "Drawings" 12 of 12, "Typed
+  facts" 0 held open, pushed da442bf2; the live check 2 of 2, store drift
+  against orrery adcc1851 with 0 DRIFT; the Earth room on the phone,
+  "Looks good". The item stays open for the Sun's fades.
+**Gap:** the Sun's fades, the outer corona first with the
+dust cloud (L-131), in the Sun's slice (L-412), straight after the
+opening view (L-385): Tony's order, 2026-10-18, "Yes in that order".
+The range idea's
+pieces above (the Roche limit's band, L-241's torus wording) are
+re-read against the rule when the Sun's turn comes.
+- **The Sun's fades designed, 2026-10-19** (design, zero code; record
+  `documentation/SOURCES_L410_sun_corona_dust_20261019.md`, every
+  source opened that day). Tony's rulings, one at a time:
+  - Two drawings, not one. Claude had proposed one dust cloud standing
+    for the outer corona; Tony: "I thought the corona is radiation and
+    the dust cloud is dust so connected but not the same physics." So:
+    the corona is plasma, its glow sunlight scattered by free electrons
+    (the K-corona); the F-corona is sunlight scattered by dust, the
+    innermost part of the zodiacal light (Boe et al. 2021). "Yes."
+  - The inner corona and outer corona spheres become ONE plasma fade,
+    following the measured electron density, from the surface out to
+    the Alfven surface, which stays drawn. "Confirmed as recommended."
+    The 50 solar radii sphere goes.
+  - The dust is its own drawing (L-131), below.
+  - The corona's dots follow the dust's rule: place for the electron
+    density, brightness for the sunlight each receives. "Yes confirmed."
+    The density from Leblanc et al. (1998) as given by Mann et al.
+    (2023), open, covering the whole drawn range.
+  - The words, revision 1, drafted for Tony's review:
+    `documentation/WORDS_L410_sun_fades_20261019.md`.
+  - Tony asked for a Gemini prompt to cross-check the sources and find
+    the missing ones, as for Earth's (L-455):
+    `documentation/prompts/RELAY_L410_gemini_sun_fades_20261019.md`,
+    eleven citation rows and six discovery rows (forward scattering, the
+    dust's origin, the inner density exponent, one density model from
+    the surface out, the corona's temperature, where the dust's light
+    overtakes the electrons').
+  - Tony, on that prompt: "This is a good search method. Can we add it
+    to the skill?" Added as provenance-cross-check 1.1, The Slice Relay
+    (protocol v3.104).
+  - Gemini's worksheet came back the same evening (header: Gemini 3.1
+    Pro, standard tier); reviewed in
+    `documentation/REVIEW_L410_gemini_worksheet_20261019.md`. Its one
+    real find, re-opened and confirmed: the Leblanc model holds only
+    beyond about 1.8 solar radii (Zic, Vrsnak and Temmer, arXiv
+    1506.08582), so by the one-model method the corona's fade follows
+    Mann et al. (2023)'s own model, 1 to 250 solar radii. The dust's
+    origin is now sourced (Nesvorny et al. 2010); forward scattering is
+    not. Re-opening caught two papers it named under the wrong authors.
+    The words go to revision 2.
+  - **Tony's answers on the words, 2026-10-19 late** (in place in
+    `documentation/WORDS_L410_sun_fades_20261019.md`): every item yes but
+    two, discussed. On 1e, "how does the corona differ from the
+    streamer belt. this suggests they are connected": they are; the belt
+    is the part of the corona the magnetic field holds in loops. Then
+    Tony's question, "should we redraw the corona to include the
+    streamer belt as one feature rather than two", and on the
+    recommendation: "yes, with the hover explaining." So the corona is
+    ONE feature from two drawings (the fade and the streamer belt): one
+    name, one checkbox, one legend entry, switched together. Forward
+    scattering left out; the dust's origin kept; NASA's corona
+    temperature kept. Revision 3 holds the rulings and drafts for 1c,
+    1d and 1e, marked at the next session.
+**Gap (replaces the one above, 2026-10-19):** build the Sun's two fades
+as designed: the plasma corona (this item) and the dust cloud (L-131),
+each written twice, Python and JavaScript, after Tony's answers on the
+words list. Open points for the build are in the sources record's last
+section. The Roche limit's band and L-241's wording are re-read then.
+- **The Sun's two fades built, 2026-10-19 to 20** (Claude Opus 5.5;
+  record `documentation/HANDOFF_L410_sun_fades_build_20261020.md`).
+  Revision 3's three drafts were marked first ("yes, 1d confirmed";
+  the streamer belt and the Alfven surface reworded, "yes, clearer.
+  approved"); the build list in
+  `documentation/WORDS_L410_build_list_20261019.md` answered item by
+  item.
+  - The orrery, `patch_L410_5_sun_fades_orrery_20261020.py`, pushed
+    fcd191e9. The corona: 2,500 dots from the Sun's surface to the
+    Alfven surface, placed by the electron density of Mann et al.
+    (2023)'s solar wind model (`sun_corona_sampler.py`), each dot's
+    brightness the sunlight it receives. The streamer belt is drawn
+    with it: one checkbox, one legend entry, "Corona". The inner and
+    outer corona spheres are gone, with their strings. The dust cloud
+    (L-131) the same way. Eighteen rows; two stored drawings,
+    `data/drawings/sun_corona.json` and `zodiacal_dust.json`. Tony's
+    looks: "the colors and shapes look great", then "looks great".
+  - The website, `patch_L410_7_sun_fades_website_20261020.py`: the
+    stored fade drawn in solar radii and in AU as well as Earth radii,
+    the dust tilted to the ecliptic, the two corona spheres' entries
+    gone, the streamer belt switched with the corona. Its words in
+    `documentation/WORDS_L410_website_list_20261020.md`, marked by
+    Tony on 2026-10-20: the hover alone, "yes"; kilometres beside the
+    Alfven surface's distance on both sites, "yes"; the Source labels,
+    "yes", with live links wanted (L-456, L-266); the dust cloud's
+    Wikipedia link, "yes", and the corona's, "accepted" once its
+    reason was given (L-265's exception of 2026-09-02: NASA's only
+    corona page is written for children); the Roche limit's note
+    reworded to "the true limit could lie a little nearer the Sun or
+    farther out", and comet-by-comet limits recorded as L-457; ".; "
+    in joined citations, "yes, but we should do this on a priority
+    basis since the earth and sun slices are the template" (L-456).
+  - The Alfven surface's Source line now names Kasper et al. (2021)
+    with its address; its old wording held the address only where no
+    visitor reads it. Tony: "we should add this to the skill":
+    provenance-discipline 2.32.
+  - The Roche limit's band, re-read against the rule of 2026-10-17:
+    it is an edge known only as a range (kind 3), so it stays a drawn
+    choice with words; no fade. L-241's torus wording is not part of
+    this build and stays on L-241.
+- **2026-10-27, night: checked against both repositories, at Tony's
+  word** ("verify against the repo that it was built and pushed on
+  Oct 20, and if so close it, naming the commit"):
+  - orrery: fcd191e, 2026-10-20, "L410 sun fades and words", on main;
+    it carries `patch_L410_5_sun_fades_orrery_20261020.py`,
+    `data/drawings/sun_corona.json` and `zodiacal_dust.json`.
+  - gallery: the website patch committed at 7de9724 and run, its
+    result pushed at 4778944, 2026-10-20, "daily run again L410 sun
+    fades L456 source list", on main: `gallery/feature_renderers.js`
+    and `interactive.html` changed, and the served cache holds
+    `drawings/sun_corona.json` and `zodiacal_dust.json` at gallery
+    7a4a03a, with the corona's feature naming its drawing.
+  - Tony's look at the Sun room on the phone: 2026-10-20 (L-412's
+    record; it found the drawer's order, L-460), and 2026-10-27, the
+    corona's row, "the words read right" (L-468). No record of a
+    separate live check was found; the nightly builds since have
+    swapped in ok.
+- **Closed 2026-10-27, night.** Loose ends:
+  - L-131 (the dust cloud), whose Gap waited on the same runs: closed
+    with this item.
+  - The kind-1 list's "upper atmosphere into the exosphere": re-homed
+    to L-413 (Earth's list).
+  - The kind-1 list's "Oort cloud's outer reaches": struck, done. The
+    outer cloud's dots reach across its outer edge's range and its
+    hover names the range (L-434, 2026-10-22; provenance-discipline
+    2.34, How a range is drawn).
+  - The streamer belt drawn with the corona ("one name, one checkbox"):
+    reversed by the talk of 2026-10-27, ruling 6b, carried on L-497.
+**Gap (2026-10-27, night):** none.
+**Gap (2026-10-20; superseded above):** Tony's runs of the
+website half: the website patch, the Daily Run, the Sun room on the
+phone, the live check. Then L-410 and L-131 DONE. The kind-1 list's
+others (the upper atmosphere into the exosphere, the Oort cloud's outer
+reaches) wait for their rooms.
+**Ref:** L-131, L-241, L-371, L-454, L-457; `solar_visualization_shells.py`
+(`create_sun_streamer_band`, the fade to follow); gallery
+`gallery/feature_renderers.js`.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
@@ -29066,59 +29231,6 @@ and words).
 **Gap:** not scoped -- check whether the 9/9/24 approach is recoverable
 from git history or needs rebuilding; decide where it lives.
 **Ref:** to_do_ideas.md (pre-ledger, 4/16/26).
-
-#### [L-131] Zodiacal dust solar shell
-<!-- L:131 status:OPEN upd:2026-10-20 section:A flag: rice: -->
-- **Note (2026-10-08):** RICE struck (was 2/2/50/2). This item is item 9 of L-412 (the Sun's slice),
-  and an item in an ordered list carries no score; the list's
-  order is its priority (Tony's rule of 2026-10-07, L-412).
-- **Idea (Tony, 4/17/26, pre-ledger note).** Add a solar shell for the
-  zodiacal dust cloud (interplanetary dust concentrated near the ecliptic).
-- **Cross-ref:** groups with L-128, L-136.
-- **2026-10-04, into the Sun's slice (Tony), designed with L-410.**
-  The outer corona's faint glow is sunlight scattered by this same
-  dust, so the outer corona's fuzzy edge may be where the drawing
-  hands over to the dust cloud rather than fading into nothing. The
-  cloud is flattened toward the planets' plane: a thick disk, not a
-  sphere. Tony: this "conforms to our braid principle and grouping of
-  thematic content". The Sun slice's ninth item (L-412).
-- **2026-10-04:** moved to section A; it is the Sun slice's ninth
-  item, with L-410 (L-412). Its July score was set as a loose idea; a
-  re-score is among the questions L-412 records.
-- **Designed 2026-10-19, with L-410** (record
-  `documentation/SOURCES_L410_sun_corona_dust_20261019.md`). Tony's
-  rulings:
-  - The dust is its own drawing, a stored cloud of dots: Kelsall et
-    al. (1998)'s COBE model, density falling as distance to the power
-    1.34, the widened fan shape flattened toward a midplane tilted
-    2.03 degrees. Near the Sun it thins from about 19 solar radii and
-    is gone by about 5 (Lamy et al. 2022), the dust-free zone Parker
-    Solar Probe saw signs of (Howard et al. 2019). Its hover says that
-    near the Sun this dust is seen as the F-corona.
-  - A dot's PLACE shows the dust's density; its BRIGHTNESS shows the
-    sunlight it receives, falling with the square of distance. "Confirmed
-    as recommend." The forward scattering, which depends on where the
-    viewer stands, is said in words, not drawn. Tony asked whether light
-    falls with the cube; it is the square, "Confirmed".
-  - The dots stop at 5.2 AU, where Kelsall et al.'s model stops its
-    sums: declared, the hover saying the cloud has no edge. "Confirmed."
-**Gap (replaces "not scoped", 2026-10-19):** build as designed, with
-L-410's corona fade. Open points in the sources record.
-- **Built 2026-10-19 to 20, with L-410** (record
-  `documentation/HANDOFF_L410_sun_fades_build_20261020.md`). 3,000
-  dots by Kelsall et al. (1998)'s smooth cloud
-  (`zodiacal_dust_sampler.py`), tilted 2.03 degrees with its node at
-  77.7 degrees, thinning linearly from 19 solar radii to nothing at 5,
-  stopping at 5.2 AU; brightness the sunlight each dot receives. Two
-  method choices Tony approved at the build: the linear thinning
-  between Lamy et al.'s two edges, and the cloud centred on the Sun
-  (Kelsall's small offset not drawn). The checkbox reads "Zodiacal
-  Dust Cloud (F-corona)". Orrery pushed fcd191e9; Tony: "the colors
-  and shapes look great". The website half is in the same patch as
-  L-410's.
-**Gap (replaces the one above, 2026-10-20):** Tony's runs of the
-website half, with L-410's; then DONE.
-**Ref:** to_do_ideas.md (pre-ledger, 4/17/26); L-410.
 
 #### [L-136] Solar "scattered disk" shell
 <!-- L:136 status:OPEN upd:2026-10-11 section:D.Feature-B flag: rice:2/2/50/2 -->

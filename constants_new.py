@@ -227,6 +227,12 @@ Module updated: October 26, 2026 with Anthropic's Claude Opus 5.5
 (L-491: nine comet nucleus sizes, each sourced to a page opened that
 day, in a section of their own; they replace a table typed from memory
 in comet_visualization_shells.py.)
+Module updated: October 27, 2026 with Anthropic's Claude Opus 5.5
+(L-465 (a), the orrery's Sun axis hover: four new rows, the latitude the
+Sun's adopted period is taken at, its turn at the equator and near the
+poles, and the Carrington rotation's turn as seen from Earth; the NASA
+Sun Fact Sheet joins the citations of the rate and the pole. No value
+changed.)
 """
 
 import math
@@ -1039,6 +1045,10 @@ SUN_POLE_RA_J2000_DEG = 286.13
 # Read+: "BODY10_POLE_RA = ( 286.13 0. 0. )" and the Sun section's note
 # Read+: "Values are unchanged in the 2015 IAU report.", 2026-10-22,
 # Read+: Claude Opus 5.5.
+# Read: the fact sheet's block "North Pole of Rotation", "Right Ascension:
+# Read+: 286.13", and its row "Obliquity to ecliptic (deg.) 7.25", at the
+# Read+: fact sheet's address on the Source line, 2026-10-27, Claude Opus
+# Read+: 5.5.
 # Source: NASA NAIF, planetary constants kernel pck00011.tpc,
 # Source+: https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc
 # Source+: -- BODY10_POLE_RA = 286.13 degrees, the right ascension of the
@@ -1046,9 +1056,18 @@ SUN_POLE_RA_J2000_DEG = 286.13
 # Source+: kernel says the Sun's values are unchanged in the 2015 report of
 # Source+: the IAU Working Group on Cartographic Coordinates and Rotational
 # Source+: Elements (Archinal et al. 2018, Cel. Mech. Dyn. Astron. 130:22).
+# Source+: NASA Sun Fact Sheet, D. R. Williams, NASA Goddard Space
+# Source+: Flight Center, last updated 9 May 2024,
+# Source+: https://nssdc.gsfc.nasa.gov/planetary/factsheet/sunfact.html
+# Source+: -- "North Pole of Rotation", Right Ascension 286.13; its
+# Source+: obliquity to ecliptic, 7.25 deg, is the tilt worked out from this
+# Source+: pole (SUN_EQUATOR_TILT_DEG).
 # Ref: https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc
+# Ref: https://nssdc.gsfc.nasa.gov/planetary/factsheet/sunfact.html
 # Note: drawn, never printed, so the website prints no pole; the tilt it
-# Note+: prints is SUN_EQUATOR_TILT_DEG.
+# Note+: prints is SUN_EQUATOR_TILT_DEG. The fact sheet joined this row's
+# Note+: Source on 2026-10-27 because the orrery's axis hover names it for
+# Note+: the tilt (L-465); the IAU's elements are the work behind it.
 
 SUN_POLE_DEC_J2000_DEG = 63.87
 # Unit: deg
@@ -1056,12 +1075,19 @@ SUN_POLE_DEC_J2000_DEG = 63.87
 # Figures: 4 -- the kernel prints 63.87, to hundredths of a degree.
 # Read: as SUN_POLE_RA_J2000_DEG, the line "BODY10_POLE_DEC = ( 63.87 0.
 # Read+: 0. )", 2026-10-22, Claude Opus 5.5.
+# Read: the fact sheet's line "Declination : 63.87", at the fact sheet's
+# Read+: address on the Source line, 2026-10-27, Claude Opus 5.5.
 # Source: NASA NAIF, planetary constants kernel pck00011.tpc,
 # Source+: https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc
 # Source+: -- BODY10_POLE_DEC = 63.87 degrees, the declination of the Sun's
 # Source+: north pole in the ICRF, with no change over time; unchanged in
 # Source+: the IAU working group's 2015 report (Archinal et al. 2018).
+# Source+: NASA Sun Fact Sheet, D. R. Williams, NASA Goddard Space
+# Source+: Flight Center, last updated 9 May 2024,
+# Source+: https://nssdc.gsfc.nasa.gov/planetary/factsheet/sunfact.html
+# Source+: -- "North Pole of Rotation", Declination 63.87.
 # Ref: https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc
+# Ref: https://nssdc.gsfc.nasa.gov/planetary/factsheet/sunfact.html
 
 # The pole directions of the bodies the orrery draws with an axis, as ICRF
 # right ascension and declination in degrees. Moved here from
@@ -2028,8 +2054,9 @@ DEG_PER_RAD = 180.0 / math.pi
 # and its hover prints the two numbers below. Both come from the IAU's
 # rotational elements for the Sun as NASA NAIF's kernel carries them: the
 # pole above (SUN_POLE_RA_J2000_DEG, SUN_POLE_DEC_J2000_DEG) and the rate
-# here. The orrery's own axis hover still types its Sun numbers in
-# planet_visualization_utilities.py, PLANET_ROTATION; that is L-465's Gap.
+# here. Since 2026-10-27 (L-465 (a)) the orrery's own axis hover prints
+# from these rows and the four below the tilt; until then it typed its Sun
+# numbers in planet_visualization_utilities.py, PLANET_ROTATION.
 
 DEG_PER_TURN = 360.0
 # Unit: deg
@@ -2063,6 +2090,10 @@ SUN_ROTATION_RATE_DEG_PER_DAY = 14.1844
 # Read+: Coordinates and Rotational Elements: 2015", B. A. Archinal, C. H.
 # Read+: Acton, A. Conrad and others, its Fig. 1 caption at Springer's
 # Read+: page, the address on the Source line, 2026-10-22, Claude Opus 5.5.
+# Read: the fact sheet's row "Sidereal rotation period (hrs)* 609.12" and
+# Read+: its footnote, at the fact sheet's address on the Source line,
+# Read+: 2026-10-27, Claude Opus 5.5. 609.12 hours is 25.380 days, the
+# Read+: period this rate gives (SUN_SIDEREAL_ROTATION_PERIOD_D).
 # Source: NASA NAIF, planetary constants kernel pck00011.tpc,
 # Source+: https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc
 # Source+: -- BODY10_PM, the angle W of the Sun's prime meridian,
@@ -2073,12 +2104,19 @@ SUN_ROTATION_RATE_DEG_PER_DAY = 14.1844
 # Source+: Rotational Elements: 2015, Cel. Mech. Dyn. Astron. 131:61,
 # Source+: https://doi.org/10.1007/s10569-019-9925-1 -- Fig. 1 caption:
 # Source+: where W increases with time, the body's rotation is prograde.
+# Source+: NASA Sun Fact Sheet, D. R. Williams, NASA Goddard Space
+# Source+: Flight Center, last updated 9 May 2024,
+# Source+: https://nssdc.gsfc.nasa.gov/planetary/factsheet/sunfact.html
+# Source+: -- "Sidereal rotation period (hrs)* 609.12", and its note: "This
+# Source+: is the adopted period at 16 deg. latitude - the actual rotation
+# Source+: rate varies with latitude".
 # Ref: https://naif.jpl.nasa.gov/pub/naif/generic_kernels/pck/pck00011.tpc
 # Ref: https://doi.org/10.1007/s10569-019-9925-1
+# Ref: https://nssdc.gsfc.nasa.gov/planetary/factsheet/sunfact.html
 # Note: the IAU's rate for the Sun's map frame. The Sun is not solid and
 # Note+: does not turn at one rate; this is the rate the frame is defined
-# Note+: by. A sentence saying so waits for a source a visitor can open
-# Note+: (L-465).
+# Note+: by. Since 2026-10-27 the orrery's axis hover says so, from
+# Note+: SUN_DIFFERENTIAL_ROTATION_EQUATOR_D and _POLE_D below (L-465).
 
 SUN_SIDEREAL_ROTATION_PERIOD_D = DEG_PER_TURN / SUN_ROTATION_RATE_DEG_PER_DAY
 # Derived: one full turn divided by the rate, 360 / 14.1844
@@ -2108,6 +2146,94 @@ SUN_EQUATOR_TILT_DEG = math.acos(math.sin(SUN_POLE_DEC_J2000_DEG / DEG_PER_RAD) 
 # Figures+: given to (provenance-discipline, Rule 3: a function that
 # Figures+: magnifies its input's uncertainty drops a figure, said here).
 # Note: printed in the website's Sun room, on the rotation axis's hover.
+
+# --- The Sun's turning, for the orrery's axis hover (L-465 (a), 2026-10-27)
+# Four rows the orrery's Sun axis hover prints beside the period and the
+# tilt above, in the words Tony confirmed at the talk of 2026-10-27
+# (documentation/DESIGN_talk_20261027_rulings.md, section 5; the Carrington
+# words his of the same evening). Two pages, both read that evening.
+
+SUN_ADOPTED_PERIOD_LATITUDE_DEG = 16
+# Unit: deg
+# Status: measured V_SOURCED 2026-10-27
+# Figures: 2 -- the fact sheet prints "16 deg." with no decimal.
+# Read: the footnote to the fact sheet's row "Sidereal rotation period
+# Read+: (hrs)*", "This is the adopted period at 16 deg. latitude", at the
+# Read+: address on the Source line, 2026-10-27, Claude Opus 5.5.
+# Source: NASA Sun Fact Sheet, D. R. Williams, NASA Goddard Space Flight
+# Source+: Center, last updated 9 May 2024,
+# Source+: https://nssdc.gsfc.nasa.gov/planetary/factsheet/sunfact.html --
+# Source+: the sidereal rotation period 609.12 hours "is the adopted period
+# Source+: at 16 deg. latitude".
+# Ref: https://nssdc.gsfc.nasa.gov/planetary/factsheet/sunfact.html
+# Note: the latitude at which the period in SUN_SIDEREAL_ROTATION_PERIOD_D
+# Note+: is the Sun's turn. Printed on the orrery's Sun axis hover.
+
+SUN_DIFFERENTIAL_ROTATION_EQUATOR_D = 25
+# Unit: days
+# Status: measured V_SOURCED 2026-10-27
+# Figures: 2 -- the page prints "every 25 days", a whole number of days.
+# Read: the page's first paragraph, "the Sun rotates every 25 days at the
+# Read+: equator and takes progressively longer to rotate at higher
+# Read+: latitudes, up to 35 days at the poles. This is known as
+# Read+: differential rotation.", at the address on the Source line,
+# Read+: 2026-10-27, Claude Opus 5.5.
+# Source: NASA SOHO, "Differential Rotation of the Sun" (Grades 9-12),
+# Source+: lesson page by Ginger Sutula,
+# Source+: https://soho.nascom.nasa.gov/explore/lessons/diffrot9_12.html
+# Source+: -- "the Sun rotates every 25 days at the equator".
+# Ref: https://soho.nascom.nasa.gov/explore/lessons/diffrot9_12.html
+# Note: an agency page that names no source of its own, which
+# Note+: provenance-discipline reads as a lead. Cited here on Tony's
+# Note+: ruling of 2026-10-27 (L-465); a work behind the figure, when
+# Note+: one is found and opened, re-homes it.
+# Note+: The fact sheet's latitude formula gives about 25.1 days at the
+# Note+: equator, which agrees.
+
+SUN_DIFFERENTIAL_ROTATION_POLE_D = 35
+# Unit: days
+# Status: measured V_SOURCED 2026-10-27
+# Figures: 2 -- the page prints "up to 35 days", a whole number of days.
+# Read: as SUN_DIFFERENTIAL_ROTATION_EQUATOR_D, the same sentence,
+# Read+: 2026-10-27, Claude Opus 5.5.
+# Source: NASA SOHO, "Differential Rotation of the Sun" (Grades 9-12),
+# Source+: lesson page by Ginger Sutula,
+# Source+: https://soho.nascom.nasa.gov/explore/lessons/diffrot9_12.html
+# Source+: -- "up to 35 days at the poles".
+# Ref: https://soho.nascom.nasa.gov/explore/lessons/diffrot9_12.html
+# Note: an agency page that names no source of its own, which
+# Note+: provenance-discipline reads as a lead. Cited here on Tony's
+# Note+: ruling of 2026-10-27 (L-465); a work behind the figure, when
+# Note+: one is found and opened, re-homes it.
+# Note+: The fact sheet's latitude formula gives about 34.4 days at the
+# Note+: pole, inside the page's "up to".
+
+SUN_CARRINGTON_SYNODIC_PERIOD_D = 27.28
+# Unit: days
+# Status: measured V_SOURCED 2026-10-27
+# Figures: 4 -- the page prints 27.28.
+# Read: the page's paragraph "The Carrington Rotations are named for
+# Read+: Richard Carrington, an astronomer who first noted that sunspots
+# Read+: rotate every 27.28 days. Rotations are numbered starting with 9
+# Read+: November 1853.", at the address on the Source line, 2026-10-27,
+# Read+: Claude Opus 5.5.
+# Source: NASA SOHO, "Differential Rotation of the Sun" (Grades 9-12),
+# Source+: lesson page by Ginger Sutula,
+# Source+: https://soho.nascom.nasa.gov/explore/lessons/diffrot9_12.html
+# Source+: -- "sunspots rotate every 27.28 days. Rotations are numbered
+# Source+: starting with 9 November 1853."
+# Ref: https://soho.nascom.nasa.gov/explore/lessons/diffrot9_12.html
+# Note: an agency page that names no source of its own, which
+# Note+: provenance-discipline reads as a lead. Cited here on Tony's
+# Note+: ruling of 2026-10-27 (L-465); a work behind the figure, when
+# Note+: one is found and opened, re-homes it.
+# Note+: The turn as seen from Earth, which moves along its orbit
+# Note+: meanwhile; against the stars it is SUN_SIDEREAL_ROTATION_PERIOD_D.
+# Note+: That the turn seen from Earth is the longer because Earth moves
+# Note+: along its orbit meanwhile is the hover's wording, Tony's of
+# Note+: 2026-10-27; neither page read states it, and no year length is
+# Note+: typed here to work it. The date the count starts is printed in
+# Note+: words on the hover, where its source is cited.
 
 EARTH_IGRF13_G10_NT = -29404.8
 # Unit: nt
