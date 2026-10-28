@@ -523,3 +523,440 @@ I've recorded your "Keep them", so the five "plot with" lines stay as they are n
 > - *(do) look at the change list in GitHub Desktop; commit and push.*
 > - (do) read the plan's front page and Section 5a, if not done yet.
 > - Two papers left to try (`READING_L456_tony_20261021.md`).
+>
+> +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+>
+> **Session: OPEN: 10-27-26 2246: Opus: Code: Session 2: L-492 closure and Sun axis hover**
+>
+> I've read the protocol, Where We Are, the brief, the rulings and the interactive-exhibit skill (1.27, matches); now reading the other skills the job fires.
+
+Skills read and versions match; checking one thing before I propose the plan: whether the four new Sun rows are already in the export the website mirrors from.
+
+Both folders are ready, and nothing has been edited yet.
+
+**Skills I read, with their versions.** Each matches the protocol's skill list:
+- Read in full: interactive-exhibit 1.27, ledger-and-session-records 1.22, safe-file-editing 1.14 and agentic-pre-test 1.3.
+- Version lines only, because this job barely touches them: gallery-cache-builder 1.13, gallery-assembler 1.3 and gallery-pipeline 1.2.
+
+**The starting point:**
+- The gallery folder is at 7a4a03a, the same as GitHub, with nothing waiting to commit.
+- The orrery folder is at 72f8fa6, also the same as GitHub. It has one change waiting, and it is yours: your note in the Oct 27 run record. It says the three hovers "seem correct" and gives the push number. I'll read it and won't change it.
+
+**What I'll do, if you agree.** I'll build session 2 of the Oct 27 brief in the gallery, in this order:
+1. One text box in every room (L-497 (left-aligned text)). Tapping a cross opens the page's own box, left-aligned, one sentence to a bullet, in the feature's colour. The streamer belt gets its own drawer row under the corona's.
+2. The Sun's axis hover on the website gets the same five bullets as the orrery's. The four new Sun numbers are already in the orrery's export, so the website can print them from the served data. The numbers reach visitors only after the next Daily Run rebuilds the cache.
+3. The "report a problem" link in every room's i panel (L-458 (report a problem)).
+4. The F corona's cross moved off the x axis (L-468 (the corona's cross)), and the Alfven dashed circles made easier to see (L-454 (moving edges)).
+5. The search box finds groups such as "comet" (L-496 (groups in the search)).
+
+After that, I'll run the gallery's offline maintenance run and read the result. Then I'll close L-492 (the stale scale sentences) on your "seem correct", and write the ledger and Where We Are.
+
+**Files changed:** none yet.
+
+**Your run order:** nothing to run yet.
+
+**Tony-actions:**
+- (decide) The go-ahead for the build above. -- yes
+
+====================================================================
+
+All the work in session 2 of the brief is built in the gallery folder, plus the Sun axis bullets on the website. Nothing is committed. Please run the Daily Run before you commit, because most of these changes need the cache rebuilt.
+
+The skills I read. All match the protocol’s skill list:
+
+Read in full: interactive-exhibit 1.27, ledger-and-session-records 1.22, safe-file-editing 1.14 and agentic-pre-test 1.3.
+Version lines only: gallery-cache-builder 1.13, gallery-assembler 1.3 and gallery-pipeline 1.2.
+What changed on the website:
+
+One text box (L-497 (one text box)). Plotly’s gold tooltip is gone in every room. Tapping a marker now opens the same box as Go To:
+left-aligned, one sentence to a bullet, the title in bold, and a border in the feature’s colour.
+On a desktop, resting the mouse on a marker also opens it, and moving off closes it. That part was my call, so the desktop still shows something when you hover.
+The streamer belt has its own row again, directly under the corona’s. The corona’s sentence about the belt now says the belt “has its own row, just below this one.”
+“Report a problem” (L-458 (report a problem)) is under every feature in the i panel. It opens the guest book form with the room, the feature and the page already written in. I read the form’s hidden field name from its public page, so you don’t need to do the “Get pre-filled link” step. The guest book updater now shows a problem report to you as private and never offers it for the lobby.
+The search box finds groups (L-496 (groups in the search)):
+“comet” lists six groups, closed, with their counts. Choosing one clears the search and opens that group.
+“jfc” or “probe” opens its one group whole.
+“planet” lists the eight planets. Pluto isn’t included, because I gave it no “planet” word.
+The Sun’s axis box (L-465 (the Sun’s axis)) has your five bullets, every number taken from the orrery’s rows. Two website rules change how it looks:
+The citations go in the i panel, not in the box.
+With one sentence to a bullet, the five bullets show as eight.
+The F corona’s cross is lifted 25 degrees off the x axis.
+The Alfven dashed circles are twice as thick and fully opaque, in the same colour you chose on Oct 22.
+What I tested. I ran the room in a real browser on a local copy, and the tap box, the mouse hover, the group search and the report link all worked. Your phone hasn’t seen any of it. The checks that cover these changes were updated, and each has a planted fault that I saw turn it red.
+
+The two red checks. “Cache in step” and “Display figures” compare the served cache with the config, so they stay red until the Daily Run rebuilds the cache. I ran “Display figures” against the cache as the rebuild will write it, and it passed.
+
+Things to watch on your phone:
+
+The Sun’s axis box is 33 lines tall on a portrait phone, which is more than fits on the screen.
+The crosses for the Hills cloud, the outer Oort cloud and the galactic tide also sit on the x axis. I left them on your deferred list.
+Four sentences in the interactive-exhibit skill are now wrong. L-497 lists them for the next orrery session to correct.
+Files changed (gallery):
+
+ok interactive.html, the page (19 edits)
+ok gallery/text_box.js, the box’s bulleted words (new)
+ok gallery/feature_renderers.js, the axis bullets and the belt note (8 edits)
+ok gallery/solar_system_drawer.js, the group search (12 edits)
+ok data/objects_config.json, the served config (31 edits of mine, plus 8 citations written by the constants mirror)
+ok tools/guestbook_updater.py, keeps reports private (7 edits)
+ok tools/test_guestbook_updater.py, the updater’s test (4 edits)
+ok gallery_maintenance_run.py, the run’s file list (2 edits)
+ok documentation/smoke_hover_budget.js (3 edits), smoke_label_words.js (6 edits), smoke_sun_shells.js (6 edits), smoke_solar_system_drawer.js (5 edits), smoke_typed_numbers.js (1 edit), smoke_display_figures.js (1 edit): the checks
+ok documentation/fixture_hovers_L497_on_7a4a03a8.json, the new recorded hovers (new)
+Rewritten by the maintenance run, as usual: MODULE_ATLAS.md, MODULE_INDEX.md, data/constants_export.json, and the pull stamps data/constants_export.sha, data/objects_export.sha, data/drawings/pulled_at.sha
+Files changed (orrery):
+
+ok LEDGER_CONSOLIDATED.md, the ledger (10 edits, index regenerated). L-492 (the stale scale sentences) is closed on your “seem correct” and moved to the closed section.
+ok documentation/WHERE_WE_ARE.md, your page (16 edits)
+The run record of Oct 27 also shows as changed; that’s your own edit.
+Your run order:
+
+1. The Daily Run, from the dashboard. Expect the maintenance run at its end to read all green.
+
+======================================================================
+  DAILY RUN -- Tuesday October 27, 2026  23:30
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io
+======================================================================
+Daily Run steps, from C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io:
+  1. Guest book updater                 tools\guestbook_updater.py  found
+  2. Pulls from the orrery              gallery_maintenance_run.py  found
+  3. Cache builder                      tools\gallery_cache_builder.py  found
+  4. Gallery maintenance run, offline   gallery_maintenance_run.py  found
+  pull-match fixtures: 5 of 5 cases right; planted faults caught 2 of 2
+=== DAILY RUN: all 4 step scripts found; the pull-match check passed 7 of 7 fixture checks (L-461)
+Last cache build: 2026-10-27 14:04 UTC, ok, 0 days ago.
+
+======================================================================
+  DAILY RUN step 1 of 4: Guest book updater
+======================================================================
+======================================================================
+  guest book updater -- C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io
+======================================================================
+1 entry in the guest book; 172 gallery pages a link may point at.
+
+Fetching the form's responses...
+No new messages.
+
+w write, r reply, x remove, p pin/unpin, f form address, s sheet address, q finish > q
+
+======================================================================
+  approved 0, declined 0, waiting 0, problem reports read 0; the guest book now has 1 entry
+  No change to data/guestbook.json.
+======================================================================
+
+======================================================================
+  DAILY RUN step 2 of 4: Pulls from the orrery
+======================================================================
+======================================================================
+  gallery maintenance run -- PULLS (before the cache builder)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Constants export pull     0.6s  no change to
+                                    data/constants_export.json,
+                                    data/constants_export.sha
+  PASS Config mirror             0.2s  no change to
+                                    data/objects_config.json
+  PASS Objects export pull       0.5s  no change to
+                                    data/objects_export.json,
+                                    data/objects_export.sha
+  PASS Objects mirror            0.2s  no change to
+                                    data/objects_config.json
+  PASS Drawings pull             1.3s  no change to
+                                    data/drawings/hills_cloud.json,
+                                    data/drawings/van_allen_belts.json,
+                                    data/drawings/earth_exosphere.json,
+                                    data/drawings/pulled_at.sha
+
+======================================================================
+
+=== PULLS: all 5 passed -- Constants export pull, Config mirror, Objects export pull, Objects mirror, Drawings pull
+
+Pull matches push: the orrery pulled is d46f204f, the newest commit in your orrery folder.
+
+======================================================================
+  DAILY RUN step 3 of 4: Cache builder
+======================================================================
+[RECOVER] removed retained data\solar-system.prev (cleared read-only on 7 entries)
+[sweep] no sibling directories present
+[RUNS] before the copy: 112 run records in data\solar-system\raw\runs
+[RUNS] after the copy:  112 run records in data\.staging_solar-system_20261028T043105Z\raw\runs
+[POLE] earth: pole of 2026-10-28 served (RA 0.64820, Dec 89.84982 deg); tilt 23.43788 deg
+[window] served window: 88.0 days either side of today, set by mercury, the shortest of 62 bodies' trusted spans
+[SWAP] the new cache is in place; every rename worked on the first try. Recorded in data/cache_swap_log.jsonl
+[warn] sun: features-only entry; no Horizons fetch
+[warn] halley: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] ikeya_seki: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] hale_bopp: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] hyakutake: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] neowise: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] lemmon: its period is around @0, but a comet is drawn from its elements around the Sun
+[done] run 20261028T043105Z (nightly): 94 objects
+
+----------------------------------------------------------------------
+WHAT TO DO NEXT, before you commit anything:
+
+  1. Run the gallery maintenance run, from this same folder:
+         python gallery_maintenance_run.py
+     Every gating checker should pass. Its LAST line reads the
+     swap log back and should agree with the [SWAP] line above.
+  2. In GitHub Desktop, look at the change list. A good build
+     shows changed and added files and NO pile of deletions.
+  3. Commit and push.
+  4. After the push, check what the live site serves:
+         python gallery_maintenance_run.py --live
+
+TONY-ACTION ROLLUP for this run:
+  (do)     steps 1 to 4 above, in that order.
+----------------------------------------------------------------------
+
+Run records: carried 112 of 112, plus tonight's: 20261028T043105Z.json.
+  compared C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\data\solar-system\raw\runs
+  with     C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\data\solar-system.prev\raw\runs
+
+The builder's next steps start with the maintenance run.
+The Daily Run runs it now.
+
+======================================================================
+  DAILY RUN step 4 of 4: Gallery maintenance run, offline
+======================================================================
+======================================================================
+  gallery maintenance run -- OFFLINE (before a commit)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Module atlas              2.4s  rewrote MODULE_ATLAS.md,
+                                    MODULE_INDEX.md
+  PASS Constants export pull     0.6s  no change to
+                                    data/constants_export.json,
+                                    data/constants_export.sha
+  PASS Config mirror             0.4s  no change to
+                                    data/objects_config.json
+  PASS Objects export pull       0.7s  no change to
+                                    data/objects_export.json,
+                                    data/objects_export.sha
+  PASS Objects mirror            0.3s  no change to
+                                    data/objects_config.json
+  PASS Drawings pull             1.1s  no change to
+                                    data/drawings/hills_cloud.json,
+                                    data/drawings/van_allen_belts.json,
+                                    data/drawings/earth_exosphere.json,
+                                    data/drawings/pulled_at.sha
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite      88.8s  PASS (482 checks, 0 failures)
+  PASS Pole of date              0.4s  POLE OF DATE: all 11 checks passed
+                                    (frame angle, orrery, ERFA, block
+                                    checker, and each shown able to
+                                    fail).
+  PASS Mirror suite              0.2s  All 77 mirror checks passed:
+                                    served, spelling, relabel refused
+                                    and accepted, conflict refused,
+                                    definition as exactly 1, fallback
+                                    and absent named, no-slot refused,
+                                    five shapes, formatting kept,
+                                    idempotent, report writes nothing,
+                                    uncertainty written as served,
+                                    Earth's pole served, print count
+                                    written as served, "in" written as
+                                    served and a slot served in
+                                    another unit from it, and the
+                                    citation written as served, a
+                                    website-only citation named, an
+                                    old export refused.
+  PASS Store writer suite       29.4s  All 468 store-writer checks
+                                    passed: an allow list that lets
+                                    through only a shell's words, a
+                                    belt's words and the arrival
+                                    settings, the rooms section's
+                                    included; a no-edit round trip;
+                                    one line per change; empty words
+                                    handled; a refused batch writing
+                                    nothing; awkward text; and the
+                                    shell list matching the cache
+                                    check's rule.
+  PASS Store editor suite        0.2s  All 377 store-editor checks
+                                    passed: every box the form offers
+                                    is one the writer allows; the word
+                                    list and the tick list differ by
+                                    the belts, on purpose; nothing
+                                    typed saves nothing; the save
+                                    message does not promise a visitor
+                                    sees what they cannot yet; and a
+                                    red Cache in step is explained
+                                    rather than just shown.
+  PASS Objects mirror suite      0.2s  MIRROR OBJECTS SUITE: pass
+  PASS Objects mirror check      0.1s  OBJECTS MIRROR: pass
+  PASS Config mirror check       0.1s  Every served link holds the
+                                    export's value, unit, figure count
+                                    and citation; 170 link(s)
+                                    compared, 166 citation(s) word for
+                                    word, 4 declared with none, 3 not
+                                    served; store 37fc0fb07a32.
+  PASS Pull failures             0.4s  PULL FAILURES: all 13 checks
+                                    passed (3 pulls x 3 ways to fail,
+                                    the run after a failed pull, and 3
+                                    planted faults caught)
+  PASS Horizons confirmations    0.1s  HORIZONS CONFIRMATIONS: pass -- 89
+                                    of 89 confirmed, and 61 periods,
+                                    within 30 days
+  PASS Pointer join              0.1s  Every link is accounted for: 173
+                                    link(s) against orrery d46f204f, 1
+                                    fallback named; read check: 66 of
+                                    66 measured rows reached carry a
+                                    read.
+  PASS Cache in step             0.1s  The served cache holds the
+                                    config's 94 object(s) and their
+                                    features exactly: 4 object(s) with
+                                    34 named shell(s), in both cache
+                                    files.
+  PASS Drawn orbit               1.8s  DRAWN ORBIT: pass -- 18 checks,
+                                    every planted fault caught
+  PASS Drawings                  0.6s  DRAWINGS: PASS -- 30 of 30 planted
+                                    faults caught; pulled at orrery
+                                    d46f204f; earth_exosphere 1500
+                                    dots, round, sha256 6112639fb2cd;
+                                    galactic_tide 5000 dots, about the
+                                    galactic pole, sha256
+                                    950a7511f0b5; hills_cloud 3600
+                                    dots, tilt 31.0 deg, sha256
+                                    4d3e85616645; outer_oort_cloud
+                                    2736 dots, between its edges,
+                                    sha256 2f7ab88ee113; sun_corona
+                                    2500 dots, round, sha256
+                                    e2b57ccbc8a4; van_allen_belts 3200
+                                    dots, tilt 0.4 deg, sha256
+                                    75274e84f840; zodiacal_dust 3000
+                                    dots, tilt 2.8 deg, sha256
+                                    995f13a056e8
+  PASS Collapsed features        0.1s  32 stored as themselves, 16
+                                    collapsed, 0 unclassified.
+  PASS Feature renderers         0.1s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.1s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.2s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.2s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.1s  === ALL CHECKS PASSED ===
+  PASS Typed facts               0.2s  TYPED FACTS: PASS -- 0 typed facts
+                                    in the Sun and Earth rooms; 17
+                                    number line(s), 28 of 28 allowed
+                                    sentence(s) seen, 0 held open
+                                    (L-451); 26 word field(s) masked.
+  PASS Typed numbers             0.3s  TYPED NUMBERS: PASS -- 0 typed
+                                    numbers in the Sun and Earth
+                                    rooms' served words; 315 number(s)
+                                    masked, 8 held.
+  PASS Arrival                   0.2s  Arrival: both rooms open on the
+                                    right things; every shell trace
+                                    carries its key; the fallback with
+                                    no arrival block is unchanged.
+  PASS Display figures           0.2s  === PASS: 61 hover(s) and 312
+                                    number(s) examined; 14 graded, 7
+                                    graded by line, 47 held to the
+                                    fixture ===
+  PASS Solar System figures      0.1s  === PASS: 6 worked cases, 63
+                                    drawer rows matched to their
+                                    accuracy rows, 62 served
+                                    distances; Uranus, Neptune and
+                                    Pluto print to JPL's ten-thousands
+                                    place; 6 period cases and 62
+                                    served periods printed as the
+                                    orrery printed them; 5 orbit-line
+                                    cases and 62 served orbit lines; 3
+                                    path cases and 26 served paths,
+                                    spacecraft and comets ===
+  PASS Far lines                 0.1s  === PASS: far lines are cut to the
+                                    view's box ===
+  PASS Direction arrows          0.1s  === PASS: the arrows point the way
+                                    the points run, sit ahead of the
+                                    body, stay in the view, and the
+                                    page places them ===
+  PASS Solar System drawer       0.1s  === PASS: the Sun is never ticked,
+                                    every row and group is listed, the
+                                    handle names the last body ticked,
+                                    nothing ticks many bodies at once
+                                    but a spacecraft with its
+                                    companions, rooms are offered only
+                                    where they exist, groups fold and
+                                    reset their bodies, the count line
+                                    counts ticked bodies outside the
+                                    view, a search finds a body by any
+                                    of its names and a group by its
+                                    label or words, and the page asks
+                                    this file ===
+  PASS Source list               0.1s  === PASS: the i panel's sources
+                                    are a list, every address a link,
+                                    and its words are one sentence to
+                                    a bullet ===
+  PASS Drawer order              0.2s  === DRAWER ORDER: both rooms list
+                                    their shells where each begins;
+                                    self-test red twice
+  PASS Drawn ends                0.2s  === DRAWN ENDS: every drawing
+                                    starts and stops on a served row
+                                    or a held end; self-test red three
+                                    times
+  PASS Label words               0.2s  === LABEL WORDS: all 34 shell rows
+                                    in both rooms open their own
+                                    feature's words; self-test red
+                                    once
+  PASS Guest book                0.1s  === GUEST BOOK: all 8 checks
+                                    passed
+  PASS Guest book updater        0.3s  === GUEST BOOK UPDATER: all 49
+                                    checks passed (8 scripted runs,
+                                    self-test first)
+  PASS Daily run steps           0.2s  === DAILY RUN: all 4 step scripts
+                                    found; the pull-match check passed
+                                    7 of 7 fixture checks (L-461)
+  PASS Artifact 1 assembler      0.2s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.1s  RESULT: 3 directories in data/ the
+                                    builder did not make: solar-system
+                                    (1), solar-system (2),
+                                    solar-system (3). Check whether
+                                    they belong there; the newer
+                                    .gitignore rules keep the known
+                                    conflict-copy shapes out of git
+                                    but do not remove anything.
+
+======================================================================
+  36 of 36 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: 3 directories in data/ the
+  last swap 2026-10-28T04:34:34.846429+00:00: succeeded first time
+======================================================================
+
+  After you push: python gallery_maintenance_run.py --live
+
+======================================================================
+  DAILY RUN -- summary
+======================================================================
+  Guest book updater           ok
+  Pulls from the orrery        ok
+  Pull matches push            ok
+  Cache builder                ok
+  Run records                  ok: carried 112 of 112, plus 1 new
+  Maintenance run, offline     ok
+
+  NEXT:
+    1. GitHub Desktop: look at the change list, then commit and push.
+    2. Then the dashboard's Gallery Maintenance Run -- live, AFTER a push.
+======================================================================
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+2. In GitHub Desktop, commit and push the gallery, -- 3dc5bb3036f8b8a2f35a666fb494660dcf247e5c
+3. then the orrery.
+4. The live run, from the dashboard.
+On your phone:
+1. In the Sun room, tap a cross, then use Go To on the same feature.
+2. Look at the belt’s row, the axis box, the F corona’s cross and the dashes.
+3. In the Solar System room, search “comet” and choose a group; then try “planet” and “probe”.
+4. Tap “Report a problem” in an i panel.
+Tony-actions:
+
+(do) The Daily Run, before you commit.
+(do) Commit and push both folders.
+(do) The live run.
+(do) Your phone look.
