@@ -493,7 +493,7 @@ I've recorded your "Keep them", so the five "plot with" lines stay as they are n
 **Your run order:**
 1. In the orrery, plot Pluto with its shells and hover the Hill sphere's cross. Then hover the Venus Magnetosphere checkbox and the Voyager 1 checkbox. -- seem correct. 
 2. Look at the change list in GitHub Desktop.
-3. Commit and push.
+3. Commit and push. -- 72f8fa6c43eda630a1b4ef23b65041c07670b2e9
 
 **Tony-actions:**
 - (do) Look at the three hovers.
