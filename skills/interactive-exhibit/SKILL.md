@@ -1,14 +1,30 @@
 ---
 name: interactive-exhibit
 description: How an interactive exhibit (a room in interactive.html such as ?exhibit=sun) is designed, built, verified and carded for the Paloma's Orrery gallery. Covers the exhibit switch and boot path, the assembler driver spec, the JS feature handoff, the shared chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent gate, back link), what is per-body, the served-data provenance contract, what a room opens on (the arrival block) and the shell-key stamp the renderers apply, the drawer order, who may write data/objects_config.json, the Mode 5 phone sequence, and carding an exhibit through Studio. Use when adding or changing an exhibit (Earth, Jupiter, the stars), touching sun* chrome in interactive.html, deciding what an exhibit may render, or editing the served words with store_writer or exhibit_store_editor. Not for propagation math (gallery-assembler), the nightly builder (gallery-cache-builder), or the Studio/converter chain (gallery-pipeline). Do not use for projects other than Paloma's Orrery.
-fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, its group rows, its two Resets, the Reset in every room's top bar, Home's order and its framing; Go To fitting a body's whole orbit and the orbit line in a body's hover; the count line's place; a bare interactive.html link and the Explorer's address; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia); a served number's citation and its source_note; the Typed facts check (smoke_typed_facts.js); a feature drawn as stored dots (the Hills cloud, Earth's radiation belts); the i panel's source list and its links (source_list.js); the order a room's drawer lists its shells in, where each begins (drawer_order.js, the Drawer order check); a spacecraft's path in the Solar System room (its positions file, solid and dashed, its text box); whether the website and the orrery agree on an object; the planets ticked with a spacecraft (companions); the i panel's words one sentence to a bullet; a comet on an open path in the Solar System room; the drawer's groups one JPL class to a row; JPL's terms in the words a visitor reads; a comet's companions; the drawer's Find a body box; the direction arrows on the orbits; the grid chip's AU note and the triad's frame note; the i button's first-visit note and hovers without a pointer line
+fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, its group rows, its two Resets, the Reset in every room's top bar, Home's order and its framing; Go To fitting a body's whole orbit and the orbit line in a body's hover; the count line's place; a bare interactive.html link and the Explorer's address; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia); a served number's citation and its source_note; the Typed facts check (smoke_typed_facts.js); a feature drawn as stored dots (the Hills cloud, Earth's radiation belts); the i panel's source list and its links (source_list.js); the order a room's drawer lists its shells in, where each begins (drawer_order.js, the Drawer order check); a spacecraft's path in the Solar System room (its positions file, solid and dashed, its text box); whether the website and the orrery agree on an object; the planets ticked with a spacecraft (companions); the i panel's words one sentence to a bullet; a comet on an open path in the Solar System room; the drawer's groups one JPL class to a row; JPL's terms in the words a visitor reads; a comet's companions; the drawer's Find a body box; the direction arrows on the orbits; the grid chip's AU note and the triad's frame note; the i button's first-visit note and hovers without a pointer line; the one text box for a tap and Go To (text_box.js); a group found by its find words; the i panel's Report a problem link
 ---
 
 # Interactive Exhibit
 
-Read this file in 8 parts: lines 1-153, 154-157, 158-399, 400-497, 498-737, 738-989, 990-1217, 1218-1415.
+Read this file in 9 parts: lines 1-141, 142-161, 162-403, 404-501, 502-740, 741-973, 974-1187, 1188-1379, 1380-1487.
 
-Skill version: 1.27 | 2026-10-27, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.28 | 2026-10-28, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ b2fcc1bb and gallery @ acbf206b. v1.28 (L-443, carrying
+L-497, L-496 and L-458) corrects four sentences the gallery's builds of
+2026-10-27 made wrong, each one a session following it would act on:
+a group IS found by a word such as "comet" (L-496); the streamer belt
+is drawn on its own row, not with the corona (L-497, 6b); Plotly's own
+hover box is off in every room, so a marker tap opens the page's text
+box (L-497, 6a), in the Phone first sequence and The touch path; and a
+tap on a marker opens the text box, not only naming its row (the
+anatomy table's drawer row). And it records three things new to the
+gallery: `gallery/text_box.js`, the one text box's words one sentence
+to a bullet; the `find` words on the drawer's rows; and the "Report a
+problem" link in every room's i panel (L-458). Riding the same bump
+(L-501): a body the served cache does not hold yet turns the Solar
+System figures check red as well as Cache in step. Each fact was read
+from the gallery's code at acbf206b before it was written.
+Earlier: 1.27 | 2026-10-27, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 8d334e7 and gallery @ 7d422e5. v1.27 (L-443, carrying
 L-493, L-494 and L-495) records the night of 2026-10-26. It corrects a
 wrong sentence: no website hover ends with a pointer to the i panel any
@@ -34,24 +50,12 @@ should keep these correct words and explain them when they should be
 explained." The orbit line now reads "Orbit: perihelion q AU, its
 closest to the Sun, to aphelion Q AU, its farthest." A name the orrery
 keys with an underscore is shown with JPL's space.
-Earlier: 1.25 | 2026-10-25, evening, with Anthropic's Claude Opus
-5.5, at palomas_orrery @ 967d1503 and gallery @ 82a7ab13. v1.25 (L-443,
-L-487) records Tony's two asks from his phone look of the spacecraft,
-approved the same evening ("Yes please on all your suggestions"). Ticking
-a spacecraft ticks its companions: the planets its plan passes by and the
-farthest planet whose perihelion its path goes beyond, Pluto the last
-("add the farthest planet orbit that the object has reached ... This
-gives perspective to a spacecraft plot," and "Maybe flyby planets too");
-the one exception to nothing ticking many bodies at once. And the i panel
-shows every description, note and citation one sentence to a bullet, in
-every room ("put bullets on all sentences for readability including the
-source paragraph"), cut where the room shows the words.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
 on 2026-10-05 (L-418), 2026-10-10 (L-429), 2026-10-14 (L-431),
 2026-10-16 (L-421), 2026-10-17 (L-452), 2026-10-20 (L-456),
 2026-10-21 (L-460), 2026-10-22 (L-434, L-443), 2026-10-24
-(L-477, L-482), 2026-10-25 (L-443, twice), 2026-10-26 (L-443) and
-2026-10-27 (L-443).
+(L-477, L-482), 2026-10-25 (L-443, twice), 2026-10-26 (L-443),
+2026-10-27 (L-443) and 2026-10-28 (L-443).
 
 ## Contents
 
@@ -116,10 +120,10 @@ the new exhibit brings its own.
 | Feature handoff: `GalleryFeatures.buildFeatureTraces(features, positions, {sceneHalfRangeAu})`; anything larger than the frame goes to the drawer, not dropped | feature_renderers.js | shared |
 | Arrival frame: measure every trace once (`sunTraceExtentAu`), half-range = 1.1 x the largest visible, floored at the body's constant (`SUN_HALF_RANGE_AU` 0.25) | initSunExhibit | mechanism shared; the floor and what is visible on arrival are per-body rulings |
 | Layout builder: aspect 1:1:1 unless the body's physics says otherwise (the Sun's shells are spheres); axes state their unit; `tick0` 0 and `dtick` from `sunGridDtick(span)` | `buildSunLayout()` | per-body values, shared rules |
-| Drawer replacing the legend: rows from `legendgroup`, `legendonly` hides, Reset in every room (L-477, L-482: the Solar System room's puts back its served opening and folds its groups, `ssReset`; the Sun's and Earth's put back their arrival, `sunReset`), focus row. A row's whole left end -- edge, box and colour dot, the full row height, about 65 px -- ticks and unticks; rows are at least 44 px tall; the name or GO on an UNTICKED shell ticks it and then frames it (L-318 round 3, amending L-267's G2 in that one case; GO still never hides anything). Since L-429 (Tony, 2026-10-10: "For uniformity rename the Go buttons in all rooms to Go To and center") the button reads GO TO and sits in the true middle of every room's row: the row is a three-column grid, the left end and the name in the first, Go To in the second, the room button (Solar System room) in the third; a long name wraps onto more lines rather than being cut. Naming a DRAWN shell also opens its hover text as a text box: on the desktop and a landscape phone a scene annotation pinned to its info marker with an arrow; on a portrait phone (`sunPhonePortrait()`) a page annotation centred in the view with no arrow, same text and width (L-318 round 5). A tap in the scene, on the box, or on the backdrop closes it; the backdrop also closes the drawer; unticking closes it too (L-318) | `buildSunDrawer`, `sunApplyVisibility`, `sunFocusOn`, `sunLabelShow`, `sunLabelInstall`, `sunPhonePortrait`; knobs `SUN_LABEL_WRAP_CHARS` (34), `SUN_LABEL_PHONE_X` / `_Y` (0.5), `SUN_LABEL_FONT_PX` (12) | shared |
+| Drawer replacing the legend: rows from `legendgroup`, `legendonly` hides, Reset in every room (L-477, L-482: the Solar System room's puts back its served opening and folds its groups, `ssReset`; the Sun's and Earth's put back their arrival, `sunReset`), focus row. A row's whole left end -- edge, box and colour dot, the full row height, about 65 px -- ticks and unticks; rows are at least 44 px tall; the name or GO on an UNTICKED shell ticks it and then frames it (L-318 round 3, amending L-267's G2 in that one case; GO still never hides anything). Since L-429 (Tony, 2026-10-10: "For uniformity rename the Go buttons in all rooms to Go To and center") the button reads GO TO and sits in the true middle of every room's row: the row is a three-column grid, the left end and the name in the first, Go To in the second, the room button (Solar System room) in the third; a long name wraps onto more lines rather than being cut. Naming a DRAWN shell also opens its hover text as a text box: on the desktop and a landscape phone a scene annotation pinned to its info marker with an arrow; on a portrait phone (`sunPhonePortrait()`) a page annotation centred in the view with no arrow, same text and width (L-318 round 5). Since v1.28 (L-497, 6a) it is the ONE text box: a tap on a marker in the picture opens the same box with that marker's words, and on a desktop a mouse resting on a marker opens it and moving off closes a box the pointer opened (`plotly_hover`, `plotly_unhover`, deferred out of Plotly's event); Plotly's own hover box is off (below, One text box). A tap in the scene, on the box, or on the backdrop closes it; the backdrop also closes the drawer; unticking closes it too (L-318) | `buildSunDrawer`, `sunApplyVisibility`, `sunFocusOn`, `sunLabelShow`, `sunLabelInstall`, `sunLabelRefresh`, `sunPhonePortrait`; knobs `SUN_LABEL_WRAP_CHARS` (34), `SUN_LABEL_PHONE_X` / `_Y` (0.5), `SUN_LABEL_FONT_PX` (12) | shared |
 | Nav cluster: + / - / Home = FRAME zoom (range and dtick change together; the grid re-labels), plus four arrow buttons that turn the camera by a step scaled to the live eye distance, so a tap moves the same slice of screen at any zoom (L-310); on a portrait phone 768 px or narrower the arrow cross, Home with it, moves apart from + and - into its own holder, and the in-frame title stays (L-316). WHICH corner is set only by the `.nav-cross-apart` CSS rule in `nav_cluster.js` -- top right since round 4, after a round at the bottom left -- and the method that moves it, `crossApart(on)`, says nothing about the corner, so the next move is one CSS edit. The open drawer hides the cluster and the holder both. The page decides WHEN: `navPlaceCross()` asks `sunPhonePortrait()`, the same test the text box uses | gallery/nav_cluster.js (`crossApart`, `.nav-cross-apart`), `navFrameZoom`, `navHome`, `navCameraStep`, `navPlaceCross`, `sunPhonePortrait` | shared |
 | Click deferral: `plotly_click` -> `setTimeout(0)` -> focus | initSunExhibit | shared, CRITICAL (L-278) |
-| i-panel follows the focus; curated link per feature stamped into trace `meta` by `stampLink`; its last line, in every room, is "About Paloma's Orrery", opening the lobby's About card at index.html#about (L-475), and closing the card steps back to the room that opened it (L-480, index.html's `aboutFromRoom`) | `renderSunInfo`, feature_renderers.js | shared mechanism; per-body copy and links |
+| i-panel follows the focus; curated link per feature stamped into trace `meta` by `stampLink`; its last line, in every room, is "About Paloma's Orrery", opening the lobby's About card at index.html#about (L-475), and closing the card steps back to the room that opened it (L-480, index.html's `aboutFromRoom`). Under every focused feature, in every room, a "Report a problem" link with a line beside it (v1.28, L-458, talk D's approved words): it opens the guest book's Google Form with its message box already written, "Problem report -- <room> room, <feature>", two prompts, and "Page: <the room's address>"; the form's address and the box's field were read from the form's public page (`REPORT_FORM`), so no second form and no account. `tools/guestbook_updater.py` shows a message beginning "Problem report" to Tony as a report, private, never offered for the lobby | `renderSunInfo`, feature_renderers.js; `REPORT_FORM`, `REPORT_WORDS`, `sunReportMessage`, `sunReportLink` | shared mechanism; per-body copy and links |
 | Frame HUD: camera-following triad, Aries glyph with the frame note and its source, grid chip. A tap or hover anywhere on the triad opens the frame note, not on the Aries glyph alone; the grid chip opens a note on what an AU is, its kilometres the served KM_PER_AU (IAU 2012 Resolution B2), its words resting on the IAU's Measuring the Universe page, both linked (v1.27, L-495) | `sunHud*`, `sunAuNote*`, `#sun-au-note` | shared; reads the camera, never calls Plotly |
 | Consent gate and Pyodide load | `loadPyodideRuntime`, `CONSENT_KEY` | shared |
 | Back link: "Gallery" steps back in history when the gallery is behind it | BACK TO THE GALLERY block | shared |
@@ -668,7 +672,10 @@ Plotly.
   the orrery's description and link, as for any body. A row the served
   cache does not hold yet -- before the builder has served a new body,
   or when its first fetch failed -- is named in the room's notes and left
-  out, rather than stopping the room. Checked by the figures check's
+  out, rather than stopping the room. The gallery run is red on it twice
+  until the builder serves it, both correct, one cause: Cache in step,
+  and the Solar System figures check ("<slug>: the served cache has no
+  as_of_today or trust"; v1.28, found adding 2026 ED138, L-501). Checked by the figures check's
   part 7 (three worked cases, two planted faults, every served
   spacecraft) and walked headlessly (`walk_solar_system_drawer.js`,
   section 20, shown failing once on a predicted part drawn solid).
@@ -758,8 +765,29 @@ Plotly.
   button or Reset empties the box. The logic is the drawer file's FIND
   (`searchKey`, `searchNames`, `searchHits`, `searchVisible`,
   `searchGroupCount`, `searchVia`); checked by the drawer check, with two
-  planted breaks, and walked. Finding a GROUP by a word such as "comet"
-  is not built; it waits on a design talk (L-496).
+  planted breaks, and walked.
+  A GROUP IS FOUND TOO (v1.28, L-496; Tony's ruling of 2026-10-27,
+  "results list matching groups closed, with counts; choosing one opens
+  it; a single match opens directly"). It matches the group row's label
+  and its `find` words, served on the row in the rooms section: JPL's
+  class code and plain words ("comet" on the five comet groups; "HYA",
+  "comet" and "interstellar" on the interstellar objects; "asteroid" on
+  the asteroid groups, with "near-Earth" on Aten, Apollo and Amor;
+  "probe" and "mission" on the spacecraft; "CEN" on the centaurs; "TNO"
+  and "Kuiper belt" on the trans-Neptunian objects). A body row may
+  serve `find` too: the eight planets serve "planet", which is no row's
+  label, and Pluto serves none. Several groups matching are listed
+  closed, each with its count ("n bodies"), and the count line names
+  groups ("6 groups match"); choosing one clears the box and unfolds it,
+  ticking nothing; one group alone, with no body found outside it, opens
+  whole ("probe" opens the twelve spacecraft). The box still reads "Find
+  a body". The logic is the drawer file's GROUPS FOUND (`searchHits`
+  returns `listed` and `opened`; `searchOpen`; `WORDS.listed`,
+  `WORDS.found`), checked by the drawer check's section 8b with two
+  planted breaks. The `find` words were written by hand into
+  `data/objects_config.json`; neither `tools/store_writer.py` nor the
+  exhibit store editor takes them, as they take no other word of a
+  rooms-section row (`label`, `about`, `source_note`).
 - **The direction arrows** (v1.27, L-495; Tony, 2026-10-26: "a small
   directional arrow right on the orbit line near the objects showing the
   direction of travel of objects. This is to make clear what the orbit
@@ -854,13 +882,23 @@ is placed by the nearest point drawn, where it begins at 30.6.
 
 A ROW OPENS ITS OWN WORDS (L-468, 2026-10-22). Naming a row opens the
 info cross of the row's OWN feature, not the first cross the group
-holds: a member served `drawn_with` another (the streamer belt, drawn
-with the corona) yields the row to its host's cross.
-`GalleryFeatures.labelTraceIndex(traces, indices)` makes the pick and
+holds. `GalleryFeatures.labelTraceIndex(traces, indices)` makes the pick and
 `sunLabelMarker` in `interactive.html` asks it; the gallery run's
 "Label words" check (`documentation/smoke_label_words.js`) holds every
 shell row in both rooms to it, with a planted fault. Tony's phone look
 of 2026-10-21 found the corona's row opening the belt's old words.
+ONE ROW, ONE THING (v1.28, L-497, 6b; Tony, 2026-10-27, "Yes"). No
+member in either room is served `drawn_with` another now: the streamer
+belt, which was, has its own row again, directly under the corona's,
+with its own cross, hover and Go To box, placed by its own nearest edge
+(`range.low`, HELMET_CUSP_LOW_RADII, 2 solar radii), with no typed
+order. The corona's hover points at the belt's row in one sentence.
+This reverses Tony's ruling of 2026-10-04 (one name, one checkbox).
+The renderers still honour `drawn_with` if a member serves it -- its
+traces join the host's row and yield to the host's cross -- but the
+Label words check now fails on a shell row holding more than one info
+cross and on a Sun room with no row of the belt's own; its self-test
+plants the old join on a copy of the config.
 
 TIES AND PLACES:
 - A drawing whose nearest dot lies at or under its body's surface
@@ -1055,10 +1093,14 @@ left end ticks on the first try; a hidden shell draws and the view
 rescales to hold it; GO on an unticked shell ticks and frames it); a
 shell NAME (focus, the i-panel, and its text box -- mid-view with no
 arrow on a portrait phone, pinned to the marker elsewhere; the whole box
-on screen; sentences unbroken); a MARKER tap (opens on the first tap; a
-tap on empty space closes the box); the HUD note (hover on desktop, tap
-on phone); Gallery button then browser back; then landscape; then
-desktop, where the text box and the tap are as they were. Report each
+on screen; sentences unbroken); a MARKER tap (the page's one text box
+opens on the first tap, the same box naming the row opens: left-aligned,
+a sentence to a bullet, the feature's colour on its border; a tap on
+empty space closes it); the i panel's "Report a problem" link opens the
+form with the note started; the HUD note (hover on desktop, tap on
+phone); Gallery button then browser back; then landscape; then desktop,
+where a mouse resting on a marker opens the same box and moving off
+closes it. Report each
 trial with its conditions -- device, orientation, arrival or after
 which action -- per gallery-assembler's Mode 5 as Measurement. A
 headless run here measures the mechanism; only the phone measures
@@ -1089,8 +1131,35 @@ on where the marker sits, not on how much room there is. Wrap narrower,
 or pin a scene annotation, which always points. (L-318.) Since round 5
 the portrait phone's text box is a page annotation with no arrow at all,
 on Tony's word ("very useful but not indispensable"); the desktop keeps
-the pinned label. Plotly's OWN hover box on a marker tap still follows
-this rule and Tony saw no problem with it once taps landed.
+the pinned label. Plotly's OWN hover box is off in every room since
+v1.28 (L-497, 6a; below, One text box): a marker tap opens the page's
+text box instead, so this rule reaches only a room that turns Plotly's
+box back on.
+
+**One text box, for a tap and for Go To** (v1.28, L-497, 6a; Tony,
+2026-10-27: "why not have one hover box for both methods?", then
+"Confirmed"). Every room shows a feature's words in one box, the
+page's, whether the visitor taps the feature, rests a mouse on it, or
+names its row. Plotly's own box is switched off by `hovermode: false`
+in `buildSunLayout`'s scene; read from plotly.js 2.35.2, gl3d/scene.js,
+that gates only the box (`Fx.loneHover`), so `plotly_click` and the
+hover events still fire. A tap is deferred out of the event (L-278) and
+opens `sunLabelShow` with the marker's words; in the Sun and Earth
+rooms the camera still frames the shell, in the Solar System room it
+moves nothing. The box is left-aligned, its border the feature's colour
+at 2 px. Its WORDS are decided by `gallery/text_box.js`
+(`GalleryTextBox.bullets`), a file of its own by L-338, loaded by a
+script tag and so on the live check's file list: a soft break becomes a space, the
+first line is the title in bold, a line already opening with a bullet
+stays, a line opening "=" carries on the line before it as one bullet,
+every other line is cut into its sentences by the i panel's own cut
+(`GallerySources.sentences`), one to a bullet, and empty lines go;
+nothing else is added or dropped. The check is the gallery run's Hover
+budget row (`documentation/smoke_hover_budget.js`): five worked cases
+for the file, the page loading it and turning Plotly's box off, and a
+copy of the file with its sentence cut taken out, which must fail; it
+measures the phone's boxes bulleted. (The file's own header names a
+`documentation/smoke_text_box.js`, which does not exist at acbf206b.)
 
 **A line break inside a sentence is soft.** Hover text is wrapped twice
 -- at `HOVER_WIDTH` (70) for the desktop box and again at
@@ -1413,3 +1482,6 @@ cut in that session; the next session confirms its loaded copy reads
 2026-10-27 in a Claude Code session, which reads the skills as files in
 the repo, so its loaded copy of 1.26 was the repo's own; a session that
 loads the account's copy confirms it reads 1.27 before exhibit work.
+1.28 was cut on 2026-10-28 in a Claude Code session, from the repo's
+copy of 1.27; a session that loads the account's copy confirms it reads
+1.28 before exhibit work.

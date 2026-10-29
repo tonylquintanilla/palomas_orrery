@@ -233,6 +233,10 @@ Sun's adopted period is taken at, its turn at the equator and near the
 poles, and the Carrington rotation's turn as seen from Earth; the NASA
 Sun Fact Sheet joins the citations of the rate and the pole. No value
 changed.)
+Module updated: October 28, 2026 with Anthropic's Claude Opus 5.5
+(L-443: the main asteroid belt, a section of its own: JPL's MBA class
+limits, the brightness cut, two counts and three spread tables measured
+from 5,429 of JPL's main-belt orbits, for main_belt_sampler.py.)
 """
 
 import math
@@ -4009,6 +4013,231 @@ ZODIACAL_DUST_ASTEROID_MAX_PERCENT = 10
 # Read: as ZODIACAL_DUST_JFC_LOW_PERCENT, 2026-10-19, Claude Opus 5.5.
 # Source: as ZODIACAL_DUST_JFC_LOW_PERCENT.
 # Note: an upper limit: the asteroids' share is less than this.
+
+# ============================================================
+# THE MAIN ASTEROID BELT
+# L-443, Tony's ruling of 2026-10-28 (form B): JPL's edges for the class,
+# and the belt's spread measured from JPL's own orbits; the drawn cloud
+# is dots placed at random inside that spread, stored once. JPL's answer
+# is kept unchanged in
+# documentation/worksheets/main_belt_jpl_mba_h13_20261028.json, and
+# main_belt_sampler.py measures the three tables from it; no number is
+# typed there. test_drawings_export.py fails if the tables are not the
+# kept answer's.
+# ============================================================
+
+MAIN_BELT_A_INNER_AU = 2.0
+# Unit: au
+# Status: measured V_SOURCED 2026-10-28 -- open page
+# Figures: 2 -- the page prints 2.0.
+# Read: "SBDB Filter Parameters", version 1.0 (2021 August), the MBA
+# Read+: row, 2026-10-28, Claude Opus 5.5.
+# Source: JPL Solar System Dynamics, "SBDB Filter Parameters", version
+# Source+: 1.0 (2021 August), orbit class MBA, Main-belt Asteroid:
+# Source+: "Asteroids with orbital elements constrained by (2.0 au < a <
+# Source+: 3.2 au; q > 1.666 au)". https://ssd-api.jpl.nasa.gov/doc/sbdb_filter.html
+# Note: a limit on the semi-major axis, the orbit's size, not on distance
+# Note+: from the Sun; the drawing's ends are the distance table's.
+
+MAIN_BELT_A_OUTER_AU = 3.2
+# Unit: au
+# Status: measured V_SOURCED 2026-10-28 -- open page
+# Figures: 2 -- the page prints 3.2.
+# Read: as MAIN_BELT_A_INNER_AU, 2026-10-28, Claude Opus 5.5.
+# Source: as MAIN_BELT_A_INNER_AU.
+
+MAIN_BELT_Q_MIN_AU = 1.666
+# Unit: au
+# Status: measured V_SOURCED 2026-10-28 -- open page
+# Figures: 4 -- the page prints 1.666.
+# Read: as MAIN_BELT_A_INNER_AU, 2026-10-28, Claude Opus 5.5.
+# Source: as MAIN_BELT_A_INNER_AU.
+# Note: the limit on the perihelion, an orbit's nearest point to the Sun.
+
+MAIN_BELT_SAMPLE_H_MAX = 13
+# Unit: mag
+# Status: declared 2026-10-28 -- which asteroids the spread is measured
+# Status+: from: the brightest, roughly the larger ones, enough to keep
+# Status+: the cloud near the size the orrery drew before.
+# Figures: exact -- a choice, not a measurement.
+# Declared: Tony's go-ahead of 2026-10-28 on the 5,429 brightest (L-443).
+
+MAIN_BELT_SAMPLE_ORBITS = 5429
+# Unit: count
+# Status: measured V_FETCHED 2026-10-28 -- JPL's own answer, kept
+# Figures: exact -- a count JPL returned.
+# Source: JPL Solar System Dynamics, SBDB Query API, version 1.0, asked
+# Source+: 2026-10-28 for every asteroid of orbit class MBA (Main-belt
+# Source+: Asteroid) with absolute magnitude H 13 or brighter: 5,429
+# Source+: orbits (heliocentric elements a, e, i, om, w, ma at their
+# Source+: epochs). https://ssd-api.jpl.nasa.gov/doc/sbdb_query.html
+# Note: JPL's "count" field in the kept answer; the count changes as
+# Note+: JPL adds asteroids, and this row holds the answer of that date.
+
+MAIN_BELT_JPL_COUNT = 1394455
+# Unit: count
+# Status: measured V_FETCHED 2026-10-28 -- JPL's own answer, kept
+# Figures: exact -- a count JPL returned.
+# Source: JPL Solar System Dynamics, SBDB Query API, version 1.0, asked
+# Source+: 2026-10-28 for every asteroid of orbit class MBA, of any
+# Source+: brightness: 1,394,455. https://ssd-api.jpl.nasa.gov/doc/sbdb_query.html
+# Note: as MAIN_BELT_SAMPLE_ORBITS, a count of that date.
+
+MAIN_BELT_DISTANCE_PERCENTILES_AU = {
+    '0': 1.668,
+    '1': 1.926,
+    '2': 2.015,
+    '3': 2.076,
+    '4': 2.127,
+    '5': 2.169,
+    '10': 2.319,
+    '15': 2.431,
+    '20': 2.527,
+    '25': 2.613,
+    '30': 2.684,
+    '35': 2.744,
+    '40': 2.799,
+    '45': 2.849,
+    '50': 2.895,
+    '55': 2.941,
+    '60': 2.991,
+    '65': 3.043,
+    '70': 3.097,
+    '75': 3.154,
+    '80': 3.217,
+    '85': 3.294,
+    '90': 3.395,
+    '95': 3.544,
+    '96': 3.583,
+    '97': 3.626,
+    '98': 3.679,
+    '99': 3.761,
+    '100': 4.263,
+}
+# Unit: au
+# Status: measured V_FETCHED 2026-10-28 -- worked out from JPL's own
+# Status+: answer, kept
+# Figures: 3 -- capped by the sample, not by JPL's digits: measured
+# Figures+: again from the 2,038 brightest of these orbits (H 12 or
+# Figures+: brighter), the entries move by up to 0.031 AU, median 0.015
+# Figures+: (2026-10-28), so the hundredths are the last place the
+# Figures+: sample supports; every entry lies between 1 and 10 AU, so 3
+# Figures+: figures is that place throughout. Stored as measure() rounds
+# Figures+: them, to 0.001 AU; the export and the hover report 3.
+# Source: JPL Solar System Dynamics, SBDB Query API, version 1.0, asked
+# Source+: 2026-10-28 for every asteroid of orbit class MBA (Main-belt
+# Source+: Asteroid) with absolute magnitude H 13 or brighter: 5,429
+# Source+: orbits (heliocentric elements a, e, i, om, w, ma at their
+# Source+: epochs). https://ssd-api.jpl.nasa.gov/doc/sbdb_query.html
+# Note: the distance from the Sun at each percentile, keyed by the percentile,
+# Note+: of every orbit followed through one whole turn, 720 points evenly in
+# Note+: time, all orbits pooled: where these asteroids spend their time, on no
+# Note+: particular date. Every 5th percentile, and every one in the first and
+# Note+: last five.
+# Note+: The 0th is the nearest perihelion among the orbits and the 100th the
+# Note+: farthest aphelion, exactly: the drawing's two ends.
+
+MAIN_BELT_LATITUDE_PERCENTILES_DEG = {
+    '0': 0.00,
+    '1': 0.08,
+    '2': 0.16,
+    '3': 0.23,
+    '4': 0.31,
+    '5': 0.39,
+    '10': 0.80,
+    '15': 1.21,
+    '20': 1.65,
+    '25': 2.12,
+    '30': 2.61,
+    '35': 3.17,
+    '40': 3.83,
+    '45': 4.54,
+    '50': 5.27,
+    '55': 6.06,
+    '60': 6.91,
+    '65': 7.79,
+    '70': 8.66,
+    '75': 9.55,
+    '80': 10.53,
+    '85': 11.72,
+    '90': 13.30,
+    '95': 15.72,
+    '96': 16.61,
+    '97': 17.84,
+    '98': 19.85,
+    '99': 22.54,
+    '100': 41.44,
+}
+# Unit: deg
+# Status: measured V_FETCHED 2026-10-28 -- worked out from JPL's own
+# Status+: answer, kept
+# Figures: 2 -- capped by the sample: measured again from the 2,038
+# Figures+: brightest (H 12 or brighter), the entries move by up to 0.18
+# Figures+: deg, median 0.05 (2026-10-28), so the tenths are the last place
+# Figures+: the sample supports; 2 figures keeps that place from 1 to 10
+# Figures+: deg and is coarser above. The entries under 1 deg keep a finer
+# Figures+: place than the sample supports, which moves no dot. Stored as
+# Figures+: measure() rounds them, to 0.01 deg.
+# Source: JPL Solar System Dynamics, SBDB Query API, version 1.0, asked
+# Source+: 2026-10-28 for every asteroid of orbit class MBA (Main-belt
+# Source+: Asteroid) with absolute magnitude H 13 or brighter: 5,429
+# Source+: orbits (heliocentric elements a, e, i, om, w, ma at their
+# Source+: epochs). https://ssd-api.jpl.nasa.gov/doc/sbdb_query.html
+# Note: the angle above or below the ecliptic, either side, at each
+# Note+: percentile, measured as MAIN_BELT_DISTANCE_PERCENTILES_AU is.
+# Note+: The 100th is the largest inclination among the orbits, exactly.
+
+MAIN_BELT_HEIGHT_PERCENTILES_AU = {
+    '0': 0.000,
+    '1': 0.004,
+    '2': 0.008,
+    '3': 0.012,
+    '4': 0.015,
+    '5': 0.019,
+    '10': 0.040,
+    '15': 0.060,
+    '20': 0.081,
+    '25': 0.104,
+    '30': 0.127,
+    '35': 0.153,
+    '40': 0.183,
+    '45': 0.218,
+    '50': 0.256,
+    '55': 0.298,
+    '60': 0.343,
+    '65': 0.389,
+    '70': 0.435,
+    '75': 0.481,
+    '80': 0.529,
+    '85': 0.586,
+    '90': 0.667,
+    '95': 0.825,
+    '96': 0.874,
+    '97': 0.937,
+    '98': 1.024,
+    '99': 1.153,
+    '100': 2.766,
+}
+# Unit: au
+# Status: measured V_FETCHED 2026-10-28 -- worked out from JPL's own
+# Status+: answer, kept
+# Figures: 2 -- capped by the sample: measured again from the 2,038
+# Figures+: brightest (H 12 or brighter), the entries move by up to
+# Figures+: 0.014 AU, median 0.005 (2026-10-28), so the hundredths are the
+# Figures+: last place the sample supports; 2 figures keeps that place for
+# Figures+: the entries the hover prints (the 50th and 90th) and is coarser
+# Figures+: from 1 AU up. The entries under 0.1 AU, at the ecliptic, keep
+# Figures+: a finer place than the sample supports, which moves no dot.
+# Figures+: Stored as measure() rounds them, to 0.001 AU.
+# Source: JPL Solar System Dynamics, SBDB Query API, version 1.0, asked
+# Source+: 2026-10-28 for every asteroid of orbit class MBA (Main-belt
+# Source+: Asteroid) with absolute magnitude H 13 or brighter: 5,429
+# Source+: orbits (heliocentric elements a, e, i, om, w, ma at their
+# Source+: epochs). https://ssd-api.jpl.nasa.gov/doc/sbdb_query.html
+# Note: the distance above or below the ecliptic, either side, at each
+# Note+: percentile, measured as MAIN_BELT_DISTANCE_PERCENTILES_AU is. The
+# Note+: drawing does not place dots by it; the check holds the drawn dots'
+# Note+: heights to it, and the hover prints its 50th and 90th.
 
 # ============================================================
 # HELIOSPHERE BOUNDARIES (in AU)

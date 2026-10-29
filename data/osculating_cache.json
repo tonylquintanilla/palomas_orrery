@@ -5538,5 +5538,66 @@
       "elements_fetch_days": 102884.7954479848,
       "elements_fetch_center": "@sun"
     }
+  },
+  "Pluto-Charon Barycenter": {
+    "elements": {
+      "a": 39.34506272582425,
+      "e": 0.2480411659725472,
+      "i": 17.17469170724002,
+      "omega": 113.0474856267893,
+      "Omega": 110.3352303986509,
+      "epoch": "2026-10-28 20:36 osc.",
+      "TP": 2447700.515630057,
+      "MA": 54.48058346790978,
+      "TA": 81.57534945141573
+    },
+    "metadata": {
+      "fetched": "2026-10-28T20:35:43.739450",
+      "source": "JPL Horizons",
+      "solution_date": "2026-10-28",
+      "horizons_id": "9",
+      "display_name": "Pluto-Charon Barycenter",
+      "refresh_interval_days": 30,
+      "center_body": "@sun"
+    },
+    "period": {
+      "days": 90578.39025812282,
+      "open_orbit": false,
+      "center": "@0",
+      "epoch": "2026-10-28 20:36",
+      "fetched": "2026-10-28",
+      "source": "JPL Horizons PR (sidereal orbit period)",
+      "year_change_days": 0.31426049568108283,
+      "year_step_days": 365.25,
+      "sbdb_sigma_days": null,
+      "sbdb_status": "not a small body; SBDB not asked",
+      "sbdb_fullname": null,
+      "error_days": 0.31426049568108283,
+      "error_from": "year_change",
+      "test": {
+        "@sun": 179.7934025407303,
+        "@0": 0.31426049568108283,
+        "run": "2026-10-28"
+      },
+      "horizons_targetname": "Pluto Barycenter (9)",
+      "target": "9",
+      "target_label": null,
+      "agrees_with_elements_fetch": null,
+      "elements_fetch_not_compared": null,
+      "elements": {
+        "a": 39.48919057963887,
+        "e": 0.2490220618046639,
+        "i": 17.14062661251349,
+        "omega": 113.7746613050757,
+        "Omega": 110.300959531181,
+        "TP": 2447808.948852194,
+        "MA": 53.78796641589784,
+        "TA": 80.87498040333418,
+        "q": 29.65551092249989,
+        "epoch": "2026-10-28 20:36 osc."
+      },
+      "elements_fetch_days": 90143.36962951737,
+      "elements_fetch_center": "@sun"
+    }
   }
 }

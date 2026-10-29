@@ -39,7 +39,7 @@ data/drawings/<name>.json for each entry in DRAWINGS:
     made_by       the function that places the dots
     frame         the frame the coordinates are in
     unit          "au" (the Hills cloud, the dust cloud, the outer cloud,
-                  the tide), "r_earth" (the belts, the exosphere) or "r_sun"
+                  the tide, the main belt), "r_earth" (the belts, the exosphere) or "r_sun"
                   (the corona)
     rounding      how each coordinate was rounded, and why that is safe
     settings      the drawing's settings: orbits, dots per orbit, seed
@@ -107,6 +107,11 @@ outer_oort_sampler.py and the galactic tide from galactic_tide_sampler.py,
 each in whole AU in the ecliptic frame, each placed once from a seed.
 The Hills cloud's description says it fills in across its inner edge's
 range, Tony's ruling of the same day.)
+Module updated: October 28, 2026 with Anthropic's Claude Opus 5.5 (L-443:
+the eighth stored drawing, the main asteroid belt from
+main_belt_sampler.py, in AU to 0.001 in the ecliptic frame, dots placed
+at random inside the spread measured from JPL's main-belt orbits, Tony's
+form B of the same day.)
 """
 
 import hashlib
@@ -354,6 +359,37 @@ def _galactic_tide():
     }
 
 
+def _main_belt():
+    """The main asteroid belt's file content, as a dict (L-443,
+    2026-10-28)."""
+    import main_belt_sampler as mbs
+    rows = mbs.rows_from_store()
+    dots = mbs.drawn_main_belt(rows)
+    return {
+        "schema": SCHEMA,
+        "drawing": "main_belt",
+        "what": ("The main asteroid belt as dots placed at random inside "
+                 "the belt's spread, in distance from the Sun and in "
+                 "angle above or below the ecliptic, measured along the "
+                 "whole orbits of JPL's main-belt asteroids (class MBA) "
+                 "of absolute magnitude 13 or brighter. Not individual "
+                 "asteroids, and the same on every date."),
+        "made_by": "main_belt_sampler.drawn_main_belt()",
+        "frame": ("ecliptic and equinox of J2000, centred on the Sun, the "
+                  "orrery's drawing frame"),
+        "unit": "au",
+        "rounding": ("each coordinate to 0.001 AU, about 150,000 km: a "
+                     "drawing, not a measurement"),
+        "settings": dots["settings"],
+        "rows": list(mbs.ROW_NAMES),
+        "rows_sha256": rows_sha256(rows),
+        "dots": len(dots["x"]),
+        "x": [round(v, 3) for v in dots["x"]],
+        "y": [round(v, 3) for v in dots["y"]],
+        "z": [round(v, 3) for v in dots["z"]],
+    }
+
+
 # name -> function returning the file's content. A new stored drawing
 # is one line here, and test_drawings_export.py checks every entry.
 DRAWINGS = {
@@ -364,6 +400,7 @@ DRAWINGS = {
     "zodiacal_dust": _zodiacal_dust,
     "outer_oort_cloud": _outer_oort_cloud,
     "galactic_tide": _galactic_tide,
+    "main_belt": _main_belt,
 }
 
 # The lists a drawing may carry, one line each in the file, in this

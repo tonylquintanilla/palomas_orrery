@@ -44,6 +44,12 @@ For every entry in export_drawings.DRAWINGS it checks:
                   latitude shells following |sin b cos b| about the
                   galactic pole as its rows give it, worked out a second
                   way (galactic_tide_sampler.check_dots)
+    the main belt every dot between its two ends, the dots holding each
+                  band's share of the measured distance and latitude
+                  tables, their heights the measured heights
+                  (main_belt_sampler.check_dots); and the three tables
+                  are the kept JPL answer's, measured again
+                  (main_belt_sampler.check_rows)
 
 A check that passes is only worth something if it can fail, so faults
 are planted first, each in memory, and each must be caught:
@@ -68,6 +74,9 @@ are planted first, each in memory, and each must be caught:
     an outer cloud dot moved inside its row  the outer cloud
     a tide dot moved past the outer edge     the tide
     the tide drawn about the ecliptic's pole the tide
+    a main-belt dot moved past its far end   the main belt
+    the main belt drawn flat                 the main belt
+    a main-belt spread row edited            the main belt
 
 The last line starts "DRAWINGS EXPORT:", which the maintenance run
 quotes. It names each drawing, its dots, its tilt and its sha256.
@@ -104,6 +113,9 @@ tide, checked against their rows, with three more faults planted: an
 outer cloud dot inside where its row says it begins, a tide dot past
 the outer edge, and the tide drawn about the wrong pole; and the Hills
 cloud's fill-in across its inner edge's range, with its planted fault)
+Module updated: October 28, 2026 with Anthropic's Claude Opus 5.5 (L-443:
+the eighth drawing, the main asteroid belt, checked against its rows and
+its rows against the kept JPL answer, with three more faults planted)
 """
 import hashlib
 import json
@@ -119,6 +131,7 @@ import sun_corona_sampler as scs
 import zodiacal_dust_sampler as zds
 import outer_oort_sampler as oos
 import galactic_tide_sampler as gts
+import main_belt_sampler as mbs
 
 PROJECT_DIR = os.path.dirname(os.path.abspath(__file__))
 
@@ -201,6 +214,10 @@ def check_one(name, text_on_disk, text_now, path, ignored=git_ignored):
             failures.append("%s: %s" % (name, line))
     elif name == "galactic_tide":
         for line in gts.check_dots(content, gts.rows_from_store()):
+            failures.append("%s: %s" % (name, line))
+    elif name == "main_belt":
+        rows = mbs.rows_from_store()
+        for line in mbs.check_dots(content, rows) + mbs.check_rows(rows):
             failures.append("%s: %s" % (name, line))
     tilt = None
     if lengths == [n] * len(axes) and n and "plane_tilt_deg" in content:
@@ -398,6 +415,32 @@ def _planted_outer_cloud(cloud_now, tide_now):
     return out
 
 
+def _planted_main_belt(text_now):
+    """Three faults for the main belt (L-443), each caught by its own
+    check: two in the file, each compared with itself as the belts' are;
+    the third a spread row edited, with the file left as drawn, so only
+    the rows' check against the kept JPL answer can catch it."""
+    out = []
+    far = json.loads(text_now)
+    far["x"][0], far["y"][0], far["z"][0] = 5.0, 0.0, 0.0
+    out.append(("a main-belt dot moved past its far end", ed.render(far),
+                None, "ends:"))
+    rows = mbs.rows_from_store()
+    rows["MAIN_BELT_LATITUDE_PERCENTILES_DEG"] = dict(
+        (k, 0.0) for k in rows["MAIN_BELT_LATITUDE_PERCENTILES_DEG"])
+    other = mbs.drawn_main_belt(rows)
+    flat = json.loads(text_now)
+    for axis in ("x", "y", "z"):
+        flat[axis] = [round(v, 3) for v in other[axis]]
+    out.append(("the main belt drawn flat", ed.render(flat), None,
+                "latitude:"))
+    edited = mbs.rows_from_store()
+    edited["MAIN_BELT_DISTANCE_PERCENTILES_AU"]["95"] += 0.1
+    out.append(("a main-belt spread row edited", text_now, edited,
+                "rows:"))
+    return out
+
+
 def main():
     print("=" * 70)
     print("  DRAWINGS EXPORT CHECK -- data/drawings/ against the rows")
@@ -460,6 +503,23 @@ def main():
             caught += 1
         else:
             problems.append("planted fault not caught: " + label)
+    main_belt_planted = _planted_main_belt(texts_now["main_belt"])
+    for label, text, rows, expect in main_belt_planted:
+        real = mbs.rows_from_store
+        if rows is not None:
+            mbs.rows_from_store = lambda: rows
+        try:
+            failures, _ = check_one("main_belt", text, text,
+                                    ed.path_of(PROJECT_DIR, "main_belt"),
+                                    lambda _p: False)
+        finally:
+            mbs.rows_from_store = real
+        hit = any(expect in line for line in failures)
+        print("  planted: %-36s %s" % (label, "caught" if hit else "MISSED"))
+        if hit:
+            caught += 1
+        else:
+            problems.append("planted fault not caught: " + label)
     print("")
 
     named = []
@@ -490,7 +550,7 @@ def main():
         return 1
     print("DRAWINGS EXPORT: PASS -- %d of %d planted faults caught; %s"
           % (caught, len(planted) + len(belt_planted) + len(exo_planted)
-             + len(sun_planted),
+             + len(sun_planted) + len(main_belt_planted),
              "; ".join(named)))
     return 0
 

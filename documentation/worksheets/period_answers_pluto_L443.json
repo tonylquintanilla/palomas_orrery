@@ -1,0 +1,79 @@
+{
+  "_comment": "Recorded answers for test_period_fetch.py part 7 (L-443, Pluto's year). Written 2026-10-28 with Anthropic's Claude Opus 5.5, built on orrery b2fcc1bb50d6bbf30fc91ac58de474483a5c7c02. Every answer is JPL's own, recorded live; none is constructed. Record 9 asked as a major body (id_type None) is 'Pluto Barycenter (9)'. The same run's first attempt asked 9 as a small body and JPL answered for the asteroid 9 Metis (a period of 1,346.6 days); that answer is not kept here, and the test plants that fault and finds no answer for it. The test treats a query with no answer here as JPL not reached.",
+  "built_on": "b2fcc1bb50d6bbf30fc91ac58de474483a5c7c02",
+  "when": "2026-10-28T20:35:00",
+  "when_note": "The time the test passes as 'now'. fetch_osculating_elements adds 69 seconds (UTC to TDB) and writes it to the minute, which gives the epoch '2026-10-28 20:36'.",
+  "inputs": {
+    "cache": {}
+  },
+  "answers": {
+    "elements": {
+      "9|None|2026-10-28 20:36|None": {
+        "answer": {
+          "a": 39.34506272582425,
+          "e": 0.2480411659725472,
+          "i": 17.17469170724002,
+          "omega": 113.0474856267893,
+          "Omega": 110.3352303986509,
+          "TP": 2447700.515630057,
+          "MA": 54.48058346790978,
+          "TA": 81.57534945141573,
+          "epoch": "2026-10-28 20:36 osc.",
+          "solution_date": "2026-10-28",
+          "horizons_id": "9",
+          "center_body": "@sun",
+          "q": 29.5858674920478,
+          "P_days": 90143.36962951737
+        },
+        "from": "recorded: JPL Horizons' own answer, read live 2026-10-28 by period_fetch.py's first run with the Pluto-Charon barycentre fetched (L-443), through the real orbit_data_manager / orbital_period functions, wrapped only to record what they returned."
+      }
+    },
+    "period_pairs": {
+      "9|None|2026-10-28 20:36|@sun": {
+        "answer": {
+          "p1": 90143.36962951737,
+          "p2": 90323.1630320581,
+          "step_days": 365.25,
+          "e": 0.2480411659725472,
+          "targetname": "Pluto Barycenter (9)",
+          "elements": {
+            "a": 39.34506272582425,
+            "e": 0.2480411659725472,
+            "i": 17.17469170724002,
+            "omega": 113.0474856267893,
+            "Omega": 110.3352303986509,
+            "TP": 2447700.515630057,
+            "MA": 54.48058346790978,
+            "TA": 81.57534945141573,
+            "q": 29.5858674920478,
+            "epoch": "2026-10-28 20:36 osc."
+          }
+        },
+        "from": "recorded: JPL Horizons' own answer, read live 2026-10-28 by period_fetch.py's first run with the Pluto-Charon barycentre fetched (L-443), through the real orbit_data_manager / orbital_period functions, wrapped only to record what they returned."
+      },
+      "9|None|2026-10-28 20:36|@0": {
+        "answer": {
+          "p1": 90578.39025812282,
+          "p2": 90578.7045186185,
+          "step_days": 365.25,
+          "e": 0.2490220618046639,
+          "targetname": "Pluto Barycenter (9)",
+          "elements": {
+            "a": 39.48919057963887,
+            "e": 0.2490220618046639,
+            "i": 17.14062661251349,
+            "omega": 113.7746613050757,
+            "Omega": 110.300959531181,
+            "TP": 2447808.948852194,
+            "MA": 53.78796641589784,
+            "TA": 80.87498040333418,
+            "q": 29.65551092249989,
+            "epoch": "2026-10-28 20:36 osc."
+          }
+        },
+        "from": "recorded: JPL Horizons' own answer, read live 2026-10-28 by period_fetch.py's first run with the Pluto-Charon barycentre fetched (L-443), through the real orbit_data_manager / orbital_period functions, wrapped only to record what they returned."
+      }
+    },
+    "sbdb": {}
+  }
+}

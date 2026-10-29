@@ -912,7 +912,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*254 live items; 238 need attention (`!`); 165 RICE-scored; 241 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*249 live items; 233 need attention (`!`); 165 RICE-scored; 247 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1035,11 +1035,11 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-393 | Encounter data: dates, spacecraft records centred on their targets, and how far the cache reaches in time (gallery, cache) | OPEN | -- | 2026-09-29 |
 | ! | L-394 | A card cannot say which body it belongs to (gallery, Studio) | OPEN | -- | 2026-09-29 |
 | ! | L-396 | Tony's page: WHERE_WE_ARE.md, the big picture in plain words (documentation, skills) | OPEN | -- | 2026-10-07 |
-| ! | L-399 | Small bodies: fetch each one's own position uncertainty from Horizons (gallery, builder) | OPEN | -- | 2026-10-01 |
+| ! | L-399 | Small bodies: fetch each one's own position uncertainty from Horizons (gallery, builder) | OPEN | -- | 2026-10-28 |
 | ! | L-401 | The orrery's own distance hovers print by fixed widths, not by the errors the position earns (orrery, provenance) | OPEN | -- | 2026-10-21 |
 | ! | L-402 | Choose a date, or animate, within the range the drawn bodies are trusted for (gallery, exhibits) | OPEN | -- | 2026-10-01 |
 | ! | L-403 | Numbers in the object list's descriptions carry no source (orrery, provenance) | OPEN | -- | 2026-10-01 |
-| ! | L-411 | The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-21 |
+| ! | L-411 | The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-28 |
 | ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-10-27 |
 | ! | L-423 | The website's checks: the order Tony confirmed (checks, gallery) | OPEN | -- | 2026-10-16 |
 | ! | L-424 | The checker reports one word for two different cases (worksheet checker) | OPEN | -- | 2026-10-11 |
@@ -1048,38 +1048,33 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-427 | Rows a neighbour's citation had been crediting (store) | OPEN | -- | 2026-10-09 |
 | ! | L-429 | The room button on the row, in the Solar System room's list (gallery, exhibits) | OPEN | -- | 2026-10-10 |
 | ! | L-430 | Uncited lines in the orrery's Oort cloud tooltips and the Sun's reach text (orrery, words) | OPEN | -- | 2026-10-10 |
-| ! | L-432 | Objects drawn in the default goldenrod (orrery, colours) | OPEN | -- | 2026-10-11 |
+| ! | L-432 | Objects drawn in the default goldenrod (orrery, colours) | OPEN | -- | 2026-10-28 |
 | ! | L-435 | Standing rulings that are method, held only on Tony's page (skills, records) | OPEN | -- | 2026-10-12 |
-| ! | L-443 | The rest of the orrery's objects come to the website as plotted positions (gallery + orrery, objects) | OPEN | -- | 2026-10-27 |
 | ! | L-449 | A cache build dropped the 82 build-run records it should have carried (gallery, cache builder) | OPEN | -- | 2026-10-17 |
 | ! | L-454 | A drawn device for edges that move: the magnetopause, the bow shock and their kind (orrery + gallery, design) | OPEN | -- | 2026-10-28 |
 | ! | L-456 | What a visitor reads, from Earth's Mode 5 look: body radii, sources as a list with live links, Celsius for Earth's surface and air (gallery + orrery) | OPEN | -- | 2026-10-21 |
-| ! | L-458 | A "report a problem" link in every room's i panel (gallery, interactive) | OPEN | -- | 2026-10-28 |
 | ! | L-459 | A monthly run for slow checks, started by the Daily Run (gallery + orrery, maintenance) | OPEN | -- | 2026-10-20 |
 | ! | L-461 | The Daily Run confirms the orrery it pulled is the one Tony pushed (gallery, Daily Run) | OPEN | -- | 2026-10-25 |
 | ! | L-462 | The orrery maintenance run, a short form for small patches (orrery, maintenance) | OPEN | -- | 2026-10-26 |
-| ! | L-465 | The Sun room draws the Sun's pole and its direction of spin, as the orrery does (gallery, the Sun room) | OPEN | -- | 2026-10-28 |
 | ! | L-466 | Every drawing starts and stops where a served row says (orrery + gallery, the Sun's slice and Earth's) | OPEN | -- | 2026-10-22 |
 | ! | L-467 | The scanner credits a display line with a citation it only sits near (orrery, provenance scanner) | OPEN | -- | 2026-10-21 |
 | ! | L-468 | The Sun room's phone look of 2026-10-21, night: the corona's drawer text and the Hills cloud's cross (gallery, the Sun room) | OPEN | -- | 2026-10-28 |
 | ! | L-470 | Orrery entries the website cannot serve as they stand (orrery, objects) | OPEN | -- | 2026-10-25 |
 | ! | L-476 | The orrery's whole-path plots draw by the same path plan as the website (orrery, spacecraft and comets) | OPEN | -- | 2026-10-24 |
-| ! | L-483 | A room for C/2025 K1 and its pieces, the first comet room (gallery, exhibits) | OPEN | -- | 2026-10-24 |
+| ! | L-483 | A room for C/2025 K1 and its pieces, the first comet room (gallery, exhibits) | OPEN | -- | 2026-10-28 |
 | ! | L-484 | The website and the orrery agree on every object both draw, or the difference is written down (orrery + gallery, objects; method for interactive-exhibit) | OPEN | -- | 2026-10-28 |
-| ! | L-485 | A nightly unattended run of the routines (orrery + gallery, maintenance) | OPEN | -- | 2026-10-27 |
+| ! | L-485 | A nightly unattended run of the routines (orrery + gallery, maintenance) | OPEN | -- | 2026-10-28 |
 | ! | L-486 | A view carried into a room (gallery, the rooms) | OPEN | -- | 2026-10-26 |
 | ! | L-487 | Each body's description in the i panel, one bullet per sentence (gallery, the i panel) | OPEN | -- | 2026-10-25 |
 | ! | L-488 | Solar features beside a spacecraft in the Solar System room, such as the heliopause (gallery, the rooms) | OPEN | -- | 2026-10-26 |
-| ! | L-489 | Compositions: a curated view within a room, authored in the editor (gallery, the rooms) | OPEN | -- | 2026-10-27 |
+| ! | L-489 | Compositions: a curated view within a room, authored in the editor (gallery, the rooms) | OPEN | -- | 2026-10-28 |
 | ! | L-490 | What the website leans on outside its two repositories, for when Tony cannot work it (orrery + gallery, legacy) | OPEN | -- | 2026-10-26 |
 | ! | L-491 | The comet nucleus sizes the orrery's comet hover prints, sourced (orrery, the words a visitor reads) | OPEN | -- | 2026-10-26 |
-| ! | L-496 | The drawer's search box finds groups too, such as "comet", "planet" or "asteroid" (gallery, the drawer) | OPEN | -- | 2026-10-28 |
-| ! | L-497 | Left-aligned text in every text box (gallery, the rooms) | OPEN | -- | 2026-10-28 |
 | ! | L-498 | The master plan restamped as v37 at slice 2's close (documentation) | OPEN | -- | 2026-10-27 |
 | ! | L-499 | The kinds of session: three, told apart by what each writes, with the build session in two forms (protocol, Mode 7) | OPEN | -- | 2026-10-27 |
 | ! | L-500 | The Sun's twelve eyeballed shape numbers: the streamer belt's seven and the outer cloud's clumps' five (orrery + gallery, the Sun's drawings) | OPEN | -- | 2026-10-27 |
-| ! | L-501 | 2026 ED138, the Rubin Observatory's first dwarf-planet candidate, added to the orrery as a test of the object pipeline (orrery + gallery, objects) | OPEN | -- | 2026-10-28 |
 | ! | L-502 | The triad's hover spot, and info crosses in crowded places (gallery, the rooms) | OPEN | -- | 2026-10-28 |
+| ! | L-503 | The main asteroid belt's cloud on the website, L-443's last piece, its gallery half (gallery, the Solar System room) | OPEN | -- | 2026-10-28 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1440,6 +1435,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-440 | The dashboard's labels, short lines and headings, and the parity check (dashboard, both repos) | DONE | -- | 2026-10-14 |
 |  | L-441 | The dashboard's "when" index, generated from tags (dashboard, dropped 2026-10-14) | DONE | -- | 2026-10-14 |
 |  | L-442 | The master plan is strategy and the road is the order: Tony's seven kinds of document (documentation, DONE 2026-10-14) | DONE | -- | 2026-10-14 |
+|  | L-443 | The rest of the orrery's objects come to the website as plotted positions (gallery + orrery, objects) | DONE | -- | 2026-10-28 |
 |  | L-444 | The maintenance run fetches a served body's missing period from JPL, as its own step before the Horizons check (orrery, periods) | DONE | -- | 2026-10-15 |
 |  | L-445 | Earth's orbital period from the Earth-Moon barycentre, not Earth's centre (orrery + website, periods) | DONE | -- | 2026-10-16 |
 |  | L-446 | The website's Daily Run pulls the orrery's exports before it builds the cache (gallery, daily run) | DONE | -- | 2026-10-16 |
@@ -1450,9 +1446,11 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-452 | The website's notes beside a citation: read them again now that the citation prints above them (gallery, words) | DONE | -- | 2026-10-17 |
 |  | L-453 | The page's grey type turned blue, and the inner shells' radius named (gallery, the rooms' look) | DONE | -- | 2026-10-16 |
 |  | L-455 | Typed numbers in the website's served words, with no row behind them (gallery, words) | DONE | -- | 2026-10-18 |
+|  | L-458 | A "report a problem" link in every room's i panel (gallery, interactive) | DONE | -- | 2026-10-28 |
 |  | L-460 | Every room's drawer orders its shells by where each begins (gallery, exhibits; method for interactive-exhibit 1.19) (DONE 2026-10-22) | DONE | -- | 2026-10-22 |
 |  | L-463 | A pink band or sheet across the Sun room on Tony's phone (gallery, rendering, DONE 2026-10-21) | DONE | -- | 2026-10-21 |
 |  | L-464 | The Sun room's own row: no info link, and the pole's citation has nowhere to show (gallery, interactive, DONE 2026-10-21) | DONE | -- | 2026-10-21 |
+|  | L-465 | The Sun room draws the Sun's pole and its direction of spin, as the orrery does (gallery, the Sun room) | DONE | -- | 2026-10-28 |
 |  | L-469 | Where We Are gains a Deferred section (records; ledger-and-session-records 1.22, DONE 2026-10-22) | DONE | -- | 2026-10-22 |
 |  | L-471 | A delivered patch is final (safe-file-editing, next version) | DONE | -- | 2026-10-25 |
 |  | L-472 | The Solar System room's view: a far body drawn in the wrong place when zoomed in (gallery, the Solar System room) | DONE | -- | 2026-10-24 |
@@ -1469,6 +1467,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-493 | A search box to find a row in the Solar System room's drawer (gallery, the drawer) | DONE | -- | 2026-10-26 |
 |  | L-494 | A pointer to the i button, so a visitor knows where more information is (gallery, the rooms' chrome) | DONE | -- | 2026-10-26 |
 |  | L-495 | Tony's phone look of the night of Oct 26: the wrapped orbit line, the AU note, a comet's farthest planet on a closed orbit, the whole triad, the direction arrows (gallery, the rooms) | DONE | -- | 2026-10-27 |
+|  | L-496 | The drawer's search box finds groups too, such as "comet", "planet" or "asteroid" (gallery, the drawer) | DONE | -- | 2026-10-28 |
+|  | L-497 | Left-aligned text in every text box (gallery, the rooms) | DONE | -- | 2026-10-28 |
+|  | L-501 | 2026 ED138, the Rubin Observatory's first dwarf-planet candidate, added to the orrery as a test of the object pipeline (orrery + gallery, objects) | DONE | -- | 2026-10-28 |
 
 ### W.Done -- Web Publication track, closed items
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1508,181 +1509,51 @@ as an archive of the prioritization thinking -- no cleanup on close.
   they get lost in the glare?"
 - Captured on first mention by the L-501 session, which built nothing
   on the website.
+- **Received 2026-10-28 from L-497, at its close:**
+  `gallery/text_box.js`'s header names `documentation/smoke_text_box.js`
+  as its check, which does not exist at acbf206b; the check is the
+  Hover budget row. A one-line comment fix when this build opens the
+  page's text-box code.
 **Gap:** a design talk: where the triad sits on a phone, and a rule for
 placing an info cross clear of dense drawing.
 **Ref:** L-497; interactive-exhibit, the anatomy (the frame HUD); L-318.
 
-#### [L-501] 2026 ED138, the Rubin Observatory's first dwarf-planet candidate, added to the orrery as a test of the object pipeline (orrery + gallery, objects)
-<!-- L:501 status:OPEN upd:2026-10-28 section:A flag: rice: -->
-- **Opened 2026-10-28** in a Claude Code session built on orrery 45d475b0
-  and gallery 3dc5bb30, by
-  `documentation/COORD_2026_ED138_words_20261028.md` (sections 4 and 5).
-  Tony, 08:58: "adding this object to our orrery and website would be a
-  great test of our methods!"; 09:11, a comparison to Pluto.
-- **Built (orrery):** `celestial_objects.py` entry keyed
-  `tno_2026_ed138`, id '2026 ED138', id_type 'smallbody', horizons_name
-  '(2026 ED138)', read from JPL's Lookup on 2026-10-28 (asteroid,
-  integrated barycenter; SPKID 54667839; the major-body index finds
-  nothing). Its link is Wikipedia's "2026 ED138", live that day; NASA has
-  no page of its own for it (interactive-exhibit, A feature's info link).
-  A checkbox among the Kuiper Belt objects (`palomas_orrery.py`) and a
-  tooltip (`info_dictionary.py`). No typed elements, no typed period.
-- **Tony's ruling, 2026-10-28, on how its numbers reach the hover:** "B,
-  words only." The story sentences stay with their sources; the orbit
-  figures come out, because the hover's own lines print the period, the
-  distance and the orbit from JPL's record. The 1925 perihelion and the
-  600 to 1,500 km size range were to stay only if the Typed numbers check
-  allows a cited date and range in this room's words. It does not: it
-  reads only the Sun and Earth rooms, and by its rules a typed range
-  fails. Both came out. The perihelion sentence now says only that it has
-  passed perihelion and is moving outward (JPL's tp, read 2026-10-28).
-- **One wording corrected, for Tony to see:** the approved words said
-  "JPL calls it a hot classical TNO". JPL's class is TNO; "hot classical"
-  is the Rubin Observatory's, which the note itself named as that
-  sentence's source. The served sentence says "the Rubin Observatory
-  calls it a hot classical TNO".
-- **Sources read 2026-10-28:** the Rubin Observatory release of
-  2026-10-27 (https://rubinobservatory.org/news/rubin-first-dwarf-planet-candidate),
-  which supports every sentence citing it; MPEC 2026-U85, issued 2026
-  October 27, 18:17 UT, observations from 2016 (Dark Energy Camera, W84)
-  and 2026 (Rubin, X05). Each is named in the entry's comments.
-- **The Pluto sentence's numbers** (words only, none printed): 2026
-  ED138 from its fetched record, around the solar system's centre of
-  mass, 2026-10-28: perihelion 37.11 AU, aphelion 49.07 AU, tilt 24.43
-  deg, period 103,249 days (about 283 years), error 10.3 days. Pluto
-  from the orrery's cached orbit around the Sun (epoch 2026-06-05):
-  perihelion 29.62 AU, aphelion 49.44 AU, tilt 17.40 deg, and a year of
-  about 248.5 years worked out from its cached a of 39.53 AU by Kepler's
-  third law, since no period for Pluto is fetched. Pluto's diameter, 2 x
-  PLUTO_RADIUS_KM = 2,376.6 km, is larger than the release's top
-  estimate of 1,500 km. All four comparisons hold; the nearest margin is
-  the aphelion, 0.4 AU.
-- **The maintenance run of 2026-10-28:** the period fetch fetched 2026
-  ED138 (one new cache entry); the Horizons check confirmed its identity
-  and its period, JPL's PR equal to the fetched one; the objects export
-  carries it; the provenance gate held at 0 Tier-1, no file's count
-  rising. The pre-test loaded the orrery with its window loop off: one
-  entry, its checkbox, its tooltip.
-- **Findings (orrery):**
-  - The Constants change check fails on any changed line in
-    `constants_new.py` that holds a digit and is not a value it reads,
-    so a new body's colour in `color_map` turns the run red. The colour
-    was taken out, and 2026 ED138 draws in the default, goldenrod. A
-    colour is a drawing setting (provenance-discipline, Three Kinds of
-    Drawing Number), so the class is the colour table's place: in the
-    drawing code, or a shape the check reads.
-  - Pluto's served period is "Not yet fetched from JPL" (the
-    pluto_barycenter entry; the Pluto-Charon Barycenter has no cache
-    entry). So on the website a visitor does not see Pluto's year on its
-    own line, as the Pluto sentence assumes.
-  - An object's words on the website show no citation for the sentences
-    a source supports, only the link and the Horizons source line
-    (provenance-discipline, What a Visitor Reads, principle 4). Recorded
-    as a class, not chased.
-- **Findings (gallery), reported, not fixed, by the brief:** for 2026
-  ED138 to appear in the Solar System room's TNO row, two hand edits to
-  `data/objects_config.json`: (1) an object block with slug
-  `tno_2026_ed138` and the fields no tool writes (category, availability,
-  parent, the centre and frame, trajectory_of, trace_policy, features),
-  as 2017 OF201's block has; (2) a drawer row `{ "slug":
-  "tno_2026_ed138", "in": "tno" }` in the Solar System room's rows. Until
-  (1) exists, the objects mirror refuses the export ("a key in the export
-  with no object of that slug in the config"), and the Daily Run stops at
-  its pulls step. And the Typed numbers check does not read the Solar
-  System room's words, so the discovery dates in this object's words are
-  held by no check.
-- **Built (gallery), 2026-10-28,** in a Claude Code session built on
-  gallery 3dc5bb30 and orrery 777a8dee (both read live with git
-  ls-remote; Tony's go-ahead in chat, "Go ahead"). Three edits, made
-  directly in the working copy:
-  - `data/objects_config.json`: the object block for `tno_2026_ed138`
-    after Arrokoth's, holding only the fields no tool writes, as 2017
-    OF201's does (category asteroid, availability analytic, parent sun,
-    canonical_center @sun, center_slug sun, canonical_frame
-    heliocentric, trajectory_of null, trace_policy none, features {}),
-    with name, horizons_id and id_type, which the objects mirror
-    replaces but needs present.
-  - the same file: the drawer row `{ "slug": "tno_2026_ed138", "in":
-    "tno" }`, last in the TNO group, which lists by served semi-major
-    axis ("order": "a").
-  - `tools/test_gallery_cache_builder_offline.py`: a stand-in for the
-    fake Horizons, ELEMS '2026 ED138' a 42.948, e 0.14174 (the brief's
-    JPL read), and its stamp. The brief named two edits; the third is
-    gallery-cache-builder's Adding a new object, step (2): without it
-    the suite's fake_elements fails on a body it has no answer for.
-- **These edits are the website's AUTHOR STEP for a new body** (Tony's
-  instruction, 2026-10-28, in this session's opening prompt; the reading
-  is the coordinating session's, in his run record
-  `documentation/WHERE_WE_ARE_10-28-26_1344_run_record.md`: "this stop
-  is by design, not a defect"). The website is curated: a
-  room shows what its author put in it, and the objects mirror refusing
-  an export that names a body the config lacks is the same rule as the
-  Daily Run stopping on a pull that is not the push. Neither tool the
-  skills allow to write the config can make them: `mirror_constants.py`
-  writes numbers and their citations, `store_writer.py` words and a
-  room's arrival. So the only route today is a hand edit (here) or a
-  patch (L-443 slice 1's 50 bodies, patch_L443_2). Everything else the
-  body carries -- its description, link, period and JPL's name -- the
-  objects mirror wrote from the orrery's export on the run below.
-  **Follow-up:** the exhibit store editor (`tools/exhibit_store_editor.py`
-  over `tools/store_writer.py`) should offer these two edits as a form:
-  a new body's block from its orrery key, and its drawer row in a
-  group. It joins the question already on Where We Are, whether the
-  editor also edits the Solar System room's rows, and the editor work
-  queued for compositions (L-489 (compositions)).
-- **The maintenance run, offline, 2026-10-28:** 34 of 36 gating checkers
-  passed. The pulls fetched the orrery's exports at 777a8dee; the
-  objects mirror linked 90 objects and wrote 2026 ED138's description,
-  info_url, period (fetched, around the solar system's centre of mass,
-  282.7 years, 103,250 days) and horizons_name "(2026 ED138)"; a second
-  mirror check read "every linked field already matches". The cache
-  builder's offline suite passed, 485 checks. Two red, ONE cause, the
-  cache not yet rebuilt: Cache in step ("tno_2026_ed138 is in the config
-  and not in" coverage_index.json and feature_configs.json), which
-  gallery-cache-builder calls correct straight after a config change;
-  and Solar System figures ("tno_2026_ed138: the served cache has no
-  as_of_today or trust"). Both clear when the Daily Run's builder runs.
-- **Findings (gallery):**
-  - The Solar System figures check also goes red on a body the cache
-    does not hold yet, while the room itself names such a row in its
-    notes and leaves it out. The skill names only Cache in step as red
-    after a config change; the figures check's red is the second, for
-    interactive-exhibit's next version (it would only tell a session
-    the run is red for one reason, not two).
-  - gallery-cache-builder 1.13 says a new non-spacecraft body needs
-    --first-build, not nightly. The Daily Run builds nightly, and slice
-    1's 50 bodies went in that way and draw from their elements; the
-    sentence is for that skill's next version, carried here, not acted
-    on.
-  - The mirror also moved five spacecraft plans' `made` date from
-    2026-10-25 to 2026-10-28 (Voyager 1 and 2, New Horizons, Juno,
-    OSIRIS-APEX), span and events unchanged: the orrery's run re-made
-    them. By the builder's rule a new `made` is a new plan, so the Daily
-    Run fetches those five paths whole again, and the shrink gate names
-    them. By design; the run takes longer.
-- **Tony's questions in his run record, answered:**
-  - "is our test correct if it differs from JPL?" Yes. JPL's
-    Small-Body Database gives 102,806 days around the Sun; the orrery
-    takes every period around the solar system's centre of mass ('@0'),
-    and from there JPL's own figure is 103,249 days. The Horizons check
-    compares the fetched period with JPL's at that same centre, and they
-    agreed. For a body this far out the two centres give different
-    years because the Sun itself moves around the centre of mass.
-  - Pluto's year "not yet fetched": the period fetch skips the
-    Pluto-Charon barycentre on purpose, because plotting's pre-fetch
-    does not fetch it either (`period_fetch.py`, docstring, "Today that
-    is the Pluto-Charon barycentre, which L-443 carries"). So it reports
-    nothing missing, and the website's Pluto row prints "not yet
-    fetched". The fix belongs to L-443 (the objects), an orrery session.
-  - The colour: "okay"; 2026 ED138 stays the default goldenrod.
-**Gap:** Tony's Daily Run (its builder serves 2026 ED138 and clears the
-two reds), the website's maintenance run, the gallery commit and push,
-the live run, and his phone look: the TNO row lists 2026 ED138, its
-words read as bullets, Go To fits its orbit. Closes on that look. The
-editor form is the follow-up above, not this item's gap.
-**Ref:** `documentation/COORD_2026_ED138_words_20261028.md`; L-443;
-L-484; `celestial_objects.py`; `constants_change_report.py`; gallery
-`tools/mirror_objects.py`, `documentation/smoke_typed_numbers.js`.
+#### [L-503] The main asteroid belt's cloud on the website, L-443's last piece, its gallery half (gallery, the Solar System room)
+<!-- L:503 status:OPEN upd:2026-10-28 section:A flag: rice: -->
+- **Opened 2026-10-28 at L-443's close**, which built the orrery half
+  in the orrery's Claude Code session built on orrery b2fcc1bb and
+  gallery acbf206b (section 5, item 1 of
+  `documentation/HANDOFF_coordination_20261026_28.md`), by Tony's
+  ruling of that day (form B, recorded on L-443): dots placed at random
+  inside the belt's spread measured from 5,429 of JPL's main-belt
+  orbits, stored once, the hover saying it shows the belt's extent,
+  not individual bodies. The brief: "The website's pull and the
+  room's row are the next gallery session's."
+- **What the orrery serves at its push:** `data/drawings/main_belt.json`
+  (6,000 dots, 0.001 AU, the ecliptic frame, seed 443, written by
+  `export_drawings.py`); the nine MAIN_BELT_* rows in
+  `data/constants_export.json`, with their sources (JPL's SBDB Filter
+  Parameters and SBDB Query API); and the words, the orrery's
+  `main_belt_sampler.hover_text()`, every number from a row at its
+  declared count.
+- **What the gallery half does:** name the drawing under a feature's
+  `drawing.dots` in `data/objects_config.json`, so
+  `tools/pull_drawings.py` fetches it (it pulls only what the config
+  names, so the orrery's new file waits safely until then); give it
+  the Solar System room's row, beside the Main asteroid belt group
+  (JPL's MBA, the same class); serve its numbers through the rows, not
+  typed; its words to Tony first. It is the first stored drawing in a
+  room whose rows are bodies, so where its row sits and how it ticks
+  is the session's first question to Tony.
+- **Received from L-443:** the headless walk's Pluto frame check fails
+  on the stand-in data (it fails the same way on the untouched base);
+  it holds on the served cache. Recorded, not chased.
+**Gap:** the gallery session (after L-399 and L-502 on Tony's queue):
+the pull, the room's row, the words; the gallery run with the drawing's
+ends held; then Tony's phone look.
+**Ref:** L-443; orrery `main_belt_sampler.py`,
+`data/drawings/main_belt.json`, `constants_new.py` (THE MAIN ASTEROID
+BELT); gallery `tools/pull_drawings.py`, `data/objects_config.json`.
 
 #### [L-500] The Sun's twelve eyeballed shape numbers: the streamer belt's seven and the outer cloud's clumps' five (orrery + gallery, the Sun's drawings)
 <!-- L:500 status:OPEN upd:2026-10-27 section:A flag: rice: -->
@@ -1813,148 +1684,6 @@ commit and push. Then DONE.
 `documentation/COORD_next_sessions_brief_20261026.md`; L-442; L-443;
 L-485; L-489; L-490; L-412.
 
-#### [L-497] Left-aligned text in every text box (gallery, the rooms)
-<!-- L:497 status:OPEN upd:2026-10-28 section:A flag: rice: -->
-- **Tony, 2026-10-26, night,** at his phone look of the wrapped orbit
-  line (`documentation/WHERE_WE_ARE_10-26-26_1451_run_record.md`, the second website patch's
-  phone look): "we should standardize text on left justified."
-- What his screenshots of Halley showed that evening: the box Plotly
-  opens on a tap on a marker drew its lines centred, while the page's
-  own text box, the one the drawer opens, is drawn left-aligned
-  (`align: "left"` in sunLabelRefresh).
-- **2026-10-27, grown at the talk** (`documentation/DESIGN_talk_20261027_rulings.md`, section 6).
-  - 6a, one text box. Tony, at his look at the Sun's axis: "The hover
-    tapping the cross should be left justified as the go to text is.
-    Add bullets to sentences in both for readability. Question: why
-    not have one hover box for both methods?" Put to him: a tap on a
-    cross opens the page's own box with the hover's words in place of
-    Plotly's tooltip. Tony: "Confirmed." So: one text box for tap and
-    Go To, the page's own, in every room; left-aligned; one sentence
-    to a bullet; the feature's colour on the box. The gold box goes.
-  - 6b, the streamer belt gets its own row again. Tony: "should we
-    separate the corona and the streamers again?" Put to him: every
-    other row draws one thing with one cross, one hover and one box.
-    Tony: "Yes." The belt is a row of its own, directly under the
-    corona's, with its own cross, hover and Go To box; the corona's
-    hover sentence on the belt becomes a pointer at the belt's row.
-    This reverses Tony's ruling of Oct 4 (L-412's item 2; L-410's
-    "one name, one checkbox").
-- **2026-10-27, late night, built** (Claude Opus 5.5, the gallery's
-  first Claude Code session, no patch file; built on gallery 7a4a03a):
-  - 6a, one text box. Plotly's own hover box is off in every room
-    (`scene.hovermode: false` in buildSunLayout; read from plotly.js
-    2.35.2, gl3d/scene.js: hovermode gates only the box, so a tap still
-    sends plotly_click). A tap on a marker opens the page's text box
-    with that marker's words; in the Sun and Earth rooms the camera
-    still frames the shell, in the Solar System room it still moves
-    nothing. A mouse resting on a marker opens it on a desktop, and
-    moving off closes a box the pointer opened (Claude's call, so the
-    desktop keeps a hover; for Tony to see). The words are one sentence
-    to a bullet, the title bold, by `gallery/text_box.js` (new, with the
-    panel's own sentence cut); a line opening "=" joins the line before.
-    The box's border is the feature's colour at 2 px, up from 1.
-  - 6b, the streamer belt's own row: `drawn_with` taken off its entry in
-    `data/objects_config.json`; the drawer lists it directly under the
-    corona's row by its own nearest edge (range.low, 2 solar radii), as
-    the ruling asked, with no typed order. The corona's hover sentence
-    now reads "The streamer belt, the part of the corona where the Sun's
-    magnetic field closes in loops, has its own row, just below this
-    one." (written with tools/store_writer.py; words for Tony to see).
-  - Checks: Hover budget now holds the box's words (five worked cases,
-    and a copy with the sentence cut taken out must fail) and measures
-    the phone's boxes bulleted; Label words fails on a row with more than
-    one cross and on a Sun room with no belt row, its self-test planting
-    the old join on a copy of the config; Sun shells and Display figures
-    re-recorded for the belt's row (fixture_hovers_L497_on_7a4a03a8.json,
-    exactly four hovers different from the L-494 one). No new check row,
-    so the orrery dashboard needs no new button.
-  - Seen in a real browser on a local copy (the built-in browser, Plotly
-    and Pyodide from their CDNs): a tap on the axis cross and on Earth
-    opened the bulleted box in the feature's colour; a resting mouse
-    opened it and moving off closed it. The phone has not seen it.
-  - For Tony's look: the Sun's axis box, with its five bullets, is 33
-    lines on a portrait phone at 34 characters a line (the Hover budget
-    check's tallest; Earth's axis 27), more than a phone shows at once.
-**Note (Claude, for interactive-exhibit's next version; this gallery
-session reads the orrery's skills and does not edit them):** sentences
-1.27 says that are now wrong, each one a session following it would act
-on: "Finding a GROUP by a word such as "comet" is not built" (L-496 built
-it); "the streamer belt, drawn with the corona" under A row opens its own
-words (the belt has its own row, 6b); the Phone first sequence and The
-touch path's "Plotly's OWN hover box on a marker tap" (gone, 6a); and the
-anatomy table's drawer row, which says only naming a shell opens the text
-box (a tap does too). Also new to record: `gallery/text_box.js`, the
-`find` words on the drawer's rows, and the "Report a problem" link
-(L-458).
-- **Tony's look, recorded 2026-10-28** from `documentation/WHERE_WE_ARE_10-27-26_0906_run_record.md`: "In the Sun room, tap a cross, then use Go To on the same
-  feature. -- correct." His further ask in the same line is L-502.
-**Gap (replaces the one below, 2026-10-27, late night):** the Daily Run
-to rebuild the cache, then commit and push; then Tony's phone look of
-the box (a tap, Go To, the colour border, the bullets, the belt's own
-row and the corona's new sentence). Then DONE.
-**Gap (2026-10-27; superseded above):** the build, in the
-gallery session of the Oct 27 brief (item 2a): 6a and 6b, with the
-drawer order and Label words checks updated for the belt's row. Mode
-5: Tony judges the box on his phone.
-**Gap (2026-10-26; superseded above):** a small build: Plotly's own box left-aligned in every room,
-the Sun's and Earth's too; then Tony's phone look.
-**Ref:** gallery `interactive.html` (the layouts' hover label,
-sunLabelRefresh); L-495.
-
-#### [L-496] The drawer's search box finds groups too, such as "comet", "planet" or "asteroid" (gallery, the drawer)
-<!-- L:496 status:OPEN upd:2026-10-28 section:A flag: rice: -->
-- **Tony, 2026-10-26, night,** at his phone look of the search box
-  (`documentation/WHERE_WE_ARE_10-26-26_1451_run_record.md`, the first website patch's phone look):
-  "the user should also be able to find groups, like "comet" or
-  "planet" or "asteroid" not just individual bodies."
-- Since L-493 the box matches each body's four names; a group's row
-  name and its class words are not searched.
-- **2026-10-27, ruled at the talk** (`documentation/DESIGN_talk_20261027_rulings.md`, section 2).
-  Tony asked: "Comets and asteroids match several groups. Would the
-  result list the groups open or closed?" His ruling: "results list
-  matching groups closed, with counts; choosing one opens it; a single
-  match opens directly. -- confirmed." So typing "comet" lists the
-  comet groups as rows with their member counts; choosing one scrolls
-  the drawer to it and unfolds it, ticking nothing; one match skips
-  the list.
-**Note (Claude, from the record, not ruled):** a group is found by its
-row label, by JPL's class name, and by a short list of plain words
-beside its label ("comet", "planet", "asteroid"), held in the store
-with the group's other words so the editor can change it. A body is
-still found by its own names.
-- **2026-10-27, late night, built** (Claude Opus 5.5, the gallery's
-  first Claude Code session; built on gallery 7a4a03a), by Tony's
-  ruling and Claude's reading above. Each group row in the store serves
-  `find`, its plain words: JPL's class code and "comet" for the five
-  comet groups, "HYA", "comet" and "interstellar" for the interstellar
-  objects, "asteroid" (and "near-Earth" for Aten, Apollo and Amor) for
-  the asteroid groups, "probe" and "mission" for the spacecraft, "CEN"
-  for the centaurs, "TNO" and "Kuiper belt" for the trans-Neptunian
-  objects; the eight planets' rows serve "planet". A group is found by
-  its label and its words: several list closed, each with "n bodies";
-  one alone, with no body found outside it, opens whole ("probe" opens
-  the twelve spacecraft); choosing a listed group clears the search and
-  unfolds it, ticking nothing. "planet" finds the eight planets; Pluto,
-  a dwarf planet, serves no word, so it is not among them (for Tony to
-  see). The count line names groups ("6 groups match"). The box still
-  reads "Find a body". Logic in `gallery/solar_system_drawer.js`
-  (GROUPS FOUND); the drawer check's section 8b, with two planted
-  breaks, both red. Tried in a real browser: "comet" lists six groups
-  closed, "jfc" opens Jupiter-family comets whole, "planet" lists eight.
-- **Tony's look, recorded 2026-10-28** from `documentation/WHERE_WE_ARE_10-27-26_0906_run_record.md`: "In the Solar System room, search "comet" and choose a
-  group; then try "planet" and "probe". -- correct"
-**Gap (replaces the one below, 2026-10-27, late night):** commit and
-push; then Tony's phone look. Then DONE.
-**Gap (2026-10-27; superseded above):** the build, in the
-gallery session of the Oct 27 brief (item 2c), with the drawer
-check's planted breaks; then Tony's phone look.
-**Gap (2026-10-26; superseded above):** a design talk: what a group match shows (the group open with
-all its bodies, or its row alone), and which words find a group (its
-row's name, JPL's class name, plain words such as "planet"); words to
-Tony first; then a build with the drawer check's planted breaks.
-**Ref:** gallery `gallery/solar_system_drawer.js` (searchHits),
-`interactive.html` (the drawer); L-493.
-
 #### [L-491] The comet nucleus sizes the orrery's comet hover prints, sourced (orrery, the words a visitor reads)
 <!-- L:491 status:OPEN upd:2026-10-26 section:A flag: rice: -->
 - **Opened and built 2026-10-26, to run** in the comets session of slice 2
@@ -2034,7 +1763,7 @@ failure mode and how its failure shows.
 (sections 4 and 6); L-485.
 
 #### [L-489] Compositions: a curated view within a room, authored in the editor (gallery, the rooms)
-<!-- L:489 status:OPEN upd:2026-10-27 section:A flag: rice: -->
+<!-- L:489 status:OPEN upd:2026-10-28 section:A flag: rice: -->
 - **Opened 2026-10-26** from the design talk of Oct 25, evening
   (`documentation/DESIGN_compositions_rulings_20261025.md`, Claude
   Fable 5.1's record, zero code). Prompted by build B's finding that
@@ -2118,6 +1847,11 @@ failure mode and how its failure shows.
     `?exhibit=solar-system&scene=voyager-1`.
   - The first scene stays example 1, Voyager 1 with its planets in
     the Solar System room, unless he says otherwise then.
+- **Received 2026-10-28 from L-501 (2026 ED138), at its close:** the
+  exhibit store editor should offer a new body's two edits as a form:
+  its block in `data/objects_config.json` from its orrery key, and its
+  drawer row in a group. It joins Where We Are's question whether the
+  editor also edits the Solar System room's rows.
 **Gap (replaces the one below, 2026-10-27):** after L-412 and L-413
 close: the encounters question first; then the discovery list; then
 the build, example 1 first.
@@ -2228,7 +1962,7 @@ Are).
 L-489.
 
 #### [L-485] A nightly unattended run of the routines (orrery + gallery, maintenance)
-<!-- L:485 status:OPEN upd:2026-10-27 section:A flag: rice: -->
+<!-- L:485 status:OPEN upd:2026-10-28 section:A flag: rice: -->
 - **Tony, 2026-10-24, night,** in his run record (`documentation/WHERE_WE_ARE_10-24-26_1927_run_record.md`): "i am
   thinking of revising the idea of an automated run at midnight every
   day, with all the daily and 30-day run routines except the messages.
@@ -2331,6 +2065,23 @@ L-489.
   mechanics the build takes unless he objects; he did not object.
 - **On the road** (the record's section 4): beside Earth's list, not
   in front of it.
+- **Received 2026-10-28 from L-443 and L-501, at their closes,** for
+  gallery-cache-builder's next version, which this item's gallery
+  session fires (each would mislead, not act wrongly):
+  - The Builder Reads the Period's Centre says a comet is drawn "from
+    its elements at perihelion"; every comet is drawn from its
+    elements of today since 2026-10-22.
+  - Adding a New Object says --first-build is required for a new
+    non-spacecraft object, while the room draws an analytic body from
+    its elements, so a Daily Run onboards it (slice 1's 50 bodies and
+    2026 ED138 went in that way).
+  - A config change is not deployed names only Cache in step as red
+    straight after a config change; the Solar System figures check is
+    red then too, for a body the cache does not hold yet.
+  - And from this session: `osculating_cache_manager.save_cache` writes
+    `data/osculating_cache.json` in text mode with no newline='', so on
+    Windows every save turns it CRLF (git normalizes it on commit); a
+    generator does not let the platform pick (safe-file-editing).
 **Gap (replaces the one below, 2026-10-27):** two build sessions,
 orrery then gallery, from
 `documentation/DESIGN_L485_nightly_run_rulings_20261025.md` with P1
@@ -2370,6 +2121,20 @@ L-490.
   period; the website cannot hold it until its config gains the object
   and its drawer row by hand, so the two do not yet agree, by L-501's
   gallery findings.
+- **Received 2026-10-28 from L-501 and L-443, at their closes:**
+  - An object's words on the website show no citation for the
+    sentences a source supports, only the link and the Horizons source
+    line (provenance-discipline, What a Visitor Reads, principle 4),
+    recorded as a class.
+  - The served objects with no key (the Moon, Io, Titan, Pluto's body,
+    Charon) get no period on the website and no Horizons check; each
+    gains both when it gets a key.
+  - From L-395: the fields the list lacks (a moon's parent, a clean
+    kind); the display-name rename, which waits for names to stop
+    being keys; MAPS and 3I/ATLAS checked live once served; whether the
+    identity check widens past the keyed entries (default no).
+  - Not asked: whether the Lagrange points and the exoplanet entries
+    are ever served.
 **Gap (replaces the one below, 2026-10-25):** the check's design, then
 its build, with a planted fault; where its exceptions live.
 **Gap (superseded above):** the rule into interactive-exhibit at its next version (this
@@ -2379,7 +2144,7 @@ with a planted fault; where its exceptions live.
 `data/objects_config.json`.
 
 #### [L-483] A room for C/2025 K1 and its pieces, the first comet room (gallery, exhibits)
-<!-- L:483 status:OPEN upd:2026-10-24 section:A flag: rice: -->
+<!-- L:483 status:OPEN upd:2026-10-28 section:A flag: rice: -->
 - **Tony, 2026-10-24, 17:20, in chat**
   (`documentation/COORD_L443_words_decisions_20261024.md`, sec. 2a):
   "And for the comet can we create our first comet room for its
@@ -2396,6 +2161,12 @@ with a planted fault; where its exceptions live.
   lines not yet checked against a source: the discovery, the Earth
   approach, the brightness forecasts, the non-gravitational note, the
   pieces' distances.
+- **Received 2026-10-28 from L-443, at its close,** for the comets'
+  next design look: six comets (halley, ikeya_seki, hale_bopp,
+  hyakutake, neowise, lemmon) carry the builder's warning "its period
+  is around @0, but a comet is drawn from its elements around the
+  Sun": the hover's period and the drawn ellipse use different
+  centres, against L-431's ruling 7 (one orbit for hover and drawing).
 **Gap:** a design talk, after slice 2 draws the comets; then the build.
 **Ref:** L-443; L-470; `celestial_objects.py`; `info_dictionary.py`.
 
@@ -2764,219 +2535,6 @@ CORONA_BASE_KM, CORONA_BASE_RADII); `palomas_orrery_dashboard.py`;
 `documentation/DISCOVERY_drawn_ends_20261021.md`; L-460; L-434; L-413;
 L-330.
 
-#### [L-465] The Sun room draws the Sun's pole and its direction of spin, as the orrery does (gallery, the Sun room)
-<!-- L:465 status:OPEN upd:2026-10-28 section:A flag: rice: -->
-- **Tony, 2026-10-21,** in his run record after the Sun's own row was
-  fixed (`documentation/WHERE_WE_ARE_10-21-26_1217_run_record.md`): "can we show the
-  pole and the sun's rotational direction like the orrery?"
-- **What the orrery draws, read at orrery b3c3e2a5:**
-  `build_rotation_axis_traces` in `planet_visualization_utilities.py`
-  draws a centre body's spin-pole line, a curved arrow for the direction
-  of spin and one info marker, from the same pole matrix that turns the
-  streamer belt. Its hover gives the sidereal rotation period, the
-  direction (prograde) and the tilt; for the Sun those are typed strings
-  in that file ("25.38 d sidereal", "7.25 deg to ecliptic"), sourced in
-  its comments, not rows in `constants_new.py`.
-- **What the website has:** the Sun's pole is served (`orientation`, NASA
-  NAIF's pck00011.tpc) and turns the room's drawings, and since L-464
-  its citation shows on the Sun's own row; nothing draws the axis. The
-  Earth room's axis is its own drawer row, Rotation Axis and Equator,
-  which is the website's existing form for this.
-- **2026-10-22, designed and built in one session, from Tony's phone**
-  ("Could we add one more feature to the website? The sun's pole and
-  rotational axis like the orrery?"). The words were put to him in
-  chat; his next message called the axis done, read as his yes. Store
-  rows (orrery `patch_L465_1_sun_axis_rows_orrery_20261022.py`):
-  SUN_POLE_RA_J2000_DEG and SUN_POLE_DEC_J2000_DEG (planet_poles['Sun']
-  reads them now), SUN_ROTATION_RATE_DEG_PER_DAY from NASA NAIF's
-  pck00011 (read 2026-10-22), DEG_PER_TURN, and two derived rows the
-  website prints, SUN_SIDEREAL_ROTATION_PERIOD_D (25.3800 days: six
-  figures, the rate's) and SUN_EQUATOR_TILT_DEG (7.25 degrees). The
-  sense of the arrows: Archinal et al. (2019), Fig. 1 caption, read the
-  same day. The figures checker and the constants change report learn
-  acos.
-- **Website** (`patch_L465_2_sun_axis_website_20261022.py`):
-  `renderRotationAxis`, a frame element drawn first and always: a gold
-  line 1.5 solar radii each way along the served pole, an arrow at each
-  end turning by the served period's sign, one marker whose hover
-  prints the period and tilt by their own served sentences in the
-  approved words. The Sun shells check measures it with a planted
-  backwards period; Arrival holds it drawn on opening with no shell
-  key; Typed facts allows its name beside Earth's guides'; the hover
-  fixture re-recorded with only it added. The opening view widens from
-  about 1.2 to 1.7 solar radii to hold it. In interactive-exhibit 1.20.
-- **Carried, not chased (The Braid):** (a) the orrery's own axis hover
-  still types the Sun's period, tilt and differential range ("24.5-35
-  d") in PLANET_ROTATION (`planet_visualization_utilities.py`); wiring
-  them to the rows changes words a visitor reads, so it goes to Tony,
-  with a source for the Sun's differential rotation. (b) The axis's
-  geometry is now written twice, `renderRotationAxis` and
-  `gallery/earth_geometry.js`; one shared builder when the Earth room is
-  next opened. (c) The constants change report cannot follow numbers
-  out of a dictionary entry into rows: it names planet_poles' Sun line
-  once, on this patch, and Tony is told to expect it.
-- **2026-10-24, night: (a) not built.** The brief for the session called
-  it a small fix with no open question, to ride any orrery patch the
-  session opened. It is not: wiring the orrery's Sun-axis hover to the
-  store rows changes words a visitor reads, which go to Tony before they
-  ship, and its "differential 24.5-35 d" still needs a source a visitor
-  can open. So it stays on Where We Are's list, with the words to be
-  drafted for Tony.
-- **2026-10-27, Tony's phone look** (`documentation/DESIGN_talk_20261027_rulings.md`, section 6,
-  look 2): the axis with its arrows, the opening view and its hover,
-  "Correct." His three notes on the hover went to L-497 (ruling 6a).
-- **2026-10-27, the words and the sources, ruled at the talk** (the
-  record's section 5). Read that day by the coordinating session: the
-  NASA Sun Fact Sheet (sidereal rotation period 609.12 hours, "the
-  adopted period at 16 deg. latitude"; obliquity to ecliptic 7.25
-  deg) and NASA SOHO's lesson page "Differential Rotation of the Sun"
-  (25 days at the equator, up to 35 at the poles). The "24.5" has no
-  source and goes. Five bullets for the orrery's Sun axis hover, Tony:
-  "Confirmed": the period with its 16 degrees; the differential
-  rotation; a Carrington bullet ("the standard count of solar
-  rotations, 25.38 days, named for Richard Carrington, who measured it
-  from sunspots in 1863"); the tilt; the spin prograde. (a) becomes a
-  build.
-- **2026-10-27, evening, (a) not built: two findings at the build**
-  (Claude Opus 5.5, the Code session of that evening). Both pages
-  re-read that evening at the addresses in the record.
-  1. The SOHO page, the source the record names for the differential
-     bullet, contradicts the Carrington bullet: "The Carrington
-     Rotations are named for Richard Carrington, an astronomer who
-     first noted that sunspots rotate every 27.28 days. Rotations are
-     numbered starting with 9 November 1853." So the count runs at
-     27.28 days, the turn seen from Earth, not at the 25.38-day turn
-     against the stars; and it starts in 1853, not 1863. No page read
-     carries the 1863 or Carrington measuring the 25.38.
-  2. Neither NASA page names a source for its figures, so under
-     provenance-discipline's Access Standard (an agency summary that
-     names no source is a lead, read one layer down) neither is the
-     citation for a figure that has a work behind it. For the period
-     and the tilt the store already went one layer down: they print
-     from SUN_SIDEREAL_ROTATION_PERIOD_D and SUN_EQUATOR_TILT_DEG,
-     worked from the IAU's rotational elements in NASA NAIF's kernel,
-     and the fact sheet's 609.12 hours and 7.25 deg agree with them.
-     For the 25-and-35 pair no work behind it was found in one search;
-     the fact sheet's own latitude formula, (14.37 - 2.33 sin2 L -
-     1.56 sin4 L) deg/day, matched no published fit found.
-  The build rows checked first, as the brief asked: the period and the
-  tilt already have rows (above); the pair has none.
-- **2026-10-27, night, Tony's word on the two findings** (in the Code
-  session, pasted): "The Carrington bullet: reword, keep it." His text:
-  "Carrington rotation: the standard count of the Sun's turns, numbered
-  from November 9, 1853. One turn is 27.28 days as sunspots are seen to
-  come round from Earth, which is 25.38 days against the stars, because
-  Earth moves along its orbit meanwhile. Named for Richard Carrington,
-  who first noted that sunspots rotate." Sources: NASA SOHO for 27.28
-  days and 1853, the NASA Sun Fact Sheet for 25.38 days; "1863" dropped.
-  The other four bullets confirmed as they stand, with the SOHO page
-  for the differential pair.
-- **2026-10-27, night, (a) built** (Claude Opus 5.5, Claude Code, no
-  patch file):
-  - `constants_new.py`: four rows, each with its Read line, read that
-    evening: SUN_ADOPTED_PERIOD_LATITUDE_DEG (16, the fact sheet),
-    SUN_DIFFERENTIAL_ROTATION_EQUATOR_D (25) and _POLE_D (35) (the SOHO
-    page), SUN_CARRINGTON_SYNODIC_PERIOD_D (27.28, the SOHO page). The
-    pair is two rows, not one, by the store's range convention (a LOW
-    and a HIGH row). Each SOHO row says in a Note that the page names
-    no source of its own and is cited on Tony's ruling. The fact sheet
-    joined the Source of SUN_ROTATION_RATE_DEG_PER_DAY (its 609.12 hours
-    at 16 degrees) and of the two pole rows (the same pole, and its
-    7.25 deg tilt), beside the IAU's. No value changed.
-  - `planet_visualization_utilities.py`: PLANET_ROTATION['Sun'] carries
-    the five bullets, every number printed from its row at its declared
-    count by `_row_text()`, which keeps trailing zeros; the typed
-    "25.38 d", "7.25 deg" and "24.5-35 d" are gone.
-    `build_rotation_axis_traces` prints a body's `hover_bullets` where
-    it has them; every other body's hover is unchanged.
-  - Two choices the rules made, for Tony to see: the period prints
-    25.3800, the row's six figures, where his words said 25.38
-    (provenance-discipline, Rule 7: a display prints the declared
-    count, as the website's hover already does); and the Carrington
-    bullet ends "Sources: NASA SOHO, Differential Rotation of the Sun;
-    NASA Sun Fact Sheet.", as the other bullets end with theirs. The
-    date the count starts is words on the hover, cited where the hover
-    is built.
-  - Checked on the live path: `create_celestial_body_visualization`
-    for the Sun builds one axis info marker with the five bullets; its
-    longest line 68 characters; no "24.5"; Earth's, Mars's and
-    Uranus's axis hovers unchanged. The headless GUI run of
-    agentic-pre-test was not run (Windows, no xvfb); the maintenance run
-    was: 32 of 32 gating checkers, gate path 0.
-  - The scanner's window, met and undone (L-467's class): the first
-    placement of the bullets sat between PLANET_ROTATION and the NASA
-    fact sheet comment above it, and the docstring note quoted the old
-    typed numbers. The whole tree's Tier-1 rose 276 to 283, all in this
-    file (4 to 11): six planets' typed tilts no longer under the comment,
-    and the docstring. Nothing had been sourced or unsourced. The block
-    moved below the table and the docstring lost the numbers; the next
-    run read 276, the same four findings in the file by name.
-  - The website's axis hover (the check the brief asked for): it prints
-    the period and the tilt from their served rows in its own approved
-    words. To carry the same five bullets it would need the four new
-    rows exported and served; that is the gallery's to decide under
-    interactive-exhibit, which this orrery session did not load.
-    Recommended: yes, in the gallery session that builds L-497's one
-    text box, since the axis hover is one of the boxes it rebuilds.
-- **2026-10-27, Tony's look at the orrery's Sun axis hover**, in his run
-  record `documentation/WHERE_WE_ARE_10-27-26_0906_run_record.md`
-  (run order step 1, "Check the five bullets."): "-- correct"; pushed
-  at 94258f2 (step 3). Recorded by the L-492 session.
-- **2026-10-27, late night, Tony's decision** (pasted to the gallery's
-  Code session): "the website's Sun axis hover takes the same five
-  bullets as the orrery's, from the served rows, in the one text box."
-- **2026-10-27, late night, built on the website** (Claude Opus 5.5,
-  the gallery's Code session; built on gallery 7a4a03a, the export
-  pulled at orrery d46f204): the four new rows linked in the Sun's
-  orientation block (`adopted_latitude`, `differential_equator`,
-  `differential_pole`, `carrington_period`), their values and citations
-  written by `tools/mirror_constants.py` from the export; each bullet's
-  sentence is its row's served `hover_line`, the period's and the
-  tilt's reworded to the bullets; the spin a served word
-  (`words.spin`). `renderRotationAxis` prints them between the picture's
-  two sentences; a row the served cache does not hold yet leaves its
-  bullet out, with a warning. The i panel lists six citations. The
-  website's form follows its own rules where they differ from the
-  orrery's: no "Source:" tail in the hover (the citations are the i
-  panel's), and one sentence to a bullet (L-497, 6a), so the five
-  bullets show as eight. The date "November 9, 1853" is on Typed
-  numbers' DATES list, its work on the Carrington row's Source line.
-  Checked: Sun shells (all eight lines at their served counts, the six
-  citations, and a cache without the four rows), Typed numbers, Typed
-  facts, Hover budget (17 lines, at the ceiling; the blank line under
-  the title dropped to fit).
-- **Tony's look, recorded 2026-10-28** from `documentation/WHERE_WE_ARE_10-27-26_0906_run_record.md`: "Look at the belt's row, the axis box, the F corona's cross
-  and the dashes. -- correct" (the axis box is this item's part).
-**Gap (replaces the one below, 2026-10-27, late night):** the Daily Run
-to rebuild the cache (the rows reach a visitor only then), commit and
-push; then Tony's phone look of the axis box. Then DONE.
-**Gap (2026-10-27, late; superseded above):** whether the
-website's axis hover takes the five bullets, in the gallery session
-(Tony-action (decide)); and this closes.
-**Gap (2026-10-27, night; superseded above):** Tony's look at the
-orrery's Sun axis hover (the Sun plotted with its axis). Then whether
-the website's axis hover takes the five bullets, in the gallery session
-(Tony-action (decide)); and this closes.
-**Gap (2026-10-27, evening; superseded above):** (a) the
-orrery's Sun axis hover printing from the rows, after Tony's word on
-the two findings above: Tony-action (decide), the Carrington bullet
-(dropped, or reworded to what the SOHO page says) and the citation
-for the differential pair (the SOHO page as the record ruled, or a
-work behind it, or the bullet without numbers). Then whether the
-website's axis hover takes the same bullets (interactive-exhibit).
-(b) re-homed to L-413. (c) was a one-time notice, given on
-2026-10-22; struck.
-**Gap (2026-10-22; superseded above):** Tony's runs and his phone
-look (the axis, its arrows, the opening view, the hover); then (a)
-and (b) above are re-homed and the item closes.
-**Gap (superseded above):** a design talk: the row and what it draws; the numbers its hover
-prints, which need rows in the store with sources before the website may
-print them (the period and the tilt); the hover's words to Tony before
-they ship. Then the build, in the Sun's slice (L-412).
-**Ref:** orrery `planet_visualization_utilities.py`; gallery
-`gallery/earth_geometry.js` (Earth's axis row), `interactive.html`;
-L-464; L-412.
-
 #### [L-462] The orrery maintenance run, a short form for small patches (orrery, maintenance)
 <!-- L:462 status:OPEN upd:2026-10-26 section:A flag: rice: -->
 - **Tony, 2026-10-21,** after `patch_L456_4b_roche_rehome_20261021.py`:
@@ -3083,86 +2641,6 @@ which repository's Daily Run starts it, how its findings reach the run
 record.
 **Ref:** L-266 (its first job); L-395 (the Horizons Check's own dates);
 L-446 (the Daily Run's order); L-416 (a dashboard button per step).
-
-#### [L-458] A "report a problem" link in every room's i panel (gallery, interactive)
-<!-- L:458 status:OPEN upd:2026-10-28 section:A flag: rice: -->
-- **Tony's idea, 2026-10-20**, in a design chat on verification: the
-  live source links in the i panel let a visitor check a claim, and "if
-  they see something off, they could report it. You know, that could be
-  me, or that could be somebody else." Brought to this session as a
-  draft.
-- **For any problem, not only a dead link** (Tony: "In fact the problem
-  report could report not just a broken link but any problem the
-  visitor sees, perhaps an expert would see a problem we have not
-  caught."). Dead links are the monthly run's (L-459); this is the
-  outside check only a visitor can make: a number, a sentence, a
-  source, a link or the drawing.
-- **Where it lands: Tony's Daily Run report** (Tony: "in the daily
-  maintenance report").
-- **How: the guest book's form, pre-filled** (Tony: "instead of
-  creating a second sheet couldn't have the function preformat a
-  message for the visitor to send or amend as a comment?"; then
-  "Confirmed"). The link opens the guest book's Google Form with its
-  message box already written, naming the room and the feature, for
-  the visitor to edit and send. It lands in the guest book's sheet; the
-  Daily Run's guest book step shows it to Tony. A message beginning
-  "Problem report" is shown as a report, kept private, and never offered
-  for the lobby. No second form, no second sheet, and the visitor needs
-  no account. First draft of the message, for Tony's words list at the
-  build: "Problem report -- Sun room, Corona. What looks wrong (a
-  number, a sentence, a source, a link, or the drawing)? If you know a
-  better source, please name it:"
-- **Tony-action (do), at the build:** in the guest book form's editor,
-  "Get pre-filled link" once, so the link knows the hidden name of the
-  message box. Steps given then.
-- **2026-10-21, talks part 2, talk D:** the words approved (Tony,
-  "Approved"), as listed in `documentation/DESIGN_talks2_rulings_20261021.md`
-  talk D; plus an "About this gallery" line under the link opening the
-  front page's About card, shared not copied (Tony, "please add the
-  same info button that is in the front page that has my name and
-  email", then "A"); plus "Page: <address>" as the message's last
-  line (Tony, "Yes").
-- **2026-10-22:** deferred behind L-443 (the objects), Tony's ruling in the
-  coordination session (Claude Fable 5.1's record, carried into this
-  close); listed under Deferred on Where We Are.
-- **2026-10-27, late night, built** (Claude Opus 5.5, the gallery's
-  first Claude Code session; built on gallery 7a4a03a), in talk D's
-  approved words: "Report a problem" under every focused feature in the
-  i panel, in every room, with its line beside it; the link opens the
-  guest book's Google Form with the message box written: "Problem report
-  -- <room> room, <feature>", the two prompts, and "Page: <the room's
-  address>". "About this gallery" was already there, as the panel's
-  last line "About Paloma's Orrery" (L-475).
-  - The form's long address and the message box's field
-    (entry.547008652, "Leave a note about the gallery") were read from
-    the form's public page, which the guest book's short link opens; so
-    the "Get pre-filled link" step is not needed (`REPORT_FORM` in
-    interactive.html says where they came from).
-  - `tools/guestbook_updater.py`: a message beginning "Problem report"
-    is shown as a report, never offered for the lobby (k keep, l later,
-    q stop), and counted on the last line. Its test has a seventh run
-    for it. Note: the form's own description still says a message "will
-    be reviewed for the public lobby"; a report is not, by the updater.
-  - Tried in a real browser: the Earth row's link carried "Problem report
-    -- Solar System room, Earth" and the page address.
-- **Tony's look, recorded 2026-10-28** from `documentation/WHERE_WE_ARE_10-27-26_0906_run_record.md`: "Tap "Report a problem" in an i panel. -- correct. tested
-  the read also."
-**Gap (replaces the one below, 2026-10-27, late night):** commit and
-push; then Tony's look: open a room's i panel on his phone, tap Report
-a problem, see the form open with the note started (send a test report
-if he likes, and see it come through the Daily Run as a report). Then
-DONE.
-**Gap (2026-10-21; superseded above):** the build: the link in the shared i-panel
-chrome, so every room has it at once (interactive-exhibit); the guest
-book updater telling a report from a greeting. The words list is no
-longer a gap.
-**Gap (superseded above):** the build: the link in the shared i-panel chrome, so every
-room has it at once (interactive-exhibit); the guest book updater
-telling a report from a greeting; the message's words as a list for
-Tony first.
-**Ref:** L-456 (the panel's sources as a list with links); L-281 (the
-guest book: its form, sheet and updater); L-265 (the i panel's links);
-L-459 (the monthly run).
 
 #### [L-456] What a visitor reads, from Earth's Mode 5 look: body radii, sources as a list with live links, Celsius for Earth's surface and air (gallery + orrery)
 <!-- L:456 status:OPEN upd:2026-10-21 section:A flag: rice: -->
@@ -3562,655 +3040,11 @@ the deliberate limit, its number set then, each removal named.
 `data/solar-system/raw/runs/`; L-446; L-216;
 `documentation/HANDOFF_L446_daily_run_order_build_20261015.md`.
 
-#### [L-443] The rest of the orrery's objects come to the website as plotted positions (gallery + orrery, objects)
-<!-- L:443 status:OPEN upd:2026-10-27 section:A flag: rice: -->
-- **Tony, 2026-10-13:** "I am anxious to add the symbols to the gallery
-  too so visitors can at least plot positions." And his note of
-  2026-10-10 on L-433: "then add the symbols for most if not all the
-  orrery's objects list." Stage 11 on the road.
-- **Opened 2026-10-14, at L-433's close** (L-442), so L-433's loose ends
-  have an open home. The brief,
-  `documentation/HANDOFF_L438_objects_to_website_brief_20261013.md`,
-  names this work L-438; the ledger's index had retired L-438 and L-439
-  before the item opened, and a retired handle is never reused. The
-  brief is otherwise current.
-- **Loose ends received from L-433** (its note of 2026-10-14, from L-431
-  and L-395), word for word:
-  - The served objects with no `'key'` in the orrery's list (moon, io,
-    titan, pluto, charon, voyager_1) get no period on the website and
-    no Horizons check; each gains both when it gets a key.
-  - The Pluto-Charon barycentre's own period, around the Sun: the
-    orrery never fetches elements for the barycentre itself, so the
-    website prints "not yet fetched from JPL" for it.
-  - From L-395: the fields the list lacks (a moon's parent, a clean
-    kind); the display-name rename, which waits for names to stop
-    being keys; MAPS and 3I/ATLAS checked live once served; and
-    whether the identity check widens past the keyed entries (default
-    no).
-- **Tony's ruling, 2026-10-15, in the coordination session** (asked
-  whether to run this item's design session before the Sun's list, to
-  size the objects by kind and build one cheap batch first):
-  "No. Let's stick to the pan. Finish earth, finish the sun, proceed
-  to objects." ("pan" is "plan".) So this item, its design
-  session included, waits until Earth's list (L-413) and the Sun's list
-  (L-412) are worked through. L-444 (the missing periods) still goes
-  first; its brief was already written.
-- **Tony, 2026-10-17:** "i would like to finish the sun slice and
-  then work on adding the symbols to the interactive." The order
-  holds, with Earth's remaining talks (L-413) moved out of its way:
-  this item follows the Sun's numbers and the drawings he picks
-  (L-412).
-- **2026-10-22, Tony's ruling in the coordination session** (Claude
-  Fable 5.1's record, carried into this close): after L-434, this item
-  goes next; its design session first, from
-  `documentation/HANDOFF_L438_objects_to_website_brief_20261013.md`
-  (still current), taking the Solar System room's drawer and stage 10
-  with it. "Yes, and let's keep the deferred list prominent so we can
-  come back to it." His reason: "I am anxious to add the symbols to
-  the website. We could keep going with this backlog but we may be at
-  diminishing returns and could defer some items."
-- **2026-10-22, the design session and slice 1's build** (Claude Opus
-  5.5; the record is `documentation/DESIGN_L443_objects_rulings_20261022.md`,
-  the build's `documentation/HANDOFF_L443_slice1_build_20261022.md`).
-  Tony's rulings, in his words:
-  - The drawer, at the mock-up: "B. this is the right view. the "room"
-    would only apply if the object has additional features beyond the
-    symbol such as future moon shells, or spacecraft encounters, or
-    comet perihelion encounters, or asteroid near earth encounters,
-    etc. another group not shown that could be added is the main
-    asteroid belt." Groups fold open in the drawer; this supersedes the
-    2026-09-29 line that a group's bodies appear only in its room. The
-    main belt is a group row; a drawn belt cloud is later.
-  - Fetch every body on every build: "yes". Measured: the day's first
-    build takes 20 to 34 seconds for 19 objects, so about one to two
-    minutes more with slice 1; the first real build confirms it.
-  - Slice 1 is the bodies the website can draw now; the comets on open
-    paths go with the spacecraft: "Yes. Confirmed as recommended". 50
-    bodies, JPL's classes: comets 11, near-Earth asteroids 11, main belt
-    7, Jupiter Trojans 5, centaurs 1, trans-Neptunian objects 15.
-    Wierzchos (JPL: hyperbolic) joined the 13 open-path comets.
-  - The words list, `documentation/WORDS_L443_slice1_20261022.md`:
-    "Confirmed". The three stale comet pins: "Re-pin to the newest
-    (Recommended)" (Schaumasse 90000356, Howell 90000901,
-    Churyumov-Gerasimenko 90000703). Ikeya-Seki's link: "[No
-    preference]", so the one-link rule's Wikipedia.
-  - Every comet drawn from its elements of today, Halley and Encke too:
-    "Yes". Their perihelion-anchored spans had ended (Encke May 2025,
-    Halley February 2024).
-- **Built** (patches `patch_L443_1_slice1_orrery_20261022.py`,
-  `patch_L443_2_slice1_website_20261022.py`): the 50 entries keyed with
-  JPL's names, their descriptions sourced or trimmed and their links one
-  per body; a body with a helio_id served by it (export, period fetch,
-  and plotting's elements pre-fetch around the Sun); 50 rows in
-  `data/objects_config.json`, the drawer's six group rows, Halley and
-  Encke anchored at today; stage 10, a bare interactive.html link
-  opening this room and the Explorer at
-  ?exhibit=solar-system-explorer; interactive-exhibit 1.21. Shared
-  centres outside the bigger body: Orcus-Vanth and Patroclus-Menoetius,
-  which carry Pluto's kind of sentence; the other five pairs inside.
-  The info panel's two sentences about what the room holds were
-  rewritten for the slice (the handoff lists them for Tony's word).
-- **Loose ends, re-homed:**
-  - The 14 open-path comets: slice 2, with the spacecraft, which
-    builds the path drawing for them.
-  - 6AC4721 and Gonggong's missing period: L-470.
-  - **Watch the first real build:** a comet whose fetched eccentricity
-    is 1 or more nulls the served window for the whole room (the
-    builder's FLAG-3 rule), and a near-Earth asteroid with a short trust
-    window narrows it for every visitor. The handoff tells Tony what to
-    read, and either comes to him by name before the push.
-  - Two skill sentences, carried for gallery-cache-builder's next
-    version (they would mislead, not act wrongly): The Builder Reads the
-    Period's Centre says a comet is drawn "from its elements at
-    perihelion"; and Adding a New Object says --first-build is
-    required for a new non-spacecraft object, while the room draws an
-    analytic body from its elements and never reads the backfilled
-    positions, so a Daily Run onboards it.
-  - The headless walk's Pluto frame check fails on the stand-in data
-    (it fails the same way on the untouched base); it holds on the
-    served cache. Recorded, not chased.
-  - Not asked, recorded: whether the Lagrange points and the exoplanet
-    entries are ever served.
-- **2026-10-22, late evening: Tony's runs, read** (his run record,
-  `documentation/WHERE_WE_ARE_10-22-26_2027_run_record.md`). Patches 1 and 3 ran
-  (patch 3's first copy); the orrery's maintenance run passed 31 of 31,
-  fetched 48 periods, confirmed 63 of 63 entries with JPL, and was
-  pushed at d91dc1d0. Patch 2 ran; the Daily Run built 69 objects, the
-  swap first try, the served window 88.0 days set by Mercury, the
-  shortest of 62 bodies' spans; no trust measurement failed.
-  - **One gate failed, and it was the orrery's:** Solar System figures,
-    on 2025 PN7. Its period, 363.9 days, prints "1.00" years, three
-    figures, but `orbital_period.figures_by_error` counted the figures
-    before rounding and served two, so the website printed "1.0".
-    Counted from the number as printed now
-    (`patch_L443_4_period_count_20261022.py`), with a case in
-    test_objects_export.py; only PN7's count changes in the export.
-    The website's printer was right and is unchanged.
-  - **Recorded, not chased:** six comets (halley, ikeya_seki,
-    hale_bopp, hyakutake, neowise, lemmon) carry the builder's warning
-    "its period is around @0, but a comet is drawn from its elements
-    around the Sun": the hover's period and the drawn ellipse use
-    different centres. Halley carried it since L-431 build 3; the
-    others joined with slice 1. Against L-431's ruling 7 (one orbit
-    for hover and drawing); for the comets' next design look.
-  - Patch 3's two later copies (the 6AC4721 ruling, the papers, the
-    horizons-orbital-mechanics 1.9 method) never ran: Tony had run the
-    first. Patch 4 carries them and removes the unrun copy at the root.
-- **2026-10-22, 22:50: live.** Orrery pushed at f10e859f (patch 4,
-  maintenance run 31 of 31); the second Daily Run passed 35 of 35,
-  Solar System figures among them; the website pushed at b93072eb; the
-  live run found all 25 files served as committed. Tony reinstalled
-  interactive-exhibit 1.21 and horizons-orbital-mechanics 1.9.
-- **2026-10-22, night: Tony's phone look done.** His answers are in
-  `documentation/WHERE_WE_ARE_10-22-26_2027_run_record.md`. Items 1,
-  3, 5, 6, 7, 8 and 10 a plain yes. Item 9 found Halley drawn in the
-  wrong place when zoomed in: L-472 (the view fix). Item 4: a group
-  should open with its bodies unticked, L-473. Item 2: the About link
-  missing from the i panels, L-475. A later note: See more / See
-  fewer at the top of the drawer, L-474. And "Gonggong skipped but
-  needs discussion", on L-470.
-- **2026-10-23: the view talk done.** Nothing was drawn wrong; a count
-  line for ticked bodies outside the view, See more at the top and the
-  About line built in gallery patch_L472_1 (L-472, L-474, L-475);
-  L-473 parked, the drawer already opening groups unticked.
-- **2026-10-23, evening: slice 2 designed,** from Tony's phone. Seven
-  rulings, in his words in `documentation/DESIGN_L443_slice2_rulings_20261023.md`:
-  one path rule, the orrery's (a backbone thinned where straight, fine
-  steps around each event), its plan made in the orrery and served;
-  the first set the twelve spacecraft still flying among the planets,
-  with the 14 open-path comets; an event placed by the nearest
-  approach found in JPL's positions, a sourced date only extra words;
-  a flyby later in the room of the body flown past, its sharply
-  curving part and nearest approach or approaches; solid to today,
-  dashed after, for spacecraft and comets alike, the future part
-  JPL's own plan or prediction; that part fetched again on the 30-day
-  cycle. The orrery's own plots follow on L-476.
-- **Carried for the build:** gallery `render_orbits.py`'s comment that
-  a 3D line cannot be dashed is wrong (Plotly 2.35.2's schema gives
-  six dash styles); corrected when slice 2 opens the file.
-- **2026-10-24: Tony's phone look of Oct 23 found five things,** ruled
-  at the day's design talk (`documentation/DESIGN_L477_drawer_and_view_rulings_20261024.md`):
-  the drawer loses See more and every "All", a group row only opens,
-  Reset puts things back (L-477); the count line moves left (L-478);
-  Go To fits a body's whole orbit, and every hover gives its orbit's
-  near and far distance (L-479); closing the About card goes back to
-  the room (L-480). Built before slice 2.
-- **2026-10-24, evening: L-477 to L-481 closed on Tony's look**
-  (`documentation/WHERE_WE_ARE_10-24-26_1140_run_record.md`). Slice 2 builds on gallery
-  96173b8 and orrery 206f96c.
-- **Carried for interactive-exhibit's next version, from L-481**
-  (closed 2026-10-24; descriptions to add, not wrong sentences): in the
-  Solar System room each hover line after the name is a bullet, written
-  `&#8226;` because Plotly 2.35.2 converts only eight named entities;
-  every source line naming JPL Horizons carries
-  https://ssd.jpl.nasa.gov/horizons/, which the i panel makes a link;
-  each room's closing paragraph is a bulleted list, "the creator's
-  daughter". Slice 2's skill bump carries them.
-- **2026-10-24, night: slice 2 split in two; build A built**
-  (`documentation/HANDOFF_L443_slice2_buildA_20261024.md`). The orrery's
-  objects export cannot carry a key the website has no entry for: the
-  website's objects mirror refuses it, which would stop the Daily Run's
-  pulls. So the twelve spacecraft are keyed in the same round as their
-  website entries (build B). Build A is the orrery's path plan
-  (orrery `patch_L443_7_slice2_path_plan_orrery_20261024.py`):
-  `path_plan.py` and its suite (15 of 15), the export's schema 3
-  carrying each served spacecraft's plan, two run rows and three
-  dashboard buttons, one of them a temporary preview that plans the
-  twelve by name so the first real flyby list comes from Tony's
-  machine. Two things the design record did not say, decided by method
-  and written into horizons-orbital-mechanics 1.10: a flyby must lie
-  inside the body's Hill sphere, worked out from JPL's own GM (without
-  it the first offline run took nearest approaches 85 million km from
-  Mercury for events), and a path's span is read from JPL's own limits,
-  since the list's end dates had gone stale (Juno's and Psyche's past
-  JPL's data, New Horizons' 21 years short of it).
-- **The words for build B, drafted for Tony**
-  (`documentation/WORDS_L443_slice2_draft_20261024.md`, the reads in
-  `CHECK_L443_slice2_sources_20261024.md`): JPL's exact name and data
-  span for all twelve spacecraft, every number in a description read
-  on a page opened that day or removed, a link for each. It carries
-  four decisions: C/2025 K1's record (L-470), BepiColombo's arrival
-  date, whether Juno's planned part is drawn, and the word
-  "Hyperbolic".
-- **Asked of Tony, 2026-10-24, in chat:** how much of a comet's path the
-  website draws. Recommended: from one year before perihelion, solid
-  to today, dashed for one more year.
-- **Answered, 17:07** (`documentation/COORD_L443_comet_span_ruling_20261024.md`):
-  "On the comet window, yes but within the JPL served window which may
-  be less." A comet's path runs from one year before perihelion to one
-  year after today, solid to today, dashed after, both ends clipped to
-  what JPL serves for its record, read from JPL's refusals as the path
-  plan reads a spacecraft's span; nothing is extended. The two margins
-  are drawing choices, and the hover says so.
-- **The four decisions in the words, ruled the same evening**
-  (`documentation/COORD_L443_words_decisions_20261024.md`):
-  1. C/2025 K1's record: asked by JPL's permanent number, 1004075
-     (17:15; built on L-470).
-  2. BepiColombo: "B for Bepi Colombo." No arrival date in its
-     description; the drawn path carries the timing.
-  3. Juno: "Confirmed in Juno." Drawn by ruling 6 to where JPL's data
-     ends, 2028-09-02, solid to today and dashed after; the description
-     says nothing about the mission's end.
-  4. "Use hyperbolic because that's the scientific term and the plain
-     words to say what it means." (17:35)
-  The rest of the words come to Tony again beside build B's hover
-  words, before they are served.
-- **Two more, the same evening:** a room for C/2025 K1 and its pieces
-  (L-483), and a check that the website and the orrery agree (L-484).
-- **Carried for slice 2's next skill bump:** none; L-481's three
-  descriptions and L-482's rule rode interactive-exhibit 1.23 this
-  session.
-- **2026-10-24, later that night: the preview sat silent.** Tony started
-  the dashboard's preview at 20:44; at 20:55 the window was still blank,
-  because the plan printed only at its end. Tony, 21:00: "i was wondering
-  if we can break this up so that we can get interim reports, especially
-  an initial report that says that we are pinging jpl at least.
-  especially if this runs automatically every 30 days, a long pause may
-  be an issue." And 21:06: "yes, and maybe patch and rerun before the
-  website patch?" Found with it: the maintenance run stops any one step
-  at 900 seconds, and the plan saved only at its end, so a first full
-  plan in that run would have been cut off with nothing saved, every
-  time. Built in orrery `patch_L443_10_path_plan_as_it_goes_20261024.py`:
-  a first line before JPL is asked anything, then a line with the
-  seconds since the start for each path's span, each body's data sheet
-  and positions, each body's near approaches and each flyby; each plan
-  saved as it is made; a 10-minute limit (TIME_LIMIT_SECONDS) after
-  which nothing new starts, what is left named in the verdict and taken
-  up by the next run; --no-limit for the dashboard's preview. The suite
-  gains checks 10 to 12, two with a planted fault (20 of 20).
-- **2026-10-24, the preview on JPL's real data** (Tony's run, 20:44 to
-  about 21:12; its report in `documentation/WHERE_WE_ARE_10-24-26_1927_run_record.md`): 12 paths, 498 events.
-  The flybys spot-checked land on the missions' known dates, as Claude
-  knows them; the numbers are JPL's: Voyager 1 at Jupiter and Saturn,
-  Voyager 2 at Saturn, Uranus and Neptune, New Horizons at Pluto, and
-  Juno's, Lucy's, JUICE's, Psyche's, Clipper's and BepiColombo's
-  passes of Earth, the Moon, Venus and Mars. One not recognised:
-  OSIRIS-APEX passing Earth at 7,526 km on 2029-04-13, the day Apophis
-  passes Earth; Claude checks it against JPL's sheet before it is
-  served. More than 230 events are three orbiters' repeated passes:
-  Juno 110 of Jupiter, Clipper 83 of Jupiter, BepiColombo 40 of
-  Mercury. After patch_L443_10, two runs of the preview printed their
-  first line at once and asked JPL nothing (21:32, 21:34).
-- **The orbiters, ruled 2026-10-24, night.** Tony, asked whether an
-  orbiter rides with its planet (`documentation/WHERE_WE_ARE_10-24-26_1927_run_record.md`): "i can see this being
-  an issue. this becomes even more with an orbiter or a lander like the
-  mars lander. i am not sure how to handle this mechanically. the
-  initial entry and exit may be important, a landing, a takeoff, but
-  routine orbits for observations could be omitted. but what would be
-  the logic?" Claude Fable 5.1, in the coordinating session the same
-  evening, recorded in the same copy: the first entry into a body's
-  Hill sphere is an event, kept with its fine steps; a departure is an
-  event, kept; everything between, while the spacecraft stays inside,
-  is captured, and in the Solar System room it rides with the planet,
-  with no fine steps; a landing is an entry with no exit; the loops
-  wait for that planet's room. Tony: "yes that would work well.
-  thanks." As method for build B: a stretch of days inside a body's
-  Hill sphere with one nearest approach is a flyby, as now; with more
-  than one it is a capture, whose first nearest approach and whose
-  last before leaving are the events; a stretch running to the end of
-  JPL's data is an arrival with no departure. Passes of the Sun stay
-  events. For horizons-orbital-mechanics' next version.
-- **Tony, 2026-10-24, 22:26, in chat:** "build 3 would implement the
-  spacecraft and hyperbolic comets and interstellar objects? Perhaps
-  those should go in their own room? And i would suggest putting the
-  spacecraft drawer after earth's as the comets are after the sun's."
-  Both are asked first in build B's session
-  (`documentation/HANDOFF_L443_slice2_buildB_brief_20261024.md`, sec.
-  3): a room of their own against the Solar System room, where the
-  planets already frame their paths (Settled, Oct 22: "Open-path
-  comets go with the spacecraft"); and the drawer's order, read as a
-  Spacecraft group row right after Earth's, as the Comets group follows
-  the Sun.
-- **2026-10-25, build B, cut after the spacecraft**
-  (`documentation/HANDOFF_L443_slice2_buildB_spacecraft_20261025.md`).
-  The brief's three questions were answered before the session by
-  `COORD_L443_drawer_groups_ruling_20261024.md` (Tony, 22:49 and 23:27:
-  a separate group, not a room; the spacecraft group after Earth's row;
-  every group by JPL's classification, minor planets too) and
-  `COORD_L461_stop_ruling_20261025.md`. Built:
-  - The OSIRIS-APEX Earth pass of 2029-04-13 checked: NASA's
-    retargeting page gives "six close Sun passes" and "three gravity
-    assists from Earth"; the plan's six Sun passes near 0.5 AU and
-    three Earth passes after the sample drop match; the April 2029 pass
-    is the third assist. JPL's sheet lists no dates.
-  - The orbiter rule in `path_plan.py` (orrery patch_L443_12): stretches
-    of days inside a Hill sphere; one nearest approach a flyby, more a
-    capture with its arrival and departure; a capture to the end of the
-    data an arrival that stays; Sun passes stay; each event names its
-    kind; RULE 2 among a plan's inputs. Suite 23 of 23, two made-up
-    orbiters, a planted fault. Tony runs the preview again with it.
-  - The twelve keyed (orrery patch_L443_13) with JPL's names and the
-    approved words (BepiColombo's with no date; Juno's silent on its
-    end); a spacecraft serves no period; the preview flag and list go,
-    and "Path Plan -- every path, now" (--all --no-limit) takes the
-    button's place; the patch carries each preview plan made by the
-    orbiter rule into data/path_plans.json under its key.
-  - The website (gallery patch_L443_15): eleven entries beside Voyager 1,
-    whose typed windows go; a Spacecraft group after Earth's row, in
-    launch order, five labelled; the mirror copies each plan; the
-    builder fetches each path by its plan, whole again on a new plan,
-    each window thinned at its own scale (1% of the passing distance;
-    the first simulated build served about 1.7 MB before, 68 KB after),
-    as_of_today today's point, a re-fetch held out of the shrink gate by
-    name, the sanity bound 1,000 AU; the room fetches each positions
-    file and draws the path solid to the minute shown and dashed after,
-    its marker worked out between points with that error printed by;
-    the text box and source line in Tony's words of 2026-10-25, the
-    dashed part named "predicted", JPL's own word, by his ruling ("use
-    the word JPL uses"; Juno's data sheet: "a planning prediction"); a row
-    the cache lacks named, not fatal; the figures check's part 7 and the
-    drawer walk's section 20. Simulated end to end in the sandbox on
-    straight fake paths; the real build and the phone have not seen it.
-  - L-461 with it (`daily_run.py`).
-  - Skills: horizons-orbital-mechanics 1.11, gallery-cache-builder 1.12,
-    interactive-exhibit 1.24, safe-file-editing 1.14 (protocol v3.112).
-- **Tony's runs, 2026-10-25, evening** (his run record,
-  `documentation/WHERE_WE_ARE_10-24-26_1927_run_record.md`). Patches 12
-  to 15 ran; orrery pushed at d80aed3, gallery at 191d68f. The preview
-  made by the orbiter rule: Juno 113 events to 4, Europa Clipper 87 to
-  5; patch 13 carried all twelve plans. Ten spacecraft built and drew;
-  his phone look: "juno looks correct. solid to today and dashed
-  predicted with both a hover text and info card"; Parker "correct".
-  Two failures, both fixed the same evening:
-  - **The Horizons check stopped at the first spacecraft as UNREACHABLE.**
-    JPL was reached. Its Lookup answers a spacecraft's id in the
-    small-body index with its two header lines alone (fetched that
-    evening for -31 and -61, group=sb), and the check read that as a
-    failed fetch. It now reads JPL's header alone as no matches (orrery
-    patch_L443_16, `horizons_check.py`, with a recorded Voyager 1 case
-    and a planted fault in its suite). The twelve names were checked
-    against JPL's Lookup the same evening; all twelve match.
-  - **Both Voyagers' paths were refused by JPL** ("No ephemeris for
-    target ... after A.D. 2100-JAN-01 00:00:00.0000 TD"). Their data ends
-    at that minute exactly; the builder adds 69 s to every time it asks
-    (UTC to TDB), so the stop asked was 00:01. The span's end is now
-    taken back by the same 69 s (gallery patch_L443_17,
-    `gallery_cache_builder.py` `_plan_span`, with a check and a planted
-    fault in its suite). The other ten end later in their last day.
-    Voyager 1 was drawn from an old path with no marker, hover or panel
-    words; Voyager 2 was dropped.
-  - **Voyager 1 goldenrod**, not the orrery's white: "the white line
-    does not contrast with the white grid"; asked whether to share
-    Parker's gold, Tony chose "Gold, like Parker" (gallery
-    `presentation.py`, in patch_L443_17).
-  - His other notes: the TNO group opened with a lag; the failed fetches
-    are listed at the foot of the i panel, as intended; the description
-    bullets are L-487.
-- **Tony's runs, 2026-10-25, night.** Both fixes ran; orrery pushed at
-  967d150, gallery at 82a7ab1. The Horizons check confirmed the twelve;
-  the Daily Run fetched both Voyagers. His look: "Looks great." Voyager
-  1 gold, with its marker, text box and panel words.
-- **A spacecraft's companions** (gallery patch_L443_19). Tony: "in
-  addition to the default inner planets, add the farthest planet orbit
-  that the object has reached. For Juno that is obviously Jupiter. For
-  Voyager that would be Pluto (include as the last commonly known minor
-  planet). This gives perspective to a spacecraft plot," then "Maybe
-  flyby planets too." Claude's rule, which he approved ("Yes please on
-  all your suggestions"): ticking a spacecraft also ticks, among the
-  drawer's top-level body rows (the planets and Pluto), every one its
-  plan names as a flyby, arrival or departure, and the farthest whose
-  perihelion its whole drawn path goes beyond, Pluto the last; ordinary
-  ticks, which Reset puts back. On the served cache: Voyager 1, Jupiter,
-  Saturn, Pluto; Voyager 2, Jupiter to Neptune and Pluto; New Horizons,
-  Jupiter and Pluto; Juno, Lucy, JUICE, Europa Clipper, Jupiter; Psyche,
-  Mars; the four inner craft, nothing past what is drawn. The driver
-  serves each craft's plan bodies and the farthest its path goes
-  (`path_events`, `path_reach_au`); `SolarSystemDrawer.companions`
-  decides; the drawer check's section 7 (seven cases, two breaks) and the
-  walk's section 20 hold it. Rule written into interactive-exhibit 1.25.
-  The heliopause Tony asked about next is L-488.
-- **Tony's runs, 2026-10-26, morning.** patch_L443_18 and _19 ran and
-  were pushed (orrery 5398439, gallery 9223cd1); his phone look of the
-  companions and the bullets: "correct."
-- **The comets, build B part 2, 2026-10-26** (orrery patch_L443_20,
-  gallery patch_L443_21; the handoff,
-  `documentation/HANDOFF_L443_slice2_buildB_comets_20261026.md`).
-  - **The class check** (`documentation/CHECK_L443_drawer_classes_20261026.md`):
-    every drawer group's bodies and the fourteen comets against JPL's
-    orbit class, read live. No body sat in the wrong group; Comets
-    gathered four classes and Near-Earth asteroids three. Tony: "Split
-    with asteroids in the correct order among the planets." So one JPL
-    class to a row: Encke-type, Jupiter-family, Halley-type and Comets,
-    then Hyperbolic comets and Interstellar objects, after the Sun; Aten
-    asteroids after Venus; Apollo and Amor asteroids after the
-    Spacecraft group.
-  - **The words** (`documentation/WORDS_L443_comets_20261026.md`),
-    approved: "Yes on all." On the first draft Tony: "I don't want to
-    drop JPL's words, Ellipse, Predicted, hyperbolic, perihelion,
-    aphelion, etc. We should keep these correct words and explain them
-    when they should be explained." Claude Fable 5.1 recorded the same
-    ruling at 11:44 as method for both instruments
-    (`documentation/COORD_jpl_words_ruling_20261026.md`): "we should
-    always keep the correct JPL words and explain them when needed."
-    Written into interactive-exhibit 1.26; provenance-discipline's What
-    a Visitor Reads takes it at its next version. The orbit line now
-    reads "Orbit: perihelion q AU, its closest to the Sun, to aphelion Q
-    AU, its farthest."
-  - **The orrery:** the fourteen keyed, each marked `open_path`, with
-    its JPL name and its approved description; West asked as
-    C/1975 V1-A. `path_plan.py` plans each by the span ruling, a year
-    before its perihelion to a year after today, clipped to JPL; the
-    perihelion found in JPL's daily positions and refined to the
-    minute, its one event; the record's TP only places the first ask.
-    Comets are not searched bodies of the spacecraft plans, so the
-    twelve plans did not change. The export and the period fetch serve
-    no period for a path. The Horizons check looks for an entry asked
-    by JPL's number in the small-body lookup (C/2025 K1 as 1004075,
-    shown failing on the old code) and confirms no period for a path.
-    And L-491, the nucleus sizes, sourced.
-  - **The website:** the builder fetches a comet on an open path by its
-    plan (`is_path_body`); the mirror copies `open_path`; the assembler
-    draws any body served positions and no elements as a path, a comet
-    with its diamond; the room's text box and source line, in the
-    approved words; the room's second list a bullet for them; a name
-    the orrery keys with an underscore shown with a space (C/2025 K1);
-    the maintenance run's live check fetches the fourteen positions
-    files.
-  - **Checked in the session:** the orrery's suites (path plan 27,
-    Horizons check 68, period fetch 36, objects export) and its
-    headless run; the builder's offline suite, 482 checks, with four new
-    for the comets; the figures, drawer and drawer-order smokes; the
-    drawer walk, 140 checks, with a new section 21 for the comets; the
-    Sun and Earth rooms driven in both copies and found the same; all
-    on stand-in plans and straight-line paths, since the sandbox cannot
-    reach JPL. The comets' real paths are Tony's runs.
-  - **Not done here, by name:** the comets' companions (none; a
-    comet's own room is L-483); the ten gallery cards' sizes (L-491).
-    Corrected the same evening: the comets' companions were built, by
-    Tony's ruling below.
-- **The same afternoon, before Tony's runs, two more website patches:**
-  - patch_L443_22: ATLAS (C/2024 G3), the one white comet, goldenrod.
-    Tony: "change all white comets to gold for contrast." The orrery
-    keeps its white.
-  - patch_L443_23: each drawer group's JPL or IAU class name explained
-    in plain words, the first bullet in the text box and the i panel of
-    every body in the group, from a served "about" on the group's row;
-    and a comet's perihelion explained in its span sentence. Tony's
-    "Yes" to drafting them, after Claude Fable 5.1's
-    `COORD_jpl_words_ruling_20261026.md`, and "Approved" to
-    `documentation/WORDS_L443_glosses_20261026.md`, whose sources are
-    JPL's Small-Body Database orbit classes, the IAU's announcement
-    ann17045 and the Horizons manual.
-  - Tony asked whether "aphelion" in his ruling was autocorrect's: it is
-    JPL's own word (the Horizons manual: "Aphelion distance (au)").
-- **Tony's runs, 2026-10-26, afternoon**
-  (`documentation/WHERE_WE_ARE_10-26-26_1451_run_record.md`). The orrery
-  pushed at 140db0a: the path plan asked JPL for the fourteen and made a
-  plan for each, one perihelion event apiece, the spacecraft plans
-  unchanged; the Horizons check confirmed the fourteen, 89 of 89
-  entries in all. The website pushed at dd9d0fa: the Daily Run's pull
-  matched the push and the build served all fourteen paths, each 2.5 to
-  4.5 KB of positions (West's plan runs from 1975, a year before its
-  perihelion); the swap took two tries, absorbed. One check was red, the
-  builder suite's: its span check had typed the stand-in plan's dates and
-  failed on the real ones, with the builder right; fixed in
-  patch_L443_24.
-- **His phone look:** the groups in their places, "yes"; ATLAS gold,
-  "yes"; Go To on 3I/ATLAS fits its whole path, "yes". C/2025 K1's
-  space: he had not seen the underscore the orrery keys it by, which is
-  the change working. And: "i thought we were adding the farthest
-  planetary orbit for perspective? that would be saturn now." Asked
-  whether a comet's farthest planet counts the path so far or the whole
-  drawn path, the dashed year included as a spacecraft's does: "so far".
-  So a comet on an open path ticks, as a spacecraft does, the farthest
-  planet whose perihelion its served path has passed up to the minute
-  shown: West, McNaught, 'Oumuamua and 2I/Borisov tick Pluto; 3I/ATLAS
-  Saturn (its whole path would reach Uranus); the rest Jupiter. Built in
-  gallery patch_L443_24, walked on the real served cache (142 checks);
-  the website's maintenance run in the sandbox, 35 of 35 gating checks,
-  its pulls aside (no orrery folder there).
-  - Two more asks, opened as items for a design talk: L-493 (a search
-    box for the drawer) and L-494 (the pointer to the i button).
-- **For the skills' next versions, carried here:** interactive-exhibit
-  1.26 says a comet on an open path has no companions, which patch 24
-  makes wrong; its next version says a comet ticks the farthest planet
-  its path has reached so far, and that a group row's about explains
-  its class first in each member's text box and panel. This session
-  already bumped interactive-exhibit once (One Session, One Bump), so the
-  correction is the next session's first skill work, before any other
-  work that fires the skill. provenance-discipline's What a Visitor
-  Reads takes the JPL-words rule, as above.
-- **2026-10-26, night: slice 2 closed on Tony's phone look**
-  (`documentation/WHERE_WE_ARE_10-26-26_1451_run_record.md`, item 7: tick West and Pluto comes; Go To
-  on 3I/ATLAS and Saturn comes: "-- correct"). L-493 (the search box)
-  and L-494 (the i button's note) were built and closed the same night,
-  and L-495 records five changes from his phone look, among them a comet
-  on a closed orbit ticking the farthest planet its orbit reaches (Tony:
-  "only spacecraft and comets").
-- **Carried for interactive-exhibit 1.27, adding to the list above**
-  (all from 2026-10-26, night; the first is a wrong sentence):
-  - Under Hover text is written for the visitor, "one pointer line
-    under each hover (L-231)" is wrong since L-494: no website hover
-    ends with a pointer; a first visit gets the i button's note.
-    (orrery-coding-conventions corrected the same sentence at 1.12.)
-  - A comet on a closed orbit ticks the farthest planet its orbit
-    reaches, by its aphelion; no asteroid or dwarf planet ticks one
-    (L-495).
-  - The drawer's Find a body box and the four names it matches (L-493).
-  - The grid chip's AU note; the whole triad opens the frame note; the
-    orbit line wrapped at 60 like the other bullets (L-495).
-  - The direction arrows: `gallery/direction_arrows.js`, the Direction
-    arrows check, five arrowhead lengths ahead, not drawn outside the
-    view or when longer than the orbit at that scale (L-495).
-  - A candidate for the headless recipe: the night's renders came from
-    the sandbox's Chromium with the pinned Plotly bundle and the room's
-    payload handed to the page in place of Pyodide, so Tony judged real
-    pictures before a build. Not yet a file in either repository.
-- **2026-10-27, the skill text written** (protocol v3.116; the first
-  session run in Claude Code, built on orrery 8d334e7 and gallery
-  7d422e5). interactive-exhibit 1.26 -> 1.27 carries every line of both
-  lists above: the pointer sentence corrected (the wrong one), a comet's
-  companions on an open path and on a closed orbit, a group's class
-  explained first, the Find a body box, the AU note and the whole
-  triad, the orbit line wrapped at 60, the direction arrows, and the
-  headless candidate, recorded as a candidate. The Hover budget check's
-  description in the skill's pre-test step said it checks that each
-  hover points at the i panel; corrected in the same bump. Each fact was
-  read from the website's code at 7d422e5 before it was written.
-  provenance-discipline 2.34 -> 2.35 takes the JPL-words rule into What
-  a Visitor Reads, principle 5, from
-  `documentation/COORD_jpl_words_ruling_20261026.md`; the five
-  principles Tony approved stay five.
-**Gap (replaces the one below, 2026-10-27):** slice 2 is closed and its
-skill text is written. What waits on this item is on Where We Are's
-Deferred list (a drawn main-belt cloud). The road's next stage is L-485
-(a nightly run), which opens with a design talk.
-**Gap (superseded above, 2026-10-26, night):** slice 2 is closed.
-Next session first: interactive-exhibit 1.27 with everything carried
-above, and provenance-discipline's JPL-words rule; then the road's next
-stage, L-485 (a nightly run), which opens with a design talk.
-**Gap (superseded above, 2026-10-26, night):** Tony's run of
-gallery patch_L443_24 and the website's maintenance run, push; his phone
-look: tick West and see Pluto come with it; Go To on 3I/ATLAS and see
-Saturn. Then slice 2 closes. Next session first: interactive-exhibit
-1.27, as above.
-**Gap (superseded above, 2026-10-26, evening):** Tony's runs, in order:
-patch_L443_20 and the orrery maintenance run (the path plan's comets
-and the Horizons check confirming the fourteen), push; patch_L443_21
-and the Daily Run, push; his phone look at the comets. Then slice 2
-closes.
-**Gap (superseded above, 2026-10-25, night):** Tony's runs of
-patch_L443_18 and patch_L443_19, push, and his phone look at the
-companions (Voyager 2, Juno). Then build B's second part, the comets,
-from the handoff's section 6.
-**Gap (superseded above, 2026-10-25, evening):** Tony's runs of
-patch_L443_16 and the orrery maintenance run (the Horizons check
-confirming the twelve), push; patch_L443_17 and the Daily Run (both
-Voyagers fetched), push; his look at Voyager 1. Then build B's second
-part, the comets, from the handoff's section 6, as below.
-**Gap (superseded above, 2026-10-25):** Tony's runs (the handoff,
-sec. 2), the preview's report, the Daily Run and his phone look; then
-build B's second part, the comets, from the handoff's section 6: the
-plan for open-path comets by the span ruling, the fourteen keyed, the
-three groups by JPL's class, the words to Tony first; and every drawer
-group checked against its bodies' SBDB classes.
-**Gap (superseded above, 2026-10-24, close of the night):** build
-B, a fresh session, from
-`documentation/HANDOFF_L443_slice2_buildB_brief_20261024.md`: Tony's
-word on a room of their own and on the drawer's order; the OSIRIS-APEX
-pass checked; the orbiter rule in the path plan; the twelve keyed with
-their website entries and words; the builder fetching by the plan; the
-room drawing each path solid to today and dashed after, the hover words
-to Tony first; L-461; then the open-path comets by the span ruling.
-**Gap (superseded above, 2026-10-24, later that night):** Tony's
-run of patch_L443_10, and the preview run again with it, its report
-pasted into the chat; then build B: the twelve keyed with their website entries
-and their words, the builder fetching by the plan, the room
-drawing each path solid to today and dashed after, the hover words to
-Tony first, with L-461; then the open-path comets by the span ruling.
-**Gap (superseded above, 2026-10-24, late night):** Tony's runs,
-patch_L443_9 right after patch_L443_8, and the preview's output pasted
-into the chat; then build B, as above.
-**Gap (superseded above, 2026-10-24, night):** Tony's run of the
-path plan patch and its preview, pasted into the chat; his words
-approvals and the four decisions; his answer on a comet's span; then
-build B: the twelve keyed with their website entries, the builder
-fetching by the plan, the room drawing each path solid to today and
-dashed after, the hover words to Tony first, with L-461; then the
-comets.
-**Gap (superseded above, 2026-10-24, evening):** slice 2's build,
-by `documentation/DESIGN_L443_slice2_rulings_20261023.md`, after the
-next design talk (L-482, L-461, L-465).
-**Gap (superseded above, 2026-10-24, noon):** L-477 to L-480 are
-built (gallery patch_L477_2); Tony's runs, pushes and phone look; then
-slice 2's build, by `documentation/DESIGN_L443_slice2_rulings_20261023.md`.
-**Gap (superseded above):** the build of L-477 to
-L-480 and Tony's phone look; then slice 2's build, by
-`documentation/DESIGN_L443_slice2_rulings_20261023.md`.
-**Gap (superseded above):** Tony's runs of
-patch_L472_1 and patch_L472_2 and his phone look; then slice 2's
-build, by `documentation/DESIGN_L443_slice2_rulings_20261023.md`.
-**Gap (superseded above):** Tony's runs of
-patch_L472_1 and his phone look; then slice 2, the spacecraft and the
-open-path comets.
-**Gap (superseded above):** the view fix first
-(L-472), with the three drawer and panel changes (L-473, L-474,
-L-475); then slice 2, the spacecraft and the open-path comets.
-**Gap (superseded above):** Tony's phone look
-(the handoff, sec. 10); then slice 2, the spacecraft and the
-open-path comets.
-**Gap (superseded above):** patch 4 and
-the orrery maintenance run, pushed; the Daily Run again and the website
-pushed; Tony's look; then slice 2, the spacecraft and the open-path
-comets.
-**Gap (superseded above):** Tony's runs of
-the two slice-1 patches, the orrery maintenance run (JPL confirms and
-fetches the 50), the Daily Run, and his look; then slice 2, the
-spacecraft and the open-path comets.
-**Gap (superseded above):** the design session, then
-the first slice on Tony's word.
-**Gap (superseded above):** after the Sun's numbers and its chosen drawings (L-412): the design session, from
-the brief: measure, propose the slices and the mechanism, and build the
-first slice only after Tony's word.
-**Ref:** `documentation/HANDOFF_L438_objects_to_website_brief_20261013.md`;
-L-433; L-431; L-395; L-442; `export_objects.py`; `celestial_objects.py`;
-gallery `data/objects_config.json`.
-
 
 
 
 #### [L-411] The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice)
-<!-- L:411 status:OPEN upd:2026-10-21 section:A flag: rice: -->
+<!-- L:411 status:OPEN upd:2026-10-28 section:A flag: rice: -->
 - **Recorded 2026-10-04** while building L-371. The orrery's Sun
   hovers, and some of the gallery's served words, still type numbers
   that no row holds. One row per CLASS (The Braid); the instances live
@@ -4365,6 +3199,10 @@ gallery `data/objects_config.json`.
 - **2026-10-21, night:** talk C's paragraph is in
   provenance-discipline 2.33, The Access Standard, as written in the
   design record; it rode L-460's bump.
+- **Received 2026-10-28 from L-501 (2026 ED138), at its close:** the
+  Typed numbers check reads only the Sun and Earth rooms, so the dates
+  in a Solar System room body's words (2026 ED138's discovery dates)
+  are held by no check.
 **Gap:** the held sentences first, from Gemini 4's return (review
 above): rows for the core's centre and the convection zone's base
 (Parker's first crossing is done, above); the chromosphere's approved
@@ -4415,7 +3253,7 @@ One Bump), and leaves the page's Settled list once it is in the skill.
 L-424; L-434; skills/*/SKILL.md.
 
 #### [L-432] Objects drawn in the default goldenrod (orrery, colours)
-<!-- L:432 status:OPEN upd:2026-10-11 section:A flag: rice: -->
+<!-- L:432 status:OPEN upd:2026-10-28 section:A flag: rice: -->
 - **Tony, 2026-10-10, in his run record** (`documentation/WHERE_WE_ARE_10-10-26_2019_run_record.md` at 6fc3648): "the color dictionary
   is a drawing choice and kept by hand. the default color is often
   goldenrod, but we should switch it up to avoid clashing with nearby
@@ -4434,6 +3272,12 @@ L-424; L-434; skills/*/SKILL.md.
   systems may be coloured by other code; not traced.
 - A colour is a drawing choice (Tony), so no row needs a source. Each
   pick is Mode 5: Tony's eye on the bodies it is drawn beside.
+- **Received 2026-10-28 from L-501 (2026 ED138), at its close:** a
+  colour line in `constants_new.py`'s color_map holds a digit the
+  Constants change check does not read, so a new body's colour turned
+  the run red, and 2026 ED138 draws in the default goldenrod. The class
+  is the colour table's place: in the drawing code, or a shape the
+  check reads (provenance-discipline, Three Kinds of Drawing Number).
 **Gap:** trace which of the 27 actually draw goldenrod; then Tony picks
 colours, Encke first, beside Halley and the other comets.
 **Ref:** `constants_new.py` (`color_map`); `celestial_objects.py`;
@@ -5300,7 +4144,7 @@ horizons-orbital-mechanics 1.3; L-398; L-399; L-431;
 `celestial_coordinates.py`.
 
 #### [L-399] Small bodies: fetch each one's own position uncertainty from Horizons (gallery, builder)
-<!-- L:399 status:OPEN upd:2026-10-01 section:A flag: rice: -->
+<!-- L:399 status:OPEN upd:2026-10-28 section:A flag: rice: -->
 - JPL's planetary report (L-398) gives accuracies for the planets and
   Pluto only. An asteroid's accuracy is kept per body. Until it is
   fetched, Apophis's text box carries one line: "JPL's own uncertainty
@@ -5322,6 +4166,11 @@ horizons-orbital-mechanics 1.3; L-398; L-399; L-431;
   `position_accuracy.fetch_small_body_state`): a small body's position
   and its 2xr uncertainty in one query, read by column name; the hover
   prints by its 3-sigma. The builder's half stays open here.
+- **Received 2026-10-28 from L-501 (2026 ED138), at its close:**
+  Tony at his phone look, 19:05: "we are still plotting the full
+  distance without a jpl uncertaintly, but clearly precision to 10 km
+  is not realistic. what can we do?" This item is the answer, the next
+  gallery build (Tony's queue of 2026-10-28, 19:34).
 **Gap:** the website's half: the builder asks the same way and the
 Solar System room prints by it; with the near-Earth asteroid design.
 **Ref:** L-398; L-363; tools/gallery_cache_builder.py (gallery).
@@ -29057,6 +27906,1460 @@ Tony-action (decide): any line the split leaves unclear, from the list.
 **Ref:** `documentation/COORD_stale_scale_sentences_ruling_20261026.md`;
 `info_dictionary.py`; `shell_configs.py`; the
 `*_visualization_shells.py` files; `save_utils.py`; L-491.
+
+#### [L-443] The rest of the orrery's objects come to the website as plotted positions (gallery + orrery, objects)
+<!-- L:443 status:DONE upd:2026-10-28 section:C flag: rice: -->
+- **Tony, 2026-10-13:** "I am anxious to add the symbols to the gallery
+  too so visitors can at least plot positions." And his note of
+  2026-10-10 on L-433: "then add the symbols for most if not all the
+  orrery's objects list." Stage 11 on the road.
+- **Opened 2026-10-14, at L-433's close** (L-442), so L-433's loose ends
+  have an open home. The brief,
+  `documentation/HANDOFF_L438_objects_to_website_brief_20261013.md`,
+  names this work L-438; the ledger's index had retired L-438 and L-439
+  before the item opened, and a retired handle is never reused. The
+  brief is otherwise current.
+- **Loose ends received from L-433** (its note of 2026-10-14, from L-431
+  and L-395), word for word:
+  - The served objects with no `'key'` in the orrery's list (moon, io,
+    titan, pluto, charon, voyager_1) get no period on the website and
+    no Horizons check; each gains both when it gets a key.
+  - The Pluto-Charon barycentre's own period, around the Sun: the
+    orrery never fetches elements for the barycentre itself, so the
+    website prints "not yet fetched from JPL" for it.
+  - From L-395: the fields the list lacks (a moon's parent, a clean
+    kind); the display-name rename, which waits for names to stop
+    being keys; MAPS and 3I/ATLAS checked live once served; and
+    whether the identity check widens past the keyed entries (default
+    no).
+- **Tony's ruling, 2026-10-15, in the coordination session** (asked
+  whether to run this item's design session before the Sun's list, to
+  size the objects by kind and build one cheap batch first):
+  "No. Let's stick to the pan. Finish earth, finish the sun, proceed
+  to objects." ("pan" is "plan".) So this item, its design
+  session included, waits until Earth's list (L-413) and the Sun's list
+  (L-412) are worked through. L-444 (the missing periods) still goes
+  first; its brief was already written.
+- **Tony, 2026-10-17:** "i would like to finish the sun slice and
+  then work on adding the symbols to the interactive." The order
+  holds, with Earth's remaining talks (L-413) moved out of its way:
+  this item follows the Sun's numbers and the drawings he picks
+  (L-412).
+- **2026-10-22, Tony's ruling in the coordination session** (Claude
+  Fable 5.1's record, carried into this close): after L-434, this item
+  goes next; its design session first, from
+  `documentation/HANDOFF_L438_objects_to_website_brief_20261013.md`
+  (still current), taking the Solar System room's drawer and stage 10
+  with it. "Yes, and let's keep the deferred list prominent so we can
+  come back to it." His reason: "I am anxious to add the symbols to
+  the website. We could keep going with this backlog but we may be at
+  diminishing returns and could defer some items."
+- **2026-10-22, the design session and slice 1's build** (Claude Opus
+  5.5; the record is `documentation/DESIGN_L443_objects_rulings_20261022.md`,
+  the build's `documentation/HANDOFF_L443_slice1_build_20261022.md`).
+  Tony's rulings, in his words:
+  - The drawer, at the mock-up: "B. this is the right view. the "room"
+    would only apply if the object has additional features beyond the
+    symbol such as future moon shells, or spacecraft encounters, or
+    comet perihelion encounters, or asteroid near earth encounters,
+    etc. another group not shown that could be added is the main
+    asteroid belt." Groups fold open in the drawer; this supersedes the
+    2026-09-29 line that a group's bodies appear only in its room. The
+    main belt is a group row; a drawn belt cloud is later.
+  - Fetch every body on every build: "yes". Measured: the day's first
+    build takes 20 to 34 seconds for 19 objects, so about one to two
+    minutes more with slice 1; the first real build confirms it.
+  - Slice 1 is the bodies the website can draw now; the comets on open
+    paths go with the spacecraft: "Yes. Confirmed as recommended". 50
+    bodies, JPL's classes: comets 11, near-Earth asteroids 11, main belt
+    7, Jupiter Trojans 5, centaurs 1, trans-Neptunian objects 15.
+    Wierzchos (JPL: hyperbolic) joined the 13 open-path comets.
+  - The words list, `documentation/WORDS_L443_slice1_20261022.md`:
+    "Confirmed". The three stale comet pins: "Re-pin to the newest
+    (Recommended)" (Schaumasse 90000356, Howell 90000901,
+    Churyumov-Gerasimenko 90000703). Ikeya-Seki's link: "[No
+    preference]", so the one-link rule's Wikipedia.
+  - Every comet drawn from its elements of today, Halley and Encke too:
+    "Yes". Their perihelion-anchored spans had ended (Encke May 2025,
+    Halley February 2024).
+- **Built** (patches `patch_L443_1_slice1_orrery_20261022.py`,
+  `patch_L443_2_slice1_website_20261022.py`): the 50 entries keyed with
+  JPL's names, their descriptions sourced or trimmed and their links one
+  per body; a body with a helio_id served by it (export, period fetch,
+  and plotting's elements pre-fetch around the Sun); 50 rows in
+  `data/objects_config.json`, the drawer's six group rows, Halley and
+  Encke anchored at today; stage 10, a bare interactive.html link
+  opening this room and the Explorer at
+  ?exhibit=solar-system-explorer; interactive-exhibit 1.21. Shared
+  centres outside the bigger body: Orcus-Vanth and Patroclus-Menoetius,
+  which carry Pluto's kind of sentence; the other five pairs inside.
+  The info panel's two sentences about what the room holds were
+  rewritten for the slice (the handoff lists them for Tony's word).
+- **Loose ends, re-homed:**
+  - The 14 open-path comets: slice 2, with the spacecraft, which
+    builds the path drawing for them.
+  - 6AC4721 and Gonggong's missing period: L-470.
+  - **Watch the first real build:** a comet whose fetched eccentricity
+    is 1 or more nulls the served window for the whole room (the
+    builder's FLAG-3 rule), and a near-Earth asteroid with a short trust
+    window narrows it for every visitor. The handoff tells Tony what to
+    read, and either comes to him by name before the push.
+  - Two skill sentences, carried for gallery-cache-builder's next
+    version (they would mislead, not act wrongly): The Builder Reads the
+    Period's Centre says a comet is drawn "from its elements at
+    perihelion"; and Adding a New Object says --first-build is
+    required for a new non-spacecraft object, while the room draws an
+    analytic body from its elements and never reads the backfilled
+    positions, so a Daily Run onboards it.
+  - The headless walk's Pluto frame check fails on the stand-in data
+    (it fails the same way on the untouched base); it holds on the
+    served cache. Recorded, not chased.
+  - Not asked, recorded: whether the Lagrange points and the exoplanet
+    entries are ever served.
+- **2026-10-22, late evening: Tony's runs, read** (his run record,
+  `documentation/WHERE_WE_ARE_10-22-26_2027_run_record.md`). Patches 1 and 3 ran
+  (patch 3's first copy); the orrery's maintenance run passed 31 of 31,
+  fetched 48 periods, confirmed 63 of 63 entries with JPL, and was
+  pushed at d91dc1d0. Patch 2 ran; the Daily Run built 69 objects, the
+  swap first try, the served window 88.0 days set by Mercury, the
+  shortest of 62 bodies' spans; no trust measurement failed.
+  - **One gate failed, and it was the orrery's:** Solar System figures,
+    on 2025 PN7. Its period, 363.9 days, prints "1.00" years, three
+    figures, but `orbital_period.figures_by_error` counted the figures
+    before rounding and served two, so the website printed "1.0".
+    Counted from the number as printed now
+    (`patch_L443_4_period_count_20261022.py`), with a case in
+    test_objects_export.py; only PN7's count changes in the export.
+    The website's printer was right and is unchanged.
+  - **Recorded, not chased:** six comets (halley, ikeya_seki,
+    hale_bopp, hyakutake, neowise, lemmon) carry the builder's warning
+    "its period is around @0, but a comet is drawn from its elements
+    around the Sun": the hover's period and the drawn ellipse use
+    different centres. Halley carried it since L-431 build 3; the
+    others joined with slice 1. Against L-431's ruling 7 (one orbit
+    for hover and drawing); for the comets' next design look.
+  - Patch 3's two later copies (the 6AC4721 ruling, the papers, the
+    horizons-orbital-mechanics 1.9 method) never ran: Tony had run the
+    first. Patch 4 carries them and removes the unrun copy at the root.
+- **2026-10-22, 22:50: live.** Orrery pushed at f10e859f (patch 4,
+  maintenance run 31 of 31); the second Daily Run passed 35 of 35,
+  Solar System figures among them; the website pushed at b93072eb; the
+  live run found all 25 files served as committed. Tony reinstalled
+  interactive-exhibit 1.21 and horizons-orbital-mechanics 1.9.
+- **2026-10-22, night: Tony's phone look done.** His answers are in
+  `documentation/WHERE_WE_ARE_10-22-26_2027_run_record.md`. Items 1,
+  3, 5, 6, 7, 8 and 10 a plain yes. Item 9 found Halley drawn in the
+  wrong place when zoomed in: L-472 (the view fix). Item 4: a group
+  should open with its bodies unticked, L-473. Item 2: the About link
+  missing from the i panels, L-475. A later note: See more / See
+  fewer at the top of the drawer, L-474. And "Gonggong skipped but
+  needs discussion", on L-470.
+- **2026-10-23: the view talk done.** Nothing was drawn wrong; a count
+  line for ticked bodies outside the view, See more at the top and the
+  About line built in gallery patch_L472_1 (L-472, L-474, L-475);
+  L-473 parked, the drawer already opening groups unticked.
+- **2026-10-23, evening: slice 2 designed,** from Tony's phone. Seven
+  rulings, in his words in `documentation/DESIGN_L443_slice2_rulings_20261023.md`:
+  one path rule, the orrery's (a backbone thinned where straight, fine
+  steps around each event), its plan made in the orrery and served;
+  the first set the twelve spacecraft still flying among the planets,
+  with the 14 open-path comets; an event placed by the nearest
+  approach found in JPL's positions, a sourced date only extra words;
+  a flyby later in the room of the body flown past, its sharply
+  curving part and nearest approach or approaches; solid to today,
+  dashed after, for spacecraft and comets alike, the future part
+  JPL's own plan or prediction; that part fetched again on the 30-day
+  cycle. The orrery's own plots follow on L-476.
+- **Carried for the build:** gallery `render_orbits.py`'s comment that
+  a 3D line cannot be dashed is wrong (Plotly 2.35.2's schema gives
+  six dash styles); corrected when slice 2 opens the file.
+- **2026-10-24: Tony's phone look of Oct 23 found five things,** ruled
+  at the day's design talk (`documentation/DESIGN_L477_drawer_and_view_rulings_20261024.md`):
+  the drawer loses See more and every "All", a group row only opens,
+  Reset puts things back (L-477); the count line moves left (L-478);
+  Go To fits a body's whole orbit, and every hover gives its orbit's
+  near and far distance (L-479); closing the About card goes back to
+  the room (L-480). Built before slice 2.
+- **2026-10-24, evening: L-477 to L-481 closed on Tony's look**
+  (`documentation/WHERE_WE_ARE_10-24-26_1140_run_record.md`). Slice 2 builds on gallery
+  96173b8 and orrery 206f96c.
+- **Carried for interactive-exhibit's next version, from L-481**
+  (closed 2026-10-24; descriptions to add, not wrong sentences): in the
+  Solar System room each hover line after the name is a bullet, written
+  `&#8226;` because Plotly 2.35.2 converts only eight named entities;
+  every source line naming JPL Horizons carries
+  https://ssd.jpl.nasa.gov/horizons/, which the i panel makes a link;
+  each room's closing paragraph is a bulleted list, "the creator's
+  daughter". Slice 2's skill bump carries them.
+- **2026-10-24, night: slice 2 split in two; build A built**
+  (`documentation/HANDOFF_L443_slice2_buildA_20261024.md`). The orrery's
+  objects export cannot carry a key the website has no entry for: the
+  website's objects mirror refuses it, which would stop the Daily Run's
+  pulls. So the twelve spacecraft are keyed in the same round as their
+  website entries (build B). Build A is the orrery's path plan
+  (orrery `patch_L443_7_slice2_path_plan_orrery_20261024.py`):
+  `path_plan.py` and its suite (15 of 15), the export's schema 3
+  carrying each served spacecraft's plan, two run rows and three
+  dashboard buttons, one of them a temporary preview that plans the
+  twelve by name so the first real flyby list comes from Tony's
+  machine. Two things the design record did not say, decided by method
+  and written into horizons-orbital-mechanics 1.10: a flyby must lie
+  inside the body's Hill sphere, worked out from JPL's own GM (without
+  it the first offline run took nearest approaches 85 million km from
+  Mercury for events), and a path's span is read from JPL's own limits,
+  since the list's end dates had gone stale (Juno's and Psyche's past
+  JPL's data, New Horizons' 21 years short of it).
+- **The words for build B, drafted for Tony**
+  (`documentation/WORDS_L443_slice2_draft_20261024.md`, the reads in
+  `CHECK_L443_slice2_sources_20261024.md`): JPL's exact name and data
+  span for all twelve spacecraft, every number in a description read
+  on a page opened that day or removed, a link for each. It carries
+  four decisions: C/2025 K1's record (L-470), BepiColombo's arrival
+  date, whether Juno's planned part is drawn, and the word
+  "Hyperbolic".
+- **Asked of Tony, 2026-10-24, in chat:** how much of a comet's path the
+  website draws. Recommended: from one year before perihelion, solid
+  to today, dashed for one more year.
+- **Answered, 17:07** (`documentation/COORD_L443_comet_span_ruling_20261024.md`):
+  "On the comet window, yes but within the JPL served window which may
+  be less." A comet's path runs from one year before perihelion to one
+  year after today, solid to today, dashed after, both ends clipped to
+  what JPL serves for its record, read from JPL's refusals as the path
+  plan reads a spacecraft's span; nothing is extended. The two margins
+  are drawing choices, and the hover says so.
+- **The four decisions in the words, ruled the same evening**
+  (`documentation/COORD_L443_words_decisions_20261024.md`):
+  1. C/2025 K1's record: asked by JPL's permanent number, 1004075
+     (17:15; built on L-470).
+  2. BepiColombo: "B for Bepi Colombo." No arrival date in its
+     description; the drawn path carries the timing.
+  3. Juno: "Confirmed in Juno." Drawn by ruling 6 to where JPL's data
+     ends, 2028-09-02, solid to today and dashed after; the description
+     says nothing about the mission's end.
+  4. "Use hyperbolic because that's the scientific term and the plain
+     words to say what it means." (17:35)
+  The rest of the words come to Tony again beside build B's hover
+  words, before they are served.
+- **Two more, the same evening:** a room for C/2025 K1 and its pieces
+  (L-483), and a check that the website and the orrery agree (L-484).
+- **Carried for slice 2's next skill bump:** none; L-481's three
+  descriptions and L-482's rule rode interactive-exhibit 1.23 this
+  session.
+- **2026-10-24, later that night: the preview sat silent.** Tony started
+  the dashboard's preview at 20:44; at 20:55 the window was still blank,
+  because the plan printed only at its end. Tony, 21:00: "i was wondering
+  if we can break this up so that we can get interim reports, especially
+  an initial report that says that we are pinging jpl at least.
+  especially if this runs automatically every 30 days, a long pause may
+  be an issue." And 21:06: "yes, and maybe patch and rerun before the
+  website patch?" Found with it: the maintenance run stops any one step
+  at 900 seconds, and the plan saved only at its end, so a first full
+  plan in that run would have been cut off with nothing saved, every
+  time. Built in orrery `patch_L443_10_path_plan_as_it_goes_20261024.py`:
+  a first line before JPL is asked anything, then a line with the
+  seconds since the start for each path's span, each body's data sheet
+  and positions, each body's near approaches and each flyby; each plan
+  saved as it is made; a 10-minute limit (TIME_LIMIT_SECONDS) after
+  which nothing new starts, what is left named in the verdict and taken
+  up by the next run; --no-limit for the dashboard's preview. The suite
+  gains checks 10 to 12, two with a planted fault (20 of 20).
+- **2026-10-24, the preview on JPL's real data** (Tony's run, 20:44 to
+  about 21:12; its report in `documentation/WHERE_WE_ARE_10-24-26_1927_run_record.md`): 12 paths, 498 events.
+  The flybys spot-checked land on the missions' known dates, as Claude
+  knows them; the numbers are JPL's: Voyager 1 at Jupiter and Saturn,
+  Voyager 2 at Saturn, Uranus and Neptune, New Horizons at Pluto, and
+  Juno's, Lucy's, JUICE's, Psyche's, Clipper's and BepiColombo's
+  passes of Earth, the Moon, Venus and Mars. One not recognised:
+  OSIRIS-APEX passing Earth at 7,526 km on 2029-04-13, the day Apophis
+  passes Earth; Claude checks it against JPL's sheet before it is
+  served. More than 230 events are three orbiters' repeated passes:
+  Juno 110 of Jupiter, Clipper 83 of Jupiter, BepiColombo 40 of
+  Mercury. After patch_L443_10, two runs of the preview printed their
+  first line at once and asked JPL nothing (21:32, 21:34).
+- **The orbiters, ruled 2026-10-24, night.** Tony, asked whether an
+  orbiter rides with its planet (`documentation/WHERE_WE_ARE_10-24-26_1927_run_record.md`): "i can see this being
+  an issue. this becomes even more with an orbiter or a lander like the
+  mars lander. i am not sure how to handle this mechanically. the
+  initial entry and exit may be important, a landing, a takeoff, but
+  routine orbits for observations could be omitted. but what would be
+  the logic?" Claude Fable 5.1, in the coordinating session the same
+  evening, recorded in the same copy: the first entry into a body's
+  Hill sphere is an event, kept with its fine steps; a departure is an
+  event, kept; everything between, while the spacecraft stays inside,
+  is captured, and in the Solar System room it rides with the planet,
+  with no fine steps; a landing is an entry with no exit; the loops
+  wait for that planet's room. Tony: "yes that would work well.
+  thanks." As method for build B: a stretch of days inside a body's
+  Hill sphere with one nearest approach is a flyby, as now; with more
+  than one it is a capture, whose first nearest approach and whose
+  last before leaving are the events; a stretch running to the end of
+  JPL's data is an arrival with no departure. Passes of the Sun stay
+  events. For horizons-orbital-mechanics' next version.
+- **Tony, 2026-10-24, 22:26, in chat:** "build 3 would implement the
+  spacecraft and hyperbolic comets and interstellar objects? Perhaps
+  those should go in their own room? And i would suggest putting the
+  spacecraft drawer after earth's as the comets are after the sun's."
+  Both are asked first in build B's session
+  (`documentation/HANDOFF_L443_slice2_buildB_brief_20261024.md`, sec.
+  3): a room of their own against the Solar System room, where the
+  planets already frame their paths (Settled, Oct 22: "Open-path
+  comets go with the spacecraft"); and the drawer's order, read as a
+  Spacecraft group row right after Earth's, as the Comets group follows
+  the Sun.
+- **2026-10-25, build B, cut after the spacecraft**
+  (`documentation/HANDOFF_L443_slice2_buildB_spacecraft_20261025.md`).
+  The brief's three questions were answered before the session by
+  `COORD_L443_drawer_groups_ruling_20261024.md` (Tony, 22:49 and 23:27:
+  a separate group, not a room; the spacecraft group after Earth's row;
+  every group by JPL's classification, minor planets too) and
+  `COORD_L461_stop_ruling_20261025.md`. Built:
+  - The OSIRIS-APEX Earth pass of 2029-04-13 checked: NASA's
+    retargeting page gives "six close Sun passes" and "three gravity
+    assists from Earth"; the plan's six Sun passes near 0.5 AU and
+    three Earth passes after the sample drop match; the April 2029 pass
+    is the third assist. JPL's sheet lists no dates.
+  - The orbiter rule in `path_plan.py` (orrery patch_L443_12): stretches
+    of days inside a Hill sphere; one nearest approach a flyby, more a
+    capture with its arrival and departure; a capture to the end of the
+    data an arrival that stays; Sun passes stay; each event names its
+    kind; RULE 2 among a plan's inputs. Suite 23 of 23, two made-up
+    orbiters, a planted fault. Tony runs the preview again with it.
+  - The twelve keyed (orrery patch_L443_13) with JPL's names and the
+    approved words (BepiColombo's with no date; Juno's silent on its
+    end); a spacecraft serves no period; the preview flag and list go,
+    and "Path Plan -- every path, now" (--all --no-limit) takes the
+    button's place; the patch carries each preview plan made by the
+    orbiter rule into data/path_plans.json under its key.
+  - The website (gallery patch_L443_15): eleven entries beside Voyager 1,
+    whose typed windows go; a Spacecraft group after Earth's row, in
+    launch order, five labelled; the mirror copies each plan; the
+    builder fetches each path by its plan, whole again on a new plan,
+    each window thinned at its own scale (1% of the passing distance;
+    the first simulated build served about 1.7 MB before, 68 KB after),
+    as_of_today today's point, a re-fetch held out of the shrink gate by
+    name, the sanity bound 1,000 AU; the room fetches each positions
+    file and draws the path solid to the minute shown and dashed after,
+    its marker worked out between points with that error printed by;
+    the text box and source line in Tony's words of 2026-10-25, the
+    dashed part named "predicted", JPL's own word, by his ruling ("use
+    the word JPL uses"; Juno's data sheet: "a planning prediction"); a row
+    the cache lacks named, not fatal; the figures check's part 7 and the
+    drawer walk's section 20. Simulated end to end in the sandbox on
+    straight fake paths; the real build and the phone have not seen it.
+  - L-461 with it (`daily_run.py`).
+  - Skills: horizons-orbital-mechanics 1.11, gallery-cache-builder 1.12,
+    interactive-exhibit 1.24, safe-file-editing 1.14 (protocol v3.112).
+- **Tony's runs, 2026-10-25, evening** (his run record,
+  `documentation/WHERE_WE_ARE_10-24-26_1927_run_record.md`). Patches 12
+  to 15 ran; orrery pushed at d80aed3, gallery at 191d68f. The preview
+  made by the orbiter rule: Juno 113 events to 4, Europa Clipper 87 to
+  5; patch 13 carried all twelve plans. Ten spacecraft built and drew;
+  his phone look: "juno looks correct. solid to today and dashed
+  predicted with both a hover text and info card"; Parker "correct".
+  Two failures, both fixed the same evening:
+  - **The Horizons check stopped at the first spacecraft as UNREACHABLE.**
+    JPL was reached. Its Lookup answers a spacecraft's id in the
+    small-body index with its two header lines alone (fetched that
+    evening for -31 and -61, group=sb), and the check read that as a
+    failed fetch. It now reads JPL's header alone as no matches (orrery
+    patch_L443_16, `horizons_check.py`, with a recorded Voyager 1 case
+    and a planted fault in its suite). The twelve names were checked
+    against JPL's Lookup the same evening; all twelve match.
+  - **Both Voyagers' paths were refused by JPL** ("No ephemeris for
+    target ... after A.D. 2100-JAN-01 00:00:00.0000 TD"). Their data ends
+    at that minute exactly; the builder adds 69 s to every time it asks
+    (UTC to TDB), so the stop asked was 00:01. The span's end is now
+    taken back by the same 69 s (gallery patch_L443_17,
+    `gallery_cache_builder.py` `_plan_span`, with a check and a planted
+    fault in its suite). The other ten end later in their last day.
+    Voyager 1 was drawn from an old path with no marker, hover or panel
+    words; Voyager 2 was dropped.
+  - **Voyager 1 goldenrod**, not the orrery's white: "the white line
+    does not contrast with the white grid"; asked whether to share
+    Parker's gold, Tony chose "Gold, like Parker" (gallery
+    `presentation.py`, in patch_L443_17).
+  - His other notes: the TNO group opened with a lag; the failed fetches
+    are listed at the foot of the i panel, as intended; the description
+    bullets are L-487.
+- **Tony's runs, 2026-10-25, night.** Both fixes ran; orrery pushed at
+  967d150, gallery at 82a7ab1. The Horizons check confirmed the twelve;
+  the Daily Run fetched both Voyagers. His look: "Looks great." Voyager
+  1 gold, with its marker, text box and panel words.
+- **A spacecraft's companions** (gallery patch_L443_19). Tony: "in
+  addition to the default inner planets, add the farthest planet orbit
+  that the object has reached. For Juno that is obviously Jupiter. For
+  Voyager that would be Pluto (include as the last commonly known minor
+  planet). This gives perspective to a spacecraft plot," then "Maybe
+  flyby planets too." Claude's rule, which he approved ("Yes please on
+  all your suggestions"): ticking a spacecraft also ticks, among the
+  drawer's top-level body rows (the planets and Pluto), every one its
+  plan names as a flyby, arrival or departure, and the farthest whose
+  perihelion its whole drawn path goes beyond, Pluto the last; ordinary
+  ticks, which Reset puts back. On the served cache: Voyager 1, Jupiter,
+  Saturn, Pluto; Voyager 2, Jupiter to Neptune and Pluto; New Horizons,
+  Jupiter and Pluto; Juno, Lucy, JUICE, Europa Clipper, Jupiter; Psyche,
+  Mars; the four inner craft, nothing past what is drawn. The driver
+  serves each craft's plan bodies and the farthest its path goes
+  (`path_events`, `path_reach_au`); `SolarSystemDrawer.companions`
+  decides; the drawer check's section 7 (seven cases, two breaks) and the
+  walk's section 20 hold it. Rule written into interactive-exhibit 1.25.
+  The heliopause Tony asked about next is L-488.
+- **Tony's runs, 2026-10-26, morning.** patch_L443_18 and _19 ran and
+  were pushed (orrery 5398439, gallery 9223cd1); his phone look of the
+  companions and the bullets: "correct."
+- **The comets, build B part 2, 2026-10-26** (orrery patch_L443_20,
+  gallery patch_L443_21; the handoff,
+  `documentation/HANDOFF_L443_slice2_buildB_comets_20261026.md`).
+  - **The class check** (`documentation/CHECK_L443_drawer_classes_20261026.md`):
+    every drawer group's bodies and the fourteen comets against JPL's
+    orbit class, read live. No body sat in the wrong group; Comets
+    gathered four classes and Near-Earth asteroids three. Tony: "Split
+    with asteroids in the correct order among the planets." So one JPL
+    class to a row: Encke-type, Jupiter-family, Halley-type and Comets,
+    then Hyperbolic comets and Interstellar objects, after the Sun; Aten
+    asteroids after Venus; Apollo and Amor asteroids after the
+    Spacecraft group.
+  - **The words** (`documentation/WORDS_L443_comets_20261026.md`),
+    approved: "Yes on all." On the first draft Tony: "I don't want to
+    drop JPL's words, Ellipse, Predicted, hyperbolic, perihelion,
+    aphelion, etc. We should keep these correct words and explain them
+    when they should be explained." Claude Fable 5.1 recorded the same
+    ruling at 11:44 as method for both instruments
+    (`documentation/COORD_jpl_words_ruling_20261026.md`): "we should
+    always keep the correct JPL words and explain them when needed."
+    Written into interactive-exhibit 1.26; provenance-discipline's What
+    a Visitor Reads takes it at its next version. The orbit line now
+    reads "Orbit: perihelion q AU, its closest to the Sun, to aphelion Q
+    AU, its farthest."
+  - **The orrery:** the fourteen keyed, each marked `open_path`, with
+    its JPL name and its approved description; West asked as
+    C/1975 V1-A. `path_plan.py` plans each by the span ruling, a year
+    before its perihelion to a year after today, clipped to JPL; the
+    perihelion found in JPL's daily positions and refined to the
+    minute, its one event; the record's TP only places the first ask.
+    Comets are not searched bodies of the spacecraft plans, so the
+    twelve plans did not change. The export and the period fetch serve
+    no period for a path. The Horizons check looks for an entry asked
+    by JPL's number in the small-body lookup (C/2025 K1 as 1004075,
+    shown failing on the old code) and confirms no period for a path.
+    And L-491, the nucleus sizes, sourced.
+  - **The website:** the builder fetches a comet on an open path by its
+    plan (`is_path_body`); the mirror copies `open_path`; the assembler
+    draws any body served positions and no elements as a path, a comet
+    with its diamond; the room's text box and source line, in the
+    approved words; the room's second list a bullet for them; a name
+    the orrery keys with an underscore shown with a space (C/2025 K1);
+    the maintenance run's live check fetches the fourteen positions
+    files.
+  - **Checked in the session:** the orrery's suites (path plan 27,
+    Horizons check 68, period fetch 36, objects export) and its
+    headless run; the builder's offline suite, 482 checks, with four new
+    for the comets; the figures, drawer and drawer-order smokes; the
+    drawer walk, 140 checks, with a new section 21 for the comets; the
+    Sun and Earth rooms driven in both copies and found the same; all
+    on stand-in plans and straight-line paths, since the sandbox cannot
+    reach JPL. The comets' real paths are Tony's runs.
+  - **Not done here, by name:** the comets' companions (none; a
+    comet's own room is L-483); the ten gallery cards' sizes (L-491).
+    Corrected the same evening: the comets' companions were built, by
+    Tony's ruling below.
+- **The same afternoon, before Tony's runs, two more website patches:**
+  - patch_L443_22: ATLAS (C/2024 G3), the one white comet, goldenrod.
+    Tony: "change all white comets to gold for contrast." The orrery
+    keeps its white.
+  - patch_L443_23: each drawer group's JPL or IAU class name explained
+    in plain words, the first bullet in the text box and the i panel of
+    every body in the group, from a served "about" on the group's row;
+    and a comet's perihelion explained in its span sentence. Tony's
+    "Yes" to drafting them, after Claude Fable 5.1's
+    `COORD_jpl_words_ruling_20261026.md`, and "Approved" to
+    `documentation/WORDS_L443_glosses_20261026.md`, whose sources are
+    JPL's Small-Body Database orbit classes, the IAU's announcement
+    ann17045 and the Horizons manual.
+  - Tony asked whether "aphelion" in his ruling was autocorrect's: it is
+    JPL's own word (the Horizons manual: "Aphelion distance (au)").
+- **Tony's runs, 2026-10-26, afternoon**
+  (`documentation/WHERE_WE_ARE_10-26-26_1451_run_record.md`). The orrery
+  pushed at 140db0a: the path plan asked JPL for the fourteen and made a
+  plan for each, one perihelion event apiece, the spacecraft plans
+  unchanged; the Horizons check confirmed the fourteen, 89 of 89
+  entries in all. The website pushed at dd9d0fa: the Daily Run's pull
+  matched the push and the build served all fourteen paths, each 2.5 to
+  4.5 KB of positions (West's plan runs from 1975, a year before its
+  perihelion); the swap took two tries, absorbed. One check was red, the
+  builder suite's: its span check had typed the stand-in plan's dates and
+  failed on the real ones, with the builder right; fixed in
+  patch_L443_24.
+- **His phone look:** the groups in their places, "yes"; ATLAS gold,
+  "yes"; Go To on 3I/ATLAS fits its whole path, "yes". C/2025 K1's
+  space: he had not seen the underscore the orrery keys it by, which is
+  the change working. And: "i thought we were adding the farthest
+  planetary orbit for perspective? that would be saturn now." Asked
+  whether a comet's farthest planet counts the path so far or the whole
+  drawn path, the dashed year included as a spacecraft's does: "so far".
+  So a comet on an open path ticks, as a spacecraft does, the farthest
+  planet whose perihelion its served path has passed up to the minute
+  shown: West, McNaught, 'Oumuamua and 2I/Borisov tick Pluto; 3I/ATLAS
+  Saturn (its whole path would reach Uranus); the rest Jupiter. Built in
+  gallery patch_L443_24, walked on the real served cache (142 checks);
+  the website's maintenance run in the sandbox, 35 of 35 gating checks,
+  its pulls aside (no orrery folder there).
+  - Two more asks, opened as items for a design talk: L-493 (a search
+    box for the drawer) and L-494 (the pointer to the i button).
+- **For the skills' next versions, carried here:** interactive-exhibit
+  1.26 says a comet on an open path has no companions, which patch 24
+  makes wrong; its next version says a comet ticks the farthest planet
+  its path has reached so far, and that a group row's about explains
+  its class first in each member's text box and panel. This session
+  already bumped interactive-exhibit once (One Session, One Bump), so the
+  correction is the next session's first skill work, before any other
+  work that fires the skill. provenance-discipline's What a Visitor
+  Reads takes the JPL-words rule, as above.
+- **2026-10-26, night: slice 2 closed on Tony's phone look**
+  (`documentation/WHERE_WE_ARE_10-26-26_1451_run_record.md`, item 7: tick West and Pluto comes; Go To
+  on 3I/ATLAS and Saturn comes: "-- correct"). L-493 (the search box)
+  and L-494 (the i button's note) were built and closed the same night,
+  and L-495 records five changes from his phone look, among them a comet
+  on a closed orbit ticking the farthest planet its orbit reaches (Tony:
+  "only spacecraft and comets").
+- **Carried for interactive-exhibit 1.27, adding to the list above**
+  (all from 2026-10-26, night; the first is a wrong sentence):
+  - Under Hover text is written for the visitor, "one pointer line
+    under each hover (L-231)" is wrong since L-494: no website hover
+    ends with a pointer; a first visit gets the i button's note.
+    (orrery-coding-conventions corrected the same sentence at 1.12.)
+  - A comet on a closed orbit ticks the farthest planet its orbit
+    reaches, by its aphelion; no asteroid or dwarf planet ticks one
+    (L-495).
+  - The drawer's Find a body box and the four names it matches (L-493).
+  - The grid chip's AU note; the whole triad opens the frame note; the
+    orbit line wrapped at 60 like the other bullets (L-495).
+  - The direction arrows: `gallery/direction_arrows.js`, the Direction
+    arrows check, five arrowhead lengths ahead, not drawn outside the
+    view or when longer than the orbit at that scale (L-495).
+  - A candidate for the headless recipe: the night's renders came from
+    the sandbox's Chromium with the pinned Plotly bundle and the room's
+    payload handed to the page in place of Pyodide, so Tony judged real
+    pictures before a build. Not yet a file in either repository.
+- **2026-10-27, the skill text written** (protocol v3.116; the first
+  session run in Claude Code, built on orrery 8d334e7 and gallery
+  7d422e5). interactive-exhibit 1.26 -> 1.27 carries every line of both
+  lists above: the pointer sentence corrected (the wrong one), a comet's
+  companions on an open path and on a closed orbit, a group's class
+  explained first, the Find a body box, the AU note and the whole
+  triad, the orbit line wrapped at 60, the direction arrows, and the
+  headless candidate, recorded as a candidate. The Hover budget check's
+  description in the skill's pre-test step said it checks that each
+  hover points at the i panel; corrected in the same bump. Each fact was
+  read from the website's code at 7d422e5 before it was written.
+  provenance-discipline 2.34 -> 2.35 takes the JPL-words rule into What
+  a Visitor Reads, principle 5, from
+  `documentation/COORD_jpl_words_ruling_20261026.md`; the five
+  principles Tony approved stay five.
+- **2026-10-28, completed** in the orrery's Claude Code session built on orrery b2fcc1bb and
+  gallery acbf206b (section 5, item 1 of
+  `documentation/HANDOFF_coordination_20261026_28.md`).
+  Three pieces, in the brief's order.
+  - **Pluto's year.** The website's Pluto is the orrery's Pluto-Charon
+    barycentre (key pluto_barycenter, Horizons 9), object_type
+    'barycenter', which plotting's pre-fetch, and with it the period
+    fetch, skipped. `period_fetch.py` gains FETCHED_HERE: that one
+    entry is fetched with plotting's own call, around the Sun as every
+    keyed body is, while plotting's lists stay as `palomas_orrery.py`
+    has them (nothing plotting fetches changed). It is asked by the
+    record the export serves (`export_objects.served_identity`: 9, a
+    major body). THE FIRST LIVE RUN CAUGHT A TRAP: asked by the
+    pre-fetch's default id_type 'smallbody', JPL answered for the
+    asteroid 9 Metis (1,346.6 days); that entry was taken back out of
+    the cache. Asked as a major body, JPL's "Pluto Barycenter (9)":
+    the two-centre test chose the solar system's centre of mass (the
+    year moved 0.314 days there against 179.8 around the Sun),
+    90,578.39 days, 247.990 years as the export reads it.
+    `test_period_fetch.py` part 7 runs on JPL's answers recorded live
+    (`documentation/worksheets/period_answers_pluto_L443.json`), with
+    two planted faults (the entry taken off FETCHED_HERE; the Metis
+    trap); its made-up list's skipped barycentre is now Orcus-Vanth's.
+    39 checks pass. The Horizons check compares it on the maintenance
+    run.
+  - **2026 ED138's menu slot:** between Varuna and Haumea, by
+    semi-major axis; the answer is on L-501.
+  - **The drawn main-belt cloud, the orrery half.** The numbers went to
+    Tony first, and his ruling of 2026-10-28 in chat, recorded here as
+    he asked: "Go ahead with JPL's edges and your measured spread. Draw
+    form B: a cloud of dots placed at random inside the measured spread
+    (radial and vertical), stored once like the Hills cloud, not a
+    snapshot of real asteroids on one date, because the orrery and the
+    website both show any date and a snapshot is wrong on every day but
+    one. The hover says it shows the belt's extent measured from 5,429
+    of JPL's main-belt orbits, not individual bodies. Record the choice
+    and the reason on L-443." THE CHOICE: form B, random dots inside
+    the measured spread, stored once. THE REASON, his: both instruments
+    show any date, and a snapshot is right on one day only.
+    - The edges are JPL's class MBA, from "SBDB Filter Parameters"
+      (version 1.0, 2021 August,
+      https://ssd-api.jpl.nasa.gov/doc/sbdb_filter.html, read
+      2026-10-28): semi-major axis between 2.0 and 3.2 AU, perihelion
+      beyond 1.666 AU. The sample: every MBA of absolute magnitude 13 or
+      brighter, 5,429 orbits of 1,394,455, from JPL's SBDB Query API the
+      same day, kept unchanged in
+      `documentation/worksheets/main_belt_jpl_mba_h13_20261028.json`.
+    - THE SPREAD WAS MEASURED ALONG EACH WHOLE ORBIT, 720 points evenly
+      in time, not at the orbits' own dates as first reported to Tony,
+      by his own reason: a cloud shown on any date is where the
+      asteroids spend their time. For Tony to see, the two side by
+      side: nearest 1.67 AU both ways; farthest 4.10 reported, 4.26
+      measured (the farthest aphelion); nine in ten between 2.17 and
+      3.54 both ways; half within 0.26 and nine in ten within 0.67 AU of
+      the ecliptic both ways.
+    - The figures are capped by the sample, not by JPL's digits:
+      measured again from the 2,038 brightest (H 12 or brighter) the
+      distances move by up to 0.031 AU, the heights by 0.014 AU, the
+      angles by 0.18 deg; so 3 figures for the distances and 2 for the
+      heights and angles, on the rows. The constants export refused the
+      first form of those lines ("to 0.001 AU") by name; fixed before
+      the run.
+    - Built: nine rows in `constants_new.py` (THE MAIN ASTEROID BELT);
+      the unit token `mag` in `constants_tokens.py`;
+      `main_belt_sampler.py` (new: the measurement, the drawing, four
+      dot checks and the rows' check against the kept answer, and the
+      words, every number from a row at its declared count);
+      `data/drawings/main_belt.json` (6,000 dots, seed 443, 0.001 AU),
+      written by `export_drawings.py`; `test_drawings_export.py` with
+      three planted faults (a dot past the far end, the belt drawn
+      flat, a spread row edited), 22 of 22 caught; and the orrery's
+      belt redrawn from the stored dots in
+      `asteroid_belt_visualization_shells.py`, its hover and checkbox
+      tooltip one text from the rows. The typed MAIN_BELT_INNER 2.2,
+      MAIN_BELT_OUTER 3.2, MAIN_BELT_PEAK 2.7 and the five KIRKWOOD_GAPS,
+      unsourced and used only there, are removed. Seen through the live
+      dispatch in a throwaway copy: 6,000 dots, the opening view 5.11
+      AU, the farthest dot plus 20 percent.
+    - WORDS FOR TONY TO SEE, old and new. The old tooltip: the belt
+      "roughly 2.2 to 3.2 AU from the Sun"; Ceres 940 km; total mass
+      about 4% of the Moon's; Kirkwood gaps; peak density around 2.7 AU;
+      C-type 75%, S-type 17%, M-type. None named a source, and the
+      drawing no longer shows the peak or the gaps (a 5-percent step of
+      distance smooths the gaps away). The new hover and tooltip: what
+      the cloud shows and that the dots are not asteroids; JPL's class
+      in JPL's words; the nearest 1.67 AU (about 250 million km) and
+      farthest 4.26 AU (about 638 million km); nine tenths of the time
+      between 2.17 and 3.54 AU, within 0.67 AU (about 100 million km)
+      of the plane of Earth's orbit, half within 0.26 AU (about 38
+      million km); the 5,429 the brightest of JPL's 1,394,455, and the
+      choice of them ours.
+  - **The skill:** interactive-exhibit 1.27 -> 1.28 (protocol v3.117),
+    carrying L-497, L-496 and L-458.
+- **Loose ends, re-homed at this close** (all from this block):
+  - The served objects with no key (the Moon, Io, Titan, Pluto's body,
+    Charon) still get no period on the website; Voyager 1 is keyed
+    since slice 2 and, as a path, serves none: L-484 (the two agree).
+  - The Pluto-Charon barycentre's own period: done, above.
+  - From L-395, the fields the list lacks, the display-name rename,
+    MAPS and 3I/ATLAS checked live, whether the identity check widens:
+    L-484.
+  - Watch the first real build: struck; the real builds ran from
+    2026-10-22 (69 objects, then 95), each red read in its session.
+  - gallery-cache-builder's two sentences: L-485 (a nightly run), with
+    L-501's third.
+  - The headless walk's Pluto frame check failing on stand-in data:
+    L-503 (the belt on the website), the next build to walk that room.
+  - Whether the Lagrange points and the exoplanet entries are ever
+    served: L-484.
+  - Six comets whose period is around the centre of mass but drawn
+    around the Sun: L-483 (a comet room), the comets' next design look.
+  - `render_orbits.py`'s comment that a 3D line cannot be dashed:
+    struck; corrected in build B (its comment of 2026-10-23).
+  - The cloud on the website: L-503, new, for the gallery session.
+**Gap (replaces the one below, 2026-10-28):** none. DONE. The cloud's
+website half is L-503 (the belt on the website).
+**Gap (replaces the one below, 2026-10-27):** slice 2 is closed and its
+skill text is written. What waits on this item is on Where We Are's
+Deferred list (a drawn main-belt cloud). The road's next stage is L-485
+(a nightly run), which opens with a design talk.
+**Gap (superseded above, 2026-10-26, night):** slice 2 is closed.
+Next session first: interactive-exhibit 1.27 with everything carried
+above, and provenance-discipline's JPL-words rule; then the road's next
+stage, L-485 (a nightly run), which opens with a design talk.
+**Gap (superseded above, 2026-10-26, night):** Tony's run of
+gallery patch_L443_24 and the website's maintenance run, push; his phone
+look: tick West and see Pluto come with it; Go To on 3I/ATLAS and see
+Saturn. Then slice 2 closes. Next session first: interactive-exhibit
+1.27, as above.
+**Gap (superseded above, 2026-10-26, evening):** Tony's runs, in order:
+patch_L443_20 and the orrery maintenance run (the path plan's comets
+and the Horizons check confirming the fourteen), push; patch_L443_21
+and the Daily Run, push; his phone look at the comets. Then slice 2
+closes.
+**Gap (superseded above, 2026-10-25, night):** Tony's runs of
+patch_L443_18 and patch_L443_19, push, and his phone look at the
+companions (Voyager 2, Juno). Then build B's second part, the comets,
+from the handoff's section 6.
+**Gap (superseded above, 2026-10-25, evening):** Tony's runs of
+patch_L443_16 and the orrery maintenance run (the Horizons check
+confirming the twelve), push; patch_L443_17 and the Daily Run (both
+Voyagers fetched), push; his look at Voyager 1. Then build B's second
+part, the comets, from the handoff's section 6, as below.
+**Gap (superseded above, 2026-10-25):** Tony's runs (the handoff,
+sec. 2), the preview's report, the Daily Run and his phone look; then
+build B's second part, the comets, from the handoff's section 6: the
+plan for open-path comets by the span ruling, the fourteen keyed, the
+three groups by JPL's class, the words to Tony first; and every drawer
+group checked against its bodies' SBDB classes.
+**Gap (superseded above, 2026-10-24, close of the night):** build
+B, a fresh session, from
+`documentation/HANDOFF_L443_slice2_buildB_brief_20261024.md`: Tony's
+word on a room of their own and on the drawer's order; the OSIRIS-APEX
+pass checked; the orbiter rule in the path plan; the twelve keyed with
+their website entries and words; the builder fetching by the plan; the
+room drawing each path solid to today and dashed after, the hover words
+to Tony first; L-461; then the open-path comets by the span ruling.
+**Gap (superseded above, 2026-10-24, later that night):** Tony's
+run of patch_L443_10, and the preview run again with it, its report
+pasted into the chat; then build B: the twelve keyed with their website entries
+and their words, the builder fetching by the plan, the room
+drawing each path solid to today and dashed after, the hover words to
+Tony first, with L-461; then the open-path comets by the span ruling.
+**Gap (superseded above, 2026-10-24, late night):** Tony's runs,
+patch_L443_9 right after patch_L443_8, and the preview's output pasted
+into the chat; then build B, as above.
+**Gap (superseded above, 2026-10-24, night):** Tony's run of the
+path plan patch and its preview, pasted into the chat; his words
+approvals and the four decisions; his answer on a comet's span; then
+build B: the twelve keyed with their website entries, the builder
+fetching by the plan, the room drawing each path solid to today and
+dashed after, the hover words to Tony first, with L-461; then the
+comets.
+**Gap (superseded above, 2026-10-24, evening):** slice 2's build,
+by `documentation/DESIGN_L443_slice2_rulings_20261023.md`, after the
+next design talk (L-482, L-461, L-465).
+**Gap (superseded above, 2026-10-24, noon):** L-477 to L-480 are
+built (gallery patch_L477_2); Tony's runs, pushes and phone look; then
+slice 2's build, by `documentation/DESIGN_L443_slice2_rulings_20261023.md`.
+**Gap (superseded above):** the build of L-477 to
+L-480 and Tony's phone look; then slice 2's build, by
+`documentation/DESIGN_L443_slice2_rulings_20261023.md`.
+**Gap (superseded above):** Tony's runs of
+patch_L472_1 and patch_L472_2 and his phone look; then slice 2's
+build, by `documentation/DESIGN_L443_slice2_rulings_20261023.md`.
+**Gap (superseded above):** Tony's runs of
+patch_L472_1 and his phone look; then slice 2, the spacecraft and the
+open-path comets.
+**Gap (superseded above):** the view fix first
+(L-472), with the three drawer and panel changes (L-473, L-474,
+L-475); then slice 2, the spacecraft and the open-path comets.
+**Gap (superseded above):** Tony's phone look
+(the handoff, sec. 10); then slice 2, the spacecraft and the
+open-path comets.
+**Gap (superseded above):** patch 4 and
+the orrery maintenance run, pushed; the Daily Run again and the website
+pushed; Tony's look; then slice 2, the spacecraft and the open-path
+comets.
+**Gap (superseded above):** Tony's runs of
+the two slice-1 patches, the orrery maintenance run (JPL confirms and
+fetches the 50), the Daily Run, and his look; then slice 2, the
+spacecraft and the open-path comets.
+**Gap (superseded above):** the design session, then
+the first slice on Tony's word.
+**Gap (superseded above):** after the Sun's numbers and its chosen drawings (L-412): the design session, from
+the brief: measure, propose the slices and the mechanism, and build the
+first slice only after Tony's word.
+**Ref:** `documentation/HANDOFF_L438_objects_to_website_brief_20261013.md`;
+L-433; L-431; L-395; L-442; `export_objects.py`; `celestial_objects.py`;
+gallery `data/objects_config.json`.
+
+#### [L-458] A "report a problem" link in every room's i panel (gallery, interactive)
+<!-- L:458 status:DONE upd:2026-10-28 section:C flag: rice: -->
+- **Tony's idea, 2026-10-20**, in a design chat on verification: the
+  live source links in the i panel let a visitor check a claim, and "if
+  they see something off, they could report it. You know, that could be
+  me, or that could be somebody else." Brought to this session as a
+  draft.
+- **For any problem, not only a dead link** (Tony: "In fact the problem
+  report could report not just a broken link but any problem the
+  visitor sees, perhaps an expert would see a problem we have not
+  caught."). Dead links are the monthly run's (L-459); this is the
+  outside check only a visitor can make: a number, a sentence, a
+  source, a link or the drawing.
+- **Where it lands: Tony's Daily Run report** (Tony: "in the daily
+  maintenance report").
+- **How: the guest book's form, pre-filled** (Tony: "instead of
+  creating a second sheet couldn't have the function preformat a
+  message for the visitor to send or amend as a comment?"; then
+  "Confirmed"). The link opens the guest book's Google Form with its
+  message box already written, naming the room and the feature, for
+  the visitor to edit and send. It lands in the guest book's sheet; the
+  Daily Run's guest book step shows it to Tony. A message beginning
+  "Problem report" is shown as a report, kept private, and never offered
+  for the lobby. No second form, no second sheet, and the visitor needs
+  no account. First draft of the message, for Tony's words list at the
+  build: "Problem report -- Sun room, Corona. What looks wrong (a
+  number, a sentence, a source, a link, or the drawing)? If you know a
+  better source, please name it:"
+- **Tony-action (do), at the build:** in the guest book form's editor,
+  "Get pre-filled link" once, so the link knows the hidden name of the
+  message box. Steps given then.
+- **2026-10-21, talks part 2, talk D:** the words approved (Tony,
+  "Approved"), as listed in `documentation/DESIGN_talks2_rulings_20261021.md`
+  talk D; plus an "About this gallery" line under the link opening the
+  front page's About card, shared not copied (Tony, "please add the
+  same info button that is in the front page that has my name and
+  email", then "A"); plus "Page: <address>" as the message's last
+  line (Tony, "Yes").
+- **2026-10-22:** deferred behind L-443 (the objects), Tony's ruling in the
+  coordination session (Claude Fable 5.1's record, carried into this
+  close); listed under Deferred on Where We Are.
+- **2026-10-27, late night, built** (Claude Opus 5.5, the gallery's
+  first Claude Code session; built on gallery 7a4a03a), in talk D's
+  approved words: "Report a problem" under every focused feature in the
+  i panel, in every room, with its line beside it; the link opens the
+  guest book's Google Form with the message box written: "Problem report
+  -- <room> room, <feature>", the two prompts, and "Page: <the room's
+  address>". "About this gallery" was already there, as the panel's
+  last line "About Paloma's Orrery" (L-475).
+  - The form's long address and the message box's field
+    (entry.547008652, "Leave a note about the gallery") were read from
+    the form's public page, which the guest book's short link opens; so
+    the "Get pre-filled link" step is not needed (`REPORT_FORM` in
+    interactive.html says where they came from).
+  - `tools/guestbook_updater.py`: a message beginning "Problem report"
+    is shown as a report, never offered for the lobby (k keep, l later,
+    q stop), and counted on the last line. Its test has a seventh run
+    for it. Note: the form's own description still says a message "will
+    be reviewed for the public lobby"; a report is not, by the updater.
+  - Tried in a real browser: the Earth row's link carried "Problem report
+    -- Solar System room, Earth" and the page address.
+- **Tony's look, recorded 2026-10-28** from `documentation/WHERE_WE_ARE_10-27-26_0906_run_record.md`: "Tap "Report a problem" in an i panel. -- correct. tested
+  the read also."
+- **Closed 2026-10-28** in the orrery's Claude Code session built on orrery b2fcc1bb and
+  gallery acbf206b (section 5, item 1 of
+  `documentation/HANDOFF_coordination_20261026_28.md`), on Tony's
+  verdict recorded above ("correct", his run record of 2026-10-27,
+  `documentation/WHERE_WE_ARE_10-27-26_0906_run_record.md`). The
+  link is in interactive-exhibit 1.28's anatomy table.
+- **Loose end, struck here with its reason:** the guest book form's
+  own description still says a message "will be reviewed for the
+  public lobby", which a report is not. It is a wording change in
+  Google Forms that only Tony's account can make, so it went to Where
+  We Are's not-urgent list as a Tony-action (do), not to an item.
+**Gap (replaces the one below, 2026-10-28):** none. DONE.
+**Gap (replaces the one below, 2026-10-27, late night):** commit and
+push; then Tony's look: open a room's i panel on his phone, tap Report
+a problem, see the form open with the note started (send a test report
+if he likes, and see it come through the Daily Run as a report). Then
+DONE.
+**Gap (2026-10-21; superseded above):** the build: the link in the shared i-panel
+chrome, so every room has it at once (interactive-exhibit); the guest
+book updater telling a report from a greeting. The words list is no
+longer a gap.
+**Gap (superseded above):** the build: the link in the shared i-panel chrome, so every
+room has it at once (interactive-exhibit); the guest book updater
+telling a report from a greeting; the message's words as a list for
+Tony first.
+**Ref:** L-456 (the panel's sources as a list with links); L-281 (the
+guest book: its form, sheet and updater); L-265 (the i panel's links);
+L-459 (the monthly run).
+
+#### [L-465] The Sun room draws the Sun's pole and its direction of spin, as the orrery does (gallery, the Sun room)
+<!-- L:465 status:DONE upd:2026-10-28 section:C flag: rice: -->
+- **Tony, 2026-10-21,** in his run record after the Sun's own row was
+  fixed (`documentation/WHERE_WE_ARE_10-21-26_1217_run_record.md`): "can we show the
+  pole and the sun's rotational direction like the orrery?"
+- **What the orrery draws, read at orrery b3c3e2a5:**
+  `build_rotation_axis_traces` in `planet_visualization_utilities.py`
+  draws a centre body's spin-pole line, a curved arrow for the direction
+  of spin and one info marker, from the same pole matrix that turns the
+  streamer belt. Its hover gives the sidereal rotation period, the
+  direction (prograde) and the tilt; for the Sun those are typed strings
+  in that file ("25.38 d sidereal", "7.25 deg to ecliptic"), sourced in
+  its comments, not rows in `constants_new.py`.
+- **What the website has:** the Sun's pole is served (`orientation`, NASA
+  NAIF's pck00011.tpc) and turns the room's drawings, and since L-464
+  its citation shows on the Sun's own row; nothing draws the axis. The
+  Earth room's axis is its own drawer row, Rotation Axis and Equator,
+  which is the website's existing form for this.
+- **2026-10-22, designed and built in one session, from Tony's phone**
+  ("Could we add one more feature to the website? The sun's pole and
+  rotational axis like the orrery?"). The words were put to him in
+  chat; his next message called the axis done, read as his yes. Store
+  rows (orrery `patch_L465_1_sun_axis_rows_orrery_20261022.py`):
+  SUN_POLE_RA_J2000_DEG and SUN_POLE_DEC_J2000_DEG (planet_poles['Sun']
+  reads them now), SUN_ROTATION_RATE_DEG_PER_DAY from NASA NAIF's
+  pck00011 (read 2026-10-22), DEG_PER_TURN, and two derived rows the
+  website prints, SUN_SIDEREAL_ROTATION_PERIOD_D (25.3800 days: six
+  figures, the rate's) and SUN_EQUATOR_TILT_DEG (7.25 degrees). The
+  sense of the arrows: Archinal et al. (2019), Fig. 1 caption, read the
+  same day. The figures checker and the constants change report learn
+  acos.
+- **Website** (`patch_L465_2_sun_axis_website_20261022.py`):
+  `renderRotationAxis`, a frame element drawn first and always: a gold
+  line 1.5 solar radii each way along the served pole, an arrow at each
+  end turning by the served period's sign, one marker whose hover
+  prints the period and tilt by their own served sentences in the
+  approved words. The Sun shells check measures it with a planted
+  backwards period; Arrival holds it drawn on opening with no shell
+  key; Typed facts allows its name beside Earth's guides'; the hover
+  fixture re-recorded with only it added. The opening view widens from
+  about 1.2 to 1.7 solar radii to hold it. In interactive-exhibit 1.20.
+- **Carried, not chased (The Braid):** (a) the orrery's own axis hover
+  still types the Sun's period, tilt and differential range ("24.5-35
+  d") in PLANET_ROTATION (`planet_visualization_utilities.py`); wiring
+  them to the rows changes words a visitor reads, so it goes to Tony,
+  with a source for the Sun's differential rotation. (b) The axis's
+  geometry is now written twice, `renderRotationAxis` and
+  `gallery/earth_geometry.js`; one shared builder when the Earth room is
+  next opened. (c) The constants change report cannot follow numbers
+  out of a dictionary entry into rows: it names planet_poles' Sun line
+  once, on this patch, and Tony is told to expect it.
+- **2026-10-24, night: (a) not built.** The brief for the session called
+  it a small fix with no open question, to ride any orrery patch the
+  session opened. It is not: wiring the orrery's Sun-axis hover to the
+  store rows changes words a visitor reads, which go to Tony before they
+  ship, and its "differential 24.5-35 d" still needs a source a visitor
+  can open. So it stays on Where We Are's list, with the words to be
+  drafted for Tony.
+- **2026-10-27, Tony's phone look** (`documentation/DESIGN_talk_20261027_rulings.md`, section 6,
+  look 2): the axis with its arrows, the opening view and its hover,
+  "Correct." His three notes on the hover went to L-497 (ruling 6a).
+- **2026-10-27, the words and the sources, ruled at the talk** (the
+  record's section 5). Read that day by the coordinating session: the
+  NASA Sun Fact Sheet (sidereal rotation period 609.12 hours, "the
+  adopted period at 16 deg. latitude"; obliquity to ecliptic 7.25
+  deg) and NASA SOHO's lesson page "Differential Rotation of the Sun"
+  (25 days at the equator, up to 35 at the poles). The "24.5" has no
+  source and goes. Five bullets for the orrery's Sun axis hover, Tony:
+  "Confirmed": the period with its 16 degrees; the differential
+  rotation; a Carrington bullet ("the standard count of solar
+  rotations, 25.38 days, named for Richard Carrington, who measured it
+  from sunspots in 1863"); the tilt; the spin prograde. (a) becomes a
+  build.
+- **2026-10-27, evening, (a) not built: two findings at the build**
+  (Claude Opus 5.5, the Code session of that evening). Both pages
+  re-read that evening at the addresses in the record.
+  1. The SOHO page, the source the record names for the differential
+     bullet, contradicts the Carrington bullet: "The Carrington
+     Rotations are named for Richard Carrington, an astronomer who
+     first noted that sunspots rotate every 27.28 days. Rotations are
+     numbered starting with 9 November 1853." So the count runs at
+     27.28 days, the turn seen from Earth, not at the 25.38-day turn
+     against the stars; and it starts in 1853, not 1863. No page read
+     carries the 1863 or Carrington measuring the 25.38.
+  2. Neither NASA page names a source for its figures, so under
+     provenance-discipline's Access Standard (an agency summary that
+     names no source is a lead, read one layer down) neither is the
+     citation for a figure that has a work behind it. For the period
+     and the tilt the store already went one layer down: they print
+     from SUN_SIDEREAL_ROTATION_PERIOD_D and SUN_EQUATOR_TILT_DEG,
+     worked from the IAU's rotational elements in NASA NAIF's kernel,
+     and the fact sheet's 609.12 hours and 7.25 deg agree with them.
+     For the 25-and-35 pair no work behind it was found in one search;
+     the fact sheet's own latitude formula, (14.37 - 2.33 sin2 L -
+     1.56 sin4 L) deg/day, matched no published fit found.
+  The build rows checked first, as the brief asked: the period and the
+  tilt already have rows (above); the pair has none.
+- **2026-10-27, night, Tony's word on the two findings** (in the Code
+  session, pasted): "The Carrington bullet: reword, keep it." His text:
+  "Carrington rotation: the standard count of the Sun's turns, numbered
+  from November 9, 1853. One turn is 27.28 days as sunspots are seen to
+  come round from Earth, which is 25.38 days against the stars, because
+  Earth moves along its orbit meanwhile. Named for Richard Carrington,
+  who first noted that sunspots rotate." Sources: NASA SOHO for 27.28
+  days and 1853, the NASA Sun Fact Sheet for 25.38 days; "1863" dropped.
+  The other four bullets confirmed as they stand, with the SOHO page
+  for the differential pair.
+- **2026-10-27, night, (a) built** (Claude Opus 5.5, Claude Code, no
+  patch file):
+  - `constants_new.py`: four rows, each with its Read line, read that
+    evening: SUN_ADOPTED_PERIOD_LATITUDE_DEG (16, the fact sheet),
+    SUN_DIFFERENTIAL_ROTATION_EQUATOR_D (25) and _POLE_D (35) (the SOHO
+    page), SUN_CARRINGTON_SYNODIC_PERIOD_D (27.28, the SOHO page). The
+    pair is two rows, not one, by the store's range convention (a LOW
+    and a HIGH row). Each SOHO row says in a Note that the page names
+    no source of its own and is cited on Tony's ruling. The fact sheet
+    joined the Source of SUN_ROTATION_RATE_DEG_PER_DAY (its 609.12 hours
+    at 16 degrees) and of the two pole rows (the same pole, and its
+    7.25 deg tilt), beside the IAU's. No value changed.
+  - `planet_visualization_utilities.py`: PLANET_ROTATION['Sun'] carries
+    the five bullets, every number printed from its row at its declared
+    count by `_row_text()`, which keeps trailing zeros; the typed
+    "25.38 d", "7.25 deg" and "24.5-35 d" are gone.
+    `build_rotation_axis_traces` prints a body's `hover_bullets` where
+    it has them; every other body's hover is unchanged.
+  - Two choices the rules made, for Tony to see: the period prints
+    25.3800, the row's six figures, where his words said 25.38
+    (provenance-discipline, Rule 7: a display prints the declared
+    count, as the website's hover already does); and the Carrington
+    bullet ends "Sources: NASA SOHO, Differential Rotation of the Sun;
+    NASA Sun Fact Sheet.", as the other bullets end with theirs. The
+    date the count starts is words on the hover, cited where the hover
+    is built.
+  - Checked on the live path: `create_celestial_body_visualization`
+    for the Sun builds one axis info marker with the five bullets; its
+    longest line 68 characters; no "24.5"; Earth's, Mars's and
+    Uranus's axis hovers unchanged. The headless GUI run of
+    agentic-pre-test was not run (Windows, no xvfb); the maintenance run
+    was: 32 of 32 gating checkers, gate path 0.
+  - The scanner's window, met and undone (L-467's class): the first
+    placement of the bullets sat between PLANET_ROTATION and the NASA
+    fact sheet comment above it, and the docstring note quoted the old
+    typed numbers. The whole tree's Tier-1 rose 276 to 283, all in this
+    file (4 to 11): six planets' typed tilts no longer under the comment,
+    and the docstring. Nothing had been sourced or unsourced. The block
+    moved below the table and the docstring lost the numbers; the next
+    run read 276, the same four findings in the file by name.
+  - The website's axis hover (the check the brief asked for): it prints
+    the period and the tilt from their served rows in its own approved
+    words. To carry the same five bullets it would need the four new
+    rows exported and served; that is the gallery's to decide under
+    interactive-exhibit, which this orrery session did not load.
+    Recommended: yes, in the gallery session that builds L-497's one
+    text box, since the axis hover is one of the boxes it rebuilds.
+- **2026-10-27, Tony's look at the orrery's Sun axis hover**, in his run
+  record `documentation/WHERE_WE_ARE_10-27-26_0906_run_record.md`
+  (run order step 1, "Check the five bullets."): "-- correct"; pushed
+  at 94258f2 (step 3). Recorded by the L-492 session.
+- **2026-10-27, late night, Tony's decision** (pasted to the gallery's
+  Code session): "the website's Sun axis hover takes the same five
+  bullets as the orrery's, from the served rows, in the one text box."
+- **2026-10-27, late night, built on the website** (Claude Opus 5.5,
+  the gallery's Code session; built on gallery 7a4a03a, the export
+  pulled at orrery d46f204): the four new rows linked in the Sun's
+  orientation block (`adopted_latitude`, `differential_equator`,
+  `differential_pole`, `carrington_period`), their values and citations
+  written by `tools/mirror_constants.py` from the export; each bullet's
+  sentence is its row's served `hover_line`, the period's and the
+  tilt's reworded to the bullets; the spin a served word
+  (`words.spin`). `renderRotationAxis` prints them between the picture's
+  two sentences; a row the served cache does not hold yet leaves its
+  bullet out, with a warning. The i panel lists six citations. The
+  website's form follows its own rules where they differ from the
+  orrery's: no "Source:" tail in the hover (the citations are the i
+  panel's), and one sentence to a bullet (L-497, 6a), so the five
+  bullets show as eight. The date "November 9, 1853" is on Typed
+  numbers' DATES list, its work on the Carrington row's Source line.
+  Checked: Sun shells (all eight lines at their served counts, the six
+  citations, and a cache without the four rows), Typed numbers, Typed
+  facts, Hover budget (17 lines, at the ceiling; the blank line under
+  the title dropped to fit).
+- **Tony's look, recorded 2026-10-28** from `documentation/WHERE_WE_ARE_10-27-26_0906_run_record.md`: "Look at the belt's row, the axis box, the F corona's cross
+  and the dashes. -- correct" (the axis box is this item's part).
+- **Closed 2026-10-28** in the orrery's Claude Code session built on orrery b2fcc1bb and
+  gallery acbf206b (section 5, item 1 of
+  `documentation/HANDOFF_coordination_20261026_28.md`), on Tony's
+  verdict recorded above ("correct", his run record of 2026-10-27,
+  `documentation/WHERE_WE_ARE_10-27-26_0906_run_record.md`). No
+  loose end; (b) went to L-413 and (c) was struck, both above.
+**Gap (replaces the one below, 2026-10-28):** none. DONE.
+**Gap (replaces the one below, 2026-10-27, late night):** the Daily Run
+to rebuild the cache (the rows reach a visitor only then), commit and
+push; then Tony's phone look of the axis box. Then DONE.
+**Gap (2026-10-27, late; superseded above):** whether the
+website's axis hover takes the five bullets, in the gallery session
+(Tony-action (decide)); and this closes.
+**Gap (2026-10-27, night; superseded above):** Tony's look at the
+orrery's Sun axis hover (the Sun plotted with its axis). Then whether
+the website's axis hover takes the five bullets, in the gallery session
+(Tony-action (decide)); and this closes.
+**Gap (2026-10-27, evening; superseded above):** (a) the
+orrery's Sun axis hover printing from the rows, after Tony's word on
+the two findings above: Tony-action (decide), the Carrington bullet
+(dropped, or reworded to what the SOHO page says) and the citation
+for the differential pair (the SOHO page as the record ruled, or a
+work behind it, or the bullet without numbers). Then whether the
+website's axis hover takes the same bullets (interactive-exhibit).
+(b) re-homed to L-413. (c) was a one-time notice, given on
+2026-10-22; struck.
+**Gap (2026-10-22; superseded above):** Tony's runs and his phone
+look (the axis, its arrows, the opening view, the hover); then (a)
+and (b) above are re-homed and the item closes.
+**Gap (superseded above):** a design talk: the row and what it draws; the numbers its hover
+prints, which need rows in the store with sources before the website may
+print them (the period and the tilt); the hover's words to Tony before
+they ship. Then the build, in the Sun's slice (L-412).
+**Ref:** orrery `planet_visualization_utilities.py`; gallery
+`gallery/earth_geometry.js` (Earth's axis row), `interactive.html`;
+L-464; L-412.
+
+#### [L-496] The drawer's search box finds groups too, such as "comet", "planet" or "asteroid" (gallery, the drawer)
+<!-- L:496 status:DONE upd:2026-10-28 section:C flag: rice: -->
+- **Tony, 2026-10-26, night,** at his phone look of the search box
+  (`documentation/WHERE_WE_ARE_10-26-26_1451_run_record.md`, the first website patch's phone look):
+  "the user should also be able to find groups, like "comet" or
+  "planet" or "asteroid" not just individual bodies."
+- Since L-493 the box matches each body's four names; a group's row
+  name and its class words are not searched.
+- **2026-10-27, ruled at the talk** (`documentation/DESIGN_talk_20261027_rulings.md`, section 2).
+  Tony asked: "Comets and asteroids match several groups. Would the
+  result list the groups open or closed?" His ruling: "results list
+  matching groups closed, with counts; choosing one opens it; a single
+  match opens directly. -- confirmed." So typing "comet" lists the
+  comet groups as rows with their member counts; choosing one scrolls
+  the drawer to it and unfolds it, ticking nothing; one match skips
+  the list.
+**Note (Claude, from the record, not ruled):** a group is found by its
+row label, by JPL's class name, and by a short list of plain words
+beside its label ("comet", "planet", "asteroid"), held in the store
+with the group's other words so the editor can change it. A body is
+still found by its own names.
+- **2026-10-27, late night, built** (Claude Opus 5.5, the gallery's
+  first Claude Code session; built on gallery 7a4a03a), by Tony's
+  ruling and Claude's reading above. Each group row in the store serves
+  `find`, its plain words: JPL's class code and "comet" for the five
+  comet groups, "HYA", "comet" and "interstellar" for the interstellar
+  objects, "asteroid" (and "near-Earth" for Aten, Apollo and Amor) for
+  the asteroid groups, "probe" and "mission" for the spacecraft, "CEN"
+  for the centaurs, "TNO" and "Kuiper belt" for the trans-Neptunian
+  objects; the eight planets' rows serve "planet". A group is found by
+  its label and its words: several list closed, each with "n bodies";
+  one alone, with no body found outside it, opens whole ("probe" opens
+  the twelve spacecraft); choosing a listed group clears the search and
+  unfolds it, ticking nothing. "planet" finds the eight planets; Pluto,
+  a dwarf planet, serves no word, so it is not among them (for Tony to
+  see). The count line names groups ("6 groups match"). The box still
+  reads "Find a body". Logic in `gallery/solar_system_drawer.js`
+  (GROUPS FOUND); the drawer check's section 8b, with two planted
+  breaks, both red. Tried in a real browser: "comet" lists six groups
+  closed, "jfc" opens Jupiter-family comets whole, "planet" lists eight.
+- **Tony's look, recorded 2026-10-28** from `documentation/WHERE_WE_ARE_10-27-26_0906_run_record.md`: "In the Solar System room, search "comet" and choose a
+  group; then try "planet" and "probe". -- correct"
+- **Closed 2026-10-28** in the orrery's Claude Code session built on orrery b2fcc1bb and
+  gallery acbf206b (section 5, item 1 of
+  `documentation/HANDOFF_coordination_20261026_28.md`), on Tony's
+  verdict recorded above ("correct", his run record of 2026-10-27,
+  `documentation/WHERE_WE_ARE_10-27-26_0906_run_record.md`). The
+  group search is in interactive-exhibit 1.28. No loose end: Pluto
+  serving no "planet" word was for Tony to see, and his "correct"
+  covers it.
+**Gap (replaces the one below, 2026-10-28):** none. DONE.
+**Gap (replaces the one below, 2026-10-27, late night):** commit and
+push; then Tony's phone look. Then DONE.
+**Gap (2026-10-27; superseded above):** the build, in the
+gallery session of the Oct 27 brief (item 2c), with the drawer
+check's planted breaks; then Tony's phone look.
+**Gap (2026-10-26; superseded above):** a design talk: what a group match shows (the group open with
+all its bodies, or its row alone), and which words find a group (its
+row's name, JPL's class name, plain words such as "planet"); words to
+Tony first; then a build with the drawer check's planted breaks.
+**Ref:** gallery `gallery/solar_system_drawer.js` (searchHits),
+`interactive.html` (the drawer); L-493.
+
+#### [L-497] Left-aligned text in every text box (gallery, the rooms)
+<!-- L:497 status:DONE upd:2026-10-28 section:C flag: rice: -->
+- **Tony, 2026-10-26, night,** at his phone look of the wrapped orbit
+  line (`documentation/WHERE_WE_ARE_10-26-26_1451_run_record.md`, the second website patch's
+  phone look): "we should standardize text on left justified."
+- What his screenshots of Halley showed that evening: the box Plotly
+  opens on a tap on a marker drew its lines centred, while the page's
+  own text box, the one the drawer opens, is drawn left-aligned
+  (`align: "left"` in sunLabelRefresh).
+- **2026-10-27, grown at the talk** (`documentation/DESIGN_talk_20261027_rulings.md`, section 6).
+  - 6a, one text box. Tony, at his look at the Sun's axis: "The hover
+    tapping the cross should be left justified as the go to text is.
+    Add bullets to sentences in both for readability. Question: why
+    not have one hover box for both methods?" Put to him: a tap on a
+    cross opens the page's own box with the hover's words in place of
+    Plotly's tooltip. Tony: "Confirmed." So: one text box for tap and
+    Go To, the page's own, in every room; left-aligned; one sentence
+    to a bullet; the feature's colour on the box. The gold box goes.
+  - 6b, the streamer belt gets its own row again. Tony: "should we
+    separate the corona and the streamers again?" Put to him: every
+    other row draws one thing with one cross, one hover and one box.
+    Tony: "Yes." The belt is a row of its own, directly under the
+    corona's, with its own cross, hover and Go To box; the corona's
+    hover sentence on the belt becomes a pointer at the belt's row.
+    This reverses Tony's ruling of Oct 4 (L-412's item 2; L-410's
+    "one name, one checkbox").
+- **2026-10-27, late night, built** (Claude Opus 5.5, the gallery's
+  first Claude Code session, no patch file; built on gallery 7a4a03a):
+  - 6a, one text box. Plotly's own hover box is off in every room
+    (`scene.hovermode: false` in buildSunLayout; read from plotly.js
+    2.35.2, gl3d/scene.js: hovermode gates only the box, so a tap still
+    sends plotly_click). A tap on a marker opens the page's text box
+    with that marker's words; in the Sun and Earth rooms the camera
+    still frames the shell, in the Solar System room it still moves
+    nothing. A mouse resting on a marker opens it on a desktop, and
+    moving off closes a box the pointer opened (Claude's call, so the
+    desktop keeps a hover; for Tony to see). The words are one sentence
+    to a bullet, the title bold, by `gallery/text_box.js` (new, with the
+    panel's own sentence cut); a line opening "=" joins the line before.
+    The box's border is the feature's colour at 2 px, up from 1.
+  - 6b, the streamer belt's own row: `drawn_with` taken off its entry in
+    `data/objects_config.json`; the drawer lists it directly under the
+    corona's row by its own nearest edge (range.low, 2 solar radii), as
+    the ruling asked, with no typed order. The corona's hover sentence
+    now reads "The streamer belt, the part of the corona where the Sun's
+    magnetic field closes in loops, has its own row, just below this
+    one." (written with tools/store_writer.py; words for Tony to see).
+  - Checks: Hover budget now holds the box's words (five worked cases,
+    and a copy with the sentence cut taken out must fail) and measures
+    the phone's boxes bulleted; Label words fails on a row with more than
+    one cross and on a Sun room with no belt row, its self-test planting
+    the old join on a copy of the config; Sun shells and Display figures
+    re-recorded for the belt's row (fixture_hovers_L497_on_7a4a03a8.json,
+    exactly four hovers different from the L-494 one). No new check row,
+    so the orrery dashboard needs no new button.
+  - Seen in a real browser on a local copy (the built-in browser, Plotly
+    and Pyodide from their CDNs): a tap on the axis cross and on Earth
+    opened the bulleted box in the feature's colour; a resting mouse
+    opened it and moving off closed it. The phone has not seen it.
+  - For Tony's look: the Sun's axis box, with its five bullets, is 33
+    lines on a portrait phone at 34 characters a line (the Hover budget
+    check's tallest; Earth's axis 27), more than a phone shows at once.
+**Note (Claude, for interactive-exhibit's next version; this gallery
+session reads the orrery's skills and does not edit them):** sentences
+1.27 says that are now wrong, each one a session following it would act
+on: "Finding a GROUP by a word such as "comet" is not built" (L-496 built
+it); "the streamer belt, drawn with the corona" under A row opens its own
+words (the belt has its own row, 6b); the Phone first sequence and The
+touch path's "Plotly's OWN hover box on a marker tap" (gone, 6a); and the
+anatomy table's drawer row, which says only naming a shell opens the text
+box (a tap does too). Also new to record: `gallery/text_box.js`, the
+`find` words on the drawer's rows, and the "Report a problem" link
+(L-458).
+- **Tony's look, recorded 2026-10-28** from `documentation/WHERE_WE_ARE_10-27-26_0906_run_record.md`: "In the Sun room, tap a cross, then use Go To on the same
+  feature. -- correct." His further ask in the same line is L-502.
+- **Closed 2026-10-28** in the orrery's Claude Code session built on orrery b2fcc1bb and
+  gallery acbf206b (section 5, item 1 of
+  `documentation/HANDOFF_coordination_20261026_28.md`), on Tony's
+  verdict recorded above ("correct", his run record of 2026-10-27,
+  `documentation/WHERE_WE_ARE_10-27-26_0906_run_record.md`). The
+  note's four wrong sentences and three new records are in
+  interactive-exhibit 1.28 (protocol v3.117), each read from the
+  gallery's code at acbf206b first.
+- **Found at the close:** `gallery/text_box.js`'s header names
+  `documentation/smoke_text_box.js` as its check, a file that does not
+  exist at acbf206b; the check is the Hover budget row
+  (`documentation/smoke_hover_budget.js`: five worked cases and the
+  sentence cut taken out of a copy). Re-homed to L-502 (the triad's
+  hover spot), the next gallery build in the page's text-box code.
+**Gap (replaces the one below, 2026-10-28):** none. DONE.
+**Gap (replaces the one below, 2026-10-27, late night):** the Daily Run
+to rebuild the cache, then commit and push; then Tony's phone look of
+the box (a tap, Go To, the colour border, the bullets, the belt's own
+row and the corona's new sentence). Then DONE.
+**Gap (2026-10-27; superseded above):** the build, in the
+gallery session of the Oct 27 brief (item 2a): 6a and 6b, with the
+drawer order and Label words checks updated for the belt's row. Mode
+5: Tony judges the box on his phone.
+**Gap (2026-10-26; superseded above):** a small build: Plotly's own box left-aligned in every room,
+the Sun's and Earth's too; then Tony's phone look.
+**Ref:** gallery `interactive.html` (the layouts' hover label,
+sunLabelRefresh); L-495.
+
+#### [L-501] 2026 ED138, the Rubin Observatory's first dwarf-planet candidate, added to the orrery as a test of the object pipeline (orrery + gallery, objects)
+<!-- L:501 status:DONE upd:2026-10-28 section:C flag: rice: -->
+- **Opened 2026-10-28** in a Claude Code session built on orrery 45d475b0
+  and gallery 3dc5bb30, by
+  `documentation/COORD_2026_ED138_words_20261028.md` (sections 4 and 5).
+  Tony, 08:58: "adding this object to our orrery and website would be a
+  great test of our methods!"; 09:11, a comparison to Pluto.
+- **Built (orrery):** `celestial_objects.py` entry keyed
+  `tno_2026_ed138`, id '2026 ED138', id_type 'smallbody', horizons_name
+  '(2026 ED138)', read from JPL's Lookup on 2026-10-28 (asteroid,
+  integrated barycenter; SPKID 54667839; the major-body index finds
+  nothing). Its link is Wikipedia's "2026 ED138", live that day; NASA has
+  no page of its own for it (interactive-exhibit, A feature's info link).
+  A checkbox among the Kuiper Belt objects (`palomas_orrery.py`) and a
+  tooltip (`info_dictionary.py`). No typed elements, no typed period.
+- **Tony's ruling, 2026-10-28, on how its numbers reach the hover:** "B,
+  words only." The story sentences stay with their sources; the orbit
+  figures come out, because the hover's own lines print the period, the
+  distance and the orbit from JPL's record. The 1925 perihelion and the
+  600 to 1,500 km size range were to stay only if the Typed numbers check
+  allows a cited date and range in this room's words. It does not: it
+  reads only the Sun and Earth rooms, and by its rules a typed range
+  fails. Both came out. The perihelion sentence now says only that it has
+  passed perihelion and is moving outward (JPL's tp, read 2026-10-28).
+- **One wording corrected, for Tony to see:** the approved words said
+  "JPL calls it a hot classical TNO". JPL's class is TNO; "hot classical"
+  is the Rubin Observatory's, which the note itself named as that
+  sentence's source. The served sentence says "the Rubin Observatory
+  calls it a hot classical TNO".
+- **Sources read 2026-10-28:** the Rubin Observatory release of
+  2026-10-27 (https://rubinobservatory.org/news/rubin-first-dwarf-planet-candidate),
+  which supports every sentence citing it; MPEC 2026-U85, issued 2026
+  October 27, 18:17 UT, observations from 2016 (Dark Energy Camera, W84)
+  and 2026 (Rubin, X05). Each is named in the entry's comments.
+- **The Pluto sentence's numbers** (words only, none printed): 2026
+  ED138 from its fetched record, around the solar system's centre of
+  mass, 2026-10-28: perihelion 37.11 AU, aphelion 49.07 AU, tilt 24.43
+  deg, period 103,249 days (about 283 years), error 10.3 days. Pluto
+  from the orrery's cached orbit around the Sun (epoch 2026-06-05):
+  perihelion 29.62 AU, aphelion 49.44 AU, tilt 17.40 deg, and a year of
+  about 248.5 years worked out from its cached a of 39.53 AU by Kepler's
+  third law, since no period for Pluto is fetched. Pluto's diameter, 2 x
+  PLUTO_RADIUS_KM = 2,376.6 km, is larger than the release's top
+  estimate of 1,500 km. All four comparisons hold; the nearest margin is
+  the aphelion, 0.4 AU.
+- **The maintenance run of 2026-10-28:** the period fetch fetched 2026
+  ED138 (one new cache entry); the Horizons check confirmed its identity
+  and its period, JPL's PR equal to the fetched one; the objects export
+  carries it; the provenance gate held at 0 Tier-1, no file's count
+  rising. The pre-test loaded the orrery with its window loop off: one
+  entry, its checkbox, its tooltip.
+- **Findings (orrery):**
+  - The Constants change check fails on any changed line in
+    `constants_new.py` that holds a digit and is not a value it reads,
+    so a new body's colour in `color_map` turns the run red. The colour
+    was taken out, and 2026 ED138 draws in the default, goldenrod. A
+    colour is a drawing setting (provenance-discipline, Three Kinds of
+    Drawing Number), so the class is the colour table's place: in the
+    drawing code, or a shape the check reads.
+  - Pluto's served period is "Not yet fetched from JPL" (the
+    pluto_barycenter entry; the Pluto-Charon Barycenter has no cache
+    entry). So on the website a visitor does not see Pluto's year on its
+    own line, as the Pluto sentence assumes.
+  - An object's words on the website show no citation for the sentences
+    a source supports, only the link and the Horizons source line
+    (provenance-discipline, What a Visitor Reads, principle 4). Recorded
+    as a class, not chased.
+- **Findings (gallery), reported, not fixed, by the brief:** for 2026
+  ED138 to appear in the Solar System room's TNO row, two hand edits to
+  `data/objects_config.json`: (1) an object block with slug
+  `tno_2026_ed138` and the fields no tool writes (category, availability,
+  parent, the centre and frame, trajectory_of, trace_policy, features),
+  as 2017 OF201's block has; (2) a drawer row `{ "slug":
+  "tno_2026_ed138", "in": "tno" }` in the Solar System room's rows. Until
+  (1) exists, the objects mirror refuses the export ("a key in the export
+  with no object of that slug in the config"), and the Daily Run stops at
+  its pulls step. And the Typed numbers check does not read the Solar
+  System room's words, so the discovery dates in this object's words are
+  held by no check.
+- **Built (gallery), 2026-10-28,** in a Claude Code session built on
+  gallery 3dc5bb30 and orrery 777a8dee (both read live with git
+  ls-remote; Tony's go-ahead in chat, "Go ahead"). Three edits, made
+  directly in the working copy:
+  - `data/objects_config.json`: the object block for `tno_2026_ed138`
+    after Arrokoth's, holding only the fields no tool writes, as 2017
+    OF201's does (category asteroid, availability analytic, parent sun,
+    canonical_center @sun, center_slug sun, canonical_frame
+    heliocentric, trajectory_of null, trace_policy none, features {}),
+    with name, horizons_id and id_type, which the objects mirror
+    replaces but needs present.
+  - the same file: the drawer row `{ "slug": "tno_2026_ed138", "in":
+    "tno" }`, last in the TNO group, which lists by served semi-major
+    axis ("order": "a").
+  - `tools/test_gallery_cache_builder_offline.py`: a stand-in for the
+    fake Horizons, ELEMS '2026 ED138' a 42.948, e 0.14174 (the brief's
+    JPL read), and its stamp. The brief named two edits; the third is
+    gallery-cache-builder's Adding a new object, step (2): without it
+    the suite's fake_elements fails on a body it has no answer for.
+- **These edits are the website's AUTHOR STEP for a new body** (Tony's
+  instruction, 2026-10-28, in this session's opening prompt; the reading
+  is the coordinating session's, in his run record
+  `documentation/WHERE_WE_ARE_10-28-26_1344_run_record.md`: "this stop
+  is by design, not a defect"). The website is curated: a
+  room shows what its author put in it, and the objects mirror refusing
+  an export that names a body the config lacks is the same rule as the
+  Daily Run stopping on a pull that is not the push. Neither tool the
+  skills allow to write the config can make them: `mirror_constants.py`
+  writes numbers and their citations, `store_writer.py` words and a
+  room's arrival. So the only route today is a hand edit (here) or a
+  patch (L-443 slice 1's 50 bodies, patch_L443_2). Everything else the
+  body carries -- its description, link, period and JPL's name -- the
+  objects mirror wrote from the orrery's export on the run below.
+  **Follow-up:** the exhibit store editor (`tools/exhibit_store_editor.py`
+  over `tools/store_writer.py`) should offer these two edits as a form:
+  a new body's block from its orrery key, and its drawer row in a
+  group. It joins the question already on Where We Are, whether the
+  editor also edits the Solar System room's rows, and the editor work
+  queued for compositions (L-489 (compositions)).
+- **The maintenance run, offline, 2026-10-28:** 34 of 36 gating checkers
+  passed. The pulls fetched the orrery's exports at 777a8dee; the
+  objects mirror linked 90 objects and wrote 2026 ED138's description,
+  info_url, period (fetched, around the solar system's centre of mass,
+  282.7 years, 103,250 days) and horizons_name "(2026 ED138)"; a second
+  mirror check read "every linked field already matches". The cache
+  builder's offline suite passed, 485 checks. Two red, ONE cause, the
+  cache not yet rebuilt: Cache in step ("tno_2026_ed138 is in the config
+  and not in" coverage_index.json and feature_configs.json), which
+  gallery-cache-builder calls correct straight after a config change;
+  and Solar System figures ("tno_2026_ed138: the served cache has no
+  as_of_today or trust"). Both clear when the Daily Run's builder runs.
+- **Findings (gallery):**
+  - The Solar System figures check also goes red on a body the cache
+    does not hold yet, while the room itself names such a row in its
+    notes and leaves it out. The skill names only Cache in step as red
+    after a config change; the figures check's red is the second, for
+    interactive-exhibit's next version (it would only tell a session
+    the run is red for one reason, not two).
+  - gallery-cache-builder 1.13 says a new non-spacecraft body needs
+    --first-build, not nightly. The Daily Run builds nightly, and slice
+    1's 50 bodies went in that way and draw from their elements; the
+    sentence is for that skill's next version, carried here, not acted
+    on.
+  - The mirror also moved five spacecraft plans' `made` date from
+    2026-10-25 to 2026-10-28 (Voyager 1 and 2, New Horizons, Juno,
+    OSIRIS-APEX), span and events unchanged: the orrery's run re-made
+    them. By the builder's rule a new `made` is a new plan, so the Daily
+    Run fetches those five paths whole again, and the shrink gate names
+    them. By design; the run takes longer.
+- **Tony's questions in his run record, answered:**
+  - "is our test correct if it differs from JPL?" Yes. JPL's
+    Small-Body Database gives 102,806 days around the Sun; the orrery
+    takes every period around the solar system's centre of mass ('@0'),
+    and from there JPL's own figure is 103,249 days. The Horizons check
+    compares the fetched period with JPL's at that same centre, and they
+    agreed. For a body this far out the two centres give different
+    years because the Sun itself moves around the centre of mass.
+  - Pluto's year "not yet fetched": the period fetch skips the
+    Pluto-Charon barycentre on purpose, because plotting's pre-fetch
+    does not fetch it either (`period_fetch.py`, docstring, "Today that
+    is the Pluto-Charon barycentre, which L-443 carries"). So it reports
+    nothing missing, and the website's Pluto row prints "not yet
+    fetched". The fix belongs to L-443 (the objects), an orrery session.
+  - The colour: "okay"; 2026 ED138 stays the default goldenrod.
+- **2026-10-28, evening, Tony's three questions of the day answered**
+  in the orrery's Claude Code session built on orrery b2fcc1bb and
+  gallery acbf206b (section 5, item 1 of
+  `documentation/HANDOFF_coordination_20261026_28.md`):
+  - His question in the run record (the 14:32 session): "in the
+    orrery object menu in the gui, is it placed in order of semi-major
+    axis? Arrokoth's semi major axis is longer than ED138's." Yes. The
+    Kuiper Belt checkboxes in `palomas_orrery.py` run by the semi-major
+    axis typed in `orbital_elements.planetary_params`: Orcus 39.39, Ixion
+    39.66, Mani 41.97, GV9 42.26, Varuna 42.947, Haumea 43.13, Quaoar
+    43.325, Arrokoth 44.45, Makemake 45.69, Gonggong 67.16, Eris 67.78,
+    Ammonite 250.07, Sedna 481.30, 2017 OF201 911.32, Leleakuhonua
+    1062.14 AU; Planet 9, hypothetical and typed 600, last. 2026 ED138
+    has no typed a; its fetched a, 42.97 AU around the Sun and 43.09 AU
+    around the solar system's centre of mass (JPL, 2026-10-28), both
+    lie between Varuna's 42.947 and Haumea's 43.13, so its checkbox
+    moved there. Seen in a throwaway copy of the orrery, its window loop
+    off: Varuna, then 2026 ED138.
+  - Pluto's year "not yet fetched": fixed on L-443 this session; the
+    period is fetched (247.990 years) and the export serves it.
+  - At his phone look (19:05): "precision to 10 km is not realistic.
+    what can we do?" That is L-399, the next gallery build (below).
+- **Closed 2026-10-28 on Tony's phone look, 19:05**
+  (`documentation/WHERE_WE_ARE_10-28-26_1344_run_record.md`, item 5):
+  "looks great."
+- **Loose ends, re-homed at this close:**
+  - The colour table's place (a colour line in `constants_new.py`
+    turns the Constants change check red), and 2026 ED138 drawn in the
+    default goldenrod: L-432 (objects in the default goldenrod).
+  - The Typed numbers check reads only the Sun and Earth rooms, so the
+    dates in a Solar System room body's words are held by no check:
+    L-411 (the typed numbers).
+  - An object's words show no citation for the sentences a source
+    supports (principle 4), recorded as a class: L-484 (the two
+    agree), which compares the instruments' words object by object.
+  - The editor form for a new body (its block and its drawer row):
+    L-489 (compositions), whose editor work it joins.
+  - The Solar System figures check red on a body not yet served: in
+    interactive-exhibit 1.28 this session.
+  - gallery-cache-builder 1.13's --first-build sentence: L-485 (a
+    nightly run), with L-443's two sentences for that skill.
+  - "precision to 10 km is not realistic": L-399 (each small body's
+    own uncertainty).
+**Gap (replaces the one below, 2026-10-28):** none. DONE.
+**Gap (superseded above):** Tony's Daily Run (its builder serves 2026 ED138 and clears the
+two reds), the website's maintenance run, the gallery commit and push,
+the live run, and his phone look: the TNO row lists 2026 ED138, its
+words read as bullets, Go To fits its orbit. Closes on that look. The
+editor form is the follow-up above, not this item's gap.
+**Ref:** `documentation/COORD_2026_ED138_words_20261028.md`; L-443;
+L-484; `celestial_objects.py`; `constants_change_report.py`; gallery
+`tools/mirror_objects.py`, `documentation/smoke_typed_numbers.js`.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

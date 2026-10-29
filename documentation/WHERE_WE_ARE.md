@@ -1,23 +1,29 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 28, 2026: 2026 ED138's two website edits made.
-- Written at orrery 777a8de and gallery 3dc5bb3.
+Last updated: October 28, 2026, night: L-443 (the objects) completed.
+- Written at orrery b2fcc1bb and gallery acbf206b.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - 2026 ED138's website entry and its TNO row are in; its words, link
->   and period came from the orrery (L-501 (2026 ED138)).
-> - Two checks stay red until your Daily Run builds the cache. Expected.
-> - A new body on the website is an author's two edits; next, a form.
+> - Pluto's year is fetched from JPL now: 248.0 years. The website
+>   prints it after your Daily Run.
+> - The orrery draws the main asteroid belt as you ruled: random dots
+>   inside the spread of 5,429 of JPL's orbits. The website's half is
+>   next (L-503 (the belt on the website)).
+> - 2026 ED138 sits between Varuna and Haumea; the menu runs by size.
+> - L-443 (the objects) is complete, five items closed with it, and the
+>   skill for the website's rooms matches what was built.
 >
-> **Do next:** *the Daily Run; then commit and push the website and the
-> orrery's records; the live run; your phone look at the TNO row.*
+> **Do next:** *commit and push the orrery folder and the gallery's
+> CLAUDE.md; your Daily Run; then the gallery session, L-399 then
+> L-502 (`HANDOFF_coordination_20261026_28.md`, section 5, item 2).*
 >
 > **Needs you now:**
-> - *(do) the Daily Run; five spacecraft paths are fetched whole again.*
-> - *(do) commit and push both folders; then the live run, and look.*
+> - *(do) commit and push both folders.*
+> - *(do) reinstall interactive-exhibit 1.28 (Settings > Skills).*
+> - (do) the Daily Run: it serves Pluto's year.
 > - (do) read the plan's front page and Section 5a, if not done yet.
 > - Two papers left to try (`READING_L456_tony_20261021.md`).
 
@@ -28,17 +34,13 @@ Last updated: October 28, 2026: 2026 ED138's two website edits made.
 In the talk's order of Oct 27 (`DESIGN_talk_20261027_rulings.md`).
   1-11.[done]  All but 5, 5b and 9: the three rooms live; typed facts
                and periods checked (Oct 14-16); the Sun's slice, closed
-               Oct 27; the objects on the website
-               (L-443 (the objects)), slices 1 and 2 (Oct 22, 26).
+               Oct 27; the objects (L-443 (the objects)), closed Oct 28;
+               the small builds and 2026 ED138, closed Oct 28.
   5.   [NOW]   *Earth's list (L-413 (Earth's list)): talks 3 to 6 with
                the coordinating session, then their builds.*
- 5c.   [next]  Beside 5, no talk needed: the small builds. L-492
-               (stale scale sentences) done; L-497 (one text box),
-               L-458 (report a problem), L-496 (groups) looked at,
-               "correct"; ready to close.
- 5d.   [next]  Beside 5: 2026 ED138 (L-501 (2026 ED138)), the test of
-               the object pipeline. Orrery and the website's edits
-               done; the Daily Run, pushes, your look << moved this session.
+ 5c.   [next]  Beside 5: the gallery session. L-399 (each small body's
+               own uncertainty), then L-502 (the triad's spot), then
+               L-503 (the belt on the website) << new this session.
  11b.  [next]  Beside 5: the nightly run (L-485 (a nightly run)), P1
                decided; two sessions, orrery then gallery.
   5b.  [beside] Housekeeping when a session has room: L-424, L-425,
@@ -51,9 +53,10 @@ In the talk's order of Oct 27 (`DESIGN_talk_20261027_rulings.md`).
  15.   [goal]  The website does what the desktop orrery does, with a date
                to choose, within the range the data covers.
 
-## Settled
+## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings. A line leaves after a few weeks, once it is habit.
+- The main belt: random dots in JPL's orbits' spread, not one date's (Oct 28).
 - A new body's words carry no orbit numbers; its hover's own lines
   print them from JPL's record (Oct 28, "B, words only").
 - The website's Sun axis box carries the orrery's five bullets, from the
@@ -68,13 +71,8 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
   visit instead. (Oct 26)
 - Spacecraft after Earth; one JPL class to a row, the asteroids among
   the planets (Oct 24, 26); JPL's words stay, explained. (Oct 26)
-- The Daily Run's pull is not your pushed orrery: it stops. (Oct 25)
-- Every room: one Reset, no See more, nothing ticks many at once; a
-  group row only opens; Reset puts back the room as it opened. (Oct 24)
-- A comet from a year before perihelion to a year past today, in JPL's
-  span; "hyperbolic" in plain words; the two agree or say why. (Oct 24)
 
-## Deferred
+## Deferred  **>> UPDATED THIS SESSION**
 
 Waiting behind other work; a line leaves when picked up.
 - L-462 (a shorter run): whether it stays, now the nightly run exists.
@@ -82,7 +80,6 @@ Waiting behind other work; a line leaves when picked up.
 - L-128 (the ice lines), already waiting.
 - L-500 (eyeballed numbers): the streamer belt's seven and the clumps'
   five, each when its drawing is next opened (Oct 27).
-- A drawn main-belt cloud (L-443 (the objects)), behind slice 2.
 - L-471 (a delivered patch is final): safe-file-editing's next version.
 - L-483 (a comet room), after slice 2; L-484 (the two agree), next.
 - L-489 (compositions), with L-486 (a view carried into a room) and
@@ -94,8 +91,8 @@ Waiting behind other work; a line leaves when picked up.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261028T043105Z, ok, no retry; the next is your
-  Daily Run, the first to serve 2026 ED138.
+- Last cache build: 20261028T195212Z, ok, no retry; the next is your
+  Daily Run, the first to serve Pluto's year.
 - Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md of Oct 28).
   Whole tree: 275: orrery 111, Earth System 149, stars 13, utilities 2.
 - This page's date and the ledger's newest stamp: both Oct 28. Agree.
@@ -108,24 +105,28 @@ Decisions, one at a time:
 At the next design talk:
 - L-502 (the triad's spot): moving the triad's hover away from the
   thumb, and info crosses out of dense drawing (Oct 28).
+- A shared link that keeps the view, such as ED138 beside Pluto (Oct
+  28); its item opens at the next records session.
 
 Not urgent, in your order:
 1. Whether the editor also edits the Solar System room's rows, and
-   adds a new body as a form (L-501 (2026 ED138)).
+   adds a new body as a form (L-489 (compositions)).
 2. Choosing a date, and animation.
+3. (do) The guest book form's description says a message is reviewed
+   for the lobby; a problem report is not (L-458 (report a problem)).
 
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- *Next: after your look, Earth's list (L-413 (Earth's list)), session
-  3 of `COORD_next_sessions_brief_20261027.md`.*
+- *Next: the gallery session, item 2 of
+  `HANDOFF_coordination_20261026_28.md`, section 5.*
 - The talk's rulings: `DESIGN_talk_20261027_rulings.md`.
-- Today's record: the ledger's L-501 (2026 ED138), both sessions, with
-  the edits, the findings and your questions answered.
-- Four sentences in the interactive-exhibit skill are now wrong; L-497
-  lists them for the next orrery session's skill update.
-- Your run records: `WHERE_WE_ARE_10-28-26_1344_run_record.md`, its
-  questions now on the ledger.
+- Tonight's record: the ledger's L-443 (the objects), with your belt
+  ruling and its reason, and L-501 (2026 ED138), your questions
+  answered.
+- The protocol's v3.117 entry: the skill's corrections, and what waits
+  for the records skill's next version.
+- Your run records: `WHERE_WE_ARE_10-28-26_1344_run_record.md`.
 
 --- Your run record below this line. No patch edits it; the length cap
 --- stops here; the close reads your timestamped copy and clears this.

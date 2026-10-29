@@ -5,7 +5,7 @@ Rebuilt by `exact_rows_report.py` on every orrery maintenance run. An exact row 
 
 ## Summary
 
-- 43 exact rows in `constants_new.py`.
+- 46 exact rows in `constants_new.py`.
 - 11 printed by at least one display: `SUN_RADIUS_KM`, `EARTH_LEO_UPPER_ALTITUDE_KM`, `EARTH_VAN_ALLEN_OUTER_RADII`, `EARTH_SOLAR_WIND_PRESSURE_NPA`, `EARTH_SOLAR_WIND_BZ_NT`, `EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG`, `EARTH_BOW_SHOCK_CUT_ANGLE_DEG`, `INNER_CORONA_RADII`, `HELMET_CUSP_RADII`, `INNER_LIMIT_OORT_CLOUD_AU`, `OUTER_OORT_CLOUD_AU`.
 - 40 printing lines: 25 in the orrery, 15 in the gallery.
 - Gallery pointers to exact rows with no PRINTS entry (NOT FOLLOWED): 0.
@@ -93,14 +93,14 @@ Rule 7: each printed exact row states a print count, each orrery line prints it 
 
 ### `INNER_LIMIT_OORT_CLOUD_AU`
 
-- orrery `palomas_orrery.py` line 10654: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
+- orrery `palomas_orrery.py` line 10661: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
 - orrery `solar_visualization_shells.py` line 205: `_OORT_INNER_EDGE = row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)`
 - orrery `solar_visualization_shells.py` line 1153: `f'From {_OORT_INNER_EDGE} AU ({row_text("INNER_LIMIT_OORT_CLOUD_AU", unit="km", grouping=True...`
 - gallery `gallery/feature_renderers.js` line 2363 (config `/objects/0/features/oort_cloud/hills_cloud_torus/inner_radius`): `hover += "From " + (fmtAuServed(cfg.inner_radius) || fmtAu(lo)) + "," +`
 
 ### `OUTER_OORT_CLOUD_AU`
 
-- orrery `palomas_orrery.py` line 10654: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
+- orrery `palomas_orrery.py` line 10661: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
 - orrery `solar_visualization_shells.py` line 215: `_OORT_OUTER_EDGE = row_text('OUTER_OORT_CLOUD_AU', grouping=True)`
 - gallery `gallery/feature_renderers.js` line 2458 (config `/objects/0/features/oort_cloud/outer_oort_clumpy/outer_radius`): `var z = fmtAuServed(cfg.outer_radius) || fmtAu(hi);`
 - gallery `gallery/feature_renderers.js` line 2458 (config `/objects/0/features/oort_cloud/galactic_tide/outer_radius`): `var z = fmtAuServed(cfg.outer_radius) || fmtAu(hi);`
@@ -146,6 +146,9 @@ No display prints these exact rows. Under Rule 7 they carry no print count. The 
 - `OUTER_CORONA_RADII`: named on 7 other orrery line(s).
 - `ROCHE_LIMIT_DRAWN_RADII`: named on 6 other orrery line(s).
   - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 3472 (config `/objects/0/features/solar_atmosphere/roche_limit/drawn_radius`): `drawAu = measuredRadiusAu(cfg.drawn_radius,`
+- `MAIN_BELT_SAMPLE_H_MAX`: named on 0 other orrery line(s).
+- `MAIN_BELT_SAMPLE_ORBITS`: named on 0 other orrery line(s).
+- `MAIN_BELT_JPL_COUNT`: named on 0 other orrery line(s).
 - `HILLS_CLOUD_PLANES_NODE_CELL_DEG`: named on 3 other orrery line(s).
 - `HILLS_CLOUD_PLANES_INCL_CELL_DEG`: named on 3 other orrery line(s).
 - `HILLS_CLOUD_PLANES_READ`: named on 6 other orrery line(s).

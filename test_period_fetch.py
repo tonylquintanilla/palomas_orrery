@@ -28,9 +28,11 @@ THE ANSWERS
 
 WHAT IT CHECKS, AND THE FAULT PLANTED FOR EACH
 
-    The list used has the Sun, Mercury, Jupiter, the Pluto-Charon
-    barycentre and Encke. Encke's entry writes no id_type, so plotting's
-    default ('smallbody') is what makes its question match.
+    The list used has the Sun, Mercury, Jupiter, the Orcus-Vanth
+    barycentre (a barycentre the fetch skips, as plotting does; it was the
+    Pluto-Charon barycentre until part 7) and Encke. Encke's entry writes
+    no id_type, so plotting's default ('smallbody') is what makes its
+    question match.
 
     1. Nothing missing: Mercury, Jupiter and Encke all fetched. No query
        is asked and the verdict is NOTHING MISSING; the Sun and the
@@ -89,6 +91,18 @@ WHAT IT CHECKS, AND THE FAULT PLANTED FOR EACH
          for 3 is UNREACHABLE and the last period, kept by the fetch, is
          not saved as a new one. Planted: each of those two checks
          removed.
+    7. (L-443) Pluto's year. On a list of the Sun and the Pluto-Charon
+       barycentre as celestial_objects.py writes it (id '9', no id_type,
+       object_type 'barycenter'), with no cache entry, and JPL's own
+       answers recorded live in
+       documentation/worksheets/period_answers_pluto_L443.json: the
+       barycentre is named missing, not skipped; fetched by plotting's
+       call asking 9 as a major body (id_type None, the record the export
+       serves), around the Sun, so the two-centre test picks the steadier
+       centre from JPL's answers; the record is JPL's "Pluto Barycenter
+       (9)"; the next run asks nothing. Planted: the barycentre taken off
+       FETCHED_HERE (skipped again); and plotting's default 'smallbody'
+       used for it, which asks the asteroid 9 Metis.
 
 RUN COMMAND
 
@@ -108,6 +122,10 @@ Module updated: October 15, 2026 with Anthropic's Claude Opus 5.5 (L-445,
 Earth's period: part 6, Earth re-fetched from the Earth-Moon barycentre,
 with eight planted faults, five of them in a copy of orbital_period.py;
 the recorded records of part 2 carry the three fields L-445 adds.)
+Module updated: October 28, 2026 with Anthropic's Claude Opus 5.5 (L-443,
+Pluto's year: part 7, the Pluto-Charon barycentre fetched as a major body
+on JPL's recorded answers, with two planted faults; the list's skipped
+barycentre is now Orcus-Vanth's.)
 """
 
 import copy
@@ -135,6 +153,8 @@ ANSWERS = os.path.join(HERE, "documentation", "worksheets",
                        "period_fetch_answers_L444.json")
 EARTH_ANSWERS = os.path.join(HERE, "documentation", "worksheets",
                              "period_answers_L445.json")
+PLUTO_ANSWERS = os.path.join(HERE, "documentation", "worksheets",
+                             "period_answers_pluto_L443.json")
 MODULE = os.path.join(HERE, "period_fetch.py")
 OP_MODULE = os.path.join(HERE, "orbital_period.py")
 ORRERY = os.path.join(HERE, "palomas_orrery.py")
@@ -146,8 +166,11 @@ LIST_ENTRIES = [
      "horizons_name": "Mercury (199)", "object_type": "orbital"},
     {"name": "Jupiter", "key": "jupiter", "id": "599", "id_type": None,
      "horizons_name": "Jupiter (599)", "object_type": "orbital"},
-    {"name": "Pluto-Charon Barycenter", "key": "pluto_barycenter",
-     "id": "9", "horizons_name": "Pluto System Barycenter (9)",
+    # A barycentre the fetch skips, as plotting's pre-fetch does. Until
+    # L-443's Pluto build (2026-10-28) this was the Pluto-Charon
+    # barycentre, which is now fetched (part 7).
+    {"name": "Orcus-Vanth Barycenter", "key": "orcus_barycenter",
+     "id": "20090482", "horizons_name": "Orcus-Vanth Barycenter",
      "object_type": "barycenter"},
     # No id_type written: plotting's default 'smallbody' must be used.
     {"name": "Encke", "key": "encke", "id": "90000091",
@@ -160,6 +183,14 @@ EARTH_ENTRIES = [
     LIST_ENTRIES[0],
     {"name": "Earth", "key": "earth", "id": "399", "id_type": None,
      "horizons_name": "Earth", "object_type": "orbital"},
+]
+
+# L-443: the Pluto-Charon barycentre as celestial_objects.py writes it.
+PLUTO_ENTRIES = [
+    LIST_ENTRIES[0],
+    {"name": "Pluto-Charon Barycenter", "key": "pluto_barycenter",
+     "id": "9", "horizons_name": "Pluto Barycenter",
+     "object_type": "barycenter"},
 ]
 
 # Fields a fresh fetch writes differently from the recorded one, and why.
@@ -407,6 +438,22 @@ def scenario_earth(mod, earth, op=None, save=None, refuse=()):
         return first
 
 
+def scenario_pluto(mod, pluto):
+    """L-443: the barycentre with no cache entry; the run must fetch it as
+    a major body. Then the same run again, which must ask nothing."""
+    with World(pluto, copy.deepcopy(pluto["inputs"]["cache"]),
+               entries=PLUTO_ENTRIES) as w:
+        code, s = mod.run(w.tmp, when_of(pluto), echo=w.echo)
+        first = {"code": code, "s": s, "calls": list(w.calls),
+                 "log": list(w.log), "cache": w.cache()}
+        w.calls[:] = []
+        w.log[:] = []
+        code2, s2 = mod.run(w.tmp, when_of(pluto), echo=w.echo)
+        first["again"] = {"code": code2, "s": s2, "calls": list(w.calls),
+                          "log": list(w.log)}
+        return first
+
+
 # ------------------------------------------------------------- judges
 # Each returns a list of findings; empty means the check passed.
 
@@ -423,7 +470,7 @@ def judge_nothing(r):
     if r["code"] != 0:
         out.append("exit %s" % r["code"])
     text = "\n".join(r["log"])
-    for name in ("Sun", "Pluto-Charon Barycenter"):
+    for name in ("Sun", "Orcus-Vanth Barycenter"):
         if ("Not fetched here: %s" % name) not in text:
             out.append("%s not named as skipped" % name)
     return out
@@ -709,6 +756,56 @@ def judge_earth_no_stick(r):
     return ["verdict %r exit %s" % (line, r["code"])]
 
 
+def judge_pluto(r, pluto):
+    """Pluto's barycentre: named missing, not skipped; asked as a major
+    body with plotting's call; its record JPL's Pluto Barycenter around
+    the steadier centre; the next run asks nothing."""
+    out = []
+    name = "Pluto-Charon Barycenter"
+    name_key = "9|None|%s|" % next(iter(pluto["answers"]["elements"])).split(
+        "|")[2]
+    pairs = pluto["answers"]["period_pairs"]
+    sun = pairs[name_key + "@sun"]["answer"]
+    bary = pairs[name_key + "@0"]["answer"]
+    centre, chosen = (("@0", bary) if _change(bary) < _change(sun)
+                      else ("@sun", sun))
+    text = "\n".join(r["log"])
+    if ("Not fetched here: %s" % name) in text:
+        out.append("the barycentre was skipped")
+    head = r["log"][:next((i for i, l in enumerate(r["log"])
+                           if l.startswith("FETCH ")), len(r["log"]))]
+    if not any(l.strip().startswith(name) and "no cache entry yet" in l
+               for l in head):
+        out.append("the barycentre not named missing before the first "
+                   "question")
+    want_call = [{"name": name, "horizons_id": "9", "id_type": None,
+                  "date": when_of(pluto), "center_body": None,
+                  "with_period": True}]
+    if r["calls"] != want_call:
+        out.append("fetch_osculating_elements was called %r, not %r"
+                   % (r["calls"], want_call))
+    want = ("PERIOD FETCH: PASS -- fetched 1: %s; new cache entries: %s"
+            % (name, name))
+    if verdict_line(r) != want or r["code"] != 0:
+        out.append("verdict %r exit %s, expected %r"
+                   % (verdict_line(r), r["code"], want))
+    rec = ((r.get("cache") or {}).get(name) or {}).get("period") or {}
+    for field, value in (("target", "9"), ("target_label", None),
+                         ("center", centre),
+                         ("horizons_targetname", "Pluto Barycenter (9)")):
+        if rec.get(field) != value:
+            out.append("the record's %s is %r, not %r"
+                       % (field, rec.get(field), value))
+    if not _close(rec.get("days"), chosen["p1"]):
+        out.append("the record's days %r, JPL's PR for 9 around %s is %r"
+                   % (rec.get("days"), centre, chosen["p1"]))
+    again = r.get("again") or {}
+    if again.get("calls") or not verdict_line(again).startswith(
+            "PERIOD FETCH: NOTHING MISSING"):
+        out.append("the next run asked again: %r" % verdict_line(again))
+    return out
+
+
 # ------------------------------------------------------------- filter
 
 FILTER_TYPES = re.compile(
@@ -812,6 +909,17 @@ EARTH_FAULTS = [
     ("a save asked of the old target read back as fetched",
      '        if block.get("target") != wanted_target(entry, cache_now):\n',
      '        if False:\n', "earth_no_stick"),
+]
+
+# L-443: faults planted in a copy of period_fetch.py, judged on Pluto's
+# barycentre.
+PLUTO_FAULTS = [
+    ("the barycentre taken off FETCHED_HERE: skipped again",
+     'FETCHED_HERE = ("Pluto-Charon Barycenter",)\n',
+     'FETCHED_HERE = ()\n'),
+    ("plotting's default 'smallbody' used for the barycentre (9 Metis)",
+     '            horizons_id, id_type = export_objects.served_identity('
+     'fields)\n', '            pass\n'),
 ]
 
 # L-445: faults planted in a copy of orbital_period.py, with the real
@@ -924,6 +1032,8 @@ def main():
     answers = load_answers()
     with open(EARTH_ANSWERS, "r", encoding="utf-8") as handle:
         earth = json.load(handle)
+    with open(PLUTO_ANSWERS, "r", encoding="utf-8") as handle:
+        pluto = json.load(handle)
     with open(OP_MODULE, "r", encoding="utf-8") as handle:
         op_source = handle.read().replace("\r\n", "\n")
     with open(MODULE, "r", encoding="utf-8") as handle:
@@ -934,7 +1044,7 @@ def main():
     t = Tally()
 
     print("=" * 70)
-    print("  PERIOD FETCH SUITE (L-444, L-445)")
+    print("  PERIOD FETCH SUITE (L-444, L-445, L-443)")
     print("=" * 70)
     print("Answers: %s (built on %s)"
           % (os.path.relpath(ANSWERS, HERE).replace(os.sep, "/"),
@@ -961,6 +1071,12 @@ def main():
         mod = plant(source, old, new, label)
         with Quiet():
             found = run_earth_judge(which, mod, earth)
+        t.check(bool(found), "%s -- caught: %s"
+                % (label, found[0] if found else "NOT CAUGHT"))
+    for label, old, new in PLUTO_FAULTS:
+        mod = plant(source, old, new, label)
+        with Quiet():
+            found = judge_pluto(scenario_pluto(mod, pluto), pluto)
         t.check(bool(found), "%s -- caught: %s"
                 % (label, found[0] if found else "NOT CAUGHT"))
     print("Planted faults, each in a copy of orbital_period.py, each caught:")
@@ -1021,6 +1137,14 @@ def main():
                                     " -- " + "; ".join(found)))
         if found:
             print(q.buf.getvalue())
+    with Quiet() as q:
+        found = judge_pluto(scenario_pluto(real, pluto), pluto)
+    t.check(not found, "Pluto's barycentre, no cache entry: named missing, "
+            "fetched by plotting's call as a major body (9, JPL's Pluto "
+            "Barycenter) around the steadier centre; the next run asks "
+            "nothing" + ("" if not found else " -- " + "; ".join(found)))
+    if found:
+        print(q.buf.getvalue())
 
     print("")
     if t.failed:
@@ -1028,9 +1152,11 @@ def main():
               % (len(t.failed), t.passed + len(t.failed), "; ".join(t.failed)))
         return 1
     print("PERIOD FETCH SUITE: pass -- %d checks, every planted fault caught "
-          "(%d planted, %d of them for Earth's period, L-445)"
-          % (t.passed, len(FAULTS) + 2 + len(EARTH_FAULTS) + len(OP_FAULTS),
-             len(EARTH_FAULTS) + len(OP_FAULTS)))
+          "(%d planted, %d of them for Earth's period, L-445, %d for "
+          "Pluto's, L-443)"
+          % (t.passed, len(FAULTS) + 2 + len(EARTH_FAULTS) + len(OP_FAULTS)
+             + len(PLUTO_FAULTS), len(EARTH_FAULTS) + len(OP_FAULTS),
+             len(PLUTO_FAULTS)))
     return 0
 
 

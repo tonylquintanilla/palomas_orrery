@@ -257,6 +257,9 @@ slice 2: GENERATORS gains Path plan, path_plan.py, after Horizons check
 and before Objects export: each served spacecraft's path plan, found in
 JPL's positions on a 30-day cycle. CHECKERS gains Path plan suite,
 test_path_plan.py.)
+Module updated: October 28, 2026 with Anthropic's Claude Opus 5.5 (L-443:
+Drawings export also writes data/drawings/main_belt.json, the main
+asteroid belt.)
 """
 
 import hashlib
@@ -328,7 +331,8 @@ GENERATORS = [
       'data/drawings/sun_corona.json',
       'data/drawings/zodiacal_dust.json',
       'data/drawings/outer_oort_cloud.json',
-      'data/drawings/galactic_tide.json']),
+      'data/drawings/galactic_tide.json',
+      'data/drawings/main_belt.json']),
     ('Module atlas',    ['module_atlas.py'],
      ['MODULE_ATLAS.md', 'MODULE_INDEX.md']),
     ('Data inventory',  ['data_inventory.py'],

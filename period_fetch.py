@@ -39,10 +39,16 @@ WHAT IT ASKS, AND WHEN
       - the Sun, which orbits nothing here (the export carries no period);
       - an object plotting's pre-fetch never asks elements for: an
         object_type outside PLOTTED_TYPES, a mission, or a name in
-        SKIP_NAMES. Today that is the Pluto-Charon barycentre, which L-443
-        carries. Both lists copy palomas_orrery.py's pre-fetch filter, and
-        test_period_fetch.py fails, naming the difference, the day the two
-        disagree.
+        SKIP_NAMES. Both lists copy palomas_orrery.py's pre-fetch filter,
+        and test_period_fetch.py fails, naming the difference, the day the
+        two disagree.
+    One exception, FETCHED_HERE: the Pluto-Charon barycentre, the website's
+    Pluto, has object_type 'barycenter', which the pre-fetch skips, so its
+    year printed "not yet fetched" (L-443, L-501). It is fetched here with
+    plotting's own call, around the Sun, like every other keyed body, and
+    asked by the record the export serves (9, a major body), since the
+    pre-fetch's default id_type, 'smallbody', would ask the asteroid 9
+    Metis. Plotting itself still asks nothing for it.
 
 THE FETCH IS PLOTTING'S
 
@@ -127,6 +133,11 @@ OR10, and the Horizons check confirms it.)
 Module updated: October 26, 2026 with Anthropic's Claude Opus 5.5 (L-443,
 slice 2's comets: an entry marked open_path, a comet drawn as a path by
 its plan, serves no period, so none is fetched for it.)
+Module updated: October 28, 2026 with Anthropic's Claude Opus 5.5 (L-443,
+Pluto's year: FETCHED_HERE, the Pluto-Charon barycentre's period fetched
+with plotting's call around the Sun, though plotting's pre-fetch skips a
+barycenter, asked by the record the export serves (9, a major body);
+palomas_orrery.py unchanged.)
 """
 
 import ast
@@ -146,6 +157,19 @@ PLOTTED_TYPES = ("orbital", "satellite", "trajectory", "lagrange_point")
 # record, and the maintenance run is the test (Tony: "just take it off the
 # skip list and see if it fails").
 SKIP_NAMES = ("MK2", "Xiangliu", "Vanth")
+
+# Served entries whose period is fetched here although plotting's pre-fetch
+# asks no elements for them (L-443, 2026-10-28). The Pluto-Charon
+# barycentre is the website's Pluto, by the barycenter rule, and its year
+# printed "not yet fetched" because the pre-fetch skips object_type
+# 'barycenter'. It is fetched with plotting's own call, around the Sun as
+# every keyed body is, so the two-centre test picks its centre; plotting's
+# lists above stay as palomas_orrery.py has them. It is asked by the record
+# the export serves (export_objects.served_identity: 9, a major body), not
+# by the pre-fetch's default 'smallbody': the first live run, 2026-10-28,
+# asked 9 as a small body and JPL answered for the asteroid 9 Metis, a
+# period of 1,346.6 days, which was taken back out of the cache.
+FETCHED_HERE = ("Pluto-Charon Barycenter",)
 
 READ_FIELDS = ("name", "key", "id", "id_type", "object_type", "is_mission",
                "helio_id", "helio_id_type", "open_path")
@@ -192,6 +216,10 @@ def served_entries(root):
         if fields.get("helio_id") is not None:
             horizons_id = str(fields["helio_id"])
             id_type = fields.get("helio_id_type") or "smallbody"
+        if name in FETCHED_HERE:
+            # Not plotting's default: the record the export serves. The
+            # barycentre writes no id_type, and 'smallbody' asks 9 Metis.
+            horizons_id, id_type = export_objects.served_identity(fields)
         out.append({
             "name": name,
             "key": fields["key"],
@@ -205,7 +233,10 @@ def served_entries(root):
 
 
 def plotting_skips(entry):
-    """Why plotting's pre-fetch would not fetch this entry, or None."""
+    """Why plotting's pre-fetch would not fetch this entry, or None. An
+    entry in FETCHED_HERE is fetched here though plotting skips it."""
+    if entry["name"] in FETCHED_HERE:
+        return None
     if entry["name"] in SKIP_NAMES:
         return "on plotting's skip list"
     if entry["object_type"] not in PLOTTED_TYPES:

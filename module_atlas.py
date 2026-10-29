@@ -169,6 +169,7 @@ ROLE_MAP = {
     'galactic_tide_sampler':                  'computation',
     'hills_cloud_sampler':                    'computation',
     'idealized_orbits':                       'computation',
+    'main_belt_sampler':                      'computation',
     'object_type_analyzer':                   'computation',
     'orbital_elements':                       'computation',
     'orbital_period':                         'computation',

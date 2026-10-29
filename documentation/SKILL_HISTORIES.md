@@ -809,6 +809,18 @@ not hold named, not stopping the room. And L-484's rule under
 Provenance: the website and the orrery agree on every object both draw,
 or the difference is written down (Tony, 2026-10-24); its check is still
 to be designed.
+Earlier: 1.25 | 2026-10-25, evening, with Anthropic's Claude Opus
+5.5, at palomas_orrery @ 967d1503 and gallery @ 82a7ab13. v1.25 (L-443,
+L-487) records Tony's two asks from his phone look of the spacecraft,
+approved the same evening ("Yes please on all your suggestions"). Ticking
+a spacecraft ticks its companions: the planets its plan passes by and the
+farthest planet whose perihelion its path goes beyond, Pluto the last
+("add the farthest planet orbit that the object has reached ... This
+gives perspective to a spacecraft plot," and "Maybe flyby planets too");
+the one exception to nothing ticking many bodies at once. And the i panel
+shows every description, note and citation one sentence to a bullet, in
+every room ("put bullets on all sentences for readability including the
+source paragraph"), cut where the room shows the words.
 
 ## safe-file-editing
 

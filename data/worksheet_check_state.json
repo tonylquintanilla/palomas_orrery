@@ -32,7 +32,9 @@
     "Relay response from Gemini -- check the sources behind the Sun's two fades L-410 with L-131.md",
     "batch1_blind_source_lookup_gemini.md",
     "horizons_answers_L395.json",
+    "main_belt_jpl_mba_h13_20261028.json",
     "period_answers_L445.json",
+    "period_answers_pluto_L443.json",
     "period_fetch_answers_L444.json",
     "worksheet_asteroid_belt.md",
     "worksheet_batch1_tier1_sourcing_gemini.md",
@@ -62,5 +64,5 @@
     "worksheet_mars_visualization.md",
     "worksheet_mercury_visualization.md"
   ],
-  "uncited_changed": "2026-10-21"
+  "uncited_changed": "2026-10-28"
 }

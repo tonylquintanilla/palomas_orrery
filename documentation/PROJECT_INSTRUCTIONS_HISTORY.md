@@ -3587,6 +3587,56 @@ resident.
 (Moved down from the resident protocol on 2026-10-27 when
 v3.116 made a fourth entry.)
 
+v3.114 (October 26, 2026): No rule changed in this document. THREE
+skill bumps, one version each (L-443, slice 2, build B part 2):
+interactive-exhibit 1.25 -> 1.26, horizons-orbital-mechanics 1.11 ->
+1.12, gallery-cache-builder 1.12 -> 1.13. THE COMETS ON OPEN PATHS;
+ONE JPL CLASS TO A DRAWER ROW; JPL'S TERMS KEPT AND EXPLAINED.
+
+WHAT PROMPTED IT. Build B's second part, the comets, from
+documentation/HANDOFF_L443_slice2_buildB_spacecraft_20261025.md section
+6, and Tony's rulings of Oct 26 in chat: the class check's split, "Split
+with asteroids in the correct order among the planets"; on the comets'
+words, "I don't want to drop JPL's words, Ellipse, Predicted,
+hyperbolic, perihelion, aphelion, etc. We should keep these correct
+words and explain them when they should be explained"; and "Yes on all
+and bring the sourcing into the ledger and into this slice," which made
+L-491 (the comet nucleus sizes).
+
+WHAT CHANGED. interactive-exhibit: the comets on open paths in the
+Solar System room, the groups one JPL class to a row, the orbit line's
+new words, a name keyed with an underscore shown with a space, and
+JPL's terms kept and explained under Hover text is written for the
+visitor. horizons-orbital-mechanics: A Comet on an Open Path, under How
+a Path's Events Are Found, and two lines on the Horizons check (an
+entry asked by JPL's number; a path serves no period).
+gallery-cache-builder: a comet on an open path is a path body. Each
+skill's oldest of four version entries moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copies read
+interactive-exhibit 1.26, horizons-orbital-mechanics 1.12 and
+gallery-cache-builder 1.13 before work that fires them. This session
+confirmed its loaded copies of gallery-cache-builder 1.12 (discharging
+that part of v3.113's obligation), gallery-assembler 1.3,
+agentic-pre-test 1.3, ledger-and-session-records 1.22 and
+safe-file-editing 1.14 (discharging that part), as the manifest
+expected. It worked from the repo's copies of interactive-exhibit 1.25
+and horizons-orbital-mechanics 1.11, at the manifest's versions, by
+Tony's instruction to go by the manifest; it did not load them, so
+v3.113's obligation for those two is not discharged and passes to the
+1.26 and 1.12 above.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.111 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-28 when
+v3.117 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

@@ -137,6 +137,9 @@ asked by its permanent number now, keeps both osculating orbits.)
 Module updated: October 28, 2026 with Anthropic's Claude Opus 5.5 (L-501:
 a checkbox for 2026 ED138 among the Kuiper Belt objects; its orbit is
 fetched from JPL like any body's, with no typed elements or period.)
+Module updated: October 28, 2026 with Anthropic's Claude Opus 5.5 (L-443:
+2026 ED138's checkbox moved between Varuna and Haumea, where its fetched
+semi-major axis puts it in the menu's order.)
 
 """
 #Paloma's Orrery - Solar System Visualization Tool
@@ -9691,6 +9694,12 @@ create_celestial_checkbutton("Mani", ms4_var)               # params
 create_celestial_checkbutton("GV9", gv9_var)                # params
 create_celestial_checkbutton("Varuna", varuna_var)          # params
 
+# L-501, slot set 2026-10-28 (L-443): the KBOs run by semi-major axis,
+# Planet 9 last. 2026 ED138 has no typed a; its fetched a, 42.97 AU around
+# the Sun and 43.09 AU around the solar system's barycentre (JPL,
+# 2026-10-28), both fall between Varuna's 42.947 and Haumea's 43.13.
+create_celestial_checkbutton("2026 ED138", ed138_var)       # L-501: elements fetched from JPL, none typed
+
 # create_celestial_checkbutton("Haumea System Barycenter", haumea_barycenter_var)
 create_celestial_checkbutton("Haumea", haumea_var)          # params
 create_celestial_checkbutton("- Hi'iaka", hiiaka_var)       # Haumea moon
@@ -9702,8 +9711,6 @@ create_celestial_checkbutton("Quaoar", quaoar_var)          # params
 create_celestial_checkbutton("- Weywot", weywot_var)           
 
 create_celestial_checkbutton("Arrokoth", arrokoth_var)      # params
-
-create_celestial_checkbutton("2026 ED138", ed138_var)       # L-501: elements fetched from JPL, none typed
 
 create_celestial_checkbutton("Makemake", makemake_var)      # params
 create_celestial_checkbutton("- MK2", mk2_var)              # Makemake moon

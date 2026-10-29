@@ -109,6 +109,8 @@ for the corona's density model and the dust cloud's shape.)
 Module updated: October 22, 2026 with Anthropic's Claude Opus 5.5
 (L-465: deg_per_day and days, for the Sun's rotation rate and its
 sidereal period.)
+Module updated: October 28, 2026 with Anthropic's Claude Opus 5.5
+(L-443: mag, a named number, for the main belt's brightness cut.)
 """
 
 TOKENS = {
@@ -197,6 +199,14 @@ TOKENS = {
         "meaning": ("McIlwain L, a named pure number; it equals geocentric "
                     "distance in Earth radii only where a field line "
                     "crosses the magnetic equator"),
+    },
+    # L-443, 2026-10-28: the main belt's sample is cut by brightness.
+    "mag": {
+        "dimension": "named number",
+        "defining_constant": None,
+        "meaning": ("an astronomical magnitude, a brightness on a "
+                    "logarithmic scale where a smaller number is brighter; "
+                    "for a small body, its absolute magnitude H"),
     },
     "days": {
         "dimension": "d",

@@ -66,6 +66,11 @@ disagree, stop and say so (the protocol's Stale Skill = Stop gate).
   summary of what changed and why, for Tony, since he does not read
   diffs (his ruling, Oct 26, 2026). Nothing below the page's run-record
   marker is touched.
+- The run-record zone below that marker is empty by design. Tony's
+  record is his timestamped copy of the page
+  (`WHERE_WE_ARE_<m-d-yy>_<hhmm>_run_record.md`), one session per
+  copy, and he writes only there (his ruling of Oct 28, 2026). An
+  empty zone is not a missing record: read his latest copy instead.
 - Your final report lists every file changed with the number of edits,
   the way a patch prints "ok <file> (n edits)", so Tony can paste it
   into his run record; then his run order (what to look at, what to

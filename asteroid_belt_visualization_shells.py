@@ -25,6 +25,10 @@ May 29, 2026: Trojan L4/L5 info markers given border_color='white' for
 Module updated: October 27, 2026 with Anthropic's Claude Opus 5.5 (L-492:
     the stale "set manual scale" and "MB per frame" sentences removed
     from the hover and info text; the opening view frames every shell).
+Module updated: October 28, 2026 with Anthropic's Claude Opus 5.5 (L-443:
+    the main belt drawn as the stored cloud from main_belt_sampler.py,
+    measured from JPL's main-belt orbits; its hover and tooltip one text
+    from the rows; the typed edges, peak and gaps removed).
 """
 
 import numpy as np
@@ -111,115 +115,71 @@ def estimate_jupiter_angle_from_date(date_str):
         return 0.0
 
 # Constants for asteroid belt distances (in AU)
-MAIN_BELT_INNER = 2.2  # Inner edge of main belt
-MAIN_BELT_OUTER = 3.2  # Outer edge of main belt
-MAIN_BELT_PEAK = 2.7   # Peak density region
+# REMOVED 2026-10-28 (L-443): MAIN_BELT_INNER 2.2, MAIN_BELT_OUTER 3.2,
+# MAIN_BELT_PEAK 2.7 and the five KIRKWOOD_GAPS, typed here with no source
+# and used only by the main belt's old drawing. The belt is now drawn from
+# rows measured from JPL's own orbits (main_belt_sampler.py).
 
 HILDA_DISTANCE = 3.97  # Hilda group distance (3:2 resonance with Jupiter)
 TROJAN_DISTANCE = 5.2  # Jupiter's orbital distance (L4 and L5 points)
-
-# Kirkwood gap locations (orbital resonances with Jupiter)
-KIRKWOOD_GAPS = [
-    2.06,  # 4:1 resonance
-    2.5,   # 3:1 resonance
-    2.82,  # 5:2 resonance
-    2.95,  # 7:3 resonance
-    3.27   # 2:1 resonance
-]
 
 #####################################
 # Main Asteroid Belt
 #####################################
 
-main_belt_info = (
-    "The main asteroid belt is located between Mars and Jupiter, roughly 2.2 to 3.2 AU from the Sun.\n"
-    "It contains millions of rocky bodies ranging from dust particles to dwarf planet Ceres (940 km diameter).\n"
-    "Despite its large number of objects, the total mass is only about 4% of the Moon's mass.\n"
-    "The belt shows distinct gaps called Kirkwood gaps at distances where orbital resonances with Jupiter\n"
-    "cause orbital instabilities. Peak density occurs around 2.7 AU.\n"
-    "Most asteroids are C-type (carbonaceous, 75%), S-type (silicaceous, 17%), or M-type (metallic)."
-)
+# L-443 (2026-10-28): the checkbox's tooltip and the cloud's hover are one
+# text, written from the rows by main_belt_sampler.hover_text(). The old
+# tooltip's sentences named no source and described a drawing that is
+# gone (its 2.2 to 3.2 AU, its peak at 2.7 AU, its gaps).
+import main_belt_sampler as _mbs
+main_belt_info = _mbs.hover_text(br="\n")
+
 
 def create_main_asteroid_belt(center_position=(0, 0, 0)):
     """
-    Creates a visualization of the main asteroid belt with density variations and Kirkwood gaps.
-    
+    The main asteroid belt as the stored cloud: dots placed at random
+    inside the belt's spread measured from JPL's main-belt orbits
+    (main_belt_sampler.drawn_main_belt, the same dots
+    data/drawings/main_belt.json carries to the website). Not individual
+    asteroids, and the same on every date (Tony's ruling of 2026-10-28,
+    form B, L-443). REPLACED 2026-10-28: until then fresh random dots on
+    every plot, between a typed 2.2 and 3.2 AU, with an eyeballed
+    thickness and gaps.
+
     Parameters:
         center_position (tuple): (x, y, z) position of the Sun
-        
+
     Returns:
         list: Plotly trace objects for the main belt
     """
     center_x, center_y, center_z = center_position
-    
-    # Create multiple density rings to show the structure
-    n_particles = 8000  # Total particles to distribute
-    n_rings = 30  # Number of radial rings
-    
-    belt_x = []
-    belt_y = []
-    belt_z = []
-    belt_colors = []
-    belt_sizes = []
-    
-    for i in range(n_rings):
-        # Calculate radius for this ring
-        radius = MAIN_BELT_INNER + (MAIN_BELT_OUTER - MAIN_BELT_INNER) * (i / (n_rings - 1))
-        
-        # Calculate density based on distance from peak and Kirkwood gaps
-        # Gaussian peak around 2.7 AU
-        density = np.exp(-((radius - MAIN_BELT_PEAK) ** 2) / (0.3 ** 2))
-        
-        # Apply Kirkwood gap reductions
-        for gap in KIRKWOOD_GAPS:
-            gap_factor = np.exp(-((radius - gap) ** 2) / (0.05 ** 2))
-            density *= (1 - 0.7 * gap_factor)  # 70% reduction in gaps
-        
-        # Number of particles in this ring based on density
-        n_in_ring = max(int(n_particles * density / n_rings), 5)
-        
-        # Generate particles in this ring
-        for j in range(n_in_ring):
-            angle = np.random.uniform(0, 2 * np.pi)
-            
-            # Add some radial jitter
-            r_jitter = np.random.normal(0, 0.05)
-            r = radius + r_jitter
-            
-            # Position in orbital plane with some inclination
-            x = r * np.cos(angle)
-            y = r * np.sin(angle)
-            
-            # Vertical thickness - gets thicker farther from peak
-            z_scale = 0.1 + 0.2 * abs(radius - MAIN_BELT_PEAK) / (MAIN_BELT_OUTER - MAIN_BELT_INNER)
-            z = np.random.normal(0, z_scale)
-            
-            belt_x.append(x)
-            belt_y.append(y)
-            belt_z.append(z)
-            
-            # Color gradient: inner belt (reddish-brown) to outer belt (gray-brown)
-            color_factor = (radius - MAIN_BELT_INNER) / (MAIN_BELT_OUTER - MAIN_BELT_INNER)
-            r_color = int(180 + 30 * (1 - color_factor))
-            g_color = int(140 + 20 * (1 - color_factor))
-            b_color = int(100 + 30 * color_factor)
-            belt_colors.append(f'rgb({r_color}, {g_color}, {b_color})')
-            
-            # Size variation
-            belt_sizes.append(np.random.uniform(0.8, 2.0))
-    
+    rows = _mbs.rows_from_store()
+    dots = _mbs.drawn_main_belt(rows)
+    belt_x = np.array(dots['x'])
+    belt_y = np.array(dots['y'])
+    belt_z = np.array(dots['z'])
+
+    # Rendering settings, as before: a colour from reddish-brown near the
+    # Sun to grey-brown far out, across the drawing's two ends, and a
+    # size between 0.8 and 2.0 from the drawing's own seed.
+    near, far = _mbs.span(rows)
+    radius = np.sqrt(belt_x ** 2 + belt_y ** 2 + belt_z ** 2)
+    color_factor = np.clip((radius - near) / (far - near), 0.0, 1.0)
+    belt_colors = ['rgb(%d, %d, %d)' % (int(180 + 30 * (1 - c)),
+                                        int(140 + 20 * (1 - c)),
+                                        int(100 + 30 * c))
+                   for c in color_factor]
+    belt_sizes = np.random.default_rng(dots['settings']['seed']).uniform(
+        0.8, 2.0, len(belt_x))
+
     # Apply center position offset
-    belt_x = np.array(belt_x) + center_x
-    belt_y = np.array(belt_y) + center_y
-    belt_z = np.array(belt_z) + center_z
-    
-    # Create the main belt hover text
-    # Source: NASA Solar System Exploration; MPC (member count); Dermott & Murray (1983) -- Kirkwood gaps
-    belt_desc = ("Main Asteroid Belt: Rocky debris between Mars and Jupiter (2.2-3.2 AU).<br>"
-                 "Contains millions of asteroids with distinct Kirkwood gaps caused by<br>"
-                 "Jupiter's gravitational resonances. Peak density at ~2.7 AU.")
+    belt_x = belt_x + center_x
+    belt_y = belt_y + center_y
+    belt_z = belt_z + center_z
+
+    belt_desc = _mbs.hover_text(rows)
     trace_name = 'Main Asteroid Belt'
-    
+
     geom_trace = go.Scatter3d(
         x=belt_x, y=belt_y, z=belt_z,
         mode='markers',

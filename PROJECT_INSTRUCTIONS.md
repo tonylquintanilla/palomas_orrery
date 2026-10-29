@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.116 | October 27, 2026
+Tony Quintanilla, PE | Claude | v3.117 | October 28, 2026
 
-Cut from 8d334e71 at https://github.com/tonylquintanilla/palomas_orrery
+Cut from b2fcc1bb at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -536,7 +536,7 @@ gallery-cache-builder        1.13 Nightly builder, atomic swap and its
                                   a pull that does not match the push, a comet
                                   on an open path fetched by its plan
                                   (is_path_body, open_path)
-interactive-exhibit          1.27 adding or changing an exhibit in
+interactive-exhibit          1.28 adding or changing an exhibit in
                                   interactive.html; any edit to the Sun's
                                   chrome (drawer, nav cluster, frame zoom,
                                   i-panel, HUD, consent, back link); "Earth
@@ -578,7 +578,9 @@ interactive-exhibit          1.27 adding or changing an exhibit in
                                   arrows on the orbits; the grid chip's AU note
                                   and the triad's frame note; the i button's
                                   first-visit note and hovers without a pointer
-                                  line
+                                  line; the one text box for a tap and Go To
+                                  (text_box.js); a group found by its find
+                                  words; the i panel's Report a problem link
 <!-- SKILL-MANIFEST:END -->
 
 Session-Start Repo Pull and the SHA Round Trip [CRITICAL]
@@ -1214,6 +1216,62 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.117 (October 28, 2026): No rule changed in this document. ONE
+skill bump, one version (L-443, carrying L-497, L-496 and L-458):
+interactive-exhibit 1.27 -> 1.28. FOUR WRONG SENTENCES CORRECTED; THE
+ONE TEXT BOX, THE GROUP SEARCH AND THE REPORT LINK RECORDED.
+
+WHAT PROMPTED IT. The gallery's first Claude Code session, of Oct 27,
+late night (built on gallery 7a4a03a), built L-497's one text box and
+the streamer belt's own row, L-496's group search and L-458's Report a
+problem link. L-497's note listed four sentences in interactive-exhibit
+1.27 that the builds made wrong, each one a session following it would
+act on, and three new things to record. The gallery session reads the
+orrery's skills and does not edit them, so the correction waited for
+this orrery session (section 5, item 1 of
+documentation/HANDOFF_coordination_20261026_28.md).
+
+WHAT CHANGED. interactive-exhibit: a group IS found by a word such as
+"comet", by its row's find words; the streamer belt has its own row,
+and no member is drawn with another; Plotly's own hover box is off in
+every room, so a marker tap opens the page's one text box, in the Phone
+first sequence and The touch path; and the anatomy table's drawer row
+says a tap on a marker opens the text box too, not only naming its
+row. Recorded new: gallery/text_box.js (the box's words, one sentence
+to a bullet), the find words on the drawer's rows, and the Report a
+problem link in every room's i panel. Riding the bump, from L-501
+(2026 ED138): a body the served cache does not hold yet turns the
+Solar System figures check red as well as Cache in step. Each fact was
+read from the gallery's code at acbf206b before it was written. The skill's oldest of
+four version entries, 1.25, moved to documentation/SKILL_HISTORIES.md,
+by the three-entry rule.
+
+NOT DONE HERE, AND WHY. ledger-and-session-records stays at 1.22. Its
+sentence that Tony pastes into the live page and then copies is wrong
+(Tony, Oct 28, 13:27-13:29: he writes only in the timestamped copy, one
+session per copy), and the kinds of session (L-499) wait for its next
+version too; both go to a records session, by the coordination
+handoff's queue, item 6. Meanwhile CLAUDE.md in both repositories says
+the run-record zone is empty by design.
+
+THE OBLIGATION TRAVELS. A Claude Code session reads each skill as the
+file in the repo. This one read in full horizons-orbital-mechanics
+1.12, orrery-coding-conventions 1.12, provenance-discipline 2.35,
+interactive-exhibit 1.27, agentic-pre-test 1.3 and
+ledger-and-session-records 1.22, each as the manifest expected, and
+safe-file-editing 1.14, also as expected, read in full partway through
+the work rather than before its first edits. The account's installed copies
+cannot be seen from Code. The next session that loads skills from the
+account confirms its copy reads interactive-exhibit 1.28, and, from
+v3.116 and v3.115, provenance-discipline 2.35 and
+orrery-coding-conventions 1.12, before work that fires them.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.114 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.116 (October 27, 2026): No rule changed in this document. TWO skill
 bumps, one version each (L-443, carrying L-493, L-494 and L-495):
 interactive-exhibit 1.26 -> 1.27, provenance-discipline 2.34 -> 2.35.
@@ -1311,53 +1369,6 @@ manifest's version, without loading it.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.112 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.114 (October 26, 2026): No rule changed in this document. THREE
-skill bumps, one version each (L-443, slice 2, build B part 2):
-interactive-exhibit 1.25 -> 1.26, horizons-orbital-mechanics 1.11 ->
-1.12, gallery-cache-builder 1.12 -> 1.13. THE COMETS ON OPEN PATHS;
-ONE JPL CLASS TO A DRAWER ROW; JPL'S TERMS KEPT AND EXPLAINED.
-
-WHAT PROMPTED IT. Build B's second part, the comets, from
-documentation/HANDOFF_L443_slice2_buildB_spacecraft_20261025.md section
-6, and Tony's rulings of Oct 26 in chat: the class check's split, "Split
-with asteroids in the correct order among the planets"; on the comets'
-words, "I don't want to drop JPL's words, Ellipse, Predicted,
-hyperbolic, perihelion, aphelion, etc. We should keep these correct
-words and explain them when they should be explained"; and "Yes on all
-and bring the sourcing into the ledger and into this slice," which made
-L-491 (the comet nucleus sizes).
-
-WHAT CHANGED. interactive-exhibit: the comets on open paths in the
-Solar System room, the groups one JPL class to a row, the orbit line's
-new words, a name keyed with an underscore shown with a space, and
-JPL's terms kept and explained under Hover text is written for the
-visitor. horizons-orbital-mechanics: A Comet on an Open Path, under How
-a Path's Events Are Found, and two lines on the Horizons check (an
-entry asked by JPL's number; a path serves no period).
-gallery-cache-builder: a comet on an open path is a path body. Each
-skill's oldest of four version entries moved to
-documentation/SKILL_HISTORIES.md, by the three-entry rule.
-
-THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
-that session. The next session confirms its loaded copies read
-interactive-exhibit 1.26, horizons-orbital-mechanics 1.12 and
-gallery-cache-builder 1.13 before work that fires them. This session
-confirmed its loaded copies of gallery-cache-builder 1.12 (discharging
-that part of v3.113's obligation), gallery-assembler 1.3,
-agentic-pre-test 1.3, ledger-and-session-records 1.22 and
-safe-file-editing 1.14 (discharging that part), as the manifest
-expected. It worked from the repo's copies of interactive-exhibit 1.25
-and horizons-orbital-mechanics 1.11, at the manifest's versions, by
-Tony's instruction to go by the manifest; it did not load them, so
-v3.113's obligation for those two is not discharged and passes to the
-1.26 and 1.12 above.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.111 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

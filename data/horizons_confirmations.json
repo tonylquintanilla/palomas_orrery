@@ -373,7 +373,17 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=9&group=mb&format=text",
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=9&group=sb&format=text"
       ],
-      "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)"
+      "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)",
+      "period": {
+        "confirmed": "2026-10-28",
+        "center": "@0",
+        "target": "9",
+        "epoch": "2026-10-28 20:36",
+        "days": 90578.39025812282,
+        "error_days": 0.31426049568108283,
+        "jpl_days": 90578.39025812282,
+        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='9'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@0'&TLIST='2461342.358333333'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
+      }
     },
     "ceres": {
       "confirmed": "2026-10-22",
@@ -656,11 +666,11 @@
         "confirmed": "2026-10-28",
         "center": "@0",
         "target": "2026 ED138",
-        "epoch": "2026-10-28 13:09",
-        "days": 103248.9414365557,
+        "epoch": "2026-10-28 14:53",
+        "days": 103248.9414310349,
         "error_days": 10.294,
-        "jpl_days": 103248.9414365557,
-        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='2026%20ED138%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@0'&TLIST='2461342.047916667'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
+        "jpl_days": 103248.9414310349,
+        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='2026%20ED138%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@0'&TLIST='2461342.120138889'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
       }
     },
     "asteroid_2025_pn7": {
@@ -1109,14 +1119,14 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2014%20MU69&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-28",
         "center": "@0",
         "target": "2014 MU69",
-        "epoch": "2026-10-22 20:37",
-        "days": 107374.0040195076,
+        "epoch": "2026-10-28 14:53",
+        "days": 107374.0052121068,
         "error_days": 36.584,
-        "jpl_days": 107374.0040195076,
-        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='2014%20MU69%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@0'&TLIST='2461336.359027778'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
+        "jpl_days": 107374.0052121068,
+        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='2014%20MU69%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@0'&TLIST='2461342.120138889'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
       }
     },
     "ixion": {
