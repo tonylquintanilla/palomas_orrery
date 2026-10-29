@@ -706,8 +706,101 @@ CHECKERS -- the verdict informs the push call
   Maintenance run, offline     ok
 
   NEXT:
-    1. GitHub Desktop: look at the change list, then commit and push.
+    1. GitHub Desktop: look at the change list, then commit and push. -- efc4ea8fd224f5b474acd7724e1378ea9d657036
     2. Then the dashboard's Gallery Maintenance Run -- live, AFTER a push.
+
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 52 files from https://palomasorrery.com/
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches (the working copy is CRLF)
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+    SERVED   gallery/arrival.js                             matches the working copy
+    SERVED   gallery/nav_cluster.js                         matches the working copy
+    SERVED   gallery/solar_system_figures.js                matches the working copy
+    SERVED   gallery/solar_system_drawer.js                 matches the working copy
+    SERVED   data/objects_config.json                       matches the working copy
+    SERVED   gallery/guestbook.js                           matches the working copy
+    SERVED   data/guestbook.json                            matches the working copy
+    SERVED   data/solar-system/drawings/hills_cloud.json    matches the working copy
+    SERVED   data/solar-system/drawings/van_allen_belts.json matches the working copy
+    SERVED   data/solar-system/drawings/earth_exosphere.json matches the working copy
+    SERVED   data/solar-system/drawings/sun_corona.json     matches the working copy
+    SERVED   data/solar-system/drawings/zodiacal_dust.json  matches the working copy
+    SERVED   data/solar-system/drawings/outer_oort_cloud.json matches the working copy
+    SERVED   data/solar-system/drawings/galactic_tide.json  matches the working copy
+    SERVED   gallery/source_list.js                         matches the working copy
+    SERVED   gallery/far_lines.js                           matches the working copy
+    SERVED   gallery/direction_arrows.js                    matches the working copy
+    SERVED   gallery/drawer_order.js                        matches the working copy
+    SERVED   gallery/text_box.js                            matches the working copy
+    SERVED   data/solar-system/positions/voyager_2.json     matches the working copy
+    SERVED   data/solar-system/positions/new_horizons.json  matches the working copy
+    SERVED   data/solar-system/positions/juno.json          matches the working copy
+    SERVED   data/solar-system/positions/osiris_apex.json   matches the working copy
+    SERVED   data/solar-system/positions/parker_solar_probe.json matches the working copy
+    SERVED   data/solar-system/positions/bepicolombo.json   matches the working copy
+    SERVED   data/solar-system/positions/solar_orbiter.json matches the working copy
+    SERVED   data/solar-system/positions/lucy.json          matches the working copy
+    SERVED   data/solar-system/positions/juice.json         matches the working copy
+    SERVED   data/solar-system/positions/psyche_spacecraft.json matches the working copy
+    SERVED   data/solar-system/positions/europa_clipper.json matches the working copy
+    SERVED   data/solar-system/positions/wierzchos.json     matches the working copy
+    SERVED   data/solar-system/positions/west.json          matches the working copy
+    SERVED   data/solar-system/positions/mcnaught.json      matches the working copy
+    SERVED   data/solar-system/positions/tsuchinshan_atlas.json matches the working copy
+    SERVED   data/solar-system/positions/atlas_2024_g3.json matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1.json      matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1_b.json    matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1_c.json    matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1_d.json    matches the working copy
+    SERVED   data/solar-system/positions/panstarrs_2025_r3.json matches the working copy
+    SERVED   data/solar-system/positions/borisov_2025_v1.json matches the working copy
+    SERVED   data/solar-system/positions/oumuamua.json      matches the working copy
+    SERVED   data/solar-system/positions/borisov_2i.json    matches the working copy
+    SERVED   data/solar-system/positions/atlas_3i.json      matches the working copy
+
+  PASS Served reachability       7.6s  all 52 files served and
+                                    byte-identical to the working copy
+
+  orrery export pinned at 090f3a7b
+
+  PASS Export freshness          0.3s  the served export is the orrery's
+                                    at 090f3a7b, byte for byte
+
+  orrery HEAD c143f73b
+  examining 3 of 173 links; the other 170 are served from the export
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  3 pointers: 1 match, 0 DRIFT, 0 UNIT MISMATCH, 2 could not be examined.
+
+  PASS Store drift               1.9s  3 pointers against orrery c143f73b
+                                    -- 1 match, 0 DRIFT, 0 UNIT
+                                    MISMATCH, 2 could not be examined.
+
+======================================================================
+  2 of 2 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Store drift            3 pointers against orrery c143f73b -- 1
+  last swap 2026-10-29T03:53:00.621738+00:00: succeeded after a refused rename -- staging_to_live took 2 attempts -- a refusal this build absorbed
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
 ======================================================================
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
@@ -721,4 +814,37 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 - (do) When you like: the guest book form's description says a message is reviewed for the lobby, but a problem report is not. -- i think that is the intent
 - (decide) Nothing pending.
 
+=========================================================================
 
+**Fable Review:**
+
+Let me check both repositories against the SHAs in your record before suggesting the look.
+
+Both pushes landed where your record says: orrery at 090f3a7b, gallery at c9eb03a9. One thing is still on your computer only: the Daily Run you ran at 22:50 rebuilt the cache and pulled Pluto's year, and that build is not committed yet. So Pluto's year is not on the website until the gallery's next push.
+
+**Mode 5, the orrery (you can do this now, nothing to push first)**
+
+Open the orrery with the Run button, tick the main asteroid belt, and plot. Look for:
+- A cloud, not a ring: it should start just inside Mars's orbit (1.67 AU) and thin out past 4 AU, dense between about 2.2 and 3.5 AU. -- perfect
+- Thickness: about 1.3 AU top to bottom, most dots near the plane, a few well above and below. -- yes
+- The hover: it should say the dots show the belt's extent measured from 5,429 of JPL's orbits, not asteroids, with JPL's class edges (2.0 to 3.2 AU, perihelion beyond 1.666 AU). -- yes
+- The opening view frames the belt at about 5.1 AU. -- not measured, but within jupiter's orbit at about 5.3 au
+- In the Kuiper Belt menu, 2026 ED138 sits between Varuna and Haumea. -- yes
+- Pluto's hover prints its year, about 248.0 years. -- in the orrery objects list, the pluto-charon barycenter has no hover information, and pluto has no hover at all. but plotting pluto, the hover says "Orbital period: 250 years (92,000 days)". is this as intended?
+
+Your eyes also judge whether it is beautiful: does it read as the belt you know from pictures, or as noise? -- it's beautiful!
+
+**Mode 5, the website (after the gallery push and the live run)**
+
+- Pluto's text box prints its year, about 248.0 years, where it said "not yet fetched". That is the only change a visitor sees tonight; the belt reaches the website in the gallery session (L-503 (the belt on the website)). -- yes, "Orbital period: 247.990 years (90,578 days), around the solar system's center of mass, from JPL...."
+
+**Next steps, in order**
+
+1. GitHub Desktop, gallery: look at the change list (changed and added files, no pile of deletions), commit and push the Daily Run's build. The swap took two tries tonight; the builder absorbed it, nothing to do.
+2. The dashboard's live run, after the push. -- done
+3. Your two looks above. -- perfect
+4. Then I write the gallery Code prompt (L-399, then L-502, then L-503). It waits for step 1 because a Code session stops if the folder does not match GitHub, and right now it does not. -- all pushed
+
+On the guest book form: your "that is the intent" closes that note as by design; the gallery session records it on L-458 (report a problem). -- yes, the problem report is not published only guest book entries are published. i believe the form says that. 
+
+Please send me the gallery's SHA after the push.  -- efc4ea8fd224f5b474acd7724e1378ea9d657036
