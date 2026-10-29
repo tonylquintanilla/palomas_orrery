@@ -597,8 +597,8 @@ Here is where you are, then the paste for Code.
 
 **Your do steps, in order**
 
-1. Done: the Daily Run after build 1, copied to your run record. -- done
-2. Now: paste the reply below into the gallery Code session. It answers the belt question and carries this morning's rulings. Code then does build 3 and the records. -- done 
+1. Done: the Daily Run after build 1, copied to your run record. -- 963500ca8bb1ebf324ff3cab47b6f1fa1dde4dc1
+2. Now: paste the reply below into the gallery Code session. It answers the belt question and carries this morning's rulings. Code then does build 3 and the records. -- 
 3. When Code's final report comes, paste it to me before you commit anything; I check it against GitHub.
 4. The Daily Run again, for build 3 (it pulls the belt's drawing and rebuilds the cache).
 5. GitHub Desktop: commit and push the gallery; then the orrery (the ledger, Where We Are, your run record, the two door files, and the cache your Pluto plot refreshed).
