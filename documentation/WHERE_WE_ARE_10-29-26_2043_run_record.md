@@ -131,7 +131,7 @@ Not urgent, in your order:
 
 **Tony**: Run record:
 
-**Session: OPEN: 10-29-26 1754: Fable: Gallery repository coordination**
+**Session: DONE: 10-29-26 2248: Fable: Gallery repository coordination**
 
 The brief for the orrery session is in your documentation folder and confirmed by size: `COORD_orrery_clock_session_brief_20261029.md`, 16,509 bytes.
 
@@ -551,5 +551,22 @@ Restored sash positions: [489, 1013]
 
   The protocol is at v3.118 with the four skills at their new versions in the manifest (interactive-exhibit 1.29, gallery-cache-builder 1.14, horizons-orbital-mechanics 1.13, provenance-discipline 2.36); its entry carries the obligation for the next session that loads skills from your account. -- done
 
-1. One line in your run record for the gallery session (`WHERE_WE_ARE_10-29-26_1818_run_record.md`): your 20:11 look, "ED138 to the hundred-thousand km with no sentence; the triad small and low: Correct". Code closed the two items on my account of it; your own line makes the record whole. It can go with tomorrow's push.
-2. Send me the orrery's SHA. I'll confirm it and write the coordination handoff for Oct 29-30, which closes this coordinating session; tomorrow's Daily Run and the gallery's push come after it. -- question, will tomorrow's daily run be 
+1. One line in your run record for the gallery session (`WHERE_WE_ARE_10-29-26_1818_run_record.md`): your 20:11 look, "ED138 to the hundred-thousand km with no sentence; the triad small and low: Correct". Code closed the two items on my account of it; your own line makes the record whole. It can go with tomorrow's push. -- done
+2. Send me the orrery's SHA. I'll confirm it and write the coordination handoff for Oct 29-30, which closes this coordinating session; tomorrow's Daily Run and the gallery's push come after it. 
+
+===============================================================================
+
+**Fable:**
+
+The handoff is placed and confirmed: `HANDOFF_coordination_20261029_30.md` in the orrery's documentation folder, 12,729 bytes, matching the copy here. It anchors at orrery 8bd472e0 and gallery b55109f2, carries tonight's rulings with where each is recorded, the state at HEAD, the findings for the next gallery session (including Code's notes on the shared link and my answers to its two blockers), and the queue with L-485 (a nightly run) first.
+
+Where this leaves us, in the handoff's own words: L-399 and L-502 are closed on your look; the orrery reads its clock as UTC and asks JPL fresh, with the later slices waiting beside the road; Pluto agrees on both instruments; the belt's kilometres are exported and the website prints them next. Next is the nightly run, orrery half then gallery half, with the small website items riding the gallery half so L-503 closes with it.
+
+Your dos, none tonight:
+
+- Tomorrow morning: the Daily Run, then commit and push the gallery and send me the SHA. Its pulls will name the export and `data/objects_config.json` as changed; that is expected.
+- Commit this handoff with the next orrery push.
+- Reinstall the four skills, if not yet. -- done
+- One line in the gallery session's run record with your 20:11 look. -- done
+
+Good session. The next coordinating session opens with this handoff and your latest run record.

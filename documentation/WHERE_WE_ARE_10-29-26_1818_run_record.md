@@ -799,6 +799,9 @@ LIVE -- what the deployed site actually serves
 C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 
 5. Phone looks: ED138 to the million km with no "not yet included" line; 
+
+   One line in your run record for the gallery session (`WHERE_WE_ARE_10-29-26_1818_run_record.md`): your 20:11 look, "ED138 to the hundred-thousand km with no sentence; the triad small and low: Correct". Code closed the two items on my account of it; your own line makes the record whole. It can go with tomorrow's push.
+
 6. the triad, thumb test, in all three rooms. 
 7. Close the saved page first so the phone fetches the new files.
 8. Send me both SHAs.
