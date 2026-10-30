@@ -1,0 +1,100 @@
+# .github/workflows/nightly.yml -- the orrery's nightly run (L-485).
+#
+# What it is. GitHub's computers run the orrery's night set every night,
+# with nobody at the keyboard: the 30-day JPL checks and the exports the
+# website pulls, then the checkers that gate them. On a clean night it
+# commits the data files those tools wrote, and nothing else, and pushes
+# them. Tony's rulings of 2026-10-25, in
+# documentation/DESIGN_L485_nightly_run_rulings_20261025.md: R1, the
+# checkers are the gate and the commit touches only what the tools
+# write; R2, the 30-day checks run inside it; R3, it runs on GitHub's
+# computers; R4, an outside failure is reported, never halting.
+#
+# The gate is the maintenance run's own. `orrery_maintenance_run.py
+# --night` exits 0 only on a clean night: every night checker passed,
+# every night tool ran (one that could not reach JPL is reported, not
+# red), nothing changed outside the allow-list, and every changed file
+# is ASCII. Any other exit fails this job before the commit step, so a
+# red night commits nothing and the previous data stays live. The log of
+# every run, red or clean, is kept under the repository's Actions tab.
+#
+# Fire it by hand: the Actions tab, "Nightly run", "Run workflow".
+#
+# Written October 30, 2026 with Anthropic's Claude Opus 5.5 (L-485, the
+# orrery half; the website's own workflow, an hour later, is the gallery
+# half).
+
+name: Nightly run
+
+on:
+  schedule:
+    # 07:17 UTC every day: 2:17 am in Chicago until the clocks change on
+    # November 1, 2026, 1:17 am after. The hour is Tony's (2026-10-29,
+    # 23:36: the orrery at 7 UTC, the website at 8 UTC). The minute is
+    # off the hour because GitHub's documentation says "High load times
+    # include the start of every hour" and "schedule your workflow to run
+    # at a different time of the hour".
+    - cron: '17 7 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write   # commit and push the night's data files
+  actions: write    # the keep-alive step below re-enables this workflow
+
+jobs:
+  night:
+    # Named, not ubuntu-latest: GitHub's image page says ubuntu-latest
+    # moves to Ubuntu 26.04 in November 2026, and a new system under a
+    # run in its first week would be a second thing changing at once.
+    runs-on: ubuntu-24.04
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v7
+
+      - name: Set up Python 3.13 (requirements.txt's recommended version)
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.13'
+
+      - name: Install the orrery's libraries
+        run: python -m pip install -r requirements.txt
+
+      - name: The night set (orrery_maintenance_run.py --night)
+        run: python orrery_maintenance_run.py --night
+
+      - name: Commit and push the night's data files
+        run: |
+          # Only the allow-list is added, read from the runner itself, so
+          # the list has one home: the night tools' declared outputs and
+          # data/nightly_run_record.json.
+          allowed=$(python -c "import orrery_maintenance_run as m; print('\n'.join(m.night_allow_list(m.night_rows()[0])))" | tr -d '\r')
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          echo "$allowed" | while read -r path; do
+            if [ -e "$path" ]; then git add -- "$path"; fi
+          done
+          if git diff --cached --quiet; then
+            echo "NIGHT COMMIT: nothing changed, nothing committed"
+            exit 0
+          fi
+          files=$(git diff --cached --name-only | tr '\n' ' ')
+          day=$(date -u +%Y-%m-%d)
+          git commit -m "Nightly run $day UTC: $files" \
+                     -m "Written by .github/workflows/nightly.yml (L-485): the night set ran clean, and these are the files its tools wrote."
+          git push
+          echo "NIGHT COMMIT: pushed $(git rev-parse HEAD): $files"
+
+      # The keep-alive (L-490, the legacy list). GitHub's documentation:
+      # "In a public repository, scheduled workflows are automatically
+      # disabled when no repository activity has occurred in 60 days." It
+      # does not say what counts as activity, so this run does not lean
+      # on its own commits counting. Each night, clean or red, it asks
+      # GitHub to enable this workflow. Whether that resets GitHub's
+      # count is not written down either; and a workflow already paused
+      # does not run, so it cannot revive itself. Both facts are on L-490.
+      - name: Keep the schedule alive (L-490)
+        if: always()
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: gh workflow enable nightly.yml

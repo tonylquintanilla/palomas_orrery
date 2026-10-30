@@ -79,7 +79,9 @@ WHAT IT CHECKS
        a full record, and fails, by name, on a confirmation deleted, one
        overdue, one whose horizons_name changed, a period never
        confirmed, today's run UNREACHABLE, and a sheet a row quotes that
-       no longer gives the row's figure.
+       no longer gives the row's figure. Its night form (--night, L-485)
+       reports today's UNREACHABLE and passes, and still fails when a
+       confirmation has lapsed.
 
 RUN COMMAND
 
@@ -110,6 +112,9 @@ the comets: C/2025 K1, asked by JPL's number for it, agrees on JPL's two
 Lookup answers for 1004075, fetched that day and kept in K1_LOOKUP; the
 check before this change found it in neither index. Planted: the same
 comet under another name disagrees.)
+Module updated: October 30, 2026 with Anthropic's Claude Opus 5.5 (L-485:
+two checks of the offline checker's night form, an outage reported and
+an outage with a lapsed confirmation still red.)
 """
 
 import datetime
@@ -688,6 +693,32 @@ def main():
                         lambda d: d.update(verdict="UNREACHABLE",
                                            unasked=["venus's identity"]),
                         "UNREACHABLE", target=last_path, base=last)
+        # L-485, R4: the night run's form reports the same outage and
+        # passes, while a confirmation truly lapsed still fails it, so an
+        # outage turns a night red only once something is 30 days old.
+        down = dict(last, verdict="UNREACHABLE", unasked=["venus's identity"])
+        with open(last_path, "w") as handle:
+            json.dump(down, handle)
+        out = []
+        code = offline.run(tmp, later, echo=out.append, night=True)
+        t.check(code == 0 and any(s.startswith("REPORTED, not red")
+                                  for s in out),
+                "the night run: today's UNREACHABLE reported, not red: "
+                "exit %d" % code)
+        lapsed = json.loads(json.dumps(good))
+        lapsed["objects"]["saturn"]["confirmed"] = str(
+            later - datetime.timedelta(days=hc.CADENCE_DAYS))
+        with open(path, "w") as handle:
+            json.dump(lapsed, handle)
+        out = []
+        code = offline.run(tmp, later, echo=out.append, night=True)
+        t.check(code == 1 and any("saturn: confirmed on" in s for s in out),
+                "the night run: an outage with a confirmation lapsed fails, "
+                "naming it: exit %d" % code)
+        with open(path, "w") as handle:
+            json.dump(good, handle)
+        with open(last_path, "w") as handle:
+            json.dump(last, handle)
         sheets_path = os.path.join(tmp, hc.SHEETS)
         sheet_base = hc.load_sheets(sheets_path)
         planted_offline("a sheet whose figure no longer matches its row",

@@ -21,6 +21,7 @@ WHY THIS EXISTS
 RUN COMMAND
 
     python check_horizons_confirmations.py
+    python check_horizons_confirmations.py --night   (the night run's form)
 
     Open it in VS Code and click Run. orrery_maintenance_run.py runs it
     among the checkers, after the Horizons check and the objects export,
@@ -40,6 +41,14 @@ WHAT MAKES IT FAIL, NAMED BY ENTRY
       (option A, ruled 2026-10-12)
     - a record that cannot be read
 
+    THE NIGHT RUN (L-485, R4: an outside failure is reported, never
+    halting). With --night, which orrery_maintenance_run.py --night
+    passes, today's UNREACHABLE is printed as REPORTED and is not red:
+    what JPL left unasked is renewing, day 25 to 29, and passes. A
+    confirmation that has truly lapsed, day 30, still fails by name, so
+    only five nights running without JPL turn the night red, and then
+    that is the true finding. A disagreement stays red on every run.
+
     It uses horizons_check.py's own rules, so the two cannot disagree
     about what is due. It names the periods it does not compare -- typed,
     or not yet fetched, which the website marks as not from JPL -- and
@@ -58,6 +67,9 @@ Module updated: October 29, 2026 with Anthropic's Claude Opus 5.5 (L-504:
 today is the UTC day, from utc_clock, as horizons_check.py dates its
 confirmations; read from the local clock, an evening run in Chicago saw
 tonight's confirmations as dated after today.)
+Module updated: October 30, 2026 with Anthropic's Claude Opus 5.5 (L-485,
+the nightly run: --night reports an unreached JPL instead of failing on
+it, by Tony's ruling R4; a lapsed confirmation still fails.)
 """
 
 import datetime
@@ -70,7 +82,7 @@ import export_objects
 import horizons_check as hc
 
 
-def run(root, today, echo=print):
+def run(root, today, echo=print, night=False):
     try:
         objects, _sha, spacecraft = hc.current_entries(root)
         confirmations = hc.load_confirmations(os.path.join(root,
@@ -132,7 +144,15 @@ def run(root, today, echo=print):
         if last.get("date") == today.isoformat():
             echo("Today's Horizons check: %s, %s due, %s queries asked."
                  % (last.get("verdict"), last.get("due"), last.get("asked")))
-            if last.get("verdict") == "UNREACHABLE":
+            if last.get("verdict") == "UNREACHABLE" and night:
+                # L-485, R4: on the night run an outage is reported, not
+                # red. What it leaves unasked is renewing (day 25 to 29)
+                # and still passes; anything that has truly lapsed fails
+                # above, by name, as on any other day.
+                echo("REPORTED, not red (the night run, R4): JPL could not "
+                     "be reached today; still due: %s"
+                     % ", ".join(last.get("unasked") or []))
+            elif last.get("verdict") == "UNREACHABLE":
                 failures.append("UNREACHABLE: JPL could not be reached "
                                 "today; still due: %s"
                                 % ", ".join(last.get("unasked") or []))
@@ -172,10 +192,10 @@ def run(root, today, echo=print):
     return 0
 
 
-def main():
+def main(argv=()):
     root = os.path.dirname(os.path.abspath(__file__))
-    return run(root, utc_clock.utc_today())
+    return run(root, utc_clock.utc_today(), night="--night" in argv)
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    sys.exit(main(sys.argv[1:]))

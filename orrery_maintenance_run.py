@@ -16,6 +16,21 @@ Open this file in VS Code and click Run. It takes no arguments.
 
 Run it after any edit session and before a push.
 
+    python orrery_maintenance_run.py --night
+
+The night set (L-485), which GitHub's computers run every night from
+.github/workflows/nightly.yml; Tony does not need to run it. It runs
+only the rows NIGHT_ROWS names -- the tools that write the data the
+website pulls, and the checkers that gate those files -- and prints
+every other row as skipped, with its reason. Its exit code is 0 only on
+a clean night: every night checker passed; every night tool ran, a tool
+that could not reach JPL being reported and not red (Tony's ruling R4);
+nothing changed outside the night's allow-list, which is the night
+tools' declared outputs and data/nightly_run_record.json; and every
+changed file is ASCII. A clean night writes that record, which the
+dashboard reads; a red night writes nothing and names every reason in
+its last line, "NIGHT RUN: RED -- ...".
+
 WHAT IT DOES
 ------------
 Runs the GENERATORS, then the CHECKERS, and prints one summary at
@@ -107,7 +122,8 @@ moves.
 
 EXIT CODE
 ---------
-0 when every checker passed, 1 when any failed. The generators do not
+0 when every checker passed, 1 when any failed. With --night, the night's
+own verdict above. The generators do not
 affect it -- a regenerated file is the normal case, not a problem.
 Report-only tools take part: a non-zero exit from one of them means it
 could not run, which is a failure and not a finding.
@@ -260,6 +276,12 @@ test_path_plan.py.)
 Module updated: October 28, 2026 with Anthropic's Claude Opus 5.5 (L-443:
 Drawings export also writes data/drawings/main_belt.json, the main
 asteroid belt.)
+Module updated: October 30, 2026 with Anthropic's Claude Opus 5.5 (L-485,
+the nightly run, the orrery half: --night runs the night set, NIGHT_ROWS,
+names every row it skips and why, and judges the night by night_gate():
+its checkers, its tools, the allow-list and ASCII. A clean night writes
+data/nightly_run_record.json. Horizons confirmations runs with --night,
+so an unreached JPL is reported, not red, until a confirmation lapses.)
 """
 
 import hashlib
@@ -500,6 +522,214 @@ CHECKERS = [
 ]
 
 TOOL_TIMEOUT_SECONDS = 900
+
+
+# ============================================================
+# THE NIGHT SET (L-485)
+# ============================================================
+#
+# `python orrery_maintenance_run.py --night` is what GitHub's computers
+# run every night (.github/workflows/nightly.yml). It is this runner,
+# not a second one: the rows below are the tables above, named by their
+# labels, and every other row is SKIPPED, by name, with its reason
+# printed. Tony's rulings of 2026-10-25 (documentation/DESIGN_L485_
+# nightly_run_rulings_20261025.md): R1, the checkers gate the nightly
+# commit and it touches only what the tools write; R2, the 30-day checks
+# run inside it; R4, an outside failure is reported, never halting.
+
+# The night's rows, by label. P2: the tools that write data the website
+# pulls, and the checkers that gate those files, need no window and
+# judge no code. They run in table order.
+NIGHT_ROWS = (
+    'Constants export', 'Period fetch', 'Horizons check', 'Path plan',
+    'Objects export', 'Drawings export',
+    'Constants export check', 'Objects export check',
+    'Horizons confirmations', 'Horizons check suite', 'Period fetch suite',
+    'Path plan suite', 'Orbit cache', 'Drawings export check',
+)
+
+# A night row run with other arguments than by day. An outage is
+# reported at night, not red, unless a confirmation has lapsed (R4).
+NIGHT_ARGS = {
+    'Horizons confirmations': ['check_horizons_confirmations.py',
+                               '--night'],
+}
+
+# Why a row is not run at night. A row named here gets its own reason;
+# every other skipped row gets its kind's. Both print on every night run.
+NIGHT_SKIP_WHY = {
+    'Reset completeness': "opens the orrery's window",
+    'Constants change': 'reads a git diff of code, and at night no code '
+                        'changes',
+    'Provenance scanner': "judges code; its push gate runs at Tony's push",
+    'Dashboard parity': "judges the dashboard's code",
+}
+NIGHT_SKIP_GENERATOR = ('writes a document, not data the website pulls; '
+                        'the night commits data only (R1)')
+NIGHT_SKIP_CHECKER = 'judges code, and at night no code changes'
+
+# The one record the night writes, on a clean night only, so the copy
+# GitHub holds is always the last clean run's. The dashboard reads it.
+NIGHT_RECORD = 'data/nightly_run_record.json'
+
+# A night tool that could not reach JPL says so in its verdict line. Its
+# row is then reported, not red (R4).
+NIGHT_UNREACHABLE = 'UNREACHABLE'
+
+
+def night_rows():
+    """(generators, checkers, skipped) for the night, from the tables.
+
+    Raises ValueError naming any NIGHT_ROWS label no table carries, so a
+    renamed row cannot drop out of the night silently.
+    """
+    labels = [row[0] for row in GENERATORS] + [row[0] for row in CHECKERS]
+    unknown = [label for label in NIGHT_ROWS if label not in labels]
+    if unknown:
+        raise ValueError('NIGHT_ROWS names rows no table carries: %s'
+                         % ', '.join(unknown))
+    gens = [row for row in GENERATORS if row[0] in NIGHT_ROWS]
+    checks = []
+    for row in CHECKERS:
+        if row[0] in NIGHT_ROWS:
+            if row[0] in NIGHT_ARGS:
+                row = (row[0], NIGHT_ARGS[row[0]]) + tuple(row[2:])
+            checks.append(row)
+    skipped = []
+    for row in GENERATORS:
+        if row[0] not in NIGHT_ROWS:
+            skipped.append((row[0], NIGHT_SKIP_WHY.get(
+                row[0], NIGHT_SKIP_GENERATOR)))
+    for row in CHECKERS:
+        if row[0] not in NIGHT_ROWS:
+            skipped.append((row[0], NIGHT_SKIP_WHY.get(
+                row[0], NIGHT_SKIP_CHECKER)))
+    return gens, checks, skipped
+
+
+def night_allow_list(gens):
+    """The files the night may commit: its generators' outputs, and its
+    record. Read from the tables, so the list has one home."""
+    allowed = []
+    for row in gens:
+        allowed.extend(row[2])
+    allowed.append(NIGHT_RECORD)
+    return allowed
+
+
+def git_changed_paths(project_dir):
+    """Every path git sees as changed or new, or raises RuntimeError.
+
+    Untracked files count: a tool that makes a new file has written
+    something the night did not declare.
+    """
+    try:
+        done = subprocess.run(
+            ['git', 'status', '--porcelain=v1', '-z',
+             '--untracked-files=all'],
+            cwd=project_dir, stdout=subprocess.PIPE,
+            stderr=subprocess.PIPE, timeout=120)
+    except (OSError, subprocess.TimeoutExpired) as exc:
+        raise RuntimeError('could not run git status: %s' % exc)
+    if done.returncode != 0:
+        raise RuntimeError('git status exited %d: %s' % (
+            done.returncode, done.stderr.decode('utf-8', 'replace').strip()))
+    paths = []
+    fields = done.stdout.decode('utf-8', 'replace').split('\0')
+    i = 0
+    while i < len(fields):
+        entry = fields[i]
+        i += 1
+        if len(entry) < 4:
+            continue
+        status, path = entry[:2], entry[3:]
+        paths.append(path)
+        if 'R' in status or 'C' in status:
+            i += 1      # -z prints a rename's old path as its own field
+    return paths
+
+
+def night_gate(project_dir, results, gens, changed=None):
+    """The night's verdict: (problems, reported, inside).
+
+    problems  -- every reason the night commits nothing, by name
+    reported  -- night generators that could not reach JPL (R4: not red)
+    inside    -- the allowed files git sees changed
+
+    Four tests. Every night checker passed. Every night generator ran
+    and either passed or could not reach JPL. Git sees nothing changed
+    outside the allow-list. Every changed file is ASCII (the record is
+    written after this, by json with ensure_ascii, so it is too).
+    `changed` stands in for git's list in test_maintenance_report.py.
+    """
+    problems, reported = [], []
+    for row in results:
+        label, rc, note, is_checker = row[0], row[1], row[3], row[5]
+        if rc is None:
+            problems.append('%s did not run' % label)
+        elif rc == 0:
+            continue
+        elif not is_checker and NIGHT_UNREACHABLE in note:
+            reported.append(label)
+        elif is_checker:
+            problems.append('%s failed' % label)
+        else:
+            problems.append('%s exited %d' % (label, rc))
+    allowed = night_allow_list(gens)
+    if changed is None:
+        try:
+            changed = git_changed_paths(project_dir)
+        except RuntimeError as exc:
+            problems.append('the changed files could not be read: %s' % exc)
+            changed = []
+    for path in changed:
+        if path not in allowed:
+            problems.append('changed outside the allow-list: %s' % path)
+    inside = [path for path in changed if path in allowed]
+    for path in inside:
+        full = os.path.join(project_dir, path)
+        if not os.path.exists(full):
+            problems.append('removed, which the night never does: %s'
+                            % path)
+            continue
+        with open(full, 'rb') as handle:
+            data = handle.read()
+        bad = sum(1 for byte in data if byte > 127)
+        if bad:
+            problems.append('%s holds %d non-ASCII byte(s)' % (path, bad))
+    return problems, reported, inside
+
+
+def write_night_record(project_dir, results, skipped, reported):
+    """The last clean night, for the dashboard and for GitHub's copy."""
+    import json
+    import utc_clock    # L-504: the clock read as UTC
+    run_url = None
+    if os.environ.get('GITHUB_RUN_ID'):
+        run_url = '%s/%s/actions/runs/%s' % (
+            os.environ.get('GITHUB_SERVER_URL', 'https://github.com'),
+            os.environ.get('GITHUB_REPOSITORY', ''),
+            os.environ['GITHUB_RUN_ID'])
+    body = {
+        '_comment': 'Written by orrery_maintenance_run.py --night on a '
+                    'clean night only (L-485), so this is the last clean '
+                    'run. The dashboard reads it. A red night writes '
+                    "nothing: its record is the run's log on GitHub.",
+        'schema': 1,
+        'clean_run_utc': utc_clock.utc_stamp(),
+        'where': ('GitHub Actions' if os.environ.get('GITHUB_ACTIONS')
+                  else 'a local run'),
+        'run_log': run_url,
+        'reported_not_red': reported,
+        'rows': [{'row': row[0],
+                  'kind': 'checker' if row[5] else 'generator',
+                  'verdict': row[3]} for row in results],
+        'skipped': [{'row': label, 'why': why} for label, why in skipped],
+    }
+    text = json.dumps(body, indent=2, ensure_ascii=True) + '\n'
+    with open(os.path.join(project_dir, NIGHT_RECORD), 'w',
+              encoding='ascii', newline='') as handle:
+        handle.write(text)
 
 
 # ============================================================
@@ -828,12 +1058,18 @@ def staleness_report(project_dir):
 # MAIN
 # ============================================================
 
-def main():
+def main(argv=None):
+    argv = sys.argv[1:] if argv is None else argv
+    night = '--night' in argv
     project_dir = os.path.dirname(os.path.abspath(__file__))
     os.chdir(project_dir)
 
     print('=' * 70)
-    print('MAINTENANCE RUN -- generators, then checkers (L-188)')
+    if night:
+        print('MAINTENANCE RUN, THE NIGHT SET -- its generators, then its '
+              'checkers (L-485)')
+    else:
+        print('MAINTENANCE RUN -- generators, then checkers (L-188)')
     print('=' * 70)
 
     # Bracketed around the whole suite, so the report covers every
@@ -845,6 +1081,23 @@ def main():
         print('  ' + line)
     print()
 
+    # ---- the night set (L-485): which rows run, and why the rest do not
+    generators, checkers_table, skipped = GENERATORS, CHECKERS, []
+    if night:
+        try:
+            generators, checkers_table, skipped = night_rows()
+        except ValueError as exc:
+            print('NIGHT RUN: RED -- %s' % exc)
+            return 1
+        print('THE NIGHT SET -- %d rows run, %d skipped (each named)'
+              % (len(generators) + len(checkers_table), len(skipped)))
+        print('-' * 70)
+        for label, why in skipped:
+            for i, piece in enumerate(wrapped('%s -- %s' % (label, why),
+                                              66)):
+                print(('  skipped ' if i == 0 else ' ' * 10) + piece)
+        print()
+
     # (label, rc, seconds, note, output, is_checker[, report_only])
     # Checker rows carry the seventh field; generator rows stop at six.
     # Read it with a length guard, never by unpacking a fixed width.
@@ -853,7 +1106,7 @@ def main():
     # ---- generators ---------------------------------------------------
     print('GENERATORS -- regenerate every time; a no-op when nothing moved')
     print('-' * 70)
-    for entry in GENERATORS:
+    for entry in generators:
         # An optional fourth field is a verdict hint, as on a checker row
         # (L-322 Stage D, patch D12). Read with a length guard.
         label, argv_tail, outputs = entry[0], entry[1], entry[2]
@@ -893,7 +1146,7 @@ def main():
     # ---- checkers -----------------------------------------------------
     print('CHECKERS -- verdict informs the push call')
     print('-' * 70)
-    for entry in CHECKERS:
+    for entry in checkers_table:
         label, argv_tail, hint = entry[0], entry[1], entry[2]
         report_only = entry[3] if len(entry) > 3 else False
         rc, output, seconds = run_tool(project_dir, argv_tail)
@@ -970,8 +1223,42 @@ def main():
         print('-' * 70)
         print(output.rstrip())
 
+    if night:
+        return night_verdict(project_dir, results, generators, skipped)
     return 1 if failed else 0
 
 
+def night_verdict(project_dir, results, generators, skipped):
+    """The night's last lines, and its exit code: 0 only on a clean night.
+
+    Printed last, so it is the last thing in GitHub's log. A clean night
+    writes the record; a red one writes nothing and names every reason.
+    """
+    problems, reported, inside = night_gate(project_dir, results,
+                                            generators)
+    print()
+    print('=' * 70)
+    for label in reported:
+        print('  REPORTED, not red (R4): %s could not reach JPL; it keeps '
+              'what it had' % label)
+    if problems:
+        print('  The night commits nothing, for %d reason(s):'
+              % len(problems))
+        for line in problems:
+            for i, piece in enumerate(wrapped(line, 64)):
+                print(('    - ' if i == 0 else '      ') + piece)
+        print('NIGHT RUN: RED -- %s' % '; '.join(problems))
+        print('=' * 70)
+        return 1
+    write_night_record(project_dir, results, skipped, reported)
+    print('  wrote %s, the last clean run' % NIGHT_RECORD)
+    print('  allowed files changed: %s'
+          % (', '.join(inside) if inside else 'none'))
+    print('NIGHT RUN: CLEAN -- %d rows run, %d skipped, %d reported'
+          % (len(results), len(skipped), len(reported)))
+    print('=' * 70)
+    return 0
+
+
 if __name__ == '__main__':
-    sys.exit(main())
+    sys.exit(main(sys.argv[1:]))

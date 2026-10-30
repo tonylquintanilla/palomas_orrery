@@ -42,13 +42,30 @@ and requires the right finding, by name:
     Windows line endings kept as they came           RISE NOT READ FROM
                                                      WINDOWS OUTPUT
 
+And the night's gate (L-485), night_gate() and write_night_record() of
+the real runner, run in a throwaway folder on eight cases: a clean
+night, a failed night checker, a tool that could not reach JPL
+(reported, not red: Tony's ruling R4), a tool that crashed, a file
+changed outside the allow-list, a non-ASCII byte in an allowed file, a
+night row no table carries, and the record a clean night writes. Six
+faults are planted for it, each caught by name:
+
+    a failed night checker let through               FAILED CHECKER PASSED
+    an outage made red                               OUTAGE MADE RED
+    a crashed night tool let through                 CRASHED TOOL PASSED
+    the allow-list not applied                       OUTSIDE NOT REFUSED
+    the ASCII test not applied                       NON-ASCII NOT REFUSED
+    a night row no table carries dropped silently    UNKNOWN ROW DROPPED
+                                                     SILENTLY
+
 The last line starts "MAINTENANCE REPORT:", which the maintenance run
 quotes, and says what was compared and how many things were examined.
 
 Run (VS Code Run button, or):
     python test_maintenance_report.py
 
-Runs nothing else and contacts nothing.
+Runs nothing else and contacts nothing; the night's cases write only
+to a throwaway folder.
 
 Role: devtool
 Domain: dev_tools
@@ -60,6 +77,9 @@ patch_L269_6_windows_output_20261014.py: the summaries pass through the
 runner's real run_tool(); a fourth summary, one file risen with Windows
 line endings, and a fourth planted fault, the runner's line-ending fix
 taken out.)
+Module updated: October 30, 2026 with Anthropic's Claude Opus 5.5 (L-485,
+the nightly run: the night's gate and record, eight cases and six planted
+faults.)
 """
 import contextlib
 import io
@@ -187,6 +207,98 @@ def judge(mod, findings, counts):
             findings.append(('RISE NOT READ FROM WINDOWS OUTPUT', 'with Windows '
                              'line endings the summary does not name %s, %d -> %d'
                              % (fname, before, after)))
+    judge_night(mod, findings, counts)
+
+
+# ============================================================================
+# THE NIGHT'S GATE (L-485)
+# ============================================================================
+#
+# The night run commits only on a clean night (Tony's ruling R1), and an
+# outage is reported, not red (R4). night_gate() decides it; these cases
+# call the runner's real night_gate() and write_night_record() in a
+# throwaway folder, with git's list of changed files given, and judge
+# the answer with reading of their own.
+
+def _row(label, rc, note, is_checker):
+    return (label, rc, 0.0, note, '', is_checker)
+
+
+def judge_night(mod, findings, counts):
+    import json
+    import shutil
+    import tempfile
+    tmp = tempfile.mkdtemp(prefix='night_gate_')
+    try:
+        os.makedirs(os.path.join(tmp, 'data'))
+        gens = [('Objects export', ['export_objects.py'],
+                 ['data/objects_export.json'])]
+        with open(os.path.join(tmp, 'data', 'objects_export.json'),
+                  'wb') as f:
+            f.write(b'{"ascii": true}\n')
+        clean = [_row('Objects export', 0, 'unchanged', False),
+                 _row('Objects export check', 0, 'pass', True)]
+
+        def gate(results, changed):
+            counts['night'] += 1
+            return mod.night_gate(tmp, results, gens, changed=changed)
+
+        problems, reported, inside = gate(clean, ['data/objects_export.json'])
+        if problems or inside != ['data/objects_export.json']:
+            findings.append(('CLEAN NIGHT REFUSED', 'a clean night with an '
+                             'allowed file changed gave %s' % problems))
+        problems, _r, _i = gate(
+            clean[:1] + [_row('Objects export check', 1, 'FAILED', True)], [])
+        if not any('Objects export check' in s for s in problems):
+            findings.append(('FAILED CHECKER PASSED', 'a failed night checker '
+                             'did not stop the night'))
+        problems, reported, _i = gate(
+            [_row('Horizons check', 1, 'exit 1 -- UNREACHABLE -- JPL could '
+                  'not be reached', False)] + clean[1:], [])
+        if problems or reported != ['Horizons check']:
+            findings.append(('OUTAGE MADE RED', 'a tool that could not reach '
+                             'JPL gave %s, reported %s' % (problems, reported)))
+        problems, _r, _i = gate(
+            [_row('Path plan', 1, 'exit 1 -- no summary line printed',
+                  False)] + clean[1:], [])
+        if not any('Path plan' in s for s in problems):
+            findings.append(('CRASHED TOOL PASSED', 'a night tool that exited '
+                             '1 without UNREACHABLE did not stop the night'))
+        problems, _r, _i = gate(clean, ['celestial_objects.py'])
+        if not any('celestial_objects.py' in s for s in problems):
+            findings.append(('OUTSIDE NOT REFUSED', 'a changed file outside the '
+                             'allow-list did not stop the night'))
+        with open(os.path.join(tmp, 'data', 'objects_export.json'),
+                  'wb') as f:
+            f.write(b'{"name": "Cr\xc3\xa8me"}\n')
+        problems, _r, _i = gate(clean, ['data/objects_export.json'])
+        if not any('non-ASCII' in s for s in problems):
+            findings.append(('NON-ASCII NOT REFUSED', 'an allowed file with a '
+                             'non-ASCII byte did not stop the night'))
+        real_rows = mod.NIGHT_ROWS
+        mod.NIGHT_ROWS = real_rows + ('No such row',)
+        counts['night'] += 1
+        try:
+            mod.night_rows()
+            findings.append(('UNKNOWN ROW DROPPED SILENTLY', 'a night row no '
+                             'table carries was not named'))
+        except ValueError as ex:
+            if 'No such row' not in str(ex):
+                findings.append(('UNKNOWN ROW DROPPED SILENTLY', str(ex)))
+        finally:
+            mod.NIGHT_ROWS = real_rows
+        mod.write_night_record(tmp, clean, [('Ledger index', 'a document')],
+                               [])
+        counts['night'] += 1
+        raw = open(os.path.join(tmp, mod.NIGHT_RECORD), 'rb').read()
+        body = json.loads(raw.decode('ascii'))
+        if (any(b > 127 for b in raw) or b'\r' in raw
+                or not body.get('clean_run_utc', '').endswith('+00:00')
+                or [r['row'] for r in body['rows']] != [c[0] for c in clean]):
+            findings.append(('RECORD WRONG', 'the night record is not ASCII and '
+                             'LF, or lacks its UTC stamp or its rows'))
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
 
 
 PLANTS = [
@@ -206,13 +318,38 @@ PLANTS = [
      ("        output = output.replace('\\r\\n', '\\n')\n",
       "        pass\n"),
      'RISE NOT READ FROM WINDOWS OUTPUT'),
+    # L-485, the night's gate
+    ('a failed night checker let through',
+     ("            problems.append('%s failed' % label)\n",
+      "            pass\n"),
+     'FAILED CHECKER PASSED'),
+    ('an outage made red',
+     ("        elif not is_checker and NIGHT_UNREACHABLE in note:\n",
+      "        elif False:\n"),
+     'OUTAGE MADE RED'),
+    ('a crashed night tool let through',
+     ("            problems.append('%s exited %d' % (label, rc))\n",
+      "            pass\n"),
+     'CRASHED TOOL PASSED'),
+    ('the allow-list not applied',
+     ("            problems.append('changed outside the allow-list: %s' % path)\n",
+      "            pass\n"),
+     'OUTSIDE NOT REFUSED'),
+    ('the ASCII test not applied',
+     ("        if bad:\n",
+      "        if False:\n"),
+     'NON-ASCII NOT REFUSED'),
+    ('a night row no table carries dropped silently',
+     ("    if unknown:\n        raise ValueError(",
+      "    if False:\n        raise ValueError("),
+     'UNKNOWN ROW DROPPED SILENTLY'),
 ]
 
 
 def main():
     problems = []
     for label, (old, new), expected in PLANTS:
-        findings, counts = [], {'summaries': 0, 'risen': 0}
+        findings, counts = [], {'summaries': 0, 'risen': 0, 'night': 0}
         try:
             judge(load(old, new), findings, counts)
         except RuntimeError as ex:
@@ -227,7 +364,7 @@ def main():
                   % (label, sorted(set(c for c, _ in findings)) or 'none'))
             problems.append('planted fault not caught: %s' % label)
 
-    findings, counts = [], {'summaries': 0, 'risen': 0}
+    findings, counts = [], {'summaries': 0, 'risen': 0, 'night': 0}
     judge(load(), findings, counts)
     for cls, detail in findings:
         print('FAIL: %s -- %s' % (cls, detail))
@@ -235,7 +372,10 @@ def main():
     print("compared: the maintenance run's printed summary against the scanner output "
           "recorded here -- the sentence that no file rose, the risen file by name with "
           "its before and after, the sentence when the run history is missing, and the "
-          "risen file again when the output has Windows line endings")
+          "risen file again when the output has Windows line endings; and the "
+          "night's gate (L-485) on clean, failed, unreached, crashed, outside "
+          "the allow-list and non-ASCII nights, an unknown night row, and the "
+          "night's record")
     print('examined: four summaries (as printed at ab96681, with one file risen, with '
           'no run history, with one file risen and Windows line endings) from the real '
           'main() and run_tool() of orrery_maintenance_run.py')
@@ -243,8 +383,9 @@ def main():
         print('MAINTENANCE REPORT: FAIL -- %d problem(s)' % len(problems))
         return 1
     print('MAINTENANCE REPORT: PASS -- %d of %d planted faults caught by name; %d summaries; '
-          '%d risen file(s) named' % (len(PLANTS), len(PLANTS), counts['summaries'],
-                                      counts['risen']))
+          '%d risen file(s) named; %d night-gate cases' % (
+              len(PLANTS), len(PLANTS), counts['summaries'], counts['risen'],
+              counts['night']))
     return 0
 
 

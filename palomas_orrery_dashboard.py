@@ -328,6 +328,12 @@ Arrows, the website's new checker (gallery patch L494_3), gets its
 button after Collapsed Features, with its short line, running through
 documentation/run_offline_check.py. The Dashboard parity check had
 found it missing on the run after patch_L494_4.
+October 30, 2026 with Anthropic's Claude Opus 5.5 (L-485, the nightly
+run): one line under the header, nightly_run_line(), says when the
+orrery's nightly run last ran clean, read from
+data/nightly_run_record.json, and turns red with "no clean run since"
+once that is more than a day old, or when no record can be read. No
+button added: the night set runs on GitHub, not from here.
 """
 
 import os
@@ -372,6 +378,7 @@ COLOR_DIVIDER = "#2a3a5c"       # Subtle dividers
 COLOR_BUTTON_BG = "#0f3460"     # Button background
 COLOR_BUTTON_HOVER = "#1a4a7a"  # Button hover
 COLOR_LINK = "#6ca0d4"          # Link color
+COLOR_ALERT = "#e06c6c"         # A line that needs Tony (L-485)
 
 # Fonts
 FONT_TITLE = ("Segoe UI", 28, "bold")
@@ -2357,6 +2364,48 @@ CARD_LINES = {
 }
 
 
+# ============================================================
+# THE NIGHTLY RUN'S LAST CLEAN NIGHT (L-485)
+# ============================================================
+# GitHub's computers run the orrery's night set every night and, on a
+# clean night, commit data/nightly_run_record.json with the rest. A red
+# night commits nothing, so the record always holds the last CLEAN run,
+# and the dashboard says how old it is: red, with the words "no clean
+# run since", once it is more than a day old, so silence cannot read as
+# fine (Tony's ruling R1, 2026-10-25). The folder shows GitHub's copy
+# only after Pull origin.
+
+NIGHTLY_RECORD = os.path.join(SCRIPT_DIR, "data", "nightly_run_record.json")
+NIGHTLY_STALE_HOURS = 24      # "older than a day"
+
+
+def nightly_run_line(path=NIGHTLY_RECORD, now=None):
+    """(text, red) for the dashboard's nightly-run line.
+
+    Red when the record is missing, cannot be read, or its clean run is
+    more than a day old. `now` is a plain UTC datetime, for a test.
+    """
+    import datetime
+    import json
+    import utc_clock    # L-504: the clock read as UTC
+    if not os.path.exists(path):
+        return ("Nightly run: no clean run recorded yet "
+                "(data/nightly_run_record.json)", True)
+    try:
+        with open(path, encoding="utf-8") as handle:
+            stamp = json.load(handle)["clean_run_utc"]
+        when = utc_clock.parse_stamp(stamp)
+    except (OSError, ValueError, KeyError, TypeError) as exc:
+        return ("Nightly run: its record could not be read (%s)" % exc,
+                True)
+    now = now or utc_clock.utc_now()
+    shown = when.strftime("%Y-%m-%d %H:%M UTC")
+    if now - when > datetime.timedelta(hours=NIGHTLY_STALE_HOURS):
+        return ("Nightly run: no clean run since %s -- read the latest "
+                "run's log on GitHub's Actions tab" % shown, True)
+    return "Nightly run: last clean run %s" % shown, False
+
+
 def card_line(group_name, label):
     """The short line for a card, or "" when it has none yet."""
     return CARD_LINES.get((group_name, label), "")
@@ -2803,6 +2852,16 @@ class PalomasOrreryDashboardFrame(ctk.CTkFrame):
             font=FONT_FOOTER, text_color=COLOR_TEXT_DIM
         )
         author.pack()
+
+        # L-485: the nightly run's last clean night, red once it is more
+        # than a day old.
+        night_text, night_red = nightly_run_line()
+        ctk.CTkLabel(
+            inner,
+            text=night_text,
+            font=FONT_FOOTER,
+            text_color=COLOR_ALERT if night_red else COLOR_TEXT_DIM,
+        ).pack(pady=(8, 0))
 
     # ----------------------------------------------------------
     # LAUNCH SECTION

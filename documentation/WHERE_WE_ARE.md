@@ -1,29 +1,27 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 29-30, 2026, night: the orrery session (L-504 (the orrery's clock), Pluto, the skills).
-- Written at orrery 571b9bf4 and gallery b55109f2, plus uncommitted edits.
+Last updated: October 30, 2026: the orrery session (L-485 (a nightly run), the orrery half).
+- Written at orrery 1e454a8b and gallery b55109f2, plus uncommitted edits.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The orrery reads the clock as UTC now. In the evening its date
->   fields open on tomorrow's date, as the website's do.
-> - A "now" plot moves a little (the Moon about 19,000 km). The fix.
-> - Pluto's period is its centre of mass's, 248 years, as on the
->   website (your choice). Its own centre swings every 6.4 days.
-> - Bennu, Halley and Ikeya-Seki now say "JPL states no accuracy".
-> - The belt's kilometres are exported; four skills updated; L-399
->   (ED138's uncertainty) and L-502 (the triad) closed on your look.
+> - The orrery has a nightly run on GitHub's computers. It starts
+>   once you push it: 07:17 UTC, the 30-day JPL checks and exports.
+> - A clean night saves only those data files to GitHub; a red night
+>   saves nothing, and its log on GitHub says why.
+> - JPL out for a night is reported, not red, until a check is 30
+>   days old. The dashboard's top line shows the last clean night.
 >
-> **Do next:** *run the orrery once; commit and push; reinstall the
-> four skills; tomorrow's Daily Run.*
+> **Do next:** *the GitHub setting; commit and push; the first run by
+> hand; then Pull origin every morning.*
 >
 > **Needs you now:**
-> - *(do) run the orrery: today's UTC date, Earth and the Moon draw.*
-> - *(do) commit and push; reinstall interactive-exhibit 1.29,
->   gallery-cache-builder 1.14, horizons-orbital-mechanics 1.13 and
->   provenance-discipline 2.36.*
+> - *(do) Pull origin each morning, before anything else, once the
+>   nightly run is on.*
+> - *(do) the GitHub setting, commit and push, the first run by hand:
+>   the session's report gives the clicks.*
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
@@ -36,8 +34,9 @@ Oct 27's order, changed Oct 29 (`DESIGN_L314_solar_wind_rulings_20261029.md`).
                the small builds and 2026 ED138, closed Oct 28.
  5d.   [NOW]   *The orrery's clock (L-504 (the orrery's clock)): the
                data path done Oct 29; Earth System, stamps, tools next.*
- 11b.  [NOW]   *Then the nightly run (L-485 (a nightly run)): two
-               sessions, orrery then gallery.*
+ 11b.  [NOW]   *The nightly run (L-485 (a nightly run)): the orrery
+               half built Oct 30, waiting on its first run; the
+               gallery half next.*  << moved this session
  5c.   [next]  L-503 (the belt's cloud) closes when the website
                prints its kilometres (the next gallery session).
   5.   [beside] Earth's list (L-413 (Earth's list)): talks 3 to 6 from
@@ -52,7 +51,7 @@ Oct 27's order, changed Oct 29 (`DESIGN_L314_solar_wind_rulings_20261029.md`).
  15.   [goal]  The website does what the desktop orrery does, with a date
                to choose, within the range the data covers.
 
-## Settled  **>> UPDATED THIS SESSION**
+## Settled
 
 Standing rulings. A line leaves after a few weeks, once it is habit.
 - Pluto's period is its centre of mass's, as Earth's is (Oct 29).
@@ -91,16 +90,19 @@ Waiting behind other work; a line leaves when picked up.
 Read from files when this page was written, not typed from memory.
 - Last cache build: 20261030T003718Z, ok, no retry (the swap log's last
   line); the next is your Daily Run.
-- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md of tonight's
+- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md of today's
   run). Whole tree: 275: orrery 111, Earth System 149, stars 13, utilities 2.
-- This page's date and the ledger's newest stamp: both Oct 29. Agree.
+- This page's date and the ledger's newest stamp: both Oct 30. Agree.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
 Decisions, one at a time:
-- Nothing waiting: tonight's one question (Pluto) is answered.
+- Nothing waiting.
 
 At the next design talk:
+- One body that disagrees with JPL stops the whole night's save, not
+  just that body (L-485 (a nightly run)); holding one body alone is a
+  build of its own.
 - A shared link keeps the view: ruled Oct 29,
   documentation/DESIGN_shared_view_rulings_20261029.md. Not built Oct 29
   (no room); its build, and its item, wait for the next gallery
@@ -114,16 +116,15 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- Tonight: L-504 (the clock), L-484 (Pluto; the n.a. sentence), L-503
-  (the belt's kilometres); L-399 (ED138's uncertainty) and L-502 (the
-  triad) closed. The brief:
-  `COORD_orrery_clock_session_brief_20261029.md`.
+- Today: L-485 (the nightly run), L-490 (the legacy list: GitHub's
+  60-day pause), L-461 (pull matches push: a second cause). The brief:
+  `COORD_L485_orrery_nightly_brief_20261029.md`.
 - L-458 (report a problem): the form's words, read; an open note.
 - The door: `documentation/python_work_door/`, and L-499.
 - Talks: `DESIGN_shared_view_rulings_20261029.md` (the shared link)
   and `DESIGN_L314_solar_wind_rulings_20261029.md` (live solar wind).
-- Your run records: `WHERE_WE_ARE_10-29-26_1818_run_record.md` and
-  `WHERE_WE_ARE_10-29-26_2043_run_record.md` (this session's).
+- Your run record: `WHERE_WE_ARE_10-29-26_2320_run_record.md`
+  (the coordination session's, and this one's start).
 
 --- Your run record below this line. No patch edits it; the length cap
 --- stops here; the close reads your timestamped copy and clears this.

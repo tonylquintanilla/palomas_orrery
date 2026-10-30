@@ -712,6 +712,12 @@ documentation/HANDOFF_coordination_20261028_29.md: L-504's first slice
 built; L-399 and L-502 closed on Tony's look; Pluto's period ruled and
 the n.a. sentence on L-484; the belt's kilometres on L-503; lines on
 L-423 and L-499), built on orrery 571b9bf4 and gallery b55109f2.
+Module updated: October 30, 2026 with Anthropic's Claude Opus 5.5 (the
+orrery's Claude Code session for L-485, the nightly run's orrery half,
+item 1 of documentation/HANDOFF_coordination_20261029_30.md: the
+workflow, the night set, its gate and record, the dashboard line built;
+lines on L-490, L-461, L-459 and L-266), built on orrery 1e454a8b with
+gallery b55109f2 read only.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -936,7 +942,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |:---:|----|------|-------------|:-----:|---------|
 | ! | L-251 | The galactic centre button served a cached HTML for seven months | OPEN | 15.2 | 2026-08-25 |
 | ! | L-238 | radius_fraction > 1.0 assumes every shell is above the surface | OPEN | 14.2 | 2026-08-25 |
-| ! | L-266 | Nothing checks that a cited link still resolves | OPEN | 9.0 | 2026-10-20 |
+| ! | L-266 | Nothing checks that a cited link still resolves | OPEN | 9.0 | 2026-10-30 |
 | ! | L-185 | Source discipline for the assembler's own constants | OPEN | 8.1 | 2026-08-06 |
 | ! | L-340 | The exhibit store editor: what the first screenshot showed, and the Mode 5 pass | OPEN | 8.1 | 2026-09-22 |
 | ! | L-269 | A report names its items, not how many there are | OPEN | 6.0 | 2026-10-13 |
@@ -1069,8 +1075,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-449 | A cache build dropped the 82 build-run records it should have carried (gallery, cache builder) | OPEN | -- | 2026-10-17 |
 | ! | L-454 | A drawn device for edges that move: the magnetopause, the bow shock and their kind (orrery + gallery, design) | OPEN | -- | 2026-10-28 |
 | ! | L-456 | What a visitor reads, from Earth's Mode 5 look: body radii, sources as a list with live links, Celsius for Earth's surface and air (gallery + orrery) | OPEN | -- | 2026-10-21 |
-| ! | L-459 | A monthly run for slow checks, started by the Daily Run (gallery + orrery, maintenance) | OPEN | -- | 2026-10-20 |
-| ! | L-461 | The Daily Run confirms the orrery it pulled is the one Tony pushed (gallery, Daily Run) | OPEN | -- | 2026-10-25 |
+| ! | L-459 | A monthly run for slow checks, started by the Daily Run (gallery + orrery, maintenance) | OPEN | -- | 2026-10-30 |
+| ! | L-461 | The Daily Run confirms the orrery it pulled is the one Tony pushed (gallery, Daily Run) | OPEN | -- | 2026-10-30 |
 | ! | L-462 | The orrery maintenance run, a short form for small patches (orrery, maintenance) | OPEN | -- | 2026-10-26 |
 | ! | L-466 | Every drawing starts and stops where a served row says (orrery + gallery, the Sun's slice and Earth's) | OPEN | -- | 2026-10-22 |
 | ! | L-467 | The scanner credits a display line with a citation it only sits near (orrery, provenance scanner) | OPEN | -- | 2026-10-21 |
@@ -1079,12 +1085,12 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-476 | The orrery's whole-path plots draw by the same path plan as the website (orrery, spacecraft and comets) | OPEN | -- | 2026-10-24 |
 | ! | L-483 | A room for C/2025 K1 and its pieces, the first comet room (gallery, exhibits) | OPEN | -- | 2026-10-28 |
 | ! | L-484 | The website and the orrery agree on every object both draw, or the difference is written down (orrery + gallery, objects; method for interactive-exhibit) | OPEN | -- | 2026-10-29 |
-| ! | L-485 | A nightly unattended run of the routines (orrery + gallery, maintenance) | OPEN | -- | 2026-10-29 |
+| ! | L-485 | A nightly unattended run of the routines (orrery + gallery, maintenance) | OPEN | -- | 2026-10-30 |
 | ! | L-486 | A view carried into a room (gallery, the rooms) | OPEN | -- | 2026-10-26 |
 | ! | L-487 | Each body's description in the i panel, one bullet per sentence (gallery, the i panel) | OPEN | -- | 2026-10-25 |
 | ! | L-488 | Solar features beside a spacecraft in the Solar System room, such as the heliopause (gallery, the rooms) | OPEN | -- | 2026-10-26 |
 | ! | L-489 | Compositions: a curated view within a room, authored in the editor (gallery, the rooms) | OPEN | -- | 2026-10-28 |
-| ! | L-490 | What the website leans on outside its two repositories, for when Tony cannot work it (orrery + gallery, legacy) | OPEN | -- | 2026-10-26 |
+| ! | L-490 | What the website leans on outside its two repositories, for when Tony cannot work it (orrery + gallery, legacy) | OPEN | -- | 2026-10-30 |
 | ! | L-491 | The comet nucleus sizes the orrery's comet hover prints, sourced (orrery, the words a visitor reads) | OPEN | -- | 2026-10-26 |
 | ! | L-498 | The master plan restamped as v37 at slice 2's close (documentation) | OPEN | -- | 2026-10-27 |
 | ! | L-499 | The kinds of session: three, told apart by what each writes, with the build session in two forms (protocol, Mode 7) | OPEN | -- | 2026-10-29 |
@@ -1988,7 +1994,7 @@ only when re-exported through Gallery Studio.
 `data/provenance_exceptions.json`; L-443; L-492.
 
 #### [L-490] What the website leans on outside its two repositories, for when Tony cannot work it (orrery + gallery, legacy)
-<!-- L:490 status:OPEN upd:2026-10-26 section:A flag: rice: -->
+<!-- L:490 status:OPEN upd:2026-10-30 section:A flag: rice: -->
 - **The first question, 2026-10-26** (Claude Fable 5.1's note on this
   item, carried by Tony): who besides Tony can hold the accounts, the
   GitHub account and the Google sign-in. It is Tony's and Paloma's to
@@ -2009,6 +2015,29 @@ only when re-exported through Gallery Studio.
   Tony's to shape at a talk of its own.
 - **Opened 2026-10-26** in the records patch for L-485 and L-489, on
   Tony's answer in chat that it be an item of its own.
+- **2026-10-30, the sixty-day pause, read from GitHub** (L-485's
+  orrery session). "In a public repository, scheduled workflows are
+  automatically disabled when no repository activity has occurred in
+  60 days." (docs.github.com, "Events that trigger workflows" and
+  "Disabling and enabling a workflow".) Neither page defines repository
+  activity, so whether the nightly commits count is not written down.
+  Built: the workflow's last step, every night, clean or red, runs `gh
+  workflow enable nightly.yml`. Two facts GitHub does not write down:
+  whether enabling a workflow that is already on resets the count; and
+  a workflow already paused does not run, so it cannot revive itself.
+  The documented way back is on the same page: "if a user with `write`
+  permissions to the repository makes a commit that changes the `cron`
+  schedule on the workflow, the workflow will be reactivated", or the
+  Enable button on the Actions tab. How the failure shows: the
+  dashboard's nightly line turns red, "no clean run since", a day
+  after the last clean run.
+- **2026-10-30, who is told when a scheduled run fails:**
+  "Notifications for scheduled workflows are sent to the user who
+  initially created the workflow" (docs.github.com, "Notifications for
+  workflow runs"); a different user who changes the cron takes them
+  over, and after a pause they go to whoever re-enabled the workflow.
+  Today that is Tony. A legacy fact: whoever holds the account holds
+  the notices.
 **Gap:** Tony-action (decide): who besides you can hold the accounts,
 with Paloma, first. Tony-action (decide): when the legacy talk happens;
 it does not block L-485. Then discovery: one list, each entry with its
@@ -2216,7 +2245,7 @@ Are).
 L-489.
 
 #### [L-485] A nightly unattended run of the routines (orrery + gallery, maintenance)
-<!-- L:485 status:OPEN upd:2026-10-29 section:A flag: rice: -->
+<!-- L:485 status:OPEN upd:2026-10-30 section:A flag: rice: -->
 - **Tony, 2026-10-24, night,** in his run record (`documentation/WHERE_WE_ARE_10-24-26_1927_run_record.md`): "i am
   thinking of revising the idea of an automated run at midnight every
   day, with all the daily and 30-day run routines except the messages.
@@ -2340,8 +2369,148 @@ L-489.
   `documentation/DESIGN_L314_solar_wind_rulings_20261029.md`):** this item
   is [NOW] on Where We Are's road, after L-504 (the orrery's clock), with
   Earth's list (L-413) beside it.
-**Gap (replaces the one below, 2026-10-27):** two build sessions,
-orrery then gallery, from
+- **2026-10-30, the orrery half built** (Claude Code session, Claude
+  Opus 5.5, built on orrery 1e454a8b with the gallery read only; brief
+  `documentation/COORD_L485_orrery_nightly_brief_20261029.md`). Files:
+  `.github/workflows/nightly.yml`, new, the repository's first
+  `.github` folder; `orrery_maintenance_run.py`, `--night`
+  (NIGHT_ROWS, night_rows(), night_gate(), write_night_record(),
+  night_verdict()); `check_horizons_confirmations.py`, `--night`;
+  `test_horizons_check.py`, two checks of that night form;
+  `test_maintenance_report.py`, the night's gate, eight cases and six
+  planted faults; `palomas_orrery_dashboard.py`, nightly_run_line(),
+  one line under the header.
+- **The night set, by name.** Run: the generators Constants export,
+  Period fetch, Horizons check, Path plan, Objects export and Drawings
+  export; the checkers Constants export check, Objects export check,
+  Horizons confirmations (with --night), Horizons check suite, Period
+  fetch suite, Path plan suite, Orbit cache and Drawings export check.
+  Skipped, each printed with its reason on every night: the six
+  generators that write documents (Ledger index, Skill manifest, Module
+  atlas, Data inventory, Exact rows report, Document index) and the 26
+  other checkers, which judge code (Reset completeness also opens the
+  window; Constants change reads a git diff of code; the provenance
+  scanner's gate runs at Tony's push; Dashboard parity judges the
+  dashboard's code). Each night checker's imports were read first:
+  Period fetch suite and Orbit cache import osculating_cache_manager,
+  whose tkinter import is item 2 below.
+- **The night's gate (R1), night_gate().** Exit 0 only when every night
+  checker passed; every night tool ran, a tool that exited non-zero
+  saying UNREACHABLE being reported and not red (R4); git sees nothing
+  changed or new outside the allow-list; and every allowed file that
+  changed is ASCII. A red night writes nothing and names every reason
+  in its last line, "NIGHT RUN: RED -- ...". A clean night writes
+  `data/nightly_run_record.json`: its UTC stamp (utc_clock), each row's
+  verdict, each skipped row and why, and the address of the run's log
+  on GitHub. So the committed copy is always the last clean run's.
+- **The allow-list, 15 files, read from the runner's tables (one
+  home):** the night generators' declared outputs --
+  data/constants_export.json, osculating_cache.json,
+  horizons_confirmations.json, spacecraft_sheets.json, path_plans.json,
+  objects_export.json and the eight under data/drawings/
+  (earth_exosphere, galactic_tide, hills_cloud, main_belt,
+  outer_oort_cloud, sun_corona, van_allen_belts, zodiacal_dust) -- and
+  the record. The brief's "fourteen tracked files" are these fourteen;
+  `git ls-files data` itself lists many more (the heatwave map files
+  among them), which the night never writes. The workflow's commit step
+  adds only this list, read from the runner.
+- **Run in a clean clone of 1e454a8b on Tony's machine, 2026-10-30.**
+  With this session's code edits in it, all 14 night rows passed and the
+  night refused, naming the four edited code files as changed outside
+  the allow-list: the gate failing on a real tree. With those hidden
+  from git: "NIGHT RUN: CLEAN -- 14 rows run, 32 skipped, 0 reported",
+  the record written ASCII and LF, nothing else changed, 78 seconds.
+  JPL was asked nothing that day (nothing due), so the first run on
+  GitHub is the test that JPL answers GitHub's computers.
+- **The brief's section 1, as found** (GitHub's pages read 2026-10-30;
+  their words are quoted on L-490 and in the session's report):
+  1. The pause: GitHub's sentence is on L-490; "repository activity" is
+     not defined on either page. The keep-alive is built.
+  2. Tools and time: "Each job in a workflow can run for up to 6 hours
+     of execution time" (GitHub, Actions limits); "GitHub Actions usage
+     is free for standard GitHub-hosted runners in public repositories"
+     (GitHub, usage limits and billing). tkinter: the Ubuntu builder of
+     actions/python-versions installs `python3-tk tk-dev` under the
+     comment "Compile with tkinter support", and its module test
+     requires tkinter to import, so osculating_cache_manager's
+     top-level import is expected to work there. Not moved; the first
+     run confirms it.
+  3. Permissions: the workflow declares contents: write and actions:
+     write; the repository's own setting is under Settings, Actions,
+     General, "Workflow permissions", then Save (GitHub's steps, in the
+     report). Who is told of a failed scheduled run is on L-490; it is
+     Tony, and his own notification setting is a Tony-action.
+  4. LF and ASCII on Linux: no night tool assumes a Windows path (the
+     only drive-letter strings are comments in spacecraft_encounters.py).
+     The fourteen data files hold no non-ASCII byte at 1e454a8b, and
+     `.gitattributes` (`* text=auto eol=lf`) stores every text file LF
+     whatever a tool writes; osculating_cache.json is CRLF only in
+     Tony's working copy (save_cache writes in text mode, above), LF on
+     Linux. The night's gate now refuses a non-ASCII byte in any file it
+     would commit, so this is checked every night, not once.
+  5. JPL from GitHub's computers: not knowable before the first run,
+     which is fired by hand and its log read to the end.
+- **The outage rule (R4), as built.** Horizons confirmations runs with
+  --night, which prints today's UNREACHABLE as "REPORTED, not red" and
+  passes what is renewing (day 25 to 29); a confirmation that has
+  lapsed, day 30, still fails by name. Renewal starts at day 25
+  (horizons_check.RENEW_DAYS), so only five nights running without JPL
+  turn a night red, and then that is the true finding. Period fetch and
+  Path plan are generators: their UNREACHABLE is reported in the night's
+  last lines and is never red. By day the checker still goes red on an
+  unreached JPL, as before.
+- **Found, not chased: a disagreement stops the whole night, not one
+  body.** P1 has the body that disagrees keep its last confirmed values
+  while the rest go on. As built, a DISAGREES makes Horizons
+  confirmations red, so the night commits nothing: every body keeps its
+  last values, the website's data stops moving, and from day 30 the
+  website's own gate goes red too. Safe and visible, and coarser than
+  P1. Holding one body would need the export to keep that body's last
+  confirmed values and the checker to pass it as held: a build of its
+  own, for the next design talk.
+- **The link check (P2) is not built.** It is L-266, the first job of
+  L-459 (a monthly run). The night set runs without it and it joins
+  when built, as a row of NIGHT_ROWS.
+- **The schedule.** 07:17 UTC daily, `cron: '17 7 * * *'` (Tony's hour,
+  2026-10-29, 23:36; the minute off the hour by GitHub's own advice,
+  "schedule your workflow to run at a different time of the hour"),
+  and `workflow_dispatch` for a run by hand. The runner is named
+  ubuntu-24.04, not ubuntu-latest: GitHub's runner-image page says
+  ubuntu-latest moves to Ubuntu 26.04 in November 2026. Python 3.13,
+  requirements.txt's recommended version. actions/checkout@v7 and
+  actions/setup-python@v7, the latest majors on their release pages on
+  2026-10-30. It commits as github-actions[bot], with the name and
+  address actions/checkout's README gives.
+- **For the records session** (the coordination handoff's queue, item
+  6): the orrery's CLAUDE.md step 2 gains a case. After a nightly
+  commit the folder and GitHub differ every morning until Tony clicks
+  Pull origin, so a session opened before then stops; the cure is Pull
+  origin, not a reconcile. The morning order: Pull origin first, then
+  anything else.
+- **For gallery-cache-builder's next version** (the gallery half's
+  bump): the orrery's nightly run exists and commits the fourteen data
+  files above; the Daily Run's pull-matches-push check has a second
+  honest cause, "not yet pulled" (L-461); and its Operating mode
+  ("manual, as of August 10 2026") and Layer 3 ("becomes live again the
+  moment the build runs unattended by any mechanism, including a GitHub
+  Action") are the gallery half's to rewrite when the website's
+  workflow is built.
+- **For horizons-orbital-mechanics' next version:** Where the Check
+  Lives gains the night form, `check_horizons_confirmations.py
+  --night`: an outage reported, not red, while a lapsed confirmation
+  still fails.
+- **No skill bumped:** no sentence in a skill would make a following
+  session do something wrong today (ledger-and-session-records, A
+  Wrong Sentence in a Skill); the three above are carried.
+**Gap (replaces the one below, 2026-10-30):** the orrery half waits on
+Tony: the GitHub setting, the push, and the first run by hand, its log
+read to the end -- JPL reached from GitHub's computers, the tkinter
+import, the commit or a truthful "nothing committed", the keep-alive's
+line -- then a week of mornings reading the log (P4). The gallery half
+is next, with the four small website items of
+`HANDOFF_coordination_20261029_30.md`, section 4.
+**Gap (superseded above, 2026-10-30; replaced the one below,
+2026-10-27):** two build sessions, orrery then gallery, from
 `documentation/DESIGN_L485_nightly_run_rulings_20261025.md` with P1
 ruled: its section 4 verified first, the sixty-day pause above all.
 **Gap (2026-10-26; superseded above):** a build session after
@@ -2888,7 +3057,7 @@ first, whether the item stays (above).
 L-188 (the maintenance run); L-459 (the monthly run).
 
 #### [L-461] The Daily Run confirms the orrery it pulled is the one Tony pushed (gallery, Daily Run)
-<!-- L:461 status:OPEN upd:2026-10-25 section:A flag: rice: -->
+<!-- L:461 status:OPEN upd:2026-10-30 section:A flag: rice: -->
 - **What happened, 2026-10-21** (run record
   `documentation/WHERE_WE_ARE_10-21-26_1217_run_record.md`): the orrery's patches
   ran and passed but were not pushed; the website's patch, Daily Run
@@ -2929,6 +3098,12 @@ L-188 (the maintenance run); L-459 (the monthly run).
   causes and what to do; a folder it cannot read stops it too. `--check`
   runs five made-up cases and two planted faults. The rule is in
   gallery-cache-builder 1.12.
+- **2026-10-30, a second honest cause** (L-485's orrery half). Once the
+  orrery's nightly run commits on GitHub, Tony's orrery folder is behind
+  GitHub every morning until he clicks Pull origin. The Daily Run's
+  check reads that folder, so a difference can now mean "not yet
+  pulled" as well as "not yet pushed". The Daily Run's words name only
+  the second; the gallery half adds the first (gallery `daily_run.py`).
 **Gap (replaces the one below, 2026-10-25):** the first Daily Run after
 the push shows its "Pull matches push" line; then DONE.
 **Gap (superseded above):** the build (gallery `daily_run.py`, the pull step), with its
@@ -2939,7 +3114,7 @@ pulls); gallery-cache-builder; L-446 (the Daily Run pulls before it
 builds); L-456.
 
 #### [L-459] A monthly run for slow checks, started by the Daily Run (gallery + orrery, maintenance)
-<!-- L:459 status:OPEN upd:2026-10-20 section:A flag: rice: -->
+<!-- L:459 status:OPEN upd:2026-10-30 section:A flag: rice: -->
 - **Tony, 2026-10-20**, in a design chat on verification: "add a monthly
   run for monthly checks like this in addition to the daily run."
   Brought to this session as a draft; Claude's recommendation, one
@@ -2962,6 +3137,10 @@ builds); L-456.
 - **The Horizons Check is not moved into it.** It already keeps its own
   dates for each object and data sheet, asks again from day 25, and
   runs in every maintenance run asking JPL nothing on most days.
+- **2026-10-30:** the orrery's nightly run exists (L-485), and runs
+  without the link check; when the link check is built it joins the
+  night set as a row of NIGHT_ROWS in `orrery_maintenance_run.py`, or
+  this monthly run, as its build decides.
 **Gap:** build it with L-266's link check: where the date file lives,
 which repository's Daily Run starts it, how its findings reach the run
 record.
@@ -9669,7 +9848,7 @@ status pass; (b) and (c) are gated on it.
 resident protocol Part 3.
 
 #### [L-266] Nothing checks that a cited link still resolves
-<!-- L:266 status:OPEN upd:2026-10-20 section:A flag: rice:5/4/90/2 -->
+<!-- L:266 status:OPEN upd:2026-10-30 section:A flag: rice:5/4/90/2 -->
 - **Raised by Tony, 2026-08-30**, on being told that link rot would be
   invisible: "That would be a helpful check from the scanner: is named
   link dead."
@@ -9747,6 +9926,8 @@ resident protocol Part 3.
 - **Built the same evening, its neighbour:** the dashboard's "Horizons
   Check -- everything, now" button (`horizons_check.py --all`), in
   Tools and Caches.
+- **2026-10-30:** the orrery's nightly run (L-485) was built without
+  it, as its brief said; it joins the night set when built (L-459).
 - **Ref:** L-265 (what makes it urgent); L-236 (the gallery runner and
   its three-state convention); L-235 (checks that cannot fail,
   gallery side); L-456 (the live links); L-459 (the monthly run, its

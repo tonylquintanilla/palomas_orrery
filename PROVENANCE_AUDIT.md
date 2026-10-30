@@ -1,10 +1,10 @@
 <!-- Doc-Kind: generated | The provenance audit: every numeric claim scored against its citation, rebuilt by provenance_scanner.py on each run. Do not hand-edit. -->
 # Paloma's Orrery -- Provenance Audit
 
-Generated: October 29, 2026
+Generated: October 30, 2026
 Files scanned: 170
-Total findings: 1148
-Constants: 293 | Dicts: 72 | Display strings: 783
+Total findings: 1150
+Constants: 294 | Dicts: 73 | Display strings: 783
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -20,14 +20,14 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T1 by domain | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|--------------|---:|---:|---:|--------:|
+| 20261030T195143Z | `1e454a8` | 170 | 1150 | 275 | orrery 111, Earth System 149, stars 13, utilities 2 | 695 | 174 | 6 | 0 |
 | 20261030T030044Z | `571b9bf` | 170 | 1148 | 275 | orrery 111, Earth System 149, stars 13, utilities 2 | 695 | 172 | 6 | 0 |
 | 20261030T025513Z | `571b9bf` | 170 | 1148 | 275 | orrery 111, Earth System 149, stars 13, utilities 2 | 695 | 172 | 6 | 0 |
 | 20261030T024310Z | `571b9bf` | 170 | 1148 | 276 | orrery 112, Earth System 149, stars 13, utilities 2 | 694 | 172 | 6 | 0 |
 | 20261029T025816Z | `b2fcc1b` | 169 | 1147 | 275 | orrery 111, Earth System 149, stars 13, utilities 2 | 694 | 172 | 6 | 0 |
 | 20261029T025632Z | `b2fcc1b` | 169 | 1148 | 276 | orrery 112, Earth System 149, stars 13, utilities 2 | 694 | 172 | 6 | 0 |
-| 20261029T025242Z | `b2fcc1b` | 169 | 1150 | 278 | orrery 114, Earth System 149, stars 13, utilities 2 | 694 | 172 | 6 | 0 |
 
-Change since the previous run: total +0, Tier-1 +0.
+Change since the previous run: total +2, Tier-1 +0.
 
 No file's Tier-1 count rose.
 
@@ -62,7 +62,7 @@ No file's Tier-1 count rose.
 |------|-------|--------|------:|
 | 1 | 16-20 | FIX NOW | 275 |
 | 2 | 10-15 | REVIEW | 695 |
-| 3 | 5-9 | LOW PRIORITY | 172 |
+| 3 | 5-9 | LOW PRIORITY | 174 |
 | 4 | 1-4 | LOWEST PRIORITY | 6 |
 
 **Whole tree, Tier-1: 275: orrery 111, Earth System 149, stars 13, utilities 2.** By each file's docstring `Domain:` tag; Findings by File Type below has every tier and every domain. The push gate is the Gate Path section, not this total.
@@ -173,12 +173,12 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `orbital_period.py` | orrery | 0 | 4 | 0 | 1 | 5 |
 | `fetch_climate_data.py` | earth_science | 0 | 5 | 0 | 0 | 5 |
 | `planet9_visualization_shells.py` | orrery | 0 | 5 | 0 | 0 | 5 |
+| `orrery_maintenance_run.py` | dev_tools | 0 | 0 | 5 | 0 | 5 |
+| `palomas_orrery_dashboard.py` | orrery | 0 | 0 | 5 | 0 | 5 |
 | `worksheet_checker.py` | dev_tools | 0 | 0 | 5 | 0 | 5 |
 | `coordinate_system_guide.py` | orrery | 2 | 2 | 0 | 0 | 4 |
 | `sgr_a_visualization_precession.py` | orrery | 4 | 0 | 0 | 0 | 4 |
 | `asteroid_belt_visualization_shells.py` | orrery | 0 | 4 | 0 | 0 | 4 |
-| `orrery_maintenance_run.py` | dev_tools | 0 | 0 | 4 | 0 | 4 |
-| `palomas_orrery_dashboard.py` | orrery | 0 | 0 | 4 | 0 | 4 |
 | `provenance_history.py` | dev_tools | 0 | 0 | 4 | 0 | 4 |
 | `test_path_plan.py` | dev_tools | 0 | 0 | 4 | 0 | 4 |
 | `horizons_check.py` | dev_tools | 0 | 0 | 4 | 0 | 4 |
@@ -241,9 +241,9 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 | Domain | Files | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |
 |--------|------:|-------:|-------:|-------:|-------:|------:|
-| Orrery (solar system + orbital mechanics) | 46 | 111 | 583 | 51 | 3 | 748 |
+| Orrery (solar system + orbital mechanics) | 46 | 111 | 583 | 52 | 3 | 749 |
 | Earth System | 13 | 149 | 71 | 2 | 0 | 222 |
-| Dev Tools (audit, diagnostics, one-shot scripts) | 30 | 0 | 0 | 113 | 0 | 113 |
+| Dev Tools (audit, diagnostics, one-shot scripts) | 30 | 0 | 0 | 114 | 0 | 114 |
 | Stars (stellar neighborhood) | 12 | 13 | 41 | 6 | 3 | 63 |
 | Utilities (cross-domain shared helpers) | 1 | 2 | 0 | 0 | 0 | 2 |
 | Gallery | 0 | 0 | 0 | 0 | 0 | 0 |
@@ -1962,10 +1962,11 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 502 | constant | TOOL_TIMEOUT_SECONDS | 900 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 565 | constant | HASH_LIMIT_BYTES | 2 * 1024 * 1024 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 684 | constant | NOTE_WIDTH | 44 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 685 | constant | NOTE_INDENT | 37 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 524 | constant | TOOL_TIMEOUT_SECONDS | 900 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 560 | dict | NIGHT_SKIP_WHY[...] | (4 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 795 | constant | HASH_LIMIT_BYTES | 2 * 1024 * 1024 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 914 | constant | NOTE_WIDTH | 44 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 915 | constant | NOTE_INDENT | 37 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### osculating_cache_manager.py
 
@@ -1985,10 +1986,11 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 360 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 361 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 2459 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 2590 | dict | SECTION_SYMBOLS[...] | (8 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
+| 366 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 367 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 2379 | constant | NIGHTLY_STALE_HOURS | 24 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 2508 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 2639 | dict | SECTION_SYMBOLS[...] | (8 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
 
 ### path_plan.py
 
