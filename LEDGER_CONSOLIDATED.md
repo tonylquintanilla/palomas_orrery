@@ -700,6 +700,12 @@ gallery's Claude Code session for L-399, L-502 and L-503, section 5, item
 2 of documentation/HANDOFF_coordination_20261026_28.md: the three built;
 L-504 (the orrery's clock) opened; lines on L-468, L-484, L-499 and
 L-458; then the road's order of Oct 29, 14:10, on L-485 and L-413), built on gallery efc4ea8f, then 963500ca after Tony's push of builds 1 and 2; orrery c143f73b, then b3bfab02.
+Module updated: October 29, 2026, evening, with Anthropic's Claude Opus
+5.5 (the gallery's short Claude Code session, section 5, item 1 of
+documentation/HANDOFF_coordination_20261028_29.md: L-399's cause found,
+astroquery's saved answers, and the guard measured by each body's own
+uncertainty; L-502 lower still; a line on L-504; the shared link not
+built, no item opened), built on gallery b3b4826f and orrery dceb4dc6.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -1553,9 +1559,24 @@ as an archive of the prioritization thinking -- no cleanup on close.
   a row in `constants_new.py`. A candidate: a row with its source (the
   IERS leap-second bulletin and TT's definition), served, so the page
   prints it from the row.
+- **Received 2026-10-29 evening from L-399 (each small body's own
+  uncertainty):** astroquery keeps every answer from JPL on disk for a
+  week and hands it back when the same question is asked again
+  (`astroquery.cache_conf.cache_timeout`, 604800 s). On 2026-10-29 that
+  served the website's 21:57 build an earlier run's orbit for 2026
+  ED138 after JPL had revised it; the website's builder now asks with
+  `cache=False` everywhere (`HORIZONS_CACHE`). The orrery's own
+  astroquery calls pass no `cache=` either (read at dceb4dc6), so a
+  question the orrery repeats within a week -- the same body, centre and
+  dates -- is answered from the saved copy, while the record says it was
+  fetched. The data path is this item's first slice, so it is opened
+  there: decide per call whether a fresh answer is wanted (a fetch whose
+  record says "retrieved" today should be), and say so where the call
+  is made.
 **Gap:** the next orrery session, the first slice (the data path), each
 reading made UTC and the conversion to TDB fed UTC; the later slices
-after it; the 69 seconds as a row.
+after it; the 69 seconds as a row; astroquery's saved answers in the
+data path's calls (received from L-399).
 **Ref:** Tony's run records `documentation/WHERE_WE_ARE_10-28-26_2242_run_record.md`
 and `WHERE_WE_ARE_10-28-26_2357_run_record.md`; gallery `interactive.html`
 (`solarSystemSourceLine`), `tools/gallery_cache_builder.py` (`utc_to_tdb`);
@@ -1614,8 +1635,44 @@ L-485; L-503.
   for the records session: CLAUDE.md and the skill should say which
   fields a direct edit may touch (drawing settings, a row's words), or
   that they come only through a tool.
-**Gap (replaces the one below, 2026-10-29):** Tony's phone look: the triad at the bottom centre with the thumb test, in the Sun, Earth and Solar System rooms; the three crosses off the axis; the empty pill gone. Then this closes, with L-468's crosses.
-**Gap (superseded above):** a design talk: where the triad sits on a phone, and a rule for
+- **Tony's look, run record `WHERE_WE_ARE_10-28-26_2357_run_record.md`,**
+  item 8: "yes, but can we move it further down?"; item 9, the three far
+  clouds' crosses: "i think so".
+- **2026-10-29 evening, lower still** (the gallery's short Claude Code
+  session, built on gallery b3b4826f, from
+  `documentation/COORD_gallery_short_session_brief_20261029.md` section
+  2; forms (a) and (b) together, every room, `interactive.html` CSS only).
+  (a) The frame HUD row and the count line sit at 48 px above the bottom
+  (were 58): the drawer button's top was measured at 46.4 px on a 375 px
+  page in the app's browser, so the row clears it by 1.6 px. (b) The
+  triad is drawn at three quarters, 78 by 90 px over its unchanged 104 by
+  120 viewBox; its x, y, z letters are set at 14.7 viewBox units so they
+  still print at 11 px, and the Aries glyph shrinks with the drawing,
+  from 15 to about 11 px. Its top edge comes down from 178 to 138 px. The
+  count line's width is now half the page less 59 px (the triad's new
+  half, 39, and two 10 px gaps), measured 10 px clear of the triad; the
+  frame note and the AU note sit at 128 px (were 168), 10 px into the
+  triad's top as before. Seen in the app's browser at 375 px in the Sun
+  and Solar System rooms (Earth's uses the same rules); the phone has
+  not seen it.
+- **Checked:** the gallery maintenance run offline, 36 of 36 gating
+  checks, Page framing and Hover budget among them; the headless walks
+  (tools/headless, jsdom, payloads built from the served cache): the
+  Sun's and Earth's Reset walks, 33 checks each, all pass; the drawer
+  order, both rooms in order with its planted fault red; the Solar
+  System room's walk, 168 of 171. The three that fail ("scene tap moved
+  the view"; "Sedna's hover lines are not bulleted"; "a body's text box
+  has a line wider than 62 characters") fail the same three on the
+  untouched b3b4826f, so they came before this build; they read as the
+  walk not yet following L-497's one text box. Recorded, not chased:
+  for the next session that opens `tools/headless/walk_solar_system_drawer.js`.
+- **The next step, if Tony's thumb still finds it** (the brief's form
+  (c)): the triad beside the drawer button on the bottom row, to its
+  left. More to move: the button is centred by flex and changes width
+  with the name it shows.
+**Gap (replaces the one below, 2026-10-29 evening):** Tony's phone look at the lower, smaller triad, with the thumb test, in the Sun, Earth and Solar System rooms; the letters readable. Then this closes, with L-468's crosses (judged "i think so").
+**Gap (superseded above, 2026-10-29):** Tony's phone look: the triad at the bottom centre with the thumb test, in the Sun, Earth and Solar System rooms; the three crosses off the axis; the empty pill gone. Then this closes, with L-468's crosses.
+**Gap (superseded, earlier):** a design talk: where the triad sits on a phone, and a rule for
 placing an info cross clear of dense drawing.
 **Ref:** L-497; interactive-exhibit, the anatomy (the frame HUD); L-318.
 
@@ -4430,8 +4487,85 @@ horizons-orbital-mechanics 1.3; L-398; L-399; L-431;
   now prints "47.22 AU from the Sun (7,065,000,000 km)", set by JPL's
   uncertainty; Sedna "82.82 AU (12,389,000,000 km)". 36 of 36 gating
   checks after the build.
-**Gap (replaces the one below, 2026-10-29):** Tony's phone look: ED138's distance to the million km and no "not yet included" line; Halley, Ikeya-Seki and Bennu with it.
-**Gap (superseded above):** the website's half: the builder asks the same way and the
+- **The Daily Run of 2026-10-29, 21:57 UTC refused 2026 ED138** ("JPL's
+  2xr answer sits 8.88e-05 AU from the served point, so another record
+  answered"; served for 50 of 54). The room printed ED138 to the tens with
+  the sentence, as designed for a refusal (Tony's look, run record item 6:
+  "reads to the 10's still").
+- **2026-10-29 evening, the cause** (the gallery's short Claude Code
+  session, built on gallery b3b4826f and orrery dceb4dc6, from
+  `documentation/COORD_gallery_short_session_brief_20261029.md` section
+  1). Not a different record and not a timing difference: astroquery's
+  saved answers. Read in the session:
+  - JPL's 2xr answer for ED138 at the served moment, JD 2461342.500694444
+    TDB from the Sun: X 2.523971430119438, Y -44.5730917643724,
+    Z -15.39482066037595 AU, R_s 1.80251391e-04 AU. The served point:
+    2.523967238837812, -44.57300836441859, -15.3947905194702. Apart by
+    8.878e-05 AU: 8.2e-06 along the body's motion (about 5 minutes of
+    it, from the day before's point) and 8.84e-05 across it. So JPL's
+    orbit for ED138 had changed.
+  - A plain position query asked fresh at that moment returned exactly
+    the 2xr position. The served Oct 29 point and the served elements
+    (a 42.97036552962497 AU) are byte-identical in the cache of the run
+    of 03:50 UTC (efc4ea8f), of 14:05 (963500ca) and of 21:57
+    (b3b4826f), while each run's "retrieved" stamp moved.
+  - The elements asked again with astroquery's saved answers on returned
+    exactly the served digits; asked fresh, a = 42.97057707653965.
+  - So: JPL revised ED138's orbit between the 14:05 and 21:57 runs (a
+    2026 discovery, its orbit revised as observations arrive). astroquery
+    keeps every answer on disk for a week
+    (`astroquery.cache_conf.cache_timeout`, 604800 s, in
+    `~/.astropy/cache/astroquery/Horizons`) and hands it back when the
+    same question is asked again, and the builder never turned that off.
+    The 21:57 run's orbit and point were an earlier run's saved answer,
+    while its 2xr question, sent directly with requests, met the new
+    orbit, and the 1e-7 AU match refused it.
+- **2026-10-29 evening, the fix, two parts** (same session).
+  - EVERY QUESTION ASKED FRESH: `HORIZONS_CACHE = False` in
+    `tools/gallery_cache_builder.py`, passed to all six astroquery calls
+    (positions by range and by epochs, elements, the solution TP, the
+    pole of date, the orbit plane). A same-day rebuild now serves what
+    JPL says at that run, and the "retrieved" stamps are true. The 2xr
+    question was already fresh.
+  - THE MATCH MEASURED BY THE BODY (Tony's direction, the handoff's
+    section 4; the rule is method): R_s is read first, and an answer with
+    none serves nothing, as before. Then the answer is accepted within
+    `uncertainty_match_tolerance(R_s)`: the body's own 3-sigma, 3 x R_s,
+    floored at 1e-7 AU (the old fixed tolerance, about 15 km; Ceres and
+    Apophis keep it) and CAPPED at 1e-3 AU (about 150,000 km). Why the
+    cap: the pieces of C/2025 K1, read live from JPL in the session.
+    The parent's 3-sigma is 1.3e-05 AU, B's 0.0022, C's 0.00088, D's
+    0.0043; the pairs sit 0.0024 (parent and C), 0.0042 (B and D) and
+    0.017 to 0.023 AU apart. D's answer standing in for B's would pass
+    D's 3-sigma alone. The cap is under half the closest pair. (The four
+    are served as open paths, so none is asked today; the rule holds for
+    any body.) Every other body sits AU away: of the 54 asked, the
+    widest 3-sigma served was 0.028 AU (2024 DW) and the closest
+    neighbour of any of them was 0.117 AU. ED138 under the rule: 8.88e-05
+    AU off, within its 5.41e-04 AU, so it is served.
+  - A REFUSAL NAMES ITS ITEMS: its reason carries the id asked, the
+    distance, the tolerance and how it was worked out, and JPL's X, Y, Z
+    beside the served point's; the run record's
+    `position_uncertainty.refused` holds the same as fields (`asked_id`,
+    `jd`, `answer_au`, `served_au`, `r_s_au`, `off_au`, `tolerance_au`).
+- **Checked:** the builder's offline suite, 498 checks, 0 failures
+  (493 before). "Another record" is re-planted half an AU away; new:
+  an answer 1e-05 AU off, inside its own 3-sigma (3e-04) but beyond the
+  floor, is served (ED138's case); one inside its 3-sigma but beyond the
+  cap is refused, and with the cap switched off it is served (the cap
+  can fail); the refusal's fields read back; with the floor switched to
+  infinity the whole match is off and the planted answer leaks, as
+  before; and every one of the builder's six astroquery questions is
+  called against a recorder and must ask with cache=False, with a
+  planted fault (the setting turned on) caught. Nothing on the page
+  changed: the served block is the same shape.
+- **Sent on:** the orrery's own astroquery calls do not turn the saved
+  answers off either (no `cache=` anywhere in its modules, read at
+  dceb4dc6); a line on L-504 (the orrery's clock), whose session opens
+  the data path next.
+**Gap (replaces the one below, 2026-10-29 evening):** Tony's Daily Run: its `[UNCERTAINTY]` line reads 51 of 54, with bennu, halley and ikeya_seki the only three missing; then his phone look, ED138's distance to the million km and no "not yet included" line. Then this closes.
+**Gap (superseded above, 2026-10-29):** Tony's phone look: ED138's distance to the million km and no "not yet included" line; Halley, Ikeya-Seki and Bennu with it.
+**Gap (superseded, earlier):** the website's half: the builder asks the same way and the
 Solar System room prints by it; with the near-Earth asteroid design.
 **Ref:** L-398; L-363; tools/gallery_cache_builder.py (gallery).
 

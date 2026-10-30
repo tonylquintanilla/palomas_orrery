@@ -1076,12 +1076,132 @@ CHECKERS -- the verdict informs the push call
 C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 
 2. GitHub Desktop: commit and push the gallery, -- b3b4826f4280b795e2efe2e9e30efa3e6be23ae4
-3. then the orrery (the orrery commit carries the two design records and the door folder). -- 
-4. Copy `documentation\python_work_door\CLAUDE.md` to `python_work\CLAUDE.md`, and `settings.json` to `python_work\.claude\settings.json`.
+3. then the orrery (the orrery commit carries the two design records and the door folder). -- dceb4dc6344e73c3c8a82df684cf54f5bf5e6c25
+4. Copy `documentation\python_work_door\CLAUDE.md` to `python_work\CLAUDE.md`, and `settings.json` to `python_work\.claude\settings.json`. -- done
 5. The live run.
-6. Phone looks: ED138 to the million km, Halley still with its sentence; the triad at bottom centre, thumb test; the crosses off the axis, the empty box gone; the belt's cloud row, tick, Go To, Reset, its words; the i panel's dates with UTC and JPL's clock, your centre-of-mass sentence.
-7. Reinstall interactive-exhibit 1.28, if not done.
-8. When you like, in Google Forms: add to the guest book form's description that a problem report stays private.
-9. Send me both SHAs.
+
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 52 files from https://palomasorrery.com/
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches (the working copy is CRLF)
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+    SERVED   gallery/arrival.js                             matches the working copy
+    SERVED   gallery/nav_cluster.js                         matches the working copy
+    SERVED   gallery/solar_system_figures.js                matches the working copy
+    SERVED   gallery/solar_system_drawer.js                 matches the working copy
+    SERVED   data/objects_config.json                       matches the working copy
+    SERVED   gallery/guestbook.js                           matches the working copy
+    SERVED   data/guestbook.json                            matches the working copy
+    SERVED   data/solar-system/drawings/hills_cloud.json    matches the working copy
+    SERVED   data/solar-system/drawings/van_allen_belts.json matches the working copy
+    SERVED   data/solar-system/drawings/earth_exosphere.json matches the working copy
+    SERVED   data/solar-system/drawings/sun_corona.json     matches the working copy
+    SERVED   data/solar-system/drawings/zodiacal_dust.json  matches the working copy
+    SERVED   data/solar-system/drawings/outer_oort_cloud.json matches the working copy
+    SERVED   data/solar-system/drawings/galactic_tide.json  matches the working copy
+    SERVED   gallery/source_list.js                         matches the working copy
+    SERVED   gallery/far_lines.js                           matches the working copy
+    SERVED   gallery/direction_arrows.js                    matches the working copy
+    SERVED   gallery/drawer_order.js                        matches the working copy
+    SERVED   gallery/text_box.js                            matches the working copy
+    SERVED   data/solar-system/positions/voyager_2.json     matches the working copy
+    SERVED   data/solar-system/positions/new_horizons.json  matches the working copy
+    SERVED   data/solar-system/positions/juno.json          matches the working copy
+    SERVED   data/solar-system/positions/osiris_apex.json   matches the working copy
+    SERVED   data/solar-system/positions/parker_solar_probe.json matches the working copy
+    SERVED   data/solar-system/positions/bepicolombo.json   matches the working copy
+    SERVED   data/solar-system/positions/solar_orbiter.json matches the working copy
+    SERVED   data/solar-system/positions/lucy.json          matches the working copy
+    SERVED   data/solar-system/positions/juice.json         matches the working copy
+    SERVED   data/solar-system/positions/psyche_spacecraft.json matches the working copy
+    SERVED   data/solar-system/positions/europa_clipper.json matches the working copy
+    SERVED   data/solar-system/positions/wierzchos.json     matches the working copy
+    SERVED   data/solar-system/positions/west.json          matches the working copy
+    SERVED   data/solar-system/positions/mcnaught.json      matches the working copy
+    SERVED   data/solar-system/positions/tsuchinshan_atlas.json matches the working copy
+    SERVED   data/solar-system/positions/atlas_2024_g3.json matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1.json      matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1_b.json    matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1_c.json    matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1_d.json    matches the working copy
+    SERVED   data/solar-system/positions/panstarrs_2025_r3.json matches the working copy
+    SERVED   data/solar-system/positions/borisov_2025_v1.json matches the working copy
+    SERVED   data/solar-system/positions/oumuamua.json      matches the working copy
+    SERVED   data/solar-system/positions/borisov_2i.json    matches the working copy
+    SERVED   data/solar-system/positions/atlas_3i.json      matches the working copy
+
+  PASS Served reachability       7.5s  all 52 files served and
+                                    byte-identical to the working copy
+
+  orrery export pinned at b3bfab02
+
+  PASS Export freshness          0.4s  the served export is the orrery's
+                                    at b3bfab02, byte for byte
+
+  orrery HEAD dceb4dc6
+  examining 3 of 182 links; the other 179 are served from the export
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  3 pointers: 1 match, 0 DRIFT, 0 UNIT MISMATCH, 2 could not be examined.
+
+  PASS Store drift               2.4s  3 pointers against orrery dceb4dc6
+                                    -- 1 match, 0 DRIFT, 0 UNIT
+                                    MISMATCH, 2 could not be examined.
+
+======================================================================
+  2 of 2 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Store drift            3 pointers against orrery dceb4dc6 -- 1
+  last swap 2026-10-29T21:57:57.080260+00:00: succeeded first time
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+6. Phone looks: ED138 to the million km, -- no, reads to the 10's still. 
+7. Halley still with its sentence; -- yes
+8. the triad at bottom centre, thumb test; -- yes, but can we move it further down?
+9. the crosses off the axis, -- i think so, which object?
+10. the empty box gone; -- yes 
+11. the belt's cloud row, tick, Go To, Reset, its words; -- yes, see upload
+12. the i panel's dates with UTC and JPL's clock, your centre-of-mass sentence. -- see upload
+13. Reinstall interactive-exhibit 1.28, if not done. -- already done
+14. When you like, in Google Forms: add to the guest book form's description that a problem report stays private. -- testing. not done.
+15. Send me both SHAs. orrery: dceb4dc6344e73c3c8a82df684cf54f5bf5e6c25 gallery: b3b4826f4280b795e2efe2e9e30efa3e6be23ae4
 
 When the SHAs come I confirm them against GitHub, and then I write the coordination handoff for Oct 28 to 29, which closes this coordinating session.
+
+====================================================================
+
+**Fable:**
+
+Both SHAs confirmed against GitHub: gallery b3b4826f ("daily run again", 17:02) and orrery dceb4dc6 ("ledger and documentation", 17:03, carrying the two design records and the door folder). Your looks, in order:
+
+- **ED138 to the tens, not the million.** Your eyes are right, and the run record says why. The 09:05 build served JPL's uncertainty for 51 of 54 small bodies, ED138 among them. The 16:56 build served 50: it refused ED138 with "JPL's 2xr answer sits 8.88e-05 AU from the served point, so another record answered". That is the guard Code built to catch the Pluto-Metis kind of mistake, where JPL answers for a different body. Here it fired on a difference of 13,000 km, which is a thirtieth of ED138's own 445,000 km uncertainty: the same body, a hair apart, probably the minute asked. The guard's tolerance is too tight; it should be measured against the body's own uncertainty, not a fixed distance. And the fallback did exactly what we asked this morning: no uncertainty served, so the honest sentence stayed. Recorded for a short gallery Code session; L-399 does not close on this look.
+- **Halley with its sentence:** correct, as designed.
+- **The triad lower still:** noted as your ruling on L-502; a one-line change in the same short session.
+- **The crosses:** the three far clouds in the Solar System room: the Hills cloud, the outer Oort cloud and the galactic tide. Tick one in the drawer and press Go To; the cross should sit at the cloud's edge on a diagonal, not on the red x axis where it was.
+- **The belt's cloud:** your screenshots show it working as ruled, and the words read well.
+- **The i panel's dates:** not in the screenshots you sent (the Sun room's frame note is, and the belt's panel cuts off at "Sources"). Open ED138's i panel when you like and read its source bullet; it should say UTC after the retrieved date and name JPL's clock for the orbit's date.
+
+I'm writing the coordination handoff for Oct 28 to 29 now, into the orrery's documentation folder.
+
+The handoff is placed and confirmed: `HANDOFF_coordination_20261028_29.md` in the orrery's documentation folder, 12,265 bytes, matching the copy here. It anchors at orrery dceb4dc6 and gallery b3b4826f, carries this period's rulings with where each is recorded, the state at HEAD including the ED138 guard finding, the queue in the order you ruled at 14:10, and what is owed. It supersedes the Oct 26-28 handoff as the latest coordination record.
+
+Where this leaves us, in the handoff's own words: L-443 is closed and the belt is on both instruments; L-502 and L-503 are built and wait on your looks; L-399 is built but does not close, because the guard refused ED138 at the second build and a short gallery session fixes its tolerance. Next is that short session, then the orrery's clock (L-504), then the nightly run (L-485), with Earth's talks beside.
+
+Your two remaining dos: commit this handoff with the next orrery push, and the guest book form's sentence when you like. The next coordinating session opens with this file and your latest run record.  
