@@ -360,7 +360,7 @@ The whole brief is done: the orrery reads its clock as UTC, and the full mainten
 
 I'll check Code's report against your folder before you commit: Where We Are, the ledger's closures, the protocol's manifest, and the new clock helper.
 
-Code's work checks out against your folder. Go ahead and commit.
+Code's work checks out against your folder. Go ahead and commit. -- a0e5a82ff2177c8ce4ca8400a898f76bdfd4c650
 
 **What I checked**
 
@@ -378,8 +378,175 @@ Code's work checks out against your folder. Go ahead and commit.
 
 **Your steps now**
 
-1. Run the orrery once from VS Code's Run button: the date fields open on October 30 (tomorrow's date, in UTC), say UTC, and Earth and the Moon draw. Pluto's hover reads 247.990 years.
-2. GitHub Desktop: commit and push the orrery, with the three new files ticked (`utc_clock.py`, `documentation/project_instructions_v3_118.md`, your run record).
+1. Run the orrery once from VS Code's Run button: the date fields open on October 30 (tomorrow's date, in UTC), say UTC, and Earth and the Moon draw. Pluto's hover reads 247.990 years. -- correct. see uploaded images. 
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/palomas_orrery.py
+Working directory set to: c:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github
+Interpreter: C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe
+Working directory: c:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github
+Window config file: c:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\window_config.json
+Restored window geometry: 1536x793+0+5
+Window will be maximized
+
+============================================================
+LOADING ORBIT CACHE FROM: data/orbit_paths.json
+============================================================
+
+Cache loaded successfully: 1503 valid entries
+
+[CACHE HEALTH SUMMARY]
+Total cached orbits: 1503
+Orbits by center object:
+  3I/ATLAS: 5 orbits
+  Apophis: 2 orbits
+  Arrokoth: 6 orbits
+  Bennu: 2 orbits
+  Bennu/OSIRIS: 1 orbits
+  Earth: 135 orbits
+  Earth-Moon Barycenter: 3 orbits
+  Eris: 2 orbits
+  Eris-Dysnomia Barycenter: 4 orbits
+  Eris/Dysnomia: 101 orbits
+  Haumea: 11 orbits
+  Haumea System Barycenter: 3 orbits
+  Juno: 4 orbits
+  Jupiter: 104 orbits
+  K1: 2 orbits
+  K1-B: 1 orbits
+  K1-C: 1 orbits
+  K1-D: 1 orbits
+  L1: 2 orbits
+  L2: 3 orbits
+  Leucus: 1 orbits
+  Makemake: 1 orbits
+  Mars: 106 orbits
+  Menoetius: 2 orbits
+  Mercury: 102 orbits
+  Moon: 112 orbits
+  Neptune: 101 orbits
+  Orcus: 3 orbits
+  Orcus-Vanth Barycenter: 3 orbits
+  Patroclus: 2 orbits
+  Patroclus-Menoetius Barycenter: 4 orbits
+  Phobos: 6 orbits
+  Planet 9: 5 orbits
+  Pluto: 102 orbits
+  Pluto-Charon Barycenter: 9 orbits
+  Polymele: 1 orbits
+  Quaoar: 1 orbits
+  Quaoar-Weywot Barycenter: 2 orbits
+  R2: 1 orbits
+  Saturn: 101 orbits
+  Sun: 158 orbits
+  Uranus: 101 orbits
+  Vanth: 2 orbits
+  Venus: 101 orbits
+
+Note: Cache can only be manually deleted by removing 'data/orbit_paths.json' file
+Cache and restore points (date = when that content was written):
+  data/orbit_paths.json: 131.1 MB, written 2026-10-28 14:57
+  data/orbit_paths.json.backup: 131.1 MB, written 2026-10-28 14:54
+  data/orbit_paths.json.backup_old: 131.1 MB, written 2026-10-27 22:28
+--------------------------------------------------
+[DEBUG] Sun can be center (numeric ID: 10)
+[DEBUG] Mercury can be center (numeric ID: 199)
+[DEBUG] Venus can be center (numeric ID: 299)
+[DEBUG] Apophis can be center (has center_id)
+[DEBUG] Earth can be center (numeric ID: 399)
+[DEBUG] Moon can be center (numeric ID: 301)
+[DEBUG] Earth-Moon Barycenter can be center (numeric ID: 3)
+[DEBUG] EM-L1 can be center (numeric ID: 3011)
+[DEBUG] EM-L2 can be center (numeric ID: 3012)
+[DEBUG] EM-L3 can be center (numeric ID: 3013)
+[DEBUG] EM-L4 can be center (numeric ID: 3014)
+[DEBUG] EM-L5 can be center (numeric ID: 3015)
+[DEBUG] L1 can be center (numeric ID: 31)
+[DEBUG] L2 can be center (numeric ID: 32)
+[DEBUG] L3 can be center (numeric ID: 33)
+[DEBUG] L4 can be center (numeric ID: 34)
+[DEBUG] L5 can be center (numeric ID: 35)
+[DEBUG] Bennu can be center (has center_id)
+[DEBUG] Itokawa can be center (has center_id)
+[DEBUG] Ryugu can be center (has center_id)
+[DEBUG] Eros can be center (has center_id)
+[DEBUG] Mars can be center (numeric ID: 499)
+[DEBUG] Phobos can be center (numeric ID: 401)
+[DEBUG] Deimos can be center (numeric ID: 402)
+[DEBUG] Dinkinesh can be center (has center_id)
+[DEBUG] Vesta can be center (has center_id)
+[DEBUG] Donaldjohanson can be center (has center_id)
+[DEBUG] Ceres can be center (has center_id)
+[DEBUG] 16 Psyche can be center (has center_id)
+[DEBUG] Orus can be center (has center_id)
+[DEBUG] Polymele can be center (has center_id)
+[DEBUG] Eurybates can be center (has center_id)
+[DEBUG] Patroclus-Menoetius Barycenter can be center (numeric ID: 20000617)
+[DEBUG] Patroclus can be center (has center_id)
+[DEBUG] Menoetius can be center (has center_id)
+[DEBUG] Leucus can be center (has center_id)
+[DEBUG] Jupiter can be center (numeric ID: 599)
+[DEBUG] Metis can be center (numeric ID: 516)
+[DEBUG] Adrastea can be center (numeric ID: 515)
+[DEBUG] Amalthea can be center (numeric ID: 505)
+[DEBUG] Thebe can be center (numeric ID: 514)
+[DEBUG] Io can be center (numeric ID: 501)
+[DEBUG] Europa can be center (numeric ID: 502)
+[DEBUG] Ganymede can be center (numeric ID: 503)
+[DEBUG] Callisto can be center (numeric ID: 504)
+[DEBUG] Saturn can be center (numeric ID: 699)
+[DEBUG] Pan can be center (numeric ID: 618)
+[DEBUG] Daphnis can be center (numeric ID: 635)
+[DEBUG] Prometheus can be center (numeric ID: 616)
+[DEBUG] Pandora can be center (numeric ID: 617)
+[DEBUG] Mimas can be center (numeric ID: 601)
+[DEBUG] Enceladus can be center (numeric ID: 602)
+[DEBUG] Tethys can be center (numeric ID: 603)
+[DEBUG] Dione can be center (numeric ID: 604)
+[DEBUG] Rhea can be center (numeric ID: 605)
+[DEBUG] Titan can be center (numeric ID: 606)
+[DEBUG] Hyperion can be center (numeric ID: 607)
+[DEBUG] Iapetus can be center (numeric ID: 608)
+[DEBUG] Phoebe can be center (numeric ID: 609)
+[DEBUG] Uranus can be center (numeric ID: 799)
+[DEBUG] Ariel can be center (numeric ID: 701)
+[DEBUG] Umbriel can be center (numeric ID: 702)
+[DEBUG] Titania can be center (numeric ID: 703)
+[DEBUG] Oberon can be center (numeric ID: 704)
+[DEBUG] Miranda can be center (numeric ID: 705)
+[DEBUG] Portia can be center (numeric ID: 712)
+[DEBUG] Mab can be center (numeric ID: 726)
+[DEBUG] Neptune can be center (numeric ID: 899)
+[DEBUG] Triton can be center (numeric ID: 801)
+[DEBUG] Despina can be center (numeric ID: 805)
+[DEBUG] Galatea can be center (numeric ID: 806)
+[DEBUG] Pluto-Charon Barycenter can be center (numeric ID: 9)
+[DEBUG] Pluto can be center (numeric ID: 999)
+[DEBUG] Charon can be center (numeric ID: 901)
+[DEBUG] Styx can be center (numeric ID: 905)
+[DEBUG] Nix can be center (numeric ID: 902)
+[DEBUG] Kerberos can be center (numeric ID: 904)
+[DEBUG] Hydra can be center (numeric ID: 903)
+[DEBUG] Orcus-Vanth Barycenter can be center (numeric ID: 20090482)
+[DEBUG] Orcus can be center (has center_id)
+[DEBUG] Vanth can be center (has center_id)
+[DEBUG] Haumea can be center (has center_id)
+[DEBUG] Hi'iaka can be center (has center_id)
+[DEBUG] Namaka can be center (has center_id)
+[DEBUG] Quaoar can be center (has center_id)
+[DEBUG] Weywot can be center (has center_id)
+[DEBUG] Arrokoth can be center (has center_id)
+[DEBUG] Makemake can be center (numeric ID: 20136472)
+[DEBUG] MK2 can be center (numeric ID: 120136472)
+[DEBUG] Gonggong can be center (has center_id)
+[DEBUG] Xiangliu can be center (has center_id)
+[DEBUG] Eris can be center (has center_id)
+[DEBUG] Dysnomia can be center (has center_id)
+[CENTER MENU] Dynamic center dropdown initialized (starts with Sun only)
+[DASHBOARD] Dashboard ready.
+[CENTER MENU] Added traces to 184 object variables
+Restored sash positions: [489, 1013]
+
+2. GitHub Desktop: commit and push the orrery, with the three new files ticked (`utc_clock.py`, `documentation/project_instructions_v3_118.md`, your run record). 
 3. Settings > Skills: reinstall the four skills.
 4. One line in your run record for the gallery session (`WHERE_WE_ARE_10-29-26_1818_run_record.md`): your 20:11 look, "ED138 to the hundred-thousand km with no sentence; the triad small and low: Correct". Code closed the two items on my account of it; your own line makes the record whole. It can go with tomorrow's push.
 5. Send me the orrery's SHA. I'll confirm it and write the coordination handoff for Oct 29-30, which closes this coordinating session; tomorrow's Daily Run and the gallery's push come after it.
