@@ -1,0 +1,210 @@
+{
+  "_comment": "Written by orrery_maintenance_run.py --night on a clean night only (L-485), so this is the last clean run. The dashboard reads it. A red night writes nothing: its record is the run's log on GitHub.",
+  "schema": 1,
+  "clean_run_utc": "2026-10-30T22:39:05.685574+00:00",
+  "where": "GitHub Actions",
+  "run_log": "https://github.com/tonylquintanilla/palomas_orrery/actions/runs/41139306173",
+  "reported_not_red": [],
+  "rows": [
+    {
+      "row": "Constants export",
+      "kind": "generator",
+      "verdict": "unchanged (1 checked, not written)"
+    },
+    {
+      "row": "Period fetch",
+      "kind": "generator",
+      "verdict": "unchanged (1 checked, not written) -- NOTHING MISSING -- 90 served objects examined, no query asked"
+    },
+    {
+      "row": "Horizons check",
+      "kind": "generator",
+      "verdict": "unchanged (2 checked, not written) -- NOTHING DUE -- 90 entries and 26 sheets current, no query asked"
+    },
+    {
+      "row": "Path plan",
+      "kind": "generator",
+      "verdict": "unchanged (1 checked, not written) -- 26 paths, events atlas_2024_g3 1, atlas_3i 1, bepicolombo 35, borisov_2025_v1 1, borisov_2i 1, c2025_k1 1, c2025_k1_b 1, c2025_k1_c 1, c2025_k1_d 1, europa_clipper 5, juice 10, juno 4, lucy 7, mcnaught 1, new_horizons 2, osiris_apex 13, oumuamua 1, panstarrs_2025_r3 1, parker_solar_probe 49, psyche_spacecraft 2, solar_orbiter 31, tsuchinshan_atlas 1, voyager_1 2, voyager_2 5, west 1, wierzchos 1. Asked JPL for: nothing."
+    },
+    {
+      "row": "Objects export",
+      "kind": "generator",
+      "verdict": "unchanged (1 checked, not written)"
+    },
+    {
+      "row": "Drawings export",
+      "kind": "generator",
+      "verdict": "unchanged (8 checked, not written)"
+    },
+    {
+      "row": "Constants export check",
+      "kind": "checker",
+      "verdict": "Export matches the store: sha256 0c1e4bbe865a on both sides; 228 rows re-read, 57 not exported, 45 tokens; 830 conversions re-computed, 12 of 12 worked cases hold; 228 citations worked out again, 8 of 8 worked cases hold."
+    },
+    {
+      "row": "Objects export check",
+      "kind": "checker",
+      "verdict": "pass"
+    },
+    {
+      "row": "Horizons confirmations",
+      "kind": "checker",
+      "verdict": "pass -- 90 of 90 entries and 63 periods confirmed, 26 sheets read, within 30 days"
+    },
+    {
+      "row": "Horizons check suite",
+      "kind": "checker",
+      "verdict": "pass -- 70 checks, every planted fault caught by name"
+    },
+    {
+      "row": "Period fetch suite",
+      "kind": "checker",
+      "verdict": "pass -- 39 checks, every planted fault caught (22 planted, 8 of them for Earth's period, L-445, 2 for Pluto's, L-443)"
+    },
+    {
+      "row": "Path plan suite",
+      "kind": "checker",
+      "verdict": "27 of 27 checks passed"
+    },
+    {
+      "row": "Orbit cache",
+      "kind": "checker",
+      "verdict": "All 12 orbit cache tests passed: cache loads, old formats convert, corrupted entries are dropped; the clock reads UTC and both forms of the fetched stamp read back; nothing left behind."
+    },
+    {
+      "row": "Drawings export check",
+      "kind": "checker",
+      "verdict": "PASS -- 22 of 22 planted faults caught; hills_cloud 3600 dots, plane tilted 31.0 deg, sha256 4d3e85616645; van_allen_belts 3200 dots, no plane recorded, sha256 75274e84f840; earth_exosphere 1500 dots, no plane recorded, sha256 6112639fb2cd; sun_corona 2500 dots, no plane recorded, sha256 e2b57ccbc8a4; zodiacal_dust 3000 dots, no plane recorded, sha256 995f13a056e8; outer_oort_cloud 2736 dots, no plane recorded, sha256 2f7ab88ee113; galactic_tide 5000 dots, no plane recorded, sha256 950a7511f0b5; main_belt 6000 dots, no plane recorded, sha256 712caffec391"
+    }
+  ],
+  "skipped": [
+    {
+      "row": "Ledger index",
+      "why": "writes a document, not data the website pulls; the night commits data only (R1)"
+    },
+    {
+      "row": "Skill manifest",
+      "why": "writes a document, not data the website pulls; the night commits data only (R1)"
+    },
+    {
+      "row": "Module atlas",
+      "why": "writes a document, not data the website pulls; the night commits data only (R1)"
+    },
+    {
+      "row": "Data inventory",
+      "why": "writes a document, not data the website pulls; the night commits data only (R1)"
+    },
+    {
+      "row": "Exact rows report",
+      "why": "writes a document, not data the website pulls; the night commits data only (R1)"
+    },
+    {
+      "row": "Document index",
+      "why": "writes a document, not data the website pulls; the night commits data only (R1)"
+    },
+    {
+      "row": "Constants change",
+      "why": "reads a git diff of code, and at night no code changes"
+    },
+    {
+      "row": "Constants relations",
+      "why": "judges code, and at night no code changes"
+    },
+    {
+      "row": "Derived figures",
+      "why": "judges code, and at night no code changes"
+    },
+    {
+      "row": "Skill headers",
+      "why": "judges code, and at night no code changes"
+    },
+    {
+      "row": "Exact rows by the count",
+      "why": "judges code, and at night no code changes"
+    },
+    {
+      "row": "Dimensions",
+      "why": "judges code, and at night no code changes"
+    },
+    {
+      "row": "Cross-check annotations",
+      "why": "judges code, and at night no code changes"
+    },
+    {
+      "row": "Citation inheritance",
+      "why": "judges code, and at night no code changes"
+    },
+    {
+      "row": "Status lines",
+      "why": "judges code, and at night no code changes"
+    },
+    {
+      "row": "Row shape",
+      "why": "judges code, and at night no code changes"
+    },
+    {
+      "row": "Scanner recognition 1d/1e",
+      "why": "judges code, and at night no code changes"
+    },
+    {
+      "row": "Scanner row run (L-414)",
+      "why": "judges code, and at night no code changes"
+    },
+    {
+      "row": "Reset completeness",
+      "why": "opens the orrery's window"
+    },
+    {
+      "row": "Earth pole of date",
+      "why": "judges code, and at night no code changes"
+    },
+    {
+      "row": "Hills cloud sampler (L-421)",
+      "why": "judges code, and at night no code changes"
+    },
+    {
+      "row": "Position digits (L-401)",
+      "why": "judges code, and at night no code changes"
+    },
+    {
+      "row": "Orbit markers (L-431, L-401)",
+      "why": "judges code, and at night no code changes"
+    },
+    {
+      "row": "Domain Split",
+      "why": "judges code, and at night no code changes"
+    },
+    {
+      "row": "Maintenance report (L-269)",
+      "why": "judges code, and at night no code changes"
+    },
+    {
+      "row": "Dashboard parity",
+      "why": "judges the dashboard's code"
+    },
+    {
+      "row": "Worksheet checker",
+      "why": "judges code, and at night no code changes"
+    },
+    {
+      "row": "Worksheet checker tests",
+      "why": "judges code, and at night no code changes"
+    },
+    {
+      "row": "Worksheet key round trip",
+      "why": "judges code, and at night no code changes"
+    },
+    {
+      "row": "Builder marker join",
+      "why": "judges code, and at night no code changes"
+    },
+    {
+      "row": "Extractor pins",
+      "why": "judges code, and at night no code changes"
+    },
+    {
+      "row": "Provenance scanner",
+      "why": "judges code; its push gate runs at Tony's push"
+    }
+  ]
+}
