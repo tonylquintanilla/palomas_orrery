@@ -333,20 +333,261 @@ Here it is, click by click. Steps 2 and 4 are GitHub's own words from its docume
 4. Choose **Read and write permissions**. The other choice, "Read repository contents and packages permissions", is the one GitHub sets by default, and it is why the night could not save anything without this change. -- done
 5. Click **Save**, just under the choices. -- done
 
-**Step 3, the push.** GitHub Desktop, as always: the change list should show the workflow file, the four edited Python files, the ledger, the Where We Are page and your run record. Write a summary, commit, and push. -- 
+**Step 3, the push.** GitHub Desktop, as always: the change list should show the workflow file, the four edited Python files, the ledger, the Where We Are page and your run record. Write a summary, commit, and push. -- 4db7aa8bba8d5907cf86fe62941e76d9149b98e8
 
 **Step 4, the first run by hand.** GitHub's steps, in its words:
 1. "On GitHub, navigate to the main page of the repository."
 2. "Under your repository name, click **Actions**."
-3. "In the left sidebar, click the name of the workflow you want to run." It is called **Nightly run**. If it is not there, the push has not landed yet; refresh after a moment.
-4. "Above the list of workflow runs, click the **Run workflow** button."
+3. "In the left sidebar, click the name of the workflow you want to run." It is called **Nightly run**. If it is not there, the push has not landed yet; refresh after a moment. -- this is under all workflows not actions. 
+4. "Above the list of workflow runs, click the **Run workflow** button." 
 5. "Select the **Branch** dropdown menu and click a branch to run the workflow on." Leave it at **main**.
-6. "Click **Run workflow**", the green button in the little box that opened.
+6. "Click **Run workflow**", the green button in the little box that opened. -- done
 
-A new line appears in the list within a few seconds, with a yellow dot while it runs and a green tick or a red cross when it ends. Click that line to open it. On the page that opens, click the job's name on the left to see the log. Each step is a row you can click to unfold. It should take about a minute and a half, going by Code's test. What to look for, in order: the night set's rows, each with a verdict; a line saying what it committed, or "nothing committed"; and the last step, the keep-alive. Paste me the last twenty or so lines, or tell me what you saw, and I will read it with you.
+7. A new line appears in the list within a few seconds, with a yellow dot while it runs and a green tick or a red cross when it ends. Click that line to open it. -- done
+8. On the page that opens, click the job's name on the left to see the log. Each step is a row you can click to unfold. It should take about a minute and a half, going by Code's test. -- yes
+9. What to look for, in order: the night set's rows, each with a verdict; a line saying what it committed, or "nothing committed"; and the last step, the keep-alive. 
+10. Paste me the last twenty or so lines, or tell me what you saw, and I will read it with you.
+
+Run python orrery_maintenance_run.py --night
+  
+======================================================================
+MAINTENANCE RUN, THE NIGHT SET -- its generators, then its checkers (L-485)
+======================================================================
+  Provenance scan is current (last run 20261030T195143Z, 0 day(s) ago).
+THE NIGHT SET -- 14 rows run, 32 skipped (each named)
+----------------------------------------------------------------------
+  skipped Ledger index -- writes a document, not data the website pulls; the
+          night commits data only (R1)
+  skipped Skill manifest -- writes a document, not data the website pulls;
+          the night commits data only (R1)
+  skipped Module atlas -- writes a document, not data the website pulls; the
+          night commits data only (R1)
+  skipped Data inventory -- writes a document, not data the website pulls;
+          the night commits data only (R1)
+  skipped Exact rows report -- writes a document, not data the website
+          pulls; the night commits data only (R1)
+  skipped Document index -- writes a document, not data the website pulls;
+          the night commits data only (R1)
+  skipped Constants change -- reads a git diff of code, and at night no code
+          changes
+  skipped Constants relations -- judges code, and at night no code changes
+  skipped Derived figures -- judges code, and at night no code changes
+  skipped Skill headers -- judges code, and at night no code changes
+  skipped Exact rows by the count -- judges code, and at night no code
+          changes
+  skipped Dimensions -- judges code, and at night no code changes
+  skipped Cross-check annotations -- judges code, and at night no code
+          changes
+  skipped Citation inheritance -- judges code, and at night no code changes
+  skipped Status lines -- judges code, and at night no code changes
+  skipped Row shape -- judges code, and at night no code changes
+  skipped Scanner recognition 1d/1e -- judges code, and at night no code
+          changes
+  skipped Scanner row run (L-414) -- judges code, and at night no code
+          changes
+  skipped Reset completeness -- opens the orrery's window
+  skipped Earth pole of date -- judges code, and at night no code changes
+  skipped Hills cloud sampler (L-421) -- judges code, and at night no code
+          changes
+  skipped Position digits (L-401) -- judges code, and at night no code
+          changes
+  skipped Orbit markers (L-431, L-401) -- judges code, and at night no code
+          changes
+  skipped Domain Split -- judges code, and at night no code changes
+  skipped Maintenance report (L-269) -- judges code, and at night no code
+          changes
+  skipped Dashboard parity -- judges the dashboard's code
+  skipped Worksheet checker -- judges code, and at night no code changes
+  skipped Worksheet checker tests -- judges code, and at night no code
+          changes
+  skipped Worksheet key round trip -- judges code, and at night no code
+          changes
+  skipped Builder marker join -- judges code, and at night no code changes
+  skipped Extractor pins -- judges code, and at night no code changes
+  skipped Provenance scanner -- judges code; its push gate runs at Tony's
+          push
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Constants export             1.6s  unchanged (1 checked, not written)
+  Period fetch                 0.2s  unchanged (1 checked, not written) --
+                                     NOTHING MISSING -- 90 served objects
+                                     examined, no query asked
+  Horizons check               0.2s  unchanged (2 checked, not written) --
+                                     NOTHING DUE -- 90 entries and 26 sheets
+                                     current, no query asked
+  Path plan                    0.2s  unchanged (1 checked, not written) -- 26
+                                     paths, events atlas_2024_g3 1, atlas_3i 1,
+                                     bepicolombo 35, borisov_2025_v1 1,
+                                     borisov_2i 1, c2025_k1 1, c2025_k1_b 1,
+                                     c2025_k1_c 1, c2025_k1_d 1, europa_clipper
+                                     5, juice 10, juno 4, lucy 7, mcnaught 1,
+                                     new_horizons 2, osiris_apex 13, oumuamua 1,
+                                     panstarrs_2025_r3 1, parker_solar_probe 49,
+                                     psyche_spacecraft 2, solar_orbiter 31,
+                                     tsuchinshan_atlas 1, voyager_1 2, voyager_2
+                                     5, west 1, wierzchos 1. Asked JPL for:
+                                     nothing.
+  Objects export               0.2s  unchanged (1 checked, not written)
+  Drawings export              1.7s  unchanged (8 checked, not written)
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants export check       2.9s  Export matches the store: sha256
+                                     0c1e4bbe865a on both sides; 228 rows
+                                     re-read, 57 not exported, 45 tokens; 830
+                                     conversions re-computed, 12 of 12 worked
+                                     cases hold; 228 citations worked out again,
+                                     8 of 8 worked cases hold.
+  Objects export check         0.2s  pass
+  Horizons confirmations       0.2s  pass -- 90 of 90 entries and 63 periods
+                                     confirmed, 26 sheets read, within 30 days
+  Horizons check suite         0.2s  pass -- 70 checks, every planted fault
+                                     caught by name
+  Period fetch suite           1.7s  pass -- 39 checks, every planted fault
+                                     caught (22 planted, 8 of them for Earth's
+                                     period, L-445, 2 for Pluto's, L-443)
+  Path plan suite              2.1s  27 of 27 checks passed
+  Orbit cache                  1.2s  All 12 orbit cache tests passed: cache
+                                     loads, old formats convert, corrupted
+                                     entries are dropped; the clock reads UTC and
+                                     both forms of the fetched stamp read back;
+                                     nothing left behind.
+  Drawings export check       58.4s  PASS -- 22 of 22 planted faults caught;
+                                     hills_cloud 3600 dots, plane tilted 31.0
+                                     deg, sha256 4d3e85616645; van_allen_belts
+                                     3200 dots, no plane recorded, sha256
+                                     75274e84f840; earth_exosphere 1500 dots, no
+                                     plane recorded, sha256 6112639fb2cd;
+                                     sun_corona 2500 dots, no plane recorded,
+                                     sha256 e2b57ccbc8a4; zodiacal_dust 3000
+                                     dots, no plane recorded, sha256
+                                     995f13a056e8; outer_oort_cloud 2736 dots, no
+                                     plane recorded, sha256 2f7ab88ee113;
+                                     galactic_tide 5000 dots, no plane recorded,
+                                     sha256 950a7511f0b5; main_belt 6000 dots, no
+                                     plane recorded, sha256 712caffec391
+======================================================================
+  8 of 8 gating checkers passed -- 70.9s total
+======================================================================
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2327 file(s) examined, 0 written, 1 created, 0 removed, 0 rewritten identically
+    created   data/horizons_check_last_run.json
+    13 file(s) over 2 MB compared by size and mtime only
+======================================================================
+  wrote data/nightly_run_record.json, the last clean run
+  allowed files changed: none
+NIGHT RUN: CLEAN -- 14 rows run, 32 skipped, 0 reported
+======================================================================
+2s
+Run # Only the allow-list is added, read from the runner itself, so
+  
+[main 00c5576] Nightly run 2026-10-30 UTC: data/nightly_run_record.json
+ 1 file changed, 210 insertions(+)
+ create mode 100644 data/nightly_run_record.json
+To https://github.com/tonylquintanilla/palomas_orrery
+   4db7aa8..00c5576  main -> main
+NIGHT COMMIT: pushed 00c5576cda29d8a64b517db8970ef4ea694afbca: data/nightly_run_record.json 
+0s
+Run gh workflow enable nightly.yml
+  
+0s
+Post job cleanup.
+1s
+Post job cleanup.
+/usr/bin/git version
+git version 2.56.0
+Temporarily overriding HOME='/home/runner/work/_temp/278ef4fa-03b4-4557-abdf-6490c0411de5' before making global git config changes
+Adding repository directory to the temporary git global config as a safe directory
+/usr/bin/git config --global --add safe.directory /home/runner/work/palomas_orrery/palomas_orrery
+Removing SSH command configuration
+/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Removing HTTP extra header
+/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Removing includeIf entries pointing to credentials config files
+/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+includeif.gitdir:/home/runner/work/palomas_orrery/palomas_orrery/.git.path
+includeif.gitdir:/home/runner/work/palomas_orrery/palomas_orrery/.git/worktrees/*.path
+includeif.gitdir:/github/workspace/.git.path
+includeif.gitdir:/github/workspace/.git/worktrees/*.path
+/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/palomas_orrery/palomas_orrery/.git.path
+/home/runner/work/_temp/git-credentials-df5b817a-56de-4c24-86a9-36325899e49a.config
+/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/palomas_orrery/palomas_orrery/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-df5b817a\-56de\-4c24\-86a9\-36325899e49a\.config
+/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/palomas_orrery/palomas_orrery/.git/worktrees/*.path
+/home/runner/work/_temp/git-credentials-df5b817a-56de-4c24-86a9-36325899e49a.config
+/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/palomas_orrery/palomas_orrery/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-df5b817a\-56de\-4c24\-86a9\-36325899e49a\.config
+/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+/github/runner_temp/git-credentials-df5b817a-56de-4c24-86a9-36325899e49a.config
+/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-df5b817a\-56de\-4c24\-86a9\-36325899e49a\.config
+/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+/github/runner_temp/git-credentials-df5b817a-56de-4c24-86a9-36325899e49a.config
+/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-df5b817a\-56de\-4c24\-86a9\-36325899e49a\.config
+/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Removing credentials config '/home/runner/work/_temp/git-credentials-df5b817a-56de-4c24-86a9-36325899e49a.config'
 
 **Step 5.** Back in GitHub Desktop, click **Fetch origin** at the top. If the run saved anything, the button turns into **Pull origin** with a number; click it. Then run the dashboard from VS Code as usual: its top line should name today's date.
 
 **Step 6** is the week's habit: the Actions tab's newest line, then Pull origin, then the Daily Run as today.
 
 **The notification setting** Code listed is separate from the repository: click your picture at the top right of any GitHub page, then **Settings**, then **Notifications** in the left list, then scroll to **Actions**. Make sure the choice there is not "Don't notify". That setting is yours to look at when you like; it does not block the first run.
+
+====================================
+
+The first run worked, end to end. I read it from the log you pasted and confirmed it on GitHub itself: the night committed one file, `data/nightly_run_record.json`, as `github-actions[bot]`, and GitHub's copy of the orrery now stands at 00c5576, one commit ahead of your folder.
+
+What the log says, row by row: 14 rows ran and 32 were skipped, each with its reason; all six tools found nothing to write, which is right for a day you had just run the maintenance run yourself; all 8 checkers passed; the record was written; "allowed files changed: none", so the only thing committed was the record itself; and the keep-alive step ran without complaint.
+
+One thing the run could not show yet. JPL was asked nothing, because nothing was due ("NOTHING DUE -- 90 entries and 26 sheets current"). So whether JPL answers GitHub's computers is still unproven. It proves itself on the first night something comes due, which the Horizons check asks again from day 25 after its last confirmation. That night's log will say "Asked JPL for:" with names instead of "no query asked". It is the one thing to watch for in your week of morning reads, and I will carry it on L-485 until a log shows it. -- can we force a 30-day check as a test? 
+
+Your step 3 note is right: the left list is headed "All workflows", and "Nightly run" sits under it. I will correct that in the record.
+
+1. Next, step 5: in GitHub Desktop, **Fetch origin**, -- done
+2. then **Pull origin**, which brings 00c5576 down. -- correct: 00c5576cda29d8a64b517db8970ef4ea694afbca
+3. Then run the dashboard from VS Code; its top line should read today's date. -- yes, 2026-10-30 22:39 UTC
+4. After that, send me the SHA your folder shows; it should be 00c5576.
+
+===============================================================================
+
+One note for tomorrow, not tonight: the gallery has not been pushed today (still at b55109f2), so the Daily Run is still owed. From now on it comes after the morning pull, since its pull-matches-push check reads your orrery folder. The schedule's first run on its own is at 2:17 am Saturday, so Saturday morning is the first full morning: Actions tab, Pull origin, Daily Run. -- wait, since we are doing the nightly run with github, the daily run does not need all its functions, right? it does not need the cache rebuild? 
+
+Same answer as before: I am not committing or pushing. Commit and push are Tony's under the orrery's CLAUDE.md, and the untracked file the check sees is the brief in my cloud copy, which Tony has already committed from his own folder (1e454a8b).
+
+======================================================================================
+
+Yes. The Horizons check already has that form: the dashboard's "Horizons Check -- everything, now" button runs `horizons_check.py --all`, which asks JPL about every served object and sheet whatever their dates. GitHub's computer cannot press that button, so the workflow needs a small addition: a switch on its "Run workflow" box, something like "ask JPL for everything", that the night set passes to the Horizons check as `--all`. The nightly schedule never uses it; only a run you fire by hand does.
+
+What such a run would do: ask JPL about 90 entries, 63 periods and 26 sheets (the counts from today's log), one question at a time with a two-second pause between them (the check's own setting). That is on the order of ten minutes, under the 15-minute limit each tool has in the runner, and it would prove the one thing today's run could not. The confirmations come back stamped with today's date, so the night would commit `data/horizons_confirmations.json`, `data/spacecraft_sheets.json` and `data/objects_export.json`, which copies the dates. All three are on the allowed list, and the website's Daily Run would pull them as usual. Nothing else changes.
+
+It is a Code job of perhaps half an hour: the workflow file, a few lines in the runner to pass the switch through, a test that shows it reaches the Horizons check, and the records. It can go alone now, or ride with the per-body disagreement slice (P1) as the orrery's next session.
+
+One question: do you want it now, on its own, so the JPL question is answered this week? If yes, I will write a short brief for it and you open a Code session as before. -- yes, let's prove this part of the workflow now. 
+
+Not committing or pushing: that is Tony's, under the orrery's CLAUDE.md, and the file the check sees is already in GitHub from his own push.
+
+=============================================================================
+
+Two answers: the Daily Run first, then the brief.
+
+**The Daily Run still needs all its steps, for now.** What GitHub runs at night is the orrery half only: the orrery's 30-day JPL checks and the exports the website pulls. The website's half, the gallery's own nightly workflow that would pull those exports, rebuild the cache and commit the website, is item 2 on the queue and is not built yet. Until it is, your morning Daily Run does everything it does today: the guest book, the pulls, the cache build, the checks, then your commit and push of the gallery. What has changed is only the step before it: Pull origin in GitHub Desktop for the orrery, so the Daily Run's pull-matches-push check sees the night's commit in your folder. Once the gallery half exists, the morning shrinks to the guest book, which needs your answers, and a look at the two logs.
+
+**The brief for the "ask JPL for everything" switch is in your orrery documentation folder**, 8,344 bytes: `COORD_L485_ask_everything_brief_20261030.md`. It asks the session to add a tick box to the workflow's "Run workflow" screen that makes the night's Horizons check ask JPL about every object, as the dashboard's "everything, now" button does; to time that check once on your machine first, because the runner cuts a tool off at 15 minutes and the check may only save at the end; and to write the test that shows the switch reaches the check. The nightly schedule never ticks the box. Your hand-fired run with it ticked either prints "Asked JPL for:" with names and commits three refreshed data files, which closes the last verification, or prints UNREACHABLE everywhere, which would be the finding.
+
+Files for your run record:
+
+    ok documentation/COORD_L485_ask_everything_brief_20261030.md (new, 157 lines)
+
+Run order:
+1. Commit and push the orrery with this brief. -- 
+2. Open a Claude Code session through the python_work door and paste:
+
+   > Orrery repository. Please build from documentation/COORD_L485_ask_everything_brief_20261030.md: L-485, the "ask JPL for everything" switch on the nightly run. Read the brief, the orrery half's brief it names, and L-485's block first.
+
+3. Paste me its report before you commit; then its run order, which ends with the hand-fired run and the Horizons check's lines pasted here.
+
+Tony-action rollup:
+- (do) Commit and push; the Code session; its run order.
+- (do) The Daily Run today or tomorrow, after Pull origin, with all its steps as before.
+- (decide) Nothing.
+
+Not committing or pushing: those are Tony's under the orrery's CLAUDE.md. The untracked files the check sees are the two briefs in my cloud copy; the copies that matter are in Tony's folder, and he commits them from GitHub Desktop.
