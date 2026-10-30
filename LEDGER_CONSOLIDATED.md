@@ -706,6 +706,12 @@ documentation/HANDOFF_coordination_20261028_29.md: L-399's cause found,
 astroquery's saved answers, and the guard measured by each body's own
 uncertainty; L-502 lower still; a line on L-504; the shared link not
 built, no item opened), built on gallery b3b4826f and orrery dceb4dc6.
+Module updated: October 29-30, 2026, night, with Anthropic's Claude Opus
+5.5 (the orrery's Claude Code session, section 5, item 2 of
+documentation/HANDOFF_coordination_20261028_29.md: L-504's first slice
+built; L-399 and L-502 closed on Tony's look; Pluto's period ruled and
+the n.a. sentence on L-484; the belt's kilometres on L-503; lines on
+L-423 and L-499), built on orrery 571b9bf4 and gallery b55109f2.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -923,7 +929,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*250 live items; 234 need attention (`!`); 165 RICE-scored; 247 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*248 live items; 232 need attention (`!`); 165 RICE-scored; 249 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1046,13 +1052,12 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-393 | Encounter data: dates, spacecraft records centred on their targets, and how far the cache reaches in time (gallery, cache) | OPEN | -- | 2026-09-29 |
 | ! | L-394 | A card cannot say which body it belongs to (gallery, Studio) | OPEN | -- | 2026-09-29 |
 | ! | L-396 | Tony's page: WHERE_WE_ARE.md, the big picture in plain words (documentation, skills) | OPEN | -- | 2026-10-07 |
-| ! | L-399 | Small bodies: fetch each one's own position uncertainty from Horizons (gallery, builder) | OPEN | -- | 2026-10-29 |
 | ! | L-401 | The orrery's own distance hovers print by fixed widths, not by the errors the position earns (orrery, provenance) | OPEN | -- | 2026-10-21 |
 | ! | L-402 | Choose a date, or animate, within the range the drawn bodies are trusted for (gallery, exhibits) | OPEN | -- | 2026-10-01 |
 | ! | L-403 | Numbers in the object list's descriptions carry no source (orrery, provenance) | OPEN | -- | 2026-10-01 |
 | ! | L-411 | The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-28 |
 | ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-10-29 |
-| ! | L-423 | The website's checks: the order Tony confirmed (checks, gallery) | OPEN | -- | 2026-10-16 |
+| ! | L-423 | The website's checks: the order Tony confirmed (checks, gallery) | OPEN | -- | 2026-10-29 |
 | ! | L-424 | The checker reports one word for two different cases (worksheet checker) | OPEN | -- | 2026-10-11 |
 | ! | L-425 | A citation's location record is checked only in part (provenance tooling) | OPEN | -- | 2026-10-09 |
 | ! | L-426 | The worksheet checker compares very small numbers as equal (worksheet checker) | OPEN | -- | 2026-10-09 |
@@ -1084,7 +1089,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-498 | The master plan restamped as v37 at slice 2's close (documentation) | OPEN | -- | 2026-10-27 |
 | ! | L-499 | The kinds of session: three, told apart by what each writes, with the build session in two forms (protocol, Mode 7) | OPEN | -- | 2026-10-29 |
 | ! | L-500 | The Sun's twelve eyeballed shape numbers: the streamer belt's seven and the outer cloud's clumps' five (orrery + gallery, the Sun's drawings) | OPEN | -- | 2026-10-27 |
-| ! | L-502 | The triad's hover spot, and info crosses in crowded places (gallery, the rooms) | OPEN | -- | 2026-10-29 |
 | ! | L-503 | The main asteroid belt's cloud on the website, L-443's last piece, its gallery half (gallery, the Solar System room) | OPEN | -- | 2026-10-29 |
 | ! | L-504 | The orrery's clock: UTC everywhere (orrery, every module that reads the clock) | OPEN | -- | 2026-10-29 |
 
@@ -1420,6 +1424,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-395 | The gallery's objects are hand-copied from the orrery's dictionary: export them, and check them against Horizons (orrery, gallery, objects) | DONE | -- | 2026-10-14 |
 |  | L-397 | "Cache in step" compared only bodies with shells; it now compares every object (gallery, checks) | DONE | -- | 2026-09-30 |
 |  | L-398 | Distance figures: the source's own accuracy, not only our drift from Horizons (gallery, provenance) | DONE | -- | 2026-10-01 |
+|  | L-399 | Small bodies: fetch each one's own position uncertainty from Horizons (gallery, builder) | DONE | -- | 2026-10-29 |
 |  | L-400 | A stray folder "data/solar-system (1)" in Tony's gallery copy (gallery, housekeeping) | DONE | -- | 2026-10-01 |
 |  | L-404 | The Exhibit Store Editor did not list the Solar System room (gallery, tooling) | DONE | -- | 2026-10-02 |
 |  | L-405 | Skill text owed from the editor fix and the drawer build (skills) | DONE | -- | 2026-10-02 |
@@ -1482,6 +1487,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-496 | The drawer's search box finds groups too, such as "comet", "planet" or "asteroid" (gallery, the drawer) | DONE | -- | 2026-10-28 |
 |  | L-497 | Left-aligned text in every text box (gallery, the rooms) | DONE | -- | 2026-10-28 |
 |  | L-501 | 2026 ED138, the Rubin Observatory's first dwarf-planet candidate, added to the orrery as a test of the object pipeline (orrery + gallery, objects) | DONE | -- | 2026-10-28 |
+|  | L-502 | The triad's hover spot, and info crosses in crowded places (gallery, the rooms) | DONE | -- | 2026-10-29 |
 
 ### W.Done -- Web Publication track, closed items
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1573,7 +1579,71 @@ as an archive of the prioritization thinking -- no cleanup on close.
   there: decide per call whether a fresh answer is wanted (a fetch whose
   record says "retrieved" today should be), and say so where the call
   is made.
-**Gap:** the next orrery session, the first slice (the data path), each
+- **2026-10-29/30, the first slice built** (the orrery's Claude Code
+  session, built on orrery 571b9bf4 with gallery b55109f2 read only,
+  from `documentation/COORD_orrery_clock_session_brief_20261029.md`
+  section 1). THE HELPER: `utc_clock.py`, imported by all ten modules of
+  the slice. `utc_now()` and `utc_today()` return plain datetimes in UTC,
+  not zoned ones as the brief sketched, because every date the orrery
+  handles is a plain one meaning UTC and Python stops when a zoned one
+  meets a plain one; `utc_stamp()` writes ISO ending "+00:00";
+  `parse_stamp()` reads both forms, an old zoneless stamp as the local
+  time it was written in. THE COUNT, read at 571b9bf4 before editing: 49,
+  as the item said, of which 48 live and one inside a commented-out line
+  (palomas_orrery.py, the old `current_date` in plot_objects), changed
+  too so a recount finds none. Mapped before editing: the dates asked of
+  JPL (the date fields' opening date and Now, every fallback when the
+  fields cannot be read, `STATIC_TODAY` for the orbit paths, the
+  elements fetch's default date, the period fetch's and the Horizons
+  check's day, the path plan's day); the stamps (the orbit cache's
+  `fetched` and `created`, the period record's `fetched` and test `run`,
+  the close-approach cache, backup file names, `last_updated`,
+  `solution_date`); and the times shown (the status lines, the
+  dashboard's log, the path plan's start line, each now ending "UTC").
+  THE STAMPS: the orbit cache writes `fetched` as UTC with "+00:00" from
+  now; `calculate_age_days` reads both forms (Pluto's record was
+  refreshed in the session and carries the new form). A date-only stamp
+  keeps its form; one written before 2026-10-29 in the evening is a day
+  early against UTC until it is next refreshed. WHAT THE GUI SAYS: "End
+  (UTC):" beside "Start (UTC):"; the Now button's tooltip says UTC and
+  that the evening is already tomorrow's date; the period line "fetched
+  <date> UTC". The plot's title already said UTC. ASTROQUERY'S SAVED
+  ANSWERS (received from L-399): the recommendation held, one switch,
+  `utc_clock.HORIZONS_CACHE = False`, passed as `cache=` at all eight
+  calls in the slice (palomas_orrery.py 3, orbit_data_manager.py 2,
+  osculating_cache_manager.py 1, orbital_period.py 1,
+  close_approach_data.py 1); the orrery's own caches are its only
+  caches. Outside the slice, spacecraft_encounters.py's three calls
+  still pass none, for the later slice. CHECKED: TestUtcClock in
+  `test_orbit_cache.py` (the Orbit cache row), six tests: UTC readings,
+  both stamp forms with a planted old one, the cache's age read from
+  both, no local reading and no call without `cache=` in the ten
+  modules, and each check shown able to fail (run against the files at
+  571b9bf4 it finds 48 local readings and 8 calls); Position digits,
+  Orbit markers, Horizons check suite, Period fetch suite, Path plan
+  suite and Dashboard parity all pass; the pre-test on a throwaway copy
+  of palomas_orrery.py at 21:01 Chicago time opened the date fields on
+  2026-10-30 and Now filled 02:01 UTC.
+  WHAT TONY WILL NOTICE: in the evening the default date is tomorrow's;
+  a "now" plot moves by five hours of motion, the Moon about 19,000 km
+  (JPL's 1.074 km/s around Earth, read 2026-10-30 02:00 UTC; the brief's
+  13,000 km assumed 2,700 km/h), Earth about 540,000 km (29.98 km/s).
+  THE LATER SLICES, recounted at the end of this session: Earth System
+  fetches 10, report and cache stamps 26, unchanged; tools 5, two having
+  joined this slice (next bullet).
+- **Found by the maintenance run, and fixed in the slice:** two readers
+  of what the data path now dates in UTC still took the local date, and
+  went red at 21:30 Chicago time on 2026-10-29. `check_horizons_confirmations.py`
+  read tonight's confirmations, dated 2026-10-30 by `horizons_check.py`,
+  as "after today"; `test_reset_completeness.py` expected the date fields
+  on the local day. Both now read `utc_clock`, and both pass. FOR THE
+  NEXT GALLERY SESSION: the website's own `tools/check_horizons_confirmations.py`
+  takes `datetime.date.today()` (line 272 at b55109f2), the local day.
+  A Daily Run in the evening, after an evening orrery run has pushed
+  confirmations dated the next UTC day, would go red the same way; a
+  daytime run is not affected, the two days being the same then.
+**Gap (replaces the one below, 2026-10-29/30):** Tony's run of the orrery (the date fields on today's UTC date, a plot of Earth and the Moon); then the later slices, each importing `utc_clock`: the Earth System fetches (10), the report and cache stamps (26), the tools (5), and spacecraft_encounters.py's three astroquery calls with `cache=`; the 69 seconds as a row. For the next gallery session: its Horizons confirmations check reads the local day (above).
+**Gap (superseded above):** the next orrery session, the first slice (the data path), each
 reading made UTC and the conversion to TDB fed UTC; the later slices
 after it; the 69 seconds as a row; astroquery's saved answers in the
 data path's calls (received from L-399).
@@ -1581,100 +1651,6 @@ data path's calls (received from L-399).
 and `WHERE_WE_ARE_10-28-26_2357_run_record.md`; gallery `interactive.html`
 (`solarSystemSourceLine`), `tools/gallery_cache_builder.py` (`utc_to_tdb`);
 L-485; L-503.
-
-#### [L-502] The triad's hover spot, and info crosses in crowded places (gallery, the rooms)
-<!-- L:502 status:OPEN upd:2026-10-29 section:A flag: rice: -->
-- **Tony, in his run record** (`documentation/WHERE_WE_ARE_10-27-26_0906_run_record.md`, his look at
-  item 1): "minor issue: the triad hover is now easy to trip where it is at on
-  the bottom right. one's thumb easily goes there. could we relocate it in
-  the bottom center above the row label to the left of the grid label? in
-  general can we move the hover crosses away from the most dense areas where
-  they get lost in the glare?"
-- Captured on first mention by the L-501 session, which built nothing
-  on the website.
-- **Received 2026-10-28 from L-497, at its close:**
-  `gallery/text_box.js`'s header names `documentation/smoke_text_box.js`
-  as its check, which does not exist at acbf206b; the check is the
-  Hover budget row. A one-line comment fix when this build opens the
-  page's text-box code.
-- **2026-10-29, built** (the gallery's Claude Code session, built on
-  gallery efc4ea8f, pushed by Tony at 963500ca). THE TRIAD: the frame HUD
-  is a row across the bottom, above the drawer button (the row label),
-  the triad in its centre and the grid chip at its right end, in every
-  room (`interactive.html`, `.sun-hud`). Centred by text-align, because
-  `body.sun-exhibit .sun-chrome` sets display: block and outweighs a
-  flex rule on the HUD -- the first try left the triad at the left, seen
-  in the app's browser at 390 px. The count line keeps left of the
-  triad, wrapping. THE CROSSES: the Hills cloud's, the outer Oort
-  cloud's and the galactic tide's stay at their outer edges and turn off
-  the x axis by a served `drawing.info_polar_deg` (45, 225 and 135
-  degrees from the ecliptic's north pole), each picked where its own
-  dots are sparse: 8 of the Hills cloud's 3,600 dots within 10 degrees,
-  where 41 were on the axis; the outer cloud no longer on the tide's
-  cross; 31 of the tide's 5,000, where 51 were. Each `_declared` says
-  why. The rule, now held by the gallery run's Label words check: a
-  stored drawing's cross stands at least 15 degrees off every axis line,
-  and no two within 10 degrees of each other (a planted fault: the Hills
-  cloud's angle taken off a copy of the config). `gallery/text_box.js`'s
-  header now names its check, the Hover budget row.
-- **Fixed in passing, reported:** a hidden count line showed as an empty
-  pill at the lower left in every room (`.ss-outside[hidden]` was
-  outweighed by `body.sun-exhibit .sun-chrome`, as the frame note's
-  rule already warned).
-- **How the config was edited** (Tony's question 5 of 2026-10-29): the
-  four edits to `data/objects_config.json` (three angles, then the
-  tide's note folded into its `_declared`) were direct edits, the Code
-  form of what a patch does. interactive-exhibit, Only two tools write
-  the served config, names the mirror (numbers and citations) and the
-  store writer (words and arrival settings), and neither writes a
-  drawing setting; the skill's precedent for one (the dust cloud's
-  `info_polar_deg`, 2026-10-27, and a row's words and `find` words) is
-  a patch. No written rule allows a Code session's direct edit of a
-  drawing setting, and the gallery's CLAUDE.md says the config is
-  edited only through the tools the skills name. Recorded as a finding
-  for the records session: CLAUDE.md and the skill should say which
-  fields a direct edit may touch (drawing settings, a row's words), or
-  that they come only through a tool.
-- **Tony's look, run record `WHERE_WE_ARE_10-28-26_2357_run_record.md`,**
-  item 8: "yes, but can we move it further down?"; item 9, the three far
-  clouds' crosses: "i think so".
-- **2026-10-29 evening, lower still** (the gallery's short Claude Code
-  session, built on gallery b3b4826f, from
-  `documentation/COORD_gallery_short_session_brief_20261029.md` section
-  2; forms (a) and (b) together, every room, `interactive.html` CSS only).
-  (a) The frame HUD row and the count line sit at 48 px above the bottom
-  (were 58): the drawer button's top was measured at 46.4 px on a 375 px
-  page in the app's browser, so the row clears it by 1.6 px. (b) The
-  triad is drawn at three quarters, 78 by 90 px over its unchanged 104 by
-  120 viewBox; its x, y, z letters are set at 14.7 viewBox units so they
-  still print at 11 px, and the Aries glyph shrinks with the drawing,
-  from 15 to about 11 px. Its top edge comes down from 178 to 138 px. The
-  count line's width is now half the page less 59 px (the triad's new
-  half, 39, and two 10 px gaps), measured 10 px clear of the triad; the
-  frame note and the AU note sit at 128 px (were 168), 10 px into the
-  triad's top as before. Seen in the app's browser at 375 px in the Sun
-  and Solar System rooms (Earth's uses the same rules); the phone has
-  not seen it.
-- **Checked:** the gallery maintenance run offline, 36 of 36 gating
-  checks, Page framing and Hover budget among them; the headless walks
-  (tools/headless, jsdom, payloads built from the served cache): the
-  Sun's and Earth's Reset walks, 33 checks each, all pass; the drawer
-  order, both rooms in order with its planted fault red; the Solar
-  System room's walk, 168 of 171. The three that fail ("scene tap moved
-  the view"; "Sedna's hover lines are not bulleted"; "a body's text box
-  has a line wider than 62 characters") fail the same three on the
-  untouched b3b4826f, so they came before this build; they read as the
-  walk not yet following L-497's one text box. Recorded, not chased:
-  for the next session that opens `tools/headless/walk_solar_system_drawer.js`.
-- **The next step, if Tony's thumb still finds it** (the brief's form
-  (c)): the triad beside the drawer button on the bottom row, to its
-  left. More to move: the button is centred by flex and changes width
-  with the name it shows.
-**Gap (replaces the one below, 2026-10-29 evening):** Tony's phone look at the lower, smaller triad, with the thumb test, in the Sun, Earth and Solar System rooms; the letters readable. Then this closes, with L-468's crosses (judged "i think so").
-**Gap (superseded above, 2026-10-29):** Tony's phone look: the triad at the bottom centre with the thumb test, in the Sun, Earth and Solar System rooms; the three crosses off the axis; the empty pill gone. Then this closes, with L-468's crosses.
-**Gap (superseded, earlier):** a design talk: where the triad sits on a phone, and a rule for
-placing an info cross clear of dense drawing.
-**Ref:** L-497; interactive-exhibit, the anatomy (the frame HUD); L-318.
 
 #### [L-503] The main asteroid belt's cloud on the website, L-443's last piece, its gallery half (gallery, the Solar System room)
 <!-- L:503 status:OPEN upd:2026-10-29 section:A flag: rice: -->
@@ -1778,7 +1754,30 @@ placing an info cross clear of dense drawing.
   horizons-orbital-mechanics (the website's 2xr is a second question,
   held to the served point), provenance-discipline (A Computed Position
   Prints What Its Errors Earn still says the asteroids wait for L-399).
-**Gap (replaces the one below, 2026-10-29):** the next Daily Run (pulls nothing new; serves the drawing into the cache), then Tony's phone look at the belt's cloud: its row, its dots, its words, Go To and Reset. For the next orrery session: the export serves the tables' kilometres; the skill corrections above.
+- **Tony's look** (run record `documentation/WHERE_WE_ARE_10-28-26_2357_run_record.md`,
+  item 11, the belt's cloud row, tick, Go To, Reset, its words): "yes,
+  see upload".
+- **2026-10-29/30, the export's half** (the orrery's Claude Code
+  session, brief section 2). `export_constants.py` gives a table of
+  numbers (a dict keyed by name) its "in" per entry, keyed as its value
+  is, each worked out by `constants_rows.conversions()` from that
+  entry's full digits, as a length row's is: the distance table's 0th
+  entry, 1.668 AU, serves 2.50e8 km at three figures, "1.67 AU (about
+  250 million km)"; the 100th, 6.38e8 km. The height table likewise;
+  the latitude table is in degrees and has no other unit. The schema
+  number does not change. `test_constants_export.py` check 6 re-computes
+  a table's "in" entry by entry, with two pins naming an entry by its
+  key (the 90th height's pin first caught the session's own wrong
+  expectation of two figures: Rule 3 carries the place, so 99,800,000
+  km prints three). THE MIRROR does not ignore the new field: run on a
+  scratch copy of the website's config with the new export, it wrote
+  the "in" into two fields (the distance and the height nodes of the
+  belt's row), and nothing else; every page and check that reads a
+  served "in" asks for a unit by name (`node["in"]["km"]`), which a
+  table's "in" does not have, so each finds none until the website asks
+  for it by key.
+**Gap (replaces the one below, 2026-10-29/30):** the website prints the belt's distances with their kilometres from each entry's served "in" (the next gallery session); the Daily Run's pulls name `data/constants_export.json` and the config's two fields as changed. The skill corrections above are in interactive-exhibit 1.29, gallery-cache-builder 1.14, horizons-orbital-mechanics 1.13 and provenance-discipline 2.36.
+**Gap (superseded above, 2026-10-29):** the next Daily Run (pulls nothing new; serves the drawing into the cache), then Tony's phone look at the belt's cloud: its row, its dots, its words, Go To and Reset. For the next orrery session: the export serves the tables' kilometres; the skill corrections above.
 **Gap (superseded above):** the gallery session (after L-399 and L-502 on Tony's queue):
 the pull, the room's row, the words; the gallery run with the drawing's
 ends held; then Tony's phone look.
@@ -1867,6 +1866,12 @@ shape); the clumps' five when the outer cloud is next re-placed.
   `python_work\CLAUDE.md` and settings.json to
   `python_work\.claude\settings.json`. The next coordination handoff
   carries the door into its section 1.
+- **Received 2026-10-29/30 from L-502, at its close:** which fields of
+  `data/objects_config.json` a Code session may edit by hand (a
+  drawing setting such as `info_polar_deg`, a row's words, `find`), or
+  that they come only through a tool; the gallery's CLAUDE.md and
+  interactive-exhibit (Only two tools write the served config) to say
+  which. For the records session, with this item's kinds of session.
 **Gap:** the protocol's Mode 7 text written to the three kinds and
 two forms, at the session the brief names; Tony ratifies a protocol
 amendment.
@@ -2404,6 +2409,51 @@ L-490.
   three tables rounded and with no kilometres, and kilometres worked out
   from a rounded number would differ from the orrery's (637 against 638
   million). It ends when the export serves the kilometres.
+- **2026-10-29/30, Pluto's period, found and ruled** (the orrery's
+  Claude Code session, brief section 3). WHY THE YEARLY CHANGE JUMPED
+  NINEFOLD: the hypothesis held. JPL's elements for Pluto's centre (999)
+  around the Sun, asked every six hours for 13 days from 2026-10-28 TDB,
+  gave periods from 88,702 to 91,630 days, peaking every 6.4 days or so
+  (at days 1.0 and 7.5 of the run), as Pluto circles the Pluto-Charon
+  barycentre with Charon; the barycentre's (9) held to 0.3 days. So "the
+  change in a year" taken on Pluto's centre was the difference of two
+  moments of that swing (66 days at one fetch, 589 at the next), not a
+  yearly change. TONY'S CHOICE, the session's one question ("Centre of
+  mass"): Pluto's period is asked of the Pluto-Charon barycentre, as
+  Earth's is of the Earth-Moon barycentre (`orbital_period.PERIOD_TARGETS`
+  '999' -> '9'). Refetched in the session with plotting's own call: the
+  two-centre test chose the solar system's barycentre (0.31 d in a year,
+  against 180.5 around the Sun), 90,578.39 days, so the orrery's Pluto
+  hover now prints "247.990 years (90,578 days), for the Pluto-Charon
+  center of mass", the website's figure; the two no longer differ. THE
+  ROUNDING RULE's fate: it stands, measured on a target that does not
+  swing; recorded in horizons-orbital-mechanics 1.13 with the test for
+  another body. THE WORDS: the barycentre's checkbox, which said "No
+  information available", has its own tooltip, words only; Pluto's
+  tooltip (it had one, under its bold centre label) gains a paragraph on
+  whose period the hover shows and why (`info_dictionary.py`).
+- **2026-10-29/30, the n.a. sentence** (brief section 4). The orrery
+  said "JPL's uncertainty for this position is not included here" for
+  Bennu, Halley and Ikeya-Seki, whose 2xr answer reads "n.a.": now
+  "JPL states no accuracy for this position" (`position_accuracy._side`).
+  Corrected from the brief's sketch: a failed question also leaves a
+  record (it carries `missing`), so "a record present" could not be the
+  test; the test is a record JPL answered, `range_3sigma_km` present and
+  no `missing`. Encke's planted zero sigma now reads as JPL stating none
+  too. Two planted faults in `test_position_digits.py`, one for each
+  sentence said in the other's place, both caught. FOR THE NEXT GALLERY
+  SESSION, two differences: the website's sentence, "JPL's own
+  uncertainty for this position is not yet included", has the same
+  slant for the same three bodies; and the two instruments print a
+  distance with no uncertainty to different places, the orrery to the
+  whole kilometre (its stated floor), the website to the tens. The
+  first is a wrong sentence to fix; the second is a method question for
+  the skill, not a ruling.
+- **2026-10-29/30, the belt's kilometres** (L-503's documented
+  difference): the export's half is done, each table entry of the
+  distance and height tables carrying its "in" (the latitude table, in
+  degrees, has no other unit). The difference ends when the website
+  prints them.
 **Gap (replaces the one below, 2026-10-25):** the check's design, then
 its build, with a planted fault; where its exceptions live.
 **Gap (superseded above):** the rule into interactive-exhibit at its next version (this
@@ -3999,7 +4049,7 @@ aberration is built. L-356's build may come on any evening (Tony,
 above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
 
 #### [L-423] The website's checks: the order Tony confirmed (checks, gallery)
-<!-- L:423 status:OPEN upd:2026-10-16 section:A flag: rice: -->
+<!-- L:423 status:OPEN upd:2026-10-29 section:A flag: rice: -->
 - **Confirmed by Tony, 2026-10-08**, in the decisions session of
   2026-10-08: "Yes open it now"; on the order, "The order is okay".
   This is road stage 9 on Where We Are. It comes before the front-door
@@ -4034,6 +4084,13 @@ above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
 - **Not a member:** L-379 (the aging Earth recording). Its only
   remaining piece, `documentation/payload_earth.json`, waits for a
   build that opens that file.
+- **Received 2026-10-29/30 from L-502, at its close:** the Solar System
+  room's headless walk (`tools/headless/walk_solar_system_drawer.js`,
+  gallery) passes 168 of 171; the three that fail ("scene tap moved the
+  view"; "Sedna's hover lines are not bulleted"; "a body's text box has
+  a line wider than 62 characters") fail the same on the untouched
+  b3b4826f and read as the walk not yet following L-497's one text box.
+  For the next session that opens the walk.
 **Gap:** items 1 and 2 done; next, item 3, L-357 (stale leftovers).
 **Ref:** L-412; L-363; the members above;
 `documentation/HANDOFF_decisions_20261008.md`.
@@ -4422,152 +4479,6 @@ formatting_utils.py; constants_new.py (DE430 rows); palomas_orrery.py
 (`fetch_position`); provenance-discipline 2.28;
 horizons-orbital-mechanics 1.3; L-398; L-399; L-431;
 `celestial_coordinates.py`.
-
-#### [L-399] Small bodies: fetch each one's own position uncertainty from Horizons (gallery, builder)
-<!-- L:399 status:OPEN upd:2026-10-29 section:A flag: rice: -->
-- JPL's planetary report (L-398) gives accuracies for the planets and
-  Pluto only. An asteroid's accuracy is kept per body. Until it is
-  fetched, Apophis's text box carries one line: "JPL's own uncertainty
-  for this position is not yet included." (Tony, 2026-10-01: keep the
-  distance; "We have been computing it all along from Horizons
-  ephemeris." He noted that near-Earth tracking knows these
-  trajectories with high precision; the fetched figure is expected to
-  confirm that.)
-- Candidate: the nightly builder asks Horizons for each small body's
-  range uncertainty (likely the 3-sigma range quantity of an
-  ephemeris query; unverified) and serves it; the page then uses it as
-  the source accuracy and the line goes away.
-- **2026-10-11, the route found** under L-401: Horizons' vector query
-  with `VEC_TABLE='2xr'` returns a small body's position and velocity
-  uncertainties with the position (Fable, re-run by Claude). The
-  orrery builds it first (L-401); the website's builder can ask the
-  same way.
-- **2026-10-12, the orrery now fetches it** (L-401 build 1,
-  `position_accuracy.fetch_small_body_state`): a small body's position
-  and its 2xr uncertainty in one query, read by column name; the hover
-  prints by its 3-sigma. The builder's half stays open here.
-- **Received 2026-10-28 from L-501 (2026 ED138), at its close:**
-  Tony at his phone look, 19:05: "we are still plotting the full
-  distance without a jpl uncertaintly, but clearly precision to 10 km
-  is not realistic. what can we do?" This item is the answer, the next
-  gallery build (Tony's queue of 2026-10-28, 19:34).
-- **2026-10-29, built on the website** (the gallery's Claude Code session,
-  built on gallery efc4ea8f; pushed by Tony at 963500ca with the Daily Run
-  of 09:05). `tools/gallery_cache_builder.py` asks each small body --
-  asteroid, comet, dwarf planet asked as a small body, 54 of them -- for
-  JPL's own uncertainty the way the orrery does (astroquery's request
-  with VEC_TABLE='2xr', sent directly, read by column name, "n.a." read
-  as missing), at the moment of its served "you are here" point, and
-  serves `position_uncertainty` on its cached record: three times R_s,
-  the 3-sigma of its distance from the Sun, in km. One difference from
-  the orrery, with its reason: there the 2xr query IS the position
-  query; here the position comes from astroquery's nightly range fetch,
-  which cannot read the 2xr columns, so it is one more question, and its
-  answer's position must match the served point within 1e-7 AU or
-  nothing is served (another record answered). A failed answer costs
-  only the uncertainty, never the orbit. The index serves who was asked
-  and why each missing one is missing. `gallery/solar_system_figures.js`
-  uses the 3-sigma whole as the error (a planet's row is a place, half a
-  unit of it), and the sentence prints exactly when no source error is
-  served. Checked: the builder's offline suite (493 checks; three
-  planted answers -- a position that does not match, no answer, an n.a.
-  uncertainty -- each serve nothing, named; the match test shown able to
-  fail) and the Solar System figures check (two worked cases, three
-  planted faults; the served cache held either way). Read live from JPL
-  in the session: 2026 ED138 444,725 km, Sedna 257,906 km (the orrery's
-  read of 2026-10-12, 257,820), Encke 923 km, Apophis 0.40 km, Ceres
-  0.01 km.
-- **The Daily Run of 2026-10-29, 09:05** (Tony's run record
-  `documentation/WHERE_WE_ARE_10-28-26_2357_run_record.md`): "[UNCERTAINTY]
-  JPL's own position uncertainty served for 51 of 54 small bodies; not
-  served: bennu, halley, ikeya_seki" -- JPL gives no R_s for those three,
-  which print with the sentence (confirmed against the served cache,
-  Tony's question 4 of that morning; a planted fault, the sentence
-  dropped where JPL gave none, added to the figures check). 2026 ED138
-  now prints "47.22 AU from the Sun (7,065,000,000 km)", set by JPL's
-  uncertainty; Sedna "82.82 AU (12,389,000,000 km)". 36 of 36 gating
-  checks after the build.
-- **The Daily Run of 2026-10-29, 21:57 UTC refused 2026 ED138** ("JPL's
-  2xr answer sits 8.88e-05 AU from the served point, so another record
-  answered"; served for 50 of 54). The room printed ED138 to the tens with
-  the sentence, as designed for a refusal (Tony's look, run record item 6:
-  "reads to the 10's still").
-- **2026-10-29 evening, the cause** (the gallery's short Claude Code
-  session, built on gallery b3b4826f and orrery dceb4dc6, from
-  `documentation/COORD_gallery_short_session_brief_20261029.md` section
-  1). Not a different record and not a timing difference: astroquery's
-  saved answers. Read in the session:
-  - JPL's 2xr answer for ED138 at the served moment, JD 2461342.500694444
-    TDB from the Sun: X 2.523971430119438, Y -44.5730917643724,
-    Z -15.39482066037595 AU, R_s 1.80251391e-04 AU. The served point:
-    2.523967238837812, -44.57300836441859, -15.3947905194702. Apart by
-    8.878e-05 AU: 8.2e-06 along the body's motion (about 5 minutes of
-    it, from the day before's point) and 8.84e-05 across it. So JPL's
-    orbit for ED138 had changed.
-  - A plain position query asked fresh at that moment returned exactly
-    the 2xr position. The served Oct 29 point and the served elements
-    (a 42.97036552962497 AU) are byte-identical in the cache of the run
-    of 03:50 UTC (efc4ea8f), of 14:05 (963500ca) and of 21:57
-    (b3b4826f), while each run's "retrieved" stamp moved.
-  - The elements asked again with astroquery's saved answers on returned
-    exactly the served digits; asked fresh, a = 42.97057707653965.
-  - So: JPL revised ED138's orbit between the 14:05 and 21:57 runs (a
-    2026 discovery, its orbit revised as observations arrive). astroquery
-    keeps every answer on disk for a week
-    (`astroquery.cache_conf.cache_timeout`, 604800 s, in
-    `~/.astropy/cache/astroquery/Horizons`) and hands it back when the
-    same question is asked again, and the builder never turned that off.
-    The 21:57 run's orbit and point were an earlier run's saved answer,
-    while its 2xr question, sent directly with requests, met the new
-    orbit, and the 1e-7 AU match refused it.
-- **2026-10-29 evening, the fix, two parts** (same session).
-  - EVERY QUESTION ASKED FRESH: `HORIZONS_CACHE = False` in
-    `tools/gallery_cache_builder.py`, passed to all six astroquery calls
-    (positions by range and by epochs, elements, the solution TP, the
-    pole of date, the orbit plane). A same-day rebuild now serves what
-    JPL says at that run, and the "retrieved" stamps are true. The 2xr
-    question was already fresh.
-  - THE MATCH MEASURED BY THE BODY (Tony's direction, the handoff's
-    section 4; the rule is method): R_s is read first, and an answer with
-    none serves nothing, as before. Then the answer is accepted within
-    `uncertainty_match_tolerance(R_s)`: the body's own 3-sigma, 3 x R_s,
-    floored at 1e-7 AU (the old fixed tolerance, about 15 km; Ceres and
-    Apophis keep it) and CAPPED at 1e-3 AU (about 150,000 km). Why the
-    cap: the pieces of C/2025 K1, read live from JPL in the session.
-    The parent's 3-sigma is 1.3e-05 AU, B's 0.0022, C's 0.00088, D's
-    0.0043; the pairs sit 0.0024 (parent and C), 0.0042 (B and D) and
-    0.017 to 0.023 AU apart. D's answer standing in for B's would pass
-    D's 3-sigma alone. The cap is under half the closest pair. (The four
-    are served as open paths, so none is asked today; the rule holds for
-    any body.) Every other body sits AU away: of the 54 asked, the
-    widest 3-sigma served was 0.028 AU (2024 DW) and the closest
-    neighbour of any of them was 0.117 AU. ED138 under the rule: 8.88e-05
-    AU off, within its 5.41e-04 AU, so it is served.
-  - A REFUSAL NAMES ITS ITEMS: its reason carries the id asked, the
-    distance, the tolerance and how it was worked out, and JPL's X, Y, Z
-    beside the served point's; the run record's
-    `position_uncertainty.refused` holds the same as fields (`asked_id`,
-    `jd`, `answer_au`, `served_au`, `r_s_au`, `off_au`, `tolerance_au`).
-- **Checked:** the builder's offline suite, 498 checks, 0 failures
-  (493 before). "Another record" is re-planted half an AU away; new:
-  an answer 1e-05 AU off, inside its own 3-sigma (3e-04) but beyond the
-  floor, is served (ED138's case); one inside its 3-sigma but beyond the
-  cap is refused, and with the cap switched off it is served (the cap
-  can fail); the refusal's fields read back; with the floor switched to
-  infinity the whole match is off and the planted answer leaks, as
-  before; and every one of the builder's six astroquery questions is
-  called against a recorder and must ask with cache=False, with a
-  planted fault (the setting turned on) caught. Nothing on the page
-  changed: the served block is the same shape.
-- **Sent on:** the orrery's own astroquery calls do not turn the saved
-  answers off either (no `cache=` anywhere in its modules, read at
-  dceb4dc6); a line on L-504 (the orrery's clock), whose session opens
-  the data path next.
-**Gap (replaces the one below, 2026-10-29 evening):** Tony's Daily Run: its `[UNCERTAINTY]` line reads 51 of 54, with bennu, halley and ikeya_seki the only three missing; then his phone look, ED138's distance to the million km and no "not yet included" line. Then this closes.
-**Gap (superseded above, 2026-10-29):** Tony's phone look: ED138's distance to the million km and no "not yet included" line; Halley, Ikeya-Seki and Bennu with it.
-**Gap (superseded, earlier):** the website's half: the builder asks the same way and the
-Solar System room prints by it; with the near-Earth asteroid design.
-**Ref:** L-398; L-363; tools/gallery_cache_builder.py (gallery).
 
 #### [L-396] Tony's page: WHERE_WE_ARE.md, the big picture in plain words (documentation, skills)
 <!-- L:396 status:OPEN upd:2026-10-07 section:A flag: rice: -->
@@ -29765,6 +29676,290 @@ editor form is the follow-up above, not this item's gap.
 **Ref:** `documentation/COORD_2026_ED138_words_20261028.md`; L-443;
 L-484; `celestial_objects.py`; `constants_change_report.py`; gallery
 `tools/mirror_objects.py`, `documentation/smoke_typed_numbers.js`.
+
+#### [L-399] Small bodies: fetch each one's own position uncertainty from Horizons (gallery, builder)
+<!-- L:399 status:DONE upd:2026-10-29 section:C flag: rice: -->
+- JPL's planetary report (L-398) gives accuracies for the planets and
+  Pluto only. An asteroid's accuracy is kept per body. Until it is
+  fetched, Apophis's text box carries one line: "JPL's own uncertainty
+  for this position is not yet included." (Tony, 2026-10-01: keep the
+  distance; "We have been computing it all along from Horizons
+  ephemeris." He noted that near-Earth tracking knows these
+  trajectories with high precision; the fetched figure is expected to
+  confirm that.)
+- Candidate: the nightly builder asks Horizons for each small body's
+  range uncertainty (likely the 3-sigma range quantity of an
+  ephemeris query; unverified) and serves it; the page then uses it as
+  the source accuracy and the line goes away.
+- **2026-10-11, the route found** under L-401: Horizons' vector query
+  with `VEC_TABLE='2xr'` returns a small body's position and velocity
+  uncertainties with the position (Fable, re-run by Claude). The
+  orrery builds it first (L-401); the website's builder can ask the
+  same way.
+- **2026-10-12, the orrery now fetches it** (L-401 build 1,
+  `position_accuracy.fetch_small_body_state`): a small body's position
+  and its 2xr uncertainty in one query, read by column name; the hover
+  prints by its 3-sigma. The builder's half stays open here.
+- **Received 2026-10-28 from L-501 (2026 ED138), at its close:**
+  Tony at his phone look, 19:05: "we are still plotting the full
+  distance without a jpl uncertaintly, but clearly precision to 10 km
+  is not realistic. what can we do?" This item is the answer, the next
+  gallery build (Tony's queue of 2026-10-28, 19:34).
+- **2026-10-29, built on the website** (the gallery's Claude Code session,
+  built on gallery efc4ea8f; pushed by Tony at 963500ca with the Daily Run
+  of 09:05). `tools/gallery_cache_builder.py` asks each small body --
+  asteroid, comet, dwarf planet asked as a small body, 54 of them -- for
+  JPL's own uncertainty the way the orrery does (astroquery's request
+  with VEC_TABLE='2xr', sent directly, read by column name, "n.a." read
+  as missing), at the moment of its served "you are here" point, and
+  serves `position_uncertainty` on its cached record: three times R_s,
+  the 3-sigma of its distance from the Sun, in km. One difference from
+  the orrery, with its reason: there the 2xr query IS the position
+  query; here the position comes from astroquery's nightly range fetch,
+  which cannot read the 2xr columns, so it is one more question, and its
+  answer's position must match the served point within 1e-7 AU or
+  nothing is served (another record answered). A failed answer costs
+  only the uncertainty, never the orbit. The index serves who was asked
+  and why each missing one is missing. `gallery/solar_system_figures.js`
+  uses the 3-sigma whole as the error (a planet's row is a place, half a
+  unit of it), and the sentence prints exactly when no source error is
+  served. Checked: the builder's offline suite (493 checks; three
+  planted answers -- a position that does not match, no answer, an n.a.
+  uncertainty -- each serve nothing, named; the match test shown able to
+  fail) and the Solar System figures check (two worked cases, three
+  planted faults; the served cache held either way). Read live from JPL
+  in the session: 2026 ED138 444,725 km, Sedna 257,906 km (the orrery's
+  read of 2026-10-12, 257,820), Encke 923 km, Apophis 0.40 km, Ceres
+  0.01 km.
+- **The Daily Run of 2026-10-29, 09:05** (Tony's run record
+  `documentation/WHERE_WE_ARE_10-28-26_2357_run_record.md`): "[UNCERTAINTY]
+  JPL's own position uncertainty served for 51 of 54 small bodies; not
+  served: bennu, halley, ikeya_seki" -- JPL gives no R_s for those three,
+  which print with the sentence (confirmed against the served cache,
+  Tony's question 4 of that morning; a planted fault, the sentence
+  dropped where JPL gave none, added to the figures check). 2026 ED138
+  now prints "47.22 AU from the Sun (7,065,000,000 km)", set by JPL's
+  uncertainty; Sedna "82.82 AU (12,389,000,000 km)". 36 of 36 gating
+  checks after the build.
+- **The Daily Run of 2026-10-29, 21:57 UTC refused 2026 ED138** ("JPL's
+  2xr answer sits 8.88e-05 AU from the served point, so another record
+  answered"; served for 50 of 54). The room printed ED138 to the tens with
+  the sentence, as designed for a refusal (Tony's look, run record item 6:
+  "reads to the 10's still").
+- **2026-10-29 evening, the cause** (the gallery's short Claude Code
+  session, built on gallery b3b4826f and orrery dceb4dc6, from
+  `documentation/COORD_gallery_short_session_brief_20261029.md` section
+  1). Not a different record and not a timing difference: astroquery's
+  saved answers. Read in the session:
+  - JPL's 2xr answer for ED138 at the served moment, JD 2461342.500694444
+    TDB from the Sun: X 2.523971430119438, Y -44.5730917643724,
+    Z -15.39482066037595 AU, R_s 1.80251391e-04 AU. The served point:
+    2.523967238837812, -44.57300836441859, -15.3947905194702. Apart by
+    8.878e-05 AU: 8.2e-06 along the body's motion (about 5 minutes of
+    it, from the day before's point) and 8.84e-05 across it. So JPL's
+    orbit for ED138 had changed.
+  - A plain position query asked fresh at that moment returned exactly
+    the 2xr position. The served Oct 29 point and the served elements
+    (a 42.97036552962497 AU) are byte-identical in the cache of the run
+    of 03:50 UTC (efc4ea8f), of 14:05 (963500ca) and of 21:57
+    (b3b4826f), while each run's "retrieved" stamp moved.
+  - The elements asked again with astroquery's saved answers on returned
+    exactly the served digits; asked fresh, a = 42.97057707653965.
+  - So: JPL revised ED138's orbit between the 14:05 and 21:57 runs (a
+    2026 discovery, its orbit revised as observations arrive). astroquery
+    keeps every answer on disk for a week
+    (`astroquery.cache_conf.cache_timeout`, 604800 s, in
+    `~/.astropy/cache/astroquery/Horizons`) and hands it back when the
+    same question is asked again, and the builder never turned that off.
+    The 21:57 run's orbit and point were an earlier run's saved answer,
+    while its 2xr question, sent directly with requests, met the new
+    orbit, and the 1e-7 AU match refused it.
+- **2026-10-29 evening, the fix, two parts** (same session).
+  - EVERY QUESTION ASKED FRESH: `HORIZONS_CACHE = False` in
+    `tools/gallery_cache_builder.py`, passed to all six astroquery calls
+    (positions by range and by epochs, elements, the solution TP, the
+    pole of date, the orbit plane). A same-day rebuild now serves what
+    JPL says at that run, and the "retrieved" stamps are true. The 2xr
+    question was already fresh.
+  - THE MATCH MEASURED BY THE BODY (Tony's direction, the handoff's
+    section 4; the rule is method): R_s is read first, and an answer with
+    none serves nothing, as before. Then the answer is accepted within
+    `uncertainty_match_tolerance(R_s)`: the body's own 3-sigma, 3 x R_s,
+    floored at 1e-7 AU (the old fixed tolerance, about 15 km; Ceres and
+    Apophis keep it) and CAPPED at 1e-3 AU (about 150,000 km). Why the
+    cap: the pieces of C/2025 K1, read live from JPL in the session.
+    The parent's 3-sigma is 1.3e-05 AU, B's 0.0022, C's 0.00088, D's
+    0.0043; the pairs sit 0.0024 (parent and C), 0.0042 (B and D) and
+    0.017 to 0.023 AU apart. D's answer standing in for B's would pass
+    D's 3-sigma alone. The cap is under half the closest pair. (The four
+    are served as open paths, so none is asked today; the rule holds for
+    any body.) Every other body sits AU away: of the 54 asked, the
+    widest 3-sigma served was 0.028 AU (2024 DW) and the closest
+    neighbour of any of them was 0.117 AU. ED138 under the rule: 8.88e-05
+    AU off, within its 5.41e-04 AU, so it is served.
+  - A REFUSAL NAMES ITS ITEMS: its reason carries the id asked, the
+    distance, the tolerance and how it was worked out, and JPL's X, Y, Z
+    beside the served point's; the run record's
+    `position_uncertainty.refused` holds the same as fields (`asked_id`,
+    `jd`, `answer_au`, `served_au`, `r_s_au`, `off_au`, `tolerance_au`).
+- **Checked:** the builder's offline suite, 498 checks, 0 failures
+  (493 before). "Another record" is re-planted half an AU away; new:
+  an answer 1e-05 AU off, inside its own 3-sigma (3e-04) but beyond the
+  floor, is served (ED138's case); one inside its 3-sigma but beyond the
+  cap is refused, and with the cap switched off it is served (the cap
+  can fail); the refusal's fields read back; with the floor switched to
+  infinity the whole match is off and the planted answer leaks, as
+  before; and every one of the builder's six astroquery questions is
+  called against a recorder and must ask with cache=False, with a
+  planted fault (the setting turned on) caught. Nothing on the page
+  changed: the served block is the same shape.
+- **Sent on:** the orrery's own astroquery calls do not turn the saved
+  answers off either (no `cache=` anywhere in its modules, read at
+  dceb4dc6); a line on L-504 (the orrery's clock), whose session opens
+  the data path next.
+- **Closed 2026-10-29/30 on Tony's phone look of 2026-10-29, 20:11**:
+  "Correct", with two screenshots, as the coordinating session recorded
+  it in `documentation/COORD_orrery_clock_session_brief_20261029.md`
+  section 6 (the run record itself was not in the orrery's folder when
+  this was written): 2026 ED138 printed to the hundred-thousand
+  kilometres, 47.225 AU (7,064,700,000 km), by JPL's revised 80,903 km,
+  with no "not yet included" line.
+- **What JPL says of the four solutions** (asked with OBJ_DATA on,
+  2026-10-30 UTC, by the orrery's Claude Code session): 2026 ED138,
+  record 50662032 "(+COV)", solution 2026-Oct-29_11:09:54, 115
+  observations 1937-2026; Bennu, "Statistical uncertainties not
+  available for object due to: truncated database EST list", a special
+  pre-computed trajectory (revised Aug 11, 2021; solution 2021-Jan-07,
+  554 observations 1999-2020, radar 58 delay, 7 Doppler); Halley,
+  record 90000030, solution 2025-Nov-21, 8,518 observations 1835-1994,
+  no covariance mark; Ikeya-Seki, record 90002042, solution date "-",
+  soln ref SAO_2008, 119 observations 1965-1966, no covariance mark. So
+  the three have no figure because JPL holds none for them.
+- **Loose ends re-homed** (A Closing Item Re-homes Its Loose Ends): the
+  website's sentence for those three ("not yet included", where JPL
+  states none) and the two instruments' different places for a distance
+  with no uncertainty -> L-484 (the two agree), for the next gallery
+  session; the orrery's own sentence was corrected this session (L-484).
+  The orrery's astroquery calls -> L-504 (the orrery's clock), done for
+  the data path; spacecraft_encounters.py's three on L-504's Gap.
+**Gap:** none; closed.
+**Gap (superseded, 2026-10-29 evening):** Tony's Daily Run: its `[UNCERTAINTY]` line reads 51 of 54, with bennu, halley and ikeya_seki the only three missing; then his phone look, ED138's distance to the million km and no "not yet included" line. Then this closes.
+**Gap (superseded above, 2026-10-29):** Tony's phone look: ED138's distance to the million km and no "not yet included" line; Halley, Ikeya-Seki and Bennu with it.
+**Gap (superseded, earlier):** the website's half: the builder asks the same way and the
+Solar System room prints by it; with the near-Earth asteroid design.
+**Ref:** L-398; L-363; tools/gallery_cache_builder.py (gallery).
+
+#### [L-502] The triad's hover spot, and info crosses in crowded places (gallery, the rooms)
+<!-- L:502 status:DONE upd:2026-10-29 section:C flag: rice: -->
+- **Tony, in his run record** (`documentation/WHERE_WE_ARE_10-27-26_0906_run_record.md`, his look at
+  item 1): "minor issue: the triad hover is now easy to trip where it is at on
+  the bottom right. one's thumb easily goes there. could we relocate it in
+  the bottom center above the row label to the left of the grid label? in
+  general can we move the hover crosses away from the most dense areas where
+  they get lost in the glare?"
+- Captured on first mention by the L-501 session, which built nothing
+  on the website.
+- **Received 2026-10-28 from L-497, at its close:**
+  `gallery/text_box.js`'s header names `documentation/smoke_text_box.js`
+  as its check, which does not exist at acbf206b; the check is the
+  Hover budget row. A one-line comment fix when this build opens the
+  page's text-box code.
+- **2026-10-29, built** (the gallery's Claude Code session, built on
+  gallery efc4ea8f, pushed by Tony at 963500ca). THE TRIAD: the frame HUD
+  is a row across the bottom, above the drawer button (the row label),
+  the triad in its centre and the grid chip at its right end, in every
+  room (`interactive.html`, `.sun-hud`). Centred by text-align, because
+  `body.sun-exhibit .sun-chrome` sets display: block and outweighs a
+  flex rule on the HUD -- the first try left the triad at the left, seen
+  in the app's browser at 390 px. The count line keeps left of the
+  triad, wrapping. THE CROSSES: the Hills cloud's, the outer Oort
+  cloud's and the galactic tide's stay at their outer edges and turn off
+  the x axis by a served `drawing.info_polar_deg` (45, 225 and 135
+  degrees from the ecliptic's north pole), each picked where its own
+  dots are sparse: 8 of the Hills cloud's 3,600 dots within 10 degrees,
+  where 41 were on the axis; the outer cloud no longer on the tide's
+  cross; 31 of the tide's 5,000, where 51 were. Each `_declared` says
+  why. The rule, now held by the gallery run's Label words check: a
+  stored drawing's cross stands at least 15 degrees off every axis line,
+  and no two within 10 degrees of each other (a planted fault: the Hills
+  cloud's angle taken off a copy of the config). `gallery/text_box.js`'s
+  header now names its check, the Hover budget row.
+- **Fixed in passing, reported:** a hidden count line showed as an empty
+  pill at the lower left in every room (`.ss-outside[hidden]` was
+  outweighed by `body.sun-exhibit .sun-chrome`, as the frame note's
+  rule already warned).
+- **How the config was edited** (Tony's question 5 of 2026-10-29): the
+  four edits to `data/objects_config.json` (three angles, then the
+  tide's note folded into its `_declared`) were direct edits, the Code
+  form of what a patch does. interactive-exhibit, Only two tools write
+  the served config, names the mirror (numbers and citations) and the
+  store writer (words and arrival settings), and neither writes a
+  drawing setting; the skill's precedent for one (the dust cloud's
+  `info_polar_deg`, 2026-10-27, and a row's words and `find` words) is
+  a patch. No written rule allows a Code session's direct edit of a
+  drawing setting, and the gallery's CLAUDE.md says the config is
+  edited only through the tools the skills name. Recorded as a finding
+  for the records session: CLAUDE.md and the skill should say which
+  fields a direct edit may touch (drawing settings, a row's words), or
+  that they come only through a tool.
+- **Tony's look, run record `WHERE_WE_ARE_10-28-26_2357_run_record.md`,**
+  item 8: "yes, but can we move it further down?"; item 9, the three far
+  clouds' crosses: "i think so".
+- **2026-10-29 evening, lower still** (the gallery's short Claude Code
+  session, built on gallery b3b4826f, from
+  `documentation/COORD_gallery_short_session_brief_20261029.md` section
+  2; forms (a) and (b) together, every room, `interactive.html` CSS only).
+  (a) The frame HUD row and the count line sit at 48 px above the bottom
+  (were 58): the drawer button's top was measured at 46.4 px on a 375 px
+  page in the app's browser, so the row clears it by 1.6 px. (b) The
+  triad is drawn at three quarters, 78 by 90 px over its unchanged 104 by
+  120 viewBox; its x, y, z letters are set at 14.7 viewBox units so they
+  still print at 11 px, and the Aries glyph shrinks with the drawing,
+  from 15 to about 11 px. Its top edge comes down from 178 to 138 px. The
+  count line's width is now half the page less 59 px (the triad's new
+  half, 39, and two 10 px gaps), measured 10 px clear of the triad; the
+  frame note and the AU note sit at 128 px (were 168), 10 px into the
+  triad's top as before. Seen in the app's browser at 375 px in the Sun
+  and Solar System rooms (Earth's uses the same rules); the phone has
+  not seen it.
+- **Checked:** the gallery maintenance run offline, 36 of 36 gating
+  checks, Page framing and Hover budget among them; the headless walks
+  (tools/headless, jsdom, payloads built from the served cache): the
+  Sun's and Earth's Reset walks, 33 checks each, all pass; the drawer
+  order, both rooms in order with its planted fault red; the Solar
+  System room's walk, 168 of 171. The three that fail ("scene tap moved
+  the view"; "Sedna's hover lines are not bulleted"; "a body's text box
+  has a line wider than 62 characters") fail the same three on the
+  untouched b3b4826f, so they came before this build; they read as the
+  walk not yet following L-497's one text box. Recorded, not chased:
+  for the next session that opens `tools/headless/walk_solar_system_drawer.js`.
+- **The next step, if Tony's thumb still finds it** (the brief's form
+  (c)): the triad beside the drawer button on the bottom row, to its
+  left. More to move: the button is centred by flex and changes width
+  with the name it shows.
+- **Closed 2026-10-29/30 on Tony's phone look of 2026-10-29, 20:11**:
+  "Correct", with two screenshots, as the coordinating session recorded
+  it in `documentation/COORD_orrery_clock_session_brief_20261029.md`
+  section 6: the triad small and low in the Solar System and Earth
+  rooms.
+- **Loose ends re-homed** (A Closing Item Re-homes Its Loose Ends): the
+  three failures of `tools/headless/walk_solar_system_drawer.js` (168 of
+  171; "scene tap moved the view", "Sedna's hover lines are not
+  bulleted", "a body's text box has a line wider than 62 characters",
+  the same on the untouched b3b4826f) -> L-423 (the website's checks).
+  The finding on which fields of `data/objects_config.json` a session
+  may edit by hand -> L-499 (kinds of session), the records session's
+  item. Form (c), the triad beside the drawer button, is struck: Tony's
+  look passed form (b). L-468's crosses ("i think so", run record
+  10-28-26 2357 item 9) stay on L-468's own record, which closes on its
+  own. The rule for a stored drawing's cross and the HUD row are in
+  interactive-exhibit 1.29.
+**Gap:** none; closed.
+**Gap (superseded, 2026-10-29 evening):** Tony's phone look at the lower, smaller triad, with the thumb test, in the Sun, Earth and Solar System rooms; the letters readable. Then this closes, with L-468's crosses (judged "i think so").
+**Gap (superseded above, 2026-10-29):** Tony's phone look: the triad at the bottom centre with the thumb test, in the Sun, Earth and Solar System rooms; the three crosses off the axis; the empty pill gone. Then this closes, with L-468's crosses.
+**Gap (superseded, earlier):** a design talk: where the triad sits on a phone, and a rule for
+placing an info cross clear of dense drawing.
+**Ref:** L-497; interactive-exhibit, the anatomy (the frame HUD); L-318.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

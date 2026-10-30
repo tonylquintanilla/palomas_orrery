@@ -1,30 +1,29 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 29, 2026, evening: the short gallery session (L-399, L-502).
-- Written at orrery dceb4dc6 and gallery b3b4826f, plus uncommitted edits.
+Last updated: October 29-30, 2026, night: the orrery session (L-504 (the orrery's clock), Pluto, the skills).
+- Written at orrery 571b9bf4 and gallery b55109f2, plus uncommitted edits.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Why ED138 was refused: the website's builder was reusing JPL's
->   answers saved from an earlier run, and JPL had revised ED138's orbit
->   in between. Now every question goes to JPL fresh.
-> - The check that refused it now allows each body its own uncertainty
->   (ED138's is 445,000 km), capped well below the gap between two
->   pieces of one comet. Your Daily Run should serve ED138 again.
-> - The triad is drawn at three quarters and sits lower: its top edge
->   is 40 px nearer the bottom, still clear of the drawer button.
-> - The shared link was not built: no room this session. It waits for
->   the next gallery session.
+> - The orrery reads the clock as UTC now. In the evening its date
+>   fields open on tomorrow's date, as the website's do.
+> - A "now" plot moves a little (the Moon about 19,000 km). The fix.
+> - Pluto's period is its centre of mass's, 248 years, as on the
+>   website (your choice). Its own centre swings every 6.4 days.
+> - Bennu, Halley and Ikeya-Seki now say "JPL states no accuracy".
+> - The belt's kilometres are exported; four skills updated; L-399
+>   (ED138's uncertainty) and L-502 (the triad) closed on your look.
 >
-> **Do next:** *the Daily Run (look for "served for 51 of 54"); commit
-> and push both folders; the live run; your phone looks.*
+> **Do next:** *run the orrery once; commit and push; reinstall the
+> four skills; tomorrow's Daily Run.*
 >
 > **Needs you now:**
-> - *(do) the Daily Run, then commit and push both folders.*
-> - *(do) phone looks: ED138 to the million km with no "not yet
->   included" line; the triad, thumb test, in all three rooms.*
+> - *(do) run the orrery: today's UTC date, Earth and the Moon draw.*
+> - *(do) commit and push; reinstall interactive-exhibit 1.29,
+>   gallery-cache-builder 1.14, horizons-orbital-mechanics 1.13 and
+>   provenance-discipline 2.36.*
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
@@ -35,13 +34,12 @@ Oct 27's order, changed Oct 29 (`DESIGN_L314_solar_wind_rulings_20261029.md`).
                and periods checked (Oct 14-16); the Sun's slice, closed
                Oct 27; the objects (L-443 (the objects)), closed Oct 28;
                the small builds and 2026 ED138, closed Oct 28.
- 5d.   [NOW]   *First the orrery's clock (L-504 (the orrery's clock)),
-               UTC everywhere, the data path first.*
+ 5d.   [NOW]   *The orrery's clock (L-504 (the orrery's clock)): the
+               data path done Oct 29; Earth System, stamps, tools next.*
  11b.  [NOW]   *Then the nightly run (L-485 (a nightly run)): two
                sessions, orrery then gallery.*
- 5c.   [next]  Your phone looks at L-399 (ED138, after the Daily Run),
-               L-502 (the triad, lower) and L-503 (the belt's cloud);
-               then they close.
+ 5c.   [next]  L-503 (the belt's cloud) closes when the website
+               prints its kilometres (the next gallery session).
   5.   [beside] Earth's list (L-413 (Earth's list)): talks 3 to 6 from
                your phone, then their builds.
   5b.  [beside] Housekeeping when a session has room: L-424, L-425,
@@ -54,9 +52,10 @@ Oct 27's order, changed Oct 29 (`DESIGN_L314_solar_wind_rulings_20261029.md`).
  15.   [goal]  The website does what the desktop orrery does, with a date
                to choose, within the range the data covers.
 
-## Settled
+## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings. A line leaves after a few weeks, once it is habit.
+- Pluto's period is its centre of mass's, as Earth's is (Oct 29).
 - UTC everywhere; the orbit's date stays on JPL's clock, said so (Oct 28-29).
 - The belt's cloud: a row first in its group, ticked like a body (Oct 29).
 - The main belt: random dots in JPL's orbits' spread, not one date's (Oct 28).
@@ -90,16 +89,16 @@ Waiting behind other work; a line leaves when picked up.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261029T215709Z, ok, no retry (the swap log's last
-  line); the next is your Daily Run, the first to ask JPL fresh.
-- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md of Oct 28).
-  Whole tree: 275: orrery 111, Earth System 149, stars 13, utilities 2.
+- Last cache build: 20261030T003718Z, ok, no retry (the swap log's last
+  line); the next is your Daily Run.
+- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md of tonight's
+  run). Whole tree: 275: orrery 111, Earth System 149, stars 13, utilities 2.
 - This page's date and the ledger's newest stamp: both Oct 29. Agree.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
 Decisions, one at a time:
-- Nothing waiting: this morning's three rulings are built.
+- Nothing waiting: tonight's one question (Pluto) is answered.
 
 At the next design talk:
 - A shared link keeps the view: ruled Oct 29,
@@ -115,16 +114,16 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- Oct 29's builds and checks: L-399 (ED138's cause and the fix),
-  L-502 (the triad, lower), L-503; the brief,
-  `COORD_gallery_short_session_brief_20261029.md`.
+- Tonight: L-504 (the clock), L-484 (Pluto; the n.a. sentence), L-503
+  (the belt's kilometres); L-399 (ED138's uncertainty) and L-502 (the
+  triad) closed. The brief:
+  `COORD_orrery_clock_session_brief_20261029.md`.
 - L-458 (report a problem): the form's words, read; an open note.
 - The door: `documentation/python_work_door/`, and L-499.
-- Today's talks: `DESIGN_shared_view_rulings_20261029.md` (the shared
-  link) and `DESIGN_L314_solar_wind_rulings_20261029.md` (L-314 ruled:
-  the orrery fetches NOAA nightly, the website pulls; after L-485).
-- Your run records: `WHERE_WE_ARE_10-28-26_2357_run_record.md` and
-  `WHERE_WE_ARE_10-29-26_1818_run_record.md` (this session's).
+- Talks: `DESIGN_shared_view_rulings_20261029.md` (the shared link)
+  and `DESIGN_L314_solar_wind_rulings_20261029.md` (live solar wind).
+- Your run records: `WHERE_WE_ARE_10-29-26_1818_run_record.md` and
+  `WHERE_WE_ARE_10-29-26_2043_run_record.md` (this session's).
 
 --- Your run record below this line. No patch edits it; the length cap
 --- stops here; the close reads your timestamped copy and clears this.

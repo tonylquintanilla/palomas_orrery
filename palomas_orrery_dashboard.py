@@ -3473,8 +3473,8 @@ class PalomasOrreryDashboardFrame(ctk.CTkFrame):
 
     def _log_status(self, message):
         """Append a timestamped message to the status window."""
-        import datetime
-        timestamp = datetime.datetime.now().strftime("%H:%M:%S")
+        from utc_clock import utc_now   # L-504: the clock read as UTC
+        timestamp = utc_now().strftime("%H:%M:%S UTC")
         line = f"[{timestamp}]  {message}\n"
 
         self._status_box.configure(state="normal")

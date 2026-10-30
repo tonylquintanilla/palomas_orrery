@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.117 | October 28, 2026
+Tony Quintanilla, PE | Claude | v3.118 | October 29, 2026
 
-Cut from b2fcc1bb at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 571b9bf4 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -487,7 +487,7 @@ safe-file-editing            1.14 Editing existing files, patch scripts,
                                   sed/regex edits, encoding checks (portable)
 agentic-pre-test             1.3  BEFORE delivering complete files/agentic
                                   code; after data-content sweeps
-horizons-orbital-mechanics   1.12 Horizons queries, centers, frames, osculating
+horizons-orbital-mechanics   1.13 Horizons queries, centers, frames, osculating
                                   elements, encounters, comet record pinning,
                                   2xr uncertainties, periods, the drawn orbit's
                                   centre, the Horizons check
@@ -503,8 +503,12 @@ horizons-orbital-mechanics   1.12 Horizons queries, centers, frames, osculating
                                   whose designation matches its own pieces, a
                                   comet on an open path's plan (its span, its
                                   TP, its perihelion), an entry asked by JPL's
-                                  number in the Horizons check
-provenance-discipline        2.35 Scanner runs, audits, citations, constants,
+                                  number in the Horizons check, the clock read
+                                  as UTC (utc_clock), astroquery's saved
+                                  answers (cache=), a 2xr answer with no figure
+                                  (n.a.), Pluto's period asked of its
+                                  barycentre
+provenance-discipline        2.36 Scanner runs, audits, citations, constants,
                                   pre-push (Tier-1 = 0 on the active build
                                   path)
 provenance-cross-check       1.1  Cross-check worksheets and relay prompts,
@@ -526,7 +530,7 @@ gallery-assembler            1.3  render_orbits.py, resolver.py,
                                   unresponsive, it worked yesterday, a console
                                   error appears, or Claude is about to hand
                                   Tony a test to run
-gallery-cache-builder        1.13 Nightly builder, atomic swap and its
+gallery-cache-builder        1.14 Nightly builder, atomic swap and its
                                   retry/roll-back/swap log, "Access is denied"
                                   under data/, coverage_index, serving cache,
                                   objects_config, dry-run/first-build/nightly,
@@ -535,8 +539,12 @@ gallery-cache-builder        1.13 Nightly builder, atomic swap and its
                                   check, a spacecraft fetched by its path plan,
                                   a pull that does not match the push, a comet
                                   on an open path fetched by its plan
-                                  (is_path_body, open_path)
-interactive-exhibit          1.28 adding or changing an exhibit in
+                                  (is_path_body, open_path), a small body's own
+                                  uncertainty (position_uncertainty, the match
+                                  rule), every JPL question asked fresh
+                                  (HORIZONS_CACHE), a drawing named on a room's
+                                  row
+interactive-exhibit          1.29 adding or changing an exhibit in
                                   interactive.html; any edit to the Sun's
                                   chrome (drawer, nav cluster, frame zoom,
                                   i-panel, HUD, consent, back link); "Earth
@@ -580,7 +588,11 @@ interactive-exhibit          1.28 adding or changing an exhibit in
                                   first-visit note and hovers without a pointer
                                   line; the one text box for a tap and Go To
                                   (text_box.js); a group found by its find
-                                  words; the i panel's Report a problem link
+                                  words; the i panel's Report a problem link; a
+                                  drawing row in the Solar System room (the
+                                  belt's cloud); a stored drawing's cross kept
+                                  off the axes; the source line's UTC and JPL
+                                  clock
 <!-- SKILL-MANIFEST:END -->
 
 Session-Start Repo Pull and the SHA Round Trip [CRITICAL]
@@ -1216,6 +1228,71 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.118 (October 29, 2026): No rule changed in this document. FOUR
+skill bumps, one version each (L-504, L-399, L-503, L-502, L-484):
+interactive-exhibit 1.28 -> 1.29, gallery-cache-builder 1.13 -> 1.14,
+horizons-orbital-mechanics 1.12 -> 1.13, provenance-discipline 2.35 ->
+2.36. THE ORRERY'S CLOCK, AND THE WEBSITE'S BUILDS OF OCTOBER 29,
+WRITTEN INTO THE SKILLS.
+
+WHAT PROMPTED IT. The orrery's Claude Code session of Oct 29-30, built
+on orrery 571b9bf4 with the gallery at b55109f2 read only, from
+documentation/COORD_orrery_clock_session_brief_20261029.md (item 2 of
+documentation/HANDOFF_coordination_20261028_29.md, section 5). It built
+L-504's first slice: the data path reads the clock as UTC through
+utc_clock.py and asks JPL fresh. The gallery's two Code sessions of Oct
+29 (L-399, L-502, L-503) had left sentences in four skills that a
+session following them would act on, listed on L-503; the gallery
+session reads the skills and does not edit them, so they waited for
+this one.
+
+WHAT CHANGED. horizons-orbital-mechanics: The Clock Is Read as UTC;
+astroquery's week of saved answers and the one switch each instrument
+passes as cache=; a 2xr answer reading "n.a." is JPL stating none, and
+the website's 2xr is a second question held to the served point;
+Pluto's period asked of the Pluto-Charon barycentre (Tony, Oct 29:
+"Centre of mass"). gallery-cache-builder: the builder serves each small
+body's position_uncertainty by a match rule held to the body's own
+3-sigma, floored at 1e-7 AU and capped at 1e-3 AU by the closest comet
+pieces, a refusal naming its numbers; every question asked fresh
+(HORIZONS_CACHE); serve_drawings reads a room's rows.
+interactive-exhibit: the six corrections listed on L-503 -- a small
+body's own uncertainty used whole and the room's sentence printed when
+no source error is served; the main belt's cloud among the stored
+drawings; the drawing row in the Solar System room's drawer; the frame
+HUD as a row across the bottom and the count line beside the triad; a
+stored drawing's cross off the axes, held by the Label words check; and
+the source line's clocks. provenance-discipline: A Computed Position
+Prints What Its Errors Earn no longer says the asteroids wait for
+L-399, and a sentence saying why a figure is missing says the true
+reason. Each skill's oldest of four version entries moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule. Every
+sentence was read from the code at 571b9bf4 and b55109f2, and JPL's
+answers fetched, before it was written.
+
+NOT DONE HERE, AND WHY. ledger-and-session-records stays at 1.22: its
+next version is the records session's (the coordination handoff's
+queue, item 6), with the sentence on the run-record zone and the kinds
+of session. orrery-coding-conventions is unchanged.
+
+THE OBLIGATION TRAVELS. A Claude Code session reads each skill as the
+file in the repo. This one read in full horizons-orbital-mechanics
+1.12, orrery-coding-conventions 1.12, provenance-discipline 2.35,
+safe-file-editing 1.14, agentic-pre-test 1.3, interactive-exhibit 1.28,
+gallery-cache-builder 1.13 and ledger-and-session-records 1.22, each as
+the manifest expected. The account's installed copies cannot be seen
+from Code. The next session that loads skills from the account confirms
+its copies read interactive-exhibit 1.29, gallery-cache-builder 1.14,
+horizons-orbital-mechanics 1.13 and provenance-discipline 2.36, and,
+from v3.115, orrery-coding-conventions 1.12, before work that fires
+them.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.115 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.117 (October 28, 2026): No rule changed in this document. ONE
 skill bump, one version (L-443, carrying L-497, L-496 and L-458):
 interactive-exhibit 1.27 -> 1.28. FOUR WRONG SENTENCES CORRECTED; THE
@@ -1323,52 +1400,6 @@ work that fires them.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.113 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.115 (October 26, 2026, night): No rule changed in this document. ONE
-skill bump, one version (L-494): orrery-coding-conventions 1.11 ->
-1.12. THE WEBSITE'S HOVERS END WITHOUT A POINTER.
-
-WHAT PROMPTED IT. Tony's choice that evening for L-494, from the design
-canvas of four options: "Or remove the sentence everywhere and just add
-the banner", then "C". Built in gallery patch_L494_1, pushed at
-ab8f6b5e: no hover on the website ends with "For more information and
-references please click on the info "i" button top right." any more,
-and a first visit is greeted by a note on the i button.
-orrery-coding-conventions still said a pointer goes under the hover. A
-session following it would put the removed sentence back, so by
-ledger-and-session-records' rule for a wrong sentence a session would
-act on, it is corrected this session.
-
-WHAT CHANGED. orrery-coding-conventions: under Hover Text Is Written for
-the Visitor, the website's hovers carry no pointer and its Hover budget
-check fails on one that does; the orrery's own hovers keep theirs. Its
-v1.9 entry moved to documentation/SKILL_HISTORIES.md, by the
-three-entry rule.
-
-NOT DONE HERE, AND WHY. interactive-exhibit 1.26 says the same thing
-("one pointer line under each hover (L-231)") and is wrong the same way.
-It was bumped once today (v3.114), so under One Session, One Bump its
-correction rides 1.27, the next session's first skill work, with the
-rest of tonight's items carried on L-443: the search box, the i
-button's note, the AU note, the whole triad, the direction arrows, and
-the comets' farthest planet. The website's Hover budget check fails on
-a hover ending with the old sentence, so the wait cannot let it back in
-unnoticed.
-
-THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
-that session. The next session confirms its loaded copies read
-orrery-coding-conventions 1.12, and, from v3.114, interactive-exhibit
-1.26, horizons-orbital-mechanics 1.12 and gallery-cache-builder 1.13,
-before work that fires them. This part of the session loaded
-ledger-and-session-records 1.22, as the manifest expected; it worked
-from the repo's copy of orrery-coding-conventions at 1.11, the
-manifest's version, without loading it.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.112 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

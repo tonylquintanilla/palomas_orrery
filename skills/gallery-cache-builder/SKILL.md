@@ -2,14 +2,23 @@
 name: gallery-cache-builder
 description: Nightly data-serving pipeline for the Paloma's Orrery web gallery (Phase 1b, ledger L-098). Use for any task touching tools/gallery_cache_builder.py, tools/test_gallery_cache_builder_offline.py, inspect_staging.py, debug_encke_tp.py, gallery_cleanup.py, data/objects_config.json, the data/solar-system/ serving cache (coverage_index.json, feature_configs.json, positions/, raw/), atomic-swap / .prev / .staging_* / .quarantine_* semantics, Guard v2, dry-run / first-build / nightly modes, documentation/TESTING_PROTOCOL.md layers, or wiring interactive.html to the served data; for the rule that a config change is not deployed until the cache is rebuilt; and whenever a rename or a delete under data/ is refused with "Access is denied" (WinError 5), or the swap log data/cache_swap_log.jsonl is being read or written; and for daily_run.py's order, a failed pull and the run records check. Do NOT use for the Studio/converter/viewer curation chain (that is gallery-pipeline) or for projects other than Paloma's Orrery.
 fires_when: Nightly builder, atomic swap and its retry/roll-back/swap log, "Access is denied" under data/, coverage_index, serving cache, objects_config, dry-run/first-build/nightly, builder testing layers, the Daily
-  Run's order and a failed pull, the run records and their check, a spacecraft fetched by its path plan, a pull that does not match the push, a comet on an open path fetched by its plan (is_path_body, open_path)
+  Run's order and a failed pull, the run records and their check, a spacecraft fetched by its path plan, a pull that does not match the push, a comet on an open path fetched by its plan (is_path_body, open_path), a small body's own uncertainty (position_uncertainty, the match rule), every JPL question asked fresh (HORIZONS_CACHE), a drawing named on a room's row
 ---
 
 # Gallery Cache Builder (Phase 1b data serving)
 
-Read this file in 3 parts: lines 1-236, 237-469, 470-671.
+Read this file in 3 parts: lines 1-239, 240-483, 484-741.
 
-Skill version: 1.13 | 2026-10-26, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.14 | 2026-10-29, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 571b9bf4 and gallery @ b55109f2. v1.14 (L-399, L-503)
+records the builder's changes of 2026-10-29: each small body is served
+`position_uncertainty`, JPL's own 3-sigma from the 2xr table, by a match
+rule held to the body's own 3-sigma, floored at 1e-7 AU and capped at
+1e-3 AU by the closest comet pieces, a refusal naming its numbers;
+every JPL question is asked fresh (`HORIZONS_CACHE`) and why; and
+`serve_drawings` serves a drawing named on a room's own row. Each fact
+was read from the builder at b55109f2 before it was written.
+Earlier: 1.13 | 2026-10-26, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 5398439 and gallery @ 9223cd1. v1.13 (L-443, slice 2,
 build B part 2) adds to A Spacecraft Is Fetched by Its Plan that a
 comet the orrery marks open_path is a path body too (is_path_body):
@@ -28,18 +37,10 @@ point; a re-fetch by a new plan is held out of the shrink gate by name.
 And under The Daily Run's Steps, Tony's ruling of 2026-10-25 on L-461,
 "stop. confirmed.": a pull that does not match the push is a failed
 pull, and the Daily Run stops before the builder.
-Earlier: 1.11 | 2026-10-17, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ a73bc24a and gallery @ f49b3e69. v1.11 (L-449) records
-the run records rule and its check. Every record is kept until the
-cause of the losses of 2026-10-15 and 10-16 is found; then a deliberate
-limit, its number set then, with each removal named (Tony, 2026-10-16).
-The builder prints what its copy carried, and the Daily Run compares
-the new cache's records with the replaced cache's after the builder and
-stops on a loss, naming each record and its copy (Tony, 2026-10-17:
-stop and name). See The Daily Run's Steps.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
 on 2026-10-05 (L-418), 2026-10-14 (L-431), 2026-10-15 (L-446),
-2026-10-17 (L-449), 2026-10-25 (L-443) and 2026-10-26 (L-443).
+2026-10-17 (L-449), 2026-10-25 (L-443), 2026-10-26 (L-443) and
+2026-10-29 (L-399).
 
 The standalone builder that fetches fresh JPL Horizons data and deploys the
 web gallery's served cache. Tony runs it MANUALLY and commits the result
@@ -64,6 +65,8 @@ if this list and the headings disagree (L-418).
 - A config change is not deployed until the cache is rebuilt [CRITICAL]
 - The Builder Reads the Period's Centre [QUALITY]
 - A Spacecraft Is Fetched by Its Plan [QUALITY]
+- A Small Body's Own Uncertainty Is Served [QUALITY]
+- Every Question Is Asked of JPL, Fresh [QUALITY]
 - The Daily Run's Steps [QUALITY]
 - Validation stance
 - Commit with round-trip verify
@@ -361,6 +364,17 @@ from the cache, so they too reach a visitor on the push alone: a body's
 and its `period` (L-431 build 3), which `tools/mirror_objects.py` copies
 from the orrery's export. The orbit drawn around a period's centre is
 NOT one of them: it is the cache's `drawn_orbit`, and needs the builder.
+Nor is a small body's own uncertainty, the cache's
+`position_uncertainty` (A Small Body's Own Uncertainty Is Served).
+
+A STORED DRAWING NAMED ON A ROOM'S ROW IS SERVED TOO (v1.14, L-503).
+`serve_drawings()` copies the drawings named under the served objects'
+features and, since 2026-10-29, those named on the rows of the config's
+`"rooms"` section, which the served index does not hold
+(`serve_drawings(staging, index, drawings_dir, rooms=...)`). The main
+belt's cloud, the Solar System room's own row, is the first.
+`tools/pull_drawings.py` reads the rooms section the same way, so the
+orrery's file is pulled before the build serves it.
 
 ## The Builder Reads the Period's Centre [QUALITY]
 
@@ -466,6 +480,62 @@ the orrery's."
   suite gives such a comet a stand-in plan and the fake answers it with
   a straight line past the Sun; four checks hold it, among them one
   fetched inside its plan's span and no further.
+
+## A Small Body's Own Uncertainty Is Served [QUALITY]
+
+Built 2026-10-29 (L-399), on the method horizons-orbital-mechanics calls
+A Small Body's Uncertainty Comes With Its Position.
+
+- EACH SMALL BODY IS ASKED JPL'S OWN UNCERTAINTY: an asteroid, a comet
+  or a dwarf planet asked as a small body (`is_small_body_target`, the
+  orrery's own test), by Horizons' vector table 2xr, read by column
+  name, at the moment of its served "you are here" point. What is
+  served is `position_uncertainty` on its entry
+  (`build_position_uncertainty`): the 3-sigma of its distance from the
+  Sun. The planets and Pluto keep JPL's planetary report, from the
+  config (`position_accuracy`). It is cache data, so unlike
+  `position_accuracy` it reaches a visitor only after a build.
+- AN ANSWER THAT CANNOT BE SERVED HONESTLY SERVES NOTHING, NAMED, and
+  never costs the orbit: no point to ask at, a body not measured from
+  the Sun, an empty position column, no R_s ("JPL gives no range
+  uncertainty (R_s) for it" -- Bennu, Halley and Ikeya-Seki, whose
+  column reads "n.a."), or a position that does not match. The index's
+  `position_uncertainty` lists who was asked and why each missing one
+  is missing.
+- THE MATCH RULE (`uncertainty_match_tolerance`, corrected
+  2026-10-29). The 2xr answer's position must sit within the body's own
+  3-sigma of the served point, 3 x R_s, R_s read first, floored at
+  1e-7 AU (`UNCERTAINTY_MATCH_AU`, about 15 km, the earlier fixed
+  tolerance, which Ceres and Apophis keep) and capped at 1e-3 AU
+  (`UNCERTAINTY_MATCH_CAP_AU`, about 150,000 km). THE CAP IS SET BY
+  THE CLOSEST COMET PIECES, the one case where another record sits
+  close: C/2025 K1's pieces B and D were 0.0042 AU apart on 2026-10-29
+  and D's own 3-sigma was 0.0043 AU, so D's answer standing in for B's
+  would pass the 3-sigma alone; the cap is under half the closest pair
+  measured that day, the parent and C at 0.0024 AU. Every other body
+  asked had no neighbour nearer than 0.117 AU.
+- A REFUSAL NAMES ITS NUMBERS. The line says how far JPL's 2xr answer
+  sits from the served point against the tolerance, and the run
+  record keeps the refused answer's items under
+  `position_uncertainty.refused` -- the id asked, JPL's X, Y, Z, the
+  served point -- so a refusal can be read later.
+- WHY IT WAS CORRECTED: the fixed 1e-7 AU refused 2026 ED138 at the
+  21:57 UTC build of 2026-10-29, its answer 8.88e-05 AU (13,000 km)
+  from a served point read from astroquery's saved answers after JPL
+  had revised the orbit -- a thirtieth of its own 3-sigma (next).
+
+## Every Question Is Asked of JPL, Fresh [QUALITY]
+
+`HORIZONS_CACHE = False` (L-399, 2026-10-29), passed as `cache=` at
+every astroquery call the builder makes. astroquery keeps each answer
+on disk for a week (`astroquery.cache_conf.cache_timeout`, 604800 s,
+in `~/.astropy/cache/astroquery/Horizons`) and hands it back when the
+same question is asked again, so a second build on the same day served
+the first build's orbit and positions under a new "retrieved" stamp.
+The 2xr question, sent directly, was always fresh, which is how the
+two came to disagree. The offline suite holds every call to the
+setting. The orrery made the same choice the same night (L-504,
+`utc_clock.HORIZONS_CACHE`; horizons-orbital-mechanics).
 
 ## The Daily Run's Steps [QUALITY]
 

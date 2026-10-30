@@ -144,6 +144,7 @@ export.)
 """
 
 import datetime
+import utc_clock   # L-504: the clock read as UTC
 import json
 import os
 import re
@@ -1153,7 +1154,7 @@ def _write_if_changed(path, content):
 
 def main(argv):
     root = os.path.dirname(os.path.abspath(__file__))
-    code, _ = run(root, live_fetch, datetime.date.today(),
+    code, _ = run(root, live_fetch, utc_clock.utc_today(),
                   check_all="--all" in argv)
     return code
 

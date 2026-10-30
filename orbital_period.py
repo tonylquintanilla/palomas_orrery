@@ -90,12 +90,22 @@ is served with the count its print shows.)
 Module updated: October 24, 2026 with Anthropic's Claude Opus 5.5 (L-470:
 no code changed. C/2025_K1 is no longer the example of a pinned record
 number: it is asked by JPL's permanent number, id_type 'designation'.)
+Module updated: October 29, 2026 with Anthropic's Claude Opus 5.5 (L-504,
+first slice: the period record's 'fetched' date and the two-centre
+test's 'run' date are UTC, every query asks JPL fresh (cache=False), and
+the hover's line says "fetched <date> UTC". L-484: PERIOD_TARGETS gains
+Pluto's, the Pluto-Charon barycentre, target 9 (Tony's choice of
+2026-10-29, "Centre of mass"): Pluto's centre circles the barycentre
+every 6.4 days, and its period around the Sun swung from 88,702 to
+91,630 days in JPL's answers every six hours from 2026-10-28, where the
+barycentre's held to 0.3 days.)
 """
 
 import math
 import os
 import re
 from datetime import datetime
+from utc_clock import utc_now, utc_today, utc_stamp, parse_stamp, HORIZONS_CACHE  # L-504: the clock read as UTC; JPL asked fresh
 
 from constants_new import D_PER_JULIAN_YEAR
 
@@ -139,8 +149,20 @@ VIEW_TO_OSCULATING_CENTRE = {
 # to a period taken around the Sun (period_target), never around another
 # centre: Earth around the Earth-Moon barycentre ('Earth@3') stays 399.
 # A target here is a major body, asked with no id_type.
+# Pluto's (L-484, Tony's choice of 2026-10-29, "Centre of mass"): Pluto's
+# centre circles the Pluto-Charon barycentre every 6.4 days, so its period
+# around the Sun swings through those days, by 2,928 days from least to
+# most in JPL's answers every six hours over 13 days from 2026-10-28 TDB
+# (88,702 to 91,630); the barycentre's, target 9, held to 0.3 days. The
+# "change in a year" measured on Pluto's centre was two moments of that
+# swing (66 days at one fetch on 2026-10-28, 589 at the next), not a
+# change in its orbit. Recorded on L-484.
+# Source: JPL Horizons (https://ssd.jpl.nasa.gov/horizons/), its own
+#   target names in its elements answers, asked 2026-10-30 UTC: target 3
+#   "Earth-Moon Barycenter (3)", target 9 "Pluto Barycenter (9)".
 PERIOD_TARGETS = {
     '399': '3',
+    '999': '9',
 }
 
 # What the hover calls each centre. Words, not values.
@@ -315,7 +337,7 @@ def query_period_pair(horizons_id, id_type, date_str, location):
         try:
             obj = Horizons(id=horizons_id, id_type=id_type, location=location,
                            epochs=[jd, jd + step])
-            el = obj.elements()
+            el = obj.elements(cache=HORIZONS_CACHE)
             if len(el) < 2:
                 raise ValueError('Horizons returned %d rows, not 2' % len(el))
             if 'P' not in el.colnames:
@@ -494,7 +516,7 @@ def build_period_record(horizons_id, id_type, date_str, location, previous=None,
         bary = query_period_pair(target, ask_type, date_str, CENTRE_BARYCENTRE)
         c_sun, c_bary = _change(sun), _change(bary)
         test = {CENTRE_SUN: c_sun, CENTRE_BARYCENTRE: c_bary,
-                'run': datetime.now().strftime('%Y-%m-%d')}
+                'run': utc_now().strftime('%Y-%m-%d')}
         if c_bary is not None and (c_sun is None or c_bary < c_sun):
             chosen, pair = CENTRE_BARYCENTRE, bary
         else:
@@ -539,7 +561,7 @@ def build_period_record(horizons_id, id_type, date_str, location, previous=None,
         'open_orbit': days is None,
         'center': chosen,
         'epoch': date_str,
-        'fetched': datetime.now().strftime('%Y-%m-%d'),
+        'fetched': utc_now().strftime('%Y-%m-%d'),
         'source': 'JPL Horizons PR (sidereal orbit period)',
         'year_change_days': change,
         'year_step_days': pair['step_days'],
@@ -698,7 +720,7 @@ def period_hover_lines(resolved):
         return ('Orbital period: %s years (%s days)<br>'
                 'Typed value, not fetched from JPL.' % (years_s, days_s))
     rec = resolved['record']
-    where = ('%saround %s, from JPL Horizons, fetched %s.'
+    where = ('%saround %s, from JPL Horizons, fetched %s UTC.'
              % (target_words(rec), resolved['label'], rec.get('fetched')))
     where = where[0].upper() + where[1:]
     if rec.get('days') is None:

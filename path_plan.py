@@ -207,6 +207,7 @@ WHAT A PLAN IS).
 
 import ast
 import datetime
+import utc_clock   # L-504: the clock read as UTC
 import hashlib
 import json
 import math
@@ -1132,7 +1133,7 @@ def run(root, fetch, today, check_all=False, pause=PAUSE_SECONDS,
                             if plans[key].get("events") else "not found"))
     every = todo + comets_todo
     progress.say("started %s: %d path(s) listed, %d due%s"
-                 % (datetime.datetime.now().strftime("%H:%M:%S"),
+                 % (utc_clock.utc_now().strftime("%H:%M:%S UTC"),
                     len(paths) + len(comets), len(every),
                     (" (%s); asking JPL for each one's span first"
                      % ", ".join(f["name"] for f, _ in every)) if every
@@ -1280,7 +1281,7 @@ def run(root, fetch, today, check_all=False, pause=PAUSE_SECONDS,
 def main(argv):
     check_all = "--all" in argv
     limit = None if "--no-limit" in argv else TIME_LIMIT_SECONDS
-    today = datetime.date.today()
+    today = utc_clock.utc_today()
     print(LINE)
     print("PATH PLAN -- where each served path needs finer steps (L-443)")
     print("  %s; a line as it goes, then the report" % (

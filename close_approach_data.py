@@ -45,6 +45,7 @@ import os
 import urllib.request
 import urllib.parse
 from datetime import datetime, date
+from utc_clock import utc_now, utc_today, utc_stamp, parse_stamp, HORIZONS_CACHE  # L-504: the clock read as UTC; JPL asked fresh
 from pathlib import Path
 
 from constants_new import KM_PER_AU, CENTER_BODY_RADII
@@ -353,7 +354,7 @@ def get_close_approaches(designation, body='Earth', date_min=None, date_max=None
         'date_min':     date_min,
         'date_max':     date_max,
         'dist_max':     dist_max,
-        'fetched':      datetime.now().strftime('%Y-%m-%d'),
+        'fetched':      utc_now().strftime('%Y-%m-%d'),
     }
     _save_cache(cache)
 
@@ -570,7 +571,7 @@ def fetch_position_at_approach(approach, designation, center_body_id='399',
     try:
         obj = Horizons(id=designation, id_type=id_type,
                        location=location, epochs=jd)
-        vec = obj.vectors()
+        vec = obj.vectors(cache=HORIZONS_CACHE)
         if len(vec) == 0:
             print("[CAD] No vectors returned from Horizons", flush=True)
             return None

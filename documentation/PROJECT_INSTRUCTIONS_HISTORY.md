@@ -3637,6 +3637,55 @@ resident.
 (Moved down from the resident protocol on 2026-10-28 when
 v3.117 made a fourth entry.)
 
+v3.115 (October 26, 2026, night): No rule changed in this document. ONE
+skill bump, one version (L-494): orrery-coding-conventions 1.11 ->
+1.12. THE WEBSITE'S HOVERS END WITHOUT A POINTER.
+
+WHAT PROMPTED IT. Tony's choice that evening for L-494, from the design
+canvas of four options: "Or remove the sentence everywhere and just add
+the banner", then "C". Built in gallery patch_L494_1, pushed at
+ab8f6b5e: no hover on the website ends with "For more information and
+references please click on the info "i" button top right." any more,
+and a first visit is greeted by a note on the i button.
+orrery-coding-conventions still said a pointer goes under the hover. A
+session following it would put the removed sentence back, so by
+ledger-and-session-records' rule for a wrong sentence a session would
+act on, it is corrected this session.
+
+WHAT CHANGED. orrery-coding-conventions: under Hover Text Is Written for
+the Visitor, the website's hovers carry no pointer and its Hover budget
+check fails on one that does; the orrery's own hovers keep theirs. Its
+v1.9 entry moved to documentation/SKILL_HISTORIES.md, by the
+three-entry rule.
+
+NOT DONE HERE, AND WHY. interactive-exhibit 1.26 says the same thing
+("one pointer line under each hover (L-231)") and is wrong the same way.
+It was bumped once today (v3.114), so under One Session, One Bump its
+correction rides 1.27, the next session's first skill work, with the
+rest of tonight's items carried on L-443: the search box, the i
+button's note, the AU note, the whole triad, the direction arrows, and
+the comets' farthest planet. The website's Hover budget check fails on
+a hover ending with the old sentence, so the wait cannot let it back in
+unnoticed.
+
+THE OBLIGATION TRAVELS. A reinstall during a session is not visible to
+that session. The next session confirms its loaded copies read
+orrery-coding-conventions 1.12, and, from v3.114, interactive-exhibit
+1.26, horizons-orbital-mechanics 1.12 and gallery-cache-builder 1.13,
+before work that fires them. This part of the session loaded
+ledger-and-session-records 1.22, as the manifest expected; it worked
+from the repo's copy of orrery-coding-conventions at 1.11, the
+manifest's version, without loading it.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.112 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-29 when
+v3.118 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

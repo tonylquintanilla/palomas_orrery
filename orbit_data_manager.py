@@ -17,6 +17,7 @@ import json
 import os
 import shutil  # Add this - needed for file operations
 from datetime import datetime, timedelta
+from utc_clock import utc_now, utc_today, utc_stamp, parse_stamp, HORIZONS_CACHE  # L-504: the clock read as UTC; JPL asked fresh
 import numpy as np
 from typing import Dict, List, Optional, Any, Tuple, Union
 import traceback
@@ -51,6 +52,8 @@ last_update_time = None
 def utc_to_tdb(dt):
     """
     Convert UTC datetime to TDB (Terrestrial Dynamical Time) for Horizons queries.
+    The dt given is UTC: since L-504 every reading of the clock on the data
+    path comes from utc_clock, where it used to be the computer's local time.
     TDB runs ~69 seconds ahead of UTC (37 leap seconds + 32.184 sec TT offset).
     Prevents boundary errors for tight-window spacecraft ephemerides.
     """
@@ -298,7 +301,7 @@ def load_orbit_paths(file_path=ORBIT_PATHS_FILE):
                 update_status("Recovered from backup after corruption")
                 
                 # Save the corrupted main file
-                corrupted_name = file_path + '.corrupted.' + datetime.now().strftime('%Y%m%d_%H%M%S')
+                corrupted_name = file_path + '.corrupted.' + utc_now().strftime('%Y%m%d_%H%M%S')
                 shutil.move(file_path, corrupted_name)
                 print(f"Corrupted file saved as: {corrupted_name}", flush=True)
                 
@@ -317,7 +320,7 @@ def load_orbit_paths(file_path=ORBIT_PATHS_FILE):
                 update_status("Recovered from old backup after double corruption")
                 
                 # Save the corrupted main file
-                corrupted_name = file_path + '.corrupted.' + datetime.now().strftime('%Y%m%d_%H%M%S')
+                corrupted_name = file_path + '.corrupted.' + utc_now().strftime('%Y%m%d_%H%M%S')
                 shutil.move(file_path, corrupted_name)
                 print(f"Corrupted file saved as: {corrupted_name}", flush=True)
                 
@@ -329,7 +332,7 @@ def load_orbit_paths(file_path=ORBIT_PATHS_FILE):
         
         # All failed - save corrupted file and start fresh
         update_status("All cache files corrupted - starting fresh")
-        backup_name = file_path + '.corrupted.' + datetime.now().strftime('%Y%m%d_%H%M%S')
+        backup_name = file_path + '.corrupted.' + utc_now().strftime('%Y%m%d_%H%M%S')
         try:
             shutil.move(file_path, backup_name)
             print(f"[CACHE BACKUP] Corrupted file saved as: {backup_name}", flush=True)
@@ -380,7 +383,7 @@ def convert_single_orbit_to_new_format(orbit_key, orbit_data):
             return None
             
         # Generate synthetic dates
-        today = datetime.today()
+        today = utc_now()
         days_span = DEFAULT_DAYS_AHEAD
         days_between = days_span / (num_points - 1) if num_points > 1 else 1
         
@@ -471,7 +474,7 @@ def save_orbit_paths(data=None, file_path=ORBIT_PATHS_FILE):
                 print(error_msg, flush=True)
                 
                 # Create emergency backup
-                emergency_backup = file_path + '.emergency_' + datetime.now().strftime('%Y%m%d_%H%M%S')
+                emergency_backup = file_path + '.emergency_' + utc_now().strftime('%Y%m%d_%H%M%S')
                 shutil.copy2(file_path, emergency_backup)
                 print(f"[EMERGENCY BACKUP] Created: {emergency_backup}", flush=True)
                 
@@ -551,7 +554,7 @@ def convert_to_new_format(old_data):
         dict: Converted data in new time-indexed format
     """
     new_data = {}
-    today = datetime.today()
+    today = utc_now()
     today_str = today.strftime("%Y-%m-%d")
     
     print("Converting orbit data to new time-indexed format...", flush=True)
@@ -692,7 +695,7 @@ def fetch_orbit_path(obj_info, start_date, end_date, interval, center_id='@0', i
 
         # Create Horizons object and fetch vectors        
         obj = Horizons(id=object_id, id_type=id_type, location=location, epochs=epochs)
-        eph = obj.vectors()
+        eph = obj.vectors(cache=HORIZONS_CACHE)
         
         # Process the ephemerides table to extract x, y, z coordinates
         x_coords = list(eph['x'])
@@ -937,7 +940,7 @@ def fetch_orbit_path_by_dates(obj_info, start_date, end_date, interval, center_i
             "earliest_date": start_date.strftime("%Y-%m-%d"),
             "latest_date": end_date.strftime("%Y-%m-%d"),
             "center_body": center_name,
-            "last_updated": datetime.today().strftime("%Y-%m-%d")
+            "last_updated": utc_now().strftime("%Y-%m-%d")
         }
     }
 
@@ -963,7 +966,7 @@ def merge_orbit_data(existing_data, new_data, new_start_date, new_end_date):
         merged_data["metadata"]["start_date"] = all_dates[0]
         merged_data["metadata"]["end_date"] = all_dates[-1]
         
-    merged_data["metadata"]["last_updated"] = datetime.today().strftime("%Y-%m-%d")
+    merged_data["metadata"]["last_updated"] = utc_now().strftime("%Y-%m-%d")
     
     return merged_data
 
@@ -1095,7 +1098,7 @@ def update_orbit_paths_incrementally(object_list=None, center_object_name="Sun",
     if root_widget:
         root = root_widget
     
-    today = datetime.today()
+    today = utc_now()
     end_window = today + timedelta(days=days_ahead)
     end_window_str = end_window.strftime("%Y-%m-%d")
     
@@ -1480,7 +1483,7 @@ def on_center_change(*args, objects=None, planetary_params=None, parent_planets=
     center_object = center_object_var.get()
 
     # Check if this is the same center we just updated
-    now = datetime.now()
+    now = utc_now()
     if (center_object == last_center_updated and 
         last_update_time and 
         (now - last_update_time).total_seconds() < 600):  # 10 minutes cache
@@ -1707,7 +1710,7 @@ def query_horizons_elements(horizons_id, id_type='smallbody', date_str=None, cen
     
     # Default to today if no date provided
     if date_str is None:
-        date_str = datetime.now().strftime('%Y-%m-%d')
+        date_str = utc_now().strftime('%Y-%m-%d')
     
     """
     # ===== ADD THIS ENTIRE BLOCK =====
@@ -1807,7 +1810,7 @@ def query_horizons_elements(horizons_id, id_type='smallbody', date_str=None, cen
         obj = Horizons(id=horizons_id, id_type=id_type, location=location, epochs=epoch_jd)
         
         # Fetch ELEMENTS
-        el = obj.elements()
+        el = obj.elements(cache=HORIZONS_CACHE)
         
         if len(el) == 0:
             raise ValueError(f"No elements returned for {horizons_id}")
@@ -1906,7 +1909,7 @@ def query_horizons_elements(horizons_id, id_type='smallbody', date_str=None, cen
             'MA': ma_val,      # Mean anomaly at epoch (degrees) - for time propagation
             'TA': ta_val,      # True anomaly at epoch (degrees) - for position verification
             'epoch': f"{date_str} osc.",
-            'solution_date': datetime.now().strftime('%Y-%m-%d'),
+            'solution_date': utc_now().strftime('%Y-%m-%d'),
             'horizons_id': str(horizons_id),  # Store the actual ID we queried
             'center_body': location           # Store which center was used
         }

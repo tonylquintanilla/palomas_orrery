@@ -30,6 +30,8 @@ right finding, by name:
     the surface line dropped for a giant planet  SURFACE LINE DROPPED
     the small-body database named for a planet   DATABASE MENTIONED FOR A PLANET OR MOON
     another body's period printed as the body's  TARGET WORDS DROPPED
+    JPL's "n.a." said as not included            JPL'S NONE SAID AS NOT INCLUDED
+    a failed question said as JPL stating none   A FAILED QUESTION SAID AS JPL STATING NONE
 
 The last five go beyond the brief's six. The first two prove the static
 plot still asks for a small body's uncertainty and reads Horizons'
@@ -68,6 +70,12 @@ Module updated: October 15, 2026 with Anthropic's Claude Opus 5.5 (L-445,
 Earth's period: a period asked of another body says whose it is, in the
 hover and the parameters window, and a body's own period does not; the
 fourteenth planted fault drops those words.)
+Module updated: October 29, 2026 with Anthropic's Claude Opus 5.5 (L-399,
+L-484: a small body whose 2xr answer has no figure, "n.a." in JPL's
+column, says JPL states no accuracy, and one whose question failed or was
+never asked says the figure is not included here: Bennu both ways, and
+Encke's zero sigma now reads as JPL stating none. Two planted faults, one
+for each sentence said in the other's place.)
 """
 import math
 import os
@@ -154,7 +162,8 @@ def row(name):
 # THE FIXTURES: bodies, centres, positions, and what each must print by
 # ============================================================================
 
-def _od(r_au, v_km_s, sigma=None, missing=False, ra_sigma=None, earth_au=None):
+def _od(r_au, v_km_s, sigma=None, missing=False, ra_sigma=None, earth_au=None,
+        na=False):
     v = v_km_s * DAY_S / cn.KM_PER_AU
     d = {'x': r_au, 'y': 0.0, 'z': 0.0, 'vx': 0.0, 'vy': v, 'vz': 0.0,
          'velocity': v, 'ra': 123.4567, 'dec': -12.3456,
@@ -165,6 +174,12 @@ def _od(r_au, v_km_s, sigma=None, missing=False, ra_sigma=None, earth_au=None):
                                      'key': {'body': 'fixture'}}
     if missing:
         d['position_uncertainty'] = {'missing': 'fixture: no 2xr columns',
+                                     'key': {'body': 'fixture'}}
+    if na:
+        # JPL answered; its uncertainty column read "n.a." (L-399, L-484):
+        # uncertainty_record() writes the figure fields as None.
+        d['position_uncertainty'] = {'range_3sigma_km': None,
+                                     'speed_3sigma_km_s': None,
                                      'key': {'body': 'fixture'}}
     if earth_au is not None:
         d['earth_distance_au'] = earth_au
@@ -231,6 +246,10 @@ FIXTURES = [
     ('C/2025_K1', 'Sun', _od(3.2, 22.0, missing=True), 'none', ('floor',), 'floor'),
     ('Makemake', 'Earth', _od(52.6, 30.1), 'none', ('floor',), 'floor'),
     ('Encke', 'Sun', _od(2.0108, 33.17, sigma=(0.0, 0.0)), 'none', ('floor',), 'floor'),
+    # L-399, L-484 (2026-10-29): JPL's 2xr answer for Bennu with "n.a." in
+    # its uncertainty column, and Bennu with no record (never asked).
+    ('Bennu', 'Sun', _od(1.13, 28.0, na=True), 'none', ('floor',), 'floor'),
+    ('Bennu', 'Sun', _od(1.13, 28.0), 'none', ('floor',), 'floor'),
 ]
 
 # What each fixture's sentences must say, and must not, beyond its state:
@@ -422,13 +441,30 @@ def judge_fixture(fx, findings, counts):
 
     # The sentences: which kind of figure, in words.
     if state == 'none':
-        reason = ('not_fetched' if (od.get('position_uncertainty')
-                                    or (name, centre) in (('Makemake', 'Earth'),)
-                                    or name in ('Voyager 1', 'Voyager 2'))
-                  else 'unstated')
+        pu = od.get('position_uncertainty')
+        # JPL answered with no figure ("n.a.", or zero): JPL states none.
+        # A failed question ('missing'), or none asked for a small body,
+        # is the figure not included here (L-399, L-484).
+        jpl_none = (isinstance(pu, dict) and 'range_3sigma_km' in pu
+                    and 'missing' not in pu)
+        if jpl_none:
+            reason = 'unstated'
+        else:
+            reason = ('not_fetched' if (pu
+                                        or (name, centre) in (('Makemake', 'Earth'),
+                                                              ('Bennu', 'Sun'))
+                                        or name in ('Voyager 1', 'Voyager 2'))
+                      else 'unstated')
         if NONE_WORDS[reason] not in text:
-            cls = ('SMALL BODY WITHOUT SIGMA NOT IN THE NO-ERROR STATE'
-                   if reason == 'not_fetched' else 'LINE DROPPED')
+            if jpl_none:
+                cls = "JPL'S NONE SAID AS NOT INCLUDED"
+            elif (reason == 'not_fetched' and isinstance(pu, dict) and pu.get('missing')
+                  and NONE_WORDS['unstated'] in text):
+                cls = 'A FAILED QUESTION SAID AS JPL STATING NONE'
+            elif reason == 'not_fetched':
+                cls = 'SMALL BODY WITHOUT SIGMA NOT IN THE NO-ERROR STATE'
+            else:
+                cls = 'LINE DROPPED'
             findings.append((cls, '%s: the no-error sentence is missing' % tag))
         want = SPEED_WORDS['not_fetched' if reason == 'not_fetched' else 'floor']
     else:
@@ -869,6 +905,37 @@ def _zero_sigma_kept():
         yield
 
 
+@contextmanager
+def _jpl_none_called_not_fetched():
+    # The code before 2026-10-29: JPL's "n.a." said as not included here.
+    real = pa._side
+
+    def side(name, role, center_name, obj_data, objects, pp):
+        s = real(name, role, center_name, obj_data, objects, pp)
+        if s.get('reason') == 'unstated' and role == 'body' and isinstance(
+                (obj_data or {}).get('position_uncertainty'), dict):
+            return pa._none_side(name, 'not_fetched')
+        return s
+    with _patched(pa, '_side', side):
+        yield
+
+
+@contextmanager
+def _failed_called_jpl_none():
+    # The brief's first sketch: any record present, failed or not, read as
+    # JPL stating none.
+    real = pa._side
+
+    def side(name, role, center_name, obj_data, objects, pp):
+        s = real(name, role, center_name, obj_data, objects, pp)
+        pu = (obj_data or {}).get('position_uncertainty') if role == 'body' else None
+        if s.get('reason') == 'not_fetched' and isinstance(pu, dict) and pu.get('missing'):
+            return pa._none_side(name, 'unstated')
+        return s
+    with _patched(pa, '_side', side):
+        yield
+
+
 def _sky_source_with_table():
     with open(os.path.join(HERE, 'celestial_coordinates.py'), encoding='utf-8') as f:
         src = f.read()
@@ -905,6 +972,10 @@ PLANTS = [
      'DATABASE MENTIONED FOR A PLANET OR MOON'),
     ("a period asked of another body printed as the body's own", _target_words_dropped, {},
      'TARGET WORDS DROPPED'),
+    ('JPL\'s "n.a." said as not included', _jpl_none_called_not_fetched, {},
+     "JPL'S NONE SAID AS NOT INCLUDED"),
+    ('a failed question said as JPL stating none', _failed_called_jpl_none, {},
+     'A FAILED QUESTION SAID AS JPL STATING NONE'),
 ]
 
 

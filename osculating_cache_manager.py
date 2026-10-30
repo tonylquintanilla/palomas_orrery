@@ -36,6 +36,7 @@ Domain: orrery
 import json
 import shutil
 from datetime import datetime, timedelta
+from utc_clock import utc_now, utc_today, utc_stamp, parse_stamp, HORIZONS_CACHE  # L-504: the clock read as UTC; JPL asked fresh
 from pathlib import Path
 import tkinter.messagebox as messagebox
 # Correct import:
@@ -291,7 +292,7 @@ def create_empty_cache():
     return {
         '_metadata': {
             'cache_version': '1.0',
-            'created': datetime.now().isoformat(),
+            'created': utc_stamp(),
             'description': 'Auto-updated cache of osculating orbital elements from JPL Horizons',
             'note': 'Elements can be copied to idealized_orbits.py for manual backup'
         }
@@ -313,8 +314,10 @@ def calculate_age_days(cache_entry):
     """
     try:
         fetched_str = cache_entry['metadata']['fetched']
-        fetched = datetime.fromisoformat(fetched_str)
-        age = (datetime.now() - fetched).total_seconds() / 86400
+        # L-504: reads a stamp that says its zone (+00:00, from 2026-10-29)
+        # and an older one with none, written in local time
+        fetched = parse_stamp(fetched_str)
+        age = (utc_now() - fetched).total_seconds() / 86400
         return int(age)
     except:
         return None
@@ -410,7 +413,7 @@ def fetch_osculating_elements(obj_name, horizons_id=None, id_type='smallbody', d
         - center_body enables fetching barycentric elements for binary systems
     """
     if date is None:
-        date = datetime.now()
+        date = utc_now()
 
     # Convert UTC epoch to TDB before formatting for Horizons.
     # The 69-second offset matters for tight-window missions (e.g. Artemis II)
@@ -452,7 +455,7 @@ def fetch_osculating_elements(obj_name, horizons_id=None, id_type='smallbody', d
             },
 
             'metadata': {
-                'fetched': datetime.now().isoformat(),
+                'fetched': utc_stamp(),
                 'source': 'JPL Horizons',
                 'solution_date': result.get('solution_date', date_str),
                 'horizons_id': query_id,  # Store the actual ID we queried with
@@ -552,7 +555,7 @@ def fetch_solution_tp(obj_name, horizons_id=None, id_type='smallbody'):
         epoch_jd = Time('2025-01-01').jd
         
         obj = Horizons(id=query_id, id_type=id_type, location='@sun', epochs=epoch_jd)
-        raw = obj.vectors_async().text
+        raw = obj.vectors_async(cache=HORIZONS_CACHE).text
         
         # Parse TP= from header lines
         # Pattern: "TP= 2460977.9952628477" (JD value, starts with 24xxxxx)
@@ -609,7 +612,7 @@ def cache_solution_tp(obj_name, tp_jd, center_body=None):
             cache[key] = {
                 'elements': {'solution_TP': tp_jd},
                 'metadata': {
-                    'fetched': datetime.now().isoformat(),
+                    'fetched': utc_stamp(),
                     'source': 'JPL Horizons (solution header)',
                     'display_name': obj_name,
                 }

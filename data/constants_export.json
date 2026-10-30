@@ -5597,7 +5597,791 @@
       "inputs": [],
       "uncertainty": null,
       "prints": null,
-      "in": null,
+      "in": {
+        "0": {
+          "au": {
+            "value": 1.67,
+            "figures": 3,
+            "prints": null
+          },
+          "km": {
+            "value": 250000000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "pc": {
+            "value": 8.1e-06,
+            "figures": 2,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 39100.0,
+            "figures": 3,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 359.0,
+            "figures": 3,
+            "prints": null
+          }
+        },
+        "1": {
+          "au": {
+            "value": 1.93,
+            "figures": 3,
+            "prints": null
+          },
+          "km": {
+            "value": 288000000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "pc": {
+            "value": 9.3e-06,
+            "figures": 2,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 45200.0,
+            "figures": 3,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 414.0,
+            "figures": 3,
+            "prints": null
+          }
+        },
+        "2": {
+          "au": {
+            "value": 2.02,
+            "figures": 3,
+            "prints": null
+          },
+          "km": {
+            "value": 301000000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "pc": {
+            "value": 9.8e-06,
+            "figures": 2,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 47300.0,
+            "figures": 3,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 433.0,
+            "figures": 3,
+            "prints": null
+          }
+        },
+        "3": {
+          "au": {
+            "value": 2.08,
+            "figures": 3,
+            "prints": null
+          },
+          "km": {
+            "value": 311000000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "pc": {
+            "value": 1.01e-05,
+            "figures": 3,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 48700.0,
+            "figures": 3,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 446.0,
+            "figures": 3,
+            "prints": null
+          }
+        },
+        "4": {
+          "au": {
+            "value": 2.13,
+            "figures": 3,
+            "prints": null
+          },
+          "km": {
+            "value": 318000000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "pc": {
+            "value": 1.03e-05,
+            "figures": 3,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 49900.0,
+            "figures": 3,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 457.0,
+            "figures": 3,
+            "prints": null
+          }
+        },
+        "5": {
+          "au": {
+            "value": 2.17,
+            "figures": 3,
+            "prints": null
+          },
+          "km": {
+            "value": 324000000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "pc": {
+            "value": 1.05e-05,
+            "figures": 3,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 50900.0,
+            "figures": 3,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 466.0,
+            "figures": 3,
+            "prints": null
+          }
+        },
+        "10": {
+          "au": {
+            "value": 2.32,
+            "figures": 3,
+            "prints": null
+          },
+          "km": {
+            "value": 347000000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "pc": {
+            "value": 1.12e-05,
+            "figures": 3,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 54400.0,
+            "figures": 3,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 499.0,
+            "figures": 3,
+            "prints": null
+          }
+        },
+        "15": {
+          "au": {
+            "value": 2.43,
+            "figures": 3,
+            "prints": null
+          },
+          "km": {
+            "value": 364000000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "pc": {
+            "value": 1.18e-05,
+            "figures": 3,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 57000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 523.0,
+            "figures": 3,
+            "prints": null
+          }
+        },
+        "20": {
+          "au": {
+            "value": 2.53,
+            "figures": 3,
+            "prints": null
+          },
+          "km": {
+            "value": 378000000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "pc": {
+            "value": 1.23e-05,
+            "figures": 3,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 59300.0,
+            "figures": 3,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 543.0,
+            "figures": 3,
+            "prints": null
+          }
+        },
+        "25": {
+          "au": {
+            "value": 2.61,
+            "figures": 3,
+            "prints": null
+          },
+          "km": {
+            "value": 391000000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "pc": {
+            "value": 1.27e-05,
+            "figures": 3,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 61300.0,
+            "figures": 3,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 562.0,
+            "figures": 3,
+            "prints": null
+          }
+        },
+        "30": {
+          "au": {
+            "value": 2.68,
+            "figures": 3,
+            "prints": null
+          },
+          "km": {
+            "value": 402000000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "pc": {
+            "value": 1.3e-05,
+            "figures": 3,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 63000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 577.0,
+            "figures": 3,
+            "prints": null
+          }
+        },
+        "35": {
+          "au": {
+            "value": 2.74,
+            "figures": 3,
+            "prints": null
+          },
+          "km": {
+            "value": 410000000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "pc": {
+            "value": 1.33e-05,
+            "figures": 3,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 64400.0,
+            "figures": 3,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 590.0,
+            "figures": 3,
+            "prints": null
+          }
+        },
+        "40": {
+          "au": {
+            "value": 2.8,
+            "figures": 3,
+            "prints": null
+          },
+          "km": {
+            "value": 419000000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "pc": {
+            "value": 1.36e-05,
+            "figures": 3,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 65600.0,
+            "figures": 3,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 602.0,
+            "figures": 3,
+            "prints": null
+          }
+        },
+        "45": {
+          "au": {
+            "value": 2.85,
+            "figures": 3,
+            "prints": null
+          },
+          "km": {
+            "value": 426000000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "pc": {
+            "value": 1.38e-05,
+            "figures": 3,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 66800.0,
+            "figures": 3,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 613.0,
+            "figures": 3,
+            "prints": null
+          }
+        },
+        "50": {
+          "au": {
+            "value": 2.9,
+            "figures": 3,
+            "prints": null
+          },
+          "km": {
+            "value": 433000000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "pc": {
+            "value": 1.4e-05,
+            "figures": 3,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 67900.0,
+            "figures": 3,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 623.0,
+            "figures": 3,
+            "prints": null
+          }
+        },
+        "55": {
+          "au": {
+            "value": 2.94,
+            "figures": 3,
+            "prints": null
+          },
+          "km": {
+            "value": 440000000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "pc": {
+            "value": 1.43e-05,
+            "figures": 3,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 69000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 632.0,
+            "figures": 3,
+            "prints": null
+          }
+        },
+        "60": {
+          "au": {
+            "value": 2.99,
+            "figures": 3,
+            "prints": null
+          },
+          "km": {
+            "value": 447000000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "pc": {
+            "value": 1.45e-05,
+            "figures": 3,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 70200.0,
+            "figures": 3,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 643.0,
+            "figures": 3,
+            "prints": null
+          }
+        },
+        "65": {
+          "au": {
+            "value": 3.04,
+            "figures": 3,
+            "prints": null
+          },
+          "km": {
+            "value": 455000000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "pc": {
+            "value": 1.48e-05,
+            "figures": 3,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 71400.0,
+            "figures": 3,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 654.0,
+            "figures": 3,
+            "prints": null
+          }
+        },
+        "70": {
+          "au": {
+            "value": 3.1,
+            "figures": 3,
+            "prints": null
+          },
+          "km": {
+            "value": 463000000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "pc": {
+            "value": 1.5e-05,
+            "figures": 3,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 72600.0,
+            "figures": 3,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 666.0,
+            "figures": 3,
+            "prints": null
+          }
+        },
+        "75": {
+          "au": {
+            "value": 3.15,
+            "figures": 3,
+            "prints": null
+          },
+          "km": {
+            "value": 472000000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "pc": {
+            "value": 1.53e-05,
+            "figures": 3,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 74000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 678.0,
+            "figures": 3,
+            "prints": null
+          }
+        },
+        "80": {
+          "au": {
+            "value": 3.22,
+            "figures": 3,
+            "prints": null
+          },
+          "km": {
+            "value": 481000000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "pc": {
+            "value": 1.56e-05,
+            "figures": 3,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 75500.0,
+            "figures": 3,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 692.0,
+            "figures": 3,
+            "prints": null
+          }
+        },
+        "85": {
+          "au": {
+            "value": 3.29,
+            "figures": 3,
+            "prints": null
+          },
+          "km": {
+            "value": 493000000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "pc": {
+            "value": 1.6e-05,
+            "figures": 3,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 77300.0,
+            "figures": 3,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 708.0,
+            "figures": 3,
+            "prints": null
+          }
+        },
+        "90": {
+          "au": {
+            "value": 3.4,
+            "figures": 3,
+            "prints": null
+          },
+          "km": {
+            "value": 508000000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "pc": {
+            "value": 1.65e-05,
+            "figures": 3,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 79600.0,
+            "figures": 3,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 730.0,
+            "figures": 3,
+            "prints": null
+          }
+        },
+        "95": {
+          "au": {
+            "value": 3.54,
+            "figures": 3,
+            "prints": null
+          },
+          "km": {
+            "value": 530000000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "pc": {
+            "value": 1.72e-05,
+            "figures": 3,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 83100.0,
+            "figures": 3,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 762.0,
+            "figures": 3,
+            "prints": null
+          }
+        },
+        "96": {
+          "au": {
+            "value": 3.58,
+            "figures": 3,
+            "prints": null
+          },
+          "km": {
+            "value": 536000000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "pc": {
+            "value": 1.74e-05,
+            "figures": 3,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 84000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 770.0,
+            "figures": 3,
+            "prints": null
+          }
+        },
+        "97": {
+          "au": {
+            "value": 3.63,
+            "figures": 3,
+            "prints": null
+          },
+          "km": {
+            "value": 542000000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "pc": {
+            "value": 1.76e-05,
+            "figures": 3,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 85000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 780.0,
+            "figures": 3,
+            "prints": null
+          }
+        },
+        "98": {
+          "au": {
+            "value": 3.68,
+            "figures": 3,
+            "prints": null
+          },
+          "km": {
+            "value": 550000000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "pc": {
+            "value": 1.78e-05,
+            "figures": 3,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 86300.0,
+            "figures": 3,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 791.0,
+            "figures": 3,
+            "prints": null
+          }
+        },
+        "99": {
+          "au": {
+            "value": 3.76,
+            "figures": 3,
+            "prints": null
+          },
+          "km": {
+            "value": 563000000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "pc": {
+            "value": 1.82e-05,
+            "figures": 3,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 88200.0,
+            "figures": 3,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 809.0,
+            "figures": 3,
+            "prints": null
+          }
+        },
+        "100": {
+          "au": {
+            "value": 4.26,
+            "figures": 3,
+            "prints": null
+          },
+          "km": {
+            "value": 638000000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "pc": {
+            "value": 2.07e-05,
+            "figures": 3,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 99990.0,
+            "figures": 4,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 917.0,
+            "figures": 3,
+            "prints": null
+          }
+        }
+      },
       "source": "JPL Solar System Dynamics, SBDB Query API, version 1.0, asked 2026-10-28 for every asteroid of orbit class MBA (Main-belt Asteroid) with absolute magnitude H 13 or brighter: 5,429 orbits (heliocentric elements a, e, i, om, w, ma at their epochs). https://ssd-api.jpl.nasa.gov/doc/sbdb_query.html",
       "source_from": [
         "MAIN_BELT_DISTANCE_PERCENTILES_AU"
@@ -5691,7 +6475,791 @@
       "inputs": [],
       "uncertainty": null,
       "prints": null,
-      "in": null,
+      "in": {
+        "0": {
+          "au": {
+            "value": 0.0,
+            "figures": 2,
+            "prints": null
+          },
+          "km": {
+            "value": 0.0,
+            "figures": 2,
+            "prints": null
+          },
+          "pc": {
+            "value": 0.0,
+            "figures": 2,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 0.0,
+            "figures": 2,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 0.0,
+            "figures": 2,
+            "prints": null
+          }
+        },
+        "1": {
+          "au": {
+            "value": 0.004,
+            "figures": 2,
+            "prints": null
+          },
+          "km": {
+            "value": 600000.0,
+            "figures": 2,
+            "prints": null
+          },
+          "pc": {
+            "value": 1.9e-08,
+            "figures": 2,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 94.0,
+            "figures": 2,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 0.86,
+            "figures": 2,
+            "prints": null
+          }
+        },
+        "2": {
+          "au": {
+            "value": 0.008,
+            "figures": 2,
+            "prints": null
+          },
+          "km": {
+            "value": 1200000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "pc": {
+            "value": 3.9e-08,
+            "figures": 2,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 188.0,
+            "figures": 3,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 1.72,
+            "figures": 3,
+            "prints": null
+          }
+        },
+        "3": {
+          "au": {
+            "value": 0.012,
+            "figures": 2,
+            "prints": null
+          },
+          "km": {
+            "value": 1800000.0,
+            "figures": 2,
+            "prints": null
+          },
+          "pc": {
+            "value": 6e-08,
+            "figures": 1,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 280.0,
+            "figures": 2,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 2.6,
+            "figures": 2,
+            "prints": null
+          }
+        },
+        "4": {
+          "au": {
+            "value": 0.015,
+            "figures": 2,
+            "prints": null
+          },
+          "km": {
+            "value": 2200000.0,
+            "figures": 2,
+            "prints": null
+          },
+          "pc": {
+            "value": 7e-08,
+            "figures": 1,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 350.0,
+            "figures": 2,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 3.2,
+            "figures": 2,
+            "prints": null
+          }
+        },
+        "5": {
+          "au": {
+            "value": 0.019,
+            "figures": 2,
+            "prints": null
+          },
+          "km": {
+            "value": 2800000.0,
+            "figures": 2,
+            "prints": null
+          },
+          "pc": {
+            "value": 9e-08,
+            "figures": 1,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 450.0,
+            "figures": 2,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 4.1,
+            "figures": 2,
+            "prints": null
+          }
+        },
+        "10": {
+          "au": {
+            "value": 0.04,
+            "figures": 2,
+            "prints": null
+          },
+          "km": {
+            "value": 6000000.0,
+            "figures": 2,
+            "prints": null
+          },
+          "pc": {
+            "value": 1.9e-07,
+            "figures": 2,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 940.0,
+            "figures": 2,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 8.6,
+            "figures": 2,
+            "prints": null
+          }
+        },
+        "15": {
+          "au": {
+            "value": 0.06,
+            "figures": 2,
+            "prints": null
+          },
+          "km": {
+            "value": 9000000.0,
+            "figures": 2,
+            "prints": null
+          },
+          "pc": {
+            "value": 2.9e-07,
+            "figures": 2,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 1410.0,
+            "figures": 3,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 12.9,
+            "figures": 3,
+            "prints": null
+          }
+        },
+        "20": {
+          "au": {
+            "value": 0.081,
+            "figures": 2,
+            "prints": null
+          },
+          "km": {
+            "value": 12100000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "pc": {
+            "value": 3.9e-07,
+            "figures": 2,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 1900.0,
+            "figures": 3,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 17.4,
+            "figures": 3,
+            "prints": null
+          }
+        },
+        "25": {
+          "au": {
+            "value": 0.1,
+            "figures": 2,
+            "prints": null
+          },
+          "km": {
+            "value": 16000000.0,
+            "figures": 2,
+            "prints": null
+          },
+          "pc": {
+            "value": 5e-07,
+            "figures": 1,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 2400.0,
+            "figures": 2,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 22.0,
+            "figures": 2,
+            "prints": null
+          }
+        },
+        "30": {
+          "au": {
+            "value": 0.13,
+            "figures": 2,
+            "prints": null
+          },
+          "km": {
+            "value": 19000000.0,
+            "figures": 2,
+            "prints": null
+          },
+          "pc": {
+            "value": 6e-07,
+            "figures": 1,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 3000.0,
+            "figures": 2,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 27.0,
+            "figures": 2,
+            "prints": null
+          }
+        },
+        "35": {
+          "au": {
+            "value": 0.15,
+            "figures": 2,
+            "prints": null
+          },
+          "km": {
+            "value": 23000000.0,
+            "figures": 2,
+            "prints": null
+          },
+          "pc": {
+            "value": 7e-07,
+            "figures": 1,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 3600.0,
+            "figures": 2,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 33.0,
+            "figures": 2,
+            "prints": null
+          }
+        },
+        "40": {
+          "au": {
+            "value": 0.18,
+            "figures": 2,
+            "prints": null
+          },
+          "km": {
+            "value": 27000000.0,
+            "figures": 2,
+            "prints": null
+          },
+          "pc": {
+            "value": 9e-07,
+            "figures": 1,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 4300.0,
+            "figures": 2,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 39.0,
+            "figures": 2,
+            "prints": null
+          }
+        },
+        "45": {
+          "au": {
+            "value": 0.22,
+            "figures": 2,
+            "prints": null
+          },
+          "km": {
+            "value": 33000000.0,
+            "figures": 2,
+            "prints": null
+          },
+          "pc": {
+            "value": 1.1e-06,
+            "figures": 2,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 5100.0,
+            "figures": 2,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 47.0,
+            "figures": 2,
+            "prints": null
+          }
+        },
+        "50": {
+          "au": {
+            "value": 0.26,
+            "figures": 2,
+            "prints": null
+          },
+          "km": {
+            "value": 38000000.0,
+            "figures": 2,
+            "prints": null
+          },
+          "pc": {
+            "value": 1.2e-06,
+            "figures": 2,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 6000.0,
+            "figures": 2,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 55.0,
+            "figures": 2,
+            "prints": null
+          }
+        },
+        "55": {
+          "au": {
+            "value": 0.3,
+            "figures": 2,
+            "prints": null
+          },
+          "km": {
+            "value": 45000000.0,
+            "figures": 2,
+            "prints": null
+          },
+          "pc": {
+            "value": 1.4e-06,
+            "figures": 2,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 7000.0,
+            "figures": 2,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 64.0,
+            "figures": 2,
+            "prints": null
+          }
+        },
+        "60": {
+          "au": {
+            "value": 0.34,
+            "figures": 2,
+            "prints": null
+          },
+          "km": {
+            "value": 51000000.0,
+            "figures": 2,
+            "prints": null
+          },
+          "pc": {
+            "value": 1.7e-06,
+            "figures": 2,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 8000.0,
+            "figures": 2,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 74.0,
+            "figures": 2,
+            "prints": null
+          }
+        },
+        "65": {
+          "au": {
+            "value": 0.39,
+            "figures": 2,
+            "prints": null
+          },
+          "km": {
+            "value": 58000000.0,
+            "figures": 2,
+            "prints": null
+          },
+          "pc": {
+            "value": 1.9e-06,
+            "figures": 2,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 9100.0,
+            "figures": 2,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 84.0,
+            "figures": 2,
+            "prints": null
+          }
+        },
+        "70": {
+          "au": {
+            "value": 0.43,
+            "figures": 2,
+            "prints": null
+          },
+          "km": {
+            "value": 65000000.0,
+            "figures": 2,
+            "prints": null
+          },
+          "pc": {
+            "value": 2.1e-06,
+            "figures": 2,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 10200.0,
+            "figures": 3,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 94.0,
+            "figures": 2,
+            "prints": null
+          }
+        },
+        "75": {
+          "au": {
+            "value": 0.48,
+            "figures": 2,
+            "prints": null
+          },
+          "km": {
+            "value": 72000000.0,
+            "figures": 2,
+            "prints": null
+          },
+          "pc": {
+            "value": 2.3e-06,
+            "figures": 2,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 11300.0,
+            "figures": 3,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 103.0,
+            "figures": 3,
+            "prints": null
+          }
+        },
+        "80": {
+          "au": {
+            "value": 0.53,
+            "figures": 2,
+            "prints": null
+          },
+          "km": {
+            "value": 79000000.0,
+            "figures": 2,
+            "prints": null
+          },
+          "pc": {
+            "value": 2.6e-06,
+            "figures": 2,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 12400.0,
+            "figures": 3,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 114.0,
+            "figures": 3,
+            "prints": null
+          }
+        },
+        "85": {
+          "au": {
+            "value": 0.59,
+            "figures": 2,
+            "prints": null
+          },
+          "km": {
+            "value": 88000000.0,
+            "figures": 2,
+            "prints": null
+          },
+          "pc": {
+            "value": 2.8e-06,
+            "figures": 2,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 13700.0,
+            "figures": 3,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 126.0,
+            "figures": 3,
+            "prints": null
+          }
+        },
+        "90": {
+          "au": {
+            "value": 0.67,
+            "figures": 2,
+            "prints": null
+          },
+          "km": {
+            "value": 99800000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "pc": {
+            "value": 3.2e-06,
+            "figures": 2,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 15600.0,
+            "figures": 3,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 143.0,
+            "figures": 3,
+            "prints": null
+          }
+        },
+        "95": {
+          "au": {
+            "value": 0.82,
+            "figures": 2,
+            "prints": null
+          },
+          "km": {
+            "value": 123000000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "pc": {
+            "value": 4e-06,
+            "figures": 2,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 19400.0,
+            "figures": 3,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 177.0,
+            "figures": 3,
+            "prints": null
+          }
+        },
+        "96": {
+          "au": {
+            "value": 0.87,
+            "figures": 2,
+            "prints": null
+          },
+          "km": {
+            "value": 131000000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "pc": {
+            "value": 4.2e-06,
+            "figures": 2,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 20500.0,
+            "figures": 3,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 188.0,
+            "figures": 3,
+            "prints": null
+          }
+        },
+        "97": {
+          "au": {
+            "value": 0.94,
+            "figures": 2,
+            "prints": null
+          },
+          "km": {
+            "value": 140000000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "pc": {
+            "value": 4.5e-06,
+            "figures": 2,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 22000.0,
+            "figures": 3,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 201.0,
+            "figures": 3,
+            "prints": null
+          }
+        },
+        "98": {
+          "au": {
+            "value": 1.0,
+            "figures": 2,
+            "prints": null
+          },
+          "km": {
+            "value": 150000000.0,
+            "figures": 2,
+            "prints": null
+          },
+          "pc": {
+            "value": 5e-06,
+            "figures": 1,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 24000.0,
+            "figures": 2,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 220.0,
+            "figures": 2,
+            "prints": null
+          }
+        },
+        "99": {
+          "au": {
+            "value": 1.2,
+            "figures": 2,
+            "prints": null
+          },
+          "km": {
+            "value": 170000000.0,
+            "figures": 2,
+            "prints": null
+          },
+          "pc": {
+            "value": 6e-06,
+            "figures": 1,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 27000.0,
+            "figures": 2,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 250.0,
+            "figures": 2,
+            "prints": null
+          }
+        },
+        "100": {
+          "au": {
+            "value": 2.8,
+            "figures": 2,
+            "prints": null
+          },
+          "km": {
+            "value": 410000000.0,
+            "figures": 2,
+            "prints": null
+          },
+          "pc": {
+            "value": 1.3e-05,
+            "figures": 2,
+            "prints": null
+          },
+          "r_earth": {
+            "value": 65000.0,
+            "figures": 2,
+            "prints": null
+          },
+          "r_sun": {
+            "value": 590.0,
+            "figures": 2,
+            "prints": null
+          }
+        }
+      },
       "source": "JPL Solar System Dynamics, SBDB Query API, version 1.0, asked 2026-10-28 for every asteroid of orbit class MBA (Main-belt Asteroid) with absolute magnitude H 13 or brighter: 5,429 orbits (heliocentric elements a, e, i, om, w, ma at their epochs). https://ssd-api.jpl.nasa.gov/doc/sbdb_query.html",
       "source_from": [
         "MAIN_BELT_HEIGHT_PERCENTILES_AU"

@@ -97,6 +97,7 @@ from orbital_elements import planetary_params, parent_planets, planet_tilts
 from constants_new import planet_poles
 import numpy as np
 from datetime import datetime, timedelta
+from utc_clock import utc_now, utc_today, utc_stamp, parse_stamp, HORIZONS_CACHE  # L-504: the clock read as UTC; JPL asked fresh
 JUPITER_MOONS = ['Metis', 'Adrastea', 'Amalthea', 'Thebe', 
                  'Io', 'Europa', 'Ganymede', 'Callisto']
 # Saturn moons for osculating-only dual orbit system
@@ -2134,7 +2135,7 @@ def plot_pluto_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
                 object_name,
                 a,
                 e,
-                date if date else datetime.now(),
+                date if date else utc_now(),
                 {'x': x_final[periapsis_idx], 'y': y_final[periapsis_idx], 'z': z_final[periapsis_idx]},
                 orbital_params,
                 lambda x: color,
@@ -2151,7 +2152,7 @@ def plot_pluto_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
                 object_name,
                 a,
                 e,
-                date if date else datetime.now(),
+                date if date else utc_now(),
                 {'x': x_final[apoapsis_idx], 'y': y_final[apoapsis_idx], 'z': z_final[apoapsis_idx]},
                 orbital_params,
                 lambda x: color,
@@ -2424,7 +2425,7 @@ def plot_tno_satellite_orbit(fig, satellite_name, parent_name, date, color, show
                 satellite_name,
                 a,
                 e,
-                date if date else datetime.now(),
+                date if date else utc_now(),
                 {'x': x_final[periapsis_idx], 'y': y_final[periapsis_idx], 'z': z_final[periapsis_idx]},
                 orbital_params,
                 lambda x: color,
@@ -2441,7 +2442,7 @@ def plot_tno_satellite_orbit(fig, satellite_name, parent_name, date, color, show
                 satellite_name,
                 a,
                 e,
-                date if date else datetime.now(),
+                date if date else utc_now(),
                 {'x': x_final[apoapsis_idx], 'y': y_final[apoapsis_idx], 'z': z_final[apoapsis_idx]},
                 orbital_params,
                 lambda x: color,
@@ -3981,7 +3982,7 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
                 satellite_name,
                 a,
                 e,
-                date if date else datetime.now(),
+                date if date else utc_now(),
                 current_position,
                 orbital_params,
                 lambda x: color,  # Simple color function
@@ -4001,7 +4002,7 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
                 satellite_name,
                 a,
                 e,
-                date if date else datetime.now(),
+                date if date else utc_now(),
                 current_position,
                 orbital_params,
                 lambda x: color,  # Simple color function
@@ -4944,8 +4945,7 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
         days_to_plot = 365  # Default fallback
     # Add date parameter default
     if date is None:
-        from datetime import datetime
-        date = datetime.now()
+        date = utc_now()
     # If objects parameter is None, handle gracefully
     if objects is None:
         print("Warning: objects list is None, cannot determine object properties", flush=True)

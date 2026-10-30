@@ -708,9 +708,9 @@
    ],
    "horizons_id": "-121",
    "id_type": "id",
-   "inputs_sha256": "81a4c4856e52f66d5c1bc85fef0c5817d7c4a916dde78e07beb57dc69e6484ad",
+   "inputs_sha256": "4c83c74ff4b90b386412f9335b296087d3466ee71681d19f822ec7bffb615709",
    "kind": "spacecraft",
-   "made": "2026-10-25",
+   "made": "2026-10-30",
    "name": "BepiColombo",
    "searched": [
     "Sun",
@@ -3600,9 +3600,9 @@
    ],
    "horizons_id": "-144",
    "id_type": "id",
-   "inputs_sha256": "563d0daf8c3a98341b098dfca0e914ae007746a41a994607226a14f8f9484c68",
+   "inputs_sha256": "49119723409d3b8f85c5640612e308564a4d887d1eccd73418e03a9b33e09055",
    "kind": "spacecraft",
-   "made": "2026-10-25",
+   "made": "2026-10-30",
    "name": "SolO",
    "searched": [
     "Sun",

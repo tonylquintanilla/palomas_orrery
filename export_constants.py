@@ -65,7 +65,13 @@ One JSON file, data/constants_export.json:
                               count from the source row alone
                               (provenance-discipline 2.22, Rule 3). A
                               display prints a unit from here and never
-                              converts a served number itself (L-345)
+                              converts a served number itself (L-345).
+                              A table of numbers (a dict keyed by name,
+                              the main belt's distance and height
+                              percentiles) carries one such "in" per
+                              entry, keyed as its value is, each worked
+                              out the same way from that entry's full
+                              digits (L-503, L-484, 2026-10-29)
                      source   the row's citation, as text, or null
                               (schema 7, L-421). A row's own citation is
                               its "# Source:" line with the lines that
@@ -189,6 +195,11 @@ Module updated: October 16, 2026 with Anthropic's Claude Opus 5.5
 with "source_from" and "source_inherited", a derived row with no
 "# Source:" of its own taking its inputs'. The gallery's mirror writes
 it beside the number, Tony's option A of 2026-10-16. SCHEMA moves to 7.)
+Module updated: October 29, 2026 with Anthropic's Claude Opus 5.5
+(L-503, L-484: a row whose value is a table of numbers carries "in" for
+each entry, so the website can print the main belt's distances in
+kilometres beside AU, as the orrery does. The schema does not change: a
+table's "in" was null and is now filled; the fields are the same.)
 """
 
 import json
@@ -241,6 +252,30 @@ def _export_value(value, figures, where):
             out[str(key)] = got
         return out, None
     return None, "%s is a %s, not a number" % (where, type(value).__name__)
+
+
+def table_conversions(row, value, values, units_by_name, tokens):
+    """(entries, problem) for a row whose value is a table of numbers, a
+    dict keyed by name: {key: that entry in every unit of its dimension},
+    each made by constants_rows.conversions() exactly as a one-number row's
+    "in" is, from the entry's full digits in the store. (None, None) for a
+    value that is not such a table, or a unit with nothing to convert into.
+    """
+    if not isinstance(value, dict) or not value:
+        return None, None
+    if not all(isinstance(v, (int, float)) and not isinstance(v, bool)
+               for v in value.values()):
+        return None, None
+    out = {}
+    for key, entry in value.items():
+        converted, problem = constants_rows.conversions(
+            row, entry, values, units_by_name, tokens)
+        if problem:
+            return None, "entry %r: %s" % (key, problem)
+        if converted is None:
+            return None, None
+        out[str(key)] = converted
+    return out, None
 
 
 POINTER_RE = re.compile(r"^as ([A-Z][A-Z0-9_]*)\.\s*(.*)$", re.DOTALL)
@@ -412,6 +447,13 @@ def build_export(project_dir, tokens=None, retired=None):
         # from full digits, never stored as a second row.
         converted, problem = constants_rows.conversions(
             row, values.get(row.name), values, units_by_name, tokens)
+        if not problem and converted is None:
+            # L-503, L-484: a table (the main belt's distance and height
+            # percentiles) carries "in" for each entry, keyed as its value
+            # is, each entry converted from the store's full digits as a
+            # one-number row is.
+            converted, problem = table_conversions(
+                row, values.get(row.name), values, units_by_name, tokens)
         if problem:
             failures.append((row.name, problem))
             continue

@@ -15,6 +15,9 @@ confirm dialog auto-confirms.
     Run:  xvfb-run -a python3 test_reset_completeness.py
 
 Module created: June 2026 with Anthropic's Claude Opus 4.8.
+Module updated: October 29, 2026 with Anthropic's Claude Opus 5.5 (L-504:
+the date fields are held to the UTC date, from utc_clock, as the orrery
+now fills them; the local date failed it in Chicago's evening.)
 
 Role: devtool
 Domain: dev_tools
@@ -106,8 +109,8 @@ for nm, e in entries.items():
         failures.append(f"entry {nm} = {got!r}, expected {ENTRY_DEFAULTS[nm]!r}")
 
 # --- date fields should have been set to ~now by fill_now() ---
-from datetime import datetime  # noqa: E402
-now = datetime.now()
+from utc_clock import utc_now  # noqa: E402  (L-504: the GUI's dates are UTC)
+now = utc_now()
 for nm, expected in (('entry_year', now.year), ('entry_month', now.month),
                      ('entry_day', now.day)):
     e = g.get(nm)

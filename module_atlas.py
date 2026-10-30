@@ -228,6 +228,7 @@ ROLE_MAP = {
     'report_manager':                         'utility',
     'shared_utilities':                       'utility',
     'shutdown_handler':                       'utility',
+    'utc_clock':                              'utility',
 
     # devtool
     'add_docstrings':                         'devtool',

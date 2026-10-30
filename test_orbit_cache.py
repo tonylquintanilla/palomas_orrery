@@ -24,13 +24,20 @@ Domain: dev_tools
 Module updated: October 15, 2026 with Anthropic's Claude Opus 5.5 (L-448:
 the fixture is written into a temporary folder, removed when the tests
 finish, instead of test_output/ in the repository.)
+Module updated: October 29, 2026 with Anthropic's Claude Opus 5.5 (L-504,
+first slice: TestUtcClock. The clock reads UTC through utc_clock; the
+orbit cache's "fetched" stamp is read back in both forms, a planted old
+one with no zone and a new one ending "+00:00"; no module on the data
+path reads the local clock or asks JPL without cache=; each check shown
+able to fail.)
 """
 import json
 import os
+import re
 import shutil
 import tempfile
 import unittest
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 import numpy as np
 from unittest.mock import patch, MagicMock, Mock
 import sys
@@ -253,6 +260,109 @@ class TestOrbitCache(unittest.TestCase):
             self.assertNotIn("Earth_Sun", loaded_data)
 
 
+# L-504, the first slice: the modules on the data path, each of which now
+# reads the clock through utc_clock and asks JPL with cache=HORIZONS_CACHE.
+DATA_PATH_MODULES = [
+    'palomas_orrery.py', 'orbit_data_manager.py', 'idealized_orbits.py',
+    'osculating_cache_manager.py', 'path_plan.py', 'orbital_period.py',
+    'period_fetch.py', 'horizons_check.py', 'close_approach_data.py',
+    'palomas_orrery_dashboard.py',
+]
+_LOCAL_CLOCK = re.compile(r'datetime\.now\(\s*\)|datetime\.today\(\)|'
+                          r'date\.today\(\)|\.utcnow\(\)')
+_JPL_CALL = re.compile(r'\.(vectors|elements|ephemerides)(_async)?\(')
+
+
+def _local_clock_lines(text):
+    """Lines of code (not comments) that read the computer's local clock."""
+    return [line.strip() for line in text.splitlines()
+            if _LOCAL_CLOCK.search(line) and not line.lstrip().startswith('#')]
+
+
+def _unfresh_calls(text):
+    """astroquery calls that do not say cache=, so they may be answered from
+    the copy astroquery keeps on disk for a week. A call that only builds the
+    request (get_query_payload=True) asks JPL nothing and is not counted."""
+    return [line.strip() for line in text.splitlines()
+            if _JPL_CALL.search(line) and not line.lstrip().startswith('#')
+            and 'cache=' not in line and 'get_query_payload' not in line]
+
+
+class TestUtcClock(unittest.TestCase):
+    """L-504: the clock is read as UTC, and the orbit cache's "fetched"
+    stamps are read back in both forms -- the old one with no zone, written
+    from the local clock, and the new one ending "+00:00"."""
+
+    def test_utc_now_is_utc(self):
+        import utc_clock
+        now = utc_clock.utc_now()
+        self.assertIsNone(now.tzinfo)
+        real = datetime.now(timezone.utc).replace(tzinfo=None)
+        self.assertLess(abs((real - now).total_seconds()), 5)
+        self.assertEqual(utc_clock.utc_today(), utc_clock.utc_now().date())
+
+    def test_new_stamp_says_its_zone(self):
+        import utc_clock
+        stamp = utc_clock.utc_stamp()
+        self.assertTrue(stamp.endswith('+00:00'), stamp)
+        back = utc_clock.parse_stamp(stamp)
+        self.assertLess(abs((utc_clock.utc_now() - back).total_seconds()), 5)
+        self.assertEqual(utc_clock.parse_stamp('2026-10-28T19:57:00Z'),
+                         datetime(2026, 10, 28, 19, 57))
+
+    def test_planted_old_stamp_is_read_as_local_time(self):
+        import utc_clock
+        # Planted: a stamp as the cache holds it from before 2026-10-29,
+        # local time with no zone.
+        local = datetime(2026, 10, 28, 14, 57, 0)
+        expect = local.astimezone(timezone.utc).replace(tzinfo=None)
+        self.assertEqual(utc_clock.parse_stamp(local.isoformat()), expect)
+
+    def test_cache_age_reads_both_forms(self):
+        import osculating_cache_manager as ocm
+        import utc_clock
+        ago = timedelta(days=3, hours=1)
+        new_form = {'metadata': {'fetched': utc_clock.utc_stamp(
+            utc_clock.utc_now() - ago)}}
+        old_form = {'metadata': {'fetched': (datetime.now() - ago).isoformat()}}
+        self.assertEqual(ocm.calculate_age_days(new_form), 3)
+        self.assertEqual(ocm.calculate_age_days(old_form), 3)
+        self.assertIsNone(ocm.calculate_age_days(
+            {'metadata': {'fetched': 'not a date'}}))
+
+    def test_data_path_reads_no_local_clock_and_asks_fresh(self):
+        here = os.path.dirname(os.path.abspath(__file__))
+        found = {}
+        for name in DATA_PATH_MODULES:
+            with open(os.path.join(here, name), encoding='utf-8') as f:
+                text = f.read()
+            bad = _local_clock_lines(text) + _unfresh_calls(text)
+            if 'utc_clock' not in text:
+                bad.append('does not import utc_clock')
+            if bad:
+                found[name] = bad
+        self.assertEqual(found, {}, 'local clock or a cached JPL call: %s' % found)
+
+    def test_these_checks_can_fail(self):
+        # Each check above, shown catching the fault it exists for.
+        self.assertEqual(len(_local_clock_lines('    now = datetime.now()\n')), 1)
+        self.assertEqual(len(_local_clock_lines('    d = datetime.date.today()\n')), 1)
+        self.assertEqual(_local_clock_lines('#    now = datetime.now()\n'), [])
+        self.assertEqual(len(_unfresh_calls('        vec = obj.vectors()\n')), 1)
+        self.assertEqual(_unfresh_calls('    p = h.vectors(get_query_payload=True)\n'), [])
+
+        # The reader as it was before L-504, given a new stamp: it returns
+        # nothing, so test_cache_age_reads_both_forms would fail on it.
+        def old_reader(entry):
+            try:
+                fetched = datetime.fromisoformat(entry['metadata']['fetched'])
+                return int((datetime.now() - fetched).total_seconds() / 86400)
+            except Exception:
+                return None
+        import utc_clock
+        self.assertIsNone(old_reader({'metadata': {'fetched': utc_clock.utc_stamp()}}))
+
+
 def main():
     """Run the suite and close on a verdict, not on a directory path.
 
@@ -268,7 +378,9 @@ def main():
     here = os.path.dirname(os.path.abspath(__file__))
     old_folder = os.path.join(here, "test_output")
     before = set(os.listdir(here))
-    suite = unittest.TestLoader().loadTestsFromTestCase(TestOrbitCache)
+    loader = unittest.TestLoader()
+    suite = loader.loadTestsFromTestCase(TestOrbitCache)
+    suite.addTests(loader.loadTestsFromTestCase(TestUtcClock))
     result = unittest.TextTestRunner(verbosity=2).run(suite)
 
     total = result.testsRun
@@ -295,7 +407,8 @@ def main():
             if left else ""))
         return 1
     print("\nAll %d orbit cache tests passed: cache loads, old formats "
-          "convert, corrupted entries are dropped; nothing left behind."
+          "convert, corrupted entries are dropped; the clock reads UTC and "
+          "both forms of the fetched stamp read back; nothing left behind."
           % total)
     return 0
 

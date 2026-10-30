@@ -153,6 +153,7 @@ from astroquery.jplhorizons import Horizons                 # we are importing f
                                                             # that handles how we structure queries from JPL Horizons. Horizons is the same system used by NASA!
 import numpy as np                                          # we are importing numpy using its standard nickname np; numbpy efficiently handles math function and arrays
 from datetime import datetime, timedelta                    # from datetime we are importing two classes. datetime allows us to define a moment in time.
+from utc_clock import utc_now, utc_today, utc_stamp, parse_stamp, HORIZONS_CACHE  # L-504: the clock read as UTC; JPL asked fresh
                                                             # timedelta allows us to define a time increment. these can be used in various functions with arguments. 
 import calendar                                             # handles calendar functions 
 import plotly.graph_objs as go                              # we are importing the MIT licensed plotly library and its subpackage graph_objs with the nickname go 
@@ -664,7 +665,7 @@ def get_interval_settings():
         
     except (ValueError, TypeError) as e:
         # Return defaults with error message
-        now = datetime.now()
+        now = utc_now()
         defaults = {
             'trajectory_points': 50,
             'orbital_points': 50,
@@ -681,7 +682,7 @@ def get_date_from_gui():
     Get the date from GUI entry fields.
     Returns a datetime object. Defaults empty fields to avoid crash.
     """
-    now = datetime.now()
+    now = utc_now()
     def safe_int(val, default):
         try:
             return int(val.get()) if val.get().strip() else default
@@ -1274,7 +1275,7 @@ main_paned.pack(fill=tk.BOTH, expand=True, padx=2, pady=2)
 
 # ============================================================================
 
-today = datetime.today()
+today = utc_now()
 STATIC_TODAY = today
 
 # Middle column - Controls
@@ -1389,7 +1390,7 @@ def fetch_position(object_id, date_obj, center_id='Sun', id_type=None, override_
         else:
             # Query the Horizons system with coordinates relative to location
             obj = Horizons(id=object_id, id_type=id_type, location=location, epochs=epochs)
-            vectors = obj.vectors()
+            vectors = obj.vectors(cache=HORIZONS_CACHE)
 
             if len(vectors) == 0:
                 print(f"No data returned for object {object_id} on {date_obj}", flush=True)
@@ -1947,13 +1948,13 @@ def fetch_radec_for_hover(object_id, date_obj, id_type=None):
         # Request ephemerides with extra precision columns
         # The quantities parameter requests specific columns including uncertainties
         try:
-            ephemerides = earth_obj.ephemerides(quantities='1,2,20,36,37')
+            ephemerides = earth_obj.ephemerides(quantities='1,2,20,36,37', cache=HORIZONS_CACHE)
             # 1 and 2 = RA/DEC, 36 and 37 = JPL's 3-sigma sky-position
             # uncertainties (as before); 20 = the distance from the observer,
             # astroquery's 'delta' in AU (L-401)
         except:
             # Fallback to basic ephemerides if enhanced request fails
-            ephemerides = earth_obj.ephemerides()
+            ephemerides = earth_obj.ephemerides(cache=HORIZONS_CACHE)
         
         if len(ephemerides) == 0:
             return None, None, None, None, None
@@ -2915,7 +2916,7 @@ def update_status_display(message, status_type='info'):
     }
     
     # Add timestamp
-    timestamp = datetime.now().strftime("%H:%M:%S")
+    timestamp = utc_now().strftime("%H:%M:%S UTC")
     status_entry = {
         'time': timestamp,
         'message': message,
@@ -4709,7 +4710,7 @@ def plot_objects():
         plot_date = get_date_from_gui()
     except Exception as e:
         print(f"[WARNING] Could not get plot date from GUI: {e}, using today", flush=True)
-        plot_date = datetime.now()
+        plot_date = utc_now()
 
     # These TNO moons have no usable JPL parent-centered ephemeris
 #    SKIP_HORIZONS_PREFETCH = ['MK2', 'Xiangliu', 'Vanth', 'Weywot']
@@ -4827,7 +4828,7 @@ def plot_objects():
             is_exoplanet_mode = bool(exo_objects or exo_host_stars)
 
             # Reset the global today or use a local today variable
-            today = datetime.today()
+            today = utc_now()
 
             # Create figure object at the start
             fig = go.Figure()
@@ -6414,7 +6415,7 @@ def plot_objects():
 
 
             # Generate default name with timestamp
-#            current_date = datetime.now()
+#            current_date = utc_now()
             current_date = STATIC_TODAY
             default_name = f"solar_system_{date_obj.strftime('%Y%m%d_%H%M')}"
 
@@ -6477,7 +6478,7 @@ def animate_objects(step, label):
         plot_date = get_date_from_gui()
     except Exception as e:
         print(f"[ANIMATION PRE-FETCH] Could not get start date: {e}, using today", flush=True)
-        plot_date = datetime.now()
+        plot_date = utc_now()
 
     # These TNO moons have no usable JPL parent-centered ephemeris
 #    SKIP_HORIZONS_PREFETCH = ['MK2', 'Xiangliu', 'Vanth', 'Weywot']
@@ -7407,7 +7408,7 @@ def animate_objects(step, label):
                 planetary_params=active_planetary_params,
                 parent_planets=parent_planets,
                 color_map=color_map,
-                date=dates_list[0] if dates_list else datetime.now(),
+                date=dates_list[0] if dates_list else utc_now(),
                 days_to_plot=settings['days_to_plot'],
                 current_positions=initial_positions,
                 fetch_position=fetch_position,
@@ -7424,7 +7425,7 @@ def animate_objects(step, label):
                     objects=objects,
                     center_object_name=center_object_name,
                     color_map=color_map,
-                    date_obj=dates_list[0] if dates_list else datetime.now(),
+                    date_obj=dates_list[0] if dates_list else utc_now(),
                     settings=settings,
                     show_apsidal_markers=show_apsidal_markers_var.get(),
                     parent_window=root,
@@ -7437,7 +7438,7 @@ def animate_objects(step, label):
                     selected_objects=selected_object_names,
                     objects=objects,
                     color_map=color_map,
-                    date_obj=dates_list[0] if dates_list else datetime.now(),
+                    date_obj=dates_list[0] if dates_list else utc_now(),
                     show_apsidal_markers=show_apsidal_markers_var.get(),
                     parent_window=root,
                 )
@@ -8574,7 +8575,7 @@ def update_date_fields(new_date):
 
 # NOW define fill_now AFTER update_date_fields
 def fill_now():
-    now = datetime.now()
+    now = utc_now()
     update_date_fields(now)
     sync_end_date_from_days()
 
@@ -8776,7 +8777,7 @@ def fill_next_vernal_equinox():
     try:
         current_date = get_date_from_gui()
     except:
-        current_date = datetime.now()
+        current_date = utc_now()
     
     next_equinox = calculate_next_vernal_equinox(current_date)
     update_date_fields(next_equinox)
@@ -8857,7 +8858,7 @@ def animate_palomas_birthday():
     paloma_birthday = datetime(2005, 2, 4, 1, 0, 0)  # February 4, 2005 at 01:00
     
     # Get the current date
-    current_date = datetime.today()
+    current_date = utc_now()
     
     # Calculate Paloma's age
     age = current_date.year - paloma_birthday.year - ((current_date.month, current_date.day) < (paloma_birthday.month, paloma_birthday.day))
@@ -8875,7 +8876,7 @@ def animate_palomas_birthday():
     animate_objects('year', "Year")  
 
 # Get the script's saved date for version control
-script_saved_date = datetime.now().strftime("%Y-%m-%d")
+script_saved_date = utc_now().strftime("%Y-%m-%d")
 
 # Exception handling for Tkinter
 # def report_callback_exception(self, exc, val, tb):
@@ -8985,7 +8986,8 @@ entry_minute.insert(0, '0')
 
 now_button = tk.Button(date_frame, text="Now", command=fill_now, width=4)
 now_button.grid(row=0, column=9, padx=(5, 5), pady=2, sticky='w')
-CreateToolTip(now_button, "Fill the current date and time")
+CreateToolTip(now_button, "Fill the current date and time in UTC.\n"
+              "In the evening in the Americas, UTC is already tomorrow's date.")
 
 vernal_equinox_button = tk.Button(date_frame, text="Vernal Eq", command=fill_next_vernal_equinox, width=8)
 vernal_equinox_button.grid(row=0, column=10, padx=(0, 0), pady=2, sticky='w')
@@ -8996,7 +8998,7 @@ reset_button.grid(row=0, column=11, padx=(5, 0), pady=2, sticky='w')
 CreateToolTip(reset_button, "Clear all selections and reset the GUI to its startup state (date->now, center Sun, scale Auto)")
 
 # END DATE ROW (Row 1)
-tk.Label(date_frame, text="End:").grid(row=1, column=0, sticky='e', padx=(0, 5), pady=2)
+tk.Label(date_frame, text="End (UTC):").grid(row=1, column=0, sticky='e', padx=(0, 5), pady=2)
 
 end_entry_year = tk.Entry(date_frame, width=5)
 end_entry_year.grid(row=1, column=1, padx=(0, 0), pady=2)
@@ -9083,7 +9085,7 @@ def sync_days_from_dates():
 
 def get_end_date_from_gui():
     """Get end date from GUI fields. Defaults empty fields to avoid crash."""
-    now = datetime.now()
+    now = utc_now()
     def safe_int(val, default):
         try:
             return int(val.get()) if val.get().strip() else default
@@ -9101,7 +9103,7 @@ def get_end_date_from_gui():
 CreateToolTip(scrollable_frame.scrollable_frame, "Use the scrollbar to see all objects. Categories include:\n" 
               "- Planets and Dwarf Planets;\n- Moons, Asteroids, and Kuiper Belt Objects;\n- Space Missions;\n" 
               "- Comets and Interstellar Objects!\n"
-              "Select a start date for plotting. The default start date is \'Now\'.")
+              "Select a start date for plotting. The default start date is \'Now\', in UTC.")
 
 # Define selection variables for each object
 celestial_frame = tk.LabelFrame(scrollable_frame.scrollable_frame, 
@@ -11308,7 +11310,7 @@ def open_orbital_param_visualization():
 #        current_date = datetime.strptime(date_entry.get(), '%Y-%m-%d')
         current_date = get_date_from_gui()
     except:
-        current_date = datetime.now()
+        current_date = utc_now()
     
     # Get the current center object
     center = center_object_var.get() if center_object_var else 'Sun'

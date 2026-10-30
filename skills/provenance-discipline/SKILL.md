@@ -6,9 +6,17 @@ fires_when: Scanner runs, audits, citations, constants, pre-push (Tier-1 = 0 on 
 
 # Provenance Discipline
 
-Read this file in 6 parts: lines 1-307, 308-628, 629-913, 914-1181, 1182-1465, 1466-1494.
+Read this file in 6 parts: lines 1-304, 305-625, 626-875, 876-1144, 1145-1398, 1399-1512.
 
-Skill version: 2.35 | 2026-10-27, with Anthropic's Claude Opus 5.5, at
+Skill version: 2.36 | 2026-10-29, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 571b9bf4 and gallery @ b55109f2. v2.36 (L-399, L-484)
+corrects A Computed Position Prints What Its Errors Earn, which still
+said the asteroids wait for L-399: since 2026-10-29 each small body is
+served JPL's own 3-sigma, used whole. And it adds that a sentence
+saying why a figure is missing says the true reason -- not fetched, or
+stated by the authority as none -- never one for the other. Read from
+the code at 571b9bf4 and b55109f2 before it was written.
+Earlier: 2.35 | 2026-10-27, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 8d334e7. v2.35 (L-443) adds to What a Visitor Reads,
 principle 5: plain words keep the authority's word. Where JPL or the
 IAU has a term for a thing, the visitor reads it, with a plain
@@ -24,22 +32,11 @@ says which. Tony, 2026-10-22: "Edges are better drawn with a cloud
 across the range. While a fluctuation is more like graph whiskers so
 there the concentric circles would be a graphical device. In both
 cases the hover should explain."
-Earlier: 2.33 | 2026-10-21, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 645558e2. v2.33 (L-460 with L-466, and L-411) adds two
-rules. To What a Visitor Reads, principle 4: a drawing starts and
-stops where a served row says; an end no row sets is held by name,
-with its reason, and the gallery run's Drawn ends check holds both
-rooms to it. Tony, 2026-10-21: "we should check all the drawings to
-be sure they reflect sourced distances", and "after the sun please
-double check the earth too and this should be added to the skill."
-And to The Access Standard: an agency summary that names no source is
-a lead, not a source; read one layer down (Tony's ruling of
-2026-10-21, that it is method).
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
 on 2026-10-05 and 2026-10-08 (L-418), 2026-10-09 (L-414),
 2026-10-13 (L-437), 2026-10-17 (L-452 and L-411), 2026-10-20
-(L-410), 2026-10-21 (L-460), 2026-10-22 (L-434) and 2026-10-27
-(L-443).
+(L-410), 2026-10-21 (L-460), 2026-10-22 (L-434), 2026-10-27
+(L-443) and 2026-10-29 (L-399).
 
 ## Contents
 
@@ -888,8 +885,11 @@ count comes from its errors, and two of them bound it:
   degrees per day, times the days since the elements' date, taken as a
   distance at the body's distance.
 - **The source's own accuracy.** How well JPL knows where the body is
-  at all. A store row per group, served to the page on the object's
-  entry.
+  at all. For a planet, the Moon or Pluto, a store row per group,
+  served to the page on the object's entry; it is a place, and half a
+  unit of it is the error. For a small body, JPL's own 3-sigma for its
+  position on that date (Horizons' vector table 2xr), which is the
+  error itself and is used whole (v2.36, L-399).
 
 **The display prints to the Report test's place (The ceiling, Report)
 for the LARGER of the two**, each unit placed by its own error, never
@@ -900,9 +900,27 @@ the page reproduces Horizons, not how well Horizons knows the planet,
 and it printed Pluto's distance to ten figures where JPL knows it to
 several thousand kilometres. A body with no source-accuracy row yet
 prints by its drift and SAYS so in the display, in words the display's
-owner approved, and the words appear exactly when the row is absent so
-the two cannot disagree. The asteroids are that case until each body's
-own uncertainty is fetched (L-399).
+owner approved, and the words appear exactly when no source error is
+served, so the two cannot disagree. Since 2026-10-29 the asteroids and
+comets are served their own uncertainty (L-399; the website's builder,
+`position_uncertainty`, and the orrery's hover from its position
+query); the bodies JPL gives none for are the remaining case.
+
+**A sentence saying why a figure is missing says the TRUE reason**
+(v2.36, L-399, L-484). Two reasons look alike on the page and are not:
+the figure exists and was not fetched (a question that failed, or was
+never asked), and the authority states none (JPL answered, and its
+uncertainty column reads "n.a."). Each has its own words -- the
+orrery's "JPL's uncertainty for this position is not included here"
+against "JPL states no accuracy for this position" -- and a display
+prints the one that is true, decided from the answer itself, never by
+default. Calling JPL's "none" "not included" claims a figure exists
+that does not; calling a failed question "none" hides a figure that
+does. Bennu, Halley and Ikeya-Seki on 2026-10-29 were the case: the
+orrery said "not included" for all three until
+`position_accuracy._side` read the answer; the website's sentence, "not
+yet included", has the same slant for them and is the next gallery
+session's, a documented difference on L-484.
 
 This applies to every computed position a display prints, in the
 gallery and the orrery. The Solar System room is the first built

@@ -1,14 +1,27 @@
 ---
 name: horizons-orbital-mechanics
 description: JPL Horizons API and orbital mechanics reference for the Paloma's Orrery project (astroquery Horizons queries, orbit_data_manager, osculating_cache_manager, idealized_orbits, apsidal_markers, spacecraft_encounters, close_approach_data, position_accuracy, orbital_period, period_fetch, path_plan). Use for any Paloma's Orrery task involving Horizons queries or ephemerides, coordinate center bodies, reference frames, osculating elements, orbit caches, a small body's position uncertainty (VEC_TABLE 2xr), orbital periods and the centre they are taken around, the drawn orbit and its markers' dates, which Horizons record serves a body (helio_id, a pinned comet record, a skip list), encounter or flyby resolution, or whenever a rendered orbit looks wrong or an ephemeris API returns empty. Do not use for projects other than Paloma's Orrery.
-fires_when: Horizons queries, centers, frames, osculating elements, encounters, comet record pinning, 2xr uncertainties, periods, the drawn orbit's centre, the Horizons check (horizons_check.py, its period comparison and the data sheets' re-read), the period fetch before it (period_fetch.py), which record serves a body (helio_id, re-pinning a comet, JPL's exact name, a body on a skip list), a spacecraft path's plan and its flybys (path_plan.py -- the Hill sphere, JPL's GM, the window and step, the orbiter rule for an arrival, a departure, a capture), a comet whose designation matches its own pieces, a comet on an open path's plan (its span, its TP, its perihelion), an entry asked by JPL's number in the Horizons check
+fires_when: Horizons queries, centers, frames, osculating elements, encounters, comet record pinning, 2xr uncertainties, periods, the drawn orbit's centre, the Horizons check (horizons_check.py, its period comparison and the data sheets' re-read), the period fetch before it (period_fetch.py), which record serves a body (helio_id, re-pinning a comet, JPL's exact name, a body on a skip list), a spacecraft path's plan and its flybys (path_plan.py -- the Hill sphere, JPL's GM, the window and step, the orbiter rule for an arrival, a departure, a capture), a comet whose designation matches its own pieces, a comet on an open path's plan (its span, its TP, its perihelion), an entry asked by JPL's number in the Horizons check, the clock read as UTC (utc_clock), astroquery's saved answers (cache=), a 2xr answer with no figure (n.a.), Pluto's period asked of its barycentre
 ---
 
 # Horizons and Orbital Mechanics Reference
 
-Read this file in 3 parts: lines 1-237, 238-426, 427-609.
+Read this file in 4 parts: lines 1-206, 207-427, 428-684, 685-695.
 
-Skill version: 1.12 | 2026-10-26, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.13 | 2026-10-29, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 571b9bf4 and gallery @ b55109f2. v1.13 (L-504, L-399,
+L-484) adds The Clock Is Read as UTC: one reading in utc_clock.py,
+plain UTC datetimes, stamps that say their zone and a reader for both
+forms. Under Query Mechanics, astroquery's week of saved answers and
+what each instrument does about them: both ask fresh, by one switch
+each. Under A Small Body's Uncertainty, the website's 2xr is a second
+question held to the served point within the body's own uncertainty,
+and an answer whose column reads "n.a." is JPL stating none. Under A
+Period Depends on Its Centre, Pluto's period is asked of the
+Pluto-Charon barycentre (Tony, 2026-10-29: "Centre of mass"). Each
+fact was read from the code at 571b9bf4 and b55109f2, and JPL's
+answers fetched, before it was written.
+Earlier: 1.12 | 2026-10-26, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 5398439. v1.12 (L-443, slice 2, build B part 2) adds A
 Comet on an Open Path to How a Path's Events Are Found: a comet marked
 open_path is planned by Tony's span ruling of 2026-10-24, from a year
@@ -34,20 +47,10 @@ are keyed, so KEYING loses its preview. And two rules from C/2025 K1 to
 Which Record Serves a Body: a comet whose designation also matches its
 own pieces is asked by JPL's permanent number for it; a path cache keyed
 by name does not notice a new record.
-Earlier: 1.10 | 2026-10-24, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 206f96c9. v1.10 (L-443, slice 2) adds How a Path's
-Events Are Found, the method path_plan.py was built on: an event is a
-nearest approach inside the body's Hill sphere, from JPL's own GM, that
-needs finer steps than the weekly backbone by the orrery's curvature
-rule; found from daily positions around the Sun, then to the minute in
-two passes; its window and step by spacecraft_encounters' own rule; made
-again on a 30-day cycle with the past carried. The Hill sphere was not
-in the design record: without it the first offline run took nearest
-approaches tens of millions of km from Mercury and the Moon for events.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
 on 2026-10-12, 2026-10-13 and 2026-10-14 (L-431), 2026-10-15
 (L-444, L-445), 2026-10-22 (L-443), 2026-10-24 (L-443), 2026-10-25
-(L-443) and 2026-10-26 (L-443).
+(L-443), 2026-10-26 (L-443) and 2026-10-29 (L-504).
 
 ## Contents
 
@@ -59,6 +62,7 @@ if this list and the headings disagree (L-418).
 - Which Record Serves a Body (L-443)
 - Small-Body Record Pinning (periodic comets)
 - A Small Body's Uncertainty Comes With Its Position (L-401)
+- The Clock Is Read as UTC (L-504)
 - A Period Depends on Its Centre (L-431)
 - The Drawn Orbit Follows the Period's Centre (L-431, build 2)
 - Checking an Entry Against JPL (L-395)
@@ -215,6 +219,30 @@ documentation/HANDOFF_L401_distance_build1_20261012.md.
   OUT_UNITS: AU and AU/day with 'AU-D'.
 - For asteroids and comets only. Read a missing column or "n.a." as
   MISSING, never as zero.
+- AN ANSWER WITH NO FIGURE IS JPL STATING NONE (v1.13, L-399, L-484).
+  Where JPL answered the 2xr question and its uncertainty column reads
+  "n.a." (Bennu, Halley and Ikeya-Seki on 2026-10-29), the record keeps
+  `range_3sigma_km` as None and the hover says "JPL states no accuracy
+  for this position". Only a question that failed (the record carries
+  `missing`) or was never asked says "JPL's uncertainty for this
+  position is not included here" (`position_accuracy._side`). JPL's own
+  headers, asked with OBJ_DATA on, 2026-10-30: Bennu's is a special
+  pre-computed trajectory (solution 2021-Jan-07, 554 observations
+  1999-2020) whose header says "Statistical uncertainties not available
+  for object"; Halley's record 90000030 (solution 2025-Nov-21, 8,518
+  observations 1835-1994) and Ikeya-Seki's 90002042 (soln ref SAO_2008,
+  119 observations 1965-1966) carry no covariance mark; 2026 ED138's
+  50662032 is marked "(+COV)" (solution 2026-Oct-29, 115 observations
+  1937-2026).
+- ON THE WEBSITE IT IS A SECOND QUESTION (v1.13, L-399). The builder
+  fetches the served path and orbit with astroquery, then asks 2xr
+  separately at the served point's moment, so the two answers can come
+  from two states of JPL's solution. The 2xr answer is held to the
+  served point within the body's own 3-sigma, floored at 1e-7 AU and
+  capped at 1e-3 AU so another record (a split comet's piece) cannot
+  stand in (gallery-cache-builder, A Small Body's Own Uncertainty Is
+  Served). In the orrery it is the position query itself, one answer,
+  so nothing needs holding.
 - Table 2 has no light time, range or range rate; work range and range
   rate out from the state.
 - astroquery 0.4.11 cannot do this. Its request sets no VEC_TABLE, and
@@ -234,6 +262,39 @@ documentation/HANDOFF_L401_distance_build1_20261012.md.
   257,820 km against 257,817.569 km.
 - A speed's bound: VR_s, VT_s and VN_s combined by root-sum-square,
   times 3 (ruled 2026-10-11).
+
+## The Clock Is Read as UTC (L-504)
+
+Tony's ruling of 2026-10-28: "we should standardize on utc." Built
+2026-10-29 for the data path, the first slice.
+
+- ONE READING, ONE PLACE: `utc_clock.py`. `utc_now()` and `utc_today()`
+  give the date and time in UTC as a plain datetime or date, with no
+  time zone attached, because the orrery's dates are all plain ones
+  that mean UTC (the date fields, the plot's date line, `utc_to_tdb`)
+  and Python refuses to compare or subtract a zoned one with a plain
+  one. Until then the data path read the computer's clock
+  (`datetime.now()`, `date.today()`), Chicago time, and `utc_to_tdb`
+  treated it as UTC, so a "now" asked of JPL was 5 or 6 hours off.
+  The ten modules of the data path read only `utc_clock`, and
+  `test_orbit_cache.py` (TestUtcClock) fails on a local reading or on
+  an astroquery call without `cache=` in any of them. The later slices
+  (the Earth System fetches, the report stamps, the tools) import the
+  same module.
+- A STAMP SAYS ITS ZONE. `utc_stamp()` writes ISO text ending
+  "+00:00"; the orbit cache's `fetched` and `created` are written so
+  from 2026-10-29. `parse_stamp()` reads both forms: one that says its
+  zone, and an older one with none, written from the local clock, read
+  as local time and turned to UTC (`calculate_age_days`). A date-only
+  stamp (a period record's `fetched`) keeps its form and is a UTC date;
+  one written before 2026-10-29 was the local date, which in the
+  evening is a day earlier than UTC's.
+- THE EPOCHS ASKED OF JPL STAY AT TDB MIDNIGHT ON PURPOSE (Tony,
+  2026-10-29, morning): this fixes only the local readings taken as UTC.
+- WHAT A VISITOR SEES: in the evening in the Americas the orrery's
+  default date is tomorrow's, as the website's is; a "now" plot moves by
+  the bodies' motion in those hours (the Moon about 19,000 km in five,
+  JPL's 1.074 km/s around Earth, read 2026-10-30 02:00 UTC).
 
 ## A Period Depends on Its Centre (L-431)
 
@@ -267,6 +328,19 @@ documentation/DESIGN_L431_orbital_periods_rulings_20261011.md.
   it from the record, never from a second map. The elements fetch's PR
   is then another body's and is not compared, and the record's elements
   are the target's, never drawn as the body's orbit.
+- PLUTO'S PERIOD IS ASKED OF THE PLUTO-CHARON BARYCENTRE, target 9
+  (v1.13, L-484; Tony, 2026-10-29: "Centre of mass"), for Earth's
+  reason. Pluto's centre (999) circles the barycentre every 6.4 days,
+  and its period around the Sun swings with it: JPL's answers every six
+  hours over 13 days from 2026-10-28 TDB ran from 88,702 to 91,630 days,
+  while the barycentre's held to 0.3 days. So "the change in a year"
+  measured on Pluto's centre was two moments of that swing (66 days at
+  one fetch of 2026-10-28, 589 at the next), not a change in its orbit.
+  Asked of 9, the two-centre test chose the solar system's barycentre
+  (0.31 d in a year, against 180 around the Sun): 90,578 days, the
+  website's figure. The test for another body: does its own centre
+  circle a barycentre with a moon fast enough to swing its period
+  around the Sun? Then its period is asked of that barycentre.
 
 ## The Drawn Orbit Follows the Period's Centre (L-431, build 2)
 
@@ -579,6 +653,18 @@ Pluto, render wrong).
   locally -> attribute the source. Explicit lists, not automatic.
 - Cache structure: cache[name]['elements'] (nested dict) -- the elements
   live one level down.
+- ASTROQUERY KEEPS EVERY ANSWER FOR A WEEK (v1.13, L-399, L-504):
+  `astroquery.cache_conf.cache_timeout`, 604800 s, on disk, handed back
+  when the same question is asked again. A record stamped "fetched" or
+  "retrieved" today may then hold an answer JPL has since revised: on
+  2026-10-29 the website's 21:57 UTC build served 2026 ED138's orbit
+  from an earlier build's saved answer. Both instruments ask fresh by
+  one switch each, passed as `cache=` at every call: the website's
+  `HORIZONS_CACHE` in `tools/gallery_cache_builder.py`, the orrery's
+  `utc_clock.HORIZONS_CACHE`, both False. The orrery's own caches (the
+  orbit cache, the path cache) are its only caches; a repeated plot
+  costs a JPL round trip, which they absorb for orbits. A direct request
+  (the 2xr query, `requests`, `urllib`) is always fresh.
 
 ## Encounter and Flyby Resolution
 

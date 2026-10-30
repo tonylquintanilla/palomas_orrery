@@ -67,6 +67,12 @@ Module updated: October 12, 2026 with Anthropic's Claude Opus 5.5 (L-401's
 second slice, with L-431 build 2: as_given, accuracy_for, distance_text,
 surface_text and accuracy_lines, so the orbits' and markers' hovers print
 by the same rule and the same formatter as the body hover).
+Module updated: October 29, 2026 with Anthropic's Claude Opus 5.5 (L-399,
+L-484: a small body whose 2xr answer came back with no figure, "n.a." in
+JPL's uncertainty column, now reads "JPL states no accuracy for this
+position"; only a question that failed, or was never asked, still reads
+"not included here". The digits are unchanged: both print to the whole
+kilometre.)
 """
 
 import math
@@ -342,6 +348,14 @@ def _side(name, role, center_name, obj_data, objects, parent_planets):
             return {'kind': 'computed', 'name': name, 'err_km': err,
                     'speed_err_km_s': _finite_positive(sig.get('speed_3sigma_km_s')),
                     'who': name}
+        # L-399, L-484 (2026-10-29): JPL answered the 2xr question and its
+        # uncertainty column read "n.a." (or zero), so JPL states none --
+        # Bennu, Halley and Ikeya-Seki that night. A failed question leaves
+        # a record carrying 'missing' and no figure field; that one, or no
+        # record at all, is the figure not included here.
+        if (isinstance(sig, dict) and 'range_3sigma_km' in sig
+                and 'missing' not in sig):
+            return _none_side(name, 'unstated')
         return _none_side(name, 'not_fetched')
     if kind == 'small_body_other_record':
         return _none_side(name, 'not_fetched')

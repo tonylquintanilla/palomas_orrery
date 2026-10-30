@@ -125,6 +125,11 @@ measured 180 km at two figures, where it was an exact 200; the
 geostationary ring's citation pin becomes the case of a derived row with
 its own pointing Source, and the low-orbit outer edge takes its place as
 a derived row inheriting both inputs'.)
+Module updated: October 29, 2026 with Anthropic's Claude Opus 5.5
+(L-503, L-484: check 6 re-computes a table's "in", one entry per key of
+its value, as it does a one-number row's; two pins name a table entry by
+its key, the main belt's nearest point and its 90th-percentile height in
+kilometres.)
 """
 
 import json
@@ -348,6 +353,12 @@ CONVERSION_PINS = (
     # tens of kilometres, each in Earth radii.
     ("EARTH_STRATOPAUSE_RADIUS_KM", "r_earth", 1.0078, 5, None),
     ("EARTH_THERMOPAUSE_RADIUS_KM", "r_earth", 1.094, 4, None),
+    # L-503, L-484 (2026-10-29): a table's entry, by its key. The belt's
+    # nearest point, 1.668 AU at three figures, and its 90th-percentile
+    # height, 0.667 AU at two figures, whose place, the hundredth of an AU,
+    # carried into kilometres, prints three (Rule 3).
+    ("MAIN_BELT_DISTANCE_PERCENTILES_AU[0]", "km", 250000000.0, 3, None),
+    ("MAIN_BELT_HEIGHT_PERCENTILES_AU[90]", "km", 99800000.0, 3, None),
 )
 
 
@@ -372,52 +383,83 @@ def _check_conversions(on_disk, values, by_name, failures, facts):
         full = values.get(name)
         one_number = (isinstance(full, (int, float))
                       and not isinstance(full, bool))
-        if len(same) < 2 or not one_number:
+        # L-503, L-484 (2026-10-29): a table of numbers, keyed by name,
+        # carries one "in" per entry, keyed as its value is.
+        table = (isinstance(full, dict) and bool(full) and all(
+            isinstance(v, (int, float)) and not isinstance(v, bool)
+            for v in full.values()))
+        if len(same) < 2 or not (one_number or table):
             if entries is not None:
                 failures.append((name, "serves \"in\" but its unit %r has "
                                  "no other unit to convert into" % unit))
             continue
-        if not isinstance(entries, dict) or sorted(entries) != sorted(same):
-            failures.append((name, "\"in\" should hold %s; it holds %r"
-                             % (", ".join(sorted(same)),
+
+        def judge(label, entries, full, own):
+            """Re-compute one number's "in" from its full digits."""
+            count = 0
+            if not isinstance(entries, dict) or sorted(entries) != sorted(same):
+                failures.append((label, "\"in\" should hold %s; it holds %r"
+                                 % (", ".join(sorted(same)),
+                                    sorted(entries) if isinstance(entries, dict)
+                                    else entries)))
+                return count
+            for token, entry in entries.items():
+                count += 1
+                if token == unit:
+                    got = (entry.get("value"), entry.get("figures"),
+                           entry.get("prints"))
+                    if got != own:
+                        failures.append((label, "\"in\" %s is %r; the row "
+                                         "itself is %r" % (token, got, own)))
+                    continue
+                if tokens[token].get("defining_constant") == name:
+                    if (entry.get("value"), entry.get("figures"),
+                            entry.get("prints")) != (1.0, "exact", 1):
+                        failures.append((label, "defines %s, so in %s it is "
+                                         "1, exact, printing 1; served %r"
+                                         % (token, token, entry)))
+                    continue
+                want = float(full) * size[unit] / size[token]
+                figures = entry.get("figures")
+                if isinstance(figures, int):
+                    want = float("%.*g" % (figures, want))
+                    ok = entry.get("value") == want
+                else:
+                    got = entry.get("value")
+                    ok = (isinstance(got, float) and
+                          abs(got - want) <= 1e-12 * max(abs(want), 1e-300))
+                if not ok:
+                    failures.append((label, "\"in\" %s is %r; re-computed "
+                                     "from full digits it is %r"
+                                     % (token, entry.get("value"), want)))
+            return count
+
+        if one_number:
+            recomputed += judge(name, entries, full,
+                                (served["value"], served["figures"],
+                                 served["prints"]))
+            continue
+        shown = served.get("value") if isinstance(served.get("value"),
+                                                  dict) else {}
+        if not isinstance(entries, dict) or sorted(entries) != sorted(
+                str(k) for k in full):
+            failures.append((name, "a table's \"in\" should hold one entry "
+                             "per key, %s; it holds %r"
+                             % (", ".join(sorted(str(k) for k in full)),
                                 sorted(entries) if isinstance(entries, dict)
                                 else entries)))
             continue
-        for token, entry in entries.items():
-            recomputed += 1
-            if token == unit:
-                expect = (served["value"], served["figures"],
-                          served["prints"])
-                got = (entry.get("value"), entry.get("figures"),
-                       entry.get("prints"))
-                if got != expect:
-                    failures.append((name, "\"in\" %s is %r; the row "
-                                     "itself is %r" % (token, got, expect)))
-                continue
-            if tokens[token].get("defining_constant") == name:
-                if (entry.get("value"), entry.get("figures"),
-                        entry.get("prints")) != (1.0, "exact", 1):
-                    failures.append((name, "defines %s, so in %s it is 1, "
-                                     "exact, printing 1; served %r"
-                                     % (token, token, entry)))
-                continue
-            want = float(full) * size[unit] / size[token]
-            figures = entry.get("figures")
-            if isinstance(figures, int):
-                want = float("%.*g" % (figures, want))
-                ok = entry.get("value") == want
-            else:
-                got = entry.get("value")
-                ok = (isinstance(got, float) and
-                      abs(got - want) <= 1e-12 * max(abs(want), 1e-300))
-            if not ok:
-                failures.append((name, "\"in\" %s is %r; re-computed from "
-                                 "full digits it is %r" % (token,
-                                                           entry.get("value"),
-                                                           want)))
+        for key, number in full.items():
+            recomputed += judge("%s[%s]" % (name, key), entries[str(key)],
+                                number, (shown.get(str(key)),
+                                         served["figures"], served["prints"]))
     held = 0
     for name, token, value, figures, prints in CONVERSION_PINS:
-        entry = ((on_disk["rows"].get(name) or {}).get("in") or {}).get(token)
+        row_name, _bracket, key = name.partition("[")
+        served_in = (on_disk["rows"].get(row_name) or {}).get("in") or {}
+        if key:
+            served_in = served_in.get(key.rstrip("]")) or {}
+        entry = served_in.get(token)
         if entry is None:
             failures.append((name, "PIN: no \"in\" %s served" % token))
             continue

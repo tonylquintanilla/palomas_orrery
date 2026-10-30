@@ -142,6 +142,7 @@ palomas_orrery.py unchanged.)
 
 import ast
 import datetime
+import utc_clock   # L-504: the clock read as UTC
 import os
 import sys
 
@@ -484,7 +485,7 @@ def run(root, when, fetch=plotting_fetch, save=plotting_save, echo=print):
 
 def main(argv):
     root = os.path.dirname(os.path.abspath(__file__))
-    code, _ = run(root, datetime.datetime.now())
+    code, _ = run(root, utc_clock.utc_now())
     return code
 
 

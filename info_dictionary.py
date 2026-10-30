@@ -44,6 +44,10 @@ Module updated: October 27, 2026 with Anthropic's Claude Opus 5.5 (L-492:
 Module updated: October 28, 2026 with Anthropic's Claude Opus 5.5 (L-501:
 INFO['2026 ED138'], the checkbox's tooltip, the opening of the object's
 description.)
+Module updated: October 29, 2026 with Anthropic's Claude Opus 5.5 (L-484:
+INFO['Pluto-Charon Barycenter'], whose checkbox said "No information
+available", and a paragraph in INFO['Pluto'] saying whose orbital period
+the hover shows and why. Words only, no numbers.)
 """
 
 # Shell radii are read from constants_new.py, never retyped here (L-209).
@@ -892,6 +896,12 @@ INFO = {
         '   * Shows TRUE orbital mechanics - both Pluto AND Charon orbit in a dance\n'
         '     around their common center of mass (barycenter)! This is why Pluto-Charon is\n'
         '     called a binary planet: the barycenter is OUTSIDE Pluto.\n\n'
+        'ORBITAL PERIOD IN THE HOVER:\n'
+        '* It is the period of the Pluto-Charon center of mass, as the website shows.\n'
+        '  Pluto\'s own center circles that point each time Charon goes around, so the\n'
+        '  period of Pluto\'s own center around the Sun swings back and forth with it.\n'
+        '  The center of mass does not swing, the same reason Earth\'s period is taken\n'
+        '  for the Earth-Moon center of mass.\n\n'
         'BINARY PLANET PHYSICS:\n'
         '* Mass ratio: Charon/Pluto = 12%\n'
         '* Barycenter: 2,035 km from Pluto\'s center (outside its 1,188 km radius!)\n'
@@ -899,6 +909,21 @@ INFO = {
         '* Charon orbits barycenter: ~17,500 km radius (same period: 6.387 days)\n'
         '* Compare: Earth-Moon barycenter is inside Earth - not a true binary.\n\n'
         'Missions: New Horizons (2015 flyby); Pluto Orbiter concept under study.',
+
+        # L-484 (2026-10-29): the barycentre's checkbox showed "No information
+        # available". Words only; the numbers are in the hover, from JPL.
+        'Pluto-Charon Barycenter':
+        'Horizons: 9 ("Pluto Barycenter"). The center of mass of Pluto and Charon.\n\n'
+        'WHAT IT IS:\n'
+        '* Pluto and Charon both circle this point. It lies outside Pluto, which is\n'
+        '  why the pair is called a binary.\n'
+        '* Its path around the Sun is smooth. Pluto\'s own center circles this point\n'
+        '  each time Charon goes around, so Pluto\'s own path wobbles along it.\n'
+        '* The orbital period the orrery shows for Pluto is this point\'s, from JPL\n'
+        '  Horizons, as the website shows it.\n\n'
+        'VISUALIZE:\n'
+        '* Select this as center, then select Pluto, Charon and the small moons to\n'
+        '  see their true orbits around it.',
 
         # Source: ALMA Brown & Butler 2018 (Orcus-Vanth mass ratio 14.2%)
         'Charon':

@@ -54,9 +54,14 @@ Module updated: October 14, 2026 with Anthropic's Claude Opus 5.5 (L-431,
 build 3, with L-395's move: the orrery's copy, a checker of its
 maintenance run; it reads the periods and the spacecraft sheets too, and
 today's check's verdict.)
+Module updated: October 29, 2026 with Anthropic's Claude Opus 5.5 (L-504:
+today is the UTC day, from utc_clock, as horizons_check.py dates its
+confirmations; read from the local clock, an evening run in Chicago saw
+tonight's confirmations as dated after today.)
 """
 
 import datetime
+import utc_clock   # L-504: the clock read as UTC
 import json
 import os
 import sys
@@ -169,7 +174,7 @@ def run(root, today, echo=print):
 
 def main():
     root = os.path.dirname(os.path.abspath(__file__))
-    return run(root, datetime.date.today())
+    return run(root, utc_clock.utc_today())
 
 
 if __name__ == "__main__":

@@ -1,14 +1,28 @@
 ---
 name: interactive-exhibit
 description: How an interactive exhibit (a room in interactive.html such as ?exhibit=sun) is designed, built, verified and carded for the Paloma's Orrery gallery. Covers the exhibit switch and boot path, the assembler driver spec, the JS feature handoff, the shared chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent gate, back link), what is per-body, the served-data provenance contract, what a room opens on (the arrival block) and the shell-key stamp the renderers apply, the drawer order, who may write data/objects_config.json, the Mode 5 phone sequence, and carding an exhibit through Studio. Use when adding or changing an exhibit (Earth, Jupiter, the stars), touching sun* chrome in interactive.html, deciding what an exhibit may render, or editing the served words with store_writer or exhibit_store_editor. Not for propagation math (gallery-assembler), the nightly builder (gallery-cache-builder), or the Studio/converter chain (gallery-pipeline). Do not use for projects other than Paloma's Orrery.
-fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, its group rows, its two Resets, the Reset in every room's top bar, Home's order and its framing; Go To fitting a body's whole orbit and the orbit line in a body's hover; the count line's place; a bare interactive.html link and the Explorer's address; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia); a served number's citation and its source_note; the Typed facts check (smoke_typed_facts.js); a feature drawn as stored dots (the Hills cloud, Earth's radiation belts); the i panel's source list and its links (source_list.js); the order a room's drawer lists its shells in, where each begins (drawer_order.js, the Drawer order check); a spacecraft's path in the Solar System room (its positions file, solid and dashed, its text box); whether the website and the orrery agree on an object; the planets ticked with a spacecraft (companions); the i panel's words one sentence to a bullet; a comet on an open path in the Solar System room; the drawer's groups one JPL class to a row; JPL's terms in the words a visitor reads; a comet's companions; the drawer's Find a body box; the direction arrows on the orbits; the grid chip's AU note and the triad's frame note; the i button's first-visit note and hovers without a pointer line; the one text box for a tap and Go To (text_box.js); a group found by its find words; the i panel's Report a problem link
+fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, its group rows, its two Resets, the Reset in every room's top bar, Home's order and its framing; Go To fitting a body's whole orbit and the orbit line in a body's hover; the count line's place; a bare interactive.html link and the Explorer's address; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia); a served number's citation and its source_note; the Typed facts check (smoke_typed_facts.js); a feature drawn as stored dots (the Hills cloud, Earth's radiation belts); the i panel's source list and its links (source_list.js); the order a room's drawer lists its shells in, where each begins (drawer_order.js, the Drawer order check); a spacecraft's path in the Solar System room (its positions file, solid and dashed, its text box); whether the website and the orrery agree on an object; the planets ticked with a spacecraft (companions); the i panel's words one sentence to a bullet; a comet on an open path in the Solar System room; the drawer's groups one JPL class to a row; JPL's terms in the words a visitor reads; a comet's companions; the drawer's Find a body box; the direction arrows on the orbits; the grid chip's AU note and the triad's frame note; the i button's first-visit note and hovers without a pointer line; the one text box for a tap and Go To (text_box.js); a group found by its find words; the i panel's Report a problem link; a drawing row in the Solar System room (the belt's cloud); a stored drawing's cross kept off the axes; the source line's UTC and JPL clock
 ---
 
 # Interactive Exhibit
 
-Read this file in 9 parts: lines 1-141, 142-161, 162-403, 404-501, 502-740, 741-973, 974-1187, 1188-1379, 1380-1487.
+Read this file in 10 parts: lines 1-108, 109-162, 163-403, 404-527, 528-538, 539-777, 778-1005, 1006-1256, 1257-1448, 1449-1558.
 
-Skill version: 1.28 | 2026-10-28, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.29 | 2026-10-29, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 571b9bf4 and gallery @ b55109f2. v1.29 (L-503, L-502,
+L-399, L-504) records the gallery's builds of 2026-10-29, six things a
+session following 1.28 would get wrong or not find: a small body's own
+uncertainty is served by the builder and used whole, and the room's
+sentence prints when no source error is served at all; the main belt's
+cloud, the first stored drawing named on a room's row, which the pull
+and the builder now read; the drawing row in the Solar System room's
+drawer; the frame HUD as a row across the bottom (the triad at three
+quarters in its centre, the chip at its right, the row and the count
+line at 48 px, the count line left of the triad); a stored drawing's
+cross off the axes, held by the Label words check; and the source
+line's clocks. Each fact was read from the gallery's code at b55109f2
+before it was written.
+Earlier: 1.28 | 2026-10-28, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ b2fcc1bb and gallery @ acbf206b. v1.28 (L-443, carrying
 L-497, L-496 and L-458) corrects four sentences the gallery's builds of
 2026-10-27 made wrong, each one a session following it would act on:
@@ -37,25 +51,12 @@ class is explained first in each member's text box and panel. And the
 Find a body box, the grid chip's AU note, the whole triad opening the
 frame note, the orbit line wrapped at 60, the direction arrows, and a
 candidate for the headless recipe.
-Earlier: 1.26 | 2026-10-26, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 5398439 and gallery @ 9223cd1. v1.26 (L-443, slice 2,
-build B part 2) adds the fourteen comets on open paths to the Solar
-System room, drawn from served positions as a spacecraft is, from a year
-before perihelion to a year after today (the span ruling of 2026-10-24),
-with no companions; splits every drawer group that gathered several of
-JPL's classes into a row per class, the asteroids in their places among
-the planets (Tony, 2026-10-26: "Split with asteroids in the correct
-order among the planets"); and records his rule on JPL's words: "We
-should keep these correct words and explain them when they should be
-explained." The orbit line now reads "Orbit: perihelion q AU, its
-closest to the Sun, to aphelion Q AU, its farthest." A name the orrery
-keys with an underscore is shown with JPL's space.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
 on 2026-10-05 (L-418), 2026-10-10 (L-429), 2026-10-14 (L-431),
 2026-10-16 (L-421), 2026-10-17 (L-452), 2026-10-20 (L-456),
 2026-10-21 (L-460), 2026-10-22 (L-434, L-443), 2026-10-24
 (L-477, L-482), 2026-10-25 (L-443, twice), 2026-10-26 (L-443),
-2026-10-27 (L-443) and 2026-10-28 (L-443).
+2026-10-27 (L-443), 2026-10-28 (L-443) and 2026-10-29 (L-503).
 
 ## Contents
 
@@ -124,7 +125,7 @@ the new exhibit brings its own.
 | Nav cluster: + / - / Home = FRAME zoom (range and dtick change together; the grid re-labels), plus four arrow buttons that turn the camera by a step scaled to the live eye distance, so a tap moves the same slice of screen at any zoom (L-310); on a portrait phone 768 px or narrower the arrow cross, Home with it, moves apart from + and - into its own holder, and the in-frame title stays (L-316). WHICH corner is set only by the `.nav-cross-apart` CSS rule in `nav_cluster.js` -- top right since round 4, after a round at the bottom left -- and the method that moves it, `crossApart(on)`, says nothing about the corner, so the next move is one CSS edit. The open drawer hides the cluster and the holder both. The page decides WHEN: `navPlaceCross()` asks `sunPhonePortrait()`, the same test the text box uses | gallery/nav_cluster.js (`crossApart`, `.nav-cross-apart`), `navFrameZoom`, `navHome`, `navCameraStep`, `navPlaceCross`, `sunPhonePortrait` | shared |
 | Click deferral: `plotly_click` -> `setTimeout(0)` -> focus | initSunExhibit | shared, CRITICAL (L-278) |
 | i-panel follows the focus; curated link per feature stamped into trace `meta` by `stampLink`; its last line, in every room, is "About Paloma's Orrery", opening the lobby's About card at index.html#about (L-475), and closing the card steps back to the room that opened it (L-480, index.html's `aboutFromRoom`). Under every focused feature, in every room, a "Report a problem" link with a line beside it (v1.28, L-458, talk D's approved words): it opens the guest book's Google Form with its message box already written, "Problem report -- <room> room, <feature>", two prompts, and "Page: <the room's address>"; the form's address and the box's field were read from the form's public page (`REPORT_FORM`), so no second form and no account. `tools/guestbook_updater.py` shows a message beginning "Problem report" to Tony as a report, private, never offered for the lobby | `renderSunInfo`, feature_renderers.js; `REPORT_FORM`, `REPORT_WORDS`, `sunReportMessage`, `sunReportLink` | shared mechanism; per-body copy and links |
-| Frame HUD: camera-following triad, Aries glyph with the frame note and its source, grid chip. A tap or hover anywhere on the triad opens the frame note, not on the Aries glyph alone; the grid chip opens a note on what an AU is, its kilometres the served KM_PER_AU (IAU 2012 Resolution B2), its words resting on the IAU's Measuring the Universe page, both linked (v1.27, L-495) | `sunHud*`, `sunAuNote*`, `#sun-au-note` | shared; reads the camera, never calls Plotly |
+| Frame HUD: camera-following triad, Aries glyph with the frame note and its source, grid chip. A tap or hover anywhere on the triad opens the frame note, not on the Aries glyph alone; the grid chip opens a note on what an AU is, its kilometres the served KM_PER_AU (IAU 2012 Resolution B2), its words resting on the IAU's Measuring the Universe page, both linked (v1.27, L-495). Since v1.29 (L-502) the HUD is a ROW across the bottom of every room (`.sun-hud`), 48 px above it, just clear of the drawer button, whose top was measured at 46.4 px on a 375 px page: the triad in its centre, drawn at three quarters (78 by 90 px over its 104 by 120 viewBox, its letters still printing at 11 px), the grid chip at its right end. It is centred by `text-align`, because `body.sun-exhibit .sun-chrome` sets `display: block` and outweighs a flex rule on the HUD; the count line keeps to the triad's left (below) | `sunHud*`, `sunAuNote*`, `#sun-au-note`; `.sun-hud`, `.sun-triad` | shared; reads the camera, never calls Plotly |
 | Consent gate and Pyodide load | `loadPyodideRuntime`, `CONSENT_KEY` | shared |
 | Back link: "Gallery" steps back in history when the gallery is behind it | BACK TO THE GALLERY block | shared |
 
@@ -257,6 +258,13 @@ page:
   for them gone. The tide's cone is not stored: two numbers and a
   formula, the website works it out from the served rows. The streamer
   band is not stored either: a grid set by about twenty served numbers.
+  The main belt's cloud (`main_belt`, v1.29, L-503) joined on
+  2026-10-29: placed once by the orrery's `main_belt_sampler.py`, and
+  the first stored drawing named on a ROOM's row rather than on a
+  body's feature -- the Solar System room's row `{drawing: "main_belt",
+  in, label, find, feature}` (below). So `tools/pull_drawings.py` and
+  the builder's `serve_drawings()` read the drawing names in the
+  config's `"rooms"` section as well as under the objects.
 - The live maintenance run (`gallery_maintenance_run.py --live`, Store
   drift) follows every pointer into the orrery store at orrery HEAD and
   reports MATCH, DRIFT, or NOT IN STORE, by name. A new exhibit's
@@ -366,6 +374,22 @@ page:
   disagree. The room's driver reads the link from the config, as it
   reads the rooms section; a change to it reaches a visitor on the push
   alone, with no cache rebuild.
+  A SMALL BODY'S OWN UNCERTAINTY (v1.29, L-399). An asteroid, a comet or
+  a dwarf planet asked as a small body has no group row. The cache
+  builder asks JPL's vector table 2xr as the orrery does and serves the
+  3-sigma of its distance from the Sun on the body's cached record as
+  `"position_uncertainty"` (`build_position_uncertainty`); the room's
+  driver passes it where the config serves no `position_accuracy`. It
+  is the error itself, so it is used whole, where a group row's place is
+  halved (`sourceError` in `gallery/solar_system_figures.js`). Unlike
+  the link, it reaches a visitor only after the builder runs. Tony's
+  sentence prints whenever no source error is served -- neither node,
+  or one that serves no kilometres (`NO_SOURCE_ACCURACY`) -- not only
+  when `position_accuracy` is absent. Bennu, Halley and Ikeya-Seki get
+  no figure from JPL ("n.a." in its column) and print it; its words say
+  "not yet included" where the orrery, since 2026-10-29, says JPL
+  states no accuracy: a documented difference on L-484, for the next
+  gallery session.
 - **A body's words and link come from the orrery's object list** (v1.8,
   L-395; Tony's rulings of 2026-10-01). On an object in
   `data/objects_config.json`, `name`, `horizons_id`, `id_type` where the
@@ -402,6 +426,19 @@ page:
   config by the room's driver, so a change reaches a visitor on the
   push alone. An object without a `'key'` in the orrery's list (the
   Moon, today) has no period to serve.
+- **The Solar System room's source line names each date's clock**
+  (v1.29, L-504; Tony's rulings of 2026-10-28, "we should standardize
+  on utc", and of 2026-10-29, the elements' date kept on JPL's clock,
+  "Simple. Direct. Educational."). `solarSystemSourceLine` reads the
+  elements' day from their Julian date, never converted: "dated <day>,
+  midnight on JPL's ephemeris clock (TDB, 69 seconds ahead of UTC;
+  Julian date <JD>)"; then "retrieved <day> UTC". For elements measured
+  from the Sun's centre it adds Tony's approved sentence
+  (`SOLAR_SYSTEM_CENTRE_WORDS`): another reference measuring the orbit
+  from the solar system's centre of mass, or on another date, gives
+  slightly different numbers, because the Sun itself moves around that
+  centre. The 69 seconds is typed in the page; a row for it is a
+  candidate on L-504.
 - **The orbit is drawn around the period's centre** (v1.15, L-431 build
   3). Where a body's period is around the solar system's barycentre,
   the served cache carries `drawn_orbit`, the body's elements around it
@@ -601,6 +638,22 @@ Plotly.
   `ssFold`. Checked by the drawer check's sections 4 and 6, with seven
   planted faults, and walked headlessly (`walk_solar_system_drawer.js`,
   sections 1, 6, 11, 15 and 16).
+- **A drawing row** (v1.29, L-503; Tony's ruling of 2026-10-29: "a
+  tickable row named "The belt's cloud", first inside the Main-belt
+  asteroids group, ticked and reset like a body, Go To fitting the
+  cloud"). A served row `{drawing, in, label, find, feature}` has no
+  slug, because it is no body the orrery lists; its key is
+  `drawing:<name>` (`DRAWING_PREFIX`), the trace group the page draws
+  it in (`buildRoomCloud` in `gallery/feature_renderers.js`). It is
+  tickable, counted with its group's rows, unticked by Reset and by the
+  group's Reset, and opens no room; in an `"order": "a"` group it
+  stays first, ahead of the bodies sorted by semi-major axis
+  (`isDrawing`, `orderGroups`). Its cross stands just past the farthest
+  drawn point -- the distance table's 100th entry times 1.02 -- 45
+  degrees round from the x axis in the ecliptic, and is the text box's
+  marker, so Go To fits the cloud. Checked by the drawer check's section
+  9, with two breaks: the row read as a body and sorted after the
+  bodies, and the row not tickable.
 - **Every comet is drawn from its elements of today** (v1.21; Tony's
   ruling of 2026-10-22, "Yes"). A comet anchored at perihelion
   (`overrides.comet.anchor: "Tp"`) is trusted only for a span around
@@ -625,7 +678,10 @@ Plotly.
   lower left, above the drawer's handle, a page element of its own
   (`#ss-outside`, class `sun-chrome`); until L-478 it sat above the grid
   chip and covered the Aries mark. It steps aside with the HUD while the
-  drawer is open.
+  drawer is open. Since v1.29 (L-502) it sits at the HUD row's height,
+  48 px, and keeps to the left of the triad in the bottom centre,
+  wrapping where it must: its width is `calc(50% - 59px)`, half the
+  page less the triad's half (39 px) and two 10 px gaps.
 - **The orbit line** (v1.22, L-479; Tony, 2026-10-24: "It would also
   give an intuitive sense of the eccentricity," then "Yes" to one short
   line). Every body on a closed orbit ends its hover with "Orbit:
@@ -899,6 +955,19 @@ traces join the host's row and yield to the host's cross -- but the
 Label words check now fails on a shell row holding more than one info
 cross and on a Sun room with no row of the belt's own; its self-test
 plants the old join on a copy of the config.
+A STORED DRAWING'S CROSS STANDS CLEAR (v1.29, L-502; Tony, 2026-10-27:
+"can we move the hover crosses away from the most dense areas where
+they get lost in the glare?"). In the Sun room every stored drawing's
+info cross -- the corona, the dust cloud, the Hills cloud, the outer
+Oort cloud, the galactic tide -- stands at least 15 degrees off every
+axis line through the Sun, and no two within 10 degrees of each other
+in direction (`AXIS_CLEAR_DEG`, `APART_DEG`). The Label words check
+holds it, prints each one's place, and is first shown red with the
+Hills cloud's angle taken off a copy of the config. The angle is served
+on the drawing, `drawing.info_polar_deg`, picked where the drawing's
+own dots are sparse, its reason in the node's `_declared`: the Hills
+cloud 45, the outer Oort cloud 225 and the galactic tide 135 degrees
+from the ecliptic's north pole, each at its outer edge.
 
 TIES AND PLACES:
 - A drawing whose nearest dot lies at or under its body's surface
@@ -1484,4 +1553,6 @@ the repo, so its loaded copy of 1.26 was the repo's own; a session that
 loads the account's copy confirms it reads 1.27 before exhibit work.
 1.28 was cut on 2026-10-28 in a Claude Code session, from the repo's
 copy of 1.27; a session that loads the account's copy confirms it reads
-1.28 before exhibit work.
+1.28 before exhibit work. 1.29 was cut on 2026-10-29 in a Claude Code
+session, from the repo's copy of 1.28; a session that loads the
+account's copy confirms it reads 1.29 before exhibit work.

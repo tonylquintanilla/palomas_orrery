@@ -545,6 +545,18 @@ Source line is the one a visitor reads; an address on the row's Access
 line alone never reaches the i panel. Tony, 2026-10-20: "the citation
 should have a live url link", and "we should add this to the skill."
 
+Earlier: 2.33 | 2026-10-21, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 645558e2. v2.33 (L-460 with L-466, and L-411) adds two
+rules. To What a Visitor Reads, principle 4: a drawing starts and
+stops where a served row says; an end no row sets is held by name,
+with its reason, and the gallery run's Drawn ends check holds both
+rooms to it. Tony, 2026-10-21: "we should check all the drawings to
+be sure they reflect sourced distances", and "after the sun please
+double check the earth too and this should be added to the skill."
+And to The Access Standard: an agency summary that names no source is
+a lead, not a source; read one layer down (Tony's ruling of
+2026-10-21, that it is method).
+
 ## interactive-exhibit
 
 Earlier: 1.15 | 2026-10-14, with Anthropic's Claude Opus 5.5, at
@@ -822,6 +834,20 @@ shows every description, note and citation one sentence to a bullet, in
 every room ("put bullets on all sentences for readability including the
 source paragraph"), cut where the room shows the words.
 
+Earlier: 1.26 | 2026-10-26, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 5398439 and gallery @ 9223cd1. v1.26 (L-443, slice 2,
+build B part 2) adds the fourteen comets on open paths to the Solar
+System room, drawn from served positions as a spacecraft is, from a year
+before perihelion to a year after today (the span ruling of 2026-10-24),
+with no companions; splits every drawer group that gathered several of
+JPL's classes into a row per class, the asteroids in their places among
+the planets (Tony, 2026-10-26: "Split with asteroids in the correct
+order among the planets"); and records his rule on JPL's words: "We
+should keep these correct words and explain them when they should be
+explained." The orbit line now reads "Orbit: perihelion q AU, its
+closest to the Sun, to aphelion Q AU, its farthest." A name the orrery
+keys with an underscore is shown with JPL's space.
+
 ## safe-file-editing
 
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons;
@@ -1081,6 +1107,17 @@ orrery fails by name, its mirror does not run, and the Daily Run stops
 before the builder: Tony's option A of 2026-10-15 (The Daily Run's
 Steps).
 
+Earlier: 1.11 | 2026-10-17, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ a73bc24a and gallery @ f49b3e69. v1.11 (L-449) records
+the run records rule and its check. Every record is kept until the
+cause of the losses of 2026-10-15 and 10-16 is found; then a deliberate
+limit, its number set then, with each removal named (Tony, 2026-10-16).
+The builder prints what its copy carried, and the Daily Run compares
+the new cache's records with the replaced cache's after the builder and
+stops on a loss, naming each record and its copy (Tony, 2026-10-17:
+stop and name). See The Daily Run's Steps.
+(Moved down 2026-10-29, when 1.14 made a fourth entry.)
+
 ## horizons-orbital-mechanics
 
 Earlier: 1.2 | 2026-10-10, with Anthropic's Claude Opus 5.5, at
@@ -1163,4 +1200,13 @@ classes as open is not drawn as an ellipse; and a name on a skip list
 says which record failed around which centre, and is tested before it
 comes off (Tony, 2026-10-22: "some idiosyncrasies in Horizons are
 addressed with specific record numbers, which can change").
-
+Earlier: 1.10 | 2026-10-24, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 206f96c9. v1.10 (L-443, slice 2) adds How a Path's
+Events Are Found, the method path_plan.py was built on: an event is a
+nearest approach inside the body's Hill sphere, from JPL's own GM, that
+needs finer steps than the weekly backbone by the orrery's curvature
+rule; found from daily positions around the Sun, then to the minute in
+two passes; its window and step by spacecraft_encounters' own rule; made
+again on a 30-day cycle with the past carried. The Hill sphere was not
+in the design record: without it the first offline run took nearest
+approaches tens of millions of km from Mercury and the Moon for events.
