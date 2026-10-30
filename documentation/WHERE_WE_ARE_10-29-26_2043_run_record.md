@@ -546,7 +546,10 @@ Cache and restore points (date = when that content was written):
 [CENTER MENU] Added traces to 184 object variables
 Restored sash positions: [489, 1013]
 
-2. GitHub Desktop: commit and push the orrery, with the three new files ticked (`utc_clock.py`, `documentation/project_instructions_v3_118.md`, your run record). 
+2. GitHub Desktop: commit and push the orrery, with the three new files ticked (`utc_clock.py`, `documentation/project_instructions_v3_118.md`, your run record). -- done
 3. Settings > Skills: reinstall the four skills.
-4. One line in your run record for the gallery session (`WHERE_WE_ARE_10-29-26_1818_run_record.md`): your 20:11 look, "ED138 to the hundred-thousand km with no sentence; the triad small and low: Correct". Code closed the two items on my account of it; your own line makes the record whole. It can go with tomorrow's push.
-5. Send me the orrery's SHA. I'll confirm it and write the coordination handoff for Oct 29-30, which closes this coordinating session; tomorrow's Daily Run and the gallery's push come after it.
+
+  The protocol is at v3.118 with the four skills at their new versions in the manifest (interactive-exhibit 1.29, gallery-cache-builder 1.14, horizons-orbital-mechanics 1.13, provenance-discipline 2.36); its entry carries the obligation for the next session that loads skills from your account. -- done
+
+1. One line in your run record for the gallery session (`WHERE_WE_ARE_10-29-26_1818_run_record.md`): your 20:11 look, "ED138 to the hundred-thousand km with no sentence; the triad small and low: Correct". Code closed the two items on my account of it; your own line makes the record whole. It can go with tomorrow's push.
+2. Send me the orrery's SHA. I'll confirm it and write the coordination handoff for Oct 29-30, which closes this coordinating session; tomorrow's Daily Run and the gallery's push come after it. -- question, will tomorrow's daily run be 
