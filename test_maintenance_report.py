@@ -58,6 +58,16 @@ faults are planted for it, each caught by name:
     a night row no table carries dropped silently    UNKNOWN ROW DROPPED
                                                      SILENTLY
 
+And the switch a night fired by hand may carry, --ask-everything
+(L-485, 2026-10-30): with it the Horizons check runs with --all, without
+it as by day, with its own time limit, longer than the runner's, since
+it saves only at its end; and no other row of the night differs. Three
+faults are planted for it, the switch in each direction and the limit:
+
+    the switch dropped                               ASK EVERYTHING DROPPED
+    the switch always on                             ASK EVERYTHING ALWAYS ON
+    the time limit left off                          ASK EVERYTHING CUT SHORT
+
 The last line starts "MAINTENANCE REPORT:", which the maintenance run
 quotes, and says what was compared and how many things were examined.
 
@@ -80,6 +90,10 @@ taken out.)
 Module updated: October 30, 2026 with Anthropic's Claude Opus 5.5 (L-485,
 the nightly run: the night's gate and record, eight cases and six planted
 faults.)
+Module updated: October 30, 2026 with Anthropic's Claude Opus 5.5 (L-485,
+"ask JPL for everything": the night's rows with and without
+--ask-everything and the Horizons check's time limit, two cases and
+three planted faults.)
 """
 import contextlib
 import io
@@ -127,6 +141,9 @@ def load(old=None, new=None):
     mod = types.ModuleType('orrery_maintenance_run_under_test')
     mod.__file__ = path
     exec(compile(src, path, 'exec'), mod.__dict__)
+    # Kept before summary_of() swaps the suite for one row: the switch's
+    # cases read the night's real rows (L-485).
+    mod.REAL_TABLES = (mod.GENERATORS, mod.CHECKERS)
     return mod
 
 
@@ -287,6 +304,40 @@ def judge_night(mod, findings, counts):
                 findings.append(('UNKNOWN ROW DROPPED SILENTLY', str(ex)))
         finally:
             mod.NIGHT_ROWS = real_rows
+        # The switch a night fired by hand may carry (L-485, 2026-10-30):
+        # with it the Horizons check is asked with --all, without it as
+        # by day, and nothing else about the night differs.
+        swapped = (mod.GENERATORS, mod.CHECKERS)
+        mod.GENERATORS, mod.CHECKERS = mod.REAL_TABLES
+        try:
+            off = mod.night_rows()
+            on = mod.night_rows(ask_everything=True)
+        finally:
+            mod.GENERATORS, mod.CHECKERS = swapped
+        counts['night'] += 2
+
+        def horizons_args(gens_):
+            return [r[1] for r in gens_ if r[0] == 'Horizons check']
+
+        if horizons_args(on[0]) != [['horizons_check.py', '--all']]:
+            findings.append(('ASK EVERYTHING DROPPED', 'with the switch the '
+                             'Horizons check runs as %s' % horizons_args(on[0])))
+        if horizons_args(off[0]) != [['horizons_check.py']]:
+            findings.append(('ASK EVERYTHING ALWAYS ON', 'without the switch '
+                             'the Horizons check runs as %s'
+                             % horizons_args(off[0])))
+        limits = [r[4] if len(r) > 4 else None
+                  for r in on[0] if r[0] == 'Horizons check']
+        if limits != [mod.ASK_EVERYTHING_SECONDS] or not (
+                mod.ASK_EVERYTHING_SECONDS > mod.TOOL_TIMEOUT_SECONDS):
+            findings.append(('ASK EVERYTHING CUT SHORT', 'with the switch the '
+                             'Horizons check may take %s seconds, against the '
+                             "runner's %d" % (limits, mod.TOOL_TIMEOUT_SECONDS)))
+        rest_on = [r for r in on[0] if r[0] != 'Horizons check']
+        rest_off = [r for r in off[0] if r[0] != 'Horizons check']
+        if rest_on != rest_off or on[1:] != off[1:]:
+            findings.append(('ASK EVERYTHING CHANGED MORE', 'the switch '
+                             'changed a row other than the Horizons check'))
         mod.write_night_record(tmp, clean, [('Ledger index', 'a document')],
                                [])
         counts['night'] += 1
@@ -343,6 +394,19 @@ PLANTS = [
      ("    if unknown:\n        raise ValueError(",
       "    if False:\n        raise ValueError("),
      'UNKNOWN ROW DROPPED SILENTLY'),
+    # L-485, the switch a night fired by hand may carry
+    ('the ask-everything switch dropped',
+     ("            if ask_everything and row[0] in ASK_EVERYTHING_ARGS:\n",
+      "            if False:\n"),
+     'ASK EVERYTHING DROPPED'),
+    ('the ask-everything switch always on',
+     ("            if ask_everything and row[0] in ASK_EVERYTHING_ARGS:\n",
+      "            if row[0] in ASK_EVERYTHING_ARGS:\n"),
+     'ASK EVERYTHING ALWAYS ON'),
+    ('the ask-everything time limit left off',
+     ("                       + (ASK_EVERYTHING_SECONDS,))\n",
+      "                       )\n"),
+     'ASK EVERYTHING CUT SHORT'),
 ]
 
 
@@ -374,8 +438,9 @@ def main():
           "its before and after, the sentence when the run history is missing, and the "
           "risen file again when the output has Windows line endings; and the "
           "night's gate (L-485) on clean, failed, unreached, crashed, outside "
-          "the allow-list and non-ASCII nights, an unknown night row, and the "
-          "night's record")
+          "the allow-list and non-ASCII nights, an unknown night row, the "
+          "Horizons check's arguments with and without --ask-everything, and "
+          "the night's record")
     print('examined: four summaries (as printed at ab96681, with one file risen, with '
           'no run history, with one file risen and Windows line endings) from the real '
           'main() and run_tool() of orrery_maintenance_run.py')

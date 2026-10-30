@@ -578,8 +578,8 @@ Files for your run record:
     ok documentation/COORD_L485_ask_everything_brief_20261030.md (new, 157 lines)
 
 Run order:
-1. Commit and push the orrery with this brief. -- 
-2. Open a Claude Code session through the python_work door and paste:
+1. Commit and push the orrery with this brief. -- b27ce8c8be7320ddcb32b3ae649d4e498f8fdeb4
+2. Open a Claude Code session through the python_work door and paste: -- running
 
    > Orrery repository. Please build from documentation/COORD_L485_ask_everything_brief_20261030.md: L-485, the "ask JPL for everything" switch on the nightly run. Read the brief, the orrery half's brief it names, and L-485's block first.
 
@@ -591,3 +591,168 @@ Tony-action rollup:
 - (decide) Nothing.
 
 Not committing or pushing: those are Tony's under the orrery's CLAUDE.md. The untracked files the check sees are the two briefs in my cloud copy; the copies that matter are in Tony's folder, and he commits them from GitHub Desktop.
+
+==========================================================================
+
+**Session: OPEN: 10-30-26 1802: Opus: Code: L-485 ask JPL switch**
+
+I'm reading L-485's ledger block (280 lines) before the skills; nothing has been changed yet.
+
+Still reading: the last skill (the citation and push-gate rules, about 1,500 lines). No changes made yet.
+
+Reading the last few lines of code the switch touches, then I'll put the plan to you.
+
+I'm ready to build the "ask JPL for everything" switch. First I'll time the full JPL check on a spare copy of the orrery, so your own folder isn't touched.
+
+**Skills read in full.** Each version matches what the project instructions expect:
+- safe-file-editing 1.14
+- agentic-pre-test 1.3
+- ledger-and-session-records 1.22
+- horizons-orbital-mechanics 1.13
+- provenance-discipline 2.36
+
+**Base.** Your folder and GitHub are at the same commit, b27ce8c. The only edit waiting is your own run-record copy (`WHERE_WE_ARE_10-29-26_2320_run_record.md`). The brief says to leave it alone, and I will.
+
+**What I'll do, in order:**
+1. **Time the full check.** I'll make a spare copy of the orrery in my scratch folder and run the full Horizons check there (`horizons_check.py --all`, which asks JPL about every object, period and spacecraft data sheet). I'll report the seconds. It should take roughly 6 to 10 minutes.
+2. **Build the switch.** Three pieces:
+   - The maintenance run gets an `--ask-everything` switch. It adds `--all` to the Horizons check for that run only, and prints one line saying so.
+   - The nightly workflow gets a tick box for runs you start by hand: "Ask JPL for everything, not only what is due". The nightly schedule never ticks it.
+   - A test that can fail, with a planted fault for each direction: the switch being dropped, and the switch being left on all the time.
+3. **Run the full maintenance run.** Then the records: L-485 (the nightly run) and the where-we-are page.
+
+**Why the timing matters.** I read how the check saves its work: it writes its two records only at the very end. The runner stops any tool after 15 minutes. So a run cut off at 15 minutes would ask JPL for a quarter of an hour and keep nothing. If my timing comes close to 15 minutes, the switch will also give the Horizons check a longer limit, for that one run only.
+
+**One correction to the brief.** Your run order says to look for a line starting "Asked JPL for:". The check prints no such line. A good run prints "HORIZONS CHECK: PASS -- N checked today, M queries". I'll put the real wording in your run order at the end.
+
+===================================================
+
+**Fable:**
+
+Code's plan matches the brief, and its correction is right: "Asked JPL for:" is the path plan's wording, which I lifted from the wrong row of last night's log. The Horizons check's own verdict reads "HORIZONS CHECK: PASS -- N checked today, M queries", and that is the line to look for when you fire the run: a number of queries greater than zero is the proof. I will use Code's wording in the record.
+
+Timing the full check on a spare copy first is the right first step, and its reason is the one the brief gave: the check saves only at the end, so a run cut off at 15 minutes would keep nothing.
+
+Nothing to decide. When Code's report comes, paste it here before you commit, as before.
+
+==========================================================
+
+**Code:**
+
+The scratch folder's path is too long for Windows; retrying with long paths allowed.
+
+Clean copy at b27ce8c. Starting the timed full check in the background (it asks JPL about everything; I expect several minutes).
+
+While that runs, I'm reading the runner and test code the switch will touch.
+
+While the timing runs, I'll confirm GitHub's own words for a tick-box input on a hand-fired run, rather than writing the workflow from memory.
+
+GitHub's docs confirm the manual trigger uses a tick-box input, but don't clarify its state on scheduled runs — so I'll make the workflow only pass the switch when the run is manually triggered and the box is checked, ensuring scheduled runs never get it. Next, I'll set up the runner's switch.
+
+Edits go bottom-up in the runner: first main(), where the switch is read.
+
+Now night_rows() and the switch's one table, beside NIGHT_ARGS.
+
+Now the test: two cases, and a planted fault for each direction.
+
+The test swaps the runner's tables for one row, so night_rows() finds none of the night's rows there. Let me see how it loads the runner.
+
+The test empties the runner's tables before the night cases run. I'll have load() keep the real tables, and have the switch cases put them back for their two calls.
+
+The test passes with all 12 planted faults caught, including the two new ones (the switch dropped, the switch always on). Now the workflow's tick box.
+
+All three files are ASCII and LF. Quick check that the switch refuses when given without `--night` and runs nothing:
+
+The switch, the tick box and the test are built. I'm waiting on the timed full check before deciding the time limit.
+
+The full check ran 10.8 minutes (72% of the runner's 15-minute cap) with all 179 items confirmed against JPL, but since results only save at the end and GitHub's connection may be slower, a timeout would lose everything. I'll extend the Horizons check timeout to 30 minutes for manual runs only, tracked directly on the workflow row for testing.
+
+Now run_tool takes the limit, and the generator loop passes the row's own.
+
+Now the test also checks the row's time limit, with a planted fault for it left out.
+
+13 of 13 planted faults are caught. Now the runner's docstring, so the module says what it does.
+
+Running two background checks in parallel: an end-to-end test confirming the `--all` switch properly processed all 179 items (versus printing NOTHING DUE without it), plus the full maintenance run in your folder.
+
+While both run, I'll get the records ready. Reading the end of L-485's ledger entry again, for where the new lines go.
+
+The first GitHub run confirms "Asked JPL for: nothing." came from the path plan's line, not the Horizons check—so my earlier correction to the run order holds. I'll check one more fact from that record next.
+
+This also confirms GitHub's runner can load the window library the period tools need, since both dependent checks passed. I'll write the L-485 nightly run lines now and add test results once both runs finish.
+
+The two runs are still going; I'll finish the records once both report.
+
+All 32 gating checkers pass, the push gate holds, and the new test caught all 13 planted faults. Still waiting on the night run with the switch, so I'll check the three signal numbers from their source files in the meantime.
+
+I'll update the where-we-are page's header, the READ THIS FIRST box, the nightly-run line, and the attention marks, leaving everything below the run-record marker untouched.
+
+The page is done apart from nothing; the ledger lines wait for the night run's result, which is still going.
+
+The full test run succeeded on the spare copy in 800 seconds — the Horizons check passed with the --all switch (179 checked, 269 queries), and the night finished clean with 14 rows run, 32 skipped, 0 reported. Now I'll move on to the ledger lines.
+
+The tick box is built and works. A night run on a spare copy, with the box's switch on, asked JPL about all 179 items and ended clean. Nothing is committed yet.
+
+**How long the full check takes on your machine: 648 seconds (about 11 minutes).** It asked JPL 269 questions, and every answer agreed. The runner normally stops a tool after 15 minutes, and the Horizons check saves only at its very end. GitHub's computers may reach JPL more slowly than your house does. So when the box is ticked, that one check gets up to 30 minutes. Every other step keeps 15, and the nightly schedule never ticks the box.
+
+**What I built:**
+- **The switch.** `orrery_maintenance_run.py --night --ask-everything` makes the Horizons check ask about everything, and prints one line saying so. Given without `--night`, it runs nothing and says so.
+- **The tick box.** "Run workflow" now shows "Ask JPL for everything, not only what is due". The switch is passed only on a run you start by hand with the box ticked. GitHub's pages don't say what the box reads on a scheduled night, so a scheduled night can never pass it.
+- **The test.** It checks the switch both ways and the 30-minute limit. Three planted faults (switch dropped, switch always on, limit left off) are each caught by name.
+
+**How I know it works:**
+- **The night run on the spare copy.** It was fresh from the timing run, so without the switch it would have said NOTHING DUE. Instead it said "PASS -- 179 checked today, 269 queries" and ended "NIGHT RUN: CLEAN -- 14 rows run, 32 skipped, 0 reported", in 800 seconds.
+- **The full maintenance run in your folder.** "32 of 32 gating checkers passed". The push gate reads "GATE PATH: 0 TIER-1 -- the push gate holds".
+
+**Two corrections to the brief:**
+- **The line to look for.** The brief said to look for a line beginning "Asked JPL for:". That is the path plan's line, not the Horizons check's. The Horizons check prints "PASS -- N checked today, M queries".
+- **The files the run saves.** There will be four, not three: the nightly run's own record (`data/nightly_run_record.json`) is saved too.
+
+**One question from earlier is settled.** Your first GitHub run (Oct 30, 22:39 UTC) passed the two checks that need the window library, so GitHub's computer can load it. That run asked JPL nothing, which is why this run is needed.
+
+**Beyond the brief, on the where-we-are page.** Besides the box I updated the road's nightly-run line. It still said "waiting on its first run", and that run has happened.
+
+**Files for your run record:**
+```
+ok orrery_maintenance_run.py (14 edits)
+ok test_maintenance_report.py (11 edits)
+ok .github/workflows/nightly.yml (3 edits)
+ok LEDGER_CONSOLIDATED.md (1 edit, plus its index rebuilt by ledger_index.py)
+ok documentation/WHERE_WE_ARE.md (6 edits)
+written by the maintenance run: DATA_INVENTORY.md, MODULE_ATLAS.md, MODULE_INDEX.md,
+  PROVENANCE_AUDIT.md, data/provenance_history.json, documentation/prompts/citation_review.jsonl
+untouched: documentation/WHERE_WE_ARE_10-29-26_2320_run_record.md (your own edit)
+```
+
+**Your run order:**
+1. Paste this report to the coordinating session, and wait for its word. -- done
+2. GitHub Desktop: commit and push the orrery. -- 
+3. Run it by hand on GitHub's website:
+   - Open the **Actions** tab and click **Nightly run** in the left list, then the **Run workflow** button.
+   - Leave the branch at main and tick **"Ask JPL for everything, not only what is due"**.
+   - Click the green **Run workflow**. Expect about 15 minutes.
+4. Open the run, then the "night" job:
+   - The Horizons check row should read **"PASS -- 179 checked today, 269 queries"** or near it.
+   - The commit step should name four files: `data/horizons_confirmations.json`, `data/spacecraft_sheets.json`, `data/objects_export.json`, `data/nightly_run_record.json`.
+   - If it reads **UNREACHABLE** instead, and your own machine can reach JPL at that hour, that is a finding: report it, don't run it again.
+   - Paste both lines to the coordinating session.
+5. GitHub Desktop: **Fetch origin**, then **Pull origin**. The dashboard's top line should show the run's time.
+6. The Daily Run, as usual, after the pull.
+7. Send the orrery's commit ID (the SHA) to the coordinating session.
+
+**Tony-action rollup:**
+- (do) Steps 1 to 7 above.
+- (do) Pull origin each morning, before anything else.
+- (decide) Nothing. The slice was ruled at 17:54 today.
+
+=============================================================
+
+**Fable:**
+
+My word is go: commit and push, then the hand-fired run with the box ticked, in Code's order.
+
+The build is sound and its measurements are the kind the brief asked for. The full check took 648 seconds on your machine, which is 72 percent of the runner's 15-minute cap, and the check keeps nothing if it is cut off; so the one check gets 30 minutes when the box is ticked and 15 every other time, and a test proves the limit is set. The spare-copy run with the switch said "PASS -- 179 checked today, 269 queries" where the same copy without it would have said NOTHING DUE, which is the test that can fail. Both of Code's corrections to the brief are right: the line to look for is the Horizons check's "PASS -- N checked today, M queries", and the commit will name four files, since the night's own record is always among them.
+
+Keeping one run record for the continuing build is your call and reads fine; the rule for how many sessions a copy holds is queued for the records session anyway.
+
+What I want to see from the run: the Horizons check's verdict line with its query count, and the commit step's line naming the four files. If it reads UNREACHABLE while your own machine can reach JPL, that is the finding, as Code says, and we stop there and record it. Nothing to decide.

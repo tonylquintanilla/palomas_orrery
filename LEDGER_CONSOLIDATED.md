@@ -2502,7 +2502,61 @@ L-489.
 - **No skill bumped:** no sentence in a skill would make a following
   session do something wrong today (ledger-and-session-records, A
   Wrong Sentence in a Skill); the three above are carried.
-**Gap (replaces the one below, 2026-10-30):** the orrery half waits on
+- **2026-10-30, 22:39 UTC, the first run on GitHub** (commit 00c5576,
+  by github-actions[bot]; its log
+  https://github.com/tonylquintanilla/palomas_orrery/actions/runs/41139306173,
+  as `data/nightly_run_record.json` names it): clean, committing only
+  that record. Verification 2 is settled by it: the Period fetch suite
+  and Orbit cache, which import osculating_cache_manager and with it
+  tkinter, passed on GitHub's computer. JPL was asked nothing ("NOTHING
+  DUE -- 90 entries and 26 sheets current, no query asked"), so
+  verification 5 stayed open. Tony's ruling, 2026-10-30, 17:54: "yes,
+  let's prove this part of the workflow now"
+  (`documentation/COORD_L485_ask_everything_brief_20261030.md`).
+- **2026-10-30, "ask JPL for everything" built** (Claude Code session,
+  Claude Opus 5.5, built on orrery b27ce8c8 with the gallery at b55109f2
+  read only). Files: `orrery_maintenance_run.py`, `--night
+  --ask-everything` (ASK_EVERYTHING, ASK_EVERYTHING_ARGS,
+  ASK_EVERYTHING_SECONDS; night_rows(ask_everything); run_tool() takes a
+  row's own limit); without --night the switch runs nothing and says so.
+  `.github/workflows/nightly.yml`, a tick box on the Run workflow form,
+  "Ask JPL for everything, not only what is due" (type boolean, default
+  false); the switch is passed only when the run was started by hand AND
+  the box is ticked, since GitHub's pages do not say what the box reads
+  on a scheduled run. `test_maintenance_report.py`, two cases and three
+  planted faults, each caught by name: ASK EVERYTHING DROPPED, ASK
+  EVERYTHING ALWAYS ON, ASK EVERYTHING CUT SHORT.
+- **The measured time.** `horizons_check.py --all` on Tony's machine,
+  2026-10-30, in a spare clone of b27ce8c8: 648 seconds, 179 due, 269
+  queries, every one agreeing ("HORIZONS CHECK: PASS -- 179 checked
+  today, 269 queries"). That is 72 per cent of the runner's 900-second
+  limit, and the check writes its two records only at its end
+  (`_write_if_changed` after the loop), so a run cut off keeps nothing.
+  So the switch also gives that row 1800 seconds; the rest of the night
+  keeps 900. Chosen over saving as it goes because it changes the runner
+  only, not the check or its suite.
+- **Run with the switch, in the same spare clone with this session's
+  three files in it** (hidden from git there, so the gate judged the
+  data alone): "Horizons check runs with --all: every entry, period and
+  sheet asked tonight (up to 30 minutes)"; the Horizons check "PASS --
+  179 checked today, 269 queries" in 652 seconds; "NIGHT RUN: CLEAN --
+  14 rows run, 32 skipped, 0 reported", 800 seconds in all. Without the
+  switch that night would have read NOTHING DUE, the clone having been
+  confirmed an hour before, so the PASS is the switch's.
+- **A correction to the brief.** Its section 5 told Tony to look for a
+  Horizons check verdict beginning "Asked JPL for:". That phrase is the
+  Path plan's ("Asked JPL for: nothing." on the first run); the
+  Horizons check prints "PASS -- N checked today, M queries", and the
+  run order Tony was given says so.
+**Gap (replaces the one below, 2026-10-30, evening):** verification 5
+waits on Tony's push and a run by hand with the box ticked: its
+Horizons check line, "PASS -- 179 checked today" or near it, closes
+verification 5 here, quoted; UNREACHABLE by name while Tony's machine
+reaches JPL is the finding instead, for this item and L-490, not
+retried around. Then a week of mornings reading the log (P4). The
+gallery half is next, with the four small website items of
+`HANDOFF_coordination_20261029_30.md`, section 4.
+**Gap (superseded above, 2026-10-30):** the orrery half waits on
 Tony: the GitHub setting, the push, and the first run by hand, its log
 read to the end -- JPL reached from GitHub's computers, the tkinter
 import, the commit or a truthful "nothing committed", the keep-alive's

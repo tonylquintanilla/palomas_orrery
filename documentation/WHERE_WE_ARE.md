@@ -1,27 +1,26 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 30, 2026: the orrery session (L-485 (a nightly run), the orrery half).
-- Written at orrery 1e454a8b and gallery b55109f2, plus uncommitted edits.
+Last updated: October 30, 2026: the orrery session (L-485 (a nightly run), "ask JPL for everything").
+- Written at orrery b27ce8c8 and gallery b55109f2, plus uncommitted edits.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The orrery has a nightly run on GitHub's computers. It starts
->   once you push it: 07:17 UTC, the 30-day JPL checks and exports.
-> - A clean night saves only those data files to GitHub; a red night
->   saves nothing, and its log on GitHub says why.
-> - JPL out for a night is reported, not red, until a check is 30
->   days old. The dashboard's top line shows the last clean night.
+> - The nightly run's "Run workflow" form has a tick box: "Ask JPL for
+>   everything, not only what is due". Ticked, the night asks JPL about
+>   every object, period and spacecraft sheet, so we see GitHub's
+>   computers reach JPL now, not some night in the coming weeks.
+> - That takes about 11 minutes on your machine, so that one check gets
+>   up to 30. The nightly schedule never ticks the box.
 >
-> **Do next:** *the GitHub setting; commit and push; the first run by
-> hand; then Pull origin every morning.*
+> **Do next:** *commit and push; then Run workflow with the box
+> ticked, and paste its Horizons check line to the coordinating session.*
 >
 > **Needs you now:**
-> - *(do) Pull origin each morning, before anything else, once the
->   nightly run is on.*
-> - *(do) the GitHub setting, commit and push, the first run by hand:
->   the session's report gives the clicks.*
+> - *(do) Pull origin each morning, before anything else.*
+> - *(do) commit and push, then the run with the box ticked: the
+>   session's report gives the clicks.*
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
@@ -35,8 +34,8 @@ Oct 27's order, changed Oct 29 (`DESIGN_L314_solar_wind_rulings_20261029.md`).
  5d.   [NOW]   *The orrery's clock (L-504 (the orrery's clock)): the
                data path done Oct 29; Earth System, stamps, tools next.*
  11b.  [NOW]   *The nightly run (L-485 (a nightly run)): the orrery
-               half built Oct 30, waiting on its first run; the
-               gallery half next.*  << moved this session
+               half's first run clean Oct 30; the run that asks JPL
+               everything next, then the gallery half.*  << moved this session
  5c.   [next]  L-503 (the belt's cloud) closes when the website
                prints its kilometres (the next gallery session).
   5.   [beside] Earth's list (L-413 (Earth's list)): talks 3 to 6 from
@@ -85,7 +84,7 @@ Waiting behind other work; a line leaves when picked up.
 - L-490 (the legacy list): who besides you and Paloma holds the accounts.
 - L-499 (kinds of session): the protocol's Mode 7 text (Oct 27).
 
-## Signals  **>> UPDATED THIS SESSION**
+## Signals
 
 Read from files when this page was written, not typed from memory.
 - Last cache build: 20261030T003718Z, ok, no retry (the swap log's last
@@ -94,7 +93,7 @@ Read from files when this page was written, not typed from memory.
   run). Whole tree: 275: orrery 111, Earth System 149, stars 13, utilities 2.
 - This page's date and the ledger's newest stamp: both Oct 30. Agree.
 
-## Waiting on you  **>> UPDATED THIS SESSION**
+## Waiting on you
 
 Decisions, one at a time:
 - Nothing waiting.
@@ -117,8 +116,9 @@ Not urgent, in your order:
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
 - Today: L-485 (the nightly run), L-490 (the legacy list: GitHub's
-  60-day pause), L-461 (pull matches push: a second cause). The brief:
-  `COORD_L485_orrery_nightly_brief_20261029.md`.
+  60-day pause), L-461 (pull matches push: a second cause). The briefs:
+  `COORD_L485_orrery_nightly_brief_20261029.md`, and
+  `COORD_L485_ask_everything_brief_20261030.md` (the tick box).
 - L-458 (report a problem): the form's words, read; an open note.
 - The door: `documentation/python_work_door/`, and L-499.
 - Talks: `DESIGN_shared_view_rulings_20261029.md` (the shared link)

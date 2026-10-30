@@ -31,6 +31,15 @@ changed file is ASCII. A clean night writes that record, which the
 dashboard reads; a red night writes nothing and names every reason in
 its last line, "NIGHT RUN: RED -- ...".
 
+    python orrery_maintenance_run.py --night --ask-everything
+
+The same night, fired by hand with the workflow's box "Ask JPL for
+everything, not only what is due" ticked: the Horizons check runs with
+--all, asking JPL about every entry, period and spacecraft sheet
+whatever their dates, and may take up to ASK_EVERYTHING_SECONDS (it saves
+only at its end). Nothing else about the night changes. Without --night
+it runs nothing and says so.
+
 WHAT IT DOES
 ------------
 Runs the GENERATORS, then the CHECKERS, and prints one summary at
@@ -282,6 +291,10 @@ names every row it skips and why, and judges the night by night_gate():
 its checkers, its tools, the allow-list and ASCII. A clean night writes
 data/nightly_run_record.json. Horizons confirmations runs with --night,
 so an unreached JPL is reported, not red, until a confirmation lapses.)
+Module updated: October 30, 2026 with Anthropic's Claude Opus 5.5 (L-485,
+"ask JPL for everything": --night --ask-everything runs the Horizons check
+with --all and a time limit of its own, ASK_EVERYTHING_SECONDS, from
+ASK_EVERYTHING_ARGS; run_tool() takes the limit.)
 """
 
 import hashlib
@@ -555,6 +568,25 @@ NIGHT_ARGS = {
                                '--night'],
 }
 
+# A night fired by hand may ask JPL about everything, not only what is
+# due (L-485, 2026-10-30): `--night --ask-everything`, which the
+# workflow passes only when Tony ticks its box on a run he starts; the
+# schedule never does. The row's arguments change and nothing else about
+# the night. The words print on the night's screen. Tony's ruling of
+# 2026-10-30, 17:54: "yes, let's prove this part of the workflow now."
+ASK_EVERYTHING = '--ask-everything'
+ASK_EVERYTHING_ARGS = {
+    'Horizons check': (['horizons_check.py', '--all'],
+                       'every entry, period and sheet asked tonight'),
+}
+# The time such a row may take, in place of TOOL_TIMEOUT_SECONDS. The
+# Horizons check writes its records only at its end, so a run cut off
+# keeps nothing. `horizons_check.py --all` took 648 seconds on Tony's
+# machine on 2026-10-30 (179 due, 269 queries, two seconds apart), 72
+# per cent of the 900; GitHub's computers may reach JPL more slowly. A
+# declared margin, under GitHub's 6-hour limit on a job.
+ASK_EVERYTHING_SECONDS = 1800
+
 # Why a row is not run at night. A row named here gets its own reason;
 # every other skipped row gets its kind's. Both print on every night run.
 NIGHT_SKIP_WHY = {
@@ -577,18 +609,34 @@ NIGHT_RECORD = 'data/nightly_run_record.json'
 NIGHT_UNREACHABLE = 'UNREACHABLE'
 
 
-def night_rows():
+def night_rows(ask_everything=False):
     """(generators, checkers, skipped) for the night, from the tables.
 
+    With ask_everything, each generator ASK_EVERYTHING_ARGS names runs
+    with its arguments there, and its row gains a fifth field, the
+    seconds it may take (ASK_EVERYTHING_SECONDS); nothing else differs.
+
     Raises ValueError naming any NIGHT_ROWS label no table carries, so a
-    renamed row cannot drop out of the night silently.
+    renamed row cannot drop out of the night silently, and any
+    ASK_EVERYTHING_ARGS label that is not a night generator, so the
+    switch cannot quietly ask nothing more.
     """
     labels = [row[0] for row in GENERATORS] + [row[0] for row in CHECKERS]
     unknown = [label for label in NIGHT_ROWS if label not in labels]
+    night_gens = [row[0] for row in GENERATORS if row[0] in NIGHT_ROWS]
+    unknown += ['%s (%s)' % (label, ASK_EVERYTHING)
+                for label in ASK_EVERYTHING_ARGS if label not in night_gens]
     if unknown:
         raise ValueError('NIGHT_ROWS names rows no table carries: %s'
                          % ', '.join(unknown))
-    gens = [row for row in GENERATORS if row[0] in NIGHT_ROWS]
+    gens = []
+    for row in GENERATORS:
+        if row[0] in NIGHT_ROWS:
+            if ask_everything and row[0] in ASK_EVERYTHING_ARGS:
+                rest = (tuple(row[2:]) + (None,))[:2]   # outputs, hint
+                row = ((row[0], ASK_EVERYTHING_ARGS[row[0]][0]) + rest
+                       + (ASK_EVERYTHING_SECONDS,))
+            gens.append(row)
     checks = []
     for row in CHECKERS:
         if row[0] in NIGHT_ROWS:
@@ -1008,7 +1056,7 @@ def verdict_from(output, hint):
     return '; '.join(parts)
 
 
-def run_tool(project_dir, argv_tail):
+def run_tool(project_dir, argv_tail, timeout=TOOL_TIMEOUT_SECONDS):
     """Run one tool with this interpreter. Returns (rc, output, seconds)."""
     started = time.time()
     try:
@@ -1018,7 +1066,7 @@ def run_tool(project_dir, argv_tail):
             stdin=subprocess.DEVNULL,
             stdout=subprocess.PIPE,
             stderr=subprocess.STDOUT,
-            timeout=TOOL_TIMEOUT_SECONDS)
+            timeout=timeout)
         # L-269, 2026-10-14: a tool's lines come back as the system wrote
         # them -- on Windows every one ends "\r\n" -- and every reader of
         # the output below expects "\n". Turned into "\n" here, once, so
@@ -1029,7 +1077,7 @@ def run_tool(project_dir, argv_tail):
         output = output.replace('\r\n', '\n')
         return completed.returncode, output, time.time() - started
     except subprocess.TimeoutExpired:
-        return (None, 'TIMEOUT after %d seconds.' % TOOL_TIMEOUT_SECONDS,
+        return (None, 'TIMEOUT after %d seconds.' % timeout,
                 time.time() - started)
     except OSError as exc:
         return None, 'could not start: %s' % exc, time.time() - started
@@ -1061,8 +1109,15 @@ def staleness_report(project_dir):
 def main(argv=None):
     argv = sys.argv[1:] if argv is None else argv
     night = '--night' in argv
+    ask_everything = ASK_EVERYTHING in argv
     project_dir = os.path.dirname(os.path.abspath(__file__))
     os.chdir(project_dir)
+    if ask_everything and not night:
+        # A switch that did nothing would read as one that worked.
+        print('%s goes with --night, and nothing ran. By day the '
+              'dashboard\'s "Horizons Check -- everything, now" asks JPL '
+              'about everything.' % ASK_EVERYTHING)
+        return 1
 
     print('=' * 70)
     if night:
@@ -1085,13 +1140,18 @@ def main(argv=None):
     generators, checkers_table, skipped = GENERATORS, CHECKERS, []
     if night:
         try:
-            generators, checkers_table, skipped = night_rows()
+            generators, checkers_table, skipped = night_rows(ask_everything)
         except ValueError as exc:
             print('NIGHT RUN: RED -- %s' % exc)
             return 1
         print('THE NIGHT SET -- %d rows run, %d skipped (each named)'
               % (len(generators) + len(checkers_table), len(skipped)))
         print('-' * 70)
+        if ask_everything:
+            for label, (args, words) in ASK_EVERYTHING_ARGS.items():
+                print('  %s runs with %s: %s (up to %d minutes)'
+                      % (label, ' '.join(args[1:]), words,
+                         ASK_EVERYTHING_SECONDS // 60))
         for label, why in skipped:
             for i, piece in enumerate(wrapped('%s -- %s' % (label, why),
                                               66)):
@@ -1111,8 +1171,11 @@ def main(argv=None):
         # (L-322 Stage D, patch D12). Read with a length guard.
         label, argv_tail, outputs = entry[0], entry[1], entry[2]
         gen_hint = entry[3] if len(entry) > 3 else None
+        # A fifth field is the row's own time limit (L-485,
+        # --ask-everything); without it, TOOL_TIMEOUT_SECONDS.
+        limit = entry[4] if len(entry) > 4 else TOOL_TIMEOUT_SECONDS
         before = dict((path, snapshot(path)) for path in outputs)
-        rc, output, seconds = run_tool(project_dir, argv_tail)
+        rc, output, seconds = run_tool(project_dir, argv_tail, limit)
         after = dict((path, snapshot(path)) for path in outputs)
         moved = [path for path in outputs
                  if before[path][1] != after[path][1]]

@@ -18,11 +18,14 @@
 # red night commits nothing and the previous data stays live. The log of
 # every run, red or clean, is kept under the repository's Actions tab.
 #
-# Fire it by hand: the Actions tab, "Nightly run", "Run workflow".
+# Fire it by hand: the Actions tab, "Nightly run", "Run workflow". Tick
+# "Ask JPL for everything, not only what is due" to have the Horizons
+# check ask about every entry, period and sheet, whatever their dates.
 #
 # Written October 30, 2026 with Anthropic's Claude Opus 5.5 (L-485, the
 # orrery half; the website's own workflow, an hour later, is the gallery
-# half).
+# half). Updated October 30, 2026 with Anthropic's Claude Opus 5.5
+# (L-485: the tick box and --ask-everything).
 
 name: Nightly run
 
@@ -36,6 +39,14 @@ on:
     # at a different time of the hour".
     - cron: '17 7 * * *'
   workflow_dispatch:
+    inputs:
+      # A tick box on the "Run workflow" form (L-485, 2026-10-30). Ticked,
+      # the night asks JPL about every entry, period and data sheet, not
+      # only what is due; the schedule never ticks it.
+      ask_everything:
+        description: 'Ask JPL for everything, not only what is due'
+        type: boolean
+        default: false
 
 permissions:
   contents: write   # commit and push the night's data files
@@ -59,8 +70,21 @@ jobs:
       - name: Install the orrery's libraries
         run: python -m pip install -r requirements.txt
 
+      # With the box ticked on a run started by hand, the night asks JPL
+      # about everything (--ask-everything); otherwise it asks only what is
+      # due. The event is tested as well as the box, so a scheduled night
+      # can never pass the switch: GitHub's pages do not say what the box
+      # reads on a scheduled run.
       - name: The night set (orrery_maintenance_run.py --night)
-        run: python orrery_maintenance_run.py --night
+        env:
+          EVENT: ${{ github.event_name }}
+          ASK_EVERYTHING: ${{ inputs.ask_everything }}
+        run: |
+          if [ "$EVENT" = "workflow_dispatch" ] && [ "$ASK_EVERYTHING" = "true" ]; then
+            python orrery_maintenance_run.py --night --ask-everything
+          else
+            python orrery_maintenance_run.py --night
+          fi
 
       - name: Commit and push the night's data files
         run: |
