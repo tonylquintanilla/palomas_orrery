@@ -726,23 +726,803 @@ untouched: documentation/WHERE_WE_ARE_10-29-26_2320_run_record.md (your own edit
 
 **Your run order:**
 1. Paste this report to the coordinating session, and wait for its word. -- done
-2. GitHub Desktop: commit and push the orrery. -- 
+2. GitHub Desktop: commit and push the orrery. -- f0409da3f4b22194f39afac4d444d6f98f50e339
 3. Run it by hand on GitHub's website:
-   - Open the **Actions** tab and click **Nightly run** in the left list, then the **Run workflow** button.
-   - Leave the branch at main and tick **"Ask JPL for everything, not only what is due"**.
-   - Click the green **Run workflow**. Expect about 15 minutes.
+   - Open the **Actions** tab and click **Nightly run** in the left list, then the **Run workflow** button. -- done 
+   - Leave the branch at main and tick **"Ask JPL for everything, not only what is due"**. -- done
+   - Click the green **Run workflow**. Expect about 15 minutes. -- done; 13 minutes
 4. Open the run, then the "night" job:
    - The Horizons check row should read **"PASS -- 179 checked today, 269 queries"** or near it.
    - The commit step should name four files: `data/horizons_confirmations.json`, `data/spacecraft_sheets.json`, `data/objects_export.json`, `data/nightly_run_record.json`.
    - If it reads **UNREACHABLE** instead, and your own machine can reach JPL at that hour, that is a finding: report it, don't run it again.
    - Paste both lines to the coordinating session.
-5. GitHub Desktop: **Fetch origin**, then **Pull origin**. The dashboard's top line should show the run's time.
-6. The Daily Run, as usual, after the pull.
+
+Run if [ "$EVENT" = "workflow_dispatch" ] && [ "$ASK_EVERYTHING" = "true" ]; then
+======================================================================
+MAINTENANCE RUN, THE NIGHT SET -- its generators, then its checkers (L-485)
+======================================================================
+  Provenance scan is current (last run 20261030T232334Z, 1 day(s) ago).
+
+THE NIGHT SET -- 14 rows run, 32 skipped (each named)
+----------------------------------------------------------------------
+  Horizons check runs with --all: every entry, period and sheet asked tonight (up to 30 minutes)
+  skipped Ledger index -- writes a document, not data the website pulls; the
+          night commits data only (R1)
+  skipped Skill manifest -- writes a document, not data the website pulls;
+          the night commits data only (R1)
+  skipped Module atlas -- writes a document, not data the website pulls; the
+          night commits data only (R1)
+  skipped Data inventory -- writes a document, not data the website pulls;
+          the night commits data only (R1)
+  skipped Exact rows report -- writes a document, not data the website
+          pulls; the night commits data only (R1)
+  skipped Document index -- writes a document, not data the website pulls;
+          the night commits data only (R1)
+  skipped Constants change -- reads a git diff of code, and at night no code
+          changes
+  skipped Constants relations -- judges code, and at night no code changes
+  skipped Derived figures -- judges code, and at night no code changes
+  skipped Skill headers -- judges code, and at night no code changes
+  skipped Exact rows by the count -- judges code, and at night no code
+          changes
+  skipped Dimensions -- judges code, and at night no code changes
+  skipped Cross-check annotations -- judges code, and at night no code
+          changes
+  skipped Citation inheritance -- judges code, and at night no code changes
+  skipped Status lines -- judges code, and at night no code changes
+  skipped Row shape -- judges code, and at night no code changes
+  skipped Scanner recognition 1d/1e -- judges code, and at night no code
+          changes
+  skipped Scanner row run (L-414) -- judges code, and at night no code
+          changes
+  skipped Reset completeness -- opens the orrery's window
+  skipped Earth pole of date -- judges code, and at night no code changes
+  skipped Hills cloud sampler (L-421) -- judges code, and at night no code
+          changes
+  skipped Position digits (L-401) -- judges code, and at night no code
+          changes
+  skipped Orbit markers (L-431, L-401) -- judges code, and at night no code
+          changes
+  skipped Domain Split -- judges code, and at night no code changes
+  skipped Maintenance report (L-269) -- judges code, and at night no code
+          changes
+  skipped Dashboard parity -- judges the dashboard's code
+  skipped Worksheet checker -- judges code, and at night no code changes
+  skipped Worksheet checker tests -- judges code, and at night no code
+          changes
+  skipped Worksheet key round trip -- judges code, and at night no code
+          changes
+  skipped Builder marker join -- judges code, and at night no code changes
+  skipped Extractor pins -- judges code, and at night no code changes
+  skipped Provenance scanner -- judges code; its push gate runs at Tony's
+          push
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Constants export             1.6s  unchanged (1 checked, not written)
+  Period fetch                 0.2s  unchanged (1 checked, not written) --
+                                     NOTHING MISSING -- 90 served objects
+                                     examined, no query asked
+  Horizons check             641.8s  rewrote data/horizons_confirmations.json,
+                                     data/spacecraft_sheets.json -- PASS -- 179
+                                     checked today, 269 queries
+  Path plan                    0.2s  unchanged (1 checked, not written) -- 26
+                                     paths, events atlas_2024_g3 1, atlas_3i 1,
+                                     bepicolombo 35, borisov_2025_v1 1,
+                                     borisov_2i 1, c2025_k1 1, c2025_k1_b 1,
+                                     c2025_k1_c 1, c2025_k1_d 1, europa_clipper
+                                     5, juice 10, juno 4, lucy 7, mcnaught 1,
+                                     new_horizons 2, osiris_apex 13, oumuamua 1,
+                                     panstarrs_2025_r3 1, parker_solar_probe 49,
+                                     psyche_spacecraft 2, solar_orbiter 31,
+                                     tsuchinshan_atlas 1, voyager_1 2, voyager_2
+                                     5, west 1, wierzchos 1. Asked JPL for:
+                                     nothing.
+  Objects export               0.2s  rewrote data/objects_export.json
+  Drawings export              1.7s  unchanged (8 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants export check       2.9s  Export matches the store: sha256
+                                     0c1e4bbe865a on both sides; 228 rows
+                                     re-read, 57 not exported, 45 tokens; 830
+                                     conversions re-computed, 12 of 12 worked
+                                     cases hold; 228 citations worked out again,
+                                     8 of 8 worked cases hold.
+  Objects export check         0.2s  pass
+  Horizons confirmations       0.2s  pass -- 90 of 90 entries and 63 periods
+                                     confirmed, 26 sheets read, within 30 days
+  Horizons check suite         0.2s  pass -- 70 checks, every planted fault
+                                     caught by name
+  Period fetch suite           1.7s  pass -- 39 checks, every planted fault
+                                     caught (22 planted, 8 of them for Earth's
+                                     period, L-445, 2 for Pluto's, L-443)
+  Path plan suite              2.2s  27 of 27 checks passed
+  Orbit cache                  1.2s  All 12 orbit cache tests passed: cache
+                                     loads, old formats convert, corrupted
+                                     entries are dropped; the clock reads UTC and
+                                     both forms of the fetched stamp read back;
+                                     nothing left behind.
+  Drawings export check       57.6s  PASS -- 22 of 22 planted faults caught;
+                                     hills_cloud 3600 dots, plane tilted 31.0
+                                     deg, sha256 4d3e85616645; van_allen_belts
+                                     3200 dots, no plane recorded, sha256
+                                     75274e84f840; earth_exosphere 1500 dots, no
+                                     plane recorded, sha256 6112639fb2cd;
+                                     sun_corona 2500 dots, no plane recorded,
+                                     sha256 e2b57ccbc8a4; zodiacal_dust 3000
+                                     dots, no plane recorded, sha256
+                                     995f13a056e8; outer_oort_cloud 2736 dots, no
+                                     plane recorded, sha256 2f7ab88ee113;
+                                     galactic_tide 5000 dots, no plane recorded,
+                                     sha256 950a7511f0b5; main_belt 6000 dots, no
+                                     plane recorded, sha256 712caffec391
+
+======================================================================
+  8 of 8 gating checkers passed -- 711.9s total
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2329 file(s) examined, 3 written, 1 created, 0 removed, 0 rewritten identically
+    written   data/horizons_confirmations.json
+    written   data/objects_export.json
+    written   data/spacecraft_sheets.json
+    created   data/horizons_check_last_run.json
+    13 file(s) over 2 MB compared by size and mtime only
+
+======================================================================
+  wrote data/nightly_run_record.json, the last clean run
+  allowed files changed: data/horizons_confirmations.json, data/objects_export.json, data/spacecraft_sheets.json
+NIGHT RUN: CLEAN -- 14 rows run, 32 skipped, 0 reported
+======================================================================
+
+5. GitHub Desktop: **Fetch origin**, then **Pull origin**. The dashboard's top line should show the run's time. -- just pull origin. the only item in the commit list is this run record, showing this exact diff. 
+6. The Daily Run, as usual, after the pull. -- where is this github workflow being documented? how does it differ from today's manual method? 
+
+======================================================================
+  DAILY RUN -- Friday October 30, 2026  20:10
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io
+======================================================================
+Daily Run steps, from C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io:
+  1. Guest book updater                 tools\guestbook_updater.py  found
+  2. Pulls from the orrery              gallery_maintenance_run.py  found
+  3. Cache builder                      tools\gallery_cache_builder.py  found
+  4. Gallery maintenance run, offline   gallery_maintenance_run.py  found
+  pull-match fixtures: 5 of 5 cases right; planted faults caught 2 of 2
+=== DAILY RUN: all 4 step scripts found; the pull-match check passed 7 of 7 fixture checks (L-461)
+Last cache build: 2026-10-30 00:40 UTC, ok, 1 day ago.
+
+======================================================================
+  DAILY RUN step 1 of 4: Guest book updater
+======================================================================
+======================================================================
+  guest book updater -- C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io
+======================================================================
+1 entry in the guest book; 172 gallery pages a link may point at.
+
+Fetching the form's responses...
+No new messages.
+
+w write, r reply, x remove, p pin/unpin, f form address, s sheet address, q finish > q
+
+======================================================================
+  approved 0, declined 0, waiting 0, problem reports read 0; the guest book now has 1 entry
+  No change to data/guestbook.json.
+======================================================================
+
+======================================================================
+  DAILY RUN step 2 of 4: Pulls from the orrery
+======================================================================
+======================================================================
+  gallery maintenance run -- PULLS (before the cache builder)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Constants export pull     0.9s  rewrote
+                                    data/constants_export.json,
+                                    data/constants_export.sha
+  PASS Config mirror             0.2s  rewrote data/objects_config.json
+  PASS Objects export pull       0.6s  rewrote data/objects_export.json,
+                                    data/objects_export.sha
+  PASS Objects mirror            0.2s  rewrote data/objects_config.json
+  PASS Drawings pull             1.9s  rewrote
+                                    data/drawings/pulled_at.sha
+
+======================================================================
+
+=== PULLS: all 5 passed -- Constants export pull, Config mirror, Objects export pull, Objects mirror, Drawings pull
+
+Pull matches push: the orrery pulled is fb3ca2b6, the newest commit in your orrery folder.
+
+======================================================================
+  DAILY RUN step 3 of 4: Cache builder
+======================================================================
+[RECOVER] removed retained data\solar-system.prev (cleared read-only on 7 entries)
+[sweep] no sibling directories present
+[RUNS] before the copy: 118 run records in data\solar-system\raw\runs
+[RUNS] after the copy:  118 run records in data\.staging_solar-system_20261031T011052Z\raw\runs
+C:\Users\tonyq\AppData\Local\Programs\Python\Python313\Lib\site-packages\erfa\core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+C:\Users\tonyq\AppData\Local\Programs\Python\Python313\Lib\site-packages\erfa\core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+C:\Users\tonyq\AppData\Local\Programs\Python\Python313\Lib\site-packages\erfa\core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+C:\Users\tonyq\AppData\Local\Programs\Python\Python313\Lib\site-packages\erfa\core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+C:\Users\tonyq\AppData\Local\Programs\Python\Python313\Lib\site-packages\erfa\core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+C:\Users\tonyq\AppData\Local\Programs\Python\Python313\Lib\site-packages\erfa\core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+C:\Users\tonyq\AppData\Local\Programs\Python\Python313\Lib\site-packages\erfa\core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+[POLE] earth: pole of 2026-10-31 served (RA 0.63606, Dec 89.84973 deg); tilt 23.43784 deg
+[UNCERTAINTY] JPL's own position uncertainty served for 51 of 54 small bodies; not served: bennu (JPL gives no range uncertainty (R_s) for it), halley (JPL gives no range uncertainty (R_s) for it), ikeya_seki (JPL gives no range uncertainty (R_s) for it)
+[window] served window: 88.0 days either side of today, set by mercury, the shortest of 63 bodies' trusted spans
+[SWAP] the new cache is in place; every rename worked on the first try. Recorded in data/cache_swap_log.jsonl
+[warn] sun: features-only entry; no Horizons fetch
+[warn] bepicolombo: DP thin backbone 442 -> 352 points (tol=0.02 AU)
+[warn] solar_orbiter: DP thin backbone 563 -> 374 points (tol=0.02 AU)
+[warn] halley: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] ikeya_seki: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] hale_bopp: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] hyakutake: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] neowise: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] lemmon: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] halley: no position uncertainty served -- JPL gives no range uncertainty (R_s) for it
+[warn] ikeya_seki: no position uncertainty served -- JPL gives no range uncertainty (R_s) for it
+[warn] bennu: no position uncertainty served -- JPL gives no range uncertainty (R_s) for it
+[warn] shrink gate: bepicolombo, solar_orbiter fetched again by a new path plan; held out of the count (old 1505, 1201, new 1501, 1198)
+[done] run 20261031T011052Z (nightly): 95 objects
+
+----------------------------------------------------------------------
+WHAT TO DO NEXT, before you commit anything:
+
+  1. Run the gallery maintenance run, from this same folder:
+         python gallery_maintenance_run.py
+     Every gating checker should pass. Its LAST line reads the
+     swap log back and should agree with the [SWAP] line above.
+  2. In GitHub Desktop, look at the change list. A good build
+     shows changed and added files and NO pile of deletions.
+  3. Commit and push.
+  4. After the push, check what the live site serves:
+         python gallery_maintenance_run.py --live
+
+TONY-ACTION ROLLUP for this run:
+  (do)     steps 1 to 4 above, in that order.
+----------------------------------------------------------------------
+
+Run records: carried 118 of 118, plus tonight's: 20261031T011052Z.json.
+  compared C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\data\solar-system\raw\runs
+  with     C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\data\solar-system.prev\raw\runs
+
+The builder's next steps start with the maintenance run.
+The Daily Run runs it now.
+
+======================================================================
+  DAILY RUN step 4 of 4: Gallery maintenance run, offline
+======================================================================
+======================================================================
+  gallery maintenance run -- OFFLINE (before a commit)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Module atlas              2.3s  rewrote MODULE_ATLAS.md,
+                                    MODULE_INDEX.md
+  PASS Constants export pull     0.7s  no change to
+                                    data/constants_export.json,
+                                    data/constants_export.sha
+  PASS Config mirror             0.2s  no change to
+                                    data/objects_config.json
+  PASS Objects export pull       0.5s  no change to
+                                    data/objects_export.json,
+                                    data/objects_export.sha
+  PASS Objects mirror            0.2s  no change to
+                                    data/objects_config.json
+  PASS Drawings pull             1.1s  no change to
+                                    data/drawings/hills_cloud.json,
+                                    data/drawings/van_allen_belts.json,
+                                    data/drawings/earth_exosphere.json,
+                                    data/drawings/pulled_at.sha
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite      91.4s  PASS (498 checks, 0 failures)
+  PASS Pole of date              0.3s  POLE OF DATE: all 11 checks passed
+                                    (frame angle, orrery, ERFA, block
+                                    checker, and each shown able to
+                                    fail).
+  PASS Mirror suite              0.2s  All 77 mirror checks passed:
+                                    served, spelling, relabel refused
+                                    and accepted, conflict refused,
+                                    definition as exactly 1, fallback
+                                    and absent named, no-slot refused,
+                                    five shapes, formatting kept,
+                                    idempotent, report writes nothing,
+                                    uncertainty written as served,
+                                    Earth's pole served, print count
+                                    written as served, "in" written as
+                                    served and a slot served in
+                                    another unit from it, and the
+                                    citation written as served, a
+                                    website-only citation named, an
+                                    old export refused.
+  PASS Store writer suite       36.5s  All 469 store-writer checks
+                                    passed: an allow list that lets
+                                    through only a shell's words, a
+                                    belt's words and the arrival
+                                    settings, the rooms section's
+                                    included; a no-edit round trip;
+                                    one line per change; empty words
+                                    handled; a refused batch writing
+                                    nothing; awkward text; and the
+                                    shell list matching the cache
+                                    check's rule.
+  PASS Store editor suite        0.3s  All 377 store-editor checks
+                                    passed: every box the form offers
+                                    is one the writer allows; the word
+                                    list and the tick list differ by
+                                    the belts, on purpose; nothing
+                                    typed saves nothing; the save
+                                    message does not promise a visitor
+                                    sees what they cannot yet; and a
+                                    red Cache in step is explained
+                                    rather than just shown.
+  PASS Objects mirror suite      0.2s  MIRROR OBJECTS SUITE: pass
+  PASS Objects mirror check      0.1s  OBJECTS MIRROR: pass
+  PASS Config mirror check       0.1s  Every served link holds the
+                                    export's value, unit, figure count
+                                    and citation; 179 link(s)
+                                    compared, 174 citation(s) word for
+                                    word, 5 declared with none, 3 not
+                                    served; store 0c1e4bbe865a.
+  PASS Pull failures             0.5s  PULL FAILURES: all 13 checks
+                                    passed (3 pulls x 3 ways to fail,
+                                    the run after a failed pull, and 3
+                                    planted faults caught)
+  FAIL Horizons confirmations    0.1s  HORIZONS CONFIRMATIONS: FAIL --
+                                    ammonite; apophis; arrokoth;
+                                    asteroid_2023_jf;
+                                    asteroid_2024_dw;
+                                    asteroid_2024_pt5;
+                                    asteroid_2024_yr4;
+                                    asteroid_2025_pn7;
+                                    asteroid_2025_py1; atlas_2024_g3;
+                                    atlas_3i; bennu; bepicolombo;
+                                    borisov_2025_v1; borisov_2i;
+                                    c2025_k1; c2025_k1_b; c2025_k1_c;
+                                    c2025_k1_d; ceres; chariklo;
+                                    churyumov; dinkinesh;
+                                    donaldjohanson; earth; encke;
+                                    eris; eros; europa_clipper;
+                                    eurybates; goibniu; gonggong;
+                                    hale_bopp; halley; haumea; howell;
+                                    hyakutake; ikeya_seki; itokawa;
+                                    ixion; juice; juno; jupiter;
+                                    kamo_oalewa; leleakuhonua; lemmon;
+                                    leucus; lucy; lutetia; makemake;
+                                    mani; maps; mars; mcnaught;
+                                    mercury; neowise; neptune;
+                                    new_horizons; orcus; orus;
+                                    osiris_apex; oumuamua;
+                                    panstarrs_2025_r3;
+                                    parker_solar_probe; patroclus;
+                                    pluto_barycenter; polymele;
+                                    psyche; psyche_spacecraft; quaoar;
+                                    ryugu; saturn; schaumasse; sedna;
+                                    solar_orbiter; steins; sun; swan;
+                                    tempel_2; tno_2017_of201;
+                                    tno_2026_ed138; tsuchinshan_atlas;
+                                    uranus; varuna; venus; vesta;
+                                    voyager_1; voyager_2; west;
+                                    wierzchos
+  PASS Pointer join              0.1s  Every link is accounted for: 182
+                                    link(s) against orrery fb3ca2b6, 1
+                                    fallback named; read check: 66 of
+                                    66 measured rows reached carry a
+                                    read.
+  PASS Cache in step             0.1s  The served cache holds the
+                                    config's 95 object(s) and their
+                                    features exactly: 4 object(s) with
+                                    34 named shell(s), in both cache
+                                    files.
+  PASS Drawn orbit               1.8s  DRAWN ORBIT: pass -- 18 checks,
+                                    every planted fault caught
+  PASS Drawings                  0.8s  DRAWINGS: PASS -- 34 of 34 planted
+                                    faults caught; pulled at orrery
+                                    fb3ca2b6; earth_exosphere 1500
+                                    dots, round, sha256 6112639fb2cd;
+                                    galactic_tide 5000 dots, about the
+                                    galactic pole, sha256
+                                    950a7511f0b5; hills_cloud 3600
+                                    dots, tilt 31.0 deg, sha256
+                                    4d3e85616645; main_belt 6000 dots,
+                                    tilt 0.2 deg, sha256 712caffec391;
+                                    outer_oort_cloud 2736 dots,
+                                    between its edges, sha256
+                                    2f7ab88ee113; sun_corona 2500
+                                    dots, round, sha256 e2b57ccbc8a4;
+                                    van_allen_belts 3200 dots, tilt
+                                    0.4 deg, sha256 75274e84f840;
+                                    zodiacal_dust 3000 dots, tilt 2.8
+                                    deg, sha256 995f13a056e8
+  PASS Collapsed features        0.1s  32 stored as themselves, 16
+                                    collapsed, 0 unclassified.
+  PASS Feature renderers         0.2s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.1s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.3s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.2s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.2s  === ALL CHECKS PASSED ===
+  PASS Typed facts               0.2s  TYPED FACTS: PASS -- 0 typed facts
+                                    in the Sun and Earth rooms; 17
+                                    number line(s), 28 of 28 allowed
+                                    sentence(s) seen, 0 held open
+                                    (L-451); 26 word field(s) masked.
+  PASS Typed numbers             0.3s  TYPED NUMBERS: PASS -- 0 typed
+                                    numbers in the Sun and Earth
+                                    rooms' served words; 315 number(s)
+                                    masked, 8 held.
+  PASS Arrival                   0.3s  Arrival: both rooms open on the
+                                    right things; every shell trace
+                                    carries its key; the fallback with
+                                    no arrival block is unchanged.
+  PASS Display figures           0.2s  === PASS: 61 hover(s) and 312
+                                    number(s) examined; 14 graded, 7
+                                    graded by line, 47 held to the
+                                    fixture ===
+  PASS Solar System figures      0.2s  === PASS: 8 worked cases, 64
+                                    drawer rows matched to their
+                                    accuracy rows, 63 served
+                                    distances; Uranus, Neptune and
+                                    Pluto print to JPL's ten-thousands
+                                    place; 6 period cases and 63
+                                    served periods printed as the
+                                    orrery printed them; 5 orbit-line
+                                    cases and 63 served orbit lines; 3
+                                    path cases and 26 served paths,
+                                    spacecraft and comets ===
+  PASS Far lines                 0.1s  === PASS: far lines are cut to the
+                                    view's box ===
+  PASS Direction arrows          0.1s  === PASS: the arrows point the way
+                                    the points run, sit ahead of the
+                                    body, stay in the view, and the
+                                    page places them ===
+  PASS Solar System drawer       0.1s  === PASS: the Sun is never ticked,
+                                    every row and group is listed, the
+                                    handle names the last body ticked,
+                                    nothing ticks many bodies at once
+                                    but a spacecraft with its
+                                    companions, rooms are offered only
+                                    where they exist, groups fold and
+                                    reset their bodies, the count line
+                                    counts ticked bodies outside the
+                                    view, a search finds a body by any
+                                    of its names and a group by its
+                                    label or words, and the page asks
+                                    this file ===
+  PASS Source list               0.2s  === PASS: the i panel's sources
+                                    are a list, every address a link,
+                                    and its words are one sentence to
+                                    a bullet ===
+  PASS Drawer order              0.2s  === DRAWER ORDER: both rooms list
+                                    their shells where each begins;
+                                    self-test red twice
+  PASS Drawn ends                0.3s  === DRAWN ENDS: every drawing
+                                    starts and stops on a served row
+                                    or a held end; self-test red three
+                                    times
+  PASS Label words               0.2s  === LABEL WORDS: all 34 shell rows
+                                    in both rooms open their own
+                                    feature's words; 5 stored
+                                    drawings' crosses stand off the
+                                    axis lines; self-test red twice
+  PASS Guest book                0.1s  === GUEST BOOK: all 8 checks
+                                    passed
+  PASS Guest book updater        0.3s  === GUEST BOOK UPDATER: all 49
+                                    checks passed (8 scripted runs,
+                                    self-test first)
+  PASS Daily run steps           0.2s  === DAILY RUN: all 4 step scripts
+                                    found; the pull-match check passed
+                                    7 of 7 fixture checks (L-461)
+  PASS Artifact 1 assembler      0.2s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.1s  RESULT: 3 directories in data/ the
+                                    builder did not make: solar-system
+                                    (1), solar-system (2),
+                                    solar-system (3). Check whether
+                                    they belong there; the newer
+                                    .gitignore rules keep the known
+                                    conflict-copy shapes out of git
+                                    but do not remove anything.
+
+======================================================================
+  1 of 36 gating checkers FAILED
+  Horizons confirmations
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: 3 directories in data/ the
+  last swap 2026-10-31T01:14:37.820841+00:00: succeeded first time
+======================================================================
+
+----------------------------------------------------------------------
+Horizons confirmations -- HORIZONS CONFIRMATIONS: FAIL -- ammonite; apophis; arrokoth; asteroid_2023_jf; asteroid_2024_dw; asteroid_2024_pt5; asteroid_2024_yr4; asteroid_2025_pn7; asteroid_2025_py1; atlas_2024_g3; atlas_3i; bennu; bepicolombo; borisov_2025_v1; borisov_2i; c2025_k1; c2025_k1_b; c2025_k1_c; c2025_k1_d; ceres; chariklo; churyumov; dinkinesh; donaldjohanson; earth; encke; eris; eros; europa_clipper; eurybates; goibniu; gonggong; hale_bopp; halley; haumea; howell; hyakutake; ikeya_seki; itokawa; ixion; juice; juno; jupiter; kamo_oalewa; leleakuhonua; lemmon; leucus; lucy; lutetia; makemake; mani; maps; mars; mcnaught; mercury; neowise; neptune; new_horizons; orcus; orus; osiris_apex; oumuamua; panstarrs_2025_r3; parker_solar_probe; patroclus; pluto_barycenter; polymele; psyche; psyche_spacecraft; quaoar; ryugu; saturn; schaumasse; sedna; solar_orbiter; steins; sun; swan; tempel_2; tno_2017_of201; tno_2026_ed138; tsuchinshan_atlas; uranus; varuna; venus; vesta; voyager_1; voyager_2; west; wierzchos
+----------------------------------------------------------------------
+Self-test: an export 31 days old, a period never confirmed, a changed name and a schema 1 export each failed.
+Read data/objects_export.json (90 entries, every 30 days), 2026-10-30.
+  sun                FAIL -- identity confirmed on 2026-10-31, which is after today
+  mercury            FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  venus              FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  earth              FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  mars               FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  jupiter            FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  eurybates          FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  patroclus          FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  polymele           FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  leucus             FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  orus               FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  saturn             FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  uranus             FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  neptune            FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  chariklo           FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  pluto_barycenter   FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  ceres              FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  haumea             FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  eris               FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  gonggong           FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  makemake           FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  mani               FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  orcus              FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  quaoar             FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  sedna              FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  leleakuhonua       FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  tno_2017_of201     FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  tno_2026_ed138     FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  asteroid_2025_pn7  FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  asteroid_2024_pt5  FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  asteroid_2025_py1  FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  asteroid_2023_jf   FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  asteroid_2024_dw   FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  asteroid_2024_yr4  FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  kamo_oalewa        FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  psyche             FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  apophis            FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  bennu              FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  eros               FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  dinkinesh          FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  itokawa            FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  lutetia            FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  ryugu              FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  steins             FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  donaldjohanson     FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  vesta              FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  arrokoth           FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  ixion              FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  goibniu            FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  varuna             FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  ammonite           FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  tempel_2           FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  schaumasse         FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  howell             FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  churyumov          FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  hale_bopp          FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  halley             FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  encke              FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  hyakutake          FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  lemmon             FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  ikeya_seki         FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  neowise            FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  wierzchos          FAIL -- identity confirmed on 2026-10-31, which is after today
+  swan               FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  maps               FAIL -- identity confirmed on 2026-10-31, which is after today; period confirmed on 2026-10-31, which is after today
+  west               FAIL -- identity confirmed on 2026-10-31, which is after today
+  mcnaught           FAIL -- identity confirmed on 2026-10-31, which is after today
+  tsuchinshan_atlas  FAIL -- identity confirmed on 2026-10-31, which is after today
+  atlas_2024_g3      FAIL -- identity confirmed on 2026-10-31, which is after today
+  c2025_k1           FAIL -- identity confirmed on 2026-10-31, which is after today
+  c2025_k1_b         FAIL -- identity confirmed on 2026-10-31, which is after today
+  c2025_k1_c         FAIL -- identity confirmed on 2026-10-31, which is after today
+  c2025_k1_d         FAIL -- identity confirmed on 2026-10-31, which is after today
+  panstarrs_2025_r3  FAIL -- identity confirmed on 2026-10-31, which is after today
+  borisov_2025_v1    FAIL -- identity confirmed on 2026-10-31, which is after today
+  oumuamua           FAIL -- identity confirmed on 2026-10-31, which is after today
+  borisov_2i         FAIL -- identity confirmed on 2026-10-31, which is after today
+  atlas_3i           FAIL -- identity confirmed on 2026-10-31, which is after today
+  voyager_1          FAIL -- identity confirmed on 2026-10-31, which is after today
+  voyager_2          FAIL -- identity confirmed on 2026-10-31, which is after today
+  new_horizons       FAIL -- identity confirmed on 2026-10-31, which is after today
+  juno               FAIL -- identity confirmed on 2026-10-31, which is after today
+  osiris_apex        FAIL -- identity confirmed on 2026-10-31, which is after today
+  parker_solar_probe FAIL -- identity confirmed on 2026-10-31, which is after today
+  lucy               FAIL -- identity confirmed on 2026-10-31, which is after today
+  juice              FAIL -- identity confirmed on 2026-10-31, which is after today
+  psyche_spacecraft  FAIL -- identity confirmed on 2026-10-31, which is after today
+  europa_clipper     FAIL -- identity confirmed on 2026-10-31, which is after today
+  bepicolombo        FAIL -- identity confirmed on 2026-10-31, which is after today
+  solar_orbiter      FAIL -- identity confirmed on 2026-10-31, which is after today
+Served, but not in the check yet (no key in the orrery's list): moon, io, titan, pluto, charon.
+FAILURES (153):
+  - sun: identity confirmed on 2026-10-31, which is after today
+  - mercury: identity confirmed on 2026-10-31, which is after today
+  - mercury: period confirmed on 2026-10-31, which is after today
+  - venus: identity confirmed on 2026-10-31, which is after today
+  - venus: period confirmed on 2026-10-31, which is after today
+  - earth: identity confirmed on 2026-10-31, which is after today
+  - earth: period confirmed on 2026-10-31, which is after today
+  - mars: identity confirmed on 2026-10-31, which is after today
+  - mars: period confirmed on 2026-10-31, which is after today
+  - jupiter: identity confirmed on 2026-10-31, which is after today
+  - jupiter: period confirmed on 2026-10-31, which is after today
+  - eurybates: identity confirmed on 2026-10-31, which is after today
+  - eurybates: period confirmed on 2026-10-31, which is after today
+  - patroclus: identity confirmed on 2026-10-31, which is after today
+  - patroclus: period confirmed on 2026-10-31, which is after today
+  - polymele: identity confirmed on 2026-10-31, which is after today
+  - polymele: period confirmed on 2026-10-31, which is after today
+  - leucus: identity confirmed on 2026-10-31, which is after today
+  - leucus: period confirmed on 2026-10-31, which is after today
+  - orus: identity confirmed on 2026-10-31, which is after today
+  - orus: period confirmed on 2026-10-31, which is after today
+  - saturn: identity confirmed on 2026-10-31, which is after today
+  - saturn: period confirmed on 2026-10-31, which is after today
+  - uranus: identity confirmed on 2026-10-31, which is after today
+  - uranus: period confirmed on 2026-10-31, which is after today
+  - neptune: identity confirmed on 2026-10-31, which is after today
+  - neptune: period confirmed on 2026-10-31, which is after today
+  - chariklo: identity confirmed on 2026-10-31, which is after today
+  - chariklo: period confirmed on 2026-10-31, which is after today
+  - pluto_barycenter: identity confirmed on 2026-10-31, which is after today
+  - pluto_barycenter: period confirmed on 2026-10-31, which is after today
+  - ceres: identity confirmed on 2026-10-31, which is after today
+  - ceres: period confirmed on 2026-10-31, which is after today
+  - haumea: identity confirmed on 2026-10-31, which is after today
+  - haumea: period confirmed on 2026-10-31, which is after today
+  - eris: identity confirmed on 2026-10-31, which is after today
+  - eris: period confirmed on 2026-10-31, which is after today
+  - gonggong: identity confirmed on 2026-10-31, which is after today
+  - gonggong: period confirmed on 2026-10-31, which is after today
+  - makemake: identity confirmed on 2026-10-31, which is after today
+  - makemake: period confirmed on 2026-10-31, which is after today
+  - mani: identity confirmed on 2026-10-31, which is after today
+  - mani: period confirmed on 2026-10-31, which is after today
+  - orcus: identity confirmed on 2026-10-31, which is after today
+  - orcus: period confirmed on 2026-10-31, which is after today
+  - quaoar: identity confirmed on 2026-10-31, which is after today
+  - quaoar: period confirmed on 2026-10-31, which is after today
+  - sedna: identity confirmed on 2026-10-31, which is after today
+  - sedna: period confirmed on 2026-10-31, which is after today
+  - leleakuhonua: identity confirmed on 2026-10-31, which is after today
+  - leleakuhonua: period confirmed on 2026-10-31, which is after today
+  - tno_2017_of201: identity confirmed on 2026-10-31, which is after today
+  - tno_2017_of201: period confirmed on 2026-10-31, which is after today
+  - tno_2026_ed138: identity confirmed on 2026-10-31, which is after today
+  - tno_2026_ed138: period confirmed on 2026-10-31, which is after today
+  - asteroid_2025_pn7: identity confirmed on 2026-10-31, which is after today
+  - asteroid_2025_pn7: period confirmed on 2026-10-31, which is after today
+  - asteroid_2024_pt5: identity confirmed on 2026-10-31, which is after today
+  - asteroid_2024_pt5: period confirmed on 2026-10-31, which is after today
+  - asteroid_2025_py1: identity confirmed on 2026-10-31, which is after today
+  - asteroid_2025_py1: period confirmed on 2026-10-31, which is after today
+  - asteroid_2023_jf: identity confirmed on 2026-10-31, which is after today
+  - asteroid_2023_jf: period confirmed on 2026-10-31, which is after today
+  - asteroid_2024_dw: identity confirmed on 2026-10-31, which is after today
+  - asteroid_2024_dw: period confirmed on 2026-10-31, which is after today
+  - asteroid_2024_yr4: identity confirmed on 2026-10-31, which is after today
+  - asteroid_2024_yr4: period confirmed on 2026-10-31, which is after today
+  - kamo_oalewa: identity confirmed on 2026-10-31, which is after today
+  - kamo_oalewa: period confirmed on 2026-10-31, which is after today
+  - psyche: identity confirmed on 2026-10-31, which is after today
+  - psyche: period confirmed on 2026-10-31, which is after today
+  - apophis: identity confirmed on 2026-10-31, which is after today
+  - apophis: period confirmed on 2026-10-31, which is after today
+  - bennu: identity confirmed on 2026-10-31, which is after today
+  - bennu: period confirmed on 2026-10-31, which is after today
+  - eros: identity confirmed on 2026-10-31, which is after today
+  - eros: period confirmed on 2026-10-31, which is after today
+  - dinkinesh: identity confirmed on 2026-10-31, which is after today
+  - dinkinesh: period confirmed on 2026-10-31, which is after today
+  - itokawa: identity confirmed on 2026-10-31, which is after today
+  - itokawa: period confirmed on 2026-10-31, which is after today
+  - lutetia: identity confirmed on 2026-10-31, which is after today
+  - lutetia: period confirmed on 2026-10-31, which is after today
+  - ryugu: identity confirmed on 2026-10-31, which is after today
+  - ryugu: period confirmed on 2026-10-31, which is after today
+  - steins: identity confirmed on 2026-10-31, which is after today
+  - steins: period confirmed on 2026-10-31, which is after today
+  - donaldjohanson: identity confirmed on 2026-10-31, which is after today
+  - donaldjohanson: period confirmed on 2026-10-31, which is after today
+  - vesta: identity confirmed on 2026-10-31, which is after today
+  - vesta: period confirmed on 2026-10-31, which is after today
+  - arrokoth: identity confirmed on 2026-10-31, which is after today
+  - arrokoth: period confirmed on 2026-10-31, which is after today
+  - ixion: identity confirmed on 2026-10-31, which is after today
+  - ixion: period confirmed on 2026-10-31, which is after today
+  - goibniu: identity confirmed on 2026-10-31, which is after today
+  - goibniu: period confirmed on 2026-10-31, which is after today
+  - varuna: identity confirmed on 2026-10-31, which is after today
+  - varuna: period confirmed on 2026-10-31, which is after today
+  - ammonite: identity confirmed on 2026-10-31, which is after today
+  - ammonite: period confirmed on 2026-10-31, which is after today
+  - tempel_2: identity confirmed on 2026-10-31, which is after today
+  - tempel_2: period confirmed on 2026-10-31, which is after today
+  - schaumasse: identity confirmed on 2026-10-31, which is after today
+  - schaumasse: period confirmed on 2026-10-31, which is after today
+  - howell: identity confirmed on 2026-10-31, which is after today
+  - howell: period confirmed on 2026-10-31, which is after today
+  - churyumov: identity confirmed on 2026-10-31, which is after today
+  - churyumov: period confirmed on 2026-10-31, which is after today
+  - hale_bopp: identity confirmed on 2026-10-31, which is after today
+  - hale_bopp: period confirmed on 2026-10-31, which is after today
+  - halley: identity confirmed on 2026-10-31, which is after today
+  - halley: period confirmed on 2026-10-31, which is after today
+  - encke: identity confirmed on 2026-10-31, which is after today
+  - encke: period confirmed on 2026-10-31, which is after today
+  - hyakutake: identity confirmed on 2026-10-31, which is after today
+  - hyakutake: period confirmed on 2026-10-31, which is after today
+  - lemmon: identity confirmed on 2026-10-31, which is after today
+  - lemmon: period confirmed on 2026-10-31, which is after today
+  - ikeya_seki: identity confirmed on 2026-10-31, which is after today
+  - ikeya_seki: period confirmed on 2026-10-31, which is after today
+  - neowise: identity confirmed on 2026-10-31, which is after today
+  - neowise: period confirmed on 2026-10-31, which is after today
+  - wierzchos: identity confirmed on 2026-10-31, which is after today
+  - swan: identity confirmed on 2026-10-31, which is after today
+  - swan: period confirmed on 2026-10-31, which is after today
+  - maps: identity confirmed on 2026-10-31, which is after today
+  - maps: period confirmed on 2026-10-31, which is after today
+  - west: identity confirmed on 2026-10-31, which is after today
+  - mcnaught: identity confirmed on 2026-10-31, which is after today
+  - tsuchinshan_atlas: identity confirmed on 2026-10-31, which is after today
+  - atlas_2024_g3: identity confirmed on 2026-10-31, which is after today
+  - c2025_k1: identity confirmed on 2026-10-31, which is after today
+  - c2025_k1_b: identity confirmed on 2026-10-31, which is after today
+  - c2025_k1_c: identity confirmed on 2026-10-31, which is after today
+  - c2025_k1_d: identity confirmed on 2026-10-31, which is after today
+  - panstarrs_2025_r3: identity confirmed on 2026-10-31, which is after today
+  - borisov_2025_v1: identity confirmed on 2026-10-31, which is after today
+  - oumuamua: identity confirmed on 2026-10-31, which is after today
+  - borisov_2i: identity confirmed on 2026-10-31, which is after today
+  - atlas_3i: identity confirmed on 2026-10-31, which is after today
+  - voyager_1: identity confirmed on 2026-10-31, which is after today
+  - voyager_2: identity confirmed on 2026-10-31, which is after today
+  - new_horizons: identity confirmed on 2026-10-31, which is after today
+  - juno: identity confirmed on 2026-10-31, which is after today
+  - osiris_apex: identity confirmed on 2026-10-31, which is after today
+  - parker_solar_probe: identity confirmed on 2026-10-31, which is after today
+  - lucy: identity confirmed on 2026-10-31, which is after today
+  - juice: identity confirmed on 2026-10-31, which is after today
+  - psyche_spacecraft: identity confirmed on 2026-10-31, which is after today
+  - europa_clipper: identity confirmed on 2026-10-31, which is after today
+  - bepicolombo: identity confirmed on 2026-10-31, which is after today
+  - solar_orbiter: identity confirmed on 2026-10-31, which is after today
+Run the orrery's maintenance run on a machine that reaches JPL, push, then pull here (the maintenance run's Objects export pull).
+HORIZONS CONFIRMATIONS: FAIL -- ammonite; apophis; arrokoth; asteroid_2023_jf; asteroid_2024_dw; asteroid_2024_pt5; asteroid_2024_yr4; asteroid_2025_pn7; asteroid_2025_py1; atlas_2024_g3; atlas_3i; bennu; bepicolombo; borisov_2025_v1; borisov_2i; c2025_k1; c2025_k1_b; c2025_k1_c; c2025_k1_d; ceres; chariklo; churyumov; dinkinesh; donaldjohanson; earth; encke; eris; eros; europa_clipper; eurybates; goibniu; gonggong; hale_bopp; halley; haumea; howell; hyakutake; ikeya_seki; itokawa; ixion; juice; juno; jupiter; kamo_oalewa; leleakuhonua; lemmon; leucus; lucy; lutetia; makemake; mani; maps; mars; mcnaught; mercury; neowise; neptune; new_horizons; orcus; orus; osiris_apex; oumuamua; panstarrs_2025_r3; parker_solar_probe; patroclus; pluto_barycenter; polymele; psyche; psyche_spacecraft; quaoar; ryugu; saturn; schaumasse; sedna; solar_orbiter; steins; sun; swan; tempel_2; tno_2017_of201; tno_2026_ed138; tsuchinshan_atlas; uranus; varuna; venus; vesta; voyager_1; voyager_2; west; wierzchos
+
+  After you push: python gallery_maintenance_run.py --live
+
+======================================================================
+  DAILY RUN -- summary
+======================================================================
+  Guest book updater           ok
+  Pulls from the orrery        ok
+  Pull matches push            ok
+  Cache builder                ok
+  Run records                  ok: carried 118 of 118, plus 1 new
+  Maintenance run, offline     reported a problem (exit 1)
+
+  Look at: Maintenance run, offline -- scroll up to its own report.
+  NEXT:
+    1. GitHub Desktop: look at the change list, then commit and push.
+    2. Then the dashboard's Gallery Maintenance Run -- live, AFTER a push.
+======================================================================
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
 7. Send the orrery's commit ID (the SHA) to the coordinating session.
 
 **Tony-action rollup:**
 - (do) Steps 1 to 7 above.
-- (do) Pull origin each morning, before anything else.
+- (do) Pull origin each morning, before anything else. -- so, every morning, first the pull then the daily run? so, what changed, if i am doing the daily too? 
 - (decide) Nothing. The slice was ruled at 17:54 today.
 
 =============================================================
@@ -755,4 +1535,244 @@ The build is sound and its measurements are the kind the brief asked for. The fu
 
 Keeping one run record for the continuing build is your call and reads fine; the rule for how many sessions a copy holds is queued for the records session anyway.
 
-What I want to see from the run: the Horizons check's verdict line with its query count, and the commit step's line naming the four files. If it reads UNREACHABLE while your own machine can reach JPL, that is the finding, as Code says, and we stop there and record it. Nothing to decide.
+What I want to see from the run: the Horizons check's verdict line with its query count, and the commit step's line naming the four files. If it reads UNREACHABLE while your own machine can reach JPL, that is the finding, as Code says, and we stop there and record it. Nothing to decide. 
+
+**Tony:** sending this report to Fable. Gallery not committed yet. 
+
+**Fable:**
+
+The run on GitHub passed, and the red row is not a Horizons error. Two separate things happened, and only the first is about JPL.
+
+**The test succeeded.** GitHub's computer asked JPL 269 questions over 642 seconds and every answer agreed: "PASS -- 179 checked today, 269 queries". The night committed the three refreshed files plus its record, as Code said it would. That closes the last verification from the design record: JPL answers GitHub's computers as it answers your house. I will record it on L-485 with that line quoted.
+
+**The red row is the website's date bug, already on the list.** Look at the failing lines: "identity confirmed on 2026-10-31, which is after today." The orrery now stamps its dates in UTC, and when GitHub ran at about 7:30 pm Chicago it was already October 31 in UTC. The website's confirmations check still reads your laptop's local date, October 30, and so it calls a confirmation from "tomorrow" a failure. Nothing is wrong with the data. This is the exact finding carried in the coordination handoff for the next gallery session: "The Horizons confirmations check reads the local date; read it the way the orrery's reader now does." Tonight it fired for the first time, because tonight was the first time an evening orrery run stamped a UTC date ahead of Chicago's.
+
+**What to do: nothing tonight.** The cache built and swapped cleanly before the check ran, so nothing is lost. Tomorrow morning, after the night's run and your Pull origin, run the Daily Run again. By then your laptop's date is October 31 too, the check passes, and you commit and push the gallery. The fix itself, a few lines in the website's checker, goes first in the gallery half's brief, which I write next; after that fix the hour of day cannot turn it red again.
+
+Your two questions from the record:
+
+- **Where the workflow is documented.** In four places: the workflow file itself, `.github/workflows/nightly.yml`, whose top is a plain-words account of what it does and under which of your rulings; the maintenance run's own docstring, which now describes its night switch; the ledger's L-485 (a nightly run), which carries the rulings, the build and tonight's results; and Where We Are's road line for it.
+- **How it differs from today's manual method.** It is the same maintenance run, not a second one, running on GitHub's computer at 07:17 UTC with 32 of its 46 rows skipped: the ones that judge code or open a window. It keeps the 14 rows that fetch from JPL and export for the website, and it commits only the data files those rows write. Your manual maintenance run stays what it is, the full 46 rows that you run after a session that changed code and before you push. The night does the fetching so the thirty-day checks no longer depend on you; the manual run still guards your code.
+
+Nothing to decide. Tomorrow: Actions tab, Pull origin, the Daily Run, the gallery push, and send me both SHAs.
+
+===============================================
+
+Yes, with one step first: run the gallery's maintenance run again before you commit. It is after midnight in Chicago now, so your laptop's date and the UTC stamp agree, and the check that went red at 20:10 should pass. The Daily Run's step 4 on its own is enough: the "Gallery Maintenance Run" button on the dashboard, offline, no pull or build needed. When it ends with every checker green, commit and push the gallery as usual.
+
+The cache build in your commit list is tonight's, from 01:10 UTC; it built and swapped cleanly and nothing in it is affected by the date bug, so it is good to push. Then send me the gallery's SHA, and go to bed; the orrery's first scheduled run is at 2:17 am and needs nobody.
+
+======================================================================
+  gallery maintenance run -- OFFLINE (before a commit)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Module atlas              1.7s  rewrote MODULE_ATLAS.md,
+                                    MODULE_INDEX.md
+  PASS Constants export pull     0.8s  no change to
+                                    data/constants_export.json,
+                                    data/constants_export.sha
+  PASS Config mirror             0.1s  no change to
+                                    data/objects_config.json
+  PASS Objects export pull       0.6s  no change to
+                                    data/objects_export.json,
+                                    data/objects_export.sha
+  PASS Objects mirror            0.2s  no change to
+                                    data/objects_config.json
+  PASS Drawings pull             1.9s  no change to
+                                    data/drawings/hills_cloud.json,
+                                    data/drawings/van_allen_belts.json,
+                                    data/drawings/earth_exosphere.json,
+                                    data/drawings/pulled_at.sha
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite      95.1s  PASS (498 checks, 0 failures)
+  PASS Pole of date              0.2s  POLE OF DATE: all 11 checks passed
+                                    (frame angle, orrery, ERFA, block
+                                    checker, and each shown able to
+                                    fail).
+  PASS Mirror suite              0.2s  All 77 mirror checks passed:
+                                    served, spelling, relabel refused
+                                    and accepted, conflict refused,
+                                    definition as exactly 1, fallback
+                                    and absent named, no-slot refused,
+                                    five shapes, formatting kept,
+                                    idempotent, report writes nothing,
+                                    uncertainty written as served,
+                                    Earth's pole served, print count
+                                    written as served, "in" written as
+                                    served and a slot served in
+                                    another unit from it, and the
+                                    citation written as served, a
+                                    website-only citation named, an
+                                    old export refused.
+  PASS Store writer suite       33.7s  All 469 store-writer checks
+                                    passed: an allow list that lets
+                                    through only a shell's words, a
+                                    belt's words and the arrival
+                                    settings, the rooms section's
+                                    included; a no-edit round trip;
+                                    one line per change; empty words
+                                    handled; a refused batch writing
+                                    nothing; awkward text; and the
+                                    shell list matching the cache
+                                    check's rule.
+  PASS Store editor suite        0.4s  All 377 store-editor checks
+                                    passed: every box the form offers
+                                    is one the writer allows; the word
+                                    list and the tick list differ by
+                                    the belts, on purpose; nothing
+                                    typed saves nothing; the save
+                                    message does not promise a visitor
+                                    sees what they cannot yet; and a
+                                    red Cache in step is explained
+                                    rather than just shown.
+  PASS Objects mirror suite      0.3s  MIRROR OBJECTS SUITE: pass
+  PASS Objects mirror check      0.2s  OBJECTS MIRROR: pass
+  PASS Config mirror check       0.2s  Every served link holds the
+                                    export's value, unit, figure count
+                                    and citation; 179 link(s)
+                                    compared, 174 citation(s) word for
+                                    word, 5 declared with none, 3 not
+                                    served; store 0c1e4bbe865a.
+  PASS Pull failures             0.7s  PULL FAILURES: all 13 checks
+                                    passed (3 pulls x 3 ways to fail,
+                                    the run after a failed pull, and 3
+                                    planted faults caught)
+  PASS Horizons confirmations    0.1s  HORIZONS CONFIRMATIONS: pass -- 90
+                                    of 90 confirmed, and 63 periods,
+                                    within 30 days
+  PASS Pointer join              0.2s  Every link is accounted for: 182
+                                    link(s) against orrery fb3ca2b6, 1
+                                    fallback named; read check: 66 of
+                                    66 measured rows reached carry a
+                                    read.
+  PASS Cache in step             0.2s  The served cache holds the
+                                    config's 95 object(s) and their
+                                    features exactly: 4 object(s) with
+                                    34 named shell(s), in both cache
+                                    files.
+  PASS Drawn orbit               3.2s  DRAWN ORBIT: pass -- 18 checks,
+                                    every planted fault caught
+  PASS Drawings                  1.1s  DRAWINGS: PASS -- 34 of 34 planted
+                                    faults caught; pulled at orrery
+                                    fb3ca2b6; earth_exosphere 1500
+                                    dots, round, sha256 6112639fb2cd;
+                                    galactic_tide 5000 dots, about the
+                                    galactic pole, sha256
+                                    950a7511f0b5; hills_cloud 3600
+                                    dots, tilt 31.0 deg, sha256
+                                    4d3e85616645; main_belt 6000 dots,
+                                    tilt 0.2 deg, sha256 712caffec391;
+                                    outer_oort_cloud 2736 dots,
+                                    between its edges, sha256
+                                    2f7ab88ee113; sun_corona 2500
+                                    dots, round, sha256 e2b57ccbc8a4;
+                                    van_allen_belts 3200 dots, tilt
+                                    0.4 deg, sha256 75274e84f840;
+                                    zodiacal_dust 3000 dots, tilt 2.8
+                                    deg, sha256 995f13a056e8
+  PASS Collapsed features        0.1s  32 stored as themselves, 16
+                                    collapsed, 0 unclassified.
+  PASS Feature renderers         0.2s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.2s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.4s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.3s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.2s  === ALL CHECKS PASSED ===
+  PASS Typed facts               0.3s  TYPED FACTS: PASS -- 0 typed facts
+                                    in the Sun and Earth rooms; 17
+                                    number line(s), 28 of 28 allowed
+                                    sentence(s) seen, 0 held open
+                                    (L-451); 26 word field(s) masked.
+  PASS Typed numbers             0.4s  TYPED NUMBERS: PASS -- 0 typed
+                                    numbers in the Sun and Earth
+                                    rooms' served words; 315 number(s)
+                                    masked, 8 held.
+  PASS Arrival                   0.3s  Arrival: both rooms open on the
+                                    right things; every shell trace
+                                    carries its key; the fallback with
+                                    no arrival block is unchanged.
+  PASS Display figures           0.3s  === PASS: 61 hover(s) and 312
+                                    number(s) examined; 14 graded, 7
+                                    graded by line, 47 held to the
+                                    fixture ===
+  PASS Solar System figures      0.2s  === PASS: 8 worked cases, 64
+                                    drawer rows matched to their
+                                    accuracy rows, 63 served
+                                    distances; Uranus, Neptune and
+                                    Pluto print to JPL's ten-thousands
+                                    place; 6 period cases and 63
+                                    served periods printed as the
+                                    orrery printed them; 5 orbit-line
+                                    cases and 63 served orbit lines; 3
+                                    path cases and 26 served paths,
+                                    spacecraft and comets ===
+  PASS Far lines                 0.2s  === PASS: far lines are cut to the
+                                    view's box ===
+  PASS Direction arrows          0.1s  === PASS: the arrows point the way
+                                    the points run, sit ahead of the
+                                    body, stay in the view, and the
+                                    page places them ===
+  PASS Solar System drawer       0.1s  === PASS: the Sun is never ticked,
+                                    every row and group is listed, the
+                                    handle names the last body ticked,
+                                    nothing ticks many bodies at once
+                                    but a spacecraft with its
+                                    companions, rooms are offered only
+                                    where they exist, groups fold and
+                                    reset their bodies, the count line
+                                    counts ticked bodies outside the
+                                    view, a search finds a body by any
+                                    of its names and a group by its
+                                    label or words, and the page asks
+                                    this file ===
+  PASS Source list               0.2s  === PASS: the i panel's sources
+                                    are a list, every address a link,
+                                    and its words are one sentence to
+                                    a bullet ===
+  PASS Drawer order              0.3s  === DRAWER ORDER: both rooms list
+                                    their shells where each begins;
+                                    self-test red twice
+  PASS Drawn ends                0.4s  === DRAWN ENDS: every drawing
+                                    starts and stops on a served row
+                                    or a held end; self-test red three
+                                    times
+  PASS Label words               0.3s  === LABEL WORDS: all 34 shell rows
+                                    in both rooms open their own
+                                    feature's words; 5 stored
+                                    drawings' crosses stand off the
+                                    axis lines; self-test red twice
+  PASS Guest book                0.1s  === GUEST BOOK: all 8 checks
+                                    passed
+  PASS Guest book updater        0.4s  === GUEST BOOK UPDATER: all 49
+                                    checks passed (8 scripted runs,
+                                    self-test first)
+  PASS Daily run steps           0.3s  === DAILY RUN: all 4 step scripts
+                                    found; the pull-match check passed
+                                    7 of 7 fixture checks (L-461)
+  PASS Artifact 1 assembler      0.3s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.1s  RESULT: 3 directories in data/ the
+                                    builder did not make: solar-system
+                                    (1), solar-system (2),
+                                    solar-system (3). Check whether
+                                    they belong there; the newer
+                                    .gitignore rules keep the known
+                                    conflict-copy shapes out of git
+                                    but do not remove anything.
+
+======================================================================
+  36 of 36 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: 3 directories in data/ the
+  last swap 2026-10-31T01:14:37.820841+00:00: succeeded first time
+======================================================================
+
+  After you push: python gallery_maintenance_run.py --live
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+-- db77edeedb58052074a1d456cffd46cfa6093e6f
+
