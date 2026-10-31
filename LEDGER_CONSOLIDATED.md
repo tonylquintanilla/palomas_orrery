@@ -1076,7 +1076,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-454 | A drawn device for edges that move: the magnetopause, the bow shock and their kind (orrery + gallery, design) | OPEN | -- | 2026-10-28 |
 | ! | L-456 | What a visitor reads, from Earth's Mode 5 look: body radii, sources as a list with live links, Celsius for Earth's surface and air (gallery + orrery) | OPEN | -- | 2026-10-21 |
 | ! | L-459 | A monthly run for slow checks, started by the Daily Run (gallery + orrery, maintenance) | OPEN | -- | 2026-10-30 |
-| ! | L-461 | The Daily Run confirms the orrery it pulled is the one Tony pushed (gallery, Daily Run) | OPEN | -- | 2026-10-30 |
+| ! | L-461 | The Daily Run confirms the orrery it pulled is the one Tony pushed (gallery, Daily Run) | OPEN | -- | 2026-10-31 |
 | ! | L-462 | The orrery maintenance run, a short form for small patches (orrery, maintenance) | OPEN | -- | 2026-10-26 |
 | ! | L-466 | Every drawing starts and stops where a served row says (orrery + gallery, the Sun's slice and Earth's) | OPEN | -- | 2026-10-22 |
 | ! | L-467 | The scanner credits a display line with a citation it only sits near (orrery, provenance scanner) | OPEN | -- | 2026-10-21 |
@@ -1084,19 +1084,19 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-470 | Orrery entries the website cannot serve as they stand (orrery, objects) | OPEN | -- | 2026-10-25 |
 | ! | L-476 | The orrery's whole-path plots draw by the same path plan as the website (orrery, spacecraft and comets) | OPEN | -- | 2026-10-24 |
 | ! | L-483 | A room for C/2025 K1 and its pieces, the first comet room (gallery, exhibits) | OPEN | -- | 2026-10-28 |
-| ! | L-484 | The website and the orrery agree on every object both draw, or the difference is written down (orrery + gallery, objects; method for interactive-exhibit) | OPEN | -- | 2026-10-29 |
-| ! | L-485 | A nightly unattended run of the routines (orrery + gallery, maintenance) | OPEN | -- | 2026-10-30 |
+| ! | L-484 | The website and the orrery agree on every object both draw, or the difference is written down (orrery + gallery, objects; method for interactive-exhibit) | OPEN | -- | 2026-10-31 |
+| ! | L-485 | A nightly unattended run of the routines (orrery + gallery, maintenance) | OPEN | -- | 2026-10-31 |
 | ! | L-486 | A view carried into a room (gallery, the rooms) | OPEN | -- | 2026-10-26 |
 | ! | L-487 | Each body's description in the i panel, one bullet per sentence (gallery, the i panel) | OPEN | -- | 2026-10-25 |
 | ! | L-488 | Solar features beside a spacecraft in the Solar System room, such as the heliopause (gallery, the rooms) | OPEN | -- | 2026-10-26 |
 | ! | L-489 | Compositions: a curated view within a room, authored in the editor (gallery, the rooms) | OPEN | -- | 2026-10-28 |
-| ! | L-490 | What the website leans on outside its two repositories, for when Tony cannot work it (orrery + gallery, legacy) | OPEN | -- | 2026-10-30 |
+| ! | L-490 | What the website leans on outside its two repositories, for when Tony cannot work it (orrery + gallery, legacy) | OPEN | -- | 2026-10-31 |
 | ! | L-491 | The comet nucleus sizes the orrery's comet hover prints, sourced (orrery, the words a visitor reads) | OPEN | -- | 2026-10-26 |
 | ! | L-498 | The master plan restamped as v37 at slice 2's close (documentation) | OPEN | -- | 2026-10-27 |
 | ! | L-499 | The kinds of session: three, told apart by what each writes, with the build session in two forms (protocol, Mode 7) | OPEN | -- | 2026-10-29 |
 | ! | L-500 | The Sun's twelve eyeballed shape numbers: the streamer belt's seven and the outer cloud's clumps' five (orrery + gallery, the Sun's drawings) | OPEN | -- | 2026-10-27 |
-| ! | L-503 | The main asteroid belt's cloud on the website, L-443's last piece, its gallery half (gallery, the Solar System room) | OPEN | -- | 2026-10-29 |
-| ! | L-504 | The orrery's clock: UTC everywhere (orrery, every module that reads the clock) | OPEN | -- | 2026-10-29 |
+| ! | L-503 | The main asteroid belt's cloud on the website, L-443's last piece, its gallery half (gallery, the Solar System room) | OPEN | -- | 2026-10-31 |
+| ! | L-504 | The orrery's clock: UTC everywhere (orrery, every module that reads the clock) | OPEN | -- | 2026-10-31 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1524,7 +1524,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
 #### [L-504] The orrery's clock: UTC everywhere (orrery, every module that reads the clock)
-<!-- L:504 status:OPEN upd:2026-10-29 section:A flag: rice: -->
+<!-- L:504 status:OPEN upd:2026-10-31 section:A flag: rice: -->
 - **Tony's ruling, 2026-10-28, 23:50:** "we should standardize on utc."
   Opened 2026-10-29 by the gallery's Claude Code session (Tony's prompt,
   item c), for the next orrery session, ahead of L-485 (a nightly run).
@@ -1648,7 +1648,14 @@ as an archive of the prioritization thinking -- no cleanup on close.
   A Daily Run in the evening, after an evening orrery run has pushed
   confirmations dated the next UTC day, would go red the same way; a
   daytime run is not affected, the two days being the same then.
-**Gap (replaces the one below, 2026-10-29/30):** Tony's run of the orrery (the date fields on today's UTC date, a plot of Earth and the Moon); then the later slices, each importing `utc_clock`: the Earth System fetches (10), the report and cache stamps (26), the tools (5), and spacecraft_encounters.py's three astroquery calls with `cache=`; the 69 seconds as a row. For the next gallery session: its Horizons confirmations check reads the local day (above).
+- **2026-10-31, the website's item closed** (L-485's gallery session):
+  the gallery's `tools/check_horizons_confirmations.py` reads today as
+  `datetime.now(timezone.utc).date()` in main(); it cannot import the
+  orrery's utc_clock, and a date read is not a stored number. On
+  GitHub's computers the local date is UTC already; the fix is for the
+  evening Daily Run.
+**Gap (replaces the one below, 2026-10-31):** Tony's run of the orrery (the date fields on today's UTC date, a plot of Earth and the Moon); then the later slices, each importing `utc_clock`: the Earth System fetches (10), the report and cache stamps (26), the tools (5), and spacecraft_encounters.py's three astroquery calls with `cache=`; the 69 seconds as a row. The website's item is closed.
+**Gap (superseded above, 2026-10-29/30):** Tony's run of the orrery (the date fields on today's UTC date, a plot of Earth and the Moon); then the later slices, each importing `utc_clock`: the Earth System fetches (10), the report and cache stamps (26), the tools (5), and spacecraft_encounters.py's three astroquery calls with `cache=`; the 69 seconds as a row. For the next gallery session: its Horizons confirmations check reads the local day (above).
 **Gap (superseded above):** the next orrery session, the first slice (the data path), each
 reading made UTC and the conversion to TDB fed UTC; the later slices
 after it; the 69 seconds as a row; astroquery's saved answers in the
@@ -1659,7 +1666,7 @@ and `WHERE_WE_ARE_10-28-26_2357_run_record.md`; gallery `interactive.html`
 L-485; L-503.
 
 #### [L-503] The main asteroid belt's cloud on the website, L-443's last piece, its gallery half (gallery, the Solar System room)
-<!-- L:503 status:OPEN upd:2026-10-29 section:A flag: rice: -->
+<!-- L:503 status:OPEN upd:2026-10-31 section:A flag: rice: -->
 - **Opened 2026-10-28 at L-443's close**, which built the orrery half
   in the orrery's Claude Code session built on orrery b2fcc1bb and
   gallery acbf206b (section 5, item 1 of
@@ -1782,7 +1789,18 @@ L-485; L-503.
   served "in" asks for a unit by name (`node["in"]["km"]`), which a
   table's "in" does not have, so each finds none until the website asks
   for it by key.
-**Gap (replaces the one below, 2026-10-29/30):** the website prints the belt's distances with their kilometres from each entry's served "in" (the next gallery session); the Daily Run's pulls name `data/constants_export.json` and the config's two fields as changed. The skill corrections above are in interactive-exhibit 1.29, gallery-cache-builder 1.14, horizons-orbital-mechanics 1.13 and provenance-discipline 2.36.
+- **2026-10-31, the website prints the kilometres** (L-485's gallery
+  session): the nearest and farthest distances and the two heights, in
+  the orrery's form, "1.67 AU (about 250 million km)", from each
+  entry's served "in" km at its own figure count
+  (`gallery/feature_renderers.js`, cloudKm); the figures check's part 9
+  holds them, with two planted faults. One documented difference: the
+  90th height, about 100 million km in the orrery's hover and 99.8
+  million served by its export (L-484; L-485 carries it to the orrery
+  session).
+**Gap (replaces the one below, 2026-10-31):** Tony's phone look at the
+belt's text box (its kilometres), then DONE.
+**Gap (superseded above, 2026-10-29/30):** the website prints the belt's distances with their kilometres from each entry's served "in" (the next gallery session); the Daily Run's pulls name `data/constants_export.json` and the config's two fields as changed. The skill corrections above are in interactive-exhibit 1.29, gallery-cache-builder 1.14, horizons-orbital-mechanics 1.13 and provenance-discipline 2.36.
 **Gap (superseded above, 2026-10-29):** the next Daily Run (pulls nothing new; serves the drawing into the cache), then Tony's phone look at the belt's cloud: its row, its dots, its words, Go To and Reset. For the next orrery session: the export serves the tables' kilometres; the skill corrections above.
 **Gap (superseded above):** the gallery session (after L-399 and L-502 on Tony's queue):
 the pull, the room's row, the words; the gallery run with the drawing's
@@ -1994,7 +2012,7 @@ only when re-exported through Gallery Studio.
 `data/provenance_exceptions.json`; L-443; L-492.
 
 #### [L-490] What the website leans on outside its two repositories, for when Tony cannot work it (orrery + gallery, legacy)
-<!-- L:490 status:OPEN upd:2026-10-30 section:A flag: rice: -->
+<!-- L:490 status:OPEN upd:2026-10-31 section:A flag: rice: -->
 - **The first question, 2026-10-26** (Claude Fable 5.1's note on this
   item, carried by Tony): who besides Tony can hold the accounts, the
   GitHub account and the Google sign-in. It is Tony's and Paloma's to
@@ -2038,6 +2056,16 @@ only when re-exported through Gallery Studio.
   over, and after a pause they go to whoever re-enabled the workflow.
   Today that is Tony. A legacy fact: whoever holds the account holds
   the notices.
+- **2026-10-31, the website's half** (L-485's gallery session): its
+  workflow carries the same keep-alive, `gh workflow enable
+  nightly.yml`, `if: always()`, with the same two unwritten facts. Two
+  more things the website leans on, now named: GitHub's rate limit on
+  unsigned questions, which its runners' shared addresses could spend
+  ("Unauthenticated requests are associated with the originating IP
+  address"), answered by the pulls asking with the run's own token; and
+  GitHub Pages redeploying on the bot's commit, seen in the orrery
+  (runs 1175 and 1177) and to be seen for the website itself on its
+  first run by hand.
 **Gap:** Tony-action (decide): who besides you can hold the accounts,
 with Paloma, first. Tony-action (decide): when the legacy talk happens;
 it does not block L-485. Then discovery: one list, each entry with its
@@ -2245,7 +2273,7 @@ Are).
 L-489.
 
 #### [L-485] A nightly unattended run of the routines (orrery + gallery, maintenance)
-<!-- L:485 status:OPEN upd:2026-10-30 section:A flag: rice: -->
+<!-- L:485 status:OPEN upd:2026-10-31 section:A flag: rice: -->
 - **Tony, 2026-10-24, night,** in his run record (`documentation/WHERE_WE_ARE_10-24-26_1927_run_record.md`): "i am
   thinking of revising the idea of an automated run at midnight every
   day, with all the daily and 30-day run routines except the messages.
@@ -2548,7 +2576,212 @@ L-489.
   Path plan's ("Asked JPL for: nothing." on the first run); the
   Horizons check prints "PASS -- N checked today, M queries", and the
   run order Tony was given says so.
-**Gap (replaces the one below, 2026-10-30, evening):** verification 5
+- **2026-10-31, the gallery half built** (Claude Code session, Claude
+  Opus 5.5, built on gallery 981198c8 with the orrery at 51cbc183 read
+  only; brief `documentation/COORD_L485_gallery_nightly_brief_20261031.md`).
+  Files, all in the gallery: `.github/workflows/nightly.yml`, new, the
+  repository's first `.github` folder; `daily_run.py`, `--night`
+  (night_main, pull_matches_remote, this_runs_swap, git_changes,
+  night_allow_list, night_gate, write_night_record) and `--allow-list`,
+  with `--check` running the night's fixtures; `gallery_maintenance_run.py`,
+  `--night` (night_pass, NIGHT_SKIPS, run_generators' skip);
+  `tools/pull_constants_export.py`, the run's token (request_headers,
+  asked_as, http_refusal), which the other two pulls import with fetch();
+  `tools/test_pull_failures.py`, the token's check and two planted
+  faults; and the four small items below.
+- **The four small website items, closed** (in the brief's order):
+  1. L-504's website item: `tools/check_horizons_confirmations.py` main()
+     reads today as `datetime.now(timezone.utc).date()` (it was line 272,
+     `datetime.date.today()`), with WHICH DAY IS TODAY in its docstring.
+     Run: "HORIZONS CONFIRMATIONS: pass -- 90 of 90 confirmed, and 63
+     periods, within 30 days".
+  2. L-503: the belt's nearest and farthest distances and its two
+     heights print "1.67 AU (about 250 million km)", the orrery's form,
+     from the served "in" km entry at its own figure count
+     (`gallery/feature_renderers.js`, cloudKm, withKm); the 5th and 95th
+     print AU alone, as the orrery's do. The figures check's part 9 now
+     wants the kilometres by its own arithmetic, holds each km to its AU
+     to both roundings, and plants two faults (the km dropped; the
+     farthest converted from its rounded AU, 637 where 638 is served).
+     Printed: 250, 638, 99.8 and 38 million km. ONE DOCUMENTED
+     DIFFERENCE (L-484): the 90th height, where the orrery's own hover
+     (`main_belt_sampler.hover_text`, run 2026-10-31) prints "0.67 AU
+     (about 100 million km)", placing the km at the AU's last digit, and
+     its export serves 99,800,000 km at three figures (Rule 3, the place
+     L-503's pins chose). The website prints what is served, never
+     converting; which place is right is the orrery's question.
+  3. L-484's sentence: a body with no figure says the TRUE reason, from
+     the builder's own words in the index's
+     position_uncertainty.missing, which the room's driver now passes
+     (`uncertainty_missing`): "JPL states no accuracy for this
+     position." where JPL gives none (the orrery's sentence; Bennu,
+     Halley and Ikeya-Seki today); "JPL was asked for its own
+     uncertainty for this position, but its answer did not match this
+     position, so it is not included." where the builder refused the
+     answer (new words, printed by no body today; for Tony's look); and
+     Tony's "not yet included" only where it was not fetched or not
+     asked (`gallery/solar_system_figures.js`, MISSING_KINDS,
+     noSourceSentence). The figures check holds every served reason to
+     one the page knows and every reason the page knows to the
+     builder's source, with three planted faults.
+  4. L-484's digits: NO CHANGE, by the skill's rule (interactive-exhibit
+     1.29, A computed distance prints by the larger of two errors; never
+     finer than whole kilometres). A body with no source error prints to
+     what its DRIFT earns: whole kilometres on its elements' own day,
+     coarser as the days since grow -- Bennu's drift is about 3 km a
+     day, Halley's about 8, so tens of kilometres within a day or two.
+     The orrery prints the whole kilometre for them because it asks JPL
+     for the moment drawn and has no drift. A true difference, written
+     in `gallery/solar_system_figures.js`'s header; not Tony's question.
+- **Section 1's five checks, as found.**
+  1. The pulls' token. GitHub's "Rate limits for the REST API", read
+     2026-10-31: "The primary rate limit for unauthenticated requests is
+     60 requests per hour", "Unauthenticated requests are associated
+     with the originating IP address, not with the user or application
+     that made the request", and "The rate limit for GITHUB_TOKEN is
+     1,000 requests per hour per repository". The header is GitHub's
+     "Authorization: Bearer YOUR-TOKEN" ("Authenticating to the REST
+     API"). Chosen over `git ls-remote`, which would need a fourth code
+     path; the header is one edit in the fetch() the three pulls share.
+     It is sent only to api.github.com and only when the environment
+     carries GITHUB_TOKEN; GitHub does not put it in a step's
+     environment by itself, so the workflow hands it over (`env:
+     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}`). A refusal now prints
+     GitHub's own message and x-ratelimit-remaining in the FAIL line.
+     "Pull failures" checks it, two planted faults caught; 16 of 16.
+  2. The runner's tools and the time. GitHub's software list for
+     ubuntu-24.04 (image 20261026.354.1, read 2026-10-31): "Node.js
+     22.23.4", "Git 2.56.0", "GitHub CLI 2.103.2"; Python 3.13 among the
+     cached tools. So no setup-node step and no browser: the design
+     record's "a headless Chromium" for the smoke suites is CORRECTED,
+     every `documentation/smoke_*.js` requiring only fs and path. THE
+     TIME, a full night in a spare clone of 981198c8 with this session's
+     edits in it (hidden from git there) on Tony's machine, 2026-10-31,
+     16:24 to 16:30 UTC: 319 seconds in all -- the pulls 4.3, the build
+     190.2, the maintenance run's night pass 122.7. Each tool keeps the
+     maintenance run's 900-second limit (the builder too, at night); the
+     job keeps GitHub's six hours.
+  3. Permissions and Pages: the workflow declares contents: write and
+     actions: write; the gallery's own setting is Tony's (Settings,
+     Actions, General, "Workflow permissions", "Read and write
+     permissions", Save). Pages redeploying on the bot's commit is
+     confirmed by the first hand-fired run's "pages build and
+     deployment" line, as it was in the orrery (runs 1175 and 1177).
+  4. LF, ASCII, no Windows path: the night's tools (daily_run.py,
+     gallery_maintenance_run.py, the three pulls, the two mirrors, the
+     builder) hold no drive letter or backslash path; the one Windows
+     assumption, the orrery folder beside the website, is replaced at
+     night by the runner form. The gate refuses a non-ASCII byte in any
+     file it would commit, every night.
+  5. JPL from GitHub's computers, for the builder: expected yes (the
+     orrery's three JPL tools, Oct 31, 00:10 UTC); the first run by hand
+     shows it. A night the builder cannot reach JPL is red, nothing is
+     committed, and the site keeps the previous cache.
+- **The night, by row.** Run: the pulls (Constants export pull, Config
+  mirror, Objects export pull, Objects mirror, Drawings pull), pull
+  matches push in its runner form, the cache builder with no flags
+  (never --commit), the run records check, then the maintenance run's
+  night pass -- the five pull rows again and all 37 checkers (36
+  gating, Cache siblings report-only). Skipped, each printed by name
+  with its reason every night: the Guest book updater (Tony's ruling of
+  Oct 31, 10:20: "his morning's"; nothing is read from Google, so no
+  address, secret or sign-in is on the runner; R5's "lists new
+  messages" is NOT built, by that ruling, and no later session builds
+  it unasked) and the Module atlas (it writes MODULE_ATLAS.md and
+  MODULE_INDEX.md, documents, which R1 keeps out of the night; chosen
+  over letting the gate refuse them, which would make every night after
+  a docstring change red for a reason that is not the data's). No row
+  needed skipping for Linux.
+- **The gate (R1), seven conditions, each reason named on the last
+  line, "NIGHT RUN: RED -- ...":** the pulls passed and the three pulled
+  commits agree with the orrery's GitHub copy read live, and did not
+  move after the build (the night pass's pull rows read the orrery
+  again); the builder exited 0 and the swap log's last line, read back
+  off the disk, is tonight's run with outcome ok; the run records were
+  carried (a loss or "could not compare" is red at night); the night
+  pass passed with no UNREACHABLE row (node missing is a setup fault,
+  red); git sees nothing changed or new outside the allow-list; every
+  changed file is ASCII; the change under data/solar-system/ is not
+  deletions only. That last is the pre-commit hook gallery-cache-builder
+  1.14 records as designed and not built, "relevant again ... if the
+  builder ever runs unattended", built into the gate. `daily_run.py
+  --check` judges fifteen made-up nights and catches three planted
+  faults (an allow-list admitting every path, deletions unseen,
+  UNREACHABLE dropped); 32 of 32 fixture checks with the runner form's
+  five cases and two faults. On the spare clone's real tree the gate
+  refused interactive.html, un-hidden, as outside the allow-list, and
+  its 97 served changes recast as deletions only.
+- **The allow-list, read from the tools (one home, `daily_run.py
+  --allow-list`):** data/constants_export.json, constants_export.sha,
+  objects_export.json, objects_export.sha, objects_config.json; the
+  drawings the drawings pull itself fetches (`named_drawings`, eight
+  today: earth_exosphere, galactic_tide, hills_cloud, main_belt,
+  outer_oort_cloud, sun_corona, van_allen_belts, zodiacal_dust) and
+  data/drawings/pulled_at.sha; data/cache_swap_log.jsonl;
+  data/nightly_run_record.json; and data/solar-system/ whole,
+  deletions included. Never data/guestbook.json, a page, a script, a
+  card or MODULE_ATLAS.md. The spare clone's clean night changed
+  exactly the swap log, the three .sha files, the new record and 97
+  served files.
+- **The workflow:** `cron: '17 8 * * *'` (Tony's hour, Oct 29, 23:36)
+  and `workflow_dispatch`; `concurrency: group: nightly-run`, without
+  cancel-in-progress, so a second run waits and a running night is
+  never cut off (GitHub's words quoted in the file); the checkout of
+  `main` as it stands when the job starts, so a run that waited builds
+  on the first one's push and its own push is not refused as out of
+  date; ubuntu-24.04, actions/checkout@v7, actions/setup-python@v7
+  with 3.13, `pip install -r requirements.txt`, `python daily_run.py
+  --night` with the token; then the commit step: stage only the
+  allow-list, fail naming anything git still sees, commit as
+  github-actions[bot] (the orrery's name and address) naming the files
+  and the UTC date, push; "nothing committed" said when nothing
+  changed. The keep-alive last, `if: always()`, naming L-490. The hour
+  gap is a hope, not a rule (the file's comment): the run pulls what the
+  orrery's GitHub copy holds when it starts and never waits for or
+  chains to the orrery's run. The --live pass is not in the night.
+- **For the next ORRERY session** (sentences this build makes true or
+  false; a gallery session reads the skills and does not edit them):
+  - gallery-cache-builder's next version, beside the lines already
+    here from Oct 28 and 30: Operating mode ("manual, as of August 10
+    2026", "Tony runs it MANUALLY", "the scheduled nightly was retired")
+    is now wrong -- the builder runs unattended every night on GitHub's
+    computer through `daily_run.py --night`, and the pre-commit hook it
+    calls "deliberately NOT built" is built as the night gate's
+    deletions-only condition; Layer 3 is live again, in the GitHub
+    Action form (its gate is the night's, its health summary the night's
+    record); The Daily Run's Steps gains the night form, the guest book
+    skipped by Tony's ruling, and the runner form of pull matches push;
+    the Validation stance's "the console Tony is watching" is the
+    night's log at night. A session following Operating mode today
+    would tell Tony the builder never runs unattended: that is the
+    wrong-sentence kind, so the next orrery session bumps it.
+  - The dashboard's second line, beside `nightly_run_line()` in
+    `palomas_orrery_dashboard.py`: the website's last clean night, read
+    from the gallery's `data/nightly_run_record.json` in the sibling
+    folder ("clean_run_utc"), red when older than a day.
+  - The orrery's workflow lacks a `concurrency` key; the website's has
+    one (`group: nightly-run`, no cancel-in-progress) and checks out
+    `main` at the job's start. One line each for the orrery's file.
+  - The belt's 90th height: the orrery's hover prints about 100 million
+    km, its export serves 99.8 million (above; L-484, L-503).
+- **For the records session** (the coordination handoff's queue, item
+  6): the gallery door's step 2 gains the same case as the orrery's.
+  After the website's nightly commit, Tony's gallery folder is behind
+  GitHub every morning until he clicks Pull origin, so a gallery
+  session opened before then stops; the cure is Pull origin, orrery
+  then website, before anything else.
+- **No skill bumped here** (a gallery session reads them); the
+  Operating mode sentence above is carried to the orrery session.
+**Gap (replaces the one below, 2026-10-31):** Tony's run order from the
+gallery session's report: the gallery's GitHub setting ("Read and write
+permissions"), the two pushes, the first run by hand from the gallery's
+Actions tab, its log read to the end (the pulls "with the run's
+GITHUB_TOKEN", pull matches push, [SWAP], run records, 36 of 36, the
+NIGHT RUN line, the commit's files, the keep-alive), the "pages build
+and deployment" line, then the --live pass. Then a week of mornings on
+both Actions tabs (P4), each start time noted. Then the orrery session
+above.
+**Gap (superseded above, 2026-10-31; replaced the one below, 2026-10-30, evening):** verification 5
 waits on Tony's push and a run by hand with the box ticked: its
 Horizons check line, "PASS -- 179 checked today" or near it, closes
 verification 5 here, quoted; UNREACHABLE by name while Tony's machine
@@ -2579,7 +2812,7 @@ Where We Are).
 L-490.
 
 #### [L-484] The website and the orrery agree on every object both draw, or the difference is written down (orrery + gallery, objects; method for interactive-exhibit)
-<!-- L:484 status:OPEN upd:2026-10-29 section:A flag: rice: -->
+<!-- L:484 status:OPEN upd:2026-10-31 section:A flag: rice: -->
 - **Tony, 2026-10-24, 17:35, in chat**
   (`documentation/COORD_L443_words_decisions_20261024.md`, sec. 7): "And
   we should add to the skill a check that the website and the orrery
@@ -2677,6 +2910,19 @@ L-490.
   distance and height tables carrying its "in" (the latitude table, in
   degrees, has no other unit). The difference ends when the website
   prints them.
+- **2026-10-31, the website's half of the two differences** (L-485's
+  gallery session). THE SENTENCE, fixed: the Solar System room says the
+  true reason a figure is missing, from the builder's own words in the
+  index's position_uncertainty.missing -- "JPL states no accuracy for
+  this position." (the orrery's sentence) for Bennu, Halley and
+  Ikeya-Seki; a refused answer said as refused; "not yet included" only
+  where it was not fetched or not asked. THE DIGITS, unchanged by the
+  skill's rule: the website prints to what its drift earns, which the
+  orrery, asking JPL for the moment drawn, does not have (whole
+  kilometres on the elements' day, tens within a day or two). A true
+  difference, documented in `gallery/solar_system_figures.js`. NEW,
+  found: the belt's 90th height, about 100 million km in the orrery's
+  hover against 99.8 million in its export, which the website prints.
 **Gap (replaces the one below, 2026-10-25):** the check's design, then
 its build, with a planted fault; where its exceptions live.
 **Gap (superseded above):** the rule into interactive-exhibit at its next version (this
@@ -3111,7 +3357,7 @@ first, whether the item stays (above).
 L-188 (the maintenance run); L-459 (the monthly run).
 
 #### [L-461] The Daily Run confirms the orrery it pulled is the one Tony pushed (gallery, Daily Run)
-<!-- L:461 status:OPEN upd:2026-10-30 section:A flag: rice: -->
+<!-- L:461 status:OPEN upd:2026-10-31 section:A flag: rice: -->
 - **What happened, 2026-10-21** (run record
   `documentation/WHERE_WE_ARE_10-21-26_1217_run_record.md`): the orrery's patches
   ran and passed but were not pushed; the website's patch, Daily Run
@@ -3158,7 +3404,23 @@ L-188 (the maintenance run); L-459 (the monthly run).
   check reads that folder, so a difference can now mean "not yet
   pulled" as well as "not yet pushed". The Daily Run's words name only
   the second; the gallery half adds the first (gallery `daily_run.py`).
-**Gap (replaces the one below, 2026-10-25):** the first Daily Run after
+- **2026-10-31, a third shape, the runner form** (L-485's gallery
+  half, gallery `daily_run.py --night`). On GitHub's computer there is
+  no orrery folder beside the website, so the same question is asked of
+  the only copy a runner can see: the three pulled commits must agree
+  with each other AND with the orrery's GitHub copy, read live with
+  `git ls-remote https://github.com/tonylquintanilla/palomas_orrery
+  HEAD`. A difference means the orrery was pushed during the pulls; the
+  night stops before the builder, no retry, no wait, by Tony's ruling of
+  Oct 25. The gate also refuses a night whose pulled commit moved after
+  the build. `--check` runs five cases and two planted faults (always
+  matches; never asks GitHub). Tony's morning Daily Run keeps the folder
+  form untouched; its words naming the second honest cause, "not yet
+  pulled", are still to add.
+**Gap (replaces the one below, 2026-10-31):** the website's first night
+run by hand shows "Pull matches push (runner form)" ok; the Daily Run's
+folder form names "not yet pulled" beside "not yet pushed"; then DONE.
+**Gap (superseded above, 2026-10-25):** the first Daily Run after
 the push shows its "Pull matches push" line; then DONE.
 **Gap (superseded above):** the build (gallery `daily_run.py`, the pull step), with its
 rule in gallery-cache-builder; whether a difference stops the run or

@@ -1,26 +1,27 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: October 30, 2026: the orrery session (L-485 (a nightly run), "ask JPL for everything").
-- Written at orrery b27ce8c8 and gallery b55109f2, plus uncommitted edits.
+Last updated: October 31, 2026: the gallery session (L-485 (a nightly run), the website's half).
+- Written at orrery 51cbc183 and gallery 981198c8, plus uncommitted edits.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The nightly run's "Run workflow" form has a tick box: "Ask JPL for
->   everything, not only what is due". Ticked, the night asks JPL about
->   every object, period and spacecraft sheet, so we see GitHub's
->   computers reach JPL now, not some night in the coming weeks.
-> - That takes about 11 minutes on your machine, so that one check gets
->   up to 30. The nightly schedule never ticks the box.
+> - The website has its own nightly run on GitHub, at 08:17 UTC. It
+>   pulls, builds, checks, and commits only what the tools wrote; one
+>   red check and it commits nothing. The guest book stays yours.
+> - Fixed: the date check reads UTC; the belt prints kilometres; three
+>   bodies say "JPL states no accuracy", not "not yet included".
 >
-> **Do next:** *commit and push; then Run workflow with the box
-> ticked, and paste its Horizons check line to the coordinating session.*
+> **Do next:** *on GitHub, allow the website's workflow to write (the
+> report gives the clicks); push both; then "Run workflow" on the
+> website's Actions tab, and read its log with the coordinating session.*
 >
 > **Needs you now:**
-> - *(do) Pull origin each morning, before anything else.*
-> - *(do) commit and push, then the run with the box ticked: the
->   session's report gives the clicks.*
+> - *(do) Pull origin each morning on BOTH repositories, orrery then
+>   website, before anything else.*
+> - *(do) the GitHub setting, the pushes, the first run by hand, then
+>   the live pass: the session's report gives the order.*
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
@@ -32,12 +33,13 @@ Oct 27's order, changed Oct 29 (`DESIGN_L314_solar_wind_rulings_20261029.md`).
                Oct 27; the objects (L-443 (the objects)), closed Oct 28;
                the small builds and 2026 ED138, closed Oct 28.
  5d.   [NOW]   *The orrery's clock (L-504 (the orrery's clock)): the
-               data path done Oct 29; Earth System, stamps, tools next.*
+               data path done Oct 29, the website's date fix Oct 31;
+               Earth System, stamps, tools next.*
  11b.  [NOW]   *The nightly run (L-485 (a nightly run)): the orrery
-               half's first run clean Oct 30; the run that asks JPL
-               everything next, then the gallery half.*  << moved this session
- 5c.   [next]  L-503 (the belt's cloud) closes when the website
-               prints its kilometres (the next gallery session).
+               half clean three times; the website's half built Oct 31;
+               its first run by hand next, then a week of mornings.*  << moved this session
+ 5c.   [next]  L-503 (the belt's cloud): the kilometres are in; it
+               closes on your phone look at the belt's text box.  << moved this session
   5.   [beside] Earth's list (L-413 (Earth's list)): talks 3 to 6 from
                your phone, then their builds.
   5b.  [beside] Housekeeping when a session has room: L-424, L-425,
@@ -50,9 +52,10 @@ Oct 27's order, changed Oct 29 (`DESIGN_L314_solar_wind_rulings_20261029.md`).
  15.   [goal]  The website does what the desktop orrery does, with a date
                to choose, within the range the data covers.
 
-## Settled
+## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings. A line leaves after a few weeks, once it is habit.
+- The guest book stays out of the night; your morning's (Oct 31).
 - Pluto's period is its centre of mass's, as Earth's is (Oct 29).
 - UTC everywhere; the orbit's date stays on JPL's clock, said so (Oct 28-29).
 - The belt's cloud: a row first in its group, ticked like a body (Oct 29).
@@ -84,14 +87,15 @@ Waiting behind other work; a line leaves when picked up.
 - L-490 (the legacy list): who besides you and Paloma holds the accounts.
 - L-499 (kinds of session): the protocol's Mode 7 text (Oct 27).
 
-## Signals
+## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261030T003718Z, ok, no retry (the swap log's last
-  line); the next is your Daily Run.
-- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md of today's
-  run). Whole tree: 275: orrery 111, Earth System 149, stars 13, utilities 2.
-- This page's date and the ledger's newest stamp: both Oct 30. Agree.
+- Last cache build: 20261031T140937Z, ok, no retry (the swap log's last
+  line); the next is the website's first night run by hand.
+- Tier-1 on the gate path: 0, by name (PROVENANCE_AUDIT.md of Oct 30;
+  not re-run by this gallery session). Whole tree: 275: orrery 111,
+  Earth System 149, stars 13, utilities 2.
+- This page's date and the ledger's newest stamp: both Oct 31. Agree.
 
 ## Waiting on you
 
@@ -102,10 +106,8 @@ At the next design talk:
 - One body that disagrees with JPL stops the whole night's save, not
   just that body (L-485 (a nightly run)); holding one body alone is a
   build of its own.
-- A shared link keeps the view: ruled Oct 29,
-  documentation/DESIGN_shared_view_rulings_20261029.md. Not built Oct 29
-  (no room); its build, and its item, wait for the next gallery
-  session.
+- A shared link keeps the view: ruled Oct 29 (DESIGN_shared_view_
+  rulings_20261029.md); its build waits for a gallery session.
 
 Not urgent, in your order:
 1. Whether the editor also edits the Solar System room's rows, and
@@ -115,15 +117,15 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- Today: L-485 (the nightly run), L-490 (the legacy list: GitHub's
-  60-day pause), L-461 (pull matches push: a second cause). The briefs:
-  `COORD_L485_orrery_nightly_brief_20261029.md`, and
-  `COORD_L485_ask_everything_brief_20261030.md` (the tick box).
-- L-458 (report a problem): the form's words, read; an open note.
+- Today: L-485 (the nightly run: the website's half), L-461 (pull
+  matches push: the runner form), L-490 (the legacy list: the
+  website's keep-alive), L-503 (the belt's kilometres), L-484 (the two
+  agree: the website's sentence), L-504 (the website's date fix). The
+  brief: `COORD_L485_gallery_nightly_brief_20261031.md`.
 - The door: `documentation/python_work_door/`, and L-499.
 - Talks: `DESIGN_shared_view_rulings_20261029.md` (the shared link)
   and `DESIGN_L314_solar_wind_rulings_20261029.md` (live solar wind).
-- Your run record: `WHERE_WE_ARE_10-29-26_2320_run_record.md`
+- Your run record: `WHERE_WE_ARE_10-31-26_0950_run_record.md`
   (the coordination session's, and this one's start).
 
 --- Your run record below this line. No patch edits it; the length cap

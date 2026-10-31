@@ -198,7 +198,7 @@ Files for your run record:
     ok documentation/COORD_L485_gallery_nightly_brief_20261031.md (new, 500 lines)
 
 Run order:
-1. Commit and push the orrery with this brief and your run record (GitHub Desktop; Pull origin first if it shows a number from last night's run). -- 
+1. Commit and push the orrery with this brief and your run record (GitHub Desktop; Pull origin first if it shows a number from last night's run). -- 51cbc1834fb2bf2503fb91157e5ee503c860ad30
 2. When you want the build, open a Claude Code session through the python_work door and paste this prompt:
 
    > Gallery repository. Please build from ..\palomas_orrery_for_github\documentation\COORD_L485_gallery_nightly_brief_20261031.md: L-485, the nightly run, the gallery half. Read the brief, the coordination handoff of Oct 29-31 it names, the orrery half's brief, and the design record first.
@@ -211,6 +211,211 @@ Tony-action rollup:
 - (decide) Nothing.
 
 Not committing or pushing: those are yours under the orrery's CLAUDE.md. The file is placed in your orrery folder and reaches GitHub with your next commit and push from GitHub Desktop.
+
+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+**Session: OPEN: 10-31-26 1102: Opus: Code: Gallery nightly build L-485**
+
+Both bases are recorded and match their remotes; now reading the six skills the job fires.
+
+All six skills read, versions match the manifest. Now reading Where We Are, Tony's latest run record, and the L-485 ledger block before I report.
+
+I've finished all the reading. Both repositories are clean and match GitHub, so I'm ready to build the website's half of the nightly run once you say go.
+
+**Skills read in full, with their version lines.** Each one matches the version the protocol (v3.118) expects:
+- safe-file-editing 1.14
+- agentic-pre-test 1.3
+- ledger-and-session-records 1.22
+- gallery-cache-builder 1.14
+- interactive-exhibit 1.29
+- provenance-discipline 2.36
+
+I also read the protocol itself, the brief, the coordination handoff of Oct 29-31, the orrery half's brief, the design record of Oct 25, Where We Are, your latest run record, and L-485 (a nightly run) in the ledger.
+
+**Where both repositories stand:**
+- **Website:** 981198c8 on your machine and on GitHub, nothing waiting.
+- **Orrery:** 51cbc183 on your machine and on GitHub. The one waiting edit is your run record for this session (`WHERE_WE_ARE_10-31-26_0950_run_record.md`), which the brief expects.
+
+**What I'll do once you say go.** These are all in the website folder, and I won't commit or push anything:
+1. First, the four small website fixes:
+   - The confirmations check will read today's date in UTC (GitHub's clock), so your evening Daily Run stops going red when the orrery has already moved to the next day.
+   - The belt's distances will also print in kilometres.
+   - When JPL states no uncertainty for a body, the website will say so, not "not yet included".
+   - Distances will print with the digits the skill's rule sets.
+2. Then the five checks the brief lists before the design can be trusted. That includes having the pulls sign in with the run's own token, so GitHub's limit on unsigned requests can't refuse them.
+3. Then the night form of the Daily Run and the workflow file on GitHub.
+4. Last, the records in the orrery folder.
+
+Files for your run record: none changed yet.
+
+Run order: nothing to run yet.
+
+Tony-action rollup:
+- (decide) The go-ahead, in the box below. -- go ahead.
+
+=======================================================================
+
+Fixed the date check (it passes, 90 of 90). Now working on the three website text items, starting with the ledger notes that describe them.
+
+Item 1 is done. For the "JPL states none" sentence I've found the reasons the builder serves; now tracing how the room passes them to the page.
+
+Now writing the true-reason sentence into the figures file.
+
+Now the page's driver passes the builder's reason, and the text box uses it.
+
+Now updating the figures check: new worked cases, faults on the new line, and every served reason held to the builder's words.
+
+The stuck command was waiting on an empty input line, my mistake; nothing was written. Redoing the check's edits as a script file.
+
+The "JPL states none" sentence is in, and the figures check passes. Now the belt's kilometres: reading the served fields and the orrery's wording.
+
+I'll note the discrepancy between the belt's served kilometres and the orrery's printed AU-based figures, since the site will display the served values. Writing that up now.
+
+Now the check's belt section: the words must carry the served kilometres, by the check's own arithmetic, with two new planted faults.
+
+The new agreement check works but its tolerance was too tight: it forgot that the kilometres are rounded too. Widening it to both roundings.
+
+Items 2-4 are done and the figures check passes with its new faults caught. Next: the three pulls send the run's token on GitHub's computers.
+
+All three pulls share one `fetch()` in the constants pull, so one edit covers them. Reading it.
+
+Confirmed the workflow needs to explicitly pass the token to the step, and that Node 22 and cached Python 3.13 are available on the runner. Now I'll add the token to the shared fetch.
+
+Safe to put GitHub's own refusal words into the error. Editing the shared fetch.
+
+Now the pull-failures suite gains a check that the token goes to GitHub's interface only, with planted faults.
+
+Token check passes, with both new faults caught. Next, the brief's grep of the night's tools for Windows paths.
+
+No Windows paths in the night's tools; the only one is the Daily Run's orrery-folder read, which the night form replaces. Reading `daily_run.py` now.
+
+The Daily Run is clear. Now the maintenance run's tables, its switches and its last line, then the orrery's night gate as the model.
+
+The allow-list can come from the tools themselves, including the drawings pull's own list. Reading the orrery's workflow and night record as the model.
+
+I have the design. Writing the maintenance run's night pass first: the same checkers, the Module atlas skipped by name, and UNREACHABLE counted red.
+
+Now the night form in `daily_run.py`: the guest book skipped, the runner form of pull-matches-push, the builder, the records, the night pass, and the seven-condition gate with its fixtures.
+
+The night form's check passes: 32 of 32 fixture checks, every planted fault caught, and the allow-list reads 16 files plus the served cache. Now the workflow file.
+
+The YAML parses. One gap: a run that waited in the queue would check out the commit from when it was triggered and then fail to push. Pinning the checkout to `main` as it stands when the job starts.
+
+Now timing a full night in a spare copy of the website, outside your folder, with this session's edits in it and hidden from git there so the gate judges only the data.
+
+The spare clone is clean to git with the edits in it. Starting the timed night run in the background.
+
+While the night runs (a few minutes), I'll prepare the records. Finding the ledger blocks this build touches.
+
+I noticed the orrery's 90th belt height ("~100 million km") doesn't quite match the website's exported value ("~99.8 million km"), so I'll note that discrepancy for the next orrery session. Now waiting for the timed night to finish.
+
+The timed night is still building; meanwhile I'm writing Where We Are, section by section.
+
+The page is 138 lines above its marker, over the 130 cap. Trimming it.
+
+The build swapped cleanly as tonight's run, and the run records carried 120 of 120. The maintenance night pass is running now.
+
+A full night ran clean in the spare clone: 319 seconds in all (pulls 4 s, build 190 s, checks 123 s), 36 of 36 gating checkers passed. Checking what it left for git to see.
+
+Everything the night changed is on the allow-list. Now showing the gate going red on a real tree: un-hiding one of this session's code edits in the clone and asking the gate.
+
+The gate refuses both: a code file changed, and a cache that is deletions only. One small polish to the clean line's wording, then the full offline maintenance run in your folder.
+
+The offline maintenance run in your folder is all green: "36 of 36 gating checkers passed". Now the ledger entries, by script with anchors at the lines edited.
+
+The ledger index rebuilt cleanly: 497 blocks, no consistency problems. Final pass: every changed file's bytes, and the file list for your run record.
+
+The website's nightly run is built. A full night ran clean in a spare copy of the website on your machine in 319 seconds, and the offline maintenance run in your folder passed "36 of 36 gating checkers passed". Nothing is committed or pushed.
+
+**Skills read in full**, each matching the version the protocol (v3.118) expects: safe-file-editing 1.14, agentic-pre-test 1.3, ledger-and-session-records 1.22, gallery-cache-builder 1.14, interactive-exhibit 1.29, provenance-discipline 2.36.
+
+**The four small website fixes:**
+1. **The date check reads UTC.** An evening Daily Run no longer goes red with "confirmed on ... which is after today". It now reads "pass -- 90 of 90 confirmed". This closes L-504's website item (the date fix).
+2. **The belt prints kilometres,** in the orrery's form: "1.67 AU (about 250 million km)". One number differs from the orrery: the 90th height. The orrery's text box says "about 100 million km", but its own export serves 99.8 million, and the website prints what is served. I recorded this for the next orrery session. This is L-503 (the belt's cloud); it closes on your phone look.
+3. **Bennu, Halley and Ikeya-Seki say "JPL states no accuracy for this position."** That is the orrery's sentence, replacing "not yet included". One new sentence covers an answer JPL gave that didn't match the position; no body shows it today. It's in the ledger for your look.
+4. **The digits stay as they are.** By the skill's rule, the website prints what its drift allows (its distance can drift from JPL's a little each day). That is whole kilometres on the day of the orbit data, then tens. The orrery has no drift, because it asks JPL directly.
+
+**The five checks before trusting the design:**
+- **The pulls now send the run's own token on GitHub's computers.** GitHub's page says unsigned requests get 60 an hour per address, and its runners share addresses; with the token it is 1,000 an hour. On your machine nothing changes.
+- **Node 22 is already on GitHub's computer,** so no browser is needed. The design record's "headless Chromium" line was wrong and is corrected in the ledger.
+- **Time:** the pulls took 4 seconds, the cache build 190, and the checks 123.
+- **No Windows-only paths** in the night's tools.
+- **JPL reaching GitHub's computers for the build:** the first run by hand shows it.
+
+**What the night does:**
+- It skips the guest book by name, per your ruling, and reads nothing from Google.
+- It checks the pulled commit against the orrery's GitHub copy.
+- It builds the cache and runs every check. It skips the module atlas by name, because that writes documents.
+- It then passes a gate with seven conditions. One refuses a commit that only deletes cache files (the August 10 mistake).
+- I showed the gate refusing a real code file and a deletions-only cache.
+
+**Three things that change your mornings:**
+- **Pull origin on BOTH repositories first,** orrery then website, before anything else.
+- **Push before bed, for the website too.** The night rewrites the config and the cache. If you edit or build in the evening without pushing, the morning pull may show a conflict. Keep your copy of the config, either copy of the cache, and tell the coordinating session before clicking.
+- **A website session opened before you pull will stop.** The ledger notes that the door file needs this case added; that change is for the records session.
+
+**Files for your run record:**
+
+    gallery:
+    ok .github/workflows/nightly.yml (new, 1 edit after)
+    ok daily_run.py (9 edits)
+    ok gallery_maintenance_run.py (8 edits)
+    ok tools/pull_constants_export.py (3 edits)
+    ok tools/test_pull_failures.py (5 edits)
+    ok tools/check_horizons_confirmations.py (3 edits)
+    ok gallery/solar_system_figures.js (5 edits)
+    ok gallery/feature_renderers.js (4 edits)
+    ok interactive.html (2 edits)
+    ok documentation/smoke_solar_system_figures.js (22 edits)
+    tool-written by the maintenance run: MODULE_ATLAS.md, MODULE_INDEX.md,
+      data/constants_export.sha, data/objects_export.sha,
+      data/drawings/pulled_at.sha (now naming orrery 51cbc183)
+    orrery:
+    ok LEDGER_CONSOLIDATED.md (12 edits, index rebuilt)
+    ok documentation/WHERE_WE_ARE.md (11 edits, 130 lines above the marker)
+
+**Your run order:**
+1. Paste this report to the coordinating session and wait for its word. -- done
+2. On GitHub's website, open the website repository (tonyquintanilla.github.io): Settings, Actions, General, "Workflow permissions", "Read and write permissions", Save. -- done
+3. In GitHub Desktop: 
+   1. Pull origin on the orrery if it shows a number. 
+   2. Then commit and push the website, then the orrery.
+4. On the website repository's Actions tab: "Nightly run", "Run workflow", branch main. Read the log to the end with the coordinating session. Look for:
+   - the pulls "with the run's GITHUB_TOKEN"
+   - the "Pull matches push" line
+   - the [SWAP] line
+   - the run records line
+   - "36 of 36"
+   - the NIGHT RUN line
+   - the commit's files, or "nothing committed"
+   - the keep-alive step
+5. Watch for "pages build and deployment" under the night's commit. Then Fetch origin and Pull origin on the website, and run the dashboard's live pass.
+6. Every morning for a week: both Actions tabs (note each start time), Pull origin on both, the guest book updater, and a push if it changed.
+7. Send both SHAs to the coordinating session.
+
+**Tony-action rollup:**
+- (do) Steps 1 to 7 above.
+- (do) Your phone look at the belt's text box.
+- (decide) Nothing.
+
+======================================================
+
+**Fable:**
+
+My word is go: the setting, both pushes, and the first run by hand, in Code's order. I read the workflow file, the night form's gate and the token edit from your gallery folder, not only the report, and they match the brief and your rulings: the guest book is out by name; the gate's seven conditions include the deletions-only refusal; the hour is 08:17 UTC with the "hope, not a rule" note written into the file; two runs can never overlap; and Node is on GitHub's computer, read from GitHub's own software list, so no browser. Code showed the gate going red on a real code file and on a deletions-only cache before it showed it green, which is the test that counts. All three files are plain ASCII with plain line endings.
+
+One thing Code found that is worth knowing, nothing to do now: the orrery's text box says the belt's 90th height is "about 100 million km" while its own export serves 99.8 million, and the website prints what is served. It is recorded for the next orrery session; your phone look at the belt's row will show the website's words.
+
+One rule for your mornings that the report does not say outright. Before your Daily Run or any push of the website, look at the website's Actions tab and make sure the newest "Nightly run" line has finished, green or red, not a yellow dot still running. The orrery's scheduled run started six hours late on Friday; if the website's ever runs that late, it could be pushing while you are, and then one of the two pushes is refused and GitHub Desktop asks you to merge cache files. If you ever see a yellow dot, wait for it to finish, then Pull origin, then carry on.
+
+At the first run, paste me the log's last lines or tell me what you saw: the pulls' commit and "with the run's GITHUB_TOKEN", the "Pull matches push" line, the [SWAP] line, "36 of 36", the NIGHT RUN line, what the commit named, and that "pages build and deployment" appeared under it. Then your live pass from the dashboard.
+
+Tony-action rollup:
+- (do) Code's run order, steps 2 to 7.
+- (do) Your phone look at the belt's text box, after the live pass.
+- (decide) Nothing.
+
+Not committing or pushing: those are yours under the orrery's CLAUDE.md. Both repositories' remote copies still stand where your last pushes left them (orrery 51cbc183, website 981198c8); the session's work is in your folders and reaches GitHub with your pushes.
 
 
 
