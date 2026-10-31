@@ -1,9 +1,9 @@
 {
   "_comment": "Written by orrery_maintenance_run.py --night on a clean night only (L-485), so this is the last clean run. The dashboard reads it. A red night writes nothing: its record is the run's log on GitHub.",
   "schema": 1,
-  "clean_run_utc": "2026-10-30T22:39:05.685574+00:00",
+  "clean_run_utc": "2026-10-31T00:23:24.024996+00:00",
   "where": "GitHub Actions",
-  "run_log": "https://github.com/tonylquintanilla/palomas_orrery/actions/runs/41139306173",
+  "run_log": "https://github.com/tonylquintanilla/palomas_orrery/actions/runs/41148710922",
   "reported_not_red": [],
   "rows": [
     {
@@ -19,7 +19,7 @@
     {
       "row": "Horizons check",
       "kind": "generator",
-      "verdict": "unchanged (2 checked, not written) -- NOTHING DUE -- 90 entries and 26 sheets current, no query asked"
+      "verdict": "rewrote data/horizons_confirmations.json, data/spacecraft_sheets.json -- PASS -- 179 checked today, 269 queries"
     },
     {
       "row": "Path plan",
@@ -29,7 +29,7 @@
     {
       "row": "Objects export",
       "kind": "generator",
-      "verdict": "unchanged (1 checked, not written)"
+      "verdict": "rewrote data/objects_export.json"
     },
     {
       "row": "Drawings export",

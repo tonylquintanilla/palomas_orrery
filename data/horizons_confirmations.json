@@ -4,7 +4,7 @@
   "cadence_days": 30,
   "objects": {
     "sun": {
-      "confirmed": "2026-10-10",
+      "confirmed": "2026-10-31",
       "horizons_id": "10",
       "id_type": null,
       "horizons_name": "Sun",
@@ -16,10 +16,11 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=10&group=mb&format=text",
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=10&group=sb&format=text"
       ],
-      "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)"
+      "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66"
     },
     "mercury": {
-      "confirmed": "2026-10-10",
+      "confirmed": "2026-10-31",
       "horizons_id": "199",
       "id_type": null,
       "horizons_name": "Mercury",
@@ -33,7 +34,7 @@
       ],
       "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)",
       "period": {
-        "confirmed": "2026-10-20",
+        "confirmed": "2026-10-31",
         "center": "@sun",
         "target": "199",
         "epoch": "2026-10-20 08:55",
@@ -41,10 +42,11 @@
         "error_days": 0.00032971618669819236,
         "jpl_days": 87.96885430477843,
         "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='199'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461333.871527778'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
-      }
+      },
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66"
     },
     "venus": {
-      "confirmed": "2026-10-10",
+      "confirmed": "2026-10-31",
       "horizons_id": "299",
       "id_type": null,
       "horizons_name": "Venus",
@@ -58,7 +60,7 @@
       ],
       "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)",
       "period": {
-        "confirmed": "2026-10-20",
+        "confirmed": "2026-10-31",
         "center": "@sun",
         "target": "299",
         "epoch": "2026-10-20 08:55",
@@ -66,10 +68,11 @@
         "error_days": 0.007994234272416634,
         "jpl_days": 224.7058361266309,
         "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='299'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461333.871527778'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
-      }
+      },
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66"
     },
     "earth": {
-      "confirmed": "2026-10-10",
+      "confirmed": "2026-10-31",
       "horizons_id": "399",
       "id_type": null,
       "horizons_name": "Earth",
@@ -83,7 +86,7 @@
       ],
       "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)",
       "period": {
-        "confirmed": "2026-10-30",
+        "confirmed": "2026-10-31",
         "center": "@sun",
         "target": "3",
         "epoch": "2026-10-28 23:02",
@@ -91,10 +94,11 @@
         "error_days": 0.004099075940587227,
         "jpl_days": 365.2498770507308,
         "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='3'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461342.459722222'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
-      }
+      },
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66"
     },
     "mars": {
-      "confirmed": "2026-10-10",
+      "confirmed": "2026-10-31",
       "horizons_id": "499",
       "id_type": null,
       "horizons_name": "Mars",
@@ -108,7 +112,7 @@
       ],
       "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)",
       "period": {
-        "confirmed": "2026-10-30",
+        "confirmed": "2026-10-31",
         "center": "@sun",
         "target": "499",
         "epoch": "2026-10-28 23:02",
@@ -116,10 +120,11 @@
         "error_days": 0.05359560300621524,
         "jpl_days": 686.9961190010482,
         "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='499'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461342.459722222'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
-      }
+      },
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66"
     },
     "jupiter": {
-      "confirmed": "2026-10-10",
+      "confirmed": "2026-10-31",
       "horizons_id": "599",
       "id_type": null,
       "horizons_name": "Jupiter",
@@ -133,7 +138,7 @@
       ],
       "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)",
       "period": {
-        "confirmed": "2026-10-30",
+        "confirmed": "2026-10-31",
         "center": "@sun",
         "target": "599",
         "epoch": "2026-10-28 23:02",
@@ -141,15 +146,16 @@
         "error_days": 0.40608472381791216,
         "jpl_days": 4332.659211918214,
         "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='599'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461342.459722222'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
-      }
+      },
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66"
     },
     "eurybates": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "1973 SO",
       "id_type": "smallbody",
       "horizons_name": "3548 Eurybates",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "3548 Eurybates",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -157,7 +163,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=1973%20SO&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@0",
         "target": "1973 SO",
         "epoch": "2026-10-22 20:37",
@@ -168,12 +174,12 @@
       }
     },
     "patroclus": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "A906 UL",
       "id_type": "smallbody",
       "horizons_name": "617 Patroclus",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "617 Patroclus",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -181,7 +187,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=A906%20UL&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@sun",
         "target": "A906 UL",
         "epoch": "2026-10-22 20:37",
@@ -192,12 +198,12 @@
       }
     },
     "polymele": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "1999 WB2",
       "id_type": "smallbody",
       "horizons_name": "15094 Polymele",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "15094 Polymele",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -205,7 +211,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=1999%20WB2&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@0",
         "target": "1999 WB2",
         "epoch": "2026-10-22 20:37",
@@ -216,12 +222,12 @@
       }
     },
     "leucus": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "1997 TS25",
       "id_type": "smallbody",
       "horizons_name": "11351 Leucus",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "11351 Leucus",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -229,7 +235,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=1997%20TS25&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@0",
         "target": "1997 TS25",
         "epoch": "2026-10-22 20:37",
@@ -240,12 +246,12 @@
       }
     },
     "orus": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "1999 VQ10",
       "id_type": "smallbody",
       "horizons_name": "21900 Orus",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "21900 Orus",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -253,7 +259,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=1999%20VQ10&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@0",
         "target": "1999 VQ10",
         "epoch": "2026-10-22 20:37",
@@ -264,7 +270,7 @@
       }
     },
     "saturn": {
-      "confirmed": "2026-10-10",
+      "confirmed": "2026-10-31",
       "horizons_id": "699",
       "id_type": null,
       "horizons_name": "Saturn",
@@ -278,7 +284,7 @@
       ],
       "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)",
       "period": {
-        "confirmed": "2026-10-20",
+        "confirmed": "2026-10-31",
         "center": "@0",
         "target": "699",
         "epoch": "2026-10-20 08:55",
@@ -286,10 +292,11 @@
         "error_days": 5.259054803749677,
         "jpl_days": 10751.30962654848,
         "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='699'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@0'&TLIST='2461333.871527778'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
-      }
+      },
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66"
     },
     "uranus": {
-      "confirmed": "2026-10-10",
+      "confirmed": "2026-10-31",
       "horizons_id": "799",
       "id_type": null,
       "horizons_name": "Uranus",
@@ -303,17 +310,19 @@
       ],
       "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)",
       "period": {
-        "confirmed": "2026-10-15",
+        "confirmed": "2026-10-31",
         "center": "@0",
+        "target": "799",
         "epoch": "2026-10-15 10:52",
         "days": 30679.94522205484,
         "error_days": 0.18876053482017596,
         "jpl_days": 30679.94522205484,
         "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='799'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@0'&TLIST='2461328.952777778'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
-      }
+      },
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66"
     },
     "neptune": {
-      "confirmed": "2026-10-10",
+      "confirmed": "2026-10-31",
       "horizons_id": "899",
       "id_type": null,
       "horizons_name": "Neptune",
@@ -327,22 +336,24 @@
       ],
       "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)",
       "period": {
-        "confirmed": "2026-10-15",
+        "confirmed": "2026-10-31",
         "center": "@0",
+        "target": "899",
         "epoch": "2026-10-15 10:52",
         "days": 60184.8784092995,
         "error_days": 2.554290918284096,
         "jpl_days": 60184.8784092995,
         "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='899'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@0'&TLIST='2461328.952777778'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
-      }
+      },
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66"
     },
     "chariklo": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "1997 CU26",
       "id_type": "smallbody",
       "horizons_name": "10199 Chariklo",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "10199 Chariklo",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -350,7 +361,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=1997%20CU26&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@0",
         "target": "1997 CU26",
         "epoch": "2026-10-22 20:37",
@@ -361,7 +372,7 @@
       }
     },
     "pluto_barycenter": {
-      "confirmed": "2026-10-10",
+      "confirmed": "2026-10-31",
       "horizons_id": "9",
       "id_type": null,
       "horizons_name": "Pluto Barycenter",
@@ -375,7 +386,7 @@
       ],
       "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)",
       "period": {
-        "confirmed": "2026-10-28",
+        "confirmed": "2026-10-31",
         "center": "@0",
         "target": "9",
         "epoch": "2026-10-28 20:36",
@@ -383,15 +394,16 @@
         "error_days": 0.31426049568108283,
         "jpl_days": 90578.39025812282,
         "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='9'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@0'&TLIST='2461342.358333333'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
-      }
+      },
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66"
     },
     "ceres": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "A801 AA",
       "id_type": "smallbody",
       "horizons_name": "1 Ceres",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "1 Ceres",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -399,7 +411,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=A801%20AA&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-30",
+        "confirmed": "2026-10-31",
         "center": "@sun",
         "target": "A801 AA",
         "epoch": "2026-10-28 23:02",
@@ -410,12 +422,12 @@
       }
     },
     "haumea": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "2003 EL61",
       "id_type": "smallbody",
       "horizons_name": "136108 Haumea",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "136108 Haumea",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -423,7 +435,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2003%20EL61&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@0",
         "target": "2003 EL61",
         "epoch": "2026-10-22 20:37",
@@ -434,12 +446,12 @@
       }
     },
     "eris": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "2003 UB313",
       "id_type": "smallbody",
       "horizons_name": "136199 Eris",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "136199 Eris",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -447,7 +459,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2003%20UB313&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@0",
         "target": "2003 UB313",
         "epoch": "2026-10-22 20:37",
@@ -458,12 +470,12 @@
       }
     },
     "gonggong": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "2007 OR10",
       "id_type": "smallbody",
       "horizons_name": "225088 Gonggong",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "225088 Gonggong",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -471,7 +483,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2007%20OR10&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-23",
+        "confirmed": "2026-10-31",
         "center": "@0",
         "target": "2007 OR10",
         "epoch": "2026-10-23 21:36",
@@ -482,12 +494,12 @@
       }
     },
     "makemake": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "2005 FY9",
       "id_type": "smallbody",
       "horizons_name": "136472 Makemake",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "136472 Makemake",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -495,7 +507,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2005%20FY9&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@0",
         "target": "2005 FY9",
         "epoch": "2026-10-22 20:37",
@@ -506,12 +518,12 @@
       }
     },
     "mani": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "2002 MS4",
       "id_type": "smallbody",
       "horizons_name": "307261 Mani",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "307261 Mani",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -519,7 +531,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2002%20MS4&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@0",
         "target": "2002 MS4",
         "epoch": "2026-10-22 20:37",
@@ -530,12 +542,12 @@
       }
     },
     "orcus": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "2004 DW",
       "id_type": "smallbody",
       "horizons_name": "90482 Orcus",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "90482 Orcus",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -543,7 +555,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2004%20DW&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@0",
         "target": "2004 DW",
         "epoch": "2026-10-22 20:37",
@@ -554,12 +566,12 @@
       }
     },
     "quaoar": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "2002 LM60",
       "id_type": "smallbody",
       "horizons_name": "50000 Quaoar",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "50000 Quaoar",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -567,7 +579,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2002%20LM60&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@0",
         "target": "2002 LM60",
         "epoch": "2026-10-22 20:37",
@@ -578,12 +590,12 @@
       }
     },
     "sedna": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "2003 VB12",
       "id_type": "smallbody",
       "horizons_name": "90377 Sedna",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "90377 Sedna",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -591,7 +603,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2003%20VB12&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@0",
         "target": "2003 VB12",
         "epoch": "2026-10-13 08:30",
@@ -602,12 +614,12 @@
       }
     },
     "leleakuhonua": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "2015 TG387",
       "id_type": "smallbody",
       "horizons_name": "541132 Leleakuhonua",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "541132 Leleakuhonua",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -615,7 +627,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2015%20TG387&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@0",
         "target": "2015 TG387",
         "epoch": "2026-10-22 20:37",
@@ -626,12 +638,12 @@
       }
     },
     "tno_2017_of201": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "2017 OF201",
       "id_type": "smallbody",
       "horizons_name": "(2017 OF201)",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "(2017 OF201)",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -639,7 +651,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2017%20OF201&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@0",
         "target": "2017 OF201",
         "epoch": "2026-10-22 20:37",
@@ -650,12 +662,12 @@
       }
     },
     "tno_2026_ed138": {
-      "confirmed": "2026-10-28",
+      "confirmed": "2026-10-31",
       "horizons_id": "2026 ED138",
       "id_type": "smallbody",
       "horizons_name": "(2026 ED138)",
       "object_type": "orbital",
-      "list_sha256": "97bc47ec162bbbaa3e8c58e81611a1beffabc7f64edab9199460f020349eae63",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "(2026 ED138)",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -663,23 +675,23 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2026%20ED138&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-28",
+        "confirmed": "2026-10-31",
         "center": "@0",
         "target": "2026 ED138",
         "epoch": "2026-10-28 14:53",
         "days": 103248.9414310349,
         "error_days": 10.294,
-        "jpl_days": 103248.9414310349,
+        "jpl_days": 103249.7029099222,
         "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='2026%20ED138%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@0'&TLIST='2461342.120138889'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
       }
     },
     "asteroid_2025_pn7": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "2025 PN7",
       "id_type": "smallbody",
       "horizons_name": "(2025 PN7)",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "(2025 PN7)",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -687,7 +699,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2025%20PN7&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@sun",
         "target": "2025 PN7",
         "epoch": "2026-10-22 20:37",
@@ -698,12 +710,12 @@
       }
     },
     "asteroid_2024_pt5": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "2024 PT5",
       "id_type": "smallbody",
       "horizons_name": "(2024 PT5)",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "(2024 PT5)",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -711,7 +723,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2024%20PT5&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@sun",
         "target": "2024 PT5",
         "epoch": "2026-10-22 20:37",
@@ -722,12 +734,12 @@
       }
     },
     "asteroid_2025_py1": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "2025 PY1",
       "id_type": "smallbody",
       "horizons_name": "(2025 PY1)",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "(2025 PY1)",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -735,7 +747,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2025%20PY1&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@sun",
         "target": "2025 PY1",
         "epoch": "2026-10-22 20:37",
@@ -746,12 +758,12 @@
       }
     },
     "asteroid_2023_jf": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "2023 JF",
       "id_type": "smallbody",
       "horizons_name": "(2023 JF)",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "(2023 JF)",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -759,7 +771,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2023%20JF&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@sun",
         "target": "2023 JF",
         "epoch": "2026-10-22 20:37",
@@ -770,12 +782,12 @@
       }
     },
     "asteroid_2024_dw": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "2024 DW",
       "id_type": "smallbody",
       "horizons_name": "(2024 DW)",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "(2024 DW)",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -783,7 +795,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2024%20DW&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@sun",
         "target": "2024 DW",
         "epoch": "2026-10-22 20:37",
@@ -794,12 +806,12 @@
       }
     },
     "asteroid_2024_yr4": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "2024 YR4",
       "id_type": "smallbody",
       "horizons_name": "(2024 YR4)",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "(2024 YR4)",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -807,7 +819,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2024%20YR4&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@sun",
         "target": "2024 YR4",
         "epoch": "2026-10-22 20:37",
@@ -818,12 +830,12 @@
       }
     },
     "kamo_oalewa": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "2016 HO3",
       "id_type": "smallbody",
       "horizons_name": "469219 Kamo`oalewa",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "469219 Kamo`oalewa",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -831,7 +843,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2016%20HO3&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@sun",
         "target": "2016 HO3",
         "epoch": "2026-10-22 20:37",
@@ -842,12 +854,12 @@
       }
     },
     "psyche": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "A852 FA",
       "id_type": "smallbody",
       "horizons_name": "16 Psyche",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "16 Psyche",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -855,7 +867,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=A852%20FA&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-30",
+        "confirmed": "2026-10-31",
         "center": "@0",
         "target": "A852 FA",
         "epoch": "2026-10-28 23:02",
@@ -866,7 +878,7 @@
       }
     },
     "apophis": {
-      "confirmed": "2026-10-10",
+      "confirmed": "2026-10-31",
       "horizons_id": "2004 MN4",
       "id_type": "smallbody",
       "horizons_name": "99942 Apophis",
@@ -880,22 +892,24 @@
       ],
       "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)",
       "period": {
-        "confirmed": "2026-10-15",
+        "confirmed": "2026-10-31",
         "center": "@sun",
+        "target": "2004 MN4",
         "epoch": "2026-10-15 10:52",
         "days": 323.5420892338735,
         "error_days": 0.0034301412194395198,
         "jpl_days": 323.5420892338735,
         "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='2004%20MN4%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461328.952777778'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
-      }
+      },
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66"
     },
     "bennu": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "1999 RQ36",
       "id_type": "smallbody",
       "horizons_name": "101955 Bennu",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "101955 Bennu",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -903,7 +917,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=1999%20RQ36&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@sun",
         "target": "1999 RQ36",
         "epoch": "2026-10-22 20:37",
@@ -914,12 +928,12 @@
       }
     },
     "eros": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "A898 PA",
       "id_type": "smallbody",
       "horizons_name": "433 Eros",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "433 Eros",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -927,7 +941,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=A898%20PA&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@sun",
         "target": "A898 PA",
         "epoch": "2026-10-22 20:37",
@@ -938,12 +952,12 @@
       }
     },
     "dinkinesh": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "1999 VD57",
       "id_type": "smallbody",
       "horizons_name": "152830 Dinkinesh",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "152830 Dinkinesh",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -951,7 +965,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=1999%20VD57&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@sun",
         "target": "1999 VD57",
         "epoch": "2026-10-22 20:37",
@@ -962,12 +976,12 @@
       }
     },
     "itokawa": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "1998 SF36",
       "id_type": "smallbody",
       "horizons_name": "25143 Itokawa",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "25143 Itokawa",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -975,7 +989,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=1998%20SF36&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@sun",
         "target": "1998 SF36",
         "epoch": "2026-10-22 20:37",
@@ -986,12 +1000,12 @@
       }
     },
     "lutetia": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "A852 VA",
       "id_type": "smallbody",
       "horizons_name": "21 Lutetia",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "21 Lutetia",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -999,7 +1013,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=A852%20VA&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@sun",
         "target": "A852 VA",
         "epoch": "2026-10-22 20:37",
@@ -1010,12 +1024,12 @@
       }
     },
     "ryugu": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "1999 JU3",
       "id_type": "smallbody",
       "horizons_name": "162173 Ryugu",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "162173 Ryugu",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -1023,7 +1037,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=1999%20JU3&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@sun",
         "target": "1999 JU3",
         "epoch": "2026-10-22 20:37",
@@ -1034,12 +1048,12 @@
       }
     },
     "steins": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "1969 VC",
       "id_type": "smallbody",
       "horizons_name": "2867 Steins",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "2867 Steins",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -1047,7 +1061,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=1969%20VC&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@sun",
         "target": "1969 VC",
         "epoch": "2026-10-22 20:37",
@@ -1058,12 +1072,12 @@
       }
     },
     "donaldjohanson": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "1981 EQ5",
       "id_type": "smallbody",
       "horizons_name": "52246 Donaldjohanson",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "52246 Donaldjohanson",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -1071,7 +1085,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=1981%20EQ5&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@sun",
         "target": "1981 EQ5",
         "epoch": "2026-10-22 20:37",
@@ -1082,12 +1096,12 @@
       }
     },
     "vesta": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "A807 FA",
       "id_type": "smallbody",
       "horizons_name": "4 Vesta",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "4 Vesta",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -1095,7 +1109,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=A807%20FA&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@sun",
         "target": "A807 FA",
         "epoch": "2026-10-22 20:37",
@@ -1106,12 +1120,12 @@
       }
     },
     "arrokoth": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "2014 MU69",
       "id_type": "smallbody",
       "horizons_name": "486958 Arrokoth",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "486958 Arrokoth",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -1119,7 +1133,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2014%20MU69&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-28",
+        "confirmed": "2026-10-31",
         "center": "@0",
         "target": "2014 MU69",
         "epoch": "2026-10-28 14:53",
@@ -1130,12 +1144,12 @@
       }
     },
     "ixion": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "2001 KX76",
       "id_type": "smallbody",
       "horizons_name": "28978 Ixion",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "28978 Ixion",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -1143,7 +1157,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2001%20KX76&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@0",
         "target": "2001 KX76",
         "epoch": "2026-10-22 20:37",
@@ -1154,12 +1168,12 @@
       }
     },
     "goibniu": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "2004 GV9",
       "id_type": "smallbody",
       "horizons_name": "90568 Goibniu",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "90568 Goibniu",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -1167,7 +1181,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2004%20GV9&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@0",
         "target": "2004 GV9",
         "epoch": "2026-10-22 20:37",
@@ -1178,12 +1192,12 @@
       }
     },
     "varuna": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "2000 WR106",
       "id_type": "smallbody",
       "horizons_name": "20000 Varuna",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "20000 Varuna",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -1191,7 +1205,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2000%20WR106&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@0",
         "target": "2000 WR106",
         "epoch": "2026-10-22 20:37",
@@ -1202,12 +1216,12 @@
       }
     },
     "ammonite": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "2023 KQ14",
       "id_type": "smallbody",
       "horizons_name": "(2023 KQ14)",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "(2023 KQ14)",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -1215,7 +1229,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2023%20KQ14&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@0",
         "target": "2023 KQ14",
         "epoch": "2026-10-22 20:37",
@@ -1226,27 +1240,20 @@
       }
     },
     "tempel_2": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "90000214",
       "id_type": "smallbody",
       "horizons_name": "10P/Tempel 2",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "10P/Tempel 2",
       "jpl_type": "comet record",
-      "pin": {
-        "record": "90000214",
-        "solution_date": "2026-Oct-22_15:52:05",
-        "records": 22,
-        "newest": "90000214",
-        "newest_epoch_year": "2017"
-      },
       "queries": [
         "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='90000214'&OBJ_DATA=YES&MAKE_EPHEM=NO",
         "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='DES=10P%3B'&OBJ_DATA=YES&MAKE_EPHEM=NO"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@sun",
         "target": "90000214",
         "epoch": "2026-10-22 20:37",
@@ -1254,30 +1261,30 @@
         "error_days": 1.0749873119598305,
         "jpl_days": 1959.815586031509,
         "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='90000214%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461336.359027778'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
+      },
+      "pin": {
+        "record": "90000214",
+        "solution_date": "2026-Oct-22_15:52:05",
+        "records": 22,
+        "newest": "90000214",
+        "newest_epoch_year": "2017"
       }
     },
     "schaumasse": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "90000356",
       "id_type": "smallbody",
       "horizons_name": "24P/Schaumasse",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "24P/Schaumasse",
       "jpl_type": "comet record",
-      "pin": {
-        "record": "90000356",
-        "solution_date": "2026-Jul-07_05:58:32",
-        "records": 12,
-        "newest": "90000356",
-        "newest_epoch_year": "2024"
-      },
       "queries": [
         "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='90000356'&OBJ_DATA=YES&MAKE_EPHEM=NO",
         "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='DES=24P%3B'&OBJ_DATA=YES&MAKE_EPHEM=NO"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@sun",
         "target": "90000356",
         "epoch": "2026-10-22 20:37",
@@ -1285,30 +1292,30 @@
         "error_days": 2.1519159749759638,
         "jpl_days": 2985.728485198871,
         "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='90000356%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461336.359027778'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
+      },
+      "pin": {
+        "record": "90000356",
+        "solution_date": "2026-Jul-07_05:58:32",
+        "records": 12,
+        "newest": "90000356",
+        "newest_epoch_year": "2024"
       }
     },
     "howell": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "90000901",
       "id_type": "smallbody",
       "horizons_name": "88P/Howell",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "88P/Howell",
       "jpl_type": "comet record",
-      "pin": {
-        "record": "90000901",
-        "solution_date": "2026-Oct-14_16:22:22",
-        "records": 9,
-        "newest": "90000901",
-        "newest_epoch_year": "2021"
-      },
       "queries": [
         "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='90000901'&OBJ_DATA=YES&MAKE_EPHEM=NO",
         "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='DES=88P%3B'&OBJ_DATA=YES&MAKE_EPHEM=NO"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@sun",
         "target": "90000901",
         "epoch": "2026-10-22 20:37",
@@ -1316,30 +1323,30 @@
         "error_days": 1.1753806260658166,
         "jpl_days": 2002.204541274829,
         "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='90000901%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461336.359027778'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
+      },
+      "pin": {
+        "record": "90000901",
+        "solution_date": "2026-Oct-14_16:22:22",
+        "records": 9,
+        "newest": "90000901",
+        "newest_epoch_year": "2021"
       }
     },
     "churyumov": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "90000703",
       "id_type": "smallbody",
       "horizons_name": "67P/Churyumov-Gerasimenko",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "67P/Churyumov-Gerasimenko",
       "jpl_type": "comet record",
-      "pin": {
-        "record": "90000703",
-        "solution_date": "2026-Sep-04_10:25:07",
-        "records": 9,
-        "newest": "90000703",
-        "newest_epoch_year": "2015"
-      },
       "queries": [
         "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='90000703'&OBJ_DATA=YES&MAKE_EPHEM=NO",
         "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='DES=67P%3B'&OBJ_DATA=YES&MAKE_EPHEM=NO"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@sun",
         "target": "90000703",
         "epoch": "2026-10-22 20:37",
@@ -1347,15 +1354,22 @@
         "error_days": 0.3264399822260202,
         "jpl_days": 2349.755907776515,
         "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='90000703%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461336.359027778'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
+      },
+      "pin": {
+        "record": "90000703",
+        "solution_date": "2026-Sep-04_10:25:07",
+        "records": 9,
+        "newest": "90000703",
+        "newest_epoch_year": "2015"
       }
     },
     "hale_bopp": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "C/1995 O1",
       "id_type": "smallbody",
       "horizons_name": "Hale-Bopp (C/1995 O1)",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "Hale-Bopp (C/1995 O1)",
       "jpl_type": "comet (integrated barycenter)",
       "queries": [
@@ -1363,7 +1377,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F1995%20O1&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@0",
         "target": "C/1995 O1",
         "epoch": "2026-10-22 20:37",
@@ -1374,7 +1388,7 @@
       }
     },
     "halley": {
-      "confirmed": "2026-10-10",
+      "confirmed": "2026-10-31",
       "horizons_id": "90000030",
       "id_type": "smallbody",
       "horizons_name": "1P/Halley",
@@ -1382,30 +1396,32 @@
       "orrery_sha": "32619f8d",
       "jpl_name": "1P/Halley",
       "jpl_type": "comet record",
-      "pin": {
-        "record": "90000030",
-        "solution_date": "2025-Nov-21_15:57:34",
-        "records": 30,
-        "newest": "90000030",
-        "newest_epoch_year": "1968"
-      },
       "queries": [
         "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='90000030'&OBJ_DATA=YES&MAKE_EPHEM=NO",
         "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='DES=1P%3B'&OBJ_DATA=YES&MAKE_EPHEM=NO"
       ],
       "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)",
       "period": {
-        "confirmed": "2026-10-15",
+        "confirmed": "2026-10-31",
         "center": "@0",
+        "target": "90000030",
         "epoch": "2026-10-15 10:52",
         "days": 27562.22169273424,
         "error_days": 0.011189067670784425,
         "jpl_days": 27562.22169273424,
         "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='90000030%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@0'&TLIST='2461328.952777778'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
+      },
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
+      "pin": {
+        "record": "90000030",
+        "solution_date": "2025-Nov-21_15:57:34",
+        "records": 30,
+        "newest": "90000030",
+        "newest_epoch_year": "1968"
       }
     },
     "encke": {
-      "confirmed": "2026-10-10",
+      "confirmed": "2026-10-31",
       "horizons_id": "90000091",
       "id_type": "smallbody",
       "horizons_name": "2P/Encke",
@@ -1413,35 +1429,37 @@
       "orrery_sha": "32619f8d",
       "jpl_name": "2P/Encke",
       "jpl_type": "comet record",
-      "pin": {
-        "record": "90000091",
-        "solution_date": "2026-Oct-09_14:41:02",
-        "records": 61,
-        "newest": "90000091",
-        "newest_epoch_year": "2023"
-      },
       "queries": [
         "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='90000091'&OBJ_DATA=YES&MAKE_EPHEM=NO",
         "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='DES=2P%3B'&OBJ_DATA=YES&MAKE_EPHEM=NO"
       ],
       "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)",
       "period": {
-        "confirmed": "2026-10-14",
+        "confirmed": "2026-10-31",
         "center": "@sun",
+        "target": "90000091",
         "epoch": "2026-10-13 08:30",
         "days": 1206.320223793072,
         "error_days": 0.15083758920104628,
-        "jpl_days": 1206.320223793072,
+        "jpl_days": 1206.320412715588,
         "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='90000091%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461326.854166667'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
+      },
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
+      "pin": {
+        "record": "90000091",
+        "solution_date": "2026-Oct-22_15:51:34",
+        "records": 61,
+        "newest": "90000091",
+        "newest_epoch_year": "2024"
       }
     },
     "hyakutake": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "C/1996 B2",
       "id_type": "smallbody",
       "horizons_name": "Hyakutake (C/1996 B2)",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "Hyakutake (C/1996 B2)",
       "jpl_type": "comet (integrated barycenter)",
       "queries": [
@@ -1449,7 +1467,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F1996%20B2&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@0",
         "target": "C/1996 B2",
         "epoch": "2026-10-22 20:37",
@@ -1460,12 +1478,12 @@
       }
     },
     "lemmon": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "C/2025 A6",
       "id_type": "smallbody",
       "horizons_name": "Lemmon (C/2025 A6)",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "Lemmon (C/2025 A6)",
       "jpl_type": "comet (integrated barycenter)",
       "queries": [
@@ -1473,7 +1491,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F2025%20A6&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@0",
         "target": "C/2025 A6",
         "epoch": "2026-10-22 20:37",
@@ -1484,12 +1502,12 @@
       }
     },
     "ikeya_seki": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "C/1965 S1-A",
       "id_type": "smallbody",
       "horizons_name": "Ikeya-Seki (C/1965 S1-A)",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "Ikeya-Seki (C/1965 S1-A)",
       "jpl_type": "comet (integrated barycenter)",
       "queries": [
@@ -1497,7 +1515,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F1965%20S1-A&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@0",
         "target": "C/1965 S1-A",
         "epoch": "2026-10-22 20:37",
@@ -1508,12 +1526,12 @@
       }
     },
     "neowise": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "C/2020 F3",
       "id_type": "smallbody",
       "horizons_name": "NEOWISE (C/2020 F3)",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "NEOWISE (C/2020 F3)",
       "jpl_type": "comet (integrated barycenter)",
       "queries": [
@@ -1521,7 +1539,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F2020%20F3&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@0",
         "target": "C/2020 F3",
         "epoch": "2026-10-22 20:37",
@@ -1532,12 +1550,12 @@
       }
     },
     "wierzchos": {
-      "confirmed": "2026-10-26",
+      "confirmed": "2026-10-31",
       "horizons_id": "C/2024 E1",
       "id_type": "smallbody",
       "horizons_name": "Wierzchos (C/2024 E1)",
       "object_type": "orbital",
-      "list_sha256": "6230404d4faf8adee45321d78f656c3d46e9e941902f58a90f36932359e022ba",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "Wierzchos (C/2024 E1)",
       "jpl_type": "comet (integrated barycenter)",
       "queries": [
@@ -1546,12 +1564,12 @@
       ]
     },
     "swan": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "C/2025 R2",
       "id_type": "smallbody",
       "horizons_name": "SWAN (C/2025 R2)",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "SWAN (C/2025 R2)",
       "jpl_type": "comet (integrated barycenter)",
       "queries": [
@@ -1559,7 +1577,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F2025%20R2&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@sun",
         "target": "C/2025 R2",
         "epoch": "2026-10-22 20:37",
@@ -1570,12 +1588,12 @@
       }
     },
     "maps": {
-      "confirmed": "2026-10-22",
+      "confirmed": "2026-10-31",
       "horizons_id": "C/2026 A1",
       "id_type": "smallbody",
       "horizons_name": "MAPS (C/2026 A1)",
       "object_type": "orbital",
-      "list_sha256": "552d19318dc087b4c9509979a475d8af7402160862ea93033f3df536f018bb1c",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "MAPS (C/2026 A1)",
       "jpl_type": "comet (integrated barycenter)",
       "queries": [
@@ -1583,7 +1601,7 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F2026%20A1&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-22",
+        "confirmed": "2026-10-31",
         "center": "@sun",
         "target": "C/2026 A1",
         "epoch": "2026-10-22 20:37",
@@ -1594,12 +1612,12 @@
       }
     },
     "west": {
-      "confirmed": "2026-10-26",
+      "confirmed": "2026-10-31",
       "horizons_id": "C/1975 V1-A",
       "id_type": "smallbody",
       "horizons_name": "West (C/1975 V1-A)",
       "object_type": "trajectory",
-      "list_sha256": "6230404d4faf8adee45321d78f656c3d46e9e941902f58a90f36932359e022ba",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "West (C/1975 V1-A)",
       "jpl_type": "comet (integrated barycenter)",
       "queries": [
@@ -1608,12 +1626,12 @@
       ]
     },
     "mcnaught": {
-      "confirmed": "2026-10-26",
+      "confirmed": "2026-10-31",
       "horizons_id": "C/2006 P1",
       "id_type": "smallbody",
       "horizons_name": "McNaught (C/2006 P1)",
       "object_type": "trajectory",
-      "list_sha256": "6230404d4faf8adee45321d78f656c3d46e9e941902f58a90f36932359e022ba",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "McNaught (C/2006 P1)",
       "jpl_type": "comet (integrated barycenter)",
       "queries": [
@@ -1622,12 +1640,12 @@
       ]
     },
     "tsuchinshan_atlas": {
-      "confirmed": "2026-10-26",
+      "confirmed": "2026-10-31",
       "horizons_id": "C/2023 A3",
       "id_type": "smallbody",
       "horizons_name": "Tsuchinshan-ATLAS (C/2023 A3)",
       "object_type": "orbital",
-      "list_sha256": "6230404d4faf8adee45321d78f656c3d46e9e941902f58a90f36932359e022ba",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "Tsuchinshan-ATLAS (C/2023 A3)",
       "jpl_type": "comet (integrated barycenter)",
       "queries": [
@@ -1636,12 +1654,12 @@
       ]
     },
     "atlas_2024_g3": {
-      "confirmed": "2026-10-26",
+      "confirmed": "2026-10-31",
       "horizons_id": "C/2024 G3",
       "id_type": "smallbody",
       "horizons_name": "ATLAS (C/2024 G3)",
       "object_type": "orbital",
-      "list_sha256": "6230404d4faf8adee45321d78f656c3d46e9e941902f58a90f36932359e022ba",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "ATLAS (C/2024 G3)",
       "jpl_type": "comet (integrated barycenter)",
       "queries": [
@@ -1650,12 +1668,12 @@
       ]
     },
     "c2025_k1": {
-      "confirmed": "2026-10-26",
+      "confirmed": "2026-10-31",
       "horizons_id": "1004075",
       "id_type": "designation",
       "horizons_name": "ATLAS (C/2025 K1)",
       "object_type": "trajectory",
-      "list_sha256": "6230404d4faf8adee45321d78f656c3d46e9e941902f58a90f36932359e022ba",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "ATLAS (C/2025 K1)",
       "jpl_type": "comet (integrated barycenter)",
       "queries": [
@@ -1664,12 +1682,12 @@
       ]
     },
     "c2025_k1_b": {
-      "confirmed": "2026-10-26",
+      "confirmed": "2026-10-31",
       "horizons_id": "C/2025 K1-B",
       "id_type": "smallbody",
       "horizons_name": "ATLAS (C/2025 K1-B)",
       "object_type": "trajectory",
-      "list_sha256": "6230404d4faf8adee45321d78f656c3d46e9e941902f58a90f36932359e022ba",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "ATLAS (C/2025 K1-B)",
       "jpl_type": "comet (integrated barycenter)",
       "queries": [
@@ -1678,12 +1696,12 @@
       ]
     },
     "c2025_k1_c": {
-      "confirmed": "2026-10-26",
+      "confirmed": "2026-10-31",
       "horizons_id": "C/2025 K1-C",
       "id_type": "smallbody",
       "horizons_name": "ATLAS (C/2025 K1-C)",
       "object_type": "trajectory",
-      "list_sha256": "6230404d4faf8adee45321d78f656c3d46e9e941902f58a90f36932359e022ba",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "ATLAS (C/2025 K1-C)",
       "jpl_type": "comet (integrated barycenter)",
       "queries": [
@@ -1692,12 +1710,12 @@
       ]
     },
     "c2025_k1_d": {
-      "confirmed": "2026-10-26",
+      "confirmed": "2026-10-31",
       "horizons_id": "C/2025 K1-D",
       "id_type": "smallbody",
       "horizons_name": "ATLAS (C/2025 K1-D)",
       "object_type": "trajectory",
-      "list_sha256": "6230404d4faf8adee45321d78f656c3d46e9e941902f58a90f36932359e022ba",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "ATLAS (C/2025 K1-D)",
       "jpl_type": "comet (integrated barycenter)",
       "queries": [
@@ -1706,12 +1724,12 @@
       ]
     },
     "panstarrs_2025_r3": {
-      "confirmed": "2026-10-26",
+      "confirmed": "2026-10-31",
       "horizons_id": "C/2025 R3",
       "id_type": "smallbody",
       "horizons_name": "PANSTARRS (C/2025 R3)",
       "object_type": "trajectory",
-      "list_sha256": "6230404d4faf8adee45321d78f656c3d46e9e941902f58a90f36932359e022ba",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "PANSTARRS (C/2025 R3)",
       "jpl_type": "comet (integrated barycenter)",
       "queries": [
@@ -1720,12 +1738,12 @@
       ]
     },
     "borisov_2025_v1": {
-      "confirmed": "2026-10-26",
+      "confirmed": "2026-10-31",
       "horizons_id": "C/2025 V1",
       "id_type": "smallbody",
       "horizons_name": "Borisov (C/2025 V1)",
       "object_type": "trajectory",
-      "list_sha256": "6230404d4faf8adee45321d78f656c3d46e9e941902f58a90f36932359e022ba",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "Borisov (C/2025 V1)",
       "jpl_type": "comet (integrated barycenter)",
       "queries": [
@@ -1734,12 +1752,12 @@
       ]
     },
     "oumuamua": {
-      "confirmed": "2026-10-26",
+      "confirmed": "2026-10-31",
       "horizons_id": "A/2017 U1",
       "id_type": "smallbody",
       "horizons_name": "'Oumuamua",
       "object_type": "trajectory",
-      "list_sha256": "6230404d4faf8adee45321d78f656c3d46e9e941902f58a90f36932359e022ba",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "'Oumuamua",
       "jpl_type": "asteroid (integrated barycenter)",
       "queries": [
@@ -1748,12 +1766,12 @@
       ]
     },
     "borisov_2i": {
-      "confirmed": "2026-10-26",
+      "confirmed": "2026-10-31",
       "horizons_id": "C/2019 Q4",
       "id_type": "smallbody",
       "horizons_name": "Borisov (C/2019 Q4)",
       "object_type": "trajectory",
-      "list_sha256": "6230404d4faf8adee45321d78f656c3d46e9e941902f58a90f36932359e022ba",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "Borisov (C/2019 Q4)",
       "jpl_type": "comet (integrated barycenter)",
       "queries": [
@@ -1762,12 +1780,12 @@
       ]
     },
     "atlas_3i": {
-      "confirmed": "2026-10-26",
+      "confirmed": "2026-10-31",
       "horizons_id": "C/2025 N1",
       "id_type": "smallbody",
       "horizons_name": "ATLAS (C/2025 N1)",
       "object_type": "trajectory",
-      "list_sha256": "6230404d4faf8adee45321d78f656c3d46e9e941902f58a90f36932359e022ba",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "ATLAS (C/2025 N1)",
       "jpl_type": "comet (integrated barycenter)",
       "queries": [
@@ -1776,12 +1794,12 @@
       ]
     },
     "voyager_1": {
-      "confirmed": "2026-10-25",
+      "confirmed": "2026-10-31",
       "horizons_id": "-31",
       "id_type": "id",
       "horizons_name": "Voyager 1 (spacecraft)",
       "object_type": "trajectory",
-      "list_sha256": "2007d3d415cf317408e5a272aa768c16cdd703cbd14a155e7850ad44ca16b59b",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "Voyager 1 (spacecraft)",
       "jpl_type": "spacecraft",
       "queries": [
@@ -1790,12 +1808,12 @@
       ]
     },
     "voyager_2": {
-      "confirmed": "2026-10-25",
+      "confirmed": "2026-10-31",
       "horizons_id": "-32",
       "id_type": "id",
       "horizons_name": "Voyager 2 (spacecraft)",
       "object_type": "trajectory",
-      "list_sha256": "2007d3d415cf317408e5a272aa768c16cdd703cbd14a155e7850ad44ca16b59b",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "Voyager 2 (spacecraft)",
       "jpl_type": "spacecraft",
       "queries": [
@@ -1804,12 +1822,12 @@
       ]
     },
     "new_horizons": {
-      "confirmed": "2026-10-25",
+      "confirmed": "2026-10-31",
       "horizons_id": "-98",
       "id_type": "id",
       "horizons_name": "New Horizons (spacecraft)",
       "object_type": "trajectory",
-      "list_sha256": "2007d3d415cf317408e5a272aa768c16cdd703cbd14a155e7850ad44ca16b59b",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "New Horizons (spacecraft)",
       "jpl_type": "spacecraft",
       "queries": [
@@ -1818,12 +1836,12 @@
       ]
     },
     "juno": {
-      "confirmed": "2026-10-25",
+      "confirmed": "2026-10-31",
       "horizons_id": "-61",
       "id_type": "id",
       "horizons_name": "Juno (spacecraft)",
       "object_type": "trajectory",
-      "list_sha256": "2007d3d415cf317408e5a272aa768c16cdd703cbd14a155e7850ad44ca16b59b",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "Juno (spacecraft)",
       "jpl_type": "spacecraft",
       "queries": [
@@ -1832,12 +1850,12 @@
       ]
     },
     "osiris_apex": {
-      "confirmed": "2026-10-25",
+      "confirmed": "2026-10-31",
       "horizons_id": "-64",
       "id_type": "id",
       "horizons_name": "OSIRIS-REx (spacecraft)",
       "object_type": "trajectory",
-      "list_sha256": "2007d3d415cf317408e5a272aa768c16cdd703cbd14a155e7850ad44ca16b59b",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "OSIRIS-REx (spacecraft)",
       "jpl_type": "spacecraft",
       "queries": [
@@ -1846,12 +1864,12 @@
       ]
     },
     "parker_solar_probe": {
-      "confirmed": "2026-10-25",
+      "confirmed": "2026-10-31",
       "horizons_id": "-96",
       "id_type": "id",
       "horizons_name": "Parker Solar Probe (spacecraft)",
       "object_type": "trajectory",
-      "list_sha256": "2007d3d415cf317408e5a272aa768c16cdd703cbd14a155e7850ad44ca16b59b",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "Parker Solar Probe (spacecraft)",
       "jpl_type": "spacecraft",
       "queries": [
@@ -1860,12 +1878,12 @@
       ]
     },
     "lucy": {
-      "confirmed": "2026-10-25",
+      "confirmed": "2026-10-31",
       "horizons_id": "-49",
       "id_type": "id",
       "horizons_name": "Lucy (spacecraft)",
       "object_type": "trajectory",
-      "list_sha256": "2007d3d415cf317408e5a272aa768c16cdd703cbd14a155e7850ad44ca16b59b",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "Lucy (spacecraft)",
       "jpl_type": "spacecraft",
       "queries": [
@@ -1874,12 +1892,12 @@
       ]
     },
     "juice": {
-      "confirmed": "2026-10-25",
+      "confirmed": "2026-10-31",
       "horizons_id": "-28",
       "id_type": "id",
       "horizons_name": "JUICE (spacecraft)",
       "object_type": "trajectory",
-      "list_sha256": "2007d3d415cf317408e5a272aa768c16cdd703cbd14a155e7850ad44ca16b59b",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "JUICE (spacecraft)",
       "jpl_type": "spacecraft",
       "queries": [
@@ -1888,12 +1906,12 @@
       ]
     },
     "psyche_spacecraft": {
-      "confirmed": "2026-10-25",
+      "confirmed": "2026-10-31",
       "horizons_id": "-255",
       "id_type": "id",
       "horizons_name": "Psyche (spacecraft)",
       "object_type": "trajectory",
-      "list_sha256": "2007d3d415cf317408e5a272aa768c16cdd703cbd14a155e7850ad44ca16b59b",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "Psyche (spacecraft)",
       "jpl_type": "spacecraft",
       "queries": [
@@ -1902,12 +1920,12 @@
       ]
     },
     "europa_clipper": {
-      "confirmed": "2026-10-25",
+      "confirmed": "2026-10-31",
       "horizons_id": "-159",
       "id_type": "id",
       "horizons_name": "Europa Clipper (spacecraft)",
       "object_type": "trajectory",
-      "list_sha256": "2007d3d415cf317408e5a272aa768c16cdd703cbd14a155e7850ad44ca16b59b",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "Europa Clipper (spacecraft)",
       "jpl_type": "spacecraft",
       "queries": [
@@ -1916,12 +1934,12 @@
       ]
     },
     "bepicolombo": {
-      "confirmed": "2026-10-25",
+      "confirmed": "2026-10-31",
       "horizons_id": "-121",
       "id_type": "id",
       "horizons_name": "BepiColombo (Spacecraft)",
       "object_type": "trajectory",
-      "list_sha256": "2007d3d415cf317408e5a272aa768c16cdd703cbd14a155e7850ad44ca16b59b",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "BepiColombo (Spacecraft)",
       "jpl_type": "spacecraft",
       "queries": [
@@ -1930,12 +1948,12 @@
       ]
     },
     "solar_orbiter": {
-      "confirmed": "2026-10-25",
+      "confirmed": "2026-10-31",
       "horizons_id": "-144",
       "id_type": "id",
       "horizons_name": "Solar Orbiter (spacecraft)",
       "object_type": "trajectory",
-      "list_sha256": "2007d3d415cf317408e5a272aa768c16cdd703cbd14a155e7850ad44ca16b59b",
+      "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "jpl_name": "Solar Orbiter (spacecraft)",
       "jpl_type": "spacecraft",
       "queries": [

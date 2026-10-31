@@ -6,7 +6,7 @@
   "sheets": {
     "-31": {
       "name": "Voyager 1",
-      "read": "2026-10-12",
+      "read": "2026-10-31",
       "revised": "Aug 19, 2022",
       "stated": {
         "RA_arcsec": 1.701,
@@ -23,7 +23,7 @@
     },
     "-32": {
       "name": "Voyager 2",
-      "read": "2026-10-12",
+      "read": "2026-10-31",
       "revised": "Aug 19, 2022",
       "stated": {
         "RA_arcsec": 4.718,
@@ -40,7 +40,7 @@
     },
     "-399110": {
       "name": "Apollo 11 S-IVB",
-      "read": "2026-10-12",
+      "read": "2026-10-31",
       "revised": "Mar 22, 2016",
       "stated": null,
       "rows": {},
@@ -51,7 +51,7 @@
     },
     "-23": {
       "name": "Pioneer 10",
-      "read": "2026-10-12",
+      "read": "2026-10-31",
       "revised": "Jul 27, 2005",
       "stated": null,
       "rows": {},
@@ -62,7 +62,7 @@
     },
     "-24": {
       "name": "Pioneer 11",
-      "read": "2026-10-12",
+      "read": "2026-10-31",
       "revised": "Jun 15, 2007",
       "stated": null,
       "rows": {},
@@ -73,7 +73,7 @@
     },
     "-77": {
       "name": "Galileo",
-      "read": "2026-10-12",
+      "read": "2026-10-31",
       "revised": "Feb 23, 2008",
       "stated": null,
       "rows": {},
@@ -84,7 +84,7 @@
     },
     "-21": {
       "name": "SOHO",
-      "read": "2026-10-12",
+      "read": "2026-10-31",
       "revised": "Sep 01, 2026",
       "stated": null,
       "rows": {},
@@ -95,7 +95,7 @@
     },
     "-82": {
       "name": "Cassini",
-      "read": "2026-10-12",
+      "read": "2026-10-31",
       "revised": "Sep 28, 2018",
       "stated": null,
       "rows": {},
@@ -106,7 +106,7 @@
     },
     "-226": {
       "name": "Rosetta",
-      "read": "2026-10-12",
+      "read": "2026-10-31",
       "revised": "Oct 24, 2016",
       "stated": null,
       "rows": {},
@@ -117,7 +117,7 @@
     },
     "-98": {
       "name": "New Horizons",
-      "read": "2026-10-12",
+      "read": "2026-10-31",
       "revised": "Sep 01, 2026",
       "stated": null,
       "rows": {},
@@ -128,7 +128,7 @@
     },
     "-5": {
       "name": "Akatsuki",
-      "read": "2026-10-12",
+      "read": "2026-10-31",
       "revised": "Aug 06, 2025",
       "stated": null,
       "rows": {},
@@ -139,7 +139,7 @@
     },
     "-61": {
       "name": "Juno",
-      "read": "2026-10-12",
+      "read": "2026-10-31",
       "revised": "Sep 30, 2026",
       "stated": null,
       "rows": {},
@@ -150,7 +150,7 @@
     },
     "-139479": {
       "name": "Gaia",
-      "read": "2026-10-12",
+      "read": "2026-10-31",
       "revised": "May 16, 2025",
       "stated": null,
       "rows": {},
@@ -161,18 +161,19 @@
     },
     "-37": {
       "name": "Hayabusa2",
-      "read": "2026-10-12",
-      "revised": "Jun 30, 2026",
+      "read": "2026-10-31",
+      "revised": "Sep 30, 2026",
       "stated": null,
       "rows": {},
       "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-37'&OBJ_DATA=YES&MAKE_EPHEM=NO",
       "notes": [
-        "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+        "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)",
+        "2026-10-31: Revised moved from Jun 30, 2026 to Sep 30, 2026; what it states is unchanged"
       ]
     },
     "-64": {
       "name": "OSIRISREx",
-      "read": "2026-10-12",
+      "read": "2026-10-31",
       "revised": "Sep 18, 2025",
       "stated": null,
       "rows": {},
@@ -183,7 +184,7 @@
     },
     "-96": {
       "name": "Parker",
-      "read": "2026-10-12",
+      "read": "2026-10-31",
       "revised": "Sep 30, 2026",
       "stated": null,
       "rows": {},
@@ -194,7 +195,7 @@
     },
     "-168": {
       "name": "MarsRover",
-      "read": "2026-10-12",
+      "read": "2026-10-31",
       "revised": "Feb 18, 2021",
       "stated": null,
       "rows": {},
@@ -205,7 +206,7 @@
     },
     "-49": {
       "name": "Lucy",
-      "read": "2026-10-12",
+      "read": "2026-10-31",
       "revised": "Oct 25, 2025",
       "stated": null,
       "rows": {},
@@ -216,7 +217,7 @@
     },
     "-135": {
       "name": "DART",
-      "read": "2026-10-12",
+      "read": "2026-10-31",
       "revised": "Mar 01, 2024",
       "stated": null,
       "rows": {},
@@ -227,29 +228,31 @@
     },
     "-170": {
       "name": "JamesWebb",
-      "read": "2026-10-12",
-      "revised": "Sep 21, 2026",
+      "read": "2026-10-31",
+      "revised": "Oct 19, 2026",
       "stated": null,
       "rows": {},
       "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-170'&OBJ_DATA=YES&MAKE_EPHEM=NO",
       "notes": [
-        "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+        "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)",
+        "2026-10-31: Revised moved from Sep 21, 2026 to Oct 19, 2026; what it states is unchanged"
       ]
     },
     "-28": {
       "name": "JUICE",
-      "read": "2026-10-12",
-      "revised": "Jun 30, 2026",
+      "read": "2026-10-31",
+      "revised": "Sep 27, 2026",
       "stated": null,
       "rows": {},
       "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-28'&OBJ_DATA=YES&MAKE_EPHEM=NO",
       "notes": [
-        "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+        "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)",
+        "2026-10-31: Revised moved from Jun 30, 2026 to Sep 27, 2026; what it states is unchanged"
       ]
     },
     "-255": {
       "name": "Psyche",
-      "read": "2026-10-12",
+      "read": "2026-10-31",
       "revised": "Sep 30, 2026",
       "stated": null,
       "rows": {},
@@ -260,29 +263,31 @@
     },
     "-159": {
       "name": "Clipper",
-      "read": "2026-10-12",
-      "revised": "Sep 30, 2026",
+      "read": "2026-10-31",
+      "revised": "Oct 28, 2026",
       "stated": null,
       "rows": {},
       "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-159'&OBJ_DATA=YES&MAKE_EPHEM=NO",
       "notes": [
-        "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+        "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)",
+        "2026-10-31: Revised moved from Sep 30, 2026 to Oct 28, 2026; what it states is unchanged"
       ]
     },
     "-121": {
       "name": "BepiColombo",
-      "read": "2026-10-12",
-      "revised": "Jun 30, 2026",
+      "read": "2026-10-31",
+      "revised": "Sep 30, 2026",
       "stated": null,
       "rows": {},
       "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='-121'&OBJ_DATA=YES&MAKE_EPHEM=NO",
       "notes": [
-        "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)"
+        "2026-10-12: seeded from the survey (read through the chat's web-fetch tool)",
+        "2026-10-31: Revised moved from Jun 30, 2026 to Sep 30, 2026; what it states is unchanged"
       ]
     },
     "-144": {
       "name": "SolO",
-      "read": "2026-10-12",
+      "read": "2026-10-31",
       "revised": "Sep 30, 2026",
       "stated": null,
       "rows": {},
@@ -293,7 +298,7 @@
     },
     "-1024": {
       "name": "Artemis II",
-      "read": "2026-10-12",
+      "read": "2026-10-31",
       "revised": "Apr 20, 2026",
       "stated": null,
       "rows": {},
