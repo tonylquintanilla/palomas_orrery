@@ -131,32 +131,3 @@ Not urgent, in your order:
 
 **Tony**: Run record:
 
-**Session: DONE: 10-31-26 0924: Fable: Coordination session handoff**
-
-Good session, and all of it is confirmed: the morning Daily Run matched the night's commit at 024305f6, the cache swapped first time, 36 of 36 checkers passed, and the gallery is pushed at 981198c8 with the orrery at 4edc5b3b.
-
-The coordination handoff that closes this session is in your orrery documentation folder, 12,931 bytes: `HANDOFF_coordination_20261029_31.md`. It records the three runs on GitHub and what each proved, the one red row and its true cause, the six-hour delay of the first scheduled run, the Pages finding, and everything the next coordinating session needs to write the gallery half's brief, with the website's date fix first in it. It supersedes the handoff of Oct 29-30 as the latest record.
-
-Where this leaves us, in the handoff's own words:
-- The orrery's nightly run exists on GitHub, has run clean three times, and JPL answers it; your mornings begin with Pull origin.
-- The website's half is next, and its brief is the next coordinating session's first job.
-- The per-body form of a disagreement, which you ruled on Oct 27, is the orrery's next slice after that.
-
-Files for your run record:
-
-    ok documentation/HANDOFF_coordination_20261029_31.md (new, 230 lines)
-
-Tony-action rollup:
-- (do) Commit the handoff with the next orrery push.
-- (do) Mornings this week: the Actions tab's newest run, noting its start time in your run record; Pull origin; the Daily Run; the gallery push.
-- (do) When you like: delete the three "solar-system (n)" folders under the gallery's `data/`; check the GitHub notification setting for failed runs.
-- (decide) Nothing.
-
-Not committing or pushing: commit and push are Tony's under the orrery's CLAUDE.md. The untracked files the check sees are the briefs and the handoff in my cloud copy; the copies that count are in Tony's folder, and he commits them from GitHub Desktop.
-
-++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-
-**Session: 
-
-
-
