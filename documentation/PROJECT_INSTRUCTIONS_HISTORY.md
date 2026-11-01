@@ -3743,6 +3743,65 @@ resident.
 (Moved down from the resident protocol on 2026-10-31 when
 v3.119 made a fourth entry.)
 
+v3.117 (October 28, 2026): No rule changed in this document. ONE
+skill bump, one version (L-443, carrying L-497, L-496 and L-458):
+interactive-exhibit 1.27 -> 1.28. FOUR WRONG SENTENCES CORRECTED; THE
+ONE TEXT BOX, THE GROUP SEARCH AND THE REPORT LINK RECORDED.
+
+WHAT PROMPTED IT. The gallery's first Claude Code session, of Oct 27,
+late night (built on gallery 7a4a03a), built L-497's one text box and
+the streamer belt's own row, L-496's group search and L-458's Report a
+problem link. L-497's note listed four sentences in interactive-exhibit
+1.27 that the builds made wrong, each one a session following it would
+act on, and three new things to record. The gallery session reads the
+orrery's skills and does not edit them, so the correction waited for
+this orrery session (section 5, item 1 of
+documentation/HANDOFF_coordination_20261026_28.md).
+
+WHAT CHANGED. interactive-exhibit: a group IS found by a word such as
+"comet", by its row's find words; the streamer belt has its own row,
+and no member is drawn with another; Plotly's own hover box is off in
+every room, so a marker tap opens the page's one text box, in the Phone
+first sequence and The touch path; and the anatomy table's drawer row
+says a tap on a marker opens the text box too, not only naming its
+row. Recorded new: gallery/text_box.js (the box's words, one sentence
+to a bullet), the find words on the drawer's rows, and the Report a
+problem link in every room's i panel. Riding the bump, from L-501
+(2026 ED138): a body the served cache does not hold yet turns the
+Solar System figures check red as well as Cache in step. Each fact was
+read from the gallery's code at acbf206b before it was written. The skill's oldest of
+four version entries, 1.25, moved to documentation/SKILL_HISTORIES.md,
+by the three-entry rule.
+
+NOT DONE HERE, AND WHY. ledger-and-session-records stays at 1.22. Its
+sentence that Tony pastes into the live page and then copies is wrong
+(Tony, Oct 28, 13:27-13:29: he writes only in the timestamped copy, one
+session per copy), and the kinds of session (L-499) wait for its next
+version too; both go to a records session, by the coordination
+handoff's queue, item 6. Meanwhile CLAUDE.md in both repositories says
+the run-record zone is empty by design.
+
+THE OBLIGATION TRAVELS. A Claude Code session reads each skill as the
+file in the repo. This one read in full horizons-orbital-mechanics
+1.12, orrery-coding-conventions 1.12, provenance-discipline 2.35,
+interactive-exhibit 1.27, agentic-pre-test 1.3 and
+ledger-and-session-records 1.22, each as the manifest expected, and
+safe-file-editing 1.14, also as expected, read in full partway through
+the work rather than before its first edits. The account's installed copies
+cannot be seen from Code. The next session that loads skills from the
+account confirms its copy reads interactive-exhibit 1.28, and, from
+v3.116 and v3.115, provenance-discipline 2.35 and
+orrery-coding-conventions 1.12, before work that fires them.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.114 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-11-01 when
+v3.120 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

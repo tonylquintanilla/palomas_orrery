@@ -276,7 +276,7 @@ The brief and a short afternoon handoff are in your orrery documentation folder 
 **The handoff** (`HANDOFF_coordination_20261101_afternoon.md`) records the cached-copy finding as a rule for coordinating sessions (read JPL's clock in the header before calling an answer live) and a second one: a hold built a day before the ruling that governs it can contradict it quietly, so the next brief re-reads the mechanism as built.
 
 Run order:
-1. Commit and push the orrery with the two files and your run record (GitHub Desktop; Pull origin first if it shows a number). -- 
+1. Commit and push the orrery with the two files and your run record (GitHub Desktop; Pull origin first if it shows a number). -- 6a434ed87956548e7c93f03a23d54c0d2f12e1f0
 2. When you want the build this week, open a Claude Code session through the python_work door and paste:
 
    > Orrery repository. Please build from documentation/COORD_L470_orrery_comet_pins_backstop_brief_20261101.md: the workflow's backstop line first, then the lesson into gallery-cache-builder, then L-503's close, then the comet pins if there is room. Read the brief, the Oct 31 brief's sections 3 and 4 it names, and the two coordination handoffs of Nov 1 first.
@@ -289,3 +289,155 @@ Tony-action rollup:
 - (decide) Nothing today.
 
 Not committing or pushing: those are yours under the orrery's CLAUDE.md.
+
+=================================================
+
+**Session: OPEN: 11-1-26 1353: Opus: Code: Orrery repository workflow build L470**
+
+I've read the brief and both Nov 1 handoffs; now reading the seven skills the job uses.
+
+All seven skill versions match the manifest; the gallery is clean at b6574a0. Reading them in full now.
+
+Still reading the provenance skill (about two thirds through), then the coding-conventions skill.
+
+All seven skills read, every version matching the manifest. Checking the workflow file and the ledger items before I propose.
+
+I've read the brief and the Nov 1 handoffs, and I'm ready to build once you say go.
+
+**Skills read in full, each matching the manifest:**
+- safe-file-editing 1.14
+- agentic-pre-test 1.3
+- ledger-and-session-records 1.22
+- provenance-discipline 2.36, with its figures reference
+- horizons-orbital-mechanics 1.13
+- gallery-cache-builder 1.15
+- orrery-coding-conventions 1.12
+
+**Base:** your orrery folder and GitHub both read 6a434ed. The only change waiting is your own run record (`WHERE_WE_ARE_11-1-26_1324_run_record.md`), which now has the commit number written in. The brief says that one is expected. The website folder is clean at b6574a0, and I'll only read it.
+
+**What I'll do, in the brief's order:**
+1. Add the second nightly time, 11:17 UTC, to the orrery's workflow file. It catches a night GitHub drops.
+2. Write the lesson into gallery-cache-builder 1.16, with the morning sentence. The lesson: a number the export changes on purpose is looked for in the website's checks before the push.
+3. Close L-503 (the belt's cloud) in the records, from your phone look.
+4. Ask the six periodic comets by their designation instead of a record number, if there's room. Before anything switches, I test JPL's answers through the orrery's own code. One disagreement and the record numbers stay.
+5. Then the protocol entry, the records and the full maintenance run.
+
+One small mismatch in the brief: it says GitHub's two sentences about late and dropped schedules are already quoted in the workflow file. They aren't; the quote there is from GitHub's concurrency page. I'll read GitHub's page myself and quote the two sentences once in the new comment.
+
+=================================================
+
+**Fable:**
+
+Yes, go ahead. Code's reading matches the brief, and its correction is right: the sentences quoted in `nightly.yml` at lines 53 to 58 are from GitHub's concurrency page, not the schedule page; the two sentences on delayed and dropped schedules are nowhere in the file yet. I wrote that wrong. Code's plan to read GitHub's page itself and quote them once in the new comment is the fix, and it is the better record anyway: the file then carries both of GitHub's pages, each dated to its own read.
+
+Two things to hold Code to when its report comes, both already in the brief:
+- The export diff, before and after the switch, read for the six `horizons_id` and `target` values unchanged. That is the proof no website pin moves.
+- The night form in a spare clone with a planted apparition change seen as TAKEN and a planted name change seen as held.
+
+The one decision in it is still after the report, not now: whether the six comets are asked every night (the brief's reading) or every 30 days.
+
+Tony-action rollup:
+- (do) Tell Code to go.
+- (do) Paste me its final report before you commit.
+- (decide) Nothing now; 4.6's cadence when you read the report.
+
+=====================================================================
+
+**Code:**
+
+Backstop line in, YAML loads with both times, and no code reads the schedule. Now the lesson for gallery-cache-builder; first I'll read L-484's lesson as written and check the gallery files it names.
+
+Writing the lesson and the morning sentence into gallery-cache-builder now.
+
+Now the night-form sentence and the new section.
+
+Lesson written, manifest regenerated, check clean. Now the comet test: first reading how the six are entered and how the Horizons check builds its addresses.
+
+Testing the six comets against JPL now, through astroquery and the check's own address builder, before deciding whether the switch fits this session.
+
+Now the test itself, written to my scratch folder and run against JPL.
+
+All 24 checks line up consistently across the six comets, with JPL's clock confirming a fresh Nov 1 read and bare semicolons now rejected outright—so the switch can proceed. Next I'll check how the readers handle a comet queried by designation.
+
+I'm pausing the switch at section 4: tests passed, but code review shows the orrery's plotting relies on comets' record-number pattern (comet tails, detection), so switching now risks silently dropping tails from plots. I'll log this finding for the next session, then complete the protocol entry and records.
+
+Record written and line numbers confirmed. Now the protocol's v3.120 entry.
+
+Writing the move and the new entry with a small all-or-nothing script.
+
+Protocol at v3.120, copy made, v3.117 moved down, skills check clean. Now the ledger: reading the ends of L-485, L-484 and L-470.
+
+Now the ledger edits, as one all-or-nothing script.
+
+Ledger done (L-503 moved to the closed section by the index tool). Now Where We Are, section by section.
+
+131 lines above the marker; the cap is 130, so trimming one Deferred line.
+
+Now the full maintenance run (several minutes), in the background.
+
+The maintenance run is going; I'll read its result when it finishes.
+
+All my files are ASCII with LF. Your run record holds 3 non-ASCII bytes; it's yours, so I haven't touched it. Waiting on the maintenance run.
+
+The maintenance run is still going (it takes several minutes); I'll pick up when it reports back. The only non-ASCII in your run record is one long dash on line 138, below the marker, in your own text.
+
+33 of 33 gating checkers passed, and the push gate holds (0 Tier-1 on what leaves the orrery). Filling in Where We Are's Signals from these files.
+
+Sections 1, 2, 3, 5 and 6 of the brief are built. The comets were tested but not switched, and nothing the website prints will change. The maintenance run passed 33 of 33 gating checkers, and the push gate holds at 0 Tier-1 (no unsourced number in anything the orrery sends to the website).
+
+**What was done**
+- **The backstop:** the orrery's night now also starts at 11:17 UTC, so a night GitHub drops still runs that day. The workflow file still loads correctly with both times. The 07:17 time stays.
+- **The lesson** (L-484, the two agree): it's in gallery-cache-builder 1.16 as a new section. When the export changes a number on purpose, the website's own checks are searched for the old number before the push. I put it there rather than in provenance-discipline. That skill asks whether a number is true; this lesson is about the website still expecting the old one.
+- **The morning sentence:** pull first, don't wait for the night's run. It's in the same skill and in Where We Are's "Needs you now".
+- **L-503 (the belt's cloud):** closed, from your two "yes" answers on your phone.
+- **The comets** (L-470, JPL's permanent number): I asked JPL about all six by name four ways each, 24 answers. All were fresh (dated Nov 1 on JPL's clock) and all named the same record you use today. I didn't switch them: the orrery's plots recognise a comet by its record number, so after a switch Encke and the others would lose their tails, with no error. That needs a careful sweep and your eyes on a plot, so it goes to the next orrery session with this test written up.
+- **Two small corrections to the brief:** GitHub's sentences about late and dropped runs weren't already in the workflow file, so I quoted them once there. And JPL now refuses an address with an unencoded semicolon outright, instead of returning all 61 of Encke's records.
+
+**Files changed, for your run record**
+- ok .github/workflows/nightly.yml (2 edits)
+- ok skills/gallery-cache-builder/SKILL.md (6 edits; its reading plan rewritten by the skills tool)
+- ok documentation/SKILL_HISTORIES.md (1 edit)
+- ok PROJECT_INSTRUCTIONS.md (3 edits; the v3.117 entry moved out; the manifest row rewritten by the skills tool)
+- ok documentation/PROJECT_INSTRUCTIONS_HISTORY.md (1 edit)
+- ok documentation/project_instructions_v3_120.md (new copy)
+- ok documentation/CHECK_L470_comet_cap_answers_20261101.md (new)
+- ok LEDGER_CONSOLIDATED.md (7 edits; index rebuilt; L-503 moved to the closed section)
+- ok documentation/WHERE_WE_ARE.md (9 edits; 130 lines above the marker; nothing below it touched)
+- Rewritten by the maintenance run, dates and counts only: DATA_INVENTORY.md, MODULE_ATLAS.md, MODULE_INDEX.md, PROVENANCE_AUDIT.md, data/provenance_history.json, documentation/prompts/citation_review.jsonl
+- Yours, not touched by me: documentation/WHERE_WE_ARE_11-1-26_1324_run_record.md. It has one long dash on line 138, the only non-ASCII character in the change list.
+
+Every file I wrote is plain ASCII with Unix line endings.
+
+**Your run order**
+1. Paste this report to the coordinating session and wait for its word.
+2. In GitHub Desktop, click Pull origin first if it shows a number. Then commit and push the orrery, everything in the change list together.
+3. The website needs nothing from you. Its night pulls the new export by itself and should be clean, with nothing printed changing. Then click Pull origin on the website.
+4. Tomorrow, on the orrery's Actions tab: you should see a run at 07:17 UTC or a late one. If GitHub dropped it, you'll see one at 11:17 instead. Both should be clean.
+5. Send the orrery's new commit number to the coordinating session.
+
+**Tony-action rollup**
+- (do) Commit and push the orrery.
+- (do) Each morning, Pull origin on both, orrery then website, without waiting for the night's run.
+- (do) Paste this report to the coordinating session, and later send it the commit number.
+- (decide) Nothing this session. Whether the comets are asked every night (the brief's 4.6) comes to you once the switch is built.
+
+==========================================================
+
+**Fable:**
+
+My word: go ahead with Code's run order. The report holds up against the files I could read, and the pause at section 4 was the right call.
+
+**What I checked.** Code's CAP record (`CHECK_L470_comet_cap_answers_20261101.md`) is in your folder and reads as reported: 24 answers, 0 disagreements, each with JPL's clock of Nov 1, 12:07 to 12:08 Pacific, so that is the fresh read the brief asked for, and the brief's 4.2 is now the stale one. The reason for the pause is real and I confirmed it in the code at HEAD: `_is_comet` (line 1699) knows a periodic comet by a numeric id of 90,000,000 or more, and the three tail tests (lines 2618, 6386, 7730) ask `id_type in ['smallbody', 'id']`; a comet asked as "2P" with `id_type 'designation'` would lose its tail and its perihelion orbit with no error. My brief missed those four sites because it searched for one regular expression and those lines use another test. Where We Are is 130 lines above the marker, the protocol copy reads v3.120 with v3.117 moved down, and the box says plainly that nothing the website prints changes.
+
+**What this means for the queue.** The switch is now a session of its own, and a better-defined one: the test is done and recorded, and the sweep is named (the Horizons calls, the five comet tests, a helper that owns the query call, and astroquery's COMMAND read on both machines). Its proof ends with your eyes on a plot with Encke's tail. I'll write that brief when you want it; it does not have to come before the ruler build.
+
+Run order:
+1. GitHub Desktop: Pull origin first if it shows a number; then commit and push the orrery, everything in the change list together. -- nothing to pull. pushed to 
+2. The website needs nothing; its night should be clean with nothing printed changing. Pull origin on it tomorrow morning.
+3. Tomorrow, the orrery's Actions tab: a run at 07:17 UTC or a late one, or one at 11:17 if GitHub dropped the night; note the start times.
+4. Send me the orrery's SHA.
+
+Tony-action rollup:
+- (do) Commit and push the orrery.
+- (do) Mornings: Pull origin on both first, without waiting for the run.
+- (decide) Nothing. The cadence question in 4.6 waits for the switch.

@@ -27,7 +27,9 @@
 # half). Updated October 30, 2026 with Anthropic's Claude Opus 5.5
 # (L-485: the tick box and --ask-everything). Updated October 31, 2026
 # with Anthropic's Claude Opus 5.5 (L-485: the concurrency group, and the
-# checkout of main as it is when the job starts).
+# checkout of main as it is when the job starts). Updated November 1,
+# 2026 with Anthropic's Claude Opus 5.5 (L-485: the second scheduled
+# line, 11:17 UTC, the backstop for a night GitHub drops).
 
 name: Nightly run
 
@@ -40,6 +42,20 @@ on:
     # include the start of every hour" and "schedule your workflow to run
     # at a different time of the hour".
     - cron: '17 7 * * *'
+    # 11:17 UTC, the backstop (L-485; Tony's ruling of 2026-11-01, 12:04
+    # Chicago). GitHub's page "Events that trigger workflows", read
+    # 2026-11-01: "The schedule event can be delayed during periods of
+    # high loads of GitHub Actions workflow runs" and "If the load is
+    # sufficiently high enough, some queued jobs may be dropped." The
+    # 07:17 run started 6 h 22 min late on 2026-10-31 and 7 h 0 min late
+    # on 2026-11-01. A dropped night and a late one look the same until
+    # it arrives, so this second line catches a dropped night the same
+    # day. The 07:17 time stays: the lag is GitHub's, not the clock's.
+    # A second firing is harmless: the concurrency group below queues it
+    # behind a run still going, and a clean second run commits only its
+    # record, which carries its own time stamp (2026-11-01: b0acdea, then
+    # 0c0bac8).
+    - cron: '17 11 * * *'
   workflow_dispatch:
     inputs:
       # A tick box on the "Run workflow" form (L-485, 2026-10-30). Ticked,

@@ -7,9 +7,22 @@ fires_when: Nightly builder, atomic swap and its retry/roll-back/swap log, "Acce
 
 # Gallery Cache Builder (Phase 1b data serving)
 
-Read this file in 4 parts: lines 1-242, 243-523, 524-796, 797-843.
+Read this file in 4 parts: lines 1-249, 250-530, 531-783, 784-907.
 
-Skill version: 1.15 | 2026-10-31, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.16 | 2026-11-01, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 6a434ed8 and gallery @ b6574a0f. v1.16 (L-484, with
+L-485) adds A Served Number That Changes on Purpose, the lesson of the
+website's red nights of 2026-11-01: a number the orrery's export
+changes on purpose is looked for in the website's CHECKS before the
+push -- its acceptance lines and its hover fixture consume the export
+as much as its renderers do -- and the brief for such a change names
+the pins that move. And under The Daily Run's Steps, the night form:
+GitHub's schedule is best-effort, so the morning pulls first and does
+not wait for the run (Tony's ruling of 2026-11-01, 12:04 Chicago); the
+orrery's night gains a second scheduled line at 11:17 UTC, the
+website's waits for its next gallery session. Each fact was read from
+the code at 6a434ed8 and b6574a0f before it was written.
+Earlier: 1.15 | 2026-10-31, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ f4994ffc and gallery @ c1c578f5. v1.15 (L-485, with
 L-461 and L-443) records that the builder runs unattended: every night
 at 08:17 UTC on GitHub's computer, through `daily_run.py --night`, whose
@@ -33,18 +46,10 @@ rule held to the body's own 3-sigma, floored at 1e-7 AU and capped at
 every JPL question is asked fresh (`HORIZONS_CACHE`) and why; and
 `serve_drawings` serves a drawing named on a room's own row. Each fact
 was read from the builder at b55109f2 before it was written.
-Earlier: 1.13 | 2026-10-26, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 5398439 and gallery @ 9223cd1. v1.13 (L-443, slice 2,
-build B part 2) adds to A Spacecraft Is Fetched by Its Plan that a
-comet the orrery marks open_path is a path body too (is_path_body):
-fetched by its plan, served positions and no elements, open_path
-carried to the served entry, its trust measured from its positions, and
-named and not fetched when it has no plan yet. Its plan's span is a year
-before its perihelion to a year after today, not JPL's whole data.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
 on 2026-10-05 (L-418), 2026-10-14 (L-431), 2026-10-15 (L-446),
 2026-10-17 (L-449), 2026-10-25 (L-443), 2026-10-26 (L-443),
-2026-10-29 (L-399) and 2026-10-31 (L-485).
+2026-10-29 (L-399), 2026-10-31 (L-485) and 2026-11-01 (L-484).
 
 The standalone builder that fetches fresh JPL Horizons data and deploys the
 web gallery's served cache. It runs unattended every night on GitHub's
@@ -73,6 +78,7 @@ if this list and the headings disagree (L-418).
 - A Small Body's Own Uncertainty Is Served [QUALITY]
 - Every Question Is Asked of JPL, Fresh [QUALITY]
 - The Daily Run's Steps [QUALITY]
+- A Served Number That Changes on Purpose [QUALITY]
 - Validation stance
 - Commit with round-trip verify
 - The three-layer gate (documentation/TESTING_PROTOCOL.md, orrery repo)
@@ -118,7 +124,8 @@ matters: `--config` and `--output-dir` default to paths relative to the
 working directory, so launching from `tools/` fails at load_config. No
 flags runs nightly mode, and Tony commits in GitHub Desktop. Tony's
 morning order since the night exists: Pull origin on both repositories
-first, then anything else.
+first, then anything else, without waiting for a night that has not
+run yet (The Daily Run's Steps, the night form, says why).
 
 The history, kept because it explains the gate. The Windows scheduled
 task was disabled on 2026-08-10 (Tony: "It can't run without my machine
@@ -702,6 +709,23 @@ ending in one gate:
   writes nothing, and its record is the run's log. `python daily_run.py
   --check` judges made-up nights and planted faults for the gate and
   the runner form.
+- THE MORNING DOES NOT WAIT FOR THE NIGHT (v1.16, L-485; Tony's ruling
+  of 2026-11-01, 12:04 Chicago): Tony pulls first and does not wait for
+  the run, and a run that lands later in the day comes with his next
+  Pull origin -- because GitHub's schedule is best-effort. Its page
+  "Events that trigger workflows", read 2026-11-01: "The schedule event
+  can be delayed during periods of high loads of GitHub Actions
+  workflow runs" and "If the load is sufficiently high enough, some
+  queued jobs may be dropped." On 2026-11-01 the website's 08:17 run
+  started at 15:15 UTC, 6 h 58 min late, and the orrery's 07:17 run at
+  14:17, 7 h 0 min late (6 h 22 min on 2026-10-31). A dropped night is
+  caught the same day by a second scheduled line: the orrery's at 11:17
+  UTC since 2026-11-01 (its `.github/workflows/nightly.yml`); the
+  website's at 12:17 comes with its next gallery session, and until
+  then its workflow carries the 08:17 line alone. A second firing is
+  harmless: the concurrency group queues it, and a clean second run
+  commits only its night record. The times stay (no reschedule): the
+  lag is GitHub's, not the clock's.
 
 Apart from the pulls and the records, a step that reports a problem
 does not stop the next: the guest book's problems still do not stop the
@@ -716,6 +740,46 @@ goes red, naming the objects, on the day a confirmation turns 30 days
 old: the cure is the orrery's maintenance run, then the push, then the
 pull here. `python daily_run.py --check` lists the steps and fails if a
 script is missing; the maintenance run runs it.
+
+## A Served Number That Changes on Purpose [QUALITY]
+
+Learned 2026-11-01 (v1.16, L-484, with L-485). The orrery's export
+changed one served number on purpose -- Earth's inner Van Allen belt,
+9,600 km to 10,000 km, by the export's rounding fix of 2026-10-31 --
+and the website's night refused every cache built on it until a
+gallery session moved two pins: the website's run 2 (by hand, 14:24
+UTC) and run 3 (scheduled, 15:15 UTC) were red, "1 of 36 gating
+checkers FAILED: Display figures", and committed nothing, as designed.
+The renderers were right. Two of the website's CHECKS still held the
+old number.
+
+- THE WEBSITE'S CHECKS CONSUME THE EXPORT TOO. The gallery's "Display
+  figures" row, `documentation/smoke_display_figures.js` in the
+  gallery repo, pins what the export serves two ways: ACCEPTANCE_LINES,
+  the approved wording of each listed hover, and the hover fixture
+  every built hover is compared with (`FIXTURE`, a
+  `fixture_hovers_<handle>_on_<sha>.json` beside it, re-recorded when
+  hovers change on purpose). A served number that moves moves the
+  hover, and both pins fail, by name.
+- SO BEFORE THE PUSH, GREP THE OTHER REPOSITORY'S CHECKS for the number
+  that moves, in the form a visitor reads it ("9,600"), and not only
+  its renderers. The orrery session of 2026-10-31 and the coordinating
+  session that wrote its brief read the renderers alone.
+- THE BRIEF FOR SUCH A CHANGE NAMES THE PINS THAT MOVE, by file, or
+  says that none does and how that was found. The gallery session then
+  moves each pin in the build that pulls the new export, re-records the
+  fixture, and proves the old figure fails by name (2026-11-01:
+  `fixture_hovers_L484_on_c1c578f5.json`, "9,600" planted and failing).
+- A CHANGE MEANT TO MOVE NOTHING SERVED is proved the other way round:
+  save `data/objects_export.json` (or `data/constants_export.json`)
+  before the change, diff it after, and name every field that moved.
+
+The check refusing was the gate working; the lesson is that the session
+making the change can know ahead. provenance-discipline binds at the
+export and asks whether a served number is TRUE (The Gate Binds at
+EXPORT); this section is about the other repository still expecting
+the old one, which is why it lives here, beside the Daily Run that
+pulls the export.
 
 ## Validation stance
 

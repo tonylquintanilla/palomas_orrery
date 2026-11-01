@@ -1131,6 +1131,16 @@ And under The Daily Run's Steps, Tony's ruling of 2026-10-25 on L-461,
 pull, and the Daily Run stops before the builder.
 (Moved down 2026-10-31, when 1.15 made a fourth entry.)
 
+Earlier: 1.13 | 2026-10-26, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 5398439 and gallery @ 9223cd1. v1.13 (L-443, slice 2,
+build B part 2) adds to A Spacecraft Is Fetched by Its Plan that a
+comet the orrery marks open_path is a path body too (is_path_body):
+fetched by its plan, served positions and no elements, open_path
+carried to the served entry, its trust measured from its positions, and
+named and not fetched when it has no plan yet. Its plan's span is a year
+before its perihelion to a year after today, not JPL's whole data.
+(Moved down 2026-11-01, when 1.16 made a fourth entry.)
+
 ## horizons-orbital-mechanics
 
 Earlier: 1.2 | 2026-10-10, with Anthropic's Claude Opus 5.5, at

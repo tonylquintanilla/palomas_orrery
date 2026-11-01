@@ -1,46 +1,48 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 1, 2026: the gallery session (the Display figures pin after the rounding fix).
-- Written at orrery 6b70a53a and gallery c1c578f5, plus uncommitted edits.
+Last updated: November 1, 2026, evening: the orrery session (the backstop, the lesson, the comets' test).
+- Written at orrery 6a434ed8 and gallery b6574a0f, plus uncommitted edits.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Fixed: the export's rounding (the orrery's hover was right). After
->   the website's pull the belt's 90th height reads "about 100 million
->   km", Earth's inner Van Allen belt "= 10,000 km" (9,600 today).
-> - The website's check now expects 10,000 km for that belt, and fails
->   by name if 9,600 comes back. Its night of Nov 1 went red because the
->   check still expected 9,600: the gate held the old site, as designed.
-> - A night takes a new value JPL gives and logs old and new; it holds
->   one body whose name or record JPL no longer gives, until you look.
+> - The orrery's night gets a second time, 11:17 UTC, so a night
+>   GitHub drops still runs that day. The website gets its own with the
+>   next gallery session.
+> - In the builder's skill: when the export changes a number on
+>   purpose, the website's checks are searched for the old number first.
+>   That old number is what turned the website's nights of Nov 1 red.
+> - The belt's cloud is closed: your phone look said yes to both.
+> - The comets were tested, not switched. All six, asked by name, give
+>   today's record. The switch waits: the orrery's plots spot a comet by
+>   its record number, and their tails would vanish.
+> - Nothing the website prints changes.
 >
-> **Do next:** *commit and push the website (everything in its change
-> list, together); then "Run workflow" on its Actions tab, read to
-> "NIGHT RUN: CLEAN"; then the phone look at the two belt sentences.*
+> **Do next:** *commit and push the orrery (everything in its change
+> list, together).*
 >
 > **Needs you now:**
-> - *(do) Pull origin each morning on BOTH repositories, orrery then
->   website, before anything else.*
+> - *(do) Each morning, Pull origin on both repositories, orrery then
+>   website, first. Do not wait for the night's run: GitHub starts it
+>   hours late some days, and a late run comes with your next Pull.*
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
-## The road
+## The road  **>> UPDATED THIS SESSION**
 
 Oct 27's order, changed Oct 29 (`DESIGN_L314_solar_wind_rulings_20261029.md`).
   1-11.[done]  All but 5, 5b and 9: the three rooms live; typed facts
                and periods checked (Oct 14-16); the Sun's slice, closed
                Oct 27; the objects (L-443 (the objects)), closed Oct 28;
-               the small builds and 2026 ED138, closed Oct 28.
+               the small builds and 2026 ED138, closed Oct 28; the
+               belt's cloud (L-503), closed Nov 1.
  5d.   [NOW]   *The orrery's clock (L-504 (the orrery's clock)): the
                data path done Oct 29, the website's date fix Oct 31;
                Earth System, stamps, tools next.*
  11b.  [NOW]   *The nightly run (L-485 (a nightly run)): both halves run
-               on GitHub; the hold built Oct 31 (take a value, hold an
-               identity); a week of mornings now.*
- 5c.   [next]  L-503 (the belt's cloud): the 90th height fixed; it
-               closes on your phone look after the website's pull.
+               on GitHub; the hold built Oct 31; the orrery's second
+               time (11:17 UTC) Nov 1; a week of mornings now.*
   5.   [beside] Earth's list (L-413 (Earth's list)): talks 3 to 6 from
                your phone, then their builds.
   5b.  [beside] Housekeeping when a session has room: L-424, L-425,
@@ -75,10 +77,11 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
 ## Deferred
 
 Waiting behind other work; a line leaves when picked up.
-- L-485 (a nightly run): the hold's website half, the builder honouring
-  a held body, a short gallery session after the ruler build (Oct 31).
-- L-470 (JPL's permanent number): the comets asked by designation, the
-  next orrery session; the website's own asking, with the hold's half.
+- L-485 (a nightly run): the website's 12:17 UTC time, with the ruler
+  build (Nov 1); the hold's website half, a session after it (Oct 31).
+- L-470 (JPL's permanent number): the comets by name, tested Nov 1;
+  the switch, with the orrery's comet tests, the next orrery session;
+  the website's asking and its six notes, with the hold's half.
 - L-462 (a shorter run): whether it stays, now the nightly run exists.
 - L-128 (the ice lines), already waiting.
 - L-500 (eyeballed numbers): the streamer belt's seven and the clumps'
@@ -94,10 +97,10 @@ Waiting behind other work; a line leaves when picked up.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261101T152614Z, ok, no retry (the website's swap
-  log's last line: your Daily Run of Nov 1, by hand).
+- Last cache build: 20261101T161141Z, ok, no retry (the website's swap
+  log's last line: its run 4 of Nov 1, by hand, on GitHub).
 - Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md
-  of Oct 31; no orrery code changed since).
+  of this session's maintenance run, Nov 1).
   Whole tree: 275: orrery 111, Earth System 149, stars 13, utilities 2.
 - This page's date and the ledger's newest stamp: both Nov 1. Agree.
 
@@ -117,14 +120,13 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- Today: L-484 (the two agree: the rounding; the website's pin moved,
-  and the lesson), L-485 (a nightly run: the website's run 2, red by
-  name). The brief:
-  `COORD_L484_gallery_display_figures_brief_20261101.md`.
+- Today: L-485 (a nightly run: the second time), L-484 (the two agree:
+  the lesson's skill), L-470 (JPL's permanent number: the comets'
+  test, `CHECK_L470_comet_cap_answers_20261101.md`), L-503 closed. The
+  brief: `COORD_L470_orrery_comet_pins_backstop_brief_20261101.md`.
 - The door: `documentation/python_work_door/`, and L-499.
 - The next gallery build: `DESIGN_axis_ticks_and_ruler_rulings_20261031.md`.
-- Your run record: `WHERE_WE_ARE_10-31-26_2048_run_record.md` (this
-  session's is in it too, under "11-1-26 0859").
+- Your run record: `WHERE_WE_ARE_11-1-26_1324_run_record.md`.
 
 --- Your run record below this line. No patch edits it; the length cap
 --- stops here; the close reads your timestamped copy and clears this.

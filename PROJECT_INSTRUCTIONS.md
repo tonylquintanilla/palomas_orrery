@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.119 | October 31, 2026
+Tony Quintanilla, PE | Claude | v3.120 | November 1, 2026
 
-Cut from f4994ffc at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 6a434ed8 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -530,7 +530,7 @@ gallery-assembler            1.3  render_orbits.py, resolver.py,
                                   unresponsive, it worked yesterday, a console
                                   error appears, or Claude is about to hand
                                   Tony a test to run
-gallery-cache-builder        1.15 Nightly builder, atomic swap and its
+gallery-cache-builder        1.16 Nightly builder, atomic swap and its
                                   retry/roll-back/swap log, "Access is denied"
                                   under data/, coverage_index, serving cache,
                                   objects_config, dry-run/first-build/nightly,
@@ -1228,6 +1228,76 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.120 (November 1, 2026): No rule changed in this document. ONE
+skill bump, one version (L-484, with L-485): gallery-cache-builder
+1.15 -> 1.16. THE LESSON OF THE WEBSITE'S RED NIGHTS WRITTEN INTO THE
+SKILL; THE ORRERY'S BACKSTOP LINE BUILT; THE COMETS' TEST RUN, THEIR
+SWITCH NOT BUILT.
+
+WHAT PROMPTED IT. The orrery's Claude Code session of Nov 1, built on
+orrery 6a434ed8 with the gallery at b6574a0f read only, from
+documentation/COORD_L470_orrery_comet_pins_backstop_brief_20261101.md.
+On Nov 1 the website's night went red twice ("1 of 36 gating checkers
+FAILED: Display figures") on a served number the orrery's export had
+changed on purpose, Earth's inner Van Allen belt, 9,600 km to 10,000
+km: the website's acceptance lines and hover fixture still held the
+old number. The gallery session wrote the lesson on L-484 for the
+orrery's skills, which a gallery session does not edit. And Tony ruled
+at noon (12:04 Chicago) that each nightly schedule gains a second line
+and the morning pulls without waiting for the run.
+
+WHAT CHANGED. gallery-cache-builder: a new section, A Served Number
+That Changes on Purpose (a number the export changes on purpose is
+looked for in the website's checks before the push; the brief for the
+change names the pins that move, or says none does and how that was
+found; a change meant to move nothing is proved by a diff of the
+export). Under The Daily Run's Steps, the night form: the morning does
+not wait for the night, because GitHub's schedule is best-effort (its
+page quoted, the three late starts named), and a dropped night is
+caught by a second scheduled line, the orrery's at 11:17 UTC, the
+website's at 12:17 with its next gallery session. The skill's oldest
+of four version entries, 1.13, moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule. Every
+sentence was read from the code at 6a434ed8 and b6574a0f, and GitHub's
+page fetched, before it was written.
+
+Not a skill, built the same session: the orrery workflow's second
+scheduled line, `cron: '17 11 * * *'` (L-485). And the test of the six
+periodic comets asked by designation with JPL's CAP directive (L-470):
+24 answers, four forms for each of Tempel 2, Schaumasse, Howell,
+Churyumov-Gerasimenko, Halley and Encke, every one live on JPL's clock
+of Nov 1 and naming today's pinned record
+(documentation/CHECK_L470_comet_cap_answers_20261101.md).
+
+NOT DONE HERE, AND WHY. The comets' switch from record number to
+designation (the brief's sections 4.5 to 4.9) was not built: reading
+the readers found that the orrery's plotting knows a periodic comet by
+its record number or its id_type in places the brief did not list
+(`_is_comet`, and the comet-tail tests in palomas_orrery.py), so the
+switch needs a sweep of those and Tony's look at a plot, more than the
+session's room. The brief's rule is to stop before section 4 rather
+than leave it half built. So horizons-orbital-mechanics stays at 1.13,
+and its Small-Body Record Pinning stays true. ledger-and-session-records
+stays at 1.22, its next version the records session's.
+
+THE OBLIGATION TRAVELS. A Claude Code session reads each skill as the
+file in the repo. This one read in full safe-file-editing 1.14,
+agentic-pre-test 1.3, ledger-and-session-records 1.22,
+provenance-discipline 2.36 with references/figures.md,
+horizons-orbital-mechanics 1.13, gallery-cache-builder 1.15 and
+orrery-coding-conventions 1.12, each as the manifest expected. The
+account's installed copies cannot be seen from Code. The next session
+that loads skills from the account confirms its copy reads
+gallery-cache-builder 1.16, and, from v3.118, interactive-exhibit 1.29,
+horizons-orbital-mechanics 1.13 and provenance-discipline 2.36, before
+work that fires them.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.117 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.119 (October 31, 2026): No rule changed in this document. ONE
 skill bump, one version (L-485, carrying L-461, L-443 and L-501):
 gallery-cache-builder 1.14 -> 1.15. THE WEBSITE'S NIGHT WRITTEN INTO
@@ -1361,62 +1431,6 @@ them.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.115 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.117 (October 28, 2026): No rule changed in this document. ONE
-skill bump, one version (L-443, carrying L-497, L-496 and L-458):
-interactive-exhibit 1.27 -> 1.28. FOUR WRONG SENTENCES CORRECTED; THE
-ONE TEXT BOX, THE GROUP SEARCH AND THE REPORT LINK RECORDED.
-
-WHAT PROMPTED IT. The gallery's first Claude Code session, of Oct 27,
-late night (built on gallery 7a4a03a), built L-497's one text box and
-the streamer belt's own row, L-496's group search and L-458's Report a
-problem link. L-497's note listed four sentences in interactive-exhibit
-1.27 that the builds made wrong, each one a session following it would
-act on, and three new things to record. The gallery session reads the
-orrery's skills and does not edit them, so the correction waited for
-this orrery session (section 5, item 1 of
-documentation/HANDOFF_coordination_20261026_28.md).
-
-WHAT CHANGED. interactive-exhibit: a group IS found by a word such as
-"comet", by its row's find words; the streamer belt has its own row,
-and no member is drawn with another; Plotly's own hover box is off in
-every room, so a marker tap opens the page's one text box, in the Phone
-first sequence and The touch path; and the anatomy table's drawer row
-says a tap on a marker opens the text box too, not only naming its
-row. Recorded new: gallery/text_box.js (the box's words, one sentence
-to a bullet), the find words on the drawer's rows, and the Report a
-problem link in every room's i panel. Riding the bump, from L-501
-(2026 ED138): a body the served cache does not hold yet turns the
-Solar System figures check red as well as Cache in step. Each fact was
-read from the gallery's code at acbf206b before it was written. The skill's oldest of
-four version entries, 1.25, moved to documentation/SKILL_HISTORIES.md,
-by the three-entry rule.
-
-NOT DONE HERE, AND WHY. ledger-and-session-records stays at 1.22. Its
-sentence that Tony pastes into the live page and then copies is wrong
-(Tony, Oct 28, 13:27-13:29: he writes only in the timestamped copy, one
-session per copy), and the kinds of session (L-499) wait for its next
-version too; both go to a records session, by the coordination
-handoff's queue, item 6. Meanwhile CLAUDE.md in both repositories says
-the run-record zone is empty by design.
-
-THE OBLIGATION TRAVELS. A Claude Code session reads each skill as the
-file in the repo. This one read in full horizons-orbital-mechanics
-1.12, orrery-coding-conventions 1.12, provenance-discipline 2.35,
-interactive-exhibit 1.27, agentic-pre-test 1.3 and
-ledger-and-session-records 1.22, each as the manifest expected, and
-safe-file-editing 1.14, also as expected, read in full partway through
-the work rather than before its first edits. The account's installed copies
-cannot be seen from Code. The next session that loads skills from the
-account confirms its copy reads interactive-exhibit 1.28, and, from
-v3.116 and v3.115, provenance-discipline 2.35 and
-orrery-coding-conventions 1.12, before work that fires them.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.114 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

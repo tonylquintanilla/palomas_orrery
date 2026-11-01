@@ -935,7 +935,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*248 live items; 232 need attention (`!`); 165 RICE-scored; 249 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*247 live items; 231 need attention (`!`); 165 RICE-scored; 250 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1081,7 +1081,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-466 | Every drawing starts and stops where a served row says (orrery + gallery, the Sun's slice and Earth's) | OPEN | -- | 2026-10-22 |
 | ! | L-467 | The scanner credits a display line with a citation it only sits near (orrery, provenance scanner) | OPEN | -- | 2026-10-21 |
 | ! | L-468 | The Sun room's phone look of 2026-10-21, night: the corona's drawer text and the Hills cloud's cross (gallery, the Sun room) | OPEN | -- | 2026-10-29 |
-| ! | L-470 | Orrery entries the website cannot serve as they stand (orrery, objects) | OPEN | -- | 2026-10-31 |
+| ! | L-470 | Orrery entries the website cannot serve as they stand (orrery, objects) | OPEN | -- | 2026-11-01 |
 | ! | L-476 | The orrery's whole-path plots draw by the same path plan as the website (orrery, spacecraft and comets) | OPEN | -- | 2026-10-24 |
 | ! | L-483 | A room for C/2025 K1 and its pieces, the first comet room (gallery, exhibits) | OPEN | -- | 2026-10-28 |
 | ! | L-484 | The website and the orrery agree on every object both draw, or the difference is written down (orrery + gallery, objects; method for interactive-exhibit) | OPEN | -- | 2026-11-01 |
@@ -1095,7 +1095,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-498 | The master plan restamped as v37 at slice 2's close (documentation) | OPEN | -- | 2026-10-27 |
 | ! | L-499 | The kinds of session: three, told apart by what each writes, with the build session in two forms (protocol, Mode 7) | OPEN | -- | 2026-10-29 |
 | ! | L-500 | The Sun's twelve eyeballed shape numbers: the streamer belt's seven and the outer cloud's clumps' five (orrery + gallery, the Sun's drawings) | OPEN | -- | 2026-10-27 |
-| ! | L-503 | The main asteroid belt's cloud on the website, L-443's last piece, its gallery half (gallery, the Solar System room) | OPEN | -- | 2026-10-31 |
 | ! | L-504 | The orrery's clock: UTC everywhere (orrery, every module that reads the clock) | OPEN | -- | 2026-10-31 |
 
 ### B. Pending Action (Tony-side)
@@ -1494,6 +1493,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-497 | Left-aligned text in every text box (gallery, the rooms) | DONE | -- | 2026-10-28 |
 |  | L-501 | 2026 ED138, the Rubin Observatory's first dwarf-planet candidate, added to the orrery as a test of the object pipeline (orrery + gallery, objects) | DONE | -- | 2026-10-28 |
 |  | L-502 | The triad's hover spot, and info crosses in crowded places (gallery, the rooms) | DONE | -- | 2026-10-29 |
+|  | L-503 | The main asteroid belt's cloud on the website, L-443's last piece, its gallery half (gallery, the Solar System room) | DONE | -- | 2026-11-01 |
 
 ### W.Done -- Web Publication track, closed items
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1664,158 +1664,6 @@ data path's calls (received from L-399).
 and `WHERE_WE_ARE_10-28-26_2357_run_record.md`; gallery `interactive.html`
 (`solarSystemSourceLine`), `tools/gallery_cache_builder.py` (`utc_to_tdb`);
 L-485; L-503.
-
-#### [L-503] The main asteroid belt's cloud on the website, L-443's last piece, its gallery half (gallery, the Solar System room)
-<!-- L:503 status:OPEN upd:2026-10-31 section:A flag: rice: -->
-- **Opened 2026-10-28 at L-443's close**, which built the orrery half
-  in the orrery's Claude Code session built on orrery b2fcc1bb and
-  gallery acbf206b (section 5, item 1 of
-  `documentation/HANDOFF_coordination_20261026_28.md`), by Tony's
-  ruling of that day (form B, recorded on L-443): dots placed at random
-  inside the belt's spread measured from 5,429 of JPL's main-belt
-  orbits, stored once, the hover saying it shows the belt's extent,
-  not individual bodies. The brief: "The website's pull and the
-  room's row are the next gallery session's."
-- **What the orrery serves at its push:** `data/drawings/main_belt.json`
-  (6,000 dots, 0.001 AU, the ecliptic frame, seed 443, written by
-  `export_drawings.py`); the nine MAIN_BELT_* rows in
-  `data/constants_export.json`, with their sources (JPL's SBDB Filter
-  Parameters and SBDB Query API); and the words, the orrery's
-  `main_belt_sampler.hover_text()`, every number from a row at its
-  declared count.
-- **What the gallery half does:** name the drawing under a feature's
-  `drawing.dots` in `data/objects_config.json`, so
-  `tools/pull_drawings.py` fetches it (it pulls only what the config
-  names, so the orrery's new file waits safely until then); give it
-  the Solar System room's row, beside the Main asteroid belt group
-  (JPL's MBA, the same class); serve its numbers through the rows, not
-  typed; its words to Tony first. It is the first stored drawing in a
-  room whose rows are bodies, so where its row sits and how it ticks
-  is the session's first question to Tony.
-- **Received from L-443:** the headless walk's Pluto frame check fails
-  on the stand-in data (it fails the same way on the untouched base);
-  it holds on the served cache. Recorded, not chased.
-- **Tony's ruling, 2026-10-29, morning** (his run record of 10-28-26
-  2357, Fable's paste): "a tickable row named "The belt's cloud", first
-  inside the Main-belt asteroids group, ticked and reset like a body, Go
-  To fitting the cloud. Go ahead."
-- **2026-10-29, built** (the gallery's Claude Code session, on gallery
-  963500ca). THE ROW: the Solar System room's served rows gain
-  `{drawing: "main_belt", in: "belt", label: "The belt's cloud", find,
-  feature}`, right after the Main asteroid belt group's row. It is the
-  room's own row, not a body's shell and not on any object: on the Sun
-  it would have added a row to the Sun room, and an object with no
-  orrery key fails the objects mirror. `gallery/solar_system_drawer.js`
-  reads it as its own row keyed "drawing:main_belt", first in its group
-  ahead of the bodies sorted by semi-major axis, tickable, counted with
-  the group's rows (the group's line reads 8), unticked by Reset and the
-  group's Reset, offering no room. `gallery/feature_renderers.js`
-  (`buildRoomCloud`) draws the dots as given, in the orrery's colour
-  ramp, and a cross just past the farthest drawn point (the distance
-  table's 100th entry times 1.02), 45 degrees round from the x axis in
-  the ecliptic; the cross is the row's text box marker, so Go To fits
-  the cloud (about 5 AU either side). THE PULL AND THE CACHE:
-  `tools/pull_drawings.py` and the builder's `serve_drawings()` read a
-  drawing named on a room's row too; the drawing was pulled this
-  session from orrery b3bfab02. THE NUMBERS: the nine MAIN_BELT_* rows,
-  linked on the row's feature and written by `tools/mirror_constants.py
-  --write` (38 fields, with their citations), never by hand. THE WORDS:
-  the orrery's `main_belt_sampler.hover_text()`, each number named in
-  braces and printed from its row by the orrery's rule, identical to
-  the orrery's text but for one thing, next.
-- **A difference from the orrery's words, and why:** the orrery prints
-  each distance with its kilometres ("1.67 AU (about 250 million km)"),
-  worked out from its store's full digits (4.263, 0.256). The export
-  serves the three tables rounded to their declared figures (4.26, 0.26)
-  and with no "in" kilometres. Kilometres worked out from the rounded
-  number print 637 million where the orrery prints 638, and 39 where it
-  prints 38 (interactive-exhibit: a hover never converts a served number
-  to print it). So the website prints the AU alone. For the next orrery
-  session: the export serves each table entry's "in" kilometres, as it
-  does a length row's, and the website then prints them. Recorded on
-  L-484 as a documented difference.
-- **Checked:** the drawer check (section 9, two breaks: the row read as
-  a body, sorted after the bodies; the row not tickable), the Solar
-  System figures check (part 9: the words worked out by the check's own
-  arithmetic, every dot between the distance table's ends and within the
-  latitude table's last entry, the cross just past the far end and off
-  the axes; two planted faults), and the Drawings check (a branch for a
-  room's own row: its ends against its row's tables; two planted
-  faults). Seen in the app's browser at 390 px: the row first in its
-  group, ticked by Go To, the frame fitted, the text box and the panel's
-  sentences and three citations, Reset unticking it. The served copy of
-  the drawing is made by the next Daily Run; until then the Drawings
-  check is red on it, correctly.
-- **For interactive-exhibit's next version** (this gallery session reads
-  the skills and does not edit them; each is a sentence a session would
-  act on, so the next orrery session corrects them): (1) Provenance, "A
-  computed distance prints by the larger of two errors": a small body's
-  own uncertainty is served by the builder on its cached record
-  (`position_uncertainty`, used whole), needs the builder to reach a
-  visitor, and the sentence prints when no source error is served, not
-  only when `position_accuracy` is absent. (2) The stored drawings list:
-  the main belt's cloud, the first named on a room's row; the pull and
-  the builder read rooms rows. (3) The Solar System room's drawer: a
-  drawing row and how it ticks, counts and resets. (4) The frame HUD
-  row of the anatomy: the triad in the bottom centre, the chip at the
-  right; the count line left of the triad. (5) L-502's rule for a
-  stored drawing's cross, and the Label words check that holds it. (6)
-  The source line: UTC after each UTC date, the epoch on JPL's clock,
-  and the sentence on the solar system's centre of mass. Also for the
-  next versions: gallery-cache-builder (the builder serves
-  `position_uncertainty`; `serve_drawings` reads rooms rows),
-  horizons-orbital-mechanics (the website's 2xr is a second question,
-  held to the served point), provenance-discipline (A Computed Position
-  Prints What Its Errors Earn still says the asteroids wait for L-399).
-- **Tony's look** (run record `documentation/WHERE_WE_ARE_10-28-26_2357_run_record.md`,
-  item 11, the belt's cloud row, tick, Go To, Reset, its words): "yes,
-  see upload".
-- **2026-10-29/30, the export's half** (the orrery's Claude Code
-  session, brief section 2). `export_constants.py` gives a table of
-  numbers (a dict keyed by name) its "in" per entry, keyed as its value
-  is, each worked out by `constants_rows.conversions()` from that
-  entry's full digits, as a length row's is: the distance table's 0th
-  entry, 1.668 AU, serves 2.50e8 km at three figures, "1.67 AU (about
-  250 million km)"; the 100th, 6.38e8 km. The height table likewise;
-  the latitude table is in degrees and has no other unit. The schema
-  number does not change. `test_constants_export.py` check 6 re-computes
-  a table's "in" entry by entry, with two pins naming an entry by its
-  key (the 90th height's pin first caught the session's own wrong
-  expectation of two figures: Rule 3 carries the place, so 99,800,000
-  km prints three). THE MIRROR does not ignore the new field: run on a
-  scratch copy of the website's config with the new export, it wrote
-  the "in" into two fields (the distance and the height nodes of the
-  belt's row), and nothing else; every page and check that reads a
-  served "in" asks for a unit by name (`node["in"]["km"]`), which a
-  table's "in" does not have, so each finds none until the website asks
-  for it by key.
-- **2026-10-31, the website prints the kilometres** (L-485's gallery
-  session): the nearest and farthest distances and the two heights, in
-  the orrery's form, "1.67 AU (about 250 million km)", from each
-  entry's served "in" km at its own figure count
-  (`gallery/feature_renderers.js`, cloudKm); the figures check's part 9
-  holds them, with two planted faults. One documented difference: the
-  90th height, about 100 million km in the orrery's hover and 99.8
-  million served by its export (L-484; L-485 carries it to the orrery
-  session).
-- **2026-10-31, the 90th height served right** (the orrery session
-  of L-484's entry of today): the export serves
-  MAIN_BELT_HEIGHT_PERCENTILES_AU[90] as 100,000,000 km, three figures,
-  where it served 99,800,000; the orrery's hover and the website now
-  agree once the website pulls. The documented difference ends there.
-**Gap (replaces the one below, 2026-10-31):** Tony's phone look at the
-belt's text box after the website's next pull -- its kilometres, the
-90th height reading about 100 million km -- then DONE.
-**Gap (superseded above; replaced the one below, 2026-10-31):** Tony's phone look at the
-belt's text box (its kilometres), then DONE.
-**Gap (superseded above, 2026-10-29/30):** the website prints the belt's distances with their kilometres from each entry's served "in" (the next gallery session); the Daily Run's pulls name `data/constants_export.json` and the config's two fields as changed. The skill corrections above are in interactive-exhibit 1.29, gallery-cache-builder 1.14, horizons-orbital-mechanics 1.13 and provenance-discipline 2.36.
-**Gap (superseded above, 2026-10-29):** the next Daily Run (pulls nothing new; serves the drawing into the cache), then Tony's phone look at the belt's cloud: its row, its dots, its words, Go To and Reset. For the next orrery session: the export serves the tables' kilometres; the skill corrections above.
-**Gap (superseded above):** the gallery session (after L-399 and L-502 on Tony's queue):
-the pull, the room's row, the words; the gallery run with the drawing's
-ends held; then Tony's phone look.
-**Ref:** L-443; orrery `main_belt_sampler.py`,
-`data/drawings/main_belt.json`, `constants_new.py` (THE MAIN ASTEROID
-BELT); gallery `tools/pull_drawings.py`, `data/objects_config.json`.
 
 #### [L-500] The Sun's twelve eyeballed shape numbers: the streamer belt's seven and the outer cloud's clumps' five (orrery + gallery, the Sun's drawings)
 <!-- L:500 status:OPEN upd:2026-10-27 section:A flag: rice: -->
@@ -2890,14 +2738,50 @@ L-489.
   Nov 1: "The schedule event can be delayed during periods of high
   loads". A backstop, a second scheduled time, is for the next design
   talk, not built.
-**Gap (replaces the one below, 2026-11-01):** Tony's push of the
+- **2026-11-01, the orrery's backstop line built** (the orrery's Claude Code session, built on orrery 6a434ed8 with the gallery at b6574a0f read only, from
+  `documentation/COORD_L470_orrery_comet_pins_backstop_brief_20261101.md`,
+  section 1; Tony's ruling of Nov 1, 12:04 Chicago, in
+  `documentation/HANDOFF_coordination_20261101_morning.md` section 2b).
+  `.github/workflows/nightly.yml` gains `- cron: '17 11 * * *'` after
+  the 07:17 line, with a comment naming the ruling, GitHub's two
+  sentences (its page "Events that trigger workflows", fetched again
+  Nov 1: "can be delayed during periods of high loads" and "some queued
+  jobs may be dropped"), the late starts, and why a second firing is
+  harmless: the concurrency group queues it, and a clean second run
+  commits only its record (b0acdea, then 0c0bac8). The brief said the
+  two sentences were already quoted at lines 53 to 58; those lines
+  quote GitHub's concurrency page, so the two are quoted once, in the
+  new comment. The header gains its "Updated November 1" line. The
+  file reads as YAML with both times (PyYAML); no code reads the
+  schedule.
+- **The start times, for the record:** Oct 31, the orrery's 07:17 run
+  6 h 22 min late; Nov 1, the orrery's 7 h 0 min late (run 4, 14:17
+  UTC) and the website's 08:17 run 6 h 58 min late (its run 3, 15:15
+  UTC, scheduled, red on the inner belt's old pin before the fix was
+  pushed). The website's run 4, by hand at 16:11 UTC, was CLEAN, commit
+  b6574a0, 101 files.
+- **The morning sentence** (Tony, Nov 1, noon: pull first; do not wait
+  for the run; a run that lands later in the day comes with the next
+  Pull origin) is in gallery-cache-builder 1.16 (The Daily Run's Steps,
+  the night form) and on Where We Are's "Needs you now".
+- **For the next gallery session (the ruler build):** the website's own
+  line, `- cron: '17 12 * * *'` in its `.github/workflows/nightly.yml`,
+  with the same comment; not written from the orrery. The apparition
+  taken as a new kind of take waits with the comets (L-470).
+**Gap (replaces the one below, 2026-11-01, evening):** Tony's push of
+this session; the morning looks for the rest of the week (P4), each
+start time noted, and on a morning GitHub drops the 07:17 night, the
+11:17 run in its place; then the ruler build (a gallery session, with
+the website's 12:17 line); then the hold's website half (a gallery
+session); then the next orrery session, the comets (L-470).
+**Gap (superseded above, 2026-11-01, evening; replaced the one below, 2026-11-01):** Tony's push of the
 gallery and its run by hand, read to "NIGHT RUN: CLEAN"; then the
 morning look at both Actions tabs for the rest of the week (P4),
 each start time noted, the website's first scheduled run among them.
 Then the ruler build (a gallery session), then the hold's website half
 (a gallery session), then the next orrery session: the comet pins
 (L-470). The backstop at the next design talk.
-**Gap (superseded above; replaced the one below, 2026-10-31):** Tony's push of this
+**Gap (superseded above, 2026-11-01; replaced the one below, 2026-10-31):** Tony's push of this
 session (Pull origin first if the night committed), then the morning
 look at both Actions tabs and the dashboard's two lines for the rest of
 the week (P4). Then the ruler build (a gallery session), then the
@@ -3126,7 +3010,24 @@ L-490.
   pins that move. Neither the orrery session of Oct 31 nor the
   coordinating session did; both read only the renderers, and the
   website's night caught it.
-**Gap (replaces the one below, 2026-11-01):** Tony's push of the
+- **2026-11-01, the lesson in a skill** (the orrery's Claude Code session, built on orrery 6a434ed8 with the gallery at b6574a0f read only, from
+  `documentation/COORD_L470_orrery_comet_pins_backstop_brief_20261101.md`,
+  section 2): gallery-cache-builder 1.16, a new section, A Served Number
+  That Changes on Purpose, beside The Daily Run's Steps (protocol
+  v3.120). gallery-cache-builder rather than provenance-discipline:
+  provenance-discipline binds at the export and asks whether a served
+  number is TRUE; this lesson is about the other repository's checks
+  still expecting the OLD number, and gallery-cache-builder already
+  carries what the website consumes from the export and the Daily Run
+  that pulls it. The gallery's two pins were read at b6574a0 before the
+  section was written (`documentation/smoke_display_figures.js`,
+  ACCEPTANCE_LINES and FIXTURE, now `fixture_hovers_L484_on_c1c578f5.json`).
+  Tony's push of the gallery, the clean run and his phone look, the
+  Gap below, all happened on Nov 1 (L-503's close).
+**Gap (replaces the one below, 2026-11-01, evening):** the check's
+design, then its build, with a planted fault; where its exceptions
+live.
+**Gap (superseded above, 2026-11-01, evening; replaced the one below, 2026-11-01):** Tony's push of the
 gallery (the check, the new fixture, the rebuilt cache and the pulled
 files together), "Run workflow" on the website's Actions tab read to
 "NIGHT RUN: CLEAN", then his phone look at the two sentences above;
@@ -3223,7 +3124,7 @@ orrery's plots, then the build.
 `spacecraft_encounters.py`; `palomas_orrery.py`.
 
 #### [L-470] Orrery entries the website cannot serve as they stand (orrery, objects)
-<!-- L:470 status:OPEN upd:2026-10-31 section:A flag: rice: -->
+<!-- L:470 status:OPEN upd:2026-11-01 section:A flag: rice: -->
 - **Found 2026-10-22, counting slice 1 of L-443 (the objects to the
   website).** One class: an entry in `celestial_objects.py` whose own
   fields stop it being served, recorded here rather than chased (The
@@ -3362,7 +3263,52 @@ orrery's plots, then the build.
   future-only apparition would need CAP's date form. For a gallery
   session (the one after the ruler build): the website asking by
   designation with CAP itself.
-**Gap (replaces the one below, 2026-10-31):** the next orrery session
+- **2026-11-01, the test run; the switch not built** (the orrery's Claude Code session, built on orrery 6a434ed8 with the gallery at b6574a0f read only, from
+  `documentation/COORD_L470_orrery_comet_pins_backstop_brief_20261101.md`,
+  sections 4.4 and 3 of its record,
+  `documentation/CHECK_L470_comet_cap_answers_20261101.md`). THE TEST:
+  the six asked four ways each -- astroquery, id_type 'designation'
+  with closest_apparition, with and without no_fragments; the raw
+  address DES=<d>;CAP; and DES=<d>;CAP;NOFRAG; through
+  `horizons_check.live_fetch`, every ';' sent as %3B -- 24 answers, all
+  LIVE (JPL's clock 2026-Nov-01 12:07:55 to 12:08:44), each naming
+  JPL's name and today's pin; 0 disagreements. Solution dates: 10P
+  2026-Oct-22, 24P 2026-Jul-07, 88P 2026-Oct-14, 67P 2026-Sep-04, 1P
+  2025-Nov-21, 2P 2026-Oct-22. The bare ';' form is now refused by JPL
+  (HTTP 400); on Oct 31 it listed Encke's 61 records. This is the
+  fresh read the coordinating session's finding of Nov 1 called for
+  (its fetch tool served JPL's answers of Oct 31, 19:05, whatever the
+  address, and a NOFRAG form dated Oct 3).
+- **Why the switch waits.** Reading the readers at 6a434ed found that
+  the orrery's plotting knows a periodic comet by its record number or
+  its id_type in places the brief's 4.5 did not list:
+  `palomas_orrery.py` `_is_comet` (line 1699; its caller at 1778 is the
+  perihelion-orbit pass) takes a numeric id of 90000000 or more, and
+  the comet-tail tests at lines 2618, 6386 and 7730 take id_type
+  'smallbody' or 'id'. Asked as id '2P', id_type 'designation', the six
+  would stop being treated as comets there, with no error (no tail).
+  So the switch is a sweep of those beside the Horizons calls, and its
+  proof includes Tony's look at a plot with Encke's tail. The brief's
+  rule is to stop before section 4 rather than leave it half built;
+  nothing of 4.5 to 4.9 was written, and horizons-orbital-mechanics
+  stays at 1.13 (its pinning sentence stays true).
+- **For that session's design:** astroquery adds CAP only through the
+  query methods' own closest_apparition, not the constructor, so the
+  one helper owns the query call or subclasses Horizons; and
+  requirements.txt asks `astroquery>=0.4.6`, so GitHub's computer
+  installs the newest while Tony's machine has 0.4.9.post1: read the
+  COMMAND each writes (`elements(get_query_payload=True, ...)`) before
+  the helper is trusted. Carried unchanged from the brief: the export
+  keeps serving the record JPL's CAP answer names (4.7); the cadence,
+  every night (4.6), for Tony to confirm when it is built; the
+  website's CAP and the six config notes, for the gallery session
+  after the ruler build (4.7, 4.10); the future-only apparition, noted.
+**Gap (replaces the one below, 2026-11-01):** the next orrery session
+builds the switch from the brief's sections 4.5 to 4.10, with this
+session's findings added to 4.5's list of readers (the comet tests in
+palomas_orrery.py; the astroquery version), re-running 4.4's test
+first; West's id (C/1975 V1-A) beside it.
+**Gap (superseded above, 2026-11-01; replaced the one below, 2026-10-31):** the next orrery session
 builds the comets' designation with CAP from the brief's section 4;
 West's id (C/1975 V1-A) beside it.
 **Gap (superseded above; replaced the one below, 2026-10-25):** West's id (C/1975 V1-A),
@@ -30704,6 +30650,170 @@ Solar System room prints by it; with the near-Earth asteroid design.
 **Gap (superseded, earlier):** a design talk: where the triad sits on a phone, and a rule for
 placing an info cross clear of dense drawing.
 **Ref:** L-497; interactive-exhibit, the anatomy (the frame HUD); L-318.
+
+#### [L-503] The main asteroid belt's cloud on the website, L-443's last piece, its gallery half (gallery, the Solar System room)
+<!-- L:503 status:DONE upd:2026-11-01 section:C flag: rice: -->
+- **Opened 2026-10-28 at L-443's close**, which built the orrery half
+  in the orrery's Claude Code session built on orrery b2fcc1bb and
+  gallery acbf206b (section 5, item 1 of
+  `documentation/HANDOFF_coordination_20261026_28.md`), by Tony's
+  ruling of that day (form B, recorded on L-443): dots placed at random
+  inside the belt's spread measured from 5,429 of JPL's main-belt
+  orbits, stored once, the hover saying it shows the belt's extent,
+  not individual bodies. The brief: "The website's pull and the
+  room's row are the next gallery session's."
+- **What the orrery serves at its push:** `data/drawings/main_belt.json`
+  (6,000 dots, 0.001 AU, the ecliptic frame, seed 443, written by
+  `export_drawings.py`); the nine MAIN_BELT_* rows in
+  `data/constants_export.json`, with their sources (JPL's SBDB Filter
+  Parameters and SBDB Query API); and the words, the orrery's
+  `main_belt_sampler.hover_text()`, every number from a row at its
+  declared count.
+- **What the gallery half does:** name the drawing under a feature's
+  `drawing.dots` in `data/objects_config.json`, so
+  `tools/pull_drawings.py` fetches it (it pulls only what the config
+  names, so the orrery's new file waits safely until then); give it
+  the Solar System room's row, beside the Main asteroid belt group
+  (JPL's MBA, the same class); serve its numbers through the rows, not
+  typed; its words to Tony first. It is the first stored drawing in a
+  room whose rows are bodies, so where its row sits and how it ticks
+  is the session's first question to Tony.
+- **Received from L-443:** the headless walk's Pluto frame check fails
+  on the stand-in data (it fails the same way on the untouched base);
+  it holds on the served cache. Recorded, not chased.
+- **Tony's ruling, 2026-10-29, morning** (his run record of 10-28-26
+  2357, Fable's paste): "a tickable row named "The belt's cloud", first
+  inside the Main-belt asteroids group, ticked and reset like a body, Go
+  To fitting the cloud. Go ahead."
+- **2026-10-29, built** (the gallery's Claude Code session, on gallery
+  963500ca). THE ROW: the Solar System room's served rows gain
+  `{drawing: "main_belt", in: "belt", label: "The belt's cloud", find,
+  feature}`, right after the Main asteroid belt group's row. It is the
+  room's own row, not a body's shell and not on any object: on the Sun
+  it would have added a row to the Sun room, and an object with no
+  orrery key fails the objects mirror. `gallery/solar_system_drawer.js`
+  reads it as its own row keyed "drawing:main_belt", first in its group
+  ahead of the bodies sorted by semi-major axis, tickable, counted with
+  the group's rows (the group's line reads 8), unticked by Reset and the
+  group's Reset, offering no room. `gallery/feature_renderers.js`
+  (`buildRoomCloud`) draws the dots as given, in the orrery's colour
+  ramp, and a cross just past the farthest drawn point (the distance
+  table's 100th entry times 1.02), 45 degrees round from the x axis in
+  the ecliptic; the cross is the row's text box marker, so Go To fits
+  the cloud (about 5 AU either side). THE PULL AND THE CACHE:
+  `tools/pull_drawings.py` and the builder's `serve_drawings()` read a
+  drawing named on a room's row too; the drawing was pulled this
+  session from orrery b3bfab02. THE NUMBERS: the nine MAIN_BELT_* rows,
+  linked on the row's feature and written by `tools/mirror_constants.py
+  --write` (38 fields, with their citations), never by hand. THE WORDS:
+  the orrery's `main_belt_sampler.hover_text()`, each number named in
+  braces and printed from its row by the orrery's rule, identical to
+  the orrery's text but for one thing, next.
+- **A difference from the orrery's words, and why:** the orrery prints
+  each distance with its kilometres ("1.67 AU (about 250 million km)"),
+  worked out from its store's full digits (4.263, 0.256). The export
+  serves the three tables rounded to their declared figures (4.26, 0.26)
+  and with no "in" kilometres. Kilometres worked out from the rounded
+  number print 637 million where the orrery prints 638, and 39 where it
+  prints 38 (interactive-exhibit: a hover never converts a served number
+  to print it). So the website prints the AU alone. For the next orrery
+  session: the export serves each table entry's "in" kilometres, as it
+  does a length row's, and the website then prints them. Recorded on
+  L-484 as a documented difference.
+- **Checked:** the drawer check (section 9, two breaks: the row read as
+  a body, sorted after the bodies; the row not tickable), the Solar
+  System figures check (part 9: the words worked out by the check's own
+  arithmetic, every dot between the distance table's ends and within the
+  latitude table's last entry, the cross just past the far end and off
+  the axes; two planted faults), and the Drawings check (a branch for a
+  room's own row: its ends against its row's tables; two planted
+  faults). Seen in the app's browser at 390 px: the row first in its
+  group, ticked by Go To, the frame fitted, the text box and the panel's
+  sentences and three citations, Reset unticking it. The served copy of
+  the drawing is made by the next Daily Run; until then the Drawings
+  check is red on it, correctly.
+- **For interactive-exhibit's next version** (this gallery session reads
+  the skills and does not edit them; each is a sentence a session would
+  act on, so the next orrery session corrects them): (1) Provenance, "A
+  computed distance prints by the larger of two errors": a small body's
+  own uncertainty is served by the builder on its cached record
+  (`position_uncertainty`, used whole), needs the builder to reach a
+  visitor, and the sentence prints when no source error is served, not
+  only when `position_accuracy` is absent. (2) The stored drawings list:
+  the main belt's cloud, the first named on a room's row; the pull and
+  the builder read rooms rows. (3) The Solar System room's drawer: a
+  drawing row and how it ticks, counts and resets. (4) The frame HUD
+  row of the anatomy: the triad in the bottom centre, the chip at the
+  right; the count line left of the triad. (5) L-502's rule for a
+  stored drawing's cross, and the Label words check that holds it. (6)
+  The source line: UTC after each UTC date, the epoch on JPL's clock,
+  and the sentence on the solar system's centre of mass. Also for the
+  next versions: gallery-cache-builder (the builder serves
+  `position_uncertainty`; `serve_drawings` reads rooms rows),
+  horizons-orbital-mechanics (the website's 2xr is a second question,
+  held to the served point), provenance-discipline (A Computed Position
+  Prints What Its Errors Earn still says the asteroids wait for L-399).
+- **Tony's look** (run record `documentation/WHERE_WE_ARE_10-28-26_2357_run_record.md`,
+  item 11, the belt's cloud row, tick, Go To, Reset, its words): "yes,
+  see upload".
+- **2026-10-29/30, the export's half** (the orrery's Claude Code
+  session, brief section 2). `export_constants.py` gives a table of
+  numbers (a dict keyed by name) its "in" per entry, keyed as its value
+  is, each worked out by `constants_rows.conversions()` from that
+  entry's full digits, as a length row's is: the distance table's 0th
+  entry, 1.668 AU, serves 2.50e8 km at three figures, "1.67 AU (about
+  250 million km)"; the 100th, 6.38e8 km. The height table likewise;
+  the latitude table is in degrees and has no other unit. The schema
+  number does not change. `test_constants_export.py` check 6 re-computes
+  a table's "in" entry by entry, with two pins naming an entry by its
+  key (the 90th height's pin first caught the session's own wrong
+  expectation of two figures: Rule 3 carries the place, so 99,800,000
+  km prints three). THE MIRROR does not ignore the new field: run on a
+  scratch copy of the website's config with the new export, it wrote
+  the "in" into two fields (the distance and the height nodes of the
+  belt's row), and nothing else; every page and check that reads a
+  served "in" asks for a unit by name (`node["in"]["km"]`), which a
+  table's "in" does not have, so each finds none until the website asks
+  for it by key.
+- **2026-10-31, the website prints the kilometres** (L-485's gallery
+  session): the nearest and farthest distances and the two heights, in
+  the orrery's form, "1.67 AU (about 250 million km)", from each
+  entry's served "in" km at its own figure count
+  (`gallery/feature_renderers.js`, cloudKm); the figures check's part 9
+  holds them, with two planted faults. One documented difference: the
+  90th height, about 100 million km in the orrery's hover and 99.8
+  million served by its export (L-484; L-485 carries it to the orrery
+  session).
+- **2026-10-31, the 90th height served right** (the orrery session
+  of L-484's entry of today): the export serves
+  MAIN_BELT_HEIGHT_PERCENTILES_AU[90] as 100,000,000 km, three figures,
+  where it served 99,800,000; the orrery's hover and the website now
+  agree once the website pulls. The documented difference ends there.
+- **2026-11-01, DONE.** Tony's phone look, after the website's run 4
+  of Nov 1 (16:11 UTC, clean, commit b6574a0), in his run record
+  `documentation/WHERE_WE_ARE_10-31-26_2048_run_record.md` (lines 2864
+  and 2865): Earth's inner radiation belt reads "= 10,000 km (0.00006
+  AU)" -- "yes"; the main belt reads "about 100 million km" for its 90th
+  height -- "yes". Closed by the orrery's Claude Code session, built on orrery 6a434ed8 with the gallery at b6574a0f read only, from
+  `documentation/COORD_L470_orrery_comet_pins_backstop_brief_20261101.md`
+  (section 3). Loose ends: none; the skill corrections it carried went
+  into interactive-exhibit 1.29, gallery-cache-builder 1.14,
+  horizons-orbital-mechanics 1.13 and provenance-discipline 2.36
+  (v3.118).
+**Gap (closed 2026-11-01):** none.
+**Gap (superseded above, 2026-11-01; replaced the one below, 2026-10-31):** Tony's phone look at the
+belt's text box after the website's next pull -- its kilometres, the
+90th height reading about 100 million km -- then DONE.
+**Gap (superseded above; replaced the one below, 2026-10-31):** Tony's phone look at the
+belt's text box (its kilometres), then DONE.
+**Gap (superseded above, 2026-10-29/30):** the website prints the belt's distances with their kilometres from each entry's served "in" (the next gallery session); the Daily Run's pulls name `data/constants_export.json` and the config's two fields as changed. The skill corrections above are in interactive-exhibit 1.29, gallery-cache-builder 1.14, horizons-orbital-mechanics 1.13 and provenance-discipline 2.36.
+**Gap (superseded above, 2026-10-29):** the next Daily Run (pulls nothing new; serves the drawing into the cache), then Tony's phone look at the belt's cloud: its row, its dots, its words, Go To and Reset. For the next orrery session: the export serves the tables' kilometres; the skill corrections above.
+**Gap (superseded above):** the gallery session (after L-399 and L-502 on Tony's queue):
+the pull, the room's row, the words; the gallery run with the drawing's
+ends held; then Tony's phone look.
+**Ref:** L-443; orrery `main_belt_sampler.py`,
+`data/drawings/main_belt.json`, `constants_new.py` (THE MAIN ASTEROID
+BELT); gallery `tools/pull_drawings.py`, `data/objects_config.json`.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
