@@ -1084,8 +1084,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-470 | Orrery entries the website cannot serve as they stand (orrery, objects) | OPEN | -- | 2026-10-31 |
 | ! | L-476 | The orrery's whole-path plots draw by the same path plan as the website (orrery, spacecraft and comets) | OPEN | -- | 2026-10-24 |
 | ! | L-483 | A room for C/2025 K1 and its pieces, the first comet room (gallery, exhibits) | OPEN | -- | 2026-10-28 |
-| ! | L-484 | The website and the orrery agree on every object both draw, or the difference is written down (orrery + gallery, objects; method for interactive-exhibit) | OPEN | -- | 2026-10-31 |
-| ! | L-485 | A nightly unattended run of the routines (orrery + gallery, maintenance) | OPEN | -- | 2026-10-31 |
+| ! | L-484 | The website and the orrery agree on every object both draw, or the difference is written down (orrery + gallery, objects; method for interactive-exhibit) | OPEN | -- | 2026-11-01 |
+| ! | L-485 | A nightly unattended run of the routines (orrery + gallery, maintenance) | OPEN | -- | 2026-11-01 |
 | ! | L-486 | A view carried into a room (gallery, the rooms) | OPEN | -- | 2026-10-26 |
 | ! | L-487 | Each body's description in the i panel, one bullet per sentence (gallery, the i panel) | OPEN | -- | 2026-10-25 |
 | ! | L-488 | Solar features beside a spacecraft in the Solar System room, such as the heliopause (gallery, the rooms) | OPEN | -- | 2026-10-26 |
@@ -2281,7 +2281,7 @@ Are).
 L-489.
 
 #### [L-485] A nightly unattended run of the routines (orrery + gallery, maintenance)
-<!-- L:485 status:OPEN upd:2026-10-31 section:A flag: rice: -->
+<!-- L:485 status:OPEN upd:2026-11-01 section:A flag: rice: -->
 - **Tony, 2026-10-24, night,** in his run record (`documentation/WHERE_WE_ARE_10-24-26_1927_run_record.md`): "i am
   thinking of revising the idea of an automated run at midnight every
   day, with all the daily and 30-day run routines except the messages.
@@ -2872,7 +2872,32 @@ L-489.
   5. Its base is the brief's section 4 as written, with JPL's answers of
   Oct 31 (every CAP answer equals today's pin) and the %3B trap; L-470
   carries it.
-**Gap (replaces the one below, 2026-10-31):** Tony's push of this
+- **2026-11-01, the website's run 2, red by name, as designed**
+  (recorded by the gallery Claude Code session, from the coordinating
+  session's brief, `documentation/COORD_L484_gallery_display_figures_brief_20261101.md`).
+  Run 2 of the website's night, fired by hand at 14:24 UTC, pulled the
+  orrery's corrected export, built the cache and ended "1 of 36 gating
+  checkers FAILED: Display figures", two findings, both Earth's inner
+  radiation belt: the check's pin still said 9,600 km. Nothing was
+  committed and the site kept the old cache: the gate refused a cache
+  whose words did not match a pin, which is what it is for. The pin and
+  the fixture were moved the same day (L-484). Read from GitHub by the
+  coordinating session: the orrery's schedule fired at 14:17 UTC on
+  Nov 1, seven hours late (its run 4), and Tony's run 5 by hand queued
+  behind it under the concurrency group; each clean run committed its
+  own record (b0acdea, 0c0bac8). The website's schedule has not fired by
+  itself yet (its runs 1 and 2 were both by hand). GitHub's page, read
+  Nov 1: "The schedule event can be delayed during periods of high
+  loads". A backstop, a second scheduled time, is for the next design
+  talk, not built.
+**Gap (replaces the one below, 2026-11-01):** Tony's push of the
+gallery and its run by hand, read to "NIGHT RUN: CLEAN"; then the
+morning look at both Actions tabs for the rest of the week (P4),
+each start time noted, the website's first scheduled run among them.
+Then the ruler build (a gallery session), then the hold's website half
+(a gallery session), then the next orrery session: the comet pins
+(L-470). The backstop at the next design talk.
+**Gap (superseded above; replaced the one below, 2026-10-31):** Tony's push of this
 session (Pull origin first if the night committed), then the morning
 look at both Actions tabs and the dashboard's two lines for the rest of
 the week (P4). Then the ruler build (a gallery session), then the
@@ -2918,7 +2943,7 @@ Where We Are).
 L-490.
 
 #### [L-484] The website and the orrery agree on every object both draw, or the difference is written down (orrery + gallery, objects; method for interactive-exhibit)
-<!-- L:484 status:OPEN upd:2026-10-31 section:A flag: rice: -->
+<!-- L:484 status:OPEN upd:2026-11-01 section:A flag: rice: -->
 - **Tony, 2026-10-24, 17:35, in chat**
   (`documentation/COORD_L443_words_decisions_20261024.md`, sec. 7): "And
   we should add to the skill a check that the website and the orrery
@@ -3066,7 +3091,48 @@ L-490.
   exosphere fit's outer edge is printed in Earth radii only, and the
   other two names are not printed, so nothing else a visitor reads
   changes.
-**Gap (replaces the one below, 2026-10-31):** Tony's push and the
+- **2026-11-01, the website's pin moved after the rounding fix**
+  (gallery Claude Code session, Claude Opus 5.5, built on gallery
+  c1c578f5 and orrery 6b70a53a, from
+  `documentation/COORD_L484_gallery_display_figures_brief_20261101.md`).
+  The website's night run 2 of Nov 1 went red on Display figures,
+  correctly: the check pinned the inner belt's old line. After Tony's
+  Daily Run of Nov 1 (pulls at orrery 6b70a53a, swap ok at 15:29 UTC,
+  first try) the served cache and the config both carry
+  EARTH_VAN_ALLEN_INNER_RADII at 10,000 km, two figures, and the
+  config's diff names the same five values this item lists above, no
+  sixth. The built hover was read first and prints
+  "= 10,000 km (0.00006 AU)"; that is the new pin in
+  `documentation/smoke_display_figures.js` (ACCEPTANCE_LINES, "Earth:
+  Inner Radiation Belt"), and its `absent` list gains "9,600", shown
+  failing by name ("the hover still carries "9,600"") with the old line
+  planted in memory. The hover fixture is re-recorded as
+  `documentation/fixture_hovers_L484_on_c1c578f5.json`: the L-497 one
+  with "earth/Earth: Inner Radiation Belt" alone different, the other
+  46 byte for byte (compared before it was written); the L-497 one is
+  left in place, unreferenced. Display figures green, its self-test red
+  21 ways; the offline maintenance run "36 of 36 gating checkers
+  passed". On the site after the push: Earth's inner belt text box
+  reads "= 10,000 km (0.00006 AU)"; the Solar System room's belt reads
+  "about 100 million km" for its 90th height. The exosphere's outer edge
+  prints in Earth radii only ("Out to 15 Earth radii"), so its km change
+  shows nowhere.
+- **THE LESSON (2026-11-01), for the next version of gallery-cache-builder
+  or provenance-discipline, whichever the next orrery session judges;
+  not edited from the gallery:** a served number that changes on purpose
+  is grepped in the OTHER repository's checks before the push -- the
+  website's acceptance lines and its hover fixture consume the export as
+  much as its renderers do -- and the brief for such a change names the
+  pins that move. Neither the orrery session of Oct 31 nor the
+  coordinating session did; both read only the renderers, and the
+  website's night caught it.
+**Gap (replaces the one below, 2026-11-01):** Tony's push of the
+gallery (the check, the new fixture, the rebuilt cache and the pulled
+files together), "Run workflow" on the website's Actions tab read to
+"NIGHT RUN: CLEAN", then his phone look at the two sentences above;
+then the check's design, then its build, with a planted fault; where
+its exceptions live.
+**Gap (superseded above; replaced the one below, 2026-10-31):** Tony's push and the
 website's next pull, then his phone look at the two sentences above;
 then the check's design, then its build, with a planted fault; where
 its exceptions live.
