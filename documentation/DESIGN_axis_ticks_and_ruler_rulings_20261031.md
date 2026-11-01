@@ -62,10 +62,11 @@ purpose.
 
 **R1. Tick marks on the three coloured axis lines, in every room**
 (17:50, "Confirmed"; 17:57, "This method would apply to all scenes in
-the website"). A short tick across the axis line at every grid step
-and a long tick at every second step, in the axis colour, drawn in the
-scene so they turn and scale with the axes. They re-space with the
-grid on zoom, as the grid does.
+the website"). A mark on the axis line at every grid step and a larger
+one at every second step, in the axis colour, drawn in the scene so
+they turn with the axes. They re-space with the grid on zoom, as the
+grid does. Refined 20:20: the marks are DOTS (markers), not line
+segments; see section 4.
 
 **R2. The major tick is twice the minor** (18:02 to 18:04). Tony: "On
 a map ruler it depends on the number of ticks drawn ... But we are
@@ -79,8 +80,12 @@ at every zoom, and the ruler's label carries the value. "Confirmed",
 **R3. The grid chip becomes a short ruler, on a transparent
 background** (17:50: "with a transparent background instead of grey.
 So it does not obscure the website url"). Three marks: 0 unlabelled,
-one step (the short tick), two steps (the long tick); the last two
-labelled with whatever the grid makes them: "0.5" and "1 AU" at a
+one step, two steps; the last two labelled with whatever the grid
+makes them. Refined 20:22 (Tony: "shouldn't the ruler use the same
+style"): the ruler's marks are the SAME SYMBOLS as the axes', a small
+dot at one step and a larger dot at two steps on a short line, in
+neutral white since the key stands for all three axes; the 0 end is
+unmarked. The labels: "0.5" and "1 AU" at a
 0.5 AU grid, "0.2" and "0.4 AU" closer in, "50" and "100 AU" far out.
 The ruler is a KEY to the marks on the axes, not a screen length (a
 perspective view has no one length); it re-labels with the grid on
@@ -119,6 +124,36 @@ the ticks and the ruler; no room is left with a grid and no scale.
   z ticks lie along x, so that from above the floor reads as a ruler;
   the session reads how the triad and the axis traces are built first,
   and Tony's phone judges.
+- From Gemini's review (Tony's relay, Oct 31, 20:17), four
+  implementation notes, none a ruling:
+  - A FLAT TICK VANISHES EDGE-ON. Ticks lying in the plane of the
+    orbits foreshorten to nothing when the scene is viewed along that
+    plane, the very view for comparing orbital tilts. Gemini's
+    candidate was a small cross; Tony, 20:20: "crosses can be confused
+    with the hover crosses. how about small dots the same color as
+    the axes, as markers?" RULED (R1 refined): the ticks are DOTS, in
+    the axis colour, a small dot at every grid step and a larger dot
+    at every second step, drawn as markers in the scene with no hover
+    and no legend group. A marker faces the screen at a fixed pixel
+    size, so it never foreshortens and never shrinks with zoom, and it
+    sits on the axis and turns with it. The session reads the marker
+    taxonomy in orrery-coding-conventions first (a plain small circle
+    must not already mean a kind of body) and keeps the dot sizes well
+    apart from the bodies' markers, Earth's blue one on the blue axis
+    above all; the low camera angle goes on the Mode 5 list.
+  - TWO MORE CHECKS MUST KNOW THE TICKS ARE FRAME, NOT FEATURE:
+    `documentation/smoke_drawn_ends.js` (every drawing's near and far
+    end held to a served row, L-460) and `sweep_collapsed_features.py`
+    (every served feature group classified, L-300), beside the three
+    named above. The tick traces are named to them as the axes are.
+  - CONTRAST OVER BRIGHT SHELLS. With no background, light ruler text
+    and lines over the corona or a dense cloud can disappear; a thin
+    dark halo (text-shadow) keeps the background clear and the text
+    readable. Mode 5.
+  - THE UNIT FOLLOWS THE ROOM. The ruler's two labels and its tap note
+    print whatever unit that room's grid chip prints today; the session
+    reads each room's chip before building (the Sun room's has read AU
+    since Sept 5; the Earth room's is read, not assumed).
 - The drawer-order, hover-budget and label-words checks must not see
   the ticks as features: the tick traces carry no hover and no
   legendgroup the drawer reads, as the Sept 5 edge-label trace did
