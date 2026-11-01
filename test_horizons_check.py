@@ -82,6 +82,18 @@ WHAT IT CHECKS
        no longer gives the row's figure. Its night form (--night, L-485)
        reports today's UNREACHABLE and passes, and still fails when a
        confirmation has lapsed.
+    7. The hold and the take (L-485; Tony's ruling of 2026-10-31,
+       18:38). Encke's period, answered twice its error away, is TAKEN:
+       re-fetched through the take, confirmed on its new number, logged
+       old and new, and passed by the offline checker, which names it.
+       Mars's horizons_name changed in the list is HELD at its
+       confirmation, with its hold block; the export carries it; the
+       night's checker passes it as held and the day's is red; 40 days
+       on no lapse clock runs on it; and once the list is put right it
+       is asked again and the hold ends, said so. Planted, each caught:
+       a take not logged; a hold dropped; a held body turning the night
+       red. (Section 3's answer with no elements row is now REPORTED,
+       not a disagreement, and section 5's changed entry is held.)
 
 RUN COMMAND
 
@@ -115,6 +127,9 @@ comet under another name disagrees.)
 Module updated: October 30, 2026 with Anthropic's Claude Opus 5.5 (L-485:
 two checks of the offline checker's night form, an outage reported and
 an outage with a lapsed confirmation still red.)
+Module updated: October 31, 2026 with Anthropic's Claude Opus 5.5 (L-485,
+the hold: section 7, a take and a hold with three planted faults; an
+answer with no elements row is reported, and a changed entry held.)
 """
 
 import datetime
@@ -319,6 +334,164 @@ def checker_with(old, new):
     return mod
 
 
+def module_with(path, name, old, new):
+    """A copy of a module with one fault planted in it."""
+    import types
+    with open(path, "r", encoding="utf-8") as handle:
+        src = handle.read().replace("\r\n", "\n")
+    if src.count(old) != 1:
+        raise SystemExit("ANCHOR FAIL for a planted fault: %r" % old[:60])
+    mod = types.ModuleType(name)
+    mod.__file__ = path
+    exec(compile(src.replace(old, new), path + " [planted]", "exec"),
+         mod.__dict__)
+    return mod
+
+
+def take_and_hold(t, answers, inputs, real_cache, fetch, url, moved):
+    """Section 7. Tony's ruling of 2026-10-31, 18:38: a value JPL gives
+    differently is taken and logged, old and new; an identity it no longer
+    gives as the list does holds that one body at its last confirmation.
+    `url` and `moved` are Encke's period question and an answer whose PR
+    sits twice the period's error away, from section 3."""
+    import export_objects as ex
+    quiet = lambda *a: None  # noqa: E731
+    tmp = tempfile.mkdtemp(prefix="horizons_check_hold_")
+    try:
+        build_root(tmp, real_cache, inputs)
+        hc.run(tmp, fetch, TODAY, pause=0, echo=quiet)   # periods confirmed
+        cache_path = os.path.join(tmp, "data", "osculating_cache.json")
+        with open(cache_path, "r") as handle:
+            cache_text = handle.read()
+        old_days = json.loads(cache_text)["Encke"]["period"]["days"]
+        new_days = float(moved.split("PR= ")[1].split()[0])
+        calls = []
+
+        def fake_take(key, obj):
+            # As make_taker does: the elements and period saved together,
+            # then the block read back through export_objects.
+            calls.append(key)
+            cache = json.loads(cache_text)
+            cache["Encke"]["period"]["days"] = new_days
+            with open(cache_path, "w") as handle:
+                json.dump(cache, handle)
+            cache, typed, _c, _r = ex.load_inputs(tmp)
+            return ex.period_block(obj["name"], obj["object_type"], cache,
+                                   typed)[0]
+
+        took_fetch = recorded_fetch(answers, extra={url: moved})
+        lines = []
+        code, out = hc.run(tmp, took_fetch, TODAY, pause=0, echo=lines.append,
+                           check_all=True, take=fake_take)
+        conf = hc.load_confirmations(os.path.join(tmp, hc.CONFIRMATIONS))
+        ep = conf["objects"]["encke"]["period"]
+        last = hc.load_json(os.path.join(tmp, hc.LAST_RUN))
+        t.check(code == 0 and calls == ["encke"]
+                and "TAKEN encke.period" in lines[-1]
+                and ep["days"] == new_days and ep["jpl_days"] == new_days
+                and ep["taken"]["old_days"] == old_days
+                and [x["name"] for x in last["taken"]] == ["encke.period"],
+                "a period JPL gives differently is TAKEN: exit %d, %s"
+                % (code, lines[-1][lines[-1].find("TAKEN"):][:80]))
+        out_lines = []
+        t.check(offline.run(tmp, TODAY, echo=out_lines.append) == 0
+                and any(s.startswith("TAKEN today: encke.period")
+                        for s in out_lines),
+                "...and the offline checker passes it on its new number, "
+                "naming it")
+        with open(cache_path, "w") as handle:
+            handle.write(cache_text)
+        hc.run(tmp, fetch, TODAY, pause=0, echo=quiet, check_all=True)
+
+        # Planted: a take not logged.
+        planted = checker_with(
+            '        taken.append({"name": "%s.period" % key,\n',
+            '        (lambda item: None)({"name": "%s.period" % key,\n')
+        lines = []
+        code, out = planted.run(tmp, took_fetch, TODAY, pause=0,
+                                echo=lines.append, check_all=True,
+                                take=fake_take, write=False)
+        t.check(not ("TAKEN encke.period" in lines[-1] and out["taken"]),
+                "planted: a take not logged is caught -- the line reads %s"
+                % lines[-1][:60])
+        with open(cache_path, "w") as handle:
+            handle.write(cache_text)
+
+        # The hold: Mars's horizons_name no longer JPL's.
+        renamed = dict(SERVED)
+        renamed["mars"] = ("Mars", "499", None, "Mars (planet)", "orbital")
+        with open(os.path.join(tmp, "celestial_objects.py"), "w") as handle:
+            handle.write(fixture_list(renamed))
+        lines = []
+        code, out = hc.run(tmp, fetch, TODAY, pause=0, echo=lines.append)
+        conf = hc.load_confirmations(os.path.join(tmp, hc.CONFIRMATIONS))
+        mars = conf["objects"]["mars"]
+        hold = mars.get("hold") or {}
+        t.check(code == 0 and hold.get("since") == TODAY.isoformat()
+                and mars.get("horizons_name") == "Mars"
+                and hold.get("list", {}).get("horizons_name") == "Mars (planet)"
+                and "HELD mars since" in lines[-1],
+                "an identity JPL no longer gives is HELD at its confirmation, "
+                "named: exit %d, %s" % (code, hold.get("causes")))
+        exported = ex.confirmation_of(mars)
+        t.check((exported.get("hold") or {}).get("since") == TODAY.isoformat()
+                and exported["identity"]["horizons_name"] == "Mars",
+                "...the export carries the hold beside the last confirmed "
+                "values")
+        out_lines = []
+        t.check(offline.run(tmp, TODAY, echo=out_lines.append, night=True) == 0
+                and any("mars" in s and "held" in s for s in out_lines),
+                "...the night's checker passes it AS HELD")
+        out_lines = []
+        t.check(offline.run(tmp, TODAY, echo=out_lines.append) == 1
+                and any("waiting on your look" in s for s in out_lines),
+                "...and by day it is red, waiting on Tony's look")
+        aged = json.loads(json.dumps(conf))
+        aged["objects"]["mars"]["confirmed"] = str(
+            TODAY - datetime.timedelta(days=40))
+        with open(os.path.join(tmp, hc.CONFIRMATIONS), "w") as handle:
+            json.dump(aged, handle)
+        out_lines = []
+        t.check(offline.run(tmp, TODAY, echo=out_lines.append, night=True) == 0,
+                "...no lapse clock runs on a held body: 40 days on, the night "
+                "still passes it as held")
+        with open(os.path.join(tmp, hc.CONFIRMATIONS), "w") as handle:
+            json.dump(conf, handle)
+
+        # Planted: a hold dropped; a held body turning the night red.
+        planted = checker_with(
+            '            result["status"] = "held"\n'
+            '            held_keys.add(key)\n',
+            '            pass\n')
+        code, out = planted.run(tmp, fetch, TODAY, pause=0, echo=quiet,
+                                write=False)
+        t.check(not (code == 0 and out["held"]),
+                "planted: a hold dropped is caught -- exit %d, problems %s"
+                % (code, out["problems"]))
+        planted_off = module_with(
+            os.path.join(HERE, "check_horizons_confirmations.py"),
+            "check_horizons_confirmations_planted",
+            "            if not night:\n"
+            "                failures.append(\"%s: %s -- waiting on your look\"",
+            "            if True:\n"
+            "                failures.append(\"%s: %s -- waiting on your look\"")
+        t.check(planted_off.run(tmp, TODAY, echo=quiet, night=True) == 1,
+                "planted: a held body turning the night red is caught")
+
+        # Tony's edit puts the name back: the hold ends, said so.
+        with open(os.path.join(tmp, "celestial_objects.py"), "w") as handle:
+            handle.write(fixture_list(SERVED))
+        lines = []
+        code, out = hc.run(tmp, fetch, TODAY, pause=0, echo=lines.append)
+        conf = hc.load_confirmations(os.path.join(tmp, hc.CONFIRMATIONS))
+        t.check(code == 0 and "hold" not in conf["objects"]["mars"]
+                and any("HOLD ENDED mars" in s for s in lines),
+                "after the list is put right, the held body is asked again and "
+                "its hold ends, said so")
+    finally:
+        shutil.rmtree(tmp, ignore_errors=True)
+
+
 def main():
     with open(ANSWERS, "r", encoding="utf-8") as handle:
         recorded = json.load(handle)
@@ -452,9 +625,12 @@ def main():
                    "Cannot interpret date. Type \"?!\" or try YYYY-MMM-DD\n")
         r = hc.check_period("encke", enc, enc["period"],
                             recorded_fetch(answers, extra={url: refused}))
-        t.check(r["status"] == "DISAGREES" and "no elements row"
-                in r["disagreement"][2],
-                "an answer with no elements row: %s" % r["status"])
+        # L-485: a question JPL refused is not JPL's data disagreeing, so
+        # it is neither taken nor held: reported, as an outage is.
+        t.check(r["status"] == "reported" and "no elements row"
+                in (r["error"] or ""),
+                "an answer with no elements row is reported, not taken or "
+                "held: %s" % r["status"])
         r = hc.check_period("encke", enc, enc["period"],
                             recorded_fetch(answers, down=("ELEMENTS",)))
         t.check(r["status"] == "could not reach JPL",
@@ -596,10 +772,13 @@ def main():
             handle.write(fixture_list(renamed))
         code, out = hc.run(tmp, fetch, TODAY, pause=0, echo=quiet,
                            write=False)
-        t.check(code == 1 and [(k, kind) for kind, k, _r, _w in
-                               out["results"]] == [("mars", "identity")],
+        # L-485: an identity JPL no longer gives as the list does is a
+        # project choice, so the body is held at its confirmation, named.
+        t.check(code == 0 and [(k, kind) for kind, k, _r, _w in
+                               out["results"]] == [("mars", "identity")]
+                and [h["name"] for h in out["held"]] == ["mars"],
                 "an entry changed after its confirmation is due at once and "
-                "caught: %s" % out["problems"])
+                "held by name: %s" % out["held"])
         with open(os.path.join(tmp, "celestial_objects.py"), "w") as handle:
             handle.write(fixture_list(SERVED))
         later = datetime.date(2026, 11, 12)
@@ -735,6 +914,9 @@ def main():
             handle.write(fixture_list(SERVED))
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
+
+    print("7. The hold and the take (L-485)")
+    take_and_hold(t, answers, inputs, real_cache, fetch, url, moved)
 
     print("")
     print("%d checks passed, %d failed." % (t.passed, len(t.failed)))

@@ -25,7 +25,9 @@
 # Written October 30, 2026 with Anthropic's Claude Opus 5.5 (L-485, the
 # orrery half; the website's own workflow, an hour later, is the gallery
 # half). Updated October 30, 2026 with Anthropic's Claude Opus 5.5
-# (L-485: the tick box and --ask-everything).
+# (L-485: the tick box and --ask-everything). Updated October 31, 2026
+# with Anthropic's Claude Opus 5.5 (L-485: the concurrency group, and the
+# checkout of main as it is when the job starts).
 
 name: Nightly run
 
@@ -48,6 +50,19 @@ on:
         type: boolean
         default: false
 
+# One night at a time. A run started by hand and the scheduled run both
+# push, so they must never run at once. GitHub's page "Control the
+# concurrency of workflows and jobs", read 2026-10-31: "When a concurrent
+# job or workflow is queued, if another job or workflow using the same
+# concurrency group in the repository is in progress, the queued job or
+# workflow will be pending." The second run waits its turn. No
+# cancel-in-progress, on purpose: a night already running is never cut
+# off part way. The website's workflow has the same group name in its own
+# repository; groups belong to one repository, so the two never wait on
+# each other (L-485).
+concurrency:
+  group: nightly-run
+
 permissions:
   contents: write   # commit and push the night's data files
   actions: write    # the keep-alive step below re-enables this workflow
@@ -59,8 +74,14 @@ jobs:
     # run in its first week would be a second thing changing at once.
     runs-on: ubuntu-24.04
     steps:
+      # main as it is when this job starts, not the commit the run was
+      # started from: a run that waited behind another (the concurrency
+      # group above) then works on what the first one pushed, and its own
+      # push is not refused for being behind.
       - name: Check out the repository
         uses: actions/checkout@v7
+        with:
+          ref: main
 
       - name: Set up Python 3.13 (requirements.txt's recommended version)
         uses: actions/setup-python@v7

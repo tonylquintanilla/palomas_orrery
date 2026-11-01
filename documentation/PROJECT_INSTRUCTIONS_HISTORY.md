@@ -3686,6 +3686,63 @@ resident.
 (Moved down from the resident protocol on 2026-10-29 when
 v3.118 made a fourth entry.)
 
+v3.116 (October 27, 2026): No rule changed in this document. TWO skill
+bumps, one version each (L-443, carrying L-493, L-494 and L-495):
+interactive-exhibit 1.26 -> 1.27, provenance-discipline 2.34 -> 2.35.
+THE NIGHT OF OCTOBER 26 WRITTEN INTO THE SKILLS; JPL'S WORDS KEPT IN
+BOTH INSTRUMENTS.
+
+WHAT PROMPTED IT. The night's website builds (gallery patch_L494_1 to
+patch_L494_3, pushed at ab8f6b5e, 1e6f6691 and b7e2edd4) left
+interactive-exhibit 1.26 saying that a website hover ends with a
+pointer line to the i panel, which a session following it would put
+back, and that a comet on an open path ticks no companions. It had been
+bumped once that day, so under One Session, One Bump its corrections
+waited for this session, carried on L-443. Tony's ruling of Oct 26, "we
+should always keep the correct JPL words and explain them when needed"
+(documentation/COORD_jpl_words_ruling_20261026.md), waited for
+provenance-discipline's next version the same way. This is the first
+session run in Claude Code, by the door CLAUDE.md opened on Oct 26.
+
+WHAT CHANGED. interactive-exhibit: no website hover ends with a
+pointer, and a first visit gets a note under the i button; a comet
+ticks a companion planet (on an open path the farthest its path has
+reached so far, on a closed orbit the farthest its orbit reaches by its
+aphelion), and no asteroid or dwarf planet does; a group's class is
+explained first in each member's text box and panel; the Find a body
+box; the grid chip's AU note and the whole triad opening the frame
+note; the orbit line wrapped at 60; the direction arrows; a candidate
+for the headless recipe; and the Hover budget check's description
+corrected. provenance-discipline: What a Visitor Reads, principle 5,
+plain words keep the authority's word, explained, never replaced. Each
+skill's oldest of four version entries moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule. Not a skill:
+the orrery dashboard gained its Direction Arrows button, which the
+Dashboard parity check had found missing on the run after patch_L494_4.
+
+THE OBLIGATION TRAVELS. A Claude Code session reads each skill as the
+file in the repo, so its loaded copy is the repo's. This one read in
+full safe-file-editing 1.14, agentic-pre-test 1.3,
+ledger-and-session-records 1.22, interactive-exhibit 1.26 and
+provenance-discipline 2.34, each as the manifest expected, and read the
+version lines of orrery-coding-conventions 1.12,
+horizons-orbital-mechanics 1.12 and gallery-cache-builder 1.13, which
+this work did not fire. The account's installed copies cannot be seen
+from Code. The next session that loads skills from the account confirms
+its copies read interactive-exhibit 1.27 and provenance-discipline
+2.35, and, from v3.114 and v3.115, orrery-coding-conventions 1.12,
+horizons-orbital-mechanics 1.12 and gallery-cache-builder 1.13, before
+work that fires them.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.113 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-10-31 when
+v3.119 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

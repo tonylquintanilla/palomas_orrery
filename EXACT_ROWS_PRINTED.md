@@ -35,44 +35,44 @@ Rule 7: each printed exact row states a print count, each orrery line prints it 
 - orrery `solar_visualization_shells.py` line 261: `f" ({row_text('SUN_RADIUS_KM', 'au')} to {row_text('CHROMOSPHERE_TOP_KM', 'au')} AU).<br>"`
 - orrery `solar_visualization_shells.py` line 263: `f"{exact_text('SUN_RADIUS_KM', grouping=True)} km in radius --<br>"`
 - orrery `solar_visualization_shells.py` line 533: `f"* Including both the Convective Zone and the Photosphere, the radius is from {row_text('RAD...`
-- gallery `gallery/feature_renderers.js` line 3667 (config `/objects/0/features/sun_structures/photosphere`): `? fmtServed(cfg.radius.value, sunF, 0) : String(cfg.radius.value);`
+- gallery `gallery/feature_renderers.js` line 3710 (config `/objects/0/features/sun_structures/photosphere`): `? fmtServed(cfg.radius.value, sunF, 0) : String(cfg.radius.value);`
 
 ### `EARTH_LEO_UPPER_ALTITUDE_KM`
 
 - orrery `earth_visualization_shells.py` line 1539: `f"Low Earth Orbit (LEO) is the region from {row_text('EARTH_LEO_LOWER_ALTITUDE_KM')} km to {e...`
 - orrery `earth_visualization_shells.py` line 1616: `f"Altitude range: {row_text('EARTH_LEO_LOWER_ALTITUDE_KM', grouping=True)} km to {exact_text(...`
-- gallery `gallery/feature_renderers.js` line 2270 (config `/objects/1/features/earth_orbital_zones/leo_inner/upper`): `vals[k] = servedText(n);`
-- gallery `gallery/feature_renderers.js` line 3682 (config `/objects/1/features/earth_orbital_zones/leo_outer/altitude`): `kmAndAu(km.altitudeKm, km.altitudeFigures)) + "<br>";`
+- gallery `gallery/feature_renderers.js` line 2275 (config `/objects/1/features/earth_orbital_zones/leo_inner/upper`): `vals[k] = servedText(n);`
+- gallery `gallery/feature_renderers.js` line 3725 (config `/objects/1/features/earth_orbital_zones/leo_outer/altitude`): `kmAndAu(km.altitudeKm, km.altitudeFigures)) + "<br>";`
 
 ### `EARTH_VAN_ALLEN_OUTER_RADII`
 
 - orrery `earth_visualization_shells.py` line 1390: `f"the poles, and they are thickest at L = {exact_text('EARTH_VAN_ALLEN_OUTER_RADII')}, about ...`
 - orrery `earth_visualization_shells.py` line 1400: `f"the L = {_band_low} to {_band_high} band; the drawn {exact_text('EARTH_VAN_ALLEN_OUTER_RADI...`
 - orrery `shell_configs.py` line 2280: `f"{exact_text('EARTH_VAN_ALLEN_OUTER_RADII')} Earth radii out (doi:10.1029/2024JA033504).\n"`
-- gallery `gallery/feature_renderers.js` line 1664 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `fmtServed(distances[i], counts[i], 1) +`
-- gallery `gallery/feature_renderers.js` line 1679 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `drawn: fmtServed(distances[i], counts[i], 1),`
-- gallery `gallery/feature_renderers.js` line 1685 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `? SOFT_BR + "(given as L = " + fmtServed(distances[i], counts[i], 1) +`
-- gallery `gallery/feature_renderers.js` line 1689 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `kmAndAu(distances[i] * radiusKm,`
+- gallery `gallery/feature_renderers.js` line 1669 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `fmtServed(distances[i], counts[i], 1) +`
+- gallery `gallery/feature_renderers.js` line 1684 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `drawn: fmtServed(distances[i], counts[i], 1),`
+- gallery `gallery/feature_renderers.js` line 1690 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `? SOFT_BR + "(given as L = " + fmtServed(distances[i], counts[i], 1) +`
+- gallery `gallery/feature_renderers.js` line 1694 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `kmAndAu(distances[i] * radiusKm,`
 
 ### `EARTH_SOLAR_WIND_PRESSURE_NPA`
 
 - orrery `earth_visualization_shells.py` line 1030: `f"Sun-facing side at a nominal solar wind pressure of {exact_text('EARTH_SOLAR_WIND_PRESSURE_...`
 - orrery `earth_visualization_shells.py` line 1213: `f"side at a nominal solar wind pressure of {exact_text('EARTH_SOLAR_WIND_PRESSURE_NPA')} nPa....`
 - orrery `earth_visualization_shells.py` line 1304: `f"Sun-facing side at a nominal solar wind pressure of {exact_text('EARTH_SOLAR_WIND_PRESSURE_...`
-- gallery `gallery/feature_renderers.js` line 3962 (config `/objects/1/features/earth_magnetosphere/magnetopause/surface/pressure`): `pressure: fmtServed(dp, servedFigures(mpS.pressure), 1),`
-- gallery `gallery/feature_renderers.js` line 4192 (config `/objects/1/features/earth_magnetosphere/bow_shock/surface/pressure`): `pressure: fmtServed(bsP, servedFigures(bsS.pressure), 1),`
+- gallery `gallery/feature_renderers.js` line 4005 (config `/objects/1/features/earth_magnetosphere/magnetopause/surface/pressure`): `pressure: fmtServed(dp, servedFigures(mpS.pressure), 1),`
+- gallery `gallery/feature_renderers.js` line 4235 (config `/objects/1/features/earth_magnetosphere/bow_shock/surface/pressure`): `pressure: fmtServed(bsP, servedFigures(bsS.pressure), 1),`
 
 ### `EARTH_SOLAR_WIND_BZ_NT`
 
-- gallery `gallery/feature_renderers.js` line 3961 (config `/objects/1/features/earth_magnetosphere/magnetopause/surface/bz`): `bz: fmtServed(bz, servedFigures(mpS.bz), 1),`
+- gallery `gallery/feature_renderers.js` line 4004 (config `/objects/1/features/earth_magnetosphere/magnetopause/surface/bz`): `bz: fmtServed(bz, servedFigures(mpS.bz), 1),`
 
 ### `EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG`
 
-- gallery `gallery/feature_renderers.js` line 3963 (config `/objects/1/features/earth_magnetosphere/magnetopause/surface/cut_angle`): `cut_angle: fmtServed(mpCut, servedFigures(mpS.cut_angle), 0)`
+- gallery `gallery/feature_renderers.js` line 4006 (config `/objects/1/features/earth_magnetosphere/magnetopause/surface/cut_angle`): `cut_angle: fmtServed(mpCut, servedFigures(mpS.cut_angle), 0)`
 
 ### `EARTH_BOW_SHOCK_CUT_ANGLE_DEG`
 
-- gallery `gallery/feature_renderers.js` line 4193 (config `/objects/1/features/earth_magnetosphere/bow_shock/surface/cut_angle`): `cut_angle: fmtServed(bsCut, servedFigures(bsS.cut_angle), 0)`
+- gallery `gallery/feature_renderers.js` line 4236 (config `/objects/1/features/earth_magnetosphere/bow_shock/surface/cut_angle`): `cut_angle: fmtServed(bsCut, servedFigures(bsS.cut_angle), 0)`
 
 ### `INNER_CORONA_RADII`
 
@@ -89,21 +89,21 @@ Rule 7: each printed exact row states a print count, each orrery line prints it 
 - orrery `solar_visualization_shells.py` line 783: `f'* Streamer Belt (Visible Corona): helmets pinch at {row_text('HELMET_CUSP_RADII')} R_sun, t...`
 - orrery `solar_visualization_shells.py` line 1472: `f"higher than {row_text('HELMET_CUSP_LOW_RADII')}-{row_text('HELMET_CUSP_HIGH_RADII')} R_sun,...`
 - orrery `solar_visualization_shells.py` line 1473: `f"({row_text('HELMET_CUSP_RADII', 'km', grouping=True)} km, {row_text('HELMET_CUSP_RADII', 'a...`
-- gallery `gallery/feature_renderers.js` line 2098 (config `/objects/0/features/solar_atmosphere/streamer_belt/cusp_radius`): `"Cusp: " + (servedText(cfg.cusp_radius) || cuspR) + " solar radii<br>= " +`
+- gallery `gallery/feature_renderers.js` line 2103 (config `/objects/0/features/solar_atmosphere/streamer_belt/cusp_radius`): `"Cusp: " + (servedText(cfg.cusp_radius) || cuspR) + " solar radii<br>= " +`
 
 ### `INNER_LIMIT_OORT_CLOUD_AU`
 
 - orrery `palomas_orrery.py` line 10663: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
 - orrery `solar_visualization_shells.py` line 205: `_OORT_INNER_EDGE = row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)`
 - orrery `solar_visualization_shells.py` line 1153: `f'From {_OORT_INNER_EDGE} AU ({row_text("INNER_LIMIT_OORT_CLOUD_AU", unit="km", grouping=True...`
-- gallery `gallery/feature_renderers.js` line 2371 (config `/objects/0/features/oort_cloud/hills_cloud_torus/inner_radius`): `hover += "From " + (fmtAuServed(cfg.inner_radius) || fmtAu(lo)) + "," +`
+- gallery `gallery/feature_renderers.js` line 2376 (config `/objects/0/features/oort_cloud/hills_cloud_torus/inner_radius`): `hover += "From " + (fmtAuServed(cfg.inner_radius) || fmtAu(lo)) + "," +`
 
 ### `OUTER_OORT_CLOUD_AU`
 
 - orrery `palomas_orrery.py` line 10663: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
 - orrery `solar_visualization_shells.py` line 215: `_OORT_OUTER_EDGE = row_text('OUTER_OORT_CLOUD_AU', grouping=True)`
-- gallery `gallery/feature_renderers.js` line 2478 (config `/objects/0/features/oort_cloud/outer_oort_clumpy/outer_radius`): `var z = fmtAuServed(cfg.outer_radius) || fmtAu(hi);`
-- gallery `gallery/feature_renderers.js` line 2478 (config `/objects/0/features/oort_cloud/galactic_tide/outer_radius`): `var z = fmtAuServed(cfg.outer_radius) || fmtAu(hi);`
+- gallery `gallery/feature_renderers.js` line 2483 (config `/objects/0/features/oort_cloud/outer_oort_clumpy/outer_radius`): `var z = fmtAuServed(cfg.outer_radius) || fmtAu(hi);`
+- gallery `gallery/feature_renderers.js` line 2483 (config `/objects/0/features/oort_cloud/galactic_tide/outer_radius`): `var z = fmtAuServed(cfg.outer_radius) || fmtAu(hi);`
 
 ## Printed to a terminal only
 
@@ -123,29 +123,29 @@ No display prints these exact rows. Under Rule 7 they carry no print count. The 
 - `S_PER_MINUTE`: named on 1 other orrery line(s).
 - `D_PER_JULIAN_YEAR`: named on 16 other orrery line(s).
 - `EARTH_POLE_RA_J2000_DEG`: named on 6 other orrery line(s).
-  - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 1050 (config `/objects/1/features/orientation/pole/ra`): `var ra = measured(pole.ra, "deg", slug + "/orientation/pole/ra", warn);`
+  - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 1055 (config `/objects/1/features/orientation/pole/ra`): `var ra = measured(pole.ra, "deg", slug + "/orientation/pole/ra", warn);`
 - `EARTH_POLE_DEC_J2000_DEG`: named on 6 other orrery line(s).
-  - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 1051 (config `/objects/1/features/orientation/pole/dec`): `var dec = measured(pole.dec, "deg", slug + "/orientation/pole/dec", warn);`
+  - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 1056 (config `/objects/1/features/orientation/pole/dec`): `var dec = measured(pole.dec, "deg", slug + "/orientation/pole/dec", warn);`
 - `ARCSEC_PER_DEG`: named on 2 other orrery line(s).
 - `EARTH_OBLIQUITY_J2000_ARCSEC`: named on 0 other orrery line(s).
 - `EARTH_OBLIQUITY_J2000_DEG`: named on 21 other orrery line(s).
 - `GALACTIC_NORTH_POLE_RA_J2000_DEG`: named on 15 other orrery line(s).
-  - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 2421 (config `/objects/0/features/oort_cloud/galactic_tide/galactic_pole/ra`): `var gra = measured(gp.ra, "deg", where + "/galactic_pole/ra", warn);`
-  - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 2508 (config `/objects/0/features/oort_cloud/galactic_plane/galactic_pole/ra`): `var gra = measured(gp.ra, "deg", where + "/galactic_pole/ra", warn);`
+  - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 2426 (config `/objects/0/features/oort_cloud/galactic_tide/galactic_pole/ra`): `var gra = measured(gp.ra, "deg", where + "/galactic_pole/ra", warn);`
+  - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 2513 (config `/objects/0/features/oort_cloud/galactic_plane/galactic_pole/ra`): `var gra = measured(gp.ra, "deg", where + "/galactic_pole/ra", warn);`
 - `GALACTIC_NORTH_POLE_DEC_J2000_ARCSEC`: named on 0 other orrery line(s).
 - `GALACTIC_NORTH_POLE_DEC_J2000_DEG`: named on 13 other orrery line(s).
-  - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 2422 (config `/objects/0/features/oort_cloud/galactic_tide/galactic_pole/dec`): `var gdec = measured(gp.dec, "deg", where + "/galactic_pole/dec", warn);`
-  - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 2509 (config `/objects/0/features/oort_cloud/galactic_plane/galactic_pole/dec`): `var gdec = measured(gp.dec, "deg", where + "/galactic_pole/dec", warn);`
+  - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 2427 (config `/objects/0/features/oort_cloud/galactic_tide/galactic_pole/dec`): `var gdec = measured(gp.dec, "deg", where + "/galactic_pole/dec", warn);`
+  - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 2514 (config `/objects/0/features/oort_cloud/galactic_plane/galactic_pole/dec`): `var gdec = measured(gp.dec, "deg", where + "/galactic_pole/dec", warn);`
 - `DEG_PER_RAD`: named on 2 other orrery line(s).
 - `DEG_PER_TURN`: named on 0 other orrery line(s).
 - `EARTH_SOLAR_WIND_SPEED_KM_S`: named on 0 other orrery line(s).
 - `EARTH_MAGNETOTAIL_DRAWN_RADIUS_RADII`: named on 3 other orrery line(s).
-  - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 4018 (config `/objects/1/features/earth_magnetosphere/magnetotail/drawn_radius`): `var tailRadius = measured(tl.drawn_radius, "r_earth",`
+  - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 4061 (config `/objects/1/features/earth_magnetosphere/magnetotail/drawn_radius`): `var tailRadius = measured(tl.drawn_radius, "r_earth",`
 - `EARTH_MAGNETOTAIL_DRAWN_END_RADII`: named on 3 other orrery line(s).
-  - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 4020 (config `/objects/1/features/earth_magnetosphere/magnetotail/drawn_end`): `var tailEnd = measured(tl.drawn_end, "r_earth", tlWhere + "/drawn_end",`
+  - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 4063 (config `/objects/1/features/earth_magnetosphere/magnetotail/drawn_end`): `var tailEnd = measured(tl.drawn_end, "r_earth", tlWhere + "/drawn_end",`
 - `OUTER_CORONA_RADII`: named on 7 other orrery line(s).
 - `ROCHE_LIMIT_DRAWN_RADII`: named on 6 other orrery line(s).
-  - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 3628 (config `/objects/0/features/solar_atmosphere/roche_limit/drawn_radius`): `drawAu = measuredRadiusAu(cfg.drawn_radius,`
+  - gallery: read to draw, not printed, at `gallery/feature_renderers.js` line 3671 (config `/objects/0/features/solar_atmosphere/roche_limit/drawn_radius`): `drawAu = measuredRadiusAu(cfg.drawn_radius,`
 - `MAIN_BELT_SAMPLE_H_MAX`: named on 4 other orrery line(s).
 - `MAIN_BELT_SAMPLE_ORBITS`: named on 7 other orrery line(s).
 - `MAIN_BELT_JPL_COUNT`: named on 5 other orrery line(s).
@@ -154,26 +154,26 @@ No display prints these exact rows. Under Rule 7 they carry no print count. The 
 - `HILLS_CLOUD_PLANES_READ`: named on 6 other orrery line(s).
 - `HILLS_CLOUD_ECCENTRICITY`: named on 4 other orrery line(s).
 - `DE430_TERRESTRIAL_POSITION_PLACE_KM`: named on 10 other orrery line(s).
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 143 (config `/objects/1/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 144 (config `/objects/1/position_accuracy`): `v = node.value;`
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 143 (config `/objects/4/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 144 (config `/objects/4/position_accuracy`): `v = node.value;`
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 143 (config `/objects/5/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 144 (config `/objects/5/position_accuracy`): `v = node.value;`
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 143 (config `/objects/6/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 144 (config `/objects/6/position_accuracy`): `v = node.value;`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 204 (config `/objects/1/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 205 (config `/objects/1/position_accuracy`): `v = node.value;`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 204 (config `/objects/4/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 205 (config `/objects/4/position_accuracy`): `v = node.value;`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 204 (config `/objects/5/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 205 (config `/objects/5/position_accuracy`): `v = node.value;`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 204 (config `/objects/6/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 205 (config `/objects/6/position_accuracy`): `v = node.value;`
 - `DE430_JUPITER_SATURN_POSITION_PLACE_KM`: named on 8 other orrery line(s).
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 143 (config `/objects/2/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 144 (config `/objects/2/position_accuracy`): `v = node.value;`
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 143 (config `/objects/3/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 144 (config `/objects/3/position_accuracy`): `v = node.value;`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 204 (config `/objects/2/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 205 (config `/objects/2/position_accuracy`): `v = node.value;`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 204 (config `/objects/3/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 205 (config `/objects/3/position_accuracy`): `v = node.value;`
 - `DE430_URANUS_NEPTUNE_PLUTO_POSITION_PLACE_KM`: named on 8 other orrery line(s).
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 143 (config `/objects/7/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 144 (config `/objects/7/position_accuracy`): `v = node.value;`
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 143 (config `/objects/8/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 144 (config `/objects/8/position_accuracy`): `v = node.value;`
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 143 (config `/objects/12/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 144 (config `/objects/12/position_accuracy`): `v = node.value;`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 204 (config `/objects/7/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 205 (config `/objects/7/position_accuracy`): `v = node.value;`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 204 (config `/objects/8/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 205 (config `/objects/8/position_accuracy`): `v = node.value;`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 204 (config `/objects/12/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 205 (config `/objects/12/position_accuracy`): `v = node.value;`
 - `DE430_MOON_POSITION_PLACE_KM`: named on 5 other orrery line(s).
 - `GM_SUN_SI`: named on 2 other orrery line(s).
 - `BOLTZMANN_CONSTANT_J_PER_K`: named on 2 other orrery line(s).

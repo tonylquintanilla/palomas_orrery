@@ -1,5 +1,5 @@
 {
-  "schema": 3,
+  "schema": 4,
   "source_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
   "period_inputs_sha256": "8edfc6114b76695235f1fd4c8049b9e70a978eb5ade0333019bf271fb302c042",
   "confirmations_sha256": "8894135a4667371aa49c7fc9939cf74ee27886e483951ac69eca06e7d9bd1bac",
@@ -22,7 +22,8 @@
           "id_type": null,
           "horizons_name": "Sun"
         },
-        "period": null
+        "period": null,
+        "hold": null
       }
     },
     "mercury": {
@@ -87,7 +88,8 @@
           "days": 87.96885430477843,
           "jpl_days": 87.96885430477843,
           "error_days": 0.00032971618669819236
-        }
+        },
+        "hold": null
       }
     },
     "venus": {
@@ -152,7 +154,8 @@
           "days": 224.7058361266309,
           "jpl_days": 224.7058361266309,
           "error_days": 0.007994234272416634
-        }
+        },
+        "hold": null
       }
     },
     "earth": {
@@ -217,7 +220,8 @@
           "days": 365.2498770507308,
           "jpl_days": 365.2498770507308,
           "error_days": 0.004099075940587227
-        }
+        },
+        "hold": null
       }
     },
     "mars": {
@@ -282,7 +286,8 @@
           "days": 686.9961190010482,
           "jpl_days": 686.9961190010482,
           "error_days": 0.05359560300621524
-        }
+        },
+        "hold": null
       }
     },
     "jupiter": {
@@ -347,7 +352,8 @@
           "days": 4332.659211918214,
           "jpl_days": 4332.659211918214,
           "error_days": 0.40608472381791216
-        }
+        },
+        "hold": null
       }
     },
     "eurybates": {
@@ -424,7 +430,8 @@
           "days": 4353.268679654878,
           "jpl_days": 4353.268679654878,
           "error_days": 0.3779520956313718
-        }
+        },
+        "hold": null
       }
     },
     "patroclus": {
@@ -489,7 +496,8 @@
           "days": 4338.918430996448,
           "jpl_days": 4338.918430996448,
           "error_days": 0.13339161562544177
-        }
+        },
+        "hold": null
       }
     },
     "polymele": {
@@ -566,7 +574,8 @@
           "days": 4320.940289044181,
           "jpl_days": 4320.940289044181,
           "error_days": 0.36346864523511613
-        }
+        },
+        "hold": null
       }
     },
     "leucus": {
@@ -643,7 +652,8 @@
           "days": 4469.563443306468,
           "jpl_days": 4469.563443306468,
           "error_days": 0.3586617740129441
-        }
+        },
+        "hold": null
       }
     },
     "orus": {
@@ -720,7 +730,8 @@
           "days": 4227.481372278889,
           "jpl_days": 4227.481372278889,
           "error_days": 0.03285546479128243
-        }
+        },
+        "hold": null
       }
     },
     "saturn": {
@@ -797,7 +808,8 @@
           "days": 10751.30962654848,
           "jpl_days": 10751.30962654848,
           "error_days": 5.259054803749677
-        }
+        },
+        "hold": null
       }
     },
     "uranus": {
@@ -874,7 +886,8 @@
           "days": 30679.94522205484,
           "jpl_days": 30679.94522205484,
           "error_days": 0.18876053482017596
-        }
+        },
+        "hold": null
       }
     },
     "neptune": {
@@ -951,7 +964,8 @@
           "days": 60184.8784092995,
           "jpl_days": 60184.8784092995,
           "error_days": 2.554290918284096
-        }
+        },
+        "hold": null
       }
     },
     "chariklo": {
@@ -1028,7 +1042,8 @@
           "days": 22822.87186136115,
           "jpl_days": 22822.87186136115,
           "error_days": 0.27082879884983413
-        }
+        },
+        "hold": null
       }
     },
     "pluto_barycenter": {
@@ -1105,7 +1120,8 @@
           "days": 90578.39025812282,
           "jpl_days": 90578.39025812282,
           "error_days": 0.31426049568108283
-        }
+        },
+        "hold": null
       }
     },
     "ceres": {
@@ -1170,7 +1186,8 @@
           "days": 1680.449424661375,
           "jpl_days": 1680.449424661375,
           "error_days": 1.0018175924831212
-        }
+        },
+        "hold": null
       }
     },
     "haumea": {
@@ -1247,7 +1264,8 @@
           "days": 103290.2392277069,
           "jpl_days": 103290.2392277069,
           "error_days": 0.14556
-        }
+        },
+        "hold": null
       }
     },
     "eris": {
@@ -1324,7 +1342,8 @@
           "days": 203933.7197943077,
           "jpl_days": 203933.7197943077,
           "error_days": 1.1493
-        }
+        },
+        "hold": null
       }
     },
     "gonggong": {
@@ -1401,7 +1420,8 @@
           "days": 200476.3596847122,
           "jpl_days": 200476.3596847122,
           "error_days": 9.386
-        }
+        },
+        "hold": null
       }
     },
     "makemake": {
@@ -1478,7 +1498,8 @@
           "days": 112022.3651480326,
           "jpl_days": 112022.3651480326,
           "error_days": 0.19844
-        }
+        },
+        "hold": null
       }
     },
     "mani": {
@@ -1555,7 +1576,8 @@
           "days": 98422.6762328787,
           "jpl_days": 98422.6762328787,
           "error_days": 0.10043
-        }
+        },
+        "hold": null
       }
     },
     "orcus": {
@@ -1632,7 +1654,8 @@
           "days": 89858.84252528189,
           "jpl_days": 89858.84252528189,
           "error_days": 0.075379
-        }
+        },
+        "hold": null
       }
     },
     "quaoar": {
@@ -1709,7 +1732,8 @@
           "days": 104127.2108388088,
           "jpl_days": 104127.2108388088,
           "error_days": 0.10339
-        }
+        },
+        "hold": null
       }
     },
     "sedna": {
@@ -1786,7 +1810,8 @@
           "days": 4160095.697859893,
           "jpl_days": 4160095.697859893,
           "error_days": 1864.0
-        }
+        },
+        "hold": null
       }
     },
     "leleakuhonua": {
@@ -1863,7 +1888,8 @@
           "days": 15404152.60983637,
           "jpl_days": 15404152.60983637,
           "error_days": 131420.0
-        }
+        },
+        "hold": null
       }
     },
     "tno_2017_of201": {
@@ -1940,7 +1966,8 @@
           "days": 8704810.133733368,
           "jpl_days": 8704810.133733368,
           "error_days": 43319.0
-        }
+        },
+        "hold": null
       }
     },
     "tno_2026_ed138": {
@@ -2017,7 +2044,8 @@
           "days": 103248.9414310349,
           "jpl_days": 103249.7029099222,
           "error_days": 10.294
-        }
+        },
+        "hold": null
       }
     },
     "asteroid_2025_pn7": {
@@ -2082,7 +2110,8 @@
           "days": 364.3987087951941,
           "jpl_days": 364.3987087951941,
           "error_days": 0.8793929706984045
-        }
+        },
+        "hold": null
       }
     },
     "asteroid_2024_pt5": {
@@ -2147,7 +2176,8 @@
           "days": 377.5685856602425,
           "jpl_days": 377.5685856602425,
           "error_days": 0.11143425240499027
-        }
+        },
+        "hold": null
       }
     },
     "asteroid_2025_py1": {
@@ -2212,7 +2242,8 @@
           "days": 425.8790928323511,
           "jpl_days": 425.8790928323511,
           "error_days": 0.007478151786472154
-        }
+        },
+        "hold": null
       }
     },
     "asteroid_2023_jf": {
@@ -2277,7 +2308,8 @@
           "days": 756.6317538257155,
           "jpl_days": 756.6317538257155,
           "error_days": 0.17146
-        }
+        },
+        "hold": null
       }
     },
     "asteroid_2024_dw": {
@@ -2342,7 +2374,8 @@
           "days": 1319.493367559023,
           "jpl_days": 1319.493367559023,
           "error_days": 1.948
-        }
+        },
+        "hold": null
       }
     },
     "asteroid_2024_yr4": {
@@ -2407,7 +2440,8 @@
           "days": 1457.74810558693,
           "jpl_days": 1457.74810558693,
           "error_days": 0.42090620401904744
-        }
+        },
+        "hold": null
       }
     },
     "kamo_oalewa": {
@@ -2472,7 +2506,8 @@
           "days": 365.7710228507339,
           "jpl_days": 365.7710228507339,
           "error_days": 0.08267874381704132
-        }
+        },
+        "hold": null
       }
     },
     "psyche": {
@@ -2549,7 +2584,8 @@
           "days": 1816.677176589282,
           "jpl_days": 1816.677176589282,
           "error_days": 2.998002337996013
-        }
+        },
+        "hold": null
       }
     },
     "apophis": {
@@ -2614,7 +2650,8 @@
           "days": 323.5420892338735,
           "jpl_days": 323.5420892338735,
           "error_days": 0.0034301412194395198
-        }
+        },
+        "hold": null
       }
     },
     "bennu": {
@@ -2679,7 +2716,8 @@
           "days": 436.3732719920993,
           "jpl_days": 436.3732719920993,
           "error_days": 0.0019433282031400267
-        }
+        },
+        "hold": null
       }
     },
     "eros": {
@@ -2744,7 +2782,8 @@
           "days": 643.215817786095,
           "jpl_days": 643.215817786095,
           "error_days": 0.02121394579239677
-        }
+        },
+        "hold": null
       }
     },
     "dinkinesh": {
@@ -2809,7 +2848,8 @@
           "days": 1184.854324196151,
           "jpl_days": 1184.854324196151,
           "error_days": 0.14147547631500856
-        }
+        },
+        "hold": null
       }
     },
     "itokawa": {
@@ -2874,7 +2914,8 @@
           "days": 556.5365233045601,
           "jpl_days": 556.5365233045601,
           "error_days": 0.027878473067630694
-        }
+        },
+        "hold": null
       }
     },
     "lutetia": {
@@ -2939,7 +2980,8 @@
           "days": 1387.517316461594,
           "jpl_days": 1387.517316461594,
           "error_days": 0.3317053983239475
-        }
+        },
+        "hold": null
       }
     },
     "ryugu": {
@@ -3004,7 +3046,8 @@
           "days": 474.6984819744807,
           "jpl_days": 474.6984819744807,
           "error_days": 0.019960414921115444
-        }
+        },
+        "hold": null
       }
     },
     "steins": {
@@ -3069,7 +3112,8 @@
           "days": 1326.971343961377,
           "jpl_days": 1326.971343961377,
           "error_days": 0.29205353167594694
-        }
+        },
+        "hold": null
       }
     },
     "donaldjohanson": {
@@ -3134,7 +3178,8 @@
           "days": 1344.447146625269,
           "jpl_days": 1344.447146625269,
           "error_days": 0.11634819676987718
-        }
+        },
+        "hold": null
       }
     },
     "vesta": {
@@ -3199,7 +3244,8 @@
           "days": 1325.244321538131,
           "jpl_days": 1325.244321538131,
           "error_days": 0.1694796937990759
-        }
+        },
+        "hold": null
       }
     },
     "arrokoth": {
@@ -3276,7 +3322,8 @@
           "days": 107374.0052121068,
           "jpl_days": 107374.0052121068,
           "error_days": 36.584
-        }
+        },
+        "hold": null
       }
     },
     "ixion": {
@@ -3353,7 +3400,8 @@
           "days": 90604.04383513043,
           "jpl_days": 90604.04383513043,
           "error_days": 0.1835694756882731
-        }
+        },
+        "hold": null
       }
     },
     "goibniu": {
@@ -3430,7 +3478,8 @@
           "days": 99157.79563354861,
           "jpl_days": 99157.79563354861,
           "error_days": 0.24326324129651766
-        }
+        },
+        "hold": null
       }
     },
     "varuna": {
@@ -3507,7 +3556,8 @@
           "days": 102737.6404443444,
           "jpl_days": 102737.6404443444,
           "error_days": 0.22860600349667948
-        }
+        },
+        "hold": null
       }
     },
     "ammonite": {
@@ -3584,7 +3634,8 @@
           "days": 1461191.327376826,
           "jpl_days": 1461191.327376826,
           "error_days": 1378.9
-        }
+        },
+        "hold": null
       }
     },
     "tempel_2": {
@@ -3649,7 +3700,8 @@
           "days": 1959.815586031509,
           "jpl_days": 1959.815586031509,
           "error_days": 1.0749873119598305
-        }
+        },
+        "hold": null
       }
     },
     "schaumasse": {
@@ -3714,7 +3766,8 @@
           "days": 2985.728485198871,
           "jpl_days": 2985.728485198871,
           "error_days": 2.1519159749759638
-        }
+        },
+        "hold": null
       }
     },
     "howell": {
@@ -3779,7 +3832,8 @@
           "days": 2002.204541274829,
           "jpl_days": 2002.204541274829,
           "error_days": 1.1753806260658166
-        }
+        },
+        "hold": null
       }
     },
     "churyumov": {
@@ -3844,7 +3898,8 @@
           "days": 2349.755907776515,
           "jpl_days": 2349.755907776515,
           "error_days": 0.3264399822260202
-        }
+        },
+        "hold": null
       }
     },
     "hale_bopp": {
@@ -3921,7 +3976,8 @@
           "days": 876356.1111669387,
           "jpl_days": 876356.1111669387,
           "error_days": 60.568
-        }
+        },
+        "hold": null
       }
     },
     "halley": {
@@ -3998,7 +4054,8 @@
           "days": 27562.22169273424,
           "jpl_days": 27562.22169273424,
           "error_days": 0.011189067670784425
-        }
+        },
+        "hold": null
       }
     },
     "encke": {
@@ -4063,7 +4120,8 @@
           "days": 1206.320223793072,
           "jpl_days": 1206.320412715588,
           "error_days": 0.15083758920104628
-        }
+        },
+        "hold": null
       }
     },
     "hyakutake": {
@@ -4140,7 +4198,8 @@
           "days": 26361894.16382161,
           "jpl_days": 26361894.16382161,
           "error_days": 539130.0
-        }
+        },
+        "hold": null
       }
     },
     "lemmon": {
@@ -4217,7 +4276,8 @@
           "days": 426377.2010872945,
           "jpl_days": 426377.2010872945,
           "error_days": 2910.299623222032
-        }
+        },
+        "hold": null
       }
     },
     "ikeya_seki": {
@@ -4294,7 +4354,8 @@
           "days": 290431.658953062,
           "jpl_days": 290431.658953062,
           "error_days": 0.12710247660288587
-        }
+        },
+        "hold": null
       }
     },
     "neowise": {
@@ -4371,7 +4432,8 @@
           "days": 2495048.759533776,
           "jpl_days": 2495048.759533776,
           "error_days": 3852.2
-        }
+        },
+        "hold": null
       }
     },
     "wierzchos": {
@@ -4391,7 +4453,8 @@
           "id_type": "smallbody",
           "horizons_name": "Wierzchos (C/2024 E1)"
         },
-        "period": null
+        "period": null,
+        "hold": null
       },
       "path": {
         "made": "2026-10-26",
@@ -4489,7 +4552,8 @@
           "days": 289076.9822466811,
           "jpl_days": 289076.9822466811,
           "error_days": 7106.544594796898
-        }
+        },
+        "hold": null
       }
     },
     "maps": {
@@ -4554,7 +4618,8 @@
           "days": 693761.814793487,
           "jpl_days": 693761.814793487,
           "error_days": 43312.7321063705
-        }
+        },
+        "hold": null
       }
     },
     "west": {
@@ -4574,7 +4639,8 @@
           "id_type": "smallbody",
           "horizons_name": "West (C/1975 V1-A)"
         },
-        "period": null
+        "period": null,
+        "hold": null
       },
       "path": {
         "made": "2026-10-26",
@@ -4627,7 +4693,8 @@
           "id_type": "smallbody",
           "horizons_name": "McNaught (C/2006 P1)"
         },
-        "period": null
+        "period": null,
+        "hold": null
       },
       "path": {
         "made": "2026-10-26",
@@ -4680,7 +4747,8 @@
           "id_type": "smallbody",
           "horizons_name": "Tsuchinshan-ATLAS (C/2023 A3)"
         },
-        "period": null
+        "period": null,
+        "hold": null
       },
       "path": {
         "made": "2026-10-26",
@@ -4733,7 +4801,8 @@
           "id_type": "smallbody",
           "horizons_name": "ATLAS (C/2024 G3)"
         },
-        "period": null
+        "period": null,
+        "hold": null
       },
       "path": {
         "made": "2026-10-26",
@@ -4786,7 +4855,8 @@
           "id_type": "designation",
           "horizons_name": "ATLAS (C/2025 K1)"
         },
-        "period": null
+        "period": null,
+        "hold": null
       },
       "path": {
         "made": "2026-10-26",
@@ -4839,7 +4909,8 @@
           "id_type": "smallbody",
           "horizons_name": "ATLAS (C/2025 K1-B)"
         },
-        "period": null
+        "period": null,
+        "hold": null
       },
       "path": {
         "made": "2026-10-26",
@@ -4892,7 +4963,8 @@
           "id_type": "smallbody",
           "horizons_name": "ATLAS (C/2025 K1-C)"
         },
-        "period": null
+        "period": null,
+        "hold": null
       },
       "path": {
         "made": "2026-10-26",
@@ -4945,7 +5017,8 @@
           "id_type": "smallbody",
           "horizons_name": "ATLAS (C/2025 K1-D)"
         },
-        "period": null
+        "period": null,
+        "hold": null
       },
       "path": {
         "made": "2026-10-26",
@@ -4998,7 +5071,8 @@
           "id_type": "smallbody",
           "horizons_name": "PANSTARRS (C/2025 R3)"
         },
-        "period": null
+        "period": null,
+        "hold": null
       },
       "path": {
         "made": "2026-10-26",
@@ -5051,7 +5125,8 @@
           "id_type": "smallbody",
           "horizons_name": "Borisov (C/2025 V1)"
         },
-        "period": null
+        "period": null,
+        "hold": null
       },
       "path": {
         "made": "2026-10-26",
@@ -5104,7 +5179,8 @@
           "id_type": "smallbody",
           "horizons_name": "'Oumuamua"
         },
-        "period": null
+        "period": null,
+        "hold": null
       },
       "path": {
         "made": "2026-10-26",
@@ -5157,7 +5233,8 @@
           "id_type": "smallbody",
           "horizons_name": "Borisov (C/2019 Q4)"
         },
-        "period": null
+        "period": null,
+        "hold": null
       },
       "path": {
         "made": "2026-10-26",
@@ -5210,7 +5287,8 @@
           "id_type": "smallbody",
           "horizons_name": "ATLAS (C/2025 N1)"
         },
-        "period": null
+        "period": null,
+        "hold": null
       },
       "path": {
         "made": "2026-10-26",
@@ -5262,7 +5340,8 @@
           "id_type": "id",
           "horizons_name": "Voyager 1 (spacecraft)"
         },
-        "period": null
+        "period": null,
+        "hold": null
       },
       "path": {
         "made": "2026-10-28",
@@ -5348,7 +5427,8 @@
           "id_type": "id",
           "horizons_name": "Voyager 2 (spacecraft)"
         },
-        "period": null
+        "period": null,
+        "hold": null
       },
       "path": {
         "made": "2026-10-28",
@@ -5485,7 +5565,8 @@
           "id_type": "id",
           "horizons_name": "New Horizons (spacecraft)"
         },
-        "period": null
+        "period": null,
+        "hold": null
       },
       "path": {
         "made": "2026-10-28",
@@ -5571,7 +5652,8 @@
           "id_type": "id",
           "horizons_name": "Juno (spacecraft)"
         },
-        "period": null
+        "period": null,
+        "hold": null
       },
       "path": {
         "made": "2026-10-28",
@@ -5691,7 +5773,8 @@
           "id_type": "id",
           "horizons_name": "OSIRIS-REx (spacecraft)"
         },
-        "period": null
+        "period": null,
+        "hold": null
       },
       "path": {
         "made": "2026-10-28",
@@ -5964,7 +6047,8 @@
           "id_type": "id",
           "horizons_name": "Parker Solar Probe (spacecraft)"
         },
-        "period": null
+        "period": null,
+        "hold": null
       },
       "path": {
         "made": "2026-10-28",
@@ -6849,7 +6933,8 @@
           "id_type": "id",
           "horizons_name": "Lucy (spacecraft)"
         },
-        "period": null
+        "period": null,
+        "hold": null
       },
       "path": {
         "made": "2026-10-28",
@@ -7020,7 +7105,8 @@
           "id_type": "id",
           "horizons_name": "JUICE (spacecraft)"
         },
-        "period": null
+        "period": null,
+        "hold": null
       },
       "path": {
         "made": "2026-10-28",
@@ -7242,7 +7328,8 @@
           "id_type": "id",
           "horizons_name": "Psyche (spacecraft)"
         },
-        "period": null
+        "period": null,
+        "hold": null
       },
       "path": {
         "made": "2026-10-28",
@@ -7328,7 +7415,8 @@
           "id_type": "id",
           "horizons_name": "Europa Clipper (spacecraft)"
         },
-        "period": null
+        "period": null,
+        "hold": null
       },
       "path": {
         "made": "2026-10-28",
@@ -7465,7 +7553,8 @@
           "id_type": "id",
           "horizons_name": "BepiColombo (Spacecraft)"
         },
-        "period": null
+        "period": null,
+        "hold": null
       },
       "path": {
         "made": "2026-10-30",
@@ -8112,7 +8201,8 @@
           "id_type": "id",
           "horizons_name": "Solar Orbiter (spacecraft)"
         },
-        "period": null
+        "period": null,
+        "hold": null
       },
       "path": {
         "made": "2026-10-30",

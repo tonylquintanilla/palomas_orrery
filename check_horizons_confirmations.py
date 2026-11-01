@@ -49,6 +49,16 @@ WHAT MAKES IT FAIL, NAMED BY ENTRY
     only five nights running without JPL turn the night red, and then
     that is the true finding. A disagreement stays red on every run.
 
+    A HELD BODY (L-485, the hold): one whose record carries a hold block,
+    written by horizons_check.py when JPL no longer gives its identity
+    as the list does. It is printed by name, with the date the hold
+    began and its causes, and no lapse clock runs on it however long the
+    hold lasts. With --night it passes AS HELD; by day it is red, "waiting
+    on your look", as the day's voice is for what waits on a person.
+    A value taken today is named (TAKEN) and passes on its new number. A
+    period date that cannot be read, or a question JPL refused, is
+    REPORTED at night and red by day, as an outage is.
+
     It uses horizons_check.py's own rules, so the two cannot disagree
     about what is due. It names the periods it does not compare -- typed,
     or not yet fetched, which the website marks as not from JPL -- and
@@ -70,6 +80,10 @@ tonight's confirmations as dated after today.)
 Module updated: October 30, 2026 with Anthropic's Claude Opus 5.5 (L-485,
 the nightly run: --night reports an unreached JPL instead of failing on
 it, by Tony's ruling R4; a lapsed confirmation still fails.)
+Module updated: October 31, 2026 with Anthropic's Claude Opus 5.5 (L-485,
+the hold: a held body passes as held at night, by name, with no lapse
+clock, and is red by day; today's takes are named; a reported period is
+reported at night and red by day.)
 """
 
 import datetime
@@ -103,6 +117,21 @@ def run(root, today, echo=print, night=False):
             hc.SHEETS.replace(os.sep, "/"), len(sheet_records),
             today.isoformat()))
     for key, obj in objects.items():
+        hold = (records.get(key) or {}).get("hold")
+        if hold:
+            # L-485, the hold: a body held for an identity JPL no longer
+            # gives as the list does is kept at its last confirmation and
+            # waits for Tony. No lapse clock runs on it, however long the
+            # hold lasts. At night it passes AS HELD; by day it is red, as
+            # the day's voice is for what waits on a person.
+            text = "HELD since %s: %s" % (hold.get("since"), "; ".join(
+                hold.get("causes") or []))
+            echo("  %-18s %s -- %s; kept at its confirmation of %s"
+                 % (key, "held" if night else "FAIL", text,
+                    (records.get(key) or {}).get("confirmed")))
+            if not night:
+                failures.append("%s: %s -- waiting on your look" % (key, text))
+            continue
         state, detail = hc.confirmation_state(obj, records.get(key), today)
         pstate, pdetail = hc.period_state(obj.get("period"), records.get(key),
                                           today)
@@ -160,6 +189,18 @@ def run(root, today, echo=print, night=False):
                 line = "today's check: %s" % problem
                 if line not in failures:
                     failures.append(line)
+            # L-485: a value taken from JPL is confirmed on its new number
+            # and passes; it is named so a person can see it moved.
+            for item in last.get("taken") or []:
+                echo("TAKEN today: %s: %s -> %s"
+                     % (item.get("name"), item.get("old"), item.get("new")))
+            # A date that cannot be read, or a question JPL refused, is
+            # reported at night, as an outage is, and red by day.
+            for item in last.get("reported") or []:
+                if night:
+                    echo("REPORTED, not red (the night run, R4): %s" % item)
+                else:
+                    failures.append("REPORTED today: %s" % item)
         else:
             echo("Today's Horizons check: not run today (last run %s)."
                  % last.get("date"))
@@ -185,10 +226,14 @@ def run(root, today, echo=print, night=False):
         return 1
     compared = sum(1 for o in objects.values()
                    if (o.get("period") or {}).get("kind") == "fetched")
+    held = [k for k in objects if (records.get(k) or {}).get("hold")]
     echo("HORIZONS CONFIRMATIONS: pass -- %d of %d entries and %d periods "
-         "confirmed, %d sheets read, within %d days"
-         % (len(objects), len(objects), compared, len(spacecraft),
-            hc.CADENCE_DAYS))
+         "confirmed, %d sheets read, within %d days%s"
+         % (len(objects) - len(held), len(objects), compared,
+            len(spacecraft), hc.CADENCE_DAYS,
+            "; HELD %s" % ", ".join(
+                "%s since %s" % (k, records[k]["hold"].get("since"))
+                for k in held) if held else ""))
     return 0
 
 

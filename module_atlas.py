@@ -263,6 +263,7 @@ ROLE_MAP = {
     'test_citation_inheritance':              'devtool',
     'test_constants_export':                  'devtool',
     'test_constants_provenance':              'devtool',
+    'test_constants_rounding':                'devtool',
     'test_cross_checked':                     'devtool',
     'test_dashboard_parity':                  'devtool',
     'test_derived_figures':                   'devtool',

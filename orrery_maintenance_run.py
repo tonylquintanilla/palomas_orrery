@@ -295,6 +295,13 @@ Module updated: October 30, 2026 with Anthropic's Claude Opus 5.5 (L-485,
 "ask JPL for everything": --night --ask-everything runs the Horizons check
 with --all and a time limit of its own, ASK_EVERYTHING_SECONDS, from
 ASK_EVERYTHING_ARGS; run_tool() takes the limit.)
+Module updated: October 31, 2026 with Anthropic's Claude Opus 5.5 (L-484:
+CHECKERS gains Constants rounding, test_constants_rounding.py, the rule
+the export's conversions are rounded by, held by hand-worked values; it
+judges a function, so it is not in the night set. L-485, the hold: the
+night's record, schema 2, names tonight's values taken from JPL and
+every body held, read by night_taken_held() from what the Horizons check
+wrote.)
 """
 
 import hashlib
@@ -409,6 +416,13 @@ CHECKERS = [
     # The export matches the store it was made from: hash, rows, the
     # not-exported list, and the per-slice gate. L-322.
     ('Constants export check', ['test_constants_export.py'], None),
+    # L-484, L-503 (2026-10-31): the rule the export's conversions are
+    # rounded by, constants_rows._to_place(), against values worked out
+    # by hand, with the fault of 2026-10-31 planted. The check above
+    # re-computes with the export's own counts, so only this can say the
+    # rounding follows the rule. Not a night row: it judges a function.
+    ('Constants rounding', ['test_constants_rounding.py'],
+     'CONSTANTS ROUNDING:'),
     # L-395: the objects export matches the list it was made from, and
     # no entry in the list writes a field twice. It names every number
     # in an exported description.
@@ -748,6 +762,43 @@ def night_gate(project_dir, results, gens, changed=None):
     return problems, reported, inside
 
 
+def night_taken_held(project_dir, today=None):
+    """(taken, held) for the night's record, read from what the Horizons
+    check wrote, never retyped (L-485, the hold). taken: tonight's values
+    taken from JPL, from its last-run file when that is today's -- name,
+    old, new, date. held: every body whose confirmation carries a hold,
+    from data/horizons_confirmations.json -- name, since, cause."""
+    import json
+    import utc_clock    # L-504: the clock read as UTC
+    today = (today or utc_clock.utc_today()).isoformat()
+    taken, held = [], []
+    try:
+        with open(os.path.join(project_dir, 'data',
+                               'horizons_check_last_run.json'),
+                  encoding='utf-8') as handle:
+            last = json.load(handle)
+        if last.get('date') == today:
+            taken = [{'name': t.get('name'), 'old': t.get('old'),
+                      'new': t.get('new'), 'date': t.get('date')}
+                     for t in last.get('taken') or []]
+    except (OSError, ValueError):
+        pass
+    try:
+        with open(os.path.join(project_dir, 'data',
+                               'horizons_confirmations.json'),
+                  encoding='utf-8') as handle:
+            records = json.load(handle).get('objects') or {}
+        for key, record in records.items():
+            hold = (record or {}).get('hold') if isinstance(record,
+                                                            dict) else None
+            if hold:
+                held.append({'name': key, 'since': hold.get('since'),
+                             'cause': '; '.join(hold.get('causes') or [])})
+    except (OSError, ValueError):
+        pass
+    return taken, held
+
+
 def write_night_record(project_dir, results, skipped, reported):
     """The last clean night, for the dashboard and for GitHub's copy."""
     import json
@@ -758,12 +809,17 @@ def write_night_record(project_dir, results, skipped, reported):
             os.environ.get('GITHUB_SERVER_URL', 'https://github.com'),
             os.environ.get('GITHUB_REPOSITORY', ''),
             os.environ['GITHUB_RUN_ID'])
+    taken, held = night_taken_held(project_dir)
     body = {
         '_comment': 'Written by orrery_maintenance_run.py --night on a '
                     'clean night only (L-485), so this is the last clean '
                     'run. The dashboard reads it. A red night writes '
-                    "nothing: its record is the run's log on GitHub.",
-        'schema': 1,
+                    "nothing: its record is the run's log on GitHub. "
+                    "'taken' is tonight's values taken from JPL, old and "
+                    "new; 'held' is every body held for its identity.",
+        'schema': 2,
+        'taken': taken,
+        'held': held,
         'clean_run_utc': utc_clock.utc_stamp(),
         'where': ('GitHub Actions' if os.environ.get('GITHUB_ACTIONS')
                   else 'a local run'),

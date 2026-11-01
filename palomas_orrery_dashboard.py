@@ -334,6 +334,14 @@ orrery's nightly run last ran clean, read from
 data/nightly_run_record.json, and turns red with "no clean run since"
 once that is more than a day old, or when no record can be read. No
 button added: the night set runs on GitHub, not from here.
+October 31, 2026 with Anthropic's Claude Opus 5.5 (L-485): a second
+line under it, website_night_line(), reads the website's own record,
+data/nightly_run_record.json in the gallery folder beside the orrery,
+by the same rule; a machine with no gallery folder says so, not red.
+Both lines name what a night took from JPL and what it holds, read from
+the record's taken and held lists; a hold is named, never red. And
+Constants Rounding, the orrery's new checker (L-484), gets its button
+after Constants Relations, with its short line.
 """
 
 import os
@@ -1491,6 +1499,19 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
+        ("Constants Rounding",
+         "test_constants_rounding.py",
+         "Check the rule the constants export rounds a value in another "
+         "unit by (constants_rows._to_place) against values worked out by "
+         "hand: a rounding that carries into a new leading digit keeps its "
+         "carry (99,781,780 km at the million place is 100,000,000), the "
+         "one-figure branch holds, and halves round to even. The fault of "
+         "Oct 31 is planted first and must be caught. Ends on "
+         "\"CONSTANTS ROUNDING: PASS\" (L-484).",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
         ("Cross-Check Annotations",
          "test_cross_checked.py",
          "Pass/fail tests for the cross-check annotation grammar and V2 "
@@ -2236,6 +2257,9 @@ CARD_LINES = {
      "Constants Relations"):
         "Checks how constants relate: derivations, orderings, completeness.",
     ("Maintenance Run",
+     "Constants Rounding"):
+        "Checks the export's rounding against values worked out by hand.",
+    ("Maintenance Run",
      "Cross-Check Annotations"):
         "Checks the grammar and scoring of cross-check annotations.",
     ("Maintenance Run",
@@ -2379,31 +2403,73 @@ NIGHTLY_RECORD = os.path.join(SCRIPT_DIR, "data", "nightly_run_record.json")
 NIGHTLY_STALE_HOURS = 24      # "older than a day"
 
 
-def nightly_run_line(path=NIGHTLY_RECORD, now=None):
-    """(text, red) for the dashboard's nightly-run line.
+# The website's record has the same key, clean_run_utc, written by the
+# gallery's daily_run.py --night on its clean nights (L-485). The website
+# folder shows GitHub's copy only after Pull origin on the website.
+WEBSITE_NIGHTLY_RECORD = os.path.join(GALLERY_REPO_DIR, "data",
+                                      "nightly_run_record.json")
+
+
+def _night_lists(record):
+    """The words a record's taken and held lists add to its line, read
+    from the record, never retyped (L-485, the hold): "; 1 held: encke
+    since 2026-11-03". "" when the record has neither."""
+    words = ""
+    taken = record.get("taken") or []
+    held = record.get("held") or []
+    if taken:
+        words += "; %d taken from JPL: %s" % (len(taken), ", ".join(
+            "%s %s -> %s" % (t.get("name"), t.get("old"), t.get("new"))
+            for t in taken))
+    if held:
+        words += "; %d held: %s" % (len(held), ", ".join(
+            "%s since %s" % (h.get("name"), h.get("since")) for h in held))
+    return words
+
+
+def nightly_run_line(path=NIGHTLY_RECORD, now=None,
+                     label="Orrery's nightly run"):
+    """(text, red) for one nightly-run line on the dashboard.
 
     Red when the record is missing, cannot be read, or its clean run is
-    more than a day old. `now` is a plain UTC datetime, for a test.
+    more than a day old. A body the night took a new value for, or held,
+    is named after the date and never turns the line red: a hold is
+    named, not red (Tony's ruling of 2026-10-31, 18:38). `label` opens
+    the line, so the orrery's record and the website's share it. `now`
+    is a plain UTC datetime, for a test.
     """
     import datetime
     import json
     import utc_clock    # L-504: the clock read as UTC
+    name = os.path.join(os.path.basename(os.path.dirname(path)),
+                        os.path.basename(path))
     if not os.path.exists(path):
-        return ("Nightly run: no clean run recorded yet "
-                "(data/nightly_run_record.json)", True)
+        return ("%s: no clean run recorded yet (%s)" % (label, name), True)
     try:
         with open(path, encoding="utf-8") as handle:
-            stamp = json.load(handle)["clean_run_utc"]
-        when = utc_clock.parse_stamp(stamp)
+            record = json.load(handle)
+        when = utc_clock.parse_stamp(record["clean_run_utc"])
     except (OSError, ValueError, KeyError, TypeError) as exc:
-        return ("Nightly run: its record could not be read (%s)" % exc,
+        return ("%s: its record could not be read (%s)" % (label, exc),
                 True)
     now = now or utc_clock.utc_now()
     shown = when.strftime("%Y-%m-%d %H:%M UTC")
+    lists = _night_lists(record)
     if now - when > datetime.timedelta(hours=NIGHTLY_STALE_HOURS):
-        return ("Nightly run: no clean run since %s -- read the latest "
-                "run's log on GitHub's Actions tab" % shown, True)
-    return "Nightly run: last clean run %s" % shown, False
+        return ("%s: no clean run since %s -- read the latest run's log on "
+                "GitHub's Actions tab%s" % (label, shown, lists), True)
+    return "%s: last clean run %s%s" % (label, shown, lists), False
+
+
+def website_night_line(now=None):
+    """(text, red) for the website's nightly-run line, read from the
+    gallery folder beside the orrery. A machine with only the orrery has
+    no such folder; that is said in words and is not red."""
+    if not os.path.isdir(GALLERY_REPO_DIR):
+        return ("Website's nightly run: the website's folder is not beside "
+                "the orrery", False)
+    return nightly_run_line(WEBSITE_NIGHTLY_RECORD, now,
+                            label="Website's nightly run")
 
 
 def card_line(group_name, label):
@@ -2853,15 +2919,16 @@ class PalomasOrreryDashboardFrame(ctk.CTkFrame):
         )
         author.pack()
 
-        # L-485: the nightly run's last clean night, red once it is more
-        # than a day old.
-        night_text, night_red = nightly_run_line()
-        ctk.CTkLabel(
-            inner,
-            text=night_text,
-            font=FONT_FOOTER,
-            text_color=COLOR_ALERT if night_red else COLOR_TEXT_DIM,
-        ).pack(pady=(8, 0))
+        # L-485: each nightly run's last clean night, the orrery's and
+        # the website's, red once it is more than a day old.
+        for index, (night_text, night_red) in enumerate(
+                (nightly_run_line(), website_night_line())):
+            ctk.CTkLabel(
+                inner,
+                text=night_text,
+                font=FONT_FOOTER,
+                text_color=COLOR_ALERT if night_red else COLOR_TEXT_DIM,
+            ).pack(pady=(8 if index == 0 else 0, 0))
 
     # ----------------------------------------------------------
     # LAUNCH SECTION

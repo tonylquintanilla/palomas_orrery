@@ -1118,6 +1118,19 @@ stops on a loss, naming each record and its copy (Tony, 2026-10-17:
 stop and name). See The Daily Run's Steps.
 (Moved down 2026-10-29, when 1.14 made a fourth entry.)
 
+Earlier: 1.12 | 2026-10-25, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 0c27f47a and gallery @ b1a4ce6c. v1.12 (L-443 build B,
+L-461) adds A Spacecraft Is Fetched by Its Plan: the builder fetches each
+spacecraft by the path plan the orrery makes, which the objects mirror
+copies onto its entry -- JPL's whole span, the predicted part included,
+each event's window at its own step and thinned at its own scale --
+whole again when the plan is a new one; its as_of_today is today's
+point; a re-fetch by a new plan is held out of the shrink gate by name.
+And under The Daily Run's Steps, Tony's ruling of 2026-10-25 on L-461,
+"stop. confirmed.": a pull that does not match the push is a failed
+pull, and the Daily Run stops before the builder.
+(Moved down 2026-10-31, when 1.15 made a fourth entry.)
+
 ## horizons-orbital-mechanics
 
 Earlier: 1.2 | 2026-10-10, with Anthropic's Claude Opus 5.5, at

@@ -26,9 +26,11 @@ WHAT IT WRITES
 --------------
 One JSON file, data/objects_export.json:
 
-    schema          3 (2 from L-431's build 3, 2026-10-14, which added
+    schema          4 (2 from L-431's build 3, 2026-10-14, which added
                     each object's period and confirmation; 3 from L-443's
-                    slice 2, 2026-10-24, which added each path's plan)
+                    slice 2, 2026-10-24, which added each path's plan; 4
+                    from L-485, 2026-10-31, which added a held body's hold
+                    to its confirmation)
     source_sha256   the sha256 of celestial_objects.py, CRLF normalised
                     to LF, so test_objects_export.py can tell whether the
                     list moved after the export was made
@@ -99,7 +101,12 @@ One JSON file, data/objects_export.json:
                                    "identity" (the id, id_type and
                                    horizons_name) and "period" (the
                                    period, its centre and date), each
-                                   null until JPL has confirmed it
+                                   null until JPL has confirmed it; and
+                                   "hold", null unless the body is held
+                                   (L-485): since when, why (its
+                                   causes), what the list says and
+                                   what JPL said. A held body keeps its
+                                   last confirmed values and their date
     numbers         for each key whose description holds a digit, the
                     numbers it holds, as written. Reported, so that no
                     number reaches the website unseen: a number in a
@@ -245,6 +252,10 @@ before.)
 Module updated: October 26, 2026 with Anthropic's Claude Opus 5.5 (L-443,
 slice 2's comets: an entry marked open_path is served as a path, with
 its plan and no period, and carries open_path in the export.)
+Module updated: October 31, 2026 with Anthropic's Claude Opus 5.5 (L-485,
+the hold: schema 4. Each object's confirmation carries "hold", null
+unless horizons_check.py has held the body, when it says since when,
+why, what the list says and what JPL said.)
 """
 
 import ast
@@ -259,7 +270,7 @@ TARGET = os.path.join("data", "objects_export.json")
 CACHE = os.path.join("data", "osculating_cache.json")
 CONFIRMATIONS = os.path.join("data", "horizons_confirmations.json")
 PATHS = os.path.join("data", "path_plans.json")
-SCHEMA = 3
+SCHEMA = 4
 CADENCE_DAYS = 30
 KEY_PATTERN = re.compile(r"^[a-z][a-z0-9_]*$")
 OPENING = re.compile(r"^Horizons:[^.]*\.\s*")
@@ -567,7 +578,16 @@ def confirmation_of(record):
                    "error_days")}
     else:
         period = None
-    return {"identity": identity, "period": period}
+    # L-485, the hold: a body held for an identity JPL no longer gives as
+    # the list does carries why beside its last confirmed values, so the
+    # export says what is held, since when and why. The website's mirror
+    # does not copy it yet (a gallery session's half, on L-485).
+    hold = record.get("hold")
+    if isinstance(hold, dict):
+        hold = {k: hold.get(k) for k in ("since", "causes", "list", "jpl")}
+    else:
+        hold = None
+    return {"identity": identity, "period": period, "hold": hold}
 
 
 def load_inputs(root):

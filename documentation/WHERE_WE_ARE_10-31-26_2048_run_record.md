@@ -153,7 +153,7 @@ Files for your run record:
     ok documentation/HANDOFF_coordination_20261031_night.md (new, 133 lines)
 
 Run order:
-1. Commit and push the orrery with the two files and your run record (GitHub Desktop; Pull origin first if it shows a number in the morning). --
+1. Commit and push the orrery with the two files and your run record (GitHub Desktop; Pull origin first if it shows a number in the morning). -- f4994ffc190f8aa853a3283d08aadf4186ba431e
 2. When you want the build, open a Claude Code session through the python_work door and paste:
 
    > Orrery repository. Please build from documentation/COORD_L485_orrery_rounding_hold_pins_brief_20261031.md: the export's rounding fault first, then the dashboard line and the workflow's concurrency line, then the hold, then the comet pins if there is room. Read the brief, the coordination handoffs of Oct 31 (18:30 and night) it names, and the orrery half's nightly brief first.
@@ -166,3 +166,237 @@ Tony-action rollup:
 - (decide) Nothing tonight.
 
 Not committing or pushing: those are yours under the orrery's CLAUDE.md.
+
+=====================================================================================
+
+**Session: OPEN: 10-31-26 2148: Opus: Code: Orrery rounding and hold pins L485**
+
+Starting the rounding fix: saving a copy of today's export first, so I can compare it name by name afterwards.
+
+Now the fix itself, with a breadcrumb and the module's stamp.
+
+Now the regression test, kept apart from the export check as the brief asks: expected values worked by hand, and the old behaviour planted so it must fail by name.
+
+The rounding test now passes and catches both planted faults. Next, I'll update the export check's arithmetic to round at the place the served count specifies, since rounding the old way would now reject the five corrected values.
+
+Export check green. Now the name-by-name diff of the export, before against after.
+
+Exactly the five names the brief listed, and nothing else moved. Now checking which sentences print those numbers, in the orrery and on the website.
+
+Checking one last place on the website: whether the Van Allen belt's text box prints that kilometre value.
+
+Rounding fix done: the website's Earth room will change one sentence. The inner Van Allen belt's text box goes from "= 9,600 km" to "= 10,000 km". Moving on to the dashboard's second line.
+
+Dashboard line works: it reads both records, and it names a taken value or a held body without turning the line red. Now the workflow's concurrency line.
+
+I'll confirm GitHub's wording myself before quoting it in the orrery's file.
+
+Confirmed on GitHub's page tonight. Now the checkout step in the orrery's workflow.
+
+Concurrency line in, and the file still reads as valid workflow YAML. Now the big piece, the hold. Reading the Horizons check first.
+
+Read the night gate and the confirmations checker. Now the export's side, then I'll build the take-and-hold logic.
+
+The website accepts any export schema from 2 up, so moving the export to schema 4 is safe. Now reading the Horizons check's test suite, so the new cases fit its shape.
+
+I have the full picture of the check, its record, the checker and the suite. Writing the take-and-hold logic into `horizons_check.py` now.
+
+The shell tripped on the quoting, so nothing was written. I'll put the edit script in a scratch file and run it from there.
+
+Now the core: sorting each result into held or taken, then writing the record.
+
+Now the module's description and stamp, so its docstring says what it does now.
+
+The suite moves exactly where expected: those two cases test the old behaviour and get updated below. Next, the confirmations checker: at night a held body passes, named as held.
+
+Now the export: carry the hold block out beside the identity and the period, and move the schema from 3 to 4.
+
+Export done. Now the night's record: it gains the taken and held lists, which the dashboard line reads.
+
+Now the rounding test's row in the maintenance run (by day only), and the runner's stamp.
+
+Now the tests. First, the maintenance report suite's gate cases, to see how they're built.
+
+The shell changed some backslashes in the edit script, so nothing was written. Switching to direct file edits for this suite.
+
+Report suite passes: 15 of 15 planted faults caught, the two new ones included. Now the Horizons check suite: its two old-behaviour cases, and a new section for the take and the hold.
+
+I found a bug: once Tony corrects a held entry back to its confirmed values, the check would treat it as current and stop asking, so the hold would never end. I'm fixing this so a held body's identity gets re-asked every run.
+
+Now the suite's new section 7, with a take case, a hold case, and the three planted faults.
+
+Suite green: 81 checks, the three new planted faults all caught. Now the two test files' descriptions and stamps.
+
+Section 3 (the hold) is built and tested. I'm pausing before section 4 (comet pins, which touches ~30 JPL comet-request spots) per the brief, and will first check whether the hold broke any skill sentences before the skill bump.
+
+The hold didn't invalidate any skill sentences, so horizons-orbital-mechanics stays at 1.13 as planned while section 4 waits. Moving on to gallery-cache-builder 1.15—first checking the lines already recorded in the ledger for it.
+
+Now the Oct 28 lines the brief lists for this version; finding where the ledger records them.
+
+Verifying those facts in the website's code before writing them into the skill.
+
+Facts confirmed in the website's code. Writing gallery-cache-builder 1.15 now, section by section.
+
+Now the Daily Run's night form, the second cause of a mismatch, and the held body.
+
+Moving the skill's oldest version entry, 1.12, into the history file word for word.
+
+Now the protocol: its v3.119 entry, the move of v3.116 down to its history file, and the header.
+
+Manifest reads 1.15 and the index check is clean. Now the archived protocol copy, as the earlier versions have.
+
+Export and protocol copy done. Next, the full maintenance run. I'll start it in the background (it takes several minutes) and check how earlier sessions ran the night in a spare copy.
+
+I'll replicate the earlier approach by hiding edits from git in the scratch folder—adding a take (a shifted period) and a hold (a changed name)—to check that both show up in the night's record.
+
+The scratch path was too long for two documentation files. Retrying with Git's long-path setting, for this throwaway copy only.
+
+Both plants are in place. Starting the night form in the spare copy, in the background.
+
+While both runs work, checking one thing: whether the dashboard needs a button for the new checker row.
+
+The parity check wants a dashboard button for every checker row, so the new rounding test gets one.
+
+Parity passes. While the two runs finish, reading the ledger blocks I'll add to.
+
+Drafting the ledger entries now, to apply once the maintenance run has finished rewriting the ledger's index.
+
+The ledger script is drafted. It runs after the maintenance run, since that run rewrites the ledger's index. Both background runs are still going; I'll pick up when they report.
+
+While the runs finish, drafting the edits to Where We Are, Tony's status page, one section at a time.
+
+The night form ran clean in the spare copy, and its record names both plants: the take (Jupiter's period re-fetched from JPL) and the hold (Mars, by its name).
+
+While the maintenance run finishes: the encoding gate on every file I changed (ASCII only, LF line endings).
+
+Encoding gate clean on all sixteen files, and all compile. Waiting on the maintenance run now.
+
+The maintenance run is still going; I'll pick up when it reports.
+
+Maintenance run green: 33 of 33 gating checkers passed, the new Constants rounding row among them, and the push gate holds at 0 Tier-1. Now the records: the ledger first.
+
+The last section's end anchor sat beyond the split point, so nothing was written. Fixing that one anchor.
+
+The page is 145 lines above the marker, over its cap of 130. Trimming: one fact once, shorter bullets.
+
+Page at 130 lines, within the cap. Running the full maintenance run once more over the finished records, in the background.
+
+The second maintenance run is going; I'll write the final report once it reports.
+
+The export's rounding is fixed, and a night now takes a new value from JPL or holds one body, instead of turning the whole night red. The dashboard has the website's nightly line, and the orrery's workflow can no longer push twice at once. I stopped before the comet pins (section 4), as the brief allows; they move to the next orrery session.
+
+**Skills read in full,** each matching the version the protocol lists: safe-file-editing 1.14, agentic-pre-test 1.3, ledger-and-session-records 1.22, provenance-discipline 2.36 with its `references/figures.md`, horizons-orbital-mechanics 1.13, gallery-cache-builder 1.14 (now 1.15), orrery-coding-conventions 1.12.
+
+**The rounding (L-484 (the two agree), L-503 (the belt's cloud)).** The orrery's hover was right and the export was wrong. When a rounding carried into a new first digit, the export rounded the original number again with one more figure, which undid the carry. Comparing the export before and after, exactly the five values the brief named changed, and nothing else.
+- The belt's 90th height in km: 99,800,000 becomes 100,000,000.
+- The inner Van Allen belt in km: 9,600 becomes 10,000.
+- Three others change too, but none of them is printed anywhere.
+
+A new test checks the rounding against values worked out by hand. The old fault is planted in it, and the test catches it.
+
+**What the website will say after its next pull:**
+- Solar System room, the belt's text box: "about 100 million km" for the 90th height.
+- Earth room, the inner Van Allen belt's text box: "= 10,000 km", where it says "= 9,600 km" today.
+- Nothing else a visitor reads changes.
+
+**How each disagreement with JPL sorts now (Tony's ruling of Oct 31, 18:38):**
+- **Taken (a value):** a period JPL now gives differently, or an orbit that turned open or closed. The night re-fetches the body's elements and period together and logs the old and new numbers.
+- **Held (a choice we made):** JPL's name for the body changed; its id finds no record, several, or none in either list; a newer record for a pinned comet. The body stays at its last confirmed values, named, until you look.
+- **Held too, by the brief's reading of your ruling:** a body found in JPL's other list of objects, or of another kind than we said. That reading is the question in the box.
+- **Reported, neither taken nor held:** a period whose date can't be read, or a question JPL refuses. It is handled like an outage.
+
+Three more things about the hold:
+- Nothing ends a hold by itself. It ends when you fix the entry, push, and the next night finds the list and JPL agreeing again.
+- At night a held body passes, named. In the daytime maintenance run it shows red, "waiting on your look". That red-by-day part is my reading of the brief.
+- The website doesn't respect a hold yet. That half is its own gallery session after the ruler build; it's written up on L-485. Nothing is held today.
+
+**Checks, read from their output:**
+- The maintenance run, run again after the records: 33 of 33 gating checkers passed, and the push gate is at 0 Tier-1.
+- The night form, in a spare copy of the orrery with one planted take and one planted hold:
+  - "NIGHT RUN: CLEAN".
+  - Its record named "jupiter.period: 4334.659212 days -> 4331.812636 days" and "mars since 2026-11-01".
+
+**Files for your run record:**
+```
+ok constants_rows.py (2 edits)
+ok test_constants_rounding.py (new)
+ok test_constants_export.py (5 edits)
+ok palomas_orrery_dashboard.py (6 edits)
+ok .github/workflows/nightly.yml (3 edits)
+ok horizons_check.py (15 edits)
+ok check_horizons_confirmations.py (5 edits)
+ok export_objects.py (5 edits)
+ok orrery_maintenance_run.py (4 edits)
+ok test_horizons_check.py (6 edits)
+ok test_maintenance_report.py (4 edits)
+ok skills/gallery-cache-builder/SKILL.md (15 edits, 1.14 -> 1.15)
+ok documentation/SKILL_HISTORIES.md (1 edit)
+ok PROJECT_INSTRUCTIONS.md (4 edits, v3.119; manifest regenerated)
+ok documentation/PROJECT_INSTRUCTIONS_HISTORY.md (1 edit)
+ok documentation/project_instructions_v3_119.md (new copy)
+ok LEDGER_CONSOLIDATED.md (5 blocks: L-484, L-503, L-485, L-470, L-461; index regenerated)
+ok documentation/WHERE_WE_ARE.md (9 sections)
+ok data/constants_export.json (regenerated: 5 values)
+ok data/objects_export.json (regenerated: schema 4)
+generated by the maintenance run: DATA_INVENTORY.md, EXACT_ROWS_PRINTED.md,
+  MODULE_ATLAS.md, MODULE_INDEX.md, PROVENANCE_AUDIT.md, WORKSHEET_CHECK.md,
+  module_atlas.py (its generated zone), data/provenance_history.json,
+  documentation/prompts/citation_review.jsonl
+yours: documentation/WHERE_WE_ARE_10-31-26_2048_run_record.md
+```
+
+**Your run order:**
+1. Paste this report to the coordinating session and wait for its word. -- proceed
+2. In GitHub Desktop, click Pull origin first if it shows a number. Then commit and push the orrery. -- 
+3. The website's night at 08:17 UTC pulls the new export by itself. Or run the Daily Run from the dashboard to have it the same day.
+4. On your phone, after closing the saved tab, check the two text boxes above: the belt's 90th height, and the inner Van Allen belt.
+5. Open the dashboard. It should show two nightly lines, the orrery's and the website's.
+6. Send the orrery's SHA to the coordinating session.
+
+**Tony-action rollup:**
+- (do) Steps 1 to 6 above.
+- (do) Each morning this week: both Actions tabs, then Pull origin on both repositories.
+- (decide) The question in the box.
+
+===============================================
+
+The ruling of tonight goes into the ledger where the open reading sat, and the open question leaves Where We Are.
+
+I've recorded your ruling: a body found in JPL's other list of objects, or of a different kind than we said, is held as a choice we made. The code already worked that way, so only the records changed.
+
+- **The ledger, L-485 (a nightly run):** the reading is marked confirmed, with your words and the time, 22:31 Chicago. The step asking you to confirm or overturn it is gone.
+- **Where We Are:** the decision is out of the box and out of "Waiting on you", which now says nothing is waiting. The Settled list says the hold covers JPL's name for a body and its record, plus which list it's found in and what kind it is.
+
+The ledger index rebuilt with no problems.
+
+**Files for your run record (this turn):**
+```
+ok LEDGER_CONSOLIDATED.md (2 edits; index regenerated)
+ok documentation/WHERE_WE_ARE.md (3 edits)
+```
+
+**Your run order:** unchanged from the report. Paste it to the coordinating session, click Pull origin if it shows a number, then commit and push the orrery, which now includes these two edits.
+
+**Tony-action rollup:**
+- (do) The run order, then both Actions tabs each morning this week.
+- (decide) Nothing waiting.
+
+============================================================================
+
+**Fable:**
+
+I'll give my word after checking the report's load-bearing claims against the files in your folder: the rounding function and its hand-worked cases, the export's five changed names, the workflow file, the protocol's manifest and version entry, the Settled line on Where We Are, and the hold's code.
+
+My word: go ahead with the run order. The report holds up against the files in your folder.
+
+**What I checked, read from your folder tonight:**
+- The rounding function now rounds at the place and counts the figures of the rounded value, and keeps the one-figure branch. I ran the hand-worked cases through it myself: 99,781,779.76 at the million place gives 100,000,000 (three figures); 9.996 gives 10.00 (four); 9.6 gives 10 (two); 637,800 stays 600,000 (one); 2.5 and 1.5 both give 2.
+- The export changed exactly the five values the brief named and nothing else, in 830 served conversions; no row changed outside its conversions.
+- The orrery's workflow has the concurrency group with GitHub's words quoted and dated, no cancel-in-progress, and the checkout of main as it stands when the job starts.
+- The protocol reads v3.119 with three entries resident, and its manifest row says gallery-cache-builder 1.15, which is what the skill's own version line says; its Operating mode heading now reads "unattended every night, since October 31 2026".
+- The hold: the export is schema 4 and every object's confirmation carries a hold field (null today); the check writes TAKEN lines and a hold block; the checker passes a held body at night and goes red by day with "waiting on your look"; the night's record carries taken and held lists. That red-by-day was the session's reading, and I agree with it: the daytime run is where you look, so that is where the hold should be loud.
+- Where We Are is 128 lines above the marker, inside its cap, and the hold's website half sits in Deferred behind the ruler build, as you ruled.
+
+One thing to know, not a problem: the session built on f4994ffc, your push of the brief and the handoff, which is GitHub's HEAD now; your folder holds the session's edits uncommitted on top of it, so step 2 is just commit and push, and Pull origin should show no number unless the night ran meanwhile.
+
+Run order: unchanged from the session's report, steps 2 to 6. Send me the orrery's SHA when the push lands, and tell me what the two text boxes say on your phone after the website's pull.

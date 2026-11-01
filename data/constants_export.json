@@ -2470,7 +2470,7 @@
           "prints": null
         },
         "km": {
-          "value": 9600.0,
+          "value": 10000.0,
           "figures": 2,
           "prints": null
         },
@@ -3972,7 +3972,7 @@
           "prints": null
         },
         "km": {
-          "value": 96000.0,
+          "value": 100000.0,
           "figures": 2,
           "prints": null
         },
@@ -5397,7 +5397,7 @@
           "prints": null
         },
         "pc": {
-          "value": 9.7e-06,
+          "value": 1e-05,
           "figures": 2,
           "prints": null
         },
@@ -6371,7 +6371,7 @@
             "prints": null
           },
           "r_earth": {
-            "value": 99990.0,
+            "value": 100000.0,
             "figures": 4,
             "prints": null
           },
@@ -7077,7 +7077,7 @@
             "prints": null
           },
           "km": {
-            "value": 99800000.0,
+            "value": 100000000.0,
             "figures": 3,
             "prints": null
           },

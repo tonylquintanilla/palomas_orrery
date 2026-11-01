@@ -74,6 +74,26 @@ WHAT IS ASKED, AND WHEN
     "Revised:" date moved but whose figure did not is noted in the
     record, not red. Nothing here edits a row.
 
+    A DISAGREEMENT, BY ITS KIND (L-485; Tony's ruling of 2026-10-31,
+    18:38, "we hold only where a project choice matters"):
+      a period JPL now gives differently, or an open orbit where a period
+      is served (or the reverse), is a VALUE: TAKEN. The body's elements
+      and period are re-fetched together through period_fetch's own path
+      and saved by its one writer, the confirmation records the new
+      period, and the line says "TAKEN <key>.period: <old> -> <new>";
+      an identity that disagrees -- horizons_name, an id answering no
+      record or several, the index (id_type), object_type, a pin with a
+      newer record -- is a project CHOICE: the body is HELD at its last
+      confirmed values, with a "hold" block in its record (since, the
+      causes, what the list says, what JPL said, the query), and its
+      period is held with it. Nothing un-holds a body: the hold ends
+      when the list and JPL agree again, which is Tony's edit. An entry
+      never confirmed has nothing to hold at and stays a FAIL;
+      a period date that cannot be read, or a question JPL refuses, is
+      neither: REPORTED, as an outage is, and still due.
+    Takes and holds do not make the run red; each is named on the
+    verdict line.
+
     One query at a time, with a pause between. Any error -- no network,
     an HTTP error, an answer that is not JPL's -- is "could not reach
     JPL": it never passes, nothing is recorded for that part, it stays
@@ -141,6 +161,12 @@ the comets: an entry asked by JPL's permanent number for a comet, id_type
 SPKID; C/2025 K1, asked as 1004075 since L-470, is the first. A path,
 a spacecraft or a comet on an open path, has no period here, as in the
 export.)
+Module updated: October 31, 2026 with Anthropic's Claude Opus 5.5 (L-485,
+the hold: a period JPL gives differently is taken through
+period_fetch's path, make_taker(); an identity that disagrees holds its
+body at its last confirmation, with a hold block in its record; a
+period date that cannot be read, or a question JPL refuses, is
+reported. The last-run file names what was taken, held and reported.)
 """
 
 import datetime
@@ -180,6 +206,17 @@ PAUSE_SECONDS = 2.0
 TIMEOUT_SECONDS = 30
 IDENTITY = ("horizons_id", "id_type", "horizons_name")
 PINNED = re.compile(r"^9\d{7}$")
+# THE HOLD AND THE TAKE (L-485; Tony's ruling of 2026-10-31, 18:38:
+# "take-and-report for values and hold for identity and record --
+# confirmed. In other words we hold only where a project choice
+# matters."). JPL is the authority, so a disagreement is "what we pinned
+# is no longer what JPL says". Each identity disagreement below names a
+# choice the project made -- which record, which index, which kind, the
+# name it serves -- so the body is HELD at its last confirmed values, by
+# name, until Tony looks. A period JPL now gives differently is a value:
+# the night TAKES JPL's new solution and logs the old and the new.
+HOLD_FIELDS = ("horizons_name", "horizons_id", "id_type", "object_type",
+               "pin")
 INDEX_WORD = {"mb": "major-body index", "sb": "small-body index"}
 LINE = "=" * 70
 OPEN_ORBIT_FLOOR = 1e90
@@ -525,17 +562,19 @@ def check_period(key, obj, period, fetch):
     """The verdict for one entry's fetched period.
 
     Returns {key, status, disagreement, jpl_days, query, error}; status
-    is "agrees", "DISAGREES" or "could not reach JPL"."""
+    is "agrees", "DISAGREES" (a value JPL now gives differently, which
+    run() takes), "reported" (a date that cannot be read, or a question
+    JPL refused: not JPL's data disagreeing) or "could not reach JPL"."""
     record = period.get("record") or {}
     out = {"key": key, "status": "agrees", "disagreement": None,
            "jpl_days": None, "query": None, "error": None}
     try:
         jd = calendar_jd(record.get("epoch"))
     except ValueError as exc:
-        out["status"] = "DISAGREES"
-        out["disagreement"] = ("period", record.get("epoch"),
-                               "the period's date cannot be read (%s)"
-                               % exc, "")
+        # L-485: not a disagreement with JPL's data, so neither taken nor
+        # held: REPORTED, as an outage is (R4), and still due.
+        out["status"] = "reported"
+        out["error"] = "the period's date cannot be read (%s)" % exc
         return out
     # L-445: the period is asked of its record's target (Earth's is the
     # Earth-Moon barycentre, "3"), with no id_type when that is another
@@ -551,9 +590,9 @@ def check_period(key, obj, period, fetch):
         try:
             jpl = parse_period(answer)
         except ValueError as exc:
-            out["status"] = "DISAGREES"
-            out["disagreement"] = ("period", _days_text(record),
-                                   str(exc), url)
+            # L-485: JPL refused the question; reported, as above.
+            out["status"] = "reported"
+            out["error"] = "JPL refused the period's question: %s" % exc
             return out
     except Unreachable as exc:
         out["status"] = "could not reach JPL"
@@ -838,8 +877,14 @@ def current_entries(root):
 
 
 def run(root, fetch, today, pause=PAUSE_SECONDS, check_all=False,
-        write=True, echo=print):
-    """The whole check. Returns (exit code, summary dict)."""
+        write=True, echo=print, take=None):
+    """The whole check. Returns (exit code, summary dict).
+
+    `take(key, obj)` re-fetches one entry's elements and period from JPL,
+    saves them as plotting saves them, and returns the entry's new period
+    block, or raises Unreachable (make_taker; a test passes its own).
+    With take None a period JPL gives differently stays a FAIL, as it was
+    before L-485's hold; main() passes one."""
     try:
         objects, list_sha, spacecraft = current_entries(root)
     except export_objects.ExportError as exc:
@@ -866,7 +911,13 @@ def run(root, fetch, today, pause=PAUSE_SECONDS, check_all=False,
     not_compared = []
     for key, obj in objects.items():
         state, detail = confirmation_state(obj, records.get(key), today)
-        if state == "current" and not check_all:
+        hold = (records.get(key) or {}).get("hold")
+        if hold:
+            # L-485: a held body is asked every run, so the run after
+            # Tony's edit finds the list and JPL agreeing and ends it.
+            tasks.append(("identity", key, obj, "held since %s"
+                          % hold.get("since")))
+        elif state == "current" and not check_all:
             quiet.append((key, "identity not due (%s)" % detail))
         else:
             tasks.append(("identity", key, obj, detail))
@@ -961,13 +1012,99 @@ def run(root, fetch, today, pause=PAUSE_SECONDS, check_all=False,
             for problem in sheet_problems(rec, rows):
                 sheet_red.append("%s: %s" % (ident, problem))
 
-    # Identity and period confirmations.
+    # The hold and the take (L-485, HOLD_FIELDS above). An identity that
+    # disagrees holds its body at the confirmation it already has; one
+    # never confirmed has nothing to be held at and stays a FAIL. A held
+    # body's period is held with it. Any other period JPL gives
+    # differently is taken: its elements and period re-fetched together
+    # as JPL's new solution, through period_fetch's path (make_taker).
+    held_keys = set(k for k, rec in records.items()
+                    if isinstance(rec, dict) and rec.get("hold"))
     for kind, key, result, _why in results:
-        if result["status"] != "agrees" or kind == "sheet":
+        if kind != "identity":
+            continue
+        if result["status"] == "agrees":
+            held_keys.discard(key)
+        elif (result["status"] == "DISAGREES"
+              and (records.get(key) or {}).get("confirmed")
+              and all(d[0] in HOLD_FIELDS for d in result["disagreements"])):
+            result["status"] = "held"
+            held_keys.add(key)
+    taken = []
+    for kind, key, result, _why in results:
+        if kind != "period" or result["status"] != "DISAGREES":
+            continue
+        if key in held_keys:
+            result["status"] = "held"
+            continue
+        if take is None:
+            continue
+        if down is not None:
+            result["status"] = "not asked"
+            result["error"] = ("JPL could not be reached for %s earlier in "
+                               "this run" % down)
+            continue
+        old_rec = objects[key]["period"].get("record") or {}
+        try:
+            new = take(key, objects[key])
+        except Unreachable as exc:
+            result["status"] = "could not reach JPL"
+            result["error"] = "taking JPL's new period: %s" % exc
+            down = "%s's period (taking it)" % key
+            continue
+        new_rec = new.get("record") or {}
+        objects[key]["period"] = new
+        result["status"] = "taken"
+        result["jpl_days"] = new_rec.get("days")
+        result["target"] = new.get("target") or result.get("target")
+        result["taken"] = {
+            "date": today.isoformat(),
+            "old_days": old_rec.get("days"), "old_epoch": old_rec.get("epoch"),
+            "new_days": new_rec.get("days"), "new_epoch": new_rec.get("epoch"),
+            "found_by": result["query"]}
+        # The confirmation's query becomes the question that confirms the
+        # new value: the new period's own date and centre.
+        own = str(result["target"]) == str(objects[key].get("horizons_id"))
+        try:
+            result["query"] = period_url(
+                result["target"], objects[key].get("id_type") if own else None,
+                new.get("center"), calendar_jd(new_rec.get("epoch")))
+        except ValueError:
+            pass
+        taken.append({"name": "%s.period" % key,
+                      "old": _days_text(old_rec), "new": _days_text(new_rec),
+                      "date": today.isoformat(),
+                      "epoch": new_rec.get("epoch")})
+
+    # Identity and period confirmations.
+    hold_ended = []
+    for kind, key, result, _why in results:
+        if kind == "identity" and result["status"] == "held":
+            # Kept at its confirmation, with the hold beside it: when, why,
+            # what the list says, what JPL said, and the query.
+            record = dict(records.get(key) or {})
+            causes = ["%s: %s -> %s" % (d[0], show(d[1]), show(d[2]))
+                      for d in result["disagreements"]]
+            prior = record.get("hold") or {}
+            record["hold"] = {
+                "since": (prior.get("since")
+                          if prior.get("causes") == causes else None)
+                or today.isoformat(),
+                "causes": causes,
+                "list": dict((d[0], d[1]) for d in result["disagreements"]),
+                "jpl": dict((d[0], d[2]) for d in result["disagreements"]),
+                "query": result["disagreements"][0][3]}
+            records[key] = record
+            continue
+        if result["status"] not in ("agrees", "taken") or kind == "sheet":
             continue
         obj = objects[key]
         record = dict(records.get(key) or {})
         if kind == "identity":
+            # The list and JPL agree again -- after Tony's edit, as a rule
+            # -- so a hold this body carried ends here, and says so.
+            if record.pop("hold", None):
+                hold_ended.append(key)
             record["confirmed"] = today.isoformat()
             for f in IDENTITY:
                 record[f] = obj.get(f)
@@ -991,6 +1128,8 @@ def run(root, fetch, today, pause=PAUSE_SECONDS, check_all=False,
                 "jpl_days": result["jpl_days"],
                 "query": result["query"],
             }
+            if result.get("taken"):
+                record["period"]["taken"] = result["taken"]
         records[key] = record
 
     # One line per thing examined.
@@ -1042,8 +1181,17 @@ def run(root, fetch, today, pause=PAUSE_SECONDS, check_all=False,
              % "; ".join(sheet_notes))
 
     problems = []
+    reported = []
     for kind, key, result, _why in results:
-        if result["status"] == "not asked":
+        if result["status"] in ("not asked", "taken", "held"):
+            continue
+        if result["status"] == "reported":
+            reported.append("%s.%s (%s)" % (key, kind, result.get("error")))
+            echo("")
+            echo("  REPORTED %s.%s, not taken and not held: %s"
+                 % (key, kind, result.get("error")))
+            if result.get("query"):
+                echo("    query:  %s" % result["query"])
             continue
         if result["status"] == "could not reach JPL":
             echo("")
@@ -1083,6 +1231,29 @@ def run(root, fetch, today, pause=PAUSE_SECONDS, check_all=False,
         problems.append("sheet %s" % line)
         echo("")
         echo("  sheet %s" % line)
+    for item in taken:
+        echo("")
+        echo("  TAKEN %s: %s -> %s (JPL's answer at %s); its elements "
+             "re-fetched with it" % (item["name"], item["old"], item["new"],
+                                     item["epoch"]))
+    held = []
+    for key in objects:
+        hold = (records.get(key) or {}).get("hold")
+        if not hold:
+            continue
+        held.append({"name": key, "since": hold.get("since"),
+                     "cause": "; ".join(hold.get("causes") or [])})
+        echo("")
+        echo("  HELD %s -- since %s: %s" % (key, hold.get("since"),
+                                            held[-1]["cause"]))
+        echo("    kept at its confirmation of %s. Nothing here un-holds it: "
+             "it ends when the list and JPL agree again"
+             % records[key].get("confirmed"))
+        if hold.get("query"):
+            echo("    query:  %s" % hold["query"])
+    for key in hold_ended:
+        echo("")
+        echo("  HOLD ENDED %s: the list and JPL agree again" % key)
 
     unasked = [("%s's %s" % (k, kind)) for kind, k, r, _w in results
                if r["status"] in ("not asked", "could not reach JPL")]
@@ -1104,6 +1275,16 @@ def run(root, fetch, today, pause=PAUSE_SECONDS, check_all=False,
         verdict = "PASS"
         line = ("HORIZONS CHECK: PASS -- %d checked today, %d queries"
                 % (len(tasks), queried))
+    # L-485: what was taken, held or reported is named on the verdict
+    # line, and none of it makes the run red.
+    if taken:
+        line += "; TAKEN %s" % ", ".join(
+            "%s: %s -> %s" % (t["name"], t["old"], t["new"]) for t in taken)
+    if held:
+        line += "; HELD %s" % ", ".join(
+            "%s since %s" % (h["name"], h["since"]) for h in held)
+    if reported:
+        line += "; REPORTED %s" % "; ".join(reported)
 
     if write:
         ordered = {k: records[k] for k in objects if k in records}
@@ -1126,7 +1307,8 @@ def run(root, fetch, today, pause=PAUSE_SECONDS, check_all=False,
                         "check_horizons_confirmations.py. Not tracked.",
             "date": today.isoformat(), "verdict": verdict,
             "asked": queried, "due": len(tasks),
-            "problems": problems, "unasked": unasked}))
+            "problems": problems, "unasked": unasked,
+            "taken": taken, "held": held, "reported": reported}))
     echo("")
     if verdict in ("FAIL", "UNREACHABLE"):
         echo("Nothing in the list or in constants_new.py is edited here. A "
@@ -1135,7 +1317,8 @@ def run(root, fetch, today, pause=PAUSE_SECONDS, check_all=False,
     echo(line)
     return (0 if verdict in ("PASS", "NOTHING DUE") else 1), {
         "verdict": verdict, "results": results, "problems": problems,
-        "queried": queried, "due": len(tasks)}
+        "queried": queried, "due": len(tasks), "taken": taken,
+        "held": held, "reported": reported}
 
 
 def payload_name(spacecraft, ident):
@@ -1152,10 +1335,50 @@ def _write_if_changed(path, content):
             handle.write(content)
 
 
+def make_taker(root):
+    """take(key, obj) for run(): re-fetch one entry's elements and period
+    from JPL by period_fetch's own path -- plotting's call and plotting's
+    save, the one writer of data/osculating_cache.json -- and return the
+    entry's new period block, read back through export_objects. Raises
+    Unreachable, saving nothing, when JPL gave no whole answer or a
+    period asked of another target than the map names (L-445)."""
+    import period_fetch
+
+    def take(key, obj):
+        entries = dict((e["key"], e) for e in
+                       period_fetch.served_entries(root))
+        entry = entries.get(key)
+        if entry is None:
+            raise Unreachable("%s is not among the period fetch's entries"
+                              % key)
+        cache, _t, _c, _r = export_objects.load_inputs(root)
+        try:
+            got = period_fetch.plotting_fetch(entry, utc_clock.utc_now())
+        except Exception as exc:          # any failure is JPL not reached
+            raise Unreachable(str(exc) or exc.__class__.__name__)
+        if not period_fetch.complete(got):
+            raise Unreachable("JPL gave no whole answer for %s's elements "
+                              "and period" % entry["name"])
+        want = period_fetch.wanted_target(entry, cache)
+        if period_fetch.fetched_target(got, entry["horizons_id"]) != want:
+            raise Unreachable("%s's period came back asked of another "
+                              "target than %s" % (entry["name"], want))
+        period_fetch.plotting_save(entry, got)
+        cache, typed, _c, _r = export_objects.load_inputs(root)
+        block, _inputs = export_objects.period_block(
+            obj["name"], obj["object_type"], cache, typed)
+        if not block or block.get("kind") != "fetched":
+            raise Unreachable("%s's new period reads back as %s, not "
+                              "fetched" % (entry["name"],
+                                           (block or {}).get("kind")))
+        return block
+    return take
+
+
 def main(argv):
     root = os.path.dirname(os.path.abspath(__file__))
     code, _ = run(root, live_fetch, utc_clock.utc_today(),
-                  check_all="--all" in argv)
+                  check_all="--all" in argv, take=make_taker(root))
     return code
 
 

@@ -68,6 +68,14 @@ faults are planted for it, the switch in each direction and the limit:
     the switch always on                             ASK EVERYTHING ALWAYS ON
     the time limit left off                          ASK EVERYTHING CUT SHORT
 
+And the hold (L-485, 2026-10-31): a night that took a value from JPL
+and one that holds a body are each clean, and the record a clean night
+writes names tonight's takes, old and new, and every body held, read
+from what the Horizons check wrote. Two faults are planted for it:
+
+    a take not logged in the night record            TAKE NOT IN RECORD
+    a hold dropped from the night record             HOLD NOT IN RECORD
+
 The last line starts "MAINTENANCE REPORT:", which the maintenance run
 quotes, and says what was compared and how many things were examined.
 
@@ -94,6 +102,9 @@ Module updated: October 30, 2026 with Anthropic's Claude Opus 5.5 (L-485,
 "ask JPL for everything": the night's rows with and without
 --ask-everything and the Horizons check's time limit, two cases and
 three planted faults.)
+Module updated: October 31, 2026 with Anthropic's Claude Opus 5.5 (L-485,
+the hold: a night that took a value and one that holds a body are clean,
+and the night's record names both; two planted faults.)
 """
 import contextlib
 import io
@@ -348,6 +359,55 @@ def judge_night(mod, findings, counts):
                 or [r['row'] for r in body['rows']] != [c[0] for c in clean]):
             findings.append(('RECORD WRONG', 'the night record is not ASCII and '
                              'LF, or lacks its UTC stamp or its rows'))
+        # L-485, the hold (Tony's ruling of 2026-10-31, 18:38). A night
+        # that took a value from JPL, and one that holds a body, are each
+        # clean: the Horizons check and its checker exit 0 on both. The
+        # record names what was taken and what is held, read from what the
+        # check wrote.
+        import utc_clock
+        took = [_row('Horizons check', 0, 'PASS -- 1 checked today, 1 '
+                     'queries; TAKEN encke.period: 1206.3202 days -> '
+                     '1206.6219 days', False),
+                _row('Horizons confirmations', 0, 'pass -- 13 of 13 entries',
+                     True)]
+        problems, _r, _i = gate(took, [])
+        if problems:
+            findings.append(('TAKE MADE RED', 'a night that took a value gave '
+                             '%s' % problems))
+        holding = [_row('Horizons check', 0, 'NOTHING DUE -- ...; HELD mars '
+                        'since 2026-11-03', False),
+                   _row('Horizons confirmations', 0, 'pass -- 12 of 13 '
+                        'entries ...; HELD mars since 2026-11-03', True)]
+        problems, _r, _i = gate(holding, [])
+        if problems:
+            findings.append(('HOLD MADE RED', 'a night holding a body gave %s'
+                             % problems))
+        today = utc_clock.utc_today().isoformat()
+        with open(os.path.join(tmp, 'data', 'horizons_check_last_run.json'),
+                  'w') as f:
+            json.dump({'date': today, 'taken': [
+                {'name': 'encke.period', 'old': '1206.3202 days',
+                 'new': '1206.6219 days', 'date': today}]}, f)
+        with open(os.path.join(tmp, 'data', 'horizons_confirmations.json'),
+                  'w') as f:
+            json.dump({'objects': {
+                'venus': {'confirmed': '2026-10-31'},
+                'mars': {'confirmed': '2026-10-31', 'hold': {
+                    'since': '2026-11-03',
+                    'causes': ['horizons_name: Mars -> Mars (planet)']}}}}, f)
+        mod.write_night_record(tmp, took, [], [])
+        counts['night'] += 1
+        body = json.loads(open(os.path.join(tmp, mod.NIGHT_RECORD),
+                               encoding='ascii').read())
+        got = [(t.get('name'), t.get('old'), t.get('new'))
+               for t in body.get('taken') or []]
+        if got != [('encke.period', '1206.3202 days', '1206.6219 days')]:
+            findings.append(('TAKE NOT IN RECORD', 'the night record names '
+                             'taken %r' % body.get('taken')))
+        got = [(h.get('name'), h.get('since')) for h in body.get('held') or []]
+        if got != [('mars', '2026-11-03')]:
+            findings.append(('HOLD NOT IN RECORD', 'the night record names '
+                             'held %r' % body.get('held')))
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
 
@@ -407,6 +467,15 @@ PLANTS = [
      ("                       + (ASK_EVERYTHING_SECONDS,))\n",
       "                       )\n"),
      'ASK EVERYTHING CUT SHORT'),
+    # L-485, the hold: the night's record names what it took and holds
+    ('a take not logged in the night record',
+     ("        if last.get('date') == today:\n",
+      "        if False:\n"),
+     'TAKE NOT IN RECORD'),
+    ('a hold dropped from the night record',
+     ("            if hold:\n                held.append(",
+      "            if False:\n                held.append("),
+     'HOLD NOT IN RECORD'),
 ]
 
 

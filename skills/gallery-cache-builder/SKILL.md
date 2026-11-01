@@ -7,9 +7,24 @@ fires_when: Nightly builder, atomic swap and its retry/roll-back/swap log, "Acce
 
 # Gallery Cache Builder (Phase 1b data serving)
 
-Read this file in 3 parts: lines 1-239, 240-483, 484-741.
+Read this file in 4 parts: lines 1-242, 243-523, 524-796, 797-843.
 
-Skill version: 1.14 | 2026-10-29, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.15 | 2026-10-31, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ f4994ffc and gallery @ c1c578f5. v1.15 (L-485, with
+L-461 and L-443) records that the builder runs unattended: every night
+at 08:17 UTC on GitHub's computer, through `daily_run.py --night`, whose
+gate carries the deletions-only guard this skill called designed and
+not built. Operating mode, the routines that said "by hand", Layer 3,
+the Validation stance and The Daily Run's Steps say so; a pull that
+does not match the push has a second honest cause, not yet pulled.
+Riding the bump, from L-443's and L-501's closes: a comet is drawn from
+its elements of today; a new body the room draws from its elements
+onboards on a Daily Run; a config change turns the Solar System figures
+check red too; the orrery's orbit cache is written in text mode. And
+from this session: the orrery's export marks a held body (L-485, the
+hold), which the builder does not honour yet. Each fact was read from
+the code at f4994ffc and c1c578f5 before it was written.
+Earlier: 1.14 | 2026-10-29, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 571b9bf4 and gallery @ b55109f2. v1.14 (L-399, L-503)
 records the builder's changes of 2026-10-29: each small body is served
 `position_uncertainty`, JPL's own 3-sigma from the 2xr table, by a match
@@ -26,33 +41,23 @@ fetched by its plan, served positions and no elements, open_path
 carried to the served entry, its trust measured from its positions, and
 named and not fetched when it has no plan yet. Its plan's span is a year
 before its perihelion to a year after today, not JPL's whole data.
-Earlier: 1.12 | 2026-10-25, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 0c27f47a and gallery @ b1a4ce6c. v1.12 (L-443 build B,
-L-461) adds A Spacecraft Is Fetched by Its Plan: the builder fetches each
-spacecraft by the path plan the orrery makes, which the objects mirror
-copies onto its entry -- JPL's whole span, the predicted part included,
-each event's window at its own step and thinned at its own scale --
-whole again when the plan is a new one; its as_of_today is today's
-point; a re-fetch by a new plan is held out of the shrink gate by name.
-And under The Daily Run's Steps, Tony's ruling of 2026-10-25 on L-461,
-"stop. confirmed.": a pull that does not match the push is a failed
-pull, and the Daily Run stops before the builder.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
 on 2026-10-05 (L-418), 2026-10-14 (L-431), 2026-10-15 (L-446),
-2026-10-17 (L-449), 2026-10-25 (L-443), 2026-10-26 (L-443) and
-2026-10-29 (L-399).
+2026-10-17 (L-449), 2026-10-25 (L-443), 2026-10-26 (L-443),
+2026-10-29 (L-399) and 2026-10-31 (L-485).
 
 The standalone builder that fetches fresh JPL Horizons data and deploys the
-web gallery's served cache. Tony runs it MANUALLY and commits the result
-himself; the scheduled nightly was retired August 10, 2026 (see Operating
-mode below).
+web gallery's served cache. It runs unattended every night on GitHub's
+computer, through `daily_run.py --night`, whose gate decides whether the
+night's files are committed; Tony can also run it by hand for a build the
+same day (see Operating mode below).
 
 ## Contents
 
 Generated from this file's headings. skills_index.py --check fails
 if this list and the headings disagree (L-418).
 
-- Operating mode -- manual, as of August 10 2026
+- Operating mode -- unattended every night, since October 31 2026
 - What it is
 - Swap blast radius [QUALITY]
 - Sibling directory semantics [QUALITY]
@@ -75,35 +80,58 @@ if this list and the headings disagree (L-418).
 - Fetch facts proven live (2026-07-11 gate)
 - Field notes
 
-## Operating mode -- manual, as of August 10 2026
+## Operating mode -- unattended every night, since October 31 2026
 
-The Windows scheduled task is DISABLED, not deleted. Tony's ruling: "It
-can't run without my machine being on anyway and it's consistent with me
-being the only commit authority. And obviates complicated fail safe
-procedures that could also fail."
+THE NIGHT (L-485; Tony's rulings R1 to R5 of 2026-10-25,
+documentation/DESIGN_L485_nightly_run_rulings_20261025.md). The
+gallery's `.github/workflows/nightly.yml` runs `python daily_run.py
+--night` on GitHub's computer at 08:17 UTC (`cron: '17 8 * * *'`), an
+hour after the orrery's own night at 07:17, and can be fired by hand
+from the Actions tab. The first run, by hand, was clean on 2026-10-31
+(commit c1c578f5, by github-actions[bot]). What makes it safe is the
+night's GATE, not a person at the keyboard: the workflow commits only
+when `daily_run.py --night` exits 0, and stages only its allow-list
+(`daily_run.py --allow-list`). The gate's conditions are in The Daily
+Run's Steps, below; one of them is the guard this section used to call
+designed and not built.
 
-What this means in practice:
-- The builder is launched from the dashboard's Developer Tools group, or
-  by running `tools/gallery_cache_builder.py` from the GALLERY REPO ROOT.
-  The root matters: `--config` and `--output-dir` default to paths
-  relative to the working directory, so launching from `tools/` fails at
-  load_config.
-- No flags runs nightly mode. `--commit` is NOT passed, so the builder
-  swaps the new cache in and stops. Tony commits in GitHub Desktop.
-- Because Tony starts the run, he knows a build is in flight. This is the
-  substantive safety change: the atomic swap's window shows deletions only
-  in a git client, and on August 10 that was committed by mistake by
-  someone who did not know a build was running.
-- A `pre-commit` hook refusing a deletion-only commit under
-  `data/solar-system/` was designed and is deliberately NOT built. It
-  becomes relevant again if the schedule returns, if a second person gains
-  commit access to the gallery repo, or if the builder ever runs
-  unattended in any other form.
+- THE DELETIONS-ONLY GUARD IS BUILT, in the gate: a change under
+  `data/solar-system/` that is deletions only stops the night, by name.
+  That is the August 10 failure -- a half-swapped cache committed by
+  someone who did not know a build was running -- refused by the
+  machine. (Until 2026-10-31 this was a `pre-commit` hook "deliberately
+  NOT built", relevant "if the builder ever runs unattended in any
+  other form". It now does.)
+- The builder runs with no flags, never `--commit`: it swaps the new
+  cache in and stops, and the workflow's own commit step commits after
+  the gate.
+- A red night commits nothing; the run's log on the Actions tab is its
+  only record, and the previous served cache stays live.
+- `concurrency: group: nightly-run`, without cancel-in-progress: a run
+  fired by hand waits for a running night rather than overlapping it,
+  and checks out `main` as it stands when it starts.
 
-The cadence question did not go away, it changed shape. "Did the nightly
-run?" became "when did I last run it?" -- and a manual build has no
-expected time at all, so an explicit staleness check is now the ONLY thing
-that can report that the served data is eleven days old. That is L-189. A GALLERY-repo tool; this skill is authored in
+BY HAND, for a build the same day. The builder is launched from the
+dashboard's Developer Tools group, or by running
+`tools/gallery_cache_builder.py` from the GALLERY REPO ROOT. The root
+matters: `--config` and `--output-dir` default to paths relative to the
+working directory, so launching from `tools/` fails at load_config. No
+flags runs nightly mode, and Tony commits in GitHub Desktop. Tony's
+morning order since the night exists: Pull origin on both repositories
+first, then anything else.
+
+The history, kept because it explains the gate. The Windows scheduled
+task was disabled on 2026-08-10 (Tony: "It can't run without my machine
+being on anyway and it's consistent with me being the only commit
+authority"), after a scheduled run's failed swap was committed on
+2026-07-24 by someone who did not know a build was running. The night on
+GitHub's computer answers both reasons: it needs no machine of Tony's,
+and its gate refuses exactly that commit.
+
+How old the served data is: the night's record,
+`data/nightly_run_record.json`, carries its last clean run, and the
+orrery's dashboard prints it, red when more than a day old. L-189's
+staleness check is the older answer to the same question. A GALLERY-repo tool; this skill is authored in
 the orrery repo per the L-002 convention (both SHAs on the cut line, like
 gallery-pipeline). For the interactive Studio/converter/viewer chain, load
 gallery-pipeline instead.
@@ -207,6 +235,10 @@ WHAT TONY DOES, and it is a routine rather than a judgement call:
 
 Step 4 is new with this version and it is the point of the whole build:
 it is the one step that does not depend on anyone noticing anything.
+AT NIGHT THE GATE DOES STEPS 3 AND 4 (v1.15, L-485): it reads the swap
+log's last line back off the disk and requires tonight's run with
+outcome ok, and it refuses a change under `data/solar-system/` that is
+deletions only, before anything is committed.
 
 ## Recovery by hand, when the roll-back also fails [QUALITY]
 
@@ -235,7 +267,10 @@ Three conditions make the discard rule safe and they travel WITH it:
 - nothing reaches the remote until Tony commits by hand.
 
 Running with `--commit` breaks the third condition and therefore breaks
-the rule. Do not use `--commit` while L-216 is open.
+the rule. Do not use `--commit` while L-216 is open. The night never
+passes it: its workflow commits after the gate, and a night whose swap
+was not ok, or whose served change is deletions only, commits nothing,
+so the third condition holds at night by the gate instead of by Tony.
 
 ## The cause, and what is still open
 
@@ -344,13 +379,17 @@ maintenance run printed 11 of 11.
 THE ROUTINE, and it is one routine rather than a judgement call:
 
   1. Change `data/objects_config.json`.
-  2. Run this builder. By hand -- see Operating mode.
+  2. Run this builder, by hand -- see Operating mode. (The night runs
+     it too, but on GitHub's copy, so a change not yet pushed is not in
+     it.)
   3. Run `python gallery_maintenance_run.py`.
   4. Commit the CONFIG AND THE CACHE TOGETHER, and push.
 
 `tools/check_cache_in_step.py` gates step 3 and compares the served
 cache against the config it was built from. A red "Cache in step" right
 after a config change is CORRECT and means step 2 has not happened yet.
+So is a red Solar System figures check (v1.15, from L-501's close), for
+a body the config names and the cache does not hold yet.
 
 THE ONE EXCEPTION, and it is worth knowing because it is the only part
 of a room's data the page reads directly: the `arrival` block --
@@ -403,8 +442,9 @@ calls The Drawn Orbit Follows the Period's Centre.
   every object whose period wants a drawn orbit has one, and no other
   object does.
 - A comet whose period is around another centre is drawn from its
-  elements at perihelion, around the Sun, and the builder WARNS rather
-  than fetching. Encke, today, is around the Sun.
+  elements of today, around the Sun (since 2026-10-22, L-443: every
+  comet is anchored at today; until then "at perihelion"), and the
+  builder WARNS rather than fetching. Encke, today, is around the Sun.
 - Which bodies this touches is decided by the orrery's period records,
   not here. On 2026-10-14 no served body's period was around the
   barycentre (Sedna is not served), so the first live `drawn_orbit` may
@@ -589,7 +629,12 @@ branch's loose ref or packed-refs), so no git command is needed. When
 they differ, the run STOPS before the builder, naming both commits and
 the two likely causes -- the orrery's work is not pushed, or GitHub has
 not finished serving a push -- and says to push, or wait a minute if the
-push just went, then run the Daily Run again. No retry, no wait: the one
+push just went, then run the Daily Run again. SINCE THE ORRERY'S NIGHT
+COMMITS (L-461's second honest cause, v1.15): Tony's orrery folder is
+behind GitHub every morning the orrery's night committed, until he
+clicks Pull origin, so the pulls (GitHub's copy) and his folder differ
+for that reason too -- not yet pulled. The cure is Pull origin, orrery
+then website, then the Daily Run again. No retry, no wait: the one
 time it happened (2026-10-21) the cause was an unpushed orrery, which
 waiting cannot fix, and a run that waits hides the common cause behind
 the rare one. A folder or commit it cannot read stops it too, saying
@@ -626,6 +671,38 @@ each record it removes (2026-10-16); and on a loss, stop and name
   builder's offline suite runs the comparison on its own builds and
   plants a loss, which must stop it by name.
 
+THE NIGHT FORM (v1.15, L-485; `python daily_run.py --night`, run by the
+gallery's workflow at 08:17 UTC). The same steps with no keyboard,
+ending in one gate:
+
+- The guest book is SKIPPED, by name: it needs Tony's answers and stays
+  his morning's (Tony's ruling of 2026-10-31, 10:20). Nothing is read
+  from Google on the runner.
+- The pulls run as by day, asking GitHub's interface with the run's own
+  token.
+- PULL MATCHES PUSH, THE RUNNER FORM (`pull_matches_remote`): there is
+  no orrery folder beside the website on GitHub's computer, so the three
+  pulled commits must agree with each other and with the orrery's
+  GitHub copy, read live with `git ls-remote`. A difference stops the
+  night before the builder: no retry, no wait.
+- The builder with no flags, never `--commit`; its swap read back off
+  the swap log as tonight's, outcome ok. The run records check: a loss,
+  or "could not compare", is red at night.
+- The maintenance run's night pass (`gallery_maintenance_run.py
+  --night`), an UNREACHABLE row red.
+- THE GATE (`night_gate`), exit 0 only when ALL hold, each failure named
+  on the last line, "NIGHT RUN: RED -- ...": the pulls passed and match
+  the orrery's GitHub copy, and did not move after the build; the
+  builder exited 0 and tonight's swap is ok; the run records were
+  carried; the night pass passed with nothing UNREACHABLE; git sees
+  nothing changed or new outside the allow-list (`night_allow_list`);
+  every changed file is ASCII; and the change under
+  `data/solar-system/` is not deletions only.
+- A clean night writes `data/nightly_run_record.json`; a red night
+  writes nothing, and its record is the run's log. `python daily_run.py
+  --check` judges made-up nights and planted faults for the gate and
+  the runner form.
+
 Apart from the pulls and the records, a step that reports a problem
 does not stop the next: the guest book's problems still do not stop the
 build. Nothing in
@@ -644,10 +721,11 @@ script is missing; the maintenance run runs it.
 
 Two dispositions, and the difference is load-bearing:
 - ABORT (raise ValidationAbort -> nonzero exit; the nonzero exit surfaces in
-  the console Tony is watching, since he starts the run -- through 2026-08-10
-  this read "Task Scheduler history is the monitoring channel," which was
-  true until the schedule was retired and is now the note to fix if the
-  schedule ever returns): structural invariants (#2/#3/#C/#8), #B3
+  the console Tony is watching when he starts the run by hand, and at
+  night in the run's log on the gallery's Actions tab, where the gate
+  reads the builder's exit and turns the night red, so nothing is
+  committed -- through 2026-08-10 this read "Task Scheduler history is
+  the monitoring channel"): structural invariants (#2/#3/#C/#8), #B3
   conversion-consistency (served km must equal raw * AU at the matching point),
   the #T as_of_today freshness check, and the shrink_gate (per-object AND
   aggregate point count must be >= 95% of the live generation; first build is
@@ -676,26 +754,30 @@ round-trip discipline the project uses by hand, baked into the builder.
 - Layer 2 -- live dry-run on Tony's hardware: `--dry-run --object <slug>` per
   tranche object, then a real --first-build. Proves the OUTPUT against real
   Horizons.
-- Layer 3 -- scheduling (unattended nightly). RETIRED 2026-08-10; the task
-  is disabled, not deleted. The layer is kept here because it becomes live
-  again the moment the build runs unattended by any mechanism, including a
-  GitHub Action. Its gating items are unchanged (gap-aware catch-up, a
-  health summary) -- see L-098 / L-111.
+- Layer 3 -- scheduling (unattended nightly). LIVE AGAIN since
+  2026-10-31, in the GitHub Action form (L-485): the gallery's
+  workflow at 08:17 UTC. Its gate is the night's (`daily_run.py
+  --night`, The Daily Run's Steps); its health summary is the night's
+  record, `data/nightly_run_record.json`, which the orrery's dashboard
+  reads. The Windows task retired on 2026-08-10 stays disabled. The
+  gap-aware catch-up L-098 / L-111 named is not built.
 
 ## Adding a new object -- the full sequence, and where it silently breaks
 
 Beyond the three-layer gate above, onboarding a genuinely NEW object needs
 two things the general gate description doesn't spell out:
 
-- **--first-build is required, not --nightly, for a new non-spacecraft
-  object.** Verified in code: only first-build mode fetches the full
-  365-day backfill window for non-spacecraft objects; nightly mode only
-  fetches [today - freeze, today] -- a few days. Add an object and run
-  --nightly and it onboards with almost no data. first-build also carries
-  the N3 floor check (rejects a clipped/truncated fetch), which nightly
-  skips. Spacecraft are the one exception: a genuinely new one has no
-  prior points, so the code auto-detects this (`not points`) and
-  backfills fully regardless of mode.
+- **--first-build fetches the full 365-day backfill for a new
+  non-spacecraft object; nightly mode only [today - freeze, today].**
+  first-build also carries the N3 floor check (rejects a
+  clipped/truncated fetch), which nightly skips. Whether that matters
+  depends on how the room draws the body (v1.15, from L-443's close):
+  one drawn from its ELEMENTS, as every orbit in the Solar System room
+  is, needs only today's point, so a Daily Run (or the night) onboards
+  it -- slice 1's 50 bodies and 2026 ED138 went in that way. A body
+  whose drawing needs the past positions themselves needs --first-build.
+  Spacecraft and comets on an open path are the other exception: they
+  are fetched by their plan, whole when the plan is new.
 - **Layer 1's offline suite has a hardcoded served-object COUNT
   assertion** (`check(len(objs) == N, ...)`), separate from the per-object
   ELEMS mock keys. Adding a new object's ELEMS entry is necessary but not
@@ -731,6 +813,26 @@ count assertion; (3) Layer 1 from a clean checkout; (4) Layer 2:
   without sweeping the consumers broke Layer 1 at HEAD (L-114/F1). When a
   producer moves, grep every consumer -- then run Layer 1 from a clean clone as
   the proof they all moved.
+- The orrery's `osculating_cache_manager.save_cache` writes
+  `data/osculating_cache.json` in text mode with no `newline=''`, so on
+  Windows every save turns it CRLF; git stores it LF (`* text=auto
+  eol=lf`), and on GitHub's Linux computer it is LF anyway (v1.15, from
+  L-485). A difference that is only line endings is not a change.
+- A BODY THE ORRERY HOLDS IS NOT YET HONOURED HERE (v1.15, L-485, the
+  hold). Since 2026-10-31 the orrery's Horizons check holds a body whose
+  identity JPL no longer gives as the list does, and its objects export
+  (schema 4) carries a `hold` block in that body's confirmation: since
+  when, why, what the list says and what JPL said. This builder does
+  not read it: `tools/mirror_objects.py` copies only its REPLACED and
+  INSERTED fields and drops the rest unnamed, the builder asks JPL by
+  the mirrored `horizons_id`, its last-good path re-stamps
+  `source.retrieved`, and the website's own confirmations check goes
+  red at day 30. So a held body is still fetched and served, and the
+  website's night goes red at day 30, as before the hold. Nothing is
+  held today. The website's half -- the mirror carries the mark, the
+  builder serves last-good named with its own data's date, the hover
+  prints the held date, the website's check passes held as held -- is a
+  gallery session after the ruler build, recorded on L-485.
 - interactive.html (gallery repo root) is the EVENTUAL consumer of the served
   data; at the time of writing it does not yet read data/solar-system/ (zero
   references -- verified). Describe the wiring as future work (L-102's open

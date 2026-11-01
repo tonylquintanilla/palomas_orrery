@@ -139,6 +139,12 @@ count its row gives it, in its own unit or in another unit of its
 dimension, so an orrery hover need not choose a width. It is the
 general form of exact_text() and conversion_text(), and computes
 through the same conversions() the export serves.)
+Module updated: October 31, 2026 with Anthropic's Claude Opus 5.5
+(L-484, L-503: _to_place() keeps a rounding that carries into a new
+leading digit and counts the figures of the rounded value. It had
+re-rounded the original at one more figure, undoing the carry, so the
+export served the belt's 90th height as 99,800,000 km where the rule
+gives 100,000,000. test_constants_rounding.py holds the rule.)
 """
 
 import ast
@@ -639,15 +645,27 @@ def _to_place(value, place):
     the value's leading digit -- a one-figure 100 Earth radii is +/- 50,
     as large as 0.002 AU on a value of 0.004 -- the value keeps its one
     leading figure rather than rounding to nothing.
+
+    Worked by hand (test_constants_rounding.py pins each): 99,781,779.76
+    at the million place is 100,000,000, three figures; 9.996 at the
+    hundredths is 10.00, four; 9.6 at the units is 10, two; 637,800 at
+    the million place stays 600,000, one (the branch above); 2.5 and 1.5
+    at the units are both 2.
     """
     figures = int(math.floor(math.log10(abs(value)))) - place + 1
     if figures < 1:
         figures = 1
         return float("%.*g" % (1, value)), 1
+    # Rounded AT THE PLACE: `figures` digits from the unrounded value's
+    # leading digit end exactly at 10**place.
     rounded = float("%.*g" % (figures, value))
-    if int(math.floor(math.log10(abs(rounded)))) - place + 1 != figures:
-        figures += 1
-        rounded = float("%.*g" % (figures, value))
+    # FIXED (L-484, L-503, 2026-10-31): a rounding that carried into a new
+    # leading digit used to re-round the ORIGINAL value at one more figure,
+    # which undid the carry -- 99,781,779.76 at the million place gave
+    # 99,800,000, 9.996 at the hundredths gave 9.996. The rounded value is
+    # kept; only its count changes, counted from the ROUNDED value.
+    if rounded != 0:
+        figures = int(math.floor(math.log10(abs(rounded)))) - place + 1
     return rounded, figures
 
 

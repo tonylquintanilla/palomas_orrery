@@ -40,7 +40,9 @@ WHAT IT CHECKS, each printing what it compared
     6. Every conversion the export serves as "in" (schema 6, L-345) is
        re-computed here from the store's full digits, by arithmetic
        written in this file rather than by the export's own function,
-       and must equal the served value at its served count. A row whose
+       and must equal the served value rounded at the place its served
+       count names (a value that carried, 100,000,000 at three figures,
+       is rounded at the million place). A row whose
        unit has another unit of its dimension must carry "in", and one
        whose unit has none must not. Six worked cases of the count rule
        (provenance-discipline 2.22, Rule 3) are pinned by value and
@@ -130,9 +132,16 @@ Module updated: October 29, 2026 with Anthropic's Claude Opus 5.5
 its value, as it does a one-number row's; two pins name a table entry by
 its key, the main belt's nearest point and its 90th-percentile height in
 kilometres.)
+Module updated: October 31, 2026 with Anthropic's Claude Opus 5.5
+(L-484, L-503: check 6 rounds at the place the served count names,
+since a value that carried into a new leading digit is not the
+unrounded value at that count; the belt's height pin moves from
+99,800,000 to 100,000,000, worked by hand. Check 6 still says only that
+the export used the function; test_constants_rounding.py holds the rule.)
 """
 
 import json
+import math
 import os
 import sys
 
@@ -357,8 +366,13 @@ CONVERSION_PINS = (
     # nearest point, 1.668 AU at three figures, and its 90th-percentile
     # height, 0.667 AU at two figures, whose place, the hundredth of an AU,
     # carried into kilometres, prints three (Rule 3).
+    # Corrected 2026-10-31 (L-484): the height's pin was 99,800,000, read
+    # from the function's output on 2026-10-29 when the function undid a
+    # carry. Worked by hand: 0.01 AU is 1,495,979 km, nearest the million
+    # place; 99,781,779.76 km at the million place is 100,000,000, whose
+    # figures down to that place are three.
     ("MAIN_BELT_DISTANCE_PERCENTILES_AU[0]", "km", 250000000.0, 3, None),
-    ("MAIN_BELT_HEIGHT_PERCENTILES_AU[90]", "km", 99800000.0, 3, None),
+    ("MAIN_BELT_HEIGHT_PERCENTILES_AU[90]", "km", 100000000.0, 3, None),
 )
 
 
@@ -422,8 +436,22 @@ def _check_conversions(on_disk, values, by_name, failures, facts):
                 want = float(full) * size[unit] / size[token]
                 figures = entry.get("figures")
                 if isinstance(figures, int):
-                    want = float("%.*g" % (figures, want))
-                    ok = entry.get("value") == want
+                    # Rounded at the place the served count names, half
+                    # to even (Rule 5). FIXED (L-484, 2026-10-31): this
+                    # rounded to the served count from the unrounded
+                    # value, which re-creates exactly the undone carry
+                    # _to_place() had: 99,781,780 at three figures is
+                    # 99,800,000, where at the million place it is
+                    # 100,000,000. Whether the place is the RULE's is
+                    # test_constants_rounding.py's to say, not this.
+                    got = entry.get("value")
+                    if isinstance(got, (int, float)) and got:
+                        place = (int(math.floor(math.log10(abs(got))))
+                                 - figures + 1)
+                        want = round(want, -place)
+                    else:
+                        want = float("%.*g" % (figures, want))
+                    ok = got == want
                 else:
                     got = entry.get("value")
                     ok = (isinstance(got, float) and

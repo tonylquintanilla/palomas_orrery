@@ -1081,7 +1081,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-466 | Every drawing starts and stops where a served row says (orrery + gallery, the Sun's slice and Earth's) | OPEN | -- | 2026-10-22 |
 | ! | L-467 | The scanner credits a display line with a citation it only sits near (orrery, provenance scanner) | OPEN | -- | 2026-10-21 |
 | ! | L-468 | The Sun room's phone look of 2026-10-21, night: the corona's drawer text and the Hills cloud's cross (gallery, the Sun room) | OPEN | -- | 2026-10-29 |
-| ! | L-470 | Orrery entries the website cannot serve as they stand (orrery, objects) | OPEN | -- | 2026-10-25 |
+| ! | L-470 | Orrery entries the website cannot serve as they stand (orrery, objects) | OPEN | -- | 2026-10-31 |
 | ! | L-476 | The orrery's whole-path plots draw by the same path plan as the website (orrery, spacecraft and comets) | OPEN | -- | 2026-10-24 |
 | ! | L-483 | A room for C/2025 K1 and its pieces, the first comet room (gallery, exhibits) | OPEN | -- | 2026-10-28 |
 | ! | L-484 | The website and the orrery agree on every object both draw, or the difference is written down (orrery + gallery, objects; method for interactive-exhibit) | OPEN | -- | 2026-10-31 |
@@ -1798,7 +1798,15 @@ L-485; L-503.
   90th height, about 100 million km in the orrery's hover and 99.8
   million served by its export (L-484; L-485 carries it to the orrery
   session).
+- **2026-10-31, the 90th height served right** (the orrery session
+  of L-484's entry of today): the export serves
+  MAIN_BELT_HEIGHT_PERCENTILES_AU[90] as 100,000,000 km, three figures,
+  where it served 99,800,000; the orrery's hover and the website now
+  agree once the website pulls. The documented difference ends there.
 **Gap (replaces the one below, 2026-10-31):** Tony's phone look at the
+belt's text box after the website's next pull -- its kilometres, the
+90th height reading about 100 million km -- then DONE.
+**Gap (superseded above; replaced the one below, 2026-10-31):** Tony's phone look at the
 belt's text box (its kilometres), then DONE.
 **Gap (superseded above, 2026-10-29/30):** the website prints the belt's distances with their kilometres from each entry's served "in" (the next gallery session); the Daily Run's pulls name `data/constants_export.json` and the config's two fields as changed. The skill corrections above are in interactive-exhibit 1.29, gallery-cache-builder 1.14, horizons-orbital-mechanics 1.13 and provenance-discipline 2.36.
 **Gap (superseded above, 2026-10-29):** the next Daily Run (pulls nothing new; serves the drawing into the cache), then Tony's phone look at the belt's cloud: its row, its dots, its words, Go To and Reset. For the next orrery session: the export serves the tables' kilometres; the skill corrections above.
@@ -2772,7 +2780,105 @@ L-489.
   then website, before anything else.
 - **No skill bumped here** (a gallery session reads them); the
   Operating mode sentence above is carried to the orrery session.
-**Gap (replaces the one below, 2026-10-31):** Tony's run order from the
+- **2026-10-31, the hold built, with the dashboard's second line and
+  the workflow's concurrency** (orrery Claude Code session, Claude Opus
+  5.5, built on orrery f4994ffc with the gallery at c1c578f5 read only;
+  brief `documentation/COORD_L485_orrery_rounding_hold_pins_brief_20261031.md`,
+  sections 2, 3 and 5). Tony's ruling of Oct 31, 18:38: "take-and-report
+  for values and hold for identity and record -- confirmed. In other
+  words we hold only where a project choice matters."
+  THE SORTING, as built (`horizons_check.HOLD_FIELDS`): a period JPL
+  gives differently beyond its error, and an open/closed mismatch, are
+  values: TAKEN. horizons_name, an id answering no record or several or
+  found in neither index, id_type (found in the other index, or both),
+  object_type, and a pin with a newer record are identity: HELD -- the
+  id_type and object_type rows were the coordinating session's reading
+  of the ruling's test, CONFIRMED by Tony on 2026-10-31, 22:31 Chicago,
+  in the session's next-step box ("Should a body found in JPL's other
+  index, or of another kind, be held, as built?" -- "Yes, hold it"). A
+  period date
+  that cannot be read, or a question JPL refused, is REPORTED, as an
+  outage is: neither taken nor held, still due.
+  BY FILE. `horizons_check.py`: a take re-fetches the body's elements
+  and period through period_fetch's own path (`make_taker`: plotting's
+  call, plotting's save, the one writer of data/osculating_cache.json),
+  in the same run, and confirms the new period, logging "TAKEN
+  <key>.period: <old> -> <new>"; a hold writes a `hold` block in the
+  body's confirmation (since, causes, what the list says, what JPL said,
+  the query), keeps its last confirmed values, and holds its period
+  too; a held body is asked every run, and its hold ends ("HOLD ENDED")
+  only when the list and JPL agree again -- nothing un-holds it, so
+  ending a hold is Tony's edit to celestial_objects.py, a push, and the
+  next night. An entry never confirmed has nothing to hold at and stays
+  a FAIL. Takes and holds exit 0 and are named on the verdict line; the
+  last-run file names them. `check_horizons_confirmations.py`: a held
+  body passes AS HELD at night, by name, with no lapse clock however
+  long the hold lasts; BY DAY IT IS RED, "waiting on your look" (this
+  session's reading of the checker's two voices: the day's is for what
+  waits on a person); today's takes named; a reported period reported
+  at night, red by day. `export_objects.py`: schema 4, each
+  confirmation carries `hold` (null unless held). `orrery_maintenance_run.py`:
+  the night's record, schema 2, carries `taken` (tonight's, from the
+  check's last-run file) and `held` (every hold, from the confirmations),
+  by `night_taken_held()`. `palomas_orrery_dashboard.py`: a second line,
+  `website_night_line()`, the website's last clean night from the
+  gallery folder's data/nightly_run_record.json, red when older than a
+  day, "the website's folder is not beside the orrery" (not red) on a
+  machine with one clone; both lines name takes and holds from their
+  record, never red for a hold. `.github/workflows/nightly.yml`:
+  `concurrency: group: nightly-run` without cancel-in-progress (GitHub's
+  sentence read again 2026-10-31 and quoted), and the checkout of
+  `main` as it stands when the job starts. Tests:
+  `test_horizons_check.py` section 7, a take and a hold with three
+  planted faults (a take not logged; a hold dropped; a held body turning
+  the night red), 81 checks; `test_maintenance_report.py`, a take night
+  and a hold night clean and the record naming both, two planted faults
+  (TAKE NOT IN RECORD, HOLD NOT IN RECORD), 15 of 15.
+  THE NIGHT IN A SPARE CLONE: on Tony's machine, 2026-11-01 03:17 UTC, a clone of f4994ffc with this session's code hidden from git there and two planted changes: Jupiter's served period moved two days (4,334.659 against JPL's 4,332.659, its error 0.41 days) and Mars's horizons_name changed to "Mars (planted)". The Horizons check read "PASS -- 2 checked today, 3 queries; TAKEN jupiter.period: 4334.659212 days -> 4331.812636 days; HELD mars since 2026-11-01" (the take re-fetched Jupiter at that minute, so its new period is today's osculating one); the night's checker "pass -- 89 of 90 entries ... HELD mars since 2026-11-01"; "NIGHT RUN: CLEAN -- 14 rows run, 33 skipped, 0 reported"; and data/nightly_run_record.json named the take, old and new, and the hold, since and cause.
+- **For a gallery session: the hold's website half** (Tony's ruling of
+  Oct 31, 21:30: after the ruler build, its own short session; read at
+  gallery c1c578f5). `tools/mirror_objects.py` copies only REPLACED
+  (name, horizons_id, id_type; line 133) and INSERTED (description,
+  info_url, period, path, open_path, horizons_name; line 134) and drops
+  every other export field unnamed, `confirmation` among them, so a
+  hold would be dropped; the builder asks JPL by the mirrored
+  `horizons_id` (fetch_vectors_range line 447, fetch_elements line 480)
+  and nothing honours a hold; its last-good path (serve_last_good, line
+  1483) re-stamps `source.retrieved` with the current time (lines 1109
+  and 1134) and drops its own stale flag before coverage_index.json, and
+  a held body that is not a path nulls `served_window` for the whole
+  cache (line 1822 on); the website's `tools/check_horizons_confirmations.py`
+  goes red for a held body at day 30 (`_age`, lines 100 to 112). GPT's
+  criterion (i), the acceptance: the export marks a held body (done
+  here); the builder honours the mark -- no fetch, last-good served and
+  NAMED, its own data's date kept; the room's hover prints the held
+  date; the website's checker passes held as held. Until then a held
+  body makes the website's night red from day 30, which is today's
+  behaviour. Nothing is held today.
+- **For horizons-orbital-mechanics' next version** (carried; no
+  sentence there is wrong today): Where the Check Lives gains the take
+  and the hold (a period JPL gives differently is taken through
+  period_fetch's path; an identity disagreement holds the body; a
+  refused question is reported), beside the night form carried above.
+- **gallery-cache-builder 1.15** (this session's one bump): Operating
+  mode rewritten -- the builder runs every night on GitHub's computer
+  through daily_run.py --night, the deletions-only guard built in the
+  gate; Layer 3 live in the GitHub Action form; the Validation stance's
+  night log; The Daily Run's Steps' night form and runner-side pull
+  match; L-461's second cause; the four Oct 28 lines; the held body not
+  yet honoured. Protocol v3.119.
+- **The comet pins (the brief's section 4) moved to the next orrery
+  session**, untouched here: the room ran out after sections 1 to 3 and
+  5. Its base is the brief's section 4 as written, with JPL's answers of
+  Oct 31 (every CAP answer equals today's pin) and the %3B trap; L-470
+  carries it.
+**Gap (replaces the one below, 2026-10-31):** Tony's push of this
+session (Pull origin first if the night committed), then the morning
+look at both Actions tabs and the dashboard's two lines for the rest of
+the week (P4). Then the ruler build (a gallery session), then the
+hold's website half (a gallery session), then the next orrery session:
+the comet pins (L-470).
+**Gap (superseded above; replaced the one below, 2026-10-31):** Tony's run order from the
 gallery session's report: the gallery's GitHub setting ("Read and write
 permissions"), the two pushes, the first run by hand from the gallery's
 Actions tab, its log read to the end (the pulls "with the run's
@@ -2923,7 +3029,48 @@ L-490.
   difference, documented in `gallery/solar_system_figures.js`. NEW,
   found: the belt's 90th height, about 100 million km in the orrery's
   hover against 99.8 million in its export, which the website prints.
-**Gap (replaces the one below, 2026-10-25):** the check's design, then
+- **2026-10-31, the export's rounding fault fixed** (orrery Claude
+  Code session, Claude Opus 5.5, built on orrery f4994ffc with the
+  gallery at c1c578f5 read only; brief
+  `documentation/COORD_L485_orrery_rounding_hold_pins_brief_20261031.md`,
+  section 1). WHICH PLACE IS RIGHT, ANSWERED: the orrery's hover was
+  right, the export was wrong. THE CAUSE, by line:
+  `constants_rows._to_place()` rounded to a figure count found from the
+  unrounded value, and when that rounding carried into a new leading
+  digit it re-rounded the ORIGINAL value at one more figure, undoing the
+  carry (99,781,779.76 km at the million place gave 99,800,000; its own
+  docstring's 9.996 at the hundredths gave 9.996). THE FIX: the value
+  rounded at the place is kept and its figures are counted from the
+  rounded value; the one-figure branch unchanged (637,800 at the
+  million place stays 600,000). THE FIVE NAMES, read from the diff of
+  `data/constants_export.json` before and after, and nothing else
+  changed: EARTH_VAN_ALLEN_INNER_RADII in km 9,600 -> 10,000;
+  EARTH_EXOSPHERE_H_FIT_OUTER_RADII in km 96,000 -> 100,000;
+  MAIN_BELT_A_INNER_AU in pc 9.7e-6 -> 1.0e-5;
+  MAIN_BELT_DISTANCE_PERCENTILES_AU[100] in r_earth 99,990 -> 100,000;
+  MAIN_BELT_HEIGHT_PERCENTILES_AU[90] in km 99,800,000 -> 100,000,000.
+  Each figure count unchanged. THE TESTS, two kinds kept apart (GPT's
+  criterion (ii)): `test_constants_rounding.py`, a new checker row
+  "Constants rounding" (not in the night set: it judges a function),
+  seven pins worked by hand with the fault of Oct 29 to 31 and a
+  half-away-from-zero rounding planted, each caught by name; and
+  `test_constants_export.py` check 6, whose belt pin moves to
+  100,000,000 and whose own re-computation now rounds at the place the
+  served count names (rounded the old way it rejected the five
+  corrected values: it re-created the same undone carry). WHAT THE
+  WEBSITE WILL PRINT after its next pull: the Solar System room's belt
+  text box, "about 100 million km" for the 90th height (the figures
+  check's part 9 accepts it); the Earth room's inner Van Allen belt
+  text box, "= 10,000 km" where it reads "= 9,600 km" today
+  (`kmAndAuServed`, gallery `gallery/feature_renderers.js`). The
+  exosphere fit's outer edge is printed in Earth radii only, and the
+  other two names are not printed, so nothing else a visitor reads
+  changes.
+**Gap (replaces the one below, 2026-10-31):** Tony's push and the
+website's next pull, then his phone look at the two sentences above;
+then the check's design, then its build, with a planted fault; where
+its exceptions live.
+**Gap (superseded above; replaced the one below, 2026-10-25):** the check's design, then
 its build, with a planted fault; where its exceptions live.
 **Gap (superseded above):** the rule into interactive-exhibit at its next version (this
 session already moved it to 1.23); the check's design, then its build,
@@ -3010,7 +3157,7 @@ orrery's plots, then the build.
 `spacecraft_encounters.py`; `palomas_orrery.py`.
 
 #### [L-470] Orrery entries the website cannot serve as they stand (orrery, objects)
-<!-- L:470 status:OPEN upd:2026-10-25 section:A flag: rice: -->
+<!-- L:470 status:OPEN upd:2026-10-31 section:A flag: rice: -->
 - **Found 2026-10-22, counting slice 1 of L-443 (the objects to the
   website).** One class: an entry in `celestial_objects.py` whose own
   fields stop it being served, recorded here rather than chased (The
@@ -3128,7 +3275,31 @@ orrery's plots, then the build.
   periods. The two instances close; West remains.
 - **2026-10-25:** the two rules are in horizons-orbital-mechanics 1.11,
   under Which Record Serves a Body.
-**Gap (replaces the one below, 2026-10-25):** West's id (C/1975 V1-A),
+- **2026-10-31, the periodic comets' record pins: ruled, briefed, not
+  yet built.** Tony, Oct 31, 18:45: "the third case where a non
+  permanent record number is reassigned is fragile: we should use the
+  permanent record." Each periodic comet is to be asked by its
+  designation with JPL's CAP directive. The six pins, Tempel 2
+  90000214, Schaumasse 90000356, Howell 90000901,
+  Churyumov-Gerasimenko 90000703, Halley 90000030 and Encke 90000091,
+  each equal to JPL's CAP answer of Oct 31 (the coordinating session's
+  fetch, in the brief's section 4.2). The trap found then: a bare ';'
+  in the address makes JPL ignore CAP and list every record (Encke's
+  61); sent as %3B it returns one. The brief's section 4 is the next
+  orrery session's base, untouched by the session of Oct 31, which
+  stopped before it as the brief allows: the test through both of the
+  orrery's routes first (astroquery with id_type 'designation' and
+  closest_apparition, with and without no_fragments; the raw URL with
+  DES=<d>;CAP), then every reader switched as one change, the export
+  keeping JPL's resolved record number for the website, and
+  horizons-orbital-mechanics 1.14. Noted, not built: a comet with a
+  future-only apparition would need CAP's date form. For a gallery
+  session (the one after the ruler build): the website asking by
+  designation with CAP itself.
+**Gap (replaces the one below, 2026-10-31):** the next orrery session
+builds the comets' designation with CAP from the brief's section 4;
+West's id (C/1975 V1-A) beside it.
+**Gap (superseded above; replaced the one below, 2026-10-25):** West's id (C/1975 V1-A),
 with the comets' part of L-443's build B.
 **Gap (superseded above, 2026-10-24, close of the night):**
 West's id (C/1975 V1-A); the two skill rules above at
@@ -3417,7 +3588,17 @@ L-188 (the maintenance run); L-459 (the monthly run).
   matches; never asks GitHub). Tony's morning Daily Run keeps the folder
   form untouched; its words naming the second honest cause, "not yet
   pulled", are still to add.
-**Gap (replaces the one below, 2026-10-31):** the website's first night
+- **2026-10-31, the second honest cause in the skill**
+  (gallery-cache-builder 1.15, the orrery session of L-485's entry of
+  today): "not yet pulled" -- Tony's orrery folder behind GitHub every
+  morning the orrery's night committed -- beside the two causes the
+  Daily Run already names, with its cure, Pull origin, orrery then
+  website. The runner form is recorded there too. The Daily Run's own
+  words for it remain a gallery edit.
+**Gap (replaces the one below, 2026-10-31):** the Daily Run's folder
+form names "not yet pulled" beside "not yet pushed" (a gallery edit);
+then DONE.
+**Gap (superseded above; replaced the one below, 2026-10-31):** the website's first night
 run by hand shows "Pull matches push (runner form)" ok; the Daily Run's
 folder form names "not yet pulled" beside "not yet pushed"; then DONE.
 **Gap (superseded above, 2026-10-25):** the first Daily Run after
