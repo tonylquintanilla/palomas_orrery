@@ -347,7 +347,7 @@ yours: documentation/WHERE_WE_ARE_10-31-26_2048_run_record.md
 
 **Your run order:**
 1. Paste this report to the coordinating session and wait for its word. -- proceed
-2. In GitHub Desktop, click Pull origin first if it shows a number. Then commit and push the orrery. -- 
+2. In GitHub Desktop, click Pull origin first if it shows a number. Then commit and push the orrery. -- 64c8d365d5c110113f8f37e67b839f6ca54ffef9
 3. The website's night at 08:17 UTC pulls the new export by itself. Or run the Daily Run from the dashboard to have it the same day.
 4. On your phone, after closing the saved tab, check the two text boxes above: the belt's 90th height, and the inner Van Allen belt.
 5. Open the dashboard. It should show two nightly lines, the orrery's and the website's.
@@ -400,3 +400,16 @@ My word: go ahead with the run order. The report holds up against the files in y
 One thing to know, not a problem: the session built on f4994ffc, your push of the brief and the handoff, which is GitHub's HEAD now; your folder holds the session's edits uncommitted on top of it, so step 2 is just commit and push, and Pull origin should show no number unless the night ran meanwhile.
 
 Run order: unchanged from the session's report, steps 2 to 6. Send me the orrery's SHA when the push lands, and tell me what the two text boxes say on your phone after the website's pull.
+
+===========================================
+
+Yes, let GitHub do it. That is the better test anyway: the website's night pulling a real change from the orrery is exactly what the first week is meant to prove, and the Daily Run by hand would only have shown the same thing sooner.
+
+What to look for in the morning, in order:
+- The orrery's Actions tab: a finished, green "Nightly run" at 07:17 UTC (1:17 am Chicago, since the clocks go back tonight). It builds on your push; it may commit only its record, or nothing, and say so.
+- The website's Actions tab: a finished, green run at 08:17 UTC (2:17 am). Its log should show the pulls at your new orrery SHA, the build, 36 of 36, and "NIGHT RUN: CLEAN".
+- Pull origin on both, orrery then website.
+- Your phone, after closing the saved tab: the belt's text box reading "about 100 million km" for the 90th height, and Earth's inner Van Allen belt "= 10,000 km".
+- The dashboard: two nightly lines, both within a day.
+
+If either run is red, its log is the record; send me the last line and we read it together.
