@@ -2895,3 +2895,10 @@ The clicks:
 3. Click the green "Run workflow" button in that panel. -- done
 
 A new "Nightly run #4: Manually run" line appears in a few seconds. It takes about four to five minutes. When it finishes green, open it, click the "night" job, and read the last lines of the step "The night (python daily_run.py --night)": you want "NIGHT RUN: CLEAN" and, in the commit step, the files it committed. Then Pull origin on the website, and the phone.
+
+===================================================
+
+1. Click "Fetch origin" first, in the same spot at the top of GitHub Desktop. Desktop only knows about a commit made on GitHub once it has fetched, and it fetches on its own only every so often; 
+2. after the fetch the button turns into "Pull origin" with a "1" beside it, and that is the night's commit (b6574a0, "Nightly run 2026-11-01 UTC", by github-actions[bot]). Click it.
+
+If after fetching it still offers no pull, open the History tab and look for that commit at the top; if it is already there, your folder is current and the live pass will match as it is.
