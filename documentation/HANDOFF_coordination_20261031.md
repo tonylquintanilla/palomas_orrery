@@ -199,6 +199,43 @@ next item (section 6) unless Tony says otherwise.
    the website's builder). The skill's pinning section is rewritten at
    its next version. A comet with a future-only apparition (none today)
    would need CAP's date form; note it, do not build it.
+   Three things confirmed with the ruling (18:48 to 18:52), for the
+   brief and the records: (a) why the pin was fragile is the WINDOW,
+   not the hold: the builder asks JPL nightly by the pinned number and
+   the identity check runs every 30 days, so a number reassigned
+   between checks draws the wrong comet nightly until the check (C/2025
+   K1, October); the stable handle removes the failure where the check
+   only catches it late. (b) CAP is "last apparition before the current
+   date": a comet inbound to a new perihelion stays on its previous
+   apparition's record until perihelion passes, even if JPL has
+   published the inbound solution; the session reads what CAP returns
+   for each comet before switching. (c) A taken value could jump if
+   JPL's answer for the same name came from another kind of record
+   (Orcus's barycentre and body records, once); the log's old-and-new
+   line and the hover's fetched date are the safeguards, and no
+   threshold holding a large jump is built until a jump has been seen:
+   a threshold would itself be a project choice.
+   **From GPT's review of these two documents (Tony's relay, 19:33),
+   three acceptance criteria, each confirmed as the brief's:**
+   (i) THE HOLD REACHES THE BUILDER. The website's builder asks JPL
+   nightly by the same handle the orrery uses (one record per body and
+   centre, in every reader), so a body the orrery holds for an identity
+   change would still be fetched, wrong, and served by the builder.
+   The export marks a held body (its last confirmed values, their
+   date, and why it is held); the builder honours the mark: no fetch,
+   last-good positions served and named, as it already does for a
+   spacecraft with no plan; the room's hover prints the held date. A
+   hold that stops at the export is decorative. A line in the orrery
+   brief and in gallery-cache-builder's next version.
+   (ii) TWO KINDS OF TEST FOR THE ROUNDING FIX, KEPT APART. The
+   regression tests establish the rule with expected values worked by
+   hand (99,781,780 at the million place is 100,000,000; 9.996 at the
+   hundredths is 10.00), never read from the function; the Constants
+   export check then establishes only that the export used the
+   corrected function.
+   (iii) THE COMET TEST READS THE WHOLE ANSWER. For each of the five,
+   the designation, the apparition and the record number JPL returns,
+   asked with and without NOFRAG, before any reader is switched.
 3. **The dashboard's second line:** the website's last clean night,
    read from the gallery's `data/nightly_run_record.json` in the
    sibling folder, beside `nightly_run_line()` (an orrery edit; the

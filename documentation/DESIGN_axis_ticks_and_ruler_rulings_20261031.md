@@ -105,6 +105,20 @@ the ticks and the ruler; no room is left with a grid and no scale.
   from the code; if it does, it is in the build (R1: every scene).
 - Tick length, line weight, label size: Tony's phone (Mode 5), as on
   Sept 6.
+- THE RULER'S LABELS CARRY THE UNIT ON BOTH, as Tony wrote them
+  (18:02: "0 (unlabeled), 0.5 au and 1.0 au"): "0.5 AU" and "1 AU".
+  The canvas's mockup dropped the unit from the minor; the record
+  follows Tony's words, and the phone may shorten it if it crowds.
+  (Raised by GPT's review, Oct 31, 19:33; already Tony's.)
+- HOW A TICK IS ORIENTED IN THREE DIMENSIONS is an implementation
+  choice, settled against the render, not a ruling (GPT's review,
+  19:33: a mark "across" an axis has a whole plane of directions, and
+  the ticks must read as scale marks, not as pieces of grid). The
+  coordinating session's suggestion for the brief: the x and y ticks
+  lie in the plane of the orbits, each across the other axis, and the
+  z ticks lie along x, so that from above the floor reads as a ruler;
+  the session reads how the triad and the axis traces are built first,
+  and Tony's phone judges.
 - The drawer-order, hover-budget and label-words checks must not see
   the ticks as features: the tick traces carry no hover and no
   legendgroup the drawer reads, as the Sept 5 edge-label trace did
