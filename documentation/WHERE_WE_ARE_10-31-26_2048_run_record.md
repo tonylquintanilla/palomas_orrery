@@ -915,10 +915,706 @@ The design question this raises, a backstop so a dropped night is caught the sam
 
 Here is where things stand, read from GitHub's records a minute ago.
 
-**The orrery is fine, and the schedule did fire after all.** GitHub's scheduled run started at 14:17 UTC, exactly seven hours late (run 4, on your push), and your hand-fired run (run 5) queued behind it under the concurrency group and ran two minutes later. Both were clean; each committed only its own record, so there are two small bot commits (b0acdea, 0c0bac8) and Pull origin will bring both. That is the group doing its job, with one correction to what I said earlier: a second clean run does commit, because the record file carries its own time stamp; nothing else moves. -- 
+**The orrery is fine, and the schedule did fire after all.** GitHub's scheduled run started at 14:17 UTC, exactly seven hours late (run 4, on your push), and your hand-fired run (run 5) queued behind it under the concurrency group and ran two minutes later. Both were clean; each committed only its own record, so there are two small bot commits (b0acdea, 0c0bac8) and Pull origin will bring both. That is the group doing its job, with one correction to what I said earlier: a second clean run does commit, because the record file carries its own time stamp; nothing else moves. -- 65991f7e0b07d534d043b16790e16eabcaa2ca74
 
 **The website failed, and I think I know why, but I need the log to be sure.** The night's gate found the Earth room's text box no longer matching a sentence pinned in one of the website's own checks. `documentation/smoke_display_figures.js` (the Display figures check, line 617) pins the inner Van Allen belt's line as "= 9,600 km (0.00006 AU)", and the new export makes the room print "= 10,000 km (0.00006 AU)". So the check went red, the night committed nothing, and the site is unchanged: the gate working as designed on a number that changed on purpose. The run's 4 minutes 19 seconds fits that: it got through the pulls and the build and failed in the maintenance run's night pass. Neither the orrery session nor I grepped the website's checks for the old number; that is a lesson for the records.
 
 If that is the cause, the fix is one line in that gallery file, then a rerun.
 
 The one thing I need from you: in the failed run's log, open the step "The night (python daily_run.py --night)" and paste me the lines that start with FAIL and the last line beginning "NIGHT RUN: RED". Then I'll give you the fix.
+
+night
+failed 22 minutes ago in 4m 14s
+Search logs
+1s
+Current runner version: '2.338.2'
+Runner Image Provisioner
+Operating System
+Runner Image
+GITHUB_TOKEN Permissions
+Secret source: Actions
+Cache mode: write
+Prepare workflow directory
+Prepare all required actions
+Getting action download info
+Download action repository 'actions/checkout@v7' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+Download action repository 'actions/setup-python@v7' (SHA:6d4fd22b20465ccc0f7354476588e8df7c9ca0e0)
+Complete job name: night
+14s
+Run actions/checkout@v7
+Syncing repository: tonylquintanilla/tonyquintanilla.github.io
+Getting Git version info
+Temporarily overriding HOME='/home/runner/work/_temp/11b29865-6a6f-4a7f-a193-359237ecf7e3' before making global git config changes
+Adding repository directory to the temporary git global config as a safe directory
+/usr/bin/git config --global --add safe.directory /home/runner/work/tonyquintanilla.github.io/tonyquintanilla.github.io
+Deleting the contents of '/home/runner/work/tonyquintanilla.github.io/tonyquintanilla.github.io'
+Determining repository object format
+Initializing the repository
+Disabling automatic garbage collection
+Setting up auth
+Fetching the repository
+Determining the checkout info
+/usr/bin/git sparse-checkout disable
+/usr/bin/git config --local --unset-all extensions.worktreeConfig
+Checking out the ref
+/usr/bin/git log -1 --format=%H
+c1c578f57f812aa0dcc0f1fec45bab43e7826bd0
+0s
+Run actions/setup-python@v7
+Installed versions
+30s
+Run python -m pip install -r requirements.txt
+Collecting numpy>=1.24.0 (from -r requirements.txt (line 34))
+  Downloading numpy-2.5.4-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (6.6 kB)
+Collecting pandas>=2.0.0 (from -r requirements.txt (line 35))
+  Downloading pandas-3.1.0-cp313-cp313-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (18 kB)
+Collecting scipy>=1.11.0 (from -r requirements.txt (line 36))
+  Downloading scipy-1.18.1-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (62 kB)
+Collecting astropy>=5.3.4 (from -r requirements.txt (line 39))
+  Downloading astropy-8.0.2-cp311-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (11 kB)
+Collecting astroquery>=0.4.6 (from -r requirements.txt (line 40))
+  Downloading astroquery-0.4.11-py3-none-any.whl.metadata (6.5 kB)
+Collecting plotly>=5.18.0 (from -r requirements.txt (line 43))
+  Downloading plotly-7.1.0-py3-none-any.whl.metadata (8.8 kB)
+Collecting matplotlib>=3.7.0 (from -r requirements.txt (line 44))
+  Downloading matplotlib-3.11.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (80 kB)
+Collecting kaleido==0.2.1 (from -r requirements.txt (line 45))
+  Downloading kaleido-0.2.1-py2.py3-none-manylinux1_x86_64.whl.metadata (15 kB)
+Collecting pillow>=10.0.0 (from -r requirements.txt (line 48))
+  Downloading pillow-13.0.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.1 kB)
+Collecting simplekml>=1.3.6 (from -r requirements.txt (line 51))
+  Downloading simplekml-1.3.6.tar.gz (52 kB)
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Collecting customtkinter>=5.2.0 (from -r requirements.txt (line 55))
+  Downloading customtkinter-6.0.0-py3-none-any.whl.metadata (698 bytes)
+Collecting ipython>=8.0.0 (from -r requirements.txt (line 60))
+  Downloading ipython-9.18.0-py3-none-any.whl.metadata (4.6 kB)
+Collecting python-dateutil>=2.8.2 (from -r requirements.txt (line 63))
+  Downloading python_dateutil-4.0.0-py3-none-any.whl.metadata (7.3 kB)
+Collecting pytz>=2023.3 (from -r requirements.txt (line 64))
+  Downloading pytz-2026.6-py2.py3-none-any.whl.metadata (22 kB)
+Collecting requests>=2.31.0 (from -r requirements.txt (line 67))
+  Downloading requests-2.34.2-py3-none-any.whl.metadata (4.8 kB)
+Collecting beautifulsoup4>=4.12.0 (from -r requirements.txt (line 68))
+  Downloading beautifulsoup4-4.15.0-py3-none-any.whl.metadata (3.8 kB)
+Collecting openpyxl>=3.1.0 (from -r requirements.txt (line 71))
+  Downloading openpyxl-3.1.5-py2.py3-none-any.whl.metadata (2.5 kB)
+Collecting astropy-iers-data>=0.2026.9.28.0.59.37 (from astropy>=5.3.4->-r requirements.txt (line 39))
+  Downloading astropy_iers_data-0.2026.10.19.0.52.1-py3-none-any.whl.metadata (3.4 kB)
+Collecting packaging>=25.0 (from astropy>=5.3.4->-r requirements.txt (line 39))
+  Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+Collecting pyerfa>=2.0.1.3 (from astropy>=5.3.4->-r requirements.txt (line 39))
+  Downloading pyerfa-2.0.1.5-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.7 kB)
+Collecting PyYAML>=6.0.0 (from astropy>=5.3.4->-r requirements.txt (line 39))
+  Downloading pyyaml-6.0.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+Collecting html5lib>=0.999 (from astroquery>=0.4.6->-r requirements.txt (line 40))
+  Downloading html5lib-1.1-py2.py3-none-any.whl.metadata (16 kB)
+Collecting keyring>=15.0 (from astroquery>=0.4.6->-r requirements.txt (line 40))
+  Downloading keyring-25.7.0-py3-none-any.whl.metadata (21 kB)
+Collecting pyvo>=1.5 (from astroquery>=0.4.6->-r requirements.txt (line 40))
+  Downloading pyvo-1.9.1-py3-none-any.whl.metadata (4.2 kB)
+Collecting narwhals>=1.15.1 (from plotly>=5.18.0->-r requirements.txt (line 43))
+  Downloading narwhals-2.28.0-py3-none-any.whl.metadata (15 kB)
+Collecting contourpy>=1.0.1 (from matplotlib>=3.7.0->-r requirements.txt (line 44))
+  Downloading contourpy-1.4.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (3.8 kB)
+Collecting cycler>=0.10 (from matplotlib>=3.7.0->-r requirements.txt (line 44))
+  Downloading cycler-0.12.1-py3-none-any.whl.metadata (3.8 kB)
+Collecting fonttools>=4.28.2 (from matplotlib>=3.7.0->-r requirements.txt (line 44))
+  Downloading fonttools-4.68.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (139 kB)
+Collecting kiwisolver>=1.3.1 (from matplotlib>=3.7.0->-r requirements.txt (line 44))
+  Downloading kiwisolver-1.5.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (5.2 kB)
+Collecting pyparsing>=3 (from matplotlib>=3.7.0->-r requirements.txt (line 44))
+  Downloading pyparsing-3.3.3-py3-none-any.whl.metadata (5.9 kB)
+Collecting darkdetect (from customtkinter>=5.2.0->-r requirements.txt (line 55))
+  Downloading darkdetect-0.8.0-py3-none-any.whl.metadata (3.6 kB)
+Collecting ipython-pygments-lexers>=1.0.0 (from ipython>=8.0.0->-r requirements.txt (line 60))
+  Downloading ipython_pygments_lexers-1.1.1-py3-none-any.whl.metadata (1.1 kB)
+Collecting jedi>=0.18.2 (from ipython>=8.0.0->-r requirements.txt (line 60))
+  Downloading jedi-0.20.1-py2.py3-none-any.whl.metadata (23 kB)
+Collecting matplotlib-inline>=0.1.6 (from ipython>=8.0.0->-r requirements.txt (line 60))
+  Downloading matplotlib_inline-0.2.2-py3-none-any.whl.metadata (2.4 kB)
+Collecting pexpect>4.6 (from ipython>=8.0.0->-r requirements.txt (line 60))
+  Downloading pexpect-4.9.0-py2.py3-none-any.whl.metadata (2.5 kB)
+Collecting prompt_toolkit<3.1.0,>=3.0.41 (from ipython>=8.0.0->-r requirements.txt (line 60))
+  Downloading prompt_toolkit-3.0.53-py3-none-any.whl.metadata (6.4 kB)
+Collecting psutil>=7 (from ipython>=8.0.0->-r requirements.txt (line 60))
+  Downloading psutil-7.2.2-cp36-abi3-manylinux2010_x86_64.manylinux_2_12_x86_64.manylinux_2_28_x86_64.whl.metadata (22 kB)
+Collecting pygments>=2.14.0 (from ipython>=8.0.0->-r requirements.txt (line 60))
+  Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+Collecting stack_data>=0.6.0 (from ipython>=8.0.0->-r requirements.txt (line 60))
+  Downloading stack_data-0.6.3-py3-none-any.whl.metadata (18 kB)
+Collecting traitlets>=5.13.0 (from ipython>=8.0.0->-r requirements.txt (line 60))
+  Downloading traitlets-5.16.1-py3-none-any.whl.metadata (10 kB)
+Collecting wcwidth>=0.1.4 (from prompt_toolkit<3.1.0,>=3.0.41->ipython>=8.0.0->-r requirements.txt (line 60))
+  Downloading wcwidth-0.9.4-cp310-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (23 kB)
+Collecting tzdata (from python-dateutil>=2.8.2->-r requirements.txt (line 63))
+  Downloading tzdata-2026.6-py2.py3-none-any.whl.metadata (1.4 kB)
+Collecting charset_normalizer<4,>=2 (from requests>=2.31.0->-r requirements.txt (line 67))
+  Downloading charset_normalizer-3.5.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (46 kB)
+Collecting idna<4,>=2.5 (from requests>=2.31.0->-r requirements.txt (line 67))
+  Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+Collecting urllib3<3,>=1.26 (from requests>=2.31.0->-r requirements.txt (line 67))
+  Downloading urllib3-2.8.0-py3-none-any.whl.metadata (7.4 kB)
+Collecting certifi>=2023.5.7 (from requests>=2.31.0->-r requirements.txt (line 67))
+  Downloading certifi-2026.10.23-py3-none-any.whl.metadata (2.5 kB)
+Collecting soupsieve>=1.6.1 (from beautifulsoup4>=4.12.0->-r requirements.txt (line 68))
+  Downloading soupsieve-3.0.4-py3-none-any.whl.metadata (4.4 kB)
+Collecting typing-extensions>=4.0.0 (from beautifulsoup4>=4.12.0->-r requirements.txt (line 68))
+  Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting et-xmlfile (from openpyxl>=3.1.0->-r requirements.txt (line 71))
+  Downloading et_xmlfile-2.0.0-py3-none-any.whl.metadata (2.7 kB)
+Collecting six>=1.9 (from html5lib>=0.999->astroquery>=0.4.6->-r requirements.txt (line 40))
+  Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+Collecting webencodings (from html5lib>=0.999->astroquery>=0.4.6->-r requirements.txt (line 40))
+  Downloading webencodings-0.6.1-py3-none-any.whl.metadata (3.4 kB)
+Collecting parso<0.9.0,>=0.8.7 (from jedi>=0.18.2->ipython>=8.0.0->-r requirements.txt (line 60))
+  Downloading parso-0.8.7-py2.py3-none-any.whl.metadata (8.2 kB)
+Collecting SecretStorage>=3.2 (from keyring>=15.0->astroquery>=0.4.6->-r requirements.txt (line 40))
+  Downloading secretstorage-3.5.0-py3-none-any.whl.metadata (4.0 kB)
+Collecting jeepney>=0.4.2 (from keyring>=15.0->astroquery>=0.4.6->-r requirements.txt (line 40))
+  Downloading jeepney-0.9.0-py3-none-any.whl.metadata (1.2 kB)
+Collecting jaraco.classes (from keyring>=15.0->astroquery>=0.4.6->-r requirements.txt (line 40))
+  Downloading jaraco.classes-3.4.0-py3-none-any.whl.metadata (2.6 kB)
+Collecting jaraco.functools (from keyring>=15.0->astroquery>=0.4.6->-r requirements.txt (line 40))
+  Downloading jaraco_functools-4.6.0-py3-none-any.whl.metadata (2.9 kB)
+Collecting jaraco.context (from keyring>=15.0->astroquery>=0.4.6->-r requirements.txt (line 40))
+  Downloading jaraco_context-6.1.2-py3-none-any.whl.metadata (4.2 kB)
+Collecting ptyprocess>=0.5 (from pexpect>4.6->ipython>=8.0.0->-r requirements.txt (line 60))
+  Downloading ptyprocess-0.7.0-py2.py3-none-any.whl.metadata (1.3 kB)
+Collecting cryptography>=2.0 (from SecretStorage>=3.2->keyring>=15.0->astroquery>=0.4.6->-r requirements.txt (line 40))
+  Downloading cryptography-50.0.2-cp311-abi3-manylinux_2_34_x86_64.whl.metadata (4.4 kB)
+Collecting cffi>=2.0.0 (from cryptography>=2.0->SecretStorage>=3.2->keyring>=15.0->astroquery>=0.4.6->-r requirements.txt (line 40))
+  Downloading cffi-2.1.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.5 kB)
+Collecting pycparser (from cffi>=2.0.0->cryptography>=2.0->SecretStorage>=3.2->keyring>=15.0->astroquery>=0.4.6->-r requirements.txt (line 40))
+  Downloading pycparser-3.12-py3-none-any.whl.metadata (9.7 kB)
+Collecting executing>=1.2.0 (from stack_data>=0.6.0->ipython>=8.0.0->-r requirements.txt (line 60))
+  Downloading executing-2.3.0-py3-none-any.whl.metadata (9.1 kB)
+Collecting asttokens>=2.1.0 (from stack_data>=0.6.0->ipython>=8.0.0->-r requirements.txt (line 60))
+  Downloading asttokens-3.0.2-py3-none-any.whl.metadata (5.7 kB)
+Collecting pure-eval (from stack_data>=0.6.0->ipython>=8.0.0->-r requirements.txt (line 60))
+  Downloading pure_eval-0.2.4-py3-none-any.whl.metadata (6.4 kB)
+Collecting more-itertools (from jaraco.classes->keyring>=15.0->astroquery>=0.4.6->-r requirements.txt (line 40))
+  Downloading more_itertools-11.2.1-py3-none-any.whl.metadata (42 kB)
+Downloading kaleido-0.2.1-py2.py3-none-manylinux1_x86_64.whl (79.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 79.9/79.9 MB 112.8 MB/s  0:00:00
+Downloading numpy-2.5.4-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.7/16.7 MB 140.3 MB/s  0:00:00
+Downloading pandas-3.1.0-cp313-cp313-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (12.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.0/12.0 MB 107.3 MB/s  0:00:00
+Downloading scipy-1.18.1-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (35.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 35.3/35.3 MB 128.5 MB/s  0:00:00
+Downloading astropy-8.0.2-cp311-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (10.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.4/10.4 MB 116.0 MB/s  0:00:00
+Downloading astroquery-0.4.11-py3-none-any.whl (11.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 11.1/11.1 MB 119.3 MB/s  0:00:00
+Downloading plotly-7.1.0-py3-none-any.whl (9.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.7/9.7 MB 97.3 MB/s  0:00:00
+Downloading matplotlib-3.11.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (9.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.9/9.9 MB 135.8 MB/s  0:00:00
+Downloading pillow-13.0.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (7.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.1/7.1 MB 144.3 MB/s  0:00:00
+Downloading customtkinter-6.0.0-py3-none-any.whl (302 kB)
+Downloading ipython-9.18.0-py3-none-any.whl (649 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 649.6/649.6 kB 110.7 MB/s  0:00:00
+Downloading prompt_toolkit-3.0.53-py3-none-any.whl (392 kB)
+Downloading python_dateutil-4.0.0-py3-none-any.whl (92 kB)
+Downloading pytz-2026.6-py2.py3-none-any.whl (506 kB)
+Downloading requests-2.34.2-py3-none-any.whl (73 kB)
+Downloading charset_normalizer-3.5.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (254 kB)
+Downloading idna-3.20-py3-none-any.whl (69 kB)
+Downloading urllib3-2.8.0-py3-none-any.whl (135 kB)
+Downloading beautifulsoup4-4.15.0-py3-none-any.whl (109 kB)
+Downloading openpyxl-3.1.5-py2.py3-none-any.whl (250 kB)
+Downloading astropy_iers_data-0.2026.10.19.0.52.1-py3-none-any.whl (2.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.0/2.0 MB 146.9 MB/s  0:00:00
+Downloading certifi-2026.10.23-py3-none-any.whl (135 kB)
+Downloading contourpy-1.4.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (384 kB)
+Downloading cycler-0.12.1-py3-none-any.whl (8.3 kB)
+Downloading fonttools-4.68.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (5.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.4/5.4 MB 134.7 MB/s  0:00:00
+Downloading html5lib-1.1-py2.py3-none-any.whl (112 kB)
+Downloading ipython_pygments_lexers-1.1.1-py3-none-any.whl (8.1 kB)
+Downloading jedi-0.20.1-py2.py3-none-any.whl (4.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.9/4.9 MB 138.8 MB/s  0:00:00
+Downloading parso-0.8.7-py2.py3-none-any.whl (107 kB)
+Downloading keyring-25.7.0-py3-none-any.whl (39 kB)
+Downloading jeepney-0.9.0-py3-none-any.whl (49 kB)
+Downloading kiwisolver-1.5.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (1.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.5/1.5 MB 124.8 MB/s  0:00:00
+Downloading matplotlib_inline-0.2.2-py3-none-any.whl (9.5 kB)
+Downloading narwhals-2.28.0-py3-none-any.whl (490 kB)
+Downloading packaging-26.3-py3-none-any.whl (129 kB)
+Downloading pexpect-4.9.0-py2.py3-none-any.whl (63 kB)
+Downloading psutil-7.2.2-cp36-abi3-manylinux2010_x86_64.manylinux_2_12_x86_64.manylinux_2_28_x86_64.whl (155 kB)
+Downloading ptyprocess-0.7.0-py2.py3-none-any.whl (13 kB)
+Downloading pyerfa-2.0.1.5-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (738 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 738.7/738.7 kB 96.3 MB/s  0:00:00
+Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 139.5 MB/s  0:00:00
+Downloading pyparsing-3.3.3-py3-none-any.whl (126 kB)
+Downloading pyvo-1.9.1-py3-none-any.whl (1.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 144.4 MB/s  0:00:00
+Downloading pyyaml-6.0.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (801 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 801.6/801.6 kB 115.2 MB/s  0:00:00
+Downloading secretstorage-3.5.0-py3-none-any.whl (15 kB)
+Downloading cryptography-50.0.2-cp311-abi3-manylinux_2_34_x86_64.whl (4.8 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.8/4.8 MB 153.8 MB/s  0:00:00
+Downloading cffi-2.1.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (221 kB)
+Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+Downloading soupsieve-3.0.4-py3-none-any.whl (42 kB)
+Downloading stack_data-0.6.3-py3-none-any.whl (24 kB)
+Downloading asttokens-3.0.2-py3-none-any.whl (28 kB)
+Downloading executing-2.3.0-py3-none-any.whl (29 kB)
+Downloading traitlets-5.16.1-py3-none-any.whl (86 kB)
+Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+Downloading wcwidth-0.9.4-cp310-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (785 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 785.9/785.9 kB 114.5 MB/s  0:00:00
+Downloading darkdetect-0.8.0-py3-none-any.whl (9.0 kB)
+Downloading et_xmlfile-2.0.0-py3-none-any.whl (18 kB)
+Downloading jaraco.classes-3.4.0-py3-none-any.whl (6.8 kB)
+Downloading jaraco_context-6.1.2-py3-none-any.whl (7.9 kB)
+Downloading jaraco_functools-4.6.0-py3-none-any.whl (11 kB)
+Downloading more_itertools-11.2.1-py3-none-any.whl (74 kB)
+Downloading pure_eval-0.2.4-py3-none-any.whl (11 kB)
+Downloading pycparser-3.12-py3-none-any.whl (62 kB)
+Downloading tzdata-2026.6-py2.py3-none-any.whl (348 kB)
+Downloading webencodings-0.6.1-py3-none-any.whl (8.7 kB)
+Building wheels for collected packages: simplekml
+  Building wheel for simplekml (pyproject.toml): started
+  Building wheel for simplekml (pyproject.toml): finished with status 'done'
+  Created wheel for simplekml: filename=simplekml-1.3.6-py3-none-any.whl size=65942 sha256=a007c84fe1741eb5729fa95fe66939e9a6bca3d44dec798eb34d539bd84a5449
+  Stored in directory: /home/runner/.cache/pip/wheels/fd/2a/d1/84a7abdbb59566c442beb1b4fb946fe1e26c5a48fd1d5e0763
+Successfully built simplekml
+Installing collected packages: simplekml, pytz, pure-eval, ptyprocess, kaleido, webencodings, wcwidth, urllib3, tzdata, typing-extensions, traitlets, soupsieve, six, PyYAML, pyparsing, pygments, pycparser, psutil, pillow, pexpect, parso, packaging, numpy, narwhals, more-itertools, kiwisolver, jeepney, jaraco.context, idna, fonttools, executing, et-xmlfile, darkdetect, cycler, charset_normalizer, certifi, asttokens, astropy-iers-data, stack_data, scipy, requests, python-dateutil, pyerfa, prompt_toolkit, plotly, openpyxl, matplotlib-inline, jedi, jaraco.functools, jaraco.classes, ipython-pygments-lexers, html5lib, customtkinter, contourpy, cffi, beautifulsoup4, pandas, matplotlib, ipython, cryptography, astropy, SecretStorage, pyvo, keyring, astroquery
+
+Successfully installed PyYAML-6.0.3 SecretStorage-3.5.0 astropy-8.0.2 astropy-iers-data-0.2026.10.19.0.52.1 astroquery-0.4.11 asttokens-3.0.2 beautifulsoup4-4.15.0 certifi-2026.10.23 cffi-2.1.1 charset_normalizer-3.5.2 contourpy-1.4.0 cryptography-50.0.2 customtkinter-6.0.0 cycler-0.12.1 darkdetect-0.8.0 et-xmlfile-2.0.0 executing-2.3.0 fonttools-4.68.0 html5lib-1.1 idna-3.20 ipython-9.18.0 ipython-pygments-lexers-1.1.1 jaraco.classes-3.4.0 jaraco.context-6.1.2 jaraco.functools-4.6.0 jedi-0.20.1 jeepney-0.9.0 kaleido-0.2.1 keyring-25.7.0 kiwisolver-1.5.1 matplotlib-3.11.2 matplotlib-inline-0.2.2 more-itertools-11.2.1 narwhals-2.28.0 numpy-2.5.4 openpyxl-3.1.5 packaging-26.3 pandas-3.1.0 parso-0.8.7 pexpect-4.9.0 pillow-13.0.0 plotly-7.1.0 prompt_toolkit-3.0.53 psutil-7.2.2 ptyprocess-0.7.0 pure-eval-0.2.4 pycparser-3.12 pyerfa-2.0.1.5 pygments-2.21.0 pyparsing-3.3.3 python-dateutil-4.0.0 pytz-2026.6 pyvo-1.9.1 requests-2.34.2 scipy-1.18.1 simplekml-1.3.6 six-1.17.0 soupsieve-3.0.4 stack_data-0.6.3 traitlets-5.16.1 typing-extensions-4.16.0 tzdata-2026.6 urllib3-2.8.0 wcwidth-0.9.4 webencodings-0.6.1
+3m 25s
+Run python daily_run.py --night
+======================================================================
+  DAILY RUN, THE NIGHT FORM -- 2026-11-01 14:25 UTC
+  root: /home/runner/work/tonyquintanilla.github.io/tonyquintanilla.github.io
+  where: GitHub Actions
+======================================================================
+Daily Run steps, from /home/runner/work/tonyquintanilla.github.io/tonyquintanilla.github.io:
+  1. Guest book updater                 tools/guestbook_updater.py  found
+  2. Pulls from the orrery              gallery_maintenance_run.py  found
+  3. Cache builder                      tools/gallery_cache_builder.py  found
+  4. Gallery maintenance run, offline   gallery_maintenance_run.py  found
+  pull-match fixtures: 5 of 5 cases right; planted faults caught 2 of 2
+  runner-form pull-match fixtures: 5 of 5 cases right; planted faults caught 2 of 2
+  night gate fixtures: 15 of 15 nights judged right; planted faults caught 3 of 3
+  night allow-list: 16 files and data/solar-system/ (whole)
+=== DAILY RUN: all 4 step scripts found; the pull-match and night checks passed 32 of 32 fixture checks (L-461, L-485)
+
+  SKIP  step 1, Guest book updater: needs Tony's answers; his morning's (Tony's ruling of Oct 31, 2026, 10:20).
+
+The pulls ask GitHub's interface with the run's GITHUB_TOKEN.
+
+======================================================================
+  DAILY RUN step 2 of 4: Pulls from the orrery
+======================================================================
+======================================================================
+  gallery maintenance run -- PULLS (before the cache builder)
+  root: /home/runner/work/tonyquintanilla.github.io/tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Constants export pull     0.8s  rewrote
+                                    data/constants_export.json,
+                                    data/constants_export.sha
+  PASS Config mirror             0.2s  rewrote data/objects_config.json
+  PASS Objects export pull       0.6s  rewrote data/objects_export.json,
+                                    data/objects_export.sha
+  PASS Objects mirror            0.1s  no change to
+                                    data/objects_config.json
+  PASS Drawings pull             1.9s  rewrote
+                                    data/drawings/pulled_at.sha
+
+======================================================================
+
+=== PULLS: all 5 passed -- Constants export pull, Config mirror, Objects export pull, Objects mirror, Drawings pull
+
+Pull matches push (runner form): the three pulls fetched the orrery at 0c0bac8a, its GitHub copy's newest commit, read live.
+
+======================================================================
+  DAILY RUN step 3 of 4: Cache builder (up to 900 seconds)
+======================================================================
+[sweep] no sibling directories present
+[RUNS] before the copy: 121 run records in data/solar-system/raw/runs
+[RUNS] after the copy:  121 run records in data/.staging_solar-system_20261101T142548Z/raw/runs
+[POLE] earth: pole of 2026-11-01 served (RA 0.63786, Dec 89.84970 deg); tilt 23.43785 deg
+[UNCERTAINTY] JPL's own position uncertainty served for 51 of 54 small bodies; not served: bennu (JPL gives no range uncertainty (R_s) for it), halley (JPL gives no range uncertainty (R_s) for it), ikeya_seki (JPL gives no range uncertainty (R_s) for it)
+[window] served window: 88.0 days either side of today, set by mercury, the shortest of 63 bodies' trusted spans
+[SWAP] the new cache is in place; every rename worked on the first try. Recorded in data/cache_swap_log.jsonl
+[warn] sun: features-only entry; no Horizons fetch
+[warn] halley: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] ikeya_seki: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] hale_bopp: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] hyakutake: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] neowise: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] lemmon: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] halley: no position uncertainty served -- JPL gives no range uncertainty (R_s) for it
+[warn] ikeya_seki: no position uncertainty served -- JPL gives no range uncertainty (R_s) for it
+[warn] bennu: no position uncertainty served -- JPL gives no range uncertainty (R_s) for it
+[done] run 20261101T142548Z (nightly): 95 objects
+
+----------------------------------------------------------------------
+WHAT TO DO NEXT, before you commit anything:
+
+  1. Run the gallery maintenance run, from this same folder:
+         python gallery_maintenance_run.py
+     Every gating checker should pass. Its LAST line reads the
+     swap log back and should agree with the [SWAP] line above.
+  2. In GitHub Desktop, look at the change list. A good build
+     shows changed and added files and NO pile of deletions.
+  3. Commit and push.
+  4. After the push, check what the live site serves:
+         python gallery_maintenance_run.py --live
+
+TONY-ACTION ROLLUP for this run:
+  (do)     steps 1 to 4 above, in that order.
+----------------------------------------------------------------------
+
+Swap log, read back: {"attempts": {"live_to_prev": 1, "staging_to_live": 1}, "error": null, "mode": "nightly", "outcome": "ok", "reached": "staging_to_live", "run_id": "20261101T142548Z", "time": "2026-11-01T14:28:16.134779+00:00"}
+
+Run records: carried 121 of 121, plus tonight's: 20261101T142548Z.json.
+  compared /home/runner/work/tonyquintanilla.github.io/tonyquintanilla.github.io/data/solar-system/raw/runs
+  with     /home/runner/work/tonyquintanilla.github.io/tonyquintanilla.github.io/data/solar-system.prev/raw/runs
+
+======================================================================
+  DAILY RUN step 4 of 4: the maintenance run's night pass
+======================================================================
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  SKIP Module atlas              0.0s  not run tonight: writes
+                                    MODULE_ATLAS.md and
+                                    MODULE_INDEX.md, which are
+                                    documents; the night commits no
+                                    page or word (Tony's R1,
+                                    2026-10-25)
+  PASS Constants export pull     0.5s  no change to
+                                    data/constants_export.json,
+                                    data/constants_export.sha
+  PASS Config mirror             0.1s  no change to
+                                    data/objects_config.json
+  PASS Objects export pull       0.8s  no change to
+                                    data/objects_export.json,
+                                    data/objects_export.sha
+  PASS Objects mirror            0.1s  no change to
+                                    data/objects_config.json
+  PASS Drawings pull             1.4s  no change to
+                                    data/drawings/hills_cloud.json,
+                                    data/drawings/van_allen_belts.json,
+                                    data/drawings/earth_exosphere.json,
+                                    data/drawings/pulled_at.sha
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite      16.5s  PASS (498 checks, 0 failures)
+  PASS Pole of date              0.1s  POLE OF DATE: all 11 checks passed
+                                    (frame angle, orrery, ERFA, block
+                                    checker, and each shown able to
+                                    fail).
+  PASS Mirror suite              0.1s  All 77 mirror checks passed:
+                                    served, spelling, relabel refused
+                                    and accepted, conflict refused,
+                                    definition as exactly 1, fallback
+                                    and absent named, no-slot refused,
+                                    five shapes, formatting kept,
+                                    idempotent, report writes nothing,
+                                    uncertainty written as served,
+                                    Earth's pole served, print count
+                                    written as served, "in" written as
+                                    served and a slot served in
+                                    another unit from it, and the
+                                    citation written as served, a
+                                    website-only citation named, an
+                                    old export refused.
+  PASS Store writer suite       26.6s  All 469 store-writer checks
+                                    passed: an allow list that lets
+                                    through only a shell's words, a
+                                    belt's words and the arrival
+                                    settings, the rooms section's
+                                    included; a no-edit round trip;
+                                    one line per change; empty words
+                                    handled; a refused batch writing
+                                    nothing; awkward text; and the
+                                    shell list matching the cache
+                                    check's rule.
+  PASS Store editor suite        0.2s  All 377 store-editor checks
+                                    passed: every box the form offers
+                                    is one the writer allows; the word
+                                    list and the tick list differ by
+                                    the belts, on purpose; nothing
+                                    typed saves nothing; the save
+                                    message does not promise a visitor
+                                    sees what they cannot yet; and a
+                                    red Cache in step is explained
+                                    rather than just shown.
+  PASS Objects mirror suite      0.1s  MIRROR OBJECTS SUITE: pass
+  PASS Objects mirror check      0.1s  OBJECTS MIRROR: pass
+  PASS Config mirror check       0.1s  Every served link holds the
+                                    export's value, unit, figure count
+                                    and citation; 179 link(s)
+                                    compared, 174 citation(s) word for
+                                    word, 5 declared with none, 3 not
+                                    served; store 0c1e4bbe865a.
+  PASS Pull failures             0.1s  PULL FAILURES: all 16 checks
+                                    passed (3 pulls x 3 ways to fail,
+                                    the run after a failed pull, the
+                                    run's token to GitHub's interface
+                                    only, and 5 planted faults caught)
+  PASS Horizons confirmations    0.0s  HORIZONS CONFIRMATIONS: pass -- 90
+                                    of 90 confirmed, and 63 periods,
+                                    within 30 days
+  PASS Pointer join              0.1s  Every link is accounted for: 182
+                                    link(s) against orrery 0c0bac8a, 1
+                                    fallback named; read check: 66 of
+                                    66 measured rows reached carry a
+                                    read.
+  PASS Cache in step             0.1s  The served cache holds the
+                                    config's 95 object(s) and their
+                                    features exactly: 4 object(s) with
+                                    34 named shell(s), in both cache
+                                    files.
+  PASS Drawn orbit               0.5s  DRAWN ORBIT: pass -- 18 checks,
+                                    every planted fault caught
+  PASS Drawings                  0.5s  DRAWINGS: PASS -- 34 of 34 planted
+                                    faults caught; pulled at orrery
+                                    0c0bac8a; earth_exosphere 1500
+                                    dots, round, sha256 6112639fb2cd;
+                                    galactic_tide 5000 dots, about the
+                                    galactic pole, sha256
+                                    950a7511f0b5; hills_cloud 3600
+                                    dots, tilt 31.0 deg, sha256
+                                    4d3e85616645; main_belt 6000 dots,
+                                    tilt 0.2 deg, sha256 712caffec391;
+                                    outer_oort_cloud 2736 dots,
+                                    between its edges, sha256
+                                    2f7ab88ee113; sun_corona 2500
+                                    dots, round, sha256 e2b57ccbc8a4;
+                                    van_allen_belts 3200 dots, tilt
+                                    0.4 deg, sha256 75274e84f840;
+                                    zodiacal_dust 3000 dots, tilt 2.8
+                                    deg, sha256 995f13a056e8
+  PASS Collapsed features        0.0s  32 stored as themselves, 16
+                                    collapsed, 0 unclassified.
+  PASS Feature renderers         0.2s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.1s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.2s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.1s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.1s  === ALL CHECKS PASSED ===
+  PASS Typed facts               0.2s  TYPED FACTS: PASS -- 0 typed facts
+                                    in the Sun and Earth rooms; 17
+                                    number line(s), 28 of 28 allowed
+                                    sentence(s) seen, 0 held open
+                                    (L-451); 26 word field(s) masked.
+  PASS Typed numbers             0.2s  TYPED NUMBERS: PASS -- 0 typed
+                                    numbers in the Sun and Earth
+                                    rooms' served words; 315 number(s)
+                                    masked, 8 held.
+  PASS Arrival                   0.2s  Arrival: both rooms open on the
+                                    right things; every shell trace
+                                    carries its key; the fallback with
+                                    no arrival block is unchanged.
+  FAIL Display figures           0.2s  FAIL: 2 finding(s); the lines
+                                    above name every one.
+  PASS Solar System figures      0.1s  === PASS: 8 worked cases, 64
+                                    drawer rows matched to their
+                                    accuracy rows, 63 served
+                                    distances; Uranus, Neptune and
+                                    Pluto print to JPL's ten-thousands
+                                    place; 6 period cases and 63
+                                    served periods printed as the
+                                    orrery printed them; 5 orbit-line
+                                    cases and 63 served orbit lines; 3
+                                    path cases and 26 served paths,
+                                    spacecraft and comets ===
+  PASS Far lines                 0.1s  === PASS: far lines are cut to the
+                                    view's box ===
+  PASS Direction arrows          0.0s  === PASS: the arrows point the way
+                                    the points run, sit ahead of the
+                                    body, stay in the view, and the
+                                    page places them ===
+  PASS Solar System drawer       0.0s  === PASS: the Sun is never ticked,
+                                    every row and group is listed, the
+                                    handle names the last body ticked,
+                                    nothing ticks many bodies at once
+                                    but a spacecraft with its
+                                    companions, rooms are offered only
+                                    where they exist, groups fold and
+                                    reset their bodies, the count line
+                                    counts ticked bodies outside the
+                                    view, a search finds a body by any
+                                    of its names and a group by its
+                                    label or words, and the page asks
+                                    this file ===
+  PASS Source list               0.1s  === PASS: the i panel's sources
+                                    are a list, every address a link,
+                                    and its words are one sentence to
+                                    a bullet ===
+  PASS Drawer order              0.1s  === DRAWER ORDER: both rooms list
+                                    their shells where each begins;
+                                    self-test red twice
+  PASS Drawn ends                0.2s  === DRAWN ENDS: every drawing
+                                    starts and stops on a served row
+                                    or a held end; self-test red three
+                                    times
+  PASS Label words               0.2s  === LABEL WORDS: all 34 shell rows
+                                    in both rooms open their own
+                                    feature's words; 5 stored
+                                    drawings' crosses stand off the
+                                    axis lines; self-test red twice
+  PASS Guest book                0.0s  === GUEST BOOK: all 8 checks
+                                    passed
+  PASS Guest book updater        0.1s  === GUEST BOOK UPDATER: all 49
+                                    checks passed (8 scripted runs,
+                                    self-test first)
+  PASS Daily run steps           0.1s  === DAILY RUN: all 4 step scripts
+                                    found; the pull-match and night
+                                    checks passed 32 of 32 fixture
+                                    checks (L-461, L-485)
+  PASS Artifact 1 assembler      0.1s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.0s  RESULT: no sibling directories and
+                                    nothing in data/ the builder did
+                                    not make.
+
+======================================================================
+  1 of 36 gating checkers FAILED
+  Display figures
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: no sibling directories and
+  last swap 2026-11-01T14:28:16.134779+00:00: succeeded first time
+======================================================================
+
+----------------------------------------------------------------------
+Display figures -- FAIL: 2 finding(s); the lines above name every one.
+----------------------------------------------------------------------
+=== L-342: the figures a hover shows ===
+
+Self-test: the rules and the graders go red on demand (21 ways).
+
+Read the served cache data/solar-system/coverage_index.json, and
+the config beside it, and built every hover both give.
+
+Examined 61 hover(s) and 310 number(s).
+  14 Earth hover(s) graded against the figure rules and the
+  manifest's acceptance table:
+      Earth: Crust
+      Earth: Exosphere / Geocorona (hydrogen halo)
+      Earth: Geostationary Belt (GEO)
+      Earth: Hill Sphere (gravitational dominance over the Sun)
+      Earth: Inner Core
+      Earth: Low Earth Orbit, inner edge
+      Earth: Low Earth Orbit, outer edge
+      Earth: Lower Atmosphere (to the stratopause)
+      Earth: Lower Mantle
+      Earth: Outer Core
+      Earth: Rotation Axis and Equator (the rotation period)
+      Earth: Rotation Axis and Equator (the tilt of date)
+      Earth: Sun Direction (the orbital period, fetched)
+      Earth: Upper Atmosphere (to the thermopause)
+      Earth: Upper Mantle
+  7 hover(s) graded line by line against the approved C2 wording:
+      Earth: Bow Shock
+      Earth: Inner Radiation Belt
+      Earth: Magnetopause
+      Earth: Magnetotail
+      Earth: Outer Radiation Belt
+      Sun: Chromosphere (2,000 km skin)
+      Sun: Photosphere
+  47 hover(s) held byte for byte against the fixture recorded at
+  gallery 7a4a03a8, the hovers graded by line among them.
+  1 served AU printed in full because three figures would round a tie: Earth: Inner Core.
+  52 hover(s) compared between the cache and the config, in every room (all agree).
+
+Findings:
+   -- Earth: Inner Radiation Belt: the hover does not carry the approved line
+        = 9,600 km (0.00006 AU)
+   -- "earth/Earth: Inner Radiation Belt" carries no declared count and its hover changed.
+      was: Earth: Inner Radiation Belt<br><br>A belt of trapped charged particles, mostly protons, held by Earth's<br soft>magnetic
+      now: Earth: Inner Radiation Belt<br><br>A belt of trapped charged particles, mostly protons, held by Earth's<br soft>magnetic
+FAIL: 2 finding(s); the lines above name every one.
+  NIGHT: skipped by name -- Module atlas (writes MODULE_ATLAS.md and MODULE_INDEX.md, which are documents; the night commits no page or word (Tony's R1, 2026-10-25))
+
+======================================================================
+  THE NIGHT -- summary
+======================================================================
+  Guest book updater             skipped: his morning's                   0.0s
+  Pulls from the orrery          ok                                       3.7s
+  Pull matches push (runner)     ok                                       0.0s
+  Cache builder                  exit 0                                 149.0s
+  Run records                    ok                                       0.0s
+  Maintenance run, night pass    exit 1                                  50.7s
+
+  Nothing is to be committed: the site keeps serving the previous
+  cache, and tomorrow's run tries again. This log is the record.
+======================================================================
+NIGHT RUN: RED -- the maintenance run's night pass failed (a gating checker or a generator; scroll up) (205 seconds)
+Error: Process completed with exit code 1.
+0s
+1s
+Run gh workflow enable nightly.yml
+0s
+0s
+Post job cleanup.
+/usr/bin/git version
+git version 2.56.0
+Temporarily overriding HOME='/home/runner/work/_temp/958db741-af2f-43f8-a291-b0ba61c8810a' before making global git config changes
+Adding repository directory to the temporary git global config as a safe directory
+/usr/bin/git config --global --add safe.directory /home/runner/work/tonyquintanilla.github.io/tonyquintanilla.github.io
+Removing SSH command configuration
+/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Removing HTTP extra header
+/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Removing includeIf entries pointing to credentials config files
+/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+includeif.gitdir:/home/runner/work/tonyquintanilla.github.io/tonyquintanilla.github.io/.git.path
+includeif.gitdir:/home/runner/work/tonyquintanilla.github.io/tonyquintanilla.github.io/.git/worktrees/*.path
+includeif.gitdir:/github/workspace/.git.path
+includeif.gitdir:/github/workspace/.git/worktrees/*.path
+/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/tonyquintanilla.github.io/tonyquintanilla.github.io/.git.path
+/home/runner/work/_temp/git-credentials-29a55aab-2faf-45d9-9578-6dcdc2b8060e.config
+/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/tonyquintanilla.github.io/tonyquintanilla.github.io/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-29a55aab\-2faf\-45d9\-9578\-6dcdc2b8060e\.config
+/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/tonyquintanilla.github.io/tonyquintanilla.github.io/.git/worktrees/*.path
+/home/runner/work/_temp/git-credentials-29a55aab-2faf-45d9-9578-6dcdc2b8060e.config
+/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/tonyquintanilla.github.io/tonyquintanilla.github.io/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-29a55aab\-2faf\-45d9\-9578\-6dcdc2b8060e\.config
+/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+/github/runner_temp/git-credentials-29a55aab-2faf-45d9-9578-6dcdc2b8060e.config
+/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-29a55aab\-2faf\-45d9\-9578\-6dcdc2b8060e\.config
+/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+/github/runner_temp/git-credentials-29a55aab-2faf-45d9-9578-6dcdc2b8060e.config
+/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-29a55aab\-2faf\-45d9\-9578\-6dcdc2b8060e\.config
+/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Removing credentials config '/home/runner/work/_temp/git-credentials-29a55aab-2faf-45d9-9578-6dcdc2b8060e.config'
+0s
+Cleaning up orphan processes
+
+====================================================
+
+The cause is confirmed and the fix is small, but it has two parts, so it is a short gallery Code session rather than a line you edit by hand. I'll write its brief now.
+
+The brief is in your orrery documentation folder: `COORD_L484_gallery_display_figures_brief_20261101.md`.
+
+**What went wrong, in one sentence:** the website's own Display figures check pins the inner Van Allen belt's sentence as "= 9,600 km (0.00006 AU)", and after the rounding fix the room builds "= 10,000 km", so the check went red and the night refused to commit, exactly as it is built to. Nothing is wrong with the fix or the site; a pin was not moved with the number. Neither the orrery session nor I looked for the old number in the website's checks before the push, and the brief records that as the lesson.
+
+**The fix** is two parts, both in the gallery: move the pin to the line the room now builds, and re-record the check's hover fixture under a new name, by that file's own convention. The recording has to be made from a cache built on the new export, so the gallery's Daily Run comes first. It is a short Code session.
+
+Run order:
+1. In GitHub Desktop, Pull origin on the orrery (two small bot commits, the night's records); nothing to pull on the website.
+2. Open a Claude Code session through the python_work door and paste:
+
+   > Gallery repository. Please build from ..\palomas_orrery_for_github\documentation\COORD_L484_gallery_display_figures_brief_20261101.md: the Display figures pin and its hover fixture after the orrery's rounding fix. Read the brief first, then section 1 of the orrery brief it names.
+
+3. Paste me its report; then commit and push the gallery, fire the website's run by hand from its Actions tab, and look at the two text boxes on your phone.
+
+Tony-action rollup:
+- (do) Pull origin on the orrery; the gallery Code session; its run order.
+- (decide) Nothing.
