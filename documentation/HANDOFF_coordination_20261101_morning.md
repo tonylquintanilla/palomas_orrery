@@ -1,7 +1,7 @@
 <!-- Doc-Kind: hand | Addendum from the coordinating session of Oct 31 to Nov 1, 2026 (Claude Fable 5.1): the morning after the orrery session: both schedules fired seven hours late, the website's night refused a cache whose words did not match a pin, the pin moved, both nights clean. Zero code. -->
 # Coordination handoff addendum: November 1, 2026, morning
 
-Tony Quintanilla, PE | Claude Fable 5.1 (coordinating session) | November 1, 2026, 10:30
+Tony Quintanilla, PE | Claude Fable 5.1 (coordinating session) | November 1, 2026, 10:30; section 2b added 12:10
 
 Built on orrery 15d7f7e219e540c3e3de6a936e5417421c4d1261 at
 https://github.com/tonylquintanilla/palomas_orrery (branch main) and
@@ -74,6 +74,34 @@ this morning. Both sessions' own accounts are on L-484 and L-485.
   16:20: "all 52 files served, but 27 differ from the working copy",
   because the night's commit had rebuilt the cache on GitHub after his
   own 15:29 build. Pull origin on the website resolves it; not a fault.
+
+## 2b. Tony's rulings at noon, Nov 1 (12:04 to 12:07 Chicago)
+
+- **The backstop: yes.** Both schedules keep their times (07:17 UTC the
+  orrery, 08:17 the website) and each gains a second scheduled line,
+  11:17 UTC for the orrery and 12:17 for the website, so a night GitHub
+  drops is caught the same day. The concurrency group makes a second
+  firing harmless; a clean second run commits only its record.
+- **No reschedule.** Tony asked whether to move the times given the
+  lag (his workday ends by about 06:00 UTC at the latest). Put to him
+  and confirmed: the lag is GitHub's and not the clock's, the times are
+  already right relative to his day (after his last push, before his
+  morning when on time), and the backstop covers the failure that
+  matters. The morning routine gains one sentence: pull first, do not
+  wait for the run; a run that lands later in the day comes with the
+  next Pull origin.
+- **Where it is built:** the orrery's line rides the comet-pins session
+  (section 4 of `COORD_L485_orrery_rounding_hold_pins_brief_20261031.md`,
+  the next orrery session's); the website's line rides the next gallery
+  session (the ruler build, or the hold's website half, whichever is
+  first). Each is one line in its workflow file with a comment naming
+  L-485 and this ruling; the sentence on the morning routine goes to
+  Where We Are's "Needs you now" and, at its next version, the
+  gallery-cache-builder skill's Daily Run section.
+- **The order of work, recommended and not objected to:** the comet
+  pins as a short orrery session this week; the ruler build next
+  weekend; then the hold's website half with CAP; the rest of the queue
+  as the night handoff has it.
 
 ## 3. Owed
 
