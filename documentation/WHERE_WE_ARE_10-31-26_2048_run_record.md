@@ -133,7 +133,7 @@ Not urgent, in your order:
 
 **Tony**: Run record:
 
-**Session: OPEN: 10-31-26 2055: Fable: Coordination session handoff L485**
+**Session: DONE: 11-1-26 1207: Fable: Coordination session handoff L485**
 
 Writing the brief now; it goes into your orrery documentation folder when it is done.
 

@@ -137,9 +137,101 @@ I'll read both repositories live first, so the outline starts from what GitHub a
 
 Read live a minute ago (19:00 UTC): gallery at b6574a0, as the addendum says; orrery at 6609363, two commits past it — your "handoff" push (3eb9314, 10:30) and a run-record edit (6609363, 11:52).
 
-**One thing to fix before anything else.** The committed addendum is the 10:30 version: 94 lines, no section 2b. The copy you attached is 122 lines and carries your noon rulings (the backstop, no reschedule, the order of work). So the rulings exist only in your folder. Commit and push the orrery once more; otherwise the next session reads GitHub and never sees them.
+**One thing to fix before anything else.** The committed addendum is the 10:30 version: 94 lines, no section 2b. The copy you attached is 122 lines and carries your noon rulings (the backstop, no reschedule, the order of work). So the rulings exist only in your folder. Commit and push the orrery once more; otherwise the next session reads GitHub and never sees them. -- 8f851c15cefb9ff0111ed1c622e47e48b5910396
 
 **Where things stand.** Everything the addendum owed is done except that push: the website is pulled at b6574a0, both nights are clean, the phone said yes twice. L-503 (the belt's cloud) was written to close on that phone look, so it is closed in fact and only needs the next orrery session to say so in the ledger. One small loop still open: your live pass at 16:20 reported 27 STALE because you had not yet pulled. Now that you have, run it once more from the dashboard; it should read all 52 served and matching, which is the L-461 cause confirmed rather than assumed.
+
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 52 files from https://palomasorrery.com/
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches the working copy
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+    SERVED   gallery/arrival.js                             matches the working copy
+    SERVED   gallery/nav_cluster.js                         matches the working copy
+    SERVED   gallery/solar_system_figures.js                matches the working copy
+    SERVED   gallery/solar_system_drawer.js                 matches the working copy
+    SERVED   data/objects_config.json                       matches the working copy
+    SERVED   gallery/guestbook.js                           matches the working copy
+    SERVED   data/guestbook.json                            matches the working copy
+    SERVED   data/solar-system/drawings/hills_cloud.json    matches the working copy
+    SERVED   data/solar-system/drawings/van_allen_belts.json matches the working copy
+    SERVED   data/solar-system/drawings/earth_exosphere.json matches the working copy
+    SERVED   data/solar-system/drawings/sun_corona.json     matches the working copy
+    SERVED   data/solar-system/drawings/zodiacal_dust.json  matches the working copy
+    SERVED   data/solar-system/drawings/outer_oort_cloud.json matches the working copy
+    SERVED   data/solar-system/drawings/galactic_tide.json  matches the working copy
+    SERVED   gallery/source_list.js                         matches the working copy
+    SERVED   gallery/far_lines.js                           matches the working copy
+    SERVED   gallery/direction_arrows.js                    matches the working copy
+    SERVED   gallery/drawer_order.js                        matches the working copy
+    SERVED   gallery/text_box.js                            matches the working copy
+    SERVED   data/solar-system/positions/voyager_2.json     matches the working copy
+    SERVED   data/solar-system/positions/new_horizons.json  matches the working copy
+    SERVED   data/solar-system/positions/juno.json          matches the working copy
+    SERVED   data/solar-system/positions/osiris_apex.json   matches the working copy
+    SERVED   data/solar-system/positions/parker_solar_probe.json matches the working copy
+    SERVED   data/solar-system/positions/bepicolombo.json   matches the working copy
+    SERVED   data/solar-system/positions/solar_orbiter.json matches the working copy
+    SERVED   data/solar-system/positions/lucy.json          matches the working copy
+    SERVED   data/solar-system/positions/juice.json         matches the working copy
+    SERVED   data/solar-system/positions/psyche_spacecraft.json matches the working copy
+    SERVED   data/solar-system/positions/europa_clipper.json matches the working copy
+    SERVED   data/solar-system/positions/wierzchos.json     matches the working copy
+    SERVED   data/solar-system/positions/west.json          matches the working copy
+    SERVED   data/solar-system/positions/mcnaught.json      matches the working copy
+    SERVED   data/solar-system/positions/tsuchinshan_atlas.json matches the working copy
+    SERVED   data/solar-system/positions/atlas_2024_g3.json matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1.json      matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1_b.json    matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1_c.json    matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1_d.json    matches the working copy
+    SERVED   data/solar-system/positions/panstarrs_2025_r3.json matches the working copy
+    SERVED   data/solar-system/positions/borisov_2025_v1.json matches the working copy
+    SERVED   data/solar-system/positions/oumuamua.json      matches the working copy
+    SERVED   data/solar-system/positions/borisov_2i.json    matches the working copy
+    SERVED   data/solar-system/positions/atlas_3i.json      matches the working copy
+
+  PASS Served reachability       9.4s  all 52 files served and
+                                    byte-identical to the working copy
+
+  orrery export pinned at 15d7f7e2
+
+  PASS Export freshness          0.4s  the served export is the orrery's
+                                    at 15d7f7e2, byte for byte
+
+  orrery HEAD 8f851c15
+  examining 3 of 182 links; the other 179 are served from the export
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  3 pointers: 1 match, 0 DRIFT, 0 UNIT MISMATCH, 2 could not be examined.
+
+  PASS Store drift               1.9s  3 pointers against orrery 8f851c15
+                                    -- 1 match, 0 DRIFT, 0 UNIT
+                                    MISMATCH, 2 could not be examined.
+
+======================================================================
+  2 of 2 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Store drift            3 pointers against orrery 8f851c15 -- 1
+  last swap 2026-11-01T16:14:29.793918+00:00: succeeded first time
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 
 **The next steps, in the order you ruled at noon:**
 
@@ -154,7 +246,46 @@ Read live a minute ago (19:00 UTC): gallery at b6574a0, as the addendum says; or
 **Mornings this week, unchanged plus one sentence:** both Actions tabs, note the start times, Pull origin on both, pull first and do not wait for a late run. Until the backstop is built (step 1 for the orrery, step 2 for the website), a dropped night is still possible; a late one comes with the next pull.
 
 Tony-action rollup:
-- (do) Commit and push the orrery with the addendum's section 2b.
-- (do) The live pass once more, now that the website is pulled.
+- (do) Commit and push the orrery with the addendum's section 2b. -- done
+- (do) The live pass once more, now that the website is pulled. -- done
 - (do) Mornings as above.
-- (decide) Whether I write the comet-pins brief now, or when you are ready to run that session this week.
+- (decide) Whether I write the comet-pins brief now, or when you are ready to run that session this week. -- proceed
+
+=============================================================================
+
+Writing the brief now. First the ground: both repositories at HEAD, so the brief's line numbers are the repo's today and not Oct 31's.
+
+The shell's allowlist refuses JPL, as expected; the fetch tool reads the API's plain text answer.
+
+Ground read, before the writing. Three things you should know now rather than in the brief:
+
+1. **Two skill bumps in one session is allowed.** The protocol's "ONE skill bump, one version" in v3.119 counts protocol versions, not skills: v3.118 bumped four skills under one version. So the session can take horizons-orbital-mechanics to 1.14 and gallery-cache-builder to 1.16 under v3.120.
+2. **JPL could not be read fresh from here today.** My fetch tool returned the six CAP answers with JPL's own clock reading "2026-Oct-31 19:05" in the header, the same second as the Oct 31 fetch, whatever I changed in the address; a NOFRAG form came back dated Oct 3. These are cached copies, so the Oct 31 answers stand as the latest fresh read, and the session's own test through the orrery's code (the brief's 4.4) is the fresh one. That goes in the brief as fact, and in the handoff as a rule for coordinating sessions: read JPL's clock in the header before calling an answer live.
+3. **The hold changed the ground under section 4.** As built, an apparition change would be HELD (the `pin` kind is in HOLD_FIELDS); your ruling makes it a VALUE, taken. The brief rebases 4.6 on `horizons_check.py` at HEAD: a designation branch, the apparition change routed into the take, and the export serving the record JPL named at the last confirmation. One method choice I'm writing in for you to overturn: the six comets are asked every night (six queries), not every 30 days, so the record number the website asks is never more than a night old.
+
+Writing now.
+
+Both files pass the gate (ASCII, LF) and the spot-checked line numbers hold. Now placing them in your orrery documentation folder.
+
+The brief and a short afternoon handoff are in your orrery documentation folder (27,795 and 6,668 bytes; ASCII, LF; every line number read from orrery 8f851c15 and gallery b6574a0).
+
+**The brief** (`COORD_L470_orrery_comet_pins_backstop_brief_20261101.md`, 458 lines) gives one orrery session four things in order: the workflow's backstop line (one line, 11:17 UTC, with the comment naming your ruling); L-484's lesson into gallery-cache-builder 1.16 with the morning sentence; L-503 closed on your phone look; then the comet pins, which it may stop before if the room runs out. Section 4 is the Oct 31 section rebased on the hold as built: the pinned branch becomes a designation branch asking `DES=<d>;CAP`, an apparition change is routed into the take and logged "TAKEN encke.apparition: 90000091 -> <new>", and the export keeps serving the record JPL named, so the website's builder keeps working. Proof is the export diff, as the rounding was proved. No website pin moves; I grepped the gallery's checks for the six numbers.
+
+**Two things in it you should know.** The method choice written for you to overturn: the six comets are asked every night, not every 30 days, so the record number the website asks is never more than a night old; six queries. And the website's config carries six `notes` that will describe the orrery wrongly after the switch; that goes to the gallery session with the website's CAP.
+
+**The handoff** (`HANDOFF_coordination_20261101_afternoon.md`) records the cached-copy finding as a rule for coordinating sessions (read JPL's clock in the header before calling an answer live) and a second one: a hold built a day before the ruling that governs it can contradict it quietly, so the next brief re-reads the mechanism as built.
+
+Run order:
+1. Commit and push the orrery with the two files and your run record (GitHub Desktop; Pull origin first if it shows a number). -- 
+2. When you want the build this week, open a Claude Code session through the python_work door and paste:
+
+   > Orrery repository. Please build from documentation/COORD_L470_orrery_comet_pins_backstop_brief_20261101.md: the workflow's backstop line first, then the lesson into gallery-cache-builder, then L-503's close, then the comet pins if there is room. Read the brief, the Oct 31 brief's sections 3 and 4 it names, and the two coordination handoffs of Nov 1 first.
+
+3. Paste me its report before you commit; the one choice to confirm or overturn is in its 4.6.
+
+Tony-action rollup:
+- (do) Commit and push the orrery with the brief and the handoff.
+- (do) The orrery session, when you choose this week; mornings as the noon ruling has them.
+- (decide) Nothing today.
+
+Not committing or pushing: those are yours under the orrery's CLAUDE.md.
