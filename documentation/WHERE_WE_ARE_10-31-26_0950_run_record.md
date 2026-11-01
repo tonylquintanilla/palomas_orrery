@@ -156,7 +156,7 @@ Not committing or pushing: commit and push are Tony's under the orrery's CLAUDE.
 
 ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-**Session: OPEN: 10-31-26 0952: Fable: Coordination session handoff**
+**Session: DONE: 10-31-26 2044: Fable: Coordination session handoff**
 
 Base recorded: your orrery folder and GitHub both stand at 94d87a3a (the handoff commit), and the gallery at 981198c8 on both sides. Nothing is waiting uncommitted that I can see from here.
 
