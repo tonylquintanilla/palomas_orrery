@@ -413,3 +413,512 @@ What to look for in the morning, in order:
 - The dashboard: two nightly lines, both within a day.
 
 If either run is red, its log is the record; send me the last line and we read it together.
+
+======================================================
+
+I'll read both repositories and both Actions histories from GitHub's API directly.
+
+You're right, and I can see why from GitHub's own records: neither scheduled run has fired today. Both workflows are still "active", so nothing is switched off; GitHub simply has not started them.
+
+**What GitHub's history shows, read at 14:14 UTC:**
+- The orrery's nightly run has three runs in all: two by hand on Oct 30 and 31, and ONE scheduled run, yesterday, which GitHub started at 13:39 UTC, six hours and twenty minutes after its 07:17 time. Nothing today.
+- The website's nightly run has one run in all, yesterday's by hand at 18:24 UTC. Its 08:17 schedule has never fired yet, not yesterday (it did not exist then) and not today.
+- Your push landed: the orrery is at 0edcd788 on GitHub (your three commits of last night); the website is still at c1c578f5, so the new export has not reached the site.
+
+**Why, in GitHub's words**, from its page on workflow triggers, read this morning: "The schedule event can be delayed during periods of high loads of GitHub Actions workflow runs", and "If the load is sufficiently high enough, some queued jobs may be dropped." So a scheduled run is a best-effort promise, not a clock, and a late one and a dropped one look the same until it either arrives or does not. Yesterday's six-hour delay was the same thing; today's may still arrive, or may not.
+
+**What I suggest for now:** 
+1. fire both by hand from the Actions tabs, the orrery's first ("Run workflow", the tick box left off), -- started at 14:20 UTC. done in 2m 9s. 
+
+night
+succeeded 1 minute ago in 2m 5s
+Search logs
+1s
+Current runner version: '2.338.2'
+Runner Image Provisioner
+Operating System
+Runner Image
+GITHUB_TOKEN Permissions
+Secret source: Actions
+Cache mode: write
+Prepare workflow directory
+Prepare all required actions
+Getting action download info
+Download action repository 'actions/checkout@v7' (SHA:3d3c42e5aac5ba805825da76410c181273ba90b1)
+Download action repository 'actions/setup-python@v7' (SHA:6d4fd22b20465ccc0f7354476588e8df7c9ca0e0)
+Complete job name: night
+5s
+Run actions/checkout@v7
+Syncing repository: tonylquintanilla/palomas_orrery
+Getting Git version info
+Temporarily overriding HOME='/home/runner/work/_temp/57a41883-39dd-407a-9fb3-4756ef34954a' before making global git config changes
+Adding repository directory to the temporary git global config as a safe directory
+/usr/bin/git config --global --add safe.directory /home/runner/work/palomas_orrery/palomas_orrery
+Deleting the contents of '/home/runner/work/palomas_orrery/palomas_orrery'
+Determining repository object format
+Initializing the repository
+Disabling automatic garbage collection
+Setting up auth
+Fetching the repository
+Determining the checkout info
+/usr/bin/git sparse-checkout disable
+/usr/bin/git config --local --unset-all extensions.worktreeConfig
+Checking out the ref
+/usr/bin/git log -1 --format=%H
+b0acdea54ee7a3a8b65ed95a386dfd991ec8053a
+0s
+Run actions/setup-python@v7
+Installed versions
+42s
+Run python -m pip install -r requirements.txt
+Collecting numpy>=1.24.0 (from -r requirements.txt (line 35))
+  Downloading numpy-2.5.4-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (6.6 kB)
+Collecting pandas>=2.0.0 (from -r requirements.txt (line 36))
+  Downloading pandas-3.1.0-cp313-cp313-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl.metadata (18 kB)
+Collecting scipy>=1.11.0 (from -r requirements.txt (line 37))
+  Downloading scipy-1.18.1-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (62 kB)
+Collecting astropy>=5.3.4 (from -r requirements.txt (line 40))
+  Downloading astropy-8.0.2-cp311-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (11 kB)
+Collecting astroquery>=0.4.6 (from -r requirements.txt (line 41))
+  Downloading astroquery-0.4.11-py3-none-any.whl.metadata (6.5 kB)
+Collecting plotly>=5.18.0 (from -r requirements.txt (line 44))
+  Downloading plotly-7.1.0-py3-none-any.whl.metadata (8.8 kB)
+Collecting matplotlib>=3.7.0 (from -r requirements.txt (line 45))
+  Downloading matplotlib-3.11.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (80 kB)
+Collecting kaleido==0.2.1 (from -r requirements.txt (line 46))
+  Downloading kaleido-0.2.1-py2.py3-none-manylinux1_x86_64.whl.metadata (15 kB)
+Collecting pillow>=10.0.0 (from -r requirements.txt (line 49))
+  Downloading pillow-13.0.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (9.1 kB)
+Collecting simplekml>=1.3.6 (from -r requirements.txt (line 52))
+  Downloading simplekml-1.3.6.tar.gz (52 kB)
+  Installing build dependencies: started
+  Installing build dependencies: finished with status 'done'
+  Getting requirements to build wheel: started
+  Getting requirements to build wheel: finished with status 'done'
+  Preparing metadata (pyproject.toml): started
+  Preparing metadata (pyproject.toml): finished with status 'done'
+Collecting customtkinter>=5.2.0 (from -r requirements.txt (line 56))
+  Downloading customtkinter-6.0.0-py3-none-any.whl.metadata (698 bytes)
+Collecting ipython>=8.0.0 (from -r requirements.txt (line 61))
+  Downloading ipython-9.18.0-py3-none-any.whl.metadata (4.6 kB)
+Collecting python-dateutil>=2.8.2 (from -r requirements.txt (line 64))
+  Downloading python_dateutil-4.0.0-py3-none-any.whl.metadata (7.3 kB)
+Collecting pytz>=2023.3 (from -r requirements.txt (line 65))
+  Downloading pytz-2026.6-py2.py3-none-any.whl.metadata (22 kB)
+Collecting requests>=2.31.0 (from -r requirements.txt (line 68))
+  Downloading requests-2.34.2-py3-none-any.whl.metadata (4.8 kB)
+Collecting beautifulsoup4>=4.12.0 (from -r requirements.txt (line 69))
+  Downloading beautifulsoup4-4.15.0-py3-none-any.whl.metadata (3.8 kB)
+Collecting openpyxl>=3.1.0 (from -r requirements.txt (line 79))
+  Downloading openpyxl-3.1.5-py2.py3-none-any.whl.metadata (2.5 kB)
+Collecting lxml>=6.1.0 (from -r requirements.txt (line 80))
+  Downloading lxml-6.1.3-cp313-cp313-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl.metadata (3.3 kB)
+Collecting astropy-iers-data>=0.2026.9.28.0.59.37 (from astropy>=5.3.4->-r requirements.txt (line 40))
+  Downloading astropy_iers_data-0.2026.10.19.0.52.1-py3-none-any.whl.metadata (3.4 kB)
+Collecting packaging>=25.0 (from astropy>=5.3.4->-r requirements.txt (line 40))
+  Downloading packaging-26.3-py3-none-any.whl.metadata (3.5 kB)
+Collecting pyerfa>=2.0.1.3 (from astropy>=5.3.4->-r requirements.txt (line 40))
+  Downloading pyerfa-2.0.1.5-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl.metadata (5.7 kB)
+Collecting PyYAML>=6.0.0 (from astropy>=5.3.4->-r requirements.txt (line 40))
+  Downloading pyyaml-6.0.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (2.4 kB)
+Collecting html5lib>=0.999 (from astroquery>=0.4.6->-r requirements.txt (line 41))
+  Downloading html5lib-1.1-py2.py3-none-any.whl.metadata (16 kB)
+Collecting keyring>=15.0 (from astroquery>=0.4.6->-r requirements.txt (line 41))
+  Downloading keyring-25.7.0-py3-none-any.whl.metadata (21 kB)
+Collecting pyvo>=1.5 (from astroquery>=0.4.6->-r requirements.txt (line 41))
+  Downloading pyvo-1.9.1-py3-none-any.whl.metadata (4.2 kB)
+Collecting narwhals>=1.15.1 (from plotly>=5.18.0->-r requirements.txt (line 44))
+  Downloading narwhals-2.28.0-py3-none-any.whl.metadata (15 kB)
+Collecting contourpy>=1.0.1 (from matplotlib>=3.7.0->-r requirements.txt (line 45))
+  Downloading contourpy-1.4.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl.metadata (3.8 kB)
+Collecting cycler>=0.10 (from matplotlib>=3.7.0->-r requirements.txt (line 45))
+  Downloading cycler-0.12.1-py3-none-any.whl.metadata (3.8 kB)
+Collecting fonttools>=4.28.2 (from matplotlib>=3.7.0->-r requirements.txt (line 45))
+  Downloading fonttools-4.68.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (139 kB)
+Collecting kiwisolver>=1.3.1 (from matplotlib>=3.7.0->-r requirements.txt (line 45))
+  Downloading kiwisolver-1.5.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (5.2 kB)
+Collecting pyparsing>=3 (from matplotlib>=3.7.0->-r requirements.txt (line 45))
+  Downloading pyparsing-3.3.3-py3-none-any.whl.metadata (5.9 kB)
+Collecting darkdetect (from customtkinter>=5.2.0->-r requirements.txt (line 56))
+  Downloading darkdetect-0.8.0-py3-none-any.whl.metadata (3.6 kB)
+Collecting ipython-pygments-lexers>=1.0.0 (from ipython>=8.0.0->-r requirements.txt (line 61))
+  Downloading ipython_pygments_lexers-1.1.1-py3-none-any.whl.metadata (1.1 kB)
+Collecting jedi>=0.18.2 (from ipython>=8.0.0->-r requirements.txt (line 61))
+  Downloading jedi-0.20.1-py2.py3-none-any.whl.metadata (23 kB)
+Collecting matplotlib-inline>=0.1.6 (from ipython>=8.0.0->-r requirements.txt (line 61))
+  Downloading matplotlib_inline-0.2.2-py3-none-any.whl.metadata (2.4 kB)
+Collecting pexpect>4.6 (from ipython>=8.0.0->-r requirements.txt (line 61))
+  Downloading pexpect-4.9.0-py2.py3-none-any.whl.metadata (2.5 kB)
+Collecting prompt_toolkit<3.1.0,>=3.0.41 (from ipython>=8.0.0->-r requirements.txt (line 61))
+  Downloading prompt_toolkit-3.0.53-py3-none-any.whl.metadata (6.4 kB)
+Collecting psutil>=7 (from ipython>=8.0.0->-r requirements.txt (line 61))
+  Downloading psutil-7.2.2-cp36-abi3-manylinux2010_x86_64.manylinux_2_12_x86_64.manylinux_2_28_x86_64.whl.metadata (22 kB)
+Collecting pygments>=2.14.0 (from ipython>=8.0.0->-r requirements.txt (line 61))
+  Downloading pygments-2.21.0-py3-none-any.whl.metadata (2.5 kB)
+Collecting stack_data>=0.6.0 (from ipython>=8.0.0->-r requirements.txt (line 61))
+  Downloading stack_data-0.6.3-py3-none-any.whl.metadata (18 kB)
+Collecting traitlets>=5.13.0 (from ipython>=8.0.0->-r requirements.txt (line 61))
+  Downloading traitlets-5.16.1-py3-none-any.whl.metadata (10 kB)
+Collecting wcwidth>=0.1.4 (from prompt_toolkit<3.1.0,>=3.0.41->ipython>=8.0.0->-r requirements.txt (line 61))
+  Downloading wcwidth-0.9.4-cp310-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (23 kB)
+Collecting tzdata (from python-dateutil>=2.8.2->-r requirements.txt (line 64))
+  Downloading tzdata-2026.6-py2.py3-none-any.whl.metadata (1.4 kB)
+Collecting charset_normalizer<4,>=2 (from requests>=2.31.0->-r requirements.txt (line 68))
+  Downloading charset_normalizer-3.5.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl.metadata (46 kB)
+Collecting idna<4,>=2.5 (from requests>=2.31.0->-r requirements.txt (line 68))
+  Downloading idna-3.20-py3-none-any.whl.metadata (7.2 kB)
+Collecting urllib3<3,>=1.26 (from requests>=2.31.0->-r requirements.txt (line 68))
+  Downloading urllib3-2.8.0-py3-none-any.whl.metadata (7.4 kB)
+Collecting certifi>=2023.5.7 (from requests>=2.31.0->-r requirements.txt (line 68))
+  Downloading certifi-2026.10.23-py3-none-any.whl.metadata (2.5 kB)
+Collecting soupsieve>=1.6.1 (from beautifulsoup4>=4.12.0->-r requirements.txt (line 69))
+  Downloading soupsieve-3.0.4-py3-none-any.whl.metadata (4.4 kB)
+Collecting typing-extensions>=4.0.0 (from beautifulsoup4>=4.12.0->-r requirements.txt (line 69))
+  Downloading typing_extensions-4.16.0-py3-none-any.whl.metadata (3.3 kB)
+Collecting et-xmlfile (from openpyxl>=3.1.0->-r requirements.txt (line 79))
+  Downloading et_xmlfile-2.0.0-py3-none-any.whl.metadata (2.7 kB)
+Collecting six>=1.9 (from html5lib>=0.999->astroquery>=0.4.6->-r requirements.txt (line 41))
+  Downloading six-1.17.0-py2.py3-none-any.whl.metadata (1.7 kB)
+Collecting webencodings (from html5lib>=0.999->astroquery>=0.4.6->-r requirements.txt (line 41))
+  Downloading webencodings-0.6.1-py3-none-any.whl.metadata (3.4 kB)
+Collecting parso<0.9.0,>=0.8.7 (from jedi>=0.18.2->ipython>=8.0.0->-r requirements.txt (line 61))
+  Downloading parso-0.8.7-py2.py3-none-any.whl.metadata (8.2 kB)
+Collecting SecretStorage>=3.2 (from keyring>=15.0->astroquery>=0.4.6->-r requirements.txt (line 41))
+  Downloading secretstorage-3.5.0-py3-none-any.whl.metadata (4.0 kB)
+Collecting jeepney>=0.4.2 (from keyring>=15.0->astroquery>=0.4.6->-r requirements.txt (line 41))
+  Downloading jeepney-0.9.0-py3-none-any.whl.metadata (1.2 kB)
+Collecting jaraco.classes (from keyring>=15.0->astroquery>=0.4.6->-r requirements.txt (line 41))
+  Downloading jaraco.classes-3.4.0-py3-none-any.whl.metadata (2.6 kB)
+Collecting jaraco.functools (from keyring>=15.0->astroquery>=0.4.6->-r requirements.txt (line 41))
+  Downloading jaraco_functools-4.6.0-py3-none-any.whl.metadata (2.9 kB)
+Collecting jaraco.context (from keyring>=15.0->astroquery>=0.4.6->-r requirements.txt (line 41))
+  Downloading jaraco_context-6.1.2-py3-none-any.whl.metadata (4.2 kB)
+Collecting ptyprocess>=0.5 (from pexpect>4.6->ipython>=8.0.0->-r requirements.txt (line 61))
+  Downloading ptyprocess-0.7.0-py2.py3-none-any.whl.metadata (1.3 kB)
+Collecting cryptography>=2.0 (from SecretStorage>=3.2->keyring>=15.0->astroquery>=0.4.6->-r requirements.txt (line 41))
+  Downloading cryptography-50.0.2-cp311-abi3-manylinux_2_34_x86_64.whl.metadata (4.4 kB)
+Collecting cffi>=2.0.0 (from cryptography>=2.0->SecretStorage>=3.2->keyring>=15.0->astroquery>=0.4.6->-r requirements.txt (line 41))
+  Downloading cffi-2.1.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl.metadata (2.5 kB)
+Collecting pycparser (from cffi>=2.0.0->cryptography>=2.0->SecretStorage>=3.2->keyring>=15.0->astroquery>=0.4.6->-r requirements.txt (line 41))
+  Downloading pycparser-3.12-py3-none-any.whl.metadata (9.7 kB)
+Collecting executing>=1.2.0 (from stack_data>=0.6.0->ipython>=8.0.0->-r requirements.txt (line 61))
+  Downloading executing-2.3.0-py3-none-any.whl.metadata (9.1 kB)
+Collecting asttokens>=2.1.0 (from stack_data>=0.6.0->ipython>=8.0.0->-r requirements.txt (line 61))
+  Downloading asttokens-3.0.2-py3-none-any.whl.metadata (5.7 kB)
+Collecting pure-eval (from stack_data>=0.6.0->ipython>=8.0.0->-r requirements.txt (line 61))
+  Downloading pure_eval-0.2.4-py3-none-any.whl.metadata (6.4 kB)
+Collecting more-itertools (from jaraco.classes->keyring>=15.0->astroquery>=0.4.6->-r requirements.txt (line 41))
+  Downloading more_itertools-11.2.1-py3-none-any.whl.metadata (42 kB)
+Downloading kaleido-0.2.1-py2.py3-none-manylinux1_x86_64.whl (79.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 79.9/79.9 MB 52.1 MB/s  0:00:01
+Downloading numpy-2.5.4-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (16.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 16.7/16.7 MB 176.2 MB/s  0:00:00
+Downloading pandas-3.1.0-cp313-cp313-manylinux_2_24_x86_64.manylinux_2_28_x86_64.whl (12.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 12.0/12.0 MB 135.6 MB/s  0:00:00
+Downloading scipy-1.18.1-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (35.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 35.3/35.3 MB 253.0 MB/s  0:00:00
+Downloading astropy-8.0.2-cp311-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (10.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 10.4/10.4 MB 70.3 MB/s  0:00:00
+Downloading astroquery-0.4.11-py3-none-any.whl (11.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 11.1/11.1 MB 59.9 MB/s  0:00:00
+Downloading plotly-7.1.0-py3-none-any.whl (9.7 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.7/9.7 MB 274.0 MB/s  0:00:00
+Downloading matplotlib-3.11.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (9.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 9.9/9.9 MB 181.4 MB/s  0:00:00
+Downloading pillow-13.0.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (7.1 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 7.1/7.1 MB 304.5 MB/s  0:00:00
+Downloading customtkinter-6.0.0-py3-none-any.whl (302 kB)
+Downloading ipython-9.18.0-py3-none-any.whl (649 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 649.6/649.6 kB 128.8 MB/s  0:00:00
+Downloading prompt_toolkit-3.0.53-py3-none-any.whl (392 kB)
+Downloading python_dateutil-4.0.0-py3-none-any.whl (92 kB)
+Downloading pytz-2026.6-py2.py3-none-any.whl (506 kB)
+Downloading requests-2.34.2-py3-none-any.whl (73 kB)
+Downloading charset_normalizer-3.5.2-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (254 kB)
+Downloading idna-3.20-py3-none-any.whl (69 kB)
+Downloading urllib3-2.8.0-py3-none-any.whl (135 kB)
+Downloading beautifulsoup4-4.15.0-py3-none-any.whl (109 kB)
+Downloading openpyxl-3.1.5-py2.py3-none-any.whl (250 kB)
+Downloading lxml-6.1.3-cp313-cp313-manylinux_2_26_x86_64.manylinux_2_28_x86_64.whl (5.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.2/5.2 MB 141.5 MB/s  0:00:00
+Downloading astropy_iers_data-0.2026.10.19.0.52.1-py3-none-any.whl (2.0 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 2.0/2.0 MB 181.0 MB/s  0:00:00
+Downloading certifi-2026.10.23-py3-none-any.whl (135 kB)
+Downloading contourpy-1.4.0-cp313-cp313-manylinux_2_27_x86_64.manylinux_2_28_x86_64.whl (384 kB)
+Downloading cycler-0.12.1-py3-none-any.whl (8.3 kB)
+Downloading fonttools-4.68.0-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (5.4 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 5.4/5.4 MB 117.0 MB/s  0:00:00
+Downloading html5lib-1.1-py2.py3-none-any.whl (112 kB)
+Downloading ipython_pygments_lexers-1.1.1-py3-none-any.whl (8.1 kB)
+Downloading jedi-0.20.1-py2.py3-none-any.whl (4.9 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.9/4.9 MB 183.9 MB/s  0:00:00
+Downloading parso-0.8.7-py2.py3-none-any.whl (107 kB)
+Downloading keyring-25.7.0-py3-none-any.whl (39 kB)
+Downloading jeepney-0.9.0-py3-none-any.whl (49 kB)
+Downloading kiwisolver-1.5.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (1.5 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.5/1.5 MB 244.7 MB/s  0:00:00
+Downloading matplotlib_inline-0.2.2-py3-none-any.whl (9.5 kB)
+Downloading narwhals-2.28.0-py3-none-any.whl (490 kB)
+Downloading packaging-26.3-py3-none-any.whl (129 kB)
+Downloading pexpect-4.9.0-py2.py3-none-any.whl (63 kB)
+Downloading psutil-7.2.2-cp36-abi3-manylinux2010_x86_64.manylinux_2_12_x86_64.manylinux_2_28_x86_64.whl (155 kB)
+Downloading ptyprocess-0.7.0-py2.py3-none-any.whl (13 kB)
+Downloading pyerfa-2.0.1.5-cp39-abi3-manylinux_2_17_x86_64.manylinux2014_x86_64.whl (738 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 738.7/738.7 kB 132.5 MB/s  0:00:00
+Downloading pygments-2.21.0-py3-none-any.whl (1.3 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.3/1.3 MB 124.9 MB/s  0:00:00
+Downloading pyparsing-3.3.3-py3-none-any.whl (126 kB)
+Downloading pyvo-1.9.1-py3-none-any.whl (1.2 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 1.2/1.2 MB 67.6 MB/s  0:00:00
+Downloading pyyaml-6.0.3-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.manylinux_2_28_x86_64.whl (801 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 801.6/801.6 kB 164.7 MB/s  0:00:00
+Downloading secretstorage-3.5.0-py3-none-any.whl (15 kB)
+Downloading cryptography-50.0.2-cp311-abi3-manylinux_2_34_x86_64.whl (4.8 MB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 4.8/4.8 MB 161.6 MB/s  0:00:00
+Downloading cffi-2.1.1-cp313-cp313-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (221 kB)
+Downloading six-1.17.0-py2.py3-none-any.whl (11 kB)
+Downloading soupsieve-3.0.4-py3-none-any.whl (42 kB)
+Downloading stack_data-0.6.3-py3-none-any.whl (24 kB)
+Downloading asttokens-3.0.2-py3-none-any.whl (28 kB)
+Downloading executing-2.3.0-py3-none-any.whl (29 kB)
+Downloading traitlets-5.16.1-py3-none-any.whl (86 kB)
+Downloading typing_extensions-4.16.0-py3-none-any.whl (45 kB)
+Downloading wcwidth-0.9.4-cp310-abi3-manylinux2014_x86_64.manylinux_2_17_x86_64.whl (785 kB)
+   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ 785.9/785.9 kB 141.1 MB/s  0:00:00
+Downloading darkdetect-0.8.0-py3-none-any.whl (9.0 kB)
+Downloading et_xmlfile-2.0.0-py3-none-any.whl (18 kB)
+Downloading jaraco.classes-3.4.0-py3-none-any.whl (6.8 kB)
+Downloading jaraco_context-6.1.2-py3-none-any.whl (7.9 kB)
+Downloading jaraco_functools-4.6.0-py3-none-any.whl (11 kB)
+Downloading more_itertools-11.2.1-py3-none-any.whl (74 kB)
+Downloading pure_eval-0.2.4-py3-none-any.whl (11 kB)
+Downloading pycparser-3.12-py3-none-any.whl (62 kB)
+Downloading tzdata-2026.6-py2.py3-none-any.whl (348 kB)
+Downloading webencodings-0.6.1-py3-none-any.whl (8.7 kB)
+Building wheels for collected packages: simplekml
+  Building wheel for simplekml (pyproject.toml): started
+  Building wheel for simplekml (pyproject.toml): finished with status 'done'
+  Created wheel for simplekml: filename=simplekml-1.3.6-py3-none-any.whl size=65942 sha256=1d0c0fd55aa59b293420e9fc7226bdfff60b312579a66be4def96ef890b5d859
+  Stored in directory: /home/runner/.cache/pip/wheels/fd/2a/d1/84a7abdbb59566c442beb1b4fb946fe1e26c5a48fd1d5e0763
+Successfully built simplekml
+Installing collected packages: simplekml, pytz, pure-eval, ptyprocess, kaleido, webencodings, wcwidth, urllib3, tzdata, typing-extensions, traitlets, soupsieve, six, PyYAML, pyparsing, pygments, pycparser, psutil, pillow, pexpect, parso, packaging, numpy, narwhals, more-itertools, lxml, kiwisolver, jeepney, jaraco.context, idna, fonttools, executing, et-xmlfile, darkdetect, cycler, charset_normalizer, certifi, asttokens, astropy-iers-data, stack_data, scipy, requests, python-dateutil, pyerfa, prompt_toolkit, plotly, openpyxl, matplotlib-inline, jedi, jaraco.functools, jaraco.classes, ipython-pygments-lexers, html5lib, customtkinter, contourpy, cffi, beautifulsoup4, pandas, matplotlib, ipython, cryptography, astropy, SecretStorage, pyvo, keyring, astroquery
+
+Successfully installed PyYAML-6.0.3 SecretStorage-3.5.0 astropy-8.0.2 astropy-iers-data-0.2026.10.19.0.52.1 astroquery-0.4.11 asttokens-3.0.2 beautifulsoup4-4.15.0 certifi-2026.10.23 cffi-2.1.1 charset_normalizer-3.5.2 contourpy-1.4.0 cryptography-50.0.2 customtkinter-6.0.0 cycler-0.12.1 darkdetect-0.8.0 et-xmlfile-2.0.0 executing-2.3.0 fonttools-4.68.0 html5lib-1.1 idna-3.20 ipython-9.18.0 ipython-pygments-lexers-1.1.1 jaraco.classes-3.4.0 jaraco.context-6.1.2 jaraco.functools-4.6.0 jedi-0.20.1 jeepney-0.9.0 kaleido-0.2.1 keyring-25.7.0 kiwisolver-1.5.1 lxml-6.1.3 matplotlib-3.11.2 matplotlib-inline-0.2.2 more-itertools-11.2.1 narwhals-2.28.0 numpy-2.5.4 openpyxl-3.1.5 packaging-26.3 pandas-3.1.0 parso-0.8.7 pexpect-4.9.0 pillow-13.0.0 plotly-7.1.0 prompt_toolkit-3.0.53 psutil-7.2.2 ptyprocess-0.7.0 pure-eval-0.2.4 pycparser-3.12 pyerfa-2.0.1.5 pygments-2.21.0 pyparsing-3.3.3 python-dateutil-4.0.0 pytz-2026.6 pyvo-1.9.1 requests-2.34.2 scipy-1.18.1 simplekml-1.3.6 six-1.17.0 soupsieve-3.0.4 stack_data-0.6.3 traitlets-5.16.1 typing-extensions-4.16.0 tzdata-2026.6 urllib3-2.8.0 wcwidth-0.9.4 webencodings-0.6.1
+1m 13s
+Run if [ "$EVENT" = "workflow_dispatch" ] && [ "$ASK_EVERYTHING" = "true" ]; then
+======================================================================
+MAINTENANCE RUN, THE NIGHT SET -- its generators, then its checkers (L-485)
+======================================================================
+  Provenance scan is current (last run 20261101T032357Z, 0 day(s) ago).
+
+THE NIGHT SET -- 14 rows run, 33 skipped (each named)
+----------------------------------------------------------------------
+  skipped Ledger index -- writes a document, not data the website pulls; the
+          night commits data only (R1)
+  skipped Skill manifest -- writes a document, not data the website pulls;
+          the night commits data only (R1)
+  skipped Module atlas -- writes a document, not data the website pulls; the
+          night commits data only (R1)
+  skipped Data inventory -- writes a document, not data the website pulls;
+          the night commits data only (R1)
+  skipped Exact rows report -- writes a document, not data the website
+          pulls; the night commits data only (R1)
+  skipped Document index -- writes a document, not data the website pulls;
+          the night commits data only (R1)
+  skipped Constants change -- reads a git diff of code, and at night no code
+          changes
+  skipped Constants relations -- judges code, and at night no code changes
+  skipped Derived figures -- judges code, and at night no code changes
+  skipped Constants rounding -- judges code, and at night no code changes
+  skipped Skill headers -- judges code, and at night no code changes
+  skipped Exact rows by the count -- judges code, and at night no code
+          changes
+  skipped Dimensions -- judges code, and at night no code changes
+  skipped Cross-check annotations -- judges code, and at night no code
+          changes
+  skipped Citation inheritance -- judges code, and at night no code changes
+  skipped Status lines -- judges code, and at night no code changes
+  skipped Row shape -- judges code, and at night no code changes
+  skipped Scanner recognition 1d/1e -- judges code, and at night no code
+          changes
+  skipped Scanner row run (L-414) -- judges code, and at night no code
+          changes
+  skipped Reset completeness -- opens the orrery's window
+  skipped Earth pole of date -- judges code, and at night no code changes
+  skipped Hills cloud sampler (L-421) -- judges code, and at night no code
+          changes
+  skipped Position digits (L-401) -- judges code, and at night no code
+          changes
+  skipped Orbit markers (L-431, L-401) -- judges code, and at night no code
+          changes
+  skipped Domain Split -- judges code, and at night no code changes
+  skipped Maintenance report (L-269) -- judges code, and at night no code
+          changes
+  skipped Dashboard parity -- judges the dashboard's code
+  skipped Worksheet checker -- judges code, and at night no code changes
+  skipped Worksheet checker tests -- judges code, and at night no code
+          changes
+  skipped Worksheet key round trip -- judges code, and at night no code
+          changes
+  skipped Builder marker join -- judges code, and at night no code changes
+  skipped Extractor pins -- judges code, and at night no code changes
+  skipped Provenance scanner -- judges code; its push gate runs at Tony's
+          push
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Constants export             1.5s  unchanged (1 checked, not written)
+  Period fetch                 0.2s  unchanged (1 checked, not written) --
+                                     NOTHING MISSING -- 90 served objects
+                                     examined, no query asked
+  Horizons check               0.2s  unchanged (2 checked, not written) --
+                                     NOTHING DUE -- 90 entries and 26 sheets
+                                     current, no query asked
+  Path plan                    0.2s  unchanged (1 checked, not written) -- 26
+                                     paths, events atlas_2024_g3 1, atlas_3i 1,
+                                     bepicolombo 35, borisov_2025_v1 1,
+                                     borisov_2i 1, c2025_k1 1, c2025_k1_b 1,
+                                     c2025_k1_c 1, c2025_k1_d 1, europa_clipper
+                                     5, juice 10, juno 4, lucy 7, mcnaught 1,
+                                     new_horizons 2, osiris_apex 13, oumuamua 1,
+                                     panstarrs_2025_r3 1, parker_solar_probe 49,
+                                     psyche_spacecraft 2, solar_orbiter 31,
+                                     tsuchinshan_atlas 1, voyager_1 2, voyager_2
+                                     5, west 1, wierzchos 1. Asked JPL for:
+                                     nothing.
+  Objects export               0.2s  unchanged (1 checked, not written)
+  Drawings export              1.8s  unchanged (8 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants export check       2.9s  Export matches the store: sha256
+                                     0c1e4bbe865a on both sides; 228 rows
+                                     re-read, 57 not exported, 45 tokens; 830
+                                     conversions re-computed, 12 of 12 worked
+                                     cases hold; 228 citations worked out again,
+                                     8 of 8 worked cases hold.
+  Objects export check         0.2s  pass
+  Horizons confirmations       0.2s  pass -- 90 of 90 entries and 63 periods
+                                     confirmed, 26 sheets read, within 30 days
+  Horizons check suite         0.5s  pass -- 81 checks, every planted fault
+                                     caught by name
+  Period fetch suite           2.0s  pass -- 39 checks, every planted fault
+                                     caught (22 planted, 8 of them for Earth's
+                                     period, L-445, 2 for Pluto's, L-443)
+  Path plan suite              2.2s  27 of 27 checks passed
+  Orbit cache                  1.5s  All 12 orbit cache tests passed: cache
+                                     loads, old formats convert, corrupted
+                                     entries are dropped; the clock reads UTC and
+                                     both forms of the fetched stamp read back;
+                                     nothing left behind.
+  Drawings export check       57.6s  PASS -- 22 of 22 planted faults caught;
+                                     hills_cloud 3600 dots, plane tilted 31.0
+                                     deg, sha256 4d3e85616645; van_allen_belts
+                                     3200 dots, no plane recorded, sha256
+                                     75274e84f840; earth_exosphere 1500 dots, no
+                                     plane recorded, sha256 6112639fb2cd;
+                                     sun_corona 2500 dots, no plane recorded,
+                                     sha256 e2b57ccbc8a4; zodiacal_dust 3000
+                                     dots, no plane recorded, sha256
+                                     995f13a056e8; outer_oort_cloud 2736 dots, no
+                                     plane recorded, sha256 2f7ab88ee113;
+                                     galactic_tide 5000 dots, no plane recorded,
+                                     sha256 950a7511f0b5; main_belt 6000 dots, no
+                                     plane recorded, sha256 712caffec391
+
+======================================================================
+  8 of 8 gating checkers passed -- 71.1s total
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2339 file(s) examined, 0 written, 1 created, 0 removed, 0 rewritten identically
+    created   data/horizons_check_last_run.json
+    13 file(s) over 2 MB compared by size and mtime only
+
+======================================================================
+  wrote data/nightly_run_record.json, the last clean run
+  allowed files changed: none
+NIGHT RUN: CLEAN -- 14 rows run, 33 skipped, 0 reported
+======================================================================
+1s
+Run # Only the allow-list is added, read from the runner itself, so
+[main 0c0bac8] Nightly run 2026-11-01 UTC: data/nightly_run_record.json
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+To https://github.com/tonylquintanilla/palomas_orrery
+   b0acdea..0c0bac8  main -> main
+NIGHT COMMIT: pushed 0c0bac8aa3dc9e76ba4c6b4533bc37cf5028c440: data/nightly_run_record.json 
+0s
+Run gh workflow enable nightly.yml
+1s
+Post job cleanup.
+0s
+Post job cleanup.
+/usr/bin/git version
+git version 2.56.0
+Temporarily overriding HOME='/home/runner/work/_temp/9af6273c-64ff-4f39-813f-41ea423f5807' before making global git config changes
+Adding repository directory to the temporary git global config as a safe directory
+/usr/bin/git config --global --add safe.directory /home/runner/work/palomas_orrery/palomas_orrery
+Removing SSH command configuration
+/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+Removing HTTP extra header
+/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+Removing includeIf entries pointing to credentials config files
+/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+includeif.gitdir:/home/runner/work/palomas_orrery/palomas_orrery/.git.path
+includeif.gitdir:/home/runner/work/palomas_orrery/palomas_orrery/.git/worktrees/*.path
+includeif.gitdir:/github/workspace/.git.path
+includeif.gitdir:/github/workspace/.git/worktrees/*.path
+/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/palomas_orrery/palomas_orrery/.git.path
+/home/runner/work/_temp/git-credentials-4c71f2ef-ca68-4af4-9ea5-7d2ec4e5bb4b.config
+/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/palomas_orrery/palomas_orrery/.git.path \/home\/runner\/work\/_temp\/git\-credentials\-4c71f2ef\-ca68\-4af4\-9ea5\-7d2ec4e5bb4b\.config
+/usr/bin/git config --local --get-all includeif.gitdir:/home/runner/work/palomas_orrery/palomas_orrery/.git/worktrees/*.path
+/home/runner/work/_temp/git-credentials-4c71f2ef-ca68-4af4-9ea5-7d2ec4e5bb4b.config
+/usr/bin/git config --local --unset includeif.gitdir:/home/runner/work/palomas_orrery/palomas_orrery/.git/worktrees/*.path \/home\/runner\/work\/_temp\/git\-credentials\-4c71f2ef\-ca68\-4af4\-9ea5\-7d2ec4e5bb4b\.config
+/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git.path
+/github/runner_temp/git-credentials-4c71f2ef-ca68-4af4-9ea5-7d2ec4e5bb4b.config
+/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git.path \/github\/runner_temp\/git\-credentials\-4c71f2ef\-ca68\-4af4\-9ea5\-7d2ec4e5bb4b\.config
+/usr/bin/git config --local --get-all includeif.gitdir:/github/workspace/.git/worktrees/*.path
+/github/runner_temp/git-credentials-4c71f2ef-ca68-4af4-9ea5-7d2ec4e5bb4b.config
+/usr/bin/git config --local --unset includeif.gitdir:/github/workspace/.git/worktrees/*.path \/github\/runner_temp\/git\-credentials\-4c71f2ef\-ca68\-4af4\-9ea5\-7d2ec4e5bb4b\.config
+/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+Removing credentials config '/home/runner/work/_temp/git-credentials-4c71f2ef-ca68-4af4-9ea5-7d2ec4e5bb4b.config'
+0s
+Cleaning up orphan processes
+
+2. and when it is green, the website's. 
+
+@tonylquintanillatonylquintanilla
+⁠
+ c1c578f
+main
+Status
+Failure
+Total duration
+4m 19s
+Artifacts
+–
+
+
+Annotations
+1 error
+night
+Process completed with exit code 1.
+
+Because of the concurrency group, a late scheduled run arriving afterwards is harmless: it waits its turn, finds nothing new, and commits nothing. Note the times in your run record. Then Pull origin on both, and the phone look.
+
+The design question this raises, a backstop so a dropped night is caught the same day (a second scheduled time a few hours later, say), is for the next design talk, not for now; I'll carry it on L-485 (a nightly run) through the next coordinating session. Shall I take it that you'll fire both by hand now?
+
+==================================================================
+
+Here is where things stand, read from GitHub's records a minute ago.
+
+**The orrery is fine, and the schedule did fire after all.** GitHub's scheduled run started at 14:17 UTC, exactly seven hours late (run 4, on your push), and your hand-fired run (run 5) queued behind it under the concurrency group and ran two minutes later. Both were clean; each committed only its own record, so there are two small bot commits (b0acdea, 0c0bac8) and Pull origin will bring both. That is the group doing its job, with one correction to what I said earlier: a second clean run does commit, because the record file carries its own time stamp; nothing else moves. -- 
+
+**The website failed, and I think I know why, but I need the log to be sure.** The night's gate found the Earth room's text box no longer matching a sentence pinned in one of the website's own checks. `documentation/smoke_display_figures.js` (the Display figures check, line 617) pins the inner Van Allen belt's line as "= 9,600 km (0.00006 AU)", and the new export makes the room print "= 10,000 km (0.00006 AU)". So the check went red, the night committed nothing, and the site is unchanged: the gate working as designed on a number that changed on purpose. The run's 4 minutes 19 seconds fits that: it got through the pulls and the build and failed in the maintenance run's night pass. Neither the orrery session nor I grepped the website's checks for the old number; that is a lesson for the records.
+
+If that is the cause, the fix is one line in that gallery file, then a rerun.
+
+The one thing I need from you: in the failed run's log, open the step "The night (python daily_run.py --night)" and paste me the lines that start with FAIL and the last line beginning "NIGHT RUN: RED". Then I'll give you the fix.
