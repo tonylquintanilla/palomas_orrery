@@ -574,7 +574,7 @@ Tony-action rollup:
 
 ==============================================================
 
-**Session: CODE: 11-2-26 1211: Opus: Coordination session handoff L505 L506**
+**Session: OPEN: 11-2-26 1211: Opus: Coordination session handoff L505 L506**
 
 I'll start by reading where both repositories stand on GitHub right now, then build the dashboard-and-protocol patch from section 8 of the morning handoff.
 
@@ -640,17 +640,12 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
      documents: the table should open. -- correct, but hard to read in md format. could we add a version that is easier to read, maybe an html or a pdf?
   3. GitHub Desktop: commit and push the orrery, everything in the change
      list together (this patch's six files and the index); move this
-     script into documentation\ for the next commit.
+     script into documentation\ for the next commit. -- 75d9bc824a6a7cb70fcb30f7b1d0c004fc6bf97c
   4. Paste the repo's PROJECT_INSTRUCTIONS.md (v3.122) into the Orrery
-     Project's instructions on claude.ai.
-  5. Your word on the tick size: 3 and 6 as built, 4 and 8, or 5 and 10.
+     Project's instructions on claude.ai. -- done
+  5. Your word on the tick size: 3 and 6 as built, 4 and 8, or 5 and 10. -- as built
 
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
-
-2. Run `ledger_index.py`.
-3. Open the dashboard and click "Method, Model, Effort" to check that the table opens.
-4. Commit and push the orrery. Move both L506 patch scripts into `documentation\` with that commit.
-5. Paste `PROJECT_INSTRUCTIONS.md` (v3.122) into the Project's instructions.
 
 **Something to look at:** the orrery has a second run record for today, at 17:06 UTC (commit 0099170), after your hand run. I can't see the Actions pages from here, so the Actions tab will tell you whether GitHub started it late on its own. As of 18:00 UTC, the website's two scheduled runs had not started at all today.
 
