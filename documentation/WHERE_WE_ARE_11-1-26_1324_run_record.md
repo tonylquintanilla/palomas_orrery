@@ -432,7 +432,7 @@ My word: go ahead with Code's run order. The report holds up against the files I
 **What this means for the queue.** The switch is now a session of its own, and a better-defined one: the test is done and recorded, and the sweep is named (the Horizons calls, the five comet tests, a helper that owns the query call, and astroquery's COMMAND read on both machines). Its proof ends with your eyes on a plot with Encke's tail. I'll write that brief when you want it; it does not have to come before the ruler build.
 
 Run order:
-1. GitHub Desktop: Pull origin first if it shows a number; then commit and push the orrery, everything in the change list together. -- nothing to pull. pushed to 
+1. GitHub Desktop: Pull origin first if it shows a number; then commit and push the orrery, everything in the change list together. -- nothing to pull. pushed to 856922f81dd0c1f68b276e2786affa99eeff051e
 2. The website needs nothing; its night should be clean with nothing printed changing. Pull origin on it tomorrow morning.
 3. Tomorrow, the orrery's Actions tab: a run at 07:17 UTC or a late one, or one at 11:17 if GitHub dropped the night; note the start times.
 4. Send me the orrery's SHA.
@@ -441,3 +441,92 @@ Tony-action rollup:
 - (do) Commit and push the orrery.
 - (do) Mornings: Pull origin on both first, without waiting for the run.
 - (decide) Nothing. The cadence question in 4.6 waits for the switch.
+
+===========================================================================
+
+Yes. It goes in the afternoon handoff, which you commit with the next push anyway, and it goes in as a rule, not only as today's two clicks: a Code session can bump the protocol or a skill in the repo but cannot install either, so every such report leaves you those two steps, and the report should say so. Editing the handoff in your folder now.
+
+Done. The afternoon handoff in your orrery folder now has a section 6 and a current rollup (section 7), and it carries three things: the orrery session's result and why the comet switch waits; the rule that a Code session's report which bumps the protocol or a skill ends with the paste and the reinstall named in its rollup, since Code can reach neither the Project page nor Settings > Skills; and a third rule for me, that a brief's reader list is found by behaviour and not by one pattern, which is how my brief missed the four comet tests. The file shows as modified in GitHub Desktop and rides your next orrery push.
+
+Tony-action rollup (current):
+- (do) Paste the repo's `PROJECT_INSTRUCTIONS.md` (v3.120) into the Orrery Project's instructions on claude.ai. -- done
+- (do) Reinstall gallery-cache-builder (1.16) in Settings > Skills. -- done
+- (do) Commit the handoff with the next orrery push.
+- (do) Mornings this week: Pull origin on both first; both Actions tabs; start times noted.
+- (decide) Nothing.
+
+===============================================
+
+Starting the ruler brief. First the design record and the gallery's code it touches, read from GitHub at HEAD.
+
+The ruler brief is written and in your orrery documentation folder: `COORD_L505_gallery_ticks_ruler_backstop_brief_20261101.md`, 326 lines, every line number read from the gallery at b6574a0 and the orrery at 856922f8. Your laptop was on, so it is placed; it rides your next orrery push with the handoff.
+
+**What it gives the gallery session, in order:** the website's backstop line (12:17 UTC, mirroring the wording the orrery's file now carries); the tick dots on the three axis lines, built beside the existing axis-line traces and reading the same grid step the layout holds, so the dots and the grid lines cannot part on a zoom; the ruler in the chip's place, same symbols as the axes, transparent, with the AU note still opening from it and the frame note gaining one sentence; and Plotly's edge numbers off in the rooms. Sizes, the ruler's length and the halo are Mode 5, settled from URL knobs on your phone the way `?edge=N` was, so the session asks you nothing.
+
+**Two things settled by reading the code rather than asked.** The Explorer page keeps its edge numbers: it has no axis lines through the origin and no HUD, so R4's own clause (no room left with a grid and no scale) decides it, and the brief says so. And the five checks the design record worried about do not read the live page's traces, so the expectation is a green maintenance run with no check edited; the one pin that moves is the headless walk's reading of the chip's text, named.
+
+**One finding about my own tooling, written into the handoff as a rule:** my first placement of the section-6 handoff delivered the old copy under a new time stamp; placed from a fresh path it arrived whole. I now read each placed file's size back from your folder; both sizes above are read that way.
+
+The handoff's queue now carries the prompt for the gallery session. The orrery session's five items for the comet switch are in its section 6; that brief comes when you ask.
+
+Tony-action rollup (current, unchanged plus one):
+- (do) When you are back: paste v3.120 into the Project's instructions; reinstall gallery-cache-builder (1.16); commit and push the orrery with the two documentation files.
+- (do) Mornings this week: Pull origin on both first; both Actions tabs; start times noted.
+- (do) Next weekend: the gallery session, with the prompt in the handoff's section 3.
+- (decide) Nothing.
+
+==================================================
+
+Ruled: the comets asked by designation are asked every night. Recording it in the afternoon handoff now, with your reason, so the comet-switch brief carries it as the rule and not as a reading.
+
+Recorded. The handoff in your folder now carries section 8 with your words and the ruling: a comet asked by designation is asked every night, as a held body is, so the record number the website asks is never more than a night old. Its rollup says the cadence is closed. Size read back from the folder: 12,779 bytes, the whole file.
+
+That also closes the one open decision in the comet-pins brief, so the comet-switch brief will have none left to ask you.
+
+Tony-action rollup (current):
+- (do) When you are back: paste v3.120 into the Project's instructions; reinstall gallery-cache-builder (1.16); commit and push the orrery with the two documentation files.
+- (do) Mornings this week: Pull origin on both first; both Actions tabs; start times noted.
+- (do) Next weekend: the gallery session, with the prompt in the handoff's section 3.
+- (decide) Nothing.
+
+===============================================
+
+Ruled, and it settles the question cleanly: both, not either. Recording it now.
+
+Recorded, in your words, as section 9 of the afternoon handoff (15,130 bytes, read back from your folder). The reading I wrote under it: the Solar System room keeps showing encounters as it does; each encounter also gets a room centred on the body being encountered, the planet for a flyby, the Sun for a perihelion, Earth for a near-Earth pass; and in that room it may carry the host's shells, a comet's features and fuller sourced words. That makes compositions and the planets' rooms one line of work rather than two, and the first composition can be an encounter in a room that already exists. The compositions talk now starts from one question, which encounter is first and in which room, and that one can wait.
+
+That is a good place to stop. Three rulings came out of the afternoon away from your machine, the comets' nightly ask, periodic comets known by their name's form, and encounters as both, and all three are in the handoff for the next session.
+
+Tony-action rollup (current):
+- (do) When you are back: paste v3.120 into the Project's instructions; reinstall gallery-cache-builder (1.16); commit and push the orrery with the two documentation files.
+- (do) Mornings this week: Pull origin on both first; both Actions tabs; start times noted.
+- (do) Next weekend: the gallery session, with the prompt in the handoff's section 3.
+- (decide) Nothing.
+
+=============================================
+
+Recorded. Artemis II is the first encounter, in the Earth room: Earth is the centre, the Moon is already drawn there, and the orrery already has the mission built (the April 2026 plots in the gallery's files came from it).
+
+One fact for the brief rather than for you, read from tonight's cache: the website's served paths do not yet include Artemis II; the 26 paths the night serves run from the Voyagers to the comets, with no Artemis among them. So the first step of that build is the one every spacecraft has had, the entry carried from the orrery's list into the served data, before the room shows it. That is a read, not a problem; it just says where the build starts.
+
+In the handoff, under section 9: Artemis II is the first encounter, in the Earth room, with the fact that its path is not yet served and so the build starts with the entry. Size read back: 15,971 bytes. Its brief is mine when you want it, after the ruler build and the comet switch unless you ask sooner.
+
+Tony-action rollup (current, unchanged):
+- (do) When you are back: paste v3.120 into the Project's instructions; reinstall gallery-cache-builder (1.16); commit and push the orrery with the two documentation files.
+- (do) Mornings this week: Pull origin on both first; both Actions tabs; start times noted.
+- (do) Next weekend: the gallery session, with the prompt in the handoff's section 3.
+- (decide) Nothing.
+
+================================================
+
+Yes, and it is a cleaner shape than special-casing one mission. Recording it as a direction, not yet a ruling on the details, since it touches how the rooms gate dates.
+
+The implications, plainly, for the brief that picks it up: today every served body is drawn at one date, today's, inside one window of 88 days either side set by the shortest trusted span. A historical mission has no "today"; it has its own nine days or nine months, in the past. So a historical group means a body served with its own window and its own dates, drawn at a date inside that window, not at today's. That is new in the resolver and the cache, and it is the same machinery goal 15 needs, a date to choose. The Solar System drawer gains a group row for them, one JPL class to a row as the others are; ticking one would have to move the room's date into the mission's window, or the row says it is viewable in its own room only. Which of those is the Solar System room's behaviour is the design question that talk opens with.
+
+Recorded under section 9 as a direction with its implications and the one design question it opens: 17,164 bytes, read back from your folder.
+
+Tony-action rollup (current, unchanged):
+- (do) When you are back: paste v3.120 into the Project's instructions; reinstall gallery-cache-builder (1.16); commit and push the orrery with the two documentation files.
+- (do) Mornings this week: Pull origin on both first; both Actions tabs; start times noted.
+- (do) Next weekend: the gallery session, with the prompt in the handoff's section 3.
+- (decide) Nothing today. The historical-missions question waits for its talk.
