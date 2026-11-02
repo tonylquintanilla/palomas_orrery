@@ -451,7 +451,7 @@ Done. The afternoon handoff in your orrery folder now has a section 6 and a curr
 Tony-action rollup (current):
 - (do) Paste the repo's `PROJECT_INSTRUCTIONS.md` (v3.120) into the Orrery Project's instructions on claude.ai. -- done
 - (do) Reinstall gallery-cache-builder (1.16) in Settings > Skills. -- done
-- (do) Commit the handoff with the next orrery push.
+- (do) Commit the handoff with the next orrery push. -- 964dca99b988e663f0300478be2f2600e89176a9
 - (do) Mornings this week: Pull origin on both first; both Actions tabs; start times noted.
 - (decide) Nothing.
 

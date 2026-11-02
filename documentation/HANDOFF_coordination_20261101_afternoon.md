@@ -1,7 +1,7 @@
-<!-- Doc-Kind: hand | Addendum from the coordinating session of Nov 1, 2026, afternoon (Claude Fable 5.1): the comet-pins brief written, rebased on the hold as built; the orrery's backstop line and L-484's lesson folded into the same orrery session; a rule for coordinating sessions on JPL's cached answers; section 6, the orrery session's result and the two stores a Code session cannot update; section 8, the comets' nightly ask ruled; section 9, encounters are both, in the Solar System room and in rooms of their own. Zero code. -->
+<!-- Doc-Kind: hand | Addendum from the coordinating session of Nov 1, 2026, afternoon (Claude Fable 5.1): the comet-pins brief written, rebased on the hold as built; the orrery's backstop line and L-484's lesson folded into the same orrery session; a rule for coordinating sessions on JPL's cached answers; section 6, the orrery session's result and the two stores a Code session cannot update; section 8, the comets' nightly ask ruled; section 9, encounters are both, in the Solar System room and in rooms of their own; section 10, the run record read against this file, three things carried, Where We Are brought up to date. Zero code. -->
 # Coordination handoff addendum: November 1, 2026, afternoon
 
-Tony Quintanilla, PE | Claude Fable 5.1 (coordinating session) | November 1, 2026, 14:20; section 6 added 14:55
+Tony Quintanilla, PE | Claude Fable 5.1 (coordinating session) | November 1, 2026, 14:20; section 6 added 14:55; section 10 added 23:25
 
 Built on orrery 8f851c15cefb9ff0111ed1c622e47e48b5910396 and gallery
 b6574a0fa374be2faf526d7c5e5b6f8988515652, both read live on Nov 1,
@@ -271,18 +271,74 @@ room, does the room's date move into the mission's window, or does the
 row say the mission is shown in its own room? Artemis II's room is the
 first instance either way.
 
+## 10. Added 23:25: the run record read against this file; three things carried; Where We Are brought up to date
+
+The coordinating session of the night (Claude Fable 5.1; orrery
+964dca99 and gallery b6574a0f read live at 04:48 UTC Nov 2) read
+Tony's run record of the day, `WHERE_WE_ARE_11-1-26_1324_run_record.md`,
+against this file, on his question: "there is a lot more. is it in
+the coordination brief?" Everything in it is here except three
+things, carried now.
+
+- CODE'S CORRECTION TO THE COMET-PINS BRIEF. The brief said GitHub's
+  two sentences on delayed and dropped schedules were already quoted
+  in the orrery's `.github/workflows/nightly.yml`. They were not: the
+  quotation there (lines 53 to 58 at 6a434ed8) is from GitHub's
+  concurrency page. Code read GitHub's schedule page itself and quoted
+  the two sentences once, in the new comment beside the 11:17 line
+  (856922f8). A fifth line for the coordinating session's own rules,
+  the same class as section 6's third: WHAT A BRIEF SAYS A FILE
+  ALREADY CONTAINS IS READ FROM THE FILE, at the commit the brief
+  names, not from a handoff's account of it.
+- THE TWO PROOFS THE SWITCH STILL OWES. Before Code built, the
+  coordinating session asked it to hold to two proofs from the brief.
+  Neither was run, because the switch stopped at section 4. They are:
+  the export diff, `data/objects_export.json` saved before the switch
+  and compared after, read for the six comets' `horizons_id` and
+  `target` values unchanged (the brief's 4.7, lines 311 to 317); and
+  the night form run in a spare clone with a planted apparition change
+  seen as TAKEN in the record and a planted name change seen as held
+  (the brief's 4.8, lines 332 to 341). The comet-switch brief replaces
+  section 4, so it carries both by name, beside section 6's five items.
+- WHERE THE LESSON WENT, AND WHY. The brief left open whether L-484's
+  lesson goes into gallery-cache-builder or provenance-discipline. Code
+  put it in gallery-cache-builder 1.16, as A Served Number That Changes
+  on Purpose, with the reason: provenance-discipline asks whether a
+  served number is TRUE; this lesson is about the other repository
+  still expecting the old one, so it lives beside the Daily Run that
+  pulls the export. The skill's own text says so. Closed.
+
+Checked, and nothing to carry: the two NOT IN STORE lines in Tony's
+live pass (Jupiter's and Saturn's poles, `planet_poles`) are the ruled
+condition on the ledger, five served values that are not top-level
+constants, report-only; Code's trim of Where We Are's Deferred section
+rewrote the L-485 and L-470 lines rather than dropping one; Code's
+file list stays in the run record, where it belongs.
+
+WHERE WE ARE, brought up to date by this session, edited by section,
+nothing below the marker touched, 130 lines above it: the ruler build
+is on the road as stage 11c [next], with its brief named, and the
+comet switch as stage 11d [next] after it; the box's Do next is the
+ruler build; stage 12's open question is answered (encounters are
+both); Settled gains the three rulings of the afternoon; Deferred
+carries Artemis II and the historical-missions talk under L-489; the
+design question of section 9 stands under Waiting on you, at the next
+design talk. Until this session the ruler build appeared on the page
+only as a pointer to its design record and as half a line under
+L-485, which Tony found at 23:05 ("i don't see the ruler in the where
+we are"). The page is the only place the order of work lives, and a
+build ruled for next weekend was not on it: a Code session writes the
+page at its close and cannot know what a coordinating session rules
+after it, so the coordinating session that rules it moves the page.
+
 ## 7. Tony-action rollup (current, replacing section 5's)
 
-- (do) Paste the repo's `PROJECT_INSTRUCTIONS.md` (v3.120, at 856922f8)
-  into the Orrery Project's instructions on claude.ai.
-- (do) Reinstall gallery-cache-builder (1.16) in Settings > Skills from
-  `skills/gallery-cache-builder/SKILL.md`.
-- (do) Commit this file and
-  `COORD_L505_gallery_ticks_ruler_backstop_brief_20261101.md` with the
-  next orrery push.
+- (do) Commit this file and `documentation/WHERE_WE_ARE.md` with the
+  next orrery push; both are in your folder, uncommitted.
 - (do) The ruler build next weekend, with the prompt in section 3.
 - (do) Mornings this week: Pull origin on both first, without waiting
   for the run; both Actions tabs; start times noted.
-- (decide) Nothing. The 4.6 cadence is ruled (section 8): every night.
+- (decide) Nothing. The historical-missions question waits for its
+  talk.
 
 Written November 1, 2026 with Anthropic's Claude Fable 5.1.
