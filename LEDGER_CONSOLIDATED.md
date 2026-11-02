@@ -935,7 +935,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*247 live items; 231 need attention (`!`); 165 RICE-scored; 250 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*248 live items; 232 need attention (`!`); 165 RICE-scored; 250 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1096,6 +1096,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-499 | The kinds of session: three, told apart by what each writes, with the build session in two forms (protocol, Mode 7) | OPEN | -- | 2026-10-29 |
 | ! | L-500 | The Sun's twelve eyeballed shape numbers: the streamer belt's seven and the outer cloud's clumps' five (orrery + gallery, the Sun's drawings) | OPEN | -- | 2026-10-27 |
 | ! | L-504 | The orrery's clock: UTC everywhere (orrery, every module that reads the clock) | OPEN | -- | 2026-10-31 |
+| ! | L-505 | The axis ticks and the ruler: dots on the axis lines, a ruler for the grid chip, no edge numbers (gallery, every room's frame) | OPEN | -- | 2026-11-01 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1522,6 +1523,120 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ## DETAIL / RECORD
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
+
+#### [L-505] The axis ticks and the ruler: dots on the axis lines, a ruler for the grid chip, no edge numbers (gallery, every room's frame)
+<!-- L:505 status:OPEN upd:2026-11-01 section:A flag: rice: -->
+- **Opened 2026-11-01, night,** by the gallery's Claude Code session,
+  built on gallery b6574a0f (https://github.com/tonylquintanilla/tonyquintanilla.github.io)
+  with the orrery at b135babc read only, from
+  `documentation/COORD_L505_gallery_ticks_ruler_backstop_brief_20261101.md`.
+  The handle was free: L-504 the highest at b135babc.
+- **The rulings** are Tony's of 2026-10-31, in
+  `documentation/DESIGN_axis_ticks_and_ruler_rulings_20261031.md`:
+  R1 (marks on the three axis lines, every room; refined 20:20 to DOTS,
+  markers in the axis colour, no hover, no legend group); R2 (the major
+  twice the minor, at every second step); R3 (the grid chip becomes a
+  short ruler on a transparent background, its marks the same symbols
+  as the axes', refined 20:22); R4 (Plotly's numbers on the box edges
+  off, the grid lines kept, in the same build).
+- **Built, by file and function** (gallery `interactive.html`):
+  - The dots: `sunOriginTickPoints` (a dot at every multiple of the grid
+    step out to the half-range, none at 0, the major size at an even
+    multiple), installed in the same `Plotly.addTraces` as the axis lines
+    in `sunOriginAxesInstall` (traces named "ticks x/y/z",
+    `hoverinfo: "skip"`, `showlegend: false`, no legend group) and
+    restyled after them in `sunOriginAxesUpdate`, at the end of every
+    frame change. `?axes=off` turns them off with the lines.
+  - One step for both: `sunGridStep` reads the layout's dtick (or, before
+    the first is written, the same `sunGridDtick` rule from the range),
+    and the dots and the ruler both read it, so they cannot part.
+  - The ruler: `sunGridChipUpdate` fills `#sun-grid-chip` (id, tap and
+    place kept) with an inline SVG, a white line, its 0 end unmarked, a
+    dot at one step and a larger at two, the axes' sizes, and two labels
+    with the unit (`sunGridLength`: decimals from each value's own
+    magnitude, so "0.5 AU", "1 AU"; km in brackets on a second line
+    below a thousandth of an AU, decided by the step). The labels sit
+    under their dots and the line grows to fit them, up to twice its
+    length; past that (the Sun room's arrival, 0.002 AU, and Earth's
+    with the km) the one-step label goes above its dot instead, so the
+    ruler keeps clear of the triad on a phone. No pill: background and
+    border gone; a thin dark halo on the labels and marks. It sets
+    `data-spacing` and `sunGridLabel` to the full one-step text, so the
+    AU note's sentence is unchanged.
+  - The edge numbers: `showticklabels: false` in `buildSunLayout`'s
+    `axisTemplate`; `ticksuffix`, `tickfont`, `exponentformat` and the
+    coloured edge lines kept. `onSunResize` no longer re-sends
+    `tickfont` (comment left); `axisTickFont` stays, the Explorer's.
+  - The frame note gains: "The dots on the three axis lines mark the
+    grid: a small dot at every grid step, a larger one at every second
+    step. The ruler at the right shows those two steps with their
+    values." No number typed; its Source line unchanged.
+- **The Explorer is kept as it is,** with its numbers (R4's own clause,
+  "no room is left with a grid and no scale"): read at b6574a0f, it
+  has no HUD (`body:not(.sun-exhibit) .sun-chrome { display: none; }`)
+  and no axis lines (`sunOriginAxesInstall` is called only from the
+  exhibit boot), so it has nothing to carry dots and no chip to become a
+  ruler. Matching it is a build of its own, with its own frame, if Tony
+  wants it.
+- **The marker taxonomy, read first** (orrery-coding-conventions 1.12):
+  its table reserves circles for celestial objects and names the cross
+  for "coordinate ticks". Tony's 20:20 ruling chose dots over crosses
+  (crosses read as the hover crosses), so the dots follow the ruling and
+  stand apart from the bodies by size and by sitting on the axis line in
+  its hue. Carried for that skill's next version: the table's cross row
+  and the circle rule, against R1 as refined.
+- **The Mode 5 knobs** (read once at load, the house pattern of `?edge=`
+  and `?axes=`): `?tick=<minor>,<major>` (pixels; default 3,6; a minor
+  alone doubles for the major), `?ruler=<px>` (the line's length;
+  default 56), `?halo=<px>` (the labels' dark halo; default 2, 0 for
+  none). Tony's settled values go here when they come, and a follow-up
+  edit makes them the defaults with the knobs left in place.
+- **Looked at before handing over** (Claude's own look, not Mode 5): the
+  real page served from Tony's folder in the desktop app's browser, at a
+  375 px phone size, in all three rooms. The dots show at 3 and 6 px on
+  the 6 px lines; the ruler first ran under the triad in the Earth room
+  with its km labels, which is why the raised label was added; after it
+  the ruler stood 34 px clear of the triad and clear of the site's
+  address. Not seen: a real phone, the low camera angle, landscape.
+- **The checks.** Offline maintenance run: 36 of 36 gating checkers
+  passed, none edited (the tick traces are installed as the axis lines
+  are, so none of smoke_drawer_order, smoke_hover_budget,
+  smoke_label_words, smoke_drawn_ends or sweep_collapsed_features
+  reads them). Headless (Claude-only): the pin moved in
+  `tools/headless/walk_solar_system_drawer.js` section 23 (the spacing
+  read from `data-spacing`, not the chip's text), and a new section 25
+  holding the dots, the ruler's labels and dot sizes and the edge
+  numbers through a zoom, shown red on a planted copy (every dot the
+  minor size, edge numbers on); `walk_shell_reset.js` sun and earth 33
+  of 33 each; `walk_drawer_order.js` ok.
+- **Found, not caused here (for the next gallery session):** the Solar
+  System walk is red 3 of 171 at the base b6574a0f, before this build,
+  run on a copy of the base page: "scene tap moved the view", Sedna's
+  hover lines not bulleted, and "a body's text box has a line wider
+  than 62 characters" (eight lines of 67 to 70). After the build it is
+  the same 3 of 175. Not chased (The Braid): one class, the walk's pins
+  against the hovers as served now.
+- **For interactive-exhibit's next version** (an orrery session; not
+  edited from the gallery): the anatomy table's Frame HUD row and the
+  grid-chip sentences become: the HUD's right end is a RULER, not a
+  chip, keying dots on the three origin axis lines (a small dot at every
+  grid step, twice the size at every second step, in the axis hue, no
+  hover, no drawer row, installed and restyled with the lines); a tap on
+  the ruler opens the AU note; Plotly's edge numbers are off in every
+  room, and the Explorer keeps its own; the Mode 5 knobs `?tick=`,
+  `?ruler=`, `?halo=`; and the headless walk reads the spacing from the
+  ruler's `data-spacing`.
+**Gap:** Tony's push, then his phone in all three rooms (the dots at
+two sizes, the ruler with two labels and no pill, no numbers on the box
+edges, the AU note from the ruler, the frame note's new sentence, the
+low camera angle), then the Mode 5 pass with the knobs; his settled
+values written in as the defaults. Closes on his Mode 5, not on the
+push. Then interactive-exhibit's bump (above), in an orrery session.
+**Ref:** `documentation/DESIGN_axis_ticks_and_ruler_rulings_20261031.md`;
+`documentation/COORD_L505_gallery_ticks_ruler_backstop_brief_20261101.md`;
+L-289 (the frame HUD, where the chip began); L-485 (the backstop line,
+same session); gallery `interactive.html`,
+`tools/headless/walk_solar_system_drawer.js`.
 
 #### [L-504] The orrery's clock: UTC everywhere (orrery, every module that reads the clock)
 <!-- L:504 status:OPEN upd:2026-10-31 section:A flag: rice: -->
@@ -2768,7 +2883,44 @@ L-489.
   line, `- cron: '17 12 * * *'` in its `.github/workflows/nightly.yml`,
   with the same comment; not written from the orrery. The apparition
   taken as a new kind of take waits with the comets (L-470).
-**Gap (replaces the one below, 2026-11-01, evening):** Tony's push of
+- **2026-11-01, night, the website's backstop line built** (the gallery's
+  Claude Code session, built on gallery b6574a0f with the orrery at
+  b135babc read only, from
+  `documentation/COORD_L505_gallery_ticks_ruler_backstop_brief_20261101.md`,
+  section 1; Tony's ruling of Nov 1, 12:04 Chicago). The gallery's
+  `.github/workflows/nightly.yml` gains `- cron: '17 12 * * *'` after
+  the 08:17 line, its comment mirroring the orrery's: the ruling,
+  GitHub's two sentences read again from its page "Events that trigger
+  workflows" (fetched Nov 1, verbatim: "The `schedule` event can be
+  delayed during periods of high loads of GitHub Actions workflow runs"
+  and "If the load is sufficiently high enough, some queued jobs may be
+  dropped."), the late starts, and the concurrency group. The header
+  gains its "Updated November 1" line. It loads as YAML with both times
+  (PyYAML: `[{'cron': '17 8 * * *'}, {'cron': '17 12 * * *'}]`, group
+  `nightly-run`). BOTH REPOSITORIES NOW HAVE TWO TIMES: the orrery 07:17
+  and 11:17, the website 08:17 and 12:17 UTC.
+- **One difference from the orrery's comment, found while writing it.**
+  The brief and the ruling say a clean second run "commits only its
+  record". True of the orrery's night. NOT true of the website's: its
+  builder asks JPL afresh and replaces the served cache every run, so a
+  clean second run is a whole night again and commits a fresh build,
+  about a hundred files. The evidence is in the gallery's history: Tony's
+  Daily Run commit f2f4425c (Nov 1, 16:05 UTC) and the night's run by
+  hand six minutes later, b6574a0f, 101 files changed. The comment says
+  this in the file. Harmless all the same: the same gate decides it.
+  What it costs is a second night commit on every day both lines fire,
+  which is most days, since the second line fires whether or not the
+  first ran; Tony's next Pull origin brings both down. Nothing for him to
+  do unless he wants the 12:17 run to stand down when the 08:17 one
+  already ran clean that day, which would be a gallery build of its own
+  (Tony-action (decide), not urgent).
+**Gap (replaces the one below, 2026-11-01, night):** Tony's push of the
+gallery session (the ruler build and this line); the morning looks for
+the rest of the week (P4), each start time noted on both Actions tabs,
+and on a morning GitHub drops a night, the second time's run in its
+place; then the hold's website half (a gallery session); then the next
+orrery session, the comets (L-470).
+**Gap (superseded above, 2026-11-01, night; replaced the one below, 2026-11-01, evening):** Tony's push of
 this session; the morning looks for the rest of the week (P4), each
 start time noted, and on a morning GitHub drops the 07:17 night, the
 11:17 run in its place; then the ruler build (a gallery session, with
@@ -18824,6 +18976,15 @@ skills/gallery-pipeline.
   default would be a one-line patch.
 - **Tony-action (do):** archive `patch_L289_5_axis_edge_colours.py` and
   `patch_L289_6_origin_axes.py` to `documentation/` in the gallery repo.
+- **2026-11-01, the grid chip replaced by a ruler (L-505)** (the gallery's
+  Claude Code session, built on gallery b6574a0f, Tony's rulings R1 to R4
+  of 2026-10-31). The chip that this item built on 2026-09-05 keeps its
+  element, its id, its tap (the AU note) and its place at the HUD row's
+  right end; its content is now a short white ruler keying the dots on
+  the three origin axis lines, and Plotly's edge numbers, which this item
+  turned back on, are off in every room. The origin axis lines this
+  item added carry the dots. Recorded here so the chip's history reads
+  through; the work and its open Mode 5 pass are on L-505.
 **Gap:** none. CLOSED 2026-09-06 on Tony's Mode 5, per the rule that an
 exhibit item closes on his eyes and not on the push.
 **Ref:** L-267 (Sun exhibit GUI), L-278 (why the HUD never calls

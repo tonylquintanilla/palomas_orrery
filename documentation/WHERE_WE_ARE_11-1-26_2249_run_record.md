@@ -133,3 +133,146 @@ Not urgent, in your order:
 
 **Tony**: Run record:
 
+**Session: OPEN: 11-1-26 1048: Fable: Coordination session handoff L505**
+
+Here it is, the one from the handoff's section 3, for a Claude Code session opened through the python_work door:
+
+> Gallery repository. Please build from
+> ..\palomas_orrery_for_github\documentation\COORD_L505_gallery_ticks_ruler_backstop_brief_20261101.md:
+> the workflow's backstop line first, then the tick dots on the
+> axes, the ruler in place of the grid chip, and Plotly's edge
+> numbers off in the rooms. Read the brief, the design record it
+> names, and the morning addendum's section 2b first.
+
+The brief is on GitHub at 964dca99, so the session can start now; the two files I placed tonight are in the orrery folder, not the gallery's, and will not stop it. Paste me its report before you commit, as before.
+
+==================================================================
+
+Partly. One of the two rides with it; the other does not.
+
+- **11b, the nightly run (L-485):** yes, its one remaining build piece goes with the ruler. The brief's section 1 is the website's backstop line, the 12:17 UTC second time, and the session records it on L-485. What stays [NOW] after that is yours, not a session's: the week of mornings. The hold's website half (the builder honouring a held body) is a separate short gallery session after the ruler, as the Deferred section says.
+
+- **5d, the orrery's clock (L-504):** no. Its remaining slices (the Earth System generators, the stamps, the tools reading the clock as UTC) are orrery code, and the ruler build is a gallery session that does not open those files. The brief names L-504 only to say which ledger handle is the highest, so L-505 is the next free one. 5d stays [NOW] on the road and waits for an orrery session; the comet switch is the next one, and the clock's slices could ride with it or follow it, your call when that brief is written.
+
+So after the ruler build, the page's [NOW] lines read: 5d unchanged, and 11b with the website's second time built and only the mornings left.
+
+========================================================================
+
+**Session: OPEN: 11-1-26 1136: Opus: Code: Gallery repository coordinate system**
+
+The backstop line is in and loads as valid workflow YAML. Now reading the room code for the dots and the ruler.
+
+Mapping where the new dot traces fit; the axis lines are only reached by fixed indices, so three more traces added the same way won't disturb the drawer.
+
+Dots are wired in. Now replacing the grid chip's content with the ruler.
+
+Now Plotly's edge numbers off in the rooms.
+
+Now moving the headless walk's pin to read the ruler's spacing.
+
+Build is in; now running the room's real driver and the headless walk against it.
+
+The three failures are already there at the base, before my change (same 3 of 171 there); my 4 new checks pass. Now showing the new checks can fail on a planted fault.
+
+All three rooms boot with the dots, the ruler and no edge numbers, and no page errors. Running the Reset walk in the Sun and Earth rooms too.
+
+Mechanism checks pass. I'll take one real look in the built-in browser so the ruler's layout isn't only a jsdom claim.
+
+The ruler renders right. Checking whether the 3 and 6 px dots show on the 6 px axis lines.
+
+Loading (Pyodide). Waiting for the room to finish.
+
+Found the issue: at 3px and 6px, the dots are invisible since the axis lines beneath them are 6px wide in the same color. I'll add a control for the line width so you can compare, then check how it looks at phone size.
+
+I misjudged the dots from the shrunken desktop view—on an actual phone-sized view the default dots do appear correctly. I'll remove the extra line-width knob I'd added.
+
+Found that the Earth room's ruler can overflow under the triad on phones when both labels show kilometres. I'll fix this by placing the first label above its dot whenever the two labels can't fit side by side within twice the ruler's length.
+
+The ruler now ends 34 px clear of the triad in the Earth room. One look at it:
+
+The page uses border-box sizing, so the ruler's height must include its top padding; my second edit was the wrong way round. Fixing it:
+
+Earth's ruler now sits clear of the triad and of the site's address. A last look at the Sun room:
+
+All three rooms look right on a phone-sized view. Closing the browser check and re-running the walks on the final code.
+
+Walks unchanged apart from the 4 new checks, which pass. Now the offline maintenance run.
+
+36 of 36 gating checkers passed. Checking what the run left in the folder, and grepping for the pins the brief names.
+
+Those four extra files are the run's own outputs: today's date on the module atlas, and the pull stamps moved to the orrery's newest commit. Encoding gate on the files I edited:
+
+Code side is done and clean. Now the records in the orrery folder; first Tony's latest run record, then the ledger.
+
+Writing the ledger entries now: L-485 (the backstop line), then L-289 (the grid chip's history), then the new L-505.
+
+Now opening L-505 in the ledger.
+
+Running the ledger's index tool, then Where We Are.
+
+Now editing Where We Are, section by section.
+
+The page is 7 lines over its 130-line cap above the marker. Trimming.
+
+Records are within the cap and pass the encoding gate. Counting the edits per file for your run record:
+
+The ruler build is done and tested. Nothing is committed or pushed, and the phone look is still yours.
+
+**What changed in every room (Sun, Earth, Solar System):**
+- **Dots on the axis lines.** Each of the three coloured axis lines has a small dot at every grid step and a dot twice that size at every second step, in the line's colour. They can't be tapped and get no row in the drawer.
+- **The ruler.** The grey grid label at the bottom right is now a short white ruler with no grey pill behind it. Its two dots match the axes' dots, and each carries its value and the unit ("0.5 AU", "1 AU"). Tapping it still opens the AU note.
+  - When the two labels don't fit side by side, the first one moves above its dot. That happens in the Sun room and in the Earth room, whose labels also carry kilometres. Without that, the Earth ruler ran under the triad on a phone-sized screen.
+- **No edge numbers.** The numbers along the box edges are off in the rooms. The grid lines stay.
+- **The frame note** (the one the triad opens) has one new sentence saying what the dots and the ruler are.
+- **The Explorer is unchanged.** It has no axis lines and no ruler, so it keeps its edge numbers.
+
+**The website's second nightly time.** The workflow now also runs at 12:17 UTC, in case GitHub drops the 08:17 run. Both repositories now have two times.
+
+**One thing the brief had wrong.** It says a clean second run commits only its record. That's true for the orrery, but not for the website. The website's builder fetches fresh data from JPL on every run, so a clean second run commits a whole new build of about 100 files. Your commit on Nov 1 and the night run six minutes later show this. It's harmless, because the same gate decides it. But most days you'll see two night commits on the website. I put this in L-485 (a nightly run) and on Where We Are as a not-urgent decision, so you don't need to answer it now.
+
+**Tests:**
+- The offline maintenance run printed "36 of 36 gating checkers passed".
+- The Reset walks pass 33 of 33 in the Sun and Earth rooms.
+- The Solar System room's walk shows 3 red checks. They were already red before my change: I ran a copy of the old page and got the same 3. They're about Sedna's text box and lines wider than 62 characters, and are recorded on L-505 (the ticks and the ruler) for a later session.
+- The walk's 4 new checks pass, and I showed they turn red when the dot sizes or the edge numbers are broken on purpose.
+
+I also looked at the real page at phone size in all three rooms, from your folder in the app's browser. That's my look, not your phone.
+
+**Addresses to try on your phone** (for the sizes, after the push):
+- Bigger dots: `https://palomasorrery.com/interactive.html?exhibit=solar-system&tick=4,8`
+- Longer ruler, so the Sun's two labels sit side by side: `https://palomasorrery.com/interactive.html?exhibit=sun&ruler=120`
+- Stronger dark edge behind the labels: `https://palomasorrery.com/interactive.html?exhibit=earth&halo=3`
+
+The three settings are `tick=<small>,<big>` (dot sizes, now 3 and 6), `ruler=<length>` (now 56) and `halo=<width>` (now 2, and 0 turns it off). You can combine them in one address with `&`.
+
+---
+**Files changed:**
+- Website (`tonyquintanilla.github.io`):
+  - ok `.github/workflows/nightly.yml`, the nightly workflow (2 edits)
+  - ok `interactive.html`, the rooms (22 edits)
+  - ok `tools/headless/walk_solar_system_drawer.js`, my headless walk (3 edits)
+  - written by the test run: `MODULE_ATLAS.md` and `MODULE_INDEX.md` (today's date), and `data/constants_export.sha`, `data/objects_export.sha`, `data/drawings/pulled_at.sha` (the pull stamps, now the orrery's b135babc)
+- Orrery (`palomas_orrery_for_github`), records only:
+  - ok `LEDGER_CONSOLIDATED.md` (5 edits: L-505 opened, L-485, L-289, the index rebuilt)
+  - ok `documentation/WHERE_WE_ARE.md` (13 edits; 129 lines above the marker; nothing below it touched)
+
+All edited files are ASCII with LF line endings.
+
+**Your run order:**
+1. Paste this report to the coordinating session and wait for its word.
+2. GitHub Desktop, website: Pull origin first if it shows a number. Then commit and push everything in the change list together.
+3. GitHub Desktop, orrery: commit and push the two record files and your run record.
+4. Close the saved tab on your phone, then look at each of the three rooms:
+   - the dots at two sizes;
+   - the ruler with two labels and no grey pill;
+   - no numbers on the box edges;
+   - a tap on the ruler opens the AU note;
+   - the triad's note has its new sentence;
+   - one low camera angle, looking along the plane of the orbits.
+5. Try the three addresses above, and give your word on the sizes, the ruler's length and the dark edge.
+6. The next morning, the website's Actions tab shows a run at 08:17 (or later), and one at 12:17. Pull origin on both repositories.
+
+**Tony-action rollup:**
+- (do) Steps 1 to 6 above.
+- (decide) Your phone's word on the sizes, the ruler's length and the dark edge.
+- (decide, not urgent) Whether the website's 12:17 run should skip a day when the 08:17 run was clean.
