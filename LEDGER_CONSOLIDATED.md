@@ -935,7 +935,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*248 live items; 232 need attention (`!`); 165 RICE-scored; 250 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*249 live items; 233 need attention (`!`); 165 RICE-scored; 250 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1097,6 +1097,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-500 | The Sun's twelve eyeballed shape numbers: the streamer belt's seven and the outer cloud's clumps' five (orrery + gallery, the Sun's drawings) | OPEN | -- | 2026-10-27 |
 | ! | L-504 | The orrery's clock: UTC everywhere (orrery, every module that reads the clock) | OPEN | -- | 2026-10-31 |
 | ! | L-505 | The axis ticks and the ruler: dots on the axis lines, a ruler for the grid chip, no edge numbers (gallery, every room's frame) | OPEN | -- | 2026-11-01 |
+| ! | L-506 | Token economy: tokens spent where they buy verification or a decision, and counted (protocol, every session) | OPEN | -- | 2026-11-02 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1523,6 +1524,37 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ## DETAIL / RECORD
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
+
+#### [L-506] Token economy: tokens spent where they buy verification or a decision, and counted (protocol, every session)
+<!-- L:506 status:OPEN upd:2026-11-02 section:A flag: rice: -->
+- **Opened 2026-11-02** by the coordinating session (Claude Fable 5.1,
+  orrery fd3551cc and gallery b7ddf775 read live), on Tony's ruling of
+  09:24 Chicago: "I am becoming very concerned about the environmental
+  cost of token generation ... I would like to make part of our
+  protocol token economy." On the measured half, a token count in every
+  Code report and run record, 09:29: "yes".
+- **Protocol v3.121:** the section Token Economy [QUALITY] in Part 2
+  after Method Belongs to the Skill (one sentence, seven instances: the
+  smallest instrument, no speculative documents, a skill read in the
+  parts the job needs, tool output sliced, records at the reader's
+  length, cross-model review for domain uncertainty, the count); two
+  Anti-Patterns rows; CLAUDE.md's reading sentence and report sentence
+  amended to match. Delivered as `patch_L506_token_economy.py`.
+- **Founding case,** the same morning: a 176-line brief written for a
+  gallery Code session to change one marker symbol (L-505, the x
+  marks), dropped when Tony asked for the patch that was the right
+  instrument; and a 166,000-character folder listing pulled into the
+  session twice to read two file sizes.
+- **Tony-action (do):** after this patch is pushed, paste the repo's
+  PROJECT_INSTRUCTIONS.md (v3.121) into the Orrery Project's
+  instructions on claude.ai; no skill changed, nothing to reinstall.
+**Gap:** ledger-and-session-records' next version (the records
+session's) carries the count's place in a Code report and in the run
+record, and what a chat session, which prints no count, reports
+instead (the sizes of what it read and wrote). The first Code report
+with a count is the proof the rule runs.
+**Ref:** `HANDOFF_coordination_20261102_morning.md`; the protocol's
+v3.121 entry; L-505.
 
 #### [L-505] The axis ticks and the ruler: dots on the axis lines, a ruler for the grid chip, no edge numbers (gallery, every room's frame)
 <!-- L:505 status:OPEN upd:2026-11-01 section:A flag: rice: -->

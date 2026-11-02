@@ -260,19 +260,319 @@ All edited files are ASCII with LF line endings.
 
 **Your run order:**
 1. Paste this report to the coordinating session and wait for its word.
-2. GitHub Desktop, website: Pull origin first if it shows a number. Then commit and push everything in the change list together.
-3. GitHub Desktop, orrery: commit and push the two record files and your run record.
+2. GitHub Desktop, website: Pull origin first if it shows a number. Then commit and push everything in the change list together. -- nothing yet 11-2 14:02 utc. the github actions page shows nothing either.
+3. GitHub Desktop, orrery: commit and push the two record files and your run record. -- nothing yet except this file -- 14:02 utc
 4. Close the saved tab on your phone, then look at each of the three rooms:
-   - the dots at two sizes;
-   - the ruler with two labels and no grey pill;
-   - no numbers on the box edges;
-   - a tap on the ruler opens the AU note;
-   - the triad's note has its new sentence;
-   - one low camera angle, looking along the plane of the orbits.
+   - the dots at two sizes; -- yes, but, i thought we were using X not dot. the small dots are separable from the planets, but the x might be more visible and better. did we miss that discussion from yesterday?
+   - the ruler with two labels and no grey pill; -- yes
+   - no numbers on the box edges; -- yes
+   - a tap on the ruler opens the AU note; -- yes
+   - the triad's note has its new sentence; -- yes
+   - one low camera angle, looking along the plane of the orbits. -- yes
 5. Try the three addresses above, and give your word on the sizes, the ruler's length and the dark edge.
-6. The next morning, the website's Actions tab shows a run at 08:17 (or later), and one at 12:17. Pull origin on both repositories.
+6. The next morning, the website's Actions tab shows a run at 08:17 (or later), and one at 12:17. Pull origin on both repositories. -- no
 
 **Tony-action rollup:**
 - (do) Steps 1 to 6 above.
 - (decide) Your phone's word on the sizes, the ruler's length and the dark edge.
 - (decide, not urgent) Whether the website's 12:17 run should skip a day when the 08:17 run was clean.
+
+=========================
+
+**Fable:**
+
+Run them by hand, the orrery's first, then the website's.
+
+Why not wait: the orrery's 07:17 run is now over seven hours late, past yesterday's worst, and its 11:17 backstop is three hours late too; the website's two times are in the same state. Both workflow files were changed since they last fired (the orrery's on Nov 1, the website's last night), so a run by hand today also proves the new files load on GitHub's side, which a schedule that never fires cannot tell you. And the served cache is a day old until something runs.
+
+Why it is safe: a hand run is the same job the schedule starts, under the same gate. If GitHub fires the scheduled runs later, they queue behind yours and run as harmless extras: the orrery's commits only its record, the website's a fresh build, as Code reported.
+
+The order:
+1. Orrery's Actions tab: "Nightly run", Run workflow, the tick box left off. Wait for green. -- run 11-2 14:56 utc
+2. Website's Actions tab: the same. Its first check compares its pulls with the orrery's GitHub copy, which is why the orrery goes first. -- run 11-2 15:04 utc
+3. Note both start times for your run record; then Pull origin on both, orrery then website. -- done
+
+Today is a data point for L-485 (a nightly run): on both repositories, both scheduled times missed by 14:34 UTC, so the second line did not catch a dropped night today. I'll carry that into the handoff with the X correction.
+
+================================================
+
+The table's own answer: a records-only change is a patch, by Opus, standard effort. So not this session, which is Fable and long, and not a Code session. The right move is a short Opus coordinating session that writes one patch: the protocol's pointer to the table, the dashboard row, and L-506's second slice.
+
+What I can do cheaply now is the part that is already written: place the table as a reference document in the orrery's documentation folder, so the Opus session wires it in rather than writes it. Let me check how the dashboard opens a document today, so the handoff can point the Opus session at the exact place.
+
+Now section 8 in the morning handoff: the table ruled, where the document is, and the exact one-line edit for the Opus session's patch.
+
+Both placed and read back whole: `METHOD_MODEL_EFFORT.md` in the orrery's root at 3,782 bytes, and the handoff with its section 8 at 12,988.
+
+**What the table suggests about its own wiring:** a records-only change is a patch by an Opus session. So the dashboard row is not done here. The document is placed where the dashboard's documents live (its root, beside README and the patch guide), and the handoff's section 8 gives the Opus session the exact one-line edit: a tuple in `LOCAL_DOCS` at line 2690 of the dashboard, plus the protocol's pointer sentence (v3.122, the usual ceremony) and L-506's second-slice line. The parity checker does not read that list, so no pin moves.
+
+**This session should now close.** It has carried two days and is the long-session cost the table names. Everything owed is placed: two patches, the restored design record, Where We Are, the reference document, and a handoff that carries every ruling of the morning in sentences.
+
+Run order, unchanged from before plus one file:
+1. Website folder: `patch_L505_x_marks.py`, 
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L505_x_marks.py
+ok interactive.html (7 edits)
+ok tools\headless\walk_solar_system_drawer.js (3 edits)
+patch applied
+
+Next, in this order:
+  1. The headless walk (from this folder): node tools/headless/walk_solar_system_drawer.js
+     Expect the same result as before the patch: the 4 checks of section 25 pass;
+     the 3 checks that were already red on Nov 1 (Sedna's text box, lines over 62 characters) stay red.
+  2. The offline maintenance run: python gallery_maintenance_run.py  --  expect 36 of 36.
+
+======================================================================
+  gallery maintenance run -- OFFLINE (before a commit)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Module atlas              1.3s  no change to MODULE_ATLAS.md,
+                                    MODULE_INDEX.md
+  PASS Constants export pull     0.6s  no change to
+                                    data/constants_export.json,
+                                    data/constants_export.sha
+  PASS Config mirror             0.1s  no change to
+                                    data/objects_config.json
+  PASS Objects export pull       0.4s  no change to
+                                    data/objects_export.json,
+                                    data/objects_export.sha
+  PASS Objects mirror            0.1s  no change to
+                                    data/objects_config.json
+  PASS Drawings pull             1.5s  no change to
+                                    data/drawings/hills_cloud.json,
+                                    data/drawings/van_allen_belts.json,
+                                    data/drawings/earth_exosphere.json,
+                                    data/drawings/pulled_at.sha
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite      90.0s  PASS (498 checks, 0 failures)
+  PASS Pole of date              0.4s  POLE OF DATE: all 11 checks passed
+                                    (frame angle, orrery, ERFA, block
+                                    checker, and each shown able to
+                                    fail).
+  PASS Mirror suite              0.3s  All 77 mirror checks passed:
+                                    served, spelling, relabel refused
+                                    and accepted, conflict refused,
+                                    definition as exactly 1, fallback
+                                    and absent named, no-slot refused,
+                                    five shapes, formatting kept,
+                                    idempotent, report writes nothing,
+                                    uncertainty written as served,
+                                    Earth's pole served, print count
+                                    written as served, "in" written as
+                                    served and a slot served in
+                                    another unit from it, and the
+                                    citation written as served, a
+                                    website-only citation named, an
+                                    old export refused.
+  PASS Store writer suite       39.2s  All 469 store-writer checks
+                                    passed: an allow list that lets
+                                    through only a shell's words, a
+                                    belt's words and the arrival
+                                    settings, the rooms section's
+                                    included; a no-edit round trip;
+                                    one line per change; empty words
+                                    handled; a refused batch writing
+                                    nothing; awkward text; and the
+                                    shell list matching the cache
+                                    check's rule.
+  PASS Store editor suite        0.3s  All 377 store-editor checks
+                                    passed: every box the form offers
+                                    is one the writer allows; the word
+                                    list and the tick list differ by
+                                    the belts, on purpose; nothing
+                                    typed saves nothing; the save
+                                    message does not promise a visitor
+                                    sees what they cannot yet; and a
+                                    red Cache in step is explained
+                                    rather than just shown.
+  PASS Objects mirror suite      0.2s  MIRROR OBJECTS SUITE: pass
+  PASS Objects mirror check      0.1s  OBJECTS MIRROR: pass
+  PASS Config mirror check       0.1s  Every served link holds the
+                                    export's value, unit, figure count
+                                    and citation; 179 link(s)
+                                    compared, 174 citation(s) word for
+                                    word, 5 declared with none, 3 not
+                                    served; store 0c1e4bbe865a.
+  PASS Pull failures             0.4s  PULL FAILURES: all 16 checks
+                                    passed (3 pulls x 3 ways to fail,
+                                    the run after a failed pull, the
+                                    run's token to GitHub's interface
+                                    only, and 5 planted faults caught)
+  PASS Horizons confirmations    0.1s  HORIZONS CONFIRMATIONS: pass -- 90
+                                    of 90 confirmed, and 63 periods,
+                                    within 30 days
+  PASS Pointer join              0.1s  Every link is accounted for: 182
+                                    link(s) against orrery 0099170d, 1
+                                    fallback named; read check: 66 of
+                                    66 measured rows reached carry a
+                                    read.
+  PASS Cache in step             0.1s  The served cache holds the
+                                    config's 95 object(s) and their
+                                    features exactly: 4 object(s) with
+                                    34 named shell(s), in both cache
+                                    files.
+  PASS Drawn orbit               1.8s  DRAWN ORBIT: pass -- 18 checks,
+                                    every planted fault caught
+  PASS Drawings                  0.7s  DRAWINGS: PASS -- 34 of 34 planted
+                                    faults caught; pulled at orrery
+                                    0099170d; earth_exosphere 1500
+                                    dots, round, sha256 6112639fb2cd;
+                                    galactic_tide 5000 dots, about the
+                                    galactic pole, sha256
+                                    950a7511f0b5; hills_cloud 3600
+                                    dots, tilt 31.0 deg, sha256
+                                    4d3e85616645; main_belt 6000 dots,
+                                    tilt 0.2 deg, sha256 712caffec391;
+                                    outer_oort_cloud 2736 dots,
+                                    between its edges, sha256
+                                    2f7ab88ee113; sun_corona 2500
+                                    dots, round, sha256 e2b57ccbc8a4;
+                                    van_allen_belts 3200 dots, tilt
+                                    0.4 deg, sha256 75274e84f840;
+                                    zodiacal_dust 3000 dots, tilt 2.8
+                                    deg, sha256 995f13a056e8
+  PASS Collapsed features        0.1s  32 stored as themselves, 16
+                                    collapsed, 0 unclassified.
+  PASS Feature renderers         0.1s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.1s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.2s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.2s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.2s  === ALL CHECKS PASSED ===
+  PASS Typed facts               0.2s  TYPED FACTS: PASS -- 0 typed facts
+                                    in the Sun and Earth rooms; 17
+                                    number line(s), 28 of 28 allowed
+                                    sentence(s) seen, 0 held open
+                                    (L-451); 26 word field(s) masked.
+  PASS Typed numbers             0.3s  TYPED NUMBERS: PASS -- 0 typed
+                                    numbers in the Sun and Earth
+                                    rooms' served words; 315 number(s)
+                                    masked, 8 held.
+  PASS Arrival                   0.2s  Arrival: both rooms open on the
+                                    right things; every shell trace
+                                    carries its key; the fallback with
+                                    no arrival block is unchanged.
+  PASS Display figures           0.2s  === PASS: 61 hover(s) and 312
+                                    number(s) examined; 14 graded, 7
+                                    graded by line, 47 held to the
+                                    fixture ===
+  PASS Solar System figures      0.2s  === PASS: 8 worked cases, 64
+                                    drawer rows matched to their
+                                    accuracy rows, 63 served
+                                    distances; Uranus, Neptune and
+                                    Pluto print to JPL's ten-thousands
+                                    place; 6 period cases and 63
+                                    served periods printed as the
+                                    orrery printed them; 5 orbit-line
+                                    cases and 63 served orbit lines; 3
+                                    path cases and 26 served paths,
+                                    spacecraft and comets ===
+  PASS Far lines                 0.1s  === PASS: far lines are cut to the
+                                    view's box ===
+  PASS Direction arrows          0.1s  === PASS: the arrows point the way
+                                    the points run, sit ahead of the
+                                    body, stay in the view, and the
+                                    page places them ===
+  PASS Solar System drawer       0.1s  === PASS: the Sun is never ticked,
+                                    every row and group is listed, the
+                                    handle names the last body ticked,
+                                    nothing ticks many bodies at once
+                                    but a spacecraft with its
+                                    companions, rooms are offered only
+                                    where they exist, groups fold and
+                                    reset their bodies, the count line
+                                    counts ticked bodies outside the
+                                    view, a search finds a body by any
+                                    of its names and a group by its
+                                    label or words, and the page asks
+                                    this file ===
+  PASS Source list               0.2s  === PASS: the i panel's sources
+                                    are a list, every address a link,
+                                    and its words are one sentence to
+                                    a bullet ===
+  PASS Drawer order              0.2s  === DRAWER ORDER: both rooms list
+                                    their shells where each begins;
+                                    self-test red twice
+  PASS Drawn ends                0.2s  === DRAWN ENDS: every drawing
+                                    starts and stops on a served row
+                                    or a held end; self-test red three
+                                    times
+  PASS Label words               0.2s  === LABEL WORDS: all 34 shell rows
+                                    in both rooms open their own
+                                    feature's words; 5 stored
+                                    drawings' crosses stand off the
+                                    axis lines; self-test red twice
+  PASS Guest book                0.1s  === GUEST BOOK: all 8 checks
+                                    passed
+  PASS Guest book updater        0.2s  === GUEST BOOK UPDATER: all 49
+                                    checks passed (8 scripted runs,
+                                    self-test first)
+  PASS Daily run steps           0.3s  === DAILY RUN: all 4 step scripts
+                                    found; the pull-match and night
+                                    checks passed 32 of 32 fixture
+                                    checks (L-461, L-485)
+  PASS Artifact 1 assembler      0.2s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.1s  RESULT: no sibling directories and
+                                    nothing in data/ the builder did
+                                    not make.
+
+======================================================================
+  36 of 36 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: no sibling directories and
+  last swap 2026-11-02T15:08:16.199929+00:00: succeeded first time
+======================================================================
+
+  After you push: python gallery_maintenance_run.py --live
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+  3. GitHub Desktop: commit and push the website, everything in the change list together;
+     then move this script into documentation\ for the next commit. -- 8c6b1b37a3e157c415a357d99d059e49012341bf, 674160a07de266320b3ee92ead50efde20f377c3 and the nightly run ran at b7ddf77acacc5e190a8cb5e871c0dc1330dfcfd3
+  4. Phone: close the saved tab, open each room; the ticks and the ruler's key are x marks.
+     Try the sizes: ?tick=4,8 and ?tick=5,10 on the Solar System room. -- looks good
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
+
+1. Orrery folder: 
+   1. `patch_L506_token_economy.py`, 
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L506_token_economy.py
+ok PROJECT_INSTRUCTIONS.md (5 edits)
+ok documentation\PROJECT_INSTRUCTIONS_HISTORY.md (1 edits)
+ok CLAUDE.md (3 edits)
+ok LEDGER_CONSOLIDATED.md (1 edits)
+ok documentation\WHERE_WE_ARE.md (8 edits)
+ok documentation\project_instructions_v3_121.md (new; the versioned copy, 82558 bytes)
+Where We Are: 130 lines above the marker (cap 130); nothing below it touched.
+patch applied
+
+Next, in this order:
+  1. Run ledger_index.py (VS Code, Run) from this folder: it rebuilds the ledger's index with L-506. 
+
+OK: 499 L-blocks parsed, no consistency problems.
+Index regenerated (249 live items) in C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\LEDGER_CONSOLIDATED.md.
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  2. GitHub Desktop: commit and push the orrery, everything in the change list together
+     (this patch's six files, the index, the design record, the morning handoff; move this
+     script into documentation\ for the next commit). -- 
+  3. Paste the repo's PROJECT_INSTRUCTIONS.md (v3.121) into the Orrery Project's instructions
+     on claude.ai. Chat sessions read that page; the rule reaches them only then.
+  4. The next Code session's report ends with its token count; write it in the run record.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+   1. then `ledger_index.py`; 
+   2. commit and push everything in the change list (`METHOD_MODEL_EFFORT.md` rides with it); 
+   3. move the patch to `documentation`.
+1. Paste `PROJECT_INSTRUCTIONS.md` (v3.121) into the Project's instructions.
+2. Phone: the x marks, then the sizes.
+3. The next coordinating session on Opus, opened from `HANDOFF_coordination_20261102_morning.md`: the L-506 second-slice patch, then the comet-switch brief.
+
+Tony-action rollup:
+- (do) Steps 1 to 5.
+- (decide) The sizes, from your phone. Nothing else.

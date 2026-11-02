@@ -3802,6 +3802,74 @@ resident.
 (Moved down from the resident protocol on 2026-11-01 when
 v3.120 made a fourth entry.)
 
+v3.118 (October 29, 2026): No rule changed in this document. FOUR
+skill bumps, one version each (L-504, L-399, L-503, L-502, L-484):
+interactive-exhibit 1.28 -> 1.29, gallery-cache-builder 1.13 -> 1.14,
+horizons-orbital-mechanics 1.12 -> 1.13, provenance-discipline 2.35 ->
+2.36. THE ORRERY'S CLOCK, AND THE WEBSITE'S BUILDS OF OCTOBER 29,
+WRITTEN INTO THE SKILLS.
+
+WHAT PROMPTED IT. The orrery's Claude Code session of Oct 29-30, built
+on orrery 571b9bf4 with the gallery at b55109f2 read only, from
+documentation/COORD_orrery_clock_session_brief_20261029.md (item 2 of
+documentation/HANDOFF_coordination_20261028_29.md, section 5). It built
+L-504's first slice: the data path reads the clock as UTC through
+utc_clock.py and asks JPL fresh. The gallery's two Code sessions of Oct
+29 (L-399, L-502, L-503) had left sentences in four skills that a
+session following them would act on, listed on L-503; the gallery
+session reads the skills and does not edit them, so they waited for
+this one.
+
+WHAT CHANGED. horizons-orbital-mechanics: The Clock Is Read as UTC;
+astroquery's week of saved answers and the one switch each instrument
+passes as cache=; a 2xr answer reading "n.a." is JPL stating none, and
+the website's 2xr is a second question held to the served point;
+Pluto's period asked of the Pluto-Charon barycentre (Tony, Oct 29:
+"Centre of mass"). gallery-cache-builder: the builder serves each small
+body's position_uncertainty by a match rule held to the body's own
+3-sigma, floored at 1e-7 AU and capped at 1e-3 AU by the closest comet
+pieces, a refusal naming its numbers; every question asked fresh
+(HORIZONS_CACHE); serve_drawings reads a room's rows.
+interactive-exhibit: the six corrections listed on L-503 -- a small
+body's own uncertainty used whole and the room's sentence printed when
+no source error is served; the main belt's cloud among the stored
+drawings; the drawing row in the Solar System room's drawer; the frame
+HUD as a row across the bottom and the count line beside the triad; a
+stored drawing's cross off the axes, held by the Label words check; and
+the source line's clocks. provenance-discipline: A Computed Position
+Prints What Its Errors Earn no longer says the asteroids wait for
+L-399, and a sentence saying why a figure is missing says the true
+reason. Each skill's oldest of four version entries moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule. Every
+sentence was read from the code at 571b9bf4 and b55109f2, and JPL's
+answers fetched, before it was written.
+
+NOT DONE HERE, AND WHY. ledger-and-session-records stays at 1.22: its
+next version is the records session's (the coordination handoff's
+queue, item 6), with the sentence on the run-record zone and the kinds
+of session. orrery-coding-conventions is unchanged.
+
+THE OBLIGATION TRAVELS. A Claude Code session reads each skill as the
+file in the repo. This one read in full horizons-orbital-mechanics
+1.12, orrery-coding-conventions 1.12, provenance-discipline 2.35,
+safe-file-editing 1.14, agentic-pre-test 1.3, interactive-exhibit 1.28,
+gallery-cache-builder 1.13 and ledger-and-session-records 1.22, each as
+the manifest expected. The account's installed copies cannot be seen
+from Code. The next session that loads skills from the account confirms
+its copies read interactive-exhibit 1.29, gallery-cache-builder 1.14,
+horizons-orbital-mechanics 1.13 and provenance-discipline 2.36, and,
+from v3.115, orrery-coding-conventions 1.12, before work that fires
+them.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.115 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-11-02 when
+v3.121 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

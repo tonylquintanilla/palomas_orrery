@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.120 | November 1, 2026
+Tony Quintanilla, PE | Claude | v3.121 | November 2, 2026
 
-Cut from 6a434ed8 at https://github.com/tonylquintanilla/palomas_orrery
+Cut from fd3551cc at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -363,6 +363,8 @@ Return complete file from stale base  Silently overwrites  Check uploads first; 
 Edit a leaf without tracing dispatch  Edits dead code             Grep for callers; confirm leaf is on live path
 Trust a handoff claim over the render  Claimed != done            Smoke-test the output; handoff is a claim, render is fact
 Review only the in-context files  Confident wrong conclusions  ls the uploads dir; read the whole set first
+Code session for a snippet-sized change  Tokens buy nothing verifiable  Patch or snippet; the smallest instrument
+Write a brief before its session is next  Dropped when the shape changes  Write it when the session is next
 
 Workflow Patterns
 
@@ -959,6 +961,60 @@ absorb. L-256.)
 
 
 
+Token Economy [QUALITY]
+Companion to Method Belongs to the Skill, one axis over: that rule
+governs who decides; this one governs what the work may cost. Tokens
+are not free, and the price charged does not carry their outside
+costs: the emissions behind the electricity and the chips, the water,
+the grid capacity built for the load, and the demand the habit
+creates. "Data preservation is climate action" does not stop at the
+data. (Tony, November 2, 2026: "I am becoming very concerned about the
+environmental cost of token generation ... I would like to make part
+of our protocol token economy.")
+
+The rule is one sentence: SPEND TOKENS WHERE THEY BUY VERIFICATION OR
+A DECISION, NOWHERE ELSE. Its instances:
+- THE SMALLEST INSTRUMENT that produces verifiable work. A snippet or
+  a patch before a Code session; a Code session before a brief and a
+  session; one model before a relay to three. The choice is said in
+  one line, so it can be questioned. (Founding case, November 2: a
+  176-line brief written for a Code session to change one marker
+  symbol, dropped when Tony asked for the patch that was the right
+  instrument from the start.)
+- NO SPECULATIVE DOCUMENTS. A brief is written when its session is
+  next, not in case; a design record when the talk has happened.
+- READ WHAT THE JOB FIRES, IN THE PARTS THE JOB NEEDS. A skill whose
+  rules govern the work at hand is read in full; a skill loaded for
+  its version line or for one section is read in those parts, by its
+  read plan. The Stale Skill check needs the version line and the
+  manifest row, both in the first lines.
+- TOOL OUTPUT STAYS OUT OF THE CONVERSATION UNLESS IT IS READ. A
+  folder listing or a log is sliced for the line wanted, never loaded
+  whole to read one size.
+- RECORDS AT THE LENGTH THE READER NEEDS. A handoff states a decision
+  in a sentence and points at the ledger for the rest; it does not
+  restate what the ledger holds. Plain speech (the Register Rule) is
+  not length: one plain sentence beats three compressed ones and
+  three plain ones alike.
+- CROSS-MODEL REVIEW FOR DOMAIN UNCERTAINTY, not for routine (Mode
+  7's own "When NOT to use").
+- MEASURED, OR IT IS A WISH. A Code session's report ends with its
+  token count as its environment prints it (Claude Code's /cost
+  output: input and output tokens, by model), and Tony writes the
+  count in his run record beside the commit. A session whose
+  environment prints no count says so and gives the sizes of what it
+  read and wrote. A rule nobody measures is the check that cannot
+  fail. (Tony's ruling, November 2, 2026, on the measured half:
+  "yes".)
+
+[QUALITY] on this document's own promotion test: a session that
+overspends delivers a result that is correct and costly, which is
+recoverable, and the count in the run record is what makes the
+overspend visible. The tier moves up when a failure shows it was
+load-bearing. L-506.
+
+
+
 PART 4: FOUNDATION
 Why this works. The philosophy that enables everything.
 
@@ -1228,6 +1284,42 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.121 (November 2, 2026): ONE rule added to this document: Token
+Economy [QUALITY], in Part 2 after Method Belongs to the Skill, with
+two rows in the Anti-Patterns table. No skill bump. TOKENS SPENT WHERE
+THEY BUY VERIFICATION OR A DECISION, AND COUNTED.
+
+WHAT PROMPTED IT. Tony, Nov 2, 09:24 Chicago, in the coordinating
+session (Claude Fable 5.1, orrery fd3551cc and gallery b7ddf775 read
+live), after it had written a 176-line brief for a Code session to
+change one marker symbol and dropped it when he asked for a patch
+instead: "I am becoming very concerned about the environmental cost
+of token generation ... I would like to make part of our protocol
+token economy." Asked whether the rule should carry a measured half,
+a token count in every Code report and run record: "yes" (09:29).
+
+WHAT CHANGED. The section's one sentence and its seven instances: the
+smallest instrument; no speculative documents; a skill read in the
+parts the job needs; tool output sliced, not loaded; records at the
+reader's length; cross-model review for domain uncertainty; and the
+count, as Claude Code prints it, in the report and in the run record.
+The orrery's CLAUDE.md, the Code door, amends two sentences to match:
+a skill is read in full when its rules govern the work and in parts
+otherwise, and the report ends with the count. L-506 opens for it.
+ledger-and-session-records carries the shape of the count in the
+report and the run record at its next version, the records session's.
+
+THE OBLIGATION TRAVELS. The Project's instructions on claude.ai read
+v3.120 until Tony pastes this version in; a chat session reads the
+Project page, so the rule reaches chat sessions only then. No skill
+changed; nothing to reinstall.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.118 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.120 (November 1, 2026): No rule changed in this document. ONE
 skill bump, one version (L-484, with L-485): gallery-cache-builder
 1.15 -> 1.16. THE LESSON OF THE WEBSITE'S RED NIGHTS WRITTEN INTO THE
@@ -1366,71 +1458,6 @@ work that fires them.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.116 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.118 (October 29, 2026): No rule changed in this document. FOUR
-skill bumps, one version each (L-504, L-399, L-503, L-502, L-484):
-interactive-exhibit 1.28 -> 1.29, gallery-cache-builder 1.13 -> 1.14,
-horizons-orbital-mechanics 1.12 -> 1.13, provenance-discipline 2.35 ->
-2.36. THE ORRERY'S CLOCK, AND THE WEBSITE'S BUILDS OF OCTOBER 29,
-WRITTEN INTO THE SKILLS.
-
-WHAT PROMPTED IT. The orrery's Claude Code session of Oct 29-30, built
-on orrery 571b9bf4 with the gallery at b55109f2 read only, from
-documentation/COORD_orrery_clock_session_brief_20261029.md (item 2 of
-documentation/HANDOFF_coordination_20261028_29.md, section 5). It built
-L-504's first slice: the data path reads the clock as UTC through
-utc_clock.py and asks JPL fresh. The gallery's two Code sessions of Oct
-29 (L-399, L-502, L-503) had left sentences in four skills that a
-session following them would act on, listed on L-503; the gallery
-session reads the skills and does not edit them, so they waited for
-this one.
-
-WHAT CHANGED. horizons-orbital-mechanics: The Clock Is Read as UTC;
-astroquery's week of saved answers and the one switch each instrument
-passes as cache=; a 2xr answer reading "n.a." is JPL stating none, and
-the website's 2xr is a second question held to the served point;
-Pluto's period asked of the Pluto-Charon barycentre (Tony, Oct 29:
-"Centre of mass"). gallery-cache-builder: the builder serves each small
-body's position_uncertainty by a match rule held to the body's own
-3-sigma, floored at 1e-7 AU and capped at 1e-3 AU by the closest comet
-pieces, a refusal naming its numbers; every question asked fresh
-(HORIZONS_CACHE); serve_drawings reads a room's rows.
-interactive-exhibit: the six corrections listed on L-503 -- a small
-body's own uncertainty used whole and the room's sentence printed when
-no source error is served; the main belt's cloud among the stored
-drawings; the drawing row in the Solar System room's drawer; the frame
-HUD as a row across the bottom and the count line beside the triad; a
-stored drawing's cross off the axes, held by the Label words check; and
-the source line's clocks. provenance-discipline: A Computed Position
-Prints What Its Errors Earn no longer says the asteroids wait for
-L-399, and a sentence saying why a figure is missing says the true
-reason. Each skill's oldest of four version entries moved to
-documentation/SKILL_HISTORIES.md, by the three-entry rule. Every
-sentence was read from the code at 571b9bf4 and b55109f2, and JPL's
-answers fetched, before it was written.
-
-NOT DONE HERE, AND WHY. ledger-and-session-records stays at 1.22: its
-next version is the records session's (the coordination handoff's
-queue, item 6), with the sentence on the run-record zone and the kinds
-of session. orrery-coding-conventions is unchanged.
-
-THE OBLIGATION TRAVELS. A Claude Code session reads each skill as the
-file in the repo. This one read in full horizons-orbital-mechanics
-1.12, orrery-coding-conventions 1.12, provenance-discipline 2.35,
-safe-file-editing 1.14, agentic-pre-test 1.3, interactive-exhibit 1.28,
-gallery-cache-builder 1.13 and ledger-and-session-records 1.22, each as
-the manifest expected. The account's installed copies cannot be seen
-from Code. The next session that loads skills from the account confirms
-its copies read interactive-exhibit 1.29, gallery-cache-builder 1.14,
-horizons-orbital-mechanics 1.13 and provenance-discipline 2.36, and,
-from v3.115, orrery-coding-conventions 1.12, before work that fires
-them.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.115 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 
