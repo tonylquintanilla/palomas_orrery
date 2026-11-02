@@ -111,6 +111,8 @@ Module updated: October 22, 2026 with Anthropic's Claude Opus 5.5
 sidereal period.)
 Module updated: October 28, 2026 with Anthropic's Claude Opus 5.5
 (L-443: mag, a named number, for the main belt's brightness cut.)
+Module updated: November 2, 2026 with Anthropic's Claude Opus 5.5
+(L-411: g_per_cm3, for the Sun's central density.)
 """
 
 TOKENS = {
@@ -345,6 +347,12 @@ TOKENS = {
         "dimension": "1 / cm3",
         "defining_constant": None,
         "meaning": "atoms per cubic centimetre, a number density",
+    },
+    # L-411 (2026-11-02): the Sun's central density, Bahcall et al. (2001).
+    "g_per_cm3": {
+        "dimension": "g / cm3",
+        "defining_constant": None,
+        "meaning": "grams per cubic centimetre, a mass density",
     },
     # L-410 (2026-10-19): five tokens for the corona's density model
     # and the zodiacal dust cloud's shape.

@@ -100,6 +100,9 @@ Module updated: October 22, 2026 with Anthropic's Claude Opus 5.5
 Module updated: October 27, 2026 with Anthropic's Claude Opus 5.5 (L-492:
     the stale "set manual scale" and "MB per frame" sentences removed
     from the hover and info text; the opening view frames every shell).
+Module updated: November 2, 2026 with Anthropic's Claude Opus 5.5 (L-411:
+    the chromosphere's name is "Chromosphere"; its depth prints from its
+    row in the hover, two lines down.)
 """
 
 # Phase C4: Import hover text strings from body shell modules.
@@ -1968,7 +1971,7 @@ SHELL_CONFIGS = {
         },
 
         'chromosphere': {
-            'name': 'Chromosphere (2,000 km skin)',
+            'name': 'Chromosphere',
             'radius_au': CHROMOSPHERE_PHYSICAL_RADII * SOLAR_RADIUS_AU,
             'color': 'rgb(30, 144, 255)',
             'opacity': 0.5,

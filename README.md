@@ -186,6 +186,7 @@ further down this file for the rest.
 | [L192_extractor_pins.txt](L192_extractor_pins.txt) | hand-written | Extractor pins for the L-192 corpus: what the instruction filter keeps and drops at each display-string site, frozen by Tony 2026-08-14. Read by test_extractor_pins.py on every maintenance run; regenerate only from that test's REPIN output. |
 | [L192_key_pins.txt](L192_key_pins.txt) | hand-written | Key pins for the L-192 corpus: every worksheet key minted at 305b269, asserted to still resolve by test_worksheet_keys.py on every maintenance run. A rename breaks this loudly; record the alias in worksheet_key_aliases.py, never regenerate to make it quiet. |
 | [LICENSE.md](LICENSE.md) | hand-written | The MIT license, as the standard text alone so GitHub recognizes it. Attributions are in NOTICE.md. |
+| [METHOD_MODEL_EFFORT.md](METHOD_MODEL_EFFORT.md) | hand-written | Field manual, one page: which instrument, which model and how much thinking each kind of task in Paloma's Orrery gets. Companion to the protocol's Token Economy (v3.121, L-506). Opened from the dashboard's documents list. |
 | [NOTICE.md](NOTICE.md) | hand-written | Data attributions and third-party components, moved out of LICENSE.md so GitHub recognizes the license. |
 | [PROJECT_ORIGIN.md](PROJECT_ORIGIN.md) | hand-written | How the project started, in Tony's own words. |
 | [requirements.txt](requirements.txt) | hand-written | Annotated dependency spec, including the kaleido 0.2.1 pin and the Plotly 5.x constraint. |

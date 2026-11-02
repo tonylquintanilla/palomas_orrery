@@ -935,7 +935,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*249 live items; 233 need attention (`!`); 165 RICE-scored; 250 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*250 live items; 234 need attention (`!`); 165 RICE-scored; 250 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1061,8 +1061,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-401 | The orrery's own distance hovers print by fixed widths, not by the errors the position earns (orrery, provenance) | OPEN | -- | 2026-10-21 |
 | ! | L-402 | Choose a date, or animate, within the range the drawn bodies are trusted for (gallery, exhibits) | OPEN | -- | 2026-10-01 |
 | ! | L-403 | Numbers in the object list's descriptions carry no source (orrery, provenance) | OPEN | -- | 2026-10-01 |
-| ! | L-411 | The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-10-28 |
-| ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-10-29 |
+| ! | L-411 | The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-11-02 |
+| ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-11-02 |
 | ! | L-423 | The website's checks: the order Tony confirmed (checks, gallery) | OPEN | -- | 2026-10-29 |
 | ! | L-424 | The checker reports one word for two different cases (worksheet checker) | OPEN | -- | 2026-10-11 |
 | ! | L-425 | A citation's location record is checked only in part (provenance tooling) | OPEN | -- | 2026-10-09 |
@@ -1081,7 +1081,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-466 | Every drawing starts and stops where a served row says (orrery + gallery, the Sun's slice and Earth's) | OPEN | -- | 2026-10-22 |
 | ! | L-467 | The scanner credits a display line with a citation it only sits near (orrery, provenance scanner) | OPEN | -- | 2026-10-21 |
 | ! | L-468 | The Sun room's phone look of 2026-10-21, night: the corona's drawer text and the Hills cloud's cross (gallery, the Sun room) | OPEN | -- | 2026-10-29 |
-| ! | L-470 | Orrery entries the website cannot serve as they stand (orrery, objects) | OPEN | -- | 2026-11-01 |
+| ! | L-470 | Orrery entries the website cannot serve as they stand (orrery, objects) | OPEN | -- | 2026-11-02 |
 | ! | L-476 | The orrery's whole-path plots draw by the same path plan as the website (orrery, spacecraft and comets) | OPEN | -- | 2026-10-24 |
 | ! | L-483 | A room for C/2025 K1 and its pieces, the first comet room (gallery, exhibits) | OPEN | -- | 2026-10-28 |
 | ! | L-484 | The website and the orrery agree on every object both draw, or the difference is written down (orrery + gallery, objects; method for interactive-exhibit) | OPEN | -- | 2026-11-01 |
@@ -1098,6 +1098,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-504 | The orrery's clock: UTC everywhere (orrery, every module that reads the clock) | OPEN | -- | 2026-10-31 |
 | ! | L-505 | The axis ticks and the ruler: dots on the axis lines, a ruler for the grid chip, no edge numbers (gallery, every room's frame) | OPEN | -- | 2026-11-02 |
 | ! | L-506 | Token economy: tokens spent where they buy verification or a decision, and counted (protocol, every session) | OPEN | -- | 2026-11-02 |
+| ! | L-507 | Historical missions: past voyages drawn in the Solar System room, then encounters (gallery, the Solar System room) | OPEN | -- | 2026-11-02 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1525,6 +1526,57 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
+#### [L-507] Historical missions: past voyages drawn in the Solar System room, then encounters (gallery, the Solar System room)
+<!-- L:507 status:OPEN upd:2026-11-02 section:A flag: rice: -->
+- **Opened 2026-11-02** by the Code session of that evening (Claude
+  Opus 5.5), on orrery 26a6dd04 and gallery 8c3947c1, at Tony's
+  request, from `documentation/HANDOFF_coordination_20261101_afternoon.md`
+  section 9 and his ruling of Nov 2, 14:32, from the Fable talk.
+- **The direction (Tony, Nov 1, 15:51),** on reading why Artemis II is
+  not served (no key, by the Oct 1 rule; JPL's data for it covers only
+  April 2 to 10, 2026): "this actually suggests a separate group for
+  historical missions in addition to active missions with special
+  windows." The handoff's question for the talk: does ticking a
+  historical mission move the Solar System room's date, or send the
+  visitor to its own room? The ruling below answers it.
+- **RULED, Tony, Nov 2, 14:32 (the Fable talk), in his words:**
+  - "Slice 1, first, existing machinery. Past voyages (Cassini,
+    Galileo, the like) are drawn in the Solar System room exactly as
+    Voyager is today: a served positions file fetched by the mission's
+    path plan across its whole span, the line drawn by
+    render_spacecraft.py, no marker when today is past the mission's
+    end. No change to the room's date. The new work is the words: the
+    text box says the path spans the mission's own dates while the
+    planets are drawn where they are today, so a flyby bends the line
+    where the planet was, not where it is. That sentence is missing
+    from the active spacecraft's box too, so it lands on Voyager as
+    well."
+  - "Slice 2, deferred behind the Sun's eight. Encounters: the planet
+    drawn where it was when the spacecraft arrived. This is the only
+    view that needs the room to move off today's date. Artemis II is an
+    encounter and belongs in the Earth room, so it waits here. L-402
+    (choose a date within the trusted range) shares the date control
+    with this slice and not the data supply: L-402 moves inside the
+    served 88-day window, encounters need the planets served at dates
+    outside it. Encounters were split from voyages by scale: Artemis II
+    is a dot on Earth's dot in the Solar System room."
+- **Checked by the coordinating session at website 8c3947c1:**
+  build_spacecraft_traces draws a path that ends before today whole and
+  solid, with no marker, and logs that; it does not fail. But the text
+  box hangs on the marker (the path lines carry no hover), so an ended
+  mission has nowhere for slice 1's words to appear. That is a design
+  point for Tony before slice 1 is built. All twelve served spacecraft
+  are active, so the ended branch has not yet run on real data.
+**Gap:** the design point first, Tony's: where an ended mission's words
+appear, since it has no marker to carry the text box. Then slice 1's
+brief (a gallery session, with the orrery's path plans for the chosen
+voyages). Slice 2 waits behind the Sun's eight (L-411, built Nov 2) and
+beside L-402 and L-489 (compositions; Artemis II in the Earth room).
+**Ref:** `documentation/HANDOFF_coordination_20261101_afternoon.md`
+section 9; L-489 (compositions, where encounters were ruled both);
+L-402 (choose a date); L-433 (the rooms); gallery
+`gallery/assembler/render_spacecraft.py` (`build_spacecraft_traces`).
+
 #### [L-506] Token economy: tokens spent where they buy verification or a decision, and counted (protocol, every session)
 <!-- L:506 status:OPEN upd:2026-11-02 section:A flag: rice: -->
 - **Opened 2026-11-02** by the coordinating session (Claude Fable 5.1,
@@ -1691,7 +1743,14 @@ v3.121 entry; L-505.
   marker table gains an x row (coordinate ticks: the axes' scale marks
   and the ruler; the cross row then info markers alone) at its next
   version, an orrery session's.
-**Gap:** Tony's word on the tick sizes (3 and 6 as built; 4 and 8, and
+- **2026-11-02, Tony's run record:** the tick sizes stay "as built", 3
+  and 6. No patch is needed for them.
+**Gap (replaces the one below, 2026-11-02):** `?ruler=` and `?halo=`
+from Tony's phone, or his word that both stay as built; any settled
+value written in as a default by a gallery patch. Closes on his Mode 5.
+Then interactive-exhibit's bump and orrery-coding-conventions' x row
+(above), in an orrery session.
+**Gap (superseded above, 2026-11-02):** Tony's word on the tick sizes (3 and 6 as built; 4 and 8, and
 5 and 10, both tried), then `?ruler=` and `?halo=`; his settled values
 written in as the defaults by a gallery patch. Closes on his Mode 5.
 Then interactive-exhibit's bump and orrery-coding-conventions' x row
@@ -3340,7 +3399,7 @@ orrery's plots, then the build.
 `spacecraft_encounters.py`; `palomas_orrery.py`.
 
 #### [L-470] Orrery entries the website cannot serve as they stand (orrery, objects)
-<!-- L:470 status:OPEN upd:2026-11-01 section:A flag: rice: -->
+<!-- L:470 status:OPEN upd:2026-11-02 section:A flag: rice: -->
 - **Found 2026-10-22, counting slice 1 of L-443 (the objects to the
   website).** One class: an entry in `celestial_objects.py` whose own
   fields stop it being served, recorded here rather than chased (The
@@ -3519,7 +3578,21 @@ orrery's plots, then the build.
   every night (4.6), for Tony to confirm when it is built; the
   website's CAP and the six config notes, for the gallery session
   after the ruler build (4.7, 4.10); the future-only apparition, noted.
-**Gap (replaces the one below, 2026-11-01):** the next orrery session
+- **2026-11-02, afternoon, the coordinating session (recorded by the
+  Code session of that evening, from its brief, section 6):** an OPEN
+  CHOICE, Tony's, not yet made. (a) The pins are kept and the monthly
+  Horizons check relied on; the switch comes off the road. (b) The
+  same, with the six comets asked every night. (c) The switch is kept,
+  after the Sun's eight. The coordinating session's reasons for asking:
+  nothing is broken (the six pins equalled JPL's CAP answers of Nov 1);
+  the Horizons check already reports a pin that has a newer record, and
+  the night holds the body (horizons_check.py's docstring); the switch
+  touches `_is_comet` and the comet-tail tests in palomas_orrery.py,
+  which fail silently.
+**Gap (replaces the one below, 2026-11-02):** Tony's choice among (a),
+(b) and (c) above. Under (c), the next orrery session builds the switch
+as the Gap below says.
+**Gap (superseded above, 2026-11-02; replaced the one below, 2026-11-01):** the next orrery session
 builds the switch from the brief's sections 4.5 to 4.10, with this
 session's findings added to 4.5's list of readers (the comet tests in
 palomas_orrery.py; the astroquery version), re-running 4.4's test
@@ -4274,7 +4347,7 @@ the deliberate limit, its number set then, each removal named.
 
 
 #### [L-411] The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice)
-<!-- L:411 status:OPEN upd:2026-10-28 section:A flag: rice: -->
+<!-- L:411 status:OPEN upd:2026-11-02 section:A flag: rice: -->
 - **Recorded 2026-10-04** while building L-371. The orrery's Sun
   hovers, and some of the gallery's served words, still type numbers
   that no row holds. One row per CLASS (The Braid); the instances live
@@ -4433,7 +4506,68 @@ the deliberate limit, its number set then, each removal named.
   Typed numbers check reads only the Sun and Earth rooms, so the dates
   in a Solar System room body's words (2026 ED138's discovery dates)
   are held by no check.
-**Gap:** the held sentences first, from Gemini 4's return (review
+- **2026-11-02, evening: the Sun's eight, built** by a Claude Code
+  session (Claude Opus 5.5), on orrery 26a6dd04 and gallery 8c3947c1,
+  from `documentation/COORD_L411_sun_eight_held_numbers_brief_20261102.md`.
+  Every source opened that session from the paper's own text, and the
+  words approved by Tony before they were written
+  (`documentation/WORDS_L411_sun_eight_20261102.md`; Tony: "Approved").
+  - 1, the core: two rows, SUN_CENTRAL_TEMPERATURE_K (15.696 million
+    K) and SUN_CENTRAL_DENSITY_G_CM3 (152.7), Bahcall, Pinsonneault and
+    Basu (2001), Table 5, each capped at two figures because the
+    paper's variant models agree only to two. The panel prints
+    "about 16,000,000 kelvin" (was a typed 15 million: 15.696 rounds to
+    16) and "about 150 times as dense as water". FOUND: the paper
+    prints the centre's units wrongly twice (Table 5's heading, "in
+    units of 10^7 K" and "10^2 gm cm^-3"; sec. 3.4, "15.7 x 10^9 K");
+    the size, 10^6 K and grams per cubic centimetre, is read from its
+    own sec. 3.3 (2.18 x 10^6 K, further out) and NASA/Marshall's page,
+    and both rows say so in a Note. Water's one gram per cubic
+    centimetre is USGS's Water Density page, on the density row's Also.
+    One token added, g_per_cm3.
+  - 2, the radiative zone: CONVECTION_ZONE_BASE_TEMPERATURE_K, the
+    same paper's sec. 3.3, 2.18 x 10^6 K, two figures; the panel prints
+    "Temperatures fall outward through it, to about 2,200,000 kelvin
+    at the top of the zone". "7 million near the core" REMOVED: the
+    paper's model file that would give it (sns.ias.edu, BP2000) sits
+    behind a robot check, and NASA/Marshall names no source. Tony can
+    read it himself (the words file says how) and a later step adds it.
+  - 3 and 4, the chromosphere's name: "Sun: Chromosphere" on both
+    sites; its depth prints from CHROMOSPHERE_PHYSICAL_KM two lines down
+    in the same hover. The pins that moved: the orrery's
+    `shell_configs.py` and `solar_visualization_shells.py`; the
+    website's config name, `smoke_display_figures.js` (SUN_LINES and the
+    fixture), `smoke_sun_shells.js` (two), `smoke_typed_numbers.js`
+    (HELD). Old fixtures and old patch files keep the old name, as
+    records.
+  - 5, the chromosphere's temperatures: Tony's approved words of
+    2026-10-20, printed on both sites from two rows,
+    CHROMOSPHERE_BOTTOM_TEMPERATURE_K (4,000, Carlsson sec. 1) and
+    CHROMOSPHERE_TOP_TEMPERATURE_K (7,000, sec. 2). FOUND on re-opening
+    the paper, as the brief asked: sec. 1's early models give 4000 K at
+    the minimum and 8000 K at about 2000 km; sec. 2's semi-empirical
+    models give 7000 K at 2000 km. Tony kept the approved words with
+    both before him; each row quotes its own section. The orrery's
+    10,000 K average and ~290 nm are gone.
+  - 6, Parker's April 2021: no word changed; the date joined the Typed
+    numbers check's DATES, with Kasper et al. (2021) on the Source line
+    (its abstract: 28 April 2021, 09:33 UT).
+  - 7 and 8, the Hills cloud: "A computer model (Nesvorny and others,
+    2025)" in the panel and the hover, the year now part of the
+    citation; the paper (arXiv:2502.11252) confirms the year, the
+    authors and the 30 degrees.
+  - NASA/Marshall's temperature words came off the Source lines of
+    CORE_RADII, RADIATIVE_ZONE_RADII and CHROMOSPHERE_PHYSICAL_KM, since
+    the numbers they gave now come from the rows above.
+  - HELD in `smoke_typed_numbers.js` is empty.
+**Gap (replaces the one below, 2026-11-02):** Tony's phone look in the
+Sun room (the core, the radiative zone, the chromosphere's name, hover
+and panel, the Alfven surface, the Hills cloud), once the website's
+cache is rebuilt. Then groups T, M and C, the three leftovers above,
+one shell at a time, off the road (the Sun's slice is closed, Tony,
+2026-11-02, 13:47). "7 million" may come back from the BP2000 model
+file, read by Tony.
+**Gap (superseded above, 2026-11-02):** the held sentences first, from Gemini 4's return (review
 above): rows for the core's centre and the convection zone's base
 (Parker's first crossing is done, above); the chromosphere's approved
 words and their two rows from Carlsson (2007) (ruled 2026-10-20);
@@ -4758,7 +4892,7 @@ for each case and updates the skill's bullet to match.
 L-252; L-418.
 
 #### [L-413] Earth's list: the old Earth items, in the order Tony confirmed (Earth room)
-<!-- L:413 status:OPEN upd:2026-10-29 section:A flag: rice: -->
+<!-- L:413 status:OPEN upd:2026-11-02 section:A flag: rice: -->
 - **Confirmed by Tony, 2026-10-04,** after a sweep of the open items
   that touch the Earth room, read against the code at orrery cbde99dc
   and gallery e7ef96eb, and checked against the Claude Fable 5.1 ledger
@@ -4928,7 +5062,28 @@ meanwhile is the field's epoch (L-356), which the hover states.
   `documentation/DESIGN_L314_solar_wind_rulings_20261029.md`):** this list
   moves from [NOW] to [beside] on Where We Are's road, its talks continuing
   from Tony's phone, while L-504 and then L-485 (a nightly run) are [NOW].
-**Gap (replaces the one below, 2026-10-27, evening):** talks 3 to 6
+- **2026-11-02, the slice closed (Tony, 13:47, in the coordinating
+  session of the afternoon):** "Actually these seem to be good
+  enhancements but not blocking ... i would call the sun and earth
+  slices closed for now. There's always more that can be done." Earth's
+  slice is closed as a slice; it closes in full once the Sun's eight
+  (L-411) are built, which the Code session of Nov 2, evening, did.
+  What stays here, kept as enhancements, none of them a gate on any
+  road item: talks 3, 5 and 6; the ruled builds L-375 (the dipole's
+  offset cone), L-356 (IGRF-14), L-454's Earth pairs, L-466 (the belts'
+  lower ends), L-331's hovers in `gallery/earth_geometry.js`, the shared
+  axis builder, and the exosphere fade (all above). Each is its own
+  ledger row already, or a bullet here naming where it lives, so nothing
+  is lost if this item closes (A Closing Item Re-homes Its Loose Ends).
+  PROPOSED by that session, for Tony to say: keep L-413 OPEN as Earth's
+  enhancement list, off the road, its Gap below; the other choice is
+  DONE, with the seven re-homed to their own rows (four have rows
+  already; the three without, L-331's hovers, the shared builder and the
+  fade, would each get a line on L-433, the rooms).
+**Gap (replaces the one below, 2026-11-02):** Tony's word: L-413 stays
+open as Earth's enhancement list, off the road, or goes DONE with its
+seven re-homed (above). Nothing in it gates other work.
+**Gap (superseded above, 2026-11-02; replaced the one below, 2026-10-27, evening):** talks 3 to 6
 with the coordinating session, then their builds as above, with
 L-331's hovers in `gallery/earth_geometry.js` and the shared axis
 builder.

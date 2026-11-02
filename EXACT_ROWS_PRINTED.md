@@ -32,9 +32,9 @@ Rule 7: each printed exact row states a print count, each orrery line prints it 
 
 ### `SUN_RADIUS_KM`
 
-- orrery `solar_visualization_shells.py` line 261: `f" ({row_text('SUN_RADIUS_KM', 'au')} to {row_text('CHROMOSPHERE_TOP_KM', 'au')} AU).<br>"`
-- orrery `solar_visualization_shells.py` line 263: `f"{exact_text('SUN_RADIUS_KM', grouping=True)} km in radius --<br>"`
-- orrery `solar_visualization_shells.py` line 533: `f"* Including both the Convective Zone and the Photosphere, the radius is from {row_text('RAD...`
+- orrery `solar_visualization_shells.py` line 265: `f" ({row_text('SUN_RADIUS_KM', 'au')} to {row_text('CHROMOSPHERE_TOP_KM', 'au')} AU).<br>"`
+- orrery `solar_visualization_shells.py` line 267: `f"{exact_text('SUN_RADIUS_KM', grouping=True)} km in radius --<br>"`
+- orrery `solar_visualization_shells.py` line 543: `f"* Including both the Convective Zone and the Photosphere, the radius is from {row_text('RAD...`
 - gallery `gallery/feature_renderers.js` line 3710 (config `/objects/0/features/sun_structures/photosphere`): `? fmtServed(cfg.radius.value, sunF, 0) : String(cfg.radius.value);`
 
 ### `EARTH_LEO_UPPER_ALTITUDE_KM`
@@ -48,7 +48,7 @@ Rule 7: each printed exact row states a print count, each orrery line prints it 
 
 - orrery `earth_visualization_shells.py` line 1390: `f"the poles, and they are thickest at L = {exact_text('EARTH_VAN_ALLEN_OUTER_RADII')}, about ...`
 - orrery `earth_visualization_shells.py` line 1400: `f"the L = {_band_low} to {_band_high} band; the drawn {exact_text('EARTH_VAN_ALLEN_OUTER_RADI...`
-- orrery `shell_configs.py` line 2280: `f"{exact_text('EARTH_VAN_ALLEN_OUTER_RADII')} Earth radii out (doi:10.1029/2024JA033504).\n"`
+- orrery `shell_configs.py` line 2283: `f"{exact_text('EARTH_VAN_ALLEN_OUTER_RADII')} Earth radii out (doi:10.1029/2024JA033504).\n"`
 - gallery `gallery/feature_renderers.js` line 1669 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `fmtServed(distances[i], counts[i], 1) +`
 - gallery `gallery/feature_renderers.js` line 1684 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `drawn: fmtServed(distances[i], counts[i], 1),`
 - gallery `gallery/feature_renderers.js` line 1690 (config `/objects/1/features/van_allen_belts/outer_belt_distance`): `? SOFT_BR + "(given as L = " + fmtServed(distances[i], counts[i], 1) +`
@@ -85,23 +85,23 @@ Rule 7: each printed exact row states a print count, each orrery line prints it 
 - orrery `comet_visualization_shells.py` line 591: `f"Inside the helmet cusp (~{row_text('HELMET_CUSP_RADII')} R_sun, "`
 - orrery `comet_visualization_shells.py` line 592: `f"~{row_text('HELMET_CUSP_RADII', 'au')} AU): {helmet_status}<br>"`
 - orrery `comet_visualization_shells.py` line 766: `f"({row_text('HELMET_CUSP_RADII')} R_sun, {row_text('HELMET_CUSP_RADII', 'au')} AU),<br>"`
-- orrery `solar_visualization_shells.py` line 755: `f'* Streamer Belt (Visible Corona): helmets pinch at {row_text('HELMET_CUSP_RADII')} R_sun, t...`
-- orrery `solar_visualization_shells.py` line 783: `f'* Streamer Belt (Visible Corona): helmets pinch at {row_text('HELMET_CUSP_RADII')} R_sun, t...`
-- orrery `solar_visualization_shells.py` line 1472: `f"higher than {row_text('HELMET_CUSP_LOW_RADII')}-{row_text('HELMET_CUSP_HIGH_RADII')} R_sun,...`
-- orrery `solar_visualization_shells.py` line 1473: `f"({row_text('HELMET_CUSP_RADII', 'km', grouping=True)} km, {row_text('HELMET_CUSP_RADII', 'a...`
+- orrery `solar_visualization_shells.py` line 765: `f'* Streamer Belt (Visible Corona): helmets pinch at {row_text('HELMET_CUSP_RADII')} R_sun, t...`
+- orrery `solar_visualization_shells.py` line 793: `f'* Streamer Belt (Visible Corona): helmets pinch at {row_text('HELMET_CUSP_RADII')} R_sun, t...`
+- orrery `solar_visualization_shells.py` line 1482: `f"higher than {row_text('HELMET_CUSP_LOW_RADII')}-{row_text('HELMET_CUSP_HIGH_RADII')} R_sun,...`
+- orrery `solar_visualization_shells.py` line 1483: `f"({row_text('HELMET_CUSP_RADII', 'km', grouping=True)} km, {row_text('HELMET_CUSP_RADII', 'a...`
 - gallery `gallery/feature_renderers.js` line 2103 (config `/objects/0/features/solar_atmosphere/streamer_belt/cusp_radius`): `"Cusp: " + (servedText(cfg.cusp_radius) || cuspR) + " solar radii<br>= " +`
 
 ### `INNER_LIMIT_OORT_CLOUD_AU`
 
 - orrery `palomas_orrery.py` line 10663: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
-- orrery `solar_visualization_shells.py` line 205: `_OORT_INNER_EDGE = row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)`
-- orrery `solar_visualization_shells.py` line 1153: `f'From {_OORT_INNER_EDGE} AU ({row_text("INNER_LIMIT_OORT_CLOUD_AU", unit="km", grouping=True...`
+- orrery `solar_visualization_shells.py` line 209: `_OORT_INNER_EDGE = row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)`
+- orrery `solar_visualization_shells.py` line 1163: `f'From {_OORT_INNER_EDGE} AU ({row_text("INNER_LIMIT_OORT_CLOUD_AU", unit="km", grouping=True...`
 - gallery `gallery/feature_renderers.js` line 2376 (config `/objects/0/features/oort_cloud/hills_cloud_torus/inner_radius`): `hover += "From " + (fmtAuServed(cfg.inner_radius) || fmtAu(lo)) + "," +`
 
 ### `OUTER_OORT_CLOUD_AU`
 
 - orrery `palomas_orrery.py` line 10663: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
-- orrery `solar_visualization_shells.py` line 215: `_OORT_OUTER_EDGE = row_text('OUTER_OORT_CLOUD_AU', grouping=True)`
+- orrery `solar_visualization_shells.py` line 219: `_OORT_OUTER_EDGE = row_text('OUTER_OORT_CLOUD_AU', grouping=True)`
 - gallery `gallery/feature_renderers.js` line 2483 (config `/objects/0/features/oort_cloud/outer_oort_clumpy/outer_radius`): `var z = fmtAuServed(cfg.outer_radius) || fmtAu(hi);`
 - gallery `gallery/feature_renderers.js` line 2483 (config `/objects/0/features/oort_cloud/galactic_tide/outer_radius`): `var z = fmtAuServed(cfg.outer_radius) || fmtAu(hi);`
 

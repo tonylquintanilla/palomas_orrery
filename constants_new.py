@@ -237,6 +237,12 @@ Module updated: October 28, 2026 with Anthropic's Claude Opus 5.5
 (L-443: the main asteroid belt, a section of its own: JPL's MBA class
 limits, the brightness cut, two counts and three spread tables measured
 from 5,429 of JPL's main-belt orbits, for main_belt_sampler.py.)
+Module updated: November 2, 2026 with Anthropic's Claude Opus 5.5
+(L-411, the Sun's eight: five rows the Sun room prints, the centre's
+temperature and density and the convection zone's base from Bahcall,
+Pinsonneault and Basu (2001), the chromosphere's bottom and top from
+Carlsson (2007); NASA/Marshall's temperature words come off three
+Source lines.)
 """
 
 import math
@@ -3272,14 +3278,11 @@ CORE_RADII = 0.25
 # Source: Hathaway, D. H., "NASA/Marshall Solar Physics", the solar interior page -- energy is
 # Source+: generated in the core, the innermost 25%; the nuclear burning
 # Source+: is almost completely shut off beyond its outer edge, about 25%
-# Source+: of the distance to the surface. The temperature at the very
-# Source+: center is about 15,000,000 degrees C and the density about
-# Source+: 150 g/cm3. https://solarscience.msfc.nasa.gov/interior.shtml
-# Also: Bahcall, Pinsonneault and Basu (2001), "Solar Models: current
-# Also+: epoch and time dependences, neutrinos, and helioseismological
-# Also+: properties", ApJ 555:990, arXiv:astro-ph/0010346 -- the standard
-# Also+: model's center, 15.7 million K and 152.7 g/cm3 (Table 5), with a
-# Also+: hydrogen mass fraction of 0.340 there (sec. 3.4).
+# Source+: of the distance to the surface.
+# Source+: https://solarscience.msfc.nasa.gov/interior.shtml
+# Note: the centre's temperature and density are rows of their own,
+# Note+: SUN_CENTRAL_TEMPERATURE_K and SUN_CENTRAL_DENSITY_G_CM3, from
+# Note+: Bahcall, Pinsonneault and Basu (2001), Table 5 (L-411, 2026-11-02).
 # Access: open, https://solarscience.msfc.nasa.gov/interior.shtml
 # Access+: (2026-10-17).
 # Corrected: 2026-10-17 (L-386, L-411) -- was CORE_AU = 0.2 x the solar
@@ -3295,6 +3298,65 @@ CORE_RADII = 0.25
 CORE_AU = CORE_RADII * SUN_RADIUS_KM / KM_PER_AU
 # Unit: au
 # Conversion: of CORE_RADII -- computed from that row, which carries the source and the count.
+
+SUN_CENTRAL_TEMPERATURE_K = 15.696e6
+# Unit: k
+# Status: measured V_SOURCED 2026-11-02 -- open full text
+# Figures: 2 -- capped. The source prints 15.696, five figures, but the
+# Figures+: same table's variant models of the Sun give 15.62 to 15.73
+# Figures+: million, so the figure is held to two (Rule 7, a cap with its
+# Figures+: reason).
+# Read: Table 5 (the Standard row) and sec. 3.4, Bahcall, Pinsonneault
+# Read+: and Basu (2001), the arXiv source text, 2026-11-02, Claude Opus
+# Read+: 5.5.
+# Source: Bahcall, J. N., Pinsonneault, M. H. and Basu, S. (2001),
+# Source+: "Solar Models: current epoch and time dependences, neutrinos,
+# Source+: and helioseismological properties", ApJ 555:990,
+# Source+: arXiv:astro-ph/0010346 -- Table 5: the
+# Source+: Standard model's central temperature at the current epoch,
+# Source+: 15.696 million K. https://arxiv.org/abs/astro-ph/0010346
+# Access: open, https://arxiv.org/abs/astro-ph/0010346 (2026-11-02).
+# Also: Hathaway, D. H., "NASA/Marshall Solar Physics", the solar
+# Also+: interior page -- the temperature at the very center of the Sun
+# Also+: is about 15,000,000 degrees C and the density is about 150 g/cm3.
+# Also+: https://solarscience.msfc.nasa.gov/interior.shtml (2026-11-02).
+# Note: the paper prints this figure's unit wrongly twice: Table 5's
+# Note+: heading gives T_c "in units of 10^7 K", and sec. 3.4 "15.7 x
+# Note+: 10^9 K at the current epoch". Its size is 10^6 K: sec. 3.3
+# Note+: gives the convection zone's base, further out, as 2.18 x 10^6 K
+# Note+: (CONVECTION_ZONE_BASE_TEMPERATURE_K), and NASA/Marshall gives
+# Note+: about 15,000,000 degrees at the centre (Also). The rounding is
+# Note+: why the website's typed "15 million" becomes 16,000,000 (L-411;
+# Note+: Tony's approval of 2026-11-02).
+
+SUN_CENTRAL_DENSITY_G_CM3 = 152.7
+# Unit: g_per_cm3
+# Status: measured V_SOURCED 2026-11-02 -- open full text
+# Figures: 2 -- capped. The source prints 152.7, four figures, but the
+# Figures+: same table's variant models of the Sun give 148.1 to 152.9,
+# Figures+: so the figure is held to two (Rule 7, a cap with its reason).
+# Read: Table 5 (the Standard row), Bahcall, Pinsonneault and Basu
+# Read+: (2001), the arXiv source text, 2026-11-02, Claude Opus 5.5.
+# Source: Bahcall, J. N., Pinsonneault, M. H. and Basu, S. (2001),
+# Source+: "Solar Models: current epoch and time dependences, neutrinos,
+# Source+: and helioseismological properties", ApJ 555:990,
+# Source+: arXiv:astro-ph/0010346 -- Table 5: the
+# Source+: Standard model's central density at the current epoch, 152.7
+# Source+: grams per cubic centimetre. https://arxiv.org/abs/astro-ph/0010346
+# Access: open, https://arxiv.org/abs/astro-ph/0010346 (2026-11-02).
+# Also: Hathaway, D. H., "NASA/Marshall Solar Physics", the solar
+# Also+: interior page -- the density is about 150 g/cm3.
+# Also+: https://solarscience.msfc.nasa.gov/interior.shtml (2026-11-02).
+# Also: U.S. Geological Survey, Water Science School, "Water Density"
+# Also+: -- the density of water is roughly 1 gram per milliliter.
+# Also+: https://www.usgs.gov/special-topics/water-science-school/science/water-density
+# Also+: (2026-11-02).
+# Note: Table 5's heading prints the density's unit as 10^2 gm cm^-3;
+# Note+: its size is grams per cubic centimetre, as NASA/Marshall's 150
+# Note+: g/cm3 (Also). A millilitre is a cubic centimetre, and water is
+# Note+: roughly one gram in it (USGS, Also), so the website's "times as
+# Note+: dense as water" prints this row's number as it stands. Replaces
+# Note+: the website's typed 150 (L-411).
 
 PHOTOSPHERE_THICKNESS_KM = 100
 # Unit: km
@@ -3335,10 +3397,9 @@ RADIATIVE_ZONE_RADII = 0.713
 # Source+: effectively identical to the 1991 estimate of 0.713 +/- 0.003.
 # Source+: Hathaway, D. H., "NASA/Marshall Solar Physics", the solar interior page -- the
 # Source+: radiative zone extends from the outer edge of the core to the
-# Source+: interface layer; the temperature falls from 7,000,000 degrees C
-# Source+: to about 2,000,000 degrees C over the same distance, and an
-# Source+: individual photon takes about a million years to reach the
-# Source+: interface layer. https://solarscience.msfc.nasa.gov/interior.shtml
+# Source+: interface layer, and an individual photon takes about a
+# Source+: million years to reach the interface layer.
+# Source+: https://solarscience.msfc.nasa.gov/interior.shtml
 # Also: Christensen-Dalsgaard, Gough and Thompson (1991), "The depth of
 # Also+: the solar convection zone", ApJ 378:413 -- the 1991 estimate,
 # Also+: given in its abstract as a depth of 0.287 +/- 0.003 solar radii
@@ -3360,6 +3421,31 @@ RADIATIVE_ZONE_RADII = 0.713
 RADIATIVE_ZONE_AU = RADIATIVE_ZONE_RADII * SUN_RADIUS_KM / KM_PER_AU
 # Unit: au
 # Conversion: of RADIATIVE_ZONE_RADII -- computed from that row, which carries the source and the count.
+
+CONVECTION_ZONE_BASE_TEMPERATURE_K = 2.18e6
+# Unit: k
+# Status: measured V_SOURCED 2026-11-02 -- open full text
+# Figures: 2 -- capped. The source prints 2.18 x 10^6 K, three figures,
+# Figures+: but the same paper's variant models of the Sun (Table 6) give
+# Figures+: 2.15 to 2.20 million, so the figure is held to two (Rule 7, a
+# Figures+: cap with its reason).
+# Read: sec. 3.3 and Table 6 (the Standard row), Bahcall, Pinsonneault
+# Read+: and Basu (2001), the arXiv source text, 2026-11-02, Claude Opus
+# Read+: 5.5.
+# Source: Bahcall, J. N., Pinsonneault, M. H. and Basu, S. (2001),
+# Source+: "Solar Models: current epoch and time dependences, neutrinos,
+# Source+: and helioseismological properties", ApJ 555:990,
+# Source+: arXiv:astro-ph/0010346 -- sec. 3.3: the
+# Source+: Standard model's temperature at the base of the convective
+# Source+: zone at the current epoch, T(CZ, today) = 2.18 x 10^6 K.
+# Source+: https://arxiv.org/abs/astro-ph/0010346
+# Access: open, https://arxiv.org/abs/astro-ph/0010346 (2026-11-02).
+# Note: the top of the radiative zone, whose radius RADIATIVE_ZONE_RADII
+# Note+: gives. Replaces the website's typed "2 million" (L-411). The
+# Note+: website's "7 million near the core" was removed, not sourced:
+# Note+: the paper's model file that would give it
+# Note+: (www.sns.ias.edu/~jnb, BP2000) sits behind a robot check this
+# Note+: session could not pass (Tony's approval of 2026-11-02).
 
 # Solar atmosphere (in solar radii)
 # RETIRED 2026-08-16 -- CHROMOSPHERE_RADII = 1.1, the DRAWN shell radius.
@@ -3388,9 +3474,8 @@ CHROMOSPHERE_PHYSICAL_KM = 2000.0
 # Source+: is a layer of gas, approximately 2000 km thick, known as the
 # Source+: chromosphere.
 # Source+: https://solar.physics.montana.edu/YPOP/Spotlight/SunInfo/Chromosph.html;
-# Source+: Hathaway, D. H., "NASA/Marshall Solar Physics", the chromosphere page -- the
-# Source+: temperature rises from 6000 degrees C to about 20,000 degrees C;
-# Source+: at these temperatures hydrogen gives off a reddish light
+# Source+: Hathaway, D. H., "NASA/Marshall Solar Physics", the chromosphere page -- hydrogen
+# Source+: there gives off a reddish light
 # Source+: (H-alpha), which gives the chromosphere its name.
 # Source+: https://solarscience.msfc.nasa.gov/chromos.shtml
 # Also: Carroll and Ostlie, An Introduction to Modern Astrophysics, Ch. 11,
@@ -3426,6 +3511,43 @@ CHROMOSPHERE_PHYSICAL_RADII = CHROMOSPHERE_TOP_KM / SUN_RADIUS_KM
 # Note+: is thousandths of a solar radius (provenance-discipline 2.21 and
 # Note+: 2.22, Rule 3). The shell draws at this value. Until patch D20 it
 # Note+: was its own row, the sum written over the radius (patch D17).
+
+CHROMOSPHERE_BOTTOM_TEMPERATURE_K = 4000.0
+# Unit: k
+# Status: measured V_SOURCED 2026-11-02 -- open full text
+# Figures: 1 -- the source gives around 4000 K; the zeros are
+# Figures+: placeholders (Rule 2).
+# Read: sec. 1, Carlsson (2007), the arXiv source text, 2026-11-02,
+# Read+: Claude Opus 5.5.
+# Source: Carlsson, M. (2007), "Modeling the Solar Chromosphere",
+# Source+: arXiv:0704.1509 -- sec. 1: the early
+# Source+: plane-parallel models give a temperature falling to a minimum
+# Source+: around 4000 K about 500 km above the visible surface.
+# Source+: https://arxiv.org/pdf/0704.1509
+# Access: open, https://arxiv.org/abs/0704.1509 (2026-11-02).
+# Note: the bottom of the chromosphere, its temperature minimum. Replaces
+# Note+: the website's typed 6,000 kelvin and the orrery's typed 4,000
+# Note+: and 6,000 K (L-411; Tony's approved words of 2026-10-20).
+
+CHROMOSPHERE_TOP_TEMPERATURE_K = 7000.0
+# Unit: k
+# Status: measured V_SOURCED 2026-11-02 -- open full text
+# Figures: 1 -- the source gives 7000 K; the zeros are placeholders
+# Figures+: (Rule 2).
+# Read: sec. 2, Carlsson (2007), the arXiv source text, 2026-11-02,
+# Read+: Claude Opus 5.5.
+# Source: Carlsson, M. (2007), "Modeling the Solar Chromosphere",
+# Source+: arXiv:0704.1509 -- sec. 2: the
+# Source+: semi-empirical models rise to about 6000 K at 1000 km height
+# Source+: and thereafter a gradual temperature increase to 7000 K at
+# Source+: 2000 km height, with a very rapid increase from there to
+# Source+: coronal temperatures. https://arxiv.org/pdf/0704.1509
+# Access: open, https://arxiv.org/abs/0704.1509 (2026-11-02).
+# Note: sec. 1 gives the early models' 8000 K at about 2000 km. This row
+# Note+: takes sec. 2's semi-empirical models, at the 2,000 km the room
+# Note+: draws (CHROMOSPHERE_PHYSICAL_KM); Tony kept his approved words
+# Note+: on 2026-11-02, with both sections before him. Replaces the
+# Note+: website's typed 20,000 and the orrery's typed 20,000 K (L-411).
 
 CORONA_BASE_HEIGHT_KM = 3000.0
 # Unit: km

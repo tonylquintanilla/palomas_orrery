@@ -1,10 +1,10 @@
 <!-- Doc-Kind: generated | The provenance audit: every numeric claim scored against its citation, rebuilt by provenance_scanner.py on each run. Do not hand-edit. -->
 # Paloma's Orrery -- Provenance Audit
 
-Generated: November 01, 2026
-Files scanned: 171
-Total findings: 1151
-Constants: 295 | Dicts: 73 | Display strings: 783
+Generated: November 02, 2026
+Files scanned: 172
+Total findings: 1154
+Constants: 300 | Dicts: 73 | Display strings: 781
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -20,12 +20,12 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T1 by domain | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|--------------|---:|---:|---:|--------:|
+| 20261102T233651Z | `26a6dd0` | 172 | 1154 | 275 | orrery 111, Earth System 149, stars 13, utilities 2 | 698 | 175 | 6 | 0 |
+| 20261102T233137Z | `26a6dd0` | 172 | 1154 | 275 | orrery 111, Earth System 149, stars 13, utilities 2 | 698 | 175 | 6 | 0 |
 | 20261101T201749Z | `6a434ed` | 171 | 1151 | 275 | orrery 111, Earth System 149, stars 13, utilities 2 | 695 | 175 | 6 | 0 |
 | 20261101T032357Z | `f4994ff` | 171 | 1151 | 275 | orrery 111, Earth System 149, stars 13, utilities 2 | 695 | 175 | 6 | 0 |
 | 20261101T031743Z | `f4994ff` | 171 | 1151 | 275 | orrery 111, Earth System 149, stars 13, utilities 2 | 695 | 175 | 6 | 0 |
 | 20261030T232334Z | `b27ce8c` | 170 | 1151 | 275 | orrery 111, Earth System 149, stars 13, utilities 2 | 695 | 175 | 6 | 0 |
-| 20261030T195143Z | `1e454a8` | 170 | 1150 | 275 | orrery 111, Earth System 149, stars 13, utilities 2 | 695 | 174 | 6 | 0 |
-| 20261030T030044Z | `571b9bf` | 170 | 1148 | 275 | orrery 111, Earth System 149, stars 13, utilities 2 | 695 | 172 | 6 | 0 |
 
 Change since the previous run: total +0, Tier-1 +0.
 
@@ -61,7 +61,7 @@ No file's Tier-1 count rose.
 | Tier | Score | Action | Count |
 |------|-------|--------|------:|
 | 1 | 16-20 | FIX NOW | 275 |
-| 2 | 10-15 | REVIEW | 695 |
+| 2 | 10-15 | REVIEW | 698 |
 | 3 | 5-9 | LOW PRIORITY | 175 |
 | 4 | 1-4 | LOWEST PRIORITY | 6 |
 
@@ -80,7 +80,7 @@ The push gate is Tier-1 = 0 on the active build path, and it binds at export. Th
 
 **GATE PATH: 0 TIER-1 -- the push gate holds.**
 
-Examined: 197 of 228 exported rows; 31 more are computed from other rows, whose inputs are scored where they are typed; 6 display string(s) in 90 served object(s). The whole tree's Tier-1 count is 275: orrery 111, Earth System 149, stars 13, utilities 2; most of them are off this path.
+Examined: 202 of 233 exported rows; 31 more are computed from other rows, whose inputs are scored where they are typed; 6 display string(s) in 90 served object(s). The whole tree's Tier-1 count is 275: orrery 111, Earth System 149, stars 13, utilities 2; most of them are off this path.
 
 Exported rows computed from other rows (31): `CHROMOSPHERE_TOP_KM`, `CORONA_BASE_KM`, `DEG_PER_RAD`, `EARTH_BOW_SHOCK_STANDOFF_RADII`, `EARTH_DIPOLE_TILT_DEG`, `EARTH_DIPOLE_TILT_RATE_DEG_PER_YEAR`, `EARTH_GEOSTATIONARY_RADIUS_KM`, `EARTH_HILL_SPHERE_KM`, `EARTH_LEO_INNER_KM`, `EARTH_LEO_INNER_PERIOD_MIN`, `EARTH_LEO_OUTER_KM`, `EARTH_LEO_OUTER_PERIOD_MIN`, `EARTH_LOWER_MANTLE_KM`, `EARTH_MAGNETOPAUSE_STANDOFF_RADII`, `EARTH_MAGNETOTAIL_DRAWN_END_RADII`, `EARTH_MAGNETOTAIL_DRAWN_RADIUS_RADII`, `EARTH_OBLIQUITY_J2000_DEG`, `EARTH_SIDEREAL_ROTATION_PERIOD_H`, `EARTH_STRATOPAUSE_RADIUS_KM`, `EARTH_THERMOPAUSE_RADIUS_KM`, `EARTH_VAN_ALLEN_OUTER_RADII`, `GALACTIC_NORTH_POLE_DEC_J2000_DEG`, `HELMET_CUSP_RADII`, `INNER_LIMIT_OORT_CLOUD_AU`, `OUTER_OORT_CLOUD_AU`, `PARKER_CLOSEST_KM`, `ROCHE_LIMIT_DRAWN_RADII`, `SGR_A_STAR_DEC_ICRS_DEG`, `SGR_A_STAR_RA_ICRS_DEG`, `SUN_EQUATOR_TILT_DEG`, `SUN_SIDEREAL_ROTATION_PERIOD_D`.
 
@@ -92,35 +92,35 @@ Rows whose own comment block says `# Status: declared` and gives the reason, on 
 
 | File | Line | Row | Status | Reason on |
 |------|-----:|-----|--------|-----------|
-| `constants_new.py` | 707 | `S_PER_HOUR` | Status: declared 2026-09-23 -- an exact unit conversion, seconds in one | Status line |
-| `constants_new.py` | 730 | `S_PER_DAY` | Status: declared 2026-10-12 -- an exact unit conversion, seconds in one | Status line |
-| `constants_new.py` | 749 | `S_PER_MINUTE` | Status: declared 2026-10-18 -- an exact unit conversion, seconds in one | Status line |
-| `constants_new.py` | 769 | `D_PER_JULIAN_YEAR` | Status: declared 2026-10-11 -- an exact unit conversion, days in one | Status line |
-| `constants_new.py` | 799 | `EARTH_POLE_RA_J2000_DEG` | Status: declared 2026-09-23 -- a frame definition, the FALLBACK only | Declared line |
-| `constants_new.py` | 836 | `EARTH_POLE_DEC_J2000_DEG` | Status: declared 2026-09-23 -- a frame definition, the FALLBACK only | Declared line |
-| `constants_new.py` | 848 | `ARCSEC_PER_DEG` | Status: declared 2026-09-23 -- an exact unit conversion, arcseconds in | Status line |
-| `constants_new.py` | 867 | `EARTH_OBLIQUITY_J2000_ARCSEC` | Status: declared 2026-09-23 -- a frame definition, not a measurement | Declared line |
-| `constants_new.py` | 905 | `GALACTIC_NORTH_POLE_RA_J2000_DEG` | Status: declared 2026-10-02 -- a frame definition, not a measurement | Declared line |
-| `constants_new.py` | 951 | `GALACTIC_NORTH_POLE_DEC_J2000_ARCSEC` | Status: declared 2026-10-02 -- a frame definition, not a measurement | Declared line |
-| `constants_new.py` | 2065 | `DEG_PER_TURN` | Status: declared 2026-10-22 -- an exact unit conversion, degrees in one | Status line |
-| `constants_new.py` | 2409 | `EARTH_SOLAR_WIND_PRESSURE_NPA` | Status: declared pending 2026-09-12 -- L-314 | Declared line |
-| `constants_new.py` | 2427 | `EARTH_SOLAR_WIND_BZ_NT` | Status: declared pending 2026-09-12 -- L-314 | Declared line |
-| `constants_new.py` | 2439 | `EARTH_SOLAR_WIND_SPEED_KM_S` | Status: declared pending 2026-09-12 -- L-314 | Declared line |
-| `constants_new.py` | 2608 | `EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG` | Status: declared 2026-09-14 -- a drawing limit, not an edge | Declared line |
-| `constants_new.py` | 2703 | `EARTH_BOW_SHOCK_CUT_ANGLE_DEG` | Status: declared 2026-09-21 -- a drawing limit, not an edge | Declared line |
-| `constants_new.py` | 3474 | `INNER_CORONA_RADII` | Status: declared 2026-08-29 -- a stated CONVENTION, not a | Status line |
-| `constants_new.py` | 3503 | `OUTER_CORONA_RADII` | Status: declared 2026-10-04 -- a boundary chosen for the drawing, L-371 | Declared line |
-| `constants_new.py` | 3946 | `ZODIACAL_DUST_OUTER_AU` | Status: declared 2026-10-19 -- the drawing stops where the COBE model | Status line |
-| `constants_new.py` | 4057 | `MAIN_BELT_SAMPLE_H_MAX` | Status: declared 2026-10-28 -- which asteroids the spread is measured | Declared line |
-| `constants_new.py` | 4658 | `HILLS_CLOUD_PLANES_NODE_CELL_DEG` | Status: declared 2026-10-10 -- the width of a cell in the reading of | Declared line |
-| `constants_new.py` | 4668 | `HILLS_CLOUD_PLANES_INCL_CELL_DEG` | Status: declared 2026-10-10 -- the height of a cell in the reading of | Declared line |
-| `constants_new.py` | 4675 | `HILLS_CLOUD_PLANES_READ` | Status: declared 2026-10-10 -- a reading of the paper's Fig. 3, which | Declared line |
-| `constants_new.py` | 4913 | `HILLS_CLOUD_ECCENTRICITY` | Status: declared 2026-10-10 -- chosen for the picture; the paper shows | Declared line |
-| `constants_new.py` | 5641 | `DE430_TERRESTRIAL_POSITION_PLACE_KM` | Status: declared 2026-10-01 -- the reporting place of the source's | Declared line |
-| `constants_new.py` | 5669 | `DE430_JUPITER_SATURN_POSITION_PLACE_KM` | Status: declared 2026-10-01 -- the reporting place of the source's | Declared line |
-| `constants_new.py` | 5693 | `DE430_URANUS_NEPTUNE_PLUTO_POSITION_PLACE_KM` | Status: declared 2026-10-01 -- the reporting place of the source's | Declared line |
-| `constants_new.py` | 5720 | `DE430_MOON_POSITION_PLACE_KM` | Status: declared 2026-10-12 -- the reporting place of the source's | Declared line |
-| `constants_new.py` | 6048 | `M3_PER_KM3` | Status: declared 2026-09-19 -- an exact unit conversion, 1 km^3 = 1e9 m^3. | Status line |
+| `constants_new.py` | 713 | `S_PER_HOUR` | Status: declared 2026-09-23 -- an exact unit conversion, seconds in one | Status line |
+| `constants_new.py` | 736 | `S_PER_DAY` | Status: declared 2026-10-12 -- an exact unit conversion, seconds in one | Status line |
+| `constants_new.py` | 755 | `S_PER_MINUTE` | Status: declared 2026-10-18 -- an exact unit conversion, seconds in one | Status line |
+| `constants_new.py` | 775 | `D_PER_JULIAN_YEAR` | Status: declared 2026-10-11 -- an exact unit conversion, days in one | Status line |
+| `constants_new.py` | 805 | `EARTH_POLE_RA_J2000_DEG` | Status: declared 2026-09-23 -- a frame definition, the FALLBACK only | Declared line |
+| `constants_new.py` | 842 | `EARTH_POLE_DEC_J2000_DEG` | Status: declared 2026-09-23 -- a frame definition, the FALLBACK only | Declared line |
+| `constants_new.py` | 854 | `ARCSEC_PER_DEG` | Status: declared 2026-09-23 -- an exact unit conversion, arcseconds in | Status line |
+| `constants_new.py` | 873 | `EARTH_OBLIQUITY_J2000_ARCSEC` | Status: declared 2026-09-23 -- a frame definition, not a measurement | Declared line |
+| `constants_new.py` | 911 | `GALACTIC_NORTH_POLE_RA_J2000_DEG` | Status: declared 2026-10-02 -- a frame definition, not a measurement | Declared line |
+| `constants_new.py` | 957 | `GALACTIC_NORTH_POLE_DEC_J2000_ARCSEC` | Status: declared 2026-10-02 -- a frame definition, not a measurement | Declared line |
+| `constants_new.py` | 2071 | `DEG_PER_TURN` | Status: declared 2026-10-22 -- an exact unit conversion, degrees in one | Status line |
+| `constants_new.py` | 2415 | `EARTH_SOLAR_WIND_PRESSURE_NPA` | Status: declared pending 2026-09-12 -- L-314 | Declared line |
+| `constants_new.py` | 2433 | `EARTH_SOLAR_WIND_BZ_NT` | Status: declared pending 2026-09-12 -- L-314 | Declared line |
+| `constants_new.py` | 2445 | `EARTH_SOLAR_WIND_SPEED_KM_S` | Status: declared pending 2026-09-12 -- L-314 | Declared line |
+| `constants_new.py` | 2614 | `EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG` | Status: declared 2026-09-14 -- a drawing limit, not an edge | Declared line |
+| `constants_new.py` | 2709 | `EARTH_BOW_SHOCK_CUT_ANGLE_DEG` | Status: declared 2026-09-21 -- a drawing limit, not an edge | Declared line |
+| `constants_new.py` | 3596 | `INNER_CORONA_RADII` | Status: declared 2026-08-29 -- a stated CONVENTION, not a | Status line |
+| `constants_new.py` | 3625 | `OUTER_CORONA_RADII` | Status: declared 2026-10-04 -- a boundary chosen for the drawing, L-371 | Declared line |
+| `constants_new.py` | 4068 | `ZODIACAL_DUST_OUTER_AU` | Status: declared 2026-10-19 -- the drawing stops where the COBE model | Status line |
+| `constants_new.py` | 4179 | `MAIN_BELT_SAMPLE_H_MAX` | Status: declared 2026-10-28 -- which asteroids the spread is measured | Declared line |
+| `constants_new.py` | 4780 | `HILLS_CLOUD_PLANES_NODE_CELL_DEG` | Status: declared 2026-10-10 -- the width of a cell in the reading of | Declared line |
+| `constants_new.py` | 4790 | `HILLS_CLOUD_PLANES_INCL_CELL_DEG` | Status: declared 2026-10-10 -- the height of a cell in the reading of | Declared line |
+| `constants_new.py` | 4797 | `HILLS_CLOUD_PLANES_READ` | Status: declared 2026-10-10 -- a reading of the paper's Fig. 3, which | Declared line |
+| `constants_new.py` | 5035 | `HILLS_CLOUD_ECCENTRICITY` | Status: declared 2026-10-10 -- chosen for the picture; the paper shows | Declared line |
+| `constants_new.py` | 5763 | `DE430_TERRESTRIAL_POSITION_PLACE_KM` | Status: declared 2026-10-01 -- the reporting place of the source's | Declared line |
+| `constants_new.py` | 5791 | `DE430_JUPITER_SATURN_POSITION_PLACE_KM` | Status: declared 2026-10-01 -- the reporting place of the source's | Declared line |
+| `constants_new.py` | 5815 | `DE430_URANUS_NEPTUNE_PLUTO_POSITION_PLACE_KM` | Status: declared 2026-10-01 -- the reporting place of the source's | Declared line |
+| `constants_new.py` | 5842 | `DE430_MOON_POSITION_PLACE_KM` | Status: declared 2026-10-12 -- the reporting place of the source's | Declared line |
+| `constants_new.py` | 6170 | `M3_PER_KM3` | Status: declared 2026-09-19 -- an exact unit conversion, 1 km^3 = 1e9 m^3. | Status line |
 
 ---
 
@@ -130,9 +130,9 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 
 | File | Domain | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |
 |------|--------|-------:|-------:|-------:|-------:|------:|
-| `constants_new.py` | orrery | 1 | 186 | 4 | 2 | 193 |
+| `constants_new.py` | orrery | 1 | 191 | 4 | 2 | 198 |
 | `info_dictionary.py` | orrery | 2 | 106 | 2 | 0 | 110 |
-| `shell_configs.py` | orrery | 34 | 62 | 0 | 0 | 96 |
+| `shell_configs.py` | orrery | 34 | 61 | 0 | 0 | 95 |
 | `paleoclimate_wet_bulb_full.py` | earth_science | 44 | 22 | 0 | 0 | 66 |
 | `paleoclimate_human_origins_full.py` | earth_science | 40 | 6 | 0 | 0 | 46 |
 | `star_notes.py` | stars | 1 | 37 | 0 | 0 | 38 |
@@ -142,8 +142,8 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `comet_visualization_shells.py` | orrery | 4 | 22 | 0 | 0 | 26 |
 | `neptune_visualization_shells.py` | orrery | 0 | 25 | 0 | 0 | 25 |
 | `uranus_visualization_shells.py` | orrery | 1 | 20 | 0 | 0 | 21 |
-| `solar_visualization_shells.py` | orrery | 2 | 15 | 0 | 0 | 17 |
 | `planet_visualization_utilities.py` | orrery | 4 | 11 | 1 | 0 | 16 |
+| `solar_visualization_shells.py` | orrery | 2 | 14 | 0 | 0 | 16 |
 | `earth_visualization_shells.py` | earth_science | 0 | 16 | 0 | 0 | 16 |
 | `path_plan.py` | dev_tools | 0 | 0 | 16 | 0 | 16 |
 | `provenance_scanner.py` | dev_tools | 0 | 0 | 16 | 0 | 16 |
@@ -241,7 +241,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 
 | Domain | Files | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |
 |--------|------:|-------:|-------:|-------:|-------:|------:|
-| Orrery (solar system + orbital mechanics) | 46 | 111 | 583 | 52 | 3 | 749 |
+| Orrery (solar system + orbital mechanics) | 46 | 111 | 586 | 52 | 3 | 752 |
 | Earth System | 13 | 149 | 71 | 2 | 0 | 222 |
 | Dev Tools (audit, diagnostics, one-shot scripts) | 30 | 0 | 0 | 115 | 0 | 115 |
 | Stars (stellar neighborhood) | 12 | 13 | 41 | 6 | 3 | 63 |
@@ -275,10 +275,10 @@ Each of these was written for something. Either it belongs on a specific value -
 
 | File | Line | Annotation |
 |------|-----:|------------|
-| `constants_new.py` | 3263 | # Cross-checked: Gemini 2026-08-02 -- Carroll & Ostlie (worksheet_gemini_constants_remaining.md) |
-| `constants_new.py` | 3264 | # Cross-checked: GPT 2026-08-02 -- NASA Sun Fact Sheet (constants_new_citation_verification_gpt.md) |
-| `constants_new.py` | 5027 | # Cross-checked: Claude 2026-08-02 -- IAU B3 / Archinal / JPL SSD (worksheet_claude_constants_new.md) |
-| `constants_new.py` | 5028 | # Cross-checked: GPT 2026-08-02 -- IAU B3 / Archinal / JPL SSD (constants_new_citation_verification_gpt.md) |
+| `constants_new.py` | 3269 | # Cross-checked: Gemini 2026-08-02 -- Carroll & Ostlie (worksheet_gemini_constants_remaining.md) |
+| `constants_new.py` | 3270 | # Cross-checked: GPT 2026-08-02 -- NASA Sun Fact Sheet (constants_new_citation_verification_gpt.md) |
+| `constants_new.py` | 5149 | # Cross-checked: Claude 2026-08-02 -- IAU B3 / Archinal / JPL SSD (worksheet_claude_constants_new.md) |
+| `constants_new.py` | 5150 | # Cross-checked: GPT 2026-08-02 -- IAU B3 / Archinal / JPL SSD (constants_new_citation_verification_gpt.md) |
 
 ---
 
@@ -360,7 +360,7 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 5134 | dict | CENTER_BODY_RADII[...] | (1 entry) | 4 | 4 | **16** | No source citation (recalled) | RELATIONAL -- defined against a tracked base (name) |
+| 5256 | dict | CENTER_BODY_RADII[...] | (1 entry) | 4 | 4 | **16** | No source citation (recalled) | RELATIONAL -- defined against a tracked base (name) |
 
 ### coordinate_system_guide.py
 
@@ -768,47 +768,47 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 634 | string | display string @ line 634 | (5 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 655 | string | display string @ line 655 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 670 | string | display string @ line 670 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 684 | string | display string @ line 684 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 698 | string | display string @ line 698 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 731 | string | display string @ line 731 | (4 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 761 | string | display string @ line 761 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 779 | string | display string @ line 779 | (10 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 820 | string | display string @ line 820 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 827 | string | display string @ line 827 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 851 | string | display string @ line 851 | (5 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 898 | string | display string @ line 898 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 905 | string | display string @ line 905 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 921 | string | display string @ line 921 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 933 | string | display string @ line 933 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 947 | string | display string @ line 947 | (1 claim) | 4 | 4 | **16** | No source citation; date-sensitive (recalled) | Public-facing display string (hover/INFO) |
-| 989 | string | display string @ line 989 | (6 claims) | 4 | 4 | **16** | No source citation; date-sensitive (recalled) | Public-facing display string (hover/INFO) |
-| 997 | string | display string @ line 997 | (6 claims) | 4 | 4 | **16** | No source citation; date-sensitive (recalled) | Public-facing display string (hover/INFO) |
-| 1019 | string | display string @ line 1019 | (2 claims) | 4 | 4 | **16** | No source citation; date-sensitive (recalled) | Public-facing display string (hover/INFO) |
-| 1025 | string | display string @ line 1025 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 1064 | string | display string @ line 1064 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 1072 | string | display string @ line 1072 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 1087 | string | display string @ line 1087 | (5 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 1097 | string | display string @ line 1097 | (3 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 1114 | string | display string @ line 1114 | (6 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 1125 | string | display string @ line 1125 | (3 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 1141 | string | display string @ line 1141 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 1150 | string | display string @ line 1150 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 1276 | string | display string @ line 1276 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 1287 | string | display string @ line 1287 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 1301 | string | display string @ line 1301 | (5 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 1315 | string | display string @ line 1315 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 1328 | string | display string @ line 1328 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 2136 | string | display string @ line 2136 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 637 | string | display string @ line 637 | (5 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 658 | string | display string @ line 658 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 673 | string | display string @ line 673 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 687 | string | display string @ line 687 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 701 | string | display string @ line 701 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 734 | string | display string @ line 734 | (4 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 764 | string | display string @ line 764 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 782 | string | display string @ line 782 | (10 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 823 | string | display string @ line 823 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 830 | string | display string @ line 830 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 854 | string | display string @ line 854 | (5 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 901 | string | display string @ line 901 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 908 | string | display string @ line 908 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 924 | string | display string @ line 924 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 936 | string | display string @ line 936 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 950 | string | display string @ line 950 | (1 claim) | 4 | 4 | **16** | No source citation; date-sensitive (recalled) | Public-facing display string (hover/INFO) |
+| 992 | string | display string @ line 992 | (6 claims) | 4 | 4 | **16** | No source citation; date-sensitive (recalled) | Public-facing display string (hover/INFO) |
+| 1000 | string | display string @ line 1000 | (6 claims) | 4 | 4 | **16** | No source citation; date-sensitive (recalled) | Public-facing display string (hover/INFO) |
+| 1022 | string | display string @ line 1022 | (2 claims) | 4 | 4 | **16** | No source citation; date-sensitive (recalled) | Public-facing display string (hover/INFO) |
+| 1028 | string | display string @ line 1028 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 1067 | string | display string @ line 1067 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 1075 | string | display string @ line 1075 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 1090 | string | display string @ line 1090 | (5 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 1100 | string | display string @ line 1100 | (3 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 1117 | string | display string @ line 1117 | (6 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 1128 | string | display string @ line 1128 | (3 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 1144 | string | display string @ line 1144 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 1153 | string | display string @ line 1153 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 1279 | string | display string @ line 1279 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 1290 | string | display string @ line 1290 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 1304 | string | display string @ line 1304 | (5 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 1318 | string | display string @ line 1318 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 1331 | string | display string @ line 1331 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 2139 | string | display string @ line 2139 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 
 ### solar_visualization_shells.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 804 | string | display string @ line 804 | (12 claims) | 4 | 4 | **16** | No source citation; date-sensitive (recalled) | Public-facing display string (hover/INFO) |
-| 1700 | string | display string @ line 1700 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+| 814 | string | display string @ line 814 | (12 claims) | 4 | 4 | **16** | No source citation; date-sensitive (recalled) | Public-facing display string (hover/INFO) |
+| 1710 | string | display string @ line 1710 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 
 ### star_notes.py
 
@@ -945,192 +945,197 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 424 | constant | EARTH_MEAN_RADIUS_KM | 6371.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 453 | constant | EARTH_INNER_CORE_KM | 1221.5 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 483 | constant | EARTH_OUTER_CORE_KM | 3480.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 521 | constant | EARTH_D660_DEPTH_KM | 660.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 583 | constant | EARTH_UPPER_MANTLE_KM | 6346.6 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 625 | constant | EARTH_GM_KM3_S2 | 398600.4418 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 647 | constant | EARTH_ROTATION_RATE_RAD_S | 7.292115e-05 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 972 | constant | SGR_A_STAR_RA_ICRS_ARCSEC | 959100.6 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 1007 | constant | SGR_A_STAR_DEC_ICRS_ARCSEC | -104428.138 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 1044 | constant | SUN_POLE_RA_J2000_DEG | 286.13 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 1076 | constant | SUN_POLE_DEC_J2000_DEG | 63.87 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 1129 | constant | EARTH_LEO_UPPER_ALTITUDE_KM | 2000.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 1161 | constant | EARTH_LEO_LOWER_ALTITUDE_KM | 180.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 1218 | constant | EARTH_STRATOPAUSE_ALTITUDE_KM | 50.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 1236 | constant | EARTH_THERMOPAUSE_ALTITUDE_KM | 600.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 1315 | constant | EARTH_INNER_CORE_TEMPERATURE_K | 5600.0 | 3 | 5 | **15** | Cited, not cross-checked; date-sensitive | MEASURED -- independently catalogued fact (name) |
-| 1338 | constant | EARTH_CRUST_OCEANIC_THICKNESS_KM | 5.0 | 3 | 5 | **15** | Cited, not cross-checked; date-sensitive | MEASURED -- independently catalogued fact (name) |
-| 1351 | constant | EARTH_CRUST_CONTINENTAL_THICKNESS_KM | 30.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 1361 | constant | EARTH_SURFACE_COLDEST_K | 184.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 1378 | constant | EARTH_SURFACE_HOTTEST_K | 329.8 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 1394 | constant | EARTH_TROPOPAUSE_ALTITUDE_KM | 12.0 | 3 | 5 | **15** | Cited, not cross-checked; date-sensitive | MEASURED -- independently catalogued fact (name) |
-| 1410 | constant | EARTH_SURFACE_MEAN_TEMPERATURE_K | 290.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 1427 | constant | EARTH_TROPOPAUSE_TEMPERATURE_K | 222.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 1441 | constant | EARTH_THERMOSPHERE_TOP_TEMPERATURE_K | 2000.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 1481 | constant | APOPHIS_2029_APPROACH_ALTITUDE_KM | 32000.0 | 3 | 5 | **15** | Cited, not cross-checked; date-sensitive | MEASURED -- independently catalogued fact (name) |
-| 1499 | constant | EARTH_CORE_MANTLE_BOUNDARY_TEMPERATURE_K | 4100.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 1522 | constant | EARTH_INNER_CORE_BOUNDARY_TEMPERATURE_K | 5580.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 1542 | constant | EARTH_UPPER_MANTLE_TOP_TEMPERATURE_K | 1646.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 1560 | constant | EARTH_UPPER_MANTLE_BASE_TEMPERATURE_K | 1994.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 1573 | constant | EARTH_LOWER_MANTLE_TOP_TEMPERATURE_K | 1960.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 1587 | constant | EARTH_ATMOSPHERE_MASS_BELOW_STRATOPAUSE_ | 99.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 1604 | constant | EARTH_THERMOPAUSE_LOW_KM | 500.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 1619 | constant | EARTH_THERMOPAUSE_HIGH_KM | 1000.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 1653 | constant | MOON_SEMI_MAJOR_AXIS_KM | 384400.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 1666 | constant | ISS_ALTITUDE_LOW_KM | 370.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 1679 | constant | ISS_ALTITUDE_HIGH_KM | 460.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 1688 | constant | ISS_INCLINATION_DEG | 51.6 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 1697 | constant | HUBBLE_ALTITUDE_KM | 550.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 1743 | constant | STARLINK_PEAK_ALTITUDE_KM | 550.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 1811 | constant | EARTH_VAN_ALLEN_OUTER_BAND_LOW_L | 4.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 1843 | constant | EARTH_VAN_ALLEN_OUTER_BAND_HIGH_L | 5.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 1904 | constant | EARTH_VAN_ALLEN_INNER_BELT_INNER_EDGE | 1.1 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 1930 | constant | EARTH_VAN_ALLEN_INNER_BELT_OUTER_EDGE | 2.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 1955 | constant | EARTH_VAN_ALLEN_OUTER_BELT_INNER_EDGE | 3.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 1983 | constant | EARTH_VAN_ALLEN_OUTER_BELT_OUTER_EDGE | 7.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 2083 | constant | SUN_ROTATION_RATE_DEG_PER_DAY | 14.1844 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 2160 | constant | SUN_ADOPTED_PERIOD_LATITUDE_DEG | 16 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 2176 | constant | SUN_DIFFERENTIAL_ROTATION_EQUATOR_D | 25 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 2197 | constant | SUN_DIFFERENTIAL_ROTATION_POLE_D | 35 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 2215 | constant | SUN_CARRINGTON_SYNODIC_PERIOD_D | 27.28 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 2242 | constant | EARTH_IGRF13_G10_NT | -29404.8 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 2264 | constant | EARTH_IGRF13_G11_NT | -1450.9 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 2280 | constant | EARTH_IGRF13_H11_NT | 4652.5 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 2296 | constant | EARTH_IGRF13_G10_SV_NT_PER_YEAR | 5.7 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 2313 | constant | EARTH_IGRF13_G11_SV_NT_PER_YEAR | 7.4 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 2330 | constant | EARTH_IGRF13_H11_SV_NT_PER_YEAR | -25.9 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 2494 | constant | EARTH_MAGNETOPAUSE_SHUE_A3_PER_NT | 0.184 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 2511 | constant | EARTH_MAGNETOPAUSE_SHUE_A4_NT | 8.14 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 2528 | constant | EARTH_MAGNETOPAUSE_SHUE_A5 | 6.6 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 2550 | constant | EARTH_MAGNETOPAUSE_SHUE_A6 | 0.58 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 2570 | constant | EARTH_MAGNETOPAUSE_SHUE_A7_PER_NT | -0.007 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 2589 | constant | EARTH_MAGNETOPAUSE_SHUE_A8 | 0.024 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 2667 | constant | EARTH_BOW_SHOCK_JELINEK_EPS | 6.55 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 2682 | constant | EARTH_BOW_SHOCK_JELINEK_LAMBDA | 1.17 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 3124 | constant | EARTH_EXOSPHERE_H_FIT_COEFF_CM3 | 370520.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 3147 | constant | EARTH_EXOSPHERE_H_FIT_EXPONENT | 3.67 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 3156 | constant | EARTH_EXOSPHERE_H_OUTER_EXPONENT | 3.02 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 3299 | constant | PHOTOSPHERE_THICKNESS_KM | 100 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 3310 | constant | PHOTOSPHERE_TEMPERATURE_K | 5700 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 3378 | constant | CHROMOSPHERE_PHYSICAL_KM | 2000.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 3430 | constant | CORONA_BASE_HEIGHT_KM | 3000.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 3788 | constant | CORONA_MODEL_TEMPERATURE_K | 1180000.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 3816 | constant | CORONA_MODEL_MEAN_MOLECULAR_WEIGHT | 0.57 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 3828 | constant | CORONA_MODEL_ELECTRON_FLUX_PER_S | 9.127e+34 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 3838 | constant | CORONA_TEMPERATURE_MAX_K | 2000000.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 3849 | constant | ZODIACAL_DUST_DENSITY_EXPONENT | 1.34 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 3866 | constant | ZODIACAL_DUST_BETA | 4.14 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 3882 | constant | ZODIACAL_DUST_GAMMA | 0.942 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 3897 | constant | ZODIACAL_DUST_MU | 0.189 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 3912 | constant | ZODIACAL_DUST_TILT_DEG | 2.03 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 3928 | constant | ZODIACAL_DUST_NODE_DEG | 77.7 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 3988 | constant | ZODIACAL_DUST_JFC_LOW_PERCENT | 85 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 4002 | constant | ZODIACAL_DUST_JFC_HIGH_PERCENT | 95 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 4009 | constant | ZODIACAL_DUST_ASTEROID_MAX_PERCENT | 10 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 4029 | constant | MAIN_BELT_A_INNER_AU | 2.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 4042 | constant | MAIN_BELT_A_OUTER_AU | 3.2 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 4049 | constant | MAIN_BELT_Q_MIN_AU | 1.666 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 4065 | constant | MAIN_BELT_SAMPLE_ORBITS | 5429 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 4077 | constant | MAIN_BELT_JPL_COUNT | 1394455 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 4086 | dict | MAIN_BELT_DISTANCE_PERCENTILES_AU[...] | (29 entries) | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 4140 | dict | MAIN_BELT_LATITUDE_PERCENTILES_DEG[...] | (29 entries) | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 4190 | dict | MAIN_BELT_HEIGHT_PERCENTILES_AU[...] | (29 entries) | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 4246 | constant | TERMINATION_SHOCK_AU | 94.01 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 4275 | constant | VOYAGER2_TERMINATION_SHOCK_AU | 83.6 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 4299 | constant | TERMINATION_SHOCK_RANGE_LOW_AU | 80 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 4316 | constant | TERMINATION_SHOCK_RANGE_HIGH_AU | 100 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 4325 | constant | VOYAGER2_TS_UPSTREAM_SPEED_KM_S | 321.01 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 4341 | constant | VOYAGER2_TS_DOWNSTREAM_SPEED_KM_S | 184.67 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 4352 | constant | HELIOPAUSE_AU | 121 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 4397 | constant | OORT_CLOUD_INNER_EDGE_LOW_AU | 2000 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 4414 | constant | OORT_CLOUD_INNER_EDGE_HIGH_AU | 5000 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 4438 | constant | INNER_OORT_CLOUD_AU | 20000 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 4464 | constant | OORT_CLOUD_OUTER_EDGE_LOW_AU | 10000 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 4476 | constant | OORT_CLOUD_OUTER_EDGE_HIGH_AU | 100000 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 4509 | constant | INNER_OORT_DISK_OUTER_AU | 10000 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 4532 | constant | HILLS_CLOUD_TILT_DEG | 30 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 4552 | constant | ECLIPTIC_NODE_GALACTIC_LON_DEG | 186 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 4572 | constant | HILLS_CLOUD_PERI_ARG_BAND1_LOW_DEG | 70 | 3 | 5 | **15** | Cited, not cross-checked; date-sensitive | MEASURED -- independently catalogued fact (name) |
-| 4590 | constant | HILLS_CLOUD_PERI_ARG_BAND1_HIGH_DEG | 180 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 4598 | constant | HILLS_CLOUD_PERI_ARG_BAND2_LOW_DEG | 250 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 4606 | constant | HILLS_CLOUD_PERI_ARG_BAND2_HIGH_DEG | 360 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 4614 | constant | HILLS_CLOUD_NODE_LOW_DEG | 120 | 3 | 5 | **15** | Cited, not cross-checked; date-sensitive | MEASURED -- independently catalogued fact (name) |
-| 4633 | constant | HILLS_CLOUD_NODE_HIGH_DEG | 180 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 4641 | constant | HILLS_CLOUD_INCL_GAL_LOW_DEG | 75 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 4649 | constant | HILLS_CLOUD_INCL_GAL_HIGH_DEG | 90 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 4929 | constant | GRAVITATIONAL_INFLUENCE_PC | 0.65 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 4967 | constant | PARKER_CLOSEST_ALTITUDE_KM | 6160000.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 5039 | constant | MERCURY_RADIUS_KM | 2439.7 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 5042 | constant | VENUS_RADIUS_KM | 6051.8 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 5057 | constant | PHOBOS_RADIUS_KM | 11.1 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 5075 | constant | PLUTO_RADIUS_KM | 1188.3 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 5078 | constant | BENNU_RADIUS_KM | 0.24503 | 3 | 5 | **15** | Cited; cross-check incomplete (1/2 models) | MEASURED -- independently catalogued fact (name) |
-| 5096 | constant | ERIS_RADIUS_KM | 1163 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 5122 | constant | MAKEMAKE_RADIUS_KM | 715 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 5166 | dict | KNOWN_ORBITAL_PERIODS[...] | (133 entries) | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 5761 | constant | VOYAGER_1_POINTING_RA_2030_ARCSEC | 1.701 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 5775 | constant | VOYAGER_1_POINTING_DEC_2030_ARCSEC | 1.535 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 5786 | constant | VOYAGER_2_POINTING_RA_2030_ARCSEC | 4.718 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 5800 | constant | VOYAGER_2_POINTING_DEC_2030_ARCSEC | 3.715 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 5827 | constant | COMET_HALLEY_NUCLEUS_RADIUS_KM | 5.5 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 5843 | constant | COMET_HALE_BOPP_NUCLEUS_RADIUS_KM | 37 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 5861 | constant | COMET_IKEYA_SEKI_NUCLEUS_RADIUS_KM | 4.3 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 5877 | constant | COMET_HYAKUTAKE_NUCLEUS_RADIUS_KM | 2.4 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 5895 | constant | COMET_3I_ATLAS_NUCLEUS_RADIUS_KM | 1.3 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 5912 | constant | COMET_MAPS_NUCLEUS_DIAMETER_KM | 0.4 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 5930 | constant | COMET_SCHAUMASSE_NUCLEUS_DIAMETER_KM | 2.6 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 5943 | constant | COMET_HOWELL_NUCLEUS_DIAMETER_KM | 4.4 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 5957 | constant | COMET_TEMPEL_2_NUCLEUS_RADIUS_KM | 5.98 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 6027 | constant | BOLTZMANN_CONSTANT_J_PER_K | 1.380649e-23 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
-| 6039 | constant | PROTON_MASS_KG | 1.67262192595e-27 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 6117 | constant | SGR_A_MASS_SOLAR | 4297000.0 | 3 | 5 | **15** | Cited; cross-check incomplete (1/2 models) | MEASURED -- independently catalogued fact (name) |
-| 6145 | constant | SGR_A_DISTANCE_PC | 8277.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 430 | constant | EARTH_MEAN_RADIUS_KM | 6371.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 459 | constant | EARTH_INNER_CORE_KM | 1221.5 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 489 | constant | EARTH_OUTER_CORE_KM | 3480.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 527 | constant | EARTH_D660_DEPTH_KM | 660.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 589 | constant | EARTH_UPPER_MANTLE_KM | 6346.6 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 631 | constant | EARTH_GM_KM3_S2 | 398600.4418 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 653 | constant | EARTH_ROTATION_RATE_RAD_S | 7.292115e-05 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 978 | constant | SGR_A_STAR_RA_ICRS_ARCSEC | 959100.6 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 1013 | constant | SGR_A_STAR_DEC_ICRS_ARCSEC | -104428.138 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 1050 | constant | SUN_POLE_RA_J2000_DEG | 286.13 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 1082 | constant | SUN_POLE_DEC_J2000_DEG | 63.87 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 1135 | constant | EARTH_LEO_UPPER_ALTITUDE_KM | 2000.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 1167 | constant | EARTH_LEO_LOWER_ALTITUDE_KM | 180.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 1224 | constant | EARTH_STRATOPAUSE_ALTITUDE_KM | 50.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 1242 | constant | EARTH_THERMOPAUSE_ALTITUDE_KM | 600.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 1321 | constant | EARTH_INNER_CORE_TEMPERATURE_K | 5600.0 | 3 | 5 | **15** | Cited, not cross-checked; date-sensitive | MEASURED -- independently catalogued fact (name) |
+| 1344 | constant | EARTH_CRUST_OCEANIC_THICKNESS_KM | 5.0 | 3 | 5 | **15** | Cited, not cross-checked; date-sensitive | MEASURED -- independently catalogued fact (name) |
+| 1357 | constant | EARTH_CRUST_CONTINENTAL_THICKNESS_KM | 30.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 1367 | constant | EARTH_SURFACE_COLDEST_K | 184.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 1384 | constant | EARTH_SURFACE_HOTTEST_K | 329.8 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 1400 | constant | EARTH_TROPOPAUSE_ALTITUDE_KM | 12.0 | 3 | 5 | **15** | Cited, not cross-checked; date-sensitive | MEASURED -- independently catalogued fact (name) |
+| 1416 | constant | EARTH_SURFACE_MEAN_TEMPERATURE_K | 290.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 1433 | constant | EARTH_TROPOPAUSE_TEMPERATURE_K | 222.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 1447 | constant | EARTH_THERMOSPHERE_TOP_TEMPERATURE_K | 2000.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 1487 | constant | APOPHIS_2029_APPROACH_ALTITUDE_KM | 32000.0 | 3 | 5 | **15** | Cited, not cross-checked; date-sensitive | MEASURED -- independently catalogued fact (name) |
+| 1505 | constant | EARTH_CORE_MANTLE_BOUNDARY_TEMPERATURE_K | 4100.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 1528 | constant | EARTH_INNER_CORE_BOUNDARY_TEMPERATURE_K | 5580.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 1548 | constant | EARTH_UPPER_MANTLE_TOP_TEMPERATURE_K | 1646.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 1566 | constant | EARTH_UPPER_MANTLE_BASE_TEMPERATURE_K | 1994.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 1579 | constant | EARTH_LOWER_MANTLE_TOP_TEMPERATURE_K | 1960.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 1593 | constant | EARTH_ATMOSPHERE_MASS_BELOW_STRATOPAUSE_ | 99.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 1610 | constant | EARTH_THERMOPAUSE_LOW_KM | 500.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 1625 | constant | EARTH_THERMOPAUSE_HIGH_KM | 1000.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 1659 | constant | MOON_SEMI_MAJOR_AXIS_KM | 384400.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 1672 | constant | ISS_ALTITUDE_LOW_KM | 370.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 1685 | constant | ISS_ALTITUDE_HIGH_KM | 460.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 1694 | constant | ISS_INCLINATION_DEG | 51.6 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 1703 | constant | HUBBLE_ALTITUDE_KM | 550.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 1749 | constant | STARLINK_PEAK_ALTITUDE_KM | 550.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 1817 | constant | EARTH_VAN_ALLEN_OUTER_BAND_LOW_L | 4.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 1849 | constant | EARTH_VAN_ALLEN_OUTER_BAND_HIGH_L | 5.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 1910 | constant | EARTH_VAN_ALLEN_INNER_BELT_INNER_EDGE | 1.1 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 1936 | constant | EARTH_VAN_ALLEN_INNER_BELT_OUTER_EDGE | 2.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 1961 | constant | EARTH_VAN_ALLEN_OUTER_BELT_INNER_EDGE | 3.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 1989 | constant | EARTH_VAN_ALLEN_OUTER_BELT_OUTER_EDGE | 7.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 2089 | constant | SUN_ROTATION_RATE_DEG_PER_DAY | 14.1844 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 2166 | constant | SUN_ADOPTED_PERIOD_LATITUDE_DEG | 16 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 2182 | constant | SUN_DIFFERENTIAL_ROTATION_EQUATOR_D | 25 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 2203 | constant | SUN_DIFFERENTIAL_ROTATION_POLE_D | 35 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 2221 | constant | SUN_CARRINGTON_SYNODIC_PERIOD_D | 27.28 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 2248 | constant | EARTH_IGRF13_G10_NT | -29404.8 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 2270 | constant | EARTH_IGRF13_G11_NT | -1450.9 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 2286 | constant | EARTH_IGRF13_H11_NT | 4652.5 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 2302 | constant | EARTH_IGRF13_G10_SV_NT_PER_YEAR | 5.7 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 2319 | constant | EARTH_IGRF13_G11_SV_NT_PER_YEAR | 7.4 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 2336 | constant | EARTH_IGRF13_H11_SV_NT_PER_YEAR | -25.9 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 2500 | constant | EARTH_MAGNETOPAUSE_SHUE_A3_PER_NT | 0.184 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 2517 | constant | EARTH_MAGNETOPAUSE_SHUE_A4_NT | 8.14 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 2534 | constant | EARTH_MAGNETOPAUSE_SHUE_A5 | 6.6 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 2556 | constant | EARTH_MAGNETOPAUSE_SHUE_A6 | 0.58 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 2576 | constant | EARTH_MAGNETOPAUSE_SHUE_A7_PER_NT | -0.007 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 2595 | constant | EARTH_MAGNETOPAUSE_SHUE_A8 | 0.024 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 2673 | constant | EARTH_BOW_SHOCK_JELINEK_EPS | 6.55 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 2688 | constant | EARTH_BOW_SHOCK_JELINEK_LAMBDA | 1.17 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 3130 | constant | EARTH_EXOSPHERE_H_FIT_COEFF_CM3 | 370520.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 3153 | constant | EARTH_EXOSPHERE_H_FIT_EXPONENT | 3.67 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 3162 | constant | EARTH_EXOSPHERE_H_OUTER_EXPONENT | 3.02 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 3302 | constant | SUN_CENTRAL_TEMPERATURE_K | 15696000.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 3332 | constant | SUN_CENTRAL_DENSITY_G_CM3 | 152.7 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 3361 | constant | PHOTOSPHERE_THICKNESS_KM | 100 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 3372 | constant | PHOTOSPHERE_TEMPERATURE_K | 5700 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 3425 | constant | CONVECTION_ZONE_BASE_TEMPERATURE_K | 2180000.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 3464 | constant | CHROMOSPHERE_PHYSICAL_KM | 2000.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 3515 | constant | CHROMOSPHERE_BOTTOM_TEMPERATURE_K | 4000.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 3532 | constant | CHROMOSPHERE_TOP_TEMPERATURE_K | 7000.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 3552 | constant | CORONA_BASE_HEIGHT_KM | 3000.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 3910 | constant | CORONA_MODEL_TEMPERATURE_K | 1180000.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 3938 | constant | CORONA_MODEL_MEAN_MOLECULAR_WEIGHT | 0.57 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 3950 | constant | CORONA_MODEL_ELECTRON_FLUX_PER_S | 9.127e+34 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 3960 | constant | CORONA_TEMPERATURE_MAX_K | 2000000.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 3971 | constant | ZODIACAL_DUST_DENSITY_EXPONENT | 1.34 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 3988 | constant | ZODIACAL_DUST_BETA | 4.14 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 4004 | constant | ZODIACAL_DUST_GAMMA | 0.942 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 4019 | constant | ZODIACAL_DUST_MU | 0.189 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 4034 | constant | ZODIACAL_DUST_TILT_DEG | 2.03 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 4050 | constant | ZODIACAL_DUST_NODE_DEG | 77.7 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 4110 | constant | ZODIACAL_DUST_JFC_LOW_PERCENT | 85 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 4124 | constant | ZODIACAL_DUST_JFC_HIGH_PERCENT | 95 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 4131 | constant | ZODIACAL_DUST_ASTEROID_MAX_PERCENT | 10 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 4151 | constant | MAIN_BELT_A_INNER_AU | 2.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 4164 | constant | MAIN_BELT_A_OUTER_AU | 3.2 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 4171 | constant | MAIN_BELT_Q_MIN_AU | 1.666 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 4187 | constant | MAIN_BELT_SAMPLE_ORBITS | 5429 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 4199 | constant | MAIN_BELT_JPL_COUNT | 1394455 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 4208 | dict | MAIN_BELT_DISTANCE_PERCENTILES_AU[...] | (29 entries) | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 4262 | dict | MAIN_BELT_LATITUDE_PERCENTILES_DEG[...] | (29 entries) | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 4312 | dict | MAIN_BELT_HEIGHT_PERCENTILES_AU[...] | (29 entries) | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 4368 | constant | TERMINATION_SHOCK_AU | 94.01 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 4397 | constant | VOYAGER2_TERMINATION_SHOCK_AU | 83.6 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 4421 | constant | TERMINATION_SHOCK_RANGE_LOW_AU | 80 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 4438 | constant | TERMINATION_SHOCK_RANGE_HIGH_AU | 100 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 4447 | constant | VOYAGER2_TS_UPSTREAM_SPEED_KM_S | 321.01 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 4463 | constant | VOYAGER2_TS_DOWNSTREAM_SPEED_KM_S | 184.67 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 4474 | constant | HELIOPAUSE_AU | 121 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 4519 | constant | OORT_CLOUD_INNER_EDGE_LOW_AU | 2000 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 4536 | constant | OORT_CLOUD_INNER_EDGE_HIGH_AU | 5000 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 4560 | constant | INNER_OORT_CLOUD_AU | 20000 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 4586 | constant | OORT_CLOUD_OUTER_EDGE_LOW_AU | 10000 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 4598 | constant | OORT_CLOUD_OUTER_EDGE_HIGH_AU | 100000 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 4631 | constant | INNER_OORT_DISK_OUTER_AU | 10000 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 4654 | constant | HILLS_CLOUD_TILT_DEG | 30 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 4674 | constant | ECLIPTIC_NODE_GALACTIC_LON_DEG | 186 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 4694 | constant | HILLS_CLOUD_PERI_ARG_BAND1_LOW_DEG | 70 | 3 | 5 | **15** | Cited, not cross-checked; date-sensitive | MEASURED -- independently catalogued fact (name) |
+| 4712 | constant | HILLS_CLOUD_PERI_ARG_BAND1_HIGH_DEG | 180 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 4720 | constant | HILLS_CLOUD_PERI_ARG_BAND2_LOW_DEG | 250 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 4728 | constant | HILLS_CLOUD_PERI_ARG_BAND2_HIGH_DEG | 360 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 4736 | constant | HILLS_CLOUD_NODE_LOW_DEG | 120 | 3 | 5 | **15** | Cited, not cross-checked; date-sensitive | MEASURED -- independently catalogued fact (name) |
+| 4755 | constant | HILLS_CLOUD_NODE_HIGH_DEG | 180 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 4763 | constant | HILLS_CLOUD_INCL_GAL_LOW_DEG | 75 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 4771 | constant | HILLS_CLOUD_INCL_GAL_HIGH_DEG | 90 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 5051 | constant | GRAVITATIONAL_INFLUENCE_PC | 0.65 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 5089 | constant | PARKER_CLOSEST_ALTITUDE_KM | 6160000.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 5161 | constant | MERCURY_RADIUS_KM | 2439.7 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 5164 | constant | VENUS_RADIUS_KM | 6051.8 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 5179 | constant | PHOBOS_RADIUS_KM | 11.1 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 5197 | constant | PLUTO_RADIUS_KM | 1188.3 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 5200 | constant | BENNU_RADIUS_KM | 0.24503 | 3 | 5 | **15** | Cited; cross-check incomplete (1/2 models) | MEASURED -- independently catalogued fact (name) |
+| 5218 | constant | ERIS_RADIUS_KM | 1163 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 5244 | constant | MAKEMAKE_RADIUS_KM | 715 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 5288 | dict | KNOWN_ORBITAL_PERIODS[...] | (133 entries) | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 5883 | constant | VOYAGER_1_POINTING_RA_2030_ARCSEC | 1.701 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 5897 | constant | VOYAGER_1_POINTING_DEC_2030_ARCSEC | 1.535 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 5908 | constant | VOYAGER_2_POINTING_RA_2030_ARCSEC | 4.718 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 5922 | constant | VOYAGER_2_POINTING_DEC_2030_ARCSEC | 3.715 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 5949 | constant | COMET_HALLEY_NUCLEUS_RADIUS_KM | 5.5 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 5965 | constant | COMET_HALE_BOPP_NUCLEUS_RADIUS_KM | 37 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 5983 | constant | COMET_IKEYA_SEKI_NUCLEUS_RADIUS_KM | 4.3 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 5999 | constant | COMET_HYAKUTAKE_NUCLEUS_RADIUS_KM | 2.4 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 6017 | constant | COMET_3I_ATLAS_NUCLEUS_RADIUS_KM | 1.3 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 6034 | constant | COMET_MAPS_NUCLEUS_DIAMETER_KM | 0.4 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 6052 | constant | COMET_SCHAUMASSE_NUCLEUS_DIAMETER_KM | 2.6 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 6065 | constant | COMET_HOWELL_NUCLEUS_DIAMETER_KM | 4.4 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 6079 | constant | COMET_TEMPEL_2_NUCLEUS_RADIUS_KM | 5.98 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 6149 | constant | BOLTZMANN_CONSTANT_J_PER_K | 1.380649e-23 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'data') |
+| 6161 | constant | PROTON_MASS_KG | 1.67262192595e-27 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 6239 | constant | SGR_A_MASS_SOLAR | 4297000.0 | 3 | 5 | **15** | Cited; cross-check incomplete (1/2 models) | MEASURED -- independently catalogued fact (name) |
+| 6267 | constant | SGR_A_DISTANCE_PC | 8277.0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
 | 1 | string | display string @ line 1 | (12 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1631 | constant | EARTH_MAGNETOPAUSE_STORM_2005_RADII | 3.0 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
-| 1776 | constant | EARTH_VAN_ALLEN_INNER_RADII | 1.5 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
-| 2450 | constant | EARTH_MAGNETOPAUSE_SHUE_A1_RADII | 10.22 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
-| 2477 | constant | EARTH_MAGNETOPAUSE_SHUE_A2_RADII | 1.29 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
-| 2640 | constant | EARTH_BOW_SHOCK_JELINEK_R0_RADII | 15.02 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
-| 2736 | constant | EARTH_MAGNETOPAUSE_SHUE_SCATTER_RADII | 1.23 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
-| 2816 | constant | EARTH_BOW_SHOCK_JELINEK_SCATTER_RADII | 0.69 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
-| 2885 | constant | EARTH_MAGNETOTAIL_OBSERVED_RADII | 220.0 | 3 | 4 | **12** | Cited, not cross-checked; date-sensitive | RELATIONAL -- defined against a tracked base (name) |
-| 2944 | constant | EARTH_MAGNETOTAIL_FLARE_END_RADII | 120.0 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
-| 2984 | constant | EARTH_MAGNETOTAIL_DIAMETER_RADII | 60.0 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
-| 3058 | constant | EARTH_GEOCORONA_RADII | 100.0 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
-| 3087 | constant | EARTH_EXOSPHERE_H_FIT_INNER_RADII | 3.0 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
-| 3113 | constant | EARTH_EXOSPHERE_H_FIT_OUTER_RADII | 15.0 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
-| 3138 | constant | EARTH_EXOSPHERE_H_FIT_OFFSET_RADII | 2.47 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
-| 3177 | constant | EARTH_EXOSPHERE_H_AT_10_RADII_CM3 | 35.0 | 3 | 4 | **12** | Cited, not cross-checked; date-sensitive | RELATIONAL -- defined against a tracked base (name) |
-| 3192 | constant | EARTH_EXOSPHERE_H_AT_RADII | 10.0 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
-| 3266 | constant | CORE_RADII | 0.25 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
-| 3324 | constant | RADIATIVE_ZONE_RADII | 0.713 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
-| 3517 | constant | HELMET_CUSP_LOW_RADII | 2 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
-| 3541 | constant | HELMET_CUSP_HIGH_RADII | 4 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
-| 3665 | constant | ALFVEN_SURFACE_RADII | 19.7 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
-| 3730 | constant | ALFVEN_SURFACE_RANGE_LOW_RADII | 10 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
-| 3751 | constant | ALFVEN_SURFACE_RANGE_HIGH_RADII | 20 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
-| 3761 | constant | ALFVEN_SURFACE_STREAMER_FLOOR_RADII | 15 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
-| 3961 | constant | DUST_DEPLETION_OUTER_RADII | 19 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
-| 3975 | constant | DUST_FREE_ZONE_RADII | 5 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
-| 258 | constant | KM_PER_AU | 149597870.7 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED -- independently catalogued fact (name) |
-| 279 | constant | PARSEC_TO_AU | 206264.806247096 | 2 | 5 | **10** | Cross-checked by 3 models (Claude, GPT, Gemini) | MEASURED -- independently catalogued fact (name) |
-| 323 | constant | SUN_RADIUS_KM | 695700.0 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED -- independently catalogued fact (name) |
-| 345 | constant | EARTH_EQUATORIAL_RADIUS_KM | 6378.1366 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED -- independently catalogued fact (name) |
-| 368 | constant | EARTH_POLAR_RADIUS_KM | 6356.752 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED -- independently catalogued fact (name) |
-| 3204 | constant | JUPITER_EQUATORIAL_RADIUS_KM | 71492.0 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED -- independently catalogued fact (name) |
-| 3210 | constant | JUPITER_POLAR_RADIUS_KM | 66854.0 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED -- independently catalogued fact (name) |
-| 3216 | constant | SPEED_OF_LIGHT_KM_S | 299792.458 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED (inferred from role 'data') |
-| 5045 | constant | MOON_RADIUS_KM | 1737.4 | 2 | 5 | **10** | Cross-checked by 3 models (Claude, GPT, Gemini) | MEASURED -- independently catalogued fact (name) |
-| 5052 | constant | MARS_RADIUS_KM | 3396.2 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED -- independently catalogued fact (name) |
-| 5060 | constant | SATURN_RADIUS_KM | 60268 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED -- independently catalogued fact (name) |
-| 5065 | constant | URANUS_RADIUS_KM | 25559 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED -- independently catalogued fact (name) |
-| 5070 | constant | NEPTUNE_RADIUS_KM | 24764 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED -- independently catalogued fact (name) |
-| 5099 | constant | HAUMEA_RADIUS_KM | 798 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED -- independently catalogued fact (name) |
-| 5125 | constant | ARROKOTH_RADIUS_KM | 9.1 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED -- independently catalogued fact (name) |
-| 5989 | constant | GRAVITATIONAL_CONSTANT_SI | 6.6743e-11 | 2 | 5 | **10** | Cross-checked by 3 models (Claude, GPT, Gemini) | MEASURED (inferred from role 'data') |
-| 6011 | constant | GM_SUN_SI | 1.3271244e+20 | 2 | 5 | **10** | Cross-checked by 3 models (Claude, GPT, Gemini) | MEASURED (inferred from role 'data') |
+| 1637 | constant | EARTH_MAGNETOPAUSE_STORM_2005_RADII | 3.0 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
+| 1782 | constant | EARTH_VAN_ALLEN_INNER_RADII | 1.5 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
+| 2456 | constant | EARTH_MAGNETOPAUSE_SHUE_A1_RADII | 10.22 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
+| 2483 | constant | EARTH_MAGNETOPAUSE_SHUE_A2_RADII | 1.29 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
+| 2646 | constant | EARTH_BOW_SHOCK_JELINEK_R0_RADII | 15.02 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
+| 2742 | constant | EARTH_MAGNETOPAUSE_SHUE_SCATTER_RADII | 1.23 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
+| 2822 | constant | EARTH_BOW_SHOCK_JELINEK_SCATTER_RADII | 0.69 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
+| 2891 | constant | EARTH_MAGNETOTAIL_OBSERVED_RADII | 220.0 | 3 | 4 | **12** | Cited, not cross-checked; date-sensitive | RELATIONAL -- defined against a tracked base (name) |
+| 2950 | constant | EARTH_MAGNETOTAIL_FLARE_END_RADII | 120.0 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
+| 2990 | constant | EARTH_MAGNETOTAIL_DIAMETER_RADII | 60.0 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
+| 3064 | constant | EARTH_GEOCORONA_RADII | 100.0 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
+| 3093 | constant | EARTH_EXOSPHERE_H_FIT_INNER_RADII | 3.0 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
+| 3119 | constant | EARTH_EXOSPHERE_H_FIT_OUTER_RADII | 15.0 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
+| 3144 | constant | EARTH_EXOSPHERE_H_FIT_OFFSET_RADII | 2.47 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
+| 3183 | constant | EARTH_EXOSPHERE_H_AT_10_RADII_CM3 | 35.0 | 3 | 4 | **12** | Cited, not cross-checked; date-sensitive | RELATIONAL -- defined against a tracked base (name) |
+| 3198 | constant | EARTH_EXOSPHERE_H_AT_RADII | 10.0 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
+| 3272 | constant | CORE_RADII | 0.25 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
+| 3386 | constant | RADIATIVE_ZONE_RADII | 0.713 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
+| 3639 | constant | HELMET_CUSP_LOW_RADII | 2 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
+| 3663 | constant | HELMET_CUSP_HIGH_RADII | 4 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
+| 3787 | constant | ALFVEN_SURFACE_RADII | 19.7 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
+| 3852 | constant | ALFVEN_SURFACE_RANGE_LOW_RADII | 10 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
+| 3873 | constant | ALFVEN_SURFACE_RANGE_HIGH_RADII | 20 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
+| 3883 | constant | ALFVEN_SURFACE_STREAMER_FLOOR_RADII | 15 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
+| 4083 | constant | DUST_DEPLETION_OUTER_RADII | 19 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
+| 4097 | constant | DUST_FREE_ZONE_RADII | 5 | 3 | 4 | **12** | Cited, not independently cross-checked | RELATIONAL -- defined against a tracked base (name) |
+| 264 | constant | KM_PER_AU | 149597870.7 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED -- independently catalogued fact (name) |
+| 285 | constant | PARSEC_TO_AU | 206264.806247096 | 2 | 5 | **10** | Cross-checked by 3 models (Claude, GPT, Gemini) | MEASURED -- independently catalogued fact (name) |
+| 329 | constant | SUN_RADIUS_KM | 695700.0 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED -- independently catalogued fact (name) |
+| 351 | constant | EARTH_EQUATORIAL_RADIUS_KM | 6378.1366 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED -- independently catalogued fact (name) |
+| 374 | constant | EARTH_POLAR_RADIUS_KM | 6356.752 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED -- independently catalogued fact (name) |
+| 3210 | constant | JUPITER_EQUATORIAL_RADIUS_KM | 71492.0 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED -- independently catalogued fact (name) |
+| 3216 | constant | JUPITER_POLAR_RADIUS_KM | 66854.0 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED -- independently catalogued fact (name) |
+| 3222 | constant | SPEED_OF_LIGHT_KM_S | 299792.458 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED (inferred from role 'data') |
+| 5167 | constant | MOON_RADIUS_KM | 1737.4 | 2 | 5 | **10** | Cross-checked by 3 models (Claude, GPT, Gemini) | MEASURED -- independently catalogued fact (name) |
+| 5174 | constant | MARS_RADIUS_KM | 3396.2 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED -- independently catalogued fact (name) |
+| 5182 | constant | SATURN_RADIUS_KM | 60268 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED -- independently catalogued fact (name) |
+| 5187 | constant | URANUS_RADIUS_KM | 25559 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED -- independently catalogued fact (name) |
+| 5192 | constant | NEPTUNE_RADIUS_KM | 24764 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED -- independently catalogued fact (name) |
+| 5221 | constant | HAUMEA_RADIUS_KM | 798 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED -- independently catalogued fact (name) |
+| 5247 | constant | ARROKOTH_RADIUS_KM | 9.1 | 2 | 5 | **10** | Cross-checked by 2 models (Claude, GPT) | MEASURED -- independently catalogued fact (name) |
+| 6111 | constant | GRAVITATIONAL_CONSTANT_SI | 6.6743e-11 | 2 | 5 | **10** | Cross-checked by 3 models (Claude, GPT, Gemini) | MEASURED (inferred from role 'data') |
+| 6133 | constant | GM_SUN_SI | 1.3271244e+20 | 2 | 5 | **10** | Cross-checked by 3 models (Claude, GPT, Gemini) | MEASURED (inferred from role 'data') |
 
 ### coordinate_system_guide.py
 
@@ -1595,87 +1600,85 @@ is planned for a future session.
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
 | 1 | string | display string @ line 1 | (4 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 212 | string | display string @ line 212 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 217 | string | display string @ line 217 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 232 | string | display string @ line 232 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 236 | string | display string @ line 236 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 250 | string | display string @ line 250 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 254 | string | display string @ line 254 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 272 | string | display string @ line 272 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 277 | string | display string @ line 277 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 290 | string | display string @ line 290 | (4 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 334 | string | display string @ line 334 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 366 | string | display string @ line 366 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 372 | string | display string @ line 372 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 386 | string | display string @ line 386 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 396 | string | display string @ line 396 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 414 | string | display string @ line 414 | (9 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 435 | string | display string @ line 435 | (1 claim) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 453 | string | display string @ line 453 | (4 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 473 | string | display string @ line 473 | (2 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 488 | string | display string @ line 488 | (1 claim) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 520 | string | display string @ line 520 | (2 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 526 | string | display string @ line 526 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 554 | string | display string @ line 554 | (8 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 580 | string | display string @ line 580 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 595 | string | display string @ line 595 | (7 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 613 | string | display string @ line 613 | (1 claim) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 1340 | string | display string @ line 1340 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1361 | string | display string @ line 1361 | (3 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1384 | string | display string @ line 1384 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1468 | string | display string @ line 1468 | (6 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 1483 | string | display string @ line 1483 | (6 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 1506 | string | display string @ line 1506 | (11 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 1514 | string | display string @ line 1514 | (11 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 1550 | string | display string @ line 1550 | (1 claim) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 1583 | string | display string @ line 1583 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1589 | string | display string @ line 1589 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1604 | string | display string @ line 1604 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1610 | string | display string @ line 1610 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1624 | string | display string @ line 1624 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1631 | string | display string @ line 1631 | (2 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 1646 | string | display string @ line 1646 | (2 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 1655 | string | display string @ line 1655 | (2 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 1671 | string | display string @ line 1671 | (2 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 1678 | string | display string @ line 1678 | (2 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 1694 | string | display string @ line 1694 | (3 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 1703 | string | display string @ line 1703 | (3 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1971 | string | display string @ line 1971 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 2122 | string | display string @ line 2122 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 2219 | string | display string @ line 2219 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 2256 | string | display string @ line 2256 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 2308 | string | display string @ line 2308 | (3 claims) | 3 | 4 | **12** | Cited, not cross-checked; date-sensitive | Public-facing display string (hover/INFO) |
-| 2348 | string | display string @ line 2348 | (3 claims) | 3 | 4 | **12** | Cited, not cross-checked; date-sensitive | Public-facing display string (hover/INFO) |
-| 2364 | string | display string @ line 2364 | (1 claim) | 3 | 4 | **12** | Cited, not cross-checked; date-sensitive | Public-facing display string (hover/INFO) |
-| 2388 | string | display string @ line 2388 | (1 claim) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
-| 2403 | string | display string @ line 2403 | (4 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 2443 | string | display string @ line 2443 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 2459 | string | display string @ line 2459 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 2503 | string | display string @ line 2503 | (9 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 2552 | string | display string @ line 2552 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 2568 | string | display string @ line 2568 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 2638 | string | display string @ line 2638 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 2654 | string | display string @ line 2654 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 215 | string | display string @ line 215 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 220 | string | display string @ line 220 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 235 | string | display string @ line 235 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 239 | string | display string @ line 239 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 253 | string | display string @ line 253 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 257 | string | display string @ line 257 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 275 | string | display string @ line 275 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 280 | string | display string @ line 280 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 293 | string | display string @ line 293 | (4 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 337 | string | display string @ line 337 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 369 | string | display string @ line 369 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 375 | string | display string @ line 375 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 389 | string | display string @ line 389 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 399 | string | display string @ line 399 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 417 | string | display string @ line 417 | (9 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 438 | string | display string @ line 438 | (1 claim) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 456 | string | display string @ line 456 | (4 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 476 | string | display string @ line 476 | (2 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 491 | string | display string @ line 491 | (1 claim) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 523 | string | display string @ line 523 | (2 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 529 | string | display string @ line 529 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 557 | string | display string @ line 557 | (8 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 583 | string | display string @ line 583 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 598 | string | display string @ line 598 | (7 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 616 | string | display string @ line 616 | (1 claim) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 1343 | string | display string @ line 1343 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1364 | string | display string @ line 1364 | (3 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1387 | string | display string @ line 1387 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1471 | string | display string @ line 1471 | (6 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 1486 | string | display string @ line 1486 | (6 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 1509 | string | display string @ line 1509 | (11 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 1517 | string | display string @ line 1517 | (11 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 1553 | string | display string @ line 1553 | (1 claim) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 1586 | string | display string @ line 1586 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1592 | string | display string @ line 1592 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1607 | string | display string @ line 1607 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1613 | string | display string @ line 1613 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1627 | string | display string @ line 1627 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1634 | string | display string @ line 1634 | (2 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 1649 | string | display string @ line 1649 | (2 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 1658 | string | display string @ line 1658 | (2 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 1674 | string | display string @ line 1674 | (2 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 1681 | string | display string @ line 1681 | (2 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 1697 | string | display string @ line 1697 | (3 claims) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 1706 | string | display string @ line 1706 | (3 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 2125 | string | display string @ line 2125 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 2222 | string | display string @ line 2222 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 2259 | string | display string @ line 2259 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 2311 | string | display string @ line 2311 | (3 claims) | 3 | 4 | **12** | Cited, not cross-checked; date-sensitive | Public-facing display string (hover/INFO) |
+| 2351 | string | display string @ line 2351 | (3 claims) | 3 | 4 | **12** | Cited, not cross-checked; date-sensitive | Public-facing display string (hover/INFO) |
+| 2367 | string | display string @ line 2367 | (1 claim) | 3 | 4 | **12** | Cited, not cross-checked; date-sensitive | Public-facing display string (hover/INFO) |
+| 2391 | string | display string @ line 2391 | (1 claim) | 3 | 4 | **12** | Cited via enclosing block citation | Public-facing display string (hover/INFO) |
+| 2406 | string | display string @ line 2406 | (4 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 2446 | string | display string @ line 2446 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 2462 | string | display string @ line 2462 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 2506 | string | display string @ line 2506 | (9 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 2555 | string | display string @ line 2555 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 2571 | string | display string @ line 2571 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 2641 | string | display string @ line 2641 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 2657 | string | display string @ line 2657 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 
 ### solar_visualization_shells.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
 | 1 | string | display string @ line 1 | (11 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 386 | string | display string @ line 386 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 462 | string | display string @ line 462 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 500 | string | display string @ line 500 | (3 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 523 | string | display string @ line 523 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 533 | string | display string @ line 533 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 595 | string | display string @ line 595 | (5 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 644 | string | display string @ line 644 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 652 | string | display string @ line 652 | (9 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 668 | string | display string @ line 668 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 696 | string | display string @ line 696 | (3 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 760 | string | display string @ line 760 | (2 claims) | 3 | 4 | **12** | Cited, not cross-checked; date-sensitive | Public-facing display string (hover/INFO) |
-| 766 | string | display string @ line 766 | (5 claims) | 3 | 4 | **12** | Cited, not cross-checked; date-sensitive | Public-facing display string (hover/INFO) |
-| 771 | string | display string @ line 771 | (2 claims) | 3 | 4 | **12** | Cited, not cross-checked; date-sensitive | Public-facing display string (hover/INFO) |
-| 794 | string | display string @ line 794 | (5 claims) | 3 | 4 | **12** | Cited, not cross-checked; date-sensitive | Public-facing display string (hover/INFO) |
+| 390 | string | display string @ line 390 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 466 | string | display string @ line 466 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 508 | string | display string @ line 508 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 543 | string | display string @ line 543 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 605 | string | display string @ line 605 | (5 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 654 | string | display string @ line 654 | (2 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 662 | string | display string @ line 662 | (9 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 678 | string | display string @ line 678 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 706 | string | display string @ line 706 | (3 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 770 | string | display string @ line 770 | (2 claims) | 3 | 4 | **12** | Cited, not cross-checked; date-sensitive | Public-facing display string (hover/INFO) |
+| 776 | string | display string @ line 776 | (5 claims) | 3 | 4 | **12** | Cited, not cross-checked; date-sensitive | Public-facing display string (hover/INFO) |
+| 781 | string | display string @ line 781 | (2 claims) | 3 | 4 | **12** | Cited, not cross-checked; date-sensitive | Public-facing display string (hover/INFO) |
+| 804 | string | display string @ line 804 | (5 claims) | 3 | 4 | **12** | Cited, not cross-checked; date-sensitive | Public-facing display string (hover/INFO) |
 
 ### spacecraft_encounters.py
 
@@ -1811,10 +1814,10 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 3610 | constant | ROCHE_LIMIT_RADII | 3.45 | 2 | 4 | **8** | Cross-checked by 2 models (Claude, GPT) | RELATIONAL -- defined against a tracked base (name) |
-| 1712 | constant | SATELLITES_FUNCTIONING_COUNT | 15900.0 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal use (name vocabulary) |
-| 1727 | constant | LEO_OBJECTS_TRACKED_COUNT | 28015.0 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal use (name vocabulary) |
-| 1762 | constant | STARLINK_WORKING_COUNT | 11140.0 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal use (name vocabulary) |
+| 3732 | constant | ROCHE_LIMIT_RADII | 3.45 | 2 | 4 | **8** | Cross-checked by 2 models (Claude, GPT) | RELATIONAL -- defined against a tracked base (name) |
+| 1718 | constant | SATELLITES_FUNCTIONING_COUNT | 15900.0 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal use (name vocabulary) |
+| 1733 | constant | LEO_OBJECTS_TRACKED_COUNT | 28015.0 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal use (name vocabulary) |
+| 1768 | constant | STARLINK_WORKING_COUNT | 11140.0 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal use (name vocabulary) |
 
 ### data_inventory.py
 
@@ -1987,11 +1990,11 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 374 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 375 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 2403 | constant | NIGHTLY_STALE_HOURS | 24 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 2574 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 2705 | dict | SECTION_SYMBOLS[...] | (8 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
+| 378 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 379 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 2407 | constant | NIGHTLY_STALE_HOURS | 24 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 2578 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 2710 | dict | SECTION_SYMBOLS[...] | (8 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
 
 ### path_plan.py
 
@@ -2228,8 +2231,8 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 3252 | constant | DEFAULT_MARKER_SIZE | 7 | 4 | 1 | **4** | No source citation (recalled) | Cosmetic (name vocabulary) |
-| 3254 | constant | CENTER_MARKER_SIZE | 10 | 4 | 1 | **4** | No source citation (recalled) | Cosmetic (name vocabulary) |
+| 3258 | constant | DEFAULT_MARKER_SIZE | 7 | 4 | 1 | **4** | No source citation (recalled) | Cosmetic (name vocabulary) |
+| 3260 | constant | CENTER_MARKER_SIZE | 10 | 4 | 1 | **4** | No source citation (recalled) | Cosmetic (name vocabulary) |
 
 ### orbital_period.py
 

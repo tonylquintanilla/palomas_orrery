@@ -18,6 +18,10 @@ Consumed by: planet_visualization.py (routing dispatcher),
 Role: rendering/shells
 Domain: orrery
 
+Module updated: November 2, 2026 with Anthropic's Claude Opus 5.5
+(L-411, the Sun's eight: the chromosphere's temperatures print from two
+rows, Carlsson (2007), in Tony's approved words of 2026-10-20, and its
+name is "Sun: Chromosphere"; the depth prints from its row in the hover.)
 Module updated: October 22, 2026 with Anthropic's Claude Opus 5.5
 (L-434, with L-239: the outer Oort cloud and the galactic tide draw
 stored drawings, outer_oort_sampler.drawn_cloud() and
@@ -496,6 +500,10 @@ termination_shock_info = (
 # Source+: Bahcall et al. standard solar model; SUN_RADIUS_KM=695700 in constants_new.py
 # Note: the lines above came from chromosphere_info_hover, the plot
 # Note+: hover's copy, deleted 2026-10-21 (L-191).
+# Note: the temperatures print from CHROMOSPHERE_BOTTOM_TEMPERATURE_K and
+# Note+: CHROMOSPHERE_TOP_TEMPERATURE_K, Carlsson (2007), in Tony's approved
+# Note+: words of 2026-10-20; the typed 20,000 K, the 10,000 K average and
+# Note+: the ~290 nm worked out from it are gone (L-411, 2026-11-02).
 chromosphere_info = (
             "Sun: Chromosphere:\n\n"
 
@@ -505,8 +513,10 @@ chromosphere_info = (
              
             "* The chromosphere is relatively thin, extending only about 2,000 kilometers (1,200 miles) above the photosphere.\n" 
             "  It's also much less dense than the photosphere.\n" 
-            "* The temperature in the chromosphere increases dramatically with altitude, from around 4,000 Kelvin at the\n" 
-            "  photosphere to about 20,000 Kelvin at the inner corona.\n" 
+            f"* The temperature in the chromosphere increases dramatically with altitude, from about "
+            f"{row_text('CHROMOSPHERE_BOTTOM_TEMPERATURE_K', grouping=True)} Kelvin at its\n"
+            f"  bottom to about {row_text('CHROMOSPHERE_TOP_TEMPERATURE_K', grouping=True)} Kelvin near its top. "
+            f"Above that it climbs steeply into the corona, which is far hotter.\n"
             "* The chromosphere gets its name from the Greek word \"chroma,\" meaning color, because of its reddish appearance.\n" 
             "  This color is primarily due to the strong emission of light from hydrogen atoms\n" 
             "* The chromosphere is a constantly changing environment, with a variety of features that evolve and erupt on\n" 
@@ -520,8 +530,8 @@ chromosphere_info = (
             "    are concentrated.\n\n" 
              
             + CHROMOSPHERE_RADIUS_LINE +
-            "* Temperature: ~6,000 to 20,000 K, for a average of 10,000 K\n"
-            "* Radiates at an average peak wavelength of ~290 nm, ultraviolet range, invisible."
+            f"* Temperature: about {row_text('CHROMOSPHERE_BOTTOM_TEMPERATURE_K', grouping=True)} K at the bottom to about "
+            f"{row_text('CHROMOSPHERE_TOP_TEMPERATURE_K', grouping=True)} K near the top."
         )
 
 # Source: NASA Solar System Exploration (solarsystem.nasa.gov/solar-system/sun); SUN_RADIUS_KM=695700 in constants_new.py
@@ -1012,8 +1022,8 @@ def create_sun_chromosphere_shell():
         x=x, y=y, z=z,
         mode='markers',
         marker=dict(size=3.0, color='rgb(30, 144, 255)', opacity=0.5),
-        name='Sun: Chromosphere (2,000 km skin)',
-        legendgroup='Sun: Chromosphere (2,000 km skin)',
+        name='Sun: Chromosphere',
+        legendgroup='Sun: Chromosphere',
         hoverinfo='skip',
         showlegend=True
     )
@@ -1021,8 +1031,8 @@ def create_sun_chromosphere_shell():
     info_trace = create_info_marker(
         info_x, 0, info_z,
         'rgb(30, 144, 255)',
-        "Sun: Chromosphere (2,000 km skin)<br><br>" + chromosphere_info.replace('\n', '<br>'),
-        'Sun: Chromosphere (2,000 km skin)'
+        "Sun: Chromosphere<br><br>" + chromosphere_info.replace('\n', '<br>'),
+        'Sun: Chromosphere'
     )
     return [shell_trace, info_trace]
 

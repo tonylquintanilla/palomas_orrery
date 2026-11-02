@@ -1,23 +1,30 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 2, 2026, afternoon: the coordinating session (the x marks live; the method table wired; v3.122).
-- Written at orrery 7277aa4c and gallery 674160a0, plus uncommitted edits.
+Last updated: November 2, 2026, evening: a Claude Code session (the Sun's eight built; historical missions opened).
+- Written at orrery 26a6dd04 and gallery 8c3947c1, plus uncommitted edits.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The x marks are live in all three rooms (website 674160a0), and
->   your phone says they look good, at 4 and 8 and at 5 and 10.
-> - The method table opens from the dashboard, and the protocol
->   points to it (v3.122): paste it into the Project.
-> - The website's two times had not run by 18:00 UTC on Nov 2. The
->   orrery wrote a run record at 17:06 (0099170), after your hand
->   run: the Actions tab says whether GitHub started it.
+> - The Sun room's last eight typed numbers are fixed (L-411 (the
+>   Sun's typed numbers)). Five now print from sourced rows; nothing
+>   is left that no source stands behind.
+> - The core's centre now reads 16,000,000 kelvin, not 15 million. The
+>   paper gives 15.7 million, and that rounds to 16.
+> - "7 million kelvin near the core" is gone: no source anyone can open
+>   gives it. The radiative zone's top, 2,200,000, stays.
+> - The chromosphere is called just "Chromosphere"; its 2,000 km depth
+>   is printed two lines lower in the same hover.
+> - Historical missions have their own ledger item (L-507 (historical
+>   missions)), with your ruling of 14:32 in it, both slices.
+> - The website's scheduled run of Nov 2 committed at 18:29 UTC
+>   (8c3947c1), about six hours late. The orrery's second run record
+>   came at 17:06 UTC (0099170).
 >
-> **Do next:** *run `patch_L506_2_method_table.py` from the orrery
-> folder, then `ledger_index.py`, push, and paste the protocol into
-> the Project; then your word on the tick size.*
+> **Do next:** *commit and push the orrery; then this session pulls
+> the new numbers into the website and rebuilds its cache; then you
+> commit and push the website, and look at the Sun room on your phone.*
 >
 > **Needs you now:**
 > - *(do) Each morning, Pull origin on both, orrery then website, first;
@@ -39,16 +46,28 @@ Oct 27's order, changed Oct 29 (`DESIGN_L314_solar_wind_rulings_20261029.md`).
                on GitHub; the hold built Oct 31; both second times built
                (11:17 and 12:17 UTC, Nov 1); a week of mornings now.*
  11c.  [NOW]   *The ruler build (L-505 (the ticks and the ruler)): x marks
-               live Nov 2, good on your phone; your word on the sizes
-               next, then a patch writes them in.* << changed this session
- 11d.  [next]  The comet switch (L-470 (JPL's permanent number)): the six
-               asked by name every night; the orrery's comet tests
-               swept; proved on a plot with Encke's tail.
-  5.   [beside] Earth's list (L-413 (Earth's list)): talks 3 to 6 from
-               your phone, then their builds.
+               live Nov 2; the sizes stay as built, 3 and 6; the ruler
+               and the halo from your phone next.* << changed this session
+ 11e.  [NOW]   *The Sun's eight (L-411 (the Sun's typed numbers)): built
+               Nov 2; the website's cache next, then your phone look.*
+               << new this session
+ 11d.  [waiting] The comet switch (L-470 (JPL's permanent number)):
+               waits on your choice, below. << changed this session
+  5.   [done]  Earth's list (L-413 (Earth's list)): closed as a slice
+               (Nov 2); what is left is enhancements, kept on the item.
+               << changed this session
   5b.  [beside] Housekeeping when a session has room: L-424, L-425,
                L-426; L-423 (the website's checks) item 3, L-357.
- 12.   [later] Compositions (L-489 (compositions)), after 5. Encounters
+ 12a.  [next]  Historical missions, slice 1 (L-507 (historical
+               missions)): past voyages drawn in the Solar System room
+               as Voyager is, on today's date; a sentence on the text
+               box, Voyager's too. First, where an ended mission's words
+               go. << new this session
+ 12b.  [later] Historical missions, slice 2: encounters, the planet
+               where it was when the spacecraft arrived; the room moves
+               off today's date; Artemis II in the Earth room.
+               << new this session
+ 12.   [later] Compositions (L-489 (compositions)). Encounters
                are both: the Solar System room as today, and a room of
                their own; Artemis II first (Nov 1).
  13.   [later] The inner planets' rooms, from the template; Jupiter and
@@ -57,9 +76,14 @@ Oct 27's order, changed Oct 29 (`DESIGN_L314_solar_wind_rulings_20261029.md`).
  15.   [goal]  The website does what the desktop orrery does, with a date
                to choose, within the range the data covers.
 
-## Settled
+## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings. A line leaves after a few weeks, once it is habit.
+- The Sun and Earth slices are closed; what is left on them is
+  enhancements, not blocking (Nov 2, 13:47).
+- Past voyages are drawn on today's date, their path over the
+  mission's own dates; only encounters move the room's date (Nov 2, 14:32).
+- The ticks stay as built, 3 and 6 (Nov 2).
 - Tokens are spent where they buy verification or a decision: the
   smallest instrument, no document before its session, a skill read in
   the parts the job needs, and a token count in every Code report (Nov 2).
@@ -69,15 +93,13 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
   as a held body is: the record the website asks is a night old (Nov 1).
 - Encounters are both: shown in the Solar System room as today, and in
   a room centred on the body met, with its shells and fuller words (Nov 1).
-- Historical missions get a group of their own, served with their own
-  dates; the details at its talk (Nov 1).
 - A night takes a value JPL changed, holds only an identity (the index
   and the kind included); the guest book stays out of it (Oct 31).
 - UTC everywhere; the orbit's date stays on JPL's clock; Pluto's period
   is its centre of mass's, as Earth's is (Oct 28-29).
 - The main belt: random dots in JPL's spread; a new body's hover prints its orbit numbers (Oct 28).
 
-## Deferred
+## Deferred  **>> UPDATED THIS SESSION**
 
 Waiting behind other work; a line leaves when picked up.
 - L-485 (a nightly run): the hold's website half, with its asking by
@@ -89,27 +111,31 @@ Waiting behind other work; a line leaves when picked up.
 - L-483 (a comet room), after slice 2; L-484 (the two agree): its check.
 - L-489 (compositions), with L-486 (a view carried into a room) and
   L-488 (the heliopause) under it: Artemis II in the Earth room first,
-  its entry served before its room; the historical-missions talk;
-  after the ruler and the comet switch unless you ask sooner (Nov 1).
+  its entry served before its room, with historical missions' slice 2
+  (L-507 (historical missions)); after the ruler unless you ask sooner.
 - L-490 (the legacy list): who holds the accounts; L-499 (kinds of session), Oct 27.
 
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261102T150545Z, ok, no retry (the website's swap
-  log's last line at 674160a0: your hand run of Nov 2, on GitHub).
+- Last cache build: 20261102T182626Z, ok, no retry (the website's swap
+  log's last line at 8c3947c1: the scheduled night of Nov 2, late).
 - Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md
-  of Nov 1; since then one file name in the dashboard, no number).
+  of Nov 2, this session's run, with the five new rows).
 - This page's date and the ledger's newest stamp: both Nov 2. Agree.
 
-## Waiting on you
+## Waiting on you  **>> UPDATED THIS SESSION**
 
 Decisions, one at a time:
-- Nothing waiting.
+- The comet switch (L-470 (JPL's permanent number)): (a) keep the six
+  pins and rely on the monthly Horizons check, the switch off the
+  road; (b) the same, with the six asked every night; or (c) build the
+  switch next. Nothing is broken today. (Nov 2)
 
 At the next design talk:
-- Historical missions: does ticking one in the Solar System room move
-  the room's date, or send the visitor to its own room? (Nov 1)
+- Historical missions: an ended mission has no marker, and the text
+  box hangs on the marker. Where do its words go? (L-507 (historical
+  missions), Nov 2)
 - The shared link (ruled Oct 29) waits for its build.
 
 Not urgent, in your order:
@@ -117,12 +143,18 @@ Not urgent, in your order:
    adds a new body as a form (L-489 (compositions)).
 2. The website's second run makes a fresh build and a second commit
    most days: keep, or stand down after a clean 08:17 (L-485 (a nightly run)).
+3. Earth's list (L-413 (Earth's list)): stays open as Earth's enhancements, or closes
+   with its seven pieces moved to their own items.
+4. The ruler and the halo: `?ruler=` and `?halo=` from your phone, or
+   both stay as built (L-505 (the ticks and the ruler)).
 
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- Today: `HANDOFF_coordination_20261102_morning.md` (the lost ruling,
-  the nights, the queue); L-505; L-506; `METHOD_MODEL_EFFORT.md`.
+- Today: `COORD_L411_sun_eight_held_numbers_brief_20261102.md` (the
+  brief); `WORDS_L411_sun_eight_20261102.md` (the words you approved,
+  and how to read "7 million" yourself); L-411 (the Sun's typed
+  numbers); L-507 (historical missions).
 - The door: `documentation/python_work_door/`, and L-499.
 - The ruler build: `COORD_L505_gallery_ticks_ruler_backstop_brief_20261101.md`;
   its correction, the website's `patch_L505_x_marks.py`.
