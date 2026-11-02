@@ -1096,7 +1096,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-499 | The kinds of session: three, told apart by what each writes, with the build session in two forms (protocol, Mode 7) | OPEN | -- | 2026-10-29 |
 | ! | L-500 | The Sun's twelve eyeballed shape numbers: the streamer belt's seven and the outer cloud's clumps' five (orrery + gallery, the Sun's drawings) | OPEN | -- | 2026-10-27 |
 | ! | L-504 | The orrery's clock: UTC everywhere (orrery, every module that reads the clock) | OPEN | -- | 2026-10-31 |
-| ! | L-505 | The axis ticks and the ruler: dots on the axis lines, a ruler for the grid chip, no edge numbers (gallery, every room's frame) | OPEN | -- | 2026-11-01 |
+| ! | L-505 | The axis ticks and the ruler: dots on the axis lines, a ruler for the grid chip, no edge numbers (gallery, every room's frame) | OPEN | -- | 2026-11-02 |
 | ! | L-506 | Token economy: tokens spent where they buy verification or a decision, and counted (protocol, every session) | OPEN | -- | 2026-11-02 |
 
 ### B. Pending Action (Tony-side)
@@ -1545,9 +1545,23 @@ as an archive of the prioritization thinking -- no cleanup on close.
   marks), dropped when Tony asked for the patch that was the right
   instrument; and a 166,000-character folder listing pulled into the
   session twice to read two file sizes.
-- **Tony-action (do):** after this patch is pushed, paste the repo's
-  PROJECT_INSTRUCTIONS.md (v3.121) into the Orrery Project's
-  instructions on claude.ai; no skill changed, nothing to reinstall.
+- **Second slice, 2026-11-02 afternoon,** by the coordinating session
+  (Claude Opus 5.5, orrery 7277aa4c and gallery 674160a0 read live),
+  from the morning handoff's section 8: `METHOD_MODEL_EFFORT.md`, the
+  table of method, model and effort placed at the orrery's root that
+  morning, gets its row in the dashboard's documents list
+  (`palomas_orrery_dashboard.py`, `LOCAL_DOCS`, after Running a Patch
+  File), and Token Economy one sentence pointing at it (protocol
+  v3.122; v3.119 moved to the history file; the versioned copy).
+  Delivered as `patch_L506_2_method_table.py`. That session printed no
+  token count (a chat session); it read the two skills its patch
+  fired in full and the target files at their edit sites only.
+- **Tony-action (do):** paste the repo's PROJECT_INSTRUCTIONS.md into
+  the Orrery Project's instructions on claude.ai after each protocol
+  push. v3.121 pasted Nov 2 ("done", in
+  `WHERE_WE_ARE_11-1-26_2249_run_record.md`); v3.122 after
+  `patch_L506_2_method_table.py` is pushed. No skill changed, nothing
+  to reinstall.
 **Gap:** ledger-and-session-records' next version (the records
 session's) carries the count's place in a Code report and in the run
 record, and what a chat session, which prints no count, reports
@@ -1557,7 +1571,7 @@ with a count is the proof the rule runs.
 v3.121 entry; L-505.
 
 #### [L-505] The axis ticks and the ruler: dots on the axis lines, a ruler for the grid chip, no edge numbers (gallery, every room's frame)
-<!-- L:505 status:OPEN upd:2026-11-01 section:A flag: rice: -->
+<!-- L:505 status:OPEN upd:2026-11-02 section:A flag: rice: -->
 - **Opened 2026-11-01, night,** by the gallery's Claude Code session,
   built on gallery b6574a0f (https://github.com/tonylquintanilla/tonyquintanilla.github.io)
   with the orrery at b135babc read only, from
@@ -1658,12 +1672,30 @@ v3.121 entry; L-505.
   room, and the Explorer keeps its own; the Mode 5 knobs `?tick=`,
   `?ruler=`, `?halo=`; and the headless walk reads the spacing from the
   ruler's `data-spacing`.
-**Gap:** Tony's push, then his phone in all three rooms (the dots at
-two sizes, the ruler with two labels and no pill, no numbers on the box
-edges, the AU note from the ruler, the frame note's new sentence, the
-low camera angle), then the Mode 5 pass with the knobs; his settled
-values written in as the defaults. Closes on his Mode 5, not on the
-push. Then interactive-exhibit's bump (above), in an orrery session.
+- **Corrected to x marks, 2026-11-02.** Tony's ruling of 2026-10-31,
+  20:43: "let's go with X then. X is simply a graphical marker with no
+  render significance like a + while a filled square might be used for
+  a render at some point." It never reached the committed design
+  record, so the build above drew dots. The coordinating session of
+  Nov 2, morning (Claude Fable 5.1), restored it in
+  `documentation/DESIGN_axis_ticks_and_ruler_rulings_20261031.md`
+  (its section 6 says what happened) and delivered the gallery's
+  `patch_L505_x_marks.py`: the three tick traces to Plotly's symbol
+  "x", the ruler's key to two x marks (`sunRulerX`), the frame note's
+  sentence, and the walk's section 25. Tony ran it, the maintenance run
+  36 of 36, and pushed (gallery 968fefb4, 8c6b1b37, 674160a0). His
+  phone, Nov 2: the x marks in all three rooms, and `?tick=4,8` and
+  `?tick=5,10`, "looks good" (`WHERE_WE_ARE_11-1-26_2249_run_record.md`).
+  Wherever this item says dots above, read x marks, the
+  interactive-exhibit bullet included. orrery-coding-conventions'
+  marker table gains an x row (coordinate ticks: the axes' scale marks
+  and the ruler; the cross row then info markers alone) at its next
+  version, an orrery session's.
+**Gap:** Tony's word on the tick sizes (3 and 6 as built; 4 and 8, and
+5 and 10, both tried), then `?ruler=` and `?halo=`; his settled values
+written in as the defaults by a gallery patch. Closes on his Mode 5.
+Then interactive-exhibit's bump and orrery-coding-conventions' x row
+(above), in an orrery session.
 **Ref:** `documentation/DESIGN_axis_ticks_and_ruler_rulings_20261031.md`;
 `documentation/COORD_L505_gallery_ticks_ruler_backstop_brief_20261101.md`;
 L-289 (the frame HUD, where the chip began); L-485 (the backstop line,

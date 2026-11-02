@@ -1,22 +1,23 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 2, 2026, morning: the coordinating session (the ticks' ruling restored; the x patch; token economy).
-- Written at orrery fd3551cc and gallery b7ddf77a, plus uncommitted edits.
+Last updated: November 2, 2026, afternoon: the coordinating session (the x marks live; the method table wired; v3.122).
+- Written at orrery 7277aa4c and gallery 674160a0, plus uncommitted edits.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The ticks are x marks, by your ruling of Oct 31, 20:43. The build
->   drew dots because that ruling never reached the committed design
->   record (the file placed in your folder was an earlier copy). The
->   record is restored; a patch corrects the build.
-> - Nov 2: neither night fired by 14:34 UTC; you ran both by hand.
-> - Token economy is in the protocol (v3.121): paste it into the Project.
+> - The x marks are live in all three rooms (website 674160a0), and
+>   your phone says they look good, at 4 and 8 and at 5 and 10.
+> - The method table opens from the dashboard, and the protocol
+>   points to it (v3.122): paste it into the Project.
+> - The website's two times had not run by 18:00 UTC on Nov 2. The
+>   orrery wrote a run record at 17:06 (0099170), after your hand
+>   run: the Actions tab says whether GitHub started it.
 >
-> **Do next:** *run `patch_L505_x_marks.py` from the website folder,
-> then the maintenance run, push, and your phone on the x marks and
-> their sizes (`?tick=4,8`, `?tick=5,10`).*
+> **Do next:** *run `patch_L506_2_method_table.py` from the orrery
+> folder, then `ledger_index.py`, push, and paste the protocol into
+> the Project; then your word on the tick size.*
 >
 > **Needs you now:**
 > - *(do) Each morning, Pull origin on both, orrery then website, first;
@@ -37,9 +38,9 @@ Oct 27's order, changed Oct 29 (`DESIGN_L314_solar_wind_rulings_20261029.md`).
  11b.  [NOW]   *The nightly run (L-485 (a nightly run)): both halves run
                on GitHub; the hold built Oct 31; both second times built
                (11:17 and 12:17 UTC, Nov 1); a week of mornings now.*
- 11c.  [NOW]   *The ruler build (L-505 (the ticks and the ruler)): built
-               Nov 1 with dots; the x patch next (your ruling of Oct 31,
-               20:43); then sizes on your phone.* << changed this session
+ 11c.  [NOW]   *The ruler build (L-505 (the ticks and the ruler)): x marks
+               live Nov 2, good on your phone; your word on the sizes
+               next, then a patch writes them in.* << changed this session
  11d.  [next]  The comet switch (L-470 (JPL's permanent number)): the six
                asked by name every night; the orrery's comet tests
                swept; proved on a plot with Encke's tail.
@@ -56,7 +57,7 @@ Oct 27's order, changed Oct 29 (`DESIGN_L314_solar_wind_rulings_20261029.md`).
  15.   [goal]  The website does what the desktop orrery does, with a date
                to choose, within the range the data covers.
 
-## Settled  **>> UPDATED THIS SESSION**
+## Settled
 
 Standing rulings. A line leaves after a few weeks, once it is habit.
 - Tokens are spent where they buy verification or a decision: the
@@ -96,11 +97,10 @@ Waiting behind other work; a line leaves when picked up.
 
 Read from files when this page was written, not typed from memory.
 - Last cache build: 20261102T150545Z, ok, no retry (the website's swap
-  log's last line: your hand run of Nov 2, on GitHub).
+  log's last line at 674160a0: your hand run of Nov 2, on GitHub).
 - Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md
-  of the orrery session's maintenance run, Nov 1; no orrery code since).
-- This page's date Nov 2; the ledger's newest stamp Nov 1: this update
-  edits no ledger item (L-505's line comes with the next records patch).
+  of Nov 1; since then one file name in the dashboard, no number).
+- This page's date and the ledger's newest stamp: both Nov 2. Agree.
 
 ## Waiting on you
 
@@ -122,7 +122,7 @@ Not urgent, in your order:
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
 - Today: `HANDOFF_coordination_20261102_morning.md` (the lost ruling,
-  the lesson, the nights); the design record's section 6; L-505; L-506.
+  the nights, the queue); L-505; L-506; `METHOD_MODEL_EFFORT.md`.
 - The door: `documentation/python_work_door/`, and L-499.
 - The ruler build: `COORD_L505_gallery_ticks_ruler_backstop_brief_20261101.md`;
   its correction, the website's `patch_L505_x_marks.py`.

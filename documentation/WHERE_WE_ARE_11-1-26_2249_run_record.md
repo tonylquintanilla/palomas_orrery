@@ -560,19 +560,100 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
   2. GitHub Desktop: commit and push the orrery, everything in the change list together
      (this patch's six files, the index, the design record, the morning handoff; move this
-     script into documentation\ for the next commit). -- 
+     script into documentation\ for the next commit). -- 7277aa4c891c62d1917dca03f57344c02a86765b and nightly run at 0099170d552ea38cfbcd28a914d3c9c1db77650c
   3. Paste the repo's PROJECT_INSTRUCTIONS.md (v3.121) into the Orrery Project's instructions
-     on claude.ai. Chat sessions read that page; the rule reaches them only then.
+     on claude.ai. Chat sessions read that page; the rule reaches them only then. -- done
   4. The next Code session's report ends with its token count; write it in the run record.
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
-   1. then `ledger_index.py`; 
-   2. commit and push everything in the change list (`METHOD_MODEL_EFFORT.md` rides with it); 
-   3. move the patch to `documentation`.
-1. Paste `PROJECT_INSTRUCTIONS.md` (v3.121) into the Project's instructions.
-2. Phone: the x marks, then the sizes.
-3. The next coordinating session on Opus, opened from `HANDOFF_coordination_20261102_morning.md`: the L-506 second-slice patch, then the comet-switch brief.
+1. The next coordinating session on Opus, opened from `HANDOFF_coordination_20261102_morning.md`: the L-506 second-slice patch, then the comet-switch brief.
 
 Tony-action rollup:
 - (do) Steps 1 to 5.
 - (decide) The sizes, from your phone. Nothing else.
+
+==============================================================
+
+**Session: CODE: 11-2-26 1211: Opus: Coordination session handoff L505 L506**
+
+I'll start by reading where both repositories stand on GitHub right now, then build the dashboard-and-protocol patch from section 8 of the morning handoff.
+
+The orrery's GitHub head is 7277aa4c, your push, and the website's is 674160a0. Fetching the history and just the three files the patch touches.
+
+Both skills loaded at the versions the manifest expects (ledger-and-session-records 1.22, safe-file-editing 1.14). Now reading only the edit sites.
+
+Edit sites found. Checking line endings and stray non-ASCII in the five target files, and confirming the x-marks patch is in the website's GitHub copy.
+
+I can't read the Actions pages from here, so the 17:06 commit goes on the page as a question for your Actions tab rather than a guess. Finding the end of the dashboard's docstring.
+
+I have everything the patch needs. Two last checks: whether anything else names the protocol's version, and that each anchor I plan to use appears exactly once.
+
+Every anchor matches exactly once. Writing the patch now.
+
+Filling in the three file fingerprints, then testing on a throwaway copy: one run, a second run that must refuse, a compile of the dashboard, and a read of the diffs.
+
+The length check caught Where We Are one line over its cap and wrote nothing, which is the check working. Trimming the details line by one.
+
+Tested and ready. Placing the patch in your orrery folder and reading its size back from the folder.
+
+Reading it back by staging the file from your folder, which reports its size without listing the whole folder.
+
+Staging refuses that file for a technical reason (a hard link on your side), so I'll fall back to the folder listing, the read-back the morning session ruled.
+
+The patch is in your orrery folder: `patch_L506_2_method_table.py`, 19,791 bytes. I checked that size against your folder after placing it, and it matches. Your copies of the files it edits are the same sizes as GitHub's 7277aa4c, so it should apply cleanly.
+
+**What it does (records only, nothing the orrery draws changes):**
+- **Dashboard:** "Method, Model, Effort" is added to the documents list, under "Running a Patch File". It opens the table the morning session wrote.
+- **Protocol (now v3.122):** Token Economy gains one sentence saying where that table lives. The version entry and the archived copy are included.
+- **Ledger:**
+  - L-506 (token economy) records this second step.
+  - L-505 (the ticks and the ruler) records the switch to x marks and your phone's "looks good". Its remaining item is now just your choice of size.
+- **Where We Are:** brought up to date. It says the x marks are live, that the table is wired in, and what happened with the night runs.
+
+I tested it on a throwaway copy first. All six files were written, and a second run refused, as it should. The dashboard compiles, the ledger's index tool reported no problems, and Where We Are sits exactly at its 130-line limit.
+
+**Your run order:**
+1. Run `patch_L506_2_method_table.py` from the orrery folder.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L506_2_method_table.py
+ok palomas_orrery_dashboard.py (2 edits)
+ok PROJECT_INSTRUCTIONS.md (5 edits)
+ok documentation\PROJECT_INSTRUCTIONS_HISTORY.md (1 edits)
+ok documentation\project_instructions_v3_122.md (new; the versioned copy, 80290 bytes)
+ok LEDGER_CONSOLIDATED.md (3 edits)
+ok documentation\WHERE_WE_ARE.md (6 edits)
+Where We Are: 130 lines above the marker (cap 130); nothing below it touched.
+Stamps moved: the protocol header (v3.122) and its SHA anchor (7277aa4c);
+  the dashboard docstring; L-505 upd:2026-11-02; Where We Are's header.
+patch applied
+
+Next, in this order:
+  1. Run ledger_index.py (VS Code, Run) from this folder: it rebuilds the
+     ledger's index with L-505 and L-506 as edited.
+
+OK: 499 L-blocks parsed, no consistency problems.
+Index regenerated (249 live items) in C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\LEDGER_CONSOLIDATED.md.
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  2. Open the dashboard once and click Method, Model, Effort under the
+     documents: the table should open. -- correct, but hard to read in md format. could we add a version that is easier to read, maybe an html or a pdf?
+  3. GitHub Desktop: commit and push the orrery, everything in the change
+     list together (this patch's six files and the index); move this
+     script into documentation\ for the next commit.
+  4. Paste the repo's PROJECT_INSTRUCTIONS.md (v3.122) into the Orrery
+     Project's instructions on claude.ai.
+  5. Your word on the tick size: 3 and 6 as built, 4 and 8, or 5 and 10.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+2. Run `ledger_index.py`.
+3. Open the dashboard and click "Method, Model, Effort" to check that the table opens.
+4. Commit and push the orrery. Move both L506 patch scripts into `documentation\` with that commit.
+5. Paste `PROJECT_INSTRUCTIONS.md` (v3.122) into the Project's instructions.
+
+**Something to look at:** the orrery has a second run record for today, at 17:06 UTC (commit 0099170), after your hand run. I can't see the Actions pages from here, so the Actions tab will tell you whether GitHub started it late on its own. As of 18:00 UTC, the website's two scheduled runs had not started at all today.
+
+**Next:** the comet-switch brief. I'd write it in a fresh Opus session when you're ready to run that build, not in this one, to keep to one job per session. I wrote no new handoff, because the ledger and Where We Are now carry this session's work and the morning handoff's queue still stands. This session can't print a token count. The two skills this patch needed were read in full, and the files only where it edits them.
+
+**One thing I need from you:** which tick size do you want as the default? The choices are 3 and 6 (as built now), 4 and 8, or 5 and 10. You said both larger sizes looked good, so I need the pick before a patch can write it in.

@@ -342,6 +342,10 @@ Both lines name what a night took from JPL and what it holds, read from
 the record's taken and held lists; a hold is named, never red. And
 Constants Rounding, the orrery's new checker (L-484), gets its button
 after Constants Relations, with its short line.
+November 2, 2026 with Anthropic's Claude Opus 5.5 (L-506): Method,
+Model, Effort joins the documents list after Running a Patch File. It
+opens METHOD_MODEL_EFFORT.md, the one-page table of which instrument,
+model and effort each kind of task gets.
 """
 
 import os
@@ -2695,6 +2699,7 @@ LOCAL_DOCS = [
     ("Project Instructions", "PROJECT_INSTRUCTIONS.md"),
     ("Adding Objects Guide", "ADDING_OBJECTS_GUIDE.md"),
     ("Running a Patch File", "RUNNING_A_PATCH_FILE.md"),
+    ("Method, Model, Effort", "METHOD_MODEL_EFFORT.md"),
     ("Color Reference", "Python_Color_Reference_v2.pdf"),    # or color_map.py    
 ]
 
