@@ -210,3 +210,196 @@ I wrote the brief for historical missions slice 1, recorded your four rulings in
 - (decide, only if you want to) Redirect either of the brief's two choices: only Cassini and Galileo, and their own drawer group.
 
 I haven't committed or pushed anything, and I'm leaving it that way. Your project rules say commit and push are always yours. The changes the reminder is flagging are in my working copy here, and the same three files are already in your orrery folder. Your next step is unchanged: commit and push the orrery in GitHub Desktop.
+
+==============================================================
+
+**Session: OPEN: 9-1-26 2103: Opus: Code: L507 gallery historical missions**
+
+Export pulled and mirrored (both pass). Now building Galileo's and Cassini's paths from JPL.
+
+While the build runs, I'll read the records' current shape.
+
+The build is fetching from JPL now; I'll check the result when it finishes.
+
+The build is still running: it is fetching Galileo's and Cassini's paths from JPL. I'll carry on with the checks when it finishes.
+
+Both paths are served and end on the right day: Galileo's last point is 21 September 2003, Cassini's is 15 September 2017. Next, the figures check and the drawer walk.
+
+The figures check passes, and both missions print "on its last day". Now the drawer walk.
+
+The walk runs but shows 4 failures. I'll find out which come from this build and which were there before.
+
+Two things are mine to fix. Cassini's distance line runs to 64 characters once "on its last day" is added. The belt cloud's lines look older than this build, and I'll check that on an untouched copy.
+
+Now an untouched copy of the website at its last commit, to see which failures were already there.
+
+The untouched copy fails the same four checks, so the walk was already red before this build. Cassini's long line is the only failure that was mine. I'll rerun the walk on the fixed page.
+
+The walk now fails only the four checks the untouched copy fails. The 10 new checks for this build all pass, Galileo's included. A quick look at what the four old failures are:
+
+I'll fix the stale frame-note check by updating "dots" to "x marks" to match the restored ruling, and just log the other three older discrepancies without addressing them now.
+
+Now the planted-fault runs: each new check must fail once, on a throwaway copy.
+
+Removing one point was not enough, since the last-day fetch serves two points on 21 September. I'll drop everything on that day, which is what a missing last-day fetch would leave.
+
+Wrong result: the copy's path now ends on 19 September, yet part 7 still passes. So the check prints the plan's end date instead of testing the served one. I'll read part 7.
+
+The check reads the end date from the cache's index, not from the positions file itself. A real fault would change both, but the check should read the file too. I'll add that.
+
+Figures part 7 now correctly fails on both planted faults (truncated file and truncated index) while passing on the real cache. Next I'll check the Galileo section of the walk with a planted fault in the page.
+
+The walk's Galileo section fails on the planted fault, as it should, and the stale frame-note check now passes. Next, the real walk once more, then the website's maintenance run.
+
+The real walk now has 3 failures, all older than this build. Now the website's maintenance run.
+
+While that runs, I'll check the edited files are plain ASCII with LF endings, and whether the website's night has run on GitHub.
+
+The website's nightly job hasn't run on GitHub yet, so pushing soon will avoid a harmless red run from the new Galileo/Cassini orrery export names. While the maintenance run finishes, I'll check the candidate list for the ledger.
+
+The ledger item is written and its check passes. Now I'm writing Where We Are, while the website's maintenance run finishes.
+
+Both records are written. Where We Are was edited section by section, with nothing below the run-record marker touched. The only thing left is the website's maintenance run, which is still going. I'll report when it finishes.
+
+The website's run is green: "36 of 36 gating checkers passed". I'll add that line to the ledger, then get the session's token count.
+
+Galileo and Cassini are built and checked. The website is ready for you to push.
+
+**What I checked, each read from the output:**
+- **The paths:** both are served and end on the mission's last day. Galileo runs from 20 October 1989 to 21 September 2003, its crash into Jupiter. Cassini runs from 16 October 1997 to 15 September 2017.
+- **The figures check:** passes, with both printing "on its last day". Each new check was also made to fail once on a throwaway copy with a planted fault, to prove it can catch one.
+- **The figures check had a gap:** the first time I planted a fault, it still passed. It read the end date from the cache's index, not from the path file itself. It now reads both, and fails on either fault.
+- **One fix to the page:** Cassini's distance line, with "on its last day" added, ran to 64 characters, too wide for a phone. It now wraps at 60 like the other lines.
+- **The website's maintenance run:** "36 of 36 gating checkers passed".
+- **The drawer walk:** the walk is my own headless test of the room's drawer. It is not part of the website's run.
+  - Its 10 new checks pass, Galileo's included.
+  - Three failures remain, and an untouched copy of the website at its last commit fails all three too, so they were there before this work: tapping a body moves the view, Sedna's text box bullets, and the main belt cloud's box running to 70 characters.
+  - A fourth old failure was just a stale check, still looking for "dots" after your x marks came back. I corrected it to "x marks".
+  - The three are recorded on L-507 (historical missions) for an item of their own.
+
+**Push the website soon.** The orrery's export now names Galileo and Cassini. If the website's night runs before your push, it will stop and commit nothing. That does no harm, but it shows red.
+
+**Token count:** this session holds about 156,000 tokens of context right now. The total since the session began can't be seen, because the session was summarized once partway through.
+
+**Files changed:**
+- **Website:**
+  - `gallery/assembler/render_spacecraft.py` (3 edits)
+  - `gallery/assembler/presentation.py` (2)
+  - `data/objects_config.json` (2, then filled in by the mirror tool)
+  - `interactive.html` (4)
+  - `tools/gallery_cache_builder.py` (3)
+  - `tools/test_gallery_cache_builder_offline.py` (2)
+  - `documentation/smoke_solar_system_figures.js` (6)
+  - `tools/headless/walk_solar_system_drawer.js` (8)
+  - Written by the tools:
+    - `data/objects_export.json` and `data/objects_export.sha` (the pull)
+    - the served cache under `data/solar-system/`, including the new `positions/galileo.json` and `positions/cassini.json` (the build)
+    - `data/cache_swap_log.jsonl`
+- **Orrery records:**
+  - `LEDGER_CONSOLIDATED.md` (4 edits: the L-507 entry, two dates, the run line)
+  - `documentation/WHERE_WE_ARE.md` (11 edits, by section; nothing below the marker)
+
+**Your run order:**
+1. GitHub Desktop, the website: commit everything and push. The list should show changed and added files, with no pile of deletions. -- 3a211a8cf10a3002668a85836f31bf973e385f2c
+2. From the dashboard, run the live check. 
+
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 52 files from https://palomasorrery.com/
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches (the working copy is CRLF)
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+    SERVED   gallery/arrival.js                             matches the working copy
+    SERVED   gallery/nav_cluster.js                         matches the working copy
+    SERVED   gallery/solar_system_figures.js                matches the working copy
+    SERVED   gallery/solar_system_drawer.js                 matches the working copy
+    SERVED   data/objects_config.json                       matches the working copy
+    SERVED   gallery/guestbook.js                           matches the working copy
+    SERVED   data/guestbook.json                            matches the working copy
+    SERVED   data/solar-system/drawings/hills_cloud.json    matches the working copy
+    SERVED   data/solar-system/drawings/van_allen_belts.json matches the working copy
+    SERVED   data/solar-system/drawings/earth_exosphere.json matches the working copy
+    SERVED   data/solar-system/drawings/sun_corona.json     matches the working copy
+    SERVED   data/solar-system/drawings/zodiacal_dust.json  matches the working copy
+    SERVED   data/solar-system/drawings/outer_oort_cloud.json matches the working copy
+    SERVED   data/solar-system/drawings/galactic_tide.json  matches the working copy
+    SERVED   gallery/source_list.js                         matches the working copy
+    SERVED   gallery/far_lines.js                           matches the working copy
+    SERVED   gallery/direction_arrows.js                    matches the working copy
+    SERVED   gallery/drawer_order.js                        matches the working copy
+    SERVED   gallery/text_box.js                            matches the working copy
+    SERVED   data/solar-system/positions/voyager_2.json     matches the working copy
+    SERVED   data/solar-system/positions/new_horizons.json  matches the working copy
+    SERVED   data/solar-system/positions/juno.json          matches the working copy
+    SERVED   data/solar-system/positions/osiris_apex.json   matches the working copy
+    SERVED   data/solar-system/positions/parker_solar_probe.json matches the working copy
+    SERVED   data/solar-system/positions/bepicolombo.json   matches the working copy
+    SERVED   data/solar-system/positions/solar_orbiter.json matches the working copy
+    SERVED   data/solar-system/positions/lucy.json          matches the working copy
+    SERVED   data/solar-system/positions/juice.json         matches the working copy
+    SERVED   data/solar-system/positions/psyche_spacecraft.json matches the working copy
+    SERVED   data/solar-system/positions/europa_clipper.json matches the working copy
+    SERVED   data/solar-system/positions/wierzchos.json     matches the working copy
+    SERVED   data/solar-system/positions/west.json          matches the working copy
+    SERVED   data/solar-system/positions/mcnaught.json      matches the working copy
+    SERVED   data/solar-system/positions/tsuchinshan_atlas.json matches the working copy
+    SERVED   data/solar-system/positions/atlas_2024_g3.json matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1.json      matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1_b.json    matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1_c.json    matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1_d.json    matches the working copy
+    SERVED   data/solar-system/positions/panstarrs_2025_r3.json matches the working copy
+    SERVED   data/solar-system/positions/borisov_2025_v1.json matches the working copy
+    SERVED   data/solar-system/positions/oumuamua.json      matches the working copy
+    SERVED   data/solar-system/positions/borisov_2i.json    matches the working copy
+    SERVED   data/solar-system/positions/atlas_3i.json      matches the working copy
+
+  PASS Served reachability       6.7s  all 52 files served and
+                                    byte-identical to the working copy
+
+  orrery export pinned at 453fd98c
+
+  PASS Export freshness          0.3s  the served export is the orrery's
+                                    at 453fd98c, byte for byte
+
+  orrery HEAD 453fd98c
+  examining 3 of 187 links; the other 184 are served from the export
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  3 pointers: 1 match, 0 DRIFT, 0 UNIT MISMATCH, 2 could not be examined.
+
+  PASS Store drift               2.5s  3 pointers against orrery 453fd98c
+                                    -- 1 match, 0 DRIFT, 0 UNIT
+                                    MISMATCH, 2 could not be examined.
+
+======================================================================
+  2 of 2 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Store drift            3 pointers against orrery 453fd98c -- 1
+  last swap 2026-11-03T08:25:26.170958+00:00: succeeded first time
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+3. On your phone, in the Solar System room, open the "Historical missions" group and tick Galileo and Cassini. Look at their text boxes and the planets they bring with them, and at Voyager 1's box. -- perfect. 
+4. GitHub Desktop, the orrery: commit and push the two records. -- 
+
+**Tony actions:**
+- **Do now:** steps 1 to 4.
+- **Later:** in Settings > Skills, reinstall interactive-exhibit, orrery-coding-conventions, horizons-orbital-mechanics and gallery-cache-builder, then paste v3.123 into the Project's instructions on claude.ai.
+
+When you've looked at it on your phone: is the ended mission's solid line right as it is, or should it look different from an active one?

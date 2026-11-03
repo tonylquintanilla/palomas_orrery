@@ -1097,7 +1097,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-500 | The Sun's twelve eyeballed shape numbers: the streamer belt's seven and the outer cloud's clumps' five (orrery + gallery, the Sun's drawings) | OPEN | -- | 2026-10-27 |
 | ! | L-504 | The orrery's clock: UTC everywhere (orrery, every module that reads the clock) | OPEN | -- | 2026-10-31 |
 | ! | L-506 | Token economy: tokens spent where they buy verification or a decision, and counted (protocol, every session) | OPEN | -- | 2026-11-02 |
-| ! | L-507 | Historical missions: past voyages drawn in the Solar System room, then encounters (gallery, the Solar System room) | OPEN | -- | 2026-11-02 |
+| ! | L-507 | Historical missions: past voyages drawn in the Solar System room, then encounters (gallery, the Solar System room) | OPEN | -- | 2026-11-03 |
 | ! | L-508 | A held body's alarm: loud until a ledger item names it (orrery + gallery, the Horizons check and the night) | OPEN | -- | 2026-11-02 |
 
 ### B. Pending Action (Tony-side)
@@ -1572,7 +1572,7 @@ holds would be a second store.
 number, choice (a)); `horizons_check.py`; gallery-cache-builder 1.16.
 
 #### [L-507] Historical missions: past voyages drawn in the Solar System room, then encounters (gallery, the Solar System room)
-<!-- L:507 status:OPEN upd:2026-11-02 section:A flag: rice: -->
+<!-- L:507 status:OPEN upd:2026-11-03 section:A flag: rice: -->
 - **Opened 2026-11-02** by the Code session of that evening (Claude
   Opus 5.5), on orrery 26a6dd04 and gallery 8c3947c1, at Tony's
   request, from `documentation/HANDOFF_coordination_20261101_afternoon.md`
@@ -1636,7 +1636,71 @@ number, choice (a)); `horizons_check.py`; gallery-cache-builder 1.16.
   0d2d2a0e, so neither is exported or planned yet. The brief also
   carries L-505's two skill corrections (interactive-exhibit's x marks,
   orrery-coding-conventions' x row), re-homed when L-505 closed.
-**Gap (replaces the one below, 2026-11-02, evening):** slice 1's Claude Code
+- **2026-11-02 to 11-03: slice 1 built** by a Claude Code session
+  (Claude Opus 5.5) through the python_work door, from the brief, on
+  orrery 15dc8e34 (the brief's 0d2d2a0e plus records only) and gallery
+  c77f87f6. The orrery half is Tony's push 453fd98c ("Code: L507
+  historical missions"); the website half waits for his push.
+  - **Galileo stops at its impact (Tony, Nov 2: "Yes stop at impact").**
+    JPL serves Galileo to 2003-09-30, nine days past NASA's end of
+    Sept. 21, 2003, on a path leaving Jupiter (6.2 million km from its
+    centre on the 30th). A new `mission_end` in `celestial_objects.py`
+    (Galileo 2003-09-21, Cassini 2017-09-15, each with NASA's page
+    quoted) ends the path plan's span there; `path_plan.py` adds it to a
+    plan's inputs only when it is set, so no other plan was remade.
+    `test_path_plan.py` check 18, shown failing once: 29 of 29.
+  - **The words** are `documentation/WORDS_L507_historical_missions_20261102.md`,
+    Tony's "Approved" (Nov 2): the dates sentence on every spacecraft's
+    box; the ended opening; the solid-path sentence; "on its last day"
+    after the distance; the source line "to the day the mission ended";
+    the drawer group "Historical missions" after Spacecraft; Cassini's
+    description. Goldenrod (Galileo) and green (Cassini) and the open
+    diamond were method, recorded there.
+  - **The website:** `render_spacecraft.py` draws an ended path whole and
+    solid with its marker on the last served point (`meta.ended`);
+    `presentation.py` the two colours; `data/objects_config.json` the two
+    entries and the group row (the mirror fills the rest);
+    `interactive.html` the text box and source line;
+    `tools/gallery_cache_builder.py` `fetch_path_last_day`, since the
+    7-day backbone can stop up to six days short of the span's end.
+  - **Skills:** interactive-exhibit 1.30 (with L-505's ruler and x marks),
+    orrery-coding-conventions 1.13 (the x row; an ended mission keeps the
+    open diamond), horizons-orbital-mechanics 1.14 (`mission_end`),
+    gallery-cache-builder 1.17 (the last-day fetch); protocol v3.123.
+- **Verified against claimed, 2026-11-03, each line read from output:**
+  - The orrery's maintenance run: "33 of 33 gating checkers passed",
+    "0 TIER-1 -- the push gate holds".
+  - The hand build 20261103T082211Z: ok, no retry. Galileo is served
+    from 1989-10-20 to 2003-09-21 00:01, Cassini from 1997-10-16 to
+    2017-09-15 00:01 (JPL's TDB dates).
+  - The cache builder's offline test: 506 checks, 0 failures; c7 (the
+    last day fetched) and c8 (its planted fault) both as designed.
+  - The figures check: PASS, both printing "on its last day". Part 7
+    first read only the cache index's end, so a planted positions file
+    stopping on 09-19 passed; it now reads the file too, and fails on
+    both plants (the file short, the index short).
+  - The drawer walk: 185 checks, the 10 new ones passing, section 20b
+    shown failing once on a planted page that ignores an ended mission.
+    Cassini's distance line ran to 64 characters with "on its last day"
+    and is now wrapped at 60. Three failures remain that an untouched
+    copy of c77f87f6 also fails, so they predate this build: "scene tap
+    moved the view"; Sedna's hover bullets; and the main belt cloud's
+    text box, lines up to 70 characters (L-503's words). A fourth there,
+    the frame note's check still looking for "dots" after the x marks
+    came back, was corrected to "x marks".
+  - The website's maintenance run (offline): "36 of 36 gating checkers
+    passed"; last swap "succeeded first time". The walk is not one of
+    its checkers.
+  - Not verified: the live site and Tony's phone look.
+**Gap (replaces the one below, 2026-11-03):** Tony pushes the website,
+then the live run; his phone look (Galileo and Cassini ticked, their
+boxes, their companions, Voyager 1's box) and his Mode 5 word on the
+solid ended line. The walk's three older failures, to an item of their
+own or L-423 (the website's checks). Which ended missions come next is
+Tony's: the orrery also lists Pioneer 10, Pioneer 11, Rosetta and DART.
+Slice 2 waits beside L-402 and L-489 (compositions; Artemis II in the
+Earth room).
+**Gap (superseded above, 2026-11-03; replaced the one below, 2026-11-02, evening):** slice 1's Claude Code
 session, from the brief above, both repositories; then Tony's phone
 look and his Mode 5 word on the ended line. Slice 2 waits beside L-402
 and L-489 (compositions; Artemis II in the Earth room).
