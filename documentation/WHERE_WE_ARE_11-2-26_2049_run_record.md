@@ -169,3 +169,44 @@ Not urgent, in your order:
 
 **Session: OPEN: 11-2-26 2047: Opus: Coordinator: Historical missions slice 1 brief L507**
 
+I'll take this as orrery-repository work, since the ledger and Where We Are both live there. First I'll pull the repository and read its rules, the ledger item, Where We Are and your latest run record, then write the brief and record your rulings.
+
+Both of Tony's local copies match GitHub byte for byte. Applying the ledger edits and regenerating the index.
+
+Read back the sizes on your computer to confirm the three files landed.
+
+I wrote the brief for historical missions slice 1, recorded your four rulings in the ledger, and updated Where We Are. All three files are in your orrery folder, and their sizes on your computer match mine.
+
+**What the brief asks for:**
+- **Which missions:** Cassini and Galileo, the two you named, drawn in the Solar System room the way Voyager is.
+- **An ended mission:** its marker sits where it was on its last day, and the whole line is solid.
+- **The new sentence:** the one saying the path covers the mission's own dates while the planets are drawn where they are today goes on every spacecraft's box, Voyager's included.
+- **Your approval:** every new sentence goes in a words file and waits for your "Approved".
+- **Two choices the brief makes for you,** both easy to change: only those two missions for now, and a drawer group of their own beside Spacecraft. The second follows your Nov 1 words, "a separate group for historical missions".
+- **One stop point:** JPL's data for Galileo appears to run to September 30, 2003. If that is later than the mission's stated end, the session stops and asks you which date the marker should use.
+
+**Your rulings, as recorded:**
+1. **The Sun's eight (L-411):** your seven "yes" answers are quoted from your 17:47 run record. The Sun and Earth slices are closed, and the item stays open only for enhancements, off the road.
+2. **The comet switch (L-470):** off the road. The record numbers stay. West's id is the only thing left on that item.
+3. **A held body's alarm:** recorded as a new item, L-508 (a held body's alarm). It carries the rule in your words and the text written for the records skill's next version, with provenance-discipline pointing to it. Nothing is built yet. Right now no body is held.
+4. **The ruler and the halo (L-505):** they stay as built, and the item is closed. Its two leftover skill corrections move to the historical missions session, which opens both skills anyway.
+
+**Where We Are:** historical missions is now the current stage, the comet decision is off your list, and the page is 12 lines shorter.
+
+**Files changed:**
+- `ok LEDGER_CONSOLIDATED.md (7 edits, then the index regenerated; it reports no problems)`
+- `ok documentation/WHERE_WE_ARE.md (7 edits, one per section; nothing below your run-record marker touched)`
+- `ok documentation/COORD_L507_gallery_historical_missions_slice1_brief_20261102.md (new file)`
+
+**Token count:** this environment can't print one. I read about 2.3 MB (mostly the ledger, which I edited by script without loading it) and wrote about 21 KB.
+
+**Your run order:**
+1. In GitHub Desktop, commit and push the orrery: the three files above. -- 
+2. Open a Claude Code session through the python_work door and give it the brief.
+
+**Tony-action rollup:**
+- (do) The two steps above.
+- (do) Each morning, Pull origin on both repositories, orrery first.
+- (decide, only if you want to) Redirect either of the brief's two choices: only Cassini and Galileo, and their own drawer group.
+
+I haven't committed or pushed anything, and I'm leaving it that way. Your project rules say commit and push are always yours. The changes the reminder is flagging are in my working copy here, and the same three files are already in your orrery folder. Your next step is unchanged: commit and push the orrery in GitHub Desktop.
