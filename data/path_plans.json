@@ -1032,6 +1032,165 @@
    },
    "tp_jd": 2460956.955266
   },
+  "cassini": {
+   "backbone": {
+    "step": "7d",
+    "thin_tol_au": 0.02
+   },
+   "carried": 0,
+   "events": [
+    {
+     "body": "Sun",
+     "body_id": "10",
+     "closest": "1998-03-27 06:48",
+     "dist_km": 100715416.1,
+     "hill_km": null,
+     "ideal_step_s": 265143.7,
+     "jd": 2450899.783333,
+     "kind": "perihelion",
+     "stays": false,
+     "step": "3d",
+     "v_kms": 39.778,
+     "window": [
+      "1997-10-02 10:54",
+      "1998-09-19 02:41"
+     ]
+    },
+    {
+     "body": "Venus",
+     "body_id": "299",
+     "closest": "1998-04-26 13:46",
+     "dist_km": 6337.3,
+     "hill_km": 1016852,
+     "ideal_step_s": 56.3,
+     "jd": 2450930.073611,
+     "kind": "flyby",
+     "stays": false,
+     "step": "1m",
+     "v_kms": 11.785,
+     "window": [
+      "1998-04-26 12:52",
+      "1998-04-26 14:39"
+     ]
+    },
+    {
+     "body": "Venus",
+     "body_id": "299",
+     "closest": "1999-06-24 20:31",
+     "dist_km": 6654.4,
+     "hill_km": 1013006,
+     "ideal_step_s": 51.1,
+     "jd": 2451354.354861,
+     "kind": "flyby",
+     "stays": false,
+     "step": "1m",
+     "v_kms": 13.645,
+     "window": [
+      "1999-06-24 19:42",
+      "1999-06-24 21:19"
+     ]
+    },
+    {
+     "body": "Sun",
+     "body_id": "10",
+     "closest": "1999-06-29 11:35",
+     "dist_km": 107875471.5,
+     "hill_km": null,
+     "ideal_step_s": 257290.0,
+     "jd": 2451358.982639,
+     "kind": "perihelion",
+     "stays": false,
+     "step": "2d",
+     "v_kms": 43.906,
+     "window": [
+      "1999-01-09 20:41",
+      "1999-12-17 02:28"
+     ]
+    },
+    {
+     "body": "Earth",
+     "body_id": "399",
+     "closest": "1999-08-18 03:29",
+     "dist_km": 7567.8,
+     "hill_km": 1515093,
+     "ideal_step_s": 41.7,
+     "jd": 2451408.645139,
+     "kind": "flyby",
+     "stays": false,
+     "step": "1m",
+     "v_kms": 19.02,
+     "window": [
+      "1999-08-18 02:49",
+      "1999-08-18 04:08"
+     ]
+    },
+    {
+     "body": "Jupiter",
+     "body_id": "599",
+     "closest": "2000-12-30 10:05",
+     "dist_km": 9794457.0,
+     "hill_km": 51529632,
+     "ideal_step_s": 88413.6,
+     "jd": 2451908.920139,
+     "kind": "flyby",
+     "stays": false,
+     "step": "1d",
+     "v_kms": 11.601,
+     "window": [
+      "2000-11-01 18:56",
+      "2001-02-27 01:13"
+     ]
+    },
+    {
+     "body": "Saturn",
+     "body_id": "699",
+     "closest": "2004-07-01 02:40",
+     "dist_km": 80230.2,
+     "hill_km": 61781828,
+     "ideal_step_s": 273.4,
+     "jd": 2453187.611111,
+     "kind": "arrival",
+     "stays": true,
+     "step": "5m",
+     "v_kms": 30.734,
+     "window": [
+      "2004-06-30 22:18",
+      "2004-07-01 07:01"
+     ]
+    }
+   ],
+   "horizons_id": "-82",
+   "id_type": "id",
+   "inputs_sha256": "07ec06bc39553b38817bdac089a07bbe6b0e39f06aeecf6ee162abe94c07b5ca",
+   "kind": "spacecraft",
+   "made": "2026-11-03",
+   "name": "Cassini",
+   "searched": [
+    "Sun",
+    "Mercury",
+    "Venus",
+    "Earth",
+    "Moon",
+    "Mars",
+    "Jupiter",
+    "Saturn",
+    "Uranus",
+    "Neptune",
+    "Pluto",
+    "Ceres",
+    "16 Psyche",
+    "Dinkinesh",
+    "Itokawa",
+    "Ryugu",
+    "Vesta",
+    "Churyumov"
+   ],
+   "searched_from": "1997-10-16",
+   "span": {
+    "end": "2017-09-15",
+    "start": "1997-10-16"
+   }
+  },
   "europa_clipper": {
    "backbone": {
     "step": "7d",
@@ -1155,6 +1314,165 @@
    "span": {
     "end": "2034-09-03",
     "start": "2024-10-15"
+   }
+  },
+  "galileo": {
+   "backbone": {
+    "step": "7d",
+    "thin_tol_au": 0.02
+   },
+   "carried": 0,
+   "events": [
+    {
+     "body": "Venus",
+     "body_id": "299",
+     "closest": "1990-02-10 06:00",
+     "dist_km": 22175.4,
+     "hill_km": 1004861,
+     "ideal_step_s": 283.1,
+     "jd": 2447932.75,
+     "kind": "flyby",
+     "stays": false,
+     "step": "5m",
+     "v_kms": 8.202,
+     "window": [
+      "1990-02-10 01:29",
+      "1990-02-10 10:30"
+     ]
+    },
+    {
+     "body": "Sun",
+     "body_id": "10",
+     "closest": "1990-02-25 10:14",
+     "dist_km": 104503063.3,
+     "hill_km": null,
+     "ideal_step_s": 269819.1,
+     "jd": 2447947.926389,
+     "kind": "perihelion",
+     "stays": false,
+     "step": "3d",
+     "v_kms": 40.559,
+     "window": [
+      "1989-08-30 11:55",
+      "1990-08-23 08:32"
+     ]
+    },
+    {
+     "body": "Earth",
+     "body_id": "399",
+     "closest": "1990-12-08 20:36",
+     "dist_km": 7341.6,
+     "hill_km": 1474071,
+     "ideal_step_s": 56.0,
+     "jd": 2448234.358333,
+     "kind": "flyby",
+     "stays": false,
+     "step": "1m",
+     "v_kms": 13.736,
+     "window": [
+      "1990-12-08 19:42",
+      "1990-12-08 21:29"
+     ]
+    },
+    {
+     "body": "Sun",
+     "body_id": "10",
+     "closest": "1991-01-11 05:33",
+     "dist_km": 135337718.8,
+     "hill_km": null,
+     "ideal_step_s": 378427.1,
+     "jd": 2448267.73125,
+     "kind": "perihelion",
+     "stays": false,
+     "step": "4d",
+     "v_kms": 37.451,
+     "window": [
+      "1990-05-05 06:41",
+      "1991-09-19 04:24"
+     ]
+    },
+    {
+     "body": "Earth",
+     "body_id": "399",
+     "closest": "1992-12-08 15:10",
+     "dist_km": 6680.6,
+     "hill_km": 1473888,
+     "ideal_step_s": 49.7,
+     "jd": 2448965.131944,
+     "kind": "flyby",
+     "stays": false,
+     "step": "1m",
+     "v_kms": 14.076,
+     "window": [
+      "1992-12-08 14:22",
+      "1992-12-08 15:57"
+     ]
+    },
+    {
+     "body": "Sun",
+     "body_id": "10",
+     "closest": "1992-12-13 08:26",
+     "dist_km": 146974692.3,
+     "hill_km": null,
+     "ideal_step_s": 394338.9,
+     "jd": 2448969.851389,
+     "kind": "perihelion",
+     "stays": false,
+     "step": "4d",
+     "v_kms": 39.03,
+     "window": [
+      "1992-03-26 20:20",
+      "1993-08-31 20:31"
+     ]
+    },
+    {
+     "body": "Jupiter",
+     "body_id": "599",
+     "closest": "1995-12-07 21:55",
+     "dist_km": 286030.3,
+     "hill_km": 53902848,
+     "ideal_step_s": 994.3,
+     "jd": 2450059.413194,
+     "kind": "arrival",
+     "stays": true,
+     "step": "30m",
+     "v_kms": 30.124,
+     "window": [
+      "1995-12-07 06:05",
+      "1995-12-08 13:44"
+     ]
+    }
+   ],
+   "horizons_id": "-77",
+   "id_type": "id",
+   "inputs_sha256": "80d29ade9f4440305838c0a7c612dbd649ef36f527c48f6a07a57d6a01016cc7",
+   "kind": "spacecraft",
+   "made": "2026-11-03",
+   "name": "Galileo",
+   "searched": [
+    "Sun",
+    "Mercury",
+    "Venus",
+    "Earth",
+    "Moon",
+    "Mars",
+    "Jupiter",
+    "Saturn",
+    "Uranus",
+    "Neptune",
+    "Pluto",
+    "Ceres",
+    "16 Psyche",
+    "Dinkinesh",
+    "Itokawa",
+    "Ryugu",
+    "Vesta",
+    "Churyumov"
+   ],
+   "searched_from": "1989-10-20",
+   "span": {
+    "end": "2003-09-21",
+    "start": "1989-10-20"
    }
   },
   "juice": {

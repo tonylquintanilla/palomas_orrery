@@ -847,6 +847,19 @@ should keep these correct words and explain them when they should be
 explained." The orbit line now reads "Orbit: perihelion q AU, its
 closest to the Sun, to aphelion Q AU, its farthest." A name the orrery
 keys with an underscore is shown with JPL's space.
+Earlier: 1.27 | 2026-10-27, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 8d334e7 and gallery @ 7d422e5. v1.27 (L-443, carrying
+L-493, L-494 and L-495) records the night of 2026-10-26. It corrects a
+wrong sentence: no website hover ends with a pointer to the i panel any
+more, and a first visit gets a note under the i button (Tony's option
+C, L-494). A comet ticks a companion planet: on an open path the
+farthest its path has reached so far (Tony: "so far"), on a closed
+orbit the farthest its orbit reaches, by its aphelion; no asteroid or
+dwarf planet ticks one (Tony: "only spacecraft and comets"). A group's
+class is explained first in each member's text box and panel. And the
+Find a body box, the grid chip's AU note, the whole triad opening the
+frame note, the orbit line wrapped at 60, the direction arrows, and a
+candidate for the headless recipe.
 
 ## safe-file-editing
 
@@ -920,6 +933,14 @@ standing rule of 2026-09-16, "In general we should avoid compressed
 language in the hovertext." It was ruled over the gallery's hovers and
 reaches the orrery's own next (L-321); a convention that is not in the
 skill does not travel, and this is the skill a hover session loads.
+Earlier: 1.10 | 2026-10-05, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 72e3b558. v1.10 (L-418) changes no rule. A contents
+list now opens the skill, generated from its headings, and
+skills_index.py --check fails if the two disagree. Version history
+older than the two entries below moved to
+documentation/SKILL_HISTORIES.md. Both because a plain read of a
+long file shows its start and end and leaves out its middle, where
+the rules are (Tony, 2026-10-05).
 
 ## ledger-and-session-records
 
@@ -1140,6 +1161,15 @@ carried to the served entry, its trust measured from its positions, and
 named and not fetched when it has no plan yet. Its plan's span is a year
 before its perihelion to a year after today, not JPL's whole data.
 (Moved down 2026-11-01, when 1.16 made a fourth entry.)
+Earlier: 1.14 | 2026-10-29, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 571b9bf4 and gallery @ b55109f2. v1.14 (L-399, L-503)
+records the builder's changes of 2026-10-29: each small body is served
+`position_uncertainty`, JPL's own 3-sigma from the 2xr table, by a match
+rule held to the body's own 3-sigma, floored at 1e-7 AU and capped at
+1e-3 AU by the closest comet pieces, a refusal naming its numbers;
+every JPL question is asked fresh (`HORIZONS_CACHE`) and why; and
+`serve_drawings` serves a drawing named on a room's own row. Each fact
+was read from the builder at b55109f2 before it was written.
 
 ## horizons-orbital-mechanics
 
@@ -1233,3 +1263,17 @@ two passes; its window and step by spacecraft_encounters' own rule; made
 again on a 30-day cycle with the past carried. The Hill sphere was not
 in the design record: without it the first offline run took nearest
 approaches tens of millions of km from Mercury and the Moon for events.
+Earlier: 1.11 | 2026-10-25, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 0c27f47a. v1.11 (L-443 build B, with L-470) adds the
+orbiter rule to How a Path's Events Are Found, by Tony's ruling of
+2026-10-24 ("yes that would work well"): the days a path spends inside
+one body's Hill sphere form a stretch; one nearest approach in it is a
+flyby, more than one a capture, whose first and last nearest approaches
+are the events, and a capture running to the end of JPL's data is an
+arrival with no departure; passes of the Sun stay events; the rule is
+among a plan's inputs. Also: a long JPL run prints as it goes, saves as
+it goes and keeps under the maintenance run's 15 minutes; the twelve
+are keyed, so KEYING loses its preview. And two rules from C/2025 K1 to
+Which Record Serves a Body: a comet whose designation also matches its
+own pieces is asked by JPL's permanent number for it; a path cache keyed
+by name does not notice a new record.

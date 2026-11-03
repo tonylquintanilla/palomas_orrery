@@ -1821,6 +1821,34 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-32&group=sb&format=text"
       ]
     },
+    "galileo": {
+      "confirmed": "2026-11-03",
+      "horizons_id": "-77",
+      "id_type": "id",
+      "horizons_name": "Galileo (spacecraft)",
+      "object_type": "trajectory",
+      "list_sha256": "f6613a32f200a4326752421f36ff11a00cbc01b295be1f7ff2b6a538471e241f",
+      "jpl_name": "Galileo (spacecraft)",
+      "jpl_type": "spacecraft",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-77&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-77&group=sb&format=text"
+      ]
+    },
+    "cassini": {
+      "confirmed": "2026-11-03",
+      "horizons_id": "-82",
+      "id_type": "id",
+      "horizons_name": "Cassini (spacecraft)",
+      "object_type": "trajectory",
+      "list_sha256": "f6613a32f200a4326752421f36ff11a00cbc01b295be1f7ff2b6a538471e241f",
+      "jpl_name": "Cassini (spacecraft)",
+      "jpl_type": "spacecraft",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-82&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-82&group=sb&format=text"
+      ]
+    },
     "new_horizons": {
       "confirmed": "2026-10-31",
       "horizons_id": "-98",

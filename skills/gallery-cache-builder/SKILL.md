@@ -2,14 +2,22 @@
 name: gallery-cache-builder
 description: Nightly data-serving pipeline for the Paloma's Orrery web gallery (Phase 1b, ledger L-098). Use for any task touching tools/gallery_cache_builder.py, tools/test_gallery_cache_builder_offline.py, inspect_staging.py, debug_encke_tp.py, gallery_cleanup.py, data/objects_config.json, the data/solar-system/ serving cache (coverage_index.json, feature_configs.json, positions/, raw/), atomic-swap / .prev / .staging_* / .quarantine_* semantics, Guard v2, dry-run / first-build / nightly modes, documentation/TESTING_PROTOCOL.md layers, or wiring interactive.html to the served data; for the rule that a config change is not deployed until the cache is rebuilt; and whenever a rename or a delete under data/ is refused with "Access is denied" (WinError 5), or the swap log data/cache_swap_log.jsonl is being read or written; and for daily_run.py's order, a failed pull and the run records check. Do NOT use for the Studio/converter/viewer curation chain (that is gallery-pipeline) or for projects other than Paloma's Orrery.
 fires_when: Nightly builder, atomic swap and its retry/roll-back/swap log, "Access is denied" under data/, coverage_index, serving cache, objects_config, dry-run/first-build/nightly, builder testing layers, the Daily
-  Run's order and a failed pull, the run records and their check, a spacecraft fetched by its path plan, a pull that does not match the push, a comet on an open path fetched by its plan (is_path_body, open_path), a small body's own uncertainty (position_uncertainty, the match rule), every JPL question asked fresh (HORIZONS_CACHE), a drawing named on a room's row
+  Run's order and a failed pull, the run records and their check, a spacecraft fetched by its path plan, a pull that does not match the push, a comet on an open path fetched by its plan (is_path_body, open_path), a small body's own uncertainty (position_uncertainty, the match rule), every JPL question asked fresh (HORIZONS_CACHE), a drawing named on a room's row, an ended mission's last day (fetch_path_last_day)
 ---
 
 # Gallery Cache Builder (Phase 1b data serving)
 
-Read this file in 4 parts: lines 1-249, 250-530, 531-783, 784-907.
+Read this file in 5 parts: lines 1-248, 249-459, 460-601, 602-843, 844-922.
 
-Skill version: 1.16 | 2026-11-01, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.17 | 2026-11-02, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 15dc8e34 and gallery @ c77f87f6. v1.17 (L-507) adds, to
+A Spacecraft Is Fetched by Its Plan, an ended mission's last day asked
+for itself (fetch_path_last_day): the room puts an ended mission's
+marker on the path's last served point, and the 7-day backbone can stop
+up to six days short of the day the mission ended. And the plan's span
+now ends on an ended mission's mission_end. Read from the gallery's
+builder, with this session's edit, before it was written.
+Earlier: 1.16 | 2026-11-01, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 6a434ed8 and gallery @ b6574a0f. v1.16 (L-484, with
 L-485) adds A Served Number That Changes on Purpose, the lesson of the
 website's red nights of 2026-11-01: a number the orrery's export
@@ -37,19 +45,10 @@ check red too; the orrery's orbit cache is written in text mode. And
 from this session: the orrery's export marks a held body (L-485, the
 hold), which the builder does not honour yet. Each fact was read from
 the code at f4994ffc and c1c578f5 before it was written.
-Earlier: 1.14 | 2026-10-29, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 571b9bf4 and gallery @ b55109f2. v1.14 (L-399, L-503)
-records the builder's changes of 2026-10-29: each small body is served
-`position_uncertainty`, JPL's own 3-sigma from the 2xr table, by a match
-rule held to the body's own 3-sigma, floored at 1e-7 AU and capped at
-1e-3 AU by the closest comet pieces, a refusal naming its numbers;
-every JPL question is asked fresh (`HORIZONS_CACHE`) and why; and
-`serve_drawings` serves a drawing named on a room's own row. Each fact
-was read from the builder at b55109f2 before it was written.
-Older entries are in documentation/SKILL_HISTORIES.md, moved there
-on 2026-10-05 (L-418), 2026-10-14 (L-431), 2026-10-15 (L-446),
-2026-10-17 (L-449), 2026-10-25 (L-443), 2026-10-26 (L-443),
-2026-10-29 (L-399), 2026-10-31 (L-485) and 2026-11-01 (L-484).
+Older entries are in documentation/SKILL_HISTORIES.md, moved there on
+2026-10-05 (L-418), 2026-10-14 (L-431), 2026-10-15 (L-446), 2026-10-17
+(L-449), 2026-10-25 (L-443), 2026-10-26 (L-443), 2026-10-29 (L-399),
+2026-10-31 (L-485), 2026-11-01 (L-484) and 2026-11-02 (L-507).
 
 The standalone builder that fetches fresh JPL Horizons data and deploys the
 web gallery's served cache. It runs unattended every night on GitHub's
@@ -469,7 +468,8 @@ the orrery's."
   spacecraft's plan in the orrery's maintenance run; the objects export
   carries it; `tools/mirror_objects.py` copies onto the entry in
   `data/objects_config.json` what the builder and the room need: its
-  `made` date, its `span` (JPL's own, launch to the end of JPL's data),
+  `made` date, its `span` (JPL's own, launch to the end of JPL's data,
+  or to the day an ended mission ended, its `mission_end`, since v1.17),
   its `backbone` (step and thinning), and each event's body, kind,
   moment, distance, window and step. Never by hand.
 - THE WHOLE PATH, WHEN THE PLAN IS NEW (`fetch_path_by_plan`): the
@@ -487,6 +487,21 @@ the orrery's."
   window before today to two days after (`PATH_TAIL_AHEAD_DAYS`), inside
   the span, so the room, drawing the minute it is opened, finds a point
   either side of it until the next build.
+- AN ENDED MISSION'S LAST DAY IS ASKED FOR ITSELF (`fetch_path_last_day`,
+  v1.17, L-507). A path whose span ended before today also gets the
+  first two minutes of its last day, asked as 00:00 and 00:01 UTC (they
+  come back a minute later on JPL's clock, which labels them), merged
+  with the rest, whole fetch and tail alike. The room puts an ended
+  mission's marker on the path's last served point and its text box
+  says the mission ended that day, but the 7-day backbone from the
+  launch can stop up to six days short of it: Galileo's would have
+  stopped on a day the box would then print as its end. The span's end
+  is a day, inside JPL's data by path_plan's own clipping
+  (horizons-orbital-mechanics, An Ended Mission Ends on Its
+  mission_end), so the two minutes are too. `{}` for a path still
+  running. Such a path serves no `as_of_today`. The offline suite holds
+  it (the last point on the span's last day; planted fault, the last
+  day not asked, leaving 2003-09-23 for an end of 2003-09-29).
 - EVERY POINT IS KEYED TO THE MINUTE (`MINUTE_KEY`), since a window's
   step can be a minute; every other object keeps day keys.
 - AS_OF_TODAY IS TODAY'S POINT, the latest at or before today, not the

@@ -61,6 +61,11 @@ Module updated: October 28, 2026 with Anthropic's Claude Opus 5.5 (L-501:
 2026 ED138, the first dwarf-planet candidate from the Rubin Observatory,
 added and keyed for the website, with JPL's exact name, the words Tony
 approved with their orbit figures left out, and its Wikipedia link.)
+Module updated: November 2, 2026 with Anthropic's Claude Opus 5.5 (L-507,
+historical missions, slice 1: Galileo and Cassini keyed for the website,
+each with JPL's exact name, NASA's mission page as its link, and
+'mission_end', the day NASA's page says the mission ended, which the path
+plan stops at. Cassini's description now says what its page supports.)
 """
 
 from datetime import datetime
@@ -933,11 +938,20 @@ OBJECT_DEFINITIONS = [
     'mission_url': 'https://voyager.jpl.nasa.gov/mission/', 
     'mission_info': 'Horizons: -32. Launched in 1977, Voyager 2 is the only spacecraft to have visited all four giant planets, and the only one to visit Uranus and Neptune.'},
 
-    {'name': 'Galileo', 'id': '-77', 'var_name': 'galileo_var', 'color_key': 'Galileo', 'symbol': 'diamond-open', 'object_type': 'trajectory', 
+    {'name': 'Galileo', 'key': 'galileo', 'id': '-77', 'horizons_name': 'Galileo (spacecraft)', 'var_name': 'galileo_var', 'color_key': 'Galileo', 'symbol': 'diamond-open', 'object_type': 'trajectory',
     'id_type': 'id', 'is_mission': True, 'start_date': datetime(1989, 10, 20), 'end_date': datetime(2003, 9, 29),
     # No ephemeris for target "Galileo (spacecraft)" prior to A.D. 1989-OCT-19 01:28:37.0780 UT
     # No ephemeris for target "Galileo (spacecraft)" after A.D. 2003-SEP-30 11:58:55.8177 UT
-    'mission_url': 'https://solarsystem.nasa.gov/missions/galileo/overview/', 
+    # JPL's Lookup, read 2026-11-02: "Galileo (spacecraft)", spkid -77.
+    # JPL's positions run on past the impact, on a path leaving Jupiter
+    # (6.2 million km from its centre on 2003-09-30), so the path plan
+    # stops at mission_end (L-507; Tony, 2026-11-02, "Yes stop at impact").
+    # Source: NASA, Galileo mission page,
+    # https://science.nasa.gov/mission/galileo/ (read 2026-11-02): "It
+    # started orbiting Jupiter in December 1995" and "The mission ended
+    # when the spacecraft deliberately impacted Jupiter on Sept. 21, 2003."
+    'mission_end': datetime(2003, 9, 21),
+    'mission_url': 'https://science.nasa.gov/mission/galileo/',
     'mission_info': 'Horizons: -77. Galileo studied Jupiter and its moons from 1995 to 2003.'},
 
     {'name': 'SOHO', 'id': '-21', 'var_name': 'soho_var', 'color_key': 'SOHO', 
@@ -946,11 +960,17 @@ OBJECT_DEFINITIONS = [
     'mission_info': 'Horizons: -21. The Solar and Heliospheric Observatory observes the Sun and heliosphere from the L1 Lagrange point.', 
     'mission_url': 'https://sohowww.nascom.nasa.gov/'},    
 
-    {'name': 'Cassini', 'id': '-82', 'var_name': 'cassini_var', 'color_key': 'Cassini', 'symbol': 'diamond-open', 
-     'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(1997, 10, 16), 'end_date': datetime(2017, 9, 14), 
+    {'name': 'Cassini', 'key': 'cassini', 'id': '-82', 'horizons_name': 'Cassini (spacecraft)', 'var_name': 'cassini_var', 'color_key': 'Cassini', 'symbol': 'diamond-open',
+     'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(1997, 10, 16), 'end_date': datetime(2017, 9, 14),
      # No ephemeris for target "Cassini (spacecraft)" after A.D. 2017-SEP-15 11:56:50.8176 UT
-     'mission_url': 'https://solarsystem.nasa.gov/missions/cassini/overview/', 
-     'mission_info': 'Horizons: -82. Cassini-Huygens studied Saturn and its moons from 2004 to 2017.'},
+     # JPL's Lookup, read 2026-11-02: "Cassini (spacecraft)", spkid -82.
+     # Source: NASA, Cassini mission page,
+     # https://science.nasa.gov/mission/cassini/ (read 2026-11-02): the
+     # mission's end, "Sept. 15, 2017", and "The Saturn system was
+     # Cassini's home for 13 years." JPL's positions end the same day.
+     'mission_end': datetime(2017, 9, 15),
+     'mission_url': 'https://science.nasa.gov/mission/cassini/',
+     'mission_info': 'Horizons: -82. Cassini-Huygens studied Saturn and its moons. The Saturn system was its home for 13 years.'},
 
     {'name': 'Rosetta', 'id': '-226', 'var_name': 'rosetta_var', 'color_key': 'Rosetta', 'symbol': 'diamond-open', 'object_type': 'trajectory', 
     'id_type': 'id', 'is_mission': True, 'start_date': datetime(2004, 3, 3), 'end_date': datetime(2016, 10, 4),

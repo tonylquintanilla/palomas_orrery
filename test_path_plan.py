@@ -68,6 +68,11 @@ WHAT IT CHECKS
          again, Comet One's end moved 31 days, Comet Two's still JPL's.
      17. Two planted faults must fail check 15: the perihelion taken from
          the data sheet's TP, and JPL's limits ignored.
+     18. An ended mission (L-507): Craft A given a mission_end before
+         JPL's data ends is asked to that day and no further, its flyby
+         still found; Craft B, with none, keeps its fingerprint, so no
+         plan of a mission still flying is made again. Planted fault:
+         the field not read.
 
 RUN COMMAND
 
@@ -94,6 +99,8 @@ not planned, the --preview flag it checked having gone).
 Module updated: October 26, 2026 with Anthropic's Claude Opus 5.5
 (L-443, build B part 2: checks 15 to 17, comets on open paths, with two
 planted faults).
+Module updated: November 2, 2026 with Anthropic's Claude Opus 5.5
+(L-507: check 18, an ended mission's mission_end, with a planted fault).
 """
 
 import datetime
@@ -762,6 +769,41 @@ def plant_no_clip():
     return restore
 
 
+def mission_end_clip(plant=False):
+    """(ok, why): Craft A given a mission_end of 2025-04-01, before JPL's
+    made-up data ends (2025-05-20), is asked to that day and no further,
+    its Earth flyby of 2025-03-01 still found; Craft B, with none, keeps
+    the fingerprint it had without the field. Planted fault: the field
+    not read, so the span runs on to JPL's end (L-507)."""
+    ended = LIST.replace(
+        "'end_date': datetime(2025, 6, 1)},",
+        "'end_date': datetime(2025, 6, 1),\n"
+        "     'mission_end': datetime(2025, 4, 1)},", 1)
+    root, root0 = make_root(ended), make_root()
+    fields = pp.FIELDS
+    if plant:
+        pp.FIELDS = tuple(f for f in fields if f != "mission_end")
+    try:
+        _, _, out = pp.run(root, FakeJPL(refuse=("X2",)),
+                           datetime.date(2026, 10, 24), pause=0.0)
+        _, _, out0 = pp.run(root0, FakeJPL(refuse=("X2",)),
+                            datetime.date(2026, 10, 24), pause=0.0)
+    finally:
+        pp.FIELDS = fields
+        shutil.rmtree(root, ignore_errors=True)
+        shutil.rmtree(root0, ignore_errors=True)
+    a, b = out["plans"]["craft_a"], out["plans"]["craft_b"]
+    probs = []
+    if a["span"]["end"] != "2025-04-01":
+        probs.append("Craft A's span ends %s, not 2025-04-01"
+                     % a["span"]["end"])
+    if not flyby_ok(a, FLYBY_A, "Earth", True)[0]:
+        probs.append("Craft A's Earth flyby not found")
+    if b["inputs_sha256"] != out0["plans"]["craft_b"]["inputs_sha256"]:
+        probs.append("Craft B's fingerprint moved")
+    return not probs, "; ".join(probs) or "ok"
+
+
 def plant_no_backbone():
     old = pp.BACKBONE_STEP_SECONDS
     pp.BACKBONE_STEP_SECONDS = 0.0
@@ -823,6 +865,12 @@ def main():
         got = comets(plant=plant)
         shutil.rmtree(got[5], ignore_errors=True)
         check(not got[0], "17. planted fault caught: %s" % name)
+    ok, why = mission_end_clip()
+    check(ok, "18. an ended mission's path is asked to its mission_end and "
+              "no further, its flyby still found, and a path with none "
+              "keeps its fingerprint (%s)" % why)
+    check(not mission_end_clip(plant=True)[0],
+          "18. planted fault caught: mission_end not read")
     for name, plant in (("the backbone's step set to nothing",
                          plant_no_backbone),
                         ("the fine pass skipped", plant_no_fine_pass)):

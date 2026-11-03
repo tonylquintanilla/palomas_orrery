@@ -201,7 +201,7 @@ I wrote the brief for historical missions slice 1, recorded your four rulings in
 **Token count:** this environment can't print one. I read about 2.3 MB (mostly the ledger, which I edited by script without loading it) and wrote about 21 KB.
 
 **Your run order:**
-1. In GitHub Desktop, commit and push the orrery: the three files above. -- 
+1. In GitHub Desktop, commit and push the orrery: the three files above. -- 15dc8e34e2ea17bd57d4af9b61d138a6fb4479ba
 2. Open a Claude Code session through the python_work door and give it the brief.
 
 **Tony-action rollup:**

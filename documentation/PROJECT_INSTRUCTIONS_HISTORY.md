@@ -3944,6 +3944,79 @@ resident.
 (Moved down from the resident protocol on 2026-11-02 when
 v3.122 made a fourth entry.)
 
+v3.120 (November 1, 2026): No rule changed in this document. ONE
+skill bump, one version (L-484, with L-485): gallery-cache-builder
+1.15 -> 1.16. THE LESSON OF THE WEBSITE'S RED NIGHTS WRITTEN INTO THE
+SKILL; THE ORRERY'S BACKSTOP LINE BUILT; THE COMETS' TEST RUN, THEIR
+SWITCH NOT BUILT.
+
+WHAT PROMPTED IT. The orrery's Claude Code session of Nov 1, built on
+orrery 6a434ed8 with the gallery at b6574a0f read only, from
+documentation/COORD_L470_orrery_comet_pins_backstop_brief_20261101.md.
+On Nov 1 the website's night went red twice ("1 of 36 gating checkers
+FAILED: Display figures") on a served number the orrery's export had
+changed on purpose, Earth's inner Van Allen belt, 9,600 km to 10,000
+km: the website's acceptance lines and hover fixture still held the
+old number. The gallery session wrote the lesson on L-484 for the
+orrery's skills, which a gallery session does not edit. And Tony ruled
+at noon (12:04 Chicago) that each nightly schedule gains a second line
+and the morning pulls without waiting for the run.
+
+WHAT CHANGED. gallery-cache-builder: a new section, A Served Number
+That Changes on Purpose (a number the export changes on purpose is
+looked for in the website's checks before the push; the brief for the
+change names the pins that move, or says none does and how that was
+found; a change meant to move nothing is proved by a diff of the
+export). Under The Daily Run's Steps, the night form: the morning does
+not wait for the night, because GitHub's schedule is best-effort (its
+page quoted, the three late starts named), and a dropped night is
+caught by a second scheduled line, the orrery's at 11:17 UTC, the
+website's at 12:17 with its next gallery session. The skill's oldest
+of four version entries, 1.13, moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule. Every
+sentence was read from the code at 6a434ed8 and b6574a0f, and GitHub's
+page fetched, before it was written.
+
+Not a skill, built the same session: the orrery workflow's second
+scheduled line, `cron: '17 11 * * *'` (L-485). And the test of the six
+periodic comets asked by designation with JPL's CAP directive (L-470):
+24 answers, four forms for each of Tempel 2, Schaumasse, Howell,
+Churyumov-Gerasimenko, Halley and Encke, every one live on JPL's clock
+of Nov 1 and naming today's pinned record
+(documentation/CHECK_L470_comet_cap_answers_20261101.md).
+
+NOT DONE HERE, AND WHY. The comets' switch from record number to
+designation (the brief's sections 4.5 to 4.9) was not built: reading
+the readers found that the orrery's plotting knows a periodic comet by
+its record number or its id_type in places the brief did not list
+(`_is_comet`, and the comet-tail tests in palomas_orrery.py), so the
+switch needs a sweep of those and Tony's look at a plot, more than the
+session's room. The brief's rule is to stop before section 4 rather
+than leave it half built. So horizons-orbital-mechanics stays at 1.13,
+and its Small-Body Record Pinning stays true. ledger-and-session-records
+stays at 1.22, its next version the records session's.
+
+THE OBLIGATION TRAVELS. A Claude Code session reads each skill as the
+file in the repo. This one read in full safe-file-editing 1.14,
+agentic-pre-test 1.3, ledger-and-session-records 1.22,
+provenance-discipline 2.36 with references/figures.md,
+horizons-orbital-mechanics 1.13, gallery-cache-builder 1.15 and
+orrery-coding-conventions 1.12, each as the manifest expected. The
+account's installed copies cannot be seen from Code. The next session
+that loads skills from the account confirms its copy reads
+gallery-cache-builder 1.16, and, from v3.118, interactive-exhibit 1.29,
+horizons-orbital-mechanics 1.13 and provenance-discipline 2.36, before
+work that fires them.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.117 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-11-02 when
+v3.123 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

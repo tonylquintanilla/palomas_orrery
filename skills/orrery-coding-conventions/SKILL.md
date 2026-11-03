@@ -6,9 +6,18 @@ fires_when: Markers, hover text, axes, the opening view (Auto scale), shells, le
 
 # Orrery Coding Conventions
 
-Read this file in 3 parts: lines 1-274, 275-574, 575-710.
+Read this file in 3 parts: lines 1-290, 291-590, 591-726.
 
-Skill version: 1.12 | 2026-10-26, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.13 | 2026-11-02, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 15dc8e34. v1.13 (L-505, L-507) corrects the Marker
+Symbol Convention: the cross is for info markers alone, and a new x row
+holds the coordinate ticks, the axes' scale marks and the ruler that
+keys them (Tony, 2026-10-31: "X is simply a graphical marker with no
+render significance"). A session following 1.12 would have drawn ticks
+as crosses, which read as hover points. And it adds the ended mission's
+marker: the spacecraft's open diamond, on its path's last point; the
+symbol says what the thing is, the text box says when.
+Earlier: 1.12 | 2026-10-26, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 8f4173c4. v1.12 (L-494) corrects one sentence, under
 Hover Text Is Written for the Visitor: the website's hovers no longer
 end with a pointer to the i panel. Tony chose option C that evening,
@@ -24,16 +33,9 @@ end just past its farthest shell. Tony, 2026-10-18: "this should be
 the rule for all rooms or system views." The ledger had said the rule
 goes into this skill at its build. The file also gets its read plan,
 and leaves skills_index.py's PLAN_NOT_YET list.
-Earlier: 1.10 | 2026-10-05, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 72e3b558. v1.10 (L-418) changes no rule. A contents
-list now opens the skill, generated from its headings, and
-skills_index.py --check fails if the two disagree. Version history
-older than the two entries below moved to
-documentation/SKILL_HISTORIES.md. Both because a plain read of a
-long file shows its start and end and leaves out its middle, where
-the rules are (Tony, 2026-10-05).
-Older entries are in documentation/SKILL_HISTORIES.md, moved there
-on 2026-10-05 (L-418), 2026-10-19 (L-385) and 2026-10-26 (L-494).
+Older entries are in documentation/SKILL_HISTORIES.md, moved there on
+2026-10-05 (L-418), 2026-10-19 (L-385), 2026-10-26 (L-494) and
+2026-11-02 (L-507).
 Criticality tiers ([CRITICAL]/[QUALITY]/[PRACTICE]) are defined in the
 resident protocol, Part 2.
 
@@ -107,11 +109,25 @@ see Field Notes.)
 | Filled diamond | diamond       | Comets                                      |
 | Open diamond   | diamond-open  | Spacecraft                                  |
 | Open square    | square-open   | Structural positions: Lagrange points       |
-| Cross (+)      | cross         | Non-structural: coordinate ticks, info markers |
+| Cross (+)      | cross         | Info markers                                |
+| X              | x             | Coordinate ticks: the axes' scale marks and the ruler that keys them |
 
 Circles are reserved for celestial objects. Cross is for hover information
-only. When an existing marker already occupies a position, add hovertext via
-customdata instead of adding a second marker.
+only. An x means nothing in the scene: it is a scale mark, with no hover
+and no drawer row (L-505; Tony, 2026-10-31, 20:43: "X is simply a
+graphical marker with no render significance like a + while a filled
+square might be used for a render at some point"). When an existing
+marker already occupies a position, add hovertext via customdata instead
+of adding a second marker.
+
+AN ENDED MISSION'S MARKER IS THE SPACECRAFT'S OPEN DIAMOND (v1.13,
+L-507). The symbol says what the thing is; the text box says when. A
+mission whose path ended before the moment drawn keeps its marker, on
+the path's last point, where it was on its last day, and it is
+diamond-open like every spacecraft's, so no new symbol is spent and the
+taxonomy keeps one symbol per kind of thing. Whether the ended path's
+LINE looks different from an active one is Tony's, on the render
+(Mode 5); it is built solid.
 
 ## Single Info Marker Pattern [QUALITY]
 

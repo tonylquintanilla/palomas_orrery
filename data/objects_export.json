@@ -1,9 +1,9 @@
 {
   "schema": 4,
-  "source_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
-  "period_inputs_sha256": "8edfc6114b76695235f1fd4c8049b9e70a978eb5ade0333019bf271fb302c042",
-  "confirmations_sha256": "8894135a4667371aa49c7fc9939cf74ee27886e483951ac69eca06e7d9bd1bac",
-  "paths_sha256": "3c18a250c4a04e25a1fddedd01323723f1d7b8e31f9b8ca02a4eb773768d1fe8",
+  "source_sha256": "f6613a32f200a4326752421f36ff11a00cbc01b295be1f7ff2b6a538471e241f",
+  "period_inputs_sha256": "0581eea56daf557ed677dccaf4def5c5153b368a98a6a09a716b17a9b9aa41c1",
+  "confirmations_sha256": "dca1b1159eb0e1322c4773573ea7087c155701a1ea6366191a2efe59051894ca",
+  "paths_sha256": "419675220512cae6778a296c7d842b97be47be2e734e58fe42374b78d85cf621",
   "cadence_days": 30,
   "objects": {
     "sun": {
@@ -5549,6 +5549,350 @@
         ]
       }
     },
+    "galileo": {
+      "name": "Galileo",
+      "horizons_id": "-77",
+      "horizons_name": "Galileo (spacecraft)",
+      "id_type": "id",
+      "object_type": "trajectory",
+      "description": "Galileo studied Jupiter and its moons from 1995 to 2003.",
+      "info_url": "https://science.nasa.gov/mission/galileo/",
+      "period": null,
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-11-03",
+          "horizons_id": "-77",
+          "id_type": "id",
+          "horizons_name": "Galileo (spacecraft)"
+        },
+        "period": null,
+        "hold": null
+      },
+      "path": {
+        "made": "2026-11-03",
+        "span": {
+          "end": "2003-09-21",
+          "start": "1989-10-20"
+        },
+        "backbone": {
+          "step": "7d",
+          "thin_tol_au": 0.02
+        },
+        "events": [
+          {
+            "body": "Venus",
+            "body_id": "299",
+            "closest": "1990-02-10 06:00",
+            "dist_km": 22175.4,
+            "hill_km": 1004861,
+            "ideal_step_s": 283.1,
+            "jd": 2447932.75,
+            "kind": "flyby",
+            "stays": false,
+            "step": "5m",
+            "v_kms": 8.202,
+            "window": [
+              "1990-02-10 01:29",
+              "1990-02-10 10:30"
+            ]
+          },
+          {
+            "body": "Sun",
+            "body_id": "10",
+            "closest": "1990-02-25 10:14",
+            "dist_km": 104503063.3,
+            "hill_km": null,
+            "ideal_step_s": 269819.1,
+            "jd": 2447947.926389,
+            "kind": "perihelion",
+            "stays": false,
+            "step": "3d",
+            "v_kms": 40.559,
+            "window": [
+              "1989-08-30 11:55",
+              "1990-08-23 08:32"
+            ]
+          },
+          {
+            "body": "Earth",
+            "body_id": "399",
+            "closest": "1990-12-08 20:36",
+            "dist_km": 7341.6,
+            "hill_km": 1474071,
+            "ideal_step_s": 56.0,
+            "jd": 2448234.358333,
+            "kind": "flyby",
+            "stays": false,
+            "step": "1m",
+            "v_kms": 13.736,
+            "window": [
+              "1990-12-08 19:42",
+              "1990-12-08 21:29"
+            ]
+          },
+          {
+            "body": "Sun",
+            "body_id": "10",
+            "closest": "1991-01-11 05:33",
+            "dist_km": 135337718.8,
+            "hill_km": null,
+            "ideal_step_s": 378427.1,
+            "jd": 2448267.73125,
+            "kind": "perihelion",
+            "stays": false,
+            "step": "4d",
+            "v_kms": 37.451,
+            "window": [
+              "1990-05-05 06:41",
+              "1991-09-19 04:24"
+            ]
+          },
+          {
+            "body": "Earth",
+            "body_id": "399",
+            "closest": "1992-12-08 15:10",
+            "dist_km": 6680.6,
+            "hill_km": 1473888,
+            "ideal_step_s": 49.7,
+            "jd": 2448965.131944,
+            "kind": "flyby",
+            "stays": false,
+            "step": "1m",
+            "v_kms": 14.076,
+            "window": [
+              "1992-12-08 14:22",
+              "1992-12-08 15:57"
+            ]
+          },
+          {
+            "body": "Sun",
+            "body_id": "10",
+            "closest": "1992-12-13 08:26",
+            "dist_km": 146974692.3,
+            "hill_km": null,
+            "ideal_step_s": 394338.9,
+            "jd": 2448969.851389,
+            "kind": "perihelion",
+            "stays": false,
+            "step": "4d",
+            "v_kms": 39.03,
+            "window": [
+              "1992-03-26 20:20",
+              "1993-08-31 20:31"
+            ]
+          },
+          {
+            "body": "Jupiter",
+            "body_id": "599",
+            "closest": "1995-12-07 21:55",
+            "dist_km": 286030.3,
+            "hill_km": 53902848,
+            "ideal_step_s": 994.3,
+            "jd": 2450059.413194,
+            "kind": "arrival",
+            "stays": true,
+            "step": "30m",
+            "v_kms": 30.124,
+            "window": [
+              "1995-12-07 06:05",
+              "1995-12-08 13:44"
+            ]
+          }
+        ],
+        "searched": [
+          "Sun",
+          "Mercury",
+          "Venus",
+          "Earth",
+          "Moon",
+          "Mars",
+          "Jupiter",
+          "Saturn",
+          "Uranus",
+          "Neptune",
+          "Pluto",
+          "Ceres",
+          "16 Psyche",
+          "Dinkinesh",
+          "Itokawa",
+          "Ryugu",
+          "Vesta",
+          "Churyumov"
+        ]
+      }
+    },
+    "cassini": {
+      "name": "Cassini",
+      "horizons_id": "-82",
+      "horizons_name": "Cassini (spacecraft)",
+      "id_type": "id",
+      "object_type": "trajectory",
+      "description": "Cassini-Huygens studied Saturn and its moons. The Saturn system was its home for 13 years.",
+      "info_url": "https://science.nasa.gov/mission/cassini/",
+      "period": null,
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-11-03",
+          "horizons_id": "-82",
+          "id_type": "id",
+          "horizons_name": "Cassini (spacecraft)"
+        },
+        "period": null,
+        "hold": null
+      },
+      "path": {
+        "made": "2026-11-03",
+        "span": {
+          "end": "2017-09-15",
+          "start": "1997-10-16"
+        },
+        "backbone": {
+          "step": "7d",
+          "thin_tol_au": 0.02
+        },
+        "events": [
+          {
+            "body": "Sun",
+            "body_id": "10",
+            "closest": "1998-03-27 06:48",
+            "dist_km": 100715416.1,
+            "hill_km": null,
+            "ideal_step_s": 265143.7,
+            "jd": 2450899.783333,
+            "kind": "perihelion",
+            "stays": false,
+            "step": "3d",
+            "v_kms": 39.778,
+            "window": [
+              "1997-10-02 10:54",
+              "1998-09-19 02:41"
+            ]
+          },
+          {
+            "body": "Venus",
+            "body_id": "299",
+            "closest": "1998-04-26 13:46",
+            "dist_km": 6337.3,
+            "hill_km": 1016852,
+            "ideal_step_s": 56.3,
+            "jd": 2450930.073611,
+            "kind": "flyby",
+            "stays": false,
+            "step": "1m",
+            "v_kms": 11.785,
+            "window": [
+              "1998-04-26 12:52",
+              "1998-04-26 14:39"
+            ]
+          },
+          {
+            "body": "Venus",
+            "body_id": "299",
+            "closest": "1999-06-24 20:31",
+            "dist_km": 6654.4,
+            "hill_km": 1013006,
+            "ideal_step_s": 51.1,
+            "jd": 2451354.354861,
+            "kind": "flyby",
+            "stays": false,
+            "step": "1m",
+            "v_kms": 13.645,
+            "window": [
+              "1999-06-24 19:42",
+              "1999-06-24 21:19"
+            ]
+          },
+          {
+            "body": "Sun",
+            "body_id": "10",
+            "closest": "1999-06-29 11:35",
+            "dist_km": 107875471.5,
+            "hill_km": null,
+            "ideal_step_s": 257290.0,
+            "jd": 2451358.982639,
+            "kind": "perihelion",
+            "stays": false,
+            "step": "2d",
+            "v_kms": 43.906,
+            "window": [
+              "1999-01-09 20:41",
+              "1999-12-17 02:28"
+            ]
+          },
+          {
+            "body": "Earth",
+            "body_id": "399",
+            "closest": "1999-08-18 03:29",
+            "dist_km": 7567.8,
+            "hill_km": 1515093,
+            "ideal_step_s": 41.7,
+            "jd": 2451408.645139,
+            "kind": "flyby",
+            "stays": false,
+            "step": "1m",
+            "v_kms": 19.02,
+            "window": [
+              "1999-08-18 02:49",
+              "1999-08-18 04:08"
+            ]
+          },
+          {
+            "body": "Jupiter",
+            "body_id": "599",
+            "closest": "2000-12-30 10:05",
+            "dist_km": 9794457.0,
+            "hill_km": 51529632,
+            "ideal_step_s": 88413.6,
+            "jd": 2451908.920139,
+            "kind": "flyby",
+            "stays": false,
+            "step": "1d",
+            "v_kms": 11.601,
+            "window": [
+              "2000-11-01 18:56",
+              "2001-02-27 01:13"
+            ]
+          },
+          {
+            "body": "Saturn",
+            "body_id": "699",
+            "closest": "2004-07-01 02:40",
+            "dist_km": 80230.2,
+            "hill_km": 61781828,
+            "ideal_step_s": 273.4,
+            "jd": 2453187.611111,
+            "kind": "arrival",
+            "stays": true,
+            "step": "5m",
+            "v_kms": 30.734,
+            "window": [
+              "2004-06-30 22:18",
+              "2004-07-01 07:01"
+            ]
+          }
+        ],
+        "searched": [
+          "Sun",
+          "Mercury",
+          "Venus",
+          "Earth",
+          "Moon",
+          "Mars",
+          "Jupiter",
+          "Saturn",
+          "Uranus",
+          "Neptune",
+          "Pluto",
+          "Ceres",
+          "16 Psyche",
+          "Dinkinesh",
+          "Itokawa",
+          "Ryugu",
+          "Vesta",
+          "Churyumov"
+        ]
+      }
+    },
     "new_horizons": {
       "name": "New Horizons",
       "horizons_id": "-98",
@@ -8960,6 +9304,13 @@
     "voyager_2": [
       "1977",
       "2"
+    ],
+    "galileo": [
+      "1995",
+      "2003"
+    ],
+    "cassini": [
+      "13"
     ],
     "new_horizons": [
       "2015",

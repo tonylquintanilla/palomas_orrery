@@ -1,14 +1,27 @@
 ---
 name: interactive-exhibit
 description: How an interactive exhibit (a room in interactive.html such as ?exhibit=sun) is designed, built, verified and carded for the Paloma's Orrery gallery. Covers the exhibit switch and boot path, the assembler driver spec, the JS feature handoff, the shared chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent gate, back link), what is per-body, the served-data provenance contract, what a room opens on (the arrival block) and the shell-key stamp the renderers apply, the drawer order, who may write data/objects_config.json, the Mode 5 phone sequence, and carding an exhibit through Studio. Use when adding or changing an exhibit (Earth, Jupiter, the stars), touching sun* chrome in interactive.html, deciding what an exhibit may render, or editing the served words with store_writer or exhibit_store_editor. Not for propagation math (gallery-assembler), the nightly builder (gallery-cache-builder), or the Studio/converter chain (gallery-pipeline). Do not use for projects other than Paloma's Orrery.
-fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, its group rows, its two Resets, the Reset in every room's top bar, Home's order and its framing; Go To fitting a body's whole orbit and the orbit line in a body's hover; the count line's place; a bare interactive.html link and the Explorer's address; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia); a served number's citation and its source_note; the Typed facts check (smoke_typed_facts.js); a feature drawn as stored dots (the Hills cloud, Earth's radiation belts); the i panel's source list and its links (source_list.js); the order a room's drawer lists its shells in, where each begins (drawer_order.js, the Drawer order check); a spacecraft's path in the Solar System room (its positions file, solid and dashed, its text box); whether the website and the orrery agree on an object; the planets ticked with a spacecraft (companions); the i panel's words one sentence to a bullet; a comet on an open path in the Solar System room; the drawer's groups one JPL class to a row; JPL's terms in the words a visitor reads; a comet's companions; the drawer's Find a body box; the direction arrows on the orbits; the grid chip's AU note and the triad's frame note; the i button's first-visit note and hovers without a pointer line; the one text box for a tap and Go To (text_box.js); a group found by its find words; the i panel's Report a problem link; a drawing row in the Solar System room (the belt's cloud); a stored drawing's cross kept off the axes; the source line's UTC and JPL clock
+fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, its group rows, its two Resets, the Reset in every room's top bar, Home's order and its framing; Go To fitting a body's whole orbit and the orbit line in a body's hover; the count line's place; a bare interactive.html link and the Explorer's address; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia); a served number's citation and its source_note; the Typed facts check (smoke_typed_facts.js); a feature drawn as stored dots (the Hills cloud, Earth's radiation belts); the i panel's source list and its links (source_list.js); the order a room's drawer lists its shells in, where each begins (drawer_order.js, the Drawer order check); a spacecraft's path in the Solar System room (its positions file, solid and dashed, its text box); whether the website and the orrery agree on an object; the planets ticked with a spacecraft (companions); the i panel's words one sentence to a bullet; a comet on an open path in the Solar System room; the drawer's groups one JPL class to a row; JPL's terms in the words a visitor reads; a comet's companions; the drawer's Find a body box; the direction arrows on the orbits; the grid chip's AU note and the triad's frame note; the i button's first-visit note and hovers without a pointer line; the one text box for a tap and Go To (text_box.js); a group found by its find words; the i panel's Report a problem link; a drawing row in the Solar System room (the belt's cloud); a stored drawing's cross kept off the axes; the source line's UTC and JPL clock; the ruler and the x marks on the axes; an ended mission (the Historical missions group, its marker on its last day, mission_end)
 ---
 
 # Interactive Exhibit
 
-Read this file in 10 parts: lines 1-108, 109-162, 163-403, 404-527, 528-538, 539-777, 778-1005, 1006-1256, 1257-1448, 1449-1558.
+Read this file in 10 parts: lines 1-108, 109-162, 163-403, 404-527, 528-538, 539-778, 779-955, 956-1237, 1238-1414, 1415-1617.
 
-Skill version: 1.29 | 2026-10-29, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.30 | 2026-11-02, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 15dc8e34 and gallery @ c77f87f6. v1.30 (L-507, carrying
+L-505) records historical missions' slice 1 and corrects what the ruler
+build of 2026-11-01 left wrong. An ended mission is drawn as Voyager is,
+whole and solid, its marker the spacecraft's diamond-open on its path's
+last served point, where it was on its last day; its text box opens with
+the day it ended, as Tony ruled; the Historical missions group follows
+the Spacecraft group; every spacecraft's box carries the dates sentence
+(the path is the mission's dates, the planets today's). And the Frame
+HUD row: its right end is a ruler keying x marks on the axis lines, not
+a grid chip, and the edge numbers are off (L-505, x marks by Tony's
+ruling of 2026-10-31). Each fact was read from the gallery's code at
+c77f87f6, with this session's edits, before it was written.
+Earlier: 1.29 | 2026-10-29, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 571b9bf4 and gallery @ b55109f2. v1.29 (L-503, L-502,
 L-399, L-504) records the gallery's builds of 2026-10-29, six things a
 session following 1.28 would get wrong or not find: a small body's own
@@ -38,25 +51,12 @@ problem" link in every room's i panel (L-458). Riding the same bump
 (L-501): a body the served cache does not hold yet turns the Solar
 System figures check red as well as Cache in step. Each fact was read
 from the gallery's code at acbf206b before it was written.
-Earlier: 1.27 | 2026-10-27, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 8d334e7 and gallery @ 7d422e5. v1.27 (L-443, carrying
-L-493, L-494 and L-495) records the night of 2026-10-26. It corrects a
-wrong sentence: no website hover ends with a pointer to the i panel any
-more, and a first visit gets a note under the i button (Tony's option
-C, L-494). A comet ticks a companion planet: on an open path the
-farthest its path has reached so far (Tony: "so far"), on a closed
-orbit the farthest its orbit reaches, by its aphelion; no asteroid or
-dwarf planet ticks one (Tony: "only spacecraft and comets"). A group's
-class is explained first in each member's text box and panel. And the
-Find a body box, the grid chip's AU note, the whole triad opening the
-frame note, the orbit line wrapped at 60, the direction arrows, and a
-candidate for the headless recipe.
-Older entries are in documentation/SKILL_HISTORIES.md, moved there
-on 2026-10-05 (L-418), 2026-10-10 (L-429), 2026-10-14 (L-431),
-2026-10-16 (L-421), 2026-10-17 (L-452), 2026-10-20 (L-456),
-2026-10-21 (L-460), 2026-10-22 (L-434, L-443), 2026-10-24
-(L-477, L-482), 2026-10-25 (L-443, twice), 2026-10-26 (L-443),
-2026-10-27 (L-443), 2026-10-28 (L-443) and 2026-10-29 (L-503).
+Older entries are in documentation/SKILL_HISTORIES.md, moved there on
+2026-10-05 (L-418), 2026-10-10 (L-429), 2026-10-14 (L-431), 2026-10-16
+(L-421), 2026-10-17 (L-452), 2026-10-20 (L-456), 2026-10-21 (L-460),
+2026-10-22 (L-434, L-443), 2026-10-24 (L-477, L-482), 2026-10-25 (L-443,
+twice), 2026-10-26 (L-443), 2026-10-27 (L-443), 2026-10-28 (L-443),
+2026-10-29 (L-503) and 2026-11-02 (L-507).
 
 ## Contents
 
@@ -125,7 +125,7 @@ the new exhibit brings its own.
 | Nav cluster: + / - / Home = FRAME zoom (range and dtick change together; the grid re-labels), plus four arrow buttons that turn the camera by a step scaled to the live eye distance, so a tap moves the same slice of screen at any zoom (L-310); on a portrait phone 768 px or narrower the arrow cross, Home with it, moves apart from + and - into its own holder, and the in-frame title stays (L-316). WHICH corner is set only by the `.nav-cross-apart` CSS rule in `nav_cluster.js` -- top right since round 4, after a round at the bottom left -- and the method that moves it, `crossApart(on)`, says nothing about the corner, so the next move is one CSS edit. The open drawer hides the cluster and the holder both. The page decides WHEN: `navPlaceCross()` asks `sunPhonePortrait()`, the same test the text box uses | gallery/nav_cluster.js (`crossApart`, `.nav-cross-apart`), `navFrameZoom`, `navHome`, `navCameraStep`, `navPlaceCross`, `sunPhonePortrait` | shared |
 | Click deferral: `plotly_click` -> `setTimeout(0)` -> focus | initSunExhibit | shared, CRITICAL (L-278) |
 | i-panel follows the focus; curated link per feature stamped into trace `meta` by `stampLink`; its last line, in every room, is "About Paloma's Orrery", opening the lobby's About card at index.html#about (L-475), and closing the card steps back to the room that opened it (L-480, index.html's `aboutFromRoom`). Under every focused feature, in every room, a "Report a problem" link with a line beside it (v1.28, L-458, talk D's approved words): it opens the guest book's Google Form with its message box already written, "Problem report -- <room> room, <feature>", two prompts, and "Page: <the room's address>"; the form's address and the box's field were read from the form's public page (`REPORT_FORM`), so no second form and no account. `tools/guestbook_updater.py` shows a message beginning "Problem report" to Tony as a report, private, never offered for the lobby | `renderSunInfo`, feature_renderers.js; `REPORT_FORM`, `REPORT_WORDS`, `sunReportMessage`, `sunReportLink` | shared mechanism; per-body copy and links |
-| Frame HUD: camera-following triad, Aries glyph with the frame note and its source, grid chip. A tap or hover anywhere on the triad opens the frame note, not on the Aries glyph alone; the grid chip opens a note on what an AU is, its kilometres the served KM_PER_AU (IAU 2012 Resolution B2), its words resting on the IAU's Measuring the Universe page, both linked (v1.27, L-495). Since v1.29 (L-502) the HUD is a ROW across the bottom of every room (`.sun-hud`), 48 px above it, just clear of the drawer button, whose top was measured at 46.4 px on a 375 px page: the triad in its centre, drawn at three quarters (78 by 90 px over its 104 by 120 viewBox, its letters still printing at 11 px), the grid chip at its right end. It is centred by `text-align`, because `body.sun-exhibit .sun-chrome` sets `display: block` and outweighs a flex rule on the HUD; the count line keeps to the triad's left (below) | `sunHud*`, `sunAuNote*`, `#sun-au-note`; `.sun-hud`, `.sun-triad` | shared; reads the camera, never calls Plotly |
+| Frame HUD: camera-following triad, Aries glyph with the frame note and its source, the ruler. A tap or hover anywhere on the triad opens the frame note, not on the Aries glyph alone; a tap on the ruler opens a note on what an AU is, its kilometres the served KM_PER_AU (IAU 2012 Resolution B2), its words resting on the IAU's Measuring the Universe page, both linked (v1.27, L-495). Since v1.29 (L-502) the HUD is a ROW across the bottom of every room (`.sun-hud`), 48 px above it, just clear of the drawer button, whose top was measured at 46.4 px on a 375 px page: the triad in its centre, drawn at three quarters (78 by 90 px over its 104 by 120 viewBox, its letters still printing at 11 px), the ruler at its right end. Since v1.30 (L-505, Tony's rulings of 2026-10-31) that end is a RULER, not a chip: its two x marks key the x marks on the three origin axis lines, a small x at every grid step and one twice the size at every second step, in the axis hue (Plotly's symbol "x"), with no hover and no drawer row, installed and restyled with the lines; its labels carry a thin dark halo. An x means nothing in the scene: circles are bodies, crosses are hover points (Tony, 2026-10-31, 20:43: "X is simply a graphical marker with no render significance"). Plotly's edge numbers are off in every room (`showticklabels: false`); the Explorer keeps its own. Mode 5 knobs, read once at load: `?tick=<minor>,<major>` (pixels, 3,6), `?ruler=<px>` (the line, 56), `?halo=<px>` (2, 0 for none); Tony kept all three as built (2026-11-02). The headless walk reads the spacing from the ruler's `data-spacing`. It is centred by `text-align`, because `body.sun-exhibit .sun-chrome` sets `display: block` and outweighs a flex rule on the HUD; the count line keeps to the triad's left (below) | `sunHud*`, `sunAuNote*`, `#sun-au-note`; `.sun-hud`, `.sun-triad`; the ruler `sunRulerX` | shared; reads the camera, never calls Plotly |
 | Consent gate and Pyodide load | `loadPyodideRuntime`, `CONSENT_KEY` | shared |
 | Back link: "Gallery" steps back in history when the gallery is behind it | BACK TO THE GALLERY block | shared |
 
@@ -621,7 +621,9 @@ Plotly.
   (JFc), Halley-type comets (HTC), Comets (COM), Hyperbolic comets (HYP)
   and Interstellar objects (the IAU's "I" numbers; JPL gives HYP, and
   HYA for 'Oumuamua); Aten asteroids (ATE) after Venus; Spacecraft after
-  Earth; Apollo (APO) and Amor (AMO) asteroids after the Spacecraft;
+  Earth; Historical missions after the Spacecraft (v1.30, L-507; like
+  Spacecraft, a group of missions, not a JPL class); Apollo (APO) and
+  Amor (AMO) asteroids after them;
   Main asteroid belt (MBA) after Mars; Jupiter Trojans (TJN) after
   Jupiter; Centaurs (CEN) after Saturn; Trans-Neptunian objects (TNO)
   after Pluto. A comet group without "order": "a" lists its bodies by
@@ -738,7 +740,64 @@ Plotly.
   "Predicted" is JPL's own word, by Tony's ruling of 2026-10-25 ("use
   the word JPL uses"): Juno's data sheet calls its part after
   2026-09-23 "a planning prediction"; Voyager 1's speaks of "a new
-  solution and prediction".
+  solution and prediction". Since v1.30 (L-507) every spacecraft's box,
+  after the path sentence, carries the DATES SENTENCE, Tony's words of
+  2026-11-02: "Its path covers the mission's own dates, but the planets
+  are drawn where they are today, so a flyby bends the line where the
+  planet was then, not where it is now." (`SPACECRAFT_DATES_WORDS`; not
+  on a comet's box.) So the box is four bullets.
+- **An ended mission** (v1.30, L-507, historical missions slice 1; Tony's
+  rulings of 2026-11-02, the words in
+  documentation/WORDS_L507_historical_missions_20261102.md). A past
+  voyage is drawn as Voyager is, on today's date, over the mission's own
+  dates; the room's date does not move (that is slice 2, encounters).
+  Galileo and Cassini are the first, in a group row of their own,
+  Historical missions, right after the Spacecraft group's twelve, in
+  launch order (Tony, 2026-11-01: "a separate group for historical
+  missions in addition to active missions"); find words "probe",
+  "mission", "ended". How one is added, end to end:
+  - THE ORRERY KEYS IT WITH `mission_end`, the day NASA's mission page
+    says it ended, cited on the entry, and the path plan ends the path
+    on that day (horizons-orbital-mechanics, How a Path's Events Are
+    Found). Before keying, put JPL's last day beside that page's date:
+    more than a day apart is Tony's (Galileo's JPL path runs nine days
+    past its impact, leaving Jupiter as if it never hit; he ruled "Yes
+    stop at impact"). Keyed in the same round as its website entry and
+    drawer row, as any spacecraft (the objects mirror refuses a key with
+    no entry).
+  - THE BUILDER FETCHES ITS LAST DAY (`fetch_path_last_day`;
+    gallery-cache-builder, A Spacecraft Is Fetched by Its Plan), so its
+    last served point is on that day and not up to six days short at
+    the 7-day backbone. It serves no `as_of_today`.
+  - THE RENDERER: past the last served point, `build_spacecraft_traces`
+    draws the whole path solid and puts the marker ON the last served
+    point, where it was on its last day: the spacecraft's diamond-open
+    (orrery-coding-conventions, Marker Symbol Convention), its meta
+    `ended: true` and `interp_err_km` 0, since nothing is worked out
+    between points. No hover on the line. Before the first point it
+    still draws the path dashed with no marker, and says so. Whether the
+    ended line should look different is Tony's (Mode 5); built solid.
+  - THE TEXT BOX, five bullets: "This mission ended on <day>. The marker
+    is where it was that day." (`ENDED_OPENING`, verbatim as ruled; the
+    day is the path's last served day, which the plan made the
+    mission's); the distance "... AU from the Sun (... km) on its last
+    day", to whole kilometres, the finest the room prints; the note on
+    JPL's uncertainty; "Its path is solid all the way, since all of it
+    was flown, from <first day> to <last day>."; the dates sentence. Its
+    source line says "to the day the mission ended" in place of "as far
+    as JPL's data runs", which would be false where the plan stopped the
+    path short of JPL's data.
+  - Its companions by the same logic, unchanged: Galileo's plan names
+    flybys of Venus and Earth and its arrival at Jupiter; Cassini's,
+    Venus, Earth and Jupiter flybys and its arrival at Saturn.
+  - Checked by the figures check's part 7 (an ended mission held by its
+    last served point on its span's last day, shown failing on a path
+    running past its end and on one stopped short, and the page held to
+    its ended box) and walked headlessly (section 20b: the group's
+    place, Galileo whole and solid with its marker on its last point,
+    its box and source line, both companion lists, Reset).
+  - The orrery's other ended missions are candidates, one key and one
+    `mission_end` each, Tony's choice which.
 - **A spacecraft's companions** (v1.25, L-443; Tony, 2026-10-25: "in
   addition to the default inner planets, add the farthest planet orbit
   that the object has reached ... This gives perspective to a spacecraft

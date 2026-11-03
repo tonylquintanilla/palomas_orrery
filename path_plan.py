@@ -36,7 +36,15 @@ WHAT A PLAN IS
                 used: on 2026-10-24 Juno's and Psyche's ran past JPL's
                 data and New Horizons' stopped 21 years short of it. The
                 part after today is JPL's planned trajectory; nothing is
-                extended here.
+                extended here. A mission that has ended carries
+                'mission_end', the day it ended as NASA's own page states
+                it, and its path is asked to that day and no further
+                (L-507): JPL's positions for Galileo run on nine days
+                past its impact into Jupiter on 2003-09-21, on a path
+                that leaves Jupiter as if the impact never happened, and
+                the website puts an ended mission's marker on the path's
+                last day (Tony's ruling of 2026-11-02, "Yes stop at
+                impact").
       backbone  one step and one thinning tolerance for every path, the
                 ones Voyager 1's path was built and proven with on
                 2026-07-11: a point every 7 days, thinned by
@@ -203,6 +211,10 @@ its list are gone; see RUN COMMAND).
 Module updated: October 26, 2026 with Anthropic's Claude Opus 5.5
 (L-443, build B part 2: comets on open paths, by the span ruling; see
 WHAT A PLAN IS).
+Module updated: November 2, 2026 with Anthropic's Claude Opus 5.5
+(L-507, historical missions: an ended mission's 'mission_end' ends its
+span, and is among its plan's inputs only where it is set, so no other
+plan is made again; see WHAT A PLAN IS).
 """
 
 import ast
@@ -281,7 +293,8 @@ def _value(node):
 
 
 FIELDS = ("name", "key", "id", "id_type", "helio_id", "helio_id_type",
-          "object_type", "start_date", "end_date", "open_path")
+          "object_type", "start_date", "end_date", "open_path",
+          "mission_end")
 
 
 def keyed_entries(text):
@@ -442,11 +455,13 @@ def jpl_limit(text):
 def path_rows_and_span(fetch, path, pause):
     """(rows, first day, last day): the path's daily positions around the
     Sun across everything JPL has for it, from the list's start_date (the
-    launch) to FAR_STOP, clipped to the limits JPL names when it refuses.
+    launch) to FAR_STOP, or to the day an ended mission ended
+    ('mission_end'), clipped to the limits JPL names when it refuses.
     Raises Unreachable, or Refused with JPL's words when it refuses for
     another reason."""
     first = path["start_date"].date()
-    last = FAR_STOP
+    last = (path["mission_end"].date() if path.get("mission_end")
+            else FAR_STOP)
     for _ in range(4):
         try:
             text = fetch(vectors_url(path["id"], path["id_type"], "500@10",
@@ -695,9 +710,14 @@ def window_and_step(jd, dist_km, v_kms):
 # ------------------------------------------------------------- planning
 
 def plan_inputs(path, bodies):
-    return {"rule": RULE, "id": path["id"], "id_type": path.get("id_type"),
-            "span": [ymd(path["start_date"]), ymd(path["end_date"])],
-            "searched": [b[2] for b in bodies]}
+    inputs = {"rule": RULE, "id": path["id"], "id_type": path.get("id_type"),
+              "span": [ymd(path["start_date"]), ymd(path["end_date"])],
+              "searched": [b[2] for b in bodies]}
+    # Only where it is set, so the plans of missions still flying keep
+    # their fingerprint and are not made again (L-507).
+    if path.get("mission_end"):
+        inputs["mission_end"] = ymd(path["mission_end"])
+    return inputs
 
 
 def inputs_sha256(inputs):
