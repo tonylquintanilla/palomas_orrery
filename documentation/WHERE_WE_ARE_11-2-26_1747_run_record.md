@@ -206,11 +206,8 @@ Website:
 **Token count:** I can't print /cost from inside the session. The app reports this session's conversation at 336,717 tokens, 34% of its window, mostly messages; it gives no split between input and output. The account's Max plan stood at 52% of the week for all models. If you want the exact input and output split, /cost in a Claude Code terminal gives it.
 
 **Your run order:**
-1. Commit and push the orrery: its record edits.
-
-
-
-2. Commit and push the website, with the words file and the cache together. In GitHub Desktop the change list should show changed and added files and no pile of deletions.
+1. Commit and push the orrery: its record edits. -- 75df7486449b87119328aa246e38b18fa33433d6
+2. Commit and push the website, with the words file and the cache together. In GitHub Desktop the change list should show changed and added files and no pile of deletions. -- 
 3. Optionally, from the website folder, run `python gallery_maintenance_run.py --live` to check what the live site serves.
 4. On your phone, open the Sun room and look at the core, the radiative zone, the chromosphere (its name, hover and panel), the Alfven surface and the Hills cloud.
 
@@ -238,3 +235,454 @@ What I verified:
 One step was skipped: the orrery's full maintenance run wasn't repeated after the last two record edits. Those edits touched only the ledger and Where We Are, and the ledger's own check passed afterward, so I wouldn't rerun it.
 
 Once your phone look in the Sun room is done, both the Sun slice and the Earth slice are closed, as you ruled. The three decisions in the report can wait: the comet choice, whether Earth's list stays open, and the ruler and halo look.
+
+=========================================
+
+Don't press Stash yet. First I'll check what the one new commit on GitHub is, because the right move depends on it.
+
+Don't pull the usual way, and don't press Stash. Close that box first.
+
+**What happened:** GitHub's copy got one more scheduled night run while Code was working. It committed at 21:49 UTC, 3:49 pm your time. That run used the orrery before your Sun push, so its cache has the old Sun numbers. Your folder holds the newer build, with the corrected numbers. Both changed the same hundred or so cache files, which is why GitHub Desktop refuses. Stash wouldn't help: putting your changes back afterward would hit the same hundred files.
+
+**What we want:** join the two, keeping your version wherever they overlap. GitHub Desktop has no one-click way to do that across a hundred files, but one terminal command does.
+
+1. Click **Close** on the error. -- done
+2. In GitHub Desktop, commit the 110 files (summary: "L411 Sun eight, website"). **Don't push yet.** -- committed only
+3. In VS Code, open a terminal in the website folder and run:
+   ```
+   git pull --no-rebase --no-edit -X ours origin main
+   ```
+   This fetches the night's commit and joins it to yours. Where both changed the same lines, yours wins. Files only the night changed, such as its run record, come in as the night wrote them.
+   - **Success** prints "Merge made by the 'ort' strategy" and a list of files.
+   - **If it prints CONFLICT,** stop and paste the output to me. `git merge --abort` puts everything back the way it was after step 2.
+   - **One harmless loss:** both runs added a line at the end of the swap log, so the night's 21:49 line gives way to yours. It recorded a build that yours replaces.
+
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> git pull --no-rebase --no-edit -X ours origin main
+From https://github.com/tonylquintanilla/tonyquintanilla.github.io
+ * branch            main       -> FETCH_HEAD
+Auto-merging data/cache_swap_log.jsonl
+Auto-merging data/constants_export.sha
+Auto-merging data/drawings/pulled_at.sha
+Auto-merging data/objects_export.sha
+Auto-merging data/solar-system/coverage_index.json
+Auto-merging data/solar-system/positions/atlas_2024_g3.json
+Auto-merging data/solar-system/positions/atlas_3i.json
+Auto-merging data/solar-system/positions/bepicolombo.json
+Auto-merging data/solar-system/positions/borisov_2025_v1.json
+Auto-merging data/solar-system/positions/borisov_2i.json
+Auto-merging data/solar-system/positions/c2025_k1.json
+Auto-merging data/solar-system/positions/c2025_k1_b.json
+Auto-merging data/solar-system/positions/c2025_k1_c.json
+Auto-merging data/solar-system/positions/c2025_k1_d.json
+Auto-merging data/solar-system/positions/europa_clipper.json
+Auto-merging data/solar-system/positions/juice.json
+Auto-merging data/solar-system/positions/juno.json
+Auto-merging data/solar-system/positions/lucy.json
+Auto-merging data/solar-system/positions/mcnaught.json
+Auto-merging data/solar-system/positions/new_horizons.json
+Auto-merging data/solar-system/positions/osiris_apex.json
+Auto-merging data/solar-system/positions/oumuamua.json
+Auto-merging data/solar-system/positions/panstarrs_2025_r3.json
+Auto-merging data/solar-system/positions/parker_solar_probe.json
+Auto-merging data/solar-system/positions/psyche_spacecraft.json
+Auto-merging data/solar-system/positions/solar_orbiter.json
+Auto-merging data/solar-system/positions/tsuchinshan_atlas.json
+Auto-merging data/solar-system/positions/voyager_1.json
+Auto-merging data/solar-system/positions/voyager_2.json
+Auto-merging data/solar-system/positions/west.json
+Auto-merging data/solar-system/positions/wierzchos.json
+Auto-merging data/solar-system/raw/elements/ammonite.jsonl
+Auto-merging data/solar-system/raw/elements/apophis.jsonl
+Auto-merging data/solar-system/raw/elements/arrokoth.jsonl
+Auto-merging data/solar-system/raw/elements/asteroid_2023_jf.jsonl
+Auto-merging data/solar-system/raw/elements/asteroid_2024_dw.jsonl
+Auto-merging data/solar-system/raw/elements/asteroid_2024_pt5.jsonl
+Auto-merging data/solar-system/raw/elements/asteroid_2024_yr4.jsonl
+Auto-merging data/solar-system/raw/elements/asteroid_2025_pn7.jsonl
+Auto-merging data/solar-system/raw/elements/asteroid_2025_py1.jsonl
+Auto-merging data/solar-system/raw/elements/bennu.jsonl
+Auto-merging data/solar-system/raw/elements/ceres.jsonl
+Auto-merging data/solar-system/raw/elements/chariklo.jsonl
+Auto-merging data/solar-system/raw/elements/charon.jsonl
+Auto-merging data/solar-system/raw/elements/churyumov.jsonl
+Auto-merging data/solar-system/raw/elements/dinkinesh.jsonl
+Auto-merging data/solar-system/raw/elements/donaldjohanson.jsonl
+Auto-merging data/solar-system/raw/elements/earth.jsonl
+Auto-merging data/solar-system/raw/elements/encke.jsonl
+Auto-merging data/solar-system/raw/elements/eris.jsonl
+Auto-merging data/solar-system/raw/elements/eros.jsonl
+Auto-merging data/solar-system/raw/elements/eurybates.jsonl
+Auto-merging data/solar-system/raw/elements/goibniu.jsonl
+Auto-merging data/solar-system/raw/elements/gonggong.jsonl
+Auto-merging data/solar-system/raw/elements/hale_bopp.jsonl
+Auto-merging data/solar-system/raw/elements/halley.jsonl
+Auto-merging data/solar-system/raw/elements/haumea.jsonl
+Auto-merging data/solar-system/raw/elements/howell.jsonl
+Auto-merging data/solar-system/raw/elements/hyakutake.jsonl
+Auto-merging data/solar-system/raw/elements/ikeya_seki.jsonl
+Auto-merging data/solar-system/raw/elements/io.jsonl
+Auto-merging data/solar-system/raw/elements/itokawa.jsonl
+Auto-merging data/solar-system/raw/elements/ixion.jsonl
+Auto-merging data/solar-system/raw/elements/jupiter.jsonl
+Auto-merging data/solar-system/raw/elements/kamo_oalewa.jsonl
+Auto-merging data/solar-system/raw/elements/leleakuhonua.jsonl
+Auto-merging data/solar-system/raw/elements/lemmon.jsonl
+Auto-merging data/solar-system/raw/elements/leucus.jsonl
+Auto-merging data/solar-system/raw/elements/lutetia.jsonl
+Auto-merging data/solar-system/raw/elements/makemake.jsonl
+Auto-merging data/solar-system/raw/elements/mani.jsonl
+Auto-merging data/solar-system/raw/elements/maps.jsonl
+Auto-merging data/solar-system/raw/elements/mars.jsonl
+Auto-merging data/solar-system/raw/elements/mercury.jsonl
+Auto-merging data/solar-system/raw/elements/moon.jsonl
+Auto-merging data/solar-system/raw/elements/neowise.jsonl
+Auto-merging data/solar-system/raw/elements/neptune.jsonl
+Auto-merging data/solar-system/raw/elements/orcus.jsonl
+Auto-merging data/solar-system/raw/elements/orus.jsonl
+Auto-merging data/solar-system/raw/elements/patroclus.jsonl
+Auto-merging data/solar-system/raw/elements/pluto.jsonl
+Auto-merging data/solar-system/raw/elements/pluto_barycenter.jsonl
+Auto-merging data/solar-system/raw/elements/polymele.jsonl
+Auto-merging data/solar-system/raw/elements/psyche.jsonl
+Auto-merging data/solar-system/raw/elements/quaoar.jsonl
+Auto-merging data/solar-system/raw/elements/ryugu.jsonl
+Auto-merging data/solar-system/raw/elements/saturn.jsonl
+Auto-merging data/solar-system/raw/elements/schaumasse.jsonl
+Auto-merging data/solar-system/raw/elements/sedna.jsonl
+Auto-merging data/solar-system/raw/elements/steins.jsonl
+Auto-merging data/solar-system/raw/elements/swan.jsonl
+Auto-merging data/solar-system/raw/elements/tempel_2.jsonl
+Auto-merging data/solar-system/raw/elements/titan.jsonl
+Auto-merging data/solar-system/raw/elements/tno_2017_of201.jsonl
+Auto-merging data/solar-system/raw/elements/tno_2026_ed138.jsonl
+Auto-merging data/solar-system/raw/elements/uranus.jsonl
+Auto-merging data/solar-system/raw/elements/varuna.jsonl
+Auto-merging data/solar-system/raw/elements/venus.jsonl
+Auto-merging data/solar-system/raw/elements/vesta.jsonl
+Merge made by the 'ort' strategy.
+ data/nightly_run_record.json                     |  80 +++++++-------
+ data/solar-system/raw/runs/20261102T214544Z.json | 133 +++++++++++++++++++++++
+ 2 files changed, 173 insertions(+), 40 deletions(-)
+ create mode 100644 data/solar-system/raw/runs/20261102T214544Z.json
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+4. Run `python gallery_maintenance_run.py` and expect 36 of 36.
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>python gallery_maintenance_run.py
+======================================================================
+  gallery maintenance run -- OFFLINE (before a commit)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Module atlas              1.3s  no change to MODULE_ATLAS.md,
+                                    MODULE_INDEX.md
+  PASS Constants export pull     0.8s  rewrote data/constants_export.sha
+  PASS Config mirror             0.1s  no change to
+                                    data/objects_config.json
+  PASS Objects export pull       0.7s  rewrote data/objects_export.sha
+  PASS Objects mirror            0.2s  no change to
+                                    data/objects_config.json
+  PASS Drawings pull             2.7s  rewrote
+                                    data/drawings/pulled_at.sha
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite      79.7s  PASS (498 checks, 0 failures)
+  PASS Pole of date              0.2s  POLE OF DATE: all 11 checks passed
+                                    (frame angle, orrery, ERFA, block
+                                    checker, and each shown able to
+                                    fail).
+  PASS Mirror suite              0.2s  All 77 mirror checks passed:
+                                    served, spelling, relabel refused
+                                    and accepted, conflict refused,
+                                    definition as exactly 1, fallback
+                                    and absent named, no-slot refused,
+                                    five shapes, formatting kept,
+                                    idempotent, report writes nothing,
+                                    uncertainty written as served,
+                                    Earth's pole served, print count
+                                    written as served, "in" written as
+                                    served and a slot served in
+                                    another unit from it, and the
+                                    citation written as served, a
+                                    website-only citation named, an
+                                    old export refused.
+  PASS Store writer suite       28.1s  All 469 store-writer checks
+                                    passed: an allow list that lets
+                                    through only a shell's words, a
+                                    belt's words and the arrival
+                                    settings, the rooms section's
+                                    included; a no-edit round trip;
+                                    one line per change; empty words
+                                    handled; a refused batch writing
+                                    nothing; awkward text; and the
+                                    shell list matching the cache
+                                    check's rule.
+  PASS Store editor suite        0.3s  All 377 store-editor checks
+                                    passed: every box the form offers
+                                    is one the writer allows; the word
+                                    list and the tick list differ by
+                                    the belts, on purpose; nothing
+                                    typed saves nothing; the save
+                                    message does not promise a visitor
+                                    sees what they cannot yet; and a
+                                    red Cache in step is explained
+                                    rather than just shown.
+  PASS Objects mirror suite      0.2s  MIRROR OBJECTS SUITE: pass
+  PASS Objects mirror check      0.1s  OBJECTS MIRROR: pass
+  PASS Config mirror check       0.1s  Every served link holds the
+                                    export's value, unit, figure count
+                                    and citation; 184 link(s)
+                                    compared, 179 citation(s) word for
+                                    word, 5 declared with none, 3 not
+                                    served; store f35f649c4c53.
+  PASS Pull failures             0.5s  PULL FAILURES: all 16 checks
+                                    passed (3 pulls x 3 ways to fail,
+                                    the run after a failed pull, the
+                                    run's token to GitHub's interface
+                                    only, and 5 planted faults caught)
+  PASS Horizons confirmations    0.1s  HORIZONS CONFIRMATIONS: pass -- 90
+                                    of 90 confirmed, and 63 periods,
+                                    within 30 days
+  PASS Pointer join              0.1s  Every link is accounted for: 187
+                                    link(s) against orrery 75df7486, 1
+                                    fallback named; read check: 66 of
+                                    66 measured rows reached carry a
+                                    read.
+  PASS Cache in step             0.1s  The served cache holds the
+                                    config's 95 object(s) and their
+                                    features exactly: 4 object(s) with
+                                    34 named shell(s), in both cache
+                                    files.
+  PASS Drawn orbit               1.9s  DRAWN ORBIT: pass -- 18 checks,
+                                    every planted fault caught
+  PASS Drawings                  0.8s  DRAWINGS: PASS -- 34 of 34 planted
+                                    faults caught; pulled at orrery
+                                    75df7486; earth_exosphere 1500
+                                    dots, round, sha256 6112639fb2cd;
+                                    galactic_tide 5000 dots, about the
+                                    galactic pole, sha256
+                                    950a7511f0b5; hills_cloud 3600
+                                    dots, tilt 31.0 deg, sha256
+                                    4d3e85616645; main_belt 6000 dots,
+                                    tilt 0.2 deg, sha256 712caffec391;
+                                    outer_oort_cloud 2736 dots,
+                                    between its edges, sha256
+                                    2f7ab88ee113; sun_corona 2500
+                                    dots, round, sha256 e2b57ccbc8a4;
+                                    van_allen_belts 3200 dots, tilt
+                                    0.4 deg, sha256 75274e84f840;
+                                    zodiacal_dust 3000 dots, tilt 2.8
+                                    deg, sha256 995f13a056e8
+  PASS Collapsed features        0.1s  32 stored as themselves, 16
+                                    collapsed, 0 unclassified.
+  PASS Feature renderers         0.1s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.1s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.2s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.2s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.2s  === ALL CHECKS PASSED ===
+  PASS Typed facts               0.2s  TYPED FACTS: PASS -- 0 typed facts
+                                    in the Sun and Earth rooms; 17
+                                    number line(s), 28 of 28 allowed
+                                    sentence(s) seen, 0 held open
+                                    (L-451); 26 word field(s) masked.
+  PASS Typed numbers             0.3s  TYPED NUMBERS: PASS -- 0 typed
+                                    numbers in the Sun and Earth
+                                    rooms' served words; 325 number(s)
+                                    masked, 0 held.
+  PASS Arrival                   0.3s  Arrival: both rooms open on the
+                                    right things; every shell trace
+                                    carries its key; the fallback with
+                                    no arrival block is unchanged.
+  PASS Display figures           0.2s  === PASS: 61 hover(s) and 311
+                                    number(s) examined; 14 graded, 7
+                                    graded by line, 47 held to the
+                                    fixture ===
+  PASS Solar System figures      0.2s  === PASS: 8 worked cases, 64
+                                    drawer rows matched to their
+                                    accuracy rows, 63 served
+                                    distances; Uranus, Neptune and
+                                    Pluto print to JPL's ten-thousands
+                                    place; 6 period cases and 63
+                                    served periods printed as the
+                                    orrery printed them; 5 orbit-line
+                                    cases and 63 served orbit lines; 3
+                                    path cases and 26 served paths,
+                                    spacecraft and comets ===
+  PASS Far lines                 0.1s  === PASS: far lines are cut to the
+                                    view's box ===
+  PASS Direction arrows          0.1s  === PASS: the arrows point the way
+                                    the points run, sit ahead of the
+                                    body, stay in the view, and the
+                                    page places them ===
+  PASS Solar System drawer       0.1s  === PASS: the Sun is never ticked,
+                                    every row and group is listed, the
+                                    handle names the last body ticked,
+                                    nothing ticks many bodies at once
+                                    but a spacecraft with its
+                                    companions, rooms are offered only
+                                    where they exist, groups fold and
+                                    reset their bodies, the count line
+                                    counts ticked bodies outside the
+                                    view, a search finds a body by any
+                                    of its names and a group by its
+                                    label or words, and the page asks
+                                    this file ===
+  PASS Source list               0.2s  === PASS: the i panel's sources
+                                    are a list, every address a link,
+                                    and its words are one sentence to
+                                    a bullet ===
+  PASS Drawer order              0.2s  === DRAWER ORDER: both rooms list
+                                    their shells where each begins;
+                                    self-test red twice
+  PASS Drawn ends                0.3s  === DRAWN ENDS: every drawing
+                                    starts and stops on a served row
+                                    or a held end; self-test red three
+                                    times
+  PASS Label words               0.2s  === LABEL WORDS: all 34 shell rows
+                                    in both rooms open their own
+                                    feature's words; 5 stored
+                                    drawings' crosses stand off the
+                                    axis lines; self-test red twice
+  PASS Guest book                0.1s  === GUEST BOOK: all 8 checks
+                                    passed
+  PASS Guest book updater        0.3s  === GUEST BOOK UPDATER: all 49
+                                    checks passed (8 scripted runs,
+                                    self-test first)
+  PASS Daily run steps           0.4s  === DAILY RUN: all 4 step scripts
+                                    found; the pull-match and night
+                                    checks passed 32 of 32 fixture
+                                    checks (L-461, L-485)
+  PASS Artifact 1 assembler      0.2s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.1s  RESULT: no sibling directories and
+                                    nothing in data/ the builder did
+                                    not make.
+
+======================================================================
+  36 of 36 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: no sibling directories and
+  last swap 2026-11-02T23:49:41.858695+00:00: succeeded first time
+======================================================================
+
+  After you push: python gallery_maintenance_run.py --live
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+5. In GitHub Desktop, click **Push origin**. -- c77f87f64c0ba619326a02e7f876d94eda4767be
+
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 52 files from https://palomasorrery.com/
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches (the working copy is CRLF)
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+    SERVED   gallery/arrival.js                             matches the working copy
+    SERVED   gallery/nav_cluster.js                         matches the working copy
+    SERVED   gallery/solar_system_figures.js                matches the working copy
+    SERVED   gallery/solar_system_drawer.js                 matches the working copy
+    SERVED   data/objects_config.json                       matches the working copy
+    SERVED   gallery/guestbook.js                           matches the working copy
+    SERVED   data/guestbook.json                            matches the working copy
+    SERVED   data/solar-system/drawings/hills_cloud.json    matches the working copy
+    SERVED   data/solar-system/drawings/van_allen_belts.json matches the working copy
+    SERVED   data/solar-system/drawings/earth_exosphere.json matches the working copy
+    SERVED   data/solar-system/drawings/sun_corona.json     matches the working copy
+    SERVED   data/solar-system/drawings/zodiacal_dust.json  matches the working copy
+    SERVED   data/solar-system/drawings/outer_oort_cloud.json matches the working copy
+    SERVED   data/solar-system/drawings/galactic_tide.json  matches the working copy
+    SERVED   gallery/source_list.js                         matches the working copy
+    SERVED   gallery/far_lines.js                           matches the working copy
+    SERVED   gallery/direction_arrows.js                    matches the working copy
+    SERVED   gallery/drawer_order.js                        matches the working copy
+    SERVED   gallery/text_box.js                            matches the working copy
+    SERVED   data/solar-system/positions/voyager_2.json     matches the working copy
+    SERVED   data/solar-system/positions/new_horizons.json  matches the working copy
+    SERVED   data/solar-system/positions/juno.json          matches the working copy
+    SERVED   data/solar-system/positions/osiris_apex.json   matches the working copy
+    SERVED   data/solar-system/positions/parker_solar_probe.json matches the working copy
+    SERVED   data/solar-system/positions/bepicolombo.json   matches the working copy
+    SERVED   data/solar-system/positions/solar_orbiter.json matches the working copy
+    SERVED   data/solar-system/positions/lucy.json          matches the working copy
+    SERVED   data/solar-system/positions/juice.json         matches the working copy
+    SERVED   data/solar-system/positions/psyche_spacecraft.json matches the working copy
+    SERVED   data/solar-system/positions/europa_clipper.json matches the working copy
+    SERVED   data/solar-system/positions/wierzchos.json     matches the working copy
+    SERVED   data/solar-system/positions/west.json          matches the working copy
+    SERVED   data/solar-system/positions/mcnaught.json      matches the working copy
+    SERVED   data/solar-system/positions/tsuchinshan_atlas.json matches the working copy
+    SERVED   data/solar-system/positions/atlas_2024_g3.json matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1.json      matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1_b.json    matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1_c.json    matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1_d.json    matches the working copy
+    SERVED   data/solar-system/positions/panstarrs_2025_r3.json matches the working copy
+    SERVED   data/solar-system/positions/borisov_2025_v1.json matches the working copy
+    SERVED   data/solar-system/positions/oumuamua.json      matches the working copy
+    SERVED   data/solar-system/positions/borisov_2i.json    matches the working copy
+    SERVED   data/solar-system/positions/atlas_3i.json      matches the working copy
+
+  PASS Served reachability       6.8s  all 52 files served and
+                                    byte-identical to the working copy
+
+  orrery export pinned at 75df7486
+
+  PASS Export freshness          0.2s  the served export is the orrery's
+                                    at 75df7486, byte for byte
+
+  orrery HEAD 75df7486
+  examining 3 of 187 links; the other 184 are served from the export
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  3 pointers: 1 match, 0 DRIFT, 0 UNIT MISMATCH, 2 could not be examined.
+
+  PASS Store drift               2.0s  3 pointers against orrery 75df7486
+                                    -- 1 match, 0 DRIFT, 0 UNIT
+                                    MISMATCH, 2 could not be examined.
+
+======================================================================
+  2 of 2 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Store drift            3 pointers against orrery 75df7486 -- 1
+  last swap 2026-11-02T23:49:41.858695+00:00: succeeded first time
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+Then do the phone look in the Sun room.
+
+==================================================
+
+Before your phone look, one quick check: the maintenance run rewrote three small stamp files after your merge, so I'll confirm they reached GitHub.
+
+Everything reached GitHub. Your push is c77f87f, and the three stamp files went with it: all now point to the orrery's 75df7486. The live check confirmed the site serves all 52 files exactly as they are in your folder, and the Typed numbers check now reads "0 held". Today's merge worked cleanly.
+
+**What to look for in the Sun room.** Close the saved tab first, so the phone loads fresh files.
+
+1. **Core,** in the i panel: "about 16,000,000 kelvin at the very center" (it used to say 15 million), and "about 150 times as dense as water". The Source line names Bahcall et al. (2001). -- yes
+2. **Radiative zone,** in the i panel: the top of the zone at 2,200,000 kelvin. The old "about 7 million kelvin near the core" should be gone. -- yes
+3. **Chromosphere, its name:** the drawer row and the hover's first line say just "Chromosphere", with no "(2,000 km skin)". -- yes
+4. **Chromosphere, its hover:** the 2,000 km depth now appears a couple of lines further down. -- yes
+5. **Chromosphere, the i panel:** "from about 4,000 kelvin at the bottom to about 7,000 near the top, and then climbs steeply into the much hotter corona". The Source line names Carlsson (2007), as a link. -- yes
+6. **Alfvén surface,** in the i panel: Parker Solar Probe crossed it in April 2021, with Kasper et al. (2021) as a link on the Source line. -- yes
+7. **Hills cloud,** in both the i panel and the hover: "A computer model (Nesvorny and others, 2025) finds ... tilted about 30 degrees". The old opening, "A 2025 computer model", should be gone. -- yes
+
+Once these look right, the Sun and Earth slices are closed.
