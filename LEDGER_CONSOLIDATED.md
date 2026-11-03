@@ -1082,9 +1082,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-467 | The scanner credits a display line with a citation it only sits near (orrery, provenance scanner) | OPEN | -- | 2026-10-21 |
 | ! | L-468 | The Sun room's phone look of 2026-10-21, night: the corona's drawer text and the Hills cloud's cross (gallery, the Sun room) | OPEN | -- | 2026-10-29 |
 | ! | L-470 | Orrery entries the website cannot serve as they stand (orrery, objects) | OPEN | -- | 2026-11-02 |
-| ! | L-476 | The orrery's whole-path plots draw by the same path plan as the website (orrery, spacecraft and comets) | OPEN | -- | 2026-10-24 |
+| ! | L-476 | The orrery's whole-path plots draw by the same path plan as the website (orrery, spacecraft and comets) | OPEN | -- | 2026-11-03 |
 | ! | L-483 | A room for C/2025 K1 and its pieces, the first comet room (gallery, exhibits) | OPEN | -- | 2026-10-28 |
-| ! | L-484 | The website and the orrery agree on every object both draw, or the difference is written down (orrery + gallery, objects; method for interactive-exhibit) | OPEN | -- | 2026-11-01 |
+| ! | L-484 | The website and the orrery agree on every object both draw, or the difference is written down (orrery + gallery, objects; method for interactive-exhibit) | OPEN | -- | 2026-11-03 |
 | ! | L-485 | A nightly unattended run of the routines (orrery + gallery, maintenance) | OPEN | -- | 2026-11-01 |
 | ! | L-486 | A view carried into a room (gallery, the rooms) | OPEN | -- | 2026-10-26 |
 | ! | L-487 | Each body's description in the i panel, one bullet per sentence (gallery, the i panel) | OPEN | -- | 2026-10-25 |
@@ -1692,7 +1692,24 @@ number, choice (a)); `horizons_check.py`; gallery-cache-builder 1.16.
     passed"; last swap "succeeded first time". The walk is not one of
     its checkers.
   - Not verified: the live site and Tony's phone look.
-**Gap (replaces the one below, 2026-11-03):** Tony pushes the website,
+- **2026-11-03, morning: Tony's look, "perfect"**
+  (`documentation/WHERE_WE_ARE_11-2-26_2049_run_record.md`, run order
+  step 3): Galileo and Cassini ticked from the Historical missions
+  group, their text boxes, the planets they bring with them, and
+  Voyager 1's box. The coordinating session (Claude Opus 5.5) reads it
+  as his Mode 5 word on the ended line as well: it stays solid, as
+  built (Tony, Nov 3, 08:13: "perfect."). Pushed and read back on
+  GitHub: website 3a211a8c, orrery 453fd98c and 526a527f; the live
+  check 2 of 2, all 52 files served as in his folder. Slice 1 is done.
+**Gap (replaces the one below, 2026-11-03, morning):** slice 2 waits
+beside L-402 and L-489 (compositions; Artemis II in the Earth room).
+The drawer walk's three older failures, to an item of their own or
+L-423 (the website's checks). Which ended missions come next is Tony's:
+the orrery also lists Pioneer 10, Pioneer 11, Rosetta and DART.
+Tony-action (do): reinstall interactive-exhibit, orrery-coding-
+conventions, horizons-orbital-mechanics and gallery-cache-builder, and
+paste v3.123 into the Project's instructions.
+**Gap (superseded above, 2026-11-03, morning; replaced the one below, 2026-11-03):** Tony pushes the website,
 then the live run; his phone look (Galileo and Cassini ticked, their
 boxes, their companions, Voyager 1's box) and his Mode 5 word on the
 solid ended line. The walk's three older failures, to an item of their
@@ -3119,7 +3136,7 @@ Where We Are).
 L-490.
 
 #### [L-484] The website and the orrery agree on every object both draw, or the difference is written down (orrery + gallery, objects; method for interactive-exhibit)
-<!-- L:484 status:OPEN upd:2026-11-01 section:A flag: rice: -->
+<!-- L:484 status:OPEN upd:2026-11-03 section:A flag: rice: -->
 - **Tony, 2026-10-24, 17:35, in chat**
   (`documentation/COORD_L443_words_decisions_20261024.md`, sec. 7): "And
   we should add to the skill a check that the website and the orrery
@@ -3316,7 +3333,38 @@ L-490.
   ACCEPTANCE_LINES and FIXTURE, now `fixture_hovers_L484_on_c1c578f5.json`).
   Tony's push of the gallery, the clean run and his phone look, the
   Gap below, all happened on Nov 1 (L-503's close).
-**Gap (replaces the one below, 2026-11-01, evening):** the check's
+- **2026-11-03, morning: ON THE ROAD, next, by Tony's word** (the
+  coordinating session, Claude Opus 5.5, at orrery 526a527f and gallery
+  3a211a8c), after a review of what holds the two together today. Tony:
+  "Yes let's do L 484. Because that consistency is also a general check
+  of the website. But I think it warrants a talk about what we mean by
+  consistency beyond narrow JPL parameters." So a design talk comes
+  first. The review, for the talk:
+  - What holds today, in the website's maintenance run: the Objects
+    mirror and its check (name, JPL id, kind, description, link, period
+    and path plan copied by a tool for the 92 keyed objects; a hand
+    edit fails); Export freshness (the website's export is the
+    orrery's, byte for byte); the Config mirror and Store drift (3
+    pointers, 2 not examinable: Jupiter's and Saturn's poles); Horizons
+    confirmations on both sides, every 30 days.
+  - What nothing checks: five website objects with no orrery key (the
+    Moon, Io, Titan, Pluto's body, Charon); dates each instrument draws
+    by (below); the orrery's hover and tooltip words against the
+    website's text boxes; and the documented exceptions, which live in
+    ledger prose no tool reads.
+  - FIRST FINDING, Galileo's dates: the website draws Galileo by its
+    path plan, which stops at the impact, 2003-09-21 (L-507,
+    'mission_end'); the orrery's own plot draws by the list's typed
+    'end_date', 2003-09-29 (`palomas_orrery.py` reads
+    obj_info['end_date'] for a trajectory), eight days past the impact
+    on JPL's path leaving Jupiter. Cassini's typed end, 2017-09-14,
+    stops a day short of its plan's 2017-09-15. Both are L-476's class
+    (the orrery's plots by the plan), recorded there.
+**Gap (replaces the one below, 2026-11-03, morning):** the design talk:
+what consistency means beyond JPL's parameters, which side is the
+authority for each layer, and where exceptions live. Then the check's
+design record, then its build, with a planted fault.
+**Gap (superseded above, 2026-11-03, morning; replaced the one below, 2026-11-01, evening):** the check's
 design, then its build, with a planted fault; where its exceptions
 live.
 **Gap (superseded above, 2026-11-01, evening; replaced the one below, 2026-11-01):** Tony's push of the
@@ -3365,7 +3413,7 @@ with a planted fault; where its exceptions live.
 **Ref:** L-443; L-470; `celestial_objects.py`; `info_dictionary.py`.
 
 #### [L-476] The orrery's whole-path plots draw by the same path plan as the website (orrery, spacecraft and comets)
-<!-- L:476 status:OPEN upd:2026-10-24 section:A flag: rice: -->
+<!-- L:476 status:OPEN upd:2026-11-03 section:A flag: rice: -->
 - **Tony, 2026-10-23, at slice 2's design talk** (`documentation/DESIGN_L443_slice2_rulings_20261023.md`):
   "if there are better approaches for the orrery maybe we can implement
   them there also so the two are as Consistent as possible." And, on
@@ -3407,7 +3455,16 @@ with a planted fault; where its exceptions live.
   2030-3-1 (2030-03-22). By method the orrery reads them from the plan
   the website uses (`data/path_plans.json`), not a second typed copy,
   so they cannot go stale again. L-484's check holds the two to it.
-**Gap (replaces the one below, 2026-10-24, late night):** after slice
+- **2026-11-03, a new instance, from L-484's review:** Galileo. The
+  orrery's plot draws to the typed 'end_date', 2003-09-29, eight days
+  past the impact on 2003-09-21 where the path plan now stops (L-507's
+  'mission_end'), on JPL's path leaving Jupiter. Cassini's typed end,
+  2017-09-14, is a day short of its plan's 2017-09-15. Drawing by the
+  plan, as this item rules, removes both.
+**Gap (replaces the one below, 2026-11-03):** the design of the change
+in the orrery's plots and its date list, then the build; Galileo's
+eight days the first case it fixes. L-484's talk may take it in.
+**Gap (superseded above, 2026-11-03; replaced the one below, 2026-10-24, late night):** after slice
 2's build B, which writes the plans: the design of the change in the
 orrery's plots and its date list, then the build.
 **Gap (superseded above):** after slice 2's build: the design of the change in the

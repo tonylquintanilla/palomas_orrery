@@ -396,7 +396,7 @@ LIVE -- what the deployed site actually serves
 C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 
 3. On your phone, in the Solar System room, open the "Historical missions" group and tick Galileo and Cassini. Look at their text boxes and the planets they bring with them, and at Voyager 1's box. -- perfect. 
-4. GitHub Desktop, the orrery: commit and push the two records. -- 
+4. GitHub Desktop, the orrery: commit and push the two records. -- 526a527f0d60288853e799f0e4b9783db84d0ae4
 
 **Tony actions:**
 - **Do now:** steps 1 to 4.

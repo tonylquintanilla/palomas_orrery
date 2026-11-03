@@ -1,31 +1,41 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 3, 2026, early morning UTC: the historical missions Code session (Galileo and Cassini built).
-- Written at orrery 453fd98c and gallery c77f87f6, plus this session's uncommitted edits.
+Last updated: November 3, 2026, morning: the coordinating session (your look at Galileo and Cassini recorded; the two agree put on the road).
+- Written at orrery 526a527f and gallery 3a211a8c, plus this session's uncommitted edits.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Galileo and Cassini are built in the Solar System room, drawn as
->   Voyager is (L-507 (historical missions)). Each marker sits where the
->   spacecraft was on its last day, and the whole line is solid.
+> - The website and the orrery agreeing on every object is the next
+>   stage (L-484 (the two agree)), with a design talk first on what
+>   consistency means beyond JPL's numbers.
+> - Its first finding: the desktop orrery draws Galileo eight days
+>   past its crash into Jupiter; the website stops at the crash.
+> - Your phone look at Galileo and Cassini was "perfect". Slice 1 of
+>   historical missions is done (L-507 (historical missions)).
+> - I took "perfect" to answer the ended line too: it stays solid.
+> - Both pushes are on GitHub, and the live check passes 2 of 2.
+> - Galileo and Cassini are drawn in the Solar System room as
+>   Voyager is. Each marker sits where the spacecraft was on its last
+>   day, and the whole line is solid.
 > - Galileo's path stops at its crash into Jupiter on 21 September 2003,
 >   by your ruling, not nine days later where JPL's data ends.
 > - Every spacecraft's text box now says its path covers the mission's
 >   own dates, while the planets are drawn where they are today.
 > - The drawer has a "Historical missions" group after Spacecraft.
-> - Four skills and the protocol (v3.123) carry it. The orrery half is
->   pushed; the website half waits for your push.
+> - Four skills and the protocol (v3.123) carry it.
 > - The room's drawer walk had three old failures before this work. They
 >   are recorded on L-507, for an item of their own.
 >
-> **Do next:** *commit and push the website; then run the live check
-> from the dashboard, and look at Galileo and Cassini on your phone.*
+> **Do next:** *the design talk on L-484 (the two agree), from
+> `HANDOFF_L484_consistency_talk_20261103.md`; and commit
+> and push the orrery (this record); then, in
+> Settings > Skills, reinstall interactive-exhibit, orrery-coding-
+> conventions, horizons-orbital-mechanics and gallery-cache-builder,
+> and paste v3.123 into the Project's instructions on claude.ai.*
 >
 > **Needs you now:**
-> - *(do) Push the website soon: if the night runs first, it goes red
->   (it commits nothing, and no harm is done).*
 > - *(do) Each morning, Pull origin on both, orrery then website, first;
 >   do not wait for the night, which GitHub starts hours late or drops.*
 
@@ -39,18 +49,18 @@ Oct 27's order, changed Oct 29 (`DESIGN_L314_solar_wind_rulings_20261029.md`).
                the objects (L-443 (the objects)), the small builds and
                2026 ED138 (Oct 28); the belt's cloud (L-503, Nov 1);
                Earth's list (L-413), the ruler build (L-505) and the
-               Sun's eight (L-411), Nov 2.
+               Sun's eight (L-411), Nov 2; historical missions' slice 1
+               (L-507), Nov 3. << changed this session
  5d.   [NOW]   *The orrery's clock (L-504 (the orrery's clock)): the
                data path done Oct 29, the website's date fix Oct 31;
                Earth System, stamps, tools next.*
  11b.  [NOW]   *The nightly run (L-485 (a nightly run)): both halves run
                on GitHub; the hold built Oct 31; both second times built
                (11:17 and 12:17 UTC, Nov 1); a week of mornings now.*
- 12a.  [NOW]   *Historical missions, slice 1 (L-507 (historical
-               missions)): Cassini and Galileo drawn as Voyager is, on
-               today's date; a sentence on every text box; an ended
-               mission's marker where it was on its last day. Built
-               Nov 3; your push, live run and phone look next.* << changed this session
+ 12c.  [next]  *The two agree (L-484 (the two agree)): every object
+               both draw agrees, or the difference is written down.
+               A design talk first, on what consistency means beyond
+               JPL's numbers; then the check.* << new this session
   5b.  [beside] Housekeeping when a session has room: L-424, L-425,
                L-426; L-423 (the website's checks) item 3, L-357.
  12b.  [later] Historical missions, slice 2: encounters, the planet
@@ -68,8 +78,10 @@ Oct 27's order, changed Oct 29 (`DESIGN_L314_solar_wind_rulings_20261029.md`).
 ## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings. A line leaves after a few weeks, once it is habit.
+- An ended mission's line stays solid, like a flown path (Nov 3, your
+  look). << new this session
 - An ended mission's path stops on the day NASA gives as its end, not
-  where JPL's data runs out: Galileo at its impact (Nov 2). << new this session
+  where JPL's data runs out: Galileo at its impact (Nov 2).
 - The Sun and Earth slices are closed: your phone look passed all seven
   (Nov 2, evening; ruled 13:47). What is left is enhancements.
 - The comet switch is off the road: the six record numbers stay, and
@@ -118,7 +130,7 @@ Waiting behind other work; a line leaves when picked up.
 
 Read from files when this page was written, not typed from memory.
 - Last cache build: 20261103T082211Z, ok, no retry (the website's swap
-  log's last line: this session's hand build, not yet pushed).
+  log's last line at 3a211a8c: the hand build of Nov 3, now pushed).
 - Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md,
   this session's orrery run).
 - This page's date and the ledger's newest stamp: both Nov 3. Agree.
@@ -126,12 +138,12 @@ Read from files when this page was written, not typed from memory.
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
 Decisions, one at a time:
-- Your Mode 5 word on the ended line: it is solid, like a flown path;
-  whether it should look different is yours, on the phone.
-- Later, not now: which ended missions come next. The orrery also
+- None today. Later, not now: which ended missions come next. The orrery also
   lists Pioneer 10, Pioneer 11, Rosetta and DART.
 
 At the next design talk:
+- *What consistency means between the orrery and the website, beyond
+  JPL's numbers (L-484 (the two agree)).* << new this session
 - The shared link (ruled Oct 29) waits for its build.
 
 Not urgent, in your order:
@@ -142,9 +154,11 @@ Not urgent, in your order:
 3. Earth's list (L-413 (Earth's list)): stays open as Earth's enhancements, or closes
    with its seven pieces moved to their own items.
 
-## Where the details are  **>> UPDATED THIS SESSION**
+## Where the details are
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
+- The next talk: `HANDOFF_L484_consistency_talk_20261103.md` (L-484
+  (the two agree)).
 - Today: L-507 (historical missions), with what was verified; the
   brief `COORD_L507_gallery_historical_missions_slice1_brief_20261102.md`;
   the words `WORDS_L507_historical_missions_20261102.md`.
