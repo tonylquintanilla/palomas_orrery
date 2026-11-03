@@ -403,3 +403,6 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 - **Later:** in Settings > Skills, reinstall interactive-exhibit, orrery-coding-conventions, horizons-orbital-mechanics and gallery-cache-builder, then paste v3.123 into the Project's instructions on claude.ai.
 
 When you've looked at it on your phone: is the ended mission's solid line right as it is, or should it look different from an active one?
+
+==================================================
+

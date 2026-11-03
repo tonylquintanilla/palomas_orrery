@@ -8,6 +8,9 @@ Module updated: October 11, 2026 with Anthropic's Claude Opus 5.5 (L-431:
 query_horizons_elements keeps Horizons' PR, the sidereal orbit period, in
 days, as 'P_days' in its result; an open orbit's placeholder is kept as
 nothing. The elements it returns are unchanged.)
+Module updated: November 3, 2026 with Anthropic's Claude Opus 5.5 (L-476:
+a fetch is clamped to a planned entry's span as its path plan gives it,
+path_drawing.entry_span, not its typed dates.)
 
 Role: cache
 Domain: orrery
@@ -990,12 +993,14 @@ def fetch_complete_orbit_path(obj, orbit_key, today, end_window, interval, cente
 
     # FIXED: clamp end_window to object's valid ephemeris boundary
     # prevents Horizons errors for tight-window missions (e.g. Artemis II ends Apr 10)
-    if 'end_date' in obj and obj['end_date'] < end_window:
-        print(f"[CLAMP] {obj['name']}: clamping end from {end_window.date()} to {obj['end_date'].date()}", flush=True)
-        end_window = obj['end_date']
-    if 'start_date' in obj and obj['start_date'] > today:
-        print(f"[CLAMP] {obj['name']}: clamping start from {today.date()} to {obj['start_date'].date()}", flush=True)
-        today = obj['start_date']
+    from path_drawing import entry_span   # L-476: a planned entry's span is its plan's
+    span_start, span_end = entry_span(obj)
+    if span_end and span_end < end_window:
+        print(f"[CLAMP] {obj['name']}: clamping end from {end_window.date()} to {span_end.date()}", flush=True)
+        end_window = span_end
+    if span_start and span_start > today:
+        print(f"[CLAMP] {obj['name']}: clamping start from {today.date()} to {span_start.date()}", flush=True)
+        today = span_start
     if today >= end_window:
         print(f"[CLAMP] {obj['name']}: degenerate range after clamping, skipping", flush=True)
         return False

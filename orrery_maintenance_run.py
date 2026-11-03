@@ -302,6 +302,9 @@ judges a function, so it is not in the night set. L-485, the hold: the
 night's record, schema 2, names tonight's values taken from JPL and
 every body held, read by night_taken_held() from what the Horizons check
 wrote.)
+Module updated: November 3, 2026 with Anthropic's Claude Opus 5.5 (L-476:
+CHECKERS gains Path drawing suite, test_path_drawing.py, after Path plan
+suite: the orrery's drawing of a path by its plan, offline.)
 """
 
 import hashlib
@@ -450,6 +453,12 @@ CHECKERS = [
     # 30-day cycle, an outage, and two planted faults caught.
     ('Path plan suite', ['test_path_plan.py'],
      'PATH PLAN SUITE:'),
+    # L-476: the orrery's drawing of a path by its plan, no network: the
+    # span read from the plan, a flyby's bend kept through the thinning
+    # (planted fault: the window thinned too coarse), solid to today and
+    # dashed after, the label from the plan.
+    ('Path drawing suite', ['test_path_drawing.py'],
+     'PATH DRAWING SUITE:'),
     # Rule 7's exact row, built: every printed exact row states a print
     # count, every orrery line prints it through exact_text(), and the
     # gallery serves the count. The same script as the Exact rows report

@@ -1277,3 +1277,15 @@ are keyed, so KEYING loses its preview. And two rules from C/2025 K1 to
 Which Record Serves a Body: a comet whose designation also matches its
 own pieces is asked by JPL's permanent number for it; a path cache keyed
 by name does not notice a new record.
+Earlier: 1.12 | 2026-10-26, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 5398439. v1.12 (L-443, slice 2, build B part 2) adds A
+Comet on an Open Path to How a Path's Events Are Found: a comet marked
+open_path is planned by Tony's span ruling of 2026-10-24, from a year
+before its perihelion to a year after today, inside JPL's data; its
+record's TP, read from its data sheet in either of JPL's two forms, only
+places the first ask; the perihelion is found in JPL's daily positions
+and refined to the minute, and is the plan's one event. Comets are not
+among the bodies the spacecraft plans search, so keying them did not
+remake those. And to Where the Check Lives: an entry asked by a
+designation that is JPL's number is looked for in the small-body index
+by that number, and a path serves no period to confirm.

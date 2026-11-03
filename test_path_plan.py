@@ -22,8 +22,10 @@ WHAT IT CHECKS
       3. Thirty-one days later the plans are made again: the flybys, now
          more than 30 days old, are carried, not asked again, and none is
          doubled.
-      4. A change to what a plan was made from (the list's dates) makes it
-         again at once, in full; the span stays JPL's.
+      4. A change to what a plan was made from (the day the list asks
+         the path from) makes it again at once, in full; the span's end
+         stays JPL's. (Until L-476 the change was to the list's end_date,
+         which is no longer among a plan's inputs.)
       5. JPL unreachable: UNREACHABLE by name, the previous plans kept,
          the file unchanged.
       6. A body JPL gives no positions for is named as not searched, and
@@ -73,6 +75,10 @@ WHAT IT CHECKS
          still found; Craft B, with none, keeps its fingerprint, so no
          plan of a mission still flying is made again. Planted fault:
          the field not read.
+     19. No path this module plans carries a typed end_date in the real
+         celestial_objects.py (L-476): its span is its plan's. The
+         paths examined are counted, and named when one carries it.
+         Planted fault: an end_date put back on Voyager 1.
 
 RUN COMMAND
 
@@ -448,8 +454,8 @@ def suite(today=datetime.date(2026, 10, 24), plant=None):
         check(not [u for u in jpl3.calls if "1m" in u],
               "3. ... and no carried flyby is asked again")
         with open(os.path.join(root, "celestial_objects.py"), "w") as h:
-            h.write(LIST.replace("datetime(2025, 6, 1)",
-                                 "datetime(2025, 7, 1)"))
+            h.write(LIST.replace("'start_date': datetime(2025, 1, 1)",
+                                 "'start_date': datetime(2025, 1, 2)", 1))
         jpl4 = FakeJPL(refuse=("X2",))
         v4, l4, out4 = pp.run(root, jpl4, later, pause=0.0)
         p4 = out4["plans"]["craft_a"]
@@ -460,8 +466,8 @@ def suite(today=datetime.date(2026, 10, 24), plant=None):
         with open(os.path.join(root, pp.PLANS), "rb") as h:
             before = h.read()
         with open(os.path.join(root, "celestial_objects.py"), "w") as h:
-            h.write(LIST.replace("datetime(2025, 6, 1)",
-                                 "datetime(2025, 8, 1)"))
+            h.write(LIST.replace("'start_date': datetime(2025, 1, 1)",
+                                 "'start_date': datetime(2025, 1, 3)", 1))
         jpl5 = FakeJPL(down=True)
         v5, l5, out5 = pp.run(root, jpl5, later, pause=0.0)
         with open(os.path.join(root, pp.PLANS), "rb") as h:
@@ -804,6 +810,24 @@ def mission_end_clip(plant=False):
     return not probs, "; ".join(probs) or "ok"
 
 
+def no_typed_ends(plant=False):
+    """(ok, why): the real list's planned paths carry no end_date
+    (L-476). Planted fault: one put back on Voyager 1."""
+    with open(os.path.join(pp.ROOT, pp.SOURCE), encoding="utf-8") as h:
+        text = h.read()
+    if plant:
+        text = text.replace("'key': 'voyager_1',",
+                            "'key': 'voyager_1', 'end_date': "
+                            "datetime(2029, 12, 31),", 1)
+    entries = pp.keyed_entries(text)
+    paths = [f for f in entries if pp.is_spacecraft(f)
+             or pp.is_comet_path(f)]
+    bad = pp.typed_ends(entries)
+    return (bool(paths) and not bad,
+            "%d planned paths examined; carrying one: %s"
+            % (len(paths), ", ".join(bad) or "none"))
+
+
 def plant_no_backbone():
     old = pp.BACKBONE_STEP_SECONDS
     pp.BACKBONE_STEP_SECONDS = 0.0
@@ -871,6 +895,11 @@ def main():
               "keeps its fingerprint (%s)" % why)
     check(not mission_end_clip(plant=True)[0],
           "18. planted fault caught: mission_end not read")
+    ok, why = no_typed_ends()
+    check(ok, "19. no planned path carries a typed end_date in "
+              "celestial_objects.py (%s)" % why)
+    check(not no_typed_ends(plant=True)[0],
+          "19. planted fault caught: an end_date put back on Voyager 1")
     for name, plant in (("the backbone's step set to nothing",
                          plant_no_backbone),
                         ("the fine pass skipped", plant_no_fine_pass)):

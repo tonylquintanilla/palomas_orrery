@@ -30,6 +30,9 @@ orbit cache's "fetched" stamp is read back in both forms, a planted old
 one with no zone and a new one ending "+00:00"; no module on the data
 path reads the local clock or asks JPL without cache=; each check shown
 able to fail.)
+Module updated: November 3, 2026 with Anthropic's Claude Opus 5.5 (L-476:
+path_drawing.py, which asks JPL for a path by its plan, joins the data
+path's modules.)
 """
 import json
 import os
@@ -267,6 +270,7 @@ DATA_PATH_MODULES = [
     'osculating_cache_manager.py', 'path_plan.py', 'orbital_period.py',
     'period_fetch.py', 'horizons_check.py', 'close_approach_data.py',
     'palomas_orrery_dashboard.py',
+    'path_drawing.py',   # L-476: asks JPL for a path by its plan
 ]
 _LOCAL_CLOCK = re.compile(r'datetime\.now\(\s*\)|datetime\.today\(\)|'
                           r'date\.today\(\)|\.utcnow\(\)')

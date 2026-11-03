@@ -346,6 +346,9 @@ November 2, 2026 with Anthropic's Claude Opus 5.5 (L-506): Method,
 Model, Effort joins the documents list after Running a Patch File. It
 opens METHOD_MODEL_EFFORT.md, the one-page table of which instrument,
 model and effort each kind of task gets.
+November 3, 2026 with Anthropic's Claude Opus 5.5 (L-476): Path Drawing
+Suite, the orrery's new checker, gets its button after Path Plan Suite,
+with its short line.
 """
 
 import os
@@ -1730,6 +1733,17 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
+        ("Path Drawing Suite",
+         "test_path_drawing.py",
+         "The orrery's drawing of a path by its plan, with no network: a "
+         "planned entry's span read from its plan, a flyby's bend kept "
+         "through the thinning, the path solid to today and dashed after, "
+         "and the checkbox label from the plan; one planted fault caught. "
+         "Ends on \"PATH DRAWING SUITE: 5 of 5 checks passed\" (L-476).",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
         ("Period Fetch Suite",
          "test_period_fetch.py",
          "The Period Fetch on recorded answers, with no network "
@@ -2242,6 +2256,9 @@ CARD_LINES = {
     ("Maintenance Run",
      "Path Plan Suite"):
         "Checks the path plan on a made-up solar system; two planted faults.",
+    ("Maintenance Run",
+     "Path Drawing Suite"):
+        "Checks the orrery draws a path by its plan; one planted fault.",
     ("Maintenance Run",
      "Skill Manifest"):
         "Regenerates the protocol's skill table from skills/*/SKILL.md.",

@@ -140,6 +140,14 @@ fetched from JPL like any body's, with no typed elements or period.)
 Module updated: October 28, 2026 with Anthropic's Claude Opus 5.5 (L-443:
 2026 ED138's checkbox moved between Varuna and Haumea, where its fetched
 semi-major axis puts it in the menu's order.)
+Module updated: November 3, 2026 with Anthropic's Claude Opus 5.5 (L-476:
+a planned path around the Sun -- a keyed spacecraft or a comet on an
+open path -- is drawn by its path plan (path_drawing.py), solid to today
+and dashed after, in the static plot's whole path and the animation's
+full mission; around any other body as before. Every reader of a
+planned entry's dates takes them from its plan, and the 25 planned
+checkbox labels are written from it. create_dates_list_for_object is
+not called from anywhere and was left as it is.)
 
 """
 #Paloma's Orrery - Solar System Visualization Tool
@@ -190,6 +198,7 @@ import math                                                 # unused import. han
 import json                                                 # reads and writes json files 
 import platform                                             # detects what operating system you are working in 
 import orbit_data_manager                                   # Import YOUR OWN module (a .py file you wrote)
+import path_drawing                                         # L-476: a planned path drawn by its plan, its dates read from it
 import shutil                                               # this is an unused import. it handles comples file operations but these function were split off to other
                                                             # modules such as orbit_data_manager.py and save_utils.py for better organization.
 import copy                                                 # is is actually used even though greyed out. it allows copying of python objects. 
@@ -1637,8 +1646,7 @@ def _add_close_approach_extras(fig, selected_objects, objects, center_object_nam
                 )
                 if horizons_enc is not None:
                     sc_id = str(obj_info.get('id', ''))
-                    obj_start = obj_info.get('start_date')
-                    obj_end   = obj_info.get('end_date')
+                    obj_start, obj_end = path_drawing.entry_span(obj_info)   # L-476: a planned entry's span is its plan's
                     if sc_id and obj_start and obj_end:
                         resolved = resolve_encounter_time(
                             enc=horizons_enc,
@@ -4315,6 +4323,35 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
             if obj_info.get('object_type') in ['exoplanet', 'exo_host_star', 'exo_binary_star', 'exo_barycenter']:    
                 continue
 
+            # L-476: a planned path around the Sun, as the static plot's whole path
+            # (not the animation's Plotted Period), is drawn by its plan: solid to
+            # today and dashed after, as the website draws it. Around any other body
+            # it is drawn as before, its span read from the plan (Tony, 2026-11-03).
+            plan = (path_drawing.plan_for(obj_info)
+                    if (obj_info.get('object_type') == 'trajectory' and center_object_name == 'Sun'
+                        and not trajectory_marker_color) else None)
+            if plan:
+                plan_points = path_drawing.draw_plan(obj_info, plan)
+                if plan_points:
+                    for trace in path_drawing.plan_path_traces(
+                            plan_points, color_map(planet), f"{planet} Full Mission",
+                            f"{planet} Full Mission", f"{planet}_actual_orbit"):
+                        fig.add_trace(trace)
+                    if show_closest_approach:
+                        from apsidal_markers import add_closest_approach_marker
+                        add_closest_approach_marker(
+                            fig=fig,
+                            positions_dict={p['date'].isoformat(): {'x': p['x'], 'y': p['y'], 'z': p['z']}
+                                            for p in plan_points},
+                            obj_name=planet,
+                            center_body=center_object_name,
+                            color_map=color_map,
+                            date_range=(plan_points[0]['date'], plan_points[-1]['date']),
+                            marker_color=None,
+                            trace_qualifier='Full Mission',
+                        )
+                continue
+
             # Use helio_id for Sun-centered plots if available (longer ephemeris coverage)
             # System barycenter IDs (e.g., 20136108) only have data to ~2030
             # Heliocentric IDs (e.g., 2003 EL61) have data to ~2500
@@ -4323,9 +4360,10 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
             if center_object_name == 'Sun' and 'helio_id' in obj_info:
                 fetch_id = obj_info['helio_id']
                 fetch_id_type = 'smallbody'  # helio_ids are smallbody designations
-            
+
+            span_start, span_end = path_drawing.entry_span(obj_info)   # L-476: a planned entry's span is its plan's
             trajectory = fetch_trajectory(fetch_id, dates_list, center_id=center_id, id_type=fetch_id_type,
-                                         start_date=obj_info.get('start_date'), end_date=obj_info.get('end_date'))
+                                         start_date=span_start, end_date=span_end)
             
             # ORCUS TRAJECTORY DERIVATION: JPL doesn't support 920090482 as query target
             # Derive Orcus trajectory from Vanth using mass ratio
@@ -4943,10 +4981,11 @@ def plot_objects():
                         # Clamp fetch dates to object's ephemeris bounds (missions/trajectories)
                         obj_fetch_start = cache_start_date
                         obj_fetch_end = cache_end_date
-                        if 'start_date' in obj and obj['start_date'] > obj_fetch_start:
-                            obj_fetch_start = obj['start_date']
-                        if 'end_date' in obj and obj['end_date'] < obj_fetch_end:
-                            obj_fetch_end = obj['end_date']
+                        span_start, span_end = path_drawing.entry_span(obj)   # L-476: a planned entry's span is its plan's
+                        if span_start and span_start > obj_fetch_start:
+                            obj_fetch_start = span_start
+                        if span_end and span_end < obj_fetch_end:
+                            obj_fetch_end = span_end
                         fetch_requests.append({
                             'object': obj,
                             'fetch_start': obj_fetch_start,
@@ -4974,8 +5013,9 @@ def plot_objects():
                                 
                                 # Clamp to object's ephemeris bounds before gap-filling
                                 # FIXED: prevents Horizons errors for tight-window missions (e.g. Artemis II)
-                                eff_start = max(cache_start_date, obj['start_date']) if 'start_date' in obj else cache_start_date
-                                eff_end   = min(cache_end_date,   obj['end_date'])   if 'end_date'   in obj else cache_end_date
+                                span_start, span_end = path_drawing.entry_span(obj)   # L-476: a planned entry's span is its plan's
+                                eff_start = max(cache_start_date, span_start) if span_start else cache_start_date
+                                eff_end   = min(cache_end_date,   span_end)   if span_end   else cache_end_date
 
                                 # Gap at the beginning?
                                 if eff_start < existing_start:
@@ -5112,10 +5152,11 @@ def plot_objects():
                         # FIXED: prevents Horizons errors for tight-window missions (e.g. Artemis II)
                         start_date = get_date_from_gui()
                         end_date = get_end_date_from_gui()
-                        if 'start_date' in obj and obj['start_date'] > start_date:
-                            start_date = obj['start_date']
-                        if 'end_date' in obj and obj['end_date'] < end_date:
-                            end_date = obj['end_date']
+                        span_start, span_end = path_drawing.entry_span(obj)   # L-476: a planned entry's span is its plan's
+                        if span_start and span_start > start_date:
+                            start_date = span_start
+                        if span_end and span_end < end_date:
+                            end_date = span_end
                         
                         # Fetch without caching to main file
                         orbit_data = fetch_orbit_path(obj, start_date, end_date, interval,
@@ -5209,10 +5250,12 @@ def plot_objects():
                     if obj_type == 'trajectory':
                         # Time-bounded paths
                         # Check if object has specific start/end dates
-                        if 'start_date' in obj and 'end_date' in obj:
+                        # L-476: a planned entry's are its plan's span; around the Sun
+                        # plot_actual_orbits draws it by the plan and not by these dates
+                        span_start, span_end = path_drawing.entry_span(obj)
+                        if span_start and span_end:
                             # Use object-specific dates
-                            start_date = obj.get('start_date', date_obj)
-                            end_date = obj.get('end_date', date_obj)
+                            start_date, end_date = span_start, span_end
                         else:
                             # Use GUI settings for objects without specific dates (like 3I/ATLAS)
                             start_date = settings['start_date']
@@ -5689,8 +5732,9 @@ def plot_objects():
                     obj_name = obj['name']
                     
                     # Get mission bounds
-                    mission_start = obj.get('start_date', settings['start_date'])
-                    mission_end = obj.get('end_date', settings['end_date'])
+                    span_start, span_end = path_drawing.entry_span(obj)   # L-476: a planned entry's span is its plan's
+                    mission_start = span_start or settings['start_date']
+                    mission_end = span_end or settings['end_date']
                     
                     # Calculate plotted period (GUI dates clipped to mission bounds)
                     plot_start = max(settings['start_date'], mission_start)
@@ -5716,7 +5760,7 @@ def plot_objects():
                                         
                     # Fetch trajectory for plotted period
                     trajectory = fetch_trajectory(fetch_id, plotted_dates, center_id=center_id, id_type=fetch_id_type,
-                                                 start_date=obj.get('start_date'), end_date=obj.get('end_date'))
+                                                 start_date=span_start, end_date=span_end)
                     
                     # ORCUS TRAJECTORY DERIVATION: JPL doesn't support 920090482 as query target
                     # Derive Orcus trajectory from Vanth using mass ratio
@@ -6840,8 +6884,9 @@ def animate_objects(step, label):
                     # For animations, we need to handle each type appropriately
                     if obj_type == 'trajectory':
                         # Time-bounded paths
-                        start_date = obj.get('start_date', dates_list[0])
-                        end_date = obj.get('end_date', dates_list[-1])
+                        span_start, span_end = path_drawing.entry_span(obj)   # L-476: a planned entry's span is its plan's
+                        start_date = span_start or dates_list[0]
+                        end_date = span_end or dates_list[-1]
                         filtered_dates = [d for d in dates_list if start_date <= d <= end_date]
                         dates_lists[obj['name']] = filtered_dates if filtered_dates else [start_date]
                         
@@ -6899,10 +6944,11 @@ def animate_objects(step, label):
                     
                     
                     # Handle objects with date ranges
-                    if 'start_date' in obj or 'end_date' in obj:
+                    span_start, span_end = path_drawing.entry_span(obj)   # L-476: a planned entry's span is its plan's
+                    if span_start or span_end:
                         # Get start/end dates with fallbacks
-                        obj_start = obj.get('start_date', dates_list[0])
-                        obj_end = obj.get('end_date', dates_list[-1])
+                        obj_start = span_start or dates_list[0]
+                        obj_end = span_end or dates_list[-1]
 
                         # Use helio_id for Sun-centered plots if available
                         fetch_id = obj['id']
@@ -7258,8 +7304,9 @@ def animate_objects(step, label):
                         # Context layer: Full mission (faded background)
                         # Detail layer: Plotted Period only (solid, for fine resolution)
                         
-                        mission_start = obj.get('start_date', current_date)
-                        mission_end = obj.get('end_date', current_date + timedelta(days=settings['days_to_plot']))
+                        span_start, span_end = path_drawing.entry_span(obj)   # L-476: a planned entry's span is its plan's
+                        mission_start = span_start or current_date
+                        mission_end = span_end or current_date + timedelta(days=settings['days_to_plot'])
                         mission_days = (mission_end - mission_start).total_seconds() / 86400
                         
                         num_points = int(settings['trajectory_points']) + 1
@@ -7306,9 +7353,38 @@ def animate_objects(step, label):
                         fetch_id = obj_info['helio_id']
                         fetch_id_type = 'smallbody'
                     
+                    # L-476: a planned path around the Sun is drawn by its plan,
+                    # solid to today and dashed after, as the website draws it
+                    plan = (path_drawing.plan_for(obj_info)
+                            if center_object_name == 'Sun' else None)
+                    if plan:
+                        plan_points = path_drawing.draw_plan(obj_info, plan)
+                        if plan_points:
+                            for trace in path_drawing.plan_path_traces(
+                                    plan_points, color_map(obj_name),
+                                    f"{obj_name} Full Mission",
+                                    f"{obj_name} Full Mission Trajectory",
+                                    f"{obj_name}_full_mission"):
+                                fig.add_trace(trace)
+                            if show_closest_approach_var.get():
+                                from apsidal_markers import add_closest_approach_marker
+                                add_closest_approach_marker(
+                                    fig=fig,
+                                    positions_dict={p['date'].isoformat(): {'x': p['x'], 'y': p['y'], 'z': p['z']}
+                                                    for p in plan_points},
+                                    obj_name=obj_name,
+                                    center_body=center_object_name,
+                                    color_map=color_map,
+                                    date_range=(plan_points[0]['date'], plan_points[-1]['date']),
+                                    marker_color=color_map(obj_name),
+                                    obj_info=obj_info,
+                                    trace_qualifier='Full Mission',
+                                )
+                        continue
+
                     # Fetch trajectory for context layer
                     context_trajectory = fetch_trajectory(fetch_id, context_dates, center_id=center_id, id_type=fetch_id_type)
-                    
+
                     if context_trajectory:
                         x = [pos['x'] for pos in context_trajectory if pos is not None]
                         y = [pos['y'] for pos in context_trajectory if pos is not None]
@@ -10152,32 +10228,34 @@ def _apply_comet_disintegration_preset(comet_name):
         traceback.print_exc()
 
 # Start dates are the day after launch to avoid missing Horizons data.
+# L-476: a planned path's dates are read from its plan (path_drawing.span_label),
+# never typed here; the website serves the same span.
 create_mission_checkbutton("Apollo 11 S-IVB", apollo11sivb_var, "(1969-07-16:17 to 1969-07-28:00)")     # Time Specification: Start=1969-07-16 17 UT , Stop=1969-07-28 00, Step=1 (hours)
 create_mission_checkbutton("Pioneer 10", pioneer10_var, "(1972-03-04 to 2002-03-03)")
 create_mission_checkbutton("Pioneer 11", pioneer11_var, "(1973-04-07 to 1995-09-29)")
-create_mission_checkbutton("Voyager 2", voyager2_var, "(1977-08-21 to 2029-12-31)")
-create_mission_checkbutton("Voyager 1", voyager1_var, "(1977-09-06 to 2029-12-31)")
-create_mission_checkbutton("Galileo", galileo_var, "(1989-10-20 to 2003-09-29)")
+create_mission_checkbutton("Voyager 2", voyager2_var, path_drawing.span_label('voyager_2'))
+create_mission_checkbutton("Voyager 1", voyager1_var, path_drawing.span_label('voyager_1'))
+create_mission_checkbutton("Galileo", galileo_var, path_drawing.span_label('galileo'))
 create_mission_checkbutton("SOHO Solar Observatory", soho_var, "(1995-12-3 to 2025-9-28)")
-create_mission_checkbutton("Cassini", cassini_var, "(1997-10-16 to 2017-09-14)")
+create_mission_checkbutton("Cassini", cassini_var, path_drawing.span_label('cassini'))
 create_mission_checkbutton("Rosetta", rosetta_var, "(2004-03-03 to 2016-10-04)")
-create_mission_checkbutton("New Horizons", new_horizons_var, "(2006-01-19 to 2029-12-31)")
+create_mission_checkbutton("New Horizons", new_horizons_var, path_drawing.span_label('new_horizons'))
 create_mission_checkbutton("Akatsuki", akatsuki_var, "(2010-05-22 to 2025-08-22)")
-create_mission_checkbutton("Juno", juno_var, "(2011-08-06 to 2028-9-30)")
+create_mission_checkbutton("Juno", juno_var, path_drawing.span_label('juno'))
 create_mission_checkbutton("Gaia", gaia_var, "(2013-12-20 to 2025-03-28)")
 create_mission_checkbutton("Hayabusa 2", hayabusa2_var, "(2014-12-04 to 2025-10-29)")
 create_mission_checkbutton("OSIRIS REx", osiris_rex_var, "(2016-09-9 to 2023-09-24)")
-create_mission_checkbutton("Parker Solar Probe", parker_solar_probe_var, "(2018-08-13 to 2029-1-31)")
-create_mission_checkbutton("BepiColombo", bepicolombo_var, "(2018-10-21 to 2027-4-7)")
-create_mission_checkbutton("Solar Orbiter", solarorbiter_var, "(2020-02-11 to 2030-11-20)")
+create_mission_checkbutton("Parker Solar Probe", parker_solar_probe_var, path_drawing.span_label('parker_solar_probe'))
+create_mission_checkbutton("BepiColombo", bepicolombo_var, path_drawing.span_label('bepicolombo'))
+create_mission_checkbutton("Solar Orbiter", solarorbiter_var, path_drawing.span_label('solar_orbiter'))
 create_mission_checkbutton("Perseverance Mars Rover", perse_var, "(2020-07-31 to 2026-2-19)")
-create_mission_checkbutton("Lucy", lucy_var, "(2021-10-17 to 2033-04-02)")
+create_mission_checkbutton("Lucy", lucy_var, path_drawing.span_label('lucy'))
 create_mission_checkbutton("DART", dart_var, "(2021-11-25 to 2022-09-26)")
 create_mission_checkbutton("James Webb Space Telescope", jwst_var, "(2021-12-26 to 2030-08-18)")
-create_mission_checkbutton("JUICE", juice_var, "(2023-04-15 to 2031-07-21)")
-create_mission_checkbutton("OSIRIS APEX", osiris_apex_var, "(2023-09-24 to 2030-3-1)")
-create_mission_checkbutton("Psyche", psyche_var, "(2023-10-14 to 2029-06-26)")
-create_mission_checkbutton("Europa-Clipper", europa_clipper_var, "(2024-10-15 to 2031-02-07)")
+create_mission_checkbutton("JUICE", juice_var, path_drawing.span_label('juice'))
+create_mission_checkbutton("OSIRIS APEX", osiris_apex_var, path_drawing.span_label('osiris_apex'))
+create_mission_checkbutton("Psyche", psyche_var, path_drawing.span_label('psyche_spacecraft'))
+create_mission_checkbutton("Europa-Clipper", europa_clipper_var, path_drawing.span_label('europa_clipper'))
 create_mission_checkbutton("Artemis II", artemis2_var, "(2026-04-02 2:00 to 2026-04-11)")
 
 # Checkbuttons for comets
@@ -10351,24 +10429,24 @@ def create_interstellar_checkbutton(name, variable, dates, perihelion):
                       f"Scale and date range auto-calculated from orbital elements")
     
 
-create_interstellar_checkbutton("West", comet_west_var, "(1975-11-05 to 1976-06-01)", 
+create_interstellar_checkbutton("West", comet_west_var, path_drawing.span_label('west'), 
                          "February 25, 1976")
 
-create_interstellar_checkbutton("McNaught", comet_mcnaught_var, "(2006-08-08 to 2008-07-10)", 
+create_interstellar_checkbutton("McNaught", comet_mcnaught_var, path_drawing.span_label('mcnaught'), 
                          "January 12, 2007")        # data arc: 2006-08-07 to 2007-07-11
 
-create_interstellar_checkbutton("Tsuchinshan", comet_tsuchinshan_atlas_var, "(2022-04-09 to 2029-12-31)",
+create_interstellar_checkbutton("Tsuchinshan", comet_tsuchinshan_atlas_var, path_drawing.span_label('tsuchinshan_atlas'),
 # data arc: 2022-04-09 to 2025-10-02 PREDICTS-> 2025-DEC-29
                          "September 28, 2024")
 
-create_interstellar_checkbutton("Wierzchos", comet_wierzchos_var, "(2024-02-15 to 2026+)",
+create_interstellar_checkbutton("Wierzchos", comet_wierzchos_var, path_drawing.span_label('wierzchos'),
                          "January 20, 2026")  # C/2024 E1, CO2-driven Oort Cloud comet
 
-create_interstellar_checkbutton("ATLAS", comet_atlas_var, "(2024-04-05 to 2025-12-29)", 
+create_interstellar_checkbutton("ATLAS", comet_atlas_var, path_drawing.span_label('atlas_2024_g3'), 
 # PREDICTS-> 2025-DEC-29    data arc: 2024-04-05 to 2025-01-01  Horizons accepts all dates                         
                          "January 13, 2025")
 
-create_interstellar_checkbutton("C/2025_K1", comet_2025k1_var, "(2025-04-08 to 2029-12-31)", 
+create_interstellar_checkbutton("C/2025_K1", comet_2025k1_var, path_drawing.span_label('c2025_k1'), 
                          "October 8, 2025") # params
 
 # C/2025 K1 fragment checkboxes (indented under parent)
@@ -10387,19 +10465,19 @@ for frag_name, frag_var, frag_label in [
     CreateToolTip(cb, f"{frag_label}\n{INFO.get(frag_name, 'No information available.')}")
 
 
-create_interstellar_checkbutton("PANSTARRS", comet_c2025r3_var, "(2025-09-07 to 2026-01-11)", 
+create_interstellar_checkbutton("PANSTARRS", comet_c2025r3_var, path_drawing.span_label('panstarrs_2025_r3'), 
                          "April 19, 2026 at 21:31 UTC") # data arc: 2025-09-07 to 2026-01-11
 
-create_interstellar_checkbutton("Borisov", comet_2025v1_var, "(2025-10-29 to 2029-12-31)", 
+create_interstellar_checkbutton("Borisov", comet_2025v1_var, path_drawing.span_label('borisov_2025_v1'), 
                          "November 16, 2025") # params
 
-create_interstellar_checkbutton("1I/Oumuamua", oumuamua_var, "(2017-10-14 to 2018-01-01)", 
+create_interstellar_checkbutton("1I/Oumuamua", oumuamua_var, path_drawing.span_label('oumuamua'), 
     "September 9, 2017")    # hyperbolic trajectory
 
-create_interstellar_checkbutton("2I/Borisov", comet_borisov_var, "(2019-02-24 to 2020-09-30)", 
+create_interstellar_checkbutton("2I/Borisov", comet_borisov_var, path_drawing.span_label('borisov_2i'), 
     "December 8, 2019") # data arc: 2019-02-24 to 2020-09-30; TP= 2019-Dec-08.5528459060; hyperbolic trajectory
 
-create_interstellar_checkbutton("3I/ATLAS", atlas3i_var, "(2025-05-15 to 2025-08-27)",     
+create_interstellar_checkbutton("3I/ATLAS", atlas3i_var, path_drawing.span_label('atlas_3i'),     
     # soln ref.= JPL#26, data arc: 2025-05-15 to 2025-08-27
     "October 29, 2025")     # params; predicted; this is a hyperbolic trajectory
 

@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.123 | November 2, 2026
+Tony Quintanilla, PE | Claude | v3.124 | November 3, 2026
 
-Cut from 15dc8e34 at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 81fa7b8a at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -489,7 +489,7 @@ safe-file-editing            1.14 Editing existing files, patch scripts,
                                   sed/regex edits, encoding checks (portable)
 agentic-pre-test             1.3  BEFORE delivering complete files/agentic
                                   code; after data-content sweeps
-horizons-orbital-mechanics   1.14 Horizons queries, centers, frames, osculating
+horizons-orbital-mechanics   1.15 Horizons queries, centers, frames, osculating
                                   elements, encounters, comet record pinning,
                                   2xr uncertainties, periods, the drawn orbit's
                                   centre, the Horizons check
@@ -510,7 +510,9 @@ horizons-orbital-mechanics   1.14 Horizons queries, centers, frames, osculating
                                   answers (cache=), a 2xr answer with no figure
                                   (n.a.), Pluto's period asked of its
                                   barycentre, an ended mission's mission_end
-                                  (its path stopped on the day it ended)
+                                  (its path stopped on the day it ended), the
+                                  orrery's drawing of a path by its plan
+                                  (path_drawing.py, only around the Sun)
 provenance-discipline        2.36 Scanner runs, audits, citations, constants,
                                   pre-push (Tier-1 = 0 on the active build
                                   path)
@@ -1293,6 +1295,45 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.124 (November 3, 2026): No rule changed in this document. ONE
+skill bump: horizons-orbital-mechanics 1.14 -> 1.15 (L-476). THE
+ORRERY'S PLOT DRAWS A PLANNED PATH BY ITS PLAN, ONLY AROUND THE SUN.
+
+WHAT PROMPTED IT. The Claude Code session of Nov 3, afternoon (Claude
+Opus 5.5), through the python_work door, built on orrery 81fa7b8a and
+gallery 3a211a8c, from
+documentation/COORD_L476_orrery_plots_by_path_plan_brief_20261103.md.
+Tony's rulings of Oct 23 (one path rule, the orrery's; solid to today,
+dashed after), of Oct 24 (the orrery's dates match the website's), and
+of Nov 3, 12:06 Chicago, on whether only Sun-centred plots switch to
+the plan: "yes and the orrery and the website should both follow
+this."
+
+WHAT CHANGED. horizons-orbital-mechanics: A Plan Draws a Path Only
+Around the Sun, under How a Path's Events Are Found; and the 30-day
+cycle's list of a plan's inputs, which no longer carries a typed end.
+Its oldest of four version entries (1.12) moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule. Every
+sentence was read from path_plan.py, path_drawing.py and the website's
+builder at 3a211a8c, and from Galileo drawn from JPL that afternoon,
+before it was written.
+
+THE OBLIGATION TRAVELS. This session read each skill as the file in the
+repo, each as the manifest expected: horizons-orbital-mechanics 1.14,
+orrery-coding-conventions 1.13, gallery-cache-builder 1.17,
+provenance-discipline 2.36, safe-file-editing 1.14, agentic-pre-test
+1.3 and ledger-and-session-records 1.22. Tony reinstalls
+horizons-orbital-mechanics (Settings > Skills) and pastes this version
+into the Project's instructions on claude.ai; the next session that
+loads it from the account confirms its copy reads 1.15 before work
+that fires it.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.121 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.123 (November 2, 2026): No rule changed in this document. FOUR
 skill bumps, one version each (L-507, carrying L-505):
 interactive-exhibit 1.29 -> 1.30, orrery-coding-conventions 1.12 ->
@@ -1378,42 +1419,6 @@ reinstall.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.119 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.121 (November 2, 2026): ONE rule added to this document: Token
-Economy [QUALITY], in Part 2 after Method Belongs to the Skill, with
-two rows in the Anti-Patterns table. No skill bump. TOKENS SPENT WHERE
-THEY BUY VERIFICATION OR A DECISION, AND COUNTED.
-
-WHAT PROMPTED IT. Tony, Nov 2, 09:24 Chicago, in the coordinating
-session (Claude Fable 5.1, orrery fd3551cc and gallery b7ddf775 read
-live), after it had written a 176-line brief for a Code session to
-change one marker symbol and dropped it when he asked for a patch
-instead: "I am becoming very concerned about the environmental cost
-of token generation ... I would like to make part of our protocol
-token economy." Asked whether the rule should carry a measured half,
-a token count in every Code report and run record: "yes" (09:29).
-
-WHAT CHANGED. The section's one sentence and its seven instances: the
-smallest instrument; no speculative documents; a skill read in the
-parts the job needs; tool output sliced, not loaded; records at the
-reader's length; cross-model review for domain uncertainty; and the
-count, as Claude Code prints it, in the report and in the run record.
-The orrery's CLAUDE.md, the Code door, amends two sentences to match:
-a skill is read in full when its rules govern the work and in parts
-otherwise, and the report ends with the count. L-506 opens for it.
-ledger-and-session-records carries the shape of the count in the
-report and the run record at its next version, the records session's.
-
-THE OBLIGATION TRAVELS. The Project's instructions on claude.ai read
-v3.120 until Tony pastes this version in; a chat session reads the
-Project page, so the rule reaches chat sessions only then. No skill
-changed; nothing to reinstall.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.118 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

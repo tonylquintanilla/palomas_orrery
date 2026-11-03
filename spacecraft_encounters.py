@@ -33,6 +33,9 @@ Role: data
 Domain: orrery
 
 Module updated: May 30, 2026 with Anthropic's Claude 4.8
+Module updated: November 3, 2026 with Anthropic's Claude Opus 5.5 (L-476:
+an encounter's time is resolved across a planned spacecraft's span as
+its path plan gives it, path_drawing.entry_span, not its typed dates.)
 
 """
 
@@ -1259,11 +1262,14 @@ def add_tagged_encounter_markers(fig, selected_objects, objects, dates_lists,
             if date_source in ('horizons', 'planning'):
 
                 sc_obj = next((o for o in objects if o['name'] == sc_name), None)
-                if sc_obj and sc_obj.get('start_date') and sc_obj.get('end_date'):
+                # L-476: a planned spacecraft's span is its plan's
+                from path_drawing import entry_span
+                sc_start, sc_end = entry_span(sc_obj) if sc_obj else (None, None)
+                if sc_start and sc_end:
 
                     resolved = resolve_encounter_time(
                         enc, sc_id,
-                        sc_obj['start_date'], sc_obj['end_date'],
+                        sc_start, sc_end,
                         objects
                     )
 

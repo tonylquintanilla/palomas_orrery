@@ -66,6 +66,13 @@ historical missions, slice 1: Galileo and Cassini keyed for the website,
 each with JPL's exact name, NASA's mission page as its link, and
 'mission_end', the day NASA's page says the mission ended, which the path
 plan stops at. Cassini's description now says what its page supports.)
+Module updated: November 3, 2026 with Anthropic's Claude Opus 5.5 (L-476:
+the 20 planned entries that carried a typed 'end_date' lose it -- the 14
+keyed spacecraft and West, McNaught, Tsuchinshan, 1I/Oumuamua,
+2I/Borisov and 3I/ATLAS. A planned entry's span is read from its path
+plan (path_drawing.entry_span), so it cannot go stale against JPL; its
+'start_date' stays, the day path_plan.py asks the path from.
+test_path_plan.py check 19 fails if a planned entry carries one again.)
 """
 
 from datetime import datetime
@@ -719,7 +726,7 @@ OBJECT_DEFINITIONS = [
 # Hyperbolic solar
 
     {'name': 'West', 'key': 'west', 'horizons_name': 'West (C/1975 V1-A)', 'id': 'C/1975 V1-A', 'var_name': 'comet_west_var', 'color_key': 'Comet West', 'symbol': 'diamond', 
-    'object_type': 'trajectory', 'id_type': 'smallbody', 'start_date': datetime(1975, 11, 6), 'end_date': datetime(1976, 6, 1), 
+    'object_type': 'trajectory', 'id_type': 'smallbody', 'start_date': datetime(1975, 11, 6), 
     'mission_info': ('Horizons: C/1975 V1-A. One of the brightest objects to pass through '
         'the inner solar system in 1976. As it passed close to the Sun its '
         "nucleus split into four pieces; the path drawn is piece A's, the one "
@@ -730,7 +737,7 @@ OBJECT_DEFINITIONS = [
     'mission_url': 'https://en.wikipedia.org/wiki/Comet_West'},
 
     {'name': 'McNaught', 'key': 'mcnaught', 'horizons_name': 'McNaught (C/2006 P1)', 'id': 'C/2006 P1', 'var_name': 'comet_mcnaught_var', 'color_key': 'McNaught', 'symbol': 'diamond', 
-    'object_type': 'trajectory', 'id_type': 'smallbody', 'start_date': datetime(2006, 8, 8), 'end_date': datetime(2007, 7, 10), 
+    'object_type': 'trajectory', 'id_type': 'smallbody', 'start_date': datetime(2006, 8, 8), 
     # data arc: 2006-08-07 to 2007-07-11
     'mission_info': ('Horizons: C/2006 P1. Discovered in August 2006 by Robert McNaught '
         'and called the Great Comet of 2007, it was the brightest comet in '
@@ -743,7 +750,7 @@ OBJECT_DEFINITIONS = [
 
      {'name': 'Tsuchinshan', 'key': 'tsuchinshan_atlas', 'horizons_name': 'Tsuchinshan-ATLAS (C/2023 A3)', 'id': 'C/2023 A3', 'var_name': 'comet_tsuchinshan_atlas_var', 'color_key': 'Tsuchinsh', 
     'symbol': 'diamond', 'object_type': 'orbital', 'id_type': 'smallbody', # check object type should be 'trajectory'
-    'start_date': datetime(2023, 1, 10), 'end_date': datetime(2029, 12, 31), 
+    'start_date': datetime(2023, 1, 10), 
     'mission_info': ('Horizons: C/2023 A3. Discovered in January 2023, it became known as '
         'the Great Comet of 2024, visible to the naked eye around its '
         'perihelion, its closest pass by the Sun, in late September 2024. '
@@ -868,7 +875,7 @@ OBJECT_DEFINITIONS = [
 # Hyperbolic and interstellar
 
     {'name': '1I/Oumuamua', 'key': 'oumuamua', 'horizons_name': "'Oumuamua", 'id': 'A/2017 U1', 'var_name': 'oumuamua_var', 'color_key': '1I/Oumuamua', 'symbol': 'diamond', 
-    'object_type': 'trajectory', 'id_type': 'smallbody', 'start_date': datetime(2017, 10, 15), 'end_date': datetime(2018, 1, 1),
+    'object_type': 'trajectory', 'id_type': 'smallbody', 'start_date': datetime(2017, 10, 15), 
     # data arc from 2017 October 14 to 2018 January 2 
     'mission_info': ('Horizons: A/2017 U1. The first known interstellar object, one that '
         'came from another star system, seen passing through ours; discovered '
@@ -881,7 +888,7 @@ OBJECT_DEFINITIONS = [
     'mission_url': 'https://www.jpl.nasa.gov/news/solar-systems-first-interstellar-visitor-dazzles-scientists/'},
 
     {'name': '2I/Borisov', 'key': 'borisov_2i', 'horizons_name': 'Borisov (C/2019 Q4)', 'id': 'C/2019 Q4', 'var_name': 'comet_borisov_var', 'color_key': '2I/Borisov', 'symbol': 'diamond', 
-    'object_type': 'trajectory', 'id_type': 'smallbody', 'start_date': datetime(2019, 2, 25), 'end_date': datetime(2020, 9, 29), 
+    'object_type': 'trajectory', 'id_type': 'smallbody', 'start_date': datetime(2019, 2, 25), 
     # data arc: 2019-02-24 to 2020-09-30
     'mission_info': ('Horizons: C/2019 Q4. The first confirmed interstellar comet, one '
         'that came from another star system, and only the second interstellar '
@@ -895,7 +902,7 @@ OBJECT_DEFINITIONS = [
     {'name': '3I/ATLAS', 'key': 'atlas_3i', 'horizons_name': 'ATLAS (C/2025 N1)', 'id': 'C/2025 N1', 'var_name': 'atlas3i_var', 'color_key': '3I/ATLAS', 'symbol': 'diamond', 
     # JPL/HORIZONS                  ATLAS (C/2025 N1)            2025-Oct-28 14:32:30
     'object_type': 'trajectory', 'id_type': 'smallbody', 
-    'start_date': datetime(2025, 5, 15), 'end_date': datetime(2032, 12, 31),
+    'start_date': datetime(2025, 5, 15), 
     # data arc: 2025-05-15 to 2025-09-21
     'mission_info': ('Horizons: C/2025 N1. The third known interstellar object, one from '
         'outside our solar system, first reported on July 1, 2025 by the '
@@ -929,17 +936,17 @@ OBJECT_DEFINITIONS = [
     'mission_info': 'Horizons: -24. First spacecraft to encounter Saturn and study its rings.'},
 
     {'name': 'Voyager 1', 'key': 'voyager_1', 'id': '-31', 'horizons_name': 'Voyager 1 (spacecraft)', 'var_name': 'voyager1_var', 'color_key': 'Voyager 1', 'symbol': 'diamond-open', 
-    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(1977, 9, 6), 'end_date': datetime(2029, 12, 31), 
+    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(1977, 9, 6), 
     'mission_url': 'https://voyager.jpl.nasa.gov/mission/', 
     'mission_info': 'Horizons: -31. Launched in 1977, Voyager 1 is the farthest spacecraft from Earth. In 2012 it became the first spacecraft to reach interstellar space.'},
 
     {'name': 'Voyager 2', 'key': 'voyager_2', 'id': '-32', 'horizons_name': 'Voyager 2 (spacecraft)', 'var_name': 'voyager2_var', 'color_key': 'Voyager 2', 'symbol': 'diamond-open', 
-    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(1977, 8, 21), 'end_date': datetime(2029, 12, 31), 
+    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(1977, 8, 21), 
     'mission_url': 'https://voyager.jpl.nasa.gov/mission/', 
     'mission_info': 'Horizons: -32. Launched in 1977, Voyager 2 is the only spacecraft to have visited all four giant planets, and the only one to visit Uranus and Neptune.'},
 
     {'name': 'Galileo', 'key': 'galileo', 'id': '-77', 'horizons_name': 'Galileo (spacecraft)', 'var_name': 'galileo_var', 'color_key': 'Galileo', 'symbol': 'diamond-open', 'object_type': 'trajectory',
-    'id_type': 'id', 'is_mission': True, 'start_date': datetime(1989, 10, 20), 'end_date': datetime(2003, 9, 29),
+    'id_type': 'id', 'is_mission': True, 'start_date': datetime(1989, 10, 20), 
     # No ephemeris for target "Galileo (spacecraft)" prior to A.D. 1989-OCT-19 01:28:37.0780 UT
     # No ephemeris for target "Galileo (spacecraft)" after A.D. 2003-SEP-30 11:58:55.8177 UT
     # JPL's Lookup, read 2026-11-02: "Galileo (spacecraft)", spkid -77.
@@ -961,7 +968,7 @@ OBJECT_DEFINITIONS = [
     'mission_url': 'https://sohowww.nascom.nasa.gov/'},    
 
     {'name': 'Cassini', 'key': 'cassini', 'id': '-82', 'horizons_name': 'Cassini (spacecraft)', 'var_name': 'cassini_var', 'color_key': 'Cassini', 'symbol': 'diamond-open',
-     'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(1997, 10, 16), 'end_date': datetime(2017, 9, 14),
+     'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(1997, 10, 16), 
      # No ephemeris for target "Cassini (spacecraft)" after A.D. 2017-SEP-15 11:56:50.8176 UT
      # JPL's Lookup, read 2026-11-02: "Cassini (spacecraft)", spkid -82.
      # Source: NASA, Cassini mission page,
@@ -980,7 +987,7 @@ OBJECT_DEFINITIONS = [
     'mission_info': 'Horizons: -226. European Space Agency mission to study Comet 67P/Churyumov-Gerasimenko.'},
 
     {'name': 'New Horizons', 'key': 'new_horizons', 'id': '-98', 'horizons_name': 'New Horizons (spacecraft)', 'var_name': 'new_horizons_var', 'color_key': 'New Horizons', 'symbol': 'diamond-open', 
-    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2006, 1, 20), 'end_date': datetime(2029, 12, 31), 
+    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2006, 1, 20), 
     # No ephemeris for target "New Horizons (spacecraft)" prior to A.D. 2006-JAN-19 19:50:13.1460 UT
     # No ephemeris for target "New Horizons (spacecraft)" after A.D. 2030-JAN-01 11:58:50.8161 UT
     'mission_url': 'https://science.nasa.gov/mission/new-horizons/', 
@@ -995,7 +1002,7 @@ OBJECT_DEFINITIONS = [
     'mission_url': 'https://en.wikipedia.org/wiki/Akatsuki_(spacecraft)'},
 
     {'name': 'Juno', 'key': 'juno', 'id': '-61', 'horizons_name': 'Juno (spacecraft)', 'var_name': 'juno_var', 'color_key': 'Juno', 'symbol': 'diamond-open', 'object_type': 'trajectory', 
-    'id_type': 'id', 'is_mission': True, 'start_date': datetime(2011, 8, 6), 'end_date': datetime(2028, 9, 30), 
+    'id_type': 'id', 'is_mission': True, 'start_date': datetime(2011, 8, 6), 
     # No ephemeris for target "Juno (spacecraft)" prior to A.D. 2011-AUG-05 17:18:06.0000 UT
     # No ephemeris for target "Juno (spacecraft)" after A.D. 2028-SEP-30 23:58:50.8177 UT
     'mission_url': 'https://science.nasa.gov/mission/juno/', 
@@ -1021,13 +1028,13 @@ OBJECT_DEFINITIONS = [
     'mission_info': 'Horizons: -64. OSIRIS-REx is NASA\'s mission to collect samples from asteroid Bennu.'},
 
     {'name': 'OSIRISAPE', 'key': 'osiris_apex', 'id': '-64', 'horizons_name': 'OSIRIS-REx (spacecraft)', 'var_name': 'osiris_apex_var', 'color_key': 'OSIRIS', 'symbol': 'diamond-open', 
-    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2023, 9, 24), 'end_date': datetime(2030, 3, 1),
+    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2023, 9, 24), 
     # No ephemeris for target "OSIRIS-REx (spacecraft)" after A.D. 2030-MAR-01 19:58:50.8146 UT 
     'mission_url': 'https://science.nasa.gov/mission/osiris-apex/', 
     'mission_info': 'Horizons: -64. OSIRIS-APEX, formerly OSIRIS-REx, is on its way to asteroid Apophis. It reaches Apophis in June 2029, soon after the asteroid passes close to Earth in April 2029.'},
 
     {'name': 'Parker', 'key': 'parker_solar_probe', 'id': '-96', 'horizons_name': 'Parker Solar Probe (spacecraft)', 'var_name': 'parker_solar_probe_var', 'color_key': 'Parker Solar Probe', 
-    'symbol': 'diamond-open', 'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2018, 8, 13), 'end_date': datetime(2029, 1, 31), 
+    'symbol': 'diamond-open', 'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2018, 8, 13), 
     # No ephemeris for target "Parker Solar Probe (spacecraft)" after A.D. 2029-FEB-01 00:00:00.0000 UT
     'mission_url': 'https://science.nasa.gov/mission/parker-solar-probe/', 
     'mission_info': 'Horizons: -96. NASA\'s Parker Solar Probe, launched in August 2018, became the first spacecraft to fly through the corona, the Sun\'s upper atmosphere, in 2021. It studies how the corona is heated and what speeds up the solar wind.'},
@@ -1043,7 +1050,7 @@ OBJECT_DEFINITIONS = [
     'mission_url': 'https://tonylquintanilla.github.io/palomas_orrery/mars_milestone.html'},  # Local HTML milestone graphic (contains link to NASA)
 
     {'name': 'Lucy', 'key': 'lucy', 'id': '-49', 'horizons_name': 'Lucy (spacecraft)', 'var_name': 'lucy_var', 'color_key': 'Lucy', 'symbol': 'diamond-open', 'object_type': 'trajectory', 
-    'id_type': 'id', 'is_mission': True, 'start_date': datetime(2021, 10, 17), 'end_date': datetime(2033, 4, 2), 
+    'id_type': 'id', 'is_mission': True, 'start_date': datetime(2021, 10, 17), 
     # 2021-10-16 10:33:08.283 (min. for current target body)
     # 2033-04-02 17:27:41.343 (max. for current target body)
     'mission_info': 'Horizons: -49. NASA\'s Lucy, launched in October 2021, is on its way to the Trojan asteroids, which share an orbit around the Sun with Jupiter.', 
@@ -1064,21 +1071,21 @@ OBJECT_DEFINITIONS = [
     'mission_info': 'Horizons: -170. The James Webb Space Telescope is NASA\'s flagship infrared space telescope.'},
 
     {'name': 'JUICE', 'key': 'juice', 'id': '-28', 'horizons_name': 'JUICE (spacecraft)', 'var_name': 'juice_var', 'color_key': 'JUICE', 'symbol': 'diamond-open', 
-    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2023, 4, 15), 'end_date': datetime(2031, 7, 21), 
+    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2023, 4, 15), 
     # 2023-04-14 12:43:26.843 (min. for current target body)
     # 2031-07-21 06:31:30.022 (max. for current target body)
     'mission_url': 'https://www.esa.int/Science_Exploration/Space_Science/Juice', 
     'mission_info': 'Horizons: -28. ESA\'s Juice (Jupiter Icy Moons Explorer), launched in April 2023, reaches Jupiter in July 2031. It will study the planet and its three large moons that hold oceans: Ganymede, Callisto and Europa.'},
 
     {'name': 'Psyche', 'key': 'psyche_spacecraft', 'id': '-255', 'horizons_name': 'Psyche (spacecraft)', 'var_name': 'psyche_var', 'color_key': 'Psyche', 'symbol': 'diamond-open', 
-    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2023, 10, 14), 'end_date': datetime(2029, 6, 26), 
+    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2023, 10, 14), 
     # 2023-10-13 15:22:57.139 (min. for current target body)
     # 2029-06-26 14:29:49.496 (max. for current target body)
     'mission_url': 'https://science.nasa.gov/mission/psyche/', 
     'mission_info': 'Horizons: -255. NASA\'s Psyche spacecraft, launched in October 2023, is on its way to the metal-rich asteroid 16 Psyche in the main asteroid belt. It begins exploring the asteroid by August 2029.'},
 
     {'name': 'Clipper', 'key': 'europa_clipper', 'id': '-159', 'horizons_name': 'Europa Clipper (spacecraft)', 'var_name': 'europa_clipper_var', 'color_key': 'Clipper', 'symbol': 'diamond-open', 
-    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2024, 10, 15), 'end_date': datetime(2031, 2, 7), 
+    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2024, 10, 15), 
     # 2024-10-14 16:15:03.712 (min. for current target body)
     # 2031-02-07 18:17:27.695 (max. for current target body)
     # No ephemeris for target "Europa Clipper (spacecraft)" after A.D. 2031-FEB-07 18:16:18.5105 UT
@@ -1088,7 +1095,7 @@ OBJECT_DEFINITIONS = [
     {'name': 'BepiColombo', 'key': 'bepicolombo', 'id': '-121', 'horizons_name': 'BepiColombo (Spacecraft)', 'var_name': 'bepicolombo_var', 'color_key': 'BepiColombo', 'symbol': 'diamond-open', 
     # 'id': '-121', 2018-080A
     'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True,
-    'start_date': datetime(2018, 10, 21), 'end_date': datetime(2027, 4, 7), 
+    'start_date': datetime(2018, 10, 21), 
     # 2018-10-20 02:13:28.719 (min. for current target body)
     # 2027-04-07 00:01:09.186 (max. for current target body)
     # No ephemeris for target "BepiColombo (Spacecraft)" after A.D. 2027-APR-06 23:59:59.9998 UT
@@ -1096,7 +1103,7 @@ OBJECT_DEFINITIONS = [
     'mission_info': 'Horizons: -121. BepiColombo, led by ESA with Japan\'s space agency JAXA, launched in October 2018 to study Mercury from orbit.'},
 
     {'name': 'SolO', 'key': 'solar_orbiter', 'id': '-144', 'horizons_name': 'Solar Orbiter (spacecraft)', 'var_name': 'solarorbiter_var', 'color_key': 'SolO', 'symbol': 'diamond-open', 
-    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2020, 2, 11), 'end_date': datetime(2030, 11, 20),
+    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2020, 2, 11), 
     # 2020-02-10 04:56:58.855 (min. for current target body)
     # 2030-11-20 04:03:15.162 (max. for current target body)
     # No ephemeris for target "Solar Orbiter (spacecraft)" after A.D. 2030-NOV-20 04:02:05.9789 UT 

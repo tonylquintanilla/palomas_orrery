@@ -3360,6 +3360,20 @@ L-490.
     on JPL's path leaving Jupiter. Cassini's typed end, 2017-09-14,
     stops a day short of its plan's 2017-09-15. Both are L-476's class
     (the orrery's plots by the plan), recorded there.
+- **2026-11-03, afternoon: the first finding answered** (the orrery's
+  Claude Code session, Claude Opus 5.5, at orrery 81fa7b8a and gallery
+  3a211a8c; L-476's build). The orrery's Sun-centred whole-path plot now
+  draws each planned path by its plan, so its dates are the website's:
+  Galileo ends at the impact, Cassini on 2017-09-15, and no planned
+  entry carries a typed end date any more (`test_path_plan.py` check
+  19). Galileo drawn from JPL equals the website's served points but for
+  the website's last-day pair (`test_path_drawing.py --galileo`). The
+  check this item builds should find no date difference on a planned
+  path; two differences stay, for the talk: the orrery draws neither the
+  website's daily tail nor the last-day pair (the room's needs), and
+  three planned comets (Tsuchinshan, Wierzchos, ATLAS C/2024 G3) are
+  drawn by the orrery as ellipses, the website as paths. Detail on
+  L-476.
 **Gap (replaces the one below, 2026-11-03, morning):** the design talk:
 what consistency means beyond JPL's parameters, which side is the
 authority for each layer, and where exceptions live. Then the check's
@@ -3461,7 +3475,107 @@ with a planted fault; where its exceptions live.
   'mission_end'), on JPL's path leaving Jupiter. Cassini's typed end,
   2017-09-14, is a day short of its plan's 2017-09-15. Drawing by the
   plan, as this item rules, removes both.
-**Gap (replaces the one below, 2026-11-03):** the design of the change
+- **Tony, 2026-11-03, 12:06 Chicago** (the coordinating session, asked
+  whether only Sun-centred plots switch to the plan): "yes and the
+  orrery and the website should both follow this." A planned path
+  centred on any other body is drawn as before, in the orrery now and in
+  the website's planet rooms when they come.
+- **2026-11-03, afternoon: BUILT** (the orrery's Claude Code session,
+  Claude Opus 5.5, on orrery 81fa7b8a and gallery 3a211a8c, from
+  `documentation/COORD_L476_orrery_plots_by_path_plan_brief_20261103.md`).
+  Verified against claimed:
+  - THE LIVE PATH. The brief's map held: the whole path is
+    `plot_actual_orbits` (fed by `plot_objects`' worker), and the
+    animation's full-mission layer is a second whole path, inline in
+    `animate_objects`. `create_dates_list_for_object` is called from
+    nowhere [verified @81fa7b8a]; left as it is, named here, removed
+    only if Tony says so. Social export copies traces as they are;
+    Gallery Studio only widens thin lines and the JSON converter keeps
+    every line setting, so a dashed line survives all three (read, not
+    changed). The orbit cache feeds no whole-path drawing (its plotter,
+    `plot_orbit_paths`, is called from nowhere in either module), so a
+    plan-drawn path and an even-spread one cannot be served for each
+    other.
+  - NEW `path_drawing.py`: `draw_plan`, the website's
+    `fetch_path_by_plan` point for point without its daily tail and
+    last-day pair (twin named in its docstring); `entry_span`, the one
+    reader of a planned entry's span; `plan_path_traces`, solid to
+    `utc_now()` and dashed after, one colour, one legend entry, one
+    info marker; `span_label`. A plan drawn once per run of the orrery.
+  - THE PLOTS. Sun-centred only: the static whole path ("<name> Full
+    Mission") and the animation's full mission. Around any other centre
+    the even spread as before, its span from the plan. The animation's
+    Plotted Period and the static plot's yellow Plotted Period overlay
+    are not whole paths and keep their drawing, their bounds from the
+    plan.
+  - THE DATES. 20 planned entries lose their typed `end_date` (the 14
+    keyed spacecraft and West, McNaught, Tsuchinshan, 1I/Oumuamua,
+    2I/Borisov, 3I/ATLAS); `start_date` stays. Every reader that meant
+    the span asks `entry_span`: `palomas_orrery.py` (the whole path,
+    the overlay, the orbit cache's two clamps, special fetch, the
+    encounter extras, the animation's three), `orbit_data_manager.py`
+    (its clamp) and `spacecraft_encounters.py` (an encounter's time).
+    `verify_orbit_cache.py`'s two lines read the cache's own metadata,
+    not an entry, and are unchanged. The 25 planned checkbox labels are
+    written from the plan when the window is built, by name: Voyager 2,
+    Voyager 1, Galileo, Cassini, New Horizons, Juno, Parker Solar Probe,
+    BepiColombo, Solar Orbiter, Lucy, JUICE, OSIRIS APEX, Psyche,
+    Europa-Clipper; West, McNaught, Tsuchinshan, Wierzchos, ATLAS,
+    C/2025_K1, PANSTARRS, Borisov, 1I/Oumuamua, 2I/Borisov, 3I/ATLAS.
+    44 dated labels in all; the other 19 have no plan and keep their
+    typed dates.
+  - THE PLAN'S FINGERPRINT, found in the build: `path_plan.plan_inputs`
+    carried the typed end_date, so removing it would have remade all 14
+    spacecraft plans (half an hour of JPL, and new paths on the website
+    the next night). The inputs now carry the start day alone; the 14
+    stored fingerprints were carried to the new inputs once, each only
+    after its old fingerprint was shown to match the old inputs (all 14
+    did), and nothing else in `data/path_plans.json` moved. `python
+    path_plan.py` then read 28 of 28 current and asked JPL nothing.
+    Check 4 of `test_path_plan.py` now changes the start day.
+  - THE GUARD: `path_plan.typed_ends`, held by `test_path_plan.py`
+    check 19 on the real list (28 planned paths examined, none carrying
+    one), shown failing on an end_date planted on Voyager 1.
+  - THE CHECK THAT CAN FAIL: `test_path_drawing.py --galileo` draws
+    Galileo from JPL and compares it with the website's served
+    `data/solar-system/positions/galileo.json` at 3a211a8c: 303 drawn,
+    305 served, the two extra the website's last-day pair
+    (2452903.500694 and .501389, 2003-09-21 00:01 and 00:02), nothing
+    else on either side. With the backbone's tolerance doubled it fails
+    (242 drawn, five served moments named missing). Its offline part,
+    five checks with a planted fault, joins the maintenance run as
+    "Path drawing suite".
+  - THE EXPORT. `data/objects_export.json` moved two lines and no
+    served value: `source_sha256` (the list file changed) and
+    `paths_sha256` (the plans file's fingerprints). Nothing on the
+    website reads either (searched); no website pin moves.
+  - THE LIVE PATH, RUN (the pre-test's smoke test, on a throwaway copy
+    of `palomas_orrery.py` driven inside its own Tk loop, each figure
+    read back instead of shown, against JPL that afternoon). Sun-centred
+    plot of Voyager 1, Juno, Galileo, 3I/ATLAS and Pioneer 10: Voyager 1
+    57 points solid and 3 dashed; Juno 236 solid, 28 dashed; Galileo 303
+    solid, none dashed; 3I/ATLAS 17 solid, 2 dashed; each pair one
+    legend entry; Pioneer 10, no plan, 51 points as before; the yellow
+    Plotted Periods 51 points as before. Juno centred on Jupiter: 51
+    points, solid, the even spread as before, across the plan's span
+    (2011-08-06 to 2028-09-02; it ran to the typed 2028-09-30 before).
+    Animation by month, Voyager 1 around the Sun: its full mission 57
+    solid and 3 dashed, its Plotted Period 51 as before. The copy was
+    removed after each run. Tony's eyes are the gate on all of it.
+  - THE MAINTENANCE RUN, read from its output: "34 of 34 gating
+    checkers passed"; Path plan suite 31 of 31, Path drawing suite 5 of
+    5, Objects export unchanged after this session's export, 0 Tier-1
+    on the push gate. Its first run failed Dashboard parity, correctly:
+    the new suite had no button. "Path Drawing Suite" now has one, with
+    its short line (`palomas_orrery_dashboard.py`).
+**Gap (replaces the one below, 2026-11-03, afternoon):** Tony's Mode 5
+look at five Sun-centred plots (Voyager 1, Juno, Galileo, 3I/ATLAS,
+Pioneer 10) and one Jupiter-centred Juno; whether
+`create_dates_list_for_object`, called from nowhere, goes. Still open
+for L-484's talk: three planned comets the orrery draws as ellipses
+(Tsuchinshan, Wierzchos, ATLAS C/2024 G3), which the website draws as
+paths.
+**Gap (superseded above, 2026-11-03, afternoon; replaced the one below, 2026-11-03):** the design of the change
 in the orrery's plots and its date list, then the build; Galileo's
 eight days the first case it fixes. L-484's talk may take it in.
 **Gap (superseded above, 2026-11-03; replaced the one below, 2026-10-24, late night):** after slice

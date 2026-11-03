@@ -1,14 +1,26 @@
 ---
 name: horizons-orbital-mechanics
 description: JPL Horizons API and orbital mechanics reference for the Paloma's Orrery project (astroquery Horizons queries, orbit_data_manager, osculating_cache_manager, idealized_orbits, apsidal_markers, spacecraft_encounters, close_approach_data, position_accuracy, orbital_period, period_fetch, path_plan). Use for any Paloma's Orrery task involving Horizons queries or ephemerides, coordinate center bodies, reference frames, osculating elements, orbit caches, a small body's position uncertainty (VEC_TABLE 2xr), orbital periods and the centre they are taken around, the drawn orbit and its markers' dates, which Horizons record serves a body (helio_id, a pinned comet record, a skip list), encounter or flyby resolution, or whenever a rendered orbit looks wrong or an ephemeris API returns empty. Do not use for projects other than Paloma's Orrery.
-fires_when: Horizons queries, centers, frames, osculating elements, encounters, comet record pinning, 2xr uncertainties, periods, the drawn orbit's centre, the Horizons check (horizons_check.py, its period comparison and the data sheets' re-read), the period fetch before it (period_fetch.py), which record serves a body (helio_id, re-pinning a comet, JPL's exact name, a body on a skip list), a spacecraft path's plan and its flybys (path_plan.py -- the Hill sphere, JPL's GM, the window and step, the orbiter rule for an arrival, a departure, a capture), a comet whose designation matches its own pieces, a comet on an open path's plan (its span, its TP, its perihelion), an entry asked by JPL's number in the Horizons check, the clock read as UTC (utc_clock), astroquery's saved answers (cache=), a 2xr answer with no figure (n.a.), Pluto's period asked of its barycentre, an ended mission's mission_end (its path stopped on the day it ended)
+fires_when: Horizons queries, centers, frames, osculating elements, encounters, comet record pinning, 2xr uncertainties, periods, the drawn orbit's centre, the Horizons check (horizons_check.py, its period comparison and the data sheets' re-read), the period fetch before it (period_fetch.py), which record serves a body (helio_id, re-pinning a comet, JPL's exact name, a body on a skip list), a spacecraft path's plan and its flybys (path_plan.py -- the Hill sphere, JPL's GM, the window and step, the orbiter rule for an arrival, a departure, a capture), a comet whose designation matches its own pieces, a comet on an open path's plan (its span, its TP, its perihelion), an entry asked by JPL's number in the Horizons check, the clock read as UTC (utc_clock), astroquery's saved answers (cache=), a 2xr answer with no figure (n.a.), Pluto's period asked of its barycentre, an ended mission's mission_end (its path stopped on the day it ended), the orrery's drawing of a path by its plan (path_drawing.py, only around the Sun)
 ---
 
 # Horizons and Orbital Mechanics Reference
 
-Read this file in 4 parts: lines 1-202, 203-423, 424-665, 666-713.
+Read this file in 4 parts: lines 1-203, 204-424, 425-676, 677-733.
 
-Skill version: 1.14 | 2026-11-02, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.15 | 2026-11-03, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 81fa7b8a and gallery @ 3a211a8c. v1.15 (L-476) adds A
+Plan Draws a Path Only Around the Sun to How a Path's Events Are Found:
+the orrery's plot now draws a planned path by its plan
+(path_drawing.py), the website's method point for point, solid to today
+and dashed after, and around any other centre both instruments draw it
+as before (Tony, 2026-11-03: "yes and the orrery and the website should
+both follow this"). A plan's inputs carry the day its path is asked
+from and no typed end, since planned entries no longer carry one. Read
+from path_plan.py, path_drawing.py and the website's builder at
+3a211a8c, and Galileo drawn from JPL on 2026-11-03, before it was
+written.
+Earlier: 1.14 | 2026-11-02, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 15dc8e34. v1.14 (L-507) adds An Ended Mission Ends on
 Its mission_end to How a Path's Events Are Found: JPL's last day is not
 always the mission's (Galileo's runs nine days past its impact, on a
@@ -31,22 +43,11 @@ Period Depends on Its Centre, Pluto's period is asked of the
 Pluto-Charon barycentre (Tony, 2026-10-29: "Centre of mass"). Each
 fact was read from the code at 571b9bf4 and b55109f2, and JPL's
 answers fetched, before it was written.
-Earlier: 1.12 | 2026-10-26, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 5398439. v1.12 (L-443, slice 2, build B part 2) adds A
-Comet on an Open Path to How a Path's Events Are Found: a comet marked
-open_path is planned by Tony's span ruling of 2026-10-24, from a year
-before its perihelion to a year after today, inside JPL's data; its
-record's TP, read from its data sheet in either of JPL's two forms, only
-places the first ask; the perihelion is found in JPL's daily positions
-and refined to the minute, and is the plan's one event. Comets are not
-among the bodies the spacecraft plans search, so keying them did not
-remake those. And to Where the Check Lives: an entry asked by a
-designation that is JPL's number is looked for in the small-body index
-by that number, and a path serves no period to confirm.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there on
 2026-10-12, 2026-10-13 and 2026-10-14 (L-431), 2026-10-15 (L-444,
 L-445), 2026-10-22 (L-443), 2026-10-24 (L-443), 2026-10-25 (L-443),
-2026-10-26 (L-443), 2026-10-29 (L-504) and 2026-11-02 (L-507).
+2026-10-26 (L-443), 2026-10-29 (L-504), 2026-11-02 (L-507) and
+2026-11-03 (L-476).
 
 ## Contents
 
@@ -543,7 +544,10 @@ first run against JPL is Tony's.
   website use one rule. Its steps stop at six hours; where the ideal is
   a day or more the step is whole days, never more than the ideal.
 - THE 30-DAY CYCLE. A plan is made again when it is 30 days old, or at
-  once when its inputs change (id, id_type, span, the bodies searched).
+  once when its inputs change: the id, id_type, the day the path is
+  asked from (the list's start_date) and the bodies searched. Not a
+  typed end since v1.15 (L-476): JPL names where a path ends, and a
+  planned entry carries no end_date (test_path_plan.py check 19).
   Events more than 30 days old are carried, not asked again, and the
   search starts 3 days before them; a path whose span ended before that
   asks nothing. A failure to reach JPL keeps every plan as it was and
@@ -593,6 +597,22 @@ first run against JPL is Tony's.
   Cassini flies past Venus twice, Earth (1999-08-18) and Jupiter
   (2000-12-30, 9.8 million km) and arrives at Saturn (2004-07-01),
   staying. `test_path_plan.py` check 18, with a planted fault.
+- A PLAN DRAWS A PATH ONLY AROUND THE SUN (v1.15, L-476; Tony,
+  2026-11-03, 12:06 Chicago: "yes and the orrery and the website should
+  both follow this"). A backbone at 7 days thinned at 0.02 AU is worked
+  in distances around the Sun; centred on Jupiter it would erase Juno's
+  orbits. So both instruments draw a planned path by its plan only in a
+  Sun-centred view, and around any other centre as before, in the
+  orrery now and in the website's planet rooms when they come. The
+  orrery's drawing is path_drawing.py (draw_plan), the website's
+  fetch_path_by_plan point for point without its daily tail and
+  last-day pair, solid to today by utc_clock and dashed after, one
+  legend entry; its whole-path plot and the animation's full mission
+  use it. Every reader of a planned entry's dates asks
+  path_drawing.entry_span, which reads the plan, and the GUI's labels
+  are written from it (span_label). Checked against JPL by
+  test_path_drawing.py --galileo: Galileo's 303 points equal the
+  website's served file but for its last-day pair.
 - A LONG RUN PRINTS AS IT GOES, SAVES AS IT GOES, AND KEEPS UNDER THE
   MAINTENANCE RUN'S 15 MINUTES (Tony, 2026-10-24, after a first preview
   sat 20 minutes on a blank window). A first line before JPL is asked

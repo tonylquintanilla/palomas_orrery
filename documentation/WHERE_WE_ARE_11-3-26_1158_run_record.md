@@ -192,3 +192,196 @@ So the next concrete step after your push is the brief for Build 1, written by a
 
 **Session: OPEN: 11-3-26 1255: Opus: Code: Orrery plots by path plan**
 
+All seven skills match the manifest. Now reading the sections that govern this build.
+
+Skills read. Now the ledger's L-476 entry, then the map.
+
+Mapping the plot code that draws spacecraft paths; no edits yet.
+
+Reading the website's plan-drawing code, which is the reference the orrery's copy must match.
+
+Found a snag worth checking before I build: the plan's own fingerprint includes the typed end date. Checking what the stored plans hold.
+
+I'll rewrite the stored fingerprints plan by plan so removing the end date doesn't trigger regenerating every spacecraft plan. Now listing which entries are planned.
+
+Still mapping; the plan-drawing check will compare against the website's served Galileo file, so reading that now.
+
+Now the animation's readers, to see whether it draws the whole path.
+
+Social export copies traces as they are, so a dashed line survives it. Now checking the website's two consumers, read only.
+
+Studio only widens thin lines and the converter keeps every line setting, so a dash survives both. Next: whether the orbit cache could hand a plan path the wrong points.
+
+The orbit cache feeds no whole-path drawing (its plotter is never called), so a plan path and an even-spread path can't be mixed up there. Now the dated checkbox labels.
+
+I have the map. One more check before writing: whether adding a trace in the animation could shift its frames.
+
+Frames update by recorded trace numbers, so an added dashed trace is safe. Checking the constant and time helpers the new module will reuse.
+
+I found that the path plan suite's check 4 depends on the end date being a plan input, so I'll move it to the start date. Now checking how the plans file is written to handle the one-time fingerprint update.
+
+Map done. Writing the plan-drawing module now.
+
+Module written. Trying it live against JPL for Galileo before wiring it in, to see whether it matches the website's served points.
+
+Galileo matches the website point for point: 303 points, and the only difference is the website's two last-day points, as expected. Now the module's own test.
+
+The Galileo check passes and fails on its planted fault, as it should. Wiring the drawing into the orrery's plots now.
+
+Edits go bottom-up in the file so line numbers above stay put. First the dated labels (lowest in the file).
+
+Labels done. Now the animation's whole-path layer.
+
+Replacing the remaining typed-date readers in the plot routine with the plan's span.
+
+Only the unused function (`create_dates_list_for_object`) still reads typed dates in the main file. Now the encounter module and the orbit cache.
+
+Now removing the typed end dates from the 20 planned entries that carry one.
+
+Now the path plan module: its fingerprint stops counting the end date, and it gains the guard.
+
+Now the one-time fingerprint update, checked plan by plan against the old inputs before anything is rewritten.
+
+All 14 spacecraft plans checked out fine, with only that one field updated in the plans file. Next I'll verify the path plan suite, checking move 4 against the start date and confirming guard check 19 is in place.
+
+The path plan suite passes all 31 checks, including the new guard and its planted fault. Adding the new module to the clock check and the new suite to the maintenance run.
+
+Suites pass. Stamping the three edited modules' headers.
+
+The encoding check's shell form didn't work on this system, and one header edit didn't match. Re-checking both with Python.
+
+All files are LF and plain ASCII. Fixing the one header edit that didn't match.
+
+All three stamps landed. Next: the pre-test and a smoke test on the live plot path. First checking how the plot routine shows its figure, so the test can capture it without opening a browser.
+
+Writing the smoke test: it runs a throwaway copy of the orrery with its window loop disabled, plots on the live path, and reads the traces back without opening a browser.
+
+The smoke test is still running (it asks JPL for every path). Meanwhile, checking the objects export, which should be byte-identical.
+
+The export moved two fields only: the fingerprints of the object list file and of the plans file. Checking whether anything on the website pins either.
+
+Nothing on the website reads either fingerprint, so no website check moves. Checking on the smoke test.
+
+The smoke test looks stuck before plotting; reading the start of the plot routine for a dialog that might be waiting.
+
+The pre-fetch step opens a question box about refreshing orbital elements, which waits forever with the window hidden. Stopping the test to answer it in code.
+
+The question comes from a yes/no box in the elements cache. The smoke test will answer every message box automatically ("no, use the cache") in its own process only.
+
+While the smoke test runs, reading the records skill's parts for the ledger and the Where We Are page.
+
+I'll update the horizons-orbital-mechanics skill this session, since without it a future session could wrongly plan a path around Jupiter (which Tony ruled against) and its description of a plan's fingerprint would be outdated. Let me check the skill's header first to match its existing format.
+
+Making the skill edits now (they don't touch the running test).
+
+Manifest rebuilt and the oldest entry moved to the history file. Now the protocol's version entry; reading how the history file takes the entry that moves down.
+
+Protocol entry added (v3.124) and the manifest check passes. Waiting on the smoke test before the maintenance run; checking its progress once.
+
+Tk needs its real event loop running for the plot thread to read the checkboxes. Rewriting the smoke test to run the real loop and drive the plots from inside it.
+
+While the smoke test runs, drafting the records. Reading the L-484 entry (the website-orrery agreement check) and the Where We Are page.
+
+Smoke test still running. Reading your latest run-record copy (Nov 3, 11:58) before writing the records, as the records skill requires.
+
+The plot is still fetching. Meanwhile, confirming the path plan generator sees every plan as current after the fingerprint update, so it asks JPL nothing.
+
+All 28 plans read as current and JPL wasn't asked, so the fingerprint update worked. Writing the L-484 ledger line while the smoke test finishes.
+
+The smoke test has drawn 3I/ATLAS, Voyager 1 and Galileo by their plans. Writing the L-476 ledger record now; the smoke and maintenance results go in when they finish.
+
+The Sun-centred plot looks correct, but the Jupiter-centred Juno plot and the animation case produced no output, so I'll check the logs for both.
+
+The Jupiter-centred Juno did draw as before: 51 points spread evenly across the plan's span. My trace printout just didn't list it. Reading what happened after that case.
+
+The sphere trace for Jupiter's globe has no line mode, which crashed my test printout before it reached the animation case. I'll fix the test and rerun just the Jupiter view and animation.
+
+While that runs, editing the Where We Are page section by section (Signals come after the maintenance run).
+
+The page is updated. Regenerating the ledger's index tables from the edited entries.
+
+Ledger index rebuilt (501 entries, no problems). Reading the website's last cache build for the Signals line.
+
+Signals updated except the Tier-1 count, which comes from the maintenance run. Waiting for the Jupiter and animation smoke test to finish before starting that run.
+
+Jupiter-centred Juno draws as before: 51 evenly spaced points, solid, no plan drawing. The animation case is still running; I'll pick up when it finishes.
+
+The animation is right too: Voyager 1's full mission is solid to today and dashed after, and its plotted period is unchanged. Starting the maintenance run now.
+
+While it runs, adding the smoke test's results to the L-476 ledger entry.
+
+Ledger updated. Waiting for the maintenance run to finish; it takes several minutes.
+
+One check failed: the new suite needs a matching button on the dashboard. Adding it next to the path plan suite's button.
+
+Dashboard check passes now. Rerunning the full maintenance run to read the all-green line.
+
+The maintenance run is going again (about five minutes). I'll read its verdict when it finishes.
+
+Maintenance run is all green: "34 of 34 gating checkers passed", and Tier-1 stays at 0, so the push gate holds. Recording that in the ledger, then reading the session's token count.
+
+The desktop orrery now draws each spacecraft's and comet's whole path the way the website does, from its path plan. Around the Sun, the path is solid up to today and dashed after; around any other body it is drawn as before. This is L-476 (the orrery plots by the plan).
+
+**Skills read**, each matching the version the protocol's skill table expects:
+- horizons-orbital-mechanics 1.14 (now 1.15)
+- orrery-coding-conventions 1.13
+- gallery-cache-builder 1.17
+- provenance-discipline 2.36
+- safe-file-editing 1.14
+- agentic-pre-test 1.3
+- ledger-and-session-records 1.22
+
+**What changed:**
+- **Galileo** now stops at its crash into Jupiter, and **Cassini** ends on 15 September 2017. Both now match the website.
+- **The dates beside 25 spacecraft and comets** in the orrery's window are read from their plans when the window opens. No path's end date is typed by hand any more, and a new check fails if one comes back.
+- **Matches the website point for point:** I drew Galileo from JPL and compared it with the website's file. All 303 points match. The only difference is the website's two extra points on the last day, which the orrery doesn't need. The check also fails when I deliberately break it.
+- **A snag I found and handled:** each plan's fingerprint (the stamp that says when a plan must be made again) included the typed end date. Removing those dates would have forced all 14 spacecraft plans to be fetched from JPL again: half an hour of requests, and new paths on the website the next night. I checked each of the 14 fingerprints against its old inputs, then updated them once. The plan generator now reports all 28 plans current and asks JPL nothing.
+- **Nothing the website serves changed.** The objects export moved only two internal fingerprints, and nothing on the website reads either.
+- **Your rule of today** is now written into the orbital-mechanics skill (version 1.15) and the protocol (v3.124). The rule is that a plan draws a path only around the Sun, in both instruments.
+
+**Tests:**
+- I ran the plots on a throwaway copy of the orrery. Around the Sun, Galileo was all solid, and Voyager 1, Juno and 3I/ATLAS turned dashed after today. Pioneer 10, which has no plan, was unchanged. Juno centred on Jupiter drew evenly spaced points as before. The animation's full-mission path is solid, then dashed.
+- The maintenance run's last line reads "34 of 34 gating checkers passed", and Tier-1 is 0, so the push gate holds. Its first run correctly failed one check, because the new test had no dashboard button. I added the button.
+
+**Files changed** (for your run record):
+- ok path_drawing.py (new: draws a path by its plan)
+- ok test_path_drawing.py (new: its test, plus the live Galileo check)
+- ok palomas_orrery.py (40 edits, 25 of them the labels)
+- ok celestial_objects.py (21 edits)
+- ok path_plan.py (7 edits)
+- ok test_path_plan.py (6 edits)
+- ok data/path_plans.json (14 edits, the fingerprints)
+- ok skills/horizons-orbital-mechanics/SKILL.md (6 edits)
+- ok PROJECT_INSTRUCTIONS.md (4 edits, plus the regenerated skill table)
+- ok palomas_orrery_dashboard.py (3 edits)
+- ok orbit_data_manager.py (2 edits)
+- ok spacecraft_encounters.py (2 edits)
+- ok test_orbit_cache.py (2 edits)
+- ok orrery_maintenance_run.py (2 edits)
+- ok documentation/PROJECT_INSTRUCTIONS_HISTORY.md (1 edit)
+- ok documentation/SKILL_HISTORIES.md (1 edit)
+- ok LEDGER_CONSOLIDATED.md (4 edits, plus the regenerated index)
+- ok documentation/WHERE_WE_ARE.md (10 edits, by section)
+- Written by the maintenance run: data/objects_export.json, DATA_INVENTORY.md, EXACT_ROWS_PRINTED.md, MODULE_ATLAS.md, MODULE_INDEX.md, PROVENANCE_AUDIT.md, WORKSHEET_CHECK.md, data/provenance_history.json, documentation/prompts/citation_review.jsonl
+
+**Token count:** Claude Code's `/cost` isn't available in this app. The session's context reads 416,895 tokens in use, out of a 1,000,000 window (Claude Opus 5.5); it gives no input/output split.
+
+**Your run order:**
+1. Open `palomas_orrery.py` in VS Code and click Run.
+2. Tick Voyager 1, Juno, Galileo, 3I/ATLAS and Pioneer 10, keep the centre on the Sun, and click Plot. Look for:
+   - Voyager 1 dashed after today. -- actually the spacecraft is within the dashed line
+   - Juno dashed from today to 2 September 2028. -- yes
+   - Galileo all solid, ending at Jupiter. -- yes
+   - 3I/ATLAS dashed after today. -- the object is within the dashed line. 
+   - Pioneer 10 as before. -- spacecraft is outline the filled line. there is no dashed line. 
+   - A box may ask about refreshing 3I/ATLAS's orbit numbers; answer as you usually do.
+3. Untick everything except Juno, set the centre to Jupiter, and Plot. It should look as before. -- i can't determine
+4. Commit and push the orrery in GitHub Desktop.
+
+**Tony-action rollup:**
+- (do) Look at the six plots, above.
+- (do) Commit and push the orrery.
+- (do) Settings > Skills: reinstall horizons-orbital-mechanics. -- done
+- (do) Paste v3.124 into the Project's instructions on claude.ai. -- done
+- (decide, not urgent) Whether the unused date function `create_dates_list_for_object` goes.
+- For the L-484 talk: three comets (Tsuchinshan, Wierzchos, ATLAS C/2024 G3) are drawn by the orrery as ellipses and by the website as paths.

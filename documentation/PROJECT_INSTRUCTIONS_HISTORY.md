@@ -4017,6 +4017,45 @@ resident.
 (Moved down from the resident protocol on 2026-11-02 when
 v3.123 made a fourth entry.)
 
+v3.121 (November 2, 2026): ONE rule added to this document: Token
+Economy [QUALITY], in Part 2 after Method Belongs to the Skill, with
+two rows in the Anti-Patterns table. No skill bump. TOKENS SPENT WHERE
+THEY BUY VERIFICATION OR A DECISION, AND COUNTED.
+
+WHAT PROMPTED IT. Tony, Nov 2, 09:24 Chicago, in the coordinating
+session (Claude Fable 5.1, orrery fd3551cc and gallery b7ddf775 read
+live), after it had written a 176-line brief for a Code session to
+change one marker symbol and dropped it when he asked for a patch
+instead: "I am becoming very concerned about the environmental cost
+of token generation ... I would like to make part of our protocol
+token economy." Asked whether the rule should carry a measured half,
+a token count in every Code report and run record: "yes" (09:29).
+
+WHAT CHANGED. The section's one sentence and its seven instances: the
+smallest instrument; no speculative documents; a skill read in the
+parts the job needs; tool output sliced, not loaded; records at the
+reader's length; cross-model review for domain uncertainty; and the
+count, as Claude Code prints it, in the report and in the run record.
+The orrery's CLAUDE.md, the Code door, amends two sentences to match:
+a skill is read in full when its rules govern the work and in parts
+otherwise, and the report ends with the count. L-506 opens for it.
+ledger-and-session-records carries the shape of the count in the
+report and the run record at its next version, the records session's.
+
+THE OBLIGATION TRAVELS. The Project's instructions on claude.ai read
+v3.120 until Tony pastes this version in; a chat session reads the
+Project page, so the rule reaches chat sessions only then. No skill
+changed; nothing to reinstall.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.118 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-11-03 when
+v3.124 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

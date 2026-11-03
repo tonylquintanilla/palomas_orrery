@@ -32,9 +32,13 @@ WHAT A PLAN IS
                 JPL itself: the path is asked from the entry's start_date
                 (the launch) to the year 2100, and clipped to the limits
                 JPL names when it refuses ("No ephemeris for target ...
-                after A.D. 2028-SEP-02"). The list's end_date is not
-                used: on 2026-10-24 Juno's and Psyche's ran past JPL's
-                data and New Horizons' stopped 21 years short of it. The
+                after A.D. 2028-SEP-02"). A planned entry carries no
+                end_date since L-476 (2026-11-03): on 2026-10-24 Juno's
+                and Psyche's typed ends ran past JPL's data and New
+                Horizons' stopped 21 years short of it, so the orrery's
+                plot and labels read the span from here
+                (path_drawing.py), and typed_ends names any that comes
+                back. The
                 part after today is JPL's planned trajectory; nothing is
                 extended here. A mission that has ended carries
                 'mission_end', the day it ended as NASA's own page states
@@ -139,8 +143,8 @@ HOW AN EVENT IS FOUND
 THE 30-DAY CYCLE, AND WHAT IT ASKS
 
     Only what is due. A plan is made again when it is 30 days old, or at
-    once when what it was made from changed (the id, its type, the span,
-    or the bodies searched). A plan made again keeps the events it found
+    once when what it was made from changed (the id, its type, the day it
+    is asked from, or the bodies searched). A plan made again keeps the events it found
     more than 30 days before today, which JPL has already reconstructed,
     and looks again from three days before that onward: the planned
     part is what JPL revises. So most runs ask JPL nothing.
@@ -215,6 +219,12 @@ Module updated: November 2, 2026 with Anthropic's Claude Opus 5.5
 (L-507, historical missions: an ended mission's 'mission_end' ends its
 span, and is among its plan's inputs only where it is set, so no other
 plan is made again; see WHAT A PLAN IS).
+Module updated: November 3, 2026 with Anthropic's Claude Opus 5.5
+(L-476: a plan's inputs carry the day its path is asked from and no
+longer the list's typed end_date, which planned entries no longer have;
+typed_ends names any that comes back, and the plans file's fingerprints
+were carried to the new inputs once, by hand, so no plan was made again
+for it; the plan is drawn in the orrery by path_drawing.py).
 """
 
 import ast
@@ -710,14 +720,27 @@ def window_and_step(jd, dist_km, v_kms):
 # ------------------------------------------------------------- planning
 
 def plan_inputs(path, bodies):
+    # The day the path is asked from, and not a typed end: JPL names where
+    # a path ends, and since L-476 (2026-11-03) a planned entry carries no
+    # end_date (typed_ends).
     inputs = {"rule": RULE, "id": path["id"], "id_type": path.get("id_type"),
-              "span": [ymd(path["start_date"]), ymd(path["end_date"])],
+              "start": ymd(path["start_date"]),
               "searched": [b[2] for b in bodies]}
     # Only where it is set, so the plans of missions still flying keep
     # their fingerprint and are not made again (L-507).
     if path.get("mission_end"):
         inputs["mission_end"] = ymd(path["mission_end"])
     return inputs
+
+
+def typed_ends(entries):
+    """[name] of every path this module plans (a keyed spacecraft, or a
+    comet on an open path) whose entry carries a typed 'end_date'. Its
+    span is its plan's (path_drawing.entry_span), so a typed end is a
+    second copy that goes stale against JPL (L-476); test_path_plan.py
+    fails on any."""
+    return [f["name"] for f in entries
+            if (is_spacecraft(f) or is_comet_path(f)) and "end_date" in f]
 
 
 def inputs_sha256(inputs):
@@ -747,7 +770,8 @@ def search_start(path, previous, inputs, today, start=None, end=None):
         start = (datetime.date.fromisoformat(span["start"]) if span
                  else path["start_date"].date())
         end = (datetime.date.fromisoformat(span["end"]) if span
-               else path["end_date"].date())
+               else (path["mission_end"].date() if path.get("mission_end")
+                     else FAR_STOP))
     if (previous is None
             or previous.get("inputs_sha256") != inputs_sha256(inputs)):
         return start, []
@@ -1129,10 +1153,10 @@ def run(root, fetch, today, check_all=False, pause=PAUSE_SECONDS,
     todo = []
     for f in paths:
         key = f["key"]
-        if not f.get("start_date") or not f.get("end_date"):
+        if not f.get("start_date"):
             not_planned.append(key)
-            lines.append("  %-22s NOT PLANNED: the entry has no start_date "
-                         "or end_date" % key)
+            lines.append("  %-22s NOT PLANNED: the entry has no start_date"
+                         % key)
             continue
         inputs = plan_inputs(f, bodies)
         is_due, why = due(plans.get(key), inputs, today)

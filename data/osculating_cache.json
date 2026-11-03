@@ -871,25 +871,64 @@
   },
   "3I/ATLAS": {
     "elements": {
-      "a": -0.2639353538137568,
-      "e": 6.139311027021769,
-      "i": 175.1131066568337,
-      "omega": 128.0082001729325,
-      "Omega": 322.1561096899903,
-      "epoch": "2025-10-15 17:52 osc.",
-      "TP": 2460977.982533267,
-      "MA": -99.85827116105455,
-      "TA": 338.0679782592827,
-      "solution_TP": 2460977.9952628477
+      "a": -0.2638851402303056,
+      "e": 6.123458886514103,
+      "i": 175.2402883456047,
+      "omega": 128.7967125414429,
+      "Omega": 323.0249275184784,
+      "epoch": "2026-11-03 19:35 osc.",
+      "TP": 2460977.940749498,
+      "MA": 2692.920899474911,
+      "TA": 92.412091137462,
+      "solution_TP": 2460977.941795881
     },
     "metadata": {
-      "fetched": "2026-06-10T06:20:59.048232",
+      "fetched": "2026-11-03T19:38:55.286908+00:00",
       "source": "JPL Horizons",
-      "solution_date": "2026-06-10",
+      "solution_date": "2026-11-03",
       "horizons_id": "C/2025 N1",
       "display_name": "3I/ATLAS",
       "refresh_interval_days": 1,
       "center_body": "@sun"
+    },
+    "period": {
+      "days": null,
+      "open_orbit": true,
+      "center": "@sun",
+      "epoch": "2026-11-03 19:35",
+      "fetched": "2026-11-03",
+      "source": "JPL Horizons PR (sidereal orbit period)",
+      "year_change_days": null,
+      "year_step_days": 365.25,
+      "sbdb_sigma_days": null,
+      "sbdb_status": "open orbit; SBDB not asked",
+      "sbdb_fullname": null,
+      "error_days": null,
+      "error_from": null,
+      "test": {
+        "@sun": null,
+        "@0": null,
+        "run": "2026-11-03"
+      },
+      "horizons_targetname": "ATLAS (C/2025 N1)",
+      "target": "C/2025 N1",
+      "target_label": null,
+      "agrees_with_elements_fetch": null,
+      "elements_fetch_not_compared": null,
+      "elements": {
+        "a": -0.2638851402303056,
+        "e": 6.123458886514103,
+        "i": 175.2402883456047,
+        "omega": 128.7967125414429,
+        "Omega": 323.0249275184784,
+        "TP": 2460977.940749498,
+        "MA": 2692.920899474911,
+        "TA": 92.412091137462,
+        "q": 1.352004666731979,
+        "epoch": "2026-11-03 19:35 osc."
+      },
+      "elements_fetch_days": null,
+      "elements_fetch_center": "@sun"
     }
   },
   "Voyager 1": {
