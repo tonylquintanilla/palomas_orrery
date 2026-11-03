@@ -17,6 +17,10 @@ WHAT IT CHECKS
       3. Solid to now and dashed after, the two lines meeting at the
          last point before now, one legend entry between them.
       4. A planned entry's checkbox label is its plan's span.
+      5. The daily tail around now: on a straight run, where the
+         thinning keeps no point near now, the solid part still ends
+         within five minutes of now. Planted fault: the tail turned off,
+         and the solid part ends at the flyby, two months back.
 
     Live, by hand (python test_path_drawing.py --galileo): Galileo drawn
     by its plan from JPL now gives the same moments, to the microday, as
@@ -34,6 +38,8 @@ RUN COMMAND
 
 Module created: November 3, 2026 with Anthropic's Claude Opus 5.5
 (L-476).
+Module updated: November 3, 2026, evening, with Anthropic's Claude Opus
+5.5 (L-476: check 5, the daily tail, and its planted fault).
 """
 
 import datetime
@@ -140,6 +146,34 @@ def offline():
     check(pd.span_label("craft", plans) == "(2025-01-01 to 2025-07-01)",
           "4. a planned entry's label is its plan's span (%s)"
           % pd.span_label("craft", plans))
+
+    gap = solid_gap()
+    check(gap is not None and gap <= 5.0,
+          "5. on a straight run the solid part ends at now: its last "
+          "point %s minutes before now" % gap)
+    saved = (pd.TAIL_BEHIND_DAYS, pd.TAIL_AHEAD_DAYS, pd.TAIL_LEAD_MINUTES)
+    pd.TAIL_BEHIND_DAYS = pd.TAIL_AHEAD_DAYS = pd.TAIL_LEAD_MINUTES = 0
+    try:
+        bad = solid_gap()
+    finally:
+        (pd.TAIL_BEHIND_DAYS, pd.TAIL_AHEAD_DAYS,
+         pd.TAIL_LEAD_MINUTES) = saved
+    check(bad is not None and bad > 1440.0,
+          "5. planted fault caught: with the tail turned off the solid "
+          "part ends %s minutes before now" % bad)
+
+
+def solid_gap():
+    """Minutes from the solid part's last point to now, for PLAN drawn
+    on FakeJPL with now in its straight run, two months after the
+    flyby; None when nothing is solid."""
+    now = datetime.datetime(2025, 5, 10, 12, 0)
+    pts = pd.draw_plan({"key": "craft", "name": "Craft", "id": "-1",
+                        "id_type": "id"}, PLAN, fetch=FakeJPL(), now=now)
+    solid, dashed = pd.split_at(pts, now)
+    if not solid or not dashed or dashed[0] is not solid[-1]:
+        return None
+    return (now - solid[-1]["date"]).total_seconds() / 60.0
 
 
 def galileo(plant=False):

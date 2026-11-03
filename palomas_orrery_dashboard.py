@@ -28,6 +28,8 @@ July 2026: split the monolithic ctk.CTk dashboard into an embeddable
 CTkFrame plus a thin standalone-window wrapper, so palomas_orrery.py can
 import the dashboard into its own third GUI column without duplicating
 the launch-card / status-log UI code.
+Module updated: November 3, 2026 with Anthropic's Claude Opus 5.5
+(L-476: the Path Drawing Suite's line, 7 checks, two planted faults).
 July 2026: added Linux Button-4/5 wheel scrolling to match columns 1/2's
 cross-platform coverage (CTkScrollableFrame's built-in handling only
 covers Windows/Mac <MouseWheel>). Audited LAUNCH_GROUPS against both
@@ -1738,8 +1740,9 @@ LAUNCH_GROUPS = {
          "The orrery's drawing of a path by its plan, with no network: a "
          "planned entry's span read from its plan, a flyby's bend kept "
          "through the thinning, the path solid to today and dashed after, "
-         "and the checkbox label from the plan; one planted fault caught. "
-         "Ends on \"PATH DRAWING SUITE: 5 of 5 checks passed\" (L-476).",
+         "the checkbox label from the plan, and the solid part ending at "
+         "today on a straight run; two planted faults caught. "
+         "Ends on \"PATH DRAWING SUITE: 7 of 7 checks passed\" (L-476).",
          SCRIPT_DIR,
          True,
          None,

@@ -3568,7 +3568,41 @@ with a planted fault; where its exceptions live.
     on the push gate. Its first run failed Dashboard parity, correctly:
     the new suite had no button. "Path Drawing Suite" now has one, with
     its short line (`palomas_orrery_dashboard.py`).
-**Gap (replaces the one below, 2026-11-03, afternoon):** Tony's Mode 5
+- **2026-11-03, afternoon: Tony's look**
+  (`documentation/WHERE_WE_ARE_11-3-26_1158_run_record.md`). Juno
+  dashed to 2028-09-02, and Galileo solid to Jupiter: "yes". Voyager 1:
+  "the spacecraft is within the dashed line"; 3I/ATLAS: "the object is
+  within the dashed line". Read from his saved plot
+  (solar_system_20261103_1934): Voyager 1's solid part ended at 135.8
+  AU and its dashed part ran on from there, with the spacecraft at
+  172.2 AU; 3I/ATLAS's solid part ended at 7.4 AU, the comet at 13.0
+  AU. The cause is the brief's, which told the build to leave out the
+  website's daily tail: on a straight run the thinning keeps no point
+  near today, so the line turned dashed at the last point kept. Juno
+  passed because its path curves near today.
+- **Fixed the same evening** in `patch_L476_2_tail_at_today.py`, by the
+  coordinating session (Claude Opus 5.5) on orrery 329f4ec8:
+  `draw_plan` adds the website's daily tail, 7 days behind today and 2
+  ahead, so the solid part ends within minutes of now;
+  `test_path_drawing.py` check 5, with a planted fault (7 of 7).
+- **Pioneer 10**, "outline the filled line": it has no plan, and its
+  typed end is 2002-03-03, so its line stops at 79.8 AU and its marker
+  is at today's 142.2 AU. As before this build; for historical
+  missions' next slice (L-507).
+- **Juno centred on Jupiter**, "i can't determine": the saved plot
+  (solar_system_20261103_1952_juno) shows 51 evenly spaced points, one
+  solid line and no dash, which is the drawing before this build.
+- **Carried for horizons-orbital-mechanics' next version:** A Plan
+  Draws a Path Only Around the Sun says the orrery's drawing is the
+  website's "without its daily tail and last-day pair"; it now keeps
+  the tail and leaves out only the last-day pair.
+**Gap (replaces the one below, 2026-11-03, evening):** Tony's look at
+Voyager 1 and 3I/ATLAS after `patch_L476_2`: each marker at the end of
+the solid part. Whether `create_dates_list_for_object`, called from
+nowhere, goes. Still open for L-484's talk: three planned comets the
+orrery draws as ellipses (Tsuchinshan, Wierzchos, ATLAS C/2024 G3),
+which the website draws as paths.
+**Gap (superseded above, 2026-11-03, evening; replaced the one below, 2026-11-03, afternoon):** Tony's Mode 5
 look at five Sun-centred plots (Voyager 1, Juno, Galileo, 3I/ATLAS,
 Pioneer 10) and one Jupiter-centred Juno; whether
 `create_dates_list_for_object`, called from nowhere, goes. Still open

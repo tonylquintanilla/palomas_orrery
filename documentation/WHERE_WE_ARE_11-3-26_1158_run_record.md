@@ -380,8 +380,275 @@ The desktop orrery now draws each spacecraft's and comet's whole path the way th
 
 **Tony-action rollup:**
 - (do) Look at the six plots, above.
-- (do) Commit and push the orrery.
+- (do) Commit and push the orrery. -- 329f4ec8fc175f20bf7151a081b5aeb222601efa
 - (do) Settings > Skills: reinstall horizons-orbital-mechanics. -- done
 - (do) Paste v3.124 into the Project's instructions on claude.ai. -- done
 - (decide, not urgent) Whether the unused date function `create_dates_list_for_object` goes.
 - For the L-484 talk: three comets (Tsuchinshan, Wierzchos, ATLAS C/2024 G3) are drawn by the orrery as ellipses and by the website as paths.
+
+================================================================
+
+**Session: OPEN: 11-3-26 1017: Opus: Coordinator: Orrery plot build order L476**
+
+You were right about Voyager 1 and 3I/ATLAS. The line turned dashed years before today, and the mistake was in my brief. `patch_L476_2_tail_at_today.py` fixes it.
+
+**What went wrong:**
+- **Voyager 1:** in your 19:34 plot, the solid line ends at 135.8 AU, about ten years ago, and the dashed line starts there. The spacecraft is at 172.2 AU, so its marker sits inside the dashed part.
+- **3I/ATLAS:** same problem. The solid line ends at 7.4 AU, and the comet is at 13.0 AU.
+- **Why:** the drawing drops points where a path runs nearly straight. That left no point near today, so the line switched to dashed at the last point it kept.
+- **Whose mistake:** the website adds a short run of daily positions around today. My brief told the build to leave that out. Juno looked right only because its path curves, so points near today were kept.
+
+**The two you weren't sure about:**
+- **Juno centred on Jupiter:** your plot shows 51 evenly spaced points, one solid line and no dashes. That is how it was drawn before this build, so it passes.
+- **Pioneer 10:** its line stopping short of the marker is old behaviour. It has no plan, and its typed end date is 2002-03-03. So the line stops at 79.8 AU, while the marker shows where it is today, at 142.2 AU. I've noted it on L-476 for the next historical missions slice.
+
+**The fix:** the patch adds the website's daily positions, 7 days back and 2 ahead, so the solid line ends where the spacecraft is now. It also adds a test that fails if those positions go missing, with a deliberate fault to prove the test can fail. It records your look on L-476 (the orrery plots by the path plan).
+
+**What I checked:**
+- I ran the patch on a copy of your pushed code: 7 of 7 checks passed.
+- With the new positions switched off, the new check failed, as it should.
+- Running the patch a second time refused and wrote nothing.
+
+**Not yet checked:** a plot against JPL's real data. That's your step 2 below.
+
+**One thing the patch leaves alone:** one sentence in the orbital-mechanics skill still says the drawing leaves out the daily positions. Fixing it means a new skill version, so it's noted on L-476 for the skill's next version.
+
+Your steps, also printed by the patch:
+1. Save the patch in the orrery's root folder and click Run.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L476_2_tail_at_today.py
+ok  path_drawing.py: backbone's thinning, so a flyby is never thinned away. The w
+ok  path_drawing.py: Module created: November 3, 2026 with Anthropic's Claude Opu
+ok  path_drawing.py: WINDOW_THIN_FRACTION = 0.01
+ok  path_drawing.py: def draw_plan(obj, plan, fetch=None):
+ok  path_drawing.py: points.update(got)
+ok  test_path_drawing.py: 4. A planned entry's checkbox label is its plan's span.
+ok  test_path_drawing.py: Module created: November 3, 2026 with Anthropic's Claude Opu
+ok  test_path_drawing.py: % pd.span_label("craft", plans))
+ok  palomas_orrery_dashboard.py: "and the checkbox label from the plan; one planted fault cau
+ok  palomas_orrery_dashboard.py: the launch-card / status-log UI code.
+ok  LEDGER_CONSOLIDATED.md: **Gap (replaces the one below, 2026-11-03, afternoon):** Ton
+stamps updated: path_drawing.py, test_path_drawing.py and palomas_orrery_dashboard.py (Module updated lines)
+patch applied (2440776 bytes, 4 files)
+
+Do next, in order:
+  1. Open test_path_drawing.py and click Run. It should end on
+     "PATH DRAWING SUITE: 7 of 7 checks passed".
+
+[PATH PLAN] Craft: 5 points by its plan made 2026-11-03, 2025-01-01 to 2025-07-01
+[PATH PLAN] Craft: 4 points by its plan made 2026-11-03, 2025-01-01 to 2025-07-01
+[PATH PLAN] Craft: 15 points by its plan made 2026-11-03, 2025-01-01 to 2025-07-01
+[PATH PLAN] Craft: 5 points by its plan made 2026-11-03, 2025-01-01 to 2025-07-01
+  ok    1. a planned entry's span is its plan's (2025-01-01 00:00:00 to 2025-06-30 23:58:51); an unplanned entry's is its typed dates
+  ok    2. the flyby's bend is kept (highest y 0.0050 AU of 0.005, 5 points) and JPL is asked 2 times, inside the span
+  ok    2. planted fault caught: a window thinned a thousand times coarser loses the bend (highest y 0.0000 AU)
+  ok    3. solid to now and dashed after, meeting at 2025-03-02 00:00:00, one legend entry
+  ok    4. a planned entry's label is its plan's span ((2025-01-01 to 2025-07-01))
+  ok    5. on a straight run the solid part ends at now: its last point 2.0 minutes before now
+  ok    5. planted fault caught: with the tail turned off the solid part ends 98640.0 minutes before now
+
+PATH DRAWING SUITE: 7 of 7 checks passed
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  2. Run palomas_orrery.py, tick Voyager 1 and 3I/ATLAS, centre
+     on the Sun, and Plot. Each marker should sit where the
+     solid line turns dashed. -- yes
+  3. Run the maintenance run from the dashboard and read its
+     last line: all gating checkers passed, Tier-1 0. 
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261103T191224Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 5.3s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Skill manifest               0.4s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             4.0s  unchanged (1 checked, not written)
+  Period fetch                 0.5s  unchanged (1 checked, not written) --
+                                     NOTHING MISSING -- 92 served objects
+                                     examined, no query asked
+  Horizons check               0.6s  unchanged (2 checked, not written) --
+                                     NOTHING DUE -- 92 entries and 26 sheets
+                                     current, no query asked
+  Path plan                    0.6s  unchanged (1 checked, not written) -- 28
+                                     paths, events atlas_2024_g3 1, atlas_3i 1,
+                                     bepicolombo 35, borisov_2025_v1 1,
+                                     borisov_2i 1, c2025_k1 1, c2025_k1_b 1,
+                                     c2025_k1_c 1, c2025_k1_d 1, cassini 7,
+                                     europa_clipper 5, galileo 7, juice 10, juno
+                                     4, lucy 7, mcnaught 1, new_horizons 2,
+                                     osiris_apex 13, oumuamua 1,
+                                     panstarrs_2025_r3 1, parker_solar_probe 49,
+                                     psyche_spacecraft 2, solar_orbiter 31,
+                                     tsuchinshan_atlas 1, voyager_1 2, voyager_2
+                                     5, west 1, wierzchos 1. Asked JPL for:
+                                     nothing.
+  Objects export               0.4s  unchanged (1 checked, not written)
+  Drawings export              2.7s  unchanged (8 checked, not written)
+  Module atlas                10.1s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               5.2s  rewrote DATA_INVENTORY.md
+  Exact rows report            4.6s  rewrote EXACT_ROWS_PRINTED.md -- 11 of 46
+                                     exact rows printed at 40 lines (25 orrery,
+                                     15 gallery); 12 drawn only, 3 not followed,
+                                     0 map entries broken
+  Document index               0.2s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.3s  No changes to constants_new.py since HEAD.
+  Constants relations          0.3s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              2.4s  No figure count exceeds its inputs: 39
+                                     derived row(s) read, 32 judged OK -- 32 OK,
+                                     7 NOT YET MIGRATED; 23 conversion(s)
+                                     checked.
+  Constants export check       3.9s  Export matches the store: sha256
+                                     f35f649c4c53 on both sides; 233 rows
+                                     re-read, 57 not exported, 46 tokens; 830
+                                     conversions re-computed, 12 of 12 worked
+                                     cases hold; 233 citations worked out again,
+                                     8 of 8 worked cases hold.
+  Constants rounding           0.1s  PASS -- 7 of 7 pins held; 2 of 2 planted
+                                     faults caught by name.
+  Objects export check         0.4s  pass
+  Horizons confirmations       0.4s  pass -- 92 of 92 entries and 63 periods
+                                     confirmed, 26 sheets read, within 30 days
+  Horizons check suite         0.9s  pass -- 81 checks, every planted fault
+                                     caught by name
+  Period fetch suite           3.0s  pass -- 39 checks, every planted fault
+                                     caught (22 planted, 8 of them for Earth's
+                                     period, L-445, 2 for Pluto's, L-443)
+  Path plan suite              4.7s  31 of 31 checks passed
+  Path drawing suite           0.4s  7 of 7 checks passed
+  Skill headers                0.2s  12 skills parsed, no consistency problems.
+  Exact rows by the count      4.7s  PASSING -- 11 printed exact rows each state
+                                     a count; 25 orrery lines print through
+                                     exact_text() or row_text(); 15 gallery lines
+                                     are served the count
+  Dimensions                   2.4s  No unit contradicts its arithmetic: 62
+                                     derived row(s) read -- 53 OK, 6 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.1s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.1s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 228 status lines in constants_new.py are
+                                     well formed; 59 rows carry none.
+  Row shape                    0.1s  All 290 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.3s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Scanner row run (L-414)      0.2s  16 of 16 pins hold -- each row reads its own
+                                     comment run, declared rows are named, the
+                                     gate path is read by name.
+  Reset completeness          22.1s  PASS -- all 309 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                  2.4s  All 12 orbit cache tests passed: cache
+                                     loads, old formats convert, corrupted
+                                     entries are dropped; the clock reads UTC and
+                                     both forms of the fetched stamp read back;
+                                     nothing left behind.
+  Earth pole of date           0.4s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Hills cloud sampler (L-421)    1.0s  PASS -- 6 of 6 planted faults caught; the
+                                     real rows pass, the dots' plane tilted 34.0
+                                     deg
+  Drawings export check       63.2s  PASS -- 22 of 22 planted faults caught;
+                                     hills_cloud 3600 dots, plane tilted 31.0
+                                     deg, sha256 4d3e85616645; van_allen_belts
+                                     3200 dots, no plane recorded, sha256
+                                     75274e84f840; earth_exosphere 1500 dots, no
+                                     plane recorded, sha256 6112639fb2cd;
+                                     sun_corona 2500 dots, no plane recorded,
+                                     sha256 e2b57ccbc8a4; zodiacal_dust 3000
+                                     dots, no plane recorded, sha256
+                                     995f13a056e8; outer_oort_cloud 2736 dots, no
+                                     plane recorded, sha256 2f7ab88ee113;
+                                     galactic_tide 5000 dots, no plane recorded,
+                                     sha256 950a7511f0b5; main_belt 6000 dots, no
+                                     plane recorded, sha256 712caffec391
+  Position digits (L-401)      2.9s  PASS -- 16 of 16 planted faults caught by
+                                     name; 25 hovers examined, 197 lines compared
+                                     against their errors; 5 pairs printed the
+                                     same from either end; 499 hovers of every
+                                     listed object from the Sun, Earth and
+                                     Neptune; 3 recorded 2xr answers read by
+                                     column name; 10 period sentences
+  Orbit markers (L-431, L-401)   10.4s  PASS -- 12 of 12 planted faults caught by
+                                     name; 4 ellipses, 1080 drawn points on their
+                                     period's centre; 14 markers, 9 dates, 53
+                                     printed distances against their errors; 6
+                                     elements as given; 3 Keplerian positions
+                                     half a year on; 1 parameters-window date
+                                     pairs; 2 Moon arcs; 2 perturbation checks; 1
+                                     perihelion osculating orbits; 2 frames; 2
+                                     sources read
+  Domain Split                 0.5s  PASS -- 6 of 6 planted faults caught; the
+                                     split reads each module's Domain: tag and
+                                     prints the same on the console, in the audit
+                                     and in the run history.
+  Maintenance report (L-269)    0.7s  PASS -- 15 of 15 planted faults caught by
+                                     name; 4 summaries; 2 risen file(s) named; 13
+                                     night-gate cases
+  Dashboard parity             0.4s  PASS -- 10 of 10 planted faults caught; 95
+                                     steps matched to their buttons by name and
+                                     script; 127 cards carry a short line; the
+                                     search finds 4 of 4 cases in any word order
+  Worksheet checker            9.2s  72 of 99 routed, 8 clean
+  Worksheet checker tests     18.9s  All 135 checks passed
+  Worksheet key round trip     1.5s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         25.3s  All 76 checks passed
+  Extractor pins               0.5s  RESULT: 25 string sites carry the pinned 73
+                                     claims and 0 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          62.5s  0 TIER-1 -- the push gate holds; Whole tree,
+                                     Tier-1: 277: orrery 111, Earth System 149,
+                                     stars 13, utilities 2, unclassified 2.
+
+======================================================================
+  34 of 34 gating checkers passed -- 281.4s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           72 of 99 routed, 8 clean
+    Provenance scanner          0 TIER-1 -- the push gate holds; Whole tree, Tier-1: 277: orrery 111, Earth System 149, stars 13, utilities 2, unclassified 2.
+      No file's Tier-1 count rose since the previous run.
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2566 file(s) examined, 8 written, 0 created, 0 removed, 5 rewritten identically
+    written   DATA_INVENTORY.md
+    written   EXACT_ROWS_PRINTED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   WORKSHEET_CHECK.md
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    rewritten with identical bytes, no action needed:
+      LEDGER_CONSOLIDATED.md
+      PROJECT_INSTRUCTIONS.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      window_config.json
+    22 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  4. Move this patch into documentation/, then commit and push
+     the orrery in GitHub Desktop.
+Not changed, and named: skills/horizons-orbital-mechanics/SKILL.md still says the drawing is without the daily tail;
+carried on L-476 for its next version.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+2. Run `test_path_drawing.py`. It should end on "7 of 7 checks passed".
+3. Plot Voyager 1 and 3I/ATLAS centred on the Sun. Each marker should sit where the solid line turns dashed.
+4. Run the maintenance run, move the patch into `documentation/`, then commit and push.
+
+**Where this leaves us:** Build 1 is done except for this fix and your look at two plots. L-484 (the two agree) comes after that.

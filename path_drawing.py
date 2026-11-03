@@ -17,14 +17,21 @@ The drawing is the website's, point for point: the backbone across the
 plan's span at its step, thinned by Douglas-Peucker where it runs
 straight; each event's window at its own step, thinned at its own scale
 (WINDOW_THIN_FRACTION of the passing distance) and merged after the
-backbone's thinning, so a flyby is never thinned away. The website then
-adds a daily tail and an ended mission's last-day pair, which are its
-room's needs (a marker at the minute the room is opened); the orrery
-draws neither. Its twin is fetch_path_by_plan, _plan_span,
-fetch_vectors_range and douglas_peucker in the website's
-tools/gallery_cache_builder.py (tonyquintanilla.github.io); the two
-repositories cannot import each other, so each holds its own copy, and
-test_path_drawing.py --galileo compares them against JPL.
+backbone's thinning, so a flyby is never thinned away; then a daily
+tail around today, as the website's builder adds one, so the path has a
+point of its own at today and the solid part ends where the spacecraft
+or comet is. (Fixed 2026-11-03, evening, on Tony's look: built first
+without the tail, Voyager 1's solid part ended about ten years back,
+at 135.8 AU, with the spacecraft at 172.2 AU; on a straight run the
+thinning keeps no point near today.) The website's tail has the same
+length and step; its moments are each night's, so only an ended path,
+which has no tail, agrees point for point. An ended mission's last-day
+pair is the website room's need and is not drawn here. Its twin is
+fetch_path_by_plan, fetch_path_tail, _plan_span, fetch_vectors_range
+and douglas_peucker in the website's tools/gallery_cache_builder.py
+(tonyquintanilla.github.io); the two repositories cannot import each
+other, so each holds its own copy, and test_path_drawing.py --galileo
+compares them against JPL.
 
 Only around the Sun (Tony, 2026-11-03, 12:06 Chicago: "yes and the
 orrery and the website should both follow this"). A plan's backbone and
@@ -48,6 +55,9 @@ spacecraft_encounters.py; test_path_drawing.py.
 
 Module created: November 3, 2026 with Anthropic's Claude Opus 5.5
 (L-476).
+Module updated: November 3, 2026, evening, with Anthropic's Claude Opus
+5.5 (L-476, Tony's look: the website's daily tail added, so the solid
+part ends at today; see the third paragraph).
 """
 
 import datetime
@@ -66,6 +76,19 @@ PLANS = os.path.join("data", "path_plans.json")
 # the same number (gallery-cache-builder, A Spacecraft Is Fetched by Its
 # Plan).
 WINDOW_THIN_FRACTION = 0.01
+
+# The daily tail around today, the website's: its builder's
+# PATH_TAIL_AHEAD_DAYS (2) ahead, and its config's freeze_after_days (7)
+# behind, at a day's step, never thinned (fetch_path_tail). Drawing
+# choices mirrored from the website, not measured values.
+TAIL_BEHIND_DAYS = 7
+TAIL_AHEAD_DAYS = 2
+TAIL_STEP = "1d"
+
+# JPL labels each point on its own clock, 69 s ahead of UTC (TDB_OFFSET
+# below). The tail is asked from two minutes earlier, so its point for
+# today is labelled before now and ends the solid part.
+TAIL_LEAD_MINUTES = 2
 
 # Points are keyed to the minute, as the website keys them: a window's
 # step can be a minute, and a window point lands on a backbone point of
@@ -196,9 +219,10 @@ def douglas_peucker(points, tol_au):
     return {items[i][0]: items[i][1] for i in range(n) if keep[i]}
 
 
-def draw_plan(obj, plan, fetch=None):
+def draw_plan(obj, plan, fetch=None, now=None):
     """[{'date', 'jd', 'x', 'y', 'z'}] in time order: the path by its
-    plan, the website's whole fetch without its tail and last-day pair.
+    plan, the website's whole fetch with its daily tail around now (UTC;
+    utc_now() when not given), without its last-day pair.
     'date' is the minute key read back as a plain datetime. Asked of JPL
     once per plan in a run of the orrery. None, with the reason printed,
     when JPL gives nothing."""
@@ -228,6 +252,12 @@ def draw_plan(obj, plan, fetch=None):
                     got, float(ev["dist_km"]) * WINDOW_THIN_FRACTION
                     / KM_PER_AU)
             points.update(got)
+        today = (now or utc_now()).replace(second=0, microsecond=0)
+        t0 = max(start, today - datetime.timedelta(
+            days=TAIL_BEHIND_DAYS, minutes=TAIL_LEAD_MINUTES))
+        t1 = min(end, today + datetime.timedelta(days=TAIL_AHEAD_DAYS))
+        if t0 < t1:
+            points.update(fetch(ident, id_type, t0, t1, TAIL_STEP))
     except Exception as exc:
         print("[PATH PLAN] %s: not drawn by its plan; JPL gave no path "
               "(%s)" % (obj.get("name"), exc), flush=True)
