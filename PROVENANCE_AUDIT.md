@@ -20,12 +20,12 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T1 by domain | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|--------------|---:|---:|---:|--------:|
+| 20261102T235756Z | `25e4251` | 172 | 1154 | 275 | orrery 111, Earth System 149, stars 13, utilities 2 | 698 | 175 | 6 | 0 |
 | 20261102T233651Z | `26a6dd0` | 172 | 1154 | 275 | orrery 111, Earth System 149, stars 13, utilities 2 | 698 | 175 | 6 | 0 |
 | 20261102T233137Z | `26a6dd0` | 172 | 1154 | 275 | orrery 111, Earth System 149, stars 13, utilities 2 | 698 | 175 | 6 | 0 |
 | 20261101T201749Z | `6a434ed` | 171 | 1151 | 275 | orrery 111, Earth System 149, stars 13, utilities 2 | 695 | 175 | 6 | 0 |
 | 20261101T032357Z | `f4994ff` | 171 | 1151 | 275 | orrery 111, Earth System 149, stars 13, utilities 2 | 695 | 175 | 6 | 0 |
 | 20261101T031743Z | `f4994ff` | 171 | 1151 | 275 | orrery 111, Earth System 149, stars 13, utilities 2 | 695 | 175 | 6 | 0 |
-| 20261030T232334Z | `b27ce8c` | 170 | 1151 | 275 | orrery 111, Earth System 149, stars 13, utilities 2 | 695 | 175 | 6 | 0 |
 
 Change since the previous run: total +0, Tier-1 +0.
 

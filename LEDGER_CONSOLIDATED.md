@@ -1567,7 +1567,25 @@ as an archive of the prioritization thinking -- no cleanup on close.
   mission has nowhere for slice 1's words to appear. That is a design
   point for Tony before slice 1 is built. All twelve served spacecraft
   are active, so the ended branch has not yet run on real data.
-**Gap:** the design point first, Tony's: where an ended mission's words
+- **RULED, Tony, Nov 2, from the Fable talk (relayed to the Code session
+  that evening), answering the design point above:** an ended mission
+  gets its marker at the path's last served point, where it was on its
+  last day, with the whole line solid. Its text box opens with "This
+  mission ended on <date>. The marker is where it was that day." No
+  hover on the line (one info marker per body). The marker's symbol is
+  orrery-coding-conventions' to set (method); whether the ended line
+  looks different is Tony's, on the render (Mode 5). Today
+  render_spacecraft.py draws an ended path with no marker, so slice 1
+  changes that branch.
+**Gap (replaces the one below, 2026-11-02):** slice 1's brief, a gallery
+session: the ended branch of `render_spacecraft.py` gains the marker at
+the last served point and the text box's opening sentence; the dates
+sentence lands on every spacecraft's box, Voyager's included; the
+voyages chosen and their path plans from the orrery; the marker's symbol
+from orrery-coding-conventions. Tony's look at the ended line on the
+render. Slice 2 waits beside L-402 and L-489 (compositions; Artemis II
+in the Earth room).
+**Gap (superseded above, 2026-11-02):** the design point first, Tony's: where an ended mission's words
 appear, since it has no marker to carry the text box. Then slice 1's
 brief (a gallery session, with the orrery's path plans for the chosen
 voyages). Slice 2 waits behind the Sun's eight (L-411, built Nov 2) and
@@ -4560,10 +4578,20 @@ the deliberate limit, its number set then, each removal named.
     CORE_RADII, RADIATIVE_ZONE_RADII and CHROMOSPHERE_PHYSICAL_KM, since
     the numbers they gave now come from the rows above.
   - HELD in `smoke_typed_numbers.js` is empty.
+  - Run order and checks, the same session: the orrery's maintenance
+    run 33 of 33, Tier-1 0 on the gate path; Tony pushed the orrery
+    (25e42515); the website pulled that export and the mirror wrote
+    the nine citations (every hand-written number already matched);
+    the cache was rebuilt by hand (run 20261102T234637Z, ok, no
+    retry); the Display figures fixture re-recorded as
+    `fixture_hovers_L411_8_on_8c3947c1.json` (the chromosphere's key
+    renamed, the Hills cloud's hover changed, the other 45 byte for
+    byte); the website's maintenance run 36 of 36; the Sun room's Reset
+    walk 33 checks, all pass.
 **Gap (replaces the one below, 2026-11-02):** Tony's phone look in the
 Sun room (the core, the radiative zone, the chromosphere's name, hover
-and panel, the Alfven surface, the Hills cloud), once the website's
-cache is rebuilt. Then groups T, M and C, the three leftovers above,
+and panel, the Alfven surface, the Hills cloud), once he has pushed the
+website with its cache. Then groups T, M and C, the three leftovers above,
 one shell at a time, off the road (the Sun's slice is closed, Tony,
 2026-11-02, 13:47). "7 million" may come back from the BP2000 model
 file, read by Tony.

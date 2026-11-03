@@ -2,7 +2,7 @@
 # Where We Are
 
 Last updated: November 2, 2026, evening: a Claude Code session (the Sun's eight built; historical missions opened).
-- Written at orrery 26a6dd04 and gallery 8c3947c1, plus uncommitted edits.
+- Written at orrery 25e42515 and gallery 8c3947c1, plus uncommitted edits.
 
 > **READ THIS FIRST**
 >
@@ -16,15 +16,18 @@ Last updated: November 2, 2026, evening: a Claude Code session (the Sun's eight 
 >   gives it. The radiative zone's top, 2,200,000, stays.
 > - The chromosphere is called just "Chromosphere"; its 2,000 km depth
 >   is printed two lines lower in the same hover.
+> - The website has the new words and numbers, and its cache was
+>   rebuilt by hand tonight. Both maintenance runs pass.
 > - Historical missions have their own ledger item (L-507 (historical
 >   missions)), with your ruling of 14:32 in it, both slices.
 > - The website's scheduled run of Nov 2 committed at 18:29 UTC
 >   (8c3947c1), about six hours late. The orrery's second run record
 >   came at 17:06 UTC (0099170).
 >
-> **Do next:** *commit and push the orrery; then this session pulls
-> the new numbers into the website and rebuilds its cache; then you
-> commit and push the website, and look at the Sun room on your phone.*
+> **Do next:** *commit and push the orrery (the records), then the
+> website (its words file and cache together); then look at the Sun
+> room on your phone: the core, the radiative zone, the chromosphere,
+> the Alfven surface, the Hills cloud.*
 >
 > **Needs you now:**
 > - *(do) Each morning, Pull origin on both, orrery then website, first;
@@ -49,7 +52,7 @@ Oct 27's order, changed Oct 29 (`DESIGN_L314_solar_wind_rulings_20261029.md`).
                live Nov 2; the sizes stay as built, 3 and 6; the ruler
                and the halo from your phone next.* << changed this session
  11e.  [NOW]   *The Sun's eight (L-411 (the Sun's typed numbers)): built
-               Nov 2; the website's cache next, then your phone look.*
+               Nov 2, both sites, cache rebuilt; your phone look next.*
                << new this session
  11d.  [waiting] The comet switch (L-470 (JPL's permanent number)):
                waits on your choice, below. << changed this session
@@ -61,8 +64,8 @@ Oct 27's order, changed Oct 29 (`DESIGN_L314_solar_wind_rulings_20261029.md`).
  12a.  [next]  Historical missions, slice 1 (L-507 (historical
                missions)): past voyages drawn in the Solar System room
                as Voyager is, on today's date; a sentence on the text
-               box, Voyager's too. First, where an ended mission's words
-               go. << new this session
+               box, Voyager's too; an ended mission's marker where it
+               was on its last day. Its brief next. << new this session
  12b.  [later] Historical missions, slice 2: encounters, the planet
                where it was when the spacecraft arrived; the room moves
                off today's date; Artemis II in the Earth room.
@@ -83,6 +86,8 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
   enhancements, not blocking (Nov 2, 13:47).
 - Past voyages are drawn on today's date, their path over the
   mission's own dates; only encounters move the room's date (Nov 2, 14:32).
+- An ended mission's marker sits where it was on its last day, the
+  line solid; its text box says when it ended (Nov 2, the Fable talk).
 - The ticks stay as built, 3 and 6 (Nov 2).
 - Tokens are spent where they buy verification or a decision: the
   smallest instrument, no document before its session, a skill read in
@@ -118,8 +123,8 @@ Waiting behind other work; a line leaves when picked up.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261102T182626Z, ok, no retry (the website's swap
-  log's last line at 8c3947c1: the scheduled night of Nov 2, late).
+- Last cache build: 20261102T234637Z, ok, no retry (the website's swap
+  log's last line: this session's hand build, not yet pushed).
 - Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md
   of Nov 2, this session's run, with the five new rows).
 - This page's date and the ledger's newest stamp: both Nov 2. Agree.
@@ -133,9 +138,6 @@ Decisions, one at a time:
   switch next. Nothing is broken today. (Nov 2)
 
 At the next design talk:
-- Historical missions: an ended mission has no marker, and the text
-  box hangs on the marker. Where do its words go? (L-507 (historical
-  missions), Nov 2)
 - The shared link (ruled Oct 29) waits for its build.
 
 Not urgent, in your order:
