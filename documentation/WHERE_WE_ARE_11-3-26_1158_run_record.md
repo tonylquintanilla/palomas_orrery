@@ -1626,6 +1626,39 @@ Not mine: your run record WHERE_WE_ARE_11-3-26_1158_run_record.md had your own c
 
 **Tony-actions:**
 - (do) The Mode 5 look above. -- yes
-- (do) Commit and push. -- 
-- (do) Reinstall horizons-orbital-mechanics (now 1.16) in Settings > Skills.
-- (do) Paste protocol v3.125 into the Project's instructions on claude.ai.
+- (do) Commit and push. -- 83981b09dd7ce343d4257b56123acf1e8bddc3cb
+- (do) Reinstall horizons-orbital-mechanics (now 1.16) in Settings > Skills. -- done
+- (do) Paste protocol v3.125 into the Project's instructions on claude.ai. -- done
+
+=========================================================================================
+
+**Opus: Coordinator:**
+
+Yes, two plots in the orrery are worth your eyes. Your push matches GitHub (`83981b09`), and your three looks covered the comets that turned into paths. They didn't cover the two bodies whose drawing changed in less obvious ways:
+
+1. **McNaught (C/2006 P1), centred on the Sun.** It should still draw its path but no ellipse. The terminal should print a line naming McNaught as the refused ellipse. This is the new two-sides-of-1 refusal: JPL's database says hyperbolic, while today's elements read just under 1. It's the only place that rule fires on real data, so it's worth seeing once. -- yes. the path continues to today but has no projection. 
+2. **Piece C of C/2025 K1, centred on the Sun.** It should now be a closed orbit, an ellipse with no dashed path. It's the one body that changed side of 1. -- it has a keplerian orbit like the other pieces but the orbit is not complete. and the current position of C is beyond the rendered orbit. all the other pieces have fully rendered keplerian orbits and the same position at C. see upload. 
+
+**One website check, tomorrow morning after the night's build:** open the Solar System room and look at the C/2025 K1 pieces. Piece C will most likely disappear from the website, as Code recorded on L-484 (the two agree). Check that it's only piece C that goes and that the room still loads normally. Psyche's path end also moves by about two weeks, to 24 February 2029, from JPL's newer trajectory, so the website will pick that up the same night. -- not checked yet. did we update the website too?
+
+**One thing from the report that needs no test:**
+- "6AC4721" isn't a lost comet. It's the survey's placeholder name for MAPS (C/2026 A1), from before JPL gave it a designation. The old entry has no JPL number (`'id': 'none'`). MAPS has its own entry and draws normally.
+- So that entry is dead code, and a case for L-509 (obsolete code). I'll add it there in the next records patch rather than open a patch for one line. -- i am keeping this as a historical option to show how the early pre-Horizons path was drawn. not dead code. 
+
+**Where this leaves us:** L-510 part 1 is built and pushed, and your three looks passed. After McNaught and piece C, the next step is the brief for the L-484 check, written together with interactive-exhibit's next version. 
+
+===============================================================
+
+Piece C is drawn the way the rule says, and both oddities are expected. 6AC4721 is different: the build has probably stopped drawing it, which matters because you're keeping it. One question at the end.
+
+**Piece C**, from your 14:33 plot:
+- **"Not complete":** piece C is now a closed ellipse 4,255 AU long, with its far end about 49,000 years away. Only the part near the Sun fits in the view. Its sibling pieces are open curves (hyperbolas), drawn out to about 60 AU, so they look whole.
+- **Its marker off the line:** that ellipse is drawn around the solar system's centre of mass, as Halley's is. That's the existing rule for long orbits. The marker is placed around the Sun. At 5.6 AU the two differ by 0.085 AU, the same frame difference McNaught showed.
+- **The real visual change:** piece C has lost the path from discovery through perihelion that its siblings keep. As an orbit, it draws its actual track only over the plot's dates. That follows JPL's own fit: piece C is bound, and its siblings are not.
+
+**The website:** no, nothing on the website was edited. It copies the orrery's export when it next runs, either tonight's build or your morning Daily Run. Piece C most likely drops off then. Tomorrow's look still stands.
+
+**6AC4721:** understood, it stays as the record of how the comet was drawn before JPL had it. I'll note it as kept on purpose, not obsolete.
+- **The problem:** its drawing comes from elements typed from MPEC 2026-A49, with e of 0.99994. The new rule only reads JPL's database, which has no record for it. So Code's report says it now prints a failure and draws neither a path nor an orbit.
+
+Could you plot 6AC4721 once? If it draws nothing, should its own cited elements decide it? Its e of 0.99994 would make it an orbit, as it was before the build. That would be the rule's one exception: a body JPL doesn't carry is decided by the source it is cited to. -- you're right. the analytical orbit is not plotted. this could be an issue. what happens if Horizons is unavailable, i thought that the fallback is the cache, and if the cache is incomplete the typed elements, which are either typed as in the case of 6AC4721 or stored from the cache. this is not trivial. 
