@@ -2,9 +2,9 @@
 # Paloma's Orrery -- Provenance Audit
 
 Generated: November 03, 2026
-Files scanned: 175
-Total findings: 1162
-Constants: 304 | Dicts: 76 | Display strings: 782
+Files scanned: 176
+Total findings: 1164
+Constants: 305 | Dicts: 77 | Display strings: 782
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -20,18 +20,23 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T1 by domain | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|--------------|---:|---:|---:|--------:|
+| 20261104T005858Z | `b09989e` | 176 | 1164 | 280 | orrery 111, Earth System 149, stars 13, utilities 2, unclassified 5 | 703 | 175 | 6 | 0 |
 | 20261103T203853Z | `329f4ec` | 175 | 1162 | 277 | orrery 111, Earth System 149, stars 13, utilities 2, unclassified 2 | 703 | 176 | 6 | 0 |
 | 20261103T191224Z | `81fa7b8` | 174 | 1158 | 278 | orrery 111, Earth System 149, stars 13, utilities 2, unclassified 3 | 699 | 175 | 6 | 0 |
 | 20261103T190716Z | `81fa7b8` | 174 | 1158 | 278 | orrery 111, Earth System 149, stars 13, utilities 2, unclassified 3 | 699 | 175 | 6 | 0 |
 | 20261103T041541Z | `15dc8e3` | 172 | 1155 | 275 | orrery 111, Earth System 149, stars 13, utilities 2 | 699 | 175 | 6 | 0 |
 | 20261103T034036Z | `15dc8e3` | 172 | 1155 | 275 | orrery 111, Earth System 149, stars 13, utilities 2 | 699 | 175 | 6 | 0 |
-| 20261102T235756Z | `25e4251` | 172 | 1154 | 275 | orrery 111, Earth System 149, stars 13, utilities 2 | 698 | 175 | 6 | 0 |
 
-Change since the previous run: total +4, Tier-1 -1.
+Change since the previous run: total +2, Tier-1 +3.
 
-No file's Tier-1 count rose.
+Tier-1 rose in these files:
 
-Tier-1 moved by domain: unclassified 3 -> 2.
+| File | Before | After |
+|------|-------:|------:|
+| patch_L476_3_close_20261103.py | 0 | 1 |
+| patch_L484_2_talk_records.py | 0 | 2 |
+
+Tier-1 moved by domain: unclassified 2 -> 5.
 
 ---
 
@@ -62,12 +67,12 @@ Tier-1 moved by domain: unclassified 3 -> 2.
 
 | Tier | Score | Action | Count |
 |------|-------|--------|------:|
-| 1 | 16-20 | FIX NOW | 277 |
+| 1 | 16-20 | FIX NOW | 280 |
 | 2 | 10-15 | REVIEW | 703 |
-| 3 | 5-9 | LOW PRIORITY | 176 |
+| 3 | 5-9 | LOW PRIORITY | 175 |
 | 4 | 1-4 | LOWEST PRIORITY | 6 |
 
-**Whole tree, Tier-1: 277: orrery 111, Earth System 149, stars 13, utilities 2, unclassified 2.** By each file's docstring `Domain:` tag; Findings by File Type below has every tier and every domain. The push gate is the Gate Path section, not this total.
+**Whole tree, Tier-1: 280: orrery 111, Earth System 149, stars 13, utilities 2, unclassified 5.** By each file's docstring `Domain:` tag; Findings by File Type below has every tier and every domain. The push gate is the Gate Path section, not this total.
 
 **Tier 2 note (April 2026 audit):** All Tier-2 findings are documented
 accepted residuals -- cited constants, V_STALE staleness flags on verified
@@ -82,7 +87,7 @@ The push gate is Tier-1 = 0 on the active build path, and it binds at export. Th
 
 **GATE PATH: 0 TIER-1 -- the push gate holds.**
 
-Examined: 202 of 233 exported rows; 31 more are computed from other rows, whose inputs are scored where they are typed; 7 display string(s) in 92 served object(s). The whole tree's Tier-1 count is 277: orrery 111, Earth System 149, stars 13, utilities 2, unclassified 2; most of them are off this path.
+Examined: 202 of 233 exported rows; 31 more are computed from other rows, whose inputs are scored where they are typed; 7 display string(s) in 92 served object(s). The whole tree's Tier-1 count is 280: orrery 111, Earth System 149, stars 13, utilities 2, unclassified 5; most of them are off this path.
 
 Exported rows computed from other rows (31): `CHROMOSPHERE_TOP_KM`, `CORONA_BASE_KM`, `DEG_PER_RAD`, `EARTH_BOW_SHOCK_STANDOFF_RADII`, `EARTH_DIPOLE_TILT_DEG`, `EARTH_DIPOLE_TILT_RATE_DEG_PER_YEAR`, `EARTH_GEOSTATIONARY_RADIUS_KM`, `EARTH_HILL_SPHERE_KM`, `EARTH_LEO_INNER_KM`, `EARTH_LEO_INNER_PERIOD_MIN`, `EARTH_LEO_OUTER_KM`, `EARTH_LEO_OUTER_PERIOD_MIN`, `EARTH_LOWER_MANTLE_KM`, `EARTH_MAGNETOPAUSE_STANDOFF_RADII`, `EARTH_MAGNETOTAIL_DRAWN_END_RADII`, `EARTH_MAGNETOTAIL_DRAWN_RADIUS_RADII`, `EARTH_OBLIQUITY_J2000_DEG`, `EARTH_SIDEREAL_ROTATION_PERIOD_H`, `EARTH_STRATOPAUSE_RADIUS_KM`, `EARTH_THERMOPAUSE_RADIUS_KM`, `EARTH_VAN_ALLEN_OUTER_RADII`, `GALACTIC_NORTH_POLE_DEC_J2000_DEG`, `HELMET_CUSP_RADII`, `INNER_LIMIT_OORT_CLOUD_AU`, `OUTER_OORT_CLOUD_AU`, `PARKER_CLOSEST_KM`, `ROCHE_LIMIT_DRAWN_RADII`, `SGR_A_STAR_DEC_ICRS_DEG`, `SGR_A_STAR_RA_ICRS_DEG`, `SUN_EQUATOR_TILT_DEG`, `SUN_SIDEREAL_ROTATION_PERIOD_D`.
 
@@ -197,6 +202,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `module_atlas.py` | dev_tools | 0 | 0 | 3 | 0 | 3 |
 | `palomas_orrery.py` | orrery | 0 | 0 | 3 | 0 | 3 |
 | `exoplanet_systems.py` | stars | 0 | 0 | 3 | 0 | 3 |
+| `patch_L484_2_talk_records.py` | unclassified | 2 | 0 | 0 | 0 | 2 |
 | `test_path_drawing.py` | unclassified | 2 | 0 | 0 | 0 | 2 |
 | `energy_imbalance.py` | earth_science | 1 | 1 | 0 | 0 | 2 |
 | `plot_data_report_widget.py` | utilities | 2 | 0 | 0 | 0 | 2 |
@@ -208,6 +214,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `test_dashboard_parity.py` | dev_tools | 0 | 0 | 2 | 0 | 2 |
 | `worksheet_request_builder.py` | dev_tools | 0 | 0 | 2 | 0 | 2 |
 | `orbital_elements.py` | orrery | 1 | 0 | 0 | 0 | 1 |
+| `patch_L476_3_close_20261103.py` | unclassified | 1 | 0 | 0 | 0 | 1 |
 | `data_acquisition.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `exoplanet_orbits.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `fetch_paleoclimate_data.py` | earth_science | 1 | 0 | 0 | 0 | 1 |
@@ -227,7 +234,6 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `data_inventory.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `export_drawings.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `osculating_cache_manager.py` | orrery | 0 | 0 | 1 | 0 | 1 |
-| `patch_L476_2_tail_at_today.py` | unclassified | 0 | 0 | 1 | 0 | 1 |
 | `test_dimensions.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `test_domain_split.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `test_objects_export.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
@@ -252,11 +258,12 @@ Same data again, grouped by subject-matter domain rather than by individual file
 | Stars (stellar neighborhood) | 12 | 13 | 41 | 6 | 3 | 63 |
 | Utilities (cross-domain shared helpers) | 1 | 2 | 0 | 0 | 0 | 2 |
 | Gallery | 0 | 0 | 0 | 0 | 0 | 0 |
-| Unclassified (no Domain: tag, or one outside the six) | 3 | 2 | 4 | 1 | 0 | 7 |
+| Unclassified (no Domain: tag, or one outside the six) | 4 | 5 | 4 | 0 | 0 | 9 |
 
-**Domain coverage gap (3):** these files have findings and no `Domain:` tag the report knows, so they are counted as unclassified rather than guessed into a domain. Add the tag to each module's own docstring (one of the six above); nothing in provenance_scanner.py needs editing:
+**Domain coverage gap (4):** these files have findings and no `Domain:` tag the report knows, so they are counted as unclassified rather than guessed into a domain. Add the tag to each module's own docstring (one of the six above); nothing in provenance_scanner.py needs editing:
 
-- `patch_L476_2_tail_at_today.py` -- no Domain: tag in its docstring
+- `patch_L476_3_close_20261103.py` -- no Domain: tag in its docstring
+- `patch_L484_2_talk_records.py` -- no Domain: tag in its docstring
 - `path_drawing.py` -- no Domain: tag in its docstring
 - `test_path_drawing.py` -- no Domain: tag in its docstring
 
@@ -673,6 +680,19 @@ is planned for a future session.
 | 2174 | string | display string @ line 2174 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 | 2197 | string | display string @ line 2197 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 | 2332 | string | display string @ line 2332 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+
+### patch_L476_3_close_20261103.py
+
+| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
+|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
+| 64 | dict | WHOLE[...] | (1 entry) | 4 | 5 | **20** | No source citation (recalled) | UNDETERMINED -- could not be classified |
+
+### patch_L484_2_talk_records.py
+
+| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
+|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
+| 57 | dict | SENTINELS[...] | (2 entries) | 4 | 5 | **20** | No source citation; date-sensitive (recalled) | UNDETERMINED -- could not be classified |
+| 63 | constant | CAP | 130 | 4 | 5 | **20** | No source citation; date-sensitive (recalled) | UNDETERMINED -- could not be classified |
 
 ### planet_visualization_utilities.py
 
@@ -2008,9 +2028,9 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 2360 | constant | PERFRAME_INDICATOR_RADIUS_FACTOR | 100.0 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 2393 | constant | PERFRAME_COORD_DECIMALS | 7 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 4027 | constant | BUTTON_WIDTH | 14 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 2371 | constant | PERFRAME_INDICATOR_RADIUS_FACTOR | 100.0 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 2404 | constant | PERFRAME_COORD_DECIMALS | 7 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 4038 | constant | BUTTON_WIDTH | 14 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
 
 ### palomas_orrery_dashboard.py
 
@@ -2021,12 +2041,6 @@ is planned for a future session.
 | 2427 | constant | NIGHTLY_STALE_HOURS | 24 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
 | 2598 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
 | 2730 | dict | SECTION_SYMBOLS[...] | (8 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
-
-### patch_L476_2_tail_at_today.py
-
-| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
-|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 65 | dict | EXPECT[...] | (4 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal use (key vocabulary) |
 
 ### path_plan.py
 

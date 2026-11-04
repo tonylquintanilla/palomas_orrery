@@ -148,6 +148,9 @@ full mission; around any other body as before. Every reader of a
 planned entry's dates takes them from its plan, and the 25 planned
 checkbox labels are written from it. create_dates_list_for_object is
 not called from anywhere and was left as it is.)
+Module updated: November 3, 2026, evening, with Anthropic's Claude Opus
+5.5 (L-476 closed: create_dates_list_for_object marked DEPRECATED,
+obsolete, by Tony's word; how obsolete code is treated is L-509.)
 
 """
 #Paloma's Orrery - Solar System Visualization Tool
@@ -468,6 +471,13 @@ def get_fetch_interval_for_type(obj_type, obj_name, trajectory_interval,
         print(f"Unknown object type '{obj_type}' for {obj_name}, using default", flush=True)
         return default_interval
 
+# =============================================================================
+# DEPRECATED: create_dates_list_for_object
+# Obsolete since November 3, 2026 (L-476): called from nowhere. The live
+# date lists are built in plot_objects' worker, and a planned path is drawn
+# by path_drawing.py. Kept, marked, until L-509 (how obsolete code is
+# treated) rules whether it goes.
+# =============================================================================
 def create_dates_list_for_object(obj, obj_type, date_obj, 
                                 trajectory_points, orbital_points,
                                 satellite_days, satellite_points,
@@ -475,6 +485,7 @@ def create_dates_list_for_object(obj, obj_type, date_obj,
                                 planetary_params, parent_planets,
                                 center_object_name, max_date, settings):
     """
+    DEPRECATED (obsolete, L-476): not called from anywhere; see the banner.
     Create a list of dates for plotting based on object type.
     """
         

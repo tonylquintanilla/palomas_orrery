@@ -1,35 +1,28 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 3, 2026, afternoon: the orrery's Claude Code session (the desktop orrery draws spacecraft and comet paths by their plans).
-- Written at orrery 81fa7b8a and gallery 3a211a8c, plus this session's uncommitted edits.
+Last updated: November 3, 2026, evening: the coordinating session (your look at the fixed paths passed; L-476 closed).
+- Written at orrery b09989e0 and gallery 5abca2c6, plus this session's uncommitted edits.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The desktop orrery now draws each spacecraft's and comet's whole
->   path the way the website does, from its path plan (L-476 (the
->   orrery plots by the plan)).
-> - Around the Sun, the path is solid up to today and dashed after,
->   as on the website. Around any other body it is drawn as before.
-> - Galileo now stops at its crash into Jupiter, as on the website.
->   Cassini ends on 15 September 2017.
-> - The dates beside 25 spacecraft and comets in the orrery's window
->   are now read from the plans, so they match the website. No path's
->   end date is typed by hand any more, and a check fails if one comes
->   back.
-> - Checked against JPL: Galileo's 303 points match the website's
->   point for point. The only difference is the website's two points
->   on its last day, which the orrery does not need.
-> - Nothing the website serves changed, and none of its checks moves.
-> - One skill and the protocol (v3.124) carry the rule that a plan
->   draws a path only around the Sun.
+> - The desktop orrery draws each spacecraft's and comet's whole
+>   path from its plan, as the website does: solid to today, dashed
+>   after, around the Sun only. L-476 (the orrery plots by the plan)
+>   is done and closed.
+> - Your look passed: each marker sits where the solid line turns
+>   dashed, for Voyager 1 and 3I/ATLAS.
+> - The first build turned the line dashed years back on a straight
+>   path. The brief had left out the website's daily points around
+>   today; a second patch added them.
+> - Galileo stops at its crash into Jupiter, and the dates beside 25
+>   spacecraft and comets come from their plans.
+> - The unused date function is marked obsolete, not deleted. How
+>   obsolete code is treated is a talk of its own (L-509 (obsolete
+>   code)).
 >
-> **Do next:** *your look at six plots in the desktop orrery (the
-> run order in this session's report); commit and push the orrery;
-> then, in Settings > Skills, reinstall horizons-orbital-mechanics,
-> and paste v3.124 into the Project's instructions on claude.ai. Then
-> the design talk on L-484 (the two agree), from
+> **Do next:** *the design talk on L-484 (the two agree), from
 > `HANDOFF_L484_consistency_talk_20261103.md`.*
 >
 > **Needs you now:**
@@ -48,7 +41,7 @@ Oct 27's order, changed Oct 29 (`DESIGN_L314_solar_wind_rulings_20261029.md`).
                Earth's list (L-413), the ruler build (L-505) and the
                Sun's eight (L-411), Nov 2; historical missions' slice 1
                (L-507), Nov 2; the orrery's paths by the plan
-               (L-476), Nov 3. << changed this session
+               (L-476), Nov 3.
  5d.   [NOW]   *The orrery's clock (L-504 (the orrery's clock)): the
                data path done Oct 29, the website's date fix Oct 31;
                Earth System, stamps, tools next.*
@@ -59,9 +52,10 @@ Oct 27's order, changed Oct 29 (`DESIGN_L314_solar_wind_rulings_20261029.md`).
                both draw agrees, or the difference is written down.
                A design talk first, on what consistency means beyond
                JPL's numbers; then the check. Its first finding,
-               the dates, is fixed (L-476, Nov 3).* << changed this session
+               the dates, is fixed (L-476, Nov 3).*
   5b.  [beside] Housekeeping when a session has room: L-424, L-425,
-               L-426; L-423 (the website's checks) item 3, L-357.
+               L-426; L-423 (the website's checks) item 3, L-357;
+               L-509 (obsolete code), after its talk. << changed this session
  12b.  [later] Historical missions, slice 2: encounters, the planet
                where it was when the spacecraft arrived; the room moves
                off today's date; Artemis II in the Earth room.
@@ -77,9 +71,11 @@ Oct 27's order, changed Oct 29 (`DESIGN_L314_solar_wind_rulings_20261029.md`).
 ## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings. A line leaves after a few weeks, once it is habit.
+- Obsolete code is marked, not deleted, until a talk rules how it is
+  treated (Nov 3, 15:14). << new this session
 - A plan draws a path only around the Sun, in both the orrery and the
   website; around any other body the path is drawn as before (Nov 3,
-  12:06). << new this session
+  12:06).
 - An ended mission's line stays solid, like a flown path (Nov 3, your
   look).
 - An ended mission's path stops on the day NASA gives as its end, not
@@ -131,10 +127,10 @@ Waiting behind other work; a line leaves when picked up.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261103T161740Z, ok, no retry (the website's swap
-  log's last line at 1a79238c: the night run of Nov 3).
-- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md,
-  this session's orrery run).
+- Last cache build: 20261103T193343Z, ok, no retry (the website's swap
+  log's last line at 5abca2c6: a nightly-mode build of Nov 3).
+- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md
+  at b09989e0, your maintenance run of the evening).
 - This page's date and the ledger's newest stamp: both Nov 3. Agree.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
@@ -148,16 +144,17 @@ At the next design talk:
   JPL's numbers (L-484 (the two agree)).* Two differences are left for
   it: three comets the orrery draws as ellipses and the website as
   paths, and the website's extra points on a path's last day.
+- How obsolete code is treated: removed, kept as a stub, or kept
+  whole, and when (L-509 (obsolete code)). The first case is the
+  orrery's unused date function, marked Nov 3. << new this session
 - The shared link (ruled Oct 29) waits for its build.
 
 Not urgent, in your order:
-1. Whether the orrery's unused date function goes
-   (`create_dates_list_for_object`; L-476 (the orrery plots by the plan)).
-2. Whether the editor also edits the Solar System room's rows, and
+1. Whether the editor also edits the Solar System room's rows, and
    adds a new body as a form (L-489 (compositions)).
-3. The website's second run makes a fresh build and a second commit
+2. The website's second run makes a fresh build and a second commit
    most days: keep, or stand down after a clean 08:17 (L-485 (a nightly run)).
-4. Earth's list (L-413 (Earth's list)): stays open as Earth's enhancements, or closes
+3. Earth's list (L-413 (Earth's list)): stays open as Earth's enhancements, or closes
    with its seven pieces moved to their own items.
 
 ## Where the details are
@@ -165,9 +162,10 @@ Not urgent, in your order:
 - Every item: `LEDGER_CONSOLIDATED.md`.
 - The next talk: `HANDOFF_L484_consistency_talk_20261103.md` (L-484
   (the two agree)).
-- Today: L-476 (the orrery plots by the plan), with what was
+- Today: L-476 (the orrery plots by the plan), closed, with what was
   verified; the brief
-  `COORD_L476_orrery_plots_by_path_plan_brief_20261103.md`.
+  `COORD_L476_orrery_plots_by_path_plan_brief_20261103.md`; the fix
+  `patch_L476_2_tail_at_today.py`.
 - The door: `documentation/python_work_door/`, and L-499.
 - The Sun's eight: `COORD_L411_sun_eight_held_numbers_brief_20261102.md`
   and `WORDS_L411_sun_eight_20261102.md`.
