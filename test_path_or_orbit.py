@@ -33,6 +33,19 @@ WHAT IT CHECKS, AND THE FAULT PLANTED FOR EACH
        e in data/small_body_solutions.json, asked as the list asks it
        now, so the export can decide each one. The bodies are counted and
        any without one is named.
+    8. The plot's second link (L-512, part 1): a body with no record is
+       decided by the e of its typed elements (0.99994 an orbit), and the
+       console names it and orbital_elements.py; a body with a record is
+       decided by the store even when its typed e disagrees, and prints
+       nothing; a record asked of another search still fails by name; with
+       no typed e either, the plot's call returns None and prints FAILED;
+       the export's call (no fallback) still refuses. Planted: the typed e
+       put on the wrong side of 1 (1.00006) must change the answer; the
+       lookup turned off must fail by name; the typed e read before the
+       store must be caught.
+    9. The real plot list: every small body the plot sends through the
+       rule is decided by one link or the other, and those the second
+       link decides are named (6AC4721 on 2026-11-04).
 
 RUN COMMAND
 
@@ -47,10 +60,15 @@ Domain: dev_tools
 
 Module created: November 4, 2026 with Anthropic's Claude Opus 5.5
 (L-510, part 1: a small body drawn by its eccentricity).
+Module updated: November 4, 2026, afternoon, with Anthropic's Claude Opus
+5.5 (L-512, part 1: checks 8 and 9, the plot's second link, the typed
+elements' e, with its planted faults.)
 """
 
 import ast
+import contextlib
 import datetime
+import io
 import os
 import sys
 import types
@@ -260,6 +278,110 @@ def check_store():
             % (small, "; ".join(missing) or "none"))
 
 
+# The second link's made-up typed elements (L-512). 0.99994 is 6AC4721's
+# typed e (MPEC 2026-A49); 1.00006 the same distance on the other side.
+TYPED = {"Nameless": {"e": 0.99994}, "Closed": {"e": 1.5},
+         "Moved": {"e": 0.5}}
+TYPED_WRONG_SIDE = {"Nameless": {"e": 1.00006}, "Closed": {"e": 1.5},
+                    "Moved": {"e": 0.5}}
+
+
+def quietly(call):
+    """(result or the NoSolution raised, what was printed)."""
+    out = io.StringIO()
+    with contextlib.redirect_stdout(out):
+        try:
+            got = call()
+        except path_or_orbit.NoSolution as exc:
+            got = exc
+        except Exception as exc:   # a planted module's own NoSolution
+            if exc.__class__.__name__ != "NoSolution":
+                raise
+            got = exc
+    return got, out.getvalue()
+
+
+def check_second_link(m, typed=TYPED):
+    probs = []
+    none, closed, moved = ENTRIES["none"], ENTRIES["closed"], ENTRIES["moved"]
+    got, said = quietly(lambda: m.drawn_type(none, SOLUTIONS, True, typed))
+    if got != "orbital":
+        probs.append("Nameless (no record, typed e 0.99994) drawn as %r"
+                     % (got,))
+    elif "Nameless" not in said or "orbital_elements.py" not in said:
+        probs.append("the console did not name Nameless and "
+                     "orbital_elements.py (%r)" % said.strip())
+    got, said = quietly(lambda: m.drawn_type(closed, SOLUTIONS, True, typed))
+    if got != "orbital":
+        probs.append("Closed (record 0.99999, typed 1.5) drawn as %r: the "
+                     "typed e read before the store" % (got,))
+    elif said:
+        probs.append("a body decided by the store printed %r" % said.strip())
+    got, _said = quietly(lambda: m.drawn_type(moved, SOLUTIONS, True, typed))
+    if getattr(got, "name", None) != "Moved":
+        probs.append("Moved (asked of another search) not refused by name "
+                     "(%r)" % (got,))
+    got, said = quietly(lambda: m.drawn_type_or_none(none, SOLUTIONS, {}))
+    if got is not None or "FAILED Nameless" not in said:
+        probs.append("with neither link the plot's call gave %r, printed %r"
+                     % (got, said.strip()))
+    got, _said = quietly(lambda: m.drawn_type(none, SOLUTIONS))
+    if getattr(got, "name", None) != "Nameless":
+        probs.append("the export's call (no fallback) decided Nameless: %r"
+                     % (got,))
+    got, _said = quietly(lambda: m.side_disagreement(
+        none, 0.99994, SOLUTIONS, True, typed))
+    if got is not None:
+        probs.append("the orbit drawing's side check refused Nameless: %r"
+                     % (got,))
+    return (not probs, "; ".join(probs) or
+            "Nameless an orbit by its typed e, said by name; Closed by the "
+            "store; Moved refused; neither link FAILED; the export strict")
+
+
+def lookup_off_fails_by_name(m):
+    got, _said = quietly(lambda: m.drawn_type(ENTRIES["none"], SOLUTIONS,
+                                              True, TYPED))
+    return getattr(got, "name", None) == "Nameless"
+
+
+def check_plot_list():
+    """Every small body the plot sends through the rule, from the real
+    list, decided by one link; the second link's bodies named."""
+    from orbital_elements import planetary_params
+    with open(LIST, "r", encoding="utf-8") as handle:
+        tree = ast.parse(handle.read())
+    node = next(n for n in tree.body if isinstance(n, ast.Assign) and any(
+        getattr(t, "id", None) == "OBJECT_DEFINITIONS" for t in n.targets))
+    solutions = path_or_orbit.load_solutions(HERE)
+    small, typed, failed = 0, [], []
+    for entry in node.value.elts:
+        f = {}
+        for k, v in zip(entry.keys, entry.values):
+            if isinstance(k, ast.Constant):
+                try:
+                    f[k.value] = ast.literal_eval(v)
+                except ValueError:
+                    pass
+        if (f.get("object_type") not in ("orbital", "trajectory")
+                or not path_or_orbit.is_small_body(f)):
+            continue
+        small += 1
+        got, _said = quietly(lambda: path_or_orbit.decided_e(
+            f, solutions, planetary_params))
+        if isinstance(got, Exception):
+            failed.append(str(got))
+        elif got[1] == "typed":
+            typed.append("%s (e %r, %s)" % (f["name"], got[0],
+                                            "a path" if got[0] >= 1.0
+                                            else "an orbit"))
+    return (small > 0 and not failed,
+            "%d small bodies in the plot's list; decided by their typed "
+            "elements: %s; decided by neither: %s"
+            % (small, ", ".join(typed) or "none",
+               "; ".join(failed) or "none"))
+
+
 def main():
     results = []
 
@@ -283,8 +405,9 @@ def main():
     ok, why = check_drawn_type(real)
     check(ok, "2. the drawn type (%s)" % why)
     check(not check_drawn_type(plant(
-        '    return "trajectory" if drawn_as_path(f, solutions) else '
-        '"orbital"\n', "    return typed\n", "typed"))[0],
+        '    return ("trajectory" if drawn_as_path(f, solutions, fallback, '
+        'params)\n            else "orbital")\n', "    return typed\n",
+        "typed"))[0],
         "2. planted fault caught: the typed field let decide again")
     ok, why = check_sides(real)
     check(ok, "3. two sides of 1 refused by name (%s)" % why)
@@ -304,6 +427,22 @@ def main():
           "6. planted fault caught, naming West: open_path put back")
     ok, why = check_store()
     check(ok, "7. every keyed small body has its database e (%s)" % why)
+    ok, why = check_second_link(real)
+    check(ok, "8. the plot's second link, the typed elements' e (%s)" % why)
+    check(not check_second_link(real, TYPED_WRONG_SIDE)[0],
+          "8. planted fault caught: the typed e put on the wrong side of 1 "
+          "changes the answer")
+    off = plant("    e = typed_e(f, params)\n", "    e = None\n", "lookup off")
+    check(not check_second_link(off)[0] and lookup_off_fails_by_name(off)
+          and not lookup_off_fails_by_name(real),
+          "8. planted fault caught: the lookup turned off fails by name "
+          "(Nameless)")
+    check(not check_second_link(plant(
+        "    if solutions.get(name) is not None:\n", "    if False:\n",
+        "typed first"))[0],
+        "8. planted fault caught: the typed e read before the store")
+    ok, why = check_plot_list()
+    check(ok, "9. every small body in the plot's list is decided (%s)" % why)
 
     failed = [label for ok, label in results if not ok]
     print()

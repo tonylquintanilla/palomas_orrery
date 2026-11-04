@@ -59,6 +59,10 @@ why; the "both around the Sun" label is gone.)
 Module updated: November 4, 2026 with Anthropic's Claude Opus 5.5 (L-510:
 a small body whose database e and the elements to be drawn sit on two
 sides of 1 is named, FAILED, and no orbit is drawn for it.)
+Module updated: November 4, 2026, afternoon, with Anthropic's Claude Opus
+5.5 (L-512, part 1: that side check falls back to the e of the body's
+typed elements in orbital_elements.py when JPL's database has no record,
+so 6AC4721's orbit is drawn again.)
 
 Role: computation
 Domain: orrery
@@ -5505,7 +5509,9 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
             # the elements drawn here sit on two sides of 1 fails by name;
             # an ellipse is never drawn from a hyperbolic solution, nor a
             # hyperbola from a closed one (path_or_orbit.side_disagreement).
-            _side = _poo.side_disagreement(obj_info, e)
+            # L-512: with no record in the store, the e of the body's typed
+            # elements in orbital_elements.py stands in, said by name.
+            _side = _poo.side_disagreement(obj_info, e, fallback=True)
             if _side:
                 print(f"[PATH OR ORBIT] FAILED {_side}", flush=True)
                 skipped['invalid_orbit'].append(obj_name)

@@ -1601,14 +1601,14 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F2026%20A1&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-31",
+        "confirmed": "2026-11-04",
         "center": "@sun",
         "target": "C/2026 A1",
-        "epoch": "2026-10-22 20:37",
-        "days": 693761.814793487,
-        "error_days": 43312.7321063705,
-        "jpl_days": 693761.814793487,
-        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='C%2F2026%20A1%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461336.359027778'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
+        "epoch": "2026-11-04 14:34",
+        "days": 692302.549894268,
+        "error_days": 42764.55990996305,
+        "jpl_days": 692302.5498941079,
+        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='C%2F2026%20A1%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461349.106944445'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
       }
     },
     "west": {
@@ -1712,11 +1712,11 @@
         "confirmed": "2026-11-04",
         "center": "@0",
         "target": "C/2025 K1-C",
-        "epoch": "2025-11-25 00:01",
-        "days": 366591.2551421582,
+        "epoch": "2026-11-04 14:34",
+        "days": 35823123.73634231,
         "error_days": 38764000000.0,
-        "jpl_days": 366591.2551421582,
-        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='C%2F2025%20K1-C%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@0'&TLIST='2461004.500694444'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
+        "jpl_days": 35823123.73657669,
+        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='C%2F2025%20K1-C%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@0'&TLIST='2461349.106944445'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
       }
     },
     "c2025_k1_d": {

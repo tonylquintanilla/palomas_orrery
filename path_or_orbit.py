@@ -46,13 +46,35 @@ THE STORE
     the entry's search now is not the entry's: it is due, and the rule
     refuses it.
 
+THE ORRERY'S PLOT HAS A SECOND LINK (L-512, part 1)
+
+    Tony's chain, Nov 4, 2026: JPL, then the saved record of JPL's
+    answers, then the typed elements ("if the cache is incomplete the
+    typed elements"). For the orrery's own plot (drawn_type_or_none, and
+    the orbit drawing's side check with fallback=True) the decision is:
+    JPL's database e from the store; when the store has NO record for the
+    entry, the e of the entry's elements in orbital_elements.py (typed
+    from a cited source, or stored there from the cache: decided_e); only
+    if neither, the named failure. The console says so by name every time
+    the second link decides. A record asked of another search is not "no
+    record": it still fails by name, since the entry's identity moved and
+    typed elements may describe the old one. The export, the path plan
+    and the period fetch keep the store alone (fallback False): what the
+    website serves is decided by JPL's database or not at all.
+
+    Why this is not L-510 undone: L-510 retired object_type, a project
+    label with no source. The second link is a measurement typed from a
+    cited source (6AC4721's from MPEC 2026-A49), read only when JPL's
+    database has no record. On 2026-11-04 it decides one body, 6AC4721,
+    which JPL does not carry under that name.
+
 A NAMED FAILURE, NEVER A QUIET DEFAULT
 
     A small body with no record, or one asked of another search, raises
     NoSolution naming the body and why. The export, the path plan and the
-    period fetch stop on it by name; the orrery's plot prints it by name
-    and draws the body by neither its plan nor an ellipse
-    (drawn_type_or_none).
+    period fetch stop on it by name; the orrery's plot, when the second
+    link has no e either, prints it by name and draws the body by neither
+    its plan nor an ellipse (drawn_type_or_none).
 
     When the database's e and the osculating elements a drawing would use
     disagree about the side of 1, the drawing fails by name
@@ -64,11 +86,17 @@ Functions:
     search_of(f)                     -> what SBDB is asked for the entry
     load_solutions(root)             -> {name: record}
     solution_e(f, solutions)         -> float; raises NoSolution
-    drawn_as_path(f, solutions)      -> bool; raises NoSolution
-    drawn_type(f, solutions)         -> 'trajectory', 'orbital' or typed
-    drawn_type_or_none(f)            -> as drawn_type; None, printed, on
-                                        a NoSolution (the orrery's plot)
-    side_disagreement(f, osc_e, s)   -> None, or the named failure
+    typed_e(f, params)               -> the e of its orbital_elements.py
+                                        entry, or None
+    decided_e(f, solutions, params)  -> (e, 'database' or 'typed'); the
+                                        plot's chain; raises NoSolution
+    drawn_as_path(f, s, fallback)    -> bool; raises NoSolution
+    drawn_type(f, s, fallback)       -> 'trajectory', 'orbital' or typed
+    drawn_type_or_none(f)            -> as drawn_type with the second
+                                        link; None, printed, on a
+                                        NoSolution (the orrery's plot)
+    side_disagreement(f, osc_e, s, fallback)
+                                     -> None, or the named failure
     refresh_due(f, solutions, today) -> None, or why it is asked again
     fetch_solution(search)           -> (record or None, why, reached)
     save_solutions(root, solutions)
@@ -83,6 +111,11 @@ Domain: orrery
 
 Module created: November 4, 2026 with Anthropic's Claude Opus 5.5
 (L-510, part 1: a small body drawn by its eccentricity).
+Module updated: November 4, 2026, afternoon, with Anthropic's Claude Opus
+5.5 (L-512, part 1: the orrery's plot falls back to the e of the entry's
+elements in orbital_elements.py when the store has no record, and says
+so; typed_e, decided_e, and fallback on drawn_as_path, drawn_type and
+side_disagreement.)
 """
 
 import datetime
@@ -91,6 +124,7 @@ import os
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 STORE = os.path.join("data", "small_body_solutions.json")
+ELEMENTS = "orbital_elements.py"   # the second link's home (L-512)
 CYCLE_DAYS = 30
 SBDB_API_URL = "https://ssd-api.jpl.nasa.gov/sbdb.api"
 
@@ -170,16 +204,56 @@ def solution_e(f, solutions=None):
     return float(_record(f, solutions)["e"])
 
 
-def drawn_as_path(f, solutions=None):
+def typed_e(f, params=None):
+    """The e of the entry's elements in orbital_elements.py
+    (planetary_params, keyed by the entry's name), typed from a cited
+    source or stored there from the cache; None when there is none, or it
+    is not a number. The second link of the plot's chain (L-512)."""
+    if params is None:
+        from orbital_elements import planetary_params as params
+    try:
+        return float((params.get(f.get("name")) or {})["e"])
+    except (KeyError, TypeError, ValueError):
+        return None
+
+
+def decided_e(f, solutions=None, params=None):
+    """(e, source) by Tony's chain, for the orrery's plot (L-512, part 1).
+    source is 'database': JPL's database e from the store; or, only when
+    the store has no record for the entry, 'typed': the e of its elements
+    in orbital_elements.py, printed by name. A record asked of another
+    search still fails by name. With neither, raises NoSolution naming
+    both links."""
+    if solutions is None:
+        solutions = load_solutions()
+    name = f.get("name")
+    if solutions.get(name) is not None:
+        return float(_record(f, solutions)["e"]), "database"
+    e = typed_e(f, params)
+    if e is None:
+        raise NoSolution(name, "no e from JPL's Small-Body Database on "
+                               "record (%s), and no e in its elements in %s"
+                         % (STORE.replace(os.sep, "/"), ELEMENTS))
+    print("[PATH OR ORBIT] %s: JPL's Small-Body Database has no record; "
+          "decided by the e of its elements in %s, %r: %s"
+          % (name, ELEMENTS, e, "a path" if e >= 1.0 else "an orbit"),
+          flush=True)
+    return e, "typed"
+
+
+def drawn_as_path(f, solutions=None, fallback=False, params=None):
     """True when a small body is drawn as a path: its solution e is at or
     above 1. False for an entry that is not a small body (a spacecraft is
-    a path by its own rule, path_plan.is_spacecraft). Raises NoSolution."""
+    a path by its own rule, path_plan.is_spacecraft). With fallback (the
+    orrery's plot only), the e is decided_e's. Raises NoSolution."""
     if not is_small_body(f):
         return False
+    if fallback:
+        return decided_e(f, solutions, params)[0] >= 1.0
     return solution_e(f, solutions) >= 1.0
 
 
-def drawn_type(f, solutions=None):
+def drawn_type(f, solutions=None, fallback=False, params=None):
     """The object_type the orrery draws a body by: for a small body typed
     'orbital' or 'trajectory', 'trajectory' when it is drawn as a path
     and 'orbital' when as an orbit; for anything else its typed
@@ -188,30 +262,37 @@ def drawn_type(f, solutions=None):
     typed = f.get("object_type")
     if typed not in ("orbital", "trajectory") or not is_small_body(f):
         return typed
-    return "trajectory" if drawn_as_path(f, solutions) else "orbital"
+    return ("trajectory" if drawn_as_path(f, solutions, fallback, params)
+            else "orbital")
 
 
-def drawn_type_or_none(f, solutions=None):
-    """drawn_type for the orrery's plot: on a NoSolution, the failure is
-    printed by name and None returned, so the body is drawn by neither its
-    plan nor an ellipse, only by the positions JPL gives for the plot's
-    dates."""
+def drawn_type_or_none(f, solutions=None, params=None):
+    """drawn_type for the orrery's plot, with the second link (L-512): the
+    store's e, else the e of the entry's elements in orbital_elements.py.
+    With neither, the failure is printed by name and None returned, so the
+    body is drawn by neither its plan nor an ellipse, only by the
+    positions JPL gives for the plot's dates."""
     try:
-        return drawn_type(f, solutions)
+        return drawn_type(f, solutions, True, params)
     except NoSolution as exc:
         print("[PATH OR ORBIT] FAILED %s; drawn by neither its plan nor "
               "an orbit" % exc, flush=True)
         return None
 
 
-def side_disagreement(f, osc_e, solutions=None):
+def side_disagreement(f, osc_e, solutions=None, fallback=False,
+                      params=None):
     """None when the osculating e a drawing would use sits on the same
     side of 1 as the database's e; otherwise the named failure, as text.
-    A small body with no database e is a failure too."""
+    A small body with no database e is a failure too, unless fallback (the
+    orrery's orbit drawing, L-512) finds the e of its typed elements."""
     if not is_small_body(f):
         return None
     try:
-        db_e = solution_e(f, solutions)
+        if fallback:
+            db_e, source = decided_e(f, solutions, params)
+        else:
+            db_e, source = solution_e(f, solutions), "database"
     except NoSolution as exc:
         return str(exc)
     try:
@@ -219,12 +300,15 @@ def side_disagreement(f, osc_e, solutions=None):
     except (TypeError, ValueError):
         return "%s: the elements to draw carry no e" % f.get("name")
     if (db_e >= 1.0) != (osc >= 1.0):
-        return ("%s: JPL's Small-Body Database gives e = %s (%s), the "
-                "elements to draw give e = %.9f (%s); no orbit is drawn "
-                "from elements on the other side of 1"
-                % (f.get("name"), _record(f, solutions or load_solutions())
-                   ["e"], "open" if db_e >= 1.0 else "closed", osc,
-                   "open" if osc >= 1.0 else "closed"))
+        if source == "database":
+            said = ("JPL's Small-Body Database gives e = %s"
+                    % _record(f, solutions or load_solutions())["e"])
+        else:
+            said = "its elements in %s give e = %r" % (ELEMENTS, db_e)
+        return ("%s: %s (%s), the elements to draw give e = %.9f (%s); no "
+                "orbit is drawn from elements on the other side of 1"
+                % (f.get("name"), said, "open" if db_e >= 1.0 else "closed",
+                   osc, "open" if osc >= 1.0 else "closed"))
     return None
 
 

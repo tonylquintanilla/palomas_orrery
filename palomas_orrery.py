@@ -157,6 +157,11 @@ solution's e in JPL's Small-Body Database (drawn_object_type, through
 path_or_orbit.py), at or above 1 a path; the typed object_type no longer
 decides it, at the eight places it did in the static plot and the
 animation.)
+Module updated: November 4, 2026, afternoon, with Anthropic's Claude Opus
+5.5 (L-512, part 1: when JPL's database has no record for a small body,
+drawn_object_type falls back to the e of its typed elements in
+orbital_elements.py and says so, so 6AC4721 is drawn as an orbit again
+instead of a single point.)
 
 """
 #Paloma's Orrery - Solar System Visualization Tool
@@ -216,7 +221,9 @@ def drawn_object_type(obj, default=None):
     'orbital' or 'trajectory' is drawn as a path ('trajectory') when its
     orbit solution's e in JPL's Small-Body Database is at or above 1, as an
     orbit ('orbital') below it (path_or_orbit.py); the typed field no longer
-    decides. With no database e the failure is printed by name and None is
+    decides. With no record in the store, the e of the body's elements in
+    orbital_elements.py decides, and the console says so (L-512, part 1:
+    6AC4721). With neither, the failure is printed by name and None is
     returned, so the body is drawn by neither its plan nor an orbit. Every
     other entry keeps its typed object_type (default when it has none)."""
     if (obj.get('object_type') in ('orbital', 'trajectory')

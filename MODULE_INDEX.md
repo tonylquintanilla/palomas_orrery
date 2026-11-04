@@ -12,8 +12,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 176  
-**Total Lines of Code (non-blank):** 139,225  
-**Total Public Functions/Classes:** 1,797
+**Total Lines of Code (non-blank):** 139,444  
+**Total Public Functions/Classes:** 1,803
 
 ## Classification Coverage
 
@@ -46,7 +46,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `earth_system_controller.py` | KMZ layer selector for Google Earth Pro. (131 lines) |
 | `earth_system_visualization_gui.py` | Earth System Visualization GUI for Paloma's Orrery Hub window with climate data visualizations (1,903 lines) |
 | `orbital_param_viz.py` | Interactive orbital element visualization tool. (1,965 lines) |
-| `palomas_orrery.py` | Main GUI and plotting engine for Paloma's Orrery. (9,922 lines) |
+| `palomas_orrery.py` | Main GUI and plotting engine for Paloma's Orrery. (9,929 lines) |
 | `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (3,500 lines) |
 | `star_visualization_gui.py` | Stellar visualization GUI for Paloma's Orrery. (1,409 lines) |
 
@@ -121,13 +121,13 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `fetch_paleoclimate_data.py` | Paleoclimate Data Fetcher for Paloma's Orrery Fetches and caches paleoclimate proxy data from authoritative sources (171 lines) |
 | `galactic_tide_sampler.py` | Where the galaxy's tide sends comets in from: dots in the outer Oort cloud about the galaxy's pole, placed once from a seed, sparse at the galaxy's plane and at its poles, thickest halfway. (230 lines) |
 | `hills_cloud_sampler.py` | The Hills cloud (the inner Oort cloud) as dots along orbits, following Nesvorny et al. (2025), Fig. 3. (427 lines) |
-| `idealized_orbits.py` | Keplerian orbit ellipse construction and satellite orbit models. Computes and plots idealized (Keplerian) orbit paths from orbital elements, with osculating element support for high-accuracy visualization. Handles elliptical, parabolic, and hyperbolic orbits. Includes specia... (6,764 lines) |
+| `idealized_orbits.py` | Keplerian orbit ellipse construction and satellite orbit models. Computes and plots idealized (Keplerian) orbit paths from orbital elements, with osculating element support for high-accuracy visualization. Handles elliptical, parabolic, and hyperbolic orbits. Includes specia... (6,770 lines) |
 | `main_belt_sampler.py` | The main asteroid belt as a cloud of dots placed at random inside the belt's spread, measured from JPL's own orbits. (365 lines) |
 | `object_type_analyzer.py` | Object Type Analysis and Report Generation Module Provides comprehensive analysis of astronomical data including object types, data quality metrics, and full report generation. (756 lines) |
 | `orbital_elements.py` | Standalone data module containing orbital element dictionaries. NO IMPORTS - Pure data only to avoid circular dependencies. (1,296 lines) |
 | `orbital_period.py` | A body's orbital period from JPL, printed to the digits its errors earn. (942 lines) |
 | `outer_oort_sampler.py` | The outer Oort cloud as a thin scatter of loose dots with clumps among them, placed once from a seed, between the rows' edges. (202 lines) |
-| `path_or_orbit.py` | - the one home of the rule that decides whether a small body is drawn as a path or as an orbit: by the eccentricity of its orbit solution in JPL's Small-Body Database, refreshed on the 30-day cycle (L-510, part 1). (250 lines) |
+| `path_or_orbit.py` | - the one home of the rule that decides whether a small body is drawn as a path or as an orbit: by the eccentricity of its orbit solution in JPL's Small-Body Database, refreshed on the 30-day cycle (L-510, part 1). (327 lines) |
 | `pole_frames.py` | The matrix that turns coordinates measured about a pole into the drawing's frame, the ecliptic of J2000. (72 lines) |
 | `position_accuracy.py` | How well JPL knows a plotted position, and the hover's distances and speeds printed to the digits that knowledge earns. (744 lines) |
 | `simbad_manager.py` | Enhanced SIMBAD Query Manager with configurable rate limiting and retry logic. This module replaces simbad_test.py and provides robust SIMBAD querying capabilities. (1,030 lines) |
@@ -258,7 +258,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `test_objects_export.py` | - data/objects_export.json says what the object list in celestial_objects.py holds, and no entry in the list writes a field twice. (386 lines) |
 | `test_orbit_cache.py` | Comprehensive test suite for orbit data caching and repair (353 lines) |
 | `test_orbit_markers.py` | Each orbit is drawn around its period's centre, each marker's date comes from the period JPL gave, and every orbit and marker hover prints by the errors JPL states; and proof that this check can fail. (894 lines) |
-| `test_path_or_orbit.py` | - the rule that draws a small body as a path or an orbit by its orbit solution's e in JPL's Small-Body Database (path_or_orbit.py, L-510), on made-up records, with no network; and the guard that the retired 'open_path' does not come back to the object list. Each check is fi... (276 lines) |
+| `test_path_or_orbit.py` | - the rule that draws a small body as a path or an orbit by its orbit solution's e in JPL's Small-Body Database (path_or_orbit.py, L-510), on made-up records, with no network; and the guard that the retired 'open_path' does not come back to the object list. Each check is fi... (405 lines) |
 | `test_path_plan.py` | - the path plan, offline, against a made-up solar system answered in JPL's own vector format (L-443, slice 2). (847 lines) |
 | `test_period_fetch.py` | - the period fetch (L-444) on recorded answers, with no network: it asks only for what is missing, with plotting's own call, writes the record plotting writes, and names a failure; and every planted fault is caught by name. (1,051 lines) |
 | `test_position_digits.py` | The orrery's body hover prints each distance and speed to the digits JPL's errors earn, and proof that this check can fail. (908 lines) |

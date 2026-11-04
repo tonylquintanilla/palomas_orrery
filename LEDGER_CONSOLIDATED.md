@@ -935,7 +935,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*252 live items; 236 need attention (`!`); 165 RICE-scored; 252 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*253 live items; 237 need attention (`!`); 165 RICE-scored; 252 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1101,6 +1101,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-509 | Obsolete code: how it is marked, and when it goes (orrery, housekeeping) | OPEN | -- | 2026-11-03 |
 | ! | L-510 | The object list's typed fields stop deciding: a small body drawn by today's eccentricity, a plan asked from before any launch (orrery, the object list and the path plan) | OPEN | -- | 2026-11-04 |
 | ! | L-511 | The orrery's export carries the words the website prints (orrery + gallery, the words) | OPEN | -- | 2026-11-03 |
+| ! | L-512 | The orrery's fallbacks when JPL cannot answer (orrery, the plot's data path) | OPEN | -- | 2026-11-04 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1529,6 +1530,87 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ## DETAIL / RECORD
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
+
+#### [L-512] The orrery's fallbacks when JPL cannot answer (orrery, the plot's data path)
+<!-- L:512 status:OPEN upd:2026-11-04 section:A flag: rice: -->
+- **Opened 2026-11-04**, from
+  `documentation/COORD_L512_jpl_fallbacks_brief_20261104.md`. Tony, Nov
+  4, 10:22, on 6AC4721: "the analytical orbit is not plotted. this could
+  be an issue. what happens if Horizons is unavailable, i thought that
+  the fallback is the cache, and if the cache is incomplete the typed
+  elements ... this is not trivial." 10:32, on `data/orbit_paths.json`:
+  "this was my understanding: that this file was our record of fetched
+  data from jpl and that it was a fallback in the event of a jpl
+  failure." 10:34: "i would like to address this gap now. it is an
+  important part of the pipeline as a fallback and data integrity
+  issue." His chain: JPL live, then the saved record of JPL's answers,
+  then the typed elements.
+- **Part 1, built 2026-11-04 (Claude Code, Opus 5.5) at 3fb14c26, not
+  yet committed.** For the orrery's plot, the path-or-orbit decision
+  falls back to the e of the entry's elements in `orbital_elements.py`
+  when `data/small_body_solutions.json` has no record, and the console
+  says so by name every time (`path_or_orbit.decided_e`, `typed_e`; a
+  `fallback` switch on `drawn_as_path`, `drawn_type`,
+  `side_disagreement`; on for `drawn_type_or_none` and
+  idealized_orbits' side check). A record asked of another search still
+  fails by name. The export, the path plan and the period fetch keep the
+  store alone, so what the website serves is unchanged.
+  - Why this is not L-510 undone: L-510 retired `object_type`, a project
+    label with no source; the second link is a measurement typed from a
+    cited source (6AC4721's from MPEC 2026-A49), read only when JPL's
+    database has no record.
+  - The bodies whose drawing changes: ONE, 6AC4721 (typed e 0.99994, an
+    orbit). It is the only small body of the 69 the plot sends through
+    the rule with no record (68 are keyed and have one).
+  - Why it drew one point: with no record, `drawn_object_type` returned
+    None; the static worker's date builder has no branch for None
+    ("ERROR: No handler for object type 'None'") and gave it one date,
+    and idealized_orbits' side check refused its Keplerian orbit. Read by
+    a throwaway run of the plot's own code: before, the decision None and
+    no Keplerian orbit; after, 'orbital', the analytical orbit 51 points
+    over 51 dates, the Keplerian orbit 361.
+  - `test_path_or_orbit.py` checks 8 and 9: the second link, and every
+    small body in the plot's list decided by one link. Planted and
+    caught: the typed e put on the wrong side of 1 (1.00006) changes the
+    answer; the lookup turned off fails by name; the typed e read before
+    the store. Suite 17 of 17; the maintenance run "35 of 35 gating
+    checkers passed" [verified, this session].
+- **Part 2, mapped, not built**:
+  `documentation/MAP_L512_jpl_fallbacks_20261104.md`. With JPL
+  unreachable: Mars and Halley draw only their Keplerian orbits (from
+  the saved osculating elements); Juno and Voyager 1 around the Sun draw
+  nothing; no position marker anywhere (the animation keeps empty
+  markers in its legend); Juno around Jupiter still drew, from
+  astroquery's own week-old saved answer.
+  - FOUND: `fetch_trajectory` and `fetch_orbit_path`
+    (palomas_orrery_helpers.py lines 385 and 598) ask without
+    `cache=HORIZONS_CACHE`, so the plot's paths, and the writer of
+    `data/orbit_paths.json`, are not asked fresh; also
+    spacecraft_encounters.py lines 637, 672, 985 and
+    comet_visualization_shells.py line 2114.
+  - FOUND: "no such object" and "no answer" look the same to every
+    caller (`[None, ...]` and `None`); only the printed text differs.
+  - FOUND: `data/orbit_paths.json` (137.6 MB, 1,503 entries, 1,527,707
+    points, 1965 to 2064) files points under spread dates, not JPL's
+    times (`orbit_data_manager.fetch_orbit_path_by_dates`). Against JPL
+    today: Mars's point under 2026-05-16 is JPL's Mars of 2026-04-15
+    (31 days late); Voyager 1's of 2025-05 to 2026-12 about 30 days off;
+    Halley's about a day.
+  - The three fallback lists, same four names: palomas_orrery.py lines
+    4568, 5961 (`ANALYTICAL_POSITION_FALLBACK`) and 7062
+    (`ANALYTICAL_ANIMATION_FALLBACK`). Part 2 reads one list.
+**Gap:** Tony's rulings on the map's seven questions (0, the saved
+file's dates, added by the map; 1 to 6 from the brief); then part 2 as
+ruled; then horizons-orbital-mechanics' one bump for both parts (its
+L-510 sentence "draws the body by neither its plan nor an orbit"
+corrected by part 1, and the Query Mechanics claim that both
+instruments ask fresh corrected by the map), with the protocol's entry.
+- **Tony-action (decide):** the map's seven rulings, one at a time.
+- **Tony-action (do):** commit part 1 when its look is done.
+**Ref:** `path_or_orbit.py`; `test_path_or_orbit.py`;
+`idealized_orbits.py`; `palomas_orrery.py`; `palomas_orrery_helpers.py`;
+`orbit_data_manager.py`; L-510; L-470 (C/2025 K1's renumbering); L-504
+(the clock and HORIZONS_CACHE); the brief and the map above.
 
 #### [L-511] The orrery's export carries the words the website prints (orrery + gallery, the words)
 <!-- L:511 status:OPEN upd:2026-11-03 section:A flag: rice: -->

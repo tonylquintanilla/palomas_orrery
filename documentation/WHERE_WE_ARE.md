@@ -1,21 +1,20 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 4, 2026: the Claude Code session that built L-510 (the typed fields stop deciding), part 1.
-- Written at orrery eab623f5 and gallery 5abca2c6, plus this session's uncommitted edits.
+Last updated: November 4, 2026, afternoon: the Claude Code session that built L-512 (fallbacks when JPL cannot answer), part 1, and mapped part 2.
+- Written at orrery 3fb14c26 and gallery 5abca2c6, plus this session's uncommitted edits.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - A small body is drawn as a path or an orbit by its e in JPL's
->   small-body database (your ruling, Nov 4). 'open_path' is gone.
-> - Tsuchinshan, Wierzchos and ATLAS are now paths in the orrery too.
-> - Piece C of C/2025 K1 is now an orbit; the website stops drawing it
->   after its next pull (written on L-484 (the two agree)).
-> - McNaught stays a path, with no ellipse: the drawing refuses it.
+> - 6AC4721 draws its orbit again. With no JPL record, a small body's
+>   path or orbit is decided by the e of its typed elements, and the
+>   console says so (L-512 (fallbacks when JPL cannot answer), part 1).
+> - Mapped, not built: what the orrery draws with JPL down, and the
+>   saved-path file, whose dates can be a month off (the map).
 >
-> **Do next:** *your look at four plots (the report's run order); then
-> the check's brief (L-484 (the two agree)).*
+> **Do next:** *your rulings on the map's seven questions, one at a
+> time; then part 2 as ruled, in the same session.*
 >
 > **Needs you now:**
 > - *(do) Reinstall horizons-orbital-mechanics (now 1.16) and paste the
@@ -31,7 +30,9 @@ Oct 27's order, changed Oct 29 (`DESIGN_L314_solar_wind_rulings_20261029.md`).
   1-11.[done]  All but 5b and 9, through Nov 4: the three rooms, the
                objects, the Sun's and Earth's slices, historical
                missions' slice 1, the orrery's paths by the plan (L-476),
-               L-510 part 1 (Nov 4). << moved this session
+               L-510 part 1 (Nov 4).
+ 12f.  [NOW]   *L-512 (fallbacks when JPL cannot answer): part 1 built
+               Nov 4; part 2 waits on your rulings.* << new this session
  5d.   [NOW]   *The orrery's clock (L-504 (the orrery's clock)): the
                data path done Oct 29, the website's date fix Oct 31;
                Earth System, stamps, tools next.*
@@ -42,7 +43,7 @@ Oct 27's order, changed Oct 29 (`DESIGN_L314_solar_wind_rulings_20261029.md`).
                its build; piece C is its first open difference. The
                words wait for L-511 (the export carries the words).*
  12e.  [later] L-510 (the typed fields stop deciding), part 2: the path
-               plan asked from before any launch. << new this session
+               plan asked from before any launch.
   5b.  [beside] Housekeeping when a session has room: L-424, L-425,
                L-426; L-423 (the website's checks) item 3, L-357;
                L-509 (obsolete code), after its talk.
@@ -56,7 +57,7 @@ Oct 27's order, changed Oct 29 (`DESIGN_L314_solar_wind_rulings_20261029.md`).
  15.   [goal]  The website does what the desktop orrery does, with a date
                to choose, within the range the data covers.
 
-## Settled  **>> UPDATED THIS SESSION**
+## Settled
 
 Standing rulings. A line leaves after a few weeks, once it is habit, or
 once a skill or the protocol carries it (trimmed Nov 3, night).
@@ -97,14 +98,14 @@ Waiting behind other work; a line leaves when picked up.
 
 Read from files when this page was written, not typed from memory.
 - Last cache build: 20261103T193343Z, ok, no retry (swap log at 5abca2c6).
-- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md, this session's maintenance run).
+- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md, this session's maintenance run, Nov 4 afternoon).
 - This page's date and the ledger's newest stamp: both Nov 4. Agree.
 
-## Waiting on you
+## Waiting on you  **>> UPDATED THIS SESSION**
 
 Decisions, one at a time:
-- None today. Later: which ended missions come next (the orrery also
-  lists Pioneer 10, Pioneer 11, Rosetta and DART).
+- L-512's seven rulings, in the map. Later: which ended missions come
+  next (Pioneer 10, Pioneer 11, Rosetta and DART).
 
 At the next design talk:
 - How obsolete code is treated, and when it goes (L-509 (obsolete
@@ -122,7 +123,7 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- This session: L-510 in the ledger; the rule, `path_or_orbit.py`.
+- This session: L-512 in the ledger; `MAP_L512_jpl_fallbacks_20261104.md`.
 - The talk's rulings: `DESIGN_L484_consistency_rulings_20261103.md`.
 - The door: `documentation/python_work_door/`, and L-499.
 - Your run record: `WHERE_WE_ARE_11-3-26_1158_run_record.md`.
