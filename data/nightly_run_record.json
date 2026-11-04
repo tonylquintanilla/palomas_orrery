@@ -3,9 +3,9 @@
   "schema": 2,
   "taken": [],
   "held": [],
-  "clean_run_utc": "2026-11-03T15:08:55.128913+00:00",
+  "clean_run_utc": "2026-11-04T15:27:22.870544+00:00",
   "where": "GitHub Actions",
-  "run_log": "https://github.com/tonylquintanilla/palomas_orrery/actions/runs/41660475328",
+  "run_log": "https://github.com/tonylquintanilla/palomas_orrery/actions/runs/41857656524",
   "reported_not_red": [],
   "rows": [
     {
@@ -16,22 +16,22 @@
     {
       "row": "Period fetch",
       "kind": "generator",
-      "verdict": "unchanged (1 checked, not written) -- NOTHING MISSING -- 92 served objects examined, no query asked"
+      "verdict": "unchanged (2 checked, not written) -- NOTHING MISSING -- 92 served objects examined, no query asked"
     },
     {
       "row": "Horizons check",
       "kind": "generator",
-      "verdict": "unchanged (2 checked, not written) -- NOTHING DUE -- 92 entries and 26 sheets current, no query asked"
+      "verdict": "rewrote data/horizons_confirmations.json -- PASS -- 1 checked today, 1 queries"
     },
     {
       "row": "Path plan",
       "kind": "generator",
-      "verdict": "unchanged (1 checked, not written) -- 28 paths, events atlas_2024_g3 1, atlas_3i 1, bepicolombo 35, borisov_2025_v1 1, borisov_2i 1, c2025_k1 1, c2025_k1_b 1, c2025_k1_c 1, c2025_k1_d 1, cassini 7, europa_clipper 5, galileo 7, juice 10, juno 4, lucy 7, mcnaught 1, new_horizons 2, osiris_apex 13, oumuamua 1, panstarrs_2025_r3 1, parker_solar_probe 49, psyche_spacecraft 2, solar_orbiter 31, tsuchinshan_atlas 1, voyager_1 2, voyager_2 5, west 1, wierzchos 1. Asked JPL for: nothing."
+      "verdict": "unchanged (1 checked, not written) -- 27 paths, events atlas_2024_g3 1, atlas_3i 1, bepicolombo 35, borisov_2025_v1 1, borisov_2i 1, c2025_k1 1, c2025_k1_b 1, c2025_k1_d 1, cassini 7, europa_clipper 5, galileo 7, juice 10, juno 4, lucy 7, mcnaught 1, new_horizons 2, osiris_apex 13, oumuamua 1, panstarrs_2025_r3 1, parker_solar_probe 49, psyche_spacecraft 2, solar_orbiter 31, tsuchinshan_atlas 1, voyager_1 2, voyager_2 5, west 1, wierzchos 1. Asked JPL for: nothing. Not planned: lucy."
     },
     {
       "row": "Objects export",
       "kind": "generator",
-      "verdict": "unchanged (1 checked, not written)"
+      "verdict": "rewrote data/objects_export.json"
     },
     {
       "row": "Drawings export",
@@ -51,7 +51,7 @@
     {
       "row": "Horizons confirmations",
       "kind": "checker",
-      "verdict": "pass -- 92 of 92 entries and 63 periods confirmed, 26 sheets read, within 30 days"
+      "verdict": "pass -- 92 of 92 entries and 64 periods confirmed, 26 sheets read, within 30 days"
     },
     {
       "row": "Horizons check suite",
@@ -66,7 +66,12 @@
     {
       "row": "Path plan suite",
       "kind": "checker",
-      "verdict": "29 of 29 checks passed"
+      "verdict": "31 of 31 checks passed"
+    },
+    {
+      "row": "Path or orbit suite",
+      "kind": "checker",
+      "verdict": "12 of 12 checks passed, every planted fault caught"
     },
     {
       "row": "Orbit cache",
@@ -118,6 +123,10 @@
     },
     {
       "row": "Constants rounding",
+      "why": "judges code, and at night no code changes"
+    },
+    {
+      "row": "Path drawing suite",
       "why": "judges code, and at night no code changes"
     },
     {
