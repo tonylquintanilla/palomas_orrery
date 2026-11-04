@@ -30,6 +30,9 @@ import the dashboard into its own third GUI column without duplicating
 the launch-card / status-log UI code.
 Module updated: November 3, 2026 with Anthropic's Claude Opus 5.5
 (L-476: the Path Drawing Suite's line, 7 checks, two planted faults).
+Module updated: November 4, 2026 with Anthropic's Claude Opus 5.5
+(L-510: the Path Or Orbit Suite's button and line; the Period Fetch's
+line names its 30-day refresh of each small body's e).
 July 2026: added Linux Button-4/5 wheel scrolling to match columns 1/2's
 cross-platform coverage (CTkScrollableFrame's built-in handling only
 covers Windows/Mac <MouseWheel>). Audited LAUNCH_GROUPS against both
@@ -1747,6 +1750,19 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
+        ("Path Or Orbit Suite",
+         "test_path_or_orbit.py",
+         "The rule that draws a small body as a path or an orbit by the e "
+         "of its orbit solution in JPL's small-body database, with no "
+         "network: one body each side of 1 and one with none, the 30-day "
+         "cycle, two sides of 1 refused by name, no entry of the list "
+         "carrying open_path, every keyed small body with its e; planted "
+         "faults caught. "
+         "Ends on \"PATH OR ORBIT SUITE: 12 of 12 checks passed\" (L-510).",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
         ("Period Fetch Suite",
          "test_period_fetch.py",
          "The Period Fetch on recorded answers, with no network "
@@ -2252,7 +2268,7 @@ CARD_LINES = {
         "Writes the objects export the website reads, from celestial_objects.py.",
     ("Maintenance Run",
      "Period Fetch"):
-        "Fetches from JPL each served object's missing orbital period.",
+        "Fetches missing periods, and each small body's e every 30 days.",
     ("Maintenance Run",
      "Path Plan"):
         "Finds each spacecraft path's flybys in JPL's positions, every 30 days.",
@@ -2262,6 +2278,9 @@ CARD_LINES = {
     ("Maintenance Run",
      "Path Drawing Suite"):
         "Checks the orrery draws a path by its plan; one planted fault.",
+    ("Maintenance Run",
+     "Path Or Orbit Suite"):
+        "Checks a small body is a path or orbit by JPL's e.",
     ("Maintenance Run",
      "Skill Manifest"):
         "Regenerates the protocol's skill table from skills/*/SKILL.md.",

@@ -4056,6 +4056,40 @@ resident.
 (Moved down from the resident protocol on 2026-11-03 when
 v3.124 made a fourth entry.)
 
+v3.122 (November 2, 2026): No rule changed in this document. ONE
+sentence added to Token Economy [QUALITY], after its instances:
+where the table of method, model and effort lives. No skill bump.
+THE TABLE MADE FINDABLE FROM THE PROTOCOL AND THE DASHBOARD.
+
+WHAT PROMPTED IT. Tony, Nov 2, 10:01 Chicago, in the coordinating
+session (Claude Fable 5.1): "What would help would be recommendations
+regarding model and effort as well as method meaning snippet, patch or
+Code for our various actions and tasks." That session wrote the table,
+placed it as METHOD_MODEL_EFFORT.md at the orrery's root, and left its
+wiring to a patch by an Opus session, by the table's own row for
+records-only work (HANDOFF_coordination_20261102_morning.md, section
+8).
+
+WHAT CHANGED. Token Economy gains one sentence naming the table and
+where it opens. The dashboard's documents list gains the table's row
+after Running a Patch File (palomas_orrery_dashboard.py, LOCAL_DOCS).
+L-506 records the second slice. Built by the coordinating session of
+Nov 2, afternoon (Claude Opus 5.5), on orrery 7277aa4c, as
+patch_L506_2_method_table.py.
+
+THE OBLIGATION TRAVELS. The Project's instructions on claude.ai read
+v3.121 until Tony pastes this version in. No skill changed; nothing to
+reinstall.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.119 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-11-04 when
+v3.125 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

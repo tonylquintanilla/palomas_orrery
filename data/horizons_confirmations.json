@@ -1707,7 +1707,17 @@
       "queries": [
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F2025%20K1-C&group=sb&format=text",
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F2025%20K1-C&group=mb&format=text"
-      ]
+      ],
+      "period": {
+        "confirmed": "2026-11-04",
+        "center": "@0",
+        "target": "C/2025 K1-C",
+        "epoch": "2025-11-25 00:01",
+        "days": 366591.2551421582,
+        "error_days": 38764000000.0,
+        "jpl_days": 366591.2551421582,
+        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='C%2F2025%20K1-C%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@0'&TLIST='2461004.500694444'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
+      }
     },
     "c2025_k1_d": {
       "confirmed": "2026-10-31",

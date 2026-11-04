@@ -64,8 +64,9 @@ WHAT IT CHECKS
          days early, as a calendar day; Comet Two's as a Julian date),
          with the encounter rule's window and step; Comet One's span runs
          a year before its perihelion to a year after today, Comet Two's
-         is clipped at both ends to JPL's data. A comet not marked
-         open_path is not planned, and no spacecraft searches a comet.
+         is clipped at both ends to JPL's data. A comet whose database e
+         is below 1 is not planned, whatever its typed object_type (L-510),
+         and no spacecraft searches a comet.
      16. The same day asks nothing; 31 days later each comet is planned
          again, Comet One's end moved 31 days, Comet Two's still JPL's.
      17. Two planted faults must fail check 15: the perihelion taken from
@@ -107,6 +108,11 @@ Module updated: October 26, 2026 with Anthropic's Claude Opus 5.5
 planted faults).
 Module updated: November 2, 2026 with Anthropic's Claude Opus 5.5
 (L-507: check 18, an ended mission's mission_end, with a planted fault).
+Module updated: November 4, 2026 with Anthropic's Claude Opus 5.5
+(L-510: a comet is planned by its database e, not by a typed open_path.
+Each made-up root carries data/small_body_solutions.json; Comet Two,
+typed 'orbital', is planned because its e is 1.2, and Comet Closed, at
+0.9, is not.)
 """
 
 import datetime
@@ -291,9 +297,9 @@ OBJECT_DEFINITIONS = [
      'object_type': 'trajectory', 'start_date': datetime(2025, 1, 1),
      'end_date': datetime(2025, 6, 1)},
     {'name': 'Comet One', 'key': 'comet_one', 'id': 'C/2025 Z9',
-     'id_type': 'smallbody', 'object_type': 'trajectory', 'open_path': True},
+     'id_type': 'smallbody', 'object_type': 'trajectory'},
     {'name': 'Comet Two', 'key': 'comet_two', 'id': 'C/2024 Z8',
-     'id_type': 'smallbody', 'object_type': 'orbital', 'open_path': True},
+     'id_type': 'smallbody', 'object_type': 'orbital'},
     {'name': 'Comet Closed', 'key': 'comet_closed', 'id': 'C/2020 Z7',
      'id_type': 'smallbody', 'object_type': 'orbital'},
 ]
@@ -364,10 +370,23 @@ class FakeJPL(object):
         return "\n".join(lines) + "\n"
 
 
+# L-510: each made-up small body's database e, which decides whether it is
+# a path (at or above 1) or an orbit; written into every made-up root.
+SOLUTIONS = dict((n, {"search": s, "e": e, "class": None, "epoch_jd": None,
+                      "fullname": n, "fetched": "2026-10-24"})
+                 for n, s, e in (("Testroid", "X1", "0.2"),
+                                 ("Gone", "X2", "0.3"),
+                                 ("Comet One", "C/2025 Z9", "1.5"),
+                                 ("Comet Two", "C/2024 Z8", "1.2"),
+                                 ("Comet Closed", "C/2020 Z7", "0.9")))
+
+
 def make_root(source=LIST):
     root = tempfile.mkdtemp(prefix="path_plan_test_")
     with open(os.path.join(root, "celestial_objects.py"), "w") as handle:
         handle.write(source)
+    os.makedirs(os.path.join(root, "data"), exist_ok=True)
+    pp.path_or_orbit.save_solutions(root, SOLUTIONS)
     return root
 
 
@@ -650,7 +669,7 @@ def kinds_named():
         path = os.path.join(root, pp.PLANS)
         with open(path, "r", encoding="utf-8") as h:
             data = json.load(h)
-        bodies = pp.searched_bodies(pp.keyed_entries(LIST))
+        bodies = pp.searched_bodies(pp.keyed_entries(LIST), SOLUTIONS)
         ent = [f for f in pp.keyed_entries(LIST) if f["key"] == "craft_a"][0]
         old = pp.plan_inputs(ent, bodies)
         old["rule"] = 1
@@ -710,7 +729,7 @@ def comets(plant=None, today=datetime.date(2026, 10, 24)):
             if plan["kind"] != "comet":
                 probs.append("%s kind %s" % (key, plan["kind"]))
         if "comet_closed" in plans:
-            probs.append("a comet not marked open_path was planned")
+            probs.append("a comet whose database e is below 1 was planned")
         sa = plans.get("craft_a", {}).get("searched", [])
         if any(n.startswith("Comet") for n in sa):
             probs.append("Craft A searched a comet: %s" % sa)
@@ -875,8 +894,8 @@ def main():
     check(ok, "15. each comet on an open path has its perihelion found in "
               "JPL's positions to the minute, as its one event, and its "
               "span from a year before it to a year after today, clipped "
-              "to JPL's data; a comet not marked is not planned, and no "
-              "spacecraft searches a comet (%s)" % why)
+              "to JPL's data; a comet whose database e is below 1 is not "
+              "planned, and no spacecraft searches a comet (%s)" % why)
     for line in lines:
         if "comet" in line:
             print("  " + line)

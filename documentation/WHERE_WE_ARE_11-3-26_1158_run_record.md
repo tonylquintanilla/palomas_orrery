@@ -1447,9 +1447,185 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-3. Move the patch into `documentation/`, then commit and push.
+3. Move the patch into `documentation/`, then commit and push. -- eab623f5484fb8a47ccb2d086aab832838bb17ee
 
 **Where this leaves us:**
 - The records now match every ruling from today.
 - Next is L-510's Code session (Opus, high effort), from `COORD_L510_drawn_by_eccentricity_brief_20261103.md`.
 - Then the check's brief, written together with interactive-exhibit's next version.
+
+==============================================================
+
+**Session: OPEN: 11-4-26 0208: Opus: Code: L-510 typed fields part 1**
+
+Ruling taken: the eccentricity that decides is the one in JPL's small-body database (its orbit solution's), refreshed every 30 days. First the McNaught comparison and the re-run table.
+
+With the database's e, only piece C changes side; every other body stays where it is. Now McNaught's two numbers and what causes the gap.
+
+McNaught answered (details in the closing report). Now the build. Let me read the plotting sites that choose path or orbit, to see where one call can replace the typed field.
+
+Building now. I've read the period fetch; next I check how the path plan treats a comet that stops being a path (piece C), then write the one rule module.
+
+Writing the rule module now. One more read: the end of the static plot's date-list branches, to confirm what a body with no decided type falls into.
+
+Rule module written. Now wiring the fetch (period_fetch.py) to refresh each small body's database e and its elements on the 30-day cycle.
+
+Now the period fetch edits: the docstring first.
+
+Now the run itself: the two refreshes go in front of the period step.
+
+Period fetch done. Now the export (export_objects.py): its open_path is written by the rule instead of copied from the list.
+
+Export done (9 edits). Now the path plan's choice of which comets get a plan.
+
+Now the orrery's plot (palomas_orrery.py): every place where the typed field picked path or orbit asks the rule instead.
+
+The plot's sites are wired (each asks the rule only for ticked bodies). Next, the guard in the orbit drawing (idealized_orbits.py): no ellipse from elements on the wrong side of 1.
+
+Plot and orbit-drawing guard done. Now the object list: 'open_path' comes out of celestial_objects.py, and Wierzchos's recalled comment is checked.
+
+Object list done: 14 'open_path' lines removed (the brief's 13 plus the C/2025 K1 parent). Compiling everything touched before the first live run.
+
+Compiles. Now the period fetch, live: it seeds the database-e store and refreshes stale elements.
+
+The fetch succeeded: database e now holds 68 small bodies, nine elements were refreshed including Tsuchinshan, and McNaught is the one drawing that was refused. Next I'm checking piece C's period and the before/after export diff.
+
+The export moved only where expected: piece C lost its path and gained its fetched period, plus the two fingerprint lines. Now running the existing test suites to see what my change broke.
+
+Suite passes, but its made-up world has no database-e store, so it may have asked JPL live. Fixing that: the test world gets a seeded store and a stand-in that refuses any live database call.
+
+Period fetch suite: 39 checks pass, off the network. Now the path plan suite.
+
+Path plan suite: 31 of 31 pass. Now the export suite, whose made-up Mars carries a small-body record.
+
+Export suite passes with the new two-sided checks. Now the new test for the rule itself, with planted faults, and the guard that 'open_path' never comes back.
+
+12 of 12 pass, every planted fault caught (including the comparison turned the wrong way, and 'open_path' put back on West). Registering the suite in the maintenance run.
+
+Wiring the new suite and the new data file into the maintenance run (and the night's allow-list, so the night may commit the store).
+
+Now the rest of the map's five consumers: the social export, and (read only) the website's Gallery Studio and JSON converter.
+
+The social export, Studio and the JSON converter just draw what the plot already drew, so none of them makes a path-or-orbit choice; the website reads only open_path. I'm now checking whether gallery-cache-builder's open_path sentences have gone stale.
+
+gallery-cache-builder's sentences still hold, since open_path keeps its name and meaning, so it needs no bump. Next I'm reading the records skill's bump steps before bumping horizons-orbital-mechanics.
+
+Bump plan: horizons-orbital-mechanics 1.15 → 1.16, carrying the rule and the carried daily-tail sentence, with the protocol history entry, in one change. Reading where the old entries go.
+
+Now the skill's new section itself.
+
+Manifest regenerated (horizons-orbital-mechanics now 1.16). Now the protocol's version-history entry, step 3 of the bump.
+
+Bump's four steps done (version line, manifest, protocol entry; the one commit is Tony's). Reading agentic-pre-test before the pre-test run.
+
+Pre-test: compile, encoding gate, then a live-dispatch smoke test, running the real palomas_orrery.py in its own namespace with Tk's main loop patched out (nothing in the file is edited).
+
+The orbit cache's CRLF line endings come from plotting's existing Windows save, and git stores them as LF per .gitattributes, so nothing needs fixing. Next I'm running the live-dispatch smoke test.
+
+The live dispatch confirms the orbit fixes: Tsuchinshan, Wierzchos and ATLAS draw as Full Mission, while McNaught's ellipse is refused and piece C is drawn as an orbit. The orrery's maintenance run is next, in the background.
+
+While that runs, the records. Reading the records skill's parts for Where We Are and the ledger block format.
+
+While the run goes, Tony's item 5: reproducing the brief's count of 65 to name the four my map didn't find.
+
+The four are found: the brief's 65 was a line count that included four commented-out (dead) entries. Checking one more typed-field reader while the run continues.
+
+`get_fetch_interval_for_type` is defined but called from nowhere, so it decides nothing; I'll name it in the records and leave it. Writing the ledger entries now.
+
+The ledger text is staged and waits on the maintenance run's verdict. I'll write the Where We Are edits once the run finishes, since its Signals lines must be read from files the run writes.
+
+Both record scripts are ready; they run once the maintenance run's verdict is in. Waiting on it now.
+
+The build is in place and every suite I ran passes. The orrery's maintenance run is still going in the background, and the path plan inside it may take up to its 10-minute limit while it remakes the spacecraft plans. When it finishes I'll read its verdict, write the ledger and Where We Are entries, and send the full report.
+
+One checker failed: Dashboard parity says the new suite has no button on the dashboard. Adding it the way the Path drawing suite's button is defined.
+
+Dashboard parity passes. Now the generators' lines from the run: the period fetch, the Horizons check, the path plan and the export.
+
+Ten spacecraft plans were regenerated as expected, three await the next run, and piece C's plan is gone. Next I'll check why Lucy shows "Not planned" and what changed in the JUICE and Parker events.
+
+Lucy's plan came back "Not planned" with no reason in the maintenance summary, so I'm running the path plan directly to check whether my change caused it. That run also plans the three spacecraft left for next time.
+
+While that runs, reading the Signals lines from their files.
+
+Signals read: last cache build 20261103T193343Z, ok, no retry; push gate 0 Tier-1. Waiting on the path plan's report.
+
+The path plan is still running against JPL (it can take up to its 10-minute limit). Once it reports, I'll read Lucy's reason, write the records, and do one final maintenance run before the report.
+
+Lucy's refusal is about Lucy's own positions, not piece C: JPL gave no vectors when asked for Lucy's span. One direct question to JPL to see what it says.
+
+JPL refused Lucy's ephemeris with a message that it has no data for her before October 2021, so the plan stays at October 28. I'm recording that as part 2's probe and writing the records now.
+
+BepiColombo's and Solar Orbiter's future events also moved by minutes (JPL's newer trajectories). Correcting the ledger line to say so, wrapped.
+
+Now Where We Are, by section.
+
+146 lines stand above the marker against the 130 cap, so I'm tightening my own additions first.
+
+Page is at 129 lines above the marker (cap 130). Now the final full maintenance run over everything, records included.
+
+While the final run goes, I'm gathering the edit counts for the report. Waiting on its verdict.
+
+The final maintenance run is still going, about 15 minutes. When it finishes I'll read its verdict, fill that line into L-510, and send the full report.
+
+Final run: "35 of 35 gating checkers passed". The export was rewritten once more, so I'm checking what moved in it against GitHub's copy.
+
+The export's changes are logged: piece C, 12 remade spacecraft plans with the Psyche span end moved from 2029-02-11 to 2029-02-24, and four fingerprints. I'm putting that and the final verdict into L-510 now.
+
+I built L-510 part 1 (the typed fields stop deciding). A small body is now drawn as a path or an orbit by the e of its orbit solution in JPL's small-body database: at or above 1 a path, below 1 an orbit. That e is fetched every 30 days, and nothing typed in the object list decides it any more. The final maintenance run reads "35 of 35 gating checkers passed".
+
+**Your five points:**
+1. **McNaught.** JPL's database gives e 1.000018816 (from its 2006 fit, near the Sun); today's e around the Sun is 0.999939767. Around the solar system's centre of mass its e has stayed at 0.999916 since 2011, while the Sun-centred e swings around that value. So the gap today is the Sun's own motion around that centre, not something else. The database's e describes the comet at the moment of its 2006 fit.
+2. **The table with the database's e.** No body changes side of 1 except piece C. So I went on.
+3. **Piece C** (e 0.999994, below 1) is now drawn as an orbit. Its plan is gone, and the website losing it is written on L-484 (the two agree) as an open difference for a gallery session. I did not touch the website.
+4. **Disagreement fails by name.** When the database's e and the elements a drawing would use sit on two sides of 1, the drawing refuses and prints the body's name. Today that is McNaught: it is still drawn as a path, but with no ellipse.
+5. **The four missing from the brief's 65.** The 65 was a count of text lines, and four of them are commented-out entries, not live ones:
+   - an old Haumea entry,
+   - an old Eris/Dysnomia entry (the "1 satellite"),
+   - an old Orcus entry asked as 2004 DW,
+   - an old Bennu/OSIRIS entry.
+
+   The rule actually covers 69 bodies, because the line count could not see seven bodies asked by their Sun-centred record and the C/2025 K1 parent.
+
+**Bodies whose drawing changed:** Tsuchinshan, Wierzchos and ATLAS (C/2024 G3) are now drawn as paths in the orrery, as 3I/ATLAS is. Piece C of C/2025 K1 is now an orbit, and McNaught keeps its path but loses its ellipse. A small comet entry named 6AC4721 has no JPL number, so the orrery names it as a failure and draws neither a path nor an orbit for it.
+
+**One finding outside the job:** while the spacecraft plans were being remade (piece C now counts among the bodies they search), JPL refused Lucy's. It said it has no positions before 2021-Oct-16 10:33, and the path plan read that answer as empty. Lucy keeps its Oct 28 plan. I left it alone, because that exact question is part 2's first probe, and I wrote it there on L-510.
+
+**Files changed:**
+- ok path_or_orbit.py (new: the one home of the rule)
+- ok test_path_or_orbit.py (new: 12 checks, every planted fault caught, including the comparison turned the wrong way and 'open_path' put back on West)
+- ok data/small_body_solutions.json (new, written by the period fetch: 68 bodies)
+- ok period_fetch.py (10 edits)
+- ok export_objects.py (9 edits)
+- ok path_plan.py (11 edits)
+- ok palomas_orrery.py (11 edits)
+- ok idealized_orbits.py (3 edits)
+- ok celestial_objects.py (14 'open_path' lines removed, 5 edits)
+- ok orrery_maintenance_run.py (4 edits)
+- ok palomas_orrery_dashboard.py (4 edits)
+- ok test_period_fetch.py (6 edits)
+- ok test_path_plan.py (8 edits)
+- ok test_objects_export.py (2 edits)
+- ok skills/horizons-orbital-mechanics/SKILL.md (1.16: 12 edits and a new section)
+- ok documentation/SKILL_HISTORIES.md (1 edit)
+- ok PROJECT_INSTRUCTIONS.md (v3.125 entry, manifest, header: 5 edits)
+- ok documentation/PROJECT_INSTRUCTIONS_HISTORY.md (1 edit)
+- ok LEDGER_CONSOLIDATED.md (L-510, L-484, index: 7 edits)
+- ok documentation/WHERE_WE_ARE.md (by section: box, road, Settled, Deferred, Signals, details)
+- Written by the runs: data/osculating_cache.json, data/objects_export.json, data/path_plans.json, data/horizons_confirmations.json, data/provenance_history.json, MODULE_ATLAS.md, MODULE_INDEX.md, module_atlas.py (+2 lines for the new modules), DATA_INVENTORY.md, EXACT_ROWS_PRINTED.md, PROVENANCE_AUDIT.md, WORKSHEET_CHECK.md, documentation/prompts/citation_review.jsonl.
+
+Not mine: your run record WHERE_WE_ARE_11-3-26_1158_run_record.md had your own commit-hash note in it when I started, and I left it alone.
+
+**Token count:** none prints inside this session. In total I wrote 31 changed files (2,386 lines added, 1,212 removed) plus 38 KB of new files. The /cost output in a Claude Code terminal gives the real count.
+
+**Your run order:**
+1. In the orrery, make Sun-centred plots of Tsuchinshan, Wierzchos and ATLAS. Each should be drawn like 3I/ATLAS, solid to today and dashed after. -- yes
+2. Plot 3I/ATLAS to confirm it is unchanged. -- yes
+3. Plot Halley to confirm it is still drawn as its ellipse. -- yes
+4. Commit and push in GitHub Desktop, every file in the list above in one commit (the skill's bump travels with it).
+
+**Tony-actions:**
+- (do) The Mode 5 look above. -- yes
+- (do) Commit and push. -- 
+- (do) Reinstall horizons-orbital-mechanics (now 1.16) in Settings > Skills.
+- (do) Paste protocol v3.125 into the Project's instructions on claude.ai.

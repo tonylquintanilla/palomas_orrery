@@ -151,6 +151,12 @@ not called from anywhere and was left as it is.)
 Module updated: November 3, 2026, evening, with Anthropic's Claude Opus
 5.5 (L-476 closed: create_dates_list_for_object marked DEPRECATED,
 obsolete, by Tony's word; how obsolete code is treated is L-509.)
+Module updated: November 4, 2026 with Anthropic's Claude Opus 5.5 (L-510,
+part 1: a small body is drawn as a path or an orbit by its orbit
+solution's e in JPL's Small-Body Database (drawn_object_type, through
+path_or_orbit.py), at or above 1 a path; the typed object_type no longer
+decides it, at the eight places it did in the static plot and the
+animation.)
 
 """
 #Paloma's Orrery - Solar System Visualization Tool
@@ -202,6 +208,21 @@ import json                                                 # reads and writes j
 import platform                                             # detects what operating system you are working in 
 import orbit_data_manager                                   # Import YOUR OWN module (a .py file you wrote)
 import path_drawing                                         # L-476: a planned path drawn by its plan, its dates read from it
+import path_or_orbit                                        # L-510: a small body drawn as a path or an orbit by its database e
+
+
+def drawn_object_type(obj, default=None):
+    """L-510: the object_type a body is drawn by. A small body typed
+    'orbital' or 'trajectory' is drawn as a path ('trajectory') when its
+    orbit solution's e in JPL's Small-Body Database is at or above 1, as an
+    orbit ('orbital') below it (path_or_orbit.py); the typed field no longer
+    decides. With no database e the failure is printed by name and None is
+    returned, so the body is drawn by neither its plan nor an orbit. Every
+    other entry keeps its typed object_type (default when it has none)."""
+    if (obj.get('object_type') in ('orbital', 'trajectory')
+            and path_or_orbit.is_small_body(obj)):
+        return path_or_orbit.drawn_type_or_none(obj)
+    return obj.get('object_type', default)
 import shutil                                               # this is an unused import. it handles comples file operations but these function were split off to other
                                                             # modules such as orbit_data_manager.py and save_utils.py for better organization.
 import copy                                                 # is is actually used even though greyed out. it allows copying of python objects. 
@@ -4339,7 +4360,7 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
             # today and dashed after, as the website draws it. Around any other body
             # it is drawn as before, its span read from the plan (Tony, 2026-11-03).
             plan = (path_drawing.plan_for(obj_info)
-                    if (obj_info.get('object_type') == 'trajectory' and center_object_name == 'Sun'
+                    if (drawn_object_type(obj_info) == 'trajectory' and center_object_name == 'Sun'   # L-510
                         and not trajectory_marker_color) else None)
             if plan:
                 plan_points = path_drawing.draw_plan(obj_info, plan)
@@ -4410,7 +4431,7 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
                 z = [pos['z'] for pos in trajectory if pos is not None]
 
             # Determine object type (needed for both JPL and analytical paths)
-            obj_type = obj_info.get('object_type', 'orbital')
+            obj_type = drawn_object_type(obj_info, 'orbital')   # L-510: a small body's by its database e
             
             # Only create trace if we have actual positions from JPL
             if x:
@@ -4625,7 +4646,7 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
                         if not is_satellite_of_center:
 
                             # Create trace with same styling as Actual Orbit
-                            obj_type = obj_info.get('object_type', 'orbital')
+                            obj_type = drawn_object_type(obj_info, 'orbital')   # L-510
                             trace_color = trajectory_marker_color if (obj_type == 'trajectory' and trajectory_marker_color) else color_map(planet)
                             
                             if show_lines:
@@ -5134,7 +5155,7 @@ def plot_objects():
                         orbit_key = f"{obj['name']}_{center_object_name}"
                         
                         # Get object type
-                        obj_type = obj.get('object_type', 'unknown')
+                        obj_type = drawn_object_type(obj, 'unknown')   # L-510: a small body's by its database e
                         
                         # Determine interval based on object type
                         if obj_type == 'trajectory':
@@ -5256,7 +5277,7 @@ def plot_objects():
                     is_parent = obj['name'] in parent_planets    
                     
                                         # Get object type (with fallback for backward compatibility)
-                    obj_type = obj.get('object_type', None)
+                    obj_type = drawn_object_type(obj, None)   # L-510: a small body's by its database e
                             
                     if obj_type == 'trajectory':
                         # Time-bounded paths
@@ -5733,7 +5754,7 @@ def plot_objects():
             # ADD PLOTTED PERIOD OVERLAY FOR TRAJECTORY OBJECTS (yellow highlight)
             # This shows the GUI-selected date range overlaid on the full mission
             trajectory_objects = [obj for obj in selected_objects 
-                                 if obj.get('object_type') == 'trajectory' 
+                                 if drawn_object_type(obj) == 'trajectory'   # L-510
                                  and obj['name'] != center_object_name]
             
             if trajectory_objects:
@@ -6891,7 +6912,8 @@ def animate_objects(step, label):
                     continue
 
                 if obj['var'].get() == 1 and obj['name'] != center_object_name:
-                    
+                    obj_type = drawn_object_type(obj, 'orbital')   # L-510: a small body's by its database e, asked only of a ticked body
+
                     # For animations, we need to handle each type appropriately
                     if obj_type == 'trajectory':
                         # Time-bounded paths
@@ -7290,7 +7312,7 @@ def animate_objects(step, label):
             
             for obj in objects:
                 if obj['var'].get() == 1 and obj['name'] != center_object_name:
-                    obj_type = obj.get('object_type', 'orbital')
+                    obj_type = drawn_object_type(obj, 'orbital')   # L-510: a small body's by its database e
                     
         #            if obj_type == 'orbital' and obj['name'] in planetary_params:
                     if obj_type == 'orbital' and obj['name'] in active_planetary_params:    

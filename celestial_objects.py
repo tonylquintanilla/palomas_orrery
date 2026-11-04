@@ -4,8 +4,7 @@ celestial_objects.py - Celestial object definitions for Paloma's Orrery.
 Master catalog of 183 objects queried from JPL Horizons. Each entry is a
 dict carrying the Horizons ID, object type, display symbol, hover text, and
 URL. An entry the website serves also carries 'key', the website's name
-for it (export_objects.py writes only keyed entries), a comet the website
-draws as a path 'open_path' (path_plan.py plans it), and 'horizons_name',
+for it (export_objects.py writes only keyed entries), and 'horizons_name',
 JPL's exact name for the object, which nothing in the orrery reads: the
 gallery's Horizons check compares it with JPL's answer (L-395). 'name'
 stays the orrery's own choice. Separated from the GUI so palomas_orrery.py
@@ -73,6 +72,13 @@ keyed spacecraft and West, McNaught, Tsuchinshan, 1I/Oumuamua,
 plan (path_drawing.entry_span), so it cannot go stale against JPL; its
 'start_date' stays, the day path_plan.py asks the path from.
 test_path_plan.py check 19 fails if a planned entry carries one again.)
+Module updated: November 4, 2026 with Anthropic's Claude Opus 5.5 (L-510,
+part 1: the typed 'open_path' leaves the 14 comets that carried it. Whether
+a small body is drawn as a path or an orbit is its orbit solution's e in
+JPL's Small-Body Database, at or above 1 a path (path_or_orbit.py), and no
+field here decides it; test_path_or_orbit.py fails, naming the entry, if
+'open_path' comes back. Wierzchos's recalled "outbound period ~200,000
+years" replaced by JPL's database e and class.)
 """
 
 from datetime import datetime
@@ -689,7 +695,9 @@ OBJECT_DEFINITIONS = [
 
     {'name': 'Wierzchos', 'key': 'wierzchos', 'horizons_name': 'Wierzchos (C/2024 E1)', 'id': 'C/2024 E1', 'var_name': 'comet_wierzchos_var', 'color_key': 'Wierzchos', 'symbol': 'diamond',
     'object_type': 'orbital', 'id_type': 'smallbody',
-    # data arc: 2024-02-15 to 2026+; near-parabolic, outbound period ~200,000 years
+    # data arc: 2024-02-15 to 2026+
+    # JPL's Small-Body Database, read 2026-11-04: e = 1.00005833991638, class
+    # HYP (hyperbolic), solution epoch JD 2460818.5 (L-510).
     # Perihelion: Jan 20, 2026 at 0.562 AU. Closest to Earth: Feb 17, 2026 at ~1.0 AU.
     # CO2-driven activity (JWST confirmed). Reached mag ~6.8 post-perihelion.
     'mission_info': ('Horizons: C/2024 E1. A comet from the Oort cloud, the far-off cloud '
@@ -699,7 +707,6 @@ OBJECT_DEFINITIONS = [
         'it showed three dust tails. Hyperbolic: its orbit is an open curve, '
         "not an ellipse like a planet's, so on its present path it does not "
         'loop back around the Sun.'),
-    'open_path': True,
     'mission_url': 'https://en.wikipedia.org/wiki/C/2024_E1_(Wierzchos)'},
 
     {'name': 'SWAN', 'key': 'swan', 'id': 'C/2025 R2', 'horizons_name': 'SWAN (C/2025 R2)', 'var_name': 'comet_c2025r2_var', 'color_key': 'SWAN', 'symbol': 'diamond', 
@@ -733,7 +740,6 @@ OBJECT_DEFINITIONS = [
         'JPL tracks. Hyperbolic: its orbit is an open curve, not an ellipse '
         "like a planet's, so on its present path it does not loop back around "
         'the Sun.'),
-    'open_path': True,
     'mission_url': 'https://en.wikipedia.org/wiki/Comet_West'},
 
     {'name': 'McNaught', 'key': 'mcnaught', 'horizons_name': 'McNaught (C/2006 P1)', 'id': 'C/2006 P1', 'var_name': 'comet_mcnaught_var', 'color_key': 'McNaught', 'symbol': 'diamond', 
@@ -745,11 +751,10 @@ OBJECT_DEFINITIONS = [
         'Hemisphere in January and February 2007. Hyperbolic: its orbit is an '
         "open curve, not an ellipse like a planet's, so on its present path "
         'it does not loop back around the Sun.'),
-    'open_path': True,
     'mission_url': 'https://en.wikipedia.org/wiki/C/2006_P1_(McNaught)'},  
 
      {'name': 'Tsuchinshan', 'key': 'tsuchinshan_atlas', 'horizons_name': 'Tsuchinshan-ATLAS (C/2023 A3)', 'id': 'C/2023 A3', 'var_name': 'comet_tsuchinshan_atlas_var', 'color_key': 'Tsuchinsh', 
-    'symbol': 'diamond', 'object_type': 'orbital', 'id_type': 'smallbody', # check object type should be 'trajectory'
+    'symbol': 'diamond', 'object_type': 'orbital', 'id_type': 'smallbody', # L-510: drawn as a path by its database e, not by object_type
     'start_date': datetime(2023, 1, 10), 
     'mission_info': ('Horizons: C/2023 A3. Discovered in January 2023, it became known as '
         'the Great Comet of 2024, visible to the naked eye around its '
@@ -758,11 +763,10 @@ OBJECT_DEFINITIONS = [
         "planet's, so on its present path it does not loop back around the "
         'Sun. Retrograde: it moves around the Sun in the opposite direction '
         'to the planets.'),
-    'open_path': True,
     'mission_url': 'https://en.wikipedia.org/wiki/C/2023_A3_(Tsuchinshan-ATLAS)'},      
 
     {'name': 'ATLAS', 'key': 'atlas_2024_g3', 'horizons_name': 'ATLAS (C/2024 G3)', 'id': 'C/2024 G3', 'var_name': 'comet_atlas_var', 'color_key': 'ATLAS', 'symbol': 'diamond', 
-    'object_type': 'orbital', 'id_type': 'smallbody', # check object type should be 'trajectory'
+    'object_type': 'orbital', 'id_type': 'smallbody', # L-510: drawn as a path by its database e, not by object_type
     # 'start_date': datetime(2024, 6, 18), 'end_date': datetime(2029, 12, 31), # all dates are valid in Horizons
     # EOP coverage    : DATA-BASED 1962-JAN-20 TO 2025-OCT-03. PREDICTS-> 2025-DEC-29
     # data arc: 2024-04-05 to 2025-01-01
@@ -773,7 +777,6 @@ OBJECT_DEFINITIONS = [
         "an open curve, not an ellipse like a planet's, so on its present "
         'path it does not loop back around the Sun. Retrograde: it moves '
         'around the Sun in the opposite direction to the planets.'),
-    'open_path': True,
     'mission_url': 'https://en.wikipedia.org/wiki/C/2024_G3_(ATLAS)'},
 
     # Asked by JPL's permanent number for the comet, 1004075, sent as
@@ -795,7 +798,6 @@ OBJECT_DEFINITIONS = [
         "curve, not an ellipse like a planet's, so on its present path it "
         'does not loop back around the Sun. Retrograde: it moves around the '
         'Sun in the opposite direction to the planets.'),
-    'open_path': True,
     'mission_url': 'https://science.nasa.gov/asset/hubble/fragmenting-comet-c-2025-k1/'},
 
     # C/2025 K1's PIECES. Hubble caught the comet breaking into at least four
@@ -820,7 +822,6 @@ OBJECT_DEFINITIONS = [
         "ellipse like a planet's, so on its present path it does not loop "
         'back around the Sun. Retrograde: it moves around the Sun in the '
         'opposite direction to the planets.'),
-    'open_path': True,
     'mission_url': 'https://science.nasa.gov/asset/hubble/fragmenting-comet-c-2025-k1/'},
 
     {'name': 'C/2025_K1-C', 'key': 'c2025_k1_c', 'horizons_name': 'ATLAS (C/2025 K1-C)', 'id': 'C/2025 K1-C', 'var_name': 'comet_2025k1c_var', 'color_key': 'C/2025_K1-C', 'symbol': 'diamond',
@@ -833,7 +834,6 @@ OBJECT_DEFINITIONS = [
         "line between an ellipse and an open curve that JPL's numbers cannot "
         'yet tell which it is. Retrograde: it moves around the Sun in the '
         'opposite direction to the planets.'),
-    'open_path': True,
     'mission_url': 'https://science.nasa.gov/asset/hubble/fragmenting-comet-c-2025-k1/'},
 
     {'name': 'C/2025_K1-D', 'key': 'c2025_k1_d', 'horizons_name': 'ATLAS (C/2025 K1-D)', 'id': 'C/2025 K1-D', 'var_name': 'comet_2025k1d_var', 'color_key': 'C/2025_K1-D', 'symbol': 'diamond',
@@ -846,7 +846,6 @@ OBJECT_DEFINITIONS = [
         "curve, not an ellipse like a planet's, so on its present path it "
         'does not loop back around the Sun. Retrograde: it moves around the '
         'Sun in the opposite direction to the planets.'),
-    'open_path': True,
     'mission_url': 'https://science.nasa.gov/asset/hubble/fragmenting-comet-c-2025-k1/'},
 
     {'name': 'PANSTARRS', 'key': 'panstarrs_2025_r3', 'horizons_name': 'PANSTARRS (C/2025 R3)', 'id': 'C/2025 R3', 'var_name': 'comet_c2025r3_var', 'color_key': 'PANSTARRS', 'symbol': 'diamond',     # PANSTARRS (C/2025 R3)
@@ -858,7 +857,6 @@ OBJECT_DEFINITIONS = [
         "planet's, so on its present path it does not loop back around the "
         'Sun. Retrograde: it moves around the Sun in the opposite direction '
         'to the planets.'),
-    'open_path': True,
     'mission_url': 'https://en.wikipedia.org/wiki/C/2025_R3_(PanSTARRS)'},
 
     {'name': 'Borisov', 'key': 'borisov_2025_v1', 'horizons_name': 'Borisov (C/2025 V1)', 'id': 'C/2025 V1', 'var_name': 'comet_2025v1_var', 'color_key': 'Borisov', 'symbol': 'diamond', 
@@ -869,7 +867,6 @@ OBJECT_DEFINITIONS = [
         "orbit is an open curve, not an ellipse like a planet's, so on its "
         'present path it does not loop back around the Sun. Retrograde: it '
         'moves around the Sun in the opposite direction to the planets.'),
-    'open_path': True,
     'mission_url': 'https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=C%2F2025%20V1'},
 
 # Hyperbolic and interstellar
@@ -884,7 +881,6 @@ OBJECT_DEFINITIONS = [
         "not an ellipse like a planet's, so on its present path it does not "
         'loop back around the Sun. Retrograde: it moves around the Sun in the '
         'opposite direction to the planets.'),
-    'open_path': True,
     'mission_url': 'https://www.jpl.nasa.gov/news/solar-systems-first-interstellar-visitor-dazzles-scientists/'},
 
     {'name': '2I/Borisov', 'key': 'borisov_2i', 'horizons_name': 'Borisov (C/2019 Q4)', 'id': 'C/2019 Q4', 'var_name': 'comet_borisov_var', 'color_key': '2I/Borisov', 'symbol': 'diamond', 
@@ -896,7 +892,6 @@ OBJECT_DEFINITIONS = [
         'in August 2019. Hyperbolic: its orbit is an open curve, not an '
         "ellipse like a planet's, so on its present path it does not loop "
         'back around the Sun.'),
-    'open_path': True,
     'mission_url': 'https://science.nasa.gov/solar-system/comets/2i-borisov/'},
 
     {'name': '3I/ATLAS', 'key': 'atlas_3i', 'horizons_name': 'ATLAS (C/2025 N1)', 'id': 'C/2025 N1', 'var_name': 'atlas3i_var', 'color_key': '3I/ATLAS', 'symbol': 'diamond', 
@@ -910,7 +905,6 @@ OBJECT_DEFINITIONS = [
         "is an open curve, not an ellipse like a planet's, so on its present "
         'path it does not loop back around the Sun. Retrograde: it moves '
         'around the Sun in the opposite direction to the planets.'),
-    'open_path': True,
     'mission_url': 'https://science.nasa.gov/blogs/planetary-defense/2025/07/02/nasa-discovers-interstellar-comet-moving-through-solar-system/'},
 
     # NASA Missions -- start date moved up by one day to avoid fetching errors, and default end date is 2025-01-01

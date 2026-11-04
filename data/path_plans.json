@@ -640,17 +640,17 @@
     {
      "body": "Mercury",
      "body_id": "199",
-     "closest": "2026-10-26 12:56",
-     "dist_km": 88207.5,
+     "closest": "2026-10-26 12:57",
+     "dist_km": 88204.6,
      "hill_km": 205004,
-     "ideal_step_s": 14697.6,
-     "jd": 2461340.038889,
+     "ideal_step_s": 14697.0,
+     "jd": 2461340.039583,
      "kind": "flyby",
      "stays": false,
      "step": "3h",
      "v_kms": 0.628,
      "window": [
-      "2026-10-16 19:00",
+      "2026-10-16 19:02",
       "2026-11-05 06:51"
      ]
     },
@@ -658,7 +658,7 @@
      "body": "Sun",
      "body_id": "10",
      "closest": "2026-11-10 10:00",
-     "dist_km": 45808044.6,
+     "dist_km": 45808049.8,
      "hill_km": null,
      "ideal_step_s": 81197.5,
      "jd": 2461354.916667,
@@ -674,43 +674,43 @@
     {
      "body": "Mercury",
      "body_id": "199",
-     "closest": "2026-11-21 18:49",
-     "dist_km": 3072.2,
+     "closest": "2026-11-21 18:48",
+     "dist_km": 3073.0,
      "hill_km": 196366,
      "ideal_step_s": 86.4,
-     "jd": 2461366.284028,
+     "jd": 2461366.283333,
      "kind": "arrival",
      "stays": true,
      "step": "1m",
      "v_kms": 3.725,
      "window": [
-      "2026-11-21 17:26",
-      "2026-11-21 20:11"
+      "2026-11-21 17:25",
+      "2026-11-21 20:10"
      ]
     },
     {
      "body": "Sun",
      "body_id": "10",
-     "closest": "2027-02-06 06:12",
-     "dist_km": 45993895.7,
+     "closest": "2027-02-06 06:29",
+     "dist_km": 45993833.5,
      "hill_km": null,
-     "ideal_step_s": 81644.8,
-     "jd": 2461442.758333,
+     "ideal_step_s": 81644.7,
+     "jd": 2461442.770139,
      "kind": "perihelion",
      "stays": false,
      "step": "6h",
      "v_kms": 58.993,
      "window": [
-      "2026-12-14 02:46",
-      "2027-04-01 09:37"
+      "2026-12-14 03:04",
+      "2027-04-01 09:53"
      ]
     }
    ],
    "horizons_id": "-121",
    "id_type": "id",
-   "inputs_sha256": "d39dd8892bd435049ba65982f10d847f09c3ebd35a2b441b903891e3a872e1de",
+   "inputs_sha256": "3f3ed2199b440e8448cc425107f236ab2075d9e29833c16a35ba281c3e5d5c27",
    "kind": "spacecraft",
-   "made": "2026-10-30",
+   "made": "2026-11-04",
    "name": "BepiColombo",
    "searched": [
     "Sun",
@@ -934,55 +934,6 @@
    },
    "tp_jd": 2460956.952482
   },
-  "c2025_k1_c": {
-   "backbone": {
-    "step": "7d",
-    "thin_tol_au": 0.02
-   },
-   "carried": 0,
-   "events": [
-    {
-     "body": "Sun",
-     "body_id": "10",
-     "closest": "2025-10-08 10:33",
-     "dist_km": 49948760.3,
-     "hill_km": null,
-     "ideal_step_s": 71753.9,
-     "jd": 2460956.939583,
-     "kind": "perihelion",
-     "stays": false,
-     "step": "6h",
-     "v_kms": 72.897,
-     "window": [
-      "2025-08-21 20:33",
-      "2025-11-25 00:32"
-     ]
-    }
-   ],
-   "horizons_id": "C/2025 K1-C",
-   "id_type": "smallbody",
-   "inputs_sha256": "27fdd2c8fef5acc33db1129e17988d90adc14dca427c64aff835d50eb805a75c",
-   "kind": "comet",
-   "made": "2026-10-26",
-   "name": "C/2025_K1-C",
-   "searched": [
-    "Sun"
-   ],
-   "searched_from": "2024-10-05",
-   "span": {
-    "end": "2027-10-26",
-    "start": "2024-10-08"
-   },
-   "span_rule": {
-    "after_today_days": 365,
-    "before_perihelion_days": 365,
-    "clipped_to_jpl": [
-     false,
-     false
-    ]
-   },
-   "tp_jd": 2460956.939894
-  },
   "c2025_k1_d": {
    "backbone": {
     "step": "7d",
@@ -1161,9 +1112,9 @@
    ],
    "horizons_id": "-82",
    "id_type": "id",
-   "inputs_sha256": "09e38501639d132f746c14783b88bba5d6d09cb1150c756d355b14f00b5c1b45",
+   "inputs_sha256": "5a290907470952c8c1263be8700f68167862bf7dc4226b951f010a6910cf6304",
    "kind": "spacecraft",
-   "made": "2026-11-03",
+   "made": "2026-11-04",
    "name": "Cassini",
    "searched": [
     "Sun",
@@ -1236,9 +1187,9 @@
      "body": "Sun",
      "body_id": "10",
      "closest": "2026-10-23 13:51",
-     "dist_km": 125491544.8,
+     "dist_km": 125491559.9,
      "hill_km": null,
-     "ideal_step_s": 332681.5,
+     "ideal_step_s": 332681.4,
      "jd": 2461337.077083,
      "kind": "perihelion",
      "stays": false,
@@ -1286,9 +1237,9 @@
    ],
    "horizons_id": "-159",
    "id_type": "id",
-   "inputs_sha256": "b1fcae67ae858513c8f475c97eec4de74df34db2d07c54d7ec49082a44efe50b",
+   "inputs_sha256": "33d2c7b96743fdeecd861078c7c7732c9222abe3b9c9895dbcbc6666aed9f36e",
    "kind": "spacecraft",
-   "made": "2026-10-28",
+   "made": "2026-11-04",
    "name": "Clipper",
    "searched": [
     "Sun",
@@ -1445,9 +1396,9 @@
    ],
    "horizons_id": "-77",
    "id_type": "id",
-   "inputs_sha256": "447ca34e82396a682a4db51e2741836666c2d0173ac5cc7e27485b397a5af2f9",
+   "inputs_sha256": "26117ce6178b8605024eccede29d553eb6572ffdc27aed797d603ca18162171d",
    "kind": "spacecraft",
-   "made": "2026-11-03",
+   "made": "2026-11-04",
    "name": "Galileo",
    "searched": [
     "Sun",
@@ -1588,9 +1539,9 @@
      "body": "Earth",
      "body_id": "399",
      "closest": "2026-09-28 11:46",
-     "dist_km": 15018.9,
+     "dist_km": 15019.4,
      "hill_km": 1499801,
-     "ideal_step_s": 119.8,
+     "ideal_step_s": 119.9,
      "jd": 2461311.990278,
      "kind": "flyby",
      "stays": false,
@@ -1605,59 +1556,59 @@
      "body": "Sun",
      "body_id": "10",
      "closest": "2026-11-09 23:02",
-     "dist_km": 127107421.7,
+     "dist_km": 127107101.2,
      "hill_km": null,
-     "ideal_step_s": 338726.4,
+     "ideal_step_s": 338725.1,
      "jd": 2461354.459722,
      "kind": "perihelion",
      "stays": false,
      "step": "3d",
      "v_kms": 39.296,
      "window": [
-      "2026-03-30 08:02",
-      "2027-06-22 14:01"
+      "2026-03-30 08:03",
+      "2027-06-22 14:00"
      ]
     },
     {
      "body": "Sun",
      "body_id": "10",
      "closest": "2028-12-09 06:08",
-     "dist_km": 127093694.2,
+     "dist_km": 127094749.4,
      "hill_km": null,
-     "ideal_step_s": 338671.9,
+     "ideal_step_s": 338676.6,
      "jd": 2462114.755556,
      "kind": "perihelion",
      "stays": false,
      "step": "3d",
      "v_kms": 39.298,
      "window": [
-      "2028-04-28 16:00",
-      "2029-07-21 20:15"
+      "2028-04-28 15:55",
+      "2029-07-21 20:20"
      ]
     },
     {
      "body": "Earth",
      "body_id": "399",
-     "closest": "2029-01-17 18:35",
-     "dist_km": 11011.9,
+     "closest": "2029-01-17 18:34",
+     "dist_km": 11011.6,
      "hill_km": 1472440,
      "ideal_step_s": 83.4,
-     "jd": 2462154.274306,
+     "jd": 2462154.273611,
      "kind": "flyby",
      "stays": false,
      "step": "1m",
-     "v_kms": 13.826,
+     "v_kms": 13.825,
      "window": [
-      "2029-01-17 17:15",
-      "2029-01-17 19:54"
+      "2029-01-17 17:14",
+      "2029-01-17 19:53"
      ]
     }
    ],
    "horizons_id": "-28",
    "id_type": "id",
-   "inputs_sha256": "561e9b1390f6537b0c827b0f896e64b1a0a3a2b0e41f178f3873e5fab76f7b64",
+   "inputs_sha256": "572c7bc0933bdd1aa08d472cea962275371c2dc26b50974de33a724e937476b6",
    "kind": "spacecraft",
-   "made": "2026-10-28",
+   "made": "2026-11-04",
    "name": "JUICE",
    "searched": [
     "Sun",
@@ -1763,9 +1714,9 @@
    ],
    "horizons_id": "-61",
    "id_type": "id",
-   "inputs_sha256": "b886f55e472212f53ad534019427d22c076ad198cc50ecd2b70a8ecf6e5d0f4c",
+   "inputs_sha256": "1f8028111b2afe42eebdad4843363b4b5925f3a723d1cb572ead3d1c68a3a53f",
    "kind": "spacecraft",
-   "made": "2026-10-28",
+   "made": "2026-11-04",
    "name": "Juno",
    "searched": [
     "Sun",
@@ -2045,9 +1996,9 @@
    ],
    "horizons_id": "-98",
    "id_type": "id",
-   "inputs_sha256": "8fe491b45829321d950ba7ee1f8778455d00dc202db553aab76913826770a11f",
+   "inputs_sha256": "1177bb846eb0adfa1972e7d627abc3539573583d9095cf4945d0030cf5a0ef49",
    "kind": "spacecraft",
-   "made": "2026-10-28",
+   "made": "2026-11-04",
    "name": "New Horizons",
    "searched": [
     "Sun",
@@ -2306,9 +2257,9 @@
    ],
    "horizons_id": "-64",
    "id_type": "id",
-   "inputs_sha256": "8dff93abcdf7874d4a7b7dc77d411d869f4b2529d05273b46312f4545b4b0174",
+   "inputs_sha256": "9f6e327d0f5b772f27065a3f2164209865fccd92a01931a1997bd620d08472c3",
    "kind": "spacecraft",
-   "made": "2026-10-28",
+   "made": "2026-11-04",
    "name": "OSIRISAPE",
    "searched": [
     "Sun",
@@ -3056,18 +3007,18 @@
     {
      "body": "Sun",
      "body_id": "10",
-     "closest": "2026-12-02 00:46",
-     "dist_km": 6855386.7,
+     "closest": "2026-12-02 00:45",
+     "dist_km": 6855386.3,
      "hill_km": null,
      "ideal_step_s": 3761.1,
-     "jd": 2461376.531944,
+     "jd": 2461376.53125,
      "kind": "perihelion",
      "stays": false,
      "step": "1h",
      "v_kms": 190.876,
      "window": [
-      "2026-11-29 12:54",
-      "2026-12-04 12:37"
+      "2026-11-29 12:53",
+      "2026-12-04 12:36"
      ]
     },
     {
@@ -3277,9 +3228,9 @@
    ],
    "horizons_id": "-96",
    "id_type": "id",
-   "inputs_sha256": "f1b47bb8e202b9533686b2da057c8f0cddcfc04ae88f6404938359dade8b52a6",
+   "inputs_sha256": "725604bae983fedee91bd0e19b2c58fb86fc8c532e22b1fe6867dc47531b1fe5",
    "kind": "spacecraft",
-   "made": "2026-10-28",
+   "made": "2026-11-04",
    "name": "Parker",
    "searched": [
     "Sun",
@@ -3351,9 +3302,9 @@
    ],
    "horizons_id": "-255",
    "id_type": "id",
-   "inputs_sha256": "a4c21eeb781ba31118e3260ef64a158712c63685e9203e2d573f473c2f856b60",
+   "inputs_sha256": "7031895a21c2d08563e5be924aec00001700b6872ebfec3566a05f17f647743f",
    "kind": "spacecraft",
-   "made": "2026-10-28",
+   "made": "2026-11-04",
    "name": "Psyche",
    "searched": [
     "Sun",
@@ -3377,7 +3328,7 @@
    ],
    "searched_from": "2023-10-14",
    "span": {
-    "end": "2029-02-11",
+    "end": "2029-02-24",
     "start": "2023-10-14"
    }
   },
@@ -3681,7 +3632,7 @@
      "body": "Sun",
      "body_id": "10",
      "closest": "2026-08-19 04:07",
-     "dist_km": 44007014.2,
+     "dist_km": 44007014.1,
      "hill_km": null,
      "ideal_step_s": 68352.9,
      "jd": 2461271.671528,
@@ -3698,14 +3649,14 @@
      "body": "Venus",
      "body_id": "299",
      "closest": "2026-12-24 22:59",
-     "dist_km": 7000.4,
+     "dist_km": 6997.0,
      "hill_km": 1004344,
      "ideal_step_s": 35.2,
      "jd": 2461399.457639,
      "kind": "flyby",
      "stays": false,
      "step": "1m",
-     "v_kms": 20.823,
+     "v_kms": 20.824,
      "window": [
       "2026-12-24 22:25",
       "2026-12-24 23:32"
@@ -3714,134 +3665,134 @@
     {
      "body": "Sun",
      "body_id": "10",
-     "closest": "2027-02-06 21:47",
-     "dist_km": 42009940.4,
+     "closest": "2027-02-06 21:50",
+     "dist_km": 42012604.8,
      "hill_km": null,
-     "ideal_step_s": 64095.0,
-     "jd": 2461443.407639,
+     "ideal_step_s": 64101.8,
+     "jd": 2461443.409722,
      "kind": "perihelion",
      "stays": false,
      "step": "6h",
-     "v_kms": 68.637,
+     "v_kms": 68.634,
      "window": [
-      "2026-12-26 09:40",
-      "2027-03-21 09:53"
+      "2026-12-26 09:37",
+      "2027-03-21 10:02"
      ]
     },
     {
      "body": "Sun",
      "body_id": "10",
-     "closest": "2027-07-06 17:01",
-     "dist_km": 42011129.5,
+     "closest": "2027-07-06 17:04",
+     "dist_km": 42013841.9,
      "hill_km": null,
-     "ideal_step_s": 64098.0,
-     "jd": 2461593.209028,
+     "ideal_step_s": 64104.9,
+     "jd": 2461593.211111,
      "kind": "perihelion",
      "stays": false,
      "step": "6h",
-     "v_kms": 68.635,
+     "v_kms": 68.633,
      "window": [
-      "2027-05-25 04:51",
-      "2027-08-18 05:10"
+      "2027-05-25 04:48",
+      "2027-08-18 05:19"
      ]
     },
     {
      "body": "Sun",
      "body_id": "10",
-     "closest": "2027-12-03 12:14",
-     "dist_km": 42011613.7,
+     "closest": "2027-12-03 12:17",
+     "dist_km": 42014326.0,
      "hill_km": null,
-     "ideal_step_s": 64099.2,
-     "jd": 2461743.009722,
+     "ideal_step_s": 64106.2,
+     "jd": 2461743.011806,
      "kind": "perihelion",
      "stays": false,
      "step": "6h",
-     "v_kms": 68.635,
+     "v_kms": 68.632,
      "window": [
-      "2027-10-22 00:03",
-      "2028-01-15 00:24"
+      "2027-10-22 00:00",
+      "2028-01-15 00:33"
      ]
     },
     {
      "body": "Venus",
      "body_id": "299",
-     "closest": "2028-03-18 08:18",
-     "dist_km": 6421.2,
+     "closest": "2028-03-18 08:17",
+     "dist_km": 6424.5,
      "hill_km": 1004345,
      "ideal_step_s": 32.0,
-     "jd": 2461848.845833,
+     "jd": 2461848.845139,
      "kind": "flyby",
      "stays": false,
      "step": "1m",
-     "v_kms": 21.021,
+     "v_kms": 21.02,
      "window": [
-      "2028-03-18 07:47",
-      "2028-03-18 08:48"
+      "2028-03-18 07:46",
+      "2028-03-18 08:47"
      ]
     },
     {
      "body": "Sun",
      "body_id": "10",
-     "closest": "2028-05-08 05:28",
-     "dist_km": 49028123.8,
+     "closest": "2028-05-08 05:33",
+     "dist_km": 49031210.4,
      "hill_km": null,
-     "ideal_step_s": 83215.3,
-     "jd": 2461899.727778,
+     "ideal_step_s": 83224.3,
+     "jd": 2461899.73125,
      "kind": "perihelion",
      "stays": false,
      "step": "6h",
-     "v_kms": 61.698,
+     "v_kms": 61.695,
      "window": [
-      "2028-03-14 01:03",
-      "2028-07-02 09:52"
+      "2028-03-14 00:59",
+      "2028-07-02 10:06"
      ]
     },
     {
      "body": "Sun",
      "body_id": "10",
-     "closest": "2028-10-05 00:43",
-     "dist_km": 49028711.5,
+     "closest": "2028-10-05 00:48",
+     "dist_km": 49031798.8,
      "hill_km": null,
-     "ideal_step_s": 83217.3,
-     "jd": 2462049.529861,
+     "ideal_step_s": 83226.3,
+     "jd": 2462049.533333,
      "kind": "perihelion",
      "stays": false,
      "step": "6h",
-     "v_kms": 61.697,
+     "v_kms": 61.694,
      "window": [
-      "2028-08-10 20:16",
-      "2028-11-29 05:09"
+      "2028-08-10 20:12",
+      "2028-11-29 05:23"
      ]
     },
     {
      "body": "Sun",
      "body_id": "10",
-     "closest": "2029-03-03 19:56",
-     "dist_km": 49026210.9,
+     "closest": "2029-03-03 20:02",
+     "dist_km": 49029298.5,
      "hill_km": null,
-     "ideal_step_s": 83210.4,
-     "jd": 2462199.330556,
+     "ideal_step_s": 83219.4,
+     "jd": 2462199.334722,
      "kind": "perihelion",
      "stays": false,
      "step": "6h",
-     "v_kms": 61.699,
+     "v_kms": 61.696,
      "window": [
-      "2029-01-07 15:35",
-      "2029-04-28 00:16"
+      "2029-01-07 15:33",
+      "2029-04-28 00:30"
      ]
     },
     {
      "body": "Venus",
      "body_id": "299",
      "closest": "2029-06-10 17:43",
-     "dist_km": 6414.6,
+     "dist_km": 6426.0,
      "hill_km": 1004304,
      "ideal_step_s": 32.0,
      "jd": 2462298.238194,
      "kind": "flyby",
      "stays": false,
      "step": "1m",
-     "v_kms": 21.024,
+     "v_kms": 21.02,
      "window": [
       "2029-06-10 17:12",
       "2029-06-10 18:13"
@@ -3850,66 +3801,66 @@
     {
      "body": "Sun",
      "body_id": "10",
-     "closest": "2029-08-11 18:36",
-     "dist_km": 55452681.9,
+     "closest": "2029-08-11 18:45",
+     "dist_km": 55454788.4,
      "hill_km": null,
-     "ideal_step_s": 102986.6,
-     "jd": 2462360.275,
+     "ideal_step_s": 102993.4,
+     "jd": 2462360.28125,
      "kind": "perihelion",
      "stays": false,
      "step": "1d",
-     "v_kms": 56.386,
+     "v_kms": 56.384,
      "window": [
-      "2029-06-04 11:31",
-      "2029-10-19 01:40"
+      "2029-06-04 11:33",
+      "2029-10-19 01:56"
      ]
     },
     {
      "body": "Sun",
      "body_id": "10",
-     "closest": "2030-01-08 13:48",
-     "dist_km": 55453263.0,
+     "closest": "2030-01-08 13:56",
+     "dist_km": 55455369.6,
      "hill_km": null,
-     "ideal_step_s": 102988.2,
-     "jd": 2462510.075,
+     "ideal_step_s": 102995.1,
+     "jd": 2462510.080556,
      "kind": "perihelion",
      "stays": false,
      "step": "1d",
-     "v_kms": 56.386,
+     "v_kms": 56.384,
      "window": [
-      "2029-11-01 06:41",
-      "2030-03-17 20:54"
+      "2029-11-01 06:42",
+      "2030-03-17 21:09"
      ]
     },
     {
      "body": "Sun",
      "body_id": "10",
-     "closest": "2030-06-07 08:59",
-     "dist_km": 55452101.4,
+     "closest": "2030-06-07 09:07",
+     "dist_km": 55454208.2,
      "hill_km": null,
-     "ideal_step_s": 102984.6,
-     "jd": 2462659.874306,
+     "ideal_step_s": 102991.5,
+     "jd": 2462659.879861,
      "kind": "perihelion",
      "stays": false,
      "step": "1d",
-     "v_kms": 56.386,
+     "v_kms": 56.385,
      "window": [
-      "2030-03-31 01:55",
-      "2030-08-14 16:02"
+      "2030-03-31 01:57",
+      "2030-08-14 16:16"
      ]
     },
     {
      "body": "Venus",
      "body_id": "299",
      "closest": "2030-09-03 02:59",
-     "dist_km": 8670.3,
+     "dist_km": 8672.7,
      "hill_km": 1004332,
      "ideal_step_s": 44.5,
      "jd": 2462747.624306,
      "kind": "flyby",
      "stays": false,
      "step": "1m",
-     "v_kms": 20.388,
+     "v_kms": 20.387,
      "window": [
       "2030-09-03 02:16",
       "2030-09-03 03:41"
@@ -3918,9 +3869,9 @@
    ],
    "horizons_id": "-144",
    "id_type": "id",
-   "inputs_sha256": "061f62d2f71fbb4405001412bae1d2da5e58a304cd85b821eafb33fd9c1e904f",
+   "inputs_sha256": "603579db25ed2da44afd192929ececb9f36ae8903aa64f5f6c34b38f6681b8a4",
    "kind": "spacecraft",
-   "made": "2026-10-30",
+   "made": "2026-11-04",
    "name": "SolO",
    "searched": [
     "Sun",
@@ -4041,9 +3992,9 @@
    ],
    "horizons_id": "-31",
    "id_type": "id",
-   "inputs_sha256": "1d386fd6528a3121280605052a6ccded51cf5dfd86f6aaac0da3219931cc0858",
+   "inputs_sha256": "421d07ac40767ab383a8193dc606116f8851580943275621896d2fd3b14417c5",
    "kind": "spacecraft",
-   "made": "2026-10-28",
+   "made": "2026-11-04",
    "name": "Voyager 1",
    "searched": [
     "Sun",
@@ -4166,9 +4117,9 @@
    ],
    "horizons_id": "-32",
    "id_type": "id",
-   "inputs_sha256": "290493759c729ecbf945f5f96f7f31e739b5a900123f386bbabc05bcec7ef721",
+   "inputs_sha256": "0e28fd4a84989bd9b96a2b49a0912ffc54e805ceeda59a53244e703baeedc597",
    "kind": "spacecraft",
-   "made": "2026-10-28",
+   "made": "2026-11-04",
    "name": "Voyager 2",
    "searched": [
     "Sun",

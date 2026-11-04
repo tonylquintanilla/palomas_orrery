@@ -1,26 +1,25 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 3, 2026, night: the coordinating session (L-510 goes before the check; the words get their own item; this page trimmed).
-- Written at orrery 3a01b250 and gallery 5abca2c6, plus this session's uncommitted edits.
+Last updated: November 4, 2026: the Claude Code session that built L-510 (the typed fields stop deciding), part 1.
+- Written at orrery eab623f5 and gallery 5abca2c6, plus this session's uncommitted edits.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - L-510 (the typed fields stop deciding) is built before the check,
->   by your word of Nov 3, 21:23. Its brief is ready.
-> - New: L-511 (the export carries the words). Until it is built, the
->   check tests the words only for the mirrored description.
-> - The check's brief session also writes interactive-exhibit's next
->   version, as an orrery patch run before the check is built.
-> - This page is back under its length cap. Settled lines whose rule is
->   now written in a skill or the protocol have left it.
+> - A small body is drawn as a path or an orbit by its e in JPL's
+>   small-body database (your ruling, Nov 4). 'open_path' is gone.
+> - Tsuchinshan, Wierzchos and ATLAS are now paths in the orrery too.
+> - Piece C of C/2025 K1 is now an orbit; the website stops drawing it
+>   after its next pull (written on L-484 (the two agree)).
+> - McNaught stays a path, with no ellipse: the drawing refuses it.
 >
-> **Do next:** *L-510's Claude Code session (Opus, high effort), from
-> `COORD_L510_drawn_by_eccentricity_brief_20261103.md`; then the
-> check's brief (L-484 (the two agree)).*
+> **Do next:** *your look at four plots (the report's run order); then
+> the check's brief (L-484 (the two agree)).*
 >
 > **Needs you now:**
+> - *(do) Reinstall horizons-orbital-mechanics (now 1.16) and paste the
+>   protocol v3.125 into the Project's instructions.*
 > - *(do) Each morning, Pull origin on both, orrery then website, first;
 >   do not wait for the night, which GitHub starts hours late or drops.*
 
@@ -29,20 +28,21 @@ Last updated: November 3, 2026, night: the coordinating session (L-510 goes befo
 ## The road  **>> UPDATED THIS SESSION**
 
 Oct 27's order, changed Oct 29 (`DESIGN_L314_solar_wind_rulings_20261029.md`).
-  1-11.[done]  All but 5b and 9, through Nov 3: the three rooms, the
+  1-11.[done]  All but 5b and 9, through Nov 4: the three rooms, the
                objects, the Sun's and Earth's slices, historical
-               missions' slice 1, the orrery's paths by the plan (L-476).
+               missions' slice 1, the orrery's paths by the plan (L-476),
+               L-510 part 1 (Nov 4). << moved this session
  5d.   [NOW]   *The orrery's clock (L-504 (the orrery's clock)): the
                data path done Oct 29, the website's date fix Oct 31;
                Earth System, stamps, tools next.*
  11b.  [NOW]   *The nightly run (L-485 (a nightly run)): both halves run
                on GitHub; the hold built Oct 31; both second times built
                (11:17 and 12:17 UTC, Nov 1); a week of mornings now.*
- 12d.  [next]  *L-510 (the typed fields stop deciding), part 1: a small
-               body drawn by its eccentricity. Brief ready.* << new this session
- 12c.  [next]  *Then the two agree (L-484 (the two agree)): talk done
-               Nov 3; its brief, then its build. The words wait for
-               L-511 (the export carries the words).* << changed this session
+ 12c.  [next]  *The two agree (L-484 (the two agree)): its brief, then
+               its build; piece C is its first open difference. The
+               words wait for L-511 (the export carries the words).*
+ 12e.  [later] L-510 (the typed fields stop deciding), part 2: the path
+               plan asked from before any launch. << new this session
   5b.  [beside] Housekeeping when a session has room: L-424, L-425,
                L-426; L-423 (the website's checks) item 3, L-357;
                L-509 (obsolete code), after its talk.
@@ -60,8 +60,8 @@ Oct 27's order, changed Oct 29 (`DESIGN_L314_solar_wind_rulings_20261029.md`).
 
 Standing rulings. A line leaves after a few weeks, once it is habit, or
 once a skill or the protocol carries it (trimmed Nov 3, night).
-- A small body is drawn by its eccentricity today, fetched every 30
-  days: above 1 a path, below 1 an orbit (Nov 3, 15:55).
+- A small body is a path at or above e 1 in JPL's database, every 30
+  days, else an orbit; two sides of 1 refuse the drawing (Nov 4).
 - From the talk (Nov 3): the words have one home, the orrery's export;
   a difference is chosen (a reason, no end) or open (an end and an
   item); the check covers only what both draw; a spacecraft's span is
@@ -79,10 +79,10 @@ once a skill or the protocol carries it (trimmed Nov 3, night).
 - A night takes a value JPL changed, holds only an identity (Oct 31).
 - The main belt: random dots in JPL's spread (Oct 28).
 
-## Deferred  **>> UPDATED THIS SESSION**
+## Deferred
 
 Waiting behind other work; a line leaves when picked up.
-- L-511 (the export carries the words): behind the check (Nov 3). << new this session
+- L-511 (the export carries the words): behind the check (Nov 3).
 - L-508 (a held body's alarm): the records skill's next version, then
   its build, with the hold's website half (Nov 2).
 - L-485 (a nightly run): the hold's website half; a gallery session (Oct 31).
@@ -97,8 +97,8 @@ Waiting behind other work; a line leaves when picked up.
 
 Read from files when this page was written, not typed from memory.
 - Last cache build: 20261103T193343Z, ok, no retry (swap log at 5abca2c6).
-- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at dd84308e).
-- This page's date and the ledger's newest stamp: both Nov 3. Agree.
+- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md, this session's maintenance run).
+- This page's date and the ledger's newest stamp: both Nov 4. Agree.
 
 ## Waiting on you
 
@@ -119,10 +119,10 @@ Not urgent, in your order:
 3. Earth's list (L-413 (Earth's list)): open as enhancements, or closed
    with its seven pieces moved to their own items.
 
-## Where the details are
+## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- Next: L-510's brief, `COORD_L510_drawn_by_eccentricity_brief_20261103.md`.
+- This session: L-510 in the ledger; the rule, `path_or_orbit.py`.
 - The talk's rulings: `DESIGN_L484_consistency_rulings_20261103.md`.
 - The door: `documentation/python_work_door/`, and L-499.
 - Your run record: `WHERE_WE_ARE_11-3-26_1158_run_record.md`.

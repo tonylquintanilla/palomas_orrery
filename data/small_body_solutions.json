@@ -1,0 +1,549 @@
+{
+ "note": "Each small body's orbit-solution eccentricity from JPL's Small-Body Database (sbdb.api, full-prec), which decides whether the orrery and the website draw it as a path (e at or above 1) or an orbit. Written by period_fetch.py on the 30-day cycle; read by path_or_orbit.py (L-510).",
+ "solutions": {
+  "16 Psyche": {
+   "search": "A852 FA",
+   "e": ".1349324738201893",
+   "class": "MBA",
+   "epoch_jd": "2461200.5",
+   "fullname": "16 Psyche (A852 FA)",
+   "fetched": "2026-11-04"
+  },
+  "1I/Oumuamua": {
+   "search": "A/2017 U1",
+   "e": "1.201133796102373",
+   "class": "HYA",
+   "epoch_jd": "2458080.5",
+   "fullname": "'Oumuamua (A/2017 U1)",
+   "fetched": "2026-11-04"
+  },
+  "2017 OF201": {
+   "search": "2017 OF201",
+   "e": ".9451884804028103",
+   "class": "TNO",
+   "epoch_jd": "2461200.5",
+   "fullname": "(2017 OF201)",
+   "fetched": "2026-11-04"
+  },
+  "2023 JF": {
+   "search": "2023 JF",
+   "e": ".3915572712250333",
+   "class": "APO",
+   "epoch_jd": "2461200.5",
+   "fullname": "(2023 JF)",
+   "fetched": "2026-11-04"
+  },
+  "2024 DW": {
+   "search": "2024 DW",
+   "e": ".6872242348192807",
+   "class": "APO",
+   "epoch_jd": "2461200.5",
+   "fullname": "(2024 DW)",
+   "fetched": "2026-11-04"
+  },
+  "2024 PT5": {
+   "search": "2024 PT5",
+   "e": ".01527365223195271",
+   "class": "APO",
+   "epoch_jd": "2461200.5",
+   "fullname": "(2024 PT5)",
+   "fetched": "2026-11-04"
+  },
+  "2024 YR4": {
+   "search": "2024 YR4",
+   "e": ".6613330031901985",
+   "class": "APO",
+   "epoch_jd": "2461200.5",
+   "fullname": "(2024 YR4)",
+   "fetched": "2026-11-04"
+  },
+  "2025 PN7": {
+   "search": "2025 PN7",
+   "e": ".1081889157584464",
+   "class": "APO",
+   "epoch_jd": "2461200.5",
+   "fullname": "(2025 PN7)",
+   "fetched": "2026-11-04"
+  },
+  "2025 PY1": {
+   "search": "2025 PY1",
+   "e": ".2281608031247898",
+   "class": "APO",
+   "epoch_jd": "2461200.5",
+   "fullname": "(2025 PY1)",
+   "fetched": "2026-11-04"
+  },
+  "2026 ED138": {
+   "search": "2026 ED138",
+   "e": ".1417448328770402",
+   "class": "TNO",
+   "epoch_jd": "2461200.5",
+   "fullname": "(2026 ED138)",
+   "fetched": "2026-11-04"
+  },
+  "2I/Borisov": {
+   "search": "C/2019 Q4",
+   "e": "3.356475782676596",
+   "class": "HYP",
+   "epoch_jd": "2458853.5",
+   "fullname": "C/2019 Q4 (Borisov)",
+   "fetched": "2026-11-04"
+  },
+  "3I/ATLAS": {
+   "search": "C/2025 N1",
+   "e": "6.123467394525528",
+   "class": "HYP",
+   "epoch_jd": "2461340.5",
+   "fullname": "C/2025 N1 (ATLAS)",
+   "fetched": "2026-11-04"
+  },
+  "ATLAS": {
+   "search": "C/2024 G3",
+   "e": "1.000012291218472",
+   "class": "HYP",
+   "epoch_jd": "2460480.5",
+   "fullname": "C/2024 G3 (ATLAS)",
+   "fetched": "2026-11-04"
+  },
+  "Ammonite": {
+   "search": "2023 KQ14",
+   "e": ".7337046405149444",
+   "class": "TNO",
+   "epoch_jd": "2461200.5",
+   "fullname": "(2023 KQ14)",
+   "fetched": "2026-11-04"
+  },
+  "Apophis": {
+   "search": "2004 MN4",
+   "e": ".1911492279663492",
+   "class": "ATE",
+   "epoch_jd": "2461200.5",
+   "fullname": "99942 Apophis (2004 MN4)",
+   "fetched": "2026-11-04"
+  },
+  "Arrokoth": {
+   "search": "2014 MU69",
+   "e": ".03555717645015258",
+   "class": "TNO",
+   "epoch_jd": "2461200.5",
+   "fullname": "486958 Arrokoth (2014 MU69)",
+   "fetched": "2026-11-04"
+  },
+  "Bennu": {
+   "search": "1999 RQ36",
+   "e": ".2037450762416414",
+   "class": "APO",
+   "epoch_jd": "2455562.5",
+   "fullname": "101955 Bennu (1999 RQ36)",
+   "fetched": "2026-11-04"
+  },
+  "Borisov": {
+   "search": "C/2025 V1",
+   "e": "1.007732231432179",
+   "class": "HYP",
+   "epoch_jd": "2460983.5",
+   "fullname": "C/2025 V1 (Borisov)",
+   "fetched": "2026-11-04"
+  },
+  "C/2025_K1": {
+   "search": "1004075",
+   "e": "1.000257251473882",
+   "class": "HYP",
+   "epoch_jd": "2460941.5",
+   "fullname": "C/2025 K1 (ATLAS)",
+   "fetched": "2026-11-04"
+  },
+  "C/2025_K1-B": {
+   "search": "C/2025 K1-B",
+   "e": "1.002033474126155",
+   "class": "HYP",
+   "epoch_jd": "2460997.5",
+   "fullname": "C/2025 K1-B (ATLAS)",
+   "fetched": "2026-11-04"
+  },
+  "C/2025_K1-C": {
+   "search": "C/2025 K1-C",
+   "e": ".9999940934318799",
+   "class": "COM",
+   "epoch_jd": "2461026.5",
+   "fullname": "C/2025 K1-C (ATLAS)",
+   "fetched": "2026-11-04"
+  },
+  "C/2025_K1-D": {
+   "search": "C/2025 K1-D",
+   "e": "1.002459703720921",
+   "class": "HYP",
+   "epoch_jd": "2461033.5",
+   "fullname": "C/2025 K1-D (ATLAS)",
+   "fetched": "2026-11-04"
+  },
+  "Ceres": {
+   "search": "A801 AA",
+   "e": ".07969229514816586",
+   "class": "MBA",
+   "epoch_jd": "2461200.5",
+   "fullname": "1 Ceres (A801 AA)",
+   "fetched": "2026-11-04"
+  },
+  "Chariklo": {
+   "search": "1997 CU26",
+   "e": ".1708195854003942",
+   "class": "CEN",
+   "epoch_jd": "2461200.5",
+   "fullname": "10199 Chariklo (1997 CU26)",
+   "fetched": "2026-11-04"
+  },
+  "Churyumov": {
+   "search": "67P",
+   "e": ".6409081308996354",
+   "class": "JFc",
+   "epoch_jd": "2457305.5",
+   "fullname": "67P/Churyumov-Gerasimenko",
+   "fetched": "2026-11-04"
+  },
+  "Dinkinesh": {
+   "search": "1999 VD57",
+   "e": ".1126817135846694",
+   "class": "MBA",
+   "epoch_jd": "2461200.5",
+   "fullname": "152830 Dinkinesh (1999 VD57)",
+   "fetched": "2026-11-04"
+  },
+  "Donaldjohanson": {
+   "search": "1981 EQ5",
+   "e": ".1868593763038477",
+   "class": "MBA",
+   "epoch_jd": "2461200.5",
+   "fullname": "52246 Donaldjohanson (1981 EQ5)",
+   "fetched": "2026-11-04"
+  },
+  "Encke": {
+   "search": "2P",
+   "e": ".8469757628061869",
+   "class": "ETc",
+   "epoch_jd": "2460540.5",
+   "fullname": "2P/Encke",
+   "fetched": "2026-11-04"
+  },
+  "Eris": {
+   "search": "2003 UB313",
+   "e": ".4382385347971672",
+   "class": "TNO",
+   "epoch_jd": "2461200.5",
+   "fullname": "136199 Eris (2003 UB313)",
+   "fetched": "2026-11-04"
+  },
+  "Eros": {
+   "search": "A898 PA",
+   "e": ".2228779627700761",
+   "class": "AMO",
+   "epoch_jd": "2461200.5",
+   "fullname": "433 Eros (A898 PA)",
+   "fetched": "2026-11-04"
+  },
+  "Eurybates": {
+   "search": "1973 SO",
+   "e": ".09059867172297777",
+   "class": "TJN",
+   "epoch_jd": "2461200.5",
+   "fullname": "3548 Eurybates (1973 SO)",
+   "fetched": "2026-11-04"
+  },
+  "GV9": {
+   "search": "2004 GV9",
+   "e": ".07703121354853824",
+   "class": "TNO",
+   "epoch_jd": "2461200.5",
+   "fullname": "90568 Goibniu (2004 GV9)",
+   "fetched": "2026-11-04"
+  },
+  "Gonggong": {
+   "search": "2007 OR10",
+   "e": ".5042510000302973",
+   "class": "TNO",
+   "epoch_jd": "2461200.5",
+   "fullname": "225088 Gonggong (2007 OR10)",
+   "fetched": "2026-11-04"
+  },
+  "Hale-Bopp": {
+   "search": "C/1995 O1",
+   "e": ".9949810027633206",
+   "class": "COM",
+   "epoch_jd": "2459837.5",
+   "fullname": "C/1995 O1 (Hale-Bopp)",
+   "fetched": "2026-11-04"
+  },
+  "Halley": {
+   "search": "1P",
+   "e": ".9679359956953211",
+   "class": "HTC",
+   "epoch_jd": "2439875.5",
+   "fullname": "1P/Halley",
+   "fetched": "2026-11-04"
+  },
+  "Haumea": {
+   "search": "2003 EL61",
+   "e": ".1944430148898797",
+   "class": "TNO",
+   "epoch_jd": "2461200.5",
+   "fullname": "136108 Haumea (2003 EL61)",
+   "fetched": "2026-11-04"
+  },
+  "Howell": {
+   "search": "88P",
+   "e": ".5642860771255717",
+   "class": "JFc",
+   "epoch_jd": "2459278.5",
+   "fullname": "88P/Howell",
+   "fetched": "2026-11-04"
+  },
+  "Hyakutake": {
+   "search": "C/1996 B2",
+   "e": ".9998916470450123",
+   "class": "COM",
+   "epoch_jd": "2450157.5",
+   "fullname": "C/1996 B2 (Hyakutake)",
+   "fetched": "2026-11-04"
+  },
+  "Ikeya-Seki": {
+   "search": "C/1965 S1-A",
+   "e": "0.999915",
+   "class": "COM",
+   "epoch_jd": "2439040.5",
+   "fullname": "C/1965 S1-A (Ikeya-Seki)",
+   "fetched": "2026-11-04"
+  },
+  "Itokawa": {
+   "search": "1998 SF36",
+   "e": ".2801776414987972",
+   "class": "APO",
+   "epoch_jd": "2461200.5",
+   "fullname": "25143 Itokawa (1998 SF36)",
+   "fetched": "2026-11-04"
+  },
+  "Ixion": {
+   "search": "2001 KX76",
+   "e": ".2435609285514542",
+   "class": "TNO",
+   "epoch_jd": "2461200.5",
+   "fullname": "28978 Ixion (2001 KX76)",
+   "fetched": "2026-11-04"
+  },
+  "Kamo oalewa": {
+   "search": "2016 HO3",
+   "e": ".1022388434937281",
+   "class": "APO",
+   "epoch_jd": "2461200.5",
+   "fullname": "469219 Kamo`oalewa (2016 HO3)",
+   "fetched": "2026-11-04"
+  },
+  "Leleakuhonua": {
+   "search": "2015 TG387",
+   "e": ".951905319172072",
+   "class": "TNO",
+   "epoch_jd": "2461200.5",
+   "fullname": "541132 Leleakuhonua (2015 TG387)",
+   "fetched": "2026-11-04"
+  },
+  "Lemmon": {
+   "search": "C/2025 A6",
+   "e": ".9955362293967411",
+   "class": "COM",
+   "epoch_jd": "2460979.5",
+   "fullname": "C/2025 A6 (Lemmon)",
+   "fetched": "2026-11-04"
+  },
+  "Leucus": {
+   "search": "1997 TS25",
+   "e": ".06495789797701287",
+   "class": "TJN",
+   "epoch_jd": "2461200.5",
+   "fullname": "11351 Leucus (1997 TS25)",
+   "fetched": "2026-11-04"
+  },
+  "Lutetia": {
+   "search": "A852 VA",
+   "e": ".1647703512177245",
+   "class": "MBA",
+   "epoch_jd": "2461200.5",
+   "fullname": "21 Lutetia (A852 VA)",
+   "fetched": "2026-11-04"
+  },
+  "MAPS": {
+   "search": "C/2026 A1",
+   "e": ".9999626492034864",
+   "class": "COM",
+   "epoch_jd": "2461083.5",
+   "fullname": "C/2026 A1 (MAPS)",
+   "fetched": "2026-11-04"
+  },
+  "Makemake": {
+   "search": "2005 FY9",
+   "e": ".1588889953992523",
+   "class": "TNO",
+   "epoch_jd": "2461200.5",
+   "fullname": "136472 Makemake (2005 FY9)",
+   "fetched": "2026-11-04"
+  },
+  "Mani": {
+   "search": "2002 MS4",
+   "e": ".1482654554299753",
+   "class": "TNO",
+   "epoch_jd": "2461200.5",
+   "fullname": "307261 Mani (2002 MS4)",
+   "fetched": "2026-11-04"
+  },
+  "McNaught": {
+   "search": "C/2006 P1",
+   "e": "1.000018815882278",
+   "class": "HYP",
+   "epoch_jd": "2454065.5",
+   "fullname": "C/2006 P1 (McNaught)",
+   "fetched": "2026-11-04"
+  },
+  "NEOWISE": {
+   "search": "C/2020 F3",
+   "e": ".9991780262531292",
+   "class": "COM",
+   "epoch_jd": "2459036.5",
+   "fullname": "C/2020 F3 (NEOWISE)",
+   "fetched": "2026-11-04"
+  },
+  "Orcus": {
+   "search": "2004 DW",
+   "e": ".2205240628250881",
+   "class": "TNO",
+   "epoch_jd": "2461200.5",
+   "fullname": "90482 Orcus (2004 DW)",
+   "fetched": "2026-11-04"
+  },
+  "Orus": {
+   "search": "1999 VQ10",
+   "e": ".03672540559818106",
+   "class": "TJN",
+   "epoch_jd": "2461200.5",
+   "fullname": "21900 Orus (1999 VQ10)",
+   "fetched": "2026-11-04"
+  },
+  "PANSTARRS": {
+   "search": "C/2025 R3",
+   "e": "1.000350131023512",
+   "class": "HYP",
+   "epoch_jd": "2461063.5",
+   "fullname": "C/2025 R3 (PANSTARRS)",
+   "fetched": "2026-11-04"
+  },
+  "Patroclus": {
+   "search": "A906 UL",
+   "e": ".1391467916238868",
+   "class": "TJN",
+   "epoch_jd": "2461200.5",
+   "fullname": "617 Patroclus (A906 UL)",
+   "fetched": "2026-11-04"
+  },
+  "Polymele": {
+   "search": "1999 WB2",
+   "e": ".09592245810512318",
+   "class": "TJN",
+   "epoch_jd": "2461200.5",
+   "fullname": "15094 Polymele (1999 WB2)",
+   "fetched": "2026-11-04"
+  },
+  "Quaoar": {
+   "search": "2002 LM60",
+   "e": ".03520019261837198",
+   "class": "TNO",
+   "epoch_jd": "2461200.5",
+   "fullname": "50000 Quaoar (2002 LM60)",
+   "fetched": "2026-11-04"
+  },
+  "Ryugu": {
+   "search": "1999 JU3",
+   "e": ".1910730046480051",
+   "class": "APO",
+   "epoch_jd": "2461200.5",
+   "fullname": "162173 Ryugu (1999 JU3)",
+   "fetched": "2026-11-04"
+  },
+  "SWAN": {
+   "search": "C/2025 R2",
+   "e": ".9941957162943971",
+   "class": "COM",
+   "epoch_jd": "2460991.5",
+   "fullname": "C/2025 R2 (SWAN)",
+   "fetched": "2026-11-04"
+  },
+  "Schaumasse": {
+   "search": "24P",
+   "e": ".707909552000865",
+   "class": "JFc",
+   "epoch_jd": "2460321.5",
+   "fullname": "24P/Schaumasse",
+   "fetched": "2026-11-04"
+  },
+  "Sedna": {
+   "search": "2003 VB12",
+   "e": ".8598824585187618",
+   "class": "TNO",
+   "epoch_jd": "2461200.5",
+   "fullname": "90377 Sedna (2003 VB12)",
+   "fetched": "2026-11-04"
+  },
+  "Steins": {
+   "search": "1969 VC",
+   "e": ".1467867767199327",
+   "class": "MBA",
+   "epoch_jd": "2461200.5",
+   "fullname": "2867 Steins (1969 VC)",
+   "fetched": "2026-11-04"
+  },
+  "Tempel 2": {
+   "search": "10P",
+   "e": ".5375658260306831",
+   "class": "JFc",
+   "epoch_jd": "2458040.5",
+   "fullname": "10P/Tempel 2",
+   "fetched": "2026-11-04"
+  },
+  "Tsuchinshan": {
+   "search": "C/2023 A3",
+   "e": "1.000095368540586",
+   "class": "HYP",
+   "epoch_jd": "2460448.5",
+   "fullname": "C/2023 A3 (Tsuchinshan-ATLAS)",
+   "fetched": "2026-11-04"
+  },
+  "Varuna": {
+   "search": "2000 WR106",
+   "e": ".05161543734827757",
+   "class": "TNO",
+   "epoch_jd": "2461200.5",
+   "fullname": "20000 Varuna (2000 WR106)",
+   "fetched": "2026-11-04"
+  },
+  "Vesta": {
+   "search": "A807 FA",
+   "e": ".09020374382834395",
+   "class": "MBA",
+   "epoch_jd": "2461200.5",
+   "fullname": "4 Vesta (A807 FA)",
+   "fetched": "2026-11-04"
+  },
+  "West": {
+   "search": "C/1975 V1-A",
+   "e": "1.000016087612074",
+   "class": "HYP",
+   "epoch_jd": "2442908.5",
+   "fullname": "C/1975 V1-A (West)",
+   "fetched": "2026-11-04"
+  },
+  "Wierzchos": {
+   "search": "C/2024 E1",
+   "e": "1.00005833991638",
+   "class": "HYP",
+   "epoch_jd": "2460818.5",
+   "fullname": "C/2024 E1 (Wierzchos)",
+   "fetched": "2026-11-04"
+  }
+ }
+}

@@ -86,6 +86,10 @@ count, 2025 PN7's "1.00" years at 3 figures.)
 Module updated: October 24, 2026 with Anthropic's Claude Opus 5.5 (L-443,
 slice 2: the fresh export is built with the path plans too, and a held
 export made from an older data/path_plans.json is named.)
+Module updated: November 4, 2026 with Anthropic's Claude Opus 5.5 (L-510:
+a small body is exported with open_path when its database e is at or
+above 1 and without it below, and one with no database e is refused by
+name.)
 """
 
 import json
@@ -176,11 +180,29 @@ def self_test():
     # L-443: an entry with a helio_id is served by it, as a small body.
     helio = good.replace(" 'horizons_name': 'Mars',",
                          " 'horizons_name': 'Mars', 'helio_id': 'A123 BC',")
-    served = ex.build_export(helio)["objects"]["mars"]
+    # L-510: a small body's open_path is its database e's, at or above 1.
+    closed = {"Mars": {"search": "A123 BC", "e": "0.2", "fetched":
+                       "2026-11-04"}}
+    served = ex.build_export(helio, solutions=closed)["objects"]["mars"]
     if (served["horizons_id"], served["id_type"]) != ("A123 BC", "smallbody"):
         problems.append("an entry with a helio_id was not served by it, as a "
                         "small body: %r" % ((served["horizons_id"],
                                              served["id_type"]),))
+    if "open_path" in served:
+        problems.append("a small body with database e 0.2 was exported "
+                        "with open_path")
+    opened = {"Mars": dict(closed["Mars"], e="1.3")}
+    if not ex.build_export(helio, solutions=opened)["objects"]["mars"].get(
+            "open_path"):
+        problems.append("a small body with database e 1.3 was exported "
+                        "without open_path")
+    try:
+        ex.build_export(helio, solutions={})
+        problems.append("a small body with no database e was exported")
+    except ex.ExportError as exc:
+        if not str(exc).startswith("Mars: no e from JPL's Small-Body"):
+            problems.append("a small body with no database e was refused "
+                            "without its name: %s" % exc)
     if (export["objects"]["mars"]["horizons_id"] != "499"):
         problems.append("an entry with no helio_id was not served by its id")
 

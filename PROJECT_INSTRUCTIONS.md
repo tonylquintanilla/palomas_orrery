@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.124 | November 3, 2026
+Tony Quintanilla, PE | Claude | v3.125 | November 4, 2026
 
-Cut from 81fa7b8a at https://github.com/tonylquintanilla/palomas_orrery
+Cut from eab623f5 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -489,7 +489,7 @@ safe-file-editing            1.14 Editing existing files, patch scripts,
                                   sed/regex edits, encoding checks (portable)
 agentic-pre-test             1.3  BEFORE delivering complete files/agentic
                                   code; after data-content sweeps
-horizons-orbital-mechanics   1.15 Horizons queries, centers, frames, osculating
+horizons-orbital-mechanics   1.16 Horizons queries, centers, frames, osculating
                                   elements, encounters, comet record pinning,
                                   2xr uncertainties, periods, the drawn orbit's
                                   centre, the Horizons check
@@ -512,7 +512,10 @@ horizons-orbital-mechanics   1.15 Horizons queries, centers, frames, osculating
                                   barycentre, an ended mission's mission_end
                                   (its path stopped on the day it ended), the
                                   orrery's drawing of a path by its plan
-                                  (path_drawing.py, only around the Sun)
+                                  (path_drawing.py, only around the Sun), a
+                                  small body drawn as a path or an orbit by its
+                                  database e (path_or_orbit.py,
+                                  data/small_body_solutions.json)
 provenance-discipline        2.36 Scanner runs, audits, citations, constants,
                                   pre-push (Tier-1 = 0 on the active build
                                   path)
@@ -1295,6 +1298,50 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.125 (November 4, 2026): No rule changed in this document. ONE
+skill bump: horizons-orbital-mechanics 1.15 -> 1.16 (L-510, part 1). A
+SMALL BODY IS DRAWN AS A PATH OR AN ORBIT BY ITS DATABASE e.
+
+WHAT PROMPTED IT. The Claude Code session of Nov 4 (Claude Opus 5.5),
+through the python_work door, built on orrery eab623f5 and gallery
+5abca2c6, from
+documentation/COORD_L510_drawn_by_eccentricity_brief_20261103.md.
+Tony's rulings of Nov 3, 15:33 to 15:55 Chicago ("They should be drawn
+as all the Hyperbolic objects"; "How does JPL determine the class? By
+e"), and of Nov 4, at the brief's stop point, on which e: "Use the e
+that JPL classes by: the orbit solution's eccentricity in JPL's
+small-body database, refreshed on the 30-day cycle. Not today's
+heliocentric osculating e."
+
+WHAT CHANGED. horizons-orbital-mechanics: A Small Body Is Drawn by Its
+Database e, a new section (the rule's one home, path_or_orbit.py; which
+e and why not today's, McNaught's numbers; the store and its 30-day
+cycle in period_fetch.py; the named failure; two sides of 1 refused by
+name; the first run, where only piece C of C/2025 K1 changed side).
+Which Record Serves a Body, the Period Fetch's bullet and A Comet on an
+Open Path follow it; and L-485's carried sentence: the orrery's drawing
+of a plan keeps the website's daily tail and leaves out only its
+last-day pair. Its oldest of four version entries (1.13) moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule. Every
+sentence was read from the code built that day and from JPL's answers
+of Nov 4 before it was written.
+
+THE OBLIGATION TRAVELS. This session read each skill as the file in the
+repo, each as the manifest expected: horizons-orbital-mechanics 1.15,
+orrery-coding-conventions 1.13, gallery-cache-builder 1.17,
+provenance-discipline 2.36, safe-file-editing 1.14, agentic-pre-test
+1.3 and ledger-and-session-records 1.22. Tony reinstalls
+horizons-orbital-mechanics (Settings > Skills) and pastes this version
+into the Project's instructions on claude.ai; the next session that
+loads it from the account confirms its copy reads 1.16 before work
+that fires it.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.122 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.124 (November 3, 2026): No rule changed in this document. ONE
 skill bump: horizons-orbital-mechanics 1.14 -> 1.15 (L-476). THE
 ORRERY'S PLOT DRAWS A PLANNED PATH BY ITS PLAN, ONLY AROUND THE SUN.
@@ -1388,37 +1435,6 @@ gallery-cache-builder 1.17 before work that fires them.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.120 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.122 (November 2, 2026): No rule changed in this document. ONE
-sentence added to Token Economy [QUALITY], after its instances:
-where the table of method, model and effort lives. No skill bump.
-THE TABLE MADE FINDABLE FROM THE PROTOCOL AND THE DASHBOARD.
-
-WHAT PROMPTED IT. Tony, Nov 2, 10:01 Chicago, in the coordinating
-session (Claude Fable 5.1): "What would help would be recommendations
-regarding model and effort as well as method meaning snippet, patch or
-Code for our various actions and tasks." That session wrote the table,
-placed it as METHOD_MODEL_EFFORT.md at the orrery's root, and left its
-wiring to a patch by an Opus session, by the table's own row for
-records-only work (HANDOFF_coordination_20261102_morning.md, section
-8).
-
-WHAT CHANGED. Token Economy gains one sentence naming the table and
-where it opens. The dashboard's documents list gains the table's row
-after Running a Patch File (palomas_orrery_dashboard.py, LOCAL_DOCS).
-L-506 records the second slice. Built by the coordinating session of
-Nov 2, afternoon (Claude Opus 5.5), on orrery 7277aa4c, as
-patch_L506_2_method_table.py.
-
-THE OBLIGATION TRAVELS. The Project's instructions on claude.ai read
-v3.121 until Tony pastes this version in. No skill changed; nothing to
-reinstall.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.119 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

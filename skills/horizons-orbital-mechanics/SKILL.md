@@ -1,14 +1,26 @@
 ---
 name: horizons-orbital-mechanics
-description: JPL Horizons API and orbital mechanics reference for the Paloma's Orrery project (astroquery Horizons queries, orbit_data_manager, osculating_cache_manager, idealized_orbits, apsidal_markers, spacecraft_encounters, close_approach_data, position_accuracy, orbital_period, period_fetch, path_plan). Use for any Paloma's Orrery task involving Horizons queries or ephemerides, coordinate center bodies, reference frames, osculating elements, orbit caches, a small body's position uncertainty (VEC_TABLE 2xr), orbital periods and the centre they are taken around, the drawn orbit and its markers' dates, which Horizons record serves a body (helio_id, a pinned comet record, a skip list), encounter or flyby resolution, or whenever a rendered orbit looks wrong or an ephemeris API returns empty. Do not use for projects other than Paloma's Orrery.
-fires_when: Horizons queries, centers, frames, osculating elements, encounters, comet record pinning, 2xr uncertainties, periods, the drawn orbit's centre, the Horizons check (horizons_check.py, its period comparison and the data sheets' re-read), the period fetch before it (period_fetch.py), which record serves a body (helio_id, re-pinning a comet, JPL's exact name, a body on a skip list), a spacecraft path's plan and its flybys (path_plan.py -- the Hill sphere, JPL's GM, the window and step, the orbiter rule for an arrival, a departure, a capture), a comet whose designation matches its own pieces, a comet on an open path's plan (its span, its TP, its perihelion), an entry asked by JPL's number in the Horizons check, the clock read as UTC (utc_clock), astroquery's saved answers (cache=), a 2xr answer with no figure (n.a.), Pluto's period asked of its barycentre, an ended mission's mission_end (its path stopped on the day it ended), the orrery's drawing of a path by its plan (path_drawing.py, only around the Sun)
+description: JPL Horizons API and orbital mechanics reference for the Paloma's Orrery project (astroquery Horizons queries, orbit_data_manager, osculating_cache_manager, idealized_orbits, apsidal_markers, spacecraft_encounters, close_approach_data, position_accuracy, orbital_period, period_fetch, path_plan, path_or_orbit). Use for any Paloma's Orrery task involving Horizons queries or ephemerides, coordinate center bodies, reference frames, osculating elements, orbit caches, a small body's position uncertainty (VEC_TABLE 2xr), orbital periods and the centre they are taken around, the drawn orbit and its markers' dates, which Horizons record serves a body (helio_id, a pinned comet record, a skip list), encounter or flyby resolution, or whenever a rendered orbit looks wrong or an ephemeris API returns empty. Do not use for projects other than Paloma's Orrery.
+fires_when: Horizons queries, centers, frames, osculating elements, encounters, comet record pinning, 2xr uncertainties, periods, the drawn orbit's centre, the Horizons check (horizons_check.py, its period comparison and the data sheets' re-read), the period fetch before it (period_fetch.py), which record serves a body (helio_id, re-pinning a comet, JPL's exact name, a body on a skip list), a spacecraft path's plan and its flybys (path_plan.py -- the Hill sphere, JPL's GM, the window and step, the orbiter rule for an arrival, a departure, a capture), a comet whose designation matches its own pieces, a comet on an open path's plan (its span, its TP, its perihelion), an entry asked by JPL's number in the Horizons check, the clock read as UTC (utc_clock), astroquery's saved answers (cache=), a 2xr answer with no figure (n.a.), Pluto's period asked of its barycentre, an ended mission's mission_end (its path stopped on the day it ended), the orrery's drawing of a path by its plan (path_drawing.py, only around the Sun), a small body drawn as a path or an orbit by its database e (path_or_orbit.py, data/small_body_solutions.json)
 ---
 
 # Horizons and Orbital Mechanics Reference
 
-Read this file in 4 parts: lines 1-203, 204-424, 425-676, 677-733.
+Read this file in 4 parts: lines 1-207, 208-455, 456-575, 576-805.
 
-Skill version: 1.15 | 2026-11-03, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.16 | 2026-11-04, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ eab623f5 and gallery @ 5abca2c6. v1.16 (L-510, part 1)
+adds A Small Body Is Drawn by Its Database e: a small body is drawn as a
+path when its orbit solution's e in JPL's Small-Body Database is at or
+above 1, and as an orbit below it (path_or_orbit.py), the e refreshed by
+the period fetch every 30 days; the typed object_type and the retired
+open_path no longer decide it (Tony, 2026-11-04: "Use the e that JPL
+classes by"). A Comet on an Open Path is chosen so, and piece C of
+C/2025 K1 is an orbit since. And the sentence carried on L-485: the
+orrery's drawing of a plan keeps the website's daily tail and leaves out
+only its last-day pair. Read from the code built that day and JPL's
+answers of 2026-11-04 before it was written.
+Earlier: 1.15 | 2026-11-03, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 81fa7b8a and gallery @ 3a211a8c. v1.15 (L-476) adds A
 Plan Draws a Path Only Around the Sun to How a Path's Events Are Found:
 the orrery's plot now draws a planned path by its plan
@@ -30,24 +42,11 @@ to that day and no further, and the field is among a plan's inputs only
 where it is set. Tony's ruling of 2026-11-02, "Yes stop at impact".
 Read from path_plan.py and JPL's answers of 2026-11-02 before it was
 written.
-Earlier: 1.13 | 2026-10-29, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 571b9bf4 and gallery @ b55109f2. v1.13 (L-504, L-399,
-L-484) adds The Clock Is Read as UTC: one reading in utc_clock.py,
-plain UTC datetimes, stamps that say their zone and a reader for both
-forms. Under Query Mechanics, astroquery's week of saved answers and
-what each instrument does about them: both ask fresh, by one switch
-each. Under A Small Body's Uncertainty, the website's 2xr is a second
-question held to the served point within the body's own uncertainty,
-and an answer whose column reads "n.a." is JPL stating none. Under A
-Period Depends on Its Centre, Pluto's period is asked of the
-Pluto-Charon barycentre (Tony, 2026-10-29: "Centre of mass"). Each
-fact was read from the code at 571b9bf4 and b55109f2, and JPL's
-answers fetched, before it was written.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there on
 2026-10-12, 2026-10-13 and 2026-10-14 (L-431), 2026-10-15 (L-444,
 L-445), 2026-10-22 (L-443), 2026-10-24 (L-443), 2026-10-25 (L-443),
-2026-10-26 (L-443), 2026-10-29 (L-504), 2026-11-02 (L-507) and
-2026-11-03 (L-476).
+2026-10-26 (L-443), 2026-10-29 (L-504), 2026-11-02 (L-507),
+2026-11-03 (L-476) and 2026-11-04 (L-510).
 
 ## Contents
 
@@ -62,6 +61,7 @@ if this list and the headings disagree (L-418).
 - The Clock Is Read as UTC (L-504)
 - A Period Depends on Its Centre (L-431)
 - The Drawn Orbit Follows the Period's Centre (L-431, build 2)
+- A Small Body Is Drawn by Its Database e (L-510)
 - Checking an Entry Against JPL (L-395)
 - Where the Check Lives, and What It Compares (L-395, L-431 build 3)
 - How a Path's Events Are Found (L-443)
@@ -130,7 +130,11 @@ record each question asks, and to ask the same one everywhere.
   elements with an elliptic solver (render_orbits.solve_kepler,
   sweep_conic), so a comet JPL classes hyperbolic (SBDB class HYP, as
   Wierzchos) or one fitted with e near 1 waits for a path drawing and is
-  not served as an orbit. Read SBDB's class; do not judge from the name.
+  not served as an orbit. Which small bodies are paths is decided by the
+  database's e (A Small Body Is Drawn by Its Database e, below); do not
+  judge from the name. Piece C of C/2025 K1, e 0.999994 and class COM,
+  is served as an orbit since 2026-11-04, and the website's drawing of it
+  is an open difference on L-484.
 - A SKIP NAMES WHAT FAILED. Six lists in palomas_orrery.py keep a body
   out of a Horizons question: SKIP_HORIZONS_PREFETCH in plot_objects and
   in animate_objects, SKIP_HORIZONS_TRAJECTORY in the static plot's
@@ -385,6 +389,70 @@ build: documentation/HANDOFF_L431_build2_orbits_markers_20261012.md.
   comparison stays Sun-centred; a label saying so was built and then
   removed the same day.)
 
+## A Small Body Is Drawn by Its Database e (L-510)
+
+Built 2026-11-04 (L-510, part 1), from
+documentation/COORD_L510_drawn_by_eccentricity_brief_20261103.md.
+Tony's rulings: 2026-11-03 (L-484), "They should be drawn as all the
+Hyperbolic objects", "This is not a special class", "How does JPL
+determine the class? By e"; and 2026-11-04, on which e: "Use the e that
+JPL classes by: the orbit solution's eccentricity in JPL's small-body
+database, refreshed on the 30-day cycle. Not today's heliocentric
+osculating e."
+
+- THE RULE, ONE HOME: `path_or_orbit.drawn_as_path`. A small body whose
+  orbit solution's e in the Small-Body Database (sbdb.api, full-prec) is
+  at or above 1 is drawn as a path, by its plan, as 3I/ATLAS is; below
+  1, as an orbit. A small body is one asked as such around the Sun: a
+  `helio_id`, id_type 'smallbody', or a comet asked by JPL's permanent
+  number as a 'designation'; never a spacecraft. Its readers: the
+  orrery's static plot and animation (`drawn_object_type`, at the eight
+  places the typed object_type chose), the export's `open_path`, the
+  path plan's choice of comets, the period fetch's skip of a path's
+  period. The typed object_type keeps its other jobs: 'satellite',
+  'lagrange_point', 'fixed', the comet tails' test, and
+  `can_be_horizons_center`, which still keeps a typed 'trajectory' out
+  of the centre list.
+- WHY NOT TODAY'S OSCULATING e. McNaught (C/2006 P1), asked 2026-11-04:
+  its solution's e is 1.000018816 (class HYP, epoch 2006-11-26), equal
+  to Horizons' e around the Sun at that epoch; around the Sun on
+  2026-11-04 its e is 0.999939767. Around the solar system's barycentre
+  its e has held at 0.999916 since 2011, while the Sun-centred e swings
+  about it (0.99991, 0.99997, 0.99990, 0.99994 at 2011, 2016, 2021 Jan 1
+  and 2026 Nov 4): the swing is the Sun's own motion around the
+  barycentre. A rule on today's Sun-centred e would move a body across 1
+  with the Sun's wobble.
+- THE STORE AND THE CYCLE. `data/small_body_solutions.json`, keyed by
+  the entry's name, holds what SBDB was asked (`search`: the helio_id or
+  id, a pinned record by the name Horizons gives it,
+  `orbital_period.sbdb_search_string`), the e as JPL wrote it, its
+  class, epoch, full name and fetched date. `period_fetch.py` is its only
+  writer, in the maintenance run: a record is asked again when missing,
+  30 days old, or asked of another search than the entry's now. The
+  same step refreshes every served small body's elements when they are
+  30 days old or missing, the comets drawn as paths among them (they
+  still serve no period).
+- A NAMED FAILURE, NEVER A QUIET DEFAULT. A small body with no record
+  raises `NoSolution` naming it: the export stops ("NOTHING was
+  written"), the path plan says FAIL and keeps every plan, the period
+  fetch says FAIL, and the orrery's plot prints "[PATH OR ORBIT] FAILED"
+  and draws the body by neither its plan nor an orbit.
+- TWO SIDES OF 1 FAIL BY NAME (`side_disagreement`). Where the
+  database's e and the elements a drawing would use sit on two sides of
+  1, idealized_orbits.py draws no orbit for the body and prints why; the
+  period fetch names it, DRAWING REFUSED. Never an ellipse from a
+  hyperbolic solution. On 2026-11-04 that was McNaught alone, drawn by
+  its plan and with no ellipse.
+- THE FIRST RUN, 2026-11-04: 68 keyed small bodies asked. Only piece C
+  of C/2025 K1 changed side (e 0.9999940934318799, class COM): the orrery
+  draws it as an orbit, its plan leaves data/path_plans.json, and it
+  joins the small bodies the spacecraft plans search, so their inputs
+  change and each is made again, as any plan whose inputs change is.
+- Held by test_path_or_orbit.py: one body each side of 1, one at
+  exactly 1, one with no record, the planted faults (the comparison
+  turned the wrong way among them), and no entry of
+  celestial_objects.py carrying 'open_path' (planted: put back on West).
+
 ## Checking an Entry Against JPL (L-395)
 
 Learned building the Horizons check, 2026-10-07 to 2026-10-10. The
@@ -445,7 +513,9 @@ build's record, documentation/HANDOFF_L431_build3_website_20261014.md.
   it as plotting does, so the check compares the new period with JPL
   the same day. It asks nothing on most runs, saves nothing for a body
   whose answer is not whole, and says UNREACHABLE. The check itself
-  still fills no gaps.
+  still fills no gaps. Since v1.16 (L-510) it also refreshes, every 30
+  days, each served small body's database e and its elements, the comets
+  drawn as paths among them (A Small Body Is Drawn by Its Database e).
 - Only what is due is asked: a part of an entry never confirmed, one
   confirmed 30 days ago or more, or one that has changed since (the
   record keeps what was confirmed, so a change shows). On most runs it
@@ -605,8 +675,9 @@ first run against JPL is Tony's.
   Sun-centred view, and around any other centre as before, in the
   orrery now and in the website's planet rooms when they come. The
   orrery's drawing is path_drawing.py (draw_plan), the website's
-  fetch_path_by_plan point for point without its daily tail and
-  last-day pair, solid to today by utc_clock and dashed after, one
+  fetch_path_by_plan point for point, its daily tail included (since
+  patch_L476_2), leaving out only its last-day pair, solid to today by
+  utc_clock and dashed after, one
   legend entry; its whole-path plot and the animation's full mission
   use it. Every reader of a planned entry's dates asks
   path_drawing.entry_span, which reads the plan, and the GUI's labels
@@ -640,11 +711,12 @@ first run against JPL is Tony's.
 ### A Comet on an Open Path (v1.12)
 
 Built 2026-10-26 (L-443, slice 2, build B part 2), in `path_plan.py`'s
-comets section, for the fourteen comets the orrery's object list marks
-`open_path`: ten hyperbolic comets, the three interstellar objects and
-piece C of C/2025 K1. An ellipse means nothing for an orbit that is
-open, so the website draws the comet's path from JPL's positions, as it
-does a spacecraft's.
+comets section, for the comets whose database e is at or above 1 (A
+Small Body Is Drawn by Its Database e, v1.16): thirteen on 2026-11-04,
+ten hyperbolic comets and the three interstellar objects. Until then the
+object list marked fourteen `open_path`, piece C of C/2025 K1 among them.
+An ellipse means nothing for an orbit that is open, so both instruments
+draw the comet's path from JPL's positions, as they do a spacecraft's.
 
 - THE SPAN is Tony's ruling of 2026-10-24
   (documentation/COORD_L443_comet_span_ruling_20261024.md): "On the
@@ -670,7 +742,7 @@ does a spacecraft's.
   (now 1); the 30-day cycle is a spacecraft's.
 - COMETS ARE NOT SEARCHED BODIES. The spacecraft plans search the
   bodies the object list names; a comet on an open path is left out
-  (`is_comet_path`). Without that, keying the fourteen would have
+  (`is_comet_path`, by the database e since v1.16). Without that, keying the fourteen would have
   changed every spacecraft plan's inputs and remade all twelve, half an
   hour of JPL. A comet's own plan searches only the Sun.
 

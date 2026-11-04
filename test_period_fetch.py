@@ -126,6 +126,10 @@ Module updated: October 28, 2026 with Anthropic's Claude Opus 5.5 (L-443,
 Pluto's year: part 7, the Pluto-Charon barycentre fetched as a major body
 on JPL's recorded answers, with two planted faults; the list's skipped
 barycentre is now Orcus-Vanth's.)
+Module updated: November 4, 2026 with Anthropic's Claude Opus 5.5 (L-510:
+each world seeds Encke's database e, current on the run's day, and refuses
+any live question to JPL's Small-Body Database, so the suite stays off the
+network; one anchor moved with the period fetch's new indentation.)
 """
 
 import copy
@@ -148,6 +152,7 @@ import export_objects                    # noqa: E402
 import orbit_data_manager                # noqa: E402
 import orbital_period                    # noqa: E402
 import osculating_cache_manager as ocm   # noqa: E402
+import path_or_orbit                     # noqa: E402
 
 ANSWERS = os.path.join(HERE, "documentation", "worksheets",
                        "period_fetch_answers_L444.json")
@@ -192,6 +197,14 @@ PLUTO_ENTRIES = [
      "id": "9", "horizons_name": "Pluto Barycenter",
      "object_type": "barycenter"},
 ]
+
+# L-510: Encke's database e as JPL gave it on 2026-11-04 (sbdb.api,
+# full-prec), the only small body in these lists; seeded current, so no
+# scenario here asks the database.
+SOLUTIONS = {
+    "Encke": {"search": "2P", "e": ".8469757628061869", "class": "ETc",
+              "epoch_jd": "2460540.5", "fullname": "2P/Encke"},
+}
 
 # Fields a fresh fetch writes differently from the recorded one, and why.
 NOT_COMPARED = {
@@ -251,6 +264,15 @@ class World(object):
         # stands in for the real module while this world is open.
         self.op = op
         self.write_cache(cache)
+        # L-510: the small bodies' database e, current on the run's day, so
+        # the 30-day refresh asks nothing; a live ask is refused below.
+        day = (answers.get("when") or "2026-10-15")[:10]
+        solutions = {}
+        for e in (entries or LIST_ENTRIES):
+            if path_or_orbit.is_small_body(e) and e["name"] in SOLUTIONS:
+                solutions[e["name"]] = dict(SOLUTIONS[e["name"]],
+                                            fetched=day)
+        path_or_orbit.save_solutions(self.tmp, solutions)
         self.refuse = set(refuse)
         self.calls = []
         self.log = []
@@ -280,7 +302,11 @@ class World(object):
                 orbit_data_manager.query_horizons_elements,
             (op, "query_period_pair"): op.query_period_pair,
             (op, "fetch_sbdb_period_sigma"): op.fetch_sbdb_period_sigma,
+            (path_or_orbit, "fetch_solution"): path_or_orbit.fetch_solution,
         }
+        # L-510: no live question to JPL's Small-Body Database
+        path_or_orbit.fetch_solution = lambda search, today, get=None: (
+            None, "SBDB not reached (no recorded answer)", False)
         ocm.CACHE_FILE = data / "osculating_cache.json"
         ocm.BACKUP_FILE = data / "osculating_cache_backup.json"
         ocm.BACKUP_OLD = data / "osculating_cache_backup_old.json"
@@ -865,8 +891,8 @@ FAULTS = [
      '            have.append(entry)\n'
      '            continue\n', '', "nothing"),
     ("the set not printed before asking",
-     '    for entry, why in missing:\n'
-     '        echo("  %-24s %s" % (entry["name"], why))\n', '', "set"),
+     '        for entry, why in missing:\n'
+     '            echo("  %-24s %s" % (entry["name"], why))\n', '', "set"),
     ("a new object missed: the set built only from cached bodies",
      '        block, _inputs = export_objects.period_block(\n'
      '            entry["name"], entry["object_type"], cache, typed)\n',

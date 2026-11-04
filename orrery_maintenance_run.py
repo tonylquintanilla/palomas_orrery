@@ -305,6 +305,10 @@ wrote.)
 Module updated: November 3, 2026 with Anthropic's Claude Opus 5.5 (L-476:
 CHECKERS gains Path drawing suite, test_path_drawing.py, after Path plan
 suite: the orrery's drawing of a path by its plan, offline.)
+Module updated: November 4, 2026 with Anthropic's Claude Opus 5.5 (L-510:
+CHECKERS gains Path or orbit suite, test_path_or_orbit.py, after Path
+drawing suite, and the night runs it; Period fetch declares its second
+output, data/small_body_solutions.json, so the night may commit it.)
 """
 
 import hashlib
@@ -337,8 +341,11 @@ GENERATORS = [
     # same day and the export carries it. It asks only for what is
     # missing, so most runs ask nothing. Its hint quotes its verdict,
     # UNREACHABLE by name when JPL could not be reached.
+    # L-510: it also refreshes each served small body's database e (the
+    # store that decides path or orbit) and its elements, every 30 days.
     ('Period fetch', ['period_fetch.py'],
-     ['data/osculating_cache.json'], 'PERIOD FETCH:'),
+     ['data/osculating_cache.json', 'data/small_body_solutions.json'],
+     'PERIOD FETCH:'),
     # L-395 and L-431 build 3 (2026-10-14): JPL Horizons confirms what
     # the website serves -- each keyed entry's identity and fetched
     # period, and the spacecraft data sheets -- asking only about what is
@@ -459,6 +466,13 @@ CHECKERS = [
     # dashed after, the label from the plan.
     ('Path drawing suite', ['test_path_drawing.py'],
      'PATH DRAWING SUITE:'),
+    # L-510: a small body drawn as a path or an orbit by its database e,
+    # no network: one body each side of 1 and one with none, planted
+    # faults (the comparison turned the wrong way, among them); no entry
+    # of the list carries 'open_path' (planted: put back on West); every
+    # keyed small body has its database e.
+    ('Path or orbit suite', ['test_path_or_orbit.py'],
+     'PATH OR ORBIT SUITE:'),
     # Rule 7's exact row, built: every printed exact row states a print
     # count, every orrery line prints it through exact_text(), and the
     # gallery serves the count. The same script as the Exact rows report
@@ -581,7 +595,8 @@ NIGHT_ROWS = (
     'Objects export', 'Drawings export',
     'Constants export check', 'Objects export check',
     'Horizons confirmations', 'Horizons check suite', 'Period fetch suite',
-    'Path plan suite', 'Orbit cache', 'Drawings export check',
+    'Path plan suite', 'Path or orbit suite', 'Orbit cache',
+    'Drawings export check',
 )
 
 # A night row run with other arguments than by day. An outage is

@@ -56,6 +56,9 @@ Module updated: October 13, 2026 with Anthropic's Claude Opus 5.5 (L-431,
 Tony's ruling of the same day: an orbit drawn around another centre than
 the Sun gets no osculating-vs-mean comparison, only a sentence saying
 why; the "both around the Sun" label is gone.)
+Module updated: November 4, 2026 with Anthropic's Claude Opus 5.5 (L-510:
+a small body whose database e and the elements to be drawn sit on two
+sides of 1 is named, FAILED, and no orbit is drawn for it.)
 
 Role: computation
 Domain: orrery
@@ -69,6 +72,7 @@ from datetime import datetime, timedelta
 from osculating_cache_manager import get_elements_with_prompt
 import position_accuracy as _pa   # L-401: the body hover's formatter
 import orbital_period as _op      # L-431: the period's centre and fallback order
+import path_or_orbit as _poo      # L-510: no orbit drawn from elements on the wrong side of 1
 from constants_new import color_map, KNOWN_ORBITAL_PERIODS, KM_PER_AU, EARTH_OBLIQUITY_J2000_DEG
 from constants_new import D_PER_JULIAN_YEAR
 from orbital_elements import planetary_params as ORIGINAL_planetary_params
@@ -5497,6 +5501,15 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                 Omega = params.get('Omega', 0)
                 print(f"[L-431 orbit] {obj_name}: drawn around {_orbit['center']} "
                       f"(a={a} AU), offset {_orbit['offset_au']} AU", flush=True)
+            # L-510 (Tony, 2026-11-04): a small body whose database e and
+            # the elements drawn here sit on two sides of 1 fails by name;
+            # an ellipse is never drawn from a hyperbolic solution, nor a
+            # hyperbola from a closed one (path_or_orbit.side_disagreement).
+            _side = _poo.side_disagreement(obj_info, e)
+            if _side:
+                print(f"[PATH OR ORBIT] FAILED {_side}", flush=True)
+                skipped['invalid_orbit'].append(obj_name)
+                continue
             _off = _orbit['offset_au']
             # L-401's second slice: the body's own accuracy, from its position
             # record, so the orbit's markers print the body's digits

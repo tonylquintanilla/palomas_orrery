@@ -1083,7 +1083,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-468 | The Sun room's phone look of 2026-10-21, night: the corona's drawer text and the Hills cloud's cross (gallery, the Sun room) | OPEN | -- | 2026-10-29 |
 | ! | L-470 | Orrery entries the website cannot serve as they stand (orrery, objects) | OPEN | -- | 2026-11-02 |
 | ! | L-483 | A room for C/2025 K1 and its pieces, the first comet room (gallery, exhibits) | OPEN | -- | 2026-10-28 |
-| ! | L-484 | The website and the orrery agree on every object both draw, or the difference is written down (orrery + gallery, objects; method for interactive-exhibit) | OPEN | -- | 2026-11-03 |
+| ! | L-484 | The website and the orrery agree on every object both draw, or the difference is written down (orrery + gallery, objects; method for interactive-exhibit) | OPEN | -- | 2026-11-04 |
 | ! | L-485 | A nightly unattended run of the routines (orrery + gallery, maintenance) | OPEN | -- | 2026-11-01 |
 | ! | L-486 | A view carried into a room (gallery, the rooms) | OPEN | -- | 2026-10-26 |
 | ! | L-487 | Each body's description in the i panel, one bullet per sentence (gallery, the i panel) | OPEN | -- | 2026-10-25 |
@@ -1099,7 +1099,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-507 | Historical missions: past voyages drawn in the Solar System room, then encounters (gallery, the Solar System room) | OPEN | -- | 2026-11-03 |
 | ! | L-508 | A held body's alarm: loud until a ledger item names it (orrery + gallery, the Horizons check and the night) | OPEN | -- | 2026-11-02 |
 | ! | L-509 | Obsolete code: how it is marked, and when it goes (orrery, housekeeping) | OPEN | -- | 2026-11-03 |
-| ! | L-510 | The object list's typed fields stop deciding: a small body drawn by today's eccentricity, a plan asked from before any launch (orrery, the object list and the path plan) | OPEN | -- | 2026-11-03 |
+| ! | L-510 | The object list's typed fields stop deciding: a small body drawn by today's eccentricity, a plan asked from before any launch (orrery, the object list and the path plan) | OPEN | -- | 2026-11-04 |
 | ! | L-511 | The orrery's export carries the words the website prints (orrery + gallery, the words) | OPEN | -- | 2026-11-03 |
 
 ### B. Pending Action (Tony-side)
@@ -1549,7 +1549,7 @@ build.
 `documentation/DESIGN_L484_consistency_rulings_20261103.md`.
 
 #### [L-510] The object list's typed fields stop deciding: a small body drawn by today's eccentricity, a plan asked from before any launch (orrery, the object list and the path plan)
-<!-- L:510 status:OPEN upd:2026-11-03 section:A flag: rice: -->
+<!-- L:510 status:OPEN upd:2026-11-04 section:A flag: rice: -->
 - **Opened 2026-11-03** to carry two rulings that open the same two
   files, `celestial_objects.py` and `path_plan.py`. Both retire a field
   typed by hand, which Tony calls "a legacy of my manual method."
@@ -1585,7 +1585,136 @@ build.
 - **The skill sentence** on the daily tail (horizons-orbital-mechanics,
   A Plan Draws a Path Only Around the Sun) is carried on L-485; this
   item's build bumps that skill, so it rides that bump.
-**Gap (replaces the one below, 2026-11-03, night):** next on the road,
+- **2026-11-04: PART 1 BUILT** (a Claude Code session, Claude Opus 5.5,
+  through the python_work door, on orrery eab623f5; gallery 5abca2c6
+  read only), from its brief. [verified @eab623f5 plus this session's
+  uncommitted edits, by the runs named below]
+  - **The stop point fired.** By today's e around the Sun (JPL,
+    2026-11-04 00:00 TDB), two bodies marked open_path were below 1:
+    McNaught (C/2006 P1) 0.999939767 and piece C of C/2025 K1
+    0.999949098. **Tony, 2026-11-04, in his words:** "Use the e that
+    JPL classes by: the orbit solution's eccentricity in JPL's
+    small-body database, refreshed on the 30-day cycle. Not today's
+    heliocentric osculating e. My ruling was 'e and JPL should agree',
+    and JPL sets the class by its solution's e." And: "If a body's
+    database e and the osculating elements the plot draws from disagree
+    about the side of 1, fail by name; never draw an ellipse from
+    hyperbolic elements." And, of piece C, below 1: it "is drawn as an
+    orbit, agreeing with JPL. The website losing it goes on L-484 (the
+    two agree) as an open difference for a gallery session."
+  - **McNaught's two numbers** (JPL, 2026-11-04): the database's e
+    1.000018815882278 (class HYP, epoch JD 2454065.5, 2006-11-26), equal
+    to Horizons' e around the Sun at that epoch; today's e around the
+    Sun 0.999939767. Around the solar system's barycentre its e has held
+    at 0.999916 since 2011, while the Sun-centred e swings about it
+    (0.999909, 0.999970, 0.999904, 0.999940 at 2011, 2016, 2021 Jan 1
+    and 2026 Nov 4). So today's gap is the Sun's motion around the
+    barycentre, on an orbit closed around the barycentre; the
+    database's e is the instant of its 2006 fit, near the Sun.
+  - **The 69 small bodies, by the database's e** (sbdb.api, full-prec,
+    2026-11-04): only piece C of C/2025 K1 changes side (e
+    0.9999940934318799, class COM); it is drawn as an orbit. At or above
+    1, drawn as paths (13): Wierzchos, West, McNaught, Tsuchinshan,
+    ATLAS (C/2024 G3), C/2025 K1, its pieces B and D, PANSTARRS
+    (C/2025 R3), Borisov (C/2025 V1), 1I/Oumuamua, 2I/Borisov,
+    3I/ATLAS. Below 1, drawn as orbits (55): Eurybates, Patroclus,
+    Polymele, Leucus, Orus, Chariklo, Ceres, Haumea, Eris, Gonggong,
+    Makemake, Mani, Orcus, Quaoar, Sedna, Leleakuhonua, 2017 OF201,
+    2026 ED138, 2025 PN7, 2024 PT5, 2025 PY1, 2023 JF, 2024 DW, 2024
+    YR4, Kamo oalewa, 16 Psyche, Apophis, Bennu, Eros, Dinkinesh,
+    Itokawa, Lutetia, Ryugu, Steins, Donaldjohanson, Vesta, Arrokoth,
+    Ixion, GV9, Varuna, Ammonite, Tempel 2, Schaumasse, Howell,
+    Churyumov, Hale-Bopp, Halley, Encke, Hyakutake, Lemmon, Ikeya-Seki,
+    NEOWISE, SWAN, MAPS, and now piece C. No e (1): 6AC4721, which has
+    no JPL id ('none') and no key; the plot names it FAILED and draws it
+    by neither plan nor orbit.
+  - **The brief's 65 against this 69.** The brief's 65 counted the
+    lines holding "'id_type': 'smallbody'"; four of them are
+    commented-out entries, not live ones: an old Haumea (2003 EL61), the
+    "satellite" Eris/Dysnomia (20136199), an old Orcus asked as 2004 DW,
+    and Bennu/OSIRIS (Bennu as a centre). The rule's 69 adds what a line
+    count cannot see: the seven bodies asked around the Sun by a
+    helio_id (Patroclus, Haumea, Eris, Gonggong, Makemake, Orcus,
+    Quaoar) and C/2025 K1, asked by JPL's permanent number.
+  - **The map of step 1, by function.** The rule's one home is
+    `path_or_orbit.py` (new). Its readers: palomas_orrery.py at the
+    eight places the typed object_type chose path or orbit
+    (`drawn_object_type`): plot_actual_orbits' plan drawing and its
+    trace type (two places), plot_objects' special-fetch interval, its
+    date lists and its Plotted Period overlay, animate_objects' date
+    lists and its orbit and full-mission dates; idealized_orbits.py's
+    plot_idealized_orbits (the new side-of-1 refusal);
+    export_objects.py's build_objects (the export's open_path, which
+    horizons_check.py reads through it, unedited); path_plan.py's
+    is_comet_path, searched_bodies, typed_ends and run; period_fetch.py's
+    classify and served_entries. The social export, Gallery Studio and
+    the JSON converter make no such choice: they render the plotted
+    figure. The website reads only the export's open_path (its mirror,
+    builder and interactive.html), its name and meaning unchanged.
+  - **What object_type still does** (it stops choosing path or orbit,
+    nothing else): 'satellite', 'lagrange_point', 'fixed', the exoplanet
+    types and the pre-fetch's type filter; the comet tails' test
+    (orbital or trajectory); `can_be_horizons_center`, which still keeps
+    a typed 'trajectory' out of the centre list.
+    `get_fetch_interval_for_type` reads it and is called from nowhere
+    (obsolete code, L-509's class); not edited.
+  - **The build.** The fetch: period_fetch.py refreshes every served
+    small body's database e (data/small_body_solutions.json, new, its
+    only writer) and its elements every 30 days, the comets drawn as
+    paths no longer skipped for elements. The rule: path_or_orbit.py; a
+    small body with no database e is a named failure in the export, the
+    path plan, the period fetch and the plot. The typed field out:
+    'open_path' left 14 entries of celestial_objects.py (the brief's 13
+    and C/2025 K1 itself); test_path_or_orbit.py fails, naming the
+    entry, if it comes back. Wierzchos's recalled "outbound period
+    ~200,000 years" replaced by JPL's database e and class. The skill:
+    horizons-orbital-mechanics 1.16, carrying L-485's daily-tail
+    sentence. gallery-cache-builder's open_path sentences stay true (the
+    export's field), so no bump.
+  - **Verified against claimed** (each read from its output): the
+    rule's test, 12 of 12, the comparison turned the wrong way caught,
+    and 'open_path' put back on West caught by name; the period fetch's
+    live run, "PASS -- no period missing; database e fetched for 68
+    ...; elements on the 30-day cycle for 9: Wierzchos, West, McNaught,
+    Tsuchinshan, ATLAS, PANSTARRS, Borisov, 1I/Oumuamua, 2I/Borisov;
+    drawing refused: McNaught"; the objects export moved only for piece
+    C (open_path and path out, its fetched period in) and its two
+    fingerprints (source_sha256, period_inputs_sha256); the
+    live-dispatch smoke test (the real palomas_orrery.py run with Tk's
+    loop made a no-op): Tsuchinshan, Wierzchos and ATLAS drawn as "Full
+    Mission", solid then dashed, as 3I/ATLAS is; Halley's ellipse drawn;
+    McNaught's refused by name. The maintenance run: the first full run
+    read 36 of 37 checkers passing, Dashboard parity FAILED for the new
+    suite's missing button; the button was added, and the second full
+    run read "35 of 35 gating checkers passed". By the end the objects
+    export had moved, against GitHub's copy, only for piece C (its
+    confirmation too, from the Horizons check's first ask of its
+    period), the twelve remade spacecraft plans (their made date, the
+    minute shifts below, and Psyche's span end, which JPL moved from
+    2029-02-11 to 2029-02-24), and four fingerprints (source, period
+    inputs, confirmations, paths).
+  - **What follows from it.** Piece C leaves data/path_plans.json and
+    joins the bodies the spacecraft plans search, so each spacecraft
+    plan's inputs change and it is made again, by path_plan.py's own
+    rule. On 2026-11-04 the maintenance run and a direct run made twelve
+    of them again (Voyager 1 and 2, Galileo, Cassini, New Horizons,
+    Juno, OSIRIS-APEX, Parker, JUICE, Psyche, Europa Clipper,
+    BepiColombo, Solar Orbiter), the same events by body and kind; times
+    moved by minutes only where JPL's newer solution moved them (JUICE's
+    Earth flyby of 2029-01-17 and Parker's perihelion of 2026-12-02 by
+    one minute; BepiColombo's three events from 2026-10-26 on, by up to
+    17 minutes; Solar Orbiter's ten from 2027 on, by up to 9 minutes).
+    Lucy was refused and keeps its plan of 2026-10-28: JPL answered 'No
+    ephemeris for target "Lucy (spacecraft)" prior to A.D. 2021-OCT-16
+    10:33:08.2834 TDB', which path_plan.py read as no vectors, not as a
+    limit to clip to. That is part 2's own first question (what JPL
+    returns when asked from before its data begins), carried there.
+**Gap (replaces the one below, 2026-11-04):** Tony's Mode 5 look
+(Sun-centred: Tsuchinshan, Wierzchos, ATLAS each drawn as 3I/ATLAS is;
+3I/ATLAS unchanged; Halley still its ellipse); then part 2's brief and
+build (the plan asked from before any launch), whose first probe has a
+case already: Lucy's refusal of 2026-11-04 (above).
+**Gap (superseded above, 2026-11-04; replaced the one below, 2026-11-03, night):** next on the road,
 before L-484's check (Tony, Nov 3, 21:23: "yes"): part 1's Claude Code
 session from its brief; then part 2's brief and build.
 **Gap (superseded above, 2026-11-03, night):** behind the brief for L-484's check (the road's order); then
@@ -3240,7 +3369,7 @@ Where We Are).
 L-490.
 
 #### [L-484] The website and the orrery agree on every object both draw, or the difference is written down (orrery + gallery, objects; method for interactive-exhibit)
-<!-- L:484 status:OPEN upd:2026-11-03 section:A flag: rice: -->
+<!-- L:484 status:OPEN upd:2026-11-04 section:A flag: rice: -->
 - **Tony, 2026-10-24, 17:35, in chat**
   (`documentation/COORD_L443_words_decisions_20261024.md`, sec. 7): "And
   we should add to the skill a check that the website and the orrery
@@ -3545,7 +3674,28 @@ L-490.
     rule) as an orrery records patch, run before the check's build.
   - Where We Are stood at 187 lines above its marker against a cap of
     130; trimmed in the same patch.
-**Gap (replaces the one below, 2026-11-03, night):** after L-510 part 1
+- **2026-11-04: the three comets' difference is closed by L-510 part
+  1** (the typed fields stop deciding). Tsuchinshan, Wierzchos and ATLAS
+  (C/2024 G3) are drawn as paths by the orrery too, by their database e
+  (1.000095368540586, 1.00005833991638, 1.000012291218472, class HYP);
+  the export did not move for them.
+- **2026-11-04: AN OPEN DIFFERENCE, for a gallery session** (Tony's
+  ruling of that day, in his words: "The website losing it goes on L-484
+  (the two agree) as an open difference for a gallery session. Do not
+  edit the website."). Piece C of C/2025 K1, database e
+  0.9999940934318799 (class COM), is an orbit by L-510's rule: the
+  orrery draws it so, and the export now carries it with no open_path
+  and no path, and with a fetched period. The website draws an orbit
+  with an elliptic solver and waits for a path drawing for a comet with
+  e near 1 (horizons-orbital-mechanics, AN OPEN ORBIT IS NOT AN
+  ELLIPSE), so after its next pull it no longer draws piece C as a
+  path. Its end condition: the website draws piece C as the orrery
+  does, or the difference is chosen, with its reason. Handle: this item.
+**Gap (replaces the one below, 2026-11-04):** this item's brief, sliced
+as above, with interactive-exhibit's next version written beside it as
+an orrery records patch; then the build with a planted fault. Piece C's
+open difference (above) is the check's first open exception.
+**Gap (superseded above, 2026-11-04; replaced the one below, 2026-11-03, night):** after L-510 part 1
 (Tony, 21:23): this item's brief, sliced as above, with
 interactive-exhibit's next version written beside it as an orrery
 records patch; then the build with a planted fault.

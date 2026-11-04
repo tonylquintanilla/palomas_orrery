@@ -80,6 +80,27 @@ THE FETCH IS PLOTTING'S
     body must now read "fetched", asked of the target the map names, or
     the run fails naming it: the success line carries its evidence.
 
+THE 30-DAY REFRESH OF EVERY SMALL BODY (L-510)
+
+    Before the periods, two refreshes, each printing the bodies it asks
+    for and why:
+      - The DATABASE e. For every served small body (path_or_orbit.
+        is_small_body) whose record in data/small_body_solutions.json is
+        missing, 30 days old, or asked of another search, the orbit
+        solution's e is asked of JPL's Small-Body Database
+        (path_or_orbit.fetch_solution). That e decides whether the body
+        is drawn as a path or an orbit (Tony, 2026-11-04: "Use the e that
+        JPL classes by"). A body whose side of 1 changes is printed as
+        CHANGES SIDE.
+      - The ELEMENTS. Every served small body whose cached elements are
+        30 days old or missing, the comets drawn as paths among them, is
+        fetched with plotting's own call above, around the Sun, and saved
+        as plotting saves it. A comet drawn as a path still serves no
+        period; it is only no longer skipped for its elements. Where the
+        fetched elements and the database's e sit on two sides of 1, the
+        body is named (DRAWING REFUSED): the orrery's plot draws no orbit
+        from those elements (path_or_orbit.side_disagreement).
+
 WHAT MAKES IT FAIL
 
     Any failure to get JPL's answer -- no network, a refused query, an
@@ -101,8 +122,9 @@ WHAT IT PRINTS
 
 WHAT IT WRITES
 
-    data/osculating_cache.json only, through save_cache, which keeps its
-    own two backups (ignored by git). Git is the backup.
+    data/osculating_cache.json, through save_cache, which keeps its own
+    two backups (ignored by git), and data/small_body_solutions.json
+    (L-510), its only writer. Git is the backup.
 
 RUN COMMAND
 
@@ -138,6 +160,11 @@ Pluto's year: FETCHED_HERE, the Pluto-Charon barycentre's period fetched
 with plotting's call around the Sun, though plotting's pre-fetch skips a
 barycenter, asked by the record the export serves (9, a major body);
 palomas_orrery.py unchanged.)
+Module updated: November 4, 2026 with Anthropic's Claude Opus 5.5 (L-510,
+part 1: every served small body's database e and its elements refreshed
+on the 30-day cycle; a comet is drawn as a path by its database e
+(path_or_orbit.py), no longer by the retired 'open_path', and is no
+longer skipped for its elements.)
 """
 
 import ast
@@ -147,6 +174,7 @@ import os
 import sys
 
 import export_objects
+import path_or_orbit   # L-510: path or orbit by the database's e
 
 LINE = "=" * 70
 
@@ -173,7 +201,7 @@ SKIP_NAMES = ("MK2", "Xiangliu", "Vanth")
 FETCHED_HERE = ("Pluto-Charon Barycenter",)
 
 READ_FIELDS = ("name", "key", "id", "id_type", "object_type", "is_mission",
-               "helio_id", "helio_id_type", "open_path")
+               "helio_id", "helio_id_type", "horizons_name")
 
 
 class ListError(Exception):
@@ -192,7 +220,9 @@ def served_entries(root):
             text = handle.read().decode("utf-8").replace("\r\n", "\n")
         # The export's own checks first, so a list it would refuse is
         # refused here too.
-        export_objects.build_objects(text)
+        # (L-510: without deciding paths, since this step writes the
+        # database e that decides them.)
+        export_objects.build_objects(text, decide_paths=False)
         list_node = export_objects.definitions(text)
     except (OSError, export_objects.ExportError) as exc:
         raise ListError(str(exc))
@@ -228,7 +258,8 @@ def served_entries(root):
             "id_type": id_type,
             "object_type": fields.get("object_type"),
             "is_mission": bool(fields.get("is_mission", False)),
-            "open_path": bool(fields.get("open_path", False)),
+            # L-510: the list's own fields, for path_or_orbit's rule
+            "fields": fields,
         })
     return out
 
@@ -259,16 +290,25 @@ def wanted_target(entry, cache):
                                         meta.get("center_body", "@sun"))
 
 
-def classify(entries, cache, typed):
+def classify(entries, cache, typed, solutions=None):
     """(missing, have, skipped): missing is [(entry, why)], have is
-    [entry], skipped is [(entry, why)]."""
+    [entry], skipped is [(entry, why)]. A small body the rule cannot
+    decide (no database e) is skipped with the named failure; run()
+    counts it as a problem."""
     missing, have, skipped = [], [], []
     for entry in entries:
-        if entry.get("open_path"):
-            # L-443, slice 2's comets: drawn as a path by its plan; the
-            # export serves no period for it, so none is fetched.
-            skipped.append((entry, "a comet on an open path serves no "
-                                   "period"))
+        try:
+            path = path_or_orbit.drawn_as_path(entry.get("fields") or {},
+                                               solutions)
+        except path_or_orbit.NoSolution as exc:
+            skipped.append((entry, "FAILED: %s" % exc.why))
+            continue
+        if path:
+            # L-510 (was L-443's open_path): a comet drawn as a path, by
+            # its database e; the export serves no period for it, so none
+            # is fetched.
+            skipped.append((entry, "a comet drawn as a path (its database "
+                                   "e at or above 1) serves no period"))
             continue
         block, _inputs = export_objects.period_block(
             entry["name"], entry["object_type"], cache, typed)
@@ -353,10 +393,121 @@ def _period_words(block):
                                  block.get("center_label"))
 
 
+# ------------------------------------------------- the 30-day refresh
+
+def refresh_solutions(root, entries, today, get=None, echo=print):
+    """L-510: ask JPL's Small-Body Database for the solution e of every
+    served small body whose record is due (path_or_orbit.refresh_due),
+    and save the store when anything came back. Returns (solutions,
+    fetched names, problems, the name JPL could not be reached for or
+    None, [names whose side of 1 changed])."""
+    solutions = dict(path_or_orbit.load_solutions(root))
+    due = []
+    for entry in entries:
+        fields = entry.get("fields") or {}
+        if not path_or_orbit.is_small_body(fields):
+            continue
+        why = path_or_orbit.refresh_due(fields, solutions, today)
+        if why:
+            due.append((entry, why))
+    if not due:
+        echo("Database e due (0): none")
+        return solutions, [], [], None, []
+    echo("Database e due (%d), asked of JPL's Small-Body Database in this "
+         "order:" % len(due))
+    for entry, why in due:
+        echo("  %-24s %s" % (entry["name"], why))
+    got_names, problems, changed = [], [], []
+    down = None
+    for entry, _why in due:
+        name = entry["name"]
+        search = path_or_orbit.search_of(entry["fields"])
+        if get is None:
+            rec, said, reached = path_or_orbit.fetch_solution(search, today)
+        else:
+            rec, said, reached = path_or_orbit.fetch_solution(search, today,
+                                                              get)
+        if not reached:
+            echo("  %s: could not reach JPL's Small-Body Database (%s); "
+                 "nothing more is asked today" % (name, said))
+            down = name
+            break
+        if rec is None:
+            problems.append("%s: %s" % (name, said))
+            echo("  FAIL: %s" % problems[-1])
+            continue
+        old = solutions.get(name)
+        solutions[name] = rec
+        got_names.append(name)
+        side = "a path" if float(rec["e"]) >= 1.0 else "an orbit"
+        was = ""
+        if old:
+            was = "; was %s, fetched %s" % (old.get("e"), old.get("fetched"))
+            if (float(old["e"]) >= 1.0) != (float(rec["e"]) >= 1.0):
+                changed.append(name)
+                was += "; CHANGES SIDE of 1"
+        echo("  %s: e = %s (class %s, asked as %r), drawn as %s%s"
+             % (name, rec["e"], rec.get("class"), search, side, was))
+    if got_names:
+        path_or_orbit.save_solutions(root, solutions)
+    return solutions, got_names, problems, down, changed
+
+
+def elements_age_days(cache_entry, when):
+    """Days since the cached elements were fetched, by the run's clock;
+    None when no date can be read."""
+    try:
+        stamp = utc_clock.parse_stamp(cache_entry["metadata"]["fetched"])
+    except (KeyError, TypeError, ValueError):
+        return None
+    return (when - stamp).total_seconds() / 86400.0
+
+
+def elements_due(entries, cache, when, exclude):
+    """[(entry, why)]: each served small body plotting fetches elements
+    for, not already in exclude (the missing periods, fetched whole
+    anyway), whose cached elements are missing or 30 days old."""
+    out = []
+    for entry in entries:
+        if entry["name"] in exclude or plotting_skips(entry):
+            continue
+        if not path_or_orbit.is_small_body(entry.get("fields") or {}):
+            continue
+        cached = cache.get(entry["name"]) if isinstance(cache, dict) else None
+        if not cached:
+            out.append((entry, "no cache entry yet"))
+            continue
+        age = elements_age_days(cached, when)
+        if age is None:
+            out.append((entry, "its elements' date cannot be read"))
+        elif age >= path_or_orbit.CYCLE_DAYS:
+            out.append((entry, "elements %d days old" % int(age)))
+    return out
+
+
+def drawing_refused(entries, cache, solutions):
+    """[(name, why)]: the small bodies whose cached elements and database
+    e sit on two sides of 1, so the orrery's plot draws no orbit from
+    those elements (path_or_orbit.side_disagreement)."""
+    out = []
+    for entry in entries:
+        fields = entry.get("fields") or {}
+        cached = cache.get(entry["name"]) if isinstance(cache, dict) else None
+        if not path_or_orbit.is_small_body(fields) or not cached:
+            continue
+        e = (cached.get("elements") or {}).get("e")
+        why = path_or_orbit.side_disagreement(fields, e, solutions)
+        if why:
+            out.append((entry["name"], why))
+    return out
+
+
 # ------------------------------------------------------------- the run
 
-def run(root, when, fetch=plotting_fetch, save=plotting_save, echo=print):
-    """The whole step. Returns (exit code, summary dict)."""
+def run(root, when, fetch=plotting_fetch, save=plotting_save, echo=print,
+        sbdb_get=None):
+    """The whole step. Returns (exit code, summary dict). sbdb_get stands
+    in for the Small-Body Database's answer in a test."""
     echo(LINE)
     echo("  PERIOD FETCH -- %s" % when.strftime("%Y-%m-%d"))
     echo(LINE)
@@ -369,29 +520,51 @@ def run(root, when, fetch=plotting_fetch, save=plotting_save, echo=print):
         echo("PERIOD FETCH: FAIL -- the inputs could not be read")
         return 1, {"verdict": "FAIL", "fetched": [], "missing": []}
 
-    missing, have, skipped = classify(entries, cache, typed)
     echo("Read %s and %s through export_objects.py: %d served objects."
          % (export_objects.SOURCE, export_objects.CACHE.replace(os.sep, "/"),
             len(entries)))
+    # L-510: the database e first, since it decides which comets are
+    # paths, and a path serves no period.
+    solutions, sol_got, problems, down, changed = refresh_solutions(
+        root, entries, when.date(), sbdb_get, echo)
+    missing, have, skipped = classify(entries, cache, typed, solutions)
     echo("Already fetched from JPL (%d): %s"
          % (len(have), ", ".join(e["name"] for e in have) or "none"))
     for entry, why in skipped:
         echo("Not fetched here: %s -- %s" % (entry["name"], why))
-    if not missing:
+        if why.startswith("FAILED: "):
+            problems.append("%s: %s" % (entry["name"], why[len("FAILED: "):]))
+    due_el = elements_due(entries, cache, when,
+                          set(e["name"] for e, _w in missing))
+    if due_el:
+        echo("Elements due on the 30-day cycle (%d), asked after the "
+             "periods:" % len(due_el))
+        for entry, why in due_el:
+            echo("  %-24s %s" % (entry["name"], why))
+    else:
+        echo("Elements due on the 30-day cycle (0): none")
+    if not missing and not due_el and not sol_got and not problems \
+            and down is None:
         echo("Missing a fetched period (0): none")
+        refused = drawing_refused(entries, cache, solutions)
+        for name, why in refused:
+            echo("DRAWING REFUSED -- %s" % why)
         echo("")
         echo("PERIOD FETCH: NOTHING MISSING -- %d served objects examined, "
              "no query asked" % len(entries))
         return 0, {"verdict": "NOTHING MISSING", "fetched": [],
-                   "missing": [], "asked": []}
-    echo("Missing a fetched period (%d), asked in this order:" % len(missing))
-    for entry, why in missing:
-        echo("  %-24s %s" % (entry["name"], why))
+                   "missing": [], "asked": [], "solutions": [],
+                   "elements": [], "refused": [n for n, _w in refused]}
+    if missing:
+        echo("Missing a fetched period (%d), asked in this order:"
+             % len(missing))
+        for entry, why in missing:
+            echo("  %-24s %s" % (entry["name"], why))
+    else:
+        echo("Missing a fetched period (0): none")
     echo("")
 
     fetched, refreshed, new, asked = [], [], [], []
-    down = None
-    problems = []
     for entry, why in missing:
         name = entry["name"]
         if down is not None:
@@ -452,35 +625,107 @@ def run(root, when, fetch=plotting_fetch, save=plotting_save, echo=print):
         echo("  %s: fetched, %s; %s; read back as fetched"
              % (name, _period_words(block), elements))
 
+    # L-510: the elements of every small body on the 30-day cycle, the
+    # comets drawn as paths among them, with plotting's own call
+    el_done, el_new = [], []
+    for entry, why in due_el:
+        name = entry["name"]
+        if down is not None:
+            break
+        asked.append(name)
+        echo("-- %s (%s, id_type %s): elements, %s --"
+             % (name, entry["horizons_id"], entry["id_type"], why))
+        try:
+            got = fetch(entry, when)
+        except Exception as exc:          # any failure is JPL not reached
+            echo("  could not reach JPL: %s" % exc)
+            got = None
+        whole = complete(got)
+        if whole and (fetched_target(got, entry["horizons_id"])
+                      != wanted_target(entry, cache)):
+            # L-445's guard, as above: the last period kept is no answer
+            whole = False
+        if not whole:
+            echo("  %s: could not reach JPL for its elements; nothing "
+                 "saved" % name)
+            down = name
+            break
+        try:
+            save(entry, got)
+        except Exception as exc:
+            problems.append("%s: its elements could not be saved (%s)"
+                            % (name, exc))
+            echo("  FAIL: %s" % problems[-1])
+            continue
+        el_done.append(name)
+        if name not in cache:
+            el_new.append(name)
+        echo("  %s: elements %s, e = %s around the Sun"
+             % (name, "new cache entry" if name not in cache else
+                "refreshed (were %s)" % ((cache.get(name) or {}).get(
+                    "elements") or {}).get("epoch"),
+                (got.get("elements") or {}).get("e")))
+
+    try:
+        cache_after, _t, _c, _r = export_objects.load_inputs(root)
+    except Exception:
+        cache_after = cache
+    refused = drawing_refused(entries, cache_after, solutions)
+    for _name, why_refused in refused:
+        echo("DRAWING REFUSED -- %s" % why_refused)
+
     still = [e["name"] for e, _w in missing if e["name"] not in fetched]
     unasked = [e["name"] for e, _w in missing if e["name"] not in asked]
+    el_unasked = [e["name"] for e, _w in due_el if e["name"] not in asked]
     echo("")
+    l510 = ""
+    if sol_got:
+        l510 += "; database e fetched for %d: %s" % (len(sol_got),
+                                                     ", ".join(sol_got))
+    if changed:
+        l510 += "; CHANGES SIDE of 1: %s" % ", ".join(changed)
+    if el_done:
+        l510 += "; elements on the 30-day cycle for %d: %s" % (
+            len(el_done), ", ".join(el_done))
+    if refused:
+        l510 += "; drawing refused: %s" % ", ".join(n for n, _w in refused)
     if down is not None:
         verdict = "UNREACHABLE"
         line = ("PERIOD FETCH: UNREACHABLE -- JPL could not be reached for "
-                "%s; still missing: %s" % (down, ", ".join(still)))
+                "%s" % down)
+        if still:
+            line += "; still missing: %s" % ", ".join(still)
         if unasked:
             line += "; not asked today: %s" % ", ".join(unasked)
+        if el_unasked:
+            line += "; elements not asked today: %s" % ", ".join(el_unasked)
         if fetched:
             line += "; fetched before it: %s" % ", ".join(fetched)
         if problems:
             line += "; also FAILED: %s" % "; ".join(problems)
+        line += l510
     elif problems:
         verdict = "FAIL"
         line = "PERIOD FETCH: FAIL -- %s" % "; ".join(problems)
     else:
         verdict = "PASS"
-        line = "PERIOD FETCH: PASS -- fetched %d: %s" % (
-            len(fetched), ", ".join(fetched))
+        if fetched or not l510:
+            line = "PERIOD FETCH: PASS -- fetched %d: %s" % (
+                len(fetched), ", ".join(fetched))
+        else:
+            line = "PERIOD FETCH: PASS -- no period missing"
         if refreshed:
             line += "; elements refreshed for: %s" % ", ".join(refreshed)
         if new:
             line += "; new cache entries: %s" % ", ".join(new)
+        line += l510
     echo(line)
     return (0 if verdict == "PASS" else 1), {
         "verdict": verdict, "fetched": fetched, "refreshed": refreshed,
         "new": new, "missing": [e["name"] for e, _w in missing],
-        "still": still, "asked": asked, "problems": problems}
+        "still": still, "asked": asked, "problems": problems,
+        "solutions": sol_got, "changed": changed, "elements": el_done,
+        "elements_new": el_new, "refused": [n for n, _w in refused]}
 
 
 def main(argv):

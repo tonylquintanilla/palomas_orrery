@@ -1289,3 +1289,16 @@ among the bodies the spacecraft plans search, so keying them did not
 remake those. And to Where the Check Lives: an entry asked by a
 designation that is JPL's number is looked for in the small-body index
 by that number, and a path serves no period to confirm.
+Earlier: 1.13 | 2026-10-29, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 571b9bf4 and gallery @ b55109f2. v1.13 (L-504, L-399,
+L-484) adds The Clock Is Read as UTC: one reading in utc_clock.py,
+plain UTC datetimes, stamps that say their zone and a reader for both
+forms. Under Query Mechanics, astroquery's week of saved answers and
+what each instrument does about them: both ask fresh, by one switch
+each. Under A Small Body's Uncertainty, the website's 2xr is a second
+question held to the served point within the body's own uncertainty,
+and an answer whose column reads "n.a." is JPL stating none. Under A
+Period Depends on Its Centre, Pluto's period is asked of the
+Pluto-Charon barycentre (Tony, 2026-10-29: "Centre of mass"). Each
+fact was read from the code at 571b9bf4 and b55109f2, and JPL's
+answers fetched, before it was written.

@@ -63,9 +63,9 @@ WHAT A PLAN IS
       searched  every body whose nearest approaches were looked for.
       made      the day the plan was made.
 
-    A COMET ON AN OPEN PATH (an entry the list marks 'open_path': JPL
-    classes its orbit hyperbolic, or so near parabolic that its numbers
-    cannot tell) has a plan too, by Tony's ruling of 2026-10-24
+    A COMET ON AN OPEN PATH (a small body whose orbit solution's e in
+    JPL's Small-Body Database is at or above 1, path_or_orbit.py, L-510;
+    until 2026-11-04 an entry the list marked 'open_path') has a plan too, by Tony's ruling of 2026-10-24
     (documentation/COORD_L443_comet_span_ruling_20261024.md): "On the
     comet window, yes but within the JPL served window which may be
     less." Its one event is its perihelion: the nearest day to the Sun in
@@ -225,11 +225,17 @@ longer the list's typed end_date, which planned entries no longer have;
 typed_ends names any that comes back, and the plans file's fingerprints
 were carried to the new inputs once, by hand, so no plan was made again
 for it; the plan is drawn in the orrery by path_drawing.py).
+Module updated: November 4, 2026 with Anthropic's Claude Opus 5.5
+(L-510, part 1: a comet is planned when its database e is at or above 1,
+path_or_orbit.drawn_as_path, no longer by the list's retired 'open_path';
+a keyed small body with no database e stops the run by name, FAIL, with
+every plan kept as it was.)
 """
 
 import ast
 import datetime
 import utc_clock   # L-504: the clock read as UTC
+import path_or_orbit   # L-510: which comets are paths, by the database's e
 import hashlib
 import json
 import math
@@ -303,7 +309,7 @@ def _value(node):
 
 
 FIELDS = ("name", "key", "id", "id_type", "helio_id", "helio_id_type",
-          "object_type", "start_date", "end_date", "open_path",
+          "object_type", "start_date", "end_date", "horizons_name",
           "mission_end")
 
 
@@ -328,11 +334,13 @@ def is_spacecraft(f):
             and str(f.get("id", "")).startswith("-"))
 
 
-def is_comet_path(f):
-    """A comet drawn as a path: an entry the list marks 'open_path' (JPL
-    classes its orbit hyperbolic, or so near parabolic that its numbers
-    cannot tell; L-443, slice 2's comets)."""
-    return bool(f.get("open_path")) and not is_spacecraft(f)
+def is_comet_path(f, solutions=None):
+    """A comet drawn as a path: a small body whose orbit solution's e in
+    JPL's Small-Body Database is at or above 1 (L-510; until 2026-11-04
+    the list's typed 'open_path', L-443). Raises path_or_orbit.NoSolution
+    for a small body with no database e."""
+    return (not is_spacecraft(f)
+            and path_or_orbit.drawn_as_path(f, solutions))
 
 
 # Whose gravity a body's Hill sphere is reckoned against: the Moon's
@@ -340,13 +348,13 @@ def is_comet_path(f):
 PRIMARY = {"301": "399"}
 
 
-def searched_bodies(entries):
+def searched_bodies(entries, solutions=None):
     """[(name, kind, ident, id_type)]: the major bodies, then each served
     small body by the record the website serves it by."""
     out = [(n, "major", i, None) for n, i in MAJOR_BODIES]
     majors = set(i for _, i in MAJOR_BODIES)
     for f in entries:
-        if is_spacecraft(f) or is_comet_path(f):
+        if is_spacecraft(f) or is_comet_path(f, solutions):
             continue
         ident, id_type = served_identity(f)
         if ident is None or ident in majors:
@@ -733,14 +741,15 @@ def plan_inputs(path, bodies):
     return inputs
 
 
-def typed_ends(entries):
+def typed_ends(entries, solutions=None):
     """[name] of every path this module plans (a keyed spacecraft, or a
     comet on an open path) whose entry carries a typed 'end_date'. Its
     span is its plan's (path_drawing.entry_span), so a typed end is a
     second copy that goes stale against JPL (L-476); test_path_plan.py
     fails on any."""
     return [f["name"] for f in entries
-            if (is_spacecraft(f) or is_comet_path(f)) and "end_date" in f]
+            if (is_spacecraft(f) or is_comet_path(f, solutions))
+            and "end_date" in f]
 
 
 def inputs_sha256(inputs):
@@ -1138,8 +1147,15 @@ def run(root, fetch, today, check_all=False, pause=PAUSE_SECONDS,
     with open(os.path.join(root, SOURCE), "r", encoding="utf-8") as handle:
         entries = keyed_entries(handle.read())
     paths = [f for f in entries if is_spacecraft(f)]
-    comets = [f for f in entries if is_comet_path(f)]
-    bodies = searched_bodies(entries)
+    # L-510: which comets are paths is their database e's; a keyed small
+    # body with none stops the run by name, and every plan is kept.
+    solutions = path_or_orbit.load_solutions(root)
+    try:
+        comets = [f for f in entries if is_comet_path(f, solutions)]
+    except path_or_orbit.NoSolution as exc:
+        return ("PATH PLAN: FAIL -- %s; nothing asked, every plan kept"
+                % exc, ["  FAILED %s" % exc], None)
+    bodies = searched_bodies(entries, solutions)
     path_file = os.path.join(root, PLANS)
     old = {}
     if os.path.exists(path_file):
@@ -1342,7 +1358,8 @@ def main(argv):
         print(line)
     print()
     print(verdict)
-    return 1 if "UNREACHABLE" in verdict else 0
+    return 1 if ("UNREACHABLE" in verdict
+                 or verdict.startswith("PATH PLAN: FAIL")) else 0
 
 
 if __name__ == "__main__":

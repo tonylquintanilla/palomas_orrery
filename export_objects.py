@@ -85,9 +85,11 @@ One JSON file, data/objects_export.json:
                                    orbital period (L-443 build B), or a
                                    comet on an open path (slice 2's
                                    comets)
-                      open_path    true for a comet the list marks
-                                   open_path, drawn as a path by its plan;
-                                   absent on every other entry
+                      open_path    true for a small body whose orbit
+                                   solution's e in JPL's Small-Body
+                                   Database is at or above 1, drawn as a
+                                   path by its plan (path_or_orbit.py,
+                                   L-510); absent on every other entry
                       path         a spacecraft's (a trajectory whose
                                    id starts with '-') and a comet's on an
                                    open path: its plan from
@@ -252,6 +254,11 @@ before.)
 Module updated: October 26, 2026 with Anthropic's Claude Opus 5.5 (L-443,
 slice 2's comets: an entry marked open_path is served as a path, with
 its plan and no period, and carries open_path in the export.)
+Module updated: November 4, 2026 with Anthropic's Claude Opus 5.5 (L-510,
+part 1: the list's typed 'open_path' is retired; the export's open_path
+is written by path_or_orbit.drawn_as_path, a small body's database e at
+or above 1, and a small body with no database e stops the export by
+name.)
 Module updated: October 31, 2026 with Anthropic's Claude Opus 5.5 (L-485,
 the hold: schema 4. Each object's confirmation carries "hold", null
 unless horizons_check.py has held the body, when it says since when,
@@ -265,6 +272,8 @@ import os
 import re
 import sys
 
+import path_or_orbit   # L-510: path or orbit by the database's e
+
 SOURCE = "celestial_objects.py"
 TARGET = os.path.join("data", "objects_export.json")
 CACHE = os.path.join("data", "osculating_cache.json")
@@ -276,8 +285,7 @@ KEY_PATTERN = re.compile(r"^[a-z][a-z0-9_]*$")
 OPENING = re.compile(r"^Horizons:[^.]*\.\s*")
 NUMBER = re.compile(r"\d[\d,.]*\d|\d")
 FIELDS = ("name", "id", "id_type", "mission_info", "mission_url",
-          "horizons_name", "object_type", "helio_id", "helio_id_type",
-          "open_path")
+          "horizons_name", "object_type", "helio_id", "helio_id_type")
 
 
 def served_identity(f):
@@ -363,11 +371,13 @@ def description_of(mission_info):
     return OPENING.sub("", text, count=1).strip()
 
 
-def build_objects(text):
+def build_objects(text, decide_paths=True, solutions=None):
     """(objects, numbers) for the list's source text: each keyed entry's
     identity, words and link, the fields schema 1 carried. The Horizons
     check reads the list through this, so it and the export see the same
-    entries. Raises ExportError."""
+    entries. decide_paths False leaves open_path unwritten (the period
+    fetch, which writes the e that decides it); solutions None reads the
+    store path_or_orbit names. Raises ExportError."""
     list_node = definitions(text)
     repeats = repeated_fields(list_node)
     if repeats:
@@ -407,11 +417,17 @@ def build_objects(text):
             "description": description or None,
             "info_url": f.get("mission_url"),
         }
-        # L-443, slice 2's comets: a comet the list marks open_path is
-        # drawn as a path, by its plan, as a spacecraft is. Written only
-        # where it is set, so no other entry changes.
-        if f.get("open_path"):
-            objects[key]["open_path"] = True
+        # L-510 (was L-443's typed open_path): a small body whose
+        # database e is at or above 1 is drawn as a path, by its plan, as
+        # a spacecraft is. Written only where it is true, so no other
+        # entry changes.
+        if decide_paths:
+            try:
+                path = path_or_orbit.drawn_as_path(f, solutions)
+            except path_or_orbit.NoSolution as exc:
+                raise ExportError(str(exc))
+            if path:
+                objects[key]["open_path"] = True
         found = NUMBER.findall(description)
         if found:
             numbers[key] = found
@@ -642,8 +658,8 @@ PATH_FIELDS = ("made", "span", "backbone", "events", "searched")
 
 def is_path(obj):
     """A body drawn as a path, by its plan: a spacecraft (a trajectory
-    whose Horizons id starts with '-'), or a comet the list marks
-    open_path (L-443, slice 2's comets)."""
+    whose Horizons id starts with '-'), or a small body build_objects
+    marked open_path by its database e (L-510)."""
     return ((obj.get("object_type") == "trajectory"
              and str(obj.get("horizons_id") or "").startswith("-"))
             or bool(obj.get("open_path")))
@@ -656,10 +672,11 @@ def path_of(plan):
 
 
 def build_export(text, cache=None, typed_table=None, confirmations=None,
-                 confirmations_raw=b"", paths=None, paths_raw=b""):
+                 confirmations_raw=b"", paths=None, paths_raw=b"",
+                 solutions=None):
     """The export dict for the list's source text, the period inputs and
     the path plans. Raises ExportError."""
-    objects, numbers = build_objects(text)
+    objects, numbers = build_objects(text, solutions=solutions)
     paths = paths or {}
     cache = cache or {}
     typed_table = typed_table or {}
@@ -669,8 +686,8 @@ def build_export(text, cache=None, typed_table=None, confirmations=None,
         if is_path(obj):
             # L-443 build B: a spacecraft has no orbital period to serve,
             # and (slice 2's comets) nor does a comet on an open path: an
-            # open orbit has none, and piece C of C/2025 K1, which JPL's
-            # numbers cannot yet tell from open, is drawn as a path too.
+            # open orbit has none (L-510: piece C of C/2025 K1, whose
+            # database e is below 1, is drawn as an orbit since 2026-11-04).
             # plotting never asks elements for a mission (is_mission), so
             # the period block would read "Not yet fetched from JPL", which
             # is not true of a spacecraft; it serves none, as the Sun does,
