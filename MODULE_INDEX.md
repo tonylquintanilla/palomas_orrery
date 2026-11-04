@@ -12,7 +12,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 175  
-**Total Lines of Code (non-blank):** 138,712  
+**Total Lines of Code (non-blank):** 138,423  
 **Total Public Functions/Classes:** 1,769
 
 ## Classification Coverage
@@ -20,7 +20,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 **Undetermined role (11).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
-- `patch_L484_3_records_carried.py`
+- `patch_L484_4_order_words_trim.py`
 - `patch_L506_2_method_table.py`
 - `path_drawing.py`
 - `test_drawings_export.py`
@@ -33,7 +33,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 **Undetermined domain (4).** No valid `Domain:` tag.
 
-- `patch_L484_3_records_carried.py`
+- `patch_L484_4_order_words_trim.py`
 - `patch_L506_2_method_table.py`
 - `path_drawing.py`
 - `test_path_drawing.py`
@@ -280,7 +280,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
-| `patch_L484_3_records_carried.py` | - the records patch_L484_2 could not place: L-484's design talk and Tony's ruling on the three comets, the eccentricity build's item as L-510, its brief renamed to match, and Where We Are. (405 lines) |
+| `patch_L484_4_order_words_trim.py` | - the night review's four gaps: L-510 goes before the check (Tony, Nov 3, 21:23: "yes"); the words get their own item, L-511; interactive-exhibit's next version gets an owner; Where We Are trimmed back under its cap. (116 lines) |
 | `patch_L506_2_method_table.py` | - L-506 (token economy), second slice. (361 lines) |
 | `path_drawing.py` | The orrery draws a planned path by its path plan (L-476): a spacecraft's flown and planned trajectory, or a comet on an open path, around the Sun. (275 lines) |
 | `test_drawings_export.py` | Each stored drawing in data/drawings/ is the drawing its rows give today, git tracks it, and each check can fail. (524 lines) |

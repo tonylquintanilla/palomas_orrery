@@ -3,8 +3,8 @@
 
 Generated: November 03, 2026
 Files scanned: 175
-Total findings: 1161
-Constants: 304 | Dicts: 75 | Display strings: 782
+Total findings: 1162
+Constants: 305 | Dicts: 75 | Display strings: 782
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -20,18 +20,22 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T1 by domain | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|--------------|---:|---:|---:|--------:|
+| 20261104T033704Z | `3a01b25` | 175 | 1162 | 278 | orrery 111, Earth System 149, stars 13, utilities 2, unclassified 3 | 703 | 175 | 6 | 0 |
 | 20261104T025108Z | `dd84308` | 175 | 1161 | 277 | orrery 111, Earth System 149, stars 13, utilities 2, unclassified 2 | 703 | 175 | 6 | 0 |
 | 20261104T005858Z | `b09989e` | 176 | 1164 | 280 | orrery 111, Earth System 149, stars 13, utilities 2, unclassified 5 | 703 | 175 | 6 | 0 |
 | 20261103T203853Z | `329f4ec` | 175 | 1162 | 277 | orrery 111, Earth System 149, stars 13, utilities 2, unclassified 2 | 703 | 176 | 6 | 0 |
 | 20261103T191224Z | `81fa7b8` | 174 | 1158 | 278 | orrery 111, Earth System 149, stars 13, utilities 2, unclassified 3 | 699 | 175 | 6 | 0 |
 | 20261103T190716Z | `81fa7b8` | 174 | 1158 | 278 | orrery 111, Earth System 149, stars 13, utilities 2, unclassified 3 | 699 | 175 | 6 | 0 |
-| 20261103T041541Z | `15dc8e3` | 172 | 1155 | 275 | orrery 111, Earth System 149, stars 13, utilities 2 | 699 | 175 | 6 | 0 |
 
-Change since the previous run: total -3, Tier-1 -3.
+Change since the previous run: total +1, Tier-1 +1.
 
-No file's Tier-1 count rose.
+Tier-1 rose in these files:
 
-Tier-1 moved by domain: unclassified 5 -> 2.
+| File | Before | After |
+|------|-------:|------:|
+| patch_L484_4_order_words_trim.py | 0 | 1 |
+
+Tier-1 moved by domain: unclassified 2 -> 3.
 
 ---
 
@@ -62,12 +66,12 @@ Tier-1 moved by domain: unclassified 5 -> 2.
 
 | Tier | Score | Action | Count |
 |------|-------|--------|------:|
-| 1 | 16-20 | FIX NOW | 277 |
+| 1 | 16-20 | FIX NOW | 278 |
 | 2 | 10-15 | REVIEW | 703 |
 | 3 | 5-9 | LOW PRIORITY | 175 |
 | 4 | 1-4 | LOWEST PRIORITY | 6 |
 
-**Whole tree, Tier-1: 277: orrery 111, Earth System 149, stars 13, utilities 2, unclassified 2.** By each file's docstring `Domain:` tag; Findings by File Type below has every tier and every domain. The push gate is the Gate Path section, not this total.
+**Whole tree, Tier-1: 278: orrery 111, Earth System 149, stars 13, utilities 2, unclassified 3.** By each file's docstring `Domain:` tag; Findings by File Type below has every tier and every domain. The push gate is the Gate Path section, not this total.
 
 **Tier 2 note (April 2026 audit):** All Tier-2 findings are documented
 accepted residuals -- cited constants, V_STALE staleness flags on verified
@@ -82,7 +86,7 @@ The push gate is Tier-1 = 0 on the active build path, and it binds at export. Th
 
 **GATE PATH: 0 TIER-1 -- the push gate holds.**
 
-Examined: 202 of 233 exported rows; 31 more are computed from other rows, whose inputs are scored where they are typed; 7 display string(s) in 92 served object(s). The whole tree's Tier-1 count is 277: orrery 111, Earth System 149, stars 13, utilities 2, unclassified 2; most of them are off this path.
+Examined: 202 of 233 exported rows; 31 more are computed from other rows, whose inputs are scored where they are typed; 7 display string(s) in 92 served object(s). The whole tree's Tier-1 count is 278: orrery 111, Earth System 149, stars 13, utilities 2, unclassified 3; most of them are off this path.
 
 Exported rows computed from other rows (31): `CHROMOSPHERE_TOP_KM`, `CORONA_BASE_KM`, `DEG_PER_RAD`, `EARTH_BOW_SHOCK_STANDOFF_RADII`, `EARTH_DIPOLE_TILT_DEG`, `EARTH_DIPOLE_TILT_RATE_DEG_PER_YEAR`, `EARTH_GEOSTATIONARY_RADIUS_KM`, `EARTH_HILL_SPHERE_KM`, `EARTH_LEO_INNER_KM`, `EARTH_LEO_INNER_PERIOD_MIN`, `EARTH_LEO_OUTER_KM`, `EARTH_LEO_OUTER_PERIOD_MIN`, `EARTH_LOWER_MANTLE_KM`, `EARTH_MAGNETOPAUSE_STANDOFF_RADII`, `EARTH_MAGNETOTAIL_DRAWN_END_RADII`, `EARTH_MAGNETOTAIL_DRAWN_RADIUS_RADII`, `EARTH_OBLIQUITY_J2000_DEG`, `EARTH_SIDEREAL_ROTATION_PERIOD_H`, `EARTH_STRATOPAUSE_RADIUS_KM`, `EARTH_THERMOPAUSE_RADIUS_KM`, `EARTH_VAN_ALLEN_OUTER_RADII`, `GALACTIC_NORTH_POLE_DEC_J2000_DEG`, `HELMET_CUSP_RADII`, `INNER_LIMIT_OORT_CLOUD_AU`, `OUTER_OORT_CLOUD_AU`, `PARKER_CLOSEST_KM`, `ROCHE_LIMIT_DRAWN_RADII`, `SGR_A_STAR_DEC_ICRS_DEG`, `SGR_A_STAR_RA_ICRS_DEG`, `SUN_EQUATOR_TILT_DEG`, `SUN_SIDEREAL_ROTATION_PERIOD_D`.
 
@@ -208,6 +212,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `test_dashboard_parity.py` | dev_tools | 0 | 0 | 2 | 0 | 2 |
 | `worksheet_request_builder.py` | dev_tools | 0 | 0 | 2 | 0 | 2 |
 | `orbital_elements.py` | orrery | 1 | 0 | 0 | 0 | 1 |
+| `patch_L484_4_order_words_trim.py` | unclassified | 1 | 0 | 0 | 0 | 1 |
 | `data_acquisition.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `exoplanet_orbits.py` | stars | 1 | 0 | 0 | 0 | 1 |
 | `fetch_paleoclimate_data.py` | earth_science | 1 | 0 | 0 | 0 | 1 |
@@ -251,10 +256,11 @@ Same data again, grouped by subject-matter domain rather than by individual file
 | Stars (stellar neighborhood) | 12 | 13 | 41 | 6 | 3 | 63 |
 | Utilities (cross-domain shared helpers) | 1 | 2 | 0 | 0 | 0 | 2 |
 | Gallery | 0 | 0 | 0 | 0 | 0 | 0 |
-| Unclassified (no Domain: tag, or one outside the six) | 2 | 2 | 4 | 0 | 0 | 6 |
+| Unclassified (no Domain: tag, or one outside the six) | 3 | 3 | 4 | 0 | 0 | 7 |
 
-**Domain coverage gap (2):** these files have findings and no `Domain:` tag the report knows, so they are counted as unclassified rather than guessed into a domain. Add the tag to each module's own docstring (one of the six above); nothing in provenance_scanner.py needs editing:
+**Domain coverage gap (3):** these files have findings and no `Domain:` tag the report knows, so they are counted as unclassified rather than guessed into a domain. Add the tag to each module's own docstring (one of the six above); nothing in provenance_scanner.py needs editing:
 
+- `patch_L484_4_order_words_trim.py` -- no Domain: tag in its docstring
 - `path_drawing.py` -- no Domain: tag in its docstring
 - `test_path_drawing.py` -- no Domain: tag in its docstring
 
@@ -671,6 +677,12 @@ is planned for a future session.
 | 2174 | string | display string @ line 2174 | (2 claims) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 | 2197 | string | display string @ line 2197 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 | 2332 | string | display string @ line 2332 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
+
+### patch_L484_4_order_words_trim.py
+
+| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
+|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
+| 60 | constant | CAP | 130 | 4 | 5 | **20** | No source citation (recalled) | UNDETERMINED -- could not be classified |
 
 ### planet_visualization_utilities.py
 

@@ -935,7 +935,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*251 live items; 235 need attention (`!`); 165 RICE-scored; 252 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*252 live items; 236 need attention (`!`); 165 RICE-scored; 252 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1100,6 +1100,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-508 | A held body's alarm: loud until a ledger item names it (orrery + gallery, the Horizons check and the night) | OPEN | -- | 2026-11-02 |
 | ! | L-509 | Obsolete code: how it is marked, and when it goes (orrery, housekeeping) | OPEN | -- | 2026-11-03 |
 | ! | L-510 | The object list's typed fields stop deciding: a small body drawn by today's eccentricity, a plan asked from before any launch (orrery, the object list and the path plan) | OPEN | -- | 2026-11-03 |
+| ! | L-511 | The orrery's export carries the words the website prints (orrery + gallery, the words) | OPEN | -- | 2026-11-03 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1529,6 +1530,24 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
+#### [L-511] The orrery's export carries the words the website prints (orrery + gallery, the words)
+<!-- L:511 status:OPEN upd:2026-11-03 section:A flag: rice: -->
+- **Opened 2026-11-03, night**, from a review of the day's records
+  (L-484 (the two agree)). The design talk ruled that the words have one
+  home, the orrery's export
+  (`documentation/DESIGN_L484_consistency_rulings_20261103.md`). The
+  website's hovers, tooltips, text boxes and i panel then print from
+  that export. At 3a01b250 the export carries only the mirrored
+  description, so L-484's check can test the words only for that.
+- One row for the class: every kind of words the website prints that
+  the export does not yet carry. Which kinds move, and the cutting rule
+  for each (interactive-exhibit's next version, L-484), are this
+  item's design.
+**Gap:** behind L-484's check; a design of which words move, then the
+build.
+**Ref:** L-484; `export_objects.py`; gallery `interactive.html`;
+`documentation/DESIGN_L484_consistency_rulings_20261103.md`.
+
 #### [L-510] The object list's typed fields stop deciding: a small body drawn by today's eccentricity, a plan asked from before any launch (orrery, the object list and the path plan)
 <!-- L:510 status:OPEN upd:2026-11-03 section:A flag: rice: -->
 - **Opened 2026-11-03** to carry two rulings that open the same two
@@ -1566,7 +1585,10 @@ as an archive of the prioritization thinking -- no cleanup on close.
 - **The skill sentence** on the daily tail (horizons-orbital-mechanics,
   A Plan Draws a Path Only Around the Sun) is carried on L-485; this
   item's build bumps that skill, so it rides that bump.
-**Gap:** behind the brief for L-484's check (the road's order); then
+**Gap (replaces the one below, 2026-11-03, night):** next on the road,
+before L-484's check (Tony, Nov 3, 21:23: "yes"): part 1's Claude Code
+session from its brief; then part 2's brief and build.
+**Gap (superseded above, 2026-11-03, night):** behind the brief for L-484's check (the road's order); then
 part 1's Code session from its brief; then part 2's brief and build.
 **Ref:** L-476; L-484; L-485; `documentation/DESIGN_L484_consistency_rulings_20261103.md`,
 Ruling 6; `celestial_objects.py`; `path_plan.py`; `period_fetch.py`;
@@ -3502,7 +3524,32 @@ L-490.
   `patch_L484_3_records_carried.py`; the eccentricity build is L-510,
   and its brief is
   `documentation/COORD_L510_drawn_by_eccentricity_brief_20261103.md`.
-**Gap (replaces the one below, 2026-11-03, late evening):** the brief
+- **2026-11-03, night: a review of the day's records** (Claude Fable
+  5.1, at orrery 3a01b250, carried by Tony) found four gaps, placed by
+  `patch_L484_4_order_words_trim.py`:
+  - The words (layer 4) have no build. The words rule means the
+    website's hovers, tooltips, text boxes and i panel print from the
+    orrery's export, which carries only the mirrored description. So
+    this item's brief slices: layers 1, 2, 3 and 5 now, layer 4 for the
+    mirrored description only. The rest of the words is L-511 (the
+    export carries the words).
+  - The order. Asked whether L-510 (the typed fields stop deciding)
+    part 1 is built before this check, Tony, 21:23: "yes". Its brief is
+    written, and the check's first run then has no comet differences to
+    record and later delete.
+  - interactive-exhibit's bump has an owner. The check is built in the
+    website repository, and a gallery session does not edit the
+    orrery's skills. So the coordinating session that writes this
+    item's brief also writes interactive-exhibit's next version (Rulings
+    1, 3 and 5 as method, Ruling 4 as the check's bound, the cutting
+    rule) as an orrery records patch, run before the check's build.
+  - Where We Are stood at 187 lines above its marker against a cap of
+    130; trimmed in the same patch.
+**Gap (replaces the one below, 2026-11-03, night):** after L-510 part 1
+(Tony, 21:23): this item's brief, sliced as above, with
+interactive-exhibit's next version written beside it as an orrery
+records patch; then the build with a planted fault.
+**Gap (superseded above, 2026-11-03, night; replaced the one below, 2026-11-03, late evening):** the brief
 for the check's build, then the build with a planted fault. Where its
 exceptions live is ruled (two kinds, a file the check reads). The three
 comets are ruled and go to L-510.

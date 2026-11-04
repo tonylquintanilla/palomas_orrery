@@ -1,32 +1,24 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 3, 2026, late evening: the coordinating session (the L-484 talk and your comet ruling recorded; they had not landed).
-- Written at orrery dd84308e and gallery 5abca2c6, plus this session's uncommitted edits.
+Last updated: November 3, 2026, night: the coordinating session (L-510 goes before the check; the words get their own item; this page trimmed).
+- Written at orrery 3a01b250 and gallery 5abca2c6, plus this session's uncommitted edits.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The design talk on L-484 (the two agree) is recorded: its rulings
->   are in the ledger and under Settled below
->   (`DESIGN_L484_consistency_rulings_20261103.md`).
-> - *Your ruling on the three comets: a small body is drawn by its
->   eccentricity as of today, fetched on the 30-day cycle. Above 1 it
->   is a path, below 1 an orbit. The hand-typed type stops deciding.*
->   JPL agrees today: all three are hyperbolic.
-> - New: L-510 (the typed fields stop deciding) carries that build,
->   and a second change: the path plan's start date stops being typed
->   by hand. Its brief is
->   `COORD_L510_drawn_by_eccentricity_brief_20261103.md`.
-> - These were written this afternoon in a patch that could not run,
->   because the L-476 close ran first on the same base. This patch
->   places them; the brief was renamed from L509 to L510.
-> - L-476 (the orrery plots by the plan) is closed. Obsolete code is
->   L-509 (obsolete code), a talk.
+> - L-510 (the typed fields stop deciding) is built before the check,
+>   by your word of Nov 3, 21:23. Its brief is ready.
+> - New: L-511 (the export carries the words). Until it is built, the
+>   check tests the words only for the mirrored description.
+> - The check's brief session also writes interactive-exhibit's next
+>   version, as an orrery patch run before the check is built.
+> - This page is back under its length cap. Settled lines whose rule is
+>   now written in a skill or the protocol have left it.
 >
-> **Do next:** *the brief for the check's build (L-484 (the two
-> agree)), written when that build is next. Then L-510's Code session
-> from its brief.*
+> **Do next:** *L-510's Claude Code session (Opus, high effort), from
+> `COORD_L510_drawn_by_eccentricity_brief_20261103.md`; then the
+> check's brief (L-484 (the two agree)).*
 >
 > **Needs you now:**
 > - *(do) Each morning, Pull origin on both, orrery then website, first;
@@ -37,34 +29,27 @@ Last updated: November 3, 2026, late evening: the coordinating session (the L-48
 ## The road  **>> UPDATED THIS SESSION**
 
 Oct 27's order, changed Oct 29 (`DESIGN_L314_solar_wind_rulings_20261029.md`).
-  1-11.[done]  All but 5b and 9: the three rooms live; typed facts
-               and periods checked (Oct 14-16); the Sun's slice (Oct 27);
-               the objects (L-443 (the objects)), the small builds and
-               2026 ED138 (Oct 28); the belt's cloud (L-503, Nov 1);
-               Earth's list (L-413), the ruler build (L-505) and the
-               Sun's eight (L-411), Nov 2; historical missions' slice 1
-               (L-507), Nov 2; the orrery's paths by the plan
-               (L-476), Nov 3.
+  1-11.[done]  All but 5b and 9, through Nov 3: the three rooms, the
+               objects, the Sun's and Earth's slices, historical
+               missions' slice 1, the orrery's paths by the plan (L-476).
  5d.   [NOW]   *The orrery's clock (L-504 (the orrery's clock)): the
                data path done Oct 29, the website's date fix Oct 31;
                Earth System, stamps, tools next.*
  11b.  [NOW]   *The nightly run (L-485 (a nightly run)): both halves run
                on GitHub; the hold built Oct 31; both second times built
                (11:17 and 12:17 UTC, Nov 1); a week of mornings now.*
- 12c.  [next]  *The two agree (L-484 (the two agree)): talk done
-               Nov 3, rulings in DESIGN_L484_consistency_rulings_20261103.md;
-               the three comets ruled Nov 3. Next, the check's brief,
-               then its build; then L-510 (the typed fields stop
-               deciding).* << changed this session
+ 12d.  [next]  *L-510 (the typed fields stop deciding), part 1: a small
+               body drawn by its eccentricity. Brief ready.* << new this session
+ 12c.  [next]  *Then the two agree (L-484 (the two agree)): talk done
+               Nov 3; its brief, then its build. The words wait for
+               L-511 (the export carries the words).* << changed this session
   5b.  [beside] Housekeeping when a session has room: L-424, L-425,
                L-426; L-423 (the website's checks) item 3, L-357;
                L-509 (obsolete code), after its talk.
- 12b.  [later] Historical missions, slice 2: encounters, the planet
-               where it was when the spacecraft arrived; the room moves
-               off today's date; Artemis II in the Earth room.
- 12.   [later] Compositions (L-489 (compositions)). Encounters
-               are both: the Solar System room as today, and a room of
-               their own; Artemis II first (Nov 1).
+ 12b.  [later] Historical missions, slice 2: encounters, the room off
+               today's date; Artemis II in the Earth room.
+ 12.   [later] Compositions (L-489 (compositions)): encounters in
+               rooms of their own; Artemis II first (Nov 1).
  13.   [later] The inner planets' rooms, from the template; Jupiter and
                Saturn follow (L-433).
  14.   [later] The Earth System layers, beside 13; cards meanwhile.
@@ -73,115 +58,73 @@ Oct 27's order, changed Oct 29 (`DESIGN_L314_solar_wind_rulings_20261029.md`).
 
 ## Settled  **>> UPDATED THIS SESSION**
 
-Standing rulings. A line leaves after a few weeks, once it is habit.
+Standing rulings. A line leaves after a few weeks, once it is habit, or
+once a skill or the protocol carries it (trimmed Nov 3, night).
 - A small body is drawn by its eccentricity today, fetched every 30
-  days: above 1 a path, below 1 an orbit (Nov 3, 15:55). << new this session
-- The words have one home, the orrery's export (Nov 3, the talk). << new this session
-- A difference is chosen (a reason, no end) or open (an end and an
-  item), the two kept apart (Nov 3, the talk). << new this session
-- The check covers only what both draw (Nov 3, the talk). << new this session
-- A spacecraft's span is JPL's first and last day; an ended mission
-  stops at its end (Nov 3, the talk). << new this session
-- Obsolete code is marked, not deleted, until a talk rules how it is
-  treated (Nov 3, 15:14).
-- A plan draws a path only around the Sun, in both the orrery and the
-  website; around any other body the path is drawn as before (Nov 3,
-  12:06).
-- An ended mission's line stays solid, like a flown path (Nov 3, your
-  look).
-- An ended mission's path stops on the day NASA gives as its end, not
-  where JPL's data runs out: Galileo at its impact (Nov 2).
-- The Sun and Earth slices are closed: your phone look passed all seven
-  (Nov 2, evening; ruled 13:47). What is left is enhancements.
-- The comet switch is off the road: the six record numbers stay, and
-  the Horizons check is relied on (Nov 2, evening).
+  days: above 1 a path, below 1 an orbit (Nov 3, 15:55).
+- From the talk (Nov 3): the words have one home, the orrery's export;
+  a difference is chosen (a reason, no end) or open (an end and an
+  item); the check covers only what both draw; a spacecraft's span is
+  JPL's first and last day.
+- Obsolete code is marked, not deleted, until a talk rules (Nov 3).
+- An ended mission's line stays solid, like a flown path (Nov 3).
+- The Sun and Earth slices are closed; what is left is enhancements
+  (Nov 2).
+- The comet switch is off the road: the six record numbers stay (Nov 2).
 - A held body is loud until a ledger item names it, then quiet with the
-  item's number; it clears when the item is done, and is loud again if
-  JPL still disagrees. Every held body, not only comets (Nov 2, evening).
-- Past voyages are drawn on today's date, their path over the
-  mission's own dates; only encounters move the room's date (Nov 2, 14:32).
-- An ended mission's marker sits where it was on its last day, the
-  line solid; its text box says when it ended (Nov 2, the Fable talk).
+  item's number; loud again if JPL still disagrees (Nov 2).
 - The ticks stay as built, 3 and 6, and so do the ruler and the halo (Nov 2).
-- Tokens are spent where they buy verification or a decision: the
-  smallest instrument, no document before its session, a skill read in
-  the parts the job needs, and a token count in every Code report (Nov 2).
-- The ticks are x marks, not dots: an x means nothing in the scene,
-  circles are bodies, crosses are hover points (Oct 31, 20:43; restored Nov 2).
-- Encounters are both: shown in the Solar System room as today, and in
-  a room centred on the body met, with its shells and fuller words (Nov 1).
-- A night takes a value JPL changed, holds only an identity (the index
-  and the kind included); the guest book stays out of it (Oct 31).
-- UTC everywhere; the orbit's date stays on JPL's clock; Pluto's period
-  is its centre of mass's, as Earth's is (Oct 28-29).
-- The main belt: random dots in JPL's spread; a new body's hover prints its orbit numbers (Oct 28).
+- Encounters are both: shown in the Solar System room, and in a room
+  centred on the body met (Nov 1).
+- A night takes a value JPL changed, holds only an identity (Oct 31).
+- The main belt: random dots in JPL's spread (Oct 28).
 
 ## Deferred  **>> UPDATED THIS SESSION**
 
 Waiting behind other work; a line leaves when picked up.
-- L-510 (the typed fields stop deciding): the drawing by eccentricity,
-  the three comets first, then the path plan asked from before any
-  launch. Behind the check's brief (Nov 3). << new this session
-- L-508 (a held body's alarm): the records skill's next version, with
-  provenance-discipline's pointer; then its build, with the hold's
-  website half (Nov 2).
-- L-485 (a nightly run): the hold's website half, with its asking by
-  name and its six notes; a gallery session (Oct 31).
-- L-462 (a shorter run): whether it stays, now the night exists; L-128
-  (the ice lines), already waiting.
-- L-500 (eyeballed numbers): the belt's seven, the clumps' five (Oct 27).
-- L-471 (a delivered patch is final): safe-file-editing's next version.
-- L-483 (a comet room), after slice 2; L-484 (the two agree): its check.
-- L-489 (compositions), with L-486 (a view carried into a room) and
-  L-488 (the heliopause) under it: Artemis II in the Earth room first,
-  its entry served before its room, with historical missions' slice 2
-  (L-507 (historical missions)).
-- L-490 (the legacy list): who holds the accounts; L-499 (kinds of session), Oct 27.
+- L-511 (the export carries the words): behind the check (Nov 3). << new this session
+- L-508 (a held body's alarm): the records skill's next version, then
+  its build, with the hold's website half (Nov 2).
+- L-485 (a nightly run): the hold's website half; a gallery session (Oct 31).
+- L-462 (a shorter run); L-128 (the ice lines); L-500 (eyeballed numbers).
+- L-483 (a comet room), after historical missions' slice 2.
+- L-489 (compositions), with L-486 and L-488 under it: Artemis II in
+  the Earth room first, with slice 2 (L-507 (historical missions)).
+- L-490 (the legacy list); L-499 (kinds of session); L-471 (a delivered
+  patch is final), for safe-file-editing's next version.
 
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261103T193343Z, ok, no retry (the website's swap
-  log's last line at 5abca2c6: a nightly-mode build of Nov 3).
-- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md
-  at b09989e0, your maintenance run of the evening).
+- Last cache build: 20261103T193343Z, ok, no retry (swap log at 5abca2c6).
+- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at dd84308e).
 - This page's date and the ledger's newest stamp: both Nov 3. Agree.
 
-## Waiting on you  **>> UPDATED THIS SESSION**
+## Waiting on you
 
 Decisions, one at a time:
-- None today. Later, not now: which ended missions come next. The orrery also
-  lists Pioneer 10, Pioneer 11, Rosetta and DART.
+- None today. Later: which ended missions come next (the orrery also
+  lists Pioneer 10, Pioneer 11, Rosetta and DART).
 
 At the next design talk:
-- How obsolete code is treated: removed, kept as a stub, or kept
-  whole, and when (L-509 (obsolete code)). The first case is the
-  orrery's unused date function, marked Nov 3.
+- How obsolete code is treated, and when it goes (L-509 (obsolete
+  code)); the first case is the orrery's unused date function.
 - The shared link (ruled Oct 29) waits for its build.
 
 Not urgent, in your order:
 1. Whether the editor also edits the Solar System room's rows, and
    adds a new body as a form (L-489 (compositions)).
-2. The website's second run makes a fresh build and a second commit
-   most days: keep, or stand down after a clean 08:17 (L-485 (a nightly run)).
-3. Earth's list (L-413 (Earth's list)): stays open as Earth's enhancements, or closes
+2. The website's second run: keep, or stand down after a clean 08:17
+   (L-485 (a nightly run)).
+3. Earth's list (L-413 (Earth's list)): open as enhancements, or closed
    with its seven pieces moved to their own items.
 
 ## Where the details are
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- The talk's rulings: `DESIGN_L484_consistency_rulings_20261103.md`
-  (L-484 (the two agree)); the afternoon's handoff,
-  `HANDOFF_L484_after_talk_20261103.md`.
-- The next build after the check: L-510's brief,
-  `COORD_L510_drawn_by_eccentricity_brief_20261103.md`.
-- Today: L-476 (the orrery plots by the plan), closed, with what was
-  verified; the brief
-  `COORD_L476_orrery_plots_by_path_plan_brief_20261103.md`; the fix
-  `patch_L476_2_tail_at_today.py`.
+- Next: L-510's brief, `COORD_L510_drawn_by_eccentricity_brief_20261103.md`.
+- The talk's rulings: `DESIGN_L484_consistency_rulings_20261103.md`.
 - The door: `documentation/python_work_door/`, and L-499.
-- The Sun's eight: `COORD_L411_sun_eight_held_numbers_brief_20261102.md`
-  and `WORDS_L411_sun_eight_20261102.md`.
 - Your run record: `WHERE_WE_ARE_11-3-26_1158_run_record.md`.
 
 --- Your run record below this line. No patch edits it; the length cap
