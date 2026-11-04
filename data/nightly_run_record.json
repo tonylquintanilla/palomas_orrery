@@ -3,9 +3,9 @@
   "schema": 2,
   "taken": [],
   "held": [],
-  "clean_run_utc": "2026-11-04T15:27:22.870544+00:00",
+  "clean_run_utc": "2026-11-04T18:42:41.841540+00:00",
   "where": "GitHub Actions",
-  "run_log": "https://github.com/tonylquintanilla/palomas_orrery/actions/runs/41857656524",
+  "run_log": "https://github.com/tonylquintanilla/palomas_orrery/actions/runs/41889489828",
   "reported_not_red": [],
   "rows": [
     {
@@ -21,7 +21,7 @@
     {
       "row": "Horizons check",
       "kind": "generator",
-      "verdict": "rewrote data/horizons_confirmations.json -- PASS -- 1 checked today, 1 queries"
+      "verdict": "rewrote data/horizons_confirmations.json -- PASS -- 2 checked today, 2 queries"
     },
     {
       "row": "Path plan",
