@@ -1,15 +1,18 @@
-<!-- Doc-Kind: hand | Brief for a Claude Code build: L-509, part 1 -- a small body drawn by its eccentricity as of today, the typed open_path retired. Part 2 (the plan's start date) is named for its own session. -->
-# Brief: L-509, part 1 -- a small body is drawn by its eccentricity
+<!-- Doc-Kind: hand | Brief for a Claude Code build: L-510, part 1 -- a small body drawn by its eccentricity as of today, the typed open_path retired. Part 2 (the plan's start date) is named for its own session. -->
+# Brief: L-510, part 1 -- a small body is drawn by its eccentricity
 
 Tony Quintanilla, PE | Claude Opus 5.5 (the coordinating session of Nov 3, late afternoon) | November 3, 2026
 
 Built on orrery b09989e0d706b4454d7539bd4c392752b64c87bf at
-https://github.com/tonylquintanilla/palomas_orrery (branch main), plus
-`patch_L484_2_talk_records.py`, which writes L-509 into the ledger;
+https://github.com/tonylquintanilla/palomas_orrery (branch main);
 gallery 5abca2c614f348e9183b313a6c48de310f1dfc98 at
 https://github.com/tonylquintanilla/tonyquintanilla.github.io (read only).
-The session starts after Tony's push of that patch, and its first step
-confirms HEAD is that push and that L-509 is in the ledger.
+Its item is L-510, placed in the ledger by
+`patch_L484_3_records_carried.py` on orrery dd84308e. (Written as L-509;
+that handle went to obsolete code the same evening, so this brief was
+renamed and its handle changed by that patch.) The session's first step
+confirms HEAD is Tony's push of that patch or later, and that L-510 is
+in the ledger.
 
 Tony's local folders: orrery
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\
@@ -27,7 +30,7 @@ Type: BUILD brief, for one Claude Code session.
   patch would not do: the first step is a map of every reader of two
   typed fields, which needs the code searched and run, not anchors
   known in advance.
-- **Part 1 only.** L-509 holds two changes to the same two files. Part
+- **Part 1 only.** L-510 holds two changes to the same two files. Part
   2 (section 9) is a separate problem with its own open question, so
   it gets its own session when it is next: one job per session.
 - **One stop point** (step 1). Otherwise the session builds through.
@@ -42,7 +45,7 @@ is drawn as a path or an orbit is today decided by fields typed by
 hand ('open_path', 'object_type'), which Tony calls "a legacy of my
 manual method"; JPL's eccentricity should decide it.
 
-## 2. The ruling (read L-509 and L-484 in the ledger first)
+## 2. The ruling (read L-510 and L-484 in the ledger first)
 
 Tony, Nov 3, 15:33 to 15:55 Chicago, in his words: "They should be
 drawn as all the Hyperbolic objects." "This is not a special class."
@@ -102,7 +105,7 @@ relies on.
 ## 4. The work, in order
 
 1. **Map, then stop if the picture changes (no edits).** Confirm HEAD
-   and L-509. Map every reader of 'open_path', and of 'object_type'
+   and L-510. Map every reader of 'open_path', and of 'object_type'
    where it chooses path against orbit for a small body, by function:
    the orrery's five consumers (static plot `plot_objects`, animation
    `animate_objects`, social export, and in the gallery repo
@@ -142,7 +145,7 @@ relies on.
    recalled figure stays).
 6. **The skill.** horizons-orbital-mechanics' next version carries the
    rule (a small body drawn by today's e, fetched on the cycle), and
-   the sentence carried on L-509 (A Plan Draws a Path Only Around the
+   the sentence carried on L-510 (A Plan Draws a Path Only Around the
    Sun: the drawing now keeps the daily tail and leaves out only the
    last-day pair). One bump, by the records skill's four steps
    (version line, `skills_index.py`, a protocol history entry, one
@@ -192,7 +195,7 @@ Verify Execution, Not Appearance govern step 1.
 
 ## 8. Records, in the same session
 
-- L-509: part 1 built, verified against claimed; the map of step 1 by
+- L-510: part 1 built, verified against claimed; the map of step 1 by
   name; the 65 with their side of 1; part 2 left open as its Gap.
 - L-484 (the two agree): the three comets' difference closed by this
   build.

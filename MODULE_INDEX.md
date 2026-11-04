@@ -11,17 +11,16 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 176  
-**Total Lines of Code (non-blank):** 138,760  
-**Total Public Functions/Classes:** 1,771
+**Total Python Files:** 175  
+**Total Lines of Code (non-blank):** 138,712  
+**Total Public Functions/Classes:** 1,769
 
 ## Classification Coverage
 
-**Undetermined role (12).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (11).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
-- `patch_L476_3_close_20261103.py`
-- `patch_L484_2_talk_records.py`
+- `patch_L484_3_records_carried.py`
 - `patch_L506_2_method_table.py`
 - `path_drawing.py`
 - `test_drawings_export.py`
@@ -32,10 +31,9 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
-**Undetermined domain (5).** No valid `Domain:` tag.
+**Undetermined domain (4).** No valid `Domain:` tag.
 
-- `patch_L476_3_close_20261103.py`
-- `patch_L484_2_talk_records.py`
+- `patch_L484_3_records_carried.py`
 - `patch_L506_2_method_table.py`
 - `path_drawing.py`
 - `test_path_drawing.py`
@@ -282,8 +280,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (131 lines) |
-| `patch_L476_3_close_20261103.py` | - L-476 (the orrery plots by the path plan) closed; the unused date function marked obsolete; L-509 (obsolete code) opened; Where We Are updated. (346 lines) |
-| `patch_L484_2_talk_records.py` | - the records of Nov 3, late afternoon: the L-484 design talk's rulings recorded, L-476 closed, the three comets ruled, and two new items (L-509, L-510). (107 lines) |
+| `patch_L484_3_records_carried.py` | - the records patch_L484_2 could not place: L-484's design talk and Tony's ruling on the three comets, the eccentricity build's item as L-510, its brief renamed to match, and Where We Are. (405 lines) |
 | `patch_L506_2_method_table.py` | - L-506 (token economy), second slice. (361 lines) |
 | `path_drawing.py` | The orrery draws a planned path by its path plan (L-476): a spacecraft's flown and planned trajectory, or a comet on an open path, around the Sun. (275 lines) |
 | `test_drawings_export.py` | Each stored drawing in data/drawings/ is the drawing its rows give today, git tracks it, and each check can fail. (524 lines) |

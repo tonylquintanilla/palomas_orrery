@@ -1,29 +1,32 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 3, 2026, evening: the coordinating session (your look at the fixed paths passed; L-476 closed).
-- Written at orrery b09989e0 and gallery 5abca2c6, plus this session's uncommitted edits.
+Last updated: November 3, 2026, late evening: the coordinating session (the L-484 talk and your comet ruling recorded; they had not landed).
+- Written at orrery dd84308e and gallery 5abca2c6, plus this session's uncommitted edits.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The desktop orrery draws each spacecraft's and comet's whole
->   path from its plan, as the website does: solid to today, dashed
->   after, around the Sun only. L-476 (the orrery plots by the plan)
->   is done and closed.
-> - Your look passed: each marker sits where the solid line turns
->   dashed, for Voyager 1 and 3I/ATLAS.
-> - The first build turned the line dashed years back on a straight
->   path. The brief had left out the website's daily points around
->   today; a second patch added them.
-> - Galileo stops at its crash into Jupiter, and the dates beside 25
->   spacecraft and comets come from their plans.
-> - The unused date function is marked obsolete, not deleted. How
->   obsolete code is treated is a talk of its own (L-509 (obsolete
->   code)).
+> - The design talk on L-484 (the two agree) is recorded: its rulings
+>   are in the ledger and under Settled below
+>   (`DESIGN_L484_consistency_rulings_20261103.md`).
+> - *Your ruling on the three comets: a small body is drawn by its
+>   eccentricity as of today, fetched on the 30-day cycle. Above 1 it
+>   is a path, below 1 an orbit. The hand-typed type stops deciding.*
+>   JPL agrees today: all three are hyperbolic.
+> - New: L-510 (the typed fields stop deciding) carries that build,
+>   and a second change: the path plan's start date stops being typed
+>   by hand. Its brief is
+>   `COORD_L510_drawn_by_eccentricity_brief_20261103.md`.
+> - These were written this afternoon in a patch that could not run,
+>   because the L-476 close ran first on the same base. This patch
+>   places them; the brief was renamed from L509 to L510.
+> - L-476 (the orrery plots by the plan) is closed. Obsolete code is
+>   L-509 (obsolete code), a talk.
 >
-> **Do next:** *the design talk on L-484 (the two agree), from
-> `HANDOFF_L484_consistency_talk_20261103.md`.*
+> **Do next:** *the brief for the check's build (L-484 (the two
+> agree)), written when that build is next. Then L-510's Code session
+> from its brief.*
 >
 > **Needs you now:**
 > - *(do) Each morning, Pull origin on both, orrery then website, first;
@@ -48,14 +51,14 @@ Oct 27's order, changed Oct 29 (`DESIGN_L314_solar_wind_rulings_20261029.md`).
  11b.  [NOW]   *The nightly run (L-485 (a nightly run)): both halves run
                on GitHub; the hold built Oct 31; both second times built
                (11:17 and 12:17 UTC, Nov 1); a week of mornings now.*
- 12c.  [next]  *The two agree (L-484 (the two agree)): every object
-               both draw agrees, or the difference is written down.
-               A design talk first, on what consistency means beyond
-               JPL's numbers; then the check. Its first finding,
-               the dates, is fixed (L-476, Nov 3).*
+ 12c.  [next]  *The two agree (L-484 (the two agree)): talk done
+               Nov 3, rulings in DESIGN_L484_consistency_rulings_20261103.md;
+               the three comets ruled Nov 3. Next, the check's brief,
+               then its build; then L-510 (the typed fields stop
+               deciding).* << changed this session
   5b.  [beside] Housekeeping when a session has room: L-424, L-425,
                L-426; L-423 (the website's checks) item 3, L-357;
-               L-509 (obsolete code), after its talk. << changed this session
+               L-509 (obsolete code), after its talk.
  12b.  [later] Historical missions, slice 2: encounters, the planet
                where it was when the spacecraft arrived; the room moves
                off today's date; Artemis II in the Earth room.
@@ -71,8 +74,16 @@ Oct 27's order, changed Oct 29 (`DESIGN_L314_solar_wind_rulings_20261029.md`).
 ## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings. A line leaves after a few weeks, once it is habit.
+- A small body is drawn by its eccentricity today, fetched every 30
+  days: above 1 a path, below 1 an orbit (Nov 3, 15:55). << new this session
+- The words have one home, the orrery's export (Nov 3, the talk). << new this session
+- A difference is chosen (a reason, no end) or open (an end and an
+  item), the two kept apart (Nov 3, the talk). << new this session
+- The check covers only what both draw (Nov 3, the talk). << new this session
+- A spacecraft's span is JPL's first and last day; an ended mission
+  stops at its end (Nov 3, the talk). << new this session
 - Obsolete code is marked, not deleted, until a talk rules how it is
-  treated (Nov 3, 15:14). << new this session
+  treated (Nov 3, 15:14).
 - A plan draws a path only around the Sun, in both the orrery and the
   website; around any other body the path is drawn as before (Nov 3,
   12:06).
@@ -105,9 +116,12 @@ Standing rulings. A line leaves after a few weeks, once it is habit.
   is its centre of mass's, as Earth's is (Oct 28-29).
 - The main belt: random dots in JPL's spread; a new body's hover prints its orbit numbers (Oct 28).
 
-## Deferred
+## Deferred  **>> UPDATED THIS SESSION**
 
 Waiting behind other work; a line leaves when picked up.
+- L-510 (the typed fields stop deciding): the drawing by eccentricity,
+  the three comets first, then the path plan asked from before any
+  launch. Behind the check's brief (Nov 3). << new this session
 - L-508 (a held body's alarm): the records skill's next version, with
   provenance-discipline's pointer; then its build, with the hold's
   website half (Nov 2).
@@ -140,13 +154,9 @@ Decisions, one at a time:
   lists Pioneer 10, Pioneer 11, Rosetta and DART.
 
 At the next design talk:
-- *What consistency means between the orrery and the website, beyond
-  JPL's numbers (L-484 (the two agree)).* Two differences are left for
-  it: three comets the orrery draws as ellipses and the website as
-  paths, and the website's extra points on a path's last day.
 - How obsolete code is treated: removed, kept as a stub, or kept
   whole, and when (L-509 (obsolete code)). The first case is the
-  orrery's unused date function, marked Nov 3. << new this session
+  orrery's unused date function, marked Nov 3.
 - The shared link (ruled Oct 29) waits for its build.
 
 Not urgent, in your order:
@@ -160,8 +170,11 @@ Not urgent, in your order:
 ## Where the details are
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- The next talk: `HANDOFF_L484_consistency_talk_20261103.md` (L-484
-  (the two agree)).
+- The talk's rulings: `DESIGN_L484_consistency_rulings_20261103.md`
+  (L-484 (the two agree)); the afternoon's handoff,
+  `HANDOFF_L484_after_talk_20261103.md`.
+- The next build after the check: L-510's brief,
+  `COORD_L510_drawn_by_eccentricity_brief_20261103.md`.
 - Today: L-476 (the orrery plots by the plan), closed, with what was
   verified; the brief
   `COORD_L476_orrery_plots_by_path_plan_brief_20261103.md`; the fix
