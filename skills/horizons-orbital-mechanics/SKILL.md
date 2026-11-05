@@ -6,9 +6,21 @@ fires_when: Horizons queries, centers, frames, osculating elements, encounters, 
 
 # Horizons and Orbital Mechanics Reference
 
-Read this file in 4 parts: lines 1-207, 208-455, 456-575, 576-805.
+Read this file in 4 parts: lines 1-215, 216-473, 474-593, 594-837.
 
-Skill version: 1.16 | 2026-11-04, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.17 | 2026-11-04, evening, with Anthropic's Claude Opus
+5.5, at palomas_orrery @ 79018c0c and gallery @ 5abca2c6. v1.17 (L-512,
+part 1 and slice a's part A1). The orrery's plot decides path or orbit
+from the e of a body's typed elements when JPL's database has no record,
+and says so (A Named Failure, below). data/orbit_paths.json is retired
+(Tony's ruling 0 of 2026-11-04: "a heavy file that is wrong and nobody
+reads is a bad breadcrumb leading nowhere"), so the L-470 paragraph no
+longer sends a session to compare saved paths there, and the skip lists
+are five. Under Query Mechanics: every astroquery call in the repository
+now asks fresh, checked on Python's parser (test_orbit_cache.
+TestFreshCalls), where nine had not. Read from the code at 79018c0c and
+the session's own edits before it was written.
+Earlier: 1.16 | 2026-11-04, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ eab623f5 and gallery @ 5abca2c6. v1.16 (L-510, part 1)
 adds A Small Body Is Drawn by Its Database e: a small body is drawn as a
 path when its orbit solution's e in JPL's Small-Body Database is at or
@@ -32,21 +44,11 @@ from and no typed end, since planned entries no longer carry one. Read
 from path_plan.py, path_drawing.py and the website's builder at
 3a211a8c, and Galileo drawn from JPL on 2026-11-03, before it was
 written.
-Earlier: 1.14 | 2026-11-02, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 15dc8e34. v1.14 (L-507) adds An Ended Mission Ends on
-Its mission_end to How a Path's Events Are Found: JPL's last day is not
-always the mission's (Galileo's runs nine days past its impact, on a
-path leaving Jupiter as if it never hit), so an ended mission's entry
-carries the day NASA's page says it ended, the path plan asks the path
-to that day and no further, and the field is among a plan's inputs only
-where it is set. Tony's ruling of 2026-11-02, "Yes stop at impact".
-Read from path_plan.py and JPL's answers of 2026-11-02 before it was
-written.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there on
 2026-10-12, 2026-10-13 and 2026-10-14 (L-431), 2026-10-15 (L-444,
 L-445), 2026-10-22 (L-443), 2026-10-24 (L-443), 2026-10-25 (L-443),
 2026-10-26 (L-443), 2026-10-29 (L-504), 2026-11-02 (L-507),
-2026-11-03 (L-476) and 2026-11-04 (L-510).
+2026-11-03 (L-476), 2026-11-04 (L-510) and 2026-11-04 (L-512).
 
 ## Contents
 
@@ -135,19 +137,20 @@ record each question asks, and to ask the same one everywhere.
   judge from the name. Piece C of C/2025 K1, e 0.999994 and class COM,
   is served as an orbit since 2026-11-04, and the website's drawing of it
   is an open difference on L-484.
-- A SKIP NAMES WHAT FAILED. Six lists in palomas_orrery.py keep a body
+- A SKIP NAMES WHAT FAILED. Five lists in palomas_orrery.py keep a body
   out of a Horizons question: SKIP_HORIZONS_PREFETCH in plot_objects and
-  in animate_objects, SKIP_HORIZONS_TRAJECTORY in the static plot's
-  trajectory worker, and the fallbacks ANALYTICAL_POSITION_FALLBACK
+  in animate_objects, and the fallbacks ANALYTICAL_POSITION_FALLBACK
   (plot_actual_orbits and the static worker) and
   ANALYTICAL_ANIMATION_FALLBACK (animation_worker), which act only when
-  Horizons returned nothing. period_fetch.py copies the pre-fetch list
-  as SKIP_NAMES. A name goes on a list with a comment naming the record
-  that failed, the centre it failed around, and the date. Gonggong
-  (id 920225088, its body-centre record; helio_id 2007 OR10) is on all
-  six, every line from 2026-02-04 (commit c60572d), with no such
-  comment, so it has no fetched period (L-470). The lists' own comment
-  speaks only for the moons.
+  Horizons returned nothing. A sixth, SKIP_HORIZONS_TRAJECTORY, guarded
+  only the saved-path file's writer and went with it (L-512, 2026-11-04).
+  period_fetch.py copies the pre-fetch list as SKIP_NAMES. A name goes on
+  a list with a comment naming the record that failed, the centre it
+  failed around, and the date. Gonggong (id 920225088, its body-centre
+  record; helio_id 2007 OR10) was on all six from 2026-02-04 (commit
+  c60572d) with no such comment, and came off every list on 2026-10-23
+  (L-470): no failure on record. The lists' own comment speaks only for
+  the moons.
 - TAKING A NAME OFF A SKIP LIST IS A TEST. Ask each record the orrery
   would ask, around each centre the body is plotted from: around the
   Sun, the helio_id; around any other centre, the id. If every one
@@ -167,13 +170,18 @@ record each question asks, and to ask the same one everywhere.
   K1-B and so on), which returns one record. A record number is pinned
   only for a periodic comet whose designation alone is ambiguous across
   apparitions.
-- A PATH CACHE KEYED BY NAME DOES NOT NOTICE A NEW RECORD (L-470). The
-  orrery's path cache, data/orbit_paths.json on Tony's machine, is keyed
-  by name and centre, so when an entry's id changes, a path cached under
-  the old id is still served under the name. After an id change, compare
-  the cached path with the new record's positions at shared dates before
-  trusting it (the C/2025 K1 patch did, and found it was the comet,
-  within 0.024 AU of piece B on 320 dates).
+- A STORE KEYED BY NAME DOES NOT NOTICE A NEW RECORD (L-470, L-512).
+  The orrery's path cache, data/orbit_paths.json on Tony's machine, was
+  keyed by name and centre, so when an entry's id changed, a path saved
+  under the old id was still served under the name (the C/2025 K1 patch
+  compared it and found it was the comet, within 0.024 AU of piece B on
+  320 dates). That file is retired since 2026-11-04 (L-512, ruling 0):
+  nothing in the app reads or writes it, and it filed JPL's points under
+  evenly spread dates, up to a month from JPL's own. So after an id
+  change there is no saved path to compare. A store of paths keeps each
+  body's JPL record number with them and holds, by name, a path whose
+  record differs from the entry's today (L-512, ruling 3, for the
+  positions record of its slice c; not built on 2026-11-04).
 
 ## Small-Body Record Pinning (periodic comets)
 
@@ -434,9 +442,19 @@ osculating e."
   still serve no period).
 - A NAMED FAILURE, NEVER A QUIET DEFAULT. A small body with no record
   raises `NoSolution` naming it: the export stops ("NOTHING was
-  written"), the path plan says FAIL and keeps every plan, the period
-  fetch says FAIL, and the orrery's plot prints "[PATH OR ORBIT] FAILED"
-  and draws the body by neither its plan nor an orbit.
+  written"), the path plan says FAIL and keeps every plan, and the period
+  fetch says FAIL. The orrery's plot has a second link (L-512, part 1;
+  Tony's chain of 2026-11-04: JPL, then the saved record of JPL's
+  answers, then the typed elements): with no record in the store it
+  decides by the e of the body's elements in orbital_elements.py and
+  says so by name ("decided by the e of its elements in
+  orbital_elements.py"; `path_or_orbit.decided_e`, and the orbit
+  drawing's side check with fallback=True). Only with neither does it
+  print "[PATH OR ORBIT] FAILED" and draw the body by neither its plan
+  nor an orbit. A record asked of another search still fails by name.
+  This is not L-510 undone: L-510 retired a label with no source; the
+  second link is a measurement typed from a cited source. On 2026-11-04
+  it decided one body, 6AC4721 (e 0.99994, MPEC 2026-A49), an orbit.
 - TWO SIDES OF 1 FAIL BY NAME (`side_disagreement`). Where the
   database's e and the elements a drawing would use sit on two sides of
   1, idealized_orbits.py draws no orbit for the body and prints why; the
@@ -771,10 +789,24 @@ Pluto, render wrong).
   from an earlier build's saved answer. Both instruments ask fresh by
   one switch each, passed as `cache=` at every call: the website's
   `HORIZONS_CACHE` in `tools/gallery_cache_builder.py`, the orrery's
-  `utc_clock.HORIZONS_CACHE`, both False. The orrery's own caches (the
-  orbit cache, the path cache) are its only caches; a repeated plot
-  costs a JPL round trip, which they absorb for orbits. A direct request
-  (the 2xr query, `requests`, `urllib`) is always fresh.
+  `utc_clock.HORIZONS_CACHE`, both False. In the orrery that held only on
+  the data path until 2026-11-04: nine calls elsewhere asked without it
+  (the plot's path, `fetch_trajectory`; `fetch_orbit_path`; three in
+  spacecraft_encounters.py, one in comet_visualization_shells.py, three
+  in the Earth-pole modules), and with JPL unreachable Juno's path around
+  Jupiter still drew, from astroquery's saved answer (L-512's map). Since
+  L-512 every call passes it, and `test_orbit_cache.TestFreshCalls`
+  holds every .py in the repository but the tests and documentation/ to
+  it on Python's parser: each call of vectors, elements or ephemerides
+  (or an _async form), across line breaks, must say
+  `cache=HORIZONS_CACHE`; cache=True, a comment or a string does not;
+  get_query_payload=True alone exempts; a reference that is not a direct
+  call is flagged; non-JPL calls (Counter.elements) sit on its NOT_JPL
+  list, printed every run. The orrery's own cache (the osculating
+  elements; the path cache, data/orbit_paths.json, is retired, L-512) is
+  its only cache; a repeated plot costs a JPL round trip, which it
+  absorbs for orbits. A direct request (the 2xr query, `requests`,
+  `urllib`) is always fresh.
 
 ## Encounter and Flyby Resolution
 

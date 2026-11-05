@@ -88,6 +88,10 @@ the gravitational center of the Earth-Moon system, where it said the
 Earth-Moon orbit; and the paragraph on the
 independent check named the mean formula where the tests use ERFA's
 true obliquity)
+Module updated: November 4, 2026 with Anthropic's Claude Opus 5.5 (L-512,
+slice a, part A1): fetch_pole and fetch_orbit each asks JPL fresh, cache=HORIZONS_CACHE from
+utc_clock, so astroquery never answers it from the copy it keeps on
+disk for a week.)
 """
 
 import json
@@ -199,9 +203,11 @@ def tilt_of_date_deg(pole_ra_deg, pole_dec_deg, orbit_incl_deg,
 def fetch_pole(jd):
     """(ra_deg, dec_deg) of Earth's north pole on JD `jd` (UT), ICRF."""
     from astroquery.jplhorizons import Horizons
+    from utc_clock import HORIZONS_CACHE   # L-512: JPL asked fresh
     obj = Horizons(id=POLE_QUERY['target'], location=POLE_QUERY['observer'],
                    epochs=jd)
-    table = obj.ephemerides(quantities=POLE_QUERY['quantity'])
+    table = obj.ephemerides(quantities=POLE_QUERY['quantity'],
+                            cache=HORIZONS_CACHE)
     return float(table['NPole_RA'][0]), float(table['NPole_DEC'][0])
 
 
@@ -213,9 +219,11 @@ def fetch_orbit(jd):
     minute, over which neither direction moves by anything drawn.
     """
     from astroquery.jplhorizons import Horizons
+    from utc_clock import HORIZONS_CACHE   # L-512: JPL asked fresh
     obj = Horizons(id=ORBIT_QUERY['target'], location=ORBIT_QUERY['center'],
                    epochs=jd)
-    table = obj.elements(refplane=ORBIT_QUERY['refplane'])
+    table = obj.elements(refplane=ORBIT_QUERY['refplane'],
+                         cache=HORIZONS_CACHE)
     return float(table['incl'][0]), float(table['Omega'][0])
 
 

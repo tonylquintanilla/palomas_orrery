@@ -161,7 +161,14 @@ Module updated: November 4, 2026, afternoon, with Anthropic's Claude Opus
 5.5 (L-512, part 1: when JPL's database has no record for a small body,
 drawn_object_type falls back to the e of its typed elements in
 orbital_elements.py and says so, so 6AC4721 is drawn as an orbit again
-instead of a single point.)
+orbit instead of a single point.)
+Module updated: November 4, 2026, evening, with Anthropic's Claude Opus 5.5
+(L-512, slice a, part A1, ruling 0): data/orbit_paths.json is retired.
+Startup no longer loads it or prints its health summary; the static plot's
+"Update Orbit Data?" dialog and its writer call, the animation's writer
+call, and the uncalled copy of the dialog (handle_update_dialog) are
+removed. update_orbit_paths and plot_orbit_paths, uncalled, are marked
+DEPRECATED.)
 
 """
 #Paloma's Orrery - Solar System Visualization Tool
@@ -588,63 +595,6 @@ def create_dates_list_for_object(obj, obj_type, date_obj,
     else:
         print(f"WARNING: Unknown object type '{obj_type}' for {obj['name']}", flush=True)
         return [date_obj]
-
-def handle_update_dialog(num_objects):
-    """
-    Handle the update dialog for cache updates.
-    Returns True if user wants to update, False otherwise.
-    """
-    global remember_update_choice, update_choice_remembered
-    
-    if update_choice_remembered:
-        return remember_update_choice
-        
-    # Show dialog
-    dialog = tk.Toplevel(root)
-    dialog.title("Update Orbit Data?")
-    dialog.geometry("400x200")
-    
-    message = tk.Label(dialog, 
-        text=f"New orbit data is needed for {num_objects} selected objects.\n\n"
-             f"Would you like to fetch updated data from JPL Horizons?",
-        wraplength=350)
-    message.pack(pady=20)
-    
-    remember_var = tk.IntVar(value=0)
-    remember_check = tk.Checkbutton(dialog,
-        text="Remember my choice for this session",
-        variable=remember_var)
-    remember_check.pack(pady=10)
-    
-    user_choice = {'update': None}
-    
-    def on_yes():
-        user_choice['update'] = True
-        if remember_var.get() == 1:
-            global remember_update_choice, update_choice_remembered
-            remember_update_choice = True
-            update_choice_remembered = True
-        dialog.destroy()
-    
-    def on_no():
-        user_choice['update'] = False
-        if remember_var.get() == 1:
-            global remember_update_choice, update_choice_remembered
-            remember_update_choice = False
-            update_choice_remembered = True
-        dialog.destroy()
-    
-    button_frame = tk.Frame(dialog)
-    button_frame.pack()
-    
-    tk.Button(button_frame, text="Yes - Update Cache", 
-             command=on_yes, bg='light green').pack(side='left', padx=5)
-    tk.Button(button_frame, text="No - Use Existing", 
-             command=on_no, bg='light coral').pack(side='left', padx=5)
-    
-    dialog.wait_window()
-    
-    return user_choice.get('update', False)
 
 # ============= END HELPER FUNCTIONS =============
 
@@ -1205,8 +1155,6 @@ def calculate_satellite_precession_info(selected_objects, start_date, end_date, 
 TEMP_CACHE_FILE = "orbit_paths_temp.json"
 CLEANUP_TRACKING_FILE = ".last_orbit_cleanup"
 temp_cache = {}  # In-memory temporary cache
-remember_update_choice = None  # Session memory for dialog choice
-update_choice_remembered = False  # Flag for remembering choice
 
 print("Interpreter:", sys.executable, flush=True)
 print("Working directory:", os.getcwd(), flush=True)
@@ -3048,7 +2996,7 @@ controls_canvas.bind("<Leave>", _unbound_mousewheel)
 # Set the canvas size to match available space (leave room for scrollbar)
 controls_canvas.config(width=430, height=710)  # 450 container - 16 scrollbar - 4 padding
 
-orbit_paths_over_time = None  # Will be set by orbit_data_manager
+orbit_paths_over_time = None  # L-512: never loaded now; only the DEPRECATED update_orbit_paths names it
 
 # After creating the status_display widget, initialize the orbit_data_manager
 status_display = tk.Label(root, text="Data Fetching Status", font=("Arial", 10), bg=PANEL_BG, fg='black')
@@ -3994,72 +3942,10 @@ class CreateToolTip(object):
             self.tw.destroy()
         self.tw = None
 
-"""
-# Ask the user whether to refresh all stored orbit paths (warn about delay)
-refresh_all = messagebox.askyesno(
-    "Refresh Orbit Data",
-    "Would you like to refresh all stored orbit paths from JPL Horizons?\n\n"
-    "This may take several minutes. Choose 'No' to only fetch missing data."
-)
-"""
-
-# Initialize orbit data manager without dialogs
-orbit_paths_over_time = orbit_data_manager.initialize(status_display)
-
-# Run cleanup if needed
-#cleanup_msg, cleanup_type = cleanup_old_orbits()
-#if cleanup_msg:
-#    update_status_display(cleanup_msg, cleanup_type)
-
-# Print cache health summary once per session
-# if os.path.exists('orbit_paths.json'):
-if os.path.exists('data/orbit_paths.json'):
-#    with open('orbit_paths.json', 'r') as f:
-    with open('data/orbit_paths.json', 'r') as f:
-        orbit_data = json.load(f)
-        
-    # Analyze cache by center object
-    center_stats = {}
-    for key in orbit_data.keys():
-        if '_' in key:
-            parts = key.split('_')
-            if len(parts) >= 2:
-                center = parts[1]
-                center_stats[center] = center_stats.get(center, 0) + 1
-    
-    print("\n[CACHE HEALTH SUMMARY]", flush=True)
-    print(f"Total cached orbits: {len(orbit_data)}", flush=True)
-    print("Orbits by center object:", flush=True)
-    for center, count in sorted(center_stats.items()):
-        print(f"  {center}: {count} orbits", flush=True)
-#    print("\nNote: Cache can only be manually deleted by removing 'orbit_paths.json' file")
-    print("\nNote: Cache can only be manually deleted by removing 'data/orbit_paths.json' file", flush=True)
-
-    # Restore points -- the two generations load_orbit_paths() falls back to
-    # automatically when the cache is missing or corrupt. Reported here so a
-    # damaged cache is recoverable without guessing what exists (L-213).
-    # Cache and its two restore points, newest first. save_orbit_paths()
-    # copies with shutil.copy2, which PRESERVES mtime, so each date is when
-    # that CONTENT was written rather than when the copy was taken: the live
-    # cache carries the last save, .backup the save before it, .backup_old
-    # the one before that. Printing all three together is what makes a
-    # stalled rotation visible -- two old backup dates alone cannot be told
-    # apart from a healthy cache nobody has written to lately (L-213).
-    print("Cache and restore points (date = when that content was written):", flush=True)
-    for cache_path in ('data/orbit_paths.json',
-                       'data/orbit_paths.json.backup',
-                       'data/orbit_paths.json.backup_old'):
-        if os.path.exists(cache_path):
-            cache_mb = os.path.getsize(cache_path) / (1024 * 1024)
-            cache_when = datetime.fromtimestamp(os.path.getmtime(cache_path)).strftime('%Y-%m-%d %H:%M')
-            print(f"  {cache_path}: {cache_mb:.1f} MB, written {cache_when}", flush=True)
-        else:
-            print(f"  {cache_path}: none yet", flush=True)
-    print("-" * 50, flush=True)
-else:
-    print("\n[CACHE HEALTH SUMMARY]", flush=True)
-    print("No cache found at data/orbit_paths.json. A new one will be created as needed.", flush=True)
-    print("-" * 50, flush=True)
+# L-512 (ruling 0, Tony, Nov 4, 2026): startup no longer loads
+# data/orbit_paths.json (orbit_data_manager.initialize) or prints its health
+# summary and restore points. The file is retired; Tony deletes it and its two
+# backups by hand.
 
 # CONSTANTS
 BUTTON_FONT = ("Arial", 10, "normal")  # You can adjust the font as needed
@@ -4071,9 +3957,18 @@ def pulse_progress_bar():
     progress_bar.step(2)  # Increase by 2%
     root.after(100, pulse_progress_bar)  # Call again after 100ms
     
-# Update orbit_paths to handle center objects
+# =============================================================================
+# DEPRECATED: update_orbit_paths
+# Obsolete since November 4, 2026 (L-512, ruling 0: data/orbit_paths.json
+# is retired). Called from nowhere. It would stop at once, since nothing loads
+# the file into orbit_paths_over_time any more; made to run, it would write
+# data/orbit_paths.json through save_orbit_paths.
+# Kept, marked, until L-509 (how obsolete code is treated) rules whether it
+# goes.
+# =============================================================================
 def update_orbit_paths(center_object_name='Sun'):
     """
+    DEPRECATED (obsolete, L-512): see the banner.
     For each object in the global 'objects' list that has an 'id', check if its orbit path is
     stored in orbit_paths_over_time. If not (or if refresh_all is True), fetch its orbit path
     from JPL Horizons and update the global dictionary.
@@ -4170,8 +4065,17 @@ def update_orbit_paths(center_object_name='Sun'):
 # update_orbit_paths('Sun')
 # update_orbit_paths()
 
+# =============================================================================
+# DEPRECATED: plot_orbit_paths
+# Obsolete since November 4, 2026 (L-512, ruling 0: data/orbit_paths.json
+# is retired). Called from nowhere. Outside special fetch mode it reads only
+# the in-memory paths initialize loaded, and nothing loads them now.
+# Kept, marked, until L-509 (how obsolete code is treated) rules whether it
+# goes.
+# =============================================================================
 def plot_orbit_paths(fig, objects_to_plot, center_object_name='Sun'):
-    """Plot orbit paths using data from orbit_data_manager or temp cache."""
+    """DEPRECATED (obsolete, L-512): see the banner.
+    Plot orbit paths using data from orbit_data_manager or temp cache."""
     # Check if we're in special fetch mode
     if special_fetch_var.get() == 1 and temp_cache:
         # Use temp cache data
@@ -4891,7 +4795,6 @@ def plot_objects():
         try:
 
             # Add explicit reference to avoid issues with nested scopes
-            global orbit_paths_over_time
             nonlocal active_planetary_params  # Access the pre-fetched orbital params
 
             exo_objects = [obj for obj in objects 
@@ -4992,167 +4895,11 @@ def plot_objects():
             # Check if we're in special fetch mode or normal mode
             if special_fetch_var.get() == 0:  # Normal mode
 
-                # Check if any selected object needs updating
-                need_update = False
-                fetch_requests = []  # Store what needs to be fetched
+                # L-512 (ruling 0, Tony, Nov 4, 2026): data/orbit_paths.json, its
+                # "Update Orbit Data?" dialog and its writer are retired. Nothing is
+                # saved here; every path is asked of JPL fresh as it is drawn.
+                pass
 
-                # Calculate the date range we need
-                cache_start_date = settings['start_date']  # Or get_date_from_gui()
-                cache_end_date = settings['end_date']      # Or get_end_date_from_gui()
-
-                # These TNO moons have no usable JPL parent-centered ephemeris
-        #        SKIP_HORIZONS_TRAJECTORY = ['MK2', 'Xiangliu', 'Vanth', 'Weywot']
-                SKIP_HORIZONS_TRAJECTORY = ['MK2', 'Xiangliu', 'Vanth']  # Weywot removed - JPL data works at Quaoar; Gonggong removed 2026-10-23 (L-470): no failure on record; the maintenance run is the test
-                
-                for obj in selected_objects:
-                    # Skip exoplanet objects - they don't use JPL Horizons
-                    if obj.get('object_type') in ['exoplanet', 'exo_host_star', 'exo_binary_star', 'exo_barycenter']:    
-                        continue
-                    # Skip TNO moons that use analytical orbits only
-                    if obj['name'] in SKIP_HORIZONS_TRAJECTORY:
-                        continue
-
-                    orbit_key = f"{obj['name']}_{center_object_name}"
-                    
-                    # Check if orbit exists in cache
-                    if orbit_key not in orbit_paths_over_time:
-                        need_update = True
-                        # Clamp fetch dates to object's ephemeris bounds (missions/trajectories)
-                        obj_fetch_start = cache_start_date
-                        obj_fetch_end = cache_end_date
-                        span_start, span_end = path_drawing.entry_span(obj)   # L-476: a planned entry's span is its plan's
-                        if span_start and span_start > obj_fetch_start:
-                            obj_fetch_start = span_start
-                        if span_end and span_end < obj_fetch_end:
-                            obj_fetch_end = span_end
-                        fetch_requests.append({
-                            'object': obj,
-                            'fetch_start': obj_fetch_start,
-                            'fetch_end': obj_fetch_end,
-                            'reason': 'not in cache'
-                        })
-                        print(f"{obj['name']}: Not in cache, need full range", flush=True)
-
-                    else:
-                        # Check if cached date range covers what we need
-                        cached_data = orbit_paths_over_time[orbit_key]
-                        
-                        if 'metadata' in cached_data:
-                #            cache_meta_start = cached_data['metadata'].get('start_date')
-                #            cache_meta_end = cached_data['metadata'].get('end_date')
-                            cache_meta_start = cached_data['metadata'].get('start_date') or cached_data['metadata'].get('earliest_date')
-                            cache_meta_end = cached_data['metadata'].get('end_date') or cached_data['metadata'].get('latest_date')
-                            
-                            if cache_meta_start and cache_meta_end:
-                                existing_start = datetime.strptime(cache_meta_start, '%Y-%m-%d')
-                                existing_end = datetime.strptime(cache_meta_end, '%Y-%m-%d')
-                                
-                                # Determine what gaps need filling
-                                fetch_gaps = []
-                                
-                                # Clamp to object's ephemeris bounds before gap-filling
-                                # FIXED: prevents Horizons errors for tight-window missions (e.g. Artemis II)
-                                span_start, span_end = path_drawing.entry_span(obj)   # L-476: a planned entry's span is its plan's
-                                eff_start = max(cache_start_date, span_start) if span_start else cache_start_date
-                                eff_end   = min(cache_end_date,   span_end)   if span_end   else cache_end_date
-
-                                # Gap at the beginning?
-                                if eff_start < existing_start:
-                                    fetch_gaps.append((eff_start, existing_start - timedelta(days=1)))
-                                
-                                # Gap at the end?
-                                if eff_end > existing_end:
-                                    fetch_gaps.append((existing_end + timedelta(days=1), eff_end))
-                                
-                                if fetch_gaps:
-                                    need_update = True
-                                    for gap_start, gap_end in fetch_gaps:
-                                        fetch_requests.append({
-                                            'object': obj,
-                                            'fetch_start': gap_start,
-                                            'fetch_end': gap_end,
-                                            'reason': 'gap in cache'
-                                        })
-                                        days_to_fetch = (gap_end - gap_start).days + 1
-                                        print(f"{obj['name']}: Need {days_to_fetch} days from {gap_start} to {gap_end}", flush=True)
-                
-                # Handle updates based on user preference
-                should_update = False
-                
-                if need_update and not update_choice_remembered:
-                    # Show dialog
-                    dialog = tk.Toplevel(root)
-                    dialog.title("Update Orbit Data?")
-                    dialog.geometry("400x200")
-                    
-                    message = tk.Label(dialog, 
-                        text=f"New orbit data is needed for {len(selected_objects)} selected objects.\n\n"
-                             f"Would you like to fetch updated data from JPL Horizons?",
-                        wraplength=350)
-                    message.pack(pady=20)
-                    
-                    remember_var = tk.IntVar(value=0)
-                    remember_check = tk.Checkbutton(dialog,
-                        text="Remember my choice for this session\n"
-                             "(Warning: This applies globally to all plots)",
-                        variable=remember_var)
-                    remember_check.pack(pady=10)
-                    
-                    button_frame = tk.Frame(dialog)
-                    button_frame.pack()
-                    
-                    user_choice = {'update': None}
-                    
-                    def on_yes():
-                        user_choice['update'] = True
-                        if remember_var.get() == 1:
-                            global remember_update_choice, update_choice_remembered
-                            remember_update_choice = True
-                            update_choice_remembered = True
-                        dialog.destroy()
-                    
-                    def on_no():
-                        user_choice['update'] = False
-                        if remember_var.get() == 1:
-                            global remember_update_choice, update_choice_remembered
-                            remember_update_choice = False
-                            update_choice_remembered = True
-                        dialog.destroy()
-                    
-                    tk.Button(button_frame, text="Yes - Update Cache", 
-                             command=on_yes, bg='light green').pack(side='left', padx=5)
-                    tk.Button(button_frame, text="No - Use Existing", 
-                             command=on_no, bg='light coral').pack(side='left', padx=5)
-                    
-                    dialog.wait_window()
-                    
-                    should_update = user_choice.get('update', False)
-                
-                elif need_update and update_choice_remembered:
-                    # Use remembered choice
-                    should_update = remember_update_choice
-                
-                # Perform update if needed
-                if should_update:
-                    update_status_display("Updating orbit cache for selected objects...", 'info')
-                    progress_bar.step(10)
-                    root.update_idletasks()
-                    
-                    updated, current, total, time_saved = orbit_data_manager.update_orbit_paths_incrementally(
-                        object_list=selected_objects,
-                        center_object_name=center_object_name,
-                #        days_ahead=int(get_end_date_from_gui()),
-                        days_ahead=int(days_to_plot_entry.get()),
-                        fetch_requests=fetch_requests if fetch_requests else None,  # FIXED: pass clamped requests
-                        planetary_params=active_planetary_params,
-                        parent_planets=parent_planets,
-                        root_widget=root
-                    )
-                    
-                    update_status_display(f"Cache updated: {updated} new, {current} current", 'success')
-                else:
-                    update_status_display("Using existing cache without updates", 'info')
-                    
             else:  # Special fetch mode
                 update_status_display("Special fetch mode: Fetching data (not cached)...", 'special')
                 
@@ -6648,7 +6395,6 @@ def animate_objects(step, label):
     def animation_worker():
         try:
             # Global references
-            global orbit_paths_over_time
             nonlocal active_planetary_params  # Access the pre-fetched orbital params
 
             # Initialize frames list at the beginning
@@ -6737,39 +6483,17 @@ def animate_objects(step, label):
             dates_list = create_animation_dates(current_date, step, N)
 
 
-            # Calculate days_ahead
-            days_ahead = 0
-            if dates_list:
-                days_ahead = (dates_list[-1] - dates_list[0]).days
-
-            # INCREMENTAL UPDATE: Before animating, ensure we have updated data
+            # L-512 (ruling 0, Tony, Nov 4, 2026): data/orbit_paths.json and its
+            # writer are retired, so the animation no longer updates a saved file
+            # before it draws; every path is asked of JPL as the frames are built.
             selected_objects = [obj for obj in objects if obj['var'].get() == 1]
             selected_object_names = [obj['name'] for obj in selected_objects]  # Add this for plot_idealized_orbits
 
-            output_label.config(text="Checking for orbit data updates for animation...")
-            root.update_idletasks()
-            
-            # Skip orbit data updates for exoplanet systems (they use Keplerian orbits, not JPL)
-            if not is_exoplanet_mode:
-                # Call the incremental update for selected objects only
-                updated, current, total, time_saved = orbit_data_manager.update_orbit_paths_incrementally(
-                    object_list=selected_objects,
-                    center_object_name=center_object_name,
-                    days_ahead=max(days_ahead, 365),  # Ensure we have enough data for the animation
-                    planetary_params=active_planetary_params,
-                    parent_planets=parent_planets,
-                    root_widget=root
-                )
-                
-                if updated > 0:
-                    output_label.config(text=f"Updated {updated} orbit paths. Creating animation...")
-                else:
-                    output_label.config(text="Using existing orbit data. Creating animation...")
-                root.update_idletasks()
-            else:
-                # Exoplanet mode - skip JPL data update
+            if is_exoplanet_mode:
                 output_label.config(text="Exoplanet mode: Using Keplerian orbits. Creating animation...")
-                root.update_idletasks()
+            else:
+                output_label.config(text="Creating animation...")
+            root.update_idletasks()
 
 
             # Define planets with shell visualizations
@@ -9151,9 +8875,6 @@ horizons_warning.grid(row=2, column=0, columnspan=11, pady=(2, 0), sticky='w')
 
 # Initialize the date fields with current values
 fill_now()  # This will set start date to now and calculate end date
-
-# Set startup complete flag
-orbit_data_manager._startup_complete = True
 
 def sync_end_date_from_days():
     """Calculate end date from start date + days to plot"""

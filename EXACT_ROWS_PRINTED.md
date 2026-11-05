@@ -76,15 +76,15 @@ Rule 7: each printed exact row states a print count, each orrery line prints it 
 
 ### `INNER_CORONA_RADII`
 
-- orrery `comet_visualization_shells.py` line 594: `f"Inside Inner K-corona (~{row_text('INNER_CORONA_RADII')} R_sun, ~{row_text('INNER_CORONA_RA...`
-- orrery `comet_visualization_shells.py` line 767: `f"Roche limit (about {row_text('ROCHE_LIMIT_RADII')} R_sun, {row_text('ROCHE_LIMIT_RADII', 'a...`
+- orrery `comet_visualization_shells.py` line 598: `f"Inside Inner K-corona (~{row_text('INNER_CORONA_RADII')} R_sun, ~{row_text('INNER_CORONA_RA...`
+- orrery `comet_visualization_shells.py` line 771: `f"Roche limit (about {row_text('ROCHE_LIMIT_RADII')} R_sun, {row_text('ROCHE_LIMIT_RADII', 'a...`
 
 ### `HELMET_CUSP_RADII`
 
-- orrery `comet_visualization_shells.py` line 583: `f"(~{row_text('HELMET_CUSP_RADII')} R_sun, ~{row_text('HELMET_CUSP_RADII', 'au')} AU)<br>"`
-- orrery `comet_visualization_shells.py` line 591: `f"Inside the helmet cusp (~{row_text('HELMET_CUSP_RADII')} R_sun, "`
-- orrery `comet_visualization_shells.py` line 592: `f"~{row_text('HELMET_CUSP_RADII', 'au')} AU): {helmet_status}<br>"`
-- orrery `comet_visualization_shells.py` line 766: `f"({row_text('HELMET_CUSP_RADII')} R_sun, {row_text('HELMET_CUSP_RADII', 'au')} AU),<br>"`
+- orrery `comet_visualization_shells.py` line 587: `f"(~{row_text('HELMET_CUSP_RADII')} R_sun, ~{row_text('HELMET_CUSP_RADII', 'au')} AU)<br>"`
+- orrery `comet_visualization_shells.py` line 595: `f"Inside the helmet cusp (~{row_text('HELMET_CUSP_RADII')} R_sun, "`
+- orrery `comet_visualization_shells.py` line 596: `f"~{row_text('HELMET_CUSP_RADII', 'au')} AU): {helmet_status}<br>"`
+- orrery `comet_visualization_shells.py` line 770: `f"({row_text('HELMET_CUSP_RADII')} R_sun, {row_text('HELMET_CUSP_RADII', 'au')} AU),<br>"`
 - orrery `solar_visualization_shells.py` line 765: `f'* Streamer Belt (Visible Corona): helmets pinch at {row_text('HELMET_CUSP_RADII')} R_sun, t...`
 - orrery `solar_visualization_shells.py` line 793: `f'* Streamer Belt (Visible Corona): helmets pinch at {row_text('HELMET_CUSP_RADII')} R_sun, t...`
 - orrery `solar_visualization_shells.py` line 1482: `f"higher than {row_text('HELMET_CUSP_LOW_RADII')}-{row_text('HELMET_CUSP_HIGH_RADII')} R_sun,...`
@@ -93,14 +93,14 @@ Rule 7: each printed exact row states a print count, each orrery line prints it 
 
 ### `INNER_LIMIT_OORT_CLOUD_AU`
 
-- orrery `palomas_orrery.py` line 10781: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
+- orrery `palomas_orrery.py` line 10502: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
 - orrery `solar_visualization_shells.py` line 209: `_OORT_INNER_EDGE = row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)`
 - orrery `solar_visualization_shells.py` line 1163: `f'From {_OORT_INNER_EDGE} AU ({row_text("INNER_LIMIT_OORT_CLOUD_AU", unit="km", grouping=True...`
 - gallery `gallery/feature_renderers.js` line 2376 (config `/objects/0/features/oort_cloud/hills_cloud_torus/inner_radius`): `hover += "From " + (fmtAuServed(cfg.inner_radius) || fmtAu(lo)) + "," +`
 
 ### `OUTER_OORT_CLOUD_AU`
 
-- orrery `palomas_orrery.py` line 10781: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
+- orrery `palomas_orrery.py` line 10502: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
 - orrery `solar_visualization_shells.py` line 219: `_OORT_OUTER_EDGE = row_text('OUTER_OORT_CLOUD_AU', grouping=True)`
 - gallery `gallery/feature_renderers.js` line 2483 (config `/objects/0/features/oort_cloud/outer_oort_clumpy/outer_radius`): `var z = fmtAuServed(cfg.outer_radius) || fmtAu(hi);`
 - gallery `gallery/feature_renderers.js` line 2483 (config `/objects/0/features/oort_cloud/galactic_tide/outer_radius`): `var z = fmtAuServed(cfg.outer_radius) || fmtAu(hi);`
@@ -109,7 +109,7 @@ Rule 7: each printed exact row states a print count, each orrery line prints it 
 
 A tool logging a value is not a display a visitor sees, so these are not counted above.
 
-- `KM_PER_AU`: orrery `export_orbit_cache.py` line 385: `print(" constants_new.KM_PER_AU: %s" % KM_PER_AU)`
+- `KM_PER_AU`: orrery `export_orbit_cache.py` line 399: `print(" constants_new.KM_PER_AU: %s" % KM_PER_AU)`
 - `EARTH_OBLIQUITY_J2000_DEG`: orrery `star_sphere_builder.py` line 514: `print(f" Obliquity: {EARTH_OBLIQUITY_J2000_DEG}\u00b0")`
 
 ## Not printed

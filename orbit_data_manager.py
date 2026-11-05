@@ -11,6 +11,16 @@ nothing. The elements it returns are unchanged.)
 Module updated: November 3, 2026 with Anthropic's Claude Opus 5.5 (L-476:
 a fetch is clamped to a planned entry's span as its path plan gives it,
 path_drawing.entry_span, not its typed dates.)
+Module updated: November 4, 2026 with Anthropic's Claude Opus 5.5 (L-512,
+ruling 0, Tony: "a heavy file that is wrong and nobody reads is a bad
+breadcrumb leading nowhere"): data/orbit_paths.json is retired. Its
+writer, update_orbit_paths_incrementally, and what only it served
+(determine_interval_for_object, fetch_orbit_path, calculate_planet9_orbit,
+fetch_orbit_path_by_dates, merge_orbit_data, fetch_complete_orbit_path,
+on_center_change) are removed. The file's loader, saver and readers are
+kept, marked DEPRECATED, and nothing in the app calls them. What stays in
+use: utc_to_tdb and query_horizons_elements, for the osculating-elements
+cache (osculating_cache_manager.py).
 
 Role: cache
 Domain: orrery
@@ -62,8 +72,19 @@ def utc_to_tdb(dt):
     """
     return dt + timedelta(seconds=69)
 
+# =============================================================================
+# DEPRECATED: repair_cache_on_load
+# Obsolete since November 4, 2026 (L-512, ruling 0: data/orbit_paths.json
+# is retired; the app no longer calls this file's loader, saver or writer).
+# It still reads data/orbit_paths.json, and rewrites it, if someone runs it on
+# purpose.
+# Kept, marked, until L-509 (how obsolete code is treated) rules whether
+# it goes.
+# =============================================================================
 def repair_cache_on_load():
-    """Load cache and remove only corrupted entries"""
+    """
+    DEPRECATED (obsolete, L-512): see the banner.
+    Load cache and remove only corrupted entries"""
 #    if not os.path.exists('orbit_paths.json'):
     if not os.path.exists('data/orbit_paths.json'):    
         return {}
@@ -108,8 +129,18 @@ def repair_cache_on_load():
         print("[CACHE ERROR] Entire cache file corrupted, starting fresh", flush=True)
         return {}
 
+# =============================================================================
+# DEPRECATED: initialize
+# Obsolete since November 4, 2026 (L-512, ruling 0: data/orbit_paths.json
+# is retired; the app no longer calls this file's loader, saver or writer).
+# It still reads data/orbit_paths.json (through load_orbit_paths) if someone
+# runs it on purpose.
+# Kept, marked, until L-509 (how obsolete code is treated) rules whether
+# it goes.
+# =============================================================================
 def initialize(status_widget=None, root_widget=None, center_var=None, data_file=ORBIT_PATHS_FILE):
     """
+    DEPRECATED (obsolete, L-512): see the banner.
     Initialize the orbit data manager by loading cached data.
     
     Parameters:
@@ -129,8 +160,18 @@ def initialize(status_widget=None, root_widget=None, center_var=None, data_file=
     orbit_paths_over_time = load_orbit_paths(data_file)
     return orbit_paths_over_time
 
+# =============================================================================
+# DEPRECATED: load_orbit_paths
+# Obsolete since November 4, 2026 (L-512, ruling 0: data/orbit_paths.json
+# is retired; the app no longer calls this file's loader, saver or writer).
+# It still reads data/orbit_paths.json, and can copy a backup over it, if
+# someone runs it on purpose.
+# Kept, marked, until L-509 (how obsolete code is treated) rules whether
+# it goes.
+# =============================================================================
 def load_orbit_paths(file_path=ORBIT_PATHS_FILE):
     """
+    DEPRECATED (obsolete, L-512): see the banner.
     Load orbit paths from file with automatic repair of corrupted entries.
     
     Parameters:
@@ -351,8 +392,17 @@ def load_orbit_paths(file_path=ORBIT_PATHS_FILE):
         traceback.print_exc()
         return {}
 
+# =============================================================================
+# DEPRECATED: convert_single_orbit_to_new_format
+# Obsolete since November 4, 2026 (L-512, ruling 0: data/orbit_paths.json
+# is retired; the app no longer calls this file's loader, saver or writer).
+# It touches no file; load_orbit_paths alone calls it.
+# Kept, marked, until L-509 (how obsolete code is treated) rules whether
+# it goes.
+# =============================================================================
 def convert_single_orbit_to_new_format(orbit_key, orbit_data):
     """
+    DEPRECATED (obsolete, L-512): see the banner.
     Convert a single orbit from old format to new format.
     
     Parameters:
@@ -418,8 +468,18 @@ def convert_single_orbit_to_new_format(orbit_key, orbit_data):
 
 # Replace the save_orbit_paths function in orbit_data_manager.py with this safer version
 
+# =============================================================================
+# DEPRECATED: save_orbit_paths
+# Obsolete since November 4, 2026 (L-512, ruling 0: data/orbit_paths.json
+# is retired; the app no longer calls this file's loader, saver or writer).
+# It still writes data/orbit_paths.json and rotates its two backups if someone
+# runs it on purpose.
+# Kept, marked, until L-509 (how obsolete code is treated) rules whether
+# it goes.
+# =============================================================================
 def save_orbit_paths(data=None, file_path=ORBIT_PATHS_FILE):
     """
+    DEPRECATED (obsolete, L-512): see the banner.
     Save orbit paths data to file with safety checks.
     
     Parameters:
@@ -546,8 +606,17 @@ def save_orbit_paths(data=None, file_path=ORBIT_PATHS_FILE):
         traceback.print_exc()
         raise  # Re-raise the exception
 
+# =============================================================================
+# DEPRECATED: convert_to_new_format
+# Obsolete since November 4, 2026 (L-512, ruling 0: data/orbit_paths.json
+# is retired; the app no longer calls this file's loader, saver or writer).
+# It touches no file; nothing calls it.
+# Kept, marked, until L-509 (how obsolete code is treated) rules whether
+# it goes.
+# =============================================================================
 def convert_to_new_format(old_data):
     """
+    DEPRECATED (obsolete, L-512): see the banner.
     Convert old format orbit data to new time-indexed format.
     
     Parameters:
@@ -610,202 +679,17 @@ def convert_to_new_format(old_data):
     return new_data
 
 
-# def determine_interval_for_object(obj, orbital_params=None, parent_planets=None):
-def determine_interval_for_object(obj, orbital_params=None, parent_planets=None, center_object_name=None):    # fixes pluto as satellite issue for fetching intervals
-    """
-    Determine appropriate time interval for fetching orbit data.
-    
-    Parameters:
-        obj: Object info dictionary
-        orbital_params: Dictionary of orbital parameters for known objects
-        parent_planets: Dictionary mapping planets to their satellites
-        
-    Returns:
-        str: Time interval string (e.g., "1d", "12h", "6h", "1h")
-    """
-    # Handle special case for Planet 9
-    if obj.get('id') == 'planet9_placeholder':
-        return "1d"  # Default interval for Planet 9 (though not actually used)
-    
-    # Default interval
-    interval = "1d"
-    
-    # Check if this is a comet
-    if obj.get('is_comet', False):
-        interval = "6h"
-    
-    # Check if this is a mission
-    elif obj.get('is_mission', False):
-        interval = "6h"
-    
-    # Check if this is a satellite of the center object
-#    elif parent_planets and any(obj['name'] in moons for planet, moons in parent_planets.items()):
-#        interval = "1h"
-    
-    elif parent_planets and center_object_name and center_object_name in parent_planets:    # fixes pluto as satellite issue for fetching intervals
-        if obj['name'] in parent_planets[center_object_name]:
-            interval = "1h"
-
-    # Check for high eccentricity objects
-    elif orbital_params and obj['name'] in orbital_params:
-        e = orbital_params[obj['name']].get('e', 0)
-        if e > 0.5:  # High eccentricity
-            interval = "12h"
-    
-    return interval
-
-
-def fetch_orbit_path(obj_info, start_date, end_date, interval, center_id='@0', id_type=None):
-    """
-    Fetch orbit path data from JPL Horizons.
-    
-    Parameters:
-        obj_info: Object information dictionary
-        start_date: Start date for the orbit path
-        end_date: End date for the orbit path
-        interval: Time interval (e.g., "1d", "12h")
-        center_id: ID of the central body (default: '@0' for solar system barycenter)
-        id_type: Type of ID for the object
-        
-    Returns:
-        dict: Dictionary with keys 'x', 'y', and 'z' or None on failure
-    """
-    # Handle special case for Planet 9 (calculated instead of fetched)
-    if obj_info.get('id') == 'planet9_placeholder':
-        return calculate_planet9_orbit(start_date, end_date, interval)
-    
-    # Skip JPL Horizons for exoplanets and binary stars - they use Keplerian orbit calculations
-    if obj_info.get('object_type') in ['exoplanet', 'exo_host_star']:
-        return None
-    if id_type in ['exoplanet', 'binary_star_a', 'binary_star_b', 'barycenter']:
-        return None    
-    
-    try:
-        # Use the object's id and id_type
-        object_id = obj_info['id']
-        
-        # Format the center_id appropriately
-        location = center_id
-        if not location.startswith('@'):
-            location = '@' + location
-        
-        # Format dates as required by Horizons
-        epochs = {
-            'start': utc_to_tdb(start_date).strftime('%Y-%m-%d %H:%M'),
-            'stop': utc_to_tdb(end_date).strftime('%Y-%m-%d %H:%M'),
-            'step': interval
-        }
-
-        # Create Horizons object and fetch vectors        
-        obj = Horizons(id=object_id, id_type=id_type, location=location, epochs=epochs)
-        eph = obj.vectors(cache=HORIZONS_CACHE)
-        
-        # Process the ephemerides table to extract x, y, z coordinates
-        x_coords = list(eph['x'])
-        y_coords = list(eph['y'])
-        z_coords = list(eph['z'])
-        
-        return {'x': x_coords, 'y': y_coords, 'z': z_coords}
-    except Exception as e:
-        print(f"Error fetching orbit path for {obj_info['name']}: {e}", flush=True)
-        traceback.print_exc()
-        return None
-
-
-def calculate_planet9_orbit(start_date, end_date, interval):
-    """
-    Calculate synthetic orbit for hypothetical Planet 9.
-    
-    Parameters:
-        start_date: Start date for the orbit
-        end_date: End date for the orbit
-        interval: Time interval
-        
-    Returns:
-        dict: Synthetic orbit data
-    """
-    # Calculate days between start and end
-    days_total = (end_date - start_date).days
-    
-    # Determine number of points based on interval
-    if interval == "1d":
-        num_points = days_total + 1
-    elif interval == "12h":
-        num_points = days_total * 2 + 1
-    elif interval == "6h":
-        num_points = days_total * 4 + 1
-    elif interval == "1h":
-        num_points = days_total * 24 + 1
-    else:
-        # Default to daily
-        num_points = days_total + 1
-    
-    # Planet 9 orbital parameters (hypothetical)
-    a = 600  # Semi-major axis (AU)
-    e = 0.30  # Eccentricity
-    i = 6     # Inclination (degrees)
-    Omega = 90  # Longitude of ascending node (degrees)
-    omega = 150  # Argument of perihelion (degrees)
-    
-    # Period in years (Kepler's third law)
-    P = np.sqrt(a**3)  # Period in years
-    P_days = P * 365.25  # Period in days
-    
-    # Create time points
-    t = np.linspace(0, days_total, num_points)
-    
-    # Calculate mean anomaly at each time
-    M = 360 * t / P_days
-    
-    # Solve Kepler's equation to get eccentric anomaly (simplified)
-    # For a proper implementation, this would be an iterative solution
-    E = M + e * np.sin(np.radians(M))
-    
-    # Calculate true anomaly
-    theta = 2 * np.arctan2(np.sqrt(1 + e) * np.sin(np.radians(E/2)), 
-                           np.sqrt(1 - e) * np.cos(np.radians(E/2)))
-    theta = np.degrees(theta)
-    
-    # Calculate distance from Sun
-    r = a * (1 - e**2) / (1 + e * np.cos(np.radians(theta)))
-    
-    # Calculate position in orbital plane
-    xp = r * np.cos(np.radians(theta))
-    yp = r * np.sin(np.radians(theta))
-    zp = np.zeros_like(xp)
-    
-    # Rotate to account for orbital orientation
-    # Convert angles to radians
-    i_rad = np.radians(i)
-    omega_rad = np.radians(omega)
-    Omega_rad = np.radians(Omega)
-    
-    # Initialize result arrays
-    x = np.zeros_like(xp)
-    y = np.zeros_like(yp)
-    z = np.zeros_like(zp)
-    
-    # Perform rotations for each point
-    for j in range(len(xp)):
-        # Rotate by argument of perihelion
-        x1 = xp[j] * np.cos(omega_rad) - yp[j] * np.sin(omega_rad)
-        y1 = xp[j] * np.sin(omega_rad) + yp[j] * np.cos(omega_rad)
-        
-        # Rotate by inclination
-        x2 = x1
-        y2 = y1 * np.cos(i_rad)
-        z2 = y1 * np.sin(i_rad)
-        
-        # Rotate by longitude of ascending node
-        x[j] = x2 * np.cos(Omega_rad) - y2 * np.sin(Omega_rad)
-        y[j] = x2 * np.sin(Omega_rad) + y2 * np.cos(Omega_rad)
-        z[j] = z2
-    
-    return {'x': x.tolist(), 'y': y.tolist(), 'z': z.tolist()}
-
-
+# =============================================================================
+# DEPRECATED: calculate_planet9_position
+# Obsolete since November 4, 2026 (L-512, ruling 0: data/orbit_paths.json
+# is retired; the app no longer calls this file's loader, saver or writer).
+# It touches no file; get_planet9_data alone calls it.
+# Kept, marked, until L-509 (how obsolete code is treated) rules whether
+# it goes.
+# =============================================================================
 def calculate_planet9_position(theta_offset=75):
     """
+    DEPRECATED (obsolete, L-512): see the banner.
     Calculate a fixed position for Planet 9 based on our best estimate.
     This function returns a single position rather than a full orbit.
     
@@ -856,8 +740,17 @@ def calculate_planet9_position(theta_offset=75):
     
     return x, y, z, range_val
 
+# =============================================================================
+# DEPRECATED: update_status
+# Obsolete since November 4, 2026 (L-512, ruling 0: data/orbit_paths.json
+# is retired; the app no longer calls this file's loader, saver or writer).
+# It touches no file; only the obsolete functions here call it.
+# Kept, marked, until L-509 (how obsolete code is treated) rules whether
+# it goes.
+# =============================================================================
 def update_status(message):
     """
+    DEPRECATED (obsolete, L-512): see the banner.
     Update status display if available and print to console.
     
     Parameters:
@@ -878,181 +771,17 @@ def update_status(message):
             # Just print the error, don't try to update the display again
             print(f"Error updating status display: {e}", flush=True)
 
-def fetch_orbit_path_by_dates(obj_info, start_date, end_date, interval, center_id='@0', id_type=None):
-    """
-    Fetch orbit path data for specific date range and convert to time-indexed format.
-    
-    Parameters:
-        obj_info: Object information dictionary
-        start_date: Start date for the orbit path
-        end_date: End date for the orbit path
-        interval: Time interval (e.g., "1d", "12h")
-        center_id: ID of the central body
-        id_type: Type of ID for the object
-        
-    Returns:
-        dict: Orbit data in time-indexed format
-    """
-    # ADD THIS VALIDATION AT THE START
-    if start_date >= end_date:
-        print(f"WARNING: Invalid date range for {obj_info['name']}: start {start_date} >= end {end_date}", flush=True)
-        return None  # Return None for invalid date ranges
-
-    # Special case for Planet 9 - don't fetch from Horizons
-    if obj_info.get('id') == 'planet9_placeholder':
-        # For Planet 9, we'll create a synthetic orbit
-        raw_data = calculate_planet9_orbit(start_date, end_date, interval)
-    else:
-        update_status(f"Fetching orbit data for {obj_info['name']} from {start_date.strftime('%Y-%m-%d')} to {end_date.strftime('%Y-%m-%d')}")
-        raw_data = fetch_orbit_path(obj_info, start_date, end_date, interval, center_id, id_type)
-    
-    if not raw_data or 'x' not in raw_data or not raw_data['x']:
-        return None
-        
-    # Convert array format to time-indexed format
-    data_points = {}
-    
-    # Calculate number of days between start and end
-    total_days = (end_date - start_date).days
-    
-    # Assuming points are evenly distributed between start and end dates
-    num_points = len(raw_data['x'])
-    
-    if num_points <= 1:
-        return None
-        
-    days_between = total_days / (num_points - 1)
-    
-    for i in range(num_points):
-        point_date = start_date + timedelta(days=i * days_between)
-        date_str = point_date.strftime("%Y-%m-%d")
-        
-        data_points[date_str] = {
-            "x": raw_data['x'][i],
-            "y": raw_data['y'][i],
-            "z": raw_data['z'][i]
-        }
-    
-    center_name = center_id
-    if isinstance(center_id, str):
-        center_name = center_id.replace('@', '') if center_id.startswith('@') else center_id
-    
-    return {
-        "data_points": data_points,
-        "metadata": {
-            "earliest_date": start_date.strftime("%Y-%m-%d"),
-            "latest_date": end_date.strftime("%Y-%m-%d"),
-            "center_body": center_name,
-            "last_updated": utc_now().strftime("%Y-%m-%d")
-        }
-    }
-
-def merge_orbit_data(existing_data, new_data, new_start_date, new_end_date):
-    """
-    Merge new orbit data with existing data.
-    """
-    if not new_data or "data_points" not in new_data:
-        return existing_data
-        
-    # Create a copy of existing data
-    merged_data = {
-        "data_points": existing_data.get("data_points", {}).copy(),
-        "metadata": existing_data.get("metadata", {}).copy()
-    }
-    
-    # Add new data points
-    merged_data["data_points"].update(new_data.get("data_points", {}))
-    
-    # Update metadata to reflect the actual data range
-    all_dates = sorted(merged_data["data_points"].keys())
-    if all_dates:
-        merged_data["metadata"]["start_date"] = all_dates[0]
-        merged_data["metadata"]["end_date"] = all_dates[-1]
-        
-    merged_data["metadata"]["last_updated"] = utc_now().strftime("%Y-%m-%d")
-    
-    return merged_data
-
-def fetch_complete_orbit_path(obj, orbit_key, today, end_window, interval, center_id, center_id_type):
-    """
-    Fetch and store a complete orbit path for an object.
-    
-    Parameters:
-        obj: Object information dictionary
-        orbit_key: Key for storing the orbit data
-        today: Start date
-        end_window: End date
-        interval: Time interval
-        center_id: ID of the central body
-        center_id_type: Type of ID for the central body
-        
-    Returns:
-        bool: Success status
-    """
-    global orbit_paths_over_time
-
-    # FIXED: clamp end_window to object's valid ephemeris boundary
-    # prevents Horizons errors for tight-window missions (e.g. Artemis II ends Apr 10)
-    from path_drawing import entry_span   # L-476: a planned entry's span is its plan's
-    span_start, span_end = entry_span(obj)
-    if span_end and span_end < end_window:
-        print(f"[CLAMP] {obj['name']}: clamping end from {end_window.date()} to {span_end.date()}", flush=True)
-        end_window = span_end
-    if span_start and span_start > today:
-        print(f"[CLAMP] {obj['name']}: clamping start from {today.date()} to {span_start.date()}", flush=True)
-        today = span_start
-    if today >= end_window:
-        print(f"[CLAMP] {obj['name']}: degenerate range after clamping, skipping", flush=True)
-        return False
-
-    # Special case for Planet 9 - don't fetch from Horizons
-
-    if obj.get('id') == 'planet9_placeholder':
-        # For Planet 9, we'll create a synthetic orbit and store it
-        update_status(f"Calculating synthetic orbit for {obj['name']}")
-        path_data = calculate_planet9_orbit(today, end_window, interval)
-    else:
-        update_status(f"Fetching complete orbit path for {obj['name']} relative to {center_id}")
-        path_data = fetch_orbit_path(
-            obj, today, end_window, interval,
-            center_id=center_id, id_type=obj.get('id_type')
-        )
-    
-    if not path_data:
-        return False
-        
-    # Convert to new format
-    orbit_paths_over_time[orbit_key] = {
-        "data_points": {},
-        "metadata": {
-            "earliest_date": today.strftime("%Y-%m-%d"),
-            "latest_date": end_window.strftime("%Y-%m-%d"),
-            "center_body": center_id_type or center_id,
-            "last_updated": today.strftime("%Y-%m-%d")
-        }
-    }
-    
-    # Convert array data to time-indexed format
-    num_points = len(path_data['x'])
-    if num_points > 0:
-        days_span = (end_window - today).days
-        days_between = days_span / (num_points - 1) if num_points > 1 else 1
-        
-        for i in range(num_points):
-            point_date = today + timedelta(days=i * days_between)
-            date_str = point_date.strftime("%Y-%m-%d")
-            
-            orbit_paths_over_time[orbit_key]["data_points"][date_str] = {
-                "x": path_data['x'][i],
-                "y": path_data['y'][i],
-                "z": path_data['z'][i]
-            }
-    
-    return True
-
-
+# =============================================================================
+# DEPRECATED: get_planet9_data
+# Obsolete since November 4, 2026 (L-512, ruling 0: data/orbit_paths.json
+# is retired; the app no longer calls this file's loader, saver or writer).
+# It touches no file; nothing calls it.
+# Kept, marked, until L-509 (how obsolete code is treated) rules whether
+# it goes.
+# =============================================================================
 def get_planet9_data(center_object_name='Sun'):
     """
+    DEPRECATED (obsolete, L-512): see the banner.
     Get Planet 9 data for different center objects.
     
     Parameters:
@@ -1081,262 +810,18 @@ def get_planet9_data(center_object_name='Sun'):
         'range': 0
     }
 
-def update_orbit_paths_incrementally(object_list=None, center_object_name="Sun", 
-                                     days_ahead=365, fetch_requests=None,
-                                     planetary_params=None, 
-                                     parent_planets=None, root_widget=None):
-    """
-    Update orbit paths incrementally, fetching only missing data.
-    
-    Parameters:
-        object_list: List of objects to update
-        center_object_name: Name of central body
-        days_ahead: Default days to look ahead (used if fetch_requests is None)
-        fetch_requests: List of specific fetch requests with date ranges
-        planetary_params: Dictionary of orbital parameters
-        parent_planets: Dictionary mapping planets to their satellites
-        root_widget: Root Tkinter widget for UI updates
-    """
-    global orbit_paths_over_time, root
-    
-    # Update root reference if provided
-    if root_widget:
-        root = root_widget
-    
-    today = utc_now()
-    end_window = today + timedelta(days=days_ahead)
-    end_window_str = end_window.strftime("%Y-%m-%d")
-    
-    update_status(f"Checking orbit data for updates to {end_window_str}...")
-    
-    # Get center object info from the provided object_list
-    center_object_info = None
-    if object_list:
-        center_object_info = next((obj for obj in object_list if obj['name'] == center_object_name), None)
-    
-    if center_object_info:
-        center_id = center_object_info['id']
-        center_id_type = center_object_info.get('id_type')
-    else:
-        center_id = 'Sun'
-        center_id_type = None
-    
-    # If we have specific fetch requests, use those instead of the default behavior
-    if fetch_requests:
-        updated_count = 0
-        time_saved_hours = 0
-        
-        for request in fetch_requests:
-            obj = request['object']
-            fetch_start = request['fetch_start']
-            fetch_end = request['fetch_end']
-            reason = request.get('reason', 'requested')
-
-            # ADD THIS VALIDATION
-            if fetch_start >= fetch_end:
-                print(f"Skipping invalid fetch request for {obj['name']}: {fetch_start} to {fetch_end}", flush=True)
-                continue            
-            
-            orbit_key = f"{obj['name']}_{center_object_name}"
-            
-            # Determine appropriate interval
-            interval = determine_interval_for_object(obj, planetary_params, parent_planets)
-            
-            # Update status
-            days_to_fetch = (fetch_end - fetch_start).days + 1
-            update_status(f"Fetching {days_to_fetch} days for {obj['name']} ({reason})")
-            if root:
-                root.update()
-            
-            # Special handling for Planet 9
-            if obj.get('id') == 'planet9_placeholder':
-                # Calculate synthetic orbit
-                path_data = calculate_planet9_orbit(fetch_start, fetch_end, interval)
-                
-                # Convert to time-indexed format
-                new_data = {
-                    "data_points": {},
-                    "metadata": {
-                        "start_date": fetch_start.strftime("%Y-%m-%d"),
-                        "end_date": fetch_end.strftime("%Y-%m-%d"),
-                        "center_body": center_object_name,
-                        "last_updated": today.strftime("%Y-%m-%d")
-                    }
-                }
-                
-                # Convert array data to time-indexed format
-                num_points = len(path_data['x'])
-                if num_points > 0:
-                    days_span = (fetch_end - fetch_start).days
-                    days_between = days_span / (num_points - 1) if num_points > 1 else 1
-                    
-                    for i in range(num_points):
-                        point_date = fetch_start + timedelta(days=i * days_between)
-                        date_str = point_date.strftime("%Y-%m-%d")
-                        
-                        new_data["data_points"][date_str] = {
-                            "x": path_data['x'][i],
-                            "y": path_data['y'][i],
-                            "z": path_data['z'][i]
-                        }
-            else:
-                # Fetch the specific date range from JPL Horizons
-                new_data = fetch_orbit_path_by_dates(
-                    obj, fetch_start, fetch_end, interval,
-                    center_id=center_id, id_type=obj.get('id_type')
-                )
-            
-            if new_data:
-                # Check if we have existing data to merge with
-                if orbit_key in orbit_paths_over_time:
-                    # Calculate time saved by not re-fetching existing data
-                    existing_data = orbit_paths_over_time[orbit_key]
-                    existing_points = len(existing_data.get("data_points", {}))
-                    if existing_points > 0:
-                        # Estimate based on interval
-                        calls_saved = existing_points
-                        if interval == "12h":
-                            calls_saved /= 2
-                        elif interval == "6h":
-                            calls_saved /= 4
-                        elif interval == "1h":
-                            calls_saved /= 24
-                        
-                        # Each API call might take ~1-2 seconds
-                        time_saved_seconds = calls_saved * 1.5
-                        time_saved_hours += time_saved_seconds / 3600
-                    
-                    # Merge with existing data
-                    orbit_paths_over_time[orbit_key] = merge_orbit_data(
-                        orbit_paths_over_time[orbit_key], new_data,
-                        fetch_start, fetch_end
-                    )
-                else:
-                    # New entry
-                    orbit_paths_over_time[orbit_key] = new_data
-                
-                updated_count += 1
-        
-        # Save the updated data
-        save_orbit_paths(orbit_paths_over_time)
-        
-        update_status(f"Smart fetch complete: Updated {updated_count} orbits with minimal data fetching. "
-                     f"Saved approximately {time_saved_hours:.1f} hours of fetch time.")
-        
-        return updated_count, 0, len(fetch_requests), time_saved_hours
-    
-    # Otherwise, continue with the existing logic...
-    # Default to all objects if none specified
-    if not object_list:
-        update_status("No object list provided, cannot update orbit paths incrementally.")
-        return 0, 0, 0, 0
-    
-    # Filter object list to exclude center object
-    object_list = [obj for obj in object_list if 'id' in obj and obj['name'] != center_object_name]
-    
-    updated_count = 0
-    already_current = 0
-    time_saved_hours = 0
-    
-    for obj in object_list:
-        # Special case for Planet 9
-        if obj.get('id') == 'planet9_placeholder':
-            # Planet 9 is synthetic, doesn't need updating from Horizons
-            orbit_key = f"{obj['name']}_{center_object_name}"
-            
-            # Only create/update Planet 9 data if it doesn't exist yet
-            if orbit_key not in orbit_paths_over_time:
-                update_status(f"Generating synthetic orbit for {obj['name']}")
-                # Use a default interval
-                interval = "1d"
-                fetch_complete_orbit_path(obj, orbit_key, today, end_window, interval, center_id, center_id_type)
-                updated_count += 1
-            else:
-                already_current += 1
-                
-            continue
-        
-        orbit_key = f"{obj['name']}_{center_object_name}"
-        
-        # Determine appropriate interval based on object type
-        interval = determine_interval_for_object(obj, planetary_params, parent_planets)
-        
-        # Check if we have existing data
-        if orbit_key in orbit_paths_over_time:
-            metadata = orbit_paths_over_time[orbit_key].get("metadata", {})
-            latest_date_str = metadata.get("latest_date")
-            
-            if latest_date_str:
-                latest_date = datetime.strptime(latest_date_str, "%Y-%m-%d")
-                
-                # Only update if our data doesn't extend to the desired end window
-                if latest_date < end_window:
-                    # Start fetching from the day after the latest date we have
-                    new_start_date = latest_date + timedelta(days=1)
-                    new_start_date_str = new_start_date.strftime("%Y-%m-%d")
-                    
-                    # Estimate time saved by incremental update (vs full refetch)
-                    days_already_have = (latest_date - today).days
-                    if days_already_have > 0:
-                        # Rough estimate based on time interval
-                        calls_saved = days_already_have
-                        if interval == "12h":
-                            calls_saved *= 2
-                        elif interval == "6h":
-                            calls_saved *= 4
-                        elif interval == "1h":
-                            calls_saved *= 24
-                        
-                        # Each API call might take ~1-2 seconds
-                        time_saved_seconds = calls_saved * 1.5
-                        time_saved_hours += time_saved_seconds / 3600
-                    
-                    update_status(f"Incrementally updating {obj['name']} from {new_start_date_str} to {end_window_str}")
-                    if root:
-                        root.update()
-                    
-                    # Fetch only the missing date range
-                    new_data = fetch_orbit_path_by_dates(
-                        obj, new_start_date, end_window, interval, 
-                        center_id=center_id, id_type=obj.get('id_type')
-                    )
-                    
-                    if new_data:
-                        # Merge the new data with existing data
-                        orbit_paths_over_time[orbit_key] = merge_orbit_data(
-                            orbit_paths_over_time[orbit_key], new_data, 
-                            new_start_date, end_window
-                        )
-                        
-                        # Update metadata
-                        orbit_paths_over_time[orbit_key]["metadata"]["latest_date"] = end_window_str
-                        orbit_paths_over_time[orbit_key]["metadata"]["last_updated"] = today.strftime("%Y-%m-%d")
-                        
-                        updated_count += 1
-                else:
-                    already_current += 1
-            else:
-                # Missing metadata, treat as new entry
-                fetch_complete_orbit_path(obj, orbit_key, today, end_window, interval, center_id, center_id_type)
-                updated_count += 1
-        else:
-            # No existing data, fetch complete path
-            fetch_complete_orbit_path(obj, orbit_key, today, end_window, interval, center_id, center_id_type)
-            updated_count += 1
-    
-    # Save the updated data
-    save_orbit_paths(orbit_paths_over_time)
-    
-    update_status(
-        f"Updated {updated_count} orbit paths, {already_current} already current. "
-        f"Data now extends to {end_window_str}. Saved approximately {time_saved_hours:.1f} hours of fetch time."
-    )
-    
-    return updated_count, already_current, len(object_list), time_saved_hours
-
-
+# =============================================================================
+# DEPRECATED: get_orbit_data_for_plotting
+# Obsolete since November 4, 2026 (L-512, ruling 0: data/orbit_paths.json
+# is retired; the app no longer calls this file's loader, saver or writer).
+# It reads only what initialize loaded from data/orbit_paths.json (nothing,
+# now that the app no longer calls initialize).
+# Kept, marked, until L-509 (how obsolete code is treated) rules whether
+# it goes.
+# =============================================================================
 def get_orbit_data_for_plotting(objects_to_plot, center_object_name='Sun'):
     """
+    DEPRECATED (obsolete, L-512): see the banner.
     Get orbit path data for plotting.
     
     Parameters:
@@ -1400,8 +885,18 @@ def get_orbit_data_for_plotting(objects_to_plot, center_object_name='Sun'):
     return plot_data
 
 
+# =============================================================================
+# DEPRECATED: get_data_stats
+# Obsolete since November 4, 2026 (L-512, ruling 0: data/orbit_paths.json
+# is retired; the app no longer calls this file's loader, saver or writer).
+# It still reads the size of data/orbit_paths.json if someone runs it on
+# purpose.
+# Kept, marked, until L-509 (how obsolete code is treated) rules whether
+# it goes.
+# =============================================================================
 def get_data_stats():
     """
+    DEPRECATED (obsolete, L-512): see the banner.
     Get statistics about the stored orbit data.
     
     Returns:
@@ -1465,75 +960,18 @@ def get_data_stats():
     return stats
 
 
-def on_center_change(*args, objects=None, planetary_params=None, parent_planets=None):
-    """
-    Update orbit paths when the center object is changed.
-    
-    Parameters:
-        *args: Variable arguments for Tkinter trace_add
-        objects: List of all celestial objects
-        planetary_params: Dictionary of orbital parameters
-        parent_planets: Dictionary mapping planets to their satellites
-        
-    Returns:
-        None
-    """
-#    global center_object_var, root, status_display
-    global center_object_var, root, status_display, last_center_updated, last_update_time
-    
-    # If any required parameters are missing, return early
-    if not center_object_var or not objects:
-        return
-    
-    center_object = center_object_var.get()
-
-    # Check if this is the same center we just updated
-    now = utc_now()
-    if (center_object == last_center_updated and 
-        last_update_time and 
-        (now - last_update_time).total_seconds() < 600):  # 10 minutes cache
-        update_status(f"Using cached data for center: {center_object}")
-        return
-
-    if center_object != 'Sun':
-
-        # Only fetch non-Sun centered paths when needed to avoid excessive startup time
-#        if status_display:
-#            status_display.config(text=f"Updating orbit paths for center: {center_object}...")
-#        if root:
-#            root.update()  # Force GUI to refresh
-
-        # Only fetch non-Sun centered paths when needed to avoid excessive startup time
-        update_status(f"Updating orbit paths for center: {center_object}...")
-        if root:
-            root.update()  # Force GUI to refresh            
-        
-        # Call the incremental update with the new center
-        updated, current, total, time_saved = update_orbit_paths_incrementally(
-            object_list=objects,
-            center_object_name=center_object,
-            days_ahead=730,
-            planetary_params=planetary_params,
-            parent_planets=parent_planets,
-            root_widget=root
-        )
-        
-#        if status_display:
-#            status_display.config(
-#                text=f"Updated {updated} orbit paths, {current} already current for center: {center_object}"
-#            )
-
-        # Update our cache information
-        last_center_updated = center_object
-        last_update_time = now
-        
-        update_status(
-            f"Updated {updated} orbit paths, {current} already current for center: {center_object}"
-        )
-
-
+# =============================================================================
+# DEPRECATED: plot_orbit_paths
+# Obsolete since November 4, 2026 (L-512, ruling 0: data/orbit_paths.json
+# is retired; the app no longer calls this file's loader, saver or writer).
+# It reads only what initialize loaded from data/orbit_paths.json (nothing,
+# now that the app no longer calls initialize).
+# Kept, marked, until L-509 (how obsolete code is treated) rules whether
+# it goes.
+# =============================================================================
 def plot_orbit_paths(fig, objects_to_plot, center_object_name='Sun', color_map=None, parent_planets=None):
     """
+    DEPRECATED (obsolete, L-512): see the banner.
     Plot orbit paths using time-indexed data.
     
     Parameters:

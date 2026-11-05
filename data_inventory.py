@@ -18,6 +18,9 @@ Domain: dev_tools
 Module updated: July 2026 with Anthropic's Claude Opus 4.6
 Module updated: September 16, 2026 with Anthropic's Claude Opus 5 (L-273: the output opens with a Doc-Kind: generated tag, read by
 doc_index.py; hand-editing the output is an error the tag now names).
+Module updated: November 4, 2026 with Anthropic's Claude Opus 5.5 (L-512,
+ruling 0): data/orbit_paths.json is retired, so its peek (peek_orbit) and
+its entry among the key files are removed.)
 """
 
 import os, json, pickle, sys, argparse
@@ -102,26 +105,6 @@ def gallery_inventory(gallery_path):
             total_bytes += sz
             file_count += 1
     return g, total_bytes, file_count
-
-
-def peek_orbit(path):
-    """Peek at orbit_paths.json structure."""
-    with open(path, "r") as f:
-        data = json.load(f)
-    fmts, pts = defaultdict(int), []
-    for v in data.values():
-        if isinstance(v, dict) and isinstance(v.get("data_points"), dict):
-            fmts["data_points"] += 1
-            pts.append(len(v["data_points"]))
-        elif isinstance(v, dict) and "x" in v:
-            fmts["xyz"] += 1
-            pts.append(len(v.get("x", [])))
-        else:
-            fmts["other"] += 1
-    sk = next(iter(data))
-    return (f"- entries: {len(data)}, formats: {dict(fmts)}\n"
-            f"- points/entry: min {min(pts)}, max {max(pts)}, total {sum(pts)}\n"
-            f"- sample '{sk}':\n```\n{json.dumps(data[sk], indent=2)[:800]}\n```")
 
 
 def peek_pickle(path):
@@ -209,7 +192,6 @@ def main():
 
         # Peek key files
         for label, path, fn in [
-            ("orbit_paths.json", "data/orbit_paths.json", peek_orbit),
             ("star_properties_magnitude.pkl",
              "star_data/star_properties_magnitude.pkl", peek_pickle)]:
             out.write(f"\n## {label}\n\n")

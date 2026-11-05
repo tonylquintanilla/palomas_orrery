@@ -45,6 +45,10 @@ May 28, 2026: Phase 1 re-pipe (Opus 4.7). 6 live inline info markers
     April 17, 2026: provenance audit source citations added, Gemini fact-check applied.
     Hyakutake ion tail comparison corrected (580 Mkm < Sun-Jupiter 778 Mkm).
     Provenance audit identified by Anthropic's Claude Opus 4.7
+Module updated: November 4, 2026 with Anthropic's Claude Opus 5.5 (L-512,
+slice a, part A1): _compute_maps_disintegration_position asks JPL fresh, cache=HORIZONS_CACHE from
+utc_clock, so astroquery never answers it from the copy it keeps on
+disk for a week.)
 """
 
 import numpy as np
@@ -2107,11 +2111,12 @@ def _compute_maps_disintegration_position():
     try:
         from astroquery.jplhorizons import Horizons
         from astropy.time import Time
+        from utc_clock import HORIZONS_CACHE   # L-512: JPL asked fresh
         # 2026-04-04 08:15 UTC as Julian Date
         t = Time('2026-04-04 08:15:00', scale='utc')
         obj = Horizons(id='C/2026 A1', id_type='smallbody',
                        location='@10', epochs=t.jd)
-        vec = obj.vectors()
+        vec = obj.vectors(cache=HORIZONS_CACHE)
         x = float(vec['x'][0])
         y = float(vec['y'][0])
         z = float(vec['z'][0])

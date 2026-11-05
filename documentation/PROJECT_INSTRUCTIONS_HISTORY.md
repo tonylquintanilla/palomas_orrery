@@ -4090,6 +4090,66 @@ resident.
 (Moved down from the resident protocol on 2026-11-04 when
 v3.125 made a fourth entry.)
 
+v3.123 (November 2, 2026): No rule changed in this document. FOUR
+skill bumps, one version each (L-507, carrying L-505):
+interactive-exhibit 1.29 -> 1.30, orrery-coding-conventions 1.12 ->
+1.13, horizons-orbital-mechanics 1.13 -> 1.14, gallery-cache-builder
+1.16 -> 1.17. HISTORICAL MISSIONS, SLICE 1: AN ENDED MISSION DRAWN AS
+VOYAGER IS, ITS MARKER WHERE IT WAS ON ITS LAST DAY; AND THE X MARKS
+WRITTEN INTO THE SKILLS.
+
+WHAT PROMPTED IT. The Claude Code session of Nov 2, evening (Claude
+Opus 5.5), through the python_work door, built on orrery 15dc8e34 and
+gallery c77f87f6, from
+documentation/COORD_L507_gallery_historical_missions_slice1_brief_20261102.md.
+Tony's rulings of Nov 2 (14:32, and the Fable talk after it): past
+voyages are drawn in the Solar System room on today's date over the
+mission's own dates, an ended mission's marker where it was on its
+last day. The brief's end-date check stopped the session once: JPL's
+positions for Galileo run nine days past its impact into Jupiter, on a
+path leaving Jupiter as if it never hit. Tony: "Yes stop at impact".
+And L-505's two skill corrections, re-homed to this session when L-505
+closed.
+
+WHAT CHANGED. interactive-exhibit: the Frame HUD row's right end is a
+ruler keying x marks on the axis lines, the edge numbers off (L-505);
+the Historical missions group after the Spacecraft; every spacecraft's
+box carries the dates sentence; and An ended mission, end to end, from
+the orrery's mission_end to the text box Tony approved
+(documentation/WORDS_L507_historical_missions_20261102.md).
+orrery-coding-conventions: the Marker Symbol Convention's cross row is
+info markers alone and a new x row holds the coordinate ticks; an ended
+mission's marker is the spacecraft's open diamond. horizons-orbital-
+mechanics: An Ended Mission Ends on Its mission_end, under How a Path's
+Events Are Found. gallery-cache-builder: an ended mission's last day
+asked for itself (fetch_path_last_day). Each skill's oldest of four
+version entries (1.27, 1.10, 1.11 and 1.14) moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule. Every
+sentence was read from the code, or from JPL's and NASA's answers of
+Nov 2, before it was written.
+
+THE OBLIGATION TRAVELS. This session read each skill as the file in the
+repo, each as the manifest expected: interactive-exhibit 1.29,
+gallery-assembler 1.3, gallery-cache-builder 1.16,
+horizons-orbital-mechanics 1.13, orrery-coding-conventions 1.12,
+provenance-discipline 2.36, safe-file-editing 1.14, agentic-pre-test
+1.3 and ledger-and-session-records 1.22. The account's installed copies
+cannot be seen from Code. Tony reinstalls the four bumped skills
+(Settings > Skills) and pastes this version into the Project's
+instructions on claude.ai; the next session that loads skills from the
+account confirms its copy reads interactive-exhibit 1.30,
+orrery-coding-conventions 1.13, horizons-orbital-mechanics 1.14 and
+gallery-cache-builder 1.17 before work that fires them.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.120 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-11-04 when
+v3.126 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

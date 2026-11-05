@@ -1,5 +1,16 @@
 #!/usr/bin/env python3
 """
+=============================================================================
+DEPRECATED: verify_orbit_cache.py
+Obsolete since November 4, 2026 (L-512, ruling 0, Tony: "a heavy file that
+is wrong and nobody reads is a bad breadcrumb leading nowhere"):
+data/orbit_paths.json is retired, and the app no longer reads or writes it.
+Run on purpose, this script still reads the file (by default
+./orbit_paths.json, or the path given), backs it up, and with --repair
+rewrites it. Kept, marked, until L-509 (how obsolete code is treated) rules
+whether it goes.
+=============================================================================
+
 verify_orbit_cache.py - Safely verify and repair orbit_paths.json
 
 This script will:
@@ -11,6 +22,9 @@ This script will:
 
 Role: devtool
 Domain: dev_tools
+
+Module updated: November 4, 2026 with Anthropic's Claude Opus 5.5 (L-512,
+ruling 0): marked DEPRECATED; see the banner.)
 """
 
 import json

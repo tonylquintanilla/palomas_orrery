@@ -29,16 +29,18 @@ TWO KINDS OF READING
 
 ASKING JPL FRESH
 
-    HORIZONS_CACHE is False, and every astroquery call on the data path
-    passes it as cache=. astroquery keeps each answer from JPL on disk
+    HORIZONS_CACHE is False, and every astroquery call in the repository
+    passes it as cache= (since L-512, Nov 4, 2026, checked across the
+    whole repository on Python's parser by test_orbit_cache.TestFreshCalls;
+    before then nine calls off the data path did not). astroquery keeps each answer from JPL on disk
     for a week (astroquery.cache_conf.cache_timeout, 604800 s) and hands
     it back when the same question is asked again. On 2026-10-29 the
     website's builder was handed an earlier run's orbit for 2026 ED138
-    after JPL had revised it (L-399). The orrery keeps its own caches
-    (data/osculating_cache.json, data/orbit_paths.json), so a record that
-    says "fetched" today must have been fetched today. The cost is one
-    JPL round trip when the same plot is asked twice, which the orrery's
-    own orbit cache already absorbs.
+    after JPL had revised it (L-399). The orrery keeps its own cache
+    (data/osculating_cache.json; data/orbit_paths.json was retired by
+    L-512), so a record that says "fetched" today must have been fetched
+    today. The cost is one JPL round trip when the same plot is asked
+    twice, which the orrery's own orbit cache already absorbs.
 
 Key functions:
     utc_now()           the date and time now, UTC, plain datetime
@@ -53,6 +55,9 @@ palomas_orrery_dashboard.py
 
 Module updated: October 29, 2026 with Anthropic's Claude Opus 5.5 (L-504,
 first slice: written).
+Module updated: November 4, 2026 with Anthropic's Claude Opus 5.5 (L-512,
+slice a, part A1): ASKING JPL FRESH now speaks for the whole repository,
+and names data/orbit_paths.json as retired. No code changed.
 
 Role: utility
 Domain: utilities

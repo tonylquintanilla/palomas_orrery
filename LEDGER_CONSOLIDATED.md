@@ -1599,14 +1599,90 @@ as an archive of the prioritization thinking -- no cleanup on close.
   - The three fallback lists, same four names: palomas_orrery.py lines
     4568, 5961 (`ANALYTICAL_POSITION_FALLBACK`) and 7062
     (`ANALYTICAL_ANIMATION_FALLBACK`). Part 2 reads one list.
-**Gap:** Tony's rulings on the map's seven questions (0, the saved
-file's dates, added by the map; 1 to 6 from the brief); then part 2 as
-ruled; then horizons-orbital-mechanics' one bump for both parts (its
-L-510 sentence "draws the body by neither its plan nor an orbit"
-corrected by part 1, and the Query Mechanics claim that both
-instruments ask fresh corrected by the map), with the protocol's entry.
-- **Tony-action (decide):** the map's seven rulings, one at a time.
-- **Tony-action (do):** commit part 1 when its look is done.
+- **Rulings, 2026-11-04, 12:36 to 12:56 Chicago**, in the map's last
+  section, "Tony's rulings, November 4, 2026" (the coordinating session,
+  Claude Fable 5.1). Ruling 0: delete data/orbit_paths.json, its writer
+  and the "Update Orbit Data?" dialog. Two mechanisms: propagation from
+  the committed osculating elements for orbit bodies (slice b), and a
+  committed positions record for path bodies, written by the orrery's
+  night (slice c). The order (a), (b), (c), each with Tony's look.
+- **The change to the rulings, in Tony's prompt of 2026-11-04**
+  (`documentation/COORD_L512_slice_a_prompt_20261104.md`): "One change
+  to the rulings, made here: the fresh switch's check covers the whole
+  repository, which replaces "palomas_orrery_helpers.py added to
+  TestUtcClock"."
+- **Slice a, part A1, built 2026-11-04, evening (Claude Code, Opus
+  5.5) at 79018c0c, not committed.**
+  - The inventory, by test and by reading (live = called):
+    palomas_orrery.py: startup's `orbit_data_manager.initialize` and the
+    health summary and restore-point display (live); the static worker's
+    cache check, its "Update Orbit Data?" dialog and its call of
+    `update_orbit_paths_incrementally` (live); the animation worker's
+    call of it, no dialog (live); `update_orbit_paths` and
+    `plot_orbit_paths` (uncalled); and, added by the inventory:
+    `handle_update_dialog`, an uncalled copy of the dialog, with its two
+    session flags; `orbit_data_manager._startup_complete = True` at
+    startup (live, feeding only the loader's messages); and
+    SKIP_HORIZONS_TRAJECTORY, a skip list that guarded only the writer.
+    orbit_data_manager.py: initialize, load_orbit_paths (restores a
+    backup over the main file: seen in the old code's test with the file
+    absent), repair_cache_on_load (uncalled), save_orbit_paths,
+    update_orbit_paths_incrementally and the helpers only it used, its
+    own on_center_change (uncalled), get_orbit_data_for_plotting,
+    get_data_stats, plot_orbit_paths (uncalled). palomas_orrery_helpers.
+    cleanup_old_orbits (imported; its call commented out).
+    data_inventory.py's peek and entry. The dashboard's Verify Orbit
+    Cache and Export Orbit Cache, and their scripts. test_orbit_cache.
+    TestOrbitCache (test). Comment only: close_approach_data.py,
+    utc_clock.py's docstring, palomas_orrery.py's commented lines.
+  - Removed: every live connection above; the writer and what only it
+    served (determine_interval_for_object, fetch_orbit_path,
+    calculate_planet9_orbit, fetch_orbit_path_by_dates,
+    merge_orbit_data, fetch_complete_orbit_path, on_center_change);
+    handle_update_dialog; SKIP_HORIZONS_TRAJECTORY; data_inventory.py's
+    peek_orbit and its entry. Kept: utc_to_tdb and
+    query_horizons_elements (the osculating cache's). Marked DEPRECATED
+    (L-509 not yet ruled): verify_orbit_cache.py, export_orbit_cache.py,
+    cleanup_old_orbits, update_orbit_paths, plot_orbit_paths, and in
+    orbit_data_manager.py the retained uncalled twelve. Still reading the
+    file if run on purpose: verify_orbit_cache.py (and rewrites it with
+    --repair), export_orbit_cache.py (which then stops, "caches not
+    found", once the file is gone), cleanup_old_orbits (rewrites it),
+    load_orbit_paths, initialize, repair_cache_on_load, save_orbit_paths
+    (writes), get_data_stats (its size). No removal reached another
+    store.
+  - Proved, on throwaway copies, JPL reachable, every access to a path
+    containing "orbit_paths" logged (open, rename, remove by audit hook;
+    exists, stat, size and time by wrapper): the old code touched the
+    file 18 times at startup and 15 in the animation (a write among
+    them) with the file present, 20 and 15 with it absent (restoring it
+    from a backup); the new code 0 times in startup, the static plot and
+    the animation, present and absent. The figures were the same, 48 and
+    49 traces. Tony's real files unchanged in size and time.
+  - The fresh switch at the nine calls the scan found, the same nine the
+    prompt names: palomas_orrery_helpers.fetch_trajectory and
+    fetch_orbit_path; spacecraft_encounters.resolve_encounter_time (two)
+    and fetch_position_at_encounter; comet_visualization_shells.
+    _compute_maps_disintegration_position; earth_pole_of_date.fetch_pole
+    and fetch_orbit; earth_pole_live_check._earth_orbit.
+  - test_orbit_cache.TestFreshCalls, on Python's parser, over every .py
+    but the tests and documentation/ (146 files, 20 calls; 2 not JPL,
+    provenance_history.compare's Counter.elements(), on NOT_JPL; 1
+    get_query_payload=True). Registered in main(); its last line names
+    the files and calls. The line-text check on DATA_PATH_MODULES is
+    replaced; their clock checks stay. Planted (earth_pole_live_check's
+    call without the switch): the maintenance run's Orbit cache step
+    failed on it; restored (fingerprint equal); passed.
+  - horizons-orbital-mechanics 1.16 -> 1.17 (the L-470 paragraph, the
+    named failure with part 1's second link, the skip lists now five,
+    the fresh switch repository-wide), protocol v3.126.
+**Gap:** Tony's look at A1, wifi off and on; then A2 (ruling 1: "no
+such body" is not "JPL unreachable"), then slices b and c. The three
+analytical fallback lists stay until slice b.
+- **Tony-action (do):** reinstall horizons-orbital-mechanics (1.17) and
+  paste protocol v3.126 into the Project.
+- **Tony-action (do):** last in the run order, delete
+  data/orbit_paths.json, .backup and .backup_old by hand.
 **Ref:** `path_or_orbit.py`; `test_path_or_orbit.py`;
 `idealized_orbits.py`; `palomas_orrery.py`; `palomas_orrery_helpers.py`;
 `orbit_data_manager.py`; L-510; L-470 (C/2025 K1's renumbering); L-504

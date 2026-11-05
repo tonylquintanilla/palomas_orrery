@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.125 | November 4, 2026
+Tony Quintanilla, PE | Claude | v3.126 | November 4, 2026
 
-Cut from eab623f5 at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 79018c0c at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -489,7 +489,7 @@ safe-file-editing            1.14 Editing existing files, patch scripts,
                                   sed/regex edits, encoding checks (portable)
 agentic-pre-test             1.3  BEFORE delivering complete files/agentic
                                   code; after data-content sweeps
-horizons-orbital-mechanics   1.16 Horizons queries, centers, frames, osculating
+horizons-orbital-mechanics   1.17 Horizons queries, centers, frames, osculating
                                   elements, encounters, comet record pinning,
                                   2xr uncertainties, periods, the drawn orbit's
                                   centre, the Horizons check
@@ -1298,6 +1298,52 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.126 (November 4, 2026): No rule changed in this document. ONE
+skill bump: horizons-orbital-mechanics 1.16 -> 1.17 (L-512, part 1 and
+slice a's part A1). THE SAVED-PATH FILE IS RETIRED, AND EVERY JPL
+QUESTION IN THE REPOSITORY IS ASKED FRESH.
+
+WHAT PROMPTED IT. Two Claude Code sessions of Nov 4 (Claude Opus 5.5),
+through the python_work door. Part 1, built on orrery 3fb14c26, from
+documentation/COORD_L512_jpl_fallbacks_brief_20261104.md: the orrery's
+plot decides path or orbit by the e of a body's typed elements when JPL's
+database has no record (6AC4721). Part A1, built on orrery 79018c0c, from
+documentation/COORD_L512_slice_a_prompt_20261104.md, on Tony's rulings of
+Nov 4, 12:36 to 12:56 Chicago, in
+documentation/MAP_L512_jpl_fallbacks_20261104.md. Ruling 0: "a heavy file
+that is wrong and nobody reads is a bad breadcrumb leading nowhere." And
+the prompt's change to the rulings: "the fresh switch's check covers the
+whole repository".
+
+WHAT CHANGED. horizons-orbital-mechanics: under Which Record Serves a
+Body, the L-470 paragraph no longer sends a session to compare saved
+paths in data/orbit_paths.json, which is retired, and the skip lists are
+five (SKIP_HORIZONS_TRAJECTORY went with the file's writer; Gonggong's
+line corrected to its removal of Oct 23). Under A Small Body Is Drawn by
+Its Database e, the named failure carries part 1's second link. Under
+Query Mechanics, nine calls that asked without the fresh switch, and
+test_orbit_cache.TestFreshCalls, which now holds every .py in the
+repository to it on Python's parser. Its oldest of four version entries
+(1.14) moved to documentation/SKILL_HISTORIES.md, by the three-entry
+rule. Every sentence was read from the code at 79018c0c and the session's
+own edits before it was written.
+
+THE OBLIGATION TRAVELS. This session read each skill as the file in the
+repo, each as the manifest expected: horizons-orbital-mechanics 1.16,
+orrery-coding-conventions 1.13, gallery-cache-builder 1.17,
+provenance-discipline 2.36, safe-file-editing 1.14, agentic-pre-test
+1.3 and ledger-and-session-records 1.22. Tony reinstalls
+horizons-orbital-mechanics (Settings > Skills) and pastes this version
+into the Project's instructions on claude.ai; the next session that
+loads it from the account confirms its copy reads 1.17 before work
+that fires it.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.123 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.125 (November 4, 2026): No rule changed in this document. ONE
 skill bump: horizons-orbital-mechanics 1.15 -> 1.16 (L-510, part 1). A
 SMALL BODY IS DRAWN AS A PATH OR AN ORBIT BY ITS DATABASE e.
@@ -1378,63 +1424,6 @@ that fires it.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.121 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.123 (November 2, 2026): No rule changed in this document. FOUR
-skill bumps, one version each (L-507, carrying L-505):
-interactive-exhibit 1.29 -> 1.30, orrery-coding-conventions 1.12 ->
-1.13, horizons-orbital-mechanics 1.13 -> 1.14, gallery-cache-builder
-1.16 -> 1.17. HISTORICAL MISSIONS, SLICE 1: AN ENDED MISSION DRAWN AS
-VOYAGER IS, ITS MARKER WHERE IT WAS ON ITS LAST DAY; AND THE X MARKS
-WRITTEN INTO THE SKILLS.
-
-WHAT PROMPTED IT. The Claude Code session of Nov 2, evening (Claude
-Opus 5.5), through the python_work door, built on orrery 15dc8e34 and
-gallery c77f87f6, from
-documentation/COORD_L507_gallery_historical_missions_slice1_brief_20261102.md.
-Tony's rulings of Nov 2 (14:32, and the Fable talk after it): past
-voyages are drawn in the Solar System room on today's date over the
-mission's own dates, an ended mission's marker where it was on its
-last day. The brief's end-date check stopped the session once: JPL's
-positions for Galileo run nine days past its impact into Jupiter, on a
-path leaving Jupiter as if it never hit. Tony: "Yes stop at impact".
-And L-505's two skill corrections, re-homed to this session when L-505
-closed.
-
-WHAT CHANGED. interactive-exhibit: the Frame HUD row's right end is a
-ruler keying x marks on the axis lines, the edge numbers off (L-505);
-the Historical missions group after the Spacecraft; every spacecraft's
-box carries the dates sentence; and An ended mission, end to end, from
-the orrery's mission_end to the text box Tony approved
-(documentation/WORDS_L507_historical_missions_20261102.md).
-orrery-coding-conventions: the Marker Symbol Convention's cross row is
-info markers alone and a new x row holds the coordinate ticks; an ended
-mission's marker is the spacecraft's open diamond. horizons-orbital-
-mechanics: An Ended Mission Ends on Its mission_end, under How a Path's
-Events Are Found. gallery-cache-builder: an ended mission's last day
-asked for itself (fetch_path_last_day). Each skill's oldest of four
-version entries (1.27, 1.10, 1.11 and 1.14) moved to
-documentation/SKILL_HISTORIES.md, by the three-entry rule. Every
-sentence was read from the code, or from JPL's and NASA's answers of
-Nov 2, before it was written.
-
-THE OBLIGATION TRAVELS. This session read each skill as the file in the
-repo, each as the manifest expected: interactive-exhibit 1.29,
-gallery-assembler 1.3, gallery-cache-builder 1.16,
-horizons-orbital-mechanics 1.13, orrery-coding-conventions 1.12,
-provenance-discipline 2.36, safe-file-editing 1.14, agentic-pre-test
-1.3 and ledger-and-session-records 1.22. The account's installed copies
-cannot be seen from Code. Tony reinstalls the four bumped skills
-(Settings > Skills) and pastes this version into the Project's
-instructions on claude.ai; the next session that loads skills from the
-account confirms its copy reads interactive-exhibit 1.30,
-orrery-coding-conventions 1.13, horizons-orbital-mechanics 1.14 and
-gallery-cache-builder 1.17 before work that fires them.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.120 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

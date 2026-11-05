@@ -21,11 +21,16 @@ another date, 'not_fetched_for_date', so the body hover states no
 accuracy for it.)
 Module updated: October 20, 2026 with Anthropic's Claude Opus 5.5 (L-410:
 the two corona spheres' tooltip strings are no longer imported.)
+Module updated: November 4, 2026 with Anthropic's Claude Opus 5.5 (L-512,
+slice a, part A1): fetch_trajectory, and fetch_orbit_path (the special fetch), asks JPL fresh, cache=HORIZONS_CACHE from
+utc_clock, so astroquery never answers it from the copy it keeps on
+disk for a week.)
 """
 #Paloma's Orrery - Solar System Visualization Tool
 
 # Import necessary libraries
 from astroquery.jplhorizons import Horizons
+from utc_clock import HORIZONS_CACHE                        # L-512: JPL asked fresh
 import numpy as np
 from datetime import datetime, timedelta
 import calendar
@@ -382,7 +387,7 @@ def fetch_trajectory(object_id, dates_list, center_id='Sun', id_type=None,
         
         # Query Horizons
         obj = Horizons(id=object_id, id_type=id_type, location='@' + center_id, epochs=epochs)
-        vectors = obj.vectors()
+        vectors = obj.vectors(cache=HORIZONS_CACHE)   # L-512: asked fresh
 
         # Use a small tolerance when matching returned JD to requested epochs
         tolerance = 1e-3    # original 1e-5 does not work for spacecraft BepiColombo; loosening the tolerance
@@ -595,7 +600,7 @@ def fetch_orbit_path(obj_info, start_date, end_date, interval, center_id='@0', i
 
         # Create Horizons object and fetch vectors        
         obj = Horizons(id=object_id, id_type=id_type, location=location, epochs=epochs)
-        eph = obj.vectors()
+        eph = obj.vectors(cache=HORIZONS_CACHE)   # L-512: asked fresh
         
         # Process the ephemerides table to extract x, y, z coordinates
         x_coords = list(eph['x'])
@@ -793,9 +798,17 @@ def print_planet_positions(positions):
         print(f"{name:15} Position: {pos_str:35} Distance from center: {dist_str}")
     print("=" * 50)
 
-# Weekly cleanup function -- deprecated
+# =============================================================================
+# DEPRECATED: cleanup_old_orbits
+# Obsolete since November 4, 2026 (L-512, ruling 0: data/orbit_paths.json is
+# retired). Its one call in palomas_orrery.py is commented out. Run on
+# purpose, it still reads data/orbit_paths.json and rewrites it without the
+# entries it judges old. Kept, marked, until L-509 (how obsolete code is
+# treated) rules whether it goes.
+# =============================================================================
 def cleanup_old_orbits():
-    """Remove orbit data older than 30 days"""
+    """DEPRECATED (obsolete, L-512): see the banner.
+    Remove orbit data older than 30 days"""
     try:
         # Check if it's been 7 days since last cleanup
         should_cleanup = True

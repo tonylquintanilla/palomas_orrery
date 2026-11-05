@@ -37,12 +37,17 @@ Module updated: November 3, 2026 with Anthropic's Claude Opus 5.5 (L-476:
 an encounter's time is resolved across a planned spacecraft's span as
 its path plan gives it, path_drawing.entry_span, not its typed dates.)
 
+Module updated: November 4, 2026 with Anthropic's Claude Opus 5.5 (L-512,
+slice a, part A1): resolve_encounter_time (both passes), and fetch_position_at_encounter, asks JPL fresh, cache=HORIZONS_CACHE from
+utc_clock, so astroquery never answers it from the copy it keeps on
+disk for a week.)
 """
 
 import numpy as np
 import plotly.graph_objects as go
 from datetime import datetime, timedelta
 from astroquery.jplhorizons import Horizons
+from utc_clock import HORIZONS_CACHE   # L-512: JPL asked fresh
 from astropy.time import Time
 from constants_new import KM_PER_AU
 
@@ -634,7 +639,7 @@ def resolve_encounter_time(enc, sc_id, obj_start_date, obj_end_date, objects):
             },
             id_type='id'
         )
-        coarse_vecs = coarse.vectors(refplane='ecliptic')
+        coarse_vecs = coarse.vectors(refplane='ecliptic', cache=HORIZONS_CACHE)
         if len(coarse_vecs) == 0:
             print(f"[RESOLVE] Coarse pass returned no data", flush=True)
             return None
@@ -669,7 +674,7 @@ def resolve_encounter_time(enc, sc_id, obj_start_date, obj_end_date, objects):
             },
             id_type='id'
         )
-        fine_vecs = fine.vectors(refplane='ecliptic')
+        fine_vecs = fine.vectors(refplane='ecliptic', cache=HORIZONS_CACHE)
         if len(fine_vecs) == 0:
             print(f"[RESOLVE] Fine pass returned no data, using coarse result", flush=True)
             fine_vecs = coarse_vecs
@@ -982,7 +987,7 @@ def fetch_position_at_encounter(encounter, center_id, spacecraft_id):
             id_type='id'
         )
 
-        vectors = obj.vectors(refplane='ecliptic')
+        vectors = obj.vectors(refplane='ecliptic', cache=HORIZONS_CACHE)
         if len(vectors) > 0:
             pos = {
                 'x': float(vectors['x'][0]),

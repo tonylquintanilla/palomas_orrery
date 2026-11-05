@@ -48,6 +48,10 @@ Module updated: September 23, 2026 with Anthropic's Claude Opus 5.5
 (L-322 Stage D, patch D4: PASS and FAIL judged against ERFA's true
 obliquity with a 1-arcsecond allowance, where D3 judged against the
 mean with 10; the mean is still printed)
+Module updated: November 4, 2026 with Anthropic's Claude Opus 5.5 (L-512,
+slice a, part A1): _earth_orbit asks JPL fresh, cache=HORIZONS_CACHE from
+utc_clock, so astroquery never answers it from the copy it keeps on
+disk for a week.)
 """
 
 import math
@@ -71,8 +75,9 @@ ALLOWANCE_ARCSEC = 1.0
 
 def _earth_orbit(jd):
     from astroquery.jplhorizons import Horizons
+    from utc_clock import HORIZONS_CACHE   # L-512: JPL asked fresh
     table = Horizons(id='399', location='@sun', epochs=jd).elements(
-        refplane='ecliptic')
+        refplane='ecliptic', cache=HORIZONS_CACHE)
     return float(table['incl'][0]), float(table['Omega'][0])
 
 

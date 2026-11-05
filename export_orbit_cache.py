@@ -1,4 +1,15 @@
 """
+=============================================================================
+DEPRECATED: export_orbit_cache.py
+Obsolete since November 4, 2026 (L-512, ruling 0): data/orbit_paths.json is
+retired. Run on purpose, this script still reads data/orbit_paths.json and
+data/osculating_cache.json (read-only), and stops with "caches not found"
+when either is missing, so once Tony deletes the first it cannot run at all.
+The website's served files are written by the gallery's nightly builder
+(tools/gallery_cache_builder.py), not by this script. Kept, marked, until
+L-509 (how obsolete code is treated) rules whether it goes.
+=============================================================================
+
 export_orbit_cache.py - Phase 1b desktop devtool: read the local orbit caches
 and write web-servable orbit/position files for the interactive gallery.
 
@@ -164,6 +175,9 @@ design handoff v0.6; subtraction path retired).
 
 Module updated: July 2026 with Anthropic's Claude Opus 5 (L-163 Phase 3:
 corrected stale 'add a ROLE_MAP entry' step -- roles are docstring tags now).
+
+Module updated: November 4, 2026 with Anthropic's Claude Opus 5.5 (L-512,
+ruling 0): marked DEPRECATED; see the banner.)
 
 Role: devtool
 Domain: dev_tools

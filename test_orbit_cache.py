@@ -33,7 +33,18 @@ able to fail.)
 Module updated: November 3, 2026 with Anthropic's Claude Opus 5.5 (L-476:
 path_drawing.py, which asks JPL for a path by its plan, joins the data
 path's modules.)
+Module updated: November 4, 2026 with Anthropic's Claude Opus 5.5 (L-512,
+slice a, part A1): TestFreshCalls, the fresh switch checked across the
+whole repository on Python's parser (every call of vectors, elements or
+ephemerides, or their _async forms, across line breaks, must pass
+cache=HORIZONS_CACHE; a reference that is not a direct call is flagged; a
+file that does not parse fails; non-JPL calls sit on NOT_JPL, printed
+every run). It replaces the line-text check on DATA_PATH_MODULES, which
+keep their clock checks. Registered in main(), whose last line names the
+files and calls it examined. TestOrbitCache now tests functions of
+orbit_data_manager.py marked DEPRECATED (data/orbit_paths.json retired).)
 """
+import ast
 import json
 import os
 import re
@@ -274,7 +285,6 @@ DATA_PATH_MODULES = [
 ]
 _LOCAL_CLOCK = re.compile(r'datetime\.now\(\s*\)|datetime\.today\(\)|'
                           r'date\.today\(\)|\.utcnow\(\)')
-_JPL_CALL = re.compile(r'\.(vectors|elements|ephemerides)(_async)?\(')
 
 
 def _local_clock_lines(text):
@@ -283,13 +293,137 @@ def _local_clock_lines(text):
             if _LOCAL_CLOCK.search(line) and not line.lstrip().startswith('#')]
 
 
-def _unfresh_calls(text):
-    """astroquery calls that do not say cache=, so they may be answered from
-    the copy astroquery keeps on disk for a week. A call that only builds the
-    request (get_query_payload=True) asks JPL nothing and is not counted."""
-    return [line.strip() for line in text.splitlines()
-            if _JPL_CALL.search(line) and not line.lstrip().startswith('#')
-            and 'cache=' not in line and 'get_query_payload' not in line]
+# L-512 (slice a, part A1): the fresh switch is checked across the whole
+# repository, on Python's parser, not on line text (Tony's prompt of Nov 4,
+# 2026: "the fresh switch's check covers the whole repository"). Until then
+# a line-text check looked only at DATA_PATH_MODULES, and nine JPL calls
+# elsewhere asked without the switch, so astroquery could answer them from
+# the copy it keeps on disk for a week.
+JPL_METHODS = ('vectors', 'elements', 'ephemerides',
+               'vectors_async', 'elements_async', 'ephemerides_async')
+# Calls of those names that are not astroquery: (file, function, method,
+# reason). Printed every run.
+NOT_JPL = [
+    ('provenance_history.py', 'compare', 'elements',
+     "collections.Counter.elements(): a multiset's members, not JPL"),
+]
+# Not scanned: documentation/ (its old patch scripts carry code in strings)
+# and the tests, which plant unfresh calls on purpose.
+SKIP_DIRS = ('documentation', '.git', '__pycache__')
+
+
+def _is_test(name):
+    return name.startswith('test_') or name.endswith('_test.py')
+
+
+def repo_py_files(root):
+    """Every .py file the fresh check reads, as paths relative to root."""
+    out = []
+    for folder, dirs, files in os.walk(root):
+        dirs[:] = sorted(d for d in dirs
+                         if d not in SKIP_DIRS and not d.startswith('.'))
+        for name in sorted(files):
+            if name.endswith('.py') and not _is_test(name):
+                out.append(os.path.relpath(os.path.join(folder, name), root))
+    return out
+
+
+def _says_fresh(call):
+    """True when the call passes cache=HORIZONS_CACHE as a keyword (the
+    name, or utc_clock.HORIZONS_CACHE). cache=True, a comment, a string or
+    a **kwargs that might hold it does not count."""
+    for kw in call.keywords:
+        if kw.arg == 'cache':
+            v = kw.value
+            return ((isinstance(v, ast.Name) and v.id == 'HORIZONS_CACHE') or
+                    (isinstance(v, ast.Attribute) and v.attr == 'HORIZONS_CACHE'))
+    return False
+
+
+def _payload_only(call):
+    """get_query_payload=True written in the call: it builds the request and
+    asks JPL nothing."""
+    return any(kw.arg == 'get_query_payload' and
+               isinstance(kw.value, ast.Constant) and kw.value.value is True
+               for kw in call.keywords)
+
+
+def fresh_scan(text, filename, exceptions=None):
+    """(calls, problems, excepted, payload) for one file's source text.
+
+    calls      every direct call of a JPL method name found
+    problems   each call without cache=HORIZONS_CACHE, each reference to a
+               JPL method name that is not a direct call (saved under
+               another name, or asked by getattr), or the file not parsing
+    excepted   calls on the NOT_JPL list
+    payload    calls exempt as get_query_payload=True
+    """
+    if exceptions is None:
+        exceptions = NOT_JPL
+    base = os.path.basename(filename)
+    try:
+        tree = ast.parse(text, filename)
+    except SyntaxError as exc:
+        return [], ['%s: does not parse (%s)' % (filename, exc.msg)], [], []
+    parent = {}
+    for node in ast.walk(tree):
+        for child in ast.iter_child_nodes(node):
+            parent[child] = node
+
+    def function_of(node):
+        while node in parent:
+            node = parent[node]
+            if isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)):
+                return node.name
+        return '<module>'
+
+    calls, problems, excepted, payload = [], [], [], []
+    for node in ast.walk(tree):
+        if (isinstance(node, ast.Call) and isinstance(node.func, ast.Name)
+                and node.func.id == 'getattr' and len(node.args) > 1
+                and isinstance(node.args[1], ast.Constant)
+                and node.args[1].value in JPL_METHODS):
+            problems.append('%s:%d in %s: getattr(..., %r) asks a JPL method '
+                            'by name; call it directly with '
+                            'cache=HORIZONS_CACHE'
+                            % (filename, node.lineno, function_of(node),
+                               node.args[1].value))
+        if not (isinstance(node, ast.Attribute) and node.attr in JPL_METHODS):
+            continue
+        fn = function_of(node)
+        where = '%s:%d in %s: .%s' % (filename, node.lineno, fn, node.attr)
+        call = parent.get(node)
+        if not (isinstance(call, ast.Call) and call.func is node):
+            problems.append('%s is not called where it is named (saved under '
+                            'another name?); call it directly with '
+                            'cache=HORIZONS_CACHE' % where)
+            continue
+        calls.append(where)
+        rule = [e for e in exceptions
+                if e[0] == base and e[1] == fn and e[2] == node.attr]
+        if rule:
+            excepted.append('%s() -- %s' % (where, rule[0][3]))
+        elif _payload_only(call):
+            payload.append(where + '(get_query_payload=True)')
+        elif not _says_fresh(call):
+            problems.append('%s() without cache=HORIZONS_CACHE' % where)
+    return calls, problems, excepted, payload
+
+
+def fresh_scan_repo(root):
+    """The fresh check over the repository: (files, calls, problems,
+    excepted, payload)."""
+    files = repo_py_files(root)
+    calls, problems, excepted, payload = [], [], [], []
+    for rel in files:
+        with open(os.path.join(root, rel), encoding='utf-8') as f:
+            text = f.read()
+        c, p, e, q = fresh_scan(text, rel)
+        calls += c; problems += p; excepted += e; payload += q
+    return files, calls, problems, excepted, payload
+
+
+FRESH_SUMMARY = {}
 
 
 class TestUtcClock(unittest.TestCase):
@@ -334,26 +468,26 @@ class TestUtcClock(unittest.TestCase):
         self.assertIsNone(ocm.calculate_age_days(
             {'metadata': {'fetched': 'not a date'}}))
 
-    def test_data_path_reads_no_local_clock_and_asks_fresh(self):
+    def test_data_path_reads_no_local_clock(self):
+        # L-512: asking JPL fresh is checked across the whole repository by
+        # TestFreshCalls; this keeps the clock checks on the data path.
         here = os.path.dirname(os.path.abspath(__file__))
         found = {}
         for name in DATA_PATH_MODULES:
             with open(os.path.join(here, name), encoding='utf-8') as f:
                 text = f.read()
-            bad = _local_clock_lines(text) + _unfresh_calls(text)
+            bad = _local_clock_lines(text)
             if 'utc_clock' not in text:
                 bad.append('does not import utc_clock')
             if bad:
                 found[name] = bad
-        self.assertEqual(found, {}, 'local clock or a cached JPL call: %s' % found)
+        self.assertEqual(found, {}, 'local clock, or no utc_clock: %s' % found)
 
     def test_these_checks_can_fail(self):
         # Each check above, shown catching the fault it exists for.
         self.assertEqual(len(_local_clock_lines('    now = datetime.now()\n')), 1)
         self.assertEqual(len(_local_clock_lines('    d = datetime.date.today()\n')), 1)
         self.assertEqual(_local_clock_lines('#    now = datetime.now()\n'), [])
-        self.assertEqual(len(_unfresh_calls('        vec = obj.vectors()\n')), 1)
-        self.assertEqual(_unfresh_calls('    p = h.vectors(get_query_payload=True)\n'), [])
 
         # The reader as it was before L-504, given a new stamp: it returns
         # nothing, so test_cache_age_reads_both_forms would fail on it.
@@ -365,6 +499,59 @@ class TestUtcClock(unittest.TestCase):
                 return None
         import utc_clock
         self.assertIsNone(old_reader({'metadata': {'fetched': utc_clock.utc_stamp()}}))
+
+
+class TestFreshCalls(unittest.TestCase):
+    """L-512: every astroquery call in the repository asks JPL fresh,
+    cache=HORIZONS_CACHE, found on Python's parser across line breaks.
+    The tests and documentation/ are not scanned."""
+
+    def test_every_jpl_call_asks_fresh(self):
+        here = os.path.dirname(os.path.abspath(__file__))
+        files, calls, problems, excepted, payload = fresh_scan_repo(here)
+        FRESH_SUMMARY.update(files=len(files), calls=len(calls),
+                             excepted=excepted, payload=len(payload))
+        print('\n[FRESH CHECK] %d .py files examined, %d JPL-named calls '
+              'found; %d build a request only (get_query_payload=True)'
+              % (len(files), len(calls), len(payload)))
+        for line in excepted:
+            print('[FRESH CHECK] not JPL, excepted: %s' % line)
+        for line in problems:
+            print('[FRESH CHECK] FAIL %s' % line)
+        self.assertTrue(len(files) > 0 and len(calls) > 0,
+                        'the fresh check examined nothing')
+        self.assertEqual(problems, [])
+
+    def test_the_fresh_check_can_fail(self):
+        def probs(src, exceptions=()):
+            return fresh_scan(src, 'planted.py', list(exceptions))[1]
+        ok = 'def f(o):\n    return o.vectors(cache=HORIZONS_CACHE)\n'
+        self.assertEqual(probs(ok), [])
+        # across a line break, and through utc_clock's own name
+        self.assertEqual(probs('def f(o):\n    return o.elements(\n'
+                               '        refplane="earth",\n'
+                               '        cache=utc_clock.HORIZONS_CACHE)\n'), [])
+        planted = {
+            'no keyword': 'def f(o):\n    return o.vectors()\n',
+            'cache=True': 'def f(o):\n    return o.vectors(cache=True)\n',
+            'a comment': 'def f(o):\n    return o.ephemerides()  # cache=HORIZONS_CACHE\n',
+            'a string': 'def f(o):\n    return o.vectors("cache=HORIZONS_CACHE")\n',
+            '**kwargs': 'def f(o, **k):\n    return o.vectors(**k)\n',
+            'an _async form': 'def f(o):\n    return o.vectors_async()\n',
+            'payload False': 'def f(o):\n    return o.vectors(get_query_payload=False)\n',
+            'saved under another name': 'def f(o):\n    g = o.vectors\n    return g(cache=HORIZONS_CACHE)\n',
+            'asked by getattr': 'def f(o):\n    return getattr(o, "elements")(cache=HORIZONS_CACHE)\n',
+            'a file that does not parse': 'def f(o:\n',
+        }
+        for label, src in planted.items():
+            self.assertTrue(probs(src), 'not caught: %s' % label)
+        self.assertEqual(probs('def f(o):\n    return o.vectors(get_query_payload=True)\n'), [])
+        # the exceptions list names a file, a function and a method
+        counter = 'def compare(c):\n    return sorted(c.elements())\n'
+        rule = [('planted.py', 'compare', 'elements', 'Counter')]
+        self.assertEqual(probs(counter, rule), [])
+        self.assertTrue(probs(counter))
+        self.assertTrue(probs(counter.replace('compare', 'other'), rule))
 
 
 def main():
@@ -385,6 +572,7 @@ def main():
     loader = unittest.TestLoader()
     suite = loader.loadTestsFromTestCase(TestOrbitCache)
     suite.addTests(loader.loadTestsFromTestCase(TestUtcClock))
+    suite.addTests(loader.loadTestsFromTestCase(TestFreshCalls))   # L-512
     result = unittest.TextTestRunner(verbosity=2).run(suite)
 
     total = result.testsRun
@@ -410,10 +598,14 @@ def main():
             bad, total, "; and files were left behind: %s" % ", ".join(left)
             if left else ""))
         return 1
+    fresh = FRESH_SUMMARY
     print("\nAll %d orbit cache tests passed: cache loads, old formats "
           "convert, corrupted entries are dropped; the clock reads UTC and "
-          "both forms of the fetched stamp read back; nothing left behind."
-          % total)
+          "both forms of the fetched stamp read back; the repository-wide "
+          "fresh check examined %s .py files and %s JPL calls, every one "
+          "asked fresh (%d not JPL, excepted); nothing left behind."
+          % (total, fresh.get('files', '?'), fresh.get('calls', '?'),
+             len(fresh.get('excepted', []))))
     return 0
 
 

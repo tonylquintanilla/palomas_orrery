@@ -1302,3 +1302,13 @@ Period Depends on Its Centre, Pluto's period is asked of the
 Pluto-Charon barycentre (Tony, 2026-10-29: "Centre of mass"). Each
 fact was read from the code at 571b9bf4 and b55109f2, and JPL's
 answers fetched, before it was written.
+Earlier: 1.14 | 2026-11-02, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 15dc8e34. v1.14 (L-507) adds An Ended Mission Ends on
+Its mission_end to How a Path's Events Are Found: JPL's last day is not
+always the mission's (Galileo's runs nine days past its impact, on a
+path leaving Jupiter as if it never hit), so an ended mission's entry
+carries the day NASA's page says it ended, the path plan asks the path
+to that day and no further, and the field is among a plan's inputs only
+where it is set. Tony's ruling of 2026-11-02, "Yes stop at impact".
+Read from path_plan.py and JPL's answers of 2026-11-02 before it was
+written.

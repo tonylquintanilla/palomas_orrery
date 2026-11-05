@@ -1,24 +1,23 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 4, 2026, afternoon: the Claude Code session that built L-512 (fallbacks when JPL cannot answer), part 1, and mapped part 2.
-- Written at orrery 3fb14c26 and gallery 5abca2c6, plus this session's uncommitted edits.
+Last updated: November 4, 2026, evening: the Claude Code session that built L-512 (fallbacks when JPL cannot answer), slice a, part A1.
+- Written at orrery 79018c0c and gallery 5abca2c6, plus this session's uncommitted edits.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - 6AC4721 draws its orbit again. With no JPL record, a small body's
->   path or orbit is decided by the e of its typed elements, and the
->   console says so (L-512 (fallbacks when JPL cannot answer), part 1).
-> - Mapped, not built: what the orrery draws with JPL down, and the
->   saved-path file, whose dates can be a month off (the map).
+> - The saved-path file is out of the app: nothing reads or writes it,
+>   and the "Update Orbit Data?" question is gone (your ruling 0).
+> - Every JPL question in the repository is now asked fresh, and a
+>   check fails if one is not (L-512 (fallbacks when JPL cannot answer)).
 >
-> **Do next:** *your rulings on the map's seven questions, one at a
-> time; then part 2 as ruled, in the same session.*
+> **Do next:** *your look, wifi off and on (the report's run order);
+> then part A2, "no such body" is not "JPL unreachable".*
 >
 > **Needs you now:**
-> - *(do) Reinstall horizons-orbital-mechanics (now 1.16) and paste the
->   protocol v3.125 into the Project's instructions.*
+> - *(do) Reinstall horizons-orbital-mechanics (now 1.17) and paste the
+>   protocol v3.126 into the Project's instructions.*
 > - *(do) Each morning, Pull origin on both, orrery then website, first;
 >   do not wait for the night, which GitHub starts hours late or drops.*
 
@@ -31,8 +30,8 @@ Oct 27's order, changed Oct 29 (`DESIGN_L314_solar_wind_rulings_20261029.md`).
                objects, the Sun's and Earth's slices, historical
                missions' slice 1, the orrery's paths by the plan (L-476),
                L-510 part 1 (Nov 4).
- 12f.  [NOW]   *L-512 (fallbacks when JPL cannot answer): part 1 built
-               Nov 4; part 2 waits on your rulings.* << new this session
+ 12f.  [NOW]   *L-512 (fallbacks when JPL cannot answer): slice a part
+               A1 built Nov 4; A2, then slices b and c.* << moved this session
  5d.   [NOW]   *The orrery's clock (L-504 (the orrery's clock)): the
                data path done Oct 29, the website's date fix Oct 31;
                Earth System, stamps, tools next.*
@@ -57,10 +56,11 @@ Oct 27's order, changed Oct 29 (`DESIGN_L314_solar_wind_rulings_20261029.md`).
  15.   [goal]  The website does what the desktop orrery does, with a date
                to choose, within the range the data covers.
 
-## Settled
+## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings. A line leaves after a few weeks, once it is habit, or
 once a skill or the protocol carries it (trimmed Nov 3, night).
+- No saved-path file; a JPL outage is met by propagation and a record (Nov 4).
 - A small body is a path at or above e 1 in JPL's database, every 30
   days, else an orbit; two sides of 1 refuse the drawing (Nov 4).
 - From the talk (Nov 3): the words have one home, the orrery's export;
@@ -104,8 +104,8 @@ Read from files when this page was written, not typed from memory.
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
 Decisions, one at a time:
-- L-512's seven rulings, in the map. Later: which ended missions come
-  next (Pioneer 10, Pioneer 11, Rosetta and DART).
+- None today. Later: which ended missions come next (Pioneer 10,
+  Pioneer 11, Rosetta and DART).
 
 At the next design talk:
 - How obsolete code is treated, and when it goes (L-509 (obsolete
@@ -123,7 +123,7 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- This session: L-512 in the ledger; `MAP_L512_jpl_fallbacks_20261104.md`.
+- This session: L-512; the map and your rulings; `COORD_L512_slice_a_prompt_20261104.md`.
 - The talk's rulings: `DESIGN_L484_consistency_rulings_20261103.md`.
 - The door: `documentation/python_work_door/`, and L-499.
 - Your run record: `WHERE_WE_ARE_11-3-26_1158_run_record.md`.

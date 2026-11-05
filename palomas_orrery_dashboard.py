@@ -354,6 +354,9 @@ model and effort each kind of task gets.
 November 3, 2026 with Anthropic's Claude Opus 5.5 (L-476): Path Drawing
 Suite, the orrery's new checker, gets its button after Path Plan Suite,
 with its short line.
+November 4, 2026 with Anthropic's Claude Opus 5.5 (L-512, ruling 0):
+Export Orbit Cache and Verify Orbit Cache are marked OBSOLETE in their
+descriptions and short lines, since data/orbit_paths.json is retired.
 """
 
 import os
@@ -1951,8 +1954,9 @@ LAUNCH_GROUPS = {
          True),
         ("Export Orbit Cache",
          "export_orbit_cache.py",
-         "Phase 1b devtool: read the local orbit caches (read-only) and write "
-         "web-servable orbit/position files for the interactive gallery.",
+         "OBSOLETE (L-512): data/orbit_paths.json is retired; this stops at "
+         "'caches not found' once it is deleted. Was: write web-servable orbit "
+         "files for the interactive gallery from the local orbit caches.",
          SCRIPT_DIR,
          True),
         ("Horizons Check -- everything, now",
@@ -1998,8 +2002,8 @@ LAUNCH_GROUPS = {
          True),
         ("Verify Orbit Cache",
          "verify_orbit_cache.py",
-         "Back up, validate, and repair orbit_paths.json, reporting any issues. "
-         "Run if orbit plots look wrong or the cache may be corrupted.",
+         "OBSOLETE (L-512): data/orbit_paths.json is retired and the app no "
+         "longer reads it. Was: back up, validate, and repair that file.",
          SCRIPT_DIR,
          True),
         ("VOT Cache Manager",
@@ -2406,7 +2410,7 @@ CARD_LINES = {
         "Asks Horizons for Earth's pole on five dates and checks the tilt.",
     ("Tools and Caches",
      "Export Orbit Cache"):
-        "Writes web-servable orbit files from the local orbit caches.",
+        "Obsolete (L-512): wrote orbit files from the retired orbit paths.",
     ("Tools and Caches",
      "Horizons Check -- everything, now"):
         "Asks Horizons about every served object now, not only what's due.",
@@ -2421,7 +2425,7 @@ CARD_LINES = {
         "Tests SIMBAD queries on a few stars, with rate limits and retries.",
     ("Tools and Caches",
      "Verify Orbit Cache"):
-        "Backs up, validates and repairs orbit_paths.json.",
+        "Obsolete (L-512): checks the retired orbit_paths.json file.",
     ("Tools and Caches",
      "VOT Cache Manager"):
         "Checks the VizieR VOT cache files are intact.",
