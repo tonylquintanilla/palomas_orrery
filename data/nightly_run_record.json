@@ -3,9 +3,9 @@
   "schema": 2,
   "taken": [],
   "held": [],
-  "clean_run_utc": "2026-11-04T18:42:41.841540+00:00",
+  "clean_run_utc": "2026-11-05T15:02:41.499721+00:00",
   "where": "GitHub Actions",
-  "run_log": "https://github.com/tonylquintanilla/palomas_orrery/actions/runs/41889489828",
+  "run_log": "https://github.com/tonylquintanilla/palomas_orrery/actions/runs/42050527395",
   "reported_not_red": [],
   "rows": [
     {
@@ -71,12 +71,12 @@
     {
       "row": "Path or orbit suite",
       "kind": "checker",
-      "verdict": "12 of 12 checks passed, every planted fault caught"
+      "verdict": "17 of 17 checks passed, every planted fault caught"
     },
     {
       "row": "Orbit cache",
       "kind": "checker",
-      "verdict": "All 12 orbit cache tests passed: cache loads, old formats convert, corrupted entries are dropped; the clock reads UTC and both forms of the fetched stamp read back; nothing left behind."
+      "verdict": "All 24 orbit cache tests passed: cache loads, old formats convert, corrupted entries are dropped; the clock reads UTC and both forms of the fetched stamp read back; the repository-wide fresh check examined 148 .py files and 20 JPL calls, every one asked fresh (2 not JPL, excepted); JPL's answers told apart (no such body, more than one, unreachable, other) on 10 faked answers to fetch_trajectory, 10 to fetch_position by astroquery and 11 by both its routes, and 4 fallback branches ask before drawing (3 bodies JPL has no solution for drawn from their papers whatever it answers); nothing left behind."
     },
     {
       "row": "Drawings export check",

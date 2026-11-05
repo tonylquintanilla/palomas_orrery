@@ -115,11 +115,11 @@
         "confirmed": "2026-11-05",
         "center": "@sun",
         "target": "499",
-        "epoch": "2026-11-04 23:56",
-        "days": 687.0047711824125,
-        "error_days": 0.059887784449529136,
-        "jpl_days": 687.0047711824125,
-        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='499'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461349.497222222'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
+        "epoch": "2026-11-05 04:31",
+        "days": 687.0050030500715,
+        "error_days": 0.06004392617296617,
+        "jpl_days": 687.0050030500715,
+        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='499'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461349.688194444'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
       },
       "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66"
     },
@@ -507,14 +507,14 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2005%20FY9&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-31",
+        "confirmed": "2026-11-05",
         "center": "@0",
         "target": "2005 FY9",
-        "epoch": "2026-10-22 20:37",
-        "days": 112022.3651480326,
+        "epoch": "2026-11-05 04:31",
+        "days": 112022.3642839018,
         "error_days": 0.19844,
-        "jpl_days": 112022.3651480326,
-        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='2005%20FY9%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@0'&TLIST='2461336.359027778'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
+        "jpl_days": 112022.3642839018,
+        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='2005%20FY9%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@0'&TLIST='2461349.688194444'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
       }
     },
     "mani": {
