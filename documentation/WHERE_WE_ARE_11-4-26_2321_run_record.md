@@ -425,6 +425,381 @@ PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
    2. move it into `documentation\`, 
    3. then commit and push the website. -- 721b7cc683c21c50eb9e591889be523d9e270623
 2. Run the website's night from the Actions tab and look for a green `NIGHT RUN:` line. 
+
+5m 31s
+Run python daily_run.py --night
+======================================================================
+  DAILY RUN, THE NIGHT FORM -- 2026-11-05 17:50 UTC
+  root: /home/runner/work/tonyquintanilla.github.io/tonyquintanilla.github.io
+  where: GitHub Actions
+======================================================================
+Daily Run steps, from /home/runner/work/tonyquintanilla.github.io/tonyquintanilla.github.io:
+  1. Guest book updater                 tools/guestbook_updater.py  found
+  2. Pulls from the orrery              gallery_maintenance_run.py  found
+  3. Cache builder                      tools/gallery_cache_builder.py  found
+  4. Gallery maintenance run, offline   gallery_maintenance_run.py  found
+  pull-match fixtures: 5 of 5 cases right; planted faults caught 2 of 2
+  runner-form pull-match fixtures: 5 of 5 cases right; planted faults caught 2 of 2
+  night gate fixtures: 15 of 15 nights judged right; planted faults caught 3 of 3
+  night allow-list: 16 files and data/solar-system/ (whole)
+=== DAILY RUN: all 4 step scripts found; the pull-match and night checks passed 32 of 32 fixture checks (L-461, L-485)
+
+  SKIP  step 1, Guest book updater: needs Tony's answers; his morning's (Tony's ruling of Oct 31, 2026, 10:20).
+
+The pulls ask GitHub's interface with the run's GITHUB_TOKEN.
+
+======================================================================
+  DAILY RUN step 2 of 4: Pulls from the orrery
+======================================================================
+======================================================================
+  gallery maintenance run -- PULLS (before the cache builder)
+  root: /home/runner/work/tonyquintanilla.github.io/tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Constants export pull     1.2s  rewrote data/constants_export.sha
+  PASS Config mirror             0.1s  no change to
+                                    data/objects_config.json
+  PASS Objects export pull       0.9s  rewrote data/objects_export.json,
+                                    data/objects_export.sha
+  PASS Objects mirror            0.1s  rewrote data/objects_config.json
+  PASS Drawings pull             2.4s  rewrote
+                                    data/drawings/pulled_at.sha
+
+======================================================================
+
+=== PULLS: all 5 passed -- Constants export pull, Config mirror, Objects export pull, Objects mirror, Drawings pull
+
+Pull matches push (runner form): the three pulls fetched the orrery at 59ddb645, its GitHub copy's newest commit, read live.
+
+======================================================================
+  DAILY RUN step 3 of 4: Cache builder (up to 900 seconds)
+======================================================================
+[sweep] no sibling directories present
+[RUNS] before the copy: 130 run records in data/solar-system/raw/runs
+[RUNS] after the copy:  130 run records in data/.staging_solar-system_20261105T175058Z/raw/runs
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+[POLE] earth: pole of 2026-11-05 served (RA 0.64598, Dec 89.84965 deg); tilt 23.43786 deg
+[UNCERTAINTY] JPL's own position uncertainty served for 52 of 55 small bodies; not served: bennu (JPL gives no range uncertainty (R_s) for it), halley (JPL gives no range uncertainty (R_s) for it), ikeya_seki (JPL gives no range uncertainty (R_s) for it)
+[window] served window: 88.0 days either side of today, set by mercury, the shortest of 64 bodies' trusted spans
+[SWAP] the new cache is in place; every rename worked on the first try. Recorded in data/cache_swap_log.jsonl
+[warn] sun: features-only entry; no Horizons fetch
+[warn] voyager_1: DP thin backbone 6383 -> 29 points (tol=0.02 AU)
+[warn] voyager_2: DP thin backbone 6385 -> 48 points (tol=0.02 AU)
+[warn] new_horizons: DP thin backbone 2293 -> 19 points (tol=0.02 AU)
+[warn] juno: DP thin backbone 891 -> 180 points (tol=0.02 AU)
+[warn] osiris_apex: DP thin backbone 339 -> 187 points (tol=0.02 AU)
+[warn] parker_solar_probe: DP thin backbone 594 -> 384 points (tol=0.02 AU)
+[warn] bepicolombo: DP thin backbone 442 -> 352 points (tol=0.02 AU)
+[warn] solar_orbiter: DP thin backbone 563 -> 374 points (tol=0.02 AU)
+[warn] juice: DP thin backbone 432 -> 124 points (tol=0.02 AU)
+[warn] psyche_spacecraft: DP thin backbone 280 -> 50 points (tol=0.02 AU)
+[warn] europa_clipper: DP thin backbone 516 -> 83 points (tol=0.02 AU)
+[warn] galileo: DP thin backbone 727 -> 150 points (tol=0.02 AU)
+[warn] cassini: DP thin backbone 1040 -> 97 points (tol=0.02 AU)
+[warn] halley: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] ikeya_seki: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] hale_bopp: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] hyakutake: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] neowise: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] lemmon: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] c2025_k1_c: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] c2025_k1_c: drawn as an orbit, not a path; 2 saved position(s) after today dropped, and its old plan's stamps
+[warn] halley: no position uncertainty served -- JPL gives no range uncertainty (R_s) for it
+[warn] ikeya_seki: no position uncertainty served -- JPL gives no range uncertainty (R_s) for it
+[warn] bennu: no position uncertainty served -- JPL gives no range uncertainty (R_s) for it
+[warn] shrink gate: bepicolombo, cassini, europa_clipper, galileo, juice, juno, new_horizons, osiris_apex, parker_solar_probe, psyche_spacecraft, solar_orbiter, voyager_1, voyager_2 fetched again by a new path plan; held out of the count (old 1504, 220, 184, 305, 379, 278, 45, 611, 1375, 92, 1201, 75, 137, new 1502, 220, 180, 305, 374, 272, 39, 606, 1371, 86, 1195, 69, 131)
+[done] run 20261105T175058Z (nightly): 97 objects
+
+----------------------------------------------------------------------
+WHAT TO DO NEXT, before you commit anything:
+
+  1. Run the gallery maintenance run, from this same folder:
+         python gallery_maintenance_run.py
+     Every gating checker should pass. Its LAST line reads the
+     swap log back and should agree with the [SWAP] line above.
+  2. In GitHub Desktop, look at the change list. A good build
+     shows changed and added files and NO pile of deletions.
+  3. Commit and push.
+  4. After the push, check what the live site serves:
+         python gallery_maintenance_run.py --live
+
+TONY-ACTION ROLLUP for this run:
+  (do)     steps 1 to 4 above, in that order.
+----------------------------------------------------------------------
+
+Swap log, read back: {"attempts": {"live_to_prev": 1, "staging_to_live": 1}, "error": null, "mode": "nightly", "outcome": "ok", "reached": "staging_to_live", "run_id": "20261105T175058Z", "time": "2026-11-05T17:55:16.386988+00:00"}
+
+Run records: carried 130 of 130, plus tonight's: 20261105T175058Z.json.
+  compared /home/runner/work/tonyquintanilla.github.io/tonyquintanilla.github.io/data/solar-system/raw/runs
+  with     /home/runner/work/tonyquintanilla.github.io/tonyquintanilla.github.io/data/solar-system.prev/raw/runs
+
+======================================================================
+  DAILY RUN step 4 of 4: the maintenance run's night pass
+======================================================================
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  SKIP Module atlas              0.0s  not run tonight: writes
+                                    MODULE_ATLAS.md and
+                                    MODULE_INDEX.md, which are
+                                    documents; the night commits no
+                                    page or word (Tony's R1,
+                                    2026-10-25)
+  PASS Constants export pull     1.3s  rewrote data/constants_export.sha
+  PASS Config mirror             0.1s  no change to
+                                    data/objects_config.json
+  PASS Objects export pull       0.8s  rewrote data/objects_export.sha
+  PASS Objects mirror            0.1s  no change to
+                                    data/objects_config.json
+  PASS Drawings pull             2.1s  rewrote
+                                    data/drawings/pulled_at.sha
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite      21.6s  PASS (508 checks, 0 failures)
+  PASS Pole of date              0.1s  POLE OF DATE: all 11 checks passed
+                                    (frame angle, orrery, ERFA, block
+                                    checker, and each shown able to
+                                    fail).
+  PASS Mirror suite              0.1s  All 77 mirror checks passed:
+                                    served, spelling, relabel refused
+                                    and accepted, conflict refused,
+                                    definition as exactly 1, fallback
+                                    and absent named, no-slot refused,
+                                    five shapes, formatting kept,
+                                    idempotent, report writes nothing,
+                                    uncertainty written as served,
+                                    Earth's pole served, print count
+                                    written as served, "in" written as
+                                    served and a slot served in
+                                    another unit from it, and the
+                                    citation written as served, a
+                                    website-only citation named, an
+                                    old export refused.
+  PASS Store writer suite       31.2s  All 471 store-writer checks
+                                    passed: an allow list that lets
+                                    through only a shell's words, a
+                                    belt's words and the arrival
+                                    settings, the rooms section's
+                                    included; a no-edit round trip;
+                                    one line per change; empty words
+                                    handled; a refused batch writing
+                                    nothing; awkward text; and the
+                                    shell list matching the cache
+                                    check's rule.
+  PASS Store editor suite        0.2s  All 377 store-editor checks
+                                    passed: every box the form offers
+                                    is one the writer allows; the word
+                                    list and the tick list differ by
+                                    the belts, on purpose; nothing
+                                    typed saves nothing; the save
+                                    message does not promise a visitor
+                                    sees what they cannot yet; and a
+                                    red Cache in step is explained
+                                    rather than just shown.
+  PASS Objects mirror suite      0.2s  MIRROR OBJECTS SUITE: pass
+  PASS Objects mirror check      0.1s  OBJECTS MIRROR: pass
+  PASS Config mirror check       0.1s  Every served link holds the
+                                    export's value, unit, figure count
+                                    and citation; 184 link(s)
+                                    compared, 179 citation(s) word for
+                                    word, 5 declared with none, 3 not
+                                    served; store f35f649c4c53.
+  PASS Pull failures             0.2s  PULL FAILURES: all 16 checks
+                                    passed (3 pulls x 3 ways to fail,
+                                    the run after a failed pull, the
+                                    run's token to GitHub's interface
+                                    only, and 5 planted faults caught)
+  PASS Horizons confirmations    0.0s  HORIZONS CONFIRMATIONS: pass -- 92
+                                    of 92 confirmed, and 64 periods,
+                                    within 30 days
+  PASS Pointer join              0.1s  Every link is accounted for: 187
+                                    link(s) against orrery 620b9149, 1
+                                    fallback named; read check: 66 of
+                                    66 measured rows reached carry a
+                                    read.
+  PASS Cache in step             0.1s  The served cache holds the
+                                    config's 97 object(s) and their
+                                    features exactly: 4 object(s) with
+                                    34 named shell(s), in both cache
+                                    files.
+  PASS Drawn orbit               0.7s  DRAWN ORBIT: pass -- 18 checks,
+                                    every planted fault caught
+  PASS Drawings                  0.6s  DRAWINGS: PASS -- 34 of 34 planted
+                                    faults caught; pulled at orrery
+                                    620b9149; earth_exosphere 1500
+                                    dots, round, sha256 6112639fb2cd;
+                                    galactic_tide 5000 dots, about the
+                                    galactic pole, sha256
+                                    950a7511f0b5; hills_cloud 3600
+                                    dots, tilt 31.0 deg, sha256
+                                    4d3e85616645; main_belt 6000 dots,
+                                    tilt 0.2 deg, sha256 712caffec391;
+                                    outer_oort_cloud 2736 dots,
+                                    between its edges, sha256
+                                    2f7ab88ee113; sun_corona 2500
+                                    dots, round, sha256 e2b57ccbc8a4;
+                                    van_allen_belts 3200 dots, tilt
+                                    0.4 deg, sha256 75274e84f840;
+                                    zodiacal_dust 3000 dots, tilt 2.8
+                                    deg, sha256 995f13a056e8
+  PASS Collapsed features        0.0s  32 stored as themselves, 16
+                                    collapsed, 0 unclassified.
+  PASS Feature renderers         0.9s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.1s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.2s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.2s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.2s  === ALL CHECKS PASSED ===
+  PASS Typed facts               0.2s  TYPED FACTS: PASS -- 0 typed facts
+                                    in the Sun and Earth rooms; 17
+                                    number line(s), 28 of 28 allowed
+                                    sentence(s) seen, 0 held open
+                                    (L-451); 26 word field(s) masked.
+  PASS Typed numbers             0.3s  TYPED NUMBERS: PASS -- 0 typed
+                                    numbers in the Sun and Earth
+                                    rooms' served words; 325 number(s)
+                                    masked, 0 held.
+  PASS Arrival                   0.3s  Arrival: both rooms open on the
+                                    right things; every shell trace
+                                    carries its key; the fallback with
+                                    no arrival block is unchanged.
+  PASS Display figures           0.2s  === PASS: 61 hover(s) and 311
+                                    number(s) examined; 14 graded, 7
+                                    graded by line, 47 held to the
+                                    fixture ===
+  PASS Solar System figures      0.2s  === PASS: 8 worked cases, 65
+                                    drawer rows matched to their
+                                    accuracy rows, 64 served
+                                    distances; Uranus, Neptune and
+                                    Pluto print to JPL's ten-thousands
+                                    place; 6 period cases and 64
+                                    served periods printed as the
+                                    orrery printed them; 5 orbit-line
+                                    cases and 64 served orbit lines; 3
+                                    path cases and 27 served paths,
+                                    spacecraft and comets ===
+  PASS Far lines                 0.1s  === PASS: far lines are cut to the
+                                    view's box ===
+  PASS Direction arrows          0.1s  === PASS: the arrows point the way
+                                    the points run, sit ahead of the
+                                    body, stay in the view, and the
+                                    page places them ===
+  PASS Solar System drawer       0.1s  === PASS: the Sun is never ticked,
+                                    every row and group is listed, the
+                                    handle names the last body ticked,
+                                    nothing ticks many bodies at once
+                                    but a spacecraft with its
+                                    companions, rooms are offered only
+                                    where they exist, groups fold and
+                                    reset their bodies, the count line
+                                    counts ticked bodies outside the
+                                    view, a search finds a body by any
+                                    of its names and a group by its
+                                    label or words, and the page asks
+                                    this file ===
+  PASS Source list               0.1s  === PASS: the i panel's sources
+                                    are a list, every address a link,
+                                    and its words are one sentence to
+                                    a bullet ===
+  PASS Drawer order              0.2s  === DRAWER ORDER: both rooms list
+                                    their shells where each begins;
+                                    self-test red twice
+  PASS Drawn ends                0.3s  === DRAWN ENDS: every drawing
+                                    starts and stops on a served row
+                                    or a held end; self-test red three
+                                    times
+  PASS Label words               0.2s  === LABEL WORDS: all 34 shell rows
+                                    in both rooms open their own
+                                    feature's words; 5 stored
+                                    drawings' crosses stand off the
+                                    axis lines; self-test red twice
+  PASS Guest book                0.0s  === GUEST BOOK: all 8 checks
+                                    passed
+  PASS Guest book updater        0.1s  === GUEST BOOK UPDATER: all 49
+                                    checks passed (8 scripted runs,
+                                    self-test first)
+  PASS Daily run steps           0.1s  === DAILY RUN: all 4 step scripts
+                                    found; the pull-match and night
+                                    checks passed 32 of 32 fixture
+                                    checks (L-461, L-485)
+  PASS Artifact 1 assembler      0.1s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.0s  RESULT: no sibling directories and
+                                    nothing in data/ the builder did
+                                    not make.
+
+======================================================================
+  36 of 36 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: no sibling directories and
+  last swap 2026-11-05T17:55:16.386988+00:00: succeeded first time
+======================================================================
+  NIGHT: skipped by name -- Module atlas (writes MODULE_ATLAS.md and MODULE_INDEX.md, which are documents; the night commits no page or word (Tony's R1, 2026-10-25))
+
+======================================================================
+  THE NIGHT -- summary
+======================================================================
+  Guest book updater             skipped: his morning's                   0.0s
+  Pulls from the orrery          ok                                       4.8s
+  Pull matches push (runner)     ok                                       0.0s
+  Cache builder                  exit 0                                 259.2s
+  Run records                    ok                                       0.0s
+  Maintenance run, night pass    exit 0                                  63.7s
+
+  Nothing is to be committed: the site keeps serving the previous
+  cache, and tomorrow's run tries again. This log is the record.
+======================================================================
+NIGHT RUN: RED -- the pulled orrery commit moved after the build (the maintenance run's pull rows read a newer one) (331 seconds)
+Error: Process completed with exit code 1.
+
 3. In the orrery folder, 
    1. run `patch_road_symbols_20261105.py`. It prints twelve "ok" lines and then "patch applied". 
 
@@ -446,7 +821,7 @@ patch applied
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
    2. Move it into `documentation\`, 
-   3. then commit and push the orrery. -- 
+   3. then commit and push the orrery. -- 620b9149593946b33d6b46d9b318c61bae849a1e
 
 **For your run record:**
 - `patch_L510_2_orbit_body_drops_future_points.py`, which prints `ok tools/gallery_cache_builder.py (2 edits)` and `ok tools/test_gallery_cache_builder_offline.py (3 edits)`.
