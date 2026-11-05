@@ -163,7 +163,7 @@ I've written `patch_L508_1_code_prompts_section.py`. It's a records-only patch, 
 
 ===========================================================================================
 
-**Session: OPEN: 11-4-26 2316: Opus: Coordination: Orrery handoff coordination L508**
+**Session: DONE: 11-5-26 1222: Opus: Coordination: Orrery handoff coordination L508**
 
 I'll open the night coordination handoff in the orrery repository and start with its section 1.
 
@@ -899,7 +899,7 @@ ok ledger_index.py
 patch applied
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
-3. Move both into `documentation\`, then commit and push the orrery once the website's night has finished. -- pulled origin on the website and pushing orrery: 
+3. Move both into `documentation\`, then commit and push the orrery once the website's night has finished. -- pulled origin on the website and pushing orrery: 1e2e62fd91fe372f0788e9092957ef831bee48ae
 
 **For your run record:**
 - `patch_L510_3_session_close_20261105.py`, which prints `ok LEDGER_CONSOLIDATED.md (4 edits)`, `ok documentation/WHERE_WE_ARE.md (5 edits)` and `ok ledger_index.py`.

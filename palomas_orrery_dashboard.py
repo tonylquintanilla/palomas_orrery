@@ -33,6 +33,9 @@ Module updated: November 3, 2026 with Anthropic's Claude Opus 5.5
 Module updated: November 4, 2026 with Anthropic's Claude Opus 5.5
 (L-510: the Path Or Orbit Suite's button and line; the Period Fetch's
 line names its 30-day refresh of each small body's e).
+Module updated: November 5, 2026 with Anthropic's Claude Opus 5.5
+(L-510: the Objects Mirror Check's and Suite's descriptions say the
+website's objects mirror follows a body across e = 1 by itself).
 July 2026: added Linux Button-4/5 wheel scrolling to match columns 1/2's
 cross-platform coverage (CTkScrollableFrame's built-in handling only
 covers Windows/Mac <MouseWheel>). Audited LAUNCH_GROUPS against both
@@ -856,7 +859,10 @@ LAUNCH_GROUPS = {
         "description, NASA link -- and writes nothing. A difference is a "
         "hand edit or a pull without a mirror run; the maintenance run's "
         "Objects mirror writes them. Also refuses a Solar System drawer row "
-        "with no key in the export. GATES the gallery runner.",
+        "with no key in the export. A body the orrery has moved across e = "
+        "1 (a path become an orbit, or back) shows here as the side change "
+        "the mirror makes by itself, its drawer row named for a person "
+        "(L-510). GATES the gallery runner.",
         GALLERY_REPO_DIR,
         True,
         None,
@@ -866,8 +872,9 @@ LAUNCH_GROUPS = {
         "Forces each of the objects mirror's writes and refusals on made-up "
         "configs -- an insert that keeps the file's layout, an id change "
         "reported, a blank id type left alone, a row without a key, a key "
-        "without an object, a null over held words -- then reads the real "
-        "config. GATES the gallery runner.",
+        "without an object, a null over held words, a body moved across e "
+        "= 1 both ways with three planted faults (L-510) -- then reads the "
+        "real config. GATES the gallery runner.",
         GALLERY_REPO_DIR,
         True,
         None,

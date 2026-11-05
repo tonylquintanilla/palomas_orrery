@@ -1096,7 +1096,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-500 | The Sun's twelve eyeballed shape numbers: the streamer belt's seven and the outer cloud's clumps' five (orrery + gallery, the Sun's drawings) | OPEN | -- | 2026-10-27 |
 | ! | L-504 | The orrery's clock: UTC everywhere (orrery, every module that reads the clock) | OPEN | -- | 2026-10-31 |
 | ! | L-506 | Token economy: tokens spent where they buy verification or a decision, and counted (protocol, every session) | OPEN | -- | 2026-11-02 |
-| ! | L-507 | Historical missions: past voyages drawn in the Solar System room, then encounters (gallery, the Solar System room) | OPEN | -- | 2026-11-03 |
+| ! | L-507 | Historical missions: past voyages drawn in the Solar System room, then encounters (gallery, the Solar System room) | OPEN | -- | 2026-11-05 |
 | ! | L-508 | A held body's alarm: loud until a ledger item names it (orrery + gallery, the Horizons check and the night) | OPEN | -- | 2026-11-02 |
 | ! | L-509 | Obsolete code: how it is marked, and when it goes (orrery, housekeeping) | OPEN | -- | 2026-11-03 |
 | ! | L-510 | The object list's typed fields stop deciding: a small body drawn by today's eccentricity, a plan asked from before any launch (orrery, the object list and the path plan) | OPEN | -- | 2026-11-05 |
@@ -1995,7 +1995,50 @@ build.
     after it went green too (Tony).
   Not yet done: the objects mirror still refuses a deletion, so the
   next comet that changes side stops a night at the pulls again.
-**Gap (replaces the one below, 2026-11-05):** the road's quick win: the
+- **2026-11-05, afternoon: THE MIRROR FOLLOWS THE RULE BY ITSELF** (the
+  coordinating session of Nov 5 from 13:07, Claude Opus 5.5; Tony's run
+  record `WHERE_WE_ARE_11-5-26_1458_run_record.md`). The website's
+  `patch_L510_3_mirror_follows_e_rule.py`, pushed 3660993 and read back
+  on GitHub:
+  - The objects mirror (`tools/mirror_objects.py`) follows a body
+    across e = 1 both ways. To an orbit: it removes `path` and
+    `open_path`, sets availability analytic, frame heliocentric,
+    trace none, and inserts the export's period. To a path: the
+    reverse, removing the period. It rewrites the entry's note with
+    the day (a person's own note kept after it) and prints every
+    change. It still refuses a side change over an entry whose three
+    fields were set by hand.
+  - The builder's offline test: a stand-in orbit for a body newly
+    drawn as one, named when used; the open-path count (13) replaced
+    by a comparison with the export, by name; an end-to-end build of
+    a config the mirror has flipped (West to an orbit, Hale-Bopp to a
+    path).
+  - Verified on Tony's machine: "MIRROR OBJECTS SUITE: pass", "PASS
+    (511 checks, 0 failures)". The session saw each new check fail on
+    its planted fault; the mirror as it stood before reproduced Nov
+    4's refusal word for word. The website's maintenance run in the
+    session's workspace read "36 of 36 gating checkers passed" (its
+    five pulls could not reach GitHub from there).
+  - Not done, recorded: the mirror does not move a flipped body's
+    drawer row. The drawer groups by JPL's class (interactive-
+    exhibit), which the export does not carry, so the change line
+    names the row's group for a person to check.
+  - Tony asked for the tool on the dashboard: both its buttons were
+    already there (Objects Mirror Check, Objects Mirror Suite); this
+    session's records patch rewrites their descriptions to say so.
+  - Two skill sentences carried to the next bumps of their skills,
+    named in the ended missions' brief (L-507, section 6):
+    gallery-cache-builder's open-path bullet and onboarding section
+    gain the mirror's side change and the offline test's comparison;
+    horizons-orbital-mechanics' "an open difference on L-484" for
+    piece C's website drawing is read against L-484 and corrected.
+**Gap (replaces the one below, 2026-11-05, afternoon):** Tony's Mode 5
+look (Sun-centred: Tsuchinshan, Wierzchos, ATLAS each drawn as
+3I/ATLAS is; 3I/ATLAS unchanged; Halley still its ellipse); then part
+2's brief and build (Deferred on Where We Are, Nov 5). The drawer row
+of a body that changes side waits until JPL's class reaches the
+export.
+**Gap (superseded above, 2026-11-05, afternoon; replaced the one below, 2026-11-05):** the road's quick win: the
 objects mirror follows the e rule by itself (removes `path` and
 `open_path` when the export stops serving them, and sets the entry's
 availability, frame and trace as for an orbit, or the reverse), with
@@ -2118,7 +2161,7 @@ holds would be a second store.
 number, choice (a)); `horizons_check.py`; gallery-cache-builder 1.16.
 
 #### [L-507] Historical missions: past voyages drawn in the Solar System room, then encounters (gallery, the Solar System room)
-<!-- L:507 status:OPEN upd:2026-11-03 section:A flag: rice: -->
+<!-- L:507 status:OPEN upd:2026-11-05 section:A flag: rice: -->
 - **Opened 2026-11-02** by the Code session of that evening (Claude
   Opus 5.5), on orrery 26a6dd04 and gallery 8c3947c1, at Tony's
   request, from `documentation/HANDOFF_coordination_20261101_afternoon.md`
@@ -2253,7 +2296,32 @@ number, choice (a)); `horizons_check.py`; gallery-cache-builder 1.16.
   today's 142.2 AU (Tony's look: "spacecraft is outline the filled
   line"). For the slice that takes up the orrery's other ended
   missions (Pioneer 10, Pioneer 11, Rosetta, DART).
-**Gap (replaces the one below, 2026-11-03, morning):** slice 2 waits
+- **2026-11-05: the next voyages, ruled and briefed** (the coordinating
+  session of Nov 5, Claude Opus 5.5; Tony's run record
+  `WHERE_WE_ARE_11-5-26_1458_run_record.md`), road stage 13's second
+  quick win.
+  - Tony, Nov 5, 13:27: a Claude Code session from a brief; and
+    "Apollo in slice 2": Apollo 11's S-IVB goes with the encounters.
+    JPL's span for it, as `celestial_objects.py` line 912 records it,
+    is 1969-07-16 to 1969-07-28, near Earth and the Moon.
+  - Tony, Nov 5, 15:17, on a craft that flew on after its mission
+    ended (the Pioneers; Akatsuki), choosing option A: "A. but
+    indicate the craft is still flying but not tracked." The path
+    stops on the day the mission ended, the marker where it was that
+    day, and the words say it still flies and no one tracks it.
+    Option B, declined: on to JPL's last day, dashed after the end.
+  - The brief, for Pioneer 10, Pioneer 11, Rosetta, DART and
+    Akatsuki:
+    `documentation/COORD_L507_historical_missions_more_voyages_brief_20261105.md`.
+    It carries L-476's note above (Pioneer 10 in the desktop orrery)
+    as a stop point, and the two skill sentences from L-510.
+**Gap (replaces the one below, 2026-11-05):** the more-voyages Claude
+Code session from its brief, both repositories; then Tony's phone look
+and the desktop orrery's Pioneer 10. Slice 2 (the encounters: Artemis
+II and Apollo 11's S-IVB) waits beside L-402 and L-489 (compositions).
+The drawer walk's three older failures, to an item of their own or
+L-423 (the website's checks).
+**Gap (superseded above, 2026-11-05; replaced the one below, 2026-11-03, morning):** slice 2 waits
 beside L-402 and L-489 (compositions; Artemis II in the Earth room).
 The drawer walk's three older failures, to an item of their own or
 L-423 (the website's checks). Which ended missions come next is Tony's:
