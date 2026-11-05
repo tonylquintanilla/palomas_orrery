@@ -169,6 +169,13 @@ Startup no longer loads it or prints its health summary; the static plot's
 call, and the uncalled copy of the dialog (handle_update_dialog) are
 removed. update_orbit_paths and plot_orbit_paths, uncalled, are marked
 DEPRECATED.)
+Module updated: November 4, 2026, evening, with Anthropic's Claude Opus
+5.5 (L-512, slice a, part A2, Tony's ruling 1): fetch_position fills an
+optional report dict with what JPL answered, on both its routes, and
+fetch_trajectory's report reaches its callers. A body JPL answers it has
+no record of, or more than one, never enters the fallback branches
+(plot_actual_orbits, the static worker's two, the animation worker's):
+jpl_outcome.holds_fallback says so on the console.)
 
 """
 #Paloma's Orrery - Solar System Visualization Tool
@@ -183,6 +190,8 @@ from astroquery.jplhorizons import Horizons                 # we are importing f
 import numpy as np                                          # we are importing numpy using its standard nickname np; numbpy efficiently handles math function and arrays
 from datetime import datetime, timedelta                    # from datetime we are importing two classes. datetime allows us to define a moment in time.
 from utc_clock import utc_now, utc_today, utc_stamp, parse_stamp, HORIZONS_CACHE  # L-504: the clock read as UTC; JPL asked fresh
+from jpl_outcome import (tell, outcome_of_exception, merge_routes, holds_fallback,  # L-512 A2: what JPL answered
+                         SAYS, FOUND, OTHER, NOT_ASKED, NOT_A_BODY, UNREACHABLE)
                                                             # timedelta allows us to define a time increment. these can be used in various functions with arguments. 
 import calendar                                             # handles calendar functions 
 import plotly.graph_objs as go                              # we are importing the MIT licensed plotly library and its subpackage graph_objs with the nickname go 
@@ -1323,11 +1332,18 @@ scroll_message = tk.Label(
 scroll_message.pack(pady=(5, 10))  # Adjusted padding for top placement
 
 # Function to fetch the position of a celestial object for a specific date
-def fetch_position(object_id, date_obj, center_id='Sun', id_type=None, override_location=None, mission_url=None, mission_info=None):  
+def fetch_position(object_id, date_obj, center_id='Sun', id_type=None, override_location=None, mission_url=None, mission_info=None,
+                   report=None):
+    # report (dict), optional: filled with what JPL answered -- found,
+    # unknown, ambiguous, unreachable, other or not_asked (jpl_outcome.py;
+    # L-512, ruling 1). Both routes are covered: the direct small-body
+    # request first, then astroquery; a definite unknown or ambiguous from
+    # the first is never overwritten by the second's outage.
  
     # Skip fetching for Planet 9 and use accurate position on orbit
     if object_id == 'planet9_placeholder':
         # Calculate position directly on the theoretical orbit
+        tell(report, NOT_ASKED, 'Planet 9 is not asked of JPL')   # L-512 A2
         x, y, z, range_val = calculate_planet9_position_on_orbit()
         
         # Return a complete position object with all necessary fields
@@ -1346,6 +1362,7 @@ def fetch_position(object_id, date_obj, center_id='Sun', id_type=None, override_
             'mission_info': "Planet 9 candidate identified in 2025 IRAS/AKARI infrared data analysis."
         }
         
+    first_outcome = None   # L-512 A2: the direct request's outcome, when it failed
     try:
         # Convert date to Julian Date
         times = Time([date_obj])
@@ -1371,6 +1388,7 @@ def fetch_position(object_id, date_obj, center_id='Sun', id_type=None, override_
                 direct_state, position_uncertainty = fetch_small_body_state(
                     object_id, id_type, location, epochs[0])
             except Exception as ex:
+                first_outcome = outcome_of_exception(ex)   # L-512 A2
                 print(f"[L-401] {object_id}: the vector query with JPL's uncertainty "
                       f"failed ({ex}); fetching the position without it", flush=True)
                 position_uncertainty = {
@@ -1390,6 +1408,7 @@ def fetch_position(object_id, date_obj, center_id='Sun', id_type=None, override_
 
             if len(vectors) == 0:
                 print(f"No data returned for object {object_id} on {date_obj}", flush=True)
+                tell(report, merge_routes(first_outcome, OTHER), 'JPL returned no rows')   # L-512 A2
                 return None
 
             # Extract desired fields with error handling
@@ -1465,6 +1484,7 @@ def fetch_position(object_id, date_obj, center_id='Sun', id_type=None, override_
                 if orbital_period == 'N/A':
                     orbital_period = orbital_period_years
 
+        tell(report, FOUND)   # L-512 A2
         return {
             'x': x,
             'y': y,
@@ -1485,7 +1505,14 @@ def fetch_position(object_id, date_obj, center_id='Sun', id_type=None, override_
             'orbital_period': orbital_period  # Original variable preserved for backward compatibility
         }
     except Exception as e:
-        print(f"Error fetching data for object {object_id} on {date_obj}: {e}", flush=True)
+        # L-512 A2: told apart, and the direct request's definite answer kept.
+        outcome = tell(report, merge_routes(first_outcome, outcome_of_exception(e)), e)
+        if outcome in NOT_A_BODY or outcome == UNREACHABLE:
+            first_line = (str(e).splitlines() or [''])[0][:160]
+            print(f"[JPL ANSWER] {object_id} on {date_obj}: {SAYS[outcome]} "
+                  f"({type(e).__name__}: {first_line})", flush=True)
+        else:
+            print(f"Error fetching data for object {object_id} on {date_obj}: {e}", flush=True)
         return None
 
 # ============================================================================
@@ -4305,8 +4332,9 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
                 fetch_id_type = 'smallbody'  # helio_ids are smallbody designations
 
             span_start, span_end = path_drawing.entry_span(obj_info)   # L-476: a planned entry's span is its plan's
+            traj_report = {}   # L-512 A2: what JPL answered
             trajectory = fetch_trajectory(fetch_id, dates_list, center_id=center_id, id_type=fetch_id_type,
-                                         start_date=span_start, end_date=span_end)
+                                         start_date=span_start, end_date=span_end, report=traj_report)
             
             # ORCUS TRAJECTORY DERIVATION: JPL doesn't support 920090482 as query target
             # Derive Orcus trajectory from Vanth using mass ratio
@@ -4470,7 +4498,7 @@ def plot_actual_orbits(fig, planets_to_plot, dates_lists, center_id='Sun', show_
 
             #    ANALYTICAL_POSITION_FALLBACK = ['MK2', 'Xiangliu', 'Vanth', 'Weywot', '6AC4721']
                 ANALYTICAL_POSITION_FALLBACK = ['MK2', 'Xiangliu', 'Vanth', '6AC4721']  # Weywot removed - JPL data works at Quaoar; Gonggong removed 2026-10-23 (L-470): no failure on record; the maintenance run is the test
-                if planet in ANALYTICAL_POSITION_FALLBACK:
+                if planet in ANALYTICAL_POSITION_FALLBACK and not holds_fallback(planet, traj_report):   # L-512 A2
                     from orbital_elements import planetary_params
                     if planet in planetary_params:
                         print(f"[ANALYTICAL ORBIT] Calculating analytical positions for {planet}...", flush=True)
@@ -5213,7 +5241,9 @@ def plot_objects():
                         if center_object_name == 'Sun' and 'helio_id' in obj:
                             fetch_id = obj['helio_id']
                             fetch_id_type = 'smallbody'
-                        obj_data = fetch_position(fetch_id, date_obj, center_id=center_id, id_type=fetch_id_type)
+                        pos_report = {}   # L-512 A2: what JPL answered
+                        obj_data = fetch_position(fetch_id, date_obj, center_id=center_id, id_type=fetch_id_type,
+                                                  report=pos_report)
                         
                         # Thread position timestamp for hover text
                         if obj_data is not None:
@@ -5263,7 +5293,8 @@ def plot_objects():
                                 print(f"  -> Could not fetch Vanth position to derive Orcus", flush=True)
 
                         # Fallback to analytical position for objects not in Horizons (e.g., 6AC4721)
-                        if obj_data is None and obj['name'] in active_planetary_params and 'MA' in active_planetary_params[obj['name']]:
+                        if (obj_data is None and obj['name'] in active_planetary_params and 'MA' in active_planetary_params[obj['name']]
+                                and not holds_fallback(obj['name'], pos_report)):   # L-512 A2
                             print(f"  - No JPL data for {obj['name']}, calculating analytical position from MA...", flush=True)
                             elements = active_planetary_params[obj['name']]
                             a = elements.get('a', 0)
@@ -5666,7 +5697,9 @@ def plot_objects():
                     if center_object_name == 'Sun' and 'helio_id' in obj:
                         fetch_id = obj['helio_id']
                         fetch_id_type = 'smallbody'
-                    obj_data = fetch_position(fetch_id, date_obj, center_id=center_id, id_type=fetch_id_type)
+                    pos_report = {}   # L-512 A2: what JPL answered
+                    obj_data = fetch_position(fetch_id, date_obj, center_id=center_id, id_type=fetch_id_type,
+                                              report=pos_report)
 
                     # Thread position timestamp for hover text
                     if obj_data is not None:
@@ -5706,7 +5739,8 @@ def plot_objects():
                 # Fallback for objects without JPL ephemeris (e.g., MK2, 6AC4721)
             #    ANALYTICAL_POSITION_FALLBACK = ['MK2', 'Xiangliu', 'Vanth', 'Weywot', '6AC4721']
                 ANALYTICAL_POSITION_FALLBACK = ['MK2', 'Xiangliu', 'Vanth', '6AC4721']  # Weywot removed - JPL data works at Quaoar; Gonggong removed 2026-10-23 (L-470): no failure on record; the maintenance run is the test
-                if obj_data is None and obj['name'] in ANALYTICAL_POSITION_FALLBACK:
+                # L-512 A2: obj_data is None only after the fetch above, so pos_report is this body's.
+                if obj_data is None and obj['name'] in ANALYTICAL_POSITION_FALLBACK and not holds_fallback(obj['name'], pos_report):
                     from orbital_elements import planetary_params
                     if obj['name'] in planetary_params:
                         elements = planetary_params[obj['name']]
@@ -6741,11 +6775,13 @@ def animate_objects(step, label):
                             fetch_id = obj['helio_id']
                             fetch_id_type = 'smallbody'  # helio_ids are smallbody designations
                         
+                        traj_report = {}   # L-512 A2: what JPL answered
                         positions_over_time[obj['name']] = fetch_trajectory(
                             fetch_id, 
                             obj_dates, 
                             center_id=center_id, 
-                            id_type=fetch_id_type
+                            id_type=fetch_id_type,
+                            report=traj_report
                         )
                         
                         # ORCUS TRAJECTORY DERIVATION: JPL doesn't support 920090482 as query target
@@ -6785,7 +6821,7 @@ def animate_objects(step, label):
                 #        ANALYTICAL_ANIMATION_FALLBACK = ['MK2', 'Xiangliu', 'Vanth', 'Weywot', '6AC4721']  # Objects without usable JPL ephemeris
                         ANALYTICAL_ANIMATION_FALLBACK = ['MK2', 'Xiangliu', 'Vanth', '6AC4721']  # Weywot removed - JPL data works at Quaoar; Gonggong removed 2026-10-23 (L-470): no failure on record; the maintenance run is the test
 
-                        if obj['name'] in ANALYTICAL_ANIMATION_FALLBACK:
+                        if obj['name'] in ANALYTICAL_ANIMATION_FALLBACK and not holds_fallback(obj['name'], traj_report):   # L-512 A2
                             # Check if fetch_trajectory returned empty/None
                             traj = positions_over_time.get(obj['name'])
                             if not traj or all(p is None for p in traj):

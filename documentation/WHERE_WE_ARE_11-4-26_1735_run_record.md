@@ -406,13 +406,502 @@ Restored sash positions: [489, 1013]
    3. and Halley around the Sun, -- keplerian orbit and position plotted. plus position and actual orbit. 
    4. and Juno around Jupiter. -- path and position plotted. 
 
-2. Commit when you're satisfied. -- yes, as expected
-3. Last: delete `data/orbit_paths.json`, `.backup` and `.backup_old` by hand.
+2. Commit when you're satisfied. -- yes, as expected -- e7ea329489239f41188c9af6fc48126ba691ba38
+3. Last: delete `data/orbit_paths.json`, `.backup` and `.backup_old` by hand. -- last updated 7-8-26. retained for archival purposes in archived/
 
 **What's waiting on you:**
 - (do) the wifi-off and wifi-on look.
 - (do) commit.
-- (do) reinstall horizons-orbital-mechanics 1.17, and paste protocol v3.126 into the Project's instructions.
-- (do) delete the three saved files, last.
+- (do) reinstall horizons-orbital-mechanics 1.17, and paste protocol v3.126 into the Project's instructions. -- done
+- (do) delete the three saved files, last. -- retained in archived/
 
 After your look, should I start A2 ("no such body" is not "JPL unreachable"), or did something look off?
+
+=========================================================================
+
+**Session: OPEN: 11-3-26 1017: Opus: Coordinator: Orrery plot build order L476 L484 L510**
+
+Your look matches what A1 promised on every point. Before saying go, I'll check two things: the push, and that the archived copies can't end up in a commit.
+
+Yes, go ahead with A2. A1 checks out.
+
+- **Your look matched every expectation.** Wifi off: Mars and Halley keep their Keplerian orbits and positions, and Juno, in both views, draws nothing. Wifi on: everything draws as before.
+- **Your commit is on GitHub** (`e7ea3294`).
+- **The archived copies are safe from git.** Your ignore list (`.gitignore`) already covers all three names wherever they sit: `orbit_paths.json`, `*.backup` and `*.backup_old`. I tested the `archived/` paths against it, and none is tracked at HEAD. They can't slip into a commit.
+
+One correction for the records: A1's report expects you to delete the three files. You kept them in `archived/` instead. A2's records should say so, so no later session goes looking for a deletion that didn't happen.
+
+Paste this to Code. It works whether the A1 session is still open or a new one starts:
+
+```
+A1 passed my look (wifi off and on, as you predicted) and is committed
+as e7ea3294. Proceed with PART A2 of
+documentation/COORD_L512_slice_a_prompt_20261104.md, steps 7 to 10,
+starting with its HEAD check.
+
+One correction for the records: I did not delete data/orbit_paths.json
+and its two backups; I moved them to archived/ for the record, where
+.gitignore already ignores all three. Record that on L-512 and in Where
+We Are in place of "delete them last".
+```
+
+**Where this leaves us:**
+- Next is A2: telling "no such body" apart from "JPL unreachable".
+- After it come slices (b) and (c): drawing by propagation, then the positions record.
+
+===============================================================================================
+
+**Code:**
+
+HEAD matches GitHub (e7ea3294). The two waiting files are Tony's own run record and his protocol copy; I will not touch them. Now the A2 steps.
+
+Reading the two fetch functions and their callers before changing anything; A2's HEAD check passed.
+
+I've found the three fallback branches and the two fetches. Next I'll read the static and animation workers, then test JPL with a few deliberately bad questions.
+
+JPL's answers are in. MK2, Xiangliu and 6AC4721 return "no such record", which is the case the fallback lists are for, so I'll raise that at the stop before moving on to the code.
+
+Writing the new small module that sorts JPL's answers into four kinds: found, no such body, more than one match, and unreachable.
+
+Now the edit script for the three files, all-or-nothing per file.
+
+Fixing a whitespace mismatch in my edit script (nothing was written to the repository).
+
+The code edits are in and compile. Now the offline tests, registered in the same suite as the fresh check.
+
+Now the test class itself.
+
+Nothing was written (the parse check stopped it). Fixing the one line in the block directly.
+
+All 23 tests pass, including the planted faults. Next, the live smoke test of the real app on throwaway copies, as in A1.
+
+The three saved-path files are still in the repo's data/ folder (dated Nov 3 and 4), while the archived copies in the sibling orrery folder are older, from June 17 and July 8, so I'll record that as it stands. Next I'm running the smoke test on the real app.
+
+While that runs, I'll read the records I'll update.
+
+The smoke test is still running. Meanwhile I'm reading the records rule on skill changes, to decide where A2's skill sentences go.
+
+A2's skill sentences will be carried on L-512 to the next bump, not added to 1.17. You've already reinstalled 1.17, and slice b rewrites those same fallback sentences. Waiting on the smoke test.
+
+The smoke test is still running: old code with JPL up, new code with JPL up, then new code with JPL down. I'll go on when it finishes.
+
+The three runs are back. One result matters for the stop question; first I'll check one count against A1's outage run.
+
+The outage drawing is unchanged from A1 (16 traces either way). Now the full maintenance run, in the background.
+
+While the maintenance run works, the records. First the exact lines I'll replace in Where We Are.
+
+The record edits are ready; I'll apply them once the maintenance run finishes, so it doesn't read half-written files.
+
+Records written; Where We Are is at 130 lines. A final maintenance run with the records in place:
+
+The final maintenance run is going (about five minutes). The report follows once its verdict is in.
+
+Part A2 is built. The orrery now tells "JPL has no such body" apart from "JPL can't be reached", and it never calls any other failure an outage. The 23 orbit-cache tests passed, and the final maintenance run reads "35 of 35 gating checkers passed".
+
+**What I built**
+- **Your astroquery is version 0.4.9.post1.** I asked JPL each kind of bad question live and recorded its exact words in the new module.
+  - JPL's answer for MK2 and Xiangliu is "out of bounds", which means it has no record of them. For a missing record number it says "No such record". astroquery doesn't recognise either message, so the new code reads JPL's own text.
+  - A date outside a body's data counts as "other", not an outage.
+- **A new small module, `jpl_outcome.py`**, sorts every answer into one of six kinds:
+  - found
+  - no such body
+  - more than one match
+  - JPL unreachable (no connection, a timeout, or a server error)
+  - other
+  - not asked
+- **Both fetches report the kind to the code that called them.** The plot fetch and the position fetch now hand the kind to their callers, not only to the console. For a body that is found, results and date padding are unchanged, and a test checks that.
+- **Both of the position fetch's routes are covered.** A definite "no such body" from the first route (the direct request) is kept even when the second route (astroquery) then can't connect.
+- **There are four fallback branches, not three.** The static plot's first loop has a second one, which draws any body whose typed elements have a mean anomaly. All four now check JPL's answer before drawing anything in its place.
+- **Tests:** nine new tests run without the network, on faked answers in JPL's own words. They cover:
+  - every kind of answer, for both fetches and on both routes;
+  - a success case;
+  - failures that are not outages;
+  - planted faults, each of which the tests catch.
+
+**What changes on screen**
+- **Unchanged:** Mars, Juno, Halley and Voyager 1 around the Sun draw the same 48 traces as A1 with JPL up, and the same 16 with JPL down.
+- **New, while JPL answers:** MK2 around Makemake, Xiangliu around Gonggong and 6AC4721 lose their position markers, because JPL says it has no record of them.
+  - MK2's and Xiangliu's orbits stay, because another part of the code draws them.
+  - 6AC4721 loses almost everything: its orbits, nucleus and tails go with the marker (16 traces down to 8). That undoes part 1's result for it.
+- **With JPL down, all three still draw as before.** So, as built, they appear only when JPL is unreachable.
+
+That is why the box asks you whether they should keep their drawings. I recommend yes. These three are on the fallback lists precisely because JPL has no record of them, and their typed elements are cited measurements, not a saved copy of JPL's answers. The new check would still do its real job in slice b: stopping JPL's cached elements from standing in for a body JPL says doesn't exist. Either answer is about a one-line change.
+
+**Two notes for your records**
+- **The saved-path files have not moved.** All three, from Nov 3 and 4, are still in the repository's `data/` folder at about 137.6 MB each. The `archived/` copies I found are older ones, from June 17 and July 8, in the sibling `orrery` folder. L-512 now says the files are kept rather than deleted, and records where they sit today.
+- **The skill wasn't changed.** You'd already reinstalled horizons-orbital-mechanics 1.17, so I didn't edit it again. Its two out-of-date fallback sentences are carried on L-512 for its next version; slice b rewrites both anyway.
+
+I left your run record and your protocol copy untouched.
+
+**Files changed (for your run record):**
+- new `jpl_outcome.py`
+- ok `palomas_orrery.py` (17 edits)
+- ok `palomas_orrery_helpers.py` (9 edits)
+- ok `documentation/WHERE_WE_ARE.md` (8 edits)
+- ok `test_orbit_cache.py` (4 edits)
+- ok `position_accuracy.py` (3 edits)
+- ok `LEDGER_CONSOLIDATED.md` (1 edit; index regenerated)
+- written by the maintenance run:
+  - `module_atlas.py` (it registered the new module on its own)
+  - `MODULE_ATLAS.md`, `MODULE_INDEX.md`, `PROVENANCE_AUDIT.md`, `EXACT_ROWS_PRINTED.md`, `WORKSHEET_CHECK.md`
+  - `data/horizons_confirmations.json`, `data/objects_export.json`, `data/provenance_history.json`
+  - `documentation/prompts/citation_review.jsonl`
+
+**Token count:** I can't print it from inside the session. I read about 1,500 lines of code and records, and wrote about 660 lines (the new module, the tests and the edits).
+
+**Your run order:**
+1. Answer the question in the box.
+2. After I make any change it needs, look with the wifi on and then off. Look at MK2 around Makemake, 6AC4721 around the Sun, and Mars and Halley around the Sun.
+3. Commit when you're satisfied.
+
+**What's waiting on you:**
+- (decide) MK2, Xiangliu and 6AC4721.
+- (do) the look, wifi on and off.
+- (do) commit.
+- (do) if you meant to move the three saved-path files to `archived/`, move them; they're still in `data/`.
+
+====================================================================
+
+**Opus: Coordinator:**
+
+Here's a reply for Code. Two findings shaped it.
+
+- **MK2's and Xiangliu's numbers were never confirmed with JPL.** They follow JPL's numbering pattern for moons of small bodies, and a comment beside Xiangliu says it was filled in that way. MK2's own description in the orrery also says "No JPL ephemeris available."
+- **Code's reading of JPL's answer may be wrong.** For these two, JPL said "out of bounds", and Code took that to mean JPL has no such body. It could instead mean JPL has the body but not for the dates asked. That would be a different kind of answer, so Code should quote JPL's exact words before deciding. I couldn't ask JPL from here; this workspace can't reach JPL's servers.
+
+Moving the saved files to `archived/` is safe. Git ignores those three names in every folder, so they won't appear in GitHub Desktop.
+
+```
+Thanks. My answers, and one check before you change anything.
+
+1. 6AC4721: keep its drawing. Its elements were typed by hand from a
+   published source, so it draws from them whether or not JPL answers.
+   Make sure its hover says the orbit comes from those typed elements
+   and names their source.
+
+2. MK2 and Xiangliu: I expect JPL to have these. Before deciding, check
+   the ids. celestial_objects.py gives them 120136472 and 120225088.
+   The comment on Xiangliu says that number follows JPL's "120 + number"
+   pattern, and MK2's mission_info says "No JPL ephemeris available."
+   So the ids may never have been confirmed with JPL. Please:
+   - Quote JPL's full answer, word for word, for each id. Say whether
+     "out of bounds" means JPL has no such body, or that it has the
+     body but not for the dates asked. If it is the dates, that is
+     "other" in jpl_outcome.py, not "no such body", and the sorting of
+     that message needs correcting.
+   - Ask JPL by each primary (136472 Makemake, 225088 Gonggong) and by
+     its system barycentre (920136472, 920225088), and check JPL's
+     small-body database for listed satellites. Report any id JPL gives
+     for either moon.
+   - Say what JPL answers for Vanth (120090482), the fourth name on the
+     old fallback lists.
+   Then stop and report, and change nothing yet. If JPL has either moon
+   under another id, the fix is that id in celestial_objects.py, and I
+   will rule on it. If JPL has neither, they are treated like 6AC4721:
+   drawn from their typed elements, with the hover saying so.
+
+3. The saved-path files: I moved data/orbit_paths.json and its two
+   backups to archived/. Ruling 0 said delete; I chose to keep them
+   archived. Record that in L-512, along with where they now sit. Git
+   ignores those names in every folder (.gitignore lines 11, 19 and
+   20). Since data/ no longer holds them, the next maintenance run is
+   the real file-absent test on my machine. Say if anything complains.
+
+After your report on point 2, I'll answer, then do the look with the
+wifi on and off, then commit.
+```
+
+The reply asks Code to stop after the ID check, before changing anything, because your ruling depends on what JPL actually says. If JPL lists the moons under different numbers, fixing the numbers would restore them properly, and that would be better than keeping drawings from hand-typed elements.
+
+=======================================================================
+
+Here are the links. Each one opens in a browser as plain text from JPL. The first few lines are what matter: either a body's name, or an error message. Copy the exact error wording; that wording is what decides the case.
+
+**1. Does JPL know these numbers?** These ask "what is this body?", with no dates involved.
+
+- MK2: https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27120136472%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+DXREAD: requested IOBJ= ******** is out of bounds, no action taken.
+Record boundaries:                                                 
+ IAU numbered asteroids:        1-  895910                         
+ Unnumbered asteroids  : 50000001-50683220                         
+ Comets                : 90000001-90004988                         
+If an SPK ID, look-up with "DES= ********;"  
+
+- Xiangliu: https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27120225088%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+DXREAD: requested IOBJ= ******** is out of bounds, no action taken.
+Record boundaries:                                                 
+ IAU numbered asteroids:        1-  895910                         
+ Unnumbered asteroids  : 50000001-50683220                         
+ Comets                : 90000001-90004988                         
+If an SPK ID, look-up with "DES= ********;"    
+
+- Vanth, for comparison, since JPL should know it: https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27120090482%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+*******************************************************************************
+JPL/HORIZONS                 (90482) Orcus I Vanth        # obs: 12 (2005-2015)
+PRE-COMPUTED              Satellite I body: 120090482
+                         Soln.date: 2022-Sep-08_14:33:25
+ 
+NOTE: Vanth SATELLITE body from TNO satellite solution
+
+      See also:     '90482;' for CURRENT barycenter
+                  '20090482' for SATELLITE SOLUTION barycenter
+                 '920090482' for PRIMARY body (Orcus)
+
+Asteroid physical parameters (km, seconds, rotational period in hours):
+   GM= 3.470366973 km^3/s^2     RAD~ 221.5 km                  ROTPER= sync
+   GM_rat= 0.082568807 (theory)   H= 4.88 +- 0.05                   G= n.a.
+   B-V= n.a.                 ALBEDO= 0.12                        STYP= n.a.
+
+   Position uncertainty wrt primary on 2025-Jan-1: 67 km 
+
+ASTEROID comments: 
+1: soln ref.= wrt/JPL#43 system barycenter, OCC=2
+2: source= tnosat_v001_20090482_jpl043_20220908
+*******************************************************************************
+
+**2. If JPL knows them, does it have positions for today?** These ask for one day's position around the Sun. Use them only if the first links name the body. An error here but not in step 1 means "known body, but no positions for those dates".
+
+- MK2: https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27120136472%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500@10%27&START_TIME=%272026-11-04%27&STOP_TIME=%272026-11-05%27&STEP_SIZE=%271%20d%27
+
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+DXREAD: requested IOBJ= ******** is out of bounds, no action taken.
+Record boundaries:                                                 
+ IAU numbered asteroids:        1-  895910                         
+ Unnumbered asteroids  : 50000001-50683220                         
+ Comets                : 90000001-90004988                         
+If an SPK ID, look-up with "DES= ********;"    
+
+- Xiangliu: https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27120225088%27&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=VECTORS&CENTER=%27500@10%27&START_TIME=%272026-11-04%27&STOP_TIME=%272026-11-05%27&STEP_SIZE=%271%20d%27
+
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+DXREAD: requested IOBJ= ******** is out of bounds, no action taken.
+Record boundaries:                                                 
+ IAU numbered asteroids:        1-  895910                         
+ Unnumbered asteroids  : 50000001-50683220                         
+ Comets                : 90000001-90004988                         
+If an SPK ID, look-up with "DES= ********;"  
+
+**3. Does JPL list a moon under its parent?** These ask for each parent's system centre, the balance point of the parent and its moon. If JPL has these, it probably has the moons too.
+
+- Makemake system: https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27920136472%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+DXREAD: requested IOBJ= ******** is out of bounds, no action taken.
+Record boundaries:                                                 
+ IAU numbered asteroids:        1-  895910                         
+ Unnumbered asteroids  : 50000001-50683220                         
+ Comets                : 90000001-90004988                         
+If an SPK ID, look-up with "DES= ********;"   
+
+- Gonggong system: https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND=%27920225088%27&OBJ_DATA=YES&MAKE_EPHEM=NO
+
+API VERSION: 1.2
+API SOURCE: NASA/JPL Horizons API
+
+DXREAD: requested IOBJ= ******** is out of bounds, no action taken.
+Record boundaries:                                                 
+ IAU numbered asteroids:        1-  895910                         
+ Unnumbered asteroids  : 50000001-50683220                         
+ Comets                : 90000001-90004988                         
+If an SPK ID, look-up with "DES= ********;"  
+
+**4. JPL's small-body database pages.** These are regular web pages for each parent. Scroll down for any section about satellites.
+
+- Makemake: https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=136472
+
+Small-Body Database Lookup
+Search...
+show instructions
+
+136472 Makemake (2005 FY9)
+Classification: TransNeptunian Object       SPKID: 20136472       Related Links: Ephemeris
+Orbit Viewer[show]
+Orbit Parameters[hide]
+Osculating Orbital Elements
+Epoch 2461200.5 (2026-Jun-09.0) TDB
+Reference: JPL 130 (heliocentric IAU76/J2000 ecliptic)
+Element	Value	Uncertainty (1-sigma)	Units
+e	0.1588889953992523	1.185E-6	
+a	45.57093317300052	5.3653E-5	au
+q	38.33021338173601	9.0359E-5	au
+i	29.02785603743067	1.4175E-6	deg
+node	79.2948338209406	1.4106E-5	deg
+peri	297.0922733397207	.00097128	deg
+M	169.9379962048232	.001332	deg
+tp	2408158.694098616288
+1881-Mar-19.19409862	.4032	TDB
+period	112364.8068762869
+307.6380749521886	.19844
+5.4330e-4	d
+y
+n	0.003203850120050116	5.6581E-9	deg/d
+Q	52.81165296426503	6.2178E-5	au
+Miscellaneous Details
+solution date	2026-Jun-06 21:09:02
+# obs. used (total)	6348
+data-arc span	25999 days (71.18 years)
+first obs. used	1955-01-29
+last obs. used	2026-04-05
+planetary ephem.	DE441
+SB-pert. ephem.	SB441-N16
+condition code	1
+norm. resid. RMS	.23296
+source	JPL
+producer	Otto Matic
+Earth MOID	37.4313 au
+Jupiter MOID	33.836 au
+T_jup	5.224
+Physical Parameters[hide]
+Parameter	Value	Units	Sigma	Reference	Notes
+[H] absolute magnitude	-0.25			MPO938351	
+rotation period	22.8266	h		LCDB (Rev. 2023-October); Warner et al., 2009	[Result based on less than full coverage, so that the period may be wrong by 30 percent or so.] REFERENCE LIST:[Hromakina, T.A.; Belskaya, I.N.; Krugly, Yu.N.; Shevchenko, V.G.; et al. (2019) Astron. Astrophys. 625, A46.]
+
+Satellites[hide]
+S/2015 (136472) 1
+Year Discovered: 2015
+Reference: Parker et al. (2015), CBET 4275
+Discovery Circumstances[hide]
+136472 Makemake
+Discovered 2005 Mar. 31 by M. E. Brown, C. A. Trujillo and D. L. Rabinowitz at Palomar.
+
+Makemake is the creator of humanity and the god of fertility in the mythology of the South Pacific island of Rapa Nui, or Easter Island. He was the chief god of the Tangata manu bird-man cult and was worshiped in the form of sea birds, which were his incarnation. His material symbol was a man with a bird's head.
+
+REF: 20080718/MPCPages.arc
+
+Queries related to names and citations should be addressed to the IAU Working Group Small Body Nomenclature contact@wgsbn-iau.org.
+Alternate Designations[hide]
+Designation
+2005 FY9
+
+
+- Gonggong: https://ssd.jpl.nasa.gov/tools/sbdb_lookup.html#/?sstr=225088
+
+show instructions
+
+225088 Gonggong (2007 OR10)
+Classification: TransNeptunian Object       SPKID: 20225088       Related Links: Ephemeris
+Orbit Viewer[hide]
+For accurate ephemerides, please instead use our Horizons system. This orbit viewer was implemented using two-body methods, and hence should not be used for determining accurate long-term trajectories (over several years or decades) or planetary encounter circumstances.
+Object labels not visible? Increase the font size using the orbit viewer's menu icon  to get to "Settings", then "Label Font Size".
+
+Orbit Parameters[show]
+Physical Parameters[hide]
+Parameter	Value	Units	Sigma	Reference	Notes
+[H] absolute magnitude	1.82			MPO983144	
+rotation period	22.4	h		LCDB (Rev. 2023-October);...	[Result based on less than full coverage...
+
+Satellites[hide]
+(225088) Gonggong I Xiangliu
+Year Discovered: 2010
+Provisional Designation: S/2010 (225088) 1
+Reference: Kiss et al. (2017), ApJL 838
+Discovery Circumstances[hide]
+225088 Gonggong
+Discovered 2007 July 17 by M. E. Schwamb, M. E. Brown and D. Rabinowitz at Palomar.
+
+Gonggong is a Chinese water god with red hair and a serpent-like tail. He is known for creating chaos, causing flooding, and tilting the Earth; he is often depicted with the head of a human and the body of a snake. Gonggong is often attended by his minister, Xiangliu, a nine-headed poisonous snake monster for whom the satellite is named.
+
+REF: MPC batch dated 2020-02-05
+
+Queries related to names and citations should be addressed to the IAU Working Group Small Body Nomenclature contact@wgsbn-iau.org.
+Alternate Designations[hide]
+Designation
+2007 OR10
+ 
+
+Paste back what the first links say for MK2, Xiangliu and Vanth, the error lines word for word, and I'll turn it into a ruling for Code. If Vanth comes back with a name and the other two come back with errors, JPL doesn't carry MK2 or Xiangliu under those numbers.
+
+================================================================
+
+Yes, it's documented. The orbital elements file (`orbital_elements.py`) holds both moons' elements, with their sources in comments beside them:
+
+- **Xiangliu** comes from Kiss et al. 2017. The hover on its orbit names Kiss et al. 2017 and 2019.
+- **MK2** comes from arXiv:2509.05880, the 2025 Hubble analysis.
+
+For both, the hover also says the orientation isn't constrained. The papers don't fix which way each orbit is tilted in space: MK2's tilt is measured against our line of sight, and Xiangliu's node and periapsis angles aren't known. So the orrery shows those values as unknown instead of presenting them as precise.
+
+So nothing was lost. JPL hasn't turned those papers into positions it serves, so asking JPL gets "out of bounds". The orrery's own drawing comes from the papers, and those are what my ruling for Code means by the typed elements.
+
+To keep Code from searching for this, replace ruling 1 in the reply with:
+
+```
+1. MK2, Xiangliu and 6AC4721 keep their drawings from their typed
+   elements, whether or not JPL answers. JPL serves no positions for
+   any of them; the elements come from published papers, documented
+   in orbital_elements.py (Xiangliu: Kiss et al. 2017; MK2:
+   arXiv:2509.05880) and named in their hovers. Keep those hovers'
+   sources and the "Orientation unconstrained" notes as they are.
+```
+
+The rest of the reply stands as written.
+
+===================================================
+
+**Code:**
+
+The files are gone from `data/`. Now running the maintenance run without them; this is the real file-absent test.
+
+While it runs, I'll update the records.
+
+The records script is ready. Waiting on the maintenance run to fill in its result.
+
+The file-absent maintenance run is still going. I'll write in its result and report when it ends.
+
+The file-absent test passed. With the saved-path files gone from the repository's `data/` folder, the maintenance run read "35 of 35 gating checkers passed". Nothing in it complained about the missing files.
+
+**What the run showed**
+- All 24 orbit-cache tests passed.
+- No line in the run's output names the saved-path files.
+- The check that nothing is missing from the gallery said "NOTHING MISSING -- 92 served objects".
+- Tier-1 is 0 on the push gate.
+- The data inventory page (`DATA_INVENTORY.md`) dropped its three lines for those files, which is correct now that they're gone.
+
+**What the records say**
+- **L-512 (fallbacks when JPL cannot answer)** quotes your words: you deleted the repository's files because they may be corrupted.
+- **Where you kept a copy:** the July and June copies are in `python_work\orrery\archived\`, outside the repository.
+- **The run:** the file-absent run and its result are recorded.
+- **What's left:** your look at A2 and your commit.
+- **Where We Are:** its "Changed" box now says the files are gone from the repository. The request to move them is gone from "Needs you now", and the page is at 128 lines above the marker.
+
+**One file I didn't touch:** `window_config.json` changed from "zoomed" to "iconic", which means minimized. The orrery writes that file when it closes, so this is probably from you running the app. My smoke tests ran on a copy elsewhere. Commit it or not, as you like.
+
+**Files changed (for your run record):**
+- ok `LEDGER_CONSOLIDATED.md` (2 edits; index regenerated, 253 live items)
+- ok `documentation/WHERE_WE_ARE.md` (3 edits)
+- written by the maintenance run: `DATA_INVENTORY.md`, plus the same atlas, index, audit and data files as before
+- tonight's earlier edits are unchanged: `jpl_outcome.py` (new), `palomas_orrery.py`, `palomas_orrery_helpers.py`, `position_accuracy.py` and `test_orbit_cache.py`
+
+**Token count:** I can't print it from inside the session. For this step I read about 60 lines and wrote about 30.
+
+**Your run order:**
+1. Look at A2 with the wifi on, then off. 
+   Off/on:
+   1. MK2 around Makemake (static and animation), -- keplerian/same
+   2. Xiangliu around Gonggong -- keplerian/same
+   3. and 6AC4721 around the Sun should each look as they did in A1. -- keplerian/same
+   4. Also check Mars -- keplerian position only/actual orbit and position
+   5. and Halley around the Sun. -- keplerian position only/actual orbit and position
+2. Commit.
+
+**What's waiting on you:**
+- (do) the look, wifi on and off.
+- (do) commit.

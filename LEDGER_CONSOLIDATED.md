@@ -1676,13 +1676,112 @@ as an archive of the prioritization thinking -- no cleanup on close.
   - horizons-orbital-mechanics 1.16 -> 1.17 (the L-470 paragraph, the
     named failure with part 1's second link, the skip lists now five,
     the fresh switch repository-wide), protocol v3.126.
-**Gap:** Tony's look at A1, wifi off and on; then A2 (ruling 1: "no
-such body" is not "JPL unreachable"), then slices b and c. The three
-analytical fallback lists stay until slice b.
-- **Tony-action (do):** reinstall horizons-orbital-mechanics (1.17) and
-  paste protocol v3.126 into the Project.
-- **Tony-action (do):** last in the run order, delete
-  data/orbit_paths.json, .backup and .backup_old by hand.
+- **A1 looked at and committed by Tony, 2026-11-04** (e7ea3294): wifi
+  off and on, as predicted. horizons-orbital-mechanics 1.17 reinstalled
+  and protocol v3.126 pasted, by Tony's run record; the next session
+  that loads the skill confirms its copy reads 1.17. THE SAVED FILES ARE
+  KEPT, NOT DELETED (Tony, 2026-11-04): "I did not delete
+  data/orbit_paths.json and its two backups; I moved them to archived/
+  for the record, where .gitignore already ignores all three." This
+  replaces A1's "delete them last". At A2's end the three of Nov 3 and
+  4 were still in data/ (137.6 MB each); the copies in
+  ..\orrery\archived\ are of June 17 and July 8. Tony, Nov 4, night:
+  "I moved them to archived/ myself; ruling 0 said delete, and I chose
+  to keep them." Read by this session at 21:44 that night: all three
+  still in data/ (orbit_paths.json Nov 4 10:18, 137,565,760 bytes;
+  .backup Nov 4 08:15, 137,565,760; .backup_old Nov 3 13:52,
+  137,542,931); no archived/ folder in the repository; the only
+  archived/ copies under python_work are ..\orrery\archived\
+  (orbit_paths.json Jul 8 2026 17:03, 136,693,466 bytes; .backup Jun 17
+  13:19 and .backup_old Jun 17 13:18, 136,691,204 each; and
+  orbit_paths_backup.json Jul 8 17:02, 136,691,204). Tony's picture of
+  22:14 shows that folder (python_work\orrery\archived, the sibling
+  folder, not the repository; folder changed Nov 4 18:11), so the files
+  he moved are the older orrery folder's. Read again at 22:15: the
+  repository's three of Nov 3 and 4 still in data/. THEN DELETED BY
+  TONY, Nov 4, night: "i was looking at my old sandbox not the repo.
+  and i decided to just delete the ones in the repo data/ folder. they
+  may be corrupted. the old ones from July are in orrery/archived as
+  you saw." Read at 22:20: no orbit_paths file in data/. The copy kept
+  is python_work\orrery\archived\ (Jul 8 and Jun 17, above), outside
+  the repository. The file-absent maintenance run, 22:20: 35 of 35 gating checkers passed (308.3 s); the orbit cache's 24 tests passed; no line names the file; Tier-1 0 on the gate path.
+- **Slice a, part A2, built 2026-11-04, night (Claude Code, Opus 5.5)
+  at e7ea3294, not committed.** astroquery 0.4.9.post1 on Tony's
+  machine (position_accuracy's docstring names 0.4.11). JPL's words for
+  each case read live that night, recorded in jpl_outcome.py's
+  docstring: astroquery itself names an unknown small body ("Unknown
+  target") and an ambiguous name; "No such record" (a major-body id)
+  and "DXREAD ... out of bounds" (MK2 120136472, Xiangliu 120225088)
+  reach it as "Query failed without known error message" with JPL's
+  text; a date outside the ephemeris is "No ephemeris for target".
+  - jpl_outcome.py (new): found, unknown, ambiguous, unreachable (a
+    connection error, a timeout, an HTTP failure), other (never an
+    outage), not_asked; outcome_of_text reads JPL's text the way
+    astroquery does, so both routes agree; merge_routes;
+    holds_fallback.
+  - fetch_trajectory and fetch_position fill an optional report dict;
+    successful results and date padding unchanged (tested).
+    position_accuracy.fetch_small_body_state raises JplTargetError for a
+    definite unknown or ambiguous answer; fetch_position keeps it when
+    astroquery then fails to connect (step 8).
+  - The four fallback branches ask holds_fallback with their fetch's
+    report: plot_actual_orbits, the static worker's two (the list, and
+    the one by MA in the first loop), the animation worker's. The
+    Orcus-from-Vanth derivation is not a fallback branch and is
+    unchanged.
+  - test_orbit_cache.TestJplOutcome, offline, 9 tests: 10 faked answers
+    each to fetch_trajectory and to fetch_position by astroquery, 11 by
+    both routes, the direct request reading JPL's own text, the four
+    branches found by their conditions; planted faults caught.
+    Registered in main(): 23 of 23 passed.
+  - Seen in the app on throwaway copies: four bodies around the Sun the
+    same 48 traces as A1 with JPL up, and the same 16 with JPL down.
+    WITH JPL UP, MK2 (around Makemake), Xiangliu (around Gonggong) and
+    6AC4721 lose their position markers, since JPL answers it has no
+    record of them; MK2's and Xiangliu's orbits stay (drawn by
+    plot_tno_satellite_orbit, not a fallback branch); 6AC4721 goes from
+    16 traces to 8, its orbits and coma with its marker. WITH JPL DOWN
+    all three draw as before.
+  - Carried for horizons-orbital-mechanics' next version (1.17 already
+    reinstalled; slice b rewrites both): A Skip Names What Failed's
+    "which act only when Horizons returned nothing" gains "and JPL did
+    not answer that it has no such body"; Query Mechanics' "API returns
+    empty -> check the explicit fallback list" gains the outcomes of
+    jpl_outcome.py.
+- **Tony's ruling on the three bodies, 2026-11-04, night**, after his
+  own check of JPL by its API: Vanth 120090482 is found ("(90482) Orcus
+  I Vanth ... Satellite I body: 120090482", from JPL's TNO satellite
+  solution); MK2 120136472 and Xiangliu 120225088 answer "DXREAD:
+  requested IOBJ= ******** is out of bounds, no action taken.", the same
+  for their system ids (920136472, 920225088) and for a one-day position
+  request; JPL's small-body pages list both only as discoveries (MK2:
+  Parker et al. 2015, CBET 4275; Xiangliu: Kiss et al. 2017, ApJL 838),
+  with no orbit. So "out of bounds" means no such record, as
+  jpl_outcome.py sorts it. Ruled: (1) MK2, Xiangliu and 6AC4721 keep
+  their drawings from their typed elements whether or not JPL answers;
+  the elements come from published papers (orbital_elements.py:
+  Xiangliu, Kiss et al. 2017; MK2, arXiv:2509.05880), named in their
+  hovers, and the hovers' sources and "Orientation unconstrained" notes
+  stay as they are; (2) the ids 120136472 and 120225088 stay, following
+  JPL's pattern for Vanth, so a solution JPL publishes is found under
+  them; (3) "no such body" still keeps every other body out of the
+  fallbacks.
+  - Built the same night: jpl_outcome.DRAWN_FROM_PAPERS names the three;
+    holds_fallback answers False for them whatever JPL said, with a
+    "[JPL ANSWER] ... drawn from its published elements" line. The four
+    branches, the ids, the hovers and orbital_elements.py are unchanged.
+    test_orbit_cache: test_no_such_body_holds_the_fallback now uses
+    Vanth; test_the_three_keep_their_drawings (every outcome, and each
+    name on all three fallback lists); a fourth planted fault (the
+    exemption removed) caught. 24 of 24 passed.
+  - Seen in the app on throwaway copies, JPL up: MK2 around Makemake
+    3 traces with its marker (the animation 4 traces, 29 frames),
+    Xiangliu around Gonggong 5, 6AC4721 around the Sun 16 with its
+    orbits, nucleus and tails; the same as A1. The four bodies around
+    the Sun 48, unchanged. JPL down: the same counts for all three,
+    each told "JPL could not be reached".
+**Gap:** Tony's look at A2, wifi off and on; then slices b and c.
+- **Tony-action (do):** look at A2 with the wifi on and off, then commit.
 **Ref:** `path_or_orbit.py`; `test_path_or_orbit.py`;
 `idealized_orbits.py`; `palomas_orrery.py`; `palomas_orrery_helpers.py`;
 `orbit_data_manager.py`; L-510; L-470 (C/2025 K1's renumbering); L-504

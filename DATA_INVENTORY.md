@@ -9,17 +9,16 @@ Repo copies stale/absent; this reflects the live local stores.
 |---|---|---|---|---|
 | .vot | 4 | 295.1 MB | gaia_data_magnitude.vot (284.4 MB) | 2026-02-08 |
 | .nc | 18 | 161.1 MB | era5_clim_march_day22.nc (27.4 MB) | 2026-04-07 |
-| .json | 68 | 134.5 MB | orbit_paths.json (131.2 MB) | 2026-11-04 |
-| .backup | 4 | 131.6 MB | orbit_paths.json.backup (131.2 MB) | 2026-11-04 |
-| .backup_old | 1 | 131.2 MB | orbit_paths.json.backup_old (131.2 MB) | 2026-11-03 |
 | .csv | 15 | 34.9 MB | 3773_v3_niskin_hot001_yr01_to_hot348_yr35.csv (30.8 MB) | 2026-04-07 |
 | .pkl | 2 | 33.6 MB | star_properties_magnitude.pkl (31.1 MB) | 2025-09-16 |
 | .png | 159 | 14.6 MB | 2026-03-21_heatmap_western_heatwave_march_21.png (807.0 KB) | 2026-06-30 |
 | .kmz | 40 | 14.4 MB | western_heatwave_march_21_blockbuster.kmz (904.7 KB) | 2026-06-30 |
 | .html | 40 | 9.5 MB | western_heatwave_march_26_teaser.html (1.4 MB) | 2026-06-30 |
 | .pdf | 1 | 7.1 MB | IPC_Sudan_Acute_Food_Insecurity_Feb2026_Jan2027_Special_Report.pdf (7.1 MB) | 2026-06-22 |
+| .json | 67 | 3.3 MB | constants_export.json (331.2 KB) | 2026-11-04 |
 | .kml | 114 | 1.3 MB | 2015-05-24_spikes_india_pak_2015.kml (107.5 KB) | 2026-06-29 |
 | .geojson | 1 | 700.6 KB | IPC_SD_A_87143417_2026-06-22.geojson (700.6 KB) | 2026-06-22 |
+| .backup | 3 | 384.7 KB | co2_mauna_loa_monthly.json.backup (177.6 KB) | 2026-01-15 |
 
 ## star_properties_magnitude.pkl
 
@@ -89,6 +88,6 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 | repo | served size | ceiling | headroom | used |
 |---|---|---|---|---|
 | gallery | 461.9 MB | 1024 MB | 562 MB | 45.1% |
-| orrery (gitignored data) | 969.4 MB | n/a (not served) | -- | -- |
+| orrery (gitignored data) | 575.9 MB | n/a (not served) | -- | -- |
 
 Note: orrery data is local/gitignored. If orbit cache files are pushed to either repo for web serving, re-run this inventory to update headroom.

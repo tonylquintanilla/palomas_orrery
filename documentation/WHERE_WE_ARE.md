@@ -1,23 +1,21 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 4, 2026, evening: the Claude Code session that built L-512 (fallbacks when JPL cannot answer), slice a, part A1.
-- Written at orrery 79018c0c and gallery 5abca2c6, plus this session's uncommitted edits.
+Last updated: November 4, 2026, night: the Claude Code session that built L-512 (fallbacks when JPL cannot answer), slice a, part A2.
+- Written at orrery e7ea3294 and gallery 5abca2c6, plus this session's uncommitted edits.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The saved-path file is out of the app: nothing reads or writes it,
->   and the "Update Orbit Data?" question is gone (your ruling 0).
-> - Every JPL question in the repository is now asked fresh, and a
->   check fails if one is not (L-512 (fallbacks when JPL cannot answer)).
+> - The orrery now tells "JPL has no such body" from "JPL cannot be
+>   reached", and says which (L-512 (fallbacks when JPL cannot answer)).
+> - By your ruling, MK2, Xiangliu and 6AC4721 keep their drawings from
+>   their papers. The saved-path files are gone from the repository.
 >
-> **Do next:** *your look, wifi off and on (the report's run order);
-> then part A2, "no such body" is not "JPL unreachable".*
+> **Do next:** *your look at A2, wifi on and off (the report's run
+> order); then commit.*
 >
 > **Needs you now:**
-> - *(do) Reinstall horizons-orbital-mechanics (now 1.17) and paste the
->   protocol v3.126 into the Project's instructions.*
 > - *(do) Each morning, Pull origin on both, orrery then website, first;
 >   do not wait for the night, which GitHub starts hours late or drops.*
 
@@ -30,8 +28,8 @@ Oct 27's order, changed Oct 29 (`DESIGN_L314_solar_wind_rulings_20261029.md`).
                objects, the Sun's and Earth's slices, historical
                missions' slice 1, the orrery's paths by the plan (L-476),
                L-510 part 1 (Nov 4).
- 12f.  [NOW]   *L-512 (fallbacks when JPL cannot answer): slice a part
-               A1 built Nov 4; A2, then slices b and c.* << moved this session
+ 12f.  [NOW]   *L-512 (fallbacks when JPL cannot answer): A1 committed
+               Nov 4; A2 built and ruled on; then b and c.* << moved this session
  5d.   [NOW]   *The orrery's clock (L-504 (the orrery's clock)): the
                data path done Oct 29, the website's date fix Oct 31;
                Earth System, stamps, tools next.*
@@ -60,7 +58,7 @@ Oct 27's order, changed Oct 29 (`DESIGN_L314_solar_wind_rulings_20261029.md`).
 
 Standing rulings. A line leaves after a few weeks, once it is habit, or
 once a skill or the protocol carries it (trimmed Nov 3, night).
-- No saved-path file; a JPL outage is met by propagation and a record (Nov 4).
+- No saved-path file (July copy kept outside); an outage is met by propagation and a record (Nov 4).
 - A small body is a path at or above e 1 in JPL's database, every 30
   days, else an orbit; two sides of 1 refuse the drawing (Nov 4).
 - From the talk (Nov 3): the words have one home, the orrery's export;
@@ -126,7 +124,7 @@ Not urgent, in your order:
 - This session: L-512; the map and your rulings; `COORD_L512_slice_a_prompt_20261104.md`.
 - The talk's rulings: `DESIGN_L484_consistency_rulings_20261103.md`.
 - The door: `documentation/python_work_door/`, and L-499.
-- Your run record: `WHERE_WE_ARE_11-3-26_1158_run_record.md`.
+- Your run record: `WHERE_WE_ARE_11-4-26_1735_run_record.md`.
 
 --- Your run record below this line. No patch edits it; the length cap
 --- stops here; the close reads your timestamped copy and clears this.

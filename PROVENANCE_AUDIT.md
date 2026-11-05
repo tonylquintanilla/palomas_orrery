@@ -2,9 +2,9 @@
 # Paloma's Orrery -- Provenance Audit
 
 Generated: November 04, 2026
-Files scanned: 176
-Total findings: 1163
-Constants: 305 | Dicts: 75 | Display strings: 783
+Files scanned: 177
+Total findings: 1164
+Constants: 306 | Dicts: 75 | Display strings: 783
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -20,12 +20,12 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T1 by domain | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|--------------|---:|---:|---:|--------:|
+| 20261105T042433Z | `e7ea329` | 177 | 1164 | 276 | orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2 | 706 | 176 | 6 | 0 |
+| 20261105T035008Z | `e7ea329` | 177 | 1164 | 276 | orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2 | 706 | 176 | 6 | 0 |
+| 20261105T004331Z | `e7ea329` | 177 | 1164 | 276 | orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2 | 706 | 176 | 6 | 0 |
+| 20261105T003822Z | `e7ea329` | 177 | 1164 | 276 | orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2 | 706 | 176 | 6 | 0 |
 | 20261104T220022Z | `79018c0` | 176 | 1163 | 276 | orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2 | 706 | 175 | 6 | 0 |
 | 20261104T215519Z | `79018c0` | 176 | 1163 | 276 | orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2 | 706 | 175 | 6 | 0 |
-| 20261104T215058Z | `79018c0` | 176 | 1163 | 276 | orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2 | 706 | 175 | 6 | 0 |
-| 20261104T171233Z | `3fb14c2` | 176 | 1163 | 277 | orrery 111, Earth System 149, stars 13, utilities 2, unclassified 2 | 705 | 175 | 6 | 0 |
-| 20261104T092522Z | `eab623f` | 176 | 1163 | 277 | orrery 111, Earth System 149, stars 13, utilities 2, unclassified 2 | 705 | 175 | 6 | 0 |
-| 20261104T091015Z | `eab623f` | 176 | 1163 | 277 | orrery 111, Earth System 149, stars 13, utilities 2, unclassified 2 | 705 | 175 | 6 | 0 |
 
 Change since the previous run: total +0, Tier-1 +0.
 
@@ -62,7 +62,7 @@ No file's Tier-1 count rose.
 |------|-------|--------|------:|
 | 1 | 16-20 | FIX NOW | 276 |
 | 2 | 10-15 | REVIEW | 706 |
-| 3 | 5-9 | LOW PRIORITY | 175 |
+| 3 | 5-9 | LOW PRIORITY | 176 |
 | 4 | 1-4 | LOWEST PRIORITY | 6 |
 
 **Whole tree, Tier-1: 276: orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2.** By each file's docstring `Domain:` tag; Findings by File Type below has every tier and every domain. The push gate is the Gate Path section, not this total.
@@ -229,6 +229,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `test_dimensions.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `test_domain_split.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `test_objects_export.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
+| `test_orbit_cache.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `test_period_fetch.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `test_reset_completeness.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `worksheet_key_aliases.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
@@ -246,7 +247,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 |--------|------:|-------:|-------:|-------:|-------:|------:|
 | Orrery (solar system + orbital mechanics) | 47 | 110 | 590 | 52 | 3 | 755 |
 | Earth System | 13 | 149 | 71 | 2 | 0 | 222 |
-| Dev Tools (audit, diagnostics, one-shot scripts) | 30 | 0 | 0 | 115 | 0 | 115 |
+| Dev Tools (audit, diagnostics, one-shot scripts) | 31 | 0 | 0 | 116 | 0 | 116 |
 | Stars (stellar neighborhood) | 12 | 13 | 41 | 6 | 3 | 63 |
 | Utilities (cross-domain shared helpers) | 1 | 2 | 0 | 0 | 0 | 2 |
 | Gallery | 0 | 0 | 0 | 0 | 0 | 0 |
@@ -1565,11 +1566,11 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 139 | constant | SHEET_FIGURES | 4 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'computation') |
-| 144 | constant | HALF_UNIT | 0.5 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'computation') |
-| 150 | constant | SIGMA_MULTIPLE | 3 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'computation') |
-| 157 | constant | DISTANCE_FLOOR_EXPONENT_KM | 0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
-| 164 | constant | SPEED_FLOOR_EXPONENT_KM_S | -3 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'computation') |
+| 143 | constant | SHEET_FIGURES | 4 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'computation') |
+| 148 | constant | HALF_UNIT | 0.5 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'computation') |
+| 154 | constant | SIGMA_MULTIPLE | 3 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'computation') |
+| 161 | constant | DISTANCE_FLOOR_EXPONENT_KM | 0 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 168 | constant | SPEED_FLOOR_EXPONENT_KM_S | -3 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'computation') |
 
 ### saturn_visualization_shells.py
 
@@ -1971,9 +1972,9 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 106 | dict | ROLE_MAP[...] | (166 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 413 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 436 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 106 | dict | ROLE_MAP[...] | (167 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 414 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 437 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### moon_visualization_shells.py
 
@@ -2012,9 +2013,9 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 2347 | constant | PERFRAME_INDICATOR_RADIUS_FACTOR | 100.0 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 2380 | constant | PERFRAME_COORD_DECIMALS | 7 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 3952 | constant | BUTTON_WIDTH | 14 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 2374 | constant | PERFRAME_INDICATOR_RADIUS_FACTOR | 100.0 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 2407 | constant | PERFRAME_COORD_DECIMALS | 7 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 3979 | constant | BUTTON_WIDTH | 14 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
 
 ### palomas_orrery_dashboard.py
 
@@ -2072,7 +2073,7 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 106 | dict | PUBLISHED_ROW_NAMES[...] | (9 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal use (name vocabulary) |
+| 110 | dict | PUBLISHED_ROW_NAMES[...] | (9 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal use (name vocabulary) |
 
 ### provenance_history.py
 
@@ -2164,6 +2165,12 @@ is planned for a future session.
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
 | 109 | dict | SELF_TEST_RECORD[...] | (8 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+
+### test_orbit_cache.py
+
+| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
+|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
+| 573 | constant | JD_TEST | 2461348.5 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### test_orbit_markers.py
 

@@ -43,6 +43,17 @@ every run). It replaces the line-text check on DATA_PATH_MODULES, which
 keep their clock checks. Registered in main(), whose last line names the
 files and calls it examined. TestOrbitCache now tests functions of
 orbit_data_manager.py marked DEPRECATED (data/orbit_paths.json retired).)
+Module updated: November 4, 2026, evening, with Anthropic's Claude Opus 5.5
+(L-512, slice a, part A2, ruling 1): TestJplOutcome, all offline on faked
+answers in JPL's own words of 2026-11-04. fetch_trajectory and
+fetch_position tell an unknown target, an ambiguous one and an unreachable
+JPL apart, and call nothing else an outage; fetch_position on both routes
+(the direct small-body request, then astroquery), a definite answer from
+the first never overwritten by the second's outage; the four fallback
+branches in palomas_orrery.py ask jpl_outcome.holds_fallback; each check
+shown able to fail. Registered in main(), whose last line names them.
+Updated Nov 4, night, for Tony's ruling: MK2, Xiangliu and 6AC4721, which
+JPL has no solution for, keep their drawings whatever JPL answers.)
 """
 import ast
 import json
@@ -553,6 +564,427 @@ class TestFreshCalls(unittest.TestCase):
         self.assertTrue(probs(counter))
         self.assertTrue(probs(counter.replace('compare', 'other'), rule))
 
+# ----------------------------------------------------------------------------
+# L-512 A2: "no such body" is not "JPL unreachable" (Tony's ruling 1).
+# Every answer below is faked; nothing here reaches the network.
+# ----------------------------------------------------------------------------
+
+OUTCOME_SUMMARY = {}
+JD_TEST = 2461348.5   # 2026-11-04 00:00 TDB, the day the answers were read
+
+# The words JPL used on 2026-11-04 (jpl_outcome.py's docstring), cut down.
+SAID_UNKNOWN_SMALL = ("API VERSION: 1.2\nAPI SOURCE: NASA/JPL Horizons API\n\n"
+                      "Matching small-bodies:\n    No matches found.\n")
+SAID_AMBIGUOUS_SMALL = ("API VERSION: 1.2\n\nMatching small-bodies:\n\n"
+                        "    Record #  Epoch-yr  Primary Desig  >MATCH NAME<\n"
+                        "        2688            1982 HG1        Halley\n"
+                        "    90000001    -239    1P              Halley\n")
+SAID_NO_RECORD = "API VERSION: 1.2\n\nNo such record, positive values only\n"
+SAID_OUT_OF_BOUNDS = ("API VERSION: 1.2\n\nDXREAD: requested IOBJ= ******** is "
+                      "out of bounds, no action taken.\nRecord boundaries:\n")
+SAID_NO_EPHEMERIS = ('API VERSION: 1.2\n\nNo ephemeris for target "Juno (spacecraft)" '
+                     'prior to A.D. 2011-AUG-05 17:19:12.1832 TDB\n')
+
+
+def _astroquery_says(text):
+    """The ValueError astroquery 0.4.9.post1 raises for an answer whose
+    words it does not recognise."""
+    return ValueError('Query failed without known error message; received '
+                      'the following response:\n' + text)
+
+
+def _faked_answers():
+    """Each outcome as the two routes meet it: (label, exception, outcome)."""
+    import requests
+    import jpl_outcome as J
+    return [
+        ('unknown, astroquery\'s words',
+         ValueError('Unknown target (Zzqxw). Maybe try different id_type?'), J.UNKNOWN),
+        ('unknown, "No such record"', _astroquery_says(SAID_NO_RECORD), J.UNKNOWN),
+        ('unknown, a record number out of bounds (MK2)',
+         _astroquery_says(SAID_OUT_OF_BOUNDS), J.UNKNOWN),
+        ('ambiguous, astroquery\'s words',
+         ValueError('Ambiguous target name; provide unique id:\n  2688  Halley'), J.AMBIGUOUS),
+        ('unreachable, no connection',
+         requests.exceptions.ConnectionError("Failed to resolve 'ssd.jpl.nasa.gov'"),
+         J.UNREACHABLE),
+        ('unreachable, a timeout', requests.exceptions.ReadTimeout('read timed out'),
+         J.UNREACHABLE),
+        ('unreachable, an HTTP failure',
+         requests.exceptions.HTTPError('503 Server Error: Service Unavailable'), J.UNREACHABLE),
+        ('other, a date outside the ephemeris',
+         ValueError('Horizons Error: No ephemeris for target "Juno (spacecraft)" prior to '
+                    'A.D. 2011-AUG-05'), J.OTHER),
+        ('other, a malformed answer', ValueError('could not convert string to float'), J.OTHER),
+        ('other, a local error', KeyError('x'), J.OTHER),
+    ]
+
+
+def _vectors_table(jd):
+    from astropy.table import Table
+    return Table({'datetime_jd': [jd], 'x': [1.0], 'y': [0.5], 'z': [0.1],
+                  'vx': [0.001], 'vy': [0.01], 'vz': [0.0],
+                  'range': [1.12], 'range_rate': [0.002]})
+
+
+def _fake_horizons(answer):
+    """A Horizons stand-in: vectors() raises `answer` if it is an
+    exception, else returns it. It counts its calls."""
+    class FakeHorizons(object):
+        calls = 0
+
+        def __init__(self, *args, **kwargs):
+            pass
+
+        def vectors(self, **kwargs):
+            FakeHorizons.calls += 1
+            if isinstance(answer, BaseException):
+                raise answer
+            return answer
+    return FakeHorizons
+
+
+def _load_fetch_position(**override):
+    """palomas_orrery.fetch_position, read from the file and run on its own
+    (importing palomas_orrery would open the app's window)."""
+    import jpl_outcome as J
+    from astropy.time import Time
+    from constants_new import KM_PER_AU, LIGHT_MINUTES_PER_AU
+    here = os.path.dirname(os.path.abspath(__file__))
+    with open(os.path.join(here, 'palomas_orrery.py'), encoding='utf-8') as f:
+        src = f.read()
+    m = re.search(r'\ndef fetch_position\(.*?\n(?=def )', src, re.S)
+    if not m:
+        raise AssertionError('fetch_position not found in palomas_orrery.py')
+    ns = {'Time': Time, 'np': np, 'HORIZONS_CACHE': False,
+          'objects': [], 'parent_planets': {}, 'planetary_params': {},
+          'KNOWN_ORBITAL_PERIODS': {}, 'KM_PER_AU': KM_PER_AU,
+          'LIGHT_MINUTES_PER_AU': LIGHT_MINUTES_PER_AU,
+          'calculate_planet9_position_on_orbit': lambda: (1.0, 2.0, 3.0, 3.74)}
+    for name in ('tell', 'outcome_of_exception', 'merge_routes', 'SAYS', 'FOUND',
+                 'OTHER', 'NOT_ASKED', 'NOT_A_BODY', 'UNREACHABLE'):
+        ns[name] = getattr(J, name)
+    ns.update(override)
+    exec(compile(m.group(0), 'palomas_orrery.py (fetch_position)', 'exec'), ns)
+    return ns
+
+
+def _position(ns, horizons_answer, direct=None, object_id='-61', id_type=None):
+    """fetch_position's result and report, with Horizons faked and the
+    direct small-body request faked by `direct` (an exception, or a
+    (state, record) pair) when the target is a small body."""
+    from datetime import datetime as _dt
+    ns['Horizons'] = _fake_horizons(horizons_answer)
+    report = {}
+    with patch('position_accuracy.fetch_small_body_state') as direct_request:
+        if isinstance(direct, BaseException):
+            direct_request.side_effect = direct
+        elif direct is not None:
+            direct_request.return_value = direct
+        result = ns['fetch_position'](object_id, _dt(2026, 11, 4), center_id='Sun',
+                                      id_type=id_type, report=report)
+    return result, report, ns['Horizons'].calls
+
+
+def _trajectory(horizons_answer, dates=None, **kwargs):
+    import palomas_orrery_helpers as H
+    from astropy.time import Time
+    from datetime import datetime as _dt
+    dates = dates or [_dt(2026, 11, 4)]
+    if horizons_answer == 'TABLE':
+        horizons_answer = _vectors_table(Time(dates).jd[0])
+    report = {}
+    with patch('palomas_orrery_helpers.Horizons', _fake_horizons(horizons_answer)):
+        result = H.fetch_trajectory('-61', dates, center_id='Sun', report=report, **kwargs)
+    return result, report
+
+
+class _FakeResponse(object):
+    def __init__(self, text, status=200):
+        self.text = text
+        self.status_code = status
+
+    def raise_for_status(self):
+        if self.status_code >= 400:
+            import requests
+            raise requests.exceptions.HTTPError('%d Server Error' % self.status_code)
+
+
+class TestJplOutcome(unittest.TestCase):
+    """L-512 A2 (ruling 1): fetch_trajectory and fetch_position tell an
+    unknown target, an ambiguous one and an unreachable JPL apart, on both
+    of fetch_position's routes, and hand the outcome to their callers; an
+    unknown or ambiguous target never enters a fallback branch."""
+
+    def setUp(self):
+        self._quiet = patch('builtins.print')
+        self._quiet.start()
+
+    def tearDown(self):
+        self._quiet.stop()
+
+    def _count(self, key):
+        OUTCOME_SUMMARY[key] = OUTCOME_SUMMARY.get(key, 0) + 1
+
+    # -- the sorting itself ------------------------------------------------
+    def test_each_answer_is_sorted(self):
+        import jpl_outcome as J
+        for label, exc, outcome in _faked_answers():
+            self.assertEqual(J.outcome_of_exception(exc), outcome, label)
+        self.assertEqual(J.outcome_of_text(SAID_UNKNOWN_SMALL), J.UNKNOWN)
+        self.assertEqual(J.outcome_of_text(SAID_AMBIGUOUS_SMALL), J.AMBIGUOUS)
+        self.assertEqual(J.outcome_of_text('Multiple major-bodies match string "JUPITER*"\n'
+                                           '  ID#  Name\n  5  Jupiter Barycenter\n'), J.AMBIGUOUS)
+        self.assertIsNone(J.outcome_of_text(SAID_NO_EPHEMERIS))
+        self.assertIsNone(J.outcome_of_text(''))
+        # a leftover exception is never called an outage
+        for exc in (RuntimeError('boom'), TypeError('t'), OSError('disk'), ValueError('')):
+            self.assertEqual(J.outcome_of_exception(exc), J.OTHER, repr(exc))
+        self._count('sorting')
+
+    # -- fetch_trajectory ---------------------------------------------------
+    def test_fetch_trajectory_outcomes(self):
+        import jpl_outcome as J
+        result, report = _trajectory('TABLE')
+        self.assertEqual(report['outcome'], J.FOUND)
+        self.assertAlmostEqual(result[0]['x'], 1.0)
+        for label, exc, outcome in _faked_answers():
+            result, report = _trajectory(exc)
+            self.assertEqual(report.get('outcome'), outcome, 'fetch_trajectory: ' + label)
+            self.assertEqual(result, [None], label)
+            self._count('fetch_trajectory')
+        # an empty answer is not an outage
+        result, report = _trajectory(_vectors_table(0.0)[:0])
+        self.assertEqual(report['outcome'], J.OTHER)
+        # not asked at all
+        result, report = _trajectory('TABLE', start_date=datetime(2030, 1, 1))
+        self.assertEqual(report['outcome'], J.NOT_ASKED)
+
+    def test_fetch_trajectory_success_and_padding_unchanged(self):
+        """A found answer reads as before, and a clamped date still pads
+        to None, with or without a report."""
+        import palomas_orrery_helpers as H
+        from astropy.time import Time
+        dates = [datetime(2026, 11, 3), datetime(2026, 11, 4)]
+        table = _vectors_table(Time(dates).jd[1])
+        with patch('palomas_orrery_helpers.Horizons', _fake_horizons(table)):
+            plain = H.fetch_trajectory('-61', dates, start_date=dates[1])
+            report = {}
+            told = H.fetch_trajectory('-61', dates, start_date=dates[1], report=report)
+        self.assertEqual(len(plain), 2)
+        self.assertIsNone(plain[0])
+        self.assertAlmostEqual(plain[1]['x'], 1.0)
+        self.assertEqual(plain, told)
+        self.assertEqual(report['outcome'], 'found')
+
+    # -- fetch_position, astroquery's route only (not a small body) --------
+    def test_fetch_position_astroquery_route(self):
+        import jpl_outcome as J
+        ns = _load_fetch_position()
+        result, report, calls = _position(ns, _vectors_table(JD_TEST))
+        self.assertEqual(report['outcome'], J.FOUND)
+        self.assertAlmostEqual(result['x'], 1.0)
+        for label, exc, outcome in _faked_answers():
+            result, report, calls = _position(ns, exc)
+            self.assertIsNone(result, label)
+            self.assertEqual(report.get('outcome'), outcome, 'fetch_position: ' + label)
+            self._count('fetch_position, astroquery')
+        result, report, calls = _position(ns, _vectors_table(JD_TEST)[:0])
+        self.assertIsNone(result)
+        self.assertEqual(report['outcome'], J.OTHER)
+        result, report, calls = _position(ns, None, object_id='planet9_placeholder')
+        self.assertEqual(report['outcome'], J.NOT_ASKED)
+        # the success case reads the same without a report
+        plain = ns['fetch_position']
+        ns['Horizons'] = _fake_horizons(_vectors_table(JD_TEST))
+        self.assertAlmostEqual(plain('-61', datetime(2026, 11, 4))['x'], 1.0)
+
+    # -- fetch_position, the direct small-body request first ---------------
+    def test_fetch_position_direct_route(self):
+        import jpl_outcome as J
+        ns = _load_fetch_position()
+        state = ({'x': 2.0, 'y': 0.0, 'z': 0.0, 'vx': 0.0, 'vy': 0.01, 'vz': 0.0,
+                  'range': 2.0, 'range_rate': 0.0}, {'source': 'faked'})
+        result, report, calls = _position(ns, RuntimeError('not asked'), direct=state,
+                                          object_id='2688', id_type='smallbody')
+        self.assertEqual(report['outcome'], J.FOUND)
+        self.assertEqual(calls, 0, 'astroquery asked after the direct request answered')
+        self.assertAlmostEqual(result['x'], 2.0)
+        connection = _faked_answers()[4][1]
+        unknown = J.JplTargetError(J.UNKNOWN, 'Horizons: Matching small-bodies: | No matches found.')
+        ambiguous = J.JplTargetError(J.AMBIGUOUS, 'Horizons: Matching small-bodies: | 2688 Halley')
+        cases = [
+            # (direct request, astroquery, outcome)
+            (unknown, connection, J.UNKNOWN),          # step 8: never overwritten by an outage
+            (ambiguous, connection, J.AMBIGUOUS),      # step 8
+            (unknown, _faked_answers()[6][1], J.UNKNOWN),   # ... nor by an HTTP failure
+            (unknown, ValueError('Unknown target (Zzqxw). Maybe try different id_type?'), J.UNKNOWN),
+            (unknown, _faked_answers()[8][1], J.UNKNOWN),   # ... nor by a malformed answer
+            (connection, ValueError('Unknown target (Zzqxw). Maybe try different id_type?'), J.UNKNOWN),
+            (connection, ValueError('Ambiguous target name; provide unique id:'), J.AMBIGUOUS),
+            (connection, connection, J.UNREACHABLE),
+            (connection, _faked_answers()[7][1], J.OTHER),
+            (ValueError('Horizons returned no vector table'), connection, J.UNREACHABLE),
+            (connection, _vectors_table(JD_TEST), J.FOUND),
+        ]
+        for direct, second, outcome in cases:
+            result, report, calls = _position(ns, second, direct=direct,
+                                              object_id='2688', id_type='smallbody')
+            self.assertEqual(report.get('outcome'), outcome,
+                             'direct %r then %r' % (direct, second))
+            self.assertEqual(calls, 1)
+            self._count('fetch_position, both routes')
+
+    def test_the_direct_request_sorts_jpl_words(self):
+        """position_accuracy.fetch_small_body_state reads JPL's own text:
+        unknown and ambiguous raise JplTargetError; no ephemeris is not
+        one; a lost connection propagates as the outage it is."""
+        import requests
+        import jpl_outcome as J
+        from position_accuracy import fetch_small_body_state
+        from test_position_digits import RECORDED_2XR_HEADER, RECORDED_2XR_DATA, _answer
+
+        def ask(text=None, exc=None, status=200):
+            fake = (lambda *a, **k: (_ for _ in ()).throw(exc)) if exc else \
+                (lambda *a, **k: _FakeResponse(text, status))
+            with patch('requests.get', fake):
+                return fetch_small_body_state('Zzqxw', 'smallbody', '@sun', JD_TEST)
+
+        for text, outcome in ((SAID_UNKNOWN_SMALL, J.UNKNOWN), (SAID_AMBIGUOUS_SMALL, J.AMBIGUOUS),
+                              (SAID_NO_RECORD, J.UNKNOWN), (SAID_OUT_OF_BOUNDS, J.UNKNOWN)):
+            with self.assertRaises(J.JplTargetError) as caught:
+                ask(text)
+            self.assertEqual(caught.exception.outcome, outcome)
+            self.assertEqual(J.outcome_of_exception(caught.exception), outcome)
+        for exc in (requests.exceptions.ConnectionError('no route'),
+                    requests.exceptions.ConnectTimeout('slow')):
+            with self.assertRaises(Exception) as caught:
+                ask(exc=exc)
+            self.assertEqual(J.outcome_of_exception(caught.exception), J.UNREACHABLE)
+        with self.assertRaises(Exception) as caught:
+            ask('', status=503)
+        self.assertEqual(J.outcome_of_exception(caught.exception), J.UNREACHABLE)
+        with self.assertRaises(ValueError) as caught:
+            ask(SAID_NO_EPHEMERIS)
+        self.assertNotIsInstance(caught.exception, J.JplTargetError)
+        self.assertEqual(J.outcome_of_exception(caught.exception), J.OTHER)
+        state, record = ask(_answer(RECORDED_2XR_HEADER, RECORDED_2XR_DATA))
+        self.assertAlmostEqual(state['x'], 1.942725296484269)
+        self._count('the direct request')
+
+    # -- the callers --------------------------------------------------------
+    def test_no_such_body_holds_the_fallback(self):
+        import jpl_outcome as J
+        # Vanth: on the fallback lists, and JPL has a solution for it.
+        self.assertTrue(J.holds_fallback('Vanth', {'outcome': J.UNKNOWN}))
+        self.assertTrue(J.holds_fallback('Vanth', {'outcome': J.AMBIGUOUS}))
+        for outcome in (J.UNREACHABLE, J.OTHER, J.FOUND, J.NOT_ASKED):
+            self.assertFalse(J.holds_fallback('Vanth', {'outcome': outcome}), outcome)
+        self.assertFalse(J.holds_fallback('Vanth', {}))
+        self.assertFalse(J.holds_fallback('Vanth', None))
+
+    def test_the_three_keep_their_drawings(self):
+        """Tony's ruling of Nov 4, night: MK2, Xiangliu and 6AC4721, which
+        JPL has no solution for, are drawn from their published elements
+        whatever JPL answers; each is on every fallback list."""
+        import jpl_outcome as J
+        self.assertEqual(J.DRAWN_FROM_PAPERS, frozenset(('MK2', 'Xiangliu', '6AC4721')))
+        for name in sorted(J.DRAWN_FROM_PAPERS):
+            for outcome in (J.UNKNOWN, J.AMBIGUOUS, J.UNREACHABLE, J.OTHER,
+                            J.FOUND, J.NOT_ASKED):
+                self.assertFalse(J.holds_fallback(name, {'outcome': outcome}),
+                                 (name, outcome))
+        here = os.path.dirname(os.path.abspath(__file__))
+        with open(os.path.join(here, 'palomas_orrery.py'), encoding='utf-8') as f:
+            src = f.read()
+        lists = [line.split('=', 1)[1].split(']', 1)[0] for line in src.splitlines()
+                 if line.strip().startswith(('ANALYTICAL_POSITION_FALLBACK =',
+                                             'ANALYTICAL_ANIMATION_FALLBACK ='))]
+        self.assertEqual(len(lists), 3)
+        for found in lists:
+            for name in J.DRAWN_FROM_PAPERS:
+                self.assertIn("'%s'" % name, found)
+        OUTCOME_SUMMARY['drawn'] = len(J.DRAWN_FROM_PAPERS)
+
+    def test_every_fallback_branch_asks(self):
+        """The four fallback branches in palomas_orrery.py pass the fetch's
+        report to holds_fallback, and each fetch they follow keeps one."""
+        here = os.path.dirname(os.path.abspath(__file__))
+        with open(os.path.join(here, 'palomas_orrery.py'), encoding='utf-8') as f:
+            src = f.read()
+        problems = fallback_branch_problems(src)
+        for line in problems:   # written past the quieted print
+            sys.stdout.write('[OUTCOME CHECK] FAIL ' + line + chr(10))
+        self.assertEqual(problems, [])
+        OUTCOME_SUMMARY['branches'] = 4
+
+    def test_the_outcome_checks_can_fail(self):
+        """Planted faults: each is caught by the check that guards it."""
+        import jpl_outcome as J
+        # 1. fetch_position letting astroquery's outage overwrite the direct answer
+        ns = _load_fetch_position(merge_routes=lambda first, second: second)
+        unknown = J.JplTargetError(J.UNKNOWN, 'Horizons: No matches found.')
+        result, report, calls = _position(ns, _faked_answers()[4][1], direct=unknown,
+                                          object_id='2688', id_type='smallbody')
+        self.assertNotEqual(report['outcome'], J.UNKNOWN)
+        # 2. every leftover exception called an outage
+        with patch('palomas_orrery_helpers.outcome_of_exception', lambda e: J.UNREACHABLE):
+            result, report = _trajectory(_faked_answers()[0][1])
+        self.assertNotEqual(report['outcome'], J.UNKNOWN)
+        # 3. a fallback branch without the question
+        here = os.path.dirname(os.path.abspath(__file__))
+        with open(os.path.join(here, 'palomas_orrery.py'), encoding='utf-8') as f:
+            src = f.read()
+        planted = src.replace(
+            "if planet in ANALYTICAL_POSITION_FALLBACK and not holds_fallback(planet, traj_report):",
+            "if planet in ANALYTICAL_POSITION_FALLBACK:", 1)
+        self.assertNotEqual(planted, src)
+        self.assertTrue(fallback_branch_problems(planted))
+        planted = src.replace("report=traj_report\n", "\n", 1)
+        self.assertNotEqual(planted, src)
+        self.assertTrue(fallback_branch_problems(planted))
+        # 4. the ruling's three bodies without their exemption
+        with patch.object(J, 'DRAWN_FROM_PAPERS', frozenset()):
+            self.assertTrue(J.holds_fallback('MK2', {'outcome': J.UNKNOWN}))
+
+
+# The fallback branches, by the condition each opens with, and the report
+# its fetch keeps (L-512 A2). A branch added later is found by its list's
+# name or by the analytical-position marker and must be named here.
+FALLBACK_BRANCHES = [
+    ('plot_actual_orbits', 'if planet in ANALYTICAL_POSITION_FALLBACK', 'traj_report'),
+    ('the static worker, first loop (by MA)',
+     "if (obj_data is None and obj['name'] in active_planetary_params and 'MA' in", 'pos_report'),
+    ('the static worker, second loop',
+     "if obj_data is None and obj['name'] in ANALYTICAL_POSITION_FALLBACK", 'pos_report'),
+    ('the animation worker', "if obj['name'] in ANALYTICAL_ANIMATION_FALLBACK", 'traj_report'),
+]
+
+
+def fallback_branch_problems(src):
+    """Each named fallback branch asks holds_fallback with its fetch's
+    report, the fetch keeps that report, and no other branch opens on a
+    fallback list."""
+    problems = []
+    lines = src.split('\n')
+    for where, opens, report in FALLBACK_BRANCHES:
+        at = [i for i, ln in enumerate(lines) if ln.strip().startswith(opens)]
+        if len(at) != 1:
+            problems.append('%s: %d branches open with %r' % (where, len(at), opens))
+            continue
+        cond = ' '.join(ln.strip() for ln in lines[at[0]:at[0] + 2])
+        if 'holds_fallback(' not in cond or report not in cond.split('holds_fallback(', 1)[1]:
+            problems.append('%s: does not ask holds_fallback(..., %s)' % (where, report))
+        before = '\n'.join(lines[max(0, at[0] - 200):at[0]])
+        if 'report=%s' % report not in before:
+            problems.append('%s: the fetch before it keeps no report (report=%s)'
+                            % (where, report))
+    opened = [ln.strip() for ln in lines
+              if re.match(r'\s*(if|elif)\b.*ANALYTICAL_(POSITION|ANIMATION)_FALLBACK', ln)]
+    if len(opened) != 3:
+        problems.append('%d branches open on a fallback list, 3 named' % len(opened))
+    return problems
+
 
 def main():
     """Run the suite and close on a verdict, not on a directory path.
@@ -573,6 +1005,7 @@ def main():
     suite = loader.loadTestsFromTestCase(TestOrbitCache)
     suite.addTests(loader.loadTestsFromTestCase(TestUtcClock))
     suite.addTests(loader.loadTestsFromTestCase(TestFreshCalls))   # L-512
+    suite.addTests(loader.loadTestsFromTestCase(TestJplOutcome))   # L-512 A2
     result = unittest.TextTestRunner(verbosity=2).run(suite)
 
     total = result.testsRun
@@ -603,9 +1036,19 @@ def main():
           "convert, corrupted entries are dropped; the clock reads UTC and "
           "both forms of the fetched stamp read back; the repository-wide "
           "fresh check examined %s .py files and %s JPL calls, every one "
-          "asked fresh (%d not JPL, excepted); nothing left behind."
+          "asked fresh (%d not JPL, excepted); JPL's answers told apart "
+          "(no such body, more than one, unreachable, other) on %d faked "
+          "answers to fetch_trajectory, %d to fetch_position by astroquery "
+          "and %d by both its routes, and %s fallback branches ask before "
+          "drawing (%s bodies JPL has no solution for drawn from their "
+          "papers whatever it answers); nothing left behind."
           % (total, fresh.get('files', '?'), fresh.get('calls', '?'),
-             len(fresh.get('excepted', []))))
+             len(fresh.get('excepted', [])),
+             OUTCOME_SUMMARY.get('fetch_trajectory', 0),
+             OUTCOME_SUMMARY.get('fetch_position, astroquery', 0),
+             OUTCOME_SUMMARY.get('fetch_position, both routes', 0),
+             OUTCOME_SUMMARY.get('branches', '?'),
+             OUTCOME_SUMMARY.get('drawn', '?')))
     return 0
 
 

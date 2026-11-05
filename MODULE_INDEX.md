@@ -11,9 +11,9 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 176  
-**Total Lines of Code (non-blank):** 139,012  
-**Total Public Functions/Classes:** 1,797
+**Total Python Files:** 177  
+**Total Lines of Code (non-blank):** 139,676  
+**Total Public Functions/Classes:** 1,805
 
 ## Classification Coverage
 
@@ -46,7 +46,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `earth_system_controller.py` | KMZ layer selector for Google Earth Pro. (131 lines) |
 | `earth_system_visualization_gui.py` | Earth System Visualization GUI for Paloma's Orrery Hub window with climate data visualizations (1,903 lines) |
 | `orbital_param_viz.py` | Interactive orbital element visualization tool. (1,965 lines) |
-| `palomas_orrery.py` | Main GUI and plotting engine for Paloma's Orrery. (9,700 lines) |
+| `palomas_orrery.py` | Main GUI and plotting engine for Paloma's Orrery. (9,736 lines) |
 | `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (3,504 lines) |
 | `star_visualization_gui.py` | Stellar visualization GUI for Paloma's Orrery. (1,409 lines) |
 
@@ -122,6 +122,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `galactic_tide_sampler.py` | Where the galaxy's tide sends comets in from: dots in the outer Oort cloud about the galaxy's pole, placed once from a seed, sparse at the galaxy's plane and at its poles, thickest halfway. (230 lines) |
 | `hills_cloud_sampler.py` | The Hills cloud (the inner Oort cloud) as dots along orbits, following Nesvorny et al. (2025), Fig. 3. (427 lines) |
 | `idealized_orbits.py` | Keplerian orbit ellipse construction and satellite orbit models. Computes and plots idealized (Keplerian) orbit paths from orbital elements, with osculating element support for high-accuracy visualization. Handles elliptical, parabolic, and hyperbolic orbits. Includes specia... (6,770 lines) |
+| `jpl_outcome.py` | - what JPL Horizons answered when the orrery asked it for a body, sorted into the kinds a caller has to tell apart (L-512, slice a, part A2; Tony's ruling 1 of 2026-11-04: "no such object" is not a failure to reach JPL). (186 lines) |
 | `main_belt_sampler.py` | The main asteroid belt as a cloud of dots placed at random inside the belt's spread, measured from JPL's own orbits. (365 lines) |
 | `object_type_analyzer.py` | Object Type Analysis and Report Generation Module Provides comprehensive analysis of astronomical data including object types, data quality metrics, and full report generation. (756 lines) |
 | `orbital_elements.py` | Standalone data module containing orbital element dictionaries. NO IMPORTS - Pure data only to avoid circular dependencies. (1,296 lines) |
@@ -129,7 +130,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `outer_oort_sampler.py` | The outer Oort cloud as a thin scatter of loose dots with clumps among them, placed once from a seed, between the rows' edges. (202 lines) |
 | `path_or_orbit.py` | - the one home of the rule that decides whether a small body is drawn as a path or as an orbit: by the eccentricity of its orbit solution in JPL's Small-Body Database, refreshed on the 30-day cycle (L-510, part 1). (327 lines) |
 | `pole_frames.py` | The matrix that turns coordinates measured about a pole into the drawing's frame, the ecliptic of J2000. (72 lines) |
-| `position_accuracy.py` | How well JPL knows a plotted position, and the hover's distances and speeds printed to the digits that knowledge earns. (744 lines) |
+| `position_accuracy.py` | How well JPL knows a plotted position, and the hover's distances and speeds printed to the digits that knowledge earns. (760 lines) |
 | `simbad_manager.py` | Enhanced SIMBAD Query Manager with configurable rate limiting and retry logic. This module replaces simbad_test.py and provides robust SIMBAD querying capabilities. (1,030 lines) |
 | `sun_corona_sampler.py` | The Sun's corona as dots that thin out with distance, from the base of the corona to the Alfven surface. (245 lines) |
 | `van_allen_belt_sampler.py` | Earth's two radiation belts as dots scattered at random along dipole field lines, thickest at each belt's measured peak. (201 lines) |
@@ -203,7 +204,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `constants_rows.py` | - read constants_new.py as rows: each top-level assignment, its right-hand side, and the comment fields beneath it. (881 lines) |
 | `earth_system_common.py` | Shared, engine-agnostic helpers for the Earth System KMZ generators (climate/heat and food insecurity). (134 lines) |
 | `formatting_utils.py` | Basic formatting utilities used by both palomas_orrery.py and visualization_utils.py. (19 lines) |
-| `palomas_orrery_helpers.py` | Support functions extracted from the main orrery monolith. (760 lines) |
+| `palomas_orrery_helpers.py` | Support functions extracted from the main orrery monolith. (785 lines) |
 | `report_manager.py` | Scientific Report Manager for Astronomical Data Analysis Manages generation, storage, and retrieval of analysis reports. (126 lines) |
 | `shared_utilities.py` | Small shared helpers used across shell visualization modules. (216 lines) |
 | `shutdown_handler.py` | Graceful shutdown and safe figure display for Plotly. (75 lines) |
@@ -237,7 +238,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `ledger_index.py` | Generate the at-a-glance INDEX for the consolidated ledger. (715 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (129 lines) |
-| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (1,005 lines) |
+| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (1,006 lines) |
 | `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (1,286 lines) |
 | `path_plan.py` | - the orrery's plan for drawing each path the website serves: a spacecraft's flown and planned trajectory, and a comet on an open path around its perihelion (L-443, slice 2). (1,214 lines) |
 | `period_fetch.py` | - fetch from JPL the orbital period of each object the website serves that has none fetched yet, with the same code the orrery uses when Tony plots, so the Horizons check can compare it with JPL the same day and the objects export can carry it to the website (L-444). (667 lines) |
@@ -256,7 +257,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `test_horizons_check.py` | - the Horizons check (L-395, L-431) on JPL's recorded answers, with no network: every entry agrees, and every planted fault is caught by name. (870 lines) |
 | `test_maintenance_report.py` | The maintenance run's summary names every file whose Tier-1 rose since the scanner's previous run; and proof that this check can fail. (478 lines) |
 | `test_objects_export.py` | - data/objects_export.json says what the object list in celestial_objects.py holds, and no entry in the list writes a field twice. (386 lines) |
-| `test_orbit_cache.py` | Comprehensive test suite for orbit data caching and repair (524 lines) |
+| `test_orbit_cache.py` | Comprehensive test suite for orbit data caching and repair (924 lines) |
 | `test_orbit_markers.py` | Each orbit is drawn around its period's centre, each marker's date comes from the period JPL gave, and every orbit and marker hover prints by the errors JPL states; and proof that this check can fail. (894 lines) |
 | `test_path_or_orbit.py` | - the rule that draws a small body as a path or an orbit by its orbit solution's e in JPL's Small-Body Database (path_or_orbit.py, L-510), on made-up records, with no network; and the guard that the retired 'open_path' does not come back to the object list. Each check is fi... (405 lines) |
 | `test_path_plan.py` | - the path plan, offline, against a made-up solar system answered in JPL's own vector format (L-443, slice 2). (847 lines) |

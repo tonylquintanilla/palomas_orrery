@@ -25,12 +25,19 @@ Module updated: November 4, 2026 with Anthropic's Claude Opus 5.5 (L-512,
 slice a, part A1): fetch_trajectory, and fetch_orbit_path (the special fetch), asks JPL fresh, cache=HORIZONS_CACHE from
 utc_clock, so astroquery never answers it from the copy it keeps on
 disk for a week.)
+Module updated: November 4, 2026, evening, with Anthropic's Claude Opus
+5.5 (L-512, slice a, part A2): fetch_trajectory fills an optional report
+dict with what JPL answered -- found, unknown, ambiguous, unreachable,
+other or not_asked (jpl_outcome.py) -- so a caller can tell "no such body"
+from "JPL unreachable". Successful results and date padding unchanged.)
 """
 #Paloma's Orrery - Solar System Visualization Tool
 
 # Import necessary libraries
 from astroquery.jplhorizons import Horizons
 from utc_clock import HORIZONS_CACHE                        # L-512: JPL asked fresh
+from jpl_outcome import (tell, outcome_of_exception, SAYS,  # L-512 A2: what JPL answered
+                         FOUND, OTHER, NOT_ASKED, UNKNOWN, AMBIGUOUS, UNREACHABLE)
 import numpy as np
 from datetime import datetime, timedelta
 import calendar
@@ -332,7 +339,7 @@ def calculate_axis_range(objects_to_plot):
     return [-max_range, max_range]
     
 def fetch_trajectory(object_id, dates_list, center_id='Sun', id_type=None,
-                     start_date=None, end_date=None):
+                     start_date=None, end_date=None, report=None):
     """
     Fetch trajectory data in batch for all dates, handling missing epochs through interpolation.
     Includes velocity calculations and additional orbital parameters for each point.
@@ -344,6 +351,9 @@ def fetch_trajectory(object_id, dates_list, center_id='Sun', id_type=None,
         id_type (str): Type of ID (e.g., None, 'smallbody')
         start_date (datetime): Optional ephemeris start boundary -- epochs before this return None
         end_date (datetime): Optional ephemeris end boundary -- epochs after this return None
+        report (dict): Optional. Filled with what JPL answered: report['outcome']
+            is found, unknown, ambiguous, unreachable, other or not_asked
+            (jpl_outcome.py; L-512, ruling 1), report['detail'] the reason.
         
     Returns:
         list: List of position dictionaries with complete orbital data
@@ -356,12 +366,14 @@ def fetch_trajectory(object_id, dates_list, center_id='Sun', id_type=None,
     
     # Skip trajectory fetching for Planet 9
     if object_id == 'planet9_placeholder':
+        tell(report, NOT_ASKED, 'Planet 9 is not asked of JPL')   # L-512 A2
         # Return a list of None values matching the length of dates_list
         return [None] * len(dates_list)
 
     # Skip trajectory fetching for exoplanets (not in JPL Horizons database)
     if id_type == 'exoplanet':
         # Exoplanets use separate orbital calculation system
+        tell(report, NOT_ASKED, 'an exoplanet is not asked of JPL')   # L-512 A2
         return [None] * len(dates_list)
 
     # FIXED: clamp dates_list to object's valid ephemeris window
@@ -377,6 +389,7 @@ def fetch_trajectory(object_id, dates_list, center_id='Sun', id_type=None,
             print(f"[CLAMP] {object_id}: {clipped}/{len(original_dates)} epochs outside ephemeris window", flush=True)
         if not dates_list:
             print(f"[CLAMP] {object_id}: no valid epochs in window, skipping fetch", flush=True)
+            tell(report, NOT_ASKED, 'no date inside its window')   # L-512 A2
             return [None] * len(original_dates)
 
     try:
@@ -548,6 +561,11 @@ def fetch_trajectory(object_id, dates_list, center_id='Sun', id_type=None,
         if coverage_pct < 50:
             print(f"Warning: Low data coverage ({coverage_pct:.1f}%) for {object_id}")
         
+        # L-512 A2: found when JPL gave at least one position; an empty
+        # answer is not an outage.
+        tell(report, FOUND if direct_matches else OTHER,
+             '' if direct_matches else 'JPL returned no positions for these dates')
+
         # Pad result back to original dates length if we clamped
         if len(original_dates) != len(dates_list):
             date_to_pos = {dates_list[i]: positions[i] for i in range(len(dates_list))}
@@ -555,6 +573,14 @@ def fetch_trajectory(object_id, dates_list, center_id='Sun', id_type=None,
         return positions
         
     except Exception as e:
+        # L-512 A2: no such body, more than one, and JPL out of reach are
+        # told apart; everything else is "other", never an outage.
+        outcome = tell(report, outcome_of_exception(e), e)
+        if outcome in (UNKNOWN, AMBIGUOUS, UNREACHABLE):
+            first_line = (str(e).splitlines() or [''])[0][:160]
+            print(f"[JPL ANSWER] {object_id}: {SAYS[outcome]} "
+                  f"({type(e).__name__}: {first_line})", flush=True)
+            return [None] * len(original_dates)
         if "No ephemeris for target" in str(e):
             print(f"No ephemeris available for {object_id}")
             return [None] * len(original_dates)

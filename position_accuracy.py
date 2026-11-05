@@ -73,6 +73,10 @@ JPL's uncertainty column, now reads "JPL states no accuracy for this
 position"; only a question that failed, or was never asked, still reads
 "not included here". The digits are unchanged: both print to the whole
 kilometre.)
+Module updated: November 4, 2026, evening, with Anthropic's Claude Opus
+5.5 (L-512, slice a, part A2): fetch_small_body_state raises
+jpl_outcome.JplTargetError when JPL answers that the target is unknown or
+ambiguous, so its caller can tell that from a failure to reach JPL.)
 """
 
 import math
@@ -815,7 +819,10 @@ def fetch_small_body_state(object_id, id_type, location, jd, timeout=60):
     builds, with VEC_TABLE added, sent directly. No extra query.
 
     Returns (state, uncertainty_record): state has x, y, z (AU), vx, vy,
-    vz (AU/day), range (AU) and range_rate (AU/day). Raises on failure.
+    vz (AU/day), range (AU) and range_rate (AU/day). Raises on failure:
+    jpl_outcome.JplTargetError when JPL answers that the target is unknown
+    or ambiguous (L-512, ruling 1), requests' own errors when JPL cannot be
+    reached, ValueError for an answer with no usable table.
     """
     import requests
     from astroquery.jplhorizons import Horizons, conf
@@ -825,6 +832,15 @@ def fetch_small_body_state(object_id, id_type, location, jd, timeout=60):
     payload['OBJ_DATA'] = 'NO'
     resp = requests.get(conf.horizons_server, params=payload, timeout=timeout)
     resp.raise_for_status()
+    if '$$SOE' not in resp.text:
+        # L-512 A2: JPL's definite answer about the target, read as
+        # astroquery reads it, so both routes sort the same words alike.
+        from jpl_outcome import outcome_of_text, JplTargetError
+        said = outcome_of_text(resp.text)
+        if said is not None:
+            snippet = ' | '.join(ln.strip() for ln in resp.text.split('\n')
+                                 if ln.strip())[:400]
+            raise JplTargetError(said, 'Horizons: %s' % snippet)
     rows = parse_vectors_2xr(resp.text)
     if not rows:
         raise ValueError('Horizons returned an empty vector table')

@@ -112,14 +112,14 @@
       ],
       "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)",
       "period": {
-        "confirmed": "2026-10-31",
+        "confirmed": "2026-11-05",
         "center": "@sun",
         "target": "499",
-        "epoch": "2026-10-28 23:02",
-        "days": 686.9961190010482,
-        "error_days": 0.05359560300621524,
-        "jpl_days": 686.9961190010482,
-        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='499'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461342.459722222'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
+        "epoch": "2026-11-04 23:56",
+        "days": 687.0047711824125,
+        "error_days": 0.059887784449529136,
+        "jpl_days": 687.0047711824125,
+        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='499'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461349.497222222'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
       },
       "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66"
     },
@@ -138,14 +138,14 @@
       ],
       "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)",
       "period": {
-        "confirmed": "2026-10-31",
+        "confirmed": "2026-11-05",
         "center": "@sun",
         "target": "599",
-        "epoch": "2026-10-28 23:02",
-        "days": 4332.659211918214,
-        "error_days": 0.40608472381791216,
-        "jpl_days": 4332.659211918214,
-        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='599'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461342.459722222'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
+        "epoch": "2026-11-05 00:02",
+        "days": 4333.453560194256,
+        "error_days": 1.5055221156280822,
+        "jpl_days": 4333.453560194256,
+        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='599'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461349.501388889'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
       },
       "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66"
     },
@@ -1402,14 +1402,14 @@
       ],
       "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)",
       "period": {
-        "confirmed": "2026-11-04",
+        "confirmed": "2026-11-05",
         "center": "@0",
         "target": "90000030",
-        "epoch": "2026-11-04 14:14",
-        "days": 27562.22135987816,
-        "error_days": 0.011787964809627738,
-        "jpl_days": 27562.22135987816,
-        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='90000030%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@0'&TLIST='2461349.093055556'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
+        "epoch": "2026-11-05 00:00",
+        "days": 27562.22135283971,
+        "error_days": 0.011800053882325301,
+        "jpl_days": 27562.22135283971,
+        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='90000030%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@0'&TLIST='2461349.500000000'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
       },
       "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "pin": {
