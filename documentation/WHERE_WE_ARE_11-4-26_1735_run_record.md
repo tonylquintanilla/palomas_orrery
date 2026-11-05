@@ -419,7 +419,7 @@ After your look, should I start A2 ("no such body" is not "JPL unreachable"), or
 
 =========================================================================
 
-**Session: OPEN: 11-3-26 1017: Opus: Coordinator: Orrery plot build order L476 L484 L510**
+**Session: OPEN: 11-4-26 2309: Opus: Coordinator: Orrery plot build order L476 L484 L510**
 
 Your look matches what A1 promised on every point. Before saying go, I'll check two things: the push, and that the archived copies can't end up in a commit.
 
@@ -905,3 +905,33 @@ The file-absent test passed. With the saved-path files gone from the repository'
 **What's waiting on you:**
 - (do) the look, wifi on and off.
 - (do) commit.
+
+============================================
+
+Agreed, a fresh session is the right call. I'll check what's on GitHub, then write the handoff.
+
+I've written the handoff, `HANDOFF_coordination_20261104_night.md`. It's built on your A2 commit (`bf10bcea`), which is on GitHub. Save it in the orrery's `documentation/` folder.
+
+**What the next session does first:**
+- **Confirms both HEADs and lists `python_work`.** If the folder is missing again, as it was all of this session, it says so right away.
+- **Runs `patch_L508_1_code_prompts_section.py`.** Its lines aren't in the ledger at `bf10bcea`, so it looks like it never ran. I tested it on a copy at your latest commit and it still applies cleanly. It carries the Code-prompt section on L-508 and the 6AC4721 note on L-509.
+
+**What it then works on:**
+- **Slice (b) of L-512 (fallbacks when JPL cannot answer).** When JPL can't be reached, markers and paths are drawn by propagating from the saved orbital elements. The next session writes its prompt now that it's next, in the shape that worked for slice (a).
+- **Then slice (c),** followed by the threads in the road's order:
+  - the L-484 (the two agree) check's brief, with interactive-exhibit's next version
+  - L-510 part 2, the path plan asked from before any launch
+  - L-511 (the export carries the words)
+  - the records skill's next version, carrying L-508 and the Code-prompt section
+- **Two looks still owed on the website:** the C/2025 K1 pieces after the night's build, and Psyche's path end.
+
+The handoff points at the ledger for the detail rather than repeating it.
+
+To start the new session:
+
+```
+Read documentation/HANDOFF_coordination_20261104_night.md in the
+orrery repo and follow its section 1 first.
+```
+
+**Where this leaves us:** slice (a) is done and committed. A fresh coordinating session writes the prompt for slice (b).
