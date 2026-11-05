@@ -186,4 +186,4 @@ I've done the first two checks in section 1. The third, the L-508 patch, needs o
 
 The patch isn't in `documentation\`, or anywhere in python_work. The last session sent it to you as a download, so it's probably in your Downloads folder. That folder isn't connected to this session.
 
-**Please move `patch_L508_1_code_prompts_section.py` from Downloads into `palomas_orrery_for_github\documentation\` and tell me when it's there.** Then I'll read it and test it on a copy of your ledger before you run it with the Run button. That way you're never running a patch nobody in this session has looked at. -- 
+**Please move `patch_L508_1_code_prompts_section.py` from Downloads into `palomas_orrery_for_github\documentation\` and tell me when it's there.** Then I'll read it and test it on a copy of your ledger before you run it with the Run button. That way you're never running a patch nobody in this session has looked at. -- 43ac53611024f7e3d36836b0fa0ceee7b08015ee
