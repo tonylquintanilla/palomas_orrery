@@ -828,3 +828,84 @@ PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 - `patch_road_symbols_20261105.py`, which prints `ok documentation/WHERE_WE_ARE.md (12 edits; 130 lines above the marker)`.
 
 **Still to do at this session's close:** the ledger lines for today's rulings. Those are the website following the eccentricity rule, and the road's new order.
+
+=========================================
+
+This time piece C's fix worked. The night went red for a different reason: it ran at the same moment as your orrery push.
+
+**What the log shows:**
+- **The build:** the builder passed and the new cache was swapped in on the first try.
+- **Piece C:** the log reads `c2025_k1_c: drawn as an orbit, not a path; 2 saved position(s) after today dropped, and its old plan's stamps`.
+- **The checks:** all 36 passed, including the builder's 508.
+
+**Why it still went red:** the night started at 11:50 Chicago time and read the orrery at 59ddb645. You committed the road patch (620b9149) at 11:52 and pushed it while the night was still running. At the end, the night checked the orrery again, saw a newer commit than the one it built from, and refused to save. That check exists for this exact case: the website never saves a build that may not match the orrery's latest. The website is still showing November 3's data.
+
+**The fix:** run the website's night again from the Actions tab now. Nothing is being pushed, so it should go green and save its commit.
+
+One habit for the future: let the website's night finish before pushing the orrery. If the two overlap, the night refuses to save, which is safe but means one more run.
+
+============================================
+
+Now the close patch. It adds a dated note and a new Gap to L-510, a note and a new Gap to L-485, and marks the Where We Are page's "now" stage done.
+
+Both patches work together on a copy of today's ledger. The ledger's index tool reports no problems, and a second run of either one writes nothing. I'll put the close patch in your orrery folder.
+
+The close patch is in your orrery folder. Once it runs, the session is fully recorded. I tested it on copies of today's ledger and page, together with last night's L-508 patch. Both apply cleanly, in either order, and the ledger's index tool reports no problems afterwards.
+
+**What gets recorded:**
+- **On L-510 (the typed fields stop deciding):**
+  - your ruling that the website follows the eccentricity rule;
+  - the four red nights and what stopped each one;
+  - the two website patches, and the green night (e605f56).
+  - Its next step is the road's first quick win: the copying tool follows the rule by itself, so the next comet that changes sides doesn't stop a night.
+- **On L-485 (a nightly run):**
+  - the website kept serving November 3's data safely while the nights were red;
+  - the habit to keep: let the website's night finish before pushing the orrery.
+- **On the Where We Are page:**
+  - the road's "now" stage is done, and the quick wins become "now";
+  - the Signals section shows today's build and agrees with the ledger's date.
+
+**Your run order, at your machine:**
+1. In the orrery folder, run `patch_L508_1_code_prompts_section.py` (last night's, records only).
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L508_1_code_prompts_section.py
+ok  LEDGER_CONSOLIDATED.md: **Gap:** the two skill versions above (method), then the bui
+ok  LEDGER_CONSOLIDATED.md: **Gap:** a design talk (Where We Are, at the next design tal
+patch applied (2286685 bytes, 1 file)
+
+Do next: move this patch into documentation/, then commit and
+push the orrery with your next commit. No maintenance run is
+needed for it: no status or index line changes.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+2. Run `patch_L510_3_session_close_20261105.py`. It prints nine "ok" lines, the index tool's "no consistency problems", and then "patch applied".
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L510_3_session_close_20261105.py
+ok L-510: the Nov 5 note and new Gap
+ok L-510: date stamp
+ok L-485: the Nov 5 note and new Gap
+ok L-485: date stamp
+ok the page's header
+ok the page's box
+ok the road's stage 12
+ok Signals: the cache build
+ok Signals: the page and the ledger
+ok LEDGER_CONSOLIDATED.md (4 edits)
+ok documentation\WHERE_WE_ARE.md (5 edits)
+Running ledger_index.py to rebuild the index rows ...
+  OK: 505 L-blocks parsed, no consistency problems.
+  Index regenerated (253 live items) in C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\LEDGER_CONSOLIDATED.md.
+ok ledger_index.py
+patch applied
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+3. Move both into `documentation\`, then commit and push the orrery once the website's night has finished. -- pulled origin on the website and pushing orrery: 
+
+**For your run record:**
+- `patch_L510_3_session_close_20261105.py`, which prints `ok LEDGER_CONSOLIDATED.md (4 edits)`, `ok documentation/WHERE_WE_ARE.md (5 edits)` and `ok ledger_index.py`.
+
+**Where this leaves us:**
+- The website is current again, and it now follows the same path-or-orbit rule as the orrery.
+- The road now turns to the symbols: first the quick wins, then the standards slice, then the planet rooms from Mars outward, moons first.
+
+It was an important session, I agree. It found and fixed a real gap between the orrery and the website, and gave the road a clear direction.

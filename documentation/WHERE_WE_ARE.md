@@ -1,8 +1,8 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 5, 2026, morning: the coordinating session (Opus) that read the website's red nights and turned the road to the symbols.
-- Written at orrery 59ddb645 and gallery e5352a86, read live.
+Last updated: November 5, 2026, noon: the coordinating session (Opus) closed; the website's night green again.
+- Written at orrery 620b9149 and gallery e605f56, read live.
 
 > **READ THIS FIRST**
 >
@@ -13,10 +13,10 @@ Last updated: November 5, 2026, morning: the coordinating session (Opus) that re
 > - By your ruling, the website follows the orrery's rule: path or
 >   orbit by the e in JPL's database.
 > - The road turns to the symbols, with the moons sooner.
+> - The website's night went green on Nov 5 (e605f56), piece C an orbit.
 >
-> **Do next:** *run patch_L510_2 in the website folder, commit, push,
-> and run the website's night from the Actions tab; look for a green
-> NIGHT RUN line.*
+> **Do next:** *the quick wins, starting with the copying tool
+> following the e rule by itself (stage 13).*
 >
 > **Needs you now:**
 > - *(do) Each morning, Pull origin on both, orrery then website, first;
@@ -31,8 +31,8 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
                Earth's slices, historical missions' slice 1, the paths by
                the plan (L-476), path or orbit by e (L-510), A1 and A2
                of JPL's fallbacks (L-512).
- 12.   [NOW]   *A green website night: patch_L510_2, then the night.* << new this session
- 13.   [next]  Quick wins: the copying tool follows the e rule by itself
+ 12.   [done]  A green website night, Nov 5 (e605f56). << moved this session
+ 13.   [NOW]   *Quick wins:* the copying tool follows the e rule by itself
                (L-510 (the typed fields stop deciding)); the ended
                missions Pioneer 10 and 11, Rosetta, DART, Akatsuki and
                Apollo 11's S-IVB (L-507 (historical missions)). << new this session
@@ -94,10 +94,10 @@ Waiting behind other work; a line leaves when picked up.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261103T193343Z, ok, no retry (swap log at gallery
-  e5352a86); the website's nights of Nov 4 and 5 stopped before a swap.
+- Last cache build: 20261105T181207Z, ok, no retry (swap log at gallery
+  e605f56).
 - Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md, generated Nov 4).
-- Page Nov 5, ledger's newest stamp Nov 4: today's ledger lines come at the close.
+- This page's date and the ledger's newest stamp: both Nov 5. Agree.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
 

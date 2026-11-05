@@ -1084,7 +1084,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-470 | Orrery entries the website cannot serve as they stand (orrery, objects) | OPEN | -- | 2026-11-02 |
 | ! | L-483 | A room for C/2025 K1 and its pieces, the first comet room (gallery, exhibits) | OPEN | -- | 2026-10-28 |
 | ! | L-484 | The website and the orrery agree on every object both draw, or the difference is written down (orrery + gallery, objects; method for interactive-exhibit) | OPEN | -- | 2026-11-04 |
-| ! | L-485 | A nightly unattended run of the routines (orrery + gallery, maintenance) | OPEN | -- | 2026-11-01 |
+| ! | L-485 | A nightly unattended run of the routines (orrery + gallery, maintenance) | OPEN | -- | 2026-11-05 |
 | ! | L-486 | A view carried into a room (gallery, the rooms) | OPEN | -- | 2026-10-26 |
 | ! | L-487 | Each body's description in the i panel, one bullet per sentence (gallery, the i panel) | OPEN | -- | 2026-10-25 |
 | ! | L-488 | Solar features beside a spacecraft in the Solar System room, such as the heliopause (gallery, the rooms) | OPEN | -- | 2026-10-26 |
@@ -1099,7 +1099,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-507 | Historical missions: past voyages drawn in the Solar System room, then encounters (gallery, the Solar System room) | OPEN | -- | 2026-11-03 |
 | ! | L-508 | A held body's alarm: loud until a ledger item names it (orrery + gallery, the Horizons check and the night) | OPEN | -- | 2026-11-02 |
 | ! | L-509 | Obsolete code: how it is marked, and when it goes (orrery, housekeeping) | OPEN | -- | 2026-11-03 |
-| ! | L-510 | The object list's typed fields stop deciding: a small body drawn by today's eccentricity, a plan asked from before any launch (orrery, the object list and the path plan) | OPEN | -- | 2026-11-04 |
+| ! | L-510 | The object list's typed fields stop deciding: a small body drawn by today's eccentricity, a plan asked from before any launch (orrery, the object list and the path plan) | OPEN | -- | 2026-11-05 |
 | ! | L-511 | The orrery's export carries the words the website prints (orrery + gallery, the words) | OPEN | -- | 2026-11-03 |
 | ! | L-512 | The orrery's fallbacks when JPL cannot answer (orrery, the plot's data path) | OPEN | -- | 2026-11-04 |
 
@@ -1806,7 +1806,7 @@ build.
 `documentation/DESIGN_L484_consistency_rulings_20261103.md`.
 
 #### [L-510] The object list's typed fields stop deciding: a small body drawn by today's eccentricity, a plan asked from before any launch (orrery, the object list and the path plan)
-<!-- L:510 status:OPEN upd:2026-11-04 section:A flag: rice: -->
+<!-- L:510 status:OPEN upd:2026-11-05 section:A flag: rice: -->
 - **Opened 2026-11-03** to carry two rulings that open the same two
   files, `celestial_objects.py` and `path_plan.py`. Both retire a field
   typed by hand, which Tony calls "a legacy of my manual method."
@@ -1966,7 +1966,42 @@ build.
     10:33:08.2834 TDB', which path_plan.py read as no vectors, not as a
     limit to clip to. That is part 2's own first question (what JPL
     returns when asked from before its data begins), carried there.
-**Gap (replaces the one below, 2026-11-04):** Tony's Mode 5 look
+- **2026-11-05: THE WEBSITE FOLLOWS THE RULE** (the coordinating
+  session of Nov 4, night, to Nov 5, Claude Opus 5.5; Tony's run record
+  `WHERE_WE_ARE_11-4-26_2321_run_record.md`). Part 1 moved piece C of
+  C/2025 K1 to an orbit (its database e below 1), and the orrery's
+  export stopped serving it a path. The website's nights then went red
+  four times:
+  - Nov 4, runs 10 and 11, and Nov 5's first manual run: the objects
+    mirror refused to delete piece C's `path` and `open_path`
+    ("a person decides"). Tony, Nov 4, 23:47 Chicago: "the website
+    should follow the same rule as the orrery, based on eccentricity."
+    `patch_L510_1_piece_c_orbit_website.py` (gallery e5352a86): piece
+    C's entry as Hale-Bopp's (availability analytic, frame
+    heliocentric, trace none), and the builder's offline test given a
+    stand-in orbit for it and its open-path count 14 -> 13, named.
+  - Nov 5, 14:54 UTC: the builder stopped on #T. An orbit body takes
+    its newest saved position as today's, and piece C's saved positions
+    ran to 2027-10-19 from its plan.
+    `patch_L510_2_orbit_body_drops_future_points.py` (gallery
+    721b7cc6): a body that is not a path keeps no saved position after
+    today; the drop is named in the log; the offline test plants one on
+    Hale-Bopp and was seen to fail without the fix (508 checks).
+  - Nov 5, 17:50 UTC: built and passed, refused at the end because the
+    orrery moved mid-run (L-485, below).
+  - Nov 5, 18:12 UTC: green, committed e605f56; the log read
+    "c2025_k1_c: drawn as an orbit, not a path; 2 saved position(s)
+    after today dropped, and its old plan's stamps". The scheduled run
+    after it went green too (Tony).
+  Not yet done: the objects mirror still refuses a deletion, so the
+  next comet that changes side stops a night at the pulls again.
+**Gap (replaces the one below, 2026-11-05):** the road's quick win: the
+objects mirror follows the e rule by itself (removes `path` and
+`open_path` when the export stops serving them, and sets the entry's
+availability, frame and trace as for an orbit, or the reverse), with
+planted cases both ways; then Tony's Mode 5 look below; then part 2's
+brief and build (Deferred on Where We Are, Nov 5).
+**Gap (superseded above, 2026-11-05; replaced the one below, 2026-11-04):** Tony's Mode 5 look
 (Sun-centred: Tsuchinshan, Wierzchos, ATLAS each drawn as 3I/ATLAS is;
 3I/ATLAS unchanged; Halley still its ellipse); then part 2's brief and
 build (the plan asked from before any launch), whose first probe has a
@@ -2000,6 +2035,9 @@ Ruling 6; `celestial_objects.py`; `path_plan.py`; `period_fetch.py`;
 is removed, kept as a stub, or kept whole; how long it waits; whether
 git's history is the record once it is gone; and whether the
 maintenance run lists what is marked.
+- **6AC4721 is not obsolete** (Tony, Nov 4, morning): the entry is kept
+  on purpose, as the record of how C/2026 A1 (MAPS) was drawn before
+  JPL carried it. Its drawing after L-510 is L-512's part 1.
 **Gap:** a design talk (Where We Are, at the next design talk); then a
 search of the whole tree for marked code, which lists and fixes
 nothing; then a housekeeping slice (5b on the road).
@@ -2040,6 +2078,36 @@ nothing; then a housekeeping slice (5b on the road).
 - **For provenance-discipline's next version:** one pointer line, "A
   held body's alarm: ledger-and-session-records, A Held Body's Alarm",
   where it speaks of the Horizons check; it does not repeat the rule.
+- **Also for ledger-and-session-records' next version, riding the same
+  bump (2026-11-04): a section on the brief or prompt for a Claude Code
+  session,** under Handoff Structure. Tony asked, 15:55, "Do you advise
+  a skill for Code prompts?", and said yes (17:01) to a section in this
+  skill rather than a new skill, with the two changes of a review by
+  Claude Fable 5.1. Stated in full:
+  - the anchor; where the rulings live, and that they win over any
+    recommendation; the skills the task fires, with the report stating
+    back which were read (L-290);
+  - an inventory before any removal, and a stop if a removal reaches
+    past its target;
+  - stops between slices, each with Tony's look;
+  - an irreversible step, such as deleting a file, is Tony's and comes
+    last in the run order;
+  - a ruling changed inside a prompt is recorded on its ledger item,
+    and the prompt is saved verbatim.
+  Two lines point at rules held elsewhere and do not restate them: the
+  brief tells the session to run the protocol's start check
+  (Session-Start Repo Pull); the report ends as Token Economy requires.
+- **A candidate, not yet a rule: how many reviews a prompt gets.**
+  Proposed: one independent review for a prompt that removes or
+  rewrites code; a second only for work that cannot stop safely
+  mid-way. Not adopted until measured (Mode 7: review for domain
+  uncertainty, not routine). The case so far: L-512's slice (a) prompt
+  (the orrery's fallbacks), reviewed six times on Nov 4. The reviews
+  changed it before it ran: the animation's writer call, a test suite
+  that would have skipped new tests, three more JPL calls without the
+  fresh switch. Whether Code's own inventory would have found them is
+  settled by A1's report. Until then a review is optional, and whoever
+  asks for one says in one line why.
 **Gap:** the two skill versions above (method), then the build: the
 orrery's Horizons check prints the alarm loud or quiet by the rule, and
 the website's night does the same with L-485's hold half. What a loud
@@ -2874,7 +2942,7 @@ Are).
 L-489.
 
 #### [L-485] A nightly unattended run of the routines (orrery + gallery, maintenance)
-<!-- L:485 status:OPEN upd:2026-11-01 section:A flag: rice: -->
+<!-- L:485 status:OPEN upd:2026-11-05 section:A flag: rice: -->
 - **Tony, 2026-10-24, night,** in his run record (`documentation/WHERE_WE_ARE_10-24-26_1927_run_record.md`): "i am
   thinking of revising the idea of an automated run at midnight every
   day, with all the daily and 30-day run routines except the messages.
@@ -3556,7 +3624,22 @@ L-489.
   drawing is the website's "without its daily tail and last-day pair";
   since `patch_L476_2` it keeps the tail and leaves out only the
   last-day pair.
-**Gap (replaces the one below, 2026-11-02, evening):** the morning looks for the
+- **2026-11-05, from the coordinating session of Nov 4 to 5** (Claude
+  Opus 5.5): the website's night was red on Nov 4 (runs 10 and 11) and
+  twice on Nov 5, and served Nov 3's cache meanwhile; the hold held
+  every time and nothing wrong was served. Causes and fixes on L-510
+  (the typed fields stop deciding). One cause is the night's own: a
+  manual run at 17:50 UTC read the orrery at 59ddb645, Tony pushed
+  620b9149 at 11:52 Chicago while it ran, and the night pass read the
+  newer commit and refused to save ("the pulled orrery commit moved
+  after the build"). Correct and safe; the habit it asks for is to let
+  the website's night finish before pushing the orrery. The orrery's
+  own night ran green twice on Nov 5 (711e0ea, 59ddb645).
+**Gap (replaces the one below, 2026-11-05):** the morning looks (P4), each
+start time noted on both Actions tabs; a night stopped by a push
+mid-run is run again by hand; then the hold's website half (a gallery
+session), with L-508's alarm on the night's side.
+**Gap (superseded above, 2026-11-05; replaced the one below, 2026-11-02, evening):** the morning looks for the
 rest of the week (P4), each start time noted on both Actions tabs, and
 on a morning GitHub drops a night, the second time's run in its place;
 then the hold's website half (a gallery session), with L-508's alarm on
