@@ -249,3 +249,207 @@ PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 4. Check the Actions tab after the next night. -- running nightly manually
 
 **For your run record:** `patch_L510_1_piece_c_orbit_website.py`. Once it runs it prints `ok data/objects_config.json (6 edits)` and `ok tools/test_gallery_cache_builder_offline.py (3 edits)`. This chat environment doesn't print a token count.
+
+===========================
+
+**GitHub:**
+
+Website Nightly Run:
+
+Run python daily_run.py --night
+======================================================================
+  DAILY RUN, THE NIGHT FORM -- 2026-11-05 14:54 UTC
+  root: /home/runner/work/tonyquintanilla.github.io/tonyquintanilla.github.io
+  where: GitHub Actions
+======================================================================
+Daily Run steps, from /home/runner/work/tonyquintanilla.github.io/tonyquintanilla.github.io:
+  1. Guest book updater                 tools/guestbook_updater.py  found
+  2. Pulls from the orrery              gallery_maintenance_run.py  found
+  3. Cache builder                      tools/gallery_cache_builder.py  found
+  4. Gallery maintenance run, offline   gallery_maintenance_run.py  found
+  pull-match fixtures: 5 of 5 cases right; planted faults caught 2 of 2
+  runner-form pull-match fixtures: 5 of 5 cases right; planted faults caught 2 of 2
+  night gate fixtures: 15 of 15 nights judged right; planted faults caught 3 of 3
+  night allow-list: 16 files and data/solar-system/ (whole)
+=== DAILY RUN: all 4 step scripts found; the pull-match and night checks passed 32 of 32 fixture checks (L-461, L-485)
+
+  SKIP  step 1, Guest book updater: needs Tony's answers; his morning's (Tony's ruling of Oct 31, 2026, 10:20).
+
+The pulls ask GitHub's interface with the run's GITHUB_TOKEN.
+
+======================================================================
+  DAILY RUN step 2 of 4: Pulls from the orrery
+======================================================================
+======================================================================
+  gallery maintenance run -- PULLS (before the cache builder)
+  root: /home/runner/work/tonyquintanilla.github.io/tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Constants export pull     0.8s  rewrote data/constants_export.sha
+  PASS Config mirror             0.1s  no change to
+                                    data/objects_config.json
+  PASS Objects export pull       0.6s  rewrote data/objects_export.json,
+                                    data/objects_export.sha
+  PASS Objects mirror            0.1s  rewrote data/objects_config.json
+  PASS Drawings pull             1.8s  rewrote
+                                    data/drawings/pulled_at.sha
+
+======================================================================
+
+=== PULLS: all 5 passed -- Constants export pull, Config mirror, Objects export pull, Objects mirror, Drawings pull
+
+Pull matches push (runner form): the three pulls fetched the orrery at d1524c11, its GitHub copy's newest commit, read live.
+
+======================================================================
+  DAILY RUN step 3 of 4: Cache builder (up to 900 seconds)
+======================================================================
+[sweep] no sibling directories present
+[RUNS] before the copy: 130 run records in data/solar-system/raw/runs
+[RUNS] after the copy:  130 run records in data/.staging_solar-system_20261105T145452Z/raw/runs
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+/opt/hostedtoolcache/Python/3.13.18/x64/lib/python3.13/site-packages/erfa/core.py:133: ErfaWarning: ERFA function "d2dtf" yielded 1 of "dubious year (Note 5)"
+  warn(f'ERFA function "{func_name}" yielded {wmsg}', ErfaWarning)
+[POLE] earth: pole of 2026-11-05 served (RA 0.64598, Dec 89.84965 deg); tilt 23.43786 deg
+[UNCERTAINTY] JPL's own position uncertainty served for 52 of 55 small bodies; not served: bennu (JPL gives no range uncertainty (R_s) for it), halley (JPL gives no range uncertainty (R_s) for it), ikeya_seki (JPL gives no range uncertainty (R_s) for it)
+[window] served window: 88.0 days either side of today, set by mercury, the shortest of 64 bodies' trusted spans
+[ABORT] #T c2025_k1_c: as_of_today.t not within 48h of generated -- no swap, no commit; staging kept at data/.staging_solar-system_20261105T145452Z
+
+Swap log, read back: {"attempts": {"live_to_prev": 1, "staging_to_live": 1}, "error": null, "mode": "nightly", "outcome": "ok", "reached": "staging_to_live", "run_id": "20261103T193343Z", "time": "2026-11-03T19:36:04.489783+00:00"}
+
+======================================================================
+  THE NIGHT -- summary
+======================================================================
+  Guest book updater             skipped: his morning's                   0.0s
+  Pulls from the orrery          ok                                       3.5s
+  Pull matches push (runner)     ok                                       0.0s
+  Cache builder                  exit 1                                 262.6s
+
+  Nothing is to be committed: the site keeps serving the previous
+  cache, and tomorrow's run tries again. This log is the record.
+======================================================================
+NIGHT RUN: RED -- the cache builder exited 1; the swap log's last line is run 20261103T193343Z, not tonight's: the build did not reach its swap (266 seconds)
+Error: Process completed with exit code 1.
+
+=========================================================
+
+I'll read the records skill's rules for the Where We Are page, then write the patch.
+
+The orrery's own night has run: twice this morning, at 9:02 and 9:29 Chicago, and it committed both times. Now the page patch. First I'll measure the new sections against the page's 130-line limit.
+
+The page comes out at 145 lines, and the limit above the run-record marker is 130. I'll cut repetition (each fact once) and drop the oldest settled lines that are now habit.
+
+Two handles on the road are missing their labels, which the page's rule requires. I'll fix that and keep it within 130 lines, then build the patch.
+
+It works. That warning only shows up under the strict test setting, about a file left open for a moment, and doesn't affect the result. I'll put the patch in your orrery folder.
+
+I've put a patch in your orrery folder that rewrites the road on the Where We Are page in the order you confirmed. I ran it twice on a copy of your page: the first run made the changes and the second wrote nothing.
+
+**What the page will say:**
+- **Now:** a green website night, meaning patch 2 and then the night run.
+- **Next:**
+  - the quick wins: the copying tool follows the eccentricity rule by itself, and the six ended missions;
+  - the standards slice: the Moon, and your ruling on the Pluto row.
+- **Later:**
+  - the planet rooms in order, starting with Mars, each opening with its moons, with shells after;
+  - then the Earth room's neighbourhood, the small-body systems, and stars and exoplanets.
+- **Deferred:** the work the road set aside today. That's slices b and c of L-512 (fallbacks when JPL cannot answer), L-484 (the website and the orrery agree), L-504 (the orrery's clock), and part 2 of L-510 (the typed fields stop deciding). The Earth System layers are there too. They're listed so they don't get lost.
+- **Waiting on you:** the Pluto row's ruling, at the standards slice. Planet 9 is added to the design-talk list.
+
+To stay within the page's 130 lines, four old settled lines came out, the ones from October 28 to November 2 that are now habit. Your run-record notes below the marker are untouched.
+
+Some good news: the orrery's own night ran clean twice this morning, at 9:02 and 9:29 Chicago, and committed both times.
+
+**Your run order, at your machine:**
+1. In the website folder, 
+   1. run `patch_L510_2_orbit_body_drops_future_points.py`, 
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L510_2_orbit_body_drops_future_points.py
+ok future positions dropped for a body that is not a path
+ok Module updated stamp
+ok planted future position in Hale-Bopp's saved file
+ok checks after the nightly re-run
+ok Module updated stamp
+ok tools\gallery_cache_builder.py (2 edits)
+ok tools\test_gallery_cache_builder_offline.py (3 edits)
+patch applied
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
+
+   2. move it into `documentation\`, 
+   3. then commit and push the website. -- 721b7cc683c21c50eb9e591889be523d9e270623
+2. Run the website's night from the Actions tab and look for a green `NIGHT RUN:` line. 
+3. In the orrery folder, 
+   1. run `patch_road_symbols_20261105.py`. It prints twelve "ok" lines and then "patch applied". 
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_road_symbols_20261105.py
+ok the header
+ok the box
+ok the road
+ok Settled: the e rule line
+ok Settled: comet switch line out
+ok Settled: ticks line out
+ok Settled: Oct 31 line out
+ok Settled: main belt line out
+ok Deferred
+ok Signals
+ok Waiting on you
+ok Where the details are
+ok documentation\WHERE_WE_ARE.md (12 edits; 130 lines above the marker)
+patch applied
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+   2. Move it into `documentation\`, 
+   3. then commit and push the orrery. -- 
+
+**For your run record:**
+- `patch_L510_2_orbit_body_drops_future_points.py`, which prints `ok tools/gallery_cache_builder.py (2 edits)` and `ok tools/test_gallery_cache_builder_offline.py (3 edits)`.
+- `patch_road_symbols_20261105.py`, which prints `ok documentation/WHERE_WE_ARE.md (12 edits; 130 lines above the marker)`.
+
+**Still to do at this session's close:** the ledger lines for today's rulings. Those are the website following the eccentricity rule, and the road's new order.

@@ -1,19 +1,22 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 4, 2026, night: the Claude Code session that built L-512 (fallbacks when JPL cannot answer), slice a, part A2.
-- Written at orrery e7ea3294 and gallery 5abca2c6, plus this session's uncommitted edits.
+Last updated: November 5, 2026, morning: the coordinating session (Opus) that read the website's red nights and turned the road to the symbols.
+- Written at orrery 59ddb645 and gallery e5352a86, read live.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The orrery now tells "JPL has no such body" from "JPL cannot be
->   reached", and says which (L-512 (fallbacks when JPL cannot answer)).
-> - By your ruling, MK2, Xiangliu and 6AC4721 keep their drawings from
->   their papers. The saved-path files are gone from the repository.
+> - The website's nights stopped on Nov 4 and 5 over piece C of comet
+>   C/2025 K1, which the orrery now draws as an orbit. Two website
+>   patches fix it; the first is pushed (e5352a86).
+> - By your ruling, the website follows the orrery's rule: path or
+>   orbit by the e in JPL's database.
+> - The road turns to the symbols, with the moons sooner.
 >
-> **Do next:** *your look at A2, wifi on and off (the report's run
-> order); then commit.*
+> **Do next:** *run patch_L510_2 in the website folder, commit, push,
+> and run the website's night from the Actions tab; look for a green
+> NIGHT RUN line.*
 >
 > **Needs you now:**
 > - *(do) Each morning, Pull origin on both, orrery then website, first;
@@ -23,36 +26,30 @@ Last updated: November 4, 2026, night: the Claude Code session that built L-512 
 
 ## The road  **>> UPDATED THIS SESSION**
 
-Oct 27's order, changed Oct 29 (`DESIGN_L314_solar_wind_rulings_20261029.md`).
-  1-11.[done]  All but 5b and 9, through Nov 4: the three rooms, the
-               objects, the Sun's and Earth's slices, historical
-               missions' slice 1, the orrery's paths by the plan (L-476),
-               L-510 part 1 (Nov 4).
- 12f.  [NOW]   *L-512 (fallbacks when JPL cannot answer): A1 committed
-               Nov 4; A2 built and ruled on; then b and c.* << moved this session
- 5d.   [NOW]   *The orrery's clock (L-504 (the orrery's clock)): the
-               data path done Oct 29, the website's date fix Oct 31;
-               Earth System, stamps, tools next.*
- 11b.  [NOW]   *The nightly run (L-485 (a nightly run)): both halves run
-               on GitHub; the hold built Oct 31; both second times built
-               (11:17 and 12:17 UTC, Nov 1); a week of mornings now.*
- 12c.  [next]  *The two agree (L-484 (the two agree)): its brief, then
-               its build; piece C is its first open difference. The
-               words wait for L-511 (the export carries the words).*
- 12e.  [later] L-510 (the typed fields stop deciding), part 2: the path
-               plan asked from before any launch.
-  5b.  [beside] Housekeeping when a session has room: L-424, L-425,
-               L-426; L-423 (the website's checks) item 3, L-357;
-               L-509 (obsolete code), after its talk.
- 12b.  [later] Historical missions, slice 2: encounters, the room off
-               today's date; Artemis II in the Earth room.
- 12.   [later] Compositions (L-489 (compositions)): encounters in
-               rooms of their own; Artemis II first (Nov 1).
- 13.   [later] The inner planets' rooms, from the template; Jupiter and
-               Saturn follow (L-433).
- 14.   [later] The Earth System layers, beside 13; cards meanwhile.
- 15.   [goal]  The website does what the desktop orrery does, with a date
+Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
+  1-11.[done]  Through Nov 4: the three rooms, the objects, the Sun's and
+               Earth's slices, historical missions' slice 1, the paths by
+               the plan (L-476), path or orbit by e (L-510), A1 and A2
+               of JPL's fallbacks (L-512).
+ 12.   [NOW]   *A green website night: patch_L510_2, then the night.* << new this session
+ 13.   [next]  Quick wins: the copying tool follows the e rule by itself
+               (L-510 (the typed fields stop deciding)); the ended
+               missions Pioneer 10 and 11, Rosetta, DART, Akatsuki and
+               Apollo 11's S-IVB (L-507 (historical missions)). << new this session
+ 14.   [next]  Standards: the Moon gets the orrery's words, link, period
+               and uncertainty; the Pluto row's drawing and name, your ruling. << new this session
+ 15.   [later] The planet rooms in order, each opening with the planet
+               and its moons, shells later: Mars (Phobos, Deimos),
+               Jupiter, Saturn, Uranus, Neptune, Pluto. Io, Titan,
+               Charon and Pluto come to standard in their rooms. << new this session
+ 16.   [later] The Earth room: L-297 (the Lagrange points), the Earth-Moon
+               barycentre, SOHO, Gaia, James Webb, Artemis II.
+ 17.   [later] Small-body systems' moons; then stars and exoplanets.
+ 18.   [goal]  The website does what the desktop orrery does, with a date
                to choose, within the range the data covers.
+  b.   [beside] Housekeeping: L-424, L-425, L-426 (the checkers' three);
+               L-423 (the website's checks) item 3; L-357 (stale gallery
+               artifacts); L-509 (obsolete code), after its talk.
 
 ## Settled  **>> UPDATED THIS SESSION**
 
@@ -60,7 +57,8 @@ Standing rulings. A line leaves after a few weeks, once it is habit, or
 once a skill or the protocol carries it (trimmed Nov 3, night).
 - No saved-path file (July copy kept outside); an outage is met by propagation and a record (Nov 4).
 - A small body is a path at or above e 1 in JPL's database, every 30
-  days, else an orbit; two sides of 1 refuse the drawing (Nov 4).
+  days, else an orbit; two sides of 1 refuse the drawing; the website
+  follows the same rule (Nov 4; the website, Nov 4, 23:47).
 - From the talk (Nov 3): the words have one home, the orrery's export;
   a difference is chosen (a reason, no end) or open (an end and an
   item); the check covers only what both draw; a spacecraft's span is
@@ -69,18 +67,19 @@ once a skill or the protocol carries it (trimmed Nov 3, night).
 - An ended mission's line stays solid, like a flown path (Nov 3).
 - The Sun and Earth slices are closed; what is left is enhancements
   (Nov 2).
-- The comet switch is off the road: the six record numbers stay (Nov 2).
 - A held body is loud until a ledger item names it, then quiet with the
   item's number; loud again if JPL still disagrees (Nov 2).
-- The ticks stay as built, 3 and 6, and so do the ruler and the halo (Nov 2).
 - Encounters are both: shown in the Solar System room, and in a room
   centred on the body met (Nov 1).
-- A night takes a value JPL changed, holds only an identity (Oct 31).
-- The main belt: random dots in JPL's spread (Oct 28).
 
-## Deferred
+## Deferred  **>> UPDATED THIS SESSION**
 
 Waiting behind other work; a line leaves when picked up.
+- When the road turned to the symbols (Nov 5): L-512 (fallbacks when
+  JPL cannot answer) slices b and c; L-484 (the two agree), its brief
+  and build; L-504 (the orrery's clock), the Earth System, stamps and
+  tools; L-510 part 2, the path plan asked from before any launch.
+- The Earth System layers, with cards meanwhile (Nov 5, off the road).
 - L-511 (the export carries the words): behind the check (Nov 3).
 - L-508 (a held body's alarm): the records skill's next version, then
   its build, with the hold's website half (Nov 2).
@@ -95,20 +94,22 @@ Waiting behind other work; a line leaves when picked up.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261103T193343Z, ok, no retry (swap log at 5abca2c6).
-- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md, this session's maintenance run, Nov 4 afternoon).
-- This page's date and the ledger's newest stamp: both Nov 4. Agree.
+- Last cache build: 20261103T193343Z, ok, no retry (swap log at gallery
+  e5352a86); the website's nights of Nov 4 and 5 stopped before a swap.
+- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md, generated Nov 4).
+- Page Nov 5, ledger's newest stamp Nov 4: today's ledger lines come at the close.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
 Decisions, one at a time:
-- None today. Later: which ended missions come next (Pioneer 10,
-  Pioneer 11, Rosetta and DART).
+- At the standards slice: the Pluto row, what it shows (Pluto or the
+  barycentre) and what it is called (L-150 (trusting a near-equal pair)).
 
 At the next design talk:
 - How obsolete code is treated, and when it goes (L-509 (obsolete
   code)); the first case is the orrery's unused date function.
 - The shared link (ruled Oct 29) waits for its build.
+- Planet 9: how to show a body that may not exist.
 
 Not urgent, in your order:
 1. Whether the editor also edits the Solar System room's rows, and
@@ -121,10 +122,11 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- This session: L-512; the map and your rulings; `COORD_L512_slice_a_prompt_20261104.md`.
+- This session: your run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`;
+  the website's `patch_L510_1_piece_c_orbit_website.py` and
+  `patch_L510_2_orbit_body_drops_future_points.py`.
 - The talk's rulings: `DESIGN_L484_consistency_rulings_20261103.md`.
-- The door: `documentation/python_work_door/`, and L-499.
-- Your run record: `WHERE_WE_ARE_11-4-26_1735_run_record.md`.
+- The door: `documentation/python_work_door/`, and L-499 (kinds of session).
 
 --- Your run record below this line. No patch edits it; the length cap
 --- stops here; the close reads your timestamped copy and clears this.
