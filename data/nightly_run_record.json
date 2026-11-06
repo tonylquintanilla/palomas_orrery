@@ -3,9 +3,9 @@
   "schema": 2,
   "taken": [],
   "held": [],
-  "clean_run_utc": "2026-11-05T18:51:21.485090+00:00",
+  "clean_run_utc": "2026-11-06T15:05:44.093011+00:00",
   "where": "GitHub Actions",
-  "run_log": "https://github.com/tonylquintanilla/palomas_orrery/actions/runs/42087890835",
+  "run_log": "https://github.com/tonylquintanilla/palomas_orrery/actions/runs/42239501575",
   "reported_not_red": [],
   "rows": [
     {
@@ -16,17 +16,17 @@
     {
       "row": "Period fetch",
       "kind": "generator",
-      "verdict": "unchanged (2 checked, not written) -- NOTHING MISSING -- 92 served objects examined, no query asked"
+      "verdict": "unchanged (2 checked, not written) -- NOTHING MISSING -- 97 served objects examined, no query asked"
     },
     {
       "row": "Horizons check",
       "kind": "generator",
-      "verdict": "unchanged (2 checked, not written) -- NOTHING DUE -- 92 entries and 26 sheets current, no query asked"
+      "verdict": "unchanged (2 checked, not written) -- NOTHING DUE -- 97 entries and 26 sheets current, no query asked"
     },
     {
       "row": "Path plan",
       "kind": "generator",
-      "verdict": "unchanged (1 checked, not written) -- 27 paths, events atlas_2024_g3 1, atlas_3i 1, bepicolombo 35, borisov_2025_v1 1, borisov_2i 1, c2025_k1 1, c2025_k1_b 1, c2025_k1_d 1, cassini 7, europa_clipper 5, galileo 7, juice 10, juno 4, lucy 7, mcnaught 1, new_horizons 2, osiris_apex 13, oumuamua 1, panstarrs_2025_r3 1, parker_solar_probe 49, psyche_spacecraft 2, solar_orbiter 31, tsuchinshan_atlas 1, voyager_1 2, voyager_2 5, west 1, wierzchos 1. Asked JPL for: nothing. Not planned: lucy."
+      "verdict": "unchanged (1 checked, not written) -- 32 paths, events akatsuki 15, atlas_2024_g3 1, atlas_3i 1, bepicolombo 35, borisov_2025_v1 1, borisov_2i 1, c2025_k1 1, c2025_k1_b 1, c2025_k1_d 1, cassini 7, dart 1, europa_clipper 5, galileo 7, juice 10, juno 4, lucy 7, mcnaught 1, new_horizons 2, osiris_apex 13, oumuamua 1, panstarrs_2025_r3 1, parker_solar_probe 49, pioneer_10 1, pioneer_11 2, psyche_spacecraft 2, rosetta 12, solar_orbiter 31, tsuchinshan_atlas 1, voyager_1 2, voyager_2 5, west 1, wierzchos 1. Asked JPL for: nothing."
     },
     {
       "row": "Objects export",
@@ -51,7 +51,7 @@
     {
       "row": "Horizons confirmations",
       "kind": "checker",
-      "verdict": "pass -- 92 of 92 entries and 64 periods confirmed, 26 sheets read, within 30 days"
+      "verdict": "pass -- 97 of 97 entries and 64 periods confirmed, 26 sheets read, within 30 days"
     },
     {
       "row": "Horizons check suite",
@@ -66,7 +66,7 @@
     {
       "row": "Path plan suite",
       "kind": "checker",
-      "verdict": "31 of 31 checks passed"
+      "verdict": "36 of 36 checks passed"
     },
     {
       "row": "Path or orbit suite",
@@ -76,7 +76,7 @@
     {
       "row": "Orbit cache",
       "kind": "checker",
-      "verdict": "All 24 orbit cache tests passed: cache loads, old formats convert, corrupted entries are dropped; the clock reads UTC and both forms of the fetched stamp read back; the repository-wide fresh check examined 149 .py files and 20 JPL calls, every one asked fresh (2 not JPL, excepted); JPL's answers told apart (no such body, more than one, unreachable, other) on 10 faked answers to fetch_trajectory, 10 to fetch_position by astroquery and 11 by both its routes, and 4 fallback branches ask before drawing (3 bodies JPL has no solution for drawn from their papers whatever it answers); nothing left behind."
+      "verdict": "All 24 orbit cache tests passed: cache loads, old formats convert, corrupted entries are dropped; the clock reads UTC and both forms of the fetched stamp read back; the repository-wide fresh check examined 147 .py files and 20 JPL calls, every one asked fresh (2 not JPL, excepted); JPL's answers told apart (no such body, more than one, unreachable, other) on 10 faked answers to fetch_trajectory, 10 to fetch_position by astroquery and 11 by both its routes, and 4 fallback branches ask before drawing (3 bodies JPL has no solution for drawn from their papers whatever it answers); nothing left behind."
     },
     {
       "row": "Drawings export check",
