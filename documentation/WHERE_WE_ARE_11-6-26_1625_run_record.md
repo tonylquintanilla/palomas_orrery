@@ -240,16 +240,73 @@ Do next, in order:
   1. Move this patch, and patch_L476_5_animation_scale_and_settings.py,
      which is still in the root folder, into documentation\. -- done
   2. Commit and push the orrery in GitHub Desktop, not during
-     the website's night. -- 
+     the website's night. -- 197bc0d3f7e5d5d3f42aa6dcbf4094df6b349d05
 Not changed, and named: skills/horizons-orbital-mechanics/SKILL.md still says
 the drawing leaves out the last-day pair; carried on L-485 for its next version.
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
-2. Move this patch into `documentation\`. Move `patch_L476_5_animation_scale_and_settings.py` there too, because it was pushed while still in the root folder.
-3. Commit and push the orrery, but not during the website's night.
-
 **For you to do or decide**
-- (do) Steps 1 to 3 above.
-- (decide) The Pluto row: A, B or C.
+- (do) Steps 1 to 3 above. -- done
+- (decide) The Pluto row: A, B or C. -- for a solar system view the barycenter vs pluto is trivial. however, for a local view, say a pluto drawer, it is not trivial, and we should show the barycenter and the pluto - charon pair orbiting around it. and drawing the other moons around the barycenter is critical otherwise their orbits are drawn distorted. so this seems like C? please review. the orrery has a legacy option to have the center as pluto, which indeed plots the moon orbits distorted. we don't need this option. thanks. 
 
 I can't give a token count, because this environment doesn't print one.
+
+==========================================================================
+
+Going ahead. I'll write the Code session's brief. First, a few facts about the Moon so the brief points at the right places.
+
+The website shows the Moon only in the Earth room, as an orbit around Earth. That's enough to write the brief.
+
+I'll check that the Earth room claim is right and the brief is plain ASCII, then put it in your orrery folder.
+
+That "objects" line is inside an example, not the Earth room itself. I'll check where the website really draws the Moon before the brief says so.
+
+It is the Earth room: that block is the room's own scene, where the Moon is the only body orbiting. I'll make the brief's wording precise and deliver it.
+
+The Moon session's brief is in your orrery's documentation folder. Commit and push it before you open the Code session. That session stops at the start if your folder has edits it hasn't seen pushed.
+
+The brief gives the Code session two parts.
+
+**Part 1, the Moon (the build).** The orrery's Moon entry gets a key, so the export carries it to the website.
+- JPL's exact name for the Moon and its period around Earth are read live from JPL, never typed.
+- Only the orrery's sentences that have a source go on the website.
+- The session also finds out what the website prints today for the Moon's position accuracy.
+- The session stops and asks you one question if JPL can't be reached, if the website would print a number with no source, or if the words need your choice.
+- It's done when both maintenance runs pass and you've looked at the Moon's text box in the Earth room.
+
+**Part 2, the Pluto records (no building).**
+- **L-150 (trusting a near-equal pair):** the Solar System row stays as it is, and your local-view ruling is written down for the Pluto room. Your words are quoted from your 16:25 run record.
+- **L-509 (obsolete code):** the Pluto-centred view of the moons is marked obsolete, with no change to what it does.
+- **Where We Are:** the Pluto question moves from Waiting on you to Settled.
+
+**Opener for the Code session:**
+
+> Built on orrery [the SHA of your push of the brief] at https://github.com/tonylquintanilla/palomas_orrery
+> and gallery 6c93d0a at https://github.com/tonylquintanilla/tonyquintanilla.github.io
+> (both branch main). Nightly bot commits since are expected.
+>
+> Claude Code session for Paloma's Orrery, through the python_work door; the work is in both repositories, orrery first.
+> The job: road stage 14, from documentation/COORD_stage14_moon_standards_brief_20261106.md. Part 1, the Moon's standards; Part 2, the Pluto row's records. Read the brief and the skills it names, report the bases and the skill versions, say what you are about to do, and wait for my go-ahead.
+
+**Files this turn**
+- New: `documentation/COORD_stage14_moon_standards_brief_20261106.md` (112 lines)
+
+**Run order**
+1. In GitHub Desktop, commit and push the orrery. The change list should show only the brief. -- 
+2. Paste the SHA of that push into the opener, then start the Code session from the python_work door.
+
+**For you to do or decide**
+- (do) Commit and push the brief.
+- (do) Open the Code session with the opener above.
+
+This environment doesn't print a token count. This turn read about 40 KB of the ledger, the page, the code and the website's config, and wrote the 112-line brief.
+
+I won't commit or push. In this project commit and push are always yours. The untracked file is my working copy of the brief in the cloud clone. The real copy is already in your orrery folder, so I'll remove the cloud copy so the clone matches GitHub again.
+
+I didn't commit or push, because commit and push are always yours in this project. The stop hook was asking for one, and it was firing on a working copy of the brief I had left in a clone in this session's cloud workspace.
+
+I deleted that copy. Both clones now match GitHub, with nothing untracked.
+
+The brief itself is still in your orrery's documentation folder, and your run order hasn't changed:
+1. Commit and push it in GitHub Desktop.
+2. Start the Code session with the opener from my last message, with the SHA of that push pasted in.
