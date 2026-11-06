@@ -619,7 +619,7 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 
 =================================================================================================
 
-**Session: OPEN: 11-5-26 1307: Opus: Coordinator: Orrery road stage 13 quick wins L510**
+**Session: DONE: 11-6-26 1005: Opus: Coordinator: Orrery road stage 13 quick wins L510**
 
 I'll check whether either push has landed, so I can tell you where you are in the run order.
 
@@ -785,3 +785,34 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 
 3. Do the phone look: tick the five from Historical missions.
 4. Reinstall the three skills and paste v3.127.
+
+========================================================
+
+I'd close this session. Stage 13 is done, and this conversation is now very long, so every further turn here re-reads all of it. A fresh session starts small, and the live-check fix is a good first job for it. Let me read both repositories' latest commits for the opener.
+
+I'd close here. The live-check fix is small, and a fresh session can do it more cheaply than this long one.
+
+The orrery's night ran (01b2120). The website's night hadn't committed yet when I looked at 09:44, which is usual: GitHub often starts it hours late.
+
+Here's an opener for the next session:
+
+> Built on orrery 01b2120 at https://github.com/tonylquintanilla/palomas_orrery
+> and gallery fbfc9d2 at https://github.com/tonylquintanilla/tonyquintanilla.github.io
+> (both branch main, read Nov 6, 2026, 09:44 Chicago). Nightly bot commits since are expected.
+>
+> Coordinating session for Paloma's Orrery, through the python_work door. Both repositories are in my connected python_work folder.
+>
+> Start:
+> 1. Record both bases (git ls-remote on each) and say whether either moved since the anchor.
+> 2. Read the orrery's documentation/WHERE_WE_ARE.md.
+> 3. Name each skill you read and its version line, and compare each with the manifest. horizons-orbital-mechanics and gallery-cache-builder should read 1.18 and interactive-exhibit 1.31 (carried from Nov 5, v3.127).
+>
+> The job, in this order:
+> a. The website's live check (`gallery_maintenance_run.py --live`) fetches a typed list, SERVED_FILES. It still names piece C of C/2025 K1's positions file (an orbit since Nov 4, so a false 404 on Nov 5's live run). It also leaves out all seven ended missions' positions files (Galileo, Cassini, Pioneer 10, Pioneer 11, Rosetta, DART, Akatsuki). Build the positions entries from the website's config instead (every spacecraft and every comet on an open path), so a body that crosses e = 1 changes the list by itself. Add a planted case showing the check can fail. Record it on the ledger item for the website's checks.
+> b. Then the desktop job on L-476: an ended mission's marker on its last day, in the static plot and the animation (Pioneer 10's line stops at 82.1 AU while its marker sits at today's 142.2 AU; Galileo has no marker).
+>
+> Before building, propose the smallest instrument for each in one line and wait for my go-ahead. Patches go into my folders tested on a copy. Commit and push are mine.
+
+**Where this leaves us:**
+- Stage 13's quick wins are done and live, and you've reinstalled the skills.
+- *Next session: the live check's file list first, then the desktop's ended-mission markers.*

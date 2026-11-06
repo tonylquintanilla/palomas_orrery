@@ -21,12 +21,27 @@ WHAT IT CHECKS
          thinning keeps no point near now, the solid part still ends
          within five minutes of now. Planted fault: the tail turned off,
          and the solid part ends at the flyby, two months back.
+      6. An ended mission's marker (marker_moment): chosen after the
+         path's last day, it is asked for that day at 00:01; chosen
+         before, nothing changes; a mission still flying never changes;
+         a plan that stops before mission_end (Akatsuki's cutoff) gives
+         the plan's day. Planted fault: the last day lost, and the
+         marker is asked for the date chosen.
+      7. The animation (hold_last_day): frames after the last day hold
+         the last day's position, labelled with that moment, JPL asked
+         once; frames before it and a mission still flying are as they
+         came. Planted fault: the last day lost, and those frames stay
+         empty, which hides the marker.
+      8. An ended path's line ends at its marker: drawn after its
+         span, its last point is the last-day pair's 00:01, the
+         moment marker_moment asks the marker for. Planted fault: JPL
+         asked nothing for the pair, and the line stops short.
 
     Live, by hand (python test_path_drawing.py --galileo): Galileo drawn
     by its plan from JPL now gives the same moments, to the microday, as
     the website's served data/solar-system/positions/galileo.json at
-    GALLERY_PIN, apart from the website's last-day pair, which the
-    orrery does not draw and which is named. Galileo's path ended in
+    GALLERY_PIN, its last-day pair included (the orrery draws it since
+    2026-11-06, L-476; before, it was left out). Galileo's path ended in
     2003 and JPL no longer revises it, so the two must agree. With
     --plant the backbone's thinning tolerance is doubled, and the check
     must fail.
@@ -40,6 +55,11 @@ Module created: November 3, 2026 with Anthropic's Claude Opus 5.5
 (L-476).
 Module updated: November 3, 2026, evening, with Anthropic's Claude Opus
 5.5 (L-476: check 5, the daily tail, and its planted fault).
+Module updated: November 6, 2026 with Anthropic's Claude Opus 5.5
+(L-476: checks 6 and 7, an ended mission's marker on its last day in the
+static plot and the animation, and check 8, its line ending at that
+marker by the last-day pair, each with a planted fault; check 2 counts
+the pair; the --galileo check now expects the pair drawn).
 """
 
 import datetime
@@ -121,11 +141,13 @@ def offline():
 
     top, pts, jpl = drawn_bend()
     start, end = pd.plan_span(PLAN)
-    inside = all(a >= start and b <= end for a, b, _ in jpl.asked)
-    check(top > 0.004 and inside and len(jpl.asked) == 2,
+    pair = [a for a in jpl.asked if a[2] == "1m"]
+    rest = [a for a in jpl.asked if a[2] != "1m"]
+    inside = all(a >= start and b <= end for a, b, _ in rest)
+    check(top > 0.004 and inside and len(rest) == 2 and len(pair) == 1,
           "2. the flyby's bend is kept (highest y %.4f AU of 0.005, %d "
-          "points) and JPL is asked %d times, inside the span"
-          % (top, len(pts), len(jpl.asked)))
+          "points) and JPL is asked %d times inside the span, and %d for "
+          "the last-day pair" % (top, len(pts), len(rest), len(pair)))
     top_bad = drawn_bend(fraction=10.0)[0]
     check(top_bad < 0.004,
           "2. planted fault caught: a window thinned a thousand times "
@@ -162,6 +184,108 @@ def offline():
           "5. planted fault caught: with the tail turned off the solid "
           "part ends %s minutes before now" % bad)
 
+    ok, why = ended_marker()
+    check(ok, "6. an ended mission's marker is asked for its last day "
+          "when the date chosen is after it: %s" % why)
+    ok, why = ended_frames()
+    check(ok, "7. the animation holds an ended mission's marker on its "
+          "last day: %s" % why)
+    saved = pd.last_day
+    pd.last_day = lambda obj, plans=None: None
+    try:
+        bad6 = ended_marker()[0]
+        bad7 = ended_frames()[0]
+    finally:
+        pd.last_day = saved
+    check(not bad6, "6. planted fault caught: with the last day lost, the "
+          "marker is asked for the date chosen")
+    check(not bad7, "7. planted fault caught: with the last day lost, the "
+          "frames after it stay empty")
+
+    last, marker = ended_line()
+    check(last == marker, "8. an ended path's line ends at its marker: its "
+          "last point %s, the marker %s" % (last, marker))
+
+    def no_pair(ident, id_type, start, stop, step):
+        return {} if step == "1m" else FakeJPL()(ident, id_type, start,
+                                                 stop, step)
+    last, marker = ended_line(fetch=no_pair)
+    check(last != marker, "8. planted fault caught: with no last-day pair "
+          "the line stops at %s, short of the marker %s" % (last, marker))
+
+
+# An ended mission's made-up plan, and one cut before its mission_end.
+ENDED = {"craft_ended": {"span": {"start": "1972-03-04", "end": "2003-01-23"}},
+         "craft_cut": {"span": {"start": "2010-05-22", "end": "2024-04-26"}}}
+
+
+def ended_marker():
+    """(ok, why) for marker_moment on made-up entries."""
+    ended = {"key": "craft_ended", "mission_end": datetime.datetime(2003, 1, 23)}
+    cut = {"key": "craft_cut", "mission_end": datetime.datetime(2025, 9, 18),
+           "path_cutoff": datetime.datetime(2024, 4, 26)}
+    flying = {"key": "craft_ended"}
+    unplanned = {"name": "Unplanned", "mission_end": datetime.datetime(2003, 9, 21)}
+    today = datetime.datetime(2026, 11, 6, 12, 0)
+    before = datetime.datetime(2000, 6, 1)
+    got = {
+        "ended, after": pd.marker_moment(ended, today, ENDED),
+        "ended, before": pd.marker_moment(ended, before, ENDED),
+        "flying": pd.marker_moment(flying, today, ENDED),
+        "cut": pd.marker_moment(cut, today, ENDED),
+        "unplanned": pd.marker_moment(unplanned, today, ENDED),
+    }
+    want = {
+        "ended, after": (datetime.datetime(2003, 1, 23, 0, 1), True),
+        "ended, before": (before, False),
+        "flying": (today, False),
+        "cut": (datetime.datetime(2024, 4, 26, 0, 1), True),
+        "unplanned": (datetime.datetime(2003, 9, 21, 0, 1), True),
+    }
+    wrong = ["%s gave %s, wanted %s" % (k, got[k], want[k])
+             for k in want if got[k] != want[k]]
+    return not wrong, ("; ".join(wrong) if wrong else
+                       "after the last day 2003-01-23 00:01, before it the "
+                       "date chosen, a cut plan 2024-04-26 00:01, a mission "
+                       "still flying unchanged")
+
+
+def ended_frames():
+    """(ok, why) for hold_last_day on a made-up animation of six yearly
+    frames, 2001 to 2006, the path ending on 2003-01-23."""
+    ended = {"key": "craft_ended", "name": "Craft",
+             "mission_end": datetime.datetime(2003, 1, 23)}
+    dates = [datetime.datetime(y, 6, 1) for y in range(2001, 2007)]
+    padded = [{"x": 1.0}, {"x": 2.0}, None, None, None, None]
+    asked = []
+
+    def fetch_at(moment):
+        asked.append(moment)
+        return {"x": 82.1, "y": 0.0, "z": 0.0}
+
+    held = pd.hold_last_day(ended, dates, padded, fetch_at, ENDED)
+    flying = pd.hold_last_day({"key": "craft_ended", "name": "Flying"},
+                              dates, padded, fetch_at, ENDED)
+    moment = datetime.datetime(2003, 1, 23, 0, 1)
+    ok = (held[:2] == padded[:2]
+          and all(p and p["x"] == 82.1 and p["position_date"] == moment
+                  for p in held[2:])
+          and asked == [moment] and flying == padded)
+    return ok, ("frames %s; JPL asked %s"
+                % ([None if p is None else p["x"] for p in held],
+                   [m.strftime("%Y-%m-%d %H:%M") for m in asked]))
+
+
+def ended_line(fetch=None):
+    """(the line's last moment, the marker's moment) for PLAN drawn as an
+    ended mission's path, on a day after its span."""
+    entry = {"key": "craft", "name": "Craft", "id": "-1", "id_type": "id",
+             "mission_end": datetime.datetime(2025, 7, 1)}
+    now = datetime.datetime(2026, 11, 6, 12, 0)
+    pts = pd.draw_plan(entry, PLAN, fetch=fetch or FakeJPL(), now=now)
+    marker = pd.marker_moment(entry, now, {"craft": PLAN})[0]
+    return (pts[-1]["date"] if pts else None), marker
+
 
 def solid_gap():
     """Minutes from the solid part's last point to now, for PLAN drawn
@@ -189,8 +313,10 @@ def galileo(plant=False):
                         "id_type": "id"}, plan)
     mine = set(round(p["jd"], 6) for p in pts or [])
     last_day = set(t for t in web if t >= 2452903.5)   # 2003-09-21
-    extra, missing = sorted(mine - web), sorted(web - mine - last_day)
-    ok = bool(mine) and not extra and not missing and len(last_day) == 2
+    # Since 2026-11-06 the orrery draws the last-day pair too (L-476).
+    extra, missing = sorted(mine - web), sorted(web - mine)
+    ok = (bool(mine) and not extra and not missing and len(last_day) == 2
+          and last_day <= mine)
     return ok, ("%d drawn, %d served, the website's last-day pair %s; "
                 "drawn and not served %s; served and not drawn %s"
                 % (len(mine), len(web), sorted(last_day), extra[:5],

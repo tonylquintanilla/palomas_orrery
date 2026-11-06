@@ -176,6 +176,14 @@ fetch_trajectory's report reaches its callers. A body JPL answers it has
 no record of, or more than one, never enters the fallback branches
 (plot_actual_orbits, the static worker's two, the animation worker's):
 jpl_outcome.holds_fallback says so on the console.)
+Module updated: November 6, 2026 with Anthropic's Claude Opus 5.5 (L-476,
+the ended missions' markers): when the date chosen is after an ended
+mission's last day, the static worker's two marker loops ask JPL for that
+day (path_drawing.marker_moment), and its hover gives that day, its sky
+position and its distance from Earth on that day; the animation's
+frames after that day hold the marker there (path_drawing.hold_last_day)
+instead of hiding it. Pioneer 10's marker now sits at the end of its line
+and Galileo has one.)
 
 """
 #Paloma's Orrery - Solar System Visualization Tool
@@ -2053,9 +2061,12 @@ def add_celestial_object(fig, obj_data, name, color, symbol='circle', marker_siz
         if hover_data == "Full Object Info":
 
             # Fetch RA/Dec and uncertainties - NOW RECEIVING 4 VALUES
+            # L-476 (2026-11-06): asked for the day the marker shows, so an
+            # ended mission's sky position and distance from Earth are its
+            # last day's, as its marker is (path_drawing.marker_moment).
             ra_deg, dec_deg, ra_3sigma, dec_3sigma, earth_distance_au = fetch_radec_for_hover(
                 obj_info['id'], 
-                get_date_from_gui(), 
+                path_drawing.marker_moment(obj_info, get_date_from_gui())[0], 
                 obj_info.get('id_type')
             )
             if earth_distance_au is not None:
@@ -5241,13 +5252,20 @@ def plot_objects():
                         if center_object_name == 'Sun' and 'helio_id' in obj:
                             fetch_id = obj['helio_id']
                             fetch_id_type = 'smallbody'
+                        # L-476 (2026-11-06): an ended mission's marker on its path's
+                        # last day, where the website puts it, when the date chosen
+                        # is after that day (path_drawing.marker_moment).
+                        marker_date, ended = path_drawing.marker_moment(obj, date_obj)
+                        if ended:
+                            print(f"[ENDED MISSION] {obj['name']}: marker on its last day, "
+                                  f"{marker_date:%Y-%m-%d}", flush=True)
                         pos_report = {}   # L-512 A2: what JPL answered
-                        obj_data = fetch_position(fetch_id, date_obj, center_id=center_id, id_type=fetch_id_type,
+                        obj_data = fetch_position(fetch_id, marker_date, center_id=center_id, id_type=fetch_id_type,
                                                   report=pos_report)
                         
                         # Thread position timestamp for hover text
                         if obj_data is not None:
-                            obj_data['position_date'] = date_obj
+                            obj_data['position_date'] = marker_date
 
                         # Special case: Orcus at Orcus-Vanth Barycenter - derive from Vanth's position
                         # JPL doesn't have 920090482 as a valid target, but 120090482 (Vanth) works
@@ -5697,13 +5715,19 @@ def plot_objects():
                     if center_object_name == 'Sun' and 'helio_id' in obj:
                         fetch_id = obj['helio_id']
                         fetch_id_type = 'smallbody'
+                    # L-476 (2026-11-06): an ended mission's marker on its path's
+                    # last day, as in the loop above.
+                    marker_date, ended = path_drawing.marker_moment(obj, date_obj)
+                    if ended:
+                        print(f"[ENDED MISSION] {obj['name']}: marker on its last day, "
+                              f"{marker_date:%Y-%m-%d}", flush=True)
                     pos_report = {}   # L-512 A2: what JPL answered
-                    obj_data = fetch_position(fetch_id, date_obj, center_id=center_id, id_type=fetch_id_type,
+                    obj_data = fetch_position(fetch_id, marker_date, center_id=center_id, id_type=fetch_id_type,
                                               report=pos_report)
 
                     # Thread position timestamp for hover text
                     if obj_data is not None:
-                        obj_data['position_date'] = date_obj
+                        obj_data['position_date'] = marker_date
 
                     # Special case: Orcus at Orcus-Vanth Barycenter - derive from Vanth's position
                     orcus_needs_derivation = (
@@ -6763,6 +6787,12 @@ def animate_objects(step, label):
                             center_id, 
                             fetch_id_type
                         )
+                        # L-476 (2026-11-06): the frames after an ended mission's
+                        # last day hold its marker there, instead of hiding it.
+                        positions_over_time[obj['name']] = path_drawing.hold_last_day(
+                            obj, dates_list, positions_over_time[obj['name']],
+                            lambda moment: fetch_position(fetch_id, moment, center_id=center_id,
+                                                          id_type=fetch_id_type))
                     
                     else:
                         # Fetch positions for the animation dates

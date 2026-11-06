@@ -1063,7 +1063,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-403 | Numbers in the object list's descriptions carry no source (orrery, provenance) | OPEN | -- | 2026-10-01 |
 | ! | L-411 | The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-11-02 |
 | ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-11-02 |
-| ! | L-423 | The website's checks: the order Tony confirmed (checks, gallery) | OPEN | -- | 2026-10-29 |
+| ! | L-423 | The website's checks: the order Tony confirmed (checks, gallery) | OPEN | -- | 2026-11-06 |
 | ! | L-424 | The checker reports one word for two different cases (worksheet checker) | OPEN | -- | 2026-10-11 |
 | ! | L-425 | A citation's location record is checked only in part (provenance tooling) | OPEN | -- | 2026-10-09 |
 | ! | L-426 | The worksheet checker compares very small numbers as equal (worksheet checker) | OPEN | -- | 2026-10-09 |
@@ -1082,7 +1082,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-467 | The scanner credits a display line with a citation it only sits near (orrery, provenance scanner) | OPEN | -- | 2026-10-21 |
 | ! | L-468 | The Sun room's phone look of 2026-10-21, night: the corona's drawer text and the Hills cloud's cross (gallery, the Sun room) | OPEN | -- | 2026-10-29 |
 | ! | L-470 | Orrery entries the website cannot serve as they stand (orrery, objects) | OPEN | -- | 2026-11-02 |
-| ! | L-476 | The orrery's whole-path plots draw by the same path plan as the website (orrery, spacecraft and comets) | OPEN | -- | 2026-11-05 |
+| ! | L-476 | The orrery's whole-path plots draw by the same path plan as the website (orrery, spacecraft and comets) | OPEN | -- | 2026-11-06 |
 | ! | L-483 | A room for C/2025 K1 and its pieces, the first comet room (gallery, exhibits) | OPEN | -- | 2026-10-28 |
 | ! | L-484 | The website and the orrery agree on every object both draw, or the difference is written down (orrery + gallery, objects; method for interactive-exhibit) | OPEN | -- | 2026-11-05 |
 | ! | L-485 | A nightly unattended run of the routines (orrery + gallery, maintenance) | OPEN | -- | 2026-11-05 |
@@ -6054,7 +6054,7 @@ aberration is built. L-356's build may come on any evening (Tony,
 above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
 
 #### [L-423] The website's checks: the order Tony confirmed (checks, gallery)
-<!-- L:423 status:OPEN upd:2026-10-29 section:A flag: rice: -->
+<!-- L:423 status:OPEN upd:2026-11-06 section:A flag: rice: -->
 - **Confirmed by Tony, 2026-10-08**, in the decisions session of
   2026-10-08: "Yes open it now"; on the order, "The order is okay".
   This is road stage 9 on Where We Are. It comes before the front-door
@@ -6096,7 +6096,42 @@ above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
   a line wider than 62 characters") fail the same on the untouched
   b3b4826f and read as the walk not yet following L-497's one text box.
   For the next session that opens the walk.
-**Gap:** items 1 and 2 done; next, item 3, L-357 (stale leftovers).
+- **2026-11-06: the live check's positions files come from the
+  config** (the coordinating session of Nov 6, Claude Opus 5.5, built
+  on gallery 8ff3e74; the website's
+  `patch_L423_positions_from_config.py`). Not one of the seven items
+  above; Tony's job of Nov 6, item a.
+  - Why: the live check (`gallery_maintenance_run.py --live`, its row
+    "Served reachability") typed its positions files. It still named
+    piece C of C/2025 K1's, unserved since piece C became an orbit on
+    Nov 4, so Nov 5's live run reported a false "not served". And it
+    left out all seven ended missions' files.
+  - Now `positions_files()` reads them from `data/objects_config.json`
+    by the cache builder's own `is_path_body()`: every spacecraft and
+    every comet on an open path. Today that is 32 files, 19 spacecraft
+    and 13 comets, and the page asks the same question before it draws
+    (`solarSystemPositionFiles`). A config that cannot give the list
+    turns the check red, saying why, and nothing is fetched.
+  - The new gating row "Served list" (`tools/test_served_list.py`):
+    the real list, each file in the served cache; no positions file
+    typed; five planted faults, each caught (Halley marked open_path
+    joins, 3I/ATLAS without it leaves, a config with no path body and
+    one that is not JSON turn the check red, a 404 on Pioneer 10's file
+    fails naming it). Shown failing when the runner was broken two
+    ways on a copy. The orrery's dashboard gains its button and line
+    (in the orrery's patch), which the dashboard parity check requires.
+  - Verified in a throwaway copy: the website's offline run "37 of 37
+    gating checkers passed". Its five pulls could not reach GitHub
+    from the session's workspace, and the live site could not be
+    reached either, so the live run is Tony's after the push.
+  - Carried for interactive-exhibit's next version: One check reads
+    the file the browser fetches says a new file the page fetches by
+    name joins `SERVED_FILES` in the same push. For a positions file
+    that is no longer so; and its count, "eleven files as of
+    d9d7a48f", is stale.
+**Gap:** items 1 and 2 done; next, item 3, L-357 (stale leftovers). The
+live check's list: Tony's live run after the push, its "Served
+reachability" line naming 32 positions files read from the config.
 **Ref:** L-412; L-363; the members above;
 `documentation/HANDOFF_decisions_20261008.md`.
 
@@ -32293,7 +32328,7 @@ same session); gallery `interactive.html`,
 `tools/headless/walk_solar_system_drawer.js`.
 
 #### [L-476] The orrery's whole-path plots draw by the same path plan as the website (orrery, spacecraft and comets)
-<!-- L:476 status:OPEN upd:2026-11-05 section:A flag: rice: -->
+<!-- L:476 status:OPEN upd:2026-11-06 section:A flag: rice: -->
 - **Tony, 2026-10-23, at slice 2's design talk** (`documentation/DESIGN_L443_slice2_rulings_20261023.md`):
   "if there are better approaches for the orrery maybe we can implement
   them there also so the two are as Consistent as possible." And, on
@@ -32504,7 +32539,51 @@ same session); gallery `interactive.html`,
   positions stop in 2003, gets no marker at all. The mismatch predates
   that session: this item's close of Nov 3 recorded Pioneer 10's line
   short of its marker, then at its typed end.
-**Gap (replaces the one below, 2026-11-05, evening):** the next small
+- **2026-11-06: built, an ended mission's marker on its last day in
+  the desktop** (the coordinating session of Nov 6, Claude Opus 5.5,
+  through the python_work door, built on orrery 01b2120 and gallery
+  8ff3e74; `patch_L476_4_ended_markers.py`). Tony's go-ahead of Nov 6,
+  12:20 Chicago ("proceed"), on the instrument proposed: a patch to
+  `palomas_orrery.py` with a helper in `path_drawing.py`.
+  - The static plot: both of the worker's marker loops ask JPL for
+    `path_drawing.marker_moment`: the date chosen, or, for an entry
+    with `mission_end` chosen after its path's last day, that day at
+    00:01 UTC, the website's last served point. The hover's sky
+    position and distance from Earth are asked for the same moment
+    (`add_celestial_object`); they had been asked for the GUI's date.
+  - The animation: `path_drawing.hold_last_day` gives the frames after
+    the last day that day's position, asked once, its `position_date`
+    that moment. Before, `pad_trajectory` left them empty and the
+    marker vanished after the mission's end.
+  - Found while building, and added on Tony's word (Nov 6: "Yes, add
+    them"): the drawn line stopped up to six days short of its marker.
+    Measured on the website's served files: Akatsuki 0.12 AU near
+    Venus, DART 0.07 AU, Pioneer 10 0.035 AU. `draw_plan` now adds the
+    website's last-day pair (00:00 and 00:01 UTC of the span's last
+    day) to a path that has ended, so the line ends at the marker.
+  - Verified in a throwaway copy: the path drawing suite "13 of 13
+    checks passed" (checks 6 to 8 new, each with a planted fault;
+    check 2 counts the pair). The real plot and animation run headless
+    with JPL replaced by a stand-in. Before the patch, Pioneer 10's
+    marker was asked for today and drawn at the stand-in's 138.3 AU
+    while its line ended at 78.1 AU, and its frames after 2003 were
+    hidden. After it, the marker sits at 78.148 AU on 2003-01-23 00:01
+    UTC, the line ends at the same point, and the frames hold it;
+    Galileo likewise on 2003-09-21. The orrery's maintenance run: "35
+    of 35 gating checkers passed", "0 TIER-1 -- the push gate holds".
+  - Not run here: `python test_path_drawing.py --galileo`, which needs
+    JPL. It now expects the last-day pair drawn.
+  - Carried for horizons-orbital-mechanics' next version: A Plan Draws
+    a Path Only Around the Sun says the orrery's drawing leaves out
+    the website's last-day pair; since this patch it draws it for a
+    path that has ended. And v3.127's obligation is still open: this
+    session read the skills as the repository's files, not as the
+    account's installed copies.
+**Gap (replaces the one below, 2026-11-06):** Tony's look at Pioneer 10
+and Galileo, Sun-centred, in a plot and an animation: each marker at
+the end of its line, the hover giving the last day. Then
+`python test_path_drawing.py --galileo` on his machine, and close.
+**Gap (superseded above, 2026-11-06; replaced the one below, 2026-11-05, evening):** the next small
 job above: an ended mission's marker on its last day in the desktop's
 static plot and animation, Galileo too; then Tony's look at Pioneer 10
 and Galileo, Sun-centred.

@@ -36,6 +36,10 @@ line names its 30-day refresh of each small body's e).
 Module updated: November 5, 2026 with Anthropic's Claude Opus 5.5
 (L-510: the Objects Mirror Check's and Suite's descriptions say the
 website's objects mirror follows a body across e = 1 by itself).
+Module updated: November 6, 2026 with Anthropic's Claude Opus 5.5
+(L-476: the Path Drawing Suite's line, 13 checks, five planted faults.
+L-423: the website's Served List button and line, and the offline
+run's card names it.)
 July 2026: added Linux Button-4/5 wheel scrolling to match columns 1/2's
 cross-platform coverage (CTkScrollableFrame's built-in handling only
 covers Windows/Mac <MouseWheel>). Audited LAUNCH_GROUPS against both
@@ -589,7 +593,8 @@ LAUNCH_GROUPS = {
         "the config mirror check, pull failures, Horizons "
         "confirmations, the pointer join, cache in step, drawn orbit, the drawings "
         "check, the collapsed-features sweep, the "
-        "guest book updater, the Daily Run's steps, the artifact-1 "
+        "guest book updater, the Daily Run's steps, the served list, the "
+        "artifact-1 "
         "assembler pin, and cache siblings (report only). Node: feature "
         "renderers, page framing, Sun shells, Earth scene geometry, "
         "hover budget, typed facts, typed numbers, arrival, display figures, Solar "
@@ -758,6 +763,21 @@ LAUNCH_GROUPS = {
         "room draws the ellipse in the right place, on Sedna's real numbers. "
         "Planted faults, among them an orbit drawn around the Sun, are each "
         "caught. GATES the gallery runner.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
+        True),
+        ("Served List",
+        os.path.join("tools", "test_served_list.py"),
+        "The live check's positions files (L-423): read from "
+        "data/objects_config.json -- every spacecraft and every comet on "
+        "an open path, by the cache builder's own rule -- instead of "
+        "typed, so a body that crosses e = 1 changes the list by itself. "
+        "Checks each file the config names is in the served cache and "
+        "none is typed, then plants five faults, each caught: a comet "
+        "joining, one leaving, two configs that cannot give a list, and a "
+        "404 on Pioneer 10's file. Fetches nothing. GATES the gallery "
+        "runner.",
         GALLERY_REPO_DIR,
         True,
         None,
@@ -1753,9 +1773,11 @@ LAUNCH_GROUPS = {
          "The orrery's drawing of a path by its plan, with no network: a "
          "planned entry's span read from its plan, a flyby's bend kept "
          "through the thinning, the path solid to today and dashed after, "
-         "the checkbox label from the plan, and the solid part ending at "
-         "today on a straight run; two planted faults caught. "
-         "Ends on \"PATH DRAWING SUITE: 7 of 7 checks passed\" (L-476).",
+         "the checkbox label from the plan, the solid part ending at "
+         "today on a straight run, and an ended mission's marker on its "
+         "last day in the plot and the animation, its line ending there; "
+         "five planted faults caught. "
+         "Ends on \"PATH DRAWING SUITE: 13 of 13 checks passed\" (L-476).",
          SCRIPT_DIR,
          True,
          None,
@@ -2118,6 +2140,9 @@ CARD_LINES = {
     ("Gallery -- checks and data",
      "Drawn Orbit"):
         "Checks a barycentre orbit is served and drawn around the barycentre.",
+    ("Gallery -- checks and data",
+     "Served List"):
+        "Checks the live check reads its positions files from the config.",
     ("Gallery -- checks and data",
      "Artifact 1 Assembler"):
         "Compares the Artifact 1 assembler test's verdicts with their recorded pin.",

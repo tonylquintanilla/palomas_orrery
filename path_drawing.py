@@ -25,8 +25,12 @@ without the tail, Voyager 1's solid part ended about ten years back,
 at 135.8 AU, with the spacecraft at 172.2 AU; on a straight run the
 thinning keeps no point near today.) The website's tail has the same
 length and step; its moments are each night's, so only an ended path,
-which has no tail, agrees point for point. An ended mission's last-day
-pair is the website room's need and is not drawn here. Its twin is
+which has no tail, agrees point for point. An ended path also gets the
+website's last-day pair, 00:00 and 00:01 UTC of its span's last day,
+since an ended mission's marker sits on that day (marker_moment): its
+line ends at its marker (added 2026-11-06, L-476; Tony: "Yes, add
+them"; before, the line could stop up to six days short, 0.12 AU for
+Akatsuki near Venus). Its twin is
 fetch_path_by_plan, fetch_path_tail, _plan_span, fetch_vectors_range
 and douglas_peucker in the website's tools/gallery_cache_builder.py
 (tonyquintanilla.github.io); the two repositories cannot import each
@@ -48,6 +52,10 @@ Key functions:
     plan_path_traces() - the path solid to today and dashed after, one
                    colour, one legend entry, one info marker
     span_label() - a planned entry's "(start to end)" checkbox label
+    marker_moment() - the moment a marker is asked for: an ended
+                   mission's last day, when the date chosen is after it
+    hold_last_day() - an animation's frames after an ended mission's
+                   last day hold its marker there
 
 Consumed by: palomas_orrery.py (plot_actual_orbits, plot_objects'
 worker, animate_objects' worker), orbit_data_manager.py,
@@ -58,6 +66,12 @@ Module created: November 3, 2026 with Anthropic's Claude Opus 5.5
 Module updated: November 3, 2026, evening, with Anthropic's Claude Opus
 5.5 (L-476, Tony's look: the website's daily tail added, so the solid
 part ends at today; see the third paragraph).
+Module updated: November 6, 2026 with Anthropic's Claude Opus 5.5
+(L-476, the ended missions' markers: last_day, marker_moment and
+hold_last_day, so an ended mission's marker sits on its path's last day
+in the static plot and the animation, as the website puts it; and
+draw_plan adds the website's last-day pair to a path that has ended, so
+its line ends at that marker).
 """
 
 import datetime
@@ -143,6 +157,86 @@ def entry_span(obj, plans=None):
     return obj.get("start_date"), obj.get("end_date")
 
 
+# The minute of an ended mission's last day its marker is asked for: the
+# website's last served point, 00:01 UTC (fetch_path_last_day in its
+# tools/gallery_cache_builder.py asks 00:00 and 00:01 of that day, and
+# the room puts the marker on the later). A drawing choice mirrored from
+# the website, not a measured value.
+# Source: tools/gallery_cache_builder.py, fetch_path_last_day, read at
+# gallery 8ff3e74 (tonyquintanilla.github.io): it asks last_day and
+# last_day + 1 minute, at a 1m step.
+LAST_DAY_MINUTE = 1
+
+
+def last_day(obj, plans=None):
+    """The day an ended mission's path ends, as a plain UTC datetime at
+    00:00; None for an entry with no 'mission_end' (a mission still
+    flying, or no mission at all). A planned entry's is its plan's last
+    day, which already stops at the earlier of mission_end and
+    path_cutoff and inside JPL's data (path_plan.path_stop): Akatsuki's
+    is 2024-04-26, not its mission_end. An entry with no plan takes the
+    earlier of those two days from the entry itself."""
+    if not obj.get("mission_end"):
+        return None
+    plan = plan_for(obj, plans)
+    if plan:
+        return datetime.datetime.strptime(plan["span"]["end"], "%Y-%m-%d")
+    end = min(d for d in (obj.get("mission_end"), obj.get("path_cutoff"))
+              if d)
+    return datetime.datetime(end.year, end.month, end.day)
+
+
+def marker_moment(obj, when, plans=None):
+    """(moment, ended): the moment an entry's marker is asked of JPL for.
+    The moment chosen, except for an ended mission chosen after its
+    path's last day: then that day at LAST_DAY_MINUTE, so the marker sits
+    at the end of its drawn path, where the website puts it (L-476; Tony,
+    2026-11-05: "an ended mission's marker on its last day, static plot
+    and animation, Galileo too"). Before that day nothing changes, and
+    neither does any entry with no 'mission_end'."""
+    day = last_day(obj, plans)
+    if day is None:
+        return when, False
+    moment = day + datetime.timedelta(minutes=LAST_DAY_MINUTE)
+    if when > moment:
+        return moment, True
+    return when, False
+
+
+def hold_last_day(obj, dates, positions, fetch_at, plans=None):
+    """An animation's positions for an ended mission, with every frame
+    after its path's last day holding the marker on that day instead of
+    hiding it. fetch_at(moment) is asked once, for the day's position;
+    each such frame holds a copy of it with 'position_date' set to that
+    moment, so the hover says which day it shows. Frames up to the last
+    day, and any entry with no 'mission_end', are returned as they came.
+    When JPL gives nothing for the day the frames stay as they came and
+    the console says so."""
+    day = last_day(obj, plans)
+    if day is None:
+        return positions
+    moment = day + datetime.timedelta(minutes=LAST_DAY_MINUTE)
+    after = [i for i, d in enumerate(dates)
+             if d > moment and i < len(positions)]
+    if not after:
+        return positions
+    point = fetch_at(moment)
+    if not point or "x" not in point:
+        print("[ENDED MISSION] %s: JPL gave no position for its last day, "
+              "%s, so its marker is hidden after it"
+              % (obj.get("name"), moment.strftime("%Y-%m-%d")), flush=True)
+        return positions
+    out = list(positions)
+    for i in after:
+        held = dict(point)
+        held["position_date"] = moment
+        out[i] = held
+    print("[ENDED MISSION] %s: marker held on its last day, %s, for %d "
+          "frame(s) after it" % (obj.get("name"), moment.strftime("%Y-%m-%d"),
+                                 len(after)), flush=True)
+    return out
+
+
 def span_label(key, plans=None):
     """"(YYYY-MM-DD to YYYY-MM-DD)" for a planned entry's checkbox, read
     from its plan when the window is built. A key with no plan prints so
@@ -222,7 +316,8 @@ def douglas_peucker(points, tol_au):
 def draw_plan(obj, plan, fetch=None, now=None):
     """[{'date', 'jd', 'x', 'y', 'z'}] in time order: the path by its
     plan, the website's whole fetch with its daily tail around now (UTC;
-    utc_now() when not given), without its last-day pair.
+    utc_now() when not given), and for a path whose span ended before
+    now its last-day pair, as the website's fetch_path_last_day adds it.
     'date' is the minute key read back as a plain datetime. Asked of JPL
     once per plan in a run of the orrery. None, with the reason printed,
     when JPL gives nothing."""
@@ -258,6 +353,14 @@ def draw_plan(obj, plan, fetch=None, now=None):
         t1 = min(end, today + datetime.timedelta(days=TAIL_AHEAD_DAYS))
         if t0 < t1:
             points.update(fetch(ident, id_type, t0, t1, TAIL_STEP))
+        # The last-day pair (L-476, 2026-11-06): a path whose span ended
+        # before today gets 00:00 and 00:01 UTC of its last day, as the
+        # website's fetch_path_last_day asks them, so an ended mission's
+        # line ends where its marker sits (marker_moment, 00:01).
+        day = datetime.datetime.strptime(plan["span"]["end"], "%Y-%m-%d")
+        if day + datetime.timedelta(days=1) <= today:
+            points.update(fetch(ident, id_type, day, day + datetime.timedelta(
+                minutes=LAST_DAY_MINUTE), "1m"))
     except Exception as exc:
         print("[PATH PLAN] %s: not drawn by its plan; JPL gave no path "
               "(%s)" % (obj.get("name"), exc), flush=True)

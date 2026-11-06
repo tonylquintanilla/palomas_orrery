@@ -1,26 +1,26 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 5, 2026, evening: the Code session (Opus) for the ended missions.
-- Written at orrery fb0a8dce and gallery 3660993, plus this session's edits (not pushed).
+Last updated: November 6, 2026, afternoon: the coordinating session (Opus), two quick fixes.
+- Written at orrery 01b2120 and gallery 8ff3e74, plus this session's two patches.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Five more ended missions are built: Pioneer 10 and 11, Rosetta,
->   DART, and Akatsuki cut on 26 April 2024, as you ruled. Not pushed.
-> - An orbiter's loops around a planet are no longer passes of the Sun.
+> - The website's live check reads its 32 positions files from the config.
+> - The desktop puts an ended mission's marker on its last day, and
+>   its line now ends there (your ruling). Both are patches, not run.
 >
-> **Do next:** *steps 2 to 5 below; steps 2 to 4 in one sitting,
-> before 08:17 UTC, or the website's night stops at its mirror.*
+> **Do next:** *steps 1 to 5 below, in order.*
 >
 > **Needs you now:**
-> - *1. Done: you approved the words file (Nov 5, evening).*
-> - *2. (do) Commit and push the orrery, not during the website's night.*
-> - *3. (do) The website's Daily Run, from the dashboard: last lines all
->   green, the swap log's last build "ok". Red: stop, paste me the lines.*
-> - *4. (do) Only then commit and push the website's whole change list.*
-> - *5. (do) Phone look: the five ticked from Historical missions.*
+> - *1. (do) Website: run `patch_L423_positions_from_config.py`, then
+>   tools/test_served_list.py: "SERVED LIST: all 7 checks passed".*
+> - *2. (do) Orrery: run `patch_L476_4_ended_markers.py`, then the
+>   maintenance run from the dashboard: all gating checkers passed.*
+> - *3. (do) Look: Pioneer 10 and Galileo, Sun-centred, plot and animation.*
+> - *4. (do) Commit and push both, not during the website's night.*
+> - *5. (do) After the push, the website's live run: 32 positions files.*
 > - *(do) Each morning, Pull origin on both, orrery then website, first.*
 
 *Italic* lines are the must-reads. Marks reset at every update.
@@ -32,10 +32,9 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
                Earth's slices, historical missions' slice 1, the paths by
                the plan (L-476), path or orbit by e (L-510), A1 and A2
                of JPL's fallbacks (L-512), a green website night.
- 13.   [NOW]   *Quick wins:* the e rule, done (L-510 (the typed fields));
-               five ended missions, built, waiting for your words and push
-               (L-507 (historical missions)); then the desktop's ended
-               markers (L-476 (the paths by the plan)). << moved this session
+ 13.   [NOW]   *Quick wins:* the desktop's ended markers (L-476 (the paths
+               by the plan)) and the live check's list (L-423 (the
+               website's checks)), built, for your look and push. << moved this session
  14.   [next]  Standards: the Moon gets the orrery's words, link, period
                and uncertainty; the Pluto row's drawing and name, your ruling.
  15.   [later] The planet rooms in order, each opening with the planet
@@ -54,6 +53,7 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
 ## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings; a line leaves once it is habit, or a skill carries it.
+- An ended mission's line ends at its marker on its last day, desktop as website (Nov 6).
 - A craft that flew on: path stops on its mission's last day; words say still flying, untracked (Nov 5).
 - A small body is a path at or above e 1 in JPL's database, every 30
   days, else an orbit; two sides of 1 refuse the drawing; the website
@@ -70,7 +70,7 @@ Standing rulings; a line leaves once it is habit, or a skill carries it.
 - Encounters are both: shown in the Solar System room, and in a room
   centred on the body met (Nov 1).
 
-## Deferred  **>> UPDATED THIS SESSION**
+## Deferred
 
 Waiting behind other work; a line leaves when picked up.
 - When the road turned to the symbols (Nov 5): L-512 (fallbacks when
@@ -96,9 +96,9 @@ Waiting behind other work; a line leaves when picked up.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261105T200309Z, ok, no retry (gallery swap log, Nov 5).
-- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md, generated Nov 5).
-- This page's date and the ledger's newest stamp: both Nov 5. Agree.
+- Last cache build: 20261106T155752Z, ok, no retry (gallery swap log at 8ff3e74).
+- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md, tested copy, Nov 6).
+- This page's date and the ledger's newest stamp: both Nov 6. Agree.
 
 ## Waiting on you
 
@@ -123,8 +123,8 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- This session: `WORDS_L507_more_voyages_20261105.md` and the brief
-  `COORD_L507_historical_missions_more_voyages_brief_20261105.md`.
+- This session: the website's `patch_L423_positions_from_config.py`
+  and the orrery's `patch_L476_4_ended_markers.py`.
 - The talk's rulings: `DESIGN_L484_consistency_rulings_20261103.md`.
 - The door: `documentation/python_work_door/`, and L-499 (kinds of session).
 
