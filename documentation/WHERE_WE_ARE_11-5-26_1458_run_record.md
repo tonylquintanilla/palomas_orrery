@@ -303,13 +303,9 @@ Do next:
   1. (do) Move this file into documentation\. -- done
   2. (do) In GitHub Desktop (orrery): 
      1. the change list shows the ledger, WHERE_WE_ARE.md, palomas_orrery_dashboard.py, the new brief and this file. 
-     2. Commit and push -- not while the website's night is running (08:17 UTC, 2:17 Chicago, often hours late).
+     2. Commit and push -- not while the website's night is running (08:17 UTC, 2:17 Chicago, often hours late). -- fb0a8dcec83714a4aee7ab17c43c67193f47b8e5
   3. (do) Open the Code session for the ended missions through the python_work door, pointing it at the brief documentation\COORD_L507_historical_missions_more_voyages_brief_20261105.md.
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
-
-1. Move it into `documentation\`.
-2. Commit and push, but not while the website's night is running (08:17 UTC, which is 2:17 Chicago, and often hours late).
-3. Then open the Code session through the python_work door and point it at the brief.
 
 **Where this leaves us:**
 - The copying tool follows the e rule by itself; stage 13's first quick win is done.

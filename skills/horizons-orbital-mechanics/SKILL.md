@@ -1,14 +1,31 @@
 ---
 name: horizons-orbital-mechanics
 description: JPL Horizons API and orbital mechanics reference for the Paloma's Orrery project (astroquery Horizons queries, orbit_data_manager, osculating_cache_manager, idealized_orbits, apsidal_markers, spacecraft_encounters, close_approach_data, position_accuracy, orbital_period, period_fetch, path_plan, path_or_orbit). Use for any Paloma's Orrery task involving Horizons queries or ephemerides, coordinate center bodies, reference frames, osculating elements, orbit caches, a small body's position uncertainty (VEC_TABLE 2xr), orbital periods and the centre they are taken around, the drawn orbit and its markers' dates, which Horizons record serves a body (helio_id, a pinned comet record, a skip list), encounter or flyby resolution, or whenever a rendered orbit looks wrong or an ephemeris API returns empty. Do not use for projects other than Paloma's Orrery.
-fires_when: Horizons queries, centers, frames, osculating elements, encounters, comet record pinning, 2xr uncertainties, periods, the drawn orbit's centre, the Horizons check (horizons_check.py, its period comparison and the data sheets' re-read), the period fetch before it (period_fetch.py), which record serves a body (helio_id, re-pinning a comet, JPL's exact name, a body on a skip list), a spacecraft path's plan and its flybys (path_plan.py -- the Hill sphere, JPL's GM, the window and step, the orbiter rule for an arrival, a departure, a capture), a comet whose designation matches its own pieces, a comet on an open path's plan (its span, its TP, its perihelion), an entry asked by JPL's number in the Horizons check, the clock read as UTC (utc_clock), astroquery's saved answers (cache=), a 2xr answer with no figure (n.a.), Pluto's period asked of its barycentre, an ended mission's mission_end (its path stopped on the day it ended), the orrery's drawing of a path by its plan (path_drawing.py, only around the Sun), a small body drawn as a path or an orbit by its database e (path_or_orbit.py, data/small_body_solutions.json)
+fires_when: Horizons queries, centers, frames, osculating elements, encounters, comet record pinning, 2xr uncertainties, periods, the drawn orbit's centre, the Horizons check (horizons_check.py, its period comparison and the data sheets' re-read), the period fetch before it (period_fetch.py), which record serves a body (helio_id, re-pinning a comet, JPL's exact name, a body on a skip list), a spacecraft path's plan and its flybys (path_plan.py -- the Hill sphere, JPL's GM, the window and step, the orbiter rule for an arrival, a departure, a capture), a comet whose designation matches its own pieces, a comet on an open path's plan (its span, its TP, its perihelion), an entry asked by JPL's number in the Horizons check, the clock read as UTC (utc_clock), astroquery's saved answers (cache=), a 2xr answer with no figure (n.a.), Pluto's period asked of its barycentre, an ended mission's mission_end (its path stopped on the day it ended; the agency's own page; a craft that flew on and its end_note; an end after JPL's data), a capture's passes of the Sun (riding_passes), the orrery's drawing of a path by its plan (path_drawing.py, only around the Sun), a small body drawn as a path or an orbit by its database e (path_or_orbit.py, data/small_body_solutions.json)
 ---
 
 # Horizons and Orbital Mechanics Reference
 
-Read this file in 4 parts: lines 1-215, 216-473, 474-593, 594-837.
+Read this file in 5 parts: lines 1-225, 226-483, 484-603, 604-842, 843-904.
 
-Skill version: 1.17 | 2026-11-04, evening, with Anthropic's Claude Opus
+Skill version: 1.18 | 2026-11-05, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ fb0a8dce and gallery @ 3660993e. v1.18 (L-507, more
+voyages, with L-510's carried sentence). An Ended Mission Ends on Its
+mission_end takes the AGENCY'S own page (NASA, ESA, JAXA), and gains
+Tony's rulings of 2026-11-05: a craft that flew on stops on the day
+its mission ended and carries an end_note saying it still flies; a
+mission that ended after JPL's data stops prints the agency's day; a
+page with several dates takes the last day anyone heard from the craft;
+and JPL's last weeks are read before its last day is trusted, a path
+cut on the last day JPL's solution is fitted to tracking (path_cutoff,
+Akatsuki 2024-04-26). A Capture's Passes of
+the Sun Are Its Loops, new under How a Path's Events Are Found
+(riding_passes): Akatsuki's 289 passes made by its loops around Venus
+are not events. And AN OPEN ORBIT IS NOT AN ELLIPSE says piece C's
+website drawing follows the orrery's since 2026-11-05, closing what it
+called an open difference on L-484. Read from path_plan.py, the
+export and the plans made on 2026-11-05 before it was written.
+Earlier: 1.17 | 2026-11-04, evening, with Anthropic's Claude Opus
 5.5, at palomas_orrery @ 79018c0c and gallery @ 5abca2c6. v1.17 (L-512,
 part 1 and slice a's part A1). The orrery's plot decides path or orbit
 from the e of a body's typed elements when JPL's database has no record,
@@ -32,23 +49,12 @@ C/2025 K1 is an orbit since. And the sentence carried on L-485: the
 orrery's drawing of a plan keeps the website's daily tail and leaves out
 only its last-day pair. Read from the code built that day and JPL's
 answers of 2026-11-04 before it was written.
-Earlier: 1.15 | 2026-11-03, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 81fa7b8a and gallery @ 3a211a8c. v1.15 (L-476) adds A
-Plan Draws a Path Only Around the Sun to How a Path's Events Are Found:
-the orrery's plot now draws a planned path by its plan
-(path_drawing.py), the website's method point for point, solid to today
-and dashed after, and around any other centre both instruments draw it
-as before (Tony, 2026-11-03: "yes and the orrery and the website should
-both follow this"). A plan's inputs carry the day its path is asked
-from and no typed end, since planned entries no longer carry one. Read
-from path_plan.py, path_drawing.py and the website's builder at
-3a211a8c, and Galileo drawn from JPL on 2026-11-03, before it was
-written.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there on
 2026-10-12, 2026-10-13 and 2026-10-14 (L-431), 2026-10-15 (L-444,
 L-445), 2026-10-22 (L-443), 2026-10-24 (L-443), 2026-10-25 (L-443),
-2026-10-26 (L-443), 2026-10-29 (L-504), 2026-11-02 (L-507),
-2026-11-03 (L-476), 2026-11-04 (L-510) and 2026-11-04 (L-512).
+2026-10-26 (L-443), 2026-10-29 (L-504), 2026-11-02 (L-507), 2026-11-03
+(L-476), 2026-11-04 (L-510) and 2026-11-04 (L-512) and 2026-11-05
+(L-507).
 
 ## Contents
 
@@ -135,8 +141,12 @@ record each question asks, and to ask the same one everywhere.
   not served as an orbit. Which small bodies are paths is decided by the
   database's e (A Small Body Is Drawn by Its Database e, below); do not
   judge from the name. Piece C of C/2025 K1, e 0.999994 and class COM,
-  is served as an orbit since 2026-11-04, and the website's drawing of it
-  is an open difference on L-484.
+  is served as an orbit by the orrery since 2026-11-04, and drawn as one
+  by the website since 2026-11-05 (gallery e5352a86, L-510, its entry
+  made Hale-Bopp's: availability analytic, frame heliocentric); since
+  gallery 3660993 the objects mirror makes such a change by itself. The
+  open difference L-484 (the two agree) carried for it is closed by that
+  (v1.18; it had said "an open difference on L-484").
 - A SKIP NAMES WHAT FAILED. Five lists in palomas_orrery.py keep a body
   out of a Horizons question: SKIP_HORIZONS_PREFETCH in plot_objects and
   in animate_objects, and the fallbacks ANALYTICAL_POSITION_FALLBACK
@@ -660,6 +670,23 @@ first run against JPL is Tony's.
   flyby, arrival, departure or perihelion. On the preview of 2026-10-24
   the rule turns Juno's 110 passes of Jupiter and Europa Clipper's 83
   into one arrival each.
+- A CAPTURE'S PASSES OF THE SUN ARE ITS LOOPS (v1.18, L-507, more
+  voyages; the orbiter rule's own reason, applied). The Sun has no
+  Hill-sphere gate, so before this every nearest approach to it that
+  bent faster than the 7-day backbone was an event -- and a craft
+  orbiting an inner planet makes one on every loop: Akatsuki, at Venus
+  from December 2015, one every ten days or so, 69 in its first year
+  and a half, 289 to its cutoff of 2024-04-26, found on 2026-11-05. They are the loops
+  the orbiter rule already keeps out, seen from the Sun. So
+  `riding_passes` keeps a pass of the Sun inside a capture
+  (`capture_spans`) only where the captured-by body itself passes the
+  Sun within a day: the path riding the body's own perihelion, as
+  BepiColombo rides Mercury's on 2027-02-06 (46.0 million km; Mercury's
+  own nearest day read from JPL the same day). A pure filter: it
+  removes and never adds, and no plan made before it held a pass it
+  removes (BepiColombo's was the only pass inside any capture), so RULE
+  stays 2 and no plan was made again for it. `test_path_plan.py` check
+  20, with two planted faults.
 - THE RULE IS AMONG A PLAN'S INPUTS (`RULE`, now 2), so a plan made by
   an older rule is made again at once, like one whose id or span
   changed.
@@ -670,13 +697,53 @@ first run against JPL is Tony's.
   leaves Jupiter as if the impact never happened (6.2 million km from
   its centre on the 30th), and the website puts an ended mission's
   marker on its path's last day. So an ended mission's entry carries
-  `'mission_end'`, the day NASA's own mission page says it ended, with
-  that page cited on the entry, and `path_rows_and_span` asks the path
-  to that day and no further (still clipped to JPL's limits, should
-  JPL's data stop sooner). The method, before keying one: read JPL's
-  last day (its refusal past the end) and the page's date, side by
-  side; within a day, `mission_end` is the page's date; further apart,
-  the two dates and their sources go to Tony. `mission_end` is among the
+  `'mission_end'`, the day the AGENCY'S OWN mission page says it ended
+  (NASA, ESA, JAXA; v1.18), with that page quoted on the entry, and
+  `path_rows_and_span` asks the path to that day and no further (still
+  clipped to JPL's limits, should JPL's data stop sooner). The method,
+  before keying one: read JPL's last day (its refusal past the end) and
+  the page's date, side by side:
+  - within a day: `mission_end` is the page's date;
+  - JPL runs past the page's date, whether the mission ended in an
+    impact (Galileo, Rosetta, DART) or the craft flew on (the Pioneers):
+    the page's date. A craft that flew on also carries `'end_note'`,
+    one sentence the website's box prints after its opening, cited to a
+    page that says it still flies (Tony, 2026-11-05, 15:17 Chicago: "A.
+    but indicate the craft is still flying but not tracked."); no page
+    saying so, no field, and the gap named;
+  - the page's date is AFTER JPL's last day (Akatsuki: JAXA ended it on
+    2025-09-18, JPL's data stops on 2025-08-24 00:00): `mission_end` is
+    still the page's date; the plan stops the path earlier and the
+    marker sits on its last day, and the box prints the end day from
+    `mission_end` and says the path is drawn to that last day (Tony,
+    2026-11-05: "The box's end date comes from mission_end"). Its
+    `end_note` says what became of it, where a page supports it;
+  - READ JPL'S LAST WEEKS BEFORE TRUSTING ITS LAST DAY. Akatsuki's JPL
+    positions run to 2025-08-24 but stop following Venus on 07-31 (around
+    the Sun 108.2 million km on 07-30, then 537.7 million km on 07-31;
+    exactly at Venus's centre from 08-07), reproduced by a second query.
+    Its data sheet says how far JPL's solution is fitted to tracking:
+    "Final reconstruction fit to tracking data up to 2024-Apr-26.
+    Preliminary solution 2024-Apr-26 to 2025-Jul-23, prediction
+    thereafter." So the entry carries `'path_cutoff'`, the last day fitted
+    to tracking, 2024-04-26, the sheet's line quoted beside it (Tony,
+    2026-11-05, evening: "cut the path at 2024-04-26, the last day JPL's
+    solution is fitted to tracking"), and `path_plan.path_stop` asks the
+    path to the earlier of `mission_end` and `path_cutoff`;
+    `'cutoff_note'` is the box's words after the end day, saying where
+    the path is drawn to and why, describing what is drawn and not
+    vouching for JPL's accuracy. The evidence of the last weeks stays in
+    the words file, not the box. The cutoff is among the plan's inputs
+    only where set. test_path_plan.py check 21, with a planted fault;
+  - the page gives several dates and names none the end (Pioneer 10:
+    routine contact ended, last data, last signal): the last day anyone
+    heard from it, the date and the page's words beside it on the entry
+    for Tony to see;
+  - no agency page states an end: the two dates and their sources go to
+    Tony.
+  The export carries `mission_end` ('YYYY-MM-DD') and `end_note` only
+  where set, and `cutoff_note` likewise; the website's mirror copies all
+  three (export_objects.py, tools/mirror_objects.py). `mission_end` is among the
   plan's inputs ONLY where it is set, so no plan of a mission still
   flying changes its fingerprint and is made again. Galileo and Cassini
   (2017-09-15, JPL's last day the same) were the first, planned

@@ -90,6 +90,21 @@ One JSON file, data/objects_export.json:
                                    Database is at or above 1, drawn as a
                                    path by its plan (path_or_orbit.py,
                                    L-510); absent on every other entry
+                      mission_end  an ended mission's end day,
+                                   'YYYY-MM-DD', the day the agency's own
+                                   page says it ended (L-507). The room's
+                                   text box prints it; absent on every
+                                   other entry
+                      end_note     an ended mission's sentence on what
+                                   became of the craft (the Pioneers still
+                                   fly), the entry's 'end_note', printed
+                                   after the box's opening (L-507); absent
+                                   on every other entry
+                      cutoff_note  where the list cuts a path short of
+                                   JPL's data ('path_cutoff', Akatsuki):
+                                   the sentence saying why, printed after
+                                   the box's opening (L-507); absent on
+                                   every other entry
                       path         a spacecraft's (a trajectory whose
                                    id starts with '-') and a comet's on an
                                    open path: its plan from
@@ -263,6 +278,11 @@ Module updated: October 31, 2026 with Anthropic's Claude Opus 5.5 (L-485,
 the hold: schema 4. Each object's confirmation carries "hold", null
 unless horizons_check.py has held the body, when it says since when,
 why, what the list says and what JPL said.)
+Module updated: November 5, 2026 with Anthropic's Claude Opus 5.5 (L-507,
+more voyages: an ended mission's mission_end, end_note and cutoff_note
+are exported, each only where the entry sets it, so the schema stays 4
+and no other entry changes; a number in either note is reported with
+the description's.)
 """
 
 import ast
@@ -285,7 +305,8 @@ KEY_PATTERN = re.compile(r"^[a-z][a-z0-9_]*$")
 OPENING = re.compile(r"^Horizons:[^.]*\.\s*")
 NUMBER = re.compile(r"\d[\d,.]*\d|\d")
 FIELDS = ("name", "id", "id_type", "mission_info", "mission_url",
-          "horizons_name", "object_type", "helio_id", "helio_id_type")
+          "horizons_name", "object_type", "helio_id", "helio_id_type",
+          "end_note", "cutoff_note")
 
 
 def served_identity(f):
@@ -366,6 +387,25 @@ def literal_fields(entry):
     return out
 
 
+def mission_end_of(entry):
+    """'YYYY-MM-DD' for an entry's 'mission_end', a datetime(y, m, d)
+    call as the list writes it (path_plan.py reads the same), or None
+    where the entry sets none. Raises ExportError on any other form."""
+    for k, v in zip(entry.keys, entry.values):
+        if isinstance(k, ast.Constant) and k.value == "mission_end":
+            if (isinstance(v, ast.Call)
+                    and getattr(v.func, "id", None) == "datetime"
+                    and len(v.args) == 3 and not v.keywords):
+                try:
+                    y, m, d = [ast.literal_eval(a) for a in v.args]
+                    return "%04d-%02d-%02d" % (y, m, d)
+                except (ValueError, TypeError):
+                    pass
+            raise ExportError("%s: 'mission_end' is not datetime(y, m, d)"
+                              % entry_label(entry))
+    return None
+
+
 def description_of(mission_info):
     text = (mission_info or "").strip()
     return OPENING.sub("", text, count=1).strip()
@@ -428,7 +468,29 @@ def build_objects(text, decide_paths=True, solutions=None):
                 raise ExportError(str(exc))
             if path:
                 objects[key]["open_path"] = True
-        found = NUMBER.findall(description)
+        # L-507, more voyages: an ended mission's end day and the sentence
+        # on what became of the craft, written only where the entry sets
+        # them, so no other entry changes. The room's text box prints the
+        # day the mission ended from mission_end (Akatsuki's is after
+        # JPL's last day, Tony's ruling of 2026-11-05) and the end_note
+        # after its opening.
+        mission_end = mission_end_of(entry)
+        if mission_end is not None:
+            objects[key]["mission_end"] = mission_end
+        notes = []
+        for field in ("cutoff_note", "end_note"):
+            note = f.get(field)
+            if note is None:
+                continue
+            if not isinstance(note, str) or not note.strip():
+                raise ExportError("%s: its %s is not a sentence" % (key, field))
+            if "Horizons:" in note:
+                raise ExportError("%s: its %s says 'Horizons:'" % (key, field))
+            objects[key][field] = note.strip()
+            notes.append(note)
+        # A number in the end_note or cutoff_note reaches the website as
+        # one in the description does, so it is reported with them.
+        found = NUMBER.findall(" ".join([description] + notes))
         if found:
             numbers[key] = found
     return objects, numbers

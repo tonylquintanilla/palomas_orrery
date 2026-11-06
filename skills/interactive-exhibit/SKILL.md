@@ -1,14 +1,25 @@
 ---
 name: interactive-exhibit
 description: How an interactive exhibit (a room in interactive.html such as ?exhibit=sun) is designed, built, verified and carded for the Paloma's Orrery gallery. Covers the exhibit switch and boot path, the assembler driver spec, the JS feature handoff, the shared chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent gate, back link), what is per-body, the served-data provenance contract, what a room opens on (the arrival block) and the shell-key stamp the renderers apply, the drawer order, who may write data/objects_config.json, the Mode 5 phone sequence, and carding an exhibit through Studio. Use when adding or changing an exhibit (Earth, Jupiter, the stars), touching sun* chrome in interactive.html, deciding what an exhibit may render, or editing the served words with store_writer or exhibit_store_editor. Not for propagation math (gallery-assembler), the nightly builder (gallery-cache-builder), or the Studio/converter chain (gallery-pipeline). Do not use for projects other than Paloma's Orrery.
-fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, its group rows, its two Resets, the Reset in every room's top bar, Home's order and its framing; Go To fitting a body's whole orbit and the orbit line in a body's hover; the count line's place; a bare interactive.html link and the Explorer's address; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia); a served number's citation and its source_note; the Typed facts check (smoke_typed_facts.js); a feature drawn as stored dots (the Hills cloud, Earth's radiation belts); the i panel's source list and its links (source_list.js); the order a room's drawer lists its shells in, where each begins (drawer_order.js, the Drawer order check); a spacecraft's path in the Solar System room (its positions file, solid and dashed, its text box); whether the website and the orrery agree on an object; the planets ticked with a spacecraft (companions); the i panel's words one sentence to a bullet; a comet on an open path in the Solar System room; the drawer's groups one JPL class to a row; JPL's terms in the words a visitor reads; a comet's companions; the drawer's Find a body box; the direction arrows on the orbits; the grid chip's AU note and the triad's frame note; the i button's first-visit note and hovers without a pointer line; the one text box for a tap and Go To (text_box.js); a group found by its find words; the i panel's Report a problem link; a drawing row in the Solar System room (the belt's cloud); a stored drawing's cross kept off the axes; the source line's UTC and JPL clock; the ruler and the x marks on the axes; an ended mission (the Historical missions group, its marker on its last day, mission_end)
+fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, its group rows, its two Resets, the Reset in every room's top bar, Home's order and its framing; Go To fitting a body's whole orbit and the orbit line in a body's hover; the count line's place; a bare interactive.html link and the Explorer's address; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia); a served number's citation and its source_note; the Typed facts check (smoke_typed_facts.js); a feature drawn as stored dots (the Hills cloud, Earth's radiation belts); the i panel's source list and its links (source_list.js); the order a room's drawer lists its shells in, where each begins (drawer_order.js, the Drawer order check); a spacecraft's path in the Solar System room (its positions file, solid and dashed, its text box); whether the website and the orrery agree on an object; the planets ticked with a spacecraft (companions); the i panel's words one sentence to a bullet; a comet on an open path in the Solar System room; the drawer's groups one JPL class to a row; JPL's terms in the words a visitor reads; a comet's companions; the drawer's Find a body box; the direction arrows on the orbits; the grid chip's AU note and the triad's frame note; the i button's first-visit note and hovers without a pointer line; the one text box for a tap and Go To (text_box.js); a group found by its find words; the i panel's Report a problem link; a drawing row in the Solar System room (the belt's cloud); a stored drawing's cross kept off the axes; the source line's UTC and JPL clock; the ruler and the x marks on the axes; an ended mission (the Historical missions group, its marker on its last day, mission_end; a craft that flew on and its end_note; a path cut before its mission ended and its cutoff_note)
 ---
 
 # Interactive Exhibit
 
-Read this file in 10 parts: lines 1-108, 109-162, 163-403, 404-527, 528-538, 539-778, 779-955, 956-1237, 1238-1414, 1415-1617.
+Read this file in 10 parts: lines 1-103, 104-157, 158-398, 399-522, 523-533, 534-773, 774-982, 983-1264, 1265-1441, 1442-1644.
 
-Skill version: 1.30 | 2026-11-02, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.31 | 2026-11-05, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ fb0a8dce and gallery @ 3660993e. v1.31 (L-507, more
+voyages) adds, under An Ended Mission, the day and what became of it:
+the day printed is the orrery's mission_end; a craft that flew on (the
+Pioneers) carries an end_note, its own bullet after the opening (Tony,
+2026-11-05: "A. but indicate the craft is still flying but not
+tracked."); a path cut before its mission ended (Akatsuki, on the last
+day JPL's solution is fitted to tracking) opens with its own end day
+and its cutoff_note, its source line "to the last day drawn". The group holds
+seven. Read from interactive.html, the figures check and the walk with
+this session's edits before it was written.
+Earlier: 1.30 | 2026-11-02, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 15dc8e34 and gallery @ c77f87f6. v1.30 (L-507, carrying
 L-505) records historical missions' slice 1 and corrects what the ruler
 build of 2026-11-01 left wrong. An ended mission is drawn as Voyager is,
@@ -35,28 +46,12 @@ line at 48 px, the count line left of the triad); a stored drawing's
 cross off the axes, held by the Label words check; and the source
 line's clocks. Each fact was read from the gallery's code at b55109f2
 before it was written.
-Earlier: 1.28 | 2026-10-28, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ b2fcc1bb and gallery @ acbf206b. v1.28 (L-443, carrying
-L-497, L-496 and L-458) corrects four sentences the gallery's builds of
-2026-10-27 made wrong, each one a session following it would act on:
-a group IS found by a word such as "comet" (L-496); the streamer belt
-is drawn on its own row, not with the corona (L-497, 6b); Plotly's own
-hover box is off in every room, so a marker tap opens the page's text
-box (L-497, 6a), in the Phone first sequence and The touch path; and a
-tap on a marker opens the text box, not only naming its row (the
-anatomy table's drawer row). And it records three things new to the
-gallery: `gallery/text_box.js`, the one text box's words one sentence
-to a bullet; the `find` words on the drawer's rows; and the "Report a
-problem" link in every room's i panel (L-458). Riding the same bump
-(L-501): a body the served cache does not hold yet turns the Solar
-System figures check red as well as Cache in step. Each fact was read
-from the gallery's code at acbf206b before it was written.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there on
 2026-10-05 (L-418), 2026-10-10 (L-429), 2026-10-14 (L-431), 2026-10-16
 (L-421), 2026-10-17 (L-452), 2026-10-20 (L-456), 2026-10-21 (L-460),
 2026-10-22 (L-434, L-443), 2026-10-24 (L-477, L-482), 2026-10-25 (L-443,
 twice), 2026-10-26 (L-443), 2026-10-27 (L-443), 2026-10-28 (L-443),
-2026-10-29 (L-503) and 2026-11-02 (L-507).
+2026-10-29 (L-503), 2026-11-02 (L-507) and 2026-11-05 (L-507).
 
 ## Contents
 
@@ -787,6 +782,36 @@ Plotly.
     source line says "to the day the mission ended" in place of "as far
     as JPL's data runs", which would be false where the plan stopped the
     path short of JPL's data.
+  - THE DAY AND WHAT BECAME OF IT (v1.31, L-507, more voyages; Tony's
+    rulings of 2026-11-05; words in
+    documentation/WORDS_L507_more_voyages_20261105.md). The day printed
+    is the orrery's `mission_end` where the mirror copied one
+    (`solarSystemMissionEndDay`), else the path's last served day; for
+    Galileo and Cassini the two are one day. A craft that flew on --
+    the Pioneers -- carries the orrery's `end_note`, printed as its own
+    bullet right after the opening ("It is still flying, heading out of
+    the solar system, but no one has heard from it since."), so its box
+    is six bullets. A path that stops BEFORE its mission ended
+    (Akatsuki: JAXA's end 18 September 2025, its path cut on 26 April
+    2024, the last day JPL's solution is fitted to tracking;
+    `solarSystemEndedEarly`, the end day later than the path's last
+    served day) opens "This mission ended on <mission_end>." and then
+    the orrery's `cutoff_note` in the same bullet (`ENDED_EARLY_OPENING`),
+    Tony's words of 2026-11-05: "Contact was lost at the end of April
+    2024. The path is drawn to 26 April 2024, the last day JPL's
+    solution is fitted to tracking, and the marker is where it was that
+    day." (without a cutoff_note: "The path is drawn to <last day>, and
+    the marker is where it was that day."); then its `end_note`: six
+    bullets. Its distance ends "on the last day drawn", and its source
+    line "to the last day drawn" -- the words describe what is drawn and
+    do not vouch for JPL's accuracy. Checked by the figures check's part
+    7 (`missionEndIssue`: no path past its mission_end, the early case
+    read as early, a cutoff_note only on a path cut short and naming its
+    last day as printed, a still-flying mission serving none of the
+    three, five planted cases) and the walk's section 20b (the seven in
+    launch order, Pioneer 10's six bullets, Akatsuki's six and its
+    source line, each one's companion by its plan; both shown failing on
+    a page planted without the two sentences).
   - Its companions by the same logic, unchanged: Galileo's plan names
     flybys of Venus and Earth and its arrival at Jupiter; Cassini's,
     Venus, Earth and Jupiter flybys and its arrival at Saturn.
@@ -796,8 +821,10 @@ Plotly.
     its ended box) and walked headlessly (section 20b: the group's
     place, Galileo whole and solid with its marker on its last point,
     its box and source line, both companion lists, Reset).
-  - The orrery's other ended missions are candidates, one key and one
-    `mission_end` each, Tony's choice which.
+  - Seven since 2026-11-05 (v1.31): Pioneer 10, Pioneer 11, Galileo,
+    Cassini, Rosetta, Akatsuki and DART, in launch order. Apollo 11's
+    S-IVB and Artemis II wait for slice 2, the encounters (Tony,
+    2026-11-05: "Apollo in slice 2").
 - **A spacecraft's companions** (v1.25, L-443; Tony, 2026-10-25: "in
   addition to the default inner planets, add the farthest planet orbit
   that the object has reached ... This gives perspective to a spacecraft

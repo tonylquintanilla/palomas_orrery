@@ -90,6 +90,10 @@ Module updated: November 4, 2026 with Anthropic's Claude Opus 5.5 (L-510:
 a small body is exported with open_path when its database e is at or
 above 1 and without it below, and one with no database e is refused by
 name.)
+Module updated: November 5, 2026 with Anthropic's Claude Opus 5.5 (L-507,
+more voyages: an ended mission's mission_end is exported as 'YYYY-MM-DD'
+and its end_note and cutoff_note as written, only where set; a number in
+either note is reported; a mission_end not written datetime(y, m, d) is refused.)
 """
 
 import json
@@ -205,6 +209,39 @@ def self_test():
                             "without its name: %s" % exc)
     if (export["objects"]["mars"]["horizons_id"] != "499"):
         problems.append("an entry with no helio_id was not served by its id")
+
+    # L-507, more voyages: an ended mission's mission_end and end_note are
+    # exported only where set, the day as 'YYYY-MM-DD', and a number in
+    # the end_note is reported with the description's.
+    if any(f in export["objects"]["mars"]
+           for f in ("mission_end", "end_note", "cutoff_note")):
+        problems.append("an entry with no mission_end or end_note was "
+                        "exported with one")
+    ended = good.replace(
+        " 'horizons_name': 'Mars',",
+        " 'horizons_name': 'Mars', 'mission_end': datetime(2025, 9, 18),"
+        " 'end_note': 'Lost in April 2024.', 'cutoff_note': 'Cut on 23 July.',")
+    served = ex.build_export(ended)
+    if (served["objects"]["mars"].get("mission_end") != "2025-09-18"
+            or served["objects"]["mars"].get("end_note")
+            != "Lost in April 2024."
+            or served["objects"]["mars"].get("cutoff_note")
+            != "Cut on 23 July."):
+        problems.append("an ended mission's mission_end and end_note were "
+                        "not exported as written: %r" % (
+                            served["objects"]["mars"],))
+    if not {"2024", "23"} <= set(served["numbers"].get("mars") or []):
+        problems.append("a number in an end_note or cutoff_note was not "
+                        "reported")
+    try:
+        ex.build_export(ended.replace("datetime(2025, 9, 18)",
+                                      "'2025-09-18'"))
+        problems.append("a mission_end not written datetime(y, m, d) was "
+                        "not refused")
+    except ex.ExportError as exc:
+        if "'mission_end' is not datetime" not in str(exc):
+            problems.append("the typed-string mission_end was refused for "
+                            "the wrong reason: %s" % exc)
 
     # L-431, build 3: the periods.
     cache = {"Mars": {"period": dict(SELF_TEST_RECORD),

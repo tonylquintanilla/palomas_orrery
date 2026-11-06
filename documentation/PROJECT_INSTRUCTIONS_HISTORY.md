@@ -4150,6 +4150,48 @@ resident.
 (Moved down from the resident protocol on 2026-11-04 when
 v3.126 made a fourth entry.)
 
+v3.124 (November 3, 2026): No rule changed in this document. ONE
+skill bump: horizons-orbital-mechanics 1.14 -> 1.15 (L-476). THE
+ORRERY'S PLOT DRAWS A PLANNED PATH BY ITS PLAN, ONLY AROUND THE SUN.
+
+WHAT PROMPTED IT. The Claude Code session of Nov 3, afternoon (Claude
+Opus 5.5), through the python_work door, built on orrery 81fa7b8a and
+gallery 3a211a8c, from
+documentation/COORD_L476_orrery_plots_by_path_plan_brief_20261103.md.
+Tony's rulings of Oct 23 (one path rule, the orrery's; solid to today,
+dashed after), of Oct 24 (the orrery's dates match the website's), and
+of Nov 3, 12:06 Chicago, on whether only Sun-centred plots switch to
+the plan: "yes and the orrery and the website should both follow
+this."
+
+WHAT CHANGED. horizons-orbital-mechanics: A Plan Draws a Path Only
+Around the Sun, under How a Path's Events Are Found; and the 30-day
+cycle's list of a plan's inputs, which no longer carries a typed end.
+Its oldest of four version entries (1.12) moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule. Every
+sentence was read from path_plan.py, path_drawing.py and the website's
+builder at 3a211a8c, and from Galileo drawn from JPL that afternoon,
+before it was written.
+
+THE OBLIGATION TRAVELS. This session read each skill as the file in the
+repo, each as the manifest expected: horizons-orbital-mechanics 1.14,
+orrery-coding-conventions 1.13, gallery-cache-builder 1.17,
+provenance-discipline 2.36, safe-file-editing 1.14, agentic-pre-test
+1.3 and ledger-and-session-records 1.22. Tony reinstalls
+horizons-orbital-mechanics (Settings > Skills) and pastes this version
+into the Project's instructions on claude.ai; the next session that
+loads it from the account confirms its copy reads 1.15 before work
+that fires it.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.121 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-11-05 when
+v3.127 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

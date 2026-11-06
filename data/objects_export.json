@@ -1,9 +1,9 @@
 {
   "schema": 4,
-  "source_sha256": "0db297fe3f0a0a02e7f1ab885e03e9a531e421f1ccde5dac250c8b94b4830f4f",
-  "period_inputs_sha256": "384a7a45ed222d83918e389528d8450f7117864400a2632401fa62f1ce4a2efc",
-  "confirmations_sha256": "b54ad9aaaf6c7c83b21355acd55856651228bed0c0587ae57e227f04fd11f01b",
-  "paths_sha256": "a9fc6147094d7e3b93e39f26eb29534d1fa3b4f625a7525f3554ddb48d3ea452",
+  "source_sha256": "aacf3de0db66acc4ad9333a1984cc9462b533f7bbe16d8668a75738be05e91c6",
+  "period_inputs_sha256": "0ff77f387816cf1d474d80e5bb5e4e6b15edced7ac51710513b35c37f3e4e625",
+  "confirmations_sha256": "59c53acb02498cf58ad641f51fc4bdd3b537db0c3cac41cab1bfb1efda51426a",
+  "paths_sha256": "c8fd046d767f68aa97c46b5765e71fae6cdab7127fd6f04ebbc181b37be771df",
   "cadence_days": 30,
   "objects": {
     "sun": {
@@ -5350,6 +5350,167 @@
         ]
       }
     },
+    "pioneer_10": {
+      "name": "Pioneer 10",
+      "horizons_id": "-23",
+      "horizons_name": "Pioneer 10 (spacecraft)",
+      "id_type": "id",
+      "object_type": "trajectory",
+      "description": "Pioneer 10 was NASA's first mission to the outer planets, the first spacecraft to fly through the main asteroid belt and the first to fly past Jupiter.",
+      "info_url": "https://science.nasa.gov/mission/pioneer-10/",
+      "mission_end": "2003-01-23",
+      "end_note": "It is still flying, heading out of the solar system, but no one has heard from it since.",
+      "period": null,
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-11-05",
+          "horizons_id": "-23",
+          "id_type": "id",
+          "horizons_name": "Pioneer 10 (spacecraft)"
+        },
+        "period": null,
+        "hold": null
+      },
+      "path": {
+        "made": "2026-11-05",
+        "span": {
+          "end": "2003-01-23",
+          "start": "1972-03-04"
+        },
+        "backbone": {
+          "step": "7d",
+          "thin_tol_au": 0.02
+        },
+        "events": [
+          {
+            "body": "Jupiter",
+            "body_id": "599",
+            "closest": "1973-12-04 02:26",
+            "dist_km": 203122.0,
+            "hill_km": 51613899,
+            "ideal_step_s": 585.2,
+            "jd": 2442020.601389,
+            "kind": "flyby",
+            "stays": false,
+            "step": "10m",
+            "v_kms": 36.351,
+            "window": [
+              "1973-12-03 17:07",
+              "1973-12-04 11:44"
+            ]
+          }
+        ],
+        "searched": [
+          "Sun",
+          "Mercury",
+          "Venus",
+          "Earth",
+          "Moon",
+          "Mars",
+          "Jupiter",
+          "Saturn",
+          "Uranus",
+          "Neptune",
+          "Pluto",
+          "Ceres",
+          "16 Psyche",
+          "Dinkinesh",
+          "Itokawa",
+          "Ryugu",
+          "Vesta",
+          "Churyumov"
+        ]
+      }
+    },
+    "pioneer_11": {
+      "name": "Pioneer 11",
+      "horizons_id": "-24",
+      "horizons_name": "Pioneer 11 (spacecraft)",
+      "id_type": "id",
+      "object_type": "trajectory",
+      "description": "Pioneer 11, the sister spacecraft of Pioneer 10, was the first spacecraft to study Saturn up close.",
+      "info_url": "https://science.nasa.gov/mission/pioneer-11/",
+      "mission_end": "1995-11-24",
+      "end_note": "It is still flying, heading out of the solar system, but no one has heard from it since.",
+      "period": null,
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-11-05",
+          "horizons_id": "-24",
+          "id_type": "id",
+          "horizons_name": "Pioneer 11 (spacecraft)"
+        },
+        "period": null,
+        "hold": null
+      },
+      "path": {
+        "made": "2026-11-05",
+        "span": {
+          "end": "1995-11-24",
+          "start": "1973-04-07"
+        },
+        "backbone": {
+          "step": "7d",
+          "thin_tol_au": 0.02
+        },
+        "events": [
+          {
+            "body": "Jupiter",
+            "body_id": "599",
+            "closest": "1974-12-03 05:22",
+            "dist_km": 113514.1,
+            "hill_km": 50767942,
+            "ideal_step_s": 247.1,
+            "jd": 2442384.723611,
+            "kind": "flyby",
+            "stays": false,
+            "step": "5m",
+            "v_kms": 48.113,
+            "window": [
+              "1974-12-03 01:26",
+              "1974-12-03 09:17"
+            ]
+          },
+          {
+            "body": "Saturn",
+            "body_id": "699",
+            "closest": "1979-09-01 16:30",
+            "dist_km": 80861.3,
+            "hill_km": 64107725,
+            "ideal_step_s": 266.2,
+            "jd": 2444118.1875,
+            "kind": "flyby",
+            "stays": false,
+            "step": "5m",
+            "v_kms": 31.807,
+            "window": [
+              "1979-09-01 12:15",
+              "1979-09-01 20:44"
+            ]
+          }
+        ],
+        "searched": [
+          "Sun",
+          "Mercury",
+          "Venus",
+          "Earth",
+          "Moon",
+          "Mars",
+          "Jupiter",
+          "Saturn",
+          "Uranus",
+          "Neptune",
+          "Pluto",
+          "Ceres",
+          "16 Psyche",
+          "Dinkinesh",
+          "Itokawa",
+          "Ryugu",
+          "Vesta",
+          "Churyumov"
+        ]
+      }
+    },
     "voyager_1": {
       "name": "Voyager 1",
       "horizons_id": "-31",
@@ -5583,6 +5744,7 @@
       "object_type": "trajectory",
       "description": "Galileo studied Jupiter and its moons from 1995 to 2003.",
       "info_url": "https://science.nasa.gov/mission/galileo/",
+      "mission_end": "2003-09-21",
       "period": null,
       "confirmation": {
         "identity": {
@@ -5755,6 +5917,7 @@
       "object_type": "trajectory",
       "description": "Cassini-Huygens studied Saturn and its moons. The Saturn system was its home for 13 years.",
       "info_url": "https://science.nasa.gov/mission/cassini/",
+      "mission_end": "2017-09-15",
       "period": null,
       "confirmation": {
         "identity": {
@@ -5919,6 +6082,264 @@
         ]
       }
     },
+    "rosetta": {
+      "name": "Rosetta",
+      "horizons_id": "-226",
+      "horizons_name": "Rosetta (spacecraft)",
+      "id_type": "id",
+      "object_type": "trajectory",
+      "description": "ESA's Rosetta was the first mission to travel with a comet, Comet 67P/Churyumov-Gerasimenko, and the first to set a lander down on one.",
+      "info_url": "https://en.wikipedia.org/wiki/Rosetta_(spacecraft)",
+      "mission_end": "2016-09-30",
+      "period": null,
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-11-05",
+          "horizons_id": "-226",
+          "id_type": "id",
+          "horizons_name": "Rosetta (spacecraft)"
+        },
+        "period": null,
+        "hold": null
+      },
+      "path": {
+        "made": "2026-11-05",
+        "span": {
+          "end": "2016-09-30",
+          "start": "2004-03-03"
+        },
+        "backbone": {
+          "step": "7d",
+          "thin_tol_au": 0.02
+        },
+        "events": [
+          {
+            "body": "Sun",
+            "body_id": "10",
+            "closest": "2004-05-24 17:32",
+            "dist_km": 132613204.6,
+            "hill_km": null,
+            "ideal_step_s": 415990.0,
+            "jd": 2453150.230556,
+            "kind": "perihelion",
+            "stays": false,
+            "step": "4d",
+            "v_kms": 33.384,
+            "window": [
+              "2003-08-22 20:50",
+              "2005-02-24 14:13"
+            ]
+          },
+          {
+            "body": "Earth",
+            "body_id": "399",
+            "closest": "2005-03-04 22:10",
+            "dist_km": 8333.7,
+            "hill_km": 1484351,
+            "ideal_step_s": 83.0,
+            "jd": 2453434.423611,
+            "kind": "flyby",
+            "stays": false,
+            "step": "1m",
+            "v_kms": 10.516,
+            "window": [
+              "2005-03-04 20:50",
+              "2005-03-04 23:29"
+            ]
+          },
+          {
+            "body": "Sun",
+            "body_id": "10",
+            "closest": "2005-03-04 23:03",
+            "dist_km": 148362185.5,
+            "hill_km": null,
+            "ideal_step_s": 421811.8,
+            "jd": 2453434.460417,
+            "kind": "perihelion",
+            "stays": false,
+            "step": "4d",
+            "v_kms": 36.833,
+            "window": [
+              "2004-05-29 05:42",
+              "2005-12-09 16:23"
+            ]
+          },
+          {
+            "body": "Sun",
+            "body_id": "10",
+            "closest": "2006-10-08 02:09",
+            "dist_km": 148188420.6,
+            "hill_km": null,
+            "ideal_step_s": 459002.2,
+            "jd": 2454016.589583,
+            "kind": "perihelion",
+            "stays": false,
+            "step": "5d",
+            "v_kms": 33.809,
+            "window": [
+              "2005-12-07 16:54",
+              "2007-08-08 11:23"
+            ]
+          },
+          {
+            "body": "Mars",
+            "body_id": "499",
+            "closest": "2007-02-25 01:45",
+            "dist_km": 3656.4,
+            "hill_km": 1028381,
+            "ideal_step_s": 38.1,
+            "jd": 2454156.572917,
+            "kind": "flyby",
+            "stays": false,
+            "step": "1m",
+            "v_kms": 10.051,
+            "window": [
+              "2007-02-25 01:08",
+              "2007-02-25 02:21"
+            ]
+          },
+          {
+            "body": "Earth",
+            "body_id": "399",
+            "closest": "2007-11-13 20:58",
+            "dist_km": 11681.8,
+            "hill_km": 1480862,
+            "ideal_step_s": 98.0,
+            "jd": 2454418.373611,
+            "kind": "flyby",
+            "stays": false,
+            "step": "1m",
+            "v_kms": 12.486,
+            "window": [
+              "2007-11-13 19:24",
+              "2007-11-13 22:31"
+            ]
+          },
+          {
+            "body": "Sun",
+            "body_id": "10",
+            "closest": "2007-12-17 06:38",
+            "dist_km": 136249373.3,
+            "hill_km": null,
+            "ideal_step_s": 382801.0,
+            "jd": 2454451.776389,
+            "kind": "perihelion",
+            "stays": false,
+            "step": "4d",
+            "v_kms": 37.273,
+            "window": [
+              "2007-04-07 10:09",
+              "2008-08-27 03:06"
+            ]
+          },
+          {
+            "body": "Earth",
+            "body_id": "399",
+            "closest": "2009-11-13 07:47",
+            "dist_km": 8860.0,
+            "hill_km": 1481106,
+            "ideal_step_s": 69.6,
+            "jd": 2455148.824306,
+            "kind": "flyby",
+            "stays": false,
+            "step": "1m",
+            "v_kms": 13.34,
+            "window": [
+              "2009-11-13 06:40",
+              "2009-11-13 08:53"
+            ]
+          },
+          {
+            "body": "Sun",
+            "body_id": "10",
+            "closest": "2009-11-22 20:59",
+            "dist_km": 146610872.0,
+            "hill_km": null,
+            "ideal_step_s": 393993.6,
+            "jd": 2455158.374306,
+            "kind": "perihelion",
+            "stays": false,
+            "step": "4d",
+            "v_kms": 38.968,
+            "window": [
+              "2009-03-06 14:22",
+              "2010-08-11 03:35"
+            ]
+          },
+          {
+            "body": "Churyumov",
+            "body_id": "90000703",
+            "closest": "2015-08-02 14:06",
+            "dist_km": 83.1,
+            "hill_km": 221,
+            "ideal_step_s": 11808.7,
+            "jd": 2457237.0875,
+            "kind": "flyby",
+            "stays": false,
+            "step": "3h",
+            "v_kms": 0.001,
+            "window": [
+              "2015-07-25 18:09",
+              "2015-08-10 10:02"
+            ]
+          },
+          {
+            "body": "Sun",
+            "body_id": "10",
+            "closest": "2015-08-13 02:04",
+            "dist_km": 185988922.2,
+            "hill_km": null,
+            "ideal_step_s": 569187.4,
+            "jd": 2457247.586111,
+            "kind": "perihelion",
+            "stays": false,
+            "step": "6d",
+            "v_kms": 34.218,
+            "window": [
+              "2014-07-31 15:10",
+              "2016-08-24 12:57"
+            ]
+          },
+          {
+            "body": "Churyumov",
+            "body_id": "90000703",
+            "closest": "2015-09-01 02:23",
+            "dist_km": 134.3,
+            "hill_km": 224,
+            "ideal_step_s": 16914.2,
+            "jd": 2457266.599306,
+            "kind": "flyby",
+            "stays": false,
+            "step": "3h",
+            "v_kms": 0.001,
+            "window": [
+              "2015-08-20 21:11",
+              "2015-09-12 07:34"
+            ]
+          }
+        ],
+        "searched": [
+          "Sun",
+          "Mercury",
+          "Venus",
+          "Earth",
+          "Moon",
+          "Mars",
+          "Jupiter",
+          "Saturn",
+          "Uranus",
+          "Neptune",
+          "Pluto",
+          "Ceres",
+          "16 Psyche",
+          "Dinkinesh",
+          "Itokawa",
+          "Ryugu",
+          "Vesta",
+          "Churyumov"
+        ]
+      }
+    },
     "new_horizons": {
       "name": "New Horizons",
       "horizons_id": "-98",
@@ -5981,6 +6402,317 @@
             "window": [
               "2015-07-14 10:10",
               "2015-07-14 13:29"
+            ]
+          }
+        ],
+        "searched": [
+          "Sun",
+          "Mercury",
+          "Venus",
+          "Earth",
+          "Moon",
+          "Mars",
+          "Jupiter",
+          "Saturn",
+          "Uranus",
+          "Neptune",
+          "Pluto",
+          "Ceres",
+          "16 Psyche",
+          "Dinkinesh",
+          "Itokawa",
+          "Ryugu",
+          "Vesta",
+          "Churyumov"
+        ]
+      }
+    },
+    "akatsuki": {
+      "name": "Akatsuki",
+      "horizons_id": "-5",
+      "horizons_name": "Planet-C (spacecraft)",
+      "id_type": "id",
+      "object_type": "trajectory",
+      "description": "JAXA's Venus Climate Orbiter Akatsuki studied the atmosphere of Venus from orbit, from December 2015.",
+      "info_url": "https://en.wikipedia.org/wiki/Akatsuki_(spacecraft)",
+      "mission_end": "2025-09-18",
+      "cutoff_note": "Contact was lost at the end of April 2024. The path is drawn to 26 April 2024, the last day JPL's solution is fitted to tracking, and the marker is where it was that day.",
+      "end_note": "It was orbiting Venus at the time.",
+      "period": null,
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-11-05",
+          "horizons_id": "-5",
+          "id_type": "id",
+          "horizons_name": "Planet-C (spacecraft)"
+        },
+        "period": null,
+        "hold": null
+      },
+      "path": {
+        "made": "2026-11-06",
+        "span": {
+          "end": "2024-04-26",
+          "start": "2010-05-22"
+        },
+        "backbone": {
+          "step": "7d",
+          "thin_tol_au": 0.02
+        },
+        "events": [
+          {
+            "body": "Sun",
+            "body_id": "10",
+            "closest": "2010-12-06 14:20",
+            "dist_km": 107578314.2,
+            "hill_km": null,
+            "ideal_step_s": 289498.3,
+            "jd": 2455537.097222,
+            "kind": "perihelion",
+            "stays": false,
+            "step": "3d",
+            "v_kms": 38.914,
+            "window": [
+              "2010-05-28 14:49",
+              "2011-06-16 13:50"
+            ]
+          },
+          {
+            "body": "Venus",
+            "body_id": "299",
+            "closest": "2010-12-07 00:01",
+            "dist_km": 6603.6,
+            "hill_km": 1005452,
+            "ideal_step_s": 66.9,
+            "jd": 2455537.500694,
+            "kind": "flyby",
+            "stays": false,
+            "step": "1m",
+            "v_kms": 10.342,
+            "window": [
+              "2010-12-06 22:57",
+              "2010-12-07 01:04"
+            ]
+          },
+          {
+            "body": "Sun",
+            "body_id": "10",
+            "closest": "2011-04-17 03:11",
+            "dist_km": 91502709.0,
+            "hill_km": null,
+            "ideal_step_s": 240294.0,
+            "jd": 2455668.632639,
+            "kind": "perihelion",
+            "stays": false,
+            "step": "2d",
+            "v_kms": 39.877,
+            "window": [
+              "2010-11-08 18:47",
+              "2011-09-23 11:34"
+            ]
+          },
+          {
+            "body": "Sun",
+            "body_id": "10",
+            "closest": "2011-11-07 02:18",
+            "dist_km": 91442752.2,
+            "hill_km": null,
+            "ideal_step_s": 240656.8,
+            "jd": 2455872.595833,
+            "kind": "perihelion",
+            "stays": false,
+            "step": "2d",
+            "v_kms": 39.791,
+            "window": [
+              "2011-05-31 12:07",
+              "2012-04-14 16:28"
+            ]
+          },
+          {
+            "body": "Sun",
+            "body_id": "10",
+            "closest": "2012-05-23 04:40",
+            "dist_km": 91405068.8,
+            "hill_km": null,
+            "ideal_step_s": 241355.5,
+            "jd": 2456070.694444,
+            "kind": "perihelion",
+            "stays": false,
+            "step": "2d",
+            "v_kms": 39.659,
+            "window": [
+              "2011-12-15 03:22",
+              "2012-10-30 05:57"
+            ]
+          },
+          {
+            "body": "Sun",
+            "body_id": "10",
+            "closest": "2012-12-07 22:58",
+            "dist_km": 91406904.4,
+            "hill_km": null,
+            "ideal_step_s": 241362.9,
+            "jd": 2456269.456944,
+            "kind": "perihelion",
+            "stays": false,
+            "step": "2d",
+            "v_kms": 39.659,
+            "window": [
+              "2012-06-30 21:33",
+              "2013-05-17 00:22"
+            ]
+          },
+          {
+            "body": "Sun",
+            "body_id": "10",
+            "closest": "2013-06-24 17:26",
+            "dist_km": 91411235.3,
+            "hill_km": null,
+            "ideal_step_s": 241382.8,
+            "jd": 2456468.226389,
+            "kind": "perihelion",
+            "stays": false,
+            "step": "2d",
+            "v_kms": 39.657,
+            "window": [
+              "2013-01-15 15:42",
+              "2013-12-01 19:09"
+            ]
+          },
+          {
+            "body": "Sun",
+            "body_id": "10",
+            "closest": "2014-01-09 12:01",
+            "dist_km": 91410869.5,
+            "hill_km": null,
+            "ideal_step_s": 241381.1,
+            "jd": 2456667.000694,
+            "kind": "perihelion",
+            "stays": false,
+            "step": "2d",
+            "v_kms": 39.657,
+            "window": [
+              "2013-08-02 10:18",
+              "2014-06-18 13:43"
+            ]
+          },
+          {
+            "body": "Sun",
+            "body_id": "10",
+            "closest": "2014-07-27 06:19",
+            "dist_km": 91409669.6,
+            "hill_km": null,
+            "ideal_step_s": 241376.1,
+            "jd": 2456865.763194,
+            "kind": "perihelion",
+            "stays": false,
+            "step": "2d",
+            "v_kms": 39.658,
+            "window": [
+              "2014-02-17 04:41",
+              "2015-01-03 07:56"
+            ]
+          },
+          {
+            "body": "Sun",
+            "body_id": "10",
+            "closest": "2015-02-11 00:38",
+            "dist_km": 91408841.2,
+            "hill_km": null,
+            "ideal_step_s": 241373.3,
+            "jd": 2457064.526389,
+            "kind": "perihelion",
+            "stays": false,
+            "step": "2d",
+            "v_kms": 39.658,
+            "window": [
+              "2014-09-03 23:03",
+              "2015-07-21 02:12"
+            ]
+          },
+          {
+            "body": "Sun",
+            "body_id": "10",
+            "closest": "2015-08-29 17:45",
+            "dist_km": 91255805.8,
+            "hill_km": null,
+            "ideal_step_s": 240936.0,
+            "jd": 2457264.239583,
+            "kind": "perihelion",
+            "stays": false,
+            "step": "2d",
+            "v_kms": 39.663,
+            "window": [
+              "2015-03-22 23:08",
+              "2016-02-05 12:21"
+            ]
+          },
+          {
+            "body": "Venus",
+            "body_id": "299",
+            "closest": "2015-12-07 00:03",
+            "dist_km": 6594.2,
+            "hill_km": 1004479,
+            "ideal_step_s": 69.4,
+            "jd": 2457363.502083,
+            "kind": "arrival",
+            "stays": true,
+            "step": "1m",
+            "v_kms": 9.951,
+            "window": [
+              "2015-12-06 22:56",
+              "2015-12-07 01:09"
+            ]
+          },
+          {
+            "body": "Sun",
+            "body_id": "10",
+            "closest": "2019-08-06 10:42",
+            "dist_km": 107451086.5,
+            "hill_km": null,
+            "ideal_step_s": 300653.3,
+            "jd": 2458701.945833,
+            "kind": "perihelion",
+            "stays": false,
+            "step": "3d",
+            "v_kms": 37.426,
+            "window": [
+              "2019-01-19 01:39",
+              "2020-02-21 19:44"
+            ]
+          },
+          {
+            "body": "Sun",
+            "body_id": "10",
+            "closest": "2020-10-29 10:32",
+            "dist_km": 107455182.6,
+            "hill_km": null,
+            "ideal_step_s": 289394.6,
+            "jd": 2459151.938889,
+            "kind": "perihelion",
+            "stays": false,
+            "step": "3d",
+            "v_kms": 38.884,
+            "window": [
+              "2020-04-20 12:40",
+              "2021-05-09 08:23"
+            ]
+          },
+          {
+            "body": "Sun",
+            "body_id": "10",
+            "closest": "2022-09-04 16:07",
+            "dist_km": 107461499.3,
+            "hill_km": null,
+            "ideal_step_s": 279715.8,
+            "jd": 2459827.171528,
+            "kind": "perihelion",
+            "stays": false,
+            "step": "3d",
+            "v_kms": 40.231,
+            "window": [
+              "2022-03-03 04:18",
+              "2023-03-09 03:55"
             ]
           }
         ],
@@ -7307,9 +8039,9 @@
         "hold": null
       },
       "path": {
-        "made": "2026-10-28",
+        "made": "2026-11-05",
         "span": {
-          "end": "2033-04-02",
+          "end": "2033-03-13",
           "start": "2021-10-17"
         },
         "backbone": {
@@ -7405,35 +8137,106 @@
           {
             "body": "Sun",
             "body_id": "10",
-            "closest": "2030-12-02 14:04",
-            "dist_km": 136192639.8,
+            "closest": "2030-12-02 06:27",
+            "dist_km": 136584731.8,
             "hill_km": null,
-            "ideal_step_s": 347809.5,
-            "jd": 2462838.086111,
+            "ideal_step_s": 349363.7,
+            "jd": 2462837.76875,
             "kind": "perihelion",
             "stays": false,
             "step": "4d",
-            "v_kms": 41.005,
+            "v_kms": 40.94,
             "window": [
-              "2030-04-15 22:30",
-              "2031-07-21 05:37"
+              "2030-04-14 14:09",
+              "2031-07-21 22:44"
             ]
           },
           {
             "body": "Earth",
             "body_id": "399",
-            "closest": "2030-12-27 00:37",
-            "dist_km": 6998.6,
-            "hill_km": 1471834,
-            "ideal_step_s": 44.5,
-            "jd": 2462862.525694,
+            "closest": "2030-12-26 07:45",
+            "dist_km": 7099.5,
+            "hill_km": 1471903,
+            "ideal_step_s": 45.5,
+            "jd": 2462861.822917,
             "kind": "flyby",
             "stays": false,
             "step": "1m",
-            "v_kms": 16.463,
+            "v_kms": 16.336,
             "window": [
-              "2030-12-26 23:54",
-              "2030-12-27 01:19"
+              "2030-12-26 07:01",
+              "2030-12-26 08:28"
+            ]
+          }
+        ],
+        "searched": [
+          "Sun",
+          "Mercury",
+          "Venus",
+          "Earth",
+          "Moon",
+          "Mars",
+          "Jupiter",
+          "Saturn",
+          "Uranus",
+          "Neptune",
+          "Pluto",
+          "Ceres",
+          "16 Psyche",
+          "Dinkinesh",
+          "Itokawa",
+          "Ryugu",
+          "Vesta",
+          "Churyumov"
+        ]
+      }
+    },
+    "dart": {
+      "name": "DART",
+      "horizons_id": "-135",
+      "horizons_name": "DART (spacecraft)",
+      "id_type": "id",
+      "object_type": "trajectory",
+      "description": "NASA's DART was the first mission to test a way of turning an asteroid aside. It struck Dimorphos, a small moon of the asteroid Didymos.",
+      "info_url": "https://science.nasa.gov/mission/dart/",
+      "mission_end": "2022-09-26",
+      "period": null,
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-11-05",
+          "horizons_id": "-135",
+          "id_type": "id",
+          "horizons_name": "DART (spacecraft)"
+        },
+        "period": null,
+        "hold": null
+      },
+      "path": {
+        "made": "2026-11-05",
+        "span": {
+          "end": "2022-09-26",
+          "start": "2021-11-25"
+        },
+        "backbone": {
+          "step": "7d",
+          "thin_tol_au": 0.02
+        },
+        "events": [
+          {
+            "body": "Sun",
+            "body_id": "10",
+            "closest": "2022-02-05 04:14",
+            "dist_km": 140297285.6,
+            "hill_km": null,
+            "ideal_step_s": 462984.0,
+            "jd": 2459615.676389,
+            "kind": "perihelion",
+            "stays": false,
+            "step": "5d",
+            "v_kms": 31.733,
+            "window": [
+              "2021-04-04 03:36",
+              "2022-12-09 04:51"
             ]
           }
         ],
@@ -9322,6 +10125,13 @@
       "1",
       "2025"
     ],
+    "pioneer_10": [
+      "10"
+    ],
+    "pioneer_11": [
+      "11",
+      "10"
+    ],
     "voyager_1": [
       "1977",
       "1",
@@ -9338,10 +10148,19 @@
     "cassini": [
       "13"
     ],
+    "rosetta": [
+      "67"
+    ],
     "new_horizons": [
       "2015",
       "1",
       "2019"
+    ],
+    "akatsuki": [
+      "2015",
+      "2024",
+      "26",
+      "2024"
     ],
     "juno": [
       "2016"

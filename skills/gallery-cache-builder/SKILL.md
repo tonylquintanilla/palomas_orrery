@@ -7,9 +7,20 @@ fires_when: Nightly builder, atomic swap and its retry/roll-back/swap log, "Acce
 
 # Gallery Cache Builder (Phase 1b data serving)
 
-Read this file in 5 parts: lines 1-248, 249-459, 460-601, 602-843, 844-922.
+Read this file in 5 parts: lines 1-245, 246-456, 457-617, 618-859, 860-944.
 
-Skill version: 1.17 | 2026-11-02, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.18 | 2026-11-05, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ fb0a8dce and gallery @ 3660993e. v1.18 (L-507, more
+voyages, with L-510's carried sentences). A Comet on an Open Path Is a
+Path Body gains the mirror's side change across e = 1 and the offline
+suite's comparison with the export by name, with a stand-in orbit for a
+body newly drawn as one (gallery 3660993); the onboarding section says
+a comet that changes side needs none. The mirror's INSERTED list gains
+an ended mission's `mission_end`, `end_note` and `cutoff_note`, and An
+Ended Mission's Last Day gains the case where the path stops before the
+mission ended (Akatsuki, cut on the last day fitted to tracking). Read from the gallery's mirror, its suites and builder at
+3660993e and this session's edits before it was written.
+Earlier: 1.17 | 2026-11-02, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 15dc8e34 and gallery @ c77f87f6. v1.17 (L-507) adds, to
 A Spacecraft Is Fetched by Its Plan, an ended mission's last day asked
 for itself (fetch_path_last_day): the room puts an ended mission's
@@ -30,25 +41,11 @@ not wait for the run (Tony's ruling of 2026-11-01, 12:04 Chicago); the
 orrery's night gains a second scheduled line at 11:17 UTC, the
 website's waits for its next gallery session. Each fact was read from
 the code at 6a434ed8 and b6574a0f before it was written.
-Earlier: 1.15 | 2026-10-31, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ f4994ffc and gallery @ c1c578f5. v1.15 (L-485, with
-L-461 and L-443) records that the builder runs unattended: every night
-at 08:17 UTC on GitHub's computer, through `daily_run.py --night`, whose
-gate carries the deletions-only guard this skill called designed and
-not built. Operating mode, the routines that said "by hand", Layer 3,
-the Validation stance and The Daily Run's Steps say so; a pull that
-does not match the push has a second honest cause, not yet pulled.
-Riding the bump, from L-443's and L-501's closes: a comet is drawn from
-its elements of today; a new body the room draws from its elements
-onboards on a Daily Run; a config change turns the Solar System figures
-check red too; the orrery's orbit cache is written in text mode. And
-from this session: the orrery's export marks a held body (L-485, the
-hold), which the builder does not honour yet. Each fact was read from
-the code at f4994ffc and c1c578f5 before it was written.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there on
 2026-10-05 (L-418), 2026-10-14 (L-431), 2026-10-15 (L-446), 2026-10-17
 (L-449), 2026-10-25 (L-443), 2026-10-26 (L-443), 2026-10-29 (L-399),
-2026-10-31 (L-485), 2026-11-01 (L-484) and 2026-11-02 (L-507).
+2026-10-31 (L-485), 2026-11-01 (L-484), 2026-11-02 (L-507) and
+2026-11-05 (L-507).
 
 The standalone builder that fetches fresh JPL Horizons data and deploys the
 web gallery's served cache. It runs unattended every night on GitHub's
@@ -498,8 +495,13 @@ the orrery's."
   stopped on a day the box would then print as its end. The span's end
   is a day, inside JPL's data by path_plan's own clipping
   (horizons-orbital-mechanics, An Ended Mission Ends on Its
-  mission_end), so the two minutes are too. `{}` for a path still
-  running. Such a path serves no `as_of_today`. The offline suite holds
+  mission_end), so the two minutes are too. Where the path stops
+  before the mission ended (Akatsuki: cut on 2024-04-26, the last day
+  JPL's solution is fitted to tracking, its `path_cutoff`; JAXA's end
+  2025-09-18; v1.18, L-507 more voyages), the span ends on that day, the
+  same two minutes are its last served point, and the room's box says
+  the path is drawn to it. `{}` for a path
+  still running. Such a path serves no `as_of_today`. The offline suite holds
   it (the last point on the span's last day; planted fault, the last
   day not asked, leaving 2003-09-23 for an end of 2003-09-29).
 - EVERY POINT IS KEYED TO THE MINUTE (`MINUTE_KEY`), since a window's
@@ -542,6 +544,20 @@ the orrery's."
   suite gives such a comet a stand-in plan and the fake answers it with
   a straight line past the Sun; four checks hold it, among them one
   fetched inside its plan's span and no further.
+  A body changes side by itself (v1.18, L-510; gallery 3660993): the
+  orrery draws a small body as a path or an orbit by its database e
+  (horizons-orbital-mechanics), and `tools/mirror_objects.py` follows it
+  across e = 1 both ways (WHEN A BODY CHANGES SIDE): to an orbit it
+  removes `path` and `open_path`, sets availability analytic, frame
+  heliocentric and trace none, and inserts the export's period; to a
+  path, the reverse. It rewrites the entry's note with the day, prints
+  every change, refuses a side change over an entry whose three fields
+  were set by hand, and leaves the drawer row for a person to check. The
+  offline suite compares its comets on open paths with the export BY
+  NAME (no count to bump), and gives a body newly drawn as an orbit a
+  stand-in orbit, named when used. Piece C of C/2025 K1 went to an
+  orbit this way on 2026-11-05 (by hand that day, gallery e5352a86; the
+  mirror does it since).
 
 ## A Small Body's Own Uncertainty Is Served [QUALITY]
 
@@ -856,7 +872,13 @@ two things the general gate description doesn't spell out:
   it -- slice 1's 50 bodies and 2026 ED138 went in that way. A body
   whose drawing needs the past positions themselves needs --first-build.
   Spacecraft and comets on an open path are the other exception: they
-  are fetched by their plan, whole when the plan is new.
+  are fetched by their plan, whole when the plan is new. A comet that
+  changes side needs no onboarding: the mirror follows it (A Comet on an
+  Open Path Is a Path Body, v1.18). An ended mission is a spacecraft
+  keyed with `mission_end` (and `end_note`, `cutoff_note` where set), which the
+  mirror copies (`INSERTED`, since v1.18, L-507 more voyages); its
+  config entry is written by hand as Galileo's is, the mirror filling
+  the rest.
 - **Layer 1's offline suite has a hardcoded served-object COUNT
   assertion** (`check(len(objs) == N, ...)`), separate from the per-object
   ELEMS mock keys. Adding a new object's ELEMS entry is necessary but not

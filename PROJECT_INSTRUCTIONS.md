@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.126 | November 4, 2026
+Tony Quintanilla, PE | Claude | v3.127 | November 5, 2026
 
-Cut from 79018c0c at https://github.com/tonylquintanilla/palomas_orrery
+Cut from fb0a8dce at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -489,7 +489,7 @@ safe-file-editing            1.14 Editing existing files, patch scripts,
                                   sed/regex edits, encoding checks (portable)
 agentic-pre-test             1.3  BEFORE delivering complete files/agentic
                                   code; after data-content sweeps
-horizons-orbital-mechanics   1.17 Horizons queries, centers, frames, osculating
+horizons-orbital-mechanics   1.18 Horizons queries, centers, frames, osculating
                                   elements, encounters, comet record pinning,
                                   2xr uncertainties, periods, the drawn orbit's
                                   centre, the Horizons check
@@ -510,8 +510,11 @@ horizons-orbital-mechanics   1.17 Horizons queries, centers, frames, osculating
                                   answers (cache=), a 2xr answer with no figure
                                   (n.a.), Pluto's period asked of its
                                   barycentre, an ended mission's mission_end
-                                  (its path stopped on the day it ended), the
-                                  orrery's drawing of a path by its plan
+                                  (its path stopped on the day it ended; the
+                                  agency's own page; a craft that flew on and
+                                  its end_note; an end after JPL's data), a
+                                  capture's passes of the Sun (riding_passes),
+                                  the orrery's drawing of a path by its plan
                                   (path_drawing.py, only around the Sun), a
                                   small body drawn as a path or an orbit by its
                                   database e (path_or_orbit.py,
@@ -538,7 +541,7 @@ gallery-assembler            1.3  render_orbits.py, resolver.py,
                                   unresponsive, it worked yesterday, a console
                                   error appears, or Claude is about to hand
                                   Tony a test to run
-gallery-cache-builder        1.17 Nightly builder, atomic swap and its
+gallery-cache-builder        1.18 Nightly builder, atomic swap and its
                                   retry/roll-back/swap log, "Access is denied"
                                   under data/, coverage_index, serving cache,
                                   objects_config, dry-run/first-build/nightly,
@@ -553,7 +556,7 @@ gallery-cache-builder        1.17 Nightly builder, atomic swap and its
                                   (HORIZONS_CACHE), a drawing named on a room's
                                   row, an ended mission's last day
                                   (fetch_path_last_day)
-interactive-exhibit          1.30 adding or changing an exhibit in
+interactive-exhibit          1.31 adding or changing an exhibit in
                                   interactive.html; any edit to the Sun's
                                   chrome (drawer, nav cluster, frame zoom,
                                   i-panel, HUD, consent, back link); "Earth
@@ -604,7 +607,9 @@ interactive-exhibit          1.30 adding or changing an exhibit in
                                   clock; the ruler and the x marks on the axes;
                                   an ended mission (the Historical missions
                                   group, its marker on its last day,
-                                  mission_end)
+                                  mission_end; a craft that flew on and its
+                                  end_note; a path cut before its mission ended
+                                  and its cutoff_note)
 <!-- SKILL-MANIFEST:END -->
 
 Session-Start Repo Pull and the SHA Round Trip [CRITICAL]
@@ -1298,6 +1303,57 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.127 (November 5, 2026): No rule changed in this document. THREE
+skill bumps, one session's: horizons-orbital-mechanics 1.17 -> 1.18,
+gallery-cache-builder 1.17 -> 1.18 and interactive-exhibit 1.30 ->
+1.31 (L-507, more voyages, with L-510's carried sentences). FIVE MORE
+ENDED MISSIONS ON THE WEBSITE, AND JPL'S LAST WEEKS READ BEFORE ITS
+LAST DAY IS TRUSTED.
+
+WHAT PROMPTED IT. The Claude Code session of Nov 5 (Claude Opus 5.5),
+through the python_work door, built on orrery fb0a8dce and gallery
+3660993e, from
+documentation/COORD_L507_historical_missions_more_voyages_brief_20261105.md:
+Pioneer 10, Pioneer 11, Rosetta, DART and Akatsuki. Tony's rulings of
+Nov 5: "A. but indicate the craft is still flying but not tracked."
+(15:17 Chicago); "Akatsuki stays in. mission_end = 2025-09-18"; and,
+that evening, after JPL's positions for Akatsuki were found to stop
+following Venus on 2025-07-31, "cut the path at 2024-04-26, the last
+day JPL's solution is fitted to tracking" and "The Sun-pass filter is
+accepted, on your BepiColombo measurement."
+
+WHAT CHANGED. horizons-orbital-mechanics: An Ended Mission Ends on Its
+mission_end takes the agency's own page, with cases for a craft that
+flew on (end_note), an end after JPL's data, a page with several dates,
+and JPL's last weeks read before its last day is trusted (path_cutoff,
+cutoff_note); A Capture's Passes of the Sun Are Its Loops, new
+(riding_passes); piece C's website drawing corrected against L-484.
+gallery-cache-builder: the mirror's side change across e = 1 and the
+offline test's comparison by name (L-510's carried sentence), the
+mirror's new fields, and a path cut before its mission ended.
+interactive-exhibit: the ended box's day from mission_end, the
+end_note, and a cut path's opening in Tony's words. Each skill's oldest
+of four version entries moved to documentation/SKILL_HISTORIES.md, by
+the three-entry rule. Every sentence was read from the code, JPL's
+answers of Nov 5 and the session's checks before it was written.
+
+THE OBLIGATION TRAVELS. This session read each skill as the file in the
+repo, each as the manifest expected: horizons-orbital-mechanics 1.17,
+gallery-cache-builder 1.17, interactive-exhibit 1.30, gallery-assembler
+1.3, orrery-coding-conventions 1.13, provenance-discipline 2.36,
+safe-file-editing 1.14, agentic-pre-test 1.3 and
+ledger-and-session-records 1.22. Tony reinstalls the three bumped
+skills (Settings > Skills) and pastes this version into the Project's
+instructions on claude.ai; the next session that loads them from the
+account confirms its copies read 1.18, 1.18 and 1.31 before work that
+fires them.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.124 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.126 (November 4, 2026): No rule changed in this document. ONE
 skill bump: horizons-orbital-mechanics 1.16 -> 1.17 (L-512, part 1 and
 slice a's part A1). THE SAVED-PATH FILE IS RETIRED, AND EVERY JPL
@@ -1385,45 +1441,6 @@ that fires it.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.122 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.124 (November 3, 2026): No rule changed in this document. ONE
-skill bump: horizons-orbital-mechanics 1.14 -> 1.15 (L-476). THE
-ORRERY'S PLOT DRAWS A PLANNED PATH BY ITS PLAN, ONLY AROUND THE SUN.
-
-WHAT PROMPTED IT. The Claude Code session of Nov 3, afternoon (Claude
-Opus 5.5), through the python_work door, built on orrery 81fa7b8a and
-gallery 3a211a8c, from
-documentation/COORD_L476_orrery_plots_by_path_plan_brief_20261103.md.
-Tony's rulings of Oct 23 (one path rule, the orrery's; solid to today,
-dashed after), of Oct 24 (the orrery's dates match the website's), and
-of Nov 3, 12:06 Chicago, on whether only Sun-centred plots switch to
-the plan: "yes and the orrery and the website should both follow
-this."
-
-WHAT CHANGED. horizons-orbital-mechanics: A Plan Draws a Path Only
-Around the Sun, under How a Path's Events Are Found; and the 30-day
-cycle's list of a plan's inputs, which no longer carries a typed end.
-Its oldest of four version entries (1.12) moved to
-documentation/SKILL_HISTORIES.md, by the three-entry rule. Every
-sentence was read from path_plan.py, path_drawing.py and the website's
-builder at 3a211a8c, and from Galileo drawn from JPL that afternoon,
-before it was written.
-
-THE OBLIGATION TRAVELS. This session read each skill as the file in the
-repo, each as the manifest expected: horizons-orbital-mechanics 1.14,
-orrery-coding-conventions 1.13, gallery-cache-builder 1.17,
-provenance-discipline 2.36, safe-file-editing 1.14, agentic-pre-test
-1.3 and ledger-and-session-records 1.22. Tony reinstalls
-horizons-orbital-mechanics (Settings > Skills) and pastes this version
-into the Project's instructions on claude.ai; the next session that
-loads it from the account confirms its copy reads 1.15 before work
-that fires it.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.121 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

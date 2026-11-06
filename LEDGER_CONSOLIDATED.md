@@ -935,7 +935,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*253 live items; 237 need attention (`!`); 165 RICE-scored; 252 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*254 live items; 238 need attention (`!`); 165 RICE-scored; 251 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1082,8 +1082,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-467 | The scanner credits a display line with a citation it only sits near (orrery, provenance scanner) | OPEN | -- | 2026-10-21 |
 | ! | L-468 | The Sun room's phone look of 2026-10-21, night: the corona's drawer text and the Hills cloud's cross (gallery, the Sun room) | OPEN | -- | 2026-10-29 |
 | ! | L-470 | Orrery entries the website cannot serve as they stand (orrery, objects) | OPEN | -- | 2026-11-02 |
+| ! | L-476 | The orrery's whole-path plots draw by the same path plan as the website (orrery, spacecraft and comets) | OPEN | -- | 2026-11-05 |
 | ! | L-483 | A room for C/2025 K1 and its pieces, the first comet room (gallery, exhibits) | OPEN | -- | 2026-10-28 |
-| ! | L-484 | The website and the orrery agree on every object both draw, or the difference is written down (orrery + gallery, objects; method for interactive-exhibit) | OPEN | -- | 2026-11-04 |
+| ! | L-484 | The website and the orrery agree on every object both draw, or the difference is written down (orrery + gallery, objects; method for interactive-exhibit) | OPEN | -- | 2026-11-05 |
 | ! | L-485 | A nightly unattended run of the routines (orrery + gallery, maintenance) | OPEN | -- | 2026-11-05 |
 | ! | L-486 | A view carried into a room (gallery, the rooms) | OPEN | -- | 2026-10-26 |
 | ! | L-487 | Each body's description in the i panel, one bullet per sentence (gallery, the i panel) | OPEN | -- | 2026-10-25 |
@@ -1485,7 +1486,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-473 | A group in the Solar System room's drawer opens with its bodies unticked (gallery, the drawer) | DONE | -- | 2026-10-24 |
 |  | L-474 | See more / See fewer at the top of the Solar System room's drawer (gallery, the drawer) | DONE | -- | 2026-10-24 |
 |  | L-475 | The About link at the bottom of every room's i panel (gallery, the rooms' shared chrome) | DONE | -- | 2026-10-24 |
-|  | L-476 | The orrery's whole-path plots draw by the same path plan as the website (orrery, spacecraft and comets) | DONE | -- | 2026-11-03 |
 |  | L-477 | The Solar System room's drawer: no See more, no "All", a group row only opens, and Reset (gallery, the drawer) | DONE | -- | 2026-10-24 |
 |  | L-478 | The count line moves to the left, above the object label (gallery, the Solar System room's HUD) | DONE | -- | 2026-10-24 |
 |  | L-479 | A far orbit's frame: Go To fits the whole orbit, and every body's hover gives its orbit's near and far distance (gallery, the Solar System room) | DONE | -- | 2026-10-24 |
@@ -2032,6 +2032,14 @@ build.
     gain the mirror's side change and the offline test's comparison;
     horizons-orbital-mechanics' "an open difference on L-484" for
     piece C's website drawing is read against L-484 and corrected.
+- **2026-11-05, evening: the two carried skill sentences landed**, in
+  the more-voyages session's bumps (L-507): gallery-cache-builder 1.18
+  (A Comet on an Open Path Is a Path Body: the mirror's side change
+  across e = 1, the offline test's comparison with the export by name
+  and its stand-in orbit; the onboarding section) and
+  horizons-orbital-mechanics 1.18 (AN OPEN ORBIT IS NOT AN ELLIPSE,
+  read against L-484 and corrected: the website draws piece C as an
+  orbit since gallery e5352a86).
 **Gap (replaces the one below, 2026-11-05, afternoon):** Tony's Mode 5
 look (Sun-centred: Tsuchinshan, Wierzchos, ATLAS each drawn as
 3I/ATLAS is; 3I/ATLAS unchanged; Halley still its ellipse); then part
@@ -2315,7 +2323,132 @@ number, choice (a)); `horizons_check.py`; gallery-cache-builder 1.16.
     `documentation/COORD_L507_historical_missions_more_voyages_brief_20261105.md`.
     It carries L-476's note above (Pioneer 10 in the desktop orrery)
     as a stop point, and the two skill sentences from L-510.
-**Gap (replaces the one below, 2026-11-05):** the more-voyages Claude
+- **2026-11-05, evening: more voyages built** (a Claude Code session,
+  Claude Opus 5.5, through the python_work door, from the brief, on
+  orrery fb0a8dce and gallery 3660993e; not yet pushed).
+  [verified @fb0a8dce plus this session's edits]
+  - **The five keyed** (`celestial_objects.py`), each with JPL's exact
+    name from the Lookup (Nov 5: "Pioneer 10 (spacecraft)", "Pioneer 11
+    (spacecraft)", "Rosetta (spacecraft)", "DART (spacecraft)",
+    "Planet-C (spacecraft)") and `mission_end` from the agency's own
+    page, quoted on the entry: Pioneer 10 2003-01-23 (NASA, its last
+    signal), Pioneer 11 1995-11-24 (NASA, its last data), Rosetta
+    2016-09-30 (ESA, "Mission end"), DART 2022-09-26 (NASA, the
+    impact), Akatsuki 2025-09-18 (JAXA's release). The typed end_date
+    went, as for every planned entry (L-476). Links by the exhibit's
+    rule: the Pioneers' dead NASA Ames link and DART's redirect replaced
+    by their NASA mission pages; Rosetta's is Wikipedia's (no NASA page).
+  - **Tony's rulings, this session, in his words.** Nov 5, after the
+    stop on three dates: "Akatsuki stays in. mission_end = 2025-09-18
+    (JAXA press release, Sept 18, 2025, quoted)." Evening, on JPL's last
+    weeks: "Hold Akatsuki's cutoff until this is in the words file", six
+    points. Then: "cut the path at 2024-04-26, the last day JPL's
+    solution is fitted to tracking ... mission_end stays 2025-09-18
+    (JAXA)", the box's words, "Keep the July 31 jump in the words file's
+    evidence, not in the box", and "The Sun-pass filter is accepted, on
+    your BepiColombo measurement."
+  - **Found: JPL's last weeks for Akatsuki.** Its positions stop
+    following Venus after 2025-07-30: 537.7 million km from the Sun on
+    07-31, exactly at Venus's centre from 08-07; reproduced by a second
+    query (astroquery), every row to 0.000 km. Its data sheet: "Final
+    reconstruction fit to tracking data up to 2024-Apr-26. Preliminary
+    solution 2024-Apr-26 to 2025-Jul-23, prediction thereafter." The
+    raw rows and the sheet are in
+    `documentation/WORDS_L507_more_voyages_20261105.md`, section 6.
+  - **New fields, exported only where set and copied by the mirror:**
+    `end_note` (the Pioneers: "It is still flying, heading out of the
+    solar system, but no one has heard from it since."; Akatsuki: "It
+    was orbiting Venus at the time.", Tony's shortening of Nov 5,
+    evening, since his opening keeps "Contact was lost at the end of
+    April 2024"),
+    `path_cutoff` (Akatsuki 2024-04-26; `path_plan.path_stop` asks a
+    path to the earlier of it and mission_end) and `cutoff_note` (Tony's
+    words after the box's end day). `mission_end` is exported too, as
+    'YYYY-MM-DD'.
+  - **Found and fixed: a capture's passes of the Sun.** Akatsuki's loops
+    around Venus made a pass of the Sun about every ten days (69 in its
+    first year and a half before the first run's limit). The orbiter
+    rule's reason applied (`path_plan.riding_passes`): inside a capture a
+    pass of the Sun is kept only within a day of the captured-by body's
+    own nearest day to the Sun. Recomputed for every plan with a
+    capture: only BepiColombo (1 pass, Mercury's perihelion 2027-02-06,
+    kept) and Akatsuki (289 dropped to its cutoff) change; Juno, Europa
+    Clipper, Galileo and Cassini hold none. RULE stays 2.
+    `test_path_plan.py` checks 20 and 21 (the cutoff), with planted
+    faults.
+  - **The plans** (`data/path_plans.json`): Pioneer 10, 1 event (Jupiter
+    flyby, 1973-12-04); Pioneer 11, 2 (Jupiter 1974-12-03, Saturn
+    1979-09-01); Rosetta, 12; DART, 1 (a pass of the Sun); Akatsuki, 15,
+    its span to 2024-04-26, the arrival at Venus staying, no departure.
+    Lucy's was remade too: already due at HEAD, its fingerprint older
+    than piece C of C/2025 K1 joining the searched bodies on Nov 4
+    (L-510); JPL moved its span's end to 2033-03-13.
+  - **The website:** the five entries and their rows in Historical
+    missions, all seven in launch order; colours, the orrery's (Rosetta
+    goldenrod for white); the box's end day from mission_end, the
+    end_note after the opening, and for a path cut short the opening
+    with its cutoff_note, "on the last day drawn" and "to the last day
+    drawn"; the figures check's part 7 (`missionEndIssue`) and the
+    walk's section 20b.
+  - **The words** are `documentation/WORDS_L507_more_voyages_20261105.md`,
+    written into the files as drafts, waiting for Tony's "Approved".
+  - **Skills:** horizons-orbital-mechanics 1.18, gallery-cache-builder
+    1.18, interactive-exhibit 1.31; protocol v3.127.
+- **Verified against claimed, Nov 5 to 6, each line read from output:**
+  - The orrery's maintenance run: "35 of 35 gating checkers passed",
+    "0 TIER-1 -- the push gate holds" (run again at the close).
+  - `test_path_plan.py`: "PATH PLAN SUITE: 36 of 36 checks passed"; the
+    export's self-test, no problems.
+  - The mirror suite: every fixture case passes, the new one shown
+    failing on a planted mirror. Its real-config case fails until the
+    pull, by design: the config's five rows have no key in the website's
+    pulled export yet.
+  - A throwaway copy of the website in the session's scratchpad, the
+    orrery's new export where the pull puts it: the mirror passes; the
+    build 20261106T010511Z swapped first time; the figures check
+    "PASS"; the walk 186 of 189, its 3 failures the older ones; the new
+    cases shown failing on a page planted without the two sentences
+    (the walk 5 of 189, the figures check 1 problem). Akatsuki's last
+    served point, marker and box agree on 2024-04-26.
+  - The positions files: Akatsuki 86 KB (1,100 points), Rosetta 56 KB,
+    Pioneer 11 6.8 KB, Pioneer 10 4.5 KB, DART 3.7 KB (Galileo's 24 KB).
+  - Akatsuki's shortened sentence, checked the same way in the copy:
+    the figures check "PASS", the walk 186 of 189 (the three older
+    failures), the box as Tony wrote it.
+  - Not verified: the website's own Daily Run and maintenance run
+    (they follow the orrery's push and the pull), the live site, Tony's
+    phone look.
+  - Session size, as measured: 549,496 tokens was the session's
+    CONTEXT SIZE when read (the app's usage tool, Claude Opus 5.5), not
+    its total use; Claude Code's /cost, which counts input and output
+    tokens, was not available to the session. The two are not to be
+    compared.
+- **A later item (Tony, Nov 5, evening: "Record on L-507 that a craft
+  riding a planet on 7-day points corners outside its windows, as a
+  later item"):** between the windows a path is drawn from points 7
+  days apart; on a tight orbit that cuts corners. BepiColombo riding
+  Mercury, 2027-01-03 to 2027-04-10: 7-day straight segments sit up to
+  0.0185 AU (2.8 million km) from the path at 6-hour steps, covered
+  today only by its one kept Sun-pass window. Akatsuki riding Venus:
+  up to 0.0056 AU, mostly its own loops.
+**Gap (replaces the one below, 2026-11-05, evening):** Tony's run
+order, his of Nov 5, evening, by gallery-cache-builder's rule that a
+config change is not deployed until the cache is rebuilt (L-336):
+(1) his "Approved" on the words file, its two Pioneer dates among
+them (DONE: "Approved", Nov 5, evening, Chicago); (2) the orrery committed and pushed, not while the website's
+night runs; (3) the website's Daily Run from the dashboard, its last
+lines all green and the swap log's last build "ok"; (4) only then the
+website's whole change list committed and pushed, code, config and
+rebuilt served data together; (5) his phone look (the five ticked from
+Historical missions, their boxes and companions). Steps 2 to 4 in one
+sitting before 08:17 UTC: once the orrery's export carries the five
+keys, a website night without their entries stops at its mirror
+(horizons-orbital-mechanics, KEYING). Step 3 red: the website is not
+pushed and the lines come to a session. The later item
+above. Slice 2 (the encounters: Artemis II and Apollo 11's S-IVB)
+untouched, waiting beside L-402 and L-489. The walk's three older
+failures, to an item of their own or L-423 (the website's checks).
+**Gap (superseded above, 2026-11-05, evening; replaced the one below, 2026-11-05):** the more-voyages Claude
 Code session from its brief, both repositories; then Tony's phone look
 and the desktop orrery's Pioneer 10. Slice 2 (the encounters: Artemis
 II and Apollo 11's S-IVB) waits beside L-402 and L-489 (compositions).
@@ -3777,7 +3910,7 @@ Where We Are).
 L-490.
 
 #### [L-484] The website and the orrery agree on every object both draw, or the difference is written down (orrery + gallery, objects; method for interactive-exhibit)
-<!-- L:484 status:OPEN upd:2026-11-04 section:A flag: rice: -->
+<!-- L:484 status:OPEN upd:2026-11-05 section:A flag: rice: -->
 - **Tony, 2026-10-24, 17:35, in chat**
   (`documentation/COORD_L443_words_decisions_20261024.md`, sec. 7): "And
   we should add to the skill a check that the website and the orrery
@@ -4099,7 +4232,17 @@ L-490.
   ELLIPSE), so after its next pull it no longer draws piece C as a
   path. Its end condition: the website draws piece C as the orrery
   does, or the difference is chosen, with its reason. Handle: this item.
-**Gap (replaces the one below, 2026-11-04):** this item's brief, sliced
+- **2026-11-05, evening: piece C's open difference is met** (noted by
+  the more-voyages session, L-507). The website draws piece C of
+  C/2025 K1 as an orbit since gallery e5352a86 (L-510, Nov 5), as the
+  orrery does, and the objects mirror makes such a change by itself
+  since 3660993. horizons-orbital-mechanics 1.18 says so.
+**Gap (replaces the one below, 2026-11-05, evening):** this item's
+brief, sliced as above, with interactive-exhibit's next version written
+beside it as an orrery records patch; then the build with a planted
+fault. Piece C's difference is met (above), so it is no longer the
+check's first open exception.
+**Gap (superseded above, 2026-11-05, evening; replaced the one below, 2026-11-04):** this item's brief, sliced
 as above, with interactive-exhibit's next version written beside it as
 an orrery records patch; then the build with a planted fault. Piece C's
 open difference (above) is the check's first open exception.
@@ -32150,7 +32293,7 @@ same session); gallery `interactive.html`,
 `tools/headless/walk_solar_system_drawer.js`.
 
 #### [L-476] The orrery's whole-path plots draw by the same path plan as the website (orrery, spacecraft and comets)
-<!-- L:476 status:DONE upd:2026-11-03 section:C flag: rice: -->
+<!-- L:476 status:OPEN upd:2026-11-05 section:A flag: rice: -->
 - **Tony, 2026-10-23, at slice 2's design talk** (`documentation/DESIGN_L443_slice2_rulings_20261023.md`):
   "if there are better approaches for the orrery maybe we can implement
   them there also so the two are as Consistent as possible." And, on
@@ -32348,7 +32491,24 @@ same session); gallery `interactive.html`,
   `patch_L484_2_talk_records.py`, could not apply (L-484's records
   note). The three comets, sent to L-484 above, were ruled there and
   are built on L-510.
-**Gap (replaces the one below, 2026-11-03, evening, at the close):**
+- **2026-11-05, evening: the next small job, reopened here** (recorded
+  by the more-voyages session, L-507). Tony, in his words: "Pioneer 10
+  desktop: the desktop should follow the website (an ended mission's
+  marker on its last day, static plot and animation, Galileo too), but
+  not in this session. Record it on L-476 as the next small job." The
+  desktop orrery asks JPL for every marker at the chosen date
+  (`palomas_orrery.py`, `fetch_position` in `plot_objects` and
+  `animate_objects`) and never checks the mission's span. With L-507's
+  plans, Pioneer 10 Sun-centred draws its line to 2003-01-23 at 82.1 AU
+  and its marker at today's 142.2 AU (JPL, Nov 5); Galileo, whose JPL
+  positions stop in 2003, gets no marker at all. The mismatch predates
+  that session: this item's close of Nov 3 recorded Pioneer 10's line
+  short of its marker, then at its typed end.
+**Gap (replaces the one below, 2026-11-05, evening):** the next small
+job above: an ended mission's marker on its last day in the desktop's
+static plot and animation, Galileo too; then Tony's look at Pioneer 10
+and Galileo, Sun-centred.
+**Gap (superseded above, 2026-11-05, evening; replaced the one below, 2026-11-03, evening, at the close):**
 none; closed.
 **Gap (superseded above, 2026-11-03, evening, at the close; replaced the one below, 2026-11-03, evening):** Tony's look at
 Voyager 1 and 3I/ATLAS after `patch_L476_2`: each marker at the end of

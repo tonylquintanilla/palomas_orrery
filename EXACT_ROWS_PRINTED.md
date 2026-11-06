@@ -8,7 +8,7 @@ Rebuilt by `exact_rows_report.py` on every orrery maintenance run. An exact row 
 - 46 exact rows in `constants_new.py`.
 - 11 printed by at least one display: `SUN_RADIUS_KM`, `EARTH_LEO_UPPER_ALTITUDE_KM`, `EARTH_VAN_ALLEN_OUTER_RADII`, `EARTH_SOLAR_WIND_PRESSURE_NPA`, `EARTH_SOLAR_WIND_BZ_NT`, `EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG`, `EARTH_BOW_SHOCK_CUT_ANGLE_DEG`, `INNER_CORONA_RADII`, `HELMET_CUSP_RADII`, `INNER_LIMIT_OORT_CLOUD_AU`, `OUTER_OORT_CLOUD_AU`.
 - 40 printing lines: 25 in the orrery, 15 in the gallery.
-- Gallery pointers to exact rows with no PRINTS entry (NOT FOLLOWED): 3: `MAIN_BELT_SAMPLE_ORBITS` at `/rooms/solar-system/drawer/rows/70/feature/sample_orbits`, `MAIN_BELT_JPL_COUNT` at `/rooms/solar-system/drawer/rows/70/feature/jpl_count`, `MAIN_BELT_SAMPLE_H_MAX` at `/rooms/solar-system/drawer/rows/70/feature/h_max`.
+- Gallery pointers to exact rows with no PRINTS entry (NOT FOLLOWED): 3: `MAIN_BELT_SAMPLE_ORBITS` at `/rooms/solar-system/drawer/rows/75/feature/sample_orbits`, `MAIN_BELT_JPL_COUNT` at `/rooms/solar-system/drawer/rows/75/feature/jpl_count`, `MAIN_BELT_SAMPLE_H_MAX` at `/rooms/solar-system/drawer/rows/75/feature/h_max`.
 - Gallery pointers to exact rows read only to place a drawing (DRAWN, not printed): 12: `SUN_RADIUS_KM`, `ROCHE_LIMIT_DRAWN_RADII`, `GALACTIC_NORTH_POLE_RA_J2000_DEG`, `GALACTIC_NORTH_POLE_DEC_J2000_DEG`, `OUTER_OORT_CLOUD_AU`, `DE430_TERRESTRIAL_POSITION_PLACE_KM`, `EARTH_MAGNETOTAIL_DRAWN_RADIUS_RADII`, `EARTH_MAGNETOTAIL_DRAWN_END_RADII`, `EARTH_POLE_RA_J2000_DEG`, `EARTH_POLE_DEC_J2000_DEG`, `DE430_JUPITER_SATURN_POSITION_PLACE_KM`, `DE430_URANUS_NEPTUNE_PLUTO_POSITION_PLACE_KM`.
 - PRINTS or DRAWN entries that no longer match a pointer or their line (BROKEN): 0.
 

@@ -310,7 +310,7 @@ def _value(node):
 
 FIELDS = ("name", "key", "id", "id_type", "helio_id", "helio_id_type",
           "object_type", "start_date", "end_date", "horizons_name",
-          "mission_end")
+          "mission_end", "path_cutoff")
 
 
 def keyed_entries(text):
@@ -470,6 +470,21 @@ def jpl_limit(text):
     return "after", day - datetime.timedelta(days=1) if early else day
 
 
+def path_stop(path):
+    """The last day a path is asked to: the earlier of an ended
+    mission's 'mission_end' and the entry's 'path_cutoff' where either is
+    set, else FAR_STOP (JPL's own limits clip it further). A cutoff is
+    a day the entry names where JPL's positions after it are not to be
+    drawn (L-507, more voyages). Akatsuki's is 2024-04-26, the last day
+    JPL's solution is fitted to tracking (Tony, 2026-11-05, evening; its
+    data sheet: "Final reconstruction fit to tracking data up to
+    2024-Apr-26"); JPL's prediction after 2025-07-23 stops following
+    Venus on 07-31."""
+    days = [path[f].date() for f in ("mission_end", "path_cutoff")
+            if path.get(f)]
+    return min(days) if days else FAR_STOP
+
+
 def path_rows_and_span(fetch, path, pause):
     """(rows, first day, last day): the path's daily positions around the
     Sun across everything JPL has for it, from the list's start_date (the
@@ -478,8 +493,7 @@ def path_rows_and_span(fetch, path, pause):
     Raises Unreachable, or Refused with JPL's words when it refuses for
     another reason."""
     first = path["start_date"].date()
-    last = (path["mission_end"].date() if path.get("mission_end")
-            else FAR_STOP)
+    last = path_stop(path)
     for _ in range(4):
         try:
             text = fetch(vectors_url(path["id"], path["id_type"], "500@10",
@@ -680,6 +694,55 @@ def candidates(path_rows, body_rows, gate=None):
     return out
 
 
+def sun_series(body_rows):
+    """[(jd, dist_km, v_kms)] of a body's own distance from the Sun, from
+    its rows around the Sun (500@10)."""
+    return [(r[0], math.sqrt(r[1] * r[1] + r[2] * r[2] + r[3] * r[3]) * AU_KM,
+             math.sqrt(r[4] * r[4] + r[5] * r[5] + r[6] * r[6]) * AU_KM / DAY_S)
+            for r in body_rows]
+
+
+def capture_spans(path_rows, body_rows, gate, name):
+    """[(first jd, last jd, the body's name, [jd of each of the body's own
+    nearest days to the Sun])] for each CAPTURE of the path by the body:
+    a stretch inside its Hill sphere holding more than one nearest
+    approach (orbiter_rule)."""
+    series = daily_series(path_rows, body_rows)
+    days = nearest_days(series)
+    own_series = sun_series(body_rows)
+    own = [own_series[i][0] for i in nearest_days(own_series)]
+    out = []
+    for a, b in stretches(series, gate):
+        if len([i for i in days if a <= i <= b]) > 1:
+            out.append((series[a][0], series[b][0], name, own))
+    return out
+
+
+def riding_passes(near, held):
+    """(kept, dropped count): the Sun's candidates, less each pass of the
+    Sun made by the path's loops around a body that holds it.
+
+    The orbiter rule (Tony's ruling of 2026-10-24) already keeps a
+    capture's loops from being events: in the Solar System room the
+    spacecraft rides with the body. Its passes of the Sun while captured
+    are those loops seen from the Sun -- Akatsuki's, one every ten days
+    or so around Venus for nine years, about 330 (L-507, more voyages,
+    2026-11-05). So inside a capture a pass of the Sun is kept only where
+    the body itself passes the Sun within a day: the path riding the
+    body's own perihelion, as BepiColombo rides Mercury's on 2027-02-06
+    (46.0 million km). A pure filter: it removes, never adds."""
+    kept, dropped = [], 0
+    for c in near:
+        jd = c[0]
+        holders = [h for h in held if h[0] <= jd <= h[1]]
+        if holders and not any(abs(jd - own) <= 1.0
+                               for h in holders for own in h[3]):
+            dropped += 1
+            continue
+        kept.append(c)
+    return kept, dropped
+
+
 def refine(fetch, path, body, jd, pause):
     """(jd, dist_km, v_kms) at the nearest minute, in the two passes."""
     def rows(start_jd, stop_jd, step):
@@ -738,6 +801,9 @@ def plan_inputs(path, bodies):
     # their fingerprint and are not made again (L-507).
     if path.get("mission_end"):
         inputs["mission_end"] = ymd(path["mission_end"])
+    # L-507, more voyages: likewise a cutoff, only where it is set.
+    if path.get("path_cutoff"):
+        inputs["path_cutoff"] = ymd(path["path_cutoff"])
     return inputs
 
 
@@ -779,8 +845,7 @@ def search_start(path, previous, inputs, today, start=None, end=None):
         start = (datetime.date.fromisoformat(span["start"]) if span
                  else path["start_date"].date())
         end = (datetime.date.fromisoformat(span["end"]) if span
-               else (path["mission_end"].date() if path.get("mission_end")
-                     else FAR_STOP))
+               else path_stop(path))
     if (previous is None
             or previous.get("inputs_sha256") != inputs_sha256(inputs)):
         return start, []
@@ -882,29 +947,50 @@ def make_plan(fetch, path, bodies, today, rows, previous=None, pause=0.0,
     events = list(carried)
     searched = []
     sun = ("Sun", "major", "10", None)
+
+    def gate_for(body):
+        """The body's Hill-sphere gate, or None for the Sun."""
+        if body[2] == "10":
+            return None
+        prim = next((b for b in bodies
+                     if b[2] == PRIMARY.get(body[2], "10")), sun)
+        prim_rows = rows.get(prim) if prim[2] != "10" else None
+        gm_b, gm_p = rows.gm(body), rows.gm(prim)
+        at = dict((round(r[0], 4), r) for r in rows.get(body))
+        pat = (dict((round(r[0], 4), r) for r in prim_rows)
+               if prim_rows else None)
+
+        def gate(jd, at=at, pat=pat, gm_b=gm_b, gm_p=gm_p):
+            b = at.get(round(jd, 4))
+            p = (pat.get(round(jd, 4)) if pat is not None
+                 else (jd,) + (0.0,) * 6)
+            if b is None or p is None:
+                return 0.0
+            return hill_km(b, p, gm_b, gm_p)
+        return gate
+
+    # L-507, more voyages: the captures, found before the Sun's passes are
+    # judged (riding_passes).
+    held = []
+    for body in bodies:
+        if body[2] == "10" or rows.get(body) is None:
+            continue
+        held.extend(capture_spans(path_rows, rows.get(body),
+                                  gate_for(body), body[0]))
     for body in bodies:
         body_rows = rows.get(body)
         if body_rows is None:
             continue
         searched.append(body[0])
-        gate = None
-        if body[2] != "10":
-            prim = next((b for b in bodies
-                         if b[2] == PRIMARY.get(body[2], "10")), sun)
-            prim_rows = rows.get(prim) if prim[2] != "10" else None
-            gm_b, gm_p = rows.gm(body), rows.gm(prim)
-            at = dict((round(r[0], 4), r) for r in body_rows)
-            pat = (dict((round(r[0], 4), r) for r in prim_rows)
-                   if prim_rows else None)
-
-            def gate(jd, at=at, pat=pat, gm_b=gm_b, gm_p=gm_p):
-                b = at.get(round(jd, 4))
-                p = (pat.get(round(jd, 4)) if pat is not None
-                     else (jd,) + (0.0,) * 6)
-                if b is None or p is None:
-                    return 0.0
-                return hill_km(b, p, gm_b, gm_p)
+        gate = gate_for(body)
         near = candidates(path_rows, body_rows, gate)
+        if gate is None and held:
+            near, dropped = riding_passes(near, held)
+            if dropped:
+                progress.say("%s: %d pass(es) of the Sun made by its loops "
+                             "around %s, not events (the orbiter rule)"
+                             % (path["name"], dropped,
+                                " and ".join(sorted(set(h[2] for h in held)))))
         if near:
             progress.say("%s: %d near approach(es) to %s to look at closely"
                          % (path["name"], len(near), body[0]))

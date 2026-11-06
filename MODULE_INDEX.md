@@ -1,7 +1,7 @@
 <!-- Doc-Kind: generated | The human-browsable module index, rebuilt by module_atlas.py alongside the atlas. Do not hand-edit. -->
 # Paloma's Orrery - Module Index
 
-**Generated:** November 04, 2026 by `module_atlas.py`  
+**Generated:** November 05, 2026 by `module_atlas.py`  
 **Repository:** Paloma's Orrery - Solar System Visualization Suite  
 **Philosophy:** Data Preservation is Climate Action
 
@@ -12,8 +12,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 177  
-**Total Lines of Code (non-blank):** 139,676  
-**Total Public Functions/Classes:** 1,805
+**Total Lines of Code (non-blank):** 140,044  
+**Total Public Functions/Classes:** 1,812
 
 ## Classification Coverage
 
@@ -47,7 +47,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `earth_system_visualization_gui.py` | Earth System Visualization GUI for Paloma's Orrery Hub window with climate data visualizations (1,903 lines) |
 | `orbital_param_viz.py` | Interactive orbital element visualization tool. (1,965 lines) |
 | `palomas_orrery.py` | Main GUI and plotting engine for Paloma's Orrery. (9,736 lines) |
-| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (3,504 lines) |
+| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (3,511 lines) |
 | `star_visualization_gui.py` | Stellar visualization GUI for Paloma's Orrery. (1,409 lines) |
 
 ---
@@ -142,7 +142,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `celestial_objects.py` | Celestial object definitions for Paloma's Orrery. (1,463 lines) |
+| `celestial_objects.py` | Celestial object definitions for Paloma's Orrery. (1,569 lines) |
 | `close_approach_data.py` | JPL CAD API client for small-body close approach data. (513 lines) |
 | `constants_new.py` | Verified numeric constants for Paloma's Orrery. (5,948 lines) |
 | `constants_tokens.py` | - what each "# Unit:" token in constants_new.py means. (393 lines) |
@@ -231,7 +231,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `examine_hot_csv.py` | Examine the HOT CSV file structure (47 lines) |
 | `export_constants.py` | - write data/constants_export.json from constants_new.py. The orrery is the producer of its numbers; the gallery reads this file and never reads orrery source. (571 lines) |
 | `export_drawings.py` | - write the orrery's stored drawings into data/drawings/, one file per drawing, for the website to pull and draw. (436 lines) |
-| `export_objects.py` | - write data/objects_export.json from the object list in celestial_objects.py. The orrery is the one definition of each object; the gallery reads this file and never reads orrery source. (734 lines) |
+| `export_objects.py` | - write data/objects_export.json from the object list in celestial_objects.py. The orrery is the one definition of each object; the gallery reads this file and never reads orrery source. (794 lines) |
 | `export_orbit_cache.py` | DEPRECATED: export_orbit_cache.py Obsolete since November 4, 2026 (L-512, ruling 0): data/orbit_paths.json is retired. Run on purpose, this script still reads data/orbit_paths.json and data/osculating_cache.json (read-only), and stops with "caches not found" when either is missing, so once Tony d... (629 lines) |
 | `food_insecurity_generator.py` | IPC acute food-insecurity KMZ layer (Sudan, current period). (702 lines) |
 | `horizons_check.py` | - check each object the website serves against JPL Horizons: that its entry names exactly one object, that the object's id, index and name are what the orrery's list says, and that the orbital period the website prints is the one JPL gives. And re-read each spacecraft's Horizon... (1,245 lines) |
@@ -240,7 +240,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (129 lines) |
 | `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (1,006 lines) |
 | `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (1,286 lines) |
-| `path_plan.py` | - the orrery's plan for drawing each path the website serves: a spacecraft's flown and planned trajectory, and a comet on an open path around its perihelion (L-443, slice 2). (1,214 lines) |
+| `path_plan.py` | - the orrery's plan for drawing each path the website serves: a spacecraft's flown and planned trajectory, and a comet on an open path around its perihelion (L-443, slice 2). (1,289 lines) |
 | `period_fetch.py` | - fetch from JPL the orbital period of each object the website serves that has none fetched yet, with the same code the orrery uses when Tony plots, so the Horizons check can compare it with JPL the same day and the objects export can carry it to the website (L-444). (667 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (505 lines) |
 | `provenance_scanner.py` | Fact provenance auditor for Paloma's Orrery. (3,533 lines) |
@@ -256,11 +256,11 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `test_domain_split.py` | Checks for L-437: the provenance scanner's whole-tree Tier-1 total prints with its domain split, and a module's domain is read from its own docstring Domain: tag. (406 lines) |
 | `test_horizons_check.py` | - the Horizons check (L-395, L-431) on JPL's recorded answers, with no network: every entry agrees, and every planted fault is caught by name. (870 lines) |
 | `test_maintenance_report.py` | The maintenance run's summary names every file whose Tier-1 rose since the scanner's previous run; and proof that this check can fail. (478 lines) |
-| `test_objects_export.py` | - data/objects_export.json says what the object list in celestial_objects.py holds, and no entry in the list writes a field twice. (386 lines) |
+| `test_objects_export.py` | - data/objects_export.json says what the object list in celestial_objects.py holds, and no entry in the list writes a field twice. (422 lines) |
 | `test_orbit_cache.py` | Comprehensive test suite for orbit data caching and repair (924 lines) |
 | `test_orbit_markers.py` | Each orbit is drawn around its period's centre, each marker's date comes from the period JPL gave, and every orbit and marker hover prints by the errors JPL states; and proof that this check can fail. (894 lines) |
 | `test_path_or_orbit.py` | - the rule that draws a small body as a path or an orbit by its orbit solution's e in JPL's Small-Body Database (path_or_orbit.py, L-510), on made-up records, with no network; and the guard that the retired 'open_path' does not come back to the object list. Each check is fi... (405 lines) |
-| `test_path_plan.py` | - the path plan, offline, against a made-up solar system answered in JPL's own vector format (L-443, slice 2). (847 lines) |
+| `test_path_plan.py` | - the path plan, offline, against a made-up solar system answered in JPL's own vector format (L-443, slice 2). (931 lines) |
 | `test_period_fetch.py` | - the period fetch (L-444) on recorded answers, with no network: it asks only for what is missing, with plotting's own call, writes the record plotting writes, and names a failure; and every planted fault is caught by name. (1,051 lines) |
 | `test_position_digits.py` | The orrery's body hover prints each distance and speed to the digits JPL's errors earn, and proof that this check can fail. (908 lines) |
 | `test_provenance_1d.py` | Regression tests for the Phase 1d/1e changes. (485 lines) |

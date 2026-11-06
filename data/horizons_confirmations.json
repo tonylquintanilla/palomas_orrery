@@ -1803,6 +1803,34 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=C%2F2025%20N1&group=mb&format=text"
       ]
     },
+    "pioneer_10": {
+      "confirmed": "2026-11-05",
+      "horizons_id": "-23",
+      "id_type": "id",
+      "horizons_name": "Pioneer 10 (spacecraft)",
+      "object_type": "trajectory",
+      "list_sha256": "f691ec21d5700b6e8c699c868009bb736c2406ab8cccbc8742a4924c24bf03c0",
+      "jpl_name": "Pioneer 10 (spacecraft)",
+      "jpl_type": "spacecraft",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-23&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-23&group=sb&format=text"
+      ]
+    },
+    "pioneer_11": {
+      "confirmed": "2026-11-05",
+      "horizons_id": "-24",
+      "id_type": "id",
+      "horizons_name": "Pioneer 11 (spacecraft)",
+      "object_type": "trajectory",
+      "list_sha256": "f691ec21d5700b6e8c699c868009bb736c2406ab8cccbc8742a4924c24bf03c0",
+      "jpl_name": "Pioneer 11 (spacecraft)",
+      "jpl_type": "spacecraft",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-24&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-24&group=sb&format=text"
+      ]
+    },
     "voyager_1": {
       "confirmed": "2026-10-31",
       "horizons_id": "-31",
@@ -1859,6 +1887,20 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-82&group=sb&format=text"
       ]
     },
+    "rosetta": {
+      "confirmed": "2026-11-05",
+      "horizons_id": "-226",
+      "id_type": "id",
+      "horizons_name": "Rosetta (spacecraft)",
+      "object_type": "trajectory",
+      "list_sha256": "f691ec21d5700b6e8c699c868009bb736c2406ab8cccbc8742a4924c24bf03c0",
+      "jpl_name": "Rosetta (spacecraft)",
+      "jpl_type": "spacecraft",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-226&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-226&group=sb&format=text"
+      ]
+    },
     "new_horizons": {
       "confirmed": "2026-10-31",
       "horizons_id": "-98",
@@ -1871,6 +1913,20 @@
       "queries": [
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-98&group=mb&format=text",
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-98&group=sb&format=text"
+      ]
+    },
+    "akatsuki": {
+      "confirmed": "2026-11-05",
+      "horizons_id": "-5",
+      "id_type": "id",
+      "horizons_name": "Planet-C (spacecraft)",
+      "object_type": "trajectory",
+      "list_sha256": "f691ec21d5700b6e8c699c868009bb736c2406ab8cccbc8742a4924c24bf03c0",
+      "jpl_name": "Planet-C (spacecraft)",
+      "jpl_type": "spacecraft",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-5&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-5&group=sb&format=text"
       ]
     },
     "juno": {
@@ -1927,6 +1983,20 @@
       "queries": [
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-49&group=mb&format=text",
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-49&group=sb&format=text"
+      ]
+    },
+    "dart": {
+      "confirmed": "2026-11-05",
+      "horizons_id": "-135",
+      "id_type": "id",
+      "horizons_name": "DART (spacecraft)",
+      "object_type": "trajectory",
+      "list_sha256": "f691ec21d5700b6e8c699c868009bb736c2406ab8cccbc8742a4924c24bf03c0",
+      "jpl_name": "DART (spacecraft)",
+      "jpl_type": "spacecraft",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-135&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-135&group=sb&format=text"
       ]
     },
     "juice": {

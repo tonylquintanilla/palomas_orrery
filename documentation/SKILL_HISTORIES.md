@@ -861,6 +861,24 @@ Find a body box, the grid chip's AU note, the whole triad opening the
 frame note, the orbit line wrapped at 60, the direction arrows, and a
 candidate for the headless recipe.
 
+Earlier: 1.28 | 2026-10-28, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ b2fcc1bb and gallery @ acbf206b. v1.28 (L-443, carrying
+L-497, L-496 and L-458) corrects four sentences the gallery's builds of
+2026-10-27 made wrong, each one a session following it would act on:
+a group IS found by a word such as "comet" (L-496); the streamer belt
+is drawn on its own row, not with the corona (L-497, 6b); Plotly's own
+hover box is off in every room, so a marker tap opens the page's text
+box (L-497, 6a), in the Phone first sequence and The touch path; and a
+tap on a marker opens the text box, not only naming its row (the
+anatomy table's drawer row). And it records three things new to the
+gallery: `gallery/text_box.js`, the one text box's words one sentence
+to a bullet; the `find` words on the drawer's rows; and the "Report a
+problem" link in every room's i panel (L-458). Riding the same bump
+(L-501): a body the served cache does not hold yet turns the Solar
+System figures check red as well as Cache in step. Each fact was read
+from the gallery's code at acbf206b before it was written.
+(Moved down 2026-11-05, when 1.31 made a fourth entry.)
+
 ## safe-file-editing
 
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons;
@@ -1171,6 +1189,23 @@ every JPL question is asked fresh (`HORIZONS_CACHE`) and why; and
 `serve_drawings` serves a drawing named on a room's own row. Each fact
 was read from the builder at b55109f2 before it was written.
 
+Earlier: 1.15 | 2026-10-31, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ f4994ffc and gallery @ c1c578f5. v1.15 (L-485, with
+L-461 and L-443) records that the builder runs unattended: every night
+at 08:17 UTC on GitHub's computer, through `daily_run.py --night`, whose
+gate carries the deletions-only guard this skill called designed and
+not built. Operating mode, the routines that said "by hand", Layer 3,
+the Validation stance and The Daily Run's Steps say so; a pull that
+does not match the push has a second honest cause, not yet pulled.
+Riding the bump, from L-443's and L-501's closes: a comet is drawn from
+its elements of today; a new body the room draws from its elements
+onboards on a Daily Run; a config change turns the Solar System figures
+check red too; the orrery's orbit cache is written in text mode. And
+from this session: the orrery's export marks a held body (L-485, the
+hold), which the builder does not honour yet. Each fact was read from
+the code at f4994ffc and c1c578f5 before it was written.
+(Moved down 2026-11-05, when 1.18 made a fourth entry.)
+
 ## horizons-orbital-mechanics
 
 Earlier: 1.2 | 2026-10-10, with Anthropic's Claude Opus 5.5, at
@@ -1312,3 +1347,18 @@ to that day and no further, and the field is among a plan's inputs only
 where it is set. Tony's ruling of 2026-11-02, "Yes stop at impact".
 Read from path_plan.py and JPL's answers of 2026-11-02 before it was
 written.
+
+Earlier: 1.15 | 2026-11-03, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 81fa7b8a and gallery @ 3a211a8c. v1.15 (L-476) adds A
+Plan Draws a Path Only Around the Sun to How a Path's Events Are Found:
+the orrery's plot now draws a planned path by its plan
+(path_drawing.py), the website's method point for point, solid to today
+and dashed after, and around any other centre both instruments draw it
+as before (Tony, 2026-11-03: "yes and the orrery and the website should
+both follow this"). A plan's inputs carry the day its path is asked
+from and no typed end, since planned entries no longer carry one. Read
+from path_plan.py, path_drawing.py and the website's builder at
+3a211a8c, and Galileo drawn from JPL on 2026-11-03, before it was
+written.
+(Moved down 2026-11-05, when 1.18 made a fourth entry.)
+

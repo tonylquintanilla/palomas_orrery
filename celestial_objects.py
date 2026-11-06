@@ -79,6 +79,17 @@ JPL's Small-Body Database, at or above 1 a path (path_or_orbit.py), and no
 field here decides it; test_path_or_orbit.py fails, naming the entry, if
 'open_path' comes back. Wierzchos's recalled "outbound period ~200,000
 years" replaced by JPL's database e and class.)
+Module updated: November 5, 2026 with Anthropic's Claude Opus 5.5 (L-507,
+more voyages: Pioneer 10, Pioneer 11, Rosetta, DART and Akatsuki keyed for
+the website, each with JPL's exact name and 'mission_end', the day the
+AGENCY'S OWN PAGE says the mission ended (NASA, ESA, JAXA), quoted on the
+entry; their typed 'end_date' goes, as for every planned entry (L-476).
+New field 'end_note': one sentence the website's text box prints after an
+ended mission's opening, on what became of the craft -- the Pioneers still
+fly; Akatsuki was orbiting Venus when contact was lost -- cited on the
+entry like mission_info, and exported beside it (export_objects.py). The
+Pioneers' dead NASA Ames link and DART's redirect replaced by their
+mission pages; Rosetta's link is Wikipedia's, NASA having no Rosetta page.)
 """
 
 from datetime import datetime
@@ -915,19 +926,52 @@ OBJECT_DEFINITIONS = [
     'mission_url': 'https://www.nasa.gov/mission/apollo-11/', 
     'mission_info': 'Horizons: -399110. This is the last and most powerful stage of the Saturn V rocket that propelled the Apollo 11 mission towards the Moon.'},
 
-    {'name': 'Pioneer 10', 'id': '-23', 'var_name': 'pioneer10_var', 'color_key': 'Pioneer 10', 'symbol': 'diamond-open', 
-    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(1972, 3, 4), 'end_date': datetime(2002, 3, 3), 
-    # No ephemeris for target "Pioneer 10 (spacecraft)" prior to A.D. 1972-MAR-03 02:04:00.0000 UT
-    # No ephemeris for target "Pioneer 10 (spacecraft)" after A.D. 2050-JAN-01 00:08:50.8161 UT
-    'mission_url': 'https://www.nasa.gov/centers/ames/missions/archive/pioneer.html', 
-    'mission_info': 'Horizons: -23. First spacecraft to travel through the asteroid belt and make direct observations of Jupiter.'},
+    {'name': 'Pioneer 10', 'key': 'pioneer_10', 'id': '-23', 'horizons_name': 'Pioneer 10 (spacecraft)', 'var_name': 'pioneer10_var', 'color_key': 'Pioneer 10', 'symbol': 'diamond-open',
+    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(1972, 3, 4),
+    # No ephemeris for target "Pioneer 10 (spacecraft)" prior to A.D. 1972-MAR-03 02:04:42.1854 TDB
+    # No ephemeris for target "Pioneer 10 (spacecraft)" after A.D. 2050-JAN-01 00:10:00.0000 TDB
+    # JPL's Lookup, read 2026-11-05: "Pioneer 10 (spacecraft)", spkid -23.
+    # The craft flew on after its mission ended, and JPL's positions run
+    # on to 2050, so the path plan stops at mission_end and the room says
+    # it still flies (end_note; L-507, Tony, 2026-11-05, 15:17 Chicago:
+    # "A. but indicate the craft is still flying but not tracked."). The
+    # page gives three dates and calls none the end; the last signal is
+    # taken, the last day anyone heard from it (the session's proposal of
+    # 2026-11-05, the page's "lasted more than 30 years").
+    # Source: NASA, Pioneer 10 mission page,
+    # https://science.nasa.gov/mission/pioneer-10/ (read 2026-11-05):
+    # "March 31, 1997: Routine contact with spacecraft terminated", "The
+    # spacecraft returned its last telemetry data April 27, 2002, and less
+    # than a year later, on Jan. 23, 2003, it sent its last signal",
+    # "Pioneer 10 lasted more than 30 years", "Pioneer 10 is heading out of
+    # the solar system", "Pioneer 10 was NASA's first mission to the outer
+    # planets", and among its firsts "First spacecraft to fly through the
+    # main asteroid belt" and "First spacecraft to fly past Jupiter".
+    'mission_end': datetime(2003, 1, 23),
+    'end_note': 'It is still flying, heading out of the solar system, but no one has heard from it since.',
+    'mission_url': 'https://science.nasa.gov/mission/pioneer-10/',
+    'mission_info': 'Horizons: -23. Pioneer 10 was NASA\'s first mission to the outer planets, the first spacecraft to fly through the main asteroid belt and the first to fly past Jupiter.'},
 
-    {'name': 'Pioneer 11', 'id': '-24', 'var_name': 'pioneer11_var', 'color_key': 'Pioneer 11', 'symbol': 'diamond-open', 
-    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(1973, 4, 7), 'end_date': datetime(1995, 9, 29),
-    # No ephemeris for target "Pioneer 11 (spacecraft)" prior to A.D. 1973-APR-06 02:25:00.0000 UT
-    # Science operations and daily telemetry ceased on September 30, 1995 
-    'mission_url': 'https://www.nasa.gov/centers/ames/missions/archive/pioneer.html', 
-    'mission_info': 'Horizons: -24. First spacecraft to encounter Saturn and study its rings.'},
+    {'name': 'Pioneer 11', 'key': 'pioneer_11', 'id': '-24', 'horizons_name': 'Pioneer 11 (spacecraft)', 'var_name': 'pioneer11_var', 'color_key': 'Pioneer 11', 'symbol': 'diamond-open',
+    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(1973, 4, 7),
+    # No ephemeris for target "Pioneer 11 (spacecraft)" prior to A.D. 1973-APR-06 02:25:44.1857 TDB
+    # No ephemeris for target "Pioneer 11 (spacecraft)" after A.D. 2050-JAN-01 00:10:00.0000 TDB
+    # JPL's Lookup, read 2026-11-05: "Pioneer 11 (spacecraft)", spkid -24.
+    # Flew on, as Pioneer 10 did (see its entry). The page says "The
+    # mission ended in 1995" and gives two days; the later is taken, the
+    # last day anyone heard from it, as for Pioneer 10.
+    # Source: NASA, Pioneer 11 mission page,
+    # https://science.nasa.gov/mission/pioneer-11/ (read 2026-11-05): "The
+    # mission ended in 1995 and Pioneer 11 is on a trajectory to take it
+    # out of the solar system", "NASA Ames Research Center made last
+    # contact with the spacecraft on Sept. 30, 1995", "Scientists later
+    # received a few minutes of good engineering data on Nov. 24, 1995",
+    # and "NASA's Pioneer 11, a sister spacecraft to Pioneer 10, was the
+    # first spacecraft to study Saturn up close."
+    'mission_end': datetime(1995, 11, 24),
+    'end_note': 'It is still flying, heading out of the solar system, but no one has heard from it since.',
+    'mission_url': 'https://science.nasa.gov/mission/pioneer-11/',
+    'mission_info': 'Horizons: -24. Pioneer 11, the sister spacecraft of Pioneer 10, was the first spacecraft to study Saturn up close.'},
 
     {'name': 'Voyager 1', 'key': 'voyager_1', 'id': '-31', 'horizons_name': 'Voyager 1 (spacecraft)', 'var_name': 'voyager1_var', 'color_key': 'Voyager 1', 'symbol': 'diamond-open', 
     'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(1977, 9, 6), 
@@ -973,12 +1017,26 @@ OBJECT_DEFINITIONS = [
      'mission_url': 'https://science.nasa.gov/mission/cassini/',
      'mission_info': 'Horizons: -82. Cassini-Huygens studied Saturn and its moons. The Saturn system was its home for 13 years.'},
 
-    {'name': 'Rosetta', 'id': '-226', 'var_name': 'rosetta_var', 'color_key': 'Rosetta', 'symbol': 'diamond-open', 'object_type': 'trajectory', 
-    'id_type': 'id', 'is_mission': True, 'start_date': datetime(2004, 3, 3), 'end_date': datetime(2016, 10, 4),
-    # No ephemeris for target "Rosetta (spacecraft)" prior to A.D. 2004-MAR-02 09:25:55.8146 UT
-    # No ephemeris for target "Rosetta (spacecraft)" after A.D. 2016-OCT-04 23:59:59.9997 UT
-    'mission_url': 'https://rosetta.esa.int/', 
-    'mission_info': 'Horizons: -226. European Space Agency mission to study Comet 67P/Churyumov-Gerasimenko.'},
+    {'name': 'Rosetta', 'key': 'rosetta', 'id': '-226', 'horizons_name': 'Rosetta (spacecraft)', 'var_name': 'rosetta_var', 'color_key': 'Rosetta', 'symbol': 'diamond-open', 'object_type': 'trajectory',
+    'id_type': 'id', 'is_mission': True, 'start_date': datetime(2004, 3, 3),
+    # No ephemeris for target "Rosetta (spacecraft)" prior to A.D. 2004-MAR-02 09:27:00.0000 TDB
+    # No ephemeris for target "Rosetta (spacecraft)" after A.D. 2016-OCT-05 00:01:08.1820 TDB
+    # JPL's Lookup, read 2026-11-05: "Rosetta (spacecraft)", spkid -226.
+    # JPL's positions run five days past the mission's end, so the path
+    # plan stops at mission_end (L-507; Tony, 2026-11-02, "Yes stop at
+    # impact").
+    # Source: ESA, Rosetta mission page,
+    # https://www.esa.int/Science_Exploration/Space_Science/Rosetta (read
+    # 2026-11-05): "Mission end: 30 September 2016" and "ESA's Rosetta
+    # mission was the first to rendezvous with a comet, the first to follow
+    # a comet on its orbit around the Sun, and the first to deploy a lander
+    # to a comet's surface."
+    # The link is Wikipedia's: NASA has no Rosetta mission page (the
+    # info-link rule, interactive-exhibit; science.nasa.gov/mission/rosetta/
+    # answered 404 on 2026-11-05).
+    'mission_end': datetime(2016, 9, 30),
+    'mission_url': 'https://en.wikipedia.org/wiki/Rosetta_(spacecraft)',
+    'mission_info': 'Horizons: -226. ESA\'s Rosetta was the first mission to travel with a comet, Comet 67P/Churyumov-Gerasimenko, and the first to set a lander down on one.'},
 
     {'name': 'New Horizons', 'key': 'new_horizons', 'id': '-98', 'horizons_name': 'New Horizons (spacecraft)', 'var_name': 'new_horizons_var', 'color_key': 'New Horizons', 'symbol': 'diamond-open', 
     'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2006, 1, 20), 
@@ -987,12 +1045,50 @@ OBJECT_DEFINITIONS = [
     'mission_url': 'https://science.nasa.gov/mission/new-horizons/', 
     'mission_info': 'Horizons: -98. New Horizons flew past Pluto in July 2015 and past Arrokoth on January 1, 2019. It is still travelling outward through the Kuiper Belt.'},
 
-    {'name': 'Akatsuki', 'id': '-5', 'var_name': 'akatsuki_var', 'color_key': 'Akatsuki', 'symbol': 'diamond-open',
-    # Akatsuki / VCO / Planet-C (spacecraft)           -5 
-    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2010, 5, 22), 'end_date': datetime(2025, 8, 22), 
-    # No ephemeris for target "Planet-C (spacecraft)" prior to A.D. 2010-MAY-21 00:51:00.0000 UT
-    # No ephemeris for target "Planet-C (spacecraft)" after A.D. 2025-AUG-23 23:58:50.8172 UT
-    'mission_info': 'Horizons: -5. JAXA mission to study the atmospheric circulation of Venus', 
+    {'name': 'Akatsuki', 'key': 'akatsuki', 'id': '-5', 'horizons_name': 'Planet-C (spacecraft)', 'var_name': 'akatsuki_var', 'color_key': 'Akatsuki', 'symbol': 'diamond-open',
+    # Akatsuki / VCO / Planet-C (spacecraft)           -5
+    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2010, 5, 22),
+    # No ephemeris for target "Planet-C (spacecraft)" prior to A.D. 2010-MAY-21 00:52:06.1851 TDB
+    # No ephemeris for target "Planet-C (spacecraft)" after A.D. 2025-AUG-24 00:00:00.0000 TDB
+    # JPL's Lookup, read 2026-11-05: "Planet-C (spacecraft)", spkid -5,
+    # alias "VCO Akatsuki".
+    # JAXA's end is AFTER JPL's last day, and JPL's last weeks do not
+    # follow Venus, so the path stops at path_cutoff (below) and the marker
+    # sits there; the room's box takes the end date from mission_end (L-507;
+    # Tony, 2026-11-05: "Akatsuki stays in. mission_end = 2025-09-18", and
+    # that evening, "mission_end stays 2025-09-18 (JAXA)").
+    # Source: JAXA press release, Sept. 18, 2025,
+    # https://www.jaxa.jp/press/2025/09/20250918-2_j.html (read
+    # 2026-11-05; Japanese, translated here): JAXA "carried out the
+    # transmission shutdown of Akatsuki from 9 a.m. on September 18, 2025,
+    # and ended its operations"; Akatsuki "succeeded in entering orbit
+    # around Venus in December 2015" and observed the atmosphere of Venus
+    # for more than 8 years; "in operations at the end of April 2024 ...
+    # communication could no longer be established".
+    'mission_end': datetime(2025, 9, 18),
+    # The cutoff (L-507, more voyages; Tony, 2026-11-05, evening: "cut the
+    # path at 2024-04-26, the last day JPL's solution is fitted to
+    # tracking"). JPL's data sheet for -5, read 2026-11-05:
+    #   "Final reconstruction fit to tracking data up to 2024-Apr-26."
+    # and after it: "Preliminary solution 2024-Apr-26 to 2025-Jul-23,
+    # prediction thereafter." (trajectory *-ISAS.OEM, 2024-Apr-26 to
+    # 2025-Aug-24). The prediction stops following Venus on 2025-07-31
+    # (around the Sun 108,222,413 km on 07-30, 537,674,979 km on 07-31;
+    # 0 km from Venus from 08-07; asked 2026-11-05, reproduced by a second
+    # query), the evidence kept in
+    # documentation/WORDS_L507_more_voyages_20261105.md, section 6. The
+    # path is drawn to the last day fitted to tracking and no further
+    # (path_plan.path_stop).
+    'path_cutoff': datetime(2024, 4, 26),
+    # Tony's words for the box, after "This mission ended on 18 September
+    # 2025." The day in it must be the path's last day as the room prints
+    # it; the figures check holds the two together.
+    'cutoff_note': 'Contact was lost at the end of April 2024. The path is drawn to 26 April 2024, the last day JPL\'s solution is fitted to tracking, and the marker is where it was that day.',
+    # Tony, 2026-11-05, evening: the opening keeps 'Contact was lost at the
+    # end of April 2024', so this says only where it was (JAXA's release:
+    # in Venus orbit since December 2015).
+    'end_note': 'It was orbiting Venus at the time.',
+    'mission_info': 'Horizons: -5. JAXA\'s Venus Climate Orbiter Akatsuki studied the atmosphere of Venus from orbit, from December 2015.',
     'mission_url': 'https://en.wikipedia.org/wiki/Akatsuki_(spacecraft)'},
 
     {'name': 'Juno', 'key': 'juno', 'id': '-61', 'horizons_name': 'Juno (spacecraft)', 'var_name': 'juno_var', 'color_key': 'Juno', 'symbol': 'diamond-open', 'object_type': 'trajectory', 
@@ -1050,12 +1146,22 @@ OBJECT_DEFINITIONS = [
     'mission_info': 'Horizons: -49. NASA\'s Lucy, launched in October 2021, is on its way to the Trojan asteroids, which share an orbit around the Sun with Jupiter.', 
     'mission_url': 'https://science.nasa.gov/mission/lucy/'},
 
-    {'name': 'DART', 'id': '-135', 'var_name': 'dart_var', 'color_key': 'DART', 'symbol': 'diamond-open', 'object_type': 'trajectory', 
-    'id_type': 'id', 'is_mission': True, 'start_date': datetime(2021, 11, 25), 'end_date': datetime(2022, 9, 26), 
-    # No ephemeris for target "DART (spacecraft)" prior to A.D. 2021-NOV-24 07:16:43.8171 UT
+    {'name': 'DART', 'key': 'dart', 'id': '-135', 'horizons_name': 'DART (spacecraft)', 'var_name': 'dart_var', 'color_key': 'DART', 'symbol': 'diamond-open', 'object_type': 'trajectory',
+    'id_type': 'id', 'is_mission': True, 'start_date': datetime(2021, 11, 25),
+    # No ephemeris for target "DART (spacecraft)" prior to A.D. 2021-NOV-24 07:17:53.0000 TDB
     # Impact: 26-Sep-2022 23:14:24.183  UTC (actual)
-    'mission_info': 'Horizons: -135. NASA\'s mission to test asteroid deflection.', 
-    'mission_url': 'https://www.nasa.gov/dart'},
+    # JPL's Lookup, read 2026-11-05: "DART (spacecraft)", spkid -135.
+    # JPL's positions run on past the impact (asked 2026-11-05, they
+    # continue through 2022-09-28 and on), so the path plan stops at
+    # mission_end (L-507; Tony, 2026-11-02, "Yes stop at impact").
+    # Source: NASA, DART mission page,
+    # https://science.nasa.gov/mission/dart/ (read 2026-11-05): "On Sept.
+    # 26, 2022, DART impacted the asteroid moonlet Dimorphos" and "DART was
+    # the first-ever mission dedicated to investigating and demonstrating
+    # one method of asteroid deflection".
+    'mission_end': datetime(2022, 9, 26),
+    'mission_info': 'Horizons: -135. NASA\'s DART was the first mission to test a way of turning an asteroid aside. It struck Dimorphos, a small moon of the asteroid Didymos.',
+    'mission_url': 'https://science.nasa.gov/mission/dart/'},
 
     {'name': 'JamesWebb', 'id': '-170', 'var_name': 'jwst_var', 'color_key': 'JamesWebb', 
     'symbol': 'diamond-open', 'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2021, 12, 26), 'end_date': datetime(2030, 8, 18), 

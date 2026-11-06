@@ -80,6 +80,16 @@ WHAT IT CHECKS
          celestial_objects.py (L-476): its span is its plan's. The
          paths examined are counted, and named when one carries it.
          Planted fault: an end_date put back on Voyager 1.
+     20. Passes of the Sun inside a capture (L-507, more voyages): a
+         made-up orbiter looping a body every ten days; the capture and
+         the body's own two nearest days to the Sun are found, and only
+         the Sun pass riding the body's perihelion is kept inside it.
+         Two planted faults: the filter off, and the body's own
+         perihelion dropped too.
+     21. A cutoff (L-507, more voyages): a path is asked to the earlier
+         of its mission_end and its path_cutoff (made-up dates; Akatsuki's
+         real cutoff is 2024-04-26), and the cutoff is among the plan's
+         inputs only where set. Planted fault: the cutoff ignored.
 
 RUN COMMAND
 
@@ -113,6 +123,9 @@ Module updated: November 4, 2026 with Anthropic's Claude Opus 5.5
 Each made-up root carries data/small_body_solutions.json; Comet Two,
 typed 'orbital', is planned because its e is 1.2, and Comet Closed, at
 0.9, is not.)
+Module updated: November 5, 2026 with Anthropic's Claude Opus 5.5
+(L-507, more voyages: check 20, passes of the Sun inside a capture, with
+two planted faults; check 21, a path's cutoff, with one.)
 """
 
 import datetime
@@ -829,6 +842,69 @@ def mission_end_clip(plant=False):
     return not probs, "; ".join(probs) or "ok"
 
 
+def riding_sun_passes(plant=None):
+    """(ok, why): check 20 (L-507, more voyages). A made-up orbiter loops
+    a body every ten days for 200 days, the body's own distance from the
+    Sun least on days 50 and 150. capture_spans finds the one capture,
+    with the body's two nearest days; riding_passes then keeps the Sun
+    passes outside it (day -5) and the one riding the body's perihelion
+    (day 50.3), and drops the loop's (day 20). plant 'off' keeps every
+    pass; plant 'all' drops the body's own perihelion too."""
+    body, path = [], []
+    for t in range(0, 201):
+        r = 1.0 + 0.01 * math.cos(2 * math.pi * t / 100.0)
+        bx, by = r, 0.0
+        body.append((float(t), bx, by, 0.0, 0.0, 0.017, 0.0))
+        a = 2 * math.pi * t / 10.0
+        rad = 0.001 * (1.0 + 0.5 * math.cos(a))
+        path.append((float(t), bx + rad * math.cos(a), by + rad * math.sin(a),
+                     0.0, -0.003 * math.sin(a), 0.017 + 0.003 * math.cos(a),
+                     0.0))
+    held = pp.capture_spans(path, body, lambda jd: 1.0e6, "Planet")
+    if len(held) != 1 or held[0][2] != "Planet":
+        return False, "captures found: %r" % ([h[:3] for h in held],)
+    own = [round(d) for d in held[0][3]]
+    if own != [50, 150]:
+        return False, "the body's own nearest days: %r" % own
+    near = [(-5.0, 1, 1, "perihelion", False),
+            (20.0, 1, 1, "perihelion", False),
+            (50.3, 1, 1, "perihelion", False)]
+    if plant == "off":
+        kept, dropped = near, 0
+    elif plant == "all":
+        kept = [c for c in near if not (held[0][0] <= c[0] <= held[0][1])]
+        dropped = len(near) - len(kept)
+    else:
+        kept, dropped = pp.riding_passes(near, held)
+    days = [c[0] for c in kept]
+    if days != [-5.0, 50.3] or dropped != 1:
+        return False, "kept %r, dropped %d" % (days, dropped)
+    return True, "one capture, days %.0f to %.0f; kept days -5 and 50.3, " \
+                 "dropped day 20" % (held[0][0], held[0][1])
+
+
+def cutoff_stop(plant=False):
+    """(ok, why): check 21 (L-507, more voyages). path_stop asks a path to
+    the earlier of its mission_end and its path_cutoff, else FAR_STOP;
+    and a cutoff is among the plan's inputs only where it is set. plant
+    True stands in a path_stop that ignores the cutoff."""
+    d = datetime.datetime
+    both = {"mission_end": d(2025, 9, 18), "path_cutoff": d(2025, 7, 23)}
+    stop = ((lambda p: p["mission_end"].date() if p.get("mission_end")
+             else pp.FAR_STOP) if plant else pp.path_stop)
+    got = (stop(both), stop({"mission_end": d(2003, 9, 21)}), stop({}))
+    want = (datetime.date(2025, 7, 23), datetime.date(2003, 9, 21),
+            pp.FAR_STOP)
+    if got != want:
+        return False, "stops %r, not %r" % (got, want)
+    base = {"id": "-5", "start_date": d(2010, 5, 22)}
+    if ("path_cutoff" in pp.plan_inputs(base, [])
+            or pp.plan_inputs(dict(base, **both), [])["path_cutoff"]
+            != "2025-07-23"):
+        return False, "the cutoff is not among the inputs only where set"
+    return True, "2025-07-23 for a cutoff before the end, the end alone "                  "otherwise, FAR_STOP for neither"
+
+
 def no_typed_ends(plant=False):
     """(ok, why): the real list's planned paths carry no end_date
     (L-476). Planted fault: one put back on Voyager 1."""
@@ -919,6 +995,18 @@ def main():
               "celestial_objects.py (%s)" % why)
     check(not no_typed_ends(plant=True)[0],
           "19. planted fault caught: an end_date put back on Voyager 1")
+    ok, why = riding_sun_passes()
+    check(ok, "20. inside a capture, a pass of the Sun is an event only "
+              "where the body passes the Sun too (%s)" % why)
+    for name, plant in (("the filter off", "off"),
+                        ("the body's own perihelion dropped too", "all")):
+        check(not riding_sun_passes(plant=plant)[0],
+              "20. planted fault caught: %s" % name)
+    ok, why = cutoff_stop()
+    check(ok, "21. a path is asked to the earlier of its mission_end and "
+              "its path_cutoff (%s)" % why)
+    check(not cutoff_stop(plant=True)[0],
+          "21. planted fault caught: the cutoff ignored")
     for name, plant in (("the backbone's step set to nothing",
                          plant_no_backbone),
                         ("the fine pass skipped", plant_no_fine_pass)):

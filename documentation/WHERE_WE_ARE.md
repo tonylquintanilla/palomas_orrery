@@ -1,24 +1,27 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 5, 2026, afternoon: the coordinating session (Opus) for stage 13's quick wins.
-- Written at orrery ca4dceea and gallery 3660993, read live.
+Last updated: November 5, 2026, evening: the Code session (Opus) for the ended missions.
+- Written at orrery fb0a8dce and gallery 3660993, plus this session's edits (not pushed).
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The copying tool now follows the e rule by itself, both ways
->   (website 3660993). A comet that crosses e = 1 no longer stops a
->   night. It leaves the body's drawer row for a person, and says so.
-> - The ended missions, your ruling: a craft that flew on stops on the
->   day its mission ended, and the words say it still flies, untracked.
+> - Five more ended missions are built: Pioneer 10 and 11, Rosetta,
+>   DART, and Akatsuki cut on 26 April 2024, as you ruled. Not pushed.
+> - An orbiter's loops around a planet are no longer passes of the Sun.
 >
-> **Do next:** *the Code session for the ended missions, from its brief
-> `COORD_L507_historical_missions_more_voyages_brief_20261105.md`.*
+> **Do next:** *steps 2 to 5 below; steps 2 to 4 in one sitting,
+> before 08:17 UTC, or the website's night stops at its mirror.*
 >
 > **Needs you now:**
-> - *(do) Each morning, Pull origin on both, orrery then website, first;
->   do not wait for the night, which GitHub starts hours late or drops.*
+> - *1. Done: you approved the words file (Nov 5, evening).*
+> - *2. (do) Commit and push the orrery, not during the website's night.*
+> - *3. (do) The website's Daily Run, from the dashboard: last lines all
+>   green, the swap log's last build "ok". Red: stop, paste me the lines.*
+> - *4. (do) Only then commit and push the website's whole change list.*
+> - *5. (do) Phone look: the five ticked from Historical missions.*
+> - *(do) Each morning, Pull origin on both, orrery then website, first.*
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
@@ -29,10 +32,10 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
                Earth's slices, historical missions' slice 1, the paths by
                the plan (L-476), path or orbit by e (L-510), A1 and A2
                of JPL's fallbacks (L-512), a green website night.
- 13.   [NOW]   *Quick wins:* the copying tool follows the e rule, done
-               Nov 5 (L-510 (the typed fields stop deciding)); now the
-               ended missions Pioneer 10 and 11, Rosetta, DART and
-               Akatsuki (L-507 (historical missions)). << moved this session
+ 13.   [NOW]   *Quick wins:* the e rule, done (L-510 (the typed fields));
+               five ended missions, built, waiting for your words and push
+               (L-507 (historical missions)); then the desktop's ended
+               markers (L-476 (the paths by the plan)). << moved this session
  14.   [next]  Standards: the Moon gets the orrery's words, link, period
                and uncertainty; the Pluto row's drawing and name, your ruling.
  15.   [later] The planet rooms in order, each opening with the planet
@@ -50,8 +53,7 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
 
 ## Settled  **>> UPDATED THIS SESSION**
 
-Standing rulings. A line leaves after a few weeks, once it is habit, or
-once a skill or the protocol carries it (trimmed Nov 3, night).
+Standing rulings; a line leaves once it is habit, or a skill carries it.
 - A craft that flew on: path stops on its mission's last day; words say still flying, untracked (Nov 5).
 - A small body is a path at or above e 1 in JPL's database, every 30
   days, else an orbit; two sides of 1 refuse the drawing; the website
@@ -61,7 +63,6 @@ once a skill or the protocol carries it (trimmed Nov 3, night).
   item); the check covers only what both draw; a spacecraft's span is
   JPL's first and last day.
 - Obsolete code is marked, not deleted, until a talk rules (Nov 3).
-- An ended mission's line stays solid, like a flown path (Nov 3).
 - The Sun and Earth slices are closed; what is left is enhancements
   (Nov 2).
 - A held body is loud until a ledger item names it, then quiet with the
@@ -87,15 +88,16 @@ Waiting behind other work; a line leaves when picked up.
   the Earth room first, with slice 2 (L-507 (historical missions));
   Apollo 11's S-IVB with them (Nov 5).
 - A body crossing e = 1: its drawer row waits for JPL's class (L-510 (the typed fields), Nov 5).
+- A craft riding a planet on 7-day points cuts corners between windows:
+  a later item on L-507 (historical missions) (Nov 5).
 - L-490 (the legacy list); L-499 (kinds of session); L-471 (a delivered
   patch is final), for safe-file-editing's next version.
 
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261105T200309Z, ok, no retry (swap log at gallery
-  3660993).
-- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md, generated Nov 4).
+- Last cache build: 20261105T200309Z, ok, no retry (gallery swap log, Nov 5).
+- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md, generated Nov 5).
 - This page's date and the ledger's newest stamp: both Nov 5. Agree.
 
 ## Waiting on you
@@ -121,8 +123,7 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- This session: your run record `WHERE_WE_ARE_11-5-26_1458_run_record.md`;
-  the website's `patch_L510_3_mirror_follows_e_rule.py`; the brief
+- This session: `WORDS_L507_more_voyages_20261105.md` and the brief
   `COORD_L507_historical_missions_more_voyages_brief_20261105.md`.
 - The talk's rulings: `DESIGN_L484_consistency_rulings_20261103.md`.
 - The door: `documentation/python_work_door/`, and L-499 (kinds of session).
