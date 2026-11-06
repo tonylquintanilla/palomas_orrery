@@ -12,15 +12,15 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 178  
-**Total Lines of Code (non-blank):** 141,153  
-**Total Public Functions/Classes:** 1,821
+**Total Lines of Code (non-blank):** 140,844  
+**Total Public Functions/Classes:** 1,822
 
 ## Classification Coverage
 
 **Undetermined role (11).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
-- `patch_L476_4_ended_markers.py`
+- `patch_L476_5_animation_scale_and_settings.py`
 - `patch_L506_2_method_table.py`
 - `path_drawing.py`
 - `test_drawings_export.py`
@@ -33,7 +33,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 **Undetermined domain (4).** No valid `Domain:` tag.
 
-- `patch_L476_4_ended_markers.py`
+- `patch_L476_5_animation_scale_and_settings.py`
 - `patch_L506_2_method_table.py`
 - `path_drawing.py`
 - `test_path_drawing.py`
@@ -48,7 +48,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `earth_system_controller.py` | KMZ layer selector for Google Earth Pro. (131 lines) |
 | `earth_system_visualization_gui.py` | Earth System Visualization GUI for Paloma's Orrery Hub window with climate data visualizations (1,903 lines) |
 | `orbital_param_viz.py` | Interactive orbital element visualization tool. (1,965 lines) |
-| `palomas_orrery.py` | Main GUI and plotting engine for Paloma's Orrery. (9,766 lines) |
+| `palomas_orrery.py` | Main GUI and plotting engine for Paloma's Orrery. (9,830 lines) |
 | `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (3,536 lines) |
 | `star_visualization_gui.py` | Stellar visualization GUI for Paloma's Orrery. (1,409 lines) |
 
@@ -283,7 +283,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (136 lines) |
-| `patch_L476_4_ended_markers.py` | - L-476 (the orrery plots by the path plan): an ended mission's marker on its last day in the desktop's static plot and animation, and its line ending there. With the records for this session: L-476, L-423 (the website's checks) and Where We Are. (846 lines) |
+| `patch_L476_5_animation_scale_and_settings.py` | - L-476 (the orrery plots by the path plan), after Tony's look of Nov 6: the animation's Auto scale counts a spacecraft, and a settings box that cannot be read is named instead of a silent stop. With the records: L-476 and Where We Are. (473 lines) |
 | `patch_L506_2_method_table.py` | - L-506 (token economy), second slice. (361 lines) |
 | `path_drawing.py` | The orrery draws a planned path by its path plan (L-476): a spacecraft's flown and planned trajectory, or a comet on an open path, around the Sun. (370 lines) |
 | `test_drawings_export.py` | Each stored drawing in data/drawings/ is the drawing its rows give today, git tracks it, and each check can fail. (524 lines) |

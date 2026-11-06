@@ -1,26 +1,25 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 6, 2026, afternoon: the coordinating session (Opus), two quick fixes.
-- Written at orrery 01b2120 and gallery 8ff3e74, plus this session's two patches.
+Last updated: November 6, 2026, late afternoon: the coordinating session (Opus), after your look.
+- Written at orrery d9db340 and gallery 6c93d0a, plus this session's third patch.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The website's live check reads its 32 positions files from the config.
-> - The desktop puts an ended mission's marker on its last day, and
->   its line now ends there (your ruling). Both are patches, not run.
+> - Both fixes are pushed and your look passed: the live check, and
+>   ended missions' markers on their last day.
+> - The animation's Auto scale now counts spacecraft; an unreadable
+>   settings box is named instead of a silent stop. Patch, not run.
 >
-> **Do next:** *steps 1 to 5 below, in order.*
+> **Do next:** *steps 1 to 4 below, in order.*
 >
 > **Needs you now:**
-> - *1. (do) Website: run `patch_L423_positions_from_config.py`, then
->   tools/test_served_list.py: "SERVED LIST: all 7 checks passed".*
-> - *2. (do) Orrery: run `patch_L476_4_ended_markers.py`, then the
->   maintenance run from the dashboard: all gating checkers passed.*
-> - *3. (do) Look: Pioneer 10 and Galileo, Sun-centred, plot and animation.*
-> - *4. (do) Commit and push both, not during the website's night.*
-> - *5. (do) After the push, the website's live run: 32 positions files.*
+> - *1. (do) Orrery: run `patch_L476_5_animation_scale_and_settings.py`,
+>   then the maintenance run from the dashboard: all gating checkers passed.*
+> - *2. (do) Look: the same animation on Auto scale: about 98 AU.*
+> - *3. (do) Commit and push the orrery, not during the website's night.*
+> - *4. Then L-476 (the paths by the plan) closes.*
 > - *(do) Each morning, Pull origin on both, orrery then website, first.*
 
 *Italic* lines are the must-reads. Marks reset at every update.
@@ -32,9 +31,9 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
                Earth's slices, historical missions' slice 1, the paths by
                the plan (L-476), path or orbit by e (L-510), A1 and A2
                of JPL's fallbacks (L-512), a green website night.
- 13.   [NOW]   *Quick wins:* the desktop's ended markers (L-476 (the paths
-               by the plan)) and the live check's list (L-423 (the
-               website's checks)), built, for your look and push. << moved this session
+ 13.   [NOW]   *Quick wins:* the live check's list, done (L-423 (the
+               website's checks)); the ended markers, done, and the
+               animation's scale, for your look (L-476 (the paths by the plan)).
  14.   [next]  Standards: the Moon gets the orrery's words, link, period
                and uncertainty; the Pluto row's drawing and name, your ruling.
  15.   [later] The planet rooms in order, each opening with the planet
@@ -50,7 +49,7 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
                L-423 (the website's checks) item 3; L-357 (stale gallery
                artifacts); L-509 (obsolete code), after its talk.
 
-## Settled  **>> UPDATED THIS SESSION**
+## Settled
 
 Standing rulings; a line leaves once it is habit, or a skill carries it.
 - An ended mission's line ends at its marker on its last day, desktop as website (Nov 6).
@@ -96,8 +95,8 @@ Waiting behind other work; a line leaves when picked up.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261106T155752Z, ok, no retry (gallery swap log at 8ff3e74).
-- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md, tested copy, Nov 6).
+- Last cache build: 20261106T192923Z, ok, no retry (gallery swap log at 6c93d0a).
+- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at d9db340, Nov 6).
 - This page's date and the ledger's newest stamp: both Nov 6. Agree.
 
 ## Waiting on you
@@ -123,8 +122,9 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- This session: the website's `patch_L423_positions_from_config.py`
-  and the orrery's `patch_L476_4_ended_markers.py`.
+- This session: your run record `WHERE_WE_ARE_11-6-26_1010_run_record.md`;
+  the patches `patch_L423_positions_from_config.py` (website),
+  `patch_L476_4_ended_markers.py` and `patch_L476_5_...` (orrery).
 - The talk's rulings: `DESIGN_L484_consistency_rulings_20261103.md`.
 - The door: `documentation/python_work_door/`, and L-499 (kinds of session).
 

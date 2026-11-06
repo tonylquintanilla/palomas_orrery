@@ -749,18 +749,1005 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
      day (2003-01-23 and 2003-09-21). Then an animation across
      2003 by year: after its last day each marker stays put. -- yes
   3. Move this patch into documentation\, then commit and push
-     the orrery and the website, not during the website's night.
+     the orrery and the website, not during the website's night. -- d9db3400113bcaf2dac2c2fd4b3be4018509f4b2
 Not changed, and named: skills/horizons-orbital-mechanics/SKILL.md still says the drawing leaves out the last-day pair;
 carried on L-476 for its next version.
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
 1. Your look:
    - Pioneer 10 and Galileo, centred on the Sun, today's date, Plot: each marker at the end of its line, its hover giving its last day.
-   - Then an animation by year across 2003: each marker stays put after its last day.
+   - Then an animation by year across 2003: each marker stays put after its last day. 
+
+Working directory set to: C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github
+Interpreter: C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe
+Working directory: C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github
+Window config file: C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\window_config.json
+Restored window geometry: 1536x793+0+5
+Window will be maximized
+[DEBUG] Sun can be center (numeric ID: 10)
+[DEBUG] Mercury can be center (numeric ID: 199)
+[DEBUG] Venus can be center (numeric ID: 299)
+[DEBUG] Apophis can be center (has center_id)
+[DEBUG] Earth can be center (numeric ID: 399)
+[DEBUG] Moon can be center (numeric ID: 301)
+[DEBUG] Earth-Moon Barycenter can be center (numeric ID: 3)
+[DEBUG] EM-L1 can be center (numeric ID: 3011)
+[DEBUG] EM-L2 can be center (numeric ID: 3012)
+[DEBUG] EM-L3 can be center (numeric ID: 3013)
+[DEBUG] EM-L4 can be center (numeric ID: 3014)
+[DEBUG] EM-L5 can be center (numeric ID: 3015)
+[DEBUG] L1 can be center (numeric ID: 31)
+[DEBUG] L2 can be center (numeric ID: 32)
+[DEBUG] L3 can be center (numeric ID: 33)
+[DEBUG] L4 can be center (numeric ID: 34)
+[DEBUG] L5 can be center (numeric ID: 35)
+[DEBUG] Bennu can be center (has center_id)
+[DEBUG] Itokawa can be center (has center_id)
+[DEBUG] Ryugu can be center (has center_id)
+[DEBUG] Eros can be center (has center_id)
+[DEBUG] Mars can be center (numeric ID: 499)
+[DEBUG] Phobos can be center (numeric ID: 401)
+[DEBUG] Deimos can be center (numeric ID: 402)
+[DEBUG] Dinkinesh can be center (has center_id)
+[DEBUG] Vesta can be center (has center_id)
+[DEBUG] Donaldjohanson can be center (has center_id)
+[DEBUG] Ceres can be center (has center_id)
+[DEBUG] 16 Psyche can be center (has center_id)
+[DEBUG] Orus can be center (has center_id)
+[DEBUG] Polymele can be center (has center_id)
+[DEBUG] Eurybates can be center (has center_id)
+[DEBUG] Patroclus-Menoetius Barycenter can be center (numeric ID: 20000617)
+[DEBUG] Patroclus can be center (has center_id)
+[DEBUG] Menoetius can be center (has center_id)
+[DEBUG] Leucus can be center (has center_id)
+[DEBUG] Jupiter can be center (numeric ID: 599)
+[DEBUG] Metis can be center (numeric ID: 516)
+[DEBUG] Adrastea can be center (numeric ID: 515)
+[DEBUG] Amalthea can be center (numeric ID: 505)
+[DEBUG] Thebe can be center (numeric ID: 514)
+[DEBUG] Io can be center (numeric ID: 501)
+[DEBUG] Europa can be center (numeric ID: 502)
+[DEBUG] Ganymede can be center (numeric ID: 503)
+[DEBUG] Callisto can be center (numeric ID: 504)
+[DEBUG] Saturn can be center (numeric ID: 699)
+[DEBUG] Pan can be center (numeric ID: 618)
+[DEBUG] Daphnis can be center (numeric ID: 635)
+[DEBUG] Prometheus can be center (numeric ID: 616)
+[DEBUG] Pandora can be center (numeric ID: 617)
+[DEBUG] Mimas can be center (numeric ID: 601)
+[DEBUG] Enceladus can be center (numeric ID: 602)
+[DEBUG] Tethys can be center (numeric ID: 603)
+[DEBUG] Dione can be center (numeric ID: 604)
+[DEBUG] Rhea can be center (numeric ID: 605)
+[DEBUG] Titan can be center (numeric ID: 606)
+[DEBUG] Hyperion can be center (numeric ID: 607)
+[DEBUG] Iapetus can be center (numeric ID: 608)
+[DEBUG] Phoebe can be center (numeric ID: 609)
+[DEBUG] Uranus can be center (numeric ID: 799)
+[DEBUG] Ariel can be center (numeric ID: 701)
+[DEBUG] Umbriel can be center (numeric ID: 702)
+[DEBUG] Titania can be center (numeric ID: 703)
+[DEBUG] Oberon can be center (numeric ID: 704)
+[DEBUG] Miranda can be center (numeric ID: 705)
+[DEBUG] Portia can be center (numeric ID: 712)
+[DEBUG] Mab can be center (numeric ID: 726)
+[DEBUG] Neptune can be center (numeric ID: 899)
+[DEBUG] Triton can be center (numeric ID: 801)
+[DEBUG] Despina can be center (numeric ID: 805)
+[DEBUG] Galatea can be center (numeric ID: 806)
+[DEBUG] Pluto-Charon Barycenter can be center (numeric ID: 9)
+[DEBUG] Pluto can be center (numeric ID: 999)
+[DEBUG] Charon can be center (numeric ID: 901)
+[DEBUG] Styx can be center (numeric ID: 905)
+[DEBUG] Nix can be center (numeric ID: 902)
+[DEBUG] Kerberos can be center (numeric ID: 904)
+[DEBUG] Hydra can be center (numeric ID: 903)
+[DEBUG] Orcus-Vanth Barycenter can be center (numeric ID: 20090482)
+[DEBUG] Orcus can be center (has center_id)
+[DEBUG] Vanth can be center (has center_id)
+[DEBUG] Haumea can be center (has center_id)
+[DEBUG] Hi'iaka can be center (has center_id)
+[DEBUG] Namaka can be center (has center_id)
+[DEBUG] Quaoar can be center (has center_id)
+[DEBUG] Weywot can be center (has center_id)
+[DEBUG] Arrokoth can be center (has center_id)
+[DEBUG] Makemake can be center (numeric ID: 20136472)
+[DEBUG] MK2 can be center (numeric ID: 120136472)
+[DEBUG] Gonggong can be center (has center_id)
+[DEBUG] Xiangliu can be center (has center_id)
+[DEBUG] Eris can be center (has center_id)
+[DEBUG] Dysnomia can be center (has center_id)
+[CENTER MENU] Dynamic center dropdown initialized (starts with Sun only)
+[DASHBOARD] Dashboard ready.
+[CENTER MENU] Added traces to 184 object variables
+Restored sash positions: [489, 1013]
+[DEBUG] Sun can be center (numeric ID: 10)
+[CENTER MENU] Dynamic centers: Sun + ['Sun']
+[DEBUG] Sun can be center (numeric ID: 10)
+[CENTER MENU] Dynamic centers: Sun + ['Sun']
+[get_interval_settings] Read days_to_plot: 28
+[INFO] Animation days_to_plot: calculated=9524.000000 days (13714560.0 min), GUI shows=28 days
+Days to Plot: 9524.0
+Number of Frames: 29
+Animation Step: Year
+==================================================
+  Pioneer 10: 3 dates
+  Galileo: 3 dates
+WARNING: AstropyDeprecationWarning: ``id_type``s 'majorbody' and 'id' are deprecated and replaced with ``None``, which has the same functionality. [astroquery.jplhorizons.core]
+WARNING: AstropyDeprecationWarning: ``id_type``s 'majorbody' and 'id' are deprecated and replaced with ``None``, which has the same functionality. [astroquery.jplhorizons.core]
+
+Processing trajectory for -23:
+Requested epochs: 3
+Returned vectors: 3
+Direct position matches: 3
+Interpolated positions: 0
+Final coverage: 3/3 epochs
+[ENDED MISSION] Pioneer 10: marker held on its last day, 2003-01-23, for 26 frame(s) after it
+WARNING: AstropyDeprecationWarning: ``id_type``s 'majorbody' and 'id' are deprecated and replaced with ``None``, which has the same functionality. [astroquery.jplhorizons.core]
+WARNING: AstropyDeprecationWarning: ``id_type``s 'majorbody' and 'id' are deprecated and replaced with ``None``, which has the same functionality. [astroquery.jplhorizons.core]
+
+Processing trajectory for -77:
+Requested epochs: 3
+Returned vectors: 3
+Direct position matches: 3
+Interpolated positions: 0
+Final coverage: 3/3 epochs
+[ENDED MISSION] Galileo: marker held on its last day, 2003-09-21, for 26 frame(s) after it
+Full hover text: <b>Sun</b><br>Sky position seen from Earth:<br>Right Ascension: 14h 49m 08.335s<br>Declination: -16 deg 15' 41.29"<br>Uncertainty: none given by JPL with this position<br><br>Distance from Center: 0.00000000 AU<br>Distance: 0 kilometers<br>Distance: 0.0000000 light-minutes<br>Velocity: N/A AU/day<br>Velocity: N/A km/hr (N/A km/sec)<br>This body is the center of the plot.<br>Orbital period: N/A<br>Horizons: 10. NASA: "The Sun's gravity holds the solar system together, keeping<br>everything in its orbit."
+Minimal hover text: <b>Sun</b><br>Sky position seen from Earth: RA 14h 49m 08.335s, Dec -16 deg 15' 41.29"<br>Uncertainty: none given by JPL with this position
+[TRAJECTORY] Pioneer 10 context: 51 points over 11282.0 days (full mission)
+[TRAJECTORY] Pioneer 10 detail: 51 points over 807.1 days (plotted period)
+[TRAJECTORY] Galileo context: 51 points over 5084.0 days (full mission)
+[TRAJECTORY] Galileo detail: 51 points over 1048.1 days (plotted period)
+
+[TRAJECTORY CONTEXT] Plotting 2 full mission trajectories...
+[PATH PLAN] Pioneer 10: 54 points by its plan made 2026-11-05, 1972-03-04 to 2003-01-23
+-> Added closest plotted marker for Pioneer 10 to Sun: 0.992010 AU on 1972-03-04 00:00:00 UTC
+[PATH PLAN] Galileo: 305 points by its plan made 2026-11-04, 1989-10-20 to 2003-09-21
+-> Added closest plotted marker for Galileo to Sun: 0.698589 AU on 1990-02-26 00:00:00 UTC
+[NORMAL MODE] Using dates_lists for plot_actual_orbits
+[NORMAL MODE] Pioneer 10: 51 dates from 2000-11-06 20:46:00 to 2003-01-22 23:58:51
+WARNING: AstropyDeprecationWarning: ``id_type``s 'majorbody' and 'id' are deprecated and replaced with ``None``, which has the same functionality. [astroquery.jplhorizons.core]
+
+Processing trajectory for -23:
+Requested epochs: 51
+Returned vectors: 51
+Direct position matches: 51
+Interpolated positions: 0
+Final coverage: 51/51 epochs
+[NORMAL MODE] Plotted Pioneer 10 orbit with 51 points
+-> Added closest plotted marker for Pioneer 10 to Sun: 76.451571 AU on 2000-11-06 20:46:00 UTC
+[NORMAL MODE] Galileo: 51 dates from 2000-11-06 20:46:00 to 2003-09-20 23:58:51
+WARNING: AstropyDeprecationWarning: ``id_type``s 'majorbody' and 'id' are deprecated and replaced with ``None``, which has the same functionality. [astroquery.jplhorizons.core]
+
+Processing trajectory for -77:
+Requested epochs: 51
+Returned vectors: 51
+Direct position matches: 51
+Interpolated positions: 0
+Final coverage: 51/51 epochs
+[NORMAL MODE] Plotted Galileo orbit with 51 points
+-> Added closest plotted marker for Galileo to Sun: 5.029573 AU on 2001-01-08 18:04:46 UTC
+  Trace 0: Sun (Scatter3d, mode: markers)
+  Trace 1: Pioneer 10 Full Mission (Scatter3d, mode: lines)
+  Trace 2:  (Scatter3d, mode: markers)
+  Trace 3: Pioneer 10 Closest Full Mission Point (Scatter3d, mode: markers)
+  Trace 4: Galileo Full Mission (Scatter3d, mode: lines)
+  Trace 5:  (Scatter3d, mode: markers)
+  Trace 6: Galileo Closest Full Mission Point (Scatter3d, mode: markers)
+  Trace 7: Pioneer 10 Plotted Period (Scatter3d, mode: lines)
+  Trace 8:  (Scatter3d, mode: markers)
+  Trace 9: Pioneer 10 Closest Plotted Period Point (Scatter3d, mode: markers)
+  Trace 10: Galileo Plotted Period (Scatter3d, mode: lines)
+  Trace 11:  (Scatter3d, mode: markers)
+  Trace 12: Galileo Closest Plotted Period Point (Scatter3d, mode: markers)
+
+Keplerian Orbit Summary:
+Plotted Keplerian orbits for 0 objects:
+
+Skipped Keplerian orbits for:
+
+No_params (2):
+  - Pioneer 10
+  - Galileo
+  Trace 0: Sun
+  Trace 1: Pioneer 10 Full Mission
+  Trace 2:
+  Trace 3: Pioneer 10 Closest Full Mission Point
+  Trace 4: Galileo Full Mission
+  Trace 5:
+  Trace 6: Galileo Closest Full Mission Point
+  Trace 7: Pioneer 10 Plotted Period
+  Trace 8:
+  Trace 9: Pioneer 10 Closest Plotted Period Point
+  Trace 10: Galileo Plotted Period
+  Trace 11:
+  Trace 12: Galileo Closest Plotted Period Point
+
+[COMET TAILS] Adding comet tails for animation initial state (date: 2000-11-06 20:46:00)
+No orbital data available; the view is sized by what else is drawn
+[ANIMATION] Static shell traces (before fence): 1
+[ANIMATION] Frame-updated traces: 2; constant traces excluded from frames: 12
+No orbital data available; the view is sized by what else is drawn
+[Camera Buttons] Auto-detected 2 target objects from positions
+[Camera Buttons] Added dropdown with 3 view options
+[Fly To Buttons] Auto-detected 2 target objects from positions
+[Fly To Buttons] Added dropdown with 3 fly-to options
+Visualization opened in browser
+Saving HTML (~10 KB + plot data, needs internet) to C:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_images/Sun_system_animation_20261106_2046_pioneer10_galileo.html...
+HTML saved successfully.
+Window config saved to C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\window_config.json
+[DEBUG] Sun can be center (numeric ID: 10)
+[CENTER MENU] Dynamic centers: Sun + ['Sun']
+[DEBUG] Sun can be center (numeric ID: 10)
+[DEBUG] Jupiter can be center (numeric ID: 599)
+[CENTER MENU] Dynamic centers: Sun + ['Sun', 'Jupiter']
+
+[ANIMATION PRE-FETCH] Checking osculating elements for 1 objects...
+[ANIMATION PRE-FETCH] Using Horizons ID: 599 (type: None)
+User chose to update Jupiter
+  Using Horizons ID: 599 (id_type: None)
+[...] Fetching osculating elements for Jupiter from JPL Horizons...
+   Using Horizons ID: 599 (id_type: None)
+  [Horizons Query] ID: 599 | Type: None | Location: @sun | Date: 2000-11-06 20:47
+  [L-431 period] 599: the elements fetch gave PR 4334.771877 d, the period query 4334.771877 d -- agree
+[OK] Period for Jupiter: 4334.771876986341 d around @sun (change in a year 0.45732651117850764 d; not a small body; SBDB not asked)
+[OK] Fetched elements (solution date: 2026-11-06)
+  Rotated: osculating_cache_backup.json [OK] osculating_cache_backup_old.json
+  Backed up: osculating_cache.json [OK] osculating_cache_backup.json
+[OK] Saved: osculating_cache.json (2-gen protected)
+[ANIMATION PRE-FETCH] OK: Jupiter: Updated
+[get_interval_settings] Read days_to_plot: 28
+Days to Plot: 28.0
+Number of Frames: 29
+Animation Step: Year
+==================================================
+  Jupiter: 29 dates
+  Pioneer 10: 3 dates
+  Galileo: 3 dates
+WARNING: AstropyDeprecationWarning: ``id_type``s 'majorbody' and 'id' are deprecated and replaced with ``None``, which has the same functionality. [astroquery.jplhorizons.core]
+WARNING: AstropyDeprecationWarning: ``id_type``s 'majorbody' and 'id' are deprecated and replaced with ``None``, which has the same functionality. [astroquery.jplhorizons.core]
+
+Processing trajectory for 599:
+Requested epochs: 29
+Returned vectors: 29
+Direct position matches: 29
+Interpolated positions: 0
+Final coverage: 29/29 epochs
+
+Processing trajectory for -23:
+Requested epochs: 3
+Returned vectors: 3
+Direct position matches: 3
+Interpolated positions: 0
+Final coverage: 3/3 epochs
+[ENDED MISSION] Pioneer 10: marker held on its last day, 2003-01-23, for 26 frame(s) after it
+WARNING: AstropyDeprecationWarning: ``id_type``s 'majorbody' and 'id' are deprecated and replaced with ``None``, which has the same functionality. [astroquery.jplhorizons.core]
+WARNING: AstropyDeprecationWarning: ``id_type``s 'majorbody' and 'id' are deprecated and replaced with ``None``, which has the same functionality. [astroquery.jplhorizons.core]
+
+Processing trajectory for -77:
+Requested epochs: 3
+Returned vectors: 3
+Direct position matches: 3
+Interpolated positions: 0
+Final coverage: 3/3 epochs
+[ENDED MISSION] Galileo: marker held on its last day, 2003-09-21, for 26 frame(s) after it
+Full hover text: <b>Sun</b><br>Sky position seen from Earth:<br>Right Ascension: 14h 49m 08.335s<br>Declination: -16 deg 15' 41.29"<br>Uncertainty: none given by JPL with this position<br><br>Distance from Center: 0.00000000 AU<br>Distance: 0 kilometers<br>Distance: 0.0000000 light-minutes<br>Velocity: N/A AU/day<br>Velocity: N/A km/hr (N/A km/sec)<br>This body is the center of the plot.<br>Orbital period: N/A<br>Horizons: 10. NASA: "The Sun's gravity holds the solar system together, keeping<br>everything in its orbit."
+Minimal hover text: <b>Sun</b><br>Sky position seen from Earth: RA 14h 49m 08.335s, Dec -16 deg 15' 41.29"<br>Uncertainty: none given by JPL with this position
+[TRAJECTORY] Pioneer 10 context: 51 points over 11282.0 days (full mission)
+[TRAJECTORY] Pioneer 10 detail: 51 points over 807.1 days (plotted period)
+[TRAJECTORY] Galileo context: 51 points over 5084.0 days (full mission)
+[TRAJECTORY] Galileo detail: 51 points over 1048.1 days (plotted period)
+
+[TRAJECTORY CONTEXT] Plotting 2 full mission trajectories...
+-> Added closest plotted marker for Pioneer 10 to Sun: 0.992010 AU on 1972-03-04 00:00:00 UTC
+-> Added closest plotted marker for Galileo to Sun: 0.698589 AU on 1990-02-26 00:00:00 UTC
+[NORMAL MODE] Using dates_lists for plot_actual_orbits
+[NORMAL MODE] Jupiter: 51 dates from 2000-11-06 20:46:00 to 2028-11-06 20:46:00
+
+Processing trajectory for 599:
+Requested epochs: 51
+Returned vectors: 51
+Direct position matches: 51
+Interpolated positions: 0
+Final coverage: 51/51 epochs
+[NORMAL MODE] Plotted Jupiter orbit with 51 points
+-> Added closest plotted marker for Jupiter to Sun: 4.951415 AU on 2010-12-06 14:02:48 UTC
+[NORMAL MODE] Pioneer 10: 51 dates from 2000-11-06 20:46:00 to 2003-01-22 23:58:51
+WARNING: AstropyDeprecationWarning: ``id_type``s 'majorbody' and 'id' are deprecated and replaced with ``None``, which has the same functionality. [astroquery.jplhorizons.core]
+
+Processing trajectory for -23:
+Requested epochs: 51
+Returned vectors: 51
+Direct position matches: 51
+Interpolated positions: 0
+Final coverage: 51/51 epochs
+[NORMAL MODE] Plotted Pioneer 10 orbit with 51 points
+-> Added closest plotted marker for Pioneer 10 to Sun: 76.451571 AU on 2000-11-06 20:46:00 UTC
+[NORMAL MODE] Galileo: 51 dates from 2000-11-06 20:46:00 to 2003-09-20 23:58:51
+WARNING: AstropyDeprecationWarning: ``id_type``s 'majorbody' and 'id' are deprecated and replaced with ``None``, which has the same functionality. [astroquery.jplhorizons.core]
+
+Processing trajectory for -77:
+Requested epochs: 51
+Returned vectors: 51
+Direct position matches: 51
+Interpolated positions: 0
+Final coverage: 51/51 epochs
+[NORMAL MODE] Plotted Galileo orbit with 51 points
+-> Added closest plotted marker for Galileo to Sun: 5.029573 AU on 2001-01-08 18:04:46 UTC
+  Trace 0: Sun (Scatter3d, mode: markers)
+  Trace 1: Pioneer 10 Full Mission (Scatter3d, mode: lines)
+  Trace 2:  (Scatter3d, mode: markers)
+  Trace 3: Pioneer 10 Closest Full Mission Point (Scatter3d, mode: markers)
+  Trace 4: Galileo Full Mission (Scatter3d, mode: lines)
+  Trace 5:  (Scatter3d, mode: markers)
+  Trace 6: Galileo Closest Full Mission Point (Scatter3d, mode: markers)
+  Trace 7: Jupiter Actual Orbit (Scatter3d, mode: lines)
+  Trace 8:  (Scatter3d, mode: markers)
+  Trace 9: Jupiter Closest Plotted Point (Scatter3d, mode: markers)
+  Trace 10: Pioneer 10 Plotted Period (Scatter3d, mode: lines)
+  Trace 11:  (Scatter3d, mode: markers)
+  Trace 12: Pioneer 10 Closest Plotted Period Point (Scatter3d, mode: markers)
+  Trace 13: Galileo Plotted Period (Scatter3d, mode: lines)
+  Trace 14:  (Scatter3d, mode: markers)
+  Trace 15: Galileo Closest Plotted Period Point (Scatter3d, mode: markers)
+
+[DEBUG] Processing Jupiter
+[DEBUG] params keys: dict_keys(['a', 'e', 'i', 'omega', 'Omega', 'epoch', 'TP', 'MA', 'TA'])
+  Jupiter: Using TP for perihelion: 1999-05-18 23:40:28
+  Jupiter: No Tapo provided - actual aphelion marker will not be plotted
+  Added Keplerian periapsis for Jupiter at distance 4.950216 AU
+  Added Keplerian apoapsis for Jupiter at distance 5.458888 AU
+  Jupiter: Using TP for perihelion: 1999-05-18 23:40:28
+  Jupiter: No Tapo provided - actual aphelion marker will not be plotted
+  Next perihelion: 1999-05-18 23:40:28
+
+[DEBUG] Found apsidal dates for Jupiter
+  Perihelion dates: ['1999-05-18 23:40:28']
+  Aphelion dates: []
+    Fetched position for 1999-05-18 23:40:28
+  Fetched positions: 1 dates
+[DEBUG] Calling enhanced markers for Jupiter:
+  params has epoch: True
+  epoch value: 2000-11-06 20:47 osc.
+  ideal_apsides is None: False
+  ideal_apsides keys: dict_keys(['periapsis', 'apoapsis'])
+[HOVER DEBUG] Jupiter Keplerian Perihelion (Epoch: 2000-11-06 20:47 osc.):
+  ideal_pos is not None: True
+  params is not None: True
+  'epoch' in params: True
+  epoch value: 2000-11-06 20:47 osc.
+  angle_deg: 0.003 deg
+[KEPLERIAN POS] Added marker for Jupiter at distance 5.030151 AU (TA=48.8 deg)
+  Added mean orbit trace for Jupiter (e=0.048386, Elliptical, epoch=2023-01-21)
+
+Keplerian Orbit Summary:
+Plotted Keplerian orbits for 1 objects:
+  - Jupiter
+
+Skipped Keplerian orbits for:
+
+No_params (3):
+  - Sun
+  - Pioneer 10
+  - Galileo
+  Trace 0: Sun
+  Trace 1: Pioneer 10 Full Mission
+  Trace 2:
+  Trace 3: Pioneer 10 Closest Full Mission Point
+  Trace 4: Galileo Full Mission
+  Trace 5:
+  Trace 6: Galileo Closest Full Mission Point
+  Trace 7: Jupiter Actual Orbit
+  Trace 8:
+  Trace 9: Jupiter Closest Plotted Point
+  Trace 10: Pioneer 10 Plotted Period
+  Trace 11:
+  Trace 12: Pioneer 10 Closest Plotted Period Point
+  Trace 13: Galileo Plotted Period
+  Trace 14:
+  Trace 15: Galileo Closest Plotted Period Point
+  Trace 16: Jupiter Keplerian Orbit (Epoch: 2000-11-06 20:47 osc.)
+  Trace 17:
+  Trace 18: Jupiter Keplerian Periapsis
+  Trace 19: Jupiter Keplerian Apoapsis
+  Trace 20: Jupiter Keplerian Perihelion (Epoch: 2000-11-06 20:47 osc.)
+  Trace 21: Jupiter Keplerian Position (Epoch: 2000-11-06 20:47 osc.)
+  Trace 22: Jupiter Mean Orbit (Epoch: 2023-01-21)
+  Trace 23:
+
+[COMET TAILS] Adding comet tails for animation initial state (date: 2000-11-06 20:46:00)
+Jupiter: Elliptical orbit - a=5.202887 AU, e=0.0484, aphelion=5.454635 AU
+
+Automatic scaling calculation:
+  Maximum orbital distance: 5.454635 AU
+  Buffer factor: 1.2
+  Final axis range: +/-6.545562 AU
+[ANIMATION] Static shell traces (before fence): 1
+[ANIMATION] Frame-updated traces: 3; constant traces excluded from frames: 23
+Jupiter: Elliptical orbit - a=5.204552 AU, e=0.0489, aphelion=5.458888 AU
+
+Automatic scaling calculation:
+  Maximum orbital distance: 5.458888 AU
+  Buffer factor: 1.2
+  Final axis range: +/-6.550666 AU
+[Camera Buttons] Auto-detected 3 target objects from positions
+[Camera Buttons] Added dropdown with 4 view options
+[Fly To Buttons] Auto-detected 3 target objects from positions
+[Fly To Buttons] Added dropdown with 4 fly-to options
+Visualization opened in browser
+Saving HTML (~10 KB + plot data, needs internet) to C:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_images/Sun_system_animation_20261106_2046_pioneer10_galileo.html...
+HTML saved successfully.
+
+[ANIMATION PRE-FETCH] Checking osculating elements for 1 objects...
+[ANIMATION PRE-FETCH] Using Horizons ID: 599 (type: None)
+User chose to update Jupiter
+  Using Horizons ID: 599 (id_type: None)
+[...] Fetching osculating elements for Jupiter from JPL Horizons...
+   Using Horizons ID: 599 (id_type: None)
+  [Horizons Query] ID: 599 | Type: None | Location: @sun | Date: 2000-11-06 20:47
+  [L-431 period] 599: the elements fetch gave PR 4334.771877 d, the period query 4334.771877 d -- agree
+[OK] Period for Jupiter: 4334.771876986341 d around @sun (change in a year 0.45732651117850764 d; not a small body; SBDB not asked)
+[OK] Fetched elements (solution date: 2026-11-06)
+  Rotated: osculating_cache_backup.json [OK] osculating_cache_backup_old.json
+  Backed up: osculating_cache.json [OK] osculating_cache_backup.json
+[OK] Saved: osculating_cache.json (2-gen protected)
+[ANIMATION PRE-FETCH] OK: Jupiter: Updated
+[get_interval_settings] Read days_to_plot: 28
+Days to Plot: 28.0
+Number of Frames: 29
+Animation Step: Year
+==================================================
+  Jupiter: 29 dates
+  Pioneer 10: 3 dates
+  Galileo: 3 dates
+WARNING: AstropyDeprecationWarning: ``id_type``s 'majorbody' and 'id' are deprecated and replaced with ``None``, which has the same functionality. [astroquery.jplhorizons.core]
+WARNING: AstropyDeprecationWarning: ``id_type``s 'majorbody' and 'id' are deprecated and replaced with ``None``, which has the same functionality. [astroquery.jplhorizons.core]
+
+Processing trajectory for 599:
+Requested epochs: 29
+Returned vectors: 29
+Direct position matches: 29
+Interpolated positions: 0
+Final coverage: 29/29 epochs
+
+Processing trajectory for -23:
+Requested epochs: 3
+Returned vectors: 3
+Direct position matches: 3
+Interpolated positions: 0
+Final coverage: 3/3 epochs
+[ENDED MISSION] Pioneer 10: marker held on its last day, 2003-01-23, for 26 frame(s) after it
+WARNING: AstropyDeprecationWarning: ``id_type``s 'majorbody' and 'id' are deprecated and replaced with ``None``, which has the same functionality. [astroquery.jplhorizons.core]
+WARNING: AstropyDeprecationWarning: ``id_type``s 'majorbody' and 'id' are deprecated and replaced with ``None``, which has the same functionality. [astroquery.jplhorizons.core]
+
+Processing trajectory for -77:
+Requested epochs: 3
+Returned vectors: 3
+Direct position matches: 3
+Interpolated positions: 0
+Final coverage: 3/3 epochs
+[ENDED MISSION] Galileo: marker held on its last day, 2003-09-21, for 26 frame(s) after it
+Full hover text: <b>Sun</b><br>Sky position seen from Earth:<br>Right Ascension: 14h 49m 08.335s<br>Declination: -16 deg 15' 41.29"<br>Uncertainty: none given by JPL with this position<br><br>Distance from Center: 0.00000000 AU<br>Distance: 0 kilometers<br>Distance: 0.0000000 light-minutes<br>Velocity: N/A AU/day<br>Velocity: N/A km/hr (N/A km/sec)<br>This body is the center of the plot.<br>Orbital period: N/A<br>Horizons: 10. NASA: "The Sun's gravity holds the solar system together, keeping<br>everything in its orbit."
+Minimal hover text: <b>Sun</b><br>Sky position seen from Earth: RA 14h 49m 08.335s, Dec -16 deg 15' 41.29"<br>Uncertainty: none given by JPL with this position
+[TRAJECTORY] Pioneer 10 context: 51 points over 11282.0 days (full mission)
+[TRAJECTORY] Pioneer 10 detail: 51 points over 807.1 days (plotted period)
+[TRAJECTORY] Galileo context: 51 points over 5084.0 days (full mission)
+[TRAJECTORY] Galileo detail: 51 points over 1048.1 days (plotted period)
+
+[TRAJECTORY CONTEXT] Plotting 2 full mission trajectories...
+-> Added closest plotted marker for Pioneer 10 to Sun: 0.992010 AU on 1972-03-04 00:00:00 UTC
+-> Added closest plotted marker for Galileo to Sun: 0.698589 AU on 1990-02-26 00:00:00 UTC
+[NORMAL MODE] Using dates_lists for plot_actual_orbits
+[NORMAL MODE] Jupiter: 51 dates from 2000-11-06 20:46:00 to 2028-11-06 20:46:00
+
+Processing trajectory for 599:
+Requested epochs: 51
+Returned vectors: 51
+Direct position matches: 51
+Interpolated positions: 0
+Final coverage: 51/51 epochs
+[NORMAL MODE] Plotted Jupiter orbit with 51 points
+-> Added closest plotted marker for Jupiter to Sun: 4.951415 AU on 2010-12-06 14:02:48 UTC
+[NORMAL MODE] Pioneer 10: 51 dates from 2000-11-06 20:46:00 to 2003-01-22 23:58:51
+WARNING: AstropyDeprecationWarning: ``id_type``s 'majorbody' and 'id' are deprecated and replaced with ``None``, which has the same functionality. [astroquery.jplhorizons.core]
+
+Processing trajectory for -23:
+Requested epochs: 51
+Returned vectors: 51
+Direct position matches: 51
+Interpolated positions: 0
+Final coverage: 51/51 epochs
+[NORMAL MODE] Plotted Pioneer 10 orbit with 51 points
+-> Added closest plotted marker for Pioneer 10 to Sun: 76.451571 AU on 2000-11-06 20:46:00 UTC
+[NORMAL MODE] Galileo: 51 dates from 2000-11-06 20:46:00 to 2003-09-20 23:58:51
+WARNING: AstropyDeprecationWarning: ``id_type``s 'majorbody' and 'id' are deprecated and replaced with ``None``, which has the same functionality. [astroquery.jplhorizons.core]
+
+Processing trajectory for -77:
+Requested epochs: 51
+Returned vectors: 51
+Direct position matches: 51
+Interpolated positions: 0
+Final coverage: 51/51 epochs
+[NORMAL MODE] Plotted Galileo orbit with 51 points
+-> Added closest plotted marker for Galileo to Sun: 5.029573 AU on 2001-01-08 18:04:46 UTC
+  Trace 0: Sun (Scatter3d, mode: markers)
+  Trace 1: Pioneer 10 Full Mission (Scatter3d, mode: lines)
+  Trace 2:  (Scatter3d, mode: markers)
+  Trace 3: Pioneer 10 Closest Full Mission Point (Scatter3d, mode: markers)
+  Trace 4: Galileo Full Mission (Scatter3d, mode: lines)
+  Trace 5:  (Scatter3d, mode: markers)
+  Trace 6: Galileo Closest Full Mission Point (Scatter3d, mode: markers)
+  Trace 7: Jupiter Actual Orbit (Scatter3d, mode: lines)
+  Trace 8:  (Scatter3d, mode: markers)
+  Trace 9: Jupiter Closest Plotted Point (Scatter3d, mode: markers)
+  Trace 10: Pioneer 10 Plotted Period (Scatter3d, mode: lines)
+  Trace 11:  (Scatter3d, mode: markers)
+  Trace 12: Pioneer 10 Closest Plotted Period Point (Scatter3d, mode: markers)
+  Trace 13: Galileo Plotted Period (Scatter3d, mode: lines)
+  Trace 14:  (Scatter3d, mode: markers)
+  Trace 15: Galileo Closest Plotted Period Point (Scatter3d, mode: markers)
+
+[DEBUG] Processing Jupiter
+[DEBUG] params keys: dict_keys(['a', 'e', 'i', 'omega', 'Omega', 'epoch', 'TP', 'MA', 'TA'])
+  Jupiter: Using TP for perihelion: 1999-05-18 23:40:28
+  Jupiter: No Tapo provided - actual aphelion marker will not be plotted
+  Added Keplerian periapsis for Jupiter at distance 4.950216 AU
+  Added Keplerian apoapsis for Jupiter at distance 5.458888 AU
+  Jupiter: Using TP for perihelion: 1999-05-18 23:40:28
+  Jupiter: No Tapo provided - actual aphelion marker will not be plotted
+  Next perihelion: 1999-05-18 23:40:28
+
+[DEBUG] Found apsidal dates for Jupiter
+  Perihelion dates: ['1999-05-18 23:40:28']
+  Aphelion dates: []
+    Fetched position for 1999-05-18 23:40:28
+  Fetched positions: 1 dates
+[DEBUG] Calling enhanced markers for Jupiter:
+  params has epoch: True
+  epoch value: 2000-11-06 20:47 osc.
+  ideal_apsides is None: False
+  ideal_apsides keys: dict_keys(['periapsis', 'apoapsis'])
+[HOVER DEBUG] Jupiter Keplerian Perihelion (Epoch: 2000-11-06 20:47 osc.):
+  ideal_pos is not None: True
+  params is not None: True
+  'epoch' in params: True
+  epoch value: 2000-11-06 20:47 osc.
+  angle_deg: 0.003 deg
+[KEPLERIAN POS] Added marker for Jupiter at distance 5.030151 AU (TA=48.8 deg)
+  Added mean orbit trace for Jupiter (e=0.048386, Elliptical, epoch=2023-01-21)
+
+Keplerian Orbit Summary:
+Plotted Keplerian orbits for 1 objects:
+  - Jupiter
+
+Skipped Keplerian orbits for:
+
+No_params (3):
+  - Sun
+  - Pioneer 10
+  - Galileo
+  Trace 0: Sun
+  Trace 1: Pioneer 10 Full Mission
+  Trace 2:
+  Trace 3: Pioneer 10 Closest Full Mission Point
+  Trace 4: Galileo Full Mission
+  Trace 5:
+  Trace 6: Galileo Closest Full Mission Point
+  Trace 7: Jupiter Actual Orbit
+  Trace 8:
+  Trace 9: Jupiter Closest Plotted Point
+  Trace 10: Pioneer 10 Plotted Period
+  Trace 11:
+  Trace 12: Pioneer 10 Closest Plotted Period Point
+  Trace 13: Galileo Plotted Period
+  Trace 14:
+  Trace 15: Galileo Closest Plotted Period Point
+  Trace 16: Jupiter Keplerian Orbit (Epoch: 2000-11-06 20:47 osc.)
+  Trace 17:
+  Trace 18: Jupiter Keplerian Periapsis
+  Trace 19: Jupiter Keplerian Apoapsis
+  Trace 20: Jupiter Keplerian Perihelion (Epoch: 2000-11-06 20:47 osc.)
+  Trace 21: Jupiter Keplerian Position (Epoch: 2000-11-06 20:47 osc.)
+  Trace 22: Jupiter Mean Orbit (Epoch: 2023-01-21)
+  Trace 23:
+
+[COMET TAILS] Adding comet tails for animation initial state (date: 2000-11-06 20:46:00)
+[ANIMATION] Static shell traces (before fence): 1
+[ANIMATION] Frame-updated traces: 3; constant traces excluded from frames: 23
+[ANIMATION] NOTE: camera tracking requested for 'Sun' but it has no animated positions -- tracking disabled for this run
+
 2. Move both patches into `documentation\`. Commit and push both repositories, not during the website's night.
 3. After the push, the website's live run: its "Served reachability" line should say 32 positions files were read from the config, with none NOT SERVED.
+
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 58 files from https://palomasorrery.com/ (26 typed, 32 positions files read from data\objects_config.json)
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches the working copy
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   gallery/arrival.js                             matches the working copy
+    SERVED   gallery/nav_cluster.js                         matches the working copy
+    SERVED   gallery/solar_system_figures.js                matches the working copy
+    SERVED   gallery/solar_system_drawer.js                 matches the working copy
+    SERVED   data/objects_config.json                       matches the working copy
+    SERVED   gallery/guestbook.js                           matches the working copy
+    SERVED   data/guestbook.json                            matches the working copy
+    SERVED   data/solar-system/drawings/hills_cloud.json    matches the working copy
+    SERVED   data/solar-system/drawings/van_allen_belts.json matches the working copy
+    SERVED   data/solar-system/drawings/earth_exosphere.json matches the working copy
+    SERVED   data/solar-system/drawings/sun_corona.json     matches the working copy
+    SERVED   data/solar-system/drawings/zodiacal_dust.json  matches the working copy
+    SERVED   data/solar-system/drawings/outer_oort_cloud.json matches the working copy
+    SERVED   data/solar-system/drawings/galactic_tide.json  matches the working copy
+    SERVED   gallery/source_list.js                         matches the working copy
+    SERVED   gallery/far_lines.js                           matches the working copy
+    SERVED   gallery/direction_arrows.js                    matches the working copy
+    SERVED   gallery/drawer_order.js                        matches the working copy
+    SERVED   gallery/text_box.js                            matches the working copy
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+    SERVED   data/solar-system/positions/voyager_2.json     matches the working copy
+    SERVED   data/solar-system/positions/new_horizons.json  matches the working copy
+    SERVED   data/solar-system/positions/juno.json          matches the working copy
+    SERVED   data/solar-system/positions/osiris_apex.json   matches the working copy
+    SERVED   data/solar-system/positions/parker_solar_probe.json matches the working copy
+    SERVED   data/solar-system/positions/bepicolombo.json   matches the working copy
+    SERVED   data/solar-system/positions/solar_orbiter.json matches the working copy
+    SERVED   data/solar-system/positions/lucy.json          matches the working copy
+    SERVED   data/solar-system/positions/juice.json         matches the working copy
+    SERVED   data/solar-system/positions/psyche_spacecraft.json matches the working copy
+    SERVED   data/solar-system/positions/europa_clipper.json matches the working copy
+    SERVED   data/solar-system/positions/galileo.json       matches the working copy
+    SERVED   data/solar-system/positions/cassini.json       matches the working copy
+    SERVED   data/solar-system/positions/pioneer_10.json    matches the working copy
+    SERVED   data/solar-system/positions/pioneer_11.json    matches the working copy
+    SERVED   data/solar-system/positions/rosetta.json       matches the working copy
+    SERVED   data/solar-system/positions/akatsuki.json      matches the working copy
+    SERVED   data/solar-system/positions/dart.json          matches the working copy
+    SERVED   data/solar-system/positions/west.json          matches the working copy
+    SERVED   data/solar-system/positions/mcnaught.json      matches the working copy
+    SERVED   data/solar-system/positions/tsuchinshan_atlas.json matches the working copy
+    SERVED   data/solar-system/positions/wierzchos.json     matches the working copy
+    SERVED   data/solar-system/positions/atlas_2024_g3.json matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1.json      matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1_b.json    matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1_d.json    matches the working copy
+    SERVED   data/solar-system/positions/panstarrs_2025_r3.json matches the working copy
+    SERVED   data/solar-system/positions/borisov_2025_v1.json matches the working copy
+    SERVED   data/solar-system/positions/oumuamua.json      matches the working copy
+    SERVED   data/solar-system/positions/borisov_2i.json    matches the working copy
+    SERVED   data/solar-system/positions/atlas_3i.json      matches the working copy
+
+  PASS Served reachability       9.3s  all 58 files served and
+                                    byte-identical to the working copy
+
+  orrery export pinned at 64ce3de2
+
+  PASS Export freshness          0.3s  the served export is the orrery's
+                                    at 64ce3de2, byte for byte
+
+  orrery HEAD d9db3400
+  examining 3 of 187 links; the other 184 are served from the export
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  3 pointers: 1 match, 0 DRIFT, 0 UNIT MISMATCH, 2 could not be examined.
+
+  PASS Store drift               2.0s  3 pointers against orrery d9db3400
+                                    -- 1 match, 0 DRIFT, 0 UNIT
+                                    MISMATCH, 2 could not be examined.
+
+======================================================================
+  2 of 2 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Store drift            3 pointers against orrery d9db3400 -- 1
+  last swap 2026-11-06T19:31:27.444221+00:00: succeeded first time
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 
 **Tony-action rollup**
 - (do) Steps 1 to 6 above.
 - (do) Optional, in a terminal on your machine: `python test_path_drawing.py --galileo` in the orrery folder. It compares Galileo's drawing with the website's file and needs JPL, so I couldn't run it here.
+
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>python test_path_drawing.py --galileo
+[PATH PLAN] Galileo: 305 points by its plan made 2026-11-04, 1989-10-20 to 2003-09-21
+ok    Galileo by its plan against the website's data/solar-system/positions/galileo.json at 3a211a8c:
+      305 drawn, 305 served, the website's last-day pair [2452903.500694, 2452903.501389]; drawn and not served []; served and not drawn []
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+- (do) Each morning, Pull origin on both, orrery then website, first.
+
+===========================================================================
+
+Now the code edits for the third patch, on the pushed orrery (d9db340).
+
+Now the patch script itself, built from the same edits, then a run on a fresh copy.
+
+The third patch is in your orrery folder, tested on a throwaway copy. It changes nothing until you run it.
+
+**What it does**
+- **Auto scale in the animation:** a spacecraft now counts by the farthest place its marker is drawn, the way the still plot counts it. Your Pioneer 10 animation should open at about 98 AU (82.1 AU plus 20 percent), with no hand setting. Planets and anything else with an orbit are sized exactly as before.
+- **An unreadable settings box:** the console and the status line now say which box it is and what it holds, for example: `the "Days" box holds "28.5", which is not a whole number`. The progress bar stops, so it no longer looks hung. The box for the number of steps to animate is checked the same way. The still plot, which carries on with default values, now says so on the console too.
+- **Records:** it notes on L-476 (the paths by the plan) that your look passed: the plot, the Galileo check, and the animation held at 82.1 AU and 5.4 AU. It records both fixes and gives the item a new Gap. Where We Are is edited by section.
+- **I didn't close L-476 yet:** the new scale needs your look first. I'll close it once you've seen it.
+
+**Tests on the copy, with a stand-in for JPL**
+- **The scale:** the same animation opened at ±93.8 AU, the stand-in's 78.1 AU plus 20 percent. Before the patch it didn't count Pioneer 10.
+- **Unreadable boxes:** "28.5" in Days and "2 9" in the steps box each now stop with the box named. Before the patch, both stopped silently.
+- **The path drawing suite:** 13 of 13.
+- **The maintenance run:** every checker passed except Horizons confirmations. That one fails the same way on the untouched pushed code, because your plot and animation runs saved fresh orbital numbers for Earth, Mars and Jupiter that JPL must confirm, and JPL can't be reached from here. On your machine the run asks JPL itself, so it should pass. If it's red, paste me the lines.
+
+**Files for your run record**
+- `patch_L476_5_animation_scale_and_settings.py`:
+  - ok palomas_orrery.py (7 edits)
+  - ok LEDGER_CONSOLIDATED.md (1 edit, then the ledger index rebuilt)
+  - ok documentation/WHERE_WE_ARE.md (7 edits)
+
+**Token count:** this environment doesn't print the /cost figure. The patch is 27,695 bytes.
+
+**Your run order**
+1. Run `patch_L476_5_animation_scale_and_settings.py` in the orrery folder. It should end on "patch applied".
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & 'C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe' 'c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L476_5_animation_scale_and_settings.py'
+ok  palomas_orrery.py: get_interval_settings names the box
+ok  palomas_orrery.py: the still plot says it on the console
+ok  palomas_orrery.py: the animation says it, and stops its bar
+ok  palomas_orrery.py: the animation's settings stop is said
+ok  palomas_orrery.py: get_animation_axis_range takes positions
+ok  palomas_orrery.py: the animation passes its positions
+ok  palomas_orrery.py: docstring: stamp
+ok  LEDGER_CONSOLIDATED.md: L-476: Tony's look, the scale and the boxes, a new Gap
+ok  documentation\WHERE_WE_ARE.md: the page's header
+ok  documentation\WHERE_WE_ARE.md: the page's box
+ok  documentation\WHERE_WE_ARE.md: the road: stage 13
+ok  documentation\WHERE_WE_ARE.md: Settled: its mark cleared
+ok  documentation\WHERE_WE_ARE.md: Signals: the cache build
+ok  documentation\WHERE_WE_ARE.md: Signals: Tier-1
+ok  documentation\WHERE_WE_ARE.md: Where the details are: this session
+ok palomas_orrery.py (7 edits)
+ok LEDGER_CONSOLIDATED.md (1 edits)
+ok documentation\WHERE_WE_ARE.md (7 edits)
+stamps updated: palomas_orrery.py (Module updated line); the page's header
+Running ledger_index.py ...
+  OK: 505 L-blocks parsed, no consistency problems.
+  Index regenerated (254 live items) in c:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\LEDGER_CONSOLIDATED.md.
+Running test_path_drawing.py ...
+  PATH DRAWING SUITE: 13 of 13 checks passed
+patch applied
+
+Do next, in order:
+  1. Run the maintenance run from the dashboard and read its last
+     lines: all gating checkers passed, 0 TIER-1 on the gate path.
+
+======================================================================
+MAINTENANCE RUN -- generators, then checkers (L-188)
+======================================================================
+  Provenance scan is current (last run 20261106T195323Z, 0 day(s) ago).
+
+GENERATORS -- regenerate every time; a no-op when nothing moved
+----------------------------------------------------------------------
+  Ledger index                 5.2s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Skill manifest               0.3s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Constants export             2.3s  unchanged (1 checked, not written)
+  Period fetch                 0.3s  unchanged (2 checked, not written) --
+                                     NOTHING MISSING -- 97 served objects
+                                     examined, no query asked
+  Horizons check               5.4s  rewrote data/horizons_confirmations.json --
+                                     PASS -- 3 checked today, 3 queries
+  Path plan                    0.4s  unchanged (1 checked, not written) -- 32
+                                     paths, events akatsuki 15, atlas_2024_g3 1,
+                                     atlas_3i 1, bepicolombo 35, borisov_2025_v1
+                                     1, borisov_2i 1, c2025_k1 1, c2025_k1_b 1,
+                                     c2025_k1_d 1, cassini 7, dart 1,
+                                     europa_clipper 5, galileo 7, juice 10, juno
+                                     4, lucy 7, mcnaught 1, new_horizons 2,
+                                     osiris_apex 13, oumuamua 1,
+                                     panstarrs_2025_r3 1, parker_solar_probe 49,
+                                     pioneer_10 1, pioneer_11 2,
+                                     psyche_spacecraft 2, rosetta 12,
+                                     solar_orbiter 31, tsuchinshan_atlas 1,
+                                     voyager_1 2, voyager_2 5, west 1, wierzchos
+                                     1. Asked JPL for: nothing.
+  Objects export               0.3s  rewrote data/objects_export.json
+  Drawings export              2.4s  unchanged (8 checked, not written)
+  Module atlas                 9.7s  rewrote MODULE_ATLAS.md, MODULE_INDEX.md
+  Data inventory               1.4s  unchanged (1 of 1 rewritten, content
+                                     identical)
+  Exact rows report            4.2s  rewrote EXACT_ROWS_PRINTED.md -- 11 of 46
+                                     exact rows printed at 40 lines (25 orrery,
+                                     15 gallery); 12 drawn only, 3 not followed,
+                                     0 map entries broken
+  Document index               0.1s  unchanged (1 checked, not written)
+
+CHECKERS -- verdict informs the push call
+----------------------------------------------------------------------
+  Constants change             0.2s  No changes to constants_new.py since HEAD.
+  Constants relations          0.3s  25 of 25 provenance tests passed against
+                                     constants_new.py. No constants have drifted.
+  Derived figures              2.0s  No figure count exceeds its inputs: 39
+                                     derived row(s) read, 32 judged OK -- 32 OK,
+                                     7 NOT YET MIGRATED; 23 conversion(s)
+                                     checked.
+  Constants export check       3.8s  Export matches the store: sha256
+                                     f35f649c4c53 on both sides; 233 rows
+                                     re-read, 57 not exported, 46 tokens; 830
+                                     conversions re-computed, 12 of 12 worked
+                                     cases hold; 233 citations worked out again,
+                                     8 of 8 worked cases hold.
+  Constants rounding           0.1s  PASS -- 7 of 7 pins held; 2 of 2 planted
+                                     faults caught by name.
+  Objects export check         0.3s  pass
+  Horizons confirmations       0.6s  pass -- 97 of 97 entries and 64 periods
+                                     confirmed, 26 sheets read, within 30 days
+  Horizons check suite         1.0s  pass -- 81 checks, every planted fault
+                                     caught by name
+  Period fetch suite           4.1s  pass -- 39 checks, every planted fault
+                                     caught (22 planted, 8 of them for Earth's
+                                     period, L-445, 2 for Pluto's, L-443)
+  Path plan suite              5.0s  36 of 36 checks passed
+  Path drawing suite           0.3s  13 of 13 checks passed
+  Path or orbit suite          0.3s  17 of 17 checks passed, every planted fault
+                                     caught
+  Skill headers                0.2s  12 skills parsed, no consistency problems.
+  Exact rows by the count      3.9s  PASSING -- 11 printed exact rows each state
+                                     a count; 25 orrery lines print through
+                                     exact_text() or row_text(); 15 gallery lines
+                                     are served the count
+  Dimensions                   2.1s  No unit contradicts its arithmetic: 62
+                                     derived row(s) read -- 53 OK, 6 NO UNIT, 3
+                                     NOT CHECKABLE.
+  Cross-check annotations      0.1s  19 of 19 cross-check annotation tests
+                                     passed.
+  Citation inheritance         0.1s  20 of 20 citation-inheritance tests passed.
+  Status lines                 0.1s  All 228 status lines in constants_new.py are
+                                     well formed; 59 rows carry none.
+  Row shape                    0.1s  All 290 row shapes in constants_new.py fit
+                                     the assignment's own line.
+  Scanner recognition 1d/1e    0.2s  27 of 27 recognition pins hold: real
+                                     citations recognized, fake ones refused.
+  Scanner row run (L-414)      0.2s  16 of 16 pins hold -- each row reads its own
+                                     comment run, declared rows are named, the
+                                     gate path is read by name.
+  Reset completeness          18.2s  PASS -- all 309 IntVars + 3 StringVars + 10
+                                     entries reset to startup defaults; date set
+                                     to now.
+  Orbit cache                 14.9s  All 24 orbit cache tests passed: cache
+                                     loads, old formats convert, corrupted
+                                     entries are dropped; the clock reads UTC and
+                                     both forms of the fetched stamp read back;
+                                     the repository-wide fresh check examined 148
+                                     .py files and 20 JPL calls, every one asked
+                                     fresh (2 not JPL, excepted); JPL's answers
+                                     told apart (no such body, more than one,
+                                     unreachable, other) on 10 faked answers to
+                                     fetch_trajectory, 10 to fetch_position by
+                                     astroquery and 11 by both its routes, and 4
+                                     fallback branches ask before drawing (3
+                                     bodies JPL has no solution for drawn from
+                                     their papers whatever it answers); nothing
+                                     left behind.
+  Earth pole of date           0.3s  all 14 checks passed (geometry, ERFA,
+                                     fallback, cache, hover, transform).
+  Hills cloud sampler (L-421)    0.9s  PASS -- 6 of 6 planted faults caught; the
+                                     real rows pass, the dots' plane tilted 34.0
+                                     deg
+  Drawings export check       53.4s  PASS -- 22 of 22 planted faults caught;
+                                     hills_cloud 3600 dots, plane tilted 31.0
+                                     deg, sha256 4d3e85616645; van_allen_belts
+                                     3200 dots, no plane recorded, sha256
+                                     75274e84f840; earth_exosphere 1500 dots, no
+                                     plane recorded, sha256 6112639fb2cd;
+                                     sun_corona 2500 dots, no plane recorded,
+                                     sha256 e2b57ccbc8a4; zodiacal_dust 3000
+                                     dots, no plane recorded, sha256
+                                     995f13a056e8; outer_oort_cloud 2736 dots, no
+                                     plane recorded, sha256 2f7ab88ee113;
+                                     galactic_tide 5000 dots, no plane recorded,
+                                     sha256 950a7511f0b5; main_belt 6000 dots, no
+                                     plane recorded, sha256 712caffec391
+  Position digits (L-401)      2.3s  PASS -- 16 of 16 planted faults caught by
+                                     name; 25 hovers examined, 197 lines compared
+                                     against their errors; 5 pairs printed the
+                                     same from either end; 499 hovers of every
+                                     listed object from the Sun, Earth and
+                                     Neptune; 3 recorded 2xr answers read by
+                                     column name; 10 period sentences
+  Orbit markers (L-431, L-401)    8.8s  PASS -- 12 of 12 planted faults caught by
+                                     name; 4 ellipses, 1080 drawn points on their
+                                     period's centre; 14 markers, 9 dates, 53
+                                     printed distances against their errors; 6
+                                     elements as given; 3 Keplerian positions
+                                     half a year on; 1 parameters-window date
+                                     pairs; 2 Moon arcs; 2 perturbation checks; 1
+                                     perihelion osculating orbits; 2 frames; 2
+                                     sources read
+  Domain Split                 0.4s  PASS -- 6 of 6 planted faults caught; the
+                                     split reads each module's Domain: tag and
+                                     prints the same on the console, in the audit
+                                     and in the run history.
+  Maintenance report (L-269)    0.5s  PASS -- 15 of 15 planted faults caught by
+                                     name; 4 summaries; 2 risen file(s) named; 13
+                                     night-gate cases
+  Dashboard parity             0.3s  PASS -- 10 of 10 planted faults caught; 97
+                                     steps matched to their buttons by name and
+                                     script; 129 cards carry a short line; the
+                                     search finds 4 of 4 cases in any word order
+  Worksheet checker            7.5s  72 of 99 routed, 8 clean
+  Worksheet checker tests     17.7s  All 135 checks passed
+  Worksheet key round trip     1.1s  RESULT: 52 sites minted 52 distinct keys,
+                                     all resolved; 52 pinned keys still resolve;
+                                     1 retired keys confirmed gone.
+  Builder marker join         22.1s  All 76 checks passed
+  Extractor pins               0.4s  RESULT: 25 string sites carry the pinned 73
+                                     claims and 0 instruction drops, at LOOKBACK
+                                     30 / LOOKAHEAD 25, extractor version 2.
+  Provenance scanner          55.6s  0 TIER-1 -- the push gate holds; Whole tree,
+                                     Tier-1: 278: orrery 110, Earth System 149,
+                                     stars 13, utilities 2, unclassified 4.
+
+======================================================================
+  35 of 35 gating checkers passed -- 261.9s total
+  2 report-only, exit 0 whatever they find:
+    Worksheet checker           72 of 99 routed, 8 clean
+    Provenance scanner          0 TIER-1 -- the push gate holds; Whole tree, Tier-1: 278: orrery 110, Earth System 149, stars 13, utilities 2, unclassified 4.
+      Tier-1 rose since the previous run in 1 file(s):
+      - patch_L476_5_animation_scale_and_settings.py: 0 -> 2
+======================================================================
+
+FILES WRITTEN THIS RUN
+----------------------------------------------------------------------
+  2593 file(s) examined, 9 written, 0 created, 0 removed, 7 rewritten identically
+    written   EXACT_ROWS_PRINTED.md
+    written   MODULE_ATLAS.md
+    written   MODULE_INDEX.md
+    written   PROVENANCE_AUDIT.md
+    written   data/horizons_check_last_run.json
+    written   data/horizons_confirmations.json
+    written   data/objects_export.json
+    written   data/provenance_history.json
+    written   documentation/prompts/citation_review.jsonl
+    rewritten with identical bytes, no action needed:
+      DATA_INVENTORY.md
+      LEDGER_CONSOLIDATED.md
+      PROJECT_INSTRUCTIONS.md
+      WORKSHEET_CHECK.md
+      data/worksheet_check_state.json
+      data/worksheet_routed.json
+      window_config.json
+    19 file(s) over 2 MB compared by size and mtime only
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
+
+  2. Run palomas_orrery.py: Pioneer 10, Galileo and Jupiter, centre
+     on the Sun, start in 2000, 29 steps, the Year animation, on
+     Auto scale. It opens at about 98 AU, Pioneer 10 inside it. -- 
+  3. Move this patch into documentation\, then commit and push the
+     orrery, not during the website's night.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+2. Run the maintenance run from the dashboard. It should end with all gating checkers passed and 0 TIER-1 on the gate path.
+3. Look:
+   - Pioneer 10, Galileo and Jupiter, centred on the Sun, start in 2000, 29 steps, the Year animation, on Auto scale.
+   - It should open at about 98 AU, with Pioneer 10 inside the view.
+4. Move the patch into `documentation\`, then commit and push the orrery, not during the website's night.
+
+**Tony-action rollup**
+- (do) Steps 1 to 4 above.
 - (do) Each morning, Pull origin on both, orrery then website, first.

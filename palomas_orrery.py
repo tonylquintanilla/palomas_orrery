@@ -184,6 +184,13 @@ position and its distance from Earth on that day; the animation's
 frames after that day hold the marker there (path_drawing.hold_last_day)
 instead of hiding it. Pioneer 10's marker now sits at the end of its line
 and Galileo has one.)
+Module updated: November 6, 2026, afternoon, with Anthropic's Claude Opus
+5.5 (L-476, after Tony's look): the animation's Auto scale counts a body
+with no orbit -- a spacecraft -- by the farthest place its marker is drawn
+(farthest_frame_positions), as the still plot counts its marker; and a
+settings box that cannot be read is named, with what it holds, on the
+console and in the status line, and the animation's progress bar stops,
+where it used to stop silently.
 
 """
 #Paloma's Orrery - Solar System Visualization Tool
@@ -631,14 +638,24 @@ def get_interval_settings():
         root.update_idletasks()
         
         # Get values from GUI based on object types
+        # L-476 (2026-11-06): a box that cannot be read is named, with what
+        # it holds, instead of Python's "invalid literal for int()".
+        def _read(entry, box, kind):
+            text = entry.get()
+            try:
+                return kind(text)
+            except ValueError:
+                raise ValueError('the "%s" box holds "%s", which is not %s'
+                                 % (box, text, "a whole number" if kind is int
+                                    else "a number"))
         settings = {
-            'trajectory_points': float(trajectory_points_entry.get()),
-            'orbital_points': float(orbital_points_entry.get()),
-            'satellite_days': int(satellite_days_entry.get()),
-            'satellite_points': float(satellite_points_entry.get()),
+            'trajectory_points': _read(trajectory_points_entry, "Trajectory objects", float),
+            'orbital_points': _read(orbital_points_entry, "Orbital objects", float),
+            'satellite_days': _read(satellite_days_entry, "Satellite cache span (days)", int),
+            'satellite_points': _read(satellite_points_entry, "Satellite objects", float),
             'start_date': get_date_from_gui(),
             'end_date': get_end_date_from_gui(),
-            'days_to_plot': int(days_to_plot_entry.get())
+            'days_to_plot': _read(days_to_plot_entry, "Days", int)
         }
         
         # Debug output to verify
@@ -1015,19 +1032,47 @@ def get_improved_axis_range(scale_var, custom_scale_entry, selected_objects, pos
             print("Invalid custom scale value, using default", flush=True)
             return [-1, 1]
         
+def farthest_frame_positions(positions_over_time, planetary_params):
+    """{name: the frame position farthest from the centre} for each body
+    in an animation with no orbital elements in planetary_params -- a
+    spacecraft, say, drawn from its positions. calculate_axis_range_from_orbits
+    sizes such a body by its position, as the still plot does by its
+    marker; a body with elements is sized by its orbit and is left out
+    here, so its sizing does not change (L-476, 2026-11-06)."""
+    out = {}
+    for name, frames in (positions_over_time or {}).items():
+        if name in planetary_params:
+            continue
+        best, best_r = None, -1.0
+        for p in frames or []:
+            if not p or p.get('x') is None:
+                continue
+            r = (p['x'] ** 2 + p['y'] ** 2 + p['z'] ** 2) ** 0.5
+            if r > best_r:
+                best, best_r = p, r
+        if best is not None:
+            out[name] = best
+    return out
+        
+        
 def get_animation_axis_range(scale_var, custom_scale_entry, objects, planetary_params, parent_planets, center_object_name,
-                             none_if_empty=False):
+                             none_if_empty=False, positions=None):
     """
     Get axis range for animations using the same logic as static plots.
     This ensures consistency between plot_objects() and animate_objects().
     none_if_empty (L-385): passed through; None when nothing orbits.
+    positions (L-476, 2026-11-06): farthest_frame_positions, so a body
+    with no orbit -- a spacecraft -- counts by the farthest place its
+    marker is drawn. Before, {} was passed and a spacecraft never counted:
+    Tony's animation of Pioneer 10 with Jupiter opened at 6.5 AU, Pioneer
+    10 at 76 to 82 AU outside it.
     """
     if scale_var.get() == 'Auto':
         # Use the same orbital-based scaling as plot_objects()
         selected_objects = [obj for obj in objects if obj['var'].get() == 1]
         
         return calculate_axis_range_from_orbits(
-            selected_objects, {}, planetary_params, 
+            selected_objects, positions or {}, planetary_params,
             parent_planets, center_object_name,
             none_if_empty=none_if_empty
         )
@@ -4867,6 +4912,7 @@ def plot_objects():
             # REPLACE the interval handling section with:
             settings, error_msg = get_interval_settings()
             if error_msg:
+                print(f"[PLOT] {error_msg}", flush=True)   # L-476 (2026-11-06)
                 output_label.config(text=error_msg)
             
             # CRITICAL FIX: Ensure we have the correct days_to_plot
@@ -6496,8 +6542,20 @@ def animate_objects(step, label):
             N_str = num_frames_entry.get()
             if not N_str.strip():
                 output_label.config(text="Please enter a valid number of frames.")
+                root.after(0, lambda: progress_bar.stop())   # L-476 (2026-11-06)
                 return
-            N = int(N_str)
+            # L-476 (2026-11-06): the box is named on the console and in the
+            # status line, and the progress bar stops, so a box that cannot
+            # be read no longer looks like a hang.
+            try:
+                N = int(N_str)
+            except ValueError:
+                _msg = ('The number of steps to animate holds "%s", which is not '
+                        'a whole number.' % N_str)
+                print(f"[ANIMATION] Not started: {_msg}", flush=True)
+                output_label.config(text=_msg)
+                root.after(0, lambda: progress_bar.stop())
+                return
             if N <= 0:
                 output_label.config(text="Number of frames must be positive.")
                 return
@@ -6505,7 +6563,11 @@ def animate_objects(step, label):
             # Get interval settings
             settings, error_msg = get_interval_settings()
             if error_msg:
+                # L-476 (2026-11-06): it stopped here silently, the progress
+                # bar still running; Tony's run of Nov 6 looked hung.
+                print(f"[ANIMATION] Not started: {error_msg}", flush=True)
                 output_label.config(text=error_msg)
+                root.after(0, lambda: progress_bar.stop())
                 return
             
             # Apply fix for days_to_plot
@@ -8166,13 +8228,17 @@ def animate_objects(step, label):
                     axis_range = get_animation_axis_range(
             #            scale_var, custom_scale_entry, objects, planetary_params, 
                         scale_var, custom_scale_entry, objects, active_planetary_params,
-                        parent_planets, center_object_name, none_if_empty=True
+                        parent_planets, center_object_name, none_if_empty=True,
+                        positions=farthest_frame_positions(positions_over_time,
+                                                           active_planetary_params)
                     )
             else:
                 axis_range = get_animation_axis_range(
             #        scale_var, custom_scale_entry, objects, planetary_params, 
                     scale_var, custom_scale_entry, objects, active_planetary_params,
-                    parent_planets, center_object_name, none_if_empty=True
+                    parent_planets, center_object_name, none_if_empty=True,
+                    positions=farthest_frame_positions(positions_over_time,
+                                                       active_planetary_params)
                 )
 
             # (Session C) Auto scale honors center-shell extent: the cube must

@@ -32579,7 +32579,55 @@ same session); gallery `interactive.html`,
     path that has ended. And v3.127's obligation is still open: this
     session read the skills as the repository's files, not as the
     account's installed copies.
-**Gap (replaces the one below, 2026-11-06):** Tony's look at Pioneer 10
+- **2026-11-06, afternoon: Tony's look, and two older gaps it found**
+  (the same coordinating session; Tony's run record
+  `documentation/WHERE_WE_ARE_11-6-26_1010_run_record.md`; pushed at
+  orrery d9db3400 and gallery 6c93d0a).
+  - The plot, Pioneer 10 and Galileo centred on the Sun: "yes". The
+    `--galileo` check on his machine: "305 drawn, 305 served", the
+    last-day pair included, nothing drawn and not served. The animation
+    from 2000 by year, 29 frames
+    (`Sun_system_animation_20261106_2046_pioneer10_galileo.html`), read
+    frame by frame: Pioneer 10 at 76.5, 79.0, 81.6 AU, then 82.1 AU
+    dated 2003-01-23 in every later frame; Galileo held at 5.4 AU dated
+    2003-09-21. JPL's real positions, which the session could not reach.
+  - Older gap 1, the animation's Auto scale: it passed no positions to
+    `calculate_axis_range_from_orbits`, so a body with no orbit -- a
+    spacecraft -- never counted. Tony's animation with Jupiter opened at
+    6.5 AU, Pioneer 10 outside it, and he set 100 AU by hand. The still
+    plot counts a spacecraft's marker. Fixed in
+    `patch_L476_5_animation_scale_and_settings.py` (Tony, Nov 6: "yes,
+    please"): `farthest_frame_positions` gives each body with no orbital
+    elements its farthest frame position; a body with elements is left
+    out, so its sizing is unchanged.
+  - Older gap 2, a settings box that cannot be read: the animation's
+    first try of Nov 6 stopped with "invalid literal for int()" in the
+    status line, nothing on the console and the progress bar running,
+    so it looked hung. `get_interval_settings` read five boxes with
+    bare int() and float(), and the animation returned silently on its
+    error. Now the box is named with what it holds, on the console and
+    in the status line, the progress bar stops, and the number of steps
+    to animate is read the same way. The still plot, which carries on
+    with defaults, now says it on the console too.
+  - Verified in a throwaway copy, with JPL replaced by a stand-in: the
+    same animation (Pioneer 10, Galileo, Jupiter, from 2000, 29 years)
+    opens at +/-93.8 AU, the stand-in's 78.1 AU plus 20 percent; a Days
+    box holding "28.5" stops the animation with 'the "Days" box holds
+    "28.5", which is not a whole number' on the console, and a steps
+    box holding "2 9" likewise. Before the patch the same two inputs
+    stopped it silently. No permanent check covers the scale or the
+    boxes. The orrery's maintenance run on the copy: every checker
+    passed but Horizons confirmations, red because the osculating cache
+    pushed at d9db340 holds Earth's, Mars's and Jupiter's elements from
+    Tony's runs of Nov 6, which JPL must confirm and the session cannot
+    reach. The untouched d9db340 is red the same way there; on Tony's
+    machine the Horizons check asks JPL first.
+**Gap (replaces the one below, 2026-11-06, afternoon):** Tony's look at
+the same animation with Auto scale (it opens on Pioneer 10's farthest
+point plus 20 percent, about 98 AU); then close. Its loose end at the
+close: the horizons-orbital-mechanics sentence carried above, to an open
+item for that skill's next version.
+**Gap (superseded above, 2026-11-06, afternoon; replaced the one below, 2026-11-06):** Tony's look at Pioneer 10
 and Galileo, Sun-centred, in a plot and an animation: each marker at
 the end of its line, the hover giving the last day. Then
 `python test_path_drawing.py --galileo` on his machine, and close.
