@@ -935,7 +935,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*254 live items; 238 need attention (`!`); 165 RICE-scored; 251 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*253 live items; 237 need attention (`!`); 165 RICE-scored; 252 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1082,10 +1082,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-467 | The scanner credits a display line with a citation it only sits near (orrery, provenance scanner) | OPEN | -- | 2026-10-21 |
 | ! | L-468 | The Sun room's phone look of 2026-10-21, night: the corona's drawer text and the Hills cloud's cross (gallery, the Sun room) | OPEN | -- | 2026-10-29 |
 | ! | L-470 | Orrery entries the website cannot serve as they stand (orrery, objects) | OPEN | -- | 2026-11-02 |
-| ! | L-476 | The orrery's whole-path plots draw by the same path plan as the website (orrery, spacecraft and comets) | OPEN | -- | 2026-11-06 |
 | ! | L-483 | A room for C/2025 K1 and its pieces, the first comet room (gallery, exhibits) | OPEN | -- | 2026-10-28 |
 | ! | L-484 | The website and the orrery agree on every object both draw, or the difference is written down (orrery + gallery, objects; method for interactive-exhibit) | OPEN | -- | 2026-11-05 |
-| ! | L-485 | A nightly unattended run of the routines (orrery + gallery, maintenance) | OPEN | -- | 2026-11-05 |
+| ! | L-485 | A nightly unattended run of the routines (orrery + gallery, maintenance) | OPEN | -- | 2026-11-06 |
 | ! | L-486 | A view carried into a room (gallery, the rooms) | OPEN | -- | 2026-10-26 |
 | ! | L-487 | Each body's description in the i panel, one bullet per sentence (gallery, the i panel) | OPEN | -- | 2026-10-25 |
 | ! | L-488 | Solar features beside a spacecraft in the Solar System room, such as the heliopause (gallery, the rooms) | OPEN | -- | 2026-10-26 |
@@ -1486,6 +1485,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-473 | A group in the Solar System room's drawer opens with its bodies unticked (gallery, the drawer) | DONE | -- | 2026-10-24 |
 |  | L-474 | See more / See fewer at the top of the Solar System room's drawer (gallery, the drawer) | DONE | -- | 2026-10-24 |
 |  | L-475 | The About link at the bottom of every room's i panel (gallery, the rooms' shared chrome) | DONE | -- | 2026-10-24 |
+|  | L-476 | The orrery's whole-path plots draw by the same path plan as the website (orrery, spacecraft and comets) | DONE | -- | 2026-11-06 |
 |  | L-477 | The Solar System room's drawer: no See more, no "All", a group row only opens, and Reset (gallery, the drawer) | DONE | -- | 2026-10-24 |
 |  | L-478 | The count line moves to the left, above the object label (gallery, the Solar System room's HUD) | DONE | -- | 2026-10-24 |
 |  | L-479 | A far orbit's frame: Go To fits the whole orbit, and every body's hover gives its orbit's near and far distance (gallery, the Solar System room) | DONE | -- | 2026-10-24 |
@@ -3143,7 +3143,7 @@ Are).
 L-489.
 
 #### [L-485] A nightly unattended run of the routines (orrery + gallery, maintenance)
-<!-- L:485 status:OPEN upd:2026-11-05 section:A flag: rice: -->
+<!-- L:485 status:OPEN upd:2026-11-06 section:A flag: rice: -->
 - **Tony, 2026-10-24, night,** in his run record (`documentation/WHERE_WE_ARE_10-24-26_1927_run_record.md`): "i am
   thinking of revising the idea of an automated run at midnight every
   day, with all the daily and 30-day run routines except the messages.
@@ -3825,6 +3825,21 @@ L-489.
   drawing is the website's "without its daily tail and last-day pair";
   since `patch_L476_2` it keeps the tail and leaves out only the
   last-day pair.
+- **Received 2026-11-06, evening, from L-476 at its close,** for
+  horizons-orbital-mechanics' next version. The sentence received above
+  rode 1.16 and has gone out of date again. A Plan Draws a Path Only
+  Around the Sun (1.18) says the orrery's drawing is the website's
+  `fetch_path_by_plan` point for point, "leaving out only its last-day
+  pair", and that `test_path_drawing.py --galileo` finds "Galileo's 303
+  points equal the website's served file but for its last-day pair".
+  Since `patch_L476_4_ended_markers.py` (Nov 6), `draw_plan` also adds
+  the website's last-day pair, 00:00 and 00:01 UTC of the span's last
+  day, to a path whose last day is already past, so an ended mission's
+  line ends at its marker; a path whose span runs on past today gets no
+  pair. Tony's `--galileo` run of Nov 6: "305 drawn, 305 served". Carried,
+  not bumped, on Tony's word of Nov 6: a session following the old
+  sentence would describe the drawing wrongly, and the test itself
+  already expects the pair.
 - **2026-11-05, from the coordinating session of Nov 4 to 5** (Claude
   Opus 5.5): the website's night was red on Nov 4 (runs 10 and 11) and
   twice on Nov 5, and served Nov 3's cache meanwhile; the hold held
@@ -32328,7 +32343,7 @@ same session); gallery `interactive.html`,
 `tools/headless/walk_solar_system_drawer.js`.
 
 #### [L-476] The orrery's whole-path plots draw by the same path plan as the website (orrery, spacecraft and comets)
-<!-- L:476 status:OPEN upd:2026-11-06 section:A flag: rice: -->
+<!-- L:476 status:DONE upd:2026-11-06 section:C flag: rice: -->
 - **Tony, 2026-10-23, at slice 2's design talk** (`documentation/DESIGN_L443_slice2_rulings_20261023.md`):
   "if there are better approaches for the orrery maybe we can implement
   them there also so the two are as Consistent as possible." And, on
@@ -32622,7 +32637,31 @@ same session); gallery `interactive.html`,
     Tony's runs of Nov 6, which JPL must confirm and the session cannot
     reach. The untouched d9db340 is red the same way there; on Tony's
     machine the Horizons check asks JPL first.
-**Gap (replaces the one below, 2026-11-06, afternoon):** Tony's look at
+- **2026-11-06, evening: closed.** Tony's look after
+  `patch_L476_5_animation_scale_and_settings.py`, in his words to the
+  coordinating session of Nov 6, evening (Claude Opus 5.5, through the
+  python_work door, on orrery dc52cbe and gallery 6c93d0a): "my look of
+  Nov 6 passed (animation at 98.6 AU)." The same animation (Pioneer 10,
+  Galileo and Jupiter, Sun-centred, from 2000 by year, Auto scale)
+  opened at 98.6 AU, where the patch expected about 98 (Pioneer 10's
+  82.1 AU plus 20 percent). His maintenance run, in his run record
+  `documentation/WHERE_WE_ARE_11-6-26_1010_run_record.md`: "35 of 35
+  gating checkers passed", the Horizons check among them (it had been
+  red only in the session's copy, which could not reach JPL). Pushed at
+  dc52cbe.
+- **Where the loose ends went** (A Closing Item Re-homes Its Loose
+  Ends): the horizons-orbital-mechanics sentence on the last-day pair,
+  to L-485 (a nightly run), beside its other notes for that skill's
+  next version, as its sentence on the daily tail went on Nov 3.
+  Struck, with the reason: "No permanent check covers the scale or the
+  boxes" (above). The scale is judged by Tony's eyes (Visual
+  Verification), and a box that cannot be read now names itself when it
+  fails, so no item is opened for it. Nothing else here is recorded as
+  not done: `--galileo` ran on his machine (305 drawn, 305 served), and
+  the earlier loose ends went at the close of Nov 3.
+**Gap (replaces the one below, 2026-11-06, evening, at the close):**
+none; closed.
+**Gap (superseded above, 2026-11-06, evening, at the close; replaced the one below, 2026-11-06, afternoon):** Tony's look at
 the same animation with Auto scale (it opens on Pioneer 10's farthest
 point plus 20 percent, about 98 AU); then close. Its loose end at the
 close: the horizons-orbital-mechanics sentence carried above, to an open

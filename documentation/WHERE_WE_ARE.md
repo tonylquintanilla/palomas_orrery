@@ -1,25 +1,23 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 6, 2026, late afternoon: the coordinating session (Opus), after your look.
-- Written at orrery d9db340 and gallery 6c93d0a, plus this session's third patch.
+Last updated: November 6, 2026, evening: the coordinating session (Opus), at L-476's close.
+- Written at orrery dc52cbe and gallery 6c93d0a, plus this session's close patch.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Both fixes are pushed and your look passed: the live check, and
->   ended missions' markers on their last day.
-> - The animation's Auto scale now counts spacecraft; an unreadable
->   settings box is named instead of a silent stop. Patch, not run.
+> - Your look passed (98.6 AU on Auto scale): L-476 (the paths by the
+>   plan) is closed.
+> - Its loose end, a Horizons skill sentence on the drawing's last day,
+>   waits on L-485 (a nightly run) for that skill's next version.
 >
-> **Do next:** *steps 1 to 4 below, in order.*
+> **Do next:** *stage 14: your ruling on the Pluto row, then the Moon.*
 >
 > **Needs you now:**
-> - *1. (do) Orrery: run `patch_L476_5_animation_scale_and_settings.py`,
->   then the maintenance run from the dashboard: all gating checkers passed.*
-> - *2. (do) Look: the same animation on Auto scale: about 98 AU.*
-> - *3. (do) Commit and push the orrery, not during the website's night.*
-> - *4. Then L-476 (the paths by the plan) closes.*
+> - *(do) Orrery: run `patch_L476_6_close_20261106.py`, then commit and
+>   push the orrery, not during the website's night.*
+> - *(decide) The Pluto row: what it draws and what it is called.*
 > - *(do) Each morning, Pull origin on both, orrery then website, first.*
 
 *Italic* lines are the must-reads. Marks reset at every update.
@@ -27,15 +25,14 @@ Last updated: November 6, 2026, late afternoon: the coordinating session (Opus),
 ## The road  **>> UPDATED THIS SESSION**
 
 Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
-  1-12.[done]  Through Nov 5: the three rooms, the objects, the Sun's and
+  1-13.[done]  Through Nov 6: the three rooms, the objects, the Sun's and
                Earth's slices, historical missions' slice 1, the paths by
-               the plan (L-476), path or orbit by e (L-510), A1 and A2
-               of JPL's fallbacks (L-512), a green website night.
- 13.   [NOW]   *Quick wins:* the live check's list, done (L-423 (the
-               website's checks)); the ended markers, done, and the
-               animation's scale, for your look (L-476 (the paths by the plan)).
- 14.   [next]  Standards: the Moon gets the orrery's words, link, period
-               and uncertainty; the Pluto row's drawing and name, your ruling.
+               the plan (L-476, closed), path or orbit by e (L-510), A1
+               and A2 of JPL's fallbacks (L-512), a green website night,
+               the quick wins with L-423 (the website's checks). << moved
+ 14.   [NOW]   *Standards: the Moon gets the orrery's words, link, period
+               and uncertainty; the Pluto row's drawing and name, your
+               ruling.* << moved this session
  15.   [later] The planet rooms in order, each opening with the planet
                and its moons, shells later: Mars (Phobos, Deimos),
                Jupiter, Saturn, Uranus, Neptune, Pluto. Io, Titan,
@@ -96,7 +93,7 @@ Waiting behind other work; a line leaves when picked up.
 
 Read from files when this page was written, not typed from memory.
 - Last cache build: 20261106T192923Z, ok, no retry (gallery swap log at 6c93d0a).
-- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at d9db340, Nov 6).
+- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at dc52cbe, Nov 6).
 - This page's date and the ledger's newest stamp: both Nov 6. Agree.
 
 ## Waiting on you
@@ -124,7 +121,8 @@ Not urgent, in your order:
 - Every item: `LEDGER_CONSOLIDATED.md`.
 - This session: your run record `WHERE_WE_ARE_11-6-26_1010_run_record.md`;
   the patches `patch_L423_positions_from_config.py` (website),
-  `patch_L476_4_ended_markers.py` and `patch_L476_5_...` (orrery).
+  `patch_L476_4_ended_markers.py`, `patch_L476_5_...` and the close,
+  `patch_L476_6_close_20261106.py` (orrery).
 - The talk's rulings: `DESIGN_L484_consistency_rulings_20261103.md`.
 - The door: `documentation/python_work_door/`, and L-499 (kinds of session).
 

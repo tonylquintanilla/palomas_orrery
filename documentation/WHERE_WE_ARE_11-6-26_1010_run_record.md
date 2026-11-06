@@ -166,7 +166,7 @@ Here's an opener for the next session:
 
 ===================================================================================================
 
-**Session: OPEN: 11-6-26 1014: Opus: Orrery and gallery live-check fixes**
+**Session: DONE: 11-6-26 1617: Opus: Coordinator: Orrery and gallery live-check fixes**
 
 I'll record both bases, read the orientation files and the skills, then come back with one-line proposals for the two jobs.
 
@@ -1737,17 +1737,44 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
   2. Run palomas_orrery.py: Pioneer 10, Galileo and Jupiter, centre
      on the Sun, start in 2000, 29 steps, the Year animation, on
-     Auto scale. It opens at about 98 AU, Pioneer 10 inside it. -- 
+     Auto scale. It opens at about 98 AU, Pioneer 10 inside it. -- correct
   3. Move this patch into documentation\, then commit and push the
-     orrery, not during the website's night.
+     orrery, not during the website's night. -- dc52cbe71d325a0e027d3284f025e5203fbd1677
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
 2. Run the maintenance run from the dashboard. It should end with all gating checkers passed and 0 TIER-1 on the gate path.
 3. Look:
    - Pioneer 10, Galileo and Jupiter, centred on the Sun, start in 2000, 29 steps, the Year animation, on Auto scale.
-   - It should open at about 98 AU, with Pioneer 10 inside the view.
+   - It should open at about 98 AU, with Pioneer 10 inside the view. -- correct
 4. Move the patch into `documentation\`, then commit and push the orrery, not during the website's night.
 
 **Tony-action rollup**
 - (do) Steps 1 to 4 above.
 - (do) Each morning, Pull origin on both, orrery then website, first.
+
+==========================================================================
+
+The animation now opens at ±98.6 AU, which is Pioneer 10's 82.1 AU plus 20 percent, so the fix works on your machine. I can see your push at dc52cbe.
+
+**What's next on the road is stage 14, the standards slice.** It does two things:
+- **The Moon:** the website's Moon gets what the orrery already has: its words, its info link, its period and its position uncertainty.
+- **The Pluto row:** it needs your ruling before anything is built. Should the Solar System room's Pluto row show Pluto itself or the Pluto-Charon barycentre, and what should the row be called? It's recorded on L-150 (trusting a near-equal pair), on your "Waiting on you" list.
+
+**One small loose end first:** L-476 (the paths by the plan) can now close, since your look passed. Closing it also moves one out-of-date skill sentence onto the open item that collects notes for that skill's next update. That's a short records patch, and the next session can do it first.
+
+I'd close this session here. It has run long, and every further turn re-reads all of it. Here is an opener for the next one:
+
+> Built on orrery dc52cbe at https://github.com/tonylquintanilla/palomas_orrery
+> and gallery 6c93d0a at https://github.com/tonylquintanilla/tonyquintanilla.github.io
+> (both branch main, read Nov 6, 2026). Nightly bot commits since are expected.
+>
+> Coordinating session for Paloma's Orrery, through the python_work door. Both repositories are in my connected python_work folder.
+>
+> Start:
+> 1. Record both bases and say whether either moved since the anchor.
+> 2. Read the orrery's documentation/WHERE_WE_ARE.md and my latest run record copy.
+> 3. Name each skill you read and its version line, against the manifest.
+>
+> The job, in this order:
+> a. Close L-476 (the paths by the plan): my look of Nov 6 passed (animation at 98.6 AU). Re-home its loose end, the horizons-orbital-mechanics sentence on the last-day pair, to the open item that carries that skill's next-version notes.
+> b. Road stage 14, standards: bring me the Pluto row question (L-150) as one decision with its options, then propose the smallest instrument for the Moon's standards and wait for my go-ahead.
