@@ -935,7 +935,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*254 live items; 238 need attention (`!`); 165 RICE-scored; 253 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*255 live items; 239 need attention (`!`); 165 RICE-scored; 253 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1103,6 +1103,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-511 | The orrery's export carries the words the website prints (orrery + gallery, the words) | OPEN | -- | 2026-11-03 |
 | ! | L-512 | The orrery's fallbacks when JPL cannot answer (orrery, the plot's data path) | OPEN | -- | 2026-11-04 |
 | ! | L-514 | The Mars room: Mars, Phobos and Deimos (gallery + orrery, a planet room; road stage 15) | OPEN | -- | 2026-11-06 |
+| ! | L-515 | One nested tree in place of isolated rooms (gallery, the room system; design) | OPEN | -- | 2026-11-07 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1533,6 +1534,47 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
+#### [L-515] One nested tree in place of isolated rooms (gallery, the room system; design)
+<!-- L:515 status:OPEN upd:2026-11-07 section:A flag: rice: -->
+- **Opened 2026-11-07, 00:17 Chicago**, in the coordinating session
+  (Claude Opus 5.5), built on orrery 33c699bb and gallery 3f2ce7fc.
+  Tony: "I think we need to rethink the room system before we go
+  further. The model we are using is that of isolated room with their
+  defined features. A solar system room, a sun room, an earth room, next
+  a mars room, etc. the problem is that they are isolated and their
+  features cannot be shared. I think what we need is a nested system
+  much like the orrery's flat objects list:" -- his tree: Solar system;
+  Sun (Sun shells; Comets, by type); Mercury (shells); Venus (shells;
+  asteroids); Earth (shells; Moon, with Moon shells; space missions, by
+  type; asteroids, by type); Mars (shells; Phobos; Deimos); Asteroid
+  belt (belt cloud; named asteroids); ... TNOs; Termination shock;
+  Heliopause; ... Gravitational influence.
+- **Read at gallery 3f2ce7fc:** every object in
+  `data/objects_config.json` already names a `parent`: "sun" for 97, none
+  for the Sun, and Earth, Jupiter, Saturn and Pluto for the Moon, Io,
+  Titan and Charon. The Solar System room's drawer
+  (`rooms.solar-system.drawer.rows`, 113 rows) is already in his order:
+  the Sun, the comet groups, Mercury, Venus, the Aten group, Earth, the
+  Spacecraft, and outward. What it lacks: a body's row cannot open into
+  its own shells and moons; it offers a separate room.
+- **Raised by the coordinator:** two kinds of "under" in the tree. An
+  ORBIT child (the Moon, Phobos) is asked of JPL around its parent, which
+  is what makes a parent-centred view right; a NEIGHBOURHOOD child (the
+  Atens under Venus, missions under Earth) still goes around the Sun and
+  is only placed there for the visitor. The website never moves a
+  position from one centre to another by subtraction (retired for
+  catastrophic cancellation; the protocol's The Orrery and the
+  Assembler), so each branch must say which kind it is.
+- **Options put to Tony:** A, one tree in the data, the rooms kept as
+  views of a node; B, one tree on one page, any node's Go To making it
+  the centre; C, one continuous scene with nothing re-centred, which the
+  coordinator advised against.
+**Gap:** Tony's direction; then the design rounds; L-514 (the Mars room)
+waits.
+- **Ref:** L-514 (the Mars room); L-443 (the drawer's groups); L-392 (the
+  rooms section); L-291 (the Earth room); the protocol's The Orrery and
+  the Assembler.
+
 #### [L-514] The Mars room: Mars, Phobos and Deimos (gallery + orrery, a planet room; road stage 15)
 <!-- L:514 status:OPEN upd:2026-11-06 section:A flag: rice: -->
 - **Opened 2026-11-06, night**, by the coordinating session (Claude Opus
@@ -1655,8 +1697,12 @@ as an archive of the prioritization thinking -- no cleanup on close.
   - Each session's brief written when that session is next (Token
     Economy); one interactive-exhibit bump, in session 2, if its rules
     change.
-**Gap:** Tony's go-ahead on the build; then sessions 1 and 2; the item
-closes on his phone look.
+- **Held, Nov 7, 00:17 Chicago**, before any go-ahead: Tony opened a
+  rethink of the room system (L-515 (one nested tree)). The Mars room
+  waits behind it, and may be built as the first node of the new system
+  rather than as one more room. Its four rulings stand.
+**Gap:** L-515's direction; then the build, proposed again in its terms,
+on Tony's go-ahead.
 - **Ref:** L-513 (the Moon's standards, the pattern); L-334 (what a room
   opens on, 2026-09-17); L-291 (the Earth room); L-484 (the two agree);
   L-150 (Charon's period centre, for the Pluto room).
