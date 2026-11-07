@@ -228,7 +228,7 @@ The Moon's pattern, line by line:
 - One sentence saying which of the two set those digits.
 - Its period in days, around Mars, from JPL, with the date it was fetched.
 
-The difference is that the orrery has no cited accuracy for Mars's moons yet. JPL's 2014 report, which gives the planets' and the Moon's, doesn't cover them. Until a source is found and cited, the box prints the standing sentence the website already uses for any body without one: "JPL's own uncertainty for this position is not yet included." Finding that source is part of the build, not a guess now.
+The difference is that the orrery has no cited accuracy for Mars's moons yet. JPL's 2014 report, which gives the planets' and the Moon's, doesn't cover them. Until a source is found and cited, the box prints the standing sentence the website already uses for any body without one: "JPL's own uncertainty for this position is not yet included." Finding that source is part of the build, not a guess now. -- yes, needs a source.
 
 **Files changed, for your run record**
 - ok `LEDGER_CONSOLIDATED.md` (2 edits, then the index rebuilt). Ruling 1 again, and ruling 2 with your note on the Earth room, on L-514 (the Mars room).
@@ -237,13 +237,17 @@ The difference is that the orrery has no cited accuracy for Mars's moons yet. JP
 **Token count:** this session can't print Claude Code's usage count. This turn read small slices and wrote the two files above.
 
 **Your run order**
-1. In GitHub Desktop, commit and push the orrery. Check that both the ledger and Where We Are are in the change list.
+1. In GitHub Desktop, commit and push the orrery. Check that both the ledger and Where We Are are in the change list. -- 33c699bb8514972953f1647ca4dbe30a0a781ecf
 
 **For you to do or decide**
-- (decide) Should each Martian moon's box follow the Moon's pattern, with the "not yet included" sentence until an accuracy is cited?
+- (decide) Should each Martian moon's box follow the Moon's pattern, with the "not yet included" sentence until an accuracy is cited? -- yes. but it will be part of the build. 
 - (do) Commit and push the orrery, ledger included.
 - (do) Each morning, Pull origin on both, orrery then website, first.
 
 I haven't committed or pushed, because commit and push are yours by your project rules. The uncommitted changes are in my working copy here. The same two files, the ledger and Where We Are, are already saved in your orrery folder for you to commit in GitHub Desktop.
 
-The open question is still question 3: should each Martian moon's text box follow the Moon's pattern?
+The open question is still question 3: should each Martian moon's text box follow the Moon's pattern? -- yes. but there are 3 text boxes:
+1) the go to button open a short text box labeling the orbit. 
+2) tapping the moon open's the moon's text box
+3) tapping the cross on the orbit open's a text box on the orbit as rendered.
+-- this is complicated for the visitor and can be easily missed and tapping is hit or miss. the only obvious box is the go to's text box. to make it easier on the visitor, this go to box should tell the visitor to tap the moon and to tap the cross for specific information about those features. perhaps we should also increase the tap area so that it is easier to open those text boxes. i missed these details when building the earth room, but this is the template for all future moons including Mars'. 

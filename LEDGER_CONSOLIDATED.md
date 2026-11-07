@@ -1599,8 +1599,42 @@ as an archive of the prioritization thinking -- no cleanup on close.
     (interactive-exhibit, One chrome, many rooms): built once, given to
     the Mars and Earth rooms together, both Mode 5 targets. Put to Tony
     with the build's instrument.
-**Gap:** ruling 3; then the smallest instrument, proposed, on Tony's
-go-ahead, with the Earth room's fixed row in it.
+- **Ruling 3, how a moon's box reads**, Tony, Nov 6, the same run record:
+  each Martian moon's box follows the Moon's (L-513) pattern -- name,
+  NASA's sentence with NASA's page as the panel's link, its distance
+  from Mars by the larger of the drift and JPL's accuracy, never finer
+  than whole kilometres, a sentence saying which set the digits, its
+  period in days around Mars -- with JPL's "not yet included" sentence
+  until an accuracy is cited. Tony: "yes, needs a source." and "yes.
+  but it will be part of the build." So finding and citing an accuracy
+  for the Martian moons is build work, not a guess at design.
+- **Tony's observation on the moon's three boxes**, the same run record,
+  for the template of every moon, the Earth room's Moon included: "there
+  are 3 text boxes: 1) the go to button open a short text box labeling
+  the orbit. 2) tapping the moon open's the moon's text box 3) tapping
+  the cross on the orbit open's a text box on the orbit as rendered. --
+  this is complicated for the visitor and can be easily missed and
+  tapping is hit or miss. the only obvious box is the go to's text box.
+  to make it easier on the visitor, this go to box should tell the
+  visitor to tap the moon and to tap the cross for specific information
+  about those features. perhaps we should also increase the tap area so
+  that it is easier to open those text boxes. i missed these details
+  when building the earth room, but this is the template for all future
+  moons including Mars'."
+  - Read at gallery 3f2ce7fc: Go To on the Moon's row opens the words of
+    the row's info cross, the orbit's short label "Moon's orbit, drawn
+    around Earth" (`labelTraceIndex` takes a trace marked
+    `meta.label_target` first, else the row's cross); the full box is on
+    the Moon's marker alone (`earth_geometry.js`, `moonBox`). The tap
+    reaches 22 px on a portrait phone, with text-less traces left out of
+    the pick (`SUN_PICK_RADIUS_PX`, `sunTapPicking`), and Plotly's 10 px
+    elsewhere.
+  - Put to Tony as the round's last question: the Go To box tells the
+    visitor where to tap (his proposal), or Go To opens the moon's own
+    full box (the marker marked `label_target`), as Go To on a body does
+    in the Solar System room.
+**Gap:** the answer on the moon's boxes; then the smallest instrument,
+proposed, on Tony's go-ahead, with the Earth room's fixed row in it.
 - **Ref:** L-513 (the Moon's standards, the pattern); L-334 (what a room
   opens on, 2026-09-17); L-291 (the Earth room); L-484 (the two agree);
   L-150 (Charon's period centre, for the Pluto room).

@@ -10,14 +10,14 @@ Last updated: November 6, 2026, late night: the coordinating session (Opus), sta
 > - The Moon keeps JPL's period for today, by the same rule as every
 >   other body (your "yes", Nov 6, 22:17). L-513 (the Moon's standards)
 >   is closed, and road stage 14 is done.
-> - The Mars room's design round has begun, in L-514 (the Mars room).
->   It opens on Mars's symbol alone, moons off; its drawer lists Mars
->   (fixed), Phobos and Deimos. The Earth room gets a fixed Earth row too.
+> - L-514 (the Mars room): it opens on Mars's symbol alone, moons off;
+>   its drawer lists Mars (fixed), Phobos, Deimos; a moon's box follows
+>   the Moon's, accuracy sourced at the build; Earth gets a fixed row.
 >
-> **Do next:** *answer the Mars room's third question: how a moon's box reads.*
+> **Do next:** *answer what Go To on a moon opens (the question in chat).*
 >
 > **Needs you now:**
-> - *(decide) How a Martian moon's text box reads (the question in chat).*
+> - *(decide) What Go To on a moon opens, for every room with moons.*
 > - *(do) Commit and push the orrery: the ledger and this page.*
 > - *(do) Each morning, Pull origin on both, orrery then website, first.*
 
@@ -101,8 +101,8 @@ Read from files when this page was written, not typed from memory.
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
 Decisions, one at a time:
-- *The Mars room: how a moon's box reads (L-514 (the Mars room)). Its
-  opening and its drawer are ruled (Nov 6).*
+- *What Go To on a moon opens (L-514 (the Mars room)); the rest of the
+  Mars room's design is ruled (Nov 6).*
 
 At the next design talk:
 - How obsolete code is treated, and when it goes (L-509 (obsolete
@@ -124,7 +124,7 @@ Not urgent, in your order:
 - Every item: `LEDGER_CONSOLIDATED.md`.
 - This session: L-513 (the Moon's standards) closed on your ruling in
   `WHERE_WE_ARE_11-6-26_1625_run_record.md`; L-514 (the Mars room)
-  carries the design round, rulings 1 and 2 from `..._2227_run_record.md`.
+  carries the design round, its rulings from `..._2227_run_record.md`.
 - The talk's rulings: `DESIGN_L484_consistency_rulings_20261103.md`.
 - The door: `documentation/python_work_door/`, and L-499 (kinds of session).
 
