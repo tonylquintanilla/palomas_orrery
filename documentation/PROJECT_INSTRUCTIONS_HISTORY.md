@@ -4239,6 +4239,55 @@ resident.
 (Moved down from the resident protocol on 2026-11-06 when
 v3.128 made a fourth entry.)
 
+v3.126 (November 4, 2026): No rule changed in this document. ONE
+skill bump: horizons-orbital-mechanics 1.16 -> 1.17 (L-512, part 1 and
+slice a's part A1). THE SAVED-PATH FILE IS RETIRED, AND EVERY JPL
+QUESTION IN THE REPOSITORY IS ASKED FRESH.
+
+WHAT PROMPTED IT. Two Claude Code sessions of Nov 4 (Claude Opus 5.5),
+through the python_work door. Part 1, built on orrery 3fb14c26, from
+documentation/COORD_L512_jpl_fallbacks_brief_20261104.md: the orrery's
+plot decides path or orbit by the e of a body's typed elements when JPL's
+database has no record (6AC4721). Part A1, built on orrery 79018c0c, from
+documentation/COORD_L512_slice_a_prompt_20261104.md, on Tony's rulings of
+Nov 4, 12:36 to 12:56 Chicago, in
+documentation/MAP_L512_jpl_fallbacks_20261104.md. Ruling 0: "a heavy file
+that is wrong and nobody reads is a bad breadcrumb leading nowhere." And
+the prompt's change to the rulings: "the fresh switch's check covers the
+whole repository".
+
+WHAT CHANGED. horizons-orbital-mechanics: under Which Record Serves a
+Body, the L-470 paragraph no longer sends a session to compare saved
+paths in data/orbit_paths.json, which is retired, and the skip lists are
+five (SKIP_HORIZONS_TRAJECTORY went with the file's writer; Gonggong's
+line corrected to its removal of Oct 23). Under A Small Body Is Drawn by
+Its Database e, the named failure carries part 1's second link. Under
+Query Mechanics, nine calls that asked without the fresh switch, and
+test_orbit_cache.TestFreshCalls, which now holds every .py in the
+repository to it on Python's parser. Its oldest of four version entries
+(1.14) moved to documentation/SKILL_HISTORIES.md, by the three-entry
+rule. Every sentence was read from the code at 79018c0c and the session's
+own edits before it was written.
+
+THE OBLIGATION TRAVELS. This session read each skill as the file in the
+repo, each as the manifest expected: horizons-orbital-mechanics 1.16,
+orrery-coding-conventions 1.13, gallery-cache-builder 1.17,
+provenance-discipline 2.36, safe-file-editing 1.14, agentic-pre-test
+1.3 and ledger-and-session-records 1.22. Tony reinstalls
+horizons-orbital-mechanics (Settings > Skills) and pastes this version
+into the Project's instructions on claude.ai; the next session that
+loads it from the account confirms its copy reads 1.17 before work
+that fires it.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.123 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-11-07 when
+v3.129 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

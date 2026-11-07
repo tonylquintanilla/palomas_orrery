@@ -40,6 +40,9 @@ Module updated: November 6, 2026 with Anthropic's Claude Opus 5.5
 (L-476: the Path Drawing Suite's line, 13 checks, five planted faults.
 L-423: the website's Served List button and line, and the offline
 run's card names it.)
+Module updated: November 7, 2026 with Anthropic's Claude Opus 5.5
+(L-515 step 1: the website's Tree Parents button and line, beside Served
+List, for the gallery run's new "Tree parents" check.)
 July 2026: added Linux Button-4/5 wheel scrolling to match columns 1/2's
 cross-platform coverage (CTkScrollableFrame's built-in handling only
 covers Windows/Mac <MouseWheel>). Audited LAUNCH_GROUPS against both
@@ -778,6 +781,20 @@ LAUNCH_GROUPS = {
         "joining, one leaving, two configs that cannot give a list, and a "
         "404 on Pioneer 10's file. Fetches nothing. GATES the gallery "
         "runner.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
+        True),
+        ("Tree Parents",
+        os.path.join("tools", "check_tree_parents.py"),
+        "The website's one nested tree (L-515): every object in "
+        "data/objects_config.json sits under the centre JPL serves it "
+        "around -- its parent equals its center_slug -- the Sun, served "
+        "around itself, is the one root with no parent, and every parent "
+        "is an object the config lists. Four faults are planted on copies "
+        "first, each caught: a parent that is not the fetched centre, a "
+        "root with a parent, a parent naming no object, and a second "
+        "root. Reads only the config. GATES the gallery runner.",
         GALLERY_REPO_DIR,
         True,
         None,
@@ -2143,6 +2160,9 @@ CARD_LINES = {
     ("Gallery -- checks and data",
      "Served List"):
         "Checks the live check reads its positions files from the config.",
+    ("Gallery -- checks and data",
+     "Tree Parents"):
+        "Checks every object sits under the centre JPL serves it around.",
     ("Gallery -- checks and data",
      "Artifact 1 Assembler"):
         "Compares the Artifact 1 assembler test's verdicts with their recorded pin.",

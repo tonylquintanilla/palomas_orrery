@@ -133,7 +133,7 @@ Not urgent, in your order:
 
 **Tony**: Run record:
 
-**Session: OPEN: 11-6-26 2225: Opus: Coordinator: Orrery Moon period and Mars room**
+**Session: DONE: 11-7-26 1301: Opus: Coordinator: Orrery Moon period and Mars room L515**
 
 I'll record both bases, read Where We Are and your latest run record, and check the skills' versions before touching L-513.
 

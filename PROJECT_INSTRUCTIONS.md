@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.128 | November 6, 2026
+Tony Quintanilla, PE | Claude | v3.129 | November 7, 2026
 
-Cut from f87d3aee at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 9117505a at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -556,7 +556,7 @@ gallery-cache-builder        1.18 Nightly builder, atomic swap and its
                                   (HORIZONS_CACHE), a drawing named on a room's
                                   row, an ended mission's last day
                                   (fetch_path_last_day)
-interactive-exhibit          1.32 adding or changing an exhibit in
+interactive-exhibit          1.33 adding or changing an exhibit in
                                   interactive.html; any edit to the Sun's
                                   chrome (drawer, nav cluster, frame zoom,
                                   i-panel, HUD, consent, back link); "Earth
@@ -610,7 +610,14 @@ interactive-exhibit          1.32 adding or changing an exhibit in
                                   mission_end; a craft that flew on and its
                                   end_note; a path cut before its mission ended
                                   and its cutoff_note); an orbital period under
-                                  a year, printed in days only (days_only)
+                                  a year, printed in days only (days_only); one
+                                  drawer for every centre (the fixed centre
+                                  row, the trail line, Centre on and Not built
+                                  yet, the root's ticks kept, a centre's
+                                  children after its shells); an object's
+                                  parent as its fetched centre
+                                  (check_tree_parents.py, the store writer's
+                                  parent path)
 <!-- SKILL-MANIFEST:END -->
 
 Session-Start Repo Pull and the SHA Round Trip [CRITICAL]
@@ -1304,6 +1311,52 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.129 (November 7, 2026): No rule changed in this document. ONE
+skill bump: interactive-exhibit 1.32 -> 1.33 (L-515, one nested tree,
+step 1 and step 2a's part 2). THE WEBSITE'S ROOMS BECOME ONE TREE: ONE
+DRAWER FOR EVERY CENTRE, AND EACH OBJECT UNDER THE CENTRE JPL SERVES IT
+AROUND.
+
+WHAT PROMPTED IT. The Claude Code session of Nov 7 (Claude Opus 5.5),
+through the python_work door, built on orrery 9117505a and gallery
+9c6093af, from documentation/COORD_L515_steps1_2a_brief_20261107.md, on
+Tony's twelve rulings of Nov 7 on L-515. Its question at the start,
+whether a gallery session may make this bump in the orrery: "Yes, bump
+it here". His instruction after part 2: "Then stop here: make the
+interactive-exhibit skill bump now, with parts 1 and 2's rules. Part 3
+goes to a fresh session after I've looked at part 2 on my phone."
+
+WHAT CHANGED. interactive-exhibit: a new rule, One drawer for every
+centre -- one builder and one plan for the root and the Sun and Earth;
+a fixed row for the centre in every centre, Earth's new; the trail line
+"Solar system > Earth"; "Centre on <name>" where "Enter the <name> room"
+stood, and "Not built yet" on a centre in the tree with none built,
+both read from the config; the root's ticks kept on leaving by Centre
+on and put back once (rulings 2 and 10); and two rules of method the
+brief asked the session to write, a centre's children listed after its
+shells and which Reset a centre gets. Under Only two tools write the
+served config, the store writer's parent path, which accepts only the
+object's own center_slug (ruling 6), held by the gallery run's new Tree
+parents check. Its oldest of four version entries (1.30) moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule. Every
+sentence was read from the gallery's code with this session's edits
+before it was written.
+
+THE OBLIGATION TRAVELS. This session read each skill as the file in the
+repo, each as the manifest expected: interactive-exhibit 1.32 in full,
+gallery-cache-builder 1.18 in the parts its brief named,
+safe-file-editing 1.14 and ledger-and-session-records 1.22. Tony
+reinstalls interactive-exhibit (Settings > Skills) and pastes this
+version into the Project's instructions on claude.ai; the next session
+that loads it from the account confirms its copy reads 1.33 before
+work that fires it.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.126 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.128 (November 6, 2026): No rule changed in this document. ONE
 skill bump: interactive-exhibit 1.31 -> 1.32 (L-513, the Moon's
 standards). AN ORBITAL PERIOD UNDER A YEAR PRINTS IN DAYS ONLY.
@@ -1396,52 +1449,6 @@ fires them.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.124 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.126 (November 4, 2026): No rule changed in this document. ONE
-skill bump: horizons-orbital-mechanics 1.16 -> 1.17 (L-512, part 1 and
-slice a's part A1). THE SAVED-PATH FILE IS RETIRED, AND EVERY JPL
-QUESTION IN THE REPOSITORY IS ASKED FRESH.
-
-WHAT PROMPTED IT. Two Claude Code sessions of Nov 4 (Claude Opus 5.5),
-through the python_work door. Part 1, built on orrery 3fb14c26, from
-documentation/COORD_L512_jpl_fallbacks_brief_20261104.md: the orrery's
-plot decides path or orbit by the e of a body's typed elements when JPL's
-database has no record (6AC4721). Part A1, built on orrery 79018c0c, from
-documentation/COORD_L512_slice_a_prompt_20261104.md, on Tony's rulings of
-Nov 4, 12:36 to 12:56 Chicago, in
-documentation/MAP_L512_jpl_fallbacks_20261104.md. Ruling 0: "a heavy file
-that is wrong and nobody reads is a bad breadcrumb leading nowhere." And
-the prompt's change to the rulings: "the fresh switch's check covers the
-whole repository".
-
-WHAT CHANGED. horizons-orbital-mechanics: under Which Record Serves a
-Body, the L-470 paragraph no longer sends a session to compare saved
-paths in data/orbit_paths.json, which is retired, and the skip lists are
-five (SKIP_HORIZONS_TRAJECTORY went with the file's writer; Gonggong's
-line corrected to its removal of Oct 23). Under A Small Body Is Drawn by
-Its Database e, the named failure carries part 1's second link. Under
-Query Mechanics, nine calls that asked without the fresh switch, and
-test_orbit_cache.TestFreshCalls, which now holds every .py in the
-repository to it on Python's parser. Its oldest of four version entries
-(1.14) moved to documentation/SKILL_HISTORIES.md, by the three-entry
-rule. Every sentence was read from the code at 79018c0c and the session's
-own edits before it was written.
-
-THE OBLIGATION TRAVELS. This session read each skill as the file in the
-repo, each as the manifest expected: horizons-orbital-mechanics 1.16,
-orrery-coding-conventions 1.13, gallery-cache-builder 1.17,
-provenance-discipline 2.36, safe-file-editing 1.14, agentic-pre-test
-1.3 and ledger-and-session-records 1.22. Tony reinstalls
-horizons-orbital-mechanics (Settings > Skills) and pastes this version
-into the Project's instructions on claude.ai; the next session that
-loads it from the account confirms its copy reads 1.17 before work
-that fires it.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.123 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

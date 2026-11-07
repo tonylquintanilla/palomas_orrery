@@ -718,6 +718,11 @@ item 1 of documentation/HANDOFF_coordination_20261029_30.md: the
 workflow, the night set, its gate and record, the dashboard line built;
 lines on L-490, L-461, L-459 and L-266), built on orrery 1e454a8b with
 gallery b55109f2 read only.
+Module updated: November 7, 2026 with Anthropic's Claude Opus 5.5 (the
+website Code session for L-515 step 1: the coordinator's last entry on
+L-515 restored from its handoff, and step 1's record; then step 2a's
+part 2, the one drawer; the interactive-exhibit bump to 1.33 and
+protocol v3.129), built on orrery 9117505a with gallery 9c6093af.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -1957,9 +1962,204 @@ as an archive of the prioritization thinking -- no cleanup on close.
   copied into the coverage index beside `stored_center`). So step 1 is a
   check that `parent` equals `center_slug` and those two corrections,
   small enough to ride step 2a's session.
-**Gap:** Tony's go-ahead on the instrument: one Code session on the
-website, step 1 folded into step 2a, its brief written when that session
-is next; L-514 (the Mars room) waits for step 3.
+- **Tony's go-ahead, Nov 7, 13:01 Chicago, in chat:** "Yes." The brief:
+  `documentation/COORD_L515_steps1_2a_brief_20261107.md`, for one Claude
+  Code session on the website, in four parts with a stop after each: the
+  fetched-centre check and the two parents; one drawer for the root and
+  Earth, with the fixed centre row, the trail line, Centre on and Not
+  built yet; the Sun's shells in the root; and, separable, the freeze
+  past the served window (L-165). It asks Tony at its start whether it
+  may make the one interactive-exhibit bump in the orrery.
+- **Tony's question, the same message:** "would future barycenter
+  objects use these method?" The coordinator's answer: yes, by ruling 6.
+  A body JPL is asked around a barycentre sits under that barycentre,
+  and the barycentre, fetched around the Sun, is a centre (ruling 9: it
+  has something fetched around it). By the gallery-assembler skill's
+  rule a barycentre is its own node only when it lies OUTSIDE the
+  primary (Pluto-Charon; a near-equal binary asteroid); where it lies
+  inside (the Earth-Moon barycentre) the primary stays the centre and
+  the barycentre is a point drawn in its view, as road stage 16 plans.
+  The solar system's barycentre, around which some orbits are drawn
+  (`drawn_orbit`), stays a drawing, not a node. JPL's numeric
+  barycentre ids serve the planets' systems (Pluto's is 9, "@9" in the
+  config); whether JPL offers one for a small-body binary is to be read
+  live when one is added.
+- **Restored, Nov 7, by the website Code session:** the two bullets
+  above and the coordinator's Gap line were missing from Tony's push
+  9117505; they were put back from
+  `documentation/HANDOFF_coordination_20261107.md`, section "One thing
+  to repair first", on Tony's instruction in chat, word for word. The
+  Gap below is that line with the session's progress added.
+- **Step 1 built, Nov 7, the website Code session** (Claude Opus 5.5,
+  through the python_work door), built on orrery 9117505a and gallery
+  9c6093af, from the brief above (part 1). Tony's answer at its start,
+  in chat: "Yes, bump it here" (the session may make the one
+  interactive-exhibit bump; held until its last part, by Tony's
+  instruction).
+  - A CHECK IN THE GALLERY RUN, "Tree parents"
+    (`tools/check_tree_parents.py`, gates): every object's `parent`
+    equals its `center_slug`; the object served around itself (the Sun)
+    is the one root, its parent null; every parent names an object the
+    config lists. Four faults are planted on copies first (a parent not
+    the fetched centre, a root with a parent, a parent naming no object,
+    a second root), each must be reported, and a pass prints the tree it
+    read. Shown failing on the anchor's config, read from its output:
+    "pluto: parent is 'sun', but it is served around 'pluto_barycenter'"
+    and "charon: parent is 'pluto', but it is served around
+    'pluto_barycenter'". Now: "102 objects, each parent its fetched
+    centre"; under the Sun 96, under Earth the Moon, Jupiter Io, Saturn
+    Titan, pluto_barycenter Charon and Pluto.
+  - THE WRITER: `parent` joins `tools/store_writer.py`'s allow list for
+    every object that has one (the root's null is not offered), and the
+    one value it accepts is the object's own `center_slug`; any other is
+    refused, saying the fetched centre rules the tree. The two parents
+    were written through it (`save`, two changes, two lines of
+    `data/objects_config.json`). Its suite gains check 11 (shown failing
+    once on a copy of the writer with the rule taken out), and its
+    "nothing outside a room is editable" sweep sets the tree field
+    aside. Store writer suite 481 checks, store editor suite 377, both
+    green. The allow list holds 532 paths.
+  - CACHE IN STEP IS RED on exactly two differences, pluto/parent and
+    charon/parent, until the cache builder copies the new parents into
+    `coverage_index.json` (gallery-cache-builder, A config change is not
+    deployed until the cache is rebuilt). Nothing the page draws reads
+    `parent` yet, so a visitor sees no change. The cache builder's
+    offline suite: 526 checks, 0 failures.
+  - Carried for the interactive-exhibit bump: Only two tools write the
+    served config gains the `parent` path and its one value.
+- **Step 2a, part 2 built, Nov 7, the same website Code session**, on
+  Tony's "Go on to part 2, the one drawer" (chat), with three notes: no
+  commit or push (he pushes parts 1 and 2 together, then runs the nightly
+  by hand); the red clears at the next nightly run or his hand run, not
+  "tonight" (today's nightly ran at 11:49 Chicago, before the edits); stop
+  after part 2 and list its files apart from part 1's.
+  - ONE DRAWER BUILDER (`interactive.html`, `drawerBuildRows`), from one
+    plan in `gallery/solar_system_drawer.js` (`rowPlan`): the centre's
+    fixed row first; in the root its group rows and body rows in served
+    order (as before); in the Sun and Earth its shells in
+    `drawer_order.js`'s order. `ssBuildRows` and the second loop in
+    `buildSunDrawer` are gone. `EXHIBITS` keeps its three rows as
+    per-centre compose hooks; the three addresses open what they opened.
+  - THE FIXED ROW in every centre: no tick box, no Go To, always drawn,
+    never counted; its name opens its text box and its panel. The Sun
+    room's Sun row (tickable until now) is fixed; Earth's is new: the
+    assembler's centre marker, which `earth_geometry.js` used to drop, is
+    kept first as Earth's row, its box and panel the orrery's name,
+    description and link (`earthBox`, from the driver's new
+    `payload.earth`). Its marker is the assembler's yellow dot at the
+    centre, inside the crust: for Tony's phone look.
+  - THE TRAIL LINE, "Solar system > Earth" (and "> Sun"), at the top of a
+    centre's drawer, its first part a link to `?exhibit=solar-system`; the
+    root shows none. The name is the fixed row's, read from the scene.
+  - CENTRE ON AND NOT BUILT YET: `WORDS.enter` reads "Centre on <name>";
+    a body that is a centre in the tree with none built reads "Not built
+    yet" on its row, words, no link (`centreOffer`). Which bodies are
+    centres is read from the config (`centresOf`: an object fetched around
+    it, or features of its own): today the Sun, Earth, Jupiter, Saturn and
+    pluto_barycenter, so Jupiter, Saturn and Pluto read Not built yet. A
+    body that is no centre (Mars, until Phobos and Deimos are served)
+    still opens to "No room or cards yet", Tony's words of 2026-09-30,
+    kept: whether they change now that rooms are centres is his.
+  - TICKS KEPT (ruling 10): leaving the root by a Centre on button keeps
+    what is ticked and its order in sessionStorage, for the open tab only
+    (`tickMemory`); the root's next opening in that tab puts it back, once
+    (`tickRestore`, dropping a key that is no row now), the handle naming
+    the last body ticked; Reset still puts back the served opening.
+  - RULES WRITTEN, not asked (the brief; return 1, finding 10), carried for
+    the interactive-exhibit bump: (1) a centre's drawer lists its fixed row
+    first, its shells by where each begins, then its children -- the
+    bodies fetched around it, read from the config (`childrenOf`) -- right
+    after the last shell, any other row keeping its place
+    (`drawer_order.js`, `placeCentreAndChildren`); this is ruling 2's
+    order for Mars ("Mars, fixed; its shells when built; Phobos; Deimos")
+    and moves Earth's Moon from first to after the Hill sphere; (2) every
+    centre's Reset puts back what that centre opened on and never touches
+    its fixed row: a centre that serves rows keeps the root's (`ssReset`:
+    the served opening, groups folded, Find cleared), a centre of shells
+    keeps `sunReset` (its arrival), and a centre with both, when one is
+    built, puts back its own served opening and its shells' arrival
+    together.
+  - CHECKS, each shown red on a planted fault: Solar System drawer
+    (section 10, four new breaks, the page's one-drawer wiring), Drawer
+    order (a third self-test, the Moon kept in its old place), Arrival
+    (Earth's fixed row expected drawn; a centre stamped as a shell
+    planted), Label words (Earth's fixed row given the Moon's words). Also
+    updated: Earth scene geometry (the centre kept, 22 rows), Typed facts
+    (Earth's words masked), Display figures (re-recorded as
+    `fixture_hovers_L515_on_9c6093af.json`: "scene/center" new, three
+    hovers following the re-recorded scene, every other byte for byte),
+    and the Earth scene re-recorded by `tools/record_earth_scene.py`.
+  - HEADLESS: walk_drawer_order ok (Sun 19 rows, Earth 22, planted fault
+    caught); walk_shell_reset 33 of 33 in both rooms; walk_solar_system_
+    drawer 199 of 202, section 26 new (Not built yet on Jupiter, Saturn
+    and Pluto, the root with no trail, the Sun's box, ticks kept and put
+    back, Reset fresh), shown red on the anchor's page by eleven named
+    checks. Its three reds are the anchor's own, the same three on the
+    anchor's page with today's payload, recorded here and not chased:
+    "scene tap moved the view", "Sedna's hover lines are not bulleted",
+    and "a body's text box has a line wider than 62 characters" -- for
+    L-423 (the website's checks). `compare_rooms.js`, anchor page against
+    this one: every difference named and intended -- the trail line, the
+    fixed rows, the Sun room's count "3 of 19" to "2 of 18" (the fixed row
+    not counted), Earth's Moon after its shells, the root's button words
+    and Not built yet; the root's tick trail identical step for step.
+  - THE GALLERY RUN (offline), read from its output: "1 of 38 gating
+    checkers FAILED -- Cache in step", on pluto/parent and charon/parent
+    only, part 1's expected red, until the next nightly run or Tony's
+    hand run. No new file is fetched, so `SERVED_FILES` is unchanged.
+- **The rows after the nightly, read on a copy, Nov 7.** Tony asked
+  what the root shows once the next nightly run copies the new parents
+  (pluto and charon under pluto_barycenter) into the coverage index. A
+  throwaway copy of the gallery with only those two parents changed in
+  its coverage_index.json (Cache in step passes on it; the real cache
+  untouched), the Solar System payload built from it, and the drawer
+  walk run on it: 199 of 202, the same three reds as before (recorded
+  above). The root lists ONE row for the system, the served row
+  `pluto_barycenter`, labelled "Pluto", reading "Not built yet" with no
+  link, and naming it opens the barycentre's own sentence and NASA's
+  link; Pluto and Charon have no row of their own in the root, as
+  today. The same on today's cache: nothing the page draws reads the
+  cache's parent, and the drawer reads the tree from the config's
+  center_slug, which part 1 already made right.
+- **The interactive-exhibit bump, 1.32 -> 1.33, made Nov 7 on Tony's
+  instruction** ("Then stop here: make the interactive-exhibit skill
+  bump now, with parts 1 and 2's rules. Part 3 goes to a fresh session
+  after I've looked at part 2 on my phone."): the four steps -- the
+  skill's version line and body (One drawer for every centre, new; the
+  parent path under Only two tools write the served config; the drawer
+  order's ties; the room button's words; Install and verify), its 1.30
+  entry moved to `documentation/SKILL_HISTORIES.md`; `skills_index.py`
+  run (the manifest read 1.32 and was corrected; `--check` OK); the
+  protocol's v3.129 entry, its v3.126 moved to
+  `documentation/PROJECT_INSTRUCTIONS_HISTORY.md` PART 1, the header
+  stamp and anchor moved; and the commit, Tony's, carrying all of it.
+  The session loaded 1.32 from the repo, so 1.33 is confirmed by the
+  next session that loads it.
+- **The orrery maintenance run, Nov 7, after the bump**, read from its
+  output: "1 of 37 checkers FAILED", Dashboard parity: "NO BUTTON
+  gallery step "Tree parents" (tools/check_tree_parents.py) has no
+  button named so in "Gallery -- checks and data"". Part 1 added the
+  gallery run's row and not its dashboard button. The fix is one button
+  entry in the orrery's `palomas_orrery_dashboard.py`, beside "Served
+  List"; that file is outside what a gallery session edits, so it waited
+  for Tony's word. Every other checker passed.
+- **The dashboard's button, Nov 7, on Tony's "Yes, add the Tree parents
+  button to palomas_orrery_dashboard.py now, next to Served List"**: a
+  "Tree Parents" button in "Gallery -- checks and data" after Served
+  List, and its short line in the cards' list. The orrery maintenance
+  run again, read from its output: "35 of 35 gating checkers passed";
+  Dashboard parity "PASS -- 10 of 10 planted faults caught; 98 steps
+  matched to their buttons by name and script"; the provenance scanner
+  "0 TIER-1 -- the push gate holds".
+**Gap:** Tony's phone look at part 2 (the root, `?exhibit=sun`,
+`?exhibit=earth`); then part 3 of the brief, the Sun's shells in the
+root, in a fresh website session, its brief written when it is next;
+part 4 (L-165, the freeze past the window) after it or on its own; then
+Tony's phone look before step 2b; L-514 (the Mars room) waits for step
+3. Carried for Tony: whether "No room or cards yet" stays now that
+rooms are centres; the yellow centre dot in Earth's fixed row.
+**Tony-action (do):** reinstall interactive-exhibit 1.33 (Settings >
+Skills) and paste protocol v3.129 into the Project's instructions.
 - **Ref:** L-514 (the Mars room); L-443 (the drawer's groups); L-392 (the
   rooms section); L-291 (the Earth room); the protocol's The Orrery and
   the Assembler.

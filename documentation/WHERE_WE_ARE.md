@@ -1,30 +1,29 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 7, 2026, past midnight: the coordinating session (Opus), stage 14 closed, stage 15 held for the room system.
-- Written at orrery b32205f and gallery 3f2ce7f, plus this session's edits.
+Last updated: November 7, 2026, afternoon: the website Code session (Opus), L-515 step 1 and part 2 built, interactive-exhibit 1.33.
+- Written at orrery 9117505 and gallery 9c6093a, plus this session's edits.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The Moon keeps JPL's period for today, by the same rule as every
->   other body (your "yes", Nov 6, 22:17). L-513 (the Moon's standards)
->   is closed, and road stage 14 is done.
-> - L-514 (the Mars room) is designed: your four rulings are on it.
-> - You opened a rethink: one nested tree instead of isolated rooms
->   (L-515 (one nested tree)). The Mars build waits behind it.
+> - Step 1 of L-515 (one nested tree): Pluto and Charon now sit under
+>   the Pluto-Charon barycentre, where JPL measures them.
+> - Part 2: one drawer in every room, a fixed row for the centre (Earth
+>   gets one), "Solar system > Earth" at the top, "Centre on" and "Not
+>   built yet", and your ticks kept when you come back to the root.
 >
-> **Do next:** *go or redirect on the first build session (in chat).*
+> **Do next:** *your phone look at part 2; then part 3 in a fresh session.*
 >
 > **Needs you now:**
-> - *(decide) One website Code session: steps 1 and 2a (L-515).*
-> - *(do) Commit and push the orrery: the ledger and this page.*
+> - *(do) Push parts 1 and 2, then the nightly by hand (clears Cache in step).*
+> - *(do) Reinstall interactive-exhibit 1.33; paste protocol v3.129.*
 > - *(do) Each morning, Pull origin on both, orrery then website, first.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
-## The road  **>> UPDATED THIS SESSION**
+## The road
 
 Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
   1-14.[done]  Through Nov 6: the three rooms, the objects, the Sun's and
@@ -32,12 +31,12 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
                the plan (L-476, closed), path or orbit by e (L-510), A1
                and A2 of JPL's fallbacks (L-512), a green website night,
                the quick wins with L-423 (the website's checks), and the
-               Moon's standards (L-513, closed). << moved this session
+               Moon's standards (L-513, closed).
  15.   [NOW]   *The planet rooms in order, each opening with the planet
                and its moons, shells later: Mars (Phobos, Deimos) first,
                in design now (L-514 (the Mars room)), then Jupiter,
                Saturn, Uranus, Neptune, Pluto. Io, Titan, Charon and
-               Pluto come to standard in their rooms.* << moved this session
+               Pluto come to standard in their rooms.*
  16.   [later] The Earth room: L-297 (the Lagrange points), the Earth-Moon
                barycentre, SOHO, Gaia, James Webb, Artemis II.
  17.   [later] Small-body systems' moons; then stars and exoplanets.
@@ -50,6 +49,8 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
 ## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings; a line leaves once it is habit, or a skill carries it.
+- What JPL measures a thing around is where it sits in the website's
+  tree (Nov 7, 11:26; L-515 (one nested tree), ruling 6).
 - The Moon shows JPL's period for today, like every other body, not the
   sidereal month (Nov 6, 22:17; L-513 (the Moon's standards)).
 - Pluto: the Solar System row stays the barycentre named Pluto; the Pluto
@@ -67,7 +68,7 @@ Standing rulings; a line leaves once it is habit, or a skill carries it.
 - Encounters are both: shown in the Solar System room, and in a room
   centred on the body met (Nov 1).
 
-## Deferred  **>> UPDATED THIS SESSION**
+## Deferred
 
 Waiting behind other work; a line leaves when picked up.
 - Charon's period is asked around Pluto's centre, not the barycentre;
@@ -95,14 +96,14 @@ Waiting behind other work; a line leaves when picked up.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261106T192923Z, ok, no retry (gallery swap log, read Nov 6, late night).
-- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at orrery b32205f).
+- Last cache build: 20261107T174655Z, nightly, ok, no retry (gallery swap log, read Nov 7, afternoon).
+- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at orrery 9117505).
 - This page's date and the ledger's newest stamp: both Nov 7. Agree.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
 Decisions, one at a time:
-- *The room system's shape (L-515 (one nested tree)); Mars waits (Nov 7).*
+- None open: L-515 (one nested tree) is ruled; Mars waits for step 3.
 
 At the next design talk:
 - How obsolete code is treated, and when it goes (L-509 (obsolete
@@ -122,9 +123,8 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- This session: L-513 (the Moon's standards) closed on your ruling in
-  `WHERE_WE_ARE_11-6-26_1625_run_record.md`; L-514 (the Mars room)
-  carries the design round, its rulings from `..._2227_run_record.md`.
+- This session: L-515 (one nested tree); its brief
+  `COORD_L515_steps1_2a_brief_20261107.md`; `HANDOFF_coordination_20261107.md`.
 - The talk's rulings: `DESIGN_L484_consistency_rulings_20261103.md`.
 - The door: `documentation/python_work_door/`, and L-499 (kinds of session).
 

@@ -895,6 +895,21 @@ line's clocks. Each fact was read from the gallery's code at b55109f2
 before it was written.
 (Moved down 2026-11-06, when 1.32 made a fourth entry.)
 
+Earlier: 1.30 | 2026-11-02, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 15dc8e34 and gallery @ c77f87f6. v1.30 (L-507, carrying
+L-505) records historical missions' slice 1 and corrects what the ruler
+build of 2026-11-01 left wrong. An ended mission is drawn as Voyager is,
+whole and solid, its marker the spacecraft's diamond-open on its path's
+last served point, where it was on its last day; its text box opens with
+the day it ended, as Tony ruled; the Historical missions group follows
+the Spacecraft group; every spacecraft's box carries the dates sentence
+(the path is the mission's dates, the planets today's). And the Frame
+HUD row: its right end is a ruler keying x marks on the axis lines, not
+a grid chip, and the edge numbers are off (L-505, x marks by Tony's
+ruling of 2026-10-31). Each fact was read from the gallery's code at
+c77f87f6, with this session's edits, before it was written.
+(Moved down 2026-11-07, when 1.33 made a fourth entry.)
+
 ## safe-file-editing
 
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons;
