@@ -935,7 +935,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*254 live items; 238 need attention (`!`); 165 RICE-scored; 252 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*254 live items; 238 need attention (`!`); 165 RICE-scored; 253 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1102,7 +1102,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-510 | The object list's typed fields stop deciding: a small body drawn by today's eccentricity, a plan asked from before any launch (orrery, the object list and the path plan) | OPEN | -- | 2026-11-05 |
 | ! | L-511 | The orrery's export carries the words the website prints (orrery + gallery, the words) | OPEN | -- | 2026-11-03 |
 | ! | L-512 | The orrery's fallbacks when JPL cannot answer (orrery, the plot's data path) | OPEN | -- | 2026-11-04 |
-| ! | L-513 | The Moon's standards: its words, link, period and uncertainty, served by the orrery (orrery + gallery, objects; road stage 14) | OPEN | -- | 2026-11-06 |
+| ! | L-514 | The Mars room: Mars, Phobos and Deimos (gallery + orrery, a planet room; road stage 15) | OPEN | -- | 2026-11-06 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1503,6 +1503,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-502 | The triad's hover spot, and info crosses in crowded places (gallery, the rooms) | DONE | -- | 2026-10-29 |
 |  | L-503 | The main asteroid belt's cloud on the website, L-443's last piece, its gallery half (gallery, the Solar System room) | DONE | -- | 2026-11-01 |
 |  | L-505 | The axis ticks and the ruler: dots on the axis lines, a ruler for the grid chip, no edge numbers (gallery, every room's frame) | DONE | -- | 2026-11-02 |
+|  | L-513 | The Moon's standards: its words, link, period and uncertainty, served by the orrery (orrery + gallery, objects; road stage 14) | DONE | -- | 2026-11-06 |
 
 ### W.Done -- Web Publication track, closed items
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1532,242 +1533,52 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
-#### [L-513] The Moon's standards: its words, link, period and uncertainty, served by the orrery (orrery + gallery, objects; road stage 14)
-<!-- L:513 status:OPEN upd:2026-11-06 section:A flag: rice: -->
-- **Opened 2026-11-06**, evening, by the Claude Code session (Opus 5.5)
-  built on orrery 1422a96b and gallery 6c93d0a2, from
-  `documentation/COORD_stage14_moon_standards_brief_20261106.md`, Part
-  1. Tony, at the session's start: "Open L-513 (the Moon's standards)
-  in the ledger as your first record, cross-linked to L-484 (the two
-  agree) and to the brief, and carry Part 1's work on it."
-- The road's words (stage 14): "the Moon gets the orrery's words,
-  link, period and uncertainty."
-- **Why it is L-484's:** L-484 (the two agree) named the Moon among the
-  served objects with no key, outside its check until it gets one
-  ("each gains both when it gets a key"). This item is the Moon's key,
-  and with it the Moon enters the Horizons check and L-484's
-  comparison by name.
+#### [L-514] The Mars room: Mars, Phobos and Deimos (gallery + orrery, a planet room; road stage 15)
+<!-- L:514 status:OPEN upd:2026-11-06 section:A flag: rice: -->
+- **Opened 2026-11-06, night**, by the coordinating session (Claude Opus
+  5.5) through the python_work door, built on orrery b32205f4 and
+  gallery 3f2ce7fc. Tony's prompt: "Road stage 15, the planet rooms,
+  starting with Mars (Phobos, Deimos). This is a design round, not a
+  build: Mars is the first room centred on a planet since the Earth
+  room. Bring me the room's design questions one at a time: what the
+  room opens on, what its drawer lists, and how a moon's box reads. Use
+  the Moon of L-513 as the pattern for each moon (a key in the export,
+  JPL's name and period read live, NASA's own words with their page as
+  the link, a cited accuracy, days only under a year). Don't build until
+  the design settles; then propose the smallest instrument and wait for
+  my go-ahead."
 - **At the base, read 2026-11-06:**
-  - Orrery: `celestial_objects.py`, the entry `'name': 'Moon'`, id 301,
-    `id_type` 'majorbody', no `'key'`, so `export_objects.py` did not
-    export it. It carries `mission_info` (a NASA quotation) and
-    `mission_url` (https://science.nasa.gov/moon/). The orbit cache
-    holds its elements around Earth (`center_body` '@399', fetched
-    2026-09-25) and no period record.
-  - Website: `data/objects_config.json` slug `moon`, `canonical_center`
-    '@399', with no description, no info link, no `horizons_name`, no
-    period and no `position_accuracy`. The Earth room draws it
-    (`interactive.html`, `"objects": ["moon"]`).
-- **JPL's exact name, read live 2026-11-06** by the Horizons check's
-  three steps (`horizons_check.lookup_url`, `parse_lookup`, `keep`):
-  the major-body index for 301 answers one object, "Moon", natural
-  satellite, SPKID 301; the small-body index answers only 301 Bavaria
-  (SPKID 20000301, designation A890 WA), which the check's own filter
-  drops. So `horizons_name` is "Moon" and `id_type` 'majorbody' stands.
-- **Keyed 2026-11-06:** `'key': 'moon'` and `'horizons_name': 'Moon'` on
-  the entry. The path plans do not move: the Moon is already one of
-  path_plan's MAJOR_BODIES, and a major body is not a searched small
-  body.
-- **The period, fetched 2026-11-06 by `period_fetch.py`** (PASS,
-  "fetched 1: Moon"): around Earth ('@399', the centre the orrery gives
-  a moon; target 301), 27.42568868 days on JPL's elements of that
-  minute, the elements fetch's PR and the period query agreeing; its
-  change in a year 0.62 days, so it prints "0.08 years (27 days)". The
-  typed value it replaces, 27.321582 days, is the sidereal month; JPL's
-  osculating period around Earth moves with the Sun's pull, which is
-  why it prints to whole days.
-- **The words: NASA's Moon page does not carry the quotation**, read
-  2026-11-06 at https://science.nasa.gov/moon/ (title "Earth's Moon").
-  The entry's `mission_info` quotes NASA: "The Moon rotates exactly once
-  each time it orbits our planet." Neither that page nor NASA's Moon
-  facts page (https://science.nasa.gov/moon/facts/) has the sentence;
-  the facts page says it in other words, with a figure ("makes a
-  complete orbit around Earth in 27 Earth days and rotates or spins at
-  that same rate"). A quotation a visitor cannot find at the source is
-  not served (provenance-discipline, What a Visitor Reads, principle 4).
-  The Moon page's own opening, in its visible text: "From lighting up
-  our skies to preserving evidence of our solar system's history,
-  Earth's closest neighbor plays a pivotal role in the study of our
-  planet and beyond." Which, if any, the Moon serves is Tony's (the
-  brief's stop: the words need his choice).
-- **The uncertainty:** the website prints none for the Moon today. The
-  Earth room's Moon marker and orbit cross carry the assembler's bare
-  position line (`render_objects._marker_hover`, `render_orbits.
-  _au_km_hover`: r to six decimals of an AU and four figures of km),
-  with no words, no link, no period and no accuracy; only the Solar
-  System room prints an accuracy. The orrery's row reaches it:
-  `DE430_MOON_POSITION_PLACE_KM` (0.001 km, the place "submeter" reports
-  to; Folkner et al. 2014, abstract, open PDF on its Source line) is in
-  the constants export, so the website can link it as the Moon's
-  `position_accuracy`, as the planets link theirs. The Earth room needs
-  a build to print it, with the words, link and period.
-- **Tony's choice of the words, 2026-11-06, in chat:** "use NASA's own
-  words from its Moon facts page, quoted exactly: "The Moon makes a
-  complete orbit around Earth in 27 Earth days and rotates or spins at
-  that same rate." Cite it to https://science.nasa.gov/moon/facts/ (read
-  Nov 6, 2026), and keep the Moon's info link as the NASA Moon page.
-  Correct the orrery's own Moon entry to this sentence first, so the
-  website takes it from the export. Then go ahead with the Earth room's
-  build so the Moon's text box shows its words, link, period and
-  accuracy."
-  - Done in `celestial_objects.py`: `mission_info` reads "Horizons: 301.
-    NASA, Moon Facts (https://science.nasa.gov/moon/facts/): "The Moon
-    makes ... at that same rate."", the page and its read date on the
-    entry's `# Source:` comment. The export serves it as the Moon's
-    description, its address on the sentence a visitor reads, and
-    reports its one number, 27, which NASA's page states: the read is
-    this record (provenance-discipline, A Simple Error a Check Finds,
-    a number in a served description).
-  - Re-read 2026-11-06, the page titled "Moon Facts - NASA Science": the
-    words are there exactly; NASA's sentence goes on past "rate" with ",
-    or in that same amount of time.", and the quote ends where Tony's
-    did.
-- **Tony's three changes, after his push at 402f6c0e:** "(1) make the
-  Moon's info_url https://science.nasa.gov/moon/facts/ and drop the
-  address from the sentence, so the Moon follows the export's NASA: "..."
-  form like every other body; (2) quote NASA's whole sentence or end the
-  cut one with "...", your choice from the page; (3) leave the period
-  rule as it is, and I'll judge "0.08 years (27 days)" at my look."
-  Done: `mission_url` is the facts page, and `mission_info` reads
-  "Horizons: 301. NASA: "The Moon makes a complete orbit around Earth in
-  27 Earth days and rotates or spins at that same rate, or in that same
-  amount of time."" -- NASA's whole sentence, the session's choice, so
-  nothing is cut and no ellipsis stands for words. The bullet above
-  (the address on the sentence, the link the Moon page) is superseded
-  by this one.
-- **The orrery's maintenance run, 2026-11-06 evening:** "35 of 35 gating
-  checkers passed"; the gate path "0 TIER-1 -- the push gate holds". The
-  Horizons check confirmed the Moon by name on 2026-11-07 (UTC): identity
-  (JPL "Moon", natural satellite, both indexes asked) and period (around
-  @399, JPL's 27.42568868 days equal to the orrery's). Run again after
-  Tony's three changes: "35 of 35 gating checkers passed", 0 Tier-1 on
-  the gate path. Tony pushed the orrery at 402f6c0e, then at 67662596.
-- **The website half, built 2026-11-06 evening on gallery 6c93d0a2, not
-  yet committed:**
-  - THE PULL. `gallery_maintenance_run.py --pull` at orrery 67662596:
-    "all 5 passed"; the objects mirror wrote the Moon's description
-    (NASA's whole sentence), `info_url` (the facts page), `period`
-    (around Earth, "0.08" years, "27" days, fetched 2026-11-06) and
-    `horizons_name`. It also wrote three planets' periods that moved in
-    the orrery's cache since the last pull (Earth's fetched date; Mars's
-    date; Jupiter 11.86 to 11.87 years, 4333 to 4335 days), which no
-    website check pins.
-  - THE ACCURACY LINK. A `position_accuracy` pointer on the Moon's entry
-    to `constants_new.py::DE430_MOON_POSITION_PLACE_KM`, written as the
-    planets' were (L-398's patch wrote theirs), its value null; then
-    `tools/mirror_constants.py --write` filled the value (0.001 km), its
-    units, figures and the orrery's citation (Folkner et al. 2014: "the
-    present-day lunar orbit is known to submeter accuracy through
-    fitting lunar laser ranging data").
-  - THE EARTH ROOM. Its driver (`interactive.html`, EARTH_DRIVER) hands
-    over `moon`: the config's name, description, info_url, period and
-    position_accuracy, and the served trust rate and elements' date.
-    `gallery/earth_geometry.js` (`moonBox`) writes the Moon's text box:
-    its name; NASA's sentence; its distance from Earth by the Solar
-    System room's rule, the larger of the drift and JPL's accuracy,
-    never finer than whole kilometres ("0.00258731 AU from Earth
-    (387,056 km)." on the elements' own date; 100 km digits half a day
-    later, the drift governing); one sentence saying which error set the
-    digits, in the orrery's words for the Moon (the drift case: "This
-    distance is rounded to how far this page's working-out from JPL's
-    orbit may have drifted by the minute shown. JPL's published accuracy
-    for the Moon's orbit around Earth is finer."); and its period line.
-    Its panel: NASA's sentence, the facts-page link, and two sources --
-    the trusted arc's own sentence for the Moon's elements (one home now,
-    MOON_ELEMENTS_SOURCE) and the accuracy's citation. The orbit's cross
-    reads "Moon's orbit, drawn around Earth". `distanceLine` in
-    `gallery/solar_system_figures.js` takes the centre's words, "the
-    Sun" when none is given, so the Solar System room is unchanged.
-  - THE CHECKS. The Earth scene re-recorded with the new driver
-    (`tools/record_earth_scene.py`, epoch 2026-11-06 00:00 UTC, no
-    warnings). Typed facts masks the Moon's served words as it masks
-    Earth's period, and its ALLOWED list gains the box's seven typed
-    sentences, each with its reason; before that it named all twelve
-    strings the box added. Display figures re-recorded as
-    `fixture_hovers_L513_on_6c93d0a2.json`: the old fixture failed on
-    exactly four hovers, by name -- the Moon's two boxes, and Earth's
-    Sun distance and the arc's dates, which follow the re-recorded scene
-    -- and the diff of old and new showed nothing else moved. Then
-    `gallery_maintenance_run.py`: "37 of 37 gating checkers passed",
-    Cache in step among them; no cache rebuild is needed, since the
-    driver reads these fields from the config (they reach a visitor on
-    the push alone). The page's inline script passes `node --check`. Not
-    run: the headless page walk (jsdom is not installed here) and the
-    phone.
-  - THE TWO AGREE (L-484), compared by hand: the same JPL record (301,
-    a major body), name, words, link and period on both sides, through
-    the mirror. One chosen difference: the orrery asks JPL for the
-    moment drawn and prints the whole kilometre ("These distances are
-    shown to the whole kilometer; JPL's published accuracy for the
-    Moon's orbit around Earth is finer."), while the website works the
-    position out from elements, so its digits follow the drift after the
-    elements' date, and its sentence says so. Reason: the website has no
-    live JPL; no end.
-- **Carried for interactive-exhibit's next version** (two sentences that
-  no step depends on, by the records skill's rule): A body's orbital
-  period still says "An object without a 'key' in the orrery's list (the
-  Moon, today) has no period to serve"; and A body's words and link
-  says the hover carries neither description nor link -- the Earth
-  room's Moon box now carries its description, by Tony's ruling of
-  2026-11-06 ("so the Moon's text box shows its words, link, period and
-  accuracy"), its link in the panel. Both corrected in interactive-exhibit
-  1.32, the same evening (below).
-- **Tony's look, Nov 6, evening**, after his pushes of orrery f87d3ae and
-  website 0f99f2b, in his run record
-  `documentation/WHERE_WE_ARE_11-6-26_1625_run_record.md`: on the Moon's
-  box in the Earth room, "correct on both the phone and desktop"; on its
-  sentences and "0.08 years (27 days)", "correct". The build is accepted.
-- **Tony's ruling on periods under a year**, the same run record: "print
-  them in days only, with no years figure, for every moon, in the orrery
-  and on the website. The days keep the digits the rule earns, so the
-  Moon reads '27 days'." Built the same evening, a Claude Code session
-  (Opus 5.5) on orrery f87d3ae and gallery 0f99f2b:
-  - The rule's one home is `orbital_period.days_only`: a period whose
-    full days are under the Julian year (365.25 days) prints "M days";
-    `period_words` prints it so in the hover and the parameters window,
-    fetched or typed. The days keep their digits (format_by_error, or as
-    typed).
-  - `export_objects.py` serves the choice on each period block as
-    "days_only", with "years" null for such a period; the schema stays 4.
-    The export's run now prints five days-only periods by name: Mercury
-    87.969 days, Venus 224.71, the Moon 27, 2025 PN7 364 and Apophis
-    323.54. The rule is by length, as ruled ("periods under a year"), so
-    it reaches the two planets and two asteroids as well as the Moon.
-  - The website's `SolarSystemFigures.periodLine` prints "M days" for a
-    days_only period and decides nothing itself; the Moon's box reads
-    "Orbital period: 27 days, around Earth, ...".
-  - Checks: `test_position_digits.py` holds the Moon's fetched and
-    Mercury's typed period to days alone and Earth's (just over a year)
-    to years and days; it failed once on a wording slip of the new case,
-    which proves the path is live, then passed. The website's Solar
-    System figures check gains two worked cases and fails a days_only
-    period that prints a years figure; Typed facts' Moon line reads
-    "Orbital period: # days, around Earth, ...".
-  - The skill: interactive-exhibit 1.31 -> 1.32, protocol v3.128,
-    manifest by `skills_index.py`, in one change (the records skill's
-    binding rule); 1.29's entry and v3.125 moved down.
-  - The runs: `orrery_maintenance_run.py`, "35 of 35 gating checkers
-    passed", "0 TIER-1 -- the push gate holds"; Tony pushed it as
-    5e08d2b. Then the website pulled that export, the objects mirror
-    wrote "days_only" onto every period ("OBJECTS MIRROR: pass"), the
-    Earth scene was re-recorded, and Display figures re-recorded as
-    `fixture_hovers_L513b_on_0f99f2b5.json`: the old fixture failed on
-    exactly one hover, the Moon's box, whose period line went from
-    "0.08 years (27 days)" to "27 days"; the other 46 byte for byte.
-    `gallery_maintenance_run.py`: "37 of 37 gating checkers passed",
-    Cache in step among them; no cache rebuild, since the page reads the
-    period from the config.
-- **For the design talk** (Tony's words, the same run record): "which
-  period the Moon shows, JPL's figure for today (27.43 days, rounded to
-  27) or the long-term sidereal month (27.32 days), which would have to
-  be cited from a published source rather than fetched." No change
-  tonight, on his word.
-**Gap:** the design talk's answer on which period the Moon shows; then
-this item closes.
-- **Ref:** L-484 (the two agree); the brief above; L-395 (the Horizons
-  check, and the words and link from the orrery); L-431 (periods);
-  L-398 and L-401 (the DE430 accuracy rows); L-150 (Pluto's moons'
-  period centre, for the Pluto room).
+  - Website: `data/objects_config.json` has `mars` (id 499, around the
+    Sun, NASA's words, info link, a fetched period, a position_accuracy
+    link) with NO features served, and no entry for Phobos or Deimos.
+    The config's rooms section holds only the Solar System room; there
+    is no `mars` row in `EXHIBITS`.
+  - Orrery: `celestial_objects.py` has Phobos (401) and Deimos (402),
+    both `id_type` 'majorbody', with no `'key'`, so neither is exported.
+    Their `mission_info` is typed, not NASA's words, and carries typed
+    periods ("Mars orbital period: 0.32 Earth days."; "1.26 Earth days.
+    Retrogade."). Their links: Phobos
+    https://science.nasa.gov/resource/martian-moon-phobos/, Deimos
+    https://science.nasa.gov/mars/moons/deimos/.
+  - Deimos's "Retrogade": unsourced. NASA's Deimos page, read
+    2026-11-06 ("Deimos - NASA Science"), says "Deimos orbits Mars every
+    30 hours." and says nothing of direction. The word goes when the
+    entry takes NASA's words (the moon's box question), not before.
+  - `constants_new.py`: MARS_RADIUS_KM 3396.2 (Archinal et al. 2018,
+    equatorial) and PHOBOS_RADIUS_KM; the DE430 accuracy rows cover the
+    planets' groups and the Moon only, so no row yet gives JPL's
+    accuracy for the Martian moons.
+  - The orrery draws Mars's shells (`mars_visualization_shells.py`);
+    the road says the planet rooms open "with the planet and its moons,
+    shells later".
+- **The design questions, in Tony's order**, each recorded here with
+  its ruling: (1) what the room opens on; (2) what its drawer lists;
+  (3) how a moon's box reads.
+**Gap:** the three rulings; then the smallest instrument, proposed, on
+Tony's go-ahead.
+- **Ref:** L-513 (the Moon's standards, the pattern); L-334 (what a room
+  opens on, 2026-09-17); L-291 (the Earth room); L-484 (the two agree);
+  L-150 (Charon's period centre, for the Pluto room).
 
 #### [L-512] The orrery's fallbacks when JPL cannot answer (orrery, the plot's data path)
 <!-- L:512 status:OPEN upd:2026-11-04 section:A flag: rice: -->
@@ -32976,6 +32787,262 @@ orrery's plots and its date list, then the build.
 orrery's plots, then the build.
 **Ref:** L-443; `documentation/DESIGN_L443_slice2_rulings_20261023.md`, rulings 2 and 6;
 `spacecraft_encounters.py`; `palomas_orrery.py`.
+
+#### [L-513] The Moon's standards: its words, link, period and uncertainty, served by the orrery (orrery + gallery, objects; road stage 14)
+<!-- L:513 status:DONE upd:2026-11-06 section:C flag: rice: -->
+- **Opened 2026-11-06**, evening, by the Claude Code session (Opus 5.5)
+  built on orrery 1422a96b and gallery 6c93d0a2, from
+  `documentation/COORD_stage14_moon_standards_brief_20261106.md`, Part
+  1. Tony, at the session's start: "Open L-513 (the Moon's standards)
+  in the ledger as your first record, cross-linked to L-484 (the two
+  agree) and to the brief, and carry Part 1's work on it."
+- The road's words (stage 14): "the Moon gets the orrery's words,
+  link, period and uncertainty."
+- **Why it is L-484's:** L-484 (the two agree) named the Moon among the
+  served objects with no key, outside its check until it gets one
+  ("each gains both when it gets a key"). This item is the Moon's key,
+  and with it the Moon enters the Horizons check and L-484's
+  comparison by name.
+- **At the base, read 2026-11-06:**
+  - Orrery: `celestial_objects.py`, the entry `'name': 'Moon'`, id 301,
+    `id_type` 'majorbody', no `'key'`, so `export_objects.py` did not
+    export it. It carries `mission_info` (a NASA quotation) and
+    `mission_url` (https://science.nasa.gov/moon/). The orbit cache
+    holds its elements around Earth (`center_body` '@399', fetched
+    2026-09-25) and no period record.
+  - Website: `data/objects_config.json` slug `moon`, `canonical_center`
+    '@399', with no description, no info link, no `horizons_name`, no
+    period and no `position_accuracy`. The Earth room draws it
+    (`interactive.html`, `"objects": ["moon"]`).
+- **JPL's exact name, read live 2026-11-06** by the Horizons check's
+  three steps (`horizons_check.lookup_url`, `parse_lookup`, `keep`):
+  the major-body index for 301 answers one object, "Moon", natural
+  satellite, SPKID 301; the small-body index answers only 301 Bavaria
+  (SPKID 20000301, designation A890 WA), which the check's own filter
+  drops. So `horizons_name` is "Moon" and `id_type` 'majorbody' stands.
+- **Keyed 2026-11-06:** `'key': 'moon'` and `'horizons_name': 'Moon'` on
+  the entry. The path plans do not move: the Moon is already one of
+  path_plan's MAJOR_BODIES, and a major body is not a searched small
+  body.
+- **The period, fetched 2026-11-06 by `period_fetch.py`** (PASS,
+  "fetched 1: Moon"): around Earth ('@399', the centre the orrery gives
+  a moon; target 301), 27.42568868 days on JPL's elements of that
+  minute, the elements fetch's PR and the period query agreeing; its
+  change in a year 0.62 days, so it prints "0.08 years (27 days)". The
+  typed value it replaces, 27.321582 days, is the sidereal month; JPL's
+  osculating period around Earth moves with the Sun's pull, which is
+  why it prints to whole days.
+- **The words: NASA's Moon page does not carry the quotation**, read
+  2026-11-06 at https://science.nasa.gov/moon/ (title "Earth's Moon").
+  The entry's `mission_info` quotes NASA: "The Moon rotates exactly once
+  each time it orbits our planet." Neither that page nor NASA's Moon
+  facts page (https://science.nasa.gov/moon/facts/) has the sentence;
+  the facts page says it in other words, with a figure ("makes a
+  complete orbit around Earth in 27 Earth days and rotates or spins at
+  that same rate"). A quotation a visitor cannot find at the source is
+  not served (provenance-discipline, What a Visitor Reads, principle 4).
+  The Moon page's own opening, in its visible text: "From lighting up
+  our skies to preserving evidence of our solar system's history,
+  Earth's closest neighbor plays a pivotal role in the study of our
+  planet and beyond." Which, if any, the Moon serves is Tony's (the
+  brief's stop: the words need his choice).
+- **The uncertainty:** the website prints none for the Moon today. The
+  Earth room's Moon marker and orbit cross carry the assembler's bare
+  position line (`render_objects._marker_hover`, `render_orbits.
+  _au_km_hover`: r to six decimals of an AU and four figures of km),
+  with no words, no link, no period and no accuracy; only the Solar
+  System room prints an accuracy. The orrery's row reaches it:
+  `DE430_MOON_POSITION_PLACE_KM` (0.001 km, the place "submeter" reports
+  to; Folkner et al. 2014, abstract, open PDF on its Source line) is in
+  the constants export, so the website can link it as the Moon's
+  `position_accuracy`, as the planets link theirs. The Earth room needs
+  a build to print it, with the words, link and period.
+- **Tony's choice of the words, 2026-11-06, in chat:** "use NASA's own
+  words from its Moon facts page, quoted exactly: "The Moon makes a
+  complete orbit around Earth in 27 Earth days and rotates or spins at
+  that same rate." Cite it to https://science.nasa.gov/moon/facts/ (read
+  Nov 6, 2026), and keep the Moon's info link as the NASA Moon page.
+  Correct the orrery's own Moon entry to this sentence first, so the
+  website takes it from the export. Then go ahead with the Earth room's
+  build so the Moon's text box shows its words, link, period and
+  accuracy."
+  - Done in `celestial_objects.py`: `mission_info` reads "Horizons: 301.
+    NASA, Moon Facts (https://science.nasa.gov/moon/facts/): "The Moon
+    makes ... at that same rate."", the page and its read date on the
+    entry's `# Source:` comment. The export serves it as the Moon's
+    description, its address on the sentence a visitor reads, and
+    reports its one number, 27, which NASA's page states: the read is
+    this record (provenance-discipline, A Simple Error a Check Finds,
+    a number in a served description).
+  - Re-read 2026-11-06, the page titled "Moon Facts - NASA Science": the
+    words are there exactly; NASA's sentence goes on past "rate" with ",
+    or in that same amount of time.", and the quote ends where Tony's
+    did.
+- **Tony's three changes, after his push at 402f6c0e:** "(1) make the
+  Moon's info_url https://science.nasa.gov/moon/facts/ and drop the
+  address from the sentence, so the Moon follows the export's NASA: "..."
+  form like every other body; (2) quote NASA's whole sentence or end the
+  cut one with "...", your choice from the page; (3) leave the period
+  rule as it is, and I'll judge "0.08 years (27 days)" at my look."
+  Done: `mission_url` is the facts page, and `mission_info` reads
+  "Horizons: 301. NASA: "The Moon makes a complete orbit around Earth in
+  27 Earth days and rotates or spins at that same rate, or in that same
+  amount of time."" -- NASA's whole sentence, the session's choice, so
+  nothing is cut and no ellipsis stands for words. The bullet above
+  (the address on the sentence, the link the Moon page) is superseded
+  by this one.
+- **The orrery's maintenance run, 2026-11-06 evening:** "35 of 35 gating
+  checkers passed"; the gate path "0 TIER-1 -- the push gate holds". The
+  Horizons check confirmed the Moon by name on 2026-11-07 (UTC): identity
+  (JPL "Moon", natural satellite, both indexes asked) and period (around
+  @399, JPL's 27.42568868 days equal to the orrery's). Run again after
+  Tony's three changes: "35 of 35 gating checkers passed", 0 Tier-1 on
+  the gate path. Tony pushed the orrery at 402f6c0e, then at 67662596.
+- **The website half, built 2026-11-06 evening on gallery 6c93d0a2, not
+  yet committed:**
+  - THE PULL. `gallery_maintenance_run.py --pull` at orrery 67662596:
+    "all 5 passed"; the objects mirror wrote the Moon's description
+    (NASA's whole sentence), `info_url` (the facts page), `period`
+    (around Earth, "0.08" years, "27" days, fetched 2026-11-06) and
+    `horizons_name`. It also wrote three planets' periods that moved in
+    the orrery's cache since the last pull (Earth's fetched date; Mars's
+    date; Jupiter 11.86 to 11.87 years, 4333 to 4335 days), which no
+    website check pins.
+  - THE ACCURACY LINK. A `position_accuracy` pointer on the Moon's entry
+    to `constants_new.py::DE430_MOON_POSITION_PLACE_KM`, written as the
+    planets' were (L-398's patch wrote theirs), its value null; then
+    `tools/mirror_constants.py --write` filled the value (0.001 km), its
+    units, figures and the orrery's citation (Folkner et al. 2014: "the
+    present-day lunar orbit is known to submeter accuracy through
+    fitting lunar laser ranging data").
+  - THE EARTH ROOM. Its driver (`interactive.html`, EARTH_DRIVER) hands
+    over `moon`: the config's name, description, info_url, period and
+    position_accuracy, and the served trust rate and elements' date.
+    `gallery/earth_geometry.js` (`moonBox`) writes the Moon's text box:
+    its name; NASA's sentence; its distance from Earth by the Solar
+    System room's rule, the larger of the drift and JPL's accuracy,
+    never finer than whole kilometres ("0.00258731 AU from Earth
+    (387,056 km)." on the elements' own date; 100 km digits half a day
+    later, the drift governing); one sentence saying which error set the
+    digits, in the orrery's words for the Moon (the drift case: "This
+    distance is rounded to how far this page's working-out from JPL's
+    orbit may have drifted by the minute shown. JPL's published accuracy
+    for the Moon's orbit around Earth is finer."); and its period line.
+    Its panel: NASA's sentence, the facts-page link, and two sources --
+    the trusted arc's own sentence for the Moon's elements (one home now,
+    MOON_ELEMENTS_SOURCE) and the accuracy's citation. The orbit's cross
+    reads "Moon's orbit, drawn around Earth". `distanceLine` in
+    `gallery/solar_system_figures.js` takes the centre's words, "the
+    Sun" when none is given, so the Solar System room is unchanged.
+  - THE CHECKS. The Earth scene re-recorded with the new driver
+    (`tools/record_earth_scene.py`, epoch 2026-11-06 00:00 UTC, no
+    warnings). Typed facts masks the Moon's served words as it masks
+    Earth's period, and its ALLOWED list gains the box's seven typed
+    sentences, each with its reason; before that it named all twelve
+    strings the box added. Display figures re-recorded as
+    `fixture_hovers_L513_on_6c93d0a2.json`: the old fixture failed on
+    exactly four hovers, by name -- the Moon's two boxes, and Earth's
+    Sun distance and the arc's dates, which follow the re-recorded scene
+    -- and the diff of old and new showed nothing else moved. Then
+    `gallery_maintenance_run.py`: "37 of 37 gating checkers passed",
+    Cache in step among them; no cache rebuild is needed, since the
+    driver reads these fields from the config (they reach a visitor on
+    the push alone). The page's inline script passes `node --check`. Not
+    run: the headless page walk (jsdom is not installed here) and the
+    phone.
+  - THE TWO AGREE (L-484), compared by hand: the same JPL record (301,
+    a major body), name, words, link and period on both sides, through
+    the mirror. One chosen difference: the orrery asks JPL for the
+    moment drawn and prints the whole kilometre ("These distances are
+    shown to the whole kilometer; JPL's published accuracy for the
+    Moon's orbit around Earth is finer."), while the website works the
+    position out from elements, so its digits follow the drift after the
+    elements' date, and its sentence says so. Reason: the website has no
+    live JPL; no end.
+- **Carried for interactive-exhibit's next version** (two sentences that
+  no step depends on, by the records skill's rule): A body's orbital
+  period still says "An object without a 'key' in the orrery's list (the
+  Moon, today) has no period to serve"; and A body's words and link
+  says the hover carries neither description nor link -- the Earth
+  room's Moon box now carries its description, by Tony's ruling of
+  2026-11-06 ("so the Moon's text box shows its words, link, period and
+  accuracy"), its link in the panel. Both corrected in interactive-exhibit
+  1.32, the same evening (below).
+- **Tony's look, Nov 6, evening**, after his pushes of orrery f87d3ae and
+  website 0f99f2b, in his run record
+  `documentation/WHERE_WE_ARE_11-6-26_1625_run_record.md`: on the Moon's
+  box in the Earth room, "correct on both the phone and desktop"; on its
+  sentences and "0.08 years (27 days)", "correct". The build is accepted.
+- **Tony's ruling on periods under a year**, the same run record: "print
+  them in days only, with no years figure, for every moon, in the orrery
+  and on the website. The days keep the digits the rule earns, so the
+  Moon reads '27 days'." Built the same evening, a Claude Code session
+  (Opus 5.5) on orrery f87d3ae and gallery 0f99f2b:
+  - The rule's one home is `orbital_period.days_only`: a period whose
+    full days are under the Julian year (365.25 days) prints "M days";
+    `period_words` prints it so in the hover and the parameters window,
+    fetched or typed. The days keep their digits (format_by_error, or as
+    typed).
+  - `export_objects.py` serves the choice on each period block as
+    "days_only", with "years" null for such a period; the schema stays 4.
+    The export's run now prints five days-only periods by name: Mercury
+    87.969 days, Venus 224.71, the Moon 27, 2025 PN7 364 and Apophis
+    323.54. The rule is by length, as ruled ("periods under a year"), so
+    it reaches the two planets and two asteroids as well as the Moon.
+  - The website's `SolarSystemFigures.periodLine` prints "M days" for a
+    days_only period and decides nothing itself; the Moon's box reads
+    "Orbital period: 27 days, around Earth, ...".
+  - Checks: `test_position_digits.py` holds the Moon's fetched and
+    Mercury's typed period to days alone and Earth's (just over a year)
+    to years and days; it failed once on a wording slip of the new case,
+    which proves the path is live, then passed. The website's Solar
+    System figures check gains two worked cases and fails a days_only
+    period that prints a years figure; Typed facts' Moon line reads
+    "Orbital period: # days, around Earth, ...".
+  - The skill: interactive-exhibit 1.31 -> 1.32, protocol v3.128,
+    manifest by `skills_index.py`, in one change (the records skill's
+    binding rule); 1.29's entry and v3.125 moved down.
+  - The runs: `orrery_maintenance_run.py`, "35 of 35 gating checkers
+    passed", "0 TIER-1 -- the push gate holds"; Tony pushed it as
+    5e08d2b. Then the website pulled that export, the objects mirror
+    wrote "days_only" onto every period ("OBJECTS MIRROR: pass"), the
+    Earth scene was re-recorded, and Display figures re-recorded as
+    `fixture_hovers_L513b_on_0f99f2b5.json`: the old fixture failed on
+    exactly one hover, the Moon's box, whose period line went from
+    "0.08 years (27 days)" to "27 days"; the other 46 byte for byte.
+    `gallery_maintenance_run.py`: "37 of 37 gating checkers passed",
+    Cache in step among them; no cache rebuild, since the page reads the
+    period from the config.
+- **For the design talk** (Tony's words, the same run record): "which
+  period the Moon shows, JPL's figure for today (27.43 days, rounded to
+  27) or the long-term sidereal month (27.32 days), which would have to
+  be cited from a published source rather than fetched." No change
+  tonight, on his word.
+- **Tony's ruling, Nov 6, 22:17 Chicago**, in his run record
+  `documentation/WHERE_WE_ARE_11-6-26_1625_run_record.md`, answering the
+  coordinator's question "Does that settle it: the Moon keeps JPL's
+  figure, the same rule as every other body, and L-513 (the Moon's
+  standards) closes?": "yes". And in the coordinating session's prompt
+  that night: "yes, keep jpl's figure." The Moon shows JPL's period for
+  today, rounded to the digits that hold steady, by the same rule as
+  every other body, not the 27.32-day sidereal average. His look at
+  "27 days" passed. Nothing to build: the served period is already
+  JPL's.
+- **Closed 2026-11-06, night**, by the coordinating session (Claude Opus
+  5.5) through the python_work door, built on orrery b32205f4 and
+  gallery 3f2ce7fc. Road stage 14 is done. Loose ends, re-homed:
+  - the two interactive-exhibit sentences carried above: corrected in
+    1.32 (v3.128), nothing left;
+  - Charon's period asked around Pluto's centre (@999) rather than the
+    barycentre: carried on L-150 (trusting a near-equal pair), which
+    holds it, to be fixed before the Pluto room (Tony, the same prompt);
+  - the phone walk "not run" above: Tony's look on phone and desktop
+    passed (above), nothing left.
+**Gap:** none.
+- **Ref:** L-484 (the two agree); the brief above; L-395 (the Horizons
+  check, and the words and link from the orrery); L-431 (periods);
+  L-398 and L-401 (the DE430 accuracy rows); L-150 (Pluto's moons'
+  period centre, for the Pluto room).
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

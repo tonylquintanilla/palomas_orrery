@@ -1,22 +1,23 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 6, 2026, night: the Claude Code session (Opus), road stage 14, after your look.
-- Written at orrery 5e08d2b and gallery 0f99f2b, plus this session's edits.
+Last updated: November 6, 2026, late night: the coordinating session (Opus), stage 14 closed, stage 15 begun.
+- Written at orrery b32205f and gallery 3f2ce7f, plus this session's edits.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Your look passed: the Moon's box is right, phone and desktop.
-> - Your ruling: a period under a year prints in days only, in both
->   instruments. The Moon reads "27 days"; so do Mercury, Venus,
->   2025 PN7 and Apophis. interactive-exhibit is now 1.32 (v3.128).
+> - The Moon keeps JPL's period for today, by the same rule as every
+>   other body (your "yes", Nov 6, 22:17). L-513 (the Moon's standards)
+>   is closed, and road stage 14 is done.
+> - The Mars room's design round has begun. L-514 (the Mars room) holds
+>   what was read at the start and will hold your rulings.
 >
-> **Do next:** *push both, then a quick look: the Moon's box reads "27 days".*
+> **Do next:** *answer the Mars room's first question: what it opens on.*
 >
 > **Needs you now:**
-> - *(do) Commit and push the orrery (the records), then the website.*
-> - *(do) Reinstall interactive-exhibit (Settings > Skills); paste v3.128.*
+> - *(decide) What the Mars room opens on (the question in chat).*
+> - *(do) Commit and push the orrery: the ledger and this page.*
 > - *(do) Each morning, Pull origin on both, orrery then website, first.*
 
 *Italic* lines are the must-reads. Marks reset at every update.
@@ -24,18 +25,17 @@ Last updated: November 6, 2026, night: the Claude Code session (Opus), road stag
 ## The road  **>> UPDATED THIS SESSION**
 
 Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
-  1-13.[done]  Through Nov 6: the three rooms, the objects, the Sun's and
+  1-14.[done]  Through Nov 6: the three rooms, the objects, the Sun's and
                Earth's slices, historical missions' slice 1, the paths by
                the plan (L-476, closed), path or orbit by e (L-510), A1
                and A2 of JPL's fallbacks (L-512), a green website night,
-               the quick wins with L-423 (the website's checks).
- 14.   [NOW]   *Standards: the Moon built and looked at (words, link,
-               period in days, accuracy); the Pluto row ruled and
-               recorded.* << moved this session
- 15.   [later] The planet rooms in order, each opening with the planet
-               and its moons, shells later: Mars (Phobos, Deimos),
-               Jupiter, Saturn, Uranus, Neptune, Pluto. Io, Titan,
-               Charon and Pluto come to standard in their rooms.
+               the quick wins with L-423 (the website's checks), and the
+               Moon's standards (L-513, closed). << moved this session
+ 15.   [NOW]   *The planet rooms in order, each opening with the planet
+               and its moons, shells later: Mars (Phobos, Deimos) first,
+               in design now (L-514 (the Mars room)), then Jupiter,
+               Saturn, Uranus, Neptune, Pluto. Io, Titan, Charon and
+               Pluto come to standard in their rooms.* << moved this session
  16.   [later] The Earth room: L-297 (the Lagrange points), the Earth-Moon
                barycentre, SOHO, Gaia, James Webb, Artemis II.
  17.   [later] Small-body systems' moons; then stars and exoplanets.
@@ -48,15 +48,13 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
 ## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings; a line leaves once it is habit, or a skill carries it.
-- A period under a year prints in days only, orrery and website (Nov 6; L-513 (the Moon's standards)).
+- The Moon shows JPL's period for today, like every other body, not the
+  sidereal month (Nov 6, 22:17; L-513 (the Moon's standards)).
 - Pluto: the Solar System row stays the barycentre named Pluto; the Pluto
   room draws Pluto, Charon and the other moons around the barycentre;
   the orrery's Pluto-centred view goes (Nov 6; L-150 (trusting a near-equal pair)).
 - An ended mission's line ends at its marker on its last day, desktop as website (Nov 6).
 - A craft that flew on: path stops on its mission's last day; words say still flying, untracked (Nov 5).
-- A small body is a path at or above e 1 in JPL's database, every 30
-  days, else an orbit; two sides of 1 refuse the drawing; the website
-  follows the same rule (Nov 4; the website, Nov 4, 23:47).
 - From the talk (Nov 3): the words have one home, the orrery's export;
   a difference is chosen (a reason, no end) or open (an end and an
   item); the check covers only what both draw; a spacecraft's span is
@@ -67,9 +65,11 @@ Standing rulings; a line leaves once it is habit, or a skill carries it.
 - Encounters are both: shown in the Solar System room, and in a room
   centred on the body met (Nov 1).
 
-## Deferred
+## Deferred  **>> UPDATED THIS SESSION**
 
 Waiting behind other work; a line leaves when picked up.
+- Charon's period is asked around Pluto's centre, not the barycentre;
+  fix it before Pluto's room (L-150 (trusting a near-equal pair), Nov 6).
 - When the road turned to the symbols (Nov 5): L-512 (fallbacks when
   JPL cannot answer) slices b and c; L-484 (the two agree), its brief
   and build; L-504 (the orrery's clock), the Earth System, stamps and
@@ -93,18 +93,17 @@ Waiting behind other work; a line leaves when picked up.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261106T192923Z, ok, no retry (gallery swap log, read Nov 6, night).
-- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md, this session's second run).
+- Last cache build: 20261106T192923Z, ok, no retry (gallery swap log, read Nov 6, late night).
+- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at orrery b32205f).
 - This page's date and the ledger's newest stamp: both Nov 6. Agree.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
 Decisions, one at a time:
-- None waiting (the Pluto row was ruled Nov 6; see Settled).
+- *The Mars room: what it opens on; then its drawer; then a moon's box
+  (L-514 (the Mars room)).*
 
 At the next design talk:
-- The Moon's period: JPL's for today (27.43 days, shown 27), or the
-  sidereal month (27.32 days), cited not fetched (L-513 (the Moon's standards)).
 - How obsolete code is treated, and when it goes (L-509 (obsolete
   code)); two cases now, the orrery's unused date function and its
   Pluto-centred view of the moons.
@@ -122,9 +121,9 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- This session: the brief `COORD_stage14_moon_standards_brief_20261106.md`;
-  your run record `WHERE_WE_ARE_11-6-26_1625_run_record.md`; L-513 (the
-  Moon's standards) carries the build, L-150 and L-509 the Pluto rulings.
+- This session: L-513 (the Moon's standards) closed on your ruling in
+  `WHERE_WE_ARE_11-6-26_1625_run_record.md`; L-514 (the Mars room)
+  opened for the design round.
 - The talk's rulings: `DESIGN_L484_consistency_rulings_20261103.md`.
 - The door: `documentation/python_work_door/`, and L-499 (kinds of session).
 
