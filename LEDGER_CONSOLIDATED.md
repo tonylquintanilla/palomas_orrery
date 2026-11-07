@@ -1639,10 +1639,86 @@ as an archive of the prioritization thinking -- no cleanup on close.
   checkers passed"; the gate path "0 TIER-1 -- the push gate holds". The
   Horizons check confirmed the Moon by name on 2026-11-07 (UTC): identity
   (JPL "Moon", natural satellite, both indexes asked) and period (around
-  @399, JPL's 27.42568868 days equal to the orrery's).
+  @399, JPL's 27.42568868 days equal to the orrery's). Run again after
+  Tony's three changes: "35 of 35 gating checkers passed", 0 Tier-1 on
+  the gate path. Tony pushed the orrery at 402f6c0e, then at 67662596.
+- **The website half, built 2026-11-06 evening on gallery 6c93d0a2, not
+  yet committed:**
+  - THE PULL. `gallery_maintenance_run.py --pull` at orrery 67662596:
+    "all 5 passed"; the objects mirror wrote the Moon's description
+    (NASA's whole sentence), `info_url` (the facts page), `period`
+    (around Earth, "0.08" years, "27" days, fetched 2026-11-06) and
+    `horizons_name`. It also wrote three planets' periods that moved in
+    the orrery's cache since the last pull (Earth's fetched date; Mars's
+    date; Jupiter 11.86 to 11.87 years, 4333 to 4335 days), which no
+    website check pins.
+  - THE ACCURACY LINK. A `position_accuracy` pointer on the Moon's entry
+    to `constants_new.py::DE430_MOON_POSITION_PLACE_KM`, written as the
+    planets' were (L-398's patch wrote theirs), its value null; then
+    `tools/mirror_constants.py --write` filled the value (0.001 km), its
+    units, figures and the orrery's citation (Folkner et al. 2014: "the
+    present-day lunar orbit is known to submeter accuracy through
+    fitting lunar laser ranging data").
+  - THE EARTH ROOM. Its driver (`interactive.html`, EARTH_DRIVER) hands
+    over `moon`: the config's name, description, info_url, period and
+    position_accuracy, and the served trust rate and elements' date.
+    `gallery/earth_geometry.js` (`moonBox`) writes the Moon's text box:
+    its name; NASA's sentence; its distance from Earth by the Solar
+    System room's rule, the larger of the drift and JPL's accuracy,
+    never finer than whole kilometres ("0.00258731 AU from Earth
+    (387,056 km)." on the elements' own date; 100 km digits half a day
+    later, the drift governing); one sentence saying which error set the
+    digits, in the orrery's words for the Moon (the drift case: "This
+    distance is rounded to how far this page's working-out from JPL's
+    orbit may have drifted by the minute shown. JPL's published accuracy
+    for the Moon's orbit around Earth is finer."); and its period line.
+    Its panel: NASA's sentence, the facts-page link, and two sources --
+    the trusted arc's own sentence for the Moon's elements (one home now,
+    MOON_ELEMENTS_SOURCE) and the accuracy's citation. The orbit's cross
+    reads "Moon's orbit, drawn around Earth". `distanceLine` in
+    `gallery/solar_system_figures.js` takes the centre's words, "the
+    Sun" when none is given, so the Solar System room is unchanged.
+  - THE CHECKS. The Earth scene re-recorded with the new driver
+    (`tools/record_earth_scene.py`, epoch 2026-11-06 00:00 UTC, no
+    warnings). Typed facts masks the Moon's served words as it masks
+    Earth's period, and its ALLOWED list gains the box's seven typed
+    sentences, each with its reason; before that it named all twelve
+    strings the box added. Display figures re-recorded as
+    `fixture_hovers_L513_on_6c93d0a2.json`: the old fixture failed on
+    exactly four hovers, by name -- the Moon's two boxes, and Earth's
+    Sun distance and the arc's dates, which follow the re-recorded scene
+    -- and the diff of old and new showed nothing else moved. Then
+    `gallery_maintenance_run.py`: "37 of 37 gating checkers passed",
+    Cache in step among them; no cache rebuild is needed, since the
+    driver reads these fields from the config (they reach a visitor on
+    the push alone). The page's inline script passes `node --check`. Not
+    run: the headless page walk (jsdom is not installed here) and the
+    phone.
+  - THE TWO AGREE (L-484), compared by hand: the same JPL record (301,
+    a major body), name, words, link and period on both sides, through
+    the mirror. One chosen difference: the orrery asks JPL for the
+    moment drawn and prints the whole kilometre ("These distances are
+    shown to the whole kilometer; JPL's published accuracy for the
+    Moon's orbit around Earth is finer."), while the website works the
+    position out from elements, so its digits follow the drift after the
+    elements' date, and its sentence says so. Reason: the website has no
+    live JPL; no end.
+- **Carried for interactive-exhibit's next version** (two sentences that
+  no step depends on, by the records skill's rule): A body's orbital
+  period still says "An object without a 'key' in the orrery's list (the
+  Moon, today) has no period to serve"; and A body's words and link
+  says the hover carries neither description nor link -- the Earth
+  room's Moon box now carries its description, by Tony's ruling of
+  2026-11-06 ("so the Moon's text box shows its words, link, period and
+  accuracy"), its link in the panel.
+**Gap:** Tony's look at the Moon's text box in the Earth room, after his
+push of the website (the phone, then the desktop): the box's new
+sentences and "0.08 years (27 days)" are his to judge; then this item
+closes.
 - **Ref:** L-484 (the two agree); the brief above; L-395 (the Horizons
   check, and the words and link from the orrery); L-431 (periods);
-  L-398 and L-401 (the DE430 accuracy rows).
+  L-398 and L-401 (the DE430 accuracy rows); L-150 (Pluto's moons'
+  period centre, for the Pluto room).
 
 #### [L-512] The orrery's fallbacks when JPL cannot answer (orrery, the plot's data path)
 <!-- L:512 status:OPEN upd:2026-11-04 section:A flag: rice: -->

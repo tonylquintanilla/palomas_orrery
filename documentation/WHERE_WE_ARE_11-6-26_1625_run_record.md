@@ -313,5 +313,109 @@ The brief itself is still in your orrery's documentation folder, and your run or
 
 =========================================================================================================
 
+Here's a response to paste to the Code session. The second paragraph assumes you answer yes to days-only for periods under a year. Delete it if your answer is no.
+
+> Good work; I haven't pushed yet. Three things before I do:
+>
+> 1. My ruling on periods under a year: print them in days only, with no years figure, for every moon, in the orrery and on the website. The days keep the digits the rule earns, so the Moon reads "27 days". Make the change in both repositories, write the rule into the skill that owns the period's display, with the version bump, the protocol entry and the manifest in the same change, and rerun both maintenance runs. If this won't finish well before the website's night run, stop, tell me, and I'll push what you have; the rule then goes to the next session on L-513.
+>
+> 2. For the design-talk list on Where We Are: which period the Moon shows, JPL's figure for today (27.43 days, rounded to 27) or the long-term sidereal month (27.32 days), which would have to be cited from a published source rather than fetched. Record it on L-513 in those words. No change tonight.
+>
+> 3. In your final report, give me the run order again with the files that changed after this message, so my run record has the whole session.
+
+When the session reports back green, push the orrery first, then the website, and look at the Moon's box on your phone.
+
+=================================================================================================
+
 **Session: OPEN: 11-6-26 1737: Opus: Code: Paloma's Orrery stage 14 Moon standards L513**
+
+The push is confirmed: both read 67662596, with nothing left waiting. Starting the website half with its pull-and-copy step, the same step the Daily Run runs.
+
+All five pulls passed, and the objects mirror rewrote the website's config. Here's the Moon's entry now:
+
+The mirror has written the Moon's NASA sentence, its facts-page link, JPL's name and period, and refreshed three planets' periods (Jupiter now 4335 days). Next I'll write the Moon's accuracy-link pointer in the same form as the planets', and the constants mirror will fill in the value and citation.
+
+The Moon's accuracy link now carries the constants mirror's 0.001 km value, and I'm re-recording the Earth scene with the room's new driver so the checks pick up the Moon's box.
+
+The scene is re-recorded and carries the Moon's fields. Now the website's full offline maintenance run:
+
+The Earth scene geometry check passes, and I'm reading the two red checks next: typed facts and display figures, which has four findings.
+
+Both red checks are flagging the Moon's box as it should: the typed-facts check doesn't yet recognise the Moon's served fields, and the display-figures check compares against old hover copies that now need re-recording.
+
+The fix is two parts. The check masks the Moon's served fields the way it already masks Earth's served period. Then the box's new typed sentences go on its allowed list, each with its reason.
+
+Typed facts passes now, masking the Moon's served words and listing the box's new sentences on its allowed list. I'm checking the Display figures check's recorded hovers next.
+
+The check names the four hovers that changed. Before re-recording, I'm confirming each change is expected and not a regression, by comparing the old recorded copy with the new one in full.
+
+The Moon's box now reads 387,056 km at this moment, with no drift yet, and I'm running the website's full offline check again next.
+
+The website run is green with all 37 gating checks passed, so no cache rebuild is needed. I'm running a syntax check on the page scripts in interactive.html next.
+
+Both repositories are green, and the edited website files are plain text with no stray characters. Now the session's records, starting with L-513's website half:
+
+Now Where We Are, section by section:
+
+The page now stands at 139 lines above the marker, over its 130-line cap. Trimming it without dropping anything you still need:
+
+129 lines now. One fix: a ledger handle on this page always carries its label.
+
+The orrery's last run is green too, with 35 of 35 gating checkers passing and 0 Tier-1 on the gate path, and the page sits right at its 130-line cap. I'm pulling the session's token count for your run record next.
+
+Part 1 (the Moon's standards) is built in both repositories, Part 2 (the Pluto row's records) is recorded, and both repositories' checks end green.
+
+**What's done**
+- **The Moon's words and link:** NASA's whole sentence from its Moon facts page, in the same NASA: "..." form as every other body, with the facts page as its link. The old quotation was on no NASA page, so it's gone.
+- **JPL's name for it:** "Moon", read live from JPL.
+- **Its period:** fetched from JPL around Earth, printed as "0.08 years (27 days)".
+- **Its accuracy:** the website now links the Moon to the orrery's accuracy row, and the citation travels with it.
+- **The Earth room's Moon box:** it shows NASA's sentence, the distance from Earth printed only to the digits its errors earn, one sentence on JPL's accuracy, and the period. The info panel carries the link and the two sources.
+- **Two Moon checks the brief asked for:**
+  - **The Horizons check:** it now confirms the Moon by name, its identity and its period.
+  - **L-484 (the two agree):** its check isn't built yet. I compared the two by hand: the orrery and the website agree on the Moon's JPL record, name, words, link and period. One difference is chosen, with its reason on L-513 (the Moon's standards): the website rounds the distance to its own drift, because it works the position out instead of asking JPL live.
+- **Your Pluto question:** yes. Pluto's moons are asked around Pluto's centre today: Charon's one stored period, 6.387 days, is around Pluto's centre. That's recorded on L-150 (trusting a near-equal pair) for the Pluto room. The mark I added in the period module covers only the Pluto-centred view's row, not that default.
+- **Checks, read from the output:**
+  - Orrery: "35 of 35 gating checkers passed", with 0 Tier-1 on the gate path.
+  - Website: "37 of 37 gating checkers passed". The two Earth checks that were red are green.
+  - The page's scripts pass a syntax check.
+
+**What I didn't verify:**
+- I didn't run the headless page walk; the tool it needs isn't installed here.
+- Nobody has seen the box on a phone or in a real browser yet.
+- The box's new sentences are mine. Your look approves or changes them.
+
+**Files for your run record** (whole session, both repositories)
+Orrery:
+- ok celestial_objects.py (5 edits)
+- ok idealized_orbits.py (6 edits)
+- ok palomas_orrery.py (5 edits)
+- ok orbital_period.py (2 edits)
+- ok LEDGER_CONSOLIDATED.md (10 edits)
+- ok documentation/WHERE_WE_ARE.md (13 edits)
+- written by the period fetch, export, Horizons check and maintenance runs: data/objects_export.json, data/osculating_cache.json, data/horizons_confirmations.json, data/provenance_history.json, MODULE_ATLAS.md, MODULE_INDEX.md, PROVENANCE_AUDIT.md, EXACT_ROWS_PRINTED.md, WORKSHEET_CHECK.md, DATA_INVENTORY.md, documentation/prompts/citation_review.jsonl
+
+Website:
+- ok interactive.html (1 edit: the Earth room's driver)
+- ok gallery/earth_geometry.js (5 edits)
+- ok gallery/solar_system_figures.js (3 edits)
+- ok data/objects_config.json (1 hand edit, the accuracy pointer; the rest written by the two mirrors)
+- ok documentation/smoke_typed_facts.js (2 edits)
+- ok documentation/smoke_display_figures.js (1 edit)
+- new documentation/fixture_hovers_L513_on_6c93d0a2.json (the re-recorded hovers)
+- re-recorded documentation/payload_earth_scene.json (the Earth scene)
+- written by the pull and the run: data/objects_export.json, data/objects_export.sha, data/constants_export.sha, data/drawings/pulled_at.sha, MODULE_ATLAS.md, MODULE_INDEX.md
+
+**Token count:** I can't print Claude Code's /cost from inside this session. The app reports 538,417 tokens in this session's context, out of 1,000,000, and 18% of the 5-hour limit used.
+
+**Your run order**
+1. In GitHub Desktop, commit and push the orrery. The change list is the ledger, Where We Are and the reports the run rewrote. -- 
+2. Commit and push the website. The change list is the files above, including one new file.
+3. When the site updates, open the Earth room, tick the Moon in the drawer and tap the Moon: on your phone first, then the desktop.
+
+**For you to do or decide**
+- (do) Push the orrery, then the website.
+- (do) Look at the Moon's box. Judge its new sentences and "0.08 years (27 days)". L-513 closes on your look.
+- (decide, at the next design talk) L-509 (obsolete code), now with two cases: the unused date function and the Pluto-centred view.
+- (do) Each morning, Pull origin on both, orrery then website, first.
 

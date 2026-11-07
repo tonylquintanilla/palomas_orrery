@@ -9,7 +9,7 @@ Rebuilt by `exact_rows_report.py` on every orrery maintenance run. An exact row 
 - 11 printed by at least one display: `SUN_RADIUS_KM`, `EARTH_LEO_UPPER_ALTITUDE_KM`, `EARTH_VAN_ALLEN_OUTER_RADII`, `EARTH_SOLAR_WIND_PRESSURE_NPA`, `EARTH_SOLAR_WIND_BZ_NT`, `EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG`, `EARTH_BOW_SHOCK_CUT_ANGLE_DEG`, `INNER_CORONA_RADII`, `HELMET_CUSP_RADII`, `INNER_LIMIT_OORT_CLOUD_AU`, `OUTER_OORT_CLOUD_AU`.
 - 40 printing lines: 25 in the orrery, 15 in the gallery.
 - Gallery pointers to exact rows with no PRINTS entry (NOT FOLLOWED): 3: `MAIN_BELT_SAMPLE_ORBITS` at `/rooms/solar-system/drawer/rows/75/feature/sample_orbits`, `MAIN_BELT_JPL_COUNT` at `/rooms/solar-system/drawer/rows/75/feature/jpl_count`, `MAIN_BELT_SAMPLE_H_MAX` at `/rooms/solar-system/drawer/rows/75/feature/h_max`.
-- Gallery pointers to exact rows read only to place a drawing (DRAWN, not printed): 12: `SUN_RADIUS_KM`, `ROCHE_LIMIT_DRAWN_RADII`, `GALACTIC_NORTH_POLE_RA_J2000_DEG`, `GALACTIC_NORTH_POLE_DEC_J2000_DEG`, `OUTER_OORT_CLOUD_AU`, `DE430_TERRESTRIAL_POSITION_PLACE_KM`, `EARTH_MAGNETOTAIL_DRAWN_RADIUS_RADII`, `EARTH_MAGNETOTAIL_DRAWN_END_RADII`, `EARTH_POLE_RA_J2000_DEG`, `EARTH_POLE_DEC_J2000_DEG`, `DE430_JUPITER_SATURN_POSITION_PLACE_KM`, `DE430_URANUS_NEPTUNE_PLUTO_POSITION_PLACE_KM`.
+- Gallery pointers to exact rows read only to place a drawing (DRAWN, not printed): 13: `SUN_RADIUS_KM`, `ROCHE_LIMIT_DRAWN_RADII`, `GALACTIC_NORTH_POLE_RA_J2000_DEG`, `GALACTIC_NORTH_POLE_DEC_J2000_DEG`, `OUTER_OORT_CLOUD_AU`, `DE430_TERRESTRIAL_POSITION_PLACE_KM`, `EARTH_MAGNETOTAIL_DRAWN_RADIUS_RADII`, `EARTH_MAGNETOTAIL_DRAWN_END_RADII`, `EARTH_POLE_RA_J2000_DEG`, `EARTH_POLE_DEC_J2000_DEG`, `DE430_JUPITER_SATURN_POSITION_PLACE_KM`, `DE430_URANUS_NEPTUNE_PLUTO_POSITION_PLACE_KM`, `DE430_MOON_POSITION_PLACE_KM`.
 - PRINTS or DRAWN entries that no longer match a pointer or their line (BROKEN): 0.
 
 ## Printed by the count
@@ -175,6 +175,8 @@ No display prints these exact rows. Under Rule 7 they carry no print count. The 
   - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 210 (config `/objects/12/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
   - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 211 (config `/objects/12/position_accuracy`): `v = node.value;`
 - `DE430_MOON_POSITION_PLACE_KM`: named on 5 other orrery line(s).
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 210 (config `/objects/9/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 211 (config `/objects/9/position_accuracy`): `v = node.value;`
 - `GM_SUN_SI`: named on 2 other orrery line(s).
 - `BOLTZMANN_CONSTANT_J_PER_K`: named on 2 other orrery line(s).
 - `M3_PER_KM3`: named on 1 other orrery line(s).
