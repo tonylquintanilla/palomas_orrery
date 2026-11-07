@@ -428,3 +428,77 @@ Website:
 > 2. For the design-talk list on Where We Are: which period the Moon shows, JPL's figure for today (27.43 days, rounded to 27) or the long-term sidereal month (27.32 days), which would have to be cited from a published source rather than fetched. Record it on L-513 in those words. No change tonight.
 >
 > 3. In your final report, give me the run order again with the files that changed after this message, so my run record has the whole session.
+
+=================================================================
+
+The push is confirmed: GitHub reads 5e08d2b, the same as your folder. Now the website's pull and the objects mirror.
+
+Now the website's full offline maintenance run.
+
+The one red check is the Earth room's recorded scene. It still holds the Moon's period from before the rule ("years (days)"), so I'm re-recording it from the new copy.
+
+One hover moved, the Moon's box in the Earth room. Before re-recording its fixture, I'm checking that the period line is the only thing that changed in it.
+
+Only the Moon's period line changed, from "0.08 years (27 days)" to "27 days". The other 46 hovers are byte for byte the same. Running the website's full check again:
+
+The website is green: "37 of 37 gating checkers passed", with Cache in step passing. Now the encoding check on every file I edited, and the two figures Where We Are reads from files.
+
+All the files are clean ASCII with LF endings. Now the L-513 record's website half, and Where We Are.
+
+Your ruling is built: a period shorter than a year now prints in days only in both the orrery and the website, and both maintenance runs pass. The Moon's box reads "Orbital period: 27 days, around Earth, ...".
+
+- **Who it changes:** five bodies print days only:
+  - the Moon, 27 days
+  - Mercury, 87.969 days
+  - Venus, 224.71 days
+  - the asteroid 2025 PN7, 364 days
+  - the asteroid Apophis, 323.54 days
+
+  Earth is just over a year, so it keeps its years figure.
+- **Checks, read from the output:**
+  - Orrery: "35 of 35 gating checkers passed" and "0 TIER-1 -- the push gate holds".
+  - Website: "37 of 37 gating checkers passed", Cache in step among them. No cache rebuild is needed.
+  - Display figures (it compares each hover with a recorded copy): only one hover changed, the Moon's box, from "0.08 years (27 days)" to "27 days". The other 46 are unchanged.
+- **The skill:** interactive-exhibit is now 1.32. The protocol entry v3.128 and the manifest went in the same change, and the two out-of-date sentences L-513 (the Moon's standards) was carrying are corrected.
+- **Your design question** is on L-513 in your words, and on Where We Are's design-talk list: JPL's period for today (27.43 days, shown 27) or the sidereal month (27.32 days). L-513 stays open only for that question.
+- **Not checked:** after the orrery's run I wrote only the records, L-513 and Where We Are. The ledger index tool rebuilt the index with no problems, and Where We Are is at exactly 130 lines, its limit. The full orrery run was not repeated after those edits.
+
+**Files changed after your message** (for your run record)
+
+Orrery, already in your 5e08d2b push:
+- ok orbital_period.py (6 edits)
+- ok export_objects.py (6 edits)
+- ok test_position_digits.py (3 edits)
+- ok skills/interactive-exhibit/SKILL.md (8 edits)
+- ok PROJECT_INSTRUCTIONS.md (4 edits, plus the manifest rewritten by the skills index)
+- ok documentation/SKILL_HISTORIES.md (1 edit)
+- ok documentation/PROJECT_INSTRUCTIONS_HISTORY.md (1 edit)
+- ok LEDGER_CONSOLIDATED.md (1 edit)
+- written by the export and the run: data/objects_export.json, DATA_INVENTORY.md, EXACT_ROWS_PRINTED.md, MODULE_ATLAS.md, MODULE_INDEX.md, PROVENANCE_AUDIT.md, data/provenance_history.json, documentation/prompts/citation_review.jsonl
+
+Orrery, since that push (not committed):
+- ok LEDGER_CONSOLIDATED.md (1 edit: L-513's website half; the index rebuilt by the ledger tool)
+- ok documentation/WHERE_WE_ARE.md (7 edits)
+
+Website (not committed):
+- ok gallery/solar_system_figures.js (2 edits)
+- ok documentation/smoke_solar_system_figures.js (2 edits)
+- ok documentation/smoke_typed_facts.js (1 edit)
+- ok documentation/smoke_display_figures.js (1 edit)
+- new documentation/fixture_hovers_L513b_on_0f99f2b5.json (the re-recorded hovers)
+- re-recorded documentation/payload_earth_scene.json (the Earth scene)
+- written by the pull and the mirror: data/objects_config.json, data/objects_export.json, data/objects_export.sha, data/constants_export.sha, data/drawings/pulled_at.sha
+
+**Token count:** I can't print Claude Code's /cost from inside this session. The app reports 275,874 tokens in this session's context, out of 1,000,000, and 5% of the 5-hour limit used (8% of the week).
+
+**Your run order**
+1. In GitHub Desktop, commit and push the orrery: the ledger and Where We Are. -- 
+2. Commit and push the website: the files above, including the one new file.
+3. When the site updates, open the Earth room, tick the Moon and tap it. Its period should read "27 days". If you like, also tap Mercury and Venus in the Solar System room.
+
+**For you to do or decide**
+- (do) Push the orrery, then the website.
+- (do) Reinstall interactive-exhibit (Settings > Skills), and paste protocol v3.128 into the Project's instructions on claude.ai.
+- (decide, at the next design talk) Which period the Moon shows (L-513 (the Moon's standards)).
+- (decide, at the next design talk) L-509 (obsolete code), with its two cases.
+- (do) Each morning, Pull origin on both, orrery then website, first.

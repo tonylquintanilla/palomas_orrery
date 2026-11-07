@@ -1746,6 +1746,17 @@ as an archive of the prioritization thinking -- no cleanup on close.
   - The skill: interactive-exhibit 1.31 -> 1.32, protocol v3.128,
     manifest by `skills_index.py`, in one change (the records skill's
     binding rule); 1.29's entry and v3.125 moved down.
+  - The runs: `orrery_maintenance_run.py`, "35 of 35 gating checkers
+    passed", "0 TIER-1 -- the push gate holds"; Tony pushed it as
+    5e08d2b. Then the website pulled that export, the objects mirror
+    wrote "days_only" onto every period ("OBJECTS MIRROR: pass"), the
+    Earth scene was re-recorded, and Display figures re-recorded as
+    `fixture_hovers_L513b_on_0f99f2b5.json`: the old fixture failed on
+    exactly one hover, the Moon's box, whose period line went from
+    "0.08 years (27 days)" to "27 days"; the other 46 byte for byte.
+    `gallery_maintenance_run.py`: "37 of 37 gating checkers passed",
+    Cache in step among them; no cache rebuild, since the page reads the
+    period from the config.
 - **For the design talk** (Tony's words, the same run record): "which
   period the Moon shows, JPL's figure for today (27.43 days, rounded to
   27) or the long-term sidereal month (27.32 days), which would have to
