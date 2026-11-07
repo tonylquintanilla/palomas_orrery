@@ -1710,11 +1710,49 @@ as an archive of the prioritization thinking -- no cleanup on close.
   says the hover carries neither description nor link -- the Earth
   room's Moon box now carries its description, by Tony's ruling of
   2026-11-06 ("so the Moon's text box shows its words, link, period and
-  accuracy"), its link in the panel.
-**Gap:** Tony's look at the Moon's text box in the Earth room, after his
-push of the website (the phone, then the desktop): the box's new
-sentences and "0.08 years (27 days)" are his to judge; then this item
-closes.
+  accuracy"), its link in the panel. Both corrected in interactive-exhibit
+  1.32, the same evening (below).
+- **Tony's look, Nov 6, evening**, after his pushes of orrery f87d3ae and
+  website 0f99f2b, in his run record
+  `documentation/WHERE_WE_ARE_11-6-26_1625_run_record.md`: on the Moon's
+  box in the Earth room, "correct on both the phone and desktop"; on its
+  sentences and "0.08 years (27 days)", "correct". The build is accepted.
+- **Tony's ruling on periods under a year**, the same run record: "print
+  them in days only, with no years figure, for every moon, in the orrery
+  and on the website. The days keep the digits the rule earns, so the
+  Moon reads '27 days'." Built the same evening, a Claude Code session
+  (Opus 5.5) on orrery f87d3ae and gallery 0f99f2b:
+  - The rule's one home is `orbital_period.days_only`: a period whose
+    full days are under the Julian year (365.25 days) prints "M days";
+    `period_words` prints it so in the hover and the parameters window,
+    fetched or typed. The days keep their digits (format_by_error, or as
+    typed).
+  - `export_objects.py` serves the choice on each period block as
+    "days_only", with "years" null for such a period; the schema stays 4.
+    The export's run now prints five days-only periods by name: Mercury
+    87.969 days, Venus 224.71, the Moon 27, 2025 PN7 364 and Apophis
+    323.54. The rule is by length, as ruled ("periods under a year"), so
+    it reaches the two planets and two asteroids as well as the Moon.
+  - The website's `SolarSystemFigures.periodLine` prints "M days" for a
+    days_only period and decides nothing itself; the Moon's box reads
+    "Orbital period: 27 days, around Earth, ...".
+  - Checks: `test_position_digits.py` holds the Moon's fetched and
+    Mercury's typed period to days alone and Earth's (just over a year)
+    to years and days; it failed once on a wording slip of the new case,
+    which proves the path is live, then passed. The website's Solar
+    System figures check gains two worked cases and fails a days_only
+    period that prints a years figure; Typed facts' Moon line reads
+    "Orbital period: # days, around Earth, ...".
+  - The skill: interactive-exhibit 1.31 -> 1.32, protocol v3.128,
+    manifest by `skills_index.py`, in one change (the records skill's
+    binding rule); 1.29's entry and v3.125 moved down.
+- **For the design talk** (Tony's words, the same run record): "which
+  period the Moon shows, JPL's figure for today (27.43 days, rounded to
+  27) or the long-term sidereal month (27.32 days), which would have to
+  be cited from a published source rather than fetched." No change
+  tonight, on his word.
+**Gap:** the design talk's answer on which period the Moon shows; then
+this item closes.
 - **Ref:** L-484 (the two agree); the brief above; L-395 (the Horizons
   check, and the words and link from the orrery); L-431 (periods);
   L-398 and L-401 (the DE430 accuracy rows); L-150 (Pluto's moons'

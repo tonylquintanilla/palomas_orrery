@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.127 | November 5, 2026
+Tony Quintanilla, PE | Claude | v3.128 | November 6, 2026
 
-Cut from fb0a8dce at https://github.com/tonylquintanilla/palomas_orrery
+Cut from f87d3aee at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -556,7 +556,7 @@ gallery-cache-builder        1.18 Nightly builder, atomic swap and its
                                   (HORIZONS_CACHE), a drawing named on a room's
                                   row, an ended mission's last day
                                   (fetch_path_last_day)
-interactive-exhibit          1.31 adding or changing an exhibit in
+interactive-exhibit          1.32 adding or changing an exhibit in
                                   interactive.html; any edit to the Sun's
                                   chrome (drawer, nav cluster, frame zoom,
                                   i-panel, HUD, consent, back link); "Earth
@@ -609,7 +609,8 @@ interactive-exhibit          1.31 adding or changing an exhibit in
                                   group, its marker on its last day,
                                   mission_end; a craft that flew on and its
                                   end_note; a path cut before its mission ended
-                                  and its cutoff_note)
+                                  and its cutoff_note); an orbital period under
+                                  a year, printed in days only (days_only)
 <!-- SKILL-MANIFEST:END -->
 
 Session-Start Repo Pull and the SHA Round Trip [CRITICAL]
@@ -1303,6 +1304,50 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.128 (November 6, 2026): No rule changed in this document. ONE
+skill bump: interactive-exhibit 1.31 -> 1.32 (L-513, the Moon's
+standards). AN ORBITAL PERIOD UNDER A YEAR PRINTS IN DAYS ONLY.
+
+WHAT PROMPTED IT. The Claude Code session of Nov 6 (Claude Opus 5.5),
+through the python_work door, built on orrery 1422a96 and gallery
+6c93d0a, from documentation/COORD_stage14_moon_standards_brief_20261106.md,
+brought the Moon to the other bodies' standards; its period printed
+"0.08 years (27 days)". At his look Tony ruled, in his run record
+documentation/WHERE_WE_ARE_11-6-26_1625_run_record.md: "My ruling on
+periods under a year: print them in days only, with no years figure,
+for every moon, in the orrery and on the website. The days keep the
+digits the rule earns, so the Moon reads '27 days'."
+
+WHAT CHANGED. interactive-exhibit: the period bullet gains the
+days-only form, "M days" for "N years (M days)", fetched or typed; the
+orrery decides (orbital_period.days_only, the rule's one home, the full
+period against the Julian year) and the export serves the choice as the
+period's days_only, with years null, so the page decides nothing. On
+Nov 6 that was Mercury, Venus, the Moon, 2025 PN7 and Apophis. The same
+bullet's sentence that the Moon has no period to serve is corrected,
+and so is the words-and-link bullet's, that no box carries the
+description: the Moon's box does. Both were carried on L-513 for this
+version.
+Its oldest of four version entries (1.29) moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule. Every
+sentence was read from the code with this session's edits, at orrery
+f87d3aee and gallery 0f99f2b5, before it was written.
+
+THE OBLIGATION TRAVELS. This session read each skill as the file in the
+repo, each as the manifest expected: interactive-exhibit 1.31,
+horizons-orbital-mechanics 1.18, provenance-discipline 2.36,
+safe-file-editing 1.14, agentic-pre-test 1.3 and
+ledger-and-session-records 1.22. Tony reinstalls interactive-exhibit
+(Settings > Skills) and pastes this version into the Project's
+instructions on claude.ai; the next session that loads it from the
+account confirms its copy reads 1.32 before work that fires it.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.125 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.127 (November 5, 2026): No rule changed in this document. THREE
 skill bumps, one session's: horizons-orbital-mechanics 1.17 -> 1.18,
 gallery-cache-builder 1.17 -> 1.18 and interactive-exhibit 1.30 ->
@@ -1397,50 +1442,6 @@ that fires it.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.123 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.125 (November 4, 2026): No rule changed in this document. ONE
-skill bump: horizons-orbital-mechanics 1.15 -> 1.16 (L-510, part 1). A
-SMALL BODY IS DRAWN AS A PATH OR AN ORBIT BY ITS DATABASE e.
-
-WHAT PROMPTED IT. The Claude Code session of Nov 4 (Claude Opus 5.5),
-through the python_work door, built on orrery eab623f5 and gallery
-5abca2c6, from
-documentation/COORD_L510_drawn_by_eccentricity_brief_20261103.md.
-Tony's rulings of Nov 3, 15:33 to 15:55 Chicago ("They should be drawn
-as all the Hyperbolic objects"; "How does JPL determine the class? By
-e"), and of Nov 4, at the brief's stop point, on which e: "Use the e
-that JPL classes by: the orbit solution's eccentricity in JPL's
-small-body database, refreshed on the 30-day cycle. Not today's
-heliocentric osculating e."
-
-WHAT CHANGED. horizons-orbital-mechanics: A Small Body Is Drawn by Its
-Database e, a new section (the rule's one home, path_or_orbit.py; which
-e and why not today's, McNaught's numbers; the store and its 30-day
-cycle in period_fetch.py; the named failure; two sides of 1 refused by
-name; the first run, where only piece C of C/2025 K1 changed side).
-Which Record Serves a Body, the Period Fetch's bullet and A Comet on an
-Open Path follow it; and L-485's carried sentence: the orrery's drawing
-of a plan keeps the website's daily tail and leaves out only its
-last-day pair. Its oldest of four version entries (1.13) moved to
-documentation/SKILL_HISTORIES.md, by the three-entry rule. Every
-sentence was read from the code built that day and from JPL's answers
-of Nov 4 before it was written.
-
-THE OBLIGATION TRAVELS. This session read each skill as the file in the
-repo, each as the manifest expected: horizons-orbital-mechanics 1.15,
-orrery-coding-conventions 1.13, gallery-cache-builder 1.17,
-provenance-discipline 2.36, safe-file-editing 1.14, agentic-pre-test
-1.3 and ledger-and-session-records 1.22. Tony reinstalls
-horizons-orbital-mechanics (Settings > Skills) and pastes this version
-into the Project's instructions on claude.ai; the next session that
-loads it from the account confirms its copy reads 1.16 before work
-that fires it.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.122 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

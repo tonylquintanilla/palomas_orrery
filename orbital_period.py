@@ -103,6 +103,13 @@ Module updated: November 6, 2026 with Anthropic's Claude Opus 5.5 (L-509,
 its second case: the 'Pluto' row of VIEW_TO_OSCULATING_CENTRE, the
 Pluto-centred view of Pluto's moons, marked DEPRECATED. Nothing this
 module does changed.)
+Module updated: November 6, 2026 with Anthropic's Claude Opus 5.5 (L-513,
+Tony's ruling of that evening: a period shorter than a Julian year prints
+in days only, with no years figure, for every moon, in the orrery and on
+the website. days_only() is the rule's one home; period_words() prints
+the period by it, in the hover and the parameters window, and the
+export serves the same choice. The days keep the digits the rule earns:
+the Moon reads "27 days".)
 """
 
 import math
@@ -689,6 +696,28 @@ def _typed_strings(days):
     return years_s, days_s
 
 
+# A PERIOD UNDER A YEAR PRINTS IN DAYS ONLY (L-513, Tony's ruling of
+# 2026-11-06: "print them in days only, with no years figure, for every
+# moon, in the orrery and on the website. The days keep the digits the
+# rule earns, so the Moon reads '27 days'"). The test is the full period,
+# never its print, against the Julian year the years figure is worked out
+# with; it covers every moon whose period is under a year, and Mercury
+# and Venus. export_objects serves the choice as "days_only", so the
+# website prints what the orrery prints and decides nothing itself.
+def days_only(days):
+    """True when a period prints in days only: shorter than a Julian
+    year. None (an open orbit, or nothing known) is not."""
+    return days is not None and float(days) < D_PER_JULIAN_YEAR
+
+
+def period_words(days, years_s, days_s):
+    """The period as it prints: 'M days' under a year, else
+    'N years (M days)'."""
+    if days_only(days):
+        return '%s days' % days_s
+    return '%s years (%s days)' % (years_s, days_s)
+
+
 def _sbdb_words(status):
     """Why JPL's small-body database gave no period uncertainty, in true
     words, from the status build_period_record saved (L-401, build 1)."""
@@ -725,8 +754,9 @@ def period_hover_lines(resolved):
             return ('Orbital period: none (open orbit)<br>'
                     'Typed value, not fetched from JPL.')
         years_s, days_s = _typed_strings(resolved['days'])
-        return ('Orbital period: %s years (%s days)<br>'
-                'Typed value, not fetched from JPL.' % (years_s, days_s))
+        return ('Orbital period: %s<br>'
+                'Typed value, not fetched from JPL.'
+                % period_words(resolved['days'], years_s, days_s))
     rec = resolved['record']
     where = ('%saround %s, from JPL Horizons, fetched %s UTC.'
              % (target_words(rec), resolved['label'], rec.get('fetched')))
@@ -754,8 +784,8 @@ def period_hover_lines(resolved):
                + _sbdb_words(rec.get('sbdb_status')))
     else:
         why = 'No error was measured, so the digits are not rounded to one.'
-    return ('Orbital period: %s years (%s days)<br>%s<br>%s'
-            % (years_s, days_s, where, why))
+    return ('Orbital period: %s<br>%s<br>%s'
+            % (period_words(rec['days'], years_s, days_s), where, why))
 
 
 def period_panel_text(resolved):
@@ -767,12 +797,17 @@ def period_panel_text(resolved):
         return 'none (open orbit)' + (' - typed, not from JPL' if kind == 'typed' else '')
     if kind == 'typed':
         years_s, days_s = _typed_strings(resolved['days'])
+        if days_only(resolved['days']):
+            return '%s days - typed, not from JPL' % days_s
         return '%s days (%s yr) - typed, not from JPL' % (days_s, years_s)
     rec = resolved['record']
     err = rec.get('error_days')
     days_s = format_by_error(rec['days'], err)
     years_s = format_by_error(rec['days'] / D_PER_JULIAN_YEAR,
                               err / D_PER_JULIAN_YEAR if err else None)
+    if days_only(rec['days']):
+        return '%s days, JPL, %saround %s' % (days_s, target_words(rec),
+                                              resolved['label'])
     return '%s days (%s yr), JPL, %saround %s' % (days_s, years_s, target_words(rec),
                                                   resolved['label'])
 

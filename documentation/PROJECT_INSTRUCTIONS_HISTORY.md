@@ -4192,6 +4192,53 @@ resident.
 (Moved down from the resident protocol on 2026-11-05 when
 v3.127 made a fourth entry.)
 
+v3.125 (November 4, 2026): No rule changed in this document. ONE
+skill bump: horizons-orbital-mechanics 1.15 -> 1.16 (L-510, part 1). A
+SMALL BODY IS DRAWN AS A PATH OR AN ORBIT BY ITS DATABASE e.
+
+WHAT PROMPTED IT. The Claude Code session of Nov 4 (Claude Opus 5.5),
+through the python_work door, built on orrery eab623f5 and gallery
+5abca2c6, from
+documentation/COORD_L510_drawn_by_eccentricity_brief_20261103.md.
+Tony's rulings of Nov 3, 15:33 to 15:55 Chicago ("They should be drawn
+as all the Hyperbolic objects"; "How does JPL determine the class? By
+e"), and of Nov 4, at the brief's stop point, on which e: "Use the e
+that JPL classes by: the orbit solution's eccentricity in JPL's
+small-body database, refreshed on the 30-day cycle. Not today's
+heliocentric osculating e."
+
+WHAT CHANGED. horizons-orbital-mechanics: A Small Body Is Drawn by Its
+Database e, a new section (the rule's one home, path_or_orbit.py; which
+e and why not today's, McNaught's numbers; the store and its 30-day
+cycle in period_fetch.py; the named failure; two sides of 1 refused by
+name; the first run, where only piece C of C/2025 K1 changed side).
+Which Record Serves a Body, the Period Fetch's bullet and A Comet on an
+Open Path follow it; and L-485's carried sentence: the orrery's drawing
+of a plan keeps the website's daily tail and leaves out only its
+last-day pair. Its oldest of four version entries (1.13) moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule. Every
+sentence was read from the code built that day and from JPL's answers
+of Nov 4 before it was written.
+
+THE OBLIGATION TRAVELS. This session read each skill as the file in the
+repo, each as the manifest expected: horizons-orbital-mechanics 1.15,
+orrery-coding-conventions 1.13, gallery-cache-builder 1.17,
+provenance-discipline 2.36, safe-file-editing 1.14, agentic-pre-test
+1.3 and ledger-and-session-records 1.22. Tony reinstalls
+horizons-orbital-mechanics (Settings > Skills) and pastes this version
+into the Project's instructions on claude.ai; the next session that
+loads it from the account confirms its copy reads 1.16 before work
+that fires it.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.122 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-11-06 when
+v3.128 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

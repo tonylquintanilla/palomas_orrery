@@ -409,13 +409,22 @@ Website:
 **Token count:** I can't print Claude Code's /cost from inside this session. The app reports 538,417 tokens in this session's context, out of 1,000,000, and 18% of the 5-hour limit used.
 
 **Your run order**
-1. In GitHub Desktop, commit and push the orrery. The change list is the ledger, Where We Are and the reports the run rewrote. -- 
-2. Commit and push the website. The change list is the files above, including one new file.
-3. When the site updates, open the Earth room, tick the Moon in the drawer and tap the Moon: on your phone first, then the desktop.
+1. In GitHub Desktop, commit and push the orrery. The change list is the ledger, Where We Are and the reports the run rewrote. -- f87d3aeee78282eb9d74d3938ade8a8b000f2c14
+2. Commit and push the website. The change list is the files above, including one new file. -- 0f99f2b5b153417641e211ea955279ac919b1cec
+3. When the site updates, open the Earth room, tick the Moon in the drawer and tap the Moon: on your phone first, then the desktop. -- correct on both the phone and desktop
 
 **For you to do or decide**
 - (do) Push the orrery, then the website.
-- (do) Look at the Moon's box. Judge its new sentences and "0.08 years (27 days)". L-513 closes on your look.
+- (do) Look at the Moon's box. Judge its new sentences and "0.08 years (27 days)". L-513 closes on your look. -- correct
 - (decide, at the next design talk) L-509 (obsolete code), now with two cases: the unused date function and the Pluto-centred view.
 - (do) Each morning, Pull origin on both, orrery then website, first.
 
+**Tony:**
+
+> Good work; I haven't pushed yet. Three things before I do:
+>
+> 1. My ruling on periods under a year: print them in days only, with no years figure, for every moon, in the orrery and on the website. The days keep the digits the rule earns, so the Moon reads "27 days". Make the change in both repositories, write the rule into the skill that owns the period's display, with the version bump, the protocol entry and the manifest in the same change, and rerun both maintenance runs. 
+>
+> 2. For the design-talk list on Where We Are: which period the Moon shows, JPL's figure for today (27.43 days, rounded to 27) or the long-term sidereal month (27.32 days), which would have to be cited from a published source rather than fetched. Record it on L-513 in those words. No change tonight.
+>
+> 3. In your final report, give me the run order again with the files that changed after this message, so my run record has the whole session.

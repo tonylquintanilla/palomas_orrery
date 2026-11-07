@@ -160,6 +160,10 @@ before this, for a served body that has none fetched, L-444). Its parts:
                  center of mass"), else null. The orrery's hover and the
                  website's sentence both print "for <it>," before the
                  centre when it is not null
+    days_only    (L-513) true when the period is shorter than a Julian
+                 year and prints in days only (orbital_period.days_only,
+                 Tony's ruling of 2026-11-06); its "years" is then null.
+                 false otherwise, and for an open orbit or none
     years, days  each {"value", "figures", "text"}: the period printed to
                  the place its own error earns (orbital_period.
                  format_by_error, the orrery's digits rule), the value
@@ -283,6 +287,12 @@ more voyages: an ended mission's mission_end, end_note and cutoff_note
 are exported, each only where the entry sets it, so the schema stays 4
 and no other entry changes; a number in either note is reported with
 the description's.)
+Module updated: November 6, 2026 with Anthropic's Claude Opus 5.5 (L-513,
+Tony's ruling of that evening: a period under a year prints in days
+only. Each period block carries "days_only", the orrery's choice by
+orbital_period.days_only, and such a period serves "years" as null, so
+the website prints the days alone and decides nothing itself. The
+schema stays 4: a reader that knows no "days_only" finds no years.)
 """
 
 import ast
@@ -576,12 +586,14 @@ def period_block(name, object_type, cache, typed_table):
             "fetched": rec.get("fetched"),
             "words": None,
         }
+        block["days_only"] = op.days_only(days)
         if days is None:
             block["years"] = block["days"] = None
         else:
-            block["years"] = _printed(days / op.D_PER_JULIAN_YEAR,
-                                      err / op.D_PER_JULIAN_YEAR
-                                      if err else None)
+            block["years"] = (None if block["days_only"] else
+                              _printed(days / op.D_PER_JULIAN_YEAR,
+                                       err / op.D_PER_JULIAN_YEAR
+                                       if err else None))
             block["days"] = _printed(days, err)
         record = {
             "days": days,
@@ -628,14 +640,17 @@ def period_block(name, object_type, cache, typed_table):
                  "center_label": None, "open_orbit": typed is None,
                  "fetched": None,
                  "words": "Typed value, not fetched from JPL."}
+        block["days_only"] = op.days_only(typed)
         if typed is None:
             block["years"] = block["days"] = None
         else:
             block["years"], block["days"] = _typed_printed(float(typed))
+            if block["days_only"]:
+                block["years"] = None
         return block, inputs
     return ({"kind": "none", "typed": False, "center": None,
              "center_label": None, "open_orbit": False, "fetched": None,
-             "years": None, "days": None,
+             "days_only": False, "years": None, "days": None,
              "words": "Not yet fetched from JPL."}, {"none": True})
 
 
@@ -784,6 +799,9 @@ def period_summary(key, period):
         return "%s: none (not yet fetched)" % key
     if period["open_orbit"]:
         shown = "open orbit"
+    elif period.get("days_only"):
+        shown = "%s days, %d figures, days only" % (
+            period["days"]["text"], period["days"]["figures"])
     else:
         shown = "%s years (%s days), %d and %d figures" % (
             period["years"]["text"], period["days"]["text"],

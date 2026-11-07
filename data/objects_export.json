@@ -44,11 +44,8 @@
         "open_orbit": false,
         "fetched": "2026-10-20",
         "words": null,
-        "years": {
-          "value": 0.240846,
-          "figures": 6,
-          "text": "0.240846"
-        },
+        "days_only": true,
+        "years": null,
         "days": {
           "value": 87.969,
           "figures": 5,
@@ -110,11 +107,8 @@
         "open_orbit": false,
         "fetched": "2026-10-20",
         "words": null,
-        "years": {
-          "value": 0.6152,
-          "figures": 4,
-          "text": "0.6152"
-        },
+        "days_only": true,
+        "years": null,
         "days": {
           "value": 224.71,
           "figures": 5,
@@ -176,6 +170,7 @@
         "open_orbit": false,
         "fetched": "2026-11-06",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 1.0,
           "figures": 6,
@@ -242,11 +237,8 @@
         "open_orbit": false,
         "fetched": "2026-11-06",
         "words": null,
-        "years": {
-          "value": 0.08,
-          "figures": 1,
-          "text": "0.08"
-        },
+        "days_only": true,
+        "years": null,
         "days": {
           "value": 27.0,
           "figures": 2,
@@ -310,6 +302,7 @@
         "open_orbit": false,
         "fetched": "2026-11-06",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 1.881,
           "figures": 4,
@@ -376,6 +369,7 @@
         "open_orbit": false,
         "fetched": "2026-11-06",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 11.87,
           "figures": 4,
@@ -442,6 +436,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 11.919,
           "figures": 5,
@@ -520,6 +515,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 11.879,
           "figures": 5,
@@ -586,6 +582,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 11.83,
           "figures": 5,
@@ -664,6 +661,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 12.237,
           "figures": 5,
@@ -742,6 +740,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 11.5742,
           "figures": 6,
@@ -820,6 +819,7 @@
         "open_orbit": false,
         "fetched": "2026-10-20",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 29.44,
           "figures": 4,
@@ -898,6 +898,7 @@
         "open_orbit": false,
         "fetched": "2026-10-15",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 83.997,
           "figures": 5,
@@ -976,6 +977,7 @@
         "open_orbit": false,
         "fetched": "2026-10-15",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 164.78,
           "figures": 5,
@@ -1054,6 +1056,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 62.486,
           "figures": 5,
@@ -1132,6 +1135,7 @@
         "open_orbit": false,
         "fetched": "2026-10-28",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 247.99,
           "figures": 6,
@@ -1210,6 +1214,7 @@
         "open_orbit": false,
         "fetched": "2026-10-28",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 4.6,
           "figures": 3,
@@ -1276,6 +1281,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 282.793,
           "figures": 6,
@@ -1354,6 +1360,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 558.34,
           "figures": 5,
@@ -1432,6 +1439,7 @@
         "open_orbit": false,
         "fetched": "2026-10-23",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 548.9,
           "figures": 4,
@@ -1510,6 +1518,7 @@
         "open_orbit": false,
         "fetched": "2026-11-05",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 306.701,
           "figures": 6,
@@ -1588,6 +1597,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 269.467,
           "figures": 6,
@@ -1666,6 +1676,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 246.02,
           "figures": 6,
@@ -1744,6 +1755,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 285.085,
           "figures": 6,
@@ -1822,6 +1834,7 @@
         "open_orbit": false,
         "fetched": "2026-10-13",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 11390.0,
           "figures": 4,
@@ -1900,6 +1913,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 42000.0,
           "figures": 2,
@@ -1978,6 +1992,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 23800.0,
           "figures": 3,
@@ -2056,6 +2071,7 @@
         "open_orbit": false,
         "fetched": "2026-10-28",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 282.7,
           "figures": 4,
@@ -2134,11 +2150,8 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
-        "years": {
-          "value": 1.0,
-          "figures": 3,
-          "text": "1.00"
-        },
+        "days_only": true,
+        "years": null,
         "days": {
           "value": 364.0,
           "figures": 3,
@@ -2200,6 +2213,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 1.034,
           "figures": 4,
@@ -2266,6 +2280,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 1.166,
           "figures": 5,
@@ -2332,6 +2347,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 2.072,
           "figures": 4,
@@ -2398,6 +2414,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 3.61,
           "figures": 3,
@@ -2464,6 +2481,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 3.991,
           "figures": 4,
@@ -2530,6 +2548,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 1.001,
           "figures": 4,
@@ -2596,6 +2615,7 @@
         "open_orbit": false,
         "fetched": "2026-10-28",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 4.97,
           "figures": 3,
@@ -2674,11 +2694,8 @@
         "open_orbit": false,
         "fetched": "2026-10-15",
         "words": null,
-        "years": {
-          "value": 0.88581,
-          "figures": 5,
-          "text": "0.88581"
-        },
+        "days_only": true,
+        "years": null,
         "days": {
           "value": 323.54,
           "figures": 5,
@@ -2740,6 +2757,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 1.19472,
           "figures": 6,
@@ -2806,6 +2824,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 1.761,
           "figures": 5,
@@ -2872,6 +2891,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 3.244,
           "figures": 4,
@@ -2938,6 +2958,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 1.5237,
           "figures": 5,
@@ -3004,6 +3025,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 3.799,
           "figures": 4,
@@ -3070,6 +3092,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 1.2997,
           "figures": 5,
@@ -3136,6 +3159,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 3.633,
           "figures": 4,
@@ -3202,6 +3226,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 3.681,
           "figures": 4,
@@ -3268,6 +3293,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 3.628,
           "figures": 4,
@@ -3334,6 +3360,7 @@
         "open_orbit": false,
         "fetched": "2026-10-28",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 294.0,
           "figures": 4,
@@ -3412,6 +3439,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 248.06,
           "figures": 6,
@@ -3490,6 +3518,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 271.479,
           "figures": 6,
@@ -3568,6 +3597,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 281.28,
           "figures": 6,
@@ -3646,6 +3676,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 4000.0,
           "figures": 3,
@@ -3724,6 +3755,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 5.37,
           "figures": 3,
@@ -3790,6 +3822,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 8.17,
           "figures": 3,
@@ -3856,6 +3889,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 5.48,
           "figures": 3,
@@ -3922,6 +3956,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 6.433,
           "figures": 4,
@@ -3988,6 +4023,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 2399.0,
           "figures": 4,
@@ -4066,6 +4102,7 @@
         "open_orbit": false,
         "fetched": "2026-11-05",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 75.4612,
           "figures": 6,
@@ -4145,6 +4182,7 @@
         "open_orbit": false,
         "fetched": "2026-10-13",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 3.303,
           "figures": 4,
@@ -4211,6 +4249,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 72000.0,
           "figures": 2,
@@ -4289,6 +4328,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 1170.0,
           "figures": 3,
@@ -4367,6 +4407,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 795.159,
           "figures": 6,
@@ -4445,6 +4486,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 6830.0,
           "figures": 3,
@@ -4577,6 +4619,7 @@
         "open_orbit": false,
         "fetched": "2026-10-22",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 800.0,
           "figures": 1,
@@ -4643,6 +4686,7 @@
         "open_orbit": false,
         "fetched": "2026-11-04",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 1900.0,
           "figures": 2,
@@ -5033,6 +5077,7 @@
         "open_orbit": false,
         "fetched": "2026-11-04",
         "words": null,
+        "days_only": false,
         "years": {
           "value": 100000.0,
           "figures": 2,

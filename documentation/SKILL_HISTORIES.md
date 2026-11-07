@@ -879,6 +879,22 @@ System figures check red as well as Cache in step. Each fact was read
 from the gallery's code at acbf206b before it was written.
 (Moved down 2026-11-05, when 1.31 made a fourth entry.)
 
+Earlier: 1.29 | 2026-10-29, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 571b9bf4 and gallery @ b55109f2. v1.29 (L-503, L-502,
+L-399, L-504) records the gallery's builds of 2026-10-29, six things a
+session following 1.28 would get wrong or not find: a small body's own
+uncertainty is served by the builder and used whole, and the room's
+sentence prints when no source error is served at all; the main belt's
+cloud, the first stored drawing named on a room's row, which the pull
+and the builder now read; the drawing row in the Solar System room's
+drawer; the frame HUD as a row across the bottom (the triad at three
+quarters in its centre, the chip at its right, the row and the count
+line at 48 px, the count line left of the triad); a stored drawing's
+cross off the axes, held by the Label words check; and the source
+line's clocks. Each fact was read from the gallery's code at b55109f2
+before it was written.
+(Moved down 2026-11-06, when 1.32 made a fourth entry.)
+
 ## safe-file-editing
 
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons;

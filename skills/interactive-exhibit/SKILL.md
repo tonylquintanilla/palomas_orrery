@@ -1,14 +1,27 @@
 ---
 name: interactive-exhibit
 description: How an interactive exhibit (a room in interactive.html such as ?exhibit=sun) is designed, built, verified and carded for the Paloma's Orrery gallery. Covers the exhibit switch and boot path, the assembler driver spec, the JS feature handoff, the shared chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent gate, back link), what is per-body, the served-data provenance contract, what a room opens on (the arrival block) and the shell-key stamp the renderers apply, the drawer order, who may write data/objects_config.json, the Mode 5 phone sequence, and carding an exhibit through Studio. Use when adding or changing an exhibit (Earth, Jupiter, the stars), touching sun* chrome in interactive.html, deciding what an exhibit may render, or editing the served words with store_writer or exhibit_store_editor. Not for propagation math (gallery-assembler), the nightly builder (gallery-cache-builder), or the Studio/converter chain (gallery-pipeline). Do not use for projects other than Paloma's Orrery.
-fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, its group rows, its two Resets, the Reset in every room's top bar, Home's order and its framing; Go To fitting a body's whole orbit and the orbit line in a body's hover; the count line's place; a bare interactive.html link and the Explorer's address; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia); a served number's citation and its source_note; the Typed facts check (smoke_typed_facts.js); a feature drawn as stored dots (the Hills cloud, Earth's radiation belts); the i panel's source list and its links (source_list.js); the order a room's drawer lists its shells in, where each begins (drawer_order.js, the Drawer order check); a spacecraft's path in the Solar System room (its positions file, solid and dashed, its text box); whether the website and the orrery agree on an object; the planets ticked with a spacecraft (companions); the i panel's words one sentence to a bullet; a comet on an open path in the Solar System room; the drawer's groups one JPL class to a row; JPL's terms in the words a visitor reads; a comet's companions; the drawer's Find a body box; the direction arrows on the orbits; the grid chip's AU note and the triad's frame note; the i button's first-visit note and hovers without a pointer line; the one text box for a tap and Go To (text_box.js); a group found by its find words; the i panel's Report a problem link; a drawing row in the Solar System room (the belt's cloud); a stored drawing's cross kept off the axes; the source line's UTC and JPL clock; the ruler and the x marks on the axes; an ended mission (the Historical missions group, its marker on its last day, mission_end; a craft that flew on and its end_note; a path cut before its mission ended and its cutoff_note)
+fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, its group rows, its two Resets, the Reset in every room's top bar, Home's order and its framing; Go To fitting a body's whole orbit and the orbit line in a body's hover; the count line's place; a bare interactive.html link and the Explorer's address; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia); a served number's citation and its source_note; the Typed facts check (smoke_typed_facts.js); a feature drawn as stored dots (the Hills cloud, Earth's radiation belts); the i panel's source list and its links (source_list.js); the order a room's drawer lists its shells in, where each begins (drawer_order.js, the Drawer order check); a spacecraft's path in the Solar System room (its positions file, solid and dashed, its text box); whether the website and the orrery agree on an object; the planets ticked with a spacecraft (companions); the i panel's words one sentence to a bullet; a comet on an open path in the Solar System room; the drawer's groups one JPL class to a row; JPL's terms in the words a visitor reads; a comet's companions; the drawer's Find a body box; the direction arrows on the orbits; the grid chip's AU note and the triad's frame note; the i button's first-visit note and hovers without a pointer line; the one text box for a tap and Go To (text_box.js); a group found by its find words; the i panel's Report a problem link; a drawing row in the Solar System room (the belt's cloud); a stored drawing's cross kept off the axes; the source line's UTC and JPL clock; the ruler and the x marks on the axes; an ended mission (the Historical missions group, its marker on its last day, mission_end; a craft that flew on and its end_note; a path cut before its mission ended and its cutoff_note); an orbital period under a year, printed in days only (days_only)
 ---
 
 # Interactive Exhibit
 
-Read this file in 10 parts: lines 1-103, 104-157, 158-398, 399-522, 523-533, 534-773, 774-982, 983-1264, 1265-1441, 1442-1644.
+Read this file in 10 parts: lines 1-103, 104-157, 158-398, 399-538, 539-549, 550-789, 790-998, 999-1280, 1281-1457, 1458-1660.
 
-Skill version: 1.31 | 2026-11-05, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.32 | 2026-11-06, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ f87d3aee and gallery @ 0f99f2b5. v1.32 (L-513, the
+Moon's standards) adds Tony's ruling of that evening to the period
+bullet: an orbital period under a year prints in days only, "M days",
+in the orrery and on the website. The orrery decides
+(orbital_period.days_only) and serves the choice as the period's
+days_only; the page decides nothing. And it corrects the same bullet,
+which said the Moon has no period to serve: since L-513 it has, in the
+Earth room's Moon box; and the words-and-link bullet, which said no
+box carries the description: the Moon's does. Read from
+orbital_period.py, export_objects.py,
+solar_system_figures.js and both repositories' checks, with this
+session's edits, before it was written.
+Earlier: 1.31 | 2026-11-05, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ fb0a8dce and gallery @ 3660993e. v1.31 (L-507, more
 voyages) adds, under An Ended Mission, the day and what became of it:
 the day printed is the orrery's mission_end; a craft that flew on (the
@@ -32,26 +45,13 @@ HUD row: its right end is a ruler keying x marks on the axis lines, not
 a grid chip, and the edge numbers are off (L-505, x marks by Tony's
 ruling of 2026-10-31). Each fact was read from the gallery's code at
 c77f87f6, with this session's edits, before it was written.
-Earlier: 1.29 | 2026-10-29, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 571b9bf4 and gallery @ b55109f2. v1.29 (L-503, L-502,
-L-399, L-504) records the gallery's builds of 2026-10-29, six things a
-session following 1.28 would get wrong or not find: a small body's own
-uncertainty is served by the builder and used whole, and the room's
-sentence prints when no source error is served at all; the main belt's
-cloud, the first stored drawing named on a room's row, which the pull
-and the builder now read; the drawing row in the Solar System room's
-drawer; the frame HUD as a row across the bottom (the triad at three
-quarters in its centre, the chip at its right, the row and the count
-line at 48 px, the count line left of the triad); a stored drawing's
-cross off the axes, held by the Label words check; and the source
-line's clocks. Each fact was read from the gallery's code at b55109f2
-before it was written.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there on
 2026-10-05 (L-418), 2026-10-10 (L-429), 2026-10-14 (L-431), 2026-10-16
 (L-421), 2026-10-17 (L-452), 2026-10-20 (L-456), 2026-10-21 (L-460),
 2026-10-22 (L-434, L-443), 2026-10-24 (L-477, L-482), 2026-10-25 (L-443,
 twice), 2026-10-26 (L-443), 2026-10-27 (L-443), 2026-10-28 (L-443),
-2026-10-29 (L-503), 2026-11-02 (L-507) and 2026-11-05 (L-507).
+2026-10-29 (L-503), 2026-11-02 (L-507), 2026-11-05 (L-507) and
+2026-11-06 (L-513).
 
 ## Contents
 
@@ -397,7 +397,10 @@ page:
   must be linked. The room's info panel shows the row's own `about`
   where the room serves one (Pluto's barycentre sentence), otherwise
   the `description`, and links `info_url`; the hover does not carry
-  either. A changed `horizons_id` reaches the served cache only when
+  either. The Earth room's Moon box does carry the description, under
+  the name, with `info_url` in its info panel (v1.32, L-513; Tony,
+  2026-11-06: "so the Moon's text box shows its words, link, period and
+  accuracy"). A changed `horizons_id` reaches the served cache only when
   the builder runs, so Cache in step fails until it has (Apophis,
   2026-10-01).
 - **A body's orbital period is the orrery's, printed as served**
@@ -411,16 +414,29 @@ page:
   value, figure count and the orrery's printed text. The page prints
   the served text, never a recount (`SolarSystemFigures.periodLine`,
   shared by the Solar System room's body hovers and the Earth room's
-  Sun Direction). Three forms, and nothing else: "Orbital period: N
+  Sun Direction and Moon box). Three forms, and nothing else: "Orbital period: N
   years (M days), around <centre>, from JPL Horizons, fetched <date>.";
   "Orbital period: N years (M days). Typed value, not fetched from
   JPL." -- printed, marked, so the website and the orrery agree; and
-  "Orbital period: not yet fetched from JPL." A body with no block (the
+  "Orbital period: not yet fetched from JPL." A PERIOD UNDER A YEAR
+  PRINTS IN DAYS ONLY (v1.32, L-513; Tony's ruling of 2026-11-06: "print
+  them in days only, with no years figure, for every moon, in the
+  orrery and on the website. The days keep the digits the rule earns,
+  so the Moon reads '27 days'"): "M days" stands for "N years (M days)"
+  in the fetched and the typed form alike. The orrery decides, by the
+  full period against the Julian year (`orbital_period.days_only`, the
+  rule's one home), and prints so in its hover and its parameters
+  window; the export serves the choice as `days_only`, with `years`
+  null, and `periodLine` prints the days alone and decides nothing. On
+  2026-11-06 that was Mercury, Venus, the Moon, 2025 PN7 and Apophis.
+  The Solar System figures check fails a days-only period that prints
+  a years figure. A body with no block (the
   Sun) prints no line; a fetched period served with no centre prints no
   line and the room says why in its warnings. The block is read from the
   config by the room's driver, so a change reaches a visitor on the
-  push alone. An object without a `'key'` in the orrery's list (the
-  Moon, today) has no period to serve.
+  push alone. An object without a `'key'` in the orrery's list has no
+  period to serve; the Moon has one since 2026-11-06 (L-513), keyed
+  'moon' and printed in the Earth room's Moon box.
 - **The Solar System room's source line names each date's clock**
   (v1.29, L-504; Tony's rulings of 2026-10-28, "we should standardize
   on utc", and of 2026-10-29, the elements' date kept on JPL's clock,

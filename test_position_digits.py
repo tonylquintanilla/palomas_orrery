@@ -76,6 +76,11 @@ column, says JPL states no accuracy, and one whose question failed or was
 never asked says the figure is not included here: Bennu both ways, and
 Encke's zero sigma now reads as JPL stating none. Two planted faults, one
 for each sentence said in the other's place.)
+Module updated: November 6, 2026 with Anthropic's Claude Opus 5.5 (L-513,
+Tony's ruling of that evening: a period under a year prints in days only.
+The period check holds the Moon's fetched period and Mercury's typed one
+to days alone, in the hover and the parameters window, and Earth's
+period, just over a year, to years and days.)
 """
 import math
 import os
@@ -738,6 +743,30 @@ def check_period_sentence(findings, counts):
             if len(line) >= 98:
                 findings.append(('PERIOD LINE TOO WIDE', '%d characters: %s'
                                  % (len(line), line)))
+        # L-513: Earth's period is just over a Julian year, so it keeps
+        # its years figure.
+        if 'yr)' not in panel or ' years (' not in hover:
+            findings.append(('YEARS DROPPED FROM A PERIOD OVER A YEAR',
+                             '%s | %s' % (hover.replace('<br>', ' / '), panel)))
+    # L-513 (Tony's ruling of 2026-11-06): a period under a year prints in
+    # days only, with no years figure, fetched (the Moon around Earth) or
+    # typed (Mercury).
+    moon = {'days': 27.4335, 'error_days': 0.6, 'error_from': 'year_change',
+            'sbdb_sigma_days': None, 'sbdb_status': 'not a small body; SBDB not asked',
+            'fetched': '2026-11-06', 'target': '301', 'target_label': None}
+    for resolved, want in (
+            ({'kind': 'fetched', 'days': 27.4335, 'record': moon, 'label': 'Earth'},
+             'Orbital period: 27 days<br>'),
+            ({'kind': 'typed', 'days': 87.969, 'record': None, 'label': None},
+             'Orbital period: 87.969 days<br>')):
+        hover = orbital_period.period_hover_lines(resolved)
+        panel = orbital_period.period_panel_text(resolved)
+        counts['period'] = counts.get('period', 0) + 2
+        if (not hover.startswith(want) or 'year' in hover.split('<br>')[0]
+                or 'yr' in panel):
+            findings.append(('A PERIOD UNDER A YEAR NOT IN DAYS ONLY',
+                             'want %r: %s | %s'
+                             % (want, hover.replace('<br>', ' / '), panel)))
 
 
 def run_checks(sky_source=None, orrery_source=None):

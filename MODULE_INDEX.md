@@ -12,8 +12,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 176  
-**Total Lines of Code (non-blank):** 140,091  
-**Total Public Functions/Classes:** 1,815
+**Total Lines of Code (non-blank):** 140,169  
+**Total Public Functions/Classes:** 1,817
 
 ## Classification Coverage
 
@@ -124,7 +124,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `main_belt_sampler.py` | The main asteroid belt as a cloud of dots placed at random inside the belt's spread, measured from JPL's own orbits. (365 lines) |
 | `object_type_analyzer.py` | Object Type Analysis and Report Generation Module Provides comprehensive analysis of astronomical data including object types, data quality metrics, and full report generation. (756 lines) |
 | `orbital_elements.py` | Standalone data module containing orbital element dictionaries. NO IMPORTS - Pure data only to avoid circular dependencies. (1,296 lines) |
-| `orbital_period.py` | A body's orbital period from JPL, printed to the digits its errors earn. (950 lines) |
+| `orbital_period.py` | A body's orbital period from JPL, printed to the digits its errors earn. (981 lines) |
 | `outer_oort_sampler.py` | The outer Oort cloud as a thin scatter of loose dots with clumps among them, placed once from a seed, between the rows' edges. (202 lines) |
 | `path_or_orbit.py` | - the one home of the rule that decides whether a small body is drawn as a path or as an orbit: by the eccentricity of its orbit solution in JPL's Small-Body Database, refreshed on the 30-day cycle (L-510, part 1). (327 lines) |
 | `pole_frames.py` | The matrix that turns coordinates measured about a pole into the drawing's frame, the ecliptic of J2000. (72 lines) |
@@ -229,7 +229,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `examine_hot_csv.py` | Examine the HOT CSV file structure (47 lines) |
 | `export_constants.py` | - write data/constants_export.json from constants_new.py. The orrery is the producer of its numbers; the gallery reads this file and never reads orrery source. (571 lines) |
 | `export_drawings.py` | - write the orrery's stored drawings into data/drawings/, one file per drawing, for the website to pull and draw. (436 lines) |
-| `export_objects.py` | - write data/objects_export.json from the object list in celestial_objects.py. The orrery is the one definition of each object; the gallery reads this file and never reads orrery source. (794 lines) |
+| `export_objects.py` | - write data/objects_export.json from the object list in celestial_objects.py. The orrery is the one definition of each object; the gallery reads this file and never reads orrery source. (812 lines) |
 | `export_orbit_cache.py` | DEPRECATED: export_orbit_cache.py Obsolete since November 4, 2026 (L-512, ruling 0): data/orbit_paths.json is retired. Run on purpose, this script still reads data/orbit_paths.json and data/osculating_cache.json (read-only), and stops with "caches not found" when either is missing, so once Tony d... (629 lines) |
 | `food_insecurity_generator.py` | IPC acute food-insecurity KMZ layer (Sudan, current period). (702 lines) |
 | `horizons_check.py` | - check each object the website serves against JPL Horizons: that its entry names exactly one object, that the object's id, index and name are what the orrery's list says, and that the orbital period the website prints is the one JPL gives. And re-read each spacecraft's Horizon... (1,245 lines) |
@@ -260,7 +260,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `test_path_or_orbit.py` | - the rule that draws a small body as a path or an orbit by its orbit solution's e in JPL's Small-Body Database (path_or_orbit.py, L-510), on made-up records, with no network; and the guard that the retired 'open_path' does not come back to the object list. Each check is fi... (405 lines) |
 | `test_path_plan.py` | - the path plan, offline, against a made-up solar system answered in JPL's own vector format (L-443, slice 2). (931 lines) |
 | `test_period_fetch.py` | - the period fetch (L-444) on recorded answers, with no network: it asks only for what is missing, with plotting's own call, writes the record plotting writes, and names a failure; and every planted fault is caught by name. (1,051 lines) |
-| `test_position_digits.py` | The orrery's body hover prints each distance and speed to the digits JPL's errors earn, and proof that this check can fail. (908 lines) |
+| `test_position_digits.py` | The orrery's body hover prints each distance and speed to the digits JPL's errors earn, and proof that this check can fail. (937 lines) |
 | `test_provenance_1d.py` | Regression tests for the Phase 1d/1e changes. (485 lines) |
 | `test_reset_completeness.py` | - guard the Reset button against partial-reset drift. (123 lines) |
 | `test_row_run.py` | Pins for L-414: a row's citation context is its own comment run, declared rows are their own kind, and the gate-path figure is computed and recorded by name. (370 lines) |
