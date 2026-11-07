@@ -210,5 +210,40 @@ The other choice is to list the future rows now, greyed out, as a preview of wha
 
 **For you to do or decide**
 - (decide) Should the Mars room's drawer list just Mars (fixed), Phobos and Deimos? -- yes, but this suggests that the Earth room also needs the Earth symbol fixed, which it does not have. 
-- (do) Commit and push the orrery. -- 
+- (do) Commit and push the orrery. -- 062bed442487418452d05f227cc2f08dd50dd248
 - (do) Each morning, Pull origin on both, orrery then website, first.
+
+======================================================================================
+
+Your second ruling is recorded: the Mars drawer lists Mars (fixed, no tick box), then Phobos, then Deimos. You're right about the Earth room. A fixed row exists today only in the Solar System room, so the fixed centre row is a new piece the rooms share. I'll build it once and give it to the Mars and Earth rooms together, and put that to you with the build plan.
+
+**One thing to check first:** the ledger edit from my last turn isn't in your push 062bed4. That commit carried Where We Are and your run record, but not `LEDGER_CONSOLIDATED.md`. This turn's ledger file carries ruling 1 again, plus ruling 2. Please make sure GitHub Desktop shows the ledger in its changes list before you commit.
+
+**Question 3 of 3: should each Martian moon's text box read as the Moon's box does, with one difference for its accuracy?**
+
+The Moon's pattern, line by line:
+- The moon's name.
+- NASA's own sentence, with NASA's page as the link in the info panel. I'll bring you the exact sentences at the build, as with the Moon.
+- Its distance from Mars, printed to the digits the larger of two errors allows, never finer than whole kilometres. One error is how far the website's own working-out may have drifted by the minute shown. The other is JPL's published accuracy.
+- One sentence saying which of the two set those digits.
+- Its period in days, around Mars, from JPL, with the date it was fetched.
+
+The difference is that the orrery has no cited accuracy for Mars's moons yet. JPL's 2014 report, which gives the planets' and the Moon's, doesn't cover them. Until a source is found and cited, the box prints the standing sentence the website already uses for any body without one: "JPL's own uncertainty for this position is not yet included." Finding that source is part of the build, not a guess now.
+
+**Files changed, for your run record**
+- ok `LEDGER_CONSOLIDATED.md` (2 edits, then the index rebuilt). Ruling 1 again, and ruling 2 with your note on the Earth room, on L-514 (the Mars room).
+- ok `documentation/WHERE_WE_ARE.md` (3 edits). The box, Waiting on you and Where the details are now point at question 3.
+
+**Token count:** this session can't print Claude Code's usage count. This turn read small slices and wrote the two files above.
+
+**Your run order**
+1. In GitHub Desktop, commit and push the orrery. Check that both the ledger and Where We Are are in the change list.
+
+**For you to do or decide**
+- (decide) Should each Martian moon's box follow the Moon's pattern, with the "not yet included" sentence until an accuracy is cited?
+- (do) Commit and push the orrery, ledger included.
+- (do) Each morning, Pull origin on both, orrery then website, first.
+
+I haven't committed or pushed, because commit and push are yours by your project rules. The uncommitted changes are in my working copy here. The same two files, the ledger and Where We Are, are already saved in your orrery folder for you to commit in GitHub Desktop.
+
+The open question is still question 3: should each Martian moon's text box follow the Moon's pattern?

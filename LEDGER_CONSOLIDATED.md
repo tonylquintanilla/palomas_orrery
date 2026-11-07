@@ -1574,8 +1574,33 @@ as an archive of the prioritization thinking -- no cleanup on close.
 - **The design questions, in Tony's order**, each recorded here with
   its ruling: (1) what the room opens on; (2) what its drawer lists;
   (3) how a moon's box reads.
-**Gap:** the three rulings; then the smallest instrument, proposed, on
-Tony's go-ahead.
+- **Ruling 1, what the room opens on**, Tony, Nov 6, in his run record
+  `documentation/WHERE_WE_ARE_11-6-26_2227_run_record.md`, declining the
+  coordinator's proposal (Mars as a ball, Earth's guides, both moons
+  ticked): "no. like the moon in the earth room, they should be off by
+  default. the room should open like earth, with the mars symbol only
+  for now, and in the future, with its crust shell, rotation axis,
+  equator, and terminator, when we build out the room." So the arrival
+  block serves `moon` false for both moons, and the room opens on Mars's
+  symbol alone; the crust shell, axis, equator and terminator wait for
+  the room's build-out.
+- **Ruling 2, what the drawer lists**, Tony, Nov 6, the same run record,
+  answering "Should the Mars room's drawer list just Mars (fixed), Phobos
+  and Deimos?": "yes, but this suggests that the Earth room also needs
+  the Earth symbol fixed, which it does not have." So the drawer lists
+  three rows: Mars, fixed (no tick box, always drawn; its name opens its
+  text box and panel), then Phobos, then Deimos, nearest first, each
+  with a tick box and Go To, a tick drawing the moon's marker and orbit
+  together. Rows for the shells and guides join at the build-out.
+  - The Earth room's fixed Earth row: Tony's observation, recorded here
+    because one build reaches both. Today a fixed row exists only in the
+    Solar System room (`ssDrawer`, null in the Sun and Earth rooms), so
+    a fixed centre row in a planet room is a new piece of SHARED chrome
+    (interactive-exhibit, One chrome, many rooms): built once, given to
+    the Mars and Earth rooms together, both Mode 5 targets. Put to Tony
+    with the build's instrument.
+**Gap:** ruling 3; then the smallest instrument, proposed, on Tony's
+go-ahead, with the Earth room's fixed row in it.
 - **Ref:** L-513 (the Moon's standards, the pattern); L-334 (what a room
   opens on, 2026-09-17); L-291 (the Earth room); L-484 (the two agree);
   L-150 (Charon's period centre, for the Pluto room).

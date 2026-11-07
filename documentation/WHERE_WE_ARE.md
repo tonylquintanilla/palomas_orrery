@@ -11,13 +11,13 @@ Last updated: November 6, 2026, late night: the coordinating session (Opus), sta
 >   other body (your "yes", Nov 6, 22:17). L-513 (the Moon's standards)
 >   is closed, and road stage 14 is done.
 > - The Mars room's design round has begun, in L-514 (the Mars room).
->   Your first ruling: it opens like Earth's, on Mars's symbol alone,
->   with Phobos and Deimos off; the shells and guides come later.
+>   It opens on Mars's symbol alone, moons off; its drawer lists Mars
+>   (fixed), Phobos and Deimos. The Earth room gets a fixed Earth row too.
 >
-> **Do next:** *answer the Mars room's second question: what its drawer lists.*
+> **Do next:** *answer the Mars room's third question: how a moon's box reads.*
 >
 > **Needs you now:**
-> - *(decide) What the Mars room's drawer lists (the question in chat).*
+> - *(decide) How a Martian moon's text box reads (the question in chat).*
 > - *(do) Commit and push the orrery: the ledger and this page.*
 > - *(do) Each morning, Pull origin on both, orrery then website, first.*
 
@@ -101,8 +101,8 @@ Read from files when this page was written, not typed from memory.
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
 Decisions, one at a time:
-- *The Mars room: what its drawer lists; then a moon's box (L-514 (the
-  Mars room)). Its opening is ruled (Nov 6).*
+- *The Mars room: how a moon's box reads (L-514 (the Mars room)). Its
+  opening and its drawer are ruled (Nov 6).*
 
 At the next design talk:
 - How obsolete code is treated, and when it goes (L-509 (obsolete
@@ -124,7 +124,7 @@ Not urgent, in your order:
 - Every item: `LEDGER_CONSOLIDATED.md`.
 - This session: L-513 (the Moon's standards) closed on your ruling in
   `WHERE_WE_ARE_11-6-26_1625_run_record.md`; L-514 (the Mars room)
-  carries the design round, ruling 1 from `..._2227_run_record.md`.
+  carries the design round, rulings 1 and 2 from `..._2227_run_record.md`.
 - The talk's rulings: `DESIGN_L484_consistency_rulings_20261103.md`.
 - The door: `documentation/python_work_door/`, and L-499 (kinds of session).
 
