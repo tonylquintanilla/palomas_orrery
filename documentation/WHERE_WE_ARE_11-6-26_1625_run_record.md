@@ -162,7 +162,7 @@ I'd close this session here. It has run long, and every further turn re-reads al
 
 ====================================================
 
-**Session: OPEN: 11-6-26 1627: Opus: Coordination: Paloma's Orrery session**
+**Session: DONE: 11-6-26 2218: Opus: Coordination: Paloma's Orrery session**
 
 Continuing: I'll read what the Pluto row draws and calls itself today, in both instruments, so the options rest on facts.
 
@@ -492,13 +492,27 @@ Website (not committed):
 **Token count:** I can't print Claude Code's /cost from inside this session. The app reports 275,874 tokens in this session's context, out of 1,000,000, and 5% of the 5-hour limit used (8% of the week).
 
 **Your run order**
-1. In GitHub Desktop, commit and push the orrery: the ledger and Where We Are. -- 
-2. Commit and push the website: the files above, including the one new file.
-3. When the site updates, open the Earth room, tick the Moon and tap it. Its period should read "27 days". If you like, also tap Mercury and Venus in the Solar System room.
+1. In GitHub Desktop, commit and push the orrery: the ledger and Where We Are. -- 5cd9a7feaf2603b3ee7c399c12ed760a33428547
+2. Commit and push the website: the files above, including the one new file. -- 3f2ce7fce48208632c182ad0183227071129aa50
+3. When the site updates, open the Earth room, tick the Moon and tap it. Its period should read "27 days". If you like, also tap Mercury and Venus in the Solar System room. -- 
 
 **For you to do or decide**
 - (do) Push the orrery, then the website.
-- (do) Reinstall interactive-exhibit (Settings > Skills), and paste protocol v3.128 into the Project's instructions on claude.ai.
+- (do) Reinstall interactive-exhibit (Settings > Skills), and paste protocol v3.128 into the Project's instructions on claude.ai. -- done
 - (decide, at the next design talk) Which period the Moon shows (L-513 (the Moon's standards)).
 - (decide, at the next design talk) L-509 (obsolete code), with its two cases.
 - (do) Each morning, Pull origin on both, orrery then website, first.
+
+==========================================
+
+**Coordinator:**
+
+Yes. Both numbers are orbital periods, and "average month" was my loose wording. Here is the difference.
+
+- **JPL's 27.43 days, shown as 27,** is the Moon's orbital period at this moment, worked out from where it is and how it is moving today. The Sun's pull keeps changing it, which is why only whole days are stable.
+- **27.32 days** is the same orbital period averaged over many orbits. Astronomers call it the sidereal month: once around Earth, measured against the stars. It's still an orbit, just averaged, not today's. I'm quoting that figure as commonly given; it would need a cited source before it went on the site.
+- **The month we usually mean is neither of these.** That is new moon to new moon, about 29 days. It's longer because Earth moves along its own orbit while the Moon goes around. NASA's facts page makes the same distinction: the Moon "appears to orbit us every 29 days" from our point of view.
+
+There's a second reason JPL's figure fits your question. Every other body on the site, from Mercury to Sedna, shows JPL's period for today, rounded to the digits that hold steady. The Moon now follows the same rule. Choosing the 27.32 average would make the Moon the one body shown differently.
+
+**Does that settle it: the Moon keeps JPL's figure, the same rule as every other body, and L-513 (the Moon's standards) closes?** If yes, the next session records your ruling and closes it. -- yes
