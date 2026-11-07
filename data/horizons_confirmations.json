@@ -97,6 +97,30 @@
       },
       "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66"
     },
+    "moon": {
+      "confirmed": "2026-11-07",
+      "horizons_id": "301",
+      "id_type": "majorbody",
+      "horizons_name": "Moon",
+      "object_type": "satellite",
+      "list_sha256": "512e860d9f96c2ab1ee55e37174b7c0dbc0ea11ae0b912ae7d30afb5aabb9236",
+      "jpl_name": "Moon",
+      "jpl_type": "natural satellite",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=301&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=301&group=sb&format=text"
+      ],
+      "period": {
+        "confirmed": "2026-11-07",
+        "center": "@399",
+        "target": "301",
+        "epoch": "2026-11-06 23:47",
+        "days": 27.42568868369487,
+        "error_days": 0.6199933502843287,
+        "jpl_days": 27.42568868369487,
+        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='301'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@399'&TLIST='2461351.490972222'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
+      }
+    },
     "mars": {
       "confirmed": "2026-10-31",
       "horizons_id": "499",
@@ -138,14 +162,14 @@
       ],
       "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)",
       "period": {
-        "confirmed": "2026-11-06",
+        "confirmed": "2026-11-07",
         "center": "@sun",
         "target": "599",
-        "epoch": "2000-11-06 20:47",
-        "days": 4334.771876986341,
-        "error_days": 0.45732651117850764,
-        "jpl_days": 4334.771876986341,
-        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='599'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2451855.365972222'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
+        "epoch": "2000-11-06 22:12",
+        "days": 4334.845308827874,
+        "error_days": 0.752878956760469,
+        "jpl_days": 4334.845308827874,
+        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='599'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2451855.425000000'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
       },
       "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66"
     },

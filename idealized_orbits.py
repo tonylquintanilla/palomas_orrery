@@ -63,6 +63,12 @@ Module updated: November 4, 2026, afternoon, with Anthropic's Claude Opus
 5.5 (L-512, part 1: that side check falls back to the e of the body's
 typed elements in orbital_elements.py when JPL's database has no record,
 so 6AC4721's orbit is drawn again.)
+Module updated: November 6, 2026 with Anthropic's Claude Opus 5.5 (L-509,
+its second case, by Tony's ruling of that day: the Pluto-centred view of
+Pluto's moons, which draws their orbits distorted, is marked DEPRECATED
+at each of its places here -- Mode 2 of the dispatch, the center_id='Pluto'
+mode of plot_pluto_barycenter_orbit, add_pluto_barycenter_marker, and the
+Pluto branch of plot_satellite_orbit. Nothing this module does changed.)
 
 Role: computation
 Domain: orrery
@@ -1865,7 +1871,11 @@ def plot_pluto_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
     Plot osculating orbit for objects in Pluto binary system.
     
     Supports TWO center modes:
-    1. center_id='Pluto' - Traditional view, moons orbit Pluto
+    1. center_id='Pluto' - Traditional view, moons orbit Pluto.
+       DEPRECATED (L-509, obsolete code, its second case; Tony's ruling
+       of 2026-11-06): it draws the moons' orbits distorted. Unchanged,
+       marked; removed when the Pluto room is built or L-509's talk
+       rules. Mode 2 is the one kept.
     2. center_id='Pluto-Charon Barycenter' - Binary view, ALL objects orbit barycenter
     
     When "Pluto-Charon Barycenter" is the center:
@@ -1926,6 +1936,7 @@ def plot_pluto_barycenter_orbit(fig, object_name, date, color, show_apsidal_mark
         if is_barycenter_mode:
             center_suffix = '@9'  # Barycentric view
         else:
+            # DEPRECATED (L-509): the Pluto-centred view; see the docstring.
             center_suffix = '@999'  # Pluto-centered view (or None for default)
         # Determine which orbital elements to use
         """
@@ -2570,8 +2581,17 @@ def _build_pluto_centered_hover_text(object_name, a, e, i, epoch):
             f"* The Pluto-Charon binary 'wobble'<br>"
             f"The divergence you see IS the perturbation!</i>"
         )
+# =============================================================================
+# DEPRECATED: add_pluto_barycenter_marker
+# Obsolete by Tony's ruling of 2026-11-06 (L-509, its second case): it
+# serves only the Pluto-centred view of Pluto's moons (Mode 2 of the
+# dispatch in plot_idealized_orbits), which draws their orbits distorted.
+# Kept, marked, until the Pluto room is built or L-509's talk rules.
+# =============================================================================
 def add_pluto_barycenter_marker(fig, date, charon_position=None):
     """
+    DEPRECATED (obsolete, L-509): the Pluto-centred view only; see the
+    banner.
     Add the Pluto-Charon barycenter marker to Pluto-centered view.
     
     The barycenter is ~2,035 km from Pluto's center toward Charon.
@@ -3834,6 +3854,12 @@ def plot_satellite_orbit(satellite_name, planetary_params, parent_planet, color,
                 tilt_rad = np.radians(planet_tilts['Neptune'])
                 x_final, y_final, z_final = rotate_points(x_temp, y_temp, z_temp, tilt_rad, 'x')
         elif parent_planet == 'Pluto':
+            # DEPRECATED (L-509, obsolete code, its second case; Tony's
+            # ruling of 2026-11-06): an analytic orbit of a Pluto moon
+            # drawn around Pluto, part of the Pluto-centred view. The
+            # dispatch in plot_idealized_orbits sends the five moons in
+            # PLUTO_MOONS to Mode 2 before it reaches this function.
+            # Unchanged, marked; removed with that view.
             # Special case for Pluto's satellites
             # Apply the optimized transformation: X-Tilt->Y-Tilt->Z-105
             
@@ -5160,6 +5186,13 @@ def plot_idealized_orbits(fig, objects_to_plot, center_id='Sun', objects=None,
                     print(f"  Warning: Could not plot osculating orbit for {moon_name} (missing date)", flush=True)
             
             # Mode 2: Traditional Pluto-centered (for compatibility)
+            # DEPRECATED (L-509, obsolete code, its second case; Tony's
+            # ruling of 2026-11-06): the Pluto-centred view of Pluto's
+            # moons draws their orbits distorted, since they circle the
+            # Pluto-Charon barycentre, not Pluto ("we don't need this
+            # option"). Unchanged, marked; removed when the Pluto room is
+            # built (road stage 15) or when L-509's talk rules. The
+            # barycentre view above (Mode 1) is the one kept.
             elif moon_name in PLUTO_MOONS and center_id == 'Pluto':
                 # Skip analytical orbit - only plot osculating
                 # (Pluto pole RA=132.99 deg far from ecliptic, analytical transformations fail)

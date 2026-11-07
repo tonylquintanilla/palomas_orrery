@@ -99,6 +99,10 @@ Pluto's, the Pluto-Charon barycentre, target 9 (Tony's choice of
 every 6.4 days, and its period around the Sun swung from 88,702 to
 91,630 days in JPL's answers every six hours from 2026-10-28, where the
 barycentre's held to 0.3 days.)
+Module updated: November 6, 2026 with Anthropic's Claude Opus 5.5 (L-509,
+its second case: the 'Pluto' row of VIEW_TO_OSCULATING_CENTRE, the
+Pluto-centred view of Pluto's moons, marked DEPRECATED. Nothing this
+module does changed.)
 """
 
 import math
@@ -129,6 +133,10 @@ SBDB_API_URL = 'https://ssd-api.jpl.nasa.gov/sbdb.api'
 # Until build 2 the animation kept its own copy, which lacked Orcus.
 VIEW_TO_OSCULATING_CENTRE = {
     'Pluto-Charon Barycenter': '@9',
+    # DEPRECATED (L-509, obsolete code, its second case; Tony's ruling of
+    # 2026-11-06): the Pluto-centred view of Pluto's moons draws their
+    # orbits distorted. Unchanged, marked; removed when the Pluto room is
+    # built or L-509's talk rules.
     'Pluto': '@999',
     'Orcus-Vanth Barycenter': '@20090482',
     'Orcus': '@920090482',

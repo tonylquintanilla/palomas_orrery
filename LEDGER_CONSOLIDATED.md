@@ -935,7 +935,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*253 live items; 237 need attention (`!`); 165 RICE-scored; 252 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*254 live items; 238 need attention (`!`); 165 RICE-scored; 252 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1102,6 +1102,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-510 | The object list's typed fields stop deciding: a small body drawn by today's eccentricity, a plan asked from before any launch (orrery, the object list and the path plan) | OPEN | -- | 2026-11-05 |
 | ! | L-511 | The orrery's export carries the words the website prints (orrery + gallery, the words) | OPEN | -- | 2026-11-03 |
 | ! | L-512 | The orrery's fallbacks when JPL cannot answer (orrery, the plot's data path) | OPEN | -- | 2026-11-04 |
+| ! | L-513 | The Moon's standards: its words, link, period and uncertainty, served by the orrery (orrery + gallery, objects; road stage 14) | OPEN | -- | 2026-11-06 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1530,6 +1531,105 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ## DETAIL / RECORD
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
+
+#### [L-513] The Moon's standards: its words, link, period and uncertainty, served by the orrery (orrery + gallery, objects; road stage 14)
+<!-- L:513 status:OPEN upd:2026-11-06 section:A flag: rice: -->
+- **Opened 2026-11-06**, evening, by the Claude Code session (Opus 5.5)
+  built on orrery 1422a96b and gallery 6c93d0a2, from
+  `documentation/COORD_stage14_moon_standards_brief_20261106.md`, Part
+  1. Tony, at the session's start: "Open L-513 (the Moon's standards)
+  in the ledger as your first record, cross-linked to L-484 (the two
+  agree) and to the brief, and carry Part 1's work on it."
+- The road's words (stage 14): "the Moon gets the orrery's words,
+  link, period and uncertainty."
+- **Why it is L-484's:** L-484 (the two agree) named the Moon among the
+  served objects with no key, outside its check until it gets one
+  ("each gains both when it gets a key"). This item is the Moon's key,
+  and with it the Moon enters the Horizons check and L-484's
+  comparison by name.
+- **At the base, read 2026-11-06:**
+  - Orrery: `celestial_objects.py`, the entry `'name': 'Moon'`, id 301,
+    `id_type` 'majorbody', no `'key'`, so `export_objects.py` did not
+    export it. It carries `mission_info` (a NASA quotation) and
+    `mission_url` (https://science.nasa.gov/moon/). The orbit cache
+    holds its elements around Earth (`center_body` '@399', fetched
+    2026-09-25) and no period record.
+  - Website: `data/objects_config.json` slug `moon`, `canonical_center`
+    '@399', with no description, no info link, no `horizons_name`, no
+    period and no `position_accuracy`. The Earth room draws it
+    (`interactive.html`, `"objects": ["moon"]`).
+- **JPL's exact name, read live 2026-11-06** by the Horizons check's
+  three steps (`horizons_check.lookup_url`, `parse_lookup`, `keep`):
+  the major-body index for 301 answers one object, "Moon", natural
+  satellite, SPKID 301; the small-body index answers only 301 Bavaria
+  (SPKID 20000301, designation A890 WA), which the check's own filter
+  drops. So `horizons_name` is "Moon" and `id_type` 'majorbody' stands.
+- **Keyed 2026-11-06:** `'key': 'moon'` and `'horizons_name': 'Moon'` on
+  the entry. The path plans do not move: the Moon is already one of
+  path_plan's MAJOR_BODIES, and a major body is not a searched small
+  body.
+- **The period, fetched 2026-11-06 by `period_fetch.py`** (PASS,
+  "fetched 1: Moon"): around Earth ('@399', the centre the orrery gives
+  a moon; target 301), 27.42568868 days on JPL's elements of that
+  minute, the elements fetch's PR and the period query agreeing; its
+  change in a year 0.62 days, so it prints "0.08 years (27 days)". The
+  typed value it replaces, 27.321582 days, is the sidereal month; JPL's
+  osculating period around Earth moves with the Sun's pull, which is
+  why it prints to whole days.
+- **The words: NASA's Moon page does not carry the quotation**, read
+  2026-11-06 at https://science.nasa.gov/moon/ (title "Earth's Moon").
+  The entry's `mission_info` quotes NASA: "The Moon rotates exactly once
+  each time it orbits our planet." Neither that page nor NASA's Moon
+  facts page (https://science.nasa.gov/moon/facts/) has the sentence;
+  the facts page says it in other words, with a figure ("makes a
+  complete orbit around Earth in 27 Earth days and rotates or spins at
+  that same rate"). A quotation a visitor cannot find at the source is
+  not served (provenance-discipline, What a Visitor Reads, principle 4).
+  The Moon page's own opening, in its visible text: "From lighting up
+  our skies to preserving evidence of our solar system's history,
+  Earth's closest neighbor plays a pivotal role in the study of our
+  planet and beyond." Which, if any, the Moon serves is Tony's (the
+  brief's stop: the words need his choice).
+- **The uncertainty:** the website prints none for the Moon today. The
+  Earth room's Moon marker and orbit cross carry the assembler's bare
+  position line (`render_objects._marker_hover`, `render_orbits.
+  _au_km_hover`: r to six decimals of an AU and four figures of km),
+  with no words, no link, no period and no accuracy; only the Solar
+  System room prints an accuracy. The orrery's row reaches it:
+  `DE430_MOON_POSITION_PLACE_KM` (0.001 km, the place "submeter" reports
+  to; Folkner et al. 2014, abstract, open PDF on its Source line) is in
+  the constants export, so the website can link it as the Moon's
+  `position_accuracy`, as the planets link theirs. The Earth room needs
+  a build to print it, with the words, link and period.
+- **Tony's choice of the words, 2026-11-06, in chat:** "use NASA's own
+  words from its Moon facts page, quoted exactly: "The Moon makes a
+  complete orbit around Earth in 27 Earth days and rotates or spins at
+  that same rate." Cite it to https://science.nasa.gov/moon/facts/ (read
+  Nov 6, 2026), and keep the Moon's info link as the NASA Moon page.
+  Correct the orrery's own Moon entry to this sentence first, so the
+  website takes it from the export. Then go ahead with the Earth room's
+  build so the Moon's text box shows its words, link, period and
+  accuracy."
+  - Done in `celestial_objects.py`: `mission_info` reads "Horizons: 301.
+    NASA, Moon Facts (https://science.nasa.gov/moon/facts/): "The Moon
+    makes ... at that same rate."", the page and its read date on the
+    entry's `# Source:` comment. The export serves it as the Moon's
+    description, its address on the sentence a visitor reads, and
+    reports its one number, 27, which NASA's page states: the read is
+    this record (provenance-discipline, A Simple Error a Check Finds,
+    a number in a served description).
+  - Re-read 2026-11-06, the page titled "Moon Facts - NASA Science": the
+    words are there exactly; NASA's sentence goes on past "rate" with ",
+    or in that same amount of time.", and the quote ends where Tony's
+    did.
+- **The orrery's maintenance run, 2026-11-06 evening:** "35 of 35 gating
+  checkers passed"; the gate path "0 TIER-1 -- the push gate holds". The
+  Horizons check confirmed the Moon by name on 2026-11-07 (UTC): identity
+  (JPL "Moon", natural satellite, both indexes asked) and period (around
+  @399, JPL's 27.42568868 days equal to the orrery's).
+- **Ref:** L-484 (the two agree); the brief above; L-395 (the Horizons
+  check, and the words and link from the orrery); L-431 (periods);
+  L-398 and L-401 (the DE430 accuracy rows).
 
 #### [L-512] The orrery's fallbacks when JPL cannot answer (orrery, the plot's data path)
 <!-- L:512 status:OPEN upd:2026-11-04 section:A flag: rice: -->
@@ -2067,7 +2167,7 @@ Ruling 6; `celestial_objects.py`; `path_plan.py`; `period_fetch.py`;
 `data/osculating_cache.json`.
 
 #### [L-509] Obsolete code: how it is marked, and when it goes (orrery, housekeeping)
-<!-- L:509 status:OPEN upd:2026-11-03 section:A flag: rice: -->
+<!-- L:509 status:OPEN upd:2026-11-06 section:A flag: rice: -->
 - **Tony, 2026-11-03, 15:14, in chat**, asked whether the orrery's
   unused date function `create_dates_list_for_object` goes (L-476's
   close): "for documentation mark it as obsolete. we should discuss how
@@ -2089,6 +2189,39 @@ maintenance run lists what is marked.
 - **6AC4721 is not obsolete** (Tony, Nov 4, morning): the entry is kept
   on purpose, as the record of how C/2026 A1 (MAPS) was drawn before
   JPL carried it. Its drawing after L-510 is L-512's part 1.
+- **The second case, 2026-11-06: the Pluto-centred view of Pluto's
+  moons** (Tony's ruling of that day, on L-150: "the orrery has a legacy
+  option to have the center as pluto, which indeed plots the moon orbits
+  distorted. we don't need this option."). Mapped and marked by the
+  Claude Code session of that evening (Opus 5.5, at orrery 1422a96b),
+  each with a DEPRECATED comment or banner in the form above and no
+  change to what it does. It goes when the Pluto room is built (road
+  stage 15) or when this item's talk rules. The map, nine places in
+  three files, found by searching for `plot_pluto_barycenter_orbit`,
+  `center_id == 'Pluto'`, `'@999'` and the centre lists:
+  - `idealized_orbits.py`: Mode 2 of `plot_idealized_orbits`' dispatch
+    (`moon_name in PLUTO_MOONS and center_id == 'Pluto'`); the
+    `center_id='Pluto'` mode of `plot_pluto_barycenter_orbit` (its
+    docstring's mode 1 and the `'@999'` cache suffix; the function
+    itself stays, as it draws the barycentre view too);
+    `add_pluto_barycenter_marker`, a banner, as it serves only that
+    view; and the `parent_planet == 'Pluto'` branch of
+    `plot_satellite_orbit`, an analytic orbit around Pluto that the
+    dispatch's Mode 2 reaches first for the five moons in
+    PLUTO_MOONS.
+  - `palomas_orrery.py`: the centre menu that offers 'Pluto'
+    (`update_center_options`' list, where a selected Pluto becomes a
+    centre through `can_be_horizons_center`); the 'Pluto' half of the
+    element pre-fetch's Pluto-system test, in the static plot and in
+    the animation; and the animation's barycentre marker for the
+    Pluto-centred view.
+  - `orbital_period.py`: the 'Pluto' row of VIEW_TO_OSCULATING_CENTRE
+    ('@999').
+  - Not marked, and why: Pluto's own shells (`pluto_shell_vars`) and
+    Pluto as the centre of its own interior and atmosphere, which the
+    ruling did not name; `orbital_period.CENTRE_LABELS`' and
+    `osculating_cache_manager`'s mentions of 999 and '@999', which are
+    words and an example, not the view.
 **Gap:** a design talk (Where We Are, at the next design talk); then a
 search of the whole tree for marked code, which lists and fixes
 nothing; then a housekeeping slice (5b on the road).
@@ -4252,6 +4385,12 @@ L-490.
   C/2025 K1 as an orbit since gallery e5352a86 (L-510, Nov 5), as the
   orrery does, and the objects mirror makes such a change by itself
   since 3660993. horizons-orbital-mechanics 1.18 says so.
+- **2026-11-06, evening: the Moon gets its key** (road stage 14, Part 1
+  of `documentation/COORD_stage14_moon_standards_brief_20261106.md`),
+  carried on L-513 (the Moon's standards). It is the first of the
+  served objects with no key (the Moon, Io, Titan, Pluto's body,
+  Charon, above) to gain one, so it joins the keyed set this item's
+  check will compare, by name. What it found is on L-513.
 **Gap (replaces the one below, 2026-11-05, evening):** this item's
 brief, sliced as above, with interactive-exhibit's next version written
 beside it as an orrery records patch; then the build with a planted
@@ -34114,7 +34253,29 @@ S9 (info card, deferred) and S12 (ledger recommendations); L-118 (F1,
 shared serving pipeline); L-098 (parent, Phase 1b).
 
 #### [L-150] Multi-orbit trust model for near-equal-mass binaries (Pluto/Charon and future onboards)
-<!-- L:150 status:OPEN upd:2026-07-20 section:W.Active flag: rice:2/3/75/2 -->
+<!-- L:150 status:OPEN upd:2026-11-06 section:W.Active flag: rice:2/3/75/2 -->
+- **Ruled 2026-11-06 (Tony), the Pluto row** (road stage 14; recorded,
+  no build, by the Claude Code session of that evening from
+  `documentation/COORD_stage14_moon_standards_brief_20261106.md`, Part
+  2). His words, in his run record
+  `documentation/WHERE_WE_ARE_11-6-26_1625_run_record.md`: "for a solar
+  system view the barycenter vs pluto is trivial. however, for a local
+  view, say a pluto drawer, it is not trivial, and we should show the
+  barycenter and the pluto - charon pair orbiting around it. and drawing
+  the other moons around the barycenter is critical otherwise their
+  orbits are drawn distorted." At 17:20, "are we creating a pluto room
+  now? or just keeping the solar view."; the coordinating session's
+  answer, keeping the Solar System view, was accepted with "go thanks"
+  (17:25).
+  - THE SOLAR SYSTEM ROOM'S PLUTO ROW STAYS AS IT IS: the Pluto-Charon
+    barycentre (JPL 9), named Pluto, with its sentence.
+  - THE LOCAL VIEW IS RULED FOR THE PLUTO ROOM (road stage 15): centred
+    on the barycentre, Pluto and Charon circling it, the other moons
+    drawn around it. This item's per-orbit trust is that room's to
+    build.
+  - The orrery's Pluto-centred view of the moons, which draws their
+    orbits distorted, is L-509's second case (obsolete code), marked
+    the same evening.
 - **Decided (Tony, 2026-07-20), during L-149 discussion:** when a served body is a genuine
   near-equal-mass binary -- barycenter falls OUTSIDE the primary, per the project's existing
   barycenter rule -- it needs TWO served orbits, not one: heliocentric (whole-system views)

@@ -1,8 +1,8 @@
 {
   "schema": 4,
-  "source_sha256": "aacf3de0db66acc4ad9333a1984cc9462b533f7bbe16d8668a75738be05e91c6",
-  "period_inputs_sha256": "053ab96b906e37fc7aca361a5dfa325654cf21a85f8a1d761ebd0de693299295",
-  "confirmations_sha256": "3483149ba8e8370c6e6078c060949973d62b73a2168382ec4325c800d95af079",
+  "source_sha256": "512e860d9f96c2ab1ee55e37174b7c0dbc0ea11ae0b912ae7d30afb5aabb9236",
+  "period_inputs_sha256": "b44eecc08ae3c625218cf1473b9e042a1f90c8a474a8984e5653207b7eb318f2",
+  "confirmations_sha256": "42da1b06c86aec4f3ae74b9d0e848adf809f61ba4b7a397ada7efb50da63c759",
   "paths_sha256": "c8fd046d767f68aa97c46b5765e71fae6cdab7127fd6f04ebbc181b37be771df",
   "cadence_days": 30,
   "objects": {
@@ -224,6 +224,74 @@
         "hold": null
       }
     },
+    "moon": {
+      "name": "Moon",
+      "horizons_id": "301",
+      "horizons_name": "Moon",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "description": "NASA, Moon Facts (https://science.nasa.gov/moon/facts/): \"The Moon makes a complete orbit around Earth in 27 Earth days and rotates or spins at that same rate.\"",
+      "info_url": "https://science.nasa.gov/moon/",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@399",
+        "center_label": "Earth",
+        "target": "301",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-11-06",
+        "words": null,
+        "years": {
+          "value": 0.08,
+          "figures": 1,
+          "text": "0.08"
+        },
+        "days": {
+          "value": 27.0,
+          "figures": 2,
+          "text": "27"
+        },
+        "record": {
+          "days": 27.42568868369487,
+          "error_days": 0.6199933502843287,
+          "error_from": "year_change",
+          "sbdb_status": "not a small body; SBDB not asked",
+          "epoch": "2026-11-06 23:47",
+          "elements": {
+            "a": 0.002578405422484208,
+            "e": 0.04037427243226854,
+            "i": 5.010316315093197,
+            "omega": 121.5210812185545,
+            "Omega": 326.2757607411543,
+            "TP": 2461343.462008743,
+            "MA": 105.3912222969847,
+            "TA": 109.7885444896174,
+            "q": 0.002474304179515993,
+            "epoch": "2026-11-06 23:47 osc."
+          },
+          "paired": false,
+          "not_paired": "the cache holds no Sun-centred elements for this body"
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-11-07",
+          "horizons_id": "301",
+          "id_type": "majorbody",
+          "horizons_name": "Moon"
+        },
+        "period": {
+          "confirmed": "2026-11-07",
+          "center": "@399",
+          "epoch": "2026-11-06 23:47",
+          "days": 27.42568868369487,
+          "jpl_days": 27.42568868369487,
+          "error_days": 0.6199933502843287
+        },
+        "hold": null
+      }
+    },
     "mars": {
       "name": "Mars",
       "horizons_id": "499",
@@ -309,9 +377,9 @@
         "fetched": "2026-11-06",
         "words": null,
         "years": {
-          "value": 11.868,
-          "figures": 5,
-          "text": "11.868"
+          "value": 11.87,
+          "figures": 4,
+          "text": "11.87"
         },
         "days": {
           "value": 4335.0,
@@ -319,22 +387,22 @@
           "text": "4335"
         },
         "record": {
-          "days": 4334.771876986341,
-          "error_days": 0.45732651117850764,
+          "days": 4334.845308827874,
+          "error_days": 0.752878956760469,
           "error_from": "year_change",
           "sbdb_status": "not a small body; SBDB not asked",
-          "epoch": "2000-11-06 20:47",
+          "epoch": "2000-11-06 22:12",
           "elements": {
-            "a": 5.204551846621725,
-            "e": 0.04886803188636581,
-            "i": 1.304218886372498,
-            "omega": 274.9595369054674,
-            "Omega": 100.5100818221039,
-            "TP": 2451317.486445082,
-            "MA": 44.67054674743792,
-            "TA": 48.7823095428263,
-            "q": 4.950215641026769,
-            "epoch": "2000-11-06 20:47 osc."
+            "a": 5.204610623839732,
+            "e": 0.04887277686457209,
+            "i": 1.304205405702662,
+            "omega": 274.9716507412894,
+            "Omega": 100.5105161853708,
+            "TP": 2451317.623329461,
+            "MA": 44.66332420210723,
+            "TA": 48.7750032258641,
+            "q": 4.950246850153832,
+            "epoch": "2000-11-06 22:12 osc."
           }
         }
       },
@@ -346,12 +414,12 @@
           "horizons_name": "Jupiter"
         },
         "period": {
-          "confirmed": "2026-11-06",
+          "confirmed": "2026-11-07",
           "center": "@sun",
-          "epoch": "2000-11-06 20:47",
-          "days": 4334.771876986341,
-          "jpl_days": 4334.771876986341,
-          "error_days": 0.45732651117850764
+          "epoch": "2000-11-06 22:12",
+          "days": 4334.845308827874,
+          "jpl_days": 4334.845308827874,
+          "error_days": 0.752878956760469
         },
         "hold": null
       }
@@ -9940,6 +10008,9 @@
     }
   },
   "numbers": {
+    "moon": [
+      "27"
+    ],
     "eurybates": [
       "11",
       "2027"

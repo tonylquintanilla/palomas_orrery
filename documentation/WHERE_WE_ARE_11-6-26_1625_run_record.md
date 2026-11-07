@@ -292,7 +292,7 @@ The brief gives the Code session two parts.
 - New: `documentation/COORD_stage14_moon_standards_brief_20261106.md` (112 lines)
 
 **Run order**
-1. In GitHub Desktop, commit and push the orrery. The change list should show only the brief. -- 
+1. In GitHub Desktop, commit and push the orrery. The change list should show only the brief. -- 1422a96b4e398c5f25bbcb0486a2e6b74124115a
 2. Paste the SHA of that push into the opener, then start the Code session from the python_work door.
 
 **For you to do or decide**
@@ -310,3 +310,8 @@ I deleted that copy. Both clones now match GitHub, with nothing untracked.
 The brief itself is still in your orrery's documentation folder, and your run order hasn't changed:
 1. Commit and push it in GitHub Desktop.
 2. Start the Code session with the opener from my last message, with the SHA of that push pasted in.
+
+=========================================================================================================
+
+**Session: OPEN: 11-6-26 1737: Opus: Code: Paloma's Orrery stage 14 Moon standards L513**
+

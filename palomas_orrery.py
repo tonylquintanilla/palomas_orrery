@@ -191,6 +191,12 @@ with no orbit -- a spacecraft -- by the farthest place its marker is drawn
 settings box that cannot be read is named, with what it holds, on the
 console and in the status line, and the animation's progress bar stops,
 where it used to stop silently.
+Module updated: November 6, 2026, evening, with Anthropic's Claude Opus
+5.5 (L-509, its second case, by Tony's ruling of that day): the legacy
+Pluto-centred view of Pluto's moons is marked DEPRECATED where this file
+serves it -- the centre menu that offers 'Pluto', the two element
+pre-fetches' 'Pluto' half, and the animation's barycentre marker for that
+view. Nothing this module does changed.
 
 """
 #Paloma's Orrery - Solar System Visualization Tool
@@ -4820,6 +4826,9 @@ def plot_objects():
                     # Pluto system objects need center_body when viewing from barycenter
                     obj_center_body = None
 
+                    # DEPRECATED (L-509, its second case, 2026-11-06): the
+                    # 'Pluto' half is the Pluto-centred view; unchanged,
+                    # marked (see the centre menu).
                     if center_object_name in ['Pluto-Charon Barycenter', 'Pluto']:
                         pluto_system_ids = ['999', '901', '902', '903', '904', '905']   # Pluto, Charon, Styx, Nix, Kerberos, Hydra
                         if str(horizons_id) in pluto_system_ids:
@@ -6454,6 +6463,9 @@ def animate_objects(step, label):
                     # Determine if this object needs barycentric elements
                     # Pluto system objects need center_body when viewing from barycenter
                     obj_center_body = None
+                    # DEPRECATED (L-509, its second case, 2026-11-06): the
+                    # 'Pluto' half is the Pluto-centred view; unchanged,
+                    # marked (see the centre menu).
                     if center_object_name in ['Pluto-Charon Barycenter', 'Pluto']:
                         # Check if this is a Pluto system object (Pluto, Charon, or outer moons)
                         pluto_system_ids = ['999', '901', '902', '903', '904', '905']  # Pluto, Charon, Nix, Hydra, Kerberos, Styx
@@ -8026,6 +8038,8 @@ def animate_objects(step, label):
 
                 # Update Pluto-Charon Barycenter position (derived from Charon)
                 # In Pluto-centered view, barycenter is at fixed distance along Pluto-Charon direction
+                # DEPRECATED (L-509, its second case, 2026-11-06): the
+                # Pluto-centred view; unchanged, marked (see the centre menu).
                 if 'Pluto-Charon Barycenter' in trace_indices and center_object_name == 'Pluto':
                     trace_idx = trace_indices['Pluto-Charon Barycenter']
                     frame_idx = to_frame_idx(trace_idx)
@@ -10732,6 +10746,12 @@ def update_center_dropdown(*args):
     # Filter it out here so it is not listed twice.
     # FIXED: double 'Sun' in the center-object dropdown (every selection).
     new_options = ['Sun'] + [name for name in ordered_centers if name != 'Sun']
+    # DEPRECATED (L-509, obsolete code, its second case; Tony's ruling of
+    # 2026-11-06): 'Pluto', when it is offered here, is the legacy
+    # Pluto-centred view, which draws Pluto's moons' orbits distorted ("we
+    # don't need this option"); 'Pluto-Charon Barycenter' is the view
+    # kept. Unchanged, marked; it goes when the Pluto room is built or
+    # L-509's talk rules.
 
     # Update the dropdown values
     center_menu['values'] = new_options

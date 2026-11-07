@@ -11,17 +11,15 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 178  
-**Total Lines of Code (non-blank):** 140,844  
-**Total Public Functions/Classes:** 1,822
+**Total Python Files:** 176  
+**Total Lines of Code (non-blank):** 140,090  
+**Total Public Functions/Classes:** 1,815
 
 ## Classification Coverage
 
-**Undetermined role (11).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
+**Undetermined role (9).** No valid `Role:` tag in the module docstring. Not guessed -- add the tag and re-run `add_docstrings.py`, then this file.
 
 - `earth_pole_live_check.py`
-- `patch_L476_5_animation_scale_and_settings.py`
-- `patch_L506_2_method_table.py`
 - `path_drawing.py`
 - `test_drawings_export.py`
 - `test_earth_pole_of_date.py`
@@ -31,10 +29,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 - `test_worksheet_keys.py`
 - `worksheet_key_aliases.py`
 
-**Undetermined domain (4).** No valid `Domain:` tag.
+**Undetermined domain (2).** No valid `Domain:` tag.
 
-- `patch_L476_5_animation_scale_and_settings.py`
-- `patch_L506_2_method_table.py`
 - `path_drawing.py`
 - `test_path_drawing.py`
 
@@ -48,7 +44,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `earth_system_controller.py` | KMZ layer selector for Google Earth Pro. (131 lines) |
 | `earth_system_visualization_gui.py` | Earth System Visualization GUI for Paloma's Orrery Hub window with climate data visualizations (1,903 lines) |
 | `orbital_param_viz.py` | Interactive orbital element visualization tool. (1,965 lines) |
-| `palomas_orrery.py` | Main GUI and plotting engine for Paloma's Orrery. (9,830 lines) |
+| `palomas_orrery.py` | Main GUI and plotting engine for Paloma's Orrery. (9,850 lines) |
 | `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (3,536 lines) |
 | `star_visualization_gui.py` | Stellar visualization GUI for Paloma's Orrery. (1,409 lines) |
 
@@ -123,12 +119,12 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `fetch_paleoclimate_data.py` | Paleoclimate Data Fetcher for Paloma's Orrery Fetches and caches paleoclimate proxy data from authoritative sources (171 lines) |
 | `galactic_tide_sampler.py` | Where the galaxy's tide sends comets in from: dots in the outer Oort cloud about the galaxy's pole, placed once from a seed, sparse at the galaxy's plane and at its poles, thickest halfway. (230 lines) |
 | `hills_cloud_sampler.py` | The Hills cloud (the inner Oort cloud) as dots along orbits, following Nesvorny et al. (2025), Fig. 3. (427 lines) |
-| `idealized_orbits.py` | Keplerian orbit ellipse construction and satellite orbit models. Computes and plots idealized (Keplerian) orbit paths from orbital elements, with osculating element support for high-accuracy visualization. Handles elliptical, parabolic, and hyperbolic orbits. Includes specia... (6,770 lines) |
+| `idealized_orbits.py` | Keplerian orbit ellipse construction and satellite orbit models. Computes and plots idealized (Keplerian) orbit paths from orbital elements, with osculating element support for high-accuracy visualization. Handles elliptical, parabolic, and hyperbolic orbits. Includes specia... (6,803 lines) |
 | `jpl_outcome.py` | - what JPL Horizons answered when the orrery asked it for a body, sorted into the kinds a caller has to tell apart (L-512, slice a, part A2; Tony's ruling 1 of 2026-11-04: "no such object" is not a failure to reach JPL). (186 lines) |
 | `main_belt_sampler.py` | The main asteroid belt as a cloud of dots placed at random inside the belt's spread, measured from JPL's own orbits. (365 lines) |
 | `object_type_analyzer.py` | Object Type Analysis and Report Generation Module Provides comprehensive analysis of astronomical data including object types, data quality metrics, and full report generation. (756 lines) |
 | `orbital_elements.py` | Standalone data module containing orbital element dictionaries. NO IMPORTS - Pure data only to avoid circular dependencies. (1,296 lines) |
-| `orbital_period.py` | A body's orbital period from JPL, printed to the digits its errors earn. (942 lines) |
+| `orbital_period.py` | A body's orbital period from JPL, printed to the digits its errors earn. (950 lines) |
 | `outer_oort_sampler.py` | The outer Oort cloud as a thin scatter of loose dots with clumps among them, placed once from a seed, between the rows' edges. (202 lines) |
 | `path_or_orbit.py` | - the one home of the rule that decides whether a small body is drawn as a path or as an orbit: by the eccentricity of its orbit solution in JPL's Small-Body Database, refreshed on the 30-day cycle (L-510, part 1). (327 lines) |
 | `pole_frames.py` | The matrix that turns coordinates measured about a pole into the drawing's frame, the ecliptic of J2000. (72 lines) |
@@ -144,7 +140,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `celestial_objects.py` | Celestial object definitions for Paloma's Orrery. (1,569 lines) |
+| `celestial_objects.py` | Celestial object definitions for Paloma's Orrery. (1,588 lines) |
 | `close_approach_data.py` | JPL CAD API client for small-body close approach data. (513 lines) |
 | `constants_new.py` | Verified numeric constants for Paloma's Orrery. (5,948 lines) |
 | `constants_tokens.py` | - what each "# Unit:" token in constants_new.py means. (393 lines) |
@@ -283,8 +279,6 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `earth_pole_live_check.py` | Fetch Earth's pole and orbit from Horizons and check the tilt of date against an independent calculation. (136 lines) |
-| `patch_L476_5_animation_scale_and_settings.py` | - L-476 (the orrery plots by the path plan), after Tony's look of Nov 6: the animation's Auto scale counts a spacecraft, and a settings box that cannot be read is named instead of a silent stop. With the records: L-476 and Where We Are. (473 lines) |
-| `patch_L506_2_method_table.py` | - L-506 (token economy), second slice. (361 lines) |
 | `path_drawing.py` | The orrery draws a planned path by its path plan (L-476): a spacecraft's flown and planned trajectory, or a comet on an open path, around the Sun. (370 lines) |
 | `test_drawings_export.py` | Each stored drawing in data/drawings/ is the drawing its rows give today, git tracks it, and each check can fail. (524 lines) |
 | `test_earth_pole_of_date.py` | Offline checks of Earth's pole and tilt of date. (194 lines) |

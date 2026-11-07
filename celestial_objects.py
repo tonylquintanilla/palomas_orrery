@@ -90,6 +90,11 @@ fly; Akatsuki was orbiting Venus when contact was lost -- cited on the
 entry like mission_info, and exported beside it (export_objects.py). The
 Pioneers' dead NASA Ames link and DART's redirect replaced by their
 mission pages; Rosetta's link is Wikipedia's, NASA having no Rosetta page.)
+Module updated: November 6, 2026 with Anthropic's Claude Opus 5.5 (L-513,
+the Moon's standards: the Moon keyed for the website's Earth room, 'moon',
+with JPL's exact name read live; its quotation, which NASA's pages do not
+carry, replaced by NASA's own words from its Moon facts page, cited on
+the sentence, by Tony's choice; its link stays NASA's Moon page.)
 """
 
 from datetime import datetime
@@ -117,9 +122,23 @@ OBJECT_DEFINITIONS = [
     'mission_info': 'Horizons: 399. Our home planet.', 
      'mission_url': 'https://science.nasa.gov/earth/'},
 
-    {'name': 'Moon', 'id': '301', 'var_name': 'moon_var', 'color_key': 'Moon', 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 301. NASA: "The Moon rotates exactly once each time it orbits our planet."', 
+    # L-513: keyed 2026-11-06 for the website's Earth room (slug 'moon').
+    # horizons_name read live that day from JPL's Lookup: 301 in the
+    # major-body index is "Moon", natural satellite, SPKID 301; the
+    # small-body index answers only 301 Bavaria (SPKID 20000301).
+    # The sentence, Tony's choice of 2026-11-06 (L-513): NASA's own words,
+    # quoted exactly, cited on the sentence to the page they are on. The
+    # sentence it replaces, NASA: "The Moon rotates exactly once each time
+    # it orbits our planet.", is on neither NASA's Moon page nor its facts
+    # page (read 2026-11-06), so it came out.
+    # Source: NASA, "Moon Facts - NASA Science",
+    # https://science.nasa.gov/moon/facts/ (read 2026-11-06): "The Moon
+    # makes a complete orbit around Earth in 27 Earth days and rotates or
+    # spins at that same rate, or in that same amount of time." The quote
+    # ends at "rate", where Tony's did. The link stays NASA's Moon page.
+    {'name': 'Moon', 'key': 'moon', 'id': '301', 'horizons_name': 'Moon', 'var_name': 'moon_var', 'color_key': 'Moon', 'symbol': 'circle', 'object_type': 'satellite',
+     'id_type': 'majorbody',
+     'mission_info': 'Horizons: 301. NASA, Moon Facts (https://science.nasa.gov/moon/facts/): "The Moon makes a complete orbit around Earth in 27 Earth days and rotates or spins at that same rate."',
      'mission_url': 'https://science.nasa.gov/moon/'},
 
     # Earth-Moon Barycenter - highest mass ratio of any PLANET-moon system (1.23%)
