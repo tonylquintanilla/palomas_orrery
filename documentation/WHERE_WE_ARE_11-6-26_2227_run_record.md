@@ -173,10 +173,10 @@ The opening setting is read straight from the website's settings file, so it can
 **Token count:** this session can't print Claude Code's usage count. It read about 2.3 MB, mostly the ledger copied twice, plus one folder listing I didn't need. It wrote the two files above.
 
 **Your run order**
-1. In GitHub Desktop, commit and push the orrery: the ledger and Where We Are. The website has no changes. -- 
+1. In GitHub Desktop, commit and push the orrery: the ledger and Where We Are. The website has no changes. -- 472a40d9c50d50a6abea3ef4aae41dc3fa940b97
 
 **For you to do or decide**
-- (decide) Should the Mars room open with Phobos and Deimos ticked (the question above)?
+- (decide) Should the Mars room open with Phobos and Deimos ticked (the question above)? -- no. like the moon in the earth room, they should be off by default. the room should open like earth, with the mars symbol only for now, and in the future, with its crust shell, rotation axis, equator, and terminator, when we build out the room. 
 - (do) Commit and push the orrery.
 - (do) Each morning, Pull origin on both, orrery then website, first.
 
@@ -185,3 +185,30 @@ I haven't committed or pushed anything, because your project rules say commit an
 The uncommitted changes the automatic end-of-turn check found are in my working copy of the orrery here. The same two edited files, the ledger and Where We Are, are already saved in your orrery folder on your computer. They will show in GitHub Desktop's changes list for you to review, commit and push.
 
 Nothing else is waiting. The one open question is still whether the Mars room opens with Phobos and Deimos ticked.
+
+========================================================
+
+Your ruling is recorded: the Mars room opens like the Earth room, on Mars's symbol alone, with Phobos and Deimos unticked. Mars's crust shell, spin axis, equator and day-night line come when we build the room out. I've also confirmed your push: the orrery is at 472a40d, with the same bytes I wrote.
+
+**Question 2 of 3: should the Mars room's drawer list just three rows, Mars, then Phobos, then Deimos?**
+
+My proposal:
+- **Mars's row is fixed**, with no tick box, like the Sun's row in the Solar System room. Mars is the room's centre and is always drawn. Its name still opens its text box and info panel.
+- **Phobos, then Deimos**, nearest to Mars first, each with a tick box and Go To. Ticking a moon draws its marker and its orbit together, as the Moon's row does in the Earth room. Both are unticked on opening, by your ruling.
+- **Nothing else for now.** Rows for the shells and guides join when the room is built out, each at its distance from Mars, by the rule the other rooms already follow.
+
+The other choice is to list the future rows now, greyed out, as a preview of what's coming. I'd leave them out: a row that does nothing reads as a fault on the phone.
+
+**Files changed, for your run record**
+- ok `LEDGER_CONSOLIDATED.md` (1 edit, then the index rebuilt). Ruling 1 is on L-514 (the Mars room), quoted from `WHERE_WE_ARE_11-6-26_2227_run_record.md`.
+- ok `documentation/WHERE_WE_ARE.md` (3 edits). The box, Waiting on you and Where the details are now point at question 2.
+
+**Token count:** this session can't print Claude Code's usage count. This turn read only small slices and wrote the two files above.
+
+**Your run order**
+1. In GitHub Desktop, commit and push the orrery: the ledger and Where We Are.
+
+**For you to do or decide**
+- (decide) Should the Mars room's drawer list just Mars (fixed), Phobos and Deimos? -- yes, but this suggests that the Earth room also needs the Earth symbol fixed, which it does not have. 
+- (do) Commit and push the orrery. -- 
+- (do) Each morning, Pull origin on both, orrery then website, first.

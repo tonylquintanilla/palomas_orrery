@@ -10,13 +10,14 @@ Last updated: November 6, 2026, late night: the coordinating session (Opus), sta
 > - The Moon keeps JPL's period for today, by the same rule as every
 >   other body (your "yes", Nov 6, 22:17). L-513 (the Moon's standards)
 >   is closed, and road stage 14 is done.
-> - The Mars room's design round has begun. L-514 (the Mars room) holds
->   what was read at the start and will hold your rulings.
+> - The Mars room's design round has begun, in L-514 (the Mars room).
+>   Your first ruling: it opens like Earth's, on Mars's symbol alone,
+>   with Phobos and Deimos off; the shells and guides come later.
 >
-> **Do next:** *answer the Mars room's first question: what it opens on.*
+> **Do next:** *answer the Mars room's second question: what its drawer lists.*
 >
 > **Needs you now:**
-> - *(decide) What the Mars room opens on (the question in chat).*
+> - *(decide) What the Mars room's drawer lists (the question in chat).*
 > - *(do) Commit and push the orrery: the ledger and this page.*
 > - *(do) Each morning, Pull origin on both, orrery then website, first.*
 
@@ -100,8 +101,8 @@ Read from files when this page was written, not typed from memory.
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
 Decisions, one at a time:
-- *The Mars room: what it opens on; then its drawer; then a moon's box
-  (L-514 (the Mars room)).*
+- *The Mars room: what its drawer lists; then a moon's box (L-514 (the
+  Mars room)). Its opening is ruled (Nov 6).*
 
 At the next design talk:
 - How obsolete code is treated, and when it goes (L-509 (obsolete
@@ -123,7 +124,7 @@ Not urgent, in your order:
 - Every item: `LEDGER_CONSOLIDATED.md`.
 - This session: L-513 (the Moon's standards) closed on your ruling in
   `WHERE_WE_ARE_11-6-26_1625_run_record.md`; L-514 (the Mars room)
-  opened for the design round.
+  carries the design round, ruling 1 from `..._2227_run_record.md`.
 - The talk's rulings: `DESIGN_L484_consistency_rulings_20261103.md`.
 - The door: `documentation/python_work_door/`, and L-499 (kinds of session).
 
