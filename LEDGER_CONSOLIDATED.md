@@ -935,7 +935,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*255 live items; 239 need attention (`!`); 165 RICE-scored; 253 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*256 live items; 240 need attention (`!`); 165 RICE-scored; 253 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1104,6 +1104,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-512 | The orrery's fallbacks when JPL cannot answer (orrery, the plot's data path) | OPEN | -- | 2026-11-04 |
 | ! | L-514 | The Mars room: Mars, Phobos and Deimos (gallery + orrery, a planet room; road stage 15) | OPEN | -- | 2026-11-06 |
 | ! | L-515 | One nested tree in place of isolated rooms (gallery, the room system; design) | OPEN | -- | 2026-11-07 |
+| ! | L-516 | Renew palomasorrery.com at Porkbun before 2027-02-13 (legacy; Tony's account) | OPEN | -- | 2026-11-07 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1534,6 +1535,28 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
+#### [L-516] Renew palomasorrery.com at Porkbun before 2027-02-13 (legacy; Tony's account)
+<!-- L:516 status:OPEN upd:2026-11-07 section:A flag: rice: -->
+- **Opened 2026-11-07, 12:57 Chicago**, on Tony's request in chat:
+  "could you record the porkbun renewal also in the ledger?"
+- **The record**, read that day from the registry's public RDAP
+  (rdap.verisign.com): registrar "Porkbun LLC", registered
+  "2026-02-13T06:00:41Z", expires "2027-02-13T06:00:41Z", nameservers at
+  porkbun.com. The setup was the claude.ai chat of 2026-02-13, "Choosing
+  a domain name for your website" (DNS A records to GitHub, a CNAME for
+  www, GitHub Pages' custom domain and HTTPS); neither repository names
+  the registrar. Whether auto-renew is on is in Tony's Porkbun account,
+  not in the public record.
+- **Why it matters:** the domain is the one paid piece of the site; a
+  lapsed domain goes dark rather than freezing; the site stays at
+  tonyquintanilla.github.io either way (L-165, site continuity).
+- Tony-action (do): sign in at porkbun.com, check that auto-renew is on
+  for palomasorrery.com, and consider paying several years ahead; then
+  note here what was done and the new expiry date.
+**Gap:** the renewal, done and its new expiry recorded, before
+2027-02-13.
+- **Ref:** L-165 (site continuity); L-490 (the legacy list).
+
 #### [L-515] One nested tree in place of isolated rooms (gallery, the room system; design)
 <!-- L:515 status:OPEN upd:2026-11-07 section:A flag: rice: -->
 - **Opened 2026-11-07, 00:17 Chicago**, in the coordinating session
@@ -1569,8 +1592,374 @@ as an archive of the prioritization thinking -- no cleanup on close.
   views of a node; B, one tree on one page, any node's Go To making it
   the centre; C, one continuous scene with nothing re-centred, which the
   coordinator advised against.
-**Gap:** Tony's direction; then the design rounds; L-514 (the Mars room)
-waits.
+- **Tony, Nov 7, 09:40 Chicago, in chat**, asking what "any node can
+  become the centre" means: "As I see it: Solar system: Sun center -- all
+  bodies orbiting the sun and hyperbolic objects -- parents with
+  satellites or bound objects -- spacecraft. The question of centers: --
+  Sun -- parents with satellites -- close encounter objects -- arbitrary
+  center selection for visualization."
+- **The coordinator's answer, the same morning:** "any node" was too
+  loose. Two different acts: FOCUS, the camera moved to a body in the
+  view it is in (Go To, today), which any node can have; and CENTRE, a
+  body at the middle with everything drawn asked of JPL around it, which
+  only a node whose neighbours are served around it can have. Mapped on
+  Tony's four: the Sun, served today; a parent with satellites, served
+  when its satellites are fetched around it, as the Moon is; a close
+  encounter, a centre for a span of dates, the visitor's path asked
+  around the body met, so it waits for the encounters (L-507's slice 2)
+  and a date to choose (the road's goal); an arbitrary centre, the
+  orrery's live work, which the website cannot match without JPL asked
+  about every pair, so on the website it is focus, not centre.
+- **Ruling 1, centre and focus**, Tony, Nov 7, 09:49 Chicago, in chat:
+  "Yes that is what I mean. Focus is valuable for small details, for
+  example comet features, flybys, possibly moons." So: one page, one
+  tree; true centres are the Sun, each parent with satellites, and
+  later the encounters for their dates; any other body is focused on,
+  not centred. Arbitrary centring stays the orrery's.
+  - Carried for the design rounds (coordinator): focus shows only what
+    the view it is in can hold. A feature drawn on its own body (a
+    comet's tail) holds at any zoom; a flyby seen in the Sun-centred
+    view has its planet drawn where it is today, not on the flyby's
+    date, until the encounters bring a date to choose.
+- **Ruling 2, the drawer once a body is the centre**, Tony, Nov 7, 09:58
+  Chicago, in chat: "A." The drawer lists the centre's branch only (for
+  Mars: Mars, fixed; its shells when built; Phobos; Deimos), with a
+  trail line at the top, "Solar system > Mars", whose first part returns
+  to the Sun as centre; in the Sun-centred list a parent's row offers
+  "Centre on <name>" where it now offers "Enter the room".
+- **Tony's question, the same message:** "when we build encounters with
+  their date windows. How would they work in this scheme? Say we add
+  Psyche?" Read for the answer at gallery ae68a93: the Psyche
+  spacecraft's served path plan (`psyche_spacecraft`, made 2026-11-04)
+  names one encounter, a Mars flyby, closest 2026-05-15 19:29 UTC at
+  8000.4 km, its window 17:03 to 21:54 UTC at a 5-minute step; JPL's
+  data for the craft ends 2029-02-24, so no arrival at 16 Psyche (served
+  as `psyche`, A852 FA) is in the plan yet. The coordinator's answer: an
+  encounter is a DATED node under the body met (Mars > Encounters >
+  Psyche, 15 May 2026), listed also under the visitor; centring on it
+  sets the page's date to the encounter, draws the visitor's path asked
+  of JPL around the body met over the window, and the body's moons at
+  that date; leaving returns to today. A past encounter is fetched once
+  and kept. An arrival that ends in orbit makes the visitor a bound
+  child of the body for the mission's span, so 16 Psyche becomes a
+  parent with a centre of its own once JPL's data reaches the arrival.
+  This is the Settled ruling of Nov 1 ("Encounters are both").
+- **Ruling 3, encounters**, Tony, Nov 7, 10:07 Chicago, in chat: "Yes.
+  So for Mars, Psyche would be listed but the go to button selects its
+  own encounter dates instead of today's date. Date Selection is not
+  needed for this. Date selection is a separate functionality for later.
+  Right?" Confirmed: an encounter's row opens the body met as centre at
+  the encounter's own dates; a visitor choosing any date is separate,
+  the road's goal, later. While an encounter is open the page says
+  plainly which date it shows; leaving returns to today.
+- **Proposed build order, put to Tony the same morning:** (1) the tree in
+  the website's served data: each object's parent and whether it is an
+  orbiting child or a neighbourhood child; (2) the page: one drawer from
+  the tree, the trail line, "Centre on" -- the Sun and Earth as the first
+  two centres, today's room addresses still opening them; (3) Mars as the
+  first new centre, by L-514's rulings, with Phobos and Deimos; (4)
+  encounters later, with historical missions' slice 2 (L-507).
+- **Tony's question, Nov 7, 10:16 Chicago, in chat:** "shells. They would
+  retain their "parent" center? This would include all the structural
+  shells, as well as other features like the magnetospheres, asteroid
+  clouds, Oort clouds, hill spheres, rotational axes, etc. Lagrange
+  points would be under their two parents?"
+- **The coordinator's answer:** yes, each feature keeps its body; the
+  served data already stores them so, under the body's entry (at gallery
+  ae68a93 the Sun's: sun_structures, solar_atmosphere, solar_wind,
+  oort_cloud, orientation, hill_sphere; Earth's: earth_interior,
+  earth_atmosphere, earth_exosphere, earth_orbital_zones,
+  earth_geostationary, earth_magnetosphere, van_allen_belts,
+  hill_sphere, orientation). One exception: the main belt's cloud is on
+  the Solar System room's row, not on a body; in the tree it sits under
+  the Asteroid belt node, drawn around the Sun. Where the body is not
+  the centre, its features are carried with it to its place in that
+  view: a shape moved with its body, not two JPL answers subtracted, so
+  the detail holds as well as the body's place in that view holds.
+- **Lagrange points**, proposed: a point belongs to a PAIR, so its group
+  lives under the pair's smaller body and is listed also under the
+  larger, as encounters are listed both ways ("Earth-Moon Lagrange
+  points" under the Moon and Earth; "Sun-Earth Lagrange points" under
+  Earth and the Sun), each drawn in the centre JPL serves it around.
+  L-297 (the Lagrange points) records JPL serving the Earth-Moon points
+  as targets 3011 to 3015 around Earth, and the Sun-Earth points the
+  same way.
+- **Ruling 4, the Lagrange points**, Tony, Nov 7, 10:23 Chicago, in chat:
+  "Good." One group per pair, under the pair's smaller body, listed also
+  under the larger, each point drawn in the centre JPL serves it around.
+- **Tony's question, the same message:** "can the visitor mix and match
+  features. For example: the path of voyager 1 and the heliopause?"
+  The coordinator's answer: yes. From any centre a visitor may tick
+  anything in that centre's branch together, because a child's shape or
+  orbit is carried out to its parent's place by ADDING the parent's
+  position, which is sound; what cannot be drawn is anything outside
+  the branch, which would need two JPL answers subtracted. The Sun is
+  the root, so from the Sun everything mixes: Voyager 1's path (served
+  around the Sun) with the Sun's solar_wind feature, whose members at
+  gallery ae68a93 are the Termination Shock and the Heliopause. From Mars
+  as centre, only Mars's branch. This matches ruling 2 (a centre's
+  drawer lists its branch). Today the two sit in different rooms, which
+  is the isolation this item ends.
+- **Tony's question, Nov 7, 10:28 Chicago, in chat:** "would the focus
+  method allow seeing the sun from earth along the line of the first
+  point of Aries on the vernal equinox when we have date selection? Or
+  would this have to be pre-built? The orrery has this ability."
+- **The coordinator's answer:** a third viewing act, LOOK TOWARD: the
+  camera at the centre, pointed at a body drawn there; the orrery's
+  `add_look_at_object_buttons` in `visualization_utils.py` ("point camera
+  from center toward specific target objects"). On the website it is a
+  camera choice and needs no data built. With Earth the centre and the
+  date the March equinox, looking toward the Sun looks along the first
+  point of Aries. Before date selection it can be pre-built as a dated
+  node, like an encounter ("March equinox 2027" under Earth), its
+  instant taken from JPL or a published table, not from the orrery's
+  `calculate_next_vernal_equinox` in `palomas_orrery.py`, a shortened
+  Meeus formula typed into the code (recorded here, not chased). The
+  website's frame is the J2000 ecliptic (`interactive.html`'s frame
+  note), so on a present-day equinox the Sun sits a little off the x
+  axis, by the equinox's drift since 2000 (precession); its size is to
+  be sourced before any page states it.
+- **Ruling 5, look toward**, Tony, Nov 7, 10:33 Chicago, in chat: "Yes,
+  you're right that is the precession of the equinoxes!" Look toward
+  joins centre and focus as the third viewing act.
+- **A design review, asked the same message:** "could you write a review
+  prompt for a reviewer model for any design gaps or issues? Not at my
+  machine but I can attach a file." Written:
+  `documentation/REVIEW_L515_nested_tree_prompt_20261107.md`, anchored
+  at orrery 27f6f5bd and gallery ae68a93a, carrying rulings 1 to 5 and
+  the answers above in full (the newest not yet pushed), naming the four
+  skills the review fires and asking for the read-back.
+- **Three returns, Nov 7, 11:15 Chicago**, attached by Tony, saved as
+  `documentation/REVIEW_L515_nested_tree_return_1_fable_20261107.md`
+  (Claude Fable 5.1, signed), `..._2_github_reader_...` (unsigned; read
+  GitHub at both SHAs) and `..._3_drive_reader_...` (unsigned; read a
+  Google Drive snapshot of both repositories). All three name the five
+  rule files at the manifest's versions.
+- **Adjudicated by the coordinator the same morning.** Spot-checked at
+  gallery ae68a93 and found as stated: `resolver.py` raises
+  FrameRejectionError when an object's stored centre is not the scene's
+  and OutOfServedWindowError outside one served window (JD 2461264.15 to
+  2461440.09, about 2026-08-11 to 2027-02-03); Mars's drift 4.7e-6
+  degrees a day; the Moon's trusted arc 3.43 days and Io's 0.22;
+  `pluto` parent "sun" and `charon` parent "pluto", both served around
+  pluto_barycenter; `epochNow` true on the Solar System and Earth rows;
+  `drawn_orbit_offset` in `render_orbits.py`.
+  - CORRECTIONS to the coordinator's statements (all three returns):
+    rule 7 as written, "from any centre a visitor may tick anything in
+    that centre's branch", is wrong for a NEIGHBOURHOOD child, which is
+    served around the Sun only and cannot be drawn from a planet's
+    centre without subtraction; it holds for orbiting children. And
+    "adding is sound" is right but not built: the assembler refuses a
+    child stored around another centre today, so composing a moon into
+    the Sun's view is assembly work.
+  - CORRECTION to ruling 1's example (returns 1 and 3): a flyby is not a
+    focus in the Sun's view. The planet is worked out from today's
+    elements and the craft from JPL's points, so at the Psyche flyby
+    Mars would be drawn about 3,000 km off (return 1's arithmetic on the
+    served rate), against an 8,000 km pass. A flyby is always a centre on
+    the body met (ruling 3). Focus stays right for comet features and
+    moons.
+  - FOR TONY (WHAT), one at a time: (a) a neighbourhood child from a
+    planet's centre: listed only, ticking it returning the visitor to the
+    Sun's view; or fetched a second time around the parent (all three);
+    (b) whether the Sun's shells are the root itself or a branch under it
+    (returns 1 and 2); (c) which parent each group sits under (returns 2
+    and 3); (d) which distance a moon prints when seen from the Sun's
+    view (return 3); (e) what a visitor sees where a centre is not built
+    yet, and whether ticks survive a change of centre (returns 2 and 3).
+  - METHOD (HOW), for the briefs and interactive-exhibit, not Tony's:
+    `parent` becomes the served centre for every orbiting body (Pluto and
+    Charon under pluto_barycenter), and a separate field on the rooms
+    rows says where a group is LISTED (returns 1 and 2); one record per
+    object, cross-listings by reference (return 2); a writer for the tree
+    fields (return 1: no tool writes `parent` today); Go To's close-up
+    focus needs the viewing box moved off the origin, with the axis lines
+    (returns 2 and 3); look toward keeps the camera's pivot near the
+    centre so dragging still works (return 3); an encounter carries its
+    own served window and a second-centre fetch of its window, as
+    `needs_drawn_orbit()` already does for Pluto (returns 1, 2, 3), and a
+    small body met needs a numeric JPL centre id (return 1).
+  - BUILD ORDER, the returns agree it stands, with changes: step 1 is a
+    data correction and its writer, keys for Phobos and Deimos included;
+    step 2 splits, 2a the one drawer, trail line, fixed centre row and
+    "Centre on" for the Sun and Earth on their existing drivers, 2b the
+    composition of children into a parent's view and the off-origin
+    focus; `EXHIBITS` stays as per-centre compose hooks keyed by slug,
+    so `?exhibit=sun` and `?exhibit=earth` keep working; a checkpoint on
+    the Sun and Earth rooms before step 3; step 4 preceded by its own
+    builder slice.
+  - L-297 (the Lagrange points) is to be re-sized: its sizing assumed the
+    Earth room draws at 00:00 UTC, and it now draws at the minute opened
+    (returns 1 and 3).
+- **Ruling 6, the fetched centre rules**, Tony, Nov 7, 11:26 Chicago, in
+  chat, answering (a): "Maybe "neighborhood" children is not meaningful.
+  What is the fetched center should rule." So the tree IS the tree of
+  served centres: a thing sits under the body JPL is asked around for
+  it, and nowhere else by placement. Consequences, recorded by the
+  coordinator:
+  - the neighbourhood kind is struck from ruling 1; the Atens, the
+    near-Earth asteroids, the spacecraft and every other Sun-orbiting
+    body sit under the Sun, in the order its list already keeps, outward
+    with the groups between the planets; question (c) dissolves;
+  - a thing fetched around two centres sits in two places, each true:
+    a spacecraft's whole path under the Sun, an encounter's window under
+    the body met (ruling 3 stands);
+  - ruling 4 (the Lagrange points) changes to match: the Earth-Moon
+    points, served around Earth, sit under Earth; the Sun-Earth points,
+    served around the Sun, under the Sun; no cross-listing by pair;
+  - `parent` becomes the served centre for every body (returns 1 and 2's
+    method), Pluto and Charon under pluto_barycenter; a separate
+    "listed under" field is no longer needed.
+- **Ruling 7, the root is the Sun's branch**, Tony, Nov 7, 11:46 Chicago,
+  in chat, answering (b): "Yes". The root's list holds the Sun's shells
+  beside every body served around the Sun; it opens as the Solar System
+  room does today, the shells unticked; the Sun room folds into it, its
+  address opening the root with the Sun's shells ticked. How the view
+  frames a 120 AU shell beside the planets is build method.
+- **Tony's question, the same message:** "how would the Parker Solar fly
+  by of the sun with its photosphere and atmosphere work?" The
+  coordinator's answer, read from the served config at gallery ae68a93:
+  the simplest case, since the probe's path and the Sun's shells are
+  both served around the Sun, so nothing is composed or fetched twice
+  and nothing drifts (the shells are fixed radii, the path JPL's
+  points). The plan (`parker_solar_probe.path`) names 42 Sun perihelia,
+  each asked of JPL more finely (6 hours early in the mission, 1 hour at
+  the closest); the closest 6,853,212 km from the Sun's centre, about
+  9.9 solar radii, inside the corona as drawn (19.7) and at the low edge
+  of the Alfven surface's usual range (10, one figure; Cranmer et al.
+  2023 on the row). The next, 2026-12-02 00:45 UTC at 6,855,386 km, is
+  inside today's served window, so on that day the marker is in the
+  corona live. A dated perihelion node later is an encounter under the
+  Sun, needing only the encounter's own window.
+- **Ruling 8, a moon's distance in the Sun's view**, Tony, Nov 7, 11:52
+  Chicago, in chat, answering (d): "A." Its box prints its distance from
+  its planet, as when the planet is the centre, with the same accuracy.
+- **Tony's question, the same message:** "Are there any edge cases we
+  have not considered?" The coordinator's list:
+  - FAST MOONS cannot be drawn all day from one nightly set of elements:
+    the served trusted arc is the Moon's 3.43 days, Io's 0.22 (about 5
+    hours), and Phobos's would be about an hour (an eighth of its
+    period). They need positions served through the day, the same data
+    shape the Lagrange points need (L-297's Note).
+  - A BODY WITH SHELLS AND NO MOONS (Mercury, Venus, the Moon itself) is
+    no centre by ruling 1, so its shells are seen only by focus, far
+    from the origin of a Sun-centred view; how finely a phone's graphics
+    hold a small shape 30 AU out is to be measured. Put to Tony: whether
+    any body with its own shells or anything served around it is a
+    centre.
+  - LOOKING UP: a body's parent can be drawn in the body's own view by
+    turning the body's one served answer round (the Sun from Earth, as
+    the Earth room's Sun direction is today); the one thing outside a
+    branch that is drawable, and what look toward the Sun needs.
+  - A RESIDENT SPACECRAFT (Juno at Jupiter): its path under the Sun, and,
+    asked around its planet for its stay, under the planet as a live
+    child, not a dated one. The rule covers it.
+  - A BARYCENTRE ORBIT: a body whose period is around the solar system's
+    barycentre keeps its drawn orbit there (`drawn_orbit`), a drawing,
+    not a node.
+  - A SMALL BODY AS A CENTRE (16 Psyche with its orbiter, a binary
+    asteroid) needs JPL's numeric centre id (return 1).
+- **Ruling 9, a body with its own shells is a centre**, Tony, Nov 7, 12:02
+  Chicago, in chat: "Yes." A centre is any body with something drawn or
+  fetched around it, moons or not (Mercury, Venus, the Moon).
+- **Tony's question, the same message:** "how would the Artemis II
+  mission from the moon's view with its crust rendered and the earth
+  seen from the moon be shown?" The coordinator's answer, by the fetched
+  centre: two dated views. The whole free-return path, fetched around
+  Earth for the mission's days, sits under Earth (the orrery's entry,
+  `celestial_objects.py`, Horizons -1024, carries JPL's span as 2026-04-02
+  01:59 to 2026-04-10 23:59, typed from the OEM's name line). The lunar
+  flyby, which the path plan finds (the Moon is one of `path_plan.py`'s
+  MAJOR_BODIES), fetched around the Moon for its window, sits under the
+  Moon as an encounter; the Moon is a centre by ruling 9, its crust drawn
+  at the middle. Earth seen from the Moon is LOOKING UP: the Moon's own
+  answer around Earth turned round places Earth, its shells carried with
+  it; the Sun's direction is the Moon's and Earth's answers turned round
+  and added, so Earth's day-night line can be drawn; look toward Earth
+  gives the view from the Moon. Needs, all build work: the Moon's shells
+  served (the website serves the Moon no features today; the orrery has
+  `moon_visualization_shells.py`), Artemis II keyed and served (not on
+  the website today), the Moon's positions around Earth through the
+  mission's days (its trusted arc is 3.43 days against 9), and the
+  encounter's own window. Artemis II is already on the road (stage 16)
+  and L-489 (compositions).
+- **Ruling 10, a centre not built yet**, Tony, Nov 7, 12:13 Chicago, in
+  chat, answering (e): "Yes." Its row reads "Not built yet" where
+  "Centre on" would be; returning to the root restores what the visitor
+  had ticked there; Reset still starts fresh.
+- **Tony, the same message, on time:** "The propagation window for any
+  view should be provided. And if the viewers clock is outside that
+  window maybe we can provide an error estimate." And on the nightly run
+  (L-485): "I was hoping two things: 1) an automated method that does
+  not depend on my push and 2) consistent fetch times. 2) is definitely
+  not consistent with GitHub's method and 1) lasts only 60 days. And
+  this 2) is problematic when the trust window is less than 24-48 hours
+  for fast moons. Thoughts?"
+- **The coordinator's reading:**
+  - GitHub's page "Disable and enable workflows", read 2026-11-07: "In a
+    public repository, scheduled workflows are automatically disabled
+    when no repository activity has occurred in 60 days." The limit is
+    60 days with no activity, not 60 days of age; the page does not say
+    what counts as activity, so whether the nightly run's own commits
+    keep it alive is not stated.
+  - The cache builds read from `data/cache_swap_log.jsonl` at gallery
+    ae68a93 began at 20:03, 04:33, 15:57, 19:29 and 14:55 UTC over three
+    days, the scheduled and the hand-run together: fetch times are not
+    consistent today.
+  - A moon's trusted arc is short by a cap, not by its measured drift:
+    the cap is an eighth of a moon's period (gallery-assembler,
+    `_TRUST_CAP_DIVISOR`), and Io's measured drift is 0.027 degrees a
+    day against its 0.22-day window.
+  - Proposed, the window shown: each view's source line names its
+    trusted span, body by body where a view mixes them; outside it the
+    body is still drawn, its digits set by an estimate from its measured
+    drift, with a sentence saying the estimate goes beyond the checked
+    span; never silently.
+  - Proposed, the timing: a body whose trusted arc is shorter than a few
+    days is served as JPL's positions for the next few days (as the
+    spacecraft already are), the browser interpolating between JPL's
+    points, so a late or missed night still leaves the view covered and
+    the fetch time stops mattering. The same shape serves the Lagrange
+    points (L-297's Note) and the encounters' windows.
+- **Ruling 11, short windows served as positions**, Tony, Nov 7, 12:23
+  Chicago, in chat: "Yes I would say at least 48 hours." A body whose
+  trusted arc is short (Phobos, Io, the Lagrange points; an encounter's
+  window) is served as JPL's positions covering at least the next 48
+  hours, the browser interpolating between JPL's points; the view states
+  its window and, past it, an estimate.
+- **Tony's question, the same message:** "would I be better off running
+  the nightly run from Anthropic's cloud?" The coordinator's answer: no.
+  This cloud's shell cannot reach JPL (a request to ssd.jpl.nasa.gov's
+  Horizons API from this session, 2026-11-07, was refused by the
+  network's allowlist: "CONNECT tunnel failed, response 403"); each
+  night would spend tokens running a script that decides nothing (the
+  protocol's Token Economy); and a scheduled session's start time is not
+  guaranteed either. GitHub's run stays; with ruling 11 its timing no
+  longer matters. The quiet-night watch already exists: the Daily Run
+  prints "More than a day has been missed." when the last cache build is
+  two or more days old (gallery `daily_run.py`). The 60-day switch-off
+  is guarded on L-485 (a nightly run): each night's run re-enables its
+  own schedule, and the dashboard's nightly line turns red after a
+  quiet day.
+- **Ruling 12, the build order**, Tony, Nov 7, 12:57 Chicago, in chat:
+  "Yes." The four steps with the reviewers' changes: (1) the tree in the
+  data; (2a) one drawer, the trail line, the fixed centre row and
+  "Centre on" for the Sun and Earth on their existing drivers, (2b)
+  children composed into a parent's view and the off-origin focus; a
+  checkpoint on the Sun and Earth; (3) Mars by L-514; (4) encounters
+  after their own builder slice. The freeze past the served window
+  (L-165) rides step 2a or the housekeeping.
+- **Step 1, read at gallery ae68a93 for its size:** every object already
+  serves its fetched centre as `center_slug`; `parent` differs from it
+  for two only, `pluto` ("sun") and `charon` ("pluto"), both served
+  around pluto_barycenter (the Sun's `parent` is null, the root). Nothing
+  but the cache builder reads `parent` (`tools/gallery_cache_builder.py`,
+  copied into the coverage index beside `stored_center`). So step 1 is a
+  check that `parent` equals `center_slug` and those two corrections,
+  small enough to ride step 2a's session.
+**Gap:** Tony's go-ahead on the instrument: one Code session on the
+website, step 1 folded into step 2a, its brief written when that session
+is next; L-514 (the Mars room) waits for step 3.
 - **Ref:** L-514 (the Mars room); L-443 (the drawer's groups); L-392 (the
   rooms section); L-291 (the Earth room); the protocol's The Orrery and
   the Assembler.
@@ -3145,6 +3534,38 @@ only when re-exported through Gallery Studio.
   GitHub Pages redeploying on the bot's commit, seen in the orrery
   (runs 1175 and 1177) and to be seen for the website itself on its
   first run by hand.
+- **Tony, 2026-11-07, 12:35 Chicago, in chat**, after the coordinator
+  named a long run of red nights as the risk no schedule covers: "Only
+  Claude can back me up as. I have 250$". Proposed by the coordinator
+  the same hour (L-485's Note): a Claude caretaker, a scheduled task on
+  Tony's account that reads the nightly runs on GitHub (this cloud
+  cannot reach JPL, so GitHub's run keeps the fetching), switches a
+  paused schedule back on, and, after a red night, makes only repairs of
+  named kinds that keep the site drawing, each written to the ledger
+  and Where We Are and reported to Tony, anything else written up and
+  left; each run reports its token count. Named limit: the caretaker
+  runs on Tony's account and payment, so the accounts themselves are
+  still the part it cannot hold.
+- **Tony's ruling, 2026-11-07, 12:43 Chicago, in chat:** "Yes. And token
+  conservation should be a key objective. My GitHub account is free but
+  Claude is not." The caretaker may commit a short list of repairs Tony
+  approves, the first exception to "commit and push are Tony's"; the
+  list comes to him before anything is set up; each run spends the
+  fewest tokens that do its job and reports its count.
+- **His question, the same message:** "If my subscription is suspended
+  what happens with my cloud credit and caretaker schedule? Bottom line:
+  what would happen to Palomas Orrery once I'm "gone"." Answered from
+  what could be read on 2026-11-07: the caretaker runs on his Claude
+  account and stops with it; what becomes of remaining credit was not
+  readable (support.claude.com's "Using extra usage" page did not load)
+  and is Anthropic support's to answer. GitHub: its "GitHub Deceased User
+  Policy" says GitHub "can work with an authorized individual to
+  determine what happens to the account's content", and a designated
+  successor is one who can ask; "Maintaining ownership continuity of
+  your personal account's repositories" puts the successor under
+  Settings > Account > Successor settings, and "The person you invite to
+  be your successor must have a GitHub account." See L-165 (site
+  continuity) for the domain and the frozen snapshot.
 **Gap:** Tony-action (decide): who besides you can hold the accounts,
 with Paloma, first. Tony-action (decide): when the legacy talk happens;
 it does not block L-485. Then discovery: one list, each entry with its
@@ -4128,6 +4549,26 @@ the two workflows. Tony-action (decide): P1, at the build's design talk.
 **Gap (superseded above, 2026-10-26):** a design talk: which routines, in what order, the morning
 report's form, and how the machine wakes; after slice 2 (Deferred on
 Where We Are).
+**Note:** (2026-11-07, coordinator) Tony, in chat, 12:28 Chicago: "could
+we set up a small Claude cloud task that auto commits to GitHub every 30-
+days just to keep the account current?" Answered from this item and
+L-490's record of 2026-10-30: each nightly workflow already ends with
+`gh workflow enable nightly.yml`, and the dashboard's nightly line turns
+red a day after the last clean run; GitHub does not define "activity",
+so a keep-alive commit is not documented to work either; a commit by a
+scheduled Claude task would also be the first exception to "commit and
+push are Tony's". Offered instead: a monthly check-only task, no
+commit, telling Tony only if a nightly workflow is off or quiet. Tony,
+12:31: "What if I can't get in my computer for a long time?" Answered:
+the Enable button is on GitHub's website, reachable from a phone; the
+task could also switch a paused schedule back on itself through
+GitHub's API (enabling a workflow, not a commit) and then tell him. The
+larger long-absence risk named: a red night commits nothing and the
+site keeps the previous cache, whose served window runs about three
+months past its build (at gallery ae68a93, 2026-08-11 to 2027-02-03),
+so red nights for longer than that leave the website unable to draw;
+mending a red night needs someone who can fix code, which is L-490's
+legacy question. Tony's word pending on the task.
 **Ref:** `orrery_maintenance_run.py`; gallery `daily_run.py`;
 `documentation/DESIGN_L485_nightly_run_rulings_20261025.md`;
 `documentation/COORD_L461_stop_ruling_20261025.md`; L-461; L-462;
@@ -13297,8 +13738,16 @@ question carried out of it), L-286 (rooms), interactive.html.
 - **Tony's ruling, 2026-09-07:** defer (C) for the Earth build; serve
   from Horizons (A) as the follow-on. Not B.
 - Sun-Earth L1-L5 transfer the same way when L-294 comes up.
+**Note:** (2026-11-07, coordinator, from the L-515 design reviews,
+returns 1 and 3) the sizing above rests on the Earth room drawing at
+today 00:00 UTC, the same instant as the cache's marker; the Earth and
+Solar System rooms have drawn at the minute opened (`epochNow`) since
+2026-09-27, so a midnight marker would lag the Moon by up to about 13
+degrees of its orbit by day's end. Re-size before building: served
+positions through the day, or another design. In L-515's tree the
+points are one group per pair (ruling 4 there).
 **Gap:** the builder session described above, after the Earth exhibit
-ships. Tony-action (decide): when.
+ships, re-sized as the Note says. Tony-action (decide): when.
 **Ref:** L-291, L-294, gallery `tools/gallery_cache_builder.py` (lines
 745-800, 910-935, 1135-1150 at `92e98ca9`), `gallery/assembler/assemble.py`
 (line 54), the sizing note.
@@ -35404,6 +35853,31 @@ object once the pattern is set) -- yours to finalize.
   dependency). Real migration project, not a small tweak.
 **Tony:** revisit when there's focus time for it. Not urgent -- the site
 does not degrade in the meantime either way.
+**Note:** (2026-11-07, coordinator, from L-490's talk that day) two
+corrections and a proposal. The nightly fetch has run on GitHub Actions
+since L-485 (Oct 31), so (2) and (3) of the Gap are done. "A frozen,
+correct snapshot" holds for the data, but the rooms draw the minute
+opened, so once that minute passes the served window (about three months
+past the last clean build) the resolver refuses and the interactive rooms
+show nothing; the gallery's picture cards are unaffected. Proposed to
+Tony: past the window, a room draws at the last day its data covers and
+says so plainly, so the site stays an honest exhibit with no upkeep and
+no tokens.
+- **Tony's ruling, 2026-11-07, 12:53 Chicago, in chat:** "Yes." Past the
+  served window a room draws at the last day its data covers and says so
+  plainly; it never goes blank. A website build, to be sequenced (the
+  road's housekeeping, or with step 2 of L-515 (one nested tree)).
+- **The domain, found 2026-11-07** (Tony: "I had forgotten completely
+  about the domain name fee. Do you have a record of how we set that
+  up?"). The setup is the claude.ai chat of 2026-02-13, "Choosing a
+  domain name for your website": DNS A records to GitHub's addresses, a
+  CNAME for www, GitHub Pages' custom domain and HTTPS; that chat does
+  not name the registrar and no file in either repository does. The
+  registry's public record (RDAP, rdap.verisign.com, read 2026-11-07):
+  registrar "Porkbun LLC", registered "2026-02-13T06:00:41Z", expires
+  "2027-02-13T06:00:41Z", nameservers at porkbun.com. Whether
+  auto-renew is on is in Tony's Porkbun account, not the public record.
+  Tony-action (do): carried on its own item, L-516 (renew the domain).
 **Gap:** (1) decide domain-renewal approach; (2) decide whether continued
 fetching matters enough to justify the GitHub Actions migration, or
 whether a correct frozen snapshot is an acceptable legacy on its own; (3)

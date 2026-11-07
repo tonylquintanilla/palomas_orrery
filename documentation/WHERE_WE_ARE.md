@@ -11,16 +11,16 @@ Last updated: November 7, 2026, past midnight: the coordinating session (Opus), 
 >   other body (your "yes", Nov 6, 22:17). L-513 (the Moon's standards)
 >   is closed, and road stage 14 is done.
 > - L-514 (the Mars room) is designed: your four rulings are on it.
->
 > - You opened a rethink: one nested tree instead of isolated rooms
 >   (L-515 (one nested tree)). The Mars build waits behind it.
 >
-> **Do next:** *the room system's direction (the question in chat).*
+> **Do next:** *go or redirect on the first build session (in chat).*
 >
 > **Needs you now:**
-> - *(decide) The room system: which shape to explore (L-515).*
+> - *(decide) One website Code session: steps 1 and 2a (L-515).*
 > - *(do) Commit and push the orrery: the ledger and this page.*
 > - *(do) Each morning, Pull origin on both, orrery then website, first.*
+> - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
 
 *Italic* lines are the must-reads. Marks reset at every update.
 

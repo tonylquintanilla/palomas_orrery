@@ -251,3 +251,52 @@ The open question is still question 3: should each Martian moon's text box follo
 2) tapping the moon open's the moon's text box
 3) tapping the cross on the orbit open's a text box on the orbit as rendered.
 -- this is complicated for the visitor and can be easily missed and tapping is hit or miss. the only obvious box is the go to's text box. to make it easier on the visitor, this go to box should tell the visitor to tap the moon and to tap the cross for specific information about those features. perhaps we should also increase the tap area so that it is easier to open those text boxes. i missed these details when building the earth room, but this is the template for all future moons including Mars'. 
+
+============================================
+
+The brief is written, and yes, future barycentres follow the same rule.
+
+**Barycentres.** A body JPL is asked about around a barycentre sits under that barycentre. The barycentre itself is fetched around the Sun, and because something is fetched around it, it's a centre. The rule the website already follows decides when a barycentre becomes its own branch: only when it lies outside the main body.
+- **Pluto and Charon:** yes. Their balance point lies in the space between them.
+- **A near-equal pair of asteroids:** yes, for the same reason.
+- **Earth and the Moon:** no. Their balance point lies inside Earth, so Earth stays the centre, and the barycentre is a point drawn in Earth's view. That's already planned for road stage 16.
+- **The solar system's own balance point:** it stays a drawing that some orbits are drawn around, not a branch.
+
+JPL has numbered barycentres for the planets' systems; Pluto's is 9. For a pair of asteroids, whether JPL offers one gets checked when one is added.
+
+**The brief: `COORD_L515_steps1_2a_brief_20261107.md`, in your orrery documentation folder.** It's one Code session on the website, in four parts, with a stop after each:
+1. **The tree check.** It checks that each body's parent is the centre it's fetched around, and fixes Pluto and Charon.
+2. **One drawer for the root and Earth.** This adds the fixed centre row, the trail line, "Centre on" and "Not built yet".
+3. **The Sun's shells in the root.** The Sun room's address will open the root with the shells ticked.
+4. **The freeze past the data's window.** This part is separable, and goes to its own session if the first three run long.
+
+At its start the session asks you one thing: may it update the room-rules skill (interactive-exhibit) in the orrery, as one version bump?
+
+**To start it,** open a Claude Code session in your python_work folder and paste:
+
+```
+Coordinating session's brief, website: run documentation/COORD_L515_steps1_2a_brief_20261107.md in the orrery folder, from its first step. The work is in the gallery repository.
+```
+
+This session has run long, and every further turn re-reads all of it, so I'd close here.
+
+**Files changed, for your run record**
+- ok `documentation/COORD_L515_steps1_2a_brief_20261107.md` (new). The brief.
+- ok `LEDGER_CONSOLIDATED.md` (1 edit, then the index rebuilt). The go-ahead, the brief and the barycentre answer, on L-515 (one nested tree).
+- ok `documentation/WHERE_WE_ARE.md` (2 edits). Do next names the brief.
+
+**Token count:** this session can't print Claude Code's usage count. Today it read slices of the website's code and data, three review returns, and three web pages. It wrote the ledger, Where We Are, the review prompt, the three saved returns and this brief.
+
+**Your run order**
+1. In GitHub Desktop, commit and push the orrery: the ledger, Where We Are, the review prompt, the three returns and the brief. The session reads L-515's rulings from GitHub, so this comes first.
+2. Start the website Code session with the line above.
+
+**For you to do or decide**
+- (do) Push the orrery, then start the session.
+- (decide, at the session's start) May it bump the interactive-exhibit skill in the orrery?
+- (do, before 13 Feb 2027) Renew palomasorrery.com at Porkbun (L-516).
+- (do) Each morning, Pull origin on both, orrery then website, first.
+
+I haven't committed or pushed, because commit and push are yours by your project rules. All of today's records and the brief are saved in your orrery folder, ready for GitHub Desktop.
+
+Next, push the orrery, then start the website session from the brief.
