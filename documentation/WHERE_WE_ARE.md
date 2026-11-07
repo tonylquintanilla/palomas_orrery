@@ -10,14 +10,14 @@ Last updated: November 6, 2026, late night: the coordinating session (Opus), sta
 > - The Moon keeps JPL's period for today, by the same rule as every
 >   other body (your "yes", Nov 6, 22:17). L-513 (the Moon's standards)
 >   is closed, and road stage 14 is done.
-> - L-514 (the Mars room): it opens on Mars's symbol alone, moons off;
->   its drawer lists Mars (fixed), Phobos, Deimos; a moon's box follows
->   the Moon's, accuracy sourced at the build; Earth gets a fixed row.
+> - L-514 (the Mars room), settled: Mars's symbol alone, moons off; drawer
+>   Mars (fixed), Phobos, Deimos; boxes as the Moon's, Go To opening them
+>   (your "B"); accuracy sourced at the build; Earth gets a fixed row.
 >
-> **Do next:** *answer what Go To on a moon opens (the question in chat).*
+> **Do next:** *say go or redirect on the build: two Code sessions.*
 >
 > **Needs you now:**
-> - *(decide) What Go To on a moon opens, for every room with moons.*
+> - *(decide) The Mars room's build: orrery session, then website.*
 > - *(do) Commit and push the orrery: the ledger and this page.*
 > - *(do) Each morning, Pull origin on both, orrery then website, first.*
 
@@ -101,8 +101,8 @@ Read from files when this page was written, not typed from memory.
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
 Decisions, one at a time:
-- *What Go To on a moon opens (L-514 (the Mars room)); the rest of the
-  Mars room's design is ruled (Nov 6).*
+- *The Mars room's build, two sessions (L-514 (the Mars room)); its
+  design is settled (Nov 6).*
 
 At the next design talk:
 - How obsolete code is treated, and when it goes (L-509 (obsolete

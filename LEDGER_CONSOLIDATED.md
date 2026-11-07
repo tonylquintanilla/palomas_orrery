@@ -1633,8 +1633,30 @@ as an archive of the prioritization thinking -- no cleanup on close.
     visitor where to tap (his proposal), or Go To opens the moon's own
     full box (the marker marked `label_target`), as Go To on a body does
     in the Solar System room.
-**Gap:** the answer on the moon's boxes; then the smallest instrument,
-proposed, on Tony's go-ahead, with the Earth room's fixed row in it.
+- **Ruling 4, what Go To on a moon opens**, Tony, Nov 6, 23:33 Chicago,
+  in chat: "B". Go To on a moon opens the moon's own full box (its marker
+  marked `label_target`), as Go To on a body does in the Solar System
+  room; the orbit's cross keeps its short label; no sentence tells the
+  visitor where to tap. The template for every moon, the Earth room's
+  Moon included. A larger tap area is build work, measured, since a
+  wider reach near Mars could pick Mars instead of Phobos.
+- **The design is settled** with ruling 4. The build, as proposed to
+  Tony the same night, waiting for his go-ahead:
+  - Session 1, the orrery (Claude Code): key Phobos and Deimos, JPL's
+    names read live; NASA's words and pages, the sentences brought to
+    Tony before they are written (Deimos's unsourced "Retrogade" goes);
+    periods fetched around Mars; a cited accuracy for the Martian
+    moons, or the gap recorded; the export and the maintenance run.
+  - Session 2, the website (Claude Code): the two moons served and
+    cached around Mars; the Mars room's row, opening and drawer; the
+    shared fixed centre row, given to Mars and Earth; Go To on a moon
+    opening its box, the Earth room's Moon too; the tap area measured;
+    the checks and the headless walk; then Tony's phone look.
+  - Each session's brief written when that session is next (Token
+    Economy); one interactive-exhibit bump, in session 2, if its rules
+    change.
+**Gap:** Tony's go-ahead on the build; then sessions 1 and 2; the item
+closes on his phone look.
 - **Ref:** L-513 (the Moon's standards, the pattern); L-334 (what a room
   opens on, 2026-09-17); L-291 (the Earth room); L-484 (the two agree);
   L-150 (Charon's period centre, for the Pluto room).
