@@ -1098,7 +1098,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-506 | Token economy: tokens spent where they buy verification or a decision, and counted (protocol, every session) | OPEN | -- | 2026-11-02 |
 | ! | L-507 | Historical missions: past voyages drawn in the Solar System room, then encounters (gallery, the Solar System room) | OPEN | -- | 2026-11-05 |
 | ! | L-508 | A held body's alarm: loud until a ledger item names it (orrery + gallery, the Horizons check and the night) | OPEN | -- | 2026-11-02 |
-| ! | L-509 | Obsolete code: how it is marked, and when it goes (orrery, housekeeping) | OPEN | -- | 2026-11-03 |
+| ! | L-509 | Obsolete code: how it is marked, and when it goes (orrery, housekeeping) | OPEN | -- | 2026-11-06 |
 | ! | L-510 | The object list's typed fields stop deciding: a small body drawn by today's eccentricity, a plan asked from before any launch (orrery, the object list and the path plan) | OPEN | -- | 2026-11-05 |
 | ! | L-511 | The orrery's export carries the words the website prints (orrery + gallery, the words) | OPEN | -- | 2026-11-03 |
 | ! | L-512 | The orrery's fallbacks when JPL cannot answer (orrery, the plot's data path) | OPEN | -- | 2026-11-04 |
@@ -1238,7 +1238,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-157 | Gemini cross-check of shell config ring/belt/atmosphere geometry values | OPEN | 2.5 | 2026-07-27 |
 | ! | L-166 | F1b: per-object trust enforcement + soft-edge trust UX (resolver/client consumption of served trust blocks) | OPEN | 2.4 | 2026-07-28 |
 | ! | L-121 | Slim plotly wheel not deployed anywhere (F4, ships-nothing gate) | OPEN | 2.2 | 2026-07-15 |
-| ! | L-150 | Multi-orbit trust model for near-equal-mass binaries (Pluto/Charon and future onboards) | OPEN | 2.2 | 2026-07-20 |
+| ! | L-150 | Multi-orbit trust model for near-equal-mass binaries (Pluto/Charon and future onboards) | OPEN | 2.2 | 2026-11-06 |
 | ! | L-173 | shell_configs.py -- 8 body blocks missing... source citations entirely (found during 1c predesign measurement) | OPEN | 2.1 | 2026-07-30 |
 | ! | L-122 | Stray data/solar-system.prev_old/ committed to the repo (F6, non-blocking) | OPEN | 1.9 | 2026-07-15 |
 | ! | L-123 | Object info card -- serve info_dictionary.py as JSON, click-to-open (rides with F1) | OPEN | 1.8 | 2026-07-15 |
@@ -1622,6 +1622,19 @@ as an archive of the prioritization thinking -- no cleanup on close.
     words are there exactly; NASA's sentence goes on past "rate" with ",
     or in that same amount of time.", and the quote ends where Tony's
     did.
+- **Tony's three changes, after his push at 402f6c0e:** "(1) make the
+  Moon's info_url https://science.nasa.gov/moon/facts/ and drop the
+  address from the sentence, so the Moon follows the export's NASA: "..."
+  form like every other body; (2) quote NASA's whole sentence or end the
+  cut one with "...", your choice from the page; (3) leave the period
+  rule as it is, and I'll judge "0.08 years (27 days)" at my look."
+  Done: `mission_url` is the facts page, and `mission_info` reads
+  "Horizons: 301. NASA: "The Moon makes a complete orbit around Earth in
+  27 Earth days and rotates or spins at that same rate, or in that same
+  amount of time."" -- NASA's whole sentence, the session's choice, so
+  nothing is cut and no ellipsis stands for words. The bullet above
+  (the address on the sentence, the link the Moon page) is superseded
+  by this one.
 - **The orrery's maintenance run, 2026-11-06 evening:** "35 of 35 gating
   checkers passed"; the gate path "0 TIER-1 -- the push gate holds". The
   Horizons check confirmed the Moon by name on 2026-11-07 (UTC): identity
@@ -34276,6 +34289,29 @@ shared serving pipeline); L-098 (parent, Phase 1b).
   - The orrery's Pluto-centred view of the moons, which draws their
     orbits distorted, is L-509's second case (obsolete code), marked
     the same evening.
+  - **FOR THE PLUTO ROOM: the moons' periods are asked around Pluto's
+    centre today** (Tony asked, 2026-11-06; read that evening at orrery
+    402f6c0e). Two places decide the centre a Pluto moon's elements, and
+    the period that comes with them, are asked around:
+    - `orbit_data_manager.query_horizons_elements`'s default: a
+      three-digit satellite id is asked around its planet by its first
+      digit, and '9' maps to '999', Pluto's centre. So Charon (901),
+      Nix (902), Hydra (903), Kerberos (904) and Styx (905) are asked
+      around Pluto's centre whenever no view says otherwise. Not marked
+      DEPRECATED: it is the moons' default, not the Pluto-centred view
+      the ruling named.
+    - `orbital_period.VIEW_TO_OSCULATING_CENTRE`: the Pluto-centred view
+      asks '@999' (its row marked DEPRECATED this evening, under L-509);
+      the barycentre view asks '@9', the only path that asks the
+      barycentre.
+    - The orbit cache at 402f6c0e holds one Pluto-moon period, Charon's
+      under `Charon@999`: 6.387219693 days around '@999', fetched
+      2026-10-27. None is held around '@9'. For Charon the pair's
+      period is the same about either centre; for the four small moons
+      a period around Pluto's centre carries Pluto's 6.4-day circling of
+      the barycentre, as Pluto's own period around the Sun did (L-484,
+      2026-10-29). The Pluto room asks every moon's period around the
+      barycentre, '@9'.
 - **Decided (Tony, 2026-07-20), during L-149 discussion:** when a served body is a genuine
   near-equal-mass binary -- barycenter falls OUTSIDE the primary, per the project's existing
   barycenter rule -- it needs TWO served orbits, not one: heliocentric (whole-system views)

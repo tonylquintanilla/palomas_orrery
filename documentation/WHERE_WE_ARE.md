@@ -49,6 +49,12 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
 ## Settled
 
 Standing rulings; a line leaves once it is habit, or a skill carries it.
+- Pluto: the Solar System room keeps its row, the barycentre named
+  Pluto; the Pluto room (stage 15) draws Pluto and Charon around the
+  barycentre and the other moons around it too (Nov 6; L-150 (trusting
+  a near-equal pair)).
+- The orrery's Pluto-centred view of the moons draws them distorted:
+  marked obsolete, goes with the Pluto room or L-509's talk (Nov 6).
 - An ended mission's line ends at its marker on its last day, desktop as website (Nov 6).
 - A craft that flew on: path stops on its mission's last day; words say still flying, untracked (Nov 5).
 - A small body is a path at or above e 1 in JPL's database, every 30
@@ -99,12 +105,12 @@ Read from files when this page was written, not typed from memory.
 ## Waiting on you
 
 Decisions, one at a time:
-- At the standards slice: the Pluto row, what it shows (Pluto or the
-  barycentre) and what it is called (L-150 (trusting a near-equal pair)).
+- None waiting (the Pluto row was ruled Nov 6; see Settled).
 
 At the next design talk:
 - How obsolete code is treated, and when it goes (L-509 (obsolete
-  code)); the first case is the orrery's unused date function.
+  code)); two cases now, the orrery's unused date function and its
+  Pluto-centred view of the moons.
 - The shared link (ruled Oct 29) waits for its build.
 - Planet 9: how to show a body that may not exist.
 

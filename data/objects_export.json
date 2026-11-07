@@ -1,6 +1,6 @@
 {
   "schema": 4,
-  "source_sha256": "512e860d9f96c2ab1ee55e37174b7c0dbc0ea11ae0b912ae7d30afb5aabb9236",
+  "source_sha256": "c62f261841d2a682629b6fccb5ab5894707e81ea0027976d113e47a374b8859a",
   "period_inputs_sha256": "b44eecc08ae3c625218cf1473b9e042a1f90c8a474a8984e5653207b7eb318f2",
   "confirmations_sha256": "42da1b06c86aec4f3ae74b9d0e848adf809f61ba4b7a397ada7efb50da63c759",
   "paths_sha256": "c8fd046d767f68aa97c46b5765e71fae6cdab7127fd6f04ebbc181b37be771df",
@@ -230,8 +230,8 @@
       "horizons_name": "Moon",
       "id_type": "majorbody",
       "object_type": "satellite",
-      "description": "NASA, Moon Facts (https://science.nasa.gov/moon/facts/): \"The Moon makes a complete orbit around Earth in 27 Earth days and rotates or spins at that same rate.\"",
-      "info_url": "https://science.nasa.gov/moon/",
+      "description": "NASA: \"The Moon makes a complete orbit around Earth in 27 Earth days and rotates or spins at that same rate, or in that same amount of time.\"",
+      "info_url": "https://science.nasa.gov/moon/facts/",
       "period": {
         "kind": "fetched",
         "typed": false,
