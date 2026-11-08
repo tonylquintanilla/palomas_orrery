@@ -732,7 +732,7 @@ Orrery:
 
 **Your run order**
 1. Commit and push the website, -- 722ad57bf0b1f6d2e71c52cf31c0b944f418a490
-   1. then the orrery.
+   1. then the orrery. -- 1742f3f443e14570aa850698f08f894485387666
 2. No hand run of the nightly is needed: nothing this session changed needs the cache rebuilt.
 3. Your phone look:
    - Earth's Sun line as you tick rows.
@@ -748,3 +748,72 @@ Orrery:
 - (do) Your phone look, as listed above.
 - (decide) Still carried: how the yellow dot on Earth's fixed row looks.
 - Part 4 (the freeze past the served window) waits for its own session.
+
+=============================================================================
+
+**Coordinator:**
+
+Both pushes reached GitHub: the website at 722ad57 and the orrery at 1742f3f. Give the website a couple of minutes to publish, then reload on your phone.
+
+Here's what to look for, with what you should see:
+
+**Earth room (`?exhibit=earth`)**
+1. **Sun line on arrival:** it still looks short, just past the crust, because only Earth is drawn. That's expected. -- yes
+2. **Sun line as you tick:** 
+   1. tick the Moon and it reaches past the Moon's orbit. -- yes. tapping go to still renders the text box of the orbit instead of the moon as we had decided.
+   2. Tick the Hill sphere and it reaches past that. -- yes
+   3. Untick them and it shrinks back. -- yes
+4. **Sun line's hover:** judge the new words: "Line drawn a little past the farthest shell or orbit shown; the Sun is far beyond it." -- yes, and i like the point about the sub solar point
+5. **Drawer order:** the Moon sits between the magnetotail and the Hill sphere. -- yes
+6. **Labels:** no "Not built yet" or "No room or cards yet" anywhere. -- yes
+
+**Solar System room**
+7. **Shell rows:** 
+   1. the Sun's inner shells, out to the Alfvén surface, are listed right after the Sun. -- we have 6 groups of comets. can we create a larger expandable "Comets" group for all of the sub-groups? the same structure could apply to other sub groups of spacecraft and asteroids where they are listed together. 
+   2. The far ones, from the termination shock to the galactic plane, come after the trans-Neptunian objects. -- yes
+8. **All shells unticked when the room opens.** -- yes
+9.  **Alfvén surface:** tick it with Earth ticked. It draws small at the centre, since Earth sets the view. -- yes
+10. **Heliopause:** tick it and the view widens to about 133 AU, with the planets small in the middle. -- yes
+11. **Find:** typing "alfven" finds the shell. -- yes
+12. **Speed:** the room now loads about 350 KB more each time it opens. Notice whether it still feels quick. -- yes
+
+**The Sun address (`?exhibit=sun`)**
+- **What it opens on:** it now opens the Solar System room, not a separate Sun room. Only the photosphere and the rotation axis are ticked, at the old Sun room's close-up view. -- yes
+- **The Sun row:** no "Centre on" button, since the Sun is now the root. -- yes
+- **Reset:** puts the close-up view back and closes any open text box. -- yes
+- **From the lobby:** tap the Sun card on palomasorrery.com. It should open this same view. -- yes. actually wih the new setup should we rething the lobby. could you ask Design for ideas? perhaps we should reduce the number of entry points to Solar System, Earth System, and Stars, and Featured. possibly the large solar system card, below it the earth system science card, then stars, then below it the featured cards. but i am open to ideas, especially about the graphic. from showing the website to people, the most common reaction is not knowing what to do. there are so many options, and what is obvious and familiar to me is not to them. 
+
+The yellow dot on Earth's row is still yours to judge, if you haven't already. -- looks good. 
+
+-- excellent work! thank you. 
+
+==================================================================================================
+
+I'd do part 4 tonight, then follow the road.
+
+**Tonight: part 4, the freeze past the served window.** Right now, if a visitor opens a room at a moment past the dates the cache covers, the page refuses to draw. Part 4 makes it draw at the last day the data covers and say so plainly. It's already written in the brief, so it needs no new planning, it's small, and it finishes this stage of the tree.
+
+**Next: the road's own order.** First the rest of the tree, which places a moon around its planet inside the larger view. Then Mars, in two sessions, orrery then website. Earth's Moon gets its Go To fix in the Mars website session, as ruled.
+
+**The comets group** is small and can ride along with either of those.
+
+**The lobby** deserves a design talk on a fresh day, with your full attention. It's the visitor's first impression.
+
+Before you start, reinstall interactive-exhibit 1.34 in Settings > Skills. 
+
+Here's the prompt:
+
+> Built on orrery 1742f3f443e14570aa850698f08f894485387666 at https://github.com/tonylquintanilla/palomas_orrery and gallery 722ad57bf0b1f6d2e71c52cf31c0b944f418a490 at https://github.com/tonylquintanilla/tonyquintanilla.github.io (both branch main, read 2026-11-07, 19:50 Chicago). Nightly bot commits since are expected.
+>
+> Type: BUILD, a Claude Code session in the gallery repository, through the python_work door. L-515 (one nested tree), part 4.
+>
+> **Start**
+> 1. Record both bases and say whether either moved past the anchor.
+> 2. Read the orrery's `documentation/COORD_L515_steps1_2a_brief_20261107.md`. Parts 1 to 3 are done and pushed. Do its Part 4 only. Its Checks and Close apply.
+> 3. Read L-515 and L-165 in `LEDGER_CONSOLIDATED.md`, and the orrery's `documentation/WHERE_WE_ARE.md`.
+> 4. Skills, each against the manifest, by its read plan: gallery-assembler (1.3, the resolver and the served window), interactive-exhibit (1.34), safe-file-editing (1.14), ledger-and-session-records (1.22). interactive-exhibit went to 1.34 in the last session. Confirm the copy you load reads 1.34 before work that fires it, and stop if it doesn't.
+> 5. If part 4 changes a rule, you may edit the orrery's skill, run `skills_index.py`, and add the protocol's version entry, for one bump.
+>
+> **The job:** when the moment a room opens on lies past the served window, the room draws at the last day its data covers and says so plainly, instead of the resolver refusing. Show the new check failing on a planted fault.
+>
+> **Close** as the brief says. My phone look list should say how I can see the freeze on my phone, if I can. Commit and push are mine. Report the context usage reading if /cost isn't available.
