@@ -1016,13 +1016,13 @@ Orrery:
 
 **Your run order**
 1. In GitHub Desktop, commit and push the website, -- 23440b799e35ff8ff0ab0dd8405ade3137f33f60
-   1. then the orrery.
+   1. then the orrery. -- 68f7eb56f85f73a6e04cf742a1e2a2479450aa94
 2. Phone look:
-   - **The comet's date:** open the Solar System room with `&freeze=1`, then tap 3I/ATLAS. Its box should name 7 November 2026.
-   - **The opaque box:** tap any marker so its box opens over the triad. You should see no axes behind the words, and the triad should hide until the box closes.
-   - **The groups:** open the drawer. Comets, Spacecraft, and Apollo and Amor should show closed. Open Comets, then one of its groups; the bodies should sit a step further in. Judge the five names.
-   - **Find:** type "comet", then "JFc".
+   - **The comet's date:** open the Solar System room with `&freeze=1`, then tap 3I/ATLAS. Its box should name 7 November 2026. -- yes
+   - **The opaque box:** tap any marker so its box opens over the triad. You should see no axes behind the words, and the triad should hide until the box closes. -- yes
+   - **The groups:** open the drawer. Comets, Spacecraft, and Apollo and Amor should show closed. Open Comets, then one of its groups; the bodies should sit a step further in. Judge the five names. -- correct
+   - **Find:** type "comet", then "JFc". -- correct
 
 **Tony-actions**
 - (do) Commit and push both repositories.
-- (do) Reinstall interactive-exhibit 1.35 (Settings > Skills), and paste protocol v3.131 into the Project's instructions.
+- (do) Reinstall interactive-exhibit 1.35 (Settings > Skills), and paste protocol v3.131 into the Project's instructions. -- done, replacing the same numbered documents. 
