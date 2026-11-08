@@ -388,34 +388,34 @@ LIVE -- what the deployed site actually serves
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 
-3. Commit and push the orrery. --
-4. Reinstall interactive-exhibit 1.36 (Settings > Skills), and paste protocol v3.132 into the Project's instructions on claude.ai.
+3. Commit and push the orrery. -- 0a397e169fa68646db4f61992e23a901e4da9c96
+4. Reinstall interactive-exhibit 1.36 (Settings > Skills), and paste protocol v3.132 into the Project's instructions on claude.ai. -- done
 5. Your phone look, below.
 
-**Phone look: each picture's row.** Open the room, then the drawer. In the paths below, "A > B" means open group A, then sub-group B:
-- **Sun:** Solar System Explorer
-- **Comets > Hyperbolic comets > PANSTARRS (C/2025 R3):** PanSTARRS at Perigee; PANSTARRS near perihelion
-- **Comets > Hyperbolic comets > Wierzchos:** Wierzchos Perihelion
-- **Comets > Hyperbolic comets > C/2025 K1:** the K1 Breakup
-- **Comets > Other comets > MAPS:** MAPS Disintegration
-- **Comets > Halley-type comets > Halley:** Halley Perihelion
-- **Comets > Interstellar objects > 3I/ATLAS:** March 2025 to March 2026; Closest Approach to Jupiter; Perihelion
-- **Mercury:** Orbital Transformation (desktop only)
-- **Earth:** Artemis II's five, Apophis, and Earth Barycenter Shells (desktop only): 6 on a phone, 7 on a desktop
-- **Apollo and Amor asteroids** (the group row): Near Earth Asteroids (desktop only). I put it here because its bodies span three classes.
-- **Spacecraft > Active missions > Psyche spacecraft:** its four pictures
-- **Spacecraft > Active missions > New Horizons:** the whole-mission picture
-- **Jupiter:** New Horizons' Jupiter flyby
-- **Pluto:** its two pictures. The wide one shows the "turn your phone" card on a phone, and that card's back button returns to the room.
+**Phone look: each picture's row.** Open the room, then the drawer. In the paths below, "A > B" means open group A, then sub-group B: -- it should be noted that the "Save Pictures" do not have sourced words. 
+- **Sun:** Solar System Explorer -- yes
+- **Comets > Hyperbolic comets > PANSTARRS (C/2025 R3):** PanSTARRS at Perigee; PANSTARRS near perihelion -- yes
+- **Comets > Hyperbolic comets > Wierzchos:** Wierzchos Perihelion -- yes
+- **Comets > Hyperbolic comets > C/2025 K1:** the K1 Breakup -- yes
+- **Comets > Other comets > MAPS:** MAPS Disintegration -- yes
+- **Comets > Halley-type comets > Halley:** Halley Perihelion -- yes
+- **Comets > Interstellar objects > 3I/ATLAS:** March 2025 to March 2026; Closest Approach to Jupiter; Perihelion -- yes
+- **Mercury:** Orbital Transformation (desktop only) -- 
+- **Earth:** Artemis II's five, Apophis, and Earth Barycenter Shells (desktop only): 6 on a phone, 7 on a desktop -- yes
+- **Apollo and Amor asteroids** (the group row): Near Earth Asteroids (desktop only). I put it here because its bodies span three classes. -- 
+- **Spacecraft > Active missions > Psyche spacecraft:** its four pictures -- yes
+- **Spacecraft > Active missions > New Horizons:** the whole-mission picture -- yes
+- **Jupiter:** New Horizons' Jupiter flyby -- yes
+- **Pluto:** its two pictures. The wide one shows the "turn your phone" card on a phone, and that card's back button returns to the room. -- remove L view from the mobile. i can't do it in the gallery editor. the landscape view is too crowded and not readable on the phone. 
 
 **Then try:**
-- Tap an Artemis picture. You should see its upright version, with "Back to the live solar system" in the header.
-- Tap that. You should land back in the room with the drawer open at Earth's fold and anything you ticked still ticked.
-- Type "Artemis" in Find. Earth's fold should open with 5 pictures and the line "5 saved pictures match".
-- Press Reset. Every fold should close.
+- Tap an Artemis picture. You should see its upright version, with "Back to the live solar system" in the header. -- yes
+- Tap that. You should land back in the room with the drawer open at Earth's fold and anything you ticked still ticked. -- yes
+- Type "Artemis" in Find. Earth's fold should open with 5 pictures and the line "5 saved pictures match". -- yes
+- Press Reset. Every fold should close. -- yes
 
 **Tony-actions:**
-- (do) Commit and push the website, then the orrery.
+- (do) Commit and push the website, then the orrery. -- done
 - (do) Reinstall interactive-exhibit 1.36, and paste protocol v3.132.
 - (decide) The phone look: where each picture landed, and the words "Saved pictures", its line, and "Back to the live solar system".
 - (do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).
