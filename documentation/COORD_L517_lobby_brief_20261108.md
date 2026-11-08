@@ -1,4 +1,4 @@
-<!-- Doc-Kind: hand | The brief for two Claude Code sessions on the website: L-517 (the lobby for a first-time phone visitor), part 1 the pictures into the drawer, part 2 the lobby. Communication; written once, read by its sessions. -->
+<!-- Doc-Kind: hand | The brief for two Claude Code sessions on the website: L-517 (the lobby for a first-time phone visitor), part 1 the pictures into the drawer, part 2 the lobby, part 3 the Solar System subject page gone and Back fixed. Communication; written once, read by its sessions. -->
 # Brief: the lobby for a first-time phone visitor (website)
 
 Built on orrery 7d3e57bab8f7408ae8b12edc5d61a4056358c8b1 at
@@ -174,6 +174,40 @@ lobby has no checker of its own (L-367 (no checker opens a room) and
 L-423 (the website's checks) record the gap); headless shots at 390 x
 844 and 1280 x 800 on a throwaway copy, in the report, are the check
 this part can show. Name what each shot proves.
+
+## Part 3: the Solar System subject page goes, and Back returns to the lobby
+
+Added Nov 8, evening, from Tony's phone look at part 2 (his copy
+`WHERE_WE_ARE_11-8-26_1529_run_record.md`). Built on the website at
+942910cc or later. Read gallery-pipeline 1.2 in the parts on index.html's
+rooms, the doors and the address router; interactive-exhibit 1.36 only if
+the room's own code is touched.
+
+1. "i think we can delete this page. all of these options are available
+   from the tree itself and make more sense there. so remove the 'Solar'
+   option at the top." The Solar System subject page goes, and so does
+   "Solar" in the menu at the top (the door's `short` label in
+   `gallery/gallery_config.json`). Every saved picture keeps its way in
+   through the room's drawer; the live card stays the lobby's start card.
+   An old address to that page, `#room=solar_system` or any
+   `#room=solar_system/...`, opens the live Solar System room rather than
+   a blank page or the lobby (L-165, site continuity). A saved picture
+   opened from an old link keeps its way back to the room. Earth System
+   and Stars keep their pages and menu entries.
+2. "from the stars page, the back button does not bring us back to the
+   lobby. i have to tap 'Paloma's Orrery' at the top." Find the cause on
+   a phone-sized headless page first: the phone's own Back, and any back
+   control a subject page draws. Then Back from a subject page reached
+   from the lobby returns to the lobby, on all subject pages, and the fix
+   is shown failing before it and passing after.
+
+Checks: the gallery maintenance run, green; headless shots at 390 x 844
+of the menu without "Solar", an old `#room=solar_system/comets` address
+landing in the room, and Back from Stars to the lobby. Name what each
+shot proves. If Tony's look passes, L-517 closes: its loose ends are
+re-homed by the records skill's rule (the two desktop-only rows, the
+guest book note's old words, and Featured's rethink with the cards'
+unsourced words).
 
 ## Close (both parts)
 

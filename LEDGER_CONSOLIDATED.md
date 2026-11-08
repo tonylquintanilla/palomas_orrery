@@ -728,6 +728,10 @@ Module updated: November 7, 2026, evening, with Anthropic's Claude Opus
 its three fixes; then part 3, the Sun's shells in the root; the
 interactive-exhibit bump to 1.34 and protocol v3.130), built on orrery
 cba62f22 with gallery 49d1bae1.
+Module updated: November 8, 2026, evening, with Anthropic's Claude Opus 5.5 (the
+coordinating session: Tony's phone look at L-517 part 2 recorded from his
+copy WHERE_WE_ARE_11-8-26_1529_run_record.md, his two asks carried into a
+part 3), built on orrery 767b208d with gallery 942910cc.
 Module updated: November 8, 2026, late afternoon, with Anthropic's Claude Opus 5.5
 (the coordinating session: Tony's phone look at L-517 part 1 recorded from
 his copy WHERE_WE_ARE_11-8-26_1249_run_record.md, Pluto's landscape card
@@ -1827,9 +1831,25 @@ tree); L-165 (site continuity); L-503 (the belt on the website).
   - Tony-action (do): commit and push the website, then the orrery.
   - Tony-action (decide): the phone look at the lobby and the subject
     pages (the session's report lists what to tap).
+- **Part 2 pushed and passed on Tony's phone, 2026-11-08**, read from his
+  copy `documentation/WHERE_WE_ARE_11-8-26_1529_run_record.md`: website
+  pushed at 942910cc, orrery at b60ed48f. The session ran in a chat
+  session, not Claude Code; Tony: "by mistake i send your Code prompt to a
+  chat session. but it worked okay." His verdicts: the first screen,
+  Explore, the scroll order, Pluto's one picture on the phone, "yes"; the
+  words and the strip's star sizes, "correct"; the new lobby on his phone,
+  "yes".
+  - Tony's two asks, carried into part 3 of the brief: on the Stars page,
+    "note that from the stars page, the back button does not bring us
+    back to the lobby. i have to tap 'Paloma's Orrery' at the top." And
+    on the Solar System subject page: "i think we can delete this page.
+    all of these options are available from the tree itself and make more
+    sense there. so remove the 'Solar' option at the top."
 **Gap:** part 1 (the pictures) built and passed, but for the two desktop
 rows; part 2 (the lobby, with Pluto's landscape card off the phone)
-built, Tony's phone look to come; each picture group leaves its row when
+built and passed; part 3 (the Solar System subject page and its "Solar"
+menu entry gone, and Back from a subject page returning to the lobby)
+built and passed, after which L-517 closes and re-homes its loose ends; each picture group leaves its row when
 the encounter that replaces it is built.
 **Ref:** L-282 (the lobby); L-428 (the lobby's way in); L-447 (the front
 page says what the site is: its sentence and the Paloma line stay, the

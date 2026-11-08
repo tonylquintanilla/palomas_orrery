@@ -1,19 +1,19 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 8, 2026, late afternoon: the website Code session (Opus), L-517 part 2, the lobby.
-- Written at orrery 4bae211 and gallery 6f7b076, plus this session's edits.
+Last updated: November 8, 2026, evening: the coordinating session (Opus), your phone look at the lobby recorded.
+- Written at orrery 767b208 and gallery 942910c, plus this session's edits.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The lobby is built: the live solar system first, then Earth and Stars as picture strips; empty rooms are gone from the subject pages; Pluto's wide picture is off the phone (L-517 (the lobby), part 2).
-> - Your editor ask, a live view added to Featured by its address, is recorded with the shared scene link (L-518 (the shared link)).
+> - The new lobby passed your phone look and is live (L-517 (the lobby), part 2).
+> - Your two asks are a small part 3: the Solar System page and "Solar" in the menu go; Back from a subject page returns to the lobby.
 >
-> **Do next:** *your phone look at the lobby (the list in the session's report); then the shared scene link; then step 2b.*
+> **Do next:** *L-517 part 3 (brief `COORD_L517_lobby_brief_20261108.md`); then the shared scene link; then step 2b.*
 >
 > **Needs you now:**
-> - *(do) Commit and push the website, then the orrery (its records include the coordinator's); then your phone look at the lobby.*
+> - *(do) Commit and push the orrery: the records and the brief.*
 > - *(do) Each morning, Pull origin on both, orrery then website, first.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
 
@@ -38,8 +38,8 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
  17.   [later] Small-body systems' moons; then stars and exoplanets.
  18.   [goal]  The website does what the desktop orrery does, with a date
                to choose, within the range the data covers.
-  l.   [NOW]   *L-517 (the lobby): both parts built; your phone look at
-               the lobby next.* << moved this session
+  l.   [NOW]   *L-517 (the lobby): parts 1 and 2 passed; part 3, the
+               Solar System page gone and Back fixed.* << moved this session
   s.   [next]  The shared scene link (L-518 (the shared link)), after
                the lobby; your editor ask rides it. << moved this session
   b.   [beside] Housekeeping: L-424, L-425, L-426 (the checkers' three);
@@ -93,7 +93,7 @@ Waiting behind other work; a line leaves when picked up.
 ## Signals
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261108T175822Z, nightly, ok, no retry (gallery swap log at 6f7b076, read Nov 8).
+- Last cache build: 20261108T175822Z, nightly, ok, no retry (gallery swap log at 942910c, read Nov 8).
 - Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at orrery 68f7eb5, its last change).
 - This page's date and the ledger's newest stamp: both Nov 8. Agree.
 
@@ -121,9 +121,8 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- This session: L-517 (the lobby), part 2; the brief
-  `COORD_L517_lobby_brief_20261108.md`. The strip pictures are redrawn
-  by the website's `tools/headless/draw_lobby_strips.py`.
+- This session: L-517 (the lobby), your copy
+  `WHERE_WE_ARE_11-8-26_1529_run_record.md`; the brief, part 3 next.
 - The tree: L-515 (one nested tree), `COORD_L515_steps1_2a_brief_20261107.md`.
 - The talk's rulings: `DESIGN_L484_consistency_rulings_20261103.md`.
 - The door: `documentation/python_work_door/`, and L-499 (kinds of session).

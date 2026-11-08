@@ -254,3 +254,46 @@ The reminder came from an automatic check on my cloud copy of the repositories. 
 
 When you're ready: commit and push the website first, then the orrery. -- done.
 
+============================================
+
+**Coordinator:**
+
+I'll record your verdicts on the new lobby and your two asks. First I'm pulling both repos and checking how the top menu and the back button work today.
+
+I've recorded the new lobby as passed and turned your two asks into a small part 3 of the brief.
+
+**What I recorded, on L-517 (the lobby for a first-time phone visitor):**
+- **The lobby passed your phone look.** Your yeses, the pushes (website 942910cc, orrery b60ed48f) and your note about the build running in a chat session are all on the item. Running it in chat worked because that session could reach both folders on your computer, so the prompt is fine either way.
+- **Part 3, from your two asks:**
+  - The Solar System subject page goes, and so does "Solar" in the top menu. Every picture keeps its way in through the room's drawer. Old links to that page will open the live room instead of a blank page. Earth System and Stars keep their pages.
+  - Back from a subject page returns to the lobby. The build first finds out why it doesn't today, on a phone-sized test page, and shows the fix failing before and passing after.
+- **When part 3 passes, L-517 closes.** Its loose ends then move to items that stay open: the two desktop-only pictures, the old words in your guest book note, and Featured's rethink with the cards' unsourced words.
+
+**Files updated in your orrery folder, for your run record:**
+- ok LEDGER_CONSOLIDATED.md (2 edits: your phone look and asks on L-517, the header stamp; index regenerated and checked)
+- ok documentation/WHERE_WE_ARE.md (5 edits, by section; 129 lines, under its cap)
+- ok documentation/COORD_L517_lobby_brief_20261108.md (2 edits: Part 3 added, its first line names it)
+
+**Your run order:**
+1. In GitHub Desktop, commit and push the orrery.
+2. Start part 3 with the prompt below.
+
+**The prompt for the next session:**
+
+> Built on orrery (the SHA of my push) at https://github.com/tonylquintanilla/palomas_orrery and gallery 942910cc1ea30dee74a96cc19ff8a58665a83815 at https://github.com/tonylquintanilla/tonyquintanilla.github.io (both branch main). Nightly bot commits since are expected.
+>
+> Type: BUILD in the gallery repository, through the python_work door. L-517 (the lobby for a first-time phone visitor), part 3: the Solar System subject page and its "Solar" menu entry removed, and Back from a subject page returning to the lobby.
+>
+> Start: read the orrery's `documentation/COORD_L517_lobby_brief_20261108.md` and do its Part 3 only. Its Start, Checks and Close apply.
+>
+> Close as the brief says, with a phone-look list. Commit and push are mine.
+
+**Tony-actions:**
+- (do) Commit and push the orrery.
+- (do) On a computer, look at Mercury's picture and Near Earth Asteroids on the Apollo and Amor row (not urgent).
+- (do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).
+
+**Where this leaves us:**
+- The new lobby is live and passed your look.
+- Next is part 3, then the shared scene link, then step 2b of the tree.
+
