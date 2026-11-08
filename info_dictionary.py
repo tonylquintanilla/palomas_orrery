@@ -1128,7 +1128,7 @@ INFO = {
 
         # Source: Wikipedia/MPC (aphelion ~101 AU, current position ~89 AU); Kiss et al. 2017 (Xiangliu)
         'Gonggong':
-        'Horizons: 2007 OR10. One of the largest known Kuiper Belt Objects (~1230 km diameter) with a highly inclined orbit (30.9 deg). '
+        'Horizons: 2007 OR10. One of the largest known trans-Neptunian objects (~1230 km diameter) with a highly inclined orbit (30.9 deg). '
         'Named after the Chinese water god known for causing floods and chaos. '
         'Surface is extremely red due to tholins and water ice, suggesting possible past cryovolcanism. '
         'Slow rotation period (~22 hours) likely caused by tidal forces from its moon Xiangliu. '

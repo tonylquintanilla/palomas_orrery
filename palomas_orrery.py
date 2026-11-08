@@ -9084,7 +9084,7 @@ def get_end_date_from_gui():
 
 # Tooltip for scrollable frame
 CreateToolTip(scrollable_frame.scrollable_frame, "Use the scrollbar to see all objects. Categories include:\n" 
-              "- Planets and Dwarf Planets;\n- Moons, Asteroids, and Kuiper Belt Objects;\n- Space Missions;\n" 
+              "- Planets and Dwarf Planets;\n- Moons, Asteroids, and Trans-Neptunian Objects;\n- Space Missions;\n" 
               "- Comets and Interstellar Objects!\n"
               "Select a start date for plotting. The default start date is \'Now\', in UTC.")
 
@@ -9666,7 +9666,7 @@ create_celestial_checkbutton("-- Nix", nix_var)  # params
 create_celestial_checkbutton("-- Kerberos", kerberos_var)    # params
 create_celestial_checkbutton("-- Hydra", hydra_var)  # params
 
-kuiper_belt_label = tk.Label(celestial_frame, text="Kuiper Belt Objects (KBOs):", font=("Arial", 9, "bold"))
+kuiper_belt_label = tk.Label(celestial_frame, text="Trans-Neptunian Objects (TNOs):", font=("Arial", 9, "bold"))
 kuiper_belt_label.pack(anchor='w', pady=(5, 0))
 
 # Kuiper Belt Objects

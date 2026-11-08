@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.130 | November 7, 2026
+Tony Quintanilla, PE | Claude | v3.131 | November 7, 2026
 
-Cut from cba62f22 at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 4ac3903a at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -556,7 +556,7 @@ gallery-cache-builder        1.18 Nightly builder, atomic swap and its
                                   (HORIZONS_CACHE), a drawing named on a room's
                                   row, an ended mission's last day
                                   (fetch_path_last_day)
-interactive-exhibit          1.34 adding or changing an exhibit in
+interactive-exhibit          1.35 adding or changing an exhibit in
                                   interactive.html; any edit to the Sun's
                                   chrome (drawer, nav cluster, frame zoom,
                                   i-panel, HUD, consent, back link); "Earth
@@ -620,7 +620,9 @@ interactive-exhibit          1.34 adding or changing an exhibit in
                                   (EXHIBIT_ADDRESSES); the Earth room's Sun
                                   line; an object's parent as its fetched
                                   centre (check_tree_parents.py, the store
-                                  writer's parent path)
+                                  writer's parent path); a room opened past the
+                                  served window (the freeze, scene_moment.js,
+                                  the Scene moment check, ?freeze=1)
 <!-- SKILL-MANIFEST:END -->
 
 Session-Start Repo Pull and the SHA Round Trip [CRITICAL]
@@ -1314,6 +1316,48 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.131 (November 7, 2026, night): No rule changed in this document.
+ONE skill bump: interactive-exhibit 1.34 -> 1.35 (L-515, one nested
+tree, part 4, with L-165, site continuity). PAST THE SERVED WINDOW A
+ROOM DRAWS AT THE LAST DAY ITS DATA COVERS, AND SAYS SO.
+
+WHAT PROMPTED IT. The Claude Code session of Nov 7, night (Claude Opus
+5.5), through the python_work door, built on orrery 4ac3903a and
+gallery 722ad57b, from Tony's prompt of 19:50 Chicago and part 4 of
+documentation/COORD_L515_steps1_2a_brief_20261107.md, on Tony's ruling
+of Nov 7, 12:53 Chicago, on L-165: "Yes." Past the served window a room
+draws at the last day its data covers and says so plainly; it never
+goes blank.
+
+WHAT CHANGED. interactive-exhibit: a new paragraph under What a Room
+Opens On Is Served: the page asks gallery/scene_moment.js for the
+moment it hands the driver -- the minute asked, or, past the window's
+end, the window's last whole minute -- while the resolver stays
+unchanged and still refuses anything outside the window (method: the
+page chooses inside the gate); a frozen room says so under its title
+and right under its heading in the i panel; the two sentences that say
+"today" take the frozen room's words; the Mode 5 knob ?freeze=1; the
+gallery run's Scene moment check, which asks the real resolver, and the
+walk. Its oldest of four version entries (1.32) moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule. Every
+sentence was read from the gallery's code with this session's edits
+before it was written.
+
+THE OBLIGATION TRAVELS. This session loaded interactive-exhibit from
+the account and it read 1.34, as the manifest expected, discharging
+v3.130's obligation; it read gallery-assembler 1.3,
+safe-file-editing 1.14 and ledger-and-session-records 1.22. Tony
+reinstalls interactive-exhibit (Settings > Skills) and pastes this
+version into the Project's instructions on claude.ai; the next session
+that loads it from the account confirms its copy reads 1.35 before
+work that fires it.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.128 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.130 (November 7, 2026): No rule changed in this document. ONE
 skill bump: interactive-exhibit 1.33 -> 1.34 (L-515, one nested tree:
 Tony's phone look at part 2, and step 2a's part 3). THE ROOT HOLDS THE
@@ -1404,50 +1448,6 @@ work that fires it.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.126 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.128 (November 6, 2026): No rule changed in this document. ONE
-skill bump: interactive-exhibit 1.31 -> 1.32 (L-513, the Moon's
-standards). AN ORBITAL PERIOD UNDER A YEAR PRINTS IN DAYS ONLY.
-
-WHAT PROMPTED IT. The Claude Code session of Nov 6 (Claude Opus 5.5),
-through the python_work door, built on orrery 1422a96 and gallery
-6c93d0a, from documentation/COORD_stage14_moon_standards_brief_20261106.md,
-brought the Moon to the other bodies' standards; its period printed
-"0.08 years (27 days)". At his look Tony ruled, in his run record
-documentation/WHERE_WE_ARE_11-6-26_1625_run_record.md: "My ruling on
-periods under a year: print them in days only, with no years figure,
-for every moon, in the orrery and on the website. The days keep the
-digits the rule earns, so the Moon reads '27 days'."
-
-WHAT CHANGED. interactive-exhibit: the period bullet gains the
-days-only form, "M days" for "N years (M days)", fetched or typed; the
-orrery decides (orbital_period.days_only, the rule's one home, the full
-period against the Julian year) and the export serves the choice as the
-period's days_only, with years null, so the page decides nothing. On
-Nov 6 that was Mercury, Venus, the Moon, 2025 PN7 and Apophis. The same
-bullet's sentence that the Moon has no period to serve is corrected,
-and so is the words-and-link bullet's, that no box carries the
-description: the Moon's box does. Both were carried on L-513 for this
-version.
-Its oldest of four version entries (1.29) moved to
-documentation/SKILL_HISTORIES.md, by the three-entry rule. Every
-sentence was read from the code with this session's edits, at orrery
-f87d3aee and gallery 0f99f2b5, before it was written.
-
-THE OBLIGATION TRAVELS. This session read each skill as the file in the
-repo, each as the manifest expected: interactive-exhibit 1.31,
-horizons-orbital-mechanics 1.18, provenance-discipline 2.36,
-safe-file-editing 1.14, agentic-pre-test 1.3 and
-ledger-and-session-records 1.22. Tony reinstalls interactive-exhibit
-(Settings > Skills) and pastes this version into the Project's
-instructions on claude.ai; the next session that loads it from the
-account confirms its copy reads 1.32 before work that fires it.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.125 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

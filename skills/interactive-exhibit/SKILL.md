@@ -1,14 +1,28 @@
 ---
 name: interactive-exhibit
 description: How an interactive exhibit (a room in interactive.html such as ?exhibit=earth) is designed, built, verified and carded for the Paloma's Orrery gallery. Covers the exhibit switch and boot path, the assembler driver spec, the JS feature handoff, the shared chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent gate, back link), what is per-body, the served-data provenance contract, what a room opens on (the arrival block) and the shell-key stamp the renderers apply, the drawer order, who may write data/objects_config.json, the Mode 5 phone sequence, and carding an exhibit through Studio. Use when adding or changing an exhibit (Earth, Jupiter, the stars), touching sun* chrome in interactive.html, deciding what an exhibit may render, or editing the served words with store_writer or exhibit_store_editor. Not for propagation math (gallery-assembler), the nightly builder (gallery-cache-builder), or the Studio/converter chain (gallery-pipeline). Do not use for projects other than Paloma's Orrery.
-fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, its group rows, its two Resets, the Reset in every room's top bar, Home's order and its framing; Go To fitting a body's whole orbit and the orbit line in a body's hover; the count line's place; a bare interactive.html link and the Explorer's address; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia); a served number's citation and its source_note; the Typed facts check (smoke_typed_facts.js); a feature drawn as stored dots (the Hills cloud, Earth's radiation belts); the i panel's source list and its links (source_list.js); the order a room's drawer lists its shells in, where each begins (drawer_order.js, the Drawer order check); a spacecraft's path in the Solar System room (its positions file, solid and dashed, its text box); whether the website and the orrery agree on an object; the planets ticked with a spacecraft (companions); the i panel's words one sentence to a bullet; a comet on an open path in the Solar System room; the drawer's groups one JPL class to a row; JPL's terms in the words a visitor reads; a comet's companions; the drawer's Find a body box; the direction arrows on the orbits; the grid chip's AU note and the triad's frame note; the i button's first-visit note and hovers without a pointer line; the one text box for a tap and Go To (text_box.js); a group found by its find words; the i panel's Report a problem link; a drawing row in the Solar System room (the belt's cloud); a stored drawing's cross kept off the axes; the source line's UTC and JPL clock; the ruler and the x marks on the axes; an ended mission (the Historical missions group, its marker on its last day, mission_end; a craft that flew on and its end_note; a path cut before its mission ended and its cutoff_note); an orbital period under a year, printed in days only (days_only); one drawer for every centre (the fixed centre row, the trail line, Centre on, the root's ticks kept, a centre's children by distance among its shells); the Sun's shells in the Solar System room, how that room frames a shell, and what ?exhibit=sun opens on (EXHIBIT_ADDRESSES); the Earth room's Sun line; an object's parent as its fetched centre (check_tree_parents.py, the store writer's parent path)
+fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, its group rows, its two Resets, the Reset in every room's top bar, Home's order and its framing; Go To fitting a body's whole orbit and the orbit line in a body's hover; the count line's place; a bare interactive.html link and the Explorer's address; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia); a served number's citation and its source_note; the Typed facts check (smoke_typed_facts.js); a feature drawn as stored dots (the Hills cloud, Earth's radiation belts); the i panel's source list and its links (source_list.js); the order a room's drawer lists its shells in, where each begins (drawer_order.js, the Drawer order check); a spacecraft's path in the Solar System room (its positions file, solid and dashed, its text box); whether the website and the orrery agree on an object; the planets ticked with a spacecraft (companions); the i panel's words one sentence to a bullet; a comet on an open path in the Solar System room; the drawer's groups one JPL class to a row; JPL's terms in the words a visitor reads; a comet's companions; the drawer's Find a body box; the direction arrows on the orbits; the grid chip's AU note and the triad's frame note; the i button's first-visit note and hovers without a pointer line; the one text box for a tap and Go To (text_box.js); a group found by its find words; the i panel's Report a problem link; a drawing row in the Solar System room (the belt's cloud); a stored drawing's cross kept off the axes; the source line's UTC and JPL clock; the ruler and the x marks on the axes; an ended mission (the Historical missions group, its marker on its last day, mission_end; a craft that flew on and its end_note; a path cut before its mission ended and its cutoff_note); an orbital period under a year, printed in days only (days_only); one drawer for every centre (the fixed centre row, the trail line, Centre on, the root's ticks kept, a centre's children by distance among its shells); the Sun's shells in the Solar System room, how that room frames a shell, and what ?exhibit=sun opens on (EXHIBIT_ADDRESSES); the Earth room's Sun line; an object's parent as its fetched centre (check_tree_parents.py, the store writer's parent path); a room opened past the served window (the freeze, scene_moment.js, the Scene moment check, ?freeze=1)
 ---
 
 # Interactive Exhibit
 
-Read this file in 11 parts: lines 1-116, 117-170, 171-411, 412-551, 552-685, 686-696, 697-936, 937-1148, 1149-1426, 1427-1641, 1642-1849.
+Read this file in 11 parts: lines 1-117, 118-171, 172-412, 413-595, 596-729, 730-740, 741-980, 981-1192, 1193-1470, 1471-1685, 1686-1894.
 
-Skill version: 1.34 | 2026-11-07, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.35 | 2026-11-07, night, with Anthropic's Claude Opus
+5.5, at palomas_orrery @ 4ac3903a and gallery @ 722ad57b. v1.35 (L-515,
+one nested tree, part 4, with L-165, site continuity) adds THE FREEZE
+PAST THE SERVED WINDOW, Tony's ruling of 2026-11-07, 12:53 Chicago:
+"Yes." Past the served window a room draws at the last day its data
+covers and says so plainly; it never goes blank. The page asks
+gallery/scene_moment.js for the moment it hands the driver: the minute
+asked, or, past the window's end, the window's last whole minute; the
+resolver is unchanged and still refuses anything outside the window. A
+frozen room says so under its title and at the top of its i panel, and
+its two sentences that say "today" take the frozen room's words. The
+Mode 5 knob ?freeze=1 shows it early. Checked by the gallery run's Scene
+moment row, which asks the real resolver. Read from the gallery's code
+with this session's edits before it was written.
+Earlier: 1.34 | 2026-11-07, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ cba62f22 and gallery @ 49d1bae1. v1.34 (L-515, one
 nested tree: Tony's phone look at part 2, and step 2a's part 3) makes
 the root hold the Sun. ORDER BY DISTANCE, MOONS INCLUDED (Tony,
@@ -44,26 +58,13 @@ center_slug, held by the gallery run's Tree parents check. Tony's
 rulings 2, 6 and 10 of 2026-11-07; the two placement rules are method,
 written as the brief asked. Read from the gallery's code with this
 session's edits before it was written.
-Earlier: 1.32 | 2026-11-06, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ f87d3aee and gallery @ 0f99f2b5. v1.32 (L-513, the
-Moon's standards) adds Tony's ruling of that evening to the period
-bullet: an orbital period under a year prints in days only, "M days",
-in the orrery and on the website. The orrery decides
-(orbital_period.days_only) and serves the choice as the period's
-days_only; the page decides nothing. And it corrects the same bullet,
-which said the Moon has no period to serve: since L-513 it has, in the
-Earth room's Moon box; and the words-and-link bullet, which said no
-box carries the description: the Moon's does. Read from
-orbital_period.py, export_objects.py,
-solar_system_figures.js and both repositories' checks, with this
-session's edits, before it was written.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there on
 2026-10-05 (L-418), 2026-10-10 (L-429), 2026-10-14 (L-431), 2026-10-16
 (L-421), 2026-10-17 (L-452), 2026-10-20 (L-456), 2026-10-21 (L-460),
 2026-10-22 (L-434, L-443), 2026-10-24 (L-477, L-482), 2026-10-25 (L-443,
 twice), 2026-10-26 (L-443), 2026-10-27 (L-443), 2026-10-28 (L-443),
 2026-10-29 (L-503), 2026-11-02 (L-507), 2026-11-05 (L-507) and
-2026-11-06 (L-513) and 2026-11-07 (L-515, twice).
+2026-11-06 (L-513) and 2026-11-07 (L-515, three times).
 
 ## Contents
 
@@ -548,6 +549,49 @@ and the Solar System room, built the day before, could not be chosen at
 all -- found by Tony at the editor. A row's own words (`label`, `about`,
 `source_note`) are not in the allow list; a change to them comes as a
 patch, and whether the editor should take them is Tony's question.
+
+**THE MOMENT A ROOM OPENS ON, AND THE FREEZE PAST THE SERVED WINDOW**
+(v1.35, L-515 part 4 with L-165; Tony's ruling of 2026-11-07, 12:53
+Chicago: "Yes." Past the served window a room draws at the last day its
+data covers and says so plainly; it never goes blank). A room draws
+today at 00:00 UTC, or the minute it is opened where its `EXHIBITS` row
+sets `epochNow` (the Solar System room and Earth). The page asks
+`gallery/scene_moment.js` for that moment before the driver runs
+(`SceneMoment.askFor`, from the served cache's `served_window`, handed
+over as `EPOCH_ISO`, kept as `sceneMomentAsked`). Once the moment lies
+past the window's end it asks for the window's LAST WHOLE MINUTE, never
+after the end, so the resolver accepts it. The resolver is NOT changed:
+it still refuses anything outside the window (gallery-assembler), so
+nothing is drawn where nothing was checked against JPL. That split is
+method: the page chooses inside the gate, and the gate stays a gate, so
+a date a visitor chooses later (the road's goal) is never moved
+silently.
+- A FROZEN ROOM SAYS SO TWICE: under its title, "<moment>, the last day
+  our data covers" (`SceneMoment.subtitle`); and right under the room's
+  heading in its i panel, a note naming the moment and why
+  (`panelNote`, `reportSceneFrozen`, `#scene-frozen`). Both are words a
+  visitor reads, so they go to Tony's phone look before they are
+  settled (built 2026-11-07, his look still to come).
+- THE TWO SENTENCES THAT SAY "TODAY" -- the spacecraft's dates sentence
+  and a comet's span sentence -- take the frozen room's words there
+  (`todayWords`: "where they were on the day shown", "a year after the
+  day its data was fetched") and are as approved otherwise. A new
+  sentence a room prints that says "today" joins `TODAY_SWAPS`.
+- NOT MOVED: a moment before the window's start (only a clock set wrong
+  reaches it, and the ruling covers the end); and a cache with no
+  window, where the resolver warns, as before.
+- MODE 5 KNOB, read once at load: `?freeze=1` sets the clock a day past
+  the window, so the frozen room can be seen before the day comes.
+- CHECKED by the gallery run's Scene moment row
+  (`documentation/smoke_scene_moment.js`, gates): nine worked cases; the
+  real resolver in Python on the served cache, which must accept the
+  frozen moment and refuse the one asked, so the gate the freeze steps
+  around is shown live (it runs under the run's own Python, `PO_PYTHON`,
+  and fails if none starts); the two sentences; the page's wiring; the
+  real file broken three ways first. And walked headlessly
+  (`walk_scene_moment.js`, each room opened plainly and with
+  `&freeze=1`; the harness's `boot` takes `{query}`, and keeps what the
+  page hands Pyodide on `window.__pyGlobals`).
 
 ### One drawer for every centre [QUALITY]
 v1.33, L-515 (one nested tree), step 2a; Tony's rulings 2 and 10 of
@@ -1845,5 +1889,6 @@ account's copy confirms it reads 1.29 before exhibit work. 1.33 was cut
 on 2026-11-07 in a Claude Code session on the website, through the
 python_work door, from the repo's copy of 1.32; the next session, the
 same evening, loaded the account's copy and it read 1.33. 1.34 was cut
-in that session; a session that loads the account's copy confirms it
-reads 1.34 before exhibit work.
+in that session; the next session, the same night, loaded the account's
+copy and it read 1.34. 1.35 was cut in that session; a session that
+loads the account's copy confirms it reads 1.35 before exhibit work.

@@ -923,6 +923,21 @@ seven. Read from interactive.html, the figures check and the walk with
 this session's edits before it was written.
 (Moved down 2026-11-07, when 1.34 made a fourth entry.)
 
+Earlier: 1.32 | 2026-11-06, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ f87d3aee and gallery @ 0f99f2b5. v1.32 (L-513, the
+Moon's standards) adds Tony's ruling of that evening to the period
+bullet: an orbital period under a year prints in days only, "M days",
+in the orrery and on the website. The orrery decides
+(orbital_period.days_only) and serves the choice as the period's
+days_only; the page decides nothing. And it corrects the same bullet,
+which said the Moon has no period to serve: since L-513 it has, in the
+Earth room's Moon box; and the words-and-link bullet, which said no
+box carries the description: the Moon's does. Read from
+orbital_period.py, export_objects.py,
+solar_system_figures.js and both repositories' checks, with this
+session's edits, before it was written.
+(Moved down 2026-11-07, night, when 1.35 made a fourth entry.)
+
 ## safe-file-editing
 
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons;

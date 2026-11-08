@@ -1260,7 +1260,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-159 | Disclosed-approximation check (Envelope of the Unknowable, scanner-level) | OPEN | 1.2 | 2026-07-27 |
 | ! | L-111 | Gallery builder Pass 5 -- operability + deferred hardening | OPEN | 1.0 | 2026-07-27 |
 |  | L-090 | Star cache inventory + wire format decision | PROPOSED | 0.5 | 2026-07-03 |
-| ! | L-165 | Site continuity if there is no active administrator (succession / legacy planning) | OPEN | -- | 2026-07-27 |
+| ! | L-165 | Site continuity if there is no active administrator (succession / legacy planning) | OPEN | -- | 2026-11-07 |
 
 ### W.Deferred -- Web Publication deferred (captured)
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -2310,13 +2310,101 @@ as an archive of the prioritization thinking -- no cleanup on close.
   stamp and anchor moved; the commit Tony's. This session loaded 1.33
   from the account, which discharges v3.129's obligation; 1.34 is
   confirmed by the next session that loads it.
-**Gap:** Tony's phone look (the three fixes; part 3's rows in the Solar
-System room; what `?exhibit=sun` opens on); part 4 (L-165, the freeze
-past the window) in its own session unless Tony says otherwise; then
-step 2b; L-514 (the Mars room) waits for step 3. Carried for Tony: the
-yellow centre dot in Earth's fixed row.
-**Tony-action (do):** reinstall interactive-exhibit 1.34 (Settings >
-Skills) and paste protocol v3.130 into the Project's instructions.
+- **Tony's phone look at the three fixes and part 3, Nov 7, evening**, in
+  his run record `documentation/WHERE_WE_ARE_11-7-26_1631_run_record.md`:
+  "yes" to every line; the yellow dot on Earth's row, "looks good"; and
+  "excellent work! thank you." Three notes in his words, carried:
+  - The Earth room: "tapping go to still renders the text box of the
+    orbit instead of the moon as we had decided." (The coordinator, the
+    same copy: the Moon's Go To fix rides the Mars website session.)
+  - The shell rows: "we have 6 groups of comets. can we create a larger
+    expandable "Comets" group for all of the sub-groups? the same
+    structure could apply to other sub groups of spacecraft and asteroids
+    where they are listed together." (The coordinator: small; it rides
+    step 2b or Mars.)
+  - The lobby: "actually wih the new setup should we rething the lobby.
+    could you ask Design for ideas? perhaps we should reduce the number of
+    entry points to Solar System, Earth System, and Stars, and Featured.
+    ... from showing the website to people, the most common reaction is
+    not knowing what to do." (The coordinator: a design talk on a fresh
+    day.)
+- **Part 4 built, Nov 7, night, a website Code session** (Claude Opus 5.5,
+  through the python_work door, on orrery 4ac3903a and gallery 722ad57b,
+  Tony's prompt of 19:50 Chicago), the brief's part 4 and L-165's ruling
+  of 12:53.
+  - THE FREEZE. The page asks the new `gallery/scene_moment.js` for the
+    moment it hands the driver (EPOCH_ISO): the minute asked, or, once
+    that lies past the served window's end, the window's last whole
+    minute, never after it. The resolver is unchanged and still refuses
+    outside the window; the page chooses inside the gate (method, written
+    into the skill). On the window served Nov 7 (JD 2461264.49 to
+    2461440.42) the frozen moment is 3 Feb 2027, 22:10 UTC.
+  - SAID PLAINLY, words for Tony's look. Under the title: "3 Feb 2027,
+    22:10 UTC, the last day our data covers". Right under the room's
+    heading in the i panel: "This room shows 3 Feb 2027, 22:10 UTC, the
+    last day its data covers, and not today. The positions are checked
+    against JPL only up to that day, so the room stops there rather than
+    guess beyond it." Two served sentences that say "today" take the
+    frozen room's words there -- the spacecraft's "where they were on the
+    day shown", the comet span's "a year after the day its data was
+    fetched" -- and are unchanged otherwise.
+  - NOT MOVED: a clock before the window's start (only a wrong clock gets
+    there; the ruling covers the end); a cache with no window (the
+    resolver warns, as before). The Explorer has its own date box and no
+    resolver, and is untouched.
+  - ?FREEZE=1, a Mode 5 knob: the clock a day past the window, so the
+    frozen room can be seen on the phone now.
+  - CHECKS, read from their output. The gallery run's new Scene moment
+    row (`documentation/smoke_scene_moment.js`, gates): nine worked
+    cases; the real resolver in Python on the served cache, accepting
+    2027-02-03T22:10:00Z and refusing 2027-02-04T22:10:00Z; the two
+    sentences; eleven wiring points; its self-test breaks the real file
+    three ways. Shown red on a copy of the page with the frozen subtitle
+    taken out ("a frozen room does not say so under its title") and on a
+    copy of the file with the freeze taken out (six failures, the real
+    resolver refusing among them). The gallery run, offline: "39 of 39
+    gating checkers passed". Both rooms' real drivers at the frozen
+    minute: 378 and 5 traces, 0 warnings; a minute past the window,
+    refused. Headless: `walk_scene_moment.js` (new), 13 of 13 in the
+    Solar System room and 10 of 10 in Earth, red on the same two planted
+    copies; walk_solar_system_drawer 216 of 219, its three reds the same
+    three on the anchor's page; walk_drawer_order ok; walk_shell_reset 33
+    of 33 for ?exhibit=sun and Earth; compare_rooms against the anchor's
+    page, the Solar System room, ?exhibit=sun and Earth: "same: true".
+  - The gallery run also rewrote its own generated files: the three pull
+    stamps (orrery 4ac3903a), and MODULE_ATLAS.md and MODULE_INDEX.md,
+    those two with Windows line endings, which Git turns back to LF on
+    commit.
+- **The interactive-exhibit bump, 1.34 -> 1.35, made Nov 7, night**, by
+  the prompt's item 5: the four steps -- the skill's version line and its
+  new paragraph under What a Room Opens On, its 1.32 entry moved to
+  `documentation/SKILL_HISTORIES.md`; `skills_index.py` run (the manifest
+  read 1.34 and was corrected; `--check` OK); the protocol's v3.131
+  entry, its v3.128 moved to `documentation/PROJECT_INSTRUCTIONS_HISTORY.md`
+  PART 1, the header stamp and anchor moved; the commit Tony's. This
+  session loaded 1.34 from the account, which discharges v3.130's
+  obligation; 1.35 is confirmed by the next session that loads it.
+- **The orrery maintenance run, Nov 7, night, after the bump**, read from
+  its output: red on one line, Dashboard parity, "NO BUTTON gallery step
+  "Scene moment" (documentation/smoke_scene_moment.js) has no button named
+  so in "Gallery -- checks and data"" (10 of 10 planted faults caught).
+  The gallery's launcher already runs the row ("Scene moment -- PASSED
+  (exit 0)"); the button is one entry in `palomas_orrery_dashboard.py`,
+  an orrery file, so Tony is asked, as for Tree parents.
+- **The dashboard's button, Nov 7, night, on Tony's "Yes, add it"**
+  (chat): Scene Moment in "Gallery -- checks and data", beside Label
+  Words, through `documentation/run_offline_check.py`, and its card line
+  (shortened once, when Dashboard parity named it "15 words, the limit is
+  12"). Dashboard parity then "PASS -- 10 of 10 planted faults caught; 99
+  steps matched to their buttons"; the orrery maintenance run "35 of 35
+  gating checkers passed".
+**Gap:** Tony's phone look at part 4 (the frozen words, with
+?freeze=1); then step 2b; L-514 (the Mars room) waits for step 3. Carried from his
+look at part 3: the Moon's Go To box (the Mars website session), one
+Comets group over the six (with step 2b or Mars), the lobby (a design
+talk).
+**Tony-action (do):** reinstall interactive-exhibit 1.35 (Settings >
+Skills) and paste protocol v3.131 into the Project's instructions.
 - **Ref:** L-514 (the Mars room); L-443 (the drawer's groups); L-392 (the
   rooms section); L-291 (the Earth room); the protocol's The Orrery and
   the Assembler.
@@ -36179,7 +36267,7 @@ effort ticks up slightly for the naming generalization, still small per
 object once the pattern is set) -- yours to finalize.
 
 #### [L-165] Site continuity if there is no active administrator (succession / legacy planning)
-<!-- L:165 status:OPEN upd:2026-07-27 section:W.Active flag: rice:?/?/?/? -->
+<!-- L:165 status:OPEN upd:2026-11-07 section:W.Active flag: rice:?/?/?/? -->
 - Origin: Tony raised the real scenario -- not vacation, not a dead
   laptop for a week, but permanently indisposed -- and asked what should
   happen to the site with no administrator, ever, again. Alerting an
@@ -36224,6 +36312,13 @@ no tokens.
   served window a room draws at the last day its data covers and says so
   plainly; it never goes blank. A website build, to be sequenced (the
   road's housekeeping, or with step 2 of L-515 (one nested tree)).
+- **Built, Nov 7, night, the website Code session**, as L-515's part 4:
+  past the served window a room asks for the window's last whole minute
+  (`gallery/scene_moment.js`) and says so under its title and in its i
+  panel, while the resolver still refuses outside the window; held by the
+  gallery run's Scene moment check. So the good news above now holds for
+  the rooms too: an abandoned site opens on its last checked day, not on
+  "Failed to load". Tony's look at the words is on L-515.
 - **The domain, found 2026-11-07** (Tony: "I had forgotten completely
   about the domain name fee. Do you have a record of how we set that
   up?"). The setup is the claude.ai chat of 2026-02-13, "Choosing a

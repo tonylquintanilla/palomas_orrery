@@ -4342,6 +4342,53 @@ resident.
 (Moved down from the resident protocol on 2026-11-07 when
 v3.130 made a fourth entry.)
 
+v3.128 (November 6, 2026): No rule changed in this document. ONE
+skill bump: interactive-exhibit 1.31 -> 1.32 (L-513, the Moon's
+standards). AN ORBITAL PERIOD UNDER A YEAR PRINTS IN DAYS ONLY.
+
+WHAT PROMPTED IT. The Claude Code session of Nov 6 (Claude Opus 5.5),
+through the python_work door, built on orrery 1422a96 and gallery
+6c93d0a, from documentation/COORD_stage14_moon_standards_brief_20261106.md,
+brought the Moon to the other bodies' standards; its period printed
+"0.08 years (27 days)". At his look Tony ruled, in his run record
+documentation/WHERE_WE_ARE_11-6-26_1625_run_record.md: "My ruling on
+periods under a year: print them in days only, with no years figure,
+for every moon, in the orrery and on the website. The days keep the
+digits the rule earns, so the Moon reads '27 days'."
+
+WHAT CHANGED. interactive-exhibit: the period bullet gains the
+days-only form, "M days" for "N years (M days)", fetched or typed; the
+orrery decides (orbital_period.days_only, the rule's one home, the full
+period against the Julian year) and the export serves the choice as the
+period's days_only, with years null, so the page decides nothing. On
+Nov 6 that was Mercury, Venus, the Moon, 2025 PN7 and Apophis. The same
+bullet's sentence that the Moon has no period to serve is corrected,
+and so is the words-and-link bullet's, that no box carries the
+description: the Moon's box does. Both were carried on L-513 for this
+version.
+Its oldest of four version entries (1.29) moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule. Every
+sentence was read from the code with this session's edits, at orrery
+f87d3aee and gallery 0f99f2b5, before it was written.
+
+THE OBLIGATION TRAVELS. This session read each skill as the file in the
+repo, each as the manifest expected: interactive-exhibit 1.31,
+horizons-orbital-mechanics 1.18, provenance-discipline 2.36,
+safe-file-editing 1.14, agentic-pre-test 1.3 and
+ledger-and-session-records 1.22. Tony reinstalls interactive-exhibit
+(Settings > Skills) and pastes this version into the Project's
+instructions on claude.ai; the next session that loads it from the
+account confirms its copy reads 1.32 before work that fires it.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.125 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-11-07 when
+v3.131 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

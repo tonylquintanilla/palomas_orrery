@@ -1,22 +1,21 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 7, 2026, evening: the website Code session (Opus), your three phone-look fixes and L-515 part 3, interactive-exhibit 1.34.
-- Written at orrery cba62f2 and gallery 49d1bae, plus this session's edits.
+Last updated: November 7, 2026, night: the website Code session (Opus), L-515 part 4, the freeze past the served window; interactive-exhibit 1.35.
+- Written at orrery 4ac3903 and gallery 722ad57, plus this session's edits.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Your three fixes: Earth's Sun line follows the ticks; drawers list
->   rows by distance, moons included; no "Not built yet".
-> - Part 3: the Sun's shells are rows in the Solar System room; the Sun
->   address opens that room on them, and the Sun room is gone.
+> - Part 4: past the dates its data covers, a room now opens on the
+>   last day covered and says so, instead of failing to load.
+> - Your phone look at part 3 is recorded, with your three notes.
 >
-> **Do next:** *your phone look at the fixes and part 3; part 4 in its own session.*
+> **Do next:** *your phone look at the freeze (add &freeze=1 to a room's address); then step 2b.*
 >
 > **Needs you now:**
 > - *(do) Commit and push both, website and orrery.*
-> - *(do) Reinstall interactive-exhibit 1.34; paste protocol v3.130.*
+> - *(do) Reinstall interactive-exhibit 1.35; paste protocol v3.131.*
 > - *(do) Each morning, Pull origin on both, orrery then website, first.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
 
@@ -48,7 +47,7 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
 ## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings; a line leaves once it is habit, or a skill carries it.
-- Drawers list rows by distance after the centre, moons included (Nov 7; L-515 (one nested tree)).
+- Past the dates its data covers, a room draws the last day covered and says so; never blank (Nov 7, 12:53; L-165 (site continuity)).
 - What JPL measures a thing around is where it sits in the website's
   tree (Nov 7, 11:26; L-515 (one nested tree), ruling 6).
 - The Moon shows JPL's period for today, like every other body, not the
@@ -56,8 +55,6 @@ Standing rulings; a line leaves once it is habit, or a skill carries it.
 - Pluto: the Solar System row stays the barycentre named Pluto; the Pluto
   room draws Pluto, Charon and the other moons around the barycentre;
   the orrery's Pluto-centred view goes (Nov 6; L-150 (trusting a near-equal pair)).
-- An ended mission's line ends at its marker on its last day, desktop as website (Nov 6).
-- A craft that flew on: path stops on its mission's last day; words say still flying, untracked (Nov 5).
 - From the talk (Nov 3): the words have one home, the orrery's export;
   a difference is chosen (a reason, no end) or open (an end and an
   item); the check covers only what both draw; a spacecraft's span is
@@ -68,9 +65,10 @@ Standing rulings; a line leaves once it is habit, or a skill carries it.
 - Encounters are both: shown in the Solar System room, and in a room
   centred on the body met (Nov 1).
 
-## Deferred
+## Deferred  **>> UPDATED THIS SESSION**
 
 Waiting behind other work; a line leaves when picked up.
+- One Comets group over the six (and spacecraft, asteroids): step 2b or Mars; the Moon's Go To box: Mars (Nov 7; L-515 (one nested tree)).
 - Charon's period is asked around Pluto's centre, not the barycentre;
   fix it before Pluto's room (L-150 (trusting a near-equal pair), Nov 6).
 - When the road turned to the symbols (Nov 5): L-512 (fallbacks when
@@ -96,16 +94,18 @@ Waiting behind other work; a line leaves when picked up.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261107T225251Z, nightly, ok, no retry (gallery swap log, read Nov 7, evening).
-- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at orrery cba62f2).
+- Last cache build: 20261107T225251Z, nightly, ok, no retry (gallery swap log, read Nov 7, night).
+- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at orrery 4ac3903).
 - This page's date and the ledger's newest stamp: both Nov 7. Agree.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
 Decisions, one at a time:
-- None open: L-515 (one nested tree) waits for your phone look; Mars waits for step 3.
+- None open: L-515 (one nested tree) waits for your phone look at the freeze; Mars waits for step 3.
 
 At the next design talk:
+- The lobby, on a fresh day (Nov 7, your words): "should we rething the
+  lobby ... the most common reaction is not knowing what to do."
 - How obsolete code is treated, and when it goes (L-509 (obsolete
   code)); two cases now, the orrery's unused date function and its
   Pluto-centred view of the moons.
@@ -123,8 +123,8 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- This session: L-515 (one nested tree); its brief
-  `COORD_L515_steps1_2a_brief_20261107.md` (parts 1 to 3 done).
+- This session: L-515 (one nested tree) and L-165 (site continuity); the brief
+  `COORD_L515_steps1_2a_brief_20261107.md` (parts 1 to 4 done).
 - The talk's rulings: `DESIGN_L484_consistency_rulings_20261103.md`.
 - The door: `documentation/python_work_door/`, and L-499 (kinds of session).
 

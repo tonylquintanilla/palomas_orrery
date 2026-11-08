@@ -817,3 +817,40 @@ Here's the prompt:
 > **The job:** when the moment a room opens on lies past the served window, the room draws at the last day its data covers and says so plainly, instead of the resolver refusing. Show the new check failing on a planted fault.
 >
 > **Close** as the brief says. My phone look list should say how I can see the freeze on my phone, if I can. Commit and push are mine. Report the context usage reading if /cost isn't available.
+
+=======================================================
+
+**Session: OPEN: 11-7-26 2031: Opus: Code: L-515 room drawing past served window**
+
+There's a second place that names each button (around line 2245). Reading it:
+
+Adding the button beside Label Words, its one-line description, and the file's stamp, in one script:
+
+Button added and the file compiles. Rerunning the orrery's maintenance run:
+
+The button is found now; the parity check only objects that its one-line description runs 15 words, over its 12-word limit. Shortening it:
+
+Parity passes on its own. Now the full orrery run, to read the whole result rather than assume it:
+
+The orrery's run is green: "35 of 35 gating checkers passed". Updating the ledger and Where We Are to match.
+
+I added the button, and the orrery's run is now green: "35 of 35 gating checkers passed".
+
+**The button.** It's called Scene Moment and sits beside Label Words under "Gallery -- checks and data" on the dashboard. Its line reads: "Checks a room past its data's last day opens there, saying so." My first version of that line ran 15 words, and the dashboard's own check caught it (the limit is 12), so I shortened it. The check then passed, and the button runs the new check from the dashboard. The website's run was already green (39 of 39), and nothing in it changed.
+
+**Records.** L-515 (one nested tree) records the button and both run results. Where We Are no longer lists a decision for you; it's back to waiting on your phone look at the freeze.
+
+**Files changed this turn** (on top of the earlier list)
+- ok palomas_orrery_dashboard.py (4 edits)
+- ok LEDGER_CONSOLIDATED.md (1 edit, plus its index rewritten by ledger_index.py)
+- ok documentation/WHERE_WE_ARE.md (1 edit)
+- The orrery's run also rewrote its generated reports again, the same ones as before.
+
+**Your run order**
+1. In GitHub Desktop, commit and push the website, -- 820f6d438d457c260435cd4f8f857a47408a9da5
+   1. then the orrery. -- 
+2. Do the phone look: add `&freeze=1` to a room's address, using the list in my earlier report.
+
+**Tony-actions**
+- (do) Commit and push both repositories.
+- (do) Reinstall interactive-exhibit 1.35 (Settings > Skills), and paste protocol v3.131 into the Project's instructions.

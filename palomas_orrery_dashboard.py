@@ -43,6 +43,9 @@ run's card names it.)
 Module updated: November 7, 2026 with Anthropic's Claude Opus 5.5
 (L-515 step 1: the website's Tree Parents button and line, beside Served
 List, for the gallery run's new "Tree parents" check.)
+Module updated: November 7, 2026, night, with Anthropic's Claude Opus 5.5
+(L-515 part 4: the website's Scene Moment button and line, beside Label
+Words, for the gallery run's new "Scene moment" check.)
 July 2026: added Linux Button-4/5 wheel scrolling to match columns 1/2's
 cross-platform coverage (CTkScrollableFrame's built-in handling only
 covers Windows/Mac <MouseWheel>). Audited LAUNCH_GROUPS against both
@@ -1126,6 +1129,22 @@ LAUNCH_GROUPS = {
         GALLERY_REPO_DIR,
         True,
         ["Label words"],
+        True),
+        ("Scene Moment",
+        os.path.join("documentation", "run_offline_check.py"),
+        "Past the dates the website's data covers, a room opens on the "
+        "last minute covered and says so, instead of failing to load "
+        "(L-515 part 4, L-165). Works nine cases by hand, hands the "
+        "frozen moment and the moment asked to the real resolver on the "
+        "served cache (the first must be accepted, the second refused), "
+        "and checks the page says so under the title and in the i panel. "
+        "It breaks its own file three ways first, to show it can fail. "
+        "GATES the gallery runner. The check is Node, so this button runs "
+        "it through documentation/run_offline_check.py. Runs from the "
+        "gallery repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        ["Scene moment"],
         True),
         ("Page Framing",
         os.path.join("documentation", "run_offline_check.py"),
@@ -2244,6 +2263,9 @@ CARD_LINES = {
     ("Gallery -- checks and data",
      "Label Words"):
         "Checks naming a drawer row opens that shell's own words.",
+    ("Gallery -- checks and data",
+     "Scene Moment"):
+        "Checks a room past its data's last day opens there, saying so.",
     ("Gallery -- checks and data",
      "Page Framing"):
         "Checks the page's framing helpers give the right axis ranges.",
