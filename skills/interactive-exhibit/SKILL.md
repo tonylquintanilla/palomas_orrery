@@ -1,14 +1,31 @@
 ---
 name: interactive-exhibit
 description: How an interactive exhibit (a room in interactive.html such as ?exhibit=earth) is designed, built, verified and carded for the Paloma's Orrery gallery. Covers the exhibit switch and boot path, the assembler driver spec, the JS feature handoff, the shared chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent gate, back link), what is per-body, the served-data provenance contract, what a room opens on (the arrival block) and the shell-key stamp the renderers apply, the drawer order, who may write data/objects_config.json, the Mode 5 phone sequence, and carding an exhibit through Studio. Use when adding or changing an exhibit (Earth, Jupiter, the stars), touching sun* chrome in interactive.html, deciding what an exhibit may render, or editing the served words with store_writer or exhibit_store_editor. Not for propagation math (gallery-assembler), the nightly builder (gallery-cache-builder), or the Studio/converter chain (gallery-pipeline). Do not use for projects other than Paloma's Orrery.
-fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, its group rows, its two Resets, the Reset in every room's top bar, Home's order and its framing; Go To fitting a body's whole orbit and the orbit line in a body's hover; the count line's place; a bare interactive.html link and the Explorer's address; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia); a served number's citation and its source_note; the Typed facts check (smoke_typed_facts.js); a feature drawn as stored dots (the Hills cloud, Earth's radiation belts); the i panel's source list and its links (source_list.js); the order a room's drawer lists its shells in, where each begins (drawer_order.js, the Drawer order check); a spacecraft's path in the Solar System room (its positions file, solid and dashed, its text box); whether the website and the orrery agree on an object; the planets ticked with a spacecraft (companions); the i panel's words one sentence to a bullet; a comet on an open path in the Solar System room; the drawer's groups one JPL class to a row; JPL's terms in the words a visitor reads; a comet's companions; the drawer's Find a body box; the direction arrows on the orbits; the grid chip's AU note and the triad's frame note; the i button's first-visit note and hovers without a pointer line; the one text box for a tap and Go To (text_box.js); a group found by its find words; the i panel's Report a problem link; a drawing row in the Solar System room (the belt's cloud); a stored drawing's cross kept off the axes; the source line's UTC and JPL clock; the ruler and the x marks on the axes; an ended mission (the Historical missions group, its marker on its last day, mission_end; a craft that flew on and its end_note; a path cut before its mission ended and its cutoff_note); an orbital period under a year, printed in days only (days_only); one drawer for every centre (the fixed centre row, the trail line, Centre on, the root's ticks kept, a centre's children by distance among its shells); the Sun's shells in the Solar System room, how that room frames a shell, and what ?exhibit=sun opens on (EXHIBIT_ADDRESSES); the Earth room's Sun line; an object's parent as its fetched centre (check_tree_parents.py, the store writer's parent path); a room opened past the served window (the freeze, scene_moment.js, the Scene moment check, ?freeze=1); parent groups in the drawer (Comets over the comet groups, a sub-group's in); the text box opaque and the HUD hidden under it
+fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, its group rows, its two Resets, the Reset in every room's top bar, Home's order and its framing; Go To fitting a body's whole orbit and the orbit line in a body's hover; the count line's place; a bare interactive.html link and the Explorer's address; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia); a served number's citation and its source_note; the Typed facts check (smoke_typed_facts.js); a feature drawn as stored dots (the Hills cloud, Earth's radiation belts); the i panel's source list and its links (source_list.js); the order a room's drawer lists its shells in, where each begins (drawer_order.js, the Drawer order check); a spacecraft's path in the Solar System room (its positions file, solid and dashed, its text box); whether the website and the orrery agree on an object; the planets ticked with a spacecraft (companions); the i panel's words one sentence to a bullet; a comet on an open path in the Solar System room; the drawer's groups one JPL class to a row; JPL's terms in the words a visitor reads; a comet's companions; the drawer's Find a body box; the direction arrows on the orbits; the grid chip's AU note and the triad's frame note; the i button's first-visit note and hovers without a pointer line; the one text box for a tap and Go To (text_box.js); a group found by its find words; the i panel's Report a problem link; a drawing row in the Solar System room (the belt's cloud); a stored drawing's cross kept off the axes; the source line's UTC and JPL clock; the ruler and the x marks on the axes; an ended mission (the Historical missions group, its marker on its last day, mission_end; a craft that flew on and its end_note; a path cut before its mission ended and its cutoff_note); an orbital period under a year, printed in days only (days_only); one drawer for every centre (the fixed centre row, the trail line, Centre on, the root's ticks kept, a centre's children by distance among its shells); the Sun's shells in the Solar System room, how that room frames a shell, and what ?exhibit=sun opens on (EXHIBIT_ADDRESSES); the Earth room's Sun line; an object's parent as its fetched centre (check_tree_parents.py, the store writer's parent path); a room opened past the served window (the freeze, scene_moment.js, the Scene moment check, ?freeze=1); parent groups in the drawer (Comets over the comet groups, a sub-group's in); the text box opaque and the HUD hidden under it; the saved pictures beside their rows in the Solar System room's drawer (picture_folds.js, drawer_row in gallery_metadata.json, the way back from a card the room opened)
 ---
 
 # Interactive Exhibit
 
-Read this file in 11 parts: lines 1-123, 124-177, 178-418, 419-605, 606-739, 740-750, 751-989, 990-1219, 1220-1469, 1470-1740, 1741-1949.
+Read this file in 12 parts: lines 1-125, 126-179, 180-420, 421-607, 608-741, 742-752, 753-991, 992-1205, 1206-1467, 1468-1710, 1711-1902, 1903-2021.
 
-Skill version: 1.35 | 2026-11-07, night, with Anthropic's Claude Opus
+Skill version: 1.36 | 2026-11-08, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ c275fcb7 and gallery @ e9d0c5e2. v1.36 (L-517, the lobby
+for a first-time phone visitor, part 1) adds SAVED PICTURES BESIDE THEIR
+ROWS, Tony's rulings 4 and 5 of 2026-11-08: the Solar System pictures go
+into the live tree, "temporary drawers ... groups with the items upon
+opening them", "beside its row". Every Solar System card that is not a
+live room's sits in a fold under its body's row in the Solar System
+room's drawer, placed by one field on its metadata entry, drawer_row
+(gallery/picture_folds.js); a picture mark on the fold, an arrow where a
+tick box would be, one line saying each opens on its own page, closed
+when the room opens; a phone opens a card's portrait twin and a desktop
+its landscape one, by the gallery's own rule; Find finds a picture's
+words; Back returns to the room as it was left, and index.html shows the
+way back on a card the room opened. Checked by the gallery run's Picture
+folds row and the walk's section 29. Each fold leaves its row when the
+encounter that replaces it is built. Read from the gallery's code with
+this session's edits before it was written.
+Earlier: 1.35 | 2026-11-07, night, with Anthropic's Claude Opus
 5.5, at palomas_orrery @ 4ac3903a and gallery @ 722ad57b. v1.35 (L-515,
 one nested tree, part 4, with L-165, site continuity) adds THE FREEZE
 PAST THE SERVED WINDOW, Tony's ruling of 2026-11-07, 12:53 Chicago:
@@ -48,29 +65,14 @@ that room on the Sun's own opening, at the Sun room's opening frame
 (EXHIBIT_ADDRESSES), and the Sun room's row in EXHIBITS is gone; the
 root's Reset closes the text box. Read from the gallery's code with this
 session's edits before it was written.
-Earlier: 1.33 | 2026-11-07, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 9117505a and gallery @ 9c6093af. v1.33 (L-515, one
-nested tree, step 1 and step 2a's part 2) records the website's rooms
-becoming one tree. ONE DRAWER FOR EVERY CENTRE, a new rule: one builder
-and one plan (rowPlan) for the root and the Sun and Earth; a fixed row
-for the centre in every centre, Earth's new; the trail line "Solar
-system > Earth"; "Centre on <name>" where "Enter the <name> room" stood
-and "Not built yet" on a centre in the tree with none built, both read
-from the config; the root's ticks kept on leaving by Centre on and put
-back once; a centre's children listed after its shells; which Reset a
-centre gets. And under Only two tools write the served config, the
-store writer's `parent` path, which accepts only the object's own
-center_slug, held by the gallery run's Tree parents check. Tony's
-rulings 2, 6 and 10 of 2026-11-07; the two placement rules are method,
-written as the brief asked. Read from the gallery's code with this
-session's edits before it was written.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there on
 2026-10-05 (L-418), 2026-10-10 (L-429), 2026-10-14 (L-431), 2026-10-16
 (L-421), 2026-10-17 (L-452), 2026-10-20 (L-456), 2026-10-21 (L-460),
 2026-10-22 (L-434, L-443), 2026-10-24 (L-477, L-482), 2026-10-25 (L-443,
 twice), 2026-10-26 (L-443), 2026-10-27 (L-443), 2026-10-28 (L-443),
 2026-10-29 (L-503), 2026-11-02 (L-507), 2026-11-05 (L-507) and
-2026-11-06 (L-513) and 2026-11-07 (L-515, three times).
+2026-11-06 (L-513) and 2026-11-07 (L-515, three times) and 2026-11-08
+(L-517).
 
 ## Contents
 
@@ -1202,6 +1204,73 @@ Plotly.
   worked cases, and the real file broken three ways first), which
   gates; the orrery's dashboard has its button.
 
+- **Saved pictures beside their rows** (v1.36, L-517 part 1; Tony's
+  rulings 4 and 5 of 2026-11-08: the Solar System pictures go into the
+  live tree, "temporary drawers to the existing rooms to hold these
+  pictures ... groups with the items upon opening them", and "beside its
+  row. It's temporary but not quick."). Every Solar System card that is
+  not a live room's -- the Solar System Explorer included -- sits in a
+  fold under the row of the body it shows.
+  WHERE is ONE field on the card's entry in `gallery/gallery_metadata.json`,
+  `drawer_row`: a body row's slug, or a group row's key. It is typed
+  once and the drawer reads it; twins carry the same. The editor and the
+  converter keep a field they do not know, so it survives their saves.
+  Which row is METHOD: a comet's pictures beside that comet; a body with
+  no fold of its own (Jupiter, Pluto, Mercury) gets one under its row, and
+  the card's own room names the body where that room is a body (New
+  Horizons' Jupiter flyby under Jupiter); Artemis II and Apophis under
+  Earth; a mission's pictures beside its spacecraft (Psyche's four, New
+  Horizons' whole mission); a picture whose body has no row beside the
+  nearest parent group's row (Near Earth Asteroids beside Apollo and Amor
+  asteroids); the Explorer, which belongs to no single body, beside the
+  Sun's row. Tony judges each place at his phone look.
+  THEY LOOK UNLIKE THE TICKED ROWS, since they open a page and draw
+  nothing: the fold's head has a picture mark where a body row has its
+  colour dot, its count on the right, and folds as a group does; it is
+  closed when the room opens. Open, one line, "Saved pictures: each opens
+  on its own page.", then each picture with an arrow where a tick box
+  would be, and no Go To. Never ticked or counted with the bodies; Reset
+  folds every fold shut. Indented one step under its row (`pf-1` to
+  `pf-3`). `ssPictureFold`, `ssPicsRender`, `ssPicFold` in the page.
+  THE RIGHT SHAPE is decided by `gallery/picture_folds.js`
+  (`PictureFolds`), by the gallery's own rule written out again
+  (index.html's phone filter and `inCurrentMode`): a phone (`isPhone`,
+  index.html's own test) is offered a card's portrait twin and a desktop
+  its landscape one, a card with no twin both, a "none" card never a
+  phone. A place that names no row is reported, in the console and by the
+  check, never dropped quietly.
+  A PICTURE OPENS index.html#<id>, or the card's live address (the
+  Explorer). BACK RETURNS TO THE ROOM: before it goes, the room keeps
+  `po_room_return` ({exhibit, fold, card, url}) and its ticks (the root's
+  tick memory) in sessionStorage, and its next opening in the tab takes
+  both, once (`ssPicReturn`): the drawer open at that fold, its groups
+  open, the ticks as left. A page the browser kept whole and shows again
+  drops what was kept (pageshow). index.html, when the page behind it is
+  interactive.html and the card is the one named, shows one way back,
+  "Back to the live solar system", in place of the card's room chain, and
+  its turn card's back button goes there too; it steps back through
+  history. The other direction of `po_gallery_from`. The Explorer's own
+  page keeps its chain; the browser's Back returns to the room.
+  FIND finds a picture's title (`searchHits`' fourth argument, from
+  `PictureFolds.searchWords`): a row shown in a search opens its fold with
+  its matching pictures, "k of n". Only when no body and no group matches
+  by its own words do a picture's words alone bring its row into view,
+  the groups above it open, counted "N saved pictures match" ("Artemis"
+  opens Earth's fold); so "comet" still lists Comets alone, closed (L-496)
+  -- method. Choosing a fold from a search clears it and leaves the fold
+  open.
+  EACH FOLD LEAVES ITS ROW WHEN THE ENCOUNTER THAT REPLACES IT IS BUILT:
+  the card's `drawer_row` is taken off (or the card retired), and the
+  fold goes by itself.
+  Checked by the gallery run's Picture folds row
+  (`documentation/smoke_picture_folds.js`, gates: worked cases, every
+  Solar System card placed on a phone and a desktop and printed by row,
+  twins together, both pages' wiring; five breaks of the two files), and
+  walked (`walk_solar_system_drawer.js` section 29; given a planted copy
+  of the page as its third argument it walks that section alone and must
+  fail; the harness's `boot` takes `{page}` and `{width}`). The live check
+  fetches `gallery/picture_folds.js` and `gallery/gallery_metadata.json`.
+
 **FRAMING, Tony's ruling of 2026-10-02** ("B but with a buffer of
 20%"): the room frames on how far each body is from the Sun NOW, not
 on its whole orbit, and the farthest body ticked sets the frame. Two
@@ -1945,5 +2014,8 @@ on 2026-11-07 in a Claude Code session on the website, through the
 python_work door, from the repo's copy of 1.32; the next session, the
 same evening, loaded the account's copy and it read 1.33. 1.34 was cut
 in that session; the next session, the same night, loaded the account's
-copy and it read 1.34. 1.35 was cut in that session; a session that
-loads the account's copy confirms it reads 1.35 before exhibit work.
+copy and it read 1.34. 1.35 was cut in that session; the next session,
+on 2026-11-08, on the website through the python_work door, loaded the
+account's copy and it read 1.35. 1.36 was cut in that session; a
+session that loads the account's copy confirms it reads 1.36 before
+exhibit work.

@@ -4389,6 +4389,55 @@ resident.
 (Moved down from the resident protocol on 2026-11-07 when
 v3.131 made a fourth entry.)
 
+v3.129 (November 7, 2026): No rule changed in this document. ONE
+skill bump: interactive-exhibit 1.32 -> 1.33 (L-515, one nested tree,
+step 1 and step 2a's part 2). THE WEBSITE'S ROOMS BECOME ONE TREE: ONE
+DRAWER FOR EVERY CENTRE, AND EACH OBJECT UNDER THE CENTRE JPL SERVES IT
+AROUND.
+
+WHAT PROMPTED IT. The Claude Code session of Nov 7 (Claude Opus 5.5),
+through the python_work door, built on orrery 9117505a and gallery
+9c6093af, from documentation/COORD_L515_steps1_2a_brief_20261107.md, on
+Tony's twelve rulings of Nov 7 on L-515. Its question at the start,
+whether a gallery session may make this bump in the orrery: "Yes, bump
+it here". His instruction after part 2: "Then stop here: make the
+interactive-exhibit skill bump now, with parts 1 and 2's rules. Part 3
+goes to a fresh session after I've looked at part 2 on my phone."
+
+WHAT CHANGED. interactive-exhibit: a new rule, One drawer for every
+centre -- one builder and one plan for the root and the Sun and Earth;
+a fixed row for the centre in every centre, Earth's new; the trail line
+"Solar system > Earth"; "Centre on <name>" where "Enter the <name> room"
+stood, and "Not built yet" on a centre in the tree with none built,
+both read from the config; the root's ticks kept on leaving by Centre
+on and put back once (rulings 2 and 10); and two rules of method the
+brief asked the session to write, a centre's children listed after its
+shells and which Reset a centre gets. Under Only two tools write the
+served config, the store writer's parent path, which accepts only the
+object's own center_slug (ruling 6), held by the gallery run's new Tree
+parents check. Its oldest of four version entries (1.30) moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule. Every
+sentence was read from the gallery's code with this session's edits
+before it was written.
+
+THE OBLIGATION TRAVELS. This session read each skill as the file in the
+repo, each as the manifest expected: interactive-exhibit 1.32 in full,
+gallery-cache-builder 1.18 in the parts its brief named,
+safe-file-editing 1.14 and ledger-and-session-records 1.22. Tony
+reinstalls interactive-exhibit (Settings > Skills) and pastes this
+version into the Project's instructions on claude.ai; the next session
+that loads it from the account confirms its copy reads 1.33 before
+work that fires it.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.126 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-11-08 when
+v3.132 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

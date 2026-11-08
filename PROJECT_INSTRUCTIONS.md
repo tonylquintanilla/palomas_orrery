@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.131 | November 7, 2026
+Tony Quintanilla, PE | Claude | v3.132 | November 8, 2026
 
-Cut from 4ac3903a at https://github.com/tonylquintanilla/palomas_orrery
+Cut from c275fcb7 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -556,7 +556,7 @@ gallery-cache-builder        1.18 Nightly builder, atomic swap and its
                                   (HORIZONS_CACHE), a drawing named on a room's
                                   row, an ended mission's last day
                                   (fetch_path_last_day)
-interactive-exhibit          1.35 adding or changing an exhibit in
+interactive-exhibit          1.36 adding or changing an exhibit in
                                   interactive.html; any edit to the Sun's
                                   chrome (drawer, nav cluster, frame zoom,
                                   i-panel, HUD, consent, back link); "Earth
@@ -625,7 +625,11 @@ interactive-exhibit          1.35 adding or changing an exhibit in
                                   the Scene moment check, ?freeze=1); parent
                                   groups in the drawer (Comets over the comet
                                   groups, a sub-group's in); the text box
-                                  opaque and the HUD hidden under it
+                                  opaque and the HUD hidden under it; the saved
+                                  pictures beside their rows in the Solar
+                                  System room's drawer (picture_folds.js,
+                                  drawer_row in gallery_metadata.json, the way
+                                  back from a card the room opened)
 <!-- SKILL-MANIFEST:END -->
 
 Session-Start Repo Pull and the SHA Round Trip [CRITICAL]
@@ -1319,6 +1323,53 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.132 (November 8, 2026): No rule changed in this document. ONE
+skill bump: interactive-exhibit 1.35 -> 1.36 (L-517, the lobby for a
+first-time phone visitor, part 1). THE SOLAR SYSTEM PICTURES SIT BESIDE
+THEIR ROWS IN THE SOLAR SYSTEM ROOM'S DRAWER.
+
+WHAT PROMPTED IT. The Claude Code session of Nov 8 (Claude Opus 5.5),
+through the python_work door, built on orrery c275fcb7 and gallery
+e9d0c5e2, from Tony's prompt of that afternoon and part 1 of
+documentation/COORD_L517_lobby_brief_20261108.md, on his rulings 4 and
+5 of Nov 8 on L-517: the pictures go into the live tree, "temporary
+drawers ... groups with the items upon opening them", "beside its row.
+It's temporary but not quick." His order of 11:03: "I would say the
+picture first then the lobby."
+
+WHAT CHANGED. interactive-exhibit: a new bullet under The Solar System
+room's drawer, Saved pictures beside their rows: every Solar System
+card that is not a live room's sits in a fold under its body's row,
+placed by one field on its gallery metadata entry, drawer_row (which
+row is method, written out); a picture mark on the fold, an arrow where
+a tick box would be, one line saying each opens on its own page, closed
+when the room opens; a phone offered a card's portrait twin and a
+desktop its landscape one, by the gallery's own rule
+(gallery/picture_folds.js); Find finding a picture's words, adding rows
+only when no body or group matches by its own; Back returning to the
+room as it was left, and index.html's way back on a card the room
+opened; each fold leaving its row when the encounter that replaces it
+is built. Checked by the gallery run's new Picture folds row and the
+walk's section 29. Its oldest of four version entries (1.33) moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule. Every
+sentence was read from the gallery's code with this session's edits
+before it was written.
+
+THE OBLIGATION TRAVELS. This session loaded interactive-exhibit from
+the account and it read 1.35, as the manifest expected, discharging
+v3.131's obligation; it read gallery-pipeline 1.2 in the parts on
+gallery_metadata.json, safe-file-editing 1.14 and
+ledger-and-session-records 1.22. Tony reinstalls interactive-exhibit
+(Settings > Skills) and pastes this version into the Project's
+instructions on claude.ai; the next session that loads it from the
+account confirms its copy reads 1.36 before work that fires it.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.129 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.131 (November 7, 2026, night): No rule changed in this document.
 ONE skill bump: interactive-exhibit 1.34 -> 1.35 (L-515, one nested
 tree, part 4, with L-165, site continuity). PAST THE SERVED WINDOW A
@@ -1412,52 +1463,6 @@ before work that fires it.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.127 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.129 (November 7, 2026): No rule changed in this document. ONE
-skill bump: interactive-exhibit 1.32 -> 1.33 (L-515, one nested tree,
-step 1 and step 2a's part 2). THE WEBSITE'S ROOMS BECOME ONE TREE: ONE
-DRAWER FOR EVERY CENTRE, AND EACH OBJECT UNDER THE CENTRE JPL SERVES IT
-AROUND.
-
-WHAT PROMPTED IT. The Claude Code session of Nov 7 (Claude Opus 5.5),
-through the python_work door, built on orrery 9117505a and gallery
-9c6093af, from documentation/COORD_L515_steps1_2a_brief_20261107.md, on
-Tony's twelve rulings of Nov 7 on L-515. Its question at the start,
-whether a gallery session may make this bump in the orrery: "Yes, bump
-it here". His instruction after part 2: "Then stop here: make the
-interactive-exhibit skill bump now, with parts 1 and 2's rules. Part 3
-goes to a fresh session after I've looked at part 2 on my phone."
-
-WHAT CHANGED. interactive-exhibit: a new rule, One drawer for every
-centre -- one builder and one plan for the root and the Sun and Earth;
-a fixed row for the centre in every centre, Earth's new; the trail line
-"Solar system > Earth"; "Centre on <name>" where "Enter the <name> room"
-stood, and "Not built yet" on a centre in the tree with none built,
-both read from the config; the root's ticks kept on leaving by Centre
-on and put back once (rulings 2 and 10); and two rules of method the
-brief asked the session to write, a centre's children listed after its
-shells and which Reset a centre gets. Under Only two tools write the
-served config, the store writer's parent path, which accepts only the
-object's own center_slug (ruling 6), held by the gallery run's new Tree
-parents check. Its oldest of four version entries (1.30) moved to
-documentation/SKILL_HISTORIES.md, by the three-entry rule. Every
-sentence was read from the gallery's code with this session's edits
-before it was written.
-
-THE OBLIGATION TRAVELS. This session read each skill as the file in the
-repo, each as the manifest expected: interactive-exhibit 1.32 in full,
-gallery-cache-builder 1.18 in the parts its brief named,
-safe-file-editing 1.14 and ledger-and-session-records 1.22. Tony
-reinstalls interactive-exhibit (Settings > Skills) and pastes this
-version into the Project's instructions on claude.ai; the next session
-that loads it from the account confirms its copy reads 1.33 before
-work that fires it.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.126 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

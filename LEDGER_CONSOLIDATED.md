@@ -733,6 +733,10 @@ coordinating session's design talk on the lobby: L-517 opened with its
 rulings and its build order; L-518 (the shared scene link) opened and placed; lines
 on L-282, L-508 and L-515), built on orrery 7d3e57ba with gallery
 23440b79 read only.
+Module updated: November 8, 2026, afternoon, with Anthropic's Claude Opus
+5.5 (the website Code session for L-517 part 1, the pictures beside
+their rows: its record on L-517; the interactive-exhibit bump to 1.36 and
+protocol v3.132), built on orrery c275fcb7 with gallery e9d0c5e2.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -1663,7 +1667,62 @@ tree); L-165 (site continuity); L-503 (the belt on the website).
   lobby." The brief was reordered the same morning: part 1 puts the
   pictures beside their rows; part 2 builds the lobby, with no temporary
   footer line, since the pictures already have their way in.
-**Gap:** part 1 (the pictures) built and passed on Tony's phone; part 2
+- **Part 1 built, 2026-11-08, afternoon** (Claude Code, Claude Opus 5.5,
+  through the python_work door), on orrery c275fcb7 and gallery e9d0c5e2
+  (two nightly bot commits past 23440b79), from Tony's prompt and the
+  brief's part 1. interactive-exhibit loaded from the account read 1.35,
+  as the brief required.
+  - The count at e9d0c5e2: 23 Solar System pictures on a phone, as the
+    brief counted, plus the Solar System Explorer beside the Sun: 24 on a
+    phone, in 12 folds; 27 on a desktop, in 14 folds (the three "none"
+    cards, Mercury, Earth Barycenter Shells and Near Earth Asteroids, on
+    the desktop only). 47 card entries carry a place, both twins of each
+    pair; the three live rooms' cards carry none.
+  - Each card's place is ONE field on its entry in
+    gallery/gallery_metadata.json, "drawer_row" (a body row's slug or a
+    group row's key). The editor and the converter keep fields they do
+    not know, read before it was chosen. Places, by the brief's method:
+    PANSTARRS (C/2025 R3) 2; MAPS 1; 3I/ATLAS 3; Wierzchos 1; C/2025 K1 1
+    (the breakup, under the main comet's row); Halley 1; Mercury 1; Earth
+    7 (Earth Barycenter Shells, Artemis II's five, Apophis); the Sun 1
+    (the Explorer); Apollo and Amor asteroids 1 (Near Earth Asteroids,
+    whose bodies sit in three classes; its nearest parent group); Psyche
+    spacecraft 4 (the mission's); New Horizons 1 (the whole mission);
+    Jupiter 1 (New Horizons' Jupiter flyby, by the brief's "Jupiter gets
+    a fold"); Pluto 2. All for Tony's phone look.
+  - Built: gallery/picture_folds.js (which twin a screen is offered, by
+    the gallery's own rule; where each card goes; Find's words; what is
+    kept for Back); the folds in interactive.html (a picture mark, the
+    count, closed on opening, the line "Saved pictures: each opens on its
+    own page.", an arrow where a tick box would be; Reset folds them);
+    Find in gallery/solar_system_drawer.js (a picture's words add rows
+    only when no body or group matches by its own, so "comet" still
+    lists Comets closed); Back: the room keeps the fold and its ticks in
+    sessionStorage (po_room_return, and L-515's tick memory) and its next
+    opening takes them once; index.html shows "Back to the live solar
+    system" on a card the room opened, stepping back through history.
+    Words for Tony's phone look: "Saved pictures", the line, "Back to the
+    live solar system", "N saved pictures match".
+  - Checked: the gallery run's new Picture folds row (gates; worked
+    cases, the real metadata placed on a phone and a desktop and printed
+    by row, both pages' wiring; its self-test breaks the two files five
+    ways); the drawer walk's new section 29 (20 checks, all passing),
+    shown failing on two planted copies of the page, a fold open on
+    arrival (5 failures) and a picture row with a tick box (1). The walk's
+    three other failures (a scene tap moving the view, Sedna's hover
+    bullets, text box lines over 62 characters) fail the same on an
+    untouched copy of e9d0c5e2; recorded here, not chased.
+  - The gallery maintenance run (offline), read from its output: "40 of 40 gating checkers passed", the Picture folds row among them; the report-only Cache siblings row passed.
+  - The skill: interactive-exhibit 1.36, "Saved pictures beside their
+    rows" under the Solar System room's drawer, with the rule that each
+    fold leaves its row when the encounter that replaces it is built;
+    protocol v3.132. The Explorer's own page keeps its chain to the
+    gallery; the browser's Back returns it to the room.
+  - Tony-action (do): commit and push the website, then the orrery;
+    reinstall interactive-exhibit 1.36 and paste protocol v3.132.
+  - Tony-action (decide): the phone look at each picture's row, its words
+    and the way back (the session's report lists them).
+**Gap:** part 1 (the pictures) built; Tony's phone look to come; part 2
 (the lobby) built and passed; each picture group leaves its row when the encounter that
 replaces it is built.
 **Ref:** L-282 (the lobby); L-428 (the lobby's way in); L-447 (the front

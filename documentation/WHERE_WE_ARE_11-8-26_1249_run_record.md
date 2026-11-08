@@ -156,7 +156,7 @@ I've recorded it: the shared scene link goes right after the lobby and before st
 > Close as the brief says. My phone-look list should name each picture's row, so I can judge where each one landed. Commit and push are mine.
 
 **Tony-actions:**
-- (do) Commit and push the orrery. -- pulled the website. pulled the orrery. 
+- (do) Commit and push the orrery. -- nightly runs: pulled the website. pulled the orrery. all green. orrery moved to c275fcb769b5698442402f86a4594d65f36c3a3c
 - (do) Reinstall interactive-exhibit 1.35, if not done yet. -- already done
 - (do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).
 
@@ -167,3 +167,255 @@ I've recorded it: the shared scene link goes right after the lobby and before st
 I haven't committed or pushed, and I won't: the project's rules leave both to you, every time.
 
 The updated files are already in your orrery folder: the ledger, Where We Are, and the lobby brief. Committing and pushing them in GitHub Desktop is the first step of your run order.
+
+======================================================
+
+**Session: OPEN: 11-8-26 1301: Opus: Code: L-517 lobby pictures layout**
+
+Mapping each picture to its drawer row; next I read the drawer code.
+
+Reading the room's drawer code in interactive.html now, to see where the picture folds fit.
+
+Now ssRender, which decides what shows in the root's list.
+
+Design settled; now reading the headless harness and walk so the picture folds can be tested.
+
+Writing the picture-folds logic file first (no browser needed, so the checks can reach it).
+
+Now recording each picture's row in the gallery metadata.
+
+Metadata done (47 cards, additions only). Now wiring the folds into interactive.html.
+
+Wiring the folds into interactive.html now.
+
+Making the interactive.html edits (stamp, script tag, styles, state).
+
+Now the fold functions themselves.
+
+Now hooking metadata loading and the return into the boot.
+
+Now index.html: the way back to the room from a card the room opened.
+
+Code is in place. Setting up the headless tools (jsdom, room payload) to test it.
+
+The folds render in the headless page (closed, with counts). Now the check file; first a look at how the run's rows and self-tests are written.
+
+Writing the Picture folds check (worked cases, real files, page wiring, self-test).
+
+Real data is right (24 on a phone, 27 on a desktop); three self-test breaks didn't bite because they bypassed the file's internals. Switching those breaks to edit the file's text instead.
+
+Check passes and its self-test goes red five ways. Adding it to the gallery run and the served-file list.
+
+Two expected breaks: the drawer check pins the old search call, and walk section 27 reads every top-level row as a body. Updating both.
+
+Three walk failures remain; checking whether they also fail on the untouched base before blaming my change.
+
+The three walk failures also show up on the untouched base, so they predate this work and I'll record them. Next I'm adding walk section 29 for the picture folds, with a planted page and a phone-width screen.
+
+Now writing section 29 into the walk.
+
+The shell choked on the inline script; writing it to a scratch file instead.
+
+Section 29 passes all its 20 checks; only the 3 base failures remain. Now the planted faults: a fold open on arrival, and a picture row with a tick box.
+
+The tool turned the escape into a real arrow again; building the string from character codes instead.
+
+Both planted faults turn the walk red. Checking every changed file is ASCII with LF endings, then running the full gallery maintenance run.
+
+Stamping the two drawer files' headers, then the run.
+
+Running the gallery maintenance run (offline pass) now; it takes a few minutes.
+
+While the run goes, I'll read the records skill's parts on skill bumps and Where We Are.
+
+Now the skill bump to 1.36. Reading how the old version entries were moved to the history file.
+
+Writing the skill's new rule and version entry with a script (the edits are in an orrery file I'm allowed to change for this bump).
+
+Now the protocol's version entry (v3.132), moving the oldest resident entry to the history file.
+
+Writing the protocol entry script.
+
+While the gallery run finishes, reading the ledger block rules before updating L-517.
+
+Waiting on the gallery run; meanwhile updating Where We Are section by section.
+
+The gallery run is green: 40 of 40 gating checks passed, the new Picture folds check among them. Checking the run changed no files, then writing the ledger.
+
+Records are written (ledger L-517, Where We Are, skill 1.36, protocol v3.132), and the index regenerated cleanly. Closing out.
+
+Part 1 is built: every Solar System picture now sits in a closed "Saved pictures" fold under its body's row in the Solar System room's drawer. The gallery maintenance run passed: "40 of 40 gating checkers passed", read from its output.
+
+**Skills read**, each matching the manifest: interactive-exhibit 1.35 (in full, from your account's copy), gallery-pipeline 1.2 (the parts on `gallery_metadata.json`), safe-file-editing 1.14 (the encoding and stamping parts) and ledger-and-session-records 1.22 (the parts on records and skill bumps). interactive-exhibit is now 1.36.
+
+**What was built:**
+- **Where each picture goes:** one field per card in `gallery/gallery_metadata.json`, `drawer_row`. 47 card entries have one, both twins of each pair.
+- **How the folds look:** a small picture symbol, a count, and closed when the room opens. Open, a fold shows the line "Saved pictures: each opens on its own page.", then each picture with an arrow where a tick box would be.
+- **Which version opens:** a phone opens a picture's upright version and a desktop its wide one, by the gallery's own rule. The three "none" cards show on a desktop only.
+- **Find:** typing "Artemis" opens Earth's fold. Picture words only add rows when no body or group matches its own words, so "comet" still lists the Comets group, closed, as before.
+- **Back:** returns to the room with the drawer open at that fold and your ticks as you left them. A picture's own page shows "Back to the live solar system" in its header.
+- **Checks:**
+  - **New gallery-run check, Picture folds:** it blocks the run when it fails, and it first breaks the code five ways to prove it can fail.
+  - **Drawer walk, new section 29 (20 checks):** it fails on both planted faults, a fold open on arrival and a picture row with a tick box.
+  - **Three older walk failures:** they fail the same way on an untouched copy of the website as it was before this session, so this build didn't cause them. I recorded them on L-517 (the lobby for a first-time phone visitor) and didn't chase them.
+
+**Files changed, website folder:**
+- ok interactive.html (12 edits)
+- ok index.html (5 edits)
+- ok gallery/solar_system_drawer.js (6 edits)
+- ok gallery/picture_folds.js (new)
+- ok gallery/gallery_metadata.json (47 lines added, one field each)
+- ok gallery_maintenance_run.py (3 edits)
+- ok documentation/smoke_picture_folds.js (new)
+- ok documentation/smoke_solar_system_drawer.js (2 edits)
+- ok tools/headless/page_harness.js (3 edits)
+- ok tools/headless/walk_solar_system_drawer.js (8 edits)
+- Written by the gallery run itself, commit them as usual: MODULE_ATLAS.md, MODULE_INDEX.md, data/constants_export.sha, data/drawings/pulled_at.sha, data/objects_export.sha
+
+**Files changed, orrery folder:**
+- ok skills/interactive-exhibit/SKILL.md (7 edits)
+- ok documentation/SKILL_HISTORIES.md (1 edit)
+- ok PROJECT_INSTRUCTIONS.md (5 edits: v3.132 and the manifest)
+- ok documentation/PROJECT_INSTRUCTIONS_HISTORY.md (1 edit)
+- ok LEDGER_CONSOLIDATED.md (3 edits; index regenerated)
+- ok documentation/WHERE_WE_ARE.md (6 sections)
+- Your run-record copy shows as changed; that's yours and I didn't touch it.
+
+**Token count:** this app doesn't show me Claude Code's /cost output, so I can't give it. Sizes instead: I read about 9,000 lines of the drawer code, the skills and the ledger, and wrote about 1,100 lines.
+
+**Your run order:**
+1. GitHub Desktop: commit and push the website. -- 6f7b076b860e15aaa3e45c10c68374f370c14066
+2. After the push: run `gallery_maintenance_run.py --live` from the dashboard. 
+
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 61 files from https://palomasorrery.com/ (29 typed, 32 positions files read from data\objects_config.json)
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches the working copy
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   gallery/arrival.js                             matches the working copy
+    SERVED   gallery/nav_cluster.js                         matches the working copy
+    SERVED   gallery/solar_system_figures.js                matches the working copy
+    SERVED   gallery/solar_system_drawer.js                 matches the working copy
+    SERVED   data/objects_config.json                       matches the working copy
+    SERVED   gallery/guestbook.js                           matches the working copy
+    SERVED   data/guestbook.json                            matches the working copy
+    SERVED   data/solar-system/drawings/hills_cloud.json    matches the working copy
+    SERVED   data/solar-system/drawings/van_allen_belts.json matches the working copy
+    SERVED   data/solar-system/drawings/earth_exosphere.json matches the working copy
+    SERVED   data/solar-system/drawings/sun_corona.json     matches the working copy
+    SERVED   data/solar-system/drawings/zodiacal_dust.json  matches the working copy
+    SERVED   data/solar-system/drawings/outer_oort_cloud.json matches the working copy
+    SERVED   data/solar-system/drawings/galactic_tide.json  matches the working copy
+    SERVED   gallery/source_list.js                         matches the working copy
+    SERVED   gallery/far_lines.js                           matches the working copy
+    SERVED   gallery/direction_arrows.js                    matches the working copy
+    SERVED   gallery/drawer_order.js                        matches the working copy
+    SERVED   gallery/text_box.js                            matches the working copy
+    SERVED   gallery/scene_moment.js                        matches the working copy
+    SERVED   gallery/picture_folds.js                       matches the working copy
+    SERVED   gallery/gallery_metadata.json                  matches the working copy
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+    SERVED   data/solar-system/positions/voyager_2.json     matches the working copy
+    SERVED   data/solar-system/positions/new_horizons.json  matches the working copy
+    SERVED   data/solar-system/positions/juno.json          matches the working copy
+    SERVED   data/solar-system/positions/osiris_apex.json   matches the working copy
+    SERVED   data/solar-system/positions/parker_solar_probe.json matches the working copy
+    SERVED   data/solar-system/positions/bepicolombo.json   matches the working copy
+    SERVED   data/solar-system/positions/solar_orbiter.json matches the working copy
+    SERVED   data/solar-system/positions/lucy.json          matches the working copy
+    SERVED   data/solar-system/positions/juice.json         matches the working copy
+    SERVED   data/solar-system/positions/psyche_spacecraft.json matches the working copy
+    SERVED   data/solar-system/positions/europa_clipper.json matches the working copy
+    SERVED   data/solar-system/positions/galileo.json       matches the working copy
+    SERVED   data/solar-system/positions/cassini.json       matches the working copy
+    SERVED   data/solar-system/positions/pioneer_10.json    matches the working copy
+    SERVED   data/solar-system/positions/pioneer_11.json    matches the working copy
+    SERVED   data/solar-system/positions/rosetta.json       matches the working copy
+    SERVED   data/solar-system/positions/akatsuki.json      matches the working copy
+    SERVED   data/solar-system/positions/dart.json          matches the working copy
+    SERVED   data/solar-system/positions/west.json          matches the working copy
+    SERVED   data/solar-system/positions/mcnaught.json      matches the working copy
+    SERVED   data/solar-system/positions/tsuchinshan_atlas.json matches the working copy
+    SERVED   data/solar-system/positions/wierzchos.json     matches the working copy
+    SERVED   data/solar-system/positions/atlas_2024_g3.json matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1.json      matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1_b.json    matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1_d.json    matches the working copy
+    SERVED   data/solar-system/positions/panstarrs_2025_r3.json matches the working copy
+    SERVED   data/solar-system/positions/borisov_2025_v1.json matches the working copy
+    SERVED   data/solar-system/positions/oumuamua.json      matches the working copy
+    SERVED   data/solar-system/positions/borisov_2i.json    matches the working copy
+    SERVED   data/solar-system/positions/atlas_3i.json      matches the working copy
+
+  PASS Served reachability       9.4s  all 61 files served and
+                                    byte-identical to the working copy
+
+  orrery export pinned at c275fcb7
+
+  PASS Export freshness          0.3s  the served export is the orrery's
+                                    at c275fcb7, byte for byte
+
+  orrery HEAD c275fcb7
+  examining 3 of 188 links; the other 185 are served from the export
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  3 pointers: 1 match, 0 DRIFT, 0 UNIT MISMATCH, 2 could not be examined.
+
+  PASS Store drift               2.0s  3 pointers against orrery c275fcb7
+                                    -- 1 match, 0 DRIFT, 0 UNIT
+                                    MISMATCH, 2 could not be examined.
+
+======================================================================
+  2 of 2 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Store drift            3 pointers against orrery c275fcb7 -- 1
+  last swap 2026-11-08T18:00:40.879032+00:00: succeeded first time
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+3. Commit and push the orrery. --
+4. Reinstall interactive-exhibit 1.36 (Settings > Skills), and paste protocol v3.132 into the Project's instructions on claude.ai.
+5. Your phone look, below.
+
+**Phone look: each picture's row.** Open the room, then the drawer. In the paths below, "A > B" means open group A, then sub-group B:
+- **Sun:** Solar System Explorer
+- **Comets > Hyperbolic comets > PANSTARRS (C/2025 R3):** PanSTARRS at Perigee; PANSTARRS near perihelion
+- **Comets > Hyperbolic comets > Wierzchos:** Wierzchos Perihelion
+- **Comets > Hyperbolic comets > C/2025 K1:** the K1 Breakup
+- **Comets > Other comets > MAPS:** MAPS Disintegration
+- **Comets > Halley-type comets > Halley:** Halley Perihelion
+- **Comets > Interstellar objects > 3I/ATLAS:** March 2025 to March 2026; Closest Approach to Jupiter; Perihelion
+- **Mercury:** Orbital Transformation (desktop only)
+- **Earth:** Artemis II's five, Apophis, and Earth Barycenter Shells (desktop only): 6 on a phone, 7 on a desktop
+- **Apollo and Amor asteroids** (the group row): Near Earth Asteroids (desktop only). I put it here because its bodies span three classes.
+- **Spacecraft > Active missions > Psyche spacecraft:** its four pictures
+- **Spacecraft > Active missions > New Horizons:** the whole-mission picture
+- **Jupiter:** New Horizons' Jupiter flyby
+- **Pluto:** its two pictures. The wide one shows the "turn your phone" card on a phone, and that card's back button returns to the room.
+
+**Then try:**
+- Tap an Artemis picture. You should see its upright version, with "Back to the live solar system" in the header.
+- Tap that. You should land back in the room with the drawer open at Earth's fold and anything you ticked still ticked.
+- Type "Artemis" in Find. Earth's fold should open with 5 pictures and the line "5 saved pictures match".
+- Press Reset. Every fold should close.
+
+**Tony-actions:**
+- (do) Commit and push the website, then the orrery.
+- (do) Reinstall interactive-exhibit 1.36, and paste protocol v3.132.
+- (decide) The phone look: where each picture landed, and the words "Saved pictures", its line, and "Back to the live solar system".
+- (do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).

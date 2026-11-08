@@ -938,6 +938,24 @@ solar_system_figures.js and both repositories' checks, with this
 session's edits, before it was written.
 (Moved down 2026-11-07, night, when 1.35 made a fourth entry.)
 
+Earlier: 1.33 | 2026-11-07, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 9117505a and gallery @ 9c6093af. v1.33 (L-515, one
+nested tree, step 1 and step 2a's part 2) records the website's rooms
+becoming one tree. ONE DRAWER FOR EVERY CENTRE, a new rule: one builder
+and one plan (rowPlan) for the root and the Sun and Earth; a fixed row
+for the centre in every centre, Earth's new; the trail line "Solar
+system > Earth"; "Centre on <name>" where "Enter the <name> room" stood
+and "Not built yet" on a centre in the tree with none built, both read
+from the config; the root's ticks kept on leaving by Centre on and put
+back once; a centre's children listed after its shells; which Reset a
+centre gets. And under Only two tools write the served config, the
+store writer's `parent` path, which accepts only the object's own
+center_slug, held by the gallery run's Tree parents check. Tony's
+rulings 2, 6 and 10 of 2026-11-07; the two placement rules are method,
+written as the brief asked. Read from the gallery's code with this
+session's edits before it was written.
+(Moved down 2026-11-08, when 1.36 made a fourth entry.)
+
 ## safe-file-editing
 
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons;
