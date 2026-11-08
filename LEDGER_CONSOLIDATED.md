@@ -728,6 +728,14 @@ Module updated: November 7, 2026, evening, with Anthropic's Claude Opus
 its three fixes; then part 3, the Sun's shells in the root; the
 interactive-exhibit bump to 1.34 and protocol v3.130), built on orrery
 cba62f22 with gallery 49d1bae1.
+Module updated: November 8, 2026, late afternoon, with Anthropic's Claude Opus 5.5
+(the coordinating session: Tony's phone look at L-517 part 1 recorded from
+his copy WHERE_WE_ARE_11-8-26_1249_run_record.md, Pluto's landscape card
+carried into part 2), built on orrery 4bae2117 with gallery 6f7b076b.
+Module updated: November 8, 2026, late afternoon, with Anthropic's Claude
+Opus 5.5 (the website Code session for L-517 part 2, the lobby: its record
+on L-517; Tony's editor ask on L-518), built on orrery 4bae2117 with
+gallery 6f7b076b.
 Module updated: November 8, 2026 with Anthropic's Claude Opus 5.5 (the
 coordinating session's design talk on the lobby: L-517 opened with its
 rulings and its build order; L-518 (the shared scene link) opened and placed; lines
@@ -1583,9 +1591,17 @@ as an archive of the prioritization thinking -- no cleanup on close.
 - **PLACED, Tony, 11:54:** right after the lobby (L-517's part 2),
   before L-515's step 2b. The coordinator's reason, which he agreed to:
   visitors arriving from Instagram are the ones who would share a scene.
+- **Tony's ask, 2026-11-08, 15:40 Chicago**, at the go-ahead for L-517's
+  part 2 (the lobby): "looking forward we should work on the gallery
+  editor so I can add new views from the interactive to the Featured
+  views using their specific url." Recorded here because the specific
+  address is what this item builds; the editor's half, a Featured card
+  made from a live address, goes with Featured's rethink (L-517). Not
+  designed yet.
 **Gap:** the build (a gallery Code session, small, per section 7 of the
 design record, read again against L-515's tree), and Tony's Mode 5: a
-scene shared to himself and opened on another device.
+scene shared to himself and opened on another device; then Tony's ask,
+the editor taking a scene's address as a Featured card.
 **Ref:** `documentation/DESIGN_shared_view_rulings_20261029.md`;
 `documentation/HANDOFF_coordination_20261028_29.md`; L-515 (one nested
 tree); L-165 (site continuity); L-503 (the belt on the website).
@@ -1722,9 +1738,99 @@ tree); L-165 (site continuity); L-503 (the belt on the website).
     reinstall interactive-exhibit 1.36 and paste protocol v3.132.
   - Tony-action (decide): the phone look at each picture's row, its words
     and the way back (the session's report lists them).
-**Gap:** part 1 (the pictures) built; Tony's phone look to come; part 2
-(the lobby) built and passed; each picture group leaves its row when the encounter that
-replaces it is built.
+- **Part 1 pushed and passed on Tony's phone, 2026-11-08**, read from his
+  copy `documentation/WHERE_WE_ARE_11-8-26_1249_run_record.md`: website
+  pushed at 6f7b076b and its live run green ("2 of 2 gating checkers
+  passed"); orrery at 0a397e16, then v3.132 at 4bae2117; interactive-exhibit
+  1.36 reinstalled and v3.132 pasted ("done"). His verdicts: every row he
+  could see on a phone, "yes"; the Artemis upright card, Back to the room
+  with the fold open and ticks kept, Find on "Artemis", and Reset, each
+  "yes"; the words "Saved pictures", its line and "Back to the live solar
+  system", "yes". Not yet looked at, both desktop only: Mercury's
+  Orbital Transformation and the Near Earth Asteroids picture on the
+  Apollo and Amor asteroids row (left blank).
+  - Tony's ask, on Pluto's two pictures: "remove L view from the mobile.
+    i can't do it in the gallery editor. the landscape view is too
+    crowded and not readable on the phone." The two Pluto cards are not
+    twins (different dates, no sibling), so a phone offers both. Carried
+    into part 2 of the brief.
+  - Tony's note: "it should be noted that the 'Save Pictures' do not have
+    sourced words." The cards' titles and descriptions come from the
+    gallery's own card list, written through Studio and the editor, not
+    from the orrery's export (the Nov 3 ruling: the words have one home,
+    the orrery's export; L-511 (the export carries the words)). Recorded
+    with Featured's rethink, which is also about piping the existing cards
+    into the tree; not chased here.
+- **Part 2 built, 2026-11-08, late afternoon** (Claude Code, Claude Opus
+  5.5, through the python_work door), on orrery 4bae2117 and gallery
+  6f7b076b, from Tony's prompt and the brief's part 2. interactive-exhibit
+  loaded from the account read 1.36, as the prompt required;
+  gallery-pipeline 1.2, safe-file-editing 1.14 and
+  ledger-and-session-records 1.22 matched the manifest. No skill changed.
+  The session had no shell on Tony's computer: it worked in a cloud copy
+  of each repository and copied the changed files into his folders.
+  - The lobby (index.html, board D): the name with the About button
+    beside it (moved from the footer); the served sentence, now "The
+    solar system, Earth and the nearby stars in 3D, from real science
+    data." (gallery_config.json, and the page's fallback, no-script text
+    and link-preview lines); the start card with the kicker "Solar
+    System", the title "Today's sky, live" and the button "Explore", its
+    sentence served on card solar_system, now "The Sun, the planets,
+    Earth and its Moon. Turn it with your finger."; "More to explore",
+    a picture strip each for Earth System Science and Stars in the
+    subjects' colours, one tap to the subject's page (LOBBY_MORE), a
+    subject with no card in the tab left out; no Solar System subject
+    row; Featured as before; the Paloma line moved to just above the
+    guest book. The card solar_system's served title is "Today's sky,
+    live" too, so its subject page and the menu read the same.
+  - The strip pictures, drawn by tools/headless/draw_lobby_strips.py
+    (Pillow): gallery/pictures/lobby_earth_system.jpg, 146 stripes, 1880
+    to 2025, each year's mean of the card's monthly anomalies in the
+    card's own colour scale (-1.0 to 1.5); gallery/pictures/lobby_stars.jpg,
+    the 20-light-year card's stars laid flat, x against y at one scale,
+    49 of its 99 stars inside the strip, and the Sun, the marker sizes
+    doubled so they read at phone size (a drawing choice for Tony's
+    look). No numbers on either; each alt text names its card.
+  - The subject pages: a room with no card in the tab is not listed,
+    and no page counts rooms under construction (countEmptyRooms went).
+    "Exhibits" reads "views" and "rooms" reads "topics" (the headings
+    "Views" and "Topics"), "live in 3D" is gone, "special exhibit" reads
+    "special topic", and the lobby's count line reads "N views". The
+    Solar System page: the live card first, then "Solar System pictures
+    and animations" and its line, then the Explorer and the topics
+    (ROOM_PICTURES_HEADING).
+  - Pluto: pluto_barycenter_system_20260208_1957 has shape "none", the
+    gallery's existing phone setting, read by index.html's phone filter
+    and its mirror in gallery/picture_folds.js; no new field. A phone
+    offers neither its card nor its row in Pluto's fold; a desktop keeps
+    both. The Picture folds check now prints 23 pictures in 12 folds on
+    a phone (Pluto 1) and 27 in 14 on a desktop.
+  - Checked: the gallery maintenance run (offline), read from its
+    output: "40 of 40 gating checkers passed". Its five generators (the
+    three export pulls and the two mirrors) could not reach GitHub's API
+    from the sandbox and wrote nothing; on Tony's computer they run as
+    usual. Headless shots on a throwaway copy at 390 x 844 and 1280 x
+    800, read for: the lobby's order top to bottom; no Solar System
+    subject row; both strip pictures loaded; the Paloma line above the
+    guest book; no sideways scroll; no page error; the three subject
+    pages' headings, rows and counts, with no "under construction"; and
+    Pluto's page with one card on the phone and two on the desktop. The
+    lobby still has no checker of its own (L-367, L-423).
+  - Found, not changed: Tony's pinned guest book entry links "START
+    HERE: Solar System Interactive Exhibit", words the lobby no longer
+    uses (data/guestbook.json, his entry). The gallery editor's own
+    window still says "under construction" for an empty room; it is
+    Tony's tool, not the site.
+  - Tony's ask at the go-ahead, 15:40: the gallery editor to add a view
+    from the live site to Featured by its own address. Recorded on L-518
+    (the shared scene link), which builds that address.
+  - Tony-action (do): commit and push the website, then the orrery.
+  - Tony-action (decide): the phone look at the lobby and the subject
+    pages (the session's report lists what to tap).
+**Gap:** part 1 (the pictures) built and passed, but for the two desktop
+rows; part 2 (the lobby, with Pluto's landscape card off the phone)
+built, Tony's phone look to come; each picture group leaves its row when
+the encounter that replaces it is built.
 **Ref:** L-282 (the lobby); L-428 (the lobby's way in); L-447 (the front
 page says what the site is: its sentence and the Paloma line stay, the
 line moves above the guest book); L-515 (one nested tree); L-303 (the

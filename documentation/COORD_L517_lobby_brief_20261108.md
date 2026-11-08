@@ -156,6 +156,19 @@ The subject pages (every room screen, all three subjects):
 The desktop: the same order, in one centred column; the build chooses
 the width and Tony judges it (Mode 5).
 
+Also in part 2, from Tony's phone look at part 1 (his copy
+`WHERE_WE_ARE_11-8-26_1249_run_record.md`): "remove L view from the
+mobile. i can't do it in the gallery editor. the landscape view is too
+crowded and not readable on the phone." The card is
+`pluto_barycenter_system_20260208_1957` (16:9). It and the portrait
+`pluto_barycenter_social_view_20260211_0031` are not twins (different
+dates, no sibling), so the gallery's rule offers both on a phone. A phone
+offers neither the landscape card's row in Pluto's fold nor its card in
+the lists; a desktop keeps both cards. The build chooses the means from
+what the gallery's rule already reads (inCurrentMode in index.html, its
+mirror in gallery/picture_folds.js), not a new store, and names it in the
+report.
+
 Checks: the gallery maintenance run, green, read from its output. The
 lobby has no checker of its own (L-367 (no checker opens a room) and
 L-423 (the website's checks) record the gap); headless shots at 390 x

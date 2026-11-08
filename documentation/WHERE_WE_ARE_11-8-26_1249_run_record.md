@@ -133,7 +133,7 @@ Not urgent, in your order:
 
 **Tony**: Run record:
 
-**Session: OPEN: 11-8-26 0825: Opus: Coordinator: Lobby design for palomasorrery.com**
+**Session: DONE: 11-8-26 1519: Opus: Coordinator: Lobby design for palomasorrery.com**
 
 I've recorded it: the shared scene link goes right after the lobby and before step 2b of the tree. The ledger (L-518) and Where We Are both say so, and nothing on the page waits on you now.
 
@@ -167,6 +167,56 @@ I've recorded it: the shared scene link goes right after the lobby and before st
 I haven't committed or pushed, and I won't: the project's rules leave both to you, every time.
 
 The updated files are already in your orrery folder: the ledger, Where We Are, and the lobby brief. Committing and pushing them in GitHub Desktop is the first step of your run order.
+
+=====================================================
+
+I'll record your verdicts on the pictures build and fold your Pluto fix into the lobby build. First I'm pulling both repos at their current heads.
+
+Your local copies match the repo. Reading the rest of today's page so I can edit it by section.
+
+The page is 4 lines over its cap. I'll compress my own box lines rather than drop anything.
+
+I've recorded your phone look at the pictures build. Your Pluto fix now rides the lobby build, which is next.
+
+**What I recorded, on L-517 (the lobby for a first-time phone visitor):**
+- **The build passed.** Every row you could see on your phone was right. Tapping a picture, Back to the room, Find on "Artemis" and Reset all worked as they should. So did the words "Saved pictures" and "Back to the live solar system". Both pushes and the live run are noted, with their SHAs.
+- **Two rows still need a look on a computer:** Mercury's picture, and Near Earth Asteroids on the Apollo and Amor row. Both are desktop only, which is why they were blank on your phone. They're listed as not urgent on Where We Are.
+- **Your Pluto ask goes into the lobby build.** The two Pluto pictures aren't paired as twins, because they're from different dates. That's why a phone shows both. The build will take the landscape one off the phone and keep both on a computer. It works through the site's own rule for which picture a phone shows, not through the editor.
+- **Your note that the pictures' words have no source** is recorded with Featured's rethink, since both are about bringing the existing cards into the tree. Nothing was changed for it now.
+
+**Files updated in your orrery folder, for your run record:**
+- ok LEDGER_CONSOLIDATED.md (2 edits: your phone look on L-517, the header stamp; index regenerated and checked)
+- ok documentation/WHERE_WE_ARE.md (8 edits, by section; at its 130-line cap)
+- ok documentation/COORD_L517_lobby_brief_20261108.md (1 edit: the Pluto item added to part 2)
+
+**Your run order:**
+1. In GitHub Desktop, commit and push the orrery.
+2. Start the lobby build with the prompt below.
+
+**The prompt for the next session:**
+
+> Built on orrery (the SHA of my push) at https://github.com/tonylquintanilla/palomas_orrery and gallery 6f7b076b860e15aaa3e45c10c68374f370c14066 at https://github.com/tonylquintanilla/tonyquintanilla.github.io (both branch main). Nightly bot commits since are expected.
+>
+> Type: BUILD, a Claude Code session in the gallery repository, through the python_work door. L-517 (the lobby for a first-time phone visitor), part 2: the lobby, with Pluto's landscape picture off the phone.
+>
+> Start: read the orrery's `documentation/COORD_L517_lobby_brief_20261108.md` and do its Part 2 only. Its Start, Checks and Close apply. Confirm interactive-exhibit loads as 1.36 before work that fires it, and stop if it doesn't.
+>
+> Close as the brief says, with a phone-look list for the new lobby. Commit and push are mine.
+
+**Tony-actions:**
+- (do) Commit and push the orrery.
+- (do) On a computer, look at Mercury's picture and Near Earth Asteroids on the Apollo and Amor row (not urgent).
+- (do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).
+
+**Where this leaves us:**
+- The pictures are in the room's drawer, live and passed.
+- Next is the lobby, then the shared scene link, then step 2b of the tree.
+
+I haven't committed or pushed anything; that stays with you.
+
+The uncommitted changes the hook found were in my own working copy here. Their contents were already copied into your orrery folder, so I've cleared that working copy and the warning shouldn't come back.
+
+The updated ledger, Where We Are page and lobby brief are in your orrery folder, ready for you to commit and push in GitHub Desktop.
 
 ======================================================
 
@@ -416,6 +466,6 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 
 **Tony-actions:**
 - (do) Commit and push the website, then the orrery. -- done
-- (do) Reinstall interactive-exhibit 1.36, and paste protocol v3.132.
-- (decide) The phone look: where each picture landed, and the words "Saved pictures", its line, and "Back to the live solar system".
-- (do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).
+- (do) Reinstall interactive-exhibit 1.36, and paste protocol v3.132. -- 4bae211757632f58da2fbb30711ca6e33c4f0ab3
+- (decide) The phone look: where each picture landed, and the words "Saved pictures", its line, and "Back to the live solar system". -- yes
+- (do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516). -- pending. thanks. 

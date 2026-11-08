@@ -1,24 +1,19 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 8, 2026, afternoon: the website Code session (Opus), L-517 part 1, the pictures beside their rows.
-- Written at orrery c275fcb and gallery e9d0c5e, plus this session's edits.
+Last updated: November 8, 2026, late afternoon: the website Code session (Opus), L-517 part 2, the lobby.
+- Written at orrery 4bae211 and gallery 6f7b076, plus this session's edits.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The Solar System pictures are in the room's drawer now, each in a
->   closed "Saved pictures" fold under its body's row (L-517 (the lobby), part 1).
-> - A phone opens a picture's upright version, a desktop its wide one.
-> - Back from a picture returns to the room, the drawer open at that fold.
-> - interactive-exhibit is 1.36, the protocol v3.132.
+> - The lobby is built: the live solar system first, then Earth and Stars as picture strips; empty rooms are gone from the subject pages; Pluto's wide picture is off the phone (L-517 (the lobby), part 2).
+> - Your editor ask, a live view added to Featured by its address, is recorded with the shared scene link (L-518 (the shared link)).
 >
-> **Do next:** *your phone look at the pictures (the list in the session's report); then the lobby, part 2 (brief `COORD_L517_lobby_brief_20261108.md`); then the shared scene link; then step 2b.*
+> **Do next:** *your phone look at the lobby (the list in the session's report); then the shared scene link; then step 2b.*
 >
 > **Needs you now:**
-> - *(do) Commit and push the website, then the orrery.*
-> - *(do) Reinstall interactive-exhibit 1.36, and paste protocol v3.132.*
-> - *(do) Your phone look at the pictures beside their rows.*
+> - *(do) Commit and push the website, then the orrery (its records include the coordinator's); then your phone look at the lobby.*
 > - *(do) Each morning, Pull origin on both, orrery then website, first.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
 
@@ -43,10 +38,10 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
  17.   [later] Small-body systems' moons; then stars and exoplanets.
  18.   [goal]  The website does what the desktop orrery does, with a date
                to choose, within the range the data covers.
-  l.   [next]  *Two builds (L-517 (the lobby)): the pictures beside
-               their rows, built and at your phone look; then the lobby.*
+  l.   [NOW]   *L-517 (the lobby): both parts built; your phone look at
+               the lobby next.* << moved this session
   s.   [next]  The shared scene link (L-518 (the shared link)), after
-               the lobby.
+               the lobby; your editor ask rides it. << moved this session
   b.   [beside] Housekeeping: L-424, L-425, L-426 (the checkers' three);
                L-423 (the website's checks) item 3; L-357 (stale gallery
                artifacts); L-509 (obsolete code), after its talk.
@@ -68,10 +63,10 @@ Standing rulings; a line leaves once it is habit, or a skill carries it.
   item); the check covers only what both draw; a spacecraft's span is
   JPL's first and last day.
 
-## Deferred
+## Deferred  **>> UPDATED THIS SESSION**
 
 Waiting behind other work; a line leaves when picked up.
-- Featured's rethink, with the gallery editor's future: after the cards are piped into the tree (Nov 8; L-517 (the lobby)).
+- Featured's rethink, with the gallery editor's future and the cards' words, which have no source yet: after the cards are piped into the tree (Nov 8; L-517 (the lobby)). The editor taking a live view's address as a Featured card waits for that address (L-518 (the shared link)).
 - The Moon's Go To opening the orbit's box: the Mars website session (Nov 7; L-515 (one nested tree)).
 - Charon's period is asked around Pluto's centre, not the barycentre;
   fix it before Pluto's room (L-150 (trusting a near-equal pair), Nov 6).
@@ -95,14 +90,14 @@ Waiting behind other work; a line leaves when picked up.
 - L-490 (the legacy list); L-499 (kinds of session); L-471 (a delivered
   patch is final), for safe-file-editing's next version.
 
-## Signals  **>> UPDATED THIS SESSION**
+## Signals
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261108T175822Z, nightly, ok, no retry (gallery swap log at e9d0c5e, read Nov 8).
-- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at orrery 68f7eb5).
+- Last cache build: 20261108T175822Z, nightly, ok, no retry (gallery swap log at 6f7b076, read Nov 8).
+- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at orrery 68f7eb5, its last change).
 - This page's date and the ledger's newest stamp: both Nov 8. Agree.
 
-## Waiting on you
+## Waiting on you  **>> UPDATED THIS SESSION**
 
 Decisions, one at a time:
 - None open.
@@ -114,20 +109,21 @@ At the next design talk:
 - Planet 9: how to show a body that may not exist.
 
 Not urgent, in your order:
+0. On a desktop: Mercury's and Near Earth Asteroids' pictures (L-517 (the lobby)).
 1. Whether the editor also edits the Solar System room's rows, and
    adds a new body as a form (L-489 (compositions)).
 2. The website's second run: keep, or stand down after a clean 08:17
    (L-485 (a nightly run)).
 3. Earth's list (L-413 (Earth's list)): open as enhancements, or closed
    with its seven pieces moved to their own items.
+4. Your pinned guest book note still says "Interactive Exhibit", words the lobby dropped (L-517 (the lobby)).
 
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- This session: L-517 (the lobby), part 1; the brief
-  `COORD_L517_lobby_brief_20261108.md`; interactive-exhibit 1.36,
-  "Saved pictures beside their rows"; the website's
-  `gallery/picture_folds.js`.
+- This session: L-517 (the lobby), part 2; the brief
+  `COORD_L517_lobby_brief_20261108.md`. The strip pictures are redrawn
+  by the website's `tools/headless/draw_lobby_strips.py`.
 - The tree: L-515 (one nested tree), `COORD_L515_steps1_2a_brief_20261107.md`.
 - The talk's rulings: `DESIGN_L484_consistency_rulings_20261103.md`.
 - The door: `documentation/python_work_door/`, and L-499 (kinds of session).
