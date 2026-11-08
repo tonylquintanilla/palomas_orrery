@@ -232,25 +232,25 @@ Orrery folder:
 
 **Your run order:**
 1. In GitHub Desktop, commit and push the website. -- 942910cc1ea30dee74a96cc19ff8a58665a83815
-2. Commit and push the orrery. That push also carries the coordinator's records, which were still waiting. -- 
+2. Commit and push the orrery. That push also carries the coordinator's records, which were still waiting. -- b60ed48f0ca7da0d5cf74ccd88f19c9496757fed
 3. Do your phone look (list below).
 
 **Phone look:**
-- Open palomasorrery.com. You should see the name with the (i) beside it, the new line, the solar system picture, "Today's sky, live" and a gold Explore button, with no list of three subjects.
-- Tap Explore. The live room should open.
-- Go back and scroll down. You should see two picture strips under "More to explore", then Featured, then the Paloma line, then the guest book.
-- Tap the Stars strip. The Stars page should list only By Distance, By Magnitude and Exoplanets, with no "under construction."
-- Open the Solar System page from the menu. You should see the live card first, then "Solar System pictures and animations" with its line, then the topics.
-- Open Pluto, from that page or from the room's drawer. There should be one picture on the phone.
-- Judge the words, and the star sizes in the Stars strip. I drew the stars at twice the card's size so they read on a phone.
+- Open palomasorrery.com. You should see the name with the (i) beside it, the new line, the solar system picture, "Today's sky, live" and a gold Explore button, with no list of three subjects. -- yes
+- Tap Explore. The live room should open. -- yes
+- Go back and scroll down. You should see two picture strips under "More to explore", then Featured, then the Paloma line, then the guest book. -- yes
+- Tap the Stars strip. The Stars page should list only By Distance, By Magnitude and Exoplanets, with no "under construction." -- yes. note that from the stars page, the back button does not bring us back to the lobby. i have to tap "Paloma's Orrery" at the top. 
+- Open the Solar System page from the menu. You should see the live card first, then "Solar System pictures and animations" with its line, then the topics. -- i think we can delete this page. all of these options are available from the tree itself and make more sense there. so remove the "Solar" option at the top. 
+- Open Pluto, from that page or from the room's drawer. There should be one picture on the phone. -- yes
+- Judge the words, and the star sizes in the Stars strip. I drew the stars at twice the card's size so they read on a phone. -- correct
 
 **Tony-actions:**
-- (do) Commit and push the website, then the orrery.
-- (decide) Does the new lobby work on your phone?
+- (do) Commit and push the website, then the orrery. -- done
+- (decide) Does the new lobby work on your phone? -- yes
 
 I haven't committed or pushed anything, and that's deliberate. Your project rules say commit and push are always yours, in both folders.
 
 The reminder came from an automatic check on my cloud copy of the repositories. The same changed files are already in your website and orrery folders on your computer, waiting for you in GitHub Desktop. Nothing else is needed from me.
 
-When you're ready: commit and push the website first, then the orrery.
+When you're ready: commit and push the website first, then the orrery. -- done.
 
