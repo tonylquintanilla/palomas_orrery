@@ -1,27 +1,28 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 7, 2026, night: the website Code session (Opus), L-515 part 4, the freeze past the served window; interactive-exhibit 1.35.
-- Written at orrery 4ac3903 and gallery 722ad57, plus this session's edits.
+Last updated: November 8, 2026: the coordinating session (Opus), the lobby's design talk, L-517 opened; no code.
+- Written at orrery 7d3e57b and gallery 23440b7, plus this session's edits.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Part 4: past the dates its data covers, a room now opens on the
->   last day covered and says so, instead of failing to load.
-> - Your three asks: the comet's fetch date, an opaque text box, groups over groups.
+> - The lobby is designed: one door first, then Earth and Stars as pictures (L-517 (the lobby)).
+> - The Solar System's saved pictures move into the room's drawer,
+>   each beside its own body's row.
+> - Your phone look at part 4 passed; recorded on L-515 (one nested tree).
 >
-> **Do next:** *your phone look at the freeze (&freeze=1) and the three asks; then step 2b.*
+> **Do next:** *the pictures into the drawer, then the lobby (brief `COORD_L517_lobby_brief_20261108.md`); then the shared scene link; then step 2b.*
 >
 > **Needs you now:**
-> - *(do) Commit and push both, website and orrery.*
-> - *(do) Reinstall interactive-exhibit 1.35; paste protocol v3.131.*
+> - *(do) Commit and push the orrery: the records and the brief.*
+> - *(do) Reinstall interactive-exhibit 1.35, if not done yet.*
 > - *(do) Each morning, Pull origin on both, orrery then website, first.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
-## The road
+## The road  **>> UPDATED THIS SESSION**
 
 Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
   1-14.[done]  Through Nov 6: the three rooms, the objects, the Sun's and
@@ -40,6 +41,10 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
  17.   [later] Small-body systems' moons; then stars and exoplanets.
  18.   [goal]  The website does what the desktop orrery does, with a date
                to choose, within the range the data covers.
+  l.   [next]  *Two builds (L-517 (the lobby)): the pictures beside
+               their rows, then the lobby.* << new this session
+  s.   [next]  The shared scene link (L-518 (the shared link)), after
+               the lobby. << new this session
   b.   [beside] Housekeeping: L-424, L-425, L-426 (the checkers' three);
                L-423 (the website's checks) item 3; L-357 (stale gallery
                artifacts); L-509 (obsolete code), after its talk.
@@ -47,6 +52,7 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
 ## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings; a line leaves once it is habit, or a skill carries it.
+- The lobby asks one thing first; Featured stays as it is; saved pictures sit beside their body's row in the drawer (Nov 8; L-517 (the lobby)).
 - Past the dates its data covers, a room draws the last day covered and says so; never blank (Nov 7, 12:53; L-165 (site continuity)).
 - What JPL measures a thing around is where it sits in the website's
   tree (Nov 7, 11:26; L-515 (one nested tree), ruling 6).
@@ -59,15 +65,11 @@ Standing rulings; a line leaves once it is habit, or a skill carries it.
   a difference is chosen (a reason, no end) or open (an end and an
   item); the check covers only what both draw; a spacecraft's span is
   JPL's first and last day.
-- Obsolete code is marked, not deleted, until a talk rules (Nov 3).
-- A held body is loud until a ledger item names it, then quiet with the
-  item's number; loud again if JPL still disagrees (Nov 2).
-- Encounters are both: shown in the Solar System room, and in a room
-  centred on the body met (Nov 1).
 
 ## Deferred  **>> UPDATED THIS SESSION**
 
 Waiting behind other work; a line leaves when picked up.
+- Featured's rethink, with the gallery editor's future: after the cards are piped into the tree (Nov 8; L-517 (the lobby)).
 - The Moon's Go To opening the orbit's box: the Mars website session (Nov 7; L-515 (one nested tree)).
 - Charon's period is asked around Pluto's centre, not the barycentre;
   fix it before Pluto's room (L-150 (trusting a near-equal pair), Nov 6).
@@ -94,23 +96,20 @@ Waiting behind other work; a line leaves when picked up.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261107T225251Z, nightly, ok, no retry (gallery swap log, read Nov 7, night).
-- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at orrery 4ac3903).
-- This page's date and the ledger's newest stamp: both Nov 7. Agree.
+- Last cache build: 20261107T225251Z, nightly, ok, no retry (gallery swap log at 23440b7, read Nov 8).
+- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at orrery 68f7eb5).
+- This page's date and the ledger's newest stamp: both Nov 8. Agree.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
 Decisions, one at a time:
-- None open: L-515 (one nested tree) waits for your phone look at the freeze; Mars waits for step 3.
+- None open.
 
 At the next design talk:
-- The lobby, on a fresh day (Nov 7, your words): "should we rething the
-  lobby ... the most common reaction is not knowing what to do."
 - How obsolete code is treated, and when it goes (L-509 (obsolete
   code)); two cases now, the orrery's unused date function and its
   Pluto-centred view of the moons.
 - Planet 9: how to show a body that may not exist.
-- The shared link (ruled Oct 29) waits for its build.
 
 Not urgent, in your order:
 1. Whether the editor also edits the Solar System room's rows, and
@@ -123,8 +122,9 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- This session: L-515 (one nested tree) and L-165 (site continuity); the brief
-  `COORD_L515_steps1_2a_brief_20261107.md` (parts 1 to 4 done).
+- This session: L-517 (the lobby); the brief
+  `COORD_L517_lobby_brief_20261108.md`; the canvas "Lobby: fewer ways in".
+- The tree: L-515 (one nested tree), `COORD_L515_steps1_2a_brief_20261107.md`.
 - The talk's rulings: `DESIGN_L484_consistency_rulings_20261103.md`.
 - The door: `documentation/python_work_door/`, and L-499 (kinds of session).
 

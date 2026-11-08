@@ -728,6 +728,11 @@ Module updated: November 7, 2026, evening, with Anthropic's Claude Opus
 its three fixes; then part 3, the Sun's shells in the root; the
 interactive-exhibit bump to 1.34 and protocol v3.130), built on orrery
 cba62f22 with gallery 49d1bae1.
+Module updated: November 8, 2026 with Anthropic's Claude Opus 5.5 (the
+coordinating session's design talk on the lobby: L-517 opened with its
+rulings and its build order; L-518 (the shared scene link) opened and placed; lines
+on L-282, L-508 and L-515), built on orrery 7d3e57ba with gallery
+23440b79 read only.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -945,7 +950,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*256 live items; 240 need attention (`!`); 165 RICE-scored; 253 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*258 live items; 242 need attention (`!`); 165 RICE-scored; 253 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -975,7 +980,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-184 | Interactive build-path push gate | OPEN | 4.0 | 2026-10-09 |
 | ! | L-211 | UNKNOWN -- the verdict for "checked, could not determine" | OPEN | 3.8 | 2026-08-19 |
 |  | L-230 | A skill bump does not reach the protocol's version history | DEFERRED | 3.8 | 2026-08-23 |
-| ! | L-282 | The lobby: the main page as an entrance hall | OPEN | 3.8 | 2026-10-09 |
+| ! | L-282 | The lobby: the main page as an entrance hall | OPEN | 3.8 | 2026-11-08 |
 | ! | L-186 | Cross-check annotation issues -- clear before Batch 2 | OPEN | 3.6 | 2026-08-07 |
 | ! | L-210 | Pilot citation findings -- four rows in constants_new.py | OPEN | 3.6 | 2026-08-21 |
 | ! | L-215 | Ledger cleanup by topic, not by age | OPEN | 3.6 | 2026-08-19 |
@@ -1107,14 +1112,16 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-504 | The orrery's clock: UTC everywhere (orrery, every module that reads the clock) | OPEN | -- | 2026-10-31 |
 | ! | L-506 | Token economy: tokens spent where they buy verification or a decision, and counted (protocol, every session) | OPEN | -- | 2026-11-02 |
 | ! | L-507 | Historical missions: past voyages drawn in the Solar System room, then encounters (gallery, the Solar System room) | OPEN | -- | 2026-11-05 |
-| ! | L-508 | A held body's alarm: loud until a ledger item names it (orrery + gallery, the Horizons check and the night) | OPEN | -- | 2026-11-02 |
+| ! | L-508 | A held body's alarm: loud until a ledger item names it (orrery + gallery, the Horizons check and the night) | OPEN | -- | 2026-11-08 |
 | ! | L-509 | Obsolete code: how it is marked, and when it goes (orrery, housekeeping) | OPEN | -- | 2026-11-06 |
 | ! | L-510 | The object list's typed fields stop deciding: a small body drawn by today's eccentricity, a plan asked from before any launch (orrery, the object list and the path plan) | OPEN | -- | 2026-11-05 |
 | ! | L-511 | The orrery's export carries the words the website prints (orrery + gallery, the words) | OPEN | -- | 2026-11-03 |
 | ! | L-512 | The orrery's fallbacks when JPL cannot answer (orrery, the plot's data path) | OPEN | -- | 2026-11-04 |
 | ! | L-514 | The Mars room: Mars, Phobos and Deimos (gallery + orrery, a planet room; road stage 15) | OPEN | -- | 2026-11-06 |
-| ! | L-515 | One nested tree in place of isolated rooms (gallery, the room system; design) | OPEN | -- | 2026-11-07 |
+| ! | L-515 | One nested tree in place of isolated rooms (gallery, the room system; design) | OPEN | -- | 2026-11-08 |
 | ! | L-516 | Renew palomasorrery.com at Porkbun before 2027-02-13 (legacy; Tony's account) | OPEN | -- | 2026-11-07 |
+| ! | L-517 | The lobby for a first-time phone visitor: one door first, the pictures into the tree (gallery, lobby and drawer; design) | OPEN | -- | 2026-11-08 |
+| ! | L-518 | The shared scene link: the address carries the ticked bodies and the minute (gallery, the Solar System room; designed, not built) | OPEN | -- | 2026-11-08 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1545,6 +1552,127 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
+#### [L-518] The shared scene link: the address carries the ticked bodies and the minute (gallery, the Solar System room; designed, not built)
+<!-- L:518 status:OPEN upd:2026-11-08 section:A flag: rice: -->
+- **Opened 2026-11-08, 11:03 Chicago**, on Tony's question in the lobby
+  design talk: "did we build the specific scene url's that can be
+  shared?" Not built: read at gallery 23440b79, neither
+  `interactive.html` nor `gallery/*.js` reads a ticked-rows or a minute
+  parameter from the address.
+- **Designed and ruled Oct 29, 13:07 to 13:27**, never given an item
+  (the coordination handoff said "item to open"; the ledger's Oct 29
+  evening stamp, "the shared link not built, no item opened"). The
+  record is `documentation/DESIGN_shared_view_rulings_20261029.md`.
+  Tony's ask, Oct 28, 19:54: "When we compose a scene, like ED138 and
+  Pluto, and we forward it, is there a way to retain the scene?" The
+  rulings: a shared link carries the ticked bodies and the minute shown,
+  the maker's minute, written into the address by the page itself; a
+  shared moment is the first form of choosing a date. The address, as
+  sketched there:
+  `interactive.html?exhibit=solar-system&show=2026-ed138,pluto&at=2026-10-29T04:27Z`
+  (both parameter names placeholders for the build).
+- **What has changed since, for the build:** the rooms are one tree
+  (L-515), so a shared scene inside Earth's centre carries that centre
+  too; and a minute past the served window now draws the window's last
+  day and says so (the freeze, L-165, gallery `scene_moment.js`), which
+  answers what an old shared link shows.
+- **PLACED, Tony, 11:54:** right after the lobby (L-517's part 2),
+  before L-515's step 2b. The coordinator's reason, which he agreed to:
+  visitors arriving from Instagram are the ones who would share a scene.
+**Gap:** the build (a gallery Code session, small, per section 7 of the
+design record, read again against L-515's tree), and Tony's Mode 5: a
+scene shared to himself and opened on another device.
+**Ref:** `documentation/DESIGN_shared_view_rulings_20261029.md`;
+`documentation/HANDOFF_coordination_20261028_29.md`; L-515 (one nested
+tree); L-165 (site continuity); L-503 (the belt on the website).
+
+#### [L-517] The lobby for a first-time phone visitor: one door first, the pictures into the tree (gallery, lobby and drawer; design)
+<!-- L:517 status:OPEN upd:2026-11-08 section:A flag: rice: -->
+- **Opened 2026-11-08, 08:25 Chicago**, a design talk (zero code) in the
+  coordinating session (Claude Opus 5.5), built on orrery 7d3e57ba and
+  gallery 23440b79. Tony's request, from his Nov 7 phone look (copy
+  `documentation/WHERE_WE_ARE_11-7-26_1631_run_record.md`) and his prompt:
+  "from showing the website to people, the most common reaction is not
+  knowing what to do. There are too many choices, and what is obvious to
+  me is not obvious to them." Visitors now arrive from his Instagram
+  profile, on a phone, from one link, knowing nothing about the site:
+  design for them first. The lobby should reflect the one tree (L-515).
+- **Found first, read at gallery 23440b79 on a 390 px phone:** the lobby
+  was already close to Tony's starting idea (L-428 (the lobby's way in)
+  put the Solar System picture and Enter first on Oct 9). What a newcomer
+  meets instead: two Solar System buttons that go to different places
+  (Enter opens the live room; the Solar System row opens a list of 13
+  rooms, 7 marked under construction); Featured repeating the tree (The
+  Sun and Earth and Moon open views now inside the Solar System room); the
+  site's own words (exhibits, live in 3D, Interactive, rooms); and the
+  title and two sentences filling the top half of the first screen.
+- **The canvas** (Design, private to Tony): "Lobby: fewer ways in",
+  https://claude.ai/artifact/6TQPSgyMg1N1XBrYyvioxZ . Top row: D (the
+  lobby as ruled), F (pictures in the room's drawer), E (a separate
+  picture page, set aside). Bottom row: A (four ways in), B (one door), C
+  (how far out: rings of stars, solar system, Earth).
+- **RULED, in Tony's words:**
+  1. The lobby is board D (08:59): "I like A's words and pictures and
+     B's layout." The first screen asks one thing: the site's name and one
+     line, the Solar System room's picture, "Today's sky, live", one
+     sentence, one Explore button. Below it, "More to explore": a picture
+     strip each for Earth System Science and Stars. No Solar System
+     subject row in the lobby.
+  2. The 25 Solar System pictures and animations (09:03): "They are
+     useful but confusing and will eventually be replaced." They leave the
+     lobby.
+  3. Collapse and relabel (09:12): "collapse the tree to remove unused
+     branches that will not be used. And relabel so the two views clash
+     less." A room with no cards is not listed; the live view and the
+     saved pictures are named so they cannot be taken for each other.
+  4. The pictures go into the live tree (09:15): "adding temporary
+     drawers to the existing rooms to hold these pictures? That way it's
+     one tree. The drawers would be groups with the items upon opening
+     them, like we do write comets and asteroids." This set aside board E
+     and the lobby footer line that would have led to it.
+  5. Beside each body's own row (09:23): "I think beside its row. It's
+     temporary but not quick. It'll be a while before these mostly
+     encounters are all built and replace the existing. So integration as
+     best we can is the best I think."
+  6. Featured stays as it is (10:08): "keep Featured as-is and i can
+     modify in the existing editor." Its rethink is deferred (10:03):
+     "featured is part of the gallery editor and with this new tree we are
+     basically deprecating the editor as it exists today. featured can
+     still be valuable, but we have to re-think it, while piping the
+     existing cards into the new tree."
+- **Method, written into the brief, not rulings:** which row each picture
+  sits beside (the build places each and lists every one for Tony's phone
+  look); the picture rows look unlike the ticked rows (a picture mark, an
+  arrow, one line saying they open a page) and Back returns to the room;
+  the phone opens a card's portrait twin and the desktop its landscape one,
+  by the gallery's existing rule; the two strip pictures are drawn from the
+  site's own cards (Warming Stripes: the annual mean of the card's monthly
+  anomalies; the 20-light-year star map: its stars laid flat), credited to
+  their cards and carrying no numbers.
+- **Claude** (written before the order was ruled; see below): two builds,
+  in the brief `documentation/COORD_L517_lobby_brief_20261108.md`. Part 1, the lobby
+  and the collapsed subject pages (index.html); its lobby keeps one quiet
+  footer line to the Solar System pictures until part 2 lands, so they are
+  never without a way in between the two pushes (Tony agreed to that line
+  at 09:12, before the drawer idea). Part 2, the pictures beside their
+  rows in the Solar System room's drawer, with interactive-exhibit's bump;
+  it removes the footer line. Solar System Explorer, which belongs to no
+  single body, defaults to a fold beside the root's Sun row; Tony judges it
+  at the phone look.
+- **ORDER RULED, Tony, 11:03:** "I would say the picture first then the
+  lobby." The brief was reordered the same morning: part 1 puts the
+  pictures beside their rows; part 2 builds the lobby, with no temporary
+  footer line, since the pictures already have their way in.
+**Gap:** part 1 (the pictures) built and passed on Tony's phone; part 2
+(the lobby) built and passed; each picture group leaves its row when the encounter that
+replaces it is built.
+**Ref:** L-282 (the lobby); L-428 (the lobby's way in); L-447 (the front
+page says what the site is: its sentence and the Paloma line stay, the
+line moves above the guest book); L-515 (one nested tree); L-303 (the
+card model, one viewer per orientation); gallery `index.html`,
+`gallery/gallery_config.json`, `gallery/gallery_metadata.json`,
+`gallery/solar_system_drawer.js`.
+
 #### [L-516] Renew palomasorrery.com at Porkbun before 2027-02-13 (legacy; Tony's account)
 <!-- L:516 status:OPEN upd:2026-11-07 section:A flag: rice: -->
 - **Opened 2026-11-07, 12:57 Chicago**, on Tony's request in chat:
@@ -1568,7 +1696,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 - **Ref:** L-165 (site continuity); L-490 (the legacy list).
 
 #### [L-515] One nested tree in place of isolated rooms (gallery, the room system; design)
-<!-- L:515 status:OPEN upd:2026-11-07 section:A flag: rice: -->
+<!-- L:515 status:OPEN upd:2026-11-08 section:A flag: rice: -->
 - **Opened 2026-11-07, 00:17 Chicago**, in the coordinating session
   (Claude Opus 5.5), built on orrery 33c699bb and gallery 3f2ce7fc.
   Tony: "I think we need to rethink the room system before we go
@@ -2436,13 +2564,20 @@ as an archive of the prioritization thinking -- no cleanup on close.
     anchor's page: "same: true". walk_scene_moment 13 of 13 and 10 of 10;
     walk_drawer_order ok; walk_shell_reset 33 of 33 twice. The gallery
     run, offline: "39 of 39 gating checkers passed".
-**Gap:** Tony's phone look at part 4 and his three asks (the frozen
-words with ?freeze=1, the opaque box, the parent groups and their
-names); then step 2b; L-514 (the Mars room) waits for step 3. Carried
-from his look at part 3: the Moon's Go To box (the Mars website
-session), the lobby (a design talk).
+- **Part 4 pushed and passed on Tony's phone, Nov 7, night**, read on
+  2026-11-08 from his copy
+  `documentation/WHERE_WE_ARE_11-7-26_1631_run_record.md`: website
+  pushed at 23440b79, orrery at 68f7eb56 (then v3.131 at cf795cc5). His
+  verdicts: the frozen comet's date with &freeze=1, "yes"; the opaque
+  box, "yes"; the parent groups and the five names, "correct"; Find on
+  "comet" and "JFc", "correct". Protocol v3.131 is pasted (the
+  Project's instructions read v3.131 on Nov 8).
+**Gap:** step 2b; L-514 (the Mars room) waits for step 3. Carried from
+his look at part 3: the Moon's Go To box (the Mars website session).
+The lobby moved to L-517 (the lobby for a first-time phone visitor).
 **Tony-action (do):** reinstall interactive-exhibit 1.35 (Settings >
-Skills) and paste protocol v3.131 into the Project's instructions.
+Skills), if not yet done; the next session that loads it confirms it
+reads 1.35.
 - **Ref:** L-514 (the Mars room); L-443 (the drawer's groups); L-392 (the
   rooms section); L-291 (the Earth room); the protocol's The Orrery and
   the Assembler.
@@ -3176,7 +3311,16 @@ nothing; then a housekeeping slice (5b on the road).
 **Ref:** L-476; `palomas_orrery.py`.
 
 #### [L-508] A held body's alarm: loud until a ledger item names it (orrery + gallery, the Horizons check and the night)
-<!-- L:508 status:OPEN upd:2026-11-02 section:A flag: rice: -->
+<!-- L:508 status:OPEN upd:2026-11-08 section:A flag: rice: -->
+- **Also for the records skill's next version, carried here 2026-11-08**
+  (Tony, in his prompt to the lobby design talk): "once I've installed a
+  skill or pasted the protocol, any later change to it must get a new
+  version number. On Nov 7 the skill and the protocol each changed twice
+  under the same number, and the version check can't catch that." It
+  refines One Session, One Bump: one number per session holds only until
+  Tony installs or pastes; a change after that is a new number, even in
+  the same session. The case: interactive-exhibit 1.35 and protocol
+  v3.131, Nov 7, night.
 - **RULED, Tony, 2026-11-02, evening,** in the coordinating session
   (Claude Opus 5.5), in his words: "A held body raises an alarm. It is
   loud until a ledger item names it. Once an item exists, the report
@@ -13401,7 +13545,11 @@ as "Paloma's Orrery Guest Book". Kept for the record:
 https://cusdis.com/; https://github.com/djyde/cusdis.
 
 #### [L-282] The lobby: the main page as an entrance hall
-<!-- L:282 status:OPEN upd:2026-10-09 section:A flag: rice:5/4/75/4 -->
+<!-- L:282 status:OPEN upd:2026-11-08 section:A flag: rice:5/4/75/4 -->
+- **2026-11-08: the lobby is redesigned under L-517** (the lobby for a
+  first-time phone visitor): one door first, the Solar System subject row
+  out of the lobby, its pictures into the room's drawer. The doors below
+  are history where L-517 differs.
 - **DESIGN CLOSED 2026-09-04** (design session, zero code; the reasoning
   trail is HANDOFF 2026-09-04, "the lobby splits by subject"). Nine
   rounds, each simpler. What replaced proposal 1 below:
