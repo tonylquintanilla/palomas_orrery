@@ -848,8 +848,180 @@ I added the button, and the orrery's run is now green: "35 of 35 gating checkers
 
 **Your run order**
 1. In GitHub Desktop, commit and push the website, -- 820f6d438d457c260435cd4f8f857a47408a9da5
-   1. then the orrery. -- 
+   1. then the orrery. -- 1ec02dcac6a58f5f10d3d94b6f3f0afb4b15f25f
 2. Do the phone look: add `&freeze=1` to a room's address, using the list in my earlier report.
+
+**Tony-actions**
+- (do) Commit and push both repositories. -- done
+- (do) Reinstall interactive-exhibit 1.35 (Settings > Skills), and paste protocol v3.131 into the Project's instructions. -- done
+
+======================================================
+
+**Coordinator:**
+
+Both pushes reached GitHub: the website at 820f6d4 and the orrery at 1ec02dc.
+
+Part 4 is about what a room does if the website's data ever runs out. The data covers about 88 days either side of today. If the nightly build stopped for longer than that, a room would now draw the last day it has, and say so, instead of going blank. To see it before that day ever comes, add `&freeze=1` to an address, which pretends it's a day past the data's end.
+
+**1. Without the knob, nothing changes**
+- Open `palomasorrery.com/interactive.html?` as usual. -- this is the new main page
+- No note about "the last day our data covers" anywhere, under the title or in the i panel.
+
+**2. The Solar System room, frozen**
+- Open `palomasorrery.com/interactive.html?&freeze=1`. 
+- **The room draws, not blank.** The planets are in place. -- yes
+- **Under the title:** a date, then ", the last day our data covers." -- yes
+- **In the i panel, right under the room's heading,** this note: "This room shows [date], the last day its data covers, and not today. The positions are checked against JPL only up to that day, so the room stops there rather than guess beyond it." -- yes
+- **A spacecraft's text box:** its dates sentence should say "where they were on the day shown" instead of "today." -- yes
+- **A comet on an open path:** its span sentence should say "a year after the day its data was fetched." -- unclear. does that mean a year after 3-feb-2027 the date shown?  -- general comment: the text box is partially opaque so the triad comes through and conflicts with the words. can we make the text box background 100% opaque? 
+
+**3. The Earth room, frozen**
+- Open `palomasorrery.com/interactive.html?exhibit=earth&freeze=1`.
+- The same two notes, under the title and in the i panel, and the room draws normally. -- yes
+
+**4. Your judgment on the words**
+- The title line and the i panel note are new words visitors would read. Code flagged both as yours to settle on this look.
+
+==================================================================
+
+**Code:**
+
+Three changes. I'll do the two small ones first, then look at how the drawer's groups are built before shaping the third.
+
+The box is at 95% opacity over axes drawn inside the plot, so it may hide them, and the triad overlay could sit above it regardless. I'm checking which layer is on top.
+
+The triad sits above the plot, so an opaque text box won't cover it; I'll hide the HUD row only while an open box actually overlaps the triad. Next I'm checking where the box opens and closes and where the HUD redraws each frame.
+
+I'm putting the overlap test in the text box's own file and having the HUD's per-frame loop hide the row while an open box overlaps it. Reading the text box file's structure first.
+
+Item 1 first. Checking which variable holds the body where the comet's sentence is built:
+
+Now the edits for item 1: the comet's frozen sentence takes the day its data was fetched (`path_source.retrieved`, the same day its source line prints).
+
+Updating the check for the day: a worked case for each form, the new wiring line, and a fourth planted break (the day dropped).
+
+The self-test now catches four breaks, and item 1 is finished. For item 2 I'll limit the overlap test to the text box and not the credit line, and I'm checking how that credit gets drawn.
+
+I'll drop the "palomasorrery.com" credit line by its text, since it always overlaps the ruler. Then I'll read Plotly's element names from the shipped bundle before relying on them.
+
+Confirmed from the bundle: every annotation, page or scene, is a `g.annotation` in Plotly's info layer, and the box itself is its `annotation-text-g`. Making the edits:
+
+Checking that the triad and ruler carry those two ids:
+
+Both exist. Now adding item 2 to its check (the Hover budget row, which already holds the text box's file): worked overlap cases, the page's wiring, and a planted break.
+
+It takes arguments; reading how the gallery run calls it:
+
+Item 2 passes, self-test included. One wording fix: the self-test's line prints "[it passed]" even when the break was caught, which reads wrong.
+
+Items 1 and 2 are done. Now item 3, the parent groups. First, the drawer's served rows as they stand:
+
+Six comet groups sit right after the Sun, Spacecraft and Historical missions follow Earth, and Apollo and Amor asteroids come after those; I'm now reading the drawer code that handles the groups.
+
+The group logic lives in the drawer's file, so I'll give group rows a parent the way bodies name their group, letting counts, Reset and visibility follow the chain. First I'm reading the Find logic and the page's fold code.
+
+Reading `rowPlan` (which lays out the rows) and the indent styling:
+
+I'm adding parent-group support to the drawer, with counts, Reset, visibility and Find all following the chain. Next I'll check where else the page opens a group and how the indent styles work.
+
+Reading the two group rows whose labels would clash with their new parents (the JPL "Comets" class and "Spacecraft"):
+
+I'm grouping the six comet groups under proposed names, moving Spacecraft into active and historical missions, and keeping Aten after Venus; the names are easy to change in the config. Next I'll work on the drawer logic.
+
+Writing the drawer-logic changes as one all-or-nothing script:
+
+Drawer logic in place. Now the page: indent a sub-group and its bodies one step further, and open a found group's parents when it's chosen from Find.
+
+Now the served rows in the config: three parent rows, each child group naming its parent, and the two relabels.
+
+Config parses. The room's driver hands the drawer rows to the page, so I'll rebuild the Solar System payload from the new config and print the drawer as it opens:
+
+Parents are listed, but their sub-groups still show while the parent is folded, so I'm making group rows follow the same visibility rule as their bodies, Reset included.
+
+The drawer now opens with three parent rows folded: Comets (27), Spacecraft (19), and Apollo and Amor asteroids (11). Now running the existing checks to see what the change breaks:
+
+The drawer check still misses parent entries, and 8 walk tests now fail. Seven just expect the old flat list and will be rewritten, but I'm checking the clear-search failure first, since it may be a real bug.
+
+That walk failure is expected: sub-groups now stay hidden while their parent is folded, so I'll update the seven old expectations and add a parent-group section to the walk.
+
+Writing the walk updates: the seven old expectations set to the new structure, the `fold` helper opening a folded parent first (as a visitor would), and a new section 28 for the parent groups.
+
+Down to the 3 known failures plus one: "comet" shows the Comets row but not its six groups under it. Checking what Find returns for "comet":
+
+The Find rule is doing its job: "comet" also matches the Sun's shell "Roche Limit (Comets)", so Comets is listed closed, and my walk expectation was wrong. I'm fixing the walk to expect Comets alone and closed, with choosing it opening the six.
+
+The drawer walk is at 235 of 238; the 3 failures left are the ones the unchanged page also has. Now the walk on a planted fault: a copy of the page where sub-groups always show.
+
+The walk goes red on that fault, naming it in eight places. Now the gating drawer check, which the gallery run uses. Reading its structure:
+
+I'm adding a section 12 to the drawer check covering sub-group cases, four planted breaks, the real config's parents, and the page wiring.
+
+All four new breaks are caught, and the check prints the three parents from the real config. Adding section 12 to the check's header, then the full set of checks:
+
+The gallery run is still "39 of 39 gating checkers passed". Now the headless walks again, with the payloads rebuilt from the new config, and the frozen comet sentence read off the page:
+
+The frozen comet sentence now runs to a year after 7 November 2026 (or less where JPL's path stops sooner), and all thirteen open-path comets carry it. Next I'm comparing it against the anchor's page.
+
+Earth is identical. The Solar System room and the Sun address differ, as expected; naming exactly what differs:
+
+That comparison feeds new rows to the old page, which can't read them, so I'm instead comparing each page on its own matching rows.
+
+The drawer matches the anchor except for the intended changes: three parent rows, sub-groups one level deeper, and two relabels. Next I'll find where the records and the skill reference these rules, since interactive-exhibit 1.35 ships in the same bump.
+
+Writing the skill amendments as one script (the 1.35 entry, the freeze's sentence rule, the parent groups, Find, and the opaque box):
+
+Skill check clean. Now the protocol's v3.131 entry, the ledger and Where We Are, in one script:
+
+One line over the page's cap; putting the box line back on one line:
+
+Last, the orrery's run again (the skill and protocol changed) and the encoding check on the website files:
+
+All three are built, and both runs are green: the website's 39 of 39 and the orrery's 35 of 35.
+
+**1. The comet's fetch date.** In a frozen room, a comet's box now reads: "...to a year after 7 November 2026, the day its data was fetched, or less where JPL's path stops sooner...". The date uses the page's own day format, the same one the comet's source line prints, so it says "7 November 2026" rather than "Nov 7, 2026". Each comet gets its own fetch day, across all thirteen comets on open paths. When the room isn't frozen, the sentence is the one you approved.
+
+**2. The opaque text box.** The box is now fully opaque (it was 95 percent), so the axes no longer show through. The triad and the ruler are different: they sit on a layer above the picture, so no box colour can cover them. Instead, the row at the bottom (triad and ruler) now hides whenever the open box covers either one, and comes back when the box closes or moves off. On a desktop, where the box sits beside its marker, it usually won't touch the triad. My headless test page can't measure where things land on screen, so only your phone can show this one.
+
+**3. Groups over groups.** Three places in the drawer had several groups side by side, and each now has one parent row:
+- **Comets**, holding the six comet groups.
+- **Spacecraft**, holding "Active missions" (the twelve) and "Historical missions".
+- **Apollo and Amor asteroids**, holding those two. Aten stays after Venus, by your distance ruling.
+
+Two groups were renamed so neither repeats its parent's name. JPL's COM class now reads "Other comets", and its box still opens with JPL's word ("Comet: JPL's class..."). The twelve now read "Active missions". These five names are my proposals for you to judge.
+
+How the parents behave:
+- **Counts and Reset:** a parent's count and its Reset reach every body under it.
+- **Folding:** a sub-group shows only while its parent is open. It stays open inside a closed parent, so it's still open when you reopen the parent.
+- **Find:** it lists only the outermost matching group. "comet" lists Comets alone and closed, because the Sun's "Roche Limit (Comets)" row also matches. "JFc" opens the Jupiter-family comets with Comets open above them.
+
+**Checks.** The drawer check has a new section, and its four planted faults are caught. The drawer walk was 235 of 238 with the new section; its three failures are ones the unchanged page also has. On a copy with sub-groups showing under a closed parent, the walk went red on 11. Seven of the walk's older steps had to be rewritten, because they expected the old flat list of groups. Row by row, the drawer differs from before only in the three parents, the indents and the two renames, and Earth's room is unchanged. The new groups reach visitors on the push alone; they need no rebuild of the site's data.
+
+**Files changed this turn**
+Website:
+- ok gallery/scene_moment.js (2 edits)
+- ok gallery/text_box.js (1 edit)
+- ok gallery/solar_system_drawer.js (11 edits)
+- ok interactive.html (9 edits)
+- ok data/objects_config.json (10 edits)
+- ok documentation/smoke_scene_moment.js (7 edits)
+- ok documentation/smoke_hover_budget.js (2 edits)
+- ok documentation/smoke_solar_system_drawer.js (6 edits)
+- ok tools/headless/walk_solar_system_drawer.js (11 edits)
+
+Orrery:
+- ok skills/interactive-exhibit/SKILL.md (7 edits; still 1.35)
+- ok PROJECT_INSTRUCTIONS.md (1 edit, plus the manifest rewritten by skills_index.py)
+- ok LEDGER_CONSOLIDATED.md (1 edit, plus the index rewritten by ledger_index.py)
+- ok documentation/WHERE_WE_ARE.md (4 edits; 130 lines, at its cap)
+
+**Your run order**
+1. In GitHub Desktop, commit and push the website, -- 23440b799e35ff8ff0ab0dd8405ade3137f33f60
+   1. then the orrery.
+2. Phone look:
+   - **The comet's date:** open the Solar System room with `&freeze=1`, then tap 3I/ATLAS. Its box should name 7 November 2026.
+   - **The opaque box:** tap any marker so its box opens over the triad. You should see no axes behind the words, and the triad should hide until the box closes.
+   - **The groups:** open the drawer. Comets, Spacecraft, and Apollo and Amor should show closed. Open Comets, then one of its groups; the bodies should sit a step further in. Judge the five names.
+   - **Find:** type "comet", then "JFc".
 
 **Tony-actions**
 - (do) Commit and push both repositories.

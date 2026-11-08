@@ -2398,11 +2398,49 @@ as an archive of the prioritization thinking -- no cleanup on close.
   12"). Dashboard parity then "PASS -- 10 of 10 planted faults caught; 99
   steps matched to their buttons"; the orrery maintenance run "35 of 35
   gating checkers passed".
-**Gap:** Tony's phone look at part 4 (the frozen words, with
-?freeze=1); then step 2b; L-514 (the Mars room) waits for step 3. Carried from his
-look at part 3: the Moon's Go To box (the Mars website session), one
-Comets group over the six (with step 2b or Mars), the lobby (a design
-talk).
+- **Tony's three asks, Nov 7, night, in chat, and their build** (the same
+  website Code session, riding interactive-exhibit 1.35):
+  - "Comet span sentence, frozen room. It should print the fetch date,
+    e.g. "to a year after Nov 7, 2026, the day its data was fetched.""
+    Built: the frozen sentence names the day the comet's path was
+    fetched, as its source line prints it ("to a year after 7 November
+    2026, the day its data was fetched"), all thirteen open-path comets;
+    without a day it reads as before. The Scene moment check's self-test
+    now breaks the file four ways.
+  - "Text box background: fully opaque, so the triad and axes don't show
+    through the words." Built: the box is opaque (it was 95 percent);
+    the triad and ruler are page chrome above the plot, so the HUD row
+    hides while the open box covers either (checked every frame; the
+    site credit passed over), by `GalleryTextBox.overlaps`. Held by the
+    Hover budget check (five cases, the wiring, a broken copy). The
+    headless page has no layout, so the overlap itself is seen only on
+    the phone.
+  - "Comets group: one "Comets" group that opens to the six comet
+    sub-groups. The same for spacecraft and asteroids where several
+    groups sit together." Built: a group row may name a parent in "in";
+    three parents where groups sit together -- Comets over the six,
+    Spacecraft over Active missions (the twelve) and Historical
+    missions, Apollo and Amor asteroids over those two; Aten stays after
+    Venus. Relabelled so no name repeats its parent's: JPL's COM class
+    "Other comets", the twelve "Active missions". Words for his look.
+    Counts, Reset and Find reach through the sub-groups; Find lists only
+    the outermost group that matches.
+  - CHECKS, read from their output: the drawer check's new section 12,
+    four planted breaks caught, the config's parents printed; the walk's
+    new section 28, and the seven old expectations rewritten to the new
+    structure (each a group row now under a parent), 235 of 238, its
+    three reds the anchor's own; shown red (11 of 238) on a copy of the
+    page listing sub-groups while their parent is folded. The drawer
+    before and after, row by row: only the three parents, the sub-groups
+    and their bodies a step in, and the two relabels. Earth against the
+    anchor's page: "same: true". walk_scene_moment 13 of 13 and 10 of 10;
+    walk_drawer_order ok; walk_shell_reset 33 of 33 twice. The gallery
+    run, offline: "39 of 39 gating checkers passed".
+**Gap:** Tony's phone look at part 4 and his three asks (the frozen
+words with ?freeze=1, the opaque box, the parent groups and their
+names); then step 2b; L-514 (the Mars room) waits for step 3. Carried
+from his look at part 3: the Moon's Go To box (the Mars website
+session), the lobby (a design talk).
 **Tony-action (do):** reinstall interactive-exhibit 1.35 (Settings >
 Skills) and paste protocol v3.131 into the Project's instructions.
 - **Ref:** L-514 (the Mars room); L-443 (the drawer's groups); L-392 (the

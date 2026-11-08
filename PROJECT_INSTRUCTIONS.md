@@ -622,7 +622,10 @@ interactive-exhibit          1.35 adding or changing an exhibit in
                                   centre (check_tree_parents.py, the store
                                   writer's parent path); a room opened past the
                                   served window (the freeze, scene_moment.js,
-                                  the Scene moment check, ?freeze=1)
+                                  the Scene moment check, ?freeze=1); parent
+                                  groups in the drawer (Comets over the comet
+                                  groups, a sub-group's in); the text box
+                                  opaque and the HUD hidden under it
 <!-- SKILL-MANIFEST:END -->
 
 Session-Start Repo Pull and the SHA Round Trip [CRITICAL]
@@ -1338,7 +1341,14 @@ page chooses inside the gate); a frozen room says so under its title
 and right under its heading in the i panel; the two sentences that say
 "today" take the frozen room's words; the Mode 5 knob ?freeze=1; the
 gallery run's Scene moment check, which asks the real resolver, and the
-walk. Its oldest of four version entries (1.32) moved to
+walk. Riding the same bump, Tony's three asks of the same night: a
+frozen comet's span sentence names the day its data was fetched; the
+text box is opaque, and the HUD row hides while the box covers its
+triad or ruler; and parent groups in the Solar System room's drawer, a
+sub-group naming its parent in "in" (Comets over the six comet groups,
+Spacecraft over Active missions and Historical missions, Apollo and
+Amor asteroids over those two), counted, reset and found through their
+sub-groups. Its oldest of four version entries (1.32) moved to
 documentation/SKILL_HISTORIES.md, by the three-entry rule. Every
 sentence was read from the gallery's code with this session's edits
 before it was written.

@@ -9,9 +9,9 @@ Last updated: November 7, 2026, night: the website Code session (Opus), L-515 pa
 > **Changed since you last read this:**
 > - Part 4: past the dates its data covers, a room now opens on the
 >   last day covered and says so, instead of failing to load.
-> - Your phone look at part 3 is recorded, with your three notes.
+> - Your three asks: the comet's fetch date, an opaque text box, groups over groups.
 >
-> **Do next:** *your phone look at the freeze (add &freeze=1 to a room's address); then step 2b.*
+> **Do next:** *your phone look at the freeze (&freeze=1) and the three asks; then step 2b.*
 >
 > **Needs you now:**
 > - *(do) Commit and push both, website and orrery.*
@@ -68,7 +68,7 @@ Standing rulings; a line leaves once it is habit, or a skill carries it.
 ## Deferred  **>> UPDATED THIS SESSION**
 
 Waiting behind other work; a line leaves when picked up.
-- One Comets group over the six (and spacecraft, asteroids): step 2b or Mars; the Moon's Go To box: Mars (Nov 7; L-515 (one nested tree)).
+- The Moon's Go To opening the orbit's box: the Mars website session (Nov 7; L-515 (one nested tree)).
 - Charon's period is asked around Pluto's centre, not the barycentre;
   fix it before Pluto's room (L-150 (trusting a near-equal pair), Nov 6).
 - When the road turned to the symbols (Nov 5): L-512 (fallbacks when

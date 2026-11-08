@@ -1,12 +1,12 @@
 ---
 name: interactive-exhibit
 description: How an interactive exhibit (a room in interactive.html such as ?exhibit=earth) is designed, built, verified and carded for the Paloma's Orrery gallery. Covers the exhibit switch and boot path, the assembler driver spec, the JS feature handoff, the shared chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent gate, back link), what is per-body, the served-data provenance contract, what a room opens on (the arrival block) and the shell-key stamp the renderers apply, the drawer order, who may write data/objects_config.json, the Mode 5 phone sequence, and carding an exhibit through Studio. Use when adding or changing an exhibit (Earth, Jupiter, the stars), touching sun* chrome in interactive.html, deciding what an exhibit may render, or editing the served words with store_writer or exhibit_store_editor. Not for propagation math (gallery-assembler), the nightly builder (gallery-cache-builder), or the Studio/converter chain (gallery-pipeline). Do not use for projects other than Paloma's Orrery.
-fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, its group rows, its two Resets, the Reset in every room's top bar, Home's order and its framing; Go To fitting a body's whole orbit and the orbit line in a body's hover; the count line's place; a bare interactive.html link and the Explorer's address; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia); a served number's citation and its source_note; the Typed facts check (smoke_typed_facts.js); a feature drawn as stored dots (the Hills cloud, Earth's radiation belts); the i panel's source list and its links (source_list.js); the order a room's drawer lists its shells in, where each begins (drawer_order.js, the Drawer order check); a spacecraft's path in the Solar System room (its positions file, solid and dashed, its text box); whether the website and the orrery agree on an object; the planets ticked with a spacecraft (companions); the i panel's words one sentence to a bullet; a comet on an open path in the Solar System room; the drawer's groups one JPL class to a row; JPL's terms in the words a visitor reads; a comet's companions; the drawer's Find a body box; the direction arrows on the orbits; the grid chip's AU note and the triad's frame note; the i button's first-visit note and hovers without a pointer line; the one text box for a tap and Go To (text_box.js); a group found by its find words; the i panel's Report a problem link; a drawing row in the Solar System room (the belt's cloud); a stored drawing's cross kept off the axes; the source line's UTC and JPL clock; the ruler and the x marks on the axes; an ended mission (the Historical missions group, its marker on its last day, mission_end; a craft that flew on and its end_note; a path cut before its mission ended and its cutoff_note); an orbital period under a year, printed in days only (days_only); one drawer for every centre (the fixed centre row, the trail line, Centre on, the root's ticks kept, a centre's children by distance among its shells); the Sun's shells in the Solar System room, how that room frames a shell, and what ?exhibit=sun opens on (EXHIBIT_ADDRESSES); the Earth room's Sun line; an object's parent as its fetched centre (check_tree_parents.py, the store writer's parent path); a room opened past the served window (the freeze, scene_moment.js, the Scene moment check, ?freeze=1)
+fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, its group rows, its two Resets, the Reset in every room's top bar, Home's order and its framing; Go To fitting a body's whole orbit and the orbit line in a body's hover; the count line's place; a bare interactive.html link and the Explorer's address; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia); a served number's citation and its source_note; the Typed facts check (smoke_typed_facts.js); a feature drawn as stored dots (the Hills cloud, Earth's radiation belts); the i panel's source list and its links (source_list.js); the order a room's drawer lists its shells in, where each begins (drawer_order.js, the Drawer order check); a spacecraft's path in the Solar System room (its positions file, solid and dashed, its text box); whether the website and the orrery agree on an object; the planets ticked with a spacecraft (companions); the i panel's words one sentence to a bullet; a comet on an open path in the Solar System room; the drawer's groups one JPL class to a row; JPL's terms in the words a visitor reads; a comet's companions; the drawer's Find a body box; the direction arrows on the orbits; the grid chip's AU note and the triad's frame note; the i button's first-visit note and hovers without a pointer line; the one text box for a tap and Go To (text_box.js); a group found by its find words; the i panel's Report a problem link; a drawing row in the Solar System room (the belt's cloud); a stored drawing's cross kept off the axes; the source line's UTC and JPL clock; the ruler and the x marks on the axes; an ended mission (the Historical missions group, its marker on its last day, mission_end; a craft that flew on and its end_note; a path cut before its mission ended and its cutoff_note); an orbital period under a year, printed in days only (days_only); one drawer for every centre (the fixed centre row, the trail line, Centre on, the root's ticks kept, a centre's children by distance among its shells); the Sun's shells in the Solar System room, how that room frames a shell, and what ?exhibit=sun opens on (EXHIBIT_ADDRESSES); the Earth room's Sun line; an object's parent as its fetched centre (check_tree_parents.py, the store writer's parent path); a room opened past the served window (the freeze, scene_moment.js, the Scene moment check, ?freeze=1); parent groups in the drawer (Comets over the comet groups, a sub-group's in); the text box opaque and the HUD hidden under it
 ---
 
 # Interactive Exhibit
 
-Read this file in 11 parts: lines 1-117, 118-171, 172-412, 413-595, 596-729, 730-740, 741-980, 981-1192, 1193-1470, 1471-1685, 1686-1894.
+Read this file in 11 parts: lines 1-123, 124-177, 178-418, 419-605, 606-739, 740-750, 751-989, 990-1219, 1220-1469, 1470-1740, 1741-1949.
 
 Skill version: 1.35 | 2026-11-07, night, with Anthropic's Claude Opus
 5.5, at palomas_orrery @ 4ac3903a and gallery @ 722ad57b. v1.35 (L-515,
@@ -20,8 +20,14 @@ resolver is unchanged and still refuses anything outside the window. A
 frozen room says so under its title and at the top of its i panel, and
 its two sentences that say "today" take the frozen room's words. The
 Mode 5 knob ?freeze=1 shows it early. Checked by the gallery run's Scene
-moment row, which asks the real resolver. Read from the gallery's code
-with this session's edits before it was written.
+moment row, which asks the real resolver. And Tony's three asks of the
+same night, riding this bump: a frozen comet's span sentence names the
+day its data was fetched; THE TEXT BOX IS OPAQUE, and the HUD row hides
+while the box covers its triad or ruler; and PARENT GROUPS -- one group
+over the groups that sit together (Comets over the six comet groups,
+Spacecraft over Active missions and Historical missions, Apollo and Amor
+asteroids over those two), a sub-group naming its parent in "in". Read
+from the gallery's code with this session's edits before it was written.
 Earlier: 1.34 | 2026-11-07, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ cba62f22 and gallery @ 49d1bae1. v1.34 (L-515, one
 nested tree: Tony's phone look at part 2, and step 2a's part 3) makes
@@ -574,9 +580,13 @@ silently.
   settled (built 2026-11-07, his look still to come).
 - THE TWO SENTENCES THAT SAY "TODAY" -- the spacecraft's dates sentence
   and a comet's span sentence -- take the frozen room's words there
-  (`todayWords`: "where they were on the day shown", "a year after the
-  day its data was fetched") and are as approved otherwise. A new
-  sentence a room prints that says "today" joins `TODAY_SWAPS`.
+  (`todayWords`: "where they were on the day shown", and "a year after
+  <day>, the day its data was fetched", the day the comet's path was
+  fetched, `path_source.retrieved`, as its source line prints it; Tony,
+  2026-11-07, night: "It should print the fetch date"; without a day,
+  "a year after the day its data was fetched") and are as approved
+  otherwise. A new sentence a room prints that says "today" joins
+  `TODAY_SWAPS`.
 - NOT MOVED: a moment before the window's start (only a clock set wrong
   reaches it, and the ruling covers the end); and a cache with no
   window, where the resolver warns, as before.
@@ -828,7 +838,8 @@ Plotly.
   HYA for 'Oumuamua); Aten asteroids (ATE) after Venus; Spacecraft after
   Earth; Historical missions after the Spacecraft (v1.30, L-507; like
   Spacecraft, a group of missions, not a JPL class); Apollo (APO) and
-  Amor (AMO) asteroids after them;
+  Amor (AMO) asteroids after them (since v1.35 under their parents,
+  below);
   Main asteroid belt (MBA) after Mars; Jupiter Trojans (TJN) after
   Jupiter; Centaurs (CEN) after Saturn; Trans-Neptunian objects (TNO)
   after Pluto. A comet group without "order": "a" lists its bodies by
@@ -845,6 +856,34 @@ Plotly.
   `ssFold`. Checked by the drawer check's sections 4 and 6, with seven
   planted faults, and walked headlessly (`walk_solar_system_drawer.js`,
   sections 1, 6, 11, 15 and 16).
+- **Parent groups** (v1.35; Tony, 2026-11-07, night: "one "Comets" group
+  that opens to the six comet sub-groups. The same for spacecraft and
+  asteroids where several groups sit together."). A served group row may
+  name a parent group in `in`, as a body names its group, and is then a
+  SUB-GROUP: listed under its parent, indented as a body is, and shown
+  only while every group above it is open (`rowVisible`, `ancestors`);
+  its bodies sit one step further in (`depthOf`, the row's `deep`
+  class). A group's bodies are every body under it at any depth
+  (`members`), so a parent's count, its "Reset <parent>" and where a
+  Sun's shell is placed beside it reach through its sub-groups; a shell
+  never goes among a parent's sub-groups (`placeShells`). A sub-group
+  stays open inside a parent folded shut, and shows open again when the
+  parent reopens; Reset folds all. A parent serves no `about`, so a
+  body's first bullet stays its own group's class. Which groups get a
+  parent is mechanical: groups of one kind that sit together in the
+  served order, each keeping its place by distance. Since 2026-11-07:
+  Comets (`comets_all`) over the six comet groups; Spacecraft
+  (`spacecraft_all`) over Active missions (`spacecraft`, the twelve) and
+  Historical missions; Apollo and Amor asteroids (`apollo_amor`) over
+  those two; the Aten asteroids stay after Venus, alone. Two groups were
+  relabelled so no name repeats its parent's: JPL's COM class reads
+  "Other comets" (its `about` still opens "Comet: JPL's class ..."), and
+  the twelve read "Active missions". The three parents' labels and the
+  two relabels are words for Tony's phone look. Checked by the drawer
+  check's section 12 (the parent, the depth, a parent's bodies, count
+  and Reset, visibility, the plan, Find, a shell's place; four planted
+  breaks; each served sub-group's parent; the page's wiring) and walked
+  (section 28).
 - **A drawing row** (v1.29, L-503; Tony's ruling of 2026-10-29: "a
   tickable row named "The belt's cloud", first inside the Main-belt
   asteroids group, ticked and reset like a body, Go To fitting the
@@ -1132,8 +1171,12 @@ Plotly.
   closed, each with its count ("n bodies"), and the count line names
   groups ("6 groups match"); choosing one clears the box and unfolds it,
   ticking nothing; one group alone, with no body found outside it, opens
-  whole ("probe" opens the twelve spacecraft). The box still reads "Find
-  a body". The logic is the drawer file's GROUPS FOUND (`searchHits`
+  whole. Since v1.35 only the OUTERMOST group that matches is listed: a
+  sub-group whose parent matches too is not listed again ("comet" lists
+  Comets alone, closed, since the Sun's Roche limit row "(Comets)" is
+  found outside it; "JFc" opens the Jupiter-family comets with Comets
+  open above them), and a group chosen from the results opens with its
+  parents. The box still reads "Find a body". The logic is the drawer file's GROUPS FOUND (`searchHits`
   returns `listed` and `opened`; `searchOpen`; `WORDS.listed`,
   `WORDS.found`), checked by the drawer check's section 8b with two
   planted breaks. The `find` words were written by hand into
@@ -1546,7 +1589,19 @@ hover events still fire. A tap is deferred out of the event (L-278) and
 opens `sunLabelShow` with the marker's words; in the Sun and Earth
 rooms the camera still frames the shell, in the Solar System room it
 moves nothing. The box is left-aligned, its border the feature's colour
-at 2 px. Its WORDS are decided by `gallery/text_box.js`
+at 2 px, and OPAQUE (v1.35; Tony, 2026-11-07, night: "fully opaque, so
+the triad and axes don't show through the words"; it was 95 percent):
+the axes drawn behind it no longer show. The triad and the ruler are
+page chrome stacked above the plot, so no box colour can cover them;
+while the open box covers either, the HUD row is hidden
+(`sunHudBoxCheck`, every frame in `sunHudWatch`, since a scene box moves
+with the camera; `GalleryTextBox.overlaps`; the class
+`sun-box-over-hud`, by visibility, so nothing moves). The box is the
+`annotation-text-g` Plotly draws in its info layer, page or scene
+annotation alike (read from plotly.js 2.35.2); the site credit by the
+ruler is passed over. The Hover budget check holds it: five overlap
+cases, the page's wiring, and a copy of the file whose test always says
+no. Its WORDS are decided by `gallery/text_box.js`
 (`GalleryTextBox.bullets`), a file of its own by L-338, loaded by a
 script tag and so on the live check's file list: a soft break becomes a space, the
 first line is the title in bold, a line already opening with a bullet
