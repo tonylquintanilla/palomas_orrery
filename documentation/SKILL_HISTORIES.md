@@ -910,6 +910,19 @@ ruling of 2026-10-31). Each fact was read from the gallery's code at
 c77f87f6, with this session's edits, before it was written.
 (Moved down 2026-11-07, when 1.33 made a fourth entry.)
 
+Earlier: 1.31 | 2026-11-05, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ fb0a8dce and gallery @ 3660993e. v1.31 (L-507, more
+voyages) adds, under An Ended Mission, the day and what became of it:
+the day printed is the orrery's mission_end; a craft that flew on (the
+Pioneers) carries an end_note, its own bullet after the opening (Tony,
+2026-11-05: "A. but indicate the craft is still flying but not
+tracked."); a path cut before its mission ended (Akatsuki, on the last
+day JPL's solution is fitted to tracking) opens with its own end day
+and its cutoff_note, its source line "to the last day drawn". The group holds
+seven. Read from interactive.html, the figures check and the walk with
+this session's edits before it was written.
+(Moved down 2026-11-07, when 1.34 made a fourth entry.)
+
 ## safe-file-editing
 
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons;

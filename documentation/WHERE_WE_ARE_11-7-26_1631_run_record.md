@@ -548,5 +548,203 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
                                     34 named shell(s), in both cache
                                     files.
 
-5. **Website: commit and push everything together**: parts 1 and 2 plus the rebuilt cache. -- 
+5. **Website: commit and push everything together**: parts 1 and 2 plus the rebuilt cache. -- 49d1bae150415ac11d5ae3ec68eb0bab32b127e7
 6. **The phone look** at the three rooms.
+
+==================================================
+
+Both repositories are pushed with parts 1 and 2, so the prompt is anchored on what's there now.
+
+Before you start the session, reinstall interactive-exhibit 1.33 in Settings > Skills, so the session loads the version it is about to change. -- done
+
+Here's the prompt:
+
+> Built on orrery cba62f2270b1034134c3b8f44a02d8d2ad529c66 at https://github.com/tonylquintanilla/palomas_orrery and gallery 49d1bae150415ac11d5ae3ec68eb0bab32b127e7 at https://github.com/tonylquintanilla/tonyquintanilla.github.io (both branch main, read 2026-11-07, 17:47 Chicago). Nightly bot commits since are expected.
+>
+> Type: BUILD, a Claude Code session in the gallery repository, through the python_work door. L-515 (one nested tree), continued.
+>
+> **Start**
+> 1. Record both bases and say whether either moved past the anchor.
+> 2. Read the brief the last session worked from, in the orrery: `documentation/COORD_L515_steps1_2a_brief_20261107.md`. Its parts 1 and 2 are done and pushed. Its Part 3, Part 4, Checks and Close still apply, except where this prompt says otherwise.
+> 3. Read L-515 in `LEDGER_CONSOLIDATED.md` and the orrery's `documentation/WHERE_WE_ARE.md`.
+> 4. Skills, each against the manifest, by its read plan: interactive-exhibit (1.33, in full), gallery-cache-builder (1.18, the objects_config parts), safe-file-editing (1.14), ledger-and-session-records (1.22). interactive-exhibit went to 1.33 in the last session. Confirm the copy you load reads 1.33 before any work that fires it, and stop if it doesn't.
+> 5. You may edit the orrery's `skills/interactive-exhibit/SKILL.md`, run `skills_index.py`, and add the protocol's version entry, for one bump at the session's end.
+>
+> **First, the findings from my phone look at part 2. Fix these before part 3, then stop and report.**
+> 1. **Sun direction line, Earth room.** Make it reach about 10 percent past the farthest orbit or shell currently drawn. It should grow and shrink as rows are ticked and unticked. Today it stops just past the crust.
+> 2. **Drawer order.** Order everything after the fixed centre row by distance, moons included. Earth's Moon goes between the bow shock and the magnetotail. This replaces the rule "shells, then moons" in interactive-exhibit 1.33, so correct the skill too.
+> 3. **Remove "Not built yet" and "No room or cards yet."** A body with no centre shows neither label. It simply has no "Centre on" button.
+>
+> **Then Part 3, as the brief has it:** the Sun's shells become rows in the Solar System room, unticked on opening, so the Alfvén surface can be ticked beside the inner planets. `?exhibit=sun` opens the Solar System room with the Sun's shells ticked, and the Sun room's own row in `EXHIBITS` goes. Stop and report after part 3.
+>
+> **Part 4** (freeze past the served window) is for its own session unless I say otherwise.
+>
+> **Close** as the brief says, with one change: my phone look list now covers the three fixes above, plus part 3's rows in the Solar System room and what `?exhibit=sun` opens on. Commit and push are mine.
+
+================================================================
+
+**Code:**
+
+Starting part 3. First I'm reading how the Solar System room builds its rows, ticks and frames, since the Sun's shells have to fit into all three.
+
+The root's assembly already gathers the Sun's features; its driver just doesn't hand them over. Checking how the page fetches the stored drawings (corona, dust cloud) for them.
+
+Now the drawer logic file, where rows, ticks and the opening are decided.
+
+The drawer logic is clear. Now the page's tick, Go To and select functions for body rows, since the Sun's shells will ride on them.
+
+Shell rows can reuse the body-row wiring with three changes, and I'm checking how arrival handles shell traces in this room next.
+
+The arrival code skips the root, so I'll apply the Sun's arrival block to just its shells for `?exhibit=sun` and first check what else uses the Sun room's key.
+
+Plan settled. One cost to check first: the root will now fetch the Sun's stored drawings on every opening. Here are their sizes.
+
+Each opening of the Solar System room adds about 350 KB on top of its own data, which I'll note for your phone check. Next I'm working on the drawer logic for shell rows and their placement by distance.
+
+Now the page. One patch: the address table, the driver handing over the Sun's features, the root composing the shells, the framing rule, and the Sun room's row removed.
+
+Now the root's compose: draw the Sun's shells with the same renderers, place their rows by distance, and choose the opening by the address.
+
+The page script parses. Rebuilding the room's data with the Sun's features, then booting the page both ways.
+
+Close: the inner shells sit right after the Sun and the outer ones after Pluto. But the trans-Neptunian objects group landed after the shells, not before them. Checking that group's distance.
+
+Found it: group rows were being skipped as anchors, because a group row also carries a group name. Fixing that one test.
+
+Both addresses now work, with the root listing the inner shells after the Sun and the outer ones after the trans-Neptunian objects. Next I'll check Studio's scene list so it still offers the Sun address.
+
+Studio still offers all four scenes. Running the gallery checks to see what part 3 broke.
+
+38 of 38 pass, but none of them yet looks at the Sun's shells in the root, so a pass proves nothing about part 3. First the two walks that booted the old Sun room.
+
+The Sun address passes 31 of 33 reset checks; I'm making the root's Reset close the open text box, which is one of the two failures.
+
+Both reset walks pass, and the Sun address opens at the same frame as the old Sun room. Now the drawer-order walk: its Sun case becomes the Sun's shells inside the Solar System room.
+
+Now the Solar System drawer check gets a section for the Sun's shells: their place by distance, the opening by key, and the page's wiring. Each part has a planted break.
+
+The check passes, and its self-test catches all three new breaks. Now proving the page-wiring half can fail: a copy of the page with the Sun room's row put back and the shell placement removed.
+
+Both planted faults are named. Now the Solar System drawer walk on the new data.
+
+As expected, the walk still looks for "Centre on Sun" on the Sun's row. The Sun is the root now, so that row offers no button. Updating those lines.
+
+Same three failures as at the anchor, nothing new. Now a new walk section for part 3 itself: the shells in the Solar System room, and what `?exhibit=sun` opens on.
+
+Section 27 passes: 14 new checks, plus the three failures already recorded at the anchor. Now showing section 27 fails on the anchor's page, which has no shells in the root.
+
+The anchor's page ends before section 27, so that run can't test it. I'm planting two faults in a copy of today's page instead: shells ticked on opening and the Sun address removed.
+
+With the address gone, `?exhibit=sun` falls through to the old Explorer page and the walk crashes instead of naming the fault. Making it report that and stop cleanly.
+
+The planted copy goes red 17 times, but my "shell ticked on opening" line ran after a Reset, so it tested Reset instead. Moving that check to the room's true first view.
+
+The planted fault is now named, and the real page still shows only the three recorded failures (216 of 219). Now comparing the rooms against the anchor again.
+
+Earth differs from the anchor only by fix 2's Moon swap, and the Solar System room now has 115 rows instead of 97 after adding the Sun's 18 shell rows. I'm running the full gallery check again.
+
+38 of 38 pass. The run also rewrote five files it generates itself (two module indexes and three pull stamps). Checking those before calling them expected.
+
+Both changes are normal run output, not my edits: the pull stamps record your orrery's commit, and the module indexes were regenerated with line counts in Windows line endings that Git converts on commit. Part 3 is built and checked, and I'm reading the records skill's change log and Where We Are sections next.
+
+The close reads your latest run-record copy first, for your rulings and the figure you recorded last time.
+
+Now reading the skill's opening lines, where the manifest's "fires when" text comes from.
+
+I have every passage to correct. Writing the skill bump: the version line, the rules your three fixes changed, part 3's new rules, and the oldest entry moved to the history file.
+
+Nothing was written (the patch is all-or-nothing). One anchor didn't match. Checking its exact text.
+
+My insertion swallowed the first line of the "Checked" bullet. Putting it back in the patch, and naming walk section 27 there too.
+
+The skills index passes its check, and the manifest now reads 1.34. Next, the protocol's version entry and moving its oldest entry to the history file.
+
+The protocol entry is in, v3.127 has moved to the history file, and the index check still passes. Now the ledger entry for part 3.
+
+Ledger written and its index regenerated cleanly. Last record is Where We Are, and its signal lines must be read from files. Reading the newest cache build and the Tier-1 count now.
+
+Now the Where We Are page, edited section by section.
+
+139 lines stand above the run-record marker, over the 130 cap. Tightening the box and the new Settled line to fit.
+
+The page is back at the 130-line cap. Last, the orrery's own maintenance run, since the skill, protocol and ledger changed there. It takes about five minutes.
+
+The orrery run passes 35 of 35, and the push gate holds (0 Tier-1). Now the usage figure for your run record.
+
+Part 3 is built and checked. The Sun's shells are now rows in the Solar System room, unticked when it opens, and `?exhibit=sun` opens that room on the Sun's shells. The separate Sun room is gone.
+
+**What a visitor sees in the Solar System room**
+- The Sun's 18 shells are listed among the planets by distance, as in your tree.
+  - The inner shells, out to the Alfvén surface, come right after the Sun, before the comet groups and Mercury.
+  - The termination shock, heliopause, Hills cloud, Oort cloud, galactic tide, galactic plane and gravitational influence come after the trans-Neptunian objects.
+- Ticking the Alfvén surface beside the inner planets works. Earth still sets the view, and the Alfvén surface is drawn small at the centre.
+- A shell is framed whole, with 10 percent to spare, as the Sun room framed it. A planet is framed by where it is now, with 20 percent. So ticking the heliopause widens the view to about 133 AU, with the planets small in the middle.
+- Find locates a shell by name ("alfven" finds it). Reset now also closes any open text box, as the Sun room's Reset did.
+
+**What `?exhibit=sun` opens on**
+- The Solar System room, with only the Sun's own opening ticked: the photosphere and the rotation axis. No planets are ticked.
+- The view is 0.007883 AU, exactly the Sun room's opening frame. Reset puts that view back.
+- The Sun's row no longer offers "Centre on", because the Sun is now the root.
+- The lobby's Sun card still links to this address, so it now opens this view. Studio still offers the address as a scene.
+
+**One cost to judge on your phone:** the Solar System room now loads the Sun's five stored drawings every time it opens, about 350 KB more.
+
+**Checks**
+- Gallery run: "38 of 38 gating checkers passed". Orrery run: "35 of 35 gating checkers passed", and the push gate holds (0 Tier-1).
+- The new drawer checks and walk checks pass. I planted faults (the Sun room put back, the shells ticked on opening, the address removed), and the checks went red on each.
+- The Solar System walk passes 216 of 219. The three failures are the ones recorded at the anchor.
+- Compared with the anchor's page, the only differences are intended. Earth differs only by fix 2's Moon swap. The Solar System room's old rows are unchanged, with 18 shell rows added (its count goes from 97 to 115).
+
+**Records:**
+- The interactive-exhibit skill went to 1.34. It now has your three fixes and part 3's rules, including the two method rules the brief left to me: where a shell sits among the planets, and how the room frames it.
+- Protocol v3.130 is written.
+- L-515 (one nested tree) has its entry, and Where We Are is updated, back at its 130-line limit.
+
+**Usage figure:** /cost isn't available here. The context reading is 539,188 tokens, 54% of 1,000,000.
+
+**Files for your run record**
+
+Website:
+- ok interactive.html, the page (34 edits)
+- ok gallery/earth_geometry.js, Earth's drawn guides (4 edits)
+- ok gallery/drawer_order.js, the drawer's order (6 edits)
+- ok gallery/solar_system_drawer.js, the drawer's logic (11 edits)
+- ok tools/json_converter.py, Studio's scene list (2 edits)
+- ok documentation/smoke_drawer_order.js, the Drawer order check (5 edits)
+- ok documentation/smoke_solar_system_drawer.js, the Solar System drawer check (15 edits)
+- ok documentation/smoke_typed_facts.js, the Typed facts check (2 edits)
+- ok documentation/smoke_display_figures.js, the Display figures check (1 edit)
+- ok tools/headless/walk_solar_system_drawer.js, a headless walk (19 edits)
+- ok tools/headless/walk_drawer_order.js, a headless walk (7 edits)
+- ok tools/headless/walk_shell_reset.js, a headless walk (1 edit)
+- new documentation/fixture_hovers_L515b_on_49d1bae1.json, the re-recorded hovers
+- rewritten by the gallery run itself: MODULE_ATLAS.md, MODULE_INDEX.md, data/constants_export.sha, data/objects_export.sha, data/drawings/pulled_at.sha
+
+Orrery:
+- ok skills/interactive-exhibit/SKILL.md, the skill, 1.34 (16 edits)
+- ok PROJECT_INSTRUCTIONS.md, the protocol, v3.130 (4 edits, and the manifest regenerated)
+- ok documentation/PROJECT_INSTRUCTIONS_HISTORY.md, the protocol's history (1 edit)
+- ok documentation/SKILL_HISTORIES.md, the skills' history (1 edit)
+- ok LEDGER_CONSOLIDATED.md, the L-515 entry (5 edits, and the index regenerated)
+- ok documentation/WHERE_WE_ARE.md, your page (9 edits)
+- rewritten by the orrery run itself: DATA_INVENTORY.md, PROVENANCE_AUDIT.md, data/provenance_history.json, documentation/prompts/citation_review.jsonl
+- already waiting before I started, yours: your run-record copy and documentation/project_instructions_v3_129.md
+
+**Your run order**
+1. Commit and push the website, -- 722ad57bf0b1f6d2e71c52cf31c0b944f418a490
+   1. then the orrery.
+2. No hand run of the nightly is needed: nothing this session changed needs the cache rebuilt.
+3. Your phone look:
+   - Earth's Sun line as you tick rows.
+   - The Moon between the magnetotail and the Hill sphere.
+   - No "Not built yet" anywhere.
+   - The Sun's shells in the Solar System room: tick the Alfvén surface beside the inner planets, then the heliopause.
+   - What `?exhibit=sun` opens on, and its Reset.
+   - Whether the root's opening still feels quick.
+
+**Tony-action rollup**
+- (do) Commit and push both repositories.
+- (do) Reinstall interactive-exhibit 1.34 (Settings > Skills) and paste protocol v3.130 into the Project's instructions.
+- (do) Your phone look, as listed above.
+- (decide) Still carried: how the yellow dot on Earth's fixed row looks.
+- Part 4 (the freeze past the served window) waits for its own session.

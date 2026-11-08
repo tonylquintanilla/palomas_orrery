@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.129 | November 7, 2026
+Tony Quintanilla, PE | Claude | v3.130 | November 7, 2026
 
-Cut from 9117505a at https://github.com/tonylquintanilla/palomas_orrery
+Cut from cba62f22 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -556,7 +556,7 @@ gallery-cache-builder        1.18 Nightly builder, atomic swap and its
                                   (HORIZONS_CACHE), a drawing named on a room's
                                   row, an ended mission's last day
                                   (fetch_path_last_day)
-interactive-exhibit          1.33 adding or changing an exhibit in
+interactive-exhibit          1.34 adding or changing an exhibit in
                                   interactive.html; any edit to the Sun's
                                   chrome (drawer, nav cluster, frame zoom,
                                   i-panel, HUD, consent, back link); "Earth
@@ -612,12 +612,15 @@ interactive-exhibit          1.33 adding or changing an exhibit in
                                   and its cutoff_note); an orbital period under
                                   a year, printed in days only (days_only); one
                                   drawer for every centre (the fixed centre
-                                  row, the trail line, Centre on and Not built
-                                  yet, the root's ticks kept, a centre's
-                                  children after its shells); an object's
-                                  parent as its fetched centre
-                                  (check_tree_parents.py, the store writer's
-                                  parent path)
+                                  row, the trail line, Centre on, the root's
+                                  ticks kept, a centre's children by distance
+                                  among its shells); the Sun's shells in the
+                                  Solar System room, how that room frames a
+                                  shell, and what ?exhibit=sun opens on
+                                  (EXHIBIT_ADDRESSES); the Earth room's Sun
+                                  line; an object's parent as its fetched
+                                  centre (check_tree_parents.py, the store
+                                  writer's parent path)
 <!-- SKILL-MANIFEST:END -->
 
 Session-Start Repo Pull and the SHA Round Trip [CRITICAL]
@@ -1311,6 +1314,53 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.130 (November 7, 2026): No rule changed in this document. ONE
+skill bump: interactive-exhibit 1.33 -> 1.34 (L-515, one nested tree:
+Tony's phone look at part 2, and step 2a's part 3). THE ROOT HOLDS THE
+SUN: ITS SHELLS ARE ROWS IN THE SOLAR SYSTEM ROOM, AND A DRAWER LISTS
+EVERYTHING AFTER ITS CENTRE BY DISTANCE.
+
+WHAT PROMPTED IT. The Claude Code session of Nov 7, evening (Claude
+Opus 5.5), through the python_work door, built on orrery cba62f22 and
+gallery 49d1bae1, from Tony's prompt of 17:47 Chicago and
+documentation/COORD_L515_steps1_2a_brief_20261107.md. His phone look
+at part 2: "Sun direction line, Earth room. Make it reach about 10
+percent past the farthest orbit or shell currently drawn"; "Order
+everything after the fixed centre row by distance, moons included ...
+This replaces the rule 'shells, then moons' in interactive-exhibit
+1.33, so correct the skill too"; "Remove 'Not built yet' and 'No room
+or cards yet.'" Asked in the session whether the Moon goes by strict
+distance, which puts it after the magnetotail: "Strict distance". Then
+part 3, his ruling 7.
+
+WHAT CHANGED. interactive-exhibit: a centre's children placed by
+distance among its shells; a body with no centre built shows nothing
+where Centre on would be; the Earth room's Sun line follows the ticks;
+the Sun's shells as rows in the root, placed by distance
+(placeShells); how the root frames a shell beside the planets (method:
+whole, at 10 percent, a body where it is now at 20); ?exhibit=sun as an
+address that opens the root on the Sun's own opening
+(EXHIBIT_ADDRESSES), the Sun room's row in EXHIBITS gone; the root's
+Reset closing the text box. Its oldest of four version entries (1.31)
+moved to documentation/SKILL_HISTORIES.md, by the three-entry rule.
+Every sentence was read from the gallery's code with this session's
+edits before it was written.
+
+THE OBLIGATION TRAVELS. This session loaded interactive-exhibit from
+the account and it read 1.33, as the manifest expected, discharging
+v3.129's obligation; it read gallery-cache-builder 1.18 in the parts its
+prompt named, safe-file-editing 1.14 and ledger-and-session-records
+1.22. Tony reinstalls interactive-exhibit (Settings > Skills) and pastes
+this version into the Project's instructions on claude.ai; the next
+session that loads it from the account confirms its copy reads 1.34
+before work that fires it.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.127 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.129 (November 7, 2026): No rule changed in this document. ONE
 skill bump: interactive-exhibit 1.32 -> 1.33 (L-515, one nested tree,
 step 1 and step 2a's part 2). THE WEBSITE'S ROOMS BECOME ONE TREE: ONE
@@ -1398,57 +1448,6 @@ account confirms its copy reads 1.32 before work that fires it.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.125 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.127 (November 5, 2026): No rule changed in this document. THREE
-skill bumps, one session's: horizons-orbital-mechanics 1.17 -> 1.18,
-gallery-cache-builder 1.17 -> 1.18 and interactive-exhibit 1.30 ->
-1.31 (L-507, more voyages, with L-510's carried sentences). FIVE MORE
-ENDED MISSIONS ON THE WEBSITE, AND JPL'S LAST WEEKS READ BEFORE ITS
-LAST DAY IS TRUSTED.
-
-WHAT PROMPTED IT. The Claude Code session of Nov 5 (Claude Opus 5.5),
-through the python_work door, built on orrery fb0a8dce and gallery
-3660993e, from
-documentation/COORD_L507_historical_missions_more_voyages_brief_20261105.md:
-Pioneer 10, Pioneer 11, Rosetta, DART and Akatsuki. Tony's rulings of
-Nov 5: "A. but indicate the craft is still flying but not tracked."
-(15:17 Chicago); "Akatsuki stays in. mission_end = 2025-09-18"; and,
-that evening, after JPL's positions for Akatsuki were found to stop
-following Venus on 2025-07-31, "cut the path at 2024-04-26, the last
-day JPL's solution is fitted to tracking" and "The Sun-pass filter is
-accepted, on your BepiColombo measurement."
-
-WHAT CHANGED. horizons-orbital-mechanics: An Ended Mission Ends on Its
-mission_end takes the agency's own page, with cases for a craft that
-flew on (end_note), an end after JPL's data, a page with several dates,
-and JPL's last weeks read before its last day is trusted (path_cutoff,
-cutoff_note); A Capture's Passes of the Sun Are Its Loops, new
-(riding_passes); piece C's website drawing corrected against L-484.
-gallery-cache-builder: the mirror's side change across e = 1 and the
-offline test's comparison by name (L-510's carried sentence), the
-mirror's new fields, and a path cut before its mission ended.
-interactive-exhibit: the ended box's day from mission_end, the
-end_note, and a cut path's opening in Tony's words. Each skill's oldest
-of four version entries moved to documentation/SKILL_HISTORIES.md, by
-the three-entry rule. Every sentence was read from the code, JPL's
-answers of Nov 5 and the session's checks before it was written.
-
-THE OBLIGATION TRAVELS. This session read each skill as the file in the
-repo, each as the manifest expected: horizons-orbital-mechanics 1.17,
-gallery-cache-builder 1.17, interactive-exhibit 1.30, gallery-assembler
-1.3, orrery-coding-conventions 1.13, provenance-discipline 2.36,
-safe-file-editing 1.14, agentic-pre-test 1.3 and
-ledger-and-session-records 1.22. Tony reinstalls the three bumped
-skills (Settings > Skills) and pastes this version into the Project's
-instructions on claude.ai; the next session that loads them from the
-account confirms its copies read 1.18, 1.18 and 1.31 before work that
-fires them.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.124 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

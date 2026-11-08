@@ -1,23 +1,22 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 7, 2026, afternoon: the website Code session (Opus), L-515 step 1 and part 2 built, interactive-exhibit 1.33.
-- Written at orrery 9117505 and gallery 9c6093a, plus this session's edits.
+Last updated: November 7, 2026, evening: the website Code session (Opus), your three phone-look fixes and L-515 part 3, interactive-exhibit 1.34.
+- Written at orrery cba62f2 and gallery 49d1bae, plus this session's edits.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Step 1 of L-515 (one nested tree): Pluto and Charon now sit under
->   the Pluto-Charon barycentre, where JPL measures them.
-> - Part 2: one drawer in every room, a fixed row for the centre (Earth
->   gets one), "Solar system > Earth" at the top, "Centre on" and "Not
->   built yet", and your ticks kept when you come back to the root.
+> - Your three fixes: Earth's Sun line follows the ticks; drawers list
+>   rows by distance, moons included; no "Not built yet".
+> - Part 3: the Sun's shells are rows in the Solar System room; the Sun
+>   address opens that room on them, and the Sun room is gone.
 >
-> **Do next:** *your phone look at part 2; then part 3 in a fresh session.*
+> **Do next:** *your phone look at the fixes and part 3; part 4 in its own session.*
 >
 > **Needs you now:**
-> - *(do) Push parts 1 and 2, then the nightly by hand (clears Cache in step).*
-> - *(do) Reinstall interactive-exhibit 1.33; paste protocol v3.129.*
+> - *(do) Commit and push both, website and orrery.*
+> - *(do) Reinstall interactive-exhibit 1.34; paste protocol v3.130.*
 > - *(do) Each morning, Pull origin on both, orrery then website, first.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
 
@@ -49,6 +48,7 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
 ## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings; a line leaves once it is habit, or a skill carries it.
+- Drawers list rows by distance after the centre, moons included (Nov 7; L-515 (one nested tree)).
 - What JPL measures a thing around is where it sits in the website's
   tree (Nov 7, 11:26; L-515 (one nested tree), ruling 6).
 - The Moon shows JPL's period for today, like every other body, not the
@@ -96,14 +96,14 @@ Waiting behind other work; a line leaves when picked up.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261107T174655Z, nightly, ok, no retry (gallery swap log, read Nov 7, afternoon).
-- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at orrery 9117505).
+- Last cache build: 20261107T225251Z, nightly, ok, no retry (gallery swap log, read Nov 7, evening).
+- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at orrery cba62f2).
 - This page's date and the ledger's newest stamp: both Nov 7. Agree.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
 Decisions, one at a time:
-- None open: L-515 (one nested tree) is ruled; Mars waits for step 3.
+- None open: L-515 (one nested tree) waits for your phone look; Mars waits for step 3.
 
 At the next design talk:
 - How obsolete code is treated, and when it goes (L-509 (obsolete
@@ -124,7 +124,7 @@ Not urgent, in your order:
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
 - This session: L-515 (one nested tree); its brief
-  `COORD_L515_steps1_2a_brief_20261107.md`; `HANDOFF_coordination_20261107.md`.
+  `COORD_L515_steps1_2a_brief_20261107.md` (parts 1 to 3 done).
 - The talk's rulings: `DESIGN_L484_consistency_rulings_20261103.md`.
 - The door: `documentation/python_work_door/`, and L-499 (kinds of session).
 

@@ -1,14 +1,34 @@
 ---
 name: interactive-exhibit
-description: How an interactive exhibit (a room in interactive.html such as ?exhibit=sun) is designed, built, verified and carded for the Paloma's Orrery gallery. Covers the exhibit switch and boot path, the assembler driver spec, the JS feature handoff, the shared chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent gate, back link), what is per-body, the served-data provenance contract, what a room opens on (the arrival block) and the shell-key stamp the renderers apply, the drawer order, who may write data/objects_config.json, the Mode 5 phone sequence, and carding an exhibit through Studio. Use when adding or changing an exhibit (Earth, Jupiter, the stars), touching sun* chrome in interactive.html, deciding what an exhibit may render, or editing the served words with store_writer or exhibit_store_editor. Not for propagation math (gallery-assembler), the nightly builder (gallery-cache-builder), or the Studio/converter chain (gallery-pipeline). Do not use for projects other than Paloma's Orrery.
-fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, its group rows, its two Resets, the Reset in every room's top bar, Home's order and its framing; Go To fitting a body's whole orbit and the orbit line in a body's hover; the count line's place; a bare interactive.html link and the Explorer's address; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia); a served number's citation and its source_note; the Typed facts check (smoke_typed_facts.js); a feature drawn as stored dots (the Hills cloud, Earth's radiation belts); the i panel's source list and its links (source_list.js); the order a room's drawer lists its shells in, where each begins (drawer_order.js, the Drawer order check); a spacecraft's path in the Solar System room (its positions file, solid and dashed, its text box); whether the website and the orrery agree on an object; the planets ticked with a spacecraft (companions); the i panel's words one sentence to a bullet; a comet on an open path in the Solar System room; the drawer's groups one JPL class to a row; JPL's terms in the words a visitor reads; a comet's companions; the drawer's Find a body box; the direction arrows on the orbits; the grid chip's AU note and the triad's frame note; the i button's first-visit note and hovers without a pointer line; the one text box for a tap and Go To (text_box.js); a group found by its find words; the i panel's Report a problem link; a drawing row in the Solar System room (the belt's cloud); a stored drawing's cross kept off the axes; the source line's UTC and JPL clock; the ruler and the x marks on the axes; an ended mission (the Historical missions group, its marker on its last day, mission_end; a craft that flew on and its end_note; a path cut before its mission ended and its cutoff_note); an orbital period under a year, printed in days only (days_only); one drawer for every centre (the fixed centre row, the trail line, Centre on and Not built yet, the root's ticks kept, a centre's children after its shells); an object's parent as its fetched centre (check_tree_parents.py, the store writer's parent path)
+description: How an interactive exhibit (a room in interactive.html such as ?exhibit=earth) is designed, built, verified and carded for the Paloma's Orrery gallery. Covers the exhibit switch and boot path, the assembler driver spec, the JS feature handoff, the shared chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent gate, back link), what is per-body, the served-data provenance contract, what a room opens on (the arrival block) and the shell-key stamp the renderers apply, the drawer order, who may write data/objects_config.json, the Mode 5 phone sequence, and carding an exhibit through Studio. Use when adding or changing an exhibit (Earth, Jupiter, the stars), touching sun* chrome in interactive.html, deciding what an exhibit may render, or editing the served words with store_writer or exhibit_store_editor. Not for propagation math (gallery-assembler), the nightly builder (gallery-cache-builder), or the Studio/converter chain (gallery-pipeline). Do not use for projects other than Paloma's Orrery.
+fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, its group rows, its two Resets, the Reset in every room's top bar, Home's order and its framing; Go To fitting a body's whole orbit and the orbit line in a body's hover; the count line's place; a bare interactive.html link and the Explorer's address; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia); a served number's citation and its source_note; the Typed facts check (smoke_typed_facts.js); a feature drawn as stored dots (the Hills cloud, Earth's radiation belts); the i panel's source list and its links (source_list.js); the order a room's drawer lists its shells in, where each begins (drawer_order.js, the Drawer order check); a spacecraft's path in the Solar System room (its positions file, solid and dashed, its text box); whether the website and the orrery agree on an object; the planets ticked with a spacecraft (companions); the i panel's words one sentence to a bullet; a comet on an open path in the Solar System room; the drawer's groups one JPL class to a row; JPL's terms in the words a visitor reads; a comet's companions; the drawer's Find a body box; the direction arrows on the orbits; the grid chip's AU note and the triad's frame note; the i button's first-visit note and hovers without a pointer line; the one text box for a tap and Go To (text_box.js); a group found by its find words; the i panel's Report a problem link; a drawing row in the Solar System room (the belt's cloud); a stored drawing's cross kept off the axes; the source line's UTC and JPL clock; the ruler and the x marks on the axes; an ended mission (the Historical missions group, its marker on its last day, mission_end; a craft that flew on and its end_note; a path cut before its mission ended and its cutoff_note); an orbital period under a year, printed in days only (days_only); one drawer for every centre (the fixed centre row, the trail line, Centre on, the root's ticks kept, a centre's children by distance among its shells); the Sun's shells in the Solar System room, how that room frames a shell, and what ?exhibit=sun opens on (EXHIBIT_ADDRESSES); the Earth room's Sun line; an object's parent as its fetched centre (check_tree_parents.py, the store writer's parent path)
 ---
 
 # Interactive Exhibit
 
-Read this file in 10 parts: lines 1-107, 108-161, 162-402, 403-629, 630-640, 641-879, 880-1091, 1092-1369, 1370-1569, 1570-1775.
+Read this file in 11 parts: lines 1-116, 117-170, 171-411, 412-551, 552-685, 686-696, 697-936, 937-1148, 1149-1426, 1427-1641, 1642-1849.
 
-Skill version: 1.33 | 2026-11-07, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.34 | 2026-11-07, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ cba62f22 and gallery @ 49d1bae1. v1.34 (L-515, one
+nested tree: Tony's phone look at part 2, and step 2a's part 3) makes
+the root hold the Sun. ORDER BY DISTANCE, MOONS INCLUDED (Tony,
+2026-11-07: "Order everything after the fixed centre row by distance,
+moons included"; "Strict distance"): a centre's children are placed
+among its shells where each one's orbit as drawn comes nearest, so
+Earth's Moon sits between the magnetotail and the Hill sphere; this
+replaces 1.33's "a centre's children after its shells". NO "NOT BUILT
+YET" AND NO "NO ROOM OR CARDS YET": a body with no centre built shows
+nothing where Centre on would be. THE EARTH ROOM'S SUN LINE reaches 10
+percent past the farthest shell or orbit drawn and follows the ticks.
+THE SUN'S SHELLS IN THE ROOT (ruling 7): rows in the Solar System room,
+unticked on opening, placed among the bodies by distance (placeShells);
+a shell there framed by its whole shape at 10 percent, a body by where
+it is now at 20 (method, written as the brief asked); ?exhibit=sun opens
+that room on the Sun's own opening, at the Sun room's opening frame
+(EXHIBIT_ADDRESSES), and the Sun room's row in EXHIBITS is gone; the
+root's Reset closes the text box. Read from the gallery's code with this
+session's edits before it was written.
+Earlier: 1.33 | 2026-11-07, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 9117505a and gallery @ 9c6093af. v1.33 (L-515, one
 nested tree, step 1 and step 2a's part 2) records the website's rooms
 becoming one tree. ONE DRAWER FOR EVERY CENTRE, a new rule: one builder
@@ -37,24 +57,13 @@ box carries the description: the Moon's does. Read from
 orbital_period.py, export_objects.py,
 solar_system_figures.js and both repositories' checks, with this
 session's edits, before it was written.
-Earlier: 1.31 | 2026-11-05, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ fb0a8dce and gallery @ 3660993e. v1.31 (L-507, more
-voyages) adds, under An Ended Mission, the day and what became of it:
-the day printed is the orrery's mission_end; a craft that flew on (the
-Pioneers) carries an end_note, its own bullet after the opening (Tony,
-2026-11-05: "A. but indicate the craft is still flying but not
-tracked."); a path cut before its mission ended (Akatsuki, on the last
-day JPL's solution is fitted to tracking) opens with its own end day
-and its cutoff_note, its source line "to the last day drawn". The group holds
-seven. Read from interactive.html, the figures check and the walk with
-this session's edits before it was written.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there on
 2026-10-05 (L-418), 2026-10-10 (L-429), 2026-10-14 (L-431), 2026-10-16
 (L-421), 2026-10-17 (L-452), 2026-10-20 (L-456), 2026-10-21 (L-460),
 2026-10-22 (L-434, L-443), 2026-10-24 (L-477, L-482), 2026-10-25 (L-443,
 twice), 2026-10-26 (L-443), 2026-10-27 (L-443), 2026-10-28 (L-443),
 2026-10-29 (L-503), 2026-11-02 (L-507), 2026-11-05 (L-507) and
-2026-11-06 (L-513) and 2026-11-07 (L-515).
+2026-11-06 (L-513) and 2026-11-07 (L-515, twice).
 
 ## Contents
 
@@ -113,7 +122,7 @@ the new exhibit brings its own.
 
 | Piece | Where | Shared or per-body |
 |---|---|---|
-| `EXHIBIT` switch: `?exhibit=` lower-cased, default `solar-system` since 2026-10-22 (L-443, stage 10; until then `solar-system-explorer`); `EX = EXHIBITS[EXHIBIT]` is the room, and a key that is no room opens the Explorer, whose card links to `EXPLORER_EXHIBIT`, `solar-system-explorer` | interactive.html, `const EXHIBITS` | shared; a new room adds one ROW to `EXHIBITS` -- title, sceneTitle, pngName, halfRangeAu, driver, infoHtml, compose (since Earth step 3, L-291; at fc8d9fb3 it was one `EXHIBIT === "<key>"` branch per room) |
+| `EXHIBIT` switch: `?exhibit=` lower-cased, default `solar-system` since 2026-10-22 (L-443, stage 10; until then `solar-system-explorer`); `EX = EXHIBITS[EXHIBIT]` is the room (since v1.34 an address in `EXHIBIT_ADDRESSES` opens a room on another body's opening -- `?exhibit=sun`, the Solar System room on the Sun's; `EXHIBIT_ASKED` is the address, `EXHIBIT` the room), and a key that is no room opens the Explorer, whose card links to `EXPLORER_EXHIBIT`, `solar-system-explorer` | interactive.html, `const EXHIBITS` | shared; a new room adds one ROW to `EXHIBITS` -- title, sceneTitle, pngName, halfRangeAu, driver, infoHtml, compose (since Earth step 3, L-291; at fc8d9fb3 it was one `EXHIBIT === "<key>"` branch per room) |
 | `body.sun-exhibit` class and `.sun-chrome` show/hide rule, added for EVERY room | `applySunChrome()`, CSS | shared; the name stays `sun` until the rename (L-309) -- at fc8d9fb3 this row read per-body `body.<key>-exhibit` |
 | Assembler modules list and the DRIVER: `assemble_scene({domain, content_type, objects, center, epoch}, Catalog(objects_config), CacheReader(coverage_index))` | `SUN_ASSEMBLER_MODULES`, `SUN_DRIVER` | shared code; per-body spec (`objects`, `center`) |
 | Data read at boot: `data/solar-system/coverage_index.json`, `data/objects_config.json` | `initSunExhibit()` | shared |
@@ -573,18 +582,18 @@ keyed by slug, so `?exhibit=solar-system`, `?exhibit=sun` and
   first part a link to `?exhibit=solar-system` (`ROOT_EXHIBIT`), the
   name the fixed row's, read from the scene (`drawerTrailMount`,
   `#sun-trail`). The root shows none.
-- **Centre on, and Not built yet.** On a body's row where "Enter the
+- **Centre on, and nothing else.** On a body's row where "Enter the
   <name> room" stood, "Centre on <name>" (`WORDS.enter`), for a body
-  whose slug is a key in `EXHIBITS`. A body that is a centre in the tree
-  with none built reads "Not built yet" there, words and no link, on its
-  row always (`centreOffer`, `WORDS.notBuilt`). Which bodies are centres
-  is READ FROM THE CONFIG, never typed (`centresOf`): an object fetched
-  around it (another object's `center_slug`), or features served on its
-  own entry. At gallery 9c6093af with this session's edits: the Sun,
-  Earth, Jupiter, Saturn and pluto_barycenter, so Jupiter, Saturn and
-  the Pluto row read Not built yet. Any other body opens to "No room or
-  cards yet" as before (Tony's words of 2026-09-30; whether they change
-  now that rooms are centres is his, carried on L-515).
+  whose slug is a key in `EXHIBITS`. Any other body shows NOTHING there,
+  before or after its row is opened (v1.34; Tony's phone look of
+  2026-11-07: "Remove 'Not built yet' and 'No room or cards yet.' A body
+  with no centre shows neither label. It simply has no 'Centre on'
+  button."); the line under an opened row (`.sun-row-open`) is no longer
+  made, and `centreOffer`, `WORDS.notBuilt` and `WORDS.noRoom` are gone.
+  Which bodies are centres is still READ FROM THE CONFIG, never typed
+  (`centresOf`: an object fetched around it, or features served on its
+  own entry), for the tree's next centres; no page reads it now. Since
+  v1.34 the Sun is the root and its row offers no Centre on.
 - **The root's ticks are kept** (ruling 10: "returning to the root
   restores what the visitor had ticked there; Reset still starts
   fresh"). Leaving the root by a Centre on button keeps what is ticked
@@ -598,32 +607,79 @@ keyed by slug, so `?exhibit=solar-system`, `?exhibit=sun` and
   ticked. Reset still puts back the served opening, which the drawer
   keeps as before. A browser that refuses the storage keeps nothing and
   the root opens as served.
-- **Where a child's row sits** (method, v1.33). A centre's drawer lists
-  its fixed row first, its shells by where each begins (below), then its
-  CHILDREN -- the objects fetched around it, read from the config
-  (`childrenOf`) -- right after the last shell; any other row keeps its
-  place (`DrawerOrder.plan`'s `centreKey` and `children`,
-  `placeCentreAndChildren`). A child is not placed by distance: the tree
-  puts it under its centre, after the centre's own features. It is
-  ruling 2's order for Mars ("Mars, fixed; its shells when built;
-  Phobos; Deimos"), and it moved Earth's Moon from first to after the
-  Hill sphere.
+- **Where a child's row sits** (v1.34, Tony's phone look of
+  2026-11-07: "Order everything after the fixed centre row by distance,
+  moons included. ... This replaces the rule 'shells, then moons'"; and,
+  shown that the Moon's orbit lies beyond where the magnetotail begins,
+  "Strict distance"). A centre's drawer lists its fixed row first
+  (`placeCentre`), then its shells and its CHILDREN -- the objects
+  fetched around it, read from the config (`childrenOf`) -- together, by
+  distance: a shell where it begins (below), a child where its orbit as
+  drawn comes nearest the centre (`DrawerOrder.plan`'s `children`). The
+  guides keep their places. Earth: the bow shock (13.5 Earth radii), the
+  magnetotail (30.6), the Moon (58), the Hill sphere (235). Until v1.34
+  a child went right after the last shell (`placeCentreAndChildren`).
 - **Which Reset a centre gets** (method, v1.33). Every centre's Reset
   puts back what THAT centre opened on, and never touches its fixed row:
   a centre that serves rows keeps the root's (`ssReset`: the served
-  opening, every group folded, Find cleared); a centre of shells keeps
+  opening, every group folded, Find cleared, and since v1.34 the text
+  box closed, as `sunReset` closes it); a centre of shells keeps
   `sunReset` (its arrival, recorded once at boot); a centre with both,
   when one is built (Mars, step 3), puts back its served opening and its
   shells' arrival together.
+- **The Sun's shells in the root** (v1.34, Tony's ruling 7 of
+  2026-11-07; method where marked). The root's driver hands over the
+  Sun's own features (the assembler's centre features, filtered to the
+  Sun), and compose draws them with `buildFeatureTraces` at the Sun's
+  half-range, `SUN_HALF_RANGE_AU`, so they are the Sun room's shapes. Each
+  is a row, served back as `{shell, label}` (`rowsFromServed`,
+  `isShell`), unticked on opening, found by its name in Find. PLACED BY
+  DISTANCE (method): in the Sun's own order (`DrawerOrder.plan`), each
+  right after the LAST top-level row nearer than where it begins
+  (`placeShells`) -- a body's distance its served semi-major axis, a
+  group's its nearest body's, the Sun's 0, a row with none (a
+  spacecraft, a hyperbolic path) passed over; a shell with no distance
+  (the rotation axis, the galactic plane) takes the one before it; never
+  inside a group. "Last nearer", because the served order is not
+  monotonic (the long-period comets sit near the top). So the inner
+  shells, to the Alfven surface, follow the Sun ahead of the comet
+  groups and Mercury, and the termination shock onward follow the
+  trans-Neptunian objects, as in Tony's tree.
+- **How the root frames a shell** (method, v1.34). A body is framed by
+  where it is now at the room's 20 percent (2026-10-02); a shell has no
+  "now" and is framed by its whole drawn shape at 10 percent, as the Sun
+  room framed it (`sunGroupIsShell`, `sunGroupMargin`,
+  `SHELL_FRAME_MARGIN`); the frame holds the farthest thing ticked, each
+  compared as framed (`sunOutermostShown`). A shell is a trace with a
+  served shell key or `frame_element`. The count line counts no shell.
+  So the Alfven surface ticked beside the inner planets is held, and a
+  heliopause ticked frames at 1.1 times its reach, the planets small in
+  the middle.
+- **?exhibit=sun** (v1.34, ruling 7). The address is in
+  `EXHIBIT_ADDRESSES` (`sun: "solar-system"`), which
+  `tools/json_converter.py` reads so Studio still offers it; the Sun
+  room's row in `EXHIBITS` is gone, and `SUN_DRIVER`, `SUN_INFO_HTML`
+  and `sunCentreWords` are marked OBSOLETE, kept until a talk rules. It
+  opens the root on the Sun's own arrival block, applied to the Sun's
+  shells by `GalleryArrival.applyArrival` as the Sun room applied it
+  (the photosphere, with the rotation axis as a frame element), no body
+  ticked, no row highlighted, at the Sun room's opening frame (1.1 times
+  what is drawn: 0.007883 AU on 2026-11-07); its Reset puts that back.
+  It takes no kept ticks; the root's own address does.
 - **Checked** by the Solar System drawer check's section 10 (the plan,
-  the centres, Centre on and Not built yet, the kept ticks; four planted
-  breaks; the page's wiring), the Drawer order check (the order wanted
-  worked out by its own reading of the config; a third self-test keeps
-  the Moon in its old place), the Arrival check (Earth's fixed row
+  the centres, Centre on and no other words, the kept ticks; four
+  planted breaks; the page's wiring) and section 11 (the Sun's shells
+  placed by distance, a served shell row, an opening naming a shell;
+  three breaks; the page's wiring for the shells, ?exhibit=sun and the
+  frame), the Drawer order check (the order wanted worked out by its own
+  reading of the config; a third self-test breaks the file so the Moon
+  is not placed by distance), the Arrival check (Earth's fixed row
   expected drawn; a centre stamped as a shell planted), the Label words
   check (Earth's fixed row opens its own words; planted with the
   Moon's), and walked headlessly (`walk_solar_system_drawer.js`
-  section 26; `walk_drawer_order.js`; `walk_shell_reset.js`). The
+  sections 26 and 27, 27 the Sun's shells in the root and ?exhibit=sun;
+  `walk_drawer_order.js`, its Sun case the Sun's shell rows in the root;
+  `walk_shell_reset.js`, its Sun case ?exhibit=sun). The
   harness's `boot` takes `{session}` to open the page with sessionStorage
   already holding what an earlier page kept.
 
@@ -652,11 +708,12 @@ Plotly.
   the row to see the button then tap again"; and "Go To, takes them
   the orbit and hovertext. if there is a room, it opens the room. in
   that order"). The Sun's row keeps Go To's space, hidden, so its
-  button lines up. A body with no room and no centre in the tree (a centre
-  with none built reads "Not built yet", v1.33) opens to "No room or
-  cards yet": under the row upright, on the name's line with the phone
-  sideways (Tony, 2026-10-03). Both are read from the page's own table,
-  so the next room lights its row by itself.
+  button lines up. A body with no room shows nothing there, before or
+  after its row is opened (v1.34; until then "No room or cards yet",
+  under the row upright and on the name's line sideways, Tony,
+  2026-10-03, and "Not built yet" on a centre in the tree, v1.33). It is
+  read from the page's own table, so the next room lights its row by
+  itself.
 - **No See more** (v1.22, L-477; Tony, 2026-10-24: "No "see more" Let
   that be permanent."). He found the referents mixed: "See more/fewer
   rows all/none celestial objects" -- See more acted on the list, All /
@@ -1172,9 +1229,10 @@ TIES AND PLACES:
   (the config's).
 - A row that is not a shell -- the axis, the Sun direction, the
   terminator, a frame shape -- keeps its place in the list, and the
-  shells fill the other places in order. Since v1.33 two do not: the
-  centre's fixed row goes first, and its children (the Moon) go right
-  after the last shell (One drawer for every centre).
+  shells fill the other places in order. Since v1.33 the centre's fixed
+  row goes first, and since v1.34 its children (the Moon) are placed by
+  distance among the shells, where each one's orbit as drawn comes
+  nearest (One drawer for every centre).
 - A shell whose distance cannot be read keeps its place and is named in
   the room's notes. It is never guessed.
 
@@ -1224,6 +1282,20 @@ traces aside from the stamp check and FAILS on one that carries a key,
 because the arrival rule would then hide a guide that says it is
 always drawn. A guide the renderers draw unmarked fails the stamp
 check, as before.
+
+THE EARTH ROOM'S SUN LINE FOLLOWS THE TICKS (v1.34, L-515; Tony's phone
+look of 2026-11-07: "Make it reach about 10 percent past the farthest
+orbit or shell currently drawn. It should grow and shrink as rows are
+ticked and unticked."). The line and its cross carry `meta.sun_line`
+(the unit direction, the centre, the crust) from `earth_geometry.js`;
+the page draws it 1.1 times the farthest served shell or orbit drawn
+(a trace with a shell key, or the Moon's), measured as the frame
+measures (`sunLinePlan`, `sunLineFit`), at boot, after every tick and
+on Reset; a text box open on its cross moves with it; with nothing else
+drawn it reaches past the crust. It sets no frame and is never the row
+the handle names (`sunOutermostShown` passes over it). Its cross sits
+on the view's edge when the Sun lies along a grid axis, at an equinox
+or a solstice: recorded on L-515, not chased.
 
 THAT IS WHY THIS IS CRITICAL. A shell trace that loses its stamp reads
 as a frame element and is DRAWN -- the failure is a room opening on more
@@ -1771,5 +1843,7 @@ copy of 1.27; a session that loads the account's copy confirms it reads
 session, from the repo's copy of 1.28; a session that loads the
 account's copy confirms it reads 1.29 before exhibit work. 1.33 was cut
 on 2026-11-07 in a Claude Code session on the website, through the
-python_work door, from the repo's copy of 1.32; a session that loads the
-account's copy confirms it reads 1.33 before exhibit work.
+python_work door, from the repo's copy of 1.32; the next session, the
+same evening, loaded the account's copy and it read 1.33. 1.34 was cut
+in that session; a session that loads the account's copy confirms it
+reads 1.34 before exhibit work.

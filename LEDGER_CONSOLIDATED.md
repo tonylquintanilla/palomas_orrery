@@ -723,6 +723,11 @@ website Code session for L-515 step 1: the coordinator's last entry on
 L-515 restored from its handoff, and step 1's record; then step 2a's
 part 2, the one drawer; the interactive-exhibit bump to 1.33 and
 protocol v3.129), built on orrery 9117505a with gallery 9c6093af.
+Module updated: November 7, 2026, evening, with Anthropic's Claude Opus
+5.5 (the website Code session for Tony's phone look at L-515's part 2:
+its three fixes; then part 3, the Sun's shells in the root; the
+interactive-exhibit bump to 1.34 and protocol v3.130), built on orrery
+cba62f22 with gallery 49d1bae1.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -2151,15 +2156,167 @@ as an archive of the prioritization thinking -- no cleanup on close.
   Dashboard parity "PASS -- 10 of 10 planted faults caught; 98 steps
   matched to their buttons by name and script"; the provenance scanner
   "0 TIER-1 -- the push gate holds".
-**Gap:** Tony's phone look at part 2 (the root, `?exhibit=sun`,
-`?exhibit=earth`); then part 3 of the brief, the Sun's shells in the
-root, in a fresh website session, its brief written when it is next;
-part 4 (L-165, the freeze past the window) after it or on its own; then
-Tony's phone look before step 2b; L-514 (the Mars room) waits for step
-3. Carried for Tony: whether "No room or cards yet" stays now that
-rooms are centres; the yellow centre dot in Earth's fixed row.
-**Tony-action (do):** reinstall interactive-exhibit 1.33 (Settings >
-Skills) and paste protocol v3.129 into the Project's instructions.
+- **Tony's phone look at part 2, and its three fixes, Nov 7, evening,
+  the website Code session** (Claude Opus 5.5, through the python_work
+  door), built on orrery cba62f22 and gallery 49d1bae1, from the brief
+  above and Tony's prompt of 17:47 Chicago: "First, the findings from my
+  phone look at part 2. Fix these before part 3, then stop and report."
+  The session's loaded interactive-exhibit read 1.33, as the manifest.
+  - FIX 1, THE SUN LINE IN THE EARTH ROOM. Tony: "Make it reach about 10
+    percent past the farthest orbit or shell currently drawn. It should
+    grow and shrink as rows are ticked and unticked. Today it stops just
+    past the crust." Its line and cross carry `meta.sun_line` (the unit
+    direction, the centre, the crust; `gallery/earth_geometry.js`); the
+    page draws it 1.1 times the farthest served shell or orbit drawn (a
+    trace with a shell key, or the Moon's), measured as the frame
+    measures (`sunLinePlan`, `sunLineFit` in `interactive.html`), at
+    boot, after every tick and untick, and on Reset; a text box open on
+    its cross moves with it. With nothing else drawn it reaches past the
+    crust. It sets no frame and is never the row the handle names
+    (`sunOutermostShown` passes over it). Walked headlessly on today's
+    payload: 1.15 Earth radii on arrival, 69 with the Moon, 270 with the
+    Hill sphere, back to 69 and 1.15 as they are unticked, 195 with the
+    magnetotail, 1.15 after Reset. Its hover's last sentence, about the
+    picture, now reads "Line drawn a little past the farthest shell or
+    orbit shown; the Sun is far beyond it." (was "...to the edge of the
+    arrival frame..."), on Typed facts' ALLOWED; the hover fixture is
+    re-recorded as `fixture_hovers_L515b_on_49d1bae1.json`, that one
+    hover moved, every other byte for byte. Recorded, not chased: the
+    line's cross sits ON the view's edge when the Sun lies along a grid
+    axis (at an equinox or a solstice), because the frame and the line
+    both take 1.1 times the same measure.
+  - FIX 2, THE DRAWER BY DISTANCE, MOONS INCLUDED. Tony: "Order
+    everything after the fixed centre row by distance, moons included.
+    Earth's Moon goes between the bow shock and the magnetotail. This
+    replaces the rule 'shells, then moons'." Measured from Earth: the
+    bow shock begins at 13.5 Earth radii, the magnetotail at 30.6 (its
+    nearest point drawn, the rule of Oct 21), the Moon's orbit at 58,
+    the Hill sphere at 235. Put to Tony in the session, strict distance
+    or the Moon before the magnetotail; his answer: "Strict distance".
+    So a centre's children are placed among its shells by where each
+    one's orbit as drawn comes nearest the centre (`DrawerOrder.plan`;
+    `placeCentreAndChildren` became `placeCentre`, the centre's row
+    still first; the guides still keep their places). Earth's Moon moves
+    from after the Hill sphere to between the magnetotail and the Hill
+    sphere. The Drawer order check works the same order out by its own
+    arithmetic; its third self-test now breaks the file so the Moon is
+    not placed by distance, and goes red naming it. The drawer-order walk
+    now works its order out on the lines as served, since the page plans
+    before it cuts far lines to the view and the Moon's orbit is one.
+    Carried for the interactive-exhibit bump at the session's end: One
+    drawer for every centre's "Where a child's row sits" and A room's
+    drawer lists its shells' ties are rewritten to this rule.
+  - FIX 3, NO "NOT BUILT YET" AND NO "NO ROOM OR CARDS YET". Tony: "A
+    body with no centre shows neither label. It simply has no 'Centre
+    on' button." A body row whose slug is a key in `EXHIBITS` shows
+    Centre on, and any other shows nothing there, before or after it is
+    opened; the line under an opened row (`.sun-row-open`) is no longer
+    made. `centreOffer`, `WORDS.notBuilt` and `WORDS.noRoom` are removed
+    from `gallery/solar_system_drawer.js`, and the page no longer hands
+    the drawer the tree's centres; `centresOf` stays in the file, read by
+    no page now, held by the drawer check, for the next centres. This
+    settles the question carried for Tony above, whether "No room or
+    cards yet" stays.
+  - CHECKS, read from their output: Drawer order (three self-tests red);
+    Solar System drawer (the break that puts both words back is caught,
+    and the page is held to writing neither); Typed facts; Display
+    figures (62 hovers, 48 held to the new fixture); the gallery run,
+    offline, "38 of 38 gating checkers passed", Cache in step green
+    since Tony's hand run. Headless: walk_drawer_order ok (Sun 19 rows,
+    Earth 22, planted fault caught); walk_shell_reset 33 of 33 in both
+    rooms; walk_solar_system_drawer 201 of 204, its three reds the
+    anchor's own recorded above, and run on the anchor's page red by
+    name on every body that still showed a label. compare_rooms against
+    the anchor: the Sun room identical; Earth, the Moon and the Hill
+    sphere swapped and the focus index following them; the root, only
+    the two labels and their hidden lines gone, the tick trail identical.
+- **Part 3 built, Nov 7, evening, the same website Code session**, on
+  Tony's "Go on to part 3, then stop and report" (chat), the brief's
+  part 3 and his ruling 7.
+  - THE SUN'S SHELLS ARE ROWS IN THE ROOT. The root's driver hands over
+    the Sun's own features (the assembler's centre features, filtered to
+    the Sun); compose draws them as the Sun room did (the same renderers
+    at `SUN_HALF_RANGE_AU`), each a row served back as `{shell, label}`,
+    unticked on opening, found by its name in Find. 18 rows, the Sun's
+    drawer less its fixed row.
+  - PLACED BY DISTANCE (method, written into the skill): in the Sun's own
+    order, each right after the last top-level row nearer than where it
+    begins (`placeShells` in `gallery/solar_system_drawer.js`): a body's
+    distance its semi-major axis, a group's its nearest body's, the
+    Sun's 0, a row with none passed over; a shell with no distance (the
+    rotation axis, the galactic plane) takes the one before it; never
+    inside a group. "Last nearer" because the served order is not
+    monotonic (the long-period comets near the top). The result is
+    Tony's tree of Nov 7: the Sun, its inner shells to the Alfven
+    surface, the comet groups, Mercury ... Pluto, the trans-Neptunian
+    objects, then the termination shock, the heliopause, the Hills
+    cloud, the outer Oort cloud, the galactic tide, the galactic plane
+    and the gravitational influence.
+  - HOW THE ROOT FRAMES A SHELL (method, the brief's): a body by where it
+    is now at 20 percent, a shell by its whole drawn shape at 10 percent
+    as the Sun room framed it (`sunGroupIsShell`, `sunGroupMargin`); the
+    frame holds the farthest thing ticked, each compared as framed. So
+    the Alfven surface ticked beside Earth leaves Earth's frame; the
+    heliopause ticked frames at 1.1 times its reach, about 133 AU. The
+    count line counts no shell.
+  - ?EXHIBIT=SUN: an address in `EXHIBIT_ADDRESSES`, opening the root on
+    the Sun's own arrival block, applied to the Sun's shells by
+    `GalleryArrival.applyArrival` as the Sun room applied it -- the
+    photosphere, and the rotation axis as a frame element -- no body
+    ticked, at the Sun room's opening frame, 0.007883 AU, the same
+    figure the Sun room's reset walk printed at the anchor. Its Reset
+    puts that back. It takes no kept ticks. The Sun room's row in
+    `EXHIBITS` is gone; `SUN_DRIVER`, `SUN_INFO_HTML` and
+    `sunCentreWords` are marked OBSOLETE and kept, by Tony's ruling of
+    Nov 3 (L-509, obsolete code). The root's Sun row no longer offers
+    Centre on. `tools/json_converter.py` reads the address table, so
+    Studio still offers `?exhibit=sun`. The lobby's Sun card, which links
+    there, now opens the root on the Sun.
+  - THE ROOT'S RESET closes the text box, as the Sun room's did; found by
+    the reset walk on `?exhibit=sun`, which failed two of 33 checks before.
+  - Cost recorded for the phone look: the root now fetches the Sun's five
+    stored drawings on every opening, about 350 KB more.
+  - CHECKS, read from their output: Solar System drawer check section 11
+    (the shells placed by distance, a served shell row, an opening
+    naming a shell; three breaks caught) and the page's wiring, shown red
+    on a copy of the page with the Sun room's row put back and the
+    placement taken out; Drawer order; the gallery run, offline, "38 of
+    38 gating checkers passed". Headless: walk_solar_system_drawer 216 of
+    219, its three reds the anchor's own, section 27 new (the shells
+    unticked on opening, the Alfven surface between the Sun and the
+    first group, the heliopause after Pluto and the trans-Neptunian
+    objects, the Alfven surface ticked beside Earth, the heliopause
+    framed whole at 10 percent, Go To on the Alfven surface, Find,
+    Reset, and ?exhibit=sun's opening and frame), shown red 18 times on
+    a copy with the shells ticked on opening and the address removed;
+    walk_drawer_order ok, its Sun case now the Sun's shell rows in the
+    root, the planted fault caught; walk_shell_reset 33 of 33 for
+    ?exhibit=sun and for Earth. compare_rooms against the anchor: Earth,
+    only fix 2's swap; the root, its old rows unchanged once fix 3's
+    labels are set aside, 18 shell rows added, the count 97 to 115.
+  - The gallery run also rewrote its own generated files: the three pull
+    stamps (orrery cba62f22) and MODULE_ATLAS.md and MODULE_INDEX.md
+    (line counts), the last two with Windows line endings, which Git
+    turns back to LF on commit.
+- **The interactive-exhibit bump, 1.33 -> 1.34, made Nov 7, evening**,
+  by the prompt's item 5: the four steps -- the skill's version line and
+  body (a centre's children by distance; Centre on and nothing else; the
+  Sun line; the Sun's shells in the root, placed and framed; ?exhibit=sun;
+  the root's Reset), its 1.31 entry moved to
+  `documentation/SKILL_HISTORIES.md`; `skills_index.py` run (the
+  manifest read 1.33 and was corrected; `--check` OK); the protocol's
+  v3.130 entry, its v3.127 moved to
+  `documentation/PROJECT_INSTRUCTIONS_HISTORY.md` PART 1, the header
+  stamp and anchor moved; the commit Tony's. This session loaded 1.33
+  from the account, which discharges v3.129's obligation; 1.34 is
+  confirmed by the next session that loads it.
+**Gap:** Tony's phone look (the three fixes; part 3's rows in the Solar
+System room; what `?exhibit=sun` opens on); part 4 (L-165, the freeze
+past the window) in its own session unless Tony says otherwise; then
+step 2b; L-514 (the Mars room) waits for step 3. Carried for Tony: the
+yellow centre dot in Earth's fixed row.
+**Tony-action (do):** reinstall interactive-exhibit 1.34 (Settings >
+Skills) and paste protocol v3.130 into the Project's instructions.
 - **Ref:** L-514 (the Mars room); L-443 (the drawer's groups); L-392 (the
   rooms section); L-291 (the Earth room); the protocol's The Orrery and
   the Assembler.

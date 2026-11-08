@@ -31,21 +31,21 @@ Repo copies stale/absent; this reflects the live local stores.
 
 Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
-**Total size:** 463.1 MB (1303 files)
+**Total size:** 463.7 MB (1320 files)
 
-**GitHub Pages headroom:** 561 MB remaining of 1024 MB ceiling (45.2% used)
+**GitHub Pages headroom:** 560 MB remaining of 1024 MB ceiling (45.3% used)
 
 ### By extension
 
 | ext | count | total | biggest | newest |
 |---|---|---|---|---|
-| .json | 775 | 428.1 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-11-07 |
+| .json | 792 | 428.6 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-11-07 |
 | .kmz | 39 | 14.4 MB | western_heatwave_march_21_blockbuster.kmz (904.7 KB) | 2026-06-30 |
 | .py | 281 | 9.8 MB | patch_L330_3_website_belts_words_20261017.py (451.6 KB) | 2026-11-07 |
 | .png | 2 | 6.3 MB | palomas_orrery_logo.png (5.1 MB) | 2026-09-24 |
-| .jsonl | 139 | 2.6 MB | encke.jsonl (58.9 KB) | 2026-11-07 |
-| .js | 35 | 927.5 KB | feature_renderers.js (214.5 KB) | 2026-11-07 |
-| .html | 5 | 579.2 KB | interactive.html (334.4 KB) | 2026-11-07 |
+| .jsonl | 139 | 2.7 MB | encke.jsonl (59.2 KB) | 2026-11-07 |
+| .js | 35 | 951.0 KB | feature_renderers.js (214.5 KB) | 2026-11-07 |
+| .html | 5 | 590.3 KB | interactive.html (345.5 KB) | 2026-11-07 |
 | .jpg | 2 | 137.9 KB | palomas_orrery_wall.jpg (95.2 KB) | 2026-10-04 |
 | .ico | 1 | 137.3 KB | favicon.ico (137.3 KB) | 2025-11-28 |
 | .md | 8 | 92.3 KB | MODULE_ATLAS.md (60.1 KB) | 2026-11-07 |
@@ -87,7 +87,7 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
 | repo | served size | ceiling | headroom | used |
 |---|---|---|---|---|
-| gallery | 463.1 MB | 1024 MB | 561 MB | 45.2% |
+| gallery | 463.7 MB | 1024 MB | 560 MB | 45.3% |
 | orrery (gitignored data) | 575.9 MB | n/a (not served) | -- | -- |
 
 Note: orrery data is local/gitignored. If orbit cache files are pushed to either repo for web serving, re-run this inventory to update headroom.
