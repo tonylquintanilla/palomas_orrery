@@ -978,6 +978,28 @@ root's Reset closes the text box. Read from the gallery's code with this
 session's edits before it was written.
 (Moved down 2026-11-08, night, when 1.37 made a fourth entry.)
 
+Earlier: 1.35 | 2026-11-07, night, with Anthropic's Claude Opus
+5.5, at palomas_orrery @ 4ac3903a and gallery @ 722ad57b. v1.35 (L-515,
+one nested tree, part 4, with L-165, site continuity) adds THE FREEZE
+PAST THE SERVED WINDOW, Tony's ruling of 2026-11-07, 12:53 Chicago:
+"Yes." Past the served window a room draws at the last day its data
+covers and says so plainly; it never goes blank. The page asks
+gallery/scene_moment.js for the moment it hands the driver: the minute
+asked, or, past the window's end, the window's last whole minute; the
+resolver is unchanged and still refuses anything outside the window. A
+frozen room says so under its title and at the top of its i panel, and
+its two sentences that say "today" take the frozen room's words. The
+Mode 5 knob ?freeze=1 shows it early. Checked by the gallery run's Scene
+moment row, which asks the real resolver. And Tony's three asks of the
+same night, riding this bump: a frozen comet's span sentence names the
+day its data was fetched; THE TEXT BOX IS OPAQUE, and the HUD row hides
+while the box covers its triad or ruler; and PARENT GROUPS -- one group
+over the groups that sit together (Comets over the six comet groups,
+Spacecraft over Active missions and Historical missions, Apollo and Amor
+asteroids over those two), a sub-group naming its parent in "in". Read
+from the gallery's code with this session's edits before it was written.
+(Moved down 2026-11-09, when 1.38 made a fourth entry.)
+
 ## safe-file-editing
 
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons;

@@ -1,22 +1,23 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 9, 2026, morning: the coordinating session (Opus), Scenes designed.
-- Written at orrery 1c13b7c and gallery 6a15371, plus this session's edits.
+Last updated: November 9, 2026: the website Code session (Opus), Scenes built.
+- Written at orrery c7cf349 and gallery 6a15371, plus this session's edits.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Scenes is designed, on L-519 (Featured's rethink): you paste a shared link into the gallery editor, and it becomes a scene in a Scenes group under the Sun in the room's drawer.
-> - With Featured on, the same scene is also a card on the gallery page: one record, two doors.
-> - A scene always opens at the visitor's now. A set time waits for the date picker and the encounters.
-> - Featured is a board highlighting important cards or scenes, and stays largely as is.
-> - Scenes goes before step 2b, on your word.
+> - Scenes is built (L-519 (Featured's rethink)): the gallery editor has a New Scene window, where you paste a shared link and it becomes a scene.
+> - The window cleans the link, names any body it cannot find, refuses a link already on a card, and suggests a name.
+> - In the Solar System room's drawer, a Scenes group sits under the Sun, above Saved pictures. A tap opens the scene at now; Back returns to the room.
+> - Ticking Featured also puts the scene on the gallery page's Featured.
 >
-> **Do next:** *Build Scenes (L-519 (Featured's rethink)), one website Code session; then step 2b of the one tree.*
+> **Do next:** *Your phone look at Scenes (the list is on L-519); then step 2b of the one tree.*
 >
 > **Needs you now:**
-> - *(do) Commit and push the orrery: this record.*
+> - *(do) Commit and push both, the website and the orrery.*
+> - *(do) Make a scene or two in the editor (New Scene..., then Save All), push, and look on the phone.*
+> - *(do) Reinstall the interactive-exhibit skill (1.38) and paste protocol v3.134 into the Project.*
 > - *(do) Each morning, Pull origin on both, orrery then website, first.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
 
@@ -43,13 +44,13 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
                to choose, within the range the data covers.
   l.   [done]  L-517 (the lobby): closed Nov 8 on your phone look.
   s.   [done]  The shared scene link (L-518 (the shared link)): closed Nov 8 on your phone look.
-  c.   [NOW]   *Scenes (L-519 (Featured's rethink)): the editor makes a scene from a link; then step 2b.*
-               << new this session
+  c.   [NOW]   *Scenes (L-519 (Featured's rethink)): built; your phone look; then step 2b.*
+               << moved this session
   b.   [beside] Housekeeping: L-424, L-425, L-426 (the checkers' three);
                L-423 (the website's checks) item 3; L-357 (stale gallery
                artifacts); L-509 (obsolete code), after its talk.
 
-## Settled  **>> UPDATED THIS SESSION**
+## Settled
 
 Standing rulings; a line leaves once it is habit, or a skill carries it.
 - A scene opens at now; Featured is a board highlighting important cards or scenes, kept largely as is (Nov 9; L-519 (Featured's rethink)).
@@ -67,6 +68,7 @@ Standing rulings; a line leaves once it is habit, or a skill carries it.
 ## Deferred  **>> UPDATED THIS SESSION**
 
 Waiting behind other work; a line leaves when picked up.
+- Three checks red in the drawer walk before Scenes was built, the page or the walk aged: a gallery session that next opens the drawer (Nov 9; L-521 (three red checks)).
 - The saved pictures' words, which have no source: kept as made until the braid reaches them (Nov 8; L-520 (old pictures carry old words)).
 - The Moon's Go To opening the orbit's box: the Mars website session (Nov 7; L-515 (one nested tree)).
 - Charon's period is asked around Pluto's centre, not the barycentre;
@@ -94,7 +96,7 @@ Waiting behind other work; a line leaves when picked up.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261108T175822Z, nightly, ok, no retry (gallery swap log at 6a15371, read Nov 9).
+- Last cache build: 20261108T175822Z, nightly, ok, no retry (gallery swap log at 6a15371, read Nov 9, afternoon).
 - Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at orrery e4dc2f9, its last change).
 - This page's date and the ledger's newest stamp: both Nov 9. Agree.
 
@@ -120,8 +122,8 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- This session: L-519 (Featured's rethink), the Scenes design and your
-  four rulings of Nov 9, quoted.
+- This session: L-519 (Featured's rethink), the Scenes build, with the
+  phone-look list; L-521 (three red checks in the drawer walk).
 - The tree: L-515 (one nested tree), `COORD_L515_steps1_2a_brief_20261107.md`.
 - The talk's rulings: `DESIGN_L484_consistency_rulings_20261103.md`.
 - The door: `documentation/python_work_door/`, and L-499 (kinds of session).

@@ -4488,6 +4488,58 @@ resident.
 (Moved down from the resident protocol on 2026-11-08, night, when
 v3.133 made a fourth entry.)
 
+v3.131 (November 7, 2026, night): No rule changed in this document.
+ONE skill bump: interactive-exhibit 1.34 -> 1.35 (L-515, one nested
+tree, part 4, with L-165, site continuity). PAST THE SERVED WINDOW A
+ROOM DRAWS AT THE LAST DAY ITS DATA COVERS, AND SAYS SO.
+
+WHAT PROMPTED IT. The Claude Code session of Nov 7, night (Claude Opus
+5.5), through the python_work door, built on orrery 4ac3903a and
+gallery 722ad57b, from Tony's prompt of 19:50 Chicago and part 4 of
+documentation/COORD_L515_steps1_2a_brief_20261107.md, on Tony's ruling
+of Nov 7, 12:53 Chicago, on L-165: "Yes." Past the served window a room
+draws at the last day its data covers and says so plainly; it never
+goes blank.
+
+WHAT CHANGED. interactive-exhibit: a new paragraph under What a Room
+Opens On Is Served: the page asks gallery/scene_moment.js for the
+moment it hands the driver -- the minute asked, or, past the window's
+end, the window's last whole minute -- while the resolver stays
+unchanged and still refuses anything outside the window (method: the
+page chooses inside the gate); a frozen room says so under its title
+and right under its heading in the i panel; the two sentences that say
+"today" take the frozen room's words; the Mode 5 knob ?freeze=1; the
+gallery run's Scene moment check, which asks the real resolver, and the
+walk. Riding the same bump, Tony's three asks of the same night: a
+frozen comet's span sentence names the day its data was fetched; the
+text box is opaque, and the HUD row hides while the box covers its
+triad or ruler; and parent groups in the Solar System room's drawer, a
+sub-group naming its parent in "in" (Comets over the six comet groups,
+Spacecraft over Active missions and Historical missions, Apollo and
+Amor asteroids over those two), counted, reset and found through their
+sub-groups. Its oldest of four version entries (1.32) moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule. Every
+sentence was read from the gallery's code with this session's edits
+before it was written.
+
+THE OBLIGATION TRAVELS. This session loaded interactive-exhibit from
+the account and it read 1.34, as the manifest expected, discharging
+v3.130's obligation; it read gallery-assembler 1.3,
+safe-file-editing 1.14 and ledger-and-session-records 1.22. Tony
+reinstalls interactive-exhibit (Settings > Skills) and pastes this
+version into the Project's instructions on claude.ai; the next session
+that loads it from the account confirms its copy reads 1.35 before
+work that fires it.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.128 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-11-09, when v3.134 made
+a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

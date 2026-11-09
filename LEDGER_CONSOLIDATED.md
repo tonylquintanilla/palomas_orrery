@@ -992,7 +992,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*258 live items; 242 need attention (`!`); 165 RICE-scored; 255 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*259 live items; 243 need attention (`!`); 165 RICE-scored; 255 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1162,8 +1162,9 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-514 | The Mars room: Mars, Phobos and Deimos (gallery + orrery, a planet room; road stage 15) | OPEN | -- | 2026-11-06 |
 | ! | L-515 | One nested tree in place of isolated rooms (gallery, the room system; design) | OPEN | -- | 2026-11-08 |
 | ! | L-516 | Renew palomasorrery.com at Porkbun before 2027-02-13 (legacy; Tony's account) | OPEN | -- | 2026-11-07 |
-| ! | L-519 | Featured's rethink: Scenes, a shared link kept in the tree and on Featured (gallery, the gallery editor and the Solar System room's drawer; designed) | OPEN | -- | 2026-11-09 |
+| ! | L-519 | Featured's rethink: Scenes, a shared link kept in the tree and on Featured (gallery, the gallery editor and the Solar System room's drawer; built, phone look next) | OPEN | -- | 2026-11-09 |
 | ! | L-520 | Old pictures carry old words: the saved pictures' titles and descriptions have no source (gallery, the saved pictures; the braid) | OPEN | -- | 2026-11-08 |
+| ! | L-521 | Three red checks in the drawer walk (gallery, the headless walk; recorded) | OPEN | -- | 2026-11-09 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1596,6 +1597,30 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
+#### [L-521] Three red checks in the drawer walk (gallery, the headless walk; recorded)
+<!-- L:521 status:OPEN upd:2026-11-09 section:A flag: rice: -->
+- **Recorded, not chased.** Found 2026-11-09 by the L-519 (Featured's
+  rethink) Code session (Claude Opus 5.5), on gallery 6a153716 with a
+  payload built that day by the room's real driver (2026-11-09T12:00Z):
+  `tools/headless/walk_solar_system_drawer.js` reports three failures of
+  258 on a copy of the BASE commit, before that session's edits, and the
+  same three after them. The walk is Claude-only; the gallery run does
+  not run it, so nothing Tony sees went red.
+  - "scene tap moved the view": a tap on a body in the picture should
+    move nothing (Selecting moves nothing).
+  - "Sedna's hover lines are not bulleted": Sedna's lines carry the
+    bullet, so the walk's own reading may be what is stale.
+  - "a body's text box has a line wider than 62 characters": eight
+    lines of 67 to 70.
+- Not known: whether the room changed or the walk's expectations aged
+  with the data (each was last walked green on an earlier day's
+  payload). The first step is to walk the commit where each last passed.
+**Gap:** find, for each of the three, whether the page or the walk is
+wrong; fix the one that is. A gallery session that next opens the drawer
+or the text box.
+**Ref:** L-519 (Featured's rethink); L-497 (one text box); gallery
+`tools/headless/walk_solar_system_drawer.js`.
+
 #### [L-520] Old pictures carry old words: the saved pictures' titles and descriptions have no source (gallery, the saved pictures; the braid)
 <!-- L:520 status:OPEN upd:2026-11-08 section:A flag: rice: -->
 - **Recorded, not built.** A class found in L-517 (the lobby for a
@@ -1622,7 +1647,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 (Featured's rethink); L-511 (the export carries the words); gallery
 `gallery/gallery_metadata.json`.
 
-#### [L-519] Featured's rethink: Scenes, a shared link kept in the tree and on Featured (gallery, the gallery editor and the Solar System room's drawer; designed)
+#### [L-519] Featured's rethink: Scenes, a shared link kept in the tree and on Featured (gallery, the gallery editor and the Solar System room's drawer; built, phone look next)
 <!-- L:519 status:OPEN upd:2026-11-09 section:A flag: rice: -->
 - **Opened 2026-11-08, night**, at the close of L-517 (the lobby for a
   first-time phone visitor), by the Claude Code session (Claude Opus
@@ -1706,14 +1731,85 @@ as an archive of the prioritization thinking -- no cleanup on close.
     write data/objects_config.json, whose drawer comes from the orrery's
     export. The build tells Tony in one plain message how the window
     and the group will look before building.
-**Gap:** the Scenes build, one website Code session, before L-515 (one
-nested tree) step 2b, on Tony's word of 09:51; then his phone look.
-What Featured is for is settled (09:51). Left on this item besides the
-build: the editor's "under construction" line, above.
+- **Built 2026-11-09**, by the Claude Code session (Claude Opus 5.5)
+  through the python_work door, on orrery c7cf3490 (Tony's ledger commit
+  of that morning, not yet pushed) and gallery 6a153716. Before building
+  it told Tony in one message how the window and the group would look;
+  his answer: "Go ahead". As built [verified @ the session's working
+  copy, headlessly; not yet seen on a phone]:
+  - THE RECORD: a card in `gallery/gallery_metadata.json` marked
+    `"scene": true`, room `solar_system`, shape 9:16, no files, its live
+    address the link with no minute, its title the name, Featured on or
+    off. No scene exists yet: Tony makes the first in the editor.
+  - THE WINDOW: the gallery editor's New Scene... (toolbar and Card
+    menu). A paste box; the cleaned link in a box he can edit, read again
+    after each edit, with Look; check lines in plain words (what was
+    taken off, the room, the rows found, any not found in red, a link
+    already on a card); a Name box filled from the rows' names; "Also
+    show on the gallery page's Featured"; Save scene, greyed until the
+    link checks clean and has a name; a key not found asks before
+    saving. Save All writes it, as every edit. The logic is
+    `tools/scene_card.py`, with no window (L-338), checked by
+    `tools/test_scene_card.py`, the gallery run's new Scene cards row
+    (gates; its self-test breaks the file three ways). The window was
+    driven once on a throwaway copy of the gallery files: a shared link
+    pasted, cleaned, named "Earth, Mars and 16 Psyche", saved as a
+    Featured scene.
+  - THE GROUP: one fold, Scenes, under the Sun's row in the Solar System
+    room's drawer, ahead of the Sun's saved pictures, with a bookmark
+    mark and its count, closed on opening; open, the line "Each scene
+    opens with its bodies ticked, at today's date." and each scene's name
+    with an arrow. A tap opens the link at the visitor's now; Back
+    returns to the room as it was left with the drawer open at Scenes
+    (the room keeps no ticks for a scene: its own address carries them;
+    `PictureFolds.returnFor` keeps what was kept through the scene's own
+    opening, takes it on Back, drops it on anything else). Find finds a
+    scene's name and counts it as a scene. A fold now has an id of its
+    own (`foldsAt`, `rowOf`).
+  - FEATURED: no change was needed; index.html's Featured rule shows a
+    Featured scene as any live card, with the Interactive tag.
+  - CHECKS: the gallery run offline, "42 of 42 gating checkers passed";
+    the Picture folds row's new section 6 and two more breaks (seven in
+    all, each caught); the drawer walk's new section 30 (14 checks with a
+    control, on a copy of the metadata holding two scenes, through the
+    harness's new `{serve}`), shown failing on a planted page without
+    the "keep"; and a one-off read of the real page headlessly: the
+    editor knows exactly the keys each room's address writes (the root
+    115; Earth 20, its two belts sharing one).
+  - interactive-exhibit 1.37 -> 1.38 (protocol v3.134). The account's
+    copy of 1.37 read 1.37 as expected but was its first cut: the repo's
+    copy had taken Tony's phone look of L-518 ("Tap to update.") under
+    the same number. 1.38 carries the repo's words.
+  - Found, not changed: the drawer walk is red on three checks at the
+    base, before this session's edits; recorded on L-521 (three red
+    checks in the drawer walk).
+- **Tony-action (do):** the phone look, list below; then Tony makes the
+  first scenes in the editor (New Scene..., then Save All) and pushes
+  the website.
+- **The phone look** (Mode 5; the first scene made, pushed):
+  1. The Solar System room's drawer: Scenes right under the Sun's row,
+     above Saved pictures, with its bookmark mark and count, closed.
+  2. Open it: the line "Each scene opens with its bodies ticked, at
+     today's date." reads right, and each scene's name.
+  3. Tap a scene: the room opens with its bodies ticked, at now, with no
+     "Tap to update." line.
+  4. The phone's Back: the room as you left it, the drawer open at Scenes.
+  5. Find: type part of a scene's name; it shows, "1 scene matches".
+  6. Reset folds Scenes shut.
+  7. A Featured scene on the gallery page: a card with the Interactive
+     tag that opens the same view.
+  8. A scene made while centred on Earth opens the Earth room.
+  9. At the computer: the New Scene window (paste, the check lines, the
+     name, Look, Save scene).
+**Gap:** Tony's phone look of the Scenes build, above; the item closes on
+it. Left besides: the editor's "under construction" line, above.
 **Ref:** L-517 (the lobby for a first-time phone visitor); L-518 (the
 shared scene link); L-520 (old pictures carry old words); L-515 (one
-nested tree); L-303 (the card model); gallery `index.html`,
-`gallery/gallery_metadata.json`, `tools/gallery_editor.py`.
+nested tree); L-303 (the card model); L-521 (three red checks in the
+drawer walk); gallery `index.html`, `gallery/gallery_metadata.json`,
+`tools/gallery_editor.py`, `tools/scene_card.py`,
+`tools/test_scene_card.py`, `gallery/picture_folds.js`,
+`gallery/solar_system_drawer.js`, `interactive.html`.
 
 #### [L-516] Renew palomasorrery.com at Porkbun before 2027-02-13 (legacy; Tony's account)
 <!-- L:516 status:OPEN upd:2026-11-07 section:A flag: rice: -->
