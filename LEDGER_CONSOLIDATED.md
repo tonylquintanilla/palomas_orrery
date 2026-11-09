@@ -770,6 +770,11 @@ Module updated: November 8, 2026, late night, with Anthropic's Claude Opus
 frame fixed, on L-518; then L-518 closed on his word, its loose ends to
 L-519 and L-515), built on orrery 76cca2a1 with gallery 5817c553, closed
 at orrery 4095e301 with gallery 6a153716.
+Module updated: November 9, 2026, morning, with Anthropic's Claude Opus 5.5
+(the coordinating session: L-519 designed in chat, Scenes, a shared link
+kept in the tree and on Featured; Featured's purpose ruled; Scenes placed
+before L-515 step 2b), built on orrery 1c13b7c3 with gallery 6a153716
+read only.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -1157,7 +1162,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-514 | The Mars room: Mars, Phobos and Deimos (gallery + orrery, a planet room; road stage 15) | OPEN | -- | 2026-11-06 |
 | ! | L-515 | One nested tree in place of isolated rooms (gallery, the room system; design) | OPEN | -- | 2026-11-08 |
 | ! | L-516 | Renew palomasorrery.com at Porkbun before 2027-02-13 (legacy; Tony's account) | OPEN | -- | 2026-11-07 |
-| ! | L-519 | Featured's rethink: the existing cards piped into the one tree (gallery, the lobby and the gallery editor; not designed) | OPEN | -- | 2026-11-08 |
+| ! | L-519 | Featured's rethink: Scenes, a shared link kept in the tree and on Featured (gallery, the gallery editor and the Solar System room's drawer; designed) | OPEN | -- | 2026-11-09 |
 | ! | L-520 | Old pictures carry old words: the saved pictures' titles and descriptions have no source (gallery, the saved pictures; the braid) | OPEN | -- | 2026-11-08 |
 
 ### B. Pending Action (Tony-side)
@@ -1617,8 +1622,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 (Featured's rethink); L-511 (the export carries the words); gallery
 `gallery/gallery_metadata.json`.
 
-#### [L-519] Featured's rethink: the existing cards piped into the one tree (gallery, the lobby and the gallery editor; not designed)
-<!-- L:519 status:OPEN upd:2026-11-08 section:A flag: rice: -->
+#### [L-519] Featured's rethink: Scenes, a shared link kept in the tree and on Featured (gallery, the gallery editor and the Solar System room's drawer; designed)
+<!-- L:519 status:OPEN upd:2026-11-09 section:A flag: rice: -->
 - **Opened 2026-11-08, night**, at the close of L-517 (the lobby for a
   first-time phone visitor), by the Claude Code session (Claude Opus
   5.5) through the python_work door, on orrery 789c1ec8 and gallery
@@ -1652,8 +1657,59 @@ as an archive of the prioritization thinking -- no cleanup on close.
   now exists: `interactive.html?exhibit=<room>&show=<rows>&at=<minute>`,
   written by the room itself (interactive-exhibit 1.37, The Shared Scene
   Link). Not designed: part of this talk.
-**Gap:** a design talk on what Featured is for in the one tree, and with
-it the gallery editor's future; then a build.
+- **Tony's question, 2026-11-08, 23:48 Chicago**, in the coordinating
+  session: can Studio or the gallery editor make a Featured card from the
+  new link today, for ED138? Answered from the code at gallery 6a153716,
+  not tried: by hand in the gallery editor only. Its Live scene URL box
+  takes any text, and index.html opens a card's live address unchanged
+  (window.location.href = viz.live). Studio's New Interactive Card offers
+  only the fixed list of room addresses (json_converter.live_scene_urls)
+  and refuses an address another card already opens.
+- **The design talk, 2026-11-09, morning**, in the coordinating session
+  (Claude Opus 5.5), with phone pictures. Tony's words, in order:
+  - 09:37: "Can we streamline the gallery editor pipeline for
+    interactive cards? 1) start with the link 2) import title etc 3)
+    handle any url edits 4) select placement in the tree 5) select
+    featured on or off 6) etc"
+  - 09:44, his design: "What if the card functions just like a shared
+    link but is permanent through the tree? In a sun drawer called
+    'Scenes' and Featured for a second link to the Featured section. So
+    basically the gallery editor just creates the link card."
+  - 09:48, on a scene's minute: "Now. A specific time is for the future
+    date picker and encounters." A scene always opens at the visitor's
+    now; its link carries no at=.
+  - 09:51, the order and Featured's purpose: "Before 2b. And on
+    Featured, I think it's just a board in the gallery highlighting
+    important cards or scenes. That's all. It can remain largely as
+    is."
+- **The design, as settled.** A SCENE is one record the gallery editor
+  makes: a name, the link, Featured on or off.
+  - The editor's New scene window: Tony pastes the whole link his
+    phone's Share gives; the editor removes the website's address in
+    front and the at= minute; it reads the show= keys against the
+    website's object list and names any it cannot find before saving;
+    it suggests a name from the bodies' names; the cleaned link sits in
+    a box he can edit, read again after each edit, with a Look button
+    opening it in his browser; a link already on a card is refused.
+  - In the room: a group named Scenes under the Sun in the Solar System
+    room's drawer. A tap on a scene opens its link, so it behaves as a
+    shared link does, and Back returns. A scene made while centred on
+    Earth opens there, since its link carries exhibit=earth.
+  - Featured on: the same scene is also an Interactive card on the
+    gallery page. One record, two doors to one link.
+  - The words: a scene carries its name only; each body's own words
+    stay in the room. So no copy of the export's words is made, and
+    L-520's class (words with no source) does not arise here.
+  - Method, not ruled: the record is a card in
+    gallery/gallery_metadata.json, the way the saved pictures reach
+    their folds (drawer_row, picture_folds.js); the editor does not
+    write data/objects_config.json, whose drawer comes from the orrery's
+    export. The build tells Tony in one plain message how the window
+    and the group will look before building.
+**Gap:** the Scenes build, one website Code session, before L-515 (one
+nested tree) step 2b, on Tony's word of 09:51; then his phone look.
+What Featured is for is settled (09:51). Left on this item besides the
+build: the editor's "under construction" line, above.
 **Ref:** L-517 (the lobby for a first-time phone visitor); L-518 (the
 shared scene link); L-520 (old pictures carry old words); L-515 (one
 nested tree); L-303 (the card model); gallery `index.html`,
