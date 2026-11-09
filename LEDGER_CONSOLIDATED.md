@@ -765,6 +765,9 @@ Module updated: November 8, 2026, night, with Anthropic's Claude Opus 5.5
 (the website Code session for L-518, the shared scene link: built, its
 record on L-518; the interactive-exhibit bump to 1.37 and protocol
 v3.133), built on orrery 0283834d with gallery d96b9989.
+Module updated: November 8, 2026, late night, with Anthropic's Claude Opus
+5.5 (the same session: Tony's phone look at the shared link and the Reset
+frame fixed, on L-518), built on orrery 76cca2a1 with gallery 5817c553.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -1781,13 +1784,49 @@ nested tree); L-303 (the card model); gallery `index.html`,
     `tools/headless/walk_scene_address.js` (39 checks; fails on a page
     planted without the line). interactive-exhibit 1.37 and protocol
     v3.133 reworded within the same bump.
-**Gap:** Tony's phone look at "Tap to update.": a shared scene opened on
-another device, the line tapped, the room again at now with the same
-bodies and the time now under the title; where the line sits on the
-phone, upright and sideways; Earth the same after Centre on Earth;
-Reset; and the words of the two notes. Then the editor's half (a
-Featured card from an address): designed, then built.
-- Tony-action (decide): the phone look at "Tap to update.".
+- **Tony's phone look at "Tap to update.", 2026-11-08, night**, read
+  from his copy `documentation/WHERE_WE_ARE_11-8-26_2053_run_record.md`
+  (website pushed at 5817c553, orrery at 76cca2a1): a shared scene opened
+  on another device with the line under the date, "-- yes"; tapped, the
+  room at now with the same bodies and the time now, "-- yes"; where the
+  line sits, upright and sideways, "-- correct"; Earth after Centre on
+  Earth, "sending and updating works correctly. however i found a
+  possible bug: when i tick the moon's orbit, and then press reset, the
+  scene resets but the scale does not. can you check? the same thing
+  happens in the solar room: if i tick comet ikeya-seki and the press
+  reset, the scene resets but the scale stays at 20-40 au."
+  - FOUND: this build's bug, and an older one of the same kind. Reset
+    put back the room's own ticks and framed them with the frame the
+    page OPENED on (navArrivalR). A room opened from a link -- and every
+    reload, whose address now carries the ticks -- opens framed on the
+    link's rows, so Reset after the Moon kept the Moon's frame, and after
+    Ikeya-Seki its 93 AU. The root had the same fault since L-515 on a
+    return from Centre on with kept ticks. Reproduced on the live site
+    in the desktop app's browser (real Plotly: Earth opened with
+    `show=crust,moon`, Reset left the range at 0.00295 AU) and headless.
+  - FIXED: Reset frames what it has just put back, by the room's own
+    rule, the farthest thing drawn each by its own measure and margin
+    (`sunTicksFrameR` in interactive.html; `sunReset` hands it to
+    `navHome`, and the root's `ssHome` uses it). A plain opening's Reset
+    frame is unchanged to the last digit (Earth 0.0000592 AU, the root
+    1.914 AU, ?exhibit=sun 0.007883 AU). Home keeps the frame the room
+    opened on, as before; in Earth after a link that is the link's frame
+    (noted, not changed).
+  - CHECKED: the Scene address check holds both wiring points (23); the
+    walk's steps 7 and 9 (45 checks) open from a link and from kept
+    ticks, Reset, and compare with the plain opening's frame; run on the
+    pushed page they fail three times, on the fix they pass. Both Reset
+    walks pass (33 checks each); the website run "41 of 41 gating
+    checkers passed".
+  - interactive-exhibit 1.37 is not bumped again: Tony has installed it,
+    and its sentence on Reset ("the opening frame and angle") still
+    describes the fix. The next version may say how the frame is found.
+**Gap:** Tony's phone look at Reset after a shared link (Earth with the
+Moon, the Solar System room with Ikeya-Seki); the words of the two notes
+(a link too old for the data, a body the room no longer has). Then
+L-518 closes on his word, and the editor's half (a Featured card from an
+address) goes to a short design talk.
+- Tony-action (decide): the phone look at Reset, and closing L-518.
 **Ref:** `documentation/DESIGN_shared_view_rulings_20261029.md`;
 `documentation/HANDOFF_coordination_20261028_29.md`; L-515 (one nested
 tree); L-165 (site continuity); L-503 (the belt on the website).

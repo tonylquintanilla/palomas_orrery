@@ -1,8 +1,8 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 8, 2026, night: the website session (Opus), the shared scene link built.
-- Written at orrery 0283834 and gallery d96b998, plus this session's edits.
+Last updated: November 8, 2026, late night: the website session (Opus), your look at the shared link, and Reset's frame fixed.
+- Written at orrery 76cca2a and gallery 5817c55, plus this session's edits.
 
 > **READ THIS FIRST**
 >
@@ -10,12 +10,12 @@ Last updated: November 8, 2026, night: the website session (Opus), the shared sc
 > - The shared scene link is built (L-518 (the shared link)). As you tick, the room writes the bodies and the minute into its own address, so your phone's Share sends the scene.
 > - Opened from a link: the same bodies at the same minute, and a third line under the title, "Tap to update.", which brings now. Too old for the data: now, and it says so. Past the data: the last day covered, as the freeze does.
 > - Not built: making a Featured card from a link in the gallery editor. It needs a short talk first.
-> - Your first look, built: the rooms keep drawing the minute they open (your word, "That makes sense"); "as shared" is gone, "Tap to update." is the new third line. The dashboard button is added.
+> - Your look passed: sending, "Tap to update." and where the line sits. Your bug is fixed: after a shared link, Reset now comes back to the room's own frame (the Moon, Ikeya-Seki). It was mine, and an older return from "Centre on" had it too.
 >
 > **Do next:** *Your phone look at the shared link (L-518 (the shared link)); then step 2b.*
 >
 > **Needs you now:**
-> - *(decide) Your phone look at "Tap to update." on a shared link.*
+> - *(decide) Your phone look at Reset after a shared link, and the two notes' words; then L-518 (the shared link) can close.*
 > - *(do) Commit and push the website, then the orrery.*
 > - *(do) Reinstall interactive-exhibit 1.37 (Settings > Skills), and paste protocol v3.133 into the Project.*
 > - *(do) Each morning, Pull origin on both, orrery then website, first.*

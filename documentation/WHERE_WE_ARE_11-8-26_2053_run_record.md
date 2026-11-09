@@ -316,10 +316,10 @@ All clean: no non-ASCII bytes, LF only. The run's result will arrive on its own.
 - The headless walk passes on the real page, and fails on a copy without the line.
 
 **Your phone look**
-1. Tick a scene and share it to yourself. Open the link on another device: you should see the same bodies at the sender's minute, and "Tap to update." under the date line.
-2. Tap it. The room should open at now with the same bodies, and the date line should show the time now.
-3. Check where the line sits, with the phone upright and sideways, and whether it covers anything.
-4. Do the same in Earth after "Centre on Earth". Then press Reset: Earth's own opening should come back.
+1. Tick a scene and share it to yourself. Open the link on another device: you should see the same bodies at the sender's minute, and "Tap to update." under the date line. -- yes
+2. Tap it. The room should open at now with the same bodies, and the date line should show the time now. -- yes
+3. Check where the line sits, with the phone upright and sideways, and whether it covers anything. -- correct
+4. Do the same in Earth after "Centre on Earth". Then press Reset: Earth's own opening should come back. -- sending and updating works correctly. however i found a possible bug: when i tick the moon's orbit, and then press reset, the scene resets but the scale does not. can you check? the same thing happens in the solar room: if i tick comet ikeya-seki and the press reset, the scene resets but the scale stays at 20-40 au. 
 
 **Files changed since my last report**
 
@@ -338,10 +338,83 @@ Orrery:
 
 **Run order**
 1. In GitHub Desktop, commit and push the website, -- 5817c553837f8805412f322646c66280b086bfd1
-   1. then the orrery. -- 
+   1. then the orrery. -- 76cca2a19f725b4c0b9a71f179e1ebd8a252d030
 2. Do the phone look above.
 
 **Tony-actions**
 - (do) Commit and push both repositories.
-- (do) Reinstall interactive-exhibit 1.37, and paste protocol v3.133 into the Project.
+- (do) Reinstall interactive-exhibit 1.37, and paste protocol v3.133 into the Project. -- previously done last turn
 - (decide) The phone look at "Tap to update."
+
+========================================================
+
+Your look passed on the first three points. Before anything else I'm checking the base, then I'll reproduce the Reset scale bug headlessly, on both the current page and the page before this work.
+
+Reset now puts the frame and ruler back correctly in both rooms headlessly, but the stand-in plotting library may hide the bug. I'm reproducing it on the live site in the built-in browser next.
+
+Loaded with the real plotting library. Now ticking Ikeya-Seki by its own row and pressing Reset, reading the frame and ruler at each step.
+
+With the real library, ticking Ikeya-Seki and pressing the top bar's Reset brings the frame and the ruler back. So your path must differ somewhere. Trying Earth with the Moon, and then Go To.
+
+Both rooms reset fine when opened plainly, so I suspect the shared link: a room opened that way measures its opening frame on the link's bodies, and reset keeps that frame. I'm testing that now.
+
+The bug was mine: a room opened from a shared link measured its opening frame on the link's bodies, so Reset and Home kept a stale frame. I'm now measuring the room's own opening frame and giving that to Reset and Home.
+
+Reset now re-frames whatever it just restored using the same rule a tick does, rather than reusing the page's opening frame, which also keeps earlier ticks when returning to the room after "Centre on".
+
+Now testing: a room opened from a link with Ikeya-Seki or the Moon, then Reset, must come back to the same frame as a plain opening.
+
+The Reset bug is fixed and verified on the pushed page: it now returns to the plain opening frame in both rooms, and I'm adding this case to the walk and check so it stays covered.
+
+The walk passes on the fixed page (45 checks) and catches your bug on the pushed page. Now the other room walks, then the full website run.
+
+Both Reset walks, the drawer order walk, and the drawer walk (with its three known failures) are all green, and the website run reports 41 of 41 gating checkers passed. I'm moving on to the records next.
+
+The Reset bug you found was mine, and it's fixed: after a shared link, Reset now returns to the room's own frame. The website run reads "41 of 41 gating checkers passed". Your phone hasn't seen the fix yet.
+
+**What was wrong**
+- Reset put back the room's own bodies but kept the frame the page had opened on.
+- A room opened from a link opens framed on the link's bodies, like your Moon or Ikeya-Seki, so Reset kept that size.
+- Your own reloads did the same, because the address now always carries your ticks.
+- An older version of the same fault was already there: coming back to the Solar System room after "Centre on" with Ikeya-Seki ticked.
+- I reproduced it on the live site in the desktop app's browser. Earth opened from a link with the Moon kept the Moon's frame after Reset.
+
+**The fix**
+- Reset now frames what it has just put back, by the rule a tick uses: the farthest thing drawn, plus its margin.
+- A plain opening's Reset is unchanged to the last digit, in Earth, the Solar System room and the Sun's address.
+- Home still returns to the frame the room opened on, as before.
+
+**Checked**
+- The walk now opens from a link and from kept ticks, presses Reset and compares the frame with a plain opening, 45 checks in all.
+- On the page you pushed it fails exactly on your two cases, plus the kept-ticks one; on the fix it passes.
+- Both Reset walks pass, and the drawer walk shows only its three old failures.
+
+**Phone look**
+1. Open a shared link in Earth with the Moon ticked, and press Reset. The view should shrink back to Earth.
+2. Do the same in the Solar System room with Ikeya-Seki: the ruler should return to the inner-planet scale.
+3. Read the two notes. The missing-body note shows if you add `,planet9` to `show=` in a link. The other appears on a link whose `at=` date is more than about three months old, for example `at=2026-06-01T00:00Z`.
+
+If those pass, L-518 (the shared scene link) can close. The gallery editor's Featured card from a link then goes to a short design talk.
+
+**Files changed since my last report**
+
+Website:
+- ok interactive.html (5 edits: the Reset frame, and the header)
+- ok documentation/smoke_scene_address.js (2 more wiring points, 23 in all)
+- ok tools/headless/walk_scene_address.js (steps 7 and 9, 45 checks)
+- data/constants_export.sha, data/objects_export.sha, data/drawings/pulled_at.sha: rewritten by the run itself
+
+Orrery:
+- ok LEDGER_CONSOLIDATED.md (your look and the fix on L-518; index regenerated, no problems)
+- ok documentation/WHERE_WE_ARE.md (the box and the header)
+
+The room skill isn't bumped again: you've installed 1.37, and its line on Reset still describes the fix.
+
+**Run order**
+1. In GitHub Desktop, commit and push the website, 
+   1. then the orrery. The orrery's change list will also show your run record copy, which is yours.
+2. Do the phone look above.
+
+**Tony-actions**
+- (do) Commit and push both repositories.
+- (decide) The phone look at Reset, and whether L-518 closes.
