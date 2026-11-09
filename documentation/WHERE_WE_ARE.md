@@ -1,8 +1,8 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 8, 2026, night: the website session (Opus), L-517 (the lobby) closed on your word, and your five answers carried.
-- Written at orrery 3d711de and gallery 39900d7, plus this session's edits.
+Last updated: November 8, 2026, night: the coordinating session (Opus), your ruling on the two desktop pictures recorded.
+- Written at orrery e4dc2f9 and gallery d96b998, plus this session's edits.
 
 > **READ THIS FIRST**
 >
@@ -10,11 +10,12 @@ Last updated: November 8, 2026, night: the website session (Opus), L-517 (the lo
 > - L-517 (the lobby) is closed. Old Solar System addresses land on the room's opening view, as you ruled ("leave it as is").
 > - Its leftovers moved: Featured to a new item, L-519 (Featured's rethink); the pictures' words to the braid, L-520 (old pictures carry old words); adding a live view to Featured to L-518 (the shared link); the two desktop pictures to L-515 (one nested tree).
 > - Your guest book note lost its old "START HERE" link, and the dashboard gained the Picture Folds button its parity check asked for.
+> - The two desktop-only pictures stay as they are until replaced (your ruling, on L-515 (one nested tree)).
 >
 > **Do next:** *The shared scene link (L-518 (the shared link)); then step 2b.*
 >
 > **Needs you now:**
-> - *(do) Commit and push the website (the guest book note), then the orrery (the dashboard and the records).*
+> - *(do) Commit and push the orrery: this record.*
 > - *(do) Each morning, Pull origin on both, orrery then website, first.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
 
@@ -111,7 +112,6 @@ At the next design talk:
 - Planet 9: how to show a body that may not exist.
 
 Not urgent, in your order:
-0. On a desktop: Mercury's and Near Earth Asteroids' pictures (L-515 (one nested tree)).
 1. Whether the editor also edits the Solar System room's rows, and
    adds a new body as a form (L-489 (compositions)).
 2. The website's second run: keep, or stand down after a clean 08:17

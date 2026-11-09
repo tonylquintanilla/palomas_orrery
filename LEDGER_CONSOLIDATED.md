@@ -728,6 +728,10 @@ Module updated: November 7, 2026, evening, with Anthropic's Claude Opus
 its three fixes; then part 3, the Sun's shells in the root; the
 interactive-exhibit bump to 1.34 and protocol v3.130), built on orrery
 cba62f22 with gallery 49d1bae1.
+Module updated: November 8, 2026, night, with Anthropic's Claude Opus 5.5 (the
+coordinating session: Tony's ruling on the two desktop-only pictures
+recorded on L-515 from his copy WHERE_WE_ARE_11-8-26_1842_run_record.md),
+built on orrery e4dc2f9a with gallery d96b9989.
 Module updated: November 8, 2026, evening, with Anthropic's Claude Opus 5.5 (the
 coordinating session: Tony's phone look at L-517 part 2 recorded from his
 copy WHERE_WE_ARE_11-8-26_1529_run_record.md, his two asks carried into a
@@ -2594,7 +2598,10 @@ tree); L-165 (site continuity); L-503 (the belt on the website).
   desktop, and Tony has not looked at them yet: Mercury's Orbital
   Transformation, on Mercury's row, and the Near Earth Asteroids
   picture, on the Apollo and Amor asteroids row.
-  - Tony-action (decide): a look at both on a desktop.
+  - **Ruled, Tony, 2026-11-08, night** (his copy
+    `documentation/WHERE_WE_ARE_11-8-26_1842_run_record.md`): "okay for
+    legacy pictures. no change needed until replaced." Both stay as they
+    are, desktop only, until their encounters replace them.
 **Gap:** step 2b; L-514 (the Mars room) waits for step 3. Carried from
 his look at part 3: the Moon's Go To box (the Mars website session).
 The lobby moved to L-517 (the lobby for a first-time phone visitor).
