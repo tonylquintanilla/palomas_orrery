@@ -1801,8 +1801,34 @@ or the text box.
   8. A scene made while centred on Earth opens the Earth room.
   9. At the computer: the New Scene window (paste, the check lines, the
      name, Look, Save scene).
-**Gap:** Tony's phone look of the Scenes build, above; the item closes on
-it. Left besides: the editor's "under construction" line, above.
+- **First try, 2026-11-09, afternoon** (Tony's run record
+  `WHERE_WE_ARE_11-9-26_1102_run_record.md`, read by the same Code
+  session): Tony made the first scene, "New Candidate Dwarf Planet 2026
+  ED138" (earth, neptune, pluto_barycenter, tno_2026_ed138; Featured),
+  and pushed gallery 1f95d2c1. Its Pages deploy failed twice, "Internal
+  server error", during GitHub's incident with Actions, Pages and
+  Webhooks (opened 18:12Z, mitigated 18:43Z, githubstatus.com); the push
+  was at 18:17Z. So the live site still served 6a15371 (the live run: 4
+  files STALE; picture_folds.js served has no Scenes), and item 1 failed
+  for that reason: Scenes was never deployed. Not a fault in the build.
+  His notes on the window:
+  - Windows' paste (the right-click menu) does nothing in the window's
+    boxes; Ctrl+V works. Tk's Entry has no right-click menu. FIXED the
+    same afternoon on Tony's "Yes, add it": `add_edit_menu` in
+    `tools/gallery_editor.py` gives the window's three boxes Cut, Copy,
+    Paste and Select all, and its check lines Copy and Select all, each
+    asking the box's own Tk binding [verified @ a throwaway copy of the
+    gallery files: Paste filled the paste box and the link was cleaned
+    and named as with Ctrl+V; Cut and Copy reached the clipboard; the
+    offline run, 42 of 42 gating checkers passed]. Not yet tried by Tony.
+  - The link lists the rows in the order they were ticked, and the room
+    opens with the drawer showing the last one ticked.
+  - The card's room list in the editor is the old hand-curated tree, not
+    the room's tree; he chose Solar System, which saved `solar_system`,
+    as a scene needs.
+**Gap:** Tony reruns the failed deploy, then the phone look of the
+Scenes build, above; the item closes on it. Left besides: the editor's
+"under construction" line, above.
 **Ref:** L-517 (the lobby for a first-time phone visitor); L-518 (the
 shared scene link); L-520 (old pictures carry old words); L-515 (one
 nested tree); L-303 (the card model); L-521 (three red checks in the

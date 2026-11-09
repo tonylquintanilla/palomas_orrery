@@ -427,3 +427,43 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 - (do) Run the live check after the push. -- done
 - (do) The phone look, nine items above. -- failed
 - (do) Reinstall the interactive-exhibit skill (1.38) and paste protocol v3.134 into the Project. -- done
+
+==============================================================
+
+The right-click menu is written; now I'm testing it on a throwaway copy of the website files.
+
+The menu works: Paste fills the box and the link is cleaned as with Ctrl+V. Now the gallery's offline checks.
+
+I've added a right-click Paste to the New Scene window, and you can push now. Right-click any of the window's three boxes to get Cut, Copy, Paste and Select all. Right-click the check lines to get Copy and Select all.
+
+**How it was checked**
+- **On a throwaway copy of the website files:** I put a shared link on the clipboard and used the menu's Paste. The link went into the paste box. The editor took the address and the minute off and suggested "Earth and Mars", the same as with Ctrl+V. Cut and Copy reached the clipboard too.
+- **The website's offline run:** "42 of 42 gating checkers passed".
+- **Not yet tried by you:** I drove the menu from a script, so a real right-click with the mouse hasn't been tried yet.
+
+**About the deploy:** your next website push starts a new deploy by itself, and GitHub's outage is over, so this push should bring Scenes live. If it fails again: on GitHub, open Actions, then the failed run, and press "Re-run all jobs".
+
+**Files for your run record**
+
+Website:
+- ok tools/gallery_editor.py (5 edits: the right-click menu, given to the window's boxes, and a docstring note)
+- Rewritten by the run itself: MODULE_ATLAS.md and MODULE_INDEX.md (the editor's new size), and data/constants_export.sha, data/objects_export.sha and data/drawings/pulled_at.sha (now naming orrery 4d58d20)
+
+Orrery:
+- ok LEDGER_CONSOLIDATED.md (3 edits this session: your first try and the failed deploy, your three notes, the Paste fix; index regenerated, no problems)
+- ok documentation/WHERE_WE_ARE.md (3 edits by section; 129 lines above the marker)
+
+**Token count:** this app has no /cost command. This was a short follow-up: one code change, one test drive, one run of the checks.
+
+**Your run order**
+1. In VS Code, run the gallery editor, open New Scene..., and try a right-click Paste. Cancel when you've seen it.
+2. In GitHub Desktop, commit and push the website. This deploys it again. -- commit stashed, nightly run pulled, commit pushed 285f14bc342ce792d319c1e59eeeae379a6475b7
+3. Commit and push the orrery. -- 
+4. When the deploy is green, run the live check: `gallery_maintenance_run.py --live`.
+5. The phone look at Scenes, from item 1.
+
+**Tony-action rollup**
+- (do) Try the right-click Paste in the New Scene window.
+- (do) Commit and push both repositories.
+- (do) If the website's deploy fails again, re-run it on GitHub.
+- (do) Run the live check, then do the phone look.

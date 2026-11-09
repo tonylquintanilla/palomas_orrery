@@ -1,23 +1,22 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 9, 2026: the website Code session (Opus), Scenes built.
-- Written at orrery c7cf349 and gallery 6a15371, plus this session's edits.
+Last updated: November 9, 2026, afternoon: the website Code session (Opus), after your first try at Scenes.
+- Written at orrery 4d58d20 and gallery 1f95d2c, plus this session's edits.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Scenes is built (L-519 (Featured's rethink)): the gallery editor has a New Scene window, where you paste a shared link and it becomes a scene.
-> - The window cleans the link, names any body it cannot find, refuses a link already on a card, and suggests a name.
-> - In the Solar System room's drawer, a Scenes group sits under the Sun, above Saved pictures. A tap opens the scene at now; Back returns to the room.
-> - Ticking Featured also puts the scene on the gallery page's Featured.
+> - Scenes is built (L-519 (Featured's rethink)): paste a shared link into the editor's New Scene window, and it becomes a scene in a Scenes group under the Sun in the drawer; Featured ticked, also on the gallery page.
+> - Your first scene, 2026 ED138, is saved and pushed, but the website's deploy failed twice during GitHub's outage of Nov 9 (12:12 to 12:43 your time). The live site still had this morning's page, so the phone look could not find Scenes.
+> - The New Scene window's boxes now have a right-click menu with Paste, as you asked.
 >
 > **Do next:** *Your phone look at Scenes (the list is on L-519); then step 2b of the one tree.*
 >
 > **Needs you now:**
-> - *(do) Commit and push both, the website and the orrery.*
-> - *(do) Make a scene or two in the editor (New Scene..., then Save All), push, and look on the phone.*
-> - *(do) Reinstall the interactive-exhibit skill (1.38) and paste protocol v3.134 into the Project.*
+> - *(do) Commit and push both: the website (the right-click Paste) and the orrery (these records). The push deploys the website again.*
+> - *(do) If that deploy fails too, on GitHub open Actions, then the failed run, and press Re-run all jobs.*
+> - *(do) Run the live check, then the phone look at Scenes (the list is on L-519).*
 > - *(do) Each morning, Pull origin on both, orrery then website, first.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
 
