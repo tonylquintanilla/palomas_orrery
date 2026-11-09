@@ -1,19 +1,20 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 8, 2026, evening: the coordinating session (Opus), your phone look at the lobby recorded.
-- Written at orrery 767b208 and gallery 942910c, plus this session's edits.
+Last updated: November 8, 2026, evening: the website session (Opus) for L-517 part 3, the Solar System page gone and Back fixed.
+- Written at orrery 418a9b4 and gallery 942910c, plus this session's edits.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The new lobby passed your phone look and is live (L-517 (the lobby), part 2).
-> - Your two asks are a small part 3: the Solar System page and "Solar" in the menu go; Back from a subject page returns to the lobby.
+> - The Solar System page is gone, and "Solar" is gone from the top. An old address to that page now opens the live room (L-517 (the lobby), part 3).
+> - Back from Earth System or Stars should now return to the lobby. I could not make it fail in a test browser, so your phone is the test.
 >
-> **Do next:** *L-517 part 3 (brief `COORD_L517_lobby_brief_20261108.md`); then the shared scene link; then step 2b.*
+> **Do next:** *Your phone look at L-517 part 3; if it passes, L-517 closes; then the shared scene link; then step 2b.*
 >
 > **Needs you now:**
-> - *(do) Commit and push the orrery: the records and the brief.*
+> - *(do) Commit and push the website, then the orrery.*
+> - *(decide) The phone look at part 3 (the session's report lists what to tap).*
 > - *(do) Each morning, Pull origin on both, orrery then website, first.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
 
@@ -38,18 +39,18 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
  17.   [later] Small-body systems' moons; then stars and exoplanets.
  18.   [goal]  The website does what the desktop orrery does, with a date
                to choose, within the range the data covers.
-  l.   [NOW]   *L-517 (the lobby): parts 1 and 2 passed; part 3, the
-               Solar System page gone and Back fixed.* << moved this session
+  l.   [NOW]   *L-517 (the lobby): parts 1 and 2 passed; part 3 built,
+               waiting on your phone look.* << moved this session
   s.   [next]  The shared scene link (L-518 (the shared link)), after
-               the lobby; your editor ask rides it. << moved this session
+               the lobby; your editor ask rides it.
   b.   [beside] Housekeeping: L-424, L-425, L-426 (the checkers' three);
                L-423 (the website's checks) item 3; L-357 (stale gallery
                artifacts); L-509 (obsolete code), after its talk.
 
-## Settled
+## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings; a line leaves once it is habit, or a skill carries it.
-- The lobby asks one thing first; Featured stays as it is; saved pictures sit beside their body's row in the drawer (Nov 8; L-517 (the lobby)).
+- The lobby asks one thing first; Featured stays as it is; saved pictures sit beside their body's row in the drawer; the Solar System page goes, its old addresses opening the live room (Nov 8; L-517 (the lobby)).
 - Past the dates its data covers, a room draws the last day covered and says so; never blank (Nov 7, 12:53; L-165 (site continuity)).
 - What JPL measures a thing around is where it sits in the website's
   tree (Nov 7, 11:26; L-515 (one nested tree), ruling 6).
@@ -63,7 +64,7 @@ Standing rulings; a line leaves once it is habit, or a skill carries it.
   item); the check covers only what both draw; a spacecraft's span is
   JPL's first and last day.
 
-## Deferred  **>> UPDATED THIS SESSION**
+## Deferred
 
 Waiting behind other work; a line leaves when picked up.
 - Featured's rethink, with the gallery editor's future and the cards' words, which have no source yet: after the cards are piped into the tree (Nov 8; L-517 (the lobby)). The editor taking a live view's address as a Featured card waits for that address (L-518 (the shared link)).
@@ -97,7 +98,7 @@ Read from files when this page was written, not typed from memory.
 - Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at orrery 68f7eb5, its last change).
 - This page's date and the ledger's newest stamp: both Nov 8. Agree.
 
-## Waiting on you  **>> UPDATED THIS SESSION**
+## Waiting on you
 
 Decisions, one at a time:
 - None open.
@@ -121,8 +122,8 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- This session: L-517 (the lobby), your copy
-  `WHERE_WE_ARE_11-8-26_1529_run_record.md`; the brief, part 3 next.
+- This session: L-517 (the lobby), its "Part 3 built" entry; the
+  brief `COORD_L517_lobby_brief_20261108.md`, part 3.
 - The tree: L-515 (one nested tree), `COORD_L515_steps1_2a_brief_20261107.md`.
 - The talk's rulings: `DESIGN_L484_consistency_rulings_20261103.md`.
 - The door: `documentation/python_work_door/`, and L-499 (kinds of session).

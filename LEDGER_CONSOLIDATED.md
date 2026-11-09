@@ -749,6 +749,10 @@ Module updated: November 8, 2026, afternoon, with Anthropic's Claude Opus
 5.5 (the website Code session for L-517 part 1, the pictures beside
 their rows: its record on L-517; the interactive-exhibit bump to 1.36 and
 protocol v3.132), built on orrery c275fcb7 with gallery e9d0c5e2.
+Module updated: November 8, 2026, evening, with Anthropic's Claude Opus 5.5
+(the website Code session for L-517 part 3, the Solar System subject page
+gone and Back to the lobby: its record on L-517), built on orrery 418a9b44
+with gallery 942910cc.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -1845,12 +1849,81 @@ tree); L-165 (site continuity); L-503 (the belt on the website).
     on the Solar System subject page: "i think we can delete this page.
     all of these options are available from the tree itself and make more
     sense there. so remove the 'Solar' option at the top."
+- **Part 3 built, 2026-11-08, evening** (Claude Code, Claude Opus 5.5,
+  through the python_work door), on orrery 418a9b44 and gallery 942910cc,
+  from Tony's prompt and the brief's part 3. gallery-pipeline 1.2,
+  safe-file-editing 1.14 and ledger-and-session-records 1.22 matched the
+  manifest; the room's own page was touched, so interactive-exhibit was
+  read from the account in the parts on the top bar and the way back, and
+  it read 1.36, as the manifest says. No skill changed.
+  - The Solar System subject page is gone. The Solar System door in
+    gallery/gallery_config.json carries one new field, "opens":
+    "solar_system", naming the card whose live room every address under
+    the door opens. index.html (liveRoomFor, showRoom): #room=solar_system
+    and any #room=solar_system/... open the live room in the old address's
+    place (location.replace), so Back never lands on it again; a tap to
+    one steps forward. A saved picture under the door shows one way to
+    the room in its header and on its turn card: "Back to the live solar
+    system" when the room opened it (as part 1), "Open the live solar
+    system" otherwise (an old link, or Featured) -- new words for Tony's
+    look. Its chain, "Solar : Pluto", named pages that are gone. Part 2's
+    heading for that page (ROOM_PICTURES_HEADING) and its styling went
+    with it. Earth System and Stars keep their pages and menu entries.
+  - "Solar" leaves the top: interactive.html draws no chain in a room
+    under a door with "opens", so the Solar System room, the Explorer,
+    the Sun's address and the Earth room show only "Paloma's Orrery". The
+    Earth room keeps its way to the Solar System room in its drawer's
+    trail line ("Solar system > Earth").
+  - Back: the cause was looked for first, on a 390 x 844 page in Chromium
+    and in WebKit (the engine of every iPhone browser, Playwright 1.48's
+    WebKit 18.0, iPhone 13 size), along five routes, on the local copy
+    and on the live site at 942910cc: the lobby, Stars, Back; Tony's
+    route, Explore, back, Stars, Back; Explore, the room's own "Paloma's
+    Orrery", Stars, Back; Stars, a topic, a card, the header's home,
+    Stars, Back; Earth System, a topic, Back, Back. All passed; a subject
+    page draws no back control of its own. The page answered hashchange
+    alone, and a headless browser does not keep a page whole when the
+    visitor goes into the room and back (Safari's back-forward cache), so
+    the path the tests cannot reach is the one where the phone sends
+    popstate without hashchange. On a model page that withholds
+    hashchange, 942910cc failed all five routes the way Tony saw it (the
+    address back at the lobby, the Stars page still drawn), and the new
+    page passed all five. The fix: index.html answers popstate as well
+    as hashchange (routeFromHistory), and the second of the two finds the
+    screen already drawn. The cause is the best reading, not a sighting:
+    Tony's phone is the test.
+  - Checked: the gallery maintenance run (offline), read from its
+    output, "40 of 40 gating checkers passed". Its first pass was red on
+    Picture folds, which read part 1's header line word for word; the
+    check was moved to the new line, and its new section 5 holds part 3's
+    wiring in both pages and that a door's "opens" names a live card. It
+    printed 9 failures on the pages at 942910cc and 1 on a planted
+    "opens" naming a picture. The part 3 walk in WebKit at iPhone size,
+    16 of 16: five old addresses (the door, comets, pluto, earth/moon, a
+    room that does not exist) land in the live room; its top bar has no
+    "Solar"; Back from it does not land on the old address; an in-page
+    old link from the lobby opens the room and Back returns to the lobby;
+    an old link to Pluto's picture shows "Open the live solar system",
+    which opens the room; the lobby lists Earth System and Stars only;
+    both keep their pages; Back from Stars returns to the lobby; no page
+    error. The run rewrote the three pull stamps (data/constants_export.sha,
+    data/objects_export.sha, data/drawings/pulled_at.sha) to orrery
+    418a9b44; the exports themselves did not change.
+  - Carried, not changed: interactive-exhibit 1.36 says "The Explorer's
+    own page keeps its chain"; since part 3 it has none. A description,
+    for the skill's next version.
+  - Tony-action (do): commit and push the website, then the orrery.
+  - Tony-action (decide): the phone look (the session's report lists
+    what to tap); if it passes, L-517 closes.
 **Gap:** part 1 (the pictures) built and passed, but for the two desktop
 rows; part 2 (the lobby, with Pluto's landscape card off the phone)
 built and passed; part 3 (the Solar System subject page and its "Solar"
 menu entry gone, and Back from a subject page returning to the lobby)
-built and passed, after which L-517 closes and re-homes its loose ends; each picture group leaves its row when
-the encounter that replaces it is built.
+built, waiting on Tony's phone look, after which L-517 closes and
+re-homes its loose ends (the two desktop-only rows, the guest book
+note's old words, Featured's rethink with the cards' unsourced words, and
+interactive-exhibit's sentence on the Explorer's chain); each picture
+group leaves its row when the encounter that replaces it is built.
 **Ref:** L-282 (the lobby); L-428 (the lobby's way in); L-447 (the front
 page says what the site is: its sentence and the Paloma line stay, the
 line moves above the guest book); L-515 (one nested tree); L-303 (the
