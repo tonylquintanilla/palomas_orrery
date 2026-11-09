@@ -1,7 +1,7 @@
 <!-- Doc-Kind: generated | The module atlas: every module's role, functions and dependencies, rebuilt by module_atlas.py from the docstrings. Do not hand-edit. -->
 # Paloma's Orrery -- Module Atlas
 
-Generated: November 07, 2026
+Generated: November 08, 2026
 Modules: 176 | Functions: 1817 | Lines: 140,211
 
 ## Classification Coverage

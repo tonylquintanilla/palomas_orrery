@@ -346,7 +346,7 @@ LIVE -- what the deployed site actually serves
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 
-3. Commit and push the orrery.
+3. Commit and push the orrery. -- 789c1ec8d18378d91f873ec7b9434fc951bdec43
 4. Do the phone look below.
 
 **Phone look**

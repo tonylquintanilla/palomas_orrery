@@ -753,6 +753,9 @@ Module updated: November 8, 2026, evening, with Anthropic's Claude Opus 5.5
 (the website Code session for L-517 part 3, the Solar System subject page
 gone and Back to the lobby: its record on L-517), built on orrery 418a9b44
 with gallery 942910cc.
+Module updated: November 8, 2026, night, with Anthropic's Claude Opus 5.5
+(the same session: L-517 closed, its loose ends re-homed, L-519 opened),
+built on orrery 789c1ec8 with gallery 39900d75.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -970,7 +973,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*258 live items; 242 need attention (`!`); 165 RICE-scored; 253 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*258 live items; 242 need attention (`!`); 165 RICE-scored; 254 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1140,8 +1143,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-514 | The Mars room: Mars, Phobos and Deimos (gallery + orrery, a planet room; road stage 15) | OPEN | -- | 2026-11-06 |
 | ! | L-515 | One nested tree in place of isolated rooms (gallery, the room system; design) | OPEN | -- | 2026-11-08 |
 | ! | L-516 | Renew palomasorrery.com at Porkbun before 2027-02-13 (legacy; Tony's account) | OPEN | -- | 2026-11-07 |
-| ! | L-517 | The lobby for a first-time phone visitor: one door first, the pictures into the tree (gallery, lobby and drawer; design) | OPEN | -- | 2026-11-08 |
 | ! | L-518 | The shared scene link: the address carries the ticked bodies and the minute (gallery, the Solar System room; designed, not built) | OPEN | -- | 2026-11-08 |
+| ! | L-519 | Featured's rethink: the existing cards piped into the one tree, and their words (gallery, the lobby and the gallery editor; not designed) | OPEN | -- | 2026-11-08 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1543,6 +1546,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-503 | The main asteroid belt's cloud on the website, L-443's last piece, its gallery half (gallery, the Solar System room) | DONE | -- | 2026-11-01 |
 |  | L-505 | The axis ticks and the ruler: dots on the axis lines, a ruler for the grid chip, no edge numbers (gallery, every room's frame) | DONE | -- | 2026-11-02 |
 |  | L-513 | The Moon's standards: its words, link, period and uncertainty, served by the orrery (orrery + gallery, objects; road stage 14) | DONE | -- | 2026-11-06 |
+|  | L-517 | The lobby for a first-time phone visitor: one door first, the pictures into the tree (gallery, lobby and drawer; design) | DONE | -- | 2026-11-08 |
 
 ### W.Done -- Web Publication track, closed items
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1571,6 +1575,44 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ## DETAIL / RECORD
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
+
+#### [L-519] Featured's rethink: the existing cards piped into the one tree, and their words (gallery, the lobby and the gallery editor; not designed)
+<!-- L:519 status:OPEN upd:2026-11-08 section:A flag: rice: -->
+- **Opened 2026-11-08, night**, at the close of L-517 (the lobby for a
+  first-time phone visitor), by the Claude Code session (Claude Opus
+  5.5) through the python_work door, on orrery 789c1ec8 and gallery
+  39900d75, to hold the lobby's loose ends that belong together. Not
+  designed; deferred behind the road.
+- Featured's rethink, in Tony's words in the lobby talk of Nov 8 (L-517,
+  its rulings): "featured is part of the gallery editor and with this new
+  tree we are basically deprecating the editor as it exists today.
+  featured can still be valuable, but we have to re-think it, while
+  piping the existing cards into the new tree." (10:03); "keep Featured
+  as-is and i can modify in the existing editor." (10:08). Featured stays
+  as it is until then.
+- The cards' words have no source. Tony, Nov 8: "it should be noted that
+  the 'Save Pictures' do not have sourced words." The cards' titles and
+  descriptions come from the gallery's own card list
+  (gallery/gallery_metadata.json), written through Studio and the
+  editor, not from the orrery's export, where the words have one home by
+  the Nov 3 ruling (L-511 (the export carries the words)).
+- Tony's ask, Nov 8, 15:40 Chicago: "looking forward we should work on
+  the gallery editor so I can add new views from the interactive to the
+  Featured views using their specific url." It waits for the address
+  L-518 (the shared scene link) builds.
+- Found in L-517's part 2, not changed: the gallery editor's own window
+  still says "under construction" for an empty room; the site no longer
+  does.
+- Tony-action (decide): his pinned guest book note links "START HERE:
+  Solar System Interactive Exhibit", words the lobby no longer uses
+  (data/guestbook.json, his entry); whether to reword it is his.
+**Gap:** a design talk on what Featured is for in the one tree, and with
+it the gallery editor's future; then a build. The guest book note is
+Tony's.
+**Ref:** L-517 (the lobby for a first-time phone visitor); L-518 (the
+shared scene link); L-511 (the export carries the words); L-515 (one
+nested tree); L-303 (the card model); gallery `index.html`,
+`gallery/gallery_metadata.json`, `tools/gallery_editor.py`.
 
 #### [L-518] The shared scene link: the address carries the ticked bodies and the minute (gallery, the Solar System room; designed, not built)
 <!-- L:518 status:OPEN upd:2026-11-08 section:A flag: rice: -->
@@ -1604,332 +1646,22 @@ as an archive of the prioritization thinking -- no cleanup on close.
   editor so I can add new views from the interactive to the Featured
   views using their specific url." Recorded here because the specific
   address is what this item builds; the editor's half, a Featured card
-  made from a live address, goes with Featured's rethink (L-517). Not
+  made from a live address, goes with Featured's rethink (L-519). Not
   designed yet.
+- **Received 2026-11-08, night, from L-517 at its close** (the lobby for
+  a first-time phone visitor): interactive-exhibit 1.36 says "The
+  Explorer's own page keeps its chain"; since L-517's part 3 the
+  Explorer, like every room under the Solar System door, draws no chain
+  at the top. A description, not a rule: corrected in the skill's next
+  version, which this build is the next to open.
 **Gap:** the build (a gallery Code session, small, per section 7 of the
-design record, read again against L-515's tree), and Tony's Mode 5: a
-scene shared to himself and opened on another device; then Tony's ask,
-the editor taking a scene's address as a Featured card.
+design record, read again against L-515's tree), with the skill
+sentence received above, and Tony's Mode 5: a scene shared to himself
+and opened on another device. Tony's ask, the editor taking a scene's
+address as a Featured card, is on L-519 (Featured's rethink).
 **Ref:** `documentation/DESIGN_shared_view_rulings_20261029.md`;
 `documentation/HANDOFF_coordination_20261028_29.md`; L-515 (one nested
 tree); L-165 (site continuity); L-503 (the belt on the website).
-
-#### [L-517] The lobby for a first-time phone visitor: one door first, the pictures into the tree (gallery, lobby and drawer; design)
-<!-- L:517 status:OPEN upd:2026-11-08 section:A flag: rice: -->
-- **Opened 2026-11-08, 08:25 Chicago**, a design talk (zero code) in the
-  coordinating session (Claude Opus 5.5), built on orrery 7d3e57ba and
-  gallery 23440b79. Tony's request, from his Nov 7 phone look (copy
-  `documentation/WHERE_WE_ARE_11-7-26_1631_run_record.md`) and his prompt:
-  "from showing the website to people, the most common reaction is not
-  knowing what to do. There are too many choices, and what is obvious to
-  me is not obvious to them." Visitors now arrive from his Instagram
-  profile, on a phone, from one link, knowing nothing about the site:
-  design for them first. The lobby should reflect the one tree (L-515).
-- **Found first, read at gallery 23440b79 on a 390 px phone:** the lobby
-  was already close to Tony's starting idea (L-428 (the lobby's way in)
-  put the Solar System picture and Enter first on Oct 9). What a newcomer
-  meets instead: two Solar System buttons that go to different places
-  (Enter opens the live room; the Solar System row opens a list of 13
-  rooms, 7 marked under construction); Featured repeating the tree (The
-  Sun and Earth and Moon open views now inside the Solar System room); the
-  site's own words (exhibits, live in 3D, Interactive, rooms); and the
-  title and two sentences filling the top half of the first screen.
-- **The canvas** (Design, private to Tony): "Lobby: fewer ways in",
-  https://claude.ai/artifact/6TQPSgyMg1N1XBrYyvioxZ . Top row: D (the
-  lobby as ruled), F (pictures in the room's drawer), E (a separate
-  picture page, set aside). Bottom row: A (four ways in), B (one door), C
-  (how far out: rings of stars, solar system, Earth).
-- **RULED, in Tony's words:**
-  1. The lobby is board D (08:59): "I like A's words and pictures and
-     B's layout." The first screen asks one thing: the site's name and one
-     line, the Solar System room's picture, "Today's sky, live", one
-     sentence, one Explore button. Below it, "More to explore": a picture
-     strip each for Earth System Science and Stars. No Solar System
-     subject row in the lobby.
-  2. The 25 Solar System pictures and animations (09:03): "They are
-     useful but confusing and will eventually be replaced." They leave the
-     lobby.
-  3. Collapse and relabel (09:12): "collapse the tree to remove unused
-     branches that will not be used. And relabel so the two views clash
-     less." A room with no cards is not listed; the live view and the
-     saved pictures are named so they cannot be taken for each other.
-  4. The pictures go into the live tree (09:15): "adding temporary
-     drawers to the existing rooms to hold these pictures? That way it's
-     one tree. The drawers would be groups with the items upon opening
-     them, like we do write comets and asteroids." This set aside board E
-     and the lobby footer line that would have led to it.
-  5. Beside each body's own row (09:23): "I think beside its row. It's
-     temporary but not quick. It'll be a while before these mostly
-     encounters are all built and replace the existing. So integration as
-     best we can is the best I think."
-  6. Featured stays as it is (10:08): "keep Featured as-is and i can
-     modify in the existing editor." Its rethink is deferred (10:03):
-     "featured is part of the gallery editor and with this new tree we are
-     basically deprecating the editor as it exists today. featured can
-     still be valuable, but we have to re-think it, while piping the
-     existing cards into the new tree."
-- **Method, written into the brief, not rulings:** which row each picture
-  sits beside (the build places each and lists every one for Tony's phone
-  look); the picture rows look unlike the ticked rows (a picture mark, an
-  arrow, one line saying they open a page) and Back returns to the room;
-  the phone opens a card's portrait twin and the desktop its landscape one,
-  by the gallery's existing rule; the two strip pictures are drawn from the
-  site's own cards (Warming Stripes: the annual mean of the card's monthly
-  anomalies; the 20-light-year star map: its stars laid flat), credited to
-  their cards and carrying no numbers.
-- **Claude** (written before the order was ruled; see below): two builds,
-  in the brief `documentation/COORD_L517_lobby_brief_20261108.md`. Part 1, the lobby
-  and the collapsed subject pages (index.html); its lobby keeps one quiet
-  footer line to the Solar System pictures until part 2 lands, so they are
-  never without a way in between the two pushes (Tony agreed to that line
-  at 09:12, before the drawer idea). Part 2, the pictures beside their
-  rows in the Solar System room's drawer, with interactive-exhibit's bump;
-  it removes the footer line. Solar System Explorer, which belongs to no
-  single body, defaults to a fold beside the root's Sun row; Tony judges it
-  at the phone look.
-- **ORDER RULED, Tony, 11:03:** "I would say the picture first then the
-  lobby." The brief was reordered the same morning: part 1 puts the
-  pictures beside their rows; part 2 builds the lobby, with no temporary
-  footer line, since the pictures already have their way in.
-- **Part 1 built, 2026-11-08, afternoon** (Claude Code, Claude Opus 5.5,
-  through the python_work door), on orrery c275fcb7 and gallery e9d0c5e2
-  (two nightly bot commits past 23440b79), from Tony's prompt and the
-  brief's part 1. interactive-exhibit loaded from the account read 1.35,
-  as the brief required.
-  - The count at e9d0c5e2: 23 Solar System pictures on a phone, as the
-    brief counted, plus the Solar System Explorer beside the Sun: 24 on a
-    phone, in 12 folds; 27 on a desktop, in 14 folds (the three "none"
-    cards, Mercury, Earth Barycenter Shells and Near Earth Asteroids, on
-    the desktop only). 47 card entries carry a place, both twins of each
-    pair; the three live rooms' cards carry none.
-  - Each card's place is ONE field on its entry in
-    gallery/gallery_metadata.json, "drawer_row" (a body row's slug or a
-    group row's key). The editor and the converter keep fields they do
-    not know, read before it was chosen. Places, by the brief's method:
-    PANSTARRS (C/2025 R3) 2; MAPS 1; 3I/ATLAS 3; Wierzchos 1; C/2025 K1 1
-    (the breakup, under the main comet's row); Halley 1; Mercury 1; Earth
-    7 (Earth Barycenter Shells, Artemis II's five, Apophis); the Sun 1
-    (the Explorer); Apollo and Amor asteroids 1 (Near Earth Asteroids,
-    whose bodies sit in three classes; its nearest parent group); Psyche
-    spacecraft 4 (the mission's); New Horizons 1 (the whole mission);
-    Jupiter 1 (New Horizons' Jupiter flyby, by the brief's "Jupiter gets
-    a fold"); Pluto 2. All for Tony's phone look.
-  - Built: gallery/picture_folds.js (which twin a screen is offered, by
-    the gallery's own rule; where each card goes; Find's words; what is
-    kept for Back); the folds in interactive.html (a picture mark, the
-    count, closed on opening, the line "Saved pictures: each opens on its
-    own page.", an arrow where a tick box would be; Reset folds them);
-    Find in gallery/solar_system_drawer.js (a picture's words add rows
-    only when no body or group matches by its own, so "comet" still
-    lists Comets closed); Back: the room keeps the fold and its ticks in
-    sessionStorage (po_room_return, and L-515's tick memory) and its next
-    opening takes them once; index.html shows "Back to the live solar
-    system" on a card the room opened, stepping back through history.
-    Words for Tony's phone look: "Saved pictures", the line, "Back to the
-    live solar system", "N saved pictures match".
-  - Checked: the gallery run's new Picture folds row (gates; worked
-    cases, the real metadata placed on a phone and a desktop and printed
-    by row, both pages' wiring; its self-test breaks the two files five
-    ways); the drawer walk's new section 29 (20 checks, all passing),
-    shown failing on two planted copies of the page, a fold open on
-    arrival (5 failures) and a picture row with a tick box (1). The walk's
-    three other failures (a scene tap moving the view, Sedna's hover
-    bullets, text box lines over 62 characters) fail the same on an
-    untouched copy of e9d0c5e2; recorded here, not chased.
-  - The gallery maintenance run (offline), read from its output: "40 of 40 gating checkers passed", the Picture folds row among them; the report-only Cache siblings row passed.
-  - The skill: interactive-exhibit 1.36, "Saved pictures beside their
-    rows" under the Solar System room's drawer, with the rule that each
-    fold leaves its row when the encounter that replaces it is built;
-    protocol v3.132. The Explorer's own page keeps its chain to the
-    gallery; the browser's Back returns it to the room.
-  - Tony-action (do): commit and push the website, then the orrery;
-    reinstall interactive-exhibit 1.36 and paste protocol v3.132.
-  - Tony-action (decide): the phone look at each picture's row, its words
-    and the way back (the session's report lists them).
-- **Part 1 pushed and passed on Tony's phone, 2026-11-08**, read from his
-  copy `documentation/WHERE_WE_ARE_11-8-26_1249_run_record.md`: website
-  pushed at 6f7b076b and its live run green ("2 of 2 gating checkers
-  passed"); orrery at 0a397e16, then v3.132 at 4bae2117; interactive-exhibit
-  1.36 reinstalled and v3.132 pasted ("done"). His verdicts: every row he
-  could see on a phone, "yes"; the Artemis upright card, Back to the room
-  with the fold open and ticks kept, Find on "Artemis", and Reset, each
-  "yes"; the words "Saved pictures", its line and "Back to the live solar
-  system", "yes". Not yet looked at, both desktop only: Mercury's
-  Orbital Transformation and the Near Earth Asteroids picture on the
-  Apollo and Amor asteroids row (left blank).
-  - Tony's ask, on Pluto's two pictures: "remove L view from the mobile.
-    i can't do it in the gallery editor. the landscape view is too
-    crowded and not readable on the phone." The two Pluto cards are not
-    twins (different dates, no sibling), so a phone offers both. Carried
-    into part 2 of the brief.
-  - Tony's note: "it should be noted that the 'Save Pictures' do not have
-    sourced words." The cards' titles and descriptions come from the
-    gallery's own card list, written through Studio and the editor, not
-    from the orrery's export (the Nov 3 ruling: the words have one home,
-    the orrery's export; L-511 (the export carries the words)). Recorded
-    with Featured's rethink, which is also about piping the existing cards
-    into the tree; not chased here.
-- **Part 2 built, 2026-11-08, late afternoon** (Claude Code, Claude Opus
-  5.5, through the python_work door), on orrery 4bae2117 and gallery
-  6f7b076b, from Tony's prompt and the brief's part 2. interactive-exhibit
-  loaded from the account read 1.36, as the prompt required;
-  gallery-pipeline 1.2, safe-file-editing 1.14 and
-  ledger-and-session-records 1.22 matched the manifest. No skill changed.
-  The session had no shell on Tony's computer: it worked in a cloud copy
-  of each repository and copied the changed files into his folders.
-  - The lobby (index.html, board D): the name with the About button
-    beside it (moved from the footer); the served sentence, now "The
-    solar system, Earth and the nearby stars in 3D, from real science
-    data." (gallery_config.json, and the page's fallback, no-script text
-    and link-preview lines); the start card with the kicker "Solar
-    System", the title "Today's sky, live" and the button "Explore", its
-    sentence served on card solar_system, now "The Sun, the planets,
-    Earth and its Moon. Turn it with your finger."; "More to explore",
-    a picture strip each for Earth System Science and Stars in the
-    subjects' colours, one tap to the subject's page (LOBBY_MORE), a
-    subject with no card in the tab left out; no Solar System subject
-    row; Featured as before; the Paloma line moved to just above the
-    guest book. The card solar_system's served title is "Today's sky,
-    live" too, so its subject page and the menu read the same.
-  - The strip pictures, drawn by tools/headless/draw_lobby_strips.py
-    (Pillow): gallery/pictures/lobby_earth_system.jpg, 146 stripes, 1880
-    to 2025, each year's mean of the card's monthly anomalies in the
-    card's own colour scale (-1.0 to 1.5); gallery/pictures/lobby_stars.jpg,
-    the 20-light-year card's stars laid flat, x against y at one scale,
-    49 of its 99 stars inside the strip, and the Sun, the marker sizes
-    doubled so they read at phone size (a drawing choice for Tony's
-    look). No numbers on either; each alt text names its card.
-  - The subject pages: a room with no card in the tab is not listed,
-    and no page counts rooms under construction (countEmptyRooms went).
-    "Exhibits" reads "views" and "rooms" reads "topics" (the headings
-    "Views" and "Topics"), "live in 3D" is gone, "special exhibit" reads
-    "special topic", and the lobby's count line reads "N views". The
-    Solar System page: the live card first, then "Solar System pictures
-    and animations" and its line, then the Explorer and the topics
-    (ROOM_PICTURES_HEADING).
-  - Pluto: pluto_barycenter_system_20260208_1957 has shape "none", the
-    gallery's existing phone setting, read by index.html's phone filter
-    and its mirror in gallery/picture_folds.js; no new field. A phone
-    offers neither its card nor its row in Pluto's fold; a desktop keeps
-    both. The Picture folds check now prints 23 pictures in 12 folds on
-    a phone (Pluto 1) and 27 in 14 on a desktop.
-  - Checked: the gallery maintenance run (offline), read from its
-    output: "40 of 40 gating checkers passed". Its five generators (the
-    three export pulls and the two mirrors) could not reach GitHub's API
-    from the sandbox and wrote nothing; on Tony's computer they run as
-    usual. Headless shots on a throwaway copy at 390 x 844 and 1280 x
-    800, read for: the lobby's order top to bottom; no Solar System
-    subject row; both strip pictures loaded; the Paloma line above the
-    guest book; no sideways scroll; no page error; the three subject
-    pages' headings, rows and counts, with no "under construction"; and
-    Pluto's page with one card on the phone and two on the desktop. The
-    lobby still has no checker of its own (L-367, L-423).
-  - Found, not changed: Tony's pinned guest book entry links "START
-    HERE: Solar System Interactive Exhibit", words the lobby no longer
-    uses (data/guestbook.json, his entry). The gallery editor's own
-    window still says "under construction" for an empty room; it is
-    Tony's tool, not the site.
-  - Tony's ask at the go-ahead, 15:40: the gallery editor to add a view
-    from the live site to Featured by its own address. Recorded on L-518
-    (the shared scene link), which builds that address.
-  - Tony-action (do): commit and push the website, then the orrery.
-  - Tony-action (decide): the phone look at the lobby and the subject
-    pages (the session's report lists what to tap).
-- **Part 2 pushed and passed on Tony's phone, 2026-11-08**, read from his
-  copy `documentation/WHERE_WE_ARE_11-8-26_1529_run_record.md`: website
-  pushed at 942910cc, orrery at b60ed48f. The session ran in a chat
-  session, not Claude Code; Tony: "by mistake i send your Code prompt to a
-  chat session. but it worked okay." His verdicts: the first screen,
-  Explore, the scroll order, Pluto's one picture on the phone, "yes"; the
-  words and the strip's star sizes, "correct"; the new lobby on his phone,
-  "yes".
-  - Tony's two asks, carried into part 3 of the brief: on the Stars page,
-    "note that from the stars page, the back button does not bring us
-    back to the lobby. i have to tap 'Paloma's Orrery' at the top." And
-    on the Solar System subject page: "i think we can delete this page.
-    all of these options are available from the tree itself and make more
-    sense there. so remove the 'Solar' option at the top."
-- **Part 3 built, 2026-11-08, evening** (Claude Code, Claude Opus 5.5,
-  through the python_work door), on orrery 418a9b44 and gallery 942910cc,
-  from Tony's prompt and the brief's part 3. gallery-pipeline 1.2,
-  safe-file-editing 1.14 and ledger-and-session-records 1.22 matched the
-  manifest; the room's own page was touched, so interactive-exhibit was
-  read from the account in the parts on the top bar and the way back, and
-  it read 1.36, as the manifest says. No skill changed.
-  - The Solar System subject page is gone. The Solar System door in
-    gallery/gallery_config.json carries one new field, "opens":
-    "solar_system", naming the card whose live room every address under
-    the door opens. index.html (liveRoomFor, showRoom): #room=solar_system
-    and any #room=solar_system/... open the live room in the old address's
-    place (location.replace), so Back never lands on it again; a tap to
-    one steps forward. A saved picture under the door shows one way to
-    the room in its header and on its turn card: "Back to the live solar
-    system" when the room opened it (as part 1), "Open the live solar
-    system" otherwise (an old link, or Featured) -- new words for Tony's
-    look. Its chain, "Solar : Pluto", named pages that are gone. Part 2's
-    heading for that page (ROOM_PICTURES_HEADING) and its styling went
-    with it. Earth System and Stars keep their pages and menu entries.
-  - "Solar" leaves the top: interactive.html draws no chain in a room
-    under a door with "opens", so the Solar System room, the Explorer,
-    the Sun's address and the Earth room show only "Paloma's Orrery". The
-    Earth room keeps its way to the Solar System room in its drawer's
-    trail line ("Solar system > Earth").
-  - Back: the cause was looked for first, on a 390 x 844 page in Chromium
-    and in WebKit (the engine of every iPhone browser, Playwright 1.48's
-    WebKit 18.0, iPhone 13 size), along five routes, on the local copy
-    and on the live site at 942910cc: the lobby, Stars, Back; Tony's
-    route, Explore, back, Stars, Back; Explore, the room's own "Paloma's
-    Orrery", Stars, Back; Stars, a topic, a card, the header's home,
-    Stars, Back; Earth System, a topic, Back, Back. All passed; a subject
-    page draws no back control of its own. The page answered hashchange
-    alone, and a headless browser does not keep a page whole when the
-    visitor goes into the room and back (Safari's back-forward cache), so
-    the path the tests cannot reach is the one where the phone sends
-    popstate without hashchange. On a model page that withholds
-    hashchange, 942910cc failed all five routes the way Tony saw it (the
-    address back at the lobby, the Stars page still drawn), and the new
-    page passed all five. The fix: index.html answers popstate as well
-    as hashchange (routeFromHistory), and the second of the two finds the
-    screen already drawn. The cause is the best reading, not a sighting:
-    Tony's phone is the test.
-  - Checked: the gallery maintenance run (offline), read from its
-    output, "40 of 40 gating checkers passed". Its first pass was red on
-    Picture folds, which read part 1's header line word for word; the
-    check was moved to the new line, and its new section 5 holds part 3's
-    wiring in both pages and that a door's "opens" names a live card. It
-    printed 9 failures on the pages at 942910cc and 1 on a planted
-    "opens" naming a picture. The part 3 walk in WebKit at iPhone size,
-    16 of 16: five old addresses (the door, comets, pluto, earth/moon, a
-    room that does not exist) land in the live room; its top bar has no
-    "Solar"; Back from it does not land on the old address; an in-page
-    old link from the lobby opens the room and Back returns to the lobby;
-    an old link to Pluto's picture shows "Open the live solar system",
-    which opens the room; the lobby lists Earth System and Stars only;
-    both keep their pages; Back from Stars returns to the lobby; no page
-    error. The run rewrote the three pull stamps (data/constants_export.sha,
-    data/objects_export.sha, data/drawings/pulled_at.sha) to orrery
-    418a9b44; the exports themselves did not change.
-  - Carried, not changed: interactive-exhibit 1.36 says "The Explorer's
-    own page keeps its chain"; since part 3 it has none. A description,
-    for the skill's next version.
-  - Tony-action (do): commit and push the website, then the orrery.
-  - Tony-action (decide): the phone look (the session's report lists
-    what to tap); if it passes, L-517 closes.
-**Gap:** part 1 (the pictures) built and passed, but for the two desktop
-rows; part 2 (the lobby, with Pluto's landscape card off the phone)
-built and passed; part 3 (the Solar System subject page and its "Solar"
-menu entry gone, and Back from a subject page returning to the lobby)
-built, waiting on Tony's phone look, after which L-517 closes and
-re-homes its loose ends (the two desktop-only rows, the guest book
-note's old words, Featured's rethink with the cards' unsourced words, and
-interactive-exhibit's sentence on the Explorer's chain); each picture
-group leaves its row when the encounter that replaces it is built.
-**Ref:** L-282 (the lobby); L-428 (the lobby's way in); L-447 (the front
-page says what the site is: its sentence and the Paloma line stay, the
-line moves above the guest book); L-515 (one nested tree); L-303 (the
-card model, one viewer per orientation); gallery `index.html`,
-`gallery/gallery_config.json`, `gallery/gallery_metadata.json`,
-`gallery/solar_system_drawer.js`.
 
 #### [L-516] Renew palomasorrery.com at Porkbun before 2027-02-13 (legacy; Tony's account)
 <!-- L:516 status:OPEN upd:2026-11-07 section:A flag: rice: -->
@@ -2830,6 +2562,12 @@ card model, one viewer per orientation); gallery `index.html`,
   box, "yes"; the parent groups and the five names, "correct"; Find on
   "comet" and "JFc", "correct". Protocol v3.131 is pasted (the
   Project's instructions read v3.131 on Nov 8).
+- **Received 2026-11-08, night, from L-517 at its close** (the lobby for
+  a first-time phone visitor): two saved-picture rows show only on a
+  desktop, and Tony has not looked at them yet: Mercury's Orbital
+  Transformation, on Mercury's row, and the Near Earth Asteroids
+  picture, on the Apollo and Amor asteroids row.
+  - Tony-action (decide): a look at both on a desktop.
 **Gap:** step 2b; L-514 (the Mars room) waits for step 3. Carried from
 his look at part 3: the Moon's Go To box (the Mars website session).
 The lobby moved to L-517 (the lobby for a first-time phone visitor).
@@ -7652,6 +7390,16 @@ above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
   a line wider than 62 characters") fail the same on the untouched
   b3b4826f and read as the walk not yet following L-497's one text box.
   For the next session that opens the walk.
+- **Found 2026-11-08, night, at L-517's close** (the lobby for a
+  first-time phone visitor), by the orrery maintenance run on orrery
+  789c1ec8 and gallery 39900d75, read from its output: "1 of 37
+  checkers FAILED", Dashboard parity: "gallery step 'Picture folds'
+  (documentation/smoke_picture_folds.js) has no button named so in
+  'Gallery -- checks and data'". The website's Picture folds check
+  came with L-517's part 1 and no dashboard button came with it. The fix
+  is one button and its short line in palomas_orrery_dashboard.py,
+  beside Scene Moment; the gallery session that found it does not edit
+  the orrery's code, so it waits for Tony's word.
 - **2026-11-06: the live check's positions files come from the
   config** (the coordinating session of Nov 6, Claude Opus 5.5, built
   on gallery 8ff3e74; the website's
@@ -34508,6 +34256,350 @@ orrery's plots, then the build.
   check, and the words and link from the orrery); L-431 (periods);
   L-398 and L-401 (the DE430 accuracy rows); L-150 (Pluto's moons'
   period centre, for the Pluto room).
+#### [L-517] The lobby for a first-time phone visitor: one door first, the pictures into the tree (gallery, lobby and drawer; design)
+<!-- L:517 status:DONE upd:2026-11-08 section:C flag: rice: -->
+- **Opened 2026-11-08, 08:25 Chicago**, a design talk (zero code) in the
+  coordinating session (Claude Opus 5.5), built on orrery 7d3e57ba and
+  gallery 23440b79. Tony's request, from his Nov 7 phone look (copy
+  `documentation/WHERE_WE_ARE_11-7-26_1631_run_record.md`) and his prompt:
+  "from showing the website to people, the most common reaction is not
+  knowing what to do. There are too many choices, and what is obvious to
+  me is not obvious to them." Visitors now arrive from his Instagram
+  profile, on a phone, from one link, knowing nothing about the site:
+  design for them first. The lobby should reflect the one tree (L-515).
+- **Found first, read at gallery 23440b79 on a 390 px phone:** the lobby
+  was already close to Tony's starting idea (L-428 (the lobby's way in)
+  put the Solar System picture and Enter first on Oct 9). What a newcomer
+  meets instead: two Solar System buttons that go to different places
+  (Enter opens the live room; the Solar System row opens a list of 13
+  rooms, 7 marked under construction); Featured repeating the tree (The
+  Sun and Earth and Moon open views now inside the Solar System room); the
+  site's own words (exhibits, live in 3D, Interactive, rooms); and the
+  title and two sentences filling the top half of the first screen.
+- **The canvas** (Design, private to Tony): "Lobby: fewer ways in",
+  https://claude.ai/artifact/6TQPSgyMg1N1XBrYyvioxZ . Top row: D (the
+  lobby as ruled), F (pictures in the room's drawer), E (a separate
+  picture page, set aside). Bottom row: A (four ways in), B (one door), C
+  (how far out: rings of stars, solar system, Earth).
+- **RULED, in Tony's words:**
+  1. The lobby is board D (08:59): "I like A's words and pictures and
+     B's layout." The first screen asks one thing: the site's name and one
+     line, the Solar System room's picture, "Today's sky, live", one
+     sentence, one Explore button. Below it, "More to explore": a picture
+     strip each for Earth System Science and Stars. No Solar System
+     subject row in the lobby.
+  2. The 25 Solar System pictures and animations (09:03): "They are
+     useful but confusing and will eventually be replaced." They leave the
+     lobby.
+  3. Collapse and relabel (09:12): "collapse the tree to remove unused
+     branches that will not be used. And relabel so the two views clash
+     less." A room with no cards is not listed; the live view and the
+     saved pictures are named so they cannot be taken for each other.
+  4. The pictures go into the live tree (09:15): "adding temporary
+     drawers to the existing rooms to hold these pictures? That way it's
+     one tree. The drawers would be groups with the items upon opening
+     them, like we do write comets and asteroids." This set aside board E
+     and the lobby footer line that would have led to it.
+  5. Beside each body's own row (09:23): "I think beside its row. It's
+     temporary but not quick. It'll be a while before these mostly
+     encounters are all built and replace the existing. So integration as
+     best we can is the best I think."
+  6. Featured stays as it is (10:08): "keep Featured as-is and i can
+     modify in the existing editor." Its rethink is deferred (10:03):
+     "featured is part of the gallery editor and with this new tree we are
+     basically deprecating the editor as it exists today. featured can
+     still be valuable, but we have to re-think it, while piping the
+     existing cards into the new tree."
+- **Method, written into the brief, not rulings:** which row each picture
+  sits beside (the build places each and lists every one for Tony's phone
+  look); the picture rows look unlike the ticked rows (a picture mark, an
+  arrow, one line saying they open a page) and Back returns to the room;
+  the phone opens a card's portrait twin and the desktop its landscape one,
+  by the gallery's existing rule; the two strip pictures are drawn from the
+  site's own cards (Warming Stripes: the annual mean of the card's monthly
+  anomalies; the 20-light-year star map: its stars laid flat), credited to
+  their cards and carrying no numbers.
+- **Claude** (written before the order was ruled; see below): two builds,
+  in the brief `documentation/COORD_L517_lobby_brief_20261108.md`. Part 1, the lobby
+  and the collapsed subject pages (index.html); its lobby keeps one quiet
+  footer line to the Solar System pictures until part 2 lands, so they are
+  never without a way in between the two pushes (Tony agreed to that line
+  at 09:12, before the drawer idea). Part 2, the pictures beside their
+  rows in the Solar System room's drawer, with interactive-exhibit's bump;
+  it removes the footer line. Solar System Explorer, which belongs to no
+  single body, defaults to a fold beside the root's Sun row; Tony judges it
+  at the phone look.
+- **ORDER RULED, Tony, 11:03:** "I would say the picture first then the
+  lobby." The brief was reordered the same morning: part 1 puts the
+  pictures beside their rows; part 2 builds the lobby, with no temporary
+  footer line, since the pictures already have their way in.
+- **Part 1 built, 2026-11-08, afternoon** (Claude Code, Claude Opus 5.5,
+  through the python_work door), on orrery c275fcb7 and gallery e9d0c5e2
+  (two nightly bot commits past 23440b79), from Tony's prompt and the
+  brief's part 1. interactive-exhibit loaded from the account read 1.35,
+  as the brief required.
+  - The count at e9d0c5e2: 23 Solar System pictures on a phone, as the
+    brief counted, plus the Solar System Explorer beside the Sun: 24 on a
+    phone, in 12 folds; 27 on a desktop, in 14 folds (the three "none"
+    cards, Mercury, Earth Barycenter Shells and Near Earth Asteroids, on
+    the desktop only). 47 card entries carry a place, both twins of each
+    pair; the three live rooms' cards carry none.
+  - Each card's place is ONE field on its entry in
+    gallery/gallery_metadata.json, "drawer_row" (a body row's slug or a
+    group row's key). The editor and the converter keep fields they do
+    not know, read before it was chosen. Places, by the brief's method:
+    PANSTARRS (C/2025 R3) 2; MAPS 1; 3I/ATLAS 3; Wierzchos 1; C/2025 K1 1
+    (the breakup, under the main comet's row); Halley 1; Mercury 1; Earth
+    7 (Earth Barycenter Shells, Artemis II's five, Apophis); the Sun 1
+    (the Explorer); Apollo and Amor asteroids 1 (Near Earth Asteroids,
+    whose bodies sit in three classes; its nearest parent group); Psyche
+    spacecraft 4 (the mission's); New Horizons 1 (the whole mission);
+    Jupiter 1 (New Horizons' Jupiter flyby, by the brief's "Jupiter gets
+    a fold"); Pluto 2. All for Tony's phone look.
+  - Built: gallery/picture_folds.js (which twin a screen is offered, by
+    the gallery's own rule; where each card goes; Find's words; what is
+    kept for Back); the folds in interactive.html (a picture mark, the
+    count, closed on opening, the line "Saved pictures: each opens on its
+    own page.", an arrow where a tick box would be; Reset folds them);
+    Find in gallery/solar_system_drawer.js (a picture's words add rows
+    only when no body or group matches by its own, so "comet" still
+    lists Comets closed); Back: the room keeps the fold and its ticks in
+    sessionStorage (po_room_return, and L-515's tick memory) and its next
+    opening takes them once; index.html shows "Back to the live solar
+    system" on a card the room opened, stepping back through history.
+    Words for Tony's phone look: "Saved pictures", the line, "Back to the
+    live solar system", "N saved pictures match".
+  - Checked: the gallery run's new Picture folds row (gates; worked
+    cases, the real metadata placed on a phone and a desktop and printed
+    by row, both pages' wiring; its self-test breaks the two files five
+    ways); the drawer walk's new section 29 (20 checks, all passing),
+    shown failing on two planted copies of the page, a fold open on
+    arrival (5 failures) and a picture row with a tick box (1). The walk's
+    three other failures (a scene tap moving the view, Sedna's hover
+    bullets, text box lines over 62 characters) fail the same on an
+    untouched copy of e9d0c5e2; recorded here, not chased.
+  - The gallery maintenance run (offline), read from its output: "40 of 40 gating checkers passed", the Picture folds row among them; the report-only Cache siblings row passed.
+  - The skill: interactive-exhibit 1.36, "Saved pictures beside their
+    rows" under the Solar System room's drawer, with the rule that each
+    fold leaves its row when the encounter that replaces it is built;
+    protocol v3.132. The Explorer's own page keeps its chain to the
+    gallery; the browser's Back returns it to the room.
+  - Tony-action (do): commit and push the website, then the orrery;
+    reinstall interactive-exhibit 1.36 and paste protocol v3.132.
+  - Tony-action (decide): the phone look at each picture's row, its words
+    and the way back (the session's report lists them).
+- **Part 1 pushed and passed on Tony's phone, 2026-11-08**, read from his
+  copy `documentation/WHERE_WE_ARE_11-8-26_1249_run_record.md`: website
+  pushed at 6f7b076b and its live run green ("2 of 2 gating checkers
+  passed"); orrery at 0a397e16, then v3.132 at 4bae2117; interactive-exhibit
+  1.36 reinstalled and v3.132 pasted ("done"). His verdicts: every row he
+  could see on a phone, "yes"; the Artemis upright card, Back to the room
+  with the fold open and ticks kept, Find on "Artemis", and Reset, each
+  "yes"; the words "Saved pictures", its line and "Back to the live solar
+  system", "yes". Not yet looked at, both desktop only: Mercury's
+  Orbital Transformation and the Near Earth Asteroids picture on the
+  Apollo and Amor asteroids row (left blank).
+  - Tony's ask, on Pluto's two pictures: "remove L view from the mobile.
+    i can't do it in the gallery editor. the landscape view is too
+    crowded and not readable on the phone." The two Pluto cards are not
+    twins (different dates, no sibling), so a phone offers both. Carried
+    into part 2 of the brief.
+  - Tony's note: "it should be noted that the 'Save Pictures' do not have
+    sourced words." The cards' titles and descriptions come from the
+    gallery's own card list, written through Studio and the editor, not
+    from the orrery's export (the Nov 3 ruling: the words have one home,
+    the orrery's export; L-511 (the export carries the words)). Recorded
+    with Featured's rethink, which is also about piping the existing cards
+    into the tree; not chased here.
+- **Part 2 built, 2026-11-08, late afternoon** (Claude Code, Claude Opus
+  5.5, through the python_work door), on orrery 4bae2117 and gallery
+  6f7b076b, from Tony's prompt and the brief's part 2. interactive-exhibit
+  loaded from the account read 1.36, as the prompt required;
+  gallery-pipeline 1.2, safe-file-editing 1.14 and
+  ledger-and-session-records 1.22 matched the manifest. No skill changed.
+  The session had no shell on Tony's computer: it worked in a cloud copy
+  of each repository and copied the changed files into his folders.
+  - The lobby (index.html, board D): the name with the About button
+    beside it (moved from the footer); the served sentence, now "The
+    solar system, Earth and the nearby stars in 3D, from real science
+    data." (gallery_config.json, and the page's fallback, no-script text
+    and link-preview lines); the start card with the kicker "Solar
+    System", the title "Today's sky, live" and the button "Explore", its
+    sentence served on card solar_system, now "The Sun, the planets,
+    Earth and its Moon. Turn it with your finger."; "More to explore",
+    a picture strip each for Earth System Science and Stars in the
+    subjects' colours, one tap to the subject's page (LOBBY_MORE), a
+    subject with no card in the tab left out; no Solar System subject
+    row; Featured as before; the Paloma line moved to just above the
+    guest book. The card solar_system's served title is "Today's sky,
+    live" too, so its subject page and the menu read the same.
+  - The strip pictures, drawn by tools/headless/draw_lobby_strips.py
+    (Pillow): gallery/pictures/lobby_earth_system.jpg, 146 stripes, 1880
+    to 2025, each year's mean of the card's monthly anomalies in the
+    card's own colour scale (-1.0 to 1.5); gallery/pictures/lobby_stars.jpg,
+    the 20-light-year card's stars laid flat, x against y at one scale,
+    49 of its 99 stars inside the strip, and the Sun, the marker sizes
+    doubled so they read at phone size (a drawing choice for Tony's
+    look). No numbers on either; each alt text names its card.
+  - The subject pages: a room with no card in the tab is not listed,
+    and no page counts rooms under construction (countEmptyRooms went).
+    "Exhibits" reads "views" and "rooms" reads "topics" (the headings
+    "Views" and "Topics"), "live in 3D" is gone, "special exhibit" reads
+    "special topic", and the lobby's count line reads "N views". The
+    Solar System page: the live card first, then "Solar System pictures
+    and animations" and its line, then the Explorer and the topics
+    (ROOM_PICTURES_HEADING).
+  - Pluto: pluto_barycenter_system_20260208_1957 has shape "none", the
+    gallery's existing phone setting, read by index.html's phone filter
+    and its mirror in gallery/picture_folds.js; no new field. A phone
+    offers neither its card nor its row in Pluto's fold; a desktop keeps
+    both. The Picture folds check now prints 23 pictures in 12 folds on
+    a phone (Pluto 1) and 27 in 14 on a desktop.
+  - Checked: the gallery maintenance run (offline), read from its
+    output: "40 of 40 gating checkers passed". Its five generators (the
+    three export pulls and the two mirrors) could not reach GitHub's API
+    from the sandbox and wrote nothing; on Tony's computer they run as
+    usual. Headless shots on a throwaway copy at 390 x 844 and 1280 x
+    800, read for: the lobby's order top to bottom; no Solar System
+    subject row; both strip pictures loaded; the Paloma line above the
+    guest book; no sideways scroll; no page error; the three subject
+    pages' headings, rows and counts, with no "under construction"; and
+    Pluto's page with one card on the phone and two on the desktop. The
+    lobby still has no checker of its own (L-367, L-423).
+  - Found, not changed: Tony's pinned guest book entry links "START
+    HERE: Solar System Interactive Exhibit", words the lobby no longer
+    uses (data/guestbook.json, his entry). The gallery editor's own
+    window still says "under construction" for an empty room; it is
+    Tony's tool, not the site.
+  - Tony's ask at the go-ahead, 15:40: the gallery editor to add a view
+    from the live site to Featured by its own address. Recorded on L-518
+    (the shared scene link), which builds that address.
+  - Tony-action (do): commit and push the website, then the orrery.
+  - Tony-action (decide): the phone look at the lobby and the subject
+    pages (the session's report lists what to tap).
+- **Part 2 pushed and passed on Tony's phone, 2026-11-08**, read from his
+  copy `documentation/WHERE_WE_ARE_11-8-26_1529_run_record.md`: website
+  pushed at 942910cc, orrery at b60ed48f. The session ran in a chat
+  session, not Claude Code; Tony: "by mistake i send your Code prompt to a
+  chat session. but it worked okay." His verdicts: the first screen,
+  Explore, the scroll order, Pluto's one picture on the phone, "yes"; the
+  words and the strip's star sizes, "correct"; the new lobby on his phone,
+  "yes".
+  - Tony's two asks, carried into part 3 of the brief: on the Stars page,
+    "note that from the stars page, the back button does not bring us
+    back to the lobby. i have to tap 'Paloma's Orrery' at the top." And
+    on the Solar System subject page: "i think we can delete this page.
+    all of these options are available from the tree itself and make more
+    sense there. so remove the 'Solar' option at the top."
+- **Part 3 built, 2026-11-08, evening** (Claude Code, Claude Opus 5.5,
+  through the python_work door), on orrery 418a9b44 and gallery 942910cc,
+  from Tony's prompt and the brief's part 3. gallery-pipeline 1.2,
+  safe-file-editing 1.14 and ledger-and-session-records 1.22 matched the
+  manifest; the room's own page was touched, so interactive-exhibit was
+  read from the account in the parts on the top bar and the way back, and
+  it read 1.36, as the manifest says. No skill changed.
+  - The Solar System subject page is gone. The Solar System door in
+    gallery/gallery_config.json carries one new field, "opens":
+    "solar_system", naming the card whose live room every address under
+    the door opens. index.html (liveRoomFor, showRoom): #room=solar_system
+    and any #room=solar_system/... open the live room in the old address's
+    place (location.replace), so Back never lands on it again; a tap to
+    one steps forward. A saved picture under the door shows one way to
+    the room in its header and on its turn card: "Back to the live solar
+    system" when the room opened it (as part 1), "Open the live solar
+    system" otherwise (an old link, or Featured) -- new words for Tony's
+    look. Its chain, "Solar : Pluto", named pages that are gone. Part 2's
+    heading for that page (ROOM_PICTURES_HEADING) and its styling went
+    with it. Earth System and Stars keep their pages and menu entries.
+  - "Solar" leaves the top: interactive.html draws no chain in a room
+    under a door with "opens", so the Solar System room, the Explorer,
+    the Sun's address and the Earth room show only "Paloma's Orrery". The
+    Earth room keeps its way to the Solar System room in its drawer's
+    trail line ("Solar system > Earth").
+  - Back: the cause was looked for first, on a 390 x 844 page in Chromium
+    and in WebKit (the engine of every iPhone browser, Playwright 1.48's
+    WebKit 18.0, iPhone 13 size), along five routes, on the local copy
+    and on the live site at 942910cc: the lobby, Stars, Back; Tony's
+    route, Explore, back, Stars, Back; Explore, the room's own "Paloma's
+    Orrery", Stars, Back; Stars, a topic, a card, the header's home,
+    Stars, Back; Earth System, a topic, Back, Back. All passed; a subject
+    page draws no back control of its own. The page answered hashchange
+    alone, and a headless browser does not keep a page whole when the
+    visitor goes into the room and back (Safari's back-forward cache), so
+    the path the tests cannot reach is the one where the phone sends
+    popstate without hashchange. On a model page that withholds
+    hashchange, 942910cc failed all five routes the way Tony saw it (the
+    address back at the lobby, the Stars page still drawn), and the new
+    page passed all five. The fix: index.html answers popstate as well
+    as hashchange (routeFromHistory), and the second of the two finds the
+    screen already drawn. The cause is the best reading, not a sighting:
+    Tony's phone is the test.
+  - Checked: the gallery maintenance run (offline), read from its
+    output, "40 of 40 gating checkers passed". Its first pass was red on
+    Picture folds, which read part 1's header line word for word; the
+    check was moved to the new line, and its new section 5 holds part 3's
+    wiring in both pages and that a door's "opens" names a live card. It
+    printed 9 failures on the pages at 942910cc and 1 on a planted
+    "opens" naming a picture. The part 3 walk in WebKit at iPhone size,
+    16 of 16: five old addresses (the door, comets, pluto, earth/moon, a
+    room that does not exist) land in the live room; its top bar has no
+    "Solar"; Back from it does not land on the old address; an in-page
+    old link from the lobby opens the room and Back returns to the lobby;
+    an old link to Pluto's picture shows "Open the live solar system",
+    which opens the room; the lobby lists Earth System and Stars only;
+    both keep their pages; Back from Stars returns to the lobby; no page
+    error. The run rewrote the three pull stamps (data/constants_export.sha,
+    data/objects_export.sha, data/drawings/pulled_at.sha) to orrery
+    418a9b44; the exports themselves did not change.
+  - Carried, not changed: interactive-exhibit 1.36 says "The Explorer's
+    own page keeps its chain"; since part 3 it has none. A description,
+    for the skill's next version.
+  - Tony-action (do): commit and push the website, then the orrery.
+  - Tony-action (decide): the phone look (the session's report lists
+    what to tap); if it passes, L-517 closes.
+- **Part 3 pushed and looked at, and L-517 closed, 2026-11-08, night**
+  (the same Claude Code session, Claude Opus 5.5, through the python_work
+  door), on orrery 789c1ec8 and gallery 39900d75, read from Tony's copy
+  `documentation/WHERE_WE_ARE_11-8-26_1842_run_record.md` and his chat.
+  Website pushed at 39900d75, its live run green ("2 of 2 gating
+  checkers passed"); orrery at 789c1ec8.
+  - His look, in his words. On the old Comets address: "opens the solar
+    system view not the comets. I tried this in both Safari and Chrome."
+    That is as built: the room has no way to open on one group, so every
+    old Solar System address (ten topics) lands on its opening view.
+    Asked whether an old topic address should open the room on its
+    group: "No, leave it as is." On the new words: "The 'Open the live
+    solar system' button is there and works on Pluto's picture." The
+    other items (Back from Stars and from Earth System, Explore's top bar
+    without "Solar") drew no note, and his word was "Finish the close and
+    close L-517." Should Back still fail on his phone, that is a new
+    item, not this one.
+  - Loose ends, re-homed:
+    - the two desktop-only rows (Mercury's Orbital Transformation; Near
+      Earth Asteroids on the Apollo and Amor asteroids row), never looked
+      at: a line on L-515 (one nested tree), whose tree holds the folds;
+    - Featured's rethink, the cards' unsourced words, the editor taking a
+      live view's address as a Featured card (from L-518), the editor's
+      own "under construction" window, and Tony's pinned guest book
+      note's old words: the new L-519 (Featured's rethink), which holds
+      them together;
+    - interactive-exhibit 1.36's sentence "The Explorer's own page keeps
+      its chain": a line on L-518 (the shared scene link), the next build
+      to open interactive.html and that skill;
+    - the drawer walk's three failures found in part 1: already on L-423
+      (the website's checks), received there from L-502; read there, the
+      same three;
+    - "each picture group leaves its row when the encounter that replaces
+      it is built": struck here, since interactive-exhibit 1.36 carries it
+      as a rule.
+**Gap:** none.
+**Ref:** L-282 (the lobby); L-428 (the lobby's way in); L-447 (the front
+page says what the site is: its sentence and the Paloma line stay, the
+line moves above the guest book); L-515 (one nested tree); L-303 (the
+card model, one viewer per orientation); gallery `index.html`,
+`gallery/gallery_config.json`, `gallery/gallery_metadata.json`,
+`gallery/solar_system_drawer.js`; L-519 (Featured's rethink), which
+took its loose ends.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

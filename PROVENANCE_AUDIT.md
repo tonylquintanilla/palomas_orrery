@@ -1,7 +1,7 @@
 <!-- Doc-Kind: generated | The provenance audit: every numeric claim scored against its citation, rebuilt by provenance_scanner.py on each run. Do not hand-edit. -->
 # Paloma's Orrery -- Provenance Audit
 
-Generated: November 07, 2026
+Generated: November 08, 2026
 Files scanned: 176
 Total findings: 1165
 Constants: 307 | Dicts: 75 | Display strings: 783
@@ -20,12 +20,12 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T1 by domain | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|--------------|---:|---:|---:|--------:|
+| 20261109T020005Z | `789c1ec` | 176 | 1165 | 276 | orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2 | 707 | 176 | 6 | 0 |
 | 20261108T041339Z | `1ec02dc` | 176 | 1165 | 276 | orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2 | 707 | 176 | 6 | 0 |
 | 20261108T031419Z | `4ac3903` | 176 | 1165 | 276 | orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2 | 707 | 176 | 6 | 0 |
 | 20261108T030921Z | `4ac3903` | 176 | 1165 | 276 | orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2 | 707 | 176 | 6 | 0 |
 | 20261108T025414Z | `4ac3903` | 176 | 1165 | 276 | orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2 | 707 | 176 | 6 | 0 |
 | 20261108T005202Z | `cba62f2` | 176 | 1165 | 276 | orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2 | 707 | 176 | 6 | 0 |
-| 20261107T214435Z | `9117505` | 176 | 1165 | 276 | orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2 | 707 | 176 | 6 | 0 |
 
 Change since the previous run: total +0, Tier-1 +0.
 
