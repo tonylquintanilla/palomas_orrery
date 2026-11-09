@@ -420,3 +420,28 @@ The room skill isn't bumped again: you've installed 1.37, and its line on Reset 
 **Tony-actions**
 - (do) Commit and push both repositories. -- done
 - (decide) The phone look at Reset, and whether L-518 closes. -- see notes. 
+
+============================================
+
+Closing L-518 (the shared scene link). First the records skill's rule on closing an item and re-homing what's left.
+
+Closing L-518 now: its record moves to the closed section, the editor's half goes to L-519 (Featured's rethink), and one skill note goes to L-515 (one nested tree), whose next step opens that skill.
+
+L-518 (the shared scene link) is closed on your word. Its record is now in the ledger's closed section.
+
+**Where its leftovers went**
+- Making a Featured card from a shared link in the gallery editor went back to L-519 (Featured's rethink). That item's design talk decides what Featured is for, and it is the one that will open the gallery editor.
+- The room skill's line on Reset can say how the frame is now found. That note is on L-515 (one nested tree), because its step 2b is the next build to open that skill.
+- Home returning to the frame a room opened on is not a defect. Your earlier rulings make Home the opening frame, so I struck it with that reason.
+- Choosing a date per body stays in the Oct 29 design record, for the date picker's build at the end of the road.
+
+**Where We Are** now says the shared link is closed and names step 2b of the one tree as next. The reinstall line is gone, since you did it.
+
+**Files changed (orrery only)**
+- ok LEDGER_CONSOLIDATED.md (L-518 closed and moved to the closed section, one line each on L-519 and L-515, the header stamp; index regenerated, no problems)
+- ok documentation/WHERE_WE_ARE.md (the box, the road, the deferred list, the details; at its 130-line cap)
+
+**Run order:** in GitHub Desktop, commit and push the orrery. The website has nothing new.
+
+**Tony-actions**
+- (do) Commit and push the orrery. -- 8d404bdeb4cfd973f6a09cfb68abad72f617f279
