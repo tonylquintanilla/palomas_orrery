@@ -1,21 +1,22 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 9, 2026, evening: the website Code session (Opus), after your phone look at Scenes.
-- Written at orrery 1b2a0ed and gallery 285f14b, plus this session's edits.
+Last updated: November 9, 2026, evening: the website Code session (Opus), Scenes part 2 built.
+- Written at orrery 09fb693 and gallery 66c9f69, plus this session's edits.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Scenes is built (L-519 (Featured's rethink)): paste a shared link into the editor's New Scene window, and it becomes a scene in a Scenes group under the Sun in the drawer; Featured ticked, also on the gallery page.
-> - Your first scene, 2026 ED138, is live, after GitHub's outage of Nov 9 failed the first deploy; the New Scene window has a right-click Paste.
-> - Your phone look passed all but Find: "ed138" found the body, not the scene. A scene's name now shows it in Find even when a body's name matches too.
+> - Part 2 is built (L-519 (Featured's rethink)): the gallery editor's Solar System door now shows the room's own drawer, as the phone does.
+> - A card's form has "Places in the drawer", with Add place... and Remove place: a scene or a picture can sit beside one or several rows.
+> - A place can be a body, a group, one of the Sun's shells (the Heliopause) or the belt's cloud; a planet's features will be places the same way once the Solar System room draws them.
 >
-> **Do next:** *Look again at Find on the phone ("ed138": the body and the scene); then step 2b of the one tree.*
+> **Do next:** *Your phone look at part 2 (the list is on L-519); then step 2b of the one tree.*
 >
 > **Needs you now:**
-> - *(do) Commit and push both: the website (Find's fix) and the orrery (these records); run the live check.*
-> - *(do) On the phone, find "ed138": it should show the body and the scene, "1 body and 1 scene match".*
+> - *(do) Commit and push both: the website (part 2) and the orrery (the records, with the design session's).*
+> - *(do) Place ED138's scene beside its body in the editor, Save All, push, and look on the phone.*
+> - *(do) Reinstall the interactive-exhibit skill (1.39) and paste protocol v3.135 into the Project.*
 > - *(do) Each morning, Pull origin on both, orrery then website, first.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
 
@@ -42,15 +43,16 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
                to choose, within the range the data covers.
   l.   [done]  L-517 (the lobby): closed Nov 8 on your phone look.
   s.   [done]  The shared scene link (L-518 (the shared link)): closed Nov 8 on your phone look.
-  c.   [NOW]   *Scenes (L-519 (Featured's rethink)): built and live; Find to look at again; then step 2b.*
+  c.   [NOW]   *Scenes (L-519 (Featured's rethink)): live; part 2 built, your phone look; then step 2b.*
                << moved this session
   b.   [beside] Housekeeping: L-424, L-425, L-426 (the checkers' three);
                L-423 (the website's checks) item 3; L-357 (stale gallery
                artifacts); L-509 (obsolete code), after its talk.
 
-## Settled
+## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings; a line leaves once it is habit, or a skill carries it.
+- You decide where each card goes: beside one or several rows, the Sun's shells and the belt's cloud included; planet features join when drawn (Nov 9; L-519 (Featured's rethink)).
 - A scene opens at now; Featured is a board highlighting important cards or scenes, kept largely as is (Nov 9; L-519 (Featured's rethink)).
 - A shared link carries the bodies ticked and the maker's minute, written by the page itself; past the data it freezes, like any room (Oct 29; Nov 8; L-518 (the shared link)).
 - The lobby asks one thing first; Featured stays as it is; saved pictures sit beside their body's row in the drawer; the Solar System page goes, its old addresses opening the live room on its opening view, not on a group (Nov 8; L-517 (the lobby)).
@@ -63,7 +65,7 @@ Standing rulings; a line leaves once it is habit, or a skill carries it.
   room draws Pluto, Charon and the other moons around the barycentre;
   the orrery's Pluto-centred view goes (Nov 6; L-150 (trusting a near-equal pair)).
 
-## Deferred  **>> UPDATED THIS SESSION**
+## Deferred
 
 Waiting behind other work; a line leaves when picked up.
 - Three checks red in the drawer walk before Scenes was built, the page or the walk aged: a gallery session that next opens the drawer (Nov 9; L-521 (three red checks)).
@@ -94,7 +96,7 @@ Waiting behind other work; a line leaves when picked up.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261108T175822Z, nightly, ok, no retry (gallery swap log at 6a15371, read Nov 9, afternoon).
+- Last cache build: 20261109T185123Z, nightly, ok, no retry (gallery swap log at 66c9f69, read Nov 9, evening).
 - Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at orrery e4dc2f9, its last change).
 - This page's date and the ledger's newest stamp: both Nov 9. Agree.
 
@@ -120,8 +122,8 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- This session: L-519 (Featured's rethink), the Scenes build, with the
-  phone-look list; L-521 (three red checks in the drawer walk).
+- This session: L-519 (Featured's rethink), part 2's build and its
+  phone-look list; L-521 (three red checks).
 - The tree: L-515 (one nested tree), `COORD_L515_steps1_2a_brief_20261107.md`.
 - The talk's rulings: `DESIGN_L484_consistency_rulings_20261103.md`.
 - The door: `documentation/python_work_door/`, and L-499 (kinds of session).

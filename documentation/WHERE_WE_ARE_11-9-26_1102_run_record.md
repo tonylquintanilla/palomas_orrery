@@ -647,11 +647,286 @@ Orrery:
 
 **Your run order**
 1. In GitHub Desktop, commit and push the website. -- 66c9f698feae430f1d63888fba5ff8fcf479e4b5
-2. Commit and push the orrery. -- 
-3. When the deploy is green, run the live check: `gallery_maintenance_run.py --live`.
-4. On the phone, open the Solar System room's drawer and find "ed138". You should see 2026 ED138's row and the Scenes group under the Sun with your scene, and the line "1 body and 1 scene match".
+2. Commit and push the orrery. -- 09fb6934d06b4e82d750821acf719a11ccaf9436
+3. When the deploy is green, run the live check: `gallery_maintenance_run.py --live`. 
+
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 62 files from https://palomasorrery.com/ (30 typed, 32 positions files read from data\objects_config.json)
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches the working copy
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   gallery/arrival.js                             matches the working copy
+    SERVED   gallery/nav_cluster.js                         matches the working copy
+    SERVED   gallery/solar_system_figures.js                matches the working copy
+    SERVED   gallery/solar_system_drawer.js                 matches the working copy
+    SERVED   data/objects_config.json                       matches the working copy
+    SERVED   gallery/guestbook.js                           matches the working copy
+    SERVED   data/guestbook.json                            matches the working copy
+    SERVED   data/solar-system/drawings/hills_cloud.json    matches the working copy
+    SERVED   data/solar-system/drawings/van_allen_belts.json matches the working copy
+    SERVED   data/solar-system/drawings/earth_exosphere.json matches the working copy
+    SERVED   data/solar-system/drawings/sun_corona.json     matches the working copy
+    SERVED   data/solar-system/drawings/zodiacal_dust.json  matches the working copy
+    SERVED   data/solar-system/drawings/outer_oort_cloud.json matches the working copy
+    SERVED   data/solar-system/drawings/galactic_tide.json  matches the working copy
+    SERVED   gallery/source_list.js                         matches the working copy
+    SERVED   gallery/far_lines.js                           matches the working copy
+    SERVED   gallery/direction_arrows.js                    matches the working copy
+    SERVED   gallery/drawer_order.js                        matches the working copy
+    SERVED   gallery/text_box.js                            matches the working copy
+    SERVED   gallery/scene_moment.js                        matches the working copy
+    SERVED   gallery/scene_address.js                       matches the working copy
+    SERVED   gallery/picture_folds.js                       matches the working copy
+    SERVED   gallery/gallery_metadata.json                  matches the working copy
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+    SERVED   data/solar-system/positions/voyager_2.json     matches the working copy
+    SERVED   data/solar-system/positions/new_horizons.json  matches the working copy
+    SERVED   data/solar-system/positions/juno.json          matches the working copy
+    SERVED   data/solar-system/positions/osiris_apex.json   matches the working copy
+    SERVED   data/solar-system/positions/parker_solar_probe.json matches the working copy
+    SERVED   data/solar-system/positions/bepicolombo.json   matches the working copy
+    SERVED   data/solar-system/positions/solar_orbiter.json matches the working copy
+    SERVED   data/solar-system/positions/lucy.json          matches the working copy
+    SERVED   data/solar-system/positions/juice.json         matches the working copy
+    SERVED   data/solar-system/positions/psyche_spacecraft.json matches the working copy
+    SERVED   data/solar-system/positions/europa_clipper.json matches the working copy
+    SERVED   data/solar-system/positions/galileo.json       matches the working copy
+    SERVED   data/solar-system/positions/cassini.json       matches the working copy
+    SERVED   data/solar-system/positions/pioneer_10.json    matches the working copy
+    SERVED   data/solar-system/positions/pioneer_11.json    matches the working copy
+    SERVED   data/solar-system/positions/rosetta.json       matches the working copy
+    SERVED   data/solar-system/positions/akatsuki.json      matches the working copy
+    SERVED   data/solar-system/positions/dart.json          matches the working copy
+    SERVED   data/solar-system/positions/west.json          matches the working copy
+    SERVED   data/solar-system/positions/mcnaught.json      matches the working copy
+    SERVED   data/solar-system/positions/tsuchinshan_atlas.json matches the working copy
+    SERVED   data/solar-system/positions/wierzchos.json     matches the working copy
+    SERVED   data/solar-system/positions/atlas_2024_g3.json matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1.json      matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1_b.json    matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1_d.json    matches the working copy
+    SERVED   data/solar-system/positions/panstarrs_2025_r3.json matches the working copy
+    SERVED   data/solar-system/positions/borisov_2025_v1.json matches the working copy
+    SERVED   data/solar-system/positions/oumuamua.json      matches the working copy
+    SERVED   data/solar-system/positions/borisov_2i.json    matches the working copy
+    SERVED   data/solar-system/positions/atlas_3i.json      matches the working copy
+
+  PASS Served reachability       9.1s  all 62 files served and
+                                    byte-identical to the working copy
+
+  orrery export pinned at 1b2a0edf
+
+  PASS Export freshness          0.2s  the served export is the orrery's
+                                    at 1b2a0edf, byte for byte
+
+  orrery HEAD 09fb6934
+  examining 3 of 188 links; the other 185 are served from the export
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  3 pointers: 1 match, 0 DRIFT, 0 UNIT MISMATCH, 2 could not be examined.
+
+  PASS Store drift               1.8s  3 pointers against orrery 09fb6934
+                                    -- 1 match, 0 DRIFT, 0 UNIT
+                                    MISMATCH, 2 could not be examined.
+
+======================================================================
+  2 of 2 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Store drift            3 pointers against orrery 09fb6934 -- 1
+  last swap 2026-11-09T18:53:43.881740+00:00: succeeded first time
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+4. On the phone, open the Solar System room's drawer and find "ed138". You should see 2026 ED138's row and the Scenes group under the Sun with your scene, and the line "1 body and 1 scene match". -- perfect. thanks.
 
 **Tony-action rollup**
+- (do) Commit and push both repositories, then run the live check. -- done
+- (do) The phone look at Find ("ed138"). -- correct
+- (later) Make a scene in the Earth room, to finish item 8. -- correct
+
+==============================================================================
+
+Building the website side first so a card can sit in several places beside any drawer row, and future planet features will work the same way once they're rows.
+
+The shell refused the long script; writing it to a file instead.
+
+The fold check crashes because its sample scene has a place, and a place now counts. Updating the check to the new rule.
+
+Now the drawer's Find: a card in several places should be counted once.
+
+Now updating the fold check for places: new sample rows (a shell and the belt's cloud), a card in several places, and three new breaks.
+
+The fold check passes with 11 breaks, each caught. Next, a comment fix in the page, then the editor.
+
+Now the editor's logic, in a file of its own that needs no window. First, how the website orders a sorted group, so the editor matches it.
+
+The tree reads the real drawer. Now checking it against the real page: same rows, same order, same shells.
+
+The page labels the Sun's-shell rows by display name ("Sun: Heliopause") rather than key ("heliopause"), and my order check misread the group rows; I'm now checking how the page builds those shell rows.
+
+The page's shell rows need to carry their key. Making three small edits: the page passes each shell's key along, the drawer file keeps it on the row, and the place lookup matches it.
+
+Now the page probe again, reading group rows properly and the shells by their keys.
+
+The editor's tree matches the real page's 116 rows and the same shells, minus the rotation axis, which has no key. I'm reading the editor window's load and save code next.
+
+I've read enough of the editor. Writing its changes now: the drawer tree, the Places list, the Add-place window and the move rule.
+
+Both files compile, and I'm now testing the editor on a throwaway copy of the website files by placing the ED138 scene beside its body and the Heliopause, removing a place, and giving a twin picture a second place.
+
+The editor is working on a copy, with ED138's scene moved beside its body and the twin following its picture, and Save All has written the changes out. Next I'll run the fold check on that saved copy.
+
+Next, the headless walk on the real page. Reading the end of its Scenes section.
+
+Adding a section 31 to the walk: a scene beside Jupiter and the Heliopause, and a picture beside its comet and the belt's cloud.
+
+My own check was wrong: it compared a three-card list as text against the six cards (twins included). Fixing the comparison.
+
+The walk passes section 31; only the three old red checks (L-521) remain. The control printed nothing, so I'm looking at its output.
+
+The control crashes instead of failing cleanly. Making section 31 stop after its first failed check, as section 30 does.
+
+The control fails on section 31 as it should. Next, the editor logic's own check. Reading how the scene check is laid out and registered, to match it.
+
+Writing the editor logic's check now, in the same form: worked cases, a self-test that breaks the file three ways, then the real files, with the order checked against the website's own sort.
+
+The rows were too long for a command line on Windows. Passing them through a temporary file instead.
+
+The check passes, and its three breaks are each caught. Registering it in the gallery run as "Drawer places".
+
+Now the fold check's header, to describe its new section and breaks.
+
+Adding one wiring check, so the fold check fails if the page stops handing each shell row its key.
+
+The offline run reads "43 of 43 gating checkers passed", with the new Drawer places row among them. Checking what changed and that every file is ASCII with LF endings.
+
+Code is done and checked. Now the records. First the room skill: its words on saved pictures and scenes still say one place, under the Sun. Reading its current 1.38 text.
+
+Writing the room skill's 1.39 now: its words on places, scenes beside any row, and the editor's drawer tree.
+
+The skill now reads 1.39 and the manifest matches. Next, the protocol's version entry. Reading its current header and entries.
+
+Now the ledger. Updating L-519 (Featured's rethink) with the build record and a phone-look list.
+
+Where We Are is one line over its 130-line cap. Removing the box line that says the Earth System and the Stars keep their old tree, which the ledger already records.
+
+Scenes part 2 is built. In the gallery editor, the Solar System door now shows the room's own drawer, the same as on the phone. Any Solar System card, scene or saved picture, can sit beside one or several rows, the Sun's shells and the belt's cloud included. Nothing is committed and no phone has seen it yet.
+
+**What you'll see in the editor**
+- **The tree:** the Sun comes first, with "The Sun's shells" under it, then every group and body row in the website's order, groups nested.
+  - Each card shows under every row it sits beside.
+  - "Not in the drawer" at the bottom holds the three room cards.
+  - The Earth System and the Stars keep their old tree.
+- **The card's form:** "Places in the drawer" replaces the room line, with Add place... and Remove place.
+  - Add place... opens the same tree with a Find box.
+  - A picture's twin always follows its places.
+  - A scene with no place left goes back to Scenes under the Sun.
+  - Save All names each change.
+- **Planet features:** the architecture already takes them. Once the Solar System room draws one as a row, as it draws the Sun's shells, it becomes a place with nothing else to change. Placing cards inside a planet's own room is a later step.
+
+**How it was checked**
+- **The offline gallery run:** "43 of 43 gating checkers passed". That includes a new "Drawer places" check of the editor's logic, which first breaks its own file three ways. The picture-folds check gained a places section and three more breaks, eleven in all, each caught.
+- **Against the real page, headlessly:**
+  - The editor's tree and the website's drawer agree: 116 rows in the same order, and the same Sun's shells. The one exception is the rotation axis, which carries no key and so can't be a place.
+  - The drawer walk's new section 31 has a scene beside Jupiter and the Heliopause, and a picture beside 3I/ATLAS and the belt's cloud. It passes, and it fails on a copy with the old fold file.
+- **The editor, on a throwaway copy:** I placed your ED138 scene beside 2026 ED138 and the Heliopause and took it out of the Sun's Scenes. A twin followed its picture, and Save All wrote and named each change.
+
+**One fix along the way:** the website named each Sun's-shell row by its display name ("Sun: Heliopause"). It now hands each row its key ("heliopause"), so a card's place stays steady if a label changes.
+
+**Found, not changed:** the drawer walk is still red only on the three old checks of L-521 (three red checks in the drawer walk).
+
+**About the room skill:** the copy this session loaded read 1.37, cached before you reinstalled. I worked from your account's 1.38 on disk, which matches the repository's. The new 1.39 goes to your account.
+
+**Phone-look list** (also on L-519 (Featured's rethink)):
+1. In the editor, the Solar System door shows the drawer: the Sun with its shells, the rows as on the phone, ED138's scene under the Sun, "Not in the drawer" at the end.
+2. Select ED138's scene: "Places in the drawer" reads "Sun (Scenes under the Sun)".
+3. Press Add place..., find "ED138", choose 2026 ED138, then Add place. The scene shows under both rows, and Save All names the change.
+4. On the phone, 2026 ED138's row has a Scenes group under it with the scene. The Sun's Scenes still has it too.
+5. Tap the scene from ED138's row; the phone's Back returns there, with the drawer open.
+6. Find "ED138": the line reads "1 body and 1 scene match".
+7. Optional: place a card beside the Heliopause. Its group sits under that row, wherever the website puts it.
+8. Remove the Sun from the scene, Save All and push: the Sun's Scenes group goes, and the scene stays beside ED138.
+
+**Files for your run record**
+
+Website:
+- ok tools/drawer_places.py (new: the tree and the places, no window)
+- ok tools/test_drawer_places.py (new: its check, the "Drawer places" row)
+- ok tools/gallery_editor.py (13 edits: the drawer tree, Places in the drawer, the Add place window, Remove place, moving among a place's cards, the save report, docstring)
+- ok gallery/picture_folds.js (7 edits: places, any row, a Scenes group under each row, a shell by its key)
+- ok gallery/solar_system_drawer.js (3 edits: a shell row keeps its key; Find counts a card once)
+- ok interactive.html (3 edits: each Sun's-shell row gets its key; two notes)
+- ok documentation/smoke_picture_folds.js (24 edits: section 7, sample rows and cards, three more breaks, the real files with the Sun's shells, header)
+- ok tools/headless/walk_solar_system_drawer.js (5 edits: section 31)
+- ok gallery_maintenance_run.py (2 edits: the "Drawer places" row)
+- Rewritten by the run itself: MODULE_ATLAS.md, MODULE_INDEX.md, module_atlas.py (the two new files' roles), and the three .sha files (now naming orrery 09fb6934)
+
+Orrery (on top of the design session's uncommitted records):
+- ok skills/interactive-exhibit/SKILL.md (6 edits: 1.39, Places, the Scenes and saved-pictures text; the 1.36 entry moved out; read plan regenerated)
+- ok documentation/SKILL_HISTORIES.md (1 edit: the 1.36 entry, word for word)
+- ok PROJECT_INSTRUCTIONS.md (4 edits: v3.135, header and anchor, v3.132 moved out; the manifest regenerated)
+- ok documentation/PROJECT_INSTRUCTIONS_HISTORY.md (1 edit: v3.132)
+- ok LEDGER_CONSOLIDATED.md (2 edits: L-519 (Featured's rethink) part 2 built, its phone-look list, Gap and Ref; index regenerated, no problems)
+- ok documentation/WHERE_WE_ARE.md (7 edits by section; 130 lines above the marker)
+
+**Token count:** this app has no /cost command, so I can't give input and output tokens by model. This session's context stands at 464,734 tokens (Opus 5.5). Your plan shows 8% of the 5-hour limit and 26% of the week used.
+
+**Your run order**
+1. In VS Code, run `tools/gallery_editor.py` 
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\tools> & 'C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe' 'c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/tools/gallery_editor.py'
+Gallery editor loaded C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\gallery\gallery_metadata.json
+
+   1. and look at the Solar System door. 
+   2. Then place ED138's scene beside 2026 ED138 (Add place...) and press Save All.
+2. In GitHub Desktop, commit and push the website.
+3. Commit and push the orrery. That includes the design session's records from this afternoon.
+4. When the deploy is green, run the live check: `gallery_maintenance_run.py --live`.
+5. Do the phone look above.
+
+**Tony-action rollup**
+- (do) Place a card in the editor, Save All.
 - (do) Commit and push both repositories, then run the live check.
-- (do) The phone look at Find ("ed138").
-- (later) Make a scene in the Earth room, to finish item 8.
+- (do) The phone look, eight items above.
+- (do) Reinstall the interactive-exhibit skill (1.39) and paste protocol v3.135 into the Project.
+
+========================================================
+
+No, you don't need to commit. The editor reads the files on your disk, and the new code is there.
+
+**What's happening:** the window in your picture was opened at 2:01 PM, before I built part 2, so it still runs the old code. I checked which editor windows are running, and that is the only one. Its status bar still shows the Look message from this afternoon. The Run from VS Code doesn't seem to have opened a second window.
+
+**What to do**
+1. Close that Gallery Editor window. If it asks about unsaved changes, say No: there should be nothing new in it.
+2. In VS Code, open `tools/gallery_editor.py` and press Run.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\tools> & 'C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe' 'c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/tools/gallery_editor.py'
+Gallery editor loaded C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\gallery\gallery_metadata.json
+
+-- it was my mistake. i closed the terminal for the editor and it closed the new version and kept the version i had open from the dashboard, the old version! (humans...)
+
+3. The terminal should print "Gallery editor loaded ...". If it also prints "Could not read the Solar System room's drawer", send me that line. -- no problem
+4. In the new window, the Solar System door's first row is **Sun**. Open it and click the ED138 scene. **Places in the drawer** appears on the right, with **Add place...** and **Remove place**. -- done
+
+5. In GitHub Desktop, commit and push the website. -- 5edb514e8b433466043b16d9feca1571f51d0e58
+6. Commit and push the orrery. That includes the design session's records from this afternoon. -- 
+7. When the deploy is green, run the live check: `gallery_maintenance_run.py --live`.
+8. Do the phone look above.
+
+
+**Files for your run record:** none changed this turn.

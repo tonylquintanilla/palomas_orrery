@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.134 | November 9, 2026
+Tony Quintanilla, PE | Claude | v3.135 | November 9, 2026
 
-Cut from c7cf3490 at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 09fb6934 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -556,7 +556,7 @@ gallery-cache-builder        1.18 Nightly builder, atomic swap and its
                                   (HORIZONS_CACHE), a drawing named on a room's
                                   row, an ended mission's last day
                                   (fetch_path_last_day)
-interactive-exhibit          1.38 adding or changing an exhibit in
+interactive-exhibit          1.39 adding or changing an exhibit in
                                   interactive.html; any edit to the Sun's
                                   chrome (drawer, nav cluster, frame zoom,
                                   i-panel, HUD, consent, back link); "Earth
@@ -635,7 +635,12 @@ interactive-exhibit          1.38 adding or changing an exhibit in
                                   "Tap to update."); scenes, a shared link kept
                                   as a card (the Scenes fold under the Sun, the
                                   gallery editor's New Scene window,
-                                  scene_card.py, the Scene cards check)
+                                  scene_card.py, the Scene cards check); a card
+                                  in several places in the drawer, beside any
+                                  row (drawer_row a list; a Sun's shell or the
+                                  belt's cloud as a place); the gallery
+                                  editor's drawer tree and its Places list
+                                  (drawer_places.py, the Drawer places check)
 <!-- SKILL-MANIFEST:END -->
 
 Session-Start Repo Pull and the SHA Round Trip [CRITICAL]
@@ -1329,6 +1334,56 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.135 (November 9, 2026, evening): No rule changed in this document.
+ONE skill bump: interactive-exhibit 1.38 -> 1.39 (L-519, Featured's
+rethink, part 2). PLACES: A CARD BESIDE ONE OR SEVERAL ROWS, AND THE
+GALLERY EDITOR'S TREE AS THE ROOM'S OWN DRAWER.
+
+WHAT PROMPTED IT. The Claude Code session of Nov 9, evening (Claude Opus
+5.5), through the python_work door, built on orrery 09fb6934 and gallery
+66c9f698, from Tony's prompt and L-519's part 2, designed that afternoon
+(14:53: "I should be able to put the ED138 scene next to the ED138 body
+instead of the one scenes drawer"; 14:58: "can we put it next to more
+than one body"; 15:00: "B so I can decide what goes where"). Before
+building it told Tony how the tree would look and how a card is placed,
+with the two calls the design left as method; he asked how a scene of
+Voyager 1 past the Heliopause would sit, and ruled the Sun's shells and
+the belt's cloud places too ("Yes we can add them"), asking that the
+architecture take planet features later.
+
+WHAT CHANGED. interactive-exhibit: a card's drawer_row is one place or a
+list; a place is any row the Solar System room's drawer lists -- a body,
+a group, one of the Sun's shells by its served shell key, the belt's
+cloud by its drawing's name; a card shows in each place and is counted
+once; a scene sits in a Scenes fold under each row it names, under the
+Sun when it names none; Back returns to the fold a card was opened from.
+The gallery editor's Solar System door lists the room's own drawer in
+the website's order, and a card's form has Places in the drawer, Add
+place... and Remove place (tools/drawer_places.py; the gallery run's new
+Drawer places row). A planet's feature becomes a place the same way once
+the Solar System room draws it as a row. And Tony's phone look of the
+afternoon: Find shows a scene whose name holds a body's name beside the
+body. Its oldest of four version entries (1.36) moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule. Every sentence
+was read from the gallery's code with this session's edits before it was
+written.
+
+THE OBLIGATION TRAVELS. This session loaded interactive-exhibit from the
+account and it read 1.37, not the manifest's 1.38: the session had begun
+before Tony reinstalled 1.38, and the account's copy on disk read 1.38,
+byte for byte the repo's, so the session worked from that copy and said
+so to Tony. It read gallery-pipeline, safe-file-editing and
+ledger-and-session-records in the parts the work needed. Tony reinstalls
+interactive-exhibit (Settings > Skills) and pastes this version into the
+Project's instructions on claude.ai; the next session that loads it from
+the account confirms its copy reads 1.39 before work that fires it.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.132 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.134 (November 9, 2026): No rule changed in this document. ONE
 skill bump: interactive-exhibit 1.37 -> 1.38 (L-519, Featured's
 rethink). SCENES: A SHARED LINK KEPT AS A CARD, IN THE TREE AND ON
@@ -1418,53 +1473,6 @@ the next session that loads it from the account confirms its copy reads
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.130 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.132 (November 8, 2026): No rule changed in this document. ONE
-skill bump: interactive-exhibit 1.35 -> 1.36 (L-517, the lobby for a
-first-time phone visitor, part 1). THE SOLAR SYSTEM PICTURES SIT BESIDE
-THEIR ROWS IN THE SOLAR SYSTEM ROOM'S DRAWER.
-
-WHAT PROMPTED IT. The Claude Code session of Nov 8 (Claude Opus 5.5),
-through the python_work door, built on orrery c275fcb7 and gallery
-e9d0c5e2, from Tony's prompt of that afternoon and part 1 of
-documentation/COORD_L517_lobby_brief_20261108.md, on his rulings 4 and
-5 of Nov 8 on L-517: the pictures go into the live tree, "temporary
-drawers ... groups with the items upon opening them", "beside its row.
-It's temporary but not quick." His order of 11:03: "I would say the
-picture first then the lobby."
-
-WHAT CHANGED. interactive-exhibit: a new bullet under The Solar System
-room's drawer, Saved pictures beside their rows: every Solar System
-card that is not a live room's sits in a fold under its body's row,
-placed by one field on its gallery metadata entry, drawer_row (which
-row is method, written out); a picture mark on the fold, an arrow where
-a tick box would be, one line saying each opens on its own page, closed
-when the room opens; a phone offered a card's portrait twin and a
-desktop its landscape one, by the gallery's own rule
-(gallery/picture_folds.js); Find finding a picture's words, adding rows
-only when no body or group matches by its own; Back returning to the
-room as it was left, and index.html's way back on a card the room
-opened; each fold leaving its row when the encounter that replaces it
-is built. Checked by the gallery run's new Picture folds row and the
-walk's section 29. Its oldest of four version entries (1.33) moved to
-documentation/SKILL_HISTORIES.md, by the three-entry rule. Every
-sentence was read from the gallery's code with this session's edits
-before it was written.
-
-THE OBLIGATION TRAVELS. This session loaded interactive-exhibit from
-the account and it read 1.35, as the manifest expected, discharging
-v3.131's obligation; it read gallery-pipeline 1.2 in the parts on
-gallery_metadata.json, safe-file-editing 1.14 and
-ledger-and-session-records 1.22. Tony reinstalls interactive-exhibit
-(Settings > Skills) and pastes this version into the Project's
-instructions on claude.ai; the next session that loads it from the
-account confirms its copy reads 1.36 before work that fires it.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.129 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

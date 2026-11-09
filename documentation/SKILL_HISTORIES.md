@@ -999,6 +999,24 @@ Spacecraft over Active missions and Historical missions, Apollo and Amor
 asteroids over those two), a sub-group naming its parent in "in". Read
 from the gallery's code with this session's edits before it was written.
 (Moved down 2026-11-09, when 1.38 made a fourth entry.)
+Earlier: 1.36 | 2026-11-08, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ c275fcb7 and gallery @ e9d0c5e2. v1.36 (L-517, the lobby
+for a first-time phone visitor, part 1) adds SAVED PICTURES BESIDE THEIR
+ROWS, Tony's rulings 4 and 5 of 2026-11-08: the Solar System pictures go
+into the live tree, "temporary drawers ... groups with the items upon
+opening them", "beside its row". Every Solar System card that is not a
+live room's sits in a fold under its body's row in the Solar System
+room's drawer, placed by one field on its metadata entry, drawer_row
+(gallery/picture_folds.js); a picture mark on the fold, an arrow where a
+tick box would be, one line saying each opens on its own page, closed
+when the room opens; a phone opens a card's portrait twin and a desktop
+its landscape one, by the gallery's own rule; Find finds a picture's
+words; Back returns to the room as it was left, and index.html shows the
+way back on a card the room opened. Checked by the gallery run's Picture
+folds row and the walk's section 29. Each fold leaves its row when the
+encounter that replaces it is built. Read from the gallery's code with
+this session's edits before it was written.
+(Moved down 2026-11-09, evening, when 1.39 made a fourth entry.)
 
 ## safe-file-editing
 

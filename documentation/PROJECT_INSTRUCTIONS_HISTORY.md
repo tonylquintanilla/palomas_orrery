@@ -4540,6 +4540,56 @@ resident.
 (Moved down from the resident protocol on 2026-11-09, when v3.134 made
 a fourth entry.)
 
+v3.132 (November 8, 2026): No rule changed in this document. ONE
+skill bump: interactive-exhibit 1.35 -> 1.36 (L-517, the lobby for a
+first-time phone visitor, part 1). THE SOLAR SYSTEM PICTURES SIT BESIDE
+THEIR ROWS IN THE SOLAR SYSTEM ROOM'S DRAWER.
+
+WHAT PROMPTED IT. The Claude Code session of Nov 8 (Claude Opus 5.5),
+through the python_work door, built on orrery c275fcb7 and gallery
+e9d0c5e2, from Tony's prompt of that afternoon and part 1 of
+documentation/COORD_L517_lobby_brief_20261108.md, on his rulings 4 and
+5 of Nov 8 on L-517: the pictures go into the live tree, "temporary
+drawers ... groups with the items upon opening them", "beside its row.
+It's temporary but not quick." His order of 11:03: "I would say the
+picture first then the lobby."
+
+WHAT CHANGED. interactive-exhibit: a new bullet under The Solar System
+room's drawer, Saved pictures beside their rows: every Solar System
+card that is not a live room's sits in a fold under its body's row,
+placed by one field on its gallery metadata entry, drawer_row (which
+row is method, written out); a picture mark on the fold, an arrow where
+a tick box would be, one line saying each opens on its own page, closed
+when the room opens; a phone offered a card's portrait twin and a
+desktop its landscape one, by the gallery's own rule
+(gallery/picture_folds.js); Find finding a picture's words, adding rows
+only when no body or group matches by its own; Back returning to the
+room as it was left, and index.html's way back on a card the room
+opened; each fold leaving its row when the encounter that replaces it
+is built. Checked by the gallery run's new Picture folds row and the
+walk's section 29. Its oldest of four version entries (1.33) moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule. Every
+sentence was read from the gallery's code with this session's edits
+before it was written.
+
+THE OBLIGATION TRAVELS. This session loaded interactive-exhibit from
+the account and it read 1.35, as the manifest expected, discharging
+v3.131's obligation; it read gallery-pipeline 1.2 in the parts on
+gallery_metadata.json, safe-file-editing 1.14 and
+ledger-and-session-records 1.22. Tony reinstalls interactive-exhibit
+(Settings > Skills) and pastes this version into the Project's
+instructions on claude.ai; the next session that loads it from the
+account confirms its copy reads 1.36 before work that fires it.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.129 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-11-09, evening, when
+v3.135 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================
