@@ -956,6 +956,28 @@ written as the brief asked. Read from the gallery's code with this
 session's edits before it was written.
 (Moved down 2026-11-08, when 1.36 made a fourth entry.)
 
+Earlier: 1.34 | 2026-11-07, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ cba62f22 and gallery @ 49d1bae1. v1.34 (L-515, one
+nested tree: Tony's phone look at part 2, and step 2a's part 3) makes
+the root hold the Sun. ORDER BY DISTANCE, MOONS INCLUDED (Tony,
+2026-11-07: "Order everything after the fixed centre row by distance,
+moons included"; "Strict distance"): a centre's children are placed
+among its shells where each one's orbit as drawn comes nearest, so
+Earth's Moon sits between the magnetotail and the Hill sphere; this
+replaces 1.33's "a centre's children after its shells". NO "NOT BUILT
+YET" AND NO "NO ROOM OR CARDS YET": a body with no centre built shows
+nothing where Centre on would be. THE EARTH ROOM'S SUN LINE reaches 10
+percent past the farthest shell or orbit drawn and follows the ticks.
+THE SUN'S SHELLS IN THE ROOT (ruling 7): rows in the Solar System room,
+unticked on opening, placed among the bodies by distance (placeShells);
+a shell there framed by its whole shape at 10 percent, a body by where
+it is now at 20 (method, written as the brief asked); ?exhibit=sun opens
+that room on the Sun's own opening, at the Sun room's opening frame
+(EXHIBIT_ADDRESSES), and the Sun room's row in EXHIBITS is gone; the
+root's Reset closes the text box. Read from the gallery's code with this
+session's edits before it was written.
+(Moved down 2026-11-08, night, when 1.37 made a fourth entry.)
+
 ## safe-file-editing
 
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons;

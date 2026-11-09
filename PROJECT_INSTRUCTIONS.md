@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.132 | November 8, 2026
+Tony Quintanilla, PE | Claude | v3.133 | November 8, 2026
 
-Cut from c275fcb7 at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 0283834d at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -556,7 +556,7 @@ gallery-cache-builder        1.18 Nightly builder, atomic swap and its
                                   (HORIZONS_CACHE), a drawing named on a room's
                                   row, an ended mission's last day
                                   (fetch_path_last_day)
-interactive-exhibit          1.36 adding or changing an exhibit in
+interactive-exhibit          1.37 adding or changing an exhibit in
                                   interactive.html; any edit to the Sun's
                                   chrome (drawer, nav cluster, frame zoom,
                                   i-panel, HUD, consent, back link); "Earth
@@ -629,7 +629,10 @@ interactive-exhibit          1.36 adding or changing an exhibit in
                                   pictures beside their rows in the Solar
                                   System room's drawer (picture_folds.js,
                                   drawer_row in gallery_metadata.json, the way
-                                  back from a card the room opened)
+                                  back from a card the room opened); the shared
+                                  scene link (the address's show and at,
+                                  scene_address.js, the Scene address check,
+                                  "as shared")
 <!-- SKILL-MANIFEST:END -->
 
 Session-Start Repo Pull and the SHA Round Trip [CRITICAL]
@@ -1323,6 +1326,50 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.133 (November 8, 2026, night): No rule changed in this document.
+ONE skill bump: interactive-exhibit 1.36 -> 1.37 (L-518, the shared
+scene link). THE ADDRESS CARRIES THE ROWS TICKED AND THE MINUTE SHOWN.
+
+WHAT PROMPTED IT. The Claude Code session of Nov 8, night (Claude Opus
+5.5), through the python_work door, built on orrery 0283834d and gallery
+d96b9989, from Tony's prompt of that night and
+documentation/DESIGN_shared_view_rulings_20261029.md, section 7 first,
+read again against the one tree (L-515) and the freeze (L-165); his
+go-ahead to the link described: "Go ahead".
+
+WHAT CHANGED. interactive-exhibit: a new paragraph under What a Room
+Opens On, The Shared Scene Link: ?show= (every row ticked, by key) and
+?at= (the minute shown, UTC), written by the page with replaceState, at
+once when the room opens and the rows at every tick and Reset; a room
+opened from a link draws them, "as shared" under the title, a tap on
+that line bringing the visitor's now; a minute older than the served
+window opens at now and says so, one past it freezes by the freeze's
+rule, a row the room no longer has is named; a minute the tab wrote
+itself opens at now; Reset keeps the room's own opening. Checked by the
+gallery run's new Scene address row and walked
+(walk_scene_address.js). And 1.36's sentence "The Explorer's own page
+keeps its chain", received on L-518 from L-517's close, corrected: it
+draws none since L-517 part 3. Its oldest of four version entries (1.34)
+moved to documentation/SKILL_HISTORIES.md, by the three-entry rule.
+Every sentence was read from the gallery's code with this session's
+edits before it was written.
+
+THE OBLIGATION TRAVELS. This session read interactive-exhibit 1.36 from
+the repo's copy, as a Code session does, so v3.132's obligation (a
+session that loads the account's copy confirms it reads 1.36) is not
+discharged and is overtaken by this one; it read gallery-assembler 1.3,
+safe-file-editing 1.14 and ledger-and-session-records 1.22 in the parts
+the work needed. Tony reinstalls interactive-exhibit (Settings > Skills)
+and pastes this version into the Project's instructions on claude.ai;
+the next session that loads it from the account confirms its copy reads
+1.37 before work that fires it.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.130 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.132 (November 8, 2026): No rule changed in this document. ONE
 skill bump: interactive-exhibit 1.35 -> 1.36 (L-517, the lobby for a
 first-time phone visitor, part 1). THE SOLAR SYSTEM PICTURES SIT BESIDE
@@ -1416,53 +1463,6 @@ work that fires it.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.128 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.130 (November 7, 2026): No rule changed in this document. ONE
-skill bump: interactive-exhibit 1.33 -> 1.34 (L-515, one nested tree:
-Tony's phone look at part 2, and step 2a's part 3). THE ROOT HOLDS THE
-SUN: ITS SHELLS ARE ROWS IN THE SOLAR SYSTEM ROOM, AND A DRAWER LISTS
-EVERYTHING AFTER ITS CENTRE BY DISTANCE.
-
-WHAT PROMPTED IT. The Claude Code session of Nov 7, evening (Claude
-Opus 5.5), through the python_work door, built on orrery cba62f22 and
-gallery 49d1bae1, from Tony's prompt of 17:47 Chicago and
-documentation/COORD_L515_steps1_2a_brief_20261107.md. His phone look
-at part 2: "Sun direction line, Earth room. Make it reach about 10
-percent past the farthest orbit or shell currently drawn"; "Order
-everything after the fixed centre row by distance, moons included ...
-This replaces the rule 'shells, then moons' in interactive-exhibit
-1.33, so correct the skill too"; "Remove 'Not built yet' and 'No room
-or cards yet.'" Asked in the session whether the Moon goes by strict
-distance, which puts it after the magnetotail: "Strict distance". Then
-part 3, his ruling 7.
-
-WHAT CHANGED. interactive-exhibit: a centre's children placed by
-distance among its shells; a body with no centre built shows nothing
-where Centre on would be; the Earth room's Sun line follows the ticks;
-the Sun's shells as rows in the root, placed by distance
-(placeShells); how the root frames a shell beside the planets (method:
-whole, at 10 percent, a body where it is now at 20); ?exhibit=sun as an
-address that opens the root on the Sun's own opening
-(EXHIBIT_ADDRESSES), the Sun room's row in EXHIBITS gone; the root's
-Reset closing the text box. Its oldest of four version entries (1.31)
-moved to documentation/SKILL_HISTORIES.md, by the three-entry rule.
-Every sentence was read from the gallery's code with this session's
-edits before it was written.
-
-THE OBLIGATION TRAVELS. This session loaded interactive-exhibit from
-the account and it read 1.33, as the manifest expected, discharging
-v3.129's obligation; it read gallery-cache-builder 1.18 in the parts its
-prompt named, safe-file-editing 1.14 and ledger-and-session-records
-1.22. Tony reinstalls interactive-exhibit (Settings > Skills) and pastes
-this version into the Project's instructions on claude.ai; the next
-session that loads it from the account confirms its copy reads 1.34
-before work that fires it.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.127 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

@@ -1,21 +1,23 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 8, 2026, night: the coordinating session (Opus), your ruling on the two desktop pictures recorded.
-- Written at orrery e4dc2f9 and gallery d96b998, plus this session's edits.
+Last updated: November 8, 2026, night: the website session (Opus), the shared scene link built.
+- Written at orrery 0283834 and gallery d96b998, plus this session's edits.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - L-517 (the lobby) is closed. Old Solar System addresses land on the room's opening view, as you ruled ("leave it as is").
-> - Its leftovers moved: Featured to a new item, L-519 (Featured's rethink); the pictures' words to the braid, L-520 (old pictures carry old words); adding a live view to Featured to L-518 (the shared link); the two desktop pictures to L-515 (one nested tree).
-> - Your guest book note lost its old "START HERE" link, and the dashboard gained the Picture Folds button its parity check asked for.
-> - The two desktop-only pictures stay as they are until replaced (your ruling, on L-515 (one nested tree)).
+> - The shared scene link is built (L-518 (the shared link)). As you tick, the room writes the bodies and the minute into its own address, so your phone's Share sends the scene.
+> - Opened from a link: the same bodies at the same minute, "as shared" under the title; a tap on that line brings now. Too old for the data: now, and it says so. Past the data: the last day covered, as the freeze does.
+> - Not built: making a Featured card from a link in the gallery editor. It needs a short talk first.
+> - Earlier today's lobby work is closed (L-517 (the lobby)).
 >
-> **Do next:** *The shared scene link (L-518 (the shared link)); then step 2b.*
+> **Do next:** *Your phone look at the shared link (L-518 (the shared link)); then step 2b.*
 >
 > **Needs you now:**
-> - *(do) Commit and push the orrery: this record.*
+> - *(decide) May I add the orrery dashboard's Scene Address button? Its parity check is red without it.*
+> - *(do) Commit and push the website, then the orrery.*
+> - *(do) Reinstall interactive-exhibit 1.37 (Settings > Skills), and paste protocol v3.133 into the Project.*
 > - *(do) Each morning, Pull origin on both, orrery then website, first.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
 
@@ -41,8 +43,7 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
  18.   [goal]  The website does what the desktop orrery does, with a date
                to choose, within the range the data covers.
   l.   [done]  L-517 (the lobby): closed Nov 8 on your phone look.
-               << moved this session
-  s.   [NOW]   *The shared scene link (L-518 (the shared link)), with your Featured ask.*
+  s.   [NOW]   *The shared scene link (L-518 (the shared link)): built Nov 8; your phone look.*
                << moved this session
   b.   [beside] Housekeeping: L-424, L-425, L-426 (the checkers' three);
                L-423 (the website's checks) item 3; L-357 (stale gallery
@@ -51,6 +52,7 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
 ## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings; a line leaves once it is habit, or a skill carries it.
+- A shared link carries the bodies ticked and the maker's minute, written by the page itself; past the data it freezes, like any room (Oct 29; Nov 8; L-518 (the shared link)).
 - The lobby asks one thing first; Featured stays as it is; saved pictures sit beside their body's row in the drawer; the Solar System page goes, its old addresses opening the live room on its opening view, not on a group (Nov 8; L-517 (the lobby)).
 - Past the dates its data covers, a room draws the last day covered and says so; never blank (Nov 7, 12:53; L-165 (site continuity)).
 - What JPL measures a thing around is where it sits in the website's
@@ -60,14 +62,11 @@ Standing rulings; a line leaves once it is habit, or a skill carries it.
 - Pluto: the Solar System row stays the barycentre named Pluto; the Pluto
   room draws Pluto, Charon and the other moons around the barycentre;
   the orrery's Pluto-centred view goes (Nov 6; L-150 (trusting a near-equal pair)).
-- From the talk (Nov 3): the words have one home, the orrery's export;
-  a difference is chosen (a reason, no end) or open (an end and an
-  item); the check covers only what both draw; a spacecraft's span is
-  JPL's first and last day.
 
 ## Deferred  **>> UPDATED THIS SESSION**
 
 Waiting behind other work; a line leaves when picked up.
+- The gallery editor making a Featured card from a shared link: a short talk after your phone look (Nov 8; L-518 (the shared link)).
 - Featured's rethink, with the gallery editor's future: after the cards are piped into the tree (Nov 8; L-519 (Featured's rethink)).
 - The saved pictures' words, which have no source: kept as made until the braid reaches them (Nov 8; L-520 (old pictures carry old words)).
 - The Moon's Go To opening the orbit's box: the Mars website session (Nov 7; L-515 (one nested tree)).
@@ -96,14 +95,14 @@ Waiting behind other work; a line leaves when picked up.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261108T175822Z, nightly, ok, no retry (gallery swap log at 39900d7, read Nov 8).
-- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at orrery 68f7eb5, its last change).
+- Last cache build: 20261108T175822Z, nightly, ok, no retry (gallery swap log at e9d0c5e, read Nov 8, night).
+- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at orrery e4dc2f9, its last change).
 - This page's date and the ledger's newest stamp: both Nov 8. Agree.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
 Decisions, one at a time:
-- None open.
+- The orrery dashboard's Scene Address button (L-518 (the shared link)); in the box above.
 
 At the next design talk:
 - How obsolete code is treated, and when it goes (L-509 (obsolete
@@ -122,8 +121,8 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- This session: L-517 (the lobby), closed, its last entry naming
-  where each leftover went; L-519 and L-520, new.
+- This session: L-518 (the shared link), its build entry; the design,
+  `DESIGN_shared_view_rulings_20261029.md`.
 - The tree: L-515 (one nested tree), `COORD_L515_steps1_2a_brief_20261107.md`.
 - The talk's rulings: `DESIGN_L484_consistency_rulings_20261103.md`.
 - The door: `documentation/python_work_door/`, and L-499 (kinds of session).

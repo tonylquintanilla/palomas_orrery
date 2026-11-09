@@ -4438,6 +4438,56 @@ resident.
 (Moved down from the resident protocol on 2026-11-08 when
 v3.132 made a fourth entry.)
 
+v3.130 (November 7, 2026): No rule changed in this document. ONE
+skill bump: interactive-exhibit 1.33 -> 1.34 (L-515, one nested tree:
+Tony's phone look at part 2, and step 2a's part 3). THE ROOT HOLDS THE
+SUN: ITS SHELLS ARE ROWS IN THE SOLAR SYSTEM ROOM, AND A DRAWER LISTS
+EVERYTHING AFTER ITS CENTRE BY DISTANCE.
+
+WHAT PROMPTED IT. The Claude Code session of Nov 7, evening (Claude
+Opus 5.5), through the python_work door, built on orrery cba62f22 and
+gallery 49d1bae1, from Tony's prompt of 17:47 Chicago and
+documentation/COORD_L515_steps1_2a_brief_20261107.md. His phone look
+at part 2: "Sun direction line, Earth room. Make it reach about 10
+percent past the farthest orbit or shell currently drawn"; "Order
+everything after the fixed centre row by distance, moons included ...
+This replaces the rule 'shells, then moons' in interactive-exhibit
+1.33, so correct the skill too"; "Remove 'Not built yet' and 'No room
+or cards yet.'" Asked in the session whether the Moon goes by strict
+distance, which puts it after the magnetotail: "Strict distance". Then
+part 3, his ruling 7.
+
+WHAT CHANGED. interactive-exhibit: a centre's children placed by
+distance among its shells; a body with no centre built shows nothing
+where Centre on would be; the Earth room's Sun line follows the ticks;
+the Sun's shells as rows in the root, placed by distance
+(placeShells); how the root frames a shell beside the planets (method:
+whole, at 10 percent, a body where it is now at 20); ?exhibit=sun as an
+address that opens the root on the Sun's own opening
+(EXHIBIT_ADDRESSES), the Sun room's row in EXHIBITS gone; the root's
+Reset closing the text box. Its oldest of four version entries (1.31)
+moved to documentation/SKILL_HISTORIES.md, by the three-entry rule.
+Every sentence was read from the gallery's code with this session's
+edits before it was written.
+
+THE OBLIGATION TRAVELS. This session loaded interactive-exhibit from
+the account and it read 1.33, as the manifest expected, discharging
+v3.129's obligation; it read gallery-cache-builder 1.18 in the parts its
+prompt named, safe-file-editing 1.14 and ledger-and-session-records
+1.22. Tony reinstalls interactive-exhibit (Settings > Skills) and pastes
+this version into the Project's instructions on claude.ai; the next
+session that loads it from the account confirms its copy reads 1.34
+before work that fires it.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.127 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-11-08, night, when
+v3.133 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

@@ -761,6 +761,10 @@ Module updated: November 8, 2026, night, with Anthropic's Claude Opus 5.5
 (the same session: L-517 closed, its loose ends re-homed, L-519 and
 L-520 opened, the dashboard's Picture Folds button added on L-423), built
 on orrery 789c1ec8 with gallery 39900d75.
+Module updated: November 8, 2026, night, with Anthropic's Claude Opus 5.5
+(the website Code session for L-518, the shared scene link: built, its
+record on L-518; the interactive-exhibit bump to 1.37 and protocol
+v3.133), built on orrery 0283834d with gallery d96b9989.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -1685,11 +1689,61 @@ nested tree); L-303 (the card model); gallery `index.html`,
   Explorer, like every room under the Solar System door, draws no chain
   at the top. A description, not a rule: corrected in the skill's next
   version, which this build is the next to open.
-**Gap:** the build (a gallery Code session, small, per section 7 of the
-design record, read again against L-515's tree), with the skill
-sentence received above, and Tony's Mode 5: a scene shared to himself
-and opened on another device; and, in the same build, Tony's ask: the
-gallery editor taking a scene's address as a Featured card.
+- **Built 2026-11-08, night** (the Claude Code session, Claude Opus 5.5,
+  through the python_work door), on orrery 0283834d and gallery
+  d96b9989, from Tony's prompt and section 7 of the design record. The
+  link was described to him before building; his word: "Go ahead".
+  - THE ADDRESS: `interactive.html?exhibit=solar-system&show=tno_2026_ed138,pluto_barycenter&at=2026-11-08T21:14Z`.
+    The two placeholder names are kept: `show`, every row ticked by its
+    key (a body's slug, a shell's served shell key, else the row's name
+    with dashes; the Solar System room in tick order); `at`, the minute
+    shown, UTC. Written by the page with replaceState: `at` once when
+    the room opens, `show` at every tick and Reset. No Share button.
+  - READ AGAINST THE TREE: a scene inside Earth's centre carries
+    `exhibit=earth`, its shells and the Moon by key; `?exhibit=sun`
+    keeps its address. Earth's own opening reads
+    `show=crust,earth-rotation-axis-and-equator,earth-sun-direction,earth-terminator-day-night-line`,
+    the guides by name, since they serve no shell key.
+  - READ AGAINST THE FREEZE: a shared minute past the served window's
+    end freezes at its last minute in the freeze's words (L-165), not
+    "as shared", where the design talk had said "open at now". A minute
+    older than the window's start opens at now and says so, as the
+    design said. Method, told to Tony before building.
+  - SETTLED AS METHOD in the build: a minute the tab wrote itself is
+    remembered in sessionStorage, so a reload or Back opens at now and
+    not "as shared"; Reset puts back the room's own opening, not the
+    link's, in every room (the root's Reset already did); what a link
+    could not show goes in a box with the text box's look, gone at the
+    next tap, and at the top of the i panel; the two sentences that say
+    "today" take the frozen words for a shared minute; the line under
+    the title is underlined and takes the tap.
+  - Files: gallery `gallery/scene_address.js` (new, the logic),
+    `interactive.html` (the wiring), `documentation/smoke_scene_address.js`
+    (new, the gallery run's Scene address row, gates, its self-test
+    breaking the file three ways), `gallery_maintenance_run.py` (the
+    row, and the file on the live check's list),
+    `tools/headless/walk_scene_address.js` (new, eight steps in both
+    rooms, 38 checks; fails on a page planted without the rows applied).
+    The website's offline run: "41 of 41 gating checkers passed". The
+    drawer walk's three failures are the same on the base page (already
+    on L-423).
+  - The skill sentence received above is corrected at interactive-exhibit
+    1.37, with the address paragraph; protocol v3.133.
+  - NOT BUILT, on purpose: the gallery editor taking a scene's address as
+    a Featured card (Tony's ask, above). It is not designed; left for a
+    short talk once his phone look has seen the link work.
+  - Found: the orrery's Dashboard parity check goes red on the new Scene
+    address check until the orrery dashboard has its button. The
+    dashboard is an orrery file, so it waits for Tony's word.
+**Gap:** Tony's phone look (Mode 5): tick a scene on the phone, Share it
+to himself, open it on another device -- the same bodies at the same
+minute, "as shared" and "tap for now" under the title, a tap bringing
+now; Earth the same after Centre on Earth; Reset; a reload opening at
+now; and the words of the two notes. Then the editor's half (a Featured
+card from an address): designed, then built. The orrery dashboard's
+Scene Address button, on Tony's word.
+- Tony-action (decide): the phone look.
+- Tony-action (decide): the dashboard's Scene Address button.
 **Ref:** `documentation/DESIGN_shared_view_rulings_20261029.md`;
 `documentation/HANDOFF_coordination_20261028_29.md`; L-515 (one nested
 tree); L-165 (site continuity); L-503 (the belt on the website).
