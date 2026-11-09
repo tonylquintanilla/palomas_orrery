@@ -390,9 +390,11 @@ The Reset bug you found was mine, and it's fixed: after a shared link, Reset now
 - Both Reset walks pass, and the drawer walk shows only its three old failures.
 
 **Phone look**
-1. Open a shared link in Earth with the Moon ticked, and press Reset. The view should shrink back to Earth.
-2. Do the same in the Solar System room with Ikeya-Seki: the ruler should return to the inner-planet scale.
-3. Read the two notes. The missing-body note shows if you add `,planet9` to `show=` in a link. The other appears on a link whose `at=` date is more than about three months old, for example `at=2026-06-01T00:00Z`.
+1. Open a shared link in Earth with the Moon ticked, and press Reset. The view should shrink back to Earth. -- yes
+2. Do the same in the Solar System room with Ikeya-Seki: the ruler should return to the inner-planet scale. -- yes
+3. Read the two notes. The missing-body note shows if you add `,planet9` to `show=` in a link.  -- not tested
+4. The other appears on a link whose `at=` date is more than about three months old, for example `at=2026-06-01T00:00Z`. -- not tested
+   -- question on dates: let's say i receive a link and i do not open it until now is past the trust window of the scene, say past 88 days for Mercury, will the scene display? will it update using the latest fetch or the original fetch? or lets say, i open the link just a week later, and update, will it update using the newest fetch even if the original fetch works? 
 
 If those pass, L-518 (the shared scene link) can close. The gallery editor's Featured card from a link then goes to a short design talk.
 
@@ -411,10 +413,10 @@ Orrery:
 The room skill isn't bumped again: you've installed 1.37, and its line on Reset still describes the fix.
 
 **Run order**
-1. In GitHub Desktop, commit and push the website, 
-   1. then the orrery. The orrery's change list will also show your run record copy, which is yours.
-2. Do the phone look above.
+1. In GitHub Desktop, commit and push the website, -- 6a1537161aeda9882c549d4b269881ab148a6fed
+   1. then the orrery. The orrery's change list will also show your run record copy, which is yours. -- 4095e301fe54b2c009f58d995650cfbfb0fb7148
+2. Do the phone look above. -- done
 
 **Tony-actions**
-- (do) Commit and push both repositories.
-- (decide) The phone look at Reset, and whether L-518 closes.
+- (do) Commit and push both repositories. -- done
+- (decide) The phone look at Reset, and whether L-518 closes. -- see notes. 

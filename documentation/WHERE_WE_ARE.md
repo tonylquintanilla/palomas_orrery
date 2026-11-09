@@ -1,23 +1,22 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 8, 2026, late night: the website session (Opus), your look at the shared link, and Reset's frame fixed.
-- Written at orrery 76cca2a and gallery 5817c55, plus this session's edits.
+Last updated: November 8, 2026, late night: the website session (Opus), the shared link closed.
+- Written at orrery 4095e30 and gallery 6a15371, plus this session's edits.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The shared scene link is built (L-518 (the shared link)). As you tick, the room writes the bodies and the minute into its own address, so your phone's Share sends the scene.
+> - L-518 (the shared link) is closed, on your word. As you tick, the room writes the bodies and the minute into its own address, so your phone's Share sends the scene.
 > - Opened from a link: the same bodies at the same minute, and a third line under the title, "Tap to update.", which brings now. Too old for the data: now, and it says so. Past the data: the last day covered, as the freeze does.
-> - Not built: making a Featured card from a link in the gallery editor. It needs a short talk first.
-> - Your look passed: sending, "Tap to update." and where the line sits. Your bug is fixed: after a shared link, Reset now comes back to the room's own frame (the Moon, Ikeya-Seki). It was mine, and an older return from "Centre on" had it too.
+> - Making a Featured card from a link in the gallery editor went back to L-519 (Featured's rethink), for its talk.
+> - Your look passed: sending, "Tap to update.", where the line sits, and Reset after a link (the Moon, Ikeya-Seki), fixed.
+> - Your dates question, answered on L-518: a link is always redrawn from the latest fetch; older than about 88 days, it opens at now and says so.
 >
-> **Do next:** *Your phone look at the shared link (L-518 (the shared link)); then step 2b.*
+> **Do next:** *Step 2b of the one tree (L-515 (one nested tree)).*
 >
 > **Needs you now:**
-> - *(decide) Your phone look at Reset after a shared link, and the two notes' words; then L-518 (the shared link) can close.*
-> - *(do) Commit and push the website, then the orrery.*
-> - *(do) Reinstall interactive-exhibit 1.37 (Settings > Skills), and paste protocol v3.133 into the Project.*
+> - *(do) Commit and push the orrery: this record.*
 > - *(do) Each morning, Pull origin on both, orrery then website, first.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
 
@@ -43,7 +42,7 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
  18.   [goal]  The website does what the desktop orrery does, with a date
                to choose, within the range the data covers.
   l.   [done]  L-517 (the lobby): closed Nov 8 on your phone look.
-  s.   [NOW]   *The shared scene link (L-518 (the shared link)): built Nov 8; your phone look.*
+  s.   [done]  The shared scene link (L-518 (the shared link)): closed Nov 8 on your phone look.
                << moved this session
   b.   [beside] Housekeeping: L-424, L-425, L-426 (the checkers' three);
                L-423 (the website's checks) item 3; L-357 (stale gallery
@@ -66,7 +65,7 @@ Standing rulings; a line leaves once it is habit, or a skill carries it.
 ## Deferred  **>> UPDATED THIS SESSION**
 
 Waiting behind other work; a line leaves when picked up.
-- The gallery editor making a Featured card from a shared link: a short talk after your phone look (Nov 8; L-518 (the shared link)).
+- The gallery editor making a Featured card from a shared link: with Featured's rethink (Nov 8; L-519 (Featured's rethink)).
 - Featured's rethink, with the gallery editor's future: after the cards are piped into the tree (Nov 8; L-519 (Featured's rethink)).
 - The saved pictures' words, which have no source: kept as made until the braid reaches them (Nov 8; L-520 (old pictures carry old words)).
 - The Moon's Go To opening the orbit's box: the Mars website session (Nov 7; L-515 (one nested tree)).
@@ -121,8 +120,8 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- This session: L-518 (the shared link), its build entry; the design,
-  `DESIGN_shared_view_rulings_20261029.md`.
+- This session: L-518 (the shared link), closed, its last entry naming
+  where each leftover went; the design, `DESIGN_shared_view_rulings_20261029.md`.
 - The tree: L-515 (one nested tree), `COORD_L515_steps1_2a_brief_20261107.md`.
 - The talk's rulings: `DESIGN_L484_consistency_rulings_20261103.md`.
 - The door: `documentation/python_work_door/`, and L-499 (kinds of session).

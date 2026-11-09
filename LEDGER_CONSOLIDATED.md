@@ -767,7 +767,9 @@ record on L-518; the interactive-exhibit bump to 1.37 and protocol
 v3.133), built on orrery 0283834d with gallery d96b9989.
 Module updated: November 8, 2026, late night, with Anthropic's Claude Opus
 5.5 (the same session: Tony's phone look at the shared link and the Reset
-frame fixed, on L-518), built on orrery 76cca2a1 with gallery 5817c553.
+frame fixed, on L-518; then L-518 closed on his word, its loose ends to
+L-519 and L-515), built on orrery 76cca2a1 with gallery 5817c553, closed
+at orrery 4095e301 with gallery 6a153716.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -985,7 +987,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*259 live items; 243 need attention (`!`); 165 RICE-scored; 254 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*258 live items; 242 need attention (`!`); 165 RICE-scored; 255 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1155,7 +1157,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-514 | The Mars room: Mars, Phobos and Deimos (gallery + orrery, a planet room; road stage 15) | OPEN | -- | 2026-11-06 |
 | ! | L-515 | One nested tree in place of isolated rooms (gallery, the room system; design) | OPEN | -- | 2026-11-08 |
 | ! | L-516 | Renew palomasorrery.com at Porkbun before 2027-02-13 (legacy; Tony's account) | OPEN | -- | 2026-11-07 |
-| ! | L-518 | The shared scene link: the address carries the ticked bodies and the minute (gallery, the Solar System room; designed, not built) | OPEN | -- | 2026-11-08 |
 | ! | L-519 | Featured's rethink: the existing cards piped into the one tree (gallery, the lobby and the gallery editor; not designed) | OPEN | -- | 2026-11-08 |
 | ! | L-520 | Old pictures carry old words: the saved pictures' titles and descriptions have no source (gallery, the saved pictures; the braid) | OPEN | -- | 2026-11-08 |
 
@@ -1560,6 +1561,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-505 | The axis ticks and the ruler: dots on the axis lines, a ruler for the grid chip, no edge numbers (gallery, every room's frame) | DONE | -- | 2026-11-02 |
 |  | L-513 | The Moon's standards: its words, link, period and uncertainty, served by the orrery (orrery + gallery, objects; road stage 14) | DONE | -- | 2026-11-06 |
 |  | L-517 | The lobby for a first-time phone visitor: one door first, the pictures into the tree (gallery, lobby and drawer; design) | DONE | -- | 2026-11-08 |
+|  | L-518 | The shared scene link: the address carries the ticked bodies and the minute (gallery, every room of the tree; built, closed) | DONE | -- | 2026-11-08 |
 
 ### W.Done -- Web Publication track, closed items
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1643,193 +1645,19 @@ as an archive of the prioritization thinking -- no cleanup on close.
   same night ("Remove the ... link from my pinned guest book note") the
   link was removed from his entry in data/guestbook.json; the note's
   words, date and pin are unchanged.
+- **Received 2026-11-08, late night, from L-518 at its close** (the
+  shared scene link, built and closed): Tony's ask of 2026-11-08, 15:40,
+  "work on the gallery editor so I can add new views from the interactive
+  to the Featured views using their specific url". The specific address
+  now exists: `interactive.html?exhibit=<room>&show=<rows>&at=<minute>`,
+  written by the room itself (interactive-exhibit 1.37, The Shared Scene
+  Link). Not designed: part of this talk.
 **Gap:** a design talk on what Featured is for in the one tree, and with
 it the gallery editor's future; then a build.
 **Ref:** L-517 (the lobby for a first-time phone visitor); L-518 (the
 shared scene link); L-520 (old pictures carry old words); L-515 (one
 nested tree); L-303 (the card model); gallery `index.html`,
 `gallery/gallery_metadata.json`, `tools/gallery_editor.py`.
-
-#### [L-518] The shared scene link: the address carries the ticked bodies and the minute (gallery, the Solar System room; designed, not built)
-<!-- L:518 status:OPEN upd:2026-11-08 section:A flag: rice: -->
-- **Opened 2026-11-08, 11:03 Chicago**, on Tony's question in the lobby
-  design talk: "did we build the specific scene url's that can be
-  shared?" Not built: read at gallery 23440b79, neither
-  `interactive.html` nor `gallery/*.js` reads a ticked-rows or a minute
-  parameter from the address.
-- **Designed and ruled Oct 29, 13:07 to 13:27**, never given an item
-  (the coordination handoff said "item to open"; the ledger's Oct 29
-  evening stamp, "the shared link not built, no item opened"). The
-  record is `documentation/DESIGN_shared_view_rulings_20261029.md`.
-  Tony's ask, Oct 28, 19:54: "When we compose a scene, like ED138 and
-  Pluto, and we forward it, is there a way to retain the scene?" The
-  rulings: a shared link carries the ticked bodies and the minute shown,
-  the maker's minute, written into the address by the page itself; a
-  shared moment is the first form of choosing a date. The address, as
-  sketched there:
-  `interactive.html?exhibit=solar-system&show=2026-ed138,pluto&at=2026-10-29T04:27Z`
-  (both parameter names placeholders for the build).
-- **What has changed since, for the build:** the rooms are one tree
-  (L-515), so a shared scene inside Earth's centre carries that centre
-  too; and a minute past the served window now draws the window's last
-  day and says so (the freeze, L-165, gallery `scene_moment.js`), which
-  answers what an old shared link shows.
-- **PLACED, Tony, 11:54:** right after the lobby (L-517's part 2),
-  before L-515's step 2b. The coordinator's reason, which he agreed to:
-  visitors arriving from Instagram are the ones who would share a scene.
-- **Tony's ask, 2026-11-08, 15:40 Chicago**, at the go-ahead for L-517's
-  part 2 (the lobby): "looking forward we should work on the gallery
-  editor so I can add new views from the interactive to the Featured
-  views using their specific url." Recorded here because the specific
-  address is what this item builds. The editor's half, a Featured card
-  made from a live address, sat on L-519 (Featured's rethink) and
-  came back here on Tony's word, 2026-11-08, night, as part of
-  this build: "this is needed and likely is part of the specific URL's."
-  Not designed yet.
-- **Received 2026-11-08, night, from L-517 at its close** (the lobby for
-  a first-time phone visitor): interactive-exhibit 1.36 says "The
-  Explorer's own page keeps its chain"; since L-517's part 3 the
-  Explorer, like every room under the Solar System door, draws no chain
-  at the top. A description, not a rule: corrected in the skill's next
-  version, which this build is the next to open.
-- **Built 2026-11-08, night** (the Claude Code session, Claude Opus 5.5,
-  through the python_work door), on orrery 0283834d and gallery
-  d96b9989, from Tony's prompt and section 7 of the design record. The
-  link was described to him before building; his word: "Go ahead".
-  - THE ADDRESS: `interactive.html?exhibit=solar-system&show=tno_2026_ed138,pluto_barycenter&at=2026-11-08T21:14Z`.
-    The two placeholder names are kept: `show`, every row ticked by its
-    key (a body's slug, a shell's served shell key, else the row's name
-    with dashes; the Solar System room in tick order); `at`, the minute
-    shown, UTC. Written by the page with replaceState: `at` once when
-    the room opens, `show` at every tick and Reset. No Share button.
-  - READ AGAINST THE TREE: a scene inside Earth's centre carries
-    `exhibit=earth`, its shells and the Moon by key; `?exhibit=sun`
-    keeps its address. Earth's own opening reads
-    `show=crust,earth-rotation-axis-and-equator,earth-sun-direction,earth-terminator-day-night-line`,
-    the guides by name, since they serve no shell key.
-  - READ AGAINST THE FREEZE: a shared minute past the served window's
-    end freezes at its last minute in the freeze's words (L-165), not
-    "as shared", where the design talk had said "open at now". A minute
-    older than the window's start opens at now and says so, as the
-    design said. Method, told to Tony before building.
-  - SETTLED AS METHOD in the build: a minute the tab wrote itself is
-    remembered in sessionStorage, so a reload or Back opens at now and
-    not "as shared"; Reset puts back the room's own opening, not the
-    link's, in every room (the root's Reset already did); what a link
-    could not show goes in a box with the text box's look, gone at the
-    next tap, and at the top of the i panel; the two sentences that say
-    "today" take the frozen words for a shared minute; the line under
-    the title is underlined and takes the tap.
-  - Files: gallery `gallery/scene_address.js` (new, the logic),
-    `interactive.html` (the wiring), `documentation/smoke_scene_address.js`
-    (new, the gallery run's Scene address row, gates, its self-test
-    breaking the file three ways), `gallery_maintenance_run.py` (the
-    row, and the file on the live check's list),
-    `tools/headless/walk_scene_address.js` (new, eight steps in both
-    rooms, 38 checks; fails on a page planted without the rows applied).
-    The website's offline run: "41 of 41 gating checkers passed". The
-    drawer walk's three failures are the same on the base page (already
-    on L-423).
-  - The skill sentence received above is corrected at interactive-exhibit
-    1.37, with the address paragraph; protocol v3.133.
-  - NOT BUILT, on purpose: the gallery editor taking a scene's address as
-    a Featured card (Tony's ask, above). It is not designed; left for a
-    short talk once his phone look has seen the link work.
-  - Found: the orrery's Dashboard parity check goes red on the new Scene
-    address check until the orrery dashboard has its button. The
-    dashboard is an orrery file, so it waits for Tony's word.
-- **Tony's first phone look, 2026-11-08, night**, in chat, before the
-  push was read here (his words; he "will respond more later"):
-  - On the line under the title: "not clear what 'tap for now' means or
-    does. Also this pushes the text down into the scene. Consider
-    removing."
-  - On the tap: "I don't see any change. 5 minutes after changing. But
-    this may be confusing the recipient. The served scene is not at the
-    time sent or now rather the time fetched."
-  - On the reload: "reloading the sent page does not change it.
-    Reloading the page from the website updates the time however we
-    should consider changing the time to the time fetched not the time
-    served or loaded. Until we have a date picker."
-  - On the dashboard button: "yes". Added the same night (orrery
-    `palomas_orrery_dashboard.py`, the Scene Address button and its short
-    line); Dashboard parity read "PASS".
-  - Read here, not yet acted on. A reload of a RECEIVED link keeps the
-    sender's minute by design (only a minute the tab wrote itself opens
-    at now). The positions are worked out for the minute under the
-    title, from the orbits fetched at the nightly build, so five minutes
-    moves nothing a visitor can see; whether the tap registered at all
-    on his phone is not known. Showing the fetch time instead of the
-    opening minute would change Tony's ruling of 2026-09-26 (a room
-    draws the minute it is opened) in every room, and with it what `at`
-    is for: a design question for him, not built.
-- **Tony's ruling, 2026-11-08, night**, in chat, on the minute and the
-  words: "I misunderstood. I did not realize that you were propagating
-  the scene from fetch to now. That makes sense." So a room keeps
-  drawing the minute it is opened (his ruling of 2026-09-26 stands), and
-  a shared link keeps the sender's minute. On the tap: "The tap on the
-  line however does not bring it to now." On the words: "let's try
-  keeping the original lines and adding a third line, 'Tap to update.'
-  With an update to now link and the now time displayed. Note that a
-  simple reload does not work."
-  - BUILT the same night: the line under the title is the moment alone
-    again; under it a third line, "Tap to update.", a link of the page's
-    own (not Plotly's title text, whose tap did not register), placed
-    under the title wherever it sits and again when the screen turns. It
-    opens the room without the minute in the address, the rows kept, so
-    the line under the title then shows the time now; it is not a plain
-    reload. No third line for a frozen room, a minute too old for the
-    data, or the visitor's own page. Files: gallery
-    `interactive.html`, `gallery/scene_address.js`,
-    `documentation/smoke_scene_address.js` (21 wiring points),
-    `tools/headless/walk_scene_address.js` (39 checks; fails on a page
-    planted without the line). interactive-exhibit 1.37 and protocol
-    v3.133 reworded within the same bump.
-- **Tony's phone look at "Tap to update.", 2026-11-08, night**, read
-  from his copy `documentation/WHERE_WE_ARE_11-8-26_2053_run_record.md`
-  (website pushed at 5817c553, orrery at 76cca2a1): a shared scene opened
-  on another device with the line under the date, "-- yes"; tapped, the
-  room at now with the same bodies and the time now, "-- yes"; where the
-  line sits, upright and sideways, "-- correct"; Earth after Centre on
-  Earth, "sending and updating works correctly. however i found a
-  possible bug: when i tick the moon's orbit, and then press reset, the
-  scene resets but the scale does not. can you check? the same thing
-  happens in the solar room: if i tick comet ikeya-seki and the press
-  reset, the scene resets but the scale stays at 20-40 au."
-  - FOUND: this build's bug, and an older one of the same kind. Reset
-    put back the room's own ticks and framed them with the frame the
-    page OPENED on (navArrivalR). A room opened from a link -- and every
-    reload, whose address now carries the ticks -- opens framed on the
-    link's rows, so Reset after the Moon kept the Moon's frame, and after
-    Ikeya-Seki its 93 AU. The root had the same fault since L-515 on a
-    return from Centre on with kept ticks. Reproduced on the live site
-    in the desktop app's browser (real Plotly: Earth opened with
-    `show=crust,moon`, Reset left the range at 0.00295 AU) and headless.
-  - FIXED: Reset frames what it has just put back, by the room's own
-    rule, the farthest thing drawn each by its own measure and margin
-    (`sunTicksFrameR` in interactive.html; `sunReset` hands it to
-    `navHome`, and the root's `ssHome` uses it). A plain opening's Reset
-    frame is unchanged to the last digit (Earth 0.0000592 AU, the root
-    1.914 AU, ?exhibit=sun 0.007883 AU). Home keeps the frame the room
-    opened on, as before; in Earth after a link that is the link's frame
-    (noted, not changed).
-  - CHECKED: the Scene address check holds both wiring points (23); the
-    walk's steps 7 and 9 (45 checks) open from a link and from kept
-    ticks, Reset, and compare with the plain opening's frame; run on the
-    pushed page they fail three times, on the fix they pass. Both Reset
-    walks pass (33 checks each); the website run "41 of 41 gating
-    checkers passed".
-  - interactive-exhibit 1.37 is not bumped again: Tony has installed it,
-    and its sentence on Reset ("the opening frame and angle") still
-    describes the fix. The next version may say how the frame is found.
-**Gap:** Tony's phone look at Reset after a shared link (Earth with the
-Moon, the Solar System room with Ikeya-Seki); the words of the two notes
-(a link too old for the data, a body the room no longer has). Then
-L-518 closes on his word, and the editor's half (a Featured card from an
-address) goes to a short design talk.
-- Tony-action (decide): the phone look at Reset, and closing L-518.
-**Ref:** `documentation/DESIGN_shared_view_rulings_20261029.md`;
-`documentation/HANDOFF_coordination_20261028_29.md`; L-515 (one nested
-tree); L-165 (site continuity); L-503 (the belt on the website).
 
 #### [L-516] Renew palomasorrery.com at Porkbun before 2027-02-13 (legacy; Tony's account)
 <!-- L:516 status:OPEN upd:2026-11-07 section:A flag: rice: -->
@@ -2739,6 +2567,13 @@ tree); L-165 (site continuity); L-503 (the belt on the website).
     `documentation/WHERE_WE_ARE_11-8-26_1842_run_record.md`): "okay for
     legacy pictures. no change needed until replaced." Both stay as they
     are, desktop only, until their encounters replace them.
+- **Received 2026-11-08, late night, from L-518 at its close** (the
+  shared scene link): for interactive-exhibit's next version, which step
+  2b is next to open. Reset now frames what it puts back, by the room's
+  own rule (`sunTicksFrameR` in interactive.html; the root's `ssHome`,
+  `sunReset` through `navHome`), not the frame the page opened on; the
+  skill's "the opening frame and angle" may say so. A description, not a
+  wrong instruction.
 **Gap:** step 2b; L-514 (the Mars room) waits for step 3. Carried from
 his look at part 3: the Moon's Go To box (the Mars website session).
 The lobby moved to L-517 (the lobby for a first-time phone visitor).
@@ -34783,6 +34618,228 @@ card model, one viewer per orientation); gallery `index.html`,
 `gallery/gallery_config.json`, `gallery/gallery_metadata.json`,
 `gallery/solar_system_drawer.js`; L-519 (Featured's rethink) and L-520
 (old pictures carry old words), which took its loose ends.
+
+#### [L-518] The shared scene link: the address carries the ticked bodies and the minute (gallery, every room of the tree; built, closed)
+<!-- L:518 status:DONE upd:2026-11-08 section:C flag: rice: -->
+- **Opened 2026-11-08, 11:03 Chicago**, on Tony's question in the lobby
+  design talk: "did we build the specific scene url's that can be
+  shared?" Not built: read at gallery 23440b79, neither
+  `interactive.html` nor `gallery/*.js` reads a ticked-rows or a minute
+  parameter from the address.
+- **Designed and ruled Oct 29, 13:07 to 13:27**, never given an item
+  (the coordination handoff said "item to open"; the ledger's Oct 29
+  evening stamp, "the shared link not built, no item opened"). The
+  record is `documentation/DESIGN_shared_view_rulings_20261029.md`.
+  Tony's ask, Oct 28, 19:54: "When we compose a scene, like ED138 and
+  Pluto, and we forward it, is there a way to retain the scene?" The
+  rulings: a shared link carries the ticked bodies and the minute shown,
+  the maker's minute, written into the address by the page itself; a
+  shared moment is the first form of choosing a date. The address, as
+  sketched there:
+  `interactive.html?exhibit=solar-system&show=2026-ed138,pluto&at=2026-10-29T04:27Z`
+  (both parameter names placeholders for the build).
+- **What has changed since, for the build:** the rooms are one tree
+  (L-515), so a shared scene inside Earth's centre carries that centre
+  too; and a minute past the served window now draws the window's last
+  day and says so (the freeze, L-165, gallery `scene_moment.js`), which
+  answers what an old shared link shows.
+- **PLACED, Tony, 11:54:** right after the lobby (L-517's part 2),
+  before L-515's step 2b. The coordinator's reason, which he agreed to:
+  visitors arriving from Instagram are the ones who would share a scene.
+- **Tony's ask, 2026-11-08, 15:40 Chicago**, at the go-ahead for L-517's
+  part 2 (the lobby): "looking forward we should work on the gallery
+  editor so I can add new views from the interactive to the Featured
+  views using their specific url." Recorded here because the specific
+  address is what this item builds. The editor's half, a Featured card
+  made from a live address, sat on L-519 (Featured's rethink) and
+  came back here on Tony's word, 2026-11-08, night, as part of
+  this build: "this is needed and likely is part of the specific URL's."
+  Not designed yet.
+- **Received 2026-11-08, night, from L-517 at its close** (the lobby for
+  a first-time phone visitor): interactive-exhibit 1.36 says "The
+  Explorer's own page keeps its chain"; since L-517's part 3 the
+  Explorer, like every room under the Solar System door, draws no chain
+  at the top. A description, not a rule: corrected in the skill's next
+  version, which this build is the next to open.
+- **Built 2026-11-08, night** (the Claude Code session, Claude Opus 5.5,
+  through the python_work door), on orrery 0283834d and gallery
+  d96b9989, from Tony's prompt and section 7 of the design record. The
+  link was described to him before building; his word: "Go ahead".
+  - THE ADDRESS: `interactive.html?exhibit=solar-system&show=tno_2026_ed138,pluto_barycenter&at=2026-11-08T21:14Z`.
+    The two placeholder names are kept: `show`, every row ticked by its
+    key (a body's slug, a shell's served shell key, else the row's name
+    with dashes; the Solar System room in tick order); `at`, the minute
+    shown, UTC. Written by the page with replaceState: `at` once when
+    the room opens, `show` at every tick and Reset. No Share button.
+  - READ AGAINST THE TREE: a scene inside Earth's centre carries
+    `exhibit=earth`, its shells and the Moon by key; `?exhibit=sun`
+    keeps its address. Earth's own opening reads
+    `show=crust,earth-rotation-axis-and-equator,earth-sun-direction,earth-terminator-day-night-line`,
+    the guides by name, since they serve no shell key.
+  - READ AGAINST THE FREEZE: a shared minute past the served window's
+    end freezes at its last minute in the freeze's words (L-165), not
+    "as shared", where the design talk had said "open at now". A minute
+    older than the window's start opens at now and says so, as the
+    design said. Method, told to Tony before building.
+  - SETTLED AS METHOD in the build: a minute the tab wrote itself is
+    remembered in sessionStorage, so a reload or Back opens at now and
+    not "as shared"; Reset puts back the room's own opening, not the
+    link's, in every room (the root's Reset already did); what a link
+    could not show goes in a box with the text box's look, gone at the
+    next tap, and at the top of the i panel; the two sentences that say
+    "today" take the frozen words for a shared minute; the line under
+    the title is underlined and takes the tap.
+  - Files: gallery `gallery/scene_address.js` (new, the logic),
+    `interactive.html` (the wiring), `documentation/smoke_scene_address.js`
+    (new, the gallery run's Scene address row, gates, its self-test
+    breaking the file three ways), `gallery_maintenance_run.py` (the
+    row, and the file on the live check's list),
+    `tools/headless/walk_scene_address.js` (new, eight steps in both
+    rooms, 38 checks; fails on a page planted without the rows applied).
+    The website's offline run: "41 of 41 gating checkers passed". The
+    drawer walk's three failures are the same on the base page (already
+    on L-423).
+  - The skill sentence received above is corrected at interactive-exhibit
+    1.37, with the address paragraph; protocol v3.133.
+  - NOT BUILT, on purpose: the gallery editor taking a scene's address as
+    a Featured card (Tony's ask, above). It is not designed; left for a
+    short talk once his phone look has seen the link work.
+  - Found: the orrery's Dashboard parity check goes red on the new Scene
+    address check until the orrery dashboard has its button. The
+    dashboard is an orrery file, so it waits for Tony's word.
+- **Tony's first phone look, 2026-11-08, night**, in chat, before the
+  push was read here (his words; he "will respond more later"):
+  - On the line under the title: "not clear what 'tap for now' means or
+    does. Also this pushes the text down into the scene. Consider
+    removing."
+  - On the tap: "I don't see any change. 5 minutes after changing. But
+    this may be confusing the recipient. The served scene is not at the
+    time sent or now rather the time fetched."
+  - On the reload: "reloading the sent page does not change it.
+    Reloading the page from the website updates the time however we
+    should consider changing the time to the time fetched not the time
+    served or loaded. Until we have a date picker."
+  - On the dashboard button: "yes". Added the same night (orrery
+    `palomas_orrery_dashboard.py`, the Scene Address button and its short
+    line); Dashboard parity read "PASS".
+  - Read here, not yet acted on. A reload of a RECEIVED link keeps the
+    sender's minute by design (only a minute the tab wrote itself opens
+    at now). The positions are worked out for the minute under the
+    title, from the orbits fetched at the nightly build, so five minutes
+    moves nothing a visitor can see; whether the tap registered at all
+    on his phone is not known. Showing the fetch time instead of the
+    opening minute would change Tony's ruling of 2026-09-26 (a room
+    draws the minute it is opened) in every room, and with it what `at`
+    is for: a design question for him, not built.
+- **Tony's ruling, 2026-11-08, night**, in chat, on the minute and the
+  words: "I misunderstood. I did not realize that you were propagating
+  the scene from fetch to now. That makes sense." So a room keeps
+  drawing the minute it is opened (his ruling of 2026-09-26 stands), and
+  a shared link keeps the sender's minute. On the tap: "The tap on the
+  line however does not bring it to now." On the words: "let's try
+  keeping the original lines and adding a third line, 'Tap to update.'
+  With an update to now link and the now time displayed. Note that a
+  simple reload does not work."
+  - BUILT the same night: the line under the title is the moment alone
+    again; under it a third line, "Tap to update.", a link of the page's
+    own (not Plotly's title text, whose tap did not register), placed
+    under the title wherever it sits and again when the screen turns. It
+    opens the room without the minute in the address, the rows kept, so
+    the line under the title then shows the time now; it is not a plain
+    reload. No third line for a frozen room, a minute too old for the
+    data, or the visitor's own page. Files: gallery
+    `interactive.html`, `gallery/scene_address.js`,
+    `documentation/smoke_scene_address.js` (21 wiring points),
+    `tools/headless/walk_scene_address.js` (39 checks; fails on a page
+    planted without the line). interactive-exhibit 1.37 and protocol
+    v3.133 reworded within the same bump.
+- **Tony's phone look at "Tap to update.", 2026-11-08, night**, read
+  from his copy `documentation/WHERE_WE_ARE_11-8-26_2053_run_record.md`
+  (website pushed at 5817c553, orrery at 76cca2a1): a shared scene opened
+  on another device with the line under the date, "-- yes"; tapped, the
+  room at now with the same bodies and the time now, "-- yes"; where the
+  line sits, upright and sideways, "-- correct"; Earth after Centre on
+  Earth, "sending and updating works correctly. however i found a
+  possible bug: when i tick the moon's orbit, and then press reset, the
+  scene resets but the scale does not. can you check? the same thing
+  happens in the solar room: if i tick comet ikeya-seki and the press
+  reset, the scene resets but the scale stays at 20-40 au."
+  - FOUND: this build's bug, and an older one of the same kind. Reset
+    put back the room's own ticks and framed them with the frame the
+    page OPENED on (navArrivalR). A room opened from a link -- and every
+    reload, whose address now carries the ticks -- opens framed on the
+    link's rows, so Reset after the Moon kept the Moon's frame, and after
+    Ikeya-Seki its 93 AU. The root had the same fault since L-515 on a
+    return from Centre on with kept ticks. Reproduced on the live site
+    in the desktop app's browser (real Plotly: Earth opened with
+    `show=crust,moon`, Reset left the range at 0.00295 AU) and headless.
+  - FIXED: Reset frames what it has just put back, by the room's own
+    rule, the farthest thing drawn each by its own measure and margin
+    (`sunTicksFrameR` in interactive.html; `sunReset` hands it to
+    `navHome`, and the root's `ssHome` uses it). A plain opening's Reset
+    frame is unchanged to the last digit (Earth 0.0000592 AU, the root
+    1.914 AU, ?exhibit=sun 0.007883 AU). Home keeps the frame the room
+    opened on, as before; in Earth after a link that is the link's frame
+    (noted, not changed).
+  - CHECKED: the Scene address check holds both wiring points (23); the
+    walk's steps 7 and 9 (45 checks) open from a link and from kept
+    ticks, Reset, and compare with the plain opening's frame; run on the
+    pushed page they fail three times, on the fix they pass. Both Reset
+    walks pass (33 checks each); the website run "41 of 41 gating
+    checkers passed".
+  - interactive-exhibit 1.37 is not bumped again: Tony has installed it,
+    and its sentence on Reset ("the opening frame and angle") still
+    describes the fix. The next version may say how the frame is found.
+- **Tony's phone look at the Reset fix, 2026-11-08, late night**, read
+  from his copy `documentation/WHERE_WE_ARE_11-8-26_2053_run_record.md`
+  (website pushed at 6a153716, orrery at 4095e301): Earth from a link
+  with the Moon, Reset, "-- yes"; the Solar System room with Ikeya-Seki,
+  "-- yes". The two notes, "-- not tested". Both read on the live site
+  in the desktop app's browser the same night, at 6a153716: `show=earth,planet9`
+  drew Earth and named "planet9" in the box and the i panel, "Tap to
+  update." under the line; `at=2026-06-01T00:00Z` opened at now, the box
+  saying the link is older than the data, no third line.
+  - His question, in his words: "let's say i receive a link and i do not
+    open it until now is past the trust window of the scene, say past 88
+    days for Mercury, will the scene display? will it update using the
+    latest fetch or the original fetch? or lets say, i open the link
+    just a week later, and update, will it update using the newest fetch
+    even if the original fetch works?"
+  - Answered from the code and the served cache: the website holds one
+    fetch, the latest nightly build, and nothing older is served (the
+    window at 6a153716: 2026-08-12 to 2027-02-04, about 88 days either
+    side of the build, Mercury's span). A link's minute is redrawn from
+    the latest fetch's orbits, propagated to that minute; so a week-old
+    link shows its minute from the newest data, and "Tap to update." the
+    visitor's now from the same data. A link older than the window's
+    start opens at now and says so; the sender's own fetch is never
+    used, because it is no longer served. Whether a link should keep its
+    fetch is the date picker's question (the per-body window, design
+    record section 6), not this item's.
+- **Closed 2026-11-08, late night**, on Tony's word in chat, "Yes, close
+  it", to the question whether the two notes' words read right (both
+  read on the live site at 6a153716, quoted above). Website at 6a153716,
+  orrery at 4095e301.
+  - Loose ends, re-homed:
+    - the gallery editor taking a scene's address as a Featured card
+      (Tony's ask of 2026-11-08, 15:40, carried here from L-519): back
+      to L-519 (Featured's rethink), whose talk decides what Featured is
+      for in the one tree and opens the editor and index.html's Featured;
+    - interactive-exhibit's sentence on Reset ("the opening frame and
+      angle") may say how the frame is now found (sunTicksFrameR): a
+      line on L-515 (one nested tree), whose step 2b is the next build
+      to open that skill;
+    - Home in a room of shells returning to the frame the room opened
+      on, which after a link is the link's: struck -- Home is the
+      opening frame by Tony's rulings (L-310, L-482), and a link's
+      opening is that room's opening;
+    - the date picker's per-body window (the design record's section
+      6): stays in the record for the date picker's build, the road's
+      goal (stage 18), as the design said.
+**Gap:** none.
+**Ref:** `documentation/DESIGN_shared_view_rulings_20261029.md`;
+`documentation/HANDOFF_coordination_20261028_29.md`; L-515 (one nested
+tree); L-165 (site continuity); L-503 (the belt on the website).
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items
