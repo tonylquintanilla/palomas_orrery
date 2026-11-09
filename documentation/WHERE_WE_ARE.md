@@ -1,19 +1,20 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 8, 2026, night: the website session (Opus), L-517 (the lobby) closed on your word.
-- Written at orrery 789c1ec and gallery 39900d7, plus this session's edits.
+Last updated: November 8, 2026, night: the website session (Opus), L-517 (the lobby) closed on your word, and your five answers carried.
+- Written at orrery 3d711de and gallery 39900d7, plus this session's edits.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
 > - L-517 (the lobby) is closed. Old Solar System addresses land on the room's opening view, as you ruled ("leave it as is").
-> - Its leftovers moved: Featured, the cards' words and your guest book note to a new item, L-519 (Featured's rethink); the two desktop pictures to L-515 (one nested tree).
+> - Its leftovers moved: Featured to a new item, L-519 (Featured's rethink); the pictures' words to the braid, L-520 (old pictures carry old words); adding a live view to Featured to L-518 (the shared link); the two desktop pictures to L-515 (one nested tree).
+> - Your guest book note lost its old "START HERE" link, and the dashboard gained the Picture Folds button its parity check asked for.
 >
 > **Do next:** *The shared scene link (L-518 (the shared link)); then step 2b.*
 >
 > **Needs you now:**
-> - *(do) Commit and push the orrery: the records of the close.*
+> - *(do) Commit and push the website (the guest book note), then the orrery (the dashboard and the records).*
 > - *(do) Each morning, Pull origin on both, orrery then website, first.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
 
@@ -40,7 +41,7 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
                to choose, within the range the data covers.
   l.   [done]  L-517 (the lobby): closed Nov 8 on your phone look.
                << moved this session
-  s.   [NOW]   *The shared scene link (L-518 (the shared link)).*
+  s.   [NOW]   *The shared scene link (L-518 (the shared link)), with your Featured ask.*
                << moved this session
   b.   [beside] Housekeeping: L-424, L-425, L-426 (the checkers' three);
                L-423 (the website's checks) item 3; L-357 (stale gallery
@@ -66,7 +67,8 @@ Standing rulings; a line leaves once it is habit, or a skill carries it.
 ## Deferred  **>> UPDATED THIS SESSION**
 
 Waiting behind other work; a line leaves when picked up.
-- Featured's rethink, with the gallery editor's future and the cards' words, which have no source yet: after the cards are piped into the tree (Nov 8; L-519 (Featured's rethink)). The editor taking a live view's address as a Featured card waits for that address (L-518 (the shared link)).
+- Featured's rethink, with the gallery editor's future: after the cards are piped into the tree (Nov 8; L-519 (Featured's rethink)).
+- The saved pictures' words, which have no source: kept as made until the braid reaches them (Nov 8; L-520 (old pictures carry old words)).
 - The Moon's Go To opening the orbit's box: the Mars website session (Nov 7; L-515 (one nested tree)).
 - Charon's period is asked around Pluto's centre, not the barycentre;
   fix it before Pluto's room (L-150 (trusting a near-equal pair), Nov 6).
@@ -116,13 +118,12 @@ Not urgent, in your order:
    (L-485 (a nightly run)).
 3. Earth's list (L-413 (Earth's list)): open as enhancements, or closed
    with its seven pieces moved to their own items.
-4. Your pinned guest book note still says "Interactive Exhibit", words the lobby dropped (L-519 (Featured's rethink)).
 
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
 - This session: L-517 (the lobby), closed, its last entry naming
-  where each leftover went; L-519 (Featured's rethink), new.
+  where each leftover went; L-519 and L-520, new.
 - The tree: L-515 (one nested tree), `COORD_L515_steps1_2a_brief_20261107.md`.
 - The talk's rulings: `DESIGN_L484_consistency_rulings_20261103.md`.
 - The door: `documentation/python_work_door/`, and L-499 (kinds of session).

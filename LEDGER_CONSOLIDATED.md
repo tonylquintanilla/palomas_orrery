@@ -754,8 +754,9 @@ Module updated: November 8, 2026, evening, with Anthropic's Claude Opus 5.5
 gone and Back to the lobby: its record on L-517), built on orrery 418a9b44
 with gallery 942910cc.
 Module updated: November 8, 2026, night, with Anthropic's Claude Opus 5.5
-(the same session: L-517 closed, its loose ends re-homed, L-519 opened),
-built on orrery 789c1ec8 with gallery 39900d75.
+(the same session: L-517 closed, its loose ends re-homed, L-519 and
+L-520 opened, the dashboard's Picture Folds button added on L-423), built
+on orrery 789c1ec8 with gallery 39900d75.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -973,7 +974,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*258 live items; 242 need attention (`!`); 165 RICE-scored; 254 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*259 live items; 243 need attention (`!`); 165 RICE-scored; 254 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1144,7 +1145,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-515 | One nested tree in place of isolated rooms (gallery, the room system; design) | OPEN | -- | 2026-11-08 |
 | ! | L-516 | Renew palomasorrery.com at Porkbun before 2027-02-13 (legacy; Tony's account) | OPEN | -- | 2026-11-07 |
 | ! | L-518 | The shared scene link: the address carries the ticked bodies and the minute (gallery, the Solar System room; designed, not built) | OPEN | -- | 2026-11-08 |
-| ! | L-519 | Featured's rethink: the existing cards piped into the one tree, and their words (gallery, the lobby and the gallery editor; not designed) | OPEN | -- | 2026-11-08 |
+| ! | L-519 | Featured's rethink: the existing cards piped into the one tree (gallery, the lobby and the gallery editor; not designed) | OPEN | -- | 2026-11-08 |
+| ! | L-520 | Old pictures carry old words: the saved pictures' titles and descriptions have no source (gallery, the saved pictures; the braid) | OPEN | -- | 2026-11-08 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1576,7 +1578,33 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
-#### [L-519] Featured's rethink: the existing cards piped into the one tree, and their words (gallery, the lobby and the gallery editor; not designed)
+#### [L-520] Old pictures carry old words: the saved pictures' titles and descriptions have no source (gallery, the saved pictures; the braid)
+<!-- L:520 status:OPEN upd:2026-11-08 section:A flag: rice: -->
+- **Recorded, not built.** A class found in L-517 (the lobby for a
+  first-time phone visitor) and given its own row at that item's close,
+  2026-11-08, night (the Claude Code session, Claude Opus 5.5, on orrery
+  3d711deb and gallery 39900d75), one row per class under The Braid: it
+  waits until the artifact on the critical path reaches it. Tony, that
+  night: "this should be part of the provenance braid. Old pictures
+  carry old words."
+- The class: a saved picture's title and description (the cards in
+  gallery/gallery_metadata.json, among them the Solar System pictures
+  in the room's drawer folds and the Featured cards) come from the
+  gallery's own card list, written through Studio and the gallery
+  editor, not from the orrery's export, where the words have one home by
+  the Nov 3 ruling (L-511 (the export carries the words)). Tony, at his
+  look at L-517's part 1: "it should be noted that the 'Save Pictures'
+  do not have sourced words."
+- The words stay as they were made. Each picture's words are dealt with
+  when the braid reaches that picture: sourced or removed, by Fetched vs
+  Recalled; a picture whose encounter is built leaves its fold with its
+  words (interactive-exhibit 1.36).
+**Gap:** none until the braid reaches a picture.
+**Ref:** L-517 (the lobby for a first-time phone visitor); L-519
+(Featured's rethink); L-511 (the export carries the words); gallery
+`gallery/gallery_metadata.json`.
+
+#### [L-519] Featured's rethink: the existing cards piped into the one tree (gallery, the lobby and the gallery editor; not designed)
 <!-- L:519 status:OPEN upd:2026-11-08 section:A flag: rice: -->
 - **Opened 2026-11-08, night**, at the close of L-517 (the lobby for a
   first-time phone visitor), by the Claude Code session (Claude Opus
@@ -1590,27 +1618,24 @@ as an archive of the prioritization thinking -- no cleanup on close.
   piping the existing cards into the new tree." (10:03); "keep Featured
   as-is and i can modify in the existing editor." (10:08). Featured stays
   as it is until then.
-- The cards' words have no source. Tony, Nov 8: "it should be noted that
-  the 'Save Pictures' do not have sourced words." The cards' titles and
-  descriptions come from the gallery's own card list
-  (gallery/gallery_metadata.json), written through Studio and the
-  editor, not from the orrery's export, where the words have one home by
-  the Nov 3 ruling (L-511 (the export carries the words)).
-- Tony's ask, Nov 8, 15:40 Chicago: "looking forward we should work on
-  the gallery editor so I can add new views from the interactive to the
-  Featured views using their specific url." It waits for the address
-  L-518 (the shared scene link) builds.
+- **Moved out the same night, on Tony's word:** the cards' words with no
+  source, to L-520 (old pictures carry old words), a braid row ("this
+  should be part of the provenance braid. Old pictures carry old
+  words."); his ask to add a live view to Featured by its address, to
+  L-518 (the shared scene link), as part of that build ("this is needed
+  and likely is part of the specific URL's.").
 - Found in L-517's part 2, not changed: the gallery editor's own window
   still says "under construction" for an empty room; the site no longer
   does.
-- Tony-action (decide): his pinned guest book note links "START HERE:
-  Solar System Interactive Exhibit", words the lobby no longer uses
-  (data/guestbook.json, his entry); whether to reword it is his.
+- His pinned guest book note linked "START HERE: Solar System
+  Interactive Exhibit", words the lobby no longer uses. On his word the
+  same night ("Remove the ... link from my pinned guest book note") the
+  link was removed from his entry in data/guestbook.json; the note's
+  words, date and pin are unchanged.
 **Gap:** a design talk on what Featured is for in the one tree, and with
-it the gallery editor's future; then a build. The guest book note is
-Tony's.
+it the gallery editor's future; then a build.
 **Ref:** L-517 (the lobby for a first-time phone visitor); L-518 (the
-shared scene link); L-511 (the export carries the words); L-515 (one
+shared scene link); L-520 (old pictures carry old words); L-515 (one
 nested tree); L-303 (the card model); gallery `index.html`,
 `gallery/gallery_metadata.json`, `tools/gallery_editor.py`.
 
@@ -1645,9 +1670,11 @@ nested tree); L-303 (the card model); gallery `index.html`,
   part 2 (the lobby): "looking forward we should work on the gallery
   editor so I can add new views from the interactive to the Featured
   views using their specific url." Recorded here because the specific
-  address is what this item builds; the editor's half, a Featured card
-  made from a live address, goes with Featured's rethink (L-519). Not
-  designed yet.
+  address is what this item builds. The editor's half, a Featured card
+  made from a live address, sat on L-519 (Featured's rethink) and
+  came back here on Tony's word, 2026-11-08, night, as part of
+  this build: "this is needed and likely is part of the specific URL's."
+  Not designed yet.
 - **Received 2026-11-08, night, from L-517 at its close** (the lobby for
   a first-time phone visitor): interactive-exhibit 1.36 says "The
   Explorer's own page keeps its chain"; since L-517's part 3 the
@@ -1657,8 +1684,8 @@ nested tree); L-303 (the card model); gallery `index.html`,
 **Gap:** the build (a gallery Code session, small, per section 7 of the
 design record, read again against L-515's tree), with the skill
 sentence received above, and Tony's Mode 5: a scene shared to himself
-and opened on another device. Tony's ask, the editor taking a scene's
-address as a Featured card, is on L-519 (Featured's rethink).
+and opened on another device; and, in the same build, Tony's ask: the
+gallery editor taking a scene's address as a Featured card.
 **Ref:** `documentation/DESIGN_shared_view_rulings_20261029.md`;
 `documentation/HANDOFF_coordination_20261028_29.md`; L-515 (one nested
 tree); L-165 (site continuity); L-503 (the belt on the website).
@@ -7399,7 +7426,15 @@ above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
   came with L-517's part 1 and no dashboard button came with it. The fix
   is one button and its short line in palomas_orrery_dashboard.py,
   beside Scene Moment; the gallery session that found it does not edit
-  the orrery's code, so it waits for Tony's word.
+  the orrery's code, so it waited for Tony's word. Added the same night
+  on his word ("Yes, add the Picture folds button to the dashboard now,
+  in this session, and commit it with this close"): the Picture Folds
+  button and its line in "Gallery -- checks and data", beside Scene
+  Moment. Read from the output: test_dashboard_parity.py, "DASHBOARD
+  PARITY: PASS -- 10 of 10 planted faults caught; 100 steps matched to
+  their buttons by name and script"; the button's command,
+  documentation/run_offline_check.py "Picture folds", "PASSED (exit
+  0)".
 - **2026-11-06: the live check's positions files come from the
   config** (the coordinating session of Nov 6, Claude Opus 5.5, built
   on gallery 8ff3e74; the website's
@@ -34569,20 +34604,21 @@ orrery's plots, then the build.
     old Solar System address (ten topics) lands on its opening view.
     Asked whether an old topic address should open the room on its
     group: "No, leave it as is." On the new words: "The 'Open the live
-    solar system' button is there and works on Pluto's picture." The
-    other items (Back from Stars and from Earth System, Explore's top bar
-    without "Solar") drew no note, and his word was "Finish the close and
-    close L-517." Should Back still fail on his phone, that is a new
-    item, not this one.
+    solar system' button is there and works on Pluto's picture." On
+    the rest, the same night: "I didn't see any issues with Back or the
+    Explore top bar." His word: "Finish the close and close L-517."
   - Loose ends, re-homed:
     - the two desktop-only rows (Mercury's Orbital Transformation; Near
       Earth Asteroids on the Apollo and Amor asteroids row), never looked
       at: a line on L-515 (one nested tree), whose tree holds the folds;
-    - Featured's rethink, the cards' unsourced words, the editor taking a
-      live view's address as a Featured card (from L-518), the editor's
-      own "under construction" window, and Tony's pinned guest book
-      note's old words: the new L-519 (Featured's rethink), which holds
-      them together;
+    - Featured's rethink and the editor's own "under construction"
+      window: the new L-519 (Featured's rethink);
+    - the cards' unsourced words: L-520 (old pictures carry old words),
+      a braid row, on Tony's word;
+    - the editor taking a live view's address as a Featured card: L-518
+      (the shared scene link), part of that build, on Tony's word;
+    - Tony's pinned guest book note's old words: on his word, its link
+      removed from data/guestbook.json (the website), nothing left;
     - interactive-exhibit 1.36's sentence "The Explorer's own page keeps
       its chain": a line on L-518 (the shared scene link), the next build
       to open interactive.html and that skill;
@@ -34592,14 +34628,17 @@ orrery's plots, then the build.
     - "each picture group leaves its row when the encounter that replaces
       it is built": struck here, since interactive-exhibit 1.36 carries it
       as a rule.
+  - Found at the close: the orrery run's Dashboard parity red, the
+    website's Picture folds check with no dashboard button since part 1.
+    Added on Tony's word; recorded on L-423 (the website's checks).
 **Gap:** none.
 **Ref:** L-282 (the lobby); L-428 (the lobby's way in); L-447 (the front
 page says what the site is: its sentence and the Paloma line stay, the
 line moves above the guest book); L-515 (one nested tree); L-303 (the
 card model, one viewer per orientation); gallery `index.html`,
 `gallery/gallery_config.json`, `gallery/gallery_metadata.json`,
-`gallery/solar_system_drawer.js`; L-519 (Featured's rethink), which
-took its loose ends.
+`gallery/solar_system_drawer.js`; L-519 (Featured's rethink) and L-520
+(old pictures carry old words), which took its loose ends.
 ## D. RECONCILED LEDGER -- OPEN
 
 ### D.Movement -- Movement-track open items

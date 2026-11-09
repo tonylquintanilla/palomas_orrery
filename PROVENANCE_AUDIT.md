@@ -20,12 +20,12 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T1 by domain | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|--------------|---:|---:|---:|--------:|
+| 20261109T022724Z | `3d711de` | 176 | 1165 | 276 | orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2 | 707 | 176 | 6 | 0 |
 | 20261109T020005Z | `789c1ec` | 176 | 1165 | 276 | orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2 | 707 | 176 | 6 | 0 |
 | 20261108T041339Z | `1ec02dc` | 176 | 1165 | 276 | orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2 | 707 | 176 | 6 | 0 |
 | 20261108T031419Z | `4ac3903` | 176 | 1165 | 276 | orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2 | 707 | 176 | 6 | 0 |
 | 20261108T030921Z | `4ac3903` | 176 | 1165 | 276 | orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2 | 707 | 176 | 6 | 0 |
 | 20261108T025414Z | `4ac3903` | 176 | 1165 | 276 | orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2 | 707 | 176 | 6 | 0 |
-| 20261108T005202Z | `cba62f2` | 176 | 1165 | 276 | orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2 | 707 | 176 | 6 | 0 |
 
 Change since the previous run: total +0, Tier-1 +0.
 
@@ -2022,11 +2022,11 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 402 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 403 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 2524 | constant | NIGHTLY_STALE_HOURS | 24 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 2695 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 2827 | dict | SECTION_SYMBOLS[...] | (8 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
+| 406 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 407 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 2547 | constant | NIGHTLY_STALE_HOURS | 24 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 2718 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 2850 | dict | SECTION_SYMBOLS[...] | (8 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
 
 ### path_plan.py
 

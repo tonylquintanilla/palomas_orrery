@@ -360,3 +360,50 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 **Tony-actions**
 - (do) Commit and push the website, then the orrery.
 - (decide) The phone look above.
+
+=======================================================================
+
+The dashboard button is in, and its parity check now passes. Next is your pinned guest book note.
+
+Next, the ledger moves. First I'm finding where the provenance braid keeps its rows.
+
+Ledger and Where We Are are updated. Now running both maintenance runs.
+
+I've done all five of your answers, and both maintenance runs are green again.
+
+**What changed**
+1. **Dashboard:** the Picture Folds button and its short line are in "Gallery -- checks and data", beside Scene Moment. The dashboard parity check now passes, and the button's own command passes too.
+2. **Guest book:** your pinned note no longer has the "START HERE: Solar System Interactive Exhibit" link. Its words, date and pin are unchanged, and the guest book checks pass.
+3. **The pictures' words:** they're now one row in the provenance braid, L-520 (old pictures carry old words), with your words quoted. The words stay as they were made until the braid reaches them. L-519 (Featured's rethink) keeps only Featured and the gallery editor's future.
+4. **Adding a live view to Featured:** this is back on L-518 (the shared scene link), as part of that build, with your words.
+5. **Back and the Explore top bar:** your words are now in L-517's close (the lobby for a first-time phone visitor): "I didn't see any issues with Back or the Explore top bar."
+
+You committed my first close, as 3d711de "Code: L517 close", while I was working. Everything below came after that commit, so it's all still waiting.
+
+**Checks, read from their output**
+- Website maintenance run (offline): "40 of 40 gating checkers passed".
+- Orrery maintenance run: "35 of 35 gating checkers passed", with Dashboard parity among them, and "0 TIER-1 -- the push gate holds".
+
+**Files changed**
+
+Website:
+- ok data/guestbook.json (1 edit)
+- data/constants_export.sha, data/objects_export.sha and data/drawings/pulled_at.sha were rewritten by the run. They now record that it read the orrery at 3d711deb, your latest push.
+
+Orrery:
+- ok palomas_orrery_dashboard.py (3 edits)
+- ok LEDGER_CONSOLIDATED.md (14 edits, then the index regenerated: "no consistency problems")
+- ok documentation/WHERE_WE_ARE.md (8 edits; 130 lines above the marker)
+- Rewritten by the run, mostly line counts and dates: MODULE_ATLAS.md, MODULE_INDEX.md, PROVENANCE_AUDIT.md, data/provenance_history.json and documentation/prompts/citation_review.jsonl.
+
+**Token count:** this session doesn't print a cost total. All of it ran on Opus 5.5.
+
+**Your run order**
+1. Commit and push the website. -- 
+2. Run its live check from the dashboard.
+3. Commit and push the orrery.
+
+**Tony-actions**
+- (do) Commit and push the website, then the orrery.
+- (decide, not urgent) Look at the two pictures only a desktop shows, Mercury's and Near Earth Asteroids'. That look is now on L-515 (one nested tree).
+

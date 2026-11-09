@@ -46,6 +46,10 @@ List, for the gallery run's new "Tree parents" check.)
 Module updated: November 7, 2026, night, with Anthropic's Claude Opus 5.5
 (L-515 part 4: the website's Scene Moment button and line, beside Label
 Words, for the gallery run's new "Scene moment" check.)
+Module updated: November 8, 2026, night, with Anthropic's Claude Opus 5.5
+(L-517 at its close, L-423: the website's Picture Folds button and line,
+beside Scene Moment, for the gallery run's "Picture folds" check, which
+came with L-517 part 1 without one; Dashboard parity found it.)
 July 2026: added Linux Button-4/5 wheel scrolling to match columns 1/2's
 cross-platform coverage (CTkScrollableFrame's built-in handling only
 covers Windows/Mac <MouseWheel>). Audited LAUNCH_GROUPS against both
@@ -1145,6 +1149,22 @@ LAUNCH_GROUPS = {
         GALLERY_REPO_DIR,
         True,
         ["Scene moment"],
+        True),
+        ("Picture Folds",
+        os.path.join("documentation", "run_offline_check.py"),
+        "Each saved Solar System picture sits in a fold beside its body's "
+        "row in the Solar System room's drawer (L-517). Places the real "
+        "card list on a phone and on a desktop and prints each fold by "
+        "row, a phone offered a card's portrait twin and a desktop its "
+        "landscape one, and holds both pages' wiring: the way back to the "
+        "room, and old Solar System addresses opening the live room. It "
+        "breaks its own files first, to show it can fail. GATES the "
+        "gallery runner. The check is Node, so this button runs it "
+        "through documentation/run_offline_check.py. Runs from the "
+        "gallery repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        ["Picture folds"],
         True),
         ("Page Framing",
         os.path.join("documentation", "run_offline_check.py"),
@@ -2266,6 +2286,9 @@ CARD_LINES = {
     ("Gallery -- checks and data",
      "Scene Moment"):
         "Checks a room past its data's last day opens there, saying so.",
+    ("Gallery -- checks and data",
+     "Picture Folds"):
+        "Checks each saved picture sits beside its row, with a way back.",
     ("Gallery -- checks and data",
      "Page Framing"):
         "Checks the page's framing helpers give the right axis ranges.",
