@@ -458,12 +458,200 @@ Orrery:
 **Your run order**
 1. In VS Code, run the gallery editor, open New Scene..., and try a right-click Paste. Cancel when you've seen it.
 2. In GitHub Desktop, commit and push the website. This deploys it again. -- commit stashed, nightly run pulled, commit pushed 285f14bc342ce792d319c1e59eeeae379a6475b7
-3. Commit and push the orrery. -- 
+3. Commit and push the orrery. -- 1b2a0edf3b90bdeea4bedc2863296b57752915f6
 4. When the deploy is green, run the live check: `gallery_maintenance_run.py --live`.
+
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 62 files from https://palomasorrery.com/ (30 typed, 32 positions files read from data\objects_config.json)
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches the working copy
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   gallery/arrival.js                             matches the working copy
+    SERVED   gallery/nav_cluster.js                         matches the working copy
+    SERVED   gallery/solar_system_figures.js                matches the working copy
+    SERVED   gallery/solar_system_drawer.js                 matches the working copy
+    SERVED   data/objects_config.json                       matches the working copy
+    SERVED   gallery/guestbook.js                           matches the working copy
+    SERVED   data/guestbook.json                            matches the working copy
+    SERVED   data/solar-system/drawings/hills_cloud.json    matches the working copy
+    SERVED   data/solar-system/drawings/van_allen_belts.json matches the working copy
+    SERVED   data/solar-system/drawings/earth_exosphere.json matches the working copy
+    SERVED   data/solar-system/drawings/sun_corona.json     matches the working copy
+    SERVED   data/solar-system/drawings/zodiacal_dust.json  matches the working copy
+    SERVED   data/solar-system/drawings/outer_oort_cloud.json matches the working copy
+    SERVED   data/solar-system/drawings/galactic_tide.json  matches the working copy
+    SERVED   gallery/source_list.js                         matches the working copy
+    SERVED   gallery/far_lines.js                           matches the working copy
+    SERVED   gallery/direction_arrows.js                    matches the working copy
+    SERVED   gallery/drawer_order.js                        matches the working copy
+    SERVED   gallery/text_box.js                            matches the working copy
+    SERVED   gallery/scene_moment.js                        matches the working copy
+    SERVED   gallery/scene_address.js                       matches the working copy
+    SERVED   gallery/picture_folds.js                       matches the working copy
+    SERVED   gallery/gallery_metadata.json                  matches the working copy
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+    SERVED   data/solar-system/positions/voyager_2.json     matches the working copy
+    SERVED   data/solar-system/positions/new_horizons.json  matches the working copy
+    SERVED   data/solar-system/positions/juno.json          matches the working copy
+    SERVED   data/solar-system/positions/osiris_apex.json   matches the working copy
+    SERVED   data/solar-system/positions/parker_solar_probe.json matches the working copy
+    SERVED   data/solar-system/positions/bepicolombo.json   matches the working copy
+    SERVED   data/solar-system/positions/solar_orbiter.json matches the working copy
+    SERVED   data/solar-system/positions/lucy.json          matches the working copy
+    SERVED   data/solar-system/positions/juice.json         matches the working copy
+    SERVED   data/solar-system/positions/psyche_spacecraft.json matches the working copy
+    SERVED   data/solar-system/positions/europa_clipper.json matches the working copy
+    SERVED   data/solar-system/positions/galileo.json       matches the working copy
+    SERVED   data/solar-system/positions/cassini.json       matches the working copy
+    SERVED   data/solar-system/positions/pioneer_10.json    matches the working copy
+    SERVED   data/solar-system/positions/pioneer_11.json    matches the working copy
+    SERVED   data/solar-system/positions/rosetta.json       matches the working copy
+    SERVED   data/solar-system/positions/akatsuki.json      matches the working copy
+    SERVED   data/solar-system/positions/dart.json          matches the working copy
+    SERVED   data/solar-system/positions/west.json          matches the working copy
+    SERVED   data/solar-system/positions/mcnaught.json      matches the working copy
+    SERVED   data/solar-system/positions/tsuchinshan_atlas.json matches the working copy
+    SERVED   data/solar-system/positions/wierzchos.json     matches the working copy
+    SERVED   data/solar-system/positions/atlas_2024_g3.json matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1.json      matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1_b.json    matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1_d.json    matches the working copy
+    SERVED   data/solar-system/positions/panstarrs_2025_r3.json matches the working copy
+    SERVED   data/solar-system/positions/borisov_2025_v1.json matches the working copy
+    SERVED   data/solar-system/positions/oumuamua.json      matches the working copy
+    SERVED   data/solar-system/positions/borisov_2i.json    matches the working copy
+    SERVED   data/solar-system/positions/atlas_3i.json      matches the working copy
+
+  PASS Served reachability      10.9s  all 62 files served and
+                                    byte-identical to the working copy
+
+  orrery export pinned at 4d58d208
+
+  PASS Export freshness          0.4s  the served export is the orrery's
+                                    at 4d58d208, byte for byte
+
+  orrery HEAD 1b2a0edf
+  examining 3 of 188 links; the other 185 are served from the export
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  3 pointers: 1 match, 0 DRIFT, 0 UNIT MISMATCH, 2 could not be examined.
+
+  PASS Store drift               2.6s  3 pointers against orrery 1b2a0edf
+                                    -- 1 match, 0 DRIFT, 0 UNIT
+                                    MISMATCH, 2 could not be examined.
+
+======================================================================
+  2 of 2 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Store drift            3 pointers against orrery 1b2a0edf -- 1
+  last swap 2026-11-09T18:53:43.881740+00:00: succeeded first time
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
 5. The phone look at Scenes, from item 1.
 
 **Tony-action rollup**
-- (do) Try the right-click Paste in the New Scene window.
-- (do) Commit and push both repositories.
+- (do) Try the right-click Paste in the New Scene window. -- scene save button is greyed out. save all is not available. 
+- (do) Commit and push both repositories. -- done
 - (do) If the website's deploy fails again, re-run it on GitHub.
-- (do) Run the live check, then do the phone look.
+- (do) Run the live check, -- done
+- then do the phone look. -- not ready
+
+==================================================
+
+Nothing is broken. The window refused that link on purpose, because it is the scene you already made.
+
+**What the window told you:** the red line in your screenshot says "Already on a card: 'New Candidate Dwarf Planet 2026 ED138' opens this link." You pasted the same link again: Earth, Neptune, Pluto and 2026 ED138. A link already on a card can't be saved twice, so Save scene stays grey. Save All is grey too, because nothing has changed since your last save. To try the window again, tick a different set of bodies on your phone and share that link.
+
+**The paste worked:** your screenshot shows the paste box filled and the address and minute taken off, so the right-click Paste did its job.
+
+**The phone look is ready now:**
+- **The deploy:** your push (285f14b) went live. Your live check reads "all 62 files served and byte-identical".
+- **My own check of the live site:** its drawer file has the Scenes code, and its card list has your ED138 scene.
+
+So start at item 1: open the Solar System room's drawer, and Scenes should sit under the Sun's row with ED138 in it.
+
+**Files for your run record:** none changed this turn.
+
+**Your run order**
+1. Do the phone look at Scenes, items 1 to 9 on L-519 (Featured's rethink).
+
+**Tony-action rollup**
+- (do) The phone look at Scenes.
+
+**Phone-look list** (also on L-519), after you've made a scene and pushed:
+1. The Solar System room's drawer: Scenes sits right under the Sun's row, above Saved pictures, with its bookmark mark and count, and starts closed. -- yes
+2. Open it: check the line "Each scene opens with its bodies ticked, at today's date." and each scene's name. -- yes 
+3. Tap a scene: the room opens with its bodies ticked, at now, with no "Tap to update." line. -- yes
+4. The phone's Back: the room as you left it, with the drawer open at Scenes. -- yes
+5. Find: type part of a scene's name. It shows, and the count reads "1 scene matches". -- no, find ed138 only finds the object not the scene
+6. Reset folds Scenes shut. -- yes
+7. A Featured scene on the gallery page: a card with the Interactive tag that opens the same view. -- yes
+8. A scene made in the Earth room opens the Earth room. -- not tested
+9. At the computer: the New Scene window (paste, the check lines, the name, Look, Save scene). -- done for ed 138
+
+====================================================
+
+Find misses the scene because a scene's name only counts when no body matches too, and "ed138" matches the body. Fixing that so a matching scene always shows.
+
+Now making the edit in the drawer's Find logic, then adding checks for a scene found beside its body.
+
+The fold check now catches a scene hidden beside its body, and passes. Next, adding the same case to the headless drawer walk.
+
+Adding the walk check after the existing "find a scene by its name" step.
+
+The walk is back to only the three old red checks (L-521). Now a control: the new check must fail against yesterday's drawer file.
+
+The control fails as it should, so the walk now catches it. Running the full offline checks.
+
+I've fixed Find: typing "ed138" should now show both the body and your scene, with the count "1 body and 1 scene match". It isn't on the phone yet; it goes live when you push.
+
+**Why it missed the scene:** a saved picture's title only brings its row into view when no body name matches. That's the rule from the lobby work, L-517 (the lobby), and it keeps searches tidy. Scenes followed the same rule. But a scene sits under the Sun, not under the bodies in its name. So "ed138", which matched the body, hid the scene. Now a scene's name always shows it. Saved pictures keep the old rule.
+
+**How it was checked**
+- **The picture-folds check** has new cases for a scene found beside a body. It also has an eighth break, which puts the old behaviour back on a copy, and it was caught.
+- **The headless walk of the drawer** has a new check: "jupiter" finds Jupiter and a test scene called "Mars and Jupiter". On a copy with the old drawer file, that check fails, as it should.
+- **The walk also needed a repair:** your real ED138 scene had thrown off its counts, adding five red checks. It now leaves real scenes out of its test copy. It's back to only the three old red checks on L-521 (three red checks in the drawer walk).
+- **The offline run:** "42 of 42 gating checkers passed".
+
+**Your phone look so far:** items 1 to 4, 6 and 7 passed, and 9 was done with ED138. Item 5 is fixed and needs a second look. Item 8, a scene made in the Earth room, waits until you make one.
+
+**Files for your run record**
+
+Website:
+- ok gallery/solar_system_drawer.js (3 edits: a scene's name shows it in Find, the count words, a comment)
+- ok documentation/smoke_picture_folds.js (6 edits: the new cases, the eighth break, header notes)
+- ok tools/headless/walk_solar_system_drawer.js (4 edits: the new Find check; real scenes left out of the test copy; the Sun's pictures found after Scenes)
+- Rewritten by the run itself: MODULE_ATLAS.md, MODULE_INDEX.md, and the three .sha files
+
+Orrery:
+- ok LEDGER_CONSOLIDATED.md (1 edit: L-519 (Featured's rethink): the deploy, your phone look, the Find fix; the Gap is now item 5 again and item 8; index regenerated, no problems)
+- ok documentation/WHERE_WE_ARE.md (3 edits by section; 128 lines above the marker)
+
+**Token count:** the app has no /cost command. This turn was one fix: three files, two checks run, and the walk run three times.
+
+**Your run order**
+1. In GitHub Desktop, commit and push the website. -- 66c9f698feae430f1d63888fba5ff8fcf479e4b5
+2. Commit and push the orrery. -- 
+3. When the deploy is green, run the live check: `gallery_maintenance_run.py --live`.
+4. On the phone, open the Solar System room's drawer and find "ed138". You should see 2026 ED138's row and the Scenes group under the Sun with your scene, and the line "1 body and 1 scene match".
+
+**Tony-action rollup**
+- (do) Commit and push both repositories, then run the live check.
+- (do) The phone look at Find ("ed138").
+- (later) Make a scene in the Earth room, to finish item 8.

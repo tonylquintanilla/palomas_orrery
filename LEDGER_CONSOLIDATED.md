@@ -1826,8 +1826,34 @@ or the text box.
   - The card's room list in the editor is the old hand-curated tree, not
     the room's tree; he chose Solar System, which saved `solar_system`,
     as a scene needs.
-**Gap:** Tony reruns the failed deploy, then the phone look of the
-Scenes build, above; the item closes on it. Left besides: the editor's
+  - Pushed again (gallery 285f14bc, with the right-click Paste), it
+    deployed: Tony's live run, "all 62 files served and byte-identical".
+    Tony's right-click Paste worked; Save scene stayed grey because he
+    pasted the ED138 link again, which the window refuses as already on
+    a card, as built.
+- **The phone look, 2026-11-09, evening** (Tony's run record, same copy):
+  items 1, 2, 3, 4, 6 and 7 "yes"; 9 "done for ed 138"; 8 not tested (no
+  Earth scene yet); 5 FAILED: "find ed138 only finds the object not the
+  scene". Why: a saved picture's words brought its row into view only
+  when no body and no group matched (L-517's rule), and a scene obeyed
+  the same rule; but a scene sits under the Sun, not beside the bodies it
+  names, so a search holding a body's name hid it. FIXED the same evening
+  by the same Code session: in `gallery/solar_system_drawer.js`
+  (`searchHits`) a scene's name brings the Sun's row whatever else
+  matches, a saved picture still only alone; the count line says "1 body
+  and 1 scene match" (`WORDS.found`). [verified @ the working copy: the
+  Picture folds row's new cases and an eighth break, caught; the drawer
+  walk's new check in section 30 ("jupiter" finds Jupiter and the scene
+  "Mars and Jupiter"), shown failing on a copy with the old drawer file;
+  the offline run, 42 of 42 gating checkers passed; not yet on a phone.]
+  The walk's section 30 now takes the real scenes out of its copy, and
+  29b steps over the Scenes fold: Tony's first scene had put the walk 5
+  red beyond L-521's three; back to those three. interactive-exhibit's
+  Scenes bullet still reads true ("Find finds a scene's name"); the
+  finer rule waits for its next version.
+**Gap:** Tony's phone look of item 5 again (find "ed138": the body and
+the scene, "1 body and 1 scene match"), and item 8 when he makes a scene
+in the Earth room; the item closes on them. Left besides: the editor's
 "under construction" line, above.
 **Ref:** L-517 (the lobby for a first-time phone visitor); L-518 (the
 shared scene link); L-520 (old pictures carry old words); L-515 (one

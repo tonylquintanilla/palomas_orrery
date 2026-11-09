@@ -1,22 +1,21 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 9, 2026, afternoon: the website Code session (Opus), after your first try at Scenes.
-- Written at orrery 4d58d20 and gallery 1f95d2c, plus this session's edits.
+Last updated: November 9, 2026, evening: the website Code session (Opus), after your phone look at Scenes.
+- Written at orrery 1b2a0ed and gallery 285f14b, plus this session's edits.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
 > - Scenes is built (L-519 (Featured's rethink)): paste a shared link into the editor's New Scene window, and it becomes a scene in a Scenes group under the Sun in the drawer; Featured ticked, also on the gallery page.
-> - Your first scene, 2026 ED138, is saved and pushed, but the website's deploy failed twice during GitHub's outage of Nov 9 (12:12 to 12:43 your time). The live site still had this morning's page, so the phone look could not find Scenes.
-> - The New Scene window's boxes now have a right-click menu with Paste, as you asked.
+> - Your first scene, 2026 ED138, is live, after GitHub's outage of Nov 9 failed the first deploy; the New Scene window has a right-click Paste.
+> - Your phone look passed all but Find: "ed138" found the body, not the scene. A scene's name now shows it in Find even when a body's name matches too.
 >
-> **Do next:** *Your phone look at Scenes (the list is on L-519); then step 2b of the one tree.*
+> **Do next:** *Look again at Find on the phone ("ed138": the body and the scene); then step 2b of the one tree.*
 >
 > **Needs you now:**
-> - *(do) Commit and push both: the website (the right-click Paste) and the orrery (these records). The push deploys the website again.*
-> - *(do) If that deploy fails too, on GitHub open Actions, then the failed run, and press Re-run all jobs.*
-> - *(do) Run the live check, then the phone look at Scenes (the list is on L-519).*
+> - *(do) Commit and push both: the website (Find's fix) and the orrery (these records); run the live check.*
+> - *(do) On the phone, find "ed138": it should show the body and the scene, "1 body and 1 scene match".*
 > - *(do) Each morning, Pull origin on both, orrery then website, first.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
 
@@ -43,7 +42,7 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
                to choose, within the range the data covers.
   l.   [done]  L-517 (the lobby): closed Nov 8 on your phone look.
   s.   [done]  The shared scene link (L-518 (the shared link)): closed Nov 8 on your phone look.
-  c.   [NOW]   *Scenes (L-519 (Featured's rethink)): built; your phone look; then step 2b.*
+  c.   [NOW]   *Scenes (L-519 (Featured's rethink)): built and live; Find to look at again; then step 2b.*
                << moved this session
   b.   [beside] Housekeeping: L-424, L-425, L-426 (the checkers' three);
                L-423 (the website's checks) item 3; L-357 (stale gallery
