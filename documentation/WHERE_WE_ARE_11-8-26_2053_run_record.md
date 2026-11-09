@@ -241,7 +241,7 @@ The shared scene link is built, and the website's offline run reads "41 of 41 ga
 **Still red:** the orrery's Dashboard parity check. It wants an orrery dashboard button for the new Scene address check. That file is in the orrery, so it needs your word.
 
 **Your phone look**
-1. In the Solar System room, tick 2026 ED138 and Pluto. Share the page to yourself and open the link on another device. You should see the same two bodies at the same minute, with "as shared · tap for now" under the title.
+1. In the Solar System room, tick 2026 ED138 and Pluto. Share the page to yourself and open the link on another device. You should see the same two bodies at the same minute, with "as shared · tap for now" under the title. -- 
 2. Tap that line. The room should open at now with the same two bodies.
 3. Centre on Earth, tick the Moon, share and open the link the same way. Then press Reset: Earth's own opening should come back.
 4. Reload your own page: it should open at now, not "as shared".
@@ -270,10 +270,78 @@ Orrery:
 
 **Run order**
 1. In GitHub Desktop, commit and push the website, -- dfe0b26a0e9d960b4e9f77be8062d17b14f8d447
+   1. then the orrery. -- 8149b79a33792b88d9ff7eb3bec4ad3e634b24a7
+2. Do the phone look above.
+
+**Tony-actions**
+- (do) Reinstall interactive-exhibit 1.37 (Settings > Skills), and paste protocol v3.133 into the Project's instructions. -- done
+- (decide) The phone look.
+- (decide) May I add the Scene Address button to the orrery dashboard, so its parity check goes green? Yes, or not now.
+
+================================================
+
+Understood: the room keeps drawing the minute it is opened, and a shared link keeps the sender's minute. I'll make "Tap to update." a real link on its own line under the title, since tapping the title text didn't register. First, how the title is placed.
+
+The title is placed by one function, which also runs again when the phone turns, so the new line can follow it from there. Making the edits.
+
+Now the logic file: the "as shared" words go, "Tap to update." comes in.
+
+Now the check: it held the old words and the old tap, so it must hold the new line instead.
+
+Check passes with 21 wiring points. Now the walk, which also looked for the old words.
+
+The walk passes on the real page (39 checks) and fails on a copy without the new line. Starting the full website run, and updating the records meanwhile.
+
+Rewording those passages to the new line, within the same 1.37 bump.
+
+Records updated. Waiting on the website run to finish.
+
+All clean: no non-ASCII bytes, LF only. The run's result will arrive on its own.
+
+"Tap to update." is built as you asked, and the website's run reads "41 of 41 gating checkers passed". Your phone hasn't seen it yet.
+
+**What changed**
+- The rooms keep drawing the minute they are opened, as before. A shared link keeps the sender's minute.
+- The title and the date line under it are back to their original form. "As shared" and "tap for now" are gone.
+- A third line, "Tap to update.", now sits under the date line when a room opens from a shared link.
+  - Tapping it opens the room again at your own now, with the same bodies ticked. The date line then shows the time now.
+  - It doesn't work like a reload. The link's minute is taken out of the address, so the room can't come back at the sender's minute.
+- Your earlier tap failed because I had made the title's own text tappable, and phones don't pass that tap through. The new line is an ordinary link of the page's own.
+- It follows the title wherever the title sits, and moves again when you turn the phone.
+- It doesn't appear on your own page, on a room showing the data's last day, or on a link too old for the data.
+- Since the title's line is short again, the title shouldn't be pushed down. The new line floats over the top of the scene instead, so check whether it covers anything.
+
+**Checked**
+- The website check holds the new line in 21 places on the page.
+- The headless walk passes on the real page, and fails on a copy without the line.
+
+**Your phone look**
+1. Tick a scene and share it to yourself. Open the link on another device: you should see the same bodies at the sender's minute, and "Tap to update." under the date line.
+2. Tap it. The room should open at now with the same bodies, and the date line should show the time now.
+3. Check where the line sits, with the phone upright and sideways, and whether it covers anything.
+4. Do the same in Earth after "Centre on Earth". Then press Reset: Earth's own opening should come back.
+
+**Files changed since my last report**
+
+Website:
+- ok interactive.html (6 edits)
+- ok gallery/scene_address.js (the words: "Tap to update." in, "as shared" out)
+- ok documentation/smoke_scene_address.js (the new line's checks)
+- ok tools/headless/walk_scene_address.js (the new line's steps)
+- MODULE_ATLAS.md, MODULE_INDEX.md and the three `.sha` files: rewritten by the run itself; atlas files converted to LF line endings
+
+Orrery:
+- ok skills/interactive-exhibit/SKILL.md (still 1.37, reworded for the new line)
+- ok PROJECT_INSTRUCTIONS.md (v3.133 reworded, manifest)
+- ok LEDGER_CONSOLIDATED.md (your ruling and the rebuild on L-518, the shared scene link)
+- ok documentation/WHERE_WE_ARE.md (the box and the waiting list)
+
+**Run order**
+1. In GitHub Desktop, commit and push the website, -- 5817c553837f8805412f322646c66280b086bfd1
    1. then the orrery. -- 
 2. Do the phone look above.
 
 **Tony-actions**
-- (do) Reinstall interactive-exhibit 1.37 (Settings > Skills), and paste protocol v3.133 into the Project's instructions.
-- (decide) The phone look.
-- (decide) May I add the Scene Address button to the orrery dashboard, so its parity check goes green? Yes, or not now.
+- (do) Commit and push both repositories.
+- (do) Reinstall interactive-exhibit 1.37, and paste protocol v3.133 into the Project.
+- (decide) The phone look at "Tap to update."

@@ -1735,15 +1735,59 @@ nested tree); L-303 (the card model); gallery `index.html`,
   - Found: the orrery's Dashboard parity check goes red on the new Scene
     address check until the orrery dashboard has its button. The
     dashboard is an orrery file, so it waits for Tony's word.
-**Gap:** Tony's phone look (Mode 5): tick a scene on the phone, Share it
-to himself, open it on another device -- the same bodies at the same
-minute, "as shared" and "tap for now" under the title, a tap bringing
-now; Earth the same after Centre on Earth; Reset; a reload opening at
-now; and the words of the two notes. Then the editor's half (a Featured
-card from an address): designed, then built. The orrery dashboard's
-Scene Address button, on Tony's word.
-- Tony-action (decide): the phone look.
-- Tony-action (decide): the dashboard's Scene Address button.
+- **Tony's first phone look, 2026-11-08, night**, in chat, before the
+  push was read here (his words; he "will respond more later"):
+  - On the line under the title: "not clear what 'tap for now' means or
+    does. Also this pushes the text down into the scene. Consider
+    removing."
+  - On the tap: "I don't see any change. 5 minutes after changing. But
+    this may be confusing the recipient. The served scene is not at the
+    time sent or now rather the time fetched."
+  - On the reload: "reloading the sent page does not change it.
+    Reloading the page from the website updates the time however we
+    should consider changing the time to the time fetched not the time
+    served or loaded. Until we have a date picker."
+  - On the dashboard button: "yes". Added the same night (orrery
+    `palomas_orrery_dashboard.py`, the Scene Address button and its short
+    line); Dashboard parity read "PASS".
+  - Read here, not yet acted on. A reload of a RECEIVED link keeps the
+    sender's minute by design (only a minute the tab wrote itself opens
+    at now). The positions are worked out for the minute under the
+    title, from the orbits fetched at the nightly build, so five minutes
+    moves nothing a visitor can see; whether the tap registered at all
+    on his phone is not known. Showing the fetch time instead of the
+    opening minute would change Tony's ruling of 2026-09-26 (a room
+    draws the minute it is opened) in every room, and with it what `at`
+    is for: a design question for him, not built.
+- **Tony's ruling, 2026-11-08, night**, in chat, on the minute and the
+  words: "I misunderstood. I did not realize that you were propagating
+  the scene from fetch to now. That makes sense." So a room keeps
+  drawing the minute it is opened (his ruling of 2026-09-26 stands), and
+  a shared link keeps the sender's minute. On the tap: "The tap on the
+  line however does not bring it to now." On the words: "let's try
+  keeping the original lines and adding a third line, 'Tap to update.'
+  With an update to now link and the now time displayed. Note that a
+  simple reload does not work."
+  - BUILT the same night: the line under the title is the moment alone
+    again; under it a third line, "Tap to update.", a link of the page's
+    own (not Plotly's title text, whose tap did not register), placed
+    under the title wherever it sits and again when the screen turns. It
+    opens the room without the minute in the address, the rows kept, so
+    the line under the title then shows the time now; it is not a plain
+    reload. No third line for a frozen room, a minute too old for the
+    data, or the visitor's own page. Files: gallery
+    `interactive.html`, `gallery/scene_address.js`,
+    `documentation/smoke_scene_address.js` (21 wiring points),
+    `tools/headless/walk_scene_address.js` (39 checks; fails on a page
+    planted without the line). interactive-exhibit 1.37 and protocol
+    v3.133 reworded within the same bump.
+**Gap:** Tony's phone look at "Tap to update.": a shared scene opened on
+another device, the line tapped, the room again at now with the same
+bodies and the time now under the title; where the line sits on the
+phone, upright and sideways; Earth the same after Centre on Earth;
+Reset; and the words of the two notes. Then the editor's half (a
+Featured card from an address): designed, then built.
+- Tony-action (decide): the phone look at "Tap to update.".
 **Ref:** `documentation/DESIGN_shared_view_rulings_20261029.md`;
 `documentation/HANDOFF_coordination_20261028_29.md`; L-515 (one nested
 tree); L-165 (site continuity); L-503 (the belt on the website).

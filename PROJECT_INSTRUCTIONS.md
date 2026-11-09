@@ -632,7 +632,7 @@ interactive-exhibit          1.37 adding or changing an exhibit in
                                   back from a card the room opened); the shared
                                   scene link (the address's show and at,
                                   scene_address.js, the Scene address check,
-                                  "as shared")
+                                  "Tap to update.")
 <!-- SKILL-MANIFEST:END -->
 
 Session-Start Repo Pull and the SHA Round Trip [CRITICAL]
@@ -1341,8 +1341,9 @@ WHAT CHANGED. interactive-exhibit: a new paragraph under What a Room
 Opens On, The Shared Scene Link: ?show= (every row ticked, by key) and
 ?at= (the minute shown, UTC), written by the page with replaceState, at
 once when the room opens and the rows at every tick and Reset; a room
-opened from a link draws them, "as shared" under the title, a tap on
-that line bringing the visitor's now; a minute older than the served
+opened from a link draws them, with a third line under the title, "Tap
+to update.", bringing the visitor's now (Tony's first phone look: the
+first build's "as shared" on the title's own line did not take the tap); a minute older than the served
 window opens at now and says so, one past it freezes by the freeze's
 rule, a row the room no longer has is named; a minute the tab wrote
 itself opens at now; Reset keeps the room's own opening. Checked by the

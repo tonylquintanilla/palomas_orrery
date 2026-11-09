@@ -50,6 +50,10 @@ Module updated: November 8, 2026, night, with Anthropic's Claude Opus 5.5
 (L-517 at its close, L-423: the website's Picture Folds button and line,
 beside Scene Moment, for the gallery run's "Picture folds" check, which
 came with L-517 part 1 without one; Dashboard parity found it.)
+Module updated: November 8, 2026, night, with Anthropic's Claude Opus 5.5
+(L-518: the website's Scene Address button and line, beside Picture
+Folds, for the gallery run's new "Scene address" check; added on Tony's
+word, "yes", after Dashboard parity found it.)
 July 2026: added Linux Button-4/5 wheel scrolling to match columns 1/2's
 cross-platform coverage (CTkScrollableFrame's built-in handling only
 covers Windows/Mac <MouseWheel>). Audited LAUNCH_GROUPS against both
@@ -1165,6 +1169,23 @@ LAUNCH_GROUPS = {
         GALLERY_REPO_DIR,
         True,
         ["Picture folds"],
+        True),
+        ("Scene Address",
+        os.path.join("documentation", "run_offline_check.py"),
+        "The shared scene link (L-518): the address carries the rows "
+        "ticked (show) and the minute shown (at), so a forwarded link "
+        "opens the same scene. Works its cases by hand on the real "
+        "gallery/scene_address.js -- a shared minute drawn, one older "
+        "than the data opening at now, one past it frozen, the rows a "
+        "link ticks, the address written and read back -- holds every "
+        "served row and shell to a plain key, and checks the page's "
+        "wiring. It breaks its own file three ways first, to show it can "
+        "fail. GATES the gallery runner. The check is Node, so this "
+        "button runs it through documentation/run_offline_check.py. Runs "
+        "from the gallery repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        ["Scene address"],
         True),
         ("Page Framing",
         os.path.join("documentation", "run_offline_check.py"),
@@ -2289,6 +2310,9 @@ CARD_LINES = {
     ("Gallery -- checks and data",
      "Picture Folds"):
         "Checks each saved picture sits beside its row, with a way back.",
+    ("Gallery -- checks and data",
+     "Scene Address"):
+        "Checks a shared link carries the ticked rows and the minute.",
     ("Gallery -- checks and data",
      "Page Framing"):
         "Checks the page's framing helpers give the right axis ranges.",

@@ -8,14 +8,14 @@ Last updated: November 8, 2026, night: the website session (Opus), the shared sc
 >
 > **Changed since you last read this:**
 > - The shared scene link is built (L-518 (the shared link)). As you tick, the room writes the bodies and the minute into its own address, so your phone's Share sends the scene.
-> - Opened from a link: the same bodies at the same minute, "as shared" under the title; a tap on that line brings now. Too old for the data: now, and it says so. Past the data: the last day covered, as the freeze does.
+> - Opened from a link: the same bodies at the same minute, and a third line under the title, "Tap to update.", which brings now. Too old for the data: now, and it says so. Past the data: the last day covered, as the freeze does.
 > - Not built: making a Featured card from a link in the gallery editor. It needs a short talk first.
-> - Earlier today's lobby work is closed (L-517 (the lobby)).
+> - Your first look, built: the rooms keep drawing the minute they open (your word, "That makes sense"); "as shared" is gone, "Tap to update." is the new third line. The dashboard button is added.
 >
 > **Do next:** *Your phone look at the shared link (L-518 (the shared link)); then step 2b.*
 >
 > **Needs you now:**
-> - *(decide) May I add the orrery dashboard's Scene Address button? Its parity check is red without it.*
+> - *(decide) Your phone look at "Tap to update." on a shared link.*
 > - *(do) Commit and push the website, then the orrery.*
 > - *(do) Reinstall interactive-exhibit 1.37 (Settings > Skills), and paste protocol v3.133 into the Project.*
 > - *(do) Each morning, Pull origin on both, orrery then website, first.*
@@ -102,7 +102,7 @@ Read from files when this page was written, not typed from memory.
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
 Decisions, one at a time:
-- The orrery dashboard's Scene Address button (L-518 (the shared link)); in the box above.
+- None open.
 
 At the next design talk:
 - How obsolete code is treated, and when it goes (L-509 (obsolete

@@ -1,12 +1,12 @@
 ---
 name: interactive-exhibit
 description: How an interactive exhibit (a room in interactive.html such as ?exhibit=earth) is designed, built, verified and carded for the Paloma's Orrery gallery. Covers the exhibit switch and boot path, the assembler driver spec, the JS feature handoff, the shared chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent gate, back link), what is per-body, the served-data provenance contract, what a room opens on (the arrival block) and the shell-key stamp the renderers apply, the drawer order, who may write data/objects_config.json, the Mode 5 phone sequence, and carding an exhibit through Studio. Use when adding or changing an exhibit (Earth, Jupiter, the stars), touching sun* chrome in interactive.html, deciding what an exhibit may render, or editing the served words with store_writer or exhibit_store_editor. Not for propagation math (gallery-assembler), the nightly builder (gallery-cache-builder), or the Studio/converter chain (gallery-pipeline). Do not use for projects other than Paloma's Orrery.
-fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, its group rows, its two Resets, the Reset in every room's top bar, Home's order and its framing; Go To fitting a body's whole orbit and the orbit line in a body's hover; the count line's place; a bare interactive.html link and the Explorer's address; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia); a served number's citation and its source_note; the Typed facts check (smoke_typed_facts.js); a feature drawn as stored dots (the Hills cloud, Earth's radiation belts); the i panel's source list and its links (source_list.js); the order a room's drawer lists its shells in, where each begins (drawer_order.js, the Drawer order check); a spacecraft's path in the Solar System room (its positions file, solid and dashed, its text box); whether the website and the orrery agree on an object; the planets ticked with a spacecraft (companions); the i panel's words one sentence to a bullet; a comet on an open path in the Solar System room; the drawer's groups one JPL class to a row; JPL's terms in the words a visitor reads; a comet's companions; the drawer's Find a body box; the direction arrows on the orbits; the grid chip's AU note and the triad's frame note; the i button's first-visit note and hovers without a pointer line; the one text box for a tap and Go To (text_box.js); a group found by its find words; the i panel's Report a problem link; a drawing row in the Solar System room (the belt's cloud); a stored drawing's cross kept off the axes; the source line's UTC and JPL clock; the ruler and the x marks on the axes; an ended mission (the Historical missions group, its marker on its last day, mission_end; a craft that flew on and its end_note; a path cut before its mission ended and its cutoff_note); an orbital period under a year, printed in days only (days_only); one drawer for every centre (the fixed centre row, the trail line, Centre on, the root's ticks kept, a centre's children by distance among its shells); the Sun's shells in the Solar System room, how that room frames a shell, and what ?exhibit=sun opens on (EXHIBIT_ADDRESSES); the Earth room's Sun line; an object's parent as its fetched centre (check_tree_parents.py, the store writer's parent path); a room opened past the served window (the freeze, scene_moment.js, the Scene moment check, ?freeze=1); parent groups in the drawer (Comets over the comet groups, a sub-group's in); the text box opaque and the HUD hidden under it; the saved pictures beside their rows in the Solar System room's drawer (picture_folds.js, drawer_row in gallery_metadata.json, the way back from a card the room opened); the shared scene link (the address's show and at, scene_address.js, the Scene address check, "as shared")
+fires_when: adding or changing an exhibit in interactive.html; any edit to the Sun's chrome (drawer, nav cluster, frame zoom, i-panel, HUD, consent, back link); "Earth interactive", "?exhibit=", "new room in interactive.html"; deciding what numbers an exhibit may render and where they come from; what a room opens on (arrival block, drawn, moon); meta.shell_key and the trace stamp; editing the served words with store_writer or exhibit_store_editor; the Solar System room's drawer, its group rows, its two Resets, the Reset in every room's top bar, Home's order and its framing; Go To fitting a body's whole orbit and the orbit line in a body's hover; the count line's place; a bare interactive.html link and the Explorer's address; testing a room headlessly (tools/headless); carding an exhibit in Studio; choosing a feature's info link (NASA or Wikipedia); a served number's citation and its source_note; the Typed facts check (smoke_typed_facts.js); a feature drawn as stored dots (the Hills cloud, Earth's radiation belts); the i panel's source list and its links (source_list.js); the order a room's drawer lists its shells in, where each begins (drawer_order.js, the Drawer order check); a spacecraft's path in the Solar System room (its positions file, solid and dashed, its text box); whether the website and the orrery agree on an object; the planets ticked with a spacecraft (companions); the i panel's words one sentence to a bullet; a comet on an open path in the Solar System room; the drawer's groups one JPL class to a row; JPL's terms in the words a visitor reads; a comet's companions; the drawer's Find a body box; the direction arrows on the orbits; the grid chip's AU note and the triad's frame note; the i button's first-visit note and hovers without a pointer line; the one text box for a tap and Go To (text_box.js); a group found by its find words; the i panel's Report a problem link; a drawing row in the Solar System room (the belt's cloud); a stored drawing's cross kept off the axes; the source line's UTC and JPL clock; the ruler and the x marks on the axes; an ended mission (the Historical missions group, its marker on its last day, mission_end; a craft that flew on and its end_note; a path cut before its mission ended and its cutoff_note); an orbital period under a year, printed in days only (days_only); one drawer for every centre (the fixed centre row, the trail line, Centre on, the root's ticks kept, a centre's children by distance among its shells); the Sun's shells in the Solar System room, how that room frames a shell, and what ?exhibit=sun opens on (EXHIBIT_ADDRESSES); the Earth room's Sun line; an object's parent as its fetched centre (check_tree_parents.py, the store writer's parent path); a room opened past the served window (the freeze, scene_moment.js, the Scene moment check, ?freeze=1); parent groups in the drawer (Comets over the comet groups, a sub-group's in); the text box opaque and the HUD hidden under it; the saved pictures beside their rows in the Solar System room's drawer (picture_folds.js, drawer_row in gallery_metadata.json, the way back from a card the room opened); the shared scene link (the address's show and at, scene_address.js, the Scene address check, "Tap to update.")
 ---
 
 # Interactive Exhibit
 
-Read this file in 12 parts: lines 1-120, 121-174, 175-415, 416-656, 657-790, 791-801, 802-1040, 1041-1254, 1255-1467, 1468-1671, 1672-1860, 1861-2075.
+Read this file in 12 parts: lines 1-120, 121-174, 175-415, 416-601, 602-799, 800-810, 811-1049, 1050-1263, 1264-1476, 1477-1680, 1681-1869, 1870-2084.
 
 Skill version: 1.37 | 2026-11-08, night, with Anthropic's Claude Opus
 5.5, at palomas_orrery @ 0283834d and gallery @ d96b9989. v1.37 (L-518,
@@ -15,8 +15,8 @@ Opens On, Tony's rulings of 2026-10-29 and his go-ahead of 2026-11-08:
 the address carries the rows ticked (?show=, by key) and the minute
 shown (?at=, the maker's), and the page writes both itself with
 replaceState, so the browser's own Share sends the scene. A room opened
-from a link draws them, "as shared" under the title, a tap on that
-line bringing the visitor's now; a minute older than the data opens at
+from a link draws them, its title's lines as ever and a third, "Tap to
+update.", bringing the visitor's now (Tony's phone look); a minute older than the data opens at
 now and says so, one past it freezes, a row the room no longer has is
 named; Reset keeps the room's own opening (gallery/scene_address.js;
 the gallery run's Scene address row; walk_scene_address.js). And it
@@ -626,20 +626,29 @@ Share button (option 2, declined). A scene inside a centre carries it
 A ROOM OPENED FROM A LINK (`sceneAddressRead` before the driver runs,
 `sceneShowApply` after the arrival block and before the opening view is
 measured, so the view fits the shared rows): it draws the link's minute
-and its rows, the line under the title ending ", as shared", a
-middle dot (written escaped in the file) and "tap for now", and a tap on that line
-(`.gtitle-subtitle`, given pointer events by the `scene-shared` body
-class) reloads the room at the visitor's now, the rows kept, `at` taken
-out. A minute OLDER than the served window's start opens at now and
+and its rows. The title and the line under it stay as they are, and a
+THIRD LINE under them, "Tap to update." (`SceneAddress.UPDATE_WORDS`;
+Tony's phone look of 2026-11-08, night: "keeping the original lines and
+adding a third line, 'Tap to update.'"), opens the room again at the
+visitor's now, the rows kept and `at` taken out, so the line under the
+title then shows the time now (`sceneUpdateMount`). It is a link of the
+page's own (`#scene-update`, `.scene-update`), placed under the title's
+line wherever `sunFitTitle` put it and again when the screen turns
+(`sceneUpdatePlace`): the first build made the title's own line ", as
+shared" and "tap for now" and took the tap on Plotly's text, which did
+not register on Tony's phone, and the longer line pushed the title down
+into the scene. A plain reload keeps the minute, so the line never
+reloads. A minute OLDER than the served window's start opens at now and
 says so; a minute PAST its end is handed to SceneMoment, which freezes
-it like the clock, in the freeze's words, not "as shared" (method: the
+it like the clock, in the freeze's words, with no third line (method: the
 freeze's ruling, L-165, decides what lies past the data); a row the
 room no longer has is named. What a link could not show goes in a box
 with the text box's look in the middle of the view, gone at the next
 tap, and at the top of the i panel (`sceneAddressNoteShow`). A minute
 the tab wrote itself is remembered in sessionStorage
-(`po_scene_at_written`), so a reload or Back opens at now and not "as
-shared". Reset still puts back the room's OWN opening, not the link's
+(`po_scene_at_written`), so a reload or Back opens at now; a RECEIVED
+link keeps its minute on a reload, and "Tap to update." is the way to
+now. Reset still puts back the room's OWN opening, not the link's
 (a room of shells is handed the arrival's ticks recorded before the
 link's were applied, `servedShown`). The two sentences that say
 "today" take the frozen room's words for a shared minute too. The logic
