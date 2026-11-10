@@ -198,7 +198,7 @@ Website: none.
 **Token count:** this app has no /cost command. This session read parts of the ledger, the brief, three skills and the website's framing and driver code, and wrote the three files above.
 
 **Your run order**
-1. In GitHub Desktop, commit and push the orrery. -- 
+1. In GitHub Desktop, commit and push the orrery. -- 790e49c1a2e8f8746a1884bccaa0b8537350404c
 2. Start the Code session with the prompt below, putting your push's SHA where it says.
 
 **Prompt for the 2b build:**

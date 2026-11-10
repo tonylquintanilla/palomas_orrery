@@ -16,7 +16,7 @@ Last updated: November 9, 2026, late night: the coordinating session (Opus), ste
 > **Needs you now:**
 > - *(do) Commit and push the orrery: these records and the brief.*
 > - *(do) Start the 2b build with the prompt in the report.*
-> - *(do) Each morning, Pull origin on both, orrery then website, first.*
+> - *(do) Each morning, Fetch origin and Pull origin on both, orrery then website, before any work. If Pull origin shows up only once you have changes: Commit them first, then Pull origin, then Push origin. If Desktop stashes your changes anyway, restore them at once: Changes tab, Stashed Changes, Restore.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
 
 *Italic* lines are the must-reads. Marks reset at every update.
