@@ -153,16 +153,46 @@ The orrery run also rewrote its own generated files again: the module atlas and 
 
 **Your run order:** unchanged.
 1. Commit and push the website, -- e0e94b8566860bdd595daa6baf8f7727dddaf668
-   1. then the orrery. -- 
+   1. then the orrery. -- d03908908a0e0028ff146f5b2e7f8bf6a316cf0e
 2. Reinstall interactive-exhibit 1.40 and gallery-assembler 1.4, and paste protocol v3.136 into the Project's instructions.
 3. Do the phone look at step 2b from the list in my last report.
 
 Phone-look list
 
-The moon folds under Earth, Jupiter, Saturn and the Pluto system, and a moon’s box past its checked span (Io’s is past it most of the day). The sentence’s words are a proposal.
-Centre on for the Sun, Earth, Jupiter, Saturn and the Pluto system.
-The axis lines through the middle, and the frame note’s new line, “In this view the lines cross at Jupiter.”
-The trail path, for example “Solar system > Jupiter > Io”.
-Earth’s fold, where the Sun direction line is no longer drawn.
-The Pluto system’s open white square.
-A scene made while centred on Earth (?exhibit=earth).
+1. The moon folds under 
+   1. Earth, -- the moon should be included in the list of objects when searching for "Earth". this should apply to all satellites, not just shells.
+   2. Jupiter, -- did you mention this is due to the fetch uncertainty? also i do not see io when searching under "Jupiter" -- shouldn't all the Jupiter orbital features be shown including its moons? 
+   3. Saturn -- same issue as above for Titan. 
+   4. the Pluto system, -- correct. when pluto or charon are selected they fold under the barycenter. Charon should come up when searching "Pluto".
+   5. and a moon’s box past its checked span (Io’s is past it most of the day). The sentence’s words are a proposal. --  the only issue i see is the Charon text box which mentions that it's position is outside the trust window of 19 hours on either side of "the date of JPL's orbit", while in the info box we say that was 9 November midnight TDB. Can we replace "the date of JPL's orbit" with the actual date "9 Nov 2026, 0:00 UTC". Also the explanation is obscure, "This page checked its working-out against JPL...." Can we simplify this? Maybe, correct me as you see fit, "The position show was worked out from JPL's orbit on 9 Nov 2026, 0:00 UTC, but is outside the 19 hour best accuracy window for that orbit." Something like that until we fetch the 48 hour windows. 
+   
+2. Centre on for the Sun, Earth, Jupiter, Saturn and the Pluto system. -- correct
+3. The axis lines through the middle, and the frame note’s new line, “In this view the lines cross at Jupiter.” -- centering on Jupiter, i see that the orbit line does not go precisely through the center. i have not noticed this for other centers. 
+4. The trail path, for example “Solar system > Jupiter > Io”. -- centering on Jupiter with Io selected the path only shows "The Solar System"
+5. Earth’s fold, where the Sun direction line is no longer drawn. -- i don't see the sun direction indicator. i have also noticed that when starting with earth centered and a select a shell, the view expands to the solar system view instead to the specific shell drawn. the same for Jupiter and saturn. 
+6. The Pluto system’s open white square. -- correct. open squares are our symbol for positions in space that have structural meaning, like barycenters and L positions.
+7. A scene made while centred on Earth (?exhibit=earth). -- plotting Encke with Earth centered plots correctly.
+
+=================================
+
+The live site still runs your last push (e0e94b8), so the fix isn't there yet; I'm checking the fixed page at your zoom next.
+
+Your phone is showing the live site, which doesn't have the fix yet. Today's fixes are on your computer only; the website on GitHub is still at your last push (e0e94b8).
+
+- **What you measured is the fault I found:** your 0.0002 AU is about 30,000 km. The fault I measured was 27,957 km, the gap between Jupiter and the straight piece of the drawn orbit next to it.
+- **On the fixed copy:** I opened it centred on Jupiter and checked three zooms: the Io view, your zoom, and ten times closer than yours. At all three the orbit line passes exactly through Jupiter (0 km off), where the axis lines cross.
+
+Once you commit and push the website, the live site will draw the line through Jupiter. You may need to reload the page on your phone to see it.
+
+**Files for your run record:** nothing new since my last report. I only opened the page; nothing was edited.
+
+**Your run order:**
+1. Commit and push the website, -- 2dec9fc55164be4db9e6b0b591034d0952f525f6
+2. then the orrery. -- 
+3. On your phone, centre on Jupiter again and zoom in.
+
+**Tony-actions**
+- (decide) Whether Earth's fold draws the Sun direction line again.
+- (do) Commit and push the website, then the orrery.
+- (do) Each morning, Pull origin on both, orrery then website.
+- (do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).

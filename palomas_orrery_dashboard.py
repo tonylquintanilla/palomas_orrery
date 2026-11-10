@@ -1239,8 +1239,9 @@ LAUNCH_GROUPS = {
         "2b): Centre on opens a centre's own opening, the trail is the path "
         "down the tree, and the whole drawing is shifted so the middle sits "
         "at the scene's origin. Measures the 32-bit error on every moon, "
-        "from the Sun and with its planet at the middle, and prints it. It "
-        "breaks its own file four ways first, to show it can fail. GATES "
+        "from the Sun and with its planet at the middle, and prints it; a "
+        "body's orbit drawn through it. It breaks its own file five ways "
+        "first, to show it can fail. GATES "
         "the gallery runner. The check is Node, so this button runs it "
         "through documentation/run_offline_check.py. Runs from the gallery "
         "repo ROOT.",

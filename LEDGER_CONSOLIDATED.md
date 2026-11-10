@@ -780,6 +780,10 @@ Module updated: November 9, 2026, afternoon, with Anthropic's Claude Opus
 his copy WHERE_WE_ARE_11-9-26_1102_run_record.md; L-519 part 2 designed,
 a card placed in the room's own drawer tree, and placed next), built on
 orrery 09fb6934 with gallery 66c9f698 read only.
+Module updated: November 10, 2026 with Anthropic's Claude Fable 5.2 (the
+coordinating session: the governing documents reviewed; L-522 opened,
+document caps and the catch-up in six steps; step 1 briefed), built on
+orrery d0390890 with gallery e0e94b85 read only.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -997,7 +1001,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*258 live items; 242 need attention (`!`); 165 RICE-scored; 256 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*259 live items; 243 need attention (`!`); 165 RICE-scored; 256 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1169,6 +1173,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-516 | Renew palomasorrery.com at Porkbun before 2027-02-13 (legacy; Tony's account) | OPEN | -- | 2026-11-07 |
 | ! | L-520 | Old pictures carry old words: the saved pictures' titles and descriptions have no source (gallery, the saved pictures; the braid) | OPEN | -- | 2026-11-08 |
 | ! | L-521 | Three red checks in the drawer walk (gallery, the headless walk; recorded) | OPEN | -- | 2026-11-09 |
+| ! | L-522 | Document caps: how the working documents are kept from growing, and the catch-up (protocol, skills, ledger; upkeep) | OPEN | -- | 2026-11-10 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1601,6 +1606,96 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ## DETAIL / RECORD
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
+
+#### [L-522] Document caps: how the working documents are kept from growing, and the catch-up (protocol, skills, ledger; upkeep)
+<!-- L:522 status:OPEN upd:2026-11-10 section:A flag: rice: -->
+- **The review, 2026-11-10**
+  (`documentation/REVIEW_fundamental_documents_20261110.md`, read at
+  orrery b3ce81f8 and gallery cea21af1; the coordinating session, Claude
+  Fable 5.2). Tony asked for the governing documents to be reviewed for
+  gaps, effectiveness and efficiency. The finding in one sentence: each
+  document has a rule for how a line gets in and none for how a line
+  leaves, so each carries its own history and only grows. The
+  measurements are in the review and are not repeated here.
+- **Tony's rulings, 2026-11-10** (quoted with their times in
+  `documentation/DESIGN_document_caps_rulings_20261110.md`):
+  - Growth is held by a length cap on each working document. 09:48: "I
+    used to have a length cap on the project instructions at 800 lines.
+    There really no other method to control growth."
+  - A session pays where it touches, with a review from time to time.
+    09:48: "Generally where I touch works best with periodic
+    reassessments like this one. For the master plan generally that's
+    when a major build is finished."
+  - Upkeep goes between builds, never in front of one. 09:42, on the
+    Braid: "builds were being delayed by what I saw as secondary items.
+    The idea is to move along themes."
+  - The three rules and the six steps below: 09:57, "That makes sense."
+    and 10:02, "This makes sense. I would like this session to work as
+    the coordinator and we can split off chunks as we decide, on a
+    priority basis between other sessions as you said."
+  - Step 1 goes before Mars. 12:21: "before. Mars is the next part of
+    the braid. you can proceed with step 1."
+- **The method, three rules.** (1) Each working document has a cap, in
+  lines, and an overflow home: the named place an old line goes when it
+  leaves. (2) A session that adds to a document at its cap moves
+  something out first, to that home. (3) The maintenance run prints
+  every document over its cap, by name; only Tony raises a cap's number.
+  No new skill.
+- **Where the caps are written: changed after the tools were read, and
+  waiting for Tony's word.** At the talk rule 1 put each cap in the
+  document's own first lines. `doc_index.py` reads only the root's
+  documents, a skill has no such line, and a cap written into twelve
+  skill headers would make every installed copy differ from the
+  repository's until each was reinstalled. So step 1's brief puts all
+  the caps on ONE short page at the root, `DOCUMENT_CAPS.md`: the three
+  rules and a table of document, cap and home. One place for Tony to
+  read and to change a number, one tool, no skill header touched.
+  **Tony-action (decide):** the one page, or the first lines as first
+  said.
+- **The six steps**, each one session, between builds:
+  1. the mechanism, every cap set at the document's size that day, and
+     the two CLAUDE.md files under `documentation/` renamed (brief:
+     `documentation/COORD_L522_step1_caps_brief_20261110.md`);
+  2. `interactive-exhibit` split into its rules and an as-built
+     reference;
+  3. the protocol, after a talk;
+  4. this ledger's closed items and header stamps moved out by a tool;
+  5. the open items triaged by theme;
+  6. the master plan and both READMEs restamped once L-515 (one nested
+     tree) step 2b has had Tony's phone look.
+  After each step that document's cap drops to its new size.
+- **The same work, already on the ledger.** L-199 (protocol length),
+  L-215 (ledger cleanup by topic), L-230 (a skill bump and the
+  protocol's history), L-328 (a subtraction pass on the skills), and
+  the unbuilt check on L-396 (Where We Are's date and its 130 lines).
+  Each stays open until the step that does it closes it.
+- **A correction to the review's finding 5.** It said RICE scoring had
+  stopped for newer items. An item inside an ordered list needs no
+  score, by Tony's ruling of 2026-10-07 (L-412), so many of the 91
+  unscored rows in section A are unscored by rule. The finding's other
+  counts stand as measured.
+- **Read this session** [verified @d0390890]: Tony's working copies of
+  this ledger and of Where We Are equalled GitHub at d0390890, byte for
+  byte, before this item was written. All twelve skills in the account
+  equal the repository's, with `interactive-exhibit` at 1.40 and
+  `gallery-assembler` at 1.4, which is the confirmation v3.136 asked of
+  the next session; one header differs by a line wrap only. And this
+  header carried no stamp for the Nov 10 build while Where We Are's
+  third signal said the two dates agreed; this session's stamp is the
+  first of Nov 10.
+**Note (Claude):** not decided, and listed on the design record: the
+protocol's cap (800 lines again, or higher); whether the skill table
+leaves the protocol and the stale-skill check becomes "the installed
+skill equals the repository's copy", a change to a [CRITICAL] gate; each
+skill's target cap; the size limit for one ledger item. The harness (57
+of the 176 modules are developer tools) was measured, not reviewed.
+**Gap:** steps 1 to 6. **Tony-action (decide)**, at step 3: the
+protocol's cap, and whether the skill table leaves the protocol.
+**Ref:** the review and the design record named above; L-199, L-215,
+L-230, L-328, L-396; L-417 and L-418 (the 500-line warning and the
+contents lists); L-499 (the kinds of session); L-506 (Token Economy);
+L-012 (the false "fetched fresh" print, still at `palomas_orrery.py`
+line 4872).
 
 #### [L-521] Three red checks in the drawer walk (gallery, the headless walk; recorded)
 <!-- L:521 status:OPEN upd:2026-11-09 section:A flag: rice: -->
@@ -2815,21 +2910,18 @@ or the text box.
     received note on Reset's frame); gallery-assembler 1.3 -> 1.4 (No
     composition between frames says which kind is retired; it now has a
     read plan); protocol v3.136; the manifest regenerated.
-**Gap:** Tony's phone look of step 2b (the Tony-action below); then the
+**Gap:** Tony's look at the phone-look fixes below; whether Earth's fold
+draws the Sun direction line again (the Tony-action below); then the
 checkpoint on the one picture and step 3, L-514 (the Mars room), with
 ruling 11's 48-hour positions. Ruling 15's picture B (measured from the
 centre) waits for the date span, with the encounters (step 4) and the date
-picker. The three leftovers of 2b, above. The lobby moved to L-517 (the
-lobby for a first-time phone visitor).
+picker. The leftovers of 2b, above, leftover (2) narrowed below. The lobby
+moved to L-517 (the lobby for a first-time phone visitor).
 **Tony-action (do):** commit and push the website, then the orrery (the
-records and the two skills); reinstall interactive-exhibit 1.40 and
-gallery-assembler 1.4 (Settings > Skills) and paste protocol v3.136 into
-the Project's instructions.
-**Tony-action (decide):** the phone look of 2b, part by part: the moon
-folds and a moon's box past its span (its sentence); Centre on for the
-Sun, Earth, Jupiter, Saturn and the Pluto system; the axis lines and the
-frame note's line; the trail path; Earth's fold (the Sun line not drawn
-there); the open white square; an Earth scene made through ?exhibit=earth.
+records and the dashboard's one line).
+**Tony-action (decide):** whether Earth's fold in the one picture draws the
+Sun direction line again; and his look at the four fixes and the new
+sentence below.
 - **The dashboard's buttons, Nov 10, on Tony's "Yes please add the
   buttons"**: the orrery maintenance run had been red on Dashboard parity --
   four gallery run steps with no button, Compose children and View centre
@@ -2837,6 +2929,72 @@ there); the open white square; an Earth scene made through ?exhibit=earth.
   Drawer Places, Compose Children and View Centre were added beside Scene
   Address, each with its short line; Dashboard parity then passed, 105
   steps matched to their buttons and 137 cards carrying a line.
+- **Tony's phone look at step 2b, and its fixes, 2026-11-10, the same
+  website Code session** (Claude Opus 5.5), on gallery e0e94b85 and orrery
+  d0390890, his pushes of the build (run record
+  `WHERE_WE_ARE_11-10-26_1211_run_record.md`). His verdicts, item by item:
+  - CORRECT, in his words: Centre on for the five centres ("correct"); the
+    Pluto fold ("correct. when pluto or charon are selected they fold
+    under the barycenter"); the open white square ("correct. open squares
+    are our symbol for positions in space that have structural meaning,
+    like barycenters and L positions"); a scene centred on Earth
+    ("plotting Encke with Earth centered plots correctly").
+  - FIXED, Find: "the moon should be included in the list of objects when
+    searching for 'Earth'. this should apply to all satellites, not just
+    shells"; Io under "Jupiter", Titan under "Saturn", and "Charon should
+    come up when searching 'Pluto'". A body found now brings its whole
+    fold, open, at any depth, not counted as found
+    (SolarSystemDrawer.searchHits' kids); a centre whose fold is not drawn
+    yet (Earth's) is drawn when Find brings it. Leftover (2) narrows: a
+    shell's own name ("crust") is still not found before the fold is
+    drawn.
+  - FIXED, the frame after a tick: "when starting with earth centered and
+    a select a shell, the view expands to the solar system view instead to
+    the specific shell drawn. the same for Jupiter and saturn." Cause: a
+    tick framed on the farthest thing ticked anywhere, measured from the
+    middle, so the planets ticked before reached 6.4 AU. Method: with a
+    body at the middle, a row of its fold ticked or unticked frames on what
+    is ticked in that fold, each by the room's own measure and margin
+    (viewFoldFrameR); a row outside the fold frames as before.
+  - FIXED, the trail: "centering on Jupiter with Io selected the path only
+    shows 'The Solar System'". Not reproduced as worded: Go To on Io gave
+    the whole path, and only Home, Reset or a reload gives "Solar system"
+    alone -- a reload drops a view centred on Jupiter (leftover 3), which
+    may be what was seen. What was wrong: ticking or naming Io in
+    Jupiter's view left the trail on Jupiter. Now a row of the centred
+    fold ticked or named ends the trail on it ("Solar system > Jupiter >
+    Io"), and unticked returns it to the centre.
+  - FIXED, the orbit line: "centering on Jupiter, i see that the orbit line
+    does not go precisely through the center." Measured: the drawn orbit is
+    360 straight pieces, and the piece beside Jupiter passes 27,957 km from
+    Jupiter's marker, the curve's bend there (27,349 km worked out from the
+    piece's ends; Earth 5,098 km, Saturn 9,780). Framed on Io that is a
+    twelfth of the view. Each body's own place is now put into its own
+    drawn line (ViewCentre.throughPoint); Jupiter's orbit then misses it by
+    0 km.
+  - NEW WORDS, a moon past its checked span, Tony's proposal with one
+    correction: "The position shown was worked out from JPL's orbit dated 9
+    November 2026, midnight on JPL's clock, but is outside that orbit's
+    best-accuracy window of 19 hours either side." The date is printed on
+    JPL's clock (TDB), not as "0:00 UTC", by his ruling of Oct 29 (L-504)
+    that the i panel's source line follows; "either side" because the span
+    runs both ways.
+  - ANSWERED: "did you mention this is due to the fetch uncertainty?" Yes:
+    Io's box is past its span most of the day because the cache builder
+    checked the working-out for 5 hours either side of the elements' date,
+    Io's orbit being 1.8 days; ruling 11's 48-hour positions (step 3, with
+    Mars) are the fix.
+  - OPEN: "i don't see the sun direction indicator" in Earth's fold: as
+    built (method: not drawn in the root, the day-night line showing which
+    side faces the Sun); whether it comes back is his.
+  - CHECKED: the gallery maintenance run green, 45 of 45; the drawer walk
+    339 checks, only the three of L-521; its new section 36 and the View
+    centre check's fifth planted break shown red on planted faults (the
+    frame at 6.42 AU, the trail on Jupiter, the orbit 27,349 km off).
+  - THE SKILL, carried: interactive-exhibit 1.40's One picture section now
+    misses Find bringing a fold, the frame after a tick in a centred fold,
+    the trail following it, the orbit through its body, and the sentence's
+    new words; for its next version (this session bumped it once).
 - **Ref:** L-514 (the Mars room); L-443 (the drawer's groups); L-392 (the
   rooms section); L-291 (the Earth room); the protocol's The Orrery and
   the Assembler.
