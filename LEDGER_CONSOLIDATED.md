@@ -997,7 +997,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*259 live items; 243 need attention (`!`); 165 RICE-scored; 255 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*258 live items; 242 need attention (`!`); 165 RICE-scored; 256 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1167,7 +1167,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-514 | The Mars room: Mars, Phobos and Deimos (gallery + orrery, a planet room; road stage 15) | OPEN | -- | 2026-11-06 |
 | ! | L-515 | One nested tree in place of isolated rooms (gallery, the room system; design) | OPEN | -- | 2026-11-08 |
 | ! | L-516 | Renew palomasorrery.com at Porkbun before 2027-02-13 (legacy; Tony's account) | OPEN | -- | 2026-11-07 |
-| ! | L-519 | Featured's rethink: Scenes, a shared link kept in the tree and on Featured (gallery, the gallery editor and the Solar System room's drawer; part 2 built, phone look next) | OPEN | -- | 2026-11-09 |
 | ! | L-520 | Old pictures carry old words: the saved pictures' titles and descriptions have no source (gallery, the saved pictures; the braid) | OPEN | -- | 2026-11-08 |
 | ! | L-521 | Three red checks in the drawer walk (gallery, the headless walk; recorded) | OPEN | -- | 2026-11-09 |
 
@@ -1573,6 +1572,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-513 | The Moon's standards: its words, link, period and uncertainty, served by the orrery (orrery + gallery, objects; road stage 14) | DONE | -- | 2026-11-06 |
 |  | L-517 | The lobby for a first-time phone visitor: one door first, the pictures into the tree (gallery, lobby and drawer; design) | DONE | -- | 2026-11-08 |
 |  | L-518 | The shared scene link: the address carries the ticked bodies and the minute (gallery, every room of the tree; built, closed) | DONE | -- | 2026-11-08 |
+|  | L-519 | Featured's rethink: Scenes, a shared link kept in the tree and on Featured (gallery, the gallery editor and the Solar System room's drawer; built, closed) | DONE | -- | 2026-11-09 |
 
 ### W.Done -- Web Publication track, closed items
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1651,365 +1651,6 @@ or the text box.
 **Ref:** L-517 (the lobby for a first-time phone visitor); L-519
 (Featured's rethink); L-511 (the export carries the words); gallery
 `gallery/gallery_metadata.json`.
-
-#### [L-519] Featured's rethink: Scenes, a shared link kept in the tree and on Featured (gallery, the gallery editor and the Solar System room's drawer; part 2 built, phone look next)
-<!-- L:519 status:OPEN upd:2026-11-09 section:A flag: rice: -->
-- **Opened 2026-11-08, night**, at the close of L-517 (the lobby for a
-  first-time phone visitor), by the Claude Code session (Claude Opus
-  5.5) through the python_work door, on orrery 789c1ec8 and gallery
-  39900d75, to hold the lobby's loose ends that belong together. Not
-  designed; deferred behind the road.
-- Featured's rethink, in Tony's words in the lobby talk of Nov 8 (L-517,
-  its rulings): "featured is part of the gallery editor and with this new
-  tree we are basically deprecating the editor as it exists today.
-  featured can still be valuable, but we have to re-think it, while
-  piping the existing cards into the new tree." (10:03); "keep Featured
-  as-is and i can modify in the existing editor." (10:08). Featured stays
-  as it is until then.
-- **Moved out the same night, on Tony's word:** the cards' words with no
-  source, to L-520 (old pictures carry old words), a braid row ("this
-  should be part of the provenance braid. Old pictures carry old
-  words."); his ask to add a live view to Featured by its address, to
-  L-518 (the shared scene link), as part of that build ("this is needed
-  and likely is part of the specific URL's.").
-- Found in L-517's part 2, not changed: the gallery editor's own window
-  still says "under construction" for an empty room; the site no longer
-  does.
-- His pinned guest book note linked "START HERE: Solar System
-  Interactive Exhibit", words the lobby no longer uses. On his word the
-  same night ("Remove the ... link from my pinned guest book note") the
-  link was removed from his entry in data/guestbook.json; the note's
-  words, date and pin are unchanged.
-- **Received 2026-11-08, late night, from L-518 at its close** (the
-  shared scene link, built and closed): Tony's ask of 2026-11-08, 15:40,
-  "work on the gallery editor so I can add new views from the interactive
-  to the Featured views using their specific url". The specific address
-  now exists: `interactive.html?exhibit=<room>&show=<rows>&at=<minute>`,
-  written by the room itself (interactive-exhibit 1.37, The Shared Scene
-  Link). Not designed: part of this talk.
-- **Tony's question, 2026-11-08, 23:48 Chicago**, in the coordinating
-  session: can Studio or the gallery editor make a Featured card from the
-  new link today, for ED138? Answered from the code at gallery 6a153716,
-  not tried: by hand in the gallery editor only. Its Live scene URL box
-  takes any text, and index.html opens a card's live address unchanged
-  (window.location.href = viz.live). Studio's New Interactive Card offers
-  only the fixed list of room addresses (json_converter.live_scene_urls)
-  and refuses an address another card already opens.
-- **The design talk, 2026-11-09, morning**, in the coordinating session
-  (Claude Opus 5.5), with phone pictures. Tony's words, in order:
-  - 09:37: "Can we streamline the gallery editor pipeline for
-    interactive cards? 1) start with the link 2) import title etc 3)
-    handle any url edits 4) select placement in the tree 5) select
-    featured on or off 6) etc"
-  - 09:44, his design: "What if the card functions just like a shared
-    link but is permanent through the tree? In a sun drawer called
-    'Scenes' and Featured for a second link to the Featured section. So
-    basically the gallery editor just creates the link card."
-  - 09:48, on a scene's minute: "Now. A specific time is for the future
-    date picker and encounters." A scene always opens at the visitor's
-    now; its link carries no at=.
-  - 09:51, the order and Featured's purpose: "Before 2b. And on
-    Featured, I think it's just a board in the gallery highlighting
-    important cards or scenes. That's all. It can remain largely as
-    is."
-- **The design, as settled.** A SCENE is one record the gallery editor
-  makes: a name, the link, Featured on or off.
-  - The editor's New scene window: Tony pastes the whole link his
-    phone's Share gives; the editor removes the website's address in
-    front and the at= minute; it reads the show= keys against the
-    website's object list and names any it cannot find before saving;
-    it suggests a name from the bodies' names; the cleaned link sits in
-    a box he can edit, read again after each edit, with a Look button
-    opening it in his browser; a link already on a card is refused.
-  - In the room: a group named Scenes under the Sun in the Solar System
-    room's drawer. A tap on a scene opens its link, so it behaves as a
-    shared link does, and Back returns. A scene made while centred on
-    Earth opens there, since its link carries exhibit=earth.
-  - Featured on: the same scene is also an Interactive card on the
-    gallery page. One record, two doors to one link.
-  - The words: a scene carries its name only; each body's own words
-    stay in the room. So no copy of the export's words is made, and
-    L-520's class (words with no source) does not arise here.
-  - Method, not ruled: the record is a card in
-    gallery/gallery_metadata.json, the way the saved pictures reach
-    their folds (drawer_row, picture_folds.js); the editor does not
-    write data/objects_config.json, whose drawer comes from the orrery's
-    export. The build tells Tony in one plain message how the window
-    and the group will look before building.
-- **Built 2026-11-09**, by the Claude Code session (Claude Opus 5.5)
-  through the python_work door, on orrery c7cf3490 (Tony's ledger commit
-  of that morning, not yet pushed) and gallery 6a153716. Before building
-  it told Tony in one message how the window and the group would look;
-  his answer: "Go ahead". As built [verified @ the session's working
-  copy, headlessly; not yet seen on a phone]:
-  - THE RECORD: a card in `gallery/gallery_metadata.json` marked
-    `"scene": true`, room `solar_system`, shape 9:16, no files, its live
-    address the link with no minute, its title the name, Featured on or
-    off. No scene exists yet: Tony makes the first in the editor.
-  - THE WINDOW: the gallery editor's New Scene... (toolbar and Card
-    menu). A paste box; the cleaned link in a box he can edit, read again
-    after each edit, with Look; check lines in plain words (what was
-    taken off, the room, the rows found, any not found in red, a link
-    already on a card); a Name box filled from the rows' names; "Also
-    show on the gallery page's Featured"; Save scene, greyed until the
-    link checks clean and has a name; a key not found asks before
-    saving. Save All writes it, as every edit. The logic is
-    `tools/scene_card.py`, with no window (L-338), checked by
-    `tools/test_scene_card.py`, the gallery run's new Scene cards row
-    (gates; its self-test breaks the file three ways). The window was
-    driven once on a throwaway copy of the gallery files: a shared link
-    pasted, cleaned, named "Earth, Mars and 16 Psyche", saved as a
-    Featured scene.
-  - THE GROUP: one fold, Scenes, under the Sun's row in the Solar System
-    room's drawer, ahead of the Sun's saved pictures, with a bookmark
-    mark and its count, closed on opening; open, the line "Each scene
-    opens with its bodies ticked, at today's date." and each scene's name
-    with an arrow. A tap opens the link at the visitor's now; Back
-    returns to the room as it was left with the drawer open at Scenes
-    (the room keeps no ticks for a scene: its own address carries them;
-    `PictureFolds.returnFor` keeps what was kept through the scene's own
-    opening, takes it on Back, drops it on anything else). Find finds a
-    scene's name and counts it as a scene. A fold now has an id of its
-    own (`foldsAt`, `rowOf`).
-  - FEATURED: no change was needed; index.html's Featured rule shows a
-    Featured scene as any live card, with the Interactive tag.
-  - CHECKS: the gallery run offline, "42 of 42 gating checkers passed";
-    the Picture folds row's new section 6 and two more breaks (seven in
-    all, each caught); the drawer walk's new section 30 (14 checks with a
-    control, on a copy of the metadata holding two scenes, through the
-    harness's new `{serve}`), shown failing on a planted page without
-    the "keep"; and a one-off read of the real page headlessly: the
-    editor knows exactly the keys each room's address writes (the root
-    115; Earth 20, its two belts sharing one).
-  - interactive-exhibit 1.37 -> 1.38 (protocol v3.134). The account's
-    copy of 1.37 read 1.37 as expected but was its first cut: the repo's
-    copy had taken Tony's phone look of L-518 ("Tap to update.") under
-    the same number. 1.38 carries the repo's words.
-  - Found, not changed: the drawer walk is red on three checks at the
-    base, before this session's edits; recorded on L-521 (three red
-    checks in the drawer walk).
-- **Tony-action (do):** the phone look, list below; then Tony makes the
-  first scenes in the editor (New Scene..., then Save All) and pushes
-  the website.
-- **The phone look** (Mode 5; the first scene made, pushed):
-  1. The Solar System room's drawer: Scenes right under the Sun's row,
-     above Saved pictures, with its bookmark mark and count, closed.
-  2. Open it: the line "Each scene opens with its bodies ticked, at
-     today's date." reads right, and each scene's name.
-  3. Tap a scene: the room opens with its bodies ticked, at now, with no
-     "Tap to update." line.
-  4. The phone's Back: the room as you left it, the drawer open at Scenes.
-  5. Find: type part of a scene's name; it shows, "1 scene matches".
-  6. Reset folds Scenes shut.
-  7. A Featured scene on the gallery page: a card with the Interactive
-     tag that opens the same view.
-  8. A scene made while centred on Earth opens the Earth room.
-  9. At the computer: the New Scene window (paste, the check lines, the
-     name, Look, Save scene).
-- **First try, 2026-11-09, afternoon** (Tony's run record
-  `WHERE_WE_ARE_11-9-26_1102_run_record.md`, read by the same Code
-  session): Tony made the first scene, "New Candidate Dwarf Planet 2026
-  ED138" (earth, neptune, pluto_barycenter, tno_2026_ed138; Featured),
-  and pushed gallery 1f95d2c1. Its Pages deploy failed twice, "Internal
-  server error", during GitHub's incident with Actions, Pages and
-  Webhooks (opened 18:12Z, mitigated 18:43Z, githubstatus.com); the push
-  was at 18:17Z. So the live site still served 6a15371 (the live run: 4
-  files STALE; picture_folds.js served has no Scenes), and item 1 failed
-  for that reason: Scenes was never deployed. Not a fault in the build.
-  His notes on the window:
-  - Windows' paste (the right-click menu) does nothing in the window's
-    boxes; Ctrl+V works. Tk's Entry has no right-click menu. FIXED the
-    same afternoon on Tony's "Yes, add it": `add_edit_menu` in
-    `tools/gallery_editor.py` gives the window's three boxes Cut, Copy,
-    Paste and Select all, and its check lines Copy and Select all, each
-    asking the box's own Tk binding [verified @ a throwaway copy of the
-    gallery files: Paste filled the paste box and the link was cleaned
-    and named as with Ctrl+V; Cut and Copy reached the clipboard; the
-    offline run, 42 of 42 gating checkers passed]. Not yet tried by Tony.
-  - The link lists the rows in the order they were ticked, and the room
-    opens with the drawer showing the last one ticked.
-  - The card's room list in the editor is the old hand-curated tree, not
-    the room's tree; he chose Solar System, which saved `solar_system`,
-    as a scene needs.
-  - Pushed again (gallery 285f14bc, with the right-click Paste), it
-    deployed: Tony's live run, "all 62 files served and byte-identical".
-    Tony's right-click Paste worked; Save scene stayed grey because he
-    pasted the ED138 link again, which the window refuses as already on
-    a card, as built.
-- **The phone look, 2026-11-09, evening** (Tony's run record, same copy):
-  items 1, 2, 3, 4, 6 and 7 "yes"; 9 "done for ed 138"; 8 not tested (no
-  Earth scene yet); 5 FAILED: "find ed138 only finds the object not the
-  scene". Why: a saved picture's words brought its row into view only
-  when no body and no group matched (L-517's rule), and a scene obeyed
-  the same rule; but a scene sits under the Sun, not beside the bodies it
-  names, so a search holding a body's name hid it. FIXED the same evening
-  by the same Code session: in `gallery/solar_system_drawer.js`
-  (`searchHits`) a scene's name brings the Sun's row whatever else
-  matches, a saved picture still only alone; the count line says "1 body
-  and 1 scene match" (`WORDS.found`). [verified @ the working copy: the
-  Picture folds row's new cases and an eighth break, caught; the drawer
-  walk's new check in section 30 ("jupiter" finds Jupiter and the scene
-  "Mars and Jupiter"), shown failing on a copy with the old drawer file;
-  the offline run, 42 of 42 gating checkers passed; not yet on a phone.]
-  The walk's section 30 now takes the real scenes out of its copy, and
-  29b steps over the Scenes fold: Tony's first scene had put the walk 5
-  red beyond L-521's three; back to those three. interactive-exhibit's
-  Scenes bullet still reads true ("Find finds a scene's name"); the
-  finer rule waits for its next version.
-- **Tony's look at Find, 2026-11-09, afternoon**, from his copy
-  WHERE_WE_ARE_11-9-26_1102_run_record.md as attached to the coordinating
-  session (the repo's copy of it ends before these lines): find "ed138",
-  "perfect. thanks." Item 5 passed. Item 8, "(later) Make a scene in the
-  Earth room, to finish item 8. -- correct": it waits until he makes one.
-- **Part 2, designed 2026-11-09, afternoon**, in the coordinating session
-  (Claude Opus 5.5), with phone pictures. Tony's words, in order:
-  - 14:53: "The gallery tree as shown in the gallery editor now does not
-    match what we see in the website. For example, I should be able to
-    put the ED138 scene next to the ED138 body instead of the one scenes
-    drawer. I think this would be the next step. And I can clean up
-    remaining checks at the turn."
-  - 14:58: "I know we only have one scene built the same but can we put
-    it next to more than one body. ED138 is not that, but say a flyby."
-  - 15:00, asked between A (every scene beside a body's row, the Scenes
-    group gone) and B (his choice per scene, beside a row or in Scenes):
-    "I think B so I can decide what goes where"
-- **The design, part 2.** Tony decides where each scene goes: one or more
-  places, each a row of the room's drawer, and Scenes under the Sun one of
-  them. (His 15:00 answer read with his 14:58 ask; the reading was stated
-  to him in the reply.)
-  - The gallery editor's tree, for the Solar System room's cards, shows
-    the room's own drawer as the website lists it, read from
-    data/objects_config.json's rooms.drawer, read only; the editor writes
-    only a card's place. Method, not ruled: the old hand-curated tree
-    stays for the cards outside that room (84 of 135 at gallery 66c9f698:
-    the Earth System's and the stars').
-  - A card's place, drawer_row, is one row today (a string,
-    gallery/picture_folds.js); it becomes one or more. The card stays one
-    record, shown in each place; Back returns to the place it was tapped
-    from. The saved pictures use the same field and the same tree.
-    Method, not ruled.
-  - Said to Tony at 14:58, not contested: a scene opens at now (his
-    ruling of 09:48), so a flyby's moment belongs to the encounters and
-    the date picker; a scene in several places suits something happening
-    now, such as Psyche on its way to 16 Psyche.
-- **Part 2, built 2026-11-09, evening**, by the Claude Code session
-  (Claude Opus 5.5) through the python_work door, on orrery 09fb6934 (the
-  coordinating session's records of the afternoon written in the folder,
-  not yet committed) and gallery 66c9f698. The account's copy of
-  interactive-exhibit loaded as 1.37, the copy cached when the session
-  began; the account's copy on disk read 1.38, byte for byte the repo's,
-  and the session worked from it, saying so to Tony. Before building it
-  told Tony how the tree would look and how a card is placed, with the
-  two calls marked "not ruled" above; Tony asked how a scene of Voyager 1
-  past the Heliopause would sit, and ruled: "Yes we can add them" (the
-  Sun's shells and the belt's cloud as places); then, asked to go ahead,
-  "Yes, i mention it now so our architecture can best accommodate
-  inclusion of planetary features in the solar system view" (Mercury's
-  sodium tail, the giant planets' magnetospheres and Hill spheres, the
-  exceptions he named as visible at that scale). As built [verified @ the
-  session's working copy, headlessly and on a throwaway copy of the
-  gallery files; not yet seen on a phone]:
-  - A PLACE is any row the root's drawer lists: a body's slug, a group's
-    key, a Sun's shell by its served shell key ("heliopause"), the belt's
-    cloud by its drawing's name ("main_belt"). `drawer_row` is one place
-    (a string) or several (a list). The page now hands each Sun's shell
-    row its shell key (`shell_key`, from the shell's traces); the
-    rotation axis, a frame element, has none and is no place. A card is
-    one record shown in a fold under each of its rows, counted once by
-    the folds and by Find; Back returns to the fold it was opened from. A
-    scene sits in a Scenes fold under each row it names (`scenes` under
-    the Sun, `scenes:<row key>` elsewhere), under the Sun when it names
-    none. `gallery/picture_folds.js` (`rowKeyFor`, `placesOf`,
-    `sceneFoldFor`), `gallery/solar_system_drawer.js` (a shell row's
-    `shellKey`; Find counts a card once).
-  - PLANET FEATURES: once the root draws one as a row, as it draws the
-    Sun's shells, it is a place by its shell key with nothing else to
-    change. One drawn only in its planet's own room is a row of that
-    room's drawer, which holds no folds yet: placing a card there is a
-    later step. Which features the root draws is each planet room's talk;
-    Tony's three exceptions are for those talks.
-  - THE EDITOR: the Solar System door lists the room's own drawer, read
-    only -- the Sun with "The Sun's shells" under it (in the config's
-    order, the website placing each at its distance), then every group
-    and body row in served order, nested as on the phone, an "order": "a"
-    group sorted as the website sorts it -- each card under every row it
-    sits beside, scenes first; "Not in the drawer" (the three room
-    cards); "Places the drawer does not list" if any. The Earth System
-    and the Stars keep the hand-curated tree (method, as offered). A
-    Solar System card's form has "Places in the drawer": Add place... (a
-    window with the tree and a Find box), Remove place; twins follow;
-    removing a picture's last place asks first; a scene's last place
-    leaves it beside the Sun. Save All names each change. The logic is
-    `tools/drawer_places.py`; `tools/gallery_editor.py` shows it.
-  - CHECKS: the offline gallery run, "43 of 43 gating checkers passed",
-    with the new Drawer places row (`tools/test_drawer_places.py`: worked
-    cases; the real tree in the website's order, worked out by node from
-    `orderGroups`; the Sun's shells; every real card's places; the file
-    broken three ways first, each caught); the Picture folds row's new
-    section 7 and three more breaks, eleven in all, each caught; the
-    drawer walk's new section 31 (a scene beside Jupiter and the
-    Heliopause, a picture beside 3I/ATLAS and the belt's cloud, Find, Back),
-    failing on a copy with the old `picture_folds.js`, the walk otherwise
-    red only on L-521's three. Read once against the real page
-    headlessly: the editor's tree and the page's rows agree, 116 rows in
-    the same order, and the Sun's shells but the rotation axis. The
-    editor was driven on a throwaway copy: the ED138 scene placed beside
-    2026 ED138 and the Heliopause and taken from the Sun, a twin
-    following its picture, Save All writing and naming each change; the
-    fold check passed on the copy saved.
-  - interactive-exhibit 1.38 -> 1.39 (protocol v3.135).
-- **Tony-action (do):** the phone look, part 2's list below, after he
-  places a card in the editor and pushes.
-- **The phone look, part 2** (Mode 5):
-  1. At the computer: the gallery editor's Solar System door shows the
-     room's drawer: the Sun first with "The Sun's shells" under it, then
-     the rows as on the phone, ED138's scene under the Sun, "Not in the
-     drawer" at the end. The Earth System and the Stars as before.
-  2. Select ED138's scene: "Places in the drawer" lists "Sun (Scenes
-     under the Sun)", with Add place... and Remove place.
-  3. Add place..., find "ED138", choose 2026 ED138, Add place: the scene
-     shows under both rows. Save All names the change.
-  4. On the phone: 2026 ED138's row (in Trans-Neptunian objects) has a
-     Scenes group under it with the scene; the Sun's Scenes still has it.
-  5. Tap it from ED138's row; the phone's Back returns to ED138's row,
-     the drawer open there.
-  6. Find "ED138": the body and the scene, counted once: "1 body and 1
-     scene match".
-  7. If you place a card beside a Sun's shell (the Heliopause), its
-     Scenes or pictures group sits under that shell's row, wherever the
-     website places it.
-  8. Remove the Sun from ED138's scene in the editor, Save All, push: the
-     Sun's Scenes group goes, the scene stays beside ED138.
-- **Part 2 deployed, 2026-11-09, night** (Tony's run record, same copy,
-  read by the same Code session). His first push after the build carried
-  no part 2: GitHub Desktop stashed the uncommitted changes before the
-  pull of the nightly bot's 5edb514 (the history log: "reset: moving to
-  HEAD", then the pull, at 17:32), and 5edb514, written down as his
-  commit, was the bot's; the editor he reran was the folder's older code.
-  The stash held all of part 2, ED138's scene placed beside 2026 ED138
-  among it, and its three .sha files equal to the bot's; Tony restored it
-  and committed cea21af. That deploy's last step, "Deploy to GitHub
-  Pages", waited ten minutes and timed out (the build itself took 23
-  seconds; githubstatus.com listed no open Pages incident); re-run, it
-  deployed. Tony: "all green" (the live check), and the served
-  `gallery/picture_folds.js` carries part 2's `placesOf` [verified @
-  palomasorrery.com, read by the session]. Method learned: when GitHub
-  Desktop offers to stash before a pull, commit first, or restore the
-  stash right after.
-**Gap:** Tony's phone look of part 2, above; the item closes on it. Left
-for his clean-up at the turn (14:53): item 8 of the first list, a scene
-made in the Earth room opening that room; and the editor's "under
-construction" line, above. Later, by the planet rooms: a card placed in
-a centre's own drawer (Earth's, then each planet's).
-**Ref:** L-517 (the lobby for a first-time phone visitor); L-518 (the
-shared scene link); L-520 (old pictures carry old words); L-515 (one
-nested tree); L-303 (the card model); L-521 (three red checks in the
-drawer walk); L-514 (the Mars room); gallery `index.html`,
-`gallery/gallery_metadata.json`, `tools/gallery_editor.py`,
-`tools/scene_card.py`, `tools/test_scene_card.py`,
-`tools/drawer_places.py`, `tools/test_drawer_places.py`,
-`gallery/picture_folds.js`, `gallery/solar_system_drawer.js`,
-`interactive.html`.
 
 #### [L-516] Renew palomasorrery.com at Porkbun before 2027-02-13 (legacy; Tony's account)
 <!-- L:516 status:OPEN upd:2026-11-07 section:A flag: rice: -->
@@ -2926,6 +2567,15 @@ drawer walk); L-514 (the Mars room); gallery `index.html`,
   `sunReset` through `navHome`), not the frame the page opened on; the
   skill's "the opening frame and angle" may say so. A description, not a
   wrong instruction.
+- **Received 2026-11-09, night, from L-519 at its close** (Featured's
+  rethink): (1) a scene made in the Earth room opening that room, item 8
+  of L-519's first phone look, not yet tried (no Earth scene exists);
+  Tony's clean-up "at the turn". (2) A card placed in a centre's own
+  drawer -- Earth's, then each planet's: L-519 part 2 places cards in the
+  root's drawer only (any row, the Sun's shells and the belt's cloud
+  included); a centre's drawer holds no folds yet, and a place there
+  would name the room as well. A planet feature the root draws as a row
+  needs nothing more. For step 3 (Mars) or the first centre to want it.
 **Gap:** step 2b; L-514 (the Mars room) waits for step 3. Carried from
 his look at part 3: the Moon's Go To box (the Mars website session).
 The lobby moved to L-517 (the lobby for a first-time phone visitor).
@@ -4644,6 +4294,12 @@ failure mode and how its failure shows.
   its block in `data/objects_config.json` from its orrery key, and its
   drawer row in a group. It joins Where We Are's question whether the
   editor also edits the Solar System room's rows.
+- **Received 2026-11-09, night, from L-519 at its close** (Featured's
+  rethink): the gallery editor still marks an empty hand-curated room
+  "under construction", which the site no longer says (found in L-517's
+  part 2). Since L-519 part 2 the Solar System door lists the room's own
+  drawer and shows none; the Earth System and the Stars doors still do.
+  For the next session that opens tools/gallery_editor.py.
 **Gap (replaces the one below, 2026-10-27):** after L-412 and L-413
 close: the encounters question first; then the discovery list; then
 the build, example 1 first.
@@ -16332,6 +15988,368 @@ skills/gallery-assembler/SKILL.md, skills/interactive-exhibit/SKILL.md.
 ## PENDING ACTION (Tony-side)
 
 ## C. RECONCILED LEDGER -- DONE (closed; for the record, do not re-do)
+
+#### [L-519] Featured's rethink: Scenes, a shared link kept in the tree and on Featured (gallery, the gallery editor and the Solar System room's drawer; built, closed)
+<!-- L:519 status:DONE upd:2026-11-09 section:C flag: rice: -->
+- **Opened 2026-11-08, night**, at the close of L-517 (the lobby for a
+  first-time phone visitor), by the Claude Code session (Claude Opus
+  5.5) through the python_work door, on orrery 789c1ec8 and gallery
+  39900d75, to hold the lobby's loose ends that belong together. Not
+  designed; deferred behind the road.
+- Featured's rethink, in Tony's words in the lobby talk of Nov 8 (L-517,
+  its rulings): "featured is part of the gallery editor and with this new
+  tree we are basically deprecating the editor as it exists today.
+  featured can still be valuable, but we have to re-think it, while
+  piping the existing cards into the new tree." (10:03); "keep Featured
+  as-is and i can modify in the existing editor." (10:08). Featured stays
+  as it is until then.
+- **Moved out the same night, on Tony's word:** the cards' words with no
+  source, to L-520 (old pictures carry old words), a braid row ("this
+  should be part of the provenance braid. Old pictures carry old
+  words."); his ask to add a live view to Featured by its address, to
+  L-518 (the shared scene link), as part of that build ("this is needed
+  and likely is part of the specific URL's.").
+- Found in L-517's part 2, not changed: the gallery editor's own window
+  still says "under construction" for an empty room; the site no longer
+  does.
+- His pinned guest book note linked "START HERE: Solar System
+  Interactive Exhibit", words the lobby no longer uses. On his word the
+  same night ("Remove the ... link from my pinned guest book note") the
+  link was removed from his entry in data/guestbook.json; the note's
+  words, date and pin are unchanged.
+- **Received 2026-11-08, late night, from L-518 at its close** (the
+  shared scene link, built and closed): Tony's ask of 2026-11-08, 15:40,
+  "work on the gallery editor so I can add new views from the interactive
+  to the Featured views using their specific url". The specific address
+  now exists: `interactive.html?exhibit=<room>&show=<rows>&at=<minute>`,
+  written by the room itself (interactive-exhibit 1.37, The Shared Scene
+  Link). Not designed: part of this talk.
+- **Tony's question, 2026-11-08, 23:48 Chicago**, in the coordinating
+  session: can Studio or the gallery editor make a Featured card from the
+  new link today, for ED138? Answered from the code at gallery 6a153716,
+  not tried: by hand in the gallery editor only. Its Live scene URL box
+  takes any text, and index.html opens a card's live address unchanged
+  (window.location.href = viz.live). Studio's New Interactive Card offers
+  only the fixed list of room addresses (json_converter.live_scene_urls)
+  and refuses an address another card already opens.
+- **The design talk, 2026-11-09, morning**, in the coordinating session
+  (Claude Opus 5.5), with phone pictures. Tony's words, in order:
+  - 09:37: "Can we streamline the gallery editor pipeline for
+    interactive cards? 1) start with the link 2) import title etc 3)
+    handle any url edits 4) select placement in the tree 5) select
+    featured on or off 6) etc"
+  - 09:44, his design: "What if the card functions just like a shared
+    link but is permanent through the tree? In a sun drawer called
+    'Scenes' and Featured for a second link to the Featured section. So
+    basically the gallery editor just creates the link card."
+  - 09:48, on a scene's minute: "Now. A specific time is for the future
+    date picker and encounters." A scene always opens at the visitor's
+    now; its link carries no at=.
+  - 09:51, the order and Featured's purpose: "Before 2b. And on
+    Featured, I think it's just a board in the gallery highlighting
+    important cards or scenes. That's all. It can remain largely as
+    is."
+- **The design, as settled.** A SCENE is one record the gallery editor
+  makes: a name, the link, Featured on or off.
+  - The editor's New scene window: Tony pastes the whole link his
+    phone's Share gives; the editor removes the website's address in
+    front and the at= minute; it reads the show= keys against the
+    website's object list and names any it cannot find before saving;
+    it suggests a name from the bodies' names; the cleaned link sits in
+    a box he can edit, read again after each edit, with a Look button
+    opening it in his browser; a link already on a card is refused.
+  - In the room: a group named Scenes under the Sun in the Solar System
+    room's drawer. A tap on a scene opens its link, so it behaves as a
+    shared link does, and Back returns. A scene made while centred on
+    Earth opens there, since its link carries exhibit=earth.
+  - Featured on: the same scene is also an Interactive card on the
+    gallery page. One record, two doors to one link.
+  - The words: a scene carries its name only; each body's own words
+    stay in the room. So no copy of the export's words is made, and
+    L-520's class (words with no source) does not arise here.
+  - Method, not ruled: the record is a card in
+    gallery/gallery_metadata.json, the way the saved pictures reach
+    their folds (drawer_row, picture_folds.js); the editor does not
+    write data/objects_config.json, whose drawer comes from the orrery's
+    export. The build tells Tony in one plain message how the window
+    and the group will look before building.
+- **Built 2026-11-09**, by the Claude Code session (Claude Opus 5.5)
+  through the python_work door, on orrery c7cf3490 (Tony's ledger commit
+  of that morning, not yet pushed) and gallery 6a153716. Before building
+  it told Tony in one message how the window and the group would look;
+  his answer: "Go ahead". As built [verified @ the session's working
+  copy, headlessly; not yet seen on a phone]:
+  - THE RECORD: a card in `gallery/gallery_metadata.json` marked
+    `"scene": true`, room `solar_system`, shape 9:16, no files, its live
+    address the link with no minute, its title the name, Featured on or
+    off. No scene exists yet: Tony makes the first in the editor.
+  - THE WINDOW: the gallery editor's New Scene... (toolbar and Card
+    menu). A paste box; the cleaned link in a box he can edit, read again
+    after each edit, with Look; check lines in plain words (what was
+    taken off, the room, the rows found, any not found in red, a link
+    already on a card); a Name box filled from the rows' names; "Also
+    show on the gallery page's Featured"; Save scene, greyed until the
+    link checks clean and has a name; a key not found asks before
+    saving. Save All writes it, as every edit. The logic is
+    `tools/scene_card.py`, with no window (L-338), checked by
+    `tools/test_scene_card.py`, the gallery run's new Scene cards row
+    (gates; its self-test breaks the file three ways). The window was
+    driven once on a throwaway copy of the gallery files: a shared link
+    pasted, cleaned, named "Earth, Mars and 16 Psyche", saved as a
+    Featured scene.
+  - THE GROUP: one fold, Scenes, under the Sun's row in the Solar System
+    room's drawer, ahead of the Sun's saved pictures, with a bookmark
+    mark and its count, closed on opening; open, the line "Each scene
+    opens with its bodies ticked, at today's date." and each scene's name
+    with an arrow. A tap opens the link at the visitor's now; Back
+    returns to the room as it was left with the drawer open at Scenes
+    (the room keeps no ticks for a scene: its own address carries them;
+    `PictureFolds.returnFor` keeps what was kept through the scene's own
+    opening, takes it on Back, drops it on anything else). Find finds a
+    scene's name and counts it as a scene. A fold now has an id of its
+    own (`foldsAt`, `rowOf`).
+  - FEATURED: no change was needed; index.html's Featured rule shows a
+    Featured scene as any live card, with the Interactive tag.
+  - CHECKS: the gallery run offline, "42 of 42 gating checkers passed";
+    the Picture folds row's new section 6 and two more breaks (seven in
+    all, each caught); the drawer walk's new section 30 (14 checks with a
+    control, on a copy of the metadata holding two scenes, through the
+    harness's new `{serve}`), shown failing on a planted page without
+    the "keep"; and a one-off read of the real page headlessly: the
+    editor knows exactly the keys each room's address writes (the root
+    115; Earth 20, its two belts sharing one).
+  - interactive-exhibit 1.37 -> 1.38 (protocol v3.134). The account's
+    copy of 1.37 read 1.37 as expected but was its first cut: the repo's
+    copy had taken Tony's phone look of L-518 ("Tap to update.") under
+    the same number. 1.38 carries the repo's words.
+  - Found, not changed: the drawer walk is red on three checks at the
+    base, before this session's edits; recorded on L-521 (three red
+    checks in the drawer walk).
+- **Tony-action (do):** the phone look, list below; then Tony makes the
+  first scenes in the editor (New Scene..., then Save All) and pushes
+  the website.
+- **The phone look** (Mode 5; the first scene made, pushed):
+  1. The Solar System room's drawer: Scenes right under the Sun's row,
+     above Saved pictures, with its bookmark mark and count, closed.
+  2. Open it: the line "Each scene opens with its bodies ticked, at
+     today's date." reads right, and each scene's name.
+  3. Tap a scene: the room opens with its bodies ticked, at now, with no
+     "Tap to update." line.
+  4. The phone's Back: the room as you left it, the drawer open at Scenes.
+  5. Find: type part of a scene's name; it shows, "1 scene matches".
+  6. Reset folds Scenes shut.
+  7. A Featured scene on the gallery page: a card with the Interactive
+     tag that opens the same view.
+  8. A scene made while centred on Earth opens the Earth room.
+  9. At the computer: the New Scene window (paste, the check lines, the
+     name, Look, Save scene).
+- **First try, 2026-11-09, afternoon** (Tony's run record
+  `WHERE_WE_ARE_11-9-26_1102_run_record.md`, read by the same Code
+  session): Tony made the first scene, "New Candidate Dwarf Planet 2026
+  ED138" (earth, neptune, pluto_barycenter, tno_2026_ed138; Featured),
+  and pushed gallery 1f95d2c1. Its Pages deploy failed twice, "Internal
+  server error", during GitHub's incident with Actions, Pages and
+  Webhooks (opened 18:12Z, mitigated 18:43Z, githubstatus.com); the push
+  was at 18:17Z. So the live site still served 6a15371 (the live run: 4
+  files STALE; picture_folds.js served has no Scenes), and item 1 failed
+  for that reason: Scenes was never deployed. Not a fault in the build.
+  His notes on the window:
+  - Windows' paste (the right-click menu) does nothing in the window's
+    boxes; Ctrl+V works. Tk's Entry has no right-click menu. FIXED the
+    same afternoon on Tony's "Yes, add it": `add_edit_menu` in
+    `tools/gallery_editor.py` gives the window's three boxes Cut, Copy,
+    Paste and Select all, and its check lines Copy and Select all, each
+    asking the box's own Tk binding [verified @ a throwaway copy of the
+    gallery files: Paste filled the paste box and the link was cleaned
+    and named as with Ctrl+V; Cut and Copy reached the clipboard; the
+    offline run, 42 of 42 gating checkers passed]. Not yet tried by Tony.
+  - The link lists the rows in the order they were ticked, and the room
+    opens with the drawer showing the last one ticked.
+  - The card's room list in the editor is the old hand-curated tree, not
+    the room's tree; he chose Solar System, which saved `solar_system`,
+    as a scene needs.
+  - Pushed again (gallery 285f14bc, with the right-click Paste), it
+    deployed: Tony's live run, "all 62 files served and byte-identical".
+    Tony's right-click Paste worked; Save scene stayed grey because he
+    pasted the ED138 link again, which the window refuses as already on
+    a card, as built.
+- **The phone look, 2026-11-09, evening** (Tony's run record, same copy):
+  items 1, 2, 3, 4, 6 and 7 "yes"; 9 "done for ed 138"; 8 not tested (no
+  Earth scene yet); 5 FAILED: "find ed138 only finds the object not the
+  scene". Why: a saved picture's words brought its row into view only
+  when no body and no group matched (L-517's rule), and a scene obeyed
+  the same rule; but a scene sits under the Sun, not beside the bodies it
+  names, so a search holding a body's name hid it. FIXED the same evening
+  by the same Code session: in `gallery/solar_system_drawer.js`
+  (`searchHits`) a scene's name brings the Sun's row whatever else
+  matches, a saved picture still only alone; the count line says "1 body
+  and 1 scene match" (`WORDS.found`). [verified @ the working copy: the
+  Picture folds row's new cases and an eighth break, caught; the drawer
+  walk's new check in section 30 ("jupiter" finds Jupiter and the scene
+  "Mars and Jupiter"), shown failing on a copy with the old drawer file;
+  the offline run, 42 of 42 gating checkers passed; not yet on a phone.]
+  The walk's section 30 now takes the real scenes out of its copy, and
+  29b steps over the Scenes fold: Tony's first scene had put the walk 5
+  red beyond L-521's three; back to those three. interactive-exhibit's
+  Scenes bullet still reads true ("Find finds a scene's name"); the
+  finer rule waits for its next version.
+- **Tony's look at Find, 2026-11-09, afternoon**, from his copy
+  WHERE_WE_ARE_11-9-26_1102_run_record.md as attached to the coordinating
+  session (the repo's copy of it ends before these lines): find "ed138",
+  "perfect. thanks." Item 5 passed. Item 8, "(later) Make a scene in the
+  Earth room, to finish item 8. -- correct": it waits until he makes one.
+- **Part 2, designed 2026-11-09, afternoon**, in the coordinating session
+  (Claude Opus 5.5), with phone pictures. Tony's words, in order:
+  - 14:53: "The gallery tree as shown in the gallery editor now does not
+    match what we see in the website. For example, I should be able to
+    put the ED138 scene next to the ED138 body instead of the one scenes
+    drawer. I think this would be the next step. And I can clean up
+    remaining checks at the turn."
+  - 14:58: "I know we only have one scene built the same but can we put
+    it next to more than one body. ED138 is not that, but say a flyby."
+  - 15:00, asked between A (every scene beside a body's row, the Scenes
+    group gone) and B (his choice per scene, beside a row or in Scenes):
+    "I think B so I can decide what goes where"
+- **The design, part 2.** Tony decides where each scene goes: one or more
+  places, each a row of the room's drawer, and Scenes under the Sun one of
+  them. (His 15:00 answer read with his 14:58 ask; the reading was stated
+  to him in the reply.)
+  - The gallery editor's tree, for the Solar System room's cards, shows
+    the room's own drawer as the website lists it, read from
+    data/objects_config.json's rooms.drawer, read only; the editor writes
+    only a card's place. Method, not ruled: the old hand-curated tree
+    stays for the cards outside that room (84 of 135 at gallery 66c9f698:
+    the Earth System's and the stars').
+  - A card's place, drawer_row, is one row today (a string,
+    gallery/picture_folds.js); it becomes one or more. The card stays one
+    record, shown in each place; Back returns to the place it was tapped
+    from. The saved pictures use the same field and the same tree.
+    Method, not ruled.
+  - Said to Tony at 14:58, not contested: a scene opens at now (his
+    ruling of 09:48), so a flyby's moment belongs to the encounters and
+    the date picker; a scene in several places suits something happening
+    now, such as Psyche on its way to 16 Psyche.
+- **Part 2, built 2026-11-09, evening**, by the Claude Code session
+  (Claude Opus 5.5) through the python_work door, on orrery 09fb6934 (the
+  coordinating session's records of the afternoon written in the folder,
+  not yet committed) and gallery 66c9f698. The account's copy of
+  interactive-exhibit loaded as 1.37, the copy cached when the session
+  began; the account's copy on disk read 1.38, byte for byte the repo's,
+  and the session worked from it, saying so to Tony. Before building it
+  told Tony how the tree would look and how a card is placed, with the
+  two calls marked "not ruled" above; Tony asked how a scene of Voyager 1
+  past the Heliopause would sit, and ruled: "Yes we can add them" (the
+  Sun's shells and the belt's cloud as places); then, asked to go ahead,
+  "Yes, i mention it now so our architecture can best accommodate
+  inclusion of planetary features in the solar system view" (Mercury's
+  sodium tail, the giant planets' magnetospheres and Hill spheres, the
+  exceptions he named as visible at that scale). As built [verified @ the
+  session's working copy, headlessly and on a throwaway copy of the
+  gallery files; not yet seen on a phone]:
+  - A PLACE is any row the root's drawer lists: a body's slug, a group's
+    key, a Sun's shell by its served shell key ("heliopause"), the belt's
+    cloud by its drawing's name ("main_belt"). `drawer_row` is one place
+    (a string) or several (a list). The page now hands each Sun's shell
+    row its shell key (`shell_key`, from the shell's traces); the
+    rotation axis, a frame element, has none and is no place. A card is
+    one record shown in a fold under each of its rows, counted once by
+    the folds and by Find; Back returns to the fold it was opened from. A
+    scene sits in a Scenes fold under each row it names (`scenes` under
+    the Sun, `scenes:<row key>` elsewhere), under the Sun when it names
+    none. `gallery/picture_folds.js` (`rowKeyFor`, `placesOf`,
+    `sceneFoldFor`), `gallery/solar_system_drawer.js` (a shell row's
+    `shellKey`; Find counts a card once).
+  - PLANET FEATURES: once the root draws one as a row, as it draws the
+    Sun's shells, it is a place by its shell key with nothing else to
+    change. One drawn only in its planet's own room is a row of that
+    room's drawer, which holds no folds yet: placing a card there is a
+    later step. Which features the root draws is each planet room's talk;
+    Tony's three exceptions are for those talks.
+  - THE EDITOR: the Solar System door lists the room's own drawer, read
+    only -- the Sun with "The Sun's shells" under it (in the config's
+    order, the website placing each at its distance), then every group
+    and body row in served order, nested as on the phone, an "order": "a"
+    group sorted as the website sorts it -- each card under every row it
+    sits beside, scenes first; "Not in the drawer" (the three room
+    cards); "Places the drawer does not list" if any. The Earth System
+    and the Stars keep the hand-curated tree (method, as offered). A
+    Solar System card's form has "Places in the drawer": Add place... (a
+    window with the tree and a Find box), Remove place; twins follow;
+    removing a picture's last place asks first; a scene's last place
+    leaves it beside the Sun. Save All names each change. The logic is
+    `tools/drawer_places.py`; `tools/gallery_editor.py` shows it.
+  - CHECKS: the offline gallery run, "43 of 43 gating checkers passed",
+    with the new Drawer places row (`tools/test_drawer_places.py`: worked
+    cases; the real tree in the website's order, worked out by node from
+    `orderGroups`; the Sun's shells; every real card's places; the file
+    broken three ways first, each caught); the Picture folds row's new
+    section 7 and three more breaks, eleven in all, each caught; the
+    drawer walk's new section 31 (a scene beside Jupiter and the
+    Heliopause, a picture beside 3I/ATLAS and the belt's cloud, Find, Back),
+    failing on a copy with the old `picture_folds.js`, the walk otherwise
+    red only on L-521's three. Read once against the real page
+    headlessly: the editor's tree and the page's rows agree, 116 rows in
+    the same order, and the Sun's shells but the rotation axis. The
+    editor was driven on a throwaway copy: the ED138 scene placed beside
+    2026 ED138 and the Heliopause and taken from the Sun, a twin
+    following its picture, Save All writing and naming each change; the
+    fold check passed on the copy saved.
+  - interactive-exhibit 1.38 -> 1.39 (protocol v3.135).
+- **Tony-action (do):** the phone look, part 2's list below, after he
+  places a card in the editor and pushes.
+- **The phone look, part 2** (Mode 5):
+  1. At the computer: the gallery editor's Solar System door shows the
+     room's drawer: the Sun first with "The Sun's shells" under it, then
+     the rows as on the phone, ED138's scene under the Sun, "Not in the
+     drawer" at the end. The Earth System and the Stars as before.
+  2. Select ED138's scene: "Places in the drawer" lists "Sun (Scenes
+     under the Sun)", with Add place... and Remove place.
+  3. Add place..., find "ED138", choose 2026 ED138, Add place: the scene
+     shows under both rows. Save All names the change.
+  4. On the phone: 2026 ED138's row (in Trans-Neptunian objects) has a
+     Scenes group under it with the scene; the Sun's Scenes still has it.
+  5. Tap it from ED138's row; the phone's Back returns to ED138's row,
+     the drawer open there.
+  6. Find "ED138": the body and the scene, counted once: "1 body and 1
+     scene match".
+  7. If you place a card beside a Sun's shell (the Heliopause), its
+     Scenes or pictures group sits under that shell's row, wherever the
+     website places it.
+  8. Remove the Sun from ED138's scene in the editor, Save All, push: the
+     Sun's Scenes group goes, the scene stays beside ED138.
+- **Part 2 deployed, 2026-11-09, night** (Tony's run record, same copy,
+  read by the same Code session). His first push after the build carried
+  no part 2: GitHub Desktop stashed the uncommitted changes before the
+  pull of the nightly bot's 5edb514 (the history log: "reset: moving to
+  HEAD", then the pull, at 17:32), and 5edb514, written down as his
+  commit, was the bot's; the editor he reran was the folder's older code.
+  The stash held all of part 2, ED138's scene placed beside 2026 ED138
+  among it, and its three .sha files equal to the bot's; Tony restored it
+  and committed cea21af. That deploy's last step, "Deploy to GitHub
+  Pages", waited ten minutes and timed out (the build itself took 23
+  seconds; githubstatus.com listed no open Pages incident); re-run, it
+  deployed. Tony: "all green" (the live check), and the served
+  `gallery/picture_folds.js` carries part 2's `placesOf` [verified @
+  palomasorrery.com, read by the session]. Method learned: when GitHub
+  Desktop offers to stash before a pull, commit first, or restore the
+  stash right after.
+- **Closed 2026-11-09, night, on Tony's phone look of part 2**: asked
+  whether it passed, "Yes, it passed". Its loose ends, re-homed: item 8
+  of the first phone look (a scene made in the Earth room) and a card
+  placed in a centre's own drawer, to L-515 (one nested tree); the
+  editor's "under construction" line, to L-489 (compositions). L-520
+  (old pictures carry old words) and L-521 (three red checks in the
+  drawer walk) stay open on their own.
+**Gap:** none.
+**Ref:** L-517 (the lobby for a first-time phone visitor); L-518 (the
+shared scene link); L-520 (old pictures carry old words); L-515 (one
+nested tree); L-303 (the card model); L-521 (three red checks in the
+drawer walk); L-514 (the Mars room); gallery `index.html`,
+`gallery/gallery_metadata.json`, `tools/gallery_editor.py`,
+`tools/scene_card.py`, `tools/test_scene_card.py`,
+`tools/drawer_places.py`, `tools/test_drawer_places.py`,
+`gallery/picture_folds.js`, `gallery/solar_system_drawer.js`,
+`interactive.html`.
 
 #### [L-464] The Sun room's own row: no info link, and the pole's citation has nowhere to show (gallery, interactive, DONE 2026-10-21)
 <!-- L:464 status:DONE upd:2026-10-21 section:C flag: rice: -->

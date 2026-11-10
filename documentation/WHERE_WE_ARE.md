@@ -1,22 +1,22 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 9, 2026, evening: the website Code session (Opus), Scenes part 2 built.
-- Written at orrery 09fb693 and gallery 66c9f69, plus this session's edits.
+Last updated: November 9, 2026, night: the website Code session (Opus), Scenes closed.
+- Written at orrery a21fe06 and gallery cea21af, plus this session's edits.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Part 2 is built (L-519 (Featured's rethink)): the gallery editor's Solar System door now shows the room's own drawer, as the phone does.
+> - Scenes is done and closed (L-519 (Featured's rethink)): your phone look of part 2 passed. The gallery editor's Solar System door now shows the room's own drawer, as the phone does.
 > - A card's form has "Places in the drawer", with Add place... and Remove place: a scene or a picture can sit beside one or several rows.
-> - A place can be a body, a group, one of the Sun's shells (the Heliopause) or the belt's cloud; a planet's features will be places the same way once the Solar System room draws them.
 >
-> **Do next:** *Your phone look at part 2 (the list is on L-519); then step 2b of the one tree.*
+> - Its leftovers moved on: an Earth-room scene and a card in a centre's own drawer to L-515 (one nested tree); the editor's "under construction" words to L-489 (compositions).
+>
+> **Do next:** *Step 2b of the one tree (L-515 (one nested tree)).*
 >
 > **Needs you now:**
-> - *(do) Commit and push both: the website (part 2) and the orrery (the records, with the design session's).*
-> - *(do) Place ED138's scene beside its body in the editor, Save All, push, and look on the phone.*
-> - *(do) Reinstall the interactive-exhibit skill (1.39) and paste protocol v3.135 into the Project.*
+> - *(do) Commit and push the orrery: these records.*
+> - *(do) Reinstall the interactive-exhibit skill (1.39) and paste protocol v3.135 into the Project, if not yet done.*
 > - *(do) Each morning, Pull origin on both, orrery then website, first.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
 
@@ -43,7 +43,7 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
                to choose, within the range the data covers.
   l.   [done]  L-517 (the lobby): closed Nov 8 on your phone look.
   s.   [done]  The shared scene link (L-518 (the shared link)): closed Nov 8 on your phone look.
-  c.   [NOW]   *Scenes (L-519 (Featured's rethink)): live; part 2 built, your phone look; then step 2b.*
+  c.   [done]  Scenes (L-519 (Featured's rethink)): closed Nov 9 on your phone look; next, step 2b.
                << moved this session
   b.   [beside] Housekeeping: L-424, L-425, L-426 (the checkers' three);
                L-423 (the website's checks) item 3; L-357 (stale gallery
@@ -122,8 +122,8 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- This session: L-519 (Featured's rethink), part 2's build and its
-  phone-look list; L-521 (three red checks).
+- This session: L-519 (Featured's rethink), part 2's build, deploy and
+  close (section C); L-515 and L-489 received its leftovers.
 - The tree: L-515 (one nested tree), `COORD_L515_steps1_2a_brief_20261107.md`.
 - The talk's rulings: `DESIGN_L484_consistency_rulings_20261103.md`.
 - The door: `documentation/python_work_door/`, and L-499 (kinds of session).

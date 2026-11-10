@@ -1032,3 +1032,38 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 8. Do the phone look above. -- done
 
 -- website stash restored: cea21af180b98a6694cb6bfb1083eca38e9b5c5d
+
+==========================================================================
+
+Closing L-519 (Featured's rethink) now. Its three leftover pieces each go to an open item that will touch the same files.
+
+Two lines over the 130-line cap; trimming the box.
+
+I've closed L-519 (Featured's rethink) on your phone look, so Scenes is done.
+
+**Where its leftovers went**
+- **L-515 (one nested tree):**
+  - A scene made in the Earth room, which you haven't tried yet because no Earth scene exists.
+  - Placing a card inside a centre's own drawer, Earth's first and then each planet's. The planet rooms will be the first to want it.
+- **L-489 (compositions):** the gallery editor still calls an empty room "under construction" in the Earth System and Stars doors. The Solar System door no longer shows any.
+- **Already open on their own:** L-520 (old pictures carry old words) and L-521 (three red checks in the drawer walk).
+
+**Where We Are now says:**
+- Scenes is done.
+- Next is step 2b of the one tree.
+- Still needs you: commit and push the orrery, and reinstall the room skill (1.39) and paste protocol v3.135 if you haven't yet.
+
+**Files for your run record**
+
+Orrery:
+- ok LEDGER_CONSOLIDATED.md (3 edits: L-519 closed with your words and moved to the closed section; its leftovers added to L-515 and L-489; index regenerated, no problems)
+- ok documentation/WHERE_WE_ARE.md (5 edits by section; 130 lines above the marker)
+
+Website: none.
+
+**Your run order**
+1. In GitHub Desktop, commit and push the orrery. -- 
+
+**Tony-action rollup**
+- (do) Commit and push the orrery.
+- (do) Reinstall the interactive-exhibit skill (1.39) and paste protocol v3.135 into the Project, if not yet done.
