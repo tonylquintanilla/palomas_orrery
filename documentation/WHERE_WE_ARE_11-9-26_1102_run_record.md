@@ -1031,10 +1031,4 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 
 8. Do the phone look above. -- done
 
-**Files for your run record:** none changed this turn.
-
--- rerunning the editor from either the dashboard or VS runs the old version. when committing the orrery
-
-PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\tools> & 'C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe' 'c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/tools/gallery_editor.py'
-Gallery editor loaded C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\gallery\gallery_metadata.json
-PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\tools> 
+-- website stash restored: cea21af180b98a6694cb6bfb1083eca38e9b5c5d
