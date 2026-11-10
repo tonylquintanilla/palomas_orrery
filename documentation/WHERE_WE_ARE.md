@@ -1,22 +1,21 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 9, 2026, night: the website Code session (Opus), Scenes closed.
-- Written at orrery a21fe06 and gallery cea21af, plus this session's edits.
+Last updated: November 9, 2026, late night: the coordinating session (Opus), step 2b designed.
+- Written at orrery a3e86c8 and gallery cea21af, plus this session's edits.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Scenes is done and closed (L-519 (Featured's rethink)): your phone look of part 2 passed. The gallery editor's Solar System door now shows the room's own drawer, as the phone does.
-> - A card's form has "Places in the drawer", with Add place... and Remove place: a scene or a picture can sit beside one or several rows.
+> - Step 2b of the one tree is designed (L-515 (one nested tree)): the Solar System room becomes the one picture and the one drawer, and each planet folds open to its shells and moons by distance.
+> - The Earth room folds in, as the Sun's did. Only the Earth System and the stars stay rooms of their own.
+> - "Centre on" now moves the view so the body sits in the middle; the drawer's top line becomes a path down the tree.
 >
-> - Its leftovers moved on: an Earth-room scene and a card in a centre's own drawer to L-515 (one nested tree); the editor's "under construction" words to L-489 (compositions).
->
-> **Do next:** *Step 2b of the one tree (L-515 (one nested tree)).*
+> **Do next:** *Build step 2b (L-515 (one nested tree)), from `COORD_L515_step2b_brief_20261109.md`.*
 >
 > **Needs you now:**
-> - *(do) Commit and push the orrery: these records.*
-> - *(do) Reinstall the interactive-exhibit skill (1.39) and paste protocol v3.135 into the Project, if not yet done.*
+> - *(do) Commit and push the orrery: these records and the brief.*
+> - *(do) Start the 2b build with the prompt in the report.*
 > - *(do) Each morning, Pull origin on both, orrery then website, first.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
 
@@ -31,20 +30,20 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
                and A2 of JPL's fallbacks (L-512), a green website night,
                the quick wins with L-423 (the website's checks), and the
                Moon's standards (L-513, closed).
- 15.   [NOW]   *The planet rooms in order, each opening with the planet
-               and its moons, shells later: Mars (Phobos, Deimos) first,
-               in design now (L-514 (the Mars room)), then Jupiter,
-               Saturn, Uranus, Neptune, Pluto. Io, Titan, Charon and
-               Pluto come to standard in their rooms.*
- 16.   [later] The Earth room: L-297 (the Lagrange points), the Earth-Moon
+ 15.   [NOW]   *The one tree's step 2b (L-515 (one nested tree)): one
+               picture, one drawer, each planet folding open to its shells
+               and moons. Then Mars (Phobos, Deimos) as the first new fold
+               (L-514 (the Mars room)), then Jupiter, Saturn, Uranus,
+               Neptune, Pluto. Io, Titan, Charon and Pluto come to standard
+               in their folds.*  << moved this session
+ 16.   [later] Earth's fold: L-297 (the Lagrange points), the Earth-Moon
                barycentre, SOHO, Gaia, James Webb, Artemis II.
  17.   [later] Small-body systems' moons; then stars and exoplanets.
  18.   [goal]  The website does what the desktop orrery does, with a date
                to choose, within the range the data covers.
   l.   [done]  L-517 (the lobby): closed Nov 8 on your phone look.
   s.   [done]  The shared scene link (L-518 (the shared link)): closed Nov 8 on your phone look.
-  c.   [done]  Scenes (L-519 (Featured's rethink)): closed Nov 9 on your phone look; next, step 2b.
-               << moved this session
+  c.   [done]  Scenes (L-519 (Featured's rethink)): closed Nov 9 on your phone look.
   b.   [beside] Housekeeping: L-424, L-425, L-426 (the checkers' three);
                L-423 (the website's checks) item 3; L-357 (stale gallery
                artifacts); L-509 (obsolete code), after its talk.
@@ -52,25 +51,25 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
 ## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings; a line leaves once it is habit, or a skill carries it.
+- One picture, one drawer: a planet folds open to its shells and moons by distance; only the Earth System and the stars stay rooms of their own (Nov 9; L-515 (one nested tree), ruling 14).
+- Centre on moves the view so the body sits in the middle, on its own opening, the axis lines through it; the Sun has one too. The orrery's view measured from a centre waits for the date span (Nov 9; L-515 (one nested tree), rulings 15 to 17).
+- The drawer's top line is a path down the tree, "Solar system > Earth > Crust" (Nov 9; L-515 (one nested tree), ruling 20).
 - You decide where each card goes: beside one or several rows, the Sun's shells and the belt's cloud included; planet features join when drawn (Nov 9; L-519 (Featured's rethink)).
 - A scene opens at now; Featured is a board highlighting important cards or scenes, kept largely as is (Nov 9; L-519 (Featured's rethink)).
-- A shared link carries the bodies ticked and the maker's minute, written by the page itself; past the data it freezes, like any room (Oct 29; Nov 8; L-518 (the shared link)).
-- The lobby asks one thing first; Featured stays as it is; saved pictures sit beside their body's row in the drawer; the Solar System page goes, its old addresses opening the live room on its opening view, not on a group (Nov 8; L-517 (the lobby)).
 - Past the dates its data covers, a room draws the last day covered and says so; never blank (Nov 7, 12:53; L-165 (site continuity)).
 - What JPL measures a thing around is where it sits in the website's
   tree (Nov 7, 11:26; L-515 (one nested tree), ruling 6).
 - The Moon shows JPL's period for today, like every other body, not the
   sidereal month (Nov 6, 22:17; L-513 (the Moon's standards)).
-- Pluto: the Solar System row stays the barycentre named Pluto; the Pluto
-  room draws Pluto, Charon and the other moons around the barycentre;
-  the orrery's Pluto-centred view goes (Nov 6; L-150 (trusting a near-equal pair)).
+- Pluto: the row is the barycentre, now named "Pluto system", its fold Pluto
+  and Charon; the orrery's Pluto-centred view goes (Nov 6, Nov 9; L-150
+  (trusting a near-equal pair), L-515 (one nested tree), ruling 19).
 
-## Deferred
+## Deferred  **>> UPDATED THIS SESSION**
 
 Waiting behind other work; a line leaves when picked up.
 - Three checks red in the drawer walk before Scenes was built, the page or the walk aged: a gallery session that next opens the drawer (Nov 9; L-521 (three red checks)).
 - The saved pictures' words, which have no source: kept as made until the braid reaches them (Nov 8; L-520 (old pictures carry old words)).
-- The Moon's Go To opening the orbit's box: the Mars website session (Nov 7; L-515 (one nested tree)).
 - Charon's period is asked around Pluto's centre, not the barycentre;
   fix it before Pluto's room (L-150 (trusting a near-equal pair), Nov 6).
 - When the road turned to the symbols (Nov 5): L-512 (fallbacks when
@@ -96,8 +95,8 @@ Waiting behind other work; a line leaves when picked up.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261109T185123Z, nightly, ok, no retry (gallery swap log at 66c9f69, read Nov 9, evening).
-- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at orrery e4dc2f9, its last change).
+- Last cache build: 20261109T222751Z, nightly, ok, no retry (gallery swap log at cea21af, read Nov 9, night).
+- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at orrery a3e86c8, its run 20261109T022724Z).
 - This page's date and the ledger's newest stamp: both Nov 9. Agree.
 
 ## Waiting on you
@@ -122,9 +121,10 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- This session: L-519 (Featured's rethink), part 2's build, deploy and
-  close (section C); L-515 and L-489 received its leftovers.
-- The tree: L-515 (one nested tree), `COORD_L515_steps1_2a_brief_20261107.md`.
+- This session: L-515 (one nested tree), step 2b's design talk, rulings
+  13 to 20; L-514 (the Mars room) received what it means for Mars.
+- The tree: L-515 (one nested tree); `COORD_L515_step2b_brief_20261109.md`
+  (2b), `COORD_L515_steps1_2a_brief_20261107.md` (1 and 2a).
 - The talk's rulings: `DESIGN_L484_consistency_rulings_20261103.md`.
 - The door: `documentation/python_work_door/`, and L-499 (kinds of session).
 

@@ -1164,8 +1164,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-510 | The object list's typed fields stop deciding: a small body drawn by today's eccentricity, a plan asked from before any launch (orrery, the object list and the path plan) | OPEN | -- | 2026-11-05 |
 | ! | L-511 | The orrery's export carries the words the website prints (orrery + gallery, the words) | OPEN | -- | 2026-11-03 |
 | ! | L-512 | The orrery's fallbacks when JPL cannot answer (orrery, the plot's data path) | OPEN | -- | 2026-11-04 |
-| ! | L-514 | The Mars room: Mars, Phobos and Deimos (gallery + orrery, a planet room; road stage 15) | OPEN | -- | 2026-11-06 |
-| ! | L-515 | One nested tree in place of isolated rooms (gallery, the room system; design) | OPEN | -- | 2026-11-08 |
+| ! | L-514 | The Mars room: Mars, Phobos and Deimos (gallery + orrery, a planet room; road stage 15) | OPEN | -- | 2026-11-09 |
+| ! | L-515 | One nested tree in place of isolated rooms (gallery, the room system; design) | OPEN | -- | 2026-11-09 |
 | ! | L-516 | Renew palomasorrery.com at Porkbun before 2027-02-13 (legacy; Tony's account) | OPEN | -- | 2026-11-07 |
 | ! | L-520 | Old pictures carry old words: the saved pictures' titles and descriptions have no source (gallery, the saved pictures; the braid) | OPEN | -- | 2026-11-08 |
 | ! | L-521 | Three red checks in the drawer walk (gallery, the headless walk; recorded) | OPEN | -- | 2026-11-09 |
@@ -1675,7 +1675,7 @@ or the text box.
 - **Ref:** L-165 (site continuity); L-490 (the legacy list).
 
 #### [L-515] One nested tree in place of isolated rooms (gallery, the room system; design)
-<!-- L:515 status:OPEN upd:2026-11-08 section:A flag: rice: -->
+<!-- L:515 status:OPEN upd:2026-11-09 section:A flag: rice: -->
 - **Opened 2026-11-07, 00:17 Chicago**, in the coordinating session
   (Claude Opus 5.5), built on orrery 33c699bb and gallery 3f2ce7fc.
   Tony: "I think we need to rethink the room system before we go
@@ -2576,18 +2576,174 @@ or the text box.
   included); a centre's drawer holds no folds yet, and a place there
   would name the room as well. A planet feature the root draws as a row
   needs nothing more. For step 3 (Mars) or the first centre to want it.
-**Gap:** step 2b; L-514 (the Mars room) waits for step 3. Carried from
-his look at part 3: the Moon's Go To box (the Mars website session).
-The lobby moved to L-517 (the lobby for a first-time phone visitor).
-**Tony-action (do):** reinstall interactive-exhibit 1.35 (Settings >
-Skills), if not yet done; the next session that loads it confirms it
-reads 1.35.
+- **Step 2b's design talk, 2026-11-09, night**, the coordinating session
+  (Claude Opus 5.5) through the python_work door, built on orrery
+  a3e86c88 and gallery cea21af1, from Tony's prompt of 22:13 Chicago:
+  "settle the design of step 2b ... Bring me the open questions one at
+  a time, each with pictures I can compare on my phone". Pictures were
+  sketches drawn in the chat, not renders of the page. Tony's run record
+  `documentation/WHERE_WE_ARE_11-9-26_1102_run_record.md` was read
+  first: every verdict in it was already on L-519. The skills loaded
+  read as the manifest: interactive-exhibit 1.39 (v3.135's obligation
+  discharged), gallery-assembler 1.3, ledger-and-session-records 1.22.
+  Read for the talk at gallery cea21af1: the root's frame is always a
+  box centred on the Sun (`sunFrameOn`, `navHome`: ranges [-r, r]);
+  the moons served are the Moon around Earth, Io around Jupiter, Titan
+  around Saturn, Pluto and Charon around pluto_barycenter, none drawn
+  in the root; Jupiter serves ring_system, radiation_belts and
+  orientation, Saturn ring_system and orientation, neither an arrival
+  block; the drawing code already has the barycentre centre marker,
+  an open white square (`render_objects.build_center_marker`).
+- **Ruling 13, a moon's row in the root**, Tony, Nov 9, 22:27 Chicago,
+  in chat: "yes, A." Folded under its planet's row behind an arrow,
+  closed on opening, as the groups fold. With it, as put to him: ticking
+  a moon also ticks its planet; unticking the moon leaves the planet.
+- **Ruling 14, one tree in one display**, Tony, the same message: "the
+  planetary folds should follow the pattern used in the solar view:
+  Planet * shells by distance * moons by distance * shells by distance
+  (for example, radiation belts, rings, magnetotails) so, basically the
+  whole tree in one folding display. and saved and scenes are carried by
+  their objects. this replicates the flat concept of the orrery object
+  selection tree. the only objects that have isolated rooms would be the
+  earth science and stars." So: a planet's fold lists its shells and its
+  moons together by distance (the strict-distance rule of Nov 7, every
+  planet); the Earth room folds into the root as the Sun room did
+  (ruling 7); only the Earth System door and the stars stay rooms of
+  their own. Consequences, recorded by the coordinator: every moon and
+  planet shell becomes a row, so a place for cards (L-519 part 2) with
+  nothing more; L-519's leftover (2), a card in a centre's own drawer,
+  goes away; ruling 2 (a centre's drawer lists its branch only) is
+  superseded -- there is one drawer.
+- **Ruling 15, what "Centre on" draws**, Tony, Nov 9, 22:36 Chicago:
+  "this was the drawer outline. the center object display is another
+  question. the default view is the sun center. some objects may also
+  be centers. for example in the orrery, we have a list of available
+  center bodies, which are also highlighted in bold in the objects menu
+  ... each object that can be used as a center by JPL could get a
+  "Centre on ___" button." Put to him, two meanings, drawn: A, the view
+  moved so the body sits in the middle, every orbit still drawn around
+  what JPL measured it around; B, the orrery's, every body asked of JPL
+  measured from the centre over a span, so the Sun circles Earth and
+  Mars loops. His question, 22:41: "what is the difference between A
+  and B in terms of what is fetched from jpl and computed? i am used to
+  B." The coordinator's answer: B asks JPL for each body's positions
+  from the centre on every date; A asks nothing new and works nothing
+  out from the centre, and draws one minute, so it cannot show
+  retrograde motion; B on the website could later come by (1) the
+  builder fetching each planet's positions from the centre over a span,
+  as for spacecraft, (2) the browser subtracting two Sun-measured
+  positions, which breaks the website's standing rule, or (3) staying
+  the orrery's (ruling 1). Tony, 22:44: "confirmed." -- A for 2b; B a
+  later step, with the date span the encounters and the date picker
+  need. The coordinator's lean for that step is way 1; not ruled.
+  - WHICH ROWS GET THE BUTTON is ruling 9's, not a new question: a body
+    with something drawn or fetched around it. At cea21af1: the Sun,
+    Earth, Jupiter, Saturn and pluto_barycenter; Mars once Phobos and
+    Deimos are served; the Moon once its shells are.
+  - DISTANCES unchanged: a body's from the Sun, a moon's from its
+    planet (ruling 8), centred or not.
+- **Ruling 16, what Centre on opens on**, Tony, Nov 9, 22:50 Chicago:
+  "A. with one ask, add the same button to the Sun so that it focuses on
+  the photosphere plus rotational axis. it might be a bit confusing,
+  "wait, isn't the sun already the center?" but the viewer learns
+  quickly what it means." So a centre opens on its OWN served opening
+  (Earth's of 2026-09-17: the crust and the guides, the Moon unticked;
+  Mars's L-514 ruling 1: the symbol alone), the same opening its old
+  address opens (`?exhibit=earth`); the Sun's row gets "Centre on Sun",
+  opening on `?exhibit=sun`'s opening, the photosphere and the rotation
+  axis (this reverses interactive-exhibit 1.34's "the root's Sun row
+  offers no Centre on"). What was ticked stays ticked; the count line
+  says how many ticked bodies are outside the view; Home and Reset
+  return to the Sun's view.
+- **Ruling 17, the axis lines in a centred view**, Tony, Nov 9, 22:54
+  Chicago: "A, as drawn today in the earth's room." The three axis lines
+  and their x marks run through the centre, in the Sun's directions;
+  the frame note gains one line saying where they cross (words for his
+  phone look, e.g. "In this view the lines cross at Earth.").
+- **Ruling 18, the fast moons in 2b**, Tony, Nov 9, 22:57 Chicago: "A,
+  confirmed." Read at cea21af1: each moon's checked span is about Io's
+  5.3 hours either side of the elements' date (midnight UTC), Pluto's
+  and Charon's 19.2 hours, Titan's 2.0 days, the Moon's 3.4 days; Io's
+  measured drift 0.026 degrees a day. So 2b draws the moons from their
+  elements all day, and past the checked span the moon's box says so, its
+  distance printed only as finely as its measured drift allows (words for
+  his phone look); ruling 11's 48-hour positions are built with Mars
+  (step 3), which Phobos needs most.
+- **Tony's question, Nov 9, 23:03 Chicago:** "is the barycenter drawn at
+  the center of the pluto system? the orrery currently does that. should
+  it carry a dot item like the Sun, with a text box like, "Barycenter
+  (scene center)"?" The coordinator's answer: yes; in the Sun's view the
+  row's marker sits at the barycentre's place with his sentence of Nov
+  6; centred on the system it is the middle, where the axis lines cross;
+  the drawing code's barycentre mark, an open white square, is proposed
+  for it in both views, its row tickable in the Sun's view and the head
+  of the system's fold, not a fixed row. Sketched to scale by the served
+  orbits: Charon's is 8.2 times Pluto's around the barycentre (served
+  a_au 1.1674e-4 against 1.4248e-5). The open square is the
+  coordinator's lean, not objected to and not ruled: for his phone look.
+- **Ruling 19, the row's label**, Tony, Nov 9, 23:05 Chicago: "A" --
+  "Pluto system", the barycentre still the row (this changes the name in
+  his ruling of Nov 6, L-150); Find still finds it by "Pluto".
+- **Ruling 20, the trail line**, Tony, Nov 9, 23:10 Chicago: "A" (it
+  stays), then: "For Pluto: Solar system > Pluto system > Pluto > Crust
+  / For the Sun: Solar system > Photosphere / For Earth: Solar system >
+  Earth > Moon > Crust thoughts?" The rule put to him: every part but the
+  last is a centre, a link that opens that centre's own opening and
+  keeps the ticks ("Solar system" is the Sun's view, so the Sun's shells
+  follow it directly); the last part is what is in focus, from Go To or
+  a centre's opening, in bold and no link; the line shows always, as
+  "Solar system" alone on opening (Go To on Mars from the Sun's view
+  reads "Solar system > Mars", the middle still the Sun); "Earth > Moon
+  > Crust" and Pluto's crust come when those shells are served and the
+  Moon and Pluto are centres. Tony, 23:12: "yes, thanks."
+- **Method, the coordinator's, for the brief and the skills (not Tony's):**
+  - PRECISION. A phone's WebGL holds positions as 32-bit floats, about 7
+    digits: about 10 km at 1 AU, about 300 km at Pluto's distance,
+    against Pluto's 1,188 km radius (the coordinator's arithmetic, to be
+    MEASURED in the build). The fix: before a centred or close view is
+    drawn, the page shifts the whole drawing so the body in focus sits at
+    the scene's origin, in 64-bit numbers; moving our own drawing is not
+    the retired subtraction of two JPL answers.
+  - COMPOSING A CHILD into the root ADDS the parent's worked-out position
+    to the child's own JPL elements around the parent, which involves no
+    cancellation. gallery-assembler 1.3's section "No composition between
+    frames" says composition "was tried and retired"; the build amends it
+    to say which (subtracting two answers stays retired; adding to a
+    child's own answer is the method), in that skill's next version.
+  - OFF-ORIGIN FRAMES: Go To, Centre on, +, - and Home frame a box centred
+    where the view's middle is, not always the Sun. Go To on a moon from
+    the Sun's view puts its planet at the middle, fits the moon's whole
+    orbit (Go To fits the whole orbit, L-479) and opens the moon's own
+    box (L-514 ruling 4; the Earth room's Moon Go To fix, deferred to the
+    Mars session, rides 2b).
+  - The Earth room's driver and row, once Earth is a fold of the root,
+    are marked OBSOLETE and kept (Tony's ruling of Nov 3, L-509), as the
+    Sun room's were; `?exhibit=earth` opens the root centred on Earth.
+  - Jupiter's and Saturn's openings follow L-514 ruling 1's pattern, the
+    symbol alone, written as their served arrival blocks: for his phone
+    look.
+  - L-519's leftover (1), a scene made centred on Earth, rides 2b's phone
+    look: its link keeps `?exhibit=earth`, which now opens the root
+    centred on Earth.
+- **The design is settled** with ruling 20. The brief:
+  `documentation/COORD_L515_step2b_brief_20261109.md`, for one Claude
+  Code session on the website, in parts with a stop after each.
+**Gap:** step 2b's build, by the brief; then the checkpoint on the one
+picture, and step 3, L-514 (the Mars room), with ruling 11's 48-hour
+positions. Ruling 15's picture B (measured from the centre) waits for the
+date span, with the encounters (step 4) and the date picker. The Moon's
+Go To box rides 2b. The lobby moved to L-517 (the lobby for a first-time
+phone visitor). The reinstall of interactive-exhibit 1.35, once carried
+here, is struck: the session of Nov 9, night, loaded 1.39 from the
+account, as the manifest expects.
+**Tony-action (do):** start the 2b build with the prompt in the design
+session's report of Nov 9, night.
 - **Ref:** L-514 (the Mars room); L-443 (the drawer's groups); L-392 (the
   rooms section); L-291 (the Earth room); the protocol's The Orrery and
   the Assembler.
 
 #### [L-514] The Mars room: Mars, Phobos and Deimos (gallery + orrery, a planet room; road stage 15)
-<!-- L:514 status:OPEN upd:2026-11-06 section:A flag: rice: -->
+<!-- L:514 status:OPEN upd:2026-11-09 section:A flag: rice: -->
 - **Opened 2026-11-06, night**, by the coordinating session (Claude Opus
   5.5) through the python_work door, built on orrery b32205f4 and
   gallery 3f2ce7fc. Tony's prompt: "Road stage 15, the planet rooms,
@@ -2712,8 +2868,17 @@ reads 1.35.
   rethink of the room system (L-515 (one nested tree)). The Mars room
   waits behind it, and may be built as the first node of the new system
   rather than as one more room. Its four rulings stand.
-**Gap:** L-515's direction; then the build, proposed again in its terms,
-on Tony's go-ahead.
+- **Received 2026-11-09, night, from L-515's step 2b talk** (rulings 13
+  to 20 there): Mars becomes a fold of the one tree, not a room of its
+  own. Its fold lists Mars's shells and Phobos and Deimos together by
+  distance (ruling 14), which is ruling 2's three rows, nearest first;
+  "Centre on Mars" moves the view so Mars sits in the middle (ruling 15)
+  and opens on ruling 1's opening, the symbol alone (ruling 16); the axis
+  lines cross at Mars (ruling 17); Phobos and Deimos are served as JPL's
+  positions for 48 hours, built in this step (ruling 18, ruling 11).
+  Rulings 3 and 4 stand.
+**Gap:** L-515 step 2b's build; then this build, proposed again as a fold
+of the one tree, on Tony's go-ahead.
 - **Ref:** L-513 (the Moon's standards, the pattern); L-334 (what a room
   opens on, 2026-09-17); L-291 (the Earth room); L-484 (the two agree);
   L-150 (Charon's period centre, for the Pluto room).

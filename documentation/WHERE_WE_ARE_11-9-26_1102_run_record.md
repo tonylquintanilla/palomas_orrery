@@ -131,7 +131,7 @@ Not urgent, in your order:
 
 **Tony**: Run record:
 
-**Session: OPEN: 11-8-26 2340: Opus: Coordinator: Scene link and Featured cards L518 L515**
+**Session: DONE: 11-9-26 2206: Opus: Coordinator: Scene link and Featured cards L518 L515**
 
 Your local files match what you pushed. Writing the ledger entry now.
 
@@ -167,6 +167,28 @@ Your rulings are recorded, and the prompt for the Scenes build is below.
 - Scenes is designed: a shared link becomes a permanent scene in the drawer, and also on Featured if you tick it.
 - Featured stays a board for important cards and scenes.
 - Next is the Scenes build, then step 2b of the one tree.
+
+===============================================================
+
+Here's the prompt for the next coordinating session. This session changed no files since your last push, so there's nothing for you to commit.
+
+> Built on orrery a3e86c88a2c71dcd1d5a41a16b1f1c5f2e3bfabb at https://github.com/tonylquintanilla/palomas_orrery and gallery cea21af180b98a6694cb6bfb1083eca38e9b5c5d at https://github.com/tonylquintanilla/tonyquintanilla.github.io (both branch main, read Nov 9, 22:06 Chicago). Nightly bot commits since are expected.
+> Tony's local folders: orrery `C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\`, gallery `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\`
+>
+> Type: COORDINATOR, through the python_work door. A design talk; no code is built in this session unless I say so.
+>
+> Start:
+> 1. Record both bases, and say whether either moved past the anchor.
+> 2. Read the orrery's `documentation/WHERE_WE_ARE.md` and my latest run record, `documentation/WHERE_WE_ARE_11-9-26_1102_run_record.md`. Record any verdicts of mine there that aren't yet in the ledger.
+> 3. Say in one sentence what you're about to do, and wait for my go-ahead.
+>
+> The job: settle the design of step 2b of L-515 (one nested tree). Step 2b puts a moon into its planet's view and lets a room centre on a body that isn't at the middle of the scene. Read L-515 in the ledger first: its rulings, its step list, and the two leftovers it received from L-519 on Nov 9 (a scene made in the Earth room, and placing a card in a centre's own drawer). Then read `documentation/COORD_L515_steps1_2a_brief_20261107.md`, which names 2b but leaves it out, and L-514 (the Mars room), since step 3 builds on 2b. Bring me the open questions one at a time, each with pictures I can compare on my phone, and your lean with its reason. Don't write a brief until the design settles; then write it for the Code session that builds 2b, and give me that session's prompt.
+>
+> How to run it: plain speech, one question per message. Records go to the ledger and Where We Are at the close. Commit and push are mine.
+
+**Where this leaves us**
+- Scenes is done and closed. A shared link becomes a card, and you can place it beside one or several rows of the drawer.
+- Next is the design talk for step 2b of the one tree, then its build, then the Mars room.
 
 ==============================================================
 
@@ -1062,8 +1084,8 @@ Orrery:
 Website: none.
 
 **Your run order**
-1. In GitHub Desktop, commit and push the orrery. -- 
+1. In GitHub Desktop, commit and push the orrery. -- a3e86c88a2c71dcd1d5a41a16b1f1c5f2e3bfabb
 
 **Tony-action rollup**
 - (do) Commit and push the orrery.
-- (do) Reinstall the interactive-exhibit skill (1.39) and paste protocol v3.135 into the Project, if not yet done.
+- (do) Reinstall the interactive-exhibit skill (1.39) and paste protocol v3.135 into the Project, if not yet done. -- 
