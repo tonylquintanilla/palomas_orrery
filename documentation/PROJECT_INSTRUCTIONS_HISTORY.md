@@ -4590,6 +4590,54 @@ resident.
 (Moved down from the resident protocol on 2026-11-09, evening, when
 v3.135 made a fourth entry.)
 
+v3.133 (November 8, 2026, night): No rule changed in this document.
+ONE skill bump: interactive-exhibit 1.36 -> 1.37 (L-518, the shared
+scene link). THE ADDRESS CARRIES THE ROWS TICKED AND THE MINUTE SHOWN.
+
+WHAT PROMPTED IT. The Claude Code session of Nov 8, night (Claude Opus
+5.5), through the python_work door, built on orrery 0283834d and gallery
+d96b9989, from Tony's prompt of that night and
+documentation/DESIGN_shared_view_rulings_20261029.md, section 7 first,
+read again against the one tree (L-515) and the freeze (L-165); his
+go-ahead to the link described: "Go ahead".
+
+WHAT CHANGED. interactive-exhibit: a new paragraph under What a Room
+Opens On, The Shared Scene Link: ?show= (every row ticked, by key) and
+?at= (the minute shown, UTC), written by the page with replaceState, at
+once when the room opens and the rows at every tick and Reset; a room
+opened from a link draws them, with a third line under the title, "Tap
+to update.", bringing the visitor's now (Tony's first phone look: the
+first build's "as shared" on the title's own line did not take the tap); a minute older than the served
+window opens at now and says so, one past it freezes by the freeze's
+rule, a row the room no longer has is named; a minute the tab wrote
+itself opens at now; Reset keeps the room's own opening. Checked by the
+gallery run's new Scene address row and walked
+(walk_scene_address.js). And 1.36's sentence "The Explorer's own page
+keeps its chain", received on L-518 from L-517's close, corrected: it
+draws none since L-517 part 3. Its oldest of four version entries (1.34)
+moved to documentation/SKILL_HISTORIES.md, by the three-entry rule.
+Every sentence was read from the gallery's code with this session's
+edits before it was written.
+
+THE OBLIGATION TRAVELS. This session read interactive-exhibit 1.36 from
+the repo's copy, as a Code session does, so v3.132's obligation (a
+session that loads the account's copy confirms it reads 1.36) is not
+discharged and is overtaken by this one; it read gallery-assembler 1.3,
+safe-file-editing 1.14 and ledger-and-session-records 1.22 in the parts
+the work needed. Tony reinstalls interactive-exhibit (Settings > Skills)
+and pastes this version into the Project's instructions on claude.ai;
+the next session that loads it from the account confirms its copy reads
+1.37 before work that fires it.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.130 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-11-10, when v3.136 made
+a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

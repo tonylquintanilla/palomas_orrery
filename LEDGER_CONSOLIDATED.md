@@ -1164,8 +1164,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-510 | The object list's typed fields stop deciding: a small body drawn by today's eccentricity, a plan asked from before any launch (orrery, the object list and the path plan) | OPEN | -- | 2026-11-05 |
 | ! | L-511 | The orrery's export carries the words the website prints (orrery + gallery, the words) | OPEN | -- | 2026-11-03 |
 | ! | L-512 | The orrery's fallbacks when JPL cannot answer (orrery, the plot's data path) | OPEN | -- | 2026-11-04 |
-| ! | L-514 | The Mars room: Mars, Phobos and Deimos (gallery + orrery, a planet room; road stage 15) | OPEN | -- | 2026-11-09 |
-| ! | L-515 | One nested tree in place of isolated rooms (gallery, the room system; design) | OPEN | -- | 2026-11-09 |
+| ! | L-514 | The Mars room: Mars, Phobos and Deimos (gallery + orrery, a planet room; road stage 15) | OPEN | -- | 2026-11-10 |
+| ! | L-515 | One nested tree in place of isolated rooms (gallery, the room system; design) | OPEN | -- | 2026-11-10 |
 | ! | L-516 | Renew palomasorrery.com at Porkbun before 2027-02-13 (legacy; Tony's account) | OPEN | -- | 2026-11-07 |
 | ! | L-520 | Old pictures carry old words: the saved pictures' titles and descriptions have no source (gallery, the saved pictures; the braid) | OPEN | -- | 2026-11-08 |
 | ! | L-521 | Three red checks in the drawer walk (gallery, the headless walk; recorded) | OPEN | -- | 2026-11-09 |
@@ -1675,7 +1675,7 @@ or the text box.
 - **Ref:** L-165 (site continuity); L-490 (the legacy list).
 
 #### [L-515] One nested tree in place of isolated rooms (gallery, the room system; design)
-<!-- L:515 status:OPEN upd:2026-11-09 section:A flag: rice: -->
+<!-- L:515 status:OPEN upd:2026-11-10 section:A flag: rice: -->
 - **Opened 2026-11-07, 00:17 Chicago**, in the coordinating session
   (Claude Opus 5.5), built on orrery 33c699bb and gallery 3f2ce7fc.
   Tony: "I think we need to rethink the room system before we go
@@ -2728,22 +2728,121 @@ or the text box.
 - **The design is settled** with ruling 20. The brief:
   `documentation/COORD_L515_step2b_brief_20261109.md`, for one Claude
   Code session on the website, in parts with a stop after each.
-**Gap:** step 2b's build, by the brief; then the checkpoint on the one
-picture, and step 3, L-514 (the Mars room), with ruling 11's 48-hour
-positions. Ruling 15's picture B (measured from the centre) waits for the
-date span, with the encounters (step 4) and the date picker. The Moon's
-Go To box rides 2b. The lobby moved to L-517 (the lobby for a first-time
-phone visitor). The reinstall of interactive-exhibit 1.35, once carried
-here, is struck: the session of Nov 9, night, loaded 1.39 from the
-account, as the manifest expects.
-**Tony-action (do):** start the 2b build with the prompt in the design
-session's report of Nov 9, night.
+- **Step 2b built, 2026-11-10, the website Code session** (Claude Opus
+  5.5) through the python_work door, built on orrery b3ce81f8 and gallery
+  cea21af1, from Tony's prompt and the brief, in its four parts with a
+  report and his go-ahead after each ("Go on to part 2", "Yes", "Yes.").
+  Before building he allowed both skill bumps ("Yes, bump both"). The
+  skills read from the repo's copies, as the manifest expects:
+  interactive-exhibit 1.39 and gallery-assembler 1.3 in full;
+  gallery-cache-builder 1.18, orrery-coding-conventions 1.13,
+  safe-file-editing 1.14 and ledger-and-session-records 1.22 in the parts
+  the brief named. His run record `WHERE_WE_ARE_11-9-26_2209_run_record.md`
+  held no verdict not already here. Nothing is committed; the phone has
+  seen none of it.
+  - PART 1, THE MOONS IN THE ROOT (rulings 13, 8, 18). Every object
+    fetched around a body the root draws -- the Moon, Io, Titan, Pluto,
+    Charon -- is drawn at its parent's place by ADDING the parent's
+    worked-out position to its own JPL elements, in a new module,
+    `gallery/assembler/compose_children.py`, called by the root's driver
+    (method: the resolver's frame rule stays whole, so a mistake elsewhere
+    still raises FrameRejectionError). Each is a row folded under its
+    parent's row behind an arrow, closed on opening; ticking a moon ticks
+    its planet, unticking leaves it. Its box: its distance from its parent,
+    from its own answer, by the Moon's pattern; past its checked span (Io's
+    5 hours, Pluto's and Charon's 19, Titan's 2.0 days, the Moon's 3.4) one
+    sentence, proposed words: "This page checked its working-out against
+    JPL for <span> either side of the date of JPL's orbit. The minute shown
+    is outside that time." (on the Typed facts check's ALLOWED). Go To on a
+    moon opens its own box, the Earth room's Moon too (carried since Nov 7).
+  - PART 2, THE VIEW MOVED (rulings 15, 16, 17, 20). Centre on, on the Sun,
+    Earth, Jupiter, Saturn and the Pluto system (`centresOf`), moves the
+    view in the page, on the centre's own served opening, what was ticked
+    kept. THE PRECISION, MEASURED (Math.fround on the served positions):
+    Earth 5 km off at 0.99 AU, Jupiter 18 km at 5.3 AU, the Pluto system
+    121 km at 35.6 AU, Charon 173 km, against Pluto's 1,188 km radius. THE
+    FIX (method): the whole drawing shifted so the middle is the scene's
+    origin in 64-bit numbers (`gallery/view_centre.js`), every moon's error
+    then under 0.07 km; the arrows and far lines handed the box in absolute
+    points. The axis lines cross at the middle; the frame note's new line,
+    proposed words: "In this view the lines cross at <name>." Go To on a
+    moon puts its planet at the middle; Home and Reset return to the Sun's
+    view; the trail is the path down the tree. Jupiter's and Saturn's
+    openings, the symbol alone, written as served arrival blocks by a
+    narrow new store-writer function (`add_arrival`), its suite extended.
+    Method: a centre opening on its symbol alone is framed on its moons'
+    whole orbits, at the room's 20 percent.
+  - PART 3, EARTH FOLDS INTO THE ROOT (ruling 14). Earth's served shells
+    and guides are rows in Earth's fold with the Moon, by distance, drawn
+    at Earth's place from the Earth room's own drawing; `?exhibit=earth`
+    opens the root centred on Earth, on Earth's opening; the Earth room's
+    row, driver and words marked OBSOLETE and kept (L-509). METHOD, the Sun
+    line: not drawn in the root (the Sun is drawn at its true place; the
+    day-night line shows which side faces it). LOADING: a fold is drawn the
+    first time it is needed; the root's opening fetches 466 KB of stored
+    drawings (the Sun's five and the belt's cloud), Earth's 110 KB only on
+    its fold's first need. A fold's shell is keyed "<centre>.<key>" in the
+    root ("earth.crust"): the Sun's Hill sphere and Earth's would otherwise
+    be one key. An Earth room link's bare keys still open. L-519's leftover
+    1, a scene made centred on Earth: it keeps `?exhibit=earth`. The
+    gallery editor's tree and the New Scene window learn the folds.
+  - PART 4, THE OTHER FOLDS. Jupiter's rings and radiation belts and
+    Saturn's rings in their folds with Io and Titan, by distance, fetching
+    nothing. The Pluto row reads "Pluto system" (ruling 19), one string
+    replaced in place with the shared scanner; its marker the open white
+    square (`render_objects.build_center_marker`), in both views; a
+    barycentre's row answers to the names of the bodies under it, so New
+    Horizons' flyby of Pluto still ticks it.
+  - CHECKED: the gallery maintenance run green, 45 of 45 (two new rows,
+    Compose children and View centre); every new rule shown failing on a
+    planted fault; the drawer walk's new sections 32 to 35 (333 checks,
+    the three old reds of L-521 only); compare against the anchor's page
+    for the root, ?exhibit=sun and ?exhibit=earth, every difference named
+    and intended. Found and fixed: the Scene cards check, red at the
+    anchor, still refused a scene placed beside a row (L-519 part 2 made
+    that the way a scene is placed). The walk's taps are now cancelable,
+    as a real tap is, and settle twice (a 30 ms settle lost the far-line
+    re-cut once the drawer grew).
+  - LEFT, recorded: (1) Io, Titan, Pluto and Charon are not keyed in the
+    orrery's object list, so their boxes have no words, link or period;
+    the Solar System figures check lists them every run (received on
+    L-514, whose orrery session keys moons). (2) Until Earth's fold is
+    first opened, Find does not find its shells. (3) A view centred on
+    Jupiter, Saturn or the Pluto system is not carried by the shared link;
+    only ?exhibit=earth and ?exhibit=sun are addresses.
+  - SKILLS: interactive-exhibit 1.39 -> 1.40 (a new section, One picture:
+    the folds and the view's middle; the sentences 2b made wrong; L-518's
+    received note on Reset's frame); gallery-assembler 1.3 -> 1.4 (No
+    composition between frames says which kind is retired; it now has a
+    read plan); protocol v3.136; the manifest regenerated.
+**Gap:** Tony's phone look of step 2b (the Tony-action below); then the
+checkpoint on the one picture and step 3, L-514 (the Mars room), with
+ruling 11's 48-hour positions. Ruling 15's picture B (measured from the
+centre) waits for the date span, with the encounters (step 4) and the date
+picker. The three leftovers of 2b, above. The lobby moved to L-517 (the
+lobby for a first-time phone visitor).
+**Tony-action (do):** commit and push the website, then the orrery (the
+records and the two skills); reinstall interactive-exhibit 1.40 and
+gallery-assembler 1.4 (Settings > Skills) and paste protocol v3.136 into
+the Project's instructions.
+**Tony-action (decide):** the phone look of 2b, part by part: the moon
+folds and a moon's box past its span (its sentence); Centre on for the
+Sun, Earth, Jupiter, Saturn and the Pluto system; the axis lines and the
+frame note's line; the trail path; Earth's fold (the Sun line not drawn
+there); the open white square; an Earth scene made through ?exhibit=earth.
+- **The dashboard's buttons, Nov 10, on Tony's "Yes please add the
+  buttons"**: the orrery maintenance run had been red on Dashboard parity --
+  four gallery run steps with no button, Compose children and View centre
+  (this build) and Scene cards and Drawer places (L-519's). Scene Cards,
+  Drawer Places, Compose Children and View Centre were added beside Scene
+  Address, each with its short line; Dashboard parity then passed, 105
+  steps matched to their buttons and 137 cards carrying a line.
 - **Ref:** L-514 (the Mars room); L-443 (the drawer's groups); L-392 (the
   rooms section); L-291 (the Earth room); the protocol's The Orrery and
   the Assembler.
 
 #### [L-514] The Mars room: Mars, Phobos and Deimos (gallery + orrery, a planet room; road stage 15)
-<!-- L:514 status:OPEN upd:2026-11-09 section:A flag: rice: -->
+<!-- L:514 status:OPEN upd:2026-11-10 section:A flag: rice: -->
 - **Opened 2026-11-06, night**, by the coordinating session (Claude Opus
   5.5) through the python_work door, built on orrery b32205f4 and
   gallery 3f2ce7fc. Tony's prompt: "Road stage 15, the planet rooms,
@@ -2877,6 +2976,17 @@ session's report of Nov 9, night.
   lines cross at Mars (ruling 17); Phobos and Deimos are served as JPL's
   positions for 48 hours, built in this step (ruling 18, ruling 11).
   Rulings 3 and 4 stand.
+- **Received 2026-11-10, from L-515's step 2b build** (one nested tree):
+  the root now draws every moon fetched around a body at its planet's
+  place, folded under the planet's row, its box the Moon's pattern. Mars
+  needs nothing new of the page for Phobos and Deimos once they are served
+  and cached around Mars: they join Mars's fold by distance, and Mars
+  becomes a centre by `centresOf`. Its opening, the symbol alone, is
+  written by the store writer's `add_arrival`, as Jupiter's and Saturn's
+  were. Found by the build: Io, Titan, Pluto and Charon are not keyed in
+  the orrery's object list either, so their boxes carry no words, link or
+  period; this item's orrery session, which keys moons, is where they come
+  in.
 **Gap:** L-515 step 2b's build; then this build, proposed again as a fold
 of the one tree, on Tony's go-ahead.
 - **Ref:** L-513 (the Moon's standards, the pattern); L-334 (what a room

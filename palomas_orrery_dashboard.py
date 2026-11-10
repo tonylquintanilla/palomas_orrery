@@ -54,6 +54,12 @@ Module updated: November 8, 2026, night, with Anthropic's Claude Opus 5.5
 (L-518: the website's Scene Address button and line, beside Picture
 Folds, for the gallery run's new "Scene address" check; added on Tony's
 word, "yes", after Dashboard parity found it.)
+Module updated: November 10, 2026 with Anthropic's Claude Opus 5.5
+(L-515 step 2b, with L-519: the website's Scene Cards, Drawer Places,
+Compose Children and View Centre buttons and lines, beside Scene Address,
+for four gallery run checks that came without one -- L-519's two and step
+2b's two; added on Tony's word, "Yes please add the buttons", after
+Dashboard parity found them.)
 July 2026: added Linux Button-4/5 wheel scrolling to match columns 1/2's
 cross-platform coverage (CTkScrollableFrame's built-in handling only
 covers Windows/Mac <MouseWheel>). Audited LAUNCH_GROUPS against both
@@ -1187,6 +1193,61 @@ LAUNCH_GROUPS = {
         True,
         ["Scene address"],
         True),
+        ("Scene Cards",
+        os.path.join("tools", "test_scene_card.py"),
+        "The logic behind the gallery editor's New Scene window (L-519): a "
+        "shared link cleaned to a scene's address, each thing taken off "
+        "named; a link that cannot be a scene refused; a key no row has "
+        "named; a link already on a card refused; and every scene in the "
+        "real metadata clean, its rows found, in its room. It breaks its "
+        "own file three ways first, to show it can fail. GATES the gallery "
+        "runner. Runs from the gallery repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
+        True),
+        ("Drawer Places",
+        os.path.join("tools", "test_drawer_places.py"),
+        "The logic behind the gallery editor's drawer tree and Places list "
+        "(L-519 part 2): the editor's tree is the Solar System room's own "
+        "drawer, in the website's order, the folds under their bodies "
+        "(L-515 step 2b), a fold's shells keyed as the renderers key them; "
+        "a card's places one or several, twins together; every card's "
+        "places rows the drawer lists. It breaks its own file first, to "
+        "show it can fail. GATES the gallery runner. Runs from the gallery "
+        "repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
+        True),
+        ("Compose Children",
+        os.path.join("tools", "test_compose_children.py"),
+        "Each moon in the Solar System room is drawn at its planet's place "
+        "(L-515 step 2b) by ADDING the planet's position to the moon's own "
+        "JPL elements, never by subtracting two answers; its orbit is "
+        "centred on its planet's marker and its distance is its own. Worked "
+        "cases, the real served moons, the page's wiring. It breaks the "
+        "module three ways first, to show it can fail. GATES the gallery "
+        "runner. Runs from the gallery repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
+        True),
+        ("View Centre",
+        os.path.join("documentation", "run_offline_check.py"),
+        "The Solar System room's view centred as Tony ruled (L-515 step "
+        "2b): Centre on opens a centre's own opening, the trail is the path "
+        "down the tree, and the whole drawing is shifted so the middle sits "
+        "at the scene's origin. Measures the 32-bit error on every moon, "
+        "from the Sun and with its planet at the middle, and prints it. It "
+        "breaks its own file four ways first, to show it can fail. GATES "
+        "the gallery runner. The check is Node, so this button runs it "
+        "through documentation/run_offline_check.py. Runs from the gallery "
+        "repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        ["View centre"],
+        True),
         ("Page Framing",
         os.path.join("documentation", "run_offline_check.py"),
         "The page's own framing helpers, taken out of the page and run "
@@ -2313,6 +2374,18 @@ CARD_LINES = {
     ("Gallery -- checks and data",
      "Scene Address"):
         "Checks a shared link carries the ticked rows and the minute.",
+    ("Gallery -- checks and data",
+     "Scene Cards"):
+        "Checks the New Scene window turns a shared link into a card.",
+    ("Gallery -- checks and data",
+     "Drawer Places"):
+        "Checks the editor's drawer tree matches the website's drawer and folds.",
+    ("Gallery -- checks and data",
+     "Compose Children"):
+        "Checks each moon is drawn at its planet's place, by adding.",
+    ("Gallery -- checks and data",
+     "View Centre"):
+        "Checks Centre on, the trail, and the shift that keeps precision.",
     ("Gallery -- checks and data",
      "Page Framing"):
         "Checks the page's framing helpers give the right axis ranges.",

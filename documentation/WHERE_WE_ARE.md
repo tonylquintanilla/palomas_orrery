@@ -1,21 +1,22 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 9, 2026, late night: the coordinating session (Opus), step 2b designed.
-- Written at orrery a3e86c8 and gallery cea21af, plus this session's edits.
+Last updated: November 10, 2026: the website Code session (Opus), step 2b built.
+- Written at orrery b3ce81f and gallery cea21af, plus this session's edits.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Step 2b of the one tree is designed (L-515 (one nested tree)): the Solar System room becomes the one picture and the one drawer, and each planet folds open to its shells and moons by distance.
-> - The Earth room folds in, as the Sun's did. Only the Earth System and the stars stay rooms of their own.
-> - "Centre on" now moves the view so the body sits in the middle; the drawer's top line becomes a path down the tree.
+> - Step 2b is built, not yet seen on your phone (L-515 (one nested tree)). Each planet folds open to its moons and shells, and each moon is drawn where its planet is.
+> - "Centre on" now moves the view so the body sits in the middle, for the Sun, Earth, Jupiter, Saturn and the Pluto system. The drawer's top line is a path down the tree.
+> - `?exhibit=earth` opens the one picture centred on Earth; the Earth room is retired but kept. Pluto's row reads "Pluto system".
 >
-> **Do next:** *Build step 2b (L-515 (one nested tree)), from `COORD_L515_step2b_brief_20261109.md`.*
+> **Do next:** *Your phone look at step 2b, part by part (L-515 (one nested tree)); then Mars (L-514 (the Mars room)).*
 >
 > **Needs you now:**
-> - *(do) Commit and push the orrery: these records and the brief.*
-> - *(do) Start the 2b build with the prompt in the report.*
+> - *(do) Commit and push the website, then the orrery (the records and two skills).*
+> - *(do) Reinstall interactive-exhibit 1.40 and gallery-assembler 1.4; paste protocol v3.136 into the Project.*
+> - *(decide) The phone look: the list is in the report and on L-515.*
 > - *(do) Each morning, Fetch origin and Pull origin on both, orrery then website, before any work. If Pull origin shows up only once you have changes: Commit them first, then Pull origin, then Push origin. If Desktop stashes your changes anyway, restore them at once: Changes tab, Stashed Changes, Restore.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
 
@@ -30,12 +31,11 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
                and A2 of JPL's fallbacks (L-512), a green website night,
                the quick wins with L-423 (the website's checks), and the
                Moon's standards (L-513, closed).
- 15.   [NOW]   *The one tree's step 2b (L-515 (one nested tree)): one
-               picture, one drawer, each planet folding open to its shells
-               and moons. Then Mars (Phobos, Deimos) as the first new fold
-               (L-514 (the Mars room)), then Jupiter, Saturn, Uranus,
-               Neptune, Pluto. Io, Titan, Charon and Pluto come to standard
-               in their folds.*  << moved this session
+ 15.   [NOW]   *The one tree's step 2b, built Nov 10 (L-515 (one nested
+               tree)): your phone look. Then Mars (Phobos, Deimos) as the
+               first new fold (L-514 (the Mars room)), then Uranus and
+               Neptune. Io, Titan, Charon and Pluto come to standard in
+               their folds, keyed in the orrery first.*  << moved this session
  16.   [later] Earth's fold: L-297 (the Lagrange points), the Earth-Moon
                barycentre, SOHO, Gaia, James Webb, Artemis II.
  17.   [later] Small-body systems' moons; then stars and exoplanets.
@@ -61,13 +61,11 @@ Standing rulings; a line leaves once it is habit, or a skill carries it.
   tree (Nov 7, 11:26; L-515 (one nested tree), ruling 6).
 - The Moon shows JPL's period for today, like every other body, not the
   sidereal month (Nov 6, 22:17; L-513 (the Moon's standards)).
-- Pluto: the row is the barycentre, now named "Pluto system", its fold Pluto
-  and Charon; the orrery's Pluto-centred view goes (Nov 6, Nov 9; L-150
-  (trusting a near-equal pair), L-515 (one nested tree), ruling 19).
 
 ## Deferred  **>> UPDATED THIS SESSION**
 
 Waiting behind other work; a line leaves when picked up.
+- Step 2b's three leftovers: Io, Titan, Pluto and Charon have no words until the orrery keys them; Find misses Earth's shells until its fold is first opened; a view centred on Jupiter is not in the shared link (Nov 10; L-515 (one nested tree)).
 - Three checks red in the drawer walk before Scenes was built, the page or the walk aged: a gallery session that next opens the drawer (Nov 9; L-521 (three red checks)).
 - The saved pictures' words, which have no source: kept as made until the braid reaches them (Nov 8; L-520 (old pictures carry old words)).
 - Charon's period is asked around Pluto's centre, not the barycentre;
@@ -95,9 +93,9 @@ Waiting behind other work; a line leaves when picked up.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261109T222751Z, nightly, ok, no retry (gallery swap log at cea21af, read Nov 9, night).
-- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at orrery a3e86c8, its run 20261109T022724Z).
-- This page's date and the ledger's newest stamp: both Nov 9. Agree.
+- Last cache build: 20261109T222751Z, nightly, ok, no retry (gallery swap log at cea21af, read Nov 10).
+- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at orrery b3ce81f, its run 20261109T022724Z).
+- This page's date and the ledger's newest stamp: both Nov 10. Agree.
 
 ## Waiting on you
 
@@ -121,8 +119,8 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- This session: L-515 (one nested tree), step 2b's design talk, rulings
-  13 to 20; L-514 (the Mars room) received what it means for Mars.
+- This session: L-515 (one nested tree), step 2b built, its four parts
+  and what is left; L-514 (the Mars room) received what it means for Mars.
 - The tree: L-515 (one nested tree); `COORD_L515_step2b_brief_20261109.md`
   (2b), `COORD_L515_steps1_2a_brief_20261107.md` (1 and 2a).
 - The talk's rulings: `DESIGN_L484_consistency_rulings_20261103.md`.

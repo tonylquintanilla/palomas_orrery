@@ -6,9 +6,21 @@ fires_when: render_orbits.py, resolver.py, cache_reader.py, propagation math, go
 
 # Gallery Assembler
 
-Skill version: 1.3 | Cut from orrery @ 159c5a2c (v1.3),
-earlier @ 5b3fb6b4 (v1.2),
-@ f83a3abc72c5516e6dc2ad264be53ce95b68cf38 (v1.1) | 2026-09-08
+Read this file in 2 parts: lines 1-260, 261-307.
+
+Skill version: 1.4 | Cut from orrery @ b3ce81f8 and gallery @ cea21af1
+(v1.4), earlier @ 159c5a2c (v1.3), @ 5b3fb6b4 (v1.2),
+@ f83a3abc72c5516e6dc2ad264be53ce95b68cf38 (v1.1) | 2026-11-10
+v1.4 (L-515, one nested tree, step 2b; Tony's rulings 13 and 14 of
+2026-11-09) amends "No composition between frames" to say which
+composition is retired and which is the method: SUBTRACTING two JPL
+answers stays retired; ADDING a parent's worked-out position to a child's
+own JPL elements around it is how the root draws a moon at its planet's
+place, in a new module, gallery/assembler/compose_children.py, called by
+the root's driver, the resolver's frame rule unchanged. It adds the
+64-bit shift the page makes before a centred view (moving our own
+drawing, not a subtraction of answers) and its measured reason. Read
+from the gallery's code with that session's edits before it was written.
 v1.3 (L-304) adds four field notes from the 2026-09-07/08 gallery
 session. Three are Plotly 2.35.2 behaviours READ OUT OF THE SHIPPED
 BUNDLE rather than inferred, and each one cost a real defect Tony
@@ -82,18 +94,51 @@ to include it. (Known stale docs: cache_reader.py AND resolver.py both still say
 served_window is "currently null at HEAD... tracked with F1" -- pre-M2,
 no longer true; fix next time you're in that file.)
 
-## No composition between frames -- retired by design
+## No composition between frames -- which kind is retired (v1.4)
 
-A near-equal-mass binary needing both a wide (heliocentric) and close
-(barycentric) view means TWO independent fetches -- never one derived
-from the other. Composition (parent position + local offset) was tried
-and retired by the v4 model correction: subtracting two large,
-nearly-equal position vectors for a small relative one is catastrophic
-cancellation, worsened by sampling aliasing. "Pluto/Charon two-view"
-already names the correct model: two self-contained scenes. Ordinary
-planet-moon systems (barycenter INSIDE the primary) don't need this --
-the existing single parent-relative orbit already is their complete
-picture. Same barycenter-outside-primary rule as elsewhere in this
+TWO OPERATIONS HAVE BEEN CALLED "COMPOSITION", and only one is retired.
+
+RETIRED: deriving a small relative vector by SUBTRACTING two large,
+nearly-equal answers -- a moon's place around its planet as the moon's
+Sun-centred answer minus the planet's. That is catastrophic cancellation,
+worsened by sampling aliasing, and the v4 model correction retired it. A
+near-equal-mass binary needing both a wide (heliocentric) and close
+(barycentric) view still means TWO independent fetches, never one
+derived from the other ("Pluto/Charon two-view": two self-contained
+scenes).
+
+THE METHOD (v1.4, L-515 step 2b, rulings 13 and 14): drawing a child in
+its parent's place by ADDING. A moon's orbit and marker in the root are
+its OWN JPL elements around its parent, propagated as served, PLUS the
+parent's position from the parent's own elements around the Sun for the
+same minute. Nothing is differenced: the small vector keeps every digit
+it was served with, and its distance from its parent (what its box
+prints) is read from the child's own answer, never from the sum.
+`gallery/assembler/compose_children.py` does it (`children_to_draw`,
+read from the config's `center_slug`; `build_child_traces`, which stamps
+`meta.rel_au` and `meta.parent_au` on the marker), called by the root's
+driver only for a child whose parent the scene drew. The resolver's
+frame rule is unchanged: a Sun-centred scene still raises
+FrameRejectionError for an object stored around another centre, so a
+mistake anywhere else still surfaces. A barycentre parent (Pluto-Charon)
+is drawn at its marker, the Sun-centred propagation, even where its
+orbit is a drawn_orbit; its children sit on that marker. Checked by the
+gallery run's Compose children row (tools/test_compose_children.py),
+which plants a subtraction, an orbit left at the Sun and a distance
+worked out as a difference, and goes red on each.
+
+THE SHIFT IS NOT A SUBTRACTION OF ANSWERS EITHER. Before a centred or
+close view is drawn the page moves its whole drawing so the middle sits
+at the scene's origin (interactive-exhibit 1.40, One picture), every
+shifted copy made from the absolute points kept once, in 64-bit numbers.
+WHY: WebGL holds 32-bit floats; Math.fround on the served positions of
+2026-11-10 put Earth 5 km off, Jupiter 18 km, the Pluto system 121 km
+and Charon 173 km; with the planet at the middle every moon's error is
+under 0.07 km.
+
+Ordinary planet-moon systems (barycenter INSIDE the primary) need no two
+views: the single parent-relative orbit is their picture, drawn in the
+root by adding. Same barycenter-outside-primary rule as elsewhere in this
 project, not a separate judgment call.
 
 ## Trust / served_window system (M2)

@@ -1018,6 +1018,23 @@ encounter that replaces it is built. Read from the gallery's code with
 this session's edits before it was written.
 (Moved down 2026-11-09, evening, when 1.39 made a fourth entry.)
 
+1.37 | 2026-11-08, night, with Anthropic's Claude Opus
+5.5, at palomas_orrery @ 0283834d and gallery @ d96b9989. v1.37 (L-518,
+the shared scene link) adds THE SHARED SCENE LINK, under What a Room
+Opens On, Tony's rulings of 2026-10-29 and his go-ahead of 2026-11-08:
+the address carries the rows ticked (?show=, by key) and the minute
+shown (?at=, the maker's), and the page writes both itself with
+replaceState, so the browser's own Share sends the scene. A room opened
+from a link draws them, its title's lines as ever and a third, "Tap to
+update.", bringing the visitor's now (Tony's phone look); a minute older than the data opens at
+now and says so, one past it freezes, a row the room no longer has is
+named; Reset keeps the room's own opening (gallery/scene_address.js;
+the gallery run's Scene address row; walk_scene_address.js). And it
+corrects 1.36's "The Explorer's own page keeps its chain": since
+L-517 part 3 it draws none. Read from the gallery's code with this
+session's edits before it was written.
+(Moved down 2026-11-10, when 1.40 made a fourth entry.)
+
 ## safe-file-editing
 
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons;
