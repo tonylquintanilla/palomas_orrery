@@ -1980,6 +1980,22 @@ or the text box.
      website places it.
   8. Remove the Sun from ED138's scene in the editor, Save All, push: the
      Sun's Scenes group goes, the scene stays beside ED138.
+- **Part 2 deployed, 2026-11-09, night** (Tony's run record, same copy,
+  read by the same Code session). His first push after the build carried
+  no part 2: GitHub Desktop stashed the uncommitted changes before the
+  pull of the nightly bot's 5edb514 (the history log: "reset: moving to
+  HEAD", then the pull, at 17:32), and 5edb514, written down as his
+  commit, was the bot's; the editor he reran was the folder's older code.
+  The stash held all of part 2, ED138's scene placed beside 2026 ED138
+  among it, and its three .sha files equal to the bot's; Tony restored it
+  and committed cea21af. That deploy's last step, "Deploy to GitHub
+  Pages", waited ten minutes and timed out (the build itself took 23
+  seconds; githubstatus.com listed no open Pages incident); re-run, it
+  deployed. Tony: "all green" (the live check), and the served
+  `gallery/picture_folds.js` carries part 2's `placesOf` [verified @
+  palomasorrery.com, read by the session]. Method learned: when GitHub
+  Desktop offers to stash before a pull, commit first, or restore the
+  stash right after.
 **Gap:** Tony's phone look of part 2, above; the item closes on it. Left
 for his clean-up at the turn (14:53): item 8 of the first list, a scene
 made in the Earth room opening that room; and the editor's "under
