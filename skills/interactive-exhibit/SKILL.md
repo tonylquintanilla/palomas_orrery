@@ -6,7 +6,7 @@ fires_when: a room or exhibit in interactive.html (?exhibit=); its drawer and ch
 
 # Interactive Exhibit
 
-Read this file in 3 parts: lines 1-251, 252-503, 504-718.
+Read this file in 3 parts: lines 1-258, 259-510, 511-725.
 
 Skill version: 1.40 | 2026-11-10, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ b3ce81f8 and gallery @ cea21af1. v1.40 (L-515, one nested
@@ -129,6 +129,13 @@ Three neighbours own the layers beneath and beside this one:
 - gallery-pipeline: Studio -> json_converter -> index.html for FIGURE
   cards. An exhibit's card is the one place this skill touches Studio.
 
+This skill holds the rules. What the page does now, which function or
+file does it and in what order, is the gallery's `INTERACTIVE_AS_BUILT.md`,
+at its root beside `interactive.html` (L-522): a session reads the
+section for the part it changes, and changes that page in the commit
+that changes the page's code. The gallery run's "As-built names" row
+holds its code names to the code.
+
 ## Rules
 
 ### Design before code [QUALITY]
@@ -232,7 +239,7 @@ more, by Tony's ruling that it be permanent. Nothing ticks many bodies
 at once, save a spacecraft or a comet and its companions. Selecting
 moves nothing; only Go To moves the view. Each group is JPL's own
 class for its bodies, one class to a row. The room frames on where
-each body is now, at 20 percent, and Go To fits the body's whole
+each body is now, with a buffer of 20 percent, and Go To fits the body's whole
 orbit.
 What the page does, and where: the gallery's `INTERACTIVE_AS_BUILT.md`,
 The Solar System room's drawer: bodies, not shells.

@@ -303,3 +303,38 @@ Website: none.
 - Next is Mars or the skill's split, in the order you choose.
 
 **One final thought:** to read back two file sizes I loaded your orrery's whole folder listing into the conversation, which is the waste the token rule names. Next time I'll list only the one folder and slice out the line I need. -- thanks.
+
+================================================================
+
+Both heads moved: the exhibit skill was split (orrery 87fb472, 9968b17) and the website gained `INTERACTIVE_AS_BUILT.md` (33b1bfa). Checking what that changes for the prompt.
+
+The heads moved because the exhibit skill's split is partly pushed: the shortened skill (orrery 9968b17) and its new reference, `INTERACTIVE_AS_BUILT.md` (gallery 33b1bfa). The split session hasn't closed yet. Nothing in the ledger records the split as built, the skill still reads 1.40, and the protocol is still v3.137. None of the code the tap fix touches has changed; the website's only new file is the reference.
+
+Three things in my prompt needed changing:
+- **It named the skill as at its cap and said not to bump it.** The skill is now 718 lines, so that's no longer true.
+- **It pointed only at the skill.** The touch-path detail now lives partly in the website's new `INTERACTIVE_AS_BUILT.md`, under "One text box".
+- **The skill holds a sentence that is now known to be wrong:** "Touch has no hover." Plotly does send a hover for a touch that lands 5 to 22 pixels off, which is the whole bug. A session following that sentence would do the wrong thing, so the records skill's rule says to correct it now, in a bump of its own, not carry it to Mars.
+
+**Send it only after the split session has closed and you've pushed its close**, so the two sessions don't both write the ledger, Where We Are and the exhibit skill. Here is the revised prompt:
+
+> Built on orrery (the SHA of my push of the split's close) at https://github.com/tonylquintanilla/palomas_orrery and gallery (the SHA of my push) at https://github.com/tonylquintanilla/tonyquintanilla.github.io (both branch main). Nightly bot commits since are expected.
+> Tony's local folders: orrery `C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\`, gallery `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\`
+>
+> Type: BUILD, a Claude Code session in the gallery repository, through the python_work door. One small fix, before Mars: a tap on a phone opens a box only when it lands within 5 pixels of a dot.
+>
+> My words, Nov 10 and 11: "tapping with my thumb works about 1/2 to 3/4 the time" and "tapping on the phone is hit or miss on small object dots. People get quickly frustrated."
+>
+> What the coordinating session read (Opus, Nov 11), to confirm, not to trust:
+> - Plotly 2.35.2, `src/plots/gl3d/scene.js` line 459: `plotly_click` is emitted only when `selection.distance < 5`; otherwise the same pick is emitted as `plotly_hover`. The distance is in pick-buffer pixels from the finger to the nearest drawn pixel (gl-select-static's `query`, `Math.sqrt(closest[2])`).
+> - `interactive.html`, `sunTapPicking`: the search reaches `SUN_PICK_RADIUS_PX` (22) on a portrait phone only, Plotly's 10 elsewhere. So a tap 5 to 22 pixels off is a hover.
+> - `interactive.html`, `sunLabelInstall`: since L-497 (6a, Oct 27) a `plotly_hover` opens the text box only for a mouse (`sunPointerKind !== "mouse"` returns). Before that, Plotly's own box opened on the hover, which is why my Sep 16 phone look (L-318 round 6) passed: "always opens on first tap".
+>
+> The job: a finger tap that does not drag (the page's own `SUN_LABEL_TAP_PX` and `SUN_LABEL_TAP_MS` tests), whose press brings a `plotly_hover` on a marker that carries words, opens that marker's box exactly as `plotly_click` does: one focus per press (`sunTapSerial`, `sunClickServedTap`), deferred out of Plotly's event (L-278). Say whether the 22-pixel reach should also apply to a landscape phone, and why. The decision "is this hover a tap" goes in its own small file with a check that is shown failing first (L-338); a headless walk sends a touch hover and a drag and holds the page to each. Measure first, in the code, then change; the method is yours to report.
+>
+> Read, each against the manifest: interactive-exhibit, its sections "The touch path is not the mouse path" and "Phone first, and the conditions are stated"; the gallery's `INTERACTIVE_AS_BUILT.md`, its "One text box" section and any part on taps; gallery-assembler, its Mode 5 as Measurement; safe-file-editing; ledger-and-session-records, the parts for the close. Before adding to any document, read its row in the orrery's `DOCUMENT_CAPS.md`.
+>
+> The skill's sentence "Touch has no hover" is wrong for a 3D scene: Plotly sends a hover for a touch 5 to 22 pixels off. Correct it, and any sentence the fix makes untrue, in the skill and in the as-built, as a bump of the skill by the records skill's four steps.
+>
+> Close: record the fix as a new ledger item, the next handle, with L-318, L-497 and L-514 in its references; Where We Are by section, within its cap; the gallery maintenance run green, read from its output; my phone-look list, with the conditions for each tap (portrait and landscape, a planet, a small body, a moon beside its planet); the token report as the door asks. Commit and push are mine.
+
+Still Opus at standard effort. When its fix has passed your phone look, tell me and I'll write the handoff for the Mars coordinator.

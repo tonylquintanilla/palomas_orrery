@@ -662,3 +662,173 @@ The reference already names the check Part 3 builds (`tools/check_as_built_names
 Part 2 is done: the exhibit skill went from 2,440 lines to 718, the website has its new as-built reference, and the account script reads clean. Nothing is committed; Part 3 (the website's name check and the two pointers) has not started.
 
 May I go on to Part 3, the name check and the doors?
+
+===========================================================
+
+**Fable:**
+
+Yes, tell the Code session to go on to Part 3. Part 2 is confirmed.
+
+I read the four changed files from your computer and ran my own account, written separately from the Code session's.
+
+- **Every old line landed once.** All 2,352 non-blank lines of the old skill are in exactly one of the new skill, the reference, or the history file. The same three lines are found nowhere, for the reasons the report gives.
+- **Nothing was reworded in the move.** The 1,738 lines in the reference are in their original order. The only lines there that are not from the old skill are the opening, a contents list and the section headings.
+- **The skill's new text is what was agreed.** I read all 97 new lines. The six rules are there, the Provenance rule carries the five lines I asked for, and "Tony's ruling" is in.
+- **The protocol changed only in its skill table.** It is 1,401 lines, down from 1,487. The skills check and the caps check both pass on a copy.
+
+One wording fix to pass along with the go-ahead:
+
+> Go on to Part 3. One wording fix in the skill's Solar System drawer rule: "frames on where each body is now, at 20 percent" should read "with a buffer of 20 percent", which is Tony's own phrase.
+
+**Run order**
+- *(do)* Paste the block to the Code session. -- working
+- *(do)* No commit is needed now. If you want a checkpoint anyway, push the website first, then the orrery; the reference names a check that Part 3 has not built yet, and that is expected.
+- *(do)* Bring me the final report at the close.
+
+**Where this leaves us**
+- The exhibit skill is 718 lines, down from 2,440. The website has its new reference, `INTERACTIVE_AS_BUILT.md`, at 1,825 lines.
+- Five stale statements in the skill are listed for you and not fixed. They go on the ledger item for document caps (L-522) at the close.
+- Part 3 builds the check that every code name in the reference still exists in the code, and adds the pointer lines.
+- Still to come at the close: the skill's version bump, the two lowered caps, then your reinstall and paste.
+
+=============================================================
+
+**Code:**
+
+Part 3 underway: I fixed the "buffer of 20 percent" wording and am now designing the name check, working out how the gallery's other checks find the orrery folder.
+
+Writing the name check now, in the style of the gallery's other checks: it runs a self-test on a planted copy first, then the real reference.
+
+The self-test caught a real hole: the checker was reading its own file, so its own planted name counted as found. I'm excluding the checker from the code it searches.
+
+Two real findings so far: `ssBuildRows` is gone, since the page now uses `drawerBuildRows`, and `smoke_text_box.js` never existed. I'll correct the first and mark the second while I fix the four faults in the check itself.
+
+The file is right. Now filling in the orrery's names and trimming the Plotly list to the three the page actually uses.
+
+The check works on Tony's computer and on GitHub's nightly run, which has no orrery folder. Next I'll show it going red on a planted copy, then add its row to the website's maintenance run.
+
+Part 3's pieces are in. Now I'm re-running the account, which should name exactly the two lines Part 3 corrected and nothing else.
+
+Part 3 is done. The website now has a check that holds every code name in the new reference to the real code. Its first run found two old names, and it now reads green.
+
+**The check** (`tools/check_as_built_names.py`, the website run's new "As-built names" row):
+- **What it read:** 743 backticked things in `INTERACTIVE_AS_BUILT.md`.
+- **Names it checked:** 487. Of these, 478 are in the website's code, 8 only in the orrery's, and 1 is marked as not in the code.
+- **Not names, set aside and counted by kind:** 48 in all.
+  - 12 page addresses or parameters
+  - 11 patterns with a placeholder, like `positions/<slug>.json`
+  - 14 phrases or code snippets
+  - 9 object shapes, like `{group, label}`
+  - 1 date and 1 HTML entity
+- **Plotly's own names:** 3 are set aside by name (`Fx.loneHover`, `annotation-text-g`, `clipToBounds`). They live in Plotly's code, which loads from its own website and is in neither repository.
+- **It goes red:** I broke one name on a throwaway copy, `drawerBuildRows` changed to `drawerBuildRowz`. The run printed "NOT FOUND: drawerBuildRowz" and failed. It also tests three planted faults on a copy every time it runs. That self-test caught a real hole on its first run: the check was reading its own file, which names the planted fault, so the planted name counted as found. It now skips its own file.
+- **GitHub's nightly run:** the nightly run has no orrery folder. There, the 8 orrery names are printed by name as "not examined tonight", and every other name is still checked. On your computer, all 8 are looked for in the orrery, and the run goes red if that list ever drifts.
+
+**What the first run found:**
+- `ssBuildRows` no longer exists. Since the one-builder change (L-515, one nested tree), the page builds the drawer's rows with `drawerBuildRows`, so I corrected the reference.
+- `documentation/smoke_text_box.js` never existed, and the sentence already says so. I left the sentence and marked the name "[not in the code, L-522]". The check prints it every run and does not count it red.
+
+**The pointers:**
+- The website's `CLAUDE.md`, under "The skills": the reference's name, and that a session reads the section for the part it changes and updates the reference in the same commit as the code.
+- The exhibit skill carries the same pointer once, just before its Rules.
+
+**Also done:**
+- The Solar System drawer rule now reads "with a buffer of 20 percent".
+- The account still reads clean. The two old lines Part 3 corrected are the only new entries on its "found nowhere" list, each with its reason.
+- The skill is 725 lines, and the skills check reports no problems.
+
+**Still to do at the close:**
+- The orrery's maintenance run in full.
+- The website's offline run in full, with its new row.
+- The skill's bump to 1.41 and the protocol entry.
+- Lowering the two caps.
+- L-522 (document caps) and Where We Are.
+- The final report, with the file list.
+
+The full account printout is at `C:\Users\tonyq\AppData\Local\Temp\claude\83151086e8740c29\24069cc8-ab24-42b6-ba42-005a2ec28a78\scratchpad\account_out_part3.txt`.
+
+One final thought: the check proves a name exists somewhere in the code, not that it is used where the sentence says. A dotted name like `PictureFolds.foldsAt` passes if each part appears anywhere. It catches a renamed or deleted name, not a moved one.
+
+Part 3 is built: the website has a name check, added to its maintenance run as "As-built names", and both doors point at the new reference. The check found two old names and is now green; the full test runs, the version bump and the records are still to do.
+
+May I run the full checks and write the close?
+
+======================================================
+
+**Fable:**
+
+Not the close yet. Part 3 is built as reported, but I found one hole in the new check, and the tap fix still comes before the close.
+
+**What I confirmed.** I ran the check on a copy of both folders. It gives the same counts as the report: 487 names examined, none missing. It went red when I broke a name myself, and it runs correctly without the orrery folder, as it will on GitHub at night. The two pointer paragraphs and the "buffer of 20 percent" wording are in.
+
+**The hole.** In four places the reference has a code name that wraps from one line to the next. The check cannot read those, and it then misreads the rest of that line. I broke five names on those lines and the check passed every time. The clue was already in its output: it had set aside scraps like " and " and "; " as "words or a snippet".
+
+Paste this to the Code session:
+
+> Not the close yet. Two things first.
+>
+> 1. A blind spot in the name check, found by the coordinator. `SPAN` stops at a line end, so the four backticked spans that wrap a line (the reference's lines 64-65, 163-164, 565-566, 1537-1538) throw the pairing off for the rest of their closing line. Names there are not examined: a planted `sunGroupRadiuz` on line 1538 and `tools/pull_drawingz.py` on line 164 both passed. The symptom was in the output, set aside as "words or a snippet": " (below). So ", " and ", " in ", "; ". Fix: a span may wrap a line, its line break and indent read as one space; and a backticked thing that begins or ends with a space is a finding, not a set-aside. Add a wrapped span to the self-test's planted faults, and show the check red on a plant at line 1538, on a throwaway copy.
+>
+> 2. Then stop for Tony's checkpoint push. Part 4, the tap fix, follows it, and the close comes after Part 4.
+
+**Run order**
+- *(do)* Paste the block above to the Code session. -- working
+- *(do)* When it reports the fix, commit and push the website, then the orrery. You need not bring me that report; I will check the fix together with Part 4.
+- *(do)* Then paste the Part 4 block from my previous message, the tap fix.
+- *(do)* Bring me Part 4's report before the close.
+
+**Where this leaves us**
+- The split itself is done and verified: the skill is 725 lines, and the reference is in the website with its check.
+- The check has one known hole, with its fix written out for the Code session.
+- The tap fix is next, in the same session, after your checkpoint push.
+
+======================================
+
+**Code:**
+
+The patch script mangled its backslashes, and nothing was changed. I'm making the same edits with the edit tool instead.
+
+The four mispaired fragments are gone, and four more names are now examined (491). Now the coordinator's two plants, on a throwaway copy:
+
+Both plants now go red, each by name. One last look: the row inside the website's own runner.
+
+I fixed the blind spot in the name check, and both of the coordinator's planted names now go red, each by name. I've stopped here for your checkpoint push.
+
+**What was wrong.** The check paired backticks one line at a time. Four backticked names in the reference wrap onto a second line. At each of those four, the pairing went wrong, so the rest of the closing line was never read. A misspelled name there passed.
+
+**What changed in the check:**
+- A backticked name may now wrap one line, and the line break reads as a space.
+- A backticked piece that begins or ends with a space now fails the check, because it means the pairing has gone wrong there. The four fragments that had been set aside as "words or a snippet" are gone.
+- It now checks 491 names, up from 487. The extra four are the four that wrap: the `{ "value": ... }` example, the belt's cloud row, `SolarSystemDrawer.rowPlan(...)` and `frameOnPosition`. It still finds no missing names.
+- The self-test it runs every time now plants six faults instead of three. The new ones are a name that wraps a line, a name right after it on the same line, and a backticked piece that starts with a space.
+
+**Shown red on a throwaway copy:**
+- `sunGroupRadiuz` on line 1538 printed "NOT FOUND: sunGroupRadiuz".
+- `tools/pull_drawingz.py` on line 164 printed "NOT FOUND: tools/pull_drawingz.py".
+- The run ended "FAIL -- 2 finding(s)".
+
+**In the website's own runner,** the row reads "PASS As-built names, 1.4s".
+
+I see you already pushed after Part 2: orrery `9968b17` ("skills") and website `33b1bfa9` ("Create INTERACTIVE_AS_BUILT.md"). This checkpoint carries Part 3 on top of those.
+
+**Files for this checkpoint push:**
+
+Website:
+- ok `tools/check_as_built_names.py` (new; the name check)
+- ok `gallery_maintenance_run.py` (1 edit: the "As-built names" row)
+- ok `INTERACTIVE_AS_BUILT.md` (2 edits: `ssBuildRows` corrected to `drawerBuildRows`; `smoke_text_box.js` marked as not in the code)
+- ok `CLAUDE.md` (1 edit: the pointer to the reference under "The skills")
+
+Orrery:
+- ok `skills/interactive-exhibit/SKILL.md` (3 edits: "with a buffer of 20 percent", the pointer before the Rules, and the reading plan rewritten by the skills index tool)
+
+GitHub Desktop will also show your two run-record copies in the orrery (`WHERE_WE_ARE_11-10-26_1211_run_record.md` and `..._1813_Fable_run_record.md`). Those are your edits, and I haven't touched them.
+
+**Your run order:**
+1. Website: commit and push the four files. -- 1948e7903d422ed7df6d1c1b7cfd9c613971ac5c
+2. Orrery: commit and push the skill, plus your run records if you want them in this push. -- 
+3. Tell me when it's done. Part 4, the tap fix, comes next, and the close comes after it.
+
+The name check now reads backticked names that wrap a line, and its two planted names go red. It runs green inside the website's runner. Nothing past this point is built; Part 4 (the tap fix) and the close wait on your checkpoint push.
+
+Tell me when the checkpoint push is done.
