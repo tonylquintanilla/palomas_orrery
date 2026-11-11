@@ -29,6 +29,9 @@ version line or one section (the protocol's Token Economy). Open your
 first report by naming the skills you read and the version line each
 one carries. Compare that version with the manifest's row. If they
 disagree, stop and say so (the protocol's Stale Skill = Stop gate).
+The repository's copy is the one read. Claude Code also offers the
+copy installed in Tony's account; an installed skill of the same name
+is not invoked (L-522).
 
 ## At the start of a session
 
@@ -82,8 +85,11 @@ disagree, stop and say so (the protocol's Stale Skill = Stop gate).
   into his run record; then the session's token count as Claude Code
   prints it (the /cost output: input and output tokens, by model),
   which Tony writes in his run record beside the commit (the
-  protocol's Token Economy, L-506); then his run order (what to look
-  at, what to commit), then the Tony-action rollup.
+  protocol's Token Economy, L-506). Where no /cost figure prints, as in
+  Tony's app, give the context size the app shows at the close and the
+  sizes read and written, in that form every time (L-522). Then his
+  run order (what to look at, what to commit), then the Tony-action
+  rollup.
 
 ## How to report to Tony
 

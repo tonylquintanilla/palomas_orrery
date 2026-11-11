@@ -20,7 +20,9 @@ When a session opens here:
 
 The canonical copy of this file, and of `.claude\settings.json` beside
 it, lives in the orrery repository at
-`documentation\python_work_door\` (CLAUDE.md and settings.json). Tony
-copies them here; an edit is made there, never here. Written October
+`documentation\python_work_door\`, as python_work_CLAUDE.md and
+settings.json; it is not named CLAUDE.md there, so Claude Code does
+not load it as a rule file (L-522). Tony copies them here, the first
+renamed CLAUDE.md; an edit is made there, never here. Written October
 29, 2026 with Anthropic's Claude Opus 5.5 (L-499; Tony's ruling of
 Oct 29, 00:08: "a door in the parent").
