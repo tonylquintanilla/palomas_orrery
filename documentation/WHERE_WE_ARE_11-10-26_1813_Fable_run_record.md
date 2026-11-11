@@ -422,10 +422,12 @@ Step 1 is confirmed from GitHub, at orrery 24ff000 and website 41126f9.
 The new closing line also had its first real use. The Code session ended with "One final thought", and it was a criticism of its own work: it set the caps only at the very end, so one of your checkpoint pushes went up with the check red.
 
 **Run order**
-1. *(do)* Replace `python_work\CLAUDE.md` with a copy of `palomas_orrery_for_github\documentation\python_work_door\python_work_CLAUDE.md`, renamed `CLAUDE.md`.
-2. *(do)* Reinstall the records skill, ledger-and-session-records, at 1.23. The copy this session can see still reads 1.22, though it may have been loaded before any reinstall.
-3. *(do)* Paste protocol v3.137 into the Project's instructions.
+1. *(do)* Replace `python_work\CLAUDE.md` with a copy of `palomas_orrery_for_github\documentation\python_work_door\python_work_CLAUDE.md`, renamed `CLAUDE.md`. -- done
+2. *(do)* Reinstall the records skill, ledger-and-session-records, at 1.23. The copy this session can see still reads 1.22, though it may have been loaded before any reinstall. -- done. no line change. 
+3. *(do)* Paste protocol v3.137 into the Project's instructions. -- done
 4. *(do)* Give the Opus session the last line of a failed night's log.
+
+
 
 **Where this leaves us**
 - Every working document now has a cap at today's size, and the maintenance run names any document that goes over.
