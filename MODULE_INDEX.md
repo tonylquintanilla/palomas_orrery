@@ -12,8 +12,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 176  
-**Total Lines of Code (non-blank):** 140,332  
-**Total Public Functions/Classes:** 1,817
+**Total Lines of Code (non-blank):** 140,506  
+**Total Public Functions/Classes:** 1,820
 
 ## Classification Coverage
 
@@ -45,7 +45,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `earth_system_visualization_gui.py` | Earth System Visualization GUI for Paloma's Orrery Hub window with climate data visualizations (1,903 lines) |
 | `orbital_param_viz.py` | Interactive orbital element visualization tool. (1,965 lines) |
 | `palomas_orrery.py` | Main GUI and plotting engine for Paloma's Orrery. (9,850 lines) |
-| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (3,699 lines) |
+| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (3,719 lines) |
 | `star_visualization_gui.py` | Stellar visualization GUI for Paloma's Orrery. (1,409 lines) |
 
 ---
@@ -223,7 +223,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `data_inventory.py` | Inventory data stores and gallery for handoff and headroom. (236 lines) |
 | `dep_trace.py` | Targeted dependency path tracer for Paloma's Orrery Usage: python dep_trace.py <module_name> [hops] (419 lines) |
 | `diagnose_bcodmo.py` | Diagnostic script to examine BCO-DMO pH data structure (67 lines) |
-| `doc_index.py` | - regenerate README.md's key-documents table from the documents themselves. (193 lines) |
+| `doc_index.py` | - regenerate README.md's key-documents table from the documents themselves. (336 lines) |
 | `earth_system_generator.py` | Paloma's Orrery: Earth System Generator Engine Architecture: The Teaser (Plotly) & Blockbuster (KMZ) Pipeline (673 lines) |
 | `exact_rows_report.py` | - which exact rows a display prints, and where. (706 lines) |
 | `examine_hot_csv.py` | Examine the HOT CSV file structure (47 lines) |
@@ -237,7 +237,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (129 lines) |
 | `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (1,006 lines) |
-| `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (1,286 lines) |
+| `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (1,297 lines) |
 | `path_plan.py` | - the orrery's plan for drawing each path the website serves: a spacecraft's flown and planned trajectory, and a comet on an open path around its perihelion (L-443, slice 2). (1,289 lines) |
 | `period_fetch.py` | - fetch from JPL the orbital period of each object the website serves that has none fetched yet, with the same code the orrery uses when Tony plots, so the Horizons check can compare it with JPL the same day and the objects export can carry it to the website (L-444). (667 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (505 lines) |

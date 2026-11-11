@@ -20,12 +20,12 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T1 by domain | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|--------------|---:|---:|---:|--------:|
+| 20261111T003053Z | `ea43f2a` | 176 | 1165 | 276 | orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2 | 707 | 176 | 6 | 0 |
 | 20261110T195324Z | `d039089` | 176 | 1165 | 276 | orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2 | 707 | 176 | 6 | 0 |
 | 20261110T174016Z | `3198bc9` | 176 | 1165 | 276 | orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2 | 707 | 176 | 6 | 0 |
 | 20261110T164707Z | `b3ce81f` | 176 | 1165 | 276 | orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2 | 707 | 176 | 6 | 0 |
 | 20261109T022724Z | `3d711de` | 176 | 1165 | 276 | orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2 | 707 | 176 | 6 | 0 |
 | 20261109T020005Z | `789c1ec` | 176 | 1165 | 276 | orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2 | 707 | 176 | 6 | 0 |
-| 20261108T041339Z | `1ec02dc` | 176 | 1165 | 276 | orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2 | 707 | 176 | 6 | 0 |
 
 Change since the previous run: total +0, Tier-1 +0.
 
@@ -1869,9 +1869,9 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 92 | dict | KIND_LABEL[...] | (3 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 98 | dict | KIND_ORDER[...] | (4 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 109 | constant | TAG_SCAN_LINES | 40 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 109 | dict | KIND_LABEL[...] | (3 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 115 | dict | KIND_ORDER[...] | (4 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 126 | constant | TAG_SCAN_LINES | 40 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### eris_visualization_shells.py
 
@@ -1997,12 +1997,12 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 574 | constant | TOOL_TIMEOUT_SECONDS | 900 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 923 | constant | HASH_LIMIT_BYTES | 2 * 1024 * 1024 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 1042 | constant | NOTE_WIDTH | 44 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 1043 | constant | NOTE_INDENT | 37 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 626 | constant | ASK_EVERYTHING_SECONDS | 1800 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
-| 630 | dict | NIGHT_SKIP_WHY[...] | (4 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
+| 583 | constant | TOOL_TIMEOUT_SECONDS | 900 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 934 | constant | HASH_LIMIT_BYTES | 2 * 1024 * 1024 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 1053 | constant | NOTE_WIDTH | 44 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 1054 | constant | NOTE_INDENT | 37 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 635 | constant | ASK_EVERYTHING_SECONDS | 1800 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
+| 639 | dict | NIGHT_SKIP_WHY[...] | (5 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
 
 ### osculating_cache_manager.py
 
@@ -2022,11 +2022,11 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 416 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 417 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 2645 | constant | NIGHTLY_STALE_HOURS | 24 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 2816 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 2948 | dict | SECTION_SYMBOLS[...] | (8 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
+| 419 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 420 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 2665 | constant | NIGHTLY_STALE_HOURS | 24 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 2836 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 2968 | dict | SECTION_SYMBOLS[...] | (8 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
 
 ### path_plan.py
 

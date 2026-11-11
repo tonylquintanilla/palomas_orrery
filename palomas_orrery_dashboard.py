@@ -60,6 +60,9 @@ Compose Children and View Centre buttons and lines, beside Scene Address,
 for four gallery run checks that came without one -- L-519's two and step
 2b's two; added on Tony's word, "Yes please add the buttons", after
 Dashboard parity found them.)
+Module updated: November 10, 2026 with Anthropic's Claude Opus 5.5
+(L-522: the Document Caps button and line, for the orrery run's new
+"Document caps" check, doc_index.py --caps.)
 July 2026: added Linux Button-4/5 wheel scrolling to match columns 1/2's
 cross-platform coverage (CTkScrollableFrame's built-in handling only
 covers Windows/Mac <MouseWheel>). Audited LAUNCH_GROUPS against both
@@ -1741,6 +1744,20 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
+        ("Document Caps",
+         "doc_index.py",
+         "Check each working document against its cap in lines, as "
+         "DOCUMENT_CAPS.md at the root lists them, with the home its old "
+         "lines go to. Prints every row: the document, its lines now, its "
+         "cap and its home. Red, by name, when a document is over its cap, "
+         "a document or its home is not found, a skill has no row, or a "
+         "row cannot be read. Only you change a cap's number; edit the "
+         "page and the next run uses it. Writes nothing. Ends on "
+         "\"DOCUMENT CAPS: PASS\" (L-522).",
+         SCRIPT_DIR,
+         True,
+         ["--caps"],
+         True),
         ("Domain Split",
          "test_domain_split.py",
          "Check that the provenance scanner's whole-tree Tier-1 total prints "
@@ -2513,6 +2530,9 @@ CARD_LINES = {
     ("Maintenance Run",
      "Dimensions"):
         "Checks each derived constant's unit follows from its arithmetic.",
+    ("Maintenance Run",
+     "Document Caps"):
+        "Checks each working document against its cap on DOCUMENT_CAPS.md.",
     ("Maintenance Run",
      "Domain Split"):
         "Checks the scanner's Tier-1 total prints with its split by domain.",

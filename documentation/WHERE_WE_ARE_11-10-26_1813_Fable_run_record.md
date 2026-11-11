@@ -135,7 +135,7 @@ Not urgent, in your order:
 I read "Confirmed" as "write them now", and did. All four are on your computer and read back identical to what I wrote. If you meant "hold", leave them out of your commit and tell me.
 
 **Run order**
-1. *(do)* At your machine, commit and push the orrery. -- 
+1. *(do)* At your machine, commit and push the orrery. -- ea43f2a1e922274cd83ffb1da2797b509094212e
    The change list should show five files:
    - `LEDGER_CONSOLIDATED.md`
    - `documentation/WHERE_WE_ARE.md`
@@ -152,3 +152,43 @@ I read "Confirmed" as "write them now", and did. All four are on your computer a
 - Your look at the step 2b fixes on the live site is still open, on the other coordinator's track.
 
 **One final thought:** my last question offered you two choices, and "Confirmed" could have meant either. That was my fault. I will ask you only questions that a yes or a no can answer.
+
+=============================================
+
+**Session: OPEN: 11-10-26 1818: Opus: Code: L-522 documentation caps step 1**
+
+Building Part 1 now: looking at how the dashboard lists the run's buttons, then writing the caps page and its check.
+
+Writing the caps page now, with today's sizes as the starting caps.
+
+Parity passes with the new button. Now showing on a throwaway copy that the check can go red.
+
+The whole maintenance run is going in the background. It takes a few minutes, and I'll report Part 1 when it finishes.
+
+The run is still going. I'll wait for it to finish.
+
+Part 1 is built. The caps page exists, and the maintenance run now has a "Document caps" row that names any document over its cap. It's green today.
+
+**What I built.**
+- **The page: `DOCUMENT_CAPS.md`, in the root.** It holds the three rules in plain words and one table with 19 rows: the protocol, the twelve skills, Where We Are, the master plan, the README, CLAUDE.md, the page itself, and the ledger. Each row gives the document, its cap in lines, and where its old lines go. To change a cap, you change the number on the page. It is 58 lines long.
+- **The check: inside `doc_index.py`.** That's the tool that already lists the root's documents in the README, and it now has a second mode. For every row it prints the document, its lines now, its cap and its home. The ledger is printed with its size (39,021 lines) and marked as having no cap until step 4.
+- **The run row "Document caps" and its dashboard button.** The dashboard's parity check passes with the new button. The row doesn't run in the nightly run on GitHub, because it checks documents and the night only changes data.
+
+**It can fail.** I planted five faults on a throwaway copy, and each one went red, by name:
+- Three lines added to CLAUDE.md: "over its cap: CLAUDE.md (103 lines, cap 100)".
+- The master plan's file removed: "not found: documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md".
+- A skill folder with no row: "skill with no row: skills/mars-room/SKILL.md".
+- A cap written as "about 100": "row cannot be read: line 51".
+- Four lines added above Where We Are's run-record marker: "over its cap: documentation/WHERE_WE_ARE.md (131 lines, cap 130)".
+
+The copy was deleted afterwards.
+
+**The whole maintenance run.** 37 of 38 rows were green. The one red row was the new check itself, and it was right: the README had grown by one line, because the document index added the new page to the README's table. I set the README's cap to 664, and the check is green now. The final run comes at the close, after Parts 2 and 3.
+
+**One thing to know.** Every cap is set at the document's size at the end of this session. So I'll reset the numbers for the files Parts 2 and 3 change (the protocol, the records skill, CLAUDE.md, Where We Are) before I close.
+
+**The website's README and CLAUDE.md are not on the page.** The nightly run on GitHub checks out the orrery alone, so the run can't read the website's folder everywhere it runs. I'll record that on L-522 (document caps).
+
+Where this leaves us:
+- The caps page and its check are in place and green.
+- Parts 2 and 3 are not started, and nothing is committed.

@@ -6,6 +6,21 @@ ORRERY repo tool. Run it, or let orrery_maintenance_run.py run it.
 
     python doc_index.py            regenerate the table in README.md
     python doc_index.py --check    report only; exit 1 on any problem
+    python doc_index.py --caps     the document caps (L-522); exit 1 on red
+
+THE CAPS (L-522)
+----------------
+DOCUMENT_CAPS.md, at the root, holds each working document's cap in
+lines and the home its old lines go to (Tony's rulings of 2026-11-10).
+--caps reads its table and prints every row: the document, its lines
+now, its cap and its home. Red, with the names, when a document is over
+its cap, a row's document or its home is not found, a skills/*/SKILL.md
+has no row, or a row cannot be read. A cap of "N above the marker"
+counts only the lines above the run-record marker (Where We Are's 130);
+"none ..." is a row with no cap yet, printed with its size. It writes
+nothing. The maintenance run's checker "Document caps" runs it. It
+lives here, not in a tool of its own, because this tool already reads
+the root's documents and is already in the run.
 
 WHY THIS EXISTS (L-273)
 -----------------------
@@ -76,6 +91,8 @@ Domain: dev_tools
 Module created: September 1, 2026 with Anthropic's Claude Opus 5.
 Module updated: October 4, 2026 with Anthropic's Claude Opus 5.5 (L-409:
 LICENSE.md described here, since it cannot carry the tag).
+Module updated: November 10, 2026 with Anthropic's Claude Opus 5.5
+(L-522: --caps, the check of DOCUMENT_CAPS.md).
 """
 
 import re
@@ -148,9 +165,149 @@ def render(docs):
     return '\n'.join(rows)
 
 
+# ---- the caps (L-522) --------------------------------------------------
+
+CAPS_PAGE = 'DOCUMENT_CAPS.md'
+RUN_RECORD_MARKER = '--- Your run record below this line'
+CAPS_ROW_RE = re.compile(
+    r'^\|\s*`([^`]+)`\s*\|\s*([^|]*?)\s*\|\s*([^|]*?)\s*\|\s*$')
+CAPS_HEADER_RE = re.compile(r'^\|\s*Document\s*\|')
+CAPS_RULE_RE = re.compile(r'^\|[\s:|-]+\|\s*$')
+CAP_LINES_RE = re.compile(r'^(\d+)$')
+CAP_MARKER_RE = re.compile(r'^(\d+) above the marker$')
+CAP_NONE_RE = re.compile(r'^none\b')
+HOME_PATH_RE = re.compile(r'^`([^`]+)`$')
+
+
+def count_lines(text):
+    """Lines as an editor numbers them: a last line without its newline
+    still counts. Only '\\n' ends a line, so no other character splits one."""
+    if not text:
+        return 0
+    return text.count('\n') + (0 if text.endswith('\n') else 1)
+
+
+def read_caps_page(root):
+    """Return (rows, unreadable). rows: (lineno, doc, cap_text, home_text).
+    unreadable: (lineno, line) for each table line no rule could read."""
+    text = (root / CAPS_PAGE).read_text(encoding='utf-8', errors='replace')
+    rows, unreadable = [], []
+    for n, line in enumerate(text.split('\n'), 1):
+        if not line.lstrip().startswith('|'):
+            continue
+        if CAPS_HEADER_RE.match(line) or CAPS_RULE_RE.match(line):
+            continue
+        m = CAPS_ROW_RE.match(line.strip())
+        if m:
+            rows.append((n, m.group(1).strip(), m.group(2), m.group(3)))
+        else:
+            unreadable.append((n, line.strip()))
+    return rows, unreadable
+
+
+def check_caps(root):
+    """Print every row of DOCUMENT_CAPS.md -- the document, its lines now,
+    its cap and its home -- and exit 1 when a document is over its cap, a
+    row's document or home is not found, a SKILL.md has no row, or a row
+    cannot be read. Every red names what it is about."""
+    page = root / CAPS_PAGE
+    if not page.is_file():
+        print('DOCUMENT CAPS: RED -- %s not found in %s' % (CAPS_PAGE, root))
+        return 1
+    rows, unreadable = read_caps_page(root)
+
+    over, missing, no_home, uncapped, seen = [], [], [], [], {}
+    printed = []
+    for n, doc, cap_text, home_text in rows:
+        if doc in seen:
+            unreadable.append((n, '%s listed again (first on line %d)'
+                               % (doc, seen[doc])))
+            continue
+        seen[doc] = n
+        cap, above_marker = None, False
+        m_lines = CAP_LINES_RE.match(cap_text)
+        m_marker = CAP_MARKER_RE.match(cap_text)
+        if m_lines:
+            cap = int(m_lines.group(1))
+        elif m_marker:
+            cap, above_marker = int(m_marker.group(1)), True
+        elif not CAP_NONE_RE.match(cap_text):
+            unreadable.append((n, '%s: cap "%s" is not a number of lines, '
+                               '"N above the marker" or "none ..."'
+                               % (doc, cap_text)))
+            continue
+        m_home = HOME_PATH_RE.match(home_text)
+        if m_home and not (root / m_home.group(1)).is_file():
+            no_home.append('%s (home %s)' % (doc, m_home.group(1)))
+        path = root / doc
+        if not path.is_file():
+            missing.append(doc)
+            printed.append((doc, 'NOT FOUND', cap_text, home_text))
+            continue
+        try:
+            text = path.read_text(encoding='utf-8', errors='replace')
+        except OSError as e:
+            unreadable.append((n, '%s: %s' % (doc, e)))
+            continue
+        if above_marker:
+            # The lines above the marker: the marker's own index.
+            lines = next((i for i, line in enumerate(text.split('\n'))
+                          if line.startswith(RUN_RECORD_MARKER)), None)
+            if lines is None:
+                unreadable.append((n, '%s: no line beginning "%s"'
+                                   % (doc, RUN_RECORD_MARKER)))
+                continue
+        else:
+            lines = count_lines(text)
+        if cap is None:
+            uncapped.append('%s (%d lines)' % (doc, lines))
+        elif lines > cap:
+            over.append('%s (%d lines, cap %d)' % (doc, lines, cap))
+        printed.append((doc, str(lines), cap_text, home_text))
+
+    skills = sorted(p.relative_to(root).as_posix()
+                    for p in (root / 'skills').glob('*/SKILL.md'))
+    no_row = [s for s in skills if s not in seen]
+
+    print('Document caps, read from %s: %d row(s)' % (CAPS_PAGE, len(rows)))
+    width = max([len(d) for d, _l, _c, _h in printed] + [8])
+    print('  %-*s  %9s  %-22s  %s' % (width, 'document', 'lines now',
+                                      'cap', 'home'))
+    for doc, lines, cap_text, home_text in printed:
+        print('  %-*s  %9s  %-22s  %s' % (width, doc, lines, cap_text,
+                                          home_text.strip('`')))
+
+    reds = []
+    if over:
+        reds.append('over its cap: ' + ', '.join(over))
+    if missing:
+        reds.append('not found: ' + ', '.join(missing))
+    if no_home:
+        reds.append('home not found: ' + ', '.join(no_home))
+    if no_row:
+        reds.append('skill with no row: ' + ', '.join(no_row))
+    if unreadable:
+        reds.append('row cannot be read: ' + '; '.join(
+            'line %d, %s' % (n, what) for n, what in unreadable))
+    for name in uncapped:
+        print('  NO CAP YET: %s; the page says when it gets one.' % name)
+    print('')
+    if reds:
+        print('DOCUMENT CAPS: RED -- ' + ' | '.join(reds))
+        return 1
+    capped = len(printed) - len(uncapped)
+    print('DOCUMENT CAPS: PASS -- %d document(s) within their caps, %d '
+          'skill(s) all listed%s'
+          % (capped, len(skills),
+             ('; no cap yet: ' + ', '.join(uncapped)) if uncapped else ''))
+    return 0
+
+
 def main():
-    check_only = '--check' in sys.argv[1:]
     root = Path(__file__).resolve().parent
+    if '--caps' in sys.argv[1:]:
+        return check_caps(root)
+    check_only = '--check' in sys.argv[1:]
     readme = root / 'README.md'
 
     if not readme.is_file():

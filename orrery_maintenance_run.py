@@ -309,6 +309,10 @@ Module updated: November 4, 2026 with Anthropic's Claude Opus 5.5 (L-510:
 CHECKERS gains Path or orbit suite, test_path_or_orbit.py, after Path
 drawing suite, and the night runs it; Period fetch declares its second
 output, data/small_body_solutions.json, so the night may commit it.)
+Module updated: November 10, 2026 with Anthropic's Claude Opus 5.5 (L-522:
+CHECKERS gains Document caps, doc_index.py --caps, after Dashboard
+parity: each working document against its cap on DOCUMENT_CAPS.md. Not a
+night row: it judges documents.)
 """
 
 import hashlib
@@ -550,6 +554,11 @@ CHECKERS = [
     # any order (2026-10-14); ten faults planted first, each caught.
     ('Dashboard parity', ['test_dashboard_parity.py'],
      'DASHBOARD PARITY:'),
+    # L-522 (2026-11-10): each working document against its cap on
+    # DOCUMENT_CAPS.md, every row printed with its lines now, its cap and
+    # its home; red, by name, on a document over its cap, a file not
+    # found, a skill with no row or a row that cannot be read.
+    ('Document caps', ['doc_index.py', '--caps'], 'DOCUMENT CAPS:'),
     # A fourth field marks a tool REPORT-ONLY: it exits 0 whatever it
     # finds, so "passed" says only that it ran. Exactly two are, and
     # both are deliberate -- their numbers are the verdict, not their
@@ -633,6 +642,8 @@ NIGHT_SKIP_WHY = {
                         'changes',
     'Provenance scanner': "judges code; its push gate runs at Tony's push",
     'Dashboard parity': "judges the dashboard's code",
+    'Document caps': 'judges the working documents, and at night only '
+                     'data changes',
 }
 NIGHT_SKIP_GENERATOR = ('writes a document, not data the website pulls; '
                         'the night commits data only (R1)')
