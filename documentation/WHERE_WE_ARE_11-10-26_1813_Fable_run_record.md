@@ -927,10 +927,424 @@ I did not rerun the two full maintenance runs. The 36 of 36 and 47 of 47 are the
 
 **Run order**
 - *(do)* Commit and push the website, -- ebb8e623d45698fe1efc71e469446b6a14818613; nightly run #28 failed on exit code 1. 
-  - then the orrery. -- 
-- *(do)* Reinstall interactive-exhibit. It should read 1.41.
-- *(do)* Paste protocol v3.138 into the Project's instructions.
-- *(do)* Try the taps on your phone after the website push, upright and sideways. The list is on the tap item in the ledger (L-523).
+
+On re-run failed again:
+Run python daily_run.py --night
+======================================================================
+  DAILY RUN, THE NIGHT FORM -- 2026-11-11 16:51 UTC
+  root: /home/runner/work/tonyquintanilla.github.io/tonyquintanilla.github.io
+  where: GitHub Actions
+======================================================================
+Daily Run steps, from /home/runner/work/tonyquintanilla.github.io/tonyquintanilla.github.io:
+  1. Guest book updater                 tools/guestbook_updater.py  found
+  2. Pulls from the orrery              gallery_maintenance_run.py  found
+  3. Cache builder                      tools/gallery_cache_builder.py  found
+  4. Gallery maintenance run, offline   gallery_maintenance_run.py  found
+  pull-match fixtures: 5 of 5 cases right; planted faults caught 2 of 2
+  runner-form pull-match fixtures: 5 of 5 cases right; planted faults caught 2 of 2
+  night gate fixtures: 15 of 15 nights judged right; planted faults caught 3 of 3
+  night allow-list: 16 files and data/solar-system/ (whole)
+=== DAILY RUN: all 4 step scripts found; the pull-match and night checks passed 32 of 32 fixture checks (L-461, L-485)
+
+  SKIP  step 1, Guest book updater: needs Tony's answers; his morning's (Tony's ruling of Oct 31, 2026, 10:20).
+
+The pulls ask GitHub's interface with the run's GITHUB_TOKEN.
+
+======================================================================
+  DAILY RUN step 2 of 4: Pulls from the orrery
+======================================================================
+======================================================================
+  gallery maintenance run -- PULLS (before the cache builder)
+  root: /home/runner/work/tonyquintanilla.github.io/tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Constants export pull     0.7s  rewrote data/constants_export.sha
+  PASS Config mirror             0.1s  no change to
+                                    data/objects_config.json
+  PASS Objects export pull       0.5s  rewrote data/objects_export.sha
+  PASS Objects mirror            0.1s  no change to
+                                    data/objects_config.json
+  PASS Drawings pull             1.2s  rewrote
+                                    data/drawings/pulled_at.sha
+
+======================================================================
+
+=== PULLS: all 5 passed -- Constants export pull, Config mirror, Objects export pull, Objects mirror, Drawings pull
+
+Pull matches push (runner form): the three pulls fetched the orrery at 17580bc5, its GitHub copy's newest commit, read live.
+
+======================================================================
+  DAILY RUN step 3 of 4: Cache builder (up to 900 seconds)
+======================================================================
+[sweep] no sibling directories present
+[RUNS] before the copy: 144 run records in data/solar-system/raw/runs
+[RUNS] after the copy:  144 run records in data/.staging_solar-system_20261111T165115Z/raw/runs
+[POLE] earth: pole of 2026-11-11 served (RA 0.60945, Dec 89.84958 deg); tilt 23.43776 deg
+[UNCERTAINTY] JPL's own position uncertainty served for 52 of 55 small bodies; not served: bennu (JPL gives no range uncertainty (R_s) for it), halley (JPL gives no range uncertainty (R_s) for it), ikeya_seki (JPL gives no range uncertainty (R_s) for it)
+[window] served window: 0.3 days either side of today, set by halley, the shortest of 64 bodies' trusted spans
+[SWAP] the new cache is in place; every rename worked on the first try. Recorded in data/cache_swap_log.jsonl
+[warn] sun: features-only entry; no Horizons fetch
+[warn] halley: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] ikeya_seki: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] hale_bopp: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] hyakutake: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] neowise: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] lemmon: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] c2025_k1_c: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] halley: no position uncertainty served -- JPL gives no range uncertainty (R_s) for it
+[warn] ikeya_seki: no position uncertainty served -- JPL gives no range uncertainty (R_s) for it
+[warn] bennu: no position uncertainty served -- JPL gives no range uncertainty (R_s) for it
+[done] run 20261111T165115Z (nightly): 102 objects
+
+----------------------------------------------------------------------
+WHAT TO DO NEXT, before you commit anything:
+
+  1. Run the gallery maintenance run, from this same folder:
+         python gallery_maintenance_run.py
+     Every gating checker should pass. Its LAST line reads the
+     swap log back and should agree with the [SWAP] line above.
+  2. In GitHub Desktop, look at the change list. A good build
+     shows changed and added files and NO pile of deletions.
+  3. Commit and push.
+  4. After the push, check what the live site serves:
+         python gallery_maintenance_run.py --live
+
+TONY-ACTION ROLLUP for this run:
+  (do)     steps 1 to 4 above, in that order.
+----------------------------------------------------------------------
+
+Swap log, read back: {"attempts": {"live_to_prev": 1, "staging_to_live": 1}, "error": null, "mode": "nightly", "outcome": "ok", "reached": "staging_to_live", "run_id": "20261111T165115Z", "time": "2026-11-11T16:53:33.505449+00:00"}
+
+Run records: carried 144 of 144, plus tonight's: 20261111T165115Z.json.
+  compared /home/runner/work/tonyquintanilla.github.io/tonyquintanilla.github.io/data/solar-system/raw/runs
+  with     /home/runner/work/tonyquintanilla.github.io/tonyquintanilla.github.io/data/solar-system.prev/raw/runs
+
+======================================================================
+  DAILY RUN step 4 of 4: the maintenance run's night pass
+======================================================================
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  SKIP Module atlas              0.0s  not run tonight: writes
+                                    MODULE_ATLAS.md and
+                                    MODULE_INDEX.md, which are
+                                    documents; the night commits no
+                                    page or word (Tony's R1,
+                                    2026-10-25)
+  PASS Constants export pull     0.4s  no change to
+                                    data/constants_export.json,
+                                    data/constants_export.sha
+  PASS Config mirror             0.1s  no change to
+                                    data/objects_config.json
+  PASS Objects export pull       0.4s  no change to
+                                    data/objects_export.json,
+                                    data/objects_export.sha
+  PASS Objects mirror            0.1s  no change to
+                                    data/objects_config.json
+  PASS Drawings pull             0.6s  no change to
+                                    data/drawings/hills_cloud.json,
+                                    data/drawings/van_allen_belts.json,
+                                    data/drawings/earth_exosphere.json,
+                                    data/drawings/pulled_at.sha
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite      18.9s  PASS (526 checks, 0 failures)
+  PASS Pole of date              0.1s  POLE OF DATE: all 11 checks passed
+                                    (frame angle, orrery, ERFA, block
+                                    checker, and each shown able to
+                                    fail).
+  PASS Mirror suite              0.1s  All 77 mirror checks passed:
+                                    served, spelling, relabel refused
+                                    and accepted, conflict refused,
+                                    definition as exactly 1, fallback
+                                    and absent named, no-slot refused,
+                                    five shapes, formatting kept,
+                                    idempotent, report writes nothing,
+                                    uncertainty written as served,
+                                    Earth's pole served, print count
+                                    written as served, "in" written as
+                                    served and a slot served in
+                                    another unit from it, and the
+                                    citation written as served, a
+                                    website-only citation named, an
+                                    old export refused.
+  PASS Store writer suite       28.4s  All 488 store-writer checks
+                                    passed: an allow list that lets
+                                    through only a shell's words, a
+                                    belt's words and the arrival
+                                    settings, the rooms section's
+                                    included; a no-edit round trip;
+                                    one line per change; empty words
+                                    handled; a refused batch writing
+                                    nothing; awkward text; and the
+                                    shell list matching the cache
+                                    check's rule.
+  PASS Store editor suite        0.2s  All 383 store-editor checks
+                                    passed: every box the form offers
+                                    is one the writer allows; the word
+                                    list and the tick list differ by
+                                    the belts, on purpose; nothing
+                                    typed saves nothing; the save
+                                    message does not promise a visitor
+                                    sees what they cannot yet; and a
+                                    red Cache in step is explained
+                                    rather than just shown.
+  PASS Objects mirror suite      0.3s  MIRROR OBJECTS SUITE: pass
+  PASS Objects mirror check      0.1s  OBJECTS MIRROR: pass
+  PASS Config mirror check       0.1s  Every served link holds the
+                                    export's value, unit, figure count
+                                    and citation; 185 link(s)
+                                    compared, 180 citation(s) word for
+                                    word, 5 declared with none, 3 not
+                                    served; store f35f649c4c53.
+  PASS Pull failures             0.1s  PULL FAILURES: all 16 checks
+                                    passed (3 pulls x 3 ways to fail,
+                                    the run after a failed pull, the
+                                    run's token to GitHub's interface
+                                    only, and 5 planted faults caught)
+  PASS Horizons confirmations    0.0s  HORIZONS CONFIRMATIONS: pass -- 98
+                                    of 98 confirmed, and 65 periods,
+                                    within 30 days
+  PASS Pointer join              0.1s  Every link is accounted for: 188
+                                    link(s) against orrery 17580bc5, 1
+                                    fallback named; read check: 66 of
+                                    66 measured rows reached carry a
+                                    read.
+  PASS Tree parents              0.0s  TREE PARENTS: ok -- 102 objects,
+                                    each parent its fetched centre
+  PASS Cache in step             0.1s  The served cache holds the
+                                    config's 102 object(s) and their
+                                    features exactly: 4 object(s) with
+                                    34 named shell(s), in both cache
+                                    files.
+  PASS Drawn orbit               0.6s  DRAWN ORBIT: pass -- 18 checks,
+                                    every planted fault caught
+  PASS Compose children          0.0s  COMPOSE CHILDREN: pass -- each
+                                    moon is drawn at its planet's
+                                    place by adding, its orbit around
+                                    its planet's marker, its distance
+                                    its own
+  PASS Drawings                  0.5s  DRAWINGS: PASS -- 34 of 34 planted
+                                    faults caught; pulled at orrery
+                                    17580bc5; earth_exosphere 1500
+                                    dots, round, sha256 6112639fb2cd;
+                                    galactic_tide 5000 dots, about the
+                                    galactic pole, sha256
+                                    950a7511f0b5; hills_cloud 3600
+                                    dots, tilt 31.0 deg, sha256
+                                    4d3e85616645; main_belt 6000 dots,
+                                    tilt 0.2 deg, sha256 712caffec391;
+                                    outer_oort_cloud 2736 dots,
+                                    between its edges, sha256
+                                    2f7ab88ee113; sun_corona 2500
+                                    dots, round, sha256 e2b57ccbc8a4;
+                                    van_allen_belts 3200 dots, tilt
+                                    0.4 deg, sha256 75274e84f840;
+                                    zodiacal_dust 3000 dots, tilt 2.8
+                                    deg, sha256 995f13a056e8
+  PASS Collapsed features        0.0s  32 stored as themselves, 16
+                                    collapsed, 0 unclassified.
+  PASS Feature renderers         0.8s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.1s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.2s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.1s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.1s  === ALL CHECKS PASSED ===
+  PASS Typed facts               0.2s  TYPED FACTS: PASS -- 0 typed facts
+                                    in the Sun and Earth rooms; 17
+                                    number line(s), 32 of 84 allowed
+                                    sentence(s) seen, 0 held open
+                                    (L-451); 26 word field(s) masked.
+  PASS Typed numbers             0.2s  TYPED NUMBERS: PASS -- 0 typed
+                                    numbers in the Sun and Earth
+                                    rooms' served words; 325 number(s)
+                                    masked, 0 held.
+  PASS Arrival                   0.2s  Arrival: both rooms open on the
+                                    right things; every shell trace
+                                    carries its key; the fallback with
+                                    no arrival block is unchanged.
+  PASS Display figures           0.2s  === PASS: 62 hover(s) and 308
+                                    number(s) examined; 14 graded, 7
+                                    graded by line, 48 held to the
+                                    fixture ===
+  PASS Solar System figures      0.1s  === PASS: 8 worked cases, 65
+                                    drawer rows matched to their
+                                    accuracy rows, 64 served
+                                    distances; Uranus, Neptune and
+                                    Pluto print to JPL's ten-thousands
+                                    place; 6 period cases and 64
+                                    served periods printed as the
+                                    orrery printed them; 5 orbit-line
+                                    cases and 64 served orbit lines; 3
+                                    path cases and 32 served paths,
+                                    spacecraft and comets ===
+  PASS Far lines                 0.1s  === PASS: far lines are cut to the
+                                    view's box ===
+  PASS Direction arrows          0.0s  === PASS: the arrows point the way
+                                    the points run, sit ahead of the
+                                    body, stay in the view, and the
+                                    page places them ===
+  PASS Solar System drawer       0.1s  === PASS: the Sun is never ticked,
+                                    every row and group is listed, the
+                                    handle names the last body ticked,
+                                    nothing ticks many bodies at once
+                                    but a spacecraft with its
+                                    companions, rooms are offered only
+                                    where they exist, groups fold and
+                                    reset their bodies, the count line
+                                    counts ticked bodies outside the
+                                    view, a search finds a body by any
+                                    of its names and a group by its
+                                    label or words, and the page asks
+                                    this file ===
+  PASS View centre               0.0s  === PASS: the view is centred
+                                    where Tony ruled, the trail is the
+                                    path down the tree, Centre on
+                                    opens a centre's own opening, and
+                                    the shift takes every moon's
+                                    32-bit error under half a
+                                    kilometre with every reader
+                                    agreeing on it ===
+  PASS Tap hover                 0.0s  === TAP HOVER: ok -- a finger's
+                                    tap sent as a hover opens the box;
+                                    a drag, a pinch, a mouse, a late
+                                    hover and a served press do not
+  PASS Picture folds             0.1s  === PASS: a phone is offered the
+                                    portrait twins and a desktop the
+                                    landscape ones, never a "none"
+                                    card on a phone; every Solar
+                                    System picture has a place naming
+                                    a row the room serves; Find finds
+                                    a picture's words; and both pages
+                                    wire the folds and the way back;
+                                    the Solar System's addresses open
+                                    its live room, and Back answers
+                                    both of its signals; and every
+                                    scene sits in the Scenes fold
+                                    under the Sun, opens its own link,
+                                    and Back returns to the room ===
+  PASS Scene cards               0.4s  === PASS: a shared link is cleaned
+                                    to a scene's address, each thing
+                                    taken off named; a link that
+                                    cannot be a scene is refused; a
+                                    key no row has is named; a link
+                                    already on a card is refused; and
+                                    every scene in the metadata is
+                                    clean ===
+  PASS Drawer places             0.2s  === PASS: the editor's tree is the
+                                    Solar System room's drawer, in the
+                                    website's order, the Sun's shells
+                                    under the Sun; a card's places are
+                                    one or several, written as the
+                                    website reads them, twins
+                                    together; every card's places are
+                                    rows the drawer lists ===
+  PASS As-built names            0.2s  AS-BUILT NAMES: ok -- every name
+                                    examined is in the code
+  PASS Source list               0.1s  === PASS: the i panel's sources
+                                    are a list, every address a link,
+                                    and its words are one sentence to
+                                    a bullet ===
+  PASS Drawer order              0.2s  === DRAWER ORDER: both rooms list
+                                    their shells and the centre's
+                                    children where each begins, the
+                                    centre first; self-test red three
+                                    times
+  PASS Drawn ends                0.2s  === DRAWN ENDS: every drawing
+                                    starts and stops on a served row
+                                    or a held end; self-test red three
+                                    times
+  PASS Label words               0.2s  === LABEL WORDS: all 34 shell rows
+                                    in both rooms open their own
+                                    feature's words; 5 stored
+                                    drawings' crosses stand off the
+                                    axis lines; Earth's fixed row
+                                    opens its own words; self-test red
+                                    three times
+  PASS Scene moment              0.1s  === PASS: past the served window a
+                                    room asks for the window's last
+                                    minute, the resolver accepts it
+                                    and refuses the minute asked, and
+                                    the page says so ===
+  PASS Scene address             0.0s  === PASS: the address carries the
+                                    rows ticked and the minute shown,
+                                    reads back to the same scene, and
+                                    the page writes and reads it ===
+  PASS Guest book                0.0s  === GUEST BOOK: all 8 checks
+                                    passed
+  PASS Guest book updater        0.1s  === GUEST BOOK UPDATER: all 49
+                                    checks passed (8 scripted runs,
+                                    self-test first)
+  PASS Daily run steps           0.1s  === DAILY RUN: all 4 step scripts
+                                    found; the pull-match and night
+                                    checks passed 32 of 32 fixture
+                                    checks (L-461, L-485)
+  PASS Served list               0.5s  SERVED LIST: all 7 checks passed
+                                    (the real list, the typed list
+                                    free of positions files, and 5
+                                    planted faults caught)
+  FAIL Artifact 1 assembler      0.1s  === FAILURES: the Artifact 1
+                                    verdicts are not what was pinned
+                                    ===
+  PASS Cache siblings            0.0s  RESULT: no sibling directories and
+                                    nothing in data/ the builder did
+                                    not make.
+
+======================================================================
+  1 of 47 gating checkers FAILED
+  Artifact 1 assembler
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: no sibling directories and
+  last swap 2026-11-11T16:53:33.505449+00:00: succeeded first time
+======================================================================
+
+----------------------------------------------------------------------
+Artifact 1 assembler -- === FAILURES: the Artifact 1 verdicts are not what was pinned ===
+----------------------------------------------------------------------
+PIN -- Artifact 1 assembler verdicts
+  ran: python -m assembler.tests.test_artifact1_earth   (cwd gallery/)
+  the test's own exit code was 1, which is expected and is NOT the verdict here
+
+  ok   T1  expected OK      got OK      as_of_today cross-check agrees with the cached position
+  MISS T2  expected OK      NOT PRINTED
+  MISS T3  expected FAIL    NOT PRINTED
+  MISS T4  expected RAISED  NOT PRINTED
+  MISS T5  expected OK      NOT PRINTED
+  MISS T3 detail  could not parse the feature set
+
+=== FAILURES: the Artifact 1 verdicts are not what was pinned ===
+  T2 -- no verdict line found in the test's output at all
+  T3 -- no verdict line found in the test's output at all
+  T4 -- no verdict line found in the test's output at all
+  T5 -- no verdict line found in the test's output at all
+  T3 -- its line could not be parsed for the feature set; the pin cannot confirm the failure is the known one
+
+  This is the pin doing its job. Something moved.
+  If L-237 was just fixed, update PINNED in this file in the
+  same commit. Otherwise investigate before pushing.
+  NIGHT: skipped by name -- Module atlas (writes MODULE_ATLAS.md and MODULE_INDEX.md, which are documents; the night commits no page or word (Tony's R1, 2026-10-25))
+
+======================================================================
+  THE NIGHT -- summary
+======================================================================
+  Guest book updater             skipped: his morning's                   0.0s
+  Pulls from the orrery          ok                                       2.7s
+  Pull matches push (runner)     ok                                       0.0s
+  Cache builder                  exit 0                                 139.5s
+  Run records                    ok                                       0.0s
+  Maintenance run, night pass    exit 1                                  56.2s
+
+  Nothing is to be committed: the site keeps serving the previous
+  cache, and tomorrow's run tries again. This log is the record.
+======================================================================
+NIGHT RUN: RED -- the maintenance run's night pass failed (a gating checker or a generator; scroll up) (200 seconds)
+Error: Process completed with exit code 1.
+
+-- the date line at the top reads, "11 Nov 2026, 12:45 UTC, the last day our data covers" and this line pushes the date line below the directional arrows. 
+
+  - then the orrery. -- 17580bc5c3ca022f0ac46c38992e07f3dc9c55d0
+- *(do)* Reinstall interactive-exhibit. It should read 1.41. -- done; reduced to about 750 lines
+- *(do)* Paste protocol v3.138 into the Project's instructions. -- done
+- *(do)* Try the taps on your phone after the website push, upright and sideways. The list is on the tap item in the ledger (L-523). -- correct
+
 - *(do)* Tell the Opus coordinator the tap fix is built, so it can write the handoff for Mars.
 
 **Where this leaves us**
@@ -938,3 +1352,751 @@ I did not rerun the two full maintenance runs. The 36 of 36 and 47 of 47 are the
 - The tap fix is built and stays open until you have tried it on your phone.
 - Where We Are sits at exactly 130 lines, its cap. The next session that adds to it has to take something out first.
 - Next on my track is step 3, the protocol's reduction. Its first piece is the review request for GPT, which I write when you say it is next.
+
+================================
+
+**Fable:**
+
+I found the cause. It is a maths fault in the website's own code, and it explains both the red night and the date line.
+
+**What is happening.** The website has a routine that works out where a body is on its orbit at a given time. For very stretched orbits, on the half where the body is heading back toward the Sun, that routine sometimes returns a wildly wrong position without any warning. Halley is on that half now. The nightly builder tests each body's drawn position against JPL at 30 days before and after today. This week Halley's test landed on one of the bad spots and came out 21.6 degrees off.
+
+**Why you see what you see.** The builder then trusts the whole site's data for only 0.3 days either side of the build. So the page stopped at 12:45 UTC today and says "the last day our data covers". That longer sentence is what pushes the date line below the arrows. The same narrow window is very likely what broke the night's assembler test; the block asks the Code session to confirm that.
+
+**What it is not.** It is not JPL: I asked JPL today, and its Halley positions are smooth and its record is unchanged. It is not last night's split or the tap fix: the bad measurement first appears in your Daily Run of Nov 10, 22:16, before that session began. I reproduced the builder's 21.6 degrees exactly with its own code, and a three-line correction clears every case I tested. -- it is notable that you were able to reach JPL. usually Claude is not able to reach JPL. 
+
+This needs one small Code session on the website, before Mars. Paste this as its prompt:
+
+> Built on orrery 17580bc5c3ca022f0ac46c38992e07f3dc9c55d0 at https://github.com/tonylquintanilla/palomas_orrery and gallery ebb8e623d45698fe1efc71e469446b6a14818613 at https://github.com/tonylquintanilla/tonyquintanilla.github.io (both branch main). Nightly bot commits since are expected.
+> Tony's local folders: orrery `C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\`, gallery `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\`
+>
+> Type: BUILD, a Claude Code session in the gallery, through the python_work door. A fault that has the live site frozen and the nights red. It goes before Mars.
+>
+> Tony's words, Nov 11, 10:58: "the nightly failed again and on rerun and the date line on the phone is problematic." On his phone the date line reads "11 Nov 2026, 12:45 UTC, the last day our data covers" and is pushed below the direction arrows.
+>
+> What the coordinating session (Fable) found, to confirm, not to trust:
+> - The night's builder prints "[window] served window: 0.3 days either side of today, set by halley". Halley's trust block at gallery ebb8e62: the +30 day sample is 21.64 degrees off, the -30 day sample 0.0000025. On Nov 9 both were 0.000003 and its window 13,784 days.
+> - JPL is not the cause. Asked today, its positions for record 90000030 at JD 2461325.5, 2461355.5 and 2461385.5 are smooth, and the record is unchanged (JPL#75, solution date 2025-Nov-21).
+> - The cause is `solve_kepler` in `gallery/assembler/render_orbits.py`. For e of 0.8 or more it starts Newton's method at E = pi after folding M into (-pi, pi]. For a negative M that start is on the wrong side; for scattered values of M the iteration does not converge in 100 steps and returns a wrong E with no warning. With the builder's `_two_body_position`, Halley's served elements and JD 2461385.5, the position comes out near 10.6 AU where JPL has 35 AU, 21.6436 degrees off, the builder's figure exactly. A sweep of 36,000 values of M: 0 failures below e = 0.8; 542 at Halley's e; 3,448 at e = 0.9999; every one with M from 180 to 360 degrees. Served bodies on that half today with e from 0.8 to 1: Halley, Encke, Sedna, Leleakuhonua.
+> - So the page has drawn such a body in the wrong place at scattered minutes, and the trust measurement caught it when one of its two samples landed on a failing value. The freeze and the red night are the gates working.
+> - A correction that passed the same sweep with 0 failures at every e tried: solve for the absolute value of M and give E the sign of M. The method is yours; say what you chose and why.
+>
+> The job, in two parts, with a report after each:
+> 1. The solver. Correct it. Make a solve that did not converge impossible to return silently, and say how. Add a check to the gallery run that sweeps e and M, shown red on the present code first. Find every other copy or caller of this math in the gallery, and say whether any JavaScript has one. Then run the builder and read back Halley's window and the "[window]" line. Say why "Artifact 1 assembler" printed T1 and nothing after on GitHub, and whether the fix clears it.
+> 2. The date line when frozen. With the freeze sentence the line is too long for a phone and drops below the arrows. Measure it at phone widths with `?freeze=1`, then fix it. Tony's phone look uses `?freeze=1`.
+>
+> Read, each against the manifest: gallery-assembler; gallery-cache-builder, the parts on trust and the served window; interactive-exhibit and the gallery's `INTERACTIVE_AS_BUILT.md`, "What a room opens on", for the freeze; safe-file-editing; ledger-and-session-records for the close.
+>
+> Not in scope, one ledger row for the class: whether the orrery's own Kepler solvers start the same way. Look, list them by file and function, and fix none.
+>
+> Close: a new ledger item, the next handle, with L-149 and L-165 in its references. Where We Are by section; it is at its cap of 130 lines, so something moves out first. The gallery maintenance run green, read from its output. Commit and push are Tony's.
+
+**Run order**
+- *(do)* Open Claude Code through the `python_work` folder and paste the block. -- done
+- *(do)* Bring me its Part 1 report before you commit.
+- *(do)* After the fix: run your Daily Run, then commit and push the website. The live site unfreezes when that push lands.
+- *(do)* Tell the Opus coordinator this fix goes ahead of Mars.
+
+**Where this leaves us**
+- The live site is frozen at 12:45 UTC today and each night will stay red until the fix is pushed. No data is lost.
+- The safeguards worked: the builder caught a wrong drawn position and the page stopped where its data was last trusted, with a sentence saying so.
+- The fault has been in the code for a long time. On a small share of days the page has drawn Halley, and possibly Encke, in the wrong place.
+- Your reinstall, the paste and your phone look at the taps are all done, so step 2 of the document caps work and the tap fix are both closed on your side.
+
+One final thought: one body's bad measurement froze the whole site for every visitor. The builder's rule is that the shortest trusted span among all bodies sets the span for everything. A talk is worth having on whether a body that fails its test should be held out alone, with the rest of the site carrying on.
+
+==================================================================
+
+**Fable:**
+
+Yes, it can go in this same Code session, as a third part after the date line. I would not mix it into the date-line work itself, and I would still unfreeze the site first.
+
+Staying in the same session is the economical choice, because it has already read the builder's test code and run it against JPL.
+
+**One caution.** Had the hold existed this week, the site would have carried on, and Halley would still have been drawn wrong at scattered minutes. The data was fine; the fault was in the maths. The freeze is what put it on your phone. So under "hold and continue", the report is the only thing that surfaces a fault like this one. It has to be as hard to miss as the freeze was.
+
+**What I would build**, drawn from your earlier rulings on the orrery's hold (Oct 31) and its alarm (Nov 2):
+- A body fails when the builder finds its drawn position more than half a degree from JPL's at either test date. Half a degree is the limit the builder already uses; Halley was at 21.6.
+- The builder keeps that body's entry from the last good build, marks it held with the date and the cause, and finishes the build. The rest of the site carries on.
+- The night is not red for a hold. It prints a loud HELD line with the body's name on every run, until a ledger item names it.
+- The body is tested again every run, and the hold ends when it passes.
+- The page draws the held body from its last good data, and its text box says so in one sentence. The Code session proposes the sentence and your phone look settles it.
+
+Paste this when the Code session reports Part 2:
+
+> Part 3, added by Tony's word of Nov 11, 11:45: "can we do this with part 2? That would complete the fix." It builds his ruling of 11:22: "Hold the bad data and report, then continue." If your context is too full to do it well, say so and stop; it then gets its own session.
+>
+> Settled, by his rulings on L-485 (the hold) and L-508 (a held body's alarm) and this morning's:
+> - A body whose accuracy test fails is HELD: the builder serves that body's entry from the last good generation, with a hold block (since, cause), and the build goes on. The site's window is worked out as before, with the held body's last good span.
+> - A hold is not red. The night and the Daily Run print a loud HELD line, by name, every run, until a ledger item names the body; then the line carries that item's handle (L-508, as written there).
+> - A held body is tested again every run; the hold ends when its test passes.
+>
+> Method, yours to propose in a first report before building: what "fails" means in numbers (the coordinator's suggestion: a sample's error over the tolerance the builder already uses, 0.5 degrees; say which bodies your rule would have held in the run records the cache keeps, by name); a body with no good generation to hold at; how the page learns of a hold.
+>
+> Tony's: the sentence a visitor reads in a held body's box. Propose it; his phone look settles it.
+>
+> A caution to design for: this week a hold would have kept the site running while Halley was still drawn wrong at scattered minutes, because the fault was in the math and not the data. The freeze is what put it on Tony's phone. So say where Tony will see a HELD line without looking for it, and make that part of the build.
+>
+> Checks shown red first. gallery-cache-builder's bump by the records skill's rule, its cap read first. `INTERACTIVE_AS_BUILT.md` for the page's part.
+
+**Run order**
+- *(do)* The three unfreeze steps from my last message come first and are unchanged: 
+  - push, b248da5d9e1df4ce2abfd2e42f19c2415026bda1
+  - Daily Run, 
+
+======================================================================
+  DAILY RUN -- Wednesday November 11, 2026  12:39
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io
+======================================================================
+Daily Run steps, from C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io:
+  1. Guest book updater                 tools\guestbook_updater.py  found
+  2. Pulls from the orrery              gallery_maintenance_run.py  found
+  3. Cache builder                      tools\gallery_cache_builder.py  found
+  4. Gallery maintenance run, offline   gallery_maintenance_run.py  found
+  pull-match fixtures: 5 of 5 cases right; planted faults caught 2 of 2
+  runner-form pull-match fixtures: 5 of 5 cases right; planted faults caught 2 of 2
+  night gate fixtures: 15 of 15 nights judged right; planted faults caught 3 of 3
+  night allow-list: 16 files and data/solar-system/ (whole)
+=== DAILY RUN: all 4 step scripts found; the pull-match and night checks passed 32 of 32 fixture checks (L-461, L-485)
+Last cache build: 2026-11-11 04:26 UTC, ok, 0 days ago.
+
+======================================================================
+  DAILY RUN step 1 of 4: Guest book updater
+======================================================================
+======================================================================
+  guest book updater -- C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io
+======================================================================
+1 entry in the guest book; 165 gallery pages a link may point at.
+
+Fetching the form's responses...
+No new messages.
+
+w write, r reply, x remove, p pin/unpin, f form address, s sheet address, q finish > q
+
+======================================================================
+  approved 0, declined 0, waiting 0, problem reports read 0; the guest book now has 1 entry
+  No change to data/guestbook.json.
+======================================================================
+
+======================================================================
+  DAILY RUN step 2 of 4: Pulls from the orrery
+======================================================================
+======================================================================
+  gallery maintenance run -- PULLS (before the cache builder)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Constants export pull     0.9s  rewrote data/constants_export.sha
+  PASS Config mirror             0.2s  no change to
+                                    data/objects_config.json
+  PASS Objects export pull       0.8s  rewrote data/objects_export.sha
+  PASS Objects mirror            0.2s  no change to
+                                    data/objects_config.json
+  PASS Drawings pull             2.1s  rewrote
+                                    data/drawings/pulled_at.sha
+
+======================================================================
+
+=== PULLS: all 5 passed -- Constants export pull, Config mirror, Objects export pull, Objects mirror, Drawings pull
+
+Pull matches push: the orrery pulled is 17580bc5, the newest commit in your orrery folder.
+
+======================================================================
+  DAILY RUN step 3 of 4: Cache builder
+======================================================================
+[sweep] kept 1 recent sibling(s) as autopsies: .staging_solar-system_20261111T171651Z
+[RUNS] before the copy: 144 run records in data\solar-system\raw\runs
+[RUNS] after the copy:  144 run records in data\.staging_solar-system_20261111T183929Z\raw\runs
+[POLE] earth: pole of 2026-11-11 served (RA 0.60945, Dec 89.84958 deg); tilt 23.43776 deg
+[UNCERTAINTY] JPL's own position uncertainty served for 52 of 55 small bodies; not served: bennu (JPL gives no range uncertainty (R_s) for it), halley (JPL gives no range uncertainty (R_s) for it), ikeya_seki (JPL gives no range uncertainty (R_s) for it)
+[window] served window: 88.0 days either side of today, set by mercury, the shortest of 64 bodies' trusted spans
+[SWAP] staging_to_live refused on attempt 1 of 6 ([WinError 5] Access is denied: 'data\\.staging_solar-system_20261111T183929Z' -> 'data\\solar-system'); waiting 2s
+[SWAP] staging_to_live succeeded on attempt 2 of 6
+[SWAP] the new cache is in place after a refused rename: staging_to_live took 2 tries. The builder absorbed it. Recorded in data/cache_swap_log.jsonl
+[warn] sun: features-only entry; no Horizons fetch
+[warn] halley: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] ikeya_seki: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] hale_bopp: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] hyakutake: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] neowise: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] lemmon: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] c2025_k1_c: its period is around @0, but a comet is drawn from its elements around the Sun
+[warn] halley: no position uncertainty served -- JPL gives no range uncertainty (R_s) for it
+[warn] ikeya_seki: no position uncertainty served -- JPL gives no range uncertainty (R_s) for it
+[warn] bennu: no position uncertainty served -- JPL gives no range uncertainty (R_s) for it
+[done] run 20261111T183929Z (nightly): 102 objects
+
+----------------------------------------------------------------------
+WHAT TO DO NEXT, before you commit anything:
+
+  1. Run the gallery maintenance run, from this same folder:
+         python gallery_maintenance_run.py
+     Every gating checker should pass. Its LAST line reads the
+     swap log back and should agree with the [SWAP] line above.
+  2. In GitHub Desktop, look at the change list. A good build
+     shows changed and added files and NO pile of deletions.
+  3. Commit and push.
+  4. After the push, check what the live site serves:
+         python gallery_maintenance_run.py --live
+
+TONY-ACTION ROLLUP for this run:
+  (do)     steps 1 to 4 above, in that order.
+----------------------------------------------------------------------
+
+Run records: carried 144 of 144, plus tonight's: 20261111T183929Z.json.
+  compared C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\data\solar-system\raw\runs
+  with     C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\data\solar-system.prev\raw\runs
+
+The builder's next steps start with the maintenance run.
+The Daily Run runs it now.
+
+======================================================================
+  DAILY RUN step 4 of 4: Gallery maintenance run, offline
+======================================================================
+======================================================================
+  gallery maintenance run -- OFFLINE (before a commit)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+GENERATORS -- rewritten every time; a no-op when nothing moved
+  PASS Module atlas              2.4s  rewrote MODULE_ATLAS.md,
+                                    MODULE_INDEX.md
+  PASS Constants export pull     0.7s  no change to
+                                    data/constants_export.json,
+                                    data/constants_export.sha
+  PASS Config mirror             0.2s  no change to
+                                    data/objects_config.json
+  PASS Objects export pull       0.6s  no change to
+                                    data/objects_export.json,
+                                    data/objects_export.sha
+  PASS Objects mirror            0.2s  no change to
+                                    data/objects_config.json
+  PASS Drawings pull             1.2s  no change to
+                                    data/drawings/hills_cloud.json,
+                                    data/drawings/van_allen_belts.json,
+                                    data/drawings/earth_exosphere.json,
+                                    data/drawings/pulled_at.sha
+
+CHECKERS -- the verdict informs the push call
+  PASS Cache builder suite     108.4s  PASS (526 checks, 0 failures)
+  PASS Pole of date              0.3s  POLE OF DATE: all 11 checks passed
+                                    (frame angle, orrery, ERFA, block
+                                    checker, and each shown able to
+                                    fail).
+  PASS Mirror suite              0.2s  All 77 mirror checks passed:
+                                    served, spelling, relabel refused
+                                    and accepted, conflict refused,
+                                    definition as exactly 1, fallback
+                                    and absent named, no-slot refused,
+                                    five shapes, formatting kept,
+                                    idempotent, report writes nothing,
+                                    uncertainty written as served,
+                                    Earth's pole served, print count
+                                    written as served, "in" written as
+                                    served and a slot served in
+                                    another unit from it, and the
+                                    citation written as served, a
+                                    website-only citation named, an
+                                    old export refused.
+  PASS Store writer suite       46.2s  All 488 store-writer checks
+                                    passed: an allow list that lets
+                                    through only a shell's words, a
+                                    belt's words and the arrival
+                                    settings, the rooms section's
+                                    included; a no-edit round trip;
+                                    one line per change; empty words
+                                    handled; a refused batch writing
+                                    nothing; awkward text; and the
+                                    shell list matching the cache
+                                    check's rule.
+  PASS Store editor suite        0.4s  All 383 store-editor checks
+                                    passed: every box the form offers
+                                    is one the writer allows; the word
+                                    list and the tick list differ by
+                                    the belts, on purpose; nothing
+                                    typed saves nothing; the save
+                                    message does not promise a visitor
+                                    sees what they cannot yet; and a
+                                    red Cache in step is explained
+                                    rather than just shown.
+  PASS Objects mirror suite      0.5s  MIRROR OBJECTS SUITE: pass
+  PASS Objects mirror check      0.2s  OBJECTS MIRROR: pass
+  PASS Config mirror check       0.2s  Every served link holds the
+                                    export's value, unit, figure count
+                                    and citation; 185 link(s)
+                                    compared, 180 citation(s) word for
+                                    word, 5 declared with none, 3 not
+                                    served; store f35f649c4c53.
+  PASS Pull failures             0.6s  PULL FAILURES: all 16 checks
+                                    passed (3 pulls x 3 ways to fail,
+                                    the run after a failed pull, the
+                                    run's token to GitHub's interface
+                                    only, and 5 planted faults caught)
+  PASS Horizons confirmations    0.1s  HORIZONS CONFIRMATIONS: pass -- 98
+                                    of 98 confirmed, and 65 periods,
+                                    within 30 days
+  PASS Pointer join              0.2s  Every link is accounted for: 188
+                                    link(s) against orrery 17580bc5, 1
+                                    fallback named; read check: 66 of
+                                    66 measured rows reached carry a
+                                    read.
+  PASS Tree parents              0.1s  TREE PARENTS: ok -- 102 objects,
+                                    each parent its fetched centre
+  PASS Cache in step             0.1s  The served cache holds the
+                                    config's 102 object(s) and their
+                                    features exactly: 4 object(s) with
+                                    34 named shell(s), in both cache
+                                    files.
+  PASS Drawn orbit               2.6s  DRAWN ORBIT: pass -- 18 checks,
+                                    every planted fault caught
+  PASS Compose children          0.2s  COMPOSE CHILDREN: pass -- each
+                                    moon is drawn at its planet's
+                                    place by adding, its orbit around
+                                    its planet's marker, its distance
+                                    its own
+  PASS Kepler solver             7.0s  KEPLER SOLVER: pass -- every e
+                                    below 1 and every M solved to
+                                    1e-09 rad, a solve that cannot
+                                    finish raises
+  PASS Drawings                  0.9s  DRAWINGS: PASS -- 34 of 34 planted
+                                    faults caught; pulled at orrery
+                                    17580bc5; earth_exosphere 1500
+                                    dots, round, sha256 6112639fb2cd;
+                                    galactic_tide 5000 dots, about the
+                                    galactic pole, sha256
+                                    950a7511f0b5; hills_cloud 3600
+                                    dots, tilt 31.0 deg, sha256
+                                    4d3e85616645; main_belt 6000 dots,
+                                    tilt 0.2 deg, sha256 712caffec391;
+                                    outer_oort_cloud 2736 dots,
+                                    between its edges, sha256
+                                    2f7ab88ee113; sun_corona 2500
+                                    dots, round, sha256 e2b57ccbc8a4;
+                                    van_allen_belts 3200 dots, tilt
+                                    0.4 deg, sha256 75274e84f840;
+                                    zodiacal_dust 3000 dots, tilt 2.8
+                                    deg, sha256 995f13a056e8
+  PASS Collapsed features        0.1s  32 stored as themselves, 16
+                                    collapsed, 0 unclassified.
+  PASS Feature renderers         0.2s  === ALL CHECKS PASSED ===
+  PASS Page framing              0.1s  === ALL CHECKS PASSED ===
+  PASS Sun shells                0.3s  ALL CHECKS PASSED
+  PASS Earth scene geometry      0.3s  === ALL CHECKS PASSED ===
+  PASS Hover budget              0.2s  === ALL CHECKS PASSED ===
+  PASS Typed facts               0.3s  TYPED FACTS: PASS -- 0 typed facts
+                                    in the Sun and Earth rooms; 17
+                                    number line(s), 32 of 84 allowed
+                                    sentence(s) seen, 0 held open
+                                    (L-451); 26 word field(s) masked.
+  PASS Typed numbers             0.4s  TYPED NUMBERS: PASS -- 0 typed
+                                    numbers in the Sun and Earth
+                                    rooms' served words; 325 number(s)
+                                    masked, 0 held.
+  PASS Arrival                   0.4s  Arrival: both rooms open on the
+                                    right things; every shell trace
+                                    carries its key; the fallback with
+                                    no arrival block is unchanged.
+  PASS Display figures           0.3s  === PASS: 62 hover(s) and 308
+                                    number(s) examined; 14 graded, 7
+                                    graded by line, 48 held to the
+                                    fixture ===
+  PASS Solar System figures      0.2s  === PASS: 8 worked cases, 65
+                                    drawer rows matched to their
+                                    accuracy rows, 64 served
+                                    distances; Uranus, Neptune and
+                                    Pluto print to JPL's ten-thousands
+                                    place; 6 period cases and 64
+                                    served periods printed as the
+                                    orrery printed them; 5 orbit-line
+                                    cases and 64 served orbit lines; 3
+                                    path cases and 32 served paths,
+                                    spacecraft and comets ===
+  PASS Far lines                 0.2s  === PASS: far lines are cut to the
+                                    view's box ===
+  PASS Direction arrows          0.1s  === PASS: the arrows point the way
+                                    the points run, sit ahead of the
+                                    body, stay in the view, and the
+                                    page places them ===
+  PASS Solar System drawer       0.1s  === PASS: the Sun is never ticked,
+                                    every row and group is listed, the
+                                    handle names the last body ticked,
+                                    nothing ticks many bodies at once
+                                    but a spacecraft with its
+                                    companions, rooms are offered only
+                                    where they exist, groups fold and
+                                    reset their bodies, the count line
+                                    counts ticked bodies outside the
+                                    view, a search finds a body by any
+                                    of its names and a group by its
+                                    label or words, and the page asks
+                                    this file ===
+  PASS View centre               0.1s  === PASS: the view is centred
+                                    where Tony ruled, the trail is the
+                                    path down the tree, Centre on
+                                    opens a centre's own opening, and
+                                    the shift takes every moon's
+                                    32-bit error under half a
+                                    kilometre with every reader
+                                    agreeing on it ===
+  PASS Tap hover                 0.1s  === TAP HOVER: ok -- a finger's
+                                    tap sent as a hover opens the box;
+                                    a drag, a pinch, a mouse, a late
+                                    hover and a served press do not
+  PASS Picture folds             0.1s  === PASS: a phone is offered the
+                                    portrait twins and a desktop the
+                                    landscape ones, never a "none"
+                                    card on a phone; every Solar
+                                    System picture has a place naming
+                                    a row the room serves; Find finds
+                                    a picture's words; and both pages
+                                    wire the folds and the way back;
+                                    the Solar System's addresses open
+                                    its live room, and Back answers
+                                    both of its signals; and every
+                                    scene sits in the Scenes fold
+                                    under the Sun, opens its own link,
+                                    and Back returns to the room ===
+  PASS Scene cards               0.2s  === PASS: a shared link is cleaned
+                                    to a scene's address, each thing
+                                    taken off named; a link that
+                                    cannot be a scene is refused; a
+                                    key no row has is named; a link
+                                    already on a card is refused; and
+                                    every scene in the metadata is
+                                    clean ===
+  PASS Drawer places             0.6s  === PASS: the editor's tree is the
+                                    Solar System room's drawer, in the
+                                    website's order, the Sun's shells
+                                    under the Sun; a card's places are
+                                    one or several, written as the
+                                    website reads them, twins
+                                    together; every card's places are
+                                    rows the drawer lists ===
+  PASS As-built names            4.1s  AS-BUILT NAMES: ok -- every name
+                                    examined is in the code
+  PASS Source list               0.2s  === PASS: the i panel's sources
+                                    are a list, every address a link,
+                                    and its words are one sentence to
+                                    a bullet ===
+  PASS Drawer order              0.3s  === DRAWER ORDER: both rooms list
+                                    their shells and the centre's
+                                    children where each begins, the
+                                    centre first; self-test red three
+                                    times
+  PASS Drawn ends                0.4s  === DRAWN ENDS: every drawing
+                                    starts and stops on a served row
+                                    or a held end; self-test red three
+                                    times
+  PASS Label words               0.3s  === LABEL WORDS: all 34 shell rows
+                                    in both rooms open their own
+                                    feature's words; 5 stored
+                                    drawings' crosses stand off the
+                                    axis lines; Earth's fixed row
+                                    opens its own words; self-test red
+                                    three times
+  PASS Scene moment              0.3s  === PASS: past the served window a
+                                    room asks for the window's last
+                                    minute, the resolver accepts it
+                                    and refuses the minute asked, and
+                                    the page says so ===
+  PASS Scene address             0.1s  === PASS: the address carries the
+                                    rows ticked and the minute shown,
+                                    reads back to the same scene, and
+                                    the page writes and reads it ===
+  PASS Guest book                0.1s  === GUEST BOOK: all 8 checks
+                                    passed
+  PASS Guest book updater        0.4s  === GUEST BOOK UPDATER: all 49
+                                    checks passed (8 scripted runs,
+                                    self-test first)
+  PASS Daily run steps           0.6s  === DAILY RUN: all 4 step scripts
+                                    found; the pull-match and night
+                                    checks passed 32 of 32 fixture
+                                    checks (L-461, L-485)
+  PASS Served list               2.5s  SERVED LIST: all 7 checks passed
+                                    (the real list, the typed list
+                                    free of positions files, and 5
+                                    planted faults caught)
+  PASS Artifact 1 assembler      0.3s  === ALL CHECKS PASSED -- 5
+                                    verdicts and T3's feature set
+                                    match the 2026-08-31 pin ===
+  PASS Cache siblings            0.1s  RESULT: 1 sibling(s), none stale,
+                                    and nothing in data/ the builder
+                                    did not make. The sweep is keeping
+                                    up.
+
+======================================================================
+  48 of 48 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Cache siblings         RESULT: 1 sibling(s), none stale, and
+  last swap 2026-11-11T18:41:48.611360+00:00: succeeded after a refused rename -- staging_to_live took 2 attempts -- a refusal this build absorbed
+======================================================================
+
+  After you push: python gallery_maintenance_run.py --live
+
+======================================================================
+  DAILY RUN -- summary
+======================================================================
+  Guest book updater           ok
+  Pulls from the orrery        ok
+  Pull matches push            ok
+  Cache builder                ok
+  Run records                  ok: carried 144 of 144, plus 1 new
+  Maintenance run, offline     ok
+
+  NEXT:
+    1. GitHub Desktop: look at the change list, then commit and push.
+    2. Then the dashboard's Gallery Maintenance Run -- live, AFTER a push.
+======================================================================
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+  - push.
+
+- Part 1:
+Reading the project rules and the skills this job fires before touching any code; gallery is clean at ebb8e62, orrery at 17580bc.
+
+Still reading: now the website's as-built page for the frozen date line, then the editing and records skills.
+
+All six skill versions match the manifest (assembler 1.4, builder 1.18, exhibit 1.41, editing 1.14, records 1.23, pre-test 1.3). Now confirming the solver fault.
+
+Fault confirmed on the present code: at +30 days Halley's solve returns E = -1.17e12 with no warning. Now finding the "Artifact 1 assembler" step that printed only T1.
+
+Running the Artifact 1 test locally to see why it stops after T1.
+
+Two more candidates turned up: a JavaScript copy in a check file, and a Python block inside the page itself. Reading both.
+
+A copy of the solver sits in the page's Python engine and in one JavaScript check file, and I'm sweeping both. Then I'll add the new check to the gallery run.
+
+Writing the new check first, so it can be shown red on the present solver before the fix.
+
+The new check fails on the current solver with 34 failures, including several served bodies' own eccentricities, and a failed solve gives no sign of why. I'm fixing that next.
+
+Green after the fix. A quick extra stress on the hardest corners (tiny M, e within 1e-15 of 1):
+
+Now wiring the new check into the gallery run, beside Compose children.
+
+Now sweeping the two other copies (the Explorer room's Python, the JavaScript check) at the eccentricities they actually see.
+
+Both other copies are clean at the eccentricities they handle (0 failures up to e = 0.97), so I leave them as they are. Now running the builder for the read-back.
+
+While the builder asks JPL, listing the orrery's own Kepler solvers for the ledger row (look only, fix none).
+
+The orrery solvers are listed for the ledger, with seven sharing one start but each handed M between 0 and 360 degrees. I'm running the neighbouring checks that use the solver while JPL answers.
+
+The builder now prints "88.0 days either side of today, set by mercury". Reading Halley's own trust block from the staged build:
+
+Builder offline suite: 526 checks, 0 failures; Artifact 1 back to its pinned verdicts. Now reproducing the GitHub "T1 and nothing after" by giving the test the window a morning build would have had.
+
+The test stops after T1 because a build from 08:30 UTC or later on Nov 11 starts the 0.3-day window after Earth's stored "today," so the second step is refused. I'm checking that the working tree is clean apart from my edits.
+
+Part 1 is done. The website was drawing Halley and three other bodies in the wrong place at scattered minutes. That is fixed, and the builder's trial run gives the site 88 days of window again, where it had 0.3.
+
+**Skills read**, each matching the protocol's list: gallery-assembler 1.4, gallery-cache-builder 1.18, interactive-exhibit 1.41, safe-file-editing 1.14, ledger-and-session-records 1.23, agentic-pre-test 1.3. The base matched GitHub in both folders: website ebb8e62, orrery 17580bc. The orrery folder already had two files waiting that are yours: your run record of Nov 10 (edited) and `project_instructions_v3_138.md` (new). I left both alone. The project rules say to wait for your go-ahead before starting. I took your prompt as that go-ahead.
+
+**The fault.** I checked Fable's findings myself rather than taking them on trust, and they hold. The solver works out where a body sits on its orbit by repeated guessing, and it has to start from a first guess. For very stretched orbits it started from the wrong side when the body was in the second half of its orbit. Sometimes it ran out of tries and handed back a wrong answer without saying so. On today's elements, Halley's position 30 days ahead came back as nonsense: an angle of minus 1.17 trillion radians.
+
+**What I changed.** The equation is symmetric, so the solver now works on the first half of the orbit only and mirrors the answer for the second half. I chose this method because it can be proved to work: started from the far end of the half-orbit, each guess moves toward the answer and can never overshoot it. That holds for every orbit short of an escape path.
+
+**How a failed solve can no longer pass silently.** The solver now returns an answer only if that answer actually satisfies the equation. Otherwise it stops with a named error, "KeplerNotConverged". An escape-path orbit or a value that isn't a number stops it with an error too.
+
+**The new check** is the "Kepler solver" row in the gallery run, in a new file, `tools/test_kepler_solver.py`.
+- It tries 18 eccentricities at 36,000 positions each, and every served body's own eccentricity at 3,600, all 95 by name.
+- It also checks that a failed solve stops with an error, and runs Halley's case from today.
+- Before the fix it was red with 34 failures, 26 of them real served bodies: Halley, Encke, Sedna, Leleakuhonua, 2017 OF201 and nine long-period comets.
+- After the fix it is green. It also re-runs the old solver each time and must catch it, which proves it can still fail.
+
+**Other copies of this math in the website.**
+- The builder and its offline tests call the same solver, so they are fixed with it.
+- Two separate copies exist, and both stay as they are: the Solar System Explorer room's own Python (nine planets, eccentricity up to 0.25), and one JavaScript check file, `documentation/smoke_view_centre.js` (moons and their planets). Swept at their eccentricities and beyond, both had 0 failures.
+- No JavaScript served to visitors solves this equation.
+
+**The builder's trial run.** It asked JPL fresh and wrote only to its temporary staging folder, which is not committed. Its line now reads "served window: 88.0 days either side of today, set by mercury". Halley's two samples are each about 0.0000025 degrees off, so its window is 13,784 days, the same as on Nov 9. That close a match also shows JPL was never the cause.
+
+**Why "Artifact 1 assembler" printed T1 and nothing after.** That check's second step draws Earth at the date the cache stores as today, 00:01 UTC. GitHub's run starts at 08:17 UTC, and that night's window reached only 8.3 hours either side of the build time. From a build at 08:30 or later, the window began after 00:01, so the second step was refused and the check stopped. A rerun starts later still, so it failed the same way. I reproduced this on your computer; I could not read GitHub's own log from here. The fix clears it: with an 88-day window, the check runs all five steps and matches its pinned results again.
+
+**What reaches the site when.** The solver fix reaches visitors as soon as you push, because the page loads that file. The freeze lifts only when a new cache is built: tonight's run, or a Daily Run sooner.
+
+Also green: the builder's offline suite (526 checks, 0 failures), Compose children and Drawn orbit. The full gallery run comes at the close.
+
+**Where this leaves us:** part 2, the date line on the phone, is next.
+
+One final thought: the seven orrery solvers that start the same way are all handed a position between 0 and 360 degrees, the side where that start works. So they are safe today, but only by luck of how their callers count. That goes in the ledger row, unfixed, as you asked.
+
+Files changed so far:
+- ok `gallery/assembler/render_orbits.py` (2 edits)
+- ok `gallery_maintenance_run.py` (2 edits)
+- new `tools/test_kepler_solver.py`
+
+Your run order: nothing to commit yet. The records and the full gallery run come at the close.
+
+Tony-actions: none yet.
+
+- *(do)* Paste the earlier block to start Part 2.
+
+Part 2 is under way: I'm finding where the frozen date line is drawn and how the page decides where to put it.
+
+The page opens in the in-app browser at phone size; I'm now measuring where the date line lands.
+
+On a 375-pixel phone the frozen line is 284 pixels wide but only 163 fits beside the zoom buttons, so the page drops it below the arrows. I'm writing a fix that splits the line in two when it doesn't fit.
+
+Now the edits: the line-break forms go in the moment helper beside the words they break, and the title fit tries them before moving the line below the arrows.
+
+At 375 pixels wide the line now sits beside the arrows in two lines. Checking the other phone widths next.
+
+I've checked six phone widths and a phone turned sideways, and the line now fits beside the arrows on every common phone. Last, turning the phone back upright, then the checks and the records.
+
+Something rewrote the served data on your computer after this session started, so I'm checking what did it before going further.
+
+Your Daily Run started at 12:39 and swapped in a new cache at 12:41, built with the fixed solver, now showing 88 days on your computer. I didn't start it, and since the frozen date changed I'm re-measuring the line against the new cache.
+
+Now the as-built page, which describes this part of the room.
+
+Now the records. First the records skill, in full.
+
+I'm writing the records now. First your latest run record, which the close reads before it writes anything.
+
+Your run record says the tap look was "correct", and that the Daily Run comes after the fix. That matches the run I saw at 12:39. Writing the ledger item now.
+
+Ledger item written and the index rebuilt. Now Where We Are; first the two numbers its Signals section reads from files.
+
+Now the page edits, by section. It sits at its cap of 130 lines, so the old box lines and the oldest Settled line come out before the new lines go in.
+
+Where We Are is at 128 lines, under its cap, and the caps check passes. Now the full website maintenance run.
+
+The website's full maintenance run is going in the background and takes a few minutes. I'll write the closing report when it finishes.
+
+The run passed all 48 checkers. The website was already pushed as b248da5 at 12:52, so I'm correcting Where We Are, which still asks you to push it.
+
+Part 2 is done. The frozen date line now stays beside the arrows on a phone, broken into two or three lines, and the website's full maintenance run is green: "48 of 48 gating checkers passed".
+
+**What I measured first.** I measured in the app's browser at phone size, with `?freeze=1`. In one piece the frozen line is 284 pixels wide. The space between the zoom buttons and the arrows is only about 163 pixels on a 375-pixel phone. So the page moved the title and line below the arrows. It did that on every phone width, not only yours.
+
+**What I changed.** The page now tries the line beside the arrows in three forms, in this order:
+- in one piece;
+- in two lines: "11 Nov 2026, 12:45 UTC," then "the last day our data covers";
+- in three lines, with "the last day" and "our data covers" on lines of their own.
+
+It moves the title below the arrows only if none of the three fits. The words are exactly the same; only where the line breaks changes. Turned sideways, the line goes back to one piece at the top.
+
+**Measured after the change:**
+| Phone width | Where the line sits |
+|---|---|
+| 375 (iPhone) | beside the arrows, two lines |
+| 412 (most Android) | beside the arrows, two lines |
+| 430 (large iPhone) | beside the arrows, two lines |
+| 360 (small Android) | beside the arrows, three lines |
+| 320 (very old, small phones) | below the arrows, as the plain date already did there |
+| Sideways | one piece at the top |
+
+The Scene moment check now covers the broken forms too. It fails if the line in two or three lines differs in any word, and I showed it failing on a planted word change. I also updated the website's as-built page, the part on what a room opens on.
+
+**Two things happened on your side while I worked.**
+- **Your Daily Run, at 12:39.** It built a new cache with the fixed orbit maths. The trusted window is back to 88 days, so the site is no longer frozen.
+- **Your website push, at 12:52 (b248da5).** It carries every website change from this session. The final maintenance run ran on exactly those files.
+
+**The records.**
+- **L-524 (the Kepler solver's start)** is new in the ledger. It covers the cause, the fix, why only the first test step ran on GitHub, the date line, and references to L-149 and L-165. It also lists the orrery's 11 solvers by file and function, unfixed. It stays open for a green night and your phone look.
+- **L-523 (taps sent as hovers)** now carries your "-- correct" from the run record. I didn't close it; a ledger pass can do that.
+- **Where We Are**, edited by section, is at 128 lines, under its cap of 130. To make room I took out the two old lines in the box and the oldest Settled line (the Moon's period, Nov 6).
+
+**Where this leaves us:**
+- The site is no longer frozen, and the orbit maths solves right or stops with an error.
+- The next real test is tonight's run on GitHub. It should be green now.
+- Mars is next after that and your phone look.
+
+One final thought: you pushed before looking at the date line on your phone, so the live site already shows the two-line form. If the break reads oddly to you, it's a one-line change in the moment helper, `gallery/scene_moment.js`.
+
+**Files changed**
+
+Website, all already in your push b248da5:
+- ok `gallery/assembler/render_orbits.py` (2 edits)
+- ok `gallery_maintenance_run.py` (2 edits)
+- new `tools/test_kepler_solver.py`
+- ok `gallery/scene_moment.js` (4 edits)
+- ok `interactive.html` (4 edits)
+- ok `documentation/smoke_scene_moment.js` (6 edits)
+- ok `INTERACTIVE_AS_BUILT.md` (1 edit)
+- Rewritten by your Daily Run: the cache under `data/`, `MODULE_ATLAS.md`, `MODULE_INDEX.md`, the three `.sha` files.
+- Left over, not committed: my builder trial's staging folder, `data/.staging_solar-system_20261111T171651Z`. It is ignored by git, and the cache check calls it "none stale".
+
+Orrery, not yet committed:
+- ok `LEDGER_CONSOLIDATED.md` (3 edits; the index rebuilt by `ledger_index.py`)
+- ok `documentation/WHERE_WE_ARE.md` (10 edits)
+- Yours, untouched: `WHERE_WE_ARE_11-10-26_1813_Fable_run_record.md` (edited) and `project_instructions_v3_138.md` (new).
+
+**Token count.** No /cost figure prints in your app, and I can't see the context size it shows; please read it off the app.
+- Read: the records skill (807 lines), Where We Are, your run record's latest entries, the parts of the website page, as-built page and checks that the work needed, and the builder's trust code.
+- Written: the solver check (10 KB), the ledger item (about 7 KB), and the small edits listed above.
+
+**Your run order:**
+1. In GitHub Desktop, commit and push the orrery: the ledger and Where We Are, plus your own two files if you want them in.
+2. On your phone, open the Solar System room with `?freeze=1`, upright and sideways.
+3. Tomorrow, read whether the night's run on GitHub was green.
+
+**Tony-action rollup:**
+- (do) Commit and push the orrery. The website is already pushed. -- 
+- (do) The phone look at the frozen date line with `?freeze=1`, upright and sideways.
+- (do) Read the night's run on GitHub. Green closes the night's half of L-524 (the Kepler solver's start).
+
+- *(do)* When Part 2 reports, paste the block above.
+
+The website matches GitHub at b248da5, but the orrery's GitHub copy has moved to c18c4b8 while your folder sits at 17580bc. I'm fetching that commit to see what changed, without touching your folder.
+
+The orrery commit is just the expected nightly bot update to data/nightly_run_record.json, which this session doesn't touch. Part 2 is already built into your website push b248da5, and I'm handling the ruling next.
+
+The ruling is recorded as L-525 and the ledger index rebuilt cleanly. Now Where We Are, which has 2 lines of room under its cap.
+
+Your ruling of Nov 11, 11:22 is now in the ledger as its own item, L-525 (hold the bad data), marked not built. Part 2 was already finished: it went out in your website push, and I checked it still stands on the new base.
+
+**The base, read again.**
+- **Website:** your folder and GitHub are the same, at b248da5 (your push at 12:52). It holds all of Parts 1 and 2. Nothing has changed in the website since the final maintenance run, which passed 48 of 48 on exactly those files.
+- **Orrery:** your folder is at 17580bc, and GitHub is one commit ahead at c18c4b8. That commit is the nightly bot's usual update of one file, `data/nightly_run_record.json`, which this session doesn't touch. I only fetched to look; nothing in your folder changed.
+
+**Part 2, in brief:** the frozen date line now stays beside the arrows on a phone, in two lines on most phones and three on a small Android. Only where the line breaks changed, not the words. The details are in my last report.
+
+**The new item, L-525 (hold the bad data):**
+- **Your ruling, word for word:** "Hold the bad data and report, then continue. This follows our pattern of fix and report instead of stopping."
+- **The question it answers:** whether one body's failed accuracy test should stop the whole site. Today it does. The rule in L-149 (the served window's trust participation) lets the shortest trusted span set the span for every body. On Nov 11, one bad Halley sample froze every room and turned the night red.
+- **My reading, marked as mine and not decided:** the failing body is held and reported loudly, as L-508 (a held body's alarm) rules. The rest of the site keeps its own window. What a held body shows is left for the design: its last trusted night, as the hold in L-485 keeps, or nothing.
+- **What's left to do:** design and build it in a website session on the nightly builder, with a check that one planted bad body leaves everyone else's window alone.
+- **Its references:** L-149, L-485 (the hold), L-508, L-524 (the Kepler solver's start) and L-165 (site continuity).
+
+**Where We Are:** the box gains one line and Settled gains your ruling, quoted. The page is now exactly 130 lines, its cap, and the caps check passes. The next session that adds to it has to take a line out first.
+
+**Where this leaves us:**
+- The orbit maths fix and the date line are live on the website.
+- Tonight's run on GitHub is the next real test.
+- Your ruling waits for its own build. After the green night and your phone look, Mars is next.
+
+One final thought: I gave L-525 a short label of my own, "hold the bad data", taken from your words. If you'd call it something else, it's a one-word change in the ledger and on the page.
+
+**Files changed**
+
+Orrery, not yet committed:
+- ok `LEDGER_CONSOLIDATED.md` (5 edits in all: L-524, its gap, the note on L-523 (taps sent as hovers), L-525; the index rebuilt by `ledger_index.py`)
+- ok `documentation/WHERE_WE_ARE.md` (13 edits in all)
+- Yours, untouched: `WHERE_WE_ARE_11-10-26_1813_Fable_run_record.md` (edited) and `project_instructions_v3_138.md` (new).
+
+Website: nothing new this turn. Everything from the session is already in b248da5.
+
+**Token count:** no /cost figure prints here, and I can't see the context size; please read it off the app. This turn read the three referenced ledger items' openings and wrote about 2.5 KB.
+
+**Your run order:**
+1. In GitHub Desktop, open the orrery and commit the ledger and Where We Are.
+2. Press Pull origin to take in the bot's one-file update, then Push origin.
+3. On your phone, open the Solar System room with `?freeze=1`, upright and sideways.
+4. Tomorrow, read whether the night's run on GitHub was green.
+
+**Tony-action rollup:**
+- (do) Commit the orrery, Pull origin, then Push origin.
+- (do) The phone look at the frozen date line with `?freeze=1`.
+- (do) Read tonight's GitHub run.
+- (decide) When the build for L-525 (hold the bad data) goes on the road.
+
+- *(do)* Bring me Part 3's first report, its proposal, before it builds.
+
+**Where this leaves us**
+- The hold becomes Part 3 of this session, built on your existing rulings.
+- One design point is still open and comes back to you in the proposal: where you will see a HELD line without looking for it.
+- The site stays frozen until your Daily Run and second push, which do not wait on any of this.

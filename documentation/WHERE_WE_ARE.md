@@ -1,27 +1,27 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 11, 2026: the Code session (Opus), the exhibit skill's split and the tap fix.
-- Written at orrery eb77137 and gallery 1948e79, plus this session's edits.
+Last updated: November 11, 2026, afternoon: the Code session (Opus) on the website's orbit maths and the frozen date line.
+- Written at orrery 17580bc and gallery b248da5 (your push of 12:52, carrying this session's website edits).
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The exhibit skill is split: its rules stay in the skill (2,440 lines down to 738), and what the website's page does now lives in the website, `INTERACTIVE_AS_BUILT.md`, with a check that every code name it gives is in the code (L-522 (document caps), step 2).
-> - A thumb tap a little off a small dot now opens its box, in portrait and in landscape, by your ruling "Yes, any finger" (L-523 (taps sent as hovers)).
+> - The website's orbit maths gave a wrong place for a stretched orbit's homeward half, without a word; it now solves right or stops with an error, and a new check sweeps it. That fault had cut the site's trusted window to 0.3 days, froze the rooms and turned the nights red (L-524 (the Kepler solver's start)).
+> - The frozen date line now fits beside the arrows on a phone, in two or three lines (L-524).
+> - Your ruling that one body's failed test holds that body, not the site, is recorded; not built (L-525 (hold the bad data)).
 >
-> **Do next:** *Your phone look at the taps (L-523 (taps sent as hovers)); then Mars (L-514 (the Mars room)).*
+> **Do next:** *A green night; your phone look at the date line; then Mars (L-514 (the Mars room)).*
 >
 > **Needs you now:**
-> - *(do) Commit and push the website, then the orrery.*
-> - *(do) Reinstall interactive-exhibit (Settings > Skills), and paste the protocol v3.138 into the Project.*
-> - *(do) The phone look at the taps, portrait and landscape: the list on L-523.*
+> - *(do) Commit and push the orrery (the website is pushed).*
+> - *(do) The phone look at the frozen date line, with `?freeze=1`, upright and sideways.*
 > - *(do) Each morning, Fetch origin and Pull origin on both, orrery then website, before any work. If Pull origin shows up only once you have changes: Commit them first, then Pull origin, then Push origin. If Desktop stashes your changes anyway, restore them at once: Changes tab, Stashed Changes, Restore.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
-## The road  **>> UPDATED THIS SESSION**
+## The road
 
 Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
   1-14.[done]  Through Nov 6: the three rooms, the objects, the Sun's and
@@ -34,7 +34,7 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
                (L-515 (one nested tree)). Next, Mars (Phobos, Deimos) as
                the first new fold (L-514 (the Mars room)), then Uranus and
                Neptune. Io, Titan, Charon and Pluto come to standard in
-               their folds, keyed in the orrery first.*  << moved this session
+               their folds, keyed in the orrery first.*
  16.   [later] Earth's fold: L-297 (the Lagrange points), the Earth-Moon
                barycentre, SOHO, Gaia, James Webb, Artemis II.
  17.   [later] Small-body systems' moons; then stars and exoplanets.
@@ -52,6 +52,7 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
 ## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings; a line leaves once it is habit, or a skill carries it.
+- One body's failed accuracy test: "Hold the bad data and report, then continue." Not built yet (Nov 11, 11:22; L-525 (hold the bad data)).
 - The Sun direction line stays out of Earth's fold: the day-night shading and the Sun at its true place show the direction (Nov 10; L-515 (one nested tree)).
 - A finger's tap gets the wider reach on a phone held either way; a mouse keeps Plotly's own (Nov 11; L-523 (taps sent as hovers)).
 - Each working document has a length cap; a session that adds at the cap moves something out first; upkeep goes between builds, never in front (Nov 10; L-522 (document caps)).
@@ -60,12 +61,11 @@ Standing rulings; a line leaves once it is habit, or a skill carries it.
 - The drawer's top line is a path down the tree, "Solar system > Earth > Crust" (Nov 9; L-515 (one nested tree), ruling 20).
 - You decide where each card goes: beside one or several rows, the Sun's shells and the belt's cloud included; planet features join when drawn (Nov 9; L-519 (Featured's rethink)).
 - A scene opens at now; Featured is a board highlighting important cards or scenes, kept largely as is (Nov 9; L-519 (Featured's rethink)).
-- The Moon shows JPL's period for today, like every other body, not the
-  sidereal month (Nov 6, 22:17; L-513 (the Moon's standards)).
 
-## Deferred
+## Deferred  **>> UPDATED THIS SESSION**
 
 Waiting behind other work; a line leaves when picked up.
+- The orrery's own Kepler solvers start the way the website's did; safe today, listed on L-524 (the Kepler solver's start), for an orrery session (Nov 11).
 - Step 2b's three leftovers: Io, Titan, Pluto and Charon have no words or i-panel link until the orrery keys them; Find misses a shell of Earth's by its own name until Earth's fold is first opened; a view centred on Jupiter is not in the shared link (Nov 10; L-515 (one nested tree)).
 - Three checks red in the drawer walk before Scenes was built, the page or the walk aged: a gallery session that next opens the drawer (Nov 9; L-521 (three red checks)).
 - The saved pictures' words, which have no source: kept as made until the braid reaches them (Nov 8; L-520 (old pictures carry old words)).
@@ -94,15 +94,15 @@ Waiting behind other work; a line leaves when picked up.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261111T042435Z, nightly, ok, no retry (gallery swap log at 1948e79, read Nov 11).
-- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md, rewritten by the orrery run of Nov 11 with this session's edits).
+- Last cache build: 20261111T183929Z, your Daily Run on the fixed maths, ok, one retry on the swap (gallery swap log, read Nov 11).
+- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at 17580bc).
 - This page's date and the ledger's newest stamp: both Nov 11. Agree.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
 Decisions, one at a time:
-- None open. Next is Mars (L-514 (the Mars room)), after your phone
-  look at the taps (L-523 (taps sent as hovers)).
+- None open. Next is Mars (L-514 (the Mars room)), after a green night
+  and your look at the date line (L-524 (the Kepler solver's start)).
 
 At the next design talk:
 - How obsolete code is treated, and when it goes (L-509 (obsolete
@@ -121,7 +121,7 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- This session: L-522 (document caps), step 2, its brief `COORD_L522_step2_exhibit_split_brief_20261110.md`; L-523 (taps sent as hovers).
+- This session: L-524 (the Kepler solver's start) and L-525 (hold the bad data); the brief is in your run record `WHERE_WE_ARE_11-10-26_1813_Fable_run_record.md`.
 - The caps: `DOCUMENT_CAPS.md`; L-522 (document caps); its brief
   `COORD_L522_step1_caps_brief_20261110.md` and the review beside it.
 - The tree: L-515 (one nested tree); `COORD_L515_step2b_brief_20261109.md`

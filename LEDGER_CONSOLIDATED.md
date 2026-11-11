@@ -1005,7 +1005,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*260 live items; 244 need attention (`!`); 165 RICE-scored; 256 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*262 live items; 246 need attention (`!`); 165 RICE-scored; 256 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1179,6 +1179,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-521 | Three red checks in the drawer walk (gallery, the headless walk; recorded) | OPEN | -- | 2026-11-09 |
 | ! | L-522 | Document caps: how the working documents are kept from growing, and the catch-up (protocol, skills, ledger; upkeep) | OPEN | -- | 2026-11-11 |
 | ! | L-523 | A finger's tap that Plotly sends as a hover: a tap a little off a small dot opens its box (gallery, the text box; Tony's phone look) | OPEN | -- | 2026-11-11 |
+| ! | L-524 | The Kepler solver's start: a stretched orbit's second half solved wrong, the site frozen at 0.3 days, and the frozen date line on a phone (gallery, the assembler and the room's title; built) | OPEN | -- | 2026-11-11 |
+| ! | L-525 | One body's failed accuracy test holds that body, not the whole site (gallery, the nightly builder's served window; ruled, not built) | OPEN | -- | 2026-11-11 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1612,6 +1614,129 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
+#### [L-525] One body's failed accuracy test holds that body, not the whole site (gallery, the nightly builder's served window; ruled, not built)
+<!-- L:525 status:OPEN upd:2026-11-11 section:A flag: rice: -->
+- **RULED, Tony, 2026-11-11, 11:22,** in his words: "Hold the bad data
+  and report, then continue. This follows our pattern of fix and report
+  instead of stopping." Carried to the L-524 (the Kepler solver's
+  start) session by the coordinator, to be recorded at its close as its
+  own item.
+- **The question it answers:** whether one body's failed accuracy test
+  should stop the whole site. Today it does. The builder's served
+  window is the shortest trusted span among the Sun-centred bodies
+  (L-149), and the resolver holds every scene to that one window. On
+  Nov 11 one sample of Halley's, wrong because of the solver fault in
+  L-524, cut the window to 0.3 days for every body: every room froze at
+  its end, and the night went red when the Artifact 1 test's step 2 fell
+  outside it.
+- **Claude, as read, not decided:** the body whose test fails has its
+  bad data held, and the rest of the site goes on with its own window;
+  the failure is reported loudly, as L-508 (a held body's alarm) rules
+  for a held body, until a ledger item names it. What "held" serves for
+  that body (the last trusted night, as the hold of L-485 keeps, or
+  nothing), and where the report line goes, are for the build's design.
+- **Not built in the session that recorded it** (Tony's word with the
+  ruling).
+**Gap:** the design and build, in a gallery session that takes the
+nightly builder (gallery-cache-builder): one failed body held and
+reported, the served window set from the bodies that passed; and a
+check that shows one planted bad body leaving the rest of the site's
+window as it was.
+**Ref:** L-149 (the served window's trust participation); L-485 (the
+hold; a nightly unattended run); L-508 (a held body's alarm); L-524 (the
+Kepler solver's start, the case that raised it); L-165 (site
+continuity).
+
+#### [L-524] The Kepler solver's start: a stretched orbit's second half solved wrong, the site frozen at 0.3 days, and the frozen date line on a phone (gallery, the assembler and the room's title; built)
+<!-- L:524 status:OPEN upd:2026-11-11 section:A flag: rice: -->
+- **Tony's words, 2026-11-11, 10:58:** "the nightly failed again and on
+  rerun and the date line on the phone is problematic." Found by the
+  coordinating session (Claude Fable 5.2), run record
+  `WHERE_WE_ARE_11-10-26_1813_Fable_run_record.md`; built in a Code
+  session in the gallery (Claude Opus 5.5) on orrery 17580bc5 and
+  gallery ebb8e623, before Mars by the brief.
+- **The cause** [verified @ebb8e623]. `solve_kepler` in
+  `gallery/assembler/render_orbits.py` folded M into [-pi, pi) and, for
+  e of 0.8 or more, started Newton's method at E = pi. For a negative M
+  that start is on the wrong side; at scattered M the 100 steps ran out
+  and a wrong E came back with no warning. On the served Halley elements
+  of Nov 11 the +30 day trust sample gave E = -1.17e12, 21.64 degrees
+  off; the served window (L-149) fell to 0.3 days, set by Halley, and
+  the rooms froze at its end (L-515 part 4 with L-165). The page drew
+  Halley, Encke, Sedna, Leleakuhonua and other bodies with e of 0.8 or
+  more wrong at scattered minutes for as long as that start stood.
+- **Why the night was red, T1 and nothing after.** The Artifact 1
+  test's T2 draws Earth at its stored `as_of_today` (00:01 UTC). A
+  window of +/- 0.35 days around a build at 08:30 UTC or later starts
+  after 00:01, so the resolver refused T2 and the test stopped after
+  T1; the pin found T2 to T5 missing. Reproduced locally: a build at
+  04:26 or 08:17 passes, 08:30 or 09:00 refuses. GitHub's log was not
+  read (no `gh`); the cause was reproduced instead.
+- **The fix.** Solve for |M| on [0, pi], where E - e sin E - |M| rises
+  and is convex, start at E = pi, and give E the sign of M: from that
+  start Newton's steps approach from one side and never overshoot, for
+  every e below 1. NOT SILENT: an answer is returned only if it solves
+  the equation to 1e-9 rad and lies in [0, pi]; otherwise
+  `KeplerNotConverged` (an ArithmeticError) is raised; e outside [0, 1)
+  or a value that is not finite raises ValueError.
+- **The check:** the gallery run's new row "Kepler solver"
+  (`tools/test_kepler_solver.py`): 18 eccentricities to 0.999999 at
+  36,000 M each and every served body's own e (95) at 3,600, M asked
+  positive, negative and whole turns away; the not-silent cases; and
+  Halley's served elements of Nov 11 moved 30 days, under 0.1 degree.
+  Red on the old code (FAIL 34, Halley 3.96 degrees), green after (Halley
+  0.0256 degrees); its self-test runs the old solver each time and must
+  catch it.
+- **Read back from the builder** (`--dry-run`, 2026-11-11 17:16 UTC):
+  "[window] served window: 88.0 days either side of today, set by
+  mercury, the shortest of 64 bodies' trusted spans"; Halley's samples
+  2.5e-06 degrees, its window 13,784 days (capped at half its period),
+  as on Nov 9. JPL agreed to 1e-6 degrees: JPL was not the cause.
+  Tony's Daily Run of 12:39 Chicago (run 20261111T183929Z) then built
+  and swapped a cache on the fixed code, window JD 2461268.31 to
+  2461444.25.
+- **The other copies in the gallery.** Callers of the one solver:
+  `assemble.py`, `compose_children.py`, `drawn_orbit_offset`, the
+  builder's `_two_body_position`, the builder's offline test, and two
+  checks; fixed with it. Two separate copies, both left as they are and
+  swept clean to e = 0.97: the Solar System Explorer's Python in
+  `interactive.html` (`compute_orbits`, nine planets, e up to 0.25) and
+  `documentation/smoke_view_centre.js` (`kep`, a check, moons and their
+  planets). No JavaScript served to visitors solves Kepler.
+- **The date line when frozen.** In one piece the frozen line is about
+  284 px; the gap between the zoom buttons and the arrow cross is the
+  screen's width less about 212 px, so on every phone it went below the
+  cross. Now `sunFitTitle` tries it in the gap in one piece, then two
+  lines, then three (`SceneMoment.subtitleWraps`: the same words, only
+  the breaks differ), and goes below the cross only when none fits; each
+  fit starts from one piece. Measured with `?freeze=1`: two lines at 375,
+  412 and 430 px wide, three at 360, below the cross at 320 (as the plain
+  line does there), one piece sideways. Held by the Scene moment row
+  (`documentation/smoke_scene_moment.js`: the forms' words and lines,
+  three wiring points, a fifth planted break).
+- **Recorded, not fixed (the brief: "list them by file and function,
+  and fix none"): the orrery's Kepler solvers.** Start at E = pi for e
+  of 0.8 or more, like the gallery's old one: `apsidal_markers.py`
+  `solve_kepler_equation`; `exoplanet_orbits.py`
+  `solve_kepler_equation`; `sgr_a_star_data.py` `solve_kepler_equation`;
+  `palomas_orrery.py`, four inline copies (`plot_actual_orbits` near
+  line 4610; two workers near 5407 and 5863; `animation_worker` near
+  6990); `test_orbit_markers.py` `solve_kepler`. Other starts:
+  `hills_cloud_sampler.py` `_eccentric_anomaly` (M + e sin M);
+  `main_belt_sampler.py` `_kepler` (M). Every start-at-pi copy is handed
+  M in [0, 2 pi), the side where that start converges, so none is wrong
+  today; a caller handing in a negative M would be. None raises when it
+  does not converge.
+**Gap:** a green night after Tony's push of the website (b248da5d,
+12:52 Chicago, which carries every gallery edit above; the gallery run
+on those bytes, 48 of 48 green), read from the night's log. Tony's phone look at the frozen line with
+`?freeze=1`, upright and sideways. The orrery's solvers, above, for an
+orrery session.
+**Ref:** L-149 (the served window's trust participation); L-165 (site
+continuity); L-515 (one nested tree; part 4, the freeze); L-237 (Artifact
+1's stale record, T3's pinned failure); L-316 (the arrow cross);
+`INTERACTIVE_AS_BUILT.md` (what a room opens on).
+
 #### [L-523] A finger's tap that Plotly sends as a hover: a tap a little off a small dot opens its box (gallery, the text box; Tony's phone look)
 <!-- L:523 status:OPEN upd:2026-11-11 section:A flag: rice: -->
 - **Tony's word, 2026-11-11, 08:23:** "i would really like to get this
@@ -1684,6 +1809,10 @@ as an archive of the prioritization thinking -- no cleanup on close.
 body, a moon beside its planet, each tapped a little off its dot, then
 a drag and a pinch that must open nothing; in landscape a tap a little
 farther off now opens too (his ruling). Closes on his look.
+**Note:** his look, in `WHERE_WE_ARE_11-10-26_1813_Fable_run_record.md`,
+beside the phone look's run-order line: "-- correct". Read by the
+L-524 (the Kepler solver's start) session, which left the closing to
+a ledger pass.
 **Ref:** L-318 (the tap rounds; round 6, the widened pick); L-497 (one
 text box; the mouse's hover); L-514 (the Mars room: moons beside their
 planet); L-521 (the drawer walk's red checks); L-278 (no Plotly call
