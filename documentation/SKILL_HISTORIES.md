@@ -1035,6 +1035,64 @@ L-517 part 3 it draws none. Read from the gallery's code with this
 session's edits before it was written.
 (Moved down 2026-11-10, when 1.40 made a fourth entry.)
 
+Install and verify, as the skill carried it at 1.40, moved here
+on 2026-11-11 (L-522, document caps, step 2):
+1.0 was confirmed by the Earth sessions; 1.1 and 1.2 by the sessions
+that followed their pushes. The first session after 1.3's push confirms
+its loaded copy reads 1.3 before exhibit work. 1.9 was cut in the
+session that wrote it, which loaded 1.8; the next session confirms its
+loaded copy reads 1.9 before exhibit work. 1.13 was cut in a session
+that loaded 1.12; the next session confirms its loaded copy reads 1.13
+before exhibit work. 1.14 followed in the same session, after 1.13 was
+installed; the next session confirms its loaded copy reads 1.14.
+1.16 was cut in a session that loaded 1.15; the next session confirms
+its loaded copy reads 1.16 before exhibit work. 1.17 was cut in a
+session that loaded 1.16; the next session confirms its loaded copy
+reads 1.17 before exhibit work. 1.19 was cut in a session that loaded
+1.18; the next session confirms its loaded copy reads 1.19 before
+exhibit work. 1.20 was cut in a session that loaded 1.19; the next
+session confirms its loaded copy reads 1.20 before exhibit work. 1.21
+was cut in a session that loaded 1.20; the next session confirms its
+loaded copy reads 1.21 before exhibit work. 1.22 was cut in a session
+that loaded 1.21; the next session confirms its loaded copy reads 1.22
+before exhibit work. 1.23 was cut in a session that loaded 1.22, and
+the session of 2026-10-25 confirmed its loaded copy read 1.23. 1.24 was
+cut in that session; the next session confirms its loaded copy reads
+1.24 before exhibit work. 1.25 and 1.26 were cut in the sessions of
+2026-10-25 and 2026-10-26, each from the repo's copy. 1.27 was cut on
+2026-10-27 in a Claude Code session, which reads the skills as files in
+the repo, so its loaded copy of 1.26 was the repo's own; a session that
+loads the account's copy confirms it reads 1.27 before exhibit work.
+1.28 was cut on 2026-10-28 in a Claude Code session, from the repo's
+copy of 1.27; a session that loads the account's copy confirms it reads
+1.28 before exhibit work. 1.29 was cut on 2026-10-29 in a Claude Code
+session, from the repo's copy of 1.28; a session that loads the
+account's copy confirms it reads 1.29 before exhibit work. 1.33 was cut
+on 2026-11-07 in a Claude Code session on the website, through the
+python_work door, from the repo's copy of 1.32; the next session, the
+same evening, loaded the account's copy and it read 1.33. 1.34 was cut
+in that session; the next session, the same night, loaded the account's
+copy and it read 1.34. 1.35 was cut in that session; the next session,
+on 2026-11-08, on the website through the python_work door, loaded the
+account's copy and it read 1.35. 1.36 was cut in that session; a
+session that loads the account's copy confirms it reads 1.36 before
+exhibit work. 1.37 was cut on 2026-11-08, night, in a Claude Code
+session on the website through the python_work door, from the repo's
+copy of 1.36; a session that loads the account's copy confirms it reads
+1.37 before exhibit work. On 2026-11-09 the website session for L-519
+loaded the account's copy and it read 1.37, as the manifest expected,
+but it was the first cut: the repo's copy had taken Tony's phone look
+("Tap to update.") under the same number. 1.38 was cut in that session
+from the repo's copy and carries those words. The website session for
+L-519 part 2, the same evening, loaded the account's copy and it read
+1.37: that session had begun before Tony reinstalled 1.38, and the
+account's copy on disk read 1.38, byte for byte the repo's. 1.39 was cut
+in that session from the repo's copy; a session that loads the account's
+copy confirms it reads 1.39 before exhibit work. 1.40 was cut on
+2026-11-10 in the website Code session for L-515 step 2b, through the
+python_work door, from the repo's copy of 1.39; a session that loads the
+account's copy confirms it reads 1.40 before exhibit work.
+
 ## safe-file-editing
 
 Source: project_instructions_v3_29.md Part 3 + Part 5 technical lessons;

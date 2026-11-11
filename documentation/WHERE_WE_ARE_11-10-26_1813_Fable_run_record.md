@@ -448,10 +448,10 @@ The Code session will work in three parts and stop after each:
 
 **Run order**
 
-- *(do)* Commit and push the orrery. GitHub Desktop will show three files: `LEDGER_CONSOLIDATED.md`, `documentation/WHERE_WE_ARE.md`, and `documentation/COORD_L522_step2_exhibit_split_brief_20261110.md`. -- 
+- *(do)* Commit and push the orrery. GitHub Desktop will show three files: `LEDGER_CONSOLIDATED.md`, `documentation/WHERE_WE_ARE.md`, and `documentation/COORD_L522_step2_exhibit_split_brief_20261110.md`. -- 87fb472ea2d21c785685f16c6ac95387e71a3985 and github just ran the nightly run in the website repo
 - *(do)* Open Claude Code through the `python_work` folder with this prompt:
-  "Orrery repository, with the website for one new file and one check. L-522 (document caps), step 2. The brief is documentation/COORD_L522_step2_exhibit_split_brief_20261110.md."
-- *(do)* It will ask you one thing first: whether it may edit the skill and write two files in the website's folder. The answer is yes.
+  "Orrery repository, with the website for one new file and one check. L-522 (document caps), step 2. The brief is documentation/COORD_L522_step2_exhibit_split_brief_20261110.md." -- started
+- *(do)* It will ask you one thing first: whether it may edit the skill and write two files in the website's folder. The answer is yes. -- done
 - *(do)* Paste me its Part 1 report before you give the go-ahead.
 - *(do)* At the close: push the website, then the orrery; reinstall interactive-exhibit; paste the protocol into the Project.
 
@@ -462,4 +462,203 @@ The Code session will work in three parts and stop after each:
 - Where We Are now names the split as next and Mars after it, by your word tonight. Its "Waiting on you" list has no open decision.
 - The new Opus coordinator for the website should start after this step closes, so it picks up the shortened skill and the new reference file.
 
-One final thought: the reference file will have no length cap, because the nightly check on GitHub only sees the orrery. It is the part of the old skill that grew fastest, so it will keep growing in its new home unless a later step gives the website its own caps check.
+One final thought: the reference file will have no length cap, because the nightly check on GitHub only sees the orrery. It is the part of the old skill that grew fastest, so it will keep growing in its new home unless a later step gives the website its own caps check. -- thanks, however, it is not read at every turn, right? 
+
+==========================================
+
+**Code:**
+
+Read the whole exhibit skill (2,440 lines). Now checking the history file's layout, the skills index tool, and the website's root names so the plan is grounded.
+
+Plan is taking shape. Let me measure what each destination would hold before I write the report.
+
+The plan is ready: the exhibit skill drops from 2,440 lines to about 670, and almost everything that leaves goes, word for word, into a new reference in the website. Nothing has been written to any file yet.
+
+**Skills read:** interactive-exhibit 1.40, all of it with its line numbers. ledger-and-session-records 1.23 and safe-file-editing 1.14, in the parts the brief names. All three match the protocol's table.
+
+**The reference's name:** `INTERACTIVE_AS_BUILT.md`, at the website's root beside `interactive.html`.
+
+## Where each part of the old skill goes
+
+S = stays in the skill, R = moves to the reference, H = moves to the skill-history file.
+
+| Old lines | Section | Goes to |
+|---|---|---|
+| 1-82 | Header and the three version entries | S. Line 4 (`fires_when`) is cut short; the read-plan line is rewritten by the tool. |
+| 83-114 | Contents | S, minus the line for the anatomy heading |
+| 115-132 | What an exhibit is | S |
+| 133-155 | The anatomy table | R |
+| 156-164 | The `sun*` naming debt (a rule) | S, moved under One chrome |
+| 165-182 | Design before code; One chrome | S |
+| 183-510 | Provenance (328) | R; the heading stays with a new rule |
+| 511-677 | What a room opens on (167) | R; new rule |
+| 678-824 | One drawer for every centre (147) | R; new rule |
+| 825-964 | One picture (140) | R; new rule |
+| 965-1689 | The Solar System room's drawer (725) | R; new rule |
+| 1690-1801 | Shells where each begins (112) | R; new rule |
+| 1802-1826, 1845-1855 | A shell trace carries its key | S |
+| 1827-1844 | The Earth room's Sun line (describes an obsolete room) | R |
+| 1857-1878, 1894-1925 | Only two tools write the config: the rule, the allow list, the parent rule, the belts | S |
+| 1879-1893 | `add_arrival` (what one function does) | R |
+| 1927-2053 | One check; Logic in its own file; Never mutate; Scene text; Frame zoom; Aspect; km and AU; Phone first; Touch path | S |
+| 2054-2090 | One text box (what the page does) | R |
+| 2091-2150 | Soft break; 3D tap; Hover for the visitor; No pointer line; Group class | S |
+| 2151-2160 | Readability asks | R |
+| 2161-2172 | JPL's terms | S |
+| 2173-2187 | The i panel's bullets | R |
+| 2188-2247 | Info link; Adding an exhibit, steps 1-4 | S |
+| 2248-2289 | The headless recipe (Claude's test tools) | R |
+| 2290-2385 | Steps 5-8; Field notes; first lines of Install | S |
+| 2386-2440 | Install confirmations, 1.0 to 1.40 | H |
+
+**Counts:** about 1,779 lines to the reference, 55 to the history file, and 606 old lines stay. Adding six headings, the six new rules and seven one-line pointers to the reference gives about 670. In the reference, headings drop their tier tags, so no line ends up in two places.
+
+## The six new rules
+
+Each is followed in the skill by one line: "What the page does, and where: INTERACTIVE_AS_BUILT.md, <section>." The old line numbers are given only here.
+
+**Provenance is part of the build [CRITICAL]**
+- The exhibit renders only what the served entry carries. Every number a visitor reads carries its provenance in the served data, not in the page (184-193).
+- A served number, its citation and a body's words are copies the orrery's tools write. Each changes in the orrery, never by hand in the gallery (194-208, 417-446).
+- A fact about a feature is served with its words, never typed in a renderer, and the Typed facts check gates it (307-337).
+- A hover prints a unit it is served and never converts a served number to print it (341-353).
+- An exhibit is done when Store drift reads MATCH for its pointers, by name (292-298).
+- Where the website and the orrery both draw an object, they agree, or the difference is written down (493-504).
+- A gap found elsewhere is recorded, one ledger row per class, not chased (505-509).
+
+**What a room opens on is SERVED, not coded [QUALITY]**
+- A room opens on what is served: a body's `arrival` block, or a room's entry in the config's `"rooms"` section. Code never decides it. With no block nothing is hidden, and there is no floor under the opening view (512-523, 532-534).
+- The page reads both directly, so a change to them reaches a visitor on the push alone. A shell's words wait for the cache to be rebuilt. Say which when telling anyone what a change will do (525-530, 545-546).
+- Past the served window a room draws the last day its data covers and says so. It never goes blank, and the resolver's gate is not moved (568-583).
+- A shared link carries the rows ticked and the minute shown. Reset still puts back the room's own opening (615-631, 663-664).
+
+**One drawer for every centre [QUALITY]**
+- The rooms are one tree. The Solar System room is its root, and a body with something served around it is a centre (680-682).
+- Every centre's drawer is built by one builder from one plan, with the centre's fixed row first. A new centre adds a row to `EXHIBITS`, never a second drawer (689-697).
+- Which bodies are centres, and which objects are a centre's children, is read from the config, never typed (724-726, 749-751).
+- Each centre's Reset puts back what that centre opened on, and never touches its fixed row (756-765).
+
+**One picture: the folds and the view's middle [QUALITY]**
+- What is fetched around a body folds under that body's row. Which objects those are is read from the config's `center_slug`, never typed (829-833).
+- A moon is drawn at its planet's place by adding the planet's position to the moon's own elements, never by the retired subtraction (847-853).
+- Before a centred view is drawn, the whole drawing is shifted so the middle is the scene's origin, in 64-bit numbers. The reason: a phone's graphics hold only 32-bit numbers (871-888).
+- A fold is drawn, and its stored drawings fetched, the first time it is needed (919-922).
+
+**The Solar System room's drawer: bodies, not shells [QUALITY]**
+- It is the same drawer as every room's. Its decisions are made in `gallery/solar_system_drawer.js` and checked there; the page only touches the page elements and Plotly (966-975).
+- Each control acts on one thing. Every group is always listed, folded shut, and there is no See more, by your ruling that this be permanent (997-1002).
+- Nothing ticks many bodies at once, except a spacecraft or a comet with its companions (1015-1016).
+- Selecting moves nothing; only Go To moves the view (1032-1034).
+- Each group is JPL's own class for its bodies, one class to a row (1056-1060).
+- The room frames on where each body is now, with 20 percent to spare. Go To fits the body's whole orbit (1659-1666, 1675-1682).
+
+**A room's drawer lists its shells where each begins [QUALITY]**
+- Each shell takes its place at the distance where its nearest part begins (1691-1697).
+- The order is read from the served rows, never typed, so a new shell takes its place with nothing else to change (1699-1703).
+- A shell whose distance cannot be read keeps its place and is named in the room's notes; it is never guessed (1777-1778).
+- The order is only as right as the drawing, so it rests on the Drawn ends check (1780-1789).
+- Naming a row opens its own feature's words, and one row is one thing (1732-1734, 1739-1745).
+
+## The shorter "fires when" line
+
+"A room or exhibit in interactive.html (`?exhibit=`); its drawer and chrome (nav cluster, frame zoom, i panel, HUD, text box, consent, back link); the served words and numbers a room prints and where they come from (`store_writer`, `exhibit_store_editor`, `objects_config.json`); what a room opens on; testing a room (the gallery run's checks, `tools/headless`); carding an exhibit in Studio."
+
+## Why the skill can't get to 500 by moving alone
+
+The brief aimed at 500 lines, and moving alone gets to about 670. The rest is mostly short rules, which stay. Two blocks are also in the way:
+- **The three version entries, 71 lines.** The three-entry rule keeps them.
+- **The field notes, 72 lines.** These are lessons, and the protocol says lessons live in their skills. Moving them to the history file would bring the skill to about 600; I've left them, since that would change where the protocol says lessons live.
+
+Rules that look stale (for example, "deferred to the third room", and file counts tied to old commits) go on a list for you in Part 2's report. They are not fixed.
+
+Part 1, the plan, is done and nothing has been written to any file. The skill would drop from 2,440 lines to about 670; reaching 500 would mean rewriting rules or moving the field notes. Part 2 waits on your word.
+
+May I do Part 2 as planned, with the skill landing near 670 lines?
+
+====================================
+
+**Fable:**
+
+Yes, give the go-ahead for Part 2, with one change to the plan.
+
+I checked the plan against the skill itself, not only the report. The six new rules say what the old lines say, at the lines the report cites. Landing near 670 lines instead of 500 is right, and so is leaving the field notes where they are.
+
+**The one change.** The Provenance rule is the only [CRITICAL] one of the six. Its old section names sixteen rules, and the plan keeps seven in the skill. Five of the ones left out bind new work, such as the numbers and words of a new room like Mars. A session adding something new has no reason to open the reference for them, so they should stay in the skill.
+
+Paste this to the Code session:
+
+> Go ahead with Part 2 as planned, near 670 lines, the field notes left in place. One change, to the Provenance rule only. Its rules bind new work, which no pointer to the reference sends a session to read. So the rule in the skill also keeps one line for each of these, resting on the old lines named:
+> - A served note (`source_note`) holds only a drawing choice; wording that bears on a citation goes on the store's row (209-219).
+> - NOT IN STORE is fixed by adding the constant to the store, never by removing the pointer (295-298).
+> - Scattered dots are the orrery's stored drawing; the website draws them as given and places none itself (257-268).
+> - A pointer is never aimed at a conversion name; a slot drawn in another unit is written from its row's served units, and nothing is multiplied in the gallery (367-376).
+> - A computed distance prints by the larger of two errors (384-386).
+>
+> Two small things. In the skill's text write "Tony's ruling", not "your ruling" (the No See more line). And the headless recipe and `add_arrival` each leave a one-line pointer where they stood, since a session looks for them by name.
+
+**Your question on my final thought.** You are right. The reference is read only by a session that changes that part of the page, and only the section it needs. The skill loads whole every time it fires, and the protocol loads every session. So growth in the reference costs far less, and my concern was smaller than I made it sound.
+
+**Run order**
+- *(do)* Paste the block to the Code session as its go-ahead for Part 2.
+- *(do)* Bring me Part 2's report, with the account of every line, before Part 3.
+
+**Where this leaves us**
+- Part 1's plan is accepted with five lines added to the Provenance rule. The skill should land near 680 lines, down from 2,440.
+- About 1,780 lines move word for word into a new file at the website's root, `INTERACTIVE_AS_BUILT.md`.
+- Nothing is written to any file yet. I wrote nothing to the ledger tonight, because the Code session has that folder open.
+
+========================================
+
+**Code:**
+
+Going ahead with Part 2 as the coordinator set it: the five extra lines in the Provenance rule, "Tony's ruling", and pointers left where the headless recipe and `add_arrival` stood. First I'm checking the old file's encoding, then building the three files from it with a script.
+
+The skill now runs to 718 lines, a bit over the roughly 670 I estimated, and I'm checking the account script next to confirm every old line landed in exactly one place.
+
+Two faults are mine: the reference's "## Contents" heading duplicates the skill's, and the Provenance rule's first line matches old line 184. I'm rewording both, and making the build read its sources from the base commit so it can be safely rerun.
+
+The account checks out: all 2,352 old lines are accounted for, with 3 unplaced lines each explained and none duplicated. I'm looking at the joins and the protocol manifest change next.
+
+Part 2 is done. The exhibit skill went from 2,440 lines to 718, and everything that left it was moved word for word, not rewritten. The script that checks this, the account, reads clean.
+
+**Where the lines went:**
+- **Skill:** 718 lines. 556 old non-blank lines stayed, plus 97 new lines: the six new rules, their pointers, and the shorter "fires when" line.
+- **Reference:** `INTERACTIVE_AS_BUILT.md` in the website, 1,825 lines. It holds 1,738 moved lines under its own headings, in the skill's order.
+- **History file:** 55 lines of install confirmations (1.0 to 1.40) went to the end of the skill's section in `documentation/SKILL_HISTORIES.md`.
+- **Protocol:** the exhibit skill's row in the skill table shrank from about 100 lines to about 10, so `PROJECT_INSTRUCTIONS.md` went from 1,487 to 1,401 lines. The skills index tool did this itself.
+
+**The account, in short (full printout attached):**
+- Every one of the 2,352 old non-blank lines is found exactly once.
+- Three are found nowhere, each for a reason: the old "fires when" line (cut), the old reading plan (rewritten by the skills index tool), and the contents line for the anatomy heading, which moved to the reference.
+- It can fail: its first run caught two lines I had written that matched old lines word for word, the reference's "Contents" heading and the first line of the Provenance rule. I reworded both.
+
+**The coordinator's changes are in:**
+- The Provenance rule keeps its five extra lines: the served note, NOT IN STORE, the scattered dots, conversion names, and the larger of two errors.
+- "Tony's ruling" replaces "your ruling" in the No See more line.
+- The headless recipe and `add_arrival` each have a one-line pointer where they stood.
+
+**What else moved, beyond the six long sections, and why:** each of these says what the page does, not how a session must work.
+- the anatomy table
+- the Earth room's Sun line
+- `add_arrival`
+- One text box
+- the Readability asks
+- the i panel's bullets
+- the headless recipe
+
+The `sun*` naming-debt paragraph is a rule, so it stayed, moved under One chrome.
+
+**Rules that look stale, listed and not fixed:**
+- What an exhibit is still calls the Sun room "the template" and the Explorer "the default room". Since v1.40 the Sun room is an address of the root, and the default is the Solar System room.
+- The `sun*` rename is "deferred to the third room", but there are no separate rooms any more.
+- Adding an exhibit, step 3, still says "one row in `EXHIBITS`", written before the tree.
+- Counts tied to old commits: "204 paths at d9d7a48f", "eleven files as of d9d7a48f", and "at b375cfe1 it does NOT build the Sun room".
+- "One scope question is open" (Logic in its own file) is still waiting for your word.
+
+These will go on L-522 (document caps) at the close.
+
+The reference already names the check Part 3 builds (`tools/check_as_built_names.py`), which doesn't exist yet.
+
+Part 2 is done: the exhibit skill went from 2,440 lines to 718, the website has its new as-built reference, and the account script reads clean. Nothing is committed; Part 3 (the website's name check and the two pointers) has not started.
+
+May I go on to Part 3, the name check and the doors?

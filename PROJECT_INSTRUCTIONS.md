@@ -556,101 +556,15 @@ gallery-cache-builder        1.18 Nightly builder, atomic swap and its
                                   (HORIZONS_CACHE), a drawing named on a room's
                                   row, an ended mission's last day
                                   (fetch_path_last_day)
-interactive-exhibit          1.40 adding or changing an exhibit in
-                                  interactive.html; any edit to the Sun's
-                                  chrome (drawer, nav cluster, frame zoom,
-                                  i-panel, HUD, consent, back link); "Earth
-                                  interactive", "?exhibit=", "new room in
-                                  interactive.html"; deciding what numbers an
-                                  exhibit may render and where they come from;
-                                  what a room opens on (arrival block, drawn,
-                                  moon); meta.shell_key and the trace stamp;
-                                  editing the served words with store_writer or
-                                  exhibit_store_editor; the Solar System room's
-                                  drawer, its group rows, its two Resets, the
-                                  Reset in every room's top bar, Home's order
-                                  and its framing; Go To fitting a body's whole
-                                  orbit and the orbit line in a body's hover;
-                                  the count line's place; a bare
-                                  interactive.html link and the Explorer's
-                                  address; testing a room headlessly
-                                  (tools/headless); carding an exhibit in
-                                  Studio; choosing a feature's info link (NASA
-                                  or Wikipedia); a served number's citation and
-                                  its source_note; the Typed facts check
-                                  (smoke_typed_facts.js); a feature drawn as
-                                  stored dots (the Hills cloud, Earth's
-                                  radiation belts); the i panel's source list
-                                  and its links (source_list.js); the order a
-                                  room's drawer lists its shells in, where each
-                                  begins (drawer_order.js, the Drawer order
-                                  check); a spacecraft's path in the Solar
-                                  System room (its positions file, solid and
-                                  dashed, its text box); whether the website
-                                  and the orrery agree on an object; the
-                                  planets ticked with a spacecraft
-                                  (companions); the i panel's words one
-                                  sentence to a bullet; a comet on an open path
-                                  in the Solar System room; the drawer's groups
-                                  one JPL class to a row; JPL's terms in the
-                                  words a visitor reads; a comet's companions;
-                                  the drawer's Find a body box; the direction
-                                  arrows on the orbits; the grid chip's AU note
-                                  and the triad's frame note; the i button's
-                                  first-visit note and hovers without a pointer
-                                  line; the one text box for a tap and Go To
-                                  (text_box.js); a group found by its find
-                                  words; the i panel's Report a problem link; a
-                                  drawing row in the Solar System room (the
-                                  belt's cloud); a stored drawing's cross kept
-                                  off the axes; the source line's UTC and JPL
-                                  clock; the ruler and the x marks on the axes;
-                                  an ended mission (the Historical missions
-                                  group, its marker on its last day,
-                                  mission_end; a craft that flew on and its
-                                  end_note; a path cut before its mission ended
-                                  and its cutoff_note); an orbital period under
-                                  a year, printed in days only (days_only); one
-                                  drawer for every centre (the fixed centre
-                                  row, the trail line, Centre on, the root's
-                                  ticks kept, a centre's children by distance
-                                  among its shells); the Sun's shells in the
-                                  Solar System room, how that room frames a
-                                  shell, and what ?exhibit=sun opens on
-                                  (EXHIBIT_ADDRESSES); the Earth room's Sun
-                                  line; an object's parent as its fetched
-                                  centre (check_tree_parents.py, the store
-                                  writer's parent path); a room opened past the
-                                  served window (the freeze, scene_moment.js,
-                                  the Scene moment check, ?freeze=1); parent
-                                  groups in the drawer (Comets over the comet
-                                  groups, a sub-group's in); the text box
-                                  opaque and the HUD hidden under it; the saved
-                                  pictures beside their rows in the Solar
-                                  System room's drawer (picture_folds.js,
-                                  drawer_row in gallery_metadata.json, the way
-                                  back from a card the room opened); the shared
-                                  scene link (the address's show and at,
-                                  scene_address.js, the Scene address check,
-                                  "Tap to update."); scenes, a shared link kept
-                                  as a card (the Scenes fold under the Sun, the
-                                  gallery editor's New Scene window,
-                                  scene_card.py, the Scene cards check); a card
-                                  in several places in the drawer, beside any
-                                  row (drawer_row a list; a Sun's shell or the
-                                  belt's cloud as a place); the gallery
-                                  editor's drawer tree and its Places list
-                                  (drawer_places.py, the Drawer places check);
-                                  a moon in the root (drawn at its planet's
-                                  place, compose_children.py, its fold, its box
-                                  past its checked span); a centre's fold
-                                  (Earth's, Jupiter's and Saturn's own shells
-                                  in the root, fetched when first needed);
-                                  Centre on in the page and the view's middle
-                                  (view_centre.js, the 64-bit shift, the trail
-                                  as a path down the tree, the View centre
-                                  check); ?exhibit=earth; the Pluto system's
-                                  row and its open square
+interactive-exhibit          1.40 a room or exhibit in interactive.html
+                                  (?exhibit=); its drawer and chrome (nav
+                                  cluster, frame zoom, i panel, HUD, text box,
+                                  consent, back link); the served words and
+                                  numbers a room prints and where they come
+                                  from (store_writer, exhibit_store_editor,
+                                  objects_config.json); what a room opens on;
+                                  testing a room (the gallery run's checks,
+                                  tools/headless); carding an exhibit in Studio
 <!-- SKILL-MANIFEST:END -->
 
 Session-Start Repo Pull and the SHA Round Trip [CRITICAL]
