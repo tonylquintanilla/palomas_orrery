@@ -1,7 +1,7 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 11, 2026, afternoon: the Code session (Opus) on the website's orbit maths and the frozen date line.
+Last updated: November 11, 2026, afternoon: the Code session (Opus) on the website's orbit maths and the frozen date line; then the coordinating session (Fable), the hold's brief.
 - Written at orrery 17580bc and gallery b248da5 (your push of 12:52, carrying this session's website edits).
 
 > **READ THIS FIRST**
@@ -11,10 +11,10 @@ Last updated: November 11, 2026, afternoon: the Code session (Opus) on the websi
 > - The frozen date line now fits beside the arrows on a phone, in two or three lines (L-524).
 > - Your ruling that one body's failed test holds that body, not the site, is recorded; not built (L-525 (hold the bad data)).
 >
-> **Do next:** *A green night; your phone look at the date line; then Mars (L-514 (the Mars room)).*
+> **Do next:** *The hold, one Code session through the parent folder (L-525 (hold the bad data)), by your word of Nov 11; your phone look at the date line; then Mars (L-514 (the Mars room)).*
 >
 > **Needs you now:**
-> - *(do) Commit and push the orrery (the website is pushed).*
+> - *(do) Commit and push the orrery: the ledger, this page and the hold's brief (the website is pushed).*
 > - *(do) The phone look at the frozen date line, with `?freeze=1`, upright and sideways.*
 > - *(do) Each morning, Fetch origin and Pull origin on both, orrery then website, before any work. If Pull origin shows up only once you have changes: Commit them first, then Pull origin, then Push origin. If Desktop stashes your changes anyway, restore them at once: Changes tab, Stashed Changes, Restore.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
@@ -52,7 +52,7 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
 ## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings; a line leaves once it is habit, or a skill carries it.
-- One body's failed accuracy test: "Hold the bad data and report, then continue." Not built yet (Nov 11, 11:22; L-525 (hold the bad data)).
+- One body's failed accuracy test: "Hold the bad data and report, then continue." A hold is not red; the night's commit title names the held body (Nov 11; L-525 (hold the bad data)).
 - The Sun direction line stays out of Earth's fold: the day-night shading and the Sun at its true place show the direction (Nov 10; L-515 (one nested tree)).
 - A finger's tap gets the wider reach on a phone held either way; a mouse keeps Plotly's own (Nov 11; L-523 (taps sent as hovers)).
 - Each working document has a length cap; a session that adds at the cap moves something out first; upkeep goes between builds, never in front (Nov 10; L-522 (document caps)).
@@ -121,7 +121,7 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- This session: L-524 (the Kepler solver's start) and L-525 (hold the bad data); the brief is in your run record `WHERE_WE_ARE_11-10-26_1813_Fable_run_record.md`.
+- This session: L-524 (the Kepler solver's start) and L-525 (hold the bad data); the hold's brief is `COORD_L525_hold_brief_20261111.md`.
 - The caps: `DOCUMENT_CAPS.md`; L-522 (document caps); its brief
   `COORD_L522_step1_caps_brief_20261110.md` and the review beside it.
 - The tree: L-515 (one nested tree); `COORD_L515_step2b_brief_20261109.md`

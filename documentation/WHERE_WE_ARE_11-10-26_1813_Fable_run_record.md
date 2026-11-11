@@ -609,7 +609,7 @@ Paste this to the Code session:
 
 ========================================
 
-**Code:**
+**OPEN: 11-11-26 1109: Opus: Code: Kepler solver convergence bug
 
 Going ahead with Part 2 as the coordinator set it: the five extra lines in the Provenance rule, "Tony's ruling", and pointers left where the headless recipe and `add_arrival` stood. First I'm checking the old file's encoding, then building the three files from it with a script.
 
@@ -2035,7 +2035,7 @@ Orrery, not yet committed:
 3. Tomorrow, read whether the night's run on GitHub was green.
 
 **Tony-action rollup:**
-- (do) Commit and push the orrery. The website is already pushed. -- 
+- (do) Commit and push the orrery. The website is already pushed. -- 51666edaf8f5e1507feea8368f78c267ba40654b
 - (do) The phone look at the frozen date line with `?freeze=1`, upright and sideways.
 - (do) Read the night's run on GitHub. Green closes the night's half of L-524 (the Kepler solver's start).
 
@@ -2083,8 +2083,8 @@ Website: nothing new this turn. Everything from the session is already in b248da
 **Token count:** no /cost figure prints here, and I can't see the context size; please read it off the app. This turn read the three referenced ledger items' openings and wrote about 2.5 KB.
 
 **Your run order:**
-1. In GitHub Desktop, open the orrery and commit the ledger and Where We Are.
-2. Press Pull origin to take in the bot's one-file update, then Push origin.
+1. In GitHub Desktop, open the orrery and commit the ledger and Where We Are. -- 51666edaf8f5e1507feea8368f78c267ba40654b
+2. Press Pull origin to take in the bot's one-file update, then Push origin. -- done
 3. On your phone, open the Solar System room with `?freeze=1`, upright and sideways.
 4. Tomorrow, read whether the night's run on GitHub was green.
 
@@ -2100,3 +2100,116 @@ Website: nothing new this turn. Everything from the session is already in b248da
 - The hold becomes Part 3 of this session, built on your existing rulings.
 - One design point is still open and comes back to you in the proposal: where you will see a HELD line without looking for it.
 - The site stays frozen until your Daily Run and second push, which do not wait on any of this.
+
+===================
+
+**Fable:**
+
+The order did no harm. The site is unfrozen, and everything built so far is pushed. I confirmed it from GitHub.
+
+- **The live site has the fix.** The cache built at 12:41 your time trusts its data for 88 days either side of today. Halley's test is back to 0.0000025 degrees off JPL, the same as on Nov 9.
+- **The date line fix is in the same push.** It went out before your phone look, so the live site already has it.
+- **The records are pushed.** The solver fault is in the ledger as L-524, and your ruling on holding a bad body is L-525, marked as ruled and not built.
+
+**What has not happened yet.** The block that starts Part 3, the build of the hold, was not pasted. The Code session received my earlier block, the one that only asked it to record your ruling, and it did that. So the hold is recorded and unbuilt.
+
+If you still want it built in this session, paste the Part 3 block from my message of 11:45 with this line added on top:
+
+> The ruling is already recorded as L-525; build on that item, do not open another.
+
+**Run order**
+- *(do)* Paste the Part 3 block with that line, if the Code session is still open. If it has closed, tell me and I will write the hold up as its own short brief.
+- *(do)* Bring me its proposal before it builds.
+- *(do)* On your phone, open the Solar System room with `?freeze=1` added to the address, upright and sideways, to see the two-line date.
+- *(do)* Tomorrow, read whether tonight's run on GitHub was green.
+
+**Where this leaves us**
+- The orbit maths fault is fixed and live. Tonight's run on GitHub is the remaining test of it.
+- The hold is ruled and recorded. Whether it is built today depends only on pasting the Part 3 block.
+- Where We Are is at its cap of 130 lines again, so the next session to add a line must take one out.
+- Mars follows, on the Opus coordinator's track, once the night is green.
+
+======================================================
+
+**Code:**
+
+I'm stopping before Part 3, as the brief allows: my context is too full to do this build well, so it should get its own session. This conversation has already been compacted once, and Parts 1 and 2 filled most of what remains. Part 3 needs fresh, full reads of:
+- the builder's trust and swap code;
+- the night's report;
+- the page;
+- the 944-line builder skill, which is at its cap, so something has to move out of it before the version bump.
+
+A second compaction halfway through is where details get lost. I'll only record your 11:45 word on L-525, so the next session starts from it.
+
+I stopped before building Part 3, as the brief allows: this session's context is too full to build it well. It should be its own session. I built nothing for it and opened no new item.
+
+**Why I stopped.**
+- This session has already been compacted once, and Parts 1 and 2 used most of what was left.
+- Building the hold means reading these afresh and in full:
+  - the builder's trust and cache-swap code;
+  - the night run's report;
+  - the page;
+  - the 944-line builder skill, which is at its cap, so something must move out of it before the version bump.
+- A second compaction partway through is how a build like this loses detail.
+
+**What I added to L-525 (hold the bad data), the existing item:**
+- Your word of 11:45: "can we do this with part 2? That would complete the fix."
+- The coordinator's settled points: the held body is served from its last good data with a note saying since when and why, the build goes on, a hold is not red, and a loud HELD line runs every night until a ledger item names the body.
+- The open questions for the first report: what "fails" means in numbers, a body with no good data to fall back on, and how the page learns of a hold. The sentence in a held body's box is yours to choose.
+- Notes from what this session read in the builder, so the next session starts further along.
+
+**One hazard I found for that session.** The cache keeps only one earlier copy of the data, the `.prev` folder. So a held body's "last good" data disappears after one more nightly swap, unless the build keeps it somewhere of its own. That is now written on L-525, along with the caution in the brief. The new "Kepler solver" check guards against a repeat of this week's maths fault. It does not cover every kind of fault in the maths.
+
+**Where this leaves us:**
+- Parts 1 and 2 are done and live. The hold is recorded on L-525, ready for its own session.
+- The next real test is still tonight's run on GitHub.
+
+One final thought: this week a hold alone would have kept Halley drawn wrong without anyone noticing. The next session should settle where you will see the HELD line without looking for it before anything else, not leave it to the end.
+
+**Files changed**
+
+Orrery, not yet committed:
+- ok `LEDGER_CONSOLIDATED.md` (6 edits in all this session; this turn, 1 on L-525; the index rebuilt)
+- ok `documentation/WHERE_WE_ARE.md` (13 edits in all; none this turn)
+- Yours, untouched: `WHERE_WE_ARE_11-10-26_1813_Fable_run_record.md` and `project_instructions_v3_138.md`.
+
+Website: nothing new this turn. It still matches your push, b248da5.
+
+**Token count:** no /cost figure prints here, and I can't see the context size; please read it off the app. This turn read nothing new and wrote about 2.5 KB to the ledger.
+
+**Your run order:**
+1. In GitHub Desktop, open the orrery and commit the ledger and Where We Are.
+2. Press Pull origin to take in the bot's one-file update, then Push origin.
+3. Ask the coordinator for Part 3's prompt, built on L-525 (hold the bad data).
+
+**Tony-action rollup:**
+- (do) Commit the orrery, Pull origin, then Push origin.
+- (do) The phone look at the frozen date line with `?freeze=1`, upright and sideways.
+- (do) Read tonight's GitHub run.
+- (do) Open Part 3 as its own session, from the coordinator's prompt.
+
+==============================================
+
+**Fable:**
+
+Everything is in place for the hold's session, with one step to do first: your website folder has not pulled the night's commit yet.
+
+**The state, checked just now.**
+- **Orrery on GitHub** is at your push of 13:07. Your folder has three files of mine waiting to commit: the ledger, Where We Are, and the hold's brief. They are unchanged since I wrote them.
+- **Website on GitHub** has one commit newer than your folder: the night's run of 13:44, which was green. Your folder still holds last night's record, so it needs Pull origin before a Code session opens there.
+- **The run record you attached** ends where the Code session stopped before the hold. Our exchange since then is recorded on the ledger item for the hold (L-525): your account of how you found the fault, and your answer about pull titles.
+
+**Run order**
+1. *(do)* Orrery, in GitHub Desktop: commit and push. The change list should show `LEDGER_CONSOLIDATED.md`, `documentation/WHERE_WE_ARE.md` and `documentation/COORD_L525_hold_brief_20261111.md`, plus your own run record copy and `project_instructions_v3_138.md` if you want them in. -- 
+2. *(do)* Website, in GitHub Desktop: Fetch origin, then Pull origin. It brings in the night's commit. You should have no changes of your own waiting there.
+3. *(do)* Open Claude Code through the `python_work` folder with this prompt:
+   "Gallery repository, with the records and one skill in the orrery. L-525 (hold the bad data). The brief is documentation/COORD_L525_hold_brief_20261111.md in the orrery folder."
+4. *(do)* It asks one thing first: whether it may edit the builder skill and the nightly job's file. The answer is yes.
+5. *(do)* Its first report is a proposal with no file changed. Bring it to me before you give the go-ahead.
+6. *(do)* On your phone, when convenient: open the Solar System room with `?freeze=1` on the address, upright and sideways, to see the two-line date.
+7. *(do)* Tell the Opus coordinator that the solver fix is live and the hold goes next, ahead of Mars.
+
+**Where this leaves us**
+- The orbit maths fix is live and confirmed by a green night on GitHub.
+- The hold is ready to build in a fresh Code session, from a brief that carries your rulings in your words.
+- After the hold, Mars is next on the Opus coordinator's track, and this session returns to the documents: step 3, the protocol's reduction.

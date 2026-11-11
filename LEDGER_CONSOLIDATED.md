@@ -1637,6 +1637,56 @@ as an archive of the prioritization thinking -- no cleanup on close.
   nothing), and where the report line goes, are for the build's design.
 - **Not built in the session that recorded it** (Tony's word with the
   ruling).
+- **Tony, 2026-11-11, 11:45,** asked that it ride with L-524: "can we
+  do this with part 2? That would complete the fix." The coordinator's
+  Part 3 settled, by L-485 and L-508 and this morning's rulings: a body
+  whose accuracy test fails is HELD, its entry served from the last good
+  generation with a hold block (since, cause), and the build goes on;
+  the site's window is worked out as before, with the held body's last
+  good span; a hold is not red, and the night and the Daily Run print a
+  loud HELD line by name every run until a ledger item names the body,
+  then that item's handle; a held body is tested again every run and the
+  hold ends when it passes. Left to the builder's method report: "fails"
+  in numbers (the coordinator suggests a sample over the builder's 0.5
+  degree tolerance), which bodies that rule would have held in the run
+  records the cache keeps, a body with no good generation, how the page
+  learns of a hold, and where Tony sees a HELD line without looking for
+  it. Tony's: the sentence in a held body's box.
+- **Handed on, 2026-11-11:** the L-524 session stopped before Part 3,
+  its context too full to build it well, by the brief's own leave.
+  Notes for the session that takes it (Claude, from L-524's reading of
+  the builder at gallery ebb8e623): the trust measurement is
+  `measure_trust` and `_two_body_position` in
+  `tools/gallery_cache_builder.py` (samples at the elements' date plus
+  and minus up to 30 days, `TRUST_TOLERANCE_DEG` 0.5,
+  `TRUST_GUARD_K` 2); an exception there is a WARN that gives the body
+  a null window, and one null window makes the site's whole window
+  null; the window and its "[window]" print follow a little over 900
+  lines on. THE HAZARD TO DESIGN FOR: the cache keeps one earlier
+  generation (`data/solar-system.prev`), so "the last good generation"
+  is gone after one more swap unless a held body's last good entry is
+  kept apart. And the brief's caution, made concrete by L-524: a fault
+  in the maths, not the data, would be held night after night while
+  drawn wrong; the gallery run's "Kepler solver" row now guards that
+  one class.
+- **Where Tony sees a hold, RULED 2026-11-11, afternoon,** in the
+  coordinating session (Claude Fable 5.2). The coordinator first
+  proposed that a new hold turn the night red after its data is
+  committed. Tony, 14:48, on how he found L-524's fault: "I noticed
+  that the orrery pulled twice but the website did not. So I looked at
+  the action page and saw the fail, twice. That was the signal." So the
+  red mark alone had not reached him; the missing commit had, and a
+  hold that commits would remove it. The coordinator then proposed the
+  night's commit title, and asked whether he reads the titles a pull
+  brings in. Tony, 15:43: "Yes I do look at pull titles because they
+  are the only ones I don't do. And also I look for them." So: a hold
+  is not red; the title of the night's commit names every held body,
+  and the Daily Run's summary prints the same line, every run while
+  the hold lasts. Also settled as method by the coordinator: the
+  site's window is set by the bodies that passed, and a held body
+  keeps its own last good span, as a moon does. The brief:
+  `documentation/COORD_L525_hold_brief_20261111.md`, one Code session
+  through the door, before Mars by Tony's word of 11:45.
 **Gap:** the design and build, in a gallery session that takes the
 nightly builder (gallery-cache-builder): one failed body held and
 reported, the served window set from the bodies that passed; and a
