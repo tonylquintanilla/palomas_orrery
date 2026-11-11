@@ -6,9 +6,16 @@ fires_when: Ledger edits, ledger_index.py, RICE, handoffs, manifests, atlas, dep
 
 # Ledger and Session Records
 
-Read this file in 4 parts: lines 1-199, 200-454, 455-630, 631-807.
+Read this file in 4 parts: lines 1-198, 199-454, 455-630, 631-807.
 
-Skill version: 1.22 | 2026-10-22, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.23 | 2026-11-10, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ ea43f2a1. v1.23 (L-522, document caps), under Where We
+Are: the page's 130-line check is built, as the run's "Document caps"
+row over `DOCUMENT_CAPS.md`, its date half left on L-396; and a turn's
+close may add one line, "One final thought:", a concern nobody asked
+for (Tony, 2026-11-10, 16:11: "Yes but at the 'where this leaves us'
+part.").
+Earlier: 1.22 | 2026-10-22, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ b995472a. v1.22 (L-469) gives Where We Are a DEFERRED
 section, between Settled and Signals: one line per item waiting behind
 the current work, its handle with its label, the date it was deferred
@@ -27,18 +34,10 @@ in use onto the seven. Riding this version: Where We Are's section and
 the RICE bullet name the road as the order's home. Tony, 2026-10-13:
 "master plan: strategic - where we are: tactical - handoffs: orders
 and reports - ledger: logistics."
-Earlier: 1.20 | 2026-10-11, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 1bbd9fe1. v1.20 (L-351, L-421), on Tony's request: every
-handoff, brief and design record names his two local repository folders
-in its header, beside the GitHub line, so a session linked to his
-computer saves its patch where he runs it (Anchor Requirement, Handoff
-Structure, Tony's Local Folders). Tony, 2026-10-10: "since we are using
-cowork, the location of the local files should be included in the
-handoff header along with the github info."
 Older entries are in documentation/SKILL_HISTORIES.md, moved there
 on 2026-10-05 (L-418), 2026-10-07 (L-422), 2026-10-08 (L-418),
-2026-10-10 (L-395), 2026-10-11 (L-421), 2026-10-14 (L-442) and
-2026-10-22 (L-469).
+2026-10-10 (L-395), 2026-10-11 (L-421), 2026-10-14 (L-442),
+2026-10-22 (L-469) and 2026-11-10 (L-522).
 
 Note: READING the ledger at session start is resident Part-1 behavior,
 not this skill's job. This skill carries the maintenance mechanics.
@@ -298,16 +297,17 @@ written for the work, and they move only at design builds.
   reference register of this skill.
 - At the end of a TURN that changes the picture, Claude's reply closes
   with two or three bullets under "Where this leaves us", in the page's
-  own words. The page itself moves at session end.
-- THE CHECK, recorded on L-396 and not yet built (v1.17 form): the
-  orrery maintenance run fails when the page's "Last updated" date is
-  older than the ledger's newest header stamp, OR when more than 130
-  lines stand above the run-record marker. It targets the exact
-  filename `WHERE_WE_ARE.md`, so a timestamped copy cannot stand in for
-  the page; the doc indexer knows a copy by its `_run_record` ending.
-  An unchecked store drifts, as the plan's two companions did for a
-  month (L-333, L-362). Until the check is built, this rule is the only
-  thing keeping the page current and short.
+  own words. The page itself moves at session end. After them a session
+  may add one line, "One final thought:", a criticism or a concern
+  nobody asked for, saying what it would do differently: optional,
+  absent most days, never invented to fill it (Tony, 2026-11-10, L-522).
+- THE CHECK, half built (L-522). The 130-line half is the run's row
+  "Document caps" (`doc_index.py --caps`, this page's row on
+  `DOCUMENT_CAPS.md`): red, by name, when more than 130 lines stand
+  above the run-record marker, read from the exact filename so a
+  timestamped copy cannot stand in. The date half (the page's date
+  against the ledger's newest header stamp) stays on L-396: step 4 of
+  L-522 removes those stamps, so it waits for what replaces them.
 
 ## Ledger Block Format
 

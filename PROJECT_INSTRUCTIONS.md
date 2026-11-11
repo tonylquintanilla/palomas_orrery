@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.136 | November 10, 2026
+Tony Quintanilla, PE | Claude | v3.137 | November 10, 2026
 
-Cut from b3ce81f8 at https://github.com/tonylquintanilla/palomas_orrery
+Cut from ea43f2a1 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -529,7 +529,7 @@ earth-system-pipeline        1.2  KMZ layers, ERA5/ERDDAP/IPC, scenarios, ANY
                                   human-cost visualization or text
 gallery-pipeline             1.2  Gallery Studio, json_converter, index.html
                                   viewer, gallery cards
-ledger-and-session-records   1.22 Ledger edits, ledger_index.py, RICE,
+ledger-and-session-records   1.23 Ledger edits, ledger_index.py, RICE,
                                   handoffs, manifests, atlas, dep_trace,
                                   WHERE_WE_ARE.md at every session's end
 gallery-assembler            1.4  render_orbits.py, resolver.py,
@@ -1344,6 +1344,45 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.137 (November 10, 2026, night): No rule changed in this document.
+ONE skill bump: ledger-and-session-records 1.22 -> 1.23 (L-522,
+document caps, step 1), by the records skill's binding rule, Tony's
+go-ahead of that evening ("Yes, go ahead"). THE CAPS ON ONE PAGE, AND
+A CHECK THAT NAMES WHAT IS OVER.
+
+WHAT PROMPTED IT. The Claude Code session of Nov 10, night (Claude Opus
+5.5), through the python_work door, built on orrery ea43f2a1 and
+gallery 2dec9fc5, from Tony's prompt and
+documentation/COORD_L522_step1_caps_brief_20261110.md, in three parts
+with a report and his go-ahead after each.
+
+WHAT CHANGED. A new root page, DOCUMENT_CAPS.md: the three rules (each
+working document has a cap in lines and a home for its old lines; a
+session that adds to one at its cap moves something out first; only
+Tony changes a cap) and the table of caps, each set at the document's
+size that day. The maintenance run's new row "Document caps"
+(doc_index.py --caps) prints every row and is red, by name, on a
+document over its cap, a file not found, a skill with no row, or a row
+it cannot read. ledger-and-session-records: under Where We Are, THE
+CHECK's 130-line half is that row, its date half left on L-396; and a
+turn's close may add one line, "One final thought:", a concern nobody
+asked for (Tony, 16:11). Its oldest of four version entries (1.20)
+moved to documentation/SKILL_HISTORIES.md by the three-entry rule, so
+the skill ends at the 807 lines it began with.
+
+THE OBLIGATION TRAVELS. This session read ledger-and-session-records
+1.22 from the repo's copy, as a Code session does, as the manifest
+expected. Tony reinstalls it (Settings > Skills) and pastes this
+version into the Project's instructions on claude.ai; the next session
+that loads it from the account confirms its copy reads 1.23 before work
+that fires it.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.134 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.136 (November 10, 2026): No rule changed in this document. TWO
 skill bumps, one each, by the records skill's binding rule, Tony's
 go-ahead of that morning ("Yes, bump both"): interactive-exhibit 1.39 ->
@@ -1442,53 +1481,6 @@ the account confirms its copy reads 1.39 before work that fires it.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.132 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.134 (November 9, 2026): No rule changed in this document. ONE
-skill bump: interactive-exhibit 1.37 -> 1.38 (L-519, Featured's
-rethink). SCENES: A SHARED LINK KEPT AS A CARD, IN THE TREE AND ON
-FEATURED.
-
-WHAT PROMPTED IT. The Claude Code session of Nov 9 (Claude Opus 5.5),
-through the python_work door, built on orrery c7cf3490 (Tony's ledger
-commit of that morning, not yet pushed) and gallery 6a153716, from
-Tony's prompt of that morning and L-519's design talk of Nov 9; his
-go-ahead to the window and the group described: "Go ahead".
-
-WHAT CHANGED. interactive-exhibit: a new bullet under The Solar System
-room's drawer, Scenes: a card in gallery_metadata.json marked "scene":
-true, its live address a shared link with no minute; made by the
-gallery editor's New Scene window (tools/scene_card.py, the gallery
-run's new Scene cards row), which takes the website's address and the
-minute off the pasted link, names any row it cannot find, refuses a
-link already on a card and suggests a name; listed in one fold, Scenes,
-under the Sun's row ahead of its saved pictures, a tap opening the
-link at the visitor's now and Back returning to the room at Scenes
-(PictureFolds.returnFor); with Featured on, also a card on the lobby's
-Featured. A fold now has an id of its own; Find counts a scene apart.
-Checked by the Picture folds row and the walk's section 30. And the
-shared scene link's paragraph as the repo carried it after Tony's phone
-look ("Tap to update."). Its oldest of four version entries (1.35)
-moved to documentation/SKILL_HISTORIES.md, by the three-entry rule.
-Every sentence was read from the gallery's code with this session's
-edits before it was written.
-
-THE OBLIGATION TRAVELS. This session loaded interactive-exhibit from
-the account and it read 1.37, as the manifest expected, discharging
-v3.133's obligation -- but it was 1.37's first cut: the repo's copy had
-taken Tony's phone look under the same number, so the account's copy
-still said "as shared". 1.38 carries the repo's words. It read
-gallery-pipeline 1.2, safe-file-editing 1.14 and
-ledger-and-session-records 1.22 in the parts the work needed. Tony
-reinstalls interactive-exhibit (Settings > Skills) and pastes this
-version into the Project's instructions on claude.ai; the next session
-that loads it from the account confirms its copy reads 1.38 before work
-that fires it.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.131 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

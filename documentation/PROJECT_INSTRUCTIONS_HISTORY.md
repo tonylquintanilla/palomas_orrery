@@ -4638,6 +4638,56 @@ resident.
 (Moved down from the resident protocol on 2026-11-10, when v3.136 made
 a fourth entry.)
 
+v3.134 (November 9, 2026): No rule changed in this document. ONE
+skill bump: interactive-exhibit 1.37 -> 1.38 (L-519, Featured's
+rethink). SCENES: A SHARED LINK KEPT AS A CARD, IN THE TREE AND ON
+FEATURED.
+
+WHAT PROMPTED IT. The Claude Code session of Nov 9 (Claude Opus 5.5),
+through the python_work door, built on orrery c7cf3490 (Tony's ledger
+commit of that morning, not yet pushed) and gallery 6a153716, from
+Tony's prompt of that morning and L-519's design talk of Nov 9; his
+go-ahead to the window and the group described: "Go ahead".
+
+WHAT CHANGED. interactive-exhibit: a new bullet under The Solar System
+room's drawer, Scenes: a card in gallery_metadata.json marked "scene":
+true, its live address a shared link with no minute; made by the
+gallery editor's New Scene window (tools/scene_card.py, the gallery
+run's new Scene cards row), which takes the website's address and the
+minute off the pasted link, names any row it cannot find, refuses a
+link already on a card and suggests a name; listed in one fold, Scenes,
+under the Sun's row ahead of its saved pictures, a tap opening the
+link at the visitor's now and Back returning to the room at Scenes
+(PictureFolds.returnFor); with Featured on, also a card on the lobby's
+Featured. A fold now has an id of its own; Find counts a scene apart.
+Checked by the Picture folds row and the walk's section 30. And the
+shared scene link's paragraph as the repo carried it after Tony's phone
+look ("Tap to update."). Its oldest of four version entries (1.35)
+moved to documentation/SKILL_HISTORIES.md, by the three-entry rule.
+Every sentence was read from the gallery's code with this session's
+edits before it was written.
+
+THE OBLIGATION TRAVELS. This session loaded interactive-exhibit from
+the account and it read 1.37, as the manifest expected, discharging
+v3.133's obligation -- but it was 1.37's first cut: the repo's copy had
+taken Tony's phone look under the same number, so the account's copy
+still said "as shared". 1.38 carries the repo's words. It read
+gallery-pipeline 1.2, safe-file-editing 1.14 and
+ledger-and-session-records 1.22 in the parts the work needed. Tony
+reinstalls interactive-exhibit (Settings > Skills) and pastes this
+version into the Project's instructions on claude.ai; the next session
+that loads it from the account confirms its copy reads 1.38 before work
+that fires it.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.131 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-11-10, night, when
+v3.137 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

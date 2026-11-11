@@ -192,3 +192,93 @@ The copy was deleted afterwards.
 Where this leaves us:
 - The caps page and its check are in place and green.
 - Parts 2 and 3 are not started, and nothing is committed.
+
+=================================================================
+
+**Fable:**
+
+Yes, commit and continue. Part 1 does what the brief asked.
+
+I checked it myself, not only from the report.
+
+- I read `DOCUMENT_CAPS.md` from your computer. It is 58 lines, states the three rules in plain words, and its table has the 19 rows the report names.
+- I ran the new check on a copy here. It printed all 19 rows and passed, with 18 documents within their caps, the 12 skills all listed, and the ledger shown as having no cap yet.
+- I added three lines to the protocol on that copy. The check went red and named it: "over its cap: PROJECT_INSTRUCTIONS.md (1498 lines, cap 1495)".
+
+The README's cap going from 663 to 664 is not a session raising a cap. The brief says each cap is set at the document's size at the end of this session, and the new page added one row to the README's table.
+
+**Run order**
+1. *(do)* Commit and push the orrery now, as a checkpoint for Part 1. -- 2a7efd606be782650910ed675d8e40a9791c860b
+2. *(do)* Tell the Code session to go on to Part 2.
+3. *(do)* At the session's close, commit and push the website for its one file, then the orrery.
+
+**Where this leaves us**
+- The page of caps and its check are in place, green, and confirmed by a second run of mine.
+- Part 2 (the rule in the Code door and the records skill, plus "One final thought") and Part 3 (the Code doors in both folders) are still to build.
+- At the close the session resets the caps for the files those parts change, so expect the protocol's and the records skill's numbers to move once more.
+
+=======================================
+
+**Code:**
+
+Now the records skill edits, from the bottom of the file up.
+
+Records skill at 807 lines, its starting size. Now the CLAUDE.md lines.
+
+Now the protocol's version entry, and the oldest of four entries moved down to the history file, in one script that checks every anchor before it writes.
+
+Part 2 is written. The cap rule now sits where a session will read it, and the records skill and the protocol are updated under the skill-bump rule.
+
+**CLAUDE.md, the orrery's door for Code sessions: two bullets, 100 to 105 lines.**
+- In "What a Code session writes": before adding to a document listed in DOCUMENT_CAPS.md, read its row. At its cap, move something out first, to its home. A session never raises a cap.
+- In "How to report to Tony": a report may add one line, "One final thought:", after "Where this leaves us". It is for a concern nobody asked for, it is optional, and it is never invented to fill the slot.
+
+**The records skill (ledger-and-session-records), 1.22 to 1.23.**
+- The bullet that said the check on Where We Are was "not yet built" now says what is built. The run's "Document caps" row goes red when more than 130 lines stand above the run-record marker.
+- The date half of that check stays on L-396 (Where We Are's check). It compares the page's date with the ledger's header stamps, and step 4 removes those stamps, so it waits for whatever replaces them.
+- The "Where this leaves us" bullet gains your 16:11 ruling on "One final thought".
+- The oldest of its four version entries (1.20) moved, word for word, to the file of skill histories. That made the room: the skill ends at 807 lines, the same as it began.
+
+**The protocol, v3.136 to v3.137.**
+- A version entry says what changed and why. It also says you reinstall the skill and paste this version into the Project's instructions.
+- v3.134, now the oldest of four, moved down to the protocol's history file.
+- The header stamp moves to ea43f2a1.
+- The protocol is now 1,487 lines, 8 fewer than before, because the moved entry was longer than the new one.
+- The skill-manifest tool rewrote the protocol's skill table to read 1.23, and its check passes.
+
+All ten edited files are plain ASCII with LF line endings.
+
+**Not yet done.** CLAUDE.md is now 105 lines against its starting cap of 100, so the caps check would show it red today. That's expected: I reset each cap at the close to the document's final size, once Part 3 has edited the door again.
+
+Where this leaves us:
+- The rule is in the door and the records skill, and the protocol records the bump.
+- Part 3 (the doors) is next. Nothing is committed.
+
+========================================================
+
+Yes, commit and push the orrery now, as a checkpoint for Part 2. You don't need to touch the website: this session hasn't changed anything there yet.
+
+**What the orrery commit should show (7 files):**
+- `CLAUDE.md`: the cap rule and the "One final thought" line.
+- `PROJECT_INSTRUCTIONS.md`: v3.137 and the skill table at 1.23.
+- `documentation/PROJECT_INSTRUCTIONS_HISTORY.md`: v3.134 moved down.
+- `documentation/SKILL_HISTORIES.md`: the records skill's 1.20 entry moved down.
+- `skills/ledger-and-session-records/SKILL.md`: 1.23.
+- `documentation/WHERE_WE_ARE_11-10-26_1813_Fable_run_record.md`: your own run record.
+
+The skill and the protocol go in the same commit, as the bump rule requires. One row of the maintenance run reads red until the close: CLAUDE.md is at 105 lines against a starting cap of 100. I reset that cap at the end, after Part 3 edits the door again.
+
+**The website's nightly run: here's what I could read.**
+- **Both of today's failures are in the same step.** It's the one that runs the night itself (`daily_run.py --night`), and it stopped with an error, at 16:26 and 19:48 UTC. GitHub ran both hours late, as it often does.
+- **The last clean night was Nov 9.** It ran on the website as it stood before step 2b was pushed (66c9f698). Both red nights ran after it, on cea21af1 and then e0e94b85.
+- **Nothing on the live site was harmed.** A red night commits nothing, so the website keeps serving the Nov 9 data.
+- **The orrery's own nightly run passed today.**
+- **I couldn't read why it failed.** GitHub shows a run's log only to someone signed in, and its last line ("NIGHT RUN: RED -- ...") names every reason. I didn't try to reproduce it here, because that would mean running the website's night against its folder.
+- **It isn't caused by this session.** Both failures came before I touched anything, and I've changed nothing in the website folder.
+
+The website and step 2b are on the other coordinator's track, the Opus session. The quickest route is to give that session the log's last line. You'll find it in the repository's Actions tab, under "Nightly run", in the step "The night".
+
+Where this leaves us:
+- Parts 1 and 2 are done. Part 1 is pushed, and Part 2 is ready for your commit.
+- The website's night has been red since step 2b, the live data is unharmed, and the cause is for the website's session to read.
+- Part 3 (the doors) is next.

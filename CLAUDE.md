@@ -60,6 +60,9 @@ disagree, stop and say so (the protocol's Stale Skill = Stop gate).
   ..\tonyquintanilla.github.io. An orrery session reads it (the
   maintenance run does) and does not edit it unless the job says so.
 - ASCII only, LF line endings: the safe-file-editing skill.
+- Before adding to a document listed in DOCUMENT_CAPS.md, read its row;
+  at its cap, move something out first, to its home. A session never
+  raises a cap (L-522).
 
 ## At the end of a session
 
@@ -94,6 +97,8 @@ protocol's Register Rule, Part 2). So every report to him:
 - Puts one question to him per report. A finding, a
   recommendation, an uncertainty and a question are four things;
   send the one that is due and put the rest in the records.
+- May add, after "Where this leaves us", one line, "One final
+  thought:", a concern nobody asked for; optional, never invented.
 - Ends with the file list for his run record, his run order, and
   the Tony-action rollup, in that order.
 Tony, Oct 27, 2026: "Code is difficult to follow and technical."

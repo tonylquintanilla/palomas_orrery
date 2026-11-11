@@ -1240,6 +1240,17 @@ folders on his machine, so a session linked to it saves a patch where
 he runs it. Tony, 2026-10-10: "palomas_orrery_for_github is the repo
 folder."
 
+The skill's v1.20 entry, moved here word for word on 2026-11-10 when
+v1.23 made a fourth entry (L-522):
+Earlier: 1.20 | 2026-10-11, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 1bbd9fe1. v1.20 (L-351, L-421), on Tony's request: every
+handoff, brief and design record names his two local repository folders
+in its header, beside the GitHub line, so a session linked to his
+computer saves its patch where he runs it (Anchor Requirement, Handoff
+Structure, Tony's Local Folders). Tony, 2026-10-10: "since we are using
+cowork, the location of the local files should be included in the
+handoff header along with the github info."
+
 ## gallery-cache-builder
 
 v1.4 adds Recovery from a failed swap: discard and re-run -- Tony's
