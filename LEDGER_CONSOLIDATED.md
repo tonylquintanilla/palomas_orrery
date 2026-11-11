@@ -1154,7 +1154,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-470 | Orrery entries the website cannot serve as they stand (orrery, objects) | OPEN | -- | 2026-11-02 |
 | ! | L-483 | A room for C/2025 K1 and its pieces, the first comet room (gallery, exhibits) | OPEN | -- | 2026-10-28 |
 | ! | L-484 | The website and the orrery agree on every object both draw, or the difference is written down (orrery + gallery, objects; method for interactive-exhibit) | OPEN | -- | 2026-11-05 |
-| ! | L-485 | A nightly unattended run of the routines (orrery + gallery, maintenance) | OPEN | -- | 2026-11-06 |
+| ! | L-485 | A nightly unattended run of the routines (orrery + gallery, maintenance) | OPEN | -- | 2026-11-10 |
 | ! | L-486 | A view carried into a room (gallery, the rooms) | OPEN | -- | 2026-10-26 |
 | ! | L-487 | Each body's description in the i panel, one bullet per sentence (gallery, the i panel) | OPEN | -- | 2026-10-25 |
 | ! | L-488 | Solar features beside a spacecraft in the Solar System room, such as the heliopause (gallery, the rooms) | OPEN | -- | 2026-10-26 |
@@ -1859,7 +1859,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
     `daily_run.py --night`), its first nights after L-515 step 2b's push
     (cea21af1, then e0e94b85); the last clean night ran at 66c9f698. A
     red night commits nothing. Its log needs a GitHub sign-in to read;
-    told Tony, for the build track's session.
+    told Tony, for the build track's session. Read the same night: the
+    cause was JPL's, for one afternoon, on L-485 (a nightly run).
   - OWED, a consequence: the Mars session (L-514) is the first that
     must move old lines out of interactive-exhibit, at its cap of 2440,
     before adding; its home for now is SKILL_HISTORIES.md, and its
@@ -1869,11 +1870,12 @@ for one ledger item. The harness (57 of the 176 modules are developer
 tools) was measured, not reviewed.
 **Gap:** steps 2 to 6 (step 1 built 2026-11-10, night); step 3's talk
 is held, its draft is not written.
-**Tony-action (do)**, from step 1: replace
-`C:\Users\tonyq\OneDrive\Desktop\python_work\CLAUDE.md` with a copy of
-`documentation\python_work_door\python_work_CLAUDE.md`, renamed
-CLAUDE.md; reinstall ledger-and-session-records 1.23 (Settings >
-Skills); paste protocol v3.137 into the Project's instructions.
+Step 1's three Tony-actions are done, by his run record
+`WHERE_WE_ARE_11-10-26_1813_Fable_run_record.md`: the python_work door
+replaced ("done"), ledger-and-session-records 1.23 reinstalled ("done. no
+line change."), protocol v3.137 pasted ("done"). The coordinating session
+of Nov 10, night, read the account's copy of the records skill on disk as
+1.23, byte for byte the repo's at d65309a8.
 **Tony-action (decide)**, on step 3's draft: the stale-skill gate's new
 wording, and the gates for the stores in use.
 **Ref:** the review and the design record named above; L-199, L-215,
@@ -3095,18 +3097,17 @@ or the text box.
     received note on Reset's frame); gallery-assembler 1.3 -> 1.4 (No
     composition between frames says which kind is retired; it now has a
     read plan); protocol v3.136; the manifest regenerated.
-**Gap:** Tony's look at the phone-look fixes below; whether Earth's fold
-draws the Sun direction line again (the Tony-action below); then the
-checkpoint on the one picture and step 3, L-514 (the Mars room), with
-ruling 11's 48-hour positions. Ruling 15's picture B (measured from the
-centre) waits for the date span, with the encounters (step 4) and the date
-picker. The leftovers of 2b, above, leftover (2) narrowed below. The lobby
-moved to L-517 (the lobby for a first-time phone visitor).
-**Tony-action (do):** commit and push the website, then the orrery (the
-records and the dashboard's one line).
-**Tony-action (decide):** whether Earth's fold in the one picture draws the
-Sun direction line again; and his look at the four fixes and the new
-sentence below.
+**Gap:** step 2b passed Tony's look on 2026-11-10, night (below). Next,
+step 3, L-514 (the Mars room), with ruling 11's 48-hour positions; whether
+the exhibit skill's split (L-522, document caps) goes first is Tony's
+order. Ruling 15's picture B (measured from the centre) waits for the date
+span, with the encounters (step 4) and the date picker. The leftovers of
+2b, above, leftover (2) narrowed below. The lobby moved to L-517 (the
+lobby for a first-time phone visitor). The two Tony-actions once here are
+done: his pushes (gallery e0e94b85 and 2dec9fc5, orrery d0390890 and
+aa4b6184), and his look and ruling, below.
+**Tony-action (decide):** which goes first, Mars (L-514) or the exhibit
+skill's split (L-522).
 - **The dashboard's buttons, Nov 10, on Tony's "Yes please add the
   buttons"**: the orrery maintenance run had been red on Dashboard parity --
   four gallery run steps with no button, Compose children and View centre
@@ -3180,6 +3181,32 @@ sentence below.
     misses Find bringing a fold, the frame after a tick in a centred fold,
     the trail following it, the orbit through its body, and the sentence's
     new words; for its next version (this session bumped it once).
+- **Tony's look at the fixes, 2026-11-10, night**, on the live site at
+  gallery 2dec9fc5 and then e80663de, from the coordinating session's
+  list (Claude Opus 5.5), his answers in his run record
+  `WHERE_WE_ARE_11-10-26_1211_run_record.md`, below its second rule:
+  - PASSED: Find brings a planet's fold ("yes", for Earth, Jupiter,
+    Saturn and Pluto, and "yes" to "crust" not found before the fold is
+    opened); a tick in a centred fold frames the fold ("yes", Earth's bow
+    shock, Io, Titan); the trail follows the tick ("yes"); the orbit runs
+    through its planet ("yes", Jupiter, then Saturn and Earth); Charon's
+    sentence ("yes ... now charon is correct from the new daily"); the
+    date on JPL's clock, not UTC ("no problems"). Io: "no variation for
+    this fetch" -- read by the coordinator as Io being inside its checked
+    span at the time he looked, the cache then freshly built.
+  - RULED, the Sun direction line in Earth's fold: "leave it out". It is
+    not drawn in the one picture; the day-night shading and the Sun at
+    its true place show the direction.
+  - FOUND, no link in the i panel for Io, Titan and Charon ("Io does not
+    have a link in the info panel", "no link in the info panel. Charon
+    has the same issue"): leftover (1), the moons not yet keyed in the
+    orrery, which gives their words and their link together. Not new.
+  - FOUND, taps: "tapping with my thumb works about 1/2 to 3/4 the time.
+    maybe we need a larger tap area?" Received by L-514 (the Mars room),
+    where the larger tap area was already recorded as build work,
+    measured (ruling 4).
+  - So step 2b is seen and passed on his phone. The skill, carried
+    above, also takes his ruling on the Sun line at its next version.
 - **Ref:** L-514 (the Mars room); L-443 (the drawer's groups); L-392 (the
   rooms section); L-291 (the Earth room); the protocol's The Orrery and
   the Assembler.
@@ -3330,8 +3357,16 @@ sentence below.
   the orrery's object list either, so their boxes carry no words, link or
   period; this item's orrery session, which keys moons, is where they come
   in.
-**Gap:** L-515 step 2b's build; then this build, proposed again as a fold
-of the one tree, on Tony's go-ahead.
+- **Received 2026-11-10, night, from L-515's look at step 2b**: Tony, on
+  the live site, "tapping with my thumb works about 1/2 to 3/4 the time.
+  maybe we need a larger tap area?" -- in every view, not only near a
+  moon. So the larger tap area of ruling 4 is measured in this build for
+  the whole picture, with the risk ruling 4 named (a wider reach near
+  Mars picking Mars instead of Phobos).
+**Gap:** step 2b passed Tony's look (L-515); then this build, proposed
+again as a fold of the one tree, on Tony's go-ahead. Before adding to
+interactive-exhibit it moves old lines out, the skill being at its cap
+(L-522).
 - **Ref:** L-513 (the Moon's standards, the pattern); L-334 (what a room
   opens on, 2026-09-17); L-291 (the Earth room); L-484 (the two agree);
   L-150 (Charon's period centre, for the Pluto room).
@@ -5028,7 +5063,7 @@ Are).
 L-489.
 
 #### [L-485] A nightly unattended run of the routines (orrery + gallery, maintenance)
-<!-- L:485 status:OPEN upd:2026-11-06 section:A flag: rice: -->
+<!-- L:485 status:OPEN upd:2026-11-10 section:A flag: rice: -->
 - **Tony, 2026-10-24, night,** in his run record (`documentation/WHERE_WE_ARE_10-24-26_1927_run_record.md`): "i am
   thinking of revising the idea of an automated run at midnight every
   day, with all the daily and 30-day run routines except the messages.
@@ -5824,6 +5859,34 @@ months past its build (at gallery ae68a93, 2026-08-11 to 2027-02-03),
 so red nights for longer than that leave the website unable to draw;
 mending a red night needs someone who can fix code, which is L-490's
 legacy question. Tony's word pending on the task.
+- **The website's two red nights of 2026-11-10, and their cause**, read
+  the same night by the coordinating session (Claude Opus 5.5) from the
+  log of the 19:48 UTC run, Tony's "#26", which he sent; the 16:26 run's
+  log was not read.
+  - WHAT FAILED: the cache builder exited 0, but JPL's Horizons answered
+    every planet, moon, the Pluto barycentre and Bennu with "Insufficient
+    ephemeris data has been loaded to compute the state of ... at the
+    ephemeris epoch Epoch before 5879611 B.C. JUN 24" (or "after 5879611
+    JUL 11"), and Earth's pole of date the same way: the bodies JPL works
+    out from its stored ephemeris files (Bennu's page: a "pre-computed
+    trajectory"). The comets and asteroids answered, 52 of 55 position
+    uncertainties among them.
+  - WHAT HELD: the builder served each failed body's last good orbit and
+    nulled its today point, the served window went null, five gating
+    checks went red (Cache in step, Display figures, Solar System
+    figures, Scene moment, Artifact 1 assembler), and the night committed
+    nothing. The site kept the Nov 9 cache.
+  - NOT OURS: unchanged since the last green night (gallery 5edb514,
+    Nov 9, 22:27 UTC): the cache builder, the workflow, requirements.txt
+    and every JPL question in the config (its one change, Pluto's label).
+  - THE TEST, on Tony's computer, 22:05 Chicago (04:05 UTC Nov 11), with
+    his own package copies: clean, 45 of 45, pushed at gallery e80663de,
+    live 2 of 2. Then the night workflow run by hand on GitHub (Run
+    workflow), with the runner's newest packages: green, committed at
+    e21b674 (run 20261111T042435Z). So the cause was JPL's, for one
+    afternoon; nothing pinned. requirements.txt still sets no upper
+    version for astroquery or astropy: recorded, not changed.
+  - L-522 had recorded the two nights as seen; this is their record.
 **Ref:** `orrery_maintenance_run.py`; gallery `daily_run.py`;
 `documentation/DESIGN_L485_nightly_run_rulings_20261025.md`;
 `documentation/COORD_L461_stop_ruling_20261025.md`; L-461; L-462;

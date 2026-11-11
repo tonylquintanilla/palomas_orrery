@@ -427,7 +427,7 @@ The new closing line also had its first real use. The Code session ended with "O
 3. *(do)* Paste protocol v3.137 into the Project's instructions. -- done
 4. *(do)* Give the Opus session the last line of a failed night's log.
 
-
+-- done. Nightly run rerun manually and it worked. 
 
 **Where this leaves us**
 - Every working document now has a cap at today's size, and the maintenance run names any document that goes over.

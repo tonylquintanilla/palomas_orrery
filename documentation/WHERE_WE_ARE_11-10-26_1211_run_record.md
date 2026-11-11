@@ -219,3 +219,87 @@ Once you commit and push the website, the live site will draw the line through J
 - (do) Commit and push the website, then the orrery.
 - (do) Each morning, Pull origin on both, orrery then website.
 - (do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).
+
+=======================================================================
+
+I'll check what's been pushed since your run record, then write the updated phone-look list.
+
+Your review checks out: the Code session fixed four of the things you found and pushed the fixes in gallery 2dec9fc. Here is the updated phone-look list for that version.
+
+Set-up for every item: your phone held upright (portrait), the live site reloaded once so it serves 2dec9fc, starting from the bare `interactive.html` link. Don't reload in the middle of an item: a reload drops a view centred on Jupiter (leftover 3, recorded).
+
+**1. Find brings a planet's whole fold.** You asked for this.
+- In the Sun's view, open the drawer and type "Earth" in Find. Expect Earth's fold open, with the Moon and Earth's shells listed. -- yes
+- Clear the box, then do the same with "Jupiter" (expect Io), "Saturn" (Titan) and "Pluto" (Pluto and Charon, under Pluto system). -- yes
+- Known, not a fault: "crust" alone finds nothing until Earth's fold has been opened once. -- yes
+
+**2. Ticking a shell in a centred view frames that shell.** This was the view jumping out to the planets.
+- In the Sun's view, tick Jupiter. Then Centre on Earth, and tick the bow shock. Expect the view to fit the bow shock around Earth, not open out to Jupiter's distance. -- yes
+- Then Centre on Jupiter and tick Io. Expect Io's orbit to fill the view. -- yes. one issue: Io does not have a link in the info panel. 
+- Then Centre on Saturn and tick Titan, with the same result. -- yes. no link in the info panel. Charon has the same issue. 
+-- general issue: tapping with my thumb works about 1/2 to 3/4 the time. maybe we need a larger tap area? 
+
+**3. The path follows what you tick.** -- yes
+- Centre on Jupiter. The line reads "Solar system > Jupiter".
+- Tick Io: "Solar system > Jupiter > Io". Untick Io: back to "Solar system > Jupiter". Tapping Io's name should also end the path on Io.
+
+**4. The orbit line runs through its planet.**
+- Centre on Jupiter and press + several times. Expect the orbit line to pass right through Jupiter's marker, where the axis lines cross. -- yes
+- Repeat for Saturn and Earth. Before the fix, Earth's line missed by about 5,000 km and Saturn's by about 9,800. -- yes
+
+**5. The new words in a moon's box.**
+- Centre on the Pluto system and tap Charon. Expect: "The position shown was worked out from JPL's orbit dated 9 November 2026, midnight on JPL's clock, but is outside that orbit's best-accuracy window of 19 hours either side." -- yes. i verified this earlier. now charon is correct from the new daily. no link in the info panel. 
+- One correction to your proposal: it says "midnight on JPL's clock", not "0:00 UTC". JPL dates its orbits on its own clock, 69 seconds ahead of UTC, and your ruling of Oct 29 keeps that date on JPL's clock. Tell me if you'd rather have UTC there. -- no problems
+- Tap Io as well: same sentence, with 5 hours. -- no variation for this fetch. 
+
+**6. Your decision: the Sun direction line in Earth's fold.**
+- Centre on Earth. As built, there is no Sun line. The day-night shading shows which side faces the Sun, and the Sun itself is drawn at its true place, about 23,000 Earth radii away. -- yes
+- Look and decide: bring the line back, or leave it out. -- leave it out
+
+**Already passed, no need to repeat:** Centre on for all five centres, the Pluto fold, the open square, and Encke in a scene centred on Earth.
+
+Two notes from checking the repositories:
+- **The website's nightly run hasn't committed since Nov 9 at 22:29 UTC.** The orrery's ran twice today and the website's not at all. Its data still covers through February, so nothing freezes, and the boxes still date the orbits 9 November. A gallery session should look at why, without chasing it tonight. -- manual nightly run worked. 
+- **I was wrong last night that the bot doesn't write to the orrery.** It committed to it twice today (data/nightly_run_record.json). Your morning line on Where We Are already covers both repositories, so the steps stand as written.
+
+=======================================================================
+
+I'll record both nights' work: your phone-look verdicts, the cause of the red nights, and Where We Are. First the bases, and a check on the records skill, which your Code session bumped to 1.23 after I loaded it at 1.22.
+
+The account's copies on disk now read 1.23 and 1.40, matching the manifest. I'll check they match the repository's copies byte for byte, then read what 1.23 changed.
+
+Writing the ledger records now: your look at the fixes on L-515 (one nested tree), the tap note on L-514 (the Mars room), and the red nights' cause on L-485 (a nightly run).
+
+Ledger done. Now Where We Are, at 129 of its 130 lines.
+
+Both records are ready. Checking your local copies match GitHub before I write over them.
+
+Both run records are in the ledger and on Where We Are. On your computer the two files read back at the sizes I wrote. Your own lines, in your words, are now the record of your look at the fixes.
+
+**What I recorded**
+- **L-515 (one nested tree): step 2b passed your phone look.** Every item on the list came back "yes", and your ruling on the Sun line ("leave it out") is recorded.
+  - The missing i-panel links for Io, Titan and Charon aren't a new fault. They come with the moons' words, once the orrery keys them, which is already one of 2b's leftovers.
+- **L-514 (the Mars room): your tap finding.** "Works about 1/2 to 3/4 the time" goes with the larger tap area Mars already planned to measure, now for the whole picture, not only near a moon.
+- **L-485 (a nightly run): the red nights.** JPL couldn't work out any body it serves from its stored files for one afternoon. Your Daily Run and the night run by hand were both green, so nothing was pinned.
+- **L-522 (document caps): the three steps you marked done**, the door copy, the reinstall and the paste, are now recorded as done. I also checked the records skill your account now loads: it reads 1.23, byte for byte the repository's.
+- **Where We Are:** 128 lines above the marker, under its cap of 130.
+
+**Files for your run record**
+
+Orrery:
+- ok LEDGER_CONSOLIDATED.md (5 edits, index regenerated, no consistency problems)
+- ok documentation/WHERE_WE_ARE.md (9 edits by section)
+
+Website: none.
+
+**Your run order**
+1. Commit and push the orrery. -- 
+
+**The one decision now open:** which goes first, Mars, or the split of the exhibit skill into its rules and a reference? Fable raised it. The skill is at its cap of 2,440 lines, so if Mars goes first, the Mars session must move old lines out of the skill before adding any.
+
+**Where this leaves us**
+- Step 2b is done and seen on your phone.
+- The website's nights are green again, and the site serves Nov 11's data.
+- Next is Mars or the skill's split, in the order you choose.
+
+**One final thought:** to read back two file sizes I loaded your orrery's whole folder listing into the conversation, which is the waste the token rule names. Next time I'll list only the one folder and slice out the line I need.

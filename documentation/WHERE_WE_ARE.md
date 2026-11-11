@@ -1,23 +1,20 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 10, 2026, night: the orrery Code session (Opus), step 1 of the document caps.
-- Written at orrery fd2a28a and gallery 41126f9, plus this session's edits.
+Last updated: November 10, 2026, late night: the coordinating session (Opus), step 2b's look and the red nights.
+- Written at orrery d65309a and gallery e21b674, plus this session's edits.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Each working document now has a cap, on one page, `DOCUMENT_CAPS.md`; the maintenance run names any document over it. Every cap is today's size (L-522 (document caps), step 1).
-> - Both Code doors now tell a session to read the cap before adding, and allow one closing line, "One final thought". The website's door is brought level (L-522).
-> - The website's nightly run was red twice today, its first nights after step 2b's push. A red night writes nothing, so the site still serves Nov 9's data (L-515 (one nested tree)).
+> - Step 2b passed your phone look; the Sun direction line stays out of Earth's fold (L-515 (one nested tree)).
+> - The website's two red nights were JPL's, for one afternoon. Your Daily Run and a night run by hand both went green, and the site serves Nov 11's data (L-485 (a nightly run)).
 >
-> **Do next:** *Your look at step 2b's fixes, and the red nights read from their log (L-515 (one nested tree)); then Mars, the first session that must move lines out of the exhibit skill before adding (L-514 (the Mars room)).*
+> **Do next:** *Choose the order: Mars (L-514 (the Mars room)) or the exhibit skill's split (L-522 (document caps)); then build it.*
 >
 > **Needs you now:**
-> - *(do) Commit and push the orrery: the caps reset, the ledger and this page. The website's door is already pushed (41126f9).*
-> - *(do) Replace `python_work\CLAUDE.md` with a copy of the orrery's `documentation\python_work_door\python_work_CLAUDE.md`, renamed CLAUDE.md.*
-> - *(do) Reinstall ledger-and-session-records 1.23; paste protocol v3.137 into the Project.*
-> - *(decide) Whether Earth's fold draws the Sun direction line again (L-515).*
+> - *(do) Commit and push the orrery: the ledger and this page.*
+> - *(decide) Which goes first: Mars, or the exhibit skill's split.*
 > - *(do) Each morning, Fetch origin and Pull origin on both, orrery then website, before any work. If Pull origin shows up only once you have changes: Commit them first, then Pull origin, then Push origin. If Desktop stashes your changes anyway, restore them at once: Changes tab, Stashed Changes, Restore.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
 
@@ -32,11 +29,11 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
                and A2 of JPL's fallbacks (L-512), a green website night,
                the quick wins with L-423 (the website's checks), and the
                Moon's standards (L-513, closed).
- 15.   [NOW]   *The one tree's step 2b, built Nov 10 (L-515 (one nested
-               tree)): your phone look. Then, after line d's step 1, Mars
-               (Phobos, Deimos) as the first new fold (L-514 (the Mars
-               room)), then Uranus and Neptune. Io, Titan, Charon and Pluto
-               come to standard in their folds, keyed in the orrery first.*
+ 15.   [NOW]   *The one tree's step 2b passed your phone look Nov 10
+               (L-515 (one nested tree)). Next, Mars (Phobos, Deimos) as
+               the first new fold (L-514 (the Mars room)), then Uranus and
+               Neptune. Io, Titan, Charon and Pluto come to standard in
+               their folds, keyed in the orrery first.*  << moved this session
  16.   [later] Earth's fold: L-297 (the Lagrange points), the Earth-Moon
                barycentre, SOHO, Gaia, James Webb, Artemis II.
  17.   [later] Small-body systems' moons; then stars and exoplanets.
@@ -46,14 +43,15 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
                (Featured's rethink): closed Nov 8 and 9 on your phone looks.
   d.   [beside] Document caps (L-522 (document caps)): step 1 built Nov 10,
                the page of caps and its check; steps 2 to 6 between
-               builds, the exhibit skill's split first.  << moved this session
+               builds, the exhibit skill's split first.
   b.   [beside] Housekeeping: L-424, L-425, L-426 (the checkers' three);
                L-423 (the website's checks) item 3; L-357 (stale gallery
                artifacts); L-509 (obsolete code), after its talk.
 
-## Settled
+## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings; a line leaves once it is habit, or a skill carries it.
+- The Sun direction line stays out of Earth's fold: the day-night shading and the Sun at its true place show the direction (Nov 10; L-515 (one nested tree)).
 - Each working document has a length cap; a session that adds at the cap moves something out first; upkeep goes between builds, never in front (Nov 10; L-522 (document caps)).
 - One picture, one drawer: a planet folds open to its shells and moons by distance; only the Earth System and the stars stay rooms of their own (Nov 9; L-515 (one nested tree), ruling 14).
 - Centre on moves the view so the body sits in the middle, on its own opening, the axis lines through it; the Sun has one too. The orrery's view measured from a centre waits for the date span (Nov 9; L-515 (one nested tree), rulings 15 to 17).
@@ -64,10 +62,10 @@ Standing rulings; a line leaves once it is habit, or a skill carries it.
 - The Moon shows JPL's period for today, like every other body, not the
   sidereal month (Nov 6, 22:17; L-513 (the Moon's standards)).
 
-## Deferred
+## Deferred  **>> UPDATED THIS SESSION**
 
 Waiting behind other work; a line leaves when picked up.
-- Step 2b's three leftovers: Io, Titan, Pluto and Charon have no words until the orrery keys them; Find misses a shell of Earth's by its own name until Earth's fold is first opened; a view centred on Jupiter is not in the shared link (Nov 10; L-515 (one nested tree)).
+- Step 2b's three leftovers: Io, Titan, Pluto and Charon have no words or i-panel link until the orrery keys them; Find misses a shell of Earth's by its own name until Earth's fold is first opened; a view centred on Jupiter is not in the shared link (Nov 10; L-515 (one nested tree)).
 - Three checks red in the drawer walk before Scenes was built, the page or the walk aged: a gallery session that next opens the drawer (Nov 9; L-521 (three red checks)).
 - The saved pictures' words, which have no source: kept as made until the braid reaches them (Nov 8; L-520 (old pictures carry old words)).
 - Charon's period is asked around Pluto's centre, not the barycentre;
@@ -95,14 +93,14 @@ Waiting behind other work; a line leaves when picked up.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261109T222751Z, nightly, ok, no retry; today's two red nights wrote none (gallery swap log at 2dec9fc, read Nov 10, night).
-- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md, its run 20261111T003053Z, this session).
+- Last cache build: 20261111T042435Z, nightly (run by hand), ok, no retry (gallery swap log at e21b674, read Nov 10, late night).
+- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at orrery d65309a, its run 20261111T021609Z).
 - This page's date and the ledger's newest stamp: both Nov 10. Agree.
 
-## Waiting on you
+## Waiting on you  **>> UPDATED THIS SESSION**
 
 Decisions, one at a time:
-- None open.
+- Which goes first: Mars (L-514 (the Mars room)), or the exhibit skill's split (L-522 (document caps)), which Mars would otherwise have to make room in.
 
 At the next design talk:
 - How obsolete code is treated, and when it goes (L-509 (obsolete
@@ -121,6 +119,7 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
+- This session: L-515 (one nested tree), your look at step 2b; L-485 (a nightly run), the red nights' cause.
 - The caps: `DOCUMENT_CAPS.md`; L-522 (document caps); its brief
   `COORD_L522_step1_caps_brief_20261110.md` and the review beside it.
 - The tree: L-515 (one nested tree); `COORD_L515_step2b_brief_20261109.md`
