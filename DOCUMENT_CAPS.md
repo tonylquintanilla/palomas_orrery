@@ -32,7 +32,7 @@ shortens a document lowers its cap to the new size.
 
 | Document | Cap in lines | Where old lines go |
 |---|---|---|
-| `PROJECT_INSTRUCTIONS.md` | 1495 | `documentation/PROJECT_INSTRUCTIONS_HISTORY.md` |
+| `PROJECT_INSTRUCTIONS.md` | 1487 | `documentation/PROJECT_INSTRUCTIONS_HISTORY.md` |
 | `skills/agentic-pre-test/SKILL.md` | 126 | `documentation/SKILL_HISTORIES.md` |
 | `skills/earth-system-pipeline/SKILL.md` | 199 | `documentation/SKILL_HISTORIES.md` |
 | `skills/gallery-assembler/SKILL.md` | 307 | `documentation/SKILL_HISTORIES.md` |
@@ -48,8 +48,8 @@ shortens a document lowers its cap to the new size.
 | `documentation/WHERE_WE_ARE.md` | 130 above the marker | git only |
 | `documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md` | 1818 | `documentation/MASTER_PLAN_HISTORY.md` |
 | `README.md` | 664 | git only |
-| `CLAUDE.md` | 100 | git only |
-| `DOCUMENT_CAPS.md` | 60 | git only |
+| `CLAUDE.md` | 111 | git only |
+| `DOCUMENT_CAPS.md` | 58 | git only |
 | `LEDGER_CONSOLIDATED.md` | none until step 4 | none until step 4 |
 
 Where We Are's cap counts only the lines above its run-record marker,

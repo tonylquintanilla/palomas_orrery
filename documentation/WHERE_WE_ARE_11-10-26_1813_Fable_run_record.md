@@ -282,3 +282,128 @@ Where this leaves us:
 - Parts 1 and 2 are done. Part 1 is pushed, and Part 2 is ready for your commit.
 - The website's night has been red since step 2b, the live data is unharmed, and the cause is for the website's session to read.
 - Part 3 (the doors) is next.
+
+===========================
+
+**Code:**
+
+Renamed; only the root door is named CLAUDE.md now. Next, the door copy's sentence about where its canonical copy lives.
+
+Part 3 is written. Only the two real doors are still named CLAUDE.md, and both now carry the same new lines.
+
+**The two stray CLAUDE.md files, renamed.** I renamed each file directly, without a git command, so GitHub Desktop will show each one as one file removed and one file added:
+- `documentation/CLAUDE.md` is now `documentation/HANDOFF_2026-02_claude_code.md`. It is the February 2026 handoff, and its words are unchanged.
+- `documentation/python_work_door/CLAUDE.md` is now `documentation/python_work_door/python_work_CLAUDE.md`.
+
+Claude Code will no longer load either file into a session that reads a file beside it.
+
+**The door copy's own sentence.** It now says the copy is kept under the name python_work_CLAUDE.md, and that you copy it into python_work renamed to CLAUDE.md. That copy in your python_work folder is yours to replace; it's in the final rollup.
+
+**The orrery's door (CLAUDE.md): 100 lines at the start, 111 now.** Three new things, beside Part 2's two:
+- The repository's copy of a skill is the one read. A skill of the same name installed in your account is not used.
+- When no /cost figure prints, as in your app, the report gives the context size the app shows at the close, plus the sizes read and written, in that same form every time.
+
+**The website's door: 100 lines at the start, 116 now.** It is brought level with the orrery's door:
+- Skills are read in the parts the job needs, which it had missed since Nov 2.
+- The repository's copy of a skill is the one read.
+- The cap line, pointing at the orrery's DOCUMENT_CAPS.md.
+- The token line, in its new form.
+- The "One final thought" line.
+
+What belongs to the website stays as it was: its tests, the served cache it must not edit by hand, and where its records go.
+
+**Checks.**
+- All three edited files are plain ASCII with LF line endings.
+- No row of the website's maintenance run reads CLAUDE.md, so I didn't run it.
+- The website folder shows exactly one changed file, its CLAUDE.md.
+
+Where this leaves us:
+- All three parts are built.
+- The close is next: the ledger item and Where We Are, each cap reset to its document's final size, then the full maintenance run and the two index checks.
+
+==========================================
+
+Writing the ledger script to a file first, since the shell choked on it.
+
+Updating Where We Are, section by section.
+
+Where We Are is at 129 lines above its marker. Now resetting each cap to its document's final size.
+
+The full maintenance run is going in the background, for a few minutes. Then I'll run the two index checks and write the final report.
+
+Tony has already pushed Parts 2 and 3 and the website's door. I'll bring the record lines level with those pushes.
+
+Step 1 of L-522 (document caps) is done. Each working document now has a cap, on one page, and the maintenance run names any document that goes over its cap. The whole run is green: all 36 of its gating rows pass, the new "Document caps" row among them. The ledger's index check and the skill manifest's check both pass too.
+
+**The caps as set.** Each one is the document's size at the close:
+
+| Document | Cap in lines | Where old lines go |
+|---|---|---|
+| PROJECT_INSTRUCTIONS.md | 1487 | PROJECT_INSTRUCTIONS_HISTORY.md |
+| agentic-pre-test | 126 | SKILL_HISTORIES.md |
+| earth-system-pipeline | 199 | SKILL_HISTORIES.md |
+| gallery-assembler | 307 | SKILL_HISTORIES.md |
+| gallery-cache-builder | 944 | SKILL_HISTORIES.md |
+| gallery-pipeline | 160 | SKILL_HISTORIES.md |
+| horizons-orbital-mechanics | 904 | SKILL_HISTORIES.md |
+| interactive-exhibit | 2440 | SKILL_HISTORIES.md |
+| ledger-and-session-records | 807 | SKILL_HISTORIES.md |
+| orrery-coding-conventions | 726 | SKILL_HISTORIES.md |
+| provenance-cross-check | 638 | SKILL_HISTORIES.md |
+| provenance-discipline | 1512 | SKILL_HISTORIES.md |
+| safe-file-editing | 765 | SKILL_HISTORIES.md |
+| WHERE_WE_ARE.md | 130 above the marker | git only |
+| MASTER_PLAN_INTERACTIVE_GALLERY.md | 1818 | MASTER_PLAN_HISTORY.md |
+| README.md | 664 | git only |
+| CLAUDE.md | 111 | git only |
+| DOCUMENT_CAPS.md | 58 | git only |
+| LEDGER_CONSOLIDATED.md | none until step 4 | none until step 4 |
+
+Where We Are stands at 129 lines above its marker, under its 130.
+
+**A consequence to know.** The Mars session (L-514, the Mars room) will be the first that must move old lines out of the exhibit skill (interactive-exhibit) before it adds any. That skill is at its cap of 2,440 lines. For now, what moves is its old version notes and its "until v1.x" remarks, and they go to `documentation/SKILL_HISTORIES.md`.
+
+**Recorded on L-522, not asked.**
+- I left the website's README and CLAUDE.md off the page. The nightly run on GitHub checks out only the orrery, so the run can't read the website's folder everywhere it runs.
+- The website's two red nights are recorded as seen there, for the build track's session.
+
+**Files changed, for your run record**
+
+Orrery:
+- ok DOCUMENT_CAPS.md (new; 3 edits after)
+- ok doc_index.py (4 edits)
+- ok orrery_maintenance_run.py (3 edits)
+- ok palomas_orrery_dashboard.py (3 edits)
+- ok README.md (1 row, written by the document index)
+- ok CLAUDE.md (4 edits)
+- ok skills/ledger-and-session-records/SKILL.md (3 edits, plus the read plan written by skills_index.py)
+- ok PROJECT_INSTRUCTIONS.md (4 edits, plus the manifest row written by skills_index.py)
+- ok documentation/PROJECT_INSTRUCTIONS_HISTORY.md (1 edit)
+- ok documentation/SKILL_HISTORIES.md (1 edit)
+- ok documentation/CLAUDE.md renamed documentation/HANDOFF_2026-02_claude_code.md (0 edits)
+- ok documentation/python_work_door/CLAUDE.md renamed python_work_CLAUDE.md (1 edit)
+- ok LEDGER_CONSOLIDATED.md (7 edits, plus its index)
+- ok documentation/WHERE_WE_ARE.md (7 edits)
+- Written by the maintenance run: DATA_INVENTORY.md, PROVENANCE_AUDIT.md, data/provenance_history.json, documentation/prompts/citation_review.jsonl, MODULE_ATLAS.md, MODULE_INDEX.md
+
+Website:
+- ok CLAUDE.md (4 edits), already pushed at 41126f9
+
+**Tokens.** No /cost figure printed in this app. I can't see the context size the app shows, so please read that number from the app and write it beside the commit. I read about 3,500 lines in full. Most of that was the protocol, which is loaded every session (about 1,490 lines), the records skill (807), and the brief, the ruling record and L-522 together (about 550). The rest was the tools. The run outputs I sliced for the lines I needed. I wrote about 525 lines and removed about 105, across 15 files.
+
+**Run order**
+1. *(do)* Commit and push the orrery. The change list should show `DOCUMENT_CAPS.md`, `LEDGER_CONSOLIDATED.md`, `documentation/WHERE_WE_ARE.md`, the run's four outputs (`DATA_INVENTORY.md`, `PROVENANCE_AUDIT.md`, `data/provenance_history.json`, `documentation/prompts/citation_review.jsonl`), and your run record. Until you push, the orrery on GitHub still holds the old caps, so the Document caps row would read red for anyone running the check there: CLAUDE.md is at 111 lines against the old cap of 100. This commit fixes it.
+
+**Tony-action rollup**
+- *(do)* Commit and push the orrery, as above.
+- *(do)* Replace `C:\Users\tonyq\OneDrive\Desktop\python_work\CLAUDE.md` with a copy of `palomas_orrery_for_github\documentation\python_work_door\python_work_CLAUDE.md`, renamed `CLAUDE.md`.
+- *(do)* Reinstall ledger-and-session-records 1.23 (Settings > Skills).
+- *(do)* Paste protocol v3.137 into the Project's instructions on claude.ai.
+- *(do)* Give the website's session the last line of a red night's log, from the Actions tab: "Nightly run", the step "The night".
+
+Where this leaves us:
+- Every working document has a cap, today's size, and the run names any document over it.
+- Code sessions in both repositories now meet the rule at the door.
+- Next on the road: your look at step 2b, then Mars, which pays first.
+
+**One final thought:** I set the new caps only at the very end. So your checkpoint push after Part 3 went up with the caps check red, CLAUDE.md at 111 lines against 100. I should have reset each document's cap as each part changed it, so that every push you made was green.

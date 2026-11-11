@@ -1,20 +1,22 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 10, 2026, afternoon: the website Code session (Opus), step 2b's phone-look fixes, after the coordinating session (Fable), the documents review; then that session's protocol talk.
-- Written at orrery d039089 and gallery e0e94b8, plus this session's edits.
+Last updated: November 10, 2026, night: the orrery Code session (Opus), step 1 of the document caps.
+- Written at orrery fd2a28a and gallery 41126f9, plus this session's edits.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The governing documents were reviewed. They only grow, so each gets a length cap (L-522 (document caps)).
-> - The protocol's reduction is decided by your five rulings of this afternoon: about 700 lines against a cap of 800 (L-522 (document caps)). Step 1 goes before Mars.
-> - Your phone look at step 2b found four faults, now fixed but not yet seen: Find brings a planet's moons, ticking keeps a centred view, the trail follows, Jupiter's orbit runs through Jupiter. Charon's sentence is in your words (L-515 (one nested tree)).
+> - Each working document now has a cap, on one page, `DOCUMENT_CAPS.md`; the maintenance run names any document over it. Every cap is today's size (L-522 (document caps), step 1).
+> - Both Code doors now tell a session to read the cap before adding, and allow one closing line, "One final thought". The website's door is brought level (L-522).
+> - The website's nightly run was red twice today, its first nights after step 2b's push. A red night writes nothing, so the site still serves Nov 9's data (L-515 (one nested tree)).
 >
-> **Do next:** *Your look at step 2b's fixes (L-515 (one nested tree)); the caps' step 1, one Code session on the orrery (L-522 (document caps)); then Mars (L-514 (the Mars room)).*
+> **Do next:** *Your look at step 2b's fixes, and the red nights read from their log (L-515 (one nested tree)); then Mars, the first session that must move lines out of the exhibit skill before adding (L-514 (the Mars room)).*
 >
 > **Needs you now:**
-> - *(do) Commit and push the orrery: the ledger, this page, the two talks' records and step 1's amended brief.*
+> - *(do) Commit and push the orrery: the caps reset, the ledger and this page. The website's door is already pushed (41126f9).*
+> - *(do) Replace `python_work\CLAUDE.md` with a copy of the orrery's `documentation\python_work_door\python_work_CLAUDE.md`, renamed CLAUDE.md.*
+> - *(do) Reinstall ledger-and-session-records 1.23; paste protocol v3.137 into the Project.*
 > - *(decide) Whether Earth's fold draws the Sun direction line again (L-515).*
 > - *(do) Each morning, Fetch origin and Pull origin on both, orrery then website, before any work. If Pull origin shows up only once you have changes: Commit them first, then Pull origin, then Push origin. If Desktop stashes your changes anyway, restore them at once: Changes tab, Stashed Changes, Restore.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
@@ -42,14 +44,14 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
                to choose, within the range the data covers.
   l-c. [done]  L-517 (the lobby), L-518 (the shared link) and L-519
                (Featured's rethink): closed Nov 8 and 9 on your phone looks.
-  d.   [NOW]   *Document caps (L-522 (document caps)): step 1, the tools
-               and today's sizes as caps, before Mars; five more steps
-               between builds.*  << new this session
+  d.   [beside] Document caps (L-522 (document caps)): step 1 built Nov 10,
+               the page of caps and its check; steps 2 to 6 between
+               builds, the exhibit skill's split first.  << moved this session
   b.   [beside] Housekeeping: L-424, L-425, L-426 (the checkers' three);
                L-423 (the website's checks) item 3; L-357 (stale gallery
                artifacts); L-509 (obsolete code), after its talk.
 
-## Settled  **>> UPDATED THIS SESSION**
+## Settled
 
 Standing rulings; a line leaves once it is habit, or a skill carries it.
 - Each working document has a length cap; a session that adds at the cap moves something out first; upkeep goes between builds, never in front (Nov 10; L-522 (document caps)).
@@ -90,11 +92,11 @@ Waiting behind other work; a line leaves when picked up.
 - L-490 (the legacy list); L-499 (kinds of session); L-471 (a delivered
   patch is final), for safe-file-editing's next version.
 
-## Signals
+## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261109T222751Z, nightly, ok, no retry (gallery swap log at cea21af, read Nov 10).
-- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at orrery b3ce81f, its run 20261109T022724Z).
+- Last cache build: 20261109T222751Z, nightly, ok, no retry; today's two red nights wrote none (gallery swap log at 2dec9fc, read Nov 10, night).
+- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md, its run 20261111T003053Z, this session).
 - This page's date and the ledger's newest stamp: both Nov 10. Agree.
 
 ## Waiting on you
@@ -119,8 +121,8 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- This session: L-522 (document caps); `REVIEW_fundamental_documents_20261110.md`,
-  `DESIGN_document_caps_rulings_20261110.md`, `COORD_L522_step1_caps_brief_20261110.md`.
+- The caps: `DOCUMENT_CAPS.md`; L-522 (document caps); its brief
+  `COORD_L522_step1_caps_brief_20261110.md` and the review beside it.
 - The tree: L-515 (one nested tree); `COORD_L515_step2b_brief_20261109.md`
   (2b), `COORD_L515_steps1_2a_brief_20261107.md` (1 and 2a).
 - The door: `documentation/python_work_door/`, and L-499 (kinds of session).

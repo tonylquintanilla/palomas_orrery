@@ -784,6 +784,10 @@ Module updated: November 10, 2026 with Anthropic's Claude Fable 5.2 (the
 coordinating session: the governing documents reviewed; L-522 opened,
 document caps and the catch-up in six steps; step 1 briefed), built on
 orrery d0390890 with gallery e0e94b85 read only.
+Module updated: November 10, 2026, night, with Anthropic's Claude Opus
+5.5 (L-522 step 1, a Claude Code session: DOCUMENT_CAPS.md and the
+run's Document caps row; L-396's 130-line half built), built on orrery
+ea43f2a1 with gallery 2dec9fc5.
 Review and RICE update Tony 6-21-2026
 
 ---
@@ -1123,7 +1127,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-391 | Group clouds: the Trojans' sources, and the shapes of the three other groups (gallery, exhibits) | OPEN | -- | 2026-09-29 |
 | ! | L-393 | Encounter data: dates, spacecraft records centred on their targets, and how far the cache reaches in time (gallery, cache) | OPEN | -- | 2026-09-29 |
 | ! | L-394 | A card cannot say which body it belongs to (gallery, Studio) | OPEN | -- | 2026-09-29 |
-| ! | L-396 | Tony's page: WHERE_WE_ARE.md, the big picture in plain words (documentation, skills) | OPEN | -- | 2026-10-07 |
+| ! | L-396 | Tony's page: WHERE_WE_ARE.md, the big picture in plain words (documentation, skills) | OPEN | -- | 2026-11-10 |
 | ! | L-401 | The orrery's own distance hovers print by fixed widths, not by the errors the position earns (orrery, provenance) | OPEN | -- | 2026-10-21 |
 | ! | L-402 | Choose a date, or animate, within the range the drawn bodies are trusted for (gallery, exhibits) | OPEN | -- | 2026-10-01 |
 | ! | L-403 | Numbers in the object list's descriptions carry no source (orrery, provenance) | OPEN | -- | 2026-10-01 |
@@ -1790,10 +1794,86 @@ as an archive of the prioritization thinking -- no cleanup on close.
   Offered and not decided: obsolete code removed in the session that
   makes it obsolete, and a dead-code pass, both with L-509 (obsolete
   code) on the build track.
+- **Step 1, built 2026-11-10, night** (a Claude Code session, Claude
+  Opus 5.5, through the python_work door; built on orrery ea43f2a1 and
+  gallery 2dec9fc5; Tony pushed Part 1 at 2a7efd60, Part 2 at 99c0f7c,
+  Part 3 at fd2a28a and the website's door at 41126f9, the close after;
+  the brief `documentation/COORD_L522_step1_caps_brief_20261110.md`, in
+  three parts with Tony's go-ahead after each: "Yes, go ahead", "Yes,
+  Part 2", "Yes, Part 3", "Yes, close").
+  - THE PAGE: `DOCUMENT_CAPS.md` at the root, 58 lines: the three rules
+    in plain words and one table of document, cap and home.
+  - THE CHECK: `doc_index.py --caps`, the run's checker "Document caps"
+    (hint "DOCUMENT CAPS:"), with the dashboard's Document Caps button
+    and line; Dashboard parity passes. It lives in doc_index.py, not a
+    tool of its own, because that tool already reads the root's
+    documents and is already in the run, and a new module grows the
+    harness. Not a night row: it judges documents (NIGHT_SKIP_WHY). It
+    also goes red on a home that is a path and not found. Shown able to
+    fail on a throwaway copy, five reds by name: CLAUDE.md over its cap
+    (103 lines, cap 100); the master plan not found;
+    skills/mars-room/SKILL.md with no row; a cap written "about 100",
+    a row that cannot be read; Where We Are at 131 above its marker.
+  - THE CAPS AS SET, each the document's size at this session's close.
+    PROJECT_INSTRUCTIONS.md 1487, home
+    documentation/PROJECT_INSTRUCTIONS_HISTORY.md. The twelve skills,
+    home documentation/SKILL_HISTORIES.md: agentic-pre-test 126,
+    earth-system-pipeline 199, gallery-assembler 307,
+    gallery-cache-builder 944, gallery-pipeline 160,
+    horizons-orbital-mechanics 904, interactive-exhibit 2440,
+    ledger-and-session-records 807, orrery-coding-conventions 726,
+    provenance-cross-check 638, provenance-discipline 1512,
+    safe-file-editing 765. documentation/WHERE_WE_ARE.md 130 above the
+    marker, git only. documentation/MASTER_PLAN_INTERACTIVE_GALLERY.md
+    1818, home documentation/MASTER_PLAN_HISTORY.md. README.md 664,
+    CLAUDE.md 111 and DOCUMENT_CAPS.md 58, git only.
+    LEDGER_CONSOLIDATED.md no cap until step 4, printed with its size.
+    README.md's cap is 664, not its 663 at the base: the document index
+    added the new page's row to its table.
+  - THE RULE WHERE A SESSION MEETS IT: both Code doors carry the cap
+    line. ledger-and-session-records 1.22 -> 1.23: Where We Are's check
+    is half built (below, and L-396), and a turn's close may add "One
+    final thought:" (Tony, 16:11). Its 1.20 entry moved to
+    SKILL_HISTORIES.md by the three-entry rule, so the skill ends at the
+    807 lines it began with. Protocol v3.137, the manifest at 1.23, and
+    v3.134 moved down to the history file.
+  - THE DOORS: `documentation/CLAUDE.md` renamed
+    `documentation/HANDOFF_2026-02_claude_code.md`, its words unchanged;
+    `documentation/python_work_door/CLAUDE.md` renamed
+    `python_work_CLAUDE.md`, its sentence on where the canonical copy
+    lives corrected. Both real doors: the repository's copy of a skill
+    is the one read; where no /cost figure prints, the report gives the
+    context size the app shows and the sizes read and written; "One
+    final thought". The website's door also gains the Token Economy
+    edits of Nov 2 (skills read in the parts the job needs; the token
+    line). Orrery door 100 -> 111 lines; website door 100 -> 116. No
+    row of the website's maintenance run reads CLAUDE.md.
+  - LEFT OUT, by the brief's condition: rows for the website's
+    README.md and CLAUDE.md. The orrery's nightly run on GitHub checks
+    out the orrery alone (`.github/workflows/nightly.yml`, one
+    checkout), so the run cannot read the sibling folder everywhere it
+    runs. The caps row is not a night row, so the two rows would work
+    by day; adding them is Tony's to rule.
+  - SEEN, not this item's: the website's nightly run was red twice on
+    2026-11-10 (16:26 and 19:48 UTC, both in the step "The night",
+    `daily_run.py --night`), its first nights after L-515 step 2b's push
+    (cea21af1, then e0e94b85); the last clean night ran at 66c9f698. A
+    red night commits nothing. Its log needs a GitHub sign-in to read;
+    told Tony, for the build track's session.
+  - OWED, a consequence: the Mars session (L-514) is the first that
+    must move old lines out of interactive-exhibit, at its cap of 2440,
+    before adding; its home for now is SKILL_HISTORIES.md, and its
+    version notes and "until v1.x" remarks are what moves.
 **Note (Claude):** not decided: each skill's target cap; the size limit
 for one ledger item. The harness (57 of the 176 modules are developer
 tools) was measured, not reviewed.
-**Gap:** steps 1 to 6; step 3's talk is held, its draft is not written.
+**Gap:** steps 2 to 6 (step 1 built 2026-11-10, night); step 3's talk
+is held, its draft is not written.
+**Tony-action (do)**, from step 1: replace
+`C:\Users\tonyq\OneDrive\Desktop\python_work\CLAUDE.md` with a copy of
+`documentation\python_work_door\python_work_CLAUDE.md`, renamed
+CLAUDE.md; reinstall ledger-and-session-records 1.23 (Settings >
+Skills); paste protocol v3.137 into the Project's instructions.
 **Tony-action (decide)**, on step 3's draft: the stale-skill gate's new
 wording, and the gates for the stores in use.
 **Ref:** the review and the design record named above; L-199, L-215,
@@ -8385,7 +8465,7 @@ horizons-orbital-mechanics 1.3; L-398; L-399; L-431;
 `celestial_coordinates.py`.
 
 #### [L-396] Tony's page: WHERE_WE_ARE.md, the big picture in plain words (documentation, skills)
-<!-- L:396 status:OPEN upd:2026-10-07 section:A flag: rice: -->
+<!-- L:396 status:OPEN upd:2026-11-10 section:A flag: rice: -->
 - **Asked 2026-09-30 (Tony).** "i struggle to keep the big picture.
   it's the old dilemma of loosing the forest for the trees." The master
   plan's summary and critical path had not really helped. He asked for
@@ -8437,8 +8517,19 @@ horizons-orbital-mechanics 1.3; L-398; L-399; L-431;
   above the run-record marker; it targets WHERE_WE_ARE.md by exact
   name, never the timestamped copies. The doc indexer should know a
   copy by its `_run_record` ending instead of listing it as the page.
-**Gap:** build the check (date and cap), or rule that the skill rule
-is enough. L-422 holds the shape; this item holds the check.
+- **2026-11-10, night: the 130-line half is built** (L-522 step 1). The
+  maintenance run's row "Document caps", `doc_index.py --caps`, reads
+  this page's row on `DOCUMENT_CAPS.md`, "130 above the marker", and is
+  red, by name, when more lines stand above the run-record marker. It
+  reads the exact filename `documentation/WHERE_WE_ARE.md`, so a
+  timestamped copy cannot stand in. ledger-and-session-records 1.23
+  says so. The date half stays here: step 4 of L-522 removes the
+  header stamps it compares against, so it waits for what replaces
+  them.
+**Gap:** the date half: the page's date against the ledger's newest
+stamp, or against what replaces the stamps after L-522 step 4. The
+130-line half is built (L-522). L-422 holds the shape; this item holds
+the check.
 **Ref:** `documentation/WHERE_WE_ARE.md`; `skills/ledger-and-session-records/SKILL.md` (The Document Stack); `PROJECT_INSTRUCTIONS.md` v3.74; L-363; L-395; L-333; L-362.
 
 #### [L-394] A card cannot say which body it belongs to (gallery, Studio)

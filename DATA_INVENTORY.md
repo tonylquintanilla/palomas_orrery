@@ -48,7 +48,7 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 | .html | 5 | 693.1 KB | interactive.html (436.7 KB) | 2026-11-10 |
 | .jpg | 4 | 210.8 KB | palomas_orrery_wall.jpg (95.2 KB) | 2026-11-08 |
 | .ico | 1 | 137.3 KB | favicon.ico (137.3 KB) | 2025-11-28 |
-| .md | 8 | 98.9 KB | MODULE_ATLAS.md (65.8 KB) | 2026-11-10 |
+| .md | 8 | 99.9 KB | MODULE_ATLAS.md (65.8 KB) | 2026-11-10 |
 | .diff | 2 | 27.6 KB | gallery_cache_builder.py.diff (20.4 KB) | 2026-07-16 |
 | .patch | 3 | 11.7 KB | phaseb_studio.patch (7.0 KB) | 2026-07-29 |
 | .yml | 1 | 9.4 KB | nightly.yml (9.4 KB) | 2026-11-01 |
