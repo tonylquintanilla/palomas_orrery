@@ -433,3 +433,33 @@ The new closing line also had its first real use. The Code session ended with "O
 - Every working document now has a cap at today's size, and the maintenance run names any document that goes over.
 - Five steps of the catch-up remain. The next on my track is splitting the exhibit skill into its rules and a reference. I write its brief when you say it is next.
 - As the road stands, Mars comes first and has to make room in the exhibit skill before adding to it. If the split runs before Mars, that problem does not arise. The order is yours. -- let's do the split first. i will handoff the website work to a new Opus coordinator that can pick up the updated skills. 
+
+====================================================
+
+The transient refusal seen before; one other call, then retry.
+
+The brief for the exhibit skill's split is in your orrery folder, with the ledger and Where We Are updated to match. I read all three back from your computer and they match what I wrote.
+
+The Code session will work in three parts and stop after each:
+
+1. **The plan, with no file edited.** A table of where every section of the skill goes, and the text of each short rule that stays behind. Bring me this report before you give the go-ahead; it is the one place a rule's meaning could shift.
+2. **The moves.** The six long sections go whole into a new reference file in the website's folder. A script then accounts for every line of the old skill, so nothing is lost and nothing is duplicated.
+3. **A check.** The website's maintenance run will confirm that every code name the reference mentions still exists in the code.
+
+**Run order**
+
+- *(do)* Commit and push the orrery. GitHub Desktop will show three files: `LEDGER_CONSOLIDATED.md`, `documentation/WHERE_WE_ARE.md`, and `documentation/COORD_L522_step2_exhibit_split_brief_20261110.md`. -- 
+- *(do)* Open Claude Code through the `python_work` folder with this prompt:
+  "Orrery repository, with the website for one new file and one check. L-522 (document caps), step 2. The brief is documentation/COORD_L522_step2_exhibit_split_brief_20261110.md."
+- *(do)* It will ask you one thing first: whether it may edit the skill and write two files in the website's folder. The answer is yes.
+- *(do)* Paste me its Part 1 report before you give the go-ahead.
+- *(do)* At the close: push the website, then the orrery; reinstall interactive-exhibit; paste the protocol into the Project.
+
+**Where this leaves us**
+
+- Step 2 of the document caps work (ledger item L-522) is ready to build. Nothing is changed in the skill until the Code session runs.
+- Both repositories are where the brief expects them: orrery `f74ab006`, website `e21b6746`. Your push of the three files moves the orrery on by one commit, which the brief allows for.
+- Where We Are now names the split as next and Mars after it, by your word tonight. Its "Waiting on you" list has no open decision.
+- The new Opus coordinator for the website should start after this step closes, so it picks up the shortened skill and the new reference file.
+
+One final thought: the reference file will have no length cap, because the nightly check on GitHub only sees the orrery. It is the part of the old skill that grew fastest, so it will keep growing in its new home unless a later step gives the website its own caps check.

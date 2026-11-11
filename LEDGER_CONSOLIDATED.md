@@ -1865,6 +1865,26 @@ as an archive of the prioritization thinking -- no cleanup on close.
     must move old lines out of interactive-exhibit, at its cap of 2440,
     before adding; its home for now is SKILL_HISTORIES.md, and its
     version notes and "until v1.x" remarks are what moves.
+- **Step 2's order and plan, 2026-11-10, night.** Tony, in his run
+  record, read at 23:24: "let's do the split first. i will handoff the
+  website work to a new Opus coordinator that can pick up the updated
+  skills." So the exhibit skill's split runs before Mars, and Mars no
+  longer has to make room in the skill first. Claude proposed the plan;
+  Tony, 23:34: "i read the plan and it sounds reasonable. please
+  proceed." The plan, measured on `interactive-exhibit` 1.40 at f74ab006:
+  2,440 lines, about twenty short rules, and six long sections of 1,619
+  lines that describe the page. Each line goes to one of three places:
+  a rule stays in the skill, target 500 lines; what the page does, and
+  where, moves whole into a reference in the WEBSITE's repository, which
+  a build changes in the same commit as the code, with no skill
+  version; history moves to `documentation/SKILL_HISTORIES.md`. A script
+  accounts for every line. A check in the website's run confirms every
+  code name the reference gives exists in the code. The skill's
+  `fires_when`, about 4,000 characters, is cut to a few phrases, which
+  shortens the protocol's table. The reference gets no cap, since the
+  caps check cannot read the website's folder; it holds only the
+  present. Brief:
+  `documentation/COORD_L522_step2_exhibit_split_brief_20261110.md`.
 **Note (Claude):** not decided: each skill's target cap; the size limit
 for one ledger item. The harness (57 of the 176 modules are developer
 tools) was measured, not reviewed.

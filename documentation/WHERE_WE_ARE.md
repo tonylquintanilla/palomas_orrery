@@ -1,7 +1,7 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 10, 2026, late night: the coordinating session (Opus), step 2b's look and the red nights.
+Last updated: November 10, 2026, late night: the coordinating session (Opus), step 2b's look and the red nights; then the coordinating session (Fable), the split's brief.
 - Written at orrery d65309a and gallery e21b674, plus this session's edits.
 
 > **READ THIS FIRST**
@@ -10,11 +10,10 @@ Last updated: November 10, 2026, late night: the coordinating session (Opus), st
 > - Step 2b passed your phone look; the Sun direction line stays out of Earth's fold (L-515 (one nested tree)).
 > - The website's two red nights were JPL's, for one afternoon. Your Daily Run and a night run by hand both went green, and the site serves Nov 11's data (L-485 (a nightly run)).
 >
-> **Do next:** *Choose the order: Mars (L-514 (the Mars room)) or the exhibit skill's split (L-522 (document caps)); then build it.*
+> **Do next:** *The exhibit skill's split, one Code session through the parent folder (L-522 (document caps)), by your word of Nov 10; then Mars (L-514 (the Mars room)).*
 >
 > **Needs you now:**
-> - *(do) Commit and push the orrery: the ledger and this page.*
-> - *(decide) Which goes first: Mars, or the exhibit skill's split.*
+> - *(do) Commit and push the orrery: the ledger, this page and the split's brief.*
 > - *(do) Each morning, Fetch origin and Pull origin on both, orrery then website, before any work. If Pull origin shows up only once you have changes: Commit them first, then Pull origin, then Push origin. If Desktop stashes your changes anyway, restore them at once: Changes tab, Stashed Changes, Restore.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
 
@@ -100,7 +99,8 @@ Read from files when this page was written, not typed from memory.
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
 Decisions, one at a time:
-- Which goes first: Mars (L-514 (the Mars room)), or the exhibit skill's split (L-522 (document caps)), which Mars would otherwise have to make room in.
+- None open. You ruled the order Nov 10: the exhibit skill's split
+  (L-522 (document caps)), then Mars (L-514 (the Mars room)).
 
 At the next design talk:
 - How obsolete code is treated, and when it goes (L-509 (obsolete
