@@ -395,7 +395,7 @@ Website:
 1. *(do)* Commit and push the orrery. The change list should show `DOCUMENT_CAPS.md`, `LEDGER_CONSOLIDATED.md`, `documentation/WHERE_WE_ARE.md`, the run's four outputs (`DATA_INVENTORY.md`, `PROVENANCE_AUDIT.md`, `data/provenance_history.json`, `documentation/prompts/citation_review.jsonl`), and your run record. Until you push, the orrery on GitHub still holds the old caps, so the Document caps row would read red for anyone running the check there: CLAUDE.md is at 111 lines against the old cap of 100. This commit fixes it.
 
 **Tony-action rollup**
-- *(do)* Commit and push the orrery, as above.
+- *(do)* Commit and push the orrery, as above. -- 24ff0005d9e304391c7cd3669df38b1498f8068c
 - *(do)* Replace `C:\Users\tonyq\OneDrive\Desktop\python_work\CLAUDE.md` with a copy of `palomas_orrery_for_github\documentation\python_work_door\python_work_CLAUDE.md`, renamed `CLAUDE.md`.
 - *(do)* Reinstall ledger-and-session-records 1.23 (Settings > Skills).
 - *(do)* Paste protocol v3.137 into the Project's instructions on claude.ai.
@@ -407,3 +407,27 @@ Where this leaves us:
 - Next on the road: your look at step 2b, then Mars, which pays first.
 
 **One final thought:** I set the new caps only at the very end. So your checkpoint push after Part 3 went up with the caps check red, CLAUDE.md at 111 lines against 100. I should have reset each document's cap as each part changed it, so that every push you made was green.
+
+================================
+
+**Fable:**
+
+Step 1 is confirmed from GitHub, at orrery 24ff000 and website 41126f9.
+
+- The caps check passes on a clean copy: 18 documents within their caps, and all 12 skills listed.
+- The ledger check and the skills check both pass.
+- Only one file in the orrery is still named `CLAUDE.md`, the real door. Both stray ones are renamed.
+- Both doors carry the new lines. The orrery's is 111 lines and the website's is 116.
+
+The new closing line also had its first real use. The Code session ended with "One final thought", and it was a criticism of its own work: it set the caps only at the very end, so one of your checkpoint pushes went up with the check red.
+
+**Run order**
+1. *(do)* Replace `python_work\CLAUDE.md` with a copy of `palomas_orrery_for_github\documentation\python_work_door\python_work_CLAUDE.md`, renamed `CLAUDE.md`.
+2. *(do)* Reinstall the records skill, ledger-and-session-records, at 1.23. The copy this session can see still reads 1.22, though it may have been loaded before any reinstall.
+3. *(do)* Paste protocol v3.137 into the Project's instructions.
+4. *(do)* Give the Opus session the last line of a failed night's log.
+
+**Where this leaves us**
+- Every working document now has a cap at today's size, and the maintenance run names any document that goes over.
+- Five steps of the catch-up remain. The next on my track is splitting the exhibit skill into its rules and a reference. I write its brief when you say it is next.
+- As the road stands, Mars comes first and has to make room in the exhibit skill before adding to it. If the split runs before Mars, that problem does not arise. The order is yours.
