@@ -425,11 +425,11 @@ The new closing line also had its first real use. The Code session ended with "O
 1. *(do)* Replace `python_work\CLAUDE.md` with a copy of `palomas_orrery_for_github\documentation\python_work_door\python_work_CLAUDE.md`, renamed `CLAUDE.md`. -- done
 2. *(do)* Reinstall the records skill, ledger-and-session-records, at 1.23. The copy this session can see still reads 1.22, though it may have been loaded before any reinstall. -- done. no line change. 
 3. *(do)* Paste protocol v3.137 into the Project's instructions. -- done
-4. *(do)* Give the Opus session the last line of a failed night's log.
+4. *(do)* Give the Opus session the last line of a failed night's log. 
 
 -- done. Nightly run rerun manually and it worked. 
 
 **Where this leaves us**
 - Every working document now has a cap at today's size, and the maintenance run names any document that goes over.
 - Five steps of the catch-up remain. The next on my track is splitting the exhibit skill into its rules and a reference. I write its brief when you say it is next.
-- As the road stands, Mars comes first and has to make room in the exhibit skill before adding to it. If the split runs before Mars, that problem does not arise. The order is yours.
+- As the road stands, Mars comes first and has to make room in the exhibit skill before adding to it. If the split runs before Mars, that problem does not arise. The order is yours. -- let's do the split first. i will handoff the website work to a new Opus coordinator that can pick up the updated skills. 

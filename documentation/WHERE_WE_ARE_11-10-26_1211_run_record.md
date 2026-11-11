@@ -293,7 +293,7 @@ Orrery:
 Website: none.
 
 **Your run order**
-1. Commit and push the orrery. -- 
+1. Commit and push the orrery. -- c285fbb9bd4b4ad260230d006ebf49f1278622b3
 
 **The one decision now open:** which goes first, Mars, or the split of the exhibit skill into its rules and a reference? Fable raised it. The skill is at its cap of 2,440 lines, so if Mars goes first, the Mars session must move old lines out of the skill before adding any.
 
@@ -302,4 +302,4 @@ Website: none.
 - The website's nights are green again, and the site serves Nov 11's data.
 - Next is Mars or the skill's split, in the order you choose.
 
-**One final thought:** to read back two file sizes I loaded your orrery's whole folder listing into the conversation, which is the waste the token rule names. Next time I'll list only the one folder and slice out the line I need.
+**One final thought:** to read back two file sizes I loaded your orrery's whole folder listing into the conversation, which is the waste the token rule names. Next time I'll list only the one folder and slice out the line I need. -- thanks.
