@@ -1,20 +1,20 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 10, 2026, afternoon: the website Code session (Opus), step 2b's phone-look fixes, after the coordinating session (Fable), the documents review.
+Last updated: November 10, 2026, afternoon: the website Code session (Opus), step 2b's phone-look fixes, after the coordinating session (Fable), the documents review; then that session's protocol talk.
 - Written at orrery d039089 and gallery e0e94b8, plus this session's edits.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
 > - The governing documents were reviewed. They only grow, so each gets a length cap (L-522 (document caps)).
-> - The catch-up is six small sessions between builds. Step 1 goes before Mars, by your word of 12:21.
+> - The protocol's reduction is decided by your five rulings of this afternoon: about 700 lines against a cap of 800 (L-522 (document caps)). Step 1 goes before Mars.
 > - Your phone look at step 2b found four faults, now fixed but not yet seen: Find brings a planet's moons, ticking keeps a centred view, the trail follows, Jupiter's orbit runs through Jupiter. Charon's sentence is in your words (L-515 (one nested tree)).
 >
 > **Do next:** *Your look at step 2b's fixes (L-515 (one nested tree)); the caps' step 1, one Code session on the orrery (L-522 (document caps)); then Mars (L-514 (the Mars room)).*
 >
 > **Needs you now:**
-> - *(do) Commit and push the website (the fixes), then the orrery: the ledger, this page, the dashboard's line and the brief for step 1.*
+> - *(do) Commit and push the orrery: the ledger, this page, the two talks' records and step 1's amended brief.*
 > - *(decide) Whether Earth's fold draws the Sun direction line again (L-515).*
 > - *(do) Each morning, Fetch origin and Pull origin on both, orrery then website, before any work. If Pull origin shows up only once you have changes: Commit them first, then Pull origin, then Push origin. If Desktop stashes your changes anyway, restore them at once: Changes tab, Stashed Changes, Restore.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*

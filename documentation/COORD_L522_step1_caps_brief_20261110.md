@@ -10,13 +10,20 @@ L-522 (document caps), and this brief are in Tony's next orrery push;
 the session reads them in the folder in front of it. Nightly bot
 commits since are expected.
 
+Amended 2026-11-10, 15:26 Chicago, at orrery aa4b6184 and gallery
+2dec9fc5, before any session read it, on Tony's rulings of 14:24 to
+15:24: the caps go on one page in the root (settled); Part 3 widened to
+the Code doors in both folders; `git mv` replaced by a plain rename.
+And at 16:14, on his ruling of 16:11: Part 2 adds "One final thought".
+
 Tony's local folders: orrery
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\
 gallery
 C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\
 
 Type: BUILD, a Claude Code session in the ORRERY repository, through the
-python_work door. The gallery is not touched. Written November 10, 2026
+python_work door. In the gallery ONE file is edited, its `CLAUDE.md`
+(Part 3), and nothing else there. Written November 10, 2026
 with Anthropic's Claude Fable 5.2, the coordinating session, after
 Tony's rulings of 09:42 to 12:21 Chicago.
 
@@ -34,7 +41,9 @@ its own session.
 
 ## Start
 
-1. The orrery's CLAUDE.md, from its first step.
+1. The orrery's CLAUDE.md, from its first step. Record both bases,
+   since one gallery file is edited; if the gallery's `git status`
+   shows edits waiting, say so and stop.
 2. L-522 (document caps) in `LEDGER_CONSOLIDATED.md`, in full. Then
    `documentation/DESIGN_document_caps_rulings_20261110.md`. The
    review's measurements are in
@@ -43,10 +52,8 @@ its own session.
 3. Skills: ledger-and-session-records (1.22, in full: this session
    changes it); safe-file-editing (1.14); agentic-pre-test (1.3). A
    copy that disagrees with the manifest: stop and say so.
-4. L-522 carries one open decision of Tony's: all the caps on one page,
-   or each cap in its document's own first lines. This brief is written
-   for the one page. If the ledger shows he chose the first lines, stop
-   and tell him the brief needs its second section rewritten.
+4. Where the caps are written is ruled (L-522, 14:24): one page, in the
+   root.
 5. Ask Tony ONE thing before building: this session changes the records
    skill. May it edit that SKILL.md, run `skills_index.py`, and add one
    protocol version entry (the records skill's binding rule)?
@@ -102,6 +109,13 @@ its own session.
   130-line half of L-396's check is built here. The date half compares
   the page with the ledger's header stamps, which step 4 removes; it
   stays on L-396, and the bullet says so.
+- The same section's bullet on the close of a turn ("Where this leaves
+  us") gains one sentence, Tony's ruling of 16:11 (L-522): after those
+  bullets a session may add one line, "One final thought:", when it has
+  a criticism or a concern nobody asked for. The line says what the
+  session would do differently. It is optional and absent most days; a
+  session never invents one to fill it. The same sentence, shortened,
+  goes into each door's "How to report to Tony".
 - Pay where you touch, in this session first: the records skill ends no
   longer than the 807 lines it began with, and `CLAUDE.md` no longer
   than its 100 plus the lines added here. If the three-entry rule moves
@@ -110,7 +124,8 @@ its own session.
   the binding rule. The protocol's row on the page takes the protocol's
   size after that entry.
 
-**Part 3: the two stray CLAUDE.md files.**
+**Part 3: the Code doors.**
+The stray ones:
 - Claude Code loads a CLAUDE.md it finds in a subfolder when a session
   reads a file in that folder. Two sit under `documentation/`:
   - `documentation/CLAUDE.md`, a Claude Code handoff of February 2026.
@@ -119,12 +134,13 @@ its own session.
     loaded.
   - `documentation/python_work_door/CLAUDE.md`, the canonical copy of
     the door in the parent folder.
-- Rename both so neither is named CLAUDE.md where it sits. Use
-  `git mv`, so the history follows. The names are method; say them. The
-  February file is a record: its words are not edited.
+- Rename both so neither is named CLAUDE.md where it sits. A plain file
+  rename, not a git command: GitHub Desktop will show one file removed
+  and one added for each. The names are method; say them. The February
+  file is a record: its words are not edited.
 - The door's own text says where its canonical copy lives. Correct that
   sentence in the canonical copy. The copy in Tony's `python_work`
-  folder is outside this repository and is his to replace: a
+  folder is outside both repositories and is his to replace: a
   **Tony-action (do)**, with the exact file to copy and the name it
   must have there.
 - Live references to the old paths are few: L-499 (the kinds of
@@ -132,15 +148,35 @@ its own session.
   which does not change. Do not edit handoffs, spent patches or run
   records to match; they are history.
 
+The two real ones. Tony, 15:19: "Honestly Code works great." So the
+doors' structure is left alone, and three small things change:
+- A skill has two copies a Code session can see: the repository's, and
+  the one installed in Tony's account, which Claude Code also offers a
+  signed-in session. The door says which is read: the repository's. An
+  installed skill of the same name is not invoked.
+- The closing report's token line. The run records show that the app
+  Tony uses prints no /cost figure, session after session. Where none
+  prints, the report gives the context size the app shows at the close,
+  and the sizes read and written, in that form every time.
+- The website's door, `..\tonyquintanilla.github.io\CLAUDE.md`, is
+  brought level with the orrery's: it never received the Token Economy
+  edits of November 2 (skills read in the parts the job needs; the
+  token line in the closing report). It gets those, the two lines
+  above, and Part 2's cap line. What is the website's own stays: its
+  tests, the served cache it must not edit by hand, where the records
+  go. Each door ends no longer than 100 lines plus what this brief
+  adds; say the two counts.
+
 ## Out of scope
 
 - No document is shortened beyond what Part 2 asks.
 - No cap line is written into any skill's header or any document's
   first lines.
-- The website's `README.md` and `CLAUDE.md` get their rows from a
-  website session. Note on L-522 that the website's CLAUDE.md is owed
-  the cap rule, and the Token Economy lines of November 2 it never
-  received.
+- Rows on the page for the website's `README.md` and `CLAUDE.md`: add
+  them only if the maintenance run can read the sibling folder
+  everywhere it runs, the night's run on GitHub included. If it cannot,
+  leave them out and say so on L-522.
+- Nothing else in the gallery folder.
 - The 500-line warning, the contents lists and the read plans in
   `skills_index.py` stay as they are.
 
@@ -151,6 +187,9 @@ its own session.
 - `ledger_index.py --check` and `skills_index.py --check` after the
   records.
 - The three red results of Part 1, from the throwaway copy.
+- The gallery: its one edited file is ASCII with LF endings. Say whether
+  any row of the gallery's maintenance run reads `CLAUDE.md`; run it
+  only if one does.
 
 ## Close
 
@@ -159,12 +198,17 @@ its own session.
 - Where We Are, by section, within its 130 lines: the road's line d,
   Do next, Needs you now.
 - The final report, in the form CLAUDE.md's "How to report to Tony"
-  sets: every file changed; the caps table; the Tony-action rollup (the
-  commit and push, the door's copy, the records skill's reinstall, the
-  protocol's paste); the token count as the environment prints it.
+  sets: every file changed, in both folders; the caps table; the
+  Tony-action rollup (commit and push the website for its one file,
+  then the orrery; the door's copy; the records skill's reinstall; the
+  protocol's paste); the token line in Part 3's new form.
 - A consequence to state plainly to Tony in the report: from this
   session on, the Mars session is the first that will have to move old
   lines out of interactive-exhibit before adding new ones. Its home for
   now is `documentation/SKILL_HISTORIES.md`, and its version notes and
   "until v1.x" remarks are what moves.
+- The build track (L-515 (one nested tree), then L-514 (the Mars room))
+  has its own coordinating session, on Opus (Tony, 15:24). This session
+  leaves that track's lines on Where We Are and its ledger items as
+  they are.
 - Commit and push are Tony's.

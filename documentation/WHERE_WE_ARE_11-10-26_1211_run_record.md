@@ -188,8 +188,31 @@ Once you commit and push the website, the live site will draw the line through J
 
 **Your run order:**
 1. Commit and push the website, -- 2dec9fc55164be4db9e6b0b591034d0952f525f6
-2. then the orrery. -- 
+2. then the orrery. -- aa4b61841be3c906e32f047e9021076c55aa46bb
 3. On your phone, centre on Jupiter again and zoom in.
+
+**Tony-actions**
+- (decide) Whether Earth's fold draws the Sun direction line again.
+- (do) Commit and push the website, then the orrery.
+- (do) Each morning, Pull origin on both, orrery then website.
+- (do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).
+
+=========================================================================
+
+The live site still runs your last push (e0e94b8), so the fix isn't there yet; I'm checking the fixed page at your zoom next.
+
+Your phone is showing the live site, which doesn't have the fix yet. Today's fixes are on your computer only; the website on GitHub is still at your last push (e0e94b8).
+
+- **What you measured is the fault I found:** your 0.0002 AU is about 30,000 km. The fault I measured was 27,957 km, the gap between Jupiter and the straight piece of the drawn orbit next to it.
+- **On the fixed copy:** I opened it centred on Jupiter and checked three zooms: the Io view, your zoom, and ten times closer than yours. At all three the orbit line passes exactly through Jupiter (0 km off), where the axis lines cross.
+
+Once you commit and push the website, the live site will draw the line through Jupiter. You may need to reload the page on your phone to see it.
+
+**Files for your run record:** nothing new since my last report. I only opened the page; nothing was edited.
+
+**Your run order:**
+1. Commit and push the website, then the orrery.
+2. On your phone, centre on Jupiter again and zoom in.
 
 **Tony-actions**
 - (decide) Whether Earth's fold draws the Sun direction line again.

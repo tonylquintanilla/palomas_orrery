@@ -1641,8 +1641,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
   something out first, to that home. (3) The maintenance run prints
   every document over its cap, by name; only Tony raises a cap's number.
   No new skill.
-- **Where the caps are written: changed after the tools were read, and
-  waiting for Tony's word.** At the talk rule 1 put each cap in the
+- **Where the caps are written: on one page, changed after the tools
+  were read.** At the talk rule 1 put each cap in the
   document's own first lines. `doc_index.py` reads only the root's
   documents, a skill has no such line, and a cap written into twelve
   skill headers would make every installed copy differ from the
@@ -1650,8 +1650,13 @@ as an archive of the prioritization thinking -- no cleanup on close.
   the caps on ONE short page at the root, `DOCUMENT_CAPS.md`: the three
   rules and a table of document, cap and home. One place for Tony to
   read and to change a number, one tool, no skill header touched.
-  **Tony-action (decide):** the one page, or the first lines as first
-  said.
+  **Ruled 2026-11-10, 14:24.** Tony: "One page in the root folder with
+  other primary documents or in the skills/ folder." One page it is. Of
+  the two places he named, the coordinating session takes the root, as
+  the brief already says: the page covers documents that are not skills,
+  `doc_index.py` reads the root, and the README's table of key documents
+  lists a root document by itself. Said to Tony the same hour; his to
+  overrule.
 - **The six steps**, each one session, between builds:
   1. the mechanism, every cap set at the document's size that day, and
      the two CLAUDE.md files under `documentation/` renamed (brief:
@@ -1683,14 +1688,114 @@ as an archive of the prioritization thinking -- no cleanup on close.
   header carried no stamp for the Nov 10 build while Where We Are's
   third signal said the two dates agreed; this session's stamp is the
   first of Nov 10.
-**Note (Claude):** not decided, and listed on the design record: the
-protocol's cap (800 lines again, or higher); whether the skill table
-leaves the protocol and the stale-skill check becomes "the installed
-skill equals the repository's copy", a change to a [CRITICAL] gate; each
-skill's target cap; the size limit for one ledger item. The harness (57
-of the 176 modules are developer tools) was measured, not reviewed.
-**Gap:** steps 1 to 6. **Tony-action (decide)**, at step 3: the
-protocol's cap, and whether the skill table leaves the protocol.
+- **A fault in this session's own instrument, 2026-11-10, about
+  14:25.** Recording the ruling above, the session sent this ledger to
+  Tony's computer a second time from the same staged path, and the tool
+  delivered the first write's bytes, of 12:28, which lacked the website
+  session's phone-look records on L-515. The read-back caught it by the
+  file's size. The right bytes went from a fresh path within a minute
+  and read back identical; GitHub was never affected. Method from now:
+  a fresh staged path for every write, and no write counted until it is
+  read back and compared. It adds to L-499's rule that a placed file is
+  confirmed by reading it back.
+- **Step 3's talk, 2026-11-10, 14:50 to 15:08, by phone**
+  (`documentation/DESIGN_protocol_reduction_rulings_20261110.md`, which
+  quotes each ruling with its time). The protocol's reader is Claude
+  and any outside model it is carried to: Tony, 14:57, "the only
+  document I track myself is the Where We Are unless I'm searching for
+  something." Five rulings:
+  1. The skill table leaves the protocol; the stale-skill check becomes
+     "the installed skill equals the repository's copy". Read as yes
+     from his words of 14:53 and said so; the new wording of that
+     [CRITICAL] gate comes to him in the draft before it stands.
+  2. Each rule keeps one line of its history, with the date, the handle
+     and a pointer to the history file, written for a session's use;
+     the paragraphs and the version history move out (14:57).
+  3. Part 4 and the quotations move whole into `PROJECT_ORIGIN.md` as
+     legacy; the protocol keeps a short core of what changes a
+     session's conduct, written for the models in use today (15:01).
+  4. Claude proposed the sort. The rules are sorted by what they guard
+     against. Truth and
+     checking stay; how a session talks to Tony stays; the coaching on
+     basic conduct, roughly 140 lines, is tested against the ledger,
+     and a model's own word that it no longer needs a rule is not
+     evidence (15:05, "I agree").
+  5. The protocol's cap is 800 lines: Claude recommended Tony's own
+     old number, and he answered at 15:08, "Confirmed".
+  The draft is written when step 3's session is next. It should land
+  near 700 lines; that is an estimate.
+- **Ruling 3 amended by Tony, 2026-11-10, 16:37, unasked:** "And the
+  conversation is the one part of the old protocol philosophy I would
+  not, repeat, not want to lose." And at 16:33: "Well this is a
+  conversation. My focus shifts. New things attract. No strict rules
+  are needed." So the draft keeps the protocol's passages on the
+  conversation whole and in their own words (The Conversation is the
+  Point; Language is the Secret Sauce; Interpretability Through Dialog;
+  Thought at the Speed of Language; Don't Let Them Take The Language
+  Away; The Undilated Frame), not cut to a line by a session. The rest
+  of Part 4 moves to `PROJECT_ORIGIN.md` as ruled. Which passages count
+  as "the conversation" is this session's reading of his sentence; the
+  draft shows him the list before anything moves.
+- **The Code doors, 2026-11-10, 15:12 to 15:24.** Tony asked about
+  CLAUDE.md in both repositories, "actively using Code now". Read
+  against Claude Code's own documentation (its memory and skills pages,
+  that hour) and the November run records. Tony, 15:19: "Honestly Code
+  works great. The run records tell the details." So the doors'
+  structure stays, and three small changes ride step 1's third part:
+  the door says the repository's copy of a skill is the one read, not
+  the copy installed in the account; the closing report gives the
+  context size the app shows where no /cost figure prints, which the
+  run records show is every session in Tony's app; and the website's
+  door is brought level with the orrery's, having missed the edits of
+  November 2. Tony, 15:22, when the website's door was first put in the
+  Mars brief: "We should keep the tasks separate." It goes in step 1;
+  the brief is amended.
+- **Seen and left for the next review, not acted on.** Each door pulls
+  in the whole protocol, about 1,600 lines with the door, about 800
+  after step 3; the documentation's target is under 200. Through the
+  parent folder each repository's door is a nested file, which the
+  documentation says is not reloaded by itself after a long session is
+  compacted. Code sessions close at 330,000 to 577,000 tokens of
+  context by their own reports. The protocol's "measured" line (Token
+  Economy) asks for the /cost figure and needs the door's change, at
+  step 3.
+- **Two coordinating sessions** (Tony, 15:24: "Opus is Coordinating the
+  other build"). This one, on Fable, has L-522. An Opus session has the
+  build track, L-515 (one nested tree) and L-514 (the Mars room). Each
+  reads this ledger fresh from Tony's folder before it writes, and
+  leaves the other's items and lines alone.
+- **The oversight talk, 2026-11-10, 15:30 to 16:12, by phone**
+  (`documentation/DESIGN_oversight_talk_20261110.md`, which holds
+  Tony's words on how he oversees the project and says, for each
+  decision, who proposed it). Decided:
+  1. One page of about ten boxes, stages and no file names, at the top
+     of the README, redrawn at step 6. Claude proposed; Tony, 15:51,
+     "Yes."
+  2. The README is cut at step 6 to what changes only at a major build,
+     its present state a pointer to Where We Are. Claude recommended;
+     Tony, 15:55, "I'll follow your recommendation on both."
+  3. A review by GPT of the same question this session was given,
+     without this session's review, before the protocol's draft; the
+     request is written when step 3 is next. Claude recommended;
+     accepted in the same sentence.
+  4. "One final thought": after the "Where this leaves us" bullets a
+     session may add one line with a criticism nobody asked for, saying
+     what it would do differently; optional, absent most days. Tony
+     named the gap (16:08) and placed the line (16:11, "Yes but at the
+     'where this leaves us' part."). It goes into the records skill at
+     step 1.
+  5. A record quotes Tony exactly and, where his answer is a short yes,
+     says whose proposal it was (Tony, 16:03: "You also quote me
+     verbatim as the backup.").
+  Offered and not decided: obsolete code removed in the session that
+  makes it obsolete, and a dead-code pass, both with L-509 (obsolete
+  code) on the build track.
+**Note (Claude):** not decided: each skill's target cap; the size limit
+for one ledger item. The harness (57 of the 176 modules are developer
+tools) was measured, not reviewed.
+**Gap:** steps 1 to 6; step 3's talk is held, its draft is not written.
+**Tony-action (decide)**, on step 3's draft: the stale-skill gate's new
+wording, and the gates for the stores in use.
 **Ref:** the review and the design record named above; L-199, L-215,
 L-230, L-328, L-396; L-417 and L-418 (the 500-line warning and the
 contents lists); L-499 (the kinds of session); L-506 (Token Economy);
