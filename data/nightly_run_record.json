@@ -3,9 +3,9 @@
   "schema": 2,
   "taken": [],
   "held": [],
-  "clean_run_utc": "2026-11-10T18:44:29.559828+00:00",
+  "clean_run_utc": "2026-11-11T15:13:41.843225+00:00",
   "where": "GitHub Actions",
-  "run_log": "https://github.com/tonylquintanilla/palomas_orrery/actions/runs/42877864474",
+  "run_log": "https://github.com/tonylquintanilla/palomas_orrery/actions/runs/43045889365",
   "reported_not_red": [],
   "rows": [
     {
@@ -196,6 +196,10 @@
     {
       "row": "Dashboard parity",
       "why": "judges the dashboard's code"
+    },
+    {
+      "row": "Document caps",
+      "why": "judges the working documents, and at night only data changes"
     },
     {
       "row": "Worksheet checker",
