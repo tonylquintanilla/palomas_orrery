@@ -4688,6 +4688,59 @@ resident.
 (Moved down from the resident protocol on 2026-11-10, night, when
 v3.137 made a fourth entry.)
 
+v3.135 (November 9, 2026, evening): No rule changed in this document.
+ONE skill bump: interactive-exhibit 1.38 -> 1.39 (L-519, Featured's
+rethink, part 2). PLACES: A CARD BESIDE ONE OR SEVERAL ROWS, AND THE
+GALLERY EDITOR'S TREE AS THE ROOM'S OWN DRAWER.
+
+WHAT PROMPTED IT. The Claude Code session of Nov 9, evening (Claude Opus
+5.5), through the python_work door, built on orrery 09fb6934 and gallery
+66c9f698, from Tony's prompt and L-519's part 2, designed that afternoon
+(14:53: "I should be able to put the ED138 scene next to the ED138 body
+instead of the one scenes drawer"; 14:58: "can we put it next to more
+than one body"; 15:00: "B so I can decide what goes where"). Before
+building it told Tony how the tree would look and how a card is placed,
+with the two calls the design left as method; he asked how a scene of
+Voyager 1 past the Heliopause would sit, and ruled the Sun's shells and
+the belt's cloud places too ("Yes we can add them"), asking that the
+architecture take planet features later.
+
+WHAT CHANGED. interactive-exhibit: a card's drawer_row is one place or a
+list; a place is any row the Solar System room's drawer lists -- a body,
+a group, one of the Sun's shells by its served shell key, the belt's
+cloud by its drawing's name; a card shows in each place and is counted
+once; a scene sits in a Scenes fold under each row it names, under the
+Sun when it names none; Back returns to the fold a card was opened from.
+The gallery editor's Solar System door lists the room's own drawer in
+the website's order, and a card's form has Places in the drawer, Add
+place... and Remove place (tools/drawer_places.py; the gallery run's new
+Drawer places row). A planet's feature becomes a place the same way once
+the Solar System room draws it as a row. And Tony's phone look of the
+afternoon: Find shows a scene whose name holds a body's name beside the
+body. Its oldest of four version entries (1.36) moved to
+documentation/SKILL_HISTORIES.md, by the three-entry rule. Every sentence
+was read from the gallery's code with this session's edits before it was
+written.
+
+THE OBLIGATION TRAVELS. This session loaded interactive-exhibit from the
+account and it read 1.37, not the manifest's 1.38: the session had begun
+before Tony reinstalled 1.38, and the account's copy on disk read 1.38,
+byte for byte the repo's, so the session worked from that copy and said
+so to Tony. It read gallery-pipeline, safe-file-editing and
+ledger-and-session-records in the parts the work needed. Tony reinstalls
+interactive-exhibit (Settings > Skills) and pastes this version into the
+Project's instructions on claude.ai; the next session that loads it from
+the account confirms its copy reads 1.39 before work that fires it.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.132 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-11-11, when
+v3.138 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

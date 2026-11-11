@@ -772,9 +772,9 @@ Paste this to the Code session:
 > 2. Then stop for Tony's checkpoint push. Part 4, the tap fix, follows it, and the close comes after Part 4.
 
 **Run order**
-- *(do)* Paste the block above to the Code session. -- working
-- *(do)* When it reports the fix, commit and push the website, then the orrery. You need not bring me that report; I will check the fix together with Part 4.
-- *(do)* Then paste the Part 4 block from my previous message, the tap fix.
+- *(do)* Paste the block above to the Code session. -- done
+- *(do)* When it reports the fix, commit and push the website, then the orrery. You need not bring me that report; I will check the fix together with Part 4. -- done
+- *(do)* Then paste the Part 4 block from my previous message, the tap fix. -- done
 - *(do)* Bring me Part 4's report before the close.
 
 **Where this leaves us**
@@ -826,9 +826,115 @@ GitHub Desktop will also show your two run-record copies in the orrery (`WHERE_W
 
 **Your run order:**
 1. Website: commit and push the four files. -- 1948e7903d422ed7df6d1c1b7cfd9c613971ac5c
-2. Orrery: commit and push the skill, plus your run records if you want them in this push. -- 
-3. Tell me when it's done. Part 4, the tap fix, comes next, and the close comes after it.
+2. Orrery: commit and push the skill, plus your run records if you want them in this push. -- eb771379dfeda695f4f2058e7660037fa0906349
+3. Tell me when it's done. Part 4, the tap fix, comes next, -- working
+4. and the close comes after it.
 
 The name check now reads backticked names that wrap a line, and its two planted names go red. It runs green inside the website's runner. Nothing past this point is built; Part 4 (the tap fix) and the close wait on your checkpoint push.
 
-Tell me when the checkpoint push is done.
+Tell me when the checkpoint push is done. -- done
+
+======================================
+
+**Code:**
+
+Adding the two buttons now, in the same form as the View Centre and Drawer Places buttons.
+
+The buttons are in and the dashboard compiles. Now the parity check by itself, then the whole orrery run again, to read it green.
+
+Dashboard parity now passes by itself: 108 steps matched to their buttons. The whole orrery run is going again in the background. When it finishes I'll fix the L-522 line about the red row and send the final report.
+
+The orrery run is green: 36 of 36 checks that gate the push passed, and Dashboard parity passes. Correcting L-522's line about the runs, then gathering the file list for the report.
+
+The session is done: the exhibit skill is split, the tap fix is built, and both maintenance runs are green. Nothing is committed yet; that's yours.
+
+**What changed, in plain words:**
+- **The split.** The exhibit skill went from 2,440 lines to 738. Its rules stayed. What the website's page does, and which code does it, moved word for word into a new page in the website, `INTERACTIVE_AS_BUILT.md`. A script showed that every old line landed in exactly one place, or is listed with its reason.
+- **The name check.** A new check in the website's run holds every code name on that page to the real code. Its first run found two old names, now fixed.
+- **Taps (L-523).** A thumb tap a little off a small dot now opens its box. By your ruling, the wider reach applies to any finger, with the phone held either way. L-523 stays open until your phone look.
+- **The dashboard.** By your "Yes", it has two new buttons, one for each new website check.
+- **The caps.** The exhibit skill's cap is lowered to 738 and the protocol's to 1,394.
+
+**The runs:**
+- Orrery, second pass: 36 of 36 checks that gate the push passed, and the provenance scan reads 0 Tier-1 problems.
+- Website, offline: 47 of 47 passed.
+- The skills check, the ledger index and the caps check all pass.
+
+**For the website's new coordinating session.** The interactive-exhibit skill (1.41) now holds only the rules for building a room: how to work, what must be served, which checks to trust. It is read from the orrery's `skills/` folder. `INTERACTIVE_AS_BUILT.md`, at the website's root beside `interactive.html`, says what the page does today: each part, the function or file that does it, and your rulings. A session reads the section for the part it changes, and changes that section in the same commit as the page's code. The website run's "As-built names" row keeps its code names honest. The website's `CLAUDE.md` and the skill each point to it.
+
+**Where this leaves us.** Step 2 of L-522 (document caps) is done. What's left is your reinstall, the protocol paste and your phone look at the taps. Then comes Mars (L-514, the Mars room).
+
+One final thought: the drawer walk, which only Claude runs, now fails 8 of its 339 checks. They fail on the website as it stood before this session too, so this session didn't cause them. Three are on L-521 (the drawer walk's red checks), and the five new ones are written on L-523. Nothing you see in your runs is red because of them, but they're aging.
+
+**Files for your run record** (since the session's start, orrery 87fb472e and website e21b6746; some are already in your checkpoint pushes):
+
+Orrery, edited by this session:
+- ok `skills/interactive-exhibit/SKILL.md` (the split, then about 10 more edits: pointers, wording, the tap correction, version 1.41, reading plans)
+- ok `PROJECT_INSTRUCTIONS.md` (3 edits: v3.138 entry, stamp and anchor, the table regenerated)
+- ok `documentation/SKILL_HISTORIES.md` (2 edits: the install confirmations, the 1.38 entry)
+- ok `documentation/PROJECT_INSTRUCTIONS_HISTORY.md` (1 edit: v3.135 moved down)
+- ok `DOCUMENT_CAPS.md` (2 edits: the two caps lowered)
+- ok `LEDGER_CONSOLIDATED.md` (5 edits: L-523, L-522's step 2, the ruling, the runs line, the index)
+- ok `documentation/WHERE_WE_ARE.md` (12 edits, section by section)
+- ok `palomas_orrery_dashboard.py` (3 edits: two buttons, two lines, the module note)
+
+Orrery, rewritten by the maintenance run itself: `DATA_INVENTORY.md`, `EXACT_ROWS_PRINTED.md`, `MODULE_ATLAS.md`, `MODULE_INDEX.md`, `PROVENANCE_AUDIT.md`, `data/provenance_history.json`, `documentation/prompts/citation_review.jsonl`.
+
+Website, edited by this session:
+- ok `INTERACTIVE_AS_BUILT.md` (new; then 6 edits: two name fixes, three tap passages, the counts)
+- ok `tools/check_as_built_names.py` (new; then about 12 edits: the self-skip, wrapped names, the lists)
+- ok `gallery/tap_hover.js` (new; 1 edit: `widePick`)
+- ok `documentation/smoke_tap_hover.js` (new; 2 edits: the ruling's cases)
+- ok `tools/headless/walk_tap_hover.js` (new; 3 edits)
+- ok `interactive.html` (about 10 edits: the script tag, the press record, the lift, the hover, `sunTapOpen`, the click, the wider reach)
+- ok `gallery_maintenance_run.py` (5 edits: two rows, the served file, the module note, the row note)
+- ok `CLAUDE.md` (1 edit: the pointer to the reference)
+
+Website, rewritten by its run: `MODULE_ATLAS.md`, `MODULE_INDEX.md` and the three `data/*.sha` pull records.
+
+Your two run-record copies in the orrery show as changed too. Those are your edits, and I haven't touched them.
+
+**Token count.** Your app prints no /cost figure here, and I can't see the context size it shows. Please read it off the app at the close. Sizes:
+- Read: the whole old skill (168 KB), Plotly's 3D scene source (1,160 lines), and the parts of the page, the website's run and the ledger that the work needed.
+- Written: the skill (43 KB), the reference (128 KB), the name check (17 KB), and the three tap files (20 KB together).
+
+**Your run order:**
+1. In GitHub Desktop, look over the website's changes, then commit and push the website.
+2. Commit and push the orrery.
+3. After the push, if you like, run the website's live check from the dashboard.
+
+**Tony-action rollup:**
+- (do) Commit and push the website, then the orrery.
+- (do) Reinstall interactive-exhibit (Settings > Skills). The next session that loads it from your account should read 1.41.
+- (do) Paste the protocol, v3.138, into the Project's instructions on claude.ai.
+- (do) Your phone look at the taps, in portrait and landscape. Tap a planet, a small body, and a moon beside its planet, each a little off its dot. Then a drag and a pinch, which must open nothing. The list is on L-523.
+- (decide) The stale-looking rules listed on L-522, when you have a moment.
+
+======================================
+
+**Fable:**
+
+Confirmed. Go ahead and commit: the website first, then the orrery.
+
+I read the sixteen changed files from your computer and checked them on a copy of both folders.
+
+- **The split holds.** The skill is 738 lines at version 1.41. My own line count still finds every old line in exactly one place, apart from the lines the session reported changing: the three from the split itself, the version header lines, the two name fixes and the tap sentences.
+- **The hole in the name check is closed.** I broke four names on the lines where a name wraps, and the check went red on each one. It passed all four last time.
+- **The tap fix does what was asked.** A finger's near miss now opens the box, once per press. A drag, a pinch and a mouse do not. Its own check passes here, 25 cases.
+- **The records agree.** The caps check passes with the two lowered caps (skill 738, protocol 1,394). The skills check and the ledger check pass.
+
+I did not rerun the two full maintenance runs. The 36 of 36 and 47 of 47 are the Code session's figures. The same goes for the drawer walk's eight failing checks, which it says were failing before this session.
+
+**Run order**
+- *(do)* Commit and push the website, -- ebb8e623d45698fe1efc71e469446b6a14818613; nightly run #28 failed on exit code 1. 
+  - then the orrery. -- 
+- *(do)* Reinstall interactive-exhibit. It should read 1.41.
+- *(do)* Paste protocol v3.138 into the Project's instructions.
+- *(do)* Try the taps on your phone after the website push, upright and sideways. The list is on the tap item in the ledger (L-523).
+- *(do)* Tell the Opus coordinator the tap fix is built, so it can write the handoff for Mars.
+
+**Where this leaves us**
+- Step 2 of the document caps work is done. The exhibit skill is under a third of its old size, and what the page does now lives beside the page, in `INTERACTIVE_AS_BUILT.md`.
+- The tap fix is built and stays open until you have tried it on your phone.
+- Where We Are sits at exactly 130 lines, its cap. The next session that adds to it has to take something out first.
+- Next on my track is step 3, the protocol's reduction. Its first piece is the review request for GPT, which I write when you say it is next.

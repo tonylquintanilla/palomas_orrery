@@ -1,19 +1,21 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 10, 2026, late night: the coordinating session (Opus), step 2b's look and the red nights; then the coordinating session (Fable), the split's brief.
-- Written at orrery d65309a and gallery e21b674, plus this session's edits.
+Last updated: November 11, 2026: the Code session (Opus), the exhibit skill's split and the tap fix.
+- Written at orrery eb77137 and gallery 1948e79, plus this session's edits.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Step 2b passed your phone look; the Sun direction line stays out of Earth's fold (L-515 (one nested tree)).
-> - The website's two red nights were JPL's, for one afternoon. Your Daily Run and a night run by hand both went green, and the site serves Nov 11's data (L-485 (a nightly run)).
+> - The exhibit skill is split: its rules stay in the skill (2,440 lines down to 738), and what the website's page does now lives in the website, `INTERACTIVE_AS_BUILT.md`, with a check that every code name it gives is in the code (L-522 (document caps), step 2).
+> - A thumb tap a little off a small dot now opens its box, in portrait and in landscape, by your ruling "Yes, any finger" (L-523 (taps sent as hovers)).
 >
-> **Do next:** *The exhibit skill's split, one Code session through the parent folder (L-522 (document caps)), by your word of Nov 10; then Mars (L-514 (the Mars room)).*
+> **Do next:** *Your phone look at the taps (L-523 (taps sent as hovers)); then Mars (L-514 (the Mars room)).*
 >
 > **Needs you now:**
-> - *(do) Commit and push the orrery: the ledger, this page and the split's brief.*
+> - *(do) Commit and push the website, then the orrery.*
+> - *(do) Reinstall interactive-exhibit (Settings > Skills), and paste the protocol v3.138 into the Project.*
+> - *(do) The phone look at the taps, portrait and landscape: the list on L-523.*
 > - *(do) Each morning, Fetch origin and Pull origin on both, orrery then website, before any work. If Pull origin shows up only once you have changes: Commit them first, then Pull origin, then Push origin. If Desktop stashes your changes anyway, restore them at once: Changes tab, Stashed Changes, Restore.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
 
@@ -40,9 +42,9 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
                to choose, within the range the data covers.
   l-c. [done]  L-517 (the lobby), L-518 (the shared link) and L-519
                (Featured's rethink): closed Nov 8 and 9 on your phone looks.
-  d.   [beside] Document caps (L-522 (document caps)): step 1 built Nov 10,
-               the page of caps and its check; steps 2 to 6 between
-               builds, the exhibit skill's split first.
+  d.   [beside] Document caps (L-522 (document caps)): steps 1 and 2
+               built Nov 10 and 11, the page of caps and the exhibit
+               skill's split; steps 3 to 6 between builds.
   b.   [beside] Housekeeping: L-424, L-425, L-426 (the checkers' three);
                L-423 (the website's checks) item 3; L-357 (stale gallery
                artifacts); L-509 (obsolete code), after its talk.
@@ -51,17 +53,17 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
 
 Standing rulings; a line leaves once it is habit, or a skill carries it.
 - The Sun direction line stays out of Earth's fold: the day-night shading and the Sun at its true place show the direction (Nov 10; L-515 (one nested tree)).
+- A finger's tap gets the wider reach on a phone held either way; a mouse keeps Plotly's own (Nov 11; L-523 (taps sent as hovers)).
 - Each working document has a length cap; a session that adds at the cap moves something out first; upkeep goes between builds, never in front (Nov 10; L-522 (document caps)).
 - One picture, one drawer: a planet folds open to its shells and moons by distance; only the Earth System and the stars stay rooms of their own (Nov 9; L-515 (one nested tree), ruling 14).
 - Centre on moves the view so the body sits in the middle, on its own opening, the axis lines through it; the Sun has one too. The orrery's view measured from a centre waits for the date span (Nov 9; L-515 (one nested tree), rulings 15 to 17).
 - The drawer's top line is a path down the tree, "Solar system > Earth > Crust" (Nov 9; L-515 (one nested tree), ruling 20).
 - You decide where each card goes: beside one or several rows, the Sun's shells and the belt's cloud included; planet features join when drawn (Nov 9; L-519 (Featured's rethink)).
 - A scene opens at now; Featured is a board highlighting important cards or scenes, kept largely as is (Nov 9; L-519 (Featured's rethink)).
-- Past the dates its data covers, a room draws the last day covered and says so; never blank (Nov 7, 12:53; L-165 (site continuity)).
 - The Moon shows JPL's period for today, like every other body, not the
   sidereal month (Nov 6, 22:17; L-513 (the Moon's standards)).
 
-## Deferred  **>> UPDATED THIS SESSION**
+## Deferred
 
 Waiting behind other work; a line leaves when picked up.
 - Step 2b's three leftovers: Io, Titan, Pluto and Charon have no words or i-panel link until the orrery keys them; Find misses a shell of Earth's by its own name until Earth's fold is first opened; a view centred on Jupiter is not in the shared link (Nov 10; L-515 (one nested tree)).
@@ -92,15 +94,15 @@ Waiting behind other work; a line leaves when picked up.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261111T042435Z, nightly (run by hand), ok, no retry (gallery swap log at e21b674, read Nov 10, late night).
-- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at orrery d65309a, its run 20261111T021609Z).
-- This page's date and the ledger's newest stamp: both Nov 10. Agree.
+- Last cache build: 20261111T042435Z, nightly, ok, no retry (gallery swap log at 1948e79, read Nov 11).
+- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md, rewritten by the orrery run of Nov 11 with this session's edits).
+- This page's date and the ledger's newest stamp: both Nov 11. Agree.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
 Decisions, one at a time:
-- None open. You ruled the order Nov 10: the exhibit skill's split
-  (L-522 (document caps)), then Mars (L-514 (the Mars room)).
+- None open. Next is Mars (L-514 (the Mars room)), after your phone
+  look at the taps (L-523 (taps sent as hovers)).
 
 At the next design talk:
 - How obsolete code is treated, and when it goes (L-509 (obsolete
@@ -119,7 +121,7 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- This session: L-515 (one nested tree), your look at step 2b; L-485 (a nightly run), the red nights' cause.
+- This session: L-522 (document caps), step 2, its brief `COORD_L522_step2_exhibit_split_brief_20261110.md`; L-523 (taps sent as hovers).
 - The caps: `DOCUMENT_CAPS.md`; L-522 (document caps); its brief
   `COORD_L522_step1_caps_brief_20261110.md` and the review beside it.
 - The tree: L-515 (one nested tree); `COORD_L515_step2b_brief_20261109.md`

@@ -63,6 +63,10 @@ Dashboard parity found them.)
 Module updated: November 10, 2026 with Anthropic's Claude Opus 5.5
 (L-522: the Document Caps button and line, for the orrery run's new
 "Document caps" check, doc_index.py --caps.)
+Module updated: November 11, 2026 with Anthropic's Claude Opus 5.5
+(L-522 step 2 and L-523: the website's Tap Hover and As-built Names
+buttons and lines, beside View Centre, for the gallery run's two new
+checks; added on Tony's word, "Yes", after Dashboard parity found them.)
 July 2026: added Linux Button-4/5 wheel scrolling to match columns 1/2's
 cross-platform coverage (CTkScrollableFrame's built-in handling only
 covers Windows/Mac <MouseWheel>). Audited LAUNCH_GROUPS against both
@@ -1252,6 +1256,33 @@ LAUNCH_GROUPS = {
         True,
         ["View centre"],
         True),
+        ("Tap Hover",
+        os.path.join("documentation", "run_offline_check.py"),
+        "A finger's tap that Plotly sends as a hover opens the marker's "
+        "box (L-523): Plotly 2.35.2 sends a tap as a click only under 5 px "
+        "from the finger. Worked cases on the real gallery/tap_hover.js -- "
+        "a tap opens; a drag, a pinch, a mouse, a late hover and a served "
+        "press do not; the wider reach is any finger's -- and the page's "
+        "wiring. It breaks its own file five ways first, to show it can "
+        "fail. GATES the gallery runner. The check is Node, so this button "
+        "runs it through documentation/run_offline_check.py. Runs from the "
+        "gallery repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        ["Tap hover"],
+        True),
+        ("As-built Names",
+        os.path.join("tools", "check_as_built_names.py"),
+        "Every code name the website's INTERACTIVE_AS_BUILT.md gives in "
+        "backticks is in the code, the gallery's or the orrery's (L-522 "
+        "step 2). It prints how many names it examined, what it set aside "
+        "as not names, and each name not found. It plants six faults on a "
+        "throwaway copy first, to show it can fail. GATES the gallery "
+        "runner. Runs from the gallery repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
+        True),
         ("Page Framing",
         os.path.join("documentation", "run_offline_check.py"),
         "The page's own framing helpers, taken out of the page and run "
@@ -2404,6 +2435,12 @@ CARD_LINES = {
     ("Gallery -- checks and data",
      "View Centre"):
         "Checks Centre on, the trail, and the shift that keeps precision.",
+    ("Gallery -- checks and data",
+     "Tap Hover"):
+        "Checks a thumb tap a little off a dot opens its box.",
+    ("Gallery -- checks and data",
+     "As-built Names"):
+        "Checks every code name the as-built page gives is in the code.",
     ("Gallery -- checks and data",
      "Page Framing"):
         "Checks the page's framing helpers give the right axis ranges.",

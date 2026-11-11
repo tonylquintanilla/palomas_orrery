@@ -1005,7 +1005,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*259 live items; 243 need attention (`!`); 165 RICE-scored; 256 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*260 live items; 244 need attention (`!`); 165 RICE-scored; 256 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1177,7 +1177,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-516 | Renew palomasorrery.com at Porkbun before 2027-02-13 (legacy; Tony's account) | OPEN | -- | 2026-11-07 |
 | ! | L-520 | Old pictures carry old words: the saved pictures' titles and descriptions have no source (gallery, the saved pictures; the braid) | OPEN | -- | 2026-11-08 |
 | ! | L-521 | Three red checks in the drawer walk (gallery, the headless walk; recorded) | OPEN | -- | 2026-11-09 |
-| ! | L-522 | Document caps: how the working documents are kept from growing, and the catch-up (protocol, skills, ledger; upkeep) | OPEN | -- | 2026-11-10 |
+| ! | L-522 | Document caps: how the working documents are kept from growing, and the catch-up (protocol, skills, ledger; upkeep) | OPEN | -- | 2026-11-11 |
+| ! | L-523 | A finger's tap that Plotly sends as a hover: a tap a little off a small dot opens its box (gallery, the text box; Tony's phone look) | OPEN | -- | 2026-11-11 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1611,8 +1612,85 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
+#### [L-523] A finger's tap that Plotly sends as a hover: a tap a little off a small dot opens its box (gallery, the text box; Tony's phone look)
+<!-- L:523 status:OPEN upd:2026-11-11 section:A flag: rice: -->
+- **Tony's word, 2026-11-11, 08:23:** "i would really like to get this
+  tapping improvement done ... could you take care of it in our Code
+  session". The fault, his words of Nov 10 and 11: "tapping with my
+  thumb works about 1/2 to 3/4 the time" and "tapping on the phone is
+  hit or miss on small object dots. People get quickly frustrated."
+  Built as Part 4 of the Code session for L-522 (document caps) step 2
+  (Claude Opus 5.5), on orrery eb771379 and gallery 1948e790, amending
+  that brief's "Out of scope" by the coordinator's word: this part
+  changes the page's code.
+- **The cause, read from the code** [verified @1948e790]. plotly.js
+  2.35.2, `src/plots/gl3d/scene.js` line 459, fetched from the tag
+  v2.35.2 that morning: after a pick the scene sends `plotly_click`
+  only when `selection.distance < 5` and a touch has been seen, and
+  otherwise sends the same pick as `plotly_hover`. The page's
+  `sunTapPicking` widens the pick to `SUN_PICK_RADIUS_PX` (22) on a
+  portrait phone only; `sunLabelInstall` opened a box on a hover only
+  for a mouse (L-497). So a thumb 5 to 22 px off a dot picked it and
+  opened nothing. MEASURED before any change: the new walk failed 3 of
+  its 13 checks on the page as it stood -- a finger's tap sent as a
+  hover, after the lift and during the press, opened nothing; drag,
+  pinch, late hover, mouse and a true click behaved.
+- **The fix.** `gallery/tap_hover.js` (`GalleryTapHover`) decides
+  whether a hover is a finger's tap: one finger, moved at most
+  `SUN_LABEL_TAP_PX` (10), lifted within `SUN_LABEL_TAP_MS` (500) -- the
+  page's own tap test, now asked of the file by the lift handler too --
+  a picked trace carrying words, a press not yet served, and the hover
+  within `SUN_LABEL_TAP_MS` of the lift; a hover while the finger is
+  still down waits for the lift. The page opens such a tap by the same
+  function as `plotly_click` (`sunTapOpen`), one focus per press
+  (`sunTapSerial`, `sunClickServedTap`), deferred out of Plotly's event
+  (L-278). Checked by the gallery run's new Tap hover row
+  (`documentation/smoke_tap_hover.js`: 19 worked cases, 25 with the
+  ruling below, and the page's wiring; its self-test breaks the file
+  four ways, five with the ruling; red on the page
+  before it was wired) and walked (`tools/headless/walk_tap_hover.js`,
+  13 of 13 after; 3 failed on a copy of the page before). The live check
+  fetches the file (SERVED_FILES).
+- **Method, Claude's calls, said so:** no new knob -- the window after
+  the lift is `SUN_LABEL_TAP_MS`; a pen counts as a finger; a hover on a
+  trace with no words takes nothing, so a click after it still opens.
+- **The 22-px reach for any finger: Tony's ruling of 2026-11-11, "Yes,
+  any finger".** It had been portrait only because L-318 round 6 tested
+  the portrait phone and Tony said the mouse was fine on the desktop; the
+  test was the screen's shape (`sunPhonePortrait`), not the finger, so a
+  landscape thumb kept Plotly's 10 px and a shell's wordless dots could
+  still win. Put to him with Claude's recommendation (apply it wherever
+  the press is a finger); he chose it. Built: `GalleryTapHover.widePick`
+  decides from the last pointer's kind (a finger or a pen; before any
+  press, a portrait phone, as before); `sunTapPicking` applies it at
+  every press and after every plot; a mouse's press puts back Plotly's
+  own. Shown red first: the walk's section 10 (a finger on a landscape
+  window) and the check's wiring line, then green: the walk 16 of 16,
+  the check's 25 cases with five breaks.
+- **Not seen headlessly:** the phone's real order of events -- whether
+  Plotly's pick comes after the lift, as a phone's compatibility mouse
+  events suggest, or during the press. Both orders are handled and
+  walked; only the phone measures it.
+- **Found beside it, recorded, not chased:** the Solar System drawer
+  walk now fails 8 of 339 at gallery 1948e790 with a payload of
+  2026-11-11T12:00Z, the same eight on a copy with the page before the
+  fix and after it: L-521's three ("scene tap moved the view", Sedna's
+  bullets, lines over 62 characters) and five more -- Juno's box not its
+  four lines, Voyager 1's box lacking the dates sentence, Galileo's not
+  its five lines, West's not its five lines, and the "Tap to update."
+  line not where section 30e looks. On L-521's class; for the session
+  that takes L-521.
+**Gap:** Tony's phone look, portrait and landscape: a planet, a small
+body, a moon beside its planet, each tapped a little off its dot, then
+a drag and a pinch that must open nothing; in landscape a tap a little
+farther off now opens too (his ruling). Closes on his look.
+**Ref:** L-318 (the tap rounds; round 6, the widened pick); L-497 (one
+text box; the mouse's hover); L-514 (the Mars room: moons beside their
+planet); L-521 (the drawer walk's red checks); L-278 (no Plotly call
+from inside its event); L-522 (the session it was built in).
+
 #### [L-522] Document caps: how the working documents are kept from growing, and the catch-up (protocol, skills, ledger; upkeep)
-<!-- L:522 status:OPEN upd:2026-11-10 section:A flag: rice: -->
+<!-- L:522 status:OPEN upd:2026-11-11 section:A flag: rice: -->
 - **The review, 2026-11-10**
   (`documentation/REVIEW_fundamental_documents_20261110.md`, read at
   orrery b3ce81f8 and gallery cea21af1; the coordinating session, Claude
@@ -1885,11 +1963,73 @@ as an archive of the prioritization thinking -- no cleanup on close.
   caps check cannot read the website's folder; it holds only the
   present. Brief:
   `documentation/COORD_L522_step2_exhibit_split_brief_20261110.md`.
+- **Step 2 built, 2026-11-10 and 11** [verified @eb771379 and
+  @1948e790, with this session's edits]: the Claude Code session through
+  the python_work door (Claude Opus 5.5), on orrery 87fb472e and gallery
+  e21b6746, in four parts with Tony's go-ahead after each and his
+  checkpoint pushes between. The sizes, by name:
+  `skills/interactive-exhibit/SKILL.md` 2,440 lines to 738;
+  `PROJECT_INSTRUCTIONS.md` 1,487 to 1,394 (the skill's manifest row,
+  about a hundred lines, now ten); both caps LOWERED to those numbers.
+  The gallery's new `INTERACTIVE_AS_BUILT.md` holds 1,851 lines: the
+  six long sections, the anatomy table and five shorter descriptions,
+  moved whole. The install confirmations (55 lines) went to
+  `documentation/SKILL_HISTORIES.md`. THE ACCOUNT, by script against
+  87fb472e: every one of the 2,352 non-blank old lines found once in the
+  skill, the reference or the history, but five, each with its reason
+  (the old fires_when, the old read plan, the anatomy's contents line,
+  and the two lines step 2's name check corrected); none found twice.
+  The skill stops at 738, not 500: its three version entries (the
+  three-entry rule), its field notes (lessons live in their skills, by
+  the protocol) and about twenty short rules are in the way, and
+  moving alone gives no more.
+- **The name check** (gallery `tools/check_as_built_names.py`, the
+  gallery run's "As-built names" row, gates): 506 names examined, 48
+  backticked things set aside as not names by kind, four as plotly.js's
+  own, eight found only in the orrery (not examined on GitHub's night,
+  which has no orrery); its self-test plants six faults on a throwaway
+  copy. Shown red on a planted name at the reference's line 1538 and a
+  planted file at line 164. Its FIRST RUN, names the old skill gave that
+  the code no longer has: `ssBuildRows` (the page builds the rows with
+  `drawerBuildRows` since L-515 step 2a; corrected), and
+  `documentation/smoke_text_box.js` (never existed, and the sentence
+  says so; marked "[not in the code, L-522]"). A blind spot the
+  coordinating session found in the first build -- a span that wraps a
+  line threw the pairing off, so four lines' names went unexamined -- is
+  fixed and in the self-test. The doors: the gallery's `CLAUDE.md` and
+  the skill each name the reference once.
+- **The reference has no row on `DOCUMENT_CAPS.md`**: the caps check
+  runs in the orrery's run and the nightly run on GitHub checks out the
+  website alone, so neither reads both folders; the reference holds only
+  the present, replaced, never appended to.
+- **Rules that look stale, listed for Tony, not changed** (the brief's
+  out of scope): What an exhibit is still calls the Sun room "the
+  template" and the Explorer "the default room"; the sun* rename is
+  "deferred to the third room", but the rooms are one tree; Adding an
+  exhibit's step 3 still says "one row in EXHIBITS"; counts tied to old
+  commits ("204 paths at d9d7a48f", "eleven files as of d9d7a48f", "at
+  b375cfe1 it does NOT build the Sun room"); and Logic in its own file's
+  open scope question (bulk that is not logic) still waits for Tony.
+- **Part 4, added by Tony's word of 2026-11-11, 08:23:** the tap fix,
+  its own item, L-523 (taps sent as hovers). One skill bump (1.41)
+  carries the split and the correction of "Touch has no hover"; the
+  protocol is v3.138.
+- **The close's runs:** the orrery run's first pass had one red row,
+  Dashboard parity, naming the gallery's two new checks with no button
+  (Tap hover, As-built names); the two buttons and their lines were
+  added to `palomas_orrery_dashboard.py` on Tony's word ("Yes"), and the
+  second pass read 36 of 36 gating checkers passed, Tier-1 0. The
+  gallery run, offline: 47 of 47 gating checkers passed.
+  `skills_index.py --check` and `doc_index.py --caps` pass.
 **Note (Claude):** not decided: each skill's target cap; the size limit
 for one ledger item. The harness (57 of the 176 modules are developer
 tools) was measured, not reviewed.
-**Gap:** steps 2 to 6 (step 1 built 2026-11-10, night); step 3's talk
-is held, its draft is not written.
+**Gap:** steps 3 to 6 (step 1 built 2026-11-10, night; step 2 built
+2026-11-11); step 3's talk is held, its draft is not written.
+**Tony-action (do):** reinstall interactive-exhibit 1.41 (Settings >
+Skills) and paste the protocol v3.138 into the Project; the next session
+that loads the skill from the account confirms it reads 1.41.
+**Tony-action (decide):** the stale-looking rules listed above.
 Step 1's three Tony-actions are done, by his run record
 `WHERE_WE_ARE_11-10-26_1813_Fable_run_record.md`: the python_work door
 replaced ("done"), ledger-and-session-records 1.23 reinstalled ("done. no

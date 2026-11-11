@@ -1034,6 +1034,25 @@ corrects 1.36's "The Explorer's own page keeps its chain": since
 L-517 part 3 it draws none. Read from the gallery's code with this
 session's edits before it was written.
 (Moved down 2026-11-10, when 1.40 made a fourth entry.)
+1.38 | 2026-11-09, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ c7cf3490 and gallery @ 6a153716. v1.38 (L-519,
+Featured's rethink) adds SCENES, Tony's design of 2026-11-09 and his
+go-ahead the same morning: a shared link kept as a card, made by the
+gallery editor's New Scene window (tools/scene_card.py, checked without
+the window by the gallery run's Scene cards row). A scene is a card
+marked "scene": true whose live address is the link with no minute, so
+it opens at the visitor's now. Every scene sits in one fold, Scenes,
+with a bookmark mark, under the Sun's row in the Solar System room's
+drawer, ahead of the Sun's saved pictures; a tap opens its link, and
+Back returns to the room as it was left, the drawer open at Scenes. With
+Featured on it is also a card on the lobby's Featured. A fold now has an
+id of its own (PictureFolds.foldsAt, rowOf); Find counts a scene apart
+from a picture. Checked by the Picture folds row and the walk's section
+30. And the shared scene link's paragraph as the repo carried it after
+Tony's phone look of 1.37 ("Tap to update."), which the account's first
+copy of 1.37 did not. Read from the gallery's code with this session's
+edits before it was written.
+(Moved down 2026-11-11, when 1.41 made a fourth entry.)
 
 Install and verify, as the skill carried it at 1.40, moved here
 on 2026-11-11 (L-522, document caps, step 2):

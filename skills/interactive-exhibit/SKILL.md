@@ -6,9 +6,29 @@ fires_when: a room or exhibit in interactive.html (?exhibit=); its drawer and ch
 
 # Interactive Exhibit
 
-Read this file in 3 parts: lines 1-258, 259-510, 511-725.
+Read this file in 3 parts: lines 1-261, 262-519, 520-738.
 
-Skill version: 1.40 | 2026-11-10, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.41 | 2026-11-11, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 87fb472e and gallery @ e21b6746 (the session's bases;
+Tony's checkpoint pushes since). v1.41 (L-522, document caps, step 2)
+SPLITS THE SKILL: the rules stay here; what interactive.html does now
+moved whole, in its own words, into the gallery's
+INTERACTIVE_AS_BUILT.md, changed in the commit that changes the page and
+held to the code by the gallery run's As-built names row
+(tools/check_as_built_names.py). Each of the six long sections leaves
+one rule and a pointer, the Provenance rule keeping its rules for new
+work; the anatomy table, the text box, the readability asks and the
+headless recipe moved with them; the install confirmations went to
+documentation/SKILL_HISTORIES.md; fires_when is cut to the phrases that
+make the skill fire. Every old line was accounted for by script: found
+once in the skill, the reference or the history, or listed with its
+reason. SEPARATELY, A CORRECTION (L-523, Tony's word of 2026-11-11):
+"Touch has no hover" was wrong for a 3D scene. Plotly sends a finger's
+tap 5 px off or more as plotly_hover, so a finger's hover after its tap
+is that tap and opens what a click opens (gallery/tap_hover.js, the
+gallery run's Tap hover row); and the widened pick is any finger's, in
+either orientation (Tony: "Yes, any finger").
+Earlier: 1.40 | 2026-11-10, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ b3ce81f8 and gallery @ cea21af1. v1.40 (L-515, one nested
 tree, step 2b; Tony's rulings 13 to 20 of 2026-11-09, with L-514 rulings 1
 and 4) makes the Solar System room ONE PICTURE AND ONE DRAWER. Each body
@@ -53,24 +73,6 @@ Remove place (tools/drawer_places.py; the gallery run's Drawer places
 row). And Tony's phone look of the same afternoon: Find shows a scene
 whose name holds a body's name beside the body. Read from the gallery's
 code with this session's edits before it was written.
-Earlier: 1.38 | 2026-11-09, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ c7cf3490 and gallery @ 6a153716. v1.38 (L-519,
-Featured's rethink) adds SCENES, Tony's design of 2026-11-09 and his
-go-ahead the same morning: a shared link kept as a card, made by the
-gallery editor's New Scene window (tools/scene_card.py, checked without
-the window by the gallery run's Scene cards row). A scene is a card
-marked "scene": true whose live address is the link with no minute, so
-it opens at the visitor's now. Every scene sits in one fold, Scenes,
-with a bookmark mark, under the Sun's row in the Solar System room's
-drawer, ahead of the Sun's saved pictures; a tap opens its link, and
-Back returns to the room as it was left, the drawer open at Scenes. With
-Featured on it is also a card on the lobby's Featured. A fold now has an
-id of its own (PictureFolds.foldsAt, rowOf); Find counts a scene apart
-from a picture. Checked by the Picture folds row and the walk's section
-30. And the shared scene link's paragraph as the repo carried it after
-Tony's phone look of 1.37 ("Tap to update."), which the account's first
-copy of 1.37 did not. Read from the gallery's code with this session's
-edits before it was written.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there on
 2026-10-05 (L-418), 2026-10-10 (L-429), 2026-10-14 (L-431), 2026-10-16
 (L-421), 2026-10-17 (L-452), 2026-10-20 (L-456), 2026-10-21 (L-460),
@@ -78,7 +80,8 @@ Older entries are in documentation/SKILL_HISTORIES.md, moved there on
 twice), 2026-10-26 (L-443), 2026-10-27 (L-443), 2026-10-28 (L-443),
 2026-10-29 (L-503), 2026-11-02 (L-507), 2026-11-05 (L-507) and
 2026-11-06 (L-513) and 2026-11-07 (L-515, three times) and 2026-11-08
-(L-517, L-518) and 2026-11-09 (L-519, twice) and 2026-11-10 (L-515).
+(L-517, L-518) and 2026-11-09 (L-519, twice) and 2026-11-10 (L-515)
+and 2026-11-11 (L-522).
 
 ## Contents
 
@@ -455,8 +458,12 @@ changed after Tony's eyes saw them.
 ### The touch path is not the mouse path [QUALITY]
 Plotly fires no camera events during a touch rotation; chrome that
 follows the camera reads it directly (`scene._scene.getCamera()`) once
-per frame. Touch has no hover; anything that opens on hover opens on
-tap and closes on a tap elsewhere. A `hidden` attribute loses to a more
+per frame. In a 3D scene a finger's TAP can arrive as a hover: Plotly
+sends a pick as `plotly_click` only under 5 px from the finger, else as
+`plotly_hover`, so a finger's hover that follows its tap is that tap
+and opens what a click opens, once per press (L-523). A finger never
+rests, so anything that opens on a mouse's hover opens on a tap and
+closes on a tap elsewhere. A `hidden` attribute loses to a more
 specific display rule; write the hidden rule at least as specific.
 
 **A scene relayout must carry the live camera.** A 3D replot re-applies
@@ -499,8 +506,10 @@ sentence. (L-318 round 4.)
 picks the point nearest the finger within `pickRadius` (10 px, set in
 `src/plots/gl3d/scene.js`) across all traces, and only afterwards does
 scene.js drop a pick whose trace has hoverinfo `skip` -- so a shell's
-text-less dots win over its one info marker. On a portrait phone only,
-`sunTapPicking(gd)` makes text-less traces draw nothing into the pick
+text-less dots win over its one info marker. For a finger or a pen, in
+either orientation (Tony's ruling of 2026-11-11, "Yes, any finger";
+until then a portrait phone only), `sunTapPicking(gd)` makes text-less
+traces draw nothing into the pick
 buffer and widens the search to `SUN_PICK_RADIUS_PX` (22). It reaches
 into `gd._fullLayout.scene._scene` (`glplot.pickRadius`, `glplot.update`,
 each object's `drawPick`), is re-applied after every plot, and does
@@ -723,3 +732,7 @@ manifest in PROJECT_INSTRUCTIONS.md carries the version. Per Stale Skill
 = Stop, the session that installs a version cannot verify the install.
 Earlier installs and their confirmations, 1.0 to 1.40:
 documentation/SKILL_HISTORIES.md, under interactive-exhibit.
+1.41 was cut on 2026-11-11 in the Claude Code session for L-522 step 2,
+through the python_work door, from the repo's copy of 1.40; a session
+that loads the account's copy confirms it reads 1.41 before exhibit
+work.
