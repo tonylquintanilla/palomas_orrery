@@ -338,3 +338,45 @@ Three things in my prompt needed changing:
 > Close: record the fix as a new ledger item, the next handle, with L-318, L-497 and L-514 in its references; Where We Are by section, within its cap; the gallery maintenance run green, read from its output; my phone-look list, with the conditions for each tap (portrait and landscape, a planet, a small body, a moon beside its planet); the token report as the door asks. Commit and push are mine.
 
 Still Opus at standard effort. When its fix has passed your phone look, tell me and I'll write the handoff for the Mars coordinator.
+
+===============================
+
+**Session: DONE: 11-11-26 2210: Opus: Coordinator: L-515 step 2b design**
+
+I'll read the newer of your two run records first, then the ledger and both repositories as they stand, and write the handoff from those.
+
+I have what I need. Writing the handoff into the orrery's documentation folder.
+
+Now writing it into your orrery folder. It's a new file, so nothing of yours is overwritten.
+
+The handoff is in your orrery's documentation folder, and on your computer it reads back at the size I wrote.
+
+It tells the new coordinator where to start, and it carries:
+- **Two skill checks to make on loading:** interactive-exhibit should read 1.41 and gallery-cache-builder 1.19.
+- **Three small ledger passes:**
+  - Close the tap fix, L-523 (taps sent as hovers), on your "correct".
+  - Your phone look at the frozen date line, L-524 (the Kepler solver's start).
+  - The first nights read with the hold on, L-525 (hold the bad data).
+- **Mars as it stands:** the design so far, JPL's 48-hour positions for Phobos and Deimos as builder work, and the risk of a tap picking Mars instead of Phobos.
+- **A warning:** the exhibit skill is at its cap of 738 lines, so the Mars session must move old lines out of it before adding any.
+- **What this coordination learned,** including my two mistakes.
+
+It doesn't repeat the ledger or Where We Are; it points to them.
+
+**Files for your run record**
+
+Orrery:
+- ok documentation/HANDOFF_website_coordination_20261111.md (new, 116 lines)
+
+Website: none.
+
+**Your run order**
+1. Commit and push the orrery.
+2. Open the new Opus coordinating session with this prompt, putting your push's SHA where it says:
+
+> Built on orrery (the SHA of my push) at https://github.com/tonylquintanilla/palomas_orrery and gallery bd65f036d16b553953f7c8b2e76edc6b10c6b5f4 at https://github.com/tonylquintanilla/tonyquintanilla.github.io (both branch main). Nightly bot commits since are expected.
+> Tony's local folders: orrery `C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\`, gallery `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\`
+>
+> Type: COORDINATOR, through the python_work door, for the website track. Read the orrery's `documentation/HANDOFF_website_coordination_20261111.md` and follow its "Start here". Then tell me in one sentence what you're about to do, and wait for my go-ahead. Plain speech, one question per message. Commit and push are mine.
+
+It's been a full three days: the one tree, two red nights traced to JPL, and the tap fault found and fixed. Thank you for the steady eyes on the phone.

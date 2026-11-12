@@ -2498,11 +2498,13 @@ Orrery (not committed):
 
 **Your run order:**
 1. Website, in GitHub Desktop: commit and push the two files above.
-2. Orrery: commit and push the six files above, and your run-record copy if you want it in.
+2. Orrery: commit and push the six files above, and your run-record copy if you want it in. -- b63df416de703f763e90732c3cfe04ac2a01bd86
 3. Reinstall gallery-cache-builder (Settings > Skills), and paste protocol v3.139 into the Project.
 4. Tomorrow morning: Pull origin on both, orrery then website, and read the night's commit title. With nothing held, it should read the usual "Nightly run ...".
 
 **Tony-action rollup:**
-- *(do)* The two commits and pushes.
-- *(do)* The skill reinstall and the protocol paste.
-- *(do)* The phone look at the frozen date line (`?freeze=1`), upright and sideways, if you haven't done it yet.
+- *(do)* The two commits and pushes. -- done
+- *(do)* The skill reinstall and the protocol paste. -- done
+- *(do)* The phone look at the frozen date line (`?freeze=1`), upright and sideways, if you haven't done it yet. -- correct
+
+-- done
