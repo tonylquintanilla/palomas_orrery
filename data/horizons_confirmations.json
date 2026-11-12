@@ -627,14 +627,14 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=2003%20VB12&group=mb&format=text"
       ],
       "period": {
-        "confirmed": "2026-10-31",
+        "confirmed": "2026-11-12",
         "center": "@0",
         "target": "2003 VB12",
-        "epoch": "2026-10-13 08:30",
-        "days": 4160095.697859893,
+        "epoch": "2026-11-12 16:00",
+        "days": 4160094.947057001,
         "error_days": 1864.0,
-        "jpl_days": 4160095.697859893,
-        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='2003%20VB12%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@0'&TLIST='2461326.854166667'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
+        "jpl_days": 4160094.947056952,
+        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='2003%20VB12%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@0'&TLIST='2461357.166666667'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
       }
     },
     "leleakuhonua": {
@@ -1459,14 +1459,14 @@
       ],
       "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)",
       "period": {
-        "confirmed": "2026-10-31",
+        "confirmed": "2026-11-12",
         "center": "@sun",
         "target": "90000091",
-        "epoch": "2026-10-13 08:30",
-        "days": 1206.320223793072,
-        "error_days": 0.15083758920104628,
-        "jpl_days": 1206.320412715588,
-        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='90000091%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461326.854166667'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
+        "epoch": "2026-11-12 16:00",
+        "days": 1206.332999796803,
+        "error_days": 0.1674693081629357,
+        "jpl_days": 1206.332999796804,
+        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='90000091%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461357.166666667'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
       },
       "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66",
       "pin": {
