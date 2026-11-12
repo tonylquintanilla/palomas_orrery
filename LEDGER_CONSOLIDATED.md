@@ -1005,7 +1005,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*263 live items; 247 need attention (`!`); 165 RICE-scored; 256 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*263 live items; 247 need attention (`!`); 165 RICE-scored; 258 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1178,10 +1178,10 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-520 | Old pictures carry old words: the saved pictures' titles and descriptions have no source (gallery, the saved pictures; the braid) | OPEN | -- | 2026-11-08 |
 | ! | L-521 | Three red checks in the drawer walk (gallery, the headless walk; recorded) | OPEN | -- | 2026-11-09 |
 | ! | L-522 | Document caps: how the working documents are kept from growing, and the catch-up (protocol, skills, ledger; upkeep) | OPEN | -- | 2026-11-11 |
-| ! | L-523 | A finger's tap that Plotly sends as a hover: a tap a little off a small dot opens its box (gallery, the text box; Tony's phone look) | OPEN | -- | 2026-11-11 |
-| ! | L-524 | The Kepler solver's start: a stretched orbit's second half solved wrong, the site frozen at 0.3 days, and the frozen date line on a phone (gallery, the assembler and the room's title; built) | OPEN | -- | 2026-11-11 |
 | ! | L-525 | One body's failed accuracy test holds that body, not the whole site (gallery, the nightly builder's served window; built, its sentence settled Nov 11) | OPEN | -- | 2026-11-11 |
 | ! | L-526 | A body whose test fails for a real reason is drawn from the older orbit while held (gallery, the nightly builder's hold; recorded, not built) | OPEN | -- | 2026-11-11 |
+| ! | L-527 | A first visit's guide: a walk-through that waits for the visitor (gallery, the lobby and the Solar System room; design) | OPEN | -- | 2026-11-12 |
+| ! | L-528 | The orrery's Kepler solvers' start: E = pi for a stretched orbit, and no error when they do not converge (orrery; recorded, not built) | OPEN | -- | 2026-11-12 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1586,6 +1586,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-517 | The lobby for a first-time phone visitor: one door first, the pictures into the tree (gallery, lobby and drawer; design) | DONE | -- | 2026-11-08 |
 |  | L-518 | The shared scene link: the address carries the ticked bodies and the minute (gallery, every room of the tree; built, closed) | DONE | -- | 2026-11-08 |
 |  | L-519 | Featured's rethink: Scenes, a shared link kept in the tree and on Featured (gallery, the gallery editor and the Solar System room's drawer; built, closed) | DONE | -- | 2026-11-09 |
+|  | L-523 | A finger's tap that Plotly sends as a hover: a tap a little off a small dot opens its box (gallery, the text box; built, closed) | DONE | -- | 2026-11-12 |
+|  | L-524 | The Kepler solver's start: a stretched orbit's second half solved wrong, the site frozen at 0.3 days, and the frozen date line on a phone (gallery, the assembler and the room's title; built) | DONE | -- | 2026-11-12 |
 
 ### W.Done -- Web Publication track, closed items
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1614,6 +1616,99 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ## DETAIL / RECORD
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
+
+#### [L-528] The orrery's Kepler solvers' start: E = pi for a stretched orbit, and no error when they do not converge (orrery; recorded, not built)
+<!-- L:528 status:OPEN upd:2026-11-12 section:A flag: rice: -->
+- **Opened 2026-11-12**, at the close of L-524 (the Kepler solver's
+  start), to carry the list that item recorded and did not fix (its
+  brief: "list them by file and function, and fix none"). Read at
+  orrery 17580bc5 by the L-524 session.
+- **Start at E = pi for e of 0.8 or more,** as the gallery's old solver
+  did: `apsidal_markers.py` `solve_kepler_equation`;
+  `exoplanet_orbits.py` `solve_kepler_equation`; `sgr_a_star_data.py`
+  `solve_kepler_equation`; `palomas_orrery.py`, four inline copies
+  (`plot_actual_orbits` near line 4610; two workers near 5407 and 5863;
+  `animation_worker` near 6990); `test_orbit_markers.py`
+  `solve_kepler`. Other starts: `hills_cloud_sampler.py`
+  `_eccentric_anomaly` (M + e sin M); `main_belt_sampler.py` `_kepler`
+  (M).
+- **Why safe today, and when it would not be:** every start-at-pi copy
+  is handed M in [0, 2 pi), the side where that start converges; a
+  caller handing in a negative M would get a wrong answer. None raises
+  when it does not converge.
+**Gap:** an orrery session: the gallery's fix (solve for |M| on [0, pi],
+start at pi, sign from M, raise when not converged) and a check of the
+gallery's "Kepler solver" kind, in the orrery's maintenance run. Between
+builds, never in front of the road.
+**Ref:** L-524 (the Kepler solver's start, the gallery's fix and its
+check `tools/test_kepler_solver.py`); L-525 (hold the bad data).
+
+#### [L-527] A first visit's guide: a walk-through that waits for the visitor (gallery, the lobby and the Solar System room; design)
+<!-- L:527 status:OPEN upd:2026-11-12 section:A flag: rice: -->
+- **Tony's observation, 2026-11-11, 22:42 Chicago,** in the
+  coordinating session (Claude Opus 5.5, through the python_work door,
+  on orrery ceb508c6 and gallery bd65f036), before Mars: a friend on a
+  phone scrolled to the bottom of the front page and did not know what
+  to do; pointed to Explore, closed the i button's first-visit note
+  (L-494) "without a second thought", turned the grid with a thumb, and
+  then: "now what?! that's where i have to explain what the orrery is
+  really about." His idea: the yellow note on more of the key controls
+  (Explore, the Earth System and Stars doors, the room's menu button,
+  the opening scene), each once, and a "Tutorial" button under Featured
+  that turns them on and off. "most people don't even know what an
+  orrery is. i take a lot for granted."
+- **Claude, as proposed, not ruled:** two problems, not one. (1) The
+  front page does not say what this is: a sentence and a picture on the
+  first screen, Explore under it. (2) In the room nobody gives a next
+  step: a note per control explains a button, not the purpose, and a
+  visitor who has tapped "Got it" five times has learned to tap "Got
+  it". Instead, one invitation at a time, each asking for one action and
+  shown only after the last is done.
+- **Ruled, Tony, 22:50 and 22:55:** a one-time walk-through, as
+  described (it waits for the visitor; Skip on every card; remembered by
+  the browser as the i note is; the Tutorial button starts it again;
+  it replaces the i note in the room). A story, not the controls in
+  order: "Attention is everything until they learn how it works. So a
+  fun feature like Halley is a good idea. And I would say also the
+  earth-moon system." Method left to Claude ("I'll lean on your
+  knowledge of tutorials").
+- **Artemis II left out, Tony, 23:02:** the saved picture is "a served
+  html from the orrery and looks different from the interactive we are
+  teaching", and encounters will become saved scenes. So the guide ends
+  at step 4, on Halley; Artemis II becomes step 5 once its flight is a
+  saved scene inside the interactive room.
+- **The four steps, as mocked up (Tony's "Yes", 23:04):** 1, the room
+  today: drag to turn it. 2, tap Earth (a ring marks it). 3, open the
+  menu; on Earth's row, Centre on Earth; then tick the Moon. 4, Home,
+  tick Halley's comet, tap it (the move made by the guide, below). Then the end card, Explore. Each card
+  says "Step n of 4" and gives instructions only: the facts stay in the
+  boxes, which carry their sources, so the guide adds no claim to
+  source. Read at gallery bd65f036: "Centre on <name>" is a button on
+  the body's row in the drawer, not in its box, so step 3 carries both
+  menu actions. The mockup, a sketch with no real positions: the Design
+  canvas "Orrery first-visit guide: four steps",
+  https://claude.ai/artifact/QEXpNBnj8YxDHRfwF4CKLt (private to Tony).
+- **Step 4's move, RULED, Tony, 2026-11-12, 00:23 Chicago: "Yes, C."**
+  Put to him three ways from Earth's view to Halley: (A) the visitor
+  taps "Solar system" in the trail line, opens Comets and Halley-type
+  comets, ticks Halley, taps it; (B) types "Halley" in Find; (C) the
+  guide makes the move. C: the card reads "Next, a comet. Take me
+  there."; one tap returns to the Sun's view, ticks Halley, and shows
+  the menu for a moment folded open at Comets, Halley-type comets,
+  Halley; then "Tap Halley, in the ring." Read at gallery bd65f036: the
+  trail line's "Solar system" opens the Sun's view and keeps the ticks
+  (L-515 ruling 20); Halley sits under `comets_htc` in `comets_all`
+  (`data/objects_config.json`). Added to the mockup as its own screen.
+- **The risk named:** step 2 rests on a tap on a small dot (L-523's
+  wider reach helps; the ring helps the eye). Tony's phone look decides.
+**Gap:** Tony's look at the mockup; then the front page's first screen
+and the Tutorial button's place and words, one question at a time; then
+the smallest instrument, proposed, and a brief when its session is next.
+Before Mars (L-514) by Tony's word of 22:42 ("before building more").
+**Ref:** L-494 (the i button's first-visit note); L-517 (the lobby);
+L-515 (one nested tree: Centre on, the drawer); L-523 (taps sent as
+hovers); L-514 (the Mars room, which waits); L-489 (compositions:
+Artemis II in Earth's fold).
 
 #### [L-526] A body whose test fails for a real reason is drawn from the older orbit while held (gallery, the nightly builder's hold; recorded, not built)
 <!-- L:526 status:OPEN upd:2026-11-11 section:A flag: rice: -->
@@ -1778,177 +1873,6 @@ Earth's fold box, when a session next opens Earth's fold.
 hold; a nightly unattended run); L-508 (a held body's alarm); L-524 (the
 Kepler solver's start, the case that raised it); L-165 (site
 continuity).
-
-#### [L-524] The Kepler solver's start: a stretched orbit's second half solved wrong, the site frozen at 0.3 days, and the frozen date line on a phone (gallery, the assembler and the room's title; built)
-<!-- L:524 status:OPEN upd:2026-11-11 section:A flag: rice: -->
-- **Tony's words, 2026-11-11, 10:58:** "the nightly failed again and on
-  rerun and the date line on the phone is problematic." Found by the
-  coordinating session (Claude Fable 5.2), run record
-  `WHERE_WE_ARE_11-10-26_1813_Fable_run_record.md`; built in a Code
-  session in the gallery (Claude Opus 5.5) on orrery 17580bc5 and
-  gallery ebb8e623, before Mars by the brief.
-- **The cause** [verified @ebb8e623]. `solve_kepler` in
-  `gallery/assembler/render_orbits.py` folded M into [-pi, pi) and, for
-  e of 0.8 or more, started Newton's method at E = pi. For a negative M
-  that start is on the wrong side; at scattered M the 100 steps ran out
-  and a wrong E came back with no warning. On the served Halley elements
-  of Nov 11 the +30 day trust sample gave E = -1.17e12, 21.64 degrees
-  off; the served window (L-149) fell to 0.3 days, set by Halley, and
-  the rooms froze at its end (L-515 part 4 with L-165). The page drew
-  Halley, Encke, Sedna, Leleakuhonua and other bodies with e of 0.8 or
-  more wrong at scattered minutes for as long as that start stood.
-- **Why the night was red, T1 and nothing after.** The Artifact 1
-  test's T2 draws Earth at its stored `as_of_today` (00:01 UTC). A
-  window of +/- 0.35 days around a build at 08:30 UTC or later starts
-  after 00:01, so the resolver refused T2 and the test stopped after
-  T1; the pin found T2 to T5 missing. Reproduced locally: a build at
-  04:26 or 08:17 passes, 08:30 or 09:00 refuses. GitHub's log was not
-  read (no `gh`); the cause was reproduced instead.
-- **The fix.** Solve for |M| on [0, pi], where E - e sin E - |M| rises
-  and is convex, start at E = pi, and give E the sign of M: from that
-  start Newton's steps approach from one side and never overshoot, for
-  every e below 1. NOT SILENT: an answer is returned only if it solves
-  the equation to 1e-9 rad and lies in [0, pi]; otherwise
-  `KeplerNotConverged` (an ArithmeticError) is raised; e outside [0, 1)
-  or a value that is not finite raises ValueError.
-- **The check:** the gallery run's new row "Kepler solver"
-  (`tools/test_kepler_solver.py`): 18 eccentricities to 0.999999 at
-  36,000 M each and every served body's own e (95) at 3,600, M asked
-  positive, negative and whole turns away; the not-silent cases; and
-  Halley's served elements of Nov 11 moved 30 days, under 0.1 degree.
-  Red on the old code (FAIL 34, Halley 3.96 degrees), green after (Halley
-  0.0256 degrees); its self-test runs the old solver each time and must
-  catch it.
-- **Read back from the builder** (`--dry-run`, 2026-11-11 17:16 UTC):
-  "[window] served window: 88.0 days either side of today, set by
-  mercury, the shortest of 64 bodies' trusted spans"; Halley's samples
-  2.5e-06 degrees, its window 13,784 days (capped at half its period),
-  as on Nov 9. JPL agreed to 1e-6 degrees: JPL was not the cause.
-  Tony's Daily Run of 12:39 Chicago (run 20261111T183929Z) then built
-  and swapped a cache on the fixed code, window JD 2461268.31 to
-  2461444.25.
-- **The other copies in the gallery.** Callers of the one solver:
-  `assemble.py`, `compose_children.py`, `drawn_orbit_offset`, the
-  builder's `_two_body_position`, the builder's offline test, and two
-  checks; fixed with it. Two separate copies, both left as they are and
-  swept clean to e = 0.97: the Solar System Explorer's Python in
-  `interactive.html` (`compute_orbits`, nine planets, e up to 0.25) and
-  `documentation/smoke_view_centre.js` (`kep`, a check, moons and their
-  planets). No JavaScript served to visitors solves Kepler.
-- **The date line when frozen.** In one piece the frozen line is about
-  284 px; the gap between the zoom buttons and the arrow cross is the
-  screen's width less about 212 px, so on every phone it went below the
-  cross. Now `sunFitTitle` tries it in the gap in one piece, then two
-  lines, then three (`SceneMoment.subtitleWraps`: the same words, only
-  the breaks differ), and goes below the cross only when none fits; each
-  fit starts from one piece. Measured with `?freeze=1`: two lines at 375,
-  412 and 430 px wide, three at 360, below the cross at 320 (as the plain
-  line does there), one piece sideways. Held by the Scene moment row
-  (`documentation/smoke_scene_moment.js`: the forms' words and lines,
-  three wiring points, a fifth planted break).
-- **Recorded, not fixed (the brief: "list them by file and function,
-  and fix none"): the orrery's Kepler solvers.** Start at E = pi for e
-  of 0.8 or more, like the gallery's old one: `apsidal_markers.py`
-  `solve_kepler_equation`; `exoplanet_orbits.py`
-  `solve_kepler_equation`; `sgr_a_star_data.py` `solve_kepler_equation`;
-  `palomas_orrery.py`, four inline copies (`plot_actual_orbits` near
-  line 4610; two workers near 5407 and 5863; `animation_worker` near
-  6990); `test_orbit_markers.py` `solve_kepler`. Other starts:
-  `hills_cloud_sampler.py` `_eccentric_anomaly` (M + e sin M);
-  `main_belt_sampler.py` `_kepler` (M). Every start-at-pi copy is handed
-  M in [0, 2 pi), the side where that start converges, so none is wrong
-  today; a caller handing in a negative M would be. None raises when it
-  does not converge.
-**Gap:** a green night after Tony's push of the website (b248da5d,
-12:52 Chicago, which carries every gallery edit above; the gallery run
-on those bytes, 48 of 48 green), read from the night's log. Tony's phone look at the frozen line with
-`?freeze=1`, upright and sideways. The orrery's solvers, above, for an
-orrery session.
-**Ref:** L-149 (the served window's trust participation); L-165 (site
-continuity); L-515 (one nested tree; part 4, the freeze); L-237 (Artifact
-1's stale record, T3's pinned failure); L-316 (the arrow cross);
-`INTERACTIVE_AS_BUILT.md` (what a room opens on).
-
-#### [L-523] A finger's tap that Plotly sends as a hover: a tap a little off a small dot opens its box (gallery, the text box; Tony's phone look)
-<!-- L:523 status:OPEN upd:2026-11-11 section:A flag: rice: -->
-- **Tony's word, 2026-11-11, 08:23:** "i would really like to get this
-  tapping improvement done ... could you take care of it in our Code
-  session". The fault, his words of Nov 10 and 11: "tapping with my
-  thumb works about 1/2 to 3/4 the time" and "tapping on the phone is
-  hit or miss on small object dots. People get quickly frustrated."
-  Built as Part 4 of the Code session for L-522 (document caps) step 2
-  (Claude Opus 5.5), on orrery eb771379 and gallery 1948e790, amending
-  that brief's "Out of scope" by the coordinator's word: this part
-  changes the page's code.
-- **The cause, read from the code** [verified @1948e790]. plotly.js
-  2.35.2, `src/plots/gl3d/scene.js` line 459, fetched from the tag
-  v2.35.2 that morning: after a pick the scene sends `plotly_click`
-  only when `selection.distance < 5` and a touch has been seen, and
-  otherwise sends the same pick as `plotly_hover`. The page's
-  `sunTapPicking` widens the pick to `SUN_PICK_RADIUS_PX` (22) on a
-  portrait phone only; `sunLabelInstall` opened a box on a hover only
-  for a mouse (L-497). So a thumb 5 to 22 px off a dot picked it and
-  opened nothing. MEASURED before any change: the new walk failed 3 of
-  its 13 checks on the page as it stood -- a finger's tap sent as a
-  hover, after the lift and during the press, opened nothing; drag,
-  pinch, late hover, mouse and a true click behaved.
-- **The fix.** `gallery/tap_hover.js` (`GalleryTapHover`) decides
-  whether a hover is a finger's tap: one finger, moved at most
-  `SUN_LABEL_TAP_PX` (10), lifted within `SUN_LABEL_TAP_MS` (500) -- the
-  page's own tap test, now asked of the file by the lift handler too --
-  a picked trace carrying words, a press not yet served, and the hover
-  within `SUN_LABEL_TAP_MS` of the lift; a hover while the finger is
-  still down waits for the lift. The page opens such a tap by the same
-  function as `plotly_click` (`sunTapOpen`), one focus per press
-  (`sunTapSerial`, `sunClickServedTap`), deferred out of Plotly's event
-  (L-278). Checked by the gallery run's new Tap hover row
-  (`documentation/smoke_tap_hover.js`: 19 worked cases, 25 with the
-  ruling below, and the page's wiring; its self-test breaks the file
-  four ways, five with the ruling; red on the page
-  before it was wired) and walked (`tools/headless/walk_tap_hover.js`,
-  13 of 13 after; 3 failed on a copy of the page before). The live check
-  fetches the file (SERVED_FILES).
-- **Method, Claude's calls, said so:** no new knob -- the window after
-  the lift is `SUN_LABEL_TAP_MS`; a pen counts as a finger; a hover on a
-  trace with no words takes nothing, so a click after it still opens.
-- **The 22-px reach for any finger: Tony's ruling of 2026-11-11, "Yes,
-  any finger".** It had been portrait only because L-318 round 6 tested
-  the portrait phone and Tony said the mouse was fine on the desktop; the
-  test was the screen's shape (`sunPhonePortrait`), not the finger, so a
-  landscape thumb kept Plotly's 10 px and a shell's wordless dots could
-  still win. Put to him with Claude's recommendation (apply it wherever
-  the press is a finger); he chose it. Built: `GalleryTapHover.widePick`
-  decides from the last pointer's kind (a finger or a pen; before any
-  press, a portrait phone, as before); `sunTapPicking` applies it at
-  every press and after every plot; a mouse's press puts back Plotly's
-  own. Shown red first: the walk's section 10 (a finger on a landscape
-  window) and the check's wiring line, then green: the walk 16 of 16,
-  the check's 25 cases with five breaks.
-- **Not seen headlessly:** the phone's real order of events -- whether
-  Plotly's pick comes after the lift, as a phone's compatibility mouse
-  events suggest, or during the press. Both orders are handled and
-  walked; only the phone measures it.
-- **Found beside it, recorded, not chased:** the Solar System drawer
-  walk now fails 8 of 339 at gallery 1948e790 with a payload of
-  2026-11-11T12:00Z, the same eight on a copy with the page before the
-  fix and after it: L-521's three ("scene tap moved the view", Sedna's
-  bullets, lines over 62 characters) and five more -- Juno's box not its
-  four lines, Voyager 1's box lacking the dates sentence, Galileo's not
-  its five lines, West's not its five lines, and the "Tap to update."
-  line not where section 30e looks. On L-521's class; for the session
-  that takes L-521.
-**Gap:** Tony's phone look, portrait and landscape: a planet, a small
-body, a moon beside its planet, each tapped a little off its dot, then
-a drag and a pinch that must open nothing; in landscape a tap a little
-farther off now opens too (his ruling). Closes on his look.
-**Note:** his look, in `WHERE_WE_ARE_11-10-26_1813_Fable_run_record.md`,
-beside the phone look's run-order line: "-- correct". Read by the
-L-524 (the Kepler solver's start) session, which left the closing to
-a ledger pass.
-**Ref:** L-318 (the tap rounds; round 6, the widened pick); L-497 (one
-text box; the mouse's hover); L-514 (the Mars room: moons beside their
-planet); L-521 (the drawer walk's red checks); L-278 (no Plotly call
-from inside its event); L-522 (the session it was built in).
 
 #### [L-522] Document caps: how the working documents are kept from growing, and the catch-up (protocol, skills, ledger; upkeep)
 <!-- L:522 status:OPEN upd:2026-11-11 section:A flag: rice: -->
@@ -2323,6 +2247,13 @@ line 4872).
 - Not known: whether the room changed or the walk's expectations aged
   with the data (each was last walked green on an earlier day's
   payload). The first step is to walk the commit where each last passed.
+- **Five more, received 2026-11-12 from L-523 (taps sent as hovers), at
+  its close:** the drawer walk failed 8 of 339 at gallery 1948e790 with
+  a payload of 2026-11-11T12:00Z, the same eight before and after that
+  fix: this item's three and five more -- Juno's box not its four lines,
+  Voyager 1's box lacking the dates sentence, Galileo's not its five
+  lines, West's not its five lines, and the "Tap to update." line not
+  where section 30e looks. Same class; the same session takes them.
 **Gap:** find, for each of the three, whether the page or the walk is
 wrong; fix the one that is. A gallery session that next opens the drawer
 or the text box.
@@ -17112,6 +17043,189 @@ skills/gallery-assembler/SKILL.md, skills/interactive-exhibit/SKILL.md.
 ## PENDING ACTION (Tony-side)
 
 ## C. RECONCILED LEDGER -- DONE (closed; for the record, do not re-do)
+
+#### [L-524] The Kepler solver's start: a stretched orbit's second half solved wrong, the site frozen at 0.3 days, and the frozen date line on a phone (gallery, the assembler and the room's title; built)
+<!-- L:524 status:DONE upd:2026-11-12 section:C flag: rice: -->
+- **Tony's words, 2026-11-11, 10:58:** "the nightly failed again and on
+  rerun and the date line on the phone is problematic." Found by the
+  coordinating session (Claude Fable 5.2), run record
+  `WHERE_WE_ARE_11-10-26_1813_Fable_run_record.md`; built in a Code
+  session in the gallery (Claude Opus 5.5) on orrery 17580bc5 and
+  gallery ebb8e623, before Mars by the brief.
+- **The cause** [verified @ebb8e623]. `solve_kepler` in
+  `gallery/assembler/render_orbits.py` folded M into [-pi, pi) and, for
+  e of 0.8 or more, started Newton's method at E = pi. For a negative M
+  that start is on the wrong side; at scattered M the 100 steps ran out
+  and a wrong E came back with no warning. On the served Halley elements
+  of Nov 11 the +30 day trust sample gave E = -1.17e12, 21.64 degrees
+  off; the served window (L-149) fell to 0.3 days, set by Halley, and
+  the rooms froze at its end (L-515 part 4 with L-165). The page drew
+  Halley, Encke, Sedna, Leleakuhonua and other bodies with e of 0.8 or
+  more wrong at scattered minutes for as long as that start stood.
+- **Why the night was red, T1 and nothing after.** The Artifact 1
+  test's T2 draws Earth at its stored `as_of_today` (00:01 UTC). A
+  window of +/- 0.35 days around a build at 08:30 UTC or later starts
+  after 00:01, so the resolver refused T2 and the test stopped after
+  T1; the pin found T2 to T5 missing. Reproduced locally: a build at
+  04:26 or 08:17 passes, 08:30 or 09:00 refuses. GitHub's log was not
+  read (no `gh`); the cause was reproduced instead.
+- **The fix.** Solve for |M| on [0, pi], where E - e sin E - |M| rises
+  and is convex, start at E = pi, and give E the sign of M: from that
+  start Newton's steps approach from one side and never overshoot, for
+  every e below 1. NOT SILENT: an answer is returned only if it solves
+  the equation to 1e-9 rad and lies in [0, pi]; otherwise
+  `KeplerNotConverged` (an ArithmeticError) is raised; e outside [0, 1)
+  or a value that is not finite raises ValueError.
+- **The check:** the gallery run's new row "Kepler solver"
+  (`tools/test_kepler_solver.py`): 18 eccentricities to 0.999999 at
+  36,000 M each and every served body's own e (95) at 3,600, M asked
+  positive, negative and whole turns away; the not-silent cases; and
+  Halley's served elements of Nov 11 moved 30 days, under 0.1 degree.
+  Red on the old code (FAIL 34, Halley 3.96 degrees), green after (Halley
+  0.0256 degrees); its self-test runs the old solver each time and must
+  catch it.
+- **Read back from the builder** (`--dry-run`, 2026-11-11 17:16 UTC):
+  "[window] served window: 88.0 days either side of today, set by
+  mercury, the shortest of 64 bodies' trusted spans"; Halley's samples
+  2.5e-06 degrees, its window 13,784 days (capped at half its period),
+  as on Nov 9. JPL agreed to 1e-6 degrees: JPL was not the cause.
+  Tony's Daily Run of 12:39 Chicago (run 20261111T183929Z) then built
+  and swapped a cache on the fixed code, window JD 2461268.31 to
+  2461444.25.
+- **The other copies in the gallery.** Callers of the one solver:
+  `assemble.py`, `compose_children.py`, `drawn_orbit_offset`, the
+  builder's `_two_body_position`, the builder's offline test, and two
+  checks; fixed with it. Two separate copies, both left as they are and
+  swept clean to e = 0.97: the Solar System Explorer's Python in
+  `interactive.html` (`compute_orbits`, nine planets, e up to 0.25) and
+  `documentation/smoke_view_centre.js` (`kep`, a check, moons and their
+  planets). No JavaScript served to visitors solves Kepler.
+- **The date line when frozen.** In one piece the frozen line is about
+  284 px; the gap between the zoom buttons and the arrow cross is the
+  screen's width less about 212 px, so on every phone it went below the
+  cross. Now `sunFitTitle` tries it in the gap in one piece, then two
+  lines, then three (`SceneMoment.subtitleWraps`: the same words, only
+  the breaks differ), and goes below the cross only when none fits; each
+  fit starts from one piece. Measured with `?freeze=1`: two lines at 375,
+  412 and 430 px wide, three at 360, below the cross at 320 (as the plain
+  line does there), one piece sideways. Held by the Scene moment row
+  (`documentation/smoke_scene_moment.js`: the forms' words and lines,
+  three wiring points, a fifth planted break).
+- **Recorded, not fixed (the brief: "list them by file and function,
+  and fix none"): the orrery's Kepler solvers.** Start at E = pi for e
+  of 0.8 or more, like the gallery's old one: `apsidal_markers.py`
+  `solve_kepler_equation`; `exoplanet_orbits.py`
+  `solve_kepler_equation`; `sgr_a_star_data.py` `solve_kepler_equation`;
+  `palomas_orrery.py`, four inline copies (`plot_actual_orbits` near
+  line 4610; two workers near 5407 and 5863; `animation_worker` near
+  6990); `test_orbit_markers.py` `solve_kepler`. Other starts:
+  `hills_cloud_sampler.py` `_eccentric_anomaly` (M + e sin M);
+  `main_belt_sampler.py` `_kepler` (M). Every start-at-pi copy is handed
+  M in [0, 2 pi), the side where that start converges, so none is wrong
+  today; a caller handing in a negative M would be. None raises when it
+  does not converge.
+- **The green night, read 2026-11-12** [verified @173d397a]: the
+  nightly run of 2026-11-11 19:44 UTC committed (173d397a, "Nightly run
+  2026-11-11 UTC ..."), after Tony's push b248da5d at 18:52 UTC; a red
+  night commits nothing (L-525).
+- **Tony's phone look at the frozen line** (`?freeze=1`, upright and
+  sideways): "-- correct", beside the run-order line in
+  `WHERE_WE_ARE_11-10-26_1813_Fable_run_record.md` (his edit carried in
+  orrery ceb508c6).
+- **Closed 2026-11-12, 00:07 Chicago, on those two**, Tony's word in the
+  coordinating session (Claude Opus 5.5): "Yes, close L523 and L524."
+  Its loose end, re-homed: the orrery's own Kepler solvers, listed above
+  and not fixed, to L-528 (the orrery's Kepler solvers' start).
+**Gap:** none.
+**Ref:** L-149 (the served window's trust participation); L-165 (site
+continuity); L-515 (one nested tree; part 4, the freeze); L-237 (Artifact
+1's stale record, T3's pinned failure); L-316 (the arrow cross);
+`INTERACTIVE_AS_BUILT.md` (what a room opens on).
+
+#### [L-523] A finger's tap that Plotly sends as a hover: a tap a little off a small dot opens its box (gallery, the text box; built, closed)
+<!-- L:523 status:DONE upd:2026-11-12 section:C flag: rice: -->
+- **Tony's word, 2026-11-11, 08:23:** "i would really like to get this
+  tapping improvement done ... could you take care of it in our Code
+  session". The fault, his words of Nov 10 and 11: "tapping with my
+  thumb works about 1/2 to 3/4 the time" and "tapping on the phone is
+  hit or miss on small object dots. People get quickly frustrated."
+  Built as Part 4 of the Code session for L-522 (document caps) step 2
+  (Claude Opus 5.5), on orrery eb771379 and gallery 1948e790, amending
+  that brief's "Out of scope" by the coordinator's word: this part
+  changes the page's code.
+- **The cause, read from the code** [verified @1948e790]. plotly.js
+  2.35.2, `src/plots/gl3d/scene.js` line 459, fetched from the tag
+  v2.35.2 that morning: after a pick the scene sends `plotly_click`
+  only when `selection.distance < 5` and a touch has been seen, and
+  otherwise sends the same pick as `plotly_hover`. The page's
+  `sunTapPicking` widens the pick to `SUN_PICK_RADIUS_PX` (22) on a
+  portrait phone only; `sunLabelInstall` opened a box on a hover only
+  for a mouse (L-497). So a thumb 5 to 22 px off a dot picked it and
+  opened nothing. MEASURED before any change: the new walk failed 3 of
+  its 13 checks on the page as it stood -- a finger's tap sent as a
+  hover, after the lift and during the press, opened nothing; drag,
+  pinch, late hover, mouse and a true click behaved.
+- **The fix.** `gallery/tap_hover.js` (`GalleryTapHover`) decides
+  whether a hover is a finger's tap: one finger, moved at most
+  `SUN_LABEL_TAP_PX` (10), lifted within `SUN_LABEL_TAP_MS` (500) -- the
+  page's own tap test, now asked of the file by the lift handler too --
+  a picked trace carrying words, a press not yet served, and the hover
+  within `SUN_LABEL_TAP_MS` of the lift; a hover while the finger is
+  still down waits for the lift. The page opens such a tap by the same
+  function as `plotly_click` (`sunTapOpen`), one focus per press
+  (`sunTapSerial`, `sunClickServedTap`), deferred out of Plotly's event
+  (L-278). Checked by the gallery run's new Tap hover row
+  (`documentation/smoke_tap_hover.js`: 19 worked cases, 25 with the
+  ruling below, and the page's wiring; its self-test breaks the file
+  four ways, five with the ruling; red on the page
+  before it was wired) and walked (`tools/headless/walk_tap_hover.js`,
+  13 of 13 after; 3 failed on a copy of the page before). The live check
+  fetches the file (SERVED_FILES).
+- **Method, Claude's calls, said so:** no new knob -- the window after
+  the lift is `SUN_LABEL_TAP_MS`; a pen counts as a finger; a hover on a
+  trace with no words takes nothing, so a click after it still opens.
+- **The 22-px reach for any finger: Tony's ruling of 2026-11-11, "Yes,
+  any finger".** It had been portrait only because L-318 round 6 tested
+  the portrait phone and Tony said the mouse was fine on the desktop; the
+  test was the screen's shape (`sunPhonePortrait`), not the finger, so a
+  landscape thumb kept Plotly's 10 px and a shell's wordless dots could
+  still win. Put to him with Claude's recommendation (apply it wherever
+  the press is a finger); he chose it. Built: `GalleryTapHover.widePick`
+  decides from the last pointer's kind (a finger or a pen; before any
+  press, a portrait phone, as before); `sunTapPicking` applies it at
+  every press and after every plot; a mouse's press puts back Plotly's
+  own. Shown red first: the walk's section 10 (a finger on a landscape
+  window) and the check's wiring line, then green: the walk 16 of 16,
+  the check's 25 cases with five breaks.
+- **Not seen headlessly:** the phone's real order of events -- whether
+  Plotly's pick comes after the lift, as a phone's compatibility mouse
+  events suggest, or during the press. Both orders are handled and
+  walked; only the phone measures it.
+- **Found beside it, recorded, not chased:** the Solar System drawer
+  walk now fails 8 of 339 at gallery 1948e790 with a payload of
+  2026-11-11T12:00Z, the same eight on a copy with the page before the
+  fix and after it: L-521's three ("scene tap moved the view", Sedna's
+  bullets, lines over 62 characters) and five more -- Juno's box not its
+  four lines, Voyager 1's box lacking the dates sentence, Galileo's not
+  its five lines, West's not its five lines, and the "Tap to update."
+  line not where section 30e looks. On L-521's class; for the session
+  that takes L-521.
+- **Tony's phone look:** his look, in
+  `WHERE_WE_ARE_11-10-26_1813_Fable_run_record.md`, beside the phone
+  look's run-order line: "-- correct". Read by the L-524 (the Kepler
+  solver's start) session, which left the closing to a ledger pass.
+- **Closed 2026-11-12, 00:07 Chicago, on that look**, Tony's word in the
+  coordinating session (Claude Opus 5.5, through the python_work door,
+  on orrery ceb508c6 and gallery bd65f036): "Yes, close L523 and L524."
+  The phone's real order of events, not seen headlessly, is settled by
+  the same look. Its loose end, re-homed: the drawer walk's five further
+  red checks found beside it (Juno, Voyager 1, Galileo, West, the "Tap
+  to update." line), to L-521 (three red checks), which now names them.
+**Gap:** none.
+**Ref:** L-318 (the tap rounds; round 6, the widened pick); L-497 (one
+text box; the mouse's hover); L-514 (the Mars room: moons beside their
+planet); L-521 (the drawer walk's red checks); L-278 (no Plotly call
+from inside its event); L-522 (the session it was built in).
 
 #### [L-519] Featured's rethink: Scenes, a shared link kept in the tree and on Featured (gallery, the gallery editor and the Solar System room's drawer; built, closed)
 <!-- L:519 status:DONE upd:2026-11-09 section:C flag: rice: -->
