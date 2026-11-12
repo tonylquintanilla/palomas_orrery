@@ -1753,6 +1753,116 @@ check `tools/test_kepler_solver.py`); L-525 (hold the bad data).
   setting is new with the build, so every browser meets the first-visit
   card once after the update. Written into the brief; the brief is
   settled.
+- **Part 1, the proposal, read 2026-11-12, 11:36** (the Code session
+  on orrery af8e1bdf and gallery 001d5046): `gallery/first_guide.js`,
+  loaded by both pages; each step done by the page's own function
+  (`sunLabelShow`, `setSunDrawer`, `ssCentreOn`, `ssTick`, `ssHome`),
+  the turn read from the live camera (`sunHudWatch`); the menu opened
+  again after Centre on, which closes it; the ring drawn over the
+  picture by Plotly 2.35.2's own sum for a pinned point; the setting
+  `paloma_orrery_guide` (`on`/`off`, none counts as on), the front
+  page's links carrying `guide=1` or `guide=0`, taken out of the
+  address; the test address `interactive.html?guide=1`; a new run row,
+  "First guide", and a headless walk run by the session.
+- **Part 2's go-ahead, RULED, Tony, 11:44: "yes on both of your
+  changes."** (1) The ring's check can fail: the "First guide" row
+  reads the Plotly version from `interactive.html`'s script line
+  (`cdn.plot.ly/plotly-2.35.2.min.js`, line 521 at 001d5046) and is red,
+  naming both, if it is not 2.35.2; it tests the ring's sum against
+  Plotly's own placement of a point; the walk's report names each step
+  passed and whether the ring was drawn. Tony asked "is that us? what's
+  the guard?": the version moves only by an edit to that line, and no
+  check guarded it before. (2) The i note (L-494) appears once after
+  the end card's Explore, its words as today, so a guided visitor meets
+  the i button that holds the sources (the session's own final
+  thought).
+- **Part 2 built, 2026-11-12, afternoon** (the same Code session, Claude
+  Opus 5.5, on orrery af8e1bdf and gallery 001d5046; not yet committed):
+  `gallery/first_guide.js` (the steps, words, setting, address rule, turn,
+  card places, ring sum); the room's part in `interactive.html` (the card,
+  the ring, a line in each of `sunLabelShow`, `setSunDrawer`, `ssCentreOn`,
+  `ssTick` and `sunHudWatch`; `guideGo` for Take me there); the gallery
+  run's new "First guide" row (`documentation/smoke_first_guide.js`, with
+  Plotly 2.35.2's own placement copied in
+  `documentation/fixture_plotly_2_35_2_placement.js`; red, naming both, on
+  another Plotly); `INTERACTIVE_AS_BUILT.md`'s new section. Skip, like the
+  end card's Explore, turns the setting off and then shows the i note: the
+  brief's rule that with the guide off the note behaves as today, read by
+  the session, for Tony's phone look. The Hover budget check named the
+  note's three callers in place of counting two; the drawer walk's 22a now
+  meets the guide's first card on a first visit.
+  - Checked: the gallery run, offline, "49 of 49 gating checkers passed"
+    (48 of 48 at the base). The walk in a real browser
+    (`tools/headless/walk_first_guide.js`, the computer's Edge, real
+    Plotly 2.35.2, WebGL): 210 checks passed, 8 failed, all eight the
+    sideways menu below; upright at 390 x 844 and 375 x 667 all four
+    steps and the end card passed by the visitor's own actions; the ring
+    drawn on Earth and on Halley at all four sizes, 0.15 to 0.51 px from
+    where Plotly pins the same point, and a click at its centre opened the
+    body's box; every card clear of its target; the setting's eight states
+    (none, off, off with ?guide=1, ?guide=0, a shared link, a browser that
+    keeps nothing, the old note's key, Skip). A planted page without the
+    box signal failed 22 of its checks. The tap, held-body and scene
+    address walks pass; the drawer walk fails the same three (L-521's) on
+    the new page and the base.
+  - Found in the walk, three faults of the guide's, fixed before the
+    report: `scrollIntoView` scrolled the picture's area too (the card and
+    the ring moved off where they were measured, 33 px sideways); a body
+    row's group is `group` in the drawer, not the served `in`; on a
+    sideways phone no place cleared the 90 px frame row, so a card may
+    cover the frame row, never its target.
+  - Found, not the guide's, recorded: (1) ON A PHONE HELD SIDEWAYS THE OPEN
+    MENU SHOWS NO ROWS -- its header, the trail line and Find fill its 40
+    percent of a picture about 315 px tall, the list starting below the
+    screen (measured on the base page, 844 x 390 and 667 x 375) -- so step
+    3 cannot be done sideways; put to Tony. (2) A browser whose storage
+    throws on every read stops at the page's own consent check
+    (`localStorage.getItem(CONSENT_KEY)`, unguarded) before the room opens,
+    guide or not; one row for the class when a session reaches it.
+- **Upright, RULED, Tony, 2026-11-12, 13:18 and 13:44** (on Part 2's
+  report, which found the open menu shows no rows held sideways, and
+  asked to fix it): "we should talk about the landscape (sideways)
+  orientation. it does not work with the drawer system and it does not
+  have to. the portrait orientation should be used." Some saved
+  pictures, Earth Science's above all, may use landscape; the orrery's
+  room does not. Asked whether to say so or leave it to common sense,
+  the coordinator proposed saying it only when it matters; Tony: "yes.
+  you're right." So: held sideways, the room shows one line at the top
+  of the picture, "This room works best with your phone upright." (no
+  popup, nothing to dismiss; the picture still turns and zooms; gone
+  when upright). The guide, held sideways, pauses with its card "Turn
+  your phone upright to continue." and goes on at the same step when
+  upright. The sideways menu is not fixed: not supported, by this
+  ruling, not a fault. The room's phone looks and walks are upright
+  only; the sideways placement already built stays. The rule goes into
+  interactive-exhibit: the room is built and tested upright.
+- **Upright built, 2026-11-12, afternoon** (the same Code session, by the
+  ruling above; not yet committed): `GalleryGuide.SIDEWAYS` ("(orientation:
+  landscape) and (max-height: 500px)", the CSS's own words), `WORDS.sideways`
+  and `WORDS.upright`. Held sideways, `#upright-line` shows by CSS alone in
+  the room, just under the picture's title and its lines
+  (`uprightLinePlace`; first drawn at the very top, it covered the
+  picture's title, seen in the walk's screenshot), touches going through;
+  the guide pauses (`guideSideways`: the paused card keeps the step's label
+  and Skip, no button, no ring; no action counts) and, upright, puts up the
+  same step. The walk's four steps run upright only; sideways it checks the
+  line and the paused card, the picture turning and zooming, and the same
+  step going on upright.
+  - Checked: the First guide row, its self-test now ten breaks, a page on
+    another Plotly and two wrong sideways lines, all caught; its wiring
+    25 places, a planted page without the pause caught. The walk, three
+    runs in a row, 154 passed, 0 failed (two sizes upright, every step;
+    two sizes sideways, 3 checks of the ruling each; the setting's eight
+    states); the planted page without the box signal still fails (22).
+    The tap, held-body and scene-address walks pass; the drawer walk
+    fails L-521's same three as the base.
+  - Seen in the walk, not the guide's, recorded: at 375 x 667 two runs in
+    three failed at step 2 before the walk changed. Plotly picks one pixel,
+    and at some angles a line drawn through Earth's dot takes it: a click
+    dead on the centre opened nothing, 4 px up opened Earth's box (with the
+    line traces hidden the click opened Earth). The walk now taps again 4
+    px off, up to four, each said. Whether a finger meets it is Tony's
+    phone look, the risk named below.
 - **The risk named:** step 2 rests on a tap on a small dot (L-523's
   wider reach helps; the ring helps the eye). Tony's phone look decides.
 **Gap:** the Code session of the brief, in three parts with a report after each.

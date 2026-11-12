@@ -252,8 +252,308 @@ Website: none.
 3. Bring me its Part 1 report before you give it the go-ahead.
 
 **Tony-action rollup**
-- *(do)* Commit and push the orrery.
-- *(do)* Start the Code session with the prompt.
+- *(do)* Commit and push the orrery. -- merged with nightly run: af8e1bdfe3b13b20c89b59a89c4505ef6d28bb60
+  - Website night run: 001d50460e4ee2d93ece6f19c89b638af4f57987
+- *(do)* Start the Code session with the prompt. -- OPEN: 11-12-26 1057: Opus: Code: L527 Gallery build with orrery records
 - *(do)* Bring me the Part 1 report.
 
 When this coordinating session closes, it still owes two things: a Where We Are update, and a note in the handoff about my copy-back fix, so the next session doesn't hit the same problem.
+
+============================================================================
+
+**Session: OPEN: 11-12-26 1057: Opus: Code: L527 Gallery build with orrery records**
+
+Reading the room's code for Part 1. So far I've found where the i note starts, the drawer's open and close, Centre on and the tick handler. Next: the camera, the text box and the trail line.
+
+Still in Part 1: I'm working out how to draw the ring and keep it on a turning body. Next I'll look at the front page and the tests.
+
+Part 1 is almost done. I've confirmed how Plotly places a pinned point on screen, so the ring can use the same sum. Now the front page and the gallery run.
+
+# Part 1 report: the guide's proposal (L-527, a first visit's guide)
+
+The guide can be built from what the room already does. Only two small additions are needed: a signal for "the picture was turned", and a way for "Take me there" to show the menu for a moment. No file has been edited.
+
+Built on orrery af8e1bdf and website 001d5046 (the nightly run past bd65f036), both matching GitHub.
+
+**Where the code lives.** It goes in a new file, `gallery/first_guide.js`, loaded by both pages, the way `tap_hover.js` is.
+- The file holds the steps, their words, the rule for when each step is done, the setting, where a card sits, and the ring's sums.
+- Both pages need the same setting, so one file means they can't come to disagree.
+- The skill's rule also puts logic that needs no browser in a file of its own, where a check can test it.
+- The room's page keeps only the drawing of the card and ring, and the calls into its own functions.
+
+**What says each step is done.** These are the page's own functions, each of which gets one line telling the guide.
+1. **A turn.** Plotly sends no event while a finger turns the picture. The page already reads the live camera every frame (`sunHudWatch`), so the guide notes the camera when card 1 appears. The step is done once the view has turned a few degrees. This is the one signal that has to be added.
+2. **Earth's box opens.** `sunLabelShow`, whether the visitor taps the dot or Earth's name.
+3. **The menu opens:** `setSunDrawer`. **Centre on Earth:** `ssCentreOn`. **The Moon ticked:** `ssTick`.
+4. **Halley's box opens.** `sunLabelShow` again.
+
+If the visitor has already done a step's action when its card comes up, the card moves on at once. Anything else they do leaves the card where it is, and it isn't repeated.
+
+**One finding.** Centre on closes the menu by design. So once the view is on Earth, the guide opens the menu again by itself about a second later, with Earth's fold open and the Moon's row scrolled into view. That way the card "Now tick the Moon" points at a row the visitor can see. The words stay exactly as written.
+
+**What "Take me there" does,** in this order, each step waiting for the one before:
+1. Closes any open box.
+2. Goes back to the Sun's view with the ticks kept (`ssHome`, the same move as the trail line's "Solar system" link).
+3. Ticks Halley (`ssTick`), which also ticks Neptune, as a comet's tick already does, and frames out to Halley.
+4. Folds open Comets and Halley-type comets, opens the menu and scrolls Halley's row into view.
+5. Keeps the menu open for 2.5 seconds, then closes it.
+6. Puts the ring on Halley and shows its card.
+
+**The ring.** It is a thin yellow circle drawn on the page over the picture, not inside the 3D scene.
+- Every frame, the guide reads the body's dot and works out where it sits on screen. It uses the same sum Plotly uses to pin its own labels to a point, which I read in Plotly 2.35.2's source.
+- So the ring stays on the body through turning, zooming and Centre on. It also can't steal a tap, because it lets taps through to the dot underneath.
+- If Plotly's internals aren't where 2.35.2 keeps them, no ring is drawn and the card's words still say where to tap.
+- The ring doesn't pulse.
+
+**Where each card sits.** The guide measures the page's own pieces each time it places a card: the title, the arrow buttons, the bottom row of the frame chrome (the HUD), the menu button and the open menu.
+- Step 1: at the top, under the title and the arrow buttons.
+- Step 2 and Halley's ring: in whichever half of the screen the ring is not in.
+- Step 3: just above the menu button, then just above the open menu, never over Earth's or the Moon's row.
+- Step 4 and the end card: at the top.
+- Sideways, the menu shows about a row and a half, so the cards are narrower and sit at the top right of the picture.
+- The headless walk checks that no card covers its target, upright and sideways, at four phone sizes. Your phone look is the real test.
+
+**The setting.**
+- **Key and values:** `paloma_orrery_guide` in the visitor's browser, with the values `on` or `off`. A browser with no setting yet counts as `on`, so every browser meets the guide once after the update, and the old i note's key isn't read.
+- **Who writes `on`:** "Show me around" and the Tutorial switch turned on.
+- **Who writes `off`:** "Explore on my own", Skip, the end card's Explore, and the switch turned off.
+- **The links into the room:** the front page's links carry the choice in the address, `guide=1` or `guide=0`. That covers a browser that keeps no storage: "Show me around" still runs the guide, and "Explore on my own" still doesn't. The room takes `guide` out of the address as it opens, so a link shared later never carries it.
+- **Where the guide runs:** only on the room's plain opening. A shared link or a scene never runs it.
+
+**Where the words live.**
+- The cards' words are instructions, not facts, so they're typed once in a table in `first_guide.js`, the way the "Tap to update." line is. The new check holds them word for word to the brief.
+- The card's title: the page's typed constant, plus its title in `gallery/gallery_metadata.json`. The card's sentence: that file's description. Both are edited directly, as L-517 (the lobby) did.
+- The two lines under the name would replace the current line, which comes from `gallery/gallery_config.json`. That point is left for Part 3.
+
+**The test address:** `interactive.html?guide=1`. It runs the guide whatever the setting says, and you can add `&freeze=1` beside it.
+
+**The checks.**
+- A new gallery run row, "First guide". It works through each step's rule, every combination of the setting and the links, a browser that refuses storage, the words, the card placement and the ring's sums. It also checks that both pages are wired to it, and it breaks the real file several ways first to show it can fail.
+- A headless walk of the four steps, Skip, a shared link, and upright and sideways. The walk can't be a row of the run itself, because it needs a test browser (jsdom) that the gallery doesn't carry. I run it myself, as the other walks are run.
+- The base run is taken at the start of Part 2, before any edit.
+
+**The i note** (L-494): I kept the coordinator's reading. The guide stands in for the note, and with the guide off the note behaves as today.
+
+Where this leaves us: the proposal is ready for the coordinator's read, and nothing is built.
+
+One final thought: a guided visitor never meets the i note, so they may never learn the i button holds the sources. The note could appear once after the end card.
+
+My one question: **may I build Part 2 as proposed here?**
+
+**Files changed:** none.
+**Your run order:** take this report to the coordinating session, then bring me your go-ahead or its changes.
+**Tony-action rollup:** *(decide)* Part 2's go-ahead.
+
+===============================================================================
+
+**Coordinator:***
+
+I'll record both changes in L-527, then give you the go-ahead to paste into the Code session.
+
+Both changes are recorded in L-527, and the ledger reads back from your computer exactly as I wrote it. The Code session will find those lines on disk when it updates L-527 at its close.
+
+**Paste this to the Code session:**
+
+```
+Go ahead with Part 2 as proposed, with two changes from the coordinating session:
+
+1. The ring's check must be able to fail. The new "First guide" row reads the Plotly version from interactive.html's script line, and is red, naming both versions, if it is not 2.35.2, the version the ring's sum was checked against. It also tests the ring's sum against Plotly 2.35.2's own placement of a point. The headless walk's report names each step it passed, and says whether the ring was drawn.
+
+2. After the end card's Explore, the i note (L-494) appears once, as it does today for an unguided visitor, with its words unchanged.
+
+L-527 in the orrery's ledger on disk has both changes and my reading of your Part 1 report; add to it there, don't replace it.
+```
+
+**Files for your run record**
+Orrery:
+- ok LEDGER_CONSOLIDATED.md (1 edit: L-527 gains the Part 1 report's summary and your go-ahead with both changes; index rebuilt and checked; read back)
+
+Website: none.
+
+**Your run order**
+1. Paste the go-ahead into the Code session.
+2. When Part 2's report comes, bring it here, then do your phone look with `interactive.html?guide=1`, upright and sideways.
+
+**Tony-action rollup**
+- *(do)* Paste the go-ahead.
+- *(do)* Bring me Part 2's report.
+
+============================================
+
+**Code:**
+
+Part 2 has started. I'm pinning down the exact Plotly sum the ring will copy, so the new check can compare against it. Next I'll check the tools on this computer and run the base test.
+
+Progress: the editing rules are read, and the base gallery run and the test tools are installing in the background. Now I'm reading an existing check and walk to model the new ones on.
+
+Writing the guide's own file now: its steps, words, setting rule, card placement and ring sum.
+
+Now wiring the guide into the room's page. First the existing i note's look and the script tags, so the cards match.
+
+The base run shows 48 of 48 gating checks passed. It also rewrote five generated files, so I'm checking what changed in them.
+
+Those are the run's normal rewrites: the three pull stamps now name orrery af8e1bdf, and the module index has a new date line. Now the page edits.
+
+Now the guide's code in the page, beside the i note's.
+
+Now the four hooks: the box, the menu, Centre on and the tick, plus the per-frame watch.
+
+Both the page script and the new file pass the syntax check. I'm writing a pinned copy of Plotly's placement code to test the new "First guide" check against next.
+
+Now the check itself.
+
+Adding the run row and the live check's file entry, then running the check.
+
+One of the nine deliberate breaks wasn't caught, so the cases were missing one: a target sitting exactly where the card's first-choice place would be. Adding that case.
+
+The check passes with all nine deliberate breaks caught. Next I'll walk the room in a real Chromium browser with Plotly 2.35.2, so the ring and card positions are measured for real.
+
+The page loads Pyodide from a script tag, so the walk can stand in for it with the room's real payload. Writing the browser walk now.
+
+Chromium wouldn't start inside the command sandbox. I'll try once with the sandbox off for this command only; it launches the local test browser and nothing else.
+
+The bundled Chromium is broken with a side-by-side configuration error on this machine, so I'm having Playwright use the system Edge with a fresh temporary profile instead, leaving Tony's Edge data untouched.
+
+Edge runs. The walk got well into step 3 before a click stalled. Reading where.
+
+The drag didn't register as a turn, and everything after it failed in a chain. Checking whether WebGL came up in headless Edge, and what the camera did.
+
+A slower drag turns the picture: Plotly needs the moves spread over time. Updating the walk's drag.
+
+Most of the walk now passes, and the ring sits 0.2 to 0.5 px from where Plotly pins the same point. The few failures look like timing in the walk itself. Reading the rest of the output.
+
+Sideways, the Moon card overflows the top of the screen because the zoom buttons take the space above the menu, and Halley's ring is off by 33 px from Plotly's pin. I'm fixing the walk's timing first, then the two real faults.
+
+Now the placement fix. A card will measure only the pieces in its own column, and sideways it will try the left side when the right is full.
+
+scrollIntoView was shifting the whole picture area sideways, pushing the Moon card off the top and the ring 33 px off Halley. I'm limiting the guide's scroll to the menu's own list and adding detail to the "menu shown at Halley" check.
+
+The ring now sits upright, but the Moon card is still sideways and the walk's check uses the wrong key name for the Sun. I'm searching for whatever else scrolls the picture area sideways after Take me there.
+
+The page keeps a body's group under the name `group`, not `in` as the served file has it. Fixing the guide to read `group`.
+
+Something outside the walk is scrolling the picture area sideways, probably because Playwright's click scrolls targets into view and a finger never does. I'm switching the walk to click element centres and logging the picture area's scroll after each action.
+
+Tapping like a finger shows a real fault. The rows a card points at are below the screen, so my scroll of the menu's list didn't reach them. Checking which element actually scrolls in the open menu.
+
+The scroll works when called directly; the walk failed only because it ran while the menu was still opening. I'm adding a scroll after the menu settles, a short pause before tapping the ring, and logging each card's chosen place.
+
+Both upright sizes pass every step, but the sideways layout still fails in three places, and one of those failures came from my own stand-in for blocked storage, which broke the page's consent check. I'm measuring the sideways menu next.
+
+Sideways, the open menu shows no rows because its header, search box and trail line fill the screen, pushing the list below it. I'm confirming this on the base page now.
+
+Sideways, the menu header, trail and search box fill the screen, so no row is reachable there today. The menu is out of scope, so I'll report that failure, drive steps 3 to 5 through the page's own function, and fix the blocked-storage stand-in.
+
+Upright passes at both sizes and the ring stays within 0.5 px of Plotly's pin, but at 667 x 375 Halley's card still overlaps the ring. I'm checking what boxed the card in.
+
+The sideways picture is only 315 px tall with a 90 px frame row, so the card has nowhere to fit cleanly. I'm making sideways cards at most 40% of the width and letting them cover the frame row when needed, but never their own target, title, buttons or menu.
+
+The click on the ring's centre missed once at 844 x 390, though it has passed at this size before and the ring sits 0.37 px from Plotly's pin, so I'm treating it as a dropped frame in the software-drawn browser. I'll tap a second time, as a visitor would, and note it whenever that happens.
+
+The eight failures left come from the sideways menu, which shows no rows and already did before this build. I'm now writing a test for the walk case where a planted page never tells the guide a box opened.
+
+The planted page fails at the step after the tap, as it must. Next, the room's existing headless walks, to make sure the guide changes nothing they test.
+
+One drawer-walk check now fails because a first visit should be greeted by the guide rather than the i-button note, so I'm updating that check to the new rule.
+
+The walk's `click` is defined a few lines below my new check, so I'll do the tap the same way inline.
+
+The drawer walk shows the same three known failures on the new page as on the base page (L-521). I'm running the scene-address walk next, since the guide reads the address.
+
+The scene-address walk passes 44 of 44. Now the as-built page. Checking whether it has a size cap first.
+
+The as-built page has no cap; the skill is at its cap of 738 lines, which matters at the close. Writing the as-built section now.
+
+Every name on the as-built page is found in the code, and all eight files are ASCII with LF. Now the whole gallery run.
+
+The Hover budget check expects exactly two calls showing the i note, but the guide adds a third on purpose, so I'm changing the check to name each of the three calls.
+
+The full gallery run passes at 49 of 49 gating checks, and the planted hover budget copy correctly goes red. I'm writing the walk summary for the report, then Part 2's lines in L-527.
+
+Now adding Part 2's lines to L-527 in the orrery's ledger, after the coordinator's lines, replacing nothing.
+
+# Part 2 report: the room's guide (L-527, a first visit's guide)
+
+The guide works in the Solar System room. Held upright, a visitor can do all four steps and reach the end card with their own taps. Nothing is committed.
+
+**What was checked, and what it showed**
+- **The gallery run (offline):** 49 of 49 gating checks passed. The base had 48 of 48; the new one is the "First guide" row.
+- **The walk in a real browser:** it used this computer's Edge, the real Plotly 2.35.2 and the room's real data. 210 checks passed and 8 failed, and all 8 are the sideways menu fault below.
+  - **Upright** (390 x 844 and 375 x 667): every step passed, done the way a visitor does it. A drag turns the picture, a tap at the ring opens Earth's box, then the menu, Centre on Earth, the Moon's tick, Take me there, a tap on Halley, and Explore.
+  - **The ring** was drawn on Earth and on Halley at all four sizes. It sat 0.15 to 0.51 px from where Plotly itself pins the same point, and a tap at its centre opened that body's box.
+  - **Every card** stayed clear of its target.
+  - **The setting:** all eight states behaved as ruled. A planted page that never says "a box opened" failed, as it should.
+- **The ring's check can fail,** as the coordinator asked. The new row reads Plotly's version from the page's script line and goes red, naming both versions, if it isn't 2.35.2. It also holds the ring's sum to Plotly 2.35.2's own placement code.
+- **The i note** shows once after the end card's Explore, as asked. I also made it show after Skip, since the brief says that with the guide off the note behaves as today. Your phone look decides that.
+
+**Three faults of mine that the walk found, all fixed before this report**
+- Scrolling the menu to a row also scrolled the whole picture, which pushed the ring 33 px off Halley when held sideways.
+- Take me there wasn't opening the comet folds, because I read the wrong name for a body's group.
+- Sideways, there was no room for a card without covering the frame row (the triad and ruler). Cards are now narrower sideways, and as a last resort may cover the frame row, but never what they point at.
+
+**One fault from before this build, found in the walk:** held sideways, the open menu shows no rows at all. Its header, trail line and search box fill its whole height, and the list starts below the screen. That's also true of the page as it was this morning. So step 3 can't be done sideways, and no visitor can use the menu sideways today.
+
+My one question: **may I make the sideways menu show its rows in this session, before your sideways phone look?** It would be a small change to the menu, which the brief left out of scope.
+
+**Files changed**
+
+Website:
+- ok `gallery/first_guide.js` (new)
+- ok `interactive.html` (11 edits)
+- ok `gallery_maintenance_run.py` (3 edits)
+- ok `documentation/smoke_first_guide.js` (new)
+- ok `documentation/fixture_plotly_2_35_2_placement.js` (new)
+- ok `documentation/smoke_hover_budget.js` (1 edit)
+- ok `tools/headless/walk_first_guide.js` (new)
+- ok `tools/headless/walk_solar_system_drawer.js` (2 edits)
+- ok `INTERACTIVE_AS_BUILT.md` (3 edits)
+- Rewritten by the gallery run itself, as it always does: `MODULE_ATLAS.md`, `MODULE_INDEX.md` (date lines) and the three pull stamps in `data/` (now orrery af8e1bdf).
+
+Orrery:
+- ok `LEDGER_CONSOLIDATED.md` (1 edit: Part 2's lines added to L-527)
+- Your run-record note is untouched.
+
+**Your run order**
+1. Answer the question above.
+2. For the phone look: commit and push the website, then open `palomasorrery.com/interactive.html?guide=1` upright. Pushing puts the guide live for every visitor's first plain opening of the room before the front page has its choice. Skip works.
+
+**Tony-action rollup**
+- *(decide)* The sideways menu: fix it now, or record it.
+- *(do)* Commit and push the website.
+- *(decide)* The upright phone look with the test address.
+
+=============================
+
+**Coordinator:**
+
+I'll record your ruling in L-527. The Code session has added its Part 2 lines to the ledger since my last write, so I'll edit the copy on your disk, not mine.
+
+Your ruling is in L-527. I added it to the copy on your disk, after the Code session's Part 2 lines and without changing them, and it reads back as written. The Code session will see it there.
+
+**Paste this to the Code session:**
+
+```
+Your question: no, don't fix the sideways menu. Tony's ruling (13:18 and 13:44, now in L-527): the orrery's room is used upright; sideways does not work with the drawer and does not have to. Some saved pictures, Earth Science's above all, may use landscape; the room does not.
+
+So, in this session, before the phone look:
+1. Held sideways, the room shows one line at the top of the picture: "This room works best with your phone upright." No popup, nothing to dismiss; the picture still turns and zooms; the line goes when the phone is upright.
+2. The guide, held sideways, pauses with its card "Turn your phone upright to continue." and goes on at the same step when upright.
+3. The room's walks and phone looks are upright only from now on; the sideways card placement you built stays. The walk's eight sideways failures become a check that the line and the paused card show sideways.
+4. At the close, the rule goes into interactive-exhibit: the room is built and tested upright.
+
+Then Part 2's report again, short: what changed, the run and the walk.
+```
+
+**Files for your run record**
+Orrery:
+- ok LEDGER_CONSOLIDATED.md (1 edit: L-527 gains your upright ruling, after the Code session's Part 2 lines; index rebuilt and checked; read back)
+
+Website: none from me.
+
+**Your run order**
+1. Paste the text above into the Code session.
+2. When its short report comes, push the website and do the upright phone look with `palomasorrery.com/interactive.html?guide=1`. Turn the phone sideways once, to see the line and the paused card.
+
+**Tony-action rollup**
+- *(do)* Paste the text.
+- *(do)* Push the website, then the phone look.
