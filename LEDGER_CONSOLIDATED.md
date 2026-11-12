@@ -1736,11 +1736,26 @@ check `tools/test_kepler_solver.py`); L-525 (hold the bad data).
   Off. The switch turned On again brings "Show me around" back, and the
   next visit to the room runs the guide. Made in the mockup as a fourth
   front-page screen.
+- **The two lines, RULED, Tony, 09:56 (his run record): "yes".**
+  "approved and pushed" (orrery e0122ef6), and he asked for the Code
+  session's brief. Written the same morning:
+  `documentation/COORD_L527_guide_brief_20261112.md`, every card's
+  words in it. One change of the coordinator's to the end card, said
+  to Tony: "or tap Tutorial to see this again" reads "or turn on
+  Tutorial on the front page to see this again", since the room has no
+  Tutorial. One question left open in the brief, put to Tony: whether
+  the guide runs when the room opens on a shared link or a scene (the
+  coordinator's lean: no, only on the room's plain opening).
+- **A shared link, RULED, Tony, 10:17:** asked whether the guide stays
+  off when the room opens from a shared link or scene: "yes. As you
+  said it should run when first opening the website after we update the
+  front page." The guide runs only on the room's plain opening; the
+  setting is new with the build, so every browser meets the first-visit
+  card once after the update. Written into the brief; the brief is
+  settled.
 - **The risk named:** step 2 rests on a tap on a small dot (L-523's
   wider reach helps; the ring helps the eye). Tony's phone look decides.
-**Gap:** the front page's first screen
-and the Tutorial button's place and words, one question at a time; then
-the smallest instrument, proposed, and a brief when its session is next.
+**Gap:** the Code session of the brief, in three parts with a report after each.
 Before Mars (L-514) by Tony's word of 22:42 ("before building more").
 **Ref:** L-494 (the i button's first-visit note); L-517 (the lobby);
 L-515 (one nested tree: Centre on, the drawer); L-523 (taps sent as

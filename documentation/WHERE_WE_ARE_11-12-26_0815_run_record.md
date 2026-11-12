@@ -132,7 +132,7 @@ Not urgent, in your order:
 
 **Tony**: Run record:
 
-**Session: OPEN: 11-11-26 2227: Opus: Coordinator: Orrery website coordination handoff**
+**Session: OPEN: 11-11-26 2227: Opus: Coordinator: Orrery website coordination handoff L527**
 
 I'll record your choice in L-527 and add the "Take me there" screen to the mockup.
 
@@ -195,4 +195,65 @@ Orrery:
 Website: none.
 
 **Tony-action rollup**
-- *(do)* Commit and push the orrery whenever suits you. In GitHub Desktop, the ledger's change should include "One setting, RULED". -- 
+- *(do)* Commit and push the orrery whenever suits you. In GitHub Desktop, the ledger's change should include "One setting, RULED". 
+
+==================================================
+
+I'll confirm your push, record your "yes" on the two lines, and look at the last brief so this one follows the same form.
+
+Every file and name the brief cites exists. Now I'll record it in L-527 and copy both files to your orrery folder.
+
+The brief is written and in your orrery folder, and it reads back as I wrote it: `documentation/COORD_L527_guide_brief_20261112.md`. It holds every card's words, the front page's words, the one setting, the Tutorial switch, and three parts with a report and your go-ahead after each. Part 1 is a proposal only, so you see how the session plans to build it before any file changes.
+
+I made one wording change in it. The end card said "or tap Tutorial to see this again", but there's no Tutorial in the room, so it now reads *"or turn on Tutorial on the front page to see this again."*
+
+**One question is still open in the brief.** Someone can open the room from a shared link that starts on a particular scene. My lean is that the guide doesn't run then: the link shows what its sender meant, and the setting stays as it was. The guide would run only when the room opens plainly, from "Show me around" or a first visit. Once you answer, I'll write it into the brief, and then it's ready.
+
+**The prompt for the Code session,** to paste once you've pushed:
+
+```
+Built on orrery (the SHA of my push) at https://github.com/tonylquintanilla/palomas_orrery and gallery bd65f036d16b553953f7c8b2e76edc6b10c6b5f4 at https://github.com/tonylquintanilla/tonyquintanilla.github.io (both branch main). Nightly bot commits since are expected.
+Tony's local folders: orrery `C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\`, gallery `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io\`
+Type: BUILD, a Claude Code session in the GALLERY, through the python_work door, with the records in the orrery. Read the orrery's `documentation/COORD_L527_guide_brief_20261112.md` and follow its Start. Three parts, a report and my go-ahead after each; Part 1 edits no file. Plain speech, one question per message. Commit and push are mine.
+```
+
+**Files for your run record**
+Orrery:
+- ok documentation/COORD_L527_guide_brief_20261112.md (new)
+- ok LEDGER_CONSOLIDATED.md (1 edit: L-527 gains your "yes" on the two lines, the brief, the end card's wording, and the open question; index rebuilt and checked; read back)
+
+Website: none.
+
+**Your run order**
+1. Answer the question below. I'll write your answer into the brief.
+2. Commit and push the orrery.
+3. Open the Code session through the python_work door and paste the prompt.
+
+Should the guide stay off when the room opens from a shared link or scene? -- yes
+
+=================================
+
+I've written your answer into the brief, and it's settled now. The guide runs only when the room opens plainly. A shared link or scene opens with no guide and leaves the setting alone.
+
+I also wrote in what your words implied: the setting is new with this build. So every browser, including visitors from before, sees "Show me around" the first time it opens the front page after the update.
+
+Both files read back from your computer exactly as I wrote them.
+
+**Files for your run record**
+Orrery:
+- ok documentation/COORD_L527_guide_brief_20261112.md (new; your shared-link ruling written in)
+- ok LEDGER_CONSOLIDATED.md (1 edit: L-527 gains the shared-link ruling, and its gap now says the Code session is next; index rebuilt and checked; read back)
+
+Website: none.
+
+**Your run order**
+1. Commit and push the orrery. -- 
+2. Open the Code session through the python_work door and paste the prompt from my last message, filling in your push's SHA.
+3. Bring me its Part 1 report before you give it the go-ahead.
+
+**Tony-action rollup**
+- *(do)* Commit and push the orrery.
+- *(do)* Start the Code session with the prompt.
+- *(do)* Bring me the Part 1 report.
+
+When this coordinating session closes, it still owes two things: a Where We Are update, and a note in the handoff about my copy-back fix, so the next session doesn't hit the same problem.
