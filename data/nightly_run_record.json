@@ -3,9 +3,9 @@
   "schema": 2,
   "taken": [],
   "held": [],
-  "clean_run_utc": "2026-11-12T16:00:27.361741+00:00",
+  "clean_run_utc": "2026-11-12T19:00:44.111268+00:00",
   "where": "GitHub Actions",
-  "run_log": "https://github.com/tonylquintanilla/palomas_orrery/actions/runs/43253562074",
+  "run_log": "https://github.com/tonylquintanilla/palomas_orrery/actions/runs/43285342455",
   "reported_not_red": [],
   "rows": [
     {
@@ -16,12 +16,12 @@
     {
       "row": "Period fetch",
       "kind": "generator",
-      "verdict": "rewrote data/osculating_cache.json -- PASS -- no period missing; elements on the 30-day cycle for 2: Sedna, Encke; drawing refused: McNaught"
+      "verdict": "unchanged (2 checked, not written) -- NOTHING MISSING -- 98 served objects examined, no query asked"
     },
     {
       "row": "Horizons check",
       "kind": "generator",
-      "verdict": "rewrote data/horizons_confirmations.json -- PASS -- 2 checked today, 2 queries"
+      "verdict": "unchanged (2 checked, not written) -- NOTHING DUE -- 98 entries and 26 sheets current, no query asked"
     },
     {
       "row": "Path plan",
@@ -31,7 +31,7 @@
     {
       "row": "Objects export",
       "kind": "generator",
-      "verdict": "rewrote data/objects_export.json"
+      "verdict": "unchanged (1 checked, not written)"
     },
     {
       "row": "Drawings export",
