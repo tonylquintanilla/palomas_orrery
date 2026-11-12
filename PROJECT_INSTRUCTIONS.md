@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.138 | November 11, 2026
+Tony Quintanilla, PE | Claude | v3.139 | November 11, 2026
 
-Cut from eb771379 at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 02183e4d at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -541,7 +541,7 @@ gallery-assembler            1.4  render_orbits.py, resolver.py,
                                   unresponsive, it worked yesterday, a console
                                   error appears, or Claude is about to hand
                                   Tony a test to run
-gallery-cache-builder        1.18 Nightly builder, atomic swap and its
+gallery-cache-builder        1.19 Nightly builder, atomic swap and its
                                   retry/roll-back/swap log, "Access is denied"
                                   under data/, coverage_index, serving cache,
                                   objects_config, dry-run/first-build/nightly,
@@ -555,7 +555,7 @@ gallery-cache-builder        1.18 Nightly builder, atomic swap and its
                                   rule), every JPL question asked fresh
                                   (HORIZONS_CACHE), a drawing named on a room's
                                   row, an ended mission's last day
-                                  (fetch_path_last_day)
+                                  (fetch_path_last_day), a held body (HELD)
 interactive-exhibit          1.41 a room or exhibit in interactive.html
                                   (?exhibit=); its drawer and chrome (nav
                                   cluster, frame zoom, i panel, HUD, text box,
@@ -1258,6 +1258,46 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.139 (November 11, 2026, night): No rule changed in this document.
+ONE skill bump: gallery-cache-builder 1.18 -> 1.19 (L-525, hold the bad
+data), by the records skill's binding rule, Tony's go-ahead of Nov 11
+("Yes, all four": the builder skill, the skills index, one protocol
+version entry and the nightly job's file). ONE BODY'S FAILED TEST HOLDS
+THAT BODY, NOT THE SITE.
+
+WHAT PROMPTED IT. The Claude Code session of Nov 11 (Claude Opus 5.5),
+through the python_work door, built on orrery 02183e4d and gallery
+173d397a, from Tony's prompt and
+documentation/COORD_L525_hold_brief_20261111.md, in three parts with a
+report and his go-ahead after each, with the coordinator's two changes
+of that evening: a moon is not held for a test number over the limit,
+and more than five held is a failed build.
+
+WHAT CHANGED. gallery-cache-builder: a new section, A Body That Fails
+Its Test Is Held. A Sun-centred body whose accuracy test is more than
+0.5 degrees from JPL, or cannot be made, and any body JPL does not
+answer, is served from its last good build with a hold block, copied
+forward swap after swap, and leaves the site's window to the bodies
+that passed; the night's commit title starts "HELD <name>", the Daily
+Run prints the same line, and "HOLD ENDED" the run a hold ends; more
+than five held is a failed build, no swap. Riding it: the Validation
+stance's new abort, Layer 1's count, and a field note that said the
+page reads no served data, removed as wrong. Three passages of history
+moved to documentation/SKILL_HISTORIES.md with the oldest of four
+version entries (1.16), so the skill stays at its cap of 944 lines.
+
+THE OBLIGATION TRAVELS. This session read gallery-cache-builder 1.18
+from the repo's copy, as a Code session does, as the manifest expected.
+Tony reinstalls it (Settings > Skills) and pastes this version into the
+Project's instructions on claude.ai; the next session that loads it
+from the account confirms its copy reads 1.19 before builder work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.136 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.138 (November 11, 2026): No rule changed in this document. ONE skill
 bump: interactive-exhibit 1.40 -> 1.41 (L-522, document caps, step 2,
 and L-523, a finger's tap sent as a hover), by the records skill's
@@ -1337,57 +1377,6 @@ that fires it.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.134 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.136 (November 10, 2026): No rule changed in this document. TWO
-skill bumps, one each, by the records skill's binding rule, Tony's
-go-ahead of that morning ("Yes, bump both"): interactive-exhibit 1.39 ->
-1.40 and gallery-assembler 1.3 -> 1.4 (L-515, one nested tree, step 2b).
-ONE PICTURE AND ONE DRAWER.
-
-WHAT PROMPTED IT. The Claude Code session of Nov 10 (Claude Opus 5.5),
-through the python_work door, built on orrery b3ce81f8 (the brief's push
-after a3e86c88) and gallery cea21af1, from Tony's prompt and
-documentation/COORD_L515_step2b_brief_20261109.md, in four parts with a
-report and his go-ahead after each.
-
-WHAT CHANGED. interactive-exhibit: a new section, One picture: the folds
-and the view's middle. A body something is fetched around folds open to
-what circles it and, for a centre serving features (Earth, Jupiter,
-Saturn), its own shells and guides, by distance; a moon is drawn at its
-planet's place by adding; a moon's box is the Moon's pattern, its
-distance from its planet, and past its checked span a sentence saying
-so; Centre on, on every centre the Sun included, moves the view in the
-page, the drawing shifted so the middle is the scene's origin in 64-bit
-numbers, on the centre's own served opening, the axis lines crossing
-there and the frame note saying so; Go To on a moon puts its planet at
-the middle; Home and Reset return to the Sun's view; the trail is the
-path down the tree. The Earth room folds into the root (?exhibit=earth),
-its row and driver OBSOLETE and kept; a fold is drawn, and its stored
-drawings fetched, the first time it is needed. The Pluto row reads
-"Pluto system", its marker the open white square. The store writer adds
-a centre's opening (add_arrival). And L-518's received note on Reset's
-frame. gallery-assembler: No composition between frames says which
-kind is retired (subtracting two answers) and which is the method
-(adding a parent's position to a child's own answer,
-gallery/assembler/compose_children.py), and the shift's measured
-reason. Each skill's oldest of four version entries moved to
-documentation/SKILL_HISTORIES.md by the three-entry rule (interactive-
-exhibit's 1.37; gallery-assembler had three). Every sentence was read
-from the gallery's code with this session's edits before it was written.
-
-THE OBLIGATION TRAVELS. This session read both skills from the repo's
-copy, as a Code session does: interactive-exhibit 1.39 and
-gallery-assembler 1.3, as the manifest expected. Tony reinstalls both
-(Settings > Skills) and pastes this version into the Project's
-instructions on claude.ai; the next session that loads them from the
-account confirms its copies read 1.40 and 1.4 before work that fires
-them.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.133 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

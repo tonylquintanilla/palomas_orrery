@@ -1005,7 +1005,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*262 live items; 246 need attention (`!`); 165 RICE-scored; 256 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*263 live items; 247 need attention (`!`); 165 RICE-scored; 256 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1180,7 +1180,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-522 | Document caps: how the working documents are kept from growing, and the catch-up (protocol, skills, ledger; upkeep) | OPEN | -- | 2026-11-11 |
 | ! | L-523 | A finger's tap that Plotly sends as a hover: a tap a little off a small dot opens its box (gallery, the text box; Tony's phone look) | OPEN | -- | 2026-11-11 |
 | ! | L-524 | The Kepler solver's start: a stretched orbit's second half solved wrong, the site frozen at 0.3 days, and the frozen date line on a phone (gallery, the assembler and the room's title; built) | OPEN | -- | 2026-11-11 |
-| ! | L-525 | One body's failed accuracy test holds that body, not the whole site (gallery, the nightly builder's served window; ruled, not built) | OPEN | -- | 2026-11-11 |
+| ! | L-525 | One body's failed accuracy test holds that body, not the whole site (gallery, the nightly builder's served window; built, its sentence settled Nov 11) | OPEN | -- | 2026-11-11 |
+| ! | L-526 | A body whose test fails for a real reason is drawn from the older orbit while held (gallery, the nightly builder's hold; recorded, not built) | OPEN | -- | 2026-11-11 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1614,7 +1615,23 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
-#### [L-525] One body's failed accuracy test holds that body, not the whole site (gallery, the nightly builder's served window; ruled, not built)
+#### [L-526] A body whose test fails for a real reason is drawn from the older orbit while held (gallery, the nightly builder's hold; recorded, not built)
+<!-- L:526 status:OPEN upd:2026-11-11 section:A flag: rice: -->
+- **Recorded 2026-11-11**, at the coordinator's word with Tony's
+  go-ahead to Part 2 of L-525 (hold the bad data), from that session's
+  final thought: a class, one row, not chased.
+- **The class:** L-525 holds a Sun-centred body whose two-body test is
+  more than 0.5 degrees from JPL. Where the failure is real physics, not
+  bad data -- a close pass, Apophis's of April 2029 the case in view --
+  the body is drawn from its older orbit while held, where today's fresh
+  orbit with a short checked span would be nearer the truth. The hold
+  is honest and named every night, and wrong in that one way.
+**Gap:** a design talk when the case nears: whether such a body is
+recognised (a known close approach, say) and served fresh with its own
+short span instead of held. Not before 2029 unless another case comes.
+**Ref:** L-525 (the hold); L-149 (the served window).
+
+#### [L-525] One body's failed accuracy test holds that body, not the whole site (gallery, the nightly builder's served window; built, its sentence settled Nov 11)
 <!-- L:525 status:OPEN upd:2026-11-11 section:A flag: rice: -->
 - **RULED, Tony, 2026-11-11, 11:22,** in his words: "Hold the bad data
   and report, then continue. This follows our pattern of fix and report
@@ -1687,11 +1704,75 @@ as an archive of the prioritization thinking -- no cleanup on close.
   keeps its own last good span, as a moon does. The brief:
   `documentation/COORD_L525_hold_brief_20261111.md`, one Code session
   through the door, before Mars by Tony's word of 11:45.
-**Gap:** the design and build, in a gallery session that takes the
-nightly builder (gallery-cache-builder): one failed body held and
-reported, the served window set from the bodies that passed; and a
-check that shows one planted bad body leaving the rest of the site's
-window as it was.
+- **BUILT, 2026-11-11, evening and night** (Claude Code, Opus 5.5,
+  through the python_work door, on orrery 02183e4d and gallery 173d397a;
+  Tony's website push db28733e carries it), in three parts with a report
+  and Tony's go-ahead after each, from the brief.
+  - **Part 1, the proposal.** "Fails": either test sample more than
+    0.5 degrees from JPL (the tolerance unchanged). Replayed on the 186
+    committed served indexes, 2026-07-11 to 11-11: Halley on Nov 10
+    (3.99 degrees) and Nov 11 (21.6), nothing else; the next worst
+    Sun-centred body Earth, 0.012 degrees (Oct 28). A red night commits
+    nothing, so its numbers are not in that history.
+  - **The coordinator's two changes, carried by Tony with his go-ahead:**
+    (1) only the Sun-centred bodies, whose spans set the site's window,
+    are held for a number over the limit; a moon, or a body with its own
+    span, keeps today's treatment, held only when JPL gives no answer
+    (the Moon's samples run 0.10 to 0.18 degrees on ordinary nights,
+    158 of them over 0.1); (2) many at once: more than five held is a
+    failed build, not a set of holds.
+  - **The builder** (`tools/gallery_cache_builder.py`): `held_by_test`,
+    `trust_verdict`, `hold_from_prior`, `HOLD_LIMIT` 5. A held body is
+    served from its entry in the replaced cache, whole, its "you are
+    here" point cleared, with a `hold` block (since, kind, why,
+    from_generated, passed_before), copied forward each build, so it
+    survives any number of swaps; it leaves the served window, which the
+    bodies that passed set; it is tested every build and ends by name.
+    No entry to hold at: not served, named. A fetch failure with none
+    takes A-3's last-good, marked held. The index's `holds` lists every
+    held body's line and every hold ended.
+  - **The report, built first:** `daily_run.py` prints the HELD lines in
+    both summaries and the night's record; `--held-title` starts the
+    night's commit title (`.github/workflows/nightly.yml`): "HELD Halley
+    -- Nightly run ...", "HELD Halley, Encke, Apophis -- ...", past
+    three "HELD 5 bodies: ...", "HOLD ENDED Halley -- ...". An index it
+    cannot read stops the commit step. Shown on planted holds before
+    the hold was switched on.
+  - **Many at once:** measured on the old builder in a throwaway folder,
+    a build with JPL answering nothing validated and swapped, 94 of 102
+    bodies last-good, the window null. Now 69 held stop it: ABORT, no
+    swap.
+  - **The page** (`gallery/solar_system_figures.js` heldLine, holdKnob,
+    holdFor; `interactive.html`): a held body's box opens with one
+    sentence, proposed: "Halley is drawn from JPL's orbit dated <date>
+    on JPL's clock, the last one that passed this page's check against
+    JPL; the newer ones have not passed yet." (JPL not answering: "...
+    the last one this page could check against JPL; JPL has not
+    answered since."); a moon's box too; past its own span, the span
+    sentence as well. `?hold=<slug>` is the test address.
+    `INTERACTIVE_AS_BUILT.md`, A held body's box, in the same push.
+  - **Checks, each red first:** the builder suite's `hold_checks`, 11,
+    1 of 10 on the old builder (one planted bad body cut the window from
+    87.9 to 3.8 days); the suite PASS 537 of 537 (526 at the base);
+    `daily_run.py --check` on six made-up titles and two planted faults;
+    the Solar System figures check's `heldWorked`, four breaks of the
+    real file caught; `tools/headless/walk_held_body.js`, 10 of 10,
+    upright and sideways, failing on the base page; the gallery run
+    "48 of 48 gating checkers passed", as at the base.
+  - **What does not hold:** Earth's own box in its fold (`earthBox`,
+    `moonBox`) does not print the sentence; a fault in the maths, not the
+    data, is held while drawn wrong, the title then its only signal;
+    L-508's quiet half (that item); the orrery's own identity hold
+    (L-485) is unchanged; the class of L-526 (a close pass).
+  - **Records:** gallery-cache-builder 1.19, protocol v3.139.
+- **The sentence, SETTLED by Tony's phone look, 2026-11-11, 19:20
+  Chicago** (upright, `?show=halley&hold=halley`, on gallery db28733e):
+  "The hover is fine." He asked whether the room's title should change
+  for a held body; Claude's answer, as built: no -- the title and date
+  line say which minute the whole room shows, and a held body is drawn
+  at that minute too.
+**Gap:** the first live nights read for a HELD title (none expected);
+Earth's fold box, when a session next opens Earth's fold.
 **Ref:** L-149 (the served window's trust participation); L-485 (the
 hold; a nightly unattended run); L-508 (a held body's alarm); L-524 (the
 Kepler solver's start, the case that raised it); L-165 (site
@@ -4380,6 +4461,17 @@ nothing; then a housekeeping slice (5b on the road).
   fresh switch. Whether Code's own inventory would have found them is
   settled by A1's report. Until then a review is optional, and whoever
   asks for one says in one line why.
+- **2026-11-11, L-525 (hold the bad data), the website's half of the
+  LOUD line, built** (Claude Code, Opus 5.5, gallery db28733e): a body
+  the cache builder holds -- its own hold, for a failed accuracy test
+  or JPL not answering, not the orrery's identity hold -- is named in
+  the night's commit title ("HELD Halley -- Nightly run ...") and in
+  both Daily Run summaries, every run while it lasts. THE QUIET HALF IS
+  NOT BUILT, and stays here: the website's night cannot learn which
+  ledger item names a body without fetching and reading the orrery's
+  ledger or keeping a second hand list of holds, which this item's Gap
+  rules out, so the line stays loud every run. The orrery's Horizons
+  check is unchanged.
 **Gap:** the two skill versions above (method), then the build: the
 orrery's Horizons check prints the alarm loud or quiet by the rule, and
 the website's night does the same with L-485's hold half. What a loud

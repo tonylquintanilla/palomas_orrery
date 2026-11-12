@@ -4741,6 +4741,60 @@ resident.
 (Moved down from the resident protocol on 2026-11-11, when
 v3.138 made a fourth entry.)
 
+v3.136 (November 10, 2026): No rule changed in this document. TWO
+skill bumps, one each, by the records skill's binding rule, Tony's
+go-ahead of that morning ("Yes, bump both"): interactive-exhibit 1.39 ->
+1.40 and gallery-assembler 1.3 -> 1.4 (L-515, one nested tree, step 2b).
+ONE PICTURE AND ONE DRAWER.
+
+WHAT PROMPTED IT. The Claude Code session of Nov 10 (Claude Opus 5.5),
+through the python_work door, built on orrery b3ce81f8 (the brief's push
+after a3e86c88) and gallery cea21af1, from Tony's prompt and
+documentation/COORD_L515_step2b_brief_20261109.md, in four parts with a
+report and his go-ahead after each.
+
+WHAT CHANGED. interactive-exhibit: a new section, One picture: the folds
+and the view's middle. A body something is fetched around folds open to
+what circles it and, for a centre serving features (Earth, Jupiter,
+Saturn), its own shells and guides, by distance; a moon is drawn at its
+planet's place by adding; a moon's box is the Moon's pattern, its
+distance from its planet, and past its checked span a sentence saying
+so; Centre on, on every centre the Sun included, moves the view in the
+page, the drawing shifted so the middle is the scene's origin in 64-bit
+numbers, on the centre's own served opening, the axis lines crossing
+there and the frame note saying so; Go To on a moon puts its planet at
+the middle; Home and Reset return to the Sun's view; the trail is the
+path down the tree. The Earth room folds into the root (?exhibit=earth),
+its row and driver OBSOLETE and kept; a fold is drawn, and its stored
+drawings fetched, the first time it is needed. The Pluto row reads
+"Pluto system", its marker the open white square. The store writer adds
+a centre's opening (add_arrival). And L-518's received note on Reset's
+frame. gallery-assembler: No composition between frames says which
+kind is retired (subtracting two answers) and which is the method
+(adding a parent's position to a child's own answer,
+gallery/assembler/compose_children.py), and the shift's measured
+reason. Each skill's oldest of four version entries moved to
+documentation/SKILL_HISTORIES.md by the three-entry rule (interactive-
+exhibit's 1.37; gallery-assembler had three). Every sentence was read
+from the gallery's code with this session's edits before it was written.
+
+THE OBLIGATION TRAVELS. This session read both skills from the repo's
+copy, as a Code session does: interactive-exhibit 1.39 and
+gallery-assembler 1.3, as the manifest expected. Tony reinstalls both
+(Settings > Skills) and pastes this version into the Project's
+instructions on claude.ai; the next session that loads them from the
+account confirms its copies read 1.40 and 1.4 before work that fires
+them.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.133 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-11-11, when
+v3.139 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

@@ -2200,12 +2200,82 @@ Everything is in place for the hold's session, with one step to do first: your w
 - **The run record you attached** ends where the Code session stopped before the hold. Our exchange since then is recorded on the ledger item for the hold (L-525): your account of how you found the fault, and your answer about pull titles.
 
 **Run order**
-1. *(do)* Orrery, in GitHub Desktop: commit and push. The change list should show `LEDGER_CONSOLIDATED.md`, `documentation/WHERE_WE_ARE.md` and `documentation/COORD_L525_hold_brief_20261111.md`, plus your own run record copy and `project_instructions_v3_138.md` if you want them in. -- 
-2. *(do)* Website, in GitHub Desktop: Fetch origin, then Pull origin. It brings in the night's commit. You should have no changes of your own waiting there.
+1. *(do)* Orrery, in GitHub Desktop: commit and push. The change list should show `LEDGER_CONSOLIDATED.md`, `documentation/WHERE_WE_ARE.md` and `documentation/COORD_L525_hold_brief_20261111.md`, plus your own run record copy and `project_instructions_v3_138.md` if you want them in. -- 02183e4db97463706610b5440b66af6dd2f7d039
+2. *(do)* Website, in GitHub Desktop: Fetch origin, then Pull origin. It brings in the night's commit. You should have no changes of your own waiting there. -- 173d397a18bbb4a8ee0aa78c45420410747cdd92
 3. *(do)* Open Claude Code through the `python_work` folder with this prompt:
-   "Gallery repository, with the records and one skill in the orrery. L-525 (hold the bad data). The brief is documentation/COORD_L525_hold_brief_20261111.md in the orrery folder."
-4. *(do)* It asks one thing first: whether it may edit the builder skill and the nightly job's file. The answer is yes.
+   "Gallery repository, with the records and one skill in the orrery. L-525 (hold the bad data). The brief is documentation/COORD_L525_hold_brief_20261111.md in the orrery folder." -- started
+4. *(do)* It asks one thing first: whether it may edit the builder skill and the nightly job's file. The answer is yes. -- confirmed
 5. *(do)* Its first report is a proposal with no file changed. Bring it to me before you give the go-ahead.
+
+Still reading, nothing edited. The run records don't keep the accuracy test's numbers, but every committed copy of the served index does, so I'm replaying the rule over the git history.
+
+The replay found that a 0.5-degree rule against JPL would only have flagged Halley, on November 10 and 11, across 186 committed index copies. I'm reading the builder's existing last-good path next.
+
+Next: how the page shows a moon past its checked span, and how `?freeze=1` works, so the held body's sentence can follow the same pattern.
+
+Now the nightly job's commit step and the Daily Run's summary, where the HELD line would go.
+
+Here is Part 1, the proposal for L-525 (hold the bad data). The rule I propose would have held only Halley, on November 10 and 11, in the whole history the website keeps. No file is changed in either folder.
+
+**1. What "fails" means.** A body fails when either of its two test samples is more than 0.5 degrees from where JPL puts it. That is the builder's own tolerance, unchanged.
+- The test compares the page's own working-out with JPL's position, seen from the Sun. It looks 30 days either side of the orbit's date, or an eighth of the body's period if that is shorter.
+- Replayed on every committed copy of the served index (186 of them, July 11 to November 11), this rule would have held only Halley:
+  - November 10: 3.99 degrees off.
+  - November 11: 21.6 degrees off.
+- The next worst Sun-centred body was Earth, 0.012 degrees, on October 28. That is about 43 times under the limit.
+- The worst moon was the Moon, 0.18 degrees, on November 8. That is still under the limit.
+- So no healthy body would have been held.
+- One limit on the replay: a red night commits nothing, so its test numbers are not in the history.
+
+**2. A test that could not be made (JPL did not answer).** That body is held too, with the cause "JPL did not answer the accuracy test."
+- The same applies when JPL does not answer the body's fetch at all. Today either case gives the body no checked span, and that one body leaves the whole site with no window.
+- This fits L-512 (fallbacks when JPL cannot answer). Your chain there was JPL live, then the saved record of JPL's answers. A held body is served from that saved record, and it is named every run.
+
+**3. Which bodies the rule covers.** Every body that has an accuracy test, moons and Pluto included.
+- Spacecraft and comets drawn as open paths have no test, so they are unaffected.
+
+**4. Where the last good entry is kept.** In the live served index itself, not in the one earlier copy the cache keeps.
+- On the first failing night, the builder takes the body's entry from the copy being replaced. It adds a hold block saying since when, why, and from which build.
+- Each later night while the hold lasts, it copies that held entry forward again.
+- So the entry survives any number of swaps. Only the "you are here" point is cleared, as the builder already does for a failed fetch, so a stale marker is never served.
+- None of today's orbit bodies has a positions file, so the entry is all there is to keep.
+
+**5. A body with no good build to hold at** (a new body that fails on its first night). It is not served that night and is named in the HELD line as "no good build; not served".
+- This is what the builder already does for a failed fetch with nothing to fall back on. Nothing else stops, because it was not served before.
+
+**6. How the page learns of a hold, and the sentence a visitor reads.** The page reads the hold block on the body's served entry, and the body's text box adds one sentence. My proposal for your phone look:
+- "Halley is drawn from JPL's orbit of November 9, 2026, the last one that passed this page's check against JPL; the newer ones have not passed yet."
+- When the hold has outlasted the body's own checked span, the box also prints the sentence a moon prints past its checked span.
+
+**7. Your phone look when nothing is held.** A test address: `?hold=halley` makes the page treat Halley as held, with made-up dates. It works the way `?freeze=1` does for the freeze.
+
+**8. The commit title.** HELD goes first, so a title cut short on screen still shows it:
+- One body: `HELD Halley -- Nightly run 2026-11-12 UTC: data/... and 103 files under data/solar-system/`
+- Three bodies: `HELD Halley, Encke, Apophis -- Nightly run 2026-11-12 UTC: ...`
+- When a hold ends: `HOLD ENDED Halley -- Nightly run ...`
+- Both on one night: `HELD Encke; HOLD ENDED Halley -- Nightly run ...`
+
+The commit's second line, and your Daily Run's summary, print one line per body:
+- `HELD Halley since 2026-11-11: 21.6 degrees from JPL at 30 days (the limit is 0.5); drawn from the build of 2026-11-10`
+
+The Daily Run writes these words in one place, and the nightly job only asks for them, so the title and the summary can't drift apart.
+
+**9. L-508's quiet half** (a held body's alarm goes quiet once a ledger item names it). There is no small way to build it. The website's night would have to fetch and read the orrery's 39,000-line ledger, or keep a second list of holds by hand, which L-508 itself rules out. So the HELD line stays loud every run, as your ruling for the hold already asks, and the quiet half stays on L-508.
+
+**Where this leaves us:** the rule is narrow enough that it would never have held a healthy body. The report is designed to land in the commit titles you already read. Part 2 builds the title and the Daily Run line first and shows them working on a planted hold. Only then does it switch the hold on. The coordinating session reads this proposal before you answer the question in the box.
+
+One final thought: in April 2029 Apophis passes close to Earth, and its test will rightly fail for weeks around that pass. The hold will then draw it from an orbit older than the pass. That's honest and named, but it's a case for its own ledger line before 2029.
+
+**Files changed:** none, in either folder.
+
+**Size:** no token count prints in the app. So far this session has read about 330 KB and written one throwaway replay script of 2 KB in the scratchpad.
+
+**Your run order:** take this proposal to the coordinating session, then answer the question in the box.
+
+**Tony-action rollup:**
+- *(do)* Carry this proposal to the coordinating session.
+- *(decide)* The go-ahead for Part 2, in the box.
+
 6. *(do)* On your phone, when convenient: open the Solar System room with `?freeze=1` on the address, upright and sideways, to see the two-line date.
 7. *(do)* Tell the Opus coordinator that the solver fix is live and the hold goes next, ahead of Mars.
 
@@ -2213,3 +2283,189 @@ Everything is in place for the hold's session, with one step to do first: your w
 - The orbit maths fix is live and confirmed by a green night on GitHub.
 - The hold is ready to build in a fresh Code session, from a brief that carries your rulings in your words.
 - After the hold, Mars is next on the Opus coordinator's track, and this session returns to the documents: step 3, the protocol's reduction.
+
+=========================================
+
+**Fable:**
+
+Give the go-ahead for Part 2, with two changes. The proposal is sound, and I checked its main claim myself.
+
+**What I checked.** I replayed the proposed rule over the 163 saved copies of the website's data that I could reach, from August 11 to today. The result matches the Code session's: only Halley would ever have been held, on November 10 and 11. The next worst body that sets the site's trusted dates was Earth, at 0.012 degrees against a limit of 0.5.
+
+**Change 1: do not hold a moon for a high test number.** The Moon's test runs at 0.10 to 0.18 degrees on ordinary nights, about a third of the limit. That comes from the Sun's real pull on it. If the Moon ever went over the limit, the cause would most likely be physics, and an older orbit would draw it worse than tonight's. Moons also never set the site's dates, so holding one gains nothing for the rest of the site. A moon should keep today's treatment: tonight's orbit, its own short span, and its sentence when past that span. It is held only when JPL gives no answer at all.
+
+**Change 2: say what happens when many bodies fail at once.** The proposal shows the title for one body and for three. A JPL outage could fail every body in one night. That must stay a failed night, as it is today, and not become a commit that holds everything.
+
+Paste this to the Code session:
+
+> Go ahead with Part 2 on your proposal, with two changes from the coordinator.
+>
+> 1. The 0.5 degree rule holds only the bodies whose spans set the site's window, the Sun-centred participants. A moon, or any body that carries its own span, is not held for a test number over the limit. It keeps today's treatment: the fresh orbit, its own short span, its sentence past it. The reason: in the committed history the Moon's samples run at 0.10 to 0.18 degrees on ordinary nights (158 of them over 0.1), a third of the limit, from the Sun's real pull. A number over the limit there would most likely be physics, and an older orbit would draw the Moon worse than the fresh one. Such a body is held only when JPL gives no answer, since then there is no fresh orbit.
+>
+> 2. Many at once. Say what the title reads with more than three bodies held. Say the count at which a night is a failed build and not a set of holds, and what the builder's guards do today when most fetches fail; keep that. A JPL outage must not become a commit with every body held.
+>
+> For the close, one ledger line for the class your final thought names: a body whose test fails for a real reason, a close pass (Apophis, April 2029), is drawn from the older orbit while held, where the fresh orbit with a short span would be nearer the truth. Recorded, not built.
+
+**Run order**
+- *(do)* Paste the block as the go-ahead for Part 2.
+- *(do)* Bring me Part 2's report before Part 3. It should show the commit title and the Daily Run line working on a planted hold before the hold itself is switched on.
+- *(decide, later)* The visitor's sentence. The proposal's wording is: "Halley is drawn from JPL's orbit of November 9, 2026, the last one that passed this page's check against JPL; the newer ones have not passed yet." You settle it on your phone in Part 3, with `?hold=halley` on the address.
+
+**Where this leaves us**
+- The rule is narrow: in three months of saved data it would have held one body, on the two days it should have.
+- A held body is named first in the night's commit title, so a title cut short still shows it.
+- The quiet half of your Nov 2 ruling, where the line goes quiet once a ledger item names the body, is not built. The line stays loud every night until the hold ends.
+
+============================================================
+
+**Code:**
+
+Starting Part 3. First the exhibit skill's rules for the text box and for testing a room, then the page's code for a body's box.
+
+Still reading the page's code for a Sun-centred body's box, so I can add the held sentence there. Nothing on the page is edited yet.
+
+I've read enough to build it. The sentence and the `?hold=` test address go in the figures file, where the box's words already live. That file can be checked without a browser.
+
+Now the page: the driver passes each body's hold along, and the box prints the sentence.
+
+Now the checks. First, which of the website's checks read the box sentences, so the new sentence is held by one of them.
+
+The typed-facts check doesn't build the Solar System room's boxes, so the held sentence will be verified by the figures check and the headless walk instead. I'm looking at that walk now.
+
+An earlier session's copy of the headless browser library is already on this machine, so nothing needs downloading. Next: making a payload from the room's real driver.
+
+The driver now passes the hold and checked span through: Halley's record shows no hold and 30 days checked on each side. Next I'll run a headless walk of the real page with the test address and planted holds, upright and sideways.
+
+The sentence is on the page. My walk's own reading was wrong: it split the box at the soft line breaks too, so the sentence came out in pieces. I'm fixing the walk, not the page.
+
+The walk passes 10 of 10, upright and sideways. Now showing it can fail: the same walk on the page as it stood at the base.
+
+The Sun-centred box fails on the base page as expected, while the moon part passes there because its wording lives in the already-changed figures file. I'm extending the figures check to cover that part, along with the worked cases and four breaks in the real file.
+
+The figures check passes and its self-test catches all four breaks, though the base file lacks the new functions, so those cases were red there. I'm moving the walk into the repository's headless tools next, then writing the page's as-built record.
+
+Now the page's as-built record, in the commit that changes the page.
+
+The as-built page still shows the moon's older past-span sentence, which Tony's November 10 wording replaced in the code. I'm correcting it alongside the held body's paragraph and will note that in the report.
+
+The as-built page's code names all match the code. Now the website's whole maintenance run again, since the page changed.
+
+While it runs, I'm checking how Halley is reached on the phone, so the look's steps are right.
+
+One address opens the room with Halley drawn and treated as held, so your look is a single link once the website is pushed. Waiting for the maintenance run's verdict.
+
+A red row: the Solar System drawer check fails once. Reading why.
+
+The drawer check matches the exact text of the moon box's call, which my change altered. I'm restoring that call's text and passing the hold to `childBox` as an extra argument instead.
+
+All three pass again. I'm noting the new argument in `childBox`'s comment, then rerunning the whole maintenance run.
+
+Part 3 is built: a held body's text box now says, in one sentence, which orbit it is drawn from. A test address shows that sentence when nothing is held.
+
+**The sentence, as proposed** (yours to settle on your phone). It names the orbit's date on JPL's clock, the way the moon's past-span sentence does since your words of November 10:
+- **Its test failed:** "Halley is drawn from JPL's orbit dated 11 November 2026, midnight on JPL's clock, the last one that passed this page's check against JPL; the newer ones have not passed yet."
+- **JPL did not answer:** "...the last one this page could check against JPL; JPL has not answered since."
+- **Held at a build that had not passed either** (rare): "...the last one this page served; it has not passed this page's check against JPL."
+
+It is the first bullet after the body's group words. The Moon's reads "The Moon is drawn from...". If a hold outlasts the body's own checked span, its box also prints the moon's past-span sentence.
+
+**The test address:** `https://palomasorrery.com/interactive.html?show=halley&hold=halley` opens the Solar System room with Halley drawn and treated as held. Tap Halley's marker to see its box, upright, then sideways. It works only once the website is pushed.
+
+**Checks, each shown failing first:**
+- **The Solar System figures check:** it now holds the three sentences, the test address, and a held moon's box. It breaks the real file four ways first, and catches all four.
+- **A headless walk of the real page,** kept as `tools/headless/walk_held_body.js`:
+  - nothing held;
+  - the test address;
+  - a hold planted on Jupiter;
+  - a held Moon;
+  - each upright and sideways.
+
+  It passes 10 of 10. On the page as it was before this session, it fails Halley's and Jupiter's boxes.
+- **The website's whole maintenance run, offline:** "48 of 48 gating checkers passed". On the way there, one row went red: the drawer check reads the page for the exact text of the moon box's call, and my first version changed it. I put the call back as it was and passed the hold in another way.
+
+**Two things to know:**
+- Earth's own box inside its fold doesn't print the sentence yet. The page's as-built record says so.
+- The as-built record still quoted the moon's old past-span sentence from before your wording of November 10. I corrected it while I was there.
+
+**Not done yet:** the builder skill's bump, the protocol entry and the records, which come after your look in case you change the words. Nothing is committed, and the orrery folder has no edits of mine.
+
+**Files changed (website), for your run record:**
+- `tools/gallery_cache_builder.py`, the nightly builder (14 edits)
+- `tools/test_gallery_cache_builder_offline.py`, its offline suite (5 edits)
+- `daily_run.py`, the Daily Run (16 edits)
+- `.github/workflows/nightly.yml`, the nightly job (1 edit)
+- `gallery/solar_system_figures.js`, the box's words (7 edits)
+- `interactive.html`, the page (7 edits)
+- `documentation/smoke_solar_system_figures.js`, the figures check (5 edits)
+- `INTERACTIVE_AS_BUILT.md`, the page's as-built record (2 edits)
+- `tools/headless/walk_held_body.js`, the held-body walk (new)
+- Written by the maintenance run itself: `MODULE_ATLAS.md`, `MODULE_INDEX.md`, `data/constants_export.sha`, `data/objects_export.sha`, `data/drawings/pulled_at.sha`
+
+**Size:** the app shows no token count. So far this session has read about 600 KB and written about 55 KB.
+
+**Your run order:**
+1. Website, in GitHub Desktop: commit and push. The change list should show the 14 files above. -- db28733e83e2df53cc94767c4d59f3aca965006b
+2. On your phone, open the test address, tap Halley, upright and then sideways.
+3. Tell me whether the words stand, or what to change.
+
+This push also switches the hold on for tonight's night.
+
+**Tony-action rollup:**
+- *(do)* Commit and push the website.
+- *(do)* The phone look at the test address. -- yes
+- *(decide)* The sentence's words.
+
+Shall I wait while you push the website and look (yes), or do you want a change before you push (say what)?
+
+=======================
+
+The hover is settled by your words. I'll record that first, then answer the title question.
+
+The code comment also claimed the sentence is on the typed-facts check's allowed list. It is not; I'm correcting that in the same edit.
+
+The ledger write was refused by Windows (Errno 22, probably a OneDrive lock). Checking that the ledger is intact before trying again.
+
+The ledger is whole and unchanged: 39,603 lines, as before. Trying the same edit again.
+
+Now Where We Are: the sentence is settled, so it leaves "needs you now" and "waiting on you".
+
+No, I don't think the title should change. The title and the date line under it say which minute the whole room shows, and every body is drawn at that minute, a held one included. The hold is about one body, so it's said where that body is: its own text box, which you've now seen. The title changes only when the whole room is frozen past the date its data covers, as `?freeze=1` shows. That one time, the entire scene really is at another moment.
+
+Your words "The hover is fine." settle the held sentence, and they're recorded:
+- **L-525 (hold the bad data):** settled by your phone look of Nov 11, 19:20 Chicago. My answer about the title is in the record too, as built.
+- **Where We Are:** the sentence is gone from "needs you now" and "waiting on you". "Do next" is Mars. It's still at 129 lines above the marker.
+- **The page's as-built record and the code comment:** "settled" now. The comment also claimed the sentence was on the typed-facts check's allowed list, which was untrue, so I corrected that.
+
+One hiccup: the first write to the ledger was refused by Windows ("Invalid argument", probably OneDrive holding the file). The ledger was unchanged by it, 39,603 lines as before. The retry went through, and the ledger index reads "OK: 519 L-blocks parsed, no consistency problems."
+
+What's checked: only your upright screenshot. The sideways look and the first live nights with the hold on are still to come.
+
+**Files changed since your push, for your run record:**
+
+Website (not committed):
+- `INTERACTIVE_AS_BUILT.md`, the page's as-built record (1 edit)
+- `gallery/solar_system_figures.js`, the box's words (1 edit, a comment only)
+
+Orrery (not committed):
+- `skills/gallery-cache-builder/SKILL.md`, the builder skill 1.19 (20 edits)
+- `PROJECT_INSTRUCTIONS.md`, the protocol v3.139 (4 edits, plus the manifest row)
+- `documentation/PROJECT_INSTRUCTIONS_HISTORY.md`, the protocol's history (1 edit)
+- `documentation/SKILL_HISTORIES.md`, the skills' history (2 edits)
+- `LEDGER_CONSOLIDATED.md`, the ledger (6 edits, plus the index)
+- `documentation/WHERE_WE_ARE.md`, Where We Are (12 edits)
+
+**Size:** the app shows no token count. In total this session has read about 660 KB and written about 77 KB.
+
+**Your run order:**
+1. Website, in GitHub Desktop: commit and push the two files above. -- bd65f036d16b553953f7c8b2e76edc6b10c6b5f4 
+2. Orrery: commit and push the six files above, and your run-record copy if you want it in.
+3. Reinstall gallery-cache-builder (Settings > Skills) and paste protocol v3.139 into the Project.
+4. Tomorrow morning: Pull origin on both, orrery then website, and read the night's commit title.
+
+**Tony-action rollup:**
+- *(do)* The two commits and pushes.
+- *(do)* The skill reinstall and the protocol paste.
+- *(do)* The frozen date line's phone look, if not done yet.
+- *(decide)* The question below.
+
+Do you agree to keep the room's title unchanged when a body is held (yes), or should the title carry a short note naming any held body (no, add a note)?

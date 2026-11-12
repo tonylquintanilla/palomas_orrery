@@ -1450,6 +1450,64 @@ hold), which the builder does not honour yet. Each fact was read from
 the code at f4994ffc and c1c578f5 before it was written.
 (Moved down 2026-11-05, when 1.18 made a fourth entry.)
 
+Earlier: 1.16 | 2026-11-01, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 6a434ed8 and gallery @ b6574a0f. v1.16 (L-484, with
+L-485) adds A Served Number That Changes on Purpose, the lesson of the
+website's red nights of 2026-11-01: a number the orrery's export
+changes on purpose is looked for in the website's CHECKS before the
+push -- its acceptance lines and its hover fixture consume the export
+as much as its renderers do -- and the brief for such a change names
+the pins that move. And under The Daily Run's Steps, the night form:
+GitHub's schedule is best-effort, so the morning pulls first and does
+not wait for the run (Tony's ruling of 2026-11-01, 12:04 Chicago); the
+orrery's night gains a second scheduled line at 11:17 UTC, the
+website's waits for its next gallery session. Each fact was read from
+the code at 6a434ed8 and b6574a0f before it was written.
+(Moved down 2026-11-11, when 1.19 made a fourth entry.)
+
+Operating mode's history paragraph, moved here word for word on
+2026-11-11 (L-525, the skill at its cap of 944 lines):
+
+The history, kept because it explains the gate. The Windows scheduled
+task was disabled on 2026-08-10 (Tony: "It can't run without my machine
+being on anyway and it's consistent with me being the only commit
+authority"), after a scheduled run's failed swap was committed on
+2026-07-24 by someone who did not know a build was running. The night on
+GitHub's computer answers both reasons: it needs no machine of Tony's,
+and its gate refuses exactly that commit.
+
+The Cause, and What Is Still Open: its account of the first and the
+last two occurrences, moved here word for word on 2026-11-11 (L-525,
+the skill at its cap):
+
+THE FIRST ONE WAS NOT CAUGHT. On 2026-07-24 a SCHEDULED run's swap failed
+with nobody aware a build was in flight; the mass deletion was read as
+routine cleanup and was committed and pushed, then reverted after the
+fact. So the human check has not merely risked failing -- it failed once,
+and retiring the schedule on 2026-08-10 is what made Tony present for the
+four since. (The account is in the gallery repo, in the Origin paragraph
+of `documentation/AS_BUILT_L173_numbering_fix.md` and the
+`verify_promoted_data` docstring.)
+
+THE LAST TWO HAPPENED WITH SYNCING PAUSED. Both 2026-09-20 failures came
+with OneDrive paused, so pausing is not a reliable cure. Unconfirmed and
+worth carrying: the two staging directories are 1 hour 57 minutes apart
+and a pause lasts 2 hours, so the pause may have expired about when the
+second run reached its swap. That is why step 1 of the routine above said
+to note the time, until the pause was retired on 2026-10-10.
+
+The section Recovery ordering, moved here word for word on 2026-11-11
+(L-525, the skill at its cap):
+
+## Recovery ordering (why L-114 mattered twice)
+
+recover_incomplete_swap runs at build start. load_config reads the sibling
+data/objects_config.json, so it no longer depends on the swap-managed directory
+existing -- which is what used to deadlock: config-inside-the-swap-dir meant a
+crash mid-swap left load_config unable to read the config before recovery could
+restore the directory. Moving the config out (L-114) closed that; a crash
+mid-swap now self-heals on the next run.
+
 ## horizons-orbital-mechanics
 
 Earlier: 1.2 | 2026-10-10, with Anthropic's Claude Opus 5.5, at

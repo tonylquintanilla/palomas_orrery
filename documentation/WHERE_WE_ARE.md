@@ -1,21 +1,22 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 11, 2026, afternoon: the Code session (Opus) on the website's orbit maths and the frozen date line; then the coordinating session (Fable), the hold's brief.
-- Written at orrery 17580bc and gallery b248da5 (your push of 12:52, carrying this session's website edits).
+Last updated: November 11, 2026, night: the Code session (Opus) that built the hold (L-525 (hold the bad data)).
+- Written at orrery 02183e4 and gallery db28733 (your push of the website's hold).
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The website's orbit maths gave a wrong place for a stretched orbit's homeward half, without a word; it now solves right or stops with an error, and a new check sweeps it. That fault had cut the site's trusted window to 0.3 days, froze the rooms and turned the nights red (L-524 (the Kepler solver's start)).
-> - The frozen date line now fits beside the arrows on a phone, in two or three lines (L-524).
-> - Your ruling that one body's failed test holds that body, not the site, is recorded; not built (L-525 (hold the bad data)).
+> - One body that fails its accuracy test is now held, not the whole site: it is drawn from its last good build, the other bodies keep the window, and the night's commit title names it, "HELD Halley -- Nightly run ..." (L-525 (hold the bad data)).
+> - More than five bodies held at once counts as a failed build: nothing is swapped in and the night is red. Before, a JPL outage would have been swapped in.
+> - A held body's text box says so in one sentence; your phone look settled it ("The hover is fine."). A close pass, like Apophis's in 2029, would be held on its older orbit: recorded, not built (L-526 (a close pass held)).
 >
-> **Do next:** *The hold, one Code session through the parent folder (L-525 (hold the bad data)), by your word of Nov 11; your phone look at the date line; then Mars (L-514 (the Mars room)).*
+> **Do next:** *Mars (L-514 (the Mars room)), after a night with the hold switched on.*
 >
 > **Needs you now:**
-> - *(do) Commit and push the orrery: the ledger, this page and the hold's brief (the website is pushed).*
-> - *(do) The phone look at the frozen date line, with `?freeze=1`, upright and sideways.*
+> - *(do) Commit and push the orrery: the ledger, this page, the builder skill, the protocol (v3.139) and the two history files (the website is pushed).*
+> - *(do) Reinstall gallery-cache-builder (Settings > Skills) and paste protocol v3.139 into the Project.*
+> - *(do) The phone look at the frozen date line, with `?freeze=1`, upright and sideways, if not done yet.*
 > - *(do) Each morning, Fetch origin and Pull origin on both, orrery then website, before any work. If Pull origin shows up only once you have changes: Commit them first, then Pull origin, then Push origin. If Desktop stashes your changes anyway, restore them at once: Changes tab, Stashed Changes, Restore.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
 
@@ -52,7 +53,7 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
 ## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings; a line leaves once it is habit, or a skill carries it.
-- One body's failed accuracy test: "Hold the bad data and report, then continue." A hold is not red; the night's commit title names the held body (Nov 11; L-525 (hold the bad data)).
+- One body's failed accuracy test: "Hold the bad data and report, then continue." A hold is not red; the night's commit title names the held body. A moon is held only when JPL gives no answer; more than five held is a failed build (Nov 11, the coordinator's changes; L-525 (hold the bad data)).
 - The Sun direction line stays out of Earth's fold: the day-night shading and the Sun at its true place show the direction (Nov 10; L-515 (one nested tree)).
 - A finger's tap gets the wider reach on a phone held either way; a mouse keeps Plotly's own (Nov 11; L-523 (taps sent as hovers)).
 - Each working document has a length cap; a session that adds at the cap moves something out first; upkeep goes between builds, never in front (Nov 10; L-522 (document caps)).
@@ -65,6 +66,7 @@ Standing rulings; a line leaves once it is habit, or a skill carries it.
 ## Deferred  **>> UPDATED THIS SESSION**
 
 Waiting behind other work; a line leaves when picked up.
+- The hold's leftovers: Earth's own box in its fold does not say a body is held; a close pass is held on its older orbit (L-526 (a close pass held)), before 2029 (Nov 11; L-525 (hold the bad data)).
 - The orrery's own Kepler solvers start the way the website's did; safe today, listed on L-524 (the Kepler solver's start), for an orrery session (Nov 11).
 - Step 2b's three leftovers: Io, Titan, Pluto and Charon have no words or i-panel link until the orrery keys them; Find misses a shell of Earth's by its own name until Earth's fold is first opened; a view centred on Jupiter is not in the shared link (Nov 10; L-515 (one nested tree)).
 - Three checks red in the drawer walk before Scenes was built, the page or the walk aged: a gallery session that next opens the drawer (Nov 9; L-521 (three red checks)).
@@ -77,9 +79,7 @@ Waiting behind other work; a line leaves when picked up.
   tools; L-510 part 2, the path plan asked from before any launch.
 - The Earth System layers, with cards meanwhile (Nov 5, off the road).
 - L-511 (the export carries the words): behind the check (Nov 3).
-- L-508 (a held body's alarm): the records skill's next version, then
-  its build, with the hold's website half (Nov 2).
-- L-485 (a nightly run): the hold's website half; a gallery session (Oct 31).
+- L-508 (a held body's alarm), L-485 (a nightly run): the website honours no orrery hold yet; the alarm's quiet half waits, its loud half built (L-525, Nov 11).
 - L-462 (a shorter run); L-128 (the ice lines); L-500 (eyeballed numbers).
 - L-483 (a comet room), after historical missions' slice 2.
 - L-489 (compositions), with L-486 and L-488 under it: Artemis II in
@@ -94,15 +94,14 @@ Waiting behind other work; a line leaves when picked up.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261111T183929Z, your Daily Run on the fixed maths, ok, one retry on the swap (gallery swap log, read Nov 11).
-- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at 17580bc).
+- Last cache build: 20261111T194118Z, ok, no retry on the swap; tonight's is the first with the hold (gallery swap log, read Nov 11).
+- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at 02183e4).
 - This page's date and the ledger's newest stamp: both Nov 11. Agree.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
 Decisions, one at a time:
-- None open. Next is Mars (L-514 (the Mars room)), after a green night
-  and your look at the date line (L-524 (the Kepler solver's start)).
+- None open. Next is Mars (L-514 (the Mars room)).
 
 At the next design talk:
 - How obsolete code is treated, and when it goes (L-509 (obsolete
@@ -121,7 +120,7 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- This session: L-524 (the Kepler solver's start) and L-525 (hold the bad data); the hold's brief is `COORD_L525_hold_brief_20261111.md`.
+- This session: L-525 (hold the bad data) and L-526 (a close pass held); the brief, `COORD_L525_hold_brief_20261111.md`; the builder's rule, gallery-cache-builder 1.19; the page's, `INTERACTIVE_AS_BUILT.md` (website).
 - The caps: `DOCUMENT_CAPS.md`; L-522 (document caps); its brief
   `COORD_L522_step1_caps_brief_20261110.md` and the review beside it.
 - The tree: L-515 (one nested tree); `COORD_L515_step2b_brief_20261109.md`

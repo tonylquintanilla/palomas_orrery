@@ -2,14 +2,21 @@
 name: gallery-cache-builder
 description: Nightly data-serving pipeline for the Paloma's Orrery web gallery (Phase 1b, ledger L-098). Use for any task touching tools/gallery_cache_builder.py, tools/test_gallery_cache_builder_offline.py, inspect_staging.py, debug_encke_tp.py, gallery_cleanup.py, data/objects_config.json, the data/solar-system/ serving cache (coverage_index.json, feature_configs.json, positions/, raw/), atomic-swap / .prev / .staging_* / .quarantine_* semantics, Guard v2, dry-run / first-build / nightly modes, documentation/TESTING_PROTOCOL.md layers, or wiring interactive.html to the served data; for the rule that a config change is not deployed until the cache is rebuilt; and whenever a rename or a delete under data/ is refused with "Access is denied" (WinError 5), or the swap log data/cache_swap_log.jsonl is being read or written; and for daily_run.py's order, a failed pull and the run records check. Do NOT use for the Studio/converter/viewer curation chain (that is gallery-pipeline) or for projects other than Paloma's Orrery.
 fires_when: Nightly builder, atomic swap and its retry/roll-back/swap log, "Access is denied" under data/, coverage_index, serving cache, objects_config, dry-run/first-build/nightly, builder testing layers, the Daily
-  Run's order and a failed pull, the run records and their check, a spacecraft fetched by its path plan, a pull that does not match the push, a comet on an open path fetched by its plan (is_path_body, open_path), a small body's own uncertainty (position_uncertainty, the match rule), every JPL question asked fresh (HORIZONS_CACHE), a drawing named on a room's row, an ended mission's last day (fetch_path_last_day)
+  Run's order and a failed pull, the run records and their check, a spacecraft fetched by its path plan, a pull that does not match the push, a comet on an open path fetched by its plan (is_path_body, open_path), a small body's own uncertainty (position_uncertainty, the match rule), every JPL question asked fresh (HORIZONS_CACHE), a drawing named on a room's row, an ended mission's last day (fetch_path_last_day), a held body (HELD)
 ---
 
 # Gallery Cache Builder (Phase 1b data serving)
 
-Read this file in 5 parts: lines 1-245, 246-456, 457-617, 618-859, 860-944.
+Read this file in 4 parts: lines 1-260, 261-529, 530-778, 779-944.
 
-Skill version: 1.18 | 2026-11-05, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.19 | 2026-11-11, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 02183e4d and gallery @ 173d397a; built in gallery
+db28733e. v1.19 (L-525, hold the bad data) adds A Body That Fails Its
+Test Is Held. Riding it: the night's title, a new abort, Layer 1's
+count, a wrong field note removed (interactive.html does read the served
+cache), and three passages of history moved out to stay at the cap. Read
+from the gallery's code with this session's edits before it was written.
+Earlier: 1.18 | 2026-11-05, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ fb0a8dce and gallery @ 3660993e. v1.18 (L-507, more
 voyages, with L-510's carried sentences). A Comet on an Open Path Is a
 Path Body gains the mirror's side change across e = 1 and the offline
@@ -28,24 +35,11 @@ marker on the path's last served point, and the 7-day backbone can stop
 up to six days short of the day the mission ended. And the plan's span
 now ends on an ended mission's mission_end. Read from the gallery's
 builder, with this session's edit, before it was written.
-Earlier: 1.16 | 2026-11-01, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ 6a434ed8 and gallery @ b6574a0f. v1.16 (L-484, with
-L-485) adds A Served Number That Changes on Purpose, the lesson of the
-website's red nights of 2026-11-01: a number the orrery's export
-changes on purpose is looked for in the website's CHECKS before the
-push -- its acceptance lines and its hover fixture consume the export
-as much as its renderers do -- and the brief for such a change names
-the pins that move. And under The Daily Run's Steps, the night form:
-GitHub's schedule is best-effort, so the morning pulls first and does
-not wait for the run (Tony's ruling of 2026-11-01, 12:04 Chicago); the
-orrery's night gains a second scheduled line at 11:17 UTC, the
-website's waits for its next gallery session. Each fact was read from
-the code at 6a434ed8 and b6574a0f before it was written.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there on
 2026-10-05 (L-418), 2026-10-14 (L-431), 2026-10-15 (L-446), 2026-10-17
 (L-449), 2026-10-25 (L-443), 2026-10-26 (L-443), 2026-10-29 (L-399),
-2026-10-31 (L-485), 2026-11-01 (L-484), 2026-11-02 (L-507) and
-2026-11-05 (L-507).
+2026-10-31 (L-485), 2026-11-01 (L-484), 2026-11-02 (L-507),
+2026-11-05 (L-507) and 2026-11-11 (L-525).
 
 The standalone builder that fetches fresh JPL Horizons data and deploys the
 web gallery's served cache. It runs unattended every night on GitHub's
@@ -62,7 +56,6 @@ if this list and the headings disagree (L-418).
 - What it is
 - Swap blast radius [QUALITY]
 - Sibling directory semantics [QUALITY]
-- Recovery ordering (why L-114 mattered twice)
 - The swap retries, rolls back, and leaves a record [QUALITY]
 - Recovery by hand, when the roll-back also fails [QUALITY]
 - The cause, and what is still open
@@ -73,6 +66,7 @@ if this list and the headings disagree (L-418).
 - A Spacecraft Is Fetched by Its Plan [QUALITY]
 - A Small Body's Own Uncertainty Is Served [QUALITY]
 - Every Question Is Asked of JPL, Fresh [QUALITY]
+- A Body That Fails Its Test Is Held [QUALITY]
 - The Daily Run's Steps [QUALITY]
 - A Served Number That Changes on Purpose [QUALITY]
 - Validation stance
@@ -123,13 +117,9 @@ morning order since the night exists: Pull origin on both repositories
 first, then anything else, without waiting for a night that has not
 run yet (The Daily Run's Steps, the night form, says why).
 
-The history, kept because it explains the gate. The Windows scheduled
-task was disabled on 2026-08-10 (Tony: "It can't run without my machine
-being on anyway and it's consistent with me being the only commit
-authority"), after a scheduled run's failed swap was committed on
-2026-07-24 by someone who did not know a build was running. The night on
-GitHub's computer answers both reasons: it needs no machine of Tony's,
-and its gate refuses exactly that commit.
+The history (the Windows task retired on 2026-08-10, after a scheduled
+run's failed swap was committed on 2026-07-24) is in
+documentation/SKILL_HISTORIES.md since 2026-11-11.
 
 How old the served data is: the night's record,
 `data/nightly_run_record.json`, carries its last clean run, and the
@@ -167,7 +157,9 @@ survive a build lives OUTSIDE that directory. The config is a sibling,
 data/objects_config.json, for exactly this reason (L-114: it was stranded into
 .prev on every real build when it lived inside). Before adding any file the
 builder READS but does not WRITE into staging, decide which side of the blast
-radius it belongs on.
+radius it belongs on. recover_incomplete_swap runs at build start, so a
+crash mid-swap self-heals on the next run (why that needed L-114:
+documentation/SKILL_HISTORIES.md).
 
 ## Sibling directory semantics [QUALITY]
 
@@ -181,15 +173,6 @@ radius it belongs on.
 - A stale .prev that recovery cannot clear (e.g. a Windows file lock from a
   backup/AV process) is QUARANTINED and the run proceeds, rather than wedging
   every future run; the sweep reaps the quarantine later.
-
-## Recovery ordering (why L-114 mattered twice)
-
-recover_incomplete_swap runs at build start. load_config reads the sibling
-data/objects_config.json, so it no longer depends on the swap-managed directory
-existing -- which is what used to deadlock: config-inside-the-swap-dir meant a
-crash mid-swap left load_config unable to read the config before recovery could
-restore the directory. Moving the config out (L-114) closed that; a crash
-mid-swap now self-heals on the next run.
 
 ## The swap retries, rolls back, and leaves a record [QUALITY]
 
@@ -285,24 +268,9 @@ one per night, printing as normal because the builder is built to survive
 it. Catching `staging -> live` is the one that hurts.
 
 FIVE OCCURRENCES: 2026-07-24, 2026-08-19, 2026-09-17, and TWICE on
-2026-09-20. The exposure is established, not bad luck, and both ends of
-that list carry a fact worth keeping.
-
-THE FIRST ONE WAS NOT CAUGHT. On 2026-07-24 a SCHEDULED run's swap failed
-with nobody aware a build was in flight; the mass deletion was read as
-routine cleanup and was committed and pushed, then reverted after the
-fact. So the human check has not merely risked failing -- it failed once,
-and retiring the schedule on 2026-08-10 is what made Tony present for the
-four since. (The account is in the gallery repo, in the Origin paragraph
-of `documentation/AS_BUILT_L173_numbering_fix.md` and the
-`verify_promoted_data` docstring.)
-
-THE LAST TWO HAPPENED WITH SYNCING PAUSED. Both 2026-09-20 failures came
-with OneDrive paused, so pausing is not a reliable cure. Unconfirmed and
-worth carrying: the two staging directories are 1 hour 57 minutes apart
-and a pause lasts 2 hours, so the pause may have expired about when the
-second run reached its swap. That is why step 1 of the routine above said
-to note the time, until the pause was retired on 2026-10-10.
+2026-09-20. The exposure is established, not bad luck. The first was
+not caught and was committed; the last two came with OneDrive paused,
+so pausing is no cure. The account is in documentation/SKILL_HISTORIES.md.
 
 MOVING THE REPOSITORIES OFF ONEDRIVE is the lasting fix and it is
 UNDECIDED. Tony, 2026-09-17: "not at this time"; on 2026-09-20, having
@@ -615,6 +583,40 @@ two came to disagree. The offline suite holds every call to the
 setting. The orrery made the same choice the same night (L-504,
 `utc_clock.HORIZONS_CACHE`; horizons-orbital-mechanics).
 
+## A Body That Fails Its Test Is Held [QUALITY]
+
+Built 2026-11-11 (L-525; Tony: "Hold the bad data and report, then
+continue."). Before, one failed test cut the site's window to 0.3 days.
+
+- WHO. A Sun-centred body drawn from its elements (`held_by_test`) when
+  either test sample is more than `TRUST_TOLERANCE_DEG` (0.5) from JPL,
+  or the test could not be made (`trust_verdict`); and any body but a
+  path that JPL does not answer. A moon, or any body with its own span,
+  is NOT held for a number over the limit: the Moon runs 0.10 to 0.18
+  degrees on ordinary nights from the Sun's pull, so over it is likely
+  physics, and an older orbit draws it worse. Replayed on the 186
+  committed indexes of Jul 11 to Nov 11: Halley on Nov 10 and 11, only.
+- HOW (`hold_from_prior`). Served from its entry in the replaced cache,
+  whole, `as_of_today` cleared as A-3 does, with a `hold` block (since,
+  kind, why, from_generated, passed_before), copied forward each build
+  while it lasts, so it outlives any number of swaps; `.prev` is never
+  the store. It leaves the served window, which the bodies that passed
+  set. Tested every build, it ends when it passes. No entry to hold at:
+  not served, named.
+- REPORTED, NOT RED. The index's `holds` gives each body's line, "HELD
+  Halley since 2026-11-11: its accuracy test was 21.6 degrees from JPL
+  at 30 days (the limit is 0.5); drawn from the build of 2026-11-10",
+  and "HOLD ENDED". `daily_run.py` prints them in both summaries; its
+  `--held-title` starts the night's commit title, "HELD Halley --
+  Nightly run ...", and an unreadable index stops the commit.
+- More than `HOLD_LIMIT` (5) held is a failed build: ABORT, no swap.
+  Before, JPL answering nothing still swapped, 94 of 102 last-good.
+- A fault in the maths, not the data, is held while drawn wrong; the
+  title is then the only signal.
+- CHECKED: the suite's `hold_checks` (11; 1 of 10 on the old builder)
+  and `daily_run.py --check`. The page: interactive-exhibit. NOT BUILT:
+  L-508's quiet half (a ledger handle on the line); it stays loud.
+
 ## The Daily Run's Steps [QUALITY]
 
 `daily_run.py`, Tony's design of 2026-09-27 (L-281), is FOUR steps
@@ -736,6 +738,8 @@ ending in one gate:
   nothing changed or new outside the allow-list (`night_allow_list`);
   every changed file is ASCII; and the change under
   `data/solar-system/` is not deletions only.
+- The commit title starts with every held body, "HELD Halley -- "
+  (`--held-title`, v1.19, L-525); a hold is not red.
 - A clean night writes `data/nightly_run_record.json`; a red night
   writes nothing, and its record is the run's log. `python daily_run.py
   --check` judges made-up nights and planted faults for the gate and
@@ -824,7 +828,7 @@ Two dispositions, and the difference is load-bearing:
   conversion-consistency (served km must equal raw * AU at the matching point),
   the #T as_of_today freshness check, and the shrink_gate (per-object AND
   aggregate point count must be >= 95% of the live generation; first build is
-  exempt).
+  exempt), and more than HOLD_LIMIT bodies held (v1.19, L-525).
 - WARN AND KEEP, never reject: Guard v2 (guard_monitor / emit_guard_warnings,
   the per-object k*a(1+e) distance band). It is a MONITOR, not a gate.
 
@@ -841,7 +845,7 @@ round-trip discipline the project uses by hand, baked into the builder.
 
 ## The three-layer gate (documentation/TESTING_PROTOCOL.md, orrery repo)
 
-- Layer 1 -- offline suite (mocked fetch, 75 checks): proves the LOGIC. Run
+- Layer 1 -- offline suite (mocked fetch, 537 checks at v1.19): proves the LOGIC. Run
   `python3 tools/test_gallery_cache_builder_offline.py` from a CLEAN checkout
   after ANY builder or config-layout change -- it is the canary for path
   assumptions (the L-114 config move silently broke it until the test's own
@@ -934,10 +938,6 @@ count assertion; (3) Layer 1 from a clean checkout; (4) Layer 2:
   builder serves last-good named with its own data's date, the hover
   prints the held date, the website's check passes held as held -- is a
   gallery session after the ruler build, recorded on L-485.
-- interactive.html (gallery repo root) is the EVENTUAL consumer of the served
-  data; at the time of writing it does not yet read data/solar-system/ (zero
-  references -- verified). Describe the wiring as future work (L-102's open
-  question), not as existing.
 
 Origin: created for L-098 (Phase 1b) from Fable 5's 2026-07-12 Mode 7 review;
 every code fact verified against gallery HEAD 8e060677 / orrery HEAD e83fe9ce
