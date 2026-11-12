@@ -172,3 +172,27 @@ Website: none.
 **The new screen:** the view centred on Earth with the Moon on its orbit. The card reads *"There's the Moon, going round Earth. Next, a comet."* with a large **Take me there** button. A small line under it says what the tap does: it flies back out, ticks Halley, and briefly shows the menu folded open where Halley lives. The Halley screen follows, then the closing card. -- looks good. the only change i would make to the words is to say "...drawn from JPL's (NASA) live data." 
 
 Was the ledger open in VS Code, or another editor, on your computer around midnight? -- no. i had Claude open and VS, and maybe You Tube. 
+
+=================================
+
+Your ruling is in, and the ledger problem is solved.
+
+**In the mockup:** a fourth front-page screen shows a returning visitor. The card has one button, *"Explore the solar system →"*, and the Tutorial switch at the bottom reads Off. The first-visit screen keeps *"Show me around"* and *"Explore on my own"*.
+
+**In the ledger:** L-527 now has this ruling, the earlier ruling on the way in, and the front-page sketch. All of it reads back from your computer exactly as I wrote it.
+
+**What really happened with the ledger, correcting what I told you last night.** It wasn't an editor or OneDrive. When I wrote the file back twice under the same name, my copy-back tool could send its saved previous version instead of the new one. That happened at 00:09 last night and again at 09:15 this morning. Nothing of yours was lost either time. I now write under a new name each time and read the file back after every write. I'll put that in this session's handoff so the next session doesn't hit it.
+
+Back to the words: do the two lines under the name say what an orrery is the way you'd say it to your friend? -- yes
+
+- *"An orrery is a model of the solar system that moves."*
+- *"This one shows the Sun, the planets, moons, comets and spacecraft where they are today, from JPL's (NASA) data, updated every night."*
+
+**Files for your run record**
+Orrery:
+- ok LEDGER_CONSOLIDATED.md (2 edits this morning: L-527 gains the front-page sketch, your ruling on the way in, and the one-setting ruling; index rebuilt and checked; read back)
+
+Website: none.
+
+**Tony-action rollup**
+- *(do)* Commit and push the orrery whenever suits you. In GitHub Desktop, the ledger's change should include "One setting, RULED". -- 

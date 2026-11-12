@@ -1699,9 +1699,46 @@ check `tools/test_kepler_solver.py`); L-525 (hold the bad data).
   trail line's "Solar system" opens the Sun's view and keeps the ticks
   (L-515 ruling 20); Halley sits under `comets_htc` in `comets_all`
   (`data/objects_config.json`). Added to the mockup as its own screen.
+- **Tony's look at the mockup, 2026-11-12, morning, in his run record**
+  (`WHERE_WE_ARE_11-12-26_0815_run_record.md`), on the seven screens:
+  "looks good". One change to the closing card's words, his: "drawn
+  from JPL's (NASA) live data". Claude raised that the website is not
+  live (a nightly run fetches JPL's data; the desktop orrery is the one
+  that asks live); Tony, 08:30: "your words". The closing card now
+  reads: "That's the orrery: the solar system as it is today, drawn
+  from JPL's (NASA) data, updated every night. Explore on your own, or
+  tap Tutorial to see this again."
+- **The front page, sketched 2026-11-12, morning,** as a second row on
+  the same canvas: the first screen today, a proposed first screen, and
+  a proposed bottom. Read at gallery bd65f036 (`index.html`, the lobby's
+  start card, L-517): the first screen already carries Explore; what it
+  lacks is the reason to press it. Proposed, not ruled: two lines under
+  the name ("An orrery is a model of the solar system that moves." and
+  "This one shows the Sun, the planets, moons, comets and spacecraft
+  where they are today, from JPL's (NASA) data, updated every night.");
+  the card's title "Today's solar system" for "Today's sky, live" (it is
+  not the sky, and not live); its sentence "Turn it, tap a planet, fly
+  to the Moon."; under Featured, a Tutorial row with an on/off switch
+  and its line under it, since a phone has no hover.
+- **The way in, RULED, Tony, 09:07 and 09:15:** "I think the "Explore"
+  does not convey what we are asking. Maybe start the tutorial here."
+  Put to him three ways (A, two choices on the card; B, one button that
+  changes after the first visit; C, a yellow card on the front page as
+  step 0). Tony: "Let's try A". The card's gold button reads "Show me
+  around" and opens the room with the guide; under it, the link
+  "Explore on my own" opens the room with none. Made in the mockup.
+- **One setting, RULED, Tony, 09:32: "Confirmed".** Asked whether
+  "Show me around" reverts after the first visit: yes, and the card and
+  the Tutorial switch are two views of one setting kept in the
+  visitor's browser. First visit: "Show me around" with "Explore on my
+  own", the switch On. After either choice, finished, skipped or
+  explored alone: one button, "Explore the solar system", the switch
+  Off. The switch turned On again brings "Show me around" back, and the
+  next visit to the room runs the guide. Made in the mockup as a fourth
+  front-page screen.
 - **The risk named:** step 2 rests on a tap on a small dot (L-523's
   wider reach helps; the ring helps the eye). Tony's phone look decides.
-**Gap:** Tony's look at the mockup; then the front page's first screen
+**Gap:** the front page's first screen
 and the Tutorial button's place and words, one question at a time; then
 the smallest instrument, proposed, and a brief when its session is next.
 Before Mars (L-514) by Tony's word of 22:42 ("before building more").
