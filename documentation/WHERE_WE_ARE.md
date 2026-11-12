@@ -53,7 +53,7 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
 ## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings; a line leaves once it is habit, or a skill carries it.
-- One body's failed accuracy test: "Hold the bad data and report, then continue." A hold is not red; the night's commit title names the held body. A moon is held only when JPL gives no answer; more than five held is a failed build (Nov 11, the coordinator's changes; L-525 (hold the bad data)).
+- One body's failed accuracy test: "Hold the bad data and report, then continue." A hold is not red; the night's commit title names the held body. A moon is held only when JPL gives no answer; more than five held is a failed build (Nov 11, the coordinator's changes). The room's title stays unchanged for a held body; its box says it (Nov 11, your "Yes, keep it"; L-525 (hold the bad data)).
 - The Sun direction line stays out of Earth's fold: the day-night shading and the Sun at its true place show the direction (Nov 10; L-515 (one nested tree)).
 - A finger's tap gets the wider reach on a phone held either way; a mouse keeps Plotly's own (Nov 11; L-523 (taps sent as hovers)).
 - Each working document has a length cap; a session that adds at the cap moves something out first; upkeep goes between builds, never in front (Nov 10; L-522 (document caps)).

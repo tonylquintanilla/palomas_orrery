@@ -1770,7 +1770,8 @@ short span instead of held. Not before 2029 unless another case comes.
   "The hover is fine." He asked whether the room's title should change
   for a held body; Claude's answer, as built: no -- the title and date
   line say which minute the whole room shows, and a held body is drawn
-  at that minute too.
+  at that minute too. Tony's ruling, the same night: "Yes, keep it";
+  the title stays unchanged, the hold said only in the body's box.
 **Gap:** the first live nights read for a HELD title (none expected);
 Earth's fold box, when a session next opens Earth's fold.
 **Ref:** L-149 (the served window's trust participation); L-485 (the

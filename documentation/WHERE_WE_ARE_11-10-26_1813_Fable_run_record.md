@@ -2458,8 +2458,8 @@ Orrery (not committed):
 
 **Your run order:**
 1. Website, in GitHub Desktop: commit and push the two files above. -- bd65f036d16b553953f7c8b2e76edc6b10c6b5f4 
-2. Orrery: commit and push the six files above, and your run-record copy if you want it in.
-3. Reinstall gallery-cache-builder (Settings > Skills) and paste protocol v3.139 into the Project.
+2. Orrery: commit and push the six files above, and your run-record copy if you want it in. -- c2c0ed2bdd02de879dc508665de5baa3c944e88a=
+3. Reinstall gallery-cache-builder (Settings > Skills) and paste protocol v3.139 into the Project. -- done
 4. Tomorrow morning: Pull origin on both, orrery then website, and read the night's commit title.
 
 **Tony-action rollup:**
@@ -2468,4 +2468,41 @@ Orrery (not committed):
 - *(do)* The frozen date line's phone look, if not done yet.
 - *(decide)* The question below.
 
-Do you agree to keep the room's title unchanged when a body is held (yes), or should the title carry a short note naming any held body (no, add a note)?
+Do you agree to keep the room's title unchanged when a body is held (yes), or should the title carry a short note naming any held body (no, add a note)? -- yes
+
+======================================
+
+I've recorded your ruling: when a body is held, the room's title stays as it is, and only that body's own box says it is held.
+
+- **The ledger, L-525 (hold the bad data):** your "Yes, keep it" now follows my answer about the title.
+- **Where We Are:** the Settled line about the hold now carries the title ruling. The page is still 129 lines above the marker, within its 130-line cap.
+- **Checks:** the ledger index reads "OK: 519 L-blocks parsed, no consistency problems", and the document caps check reads PASS.
+
+Nothing is waiting on you except the commits. L-525 is done apart from what only time shows: the first live nights with the hold on, and Earth's own box in its fold, which still doesn't say a body is held.
+
+**Files changed since your push, for your run record:**
+
+Website (not committed):
+- `INTERACTIVE_AS_BUILT.md`, the page's as-built record (1 edit)
+- `gallery/solar_system_figures.js`, the box's words (1 edit, a comment only)
+
+Orrery (not committed):
+- `skills/gallery-cache-builder/SKILL.md`, the builder skill 1.19 (20 edits)
+- `PROJECT_INSTRUCTIONS.md`, the protocol v3.139 (4 edits, plus the manifest row)
+- `documentation/PROJECT_INSTRUCTIONS_HISTORY.md`, the protocol's history (1 edit)
+- `documentation/SKILL_HISTORIES.md`, the skills' history (2 edits)
+- `LEDGER_CONSOLIDATED.md`, the ledger (7 edits, plus the index)
+- `documentation/WHERE_WE_ARE.md`, Where We Are (13 edits)
+
+**Size:** the app shows no token count. In total this session has read about 665 KB and written about 78 KB.
+
+**Your run order:**
+1. Website, in GitHub Desktop: commit and push the two files above.
+2. Orrery: commit and push the six files above, and your run-record copy if you want it in.
+3. Reinstall gallery-cache-builder (Settings > Skills), and paste protocol v3.139 into the Project.
+4. Tomorrow morning: Pull origin on both, orrery then website, and read the night's commit title. With nothing held, it should read the usual "Nightly run ...".
+
+**Tony-action rollup:**
+- *(do)* The two commits and pushes.
+- *(do)* The skill reinstall and the protocol paste.
+- *(do)* The phone look at the frozen date line (`?freeze=1`), upright and sideways, if you haven't done it yet.
