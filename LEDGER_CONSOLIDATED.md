@@ -1863,6 +1863,88 @@ check `tools/test_kepler_solver.py`); L-525 (hold the bad data).
     line traces hidden the click opened Earth). The walk now taps again 4
     px off, up to four, each said. Whether a finger meets it is Tony's
     phone look, the risk named below.
+- **Tony's phone look at the room's guide, 2026-11-12, 15:55**
+  (palomasorrery.com/interactive.html?guide=1, after his push of gallery
+  003c484): "It works well." Four changes, his: (1) "Find home" may read
+  as the Home button, so step 2 reads "Find our home planet: tap Earth,
+  the blue dot in the ring."; (2) American spelling, "Center": the card
+  "tap Center on Earth to fly in." and so the drawer's button, "Center
+  on <name>" (`gallery/solar_system_drawer.js`, its `enter` word), which
+  the card names; (3) American usage, "around": "to see it go around
+  Earth." and "There's the Moon, going around Earth."; (4) held
+  sideways, the line "This room works best with your phone upright." in
+  the cards' yellow, to read apart from the picture. Written into the
+  brief. The ring catching the tap itself, proposed by the coordinator
+  at 15:31 against the walk's off-centre misses, is not built: on
+  Tony's phone the tap on Earth worked. It waits for a miss seen on a
+  phone.
+- **The four changes built, 2026-11-12, late afternoon** (the same Code
+  session): the three cards' words in `gallery/first_guide.js`; the
+  drawer's button "Center on <name>" (`WORDS.enter`), its checks
+  (`documentation/smoke_solar_system_drawer.js`,
+  `tools/headless/walk_solar_system_drawer.js`) and the words "Center
+  on" wherever the gallery's comments, checks and INTERACTIVE_AS_BUILT.md
+  name the button; code names keep "centre" (`ssCentreOn`,
+  `view_centre.js`). The line in the cards' yellow (`--accent`, text
+  `--bg-deep`), held by the First guide check (red on a planted dark
+  line) and by the walk, which reads the line's colours against the
+  card's in the browser. Checked: the gallery run, 49 of 49; the guide walk 154
+  passed, 0 failed, the line rgb(201, 168, 76) on rgb(10, 10, 15) at
+  both sideways sizes; the drawer walk's same three L-521 failures; the
+  scene-address walk PASS.
+  OTHER BRITISH SPELLINGS A VISITOR READS IN THE ROOM, recorded and left
+  as they are (Tony: change only the four): "centre" in the text box's
+  source lines ("measured from the Sun's centre", "the Horizons centre",
+  "<parent>'s centre", interactive.html) and in the words the page typed
+  for the Sun's elements ("the solar system's centre of mass ... around
+  that centre", SOLAR_SYSTEM_CENTRE_WORDS, approved 2026-10-29); "from
+  Earth's centre" (the subsolar point's hover, gallery/earth_geometry.js);
+  "from <body>'s centre, at the magnetic equator" (the radiation belts'
+  hover, gallery/feature_renderers.js); "Galactic centre" (a label in
+  the Hills cloud's words, the same file); "travelled" (the comet and
+  path lines, solid where travelled, interactive.html, twice). In the
+  served words (data/objects_config.json, by the tools that write it):
+  "the galaxy's centre" and "the centre of our galaxy" (the galactic
+  plane's description, note and centre_hover); "Earth's centre" (the
+  magnetopause's about); "the circle's centre" and "modelled" (the
+  terminator's hover); "go round the Sun" (the Sun's spin hover);
+  "travelling" (New Horizons' description). Not a visitor's:
+  console warnings ("colour", "grey"), "kilometres" as a code value
+  (the visitor's line says "kilometer"), the drawings' frame lines, a
+  model's _model note ("parameterised").
+- **Part 3 built, 2026-11-12, evening** (the same Code session, on the
+  coordinator's word with the four changes: "Then go on to Part 3"). The
+  front page (`index.html`): under the name the two lines, served from
+  `gallery/gallery_config.json` ("sentence", and a new "sentence_more";
+  the editor keeps keys it does not know), with the same words typed as
+  the page's fallback; the start card's title "Today's solar system"
+  (LOBBY_START_TITLE and its served title in `gallery_metadata.json`)
+  and its served sentence "Turn it, tap a planet, fly to the Moon.". A
+  first visit (no setting kept): the gold "Show me around" and under it
+  the link "Explore on my own"; once either is kept, one button,
+  "Explore the solar system". The Tutorial row under Featured, above the
+  line about Paloma: "Tutorial", a switch, and its On or Off line. The
+  words and the rules are `gallery/first_guide.js`'s (`FRONT`,
+  `frontView`, `keeps`, `roomAddress`); the page loads it. Decided in
+  the build, each the smallest reading of the brief: every way in
+  carries the choice in the room's address (guide=1 or guide=0, the
+  returning button the setting's own value), so a browser that keeps
+  nothing opens the room as its front page showed it, the switch
+  included; a tap on the card's picture goes the gold button's way; the
+  front page draws the card and the switch again when Back shows it
+  (`pageshow`), the room having written the setting meanwhile. Checked:
+  the First guide row now also holds the front page (the served words,
+  the typed title, the ways in for every setting, the room's answer to
+  each address, the Tutorial row's place, the wiring), red on the real
+  file broken fourteen ways and on a front page planted four ways; the
+  gallery run 49 of 49; the walk 173 passed, 0 failed, its new front-page
+  part walking a first visitor, Show me around, Skip and Back, the
+  switch, Explore on my own, the picture's tap and a browser that keeps
+  nothing; the walk on a page planted without the box signal still fails
+  at step 2. Not checked: Tony's phone look as a first visitor (a private
+  window) and as a returning one. Noted, not changed: the line about
+  Paloma ("name_note") still opens "An orrery is a model of the solar
+  system.", as the new first line under the name now does.
 - **The risk named:** step 2 rests on a tap on a small dot (L-523's
   wider reach helps; the ring helps the eye). Tony's phone look decides.
 **Gap:** the Code session of the brief, in three parts with a report after each.

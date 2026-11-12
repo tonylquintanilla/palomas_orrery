@@ -53,14 +53,15 @@ sources, so the guide adds no claim to source.
 
 1. The room's plain opening. "This is the solar system today, seen
    from above. Drag with one finger to turn it." Done: a turn.
-2. A ring on Earth. "Find home: tap Earth, the blue dot in the ring."
+2. A ring on Earth. "Find our home planet: tap Earth, the blue dot in the
+   ring."
    Done: Earth's box opens.
 3. Pointing at the menu button: "Open the menu, bottom left." Done:
    the drawer opens. Then: "This is the menu. On Earth's row, tap
-   Centre on Earth to fly in." Done: the view is centred on Earth.
-   Then, at the Moon's row: "Now tick the Moon, to see it go round
-   Earth." Done: the Moon ticked.
-4. "There's the Moon, going round Earth. Next, a comet." with a large
+   Center on Earth to fly in." Done: the view is centred on Earth.
+   Then, at the Moon's row: "Now tick the Moon, to see it go
+   around Earth." Done: the Moon ticked.
+4. "There's the Moon, going around Earth. Next, a comet." with a large
    button, "Take me there". Its tap: back to the Sun's view keeping
    the ticks (the trail line's "Solar system", L-515 ruling 20), Halley
    ticked, and the drawer shown for a moment folded open at Comets,
@@ -118,6 +119,15 @@ leaves the setting as it is. The setting is new with this build, so
 every browser, a visitor of before included, meets the first-visit
 card ("Show me around") the first time it opens the front page after
 the update; the old i note's key does not count as having chosen.
+
+**Changed after Tony's phone look** (Nov 12, 15:55: "It works well.",
+and four changes, his). "Find home" read as the Home button, so step 2
+reads "Find our home planet". American spelling and usage: "Center",
+"around". So the drawer's button reads "Center on <name>" wherever a
+visitor reads it, which the card names. Held sideways, the line "This
+room works best with your phone upright." is in the yellow of the
+cards, so it reads apart from the picture. The words above are the
+changed ones.
 
 ## Start
 

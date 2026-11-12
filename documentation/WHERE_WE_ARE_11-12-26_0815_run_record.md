@@ -557,3 +557,188 @@ Website: none from me.
 **Tony-action rollup**
 - *(do)* Paste the text.
 - *(do)* Push the website, then the phone look.
+
+=====================================================
+
+**Coordinator:**
+
+Good to hear it works on your phone. I'll put your four changes into the brief and L-527, then give you the text for the Code session.
+
+Your four changes are in the brief and in L-527, and both read back from your computer as written. Since Earth's tap worked on your phone, I've left out my ring change and recorded it as waiting until a miss is actually seen on a phone.
+
+One knock-on from change 2: the guide's card tells the visitor to tap the menu's "Centre on Earth" button. So the button itself has to become "Center on…" too, or the card would name a button that isn't there. I've included that below.
+
+**Paste this to the Code session:**
+
+```
+Tony's phone look at the room's guide (15:55): "It works well." Four changes, his, now in the brief and in L-527:
+
+1. Step 2 reads: "Find our home planet: tap Earth, the blue dot in the ring." ("Find home" could be read as the Home button.)
+2. American spelling, "Center". The card reads "This is the menu. On Earth's row, tap Center on Earth to fly in." The card names the drawer's button, so the button reads "Center on <name>" too (gallery/solar_system_drawer.js, its enter word), with the drawer walk's check and INTERACTIVE_AS_BUILT.md to match. Code names may stay as they are. List any other British spelling a visitor reads in the room; change only these, and record the rest.
+3. American usage, "around": "Now tick the Moon, to see it go around Earth." and "There's the Moon, going around Earth. Next, a comet."
+4. Held sideways, the line "This room works best with your phone upright." is in the cards' yellow, so it reads apart from the picture.
+
+The First guide check holds the new words. Then go on to Part 3, the front page.
+```
+
+**Files for your run record**
+Orrery:
+- ok documentation/COORD_L527_guide_brief_20261112.md (1 edit: the four changes; read back)
+- ok LEDGER_CONSOLIDATED.md (1 edit: L-527 gains your phone look, the four changes, and the ring change set aside; index rebuilt and checked; read back)
+
+Website: none from me.
+
+**Your run order**
+1. Paste the text above into the Code session.
+2. When Part 3's report comes, bring it here before the front page's phone look.
+
+**Tony-action rollup**
+- *(do)* Paste the text.
+- *(do)* Bring me Part 3's report.
+
+==========================================
+
+**Code:**
+
+The guide's new words go in next, then the drawer's "Center on" button. After that I'll search for other British spellings.
+
+Adding the yellow to the First guide check, with a planted page that has the old dark line.
+
+Now the walk's line check gets the yellow too.
+
+Nothing was written. I'll make the walk edit with the Edit tool instead.
+
+I'm still listing the British spellings a visitor reads. My script broke on a quoting slip, so I'm fixing it with the editor.
+
+Here's the list of other British spellings a visitor reads. I'll record it in L-527 and leave the words as they are. Now the gallery run and the walks.
+
+The guide walk passes, 154 of 154, and the line shows in the cards' yellow. Next, the drawer walk and the scene-address walk, for "Center on".
+
+The drawer walk shows only the same three old failures as before. While the gallery run finishes, I'm updating the as-built page.
+
+Everything is ASCII and LF. Now I'm writing the phone look's four changes into L-527 in the ledger while the gallery run finishes.
+
+The four changes are built and checked: the gallery run passes 49 of 49. Now Part 3, the front page. I'm reading the brief's Part 3 first.
+
+gallery-pipeline is 1.2, matching the manifest. Now the front page itself.
+
+The Part 1 proposal left one point for Part 3: the two lines replace the front page's current served line. I'm checking who else reads that line before I choose how to store two lines.
+
+The editor keeps any extra keys in the config, so a second served line is safe. Now I'm reading the guide's file for what Part 2 already built for the front page.
+
+The front page plan is set: new words go in the guide's file, the start card offers different choices depending on whether it's a first visit, and each link carries the visitor's choice in its address. I'm checking how the walk serves pages next, so it can cover the front page too.
+
+The walk serves the whole site folder, so it can open the front page too. Now the start card's styles.
+
+The plan is set, and I'm building the front page now, starting with its words in the guide's file.
+
+Now the front page itself.
+
+Now the edits to the front page, one at a time.
+
+Now the start card's buttons, the setting it reads, and the Tutorial row.
+
+Now the served words: the two lines in the config, and the card's title and sentence in the metadata.
+
+Only test fixtures and an old history note name the old title. Now the front page's history note.
+
+Now the First guide check, extended to the front page. Reading its structure first.
+
+The new front-page check found three gaps in its own reading of the page. I'm finding out why.
+
+The check passes, and all of its planted faults are caught. Now its closing line and the run's row description.
+
+Now the walk, so a real browser goes through the front page the way a visitor would. Reading the walk's main part first.
+
+Now the front page's walk itself.
+
+I'm adding a switch so the front-page walk can run alone while I work on it.
+
+The front-page walk passes, 19 of 19. Now a look at how the page draws.
+
+The Tutorial row reads well, under Featured and above the line about Paloma. Next: the whole walk, the gallery run and the as-built note.
+
+The whole walk passes, 173 of 173. Next I'm checking that the walk still fails on the planted faulty room.
+
+The planted copy is from before today's changes, so I'm making a fresh one from the current page with the box signal removed.
+
+The gallery run passes 49 of 49, and the planted room still fails at step 2, as it must. Now the records: the as-built page and L-527.
+
+Now L-527 in the ledger gets the Part 3 bullet.
+
+# Your four changes, then Part 3: the front page
+
+Your four changes from the phone look are built, and so is the front page. The gallery run passes 49 of 49. Nothing is committed.
+
+**Your four changes**
+1. Step 2 now reads "Find our home planet: tap Earth, the blue dot in the ring."
+2. "Center" is spelled the American way.
+   - The card reads "tap Center on Earth to fly in".
+   - The menu's button reads "Center on <name>" everywhere a visitor sees it.
+   - The drawer's checks and the as-built record match.
+   - Names inside the code keep "centre".
+3. The two Moon cards now say "go around Earth" and "going around Earth".
+4. Held sideways, the line now shows in the cards' yellow. The walk read the colour in the browser at both sideways sizes, and it is the cards' own yellow.
+
+**Other British spellings a visitor reads.** I left these alone and listed them in L-527 (a first visit's guide):
+- "centre" in the text box's source lines, in the subsolar point's hover and in the radiation belts' hover;
+- "Galactic centre" as a label;
+- "travelled" in the comet and path lines;
+- in the served words: "the galaxy's centre", "Earth's centre", "the circle's centre", "modelled", "go round the Sun" (the Sun's spin) and "travelling" (New Horizons).
+
+**Part 3, the front page**
+- Under the name, your two lines: "An orrery is a model of the solar system that moves." and "This one shows the Sun, the planets...".
+- The card's title is "Today's solar system", and its sentence is "Turn it, tap a planet, fly to the Moon."
+- On a first visit, the gold "Show me around" sits with "Explore on my own" under it. After either choice there is one button, "Explore the solar system".
+- The Tutorial row sits under Featured, with its switch and its On or Off line.
+
+I made three small choices the brief left open:
+- **Every way into the room carries the choice in its address.** A browser that keeps nothing still opens the room the way the front page showed it.
+- **A tap on the card's picture does what the gold button does.**
+- **The front page redraws the card and the switch when you come back with Back.** So after Skip it shows "Explore the solar system" at once.
+
+**The checks**
+- **The gallery run:** 49 of 49 passed. The First guide check now holds the front page too, and every fault planted in it was caught.
+- **The walk:** 173 passed, 0 failed. Its new front-page part covered a first visitor, "Show me around", Skip and Back, the switch, "Explore on my own", a tap on the picture, and a browser that keeps nothing.
+- **The drawer walk:** the same three old failures as before.
+- **A planted room** without the box signal still fails at step 2, as it must.
+
+Not yet checked: your phone look as a first visitor (a private window) and as a returning one.
+
+**Does the close wait for your front-page phone look, or shall I go straight on?**
+
+One final thought: the line about Paloma further down still opens "An orrery is a model of the solar system." The first line under the name now says nearly the same.
+
+**Files changed since your push**
+
+Website:
+- ok `gallery/first_guide.js` (5 edits)
+- ok `index.html` (9 edits)
+- ok `interactive.html` (4 edits)
+- ok `gallery/gallery_config.json` (1 edit)
+- ok `gallery/gallery_metadata.json` (2 edits)
+- ok `gallery/solar_system_drawer.js` (1 edit)
+- ok `gallery/view_centre.js` (1 edit)
+- ok `documentation/smoke_first_guide.js` (12 edits)
+- ok `documentation/smoke_solar_system_drawer.js` (1 edit)
+- ok `documentation/smoke_view_centre.js` (1 edit)
+- ok `tools/headless/walk_first_guide.js` (9 edits)
+- ok `tools/headless/walk_solar_system_drawer.js` (1 edit)
+- ok `tools/headless/walk_scene_address.js` (1 edit)
+- ok `gallery_maintenance_run.py` (3 edits)
+- ok `INTERACTIVE_AS_BUILT.md` (7 edits)
+- Rewritten by the gallery run itself: `MODULE_ATLAS.md`, `MODULE_INDEX.md` and the three pull stamps in `data/`.
+
+Orrery:
+- ok `LEDGER_CONSOLIDATED.md` (4 edits to L-527)
+- Your run-record note and the brief show changes in the orrery folder that I didn't make.
+
+**Your run order**
+1. Commit and push the website. -- f6533b7f26ac7f184874181c856cf3a07def562e
+2. In a private window, open palomasorrery.com: the two lines, the card, "Show me around", then Skip.
+3. Go back to the front page: one button, and the switch off. Turn the switch on, and "Explore the solar system" runs the guide.
+
+**Tony-action rollup**
+- *(decide)* The close: wait for your phone look, or go straight on.
+- *(do)* Commit and push the website.
+- *(look)* The front page on your phone, as a first visitor and as a returning one.
