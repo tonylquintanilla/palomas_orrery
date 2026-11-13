@@ -4795,6 +4795,48 @@ resident.
 (Moved down from the resident protocol on 2026-11-11, when
 v3.139 made a fourth entry.)
 
+v3.137 (November 10, 2026, night): No rule changed in this document.
+ONE skill bump: ledger-and-session-records 1.22 -> 1.23 (L-522,
+document caps, step 1), by the records skill's binding rule, Tony's
+go-ahead of that evening ("Yes, go ahead"). THE CAPS ON ONE PAGE, AND
+A CHECK THAT NAMES WHAT IS OVER.
+
+WHAT PROMPTED IT. The Claude Code session of Nov 10, night (Claude Opus
+5.5), through the python_work door, built on orrery ea43f2a1 and
+gallery 2dec9fc5, from Tony's prompt and
+documentation/COORD_L522_step1_caps_brief_20261110.md, in three parts
+with a report and his go-ahead after each.
+
+WHAT CHANGED. A new root page, DOCUMENT_CAPS.md: the three rules (each
+working document has a cap in lines and a home for its old lines; a
+session that adds to one at its cap moves something out first; only
+Tony changes a cap) and the table of caps, each set at the document's
+size that day. The maintenance run's new row "Document caps"
+(doc_index.py --caps) prints every row and is red, by name, on a
+document over its cap, a file not found, a skill with no row, or a row
+it cannot read. ledger-and-session-records: under Where We Are, THE
+CHECK's 130-line half is that row, its date half left on L-396; and a
+turn's close may add one line, "One final thought:", a concern nobody
+asked for (Tony, 16:11). Its oldest of four version entries (1.20)
+moved to documentation/SKILL_HISTORIES.md by the three-entry rule, so
+the skill ends at the 807 lines it began with.
+
+THE OBLIGATION TRAVELS. This session read ledger-and-session-records
+1.22 from the repo's copy, as a Code session does, as the manifest
+expected. Tony reinstalls it (Settings > Skills) and pastes this
+version into the Project's instructions on claude.ai; the next session
+that loads it from the account confirms its copy reads 1.23 before work
+that fires it.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.134 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-11-12, when
+v3.140 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

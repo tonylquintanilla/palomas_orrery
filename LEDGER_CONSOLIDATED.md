@@ -1005,7 +1005,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*263 live items; 247 need attention (`!`); 165 RICE-scored; 258 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*263 live items; 247 need attention (`!`); 165 RICE-scored; 259 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1180,8 +1180,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-522 | Document caps: how the working documents are kept from growing, and the catch-up (protocol, skills, ledger; upkeep) | OPEN | -- | 2026-11-11 |
 | ! | L-525 | One body's failed accuracy test holds that body, not the whole site (gallery, the nightly builder's served window; built, its sentence settled Nov 11) | OPEN | -- | 2026-11-11 |
 | ! | L-526 | A body whose test fails for a real reason is drawn from the older orbit while held (gallery, the nightly builder's hold; recorded, not built) | OPEN | -- | 2026-11-11 |
-| ! | L-527 | A first visit's guide: a walk-through that waits for the visitor (gallery, the lobby and the Solar System room; design) | OPEN | -- | 2026-11-12 |
 | ! | L-528 | The orrery's Kepler solvers' start: E = pi for a stretched orbit, and no error when they do not converge (orrery; recorded, not built) | OPEN | -- | 2026-11-12 |
+| ! | L-529 | Guided encounters: the guide's way of telling, used for a flyby (gallery; an idea, for a design talk after Mars) | OPEN | -- | 2026-11-12 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1588,6 +1588,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-519 | Featured's rethink: Scenes, a shared link kept in the tree and on Featured (gallery, the gallery editor and the Solar System room's drawer; built, closed) | DONE | -- | 2026-11-09 |
 |  | L-523 | A finger's tap that Plotly sends as a hover: a tap a little off a small dot opens its box (gallery, the text box; built, closed) | DONE | -- | 2026-11-12 |
 |  | L-524 | The Kepler solver's start: a stretched orbit's second half solved wrong, the site frozen at 0.3 days, and the frozen date line on a phone (gallery, the assembler and the room's title; built) | DONE | -- | 2026-11-12 |
+|  | L-527 | A first visit's guide: a walk-through that waits for the visitor (gallery, the lobby and the Solar System room; built, closed) | DONE | -- | 2026-11-12 |
 
 ### W.Done -- Web Publication track, closed items
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1617,6 +1618,43 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
 
+#### [L-529] Guided encounters: the guide's way of telling, used for a flyby (gallery; an idea, for a design talk after Mars)
+<!-- L:529 status:OPEN upd:2026-11-12 section:A flag: rice: -->
+- **Tony, 2026-11-12, 20:34,** after his phone look at the finished
+  guide (L-527 (a first visit's guide)): "it works great. i'm thinking
+  this might be a good way to create encounters, with labels and focus
+  rings."
+- **The coordinator's reading, not ruled:** the guide is a small engine
+  of three parts -- a card that waits for one thing; a ring kept on a
+  body as the view turns; a camera move worked out from what is drawn
+  (the swing to face Halley's orbit). An encounter (Voyager at Jupiter,
+  Artemis II around the Moon) could be told the same way: each card
+  sets the view, rings the craft or the body, labels the closest point.
+  Two differences named: an encounter card carries facts, so its words
+  are served words with their sources, unlike the guide's
+  instruction-only cards; and an encounter happens on another date, so
+  a card moves the date as well as the view.
+- **Tony, 20:45, on those two:** "yes, and the date choosing could be
+  served from a pre-fetched data set for objects being shown, not all
+  the objects. it would not depend on an open ended data picker for the
+  solar system room. we would also want the viewer to control when to
+  move on to the next step after the info card is acknowledged." So:
+  an encounter's dates are served for its own bodies only, fetched
+  ahead, not a date picker for the whole room (the road's goal 18 is a
+  separate thing); and the visitor moves on when ready, after the card
+  is acknowledged, not on a timer.
+- **From L-527, at its close (2026-11-12, night):** Artemis II was left
+  out of the first visit's guide (Tony, 2026-11-11, 23:02) to become a
+  step once its flight is a saved scene inside the room; the encounter
+  this item imagines is that place.
+**Gap:** a design talk after Mars (L-514 (the Mars room)), by the
+road's order; then which encounter first.
+**Ref:** L-527 (a first visit's guide: the card, the ring, the camera's
+swing, `gallery/first_guide.js`); L-507 (historical missions, whose
+encounters were to become saved scenes); L-489 (compositions: Artemis II
+in Earth's fold); L-483 (a comet room); L-518 (the shared link: a scene
+opens at its own address).
+
 #### [L-528] The orrery's Kepler solvers' start: E = pi for a stretched orbit, and no error when they do not converge (orrery; recorded, not built)
 <!-- L:528 status:OPEN upd:2026-11-12 section:A flag: rice: -->
 - **Opened 2026-11-12**, at the close of L-524 (the Kepler solver's
@@ -1642,374 +1680,6 @@ gallery's "Kepler solver" kind, in the orrery's maintenance run. Between
 builds, never in front of the road.
 **Ref:** L-524 (the Kepler solver's start, the gallery's fix and its
 check `tools/test_kepler_solver.py`); L-525 (hold the bad data).
-
-#### [L-527] A first visit's guide: a walk-through that waits for the visitor (gallery, the lobby and the Solar System room; design)
-<!-- L:527 status:OPEN upd:2026-11-12 section:A flag: rice: -->
-- **Tony's observation, 2026-11-11, 22:42 Chicago,** in the
-  coordinating session (Claude Opus 5.5, through the python_work door,
-  on orrery ceb508c6 and gallery bd65f036), before Mars: a friend on a
-  phone scrolled to the bottom of the front page and did not know what
-  to do; pointed to Explore, closed the i button's first-visit note
-  (L-494) "without a second thought", turned the grid with a thumb, and
-  then: "now what?! that's where i have to explain what the orrery is
-  really about." His idea: the yellow note on more of the key controls
-  (Explore, the Earth System and Stars doors, the room's menu button,
-  the opening scene), each once, and a "Tutorial" button under Featured
-  that turns them on and off. "most people don't even know what an
-  orrery is. i take a lot for granted."
-- **Claude, as proposed, not ruled:** two problems, not one. (1) The
-  front page does not say what this is: a sentence and a picture on the
-  first screen, Explore under it. (2) In the room nobody gives a next
-  step: a note per control explains a button, not the purpose, and a
-  visitor who has tapped "Got it" five times has learned to tap "Got
-  it". Instead, one invitation at a time, each asking for one action and
-  shown only after the last is done.
-- **Ruled, Tony, 22:50 and 22:55:** a one-time walk-through, as
-  described (it waits for the visitor; Skip on every card; remembered by
-  the browser as the i note is; the Tutorial button starts it again;
-  it replaces the i note in the room). A story, not the controls in
-  order: "Attention is everything until they learn how it works. So a
-  fun feature like Halley is a good idea. And I would say also the
-  earth-moon system." Method left to Claude ("I'll lean on your
-  knowledge of tutorials").
-- **Artemis II left out, Tony, 23:02:** the saved picture is "a served
-  html from the orrery and looks different from the interactive we are
-  teaching", and encounters will become saved scenes. So the guide ends
-  at step 4, on Halley; Artemis II becomes step 5 once its flight is a
-  saved scene inside the interactive room.
-- **The four steps, as mocked up (Tony's "Yes", 23:04):** 1, the room
-  today: drag to turn it. 2, tap Earth (a ring marks it). 3, open the
-  menu; on Earth's row, Centre on Earth; then tick the Moon. 4, Home,
-  tick Halley's comet, tap it (the move made by the guide, below). Then the end card, Explore. Each card
-  says "Step n of 4" and gives instructions only: the facts stay in the
-  boxes, which carry their sources, so the guide adds no claim to
-  source. Read at gallery bd65f036: "Centre on <name>" is a button on
-  the body's row in the drawer, not in its box, so step 3 carries both
-  menu actions. The mockup, a sketch with no real positions: the Design
-  canvas "Orrery first-visit guide: four steps",
-  https://claude.ai/artifact/QEXpNBnj8YxDHRfwF4CKLt (private to Tony).
-- **Step 4's move, RULED, Tony, 2026-11-12, 00:23 Chicago: "Yes, C."**
-  Put to him three ways from Earth's view to Halley: (A) the visitor
-  taps "Solar system" in the trail line, opens Comets and Halley-type
-  comets, ticks Halley, taps it; (B) types "Halley" in Find; (C) the
-  guide makes the move. C: the card reads "Next, a comet. Take me
-  there."; one tap returns to the Sun's view, ticks Halley, and shows
-  the menu for a moment folded open at Comets, Halley-type comets,
-  Halley; then "Tap Halley, in the ring." Read at gallery bd65f036: the
-  trail line's "Solar system" opens the Sun's view and keeps the ticks
-  (L-515 ruling 20); Halley sits under `comets_htc` in `comets_all`
-  (`data/objects_config.json`). Added to the mockup as its own screen.
-- **Tony's look at the mockup, 2026-11-12, morning, in his run record**
-  (`WHERE_WE_ARE_11-12-26_0815_run_record.md`), on the seven screens:
-  "looks good". One change to the closing card's words, his: "drawn
-  from JPL's (NASA) live data". Claude raised that the website is not
-  live (a nightly run fetches JPL's data; the desktop orrery is the one
-  that asks live); Tony, 08:30: "your words". The closing card now
-  reads: "That's the orrery: the solar system as it is today, drawn
-  from JPL's (NASA) data, updated every night. Explore on your own, or
-  tap Tutorial to see this again."
-- **The front page, sketched 2026-11-12, morning,** as a second row on
-  the same canvas: the first screen today, a proposed first screen, and
-  a proposed bottom. Read at gallery bd65f036 (`index.html`, the lobby's
-  start card, L-517): the first screen already carries Explore; what it
-  lacks is the reason to press it. Proposed, not ruled: two lines under
-  the name ("An orrery is a model of the solar system that moves." and
-  "This one shows the Sun, the planets, moons, comets and spacecraft
-  where they are today, from JPL's (NASA) data, updated every night.");
-  the card's title "Today's solar system" for "Today's sky, live" (it is
-  not the sky, and not live); its sentence "Turn it, tap a planet, fly
-  to the Moon."; under Featured, a Tutorial row with an on/off switch
-  and its line under it, since a phone has no hover.
-- **The way in, RULED, Tony, 09:07 and 09:15:** "I think the "Explore"
-  does not convey what we are asking. Maybe start the tutorial here."
-  Put to him three ways (A, two choices on the card; B, one button that
-  changes after the first visit; C, a yellow card on the front page as
-  step 0). Tony: "Let's try A". The card's gold button reads "Show me
-  around" and opens the room with the guide; under it, the link
-  "Explore on my own" opens the room with none. Made in the mockup.
-- **One setting, RULED, Tony, 09:32: "Confirmed".** Asked whether
-  "Show me around" reverts after the first visit: yes, and the card and
-  the Tutorial switch are two views of one setting kept in the
-  visitor's browser. First visit: "Show me around" with "Explore on my
-  own", the switch On. After either choice, finished, skipped or
-  explored alone: one button, "Explore the solar system", the switch
-  Off. The switch turned On again brings "Show me around" back, and the
-  next visit to the room runs the guide. Made in the mockup as a fourth
-  front-page screen.
-- **The two lines, RULED, Tony, 09:56 (his run record): "yes".**
-  "approved and pushed" (orrery e0122ef6), and he asked for the Code
-  session's brief. Written the same morning:
-  `documentation/COORD_L527_guide_brief_20261112.md`, every card's
-  words in it. One change of the coordinator's to the end card, said
-  to Tony: "or tap Tutorial to see this again" reads "or turn on
-  Tutorial on the front page to see this again", since the room has no
-  Tutorial. One question left open in the brief, put to Tony: whether
-  the guide runs when the room opens on a shared link or a scene (the
-  coordinator's lean: no, only on the room's plain opening).
-- **A shared link, RULED, Tony, 10:17:** asked whether the guide stays
-  off when the room opens from a shared link or scene: "yes. As you
-  said it should run when first opening the website after we update the
-  front page." The guide runs only on the room's plain opening; the
-  setting is new with the build, so every browser meets the first-visit
-  card once after the update. Written into the brief; the brief is
-  settled.
-- **Part 1, the proposal, read 2026-11-12, 11:36** (the Code session
-  on orrery af8e1bdf and gallery 001d5046): `gallery/first_guide.js`,
-  loaded by both pages; each step done by the page's own function
-  (`sunLabelShow`, `setSunDrawer`, `ssCentreOn`, `ssTick`, `ssHome`),
-  the turn read from the live camera (`sunHudWatch`); the menu opened
-  again after Centre on, which closes it; the ring drawn over the
-  picture by Plotly 2.35.2's own sum for a pinned point; the setting
-  `paloma_orrery_guide` (`on`/`off`, none counts as on), the front
-  page's links carrying `guide=1` or `guide=0`, taken out of the
-  address; the test address `interactive.html?guide=1`; a new run row,
-  "First guide", and a headless walk run by the session.
-- **Part 2's go-ahead, RULED, Tony, 11:44: "yes on both of your
-  changes."** (1) The ring's check can fail: the "First guide" row
-  reads the Plotly version from `interactive.html`'s script line
-  (`cdn.plot.ly/plotly-2.35.2.min.js`, line 521 at 001d5046) and is red,
-  naming both, if it is not 2.35.2; it tests the ring's sum against
-  Plotly's own placement of a point; the walk's report names each step
-  passed and whether the ring was drawn. Tony asked "is that us? what's
-  the guard?": the version moves only by an edit to that line, and no
-  check guarded it before. (2) The i note (L-494) appears once after
-  the end card's Explore, its words as today, so a guided visitor meets
-  the i button that holds the sources (the session's own final
-  thought).
-- **Part 2 built, 2026-11-12, afternoon** (the same Code session, Claude
-  Opus 5.5, on orrery af8e1bdf and gallery 001d5046; not yet committed):
-  `gallery/first_guide.js` (the steps, words, setting, address rule, turn,
-  card places, ring sum); the room's part in `interactive.html` (the card,
-  the ring, a line in each of `sunLabelShow`, `setSunDrawer`, `ssCentreOn`,
-  `ssTick` and `sunHudWatch`; `guideGo` for Take me there); the gallery
-  run's new "First guide" row (`documentation/smoke_first_guide.js`, with
-  Plotly 2.35.2's own placement copied in
-  `documentation/fixture_plotly_2_35_2_placement.js`; red, naming both, on
-  another Plotly); `INTERACTIVE_AS_BUILT.md`'s new section. Skip, like the
-  end card's Explore, turns the setting off and then shows the i note: the
-  brief's rule that with the guide off the note behaves as today, read by
-  the session, for Tony's phone look. The Hover budget check named the
-  note's three callers in place of counting two; the drawer walk's 22a now
-  meets the guide's first card on a first visit.
-  - Checked: the gallery run, offline, "49 of 49 gating checkers passed"
-    (48 of 48 at the base). The walk in a real browser
-    (`tools/headless/walk_first_guide.js`, the computer's Edge, real
-    Plotly 2.35.2, WebGL): 210 checks passed, 8 failed, all eight the
-    sideways menu below; upright at 390 x 844 and 375 x 667 all four
-    steps and the end card passed by the visitor's own actions; the ring
-    drawn on Earth and on Halley at all four sizes, 0.15 to 0.51 px from
-    where Plotly pins the same point, and a click at its centre opened the
-    body's box; every card clear of its target; the setting's eight states
-    (none, off, off with ?guide=1, ?guide=0, a shared link, a browser that
-    keeps nothing, the old note's key, Skip). A planted page without the
-    box signal failed 22 of its checks. The tap, held-body and scene
-    address walks pass; the drawer walk fails the same three (L-521's) on
-    the new page and the base.
-  - Found in the walk, three faults of the guide's, fixed before the
-    report: `scrollIntoView` scrolled the picture's area too (the card and
-    the ring moved off where they were measured, 33 px sideways); a body
-    row's group is `group` in the drawer, not the served `in`; on a
-    sideways phone no place cleared the 90 px frame row, so a card may
-    cover the frame row, never its target.
-  - Found, not the guide's, recorded: (1) ON A PHONE HELD SIDEWAYS THE OPEN
-    MENU SHOWS NO ROWS -- its header, the trail line and Find fill its 40
-    percent of a picture about 315 px tall, the list starting below the
-    screen (measured on the base page, 844 x 390 and 667 x 375) -- so step
-    3 cannot be done sideways; put to Tony. (2) A browser whose storage
-    throws on every read stops at the page's own consent check
-    (`localStorage.getItem(CONSENT_KEY)`, unguarded) before the room opens,
-    guide or not; one row for the class when a session reaches it.
-- **Upright, RULED, Tony, 2026-11-12, 13:18 and 13:44** (on Part 2's
-  report, which found the open menu shows no rows held sideways, and
-  asked to fix it): "we should talk about the landscape (sideways)
-  orientation. it does not work with the drawer system and it does not
-  have to. the portrait orientation should be used." Some saved
-  pictures, Earth Science's above all, may use landscape; the orrery's
-  room does not. Asked whether to say so or leave it to common sense,
-  the coordinator proposed saying it only when it matters; Tony: "yes.
-  you're right." So: held sideways, the room shows one line at the top
-  of the picture, "This room works best with your phone upright." (no
-  popup, nothing to dismiss; the picture still turns and zooms; gone
-  when upright). The guide, held sideways, pauses with its card "Turn
-  your phone upright to continue." and goes on at the same step when
-  upright. The sideways menu is not fixed: not supported, by this
-  ruling, not a fault. The room's phone looks and walks are upright
-  only; the sideways placement already built stays. The rule goes into
-  interactive-exhibit: the room is built and tested upright.
-- **Upright built, 2026-11-12, afternoon** (the same Code session, by the
-  ruling above; not yet committed): `GalleryGuide.SIDEWAYS` ("(orientation:
-  landscape) and (max-height: 500px)", the CSS's own words), `WORDS.sideways`
-  and `WORDS.upright`. Held sideways, `#upright-line` shows by CSS alone in
-  the room, just under the picture's title and its lines
-  (`uprightLinePlace`; first drawn at the very top, it covered the
-  picture's title, seen in the walk's screenshot), touches going through;
-  the guide pauses (`guideSideways`: the paused card keeps the step's label
-  and Skip, no button, no ring; no action counts) and, upright, puts up the
-  same step. The walk's four steps run upright only; sideways it checks the
-  line and the paused card, the picture turning and zooming, and the same
-  step going on upright.
-  - Checked: the First guide row, its self-test now ten breaks, a page on
-    another Plotly and two wrong sideways lines, all caught; its wiring
-    25 places, a planted page without the pause caught. The walk, three
-    runs in a row, 154 passed, 0 failed (two sizes upright, every step;
-    two sizes sideways, 3 checks of the ruling each; the setting's eight
-    states); the planted page without the box signal still fails (22).
-    The tap, held-body and scene-address walks pass; the drawer walk
-    fails L-521's same three as the base.
-  - Seen in the walk, not the guide's, recorded: at 375 x 667 two runs in
-    three failed at step 2 before the walk changed. Plotly picks one pixel,
-    and at some angles a line drawn through Earth's dot takes it: a click
-    dead on the centre opened nothing, 4 px up opened Earth's box (with the
-    line traces hidden the click opened Earth). The walk now taps again 4
-    px off, up to four, each said. Whether a finger meets it is Tony's
-    phone look, the risk named below.
-- **Tony's phone look at the room's guide, 2026-11-12, 15:55**
-  (palomasorrery.com/interactive.html?guide=1, after his push of gallery
-  003c484): "It works well." Four changes, his: (1) "Find home" may read
-  as the Home button, so step 2 reads "Find our home planet: tap Earth,
-  the blue dot in the ring."; (2) American spelling, "Center": the card
-  "tap Center on Earth to fly in." and so the drawer's button, "Center
-  on <name>" (`gallery/solar_system_drawer.js`, its `enter` word), which
-  the card names; (3) American usage, "around": "to see it go around
-  Earth." and "There's the Moon, going around Earth."; (4) held
-  sideways, the line "This room works best with your phone upright." in
-  the cards' yellow, to read apart from the picture. Written into the
-  brief. The ring catching the tap itself, proposed by the coordinator
-  at 15:31 against the walk's off-centre misses, is not built: on
-  Tony's phone the tap on Earth worked. It waits for a miss seen on a
-  phone.
-- **The four changes built, 2026-11-12, late afternoon** (the same Code
-  session): the three cards' words in `gallery/first_guide.js`; the
-  drawer's button "Center on <name>" (`WORDS.enter`), its checks
-  (`documentation/smoke_solar_system_drawer.js`,
-  `tools/headless/walk_solar_system_drawer.js`) and the words "Center
-  on" wherever the gallery's comments, checks and INTERACTIVE_AS_BUILT.md
-  name the button; code names keep "centre" (`ssCentreOn`,
-  `view_centre.js`). The line in the cards' yellow (`--accent`, text
-  `--bg-deep`), held by the First guide check (red on a planted dark
-  line) and by the walk, which reads the line's colours against the
-  card's in the browser. Checked: the gallery run, 49 of 49; the guide walk 154
-  passed, 0 failed, the line rgb(201, 168, 76) on rgb(10, 10, 15) at
-  both sideways sizes; the drawer walk's same three L-521 failures; the
-  scene-address walk PASS.
-  OTHER BRITISH SPELLINGS A VISITOR READS IN THE ROOM, recorded and left
-  as they are (Tony: change only the four): "centre" in the text box's
-  source lines ("measured from the Sun's centre", "the Horizons centre",
-  "<parent>'s centre", interactive.html) and in the words the page typed
-  for the Sun's elements ("the solar system's centre of mass ... around
-  that centre", SOLAR_SYSTEM_CENTRE_WORDS, approved 2026-10-29); "from
-  Earth's centre" (the subsolar point's hover, gallery/earth_geometry.js);
-  "from <body>'s centre, at the magnetic equator" (the radiation belts'
-  hover, gallery/feature_renderers.js); "Galactic centre" (a label in
-  the Hills cloud's words, the same file); "travelled" (the comet and
-  path lines, solid where travelled, interactive.html, twice). In the
-  served words (data/objects_config.json, by the tools that write it):
-  "the galaxy's centre" and "the centre of our galaxy" (the galactic
-  plane's description, note and centre_hover); "Earth's centre" (the
-  magnetopause's about); "the circle's centre" and "modelled" (the
-  terminator's hover); "go round the Sun" (the Sun's spin hover);
-  "travelling" (New Horizons' description). Not a visitor's:
-  console warnings ("colour", "grey"), "kilometres" as a code value
-  (the visitor's line says "kilometer"), the drawings' frame lines, a
-  model's _model note ("parameterised").
-- **Part 3 built, 2026-11-12, evening** (the same Code session, on the
-  coordinator's word with the four changes: "Then go on to Part 3"). The
-  front page (`index.html`): under the name the two lines, served from
-  `gallery/gallery_config.json` ("sentence", and a new "sentence_more";
-  the editor keeps keys it does not know), with the same words typed as
-  the page's fallback; the start card's title "Today's solar system"
-  (LOBBY_START_TITLE and its served title in `gallery_metadata.json`)
-  and its served sentence "Turn it, tap a planet, fly to the Moon.". A
-  first visit (no setting kept): the gold "Show me around" and under it
-  the link "Explore on my own"; once either is kept, one button,
-  "Explore the solar system". The Tutorial row under Featured, above the
-  line about Paloma: "Tutorial", a switch, and its On or Off line. The
-  words and the rules are `gallery/first_guide.js`'s (`FRONT`,
-  `frontView`, `keeps`, `roomAddress`); the page loads it. Decided in
-  the build, each the smallest reading of the brief: every way in
-  carries the choice in the room's address (guide=1 or guide=0, the
-  returning button the setting's own value), so a browser that keeps
-  nothing opens the room as its front page showed it, the switch
-  included; a tap on the card's picture goes the gold button's way; the
-  front page draws the card and the switch again when Back shows it
-  (`pageshow`), the room having written the setting meanwhile. Checked:
-  the First guide row now also holds the front page (the served words,
-  the typed title, the ways in for every setting, the room's answer to
-  each address, the Tutorial row's place, the wiring), red on the real
-  file broken fourteen ways and on a front page planted four ways; the
-  gallery run 49 of 49; the walk 173 passed, 0 failed, its new front-page
-  part walking a first visitor, Show me around, Skip and Back, the
-  switch, Explore on my own, the picture's tap and a browser that keeps
-  nothing; the walk on a page planted without the box signal still fails
-  at step 2. Not checked: Tony's phone look as a first visitor (a private
-  window) and as a returning one. Noted, not changed: the line about
-  Paloma ("name_note") still opens "An orrery is a model of the solar
-  system.", as the new first line under the name now does.
-- **Tony's phone look at the front page and the guide, 2026-11-12,
-  evening** (palomasorrery.com in a private window, after his push of
-  gallery f6533b7 and orrery 2eeeb498; in his run record
-  `WHERE_WE_ARE_11-12-26_0815_run_record.md`): the returning visitor's
-  card and the switch "yes"; steps 2, 3 and the end "okay". His
-  changes: (1) step 1 reads "This is the inner solar system today, seen
-  from above."; (2) the Moon is not animated, so its cards read "Now
-  tick the Moon, to see its orbit around Earth." and "There's the
-  Moon's orbit around Earth. Next, a comet."; (3) Halley becomes its
-  own step: the guide has five steps, "Step n of 5" (read by the
-  coordinator as: 4, the Moon's tick and its "Take me there" card; 5,
-  Halley), and on Take me there the view swings so Halley's elliptical
-  orbit can be seen, the words unchanged; (4) turning the Tutorial
-  switch on also clears the i note's first-visit mark, so the note
-  shows again after the end card. Written into the brief.
-- **The line about Paloma, RULED, Tony, 19:29:** it still opened "An
-  orrery is a model of the solar system.", now said by the first line
-  under the name (the Code session's final thought). Tony: "It could
-  simply read, "I built this digital orrery for my daughter
-  Paloma...."", read by the coordinator as the whole line "I built this
-  digital orrery for my daughter Paloma, whose name is Spanish for
-  dove." (`name_note` in `gallery/gallery_config.json`).
-- **The evening's five changes built, 2026-11-12, night** (the same Code
-  session; the close waits for Tony's next phone look). The words in
-  `gallery/first_guide.js`; five steps (`STEPS_COUNTED` 5, exported as
-  `COUNTED`, which the page now draws its dots from, where it had drawn
-  four by hand): menu and Center on Earth step 3, the Moon's tick and
-  Take me there step 4, Halley step 5, the end card after. THE VIEW
-  CHOSEN for Take me there, and why: straight down on the plane of
-  Halley's drawn orbit, from the north side, its long axis up the
-  screen with the far end (Halley, near aphelion today) at the top, the
-  whole orbit between 14 and 50 percent of the picture's height. Face-on
-  is the one view that shows the ellipse at its true shape, so the
-  "long orbit" of the card reads as long; up the screen because a phone
-  held upright is tall, and the long axis then takes the most room;
-  the top half because the card goes in the half away from Halley's
-  ring, and at 375 x 667 it begins at 54 percent (the first try, 14 to
-  58 percent, ran the Sun's end 21 px under the card in the walk). From
-  the drawn orbit alone (`GalleryGuide.faceOn`: the plane from the sum
-  of p[i] x p[i+1], the long axis toward the farthest point drawn) and
-  the scene's own ranges and Plotly's projection (`cameraFor`,
-  `FACE_FIT`), so no orbital number is typed; turned over 0.9 s in 18
-  camera moves (`guideSwingTo`). The Tutorial switch turned on clears
-  the i note's mark (`GalleryGuide.NOTE_KEY`, held equal to the room's
-  `INFO_HINT_KEY`; `clearNote`). The line about Paloma as ruled at 19:29.
-  Checked: the First guide row (the steps, labels and dots; the face of
-  a Halley-like test orbit made in the check and its camera's fit, to
-  0.002 of the height; the note's key and its clearing; the Paloma line;
-  the wiring), red on the real file broken eighteen ways; the gallery
-  run; the walk 177 passed, 0 failed, measuring the swing at both
-  upright sizes (the camera on the orbit's normal, cos 1.000000; the
-  orbit 65 x 261 px and 49 x 197 px, Halley above the Sun, clear of the
-  card); the planted page still fails at step 2; the drawer walk's same
-  three L-521 failures. THE WALK'S BROWSER: Edge (157) would not start
-  for Playwright that evening, in either headless mode; the walks now
-  run in the computer's Chrome (`WALK_CHANNEL=chrome`, in its new
-  headless mode).
-- **The risk named:** step 2 rests on a tap on a small dot (L-523's
-  wider reach helps; the ring helps the eye). Tony's phone look decides.
-**Gap:** the Code session of the brief, in three parts with a report after each.
-Before Mars (L-514) by Tony's word of 22:42 ("before building more").
-**Ref:** L-494 (the i button's first-visit note); L-517 (the lobby);
-L-515 (one nested tree: Centre on, the drawer); L-523 (taps sent as
-hovers); L-514 (the Mars room, which waits); L-489 (compositions:
-Artemis II in Earth's fold).
 
 #### [L-526] A body whose test fails for a real reason is drawn from the older orbit while held (gallery, the nightly builder's hold; recorded, not built)
 <!-- L:526 status:OPEN upd:2026-11-11 section:A flag: rice: -->
@@ -17344,6 +17014,402 @@ skills/gallery-assembler/SKILL.md, skills/interactive-exhibit/SKILL.md.
 ## PENDING ACTION (Tony-side)
 
 ## C. RECONCILED LEDGER -- DONE (closed; for the record, do not re-do)
+
+#### [L-527] A first visit's guide: a walk-through that waits for the visitor (gallery, the lobby and the Solar System room; built, closed)
+<!-- L:527 status:DONE upd:2026-11-12 section:C flag: rice: -->
+- **Tony's observation, 2026-11-11, 22:42 Chicago,** in the
+  coordinating session (Claude Opus 5.5, through the python_work door,
+  on orrery ceb508c6 and gallery bd65f036), before Mars: a friend on a
+  phone scrolled to the bottom of the front page and did not know what
+  to do; pointed to Explore, closed the i button's first-visit note
+  (L-494) "without a second thought", turned the grid with a thumb, and
+  then: "now what?! that's where i have to explain what the orrery is
+  really about." His idea: the yellow note on more of the key controls
+  (Explore, the Earth System and Stars doors, the room's menu button,
+  the opening scene), each once, and a "Tutorial" button under Featured
+  that turns them on and off. "most people don't even know what an
+  orrery is. i take a lot for granted."
+- **Claude, as proposed, not ruled:** two problems, not one. (1) The
+  front page does not say what this is: a sentence and a picture on the
+  first screen, Explore under it. (2) In the room nobody gives a next
+  step: a note per control explains a button, not the purpose, and a
+  visitor who has tapped "Got it" five times has learned to tap "Got
+  it". Instead, one invitation at a time, each asking for one action and
+  shown only after the last is done.
+- **Ruled, Tony, 22:50 and 22:55:** a one-time walk-through, as
+  described (it waits for the visitor; Skip on every card; remembered by
+  the browser as the i note is; the Tutorial button starts it again;
+  it replaces the i note in the room). A story, not the controls in
+  order: "Attention is everything until they learn how it works. So a
+  fun feature like Halley is a good idea. And I would say also the
+  earth-moon system." Method left to Claude ("I'll lean on your
+  knowledge of tutorials").
+- **Artemis II left out, Tony, 23:02:** the saved picture is "a served
+  html from the orrery and looks different from the interactive we are
+  teaching", and encounters will become saved scenes. So the guide ends
+  at step 4, on Halley; Artemis II becomes step 5 once its flight is a
+  saved scene inside the interactive room.
+- **The four steps, as mocked up (Tony's "Yes", 23:04):** 1, the room
+  today: drag to turn it. 2, tap Earth (a ring marks it). 3, open the
+  menu; on Earth's row, Centre on Earth; then tick the Moon. 4, Home,
+  tick Halley's comet, tap it (the move made by the guide, below). Then the end card, Explore. Each card
+  says "Step n of 4" and gives instructions only: the facts stay in the
+  boxes, which carry their sources, so the guide adds no claim to
+  source. Read at gallery bd65f036: "Centre on <name>" is a button on
+  the body's row in the drawer, not in its box, so step 3 carries both
+  menu actions. The mockup, a sketch with no real positions: the Design
+  canvas "Orrery first-visit guide: four steps",
+  https://claude.ai/artifact/QEXpNBnj8YxDHRfwF4CKLt (private to Tony).
+- **Step 4's move, RULED, Tony, 2026-11-12, 00:23 Chicago: "Yes, C."**
+  Put to him three ways from Earth's view to Halley: (A) the visitor
+  taps "Solar system" in the trail line, opens Comets and Halley-type
+  comets, ticks Halley, taps it; (B) types "Halley" in Find; (C) the
+  guide makes the move. C: the card reads "Next, a comet. Take me
+  there."; one tap returns to the Sun's view, ticks Halley, and shows
+  the menu for a moment folded open at Comets, Halley-type comets,
+  Halley; then "Tap Halley, in the ring." Read at gallery bd65f036: the
+  trail line's "Solar system" opens the Sun's view and keeps the ticks
+  (L-515 ruling 20); Halley sits under `comets_htc` in `comets_all`
+  (`data/objects_config.json`). Added to the mockup as its own screen.
+- **Tony's look at the mockup, 2026-11-12, morning, in his run record**
+  (`WHERE_WE_ARE_11-12-26_0815_run_record.md`), on the seven screens:
+  "looks good". One change to the closing card's words, his: "drawn
+  from JPL's (NASA) live data". Claude raised that the website is not
+  live (a nightly run fetches JPL's data; the desktop orrery is the one
+  that asks live); Tony, 08:30: "your words". The closing card now
+  reads: "That's the orrery: the solar system as it is today, drawn
+  from JPL's (NASA) data, updated every night. Explore on your own, or
+  tap Tutorial to see this again."
+- **The front page, sketched 2026-11-12, morning,** as a second row on
+  the same canvas: the first screen today, a proposed first screen, and
+  a proposed bottom. Read at gallery bd65f036 (`index.html`, the lobby's
+  start card, L-517): the first screen already carries Explore; what it
+  lacks is the reason to press it. Proposed, not ruled: two lines under
+  the name ("An orrery is a model of the solar system that moves." and
+  "This one shows the Sun, the planets, moons, comets and spacecraft
+  where they are today, from JPL's (NASA) data, updated every night.");
+  the card's title "Today's solar system" for "Today's sky, live" (it is
+  not the sky, and not live); its sentence "Turn it, tap a planet, fly
+  to the Moon."; under Featured, a Tutorial row with an on/off switch
+  and its line under it, since a phone has no hover.
+- **The way in, RULED, Tony, 09:07 and 09:15:** "I think the "Explore"
+  does not convey what we are asking. Maybe start the tutorial here."
+  Put to him three ways (A, two choices on the card; B, one button that
+  changes after the first visit; C, a yellow card on the front page as
+  step 0). Tony: "Let's try A". The card's gold button reads "Show me
+  around" and opens the room with the guide; under it, the link
+  "Explore on my own" opens the room with none. Made in the mockup.
+- **One setting, RULED, Tony, 09:32: "Confirmed".** Asked whether
+  "Show me around" reverts after the first visit: yes, and the card and
+  the Tutorial switch are two views of one setting kept in the
+  visitor's browser. First visit: "Show me around" with "Explore on my
+  own", the switch On. After either choice, finished, skipped or
+  explored alone: one button, "Explore the solar system", the switch
+  Off. The switch turned On again brings "Show me around" back, and the
+  next visit to the room runs the guide. Made in the mockup as a fourth
+  front-page screen.
+- **The two lines, RULED, Tony, 09:56 (his run record): "yes".**
+  "approved and pushed" (orrery e0122ef6), and he asked for the Code
+  session's brief. Written the same morning:
+  `documentation/COORD_L527_guide_brief_20261112.md`, every card's
+  words in it. One change of the coordinator's to the end card, said
+  to Tony: "or tap Tutorial to see this again" reads "or turn on
+  Tutorial on the front page to see this again", since the room has no
+  Tutorial. One question left open in the brief, put to Tony: whether
+  the guide runs when the room opens on a shared link or a scene (the
+  coordinator's lean: no, only on the room's plain opening).
+- **A shared link, RULED, Tony, 10:17:** asked whether the guide stays
+  off when the room opens from a shared link or scene: "yes. As you
+  said it should run when first opening the website after we update the
+  front page." The guide runs only on the room's plain opening; the
+  setting is new with the build, so every browser meets the first-visit
+  card once after the update. Written into the brief; the brief is
+  settled.
+- **Part 1, the proposal, read 2026-11-12, 11:36** (the Code session
+  on orrery af8e1bdf and gallery 001d5046): `gallery/first_guide.js`,
+  loaded by both pages; each step done by the page's own function
+  (`sunLabelShow`, `setSunDrawer`, `ssCentreOn`, `ssTick`, `ssHome`),
+  the turn read from the live camera (`sunHudWatch`); the menu opened
+  again after Centre on, which closes it; the ring drawn over the
+  picture by Plotly 2.35.2's own sum for a pinned point; the setting
+  `paloma_orrery_guide` (`on`/`off`, none counts as on), the front
+  page's links carrying `guide=1` or `guide=0`, taken out of the
+  address; the test address `interactive.html?guide=1`; a new run row,
+  "First guide", and a headless walk run by the session.
+- **Part 2's go-ahead, RULED, Tony, 11:44: "yes on both of your
+  changes."** (1) The ring's check can fail: the "First guide" row
+  reads the Plotly version from `interactive.html`'s script line
+  (`cdn.plot.ly/plotly-2.35.2.min.js`, line 521 at 001d5046) and is red,
+  naming both, if it is not 2.35.2; it tests the ring's sum against
+  Plotly's own placement of a point; the walk's report names each step
+  passed and whether the ring was drawn. Tony asked "is that us? what's
+  the guard?": the version moves only by an edit to that line, and no
+  check guarded it before. (2) The i note (L-494) appears once after
+  the end card's Explore, its words as today, so a guided visitor meets
+  the i button that holds the sources (the session's own final
+  thought).
+- **Part 2 built, 2026-11-12, afternoon** (the same Code session, Claude
+  Opus 5.5, on orrery af8e1bdf and gallery 001d5046; not yet committed):
+  `gallery/first_guide.js` (the steps, words, setting, address rule, turn,
+  card places, ring sum); the room's part in `interactive.html` (the card,
+  the ring, a line in each of `sunLabelShow`, `setSunDrawer`, `ssCentreOn`,
+  `ssTick` and `sunHudWatch`; `guideGo` for Take me there); the gallery
+  run's new "First guide" row (`documentation/smoke_first_guide.js`, with
+  Plotly 2.35.2's own placement copied in
+  `documentation/fixture_plotly_2_35_2_placement.js`; red, naming both, on
+  another Plotly); `INTERACTIVE_AS_BUILT.md`'s new section. Skip, like the
+  end card's Explore, turns the setting off and then shows the i note: the
+  brief's rule that with the guide off the note behaves as today, read by
+  the session, for Tony's phone look. The Hover budget check named the
+  note's three callers in place of counting two; the drawer walk's 22a now
+  meets the guide's first card on a first visit.
+  - Checked: the gallery run, offline, "49 of 49 gating checkers passed"
+    (48 of 48 at the base). The walk in a real browser
+    (`tools/headless/walk_first_guide.js`, the computer's Edge, real
+    Plotly 2.35.2, WebGL): 210 checks passed, 8 failed, all eight the
+    sideways menu below; upright at 390 x 844 and 375 x 667 all four
+    steps and the end card passed by the visitor's own actions; the ring
+    drawn on Earth and on Halley at all four sizes, 0.15 to 0.51 px from
+    where Plotly pins the same point, and a click at its centre opened the
+    body's box; every card clear of its target; the setting's eight states
+    (none, off, off with ?guide=1, ?guide=0, a shared link, a browser that
+    keeps nothing, the old note's key, Skip). A planted page without the
+    box signal failed 22 of its checks. The tap, held-body and scene
+    address walks pass; the drawer walk fails the same three (L-521's) on
+    the new page and the base.
+  - Found in the walk, three faults of the guide's, fixed before the
+    report: `scrollIntoView` scrolled the picture's area too (the card and
+    the ring moved off where they were measured, 33 px sideways); a body
+    row's group is `group` in the drawer, not the served `in`; on a
+    sideways phone no place cleared the 90 px frame row, so a card may
+    cover the frame row, never its target.
+  - Found, not the guide's, recorded: (1) ON A PHONE HELD SIDEWAYS THE OPEN
+    MENU SHOWS NO ROWS -- its header, the trail line and Find fill its 40
+    percent of a picture about 315 px tall, the list starting below the
+    screen (measured on the base page, 844 x 390 and 667 x 375) -- so step
+    3 cannot be done sideways; put to Tony. (2) A browser whose storage
+    throws on every read stops at the page's own consent check
+    (`localStorage.getItem(CONSENT_KEY)`, unguarded) before the room opens,
+    guide or not; one row for the class when a session reaches it.
+- **Upright, RULED, Tony, 2026-11-12, 13:18 and 13:44** (on Part 2's
+  report, which found the open menu shows no rows held sideways, and
+  asked to fix it): "we should talk about the landscape (sideways)
+  orientation. it does not work with the drawer system and it does not
+  have to. the portrait orientation should be used." Some saved
+  pictures, Earth Science's above all, may use landscape; the orrery's
+  room does not. Asked whether to say so or leave it to common sense,
+  the coordinator proposed saying it only when it matters; Tony: "yes.
+  you're right." So: held sideways, the room shows one line at the top
+  of the picture, "This room works best with your phone upright." (no
+  popup, nothing to dismiss; the picture still turns and zooms; gone
+  when upright). The guide, held sideways, pauses with its card "Turn
+  your phone upright to continue." and goes on at the same step when
+  upright. The sideways menu is not fixed: not supported, by this
+  ruling, not a fault. The room's phone looks and walks are upright
+  only; the sideways placement already built stays. The rule goes into
+  interactive-exhibit: the room is built and tested upright.
+- **Upright built, 2026-11-12, afternoon** (the same Code session, by the
+  ruling above; not yet committed): `GalleryGuide.SIDEWAYS` ("(orientation:
+  landscape) and (max-height: 500px)", the CSS's own words), `WORDS.sideways`
+  and `WORDS.upright`. Held sideways, `#upright-line` shows by CSS alone in
+  the room, just under the picture's title and its lines
+  (`uprightLinePlace`; first drawn at the very top, it covered the
+  picture's title, seen in the walk's screenshot), touches going through;
+  the guide pauses (`guideSideways`: the paused card keeps the step's label
+  and Skip, no button, no ring; no action counts) and, upright, puts up the
+  same step. The walk's four steps run upright only; sideways it checks the
+  line and the paused card, the picture turning and zooming, and the same
+  step going on upright.
+  - Checked: the First guide row, its self-test now ten breaks, a page on
+    another Plotly and two wrong sideways lines, all caught; its wiring
+    25 places, a planted page without the pause caught. The walk, three
+    runs in a row, 154 passed, 0 failed (two sizes upright, every step;
+    two sizes sideways, 3 checks of the ruling each; the setting's eight
+    states); the planted page without the box signal still fails (22).
+    The tap, held-body and scene-address walks pass; the drawer walk
+    fails L-521's same three as the base.
+  - Seen in the walk, not the guide's, recorded: at 375 x 667 two runs in
+    three failed at step 2 before the walk changed. Plotly picks one pixel,
+    and at some angles a line drawn through Earth's dot takes it: a click
+    dead on the centre opened nothing, 4 px up opened Earth's box (with the
+    line traces hidden the click opened Earth). The walk now taps again 4
+    px off, up to four, each said. Whether a finger meets it is Tony's
+    phone look, the risk named below.
+- **Tony's phone look at the room's guide, 2026-11-12, 15:55**
+  (palomasorrery.com/interactive.html?guide=1, after his push of gallery
+  003c484): "It works well." Four changes, his: (1) "Find home" may read
+  as the Home button, so step 2 reads "Find our home planet: tap Earth,
+  the blue dot in the ring."; (2) American spelling, "Center": the card
+  "tap Center on Earth to fly in." and so the drawer's button, "Center
+  on <name>" (`gallery/solar_system_drawer.js`, its `enter` word), which
+  the card names; (3) American usage, "around": "to see it go around
+  Earth." and "There's the Moon, going around Earth."; (4) held
+  sideways, the line "This room works best with your phone upright." in
+  the cards' yellow, to read apart from the picture. Written into the
+  brief. The ring catching the tap itself, proposed by the coordinator
+  at 15:31 against the walk's off-centre misses, is not built: on
+  Tony's phone the tap on Earth worked. It waits for a miss seen on a
+  phone.
+- **The four changes built, 2026-11-12, late afternoon** (the same Code
+  session): the three cards' words in `gallery/first_guide.js`; the
+  drawer's button "Center on <name>" (`WORDS.enter`), its checks
+  (`documentation/smoke_solar_system_drawer.js`,
+  `tools/headless/walk_solar_system_drawer.js`) and the words "Center
+  on" wherever the gallery's comments, checks and INTERACTIVE_AS_BUILT.md
+  name the button; code names keep "centre" (`ssCentreOn`,
+  `view_centre.js`). The line in the cards' yellow (`--accent`, text
+  `--bg-deep`), held by the First guide check (red on a planted dark
+  line) and by the walk, which reads the line's colours against the
+  card's in the browser. Checked: the gallery run, 49 of 49; the guide walk 154
+  passed, 0 failed, the line rgb(201, 168, 76) on rgb(10, 10, 15) at
+  both sideways sizes; the drawer walk's same three L-521 failures; the
+  scene-address walk PASS.
+  OTHER BRITISH SPELLINGS A VISITOR READS IN THE ROOM, recorded and left
+  as they are (Tony: change only the four): "centre" in the text box's
+  source lines ("measured from the Sun's centre", "the Horizons centre",
+  "<parent>'s centre", interactive.html) and in the words the page typed
+  for the Sun's elements ("the solar system's centre of mass ... around
+  that centre", SOLAR_SYSTEM_CENTRE_WORDS, approved 2026-10-29); "from
+  Earth's centre" (the subsolar point's hover, gallery/earth_geometry.js);
+  "from <body>'s centre, at the magnetic equator" (the radiation belts'
+  hover, gallery/feature_renderers.js); "Galactic centre" (a label in
+  the Hills cloud's words, the same file); "travelled" (the comet and
+  path lines, solid where travelled, interactive.html, twice). In the
+  served words (data/objects_config.json, by the tools that write it):
+  "the galaxy's centre" and "the centre of our galaxy" (the galactic
+  plane's description, note and centre_hover); "Earth's centre" (the
+  magnetopause's about); "the circle's centre" and "modelled" (the
+  terminator's hover); "go round the Sun" (the Sun's spin hover);
+  "travelling" (New Horizons' description). Not a visitor's:
+  console warnings ("colour", "grey"), "kilometres" as a code value
+  (the visitor's line says "kilometer"), the drawings' frame lines, a
+  model's _model note ("parameterised").
+- **Part 3 built, 2026-11-12, evening** (the same Code session, on the
+  coordinator's word with the four changes: "Then go on to Part 3"). The
+  front page (`index.html`): under the name the two lines, served from
+  `gallery/gallery_config.json` ("sentence", and a new "sentence_more";
+  the editor keeps keys it does not know), with the same words typed as
+  the page's fallback; the start card's title "Today's solar system"
+  (LOBBY_START_TITLE and its served title in `gallery_metadata.json`)
+  and its served sentence "Turn it, tap a planet, fly to the Moon.". A
+  first visit (no setting kept): the gold "Show me around" and under it
+  the link "Explore on my own"; once either is kept, one button,
+  "Explore the solar system". The Tutorial row under Featured, above the
+  line about Paloma: "Tutorial", a switch, and its On or Off line. The
+  words and the rules are `gallery/first_guide.js`'s (`FRONT`,
+  `frontView`, `keeps`, `roomAddress`); the page loads it. Decided in
+  the build, each the smallest reading of the brief: every way in
+  carries the choice in the room's address (guide=1 or guide=0, the
+  returning button the setting's own value), so a browser that keeps
+  nothing opens the room as its front page showed it, the switch
+  included; a tap on the card's picture goes the gold button's way; the
+  front page draws the card and the switch again when Back shows it
+  (`pageshow`), the room having written the setting meanwhile. Checked:
+  the First guide row now also holds the front page (the served words,
+  the typed title, the ways in for every setting, the room's answer to
+  each address, the Tutorial row's place, the wiring), red on the real
+  file broken fourteen ways and on a front page planted four ways; the
+  gallery run 49 of 49; the walk 173 passed, 0 failed, its new front-page
+  part walking a first visitor, Show me around, Skip and Back, the
+  switch, Explore on my own, the picture's tap and a browser that keeps
+  nothing; the walk on a page planted without the box signal still fails
+  at step 2. Not checked: Tony's phone look as a first visitor (a private
+  window) and as a returning one. Noted, not changed: the line about
+  Paloma ("name_note") still opens "An orrery is a model of the solar
+  system.", as the new first line under the name now does.
+- **Tony's phone look at the front page and the guide, 2026-11-12,
+  evening** (palomasorrery.com in a private window, after his push of
+  gallery f6533b7 and orrery 2eeeb498; in his run record
+  `WHERE_WE_ARE_11-12-26_0815_run_record.md`): the returning visitor's
+  card and the switch "yes"; steps 2, 3 and the end "okay". His
+  changes: (1) step 1 reads "This is the inner solar system today, seen
+  from above."; (2) the Moon is not animated, so its cards read "Now
+  tick the Moon, to see its orbit around Earth." and "There's the
+  Moon's orbit around Earth. Next, a comet."; (3) Halley becomes its
+  own step: the guide has five steps, "Step n of 5" (read by the
+  coordinator as: 4, the Moon's tick and its "Take me there" card; 5,
+  Halley), and on Take me there the view swings so Halley's elliptical
+  orbit can be seen, the words unchanged; (4) turning the Tutorial
+  switch on also clears the i note's first-visit mark, so the note
+  shows again after the end card. Written into the brief.
+- **The line about Paloma, RULED, Tony, 19:29:** it still opened "An
+  orrery is a model of the solar system.", now said by the first line
+  under the name (the Code session's final thought). Tony: "It could
+  simply read, "I built this digital orrery for my daughter
+  Paloma...."", read by the coordinator as the whole line "I built this
+  digital orrery for my daughter Paloma, whose name is Spanish for
+  dove." (`name_note` in `gallery/gallery_config.json`).
+- **The evening's five changes built, 2026-11-12, night** (the same Code
+  session; the close waits for Tony's next phone look). The words in
+  `gallery/first_guide.js`; five steps (`STEPS_COUNTED` 5, exported as
+  `COUNTED`, which the page now draws its dots from, where it had drawn
+  four by hand): menu and Center on Earth step 3, the Moon's tick and
+  Take me there step 4, Halley step 5, the end card after. THE VIEW
+  CHOSEN for Take me there, and why: straight down on the plane of
+  Halley's drawn orbit, from the north side, its long axis up the
+  screen with the far end (Halley, near aphelion today) at the top, the
+  whole orbit between 14 and 50 percent of the picture's height. Face-on
+  is the one view that shows the ellipse at its true shape, so the
+  "long orbit" of the card reads as long; up the screen because a phone
+  held upright is tall, and the long axis then takes the most room;
+  the top half because the card goes in the half away from Halley's
+  ring, and at 375 x 667 it begins at 54 percent (the first try, 14 to
+  58 percent, ran the Sun's end 21 px under the card in the walk). From
+  the drawn orbit alone (`GalleryGuide.faceOn`: the plane from the sum
+  of p[i] x p[i+1], the long axis toward the farthest point drawn) and
+  the scene's own ranges and Plotly's projection (`cameraFor`,
+  `FACE_FIT`), so no orbital number is typed; turned over 0.9 s in 18
+  camera moves (`guideSwingTo`). The Tutorial switch turned on clears
+  the i note's mark (`GalleryGuide.NOTE_KEY`, held equal to the room's
+  `INFO_HINT_KEY`; `clearNote`). The line about Paloma as ruled at 19:29.
+  Checked: the First guide row (the steps, labels and dots; the face of
+  a Halley-like test orbit made in the check and its camera's fit, to
+  0.002 of the height; the note's key and its clearing; the Paloma line;
+  the wiring), red on the real file broken eighteen ways; the gallery
+  run; the walk 177 passed, 0 failed, measuring the swing at both
+  upright sizes (the camera on the orbit's normal, cos 1.000000; the
+  orbit 65 x 261 px and 49 x 197 px, Halley above the Sun, clear of the
+  card); the planted page still fails at step 2; the drawer walk's same
+  three L-521 failures. THE WALK'S BROWSER: Edge (157) would not start
+  for Playwright that evening, in either headless mode; the walks now
+  run in the computer's Chrome (`WALK_CHANNEL=chrome`, in its new
+  headless mode).
+- **The risk named:** step 2 rests on a tap on a small dot (L-523's
+  wider reach helps; the ring helps the eye). Tony's phone look decides.
+  Decided: on his three phone looks the tap on Earth and on Halley
+  worked.
+- **Tony's phone look at the finished guide, 2026-11-12, 20:34** (after
+  his push of gallery ae0d7ac0 and orrery 6a460394): all five steps, the
+  view's turn to Halley, and the i note after the end card: "the whole
+  sequence works and is very effective." His idea from it is L-529
+  (guided encounters).
+- **CLOSED, 2026-11-12, night,** by the coordinator's word after that
+  look ("Go ahead with the close"), in the same Code session (Claude
+  Opus 5.5, through the python_work door; bases orrery af8e1bdf and
+  gallery 001d5046, closed on orrery 6a460394 and gallery ae0d7ac0).
+  What holds: the guide of five steps in the Solar System room and the
+  front page's way in, as INTERACTIVE_AS_BUILT.md's "A first visit's
+  guide" says; the gallery run's First guide row; the walk
+  (`tools/headless/walk_first_guide.js`, 177 passed, 0 failed, in the
+  computer's Chrome). The rules went into interactive-exhibit 1.42
+  (protocol v3.140): a guide asks for one action and waits for it, and
+  a room is built and tested upright. What does not hold: sideways, the
+  drawer (not supported, by the ruling of 13:18 and 13:44, not a
+  fault). LOOSE ENDS, each re-homed or struck: Artemis II as a step of
+  the guide (23:02: once its flight is a saved scene in the room) went
+  to L-529 (guided encounters), which already names Artemis II; the
+  ring catching the tap itself (proposed 15:31) is struck, three phone
+  looks having found no miss, recorded here if one is seen; the other
+  British spellings a visitor reads (listed above, 15:55) are struck as
+  work, Tony having asked them recorded, not changed: the list above is
+  the record; the walk's off-centre pick and its browser are in
+  INTERACTIVE_AS_BUILT.md's guide section and headless recipe; the
+  drawer walk's three failures belong to L-521.
+**Gap:** none; closed.
+**Ref:** L-494 (the i button's first-visit note); L-517 (the lobby);
+L-515 (one nested tree: Centre on, the drawer); L-523 (taps sent as
+hovers); L-514 (the Mars room, which waits); L-489 (compositions:
+Artemis II in Earth's fold).
 
 #### [L-524] The Kepler solver's start: a stretched orbit's second half solved wrong, the site frozen at 0.3 days, and the frozen date line on a phone (gallery, the assembler and the room's title; built)
 <!-- L:524 status:DONE upd:2026-11-12 section:C flag: rice: -->

@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.139 | November 11, 2026
+Tony Quintanilla, PE | Claude | v3.140 | November 12, 2026
 
-Cut from 02183e4d at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 6a460394 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -556,7 +556,7 @@ gallery-cache-builder        1.19 Nightly builder, atomic swap and its
                                   (HORIZONS_CACHE), a drawing named on a room's
                                   row, an ended mission's last day
                                   (fetch_path_last_day), a held body (HELD)
-interactive-exhibit          1.41 a room or exhibit in interactive.html
+interactive-exhibit          1.42 a room or exhibit in interactive.html
                                   (?exhibit=); its drawer and chrome (nav
                                   cluster, frame zoom, i panel, HUD, text box,
                                   consent, back link); the served words and
@@ -1258,6 +1258,49 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.140 (November 12, 2026, night): No rule changed in this document.
+ONE skill bump: interactive-exhibit 1.41 -> 1.42 (L-527, a first
+visit's guide), by the records skill's binding rule, Tony's go-ahead of
+Nov 12 ("Yes": the skill, the skills index and one protocol version
+entry) and the coordinator's word at the close, after his phone look of
+20:34 ("the whole sequence works and is very effective"). A GUIDE THAT
+WAITS, AND A ROOM HELD UPRIGHT.
+
+WHAT PROMPTED IT. The Claude Code session of Nov 12 (Claude Opus 5.5),
+through the python_work door, built on orrery af8e1bdf and gallery
+001d5046, from Tony's prompt and
+documentation/COORD_L527_guide_brief_20261112.md, in three parts with a
+report and his go-ahead after each, and his phone looks of 15:55, the
+evening and 20:34 between them.
+
+WHAT CHANGED. interactive-exhibit: two rules. A GUIDE ASKS FOR ONE
+ACTION AND WAITS FOR IT: its cards give instructions only, so it adds
+no claim to source; a card ends only on its own action, told by the
+page's own functions and handled by a timer, never inside a Plotly
+event; a camera move it makes is worked out from what is drawn; its
+steps, words, setting and sums are gallery/first_guide.js, held by the
+gallery run's First guide row and walked by
+tools/headless/walk_first_guide.js. And, under Phone first, UPRIGHT
+ONLY (Tony's ruling of Nov 12, 13:18 and 13:44): a room is built and
+tested upright; held sideways it shows one line asking for the phone
+upright, and a guide pauses. Seven field notes of September, each held
+by a rule the skill keeps or by the store writer's suite, and the
+oldest of four version entries (1.39) moved to
+documentation/SKILL_HISTORIES.md, so the skill stays under its cap of
+738 lines (734).
+
+THE OBLIGATION TRAVELS. This session read interactive-exhibit 1.41 from
+the repo's copy, as a Code session does, as the manifest expected. Tony
+reinstalls it (Settings > Skills) and pastes this version into the
+Project's instructions on claude.ai; the next session that loads it
+from the account confirms its copy reads 1.42 before exhibit work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.137 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.139 (November 11, 2026, night): No rule changed in this document.
 ONE skill bump: gallery-cache-builder 1.18 -> 1.19 (L-525, hold the bad
 data), by the records skill's binding rule, Tony's go-ahead of Nov 11
@@ -1338,45 +1381,6 @@ the account confirms its copy reads 1.41 before exhibit work.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.135 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.137 (November 10, 2026, night): No rule changed in this document.
-ONE skill bump: ledger-and-session-records 1.22 -> 1.23 (L-522,
-document caps, step 1), by the records skill's binding rule, Tony's
-go-ahead of that evening ("Yes, go ahead"). THE CAPS ON ONE PAGE, AND
-A CHECK THAT NAMES WHAT IS OVER.
-
-WHAT PROMPTED IT. The Claude Code session of Nov 10, night (Claude Opus
-5.5), through the python_work door, built on orrery ea43f2a1 and
-gallery 2dec9fc5, from Tony's prompt and
-documentation/COORD_L522_step1_caps_brief_20261110.md, in three parts
-with a report and his go-ahead after each.
-
-WHAT CHANGED. A new root page, DOCUMENT_CAPS.md: the three rules (each
-working document has a cap in lines and a home for its old lines; a
-session that adds to one at its cap moves something out first; only
-Tony changes a cap) and the table of caps, each set at the document's
-size that day. The maintenance run's new row "Document caps"
-(doc_index.py --caps) prints every row and is red, by name, on a
-document over its cap, a file not found, a skill with no row, or a row
-it cannot read. ledger-and-session-records: under Where We Are, THE
-CHECK's 130-line half is that row, its date half left on L-396; and a
-turn's close may add one line, "One final thought:", a concern nobody
-asked for (Tony, 16:11). Its oldest of four version entries (1.20)
-moved to documentation/SKILL_HISTORIES.md by the three-entry rule, so
-the skill ends at the 807 lines it began with.
-
-THE OBLIGATION TRAVELS. This session read ledger-and-session-records
-1.22 from the repo's copy, as a Code session does, as the manifest
-expected. Tony reinstalls it (Settings > Skills) and pastes this
-version into the Project's instructions on claude.ai; the next session
-that loads it from the account confirms its copy reads 1.23 before work
-that fires it.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.134 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

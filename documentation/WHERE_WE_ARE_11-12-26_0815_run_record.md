@@ -878,11 +878,153 @@ Orrery:
 
 **Your run order**
 1. Commit and push the website, -- ae0d7ac0100f381f8a24c622ea9b8b6d1ede18a1
-   1. then the orrery. -- 
+   1. then the orrery. -- 6a460394cbedea39fbf07c951f349be1455779a2
 2. On your phone, open `palomasorrery.com/interactive.html?guide=1` and go through all five steps. Watch the view turn at "Take me there".
-3. On the front page, turn Tutorial off and then on again, and go through the guide. The i note should show after the end card.
+3. On the front page, turn Tutorial off and then on again, and go through the guide. The i note should show after the end card. -- the whole sequence works and is very effective. thanks.
 
 **Tony-action rollup**
 - *(do)* Commit and push both folders.
 - *(look)* The phone look: all five steps, the view's turn to Halley, and the i note after the end card.
 - *(decide)* After the look, the go-ahead for the close.
+
+=====================
+
+**Tony:** it works great. i'm thinking this might be a good way to create encounters, with labels and focus rings.
+
+==============================
+
+**Orchestrator:**
+
+Both pushes are on GitHub: the orrery at 6a460394 and the website at ae0d7ac0. Your phone look passed, so the Code session can close.
+
+**Paste this to the Code session:**
+
+```
+Tony's phone look (20:34): all five steps, the view's turn to Halley, and the i note after the end card: "the whole sequence works and is very effective." Pushed: website ae0d7ac0, orrery 6a460394. Go ahead with the close, as the brief's Close section says, including the upright rule in interactive-exhibit.
+```
+
+**On encounters: I think you're onto something.** The guide is really a small engine with three parts:
+- a card that waits for one thing to happen;
+- a ring that stays on a body while the view turns;
+- a camera move worked out from what's drawn, like tonight's swing to face Halley's orbit.
+
+An encounter, such as Voyager at Jupiter or Artemis II around the Moon, could be told the same way. Each card sets the view, rings the craft or the planet, and puts a label at the closest point. Then it waits for "Next", or for a tap on the ring.
+
+Two differences would need design before building:
+- **The words would carry facts.** The guide's cards give instructions only, so they need no sources. An encounter card would say "closest approach, March 5, 1979", and that has to come from the served words with its source, like the boxes do now.
+- **Time.** The room opens at today. An encounter happens on another date, so each card would have to move the date as well as the view. The room doesn't do that yet. It's the date-choosing goal at the end of the road.
+
+Shall I open it as its own ledger item, for a design talk after Mars?
+
+====================
+
+**Tony:** yes, and the date choosing could be served from a pre-fetched data set for objects being shown, not all the objects. it would not depend on an open ended data picker for the solar system room. we would also want the viewer to control when to move on to the next step after the info card is acknowledged.
+
+=======================
+
+**Orchestrator:**
+
+I've opened L-529 (guided encounters) in your orrery ledger, and it reads back from your computer as written. It holds your idea and both of tonight's rulings:
+
+- **The dates.** An encounter's dates come from data fetched ahead of time for that encounter's own bodies only. There's no open-ended date picker for the whole Solar System room. The date-choosing goal at the end of the road stays a separate thing.
+- **The pace.** The visitor moves on when they're ready, after acknowledging each card. Nothing runs on a timer.
+
+Its gap says a design talk comes after Mars, and then the choice of which encounter goes first. It points back to L-527 for the card, the ring and the camera's swing, and to L-507 (historical missions), where encounters were already meant to become saved scenes.
+
+The Code session's close will add to the same ledger file. It reads the file fresh from disk, so L-529 will be there when it does.
+
+**Files for your run record**
+Orrery:
+- ok LEDGER_CONSOLIDATED.md (1 edit: L-529 opened; index rebuilt and checked; read back)
+
+Website: none.
+
+**Tony-action rollup**
+- *(do)* Paste the close go-ahead into the Code session, if you haven't yet.
+- *(do)* Commit and push both folders after its close.
+
+Once the Code session has closed, should I close this coordinating session too (its Where We Are update and the handoff note), or go straight on to Mars here?
+
+=======================
+
+**Code:**
+
+Both bases match GitHub. The orrery shows two files changed since the push, so I'm reading the ledger's change.
+
+The coordinator added L-529 (guided encounters) since your push; I'll leave it as it is. Now the records skill, for the close's rules.
+
+The records skill is 1.23, matching the manifest. Reading its sections on Where We Are, closing an item, and the change log.
+
+Now the interactive-exhibit skill: its head, outline and testing section.
+
+The exhibit skill is at 1.41, matching the manifest, and sits at its 738-line cap. Next I'll write the new rules and 1.42 entry, and move the 1.39 entry and old field notes to the history file.
+
+Writing the skill's edits as one script, so it either all applies or none does.
+
+The skill is at 734 lines, under its cap of 738. Checking the results, then running the skills index.
+
+The manifest now reads 1.42. Next, the protocol's version entry; first, how the history file takes a moved entry.
+
+The protocol is at v3.140, with v3.137 moved down, and the skills index check is OK. Now closing L-527 (a first visit's guide). I'll read its whole block for loose ends first.
+
+Writing the close as one script: L-527's closing lines, its move to the closed section, and the Artemis II line handed to L-529 (guided encounters).
+
+L-527 is closed and the ledger check is OK. Now Where We Are: the page first, then your latest run record.
+
+Your run record has no "not clear" or "let's discuss" lines to carry. Now the page's sections, each at its own anchor; the run-record zone stays untouched.
+
+All three record checks pass. Last, encodings and both folders' change lists.
+
+# The close: L-527 (a first visit's guide) is done
+
+The guide is closed, and its two rules are in the exhibit skill. All the checks pass. The orrery is waiting for your commit and push. The website has nothing new since your push.
+
+Skills read, each matching the manifest:
+- **interactive-exhibit 1.41**, read in full where its rules govern the guide.
+- **ledger-and-session-records 1.23**, read in the parts on Where We Are, closing an item, and the change log.
+- **gallery-pipeline 1.2**, read for Part 3.
+
+Built on orrery 6a460394 and website ae0d7ac0, both matching GitHub.
+
+**What changed**
+- **interactive-exhibit is now 1.42, with two new rules:**
+  - **A guide asks for one action and waits for it.** Its cards give instructions only, so they add nothing that needs a source. A card ends only on its own action, never on a timer. Any camera move is worked out from what is drawn. The First guide check and the guide walk hold it.
+  - **A room is built and tested upright.** This sits under the "Phone first" rule. Held sideways, a room shows one line asking for the phone upright, and the guide pauses. Phone looks and walks are upright.
+- **The skill was at its cap of 738 lines and is now 734.** The 1.39 entry and seven old field notes from September moved to the skill history file. Each of those notes is still covered by a rule or by a check.
+- **The protocol is v3.140.** Its entry says what changed and why, and v3.137 moved down to the protocol history file. The skill manifest now reads 1.42.
+- **L-527 (a first visit's guide) is closed.** It records what holds, what doesn't (the menu held sideways, which your ruling says need not work), and where each loose end went:
+  - **Artemis II as a guide step** went to the coordinator's new L-529 (guided encounters).
+  - **The ring catching the tap itself** is struck: three phone looks found no missed tap.
+  - **The other British spellings** are struck as work, as you asked. The list stays in L-527.
+- **Where We Are**, section by section:
+  - the box says what changed;
+  - the road shows the guide as done;
+  - Settled has the upright ruling, and two lines the skills now carry came off;
+  - Deferred has L-529 (guided encounters);
+  - the signals were read fresh: last night's cache build was OK, and the push gate holds at 0.
+  - The page is at 130 lines, its cap. Your run-record zone is untouched.
+
+**The checks:** the skills index is OK (12 skills), the ledger check is OK (522 items), and the document caps check passed. The gallery run passed 49 of 49 this evening, and the website hasn't changed since.
+
+One final thought: Edge stopped starting for the test browser this evening, so the walks now run in Chrome. If Chrome updates the same way, the walks will stop too. It's recorded in the as-built record and in L-527.
+
+**Files changed since your push (orrery only)**
+- ok `skills/interactive-exhibit/SKILL.md` (11 edits; read plan rewritten by the skills index)
+- ok `documentation/SKILL_HISTORIES.md` (2 edits)
+- ok `PROJECT_INSTRUCTIONS.md` (4 edits; manifest regenerated)
+- ok `documentation/PROJECT_INSTRUCTIONS_HISTORY.md` (1 edit)
+- ok `LEDGER_CONSOLIDATED.md` (3 edits; index regenerated). Its L-529 (guided encounters) is the coordinator's, not mine.
+- ok `documentation/WHERE_WE_ARE.md` (11 edits)
+- Your run record copy shows changes that are yours; I didn't touch it.
+
+**Session size:** the app shows me no token count. This close read about 700 lines of skills, the 134-line page, and parts of the protocol and ledger. It wrote the 7 orrery files above: 713 lines added, 487 removed, most of it the ledger's move and its regenerated index.
+
+**Your run order**
+1. Commit and push the orrery. -- 
+2. Reinstall interactive-exhibit (Settings > Skills), and gallery-cache-builder if you haven't yet.
+3. Paste protocol v3.140 into the Project's instructions on claude.ai.
+
+**Tony-action rollup**
+- *(do)* Commit and push the orrery.
+- *(do)* Reinstall interactive-exhibit, and gallery-cache-builder if not done yet.
+- *(do)* Paste protocol v3.140 into the Project.

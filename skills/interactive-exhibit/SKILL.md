@@ -6,9 +6,24 @@ fires_when: a room or exhibit in interactive.html (?exhibit=); its drawer and ch
 
 # Interactive Exhibit
 
-Read this file in 3 parts: lines 1-261, 262-519, 520-738.
+Read this file in 3 parts: lines 1-257, 258-482, 483-734.
 
-Skill version: 1.41 | 2026-11-11, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.42 | 2026-11-12, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ af8e1bdf and gallery @ 001d5046 (the session's bases;
+Tony's checkpoint pushes since, to gallery ae0d7ac0). v1.42 (L-527, a
+first visit's guide) adds two rules. A GUIDE ASKS FOR ONE ACTION AND
+WAITS FOR IT: its cards give instructions only, so it adds no claim to
+source; a card ends only on its own action, told by the page's own
+functions, never on a timer; a camera move it makes is worked out from
+what is drawn; its steps, words, setting and sums are
+gallery/first_guide.js, held by the gallery run's First guide row and
+walked by tools/headless/walk_first_guide.js. And A ROOM IS BUILT AND
+TESTED UPRIGHT (Tony's ruling of 2026-11-12, 13:18 and 13:44): held
+sideways a room shows one line asking for the phone upright, and the
+phone look and the walks are upright. Seven field notes of September
+(L-278, L-282, L-289, L-334), each held by a rule above them or by the
+writer's own suite, moved to documentation/SKILL_HISTORIES.md.
+Earlier: 1.41 | 2026-11-11, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ 87fb472e and gallery @ e21b6746 (the session's bases;
 Tony's checkpoint pushes since). v1.41 (L-522, document caps, step 2)
 SPLITS THE SKILL: the rules stay here; what interactive.html does now
@@ -53,26 +68,6 @@ barycentre the open white square. Jupiter's and Saturn's openings (the
 symbol alone) are served arrival blocks, which the store writer can now add
 (add_arrival). And L-518's received note on Reset's frame. Read from the
 gallery's code with this session's edits before it was written.
-Earlier: 1.39 | 2026-11-09, evening, with Anthropic's Claude Opus
-5.5, at palomas_orrery @ 09fb6934 and gallery @ 66c9f698. v1.39 (L-519,
-Featured's rethink, part 2) adds PLACES, Tony's design of 2026-11-09,
-14:53 to 15:00 ("I should be able to put the ED138 scene next to the
-ED138 body", "can we put it next to more than one body", "B so I can
-decide what goes where") and his go-ahead that evening, with the Sun's
-shells and the belt's cloud as places ("Yes we can add them"). A card's
-drawer_row is one place or a list; a place may be any row the Solar
-System room's drawer lists -- a body, a group, one of the Sun's shells by
-its served shell key, or the belt's cloud by its drawing's name -- and a
-planet's features will be places the same way once the root draws them
-as rows. The card is one record shown in each place, counted once; Back
-returns to the fold it was opened from; a scene sits in a Scenes fold
-under each row it names, under the Sun when it names none. The gallery
-editor's Solar System door lists the room's own drawer, in the website's
-order, and a card's form has Places in the drawer, Add place... and
-Remove place (tools/drawer_places.py; the gallery run's Drawer places
-row). And Tony's phone look of the same afternoon: Find shows a scene
-whose name holds a body's name beside the body. Read from the gallery's
-code with this session's edits before it was written.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there on
 2026-10-05 (L-418), 2026-10-10 (L-429), 2026-10-14 (L-431), 2026-10-16
 (L-421), 2026-10-17 (L-452), 2026-10-20 (L-456), 2026-10-21 (L-460),
@@ -81,7 +76,7 @@ twice), 2026-10-26 (L-443), 2026-10-27 (L-443), 2026-10-28 (L-443),
 2026-10-29 (L-503), 2026-11-02 (L-507), 2026-11-05 (L-507) and
 2026-11-06 (L-513) and 2026-11-07 (L-515, three times) and 2026-11-08
 (L-517, L-518) and 2026-11-09 (L-519, twice) and 2026-11-10 (L-515)
-and 2026-11-11 (L-522).
+and 2026-11-11 (L-522) and 2026-11-12 (L-527).
 
 ## Contents
 
@@ -108,6 +103,7 @@ if this list and the headings disagree (L-418).
   - Aspect is read, not assumed [QUALITY]
   - Hover text gives km AND AU [QUALITY]
   - Phone first, and the conditions are stated [QUALITY]
+  - A guide asks for one action and waits for it [QUALITY]
   - The touch path is not the mouse path [QUALITY]
   - Hover text is written for the visitor [QUALITY]
   - A feature's info link: NASA if specific, else Wikipedia [QUALITY]
@@ -446,7 +442,7 @@ opens on the first tap, the same box naming the row opens: left-aligned,
 a sentence to a bullet, the feature's colour on its border; a tap on
 empty space closes it); the i panel's "Report a problem" link opens the
 form with the note started; the HUD note (hover on desktop, tap on
-phone); Gallery button then browser back; then landscape; then desktop,
+phone); Gallery button then browser back; then desktop,
 where a mouse resting on a marker opens the same box and moving off
 closes it. Report each
 trial with its conditions -- device, orientation, arrival or after
@@ -454,6 +450,35 @@ which action -- per gallery-assembler's Mode 5 as Measurement. A
 headless run here measures the mechanism; only the phone measures
 legibility. Three of five things built in the week of 2026-09-05
 changed after Tony's eyes saw them.
+
+UPRIGHT ONLY (Tony's ruling of 2026-11-12, 13:18 and 13:44, L-527): a
+room is built and tested upright. Held sideways it shows one line, "This
+room works best with your phone upright.", in the cards' yellow, and the
+picture still turns and zooms; a guide pauses and goes on at the same
+step upright. Sideways is not supported, so what it does to the drawer
+is not a fault; the phone look and the walks are upright, and sideways
+they check only the line and the pause. A saved picture, Earth
+Science's above all, may still be landscape; a room is not.
+
+### A guide asks for one action and waits for it [QUALITY]
+L-527, Tony's rulings of 2026-11-11 and 12. A first visit's guide is
+cards over a room, each asking for ONE action and moving on only when
+that action is done; anything else leaves the card as it is, and a card
+whose action is already done moves on at once. The cards give
+instructions only: every fact stays in the text boxes, which carry
+their sources, so the guide adds no claim to source. A card ends on the
+page's own signal, from the function that does the thing (a box opened,
+the menu, Center on, a tick), handled by a timer, never inside a Plotly
+event; a turn, which Plotly does not report, is read from the live
+camera each frame. A camera move the guide makes is worked out from
+what is drawn (Take me there's view of Halley's orbit), never from a
+typed number. The steps, words, setting and sums are
+`gallery/first_guide.js`; a change to them changes the gallery run's
+First guide row in the same commit, and a change to the room's chrome
+-- a new piece a card must not cover, a renamed function a step listens
+to -- is walked with `tools/headless/walk_first_guide.js` before it
+ships. Where each piece is: the gallery's `INTERACTIVE_AS_BUILT.md`, A
+first visit's guide.
 
 ### The touch path is not the mouse path [QUALITY]
 Plotly fires no camera events during a touch rotation; chrome that
@@ -653,15 +678,6 @@ needs no ruling; whether a feature is drawn at all is Tony's.
 
 ## Field notes
 
-- 2026-09-17, L-334: Tony ruled the config is EDITED IN PLACE with the
-  mirror's scanner, not dumped through `json.dump`. The manifest had
-  proposed accepting a one-time reformat of all 929 lines; the mirror
-  already edits in place, and two writers with two layouts would fight.
-- 2026-09-18, L-334: not every shell is served with all six words --
-  the Sun's core has no `note`. A form that shows a field it can never
-  save is a trap, so the writer ADDS a missing word using the mirror's
-  own insertion. 23 of the 192 shell-and-field combinations in the real
-  config are additions.
 - 2026-09-18, L-334: a check that could not fail. The writer's suite
   asserted that refusing `value` produced a message MENTIONING "value"
   -- and "value" is in the path, so emptying the refusal list left the
@@ -672,25 +688,6 @@ needs no ruling; whether a feature is drawn at all is Tony's.
   and the bow shock drew nothing and two of Earth's sixteen shells were
   never examined. A check that examines less than it appears to is the
   same failure as a check that cannot fail.
-- 2026-09-19, L-334: two copies of the editor lived in the gallery for
-  a day -- `tools/exhibit_store_editor.py` from the patch and a stray
-  at the repo root, saved from a file handed over for reading. They
-  were byte-identical, which is exactly the trap. Deleted.
-- 2026-09-02, L-278: `sunFocusOn` called from inside `plotly_click`
-  killed the page with "Maximum call stack size exceeded" on a stack 25
-  frames deep. Not recursion; a large array applied as arguments inside
-  a half-finished replot. `setTimeout(0)` fixed it. Eight reads to
-  attribute; three wrong readings from inferring conditions.
-- 2026-09-05, L-289: tick values and axis names drawn as scatter3d text
-  on all twelve box edges passed every headless check and failed the
-  phone on three counts. Rebuilt as page chrome (triad, chip, note).
-- 2026-09-06, L-289: four defects in the rebuild, all from the desktop
-  and phone pass: `hidden` beaten by a class rule; grid colours read as
-  a second key beside the triad (withdrawn); arrival dtick unset; touch
-  rotation fires no camera events. None visible headless.
-- 2026-09-05, L-282: the "Gallery" button was a plain link, so Safari's
-  back walked into the exhibit from the lobby. history.back() when the
-  gallery is behind.
 - 2026-09-06, L-288: Studio authors the exhibit's card; the card is a
   placard with an Interactive tag and needs no picture (the lobby
   settled that on the phone).
@@ -730,9 +727,8 @@ Author here: `skills/interactive-exhibit/SKILL.md` in the orrery repo.
 Install to the account (Settings > Skills). Run `skills_index.py` so the
 manifest in PROJECT_INSTRUCTIONS.md carries the version. Per Stale Skill
 = Stop, the session that installs a version cannot verify the install.
-Earlier installs and their confirmations, 1.0 to 1.40:
+Earlier installs and their confirmations, 1.0 to 1.41:
 documentation/SKILL_HISTORIES.md, under interactive-exhibit.
-1.41 was cut on 2026-11-11 in the Claude Code session for L-522 step 2,
-through the python_work door, from the repo's copy of 1.40; a session
-that loads the account's copy confirms it reads 1.41 before exhibit
-work.
+1.42 was cut on 2026-11-12 in the Claude Code session for L-527, through
+the python_work door, from the repo's copy of 1.41; a session that loads
+the account's copy confirms it reads 1.42 before exhibit work.

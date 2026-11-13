@@ -1053,6 +1053,27 @@ Tony's phone look of 1.37 ("Tap to update."), which the account's first
 copy of 1.37 did not. Read from the gallery's code with this session's
 edits before it was written.
 (Moved down 2026-11-11, when 1.41 made a fourth entry.)
+1.39 | 2026-11-09, evening, with Anthropic's Claude Opus
+5.5, at palomas_orrery @ 09fb6934 and gallery @ 66c9f698. v1.39 (L-519,
+Featured's rethink, part 2) adds PLACES, Tony's design of 2026-11-09,
+14:53 to 15:00 ("I should be able to put the ED138 scene next to the
+ED138 body", "can we put it next to more than one body", "B so I can
+decide what goes where") and his go-ahead that evening, with the Sun's
+shells and the belt's cloud as places ("Yes we can add them"). A card's
+drawer_row is one place or a list; a place may be any row the Solar
+System room's drawer lists -- a body, a group, one of the Sun's shells by
+its served shell key, or the belt's cloud by its drawing's name -- and a
+planet's features will be places the same way once the root draws them
+as rows. The card is one record shown in each place, counted once; Back
+returns to the fold it was opened from; a scene sits in a Scenes fold
+under each row it names, under the Sun when it names none. The gallery
+editor's Solar System door lists the room's own drawer, in the website's
+order, and a card's form has Places in the drawer, Add place... and
+Remove place (tools/drawer_places.py; the gallery run's Drawer places
+row). And Tony's phone look of the same afternoon: Find shows a scene
+whose name holds a body's name beside the body. Read from the gallery's
+code with this session's edits before it was written.
+(Moved down 2026-11-12, when 1.42 made a fourth entry.)
 
 Install and verify, as the skill carried it at 1.40, moved here
 on 2026-11-11 (L-522, document caps, step 2):
@@ -1111,6 +1132,44 @@ copy confirms it reads 1.39 before exhibit work. 1.40 was cut on
 2026-11-10 in the website Code session for L-515 step 2b, through the
 python_work door, from the repo's copy of 1.39; a session that loads the
 account's copy confirms it reads 1.40 before exhibit work.
+1.41 was cut on 2026-11-11 in the Claude Code session for L-522 step 2,
+through the python_work door, from the repo's copy of 1.40; a session
+that loads the account's copy confirms it reads 1.41 before exhibit
+work.
+
+Field notes, as the skill carried them at 1.41, moved here on
+2026-11-12 (L-527), each held by a rule the skill keeps (Never mutate a
+plot from inside a Plotly event handler; Scene text is scenery; The
+touch path is not the mouse path; Only two tools write the served
+config) or by the store writer's own suite:
+- 2026-09-17, L-334: Tony ruled the config is EDITED IN PLACE with the
+  mirror's scanner, not dumped through `json.dump`. The manifest had
+  proposed accepting a one-time reformat of all 929 lines; the mirror
+  already edits in place, and two writers with two layouts would fight.
+- 2026-09-18, L-334: not every shell is served with all six words --
+  the Sun's core has no `note`. A form that shows a field it can never
+  save is a trap, so the writer ADDS a missing word using the mirror's
+  own insertion. 23 of the 192 shell-and-field combinations in the real
+  config are additions.
+- 2026-09-19, L-334: two copies of the editor lived in the gallery for
+  a day -- `tools/exhibit_store_editor.py` from the patch and a stray
+  at the repo root, saved from a file handed over for reading. They
+  were byte-identical, which is exactly the trap. Deleted.
+- 2026-09-02, L-278: `sunFocusOn` called from inside `plotly_click`
+  killed the page with "Maximum call stack size exceeded" on a stack 25
+  frames deep. Not recursion; a large array applied as arguments inside
+  a half-finished replot. `setTimeout(0)` fixed it. Eight reads to
+  attribute; three wrong readings from inferring conditions.
+- 2026-09-05, L-289: tick values and axis names drawn as scatter3d text
+  on all twelve box edges passed every headless check and failed the
+  phone on three counts. Rebuilt as page chrome (triad, chip, note).
+- 2026-09-06, L-289: four defects in the rebuild, all from the desktop
+  and phone pass: `hidden` beaten by a class rule; grid colours read as
+  a second key beside the triad (withdrawn); arrival dtick unset; touch
+  rotation fires no camera events. None visible headless.
+- 2026-09-05, L-282: the "Gallery" button was a plain link, so Safari's
+  back walked into the exhibit from the lobby. history.back() when the
+  gallery is behind.
 
 ## safe-file-editing
 
