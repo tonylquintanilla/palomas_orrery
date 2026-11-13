@@ -1,8 +1,8 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 12, 2026, night: the Code session (Opus) that built the first visit's guide (L-527 (a first visit's guide)).
-- Written at orrery 6a46039 and gallery ae0d7ac (your pushes of the guide).
+Last updated: November 12, 2026, night: the coordinating session (Opus) of the first visit's guide, at its close, after the Code session that built it (L-527 (a first visit's guide)).
+- Written at orrery c67d9c6 and gallery ae0d7ac (your pushes of the guide and its close).
 
 > **READ THIS FIRST**
 >
@@ -11,12 +11,10 @@ Last updated: November 12, 2026, night: the Code session (Opus) that built the f
 > - The front page says what an orrery is in two lines and offers "Show me around" or "Explore on my own"; the Tutorial switch near the bottom turns the guide back on.
 > - The room is built and tested upright; held sideways it asks for the phone upright. That rule and the guide's are in the exhibit skill, now 1.42.
 >
-> **Do next:** *Mars (L-514 (the Mars room)), after a night with the hold switched on.*
+> **Do next:** *Mars (L-514 (the Mars room)), with a new coordinating session: `documentation/HANDOFF_website_coordination_20261112.md`. The hold's first nights were green, nothing held (Nov 12).*
 >
 > **Needs you now:**
-> - *(do) Commit and push the orrery: the ledger, this page, the exhibit skill, the protocol (v3.140) and the two history files (the website is pushed).*
-> - *(do) Reinstall interactive-exhibit (Settings > Skills), and gallery-cache-builder if not done yet, and paste protocol v3.140 into the Project.*
-> - *(do) The phone look at the frozen date line, with `?freeze=1`, upright and sideways, if not done yet.*
+> - *(do) Commit and push the orrery: this page and the coordinator's handoff.*
 > - *(do) Each morning, Fetch origin and Pull origin on both, orrery then website, before any work. If Pull origin shows up only once you have changes: Commit them first, then Pull origin, then Push origin. If Desktop stashes your changes anyway, restore them at once: Changes tab, Stashed Changes, Restore.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
 
@@ -121,7 +119,7 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- This session: L-527 (a first visit's guide), with L-529 (guided encounters) from it; the brief, `COORD_L527_guide_brief_20261112.md`; the rules, interactive-exhibit 1.42; the page's, `INTERACTIVE_AS_BUILT.md` (website), "A first visit's guide".
+- This session: L-527 (a first visit's guide), with L-529 (guided encounters) from it; the coordinator's handoff, `HANDOFF_website_coordination_20261112.md`; the brief, `COORD_L527_guide_brief_20261112.md`; the rules, interactive-exhibit 1.42; the page's, `INTERACTIVE_AS_BUILT.md` (website), "A first visit's guide".
 - The caps: `DOCUMENT_CAPS.md`; L-522 (document caps); its brief
   `COORD_L522_step1_caps_brief_20261110.md` and the review beside it.
 - The tree: L-515 (one nested tree); `COORD_L515_step2b_brief_20261109.md`

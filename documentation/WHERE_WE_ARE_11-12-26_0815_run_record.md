@@ -1017,12 +1017,12 @@ One final thought: Edge stopped starting for the test browser this evening, so t
 - ok `documentation/WHERE_WE_ARE.md` (11 edits)
 - Your run record copy shows changes that are yours; I didn't touch it.
 
-**Session size:** the app shows me no token count. This close read about 700 lines of skills, the 134-line page, and parts of the protocol and ledger. It wrote the 7 orrery files above: 713 lines added, 487 removed, most of it the ledger's move and its regenerated index.
+**Session size:** the app shows me no token count. This close read about 700 lines of skills, the 134-line page, and parts of the protocol and ledger. It wrote the 7 orrery files above: 713 lines added, 487 removed, most of it the ledger's move and its regenerated index. -- Code context 42% used.
 
 **Your run order**
-1. Commit and push the orrery. -- 
-2. Reinstall interactive-exhibit (Settings > Skills), and gallery-cache-builder if you haven't yet.
-3. Paste protocol v3.140 into the Project's instructions on claude.ai.
+1. Commit and push the orrery. -- c67d9c6de4354f4479db98d28c462919435a835e
+2. Reinstall interactive-exhibit (Settings > Skills), and gallery-cache-builder if you haven't yet. -- done
+3. Paste protocol v3.140 into the Project's instructions on claude.ai. -- done
 
 **Tony-action rollup**
 - *(do)* Commit and push the orrery.
