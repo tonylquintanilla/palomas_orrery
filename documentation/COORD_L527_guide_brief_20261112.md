@@ -129,6 +129,16 @@ room works best with your phone upright." is in the yellow of the
 cards, so it reads apart from the picture. The words above are the
 changed ones.
 
+**Changed after Tony's second phone look** (Nov 12, evening, his
+words; L-527 holds them). Step 1: "This is the inner solar system
+today, seen from above." The Moon is not animated: "Now tick the Moon,
+to see its orbit around Earth." and "There's the Moon's orbit around
+Earth. Next, a comet." Halley is its own step, so there are five
+("Step n of 5"): 4 is the Moon's tick and its Take me there card, 5 is
+Halley; on Take me there the view swings so Halley's elliptical orbit
+can be seen. Turning the Tutorial switch on also clears the i note's
+first-visit mark. These words stand over the older ones above.
+
 ## Start
 
 1. The gallery's CLAUDE.md from its first step, then the orrery's. Both

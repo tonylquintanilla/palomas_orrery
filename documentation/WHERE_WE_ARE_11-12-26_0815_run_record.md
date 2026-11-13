@@ -735,10 +735,154 @@ Orrery:
 
 **Your run order**
 1. Commit and push the website. -- f6533b7f26ac7f184874181c856cf3a07def562e
+   1. orrery -- 2eeeb4980f9ea79f41507a862bd485bbab701886
 2. In a private window, open palomasorrery.com: the two lines, the card, "Show me around", then Skip.
-3. Go back to the front page: one button, and the switch off. Turn the switch on, and "Explore the solar system" runs the guide.
+   1. step 1: change "solar system" to "inner solar system"
+   2. step 2: okay
+   3. step 3: okay
+   4. step 4: change "to see it go around Earth" to "to see its orbit around Earth" and in the second card, change "There's the Moon, going around Earth" to "There's the Moon's orbit around Earth", since it is not animated.
+   5. step 4: make this step 5, Halley. and swing the view so that one can see Halley's elliptical orbit. The words are okay.
+   6. when resetting the tutorial also reset the notification about the info button, in this step
+   7. The end: okay
+3. Go back to the front page: one button, and the switch off. Turn the switch on, and "Explore the solar system" runs the guide. -- yes
 
 **Tony-action rollup**
 - *(decide)* The close: wait for your phone look, or go straight on.
 - *(do)* Commit and push the website.
 - *(look)* The front page on your phone, as a first visitor and as a returning one.
+
+==========================
+
+**Orchestrator:**
+
+I'll confirm both pushes, read the line about Paloma that the session flagged, then record your phone look.
+
+Your phone-look notes are in L-527 and the brief, and both read back from your computer as written. Both of your pushes are on GitHub: the website at f6533b7 and the orrery at 2eeeb498.
+
+I read one of your notes a particular way, so check it in the text below. You said to make Halley "step 5". I took that to mean the guide grows to five steps: step 4 is the Moon (tick it, then the "Take me there" card), and step 5 is Halley.
+
+**Paste this to the Code session:**
+
+```
+Tony's phone look at the front page and the guide (evening): the returning visitor's card and the switch work; steps 2, 3 and the end card are okay. His changes, now in L-527 and the brief:
+
+1. Step 1 reads: "This is the inner solar system today, seen from above."
+2. The Moon is not animated, so: "Now tick the Moon, to see its orbit around Earth." and "There's the Moon's orbit around Earth. Next, a comet."
+3. Halley becomes its own step. The guide has five steps, "Step n of 5" with five dots: step 4 is the Moon's tick and its "Take me there" card; step 5 is Halley. On "Take me there", the view swings so Halley's elliptical orbit can be seen (the words unchanged). Say in your report what view you chose and why.
+4. Turning the Tutorial switch on also clears the i note's first-visit mark, so the note shows again after the end card.
+
+Your question: the close waits. Build these, run the checks, report, and Tony does one more phone look before the close.
+```
+
+**Files for your run record**
+Orrery:
+- ok documentation/COORD_L527_guide_brief_20261112.md (1 edit: your second phone look's changes; read back)
+- ok LEDGER_CONSOLIDATED.md (1 edit: L-527 gains your second phone look and the open question below; index rebuilt and checked; read back)
+
+Website: none from me.
+
+**Your run order**
+1. Answer the question below. I'll pass it to the session with the next report.
+2. Paste the text above into the Code session.
+3. After its report, one more phone look in a private window.
+
+The session's final thought is fair. The line about Paloma further down the front page reads: *"An orrery is a model of the solar system. I built this one for my daughter Paloma, whose name is Spanish for dove."* Its first sentence now repeats the new line at the top. Should it read just *"I built this one for my daughter Paloma, whose name is Spanish for dove."*? -- It could simply read, "I built this digital orrery for my daughter Paloma...."
+
+=======================
+
+**Code:**
+
+I'm reading how the room draws Halley's orbit, so the guide can turn the view to face it. Then the words and the five steps.
+
+Edge won't start for my test browser right now. I'm checking whether the real walk starts, to tell a broken probe apart from a broken browser.
+
+Edge on this computer is now version 157, which has dropped the old headless mode that this Playwright asks for. I'm trying the new one instead.
+
+Chrome is installed too. Trying it as the walk's browser.
+
+Chrome works. Reading the probe's first lines.
+
+Chrome works and the probe fixed the room's view scale, so I'm turning the camera to look straight down on Halley's orbital plane with the orbit in the top part of the screen, above the card. Next I'm editing the guide's file.
+
+Now the view's math, the i note's key, and the header lines.
+
+Now the swing in the room's page.
+
+Now the front page's switch clears the note's mark, and the new Paloma line.
+
+Now the First guide check. Reading the step cases.
+
+Now new cases for the swing, the note and the Paloma line.
+
+The check passes and catches all 18 breaks. Updating its count in the notes.
+
+Now the walk. Reading its Take me there part.
+
+The view swing works in both sizes, but on the smaller phone the orbit's bottom end runs 21 px under the card, and the page still draws four dots. Fixing both.
+
+The whole walk passes, 177 of 177. Here's how the view looks.
+
+The orbit now reads as a long ellipse, with Halley at the top and the Sun below, and the card is clear of it. Next: the gallery run, the planted page and the other walks.
+
+The planted page still fails at step 2, and the drawer walk shows only its same three old failures. Now the as-built page.
+
+Now L-527 in the ledger.
+
+Everything's ASCII with LF endings, and the ledger check is OK. Waiting for the gallery run to finish.
+
+The gallery run is still going; I'll report once its result is in.
+
+# Your five changes from the phone look
+
+All five are built and checked, and the close waits for your next phone look. Nothing is committed.
+
+**What changed**
+1. **Step 1** reads "This is the inner solar system today, seen from above. Drag with one finger to turn it."
+2. **The Moon's cards** read "Now tick the Moon, to see its orbit around Earth." and "There's the Moon's orbit around Earth. Next, a comet."
+3. **Halley is now step 5 of 5.**
+   - Step 3 is the menu and Center on Earth.
+   - Step 4 is the Moon's tick and "Take me there".
+   - The card shows five dots. The page had drawn four dots by hand; it now takes the count from the guide's own file.
+4. **The Tutorial switch, turned on, clears the i note's first-visit mark.** The note shows again after the end card.
+5. **The line about Paloma** reads "I built this digital orrery for my daughter Paloma, whose name is Spanish for dove."
+
+**The view I chose for "Take me there."** After the menu closes, the view turns smoothly over about a second. It ends up looking straight down on Halley's orbit, with the orbit's long axis running up the screen and Halley at the top.
+- **Straight down on the orbit** is the one view that shows the ellipse at its true shape, so the card's "long orbit" reads as long.
+- **Up the screen** because an upright phone is tall, so the long axis gets the most room.
+- **In the top half of the picture** because the card sits in the half away from Halley's ring. On the smaller phone size the card starts just past halfway down the picture. My first try ran the Sun's end of the orbit 21 px under the card; the orbit now ends just above it.
+- **Worked out from the drawn orbit itself,** so no orbital number is typed into the page.
+
+**The checks**
+- **The gallery run:** 49 of 49 passed. The First guide check now also covers the five steps and dots, the view's maths on a test orbit shaped like Halley's, the note being cleared, and the Paloma line. It caught each of 18 faults planted in the guide's file.
+- **The walk:** 177 passed, 0 failed. At both phone sizes it confirmed the camera looks straight down on Halley's orbit and that the whole orbit is on screen and clear of the card. It measured 65 x 261 px on the larger phone and 49 x 197 px on the smaller one.
+- **A planted page** without the box signal still fails at step 2, as it must.
+- **The drawer walk** shows the same three old failures.
+
+**One thing that changed on my side:** Edge on this computer stopped starting for the test browser this evening, so the walks now run in Chrome.
+
+**Files changed since your push**
+
+Website:
+- ok `gallery/first_guide.js` (6 edits)
+- ok `interactive.html` (5 edits)
+- ok `index.html` (1 edit)
+- ok `gallery/gallery_config.json` (1 edit)
+- ok `documentation/smoke_first_guide.js` (6 edits)
+- ok `tools/headless/walk_first_guide.js` (5 edits)
+- ok `gallery_maintenance_run.py` (1 edit)
+- ok `INTERACTIVE_AS_BUILT.md` (6 edits)
+- Rewritten by the gallery run itself: `MODULE_ATLAS.md`, `MODULE_INDEX.md` and the three pull stamps in `data/`.
+
+Orrery:
+- ok `LEDGER_CONSOLIDATED.md` (1 edit to L-527)
+
+**Your run order**
+1. Commit and push the website, -- ae0d7ac0100f381f8a24c622ea9b8b6d1ede18a1
+   1. then the orrery. -- 
+2. On your phone, open `palomasorrery.com/interactive.html?guide=1` and go through all five steps. Watch the view turn at "Take me there".
+3. On the front page, turn Tutorial off and then on again, and go through the guide. The i note should show after the end card.
+
+**Tony-action rollup**
+- *(do)* Commit and push both folders.
+- *(look)* The phone look: all five steps, the view's turn to Halley, and the i note after the end card.
+- *(decide)* After the look, the go-ahead for the close.

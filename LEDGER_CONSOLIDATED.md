@@ -1945,6 +1945,63 @@ check `tools/test_kepler_solver.py`); L-525 (hold the bad data).
   window) and as a returning one. Noted, not changed: the line about
   Paloma ("name_note") still opens "An orrery is a model of the solar
   system.", as the new first line under the name now does.
+- **Tony's phone look at the front page and the guide, 2026-11-12,
+  evening** (palomasorrery.com in a private window, after his push of
+  gallery f6533b7 and orrery 2eeeb498; in his run record
+  `WHERE_WE_ARE_11-12-26_0815_run_record.md`): the returning visitor's
+  card and the switch "yes"; steps 2, 3 and the end "okay". His
+  changes: (1) step 1 reads "This is the inner solar system today, seen
+  from above."; (2) the Moon is not animated, so its cards read "Now
+  tick the Moon, to see its orbit around Earth." and "There's the
+  Moon's orbit around Earth. Next, a comet."; (3) Halley becomes its
+  own step: the guide has five steps, "Step n of 5" (read by the
+  coordinator as: 4, the Moon's tick and its "Take me there" card; 5,
+  Halley), and on Take me there the view swings so Halley's elliptical
+  orbit can be seen, the words unchanged; (4) turning the Tutorial
+  switch on also clears the i note's first-visit mark, so the note
+  shows again after the end card. Written into the brief.
+- **The line about Paloma, RULED, Tony, 19:29:** it still opened "An
+  orrery is a model of the solar system.", now said by the first line
+  under the name (the Code session's final thought). Tony: "It could
+  simply read, "I built this digital orrery for my daughter
+  Paloma...."", read by the coordinator as the whole line "I built this
+  digital orrery for my daughter Paloma, whose name is Spanish for
+  dove." (`name_note` in `gallery/gallery_config.json`).
+- **The evening's five changes built, 2026-11-12, night** (the same Code
+  session; the close waits for Tony's next phone look). The words in
+  `gallery/first_guide.js`; five steps (`STEPS_COUNTED` 5, exported as
+  `COUNTED`, which the page now draws its dots from, where it had drawn
+  four by hand): menu and Center on Earth step 3, the Moon's tick and
+  Take me there step 4, Halley step 5, the end card after. THE VIEW
+  CHOSEN for Take me there, and why: straight down on the plane of
+  Halley's drawn orbit, from the north side, its long axis up the
+  screen with the far end (Halley, near aphelion today) at the top, the
+  whole orbit between 14 and 50 percent of the picture's height. Face-on
+  is the one view that shows the ellipse at its true shape, so the
+  "long orbit" of the card reads as long; up the screen because a phone
+  held upright is tall, and the long axis then takes the most room;
+  the top half because the card goes in the half away from Halley's
+  ring, and at 375 x 667 it begins at 54 percent (the first try, 14 to
+  58 percent, ran the Sun's end 21 px under the card in the walk). From
+  the drawn orbit alone (`GalleryGuide.faceOn`: the plane from the sum
+  of p[i] x p[i+1], the long axis toward the farthest point drawn) and
+  the scene's own ranges and Plotly's projection (`cameraFor`,
+  `FACE_FIT`), so no orbital number is typed; turned over 0.9 s in 18
+  camera moves (`guideSwingTo`). The Tutorial switch turned on clears
+  the i note's mark (`GalleryGuide.NOTE_KEY`, held equal to the room's
+  `INFO_HINT_KEY`; `clearNote`). The line about Paloma as ruled at 19:29.
+  Checked: the First guide row (the steps, labels and dots; the face of
+  a Halley-like test orbit made in the check and its camera's fit, to
+  0.002 of the height; the note's key and its clearing; the Paloma line;
+  the wiring), red on the real file broken eighteen ways; the gallery
+  run; the walk 177 passed, 0 failed, measuring the swing at both
+  upright sizes (the camera on the orbit's normal, cos 1.000000; the
+  orbit 65 x 261 px and 49 x 197 px, Halley above the Sun, clear of the
+  card); the planted page still fails at step 2; the drawer walk's same
+  three L-521 failures. THE WALK'S BROWSER: Edge (157) would not start
+  for Playwright that evening, in either headless mode; the walks now
+  run in the computer's Chrome (`WALK_CHANNEL=chrome`, in its new
+  headless mode).
 - **The risk named:** step 2 rests on a tap on a small dot (L-523's
   wider reach helps; the ring helps the eye). Tony's phone look decides.
 **Gap:** the Code session of the brief, in three parts with a report after each.
