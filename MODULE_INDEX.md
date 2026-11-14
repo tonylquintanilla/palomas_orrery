@@ -1,7 +1,7 @@
 <!-- Doc-Kind: generated | The human-browsable module index, rebuilt by module_atlas.py alongside the atlas. Do not hand-edit. -->
 # Paloma's Orrery - Module Index
 
-**Generated:** November 11, 2026 by `module_atlas.py`  
+**Generated:** November 14, 2026 by `module_atlas.py`  
 **Repository:** Paloma's Orrery - Solar System Visualization Suite  
 **Philosophy:** Data Preservation is Climate Action
 
@@ -12,8 +12,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 176  
-**Total Lines of Code (non-blank):** 140,543  
-**Total Public Functions/Classes:** 1,820
+**Total Lines of Code (non-blank):** 141,780  
+**Total Public Functions/Classes:** 1,836
 
 ## Classification Coverage
 
@@ -45,7 +45,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `earth_system_visualization_gui.py` | Earth System Visualization GUI for Paloma's Orrery Hub window with climate data visualizations (1,903 lines) |
 | `orbital_param_viz.py` | Interactive orbital element visualization tool. (1,965 lines) |
 | `palomas_orrery.py` | Main GUI and plotting engine for Paloma's Orrery. (9,850 lines) |
-| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (3,756 lines) |
+| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (3,796 lines) |
 | `star_visualization_gui.py` | Stellar visualization GUI for Paloma's Orrery. (1,409 lines) |
 
 ---
@@ -189,7 +189,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | Module | Description |
 |--------|-------------|
 | `scenarios_coral_bleaching.py` | Paloma's Orrery: Coral Bleaching Scenario Definitions Provides fetch function + SCENARIOS list for the earth_system_generator engine. Data Source: NOAA Coral Reef Watch (ERDDAP API) - Degree Heating Weeks (DHW) (193 lines) |
-| `scenarios_food_insecurity.py` | Scenario registry for the IPC acute food-insecurity KMZ layers (Earth System family). (37 lines) |
+| `scenarios_food_insecurity.py` | Scenario registry for the IPC acute food-insecurity KMZ layers (Earth System family). (43 lines) |
 | `scenarios_heatwaves.py` | Paloma's Orrery: Heatwave Scenario Definitions Provides fetch function + SCENARIOS list for the earth_system_generator engine. Data Source: ERA5 via Open-Meteo Archive API (711 lines) |
 | `scenarios_western_heatwave_march_2026.py` | Paloma's Orrery: Western North America Heat Dome - March 2026 Scenario Module: Parameterized Timeline Snapshots (1,538 lines) |
 
@@ -231,7 +231,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `export_drawings.py` | - write the orrery's stored drawings into data/drawings/, one file per drawing, for the website to pull and draw. (436 lines) |
 | `export_objects.py` | - write data/objects_export.json from the object list in celestial_objects.py. The orrery is the one definition of each object; the gallery reads this file and never reads orrery source. (812 lines) |
 | `export_orbit_cache.py` | DEPRECATED: export_orbit_cache.py Obsolete since November 4, 2026 (L-512, ruling 0): data/orbit_paths.json is retired. Run on purpose, this script still reads data/orbit_paths.json and data/osculating_cache.json (read-only), and stops with "caches not found" when either is missing, so once Tony d... (629 lines) |
-| `food_insecurity_generator.py` | IPC acute food-insecurity KMZ layer (Sudan, current period). (702 lines) |
+| `food_insecurity_generator.py` | IPC acute food-insecurity KMZ layer (Sudan, three periods, for Google Earth on the web). (1,893 lines) |
 | `horizons_check.py` | - check each object the website serves against JPL Horizons: that its entry names exactly one object, that the object's id, index and name are what the orrery's list says, and that the orbital period the website prints is the one JPL gives. And re-read each spacecraft's Horizon... (1,245 lines) |
 | `ledger_index.py` | Generate the at-a-glance INDEX for the consolidated ledger. (715 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |

@@ -1,10 +1,10 @@
 <!-- Doc-Kind: generated | The provenance audit: every numeric claim scored against its citation, rebuilt by provenance_scanner.py on each run. Do not hand-edit. -->
 # Paloma's Orrery -- Provenance Audit
 
-Generated: November 11, 2026
+Generated: November 14, 2026
 Files scanned: 176
-Total findings: 1165
-Constants: 307 | Dicts: 75 | Display strings: 783
+Total findings: 1171
+Constants: 310 | Dicts: 77 | Display strings: 784
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -20,12 +20,12 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T1 by domain | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|--------------|---:|---:|---:|--------:|
+| 20261114T210542Z | `594e562` | 176 | 1171 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 713 | 181 | 6 | 0 |
+| 20261114T205704Z | `594e562` | 176 | 1171 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 713 | 181 | 6 | 0 |
+| 20261114T195237Z | `594e562` | 176 | 1171 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 713 | 181 | 6 | 0 |
 | 20261111T160521Z | `eb77137` | 176 | 1165 | 276 | orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2 | 707 | 176 | 6 | 0 |
 | 20261111T153103Z | `eb77137` | 176 | 1165 | 276 | orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2 | 707 | 176 | 6 | 0 |
 | 20261111T021609Z | `fd2a28a` | 176 | 1165 | 276 | orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2 | 707 | 176 | 6 | 0 |
-| 20261111T003053Z | `ea43f2a` | 176 | 1165 | 276 | orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2 | 707 | 176 | 6 | 0 |
-| 20261110T195324Z | `d039089` | 176 | 1165 | 276 | orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2 | 707 | 176 | 6 | 0 |
-| 20261110T174016Z | `3198bc9` | 176 | 1165 | 276 | orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2 | 707 | 176 | 6 | 0 |
 
 Change since the previous run: total +0, Tier-1 +0.
 
@@ -60,12 +60,12 @@ No file's Tier-1 count rose.
 
 | Tier | Score | Action | Count |
 |------|-------|--------|------:|
-| 1 | 16-20 | FIX NOW | 276 |
-| 2 | 10-15 | REVIEW | 707 |
-| 3 | 5-9 | LOW PRIORITY | 176 |
+| 1 | 16-20 | FIX NOW | 271 |
+| 2 | 10-15 | REVIEW | 713 |
+| 3 | 5-9 | LOW PRIORITY | 181 |
 | 4 | 1-4 | LOWEST PRIORITY | 6 |
 
-**Whole tree, Tier-1: 276: orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2.** By each file's docstring `Domain:` tag; Findings by File Type below has every tier and every domain. The push gate is the Gate Path section, not this total.
+**Whole tree, Tier-1: 271: orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2.** By each file's docstring `Domain:` tag; Findings by File Type below has every tier and every domain. The push gate is the Gate Path section, not this total.
 
 **Tier 2 note (April 2026 audit):** All Tier-2 findings are documented
 accepted residuals -- cited constants, V_STALE staleness flags on verified
@@ -80,7 +80,7 @@ The push gate is Tier-1 = 0 on the active build path, and it binds at export. Th
 
 **GATE PATH: 0 TIER-1 -- the push gate holds.**
 
-Examined: 202 of 233 exported rows; 31 more are computed from other rows, whose inputs are scored where they are typed; 7 display string(s) in 98 served object(s). The whole tree's Tier-1 count is 276: orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2; most of them are off this path.
+Examined: 202 of 233 exported rows; 31 more are computed from other rows, whose inputs are scored where they are typed; 7 display string(s) in 98 served object(s). The whole tree's Tier-1 count is 271: orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2; most of them are off this path.
 
 Exported rows computed from other rows (31): `CHROMOSPHERE_TOP_KM`, `CORONA_BASE_KM`, `DEG_PER_RAD`, `EARTH_BOW_SHOCK_STANDOFF_RADII`, `EARTH_DIPOLE_TILT_DEG`, `EARTH_DIPOLE_TILT_RATE_DEG_PER_YEAR`, `EARTH_GEOSTATIONARY_RADIUS_KM`, `EARTH_HILL_SPHERE_KM`, `EARTH_LEO_INNER_KM`, `EARTH_LEO_INNER_PERIOD_MIN`, `EARTH_LEO_OUTER_KM`, `EARTH_LEO_OUTER_PERIOD_MIN`, `EARTH_LOWER_MANTLE_KM`, `EARTH_MAGNETOPAUSE_STANDOFF_RADII`, `EARTH_MAGNETOTAIL_DRAWN_END_RADII`, `EARTH_MAGNETOTAIL_DRAWN_RADIUS_RADII`, `EARTH_OBLIQUITY_J2000_DEG`, `EARTH_SIDEREAL_ROTATION_PERIOD_H`, `EARTH_STRATOPAUSE_RADIUS_KM`, `EARTH_THERMOPAUSE_RADIUS_KM`, `EARTH_VAN_ALLEN_OUTER_RADII`, `GALACTIC_NORTH_POLE_DEC_J2000_DEG`, `HELMET_CUSP_RADII`, `INNER_LIMIT_OORT_CLOUD_AU`, `OUTER_OORT_CLOUD_AU`, `PARKER_CLOSEST_KM`, `ROCHE_LIMIT_DRAWN_RADII`, `SGR_A_STAR_DEC_ICRS_DEG`, `SGR_A_STAR_RA_ICRS_DEG`, `SUN_EQUATOR_TILT_DEG`, `SUN_SIDEREAL_ROTATION_PERIOD_D`.
 
@@ -147,6 +147,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `earth_visualization_shells.py` | earth_science | 0 | 16 | 0 | 0 | 16 |
 | `path_plan.py` | dev_tools | 0 | 0 | 16 | 0 | 16 |
 | `provenance_scanner.py` | dev_tools | 0 | 0 | 16 | 0 | 16 |
+| `food_insecurity_generator.py` | earth_science | 0 | 8 | 7 | 0 | 15 |
 | `jupiter_visualization_shells.py` | orrery | 0 | 15 | 0 | 0 | 15 |
 | `scenarios_heatwaves.py` | earth_science | 3 | 9 | 0 | 0 | 12 |
 | `venus_visualization_shells.py` | orrery | 3 | 4 | 5 | 0 | 12 |
@@ -157,7 +158,6 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `paleoclimate_dual_scale.py` | earth_science | 10 | 1 | 0 | 0 | 11 |
 | `moon_visualization_shells.py` | orrery | 3 | 3 | 4 | 0 | 10 |
 | `pluto_visualization_shells.py` | orrery | 0 | 0 | 10 | 0 | 10 |
-| `food_insecurity_generator.py` | earth_science | 5 | 2 | 2 | 0 | 9 |
 | `mercury_visualization_shells.py` | orrery | 1 | 5 | 3 | 0 | 9 |
 | `skills_index.py` | dev_tools | 0 | 0 | 9 | 0 | 9 |
 | `eris_visualization_shells.py` | orrery | 2 | 4 | 2 | 0 | 8 |
@@ -246,7 +246,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 | Domain | Files | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |
 |--------|------:|-------:|-------:|-------:|-------:|------:|
 | Orrery (solar system + orbital mechanics) | 47 | 110 | 590 | 52 | 3 | 755 |
-| Earth System | 13 | 149 | 71 | 2 | 0 | 222 |
+| Earth System | 13 | 144 | 77 | 7 | 0 | 228 |
 | Dev Tools (audit, diagnostics, one-shot scripts) | 31 | 0 | 0 | 116 | 0 | 116 |
 | Stars (stellar neighborhood) | 12 | 13 | 41 | 6 | 3 | 63 |
 | Utilities (cross-domain shared helpers) | 1 | 2 | 0 | 0 | 0 | 2 |
@@ -415,16 +415,6 @@ is planned for a future session.
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
 | 152 | string | display string @ line 152 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-
-### food_insecurity_generator.py
-
-| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
-|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 1 | string | display string @ line 1 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 315 | string | display string @ line 315 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 357 | string | display string @ line 357 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 404 | string | display string @ line 404 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
-| 434 | string | display string @ line 434 | (1 claim) | 4 | 4 | **16** | No source citation (recalled) | Public-facing display string (hover/INFO) |
 
 ### hr_diagram_distance.py
 
@@ -1232,8 +1222,14 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 130 | string | display string @ line 130 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 157 | string | display string @ line 157 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 149 | string | display string @ line 149 | (1 claim) | 3 | 4 | **12** | Cited, not cross-checked; date-sensitive | Public-facing display string (hover/INFO) |
+| 161 | string | display string @ line 161 | (1 claim) | 3 | 4 | **12** | Cited, not cross-checked; date-sensitive | Public-facing display string (hover/INFO) |
+| 197 | string | display string @ line 197 | (1 claim) | 3 | 4 | **12** | Cited, not cross-checked; date-sensitive | Public-facing display string (hover/INFO) |
+| 224 | string | display string @ line 224 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1253 | string | display string @ line 1253 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1556 | string | display string @ line 1556 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1626 | string | display string @ line 1626 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1752 | string | display string @ line 1752 | (1 claim) | 3 | 4 | **12** | Cited, not cross-checked; date-sensitive | Public-facing display string (hover/INFO) |
 
 ### hills_cloud_sampler.py
 
@@ -1917,8 +1913,13 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 110 | constant | P5_DOT_MIN_SCALE | 0.5 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
-| 111 | constant | P5_DOT_MAX_SCALE | 1.8 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
+| 123 | constant | P5_DOT_MIN_SCALE | 0.5 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
+| 124 | constant | P5_DOT_MAX_SCALE | 1.8 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
+| 288 | dict | FAMINE_RISK_REPORT_TO_DATA[...] | (14 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
+| 320 | dict | FAMINE_RISK_COUNTS[...] | (2 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
+| 708 | constant | CAMP_SCALE | 0.8 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
+| 709 | constant | P5_DOT_CLASSES | 8 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
+| 728 | constant | FAMINE_ICON_SCALE | 1.1 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
 
 ### horizons_check.py
 
@@ -2022,11 +2023,11 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 423 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 424 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 2702 | constant | NIGHTLY_STALE_HOURS | 24 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 2873 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 3005 | dict | SECTION_SYMBOLS[...] | (8 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
+| 428 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 429 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 2742 | constant | NIGHTLY_STALE_HOURS | 24 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 2913 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 3045 | dict | SECTION_SYMBOLS[...] | (8 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
 
 ### path_plan.py
 

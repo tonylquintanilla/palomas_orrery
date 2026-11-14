@@ -67,6 +67,11 @@ Module updated: November 11, 2026 with Anthropic's Claude Opus 5.5
 (L-522 step 2 and L-523: the website's Tap Hover and As-built Names
 buttons and lines, beside View Centre, for the gallery run's two new
 checks; added on Tony's word, "Yes", after Dashboard parity found them.)
+Module updated: November 14, 2026 with Anthropic's Claude Opus 5.5
+(L-423: the website's Kepler Solver and First Guide buttons and lines,
+beside As-built Names, for the gallery run's "Kepler solver" (L-524) and
+"First guide" (L-527) checks, which came without one; added on Tony's
+word, "yes", after Dashboard parity found them.)
 July 2026: added Linux Button-4/5 wheel scrolling to match columns 1/2's
 cross-platform coverage (CTkScrollableFrame's built-in handling only
 covers Windows/Mac <MouseWheel>). Audited LAUNCH_GROUPS against both
@@ -1283,6 +1288,35 @@ LAUNCH_GROUPS = {
         True,
         None,
         True),
+        ("Kepler Solver",
+        os.path.join("tools", "test_kepler_solver.py"),
+        "The assembler's Kepler solver gives the right answer for every "
+        "orbit shape (e below 1) and every mean anomaly, or raises (L-524). "
+        "Every position the website draws comes through it, and so does "
+        "the nightly builder's trust measurement. A sweep of e and M, the "
+        "served bodies' own e by name, and Halley's served elements of "
+        "2026-11-11 moved 30 days. It runs the solver as it was before that "
+        "day first, which must go red, to show it can fail. GATES the "
+        "gallery runner. Runs from the gallery repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
+        True),
+        ("First Guide",
+        os.path.join("documentation", "run_offline_check.py"),
+        "A first visit's guide (L-527): each card ends only on its own "
+        "action; the setting and the address decide whether it runs; the "
+        "page loads Plotly 2.35.2 and the ring's sum is 2.35.2's own; a "
+        "card never covers its target; the words are the ones ruled; held "
+        "sideways, the room shows its one line and the guide pauses. It "
+        "breaks the real file many ways first, to show it can fail. GATES "
+        "the gallery runner. The check is Node, so this button runs it "
+        "through documentation/run_offline_check.py. Runs from the gallery "
+        "repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        ["First guide"],
+        True),
         ("Page Framing",
         os.path.join("documentation", "run_offline_check.py"),
         "The page's own framing helpers, taken out of the page and run "
@@ -2441,6 +2475,12 @@ CARD_LINES = {
     ("Gallery -- checks and data",
      "As-built Names"):
         "Checks every code name the as-built page gives is in the code.",
+    ("Gallery -- checks and data",
+     "Kepler Solver"):
+        "Checks the orbit solver answers every orbit shape, or says so.",
+    ("Gallery -- checks and data",
+     "First Guide"):
+        "Checks the first visit's guide waits for each action you take.",
     ("Gallery -- checks and data",
      "Page Framing"):
         "Checks the page's framing helpers give the right axis ranges.",

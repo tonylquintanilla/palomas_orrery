@@ -1025,7 +1025,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-199 | Protocol length: govern the growth, not the number | OPEN | 4.8 | 2026-08-17 |
 | ! | L-327 | Tool repairs from the rules-vs-reasoning round (tooling track) | OPEN | 4.8 | 2026-09-14 |
 | ! | L-268 | Sweep: features collapsed out of their own identity | OPEN | 4.5 | 2026-08-30 |
-| ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-11-13 |
+| ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-11-14 |
 | ! | L-243 | Retire the replicated AU conversion factor | OPEN | 4.3 | 2026-09-28 |
 | ! | L-190 | Scanner reach: anything rendered must be reachable | OPEN | 4.3 | 2026-08-25 |
 | ! | L-281 | The guest book: no-account comments, approve-before-show | OPEN | 4.2 | 2026-09-27 |
@@ -1133,7 +1133,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-403 | Numbers in the object list's descriptions carry no source (orrery, provenance) | OPEN | -- | 2026-10-01 |
 | ! | L-411 | The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-11-02 |
 | ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-11-02 |
-| ! | L-423 | The website's checks: the order Tony confirmed (checks, gallery) | OPEN | -- | 2026-11-13 |
+| ! | L-423 | The website's checks: the order Tony confirmed (checks, gallery) | OPEN | -- | 2026-11-14 |
 | ! | L-424 | The checker reports one word for two different cases (worksheet checker) | OPEN | -- | 2026-10-11 |
 | ! | L-425 | A citation's location record is checked only in part (provenance tooling) | OPEN | -- | 2026-10-09 |
 | ! | L-426 | The worksheet checker compares very small numbers as equal (worksheet checker) | OPEN | -- | 2026-10-09 |
@@ -1184,7 +1184,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-529 | Guided encounters: the guide's way of telling, used for a flyby (gallery; an idea, for a design talk after Mars) | OPEN | -- | 2026-11-13 |
 | ! | L-530 | The other Earth System layers on Google Earth web (Earth System; recorded, not built) | OPEN | -- | 2026-11-13 |
 | ! | L-531 | The Earth Science room in the interactive site (website; recorded, not built) | OPEN | -- | 2026-11-13 |
-| ! | L-532 | A Code session away from the computer: where its work lives (method; recorded) | OPEN | -- | 2026-11-13 |
+| ! | L-532 | A Code session away from the computer: where its work lives (method; recorded) | OPEN | -- | 2026-11-14 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1683,7 +1683,7 @@ earth_system_generator.py, earth_system_common.py, scenarios_*.
 **Ref:** L-001, L-530; L-519 (Featured's rethink); L-060 (ENSO).
 
 #### [L-532] A Code session away from the computer: where its work lives (method; recorded)
-<!-- L:532 status:OPEN upd:2026-11-13 section:A flag: rice: -->
+<!-- L:532 status:OPEN upd:2026-11-14 section:A flag: rice: -->
 - **What happened, 2026-11-13:** the L-001 build session was started
   from the phone, so it ran in the cloud, not through the python_work
   door. Its work existed only inside its machine: the machine paused
@@ -1706,6 +1706,20 @@ earth_system_generator.py, earth_system_common.py, scenarios_*.
   /mnt/user-data/outputs can come out re-encoded (a PNG, same size and
   look, different bytes). Deliver a binary through a SendUserFile
   fileUuid, and compare its SHA-256 after it lands.
+- **2026-11-14: the method worked** (L-001's walk session, Opus 5.5).
+  Tony started the session on his computer before he left and drove it
+  from the phone by Remote Control; its work landed in his folders as it
+  went, nothing came home through Drive, and the session waited on his
+  word between parts. Three things it taught:
+  - The app's next-step box may not reach the phone, so each report has
+    to stand on its own as the last message, with its one question in
+    it.
+  - A preview for the phone is one self-contained page, its pictures
+    written into it, sent with SendUserFile; the in-app browser cannot
+    open a file on the computer.
+  - Headless Edge will not make a window narrower than about 480 px, so
+    a phone-width check loads the page in 360 and 375 px frames inside a
+    test page and reads the widths there.
 **Gap:** the method into the records skill or the protocol, on Tony's
 go-ahead.
 **Ref:** L-001; L-499 (kinds of session); L-471 (a delivered patch is
@@ -8473,7 +8487,7 @@ aberration is built. L-356's build may come on any evening (Tony,
 above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
 
 #### [L-423] The website's checks: the order Tony confirmed (checks, gallery)
-<!-- L:423 status:OPEN upd:2026-11-13 section:A flag: rice: -->
+<!-- L:423 status:OPEN upd:2026-11-14 section:A flag: rice: -->
 - **Confirmed by Tony, 2026-10-08**, in the decisions session of
   2026-10-08: "Yes open it now"; on the order, "The order is okay".
   This is road stage 9 on Where We Are. It comes before the front-door
@@ -8574,8 +8588,15 @@ reachability" line naming 32 positions files read from the config.
   solver" and "First guide" have no button in "Gallery -- checks and
   data" (`palomas_orrery_dashboard.py`). Two buttons and their short
   lines, as on 2026-11-11 for Tap hover and As-built names.
-  Tony-action (decide): add them in the next session that opens the
-  dashboard.
+  Built 2026-11-14 on Tony's word (15:00, "yes"), in L-001's walk
+  session: the Kepler Solver button (tools/test_kepler_solver.py) and
+  the First Guide button (run_offline_check.py "First guide"), each with
+  its short line, beside As-built Names. Pre-test on a throwaway copy:
+  the dashboard built, both buttons found by their text as the Nov 11
+  ones are. Read from the orrery run's output: "Dashboard parity PASS --
+  10 of 10 planted faults caught; 110 steps matched to their buttons by
+  name and script; 142 cards carry a short line"; "36 of 36 gating
+  checkers passed".
 **Ref:** L-412; L-363; the members above;
 `documentation/HANDOFF_decisions_20261008.md`.
 
@@ -10636,7 +10657,7 @@ one of the four).
 (STILL OPEN, item 1c).
 
 #### [L-001] Food Insecurity (Earth System track)
-<!-- L:001 status:OPEN upd:2026-11-13 section:A flag: rice:3/3/95/2 -->
+<!-- L:001 status:OPEN upd:2026-11-14 section:A flag: rice:3/3/95/2 -->
 - **Phase-1 build COMPLETE, render-confirmed (Mode-5, ge_sudan.jpg, built on
   03630ae).** Module: food_insecurity_generator.py -- new dedicated vector/
   categorical generator (NOT a bend of run_scenario); 189 area polygons, full
@@ -10768,25 +10789,82 @@ one of the four).
   Current features whatever period is selected; only the Excel holds all
   three. Google Earth web refuses to be framed (X-Frame-Options
   SAMEORIGIN), so the page links out.
+- **2026-11-14: Sudan's guided walk, on our page (Claude Code session,
+  Opus 5.5, python_work door, driven by Remote Control from Tony's
+  phone; built on orrery 594e562c and gallery 09b4b498; brief
+  `documentation/COORD_L001_sudan_walk_brief_20261114.md`).** Tony's
+  rulings (Chicago): 08:43, finish Sudan's look and the two open
+  decisions in a Code session; 09:58, "Maybe a walk through like the
+  tutorial?"; 10:15, the three periods' words confuse, the phone app
+  shows only October-January ("1/1"); 10:21, "the theme is respectful
+  awareness primarily"; 12:56, the walk lives on our Sudan page; 13:09,
+  the outline, "It sounds good Claude.", and "This is serious business.
+  The news in Sudan are sporadic at best."; 13:48, the walk's words:
+  "The words read right. They seem to always report what IPC writes,
+  which is correct."; 14:39, the re-imported project, signed out: "looks
+  right". The session is in his run record
+  `WHERE_WE_ARE_11-14-26_1123_run_record.md`.
+- **Built.** earth/food_insecurity_sdn.html is a scroll of seven steps
+  in season order, each a picture and a few sentences: what the map
+  shows (the key); February-May; June-September, the lean season;
+  October-January, the harvest season ("under way now" only while the
+  build date is inside it); hidden under the colors (a close-up of
+  Darfur and Kordofan with the Phase 5 dots and the states' names, from
+  the Excel's own state rows); Risk of Famine (IPC's symbol on the 13
+  areas); about this map, ending on the one button, "Explore the map in
+  Google Earth", and one line promising only what it does. Six pictures,
+  earth/food_insecurity_sdn_<step>.png, drawn at every build; the
+  Featured picture is drawn as before. Every figure was re-read in IPC's
+  report at its PDF page (1, 8, 22, 26, 28, 30). A sentence that states
+  a fact about the data is checked against it and the build stops if
+  they differ (56 areas in each projection; no area mapped Phase 5 in
+  February-May or October-January). The brief's "not a declaration" is
+  not IPC's wording, so step 6 quotes IPC's worst-case words and says no
+  area is classified Famine in the period. The map file's "i" pop-up
+  and folders now say what Google Earth does: it opens on
+  October-January; in a web browser the list on the left switches
+  periods; nothing about the phone app. Tony re-imported it into the
+  "Sudan" project, link unchanged.
+- **Checks, read from the output:** the KMZ check passed (22 Document
+  styles, 0 ScreenOverlays, 665 descriptions with no <table> or <br>,
+  662 styleUrls resolved, folders 1/0/0, 13 and 14 famine symbols); the
+  pre-test on a throwaway copy through the picker and _food_run (teaser
+  stubbed); the scanner, "GATE PATH: 0 TIER-1", the generator's own
+  Tier-1 from 5 to 0; the website's offline run, "49 of 49 gating
+  checkers passed"; the page in 360 and 375 px frames, scrollWidth equal
+  to clientWidth and no element wider.
+- **The tests' findings (Nov 14):** Google Earth's phone app shows a
+  project's top-level items as pages, and an import always arrives as
+  one folder, so "1/1"; on the web, in a phone's browser, a visitor can
+  switch folders; what the owner switches on is saved as the public
+  view.
+- **Page 1's "14 areas" (checked Nov 14, at Tony's word):** PDF page 1
+  reads "between February and May 2026, and 14 areas face a risk of
+  Famine", names none, and ends on a footnote the file's text does not
+  carry. The report's only list of 14 (page 26) and its summary (page
+  3) are for June-September. Nothing is drawn or said for February-May;
+  the public page carries no "14 areas", and the map file's one is in
+  the June-September folder, page 26's.
 - **Gaps.** Current (February-May) has no Risk of Famine list in this
-  report, so none is drawn for it. IPC's evidence and assistance levels
-  are shown for February-May only (the export carries none for the
-  projections). The earth-system-pipeline skill's web rules wait on
-  Tony's go-ahead for 1.3 (Tony-action (decide), below).
+  report (page 1's sentence, above), so none is drawn for it. IPC's
+  evidence and assistance levels are shown for February-May only (the
+  export carries none for the projections). The earth-system-pipeline
+  skill's web rules wait on Tony's go-ahead for 1.3 (Tony-action
+  (decide), below).
 - **Tony-action (decide):** bump earth-system-pipeline to 1.3 with the
-  web rules: shared styles at Document level; no ScreenOverlay; pop-up
-  lines in <div>, no <table> or <br>; IPC's GeoJSON download holds
-  Current only, the Excel all periods; a layer's one-home page at
-  earth/<scenario_id>.html with its picture.
-- **Tony-action (do):** apply the session's two patches (Drive folder
-  "Orrery transfer"), commit and push both repositories; then the
-  gallery's live run.
+  web rules and the walk's rule; the proposed text, with what moves out
+  to keep the skill at its cap of 199 lines, is
+  `documentation/PROPOSAL_earth_system_pipeline_1_3_20261114.md`.
+- **Tony-action (do):** commit and push both repositories (the Nov 14
+  session's files); then the gallery's live run; then the page on the
+  phone, palomasorrery.com/earth/food_insecurity_sdn.html.
 **Ref:** MANIFEST_food_insecurity_sudan_v2.md; HANDOFF_food_insecurity_build_v2.md
 (built on 03630ae); cross-ref L-064, L-069; L-060, L-070 (the track's
 other open rows); L-071, L-077 (closed 2026-10-07);
 `documentation/WHERE_WE_ARE.md` (the road, stage 14);
 COORD_L001_sudan_web_brief_20261113.md (2026-11-13, with its
-amendment); HANDOFF_food_insecurity_sdn_projections_20261112.md
+amendment); COORD_L001_sudan_walk_brief_20261114.md (2026-11-14);
+HANDOFF_food_insecurity_sdn_projections_20261112.md
 (superseded for its steps); L-530 (the other layers on the web), L-531
 (the Earth Science room).
 

@@ -201,12 +201,170 @@ Found the orrery repository, and this is a fresh session with neither morning jo
 
 I've stopped at the first step: both your folders are behind GitHub. The only thing missing from them is the nightly robot's data updates. None of your own work is missing.
 
-- **Orrery folder:** it sits at your 08:34 merge (37b3569). GitHub has one commit after that: the robot's nightly run at 11:13 your time (7317271), which changed one file, `data/nightly_run_record.json`. GitHub is exactly where the brief says it should be. -- 
-- **Gallery folder:** it sits at your "food insecurity display" commit from last night (fdbce440). GitHub has two robot nightly runs after that, at 09:11 and 12:16 your time, which changed data files only. GitHub is again exactly where the brief says.
+- **Orrery folder:** it sits at your 08:34 merge (37b3569). GitHub has one commit after that: the robot's nightly run at 11:13 your time (7317271), which changed one file, `data/nightly_run_record.json`. GitHub is exactly where the brief says it should be. -- 594e562c113e3a74c8173cb36894bd8919e1599a
+- **Gallery folder:** it sits at your "food insecurity display" commit from last night (fdbce440). GitHub has two robot nightly runs after that, at 09:11 and 12:16 your time, which changed data files only. GitHub is again exactly where the brief says. -- 09b4b498e511b67ab622b4087608a84d3ad01a00
 - **Files on your disk that aren't saved to git yet:** this brief, your 11:23 run record, and `data/ge_pages_test.kml`. That one looks like a leftover from your Google Earth test this morning. I'm leaving all three alone.
 
 To name the missing commits, I asked GitHub what it has (a "fetch"). That changes no file in your folder. I haven't loaded the skills or edited anything.
 
 The morning's two jobs (the skill's web rules and the dashboard buttons) were not started in this session. Following the brief, they come after Part 2.
 
-Will you pull both folders in GitHub Desktop and tell me when it's done? For each one, pick it in the repository menu, then press **Pull origin** at the top. Or, if you'd rather skip that, say "go on without" and I'll work on top of what's on your disk. The robot's files don't touch anything this job changes.
+Will you pull both folders in GitHub Desktop and tell me when it's done? For each one, pick it in the repository menu, then press **Pull origin** at the top. Or, if you'd rather skip that, say "go on without" and I'll work on top of what's on your disk. The robot's files don't touch anything this job changes. -- done
+
+============================
+
+The report's page 1 sentence about 14 areas at risk of Famine seems to point to February–May 2026, but pages 3 and 26 place them in June–September, so I can't confirm a February–May list. I'm noting that no such list exists in this report and copying the note to the website before starting Part 2.
+
+Part 2: I'm changing the map file's words so they promise only what Google Earth does.
+
+Words changed. Now the rebuild and the pre-test. The pre-test runs a throwaway copy of the generator through the same path the Run button takes: the scenario picker, then the build.
+
+The rebuild and the byte check passed. Next I'll confirm the new words are inside the map file, and that the website copies still match the rebuild.
+
+The scanner lacked a help option, so that run did a full scan and rewrote PROVENANCE_AUDIT.md, which the maintenance run also writes and so loses nothing. I'm reading its results for the gate and this file next.
+
+The scanner's gate is clear with zero Tier-1 findings, down from five, and every new sentence now registers as cited. I'm running the website's offline maintenance next, since that folder changed.
+
+While that runs, I'll find the Google Earth steps you used last time, so today's steps name the same buttons.
+
+I have what I need for your Google Earth steps. Now waiting on the website's maintenance run.
+
+Part 2 is nearly done. I'm waiting on the website's maintenance run, and I'll send the full Part 2 report, with your Google Earth steps, when it finishes.
+
+On the page 1 check: in context, the sentence attaches the 14 areas to February - May 2026. But the report's only list of 14 (page 26) is for June - September, and page 3 says the same. So I'm recording no February - May list. Page 1's sentence will be noted as ambiguous.
+
+Done since your approval:
+- **Website:** the walk page and its seven pictures are copied to the website's earth folder. They are byte-for-byte the same as the orrery's copies.
+- **Map file's words:** the "i" pop-up now says the map opens on October 2026 - January 2027, and that in a web browser the list on the left switches periods. Each period folder now says either "The map opens on this period" or how to switch it on in a web browser. Nothing mentions the phone app.
+- **Byte check:** passed. No styles inside folders, no screen overlays, no tables or `<br>` tags, every style resolves, and the folders open 1/0/0.
+- **Pre-test:** passed. It ran on a throwaway copy, through the scenario picker the Run button opens, then the full build. The teaser rebuild was skipped so its file isn't rewritten for nothing. The copy was deleted.
+- **Provenance scanner:** "GATE PATH: 0 TIER-1 -- the push gate holds." The generator went from 5 Tier-1 findings to none. Running it also rewrote two files, as the maintenance run does: the audit (PROVENANCE_AUDIT.md) and its run history (`data/provenance_history.json`).
+
+The website's offline run reads "49 of 49 gating checkers passed". I'll confirm it changed no files besides mine.
+
+Part 2 is done on my side. The map file now promises only what Google Earth does, and every check passed. What's left is your re-import into the "Sudan" project and a look while signed out.
+
+**What changed in the map file** (`palomas_orrery_for_github\data\food_insecurity_sdn_blockbuster.kmz`, rebuilt):
+- **The "i" pop-up:** "The map opens on Projected 2: October 2026 - January 2027. In a web browser, the list on the left switches periods: switch a period's folder on and the others off."
+- **October - January's folder:** "The map opens on this period."
+- **The other two folders:** "In a web browser, switch this folder on in the list on the left, and the open period's folder off, to see this period."
+- Nothing mentions the phone app.
+
+**Checks:**
+- **Map file byte check:** passed. It has 22 styles, all at the top level, no screen overlays, and no tables or `<br>` tags in 665 pop-ups. All 662 style links resolve. The folders open with October - January on and the other two off. IPC's symbol shows on 13 areas for October - January and 14 for June - September.
+- **Pre-test:** passed, through the Run button's own path: the scenario picker, then the full build, on a throwaway copy.
+- **Provenance:** "GATE PATH: 0 TIER-1 -- the push gate holds." The generator has no Tier-1 findings left.
+- **Website's offline run:** "49 of 49 gating checkers passed". As it does every time, it refreshed five one-line stamp files in the website folder: `MODULE_ATLAS.md`, `MODULE_INDEX.md` and three `.sha` files.
+- **Your look, unverified:** I can't see Google Earth, so how the new words show there is untested.
+
+## Your steps, at your computer
+
+1. Open Google Earth in your web browser and open your **"Sudan"** project. -- yes
+2. In the list on the left, find the old imported folder, "Sudan Food Insecurity (IPC) -- three periods". Open its **⋮** (three dots) menu and choose **Delete**. This removes only the old map, not the project, so the link stays the same. -- done
+3. At the top of the project, choose **New feature**, then **Import KML file to project**, then pick from your computer `palomas_orrery_for_github\data\food_insecurity_sdn_blockbuster.kmz`. If it asks, import it as **Map features**, as you did on Thursday. -- done
+4. **Set the public view.** Remember that what you switch on is what visitors see. Only two items should be on:
+   - "Framing (read this first)"
+   - "Projected 2: October 2026 - January 2027"
+
+   The file arrives that way, so only change it if you clicked something.
+5. Check that the project is still shared as **"Anyone with the link can view"**. -- https://earth.google.com/earth/d/1tvCdwVYhIwNetF-phuT4eTMztfOOIuaG?usp=sharing
+6. **Look as a visitor:** open the link in a private or incognito window, on your computer and in your phone's browser. You should see only October - January, and the "i" pop-up should carry the new "In a web browser..." line. Don't switch folders while you're signed in after step 4. -- yes
+
+The link is https://earth.google.com/earth/d/1tvCdwVYhIwNetF-phuT4eTMztfOOIuaG?usp=sharing
+
+**Files changed so far:**
+
+Orrery folder:
+- ok food_insecurity_generator.py (the walk, plus the map's words; 18 edits)
+- ok data/earth/food_insecurity_sdn.html (rebuilt)
+- ok data/food_insecurity_sdn_blockbuster.kmz (rebuilt)
+- ok PROVENANCE_AUDIT.md and data/provenance_history.json (the scan)
+- New in data/earth/: 6 walk pictures, plus the Featured picture redrawn
+
+Website folder:
+- ok earth/food_insecurity_sdn.html and earth/food_insecurity_sdn.png (copied)
+- New: 6 walk pictures in earth/
+- The run's 5 stamp files
+
+Your run record (`WHERE_WE_ARE_11-14-26_1123_run_record.md`) also shows as changed. That's your own edit, and I haven't touched it.
+
+**Your run order:** the six Google Earth steps above. Then Part 3 (the records and the morning's two jobs), and only then commit both folders.
+
+**Tony actions:** re-import, set the public view, and look while signed out. -- done
+
+After the re-import, does the signed-out link show only October - January, with the new words? Reply "looks right" or say what's off. -- looks right. 
+
+**Orchestrator:**
+
+Yes. The session can do all of Part 3 while you're away and wait with one report. Nothing goes live until you commit, so it's safe to let it run.
+
+Paste this before you leave:
+
+```
+Tony is away. Part 2 is closed (Nov 14, 14:39, "looks right"). Do all of Part 3 now without stopping, then send ONE report and wait. In it:
+1. The "14 areas" note: if any of its words show on the public page, quote them in full with IPC's page numbers. If they are only in the records, say so.
+2. The records: the ledger (L-001), Where We Are, and the run record's close, done as the records skill says.
+3. The Earth System skill's web rules (1.3): write the proposed changes to a file in documentation/, but do not change the skill. Tony rules on it when he is back.
+4. The two dashboard buttons for L-423: say what each would do in one sentence and what building them touches. Build nothing.
+5. The full list of changed files in each folder, for Tony's commit.
+Plain speech. Commit and push are mine.
+```
+
+When you're back, you'll have three things to do:
+- Read its report.
+- Answer yes or no on the skill rules and the buttons.
+- Commit and push both folders, then look at the page on your phone.
+
+=====================
+
+**Code:**
+
+The pattern is clear now: Python checks pass their script as the button command, while Node checks go through run_offline_check.py with their name. I'm adding Kepler Solver (Python) and First Guide (Node) after As-built Names.
+
+The new buttons appear exactly like the Nov 11 ones. Now rerunning the orrery's checks.
+
+The buttons decision only shows up under "Waiting on you" on Where We Are, not under "Needs you now". I'll update the page once the run finishes so it reflects the actual result.
+
+The Kepler Solver and First Guide buttons are built and pass the pre-test. The orrery's checks are rerunning now. Once they finish, I'll update L-423 and Where We Are with the result and send the short report.
+
+All green. Now the records.
+
+The two dashboard buttons are built, and the orrery's checks are all green.
+
+- **Built:** Kepler Solver and First Guide, each with its short line, beside As-built Names in "Gallery -- checks and data". They follow the Nov 11 pattern. Kepler Solver runs the website's `tools/test_kepler_solver.py`. First Guide runs its check through `run_offline_check.py`, because that check is a Node script. The "Module updated" line carries your "yes" of 15:00.
+- **Pre-test:** the dashboard file compiles and is plain ASCII. A throwaway copy built the whole dashboard window, and both new buttons were found by their text, the same way as Tap Hover and As-built Names. The copy was deleted.
+- **Orrery checks:** the Dashboard parity row reads "PASS -- 10 of 10 planted faults caught; 110 steps matched to their buttons by name and script; 142 cards carry a short line". The overall count is "36 of 36 gating checkers passed". The provenance gate holds at 0 Tier-1.
+- **Records:**
+  - **L-423 (the website's checks):** says the buttons are built, with those two quotes.
+  - **Where We Are:** the buttons decision is gone from "Waiting on you". "Needs you now" never listed it. One "Changed" line says the buttons are built and the run is green. The page is still at 130 lines, within its cap; the caps check passed again.
+
+## Changed files, for your commit
+
+**Orrery folder:**
+- ok palomas_orrery_dashboard.py (the two buttons; 4 edits) << new
+- ok food_insecurity_generator.py (24 edits)
+- ok LEDGER_CONSOLIDATED.md (L-001, L-532 and L-423; 8 edits, plus the regenerated index)
+- ok documentation/WHERE_WE_ARE.md (12 edits)
+- new documentation/PROPOSAL_earth_system_pipeline_1_3_20261114.md
+- ok data/earth/food_insecurity_sdn.html and data/food_insecurity_sdn_blockbuster.kmz (rebuilt)
+- Written by the checks:
+  - PROVENANCE_AUDIT.md
+  - data/provenance_history.json
+  - DATA_INVENTORY.md
+  - EXACT_ROWS_PRINTED.md
+  - MODULE_ATLAS.md
+  - MODULE_INDEX.md
+  - documentation/prompts/citation_review.jsonl
+- Yours: documentation/WHERE_WE_ARE_11-14-26_1123_run_record.md
+
+**Website folder:**
+- ok earth/food_insecurity_sdn.html and earth/food_insecurity_sdn.png
+- new: the six walk pictures in earth/
+- Written by its check run: MODULE_ATLAS.md, MODULE_INDEX.md, and the three `.sha` files
+
+**Your run order:** commit and push the orrery, then the website. Then run the website's live check from the dashboard, and look at the Sudan page on your phone.
+
+**Tony actions:**
+- (do) Commit and push both folders. 
+- (do) Run the live check, then look at the page on your phone.
+- (decide) The Earth System skill's 1.3 proposal, in `documentation/PROPOSAL_earth_system_pipeline_1_3_20261114.md`.

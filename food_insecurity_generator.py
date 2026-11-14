@@ -24,8 +24,16 @@ Stance (from MANIFEST_food_insecurity_sudan_v2.md): synthesize nothing,
 transcribe everything, attribute to IPC, defer causation to the reader.
 National totals are TRANSCRIBED from the IPC report, NEVER summed from polygons.
 
+Its page on the website, earth/food_insecurity_sdn.html, is a guided walk
+(L-001, Nov 14, 2026): a short scroll of seven steps in season order, each a
+picture drawn here at every build and a few sentences in IPC's figures and
+words, with the page each was read from; Google Earth is the last step's
+button, and its line promises only what Google Earth does.
+
 Key functions:
-    run() - end-to-end: join Excel + GeoJSON -> build KMZ (+ optional teaser).
+    run() - end-to-end: join Excel + GeoJSON -> build KMZ, the page and its
+        pictures (+ optional teaser).
+    walk_steps() / walk_pictures() - the walk's words and pictures.
     join_ipc_periods() - read both IPC files, join by name, check, stop on a
         difference.
     build_web_kml() - the three period folders, shared styles, "i" pin.
@@ -120,7 +128,7 @@ P5_DOT_ICON = "http://maps.google.com/mapfiles/kml/shapes/placemark_circle.png"
 # A naive polygon sum over-counts (IDP settlements overlap host localities), so
 # these come from the report TEXT, not from the GeoJSON.
 # Source: IPC Sudan Special Report, Feb 2026-Jan 2027, Country-wide Analysis
-# Source+: (Feb-May 2026): "covering the total population of Sudan (47.5 million)";
+# Source+: (Feb-May 2026), PDF page 8: "covering the total population of Sudan (47.5 million)";
 # Source+: "nearly 19.5 million people are classified in IPC Phase 3 or above for the
 # Source+: current period, including over 5 million people in IPC Phase 4 (Emergency)";
 # Source+: "nearly 135,000 people are classified in IPC Phase 5 (Catastrophe)".
@@ -298,6 +306,10 @@ FAMINE_RISK_BY_PERIOD = {
     "projected-2": [n for n in FAMINE_RISK_REPORT_TO_DATA
                     if n != "Beliel locality"],
     # "current": no list in this report for February-May (gap, L-001).
+    # PDF page 1 reads "between February and May 2026, and 14 areas face a
+    # risk of Famine" but names none; the report's only list of 14 (page 26)
+    # and its summary (page 3) are for June-September. So nothing is drawn
+    # for February-May (checked Nov 14, 2026).
 }
 # The report's own counts of those lists; the join checks the lists against
 # them. IPC's words for the designation are carried as written.
@@ -447,13 +459,20 @@ def read_ipc_excel(xlsx_path=None):
         return row[col[key]]
 
     areas = {}
+    state_of = {}     # area name -> the state row it sits under (the walk's labels)
+    state = None
     for row in rows[1:]:
         raw = row[0]
         if not isinstance(raw, str) or not raw.startswith("  "):
-            continue   # state totals, ANALYSIS TOTALS, blank rows
+            # state totals, ANALYSIS TOTALS, blank rows: not read as areas,
+            # but a state row names the state of the areas under it.
+            if isinstance(raw, str) and raw.strip() and raw != "ANALYSIS TOTALS":
+                state = raw.strip()
+            continue
         name = raw.lstrip(" ")
         if name in areas:
             raise ValueError("IPC Excel: area %r appears twice" % name)
+        state_of[name] = state
         per = {}
         for code, prefix, _label, *_dates in IPC_PERIODS:
             phase_code = cell(row, prefix, "Phase")
@@ -472,7 +491,7 @@ def read_ipc_excel(xlsx_path=None):
             }
         areas[name] = per
 
-    meta = {}
+    meta = {"state_of": state_of}
     if "Analysis Overview" in wb.sheetnames:
         for r in wb["Analysis Overview"].iter_rows(values_only=True):
             if r and r[0] == "Export Date":
@@ -612,7 +631,8 @@ def join_ipc_periods(xlsx_path=None, geojson_path=None):
         areas[name] = {"periods": xl[name],
                        "polygons": gj[name]["polygons"],
                        "points": gj[name]["points"],
-                       "kind": kind}
+                       "kind": kind,
+                       "state": xl_meta["state_of"].get(name)}
 
     analysed = {code: sorted(n for n in areas
                              if areas[n]["periods"][code]["phase_value"])
@@ -745,6 +765,10 @@ def famine_risk_popup_html(name, area, code, meta):
 # gone. COMPOSED: everyday names for the swatches sampled in PHASE_COLORS_RGB.
 PHASE_COLOR_WORDS = {1: "light green", 2: "yellow", 3: "orange",
                      4: "red", 5: "dark red"}
+# The key's names: Phase 5 is "Famine" for an area and "Catastrophe" for
+# people (PHASE_LABELS above), so the key, which colours areas, names both.
+PHASE_KEY_NAMES = {pv: ("Famine / Catastrophe" if pv == 5 else PHASE_LABELS[pv])
+                   for pv in range(1, 6)}
 
 # The period that opens visible (Tony's ruling, Nov 13, 2026: one file,
 # opening on October-January). The other two arrive switched off.
@@ -753,6 +777,14 @@ OPEN_PERIOD = "projected-2"
 FOLDER_ORDER = ["projected-2", "projected-1", "current"]
 
 FOOTER_STYLE = "font-size:11px;color:#555"
+
+# What Google Earth does with the periods, and nothing more (Tony's ruling of
+# Nov 14, 2026, 10:15, and that day's tests): on the web, a visitor can
+# switch the period folders in the list on the left; the phone app shows an
+# import as one page ("1/1") and offers no way to switch, so the words say
+# nothing about the app. COMPOSED, no numeric token.
+GE_SWITCH_LINE = ("In a web browser, the list on the left switches periods: "
+                  "switch a period's folder on and the others off.")
 
 
 def _x(text):
@@ -976,6 +1008,12 @@ def _p5_range(joined, code):
 
 def period_description_html(code, joined):
     lines = [_div("<b>%s</b>" % _x(_period_label(code)))]
+    if code == OPEN_PERIOD:
+        lines.append(_div(_x("The map opens on this period.")))
+    else:
+        lines.append(_div(_x(
+            "In a web browser, switch this folder on in the list on the left, "
+            "and the open period's folder off, to see this period.")))
     for s in compose_period_lines(code, joined):
         lines.append(_div(_x(s)))
     lo, hi = _p5_range(joined, code)
@@ -1004,8 +1042,7 @@ def info_popup_html(joined):
                   "font-size:16px")]
     lines.append(_div(_x(
         "Three periods of one IPC analysis, one folder each. The map opens "
-        "on %s. To see another period, switch its folder on and the others "
-        "off." % _period_label(OPEN_PERIOD))))
+        "on %s. %s" % (_period_label(OPEN_PERIOD), GE_SWITCH_LINE))))
     for code in FOLDER_ORDER:
         lines.append(_div("- " + _x(_period_label(code))))
 
@@ -1186,6 +1223,14 @@ GE_PROJECT_URL = ("https://earth.google.com/earth/d/"
 IPC_MAP_URL = ("https://www.ipcinfo.org/ipc-country-analysis/details-map/"
                "en/c/1163315/?iso3=SDN")
 PAGE_PERIOD = "projected-2"   # the period the picture draws (the file opens on it)
+# The button's one line: it promises only what Google Earth does (Tony's
+# ruling of Nov 14, 2026, 10:15, and the tests of that day: the project opens
+# on OPEN_PERIOD; on the web, a visitor can switch folders in the list; the
+# phone app offers no way to). COMPOSED, no numeric token beyond the period's
+# name.
+GOOGLE_EARTH_LINE = ("It opens in a new tab, on %s. In a web browser, the "
+                     "list on the left switches periods."
+                     % _period_label(OPEN_PERIOD).split(": ", 1)[1])
 
 # How this map relates to IPC's (Tony's ruling of Nov 13, 2026, 19:49).
 # COMPOSED, no numeric token; every item is either read from IPC (named as
@@ -1234,55 +1279,144 @@ li{margin:3px 0}
 vertical-align:-3px;margin-right:8px;border-radius:2px}
 .src{color:var(--dim);font-size:13px;border-top:1px solid var(--line);
 margin-top:24px;padding-top:10px}
+.step{border-top:1px solid var(--line);margin-top:26px;padding-top:4px}
+.step h2{font-size:19px;margin:14px 0 10px}
+.step p{margin:0 0 10px}
+.n{color:var(--dim);font-weight:400;margin-right:6px}
+.hint{color:var(--dim);font-size:14px;margin:0 0 6px}
 """
 
 
-def page_picture_png(joined, code=PAGE_PERIOD, width_px=1000):
+def _rgb01(hexstr):
+    h = hexstr.lstrip("#")
+    return tuple(int(h[i:i + 2], 16) / 255.0 for i in (0, 2, 4))
+
+
+def _outer_rings(area):
+    """Every outer ring of an area's polygons, as (lon, lat) lists."""
+    rings = []
+    for feat in area["polygons"]:
+        g = feat["geometry"]
+        polys = ([g["coordinates"]] if g["type"] == "Polygon"
+                 else g["coordinates"])
+        for poly in polys:
+            rings.append([(pt[0], pt[1]) for pt in poly[0]])
+    return rings
+
+
+def _is_darfur_or_kordofan(area):
+    st = area.get("state") or ""
+    return "Darfur" in st or "Kordofan" in st
+
+
+def darfur_kordofan_bounds(joined, code="projected-2", pad=1.0):
+    """The walk's close-up: the areas IPC analysed in `code` that the IPC
+    Excel lists under a Darfur or Kordofan state (its own state rows) -- the
+    extent of their dot points, padded by `pad` degrees, so the frame holds
+    the projected areas and not the empty north of the large localities.
+    Read from the data, never typed in. Returns (lon_min, lon_max, lat_min,
+    lat_max)."""
+    xs, ys = [], []
+    for area in joined["areas"].values():
+        if (not _is_darfur_or_kordofan(area)
+                or not area["periods"][code]["phase_value"]):
+            continue
+        if area["kind"] == "polygon":
+            at = _representative_point(area["polygons"][0]["geometry"])
+        else:
+            at = tuple(area["points"][0]["geometry"]["coordinates"][:2])
+        xs.append(at[0])
+        ys.append(at[1])
+    if not xs:
+        raise ValueError("walk: no analysed area sits under a Darfur or "
+                         "Kordofan state row in the IPC Excel; the close-up "
+                         "has no extent")
+    return (min(xs) - pad, max(xs) + pad, min(ys) - pad, max(ys) + pad)
+
+
+def _ring_area_centroid(ring):
+    """Signed area and centroid of one ring (shoelace), in degrees."""
+    a = cx = cy = 0.0
+    for (x0, y0), (x1, y1) in zip(ring, ring[1:] + ring[:1]):
+        c = x0 * y1 - x1 * y0
+        a += c
+        cx += (x0 + x1) * c
+        cy += (y0 + y1) * c
+    a *= 0.5
+    if a == 0:
+        return 0.0, ring[0]
+    return a, (cx / (6.0 * a), cy / (6.0 * a))
+
+
+def _state_labels(joined):
+    """(label, lon, lat) for each Darfur and Kordofan state, at the
+    area-weighted centre of its polygons. Placement only; the names are the
+    Excel's state rows, with a trailing " State" dropped."""
+    groups = {}
+    for area in joined["areas"].values():
+        if area["kind"] != "polygon" or not _is_darfur_or_kordofan(area):
+            continue
+        for ring in _outer_rings(area):
+            a, (cx, cy) = _ring_area_centroid(ring)
+            g = groups.setdefault(area["state"], [0.0, 0.0, 0.0])
+            g[0] += abs(a)
+            g[1] += abs(a) * cx
+            g[2] += abs(a) * cy
+    out = []
+    for st in sorted(groups):
+        total, sx, sy = groups[st]
+        if total <= 0:
+            continue
+        label = st[:-6] if st.endswith(" State") else st
+        out.append((label, sx / total, sy / total))
+    return out
+
+
+def walk_picture_png(joined, code, bounds=None, dots=False, famine=False,
+                     labels=False, box=None, width_px=1000):
     """A still picture of one period's map, drawn from the same joined data
     as the KMZ at every build (never a screenshot): areas in their phase
-    colours, not-analysed areas white, the camps as circles, the Phase 5
-    dots and IPC's Risk of Famine symbol. Returns PNG bytes."""
+    colours, not-analysed areas white, the camps as circles; and, as asked,
+    the Phase 5 dots, IPC's Risk of Famine symbol, the Darfur and Kordofan
+    state names, and a dashed box (the next step's close-up). bounds crops
+    the picture to (lon_min, lon_max, lat_min, lat_max); None is all of
+    Sudan. Returns PNG bytes."""
     import matplotlib
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
-    from matplotlib.patches import Polygon as MplPolygon
+    import matplotlib.patheffects as pe
+    from matplotlib.patches import Polygon as MplPolygon, Rectangle
     from matplotlib.collections import PatchCollection
-
-    def rgb01(hexstr):
-        h = hexstr.lstrip("#")
-        return tuple(int(h[i:i + 2], 16) / 255.0 for i in (0, 2, 4))
 
     alpha = int(POLY_FILL_ALPHA, 16) / 255.0
     patches, faces = [], []
     xs, ys = [], []
     for name, area in joined["areas"].items():
         pv = area["periods"][code]["phase_value"]
-        face = rgb01(PHASE_COLORS_RGB[pv]) if pv else rgb01(NOT_ANALYSED_RGB)
-        for feat in area["polygons"]:
-            g = feat["geometry"]
-            polys = ([g["coordinates"]] if g["type"] == "Polygon"
-                     else g["coordinates"])
-            for poly in polys:
-                ring = [(pt[0], pt[1]) for pt in poly[0]]
-                patches.append(MplPolygon(ring, closed=True))
-                faces.append(face + (alpha if pv else 1.0,))
-                xs += [p[0] for p in ring]
-                ys += [p[1] for p in ring]
+        face = _rgb01(PHASE_COLORS_RGB[pv]) if pv else _rgb01(NOT_ANALYSED_RGB)
+        for ring in _outer_rings(area):
+            patches.append(MplPolygon(ring, closed=True))
+            faces.append(face + (alpha if pv else 1.0,))
+            xs += [p[0] for p in ring]
+            ys += [p[1] for p in ring]
 
+    if bounds is None:
+        pad = 0.3
+        bounds = (min(xs) - pad, max(xs) + pad, min(ys) - pad, max(ys) + pad)
+    x0, x1, y0, y1 = bounds
     fig_w = width_px / 100.0
-    span_x, span_y = max(xs) - min(xs), max(ys) - min(ys)
-    fig = plt.figure(figsize=(fig_w, fig_w * span_y / span_x), dpi=100)
+    fig = plt.figure(figsize=(fig_w, fig_w * (y1 - y0) / (x1 - x0)), dpi=100)
     ax = fig.add_axes([0, 0, 1, 1])
     ax.set_axis_off()
     fig.patch.set_facecolor("white")
     pc = PatchCollection(patches, facecolors=faces,
-                         edgecolors=rgb01(LINE_RGB), linewidths=0.4)
+                         edgecolors=_rgb01(LINE_RGB), linewidths=0.4)
     ax.add_collection(pc)
 
     p5_max = max((a["periods"][c]["phase_pop"][5] or 0)
                  for a in joined["areas"].values()
                  for c, *_rest in IPC_PERIODS)
-    famine = set(joined["famine"].get(code, []))
+    famine_names = set(joined["famine"].get(code, [])) if famine else set()
     for name, area in joined["areas"].items():
         rec = area["periods"][code]
         pv = rec["phase_value"]
@@ -1291,24 +1425,85 @@ def page_picture_png(joined, code=PAGE_PERIOD, width_px=1000):
         else:
             at = tuple(area["points"][0]["geometry"]["coordinates"][:2])
             ax.plot([at[0]], [at[1]], "o", ms=7,
-                    mfc=rgb01(PHASE_COLORS_RGB[pv]) if pv else "white",
+                    mfc=_rgb01(PHASE_COLORS_RGB[pv]) if pv else "white",
                     mec="#333333", mew=0.8, zorder=3)
         p5 = rec["phase_pop"][5] or 0
-        if pv and p5 > 0:
+        if dots and pv and p5 > 0:
             # the KMZ's dot classes, as marker sizes (visual only)
             k = _p5_dot_class(p5, p5_max)
             ax.plot([at[0]], [at[1]], "o", ms=4 + 1.6 * k,
-                    mfc=rgb01(P5_DOT_RGB), mec="white", mew=0.6, zorder=4)
-        if name in famine:
+                    mfc=_rgb01(P5_DOT_RGB), mec="white", mew=0.6, zorder=4)
+        if name in famine_names:
             fam = tuple(c / 255.0 for c in FAMINE_SYMBOL_RGB)
             ax.plot([at[0]], [at[1] + 0.22], "^", ms=13, mfc=fam,
                     mec="white", mew=0.8, zorder=5)
             ax.plot([at[0]], [at[1] + 0.17], "x", ms=5, mec="white",
                     mew=1.4, zorder=6)
-    pad = 0.3
-    ax.set_xlim(min(xs) - pad, max(xs) + pad)
-    ax.set_ylim(min(ys) - pad, max(ys) + pad)
+    if labels:
+        # Under the dots and symbols (zorder 3.5), so a name never hides one;
+        # a name whose centre falls outside the picture is not drawn.
+        halo = [pe.withStroke(linewidth=3.5, foreground="white")]
+        for label, lx, ly in _state_labels(joined):
+            if not (x0 < lx < x1 and y0 < ly < y1):
+                continue
+            ha, edge = "center", 0.12 * (x1 - x0)
+            if lx - x0 < edge:          # a name near an edge is kept inside
+                ha, lx = "left", x0 + 0.01 * (x1 - x0)
+            elif x1 - lx < edge:
+                ha, lx = "right", x1 - 0.01 * (x1 - x0)
+            ax.text(lx, ly, label, ha=ha, va="center", fontsize=15,
+                    fontweight="bold", color="#1a1a1a", zorder=3.5,
+                    path_effects=halo, clip_on=True)
+    if box:
+        bx0, bx1, by0, by1 = box
+        ax.add_patch(Rectangle((bx0, by0), bx1 - bx0, by1 - by0, fill=False,
+                               edgecolor="#1a1a1a", linewidth=2.2,
+                               linestyle=(0, (6, 4)), zorder=8))
+    ax.set_xlim(x0, x1)
+    ax.set_ylim(y0, y1)
     ax.set_aspect("equal")
+    buf = io.BytesIO()
+    fig.savefig(buf, format="png", facecolor="white")
+    plt.close(fig)
+    return buf.getvalue()
+
+
+def page_picture_png(joined, code=PAGE_PERIOD, width_px=1000):
+    """The Featured board's picture (gallery_metadata.json names it): one
+    period's whole map with the Phase 5 dots and IPC's Risk of Famine
+    symbol, as before the walk. Returns PNG bytes."""
+    return walk_picture_png(joined, code, dots=True, famine=True,
+                            width_px=width_px)
+
+
+def phase_key_png(width_px=1000):
+    """The walk's first picture: IPC's five phase colours and the white of
+    an area not analysed, each with its name. Drawn from PHASE_COLORS_RGB
+    (sampled from IPC's own key); it carries no figure. Returns PNG bytes."""
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    from matplotlib.patches import Rectangle
+
+    rows = [(PHASE_COLORS_RGB[pv], "Phase %d  %s" % (pv, PHASE_KEY_NAMES[pv]))
+            for pv in range(1, 6)]
+    rows.append((NOT_ANALYSED_RGB, "Not analyzed"))
+    row_h = 0.82
+    fig_w = width_px / 100.0
+    fig = plt.figure(figsize=(fig_w, row_h * len(rows) + 0.3), dpi=100)
+    ax = fig.add_axes([0, 0, 1, 1])
+    ax.set_axis_off()
+    fig.patch.set_facecolor("white")
+    n = len(rows)
+    for i, (rgb, text) in enumerate(rows):
+        y = n - 1 - i
+        ax.add_patch(Rectangle((0.3, y + 0.12), 1.6, 0.76,
+                               facecolor=_rgb01(rgb), edgecolor="#555555",
+                               linewidth=1.2))
+        ax.text(2.3, y + 0.5, text, va="center", fontsize=30,
+                color="#1a1a1a")
+    ax.set_xlim(0, 10)
+    ax.set_ylim(-0.2, n + 0.1)
     buf = io.BytesIO()
     fig.savefig(buf, format="png", facecolor="white")
     plt.close(fig)
@@ -1329,15 +1524,295 @@ def _famine_svg():
             % (r, g, b))
 
 
-def build_short_page_html(joined, picture_file):
-    """Sudan's short page: the title; the three periods by IPC's names and
-    dates; each phase with its colour in words and the 20-percent rule; the
-    projections' coverage line; how this map relates to IPC's; IPC's credit
-    and citation; one button to the Google Earth project; the still picture.
-    Every number is a sourced constant or read from the data."""
+# --------------------------------------------------------------------------
+#   The guided walk (L-001; Tony's rulings of Nov 14, 2026: "Maybe a walk
+#   through like the tutorial?", 09:58; "the theme is respectful awareness
+#   primarily", 10:21; the walk lives on our Sudan page, 12:56; the outline,
+#   13:09)
+# --------------------------------------------------------------------------
+# The page is a short scroll of steps in season order, each a picture drawn
+# above at every build and a few sentences. Respectful awareness governs every
+# word: IPC's figures and phrasing, quoted with the report's PDF page; no
+# adjectives of our own on suffering; no cause IPC does not name; people
+# stated plainly as people. American spelling in composed sentences; IPC's
+# quotations keep IPC's. Every sentence is built here, so the scanner reads
+# each figure beside its # Source line. A sentence that states a fact about
+# the data is checked against the data, and the build stops if they differ.
+
+# The step pictures' names: earth/<scenario id>_<step>.png.
+WALK_PICTURE_KEYS = ["key", "current", "lean", "harvest", "hidden", "famine"]
+
+# Transcribed, no numeric token. Source: IPC Sudan Special Report, Feb
+# 2026-Jan 2027, PDF page 1: "A full nationwide projection analysis was not
+# possible due to data gaps."
+NO_NATIONWIDE_PROJECTION = ("A full nationwide projection analysis was not "
+                            "possible due to data gaps.")
+# Source: IPC Sudan Special Report, Feb 2026-Jan 2027, PDF page 30, "Acute
+# Source+: food insecurity trends in areas of concern": "an increase of
+# Source+: populations in Phase 3 or above between the February-May and
+# Source+: June-September periods is noted, with total numbers rising from 60
+# Source+: percent to 67 percent." The 60 percent is the same 56 areas in
+# Source+: February-May (the trend analysis "covers those 56 areas").
+TREND_FEB_MAY_PCT = "60 percent"
+# Source: IPC Sudan Special Report, Feb 2026-Jan 2027, PDF page 26, "RISK OF
+# Source+: FAMINE": "a risk of Famine has been identified in 14 areas across North
+# Source+: Darfur, South Darfur, and South Kordofan under a reasonable worst-case
+# Source+: scenario characterised by intensified conflict and further restrictions
+# Source+: on humanitarian access and the movement of goods and people."
+# Transcribed; no numeric token in the quoted part.
+WORST_CASE_WORDS = ("under a reasonable worst-case scenario characterised by "
+                    "intensified conflict and further restrictions on "
+                    "humanitarian access and the movement of goods and people")
+# Source: IPC Sudan Special Report, Feb 2026-Jan 2027, PDF page 1: "The IPC
+# Source+: analysis conducted in March-April 2026".
+ANALYSIS_CONDUCTED = "March - April 2026"
+
+
+def _period_dates(code):
+    return [(p[3], p[4]) for p in IPC_PERIODS if p[0] == code][0]
+
+
+def _period_is_now(code, today=None):
+    """True when the build date falls inside the period (IPC's dates)."""
+    import datetime
+    today = today or datetime.date.today().isoformat()
+    start, end = _period_dates(code)
+    return start <= today <= end
+
+
+def _no_area_mapped_famine(joined, code):
+    return not any(a["periods"][code]["phase_value"] == 5
+                   for a in joined["areas"].values())
+
+
+def walk_steps(joined, today=None):
+    """The walk's seven steps, in season order: a list of dicts with
+    "title", "picture" (a WALK_PICTURE_KEYS key, or None), "alt" and
+    "paras" (plain sentences; the page escapes them). Step 7 is built by
+    the page itself (about this map, and the button)."""
+    for code in ("projected-1", "projected-2"):
+        if len(joined["analysed"][code]) != int(PROJ_AREAS):
+            raise ValueError(
+                "walk: %s analyses %d areas in the IPC Excel; the report's "
+                "coverage line says %s" % (code, len(joined["analysed"][code]),
+                                           PROJ_AREAS))
+    if not _no_area_mapped_famine(joined, "current"):
+        raise ValueError("walk: an area is mapped Phase 5 in the Current "
+                         "period, where the report (PDF page 8) says none is")
+    steps = []
+
+    # 1. What this map shows. The five phases with their colours in words;
+    # the 20-percent rule in IPC's words.
+    phases = "; ".join("Phase %d %s, %s" % (
+        pv, "Famine" if pv == 5 else PHASE_LABELS[pv], PHASE_COLOR_WORDS[pv])
+        for pv in range(1, 6))
+    steps.append({
+        "title": "What this map shows",
+        "picture": "key",
+        "alt": ("IPC's key: %s; and white for an area not analyzed."
+                % "; ".join("Phase %d %s, %s" % (pv, PHASE_KEY_NAMES[pv],
+                                                 PHASE_COLOR_WORDS[pv])
+                            for pv in range(1, 6))),
+        "paras": [
+            "These maps show IPC's analysis of acute food insecurity in "
+            "Sudan, area by area, for three periods from February 2026 to "
+            "January 2027.",
+            "IPC places each area in one of five phases, each with its "
+            "color: %s. White is an area IPC did not analyze for that "
+            "period." % phases,
+            # Source: IPC Sudan Special Report, Feb 2026-Jan 2027, PDF page 1,
+            # Source+: "Key for the Map": "mapped Phase represents highest
+            # Source+: severity affecting at least 20% of the population".
+            "IPC's key for the map: \"mapped Phase represents highest "
+            "severity affecting at least 20% of the population.\" So an "
+            "area's color can hide people in a worse phase. Step 5 shows "
+            "where.",
+            # No numeric token. The two names of Phase 5 as the report uses
+            # them, PDF page 8: "While no areas were classified in IPC Phase 5
+            # (Famine), nearly 135,000 people are classified in IPC Phase 5
+            # (Catastrophe)".
+            "Phase 5 has two names in IPC's report: an area is classified "
+            "Phase 5 (Famine), and people are classified Phase 5 "
+            "(Catastrophe).",
+        ],
+    })
+
+    # 2. February - May 2026 (IPC: Current).
+    # Source: IPC Sudan Special Report, Feb 2026-Jan 2027, PDF page 8 (the
+    # Source+: NATL_* constants): "covering the total population of Sudan (47.5
+    # Source+: million)"; "nearly 19.5 million people are classified in IPC Phase 3
+    # Source+: or above for the current period, including over 5 million people in
+    # Source+: IPC Phase 4 (Emergency). While no areas were classified in IPC Phase
+    # Source+: 5 (Famine), nearly 135,000 people are classified in IPC Phase 5
+    # Source+: (Catastrophe)". PDF page 1: "The IPC analysis conducted in
+    # Source+: March-April 2026".
+    steps.append({
+        "title": "February - May 2026",
+        "picture": "current",
+        "alt": ("Map of Sudan, February - May 2026: every area colored by "
+                "its IPC phase, and small circles for the camps."),
+        "paras": [
+            "IPC names this period Current. Its analysis was conducted in "
+            "%s and covered all of Sudan, %s people."
+            % (ANALYSIS_CONDUCTED, NATL_TOTAL_POP),
+            "Nearly %s people were in Phase 3 or above (Crisis or worse), "
+            "including over %s in Phase 4 (Emergency)."
+            % (NATL_PHASE3PLUS, NATL_PHASE4),
+            "No area was classified Phase 5 (Famine), but nearly %s people "
+            "were in Phase 5 (Catastrophe)." % NATL_PHASE5_CATASTROPHE,
+            "The small circles are camps for internally displaced people "
+            "(IDP settlements), in their phase color.",
+        ],
+    })
+
+    # 3. June - September 2026, the lean season (IPC: Projected 1).
+    # Source: IPC Sudan Special Report, Feb 2026-Jan 2027, PDF page 22 (the
+    # Source+: PROJ_* and P1_* constants): "56 areas out of 195 units of analysis
+    # Source+: of Sudan ... equivalent to nearly 8.3 million people out of the
+    # Source+: total population of Sudan (47.5 million)"; "The period June to
+    # Source+: September coincides with Sudan's lean season"; "Around 2.2 million
+    # Source+: people are expected to experience Emergency (IPC Phase 4) ... a
+    # Source+: further 3.1 million will likely be in Crisis (IPC Phase 3)"; "5.6
+    # Source+: million people during the lean season, corresponding to 67 percent
+    # Source+: of the analysed population"; "nearly 200,000 people in
+    # Source+: June-September 2026". PDF page 30: "rising from 60 percent to 67
+    # Source+: percent". PDF page 1: the caution, and NO_NATIONWIDE_PROJECTION.
+    steps.append({
+        "title": "June - September 2026, the lean season",
+        "picture": "lean",
+        "alt": ("Map of Sudan, June - September 2026: the %s areas IPC "
+                "projected, colored by phase; every other area white."
+                % PROJ_AREAS),
+        "paras": [
+            "IPC names this period Projected 1. It covers %s of Sudan's %s "
+            "areas, nearly %s of its %s people. The other areas are white. "
+            "IPC: \"%s\""
+            % (PROJ_AREAS, PROJ_UNITS, PROJ_POP, NATL_TOTAL_POP,
+               NO_NATIONWIDE_PROJECTION),
+            "In those %s areas, IPC projected %s people, %s of the people "
+            "analyzed, in Phase 3 or above: around %s in Phase 4 "
+            "(Emergency), a further %s in Phase 3 (Crisis), and nearly %s in "
+            "Phase 5 (Catastrophe)."
+            % (PROJ_AREAS, P1_PHASE3PLUS, P1_PHASE3PLUS_PCT, P1_PHASE4,
+               P1_PHASE3, P1_PHASE5),
+            "Comparing the same %s areas with February - May, IPC notes the "
+            "share in Phase 3 or above \"rising from %s to %s.\""
+            % (PROJ_AREAS, TREND_FEB_MAY_PCT, P1_PHASE3PLUS_PCT),
+            COMPARE_CAUTION,
+        ],
+    })
+
+    # 4. October 2026 - January 2027, the harvest season (IPC: Projected 2).
+    # Source: IPC Sudan Special Report, Feb 2026-Jan 2027, PDF page 28 (the
+    # Source+: P2_* constants): "This period corresponds to the harvest season for
+    # Source+: most of the areas analysed. During this period, an estimated 4.9
+    # Source+: million people (59 percent of the analysed population) will remain in
+    # Source+: Crisis or worse conditions (IPC Phase 3 or above). This includes
+    # Source+: over 71,000 people in Catastrophe (IPC Phase 5), 1.7 million in
+    # Source+: Emergency (IPC Phase 4), and 3 million in Crisis (IPC Phase 3)."
+    # Source+: PDF page 30: "this proportion is expected to decline to 59 percent".
+    harvest = []
+    if _period_is_now("projected-2", today):
+        harvest.append("This is the period under way now.")
+    harvest += [
+        "IPC names this period Projected 2. In the same %s areas, IPC "
+        "expects an estimated %s people, %s of the people analyzed, to "
+        "remain in Phase 3 or above: over %s in Phase 5 (Catastrophe), %s in "
+        "Phase 4 (Emergency) and %s in Phase 3 (Crisis)."
+        % (PROJ_AREAS, P2_PHASE3PLUS, P2_PHASE3PLUS_PCT, P2_PHASE5,
+           P2_PHASE4, P2_PHASE3),
+        "IPC: from June - September, this share \"is expected to decline to "
+        "%s.\"" % P2_PHASE3PLUS_PCT,
+        "The dashed box marks Darfur and Kordofan, shown closer in the next "
+        "step.",
+    ]
+    steps.append({
+        "title": "October 2026 - January 2027, the harvest season",
+        "picture": "harvest",
+        "alt": ("Map of Sudan, October 2026 - January 2027: the %s areas IPC "
+                "projected, colored by phase; every other area white; a "
+                "dashed box around Darfur and Kordofan." % PROJ_AREAS),
+        "paras": harvest,
+    })
+
+    # 5. Hidden under the colors (Projected 2, closer in, the Phase 5 dots).
+    # Source: IPC Sudan Special Report, Feb 2026-Jan 2027, PDF page 1, "Key for
+    # Source+: the Map": "at least 20% of the population"; PDF page 28: "over
+    # Source+: 71,000 people in Catastrophe (IPC Phase 5)".
+    steps.append({
+        "title": "Hidden under the colors",
+        "picture": "hidden",
+        "alt": ("Close-up of Darfur and Kordofan with state names, October "
+                "2026 - January 2027: areas in their IPC phase colors, and "
+                "dark red dots, larger for more people, where IPC counts "
+                "people in Phase 5 (Catastrophe)."),
+        "paras": [
+            "Closer in: the states of Darfur and Kordofan, October 2026 - "
+            "January 2027.",
+            "An area takes the color of the highest phase affecting at least "
+            "20% of its people. Where fewer people than that are in Phase 5 "
+            "(Catastrophe), the color does not show them.",
+            "Each dark red dot marks the people IPC counts in Phase 5 "
+            "(Catastrophe) in one area; a larger dot means more people.",
+            "Across the %s areas, IPC counts \"over %s people in Catastrophe "
+            "(IPC Phase 5)\" in this period." % (PROJ_AREAS, P2_PHASE5),
+        ],
+    })
+
+    # 6. Risk of Famine (Projected 2, closer in, IPC's symbol).
+    # Source: IPC Sudan Special Report, Feb 2026-Jan 2027, PDF page 26: "13 areas
+    # Source+: and IDP settlements are confirmed with a risk of Famine during this
+    # Source+: period" (FAMINE_RISK_COUNTS); WORST_CASE_WORDS, same page.
+    famine = [
+        "IPC identifies a risk of Famine in %d areas and IDP settlements in "
+        "this period. Each carries IPC's symbol, %s."
+        % (FAMINE_RISK_COUNTS["projected-2"], FAMINE_SYMBOL_WORDS),
+        "IPC identifies them \"%s.\"" % WORST_CASE_WORDS,
+    ]
+    if _no_area_mapped_famine(joined, "projected-2"):
+        famine.append("A risk of Famine is not a classification of Famine: "
+                      "IPC classifies no area Phase 5 (Famine) in this "
+                      "period.")
+    steps.append({
+        "title": "Risk of Famine",
+        "picture": "famine",
+        "alt": ("Close-up of Darfur and Kordofan, October 2026 - January "
+                "2027: IPC's Risk of Famine symbol, %s, on each area IPC "
+                "lists." % FAMINE_SYMBOL_WORDS),
+        "paras": famine,
+    })
+    return steps
+
+
+def walk_pictures(joined):
+    """{picture key: PNG bytes} for the walk's six pictures."""
+    close = darfur_kordofan_bounds(joined)
+    return {
+        "key": phase_key_png(),
+        "current": walk_picture_png(joined, "current"),
+        "lean": walk_picture_png(joined, "projected-1"),
+        "harvest": walk_picture_png(joined, "projected-2", box=close),
+        "hidden": walk_picture_png(joined, "projected-2", bounds=close,
+                                   dots=True, labels=True),
+        "famine": walk_picture_png(joined, "projected-2", bounds=close,
+                                   famine=True, labels=True),
+    }
+
+
+def _walk_picture_file(key):
+    return "%s_%s.png" % (SCENARIO_ID, key)
+
+
+def build_short_page_html(joined, picture_file=None, today=None):
+    """Sudan's page, the guided walk: the title, then the steps of
+    walk_steps() in season order, each a picture and a few sentences, then
+    step 7, about this map: what is IPC's, what this map adds, what it does
+    not show, IPC's own map as the authority, and the one button to the
+    Google Earth project, with one line that promises only what Google
+    Earth does. picture_file is unused (kept for older callers). Every
+    number is a sourced constant or read from the data."""
     meta = joined["meta"]
     e = _x
-    pic_label = _period_label(PAGE_PERIOD)
     parts = [
         '<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
         '<meta name="viewport" content="width=device-width, '
@@ -1350,42 +1825,28 @@ def build_short_page_html(joined, picture_file):
         "<style>%s</style>\n</head>\n<body>\n<main>\n" % PAGE_CSS,
         '<a class="back" href="/">&larr; Paloma\'s Orrery</a>\n',
         "<h1>Sudan &mdash; Acute Food Insecurity</h1>\n",
-        '<p class="sub">IPC&#39;s analysis of Sudan, three periods, on '
-        "Google Earth</p>\n",
-        '<figure><img src="%s" alt="%s"><figcaption>%s, drawn from IPC\'s '
-        "data.</figcaption></figure>\n"
-        % (e(picture_file),
-           e("Map of Sudan for %s: areas colored by IPC phase, white where "
-             "not analyzed, camps as circles, dark red dots for Phase 5 "
-             "(Catastrophe) and IPC's Risk of Famine symbol." % pic_label),
-           e(pic_label)),
-        '<a class="go" href="%s" target="_blank" rel="noopener">Open the map '
-        "in Google Earth</a>\n" % e(GE_PROJECT_URL),
-        '<p class="note">It opens in a new tab, on %s. Switch a period\'s '
-        "folder on to see it.</p>\n" % e(pic_label),
-        "<h2>Three periods</h2>\n<ul>\n",
+        '<p class="sub">IPC&#39;s analysis of Sudan, February 2026 - January '
+        "2027, in seven steps.</p>\n",
+        '<p class="hint">Scroll down, one step at a time.</p>\n',
     ]
-    for code in ["current", "projected-1", "projected-2"]:
-        parts.append("<li>%s</li>\n" % e(_period_label(code)))
-    parts.append("</ul>\n")
-    parts.append('<p class="note">%s</p>\n<p class="note">%s</p>\n'
-                 % (e(COVERAGE_LINE), e(COMPARE_CAUTION)))
+    steps = walk_steps(joined, today)
+    for n, step in enumerate(steps, 1):
+        parts.append('<section class="step">\n<h2><span class="n">%d.</span>%s'
+                     "</h2>\n" % (n, e(step["title"])))
+        if step["picture"]:
+            parts.append('<figure><img src="%s" alt="%s" loading="lazy">'
+                         "</figure>\n"
+                         % (e(_walk_picture_file(step["picture"])),
+                            e(step["alt"])))
+        for s in step["paras"]:
+            parts.append("<p>%s</p>\n" % e(s))
+        parts.append("</section>\n")
 
-    parts.append("<h2>What the colors mean</h2>\n<ul class=\"key\">\n")
-    for pv in range(1, 6):
-        parts.append("<li>%sPhase %d %s: %s</li>\n" % (
-            _swatch(PHASE_COLORS_RGB[pv]), pv,
-            e("Famine / Catastrophe" if pv == 5 else PHASE_LABELS[pv]),
-            e(PHASE_COLOR_WORDS[pv])))
-    parts.append("<li>%sNot analyzed: white</li>\n" % _swatch(NOT_ANALYSED_RGB))
-    parts.append("<li>%s%s</li>\n" % (_famine_svg(), e(FAMINE_LEGEND_LINE)))
-    parts.append("<li>Small circles: IDP settlements (camps for internally "
-                 "displaced people), in their phase color</li>\n")
-    parts.append("<li>Dark red dots: people in Phase 5 (Catastrophe); a "
-                 "larger dot means more people</li>\n</ul>\n")
-    parts.append("<p>%s</p>\n" % e(TWENTY_PCT_RULE))
-
-    parts.append("<h2>How this map relates to IPC&#39;s</h2>\n")
+    # 7. About this map, and the one way into Google Earth. Its line promises
+    # only what Google Earth does (tested Nov 14, 2026): the project opens on
+    # OPEN_PERIOD; in a web browser the list on the left switches periods.
+    parts.append('<section class="step">\n<h2><span class="n">%d.</span>'
+                 "About this map</h2>\n" % (len(steps) + 1))
     parts.append("<p>%s</p>\n" % e(RELATION_IPC_OWN))
     parts.append("<p>This map adds:</p>\n<ul>\n")
     for s in RELATION_ADDED:
@@ -1396,6 +1857,10 @@ def build_short_page_html(joined, picture_file):
     parts.append('</ul>\n<p>%s <a href="%s" target="_blank" rel="noopener">'
                  "IPC&#39;s map of Sudan</a>.</p>\n"
                  % (e(RELATION_AUTHORITY), e(IPC_MAP_URL)))
+    parts.append('<a class="go" href="%s" target="_blank" rel="noopener">'
+                 "Explore the map in Google Earth</a>\n" % e(GE_PROJECT_URL))
+    parts.append('<p class="note">%s</p>\n' % e(GOOGLE_EARTH_LINE))
+    parts.append("</section>\n")
 
     parts.append('<div class="src"><div>Source: %s</div><div>%s</div>'
                  "<div>Analysis: %s</div><div>Data retrieved: %s</div>"
@@ -1417,8 +1882,10 @@ PAGE_FOLDER = "earth"
 
 
 def write_short_page(joined):
-    """Write the page and its picture into data/earth/ as
-    <scenario_id>.html and <scenario_id>.png. Returns the two paths."""
+    """Write the page, its walk's pictures and the Featured board's picture
+    into data/earth/: <scenario_id>.html, <scenario_id>_<step>.png for each
+    of WALK_PICTURE_KEYS, and <scenario_id>.png. Returns (page path, Featured
+    picture path, [walk picture paths])."""
     folder = os.path.join(DATA_DIR, PAGE_FOLDER)
     if not os.path.exists(folder):
         os.makedirs(folder)
@@ -1427,12 +1894,18 @@ def write_short_page(joined):
     pic_path = os.path.join(folder, pic_name)
     with open(pic_path, "wb") as f:
         f.write(page_picture_png(joined))
+    walk_paths = []
+    for key, png in walk_pictures(joined).items():
+        path = os.path.join(folder, _walk_picture_file(key))
+        with open(path, "wb") as f:
+            f.write(png)
+        walk_paths.append(path)
     with open(page_path, "wb") as f:
         # ASCII on disk: a character from IPC's data (an en dash in the
         # analysis name) is written as an HTML character reference.
-        f.write(build_short_page_html(joined, pic_name).encode(
+        f.write(build_short_page_html(joined).encode(
             "ascii", "xmlcharrefreplace"))
-    return page_path, pic_path
+    return page_path, pic_path, walk_paths
 
 
 # ==========================================================================
@@ -1623,8 +2096,11 @@ def run(geojson_path=DEFAULT_GEOJSON, make_teaser=True, status_callback=None,
     kmz_path = package_kmz(build_web_kml(joined))
     _status("KMZ written: %s" % kmz_path)
     check_web_kmz(kmz_path)
-    page_path, pic_path = write_short_page(joined)
-    _status("Short page written: %s (picture %s)" % (page_path, pic_path))
+    page_path, pic_path, walk_paths = write_short_page(joined)
+    _status("Page (the guided walk) written: %s (Featured picture %s; walk "
+            "pictures %s)" % (page_path, pic_path,
+                              ", ".join(os.path.basename(p)
+                                        for p in walk_paths)))
 
     teaser_path = None
     if make_teaser:
