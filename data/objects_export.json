@@ -1,8 +1,8 @@
 {
   "schema": 4,
   "source_sha256": "c62f261841d2a682629b6fccb5ab5894707e81ea0027976d113e47a374b8859a",
-  "period_inputs_sha256": "017809d704251d682a87eaf81c967ff0bf905bc823401aa1c241cf994b775ec6",
-  "confirmations_sha256": "7f20d189b8cb30becbc489f04f15c545a0d06a3d6e4fcba76b216c8a4ed0d412",
+  "period_inputs_sha256": "21292bce06c23b7ec31d14de6e02abd98804f830e8178ff88acb5088d8b00824",
+  "confirmations_sha256": "c1a4a49a7748da73d6ca34aebc0c3363832fa2c14d8ee087e9a23d0befee185e",
   "paths_sha256": "c8fd046d767f68aa97c46b5765e71fae6cdab7127fd6f04ebbc181b37be771df",
   "cadence_days": 30,
   "objects": {
@@ -2692,7 +2692,7 @@
         "target": "2004 MN4",
         "target_label": null,
         "open_orbit": false,
-        "fetched": "2026-10-15",
+        "fetched": "2026-11-14",
         "words": null,
         "days_only": true,
         "years": null,
@@ -2702,22 +2702,22 @@
           "text": "323.54"
         },
         "record": {
-          "days": 323.5420892338735,
-          "error_days": 0.0034301412194395198,
+          "days": 323.5400830651242,
+          "error_days": 0.0029145076691179383,
           "error_from": "year_change",
           "sbdb_status": "SBDB sigma",
-          "epoch": "2026-10-15 10:52",
+          "epoch": "2026-11-14 14:10",
           "elements": {
-            "a": 0.9223340441778785,
-            "e": 0.1911837946145804,
-            "i": 3.341088482961081,
-            "omega": 126.6840231838445,
-            "Omega": 203.892579976571,
-            "TP": 2461366.471227606,
-            "MA": 318.2538334651354,
-            "TA": 300.8139894354114,
-            "q": 0.7459987217097395,
-            "epoch": "2026-10-15 10:52 osc."
+            "a": 0.9223302314649741,
+            "e": 0.1911797354937678,
+            "i": 3.341089952137885,
+            "omega": 126.6839792647684,
+            "Omega": 203.8923118334684,
+            "TP": 2461366.47108512,
+            "MA": 351.7874452582109,
+            "TA": 347.7080789326722,
+            "q": 0.7459993817755947,
+            "epoch": "2026-11-14 14:10 osc."
           }
         }
       },
@@ -2729,12 +2729,12 @@
           "horizons_name": "99942 Apophis"
         },
         "period": {
-          "confirmed": "2026-10-31",
+          "confirmed": "2026-11-14",
           "center": "@sun",
-          "epoch": "2026-10-15 10:52",
-          "days": 323.5420892338735,
-          "jpl_days": 323.5420892338735,
-          "error_days": 0.0034301412194395198
+          "epoch": "2026-11-14 14:10",
+          "days": 323.5400830651242,
+          "jpl_days": 323.5400830651242,
+          "error_days": 0.0029145076691179383
         },
         "hold": null
       }
