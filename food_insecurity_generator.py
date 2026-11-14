@@ -1,62 +1,66 @@
 """
-food_insecurity_generator.py - IPC acute food-insecurity KMZ layer (Sudan, current period).
+food_insecurity_generator.py - IPC acute food-insecurity KMZ layer (Sudan, three periods, for Google Earth on the web).
 
-Dedicated vector/categorical generator for the Earth System family. Reads an
-IPC Mapping Tool GeoJSON (one polygon per analysis area, full per-area phase
-attributes) and renders a dated, no-key KMZ: per-area choropleth by mapped IPC
-phase, a full phase1-5 breakdown in every balloon (so sub-20% Catastrophe never
-hides behind a Phase-4 color), a transcribed national drivers card, and framing
-text whose numeric tokens are sourced at the construction site for the
-provenance scanner. Mirrors the family's single-doc KMZ + ScreenOverlay-card
-conventions (earth_system_generator.py) without importing the scalar engine,
-because this layer is categorical polygons, not a gridded scalar field.
+Dedicated vector/categorical generator for the Earth System family. Builds ONE
+KMZ holding the three periods of IPC's February 2026 analysis of Sudan --
+Current (February-May 2026), Projected 1 (June-September 2026) and Projected
+2 (October 2026-January 2027) -- one folder each, opening on Projected 2.
+Per-area figures for all three periods are read at run time from the IPC
+Mapping Tool's Excel export; outlines and the camps' points come from its
+GeoJSON (whose features hold the Current period only). The two are joined by
+area name, and the run stops, naming the area, if the Excel's Current figures
+differ from the GeoJSON's. Every pop-up carries the full phase 1-5
+breakdown (so a sub-20% Catastrophe never hides behind a Phase-4 colour),
+the camps (IDP settlements) are drawn as circles in their phase colour, and
+Phase 5 (Catastrophe) populations as dark red dots (L-069).
+
+Written for Google Earth on the web (L-001, Nov 2026): every style is shared
+at Document level, there is no ScreenOverlay (the title and the legend live in
+the "i" pin's pop-up), and pop-ups write one <div> per line, with no <table>
+and no <br>. The KML is written as text, not through simplekml, which puts
+styles inside Folders, where the web loses them.
 
 Stance (from MANIFEST_food_insecurity_sudan_v2.md): synthesize nothing,
 transcribe everything, attribute to IPC, defer causation to the reader.
 National totals are TRANSCRIBED from the IPC report, NEVER summed from polygons.
 
 Key functions:
-    run() - end-to-end: parse GeoJSON -> build KMZ (+ optional Plotly teaser).
-    build_food_insecurity_kml() - the per-area placemarks + styles + framing.
-    build_geojson_records() - parse the IPC GeoJSON into per-area records.
+    run() - end-to-end: join Excel + GeoJSON -> build KMZ (+ optional teaser).
+    join_ipc_periods() - read both IPC files, join by name, check, stop on a
+        difference.
+    build_web_kml() - the three period folders, shared styles, "i" pin.
+    build_geojson_records() - the GeoJSON's polygons, for the Plotly teaser.
 
 Consumed by: Earth System GUI (registration snippet in the build handoff);
-runnable standalone via __main__.
+runnable standalone via __main__ (the Run button opens the scenario picker).
 
 Role: devtool
 Domain: earth_science
 
-Module updated: June 2026 with Anthropic's Claude Opus 4.8
+Module updated: November 2026 with Anthropic's Claude Opus 5.5
 """
 import os
-import re
-import io
 import json
-import glob
 import math
 import zipfile
 import html
-from datetime import datetime
 
-import simplekml
-import matplotlib
-matplotlib.use("Agg")
-import matplotlib.pyplot as plt
-import matplotlib.patches as mpatches
-
-from earth_system_common import create_info_placemark, ScenarioPicker
+from earth_system_common import ScenarioPicker
 
 DATA_DIR = "data"
 if not os.path.exists(DATA_DIR):
     os.makedirs(DATA_DIR)
 
 SCENARIO_ID = "food_insecurity_sdn"
-DEFAULT_GEOJSON = os.path.join(DATA_DIR, "IPC_SD_A_87143417_2026-06-22.geojson")
-
-# Cache-busting build stamp (YYYY-MM-DD-HH-MM) for the ScreenOverlay PNG names;
-# refreshed at the top of each build so a regenerated KMZ never reuses a filename
-# Google Earth has cached. See _overlay_asset_path.
-BUILD_STAMP = datetime.now().strftime("%Y-%m-%d-%H-%M")
+# The IPC Mapping Tool's GeoJSON export of 2026-11-13: outlines and points.
+# It replaces the export of 2026-06-22, whose phase counts in 181 of 228
+# features add up to more than the area's population (L-001, Nov 2026).
+DEFAULT_GEOJSON = os.path.join(DATA_DIR, "IPC_SD_A_87143417_2026-11-13.geojson")
+# The IPC Mapping Tool's Excel export of the same analysis: all three periods,
+# area by area (L-001, Nov 2026). Read at run time by read_ipc_excel().
+DEFAULT_EXCEL = os.path.join(
+    DATA_DIR,
+    "IPC_SD_Acute_Food_Insecurity_Analysis___SD_February_2026_2026-11-13.xlsx")
 
 # ==========================================================================
 #   SOURCED CONSTANTS -- every numeric/quoted claim carries a # Source: within
@@ -123,6 +127,60 @@ NATL_TOTAL_POP = "47.5 million"         # total population of Sudan analysed
 NATL_PHASE3PLUS = "19.5 million"        # IPC Phase 3 or above, current period
 NATL_PHASE4 = "5 million"               # IPC Phase 4 (Emergency), current period
 NATL_PHASE5_CATASTROPHE = "135,000"     # IPC Phase 5 (Catastrophe), current period
+
+# --- Projected 1 (June-September 2026), TRANSCRIBED, never summed ----------
+# Source: IPC Sudan Special Report, Feb 2026-Jan 2027, PDF page 22: "Around 2.2
+# Source+: million people are expected to experience Emergency (IPC Phase 4)
+# Source+: conditions in these areas between June and September 2026, while a
+# Source+: further 3.1 million will likely be in Crisis (IPC Phase 3)"; "increasing
+# Source+: to 5.6 million people during the lean season, corresponding to 67 percent
+# Source+: of the analysed population"; Catastrophe (IPC Phase 5) "from nearly
+# Source+: 135,000 people in February-May to nearly 200,000 people in June-September".
+P1_PHASE3PLUS = "5.6 million"
+P1_PHASE3PLUS_PCT = "67 percent"
+P1_PHASE4 = "2.2 million"
+P1_PHASE3 = "3.1 million"
+P1_PHASE5 = "200,000"                   # "nearly 200,000"
+
+# --- Projected 2 (October 2026-January 2027), TRANSCRIBED ------------------
+# Source: IPC Sudan Special Report, Feb 2026-Jan 2027, PDF page 28: "an estimated
+# Source+: 4.9 million people (59 percent of the analysed population) will remain in
+# Source+: Crisis or worse conditions (IPC Phase 3 or above). This includes over
+# Source+: 71,000 people in Catastrophe (IPC Phase 5), 1.7 million in Emergency (IPC
+# Source+: Phase 4), and 3 million in Crisis (IPC Phase 3)."
+P2_PHASE3PLUS = "4.9 million"
+P2_PHASE3PLUS_PCT = "59 percent"
+P2_PHASE4 = "1.7 million"
+P2_PHASE3 = "3 million"
+P2_PHASE5 = "71,000"                    # "over 71,000"
+
+# --- The projections' coverage (both periods), TRANSCRIBED -----------------
+# Their numbers describe these 56 areas, never all of Sudan.
+# Source: IPC Sudan Special Report, Feb 2026-Jan 2027, PDF pages 22 and 28,
+# Source+: Methodological note: "56 areas out of 195 units of analysis of Sudan
+# Source+: (including both settled localities and concentrations of IDP
+# Source+: populations) are covered, equivalent to nearly 8.3 million people out of
+# Source+: the total population of Sudan (47.5 million)."
+PROJ_AREAS = "56"
+PROJ_UNITS = "195"
+PROJ_POP = "8.3 million"
+COVERAGE_LINE = ("IPC's projection covers %s areas out of %s units of "
+                 "analysis of Sudan, equivalent to nearly %s people out of "
+                 "the total population of Sudan (%s). Its numbers describe "
+                 "those %s areas, not all of Sudan."
+                 % (PROJ_AREAS, PROJ_UNITS, PROJ_POP, NATL_TOTAL_POP,
+                    PROJ_AREAS))
+# Composed from the coverage constants above, for an area outside the 56.
+NOT_IN_PROJECTION_LINE = ("IPC's projection for this period covers %s of "
+                          "the %s units of analysis; this area is not one "
+                          "of them." % (PROJ_AREAS, PROJ_UNITS))
+# Transcribed verbatim, no numeric token.
+# Source: IPC Sudan Special Report, Feb 2026-Jan 2027, PDF page 1: "Caution is
+# Source+: therefore advised when comparing figures across analysis periods, as
+# Source+: geographic coverage differs significantly."
+COMPARE_CAUTION = ("IPC: \"Caution is therefore advised when comparing "
+                   "figures across analysis periods, as geographic coverage "
+                   "differs significantly.\"")
 
 # IPC's OWN wording of the mapped-phase rule (transcribed verbatim -> safe tier).
 # Source: IPC Sudan Special Report page 7 legend, "Key for the Map": "mapped
@@ -191,6 +249,64 @@ CITATION = ("IPC Global Initiative. 2026. Sudan: IPC Acute Food Insecurity "
 
 PERIOD_LABEL = "Current (February - May 2026)"
 
+# --- The analysis's three periods (L-001, Nov 2026) -----------------------
+# (code, the Excel's column prefix, IPC's own name and dates). The codes are
+# the GeoJSON header's period_code values.
+# Source: IPC Mapping Tool Excel export, sheet "Analysis Overview" (export
+# Source+: 2026-11-13): "Projected 2 (2026-10-01 to 2027-01-31)", "Projected 1
+# Source+: (2026-06-01 to 2026-09-30)", "Current (2026-02-01 to 2026-05-31)".
+IPC_PERIODS = [
+    ("current", "Current", "Current: February - May 2026",
+     "2026-02-01", "2026-05-31"),
+    ("projected-1", "Projected 1", "Projected 1: June - September 2026",
+     "2026-06-01", "2026-09-30"),
+    ("projected-2", "Projected 2", "Projected 2: October 2026 - January 2027",
+     "2026-10-01", "2027-01-31"),
+]
+
+# --- Risk of Famine, by period (the files carry no flag) ------------------
+# The report's names, transcribed in its order, and the one name each has in
+# the data. "El Fasher" is "Al Fasher" in the data; "... IDP settlement" is
+# "... IDPs"; Um Durein's camp is spelled with two spaces in the data.
+# Source: IPC Sudan Special Report, Feb 2026-Jan 2027, PDF page 26, "RISK OF
+# Source+: FAMINE": "These include At Tina locality, At Tina IDP settlement, El
+# Source+: Fasher locality, Kernoi locality, Tawila IDP settlement, Um Baru locality,
+# Source+: Um Baru IDP settlement (North Darfur), Dilling locality, Kadugli
+# Source+: locality, Kadugli IDP settlement, Al Buram locality, Al Buram IDP
+# Source+: settlement, Um Durein IDP settlement (South Kordofan), and Beliel
+# Source+: locality (South Darfur)." October-January: "all the areas at risk of
+# Source+: Famine in June-September 2026 will remain at risk, except for Beliel".
+FAMINE_RISK_REPORT_TO_DATA = {
+    "At Tina locality": "At Tina",
+    "At Tina IDP settlement": "At Tina IDPs",
+    "El Fasher locality": "Al Fasher",
+    "Kernoi locality": "Kernoi",
+    "Tawila IDP settlement": "Tawila IDPs",
+    "Um Baru locality": "Um Baru",
+    "Um Baru IDP settlement": "Um Baru IDPs",
+    "Dilling locality": "Dilling",
+    "Kadugli locality": "Kadugli",
+    "Kadugli IDP settlement": "Kadugli IDPs",
+    "Al Buram locality": "Al Buram",
+    "Al Buram IDP settlement": "Al Buram IDPs",
+    "Um Durein IDP settlement": "Um Durein  IDPs",
+    "Beliel locality": "Beliel",
+}
+FAMINE_RISK_BY_PERIOD = {
+    "projected-1": list(FAMINE_RISK_REPORT_TO_DATA),
+    "projected-2": [n for n in FAMINE_RISK_REPORT_TO_DATA
+                    if n != "Beliel locality"],
+    # "current": no list in this report for February-May (gap, L-001).
+}
+# The report's own counts of those lists; the join checks the lists against
+# them. IPC's words for the designation are carried as written.
+# Source: IPC Sudan Special Report, Feb 2026-Jan 2027, PDF page 26: "a risk of
+# Source+: Famine has been identified in 14 areas ... under a reasonable worst-case
+# Source+: scenario"; "Therefore, 13 areas and IDP settlements are confirmed with a
+# Source+: risk of Famine during this period" (October 2026-January 2027).
+FAMINE_RISK_COUNTS = {"projected-1": 14, "projected-2": 13}
+FAMINE_RISK_WORDS = "Risk of Famine (reasonable worst-case scenario)"
+
 
 # ==========================================================================
 #   COLOR HELPERS
@@ -251,7 +367,10 @@ def build_geojson_records(geojson_path):
             }
         records.append({
             "area_name": p.get("area_name") or p.get("name") or "(unnamed)",
-            "phase_value": p.get("overall_phase_value"),  # None for not-analysed
+            # 0, "P0" or missing is not analysed, never "Phase 0".
+            "phase_value": (p.get("overall_phase_value")
+                            if p.get("overall_phase_value") in (1, 2, 3, 4, 5)
+                            else None),
             "phase_label": p.get("overall_phase_label"),
             "population": p.get("population", p.get("estimated_population")),
             "phase_pop": {i: p.get("phase%d_population" % i) for i in range(1, 6)},
@@ -264,6 +383,268 @@ def build_geojson_records(geojson_path):
             "geometry": geom,
         })
     return records, meta
+
+
+# ==========================================================================
+#   IPC EXCEL READER AND THE JOIN (L-001, Nov 2026; all three periods)
+# ==========================================================================
+# The IPC Mapping Tool's GeoJSON download gives the Current (February-May
+# 2026) features whatever period is selected; only its header's "active"
+# flag changes. The Excel export of the same analysis holds all three
+# periods, area by area. So the per-area figures for every period are read
+# from the Excel at run time, and the GeoJSON supplies only the outlines
+# (polygons) and the camps' points. Nothing is typed in; nothing is summed.
+
+def _excel_int(v):
+    """An Excel population cell -> int. Some Est Pop cells are text."""
+    if v is None or v == "":
+        return None
+    return int(round(float(str(v).replace(",", "").strip())))
+
+
+def _excel_float(v):
+    if v is None or v == "":
+        return None
+    return float(v)
+
+
+def _phase_code_value(code):
+    """IPC's phase code "P0".."P5" -> 1..5, or None for not analysed.
+    "P0", 0 and a missing code are all 'not analysed', never 'Phase 0'."""
+    if code is None:
+        return None
+    s = str(code).strip().upper().lstrip("P")
+    if not s.isdigit():
+        return None
+    n = int(s)
+    return n if 1 <= n <= 5 else None
+
+
+def read_ipc_excel(xlsx_path=None):
+    """Read the IPC Excel export's "Population Table" sheet.
+
+    Returns (areas, meta). areas maps the area name (the Excel's leading
+    spaces stripped, the inner spelling kept, e.g. "Um Durein  IDPs") to
+    {period_code: record} for the three periods in IPC_PERIODS. Rows
+    indented by two spaces are areas; unindented rows are state totals and
+    "ANALYSIS TOTALS", which are not read (they are not shown on the layer).
+    meta carries the export date from the "Analysis Overview" sheet.
+    """
+    import openpyxl
+    xlsx_path = xlsx_path or DEFAULT_EXCEL
+    wb = openpyxl.load_workbook(xlsx_path, read_only=True, data_only=True)
+    ws = wb["Population Table"]
+    rows = list(ws.iter_rows(values_only=True))
+    header = [str(h) if h is not None else "" for h in rows[0]]
+    col = {h: i for i, h in enumerate(header)}
+
+    def cell(row, prefix, field):
+        key = "%s - %s" % (prefix, field)
+        if key not in col:
+            raise ValueError("IPC Excel: column %r not found in %s"
+                             % (key, xlsx_path))
+        return row[col[key]]
+
+    areas = {}
+    for row in rows[1:]:
+        raw = row[0]
+        if not isinstance(raw, str) or not raw.startswith("  "):
+            continue   # state totals, ANALYSIS TOTALS, blank rows
+        name = raw.lstrip(" ")
+        if name in areas:
+            raise ValueError("IPC Excel: area %r appears twice" % name)
+        per = {}
+        for code, prefix, _label, *_dates in IPC_PERIODS:
+            phase_code = cell(row, prefix, "Phase")
+            per[code] = {
+                "phase_code": phase_code,
+                "phase_value": _phase_code_value(phase_code),
+                "population": _excel_int(cell(row, prefix, "Est Pop")),
+                "phase_pop": {i: _excel_int(cell(row, prefix, "Phase %d" % i))
+                              for i in range(1, 6)},
+                "phase_pct": {i: _excel_float(cell(row, prefix, "Phase %d %%" % i))
+                              for i in range(1, 6)},
+                "p3plus_pop": _excel_int(cell(row, prefix, "Phase 3+")),
+                "p3plus_pct": _excel_float(cell(row, prefix, "Phase 3+ %")),
+                "from_date": str(cell(row, prefix, "From Date") or "")[:10],
+                "thru_date": str(cell(row, prefix, "Thru Date") or "")[:10],
+            }
+        areas[name] = per
+
+    meta = {}
+    if "Analysis Overview" in wb.sheetnames:
+        for r in wb["Analysis Overview"].iter_rows(values_only=True):
+            if r and r[0] == "Export Date":
+                meta["export_date"] = str(r[1])[:10]
+            elif r and r[0] == "Analysis Title":
+                meta["analysis_name"] = str(r[1])
+    wb.close()
+    return areas, meta
+
+
+def read_geojson_features(geojson_path=None):
+    """The GeoJSON's features grouped by area name: polygon outlines and
+    points. Two identical points for one camp (IPC repeats some) count once.
+
+    Returns (by_name, meta): by_name[name] = {"polygons": [feature...],
+    "points": [feature...]}.
+    """
+    geojson_path = geojson_path or DEFAULT_GEOJSON
+    with open(geojson_path, "r", encoding="utf-8") as f:
+        gj = json.load(f)
+    by_name = {}
+    seen_points = set()
+    meta = {}
+    for feat in gj.get("features", []):
+        p = feat.get("properties", {})
+        geom = feat.get("geometry") or {}
+        name = p.get("area_name") or p.get("name") or "(unnamed)"
+        if not meta:
+            meta = {
+                "analysis_name": p.get("analysis_name", ""),
+                "export_timestamp": p.get("export_timestamp", ""),
+            }
+        slot = by_name.setdefault(name, {"polygons": [], "points": []})
+        if geom.get("type") in ("Polygon", "MultiPolygon"):
+            slot["polygons"].append(feat)
+        elif geom.get("type") == "Point":
+            key = (name, tuple(geom.get("coordinates", [])))
+            if key in seen_points:
+                continue
+            seen_points.add(key)
+            slot["points"].append(feat)
+    return by_name, meta
+
+
+# Current columns of the Excel that must equal the GeoJSON, field by field.
+_CURRENT_CHECK_FIELDS = (
+    ["population", "p3plus_pop"]
+    + ["phase%d_population" % i for i in range(1, 6)]
+)
+
+
+def _geojson_current_value(props, field):
+    if field == "population":
+        return props.get("population", props.get("estimated_population"))
+    if field == "p3plus_pop":
+        return props.get("phase3_plus_population")
+    return props.get(field)
+
+
+def _excel_current_value(rec, field):
+    if field == "population":
+        return rec["population"]
+    if field == "p3plus_pop":
+        return rec["p3plus_pop"]
+    i = int(field[5])
+    return rec["phase_pop"][i]
+
+
+def join_ipc_periods(xlsx_path=None, geojson_path=None):
+    """Join the Excel's three periods to the GeoJSON's outlines by area name.
+
+    Stops (ValueError, the areas named) when:
+      - a name is in one file and not the other;
+      - any Current figure in the Excel differs from the GeoJSON's (every
+        feature of the area is checked, the camps' points included), or
+        the mapped phase differs;
+      - a famine-risk name in FAMINE_RISK_REPORT_TO_DATA does not resolve
+        to exactly one area.
+
+    Returns a dict:
+      areas      name -> {"periods": {code: rec}, "polygons": [...],
+                          "points": [...], "kind": "polygon"|"camp"}
+      analysed   code -> sorted names whose phase is 1-5 in that period
+      camps      sorted names drawn only as points (no polygon)
+      famine     code -> sorted data names at risk of Famine
+      meta       export date, analysis name
+    """
+    xl, xl_meta = read_ipc_excel(xlsx_path)
+    gj, gj_meta = read_geojson_features(geojson_path)
+
+    only_xl = sorted(set(xl) - set(gj))
+    only_gj = sorted(set(gj) - set(xl))
+    if only_xl or only_gj:
+        raise ValueError("IPC join: names do not match. Only in the Excel: %s. "
+                         "Only in the GeoJSON: %s." % (only_xl, only_gj))
+
+    differences = []
+    for name in sorted(xl):
+        cur = xl[name]["current"]
+        for feat in gj[name]["polygons"] + gj[name]["points"]:
+            props = feat.get("properties", {})
+            for field in _CURRENT_CHECK_FIELDS:
+                a = _excel_current_value(cur, field)
+                b = _geojson_current_value(props, field)
+                b = None if b is None else int(round(float(b)))
+                # Not-analysed: the Excel may leave a cell empty where the
+                # GeoJSON writes 0 (Abyei PCA); both mean no people counted.
+                if (a or 0) != (b or 0):
+                    differences.append("%s: %s Excel %s, GeoJSON %s"
+                                       % (name, field, a, b))
+            gv = props.get("overall_phase_value")
+            gv = gv if gv in (1, 2, 3, 4, 5) else None
+            if gv != cur["phase_value"]:
+                differences.append("%s: phase Excel %s, GeoJSON %s"
+                                   % (name, cur["phase_code"],
+                                      props.get("overall_phase_label")))
+    if differences:
+        raise ValueError("IPC join: the Excel's Current figures differ from "
+                         "the GeoJSON in %d place(s):\n  %s"
+                         % (len(differences), "\n  ".join(differences)))
+
+    # Each period's dates in the Excel must be IPC's dates for that period.
+    wrong_dates = []
+    for name in sorted(xl):
+        for code, _prefix, _label, from_d, thru_d in IPC_PERIODS:
+            rec = xl[name][code]
+            if (rec["from_date"], rec["thru_date"]) != (from_d, thru_d):
+                wrong_dates.append("%s %s: %s to %s" % (
+                    name, code, rec["from_date"], rec["thru_date"]))
+    if wrong_dates:
+        raise ValueError("IPC join: period dates differ from IPC_PERIODS: %s"
+                         % "; ".join(wrong_dates))
+
+    areas = {}
+    for name in sorted(xl):
+        kind = "polygon" if gj[name]["polygons"] else "camp"
+        areas[name] = {"periods": xl[name],
+                       "polygons": gj[name]["polygons"],
+                       "points": gj[name]["points"],
+                       "kind": kind}
+
+    analysed = {code: sorted(n for n in areas
+                             if areas[n]["periods"][code]["phase_value"])
+                for code, *_rest in IPC_PERIODS}
+    camps = sorted(n for n in areas if areas[n]["kind"] == "camp")
+
+    famine = {}
+    bad = []
+    for code, report_names in FAMINE_RISK_BY_PERIOD.items():
+        resolved = []
+        for rn in report_names:
+            dn = FAMINE_RISK_REPORT_TO_DATA.get(rn)
+            hits = [n for n in areas if n == dn]
+            if len(hits) != 1:
+                bad.append("%s -> %r (%d matches)" % (rn, dn, len(hits)))
+            elif not areas[hits[0]]["periods"][code]["phase_value"]:
+                bad.append("%s -> %r is not analysed in %s" % (rn, dn, code))
+            else:
+                resolved.append(hits[0])
+        if len(resolved) != FAMINE_RISK_COUNTS[code]:
+            bad.append("%s: %d areas resolved, the report counts %d"
+                       % (code, len(resolved), FAMINE_RISK_COUNTS[code]))
+        famine[code] = sorted(resolved)
+    if bad:
+        raise ValueError("IPC join: famine-risk names that do not resolve to "
+                         "exactly one area: %s" % "; ".join(bad))
+
+    meta = {"export_date": xl_meta.get("export_date")
+            or (gj_meta.get("export_timestamp") or "")[:10],
+            "analysis_name": gj_meta.get("analysis_name")
+            or xl_meta.get("analysis_name", "")}
+    return {"areas": areas, "analysed": analysed, "camps": camps,
+            "famine": famine, "meta": meta}
 
 
 def _rings_from_polygon(coords):
@@ -286,423 +667,436 @@ def _representative_point(geom):
 
 
 # ==========================================================================
-#   BALLOON (full phase1-5 breakdown -- the structural fix)
+#   THE WEB FILE (L-001, Nov 2026): one KMZ, three periods, for Google Earth
+#   on the web
 # ==========================================================================
+# Written as KML text here, not through simplekml: simplekml writes a
+# feature's style inside the Folder that holds the feature, and Google Earth
+# on the web loses every style referenced from inside a Folder (every area
+# plain yellow; tested 2026-11-13). The rules this builder keeps, each from
+# that test:
+#   - every style is a shared Style at Document level, referenced by id;
+#   - no ScreenOverlay (unsupported on the web): the title and the legend
+#     live in the "i" pin's pop-up, as lines;
+#   - pop-ups write one <div> per line and <b> for labels; no <table>, no
+#     <br> (the web strips <br> and turns <table> into "TABLE SECTION").
+# Every figure in a pop-up is read from the IPC Excel at run time; national
+# figures are the transcribed constants above; nothing is summed.
 
-def build_balloon_html(rec, retrieved, analysis_name=""):
-    """Per-area CDATA HTML balloon. All fields transcribed; none synthesized.
+CAMP_ICON = P5_DOT_ICON      # a plain circle, tinted by phase
+CAMP_SCALE = 0.8             # Mode-5 visual tunable, not a data claim
+P5_DOT_CLASSES = 8           # shared dot sizes; Mode-5 visual tunable
+INFO_ICON = "http://maps.google.com/mapfiles/kml/shapes/info-i.png"
+INFO_LAT, INFO_LON = 15.5, 32.5   # placement only, near Khartoum
 
-    The full phase1-5 split (including phase5_population) is mandatory: where a
-    P4-mapped area carries a Phase-5 population, that line is the hidden
-    Catastrophe made visible.
-    """
-    pv = rec["phase_value"]
-    if pv is None:
-        mapped = "Not analysed"
-    else:
-        mapped = "Phase %s (%s)" % (pv, PHASE_LABELS.get(pv, rec.get("phase_label", "")))
+# Plain colour names for the "i" pop-up's key, now that the legend card is
+# gone. COMPOSED: everyday names for the swatches sampled in PHASE_COLORS_RGB.
+PHASE_COLOR_WORDS = {1: "light green", 2: "yellow", 3: "orange",
+                     4: "red", 5: "dark red"}
 
-    rows = ""
-    for i in range(1, 6):
-        rows += (
-            "<tr><td>Phase %d %s</td><td align='right'>%s</td>"
-            "<td align='right'>%s%%</td></tr>"
-            % (i, PHASE_LABELS[i], _intpop(rec["phase_pop"].get(i)),
-               _pct(rec["phase_pct"].get(i)))
-        )
+# The period that opens visible (Tony's ruling, Nov 13, 2026: one file,
+# opening on October-January). The other two arrive switched off.
+OPEN_PERIOD = "projected-2"
+# Folder order in the list: the visible period first, then back in time.
+FOLDER_ORDER = ["projected-2", "projected-1", "current"]
 
-    html = (
-        "<![CDATA["
-        "<div style='font-family:Arial,sans-serif;font-size:12px;width:320px'>"
-        "<h3 style='margin:2px 0'>%(name)s</h3>"
-        "<b>Mapped IPC Phase:</b> %(mapped)s<br>"
-        "<b>Period:</b> %(period)s<br>"
-        "<b>Population (area):</b> %(pop)s<br>"
-        "<table style='border-collapse:collapse;width:100%%;margin-top:4px'>"
-        "<tr><th align='left'>Phase breakdown</th><th align='right'>people</th>"
-        "<th align='right'>%%</th></tr>%(rows)s</table>"
-        "<b>Phase 3+ (Crisis or worse):</b> %(p3plus)s (%(p3pct)s%%)<br>"
-        "<b>Evidence level (IPC):</b> %(conf)s<br>"
-        "<b>Assistance (HFA) level:</b> %(hfa)s<br>"
-        "<hr style='border:none;border-top:1px solid #ccc;margin:4px 0'>"
-        "<span style='font-size:10px;color:#555'>"
-        "Analysis: %(analysis)s<br>"
-        "Source: %(prov)s<br>"
-        "Data retrieved: %(retrieved)s</span>"
-        "</div>"
-        "]]>"
-    ) % {
-        "name": rec["area_name"],
-        "mapped": mapped,
-        "period": PERIOD_LABEL,
-        "pop": _intpop(rec["population"]),
-        "rows": rows,
-        "p3plus": _intpop(rec["p3plus_pop"]),
-        "p3pct": _pct(rec["p3plus_pct"]),
-        "conf": rec["confidence_level"] if rec["confidence_level"] is not None else "-",
-        "hfa": rec["hfa_value"] if rec["hfa_value"] is not None else "-",
-        "analysis": analysis_name,
-        "prov": PROVENANCE_DATA,
-        "retrieved": retrieved,
-    }
-    # analysis_name belongs to the file meta, injected by caller via .replace
-    return html
+FOOTER_STYLE = "font-size:11px;color:#555"
 
 
-# ==========================================================================
-#   FRAMING-LAYER TEXT (composed/transcribed C1/C2/C3) and CARDS
-# ==========================================================================
+def _x(text):
+    """Escape text for XML element content or for HTML inside CDATA."""
+    return html.escape(str(text), quote=True)
+
+
+def _cdata(inner):
+    return "<![CDATA[" + inner.replace("]]>", "]]]]><![CDATA[>") + "]]>"
+
+
+def _div(inner_html, style=""):
+    if style:
+        return '<div style="%s">%s</div>' % (style, inner_html)
+    return "<div>%s</div>" % inner_html
+
+
+def _labelled(label, value):
+    return _div("<b>%s</b> %s" % (_x(label), _x(value)))
+
+
+def _period_label(code):
+    return [p[2] for p in IPC_PERIODS if p[0] == code][0]
+
+
+# --------------------------------------------------------------------------
+#   Words (composed sentences are built here from sourced constants)
+# --------------------------------------------------------------------------
 
 def compose_framing_text():
-    """Return the framing-layer sentences. Numeric tokens are sourced above
-    (NATL_* constants, TWENTY_PCT_RULE) within scanner lookback.
+    """The Current period's framing sentences. Numeric tokens are the
+    sourced NATL_* constants and TWENTY_PCT_RULE above.
 
     C1 -- mapped-vs-population reconciliation (the hidden Catastrophe).
     C2 -- the >=20% mapped-phase rule (IPC verbatim clause).
     C3 -- causal-restraint statement.
     """
-    # C1: numbers transcribed from the report (see NATL_* sourcing above).
     c1 = ("No area is mapped Phase 5 (Famine), but about %s people are in "
           "Phase 5 (Catastrophe), concentrated in North Darfur, South Darfur "
           "and South Kordofan." % NATL_PHASE5_CATASTROPHE)
-    c2 = TWENTY_PCT_RULE
-    c3 = CAUSAL_RESTRAINT
     national = ("Sudan, current period (February - May 2026): of %s people "
                 "analysed, about %s are in IPC Phase 3 or above (Crisis or "
                 "worse), including over %s in Phase 4 (Emergency)."
                 % (NATL_TOTAL_POP, NATL_PHASE3PLUS, NATL_PHASE4))
-    return {"national": national, "c1": c1, "c2": c2, "c3": c3}
+    return {"national": national, "c1": c1, "c2": TWENTY_PCT_RULE,
+            "c3": CAUSAL_RESTRAINT}
 
 
-def _overlay_asset_path(kind, png_bytes):
-    """Write a ScreenOverlay PNG under a build-stamped name so a regenerated KMZ
-    never reuses a filename Google Earth has already cached.
-
-    Heat avoids stale overlays by date-stamping its card PNG; food KMZs keep one
-    filename per country, so the old static name (e.g. intel_<id>.png) collided
-    with GE's media cache and the previous card persisted on mobile through layer
-    and file deletion. The build stamp (BUILD_STAMP, YYYY-MM-DD-HH-MM) makes every
-    regenerated overlay a new file -- busting the cache including same-period card
-    edits -- and reads as the build time at a glance. Prior overlays for this
-    scenario+kind are removed so data/ does not accumulate; the KMZ filename is
-    unchanged (the --preload glob still matches).
-    """
-    for old in glob.glob(os.path.join(DATA_DIR,
-                                      "%s_%s*.png" % (kind, SCENARIO_ID))):
-        try:
-            os.remove(old)
-        except OSError:
-            pass
-    path = os.path.join(DATA_DIR,
-                        "%s_%s_%s.png" % (kind, SCENARIO_ID, BUILD_STAMP))
-    with open(path, "wb") as f:
-        f.write(png_bytes)
-    return path
-
-
-def create_legend_card(p5_min=None, p5_max=None):
-    """Phase ramp + >=20% rule + (if provided) the Phase 5 dot-size key.
-
-    The dot-size key shows what a large vs small maroon dot means. Its values
-    (p5_min/p5_max) are the actual range of phase5_population in the data, passed
-    in at runtime -- nothing here is hardcoded or recalled.
-    """
-    fig = plt.figure(figsize=(2.7, 4.7), dpi=130)
-    fig.patch.set_facecolor("white")
-    fig.patch.set_alpha(0.9)
-    ax = fig.add_subplot(111)
-    ax.axis("off")
-    ax.set_xlim(0, 10)
-    ax.set_ylim(0, 16)
-
-    ax.text(0.2, 15.4, "IPC Acute Food Insecurity", fontweight="bold", fontsize=8)
-    ax.text(0.2, 14.8, "Phase Classification", fontsize=7.5)
-
-    rows = [(5, "5  Famine / Catastrophe", PHASE_COLORS_RGB[5]),
-            (4, "4  Emergency", PHASE_COLORS_RGB[4]),
-            (3, "3  Crisis", PHASE_COLORS_RGB[3]),
-            (2, "2  Stressed", PHASE_COLORS_RGB[2]),
-            (1, "1  Minimal", PHASE_COLORS_RGB[1]),
-            (0, "Not analysed", NOT_ANALYSED_RGB)]
-    y = 13.6
-    for _, label, color in rows:
-        ax.add_patch(mpatches.Rectangle((0.3, y - 0.35), 1.0, 0.7,
-                                        facecolor=color, edgecolor="#888"))
-        ax.text(1.6, y, label, fontsize=7.5, va="center")
-        y -= 1.15
-
-    rule = ("Mapped phase = highest severity\naffecting at least 20% of an\n"
-            "area's population.")
-    ax.text(0.2, 5.6, rule, fontsize=6.5, va="top", color="#333")
-
-    # Phase 5 (Catastrophe) dot-size key -- only if a range was supplied.
-    if p5_min is not None and p5_max is not None and p5_max > 0:
-        ax.plot([0.2, 9.8], [3.7, 3.7], color="#bbb", lw=0.6)
-        ax.text(0.2, 3.4, "Phase 5 (Catastrophe) population",
-                fontweight="bold", fontsize=7, va="top")
-        ax.text(0.2, 2.95, "maroon dot, by area; larger = more people",
-                fontsize=6.2, va="top", color="#333")
-        dot_color = PHASE_COLORS_RGB[5]
-        # radii echo the map's sqrt sizing (large vs small), purely visual
-        r_big, r_small = 0.62, 0.62 * (P5_DOT_MIN_SCALE / P5_DOT_MAX_SCALE) ** 0.5
-        ax.add_patch(mpatches.Circle((1.1, 1.4), r_big, facecolor=dot_color,
-                                     edgecolor="white", lw=0.5))
-        ax.add_patch(mpatches.Circle((3.4, 1.15), r_small, facecolor=dot_color,
-                                     edgecolor="white", lw=0.5))
-        ax.text(2.0, 1.4, "{:,}".format(int(round(p5_max))),
-                fontsize=6.5, va="center", color="#222")
-        ax.text(4.1, 1.15, "{:,}".format(int(round(p5_min))),
-                fontsize=6.5, va="center", color="#222")
-        ax.text(0.2, 0.2, "people in Phase 5 (Catastrophe)",
-                fontsize=6.0, va="top", color="#555")
-
-    buf = io.BytesIO()
-    plt.savefig(buf, format="png", bbox_inches="tight", pad_inches=0.08,
-                transparent=False)
-    plt.close()
-    return _overlay_asset_path("legend", buf.getvalue())
-
-
-def create_intel_card():
-    """Compact always-on header (title + period + hint), matching the heat KMZ
-    3+5 pattern. The full briefing -- framing, drivers, Middle East line,
-    source/citation -- now lives in the tappable i-pin balloon
-    (create_info_placemark via _balloon_info_html), so this header only
-    identifies the layer and the map reads at a glance without the long text
-    block colliding with Google Earth chrome.
-    """
-    fig = plt.figure(figsize=(4, 0.9), dpi=130)
-    fig.patch.set_facecolor("#f8f9fa")
-    fig.patch.set_alpha(0.92)
-    ax = fig.add_subplot(111)
-    ax.axis("off")
-
-    ax.text(0.04, 0.74, "SUDAN -- ACUTE FOOD INSECURITY",
-            transform=ax.transAxes, fontsize=11, fontweight="bold",
-            color="#222", va="top")
-    ax.text(0.04, 0.42, PERIOD_LABEL,
-            transform=ax.transAxes, fontsize=8, fontfamily="monospace",
-            color="#555", va="top")
-    ax.text(0.04, 0.14, "Tap the (i) pin for the full briefing",
-            transform=ax.transAxes, fontsize=7, color="#777", style="italic",
-            va="top")
-
-    buf = io.BytesIO()
-    plt.savefig(buf, format="png", bbox_inches="tight", pad_inches=0.1,
-                transparent=False)
-    plt.close()
-    return _overlay_asset_path("intel", buf.getvalue())
-
-
-# ==========================================================================
-#   KML / KMZ BUILD
-# ==========================================================================
-
-def _add_screenoverlay(kml, png_path, sx, sy, ox, oy, size_x):
-    so = kml.newscreenoverlay(name=os.path.basename(png_path))
-    so.icon.href = os.path.basename(png_path)
-    so.overlayxy = simplekml.OverlayXY(x=ox, y=oy,
-                                       xunits=simplekml.Units.fraction,
-                                       yunits=simplekml.Units.fraction)
-    so.screenxy = simplekml.ScreenXY(x=sx, y=sy,
-                                     xunits=simplekml.Units.fraction,
-                                     yunits=simplekml.Units.fraction)
-    so.size = simplekml.Size(x=size_x, y=0,
-                             xunits=simplekml.Units.fraction,
-                             yunits=simplekml.Units.fraction)
-
-
-def _phase_style(phase_value):
-    style = simplekml.Style()
-    if phase_value is None or phase_value not in PHASE_COLORS_RGB:
-        fill = rgb_to_kml(NOT_ANALYSED_RGB, "66")   # white, semi -> reads as "no data"
-        line = rgb_to_kml(LINE_RGB, "FF")
+def compose_period_lines(code, joined):
+    """The national lines for one period, as plain sentences, in IPC's
+    numbers (transcribed constants; never summed from the areas)."""
+    no_p5_area = not any(a["periods"][code]["phase_value"] == 5
+                         for a in joined["areas"].values())
+    if code == "current":
+        f = compose_framing_text()
+        lines = [f["national"]]
+        if no_p5_area:
+            lines.append(f["c1"])
+        return lines
+    if code == "projected-1":
+        lines = [
+            "June - September 2026, the lean season, in the %s areas IPC "
+            "analysed: %s people, %s of the analysed population, in IPC "
+            "Phase 3 or above (Crisis or worse). Around %s are expected in "
+            "Phase 4 (Emergency) and a further %s in Phase 3 (Crisis)."
+            % (PROJ_AREAS, P1_PHASE3PLUS, P1_PHASE3PLUS_PCT, P1_PHASE4,
+               P1_PHASE3),
+        ]
+        p5 = "nearly %s" % P1_PHASE5
     else:
-        fill = rgb_to_kml(PHASE_COLORS_RGB[phase_value], POLY_FILL_ALPHA)
-        line = rgb_to_kml(LINE_RGB, POLY_LINE_ALPHA)
-    style.polystyle.color = fill
-    style.polystyle.fill = 1
-    style.polystyle.outline = 1
-    style.linestyle.color = line
-    style.linestyle.width = 1
-    return style
+        lines = [
+            "October 2026 - January 2027, the harvest season, in the %s "
+            "areas IPC analysed: an estimated %s people, %s of the analysed "
+            "population, in IPC Phase 3 or above (Crisis or worse), "
+            "including %s in Phase 4 (Emergency) and %s in Phase 3 (Crisis)."
+            % (PROJ_AREAS, P2_PHASE3PLUS, P2_PHASE3PLUS_PCT, P2_PHASE4,
+               P2_PHASE3),
+        ]
+        p5 = "over %s" % P2_PHASE5
+    if no_p5_area:
+        lines.append("No area is mapped Phase 5 (Famine) in this period, but "
+                     "IPC expects %s people in Phase 5 (Catastrophe)." % p5)
+    else:
+        lines.append("IPC expects %s people in Phase 5 (Catastrophe)." % p5)
+    lines.append(COVERAGE_LINE)
+    lines.append(COMPARE_CAUTION)
+    return lines
 
 
-def build_phase5_dots(records, document, retrieved, analysis_name=""):
-    """L-069: maroon proportional dots for areas carrying a mapped Phase 5
-    (Catastrophe) population. Pure IPC passthrough -- every displayed value is
-    read from the GeoJSON record at runtime; nothing here is hardcoded or summed.
-    Returned in their own folder so Google Earth toggles them as a group.
+# --------------------------------------------------------------------------
+#   Styles (all at Document level)
+# --------------------------------------------------------------------------
 
-    "Catastrophe" is IPC's population-level term; these areas are mapped Phase 4
-    (Emergency), and none is classified Famine (an area-level term). The label
-    "Famine" therefore appears nowhere on these dots, by design.
+def _poly_style_xml(style_id, rgb, fill_alpha):
+    return ('<Style id="%s"><LineStyle><color>%s</color><width>1</width>'
+            '</LineStyle><PolyStyle><color>%s</color><fill>1</fill>'
+            '<outline>1</outline></PolyStyle></Style>\n'
+            % (style_id, rgb_to_kml(LINE_RGB, POLY_LINE_ALPHA),
+               rgb_to_kml(rgb, fill_alpha)))
 
-    Module section updated: June 2026 with Anthropic's Claude Opus 4.8.
-    """
-    import math
-    p5_records = [r for r in records if (r["phase_pop"].get(5) or 0) > 0]
-    if not p5_records:
-        return
-    max_p5 = max(float(r["phase_pop"][5]) for r in p5_records)
+
+def _icon_style_xml(style_id, rgb, scale, href, label_scale=0):
+    color = ("<color>%s</color>" % rgb_to_kml(rgb, "FF")) if rgb else ""
+    return ('<Style id="%s"><IconStyle>%s<scale>%s</scale><Icon><href>%s'
+            '</href></Icon></IconStyle><LabelStyle><scale>%s</scale>'
+            '</LabelStyle></Style>\n'
+            % (style_id, color, scale, _x(href), label_scale))
+
+
+def _p5_dot_scales():
     span = P5_DOT_MAX_SCALE - P5_DOT_MIN_SCALE
-    dot_kml_color = rgb_to_kml(P5_DOT_RGB, "FF")
-
-    fol = document.newfolder(name="Phase 5 (Catastrophe) populations (area level)")
-    for rec in sorted(p5_records, key=lambda r: -float(r["phase_pop"][5])):
-        p5 = float(rec["phase_pop"][5])
-        lon, lat = _representative_point(rec["geometry"])
-        # area ~ population: scale the icon by sqrt of the population fraction
-        scale = (P5_DOT_MIN_SCALE + span * math.sqrt(p5 / max_p5)
-                 if max_p5 else P5_DOT_MIN_SCALE)
-
-        pv = rec["phase_value"]
-        mapped = "Phase %s (%s)" % (pv, PHASE_LABELS.get(pv, rec.get("phase_label", "")))
-
-        # Balloon: IPC fields only, read at runtime. No hardcoded/summed numbers.
-        balloon = (
-            "<![CDATA["
-            "<div style='font-family:Arial,sans-serif;font-size:12px;width:300px'>"
-            "<h3 style='margin:2px 0'>%(name)s</h3>"
-            "<b>Mapped IPC Phase:</b> %(mapped)s<br>"
-            "<b>In Phase 5 (Catastrophe):</b> %(p5)s people (%(p5pct)s%% of area)<br>"
-            "<b>Area population:</b> %(pop)s<br>"
-            "<hr style='border:none;border-top:1px solid #ccc;margin:4px 0'>"
-            "<span style='font-size:10px;color:#555'>"
-            "Analysis: %(analysis)s<br>Source: %(prov)s<br>"
-            "Data retrieved: %(retrieved)s</span></div>]]>"
-        ) % {
-            "name": rec["area_name"],
-            "mapped": mapped,
-            "p5": _intpop(rec["phase_pop"].get(5)),
-            "p5pct": _pct(rec["phase_pct"].get(5)),
-            "pop": _intpop(rec["population"]),
-            "analysis": analysis_name,
-            "prov": PROVENANCE_DATA,
-            "retrieved": retrieved,
-        }
-
-        pt = fol.newpoint(name=rec["area_name"])
-        pt.coords = [(lon, lat)]
-        pt.style.iconstyle.icon.href = P5_DOT_ICON
-        pt.style.iconstyle.color = dot_kml_color
-        pt.style.iconstyle.scale = round(scale, 3)
-        pt.style.labelstyle.scale = 0  # name on click, not as map clutter
-        pt.description = balloon
+    return [round(P5_DOT_MIN_SCALE + span * k / (P5_DOT_CLASSES - 1), 3)
+            for k in range(P5_DOT_CLASSES)]
 
 
-def _balloon_info_html(framing):
-    """Full information block for the tappable i-pin: transcribed IPC framing,
-    key drivers, the Middle East context line, and a source / citation footer.
-    These are the same words that were on the old full intel card and the
-    framing folder, consolidated behind the 'i' icon so the always-on header
-    can stay compact (heat 3+5 pattern). Escaped; no synthesis.
-    """
-    def section(title, text):
-        return ('<h4 style="margin:8px 0 2px 0; font-size:14px;">%s</h4>'
-                '<p style="margin:0 0 6px 0;">%s</p>'
-                % (html.escape(title), html.escape(text)))
+def _p5_dot_class(p5, p5_max):
+    """1..P5_DOT_CLASSES: icon area ~ population (sqrt), one scale for all
+    three periods so a dot of one size means the same people in each."""
+    frac = math.sqrt(float(p5) / float(p5_max)) if p5_max else 0.0
+    return 1 + int(round(frac * (P5_DOT_CLASSES - 1)))
 
-    parts = [
-        section("National summary", framing["national"]),
-        section("The hidden Catastrophe", framing["c1"]),
-        section("What the map color means", framing["c2"]),
-    ]
-    parts.append('<h4 style="margin:8px 0 2px 0; font-size:14px;">'
-                 'Key drivers (IPC)</h4>')
-    parts.append('<ul style="margin:0 0 6px 0; padding-left:18px;">')
+
+def web_styles_xml():
+    out = []
+    for pv in range(1, 6):
+        out.append(_poly_style_xml("phase%d" % pv, PHASE_COLORS_RGB[pv],
+                                   POLY_FILL_ALPHA))
+    out.append(_poly_style_xml("not_analysed", NOT_ANALYSED_RGB, "66"))
+    for pv in range(1, 6):
+        out.append(_icon_style_xml("camp_phase%d" % pv, PHASE_COLORS_RGB[pv],
+                                   CAMP_SCALE, CAMP_ICON))
+    out.append(_icon_style_xml("camp_not_analysed", NOT_ANALYSED_RGB,
+                               CAMP_SCALE, CAMP_ICON))
+    for k, s in enumerate(_p5_dot_scales(), 1):
+        out.append(_icon_style_xml("p5dot_%d" % k, P5_DOT_RGB, s,
+                                   P5_DOT_ICON))
+    out.append(_icon_style_xml("info", None, 1.3, INFO_ICON, label_scale=0.9))
+    return "".join(out)
+
+
+# --------------------------------------------------------------------------
+#   Pop-ups
+# --------------------------------------------------------------------------
+
+def _footer(meta):
+    return (_div("Analysis: %s" % _x(meta["analysis_name"]), FOOTER_STYLE)
+            + _div("Source: %s" % _x(PROVENANCE_DATA), FOOTER_STYLE)
+            + _div("Data retrieved: %s" % _x(meta["export_date"]),
+                   FOOTER_STYLE))
+
+
+def area_popup_html(name, area, code, meta, famine_names):
+    """One area's (or camp's) pop-up for one period: the FULL phase 1-5
+    breakdown, people and percent, then Phase 3+, IPC's evidence and
+    assistance levels where the export carries them, and the source."""
+    rec = area["periods"][code]
+    lines = [_div("<b>%s</b>" % _x(name))]
+    if area["kind"] == "camp":
+        lines.append(_div("IDP settlement (a camp for internally displaced "
+                          "people)"))
+    lines.append(_labelled("Period:", _period_label(code)))
+    pv = rec["phase_value"]
+    if pv is None:
+        lines.append(_labelled("Mapped IPC Phase:", "Not analysed"))
+        if code != "current":
+            lines.append(_div(_x(NOT_IN_PROJECTION_LINE)))
+    else:
+        lines.append(_labelled("Mapped IPC Phase:",
+                               "Phase %d (%s)" % (pv, PHASE_LABELS[pv])))
+        if name in famine_names:
+            lines.append(_div("<b>%s</b>" % _x(FAMINE_RISK_WORDS)))
+        lines.append(_labelled("Population (area):",
+                               _intpop(rec["population"])))
+        lines.append(_div("<b>Phase breakdown (people, percent):</b>"))
+        for i in range(1, 6):
+            lines.append(_div(_x("Phase %d %s: %s (%s%%)"
+                                 % (i, PHASE_LABELS[i],
+                                    _intpop(rec["phase_pop"][i]),
+                                    _pct(rec["phase_pct"][i])))))
+        lines.append(_labelled("Phase 3+ (Crisis or worse):",
+                               "%s (%s%%)" % (_intpop(rec["p3plus_pop"]),
+                                              _pct(rec["p3plus_pct"]))))
+        if code == "current":
+            # IPC's evidence and assistance levels: the GeoJSON carries them
+            # for the Current period only; the Excel carries none.
+            props = (area["polygons"] + area["points"])[0]["properties"]
+            conf = props.get("confidence_level")
+            hfa = props.get("hfa_value")
+            lines.append(_labelled("Evidence level (IPC):",
+                                   "-" if conf is None else conf))
+            lines.append(_labelled("Assistance (HFA) level:",
+                                   "-" if hfa is None else hfa))
+    return "".join(lines) + _footer(meta)
+
+
+def p5_dot_popup_html(name, area, code, meta):
+    rec = area["periods"][code]
+    pv = rec["phase_value"]
+    return (_div("<b>%s</b>" % _x(name))
+            + _labelled("Period:", _period_label(code))
+            + _labelled("Mapped IPC Phase:",
+                        "Phase %d (%s)" % (pv, PHASE_LABELS[pv]))
+            + _labelled("In Phase 5 (Catastrophe):",
+                        "%s people (%s%% of the area)"
+                        % (_intpop(rec["phase_pop"][5]),
+                           _pct(rec["phase_pct"][5])))
+            + _labelled("Population (area):", _intpop(rec["population"]))
+            + _footer(meta))
+
+
+def _p5_range(joined, code):
+    vals = [a["periods"][code]["phase_pop"][5] for a in
+            joined["areas"].values()
+            if (a["periods"][code]["phase_pop"][5] or 0) > 0]
+    return (min(vals), max(vals)) if vals else (None, None)
+
+
+def period_description_html(code, joined):
+    lines = [_div("<b>%s</b>" % _x(_period_label(code)))]
+    for s in compose_period_lines(code, joined):
+        lines.append(_div(_x(s)))
+    lo, hi = _p5_range(joined, code)
+    if hi:
+        lines.append(_div(_x(
+            "Dark red dots: people in Phase 5 (Catastrophe), by area. The "
+            "largest dot in this period is %s people, the smallest %s."
+            % (_intpop(hi), _intpop(lo)))))
+    n = len(FAMINE_RISK_BY_PERIOD.get(code, []))
+    if n:
+        lines.append(_div(_x(
+            "%s areas and IDP settlements are at %s. Each says so in its "
+            "pop-up." % (n, FAMINE_RISK_WORDS))))
+    return "".join(lines)
+
+
+def info_popup_html(joined):
+    """The "i" pin: what the map shows, the periods, the key (each phase
+    with its colour in words), the 20-percent rule, the national lines of
+    each period, IPC's drivers, and the source. Replaces the title card
+    and the legend card, which the web does not show."""
+    meta = joined["meta"]
+    f = compose_framing_text()
+    h = lambda t: _div("<b>%s</b>" % _x(t), "margin-top:8px")
+    lines = [_div("<b>Sudan -- Acute Food Insecurity (IPC)</b>",
+                  "font-size:16px")]
+    lines.append(_div(_x(
+        "Three periods of one IPC analysis, one folder each. The map opens "
+        "on %s. To see another period, switch its folder on and the others "
+        "off." % _period_label(OPEN_PERIOD))))
+    for code in FOLDER_ORDER:
+        lines.append(_div("- " + _x(_period_label(code))))
+
+    lines.append(h("What the colours mean"))
+    for pv in range(1, 6):
+        lines.append(_div(_x("Phase %d %s: %s" % (
+            pv, "Famine / Catastrophe" if pv == 5 else PHASE_LABELS[pv],
+            PHASE_COLOR_WORDS[pv]))))
+    lines.append(_div(_x("Not analysed: white")))
+    lines.append(_div(_x(f["c2"])))
+    lines.append(_div(_x(
+        "Small circles are IDP settlements (camps for internally displaced "
+        "people), coloured by their phase. Dark red dots show people in "
+        "Phase 5 (Catastrophe); a larger dot means more people, and a dot "
+        "of one size means the same number of people in every period.")))
+    lines.append(_div(_x(
+        "Areas IPC lists at %s say so in their pop-up." % FAMINE_RISK_WORDS)))
+
+    for code in FOLDER_ORDER:
+        lines.append(h(_period_label(code)))
+        for s in compose_period_lines(code, joined):
+            lines.append(_div(_x(s)))
+
+    lines.append(h("Key drivers (IPC)"))
     for name, _text in DRIVERS:
-        parts.append('<li>%s</li>' % html.escape(name))
-    parts.append('</ul>')
-    parts.append('<p style="margin:0 0 6px 0;">%s</p>'
-                 % html.escape(MIDDLE_EAST_LINE))
-    parts.append(section("What this layer does not assert", framing["c3"]))
-    parts.append('<hr style="border:none; border-top:1px solid #ddd; '
-                 'margin:8px 0;">'
-                 '<div style="font-size:11px; color:#666;">Source: %s<br>%s</div>'
-                 % (html.escape(PROVENANCE_DATA), html.escape(CITATION)))
-    return "".join(parts)
+        lines.append(_div("- " + _x(name)))
+    lines.append(_div(_x(MIDDLE_EAST_LINE)))
+    lines.append(h("What this layer does not assert"))
+    lines.append(_div(_x(f["c3"])))
+    lines.append(_div(_x("Source: %s" % PROVENANCE_DATA), FOOTER_STYLE))
+    lines.append(_div(_x(CITATION), FOOTER_STYLE))
+    lines.append(_div("Data retrieved: %s" % _x(meta["export_date"]),
+                      FOOTER_STYLE))
+    return "".join(lines)
 
 
-def build_food_insecurity_kml(records, meta):
-    """Build the KML doc: phase styles, per-area placemarks, framing, cards."""
-    global BUILD_STAMP
-    BUILD_STAMP = datetime.now().strftime("%Y-%m-%d-%H-%M")
-    retrieved = (meta.get("export_timestamp") or "")[:10] or "IPC Mapping Tool"
-    framing = compose_framing_text()
+# --------------------------------------------------------------------------
+#   Geometry and placemarks
+# --------------------------------------------------------------------------
 
-    kml = simplekml.Kml()
-    kml.document.name = "Sudan Food Insecurity (IPC) -- %s" % PERIOD_LABEL
-
-    folder = kml.document.newfolder(name=PERIOD_LABEL)
-
-    for rec in records:
-        style = _phase_style(rec["phase_value"])
-        geom = rec["geometry"]
-        balloon = build_balloon_html(rec, retrieved,
-                                     analysis_name=meta.get("analysis_name", ""))
-
-        if geom["type"] == "Polygon":
-            outer, holes = _rings_from_polygon(geom["coordinates"])
-            pol = folder.newpolygon(name=rec["area_name"])
-            pol.outerboundaryis = outer
-            for h in holes:
-                pol.innerboundaryis = h
-            pol.style = style
-            pol.description = balloon
-            pol.tessellate = 1
-        else:  # MultiPolygon -> one placemark, shared style + balloon
-            mg = folder.newmultigeometry(name=rec["area_name"])
-            for poly_coords in geom["coordinates"]:
-                outer, holes = _rings_from_polygon(poly_coords)
-                p = mg.newpolygon()
-                p.outerboundaryis = outer
-                for h in holes:
-                    p.innerboundaryis = h
-                p.tessellate = 1
-            mg.style = style
-            mg.description = balloon
-
-    # L-069: Phase 5 (Catastrophe) population dots (pure IPC passthrough).
-    build_phase5_dots(records, kml.document, retrieved,
-                      analysis_name=meta.get("analysis_name", ""))
-
-    # Framing-layer text as a KML folder of description-only placemarks (the
-    # words on the layer; the sourced numbers live at the construction site).
-    fr = kml.document.newfolder(name="Framing (read this first)")
-    # Visible tappable "i" pin (shared create_info_placemark), matching the heat
-    # KMZ pattern: the framing text now sits behind an "i" icon near Khartoum
-    # instead of four invisible (scale=0) label points. Same transcribed words.
-    create_info_placemark(fr, "Sudan -- Acute Food Insecurity",
-                          PERIOD_LABEL, "", 15.5, 32.5,
-                          extra_html=_balloon_info_html(framing))
-
-    # Cards as ScreenOverlays (family convention).
-    p5_vals = [float(r["phase_pop"][5]) for r in records
-               if (r["phase_pop"].get(5) or 0) > 0]
-    legend_png = create_legend_card(
-        p5_min=min(p5_vals) if p5_vals else None,
-        p5_max=max(p5_vals) if p5_vals else None)
-    intel_png = create_intel_card()
-    _add_screenoverlay(kml, legend_png, sx=0.98, sy=0.05, ox=1, oy=0, size_x=0.16)
-    _add_screenoverlay(kml, intel_png, sx=0.02, sy=0.98, ox=0, oy=1, size_x=0.30)
-
-    return kml, [legend_png, intel_png]
+def _coords_xml(ring):
+    return " ".join("%r,%r" % (pt[0], pt[1]) for pt in ring)
 
 
-def package_kmz(kml, asset_pngs):
-    """Write the KMZ: a single doc.kml plus the card PNGs.
+def _polygon_xml(coords):
+    rings = ["<outerBoundaryIs><LinearRing><coordinates>%s</coordinates>"
+             "</LinearRing></outerBoundaryIs>" % _coords_xml(coords[0])]
+    for hole in coords[1:]:
+        rings.append("<innerBoundaryIs><LinearRing><coordinates>%s"
+                     "</coordinates></LinearRing></innerBoundaryIs>"
+                     % _coords_xml(hole))
+    return "<Polygon><tessellate>1</tessellate>%s</Polygon>" % "".join(rings)
 
-    Mirrors earth_system_generator.package_and_cleanup's single-doc approach so
-    Google Earth loads every layer (it reads only the first KML in an archive).
-    """
-    kml_str = kml.kml()
+
+def _geometry_xml(geom):
+    if geom["type"] == "Polygon":
+        return _polygon_xml(geom["coordinates"])
+    return ("<MultiGeometry>%s</MultiGeometry>"
+            % "".join(_polygon_xml(c) for c in geom["coordinates"]))
+
+
+def _point_xml(lon, lat):
+    return ("<Point><altitudeMode>clampToGround</altitudeMode>"
+            "<coordinates>%r,%r,0</coordinates></Point>" % (lon, lat))
+
+
+def _placemark(name, style_id, description, geometry_xml):
+    return ("<Placemark><name>%s</name><styleUrl>#%s</styleUrl>"
+            "<description>%s</description>%s</Placemark>\n"
+            % (_x(name), style_id, _cdata(description), geometry_xml))
+
+
+def _folder(name, children, visibility=None, open_=False, description=None):
+    head = "<Folder><name>%s</name>" % _x(name)
+    if visibility is not None:
+        head += "<visibility>%d</visibility>" % visibility
+    if open_:
+        head += "<open>1</open>"
+    if description:
+        head += "<description>%s</description>" % _cdata(description)
+    return head + "\n" + "".join(children) + "</Folder>\n"
+
+
+def _period_folder_xml(code, joined, p5_max):
+    meta = joined["meta"]
+    famine_names = set(joined["famine"].get(code, []))
+    areas, camps, dots = [], [], []
+    for name in sorted(joined["areas"]):
+        area = joined["areas"][name]
+        rec = area["periods"][code]
+        pv = rec["phase_value"]
+        popup = area_popup_html(name, area, code, meta, famine_names)
+        if area["kind"] == "polygon":
+            style = "phase%d" % pv if pv else "not_analysed"
+            for feat in area["polygons"]:
+                areas.append(_placemark(name, style, popup,
+                                        _geometry_xml(feat["geometry"])))
+            dot_at = _representative_point(area["polygons"][0]["geometry"])
+        else:
+            style = "camp_phase%d" % pv if pv else "camp_not_analysed"
+            for feat in area["points"]:
+                lon, lat = feat["geometry"]["coordinates"][:2]
+                camps.append(_placemark(name, style, popup,
+                                        _point_xml(lon, lat)))
+            dot_at = tuple(area["points"][0]["geometry"]["coordinates"][:2])
+        p5 = rec["phase_pop"][5] or 0
+        if pv and p5 > 0:
+            dots.append((p5, _placemark(
+                name, "p5dot_%d" % _p5_dot_class(p5, p5_max),
+                p5_dot_popup_html(name, area, code, meta),
+                _point_xml(dot_at[0], dot_at[1]))))
+    dots = [x for _p, x in sorted(dots, key=lambda t: -t[0])]
+    children = [_folder("Areas", areas),
+                _folder("IDP settlements (camps)", camps),
+                _folder("Phase 5 (Catastrophe) populations", dots)]
+    return _folder(_period_label(code), children,
+                   visibility=1 if code == OPEN_PERIOD else 0,
+                   open_=(code == OPEN_PERIOD),
+                   description=period_description_html(code, joined))
+
+
+def build_web_kml(joined):
+    """The whole web document: shared styles, the "i" pin, three period
+    folders (Projected 2 visible, the other two switched off)."""
+    p5_max = max((a["periods"][c]["phase_pop"][5] or 0)
+                 for a in joined["areas"].values()
+                 for c, *_rest in IPC_PERIODS)
+    info = _placemark("Sudan -- Acute Food Insecurity - tap for details",
+                      "info", info_popup_html(joined),
+                      _point_xml(INFO_LON, INFO_LAT))
+    body = [_folder("Framing (read this first)", [info])]
+    for code in FOLDER_ORDER:
+        body.append(_period_folder_xml(code, joined, p5_max))
+    return ('<?xml version="1.0" encoding="UTF-8"?>\n'
+            '<kml xmlns="http://www.opengis.net/kml/2.2">\n<Document>\n'
+            "<name>Sudan Food Insecurity (IPC) -- three periods</name>"
+            "<open>1</open>\n"
+            + web_styles_xml() + "".join(body)
+            + "</Document>\n</kml>\n")
+
+
+def package_kmz(kml_str):
+    """Write the KMZ: a single doc.kml (no card images; the web shows none).
+    The filename is unchanged, so links by name keep working."""
     kmz_path = os.path.join(DATA_DIR, "%s_blockbuster.kmz" % SCENARIO_ID)
     with zipfile.ZipFile(kmz_path, "w", zipfile.ZIP_DEFLATED) as zf:
-        zf.writestr("doc.kml", kml_str)
-        for png in asset_pngs:
-            if png and os.path.exists(png):
-                zf.write(png, os.path.basename(png))
+        zf.writestr("doc.kml", kml_str.encode("utf-8"))
     return kmz_path
 
 
@@ -760,10 +1154,97 @@ def generate_plotly_teaser(records, meta):
 #   ENTRY POINT
 # ==========================================================================
 
+def check_web_kmz(kmz_path):
+    """The KMZ byte checks for Google Earth on the web. Prints what it
+    examined and raises ValueError, naming each failure, if any rule fails:
+      - no Style inside a Folder (every Style a child of the Document);
+      - no ScreenOverlay;
+      - no <table> and no <br> in any description;
+      - every styleUrl resolves to a Document-level Style id;
+      - the period folders in FOLDER_ORDER, visibility 1/0/0.
+    Prints the areas per period by phase name. Returns the counts.
+    """
+    import xml.etree.ElementTree as ET
+    ns = {"k": "http://www.opengis.net/kml/2.2"}
+    with zipfile.ZipFile(kmz_path) as zf:
+        names = zf.namelist()
+        raw = zf.read("doc.kml")
+    root = ET.fromstring(raw)
+    doc = root.find("k:Document", ns)
+    failures = []
+
+    doc_styles = {st.get("id") for st in doc.findall("k:Style", ns)}
+    all_styles = root.findall(".//k:Style", ns)
+    nested = len(all_styles) - len(doc_styles)
+    if nested:
+        failures.append("%d Style element(s) not at Document level" % nested)
+    n_overlay = len(root.findall(".//k:ScreenOverlay", ns))
+    if n_overlay:
+        failures.append("%d ScreenOverlay element(s)" % n_overlay)
+    descs = [d.text or "" for d in root.iter("{%s}description" % ns["k"])]
+    bad_desc = [d for d in descs
+                if "<table" in d.lower() or "<br" in d.lower()]
+    if bad_desc:
+        failures.append("%d description(s) with <table> or <br>"
+                        % len(bad_desc))
+    urls = [u.text for u in root.iter("{%s}styleUrl" % ns["k"])]
+    unresolved = sorted({u for u in urls
+                         if not u or u.lstrip("#") not in doc_styles})
+    if unresolved:
+        failures.append("styleUrl not resolved: %s" % unresolved)
+
+    top = doc.findall("k:Folder", ns)
+    period_names = [_period_label(c) for c in FOLDER_ORDER]
+    periods = [f for f in top if f.findtext("k:name", "", ns) in period_names]
+    got = [(f.findtext("k:name", "", ns), f.findtext("k:visibility", "1", ns))
+           for f in periods]
+    want = [(_period_label(c), "1" if c == OPEN_PERIOD else "0")
+            for c in FOLDER_ORDER]
+    if got != want:
+        failures.append("period folders %s, expected %s" % (got, want))
+
+    counts = {}
+    for f in periods:
+        tally = {}
+        for pm in f.iter("{%s}Placemark" % ns["k"]):
+            sid = (pm.findtext("k:styleUrl", "", ns) or "").lstrip("#")
+            if sid.startswith("p5dot_"):
+                key = "Phase 5 dot"
+            elif sid.endswith("not_analysed"):
+                key = "Not analysed"
+            elif sid[-1:].isdigit() and int(sid[-1]) in PHASE_LABELS:
+                pv = int(sid[-1])
+                key = "Phase %d %s" % (pv, PHASE_LABELS[pv])
+            else:
+                key = "Unknown style %r" % sid
+            if sid.startswith("camp_"):
+                key += " (camp)"
+            tally[key] = tally.get(key, 0) + 1
+        counts[f.findtext("k:name", "", ns)] = tally
+
+    print("KMZ check: %s (%d bytes, files %s)" % (kmz_path,
+                                                   os.path.getsize(kmz_path),
+                                                   names))
+    print("  Document styles: %d; Styles anywhere: %d; ScreenOverlays: %d"
+          % (len(doc_styles), len(all_styles), n_overlay))
+    print("  descriptions examined: %d; with <table> or <br>: %d"
+          % (len(descs), len(bad_desc)))
+    print("  styleUrls examined: %d; unresolved: %d"
+          % (len(urls), len(unresolved)))
+    for name, vis in got:
+        print("  folder %r visibility %s" % (name, vis))
+        for key in sorted(counts[name]):
+            print("    %-28s %d" % (key, counts[name][key]))
+    if failures:
+        raise ValueError("KMZ check failed:\n  " + "\n  ".join(failures))
+    print("  KMZ check passed.")
+    return counts
+
+
 def run(geojson_path=DEFAULT_GEOJSON, make_teaser=True, status_callback=None,
-        scenario_id=None):
-    # Output assets are named by SCENARIO_ID (legend_/intel_/<id>_blockbuster.kmz
-    # /<id>_teaser.html). A picker passes the selected scenario's id so a future
+        scenario_id=None, excel_path=DEFAULT_EXCEL):
+    # Output files are named by SCENARIO_ID (<id>_blockbuster.kmz,
+    # <id>_teaser.html). A picker passes the selected scenario's id so a future
     # country writes its own files; calling run() directly keeps the Sudan
     # default. One scenario per process, so setting the module value here is safe.
     if scenario_id:
@@ -775,34 +1256,41 @@ def run(geojson_path=DEFAULT_GEOJSON, make_teaser=True, status_callback=None,
             status_callback(msg)
         print(msg)
 
-    if not os.path.exists(geojson_path):
-        raise FileNotFoundError(
-            "IPC GeoJSON not found: %s\nPlace the IPC Mapping Tool export in data/."
-            % geojson_path)
+    for path, what in ((geojson_path, "GeoJSON"), (excel_path, "Excel")):
+        if not os.path.exists(path):
+            raise FileNotFoundError(
+                "IPC %s not found: %s\nPlace the IPC Mapping Tool export in "
+                "data/." % (what, path))
 
-    _status("Parsing IPC GeoJSON...")
-    records, meta = build_geojson_records(geojson_path)
-    _status("Parsed %d analysis areas." % len(records))
+    _status("Joining the IPC Excel (three periods) to the GeoJSON outlines...")
+    joined = join_ipc_periods(excel_path, geojson_path)
+    _status("Joined %d areas (%d camps); analysed: %s." % (
+        len(joined["areas"]), len(joined["camps"]),
+        ", ".join("%s %d" % (lbl, len(joined["analysed"][c]))
+                  for c, _p, lbl, *_d in IPC_PERIODS)))
 
     _status("Building KMZ...")
-    kml, asset_pngs = build_food_insecurity_kml(records, meta)
-    kmz_path = package_kmz(kml, asset_pngs)
+    kmz_path = package_kmz(build_web_kml(joined))
     _status("KMZ written: %s" % kmz_path)
+    check_web_kmz(kmz_path)
 
     teaser_path = None
     if make_teaser:
         _status("Building Plotly teaser...")
+        records, meta = build_geojson_records(geojson_path)
         teaser_path = generate_plotly_teaser(records, meta)
         if teaser_path:
             _status("Teaser written: %s" % teaser_path)
 
-    return {"kmz": kmz_path, "teaser": teaser_path, "areas": len(records)}
+    return {"kmz": kmz_path, "teaser": teaser_path,
+            "areas": len(joined["areas"])}
 
 
 def _food_run(scenario, status_callback=None):
     """Adapter so the shared ScenarioPicker can drive run(): maps a scenario
-    dict to run()'s geojson_path + scenario_id."""
+    dict to run()'s geojson_path, excel_path and scenario_id."""
     return run(geojson_path=scenario.get("geojson", DEFAULT_GEOJSON),
+               excel_path=scenario.get("excel", DEFAULT_EXCEL),
                status_callback=status_callback,
                scenario_id=scenario.get("scenario_id"))
 

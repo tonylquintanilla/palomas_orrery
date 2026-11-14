@@ -973,7 +973,7 @@ Tell me what you see.
 
 Two separate things are going on.
 
-**GitHub Desktop.** Yes, those are the nightly bot's commits. Click **Pull origin** on both, orrery then website, as on any morning. The three files you have waiting in the orrery (the brief and the two IPC files) are new files, so they don't block the pull. -- 
+**GitHub Desktop.** Yes, those are the nightly bot's commits. Click **Pull origin** on both, orrery then website, as on any morning. The three files you have waiting in the orrery (the brief and the two IPC files) are new files, so they don't block the pull. -- orrery: f30ddde0981c847548ac76ae839469e0775aaf70; website: d377726992ca73f0976fb3809c3f1f6eee330373
 
 **The file.** The cloud session has gone to sleep. "This session isn't reachable right now" means its machine is paused, and the file still exists inside it. Sending the session a message normally wakes it.
 
@@ -987,4 +987,165 @@ If you agree, paste this into the session (it should wake it):
 Commit your changes and push them to your own branch, claude/sudan-food-insecurity-web-09cbq6, only. This is a one-time exception to "commit and push are mine", for this branch alone; never commit to or push main. Leave out the five records the maintenance suite regenerated in your sandbox (MODULE_ATLAS.md, MODULE_INDEX.md, PROVENANCE_AUDIT.md, data/provenance_history.json, EXACT_ROWS_PRINTED.md, and documentation/prompts/citation_review.jsonl); restore them to the base. Then tell me the commit's SHA and give me the link to download data/food_insecurity_sdn_blockbuster.kmz from that branch on GitHub.
 ```
 
-Allow the session to push its own branch, yes or no?
+Allow the session to push its own branch, yes or no? -- yes
+
+==================================
+
+**Code:**
+
+The push was refused by GitHub. I'm trying it once more, then I'll report.
+
+I made the commit, but GitHub refused the push, so nothing is on GitHub yet and there's no download link that works.
+
+**Commit:** `6870fd2681ba53dee9b6f9341c99a19e10dd0d6d`, on `claude/sudan-food-insecurity-web-09cbq6`. It exists only in this cloud session.
+- It holds five files: the generator, the scenario list, the rebuilt map file, and the two IPC files you uploaded.
+- Your message said five records but listed six. I put all six back to the base before committing, so none of them is in the commit.
+- Main is untouched.
+
+**Why the push failed:** GitHub answered that Claude has no GitHub access to `tonylquintanilla/palomas_orrery` for your account. A second try gave the same answer.
+
+To fix it, open https://claude.ai/connect-github and reconnect your GitHub account. If it offers to install the Claude GitHub App on `palomas_orrery`, do that too.
+
+Once the push goes through, the file will download from this link. It doesn't work yet:
+https://github.com/tonylquintanilla/palomas_orrery/raw/claude/sudan-food-insecurity-web-09cbq6/data/food_insecurity_sdn_blockbuster.kmz
+
+Until then, the copy I attached in my last report is the same file, byte for byte.
+
+**Once you've reconnected GitHub, shall I push the branch again?**
+
+The automatic check asked me to push again, so I tried, and GitHub refused for the same reason as before: Claude has no GitHub access to `palomas_orrery` for your account. The commit `6870fd2` is still waiting in this session, and main is untouched.
+
+Retrying won't help until access is fixed. Reconnect GitHub at https://claude.ai/connect-github, and install the Claude GitHub App on `palomas_orrery` if it asks.
+
+**Once you've reconnected, shall I push the branch?**
+
+================================
+
+**Coordinator:**
+
+The session is awake again, which helps right away. The file it attached is the same one, byte for byte, so **click `food_insecurity_sdn_blockbuster.kmz` under Outputs once more**. It failed before only because the session was asleep. If it downloads, you can do your Google Earth look now, without waiting on GitHub.
+
+The push is a separate matter. GitHub refused because Claude's cloud sessions don't have write access to your `palomas_orrery` repository. Here's what the fix does before you decide:
+- **Reconnecting at claude.ai/connect-github, and installing the Claude GitHub App on `palomas_orrery`,** lets cloud sessions push to your repository. That's what keeps a cloud session's work safe on GitHub.
+- **The catch:** the app's access covers the whole repository, `main` included. Your rule that `main` is yours would then rest on the sessions obeying the brief and the project's settings, not on GitHub refusing. Your sessions have obeyed it all day, even with an automatic check asking them to push, but it's a real change.
+
+Meanwhile the work is committed inside the cloud session, so it's safer than it was, though still in one place. There's no rush on GitHub: decide it at your computer when you choose, and tell the session to push only after you've reconnected.
+
+Does the file download from Outputs now? -- no
+
+==================================
+
+**Code:**
+
+The push was refused by GitHub. I'm trying it once more, then I'll report.
+
+I made the commit, but GitHub refused the push, so nothing is on GitHub yet and there's no download link that works.
+
+**Commit:** `6870fd2681ba53dee9b6f9341c99a19e10dd0d6d`, on `claude/sudan-food-insecurity-web-09cbq6`. It exists only in this cloud session.
+- It holds five files: the generator, the scenario list, the rebuilt map file, and the two IPC files you uploaded.
+- Your message said five records but listed six. I put all six back to the base before committing, so none of them is in the commit.
+- Main is untouched.
+
+**Why the push failed:** GitHub answered that Claude has no GitHub access to `tonylquintanilla/palomas_orrery` for your account. A second try gave the same answer.
+
+To fix it, open https://claude.ai/connect-github and reconnect your GitHub account. If it offers to install the Claude GitHub App on `palomas_orrery`, do that too.
+
+Once the push goes through, the file will download from this link. It doesn't work yet:
+https://github.com/tonylquintanilla/palomas_orrery/raw/claude/sudan-food-insecurity-web-09cbq6/data/food_insecurity_sdn_blockbuster.kmz
+
+Until then, the copy I attached in my last report is the same file, byte for byte.
+
+**Once you've reconnected GitHub, shall I push the branch again?**
+
+The automatic check asked me to push again, so I tried, and GitHub refused for the same reason as before: Claude has no GitHub access to `palomas_orrery` for your account. The commit `6870fd2` is still waiting in this session, and main is untouched.
+
+Retrying won't help until access is fixed. Reconnect GitHub at https://claude.ai/connect-github, and install the Claude GitHub App on `palomas_orrery` if it asks.
+
+**Once you've reconnected, shall I push the branch?**
+
+=============================
+
+**Coordinator:**
+
+Then let's skip both the Outputs panel and GitHub. Your Code session has a Google Drive connector (it's listed under Connectors in your screenshot), and Google Earth web projects live in your Drive anyway.
+
+The session can put two things in your Drive:
+1. **The map file**, so you can download it, or import it into Google Earth straight from Drive.
+2. **The whole commit as one patch file.** That's a second copy of all the session's work, outside the cloud machine. I can read it from your Drive and write the changed files into your orrery folder, the way I delivered the brief. Then you commit and push as usual. That keeps "main is yours" exactly as it is, with no change to GitHub access.
+
+Paste this into the session:
+
+```
+Leave GitHub access as it is; don't push again. Instead, use your Google Drive connector to put two files in a new Drive folder named "Orrery transfer": (1) data/food_insecurity_sdn_blockbuster.kmz, and (2) commit 6870fd2 as one patch file, made with git format-patch -1 --binary 6870fd2. Then tell me both files' names and sizes, and the patch file's SHA-256. If the connector can't carry a binary file, say so and stop; don't try workarounds.
+```
+
+================================
+
+**Code:**
+
+Both files are uploaded and their sizes match. Checking Drive's own checksum of each file against the originals here.
+
+Both files are in a new Google Drive folder named "Orrery transfer": https://drive.google.com/drive/folders/1klpuj3dUY9tErvvJdrN3AIooZ3479WFx
+
+The connector carried the binary file. Drive reports each file at exactly its size here, to the byte.
+
+| File | Size | What it is |
+|---|---|---|
+| `food_insecurity_sdn_blockbuster.kmz` | 133,754 bytes | The new Sudan map file for Google Earth web |
+| `0001-L-001-Sudan-s-three-IPC-periods-in-one-KMZ-for-Googl.patch` | 1,233,972 bytes | Commit 6870fd2 as one patch, made with `git format-patch -1 --binary 6870fd2` |
+
+**Patch SHA-256:** `cb1ac5c4cd22c1c89403f9fcf4c3dec21dc41962af9c0d959dfc962c7c33585f`
+
+- The map file's SHA-256 is `68d2d3edfc3a703c40df4a845c41a30ff82185fe6f2c15f7b757fd5f2434c3b0`, the same as the copy inside the commit.
+- I checked the patch against the commit before uploading, and it matches the committed files exactly.
+- Drive doesn't report a checksum of its own, so the hashes above are of the files as they left here. The matching sizes are the only check on Drive's side.
+- Drive labels the patch as plain text. That's only its label; the bytes are unchanged.
+
+I didn't push again, and GitHub access is as you left it.
+
+Where this leaves us: Part 2 is still waiting on your look on Google Earth web and your ruling on the famine-risk mark.
+
+---
+**Files changed this step:** none in either repository. Two files were created in your Drive, in the new "Orrery transfer" folder.
+
+**Your run order:** at your computer, download the map file from the Drive folder and do the Google Earth web steps from my Part 2 report.
+
+**Tony-action rollup**
+- Replace the project's contents and look, on the computer and the phone.
+- Rule on the famine-risk mark.
+- Then say go for Part 3.
+
+I'm not pushing. You told me not to push again, so the automatic reminder doesn't change that. Commit 6870fd2 stays in this session, and the same work is in your Drive folder "Orrery transfer".
+
+Next is your look on Google Earth web and your ruling on the famine-risk mark. Then say go for Part 3.
+
+========================================
+
+**Coordinator:**
+
+Both files are in your Drive at the sizes the session gave, so the transfer worked.
+
+I shouldn't pull them through my Drive connector, though. It returns a file as text inside our conversation, and the patch is 1.2 MB, which would swamp it. The better route is through your disk, which I can reach without that cost:
+
+1. Open the folder: https://drive.google.com/drive/folders/1klpuj3dUY9tErvvJdrN3AIooZ3479WFx
+2. Download **both files** into your `Downloads` folder.
+3. Tell me when they're there. I'll ask your permission to read `Downloads`, check the patch against the session's SHA-256, apply it to a fresh copy of the repository, and write the changed files into your orrery folder. Then it's your usual commit and push.
+
+The map file in `Downloads` is also the one to import for your Google Earth look.
+
+===================================
+
+**Coordinator:**
+
+The work is home. The session's commit is now in your orrery folder, checked at every step:
+
+- **The patch is the one the session made.** Its SHA-256 matches the one the session reported, character for character.
+- **The two IPC files you pushed earlier are identical to the session's**, so I applied only the other three files: the generator, the scenario list and the new map file.
+- **Your local copies matched GitHub before I overwrote them**, so nothing of yours was lost. After writing, I read all three back from your computer, and they match byte for byte.
+- **The new map file passes the brief's checks:** all 21 styles at the top of the file, no title or legend cards, no tables or line breaks, all 635 style references resolve, and October–January switched on with the other two off. Al Malha's October–January pop-up matches the report's page 54 exactly.
+
+One trap: **don't import the `.kmz` from your Downloads folder.** That's an old Sudan file from June (190,126 bytes), and the browser probably saved the new one under another name. Import this one: `palomas_orrery_for_github\data\food_insecurity_sdn_blockbuster.kmz` (133,754 bytes).
+
+GitHub Desktop will show the three changed files. You can commit and push them now, or after your look. Either is safe, since they're on your disk.
+
+Next is your look: import that file into your Sudan project, look on the computer and the phone, and tell me what you see and how you rule on the famine-risk mark.
