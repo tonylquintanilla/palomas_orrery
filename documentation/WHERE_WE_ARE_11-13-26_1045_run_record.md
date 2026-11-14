@@ -1311,10 +1311,147 @@ One catch along the way: my first copy of the page's picture came out re-encoded
 
 Your steps:
 1. **Delete one file by hand** (I can't delete on your computer): in File Explorer, open `tonyquintanilla.github.io\gallery\assets\` and delete `food_insecurity_sdn_blockbuster.kmz`. That's the old map file with June's wrong counts. -- done
-2. **Orrery**, in GitHub Desktop: 5 files (the generator, the ledger, Where We Are, the map file, and the new `data\earth\food_insecurity_sdn.html`). Commit and push. -- 
-3. **Website**: 7 files (index.html, the card list, the two Sudan card files, the new `earth` page and picture, and the deleted map file). Commit and push.
-4. **Run the website's live run** from your dashboard, as the session asked.
+2. **Orrery**, in GitHub Desktop: 5 files (the generator, the ledger, Where We Are, the map file, and the new `data\earth\food_insecurity_sdn.html`). Commit and push. -- 6e4dbf4701d963676074d2fc054b7f9b912aa603
+3. **Website**: 7 files (index.html, the card list, the two Sudan card files, the new `earth` page and picture, and the deleted map file). Commit and push. -- fdbce4406686c9ff3749a10a1cb6f6e08a1c9285
+4. **Run the website's live run** from your dashboard, as the session asked. 
+
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 66 files from https://palomasorrery.com/ (34 typed, 32 positions files read from data\objects_config.json)
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches the working copy
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   gallery/arrival.js                             matches the working copy
+    SERVED   gallery/nav_cluster.js                         matches the working copy
+    SERVED   gallery/solar_system_figures.js                matches the working copy
+    SERVED   gallery/solar_system_drawer.js                 matches the working copy
+    SERVED   data/objects_config.json                       matches the working copy
+    SERVED   gallery/guestbook.js                           matches the working copy
+    SERVED   data/guestbook.json                            matches the working copy
+    SERVED   data/solar-system/drawings/hills_cloud.json    matches the working copy
+    SERVED   data/solar-system/drawings/van_allen_belts.json matches the working copy
+    SERVED   data/solar-system/drawings/earth_exosphere.json matches the working copy
+    SERVED   data/solar-system/drawings/sun_corona.json     matches the working copy
+    SERVED   data/solar-system/drawings/zodiacal_dust.json  matches the working copy
+    SERVED   data/solar-system/drawings/outer_oort_cloud.json matches the working copy
+    SERVED   data/solar-system/drawings/galactic_tide.json  matches the working copy
+    SERVED   gallery/source_list.js                         matches the working copy
+    SERVED   gallery/far_lines.js                           matches the working copy
+    SERVED   gallery/direction_arrows.js                    matches the working copy
+    SERVED   gallery/drawer_order.js                        matches the working copy
+    SERVED   gallery/text_box.js                            matches the working copy
+    SERVED   gallery/scene_moment.js                        matches the working copy
+    SERVED   gallery/scene_address.js                       matches the working copy
+    SERVED   gallery/picture_folds.js                       matches the working copy
+    SERVED   gallery/gallery_metadata.json                  matches the working copy
+    SERVED   gallery/assembler/compose_children.py          matches the working copy
+    SERVED   gallery/view_centre.js                         matches the working copy
+    SERVED   gallery/tap_hover.js                           matches the working copy
+    SERVED   gallery/first_guide.js                         matches the working copy
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+    SERVED   data/solar-system/positions/voyager_2.json     matches the working copy
+    SERVED   data/solar-system/positions/new_horizons.json  matches the working copy
+    SERVED   data/solar-system/positions/juno.json          matches the working copy
+    SERVED   data/solar-system/positions/osiris_apex.json   matches the working copy
+    SERVED   data/solar-system/positions/parker_solar_probe.json matches the working copy
+    SERVED   data/solar-system/positions/bepicolombo.json   matches the working copy
+    SERVED   data/solar-system/positions/solar_orbiter.json matches the working copy
+    SERVED   data/solar-system/positions/lucy.json          matches the working copy
+    SERVED   data/solar-system/positions/juice.json         matches the working copy
+    SERVED   data/solar-system/positions/psyche_spacecraft.json matches the working copy
+    SERVED   data/solar-system/positions/europa_clipper.json matches the working copy
+    SERVED   data/solar-system/positions/galileo.json       matches the working copy
+    SERVED   data/solar-system/positions/cassini.json       matches the working copy
+    SERVED   data/solar-system/positions/pioneer_10.json    matches the working copy
+    SERVED   data/solar-system/positions/pioneer_11.json    matches the working copy
+    SERVED   data/solar-system/positions/rosetta.json       matches the working copy
+    SERVED   data/solar-system/positions/akatsuki.json      matches the working copy
+    SERVED   data/solar-system/positions/dart.json          matches the working copy
+    SERVED   data/solar-system/positions/west.json          matches the working copy
+    SERVED   data/solar-system/positions/mcnaught.json      matches the working copy
+    SERVED   data/solar-system/positions/tsuchinshan_atlas.json matches the working copy
+    SERVED   data/solar-system/positions/wierzchos.json     matches the working copy
+    SERVED   data/solar-system/positions/atlas_2024_g3.json matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1.json      matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1_b.json    matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1_d.json    matches the working copy
+    SERVED   data/solar-system/positions/panstarrs_2025_r3.json matches the working copy
+    SERVED   data/solar-system/positions/borisov_2025_v1.json matches the working copy
+    SERVED   data/solar-system/positions/oumuamua.json      matches the working copy
+    SERVED   data/solar-system/positions/borisov_2i.json    matches the working copy
+    SERVED   data/solar-system/positions/atlas_3i.json      matches the working copy
+
+  PASS Served reachability      12.0s  all 66 files served and
+                                    byte-identical to the working copy
+
+  orrery export pinned at 11662222
+
+  PASS Export freshness          0.2s  the served export is the orrery's
+                                    at 11662222, byte for byte
+
+  orrery HEAD 6e4dbf47
+  examining 3 of 188 links; the other 185 are served from the export
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  3 pointers: 1 match, 0 DRIFT, 0 UNIT MISMATCH, 2 could not be examined.
+
+  PASS Store drift               2.1s  3 pointers against orrery 6e4dbf47
+                                    -- 1 match, 0 DRIFT, 0 UNIT
+                                    MISMATCH, 2 could not be examined.
+
+======================================================================
+  2 of 2 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Store drift            3 pointers against orrery 6e4dbf47 -- 1
+  last swap 2026-11-13T19:51:40.031853+00:00: succeeded first time
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
 5. **Refresh Google Earth**: in the Sudan project, delete the Sudan folder and import `palomas_orrery_for_github\data\food_insecurity_sdn_blockbuster.kmz` once more. This final file carries the "after IPC" wording and the American spelling.
 6. **Look on your phone**: the new Featured card, the page, and its button to the map.
 
 Tell me when it's pushed, and I'll confirm both repositories on GitHub and give you the two decisions the session left.
+
+============================================
+
+**Coordinator:**
+
+Yes, the project needs tidying. Opening your link as a visitor would, I see the whole of Sudan colored, including yellow Phase 2 areas, which exist only in **February–May**. So February–May is switched on as well as, or instead of, October–January, and the TEST folder is still there. **Visitors see whatever you leave switched on in the project**, so that's what needs setting.
+
+In your Sudan project at earth.google.com, in the **Map contents** list on the left:
+
+1. **Delete the TEST folder.** Point at the row "TEST -- Google Earth we...", click the three dots (⋮) at the right end of that row, and choose Delete. -- done
+2. **Keep only one Sudan folder.** Scroll the list. If you see more than one "Sudan Food Insecurity (IPC)..." folder, delete them all. -- only one such sub folder deleted
+3. Then import the final file once: **File > Import**, choosing `palomas_orrery_for_github\data\food_insecurity_sdn_blockbuster.kmz`, as Map features. -- done
+4. **Set what visitors see.** Open the Sudan folder's arrow. Inside are four folders: Framing, Projected 2, Projected 1 and Current. Leave **Framing** and **Projected 2: October 2026 - January 2027** switched on. Switch **off** Projected 1 and Current, using each row's eye icon or checkbox. -- done
+
+Then tell me, and I'll open the link as a visitor and confirm that only October–January shows.
+
+============================================
+
+The Google Earth project is right now. Opening your link as a visitor, I see one folder, "Sudan Food Insecurity (IPC)", with the test squares gone from the desert. Only October–January is showing: the analyzed areas are colored and the rest of Sudan is pale. The "i" pin is in place.
+
+I've also recorded what tonight's session didn't know about, because it came up in our talk after the brief went out. All of it is in the ledger:
+- **L-531 (the Earth Science room)** now holds your phone review of every old card, and the three waves: the Earth System with this room, the encounters with L-529, and the stars and exoplanets with their own room. It also records your two star methods (the 3D Plotly view and the HR diagrams), and that the galactic center illustration has no wave yet.
+- **L-529 (guided encounters)** points to it.
+- **A new L-532** records how a session away from your computer strands its work, the Drive route that brought it home, your method of starting the session with Remote Control before you leave, and the picture-file trap I hit tonight.
+
+The ledger's index tool regenerated cleanly with no problems, and the file on your computer matches mine byte for byte.
+
+One last step for tonight: commit and push the orrery. It's one file, `LEDGER_CONSOLIDATED.md`.
+
+The session's remaining question, whether to write the Earth System skill's web rules as version 1.3, can wait for the next session that opens that skill. It will ask you then.

@@ -1005,7 +1005,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*265 live items; 249 need attention (`!`); 165 RICE-scored; 259 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*266 live items; 250 need attention (`!`); 165 RICE-scored; 259 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1181,9 +1181,10 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-525 | One body's failed accuracy test holds that body, not the whole site (gallery, the nightly builder's served window; built, its sentence settled Nov 11) | OPEN | -- | 2026-11-11 |
 | ! | L-526 | A body whose test fails for a real reason is drawn from the older orbit while held (gallery, the nightly builder's hold; recorded, not built) | OPEN | -- | 2026-11-11 |
 | ! | L-528 | The orrery's Kepler solvers' start: E = pi for a stretched orbit, and no error when they do not converge (orrery; recorded, not built) | OPEN | -- | 2026-11-12 |
-| ! | L-529 | Guided encounters: the guide's way of telling, used for a flyby (gallery; an idea, for a design talk after Mars) | OPEN | -- | 2026-11-12 |
+| ! | L-529 | Guided encounters: the guide's way of telling, used for a flyby (gallery; an idea, for a design talk after Mars) | OPEN | -- | 2026-11-13 |
 | ! | L-530 | The other Earth System layers on Google Earth web (Earth System; recorded, not built) | OPEN | -- | 2026-11-13 |
 | ! | L-531 | The Earth Science room in the interactive site (website; recorded, not built) | OPEN | -- | 2026-11-13 |
+| ! | L-532 | A Code session away from the computer: where its work lives (method; recorded) | OPEN | -- | 2026-11-13 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1666,11 +1667,52 @@ earth_system_generator.py, earth_system_common.py, scenarios_*.
   counts visits, and tells visitors. (Sudan's page has no visit
   counter; the site's other pages load Google Analytics.)
 - An interruption such as El Nino may come before the room (L-060).
+- **The old cards, a phone review each (Tony, 2026-11-13, 16:10):**
+  "We will need to review each existing card. They do not all work
+  well on the phone." The old gallery empties in three waves, each card
+  looked at on the phone when its new home exists, then retired: the
+  Earth System's cards with this room; the encounter cards with L-529
+  (guided encounters) -- Tony, 16:12: "The astronomical cards are
+  encounters plus the galactic center illustration."; the stars' and
+  exoplanets' cards with the stars' own room (the road's item 17) --
+  Tony, 16:14: "at some point we look at stars again and exoplanets."
+  The galactic center illustration has no wave yet; it can join the
+  stars. Tony, 16:17: "stars have two methods, the 3d plotly and 2d HR
+  diagrams" -- the stars room's design talk decides how each is shown.
 **Gap:** a design talk after Mars and the rest of the moons.
 **Ref:** L-001, L-530; L-519 (Featured's rethink); L-060 (ENSO).
 
+#### [L-532] A Code session away from the computer: where its work lives (method; recorded)
+<!-- L:532 status:OPEN upd:2026-11-13 section:A flag: rice: -->
+- **What happened, 2026-11-13:** the L-001 build session was started
+  from the phone, so it ran in the cloud, not through the python_work
+  door. Its work existed only inside its machine: the machine paused
+  when idle, its Outputs panel would not download, and GitHub refused
+  its push (Claude's cloud sessions have no write access to
+  palomas_orrery, which keeps main Tony's). The work came home through
+  Google Drive instead: the session put the map file and its commits as
+  `git format-patch --binary` patches with their SHA-256 in a Drive
+  folder, "Orrery transfer"; Tony downloaded them; the coordinator
+  checked each fingerprint, applied them to fresh copies, checked Tony's
+  local files against GitHub before overwriting, wrote the files into
+  his folders and read every one back, byte for byte. Tony committed
+  and pushed as usual.
+- **Tony's method, 2026-11-13, 17:45:** "what i should do is if i
+  expect to work away from my computer, start the code session before i
+  leave, with remote, and tell it to wait for the brief." The session
+  then runs on his computer and the phone only drives it; the computer
+  stays awake and online, the Claude app open.
+- **A trap found:** a binary written to the coordinator's
+  /mnt/user-data/outputs can come out re-encoded (a PNG, same size and
+  look, different bytes). Deliver a binary through a SendUserFile
+  fileUuid, and compare its SHA-256 after it lands.
+**Gap:** the method into the records skill or the protocol, on Tony's
+go-ahead.
+**Ref:** L-001; L-499 (kinds of session); L-471 (a delivered patch is
+final).
+
 #### [L-529] Guided encounters: the guide's way of telling, used for a flyby (gallery; an idea, for a design talk after Mars)
-<!-- L:529 status:OPEN upd:2026-11-12 section:A flag: rice: -->
+<!-- L:529 status:OPEN upd:2026-11-13 section:A flag: rice: -->
 - **Tony, 2026-11-12, 20:34,** after his phone look at the finished
   guide (L-527 (a first visit's guide)): "it works great. i'm thinking
   this might be a good way to create encounters, with labels and focus
@@ -1698,6 +1740,9 @@ earth_system_generator.py, earth_system_common.py, scenarios_*.
   out of the first visit's guide (Tony, 2026-11-11, 23:02) to become a
   step once its flight is a saved scene inside the room; the encounter
   this item imagines is that place.
+- **The old encounter cards (2026-11-13):** when encounters move into
+  the interactive site, the old gallery's encounter cards are reviewed
+  on the phone and retired, as L-531 records for all the old cards.
 **Gap:** a design talk after Mars (L-514 (the Mars room)), by the
 road's order; then which encounter first.
 **Ref:** L-527 (a first visit's guide: the card, the ring, the camera's
