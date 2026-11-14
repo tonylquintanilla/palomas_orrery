@@ -1,20 +1,20 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 13, 2026, night: the Code session (Opus) that moved Sudan to Google Earth on the web, at its close (L-001 (food insecurity)).
-- Written on orrery db9964e and gallery d377726, in two patches you apply (Drive folder "Orrery transfer").
+Last updated: November 13, 2026, late night: the coordinating session (Opus), at its close, after the Code session that moved Sudan to Google Earth on the web (L-001 (food insecurity)).
+- Written at orrery 6e4dbf4 and gallery fdbce44 (your pushes of that work).
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Sudan's food-insecurity map now holds all three of IPC's periods in one file for Google Earth on the web, opening on October-January; it is in your shared "Sudan" project, and the triangles "look okay" (L-001 (food insecurity)).
-> - The June file was wrong: in 181 of its 228 areas the phase counts added to more than the population. The map is rebuilt from IPC's November export, and each period's figures come from IPC's Excel.
+> - Sudan's food-insecurity map now holds all three of IPC's periods in one file for Google Earth on the web, opening on October-January; it is in your shared "Sudan" project, and the triangles "look okay" (L-001 (food insecurity)). The June file was wrong: in 181 of its 228 areas the phase counts added to more than the population; the map is rebuilt from IPC's November export, each period's figures from IPC's Excel.
+> - Every old card gets a phone review as it moves to a new home, in three waves: the Earth System with its room, the encounters with L-529, the stars with theirs (L-531 (the Earth Science room)). Working away from your desk: start the Code session on your computer with Remote Control before you leave (L-532 (a session away from the computer)).
 > - Sudan has its own short page on the website, palomasorrery.com/earth/food_insecurity_sdn.html, featured on the front page; the old Sudan card's Google Earth button opens it.
 >
 > **Do next:** *Mars (L-514 (the Mars room)), with a new coordinating session: `documentation/HANDOFF_website_coordination_20261112.md`. The hold's first nights were green, nothing held (Nov 12).*
 >
 > **Needs you now:**
-> - *(do) Apply the two patches from the Drive folder "Orrery transfer" (one per folder), then commit and push both; then the website's live run.*
+> - *(do) Commit and push the orrery: this page and the ledger (L-532 (a session away from the computer)).*
 > - *(decide) The Earth System skill's web rules, version 1.3 (L-001 (food insecurity)).*
 > - *(do) Each morning, Fetch origin and Pull origin on both, orrery then website, before any work. If Pull origin shows up only once you have changes: Commit them first, then Pull origin, then Push origin. If Desktop stashes your changes anyway, restore them at once: Changes tab, Stashed Changes, Restore.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
@@ -121,7 +121,7 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- This session: L-001 (food insecurity), with L-530 (the other layers on the web) and L-531 (the Earth Science room); the brief, `COORD_L001_sudan_web_brief_20261113.md`, with its amendment; the generator, `food_insecurity_generator.py`.
+- This session: L-001 (food insecurity), with L-530 (the other layers on the web) and L-531 (the Earth Science room); the brief, `COORD_L001_sudan_web_brief_20261113.md`, with its amendment; the generator, `food_insecurity_generator.py`; L-532 (a session away from the computer), from the coordinator.
 - The caps: `DOCUMENT_CAPS.md`; L-522 (document caps); its brief
   `COORD_L522_step1_caps_brief_20261110.md` and the review beside it.
 - The tree: L-515 (one nested tree); `COORD_L515_step2b_brief_20261109.md`

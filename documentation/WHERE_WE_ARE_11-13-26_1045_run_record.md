@@ -1455,3 +1455,20 @@ The ledger's index tool regenerated cleanly with no problems, and the file on yo
 One last step for tonight: commit and push the orrery. It's one file, `LEDGER_CONSOLIDATED.md`.
 
 The session's remaining question, whether to write the Earth System skill's web rules as version 1.3, can wait for the next session that opens that skill. It will ask you then.
+
+=======================================
+
+**Coordinator:**
+
+I've updated Where We Are; the copy on your computer matches mine. It now says:
+- **Written at** your pushes of tonight's work: orrery 6e4dbf4 and website fdbce44.
+- **Changed since you last read it:** Sudan on the web with its short page (as the session wrote it), plus a new line on the phone review of every old card, its three waves, and your method for working away from your desk.
+- **Needs you now:** the applied-patches line is gone, since that's done. In its place is tonight's last push.
+
+It stays exactly at its 130-line cap.
+
+**Next steps, in order:**
+1. **Tonight:** commit and push the orrery. That's two files, `LEDGER_CONSOLIDATED.md` and `documentation/WHERE_WE_ARE.md`. -- 
+2. **Next session: Mars.** Open a new coordinating session through the python_work door with `documentation/HANDOFF_website_coordination_20261112.md`, as the page's "Do next" says. If you'll be away from your desk, start the Code session on your computer with Remote Control first.
+3. **Two decisions when they come up:** the Earth System skill's web rules (version 1.3), when a session next opens that skill, and the two dashboard buttons for the parity check, when a session next opens the dashboard.
+4. **Later, by the road:** the Earth Science room after Mars and the moons. South Sudan comes when IPC publishes its new analysis, and El Niño can come in ahead of either if you choose.
