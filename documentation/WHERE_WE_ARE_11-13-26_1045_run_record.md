@@ -1296,9 +1296,25 @@ One change to its steps: you don't need the Command Prompt. Its step 3 has you t
 The only difference is history. `git am` would keep the session's six commit messages, while my route gives you one commit per repository, under your own message. The ledger records what each step did either way, so I'd take the simpler route.
 
 So:
-1. In GitHub Desktop, **Fetch origin** and **Pull origin** on both, orrery 
-   1. then website.
-2. From the Drive folder "Orrery transfer", download `orrery_L001_since_6870fd2.patch` and `gallery_L001_since_d377726.patch` into your `Downloads` folder.
+1. In GitHub Desktop, **Fetch origin** and **Pull origin** on both, orrery -- 6bdf9de92fc22d1932e68538fc952e740fbcaf08; nothing to pull
+   1. then website. -- no change from d377726992ca73f0976fb3809c3f1f6eee330373; nothing to pull
+2. From the Drive folder "Orrery transfer", download `orrery_L001_since_6870fd2.patch` and `gallery_L001_since_d377726.patch` into your `Downloads` folder. -- done
 3. Tell me when they're there.
 
 The two decisions the session left (the skill's web rules as version 1.3, and the two dashboard buttons) can wait until the work is pushed.
+
+===========================
+
+Everything is in place, and every file is checked. Both patches matched the session's fingerprints, applied cleanly to fresh copies of `main`, and all 11 changed or new files on your computer now match the session's byte for byte.
+
+One catch along the way: my first copy of the page's picture came out re-encoded. It looked the same but had different bytes, so I replaced it by another route, and it now matches exactly. I'll note that trap for future sessions.
+
+Your steps:
+1. **Delete one file by hand** (I can't delete on your computer): in File Explorer, open `tonyquintanilla.github.io\gallery\assets\` and delete `food_insecurity_sdn_blockbuster.kmz`. That's the old map file with June's wrong counts. -- done
+2. **Orrery**, in GitHub Desktop: 5 files (the generator, the ledger, Where We Are, the map file, and the new `data\earth\food_insecurity_sdn.html`). Commit and push. -- 
+3. **Website**: 7 files (index.html, the card list, the two Sudan card files, the new `earth` page and picture, and the deleted map file). Commit and push.
+4. **Run the website's live run** from your dashboard, as the session asked.
+5. **Refresh Google Earth**: in the Sudan project, delete the Sudan folder and import `palomas_orrery_for_github\data\food_insecurity_sdn_blockbuster.kmz` once more. This final file carries the "after IPC" wording and the American spelling.
+6. **Look on your phone**: the new Featured card, the page, and its button to the map.
+
+Tell me when it's pushed, and I'll confirm both repositories on GitHub and give you the two decisions the session left.

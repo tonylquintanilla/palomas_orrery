@@ -1,20 +1,21 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 12, 2026, night: the coordinating session (Opus) of the first visit's guide, at its close, after the Code session that built it (L-527 (a first visit's guide)).
-- Written at orrery c67d9c6 and gallery ae0d7ac (your pushes of the guide and its close).
+Last updated: November 13, 2026, night: the Code session (Opus) that moved Sudan to Google Earth on the web, at its close (L-001 (food insecurity)).
+- Written on orrery db9964e and gallery d377726, in two patches you apply (Drive folder "Orrery transfer").
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - A first visit now gets a guide: five steps in the Solar System room, each card waiting for one action -- turn the picture, tap Earth, Center on Earth, tick the Moon, then Halley's comet, the view turned to show its orbit. Built and closed on your phone look ("very effective"; L-527 (a first visit's guide)).
-> - The front page says what an orrery is in two lines and offers "Show me around" or "Explore on my own"; the Tutorial switch near the bottom turns the guide back on.
-> - The room is built and tested upright; held sideways it asks for the phone upright. That rule and the guide's are in the exhibit skill, now 1.42.
+> - Sudan's food-insecurity map now holds all three of IPC's periods in one file for Google Earth on the web, opening on October-January; it is in your shared "Sudan" project, and the triangles "look okay" (L-001 (food insecurity)).
+> - The June file was wrong: in 181 of its 228 areas the phase counts added to more than the population. The map is rebuilt from IPC's November export, and each period's figures come from IPC's Excel.
+> - Sudan has its own short page on the website, palomasorrery.com/earth/food_insecurity_sdn.html, featured on the front page; the old Sudan card's Google Earth button opens it.
 >
 > **Do next:** *Mars (L-514 (the Mars room)), with a new coordinating session: `documentation/HANDOFF_website_coordination_20261112.md`. The hold's first nights were green, nothing held (Nov 12).*
 >
 > **Needs you now:**
-> - *(do) Commit and push the orrery: this page and the coordinator's handoff.*
+> - *(do) Apply the two patches from the Drive folder "Orrery transfer" (one per folder), then commit and push both; then the website's live run.*
+> - *(decide) The Earth System skill's web rules, version 1.3 (L-001 (food insecurity)).*
 > - *(do) Each morning, Fetch origin and Pull origin on both, orrery then website, before any work. If Pull origin shows up only once you have changes: Commit them first, then Pull origin, then Push origin. If Desktop stashes your changes anyway, restore them at once: Changes tab, Stashed Changes, Restore.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
 
@@ -41,7 +42,9 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
                to choose, within the range the data covers.
   l-c. [done]  L-517 (the lobby), L-518 (the shared link) and L-519
                (Featured's rethink): closed Nov 8 and 9 on your phone looks.
-  g.   [done]  L-527 (a first visit's guide): closed Nov 12. << new this session
+  g.   [done]  L-527 (a first visit's guide): closed Nov 12.
+  s.   [done]  Sudan on Google Earth web (L-001 (food insecurity)), Nov 13. << new this session
+ 15a.  [later] The Earth Science room, after Mars and the moons (L-531 (the Earth Science room)). << new this session
   d.   [beside] Document caps (L-522 (document caps)): steps 1 and 2
                built Nov 10 and 11, the page of caps and the exhibit
                skill's split; steps 3 to 6 between builds.
@@ -52,14 +55,11 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
 ## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings; a line leaves once it is habit, or a skill carries it.
+- Earth System layers move to Google Earth on the web, not the desktop app; a layer's one home is its page, earth/<its id>.html (Nov 13; L-001 (food insecurity), L-530 (the other layers on the web)).
+- Sentences we compose use American spelling; IPC's quoted words keep IPC's; a symbol taken from IPC is marked "after IPC" (Nov 13; L-001 (food insecurity)).
 - The room is used upright: held sideways it shows one line asking for the phone upright; the drawer need not work sideways (Nov 12; L-527 (a first visit's guide)).
 - One body's failed accuracy test: "Hold the bad data and report, then continue." A hold is not red; the night's commit title names the held body. A moon is held only when JPL gives no answer; more than five held is a failed build (Nov 11, the coordinator's changes). The room's title stays unchanged for a held body; its box says it (Nov 11, your "Yes, keep it"; L-525 (hold the bad data)).
 - The Sun direction line stays out of Earth's fold: the day-night shading and the Sun at its true place show the direction (Nov 10; L-515 (one nested tree)).
-- One picture, one drawer: a planet folds open to its shells and moons by distance; only the Earth System and the stars stay rooms of their own (Nov 9; L-515 (one nested tree), ruling 14).
-- Centre on moves the view so the body sits in the middle, on its own opening, the axis lines through it; the Sun has one too. The orrery's view measured from a centre waits for the date span (Nov 9; L-515 (one nested tree), rulings 15 to 17).
-- The drawer's top line is a path down the tree, "Solar system > Earth > Crust" (Nov 9; L-515 (one nested tree), ruling 20).
-- You decide where each card goes: beside one or several rows, the Sun's shells and the belt's cloud included; planet features join when drawn (Nov 9; L-519 (Featured's rethink)).
-- A scene opens at now; Featured is a board highlighting important cards or scenes, kept largely as is (Nov 9; L-519 (Featured's rethink)).
 
 ## Deferred  **>> UPDATED THIS SESSION**
 
@@ -76,7 +76,7 @@ Waiting behind other work; a line leaves when picked up.
   JPL cannot answer) slices b and c; L-484 (the two agree), its brief
   and build; L-504 (the orrery's clock), the Earth System, stamps and
   tools; L-510 part 2, the path plan asked from before any launch.
-- The Earth System layers, with cards meanwhile (Nov 5, off the road).
+- The other Earth System layers on the web, and South Sudan when IPC publishes (Nov 13; L-530 (the other layers on the web), L-070 (other countries)).
 - L-511 (the export carries the words): behind the check (Nov 3).
 - L-508 (a held body's alarm), L-485 (a nightly run): the website honours no orrery hold yet; the alarm's quiet half waits, its loud half built (L-525, Nov 11).
 - L-462 (a shorter run); L-128 (the ice lines); L-500 (eyeballed numbers).
@@ -93,20 +93,22 @@ Waiting behind other work; a line leaves when picked up.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261112T200109Z, ok, no retry on the swap (gallery swap log, read Nov 12).
-- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at 6a46039).
-- This page's date and the ledger's newest stamp: both Nov 12. Agree.
+- Last cache build: 20261113T194921Z, ok, no retry on the swap (gallery swap log, read Nov 13).
+- Tier-1 on the gate path: 0, the push gate holds (this session's scanner run, Nov 13).
+- This page's date and the ledger's newest stamp: both Nov 13. Agree.
 
-## Waiting on you
+## Waiting on you  **>> UPDATED THIS SESSION**
 
 Decisions, one at a time:
-- None open. Next is Mars (L-514 (the Mars room)).
+- The Earth System skill's web rules, 1.3 (L-001 (food insecurity)).
+- Two dashboard buttons the parity check asks for (L-423 (the website's checks)).
 
 At the next design talk:
 - How obsolete code is treated, and when it goes (L-509 (obsolete
   code)); two cases now, the orrery's unused date function and its
   Pluto-centred view of the moons.
 - Planet 9: how to show a body that may not exist.
+- Whether the site counts visits, and tells visitors (Nov 13; for the Earth Science room's talk, L-531 (the Earth Science room)).
 
 Not urgent, in your order:
 1. Whether the editor also edits the Solar System room's rows, and
@@ -119,7 +121,7 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- This session: L-527 (a first visit's guide), with L-529 (guided encounters) from it; the coordinator's handoff, `HANDOFF_website_coordination_20261112.md`; the brief, `COORD_L527_guide_brief_20261112.md`; the rules, interactive-exhibit 1.42; the page's, `INTERACTIVE_AS_BUILT.md` (website), "A first visit's guide".
+- This session: L-001 (food insecurity), with L-530 (the other layers on the web) and L-531 (the Earth Science room); the brief, `COORD_L001_sudan_web_brief_20261113.md`, with its amendment; the generator, `food_insecurity_generator.py`.
 - The caps: `DOCUMENT_CAPS.md`; L-522 (document caps); its brief
   `COORD_L522_step1_caps_brief_20261110.md` and the review beside it.
 - The tree: L-515 (one nested tree); `COORD_L515_step2b_brief_20261109.md`

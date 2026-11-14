@@ -10,9 +10,9 @@ Mapping Tool's Excel export; outlines and the camps' points come from its
 GeoJSON (whose features hold the Current period only). The two are joined by
 area name, and the run stops, naming the area, if the Excel's Current figures
 differ from the GeoJSON's. Every pop-up carries the full phase 1-5
-breakdown (so a sub-20% Catastrophe never hides behind a Phase-4 colour),
-the camps (IDP settlements) are drawn as circles in their phase colour, and
-Phase 5 (Catastrophe) populations as dark red dots (L-069).
+breakdown (so a smaller Catastrophe population never hides behind a
+Phase-4 color), the camps (IDP settlements) are drawn as circles in their
+phase color, and Phase 5 (Catastrophe) populations as dark red dots (L-069).
 
 Written for Google Earth on the web (L-001, Nov 2026): every style is shared
 at Document level, there is no ScreenOverlay (the title and the legend live in
@@ -39,6 +39,7 @@ Domain: earth_science
 
 Module updated: November 2026 with Anthropic's Claude Opus 5.5
 """
+import io
 import os
 import json
 import math
@@ -188,7 +189,7 @@ COMPARE_CAUTION = ("IPC: \"Caution is therefore advised when comparing "
 TWENTY_PCT_RULE = ("The mapped phase is the highest severity affecting at least "
                    "20% of an area's population. A smaller Catastrophe population "
                    "can sit under a Phase 4 color -- the full breakdown in each "
-                   "balloon shows it.")
+                   "pop-up shows it.")
 # The first clause above is IPC's verbatim legend wording; the second sentence
 # is COMPOSED (ours) and explains the reveal. Numeric token (20%):
 # Source: IPC Sudan Special Report page 7 legend wording (above).
@@ -689,6 +690,57 @@ P5_DOT_CLASSES = 8           # shared dot sizes; Mode-5 visual tunable
 INFO_ICON = "http://maps.google.com/mapfiles/kml/shapes/info-i.png"
 INFO_LAT, INFO_LON = 15.5, 32.5   # placement only, near Khartoum
 
+# --- IPC's Risk of Famine symbol (Tony's ruling, Nov 13, 2026, 19:31) -----
+# Drawn at each at-risk area, in its period, as well as the pop-up line.
+# The shape and colour are IPC's: a dark red triangle with a white X.
+# Source: IPC Sudan Special Report, Feb 2026-Jan 2027, PDF page 21, "Key for
+# Source+: the Map": the "Risk of Famine" symbol; its fill sampled at 400 dpi
+# Source+: as RGB (96, 13, 15) (anti-alias +/-6), the same way PHASE_COLORS_RGB was.
+FAMINE_SYMBOL_RGB = (96, 13, 15)
+FAMINE_SYMBOL_WORDS = "a small dark red triangle with a white X"
+# The symbol's legend line, one home for the "i" pop-up and the page. It
+# credits IPC as the symbol's source: "after IPC" (Tony's ruling of Nov 13,
+# 2026, 20:49). COMPOSED, no numeric token.
+FAMINE_LEGEND_LINE = ("Risk of Famine (symbol after IPC): %s, on each area "
+                      "IPC lists at Risk of Famine (reasonable worst-case "
+                      "scenario)" % FAMINE_SYMBOL_WORDS)
+FAMINE_ICON_FILE = "famine_risk.png"   # packed inside the KMZ
+FAMINE_ICON_SCALE = 1.1                # Mode-5 visual tunable
+
+
+def famine_risk_icon_png(size=64):
+    """IPC's Risk of Famine symbol as PNG bytes: drawn 4x and scaled down
+    for smooth edges. Pure drawing; it carries no figure."""
+    from PIL import Image, ImageDraw
+    big = size * 4
+    im = Image.new("RGBA", (big, big), (0, 0, 0, 0))
+    d = ImageDraw.Draw(im)
+    pad = big * 0.06
+    tri = [(big / 2.0, pad), (big - pad, big - pad), (pad, big - pad)]
+    d.polygon(tri, fill=FAMINE_SYMBOL_RGB + (255,),
+              outline=(255, 255, 255, 255))
+    cx, cy, r = big / 2.0, big * 0.66, big * 0.15
+    w = int(big * 0.07)
+    d.line([(cx - r, cy - r), (cx + r, cy + r)], fill=(255, 255, 255, 255),
+           width=w)
+    d.line([(cx - r, cy + r), (cx + r, cy - r)], fill=(255, 255, 255, 255),
+           width=w)
+    im = im.resize((size, size), Image.LANCZOS)
+    buf = io.BytesIO()
+    im.save(buf, format="PNG")
+    return buf.getvalue()
+
+
+def famine_risk_popup_html(name, area, code, meta):
+    rec = area["periods"][code]
+    pv = rec["phase_value"]
+    return (_div("<b>%s</b>" % _x(name))
+            + _labelled("Period:", _period_label(code))
+            + _div("<b>%s</b>" % _x(FAMINE_RISK_WORDS))
+            + _labelled("Mapped IPC Phase:",
+                        "Phase %d (%s)" % (pv, PHASE_LABELS[pv]))
+            + _footer(meta))
+
 # Plain colour names for the "i" pop-up's key, now that the legend card is
 # gone. COMPOSED: everyday names for the swatches sampled in PHASE_COLORS_RGB.
 PHASE_COLOR_WORDS = {1: "light green", 2: "yellow", 3: "orange",
@@ -735,14 +787,14 @@ def compose_framing_text():
     sourced NATL_* constants and TWENTY_PCT_RULE above.
 
     C1 -- mapped-vs-population reconciliation (the hidden Catastrophe).
-    C2 -- the >=20% mapped-phase rule (IPC verbatim clause).
+    C2 -- IPC's mapped-phase rule (TWENTY_PCT_RULE, IPC verbatim clause).
     C3 -- causal-restraint statement.
     """
     c1 = ("No area is mapped Phase 5 (Famine), but about %s people are in "
           "Phase 5 (Catastrophe), concentrated in North Darfur, South Darfur "
           "and South Kordofan." % NATL_PHASE5_CATASTROPHE)
     national = ("Sudan, current period (February - May 2026): of %s people "
-                "analysed, about %s are in IPC Phase 3 or above (Crisis or "
+                "analyzed, about %s are in IPC Phase 3 or above (Crisis or "
                 "worse), including over %s in Phase 4 (Emergency)."
                 % (NATL_TOTAL_POP, NATL_PHASE3PLUS, NATL_PHASE4))
     return {"national": national, "c1": c1, "c2": TWENTY_PCT_RULE,
@@ -763,7 +815,7 @@ def compose_period_lines(code, joined):
     if code == "projected-1":
         lines = [
             "June - September 2026, the lean season, in the %s areas IPC "
-            "analysed: %s people, %s of the analysed population, in IPC "
+            "analyzed: %s people, %s of the analyzed population, in IPC "
             "Phase 3 or above (Crisis or worse). Around %s are expected in "
             "Phase 4 (Emergency) and a further %s in Phase 3 (Crisis)."
             % (PROJ_AREAS, P1_PHASE3PLUS, P1_PHASE3PLUS_PCT, P1_PHASE4,
@@ -773,7 +825,7 @@ def compose_period_lines(code, joined):
     else:
         lines = [
             "October 2026 - January 2027, the harvest season, in the %s "
-            "areas IPC analysed: an estimated %s people, %s of the analysed "
+            "areas IPC analyzed: an estimated %s people, %s of the analyzed "
             "population, in IPC Phase 3 or above (Crisis or worse), "
             "including %s in Phase 4 (Emergency) and %s in Phase 3 (Crisis)."
             % (PROJ_AREAS, P2_PHASE3PLUS, P2_PHASE3PLUS_PCT, P2_PHASE4,
@@ -838,6 +890,10 @@ def web_styles_xml():
         out.append(_icon_style_xml("p5dot_%d" % k, P5_DOT_RGB, s,
                                    P5_DOT_ICON))
     out.append(_icon_style_xml("info", None, 1.3, INFO_ICON, label_scale=0.9))
+    out.append(_icon_style_xml("famine_risk", None, FAMINE_ICON_SCALE,
+                               FAMINE_ICON_FILE).replace(
+        "</Icon>", '</Icon><hotSpot x="0.5" y="0" xunits="fraction" '
+        'yunits="fraction"/>'))
     return "".join(out)
 
 
@@ -864,7 +920,7 @@ def area_popup_html(name, area, code, meta, famine_names):
     lines.append(_labelled("Period:", _period_label(code)))
     pv = rec["phase_value"]
     if pv is None:
-        lines.append(_labelled("Mapped IPC Phase:", "Not analysed"))
+        lines.append(_labelled("Mapped IPC Phase:", "Not analyzed"))
         if code != "current":
             lines.append(_div(_x(NOT_IN_PROJECTION_LINE)))
     else:
@@ -953,20 +1009,21 @@ def info_popup_html(joined):
     for code in FOLDER_ORDER:
         lines.append(_div("- " + _x(_period_label(code))))
 
-    lines.append(h("What the colours mean"))
+    lines.append(h("What the colors mean"))
     for pv in range(1, 6):
         lines.append(_div(_x("Phase %d %s: %s" % (
             pv, "Famine / Catastrophe" if pv == 5 else PHASE_LABELS[pv],
             PHASE_COLOR_WORDS[pv]))))
-    lines.append(_div(_x("Not analysed: white")))
+    lines.append(_div(_x("Not analyzed: white")))
     lines.append(_div(_x(f["c2"])))
     lines.append(_div(_x(
         "Small circles are IDP settlements (camps for internally displaced "
-        "people), coloured by their phase. Dark red dots show people in "
+        "people), colored by their phase. Dark red dots show people in "
         "Phase 5 (Catastrophe); a larger dot means more people, and a dot "
         "of one size means the same number of people in every period.")))
     lines.append(_div(_x(
-        "Areas IPC lists at %s say so in their pop-up." % FAMINE_RISK_WORDS)))
+        "%s in that period. The area's pop-up says so too."
+        % FAMINE_LEGEND_LINE)))
 
     for code in FOLDER_ORDER:
         lines.append(h(_period_label(code)))
@@ -1036,7 +1093,7 @@ def _folder(name, children, visibility=None, open_=False, description=None):
 def _period_folder_xml(code, joined, p5_max):
     meta = joined["meta"]
     famine_names = set(joined["famine"].get(code, []))
-    areas, camps, dots = [], [], []
+    areas, camps, dots, risk = [], [], [], []
     for name in sorted(joined["areas"]):
         area = joined["areas"][name]
         rec = area["periods"][code]
@@ -1055,6 +1112,11 @@ def _period_folder_xml(code, joined, p5_max):
                 camps.append(_placemark(name, style, popup,
                                         _point_xml(lon, lat)))
             dot_at = tuple(area["points"][0]["geometry"]["coordinates"][:2])
+        if name in famine_names:
+            risk.append(_placemark(
+                name, "famine_risk",
+                famine_risk_popup_html(name, area, code, meta),
+                _point_xml(dot_at[0], dot_at[1])))
         p5 = rec["phase_pop"][5] or 0
         if pv and p5 > 0:
             dots.append((p5, _placemark(
@@ -1065,6 +1127,8 @@ def _period_folder_xml(code, joined, p5_max):
     children = [_folder("Areas", areas),
                 _folder("IDP settlements (camps)", camps),
                 _folder("Phase 5 (Catastrophe) populations", dots)]
+    if risk:
+        children.append(_folder(FAMINE_RISK_WORDS, risk))
     return _folder(_period_label(code), children,
                    visibility=1 if code == OPEN_PERIOD else 0,
                    open_=(code == OPEN_PERIOD),
@@ -1092,12 +1156,283 @@ def build_web_kml(joined):
 
 
 def package_kmz(kml_str):
-    """Write the KMZ: a single doc.kml (no card images; the web shows none).
-    The filename is unchanged, so links by name keep working."""
+    """Write the KMZ: doc.kml plus the Risk of Famine symbol, drawn at build
+    time (no card images; the web shows none). The filename is unchanged,
+    so links by name keep working."""
     kmz_path = os.path.join(DATA_DIR, "%s_blockbuster.kmz" % SCENARIO_ID)
     with zipfile.ZipFile(kmz_path, "w", zipfile.ZIP_DEFLATED) as zf:
         zf.writestr("doc.kml", kml_str.encode("utf-8"))
+        zf.writestr(FAMINE_ICON_FILE, famine_risk_icon_png())
     return kmz_path
+
+
+# ==========================================================================
+#   THE SHORT PAGE AND ITS PICTURE (L-001, Nov 2026; brief's amendment of
+#   Nov 13, 16:05, and Tony's ruling of Nov 13, 19:49)
+# ==========================================================================
+# The layer's one home on the website: written here, from the same constants
+# and data as the KMZ, so its words and their sources live in one place.
+# Phone-first and upright. It links out to Tony's shared Google Earth
+# project: Google Earth web will not show inside another site's page (every
+# earth.google.com address answers X-Frame-Options SAMEORIGIN; checked by
+# the coordinator, Nov 13, 2026).
+
+# Tony's public Google Earth project for this layer (his ruling of Nov 13,
+# 2026: the project renamed "Sudan"; this link, not the older one).
+GE_PROJECT_URL = ("https://earth.google.com/earth/d/"
+                  "1tvCdwVYhIwNetF-phuT4eTMztfOOIuaG?usp=sharing")
+# IPC's own interactive map of this analysis, the authority (Tony's ruling of
+# Nov 13, 2026, 19:49, which gave this address).
+IPC_MAP_URL = ("https://www.ipcinfo.org/ipc-country-analysis/details-map/"
+               "en/c/1163315/?iso3=SDN")
+PAGE_PERIOD = "projected-2"   # the period the picture draws (the file opens on it)
+
+# How this map relates to IPC's (Tony's ruling of Nov 13, 2026, 19:49).
+# COMPOSED, no numeric token; every item is either read from IPC (named as
+# IPC's) or a drawing choice of this layer (named as ours).
+RELATION_IPC_OWN = ("From IPC: the data, the phase colors, the Risk of "
+                    "Famine symbol, the figures and the words.")
+RELATION_ADDED = [
+    "Dark red dots for people in Phase 5 (Catastrophe), who can be hidden "
+    "under a lower phase's color.",
+    "The three periods side by side, one folder each.",
+    "Google Earth's satellite globe beneath them.",
+]
+RELATION_NOT_SHOWN = [
+    "IPC's food-assistance symbols.",
+    "The evidence levels for the two projections.",
+    "Acute malnutrition, which IPC classifies in its own separate analysis.",
+]
+RELATION_AUTHORITY = "IPC's own map is the authority:"
+
+PAGE_CSS = """
+:root{--bg:#0a0a0f;--panel:#12121a;--line:#2a2a3a;--text:#e8e6e3;
+--dim:#9a9a9a;--accent:#c9a84c}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--text);
+font-family:'DM Sans',-apple-system,Helvetica,Arial,sans-serif;
+font-size:16px;line-height:1.5}
+main{max-width:640px;margin:0 auto;padding:16px 16px 40px}
+a{color:var(--accent)}
+.back{font-size:14px;display:inline-block;margin-bottom:12px}
+h1{font-family:'Cormorant Garamond',Georgia,serif;font-weight:600;
+font-size:30px;line-height:1.15;margin:0 0 4px}
+h2{font-size:17px;margin:22px 0 6px;color:var(--accent)}
+.sub{color:var(--dim);margin:0 0 14px}
+figure{margin:0 0 14px;background:#fff;border-radius:10px;padding:6px}
+figure img{display:block;width:100%;height:auto}
+figcaption{color:#333;font-size:13px;padding:4px 6px 2px}
+.go{display:block;text-align:center;background:#2d6a2d;
+border:1px solid #4ade80;color:#f8fafc;text-decoration:none;
+font-weight:600;border-radius:10px;padding:14px 12px;margin:6px 0 4px;
+font-size:17px}
+.note{color:var(--dim);font-size:14px;margin:4px 0 0}
+ul{padding-left:20px;margin:4px 0}
+li{margin:3px 0}
+.key{list-style:none;padding:0}
+.sw{display:inline-block;width:16px;height:16px;border:1px solid #888;
+vertical-align:-3px;margin-right:8px;border-radius:2px}
+.src{color:var(--dim);font-size:13px;border-top:1px solid var(--line);
+margin-top:24px;padding-top:10px}
+"""
+
+
+def page_picture_png(joined, code=PAGE_PERIOD, width_px=1000):
+    """A still picture of one period's map, drawn from the same joined data
+    as the KMZ at every build (never a screenshot): areas in their phase
+    colours, not-analysed areas white, the camps as circles, the Phase 5
+    dots and IPC's Risk of Famine symbol. Returns PNG bytes."""
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    from matplotlib.patches import Polygon as MplPolygon
+    from matplotlib.collections import PatchCollection
+
+    def rgb01(hexstr):
+        h = hexstr.lstrip("#")
+        return tuple(int(h[i:i + 2], 16) / 255.0 for i in (0, 2, 4))
+
+    alpha = int(POLY_FILL_ALPHA, 16) / 255.0
+    patches, faces = [], []
+    xs, ys = [], []
+    for name, area in joined["areas"].items():
+        pv = area["periods"][code]["phase_value"]
+        face = rgb01(PHASE_COLORS_RGB[pv]) if pv else rgb01(NOT_ANALYSED_RGB)
+        for feat in area["polygons"]:
+            g = feat["geometry"]
+            polys = ([g["coordinates"]] if g["type"] == "Polygon"
+                     else g["coordinates"])
+            for poly in polys:
+                ring = [(pt[0], pt[1]) for pt in poly[0]]
+                patches.append(MplPolygon(ring, closed=True))
+                faces.append(face + (alpha if pv else 1.0,))
+                xs += [p[0] for p in ring]
+                ys += [p[1] for p in ring]
+
+    fig_w = width_px / 100.0
+    span_x, span_y = max(xs) - min(xs), max(ys) - min(ys)
+    fig = plt.figure(figsize=(fig_w, fig_w * span_y / span_x), dpi=100)
+    ax = fig.add_axes([0, 0, 1, 1])
+    ax.set_axis_off()
+    fig.patch.set_facecolor("white")
+    pc = PatchCollection(patches, facecolors=faces,
+                         edgecolors=rgb01(LINE_RGB), linewidths=0.4)
+    ax.add_collection(pc)
+
+    p5_max = max((a["periods"][c]["phase_pop"][5] or 0)
+                 for a in joined["areas"].values()
+                 for c, *_rest in IPC_PERIODS)
+    famine = set(joined["famine"].get(code, []))
+    for name, area in joined["areas"].items():
+        rec = area["periods"][code]
+        pv = rec["phase_value"]
+        if area["kind"] == "polygon":
+            at = _representative_point(area["polygons"][0]["geometry"])
+        else:
+            at = tuple(area["points"][0]["geometry"]["coordinates"][:2])
+            ax.plot([at[0]], [at[1]], "o", ms=7,
+                    mfc=rgb01(PHASE_COLORS_RGB[pv]) if pv else "white",
+                    mec="#333333", mew=0.8, zorder=3)
+        p5 = rec["phase_pop"][5] or 0
+        if pv and p5 > 0:
+            # the KMZ's dot classes, as marker sizes (visual only)
+            k = _p5_dot_class(p5, p5_max)
+            ax.plot([at[0]], [at[1]], "o", ms=4 + 1.6 * k,
+                    mfc=rgb01(P5_DOT_RGB), mec="white", mew=0.6, zorder=4)
+        if name in famine:
+            fam = tuple(c / 255.0 for c in FAMINE_SYMBOL_RGB)
+            ax.plot([at[0]], [at[1] + 0.22], "^", ms=13, mfc=fam,
+                    mec="white", mew=0.8, zorder=5)
+            ax.plot([at[0]], [at[1] + 0.17], "x", ms=5, mec="white",
+                    mew=1.4, zorder=6)
+    pad = 0.3
+    ax.set_xlim(min(xs) - pad, max(xs) + pad)
+    ax.set_ylim(min(ys) - pad, max(ys) + pad)
+    ax.set_aspect("equal")
+    buf = io.BytesIO()
+    fig.savefig(buf, format="png", facecolor="white")
+    plt.close(fig)
+    return buf.getvalue()
+
+
+def _swatch(rgb_hex):
+    return '<span class="sw" style="background:%s"></span>' % rgb_hex
+
+
+def _famine_svg():
+    r, g, b = FAMINE_SYMBOL_RGB
+    return ('<svg width="18" height="16" viewBox="0 0 18 16" '
+            'style="vertical-align:-3px;margin-right:6px" aria-hidden="true">'
+            '<polygon points="9,1 17,15 1,15" fill="rgb(%d,%d,%d)" '
+            'stroke="#fff" stroke-width="1"/><path d="M6.5,8.5 L11.5,13.5 '
+            'M11.5,8.5 L6.5,13.5" stroke="#fff" stroke-width="1.8"/></svg>'
+            % (r, g, b))
+
+
+def build_short_page_html(joined, picture_file):
+    """Sudan's short page: the title; the three periods by IPC's names and
+    dates; each phase with its colour in words and the 20-percent rule; the
+    projections' coverage line; how this map relates to IPC's; IPC's credit
+    and citation; one button to the Google Earth project; the still picture.
+    Every number is a sourced constant or read from the data."""
+    meta = joined["meta"]
+    e = _x
+    pic_label = _period_label(PAGE_PERIOD)
+    parts = [
+        '<!DOCTYPE html>\n<html lang="en">\n<head>\n<meta charset="utf-8">\n'
+        '<meta name="viewport" content="width=device-width, '
+        'initial-scale=1, viewport-fit=cover">\n'
+        "<title>Sudan: acute food insecurity (IPC) - Paloma's Orrery</title>\n"
+        '<link rel="preconnect" href="https://fonts.googleapis.com">\n'
+        '<link href="https://fonts.googleapis.com/css2?family=Cormorant+'
+        'Garamond:wght@600&family=DM+Sans:wght@400;600&display=swap" '
+        'rel="stylesheet">\n'
+        "<style>%s</style>\n</head>\n<body>\n<main>\n" % PAGE_CSS,
+        '<a class="back" href="/">&larr; Paloma\'s Orrery</a>\n',
+        "<h1>Sudan &mdash; Acute Food Insecurity</h1>\n",
+        '<p class="sub">IPC&#39;s analysis of Sudan, three periods, on '
+        "Google Earth</p>\n",
+        '<figure><img src="%s" alt="%s"><figcaption>%s, drawn from IPC\'s '
+        "data.</figcaption></figure>\n"
+        % (e(picture_file),
+           e("Map of Sudan for %s: areas colored by IPC phase, white where "
+             "not analyzed, camps as circles, dark red dots for Phase 5 "
+             "(Catastrophe) and IPC's Risk of Famine symbol." % pic_label),
+           e(pic_label)),
+        '<a class="go" href="%s" target="_blank" rel="noopener">Open the map '
+        "in Google Earth</a>\n" % e(GE_PROJECT_URL),
+        '<p class="note">It opens in a new tab, on %s. Switch a period\'s '
+        "folder on to see it.</p>\n" % e(pic_label),
+        "<h2>Three periods</h2>\n<ul>\n",
+    ]
+    for code in ["current", "projected-1", "projected-2"]:
+        parts.append("<li>%s</li>\n" % e(_period_label(code)))
+    parts.append("</ul>\n")
+    parts.append('<p class="note">%s</p>\n<p class="note">%s</p>\n'
+                 % (e(COVERAGE_LINE), e(COMPARE_CAUTION)))
+
+    parts.append("<h2>What the colors mean</h2>\n<ul class=\"key\">\n")
+    for pv in range(1, 6):
+        parts.append("<li>%sPhase %d %s: %s</li>\n" % (
+            _swatch(PHASE_COLORS_RGB[pv]), pv,
+            e("Famine / Catastrophe" if pv == 5 else PHASE_LABELS[pv]),
+            e(PHASE_COLOR_WORDS[pv])))
+    parts.append("<li>%sNot analyzed: white</li>\n" % _swatch(NOT_ANALYSED_RGB))
+    parts.append("<li>%s%s</li>\n" % (_famine_svg(), e(FAMINE_LEGEND_LINE)))
+    parts.append("<li>Small circles: IDP settlements (camps for internally "
+                 "displaced people), in their phase color</li>\n")
+    parts.append("<li>Dark red dots: people in Phase 5 (Catastrophe); a "
+                 "larger dot means more people</li>\n</ul>\n")
+    parts.append("<p>%s</p>\n" % e(TWENTY_PCT_RULE))
+
+    parts.append("<h2>How this map relates to IPC&#39;s</h2>\n")
+    parts.append("<p>%s</p>\n" % e(RELATION_IPC_OWN))
+    parts.append("<p>This map adds:</p>\n<ul>\n")
+    for s in RELATION_ADDED:
+        parts.append("<li>%s</li>\n" % e(s))
+    parts.append("</ul>\n<p>It does not show:</p>\n<ul>\n")
+    for s in RELATION_NOT_SHOWN:
+        parts.append("<li>%s</li>\n" % e(s))
+    parts.append('</ul>\n<p>%s <a href="%s" target="_blank" rel="noopener">'
+                 "IPC&#39;s map of Sudan</a>.</p>\n"
+                 % (e(RELATION_AUTHORITY), e(IPC_MAP_URL)))
+
+    parts.append('<div class="src"><div>Source: %s</div><div>%s</div>'
+                 "<div>Analysis: %s</div><div>Data retrieved: %s</div>"
+                 "<div>%s</div></div>\n"
+                 % (e(PROVENANCE_DATA), e(CITATION), e(meta["analysis_name"]),
+                    e(meta["export_date"]), e(CAUSAL_RESTRAINT)))
+    parts.append("</main>\n</body>\n</html>\n")
+    return "".join(parts)
+
+
+# Where an Earth System layer's one-home page lives (Tony's ruling of Nov 13,
+# 2026): a folder of its own at the website's top level, earth/, with the
+# page and its picture side by side, both named by the layer's scenario id --
+# earth/<scenario_id>.html and earth/<scenario_id>.png -- the same stable id
+# that names its KMZ (<scenario_id>_blockbuster.kmz). Every later layer
+# follows the same pattern. The generator writes them into data/earth/, the
+# same layout, so the folder is copied to the website as it is.
+PAGE_FOLDER = "earth"
+
+
+def write_short_page(joined):
+    """Write the page and its picture into data/earth/ as
+    <scenario_id>.html and <scenario_id>.png. Returns the two paths."""
+    folder = os.path.join(DATA_DIR, PAGE_FOLDER)
+    if not os.path.exists(folder):
+        os.makedirs(folder)
+    pic_name = "%s.png" % SCENARIO_ID
+    page_path = os.path.join(folder, "%s.html" % SCENARIO_ID)
+    pic_path = os.path.join(folder, pic_name)
+    with open(pic_path, "wb") as f:
+        f.write(page_picture_png(joined))
+    with open(page_path, "wb") as f:
+        # ASCII on disk: a character from IPC's data (an en dash in the
+        # analysis name) is written as an HTML character reference.
+        f.write(build_short_page_html(joined, pic_name).encode(
+            "ascii", "xmlcharrefreplace"))
+    return page_path, pic_path
 
 
 # ==========================================================================
@@ -1126,7 +1461,7 @@ def generate_plotly_teaser(records, meta):
         p5 = _intpop(rec["phase_pop"].get(5))
         text.append("%s<br>Mapped: %s<br>Phase 5 (Catastrophe): %s"
                     % (rec["area_name"],
-                       "Not analysed" if pv is None else "Phase %s" % pv, p5))
+                       "Not analyzed" if pv is None else "Phase %s" % pv, p5))
 
     colorscale = [
         [0.0, NOT_ANALYSED_RGB], [0.124, NOT_ANALYSED_RGB],
@@ -1208,10 +1543,12 @@ def check_web_kmz(kmz_path):
         tally = {}
         for pm in f.iter("{%s}Placemark" % ns["k"]):
             sid = (pm.findtext("k:styleUrl", "", ns) or "").lstrip("#")
-            if sid.startswith("p5dot_"):
+            if sid == "famine_risk":
+                key = "Risk of Famine symbol"
+            elif sid.startswith("p5dot_"):
                 key = "Phase 5 dot"
             elif sid.endswith("not_analysed"):
-                key = "Not analysed"
+                key = "Not analyzed"
             elif sid[-1:].isdigit() and int(sid[-1]) in PHASE_LABELS:
                 pv = int(sid[-1])
                 key = "Phase %d %s" % (pv, PHASE_LABELS[pv])
@@ -1235,6 +1572,19 @@ def check_web_kmz(kmz_path):
         print("  folder %r visibility %s" % (name, vis))
         for key in sorted(counts[name]):
             print("    %-28s %d" % (key, counts[name][key]))
+    for code in FOLDER_ORDER:
+        got_n = counts.get(_period_label(code), {}).get(
+            "Risk of Famine symbol", 0)
+        want_n = FAMINE_RISK_COUNTS.get(code, 0)
+        if got_n != want_n:
+            failures.append("%s: %d Risk of Famine symbols, the report "
+                            "counts %d" % (_period_label(code), got_n, want_n))
+    hrefs = [h.text or "" for h in root.iter("{%s}href" % ns["k"])]
+    local = sorted({h for h in hrefs if not h.startswith("http")})
+    missing = [h for h in local if h not in names]
+    if missing:
+        failures.append("icon file(s) not in the KMZ: %s" % missing)
+    print("  icons packed in the KMZ: %s; missing: %d" % (local, len(missing)))
     if failures:
         raise ValueError("KMZ check failed:\n  " + "\n  ".join(failures))
     print("  KMZ check passed.")
@@ -1264,7 +1614,7 @@ def run(geojson_path=DEFAULT_GEOJSON, make_teaser=True, status_callback=None,
 
     _status("Joining the IPC Excel (three periods) to the GeoJSON outlines...")
     joined = join_ipc_periods(excel_path, geojson_path)
-    _status("Joined %d areas (%d camps); analysed: %s." % (
+    _status("Joined %d areas (%d camps); analyzed: %s." % (
         len(joined["areas"]), len(joined["camps"]),
         ", ".join("%s %d" % (lbl, len(joined["analysed"][c]))
                   for c, _p, lbl, *_d in IPC_PERIODS)))
@@ -1273,6 +1623,8 @@ def run(geojson_path=DEFAULT_GEOJSON, make_teaser=True, status_callback=None,
     kmz_path = package_kmz(build_web_kml(joined))
     _status("KMZ written: %s" % kmz_path)
     check_web_kmz(kmz_path)
+    page_path, pic_path = write_short_page(joined)
+    _status("Short page written: %s (picture %s)" % (page_path, pic_path))
 
     teaser_path = None
     if make_teaser:
@@ -1282,8 +1634,8 @@ def run(geojson_path=DEFAULT_GEOJSON, make_teaser=True, status_callback=None,
         if teaser_path:
             _status("Teaser written: %s" % teaser_path)
 
-    return {"kmz": kmz_path, "teaser": teaser_path,
-            "areas": len(joined["areas"])}
+    return {"kmz": kmz_path, "teaser": teaser_path, "page": page_path,
+            "picture": pic_path, "areas": len(joined["areas"])}
 
 
 def _food_run(scenario, status_callback=None):

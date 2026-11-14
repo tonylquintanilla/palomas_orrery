@@ -1005,7 +1005,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*263 live items; 247 need attention (`!`); 165 RICE-scored; 259 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*265 live items; 249 need attention (`!`); 165 RICE-scored; 259 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1025,7 +1025,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-199 | Protocol length: govern the growth, not the number | OPEN | 4.8 | 2026-08-17 |
 | ! | L-327 | Tool repairs from the rules-vs-reasoning round (tooling track) | OPEN | 4.8 | 2026-09-14 |
 | ! | L-268 | Sweep: features collapsed out of their own identity | OPEN | 4.5 | 2026-08-30 |
-| ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-10-07 |
+| ! | L-001 | Food Insecurity (Earth System track) | OPEN | 4.3 | 2026-11-13 |
 | ! | L-243 | Retire the replicated AU conversion factor | OPEN | 4.3 | 2026-09-28 |
 | ! | L-190 | Scanner reach: anything rendered must be reachable | OPEN | 4.3 | 2026-08-25 |
 | ! | L-281 | The guest book: no-account comments, approve-before-show | OPEN | 4.2 | 2026-09-27 |
@@ -1084,7 +1084,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-105 | merge_orbit_data source-side frame guard (desktop cache hardening) | OPEN | 1.0 | 2026-07-08 |
 | ! | L-129 | Cometary structure constants -- periodic maintenance sweep | OPEN | 1.0 | 2026-07-17 |
 | ! | L-078 | Provenance scanner: systematic coverage via module_atlas role classification | OPEN | 0.9 | 2026-07-16 |
-| ! | L-070 | Food Insecurity -- regional multi-country assembly (Sudan crisis shed) | OPEN | 0.9 | 2026-10-07 |
+| ! | L-070 | Food Insecurity -- regional multi-country assembly (Sudan crisis shed) | OPEN | 0.9 | 2026-11-13 |
 | ! | L-319 | Focusing a smaller shell cuts larger lit shells flat at the frame's box | OPEN | 0.7 | 2026-09-10 |
 | ! | L-128 | Comet sublimation shell(s) -- solar-distance chemistry zones | OPEN | -- | 2026-10-22 |
 | ! | L-235 | Checks that cannot fail, gallery side [three instances] | OPEN | -- | 2026-10-08 |
@@ -1133,7 +1133,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-403 | Numbers in the object list's descriptions carry no source (orrery, provenance) | OPEN | -- | 2026-10-01 |
 | ! | L-411 | The typed numbers left in the Sun's hovers (orrery + gallery, the Sun's slice) | OPEN | -- | 2026-11-02 |
 | ! | L-413 | Earth's list: the old Earth items, in the order Tony confirmed (Earth room) | OPEN | -- | 2026-11-02 |
-| ! | L-423 | The website's checks: the order Tony confirmed (checks, gallery) | OPEN | -- | 2026-11-06 |
+| ! | L-423 | The website's checks: the order Tony confirmed (checks, gallery) | OPEN | -- | 2026-11-13 |
 | ! | L-424 | The checker reports one word for two different cases (worksheet checker) | OPEN | -- | 2026-10-11 |
 | ! | L-425 | A citation's location record is checked only in part (provenance tooling) | OPEN | -- | 2026-10-09 |
 | ! | L-426 | The worksheet checker compares very small numbers as equal (worksheet checker) | OPEN | -- | 2026-10-09 |
@@ -1182,6 +1182,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-526 | A body whose test fails for a real reason is drawn from the older orbit while held (gallery, the nightly builder's hold; recorded, not built) | OPEN | -- | 2026-11-11 |
 | ! | L-528 | The orrery's Kepler solvers' start: E = pi for a stretched orbit, and no error when they do not converge (orrery; recorded, not built) | OPEN | -- | 2026-11-12 |
 | ! | L-529 | Guided encounters: the guide's way of telling, used for a flyby (gallery; an idea, for a design talk after Mars) | OPEN | -- | 2026-11-12 |
+| ! | L-530 | The other Earth System layers on Google Earth web (Earth System; recorded, not built) | OPEN | -- | 2026-11-13 |
+| ! | L-531 | The Earth Science room in the interactive site (website; recorded, not built) | OPEN | -- | 2026-11-13 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1617,6 +1619,55 @@ as an archive of the prioritization thinking -- no cleanup on close.
 ## DETAIL / RECORD
 
 ## A. ACTIVE SEPARATE TRACKS (not orrery-refactor backlog; cross-referenced)
+
+#### [L-530] The other Earth System layers on Google Earth web (Earth System; recorded, not built)
+<!-- L:530 status:OPEN upd:2026-11-13 section:A flag: rice: -->
+- **Why.** Google Earth Pro on the desktop stops being offered on 25
+  June 2027 (the brief of 2026-11-13); Tony ruled Sudan onto the web
+  (L-001). The other layers are built for Pro the way Sudan was: the
+  heat layers use ScreenOverlays and styles inside folders, which
+  Google Earth web drops (every colour lost; cards unsupported).
+- **The form to follow** is Sudan's (L-001, 2026-11-13): shared styles
+  at Document level, no ScreenOverlay, pop-up lines in <div>, the "i"
+  pin carrying the title and the key in words, a byte check after every
+  build, and a one-home page at earth/<scenario_id>.html with its
+  picture.
+- **Three ideas Tony ruled "work well together" (2026-11-13, 15:51):**
+  (a) each layer's short page is its one home, written by its
+  generator from the text the scenario files already carry; (b) a
+  network link inside each Google Earth project fetches the file from
+  the website, so an update needs no re-import -- unverified, one test
+  first; (c) not every layer needs Google Earth: a still picture on its
+  page may be enough. About a dozen of the Earth System cards are
+  charts, not Google Earth layers.
+- **The shared piece:** earth_system_common.create_info_placemark still
+  writes <p> and <br>; the web form belongs there when the heat layers
+  move, so one builder serves both families.
+**Gap:** scope and order, at the Earth Science room's design talk
+(L-531); idea (b)'s test.
+**Ref:** L-001 (Sudan, the first); L-531 (the room);
+earth_system_generator.py, earth_system_common.py, scenarios_*.
+
+#### [L-531] The Earth Science room in the interactive site (website; recorded, not built)
+<!-- L:531 status:OPEN upd:2026-11-13 section:A flag: rice: -->
+- **Tony, 2026-11-13, 15:59:** "The Sudan map is a priority so should
+  be shown regardless as a featured item. Then the new room migration,
+  after Mars and the rest of the moons. We may interrupt again for
+  something else like el nino."
+- **The room**, laid out like the Solar System room (drawers and rows,
+  by theme). A plan for its design talk, from the brief's amendment:
+  the room's rows first link to the old cards (index.html opens a card
+  from #<card id>); the old lobby hides its Earth System rooms (74
+  cards, about 37 layers with their phone versions); each row moves to
+  its page as its layer is made web-ready (L-530), and that old card
+  goes. Check first where closing an old card lands a visitor who came
+  from the new room.
+- **For the design talk, Tony, 2026-11-13, 20:49:** whether the site
+  counts visits, and tells visitors. (Sudan's page has no visit
+  counter; the site's other pages load Google Analytics.)
+- An interruption such as El Nino may come before the room (L-060).
+**Gap:** a design talk after Mars and the rest of the moons.
+**Ref:** L-001, L-530; L-519 (Featured's rethink); L-060 (ENSO).
 
 #### [L-529] Guided encounters: the guide's way of telling, used for a flyby (gallery; an idea, for a design talk after Mars)
 <!-- L:529 status:OPEN upd:2026-11-12 section:A flag: rice: -->
@@ -8377,7 +8428,7 @@ aberration is built. L-356's build may come on any evening (Tony,
 above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
 
 #### [L-423] The website's checks: the order Tony confirmed (checks, gallery)
-<!-- L:423 status:OPEN upd:2026-11-06 section:A flag: rice: -->
+<!-- L:423 status:OPEN upd:2026-11-13 section:A flag: rice: -->
 - **Confirmed by Tony, 2026-10-08**, in the decisions session of
   2026-10-08: "Yes open it now"; on the order, "The order is okay".
   This is road stage 9 on Where We Are. It comes before the front-door
@@ -8473,6 +8524,13 @@ above; `documentation/HANDOFF_L413_ledger_sweep_and_earth_list_20261004.md`.
 **Gap:** items 1 and 2 done; next, item 3, L-357 (stale leftovers). The
 live check's list: Tony's live run after the push, its "Served
 reachability" line naming 32 positions files read from the config.
+- **2026-11-13 (from L-001's session):** Dashboard parity is red in the
+  orrery run, as at the session's start: the gallery's steps "Kepler
+  solver" and "First guide" have no button in "Gallery -- checks and
+  data" (`palomas_orrery_dashboard.py`). Two buttons and their short
+  lines, as on 2026-11-11 for Tap hover and As-built names.
+  Tony-action (decide): add them in the next session that opens the
+  dashboard.
 **Ref:** L-412; L-363; the members above;
 `documentation/HANDOFF_decisions_20261008.md`.
 
@@ -10533,7 +10591,7 @@ one of the four).
 (STILL OPEN, item 1c).
 
 #### [L-001] Food Insecurity (Earth System track)
-<!-- L:001 status:OPEN upd:2026-10-07 section:A flag: rice:3/3/95/2 -->
+<!-- L:001 status:OPEN upd:2026-11-13 section:A flag: rice:3/3/95/2 -->
 - **Phase-1 build COMPLETE, render-confirmed (Mode-5, ge_sudan.jpg, built on
   03630ae).** Module: food_insecurity_generator.py -- new dedicated vector/
   categorical generator (NOT a bend of run_scenario); 189 area polygons, full
@@ -10592,8 +10650,9 @@ one of the four).
   Lesson: confirm the DEPLOY path before theorizing a cache. The build-stamped
   overlay names (above) were kept as cheap cache-bust insurance.
 - **Still open under this track:** Deferred sub-layers split out: Phase-5 reveal
-  -> L-069; 39 IPC call-out points (HFA-bag/IDP symbols) and the Jun-Sep /
-  Oct-Jan projections remain deferred per original scope.
+  -> L-069. (The Jun-Sep / Oct-Jan projections and the seven IDP camps were
+  built on 2026-11-13, below; IPC's food-assistance symbols stay out, and the
+  short page says so.)
 - **Tony's ruling, 2026-10-07, on the Earth System track as a whole:**
   "The earth system track is central but behind the orrery website
   build. In the meantime the cards in the gallery work." So the
@@ -10609,10 +10668,82 @@ one of the four).
   track resumes:** (a) the WWA attribution watch across the
   europe_* series, if a study publishes; (b) a Sentinel-3 LST
   surface snapshot as a separate artifact.
+- **2026-11-13: Sudan on Google Earth web (Claude Code session, Opus
+  5.5, python_work door; built on orrery 11662222 and gallery d3777269,
+  brief `documentation/COORD_L001_sudan_web_brief_20261113.md`).**
+  Tony's rulings (Chicago time), the brief's eight: Nov 12, 23:10, South
+  Sudan waits for IPC's next analysis (on L-070); 23:11, June-September
+  is a third layer; Nov 13, 11:10, rebuild February-May from the
+  corrected file; 11:50, the seven camps as phase-coloured circles with
+  the full pop-up; 12:25, one file, opening on October-January; 12:32,
+  "migrate to the web"; 13:59, the card links only to the web project;
+  14:31, proceed. The amendment's two: 15:51, ideas (a) one-home page
+  per layer, (b) a network link, (c) a still picture may be enough, "work
+  well together" (on L-530); 15:59, Sudan featured now, the room after
+  Mars and the moons (L-531). In the session: 19:31, "Both": IPC's Risk
+  of Famine symbol on the map as well as the pop-up line; the new public
+  project, renamed "Sudan"
+  (https://earth.google.com/earth/d/1tvCdwVYhIwNetF-phuT4eTMztfOOIuaG);
+  19:49, the page says how this map relates to IPC's, with IPC's map
+  linked as the authority; the page's folder is `earth/` at the site's
+  top (earth/<scenario_id>.html and .png), Featured and the old card's
+  button as proposed; 20:32, American spelling in every composed
+  sentence, IPC's quotations kept as written; 20:49, the symbol is
+  marked "after IPC", no visit counter on the page (the question goes
+  to L-531); the triangles' look on Google Earth web: "They look okay".
+- **Built.** food_insecurity_generator.py reads every period's per-area
+  figures from IPC's Excel export (data/IPC_SD_Acute_Food_Insecurity_
+  Analysis___SD_February_2026_2026-11-13.xlsx) and joins them by name to
+  the 2026-11-13 GeoJSON's outlines; the run stops, naming the area, if
+  a name is unmatched or any Current figure differs. One KMZ, three
+  period folders (Projected 2 on, the others off), every style shared at
+  Document level, no ScreenOverlay, pop-ups one <div> per line, the full
+  phase 1-5 breakdown in each, the camps, the Phase 5 dots on one scale
+  for all three periods, IPC's Risk of Famine symbol (14 and 13 areas,
+  page 26's lists) packed in the KMZ, each period's transcribed national
+  and coverage lines, and IPC's caution about comparing periods. A byte
+  check runs after every build and was shown to fail on seven planted
+  faults. The generator also writes the layer's short page and a still
+  picture of October-January into data/earth/; the gallery serves them
+  at earth/food_insecurity_sdn.html, featured as a wide page card
+  ("page": true, no "Interactive" label), and the old Sudan card's
+  Google Earth button opens the page. The old gallery KMZ was removed.
+- **The June file's error, and its fix.** In
+  IPC_SD_A_87143417_2026-06-22.geojson, 181 of 228 features (145 of 189
+  outlines) have phase counts that add to more than the area's
+  population by more than 5 people (the brief's count was 152; same
+  finding). The 2026-11-13 export's counts all add up (largest excess 2,
+  rounding) and agree with the Excel in all 228 features. Al Malha now
+  reads 69,143 in Phase 3+ for February-May, the report's figure.
+- **Web findings** (the coordinator's tests of Nov 13, and this
+  session's): styles inside a Folder are lost, Document-level ones work;
+  ScreenOverlay unsupported; <br> and <table> are lost in pop-ups, <div>
+  keeps lines; a Folder's visibility 0 arrives off; an icon packed inside
+  the KMZ shows (Tony's look, Nov 13). IPC's GeoJSON download holds the
+  Current features whatever period is selected; only the Excel holds all
+  three. Google Earth web refuses to be framed (X-Frame-Options
+  SAMEORIGIN), so the page links out.
+- **Gaps.** Current (February-May) has no Risk of Famine list in this
+  report, so none is drawn for it. IPC's evidence and assistance levels
+  are shown for February-May only (the export carries none for the
+  projections). The earth-system-pipeline skill's web rules wait on
+  Tony's go-ahead for 1.3 (Tony-action (decide), below).
+- **Tony-action (decide):** bump earth-system-pipeline to 1.3 with the
+  web rules: shared styles at Document level; no ScreenOverlay; pop-up
+  lines in <div>, no <table> or <br>; IPC's GeoJSON download holds
+  Current only, the Excel all periods; a layer's one-home page at
+  earth/<scenario_id>.html with its picture.
+- **Tony-action (do):** apply the session's two patches (Drive folder
+  "Orrery transfer"), commit and push both repositories; then the
+  gallery's live run.
 **Ref:** MANIFEST_food_insecurity_sudan_v2.md; HANDOFF_food_insecurity_build_v2.md
 (built on 03630ae); cross-ref L-064, L-069; L-060, L-070 (the track's
 other open rows); L-071, L-077 (closed 2026-10-07);
-`documentation/WHERE_WE_ARE.md` (the road, stage 14).
+`documentation/WHERE_WE_ARE.md` (the road, stage 14);
+COORD_L001_sudan_web_brief_20261113.md (2026-11-13, with its
+amendment); HANDOFF_food_insecurity_sdn_projections_20261112.md
+(superseded for its steps); L-530 (the other layers on the web), L-531
+(the Earth Science room).
 
 #### [L-060] ENSO Standalone Chart (Earth System track)
 <!-- L:060 status:OPEN upd:2026-10-07 section:A flag: rice:3/3/75/2.5 -->
@@ -10653,7 +10784,7 @@ other open rows); L-071, L-077 (closed 2026-10-07);
 **Ref:** ENSO_chart_spec.md v2 (design spec, this session); cross-ref L-001 (Food Insecurity, same Earth System track; the track's ruling of 2026-10-07); energy_imbalance.py (Phase 2 target).
 
 #### [L-070] Food Insecurity -- regional multi-country assembly (Sudan crisis shed)
-<!-- L:070 status:OPEN upd:2026-10-07 section:A flag: rice:2/3/45/3 -->
+<!-- L:070 status:OPEN upd:2026-11-13 section:A flag: rice:2/3/45/3 -->
 - **Extend the food-insecurity view across the Sudan-war refugee shed:** Sudan
   (have, SD) + South Sudan (SS) + Chad (TD) + CAR (CF) + Ethiopia (ET). Each is a
   SEPARATE IPC analysis / separate manual Mapping Tool fetch (bot-block wall) with
@@ -10667,6 +10798,11 @@ other open rows); L-071, L-077 (closed 2026-10-07);
 neighbor at fetch time (Tony, manual). Scope: which neighbors in v1.
 - **2026-10-07:** the Earth System track is ruled central and
   sequenced behind the website build; the ruling is on L-001.
+- **2026-11-12, 23:10, Tony ("Yes. Thanks."):** South Sudan waits for
+  IPC's next analysis; its newest, April-July 2026, has ended. Any
+  country added later follows Sudan's web form (L-001, 2026-11-13): the
+  Excel for every period, the GeoJSON for outlines, one KMZ per country
+  for Google Earth web, and a page at earth/<scenario_id>.html.
 **Ref:** L-001 (parent; the track's ruling of 2026-10-07), L-069 (P5 dots reused per country); food_insecurity_generator.py.
 
 #### [L-078] Provenance scanner: systematic coverage via module_atlas role classification
