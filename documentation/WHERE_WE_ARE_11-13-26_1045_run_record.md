@@ -1146,6 +1146,159 @@ The work is home. The session's commit is now in your orrery folder, checked at 
 
 One trap: **don't import the `.kmz` from your Downloads folder.** That's an old Sudan file from June (190,126 bytes), and the browser probably saved the new one under another name. Import this one: `palomas_orrery_for_github\data\food_insecurity_sdn_blockbuster.kmz` (133,754 bytes).
 
-GitHub Desktop will show the three changed files. You can commit and push them now, or after your look. Either is safe, since they're on your disk.
+GitHub Desktop will show the three changed files. You can commit and push them now, or after your look. Either is safe, since they're on your disk. -- db9964e9ff908fdc1bcbeb7c911e38b72b81f101
 
-Next is your look: import that file into your Sudan project, look on the computer and the phone, and tell me what you see and how you rule on the famine-risk mark.
+Next is your look: import that file into your Sudan project, look on the computer and the phone, and tell me what you see and how you rule on the famine-risk mark. -- https://earth.google.com/earth/d/1tvCdwVYhIwNetF-phuT4eTMztfOOIuaG?usp=sharing
+
+====================================
+
+**Code:**
+
+The rebuilt file is in Drive. Starting Part 3: reading the gallery skill, then finding the Sudan card, its Google Earth button and the lobby's Featured board.
+
+I've finished mapping the gallery side, and I'm now generating Sudan's short page and its October–January still while I wait on your rulings, checking the site's look first.
+
+The short page and its picture build. Checking how the page looks at phone width.
+
+The page reads well on a phone, with no sideways scrolling. Two small fixes: the key needs lines for the camp circles and the dots, and "IPC's:" should read "From IPC:".
+
+Part 3 has started. The generator now writes Sudan's short page and its still picture of October–January at every build, beside the map file. The gallery side waits on your rulings.
+
+**The page**
+- I put a phone-size picture of it in your Drive folder "Orrery transfer", as `sudan_page_phone_preview.png`.
+- From top to bottom:
+  - the title
+  - the October–January picture
+  - the green button "Open the map in Google Earth", which opens your new "Sudan" project in a new tab
+  - the three periods by IPC's names and dates, the projections' coverage line, and IPC's caution about comparing periods
+  - each phase with its colour in words, plus lines for the Risk of Famine symbol, the camp circles and the dots, and the 20-percent rule
+  - your new section on how this map relates to IPC's
+  - IPC's credit and citation, and the date the data was retrieved
+- The new section follows your words. "From IPC: the data, the phase colours, the Risk of Famine symbol, the figures and the words." What this map adds: the Phase 5 dots, the three periods side by side, and Google Earth's satellite globe. What it does not show: IPC's food-assistance symbols, the evidence levels for the two projections, and acute malnutrition, "which IPC classifies in its own separate analysis". It ends "IPC's own map is the authority:" with the link to IPC's map of Sudan. It adds no new numbers.
+- The page fits a phone's width with no sideways scrolling, and it is plain ASCII.
+- One small wording fix rides along: the 20-percent sentence said "balloon"; it now says "pop-up", on the page and in the map's "i" pop-up.
+
+**Three proposals for the gallery side**
+1. **Where the page lives.** Put the page and the picture in the gallery's `gallery/assets/` folder, beside the Sudan map file that's there now. They'd be named the way that file is, `food_insecurity_sdn_page.html` and `food_insecurity_sdn_picture.png`. Its address would be palomasorrery.com/gallery/assets/food_insecurity_sdn_page.html.
+2. **Featured.** Add one new card to the gallery's card list that opens the page. It would sit full width at the top of Featured, with the October–January picture, just as the "New Candidate Dwarf Planet" card opens its own address. One small code change comes with it: today such cards carry the label "Interactive", and a page card would carry none. The two old Sudan cards would stop being featured, so Sudan shows once; they stay in the Earth System room.
+3. **The old Sudan card.** Its Google Earth button would open the short page in a new tab instead of downloading the file. That means changing where the button points in its two card files (desktop and phone), plus two small lines in the website's code: no download for a page, and no iPhone download tips. The old map file in `gallery/assets/` would be deleted. It carries the June file's wrong counts, and nothing would link to it any more, though any old shared link straight to that file would stop working.
+
+**Also to know:** the orrery folder's settings leave `.png` files out of git, so the picture travels only in the gallery copy. The generator redraws it at every build. Nothing new is committed yet, and nothing is pushed.
+
+Where this leaves us: the page is built, and the gallery side waits on your word. Your look at the triangles is still open.
+
+**Shall I build the gallery side as these three proposals say?**
+
+---
+**Files changed (for your run record)**
+- ok food_insecurity_generator.py (6 edits: the short page and its picture, writing them at each build, the key's two extra lines, the "From IPC" wording, the page saved as ASCII, "balloon" to "pop-up")
+- ok data/food_insecurity_sdn_blockbuster.kmz (rebuilt; only the "i" pop-up's word changed)
+- new data/food_insecurity_sdn_page.html
+- new data/food_insecurity_sdn_picture.png (written at each build; git leaves it out in the orrery folder)
+
+**Your run order:** look at the page preview in Drive, and at the triangles on Google Earth web.
+
+**Tony-action rollup**
+- Rule on the three proposals.
+- Tell me how the triangles look.
+
+=======================================
+
+**Code:**
+
+Building the gallery side now. First the American-spelling sweep in the generator, then the `earth/` folder and its names.
+
+Orrery side done. Now the gallery: the page folder, the Featured card, the old card's button, and removing the stale map file.
+
+Editing the website's viewer now: the "Interactive" label skips page cards, and the Google Earth button opens a page without the download behavior.
+
+Gallery edits are in. Now testing them in a headless browser: the Featured board, the card's click, and the old card's button.
+
+The Featured board card now has its picture and no "Interactive" label, and it opens the page. I'm running the gallery's own checks next.
+
+All 49 of the gallery's checks pass. I put back five record files the run rewrote with sandbox values. Now the orrery side's pre-test and full suite after today's generator changes.
+
+The suite shows one red: the same Dashboard parity finding as before, not from this work. But Earth System's whole-tree count moved from 145 to 146, so I'm finding which new line the scanner flagged.
+
+The two flagged docstrings mention "20%" with no source, and line 780 is new from Part 2 while line 1 predates this session. I'm rewording both so they no longer carry the number.
+
+Everything rebuilds from the final code, and the website copies match. Committing in both folders on my branch, with no push.
+
+The gallery side is built as you ruled. All 49 of the gallery's checks pass, and in a headless browser the new card, the page and the old card's button all behave as planned.
+
+**What was built**
+- **The page folder.** Earth System pages now live in `earth/` at the site's top level. Sudan's page is `earth/food_insecurity_sdn.html`, with its picture beside it as `earth/food_insecurity_sdn.png`. Its address will be palomasorrery.com/earth/food_insecurity_sdn.html once pushed.
+  - The naming rule for later layers: `earth/<the layer's id>.html` and `.png`, using the same id that names its map file (`food_insecurity_sdn_blockbuster.kmz`).
+  - The generator writes both files into the orrery's `data/earth/` folder in the same layout, so the folder copies to the website as it is.
+- **Featured.** A new full-width card, "Sudan: Acute Food Insecurity", shows the October–January picture and carries no "Interactive" label. A tap opens the page. The two old Sudan cards are no longer featured, but they stay in the Earth System room.
+- **The old Sudan card.** Its Google Earth button opens the page in a new tab, with no download and no iPhone download tips. The other Earth System cards' buttons still download their files; I checked the Amazon card. The old Sudan map file in `gallery/assets/` is deleted.
+
+**American spelling, the words I changed.** These are in sentences the generator writes, on the page, in the pop-ups, the legend lines and the website teaser:
+- colour → color, in "What the colors mean" (page and "i" pop-up), "the phase colors", "a lower phase's color" and "in their phase color"
+- coloured → colored, in the circles line and in the picture's description for screen readers
+- analysed → analyzed, in the three national lines ("people analyzed", "areas IPC analyzed", "the analyzed population") and in the label "Not analyzed" (pop-ups, key, website teaser)
+- No folder name and no sentence used "centre" or "grey".
+- IPC's quoted text keeps IPC's spelling: the caution about comparing periods, the drivers, and the analysis title.
+
+**Checks**
+- The gallery's suite passed 49 of 49 checks.
+- The orrery's suite passed 37 of 38. The one red is still Dashboard parity: two website test steps, "Kepler solver" and "First guide", have no dashboard button. That predates this session.
+- The provenance scanner holds the push gate at 0 Tier-1 findings. The generator now has no Tier-1 findings anywhere. Two notes inside the code, one new and one older, had mentioned "20%" without a source line; I reworded both.
+- The map file's byte check, the pre-test and the smoke test all pass on the final code.
+- Both suites rewrote some record files with this sandbox's values; I put those back to the base again.
+
+**Commits on my branch, none pushed**
+- Orrery `ca17ef7`: the page, the picture and the spelling. The picture isn't committed there, because the orrery's settings leave `.png` files out of git; the website keeps its copy.
+- Gallery `678f22e`.
+- Your Drive preview of the page predates the spelling change. The new page differs only in those words.
+
+Where this leaves us: Part 3's building is done. The close (ledger, Where We Are, the skill proposal, and the two patches in Drive) waits on your word about the triangles.
+
+One final thought: the website's other pages count visits through Google Analytics, and this new page doesn't. That's easy to add if you want it.
+
+**How do the triangles look on Google Earth web, on the computer and the phone?**
+
+---
+**Files changed (for your run record)**
+
+Orrery:
+- ok food_insecurity_generator.py (8 edits: the page into `earth/`, its naming rule, 18 spelling changes, two notes reworded)
+- ok data/food_insecurity_sdn_blockbuster.kmz (rebuilt)
+- new data/earth/food_insecurity_sdn.html
+
+Gallery:
+- new earth/food_insecurity_sdn.html
+- new earth/food_insecurity_sdn.png
+- ok gallery/gallery_metadata.json (3 edits: the new card, two cards no longer featured)
+- ok gallery/food_insecurity_sdn_teaser_gallery.json (2 edits)
+- ok gallery/food_insecurity_sdn_teaser_mobile.json (2 edits)
+- ok index.html (9 edits: six labels, the button, the iPhone tips, the header note)
+- deleted gallery/assets/food_insecurity_sdn_blockbuster.kmz
+
+**Your run order:** look at the triangles on Google Earth web and tell me. Then I do the close and put the two patches in Drive.
+
+**Tony-action rollup**
+- Report the triangles' look.
+- Optional: say whether the page should count visits like the rest of the site.
+
+I'm not pushing. Your ruling stands: no push, and at the close I put one patch per folder in the Drive folder "Orrery transfer". Both folders' commits stay on my branch in this session: orrery `ca17ef7` (with `6adcc89` before it) and gallery `678f22e`.
+
+**How do the triangles look on Google Earth web, on the computer and the phone?**
+
+======================
+
+**Coordinator:**
+
+The close is done, and it's thorough. Both patches were tested against your `main` before upload: each applied cleanly to a fresh copy and produced the session's files byte for byte. It also kept Where We Are within its 130-line cap.
+
+One change to its steps: you don't need the Command Prompt. Its step 3 has you type `git am`, which is outside your usual buttons. I can apply both patches the way I brought the earlier work home: check each fingerprint, apply it to a fresh copy of the repository, confirm the result, and write the changed files into your two folders. Then it's your usual commit and push in GitHub Desktop.
+
+The only difference is history. `git am` would keep the session's six commit messages, while my route gives you one commit per repository, under your own message. The ledger records what each step did either way, so I'd take the simpler route.
+
+So:
+1. In GitHub Desktop, **Fetch origin** and **Pull origin** on both, orrery 
+   1. then website.
+2. From the Drive folder "Orrery transfer", download `orrery_L001_since_6870fd2.patch` and `gallery_L001_since_d377726.patch` into your `Downloads` folder.
+3. Tell me when they're there.
+
+The two decisions the session left (the skill's web rules as version 1.3, and the two dashboard buttons) can wait until the work is pushed.
