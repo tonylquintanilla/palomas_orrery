@@ -1468,7 +1468,7 @@ I've updated Where We Are; the copy on your computer matches mine. It now says:
 It stays exactly at its 130-line cap.
 
 **Next steps, in order:**
-1. **Tonight:** commit and push the orrery. That's two files, `LEDGER_CONSOLIDATED.md` and `documentation/WHERE_WE_ARE.md`. -- 
+1. **Tonight:** commit and push the orrery. That's two files, `LEDGER_CONSOLIDATED.md` and `documentation/WHERE_WE_ARE.md`. -- 10aaa5dad197bc9bba315e048990ea697f56064e
 2. **Next session: Mars.** Open a new coordinating session through the python_work door with `documentation/HANDOFF_website_coordination_20261112.md`, as the page's "Do next" says. If you'll be away from your desk, start the Code session on your computer with Remote Control first.
-3. **Two decisions when they come up:** the Earth System skill's web rules (version 1.3), when a session next opens that skill, and the two dashboard buttons for the parity check, when a session next opens the dashboard.
-4. **Later, by the road:** the Earth Science room after Mars and the moons. South Sudan comes when IPC publishes its new analysis, and El Niño can come in ahead of either if you choose.
+3. **Two decisions when they come up:** the Earth System skill's web rules (version 1.3), when a session next opens that skill, and the two dashboard buttons for the parity check, when a session next opens the dashboard. -- can we do this now? 
+4. **Later, by the road:** the Earth Science room after Mars and the moons. South Sudan comes when IPC publishes its new analysis, and El Niño can come in ahead of either if you choose. 
