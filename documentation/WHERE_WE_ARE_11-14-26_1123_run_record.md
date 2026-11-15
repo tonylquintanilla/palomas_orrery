@@ -133,7 +133,7 @@ Not urgent, in your order:
 
 **Tony**: Run record:
 
-**Session: OPEN: 11-12-26 2242: Opus: Coordination: Sudan food insecurity visualization update***
+**Session: DONE: 11-14-26 2152: Opus: Coordination: Sudan food insecurity visualization update***
 
 Good, the right map opens now. Your screenshots show two things.
 
@@ -601,6 +601,114 @@ No token count prints in this app. The context-size line the close asks for isn'
 **Your run order:** commit and push the orrery, then the website. Then run the website's live check from the dashboard, and look at the Sudan page's footer on your phone.
 
 **Tony actions:**
-- (do) Commit and push both folders. -- 
-- (do) Reinstall the Earth System skill (Settings > Skills), and paste protocol v3.141 into the Project's instructions on claude.ai.
-- (do) Run the live check, then look at the page on your phone.
+- (do) Commit and push both folders. -- orrery: 564bc7754a772df6819e659ca4f12595f3d2b3c5; website: d3e97b1503d878a6fac0be4fe9131186b893d365
+- (do) Reinstall the Earth System skill (Settings > Skills), and paste protocol v3.141 into the Project's instructions on claude.ai. -- done
+- (do) Run the live check, 
+
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 66 files from https://palomasorrery.com/ (34 typed, 32 positions files read from data\objects_config.json)
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches the working copy
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   gallery/arrival.js                             matches the working copy
+    SERVED   gallery/nav_cluster.js                         matches the working copy
+    SERVED   gallery/solar_system_figures.js                matches the working copy
+    SERVED   gallery/solar_system_drawer.js                 matches the working copy
+    SERVED   data/objects_config.json                       matches the working copy
+    SERVED   gallery/guestbook.js                           matches the working copy
+    SERVED   data/guestbook.json                            matches the working copy
+    SERVED   data/solar-system/drawings/hills_cloud.json    matches the working copy
+    SERVED   data/solar-system/drawings/van_allen_belts.json matches the working copy
+    SERVED   data/solar-system/drawings/earth_exosphere.json matches the working copy
+    SERVED   data/solar-system/drawings/sun_corona.json     matches the working copy
+    SERVED   data/solar-system/drawings/zodiacal_dust.json  matches the working copy
+    SERVED   data/solar-system/drawings/outer_oort_cloud.json matches the working copy
+    SERVED   data/solar-system/drawings/galactic_tide.json  matches the working copy
+    SERVED   gallery/source_list.js                         matches the working copy
+    SERVED   gallery/far_lines.js                           matches the working copy
+    SERVED   gallery/direction_arrows.js                    matches the working copy
+    SERVED   gallery/drawer_order.js                        matches the working copy
+    SERVED   gallery/text_box.js                            matches the working copy
+    SERVED   gallery/scene_moment.js                        matches the working copy
+    SERVED   gallery/scene_address.js                       matches the working copy
+    SERVED   gallery/picture_folds.js                       matches the working copy
+    SERVED   gallery/gallery_metadata.json                  matches the working copy
+    SERVED   gallery/assembler/compose_children.py          matches the working copy
+    SERVED   gallery/view_centre.js                         matches the working copy
+    SERVED   gallery/tap_hover.js                           matches the working copy
+    SERVED   gallery/first_guide.js                         matches the working copy
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+    SERVED   data/solar-system/positions/voyager_2.json     matches the working copy
+    SERVED   data/solar-system/positions/new_horizons.json  matches the working copy
+    SERVED   data/solar-system/positions/juno.json          matches the working copy
+    SERVED   data/solar-system/positions/osiris_apex.json   matches the working copy
+    SERVED   data/solar-system/positions/parker_solar_probe.json matches the working copy
+    SERVED   data/solar-system/positions/bepicolombo.json   matches the working copy
+    SERVED   data/solar-system/positions/solar_orbiter.json matches the working copy
+    SERVED   data/solar-system/positions/lucy.json          matches the working copy
+    SERVED   data/solar-system/positions/juice.json         matches the working copy
+    SERVED   data/solar-system/positions/psyche_spacecraft.json matches the working copy
+    SERVED   data/solar-system/positions/europa_clipper.json matches the working copy
+    SERVED   data/solar-system/positions/galileo.json       matches the working copy
+    SERVED   data/solar-system/positions/cassini.json       matches the working copy
+    SERVED   data/solar-system/positions/pioneer_10.json    matches the working copy
+    SERVED   data/solar-system/positions/pioneer_11.json    matches the working copy
+    SERVED   data/solar-system/positions/rosetta.json       matches the working copy
+    SERVED   data/solar-system/positions/akatsuki.json      matches the working copy
+    SERVED   data/solar-system/positions/dart.json          matches the working copy
+    SERVED   data/solar-system/positions/west.json          matches the working copy
+    SERVED   data/solar-system/positions/mcnaught.json      matches the working copy
+    SERVED   data/solar-system/positions/tsuchinshan_atlas.json matches the working copy
+    SERVED   data/solar-system/positions/wierzchos.json     matches the working copy
+    SERVED   data/solar-system/positions/atlas_2024_g3.json matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1.json      matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1_b.json    matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1_d.json    matches the working copy
+    SERVED   data/solar-system/positions/panstarrs_2025_r3.json matches the working copy
+    SERVED   data/solar-system/positions/borisov_2025_v1.json matches the working copy
+    SERVED   data/solar-system/positions/oumuamua.json      matches the working copy
+    SERVED   data/solar-system/positions/borisov_2i.json    matches the working copy
+    SERVED   data/solar-system/positions/atlas_3i.json      matches the working copy
+
+  PASS Served reachability      10.7s  all 66 files served and
+                                    byte-identical to the working copy
+
+  orrery export pinned at 5779e1f0
+
+  PASS Export freshness          0.2s  the served export is the orrery's
+                                    at 5779e1f0, byte for byte
+
+  orrery HEAD 564bc775
+  examining 3 of 188 links; the other 185 are served from the export
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  3 pointers: 1 match, 0 DRIFT, 0 UNIT MISMATCH, 2 could not be examined.
+
+  PASS Store drift               2.0s  3 pointers against orrery 564bc775
+                                    -- 1 match, 0 DRIFT, 0 UNIT
+                                    MISMATCH, 2 could not be examined.
+
+======================================================================
+  2 of 2 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Store drift            3 pointers against orrery 564bc775 -- 1
+  last swap 2026-11-14T18:15:13.102590+00:00: succeeded first time
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+- 
+- then look at the page on your phone. -- very good. thanks. 
