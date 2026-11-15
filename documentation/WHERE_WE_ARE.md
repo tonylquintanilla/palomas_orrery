@@ -1,20 +1,21 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 14, 2026, night: the Code session (Opus) that built Sudan's guided walk, after your yes to the skill's 1.3 (L-001 (food insecurity)).
-- Written at orrery 5779e1f0 and gallery 8e24f9d0, your pushes of the walk, with tonight's files not yet pushed.
+Last updated: November 14, 2026, late night: the coordinating session (Opus) that settled the Mars moons' words and accuracy and wrote the orrery session's brief (L-514 (the Mars room)).
+- Written at orrery c314fe1a and gallery d3e97b15, your pushes of tonight, with this page, the ledger and the brief not yet pushed.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The Earth System skill is at 1.3, as you approved: its rules for Google Earth on the web and for a layer's page and its walk (L-001 (food insecurity)). One mark differs from the proposal: `<id>` in its description reads `[id]`, because the skills check refuses a tag there, and so would the reinstall.
-> - Sudan's page footer now links IPC's report (the PDF) and the IPC Mapping Tool, at the address you gave. The page is rebuilt and copied to the website folder; its pictures and the map file's words are unchanged, so no re-import.
+> - Mars's two moons have their words, from NASA's pages, as you chose: Phobos, "Phobos is on a collision course with Mars."; Deimos, "Deimos is the smaller of the two Martian moons and is less irregular in shape." (L-514 (the Mars room)).
+> - Their accuracy is JPL's own, from the 2025 paper on the exact version Horizons serves (mar099): "a few kilometers", so both moons' distances print to tens of kilometres.
+> - ESCAPADE, your find, is its own round after the Mars build: Blue and Gold join the Solar System view with their Earth flybys (L-533 (ESCAPADE)).
+> - Sudan's walk is closed on your phone look, "very good. thanks." (L-001 (food insecurity)).
 >
-> **Do next:** *Mars (L-514 (the Mars room)), with a new coordinating session: `documentation/HANDOFF_website_coordination_20261112.md`. The hold's first nights were green, nothing held (Nov 12).*
+> **Do next:** *Mars, session 1 of 2, a Code session in the orrery: Phobos and Deimos keyed, in NASA's words, with JPL's periods and accuracy. Its brief: `documentation/COORD_L514_orrery_moons_brief_20261114.md`.*
 >
 > **Needs you now:**
-> - *(do) Commit and push both folders (the skill, the protocol, the footer); then the website's live run, and the page on your phone (L-001 (food insecurity)).*
-> - *(do) Reinstall the Earth System skill (Settings > Skills) and paste protocol v3.141 into the Project's instructions on claude.ai.*
+> - *(do) Commit and push the orrery (the brief, the ledger, this page); then open the Code session and paste its prompt.*
 > - *(do) Each morning, Fetch origin and Pull origin on both, orrery then website, before any work. If Pull origin shows up only once you have changes: Commit them first, then Pull origin, then Push origin. If Desktop stashes your changes anyway, restore them at once: Changes tab, Stashed Changes, Restore.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
 
@@ -51,7 +52,7 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
                L-423 (the website's checks) item 3; L-357 (stale gallery
                artifacts); L-509 (obsolete code), after its talk.
 
-## Settled  **>> UPDATED THIS SESSION**
+## Settled
 
 Standing rulings; a line leaves once it is habit, or a skill carries it.
 - Earth System layers move to Google Earth on the web, not the desktop app; a layer's one home is its page, earth/<its id>.html (Nov 13; L-001 (food insecurity), L-530 (the other layers on the web)).
@@ -60,9 +61,10 @@ Standing rulings; a line leaves once it is habit, or a skill carries it.
 - One body's failed accuracy test: "Hold the bad data and report, then continue." A hold is not red; the night's commit title names the held body. A moon is held only when JPL gives no answer; more than five held is a failed build (Nov 11, the coordinator's changes). The room's title stays unchanged for a held body; its box says it (Nov 11, your "Yes, keep it"; L-525 (hold the bad data)).
 - The Sun direction line stays out of Earth's fold: the day-night shading and the Sun at its true place show the direction (Nov 10; L-515 (one nested tree)).
 
-## Deferred
+## Deferred  **>> UPDATED THIS SESSION**
 
 Waiting behind other work; a line leaves when picked up.
+- ESCAPADE, Blue and Gold: its own round after the Mars build; their Mars arrival becomes the first encounter at the guided-encounters talk (Nov 14; L-533 (ESCAPADE), L-529 (guided encounters)).
 - Guided encounters, the guide's way of telling used for a flyby: a design talk after Mars (Nov 12; L-529 (guided encounters)).
 - The hold's leftovers: Earth's own box in its fold does not say a body is held; a close pass is held on its older orbit (L-526 (a close pass held)), before 2029 (Nov 11; L-525 (hold the bad data)).
 - The orrery's own Kepler solvers start the way the website's did; safe today, listed on L-524 (the Kepler solver's start), for an orrery session (Nov 11).
@@ -92,11 +94,11 @@ Waiting behind other work; a line leaves when picked up.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261114T181334Z, ok, no retry on the swap (gallery swap log, read Nov 14).
-- Tier-1 on the gate path: 0, the push gate holds (this session's scanner run, Nov 14).
+- Last cache build: 20261114T181334Z, ok, no retry on the swap (gallery swap log at d3e97b15, read Nov 14).
+- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at orrery c314fe1a, read Nov 14).
 - This page's date and the ledger's newest stamp: both Nov 14. Agree.
 
-## Waiting on you  **>> UPDATED THIS SESSION**
+## Waiting on you
 
 Decisions, one at a time:
 - None now.
@@ -119,7 +121,7 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- This session: L-001 (food insecurity); the skill's 1.3, `skills/earth-system-pipeline/SKILL.md`, from `PROPOSAL_earth_system_pipeline_1_3_20261114.md`; the brief, `COORD_L001_sudan_walk_brief_20261114.md`; the generator, `food_insecurity_generator.py`; L-532 (a session away from the computer). The day before: `COORD_L001_sudan_web_brief_20261113.md`, L-530 (the other layers on the web), L-531 (the Earth Science room).
+- This session: L-514 (the Mars room), rulings 5 and the accuracy; its brief `COORD_L514_orrery_moons_brief_20261114.md`; L-533 (ESCAPADE). The day before: L-001 (food insecurity), the skill's 1.3, the walk's brief `COORD_L001_sudan_walk_brief_20261114.md`.
 - The caps: `DOCUMENT_CAPS.md`; L-522 (document caps); its brief
   `COORD_L522_step1_caps_brief_20261110.md` and the review beside it.
 - The tree: L-515 (one nested tree), its briefs `COORD_L515_*`.

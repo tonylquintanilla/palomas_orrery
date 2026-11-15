@@ -1005,7 +1005,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*266 live items; 250 need attention (`!`); 165 RICE-scored; 259 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*267 live items; 251 need attention (`!`); 165 RICE-scored; 259 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1172,7 +1172,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-510 | The object list's typed fields stop deciding: a small body drawn by today's eccentricity, a plan asked from before any launch (orrery, the object list and the path plan) | OPEN | -- | 2026-11-05 |
 | ! | L-511 | The orrery's export carries the words the website prints (orrery + gallery, the words) | OPEN | -- | 2026-11-03 |
 | ! | L-512 | The orrery's fallbacks when JPL cannot answer (orrery, the plot's data path) | OPEN | -- | 2026-11-04 |
-| ! | L-514 | The Mars room: Mars, Phobos and Deimos (gallery + orrery, a planet room; road stage 15) | OPEN | -- | 2026-11-10 |
+| ! | L-514 | The Mars room: Mars, Phobos and Deimos (gallery + orrery, a planet room; road stage 15) | OPEN | -- | 2026-11-14 |
 | ! | L-515 | One nested tree in place of isolated rooms (gallery, the room system; design) | OPEN | -- | 2026-11-10 |
 | ! | L-516 | Renew palomasorrery.com at Porkbun before 2027-02-13 (legacy; Tony's account) | OPEN | -- | 2026-11-07 |
 | ! | L-520 | Old pictures carry old words: the saved pictures' titles and descriptions have no source (gallery, the saved pictures; the braid) | OPEN | -- | 2026-11-08 |
@@ -1185,6 +1185,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-530 | The other Earth System layers on Google Earth web (Earth System; recorded, not built) | OPEN | -- | 2026-11-13 |
 | ! | L-531 | The Earth Science room in the interactive site (website; recorded, not built) | OPEN | -- | 2026-11-13 |
 | ! | L-532 | A Code session away from the computer: where its work lives (method; recorded) | OPEN | -- | 2026-11-14 |
+| ! | L-533 | ESCAPADE, Blue and Gold, on their way to Mars (orrery + gallery; recorded, after the Mars build) | OPEN | -- | 2026-11-14 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1724,6 +1725,35 @@ earth_system_generator.py, earth_system_common.py, scenarios_*.
 go-ahead.
 **Ref:** L-001; L-499 (kinds of session); L-471 (a delivered patch is
 final).
+
+#### [L-533] ESCAPADE, Blue and Gold, on their way to Mars (orrery + gallery; recorded, after the Mars build)
+<!-- L:533 status:OPEN upd:2026-11-14 section:A flag: rice: -->
+- **Tony's find, 2026-11-14, 22:43**, in the coordinating session
+  (Claude Opus 5.5, through the python_work door, on orrery c314fe1a and
+  gallery d3e97b15): NASA's article of 2026-11-09,
+  https://science.nasa.gov/science-research/heliophysics/nasas-escapade-completes-powered-earth-flybys-now-en-route-to-mars/
+  -- "maybe we could make this flyby the first encounter for the mars
+  drawer. it is timely and thematic."
+- **What the article says, read 2026-11-14:** two spacecraft, launched
+  2025-11-13 from Cape Canaveral; a loiter orbit around L2 before the
+  flybys; Earth flybys on 2026-11-07 (about 1,000 miles up) and
+  2026-11-09 (about 650 miles up), each with a trans-Mars injection
+  burn; Mars orbit insertion planned 2027-09-07 and 2027-09-09;
+  science from June 2028. Re-read it before building on any date.
+- **Tony's ruling, 22:45, "as you recommend":** its own round, after
+  the Mars build (L-514), not folded into it. Blue and Gold join the
+  Solar System view with their Earth flybys, as the other spacecraft
+  paths are drawn; their arrival at Mars becomes the Mars fold's first
+  encounter at L-529's design talk (guided encounters).
+- **Read at the base:** neither repository mentions ESCAPADE. JPL's
+  Horizons carries both craft (a radio observer's account, 2026,
+  names "ESCAPADE-Blue" and "ESCAPADE-Gold" in Horizons' spacecraft
+  data); their IDs are read from JPL's lookup when the round opens,
+  never typed.
+**Gap:** a brief when the round is next (after L-514's two sessions).
+**Ref:** L-514 (the Mars room); L-529 (guided encounters); L-476 (paths
+by the plan); horizons-orbital-mechanics (a spacecraft path's plan, the
+orbiter rule for an arrival).
 
 #### [L-529] Guided encounters: the guide's way of telling, used for a flyby (gallery; an idea, for a design talk after Mars)
 <!-- L:529 status:OPEN upd:2026-11-13 section:A flag: rice: -->
@@ -3645,7 +3675,7 @@ skill's split (L-522).
   the Assembler.
 
 #### [L-514] The Mars room: Mars, Phobos and Deimos (gallery + orrery, a planet room; road stage 15)
-<!-- L:514 status:OPEN upd:2026-11-10 section:A flag: rice: -->
+<!-- L:514 status:OPEN upd:2026-11-14 section:A flag: rice: -->
 - **Opened 2026-11-06, night**, by the coordinating session (Claude Opus
   5.5) through the python_work door, built on orrery b32205f4 and
   gallery 3f2ce7fc. Tony's prompt: "Road stage 15, the planet rooms,
@@ -3796,10 +3826,49 @@ skill's split (L-522).
   moon. So the larger tap area of ruling 4 is measured in this build for
   the whole picture, with the risk ruling 4 named (a wider reach near
   Mars picking Mars instead of Phobos).
-**Gap:** step 2b passed Tony's look (L-515); then this build, proposed
-again as a fold of the one tree, on Tony's go-ahead. Before adding to
-interactive-exhibit it moves old lines out, the skill being at its cap
-(L-522).
+- **The build's two sessions, go-ahead 2026-11-14, night**, in the
+  coordinating session (Claude Opus 5.5, through the python_work door,
+  on orrery c314fe1a and gallery d3e97b15), in chat. Session 1, the
+  orrery: Tony, 22:21, "-- yes". Session 2, the website: the larger tap
+  area is NOT part of it, Tony asking "i believe that the larger tap
+  area has already been done for the website as a whole. please
+  confirm." Confirmed from L-523 (taps sent as hovers, closed
+  2026-11-12): a finger's tap reaches 22 px in either orientation and a
+  tap sent as a hover opens its box, site-wide. What stays is ruling
+  4's risk, checked in session 2: a tap near Mars picks the moon meant.
+- **Ruling 5, the moons' words** (rule 3's NASA sentence), chosen from
+  NASA's pages read 2026-11-14, both "last updated Nov 03, 2024":
+  - Phobos, 22:43, "2": "Phobos is on a collision course with Mars."
+    (https://science.nasa.gov/mars/moons/phobos/, "Phobos - NASA
+    Science"; replaces the orrery's image-page link.)
+  - Deimos, 22:54, "3": "Deimos is the smaller of the two Martian
+    moons and is less irregular in shape." (a Quick Facts line,
+    https://science.nasa.gov/mars/moons/deimos/). The page says nothing
+    of the orbit's direction; the orrery's "Retrogade" goes.
+- **The moons' accuracy, found 2026-11-14** (rule 3's "needs a
+  source"), with Tony at his computer saving the papers:
+  - Horizons serves both moons "{source: mar099}" around Mars; a
+    VEC_TABLE='2xr' request for Deimos prints "n.a." in every sigma
+    column, so the figure must come from a paper. mar099's release note
+    (NAIF, 2025-06-02) gives only a 2-metre interpolation error, which
+    measures the file, not the moons.
+  - THE SOURCE: Brozovic, Jacobson & Park (2025), "Revised Ephemerides
+    of the Martian Satellites, Phobos and Deimos", AJ 170:42,
+    https://doi.org/10.3847/1538-3881/addab4 (open access), whose
+    abstract names MAR099. Section 6, PDF p. 13: the realistic 1-sigma
+    uncertainty for both satellites is "on the order of a few
+    kilometers for the next couple of decades". By the Report test,
+    2 to 9.999 km all report to tens: 10 km, for both moons. Tony asked
+    whether Deimos's 2 km could print whole kilometres; the 2025 paper
+    answered it, by the rule, not by a ruling.
+  - Read and superseded: Jacobson (2010), AJ 139:668, p. 677 (Phobos
+    "no better than 1 km", Deimos "roughly 2 km"), which describes
+    MAR085. Both PDFs are in Tony's local papers/ (not pushed).
+- **Session 1's brief**: `documentation/COORD_L514_orrery_moons_brief_20261114.md`.
+**Gap:** session 1, the orrery (the brief above), on Tony's go-ahead in
+that session; then session 2, the website, its brief written when it is
+next. Before adding to interactive-exhibit, session 2 moves old lines
+out, the skill being at its cap (L-522).
 - **Ref:** L-513 (the Moon's standards, the pattern); L-334 (what a room
   opens on, 2026-09-17); L-291 (the Earth room); L-484 (the two agree);
   L-150 (Charon's period centre, for the Pluto room).
@@ -10876,6 +10945,14 @@ one of the four).
   Skills and paste protocol v3.141 into the Project's instructions;
   commit and push; then the gallery's live run; then the page on the
   phone, palomasorrery.com/earth/food_insecurity_sdn.html.
+- **Tony's close of the walk, 2026-11-14, night**, in his run record
+  `documentation/WHERE_WE_ARE_11-14-26_1123_run_record.md`: the skill
+  reinstalled and protocol v3.141 pasted, "-- done"; pushed at orrery
+  564bc775 and gallery d3e97b15; the gallery's live run "2 of 2 gating
+  checkers passed", the served export pinned at 594e562c; and the page
+  on his phone, "-- very good. thanks." Recorded by the coordinating
+  session that night (Claude Opus 5.5). The walk's Tony-actions above
+  are done.
 **Ref:** MANIFEST_food_insecurity_sudan_v2.md; HANDOFF_food_insecurity_build_v2.md
 (built on 03630ae); cross-ref L-064, L-069; L-060, L-070 (the track's
 other open rows); L-071, L-077 (closed 2026-10-07);
