@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.140 | November 12, 2026
+Tony Quintanilla, PE | Claude | v3.141 | November 14, 2026
 
-Cut from 6a460394 at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 5779e1f0 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -525,7 +525,8 @@ provenance-discipline        2.36 Scanner runs, audits, citations, constants,
 provenance-cross-check       1.1  Cross-check worksheets and relay prompts,
                                   adjudicating returns, writing Cross-checked
                                   and Resolved lines
-earth-system-pipeline        1.2  KMZ layers, ERA5/ERDDAP/IPC, scenarios, ANY
+earth-system-pipeline        1.3  KMZ layers, Google Earth web, a layer's page
+                                  and its walk, ERA5/ERDDAP/IPC, scenarios, ANY
                                   human-cost visualization or text
 gallery-pipeline             1.2  Gallery Studio, json_converter, index.html
                                   viewer, gallery cards
@@ -1258,6 +1259,51 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.141 (November 14, 2026, night): No rule changed in this document.
+ONE skill bump: earth-system-pipeline 1.2 -> 1.3 (L-001, food
+insecurity), by the records skill's binding rule, Tony's word of Nov
+14, 20:04 ("Yes I approve") to
+documentation/PROPOSAL_earth_system_pipeline_1_3_20261114.md, applied
+as written but one mark: the description's earth/<id>.html reads
+earth/[id].html, as skills_index.py refuses a tag there, and so would
+the reinstall. A LAYER ON THE WEB, AND ITS WALK ON ITS PAGE.
+
+WHAT PROMPTED IT. The Claude Code session of Nov 14 (Claude Opus 5.5),
+through the python_work door, built Sudan's guided walk on orrery
+594e562c and gallery 09b4b498, from Tony's prompt and
+documentation/COORD_L001_sudan_walk_brief_20261114.md, in three parts
+with a report and his reading after each; the skill was applied after
+his pushes, at orrery 5779e1f0 and gallery 8e24f9d0.
+
+WHAT CHANGED. earth-system-pipeline: two new sections. GOOGLE EARTH ON
+THE WEB: styles at the file's top, no screen overlays, one <div> per
+line in pop-ups; the phone app cannot switch folders and the web can,
+so the words promise only where the map opens; the owner's switching is
+the public view; the page links out. A LAYER'S PAGE AND ITS WALK: the
+page is the layer's one home, written by its generator; where a visitor
+needs a route the walk lives there, Google Earth its last step's
+button; pictures drawn at every build; every figure sourced and checked
+against the data; the phone-width check and Tony's reading. Under Data
+Sources, IPC's two exports, joined by name. Respectful awareness (Tony,
+Nov 14) joins the restraint section, and Source Voice Only gains: no
+meaning given to the source in words it never uses. The 3+5 card is
+folded into Architecture as Google Earth Pro's only. To stay at the cap
+of 199 lines, the 1.2 and 1.1 entries and the Shared Conventions
+section (each line held by its master) moved to
+documentation/SKILL_HISTORIES.md.
+
+THE OBLIGATION TRAVELS. This session read earth-system-pipeline 1.2
+from the repo's copy, as a Code session does, as the manifest expected.
+Tony reinstalls it (Settings > Skills) and pastes this version into the
+Project's instructions on claude.ai; the next session that loads it
+from the account confirms its copy reads 1.3 before Earth System work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.138 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.140 (November 12, 2026, night): No rule changed in this document.
 ONE skill bump: interactive-exhibit 1.41 -> 1.42 (L-527, a first
 visit's guide), by the records skill's binding rule, Tony's go-ahead of
@@ -1338,49 +1384,6 @@ from the account confirms its copy reads 1.19 before builder work.
 The header stamp and the SHA anchor move with this entry.
 
 Version history: v3.136 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
-
-v3.138 (November 11, 2026): No rule changed in this document. ONE skill
-bump: interactive-exhibit 1.40 -> 1.41 (L-522, document caps, step 2,
-and L-523, a finger's tap sent as a hover), by the records skill's
-binding rule, Tony's go-ahead to the split of Nov 10 ("let's do the
-split first") and to the tap fix of Nov 11 (08:23: "could you take care
-of it in our Code session"). THE SKILL'S RULES AND THE PAGE'S AS-BUILT,
-PARTED.
-
-WHAT PROMPTED IT. The Claude Code session of Nov 10 and 11 (Claude Opus
-5.5), through the python_work door, built on orrery 87fb472e and gallery
-e21b6746, from Tony's prompt and
-documentation/COORD_L522_step2_exhibit_split_brief_20261110.md, in four
-parts with a report and his go-ahead after each, the fourth added by his
-word of Nov 11.
-
-WHAT CHANGED. interactive-exhibit: the rules stay in the skill; what
-interactive.html does now moved whole into the gallery's
-INTERACTIVE_AS_BUILT.md, changed in the commit that changes the page,
-its code names held to the code by the gallery run's new As-built names
-row. Each of the six long sections leaves one rule and a pointer; the
-install confirmations moved to documentation/SKILL_HISTORIES.md;
-fires_when is cut to the phrases that make the skill fire, so the
-manifest row above is ten lines where it was about a hundred. Every old
-line was accounted for by script. Separately, a correction (L-523):
-"Touch has no hover" was wrong for a 3D scene. Plotly sends a finger's
-tap 5 px off or more as a hover, and the page now opens it as a click
-(gallery/tap_hover.js, the gallery run's new Tap hover row); the widened
-pick is any finger's, in either orientation (Tony, Nov 11: "Yes, any
-finger"). Its oldest of four version entries (1.38) moved to
-documentation/SKILL_HISTORIES.md by the three-entry rule.
-
-THE OBLIGATION TRAVELS. This session read interactive-exhibit 1.40 from
-the repo's copy, as a Code session does, as the manifest expected. Tony
-reinstalls it (Settings > Skills) and pastes this version into the
-Project's instructions on claude.ai; the next session that loads it from
-the account confirms its copy reads 1.41 before exhibit work.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.135 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 

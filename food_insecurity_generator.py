@@ -1222,6 +1222,20 @@ GE_PROJECT_URL = ("https://earth.google.com/earth/d/"
 # Nov 13, 2026, 19:49, which gave this address).
 IPC_MAP_URL = ("https://www.ipcinfo.org/ipc-country-analysis/details-map/"
                "en/c/1163315/?iso3=SDN")
+# The footer's two source links (Tony's request of Nov 14, 2026: one to IPC's
+# report, one to the IPC Mapping Tool; addresses recorded, never typed from
+# memory).
+# Source: the report's address as recorded in
+# documentation/HANDOFF_food_insecurity_sdn_projections_20261112.md, Sources;
+# the same report as data/IPC_Sudan_Acute_Food_Insecurity_Feb2026_Jan2027_
+# Special_Report.pdf, whose name it carries.
+IPC_REPORT_URL = ("https://www.ipcinfo.org/fileadmin/user_upload/ipcinfo/"
+                  "docs/IPC_Sudan_Acute_Food_Insecurity_Feb2026_Jan2027_"
+                  "Special_Report.pdf")
+# Source: Tony gave this address, Nov 14, 2026, in the Code session, when
+# none was recorded in the repo. It opens the tool, not the analysis.
+IPC_MAPPING_TOOL_URL = ("https://www.ipcinfo.org/ipc-country-analysis/"
+                        "ipc-mapping-tool/")
 PAGE_PERIOD = "projected-2"   # the period the picture draws (the file opens on it)
 # The button's one line: it promises only what Google Earth does (Tony's
 # ruling of Nov 14, 2026, 10:15, and the tests of that day: the project opens
@@ -1864,9 +1878,15 @@ def build_short_page_html(joined, picture_file=None, today=None):
 
     parts.append('<div class="src"><div>Source: %s</div><div>%s</div>'
                  "<div>Analysis: %s</div><div>Data retrieved: %s</div>"
+                 '<div>Report: <a href="%s" target="_blank" rel="noopener">'
+                 "IPC&#39;s report (PDF)</a></div>"
+                 '<div>Data: <a href="%s" target="_blank" rel="noopener">'
+                 "the IPC Mapping Tool</a>; in it, choose the analysis "
+                 "named above</div>"
                  "<div>%s</div></div>\n"
                  % (e(PROVENANCE_DATA), e(CITATION), e(meta["analysis_name"]),
-                    e(meta["export_date"]), e(CAUSAL_RESTRAINT)))
+                    e(meta["export_date"]), e(IPC_REPORT_URL),
+                    e(IPC_MAPPING_TOOL_URL), e(CAUSAL_RESTRAINT)))
     parts.append("</main>\n</body>\n</html>\n")
     return "".join(parts)
 

@@ -365,6 +365,242 @@ The two dashboard buttons are built, and the orrery's checks are all green.
 **Your run order:** commit and push the orrery, then the website. Then run the website's live check from the dashboard, and look at the Sudan page on your phone.
 
 **Tony actions:**
-- (do) Commit and push both folders. 
-- (do) Run the live check, then look at the page on your phone.
+- (do) Commit and push both folders. -- orrery: 5779e1f0e0d421684f69d32fa78a9793c5f82327; website: 8e24f9d018c4c35bada12749094d1ce6263bac5c
+- (do) Run the live check, 
+ 
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 66 files from https://palomasorrery.com/ (34 typed, 32 positions files read from data\objects_config.json)
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches the working copy
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   gallery/arrival.js                             matches the working copy
+    SERVED   gallery/nav_cluster.js                         matches the working copy
+    SERVED   gallery/solar_system_figures.js                matches the working copy
+    SERVED   gallery/solar_system_drawer.js                 matches the working copy
+    SERVED   data/objects_config.json                       matches the working copy
+    SERVED   gallery/guestbook.js                           matches the working copy
+    SERVED   data/guestbook.json                            matches the working copy
+    SERVED   data/solar-system/drawings/hills_cloud.json    matches the working copy
+    SERVED   data/solar-system/drawings/van_allen_belts.json matches the working copy
+    SERVED   data/solar-system/drawings/earth_exosphere.json matches the working copy
+    SERVED   data/solar-system/drawings/sun_corona.json     matches the working copy
+    SERVED   data/solar-system/drawings/zodiacal_dust.json  matches the working copy
+    SERVED   data/solar-system/drawings/outer_oort_cloud.json matches the working copy
+    SERVED   data/solar-system/drawings/galactic_tide.json  matches the working copy
+    SERVED   gallery/source_list.js                         matches the working copy
+    SERVED   gallery/far_lines.js                           matches the working copy
+    SERVED   gallery/direction_arrows.js                    matches the working copy
+    SERVED   gallery/drawer_order.js                        matches the working copy
+    SERVED   gallery/text_box.js                            matches the working copy
+    SERVED   gallery/scene_moment.js                        matches the working copy
+    SERVED   gallery/scene_address.js                       matches the working copy
+    SERVED   gallery/picture_folds.js                       matches the working copy
+    SERVED   gallery/gallery_metadata.json                  matches the working copy
+    SERVED   gallery/assembler/compose_children.py          matches the working copy
+    SERVED   gallery/view_centre.js                         matches the working copy
+    SERVED   gallery/tap_hover.js                           matches the working copy
+    SERVED   gallery/first_guide.js                         matches the working copy
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+    SERVED   data/solar-system/positions/voyager_2.json     matches the working copy
+    SERVED   data/solar-system/positions/new_horizons.json  matches the working copy
+    SERVED   data/solar-system/positions/juno.json          matches the working copy
+    SERVED   data/solar-system/positions/osiris_apex.json   matches the working copy
+    SERVED   data/solar-system/positions/parker_solar_probe.json matches the working copy
+    SERVED   data/solar-system/positions/bepicolombo.json   matches the working copy
+    SERVED   data/solar-system/positions/solar_orbiter.json matches the working copy
+    SERVED   data/solar-system/positions/lucy.json          matches the working copy
+    SERVED   data/solar-system/positions/juice.json         matches the working copy
+    SERVED   data/solar-system/positions/psyche_spacecraft.json matches the working copy
+    SERVED   data/solar-system/positions/europa_clipper.json matches the working copy
+    SERVED   data/solar-system/positions/galileo.json       matches the working copy
+    SERVED   data/solar-system/positions/cassini.json       matches the working copy
+    SERVED   data/solar-system/positions/pioneer_10.json    matches the working copy
+    SERVED   data/solar-system/positions/pioneer_11.json    matches the working copy
+    SERVED   data/solar-system/positions/rosetta.json       matches the working copy
+    SERVED   data/solar-system/positions/akatsuki.json      matches the working copy
+    SERVED   data/solar-system/positions/dart.json          matches the working copy
+    SERVED   data/solar-system/positions/west.json          matches the working copy
+    SERVED   data/solar-system/positions/mcnaught.json      matches the working copy
+    SERVED   data/solar-system/positions/tsuchinshan_atlas.json matches the working copy
+    SERVED   data/solar-system/positions/wierzchos.json     matches the working copy
+    SERVED   data/solar-system/positions/atlas_2024_g3.json matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1.json      matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1_b.json    matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1_d.json    matches the working copy
+    SERVED   data/solar-system/positions/panstarrs_2025_r3.json matches the working copy
+    SERVED   data/solar-system/positions/borisov_2025_v1.json matches the working copy
+    SERVED   data/solar-system/positions/oumuamua.json      matches the working copy
+    SERVED   data/solar-system/positions/borisov_2i.json    matches the working copy
+    SERVED   data/solar-system/positions/atlas_3i.json      matches the working copy
+
+  PASS Served reachability      10.5s  all 66 files served and
+                                    byte-identical to the working copy
+
+  orrery export pinned at 594e562c
+
+  PASS Export freshness          0.2s  the served export is the orrery's
+                                    at 594e562c, byte for byte
+
+  orrery HEAD 5779e1f0
+  examining 3 of 188 links; the other 185 are served from the export
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  3 pointers: 1 match, 0 DRIFT, 0 UNIT MISMATCH, 2 could not be examined.
+
+  PASS Store drift               2.2s  3 pointers against orrery 5779e1f0
+                                    -- 1 match, 0 DRIFT, 0 UNIT
+                                    MISMATCH, 2 could not be examined.
+
+======================================================================
+  2 of 2 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Store drift            3 pointers against orrery 5779e1f0 -- 1
+  last swap 2026-11-14T18:15:13.102590+00:00: succeeded first time
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
+- then look at the page on your phone.
+
 - (decide) The Earth System skill's 1.3 proposal, in `documentation/PROPOSAL_earth_system_pipeline_1_3_20261114.md`.
+
+================================
+
+**Code:**
+
+Applying the approved 1.3 skill now: writing the new skill text and moving its old entries to the histories file.
+
+Now the histories file: the 1.2 and 1.1 entries and the Shared Conventions section, word for word from the committed skill.
+
+Now the protocol's version entry (v3.141), with the oldest of the four (v3.138) moving down to its history file.
+
+Protocol entry in place, still 1387 lines (cap 1394). Now the skills index.
+
+The index flags a problem in the proposal's description, which uses `earth/<id>.html` and so contains angle brackets that Anthropic rejects in a skill's description. I'm checking whether this is a hard failure.
+
+The index check failed with exit 1 because `<id>` in the description reads as an XML tag and would get the skill refused. I'm changing it to `[id]` in the description only, and I'll mention that first in the report.
+
+Index check passes. Now finding the two source addresses recorded in the repo.
+
+The report's address is on record from the Nov 12 handoff, with its file in data/. For the Mapping Tool, the only Sudan map address on record is the one you gave on Nov 13, so I'm checking the data files for another before I decide.
+
+No address for the IPC Mapping Tool appears in the ledger, briefs, handoffs, or data files, so I'll finish step 1's ledger line and then stop to ask you for it.
+
+The 1.3 skill is applied, but I've stopped at the footer: the repo records IPC's report address and no address for the IPC Mapping Tool.
+
+**New base, recorded first:** orrery 5779e1f0 and website 8e24f9d0. Both match GitHub. The only file waiting was your run record copy.
+
+**Step 1, the skill, is done, with one change from the proposal.** The description said `earth/<id>.html`. The skills index check failed on it ("holds an XML tag, '<id>', which Anthropic disallows"), and reinstalling in Settings would fail the same way. I changed it to `earth/[id].html` and changed nothing else. The check now reads "no consistency problems". The skill is 199 lines, at its cap.
+- The 1.2 and 1.1 entries and the Shared Conventions section moved to the skill histories file, word for word.
+- The skills index reads 1.3.
+- Protocol v3.141 is added, and v3.138 moved to its history file. The protocol is 1390 lines; its cap is 1394.
+- L-001 (food insecurity) records the change and the reason. The caps check passes.
+
+**Step 2, the footer links, is stopped.**
+- **The report:** the Nov 12 handoff records `https://www.ipcinfo.org/fileadmin/user_upload/ipcinfo/docs/IPC_Sudan_Acute_Food_Insecurity_Feb2026_Jan2027_Special_Report.pdf`. It is the same report as the PDF in data/.
+- **The Mapping Tool:** no address for it is recorded in the ledger, the briefs, the handoffs or the data files. The only Sudan map address recorded is the one you gave on Nov 13, `https://www.ipcinfo.org/ipc-country-analysis/details-map/en/c/1163315/?iso3=SDN`. The generator calls it "IPC's own interactive map of this analysis", and the page already links to it in its last step.
+
+Step 3 (rebuild, checks, copy to the website) waits on your answer.
+
+**Changed so far, all in the orrery folder:**
+- ok skills/earth-system-pipeline/SKILL.md (replaced with 1.3, then 1 edit)
+- ok documentation/SKILL_HISTORIES.md (1 section added, 1 edit)
+- ok PROJECT_INSTRUCTIONS.md (v3.141 added, v3.138 removed, header stamp and anchor, manifest row)
+- ok documentation/PROJECT_INSTRUCTIONS_HISTORY.md (v3.138 added)
+- ok LEDGER_CONSOLIDATED.md (L-001, 1 edit, plus the regenerated index)
+
+Should the Mapping Tool link in the footer use that Nov 13 address, or will you send the Mapping Tool's own address?
+
+=====================
+
+That's the map pop-up's footer. The page's footer is the `src` block near line 1865:
+
+I'll add the two links as their own lines in the page's footer, under the existing source lines, styled like the page's other outside links (new tab). Checking the page's link style first:
+
+Plainer wording for the data line:
+
+Rebuilding the page, pictures and map file (teaser left alone, as before):
+
+The page carries both links, and the pre-test passed. The new skill also asks for the phone-width check, so I'll rerun it with the earlier harness:
+
+That measured the old copy, because the Python step failed on the path. Redoing it with Windows paths:
+
+No sideways scroll at either width. Now copying the page to the website folder, after checking whether the rebuilt pictures differ from the website's copies:
+
+The map file shows as changed, though its words weren't touched. Checking what differs:
+
+The map file's contents are byte-for-byte the same as the pushed one; only the zip's date stamps changed. No re-import is needed. Now both folders' checks, run in the background:
+
+While both runs work, the records. L-001 first:
+
+Now Where We Are:
+
+The cache build line is unchanged. Waiting on the two check runs.
+
+Both check runs are still going (the orrery's takes several minutes). I'll report when they finish.
+
+The website's run: 49 of 49 gating checkers passed. Waiting on the orrery's run.
+
+The orrery run passed 36 of 36. The run also lists Where We Are as "written", so checking what it changed there, and reading the Tier-1 count:
+
+Skill 1.3 is applied, Sudan's page footer now links IPC's report and the IPC Mapping Tool, and both folders' checks are green.
+
+**The new footer lines, in full, as they read on the page:**
+- "Report: IPC's report (PDF)" links to `https://www.ipcinfo.org/fileadmin/user_upload/ipcinfo/docs/IPC_Sudan_Acute_Food_Insecurity_Feb2026_Jan2027_Special_Report.pdf`. That address is recorded in the Nov 12 handoff. It is the same report as the PDF in the orrery's data folder.
+- "Data: the IPC Mapping Tool; in it, choose the analysis named above" links to `https://www.ipcinfo.org/ipc-country-analysis/ipc-mapping-tool/`, the address you gave. That address opens the tool, not the Sudan analysis, so the line tells the reader to choose the analysis. The line just above it in the footer names that analysis.
+
+The footer's other lines are unchanged. Both links open in a new tab.
+
+**Checks, read from the output:**
+- **Skill 1.3:** applied as written except for one mark. In the description, `earth/<id>.html` now reads `earth/[id].html`. The skills check refused the `<id>` tag there, and the reinstall in Settings would have refused it too. With the change, the check reads "no consistency problems". The protocol entry v3.141 and L-001 (food insecurity) both record the change.
+- **The rebuild:** the map file check passed. The map file's contents are identical to what you pushed; only the zip's dates changed, so you don't need to re-import it. The pictures are unchanged.
+- **The pre-test** on a throwaway copy passed, and the copy was deleted.
+- **Phone width:** no sideways scroll at 360 or 375 px.
+- **Orrery run:** "36 of 36 gating checkers passed". The provenance gate reads "0 TIER-1 -- the push gate holds".
+- **Website run:** "49 of 49 gating checkers passed".
+- **Records:** L-001 (food insecurity) and Where We Are are updated. In Where We Are:
+  - The 1.3 decision is gone from "Needs you now" and "Waiting on you".
+  - The Settled line about the walk is removed, because the skill now carries that rule.
+  - The page is at 127 lines, within its cap of 130, and the caps check passes.
+
+**Changed files, for your commit**
+
+Orrery folder:
+- ok skills/earth-system-pipeline/SKILL.md (the skill, now 1.3)
+- ok documentation/SKILL_HISTORIES.md (the skill's old entries and Shared Conventions, moved here)
+- ok PROJECT_INSTRUCTIONS.md (the protocol: v3.141, its header, and the skills list)
+- ok documentation/PROJECT_INSTRUCTIONS_HISTORY.md (the protocol's v3.138 entry, moved here)
+- ok food_insecurity_generator.py (the footer links, 4 edits)
+- ok data/earth/food_insecurity_sdn.html (the Sudan page, rebuilt)
+- ok data/food_insecurity_sdn_blockbuster.kmz (the map file; contents unchanged, only the zip's dates)
+- ok LEDGER_CONSOLIDATED.md (L-001, 2 edits, plus the regenerated index)
+- ok documentation/WHERE_WE_ARE.md (9 edits)
+- Written by the check run: DATA_INVENTORY.md, MODULE_ATLAS.md, MODULE_INDEX.md, PROVENANCE_AUDIT.md, data/provenance_history.json, documentation/prompts/citation_review.jsonl
+- Yours: documentation/WHERE_WE_ARE_11-14-26_1123_run_record.md
+
+Website folder:
+- ok earth/food_insecurity_sdn.html (the Sudan page)
+- Written by its check run: data/constants_export.sha, data/drawings/pulled_at.sha, data/objects_export.sha
+
+No token count prints in this app. The context-size line the close asks for isn't available to me this time.
+
+**Your run order:** commit and push the orrery, then the website. Then run the website's live check from the dashboard, and look at the Sudan page's footer on your phone.
+
+**Tony actions:**
+- (do) Commit and push both folders. -- 
+- (do) Reinstall the Earth System skill (Settings > Skills), and paste protocol v3.141 into the Project's instructions on claude.ai.
+- (do) Run the live check, then look at the page on your phone.

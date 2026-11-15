@@ -4837,6 +4837,52 @@ resident.
 (Moved down from the resident protocol on 2026-11-12, when
 v3.140 made a fourth entry.)
 
+v3.138 (November 11, 2026): No rule changed in this document. ONE skill
+bump: interactive-exhibit 1.40 -> 1.41 (L-522, document caps, step 2,
+and L-523, a finger's tap sent as a hover), by the records skill's
+binding rule, Tony's go-ahead to the split of Nov 10 ("let's do the
+split first") and to the tap fix of Nov 11 (08:23: "could you take care
+of it in our Code session"). THE SKILL'S RULES AND THE PAGE'S AS-BUILT,
+PARTED.
+
+WHAT PROMPTED IT. The Claude Code session of Nov 10 and 11 (Claude Opus
+5.5), through the python_work door, built on orrery 87fb472e and gallery
+e21b6746, from Tony's prompt and
+documentation/COORD_L522_step2_exhibit_split_brief_20261110.md, in four
+parts with a report and his go-ahead after each, the fourth added by his
+word of Nov 11.
+
+WHAT CHANGED. interactive-exhibit: the rules stay in the skill; what
+interactive.html does now moved whole into the gallery's
+INTERACTIVE_AS_BUILT.md, changed in the commit that changes the page,
+its code names held to the code by the gallery run's new As-built names
+row. Each of the six long sections leaves one rule and a pointer; the
+install confirmations moved to documentation/SKILL_HISTORIES.md;
+fires_when is cut to the phrases that make the skill fire, so the
+manifest row above is ten lines where it was about a hundred. Every old
+line was accounted for by script. Separately, a correction (L-523):
+"Touch has no hover" was wrong for a 3D scene. Plotly sends a finger's
+tap 5 px off or more as a hover, and the page now opens it as a click
+(gallery/tap_hover.js, the gallery run's new Tap hover row); the widened
+pick is any finger's, in either orientation (Tony, Nov 11: "Yes, any
+finger"). Its oldest of four version entries (1.38) moved to
+documentation/SKILL_HISTORIES.md by the three-entry rule.
+
+THE OBLIGATION TRAVELS. This session read interactive-exhibit 1.40 from
+the repo's copy, as a Code session does, as the manifest expected. Tony
+reinstalls it (Settings > Skills) and pastes this version into the
+Project's instructions on claude.ai; the next session that loads it from
+the account confirms its copy reads 1.41 before exhibit work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.135 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-11-14, when
+v3.141 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

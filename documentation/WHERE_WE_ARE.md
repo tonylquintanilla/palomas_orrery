@@ -1,28 +1,26 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 14, 2026, afternoon: the Code session (Opus) that built Sudan's guided walk, at its close (L-001 (food insecurity)).
-- Written at orrery 594e562c and gallery 09b4b498, with this session's files not yet pushed.
+Last updated: November 14, 2026, night: the Code session (Opus) that built Sudan's guided walk, after your yes to the skill's 1.3 (L-001 (food insecurity)).
+- Written at orrery 5779e1f0 and gallery 8e24f9d0, your pushes of the walk, with tonight's files not yet pushed.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Sudan's page is now a guided walk: seven steps in season order, each a picture and a few sentences in IPC's figures and words, which you read and approved (L-001 (food insecurity)). It is in both folders, not yet pushed.
-> - The Google Earth map's words now promise only what it does: it opens on October - January, and in a web browser the list on the left switches periods. You re-imported it; signed out, it "looks right".
-> - Page 1 of IPC's report seems to give February - May 14 areas at risk of Famine but names none; the report's only list of 14 is June - September's. Nothing is drawn for February - May. Starting the session before you left, with Remote Control, worked (L-532 (a session away from the computer)).
-> - The dashboard's two missing buttons, Kepler Solver and First Guide, are built; the orrery run is all green, 36 of 36 (L-423 (the website's checks)).
+> - The Earth System skill is at 1.3, as you approved: its rules for Google Earth on the web and for a layer's page and its walk (L-001 (food insecurity)). One mark differs from the proposal: `<id>` in its description reads `[id]`, because the skills check refuses a tag there, and so would the reinstall.
+> - Sudan's page footer now links IPC's report (the PDF) and the IPC Mapping Tool, at the address you gave. The page is rebuilt and copied to the website folder; its pictures and the map file's words are unchanged, so no re-import.
 >
 > **Do next:** *Mars (L-514 (the Mars room)), with a new coordinating session: `documentation/HANDOFF_website_coordination_20261112.md`. The hold's first nights were green, nothing held (Nov 12).*
 >
 > **Needs you now:**
-> - *(do) Commit and push both folders (the walk, the map file, the records); then the website's live run, and the page on your phone (L-001 (food insecurity)).*
-> - *(decide) The Earth System skill's web rules, version 1.3: the proposal is `documentation/PROPOSAL_earth_system_pipeline_1_3_20261114.md` (L-001 (food insecurity)).*
+> - *(do) Commit and push both folders (the skill, the protocol, the footer); then the website's live run, and the page on your phone (L-001 (food insecurity)).*
+> - *(do) Reinstall the Earth System skill (Settings > Skills) and paste protocol v3.141 into the Project's instructions on claude.ai.*
 > - *(do) Each morning, Fetch origin and Pull origin on both, orrery then website, before any work. If Pull origin shows up only once you have changes: Commit them first, then Pull origin, then Push origin. If Desktop stashes your changes anyway, restore them at once: Changes tab, Stashed Changes, Restore.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
-## The road  **>> UPDATED THIS SESSION**
+## The road
 
 Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
   1-14.[done]  Through Nov 6: the three rooms, the objects, the Sun's and
@@ -44,7 +42,7 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
   l-c. [done]  L-517 (the lobby), L-518 (the shared link) and L-519
                (Featured's rethink): closed Nov 8 and 9 on your phone looks.
   g.   [done]  L-527 (a first visit's guide): closed Nov 12.
-  s.   [done]  Sudan on Google Earth web, Nov 13, and its guided walk, Nov 14 (L-001 (food insecurity)). << moved this session
+  s.   [done]  Sudan on Google Earth web, Nov 13, and its guided walk, Nov 14 (L-001 (food insecurity)).
  15a.  [later] The Earth Science room, after Mars and the moons (L-531 (the Earth Science room)).
   d.   [beside] Document caps (L-522 (document caps)): steps 1 and 2
                built Nov 10 and 11, the page of caps and the exhibit
@@ -56,7 +54,6 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
 ## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings; a line leaves once it is habit, or a skill carries it.
-- A layer's guided walk lives on its own page; Google Earth is an extra whose words promise only what it does; "the theme is respectful awareness primarily" (Nov 14; L-001 (food insecurity)).
 - Earth System layers move to Google Earth on the web, not the desktop app; a layer's one home is its page, earth/<its id>.html (Nov 13; L-001 (food insecurity), L-530 (the other layers on the web)).
 - Sentences we compose use American spelling; IPC's quoted words keep IPC's; a symbol taken from IPC is marked "after IPC" (Nov 13; L-001 (food insecurity)).
 - The room is used upright: held sideways it shows one line asking for the phone upright; the drawer need not work sideways (Nov 12; L-527 (a first visit's guide)).
@@ -102,7 +99,7 @@ Read from files when this page was written, not typed from memory.
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
 Decisions, one at a time:
-- The Earth System skill's web rules and the walk's rule, 1.3, as proposed (L-001 (food insecurity)).
+- None now.
 
 At the next design talk:
 - How obsolete code is treated, and when it goes (L-509 (obsolete
@@ -122,7 +119,7 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- This session: L-001 (food insecurity); the brief, `COORD_L001_sudan_walk_brief_20261114.md`; the generator, `food_insecurity_generator.py`; L-532 (a session away from the computer). The day before: `COORD_L001_sudan_web_brief_20261113.md`, L-530 (the other layers on the web), L-531 (the Earth Science room).
+- This session: L-001 (food insecurity); the skill's 1.3, `skills/earth-system-pipeline/SKILL.md`, from `PROPOSAL_earth_system_pipeline_1_3_20261114.md`; the brief, `COORD_L001_sudan_walk_brief_20261114.md`; the generator, `food_insecurity_generator.py`; L-532 (a session away from the computer). The day before: `COORD_L001_sudan_web_brief_20261113.md`, L-530 (the other layers on the web), L-531 (the Earth Science room).
 - The caps: `DOCUMENT_CAPS.md`; L-522 (document caps); its brief
   `COORD_L522_step1_caps_brief_20261110.md` and the review beside it.
 - The tree: L-515 (one nested tree), its briefs `COORD_L515_*`.

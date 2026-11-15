@@ -12,7 +12,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 176  
-**Total Lines of Code (non-blank):** 141,780  
+**Total Lines of Code (non-blank):** 141,800  
 **Total Public Functions/Classes:** 1,836
 
 ## Classification Coverage
@@ -231,7 +231,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `export_drawings.py` | - write the orrery's stored drawings into data/drawings/, one file per drawing, for the website to pull and draw. (436 lines) |
 | `export_objects.py` | - write data/objects_export.json from the object list in celestial_objects.py. The orrery is the one definition of each object; the gallery reads this file and never reads orrery source. (812 lines) |
 | `export_orbit_cache.py` | DEPRECATED: export_orbit_cache.py Obsolete since November 4, 2026 (L-512, ruling 0): data/orbit_paths.json is retired. Run on purpose, this script still reads data/orbit_paths.json and data/osculating_cache.json (read-only), and stops with "caches not found" when either is missing, so once Tony d... (629 lines) |
-| `food_insecurity_generator.py` | IPC acute food-insecurity KMZ layer (Sudan, three periods, for Google Earth on the web). (1,893 lines) |
+| `food_insecurity_generator.py` | IPC acute food-insecurity KMZ layer (Sudan, three periods, for Google Earth on the web). (1,913 lines) |
 | `horizons_check.py` | - check each object the website serves against JPL Horizons: that its entry names exactly one object, that the object's id, index and name are what the orrery's list says, and that the orbital period the website prints is the one JPL gives. And re-read each spacecraft's Horizon... (1,245 lines) |
 | `ledger_index.py` | Generate the at-a-glance INDEX for the consolidated ledger. (715 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |

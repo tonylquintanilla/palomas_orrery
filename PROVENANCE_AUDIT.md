@@ -20,12 +20,12 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T1 by domain | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|--------------|---:|---:|---:|--------:|
+| 20261115T032329Z | `5779e1f` | 176 | 1171 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 713 | 181 | 6 | 0 |
 | 20261114T210542Z | `594e562` | 176 | 1171 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 713 | 181 | 6 | 0 |
 | 20261114T205704Z | `594e562` | 176 | 1171 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 713 | 181 | 6 | 0 |
 | 20261114T195237Z | `594e562` | 176 | 1171 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 713 | 181 | 6 | 0 |
 | 20261111T160521Z | `eb77137` | 176 | 1165 | 276 | orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2 | 707 | 176 | 6 | 0 |
 | 20261111T153103Z | `eb77137` | 176 | 1165 | 276 | orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2 | 707 | 176 | 6 | 0 |
-| 20261111T021609Z | `fd2a28a` | 176 | 1165 | 276 | orrery 110, Earth System 149, stars 13, utilities 2, unclassified 2 | 707 | 176 | 6 | 0 |
 
 Change since the previous run: total +0, Tier-1 +0.
 
@@ -1226,10 +1226,10 @@ is planned for a future session.
 | 161 | string | display string @ line 161 | (1 claim) | 3 | 4 | **12** | Cited, not cross-checked; date-sensitive | Public-facing display string (hover/INFO) |
 | 197 | string | display string @ line 197 | (1 claim) | 3 | 4 | **12** | Cited, not cross-checked; date-sensitive | Public-facing display string (hover/INFO) |
 | 224 | string | display string @ line 224 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1253 | string | display string @ line 1253 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1556 | string | display string @ line 1556 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1626 | string | display string @ line 1626 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
-| 1752 | string | display string @ line 1752 | (1 claim) | 3 | 4 | **12** | Cited, not cross-checked; date-sensitive | Public-facing display string (hover/INFO) |
+| 1267 | string | display string @ line 1267 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1570 | string | display string @ line 1570 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1640 | string | display string @ line 1640 | (1 claim) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
+| 1766 | string | display string @ line 1766 | (1 claim) | 3 | 4 | **12** | Cited, not cross-checked; date-sensitive | Public-facing display string (hover/INFO) |
 
 ### hills_cloud_sampler.py
 

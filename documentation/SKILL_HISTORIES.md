@@ -1723,3 +1723,34 @@ from path_plan.py, path_drawing.py and the website's builder at
 written.
 (Moved down 2026-11-05, when 1.18 made a fourth entry.)
 
+## earth-system-pipeline
+
+Moved here 2026-11-14, when 1.3 (L-001) was applied on Tony's word
+(Nov 14, 20:04, "Yes I approve"), to keep the skill at its cap of 199
+lines. Word for word as they stood in the skill at palomas_orrery @
+5779e1f0; only "Skill version:" reads "Earlier:", and the section's
+heading sits one level down.
+
+Earlier: 1.2 | 2026-10-02, with Anthropic's Claude Opus 5.5, from
+palomas_orrery @ 94ff6c68. v1.2 (L-407) changes no rule: the header's
+description is put in quotes, because it holds ": " ("displacement):
+the restraint discipline"), which YAML refuses unquoted, so a reinstall
+in Settings would have been refused. Found by the header check
+skills_index.py gained the same day.
+Earlier: 1.1 | Cut from palomas_orrery @ e83fe9ce | 2026-07-12
+Sources: earth_system_generator.py, earth_system_common.py,
+food_insecurity_generator.py, scenarios_* at HEAD; western heatwave handoff
+v9; food insecurity design + build handoffs v2.
+
+The section below was in the skill until 1.3. Each line is still held
+by the master it names.
+
+### Shared Conventions (duplicated here deliberately; masters elsewhere)
+
+- Credit line on substantive edits: "Module updated: [Month Year] with
+  Anthropic's Claude [model]" (master: orrery-coding-conventions).
+- ASCII-only / LF for all Python deliverables (master: safe-file-editing).
+- Distance hover text includes AU alongside km where distances appear
+  (master: orrery-coding-conventions).
+- Provenance: Tier-1 = 0 before push; composed text sourced at the
+  construction site (master: provenance-discipline).

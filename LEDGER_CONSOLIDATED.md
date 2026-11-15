@@ -10848,15 +10848,33 @@ one of the four).
 - **Gaps.** Current (February-May) has no Risk of Famine list in this
   report (page 1's sentence, above), so none is drawn for it. IPC's
   evidence and assistance levels are shown for February-May only (the
-  export carries none for the projections). The earth-system-pipeline
-  skill's web rules wait on Tony's go-ahead for 1.3 (Tony-action
-  (decide), below).
-- **Tony-action (decide):** bump earth-system-pipeline to 1.3 with the
-  web rules and the walk's rule; the proposed text, with what moves out
-  to keep the skill at its cap of 199 lines, is
-  `documentation/PROPOSAL_earth_system_pipeline_1_3_20261114.md`.
-- **Tony-action (do):** commit and push both repositories (the Nov 14
-  session's files); then the gallery's live run; then the page on the
+  export carries none for the projections).
+- **earth-system-pipeline 1.3, applied 2026-11-14** on Tony's word
+  (20:04, "Yes I approve"), at orrery 5779e1f0 and gallery 8e24f9d0
+  (his pushes of the walk): the skill replaced with the proposal's text
+  (`documentation/PROPOSAL_earth_system_pipeline_1_3_20261114.md`),
+  199 lines; its 1.2 and 1.1 entries and the Shared Conventions section
+  moved to `documentation/SKILL_HISTORIES.md`; the skills index reads
+  1.3; protocol v3.141, with v3.138 moved down. One mark differs from
+  the proposal: the description's `earth/<id>.html` reads
+  `earth/[id].html`, because `skills_index.py --check` failed on it
+  ("holds an XML tag, '<id>', which Anthropic disallows"), and so would
+  the reinstall; after it, the check reads "no consistency problems".
+- **The page's footer links its sources (2026-11-14, Tony's request):**
+  "Report: IPC's report (PDF)", to the Special Report's address as
+  recorded in HANDOFF_food_insecurity_sdn_projections_20261112.md; and
+  "Data: the IPC Mapping Tool; in it, choose the analysis named above",
+  to https://www.ipcinfo.org/ipc-country-analysis/ipc-mapping-tool/,
+  which Tony gave in the session (none was recorded; it opens the tool,
+  not the analysis). Both in the generator as IPC_REPORT_URL and
+  IPC_MAPPING_TOOL_URL. Rebuilt: the KMZ check passed and its doc.kml is
+  byte-identical to the pushed one (the zip's dates alone differ); the
+  pictures are unchanged; the pre-test on a throwaway copy passed; no
+  sideways scroll in 360 and 375 px frames; the page copied to the
+  website's earth/.
+- **Tony-action (do):** reinstall earth-system-pipeline in Settings >
+  Skills and paste protocol v3.141 into the Project's instructions;
+  commit and push; then the gallery's live run; then the page on the
   phone, palomasorrery.com/earth/food_insecurity_sdn.html.
 **Ref:** MANIFEST_food_insecurity_sudan_v2.md; HANDOFF_food_insecurity_build_v2.md
 (built on 03630ae); cross-ref L-064, L-069; L-060, L-070 (the track's
