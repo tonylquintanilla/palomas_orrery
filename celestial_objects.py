@@ -1244,14 +1244,37 @@ OBJECT_DEFINITIONS = [
     # --- Adding New Moons ---
 
     # Mars' Moons
-    {'name': 'Phobos', 'id': '401', 'var_name': 'phobos_var', 'color_key': 'Phobos', 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 401. Mars orbital period: 0.32 Earth days.', 
-     'mission_url': 'https://science.nasa.gov/resource/martian-moon-phobos/'},
+    # L-514: keyed 2026-11-14 for the website's Mars room (slugs 'phobos'
+    # and 'deimos'), to the Moon's standard (L-513).
+    # horizons_name read live that day from JPL's Lookup: 401 in the
+    # major-body index is "Phobos", natural satellite, SPKID 401; the
+    # small-body index answers only 401 Ottilia (SPKID 20000401). 402 in
+    # the major-body index is "Deimos", natural satellite, SPKID 402; the
+    # small-body index answers only 402 Chloe (SPKID 20000402).
+    # The sentences, Tony's rulings of 2026-11-14 (22:43 and 22:54): NASA's
+    # own words in the NASA: "..." form, each with its NASA page as the
+    # link. The typed periods ("0.32" and "1.26 Earth days") came out: the
+    # periods are JPL's, fetched around Mars (period_fetch.py, '@499').
+    # Deimos's "Retrogade" came out: no source supports it, and Deimos's
+    # NASA page says nothing of the orbit's direction (read 2026-11-14).
+    # Phobos's link was NASA's image page,
+    # https://science.nasa.gov/resource/martian-moon-phobos/, replaced by
+    # the moon's own page.
+    # Source: NASA, "Phobos - NASA Science",
+    # https://science.nasa.gov/mars/moons/phobos/ (last updated Nov 03,
+    # 2024; read 2026-11-14): "Phobos is on a collision course with Mars."
+    # Source: NASA, "Deimos - NASA Science",
+    # https://science.nasa.gov/mars/moons/deimos/ (last updated Nov 03,
+    # 2024; read 2026-11-14), its Quick Facts: "Deimos is the smaller of
+    # the two Martian moons and is less irregular in shape."
+    {'name': 'Phobos', 'key': 'phobos', 'id': '401', 'horizons_name': 'Phobos', 'var_name': 'phobos_var', 'color_key': 'Phobos', 'symbol': 'circle', 'object_type': 'satellite',
+     'id_type': 'majorbody',
+     'mission_info': 'Horizons: 401. NASA: "Phobos is on a collision course with Mars."',
+     'mission_url': 'https://science.nasa.gov/mars/moons/phobos/'},
 
-    {'name': 'Deimos', 'id': '402', 'var_name': 'deimos_var', 'color_key': 'Deimos', 'symbol': 'circle', 'object_type': 'satellite', 
-     'id_type': 'majorbody', 
-     'mission_info': 'Horizons: 402. Mars orbital period: 1.26 Earth days. Retrogade.', 
+    {'name': 'Deimos', 'key': 'deimos', 'id': '402', 'horizons_name': 'Deimos', 'var_name': 'deimos_var', 'color_key': 'Deimos', 'symbol': 'circle', 'object_type': 'satellite',
+     'id_type': 'majorbody',
+     'mission_info': 'Horizons: 402. NASA: "Deimos is the smaller of the two Martian moons and is less irregular in shape."',
      'mission_url': 'https://science.nasa.gov/mars/moons/deimos/'},
 
 # Jupiter's Inner Ring Moons (Amalthea Group)
