@@ -1,27 +1,28 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 14, 2026, late night: the coordinating session (Opus) that settled the Mars moons' words and accuracy and wrote the orrery session's brief (L-514 (the Mars room)).
-- Written at orrery c314fe1a and gallery d3e97b15, your pushes of tonight, with this page, the ledger and the brief not yet pushed.
+Last updated: November 15, 2026: the Code session (Opus) that brought Phobos and Deimos into the orrery, Mars's session 1 of 2 (L-514 (the Mars room)).
+- Written at orrery 488cad20 (your commit "mars moons") and gallery d3e97b15; GitHub's orrery has one nightly commit since, e5b5eb58. Part 2, the ledger and this page are not yet pushed.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Mars's two moons have their words, from NASA's pages, as you chose: Phobos, "Phobos is on a collision course with Mars."; Deimos, "Deimos is the smaller of the two Martian moons and is less irregular in shape." (L-514 (the Mars room)).
-> - Their accuracy is JPL's own, from the 2025 paper on the exact version Horizons serves (mar099): "a few kilometers", so both moons' distances print to tens of kilometres.
-> - ESCAPADE, your find, is its own round after the Mars build: Blue and Gold join the Solar System view with their Earth flybys (L-533 (ESCAPADE)).
-> - Sudan's walk is closed on your phone look, "very good. thanks." (L-001 (food insecurity)).
+> - Phobos and Deimos are now served by the orrery: each has its key, JPL's own name, NASA's sentence you chose, and NASA's page as its link (L-514 (the Mars room)).
+> - Their periods are JPL's, fetched around Mars: Phobos 0.31914 days, Deimos 1.2625 days. The typed periods and the unsourced "Retrogade" are gone.
+> - Their accuracy is one row in the constants store, 10 km for both, from the 2025 paper's "a few kilometers". The website reads it from the constants export.
+> - The orrery's own hover uses it too, on your word: seen from Mars, Phobos prints to tens of kilometres, "rounded to JPL's published accuracy for Phobos's orbit around Mars", where it said "JPL states no accuracy".
+> - The orrery's checks passed, 36 of 36, and JPL confirmed both moons' names and periods today.
 >
-> **Do next:** *Mars, session 1 of 2, a Code session in the orrery: Phobos and Deimos keyed, in NASA's words, with JPL's periods and accuracy. Its brief: `documentation/COORD_L514_orrery_moons_brief_20261114.md`.*
+> **Do next:** *Mars, session 2 of 2, the website: a coordinating session writes its brief first, then a Code session in the website builds the moons into Mars's fold.*
 >
 > **Needs you now:**
-> - *(do) Commit and push the orrery (the brief, the ledger, this page); then open the Code session and paste its prompt.*
+> - *(do) Commit the orrery (Part 2, the ledger, this page), then Pull origin (GitHub's nightly commit), then Push origin. The two files that commit also changed already match yours exactly.*
 > - *(do) Each morning, Fetch origin and Pull origin on both, orrery then website, before any work. If Pull origin shows up only once you have changes: Commit them first, then Pull origin, then Push origin. If Desktop stashes your changes anyway, restore them at once: Changes tab, Stashed Changes, Restore.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
-## The road
+## The road  **>> UPDATED THIS SESSION**
 
 Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
   1-14.[done]  Through Nov 6: the three rooms, the objects, the Sun's and
@@ -30,11 +31,11 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
                and A2 of JPL's fallbacks (L-512), a green website night,
                the quick wins with L-423 (the website's checks), and the
                Moon's standards (L-513, closed).
- 15.   [NOW]   *The one tree's step 2b passed your phone look Nov 10
-               (L-515 (one nested tree)). Next, Mars (Phobos, Deimos) as
-               the first new fold (L-514 (the Mars room)), then Uranus and
-               Neptune. Io, Titan, Charon and Pluto come to standard in
-               their folds, keyed in the orrery first.*
+ 15.   [NOW]   *Mars (Phobos, Deimos) as the first new fold (L-514 (the
+               Mars room)): the orrery's half done Nov 15, the website's
+               next. Then Uranus and Neptune. Io, Titan, Charon and Pluto
+               come to standard in their folds, keyed in the orrery
+               first.* << moved this session
  16.   [later] Earth's fold: L-297 (the Lagrange points), the Earth-Moon
                barycentre, SOHO, Gaia, James Webb, Artemis II.
  17.   [later] Small-body systems' moons; then stars and exoplanets.
@@ -61,7 +62,7 @@ Standing rulings; a line leaves once it is habit, or a skill carries it.
 - One body's failed accuracy test: "Hold the bad data and report, then continue." A hold is not red; the night's commit title names the held body. A moon is held only when JPL gives no answer; more than five held is a failed build (Nov 11, the coordinator's changes). The room's title stays unchanged for a held body; its box says it (Nov 11, your "Yes, keep it"; L-525 (hold the bad data)).
 - The Sun direction line stays out of Earth's fold: the day-night shading and the Sun at its true place show the direction (Nov 10; L-515 (one nested tree)).
 
-## Deferred  **>> UPDATED THIS SESSION**
+## Deferred
 
 Waiting behind other work; a line leaves when picked up.
 - ESCAPADE, Blue and Gold: its own round after the Mars build; their Mars arrival becomes the first encounter at the guided-encounters talk (Nov 14; L-533 (ESCAPADE), L-529 (guided encounters)).
@@ -94,9 +95,9 @@ Waiting behind other work; a line leaves when picked up.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261114T181334Z, ok, no retry on the swap (gallery swap log at d3e97b15, read Nov 14).
-- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at orrery c314fe1a, read Nov 14).
-- This page's date and the ledger's newest stamp: both Nov 14. Agree.
+- Last cache build: 20261114T181334Z, ok, no retry on the swap (gallery swap log at d3e97b15, read Nov 15).
+- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md, this session's run at orrery 488cad20, read Nov 15).
+- This page's date and the ledger's newest stamp: both Nov 15. Agree.
 
 ## Waiting on you
 
@@ -121,7 +122,7 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- This session: L-514 (the Mars room), rulings 5 and the accuracy; its brief `COORD_L514_orrery_moons_brief_20261114.md`; L-533 (ESCAPADE). The day before: L-001 (food insecurity), the skill's 1.3, the walk's brief `COORD_L001_sudan_walk_brief_20261114.md`.
+- This session: L-514 (the Mars room), "Session 1 built"; its brief `COORD_L514_orrery_moons_brief_20261114.md`. The session before: rulings 5 and the accuracy, and L-533 (ESCAPADE).
 - The caps: `DOCUMENT_CAPS.md`; L-522 (document caps); its brief
   `COORD_L522_step1_caps_brief_20261110.md` and the review beside it.
 - The tree: L-515 (one nested tree), its briefs `COORD_L515_*`.

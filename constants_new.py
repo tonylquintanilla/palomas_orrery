@@ -5867,6 +5867,51 @@ DE430_MOON_POSITION_PLACE_KM = 0.001
 # Declared+: the three rows above are, so the orrery's hover reads all
 # Declared+: four the same way (L-401, build 1).
 
+# Mars's moons (L-514): not in DE430. Horizons serves Phobos and Deimos
+# around Mars from the satellite ephemeris MAR099 ("{source: mar099}",
+# read 2026-11-15) and prints "n.a." in every 2xr sigma column, so their
+# accuracy comes from JPL's paper on MAR099 itself, stored by the same
+# rule as the rows above.
+
+MAR099_PHOBOS_DEIMOS_POSITION_PLACE_KM = 10.0
+# Unit: km
+# Status: declared 2026-11-15 -- the reporting place of the source's
+# Status+: words, not a number the source prints
+# Figures: exact -- declared construction: the place every value of "a
+# Figures+: few kilometers" reports to by the Report test; 2 to 9.999 km
+# Figures+: all give tens
+# Read: Section 6, Conclusions, p. 13 of 14, and Section 5.3, p. 11,
+# Read+: 2026-11-15, Claude Opus 5.5, from Tony's saved copy of the paper
+# Read+: (papers/, local only), its text read out by a script, since the
+# Read+: publisher's page refused an automated read: "Revised Ephemerides
+# Read+: of the Martian Satellites, Phobos and Deimos", Marina Brozovic,
+# Read+: Robert A. Jacobson and Ryan S. Park. The abstract, p. 1: "We
+# Read+: report on the new ephemerides (MAR099) for the satellites of Mars".
+# Source: Brozovic, M., Jacobson, R. A. & Park, R. S. (2025), "Revised
+# Source+: Ephemerides of the Martian Satellites, Phobos and Deimos", AJ
+# Source+: 170:42, https://doi.org/10.3847/1538-3881/addab4 (open access)
+# Source+: -- Section 6, Conclusions, p. 13: "the realistic 1 sigma value
+# Source+: for the uncertainties is on the order of a few kilometers for
+# Source+: the next couple of decades" (the paper prints the Greek sigma).
+# Ref: https://doi.org/10.3847/1538-3881/addab4
+# Note: Section 5.3, p. 11, finds the formal covariance "overly
+# Note+: optimistic": MAR099 differs from the NOE-4-2020 ephemerides by
+# Note+: about 3 km for Phobos and 2 km for Deimos, so the mapped
+# Note+: uncertainties "for Phobos should be scaled by about a factor of 4,
+# Note+: and for Deimos they should be doubled". Section 6's few kilometers
+# Note+: is that realistic figure, and it is the one stored.
+# Note: read and superseded, not cited: Jacobson (2010), AJ 139:668, p.
+# Note+: 677 ("no better than 1 km" for Phobos, "roughly 2 km" for Deimos),
+# Note+: read by the coordinating session of 2026-11-14 (L-514's brief),
+# Note+: which describes MAR085, two versions before the one Horizons
+# Note+: serves.
+# Declared: the group is Phobos and Deimos, each about Mars: one source,
+# Declared+: one row. The place is ours, by the rule in the section
+# Declared+: header; the words are JPL's, and their level is 1 sigma. The
+# Declared+: paper puts the Mars system barycentre's orbit about the Sun
+# Declared+: "below 300 m (1 sigma) for the next decade" (Section 5.4, p.
+# Declared+: 12), small beside this.
+
 # ============================================================
 # SPACECRAFT TRAJECTORY UNCERTAINTY (JPL Horizons data sheets; L-401)
 # What each spacecraft's own Horizons data sheet states about how well

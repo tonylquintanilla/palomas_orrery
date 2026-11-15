@@ -255,6 +255,15 @@ FIXTURES = [
     # its uncertainty column, and Bennu with no record (never asked).
     ('Bennu', 'Sun', _od(1.13, 28.0, na=True), 'none', ('floor',), 'floor'),
     ('Bennu', 'Sun', _od(1.13, 28.0), 'none', ('floor',), 'floor'),
+    # L-514 (2026-11-15): Phobos and Deimos read their MAR099 row seen from
+    # Mars, and from the Sun the larger of it and Mars's row, which is
+    # theirs; they had printed "JPL states no accuracy".
+    ('Phobos', 'Mars', _od(6.2716e-5, 2.138), 'published',
+     ('row', 'MAR099_PHOBOS_DEIMOS_POSITION_PLACE_KM'), 'relative'),
+    ('Deimos', 'Mars', _od(1.5684e-4, 1.351), 'published',
+     ('row', 'MAR099_PHOBOS_DEIMOS_POSITION_PLACE_KM'), 'relative'),
+    ('Phobos', 'Sun', _od(1.5237, 24.07), 'published',
+     ('row', 'MAR099_PHOBOS_DEIMOS_POSITION_PLACE_KM'), 'relative'),
 ]
 
 # What each fixture's sentences must say, and must not, beyond its state:
@@ -284,6 +293,12 @@ WORDS = {
     ('Makemake', 'Earth'): (["is not included here"], ['JPL states no accuracy']),
     ('Io', 'Sun'): (["JPL states no accuracy for Io's orbit around Jupiter"],
                     ['may be larger']),
+    ('Phobos', 'Mars'): (["published accuracy for", "Phobos's orbit around Mars"],
+                         ['JPL states no accuracy', 'may be larger']),
+    ('Deimos', 'Mars'): (["published accuracy for", "Deimos's orbit around Mars"],
+                         ['JPL states no accuracy', 'may be larger']),
+    ('Phobos', 'Sun'): (["published accuracy for", "Phobos's orbit around Mars"],
+                        ['JPL states no accuracy', "Mars's orbit", 'may be larger']),
 }
 
 SENTENCES = {

@@ -14,7 +14,10 @@ WHERE EACH ERROR COMES FROM (one place; the hover reads only this)
                       DE430 rows in constants_new.py (Folkner et al. 2014),
                       used as half a unit of each row's place
     the Moon          its own DE430 row, "known to submeter accuracy"
-    a small body      JPL's own uncertainty for that date, from the same
+    Phobos, Deimos    their MAR099 row (Brozovic et al. 2025), "a few
+                      kilometers"; seen from the Sun, the larger of it and
+                      Mars's row, as the Moon is with Earth's (L-514)
+    a small body     JPL's own uncertainty for that date, from the same
                       Horizons vector query that returns the position,
                       VEC_TABLE='2xr', times three (3-sigma); fetched by
                       fetch_small_body_state() below
@@ -77,6 +80,10 @@ Module updated: November 4, 2026, evening, with Anthropic's Claude Opus
 5.5 (L-512, slice a, part A2): fetch_small_body_state raises
 jpl_outcome.JplTargetError when JPL answers that the target is unknown or
 ambiguous, so its caller can tell that from a failure to reach JPL.)
+Module updated: November 15, 2026 with Anthropic's Claude Opus 5.5 (L-514:
+Phobos and Deimos read their MAR099 row, SATELLITE_ROW_NAMES, seen from
+Mars and, by the larger of two, from the Sun; they had printed "JPL states
+no accuracy" and, from the Sun, Mars's row as a floor.)
 """
 
 import math
@@ -92,6 +99,7 @@ from constants_new import (
     DE430_JUPITER_SATURN_POSITION_PLACE_KM,
     DE430_URANUS_NEPTUNE_PLUTO_POSITION_PLACE_KM,
     DE430_MOON_POSITION_PLACE_KM,
+    MAR099_PHOBOS_DEIMOS_POSITION_PLACE_KM,
     VOYAGER_1_POINTING_RA_2030_ARCSEC,
     VOYAGER_1_POINTING_DEC_2030_ARCSEC,
     VOYAGER_2_POINTING_RA_2030_ARCSEC,
@@ -120,11 +128,20 @@ PUBLISHED_ROW_NAMES = {
 }
 MOON_ROW_NAME = 'DE430_MOON_POSITION_PLACE_KM'
 
+# Moons whose orbit about their planet JPL states an accuracy for, and the
+# row (L-514): Phobos and Deimos, from the paper on MAR099, the ephemeris
+# Horizons serves them from.
+SATELLITE_ROW_NAMES = {
+    'Phobos': 'MAR099_PHOBOS_DEIMOS_POSITION_PLACE_KM',
+    'Deimos': 'MAR099_PHOBOS_DEIMOS_POSITION_PLACE_KM',
+}
+
 ROW_VALUES = {
     'DE430_TERRESTRIAL_POSITION_PLACE_KM': DE430_TERRESTRIAL_POSITION_PLACE_KM,
     'DE430_JUPITER_SATURN_POSITION_PLACE_KM': DE430_JUPITER_SATURN_POSITION_PLACE_KM,
     'DE430_URANUS_NEPTUNE_PLUTO_POSITION_PLACE_KM': DE430_URANUS_NEPTUNE_PLUTO_POSITION_PLACE_KM,
     'DE430_MOON_POSITION_PLACE_KM': DE430_MOON_POSITION_PLACE_KM,
+    'MAR099_PHOBOS_DEIMOS_POSITION_PLACE_KM': MAR099_PHOBOS_DEIMOS_POSITION_PLACE_KM,
     'VOYAGER_1_POINTING_RA_2030_ARCSEC': VOYAGER_1_POINTING_RA_2030_ARCSEC,
     'VOYAGER_1_POINTING_DEC_2030_ARCSEC': VOYAGER_1_POINTING_DEC_2030_ARCSEC,
     'VOYAGER_2_POINTING_RA_2030_ARCSEC': VOYAGER_2_POINTING_RA_2030_ARCSEC,
@@ -338,6 +355,19 @@ def _side(name, role, center_name, obj_data, objects, parent_planets):
                 'row': MOON_ROW_NAME, 'who': 'the Moon'}
     if kind == 'satellite':
         parent = parent_of(name, parent_planets)
+        if name in SATELLITE_ROW_NAMES and parent in PUBLISHED_ROW_NAMES:
+            # L-514: about the Sun a moon with its own row is its planet's
+            # orbit plus its own about the planet; both are published, and
+            # the larger governs, as for the Moon.
+            own_row = SATELLITE_ROW_NAMES[name]
+            planet_row = PUBLISHED_ROW_NAMES[parent]
+            if _row_err_km(planet_row) >= _row_err_km(own_row):
+                return {'kind': 'published', 'name': name,
+                        'err_km': _row_err_km(planet_row), 'row': planet_row,
+                        'who': parent}
+            return {'kind': 'published', 'name': name,
+                    'err_km': _row_err_km(own_row), 'row': own_row, 'who': name,
+                    'orbit_words': "%s's orbit around %s" % (name, parent)}
         if parent in PUBLISHED_ROW_NAMES:
             row = PUBLISHED_ROW_NAMES[parent]
             return {'kind': 'floor', 'name': name, 'err_km': _row_err_km(row),
@@ -409,6 +439,13 @@ def resolve_accuracy(obj_name, center_name, obj_data, objects, parent_planets):
                     'orbit_words': "the Moon's orbit around Earth"}
         moon = obj_name if obj_name in (parent_planets or {}).get(center_name, ()) else center_name
         host = center_name if moon == obj_name else obj_name
+        if moon in SATELLITE_ROW_NAMES:
+            # L-514: a moon whose orbit about its planet JPL states an
+            # accuracy for (Phobos and Deimos, MAR099), seen from its planet.
+            own_row = SATELLITE_ROW_NAMES[moon]
+            return {'state': 'published', 'err_km': _row_err_km(own_row),
+                    'governs_kind': 'published', 'row': own_row, 'who': moon,
+                    'orbit_words': "%s's orbit around %s" % (moon, host)}
         return {'state': 'none', 'err_km': None, 'reason': 'unstated',
                 'gap': _gap(moon, 'unstated', "%s's orbit around %s" % (moon, host))}
 
@@ -436,7 +473,7 @@ def resolve_accuracy(obj_name, center_name, obj_data, objects, parent_planets):
     gov = max(numeric, key=lambda s: s['err_km'])
     small = [s for s in numeric if s['kind'] == 'computed']
     out = {'err_km': gov['err_km'], 'who': gov['who'], 'row': gov.get('row'),
-           'arcsec': gov.get('arcsec'),
+           'arcsec': gov.get('arcsec'), 'orbit_words': gov.get('orbit_words'),
            'governs_kind': gov['kind'] if gov['kind'] in ('computed', 'sheet') else 'published',
            'speed_err_km_s': small[0].get('speed_err_km_s') if small else None,
            'published_sides': [s for s in numeric if s['kind'] != 'computed']}

@@ -1,8 +1,8 @@
 {
   "schema": 4,
-  "source_sha256": "c62f261841d2a682629b6fccb5ab5894707e81ea0027976d113e47a374b8859a",
-  "period_inputs_sha256": "21292bce06c23b7ec31d14de6e02abd98804f830e8178ff88acb5088d8b00824",
-  "confirmations_sha256": "c1a4a49a7748da73d6ca34aebc0c3363832fa2c14d8ee087e9a23d0befee185e",
+  "source_sha256": "253b2ce2811116d05634eb79b790fe31c65bd78e0ce0de31c18eb9ff2abcf74f",
+  "period_inputs_sha256": "45a04070ffba746c6d739fa3b8aefa379e611bc8e7cdb422a77793fb3e6c8cf7",
+  "confirmations_sha256": "97a6b9a64d800f59d31208a4b88f3cec906a621ec3e480599998cfd64de59e2c",
   "paths_sha256": "c8fd046d767f68aa97c46b5765e71fae6cdab7127fd6f04ebbc181b37be771df",
   "cadence_days": 30,
   "objects": {
@@ -10049,6 +10049,136 @@
           "Vesta",
           "Churyumov"
         ]
+      }
+    },
+    "phobos": {
+      "name": "Phobos",
+      "horizons_id": "401",
+      "horizons_name": "Phobos",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "description": "NASA: \"Phobos is on a collision course with Mars.\"",
+      "info_url": "https://science.nasa.gov/mars/moons/phobos/",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@499",
+        "center_label": "Mars",
+        "target": "401",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-11-15",
+        "words": null,
+        "days_only": true,
+        "years": null,
+        "days": {
+          "value": 0.31914,
+          "figures": 5,
+          "text": "0.31914"
+        },
+        "record": {
+          "days": 0.3191372544024719,
+          "error_days": 1.960507055198679e-06,
+          "error_from": "year_change",
+          "sbdb_status": "not a small body; SBDB not asked",
+          "epoch": "2026-11-15 05:43",
+          "elements": {
+            "a": 6.268919712530537e-05,
+            "e": 0.01467274225927157,
+            "i": 25.64565826274094,
+            "omega": 295.5388891220779,
+            "Omega": 83.22152835354497,
+            "TP": 2461359.884332217,
+            "MA": 195.1505582492982,
+            "TA": 194.7187743857834,
+            "q": 6.17693746934451e-05,
+            "epoch": "2026-11-15 05:43 osc."
+          },
+          "paired": false,
+          "not_paired": "the cache holds no Sun-centred elements for this body"
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-11-15",
+          "horizons_id": "401",
+          "id_type": "majorbody",
+          "horizons_name": "Phobos"
+        },
+        "period": {
+          "confirmed": "2026-11-15",
+          "center": "@499",
+          "epoch": "2026-11-15 05:43",
+          "days": 0.3191372544024719,
+          "jpl_days": 0.3191372544034558,
+          "error_days": 1.960507055198679e-06
+        },
+        "hold": null
+      }
+    },
+    "deimos": {
+      "name": "Deimos",
+      "horizons_id": "402",
+      "horizons_name": "Deimos",
+      "id_type": "majorbody",
+      "object_type": "satellite",
+      "description": "NASA: \"Deimos is the smaller of the two Martian moons and is less irregular in shape.\"",
+      "info_url": "https://science.nasa.gov/mars/moons/deimos/",
+      "period": {
+        "kind": "fetched",
+        "typed": false,
+        "center": "@499",
+        "center_label": "Mars",
+        "target": "402",
+        "target_label": null,
+        "open_orbit": false,
+        "fetched": "2026-11-15",
+        "words": null,
+        "days_only": true,
+        "years": null,
+        "days": {
+          "value": 1.2625,
+          "figures": 5,
+          "text": "1.2625"
+        },
+        "record": {
+          "days": 1.262541168519147,
+          "error_days": 8.634733274703876e-05,
+          "error_from": "year_change",
+          "sbdb_status": "not a small body; SBDB not asked",
+          "epoch": "2026-11-15 05:43",
+          "elements": {
+            "a": 0.0001568091503519776,
+            "e": 0.0003711427939538367,
+            "i": 24.11086400207713,
+            "omega": 32.49354140078558,
+            "Omega": 81.60631886180283,
+            "TP": 2461359.823378054,
+            "MA": 335.710812227098,
+            "TA": 335.6933105054166,
+            "q": 0.0001567509517657985,
+            "epoch": "2026-11-15 05:43 osc."
+          },
+          "paired": false,
+          "not_paired": "the cache holds no Sun-centred elements for this body"
+        }
+      },
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-11-15",
+          "horizons_id": "402",
+          "id_type": "majorbody",
+          "horizons_name": "Deimos"
+        },
+        "period": {
+          "confirmed": "2026-11-15",
+          "center": "@499",
+          "epoch": "2026-11-15 05:43",
+          "days": 1.262541168519147,
+          "jpl_days": 1.262541168519172,
+          "error_days": 8.634733274703876e-05
+        },
+        "hold": null
       }
     }
   },

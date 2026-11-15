@@ -1172,7 +1172,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-510 | The object list's typed fields stop deciding: a small body drawn by today's eccentricity, a plan asked from before any launch (orrery, the object list and the path plan) | OPEN | -- | 2026-11-05 |
 | ! | L-511 | The orrery's export carries the words the website prints (orrery + gallery, the words) | OPEN | -- | 2026-11-03 |
 | ! | L-512 | The orrery's fallbacks when JPL cannot answer (orrery, the plot's data path) | OPEN | -- | 2026-11-04 |
-| ! | L-514 | The Mars room: Mars, Phobos and Deimos (gallery + orrery, a planet room; road stage 15) | OPEN | -- | 2026-11-14 |
+| ! | L-514 | The Mars room: Mars, Phobos and Deimos (gallery + orrery, a planet room; road stage 15) | OPEN | -- | 2026-11-15 |
 | ! | L-515 | One nested tree in place of isolated rooms (gallery, the room system; design) | OPEN | -- | 2026-11-10 |
 | ! | L-516 | Renew palomasorrery.com at Porkbun before 2027-02-13 (legacy; Tony's account) | OPEN | -- | 2026-11-07 |
 | ! | L-520 | Old pictures carry old words: the saved pictures' titles and descriptions have no source (gallery, the saved pictures; the braid) | OPEN | -- | 2026-11-08 |
@@ -3675,7 +3675,7 @@ skill's split (L-522).
   the Assembler.
 
 #### [L-514] The Mars room: Mars, Phobos and Deimos (gallery + orrery, a planet room; road stage 15)
-<!-- L:514 status:OPEN upd:2026-11-14 section:A flag: rice: -->
+<!-- L:514 status:OPEN upd:2026-11-15 section:A flag: rice: -->
 - **Opened 2026-11-06, night**, by the coordinating session (Claude Opus
   5.5) through the python_work door, built on orrery b32205f4 and
   gallery 3f2ce7fc. Tony's prompt: "Road stage 15, the planet rooms,
@@ -3865,10 +3865,67 @@ skill's split (L-522).
     "no better than 1 km", Deimos "roughly 2 km"), which describes
     MAR085. Both PDFs are in Tony's local papers/ (not pushed).
 - **Session 1's brief**: `documentation/COORD_L514_orrery_moons_brief_20261114.md`.
-**Gap:** session 1, the orrery (the brief above), on Tony's go-ahead in
-that session; then session 2, the website, its brief written when it is
-next. Before adding to interactive-exhibit, session 2 moves old lines
-out, the skill being at its cap (L-522).
+- **Session 1 built, 2026-11-14 night to 2026-11-15** (Claude Code, Claude
+  Opus 5.5, through the python_work door), on orrery f06271ba and gallery
+  d3e97b15, in three parts with Tony's go-ahead after each ("Yes, go
+  ahead"). Part 1 was committed by Tony as 488cad20 ("mars moons").
+  - Part 1, `celestial_objects.py`: Phobos `'key': 'phobos'`, Deimos
+    `'key': 'deimos'`, each with `horizons_name` read live from JPL's
+    Lookup by horizons_check's three steps (major-body index: "Phobos"
+    and "Deimos", natural satellites, SPKIDs 401 and 402; the small-body
+    index found only 401 Ottilia and 402 Chloe). `mission_info` is
+    ruling 5's NASA sentence after "Horizons: 401." / "Horizons: 402.";
+    Phobos's link is NASA's Phobos page. The typed periods and
+    "Retrogade" came out; a comment above the entries cites both pages.
+    Both NASA pages re-read 2026-11-14: the sentences word for word,
+    "last updated Nov 03, 2024", Deimos's in its visible Quick Facts, and
+    no "retrograde" on either. [verified @488cad20]
+  - The periods, `period_fetch.py` around Mars ('@499'), as printed:
+    Phobos 0.31914 d (change in a year 0.000002 d), Deimos 1.2625 d (0.00009
+    d); PASS, read back as fetched. Only the two moons' cache entries
+    changed.
+  - Part 2, `constants_new.py`: ONE row after the DE430 rows,
+    `MAR099_PHOBOS_DEIMOS_POSITION_PLACE_KM = 10.0` km, declared, "a few
+    kilometers" stored as the place it reports to (2 to 9.999 km all
+    give tens), with Read, Source (the DOI, Section 6, p. 13), Ref, a Note
+    on Section 5.3's scaling (p. 11) and a Note naming Jacobson (2010) as
+    read by the coordinator and superseded. The paper's text was read by
+    the session from Tony's saved PDF (the publisher's page refused an
+    automated read). Horizons re-read 2026-11-15: both moons
+    "{source: mar099}" around Mars, "n.a." in every 2xr sigma column.
+  - The maintenance run, read for its own line: "36 of 36 gating
+    checkers passed"; Tier-1 0 on the gate. What the two keys changed:
+    the objects export 98 to 100 objects (phobos, deimos, each with NASA's
+    sentence, the link and the fetched period around Mars); the Horizons
+    confirmations 98 to 100, both identities and both periods confirmed
+    2026-11-15 (JPL's PR equal to ours to the digits shown); the constants
+    export 233 to 234 rows, the new row among them. GitHub's nightly run
+    (e5b5eb58, 2026-11-15) had already exported the two keys from 488cad20;
+    this run's two files match its bytes.
+  - Part 4, the orrery's own hover (Tony, 2026-11-15, on the close's
+    report deferring it: "why deferred? It's directly relevant to this
+    build by various rules."; then "Yes."). The session had recorded it
+    for a later orrery session because the brief's list did not name it;
+    but the build had made the hover's sentence false (JPL's figure was
+    now in the store) and the build reaches the hover, so it was done
+    here. `position_accuracy.py`: SATELLITE_ROW_NAMES gives Phobos and
+    Deimos the MAR099 row; seen from Mars (or any centre of their local
+    pair) the row governs, "JPL's published accuracy for Phobos's orbit
+    around Mars"; seen from the Sun, the larger of it and Mars's row (the
+    Moon's pattern with Earth), so theirs. Before, from Mars: "JPL states
+    no accuracy for this position", 9382 km; after: 9380 km. Before, from
+    the Sun: Mars's row with "JPL states no accuracy for Phobos's orbit
+    around Mars."; after: their own row, no such sentence.
+    `test_position_digits.py` gains Phobos and Deimos from Mars and Phobos
+    from the Sun, with their words: PASS, 28 hovers; with the new map
+    emptied in memory the same run fails by name (WRONG STATE, FALSE OR
+    MISSING WORDS) for each.
+**Gap:** session 2, the website, its brief written when it is next: the
+two moons served and cached around Mars, their entries pointing at
+`MAR099_PHOBOS_DEIMOS_POSITION_PLACE_KM`, Mars's fold, Go To on a moon,
+and the check that a tap near Mars picks the moon meant. Before adding to
+interactive-exhibit, session 2 moves old lines out, the skill being at
+its cap (L-522).
 - **Ref:** L-513 (the Moon's standards, the pattern); L-334 (what a room
   opens on, 2026-09-17); L-291 (the Earth room); L-484 (the two agree);
   L-150 (Charon's period centre, for the Pluto room).

@@ -1,7 +1,7 @@
 <!-- Doc-Kind: generated | The human-browsable module index, rebuilt by module_atlas.py alongside the atlas. Do not hand-edit. -->
 # Paloma's Orrery - Module Index
 
-**Generated:** November 14, 2026 by `module_atlas.py`  
+**Generated:** November 15, 2026 by `module_atlas.py`  
 **Repository:** Paloma's Orrery - Solar System Visualization Suite  
 **Philosophy:** Data Preservation is Climate Action
 
@@ -12,7 +12,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
 **Total Python Files:** 176  
-**Total Lines of Code (non-blank):** 141,800  
+**Total Lines of Code (non-blank):** 141,917  
 **Total Public Functions/Classes:** 1,836
 
 ## Classification Coverage
@@ -128,7 +128,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `outer_oort_sampler.py` | The outer Oort cloud as a thin scatter of loose dots with clumps among them, placed once from a seed, between the rows' edges. (202 lines) |
 | `path_or_orbit.py` | - the one home of the rule that decides whether a small body is drawn as a path or as an orbit: by the eccentricity of its orbit solution in JPL's Small-Body Database, refreshed on the 30-day cycle (L-510, part 1). (327 lines) |
 | `pole_frames.py` | The matrix that turns coordinates measured about a pole into the drawing's frame, the ecliptic of J2000. (72 lines) |
-| `position_accuracy.py` | How well JPL knows a plotted position, and the hover's distances and speeds printed to the digits that knowledge earns. (760 lines) |
+| `position_accuracy.py` | How well JPL knows a plotted position, and the hover's distances and speeds printed to the digits that knowledge earns. (796 lines) |
 | `simbad_manager.py` | Enhanced SIMBAD Query Manager with configurable rate limiting and retry logic. This module replaces simbad_test.py and provides robust SIMBAD querying capabilities. (1,030 lines) |
 | `sun_corona_sampler.py` | The Sun's corona as dots that thin out with distance, from the base of the corona to the Alfven surface. (245 lines) |
 | `van_allen_belt_sampler.py` | Earth's two radiation belts as dots scattered at random along dipole field lines, thickest at each belt's measured peak. (201 lines) |
@@ -140,9 +140,9 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 
 | Module | Description |
 |--------|-------------|
-| `celestial_objects.py` | Celestial object definitions for Paloma's Orrery. (1,589 lines) |
+| `celestial_objects.py` | Celestial object definitions for Paloma's Orrery. (1,612 lines) |
 | `close_approach_data.py` | JPL CAD API client for small-body close approach data. (513 lines) |
-| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (5,948 lines) |
+| `constants_new.py` | Verified numeric constants for Paloma's Orrery. (5,991 lines) |
 | `constants_tokens.py` | - what each "# Unit:" token in constants_new.py means. (393 lines) |
 | `earth_pole_of_date.py` | Earth's rotation pole and tilt for the date of a plot. (277 lines) |
 | `exoplanet_coordinates.py` | Stellar Positioning and Coordinate Transformations (412 lines) |
@@ -260,7 +260,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `test_path_or_orbit.py` | - the rule that draws a small body as a path or an orbit by its orbit solution's e in JPL's Small-Body Database (path_or_orbit.py, L-510), on made-up records, with no network; and the guard that the retired 'open_path' does not come back to the object list. Each check is fi... (405 lines) |
 | `test_path_plan.py` | - the path plan, offline, against a made-up solar system answered in JPL's own vector format (L-443, slice 2). (931 lines) |
 | `test_period_fetch.py` | - the period fetch (L-444) on recorded answers, with no network: it asks only for what is missing, with plotting's own call, writes the record plotting writes, and names a failure; and every planted fault is caught by name. (1,051 lines) |
-| `test_position_digits.py` | The orrery's body hover prints each distance and speed to the digits JPL's errors earn, and proof that this check can fail. (937 lines) |
+| `test_position_digits.py` | The orrery's body hover prints each distance and speed to the digits JPL's errors earn, and proof that this check can fail. (952 lines) |
 | `test_provenance_1d.py` | Regression tests for the Phase 1d/1e changes. (485 lines) |
 | `test_reset_completeness.py` | - guard the Reset button against partial-reset drift. (123 lines) |
 | `test_row_run.py` | Pins for L-414: a row's citation context is its own comment run, declared rows are their own kind, and the gate-path figure is computed and recorded by name. (370 lines) |

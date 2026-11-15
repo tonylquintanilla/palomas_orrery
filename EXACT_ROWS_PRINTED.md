@@ -5,7 +5,7 @@ Rebuilt by `exact_rows_report.py` on every orrery maintenance run. An exact row 
 
 ## Summary
 
-- 46 exact rows in `constants_new.py`.
+- 47 exact rows in `constants_new.py`.
 - 11 printed by at least one display: `SUN_RADIUS_KM`, `EARTH_LEO_UPPER_ALTITUDE_KM`, `EARTH_VAN_ALLEN_OUTER_RADII`, `EARTH_SOLAR_WIND_PRESSURE_NPA`, `EARTH_SOLAR_WIND_BZ_NT`, `EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG`, `EARTH_BOW_SHOCK_CUT_ANGLE_DEG`, `INNER_CORONA_RADII`, `HELMET_CUSP_RADII`, `INNER_LIMIT_OORT_CLOUD_AU`, `OUTER_OORT_CLOUD_AU`.
 - 40 printing lines: 25 in the orrery, 15 in the gallery.
 - Gallery pointers to exact rows with no PRINTS entry (NOT FOLLOWED): 3: `MAIN_BELT_SAMPLE_ORBITS` at `/rooms/solar-system/drawer/rows/78/feature/sample_orbits`, `MAIN_BELT_JPL_COUNT` at `/rooms/solar-system/drawer/rows/78/feature/jpl_count`, `MAIN_BELT_SAMPLE_H_MAX` at `/rooms/solar-system/drawer/rows/78/feature/h_max`.
@@ -177,6 +177,7 @@ No display prints these exact rows. Under Rule 7 they carry no print count. The 
 - `DE430_MOON_POSITION_PLACE_KM`: named on 5 other orrery line(s).
   - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 235 (config `/objects/9/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
   - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 236 (config `/objects/9/position_accuracy`): `v = node.value;`
+- `MAR099_PHOBOS_DEIMOS_POSITION_PLACE_KM`: named on 7 other orrery line(s).
 - `GM_SUN_SI`: named on 2 other orrery line(s).
 - `BOLTZMANN_CONSTANT_J_PER_K`: named on 2 other orrery line(s).
 - `M3_PER_KM3`: named on 1 other orrery line(s).

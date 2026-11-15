@@ -2092,6 +2092,54 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-144&group=mb&format=text",
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-144&group=sb&format=text"
       ]
+    },
+    "phobos": {
+      "confirmed": "2026-11-15",
+      "horizons_id": "401",
+      "id_type": "majorbody",
+      "horizons_name": "Phobos",
+      "object_type": "satellite",
+      "list_sha256": "253b2ce2811116d05634eb79b790fe31c65bd78e0ce0de31c18eb9ff2abcf74f",
+      "jpl_name": "Phobos",
+      "jpl_type": "natural satellite",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=401&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=401&group=sb&format=text"
+      ],
+      "period": {
+        "confirmed": "2026-11-15",
+        "center": "@499",
+        "target": "401",
+        "epoch": "2026-11-15 05:43",
+        "days": 0.3191372544024719,
+        "error_days": 1.960507055198679e-06,
+        "jpl_days": 0.3191372544034558,
+        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='401'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@499'&TLIST='2461359.738194445'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
+      }
+    },
+    "deimos": {
+      "confirmed": "2026-11-15",
+      "horizons_id": "402",
+      "id_type": "majorbody",
+      "horizons_name": "Deimos",
+      "object_type": "satellite",
+      "list_sha256": "253b2ce2811116d05634eb79b790fe31c65bd78e0ce0de31c18eb9ff2abcf74f",
+      "jpl_name": "Deimos",
+      "jpl_type": "natural satellite",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=402&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=402&group=sb&format=text"
+      ],
+      "period": {
+        "confirmed": "2026-11-15",
+        "center": "@499",
+        "target": "402",
+        "epoch": "2026-11-15 05:43",
+        "days": 1.262541168519147,
+        "error_days": 8.634733274703876e-05,
+        "jpl_days": 1.262541168519172,
+        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='402'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@499'&TLIST='2461359.738194445'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
+      }
     }
   }
 }
