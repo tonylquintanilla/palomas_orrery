@@ -132,7 +132,7 @@ Not urgent, in your order:
 
 **Tony**: Run record:
 
-**Session: OPEN: 11-14-26 2204: Opus: Coordinator: Mars moons coordination plan**
+**Session: OPEN: 11-14-26 2204: Opus: Coordinator: Mars moons coordination plan L514**
 
 Yes, mar099's own paper settles it, and the answer is tens of kilometres for both moons, Phobos included.
 
@@ -317,11 +317,125 @@ Read the orrery's documentation/COORD_L514_website_moons_brief_20261115.md and f
 - new documentation/COORD_L514_website_moons_brief_20261115.md (126 lines).
 
 **Tony-actions:**
-- (do) Commit and push the orrery. -- done
+- (do) Commit and push the orrery. -- b30d6d056c21a6e853a8892a4e1f3d16a2eab266
 - (do) Open the Code session in the website folder and paste the prompt. -- started
 - (do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).
 
 **Where this leaves us:**
-- Mars's moons are in the orrery. The website's half is briefed and next.
+- Mars's moons are in the orrery. -- need a mode 5 check
+- The website's half is briefed and next.
 - Your phone look after session 2 closes L-514 (the Mars room).
 - ESCAPADE is the round after. -- let's rethink this. an encounter is a new type of build. 
+
+=============================
+
+**Session: OPEN: 11-15-26 1214: Opus: Code: L514 Website Mars Moons**
+
+Checking both folders and the skill versions; now looking at how a new object entry gets added.
+
+Both folders match GitHub, every skill is at the version the manifest expects, and I haven't changed anything.
+
+**The skills, from the repository's copies**
+- interactive-exhibit (how a room is built and tested): 1.42, matches.
+- gallery-cache-builder (the nightly data builder): 1.19, matches.
+- gallery-assembler (the page's own orbit math): 1.4, matches.
+- provenance-discipline (citing every number): 2.36, matches.
+- safe-file-editing: 1.14, matches.
+- ledger-and-session-records: 1.23, matches.
+
+I read the sections of the first two that cover Part 1. I'll read the others' relevant sections when their part comes up.
+
+**The base**
+- The orrery is at b30d6d05, the same on your computer and on GitHub. The only commit since the brief was written is your push of the brief itself.
+- The website is at d3e97b15, the same in both places. Nothing is waiting there.
+- One file in the orrery has unsaved edits: your run-record copy (`WHERE_WE_ARE_11-15-26_0837_run_record.md`), with 3 lines added and 2 removed. That's your own record, so I won't touch it.
+
+**Part 1, in one sentence:** I'll add Phobos and Deimos to the website's list of bodies as moons of Mars. Then I'll let the two copying tools fill in their names, NASA's sentences, periods and JPL's accuracy, and set Mars to open on its symbol alone with both moons off.
+
+**How the two entries get added.** No tool adds a new body to the website's list. The data-builder skill says a new entry is typed into the file directly, in the same shape as Io's. After that, the tools take over:
+- The orrery copier fills in the words and periods.
+- The constants copier fills in the accuracy number and its citation.
+- The website's text tool sets what Mars opens on.
+
+I'll type only the two entries and the two empty accuracy pointers. Every other line will be written by a tool.
+
+**Files changed:** none.
+**Your run order:** nothing to run or commit yet.
+**Your actions:** say whether to start Part 1. -- yes
+
+=======================================
+
+**Coordinator:**
+
+I'll take your two notes in turn: the orrery check first, since you can run it while the website session works.
+
+**Checking the moons in the orrery (Mode 5).** These steps use the orrery's own window:
+1. Open `palomas_orrery.py` in VS Code and press Run.
+2. In "Select Center Object for Your Plot", choose Mars.
+3. Tick Mars, "- Phobos" and "- Deimos", then press "Plot Entered Date".
+4. Look at Phobos's text, as session 1 reported it:
+   - NASA's sentence, "Phobos is on a collision course with Mars."
+   - A distance in tens of kilometres, like "9380 kilometers".
+   - The line "These distances are rounded to JPL's published accuracy for Phobos's orbit around Mars."
+5. Deimos should read the same way, with its own sentence and no "Retrogade" anywhere.
+6. Both orbits should circle Mars, and Deimos's should be about two and a half times wider than Phobos's.
+7. Then centre on the Sun with the same ticks. Phobos's text should no longer say "JPL states no accuracy".
+
+**ESCAPADE.** I agree that an encounter is a new kind of build. But I think ESCAPADE splits into two parts, and only one of them is new:
+- **Its path is not new.** Blue and Gold flying from L2, past Earth, toward Mars would be built the way Psyche's and Europa Clipper's paths were. Their Earth flybys are events in the path's plan.
+- **The encounter is new.** Their arrival at Mars in September 2027, told as a guided story, is the new kind of build. That's L-529 (guided encounters), which has no design yet.
+
+So there are two ways to go:
+- **Path first.** ESCAPADE goes in soon as an ordinary path, while it's timely. The encounter waits for L-529's design talk.
+- **Design first.** ESCAPADE waits until the encounter is designed, so it's built once, as an encounter from the start. That's slower, but nothing gets built twice.
+
+**Recording your notes.** I'll put both in the ledger after the website session closes, since that session is editing the same ledger right now.
+
+Is your rethink that ESCAPADE should wait for the encounter design, or that its path should go in first?
+
+========================
+
+Recorded next: your rulings since 16:07, while the orrery is still uncommitted so they ride in the same push.
+
+I misplaced one line on the road: I put the moons still waiting for keys under Earth's fold. Moving them back where they were.
+
+L-297 (the Lagrange points) now follows ESCAPADE on the road, and all of this afternoon's rulings are in the ledger. You haven't committed the orrery yet, so they'll ride in the same push as the Mars records. Both files read back from your disk matching my copies byte for byte.
+
+**The new order on the road:**
+1. Your two looks at Mars, which close L-514 (the Mars room).
+2. ESCAPADE's path, Blue and Gold (L-533 (ESCAPADE)).
+3. The Lagrange points, all ten (L-297), which gives ESCAPADE's L2 loop its marker.
+4. One design round for missions by destination (L-534, new) and encounters at every flyby and destination (L-529 (guided encounters)).
+5. Uranus and Neptune.
+
+**What the ledger now says:**
+- **L-533 (ESCAPADE):** your rulings in your words. L2 is shown as a loiter and the Earth flybys as the gravity assists. It also records JPL's facts for both craft:
+  - Blue is -9 and Gold is -10.
+  - Their data runs from launch to just past the Mars arrival.
+  - JPL's name search finds only the rocket stage.
+  - -9 has to be kept apart from the Pluto system's 9.
+- **L-534 (missions by destination), new:** your rule that every mission gets a row under each body it goes to, and the four questions for its design round.
+- **L-529 (guided encounters):** widened to every flyby and destination, read from the path plans' events.
+- **L-297 (the Lagrange points):** moved up and widened to all ten points. It records the typed words and the "Lagrange-1" copying slip, both to fix in that round.
+- **Where We Are:** the road shows the new order, still within its 130-line cap.
+
+**Your run order is unchanged:**
+1. Commit and push the website. -- f9f81266e328d906a6ebba65375b0604c77f053c
+2. Commit and push the orrery.
+3. Run the website's maintenance run with --live.
+4. Your two looks.
+
+Checking the moons in the orrery (Mode 5). These steps use the orrery’s own window:
+
+Open palomas_orrery.py in VS Code and press Run.
+In “Select Center Object for Your Plot”, choose Mars.
+Tick Mars, “- Phobos” and “- Deimos”, then press “Plot Entered Date”.
+Look at Phobos’s text, as session 1 reported it:
+NASA’s sentence, “Phobos is on a collision course with Mars.”
+A distance in tens of kilometres, like “9380 kilometers”.
+The line “These distances are rounded to JPL’s published accuracy for Phobos’s orbit around Mars.”
+Deimos should read the same way, with its own sentence and no “Retrogade” anywhere.
+Both orbits should circle Mars, and Deimos’s should be about two and a half times wider than Phobos’s.
+Then centre on the Sun with the same ticks. Phobos’s text should no longer say “JPL states no accuracy”.
+
+I'll write ESCAPADE's brief when it's next, after your looks close Mars.

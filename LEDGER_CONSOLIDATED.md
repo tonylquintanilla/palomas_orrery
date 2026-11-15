@@ -1005,7 +1005,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*267 live items; 251 need attention (`!`); 165 RICE-scored; 259 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*268 live items; 252 need attention (`!`); 165 RICE-scored; 259 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1077,7 +1077,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-321 | The orrery's hover text joins the provenance braid, Earth first | OPEN | 1.8 | 2026-09-12 |
 | ! | L-337 | A centre marker for bodies without shells in the exhibit rooms | OPEN | 1.8 | 2026-09-19 |
 |  | L-194 | Text-only assertions -- claims the scanner cannot see | DEFERRED | 1.4 | 2026-08-15 |
-| ! | L-297 | Earth-Moon Lagrange points: serving path sized, deferred from the Earth exhibit | OPEN | 1.4 | 2026-09-07 |
+| ! | L-297 | Earth-Moon Lagrange points: serving path sized, deferred from the Earth exhibit | OPEN | 1.4 | 2026-11-15 |
 | ! | L-314 | Live solar wind conditions for the magnetosphere shells (SWPC through the nightly builder) | OPEN | 1.3 | 2026-10-21 |
 | ! | L-253 | The 660 discontinuity's depth variation -- held unsourced | OPEN | 1.2 | 2026-08-26 |
 |  | L-308 | A shell-legend surface for static cards (deferred, with its trigger) | DEFERRED | 1.2 | 2026-10-04 |
@@ -1176,7 +1176,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-515 | One nested tree in place of isolated rooms (gallery, the room system; design) | OPEN | -- | 2026-11-10 |
 | ! | L-516 | Renew palomasorrery.com at Porkbun before 2027-02-13 (legacy; Tony's account) | OPEN | -- | 2026-11-07 |
 | ! | L-520 | Old pictures carry old words: the saved pictures' titles and descriptions have no source (gallery, the saved pictures; the braid) | OPEN | -- | 2026-11-08 |
-| ! | L-521 | Three red checks in the drawer walk (gallery, the headless walk; recorded) | OPEN | -- | 2026-11-09 |
+| ! | L-521 | Three red checks in the drawer walk (gallery, the headless walk; recorded) | OPEN | -- | 2026-11-15 |
 | ! | L-522 | Document caps: how the working documents are kept from growing, and the catch-up (protocol, skills, ledger; upkeep) | OPEN | -- | 2026-11-11 |
 | ! | L-525 | One body's failed accuracy test holds that body, not the whole site (gallery, the nightly builder's served window; built, its sentence settled Nov 11) | OPEN | -- | 2026-11-11 |
 | ! | L-526 | A body whose test fails for a real reason is drawn from the older orbit while held (gallery, the nightly builder's hold; recorded, not built) | OPEN | -- | 2026-11-11 |
@@ -1185,7 +1185,8 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-530 | The other Earth System layers on Google Earth web (Earth System; recorded, not built) | OPEN | -- | 2026-11-13 |
 | ! | L-531 | The Earth Science room in the interactive site (website; recorded, not built) | OPEN | -- | 2026-11-13 |
 | ! | L-532 | A Code session away from the computer: where its work lives (method; recorded) | OPEN | -- | 2026-11-14 |
-| ! | L-533 | ESCAPADE, Blue and Gold, on their way to Mars (orrery + gallery; recorded, after the Mars build) | OPEN | -- | 2026-11-14 |
+| ! | L-533 | ESCAPADE, Blue and Gold, on their way to Mars (orrery + gallery; recorded, after the Mars build) | OPEN | -- | 2026-11-15 |
+| ! | L-534 | Missions by destination: a mission's row under each body it goes to (gallery + orrery; design round with L-529) | OPEN | -- | 2026-11-15 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1727,7 +1728,7 @@ go-ahead.
 final).
 
 #### [L-533] ESCAPADE, Blue and Gold, on their way to Mars (orrery + gallery; recorded, after the Mars build)
-<!-- L:533 status:OPEN upd:2026-11-14 section:A flag: rice: -->
+<!-- L:533 status:OPEN upd:2026-11-15 section:A flag: rice: -->
 - **Tony's find, 2026-11-14, 22:43**, in the coordinating session
   (Claude Opus 5.5, through the python_work door, on orrery c314fe1a and
   gallery d3e97b15): NASA's article of 2026-11-09,
@@ -1750,10 +1751,97 @@ final).
   names "ESCAPADE-Blue" and "ESCAPADE-Gold" in Horizons' spacecraft
   data); their IDs are read from JPL's lookup when the round opens,
   never typed.
-**Gap:** a brief when the round is next (after L-514's two sessions).
+- **Tony's rethink, 2026-11-15**, in his run record
+  `documentation/WHERE_WE_ARE_11-15-26_0837_run_record.md`, on
+  "ESCAPADE is the round after.": "-- let's rethink this. an encounter is
+  a new type of build." The coordinating session (Claude Opus 5.5)
+  answered in chat at 12:20, Tony not yet ruling: ESCAPADE is two
+  pieces. Its PATH (L2, the two Earth flybys, the cruise) is not a new
+  kind of build: it is drawn by the plan, as Psyche's and Europa
+  Clipper's are (L-476), its Earth flybys events in the plan. Its
+  ARRIVAL at Mars in September 2027, told as a guided story, is the new
+  kind (L-529 (guided encounters), no design yet). The two ways
+  offered: the path first, while it is timely, the encounter at L-529's
+  talk; or the encounter designed first, ESCAPADE built once.
+- **Tony's rulings, 2026-11-15, afternoon, in chat** with the coordinating
+  session (Claude Opus 5.5, on orrery b30d6d05 and gallery d3e97b15):
+  - 16:07: "Yes let's draw it now and add it as a row under mars too in
+    addition to the spacecraft drawer." The path is drawn now, as the
+    other spacecraft paths are; the row under Mars rides the destination
+    rule (L-534 (missions by destination)), built for every mission at
+    once, not for ESCAPADE alone.
+  - 16:20: the order, "Yes": ESCAPADE's path now; then L-297 (the
+    Lagrange points, moved up at 16:30); then one design round for
+    destinations and encounters together (L-534, L-529).
+  - 16:22, on L2: "Yes" to the coordinator's correction of "add Lagrange
+    points as flybys for the purpose of illustrating gravity assist like
+    escapade around L2": a Lagrange point has no mass and gives no
+    gravity assist. ESCAPADE's time at L2 is shown as its own kind of
+    event, a loiter at a Lagrange point, in NASA's words (the article's
+    "loiter" or "Earth-proximity" orbit, its "kidney-bean-shaped
+    course"); the gravity assists stay at the two powered Earth flybys.
+- **Read 2026-11-15 from JPL Horizons** (the built-in browser, Tony's
+  computer): ESCAPADE-Blue is -9 (2025-260A), ESCAPADE-Gold -10
+  (2025-260B); the third match is "EscaPADE STAGE" -9901495 (2025-260C),
+  the rocket stage, not a craft to draw. Both records "Revised: Nov 10,
+  2026", headed "(E-S L2, Mars)". Blue: tracking through 2026-11-10,
+  JPL's prediction after, data 2025-Nov-13 21:31 to 2027-Sep-12 00:28;
+  Gold: tracking through 2026-11-09, 2025-Nov-13 21:32 to 2027-Sep-10
+  00:28. So each path runs from launch through L2, the Earth flybys and
+  the cruise to the first days after Mars orbit insertion.
+  - JPL's Lookup API (`horizons_lookup.api`, what horizons_check uses)
+    with sstr=ESCAPADE finds ONLY the stage; Horizons' own name search
+    finds all three. The identity check works from the IDs -9 and -10.
+  - -9 sits beside 9 and '@9', which the gallery's `CENTER_SLUG_MAP`
+    reads as the Pluto-Charon barycentre: the build checks Blue can
+    never be read as Pluto's centre.
+  - JPL serves the Lagrange points as bodies: SEMB-L2 is 32, EM-L2 3012.
+**Gap:** the orrery's Code session, its brief written when it is next
+(after Tony's two looks close L-514): Blue and Gold keyed with JPL's
+names and IDs, NASA's words, a path plan each (the L2 loiter as an event,
+the Earth flybys, the Mars arrival); then the website's session, the two
+craft served and drawn in the Spacecraft group.
 **Ref:** L-514 (the Mars room); L-529 (guided encounters); L-476 (paths
 by the plan); horizons-orbital-mechanics (a spacecraft path's plan, the
 orbiter rule for an arrival).
+
+#### [L-534] Missions by destination: a mission's row under each body it goes to (gallery + orrery; design round with L-529)
+<!-- L:534 status:OPEN upd:2026-11-15 section:A flag: rice: -->
+- **Tony's rulings, 2026-11-15**, in the coordinating session (Claude
+  Opus 5.5, through the python_work door, on orrery b30d6d05 and gallery
+  d3e97b15), starting from ESCAPADE (L-533): 16:07, "add it as a row
+  under mars too in addition to the spacecraft drawer"; asked whether
+  that is a rule for every mission or for ESCAPADE alone, 16:12: "Every
+  body. My thinking is that the visitor should see Missions as a program
+  and by destination."; 16:16: "There are three paths: paths under
+  spacecraft, paths under destinations, encounters at every flyby and
+  destination".
+- **What it changes.** Today a body is listed under what it is fetched
+  around (L-515 (one nested tree), Tony's ruling 6 of 2026-11-07: "What
+  is the fetched center should rule."). A mission listed under its
+  destination is listed where it GOES, while still fetched around the
+  Sun: one craft, a row in the Spacecraft group and a row under each
+  destination, ticking either ticking the same craft. The tree's parent
+  rule is unchanged; this adds a second kind of row.
+- **Read at gallery d3e97b15, for the design round:** the path plans'
+  events name destinations already, read from JPL, not typed: Juno,
+  Europa Clipper and Galileo a Jupiter arrival; Cassini a Saturn
+  arrival; New Horizons Jupiter and Pluto flybys; Voyager 2 four planet
+  flybys. A small body is not among the plans' bodies: Psyche's plan has
+  a Mars flyby and no arrival at the asteroid Psyche; OSIRIS-APEX's none
+  at Apophis. JPL's record header names targets for some ("(E-S L2,
+  Mars)" for ESCAPADE), a second source to weigh.
+- **The design questions**, for the round, Tony's order to be asked:
+  where a destination comes from (the plan's events, JPL's header, or
+  both); a mission with several destinations or none (Lucy, the
+  Voyagers); past destinations (New Horizons at Pluto, Apollo 11 at the
+  Moon); what a destination row shows and where Go To goes while the
+  craft is far from it (ESCAPADE now).
+**Gap:** the design round, with L-529 (guided encounters), after
+ESCAPADE's path (L-533) and the Lagrange points (L-297).
+**Ref:** L-533 (ESCAPADE); L-529 (guided encounters); L-515 (one nested
+tree); L-476 (paths by the plan); L-443 (the spacecraft group); L-507
+(historical missions).
 
 #### [L-529] Guided encounters: the guide's way of telling, used for a flyby (gallery; an idea, for a design talk after Mars)
 <!-- L:529 status:OPEN upd:2026-11-13 section:A flag: rice: -->
@@ -1787,8 +1875,19 @@ orbiter rule for an arrival).
 - **The old encounter cards (2026-11-13):** when encounters move into
   the interactive site, the old gallery's encounter cards are reviewed
   on the phone and retired, as L-531 records for all the old cards.
-**Gap:** a design talk after Mars (L-514 (the Mars room)), by the
-road's order; then which encounter first.
+- **Widened, 2026-11-15, 16:16**, Tony, in the coordinating session
+  (Claude Opus 5.5): "There are three paths: paths under spacecraft,
+  paths under destinations, encounters at every flyby and destination".
+  So an encounter is offered at EVERY flyby and destination, not one
+  chosen flyby. Read at gallery d3e97b15: every spacecraft's path plan
+  already lists its flybys and arrivals with body, kind, moment, distance
+  and window (`path.events`), worked out from JPL by path_plan.py, so the
+  encounters are read from the plans, not found again. ESCAPADE's L2
+  loiter adds a kind (L-533). Designed together with L-534 (missions by
+  destination), which reads the same events.
+**Gap:** one design round with L-534, after ESCAPADE's path (L-533) and
+the Lagrange points (L-297), by the road's order; then which encounter
+first.
 **Ref:** L-527 (a first visit's guide: the card, the ring, the camera's
 swing, `gallery/first_guide.js`); L-507 (historical missions, whose
 encounters were to become saved scenes); L-489 (compositions: Artemis II
@@ -2341,7 +2440,7 @@ L-012 (the false "fetched fresh" print, still at `palomas_orrery.py`
 line 4872).
 
 #### [L-521] Three red checks in the drawer walk (gallery, the headless walk; recorded)
-<!-- L:521 status:OPEN upd:2026-11-09 section:A flag: rice: -->
+<!-- L:521 status:OPEN upd:2026-11-15 section:A flag: rice: -->
 - **Recorded, not chased.** Found 2026-11-09 by the L-519 (Featured's
   rethink) Code session (Claude Opus 5.5), on gallery 6a153716 with a
   payload built that day by the room's real driver (2026-11-09T12:00Z):
@@ -2365,6 +2464,13 @@ line 4872).
   Voyager 1's box lacking the dates sentence, Galileo's not its five
   lines, West's not its five lines, and the "Tap to update." line not
   where section 30e looks. Same class; the same session takes them.
+- **Seen again 2026-11-15, by L-514 (the Mars room)'s session 2** (Claude
+  Code, Claude Opus 5.5), on gallery d3e97b15 with payloads of 2026-11-15:
+  this item's three, word for word, on the base before that session's
+  edits and after them (3 of 349 with its sections 37 and 38): "scene tap
+  moved the view", Sedna's lines not bulleted, and a text-box line of 67
+  to 70 characters from the main belt's drawing. The five received from
+  L-523 did not fail. Not chased.
 **Gap:** find, for each of the three, whether the page or the walk is
 wrong; fix the one that is. A gallery session that next opens the drawer
 or the text box.
@@ -3937,10 +4043,122 @@ skill's split (L-522).
   the runs, the headless walk, and the tap near Mars measured.
   interactive-exhibit loaded from the account in this session at 1.42,
   as the manifest expects: the check the Nov 12 handoff carried is done.
-**Gap:** session 2, the website (the brief above), on Tony's go-ahead in
-that session; then Tony's phone look, which closes this item. Before
-adding to interactive-exhibit, session 2 moves old lines out, the skill
-being at its cap (L-522).
+- **Session 2 built, 2026-11-15** (Claude Code, Claude Opus 5.5, through
+  the python_work door), on orrery b30d6d05 and gallery d3e97b15, both
+  matching their remotes, from Tony's prompt and the brief above, in three
+  parts with his go-ahead after each ("Yes, start Part 1", "Yes, start
+  Part 2"), and the frame fit between Parts 2 and 3. Skills read from the
+  repository's copies: interactive-exhibit 1.42, gallery-cache-builder
+  1.19, gallery-assembler 1.4, provenance-discipline 2.36,
+  safe-file-editing 1.14, ledger-and-session-records 1.23, as the
+  manifest expects. Nothing committed by the session; commit and push
+  are Tony's.
+  - Part 1, the served config (`data/objects_config.json`): Phobos (401)
+    and Deimos (402) inserted before Io in Io's shape, around "@499",
+    center_slug mars, parent mars; filled by the two tools that write the
+    config (the pull's objects mirror: NASA's sentence, the link, the
+    period around Mars, 0.31914 and 1.2625 days; `mirror_constants.py`:
+    `position_accuracy` 10 km, pointing at the orrery's
+    MAR099_PHOBOS_DEIMOS_POSITION_PLACE_KM with the 2025 paper's
+    citation). Mars's opening by `store_writer.py`'s `add_arrival`:
+    drawn [], moon false (ruling 1). Both pointers match the export's
+    row by name (Config mirror, Pointer join).
+  - Part 2, the cache and the checks. `tools/gallery_cache_builder.py`
+    could not serve a body around "@499" ("Unmapped center_body"); Mars
+    went into its CENTER_SLUG_MAP on Tony's go-ahead ("Yes, add Mars to
+    CENTER_SLUG_MAP with the note"), so the website's copy now goes one
+    body past the orrery's map, which has no Mars. Phobos's and Deimos's
+    colours in `gallery/assembler/presentation.py`, the orrery's own
+    (color_map: rgb(139, 0, 0) and rgb(105, 105, 105)), by Tony's word
+    ("my phone look judges them"). The offline suite's mocks gained the
+    two moons (rough test values, never served). The nightly build ran:
+    202 served files changed, 5 new, none deleted. The gallery run: 49 of
+    49 gating checks. The Solar System figures check lists both moons
+    with "the orrery's words, link and period served".
+  - Typed facts (`documentation/smoke_typed_facts.js`): two allowances,
+    the singular "# hour" and "# day" spans (Phobos's window is about an
+    hour) and the period line "Orbital period: # days, around Mars, from
+    JPL Horizons, fetched ###.", the page's own account of its data.
+    Shown still failing, 2026-11-15, Tony's ask: a copy of the check
+    that types a wrong figure into the period line ("every 7.5 hours")
+    fails by name for Phobos, Deimos, the Moon and the Earth-Moon
+    centre's line, 5 typed sentences; the real file passes.
+  - The headless walk, section 37: Mars's fold lists Phobos then Deimos,
+    shut on opening; Centre on Mars puts Mars at the middle, both moons
+    off; Go To on each opens its own box, at midnight Phobos 9,340 km and
+    Deimos 23,460 km from Mars, in tens of kilometres by JPL's published
+    accuracy, its sentence, and the period in days; at 19:00 Phobos is
+    past its span and prints 9,410 km by the drift, with the span's
+    sentence. Four older checks that used Mars as a body with no centre
+    now use Venus. The walk's three red checks are L-521's own three.
+  - Ruling 4's risk, measured (a tap near Mars picks the moon meant), on
+    an upright phone in a browser with Plotly's own pick: Mars centred,
+    Phobos sits 45.5 px from Mars, so the 22 px reaches do not overlap; a
+    tap on each dot picks it, 20 px off Phobos still picks Phobos, and the
+    split falls at the midpoint. In the Sun's view the two moons sit 0 to
+    0.01 px from Mars, inside one reach, and the pick goes by drawing
+    order: Mars on a fresh page, Deimos after other ticking, even when
+    aimed at Mars. Recorded for the next design talk, not changed.
+  - THE FRAME FIT, found in Tony's question before Part 3 ("find why
+    Deimos falls outside the picture when Mars is centred on an upright
+    phone"). The cause: a frame is a cube, and Plotly holds the picture's
+    height to its field of view, so an upright phone's picture (331 x 689
+    on a 375 x 812 phone) showed about 0.8 of the frame across, against
+    the outermost orbit's reach of 0.83 at the room's 20 percent. Every
+    centred view had it (Deimos 22 percent of its orbit off, Io 29,
+    Titan 20, Charon 27). Tony's rulings: "fix viewFrame before Part 3,
+    with a margin: across the picture's narrow side, the outermost moon's
+    whole orbit plus 10 percent fits, worked out from each phone's own
+    width and height"; then "use that same function in every place that
+    sets a frame ... The rule everywhere: across the picture's narrow
+    side, the farthest point of what is framed plus 10 percent fits; on
+    a picture wider than tall, nothing changes. Work the grid spacing out
+    from the widened frame so the grid label matches." Built: the sum,
+    `ViewCentre.fitAcross` in `gallery/view_centre.js`, is Plotly
+    2.35.2's own, read from its scene and held to its measured matrices
+    by the View centre check; `interactive.html` calls it at each room's
+    opening, a tick, Go To (a moon's too), Center on, a tick in a centred
+    view, Home and Reset (`viewFitR`). Measured at 375 x 812: every frame
+    that had to widen holds what it frames exactly 15 px inside the side;
+    at 1200 x 700 every frame is unchanged. Walk section 38 fails on a
+    page whose Go To is not fitted.
+  - By design, Tony, 2026-11-15: "Keep the Solar System view, its Home
+    and Reset fitting where the bodies are now (Tony's ruling of Oct 2).
+    Record in Part 3 that an orbit line can run past the side there by
+    design: the dots stay inside, and Go To shows a whole orbit." At the
+    view's opening on an upright phone Mars's orbit runs 11 px past the
+    side, and Jupiter's 21 px with Jupiter ticked; every dot is inside.
+  - For interactive-exhibit's next version, two lines (the skill is at
+    its cap, L-522, so old lines move out first): (1) its two Store drift
+    sentences (Provenance, "An exhibit is done when Store drift reads
+    MATCH for its pointers", and the build steps' "Store drift reads
+    MATCH for the new pointers") hold only for links the export does not
+    serve; Store drift leaves out pointers the export serves, such as
+    MAR099's, and for those the checks are Config mirror and Pointer
+    join. (2) Two lines near its line 320 read as one broken sentence
+    ("A centre gets its opening (`add_arrival`): the gallery's
+    `INTERACTIVE_AS_BUILT.md`," then "A centre gets its opening."); the
+    pointer wants one line.
+  - Not verified: Tony's phone look, a real finger, his eyes on the two
+    colours.
+- **Tony's note on session 1, 2026-11-15**, in his run record
+  `documentation/WHERE_WE_ARE_11-15-26_0837_run_record.md`, on "Mars's
+  moons are in the orrery.": "-- need a mode 5 check". The coordinating
+  session (Claude Opus 5.5) gave the steps in chat at 12:20: in the
+  orrery's window, "Select Center Object for Your Plot" set to Mars;
+  tick Mars, "- Phobos" and "- Deimos"; "Plot Entered Date". Phobos's
+  text carries NASA's sentence, a distance in tens of kilometres and
+  "These distances are rounded to JPL's published accuracy for Phobos's
+  orbit around Mars."; Deimos the same, with no "Retrogade"; both orbits
+  around Mars; then centred on the Sun, no "JPL states no accuracy".
+  Recorded by that session after session 2 closed, so the two did not
+  write the ledger at once.
+**Gap:** Tony's two looks, which close this item. (1) Tony-action (do):
+the orrery's moons, Mode 5, by the steps above. (2) Tony-action (do):
+the website, upright on his phone: Mars's fold; Centre on Mars; tick
+each moon; Go To each moon; tap each moon in the picture; Reset; and the
+five centred views (Mars, Jupiter, Saturn, the Pluto system, Earth) with
+their moons' orbits inside the picture.
 - **Ref:** L-513 (the Moon's standards, the pattern); L-334 (what a room
   opens on, 2026-09-17); L-291 (the Earth room); L-484 (the two agree);
   L-150 (Charon's period centre, for the Pluto room).
@@ -15823,7 +16041,7 @@ the Sun-Earth Lagrange points with it.
 question carried out of it), L-286 (rooms), interactive.html.
 
 #### [L-297] Earth-Moon Lagrange points: serving path sized, deferred from the Earth exhibit
-<!-- L:297 status:OPEN upd:2026-09-07 section:A flag: rice:2/3/70/3 -->
+<!-- L:297 status:OPEN upd:2026-11-15 section:A flag: rice:2/3/70/3 -->
 - **Sized 2026-09-07 before any Earth code, on the build order's
   instruction.** Record:
   `documentation/SIZING_earth_moon_lagrange_20260907.md` (gallery repo).
@@ -15857,8 +16075,25 @@ Solar System rooms have drawn at the minute opened (`epochNow`) since
 degrees of its orbit by day's end. Re-size before building: served
 positions through the day, or another design. In L-515's tree the
 points are one group per pair (ruling 4 there).
-**Gap:** the builder session described above, after the Earth exhibit
-ships, re-sized as the Note says. Tony-action (decide): when.
+- **Moved up, 2026-11-15, 16:30**, Tony's "Yes" in the coordinating
+  session (Claude Opus 5.5), after Tony's "And the orrery already has
+  L2" and the coordinator's recommendation, asked "From a coding
+  efficiency point of view what do you recommend?": the new serving
+  shape costs the same for one point as for ten, so all ten are served
+  in one round of their own, right after ESCAPADE's path (L-533), not
+  pulled into it; ESCAPADE's L2 loop gains its marker then.
+- **Scope widened to all ten points**: the Sun-Earth L1 to L5 (JPL 31 to
+  35, around the Sun) as well as the Earth-Moon L1 to L5 (3011 to 3015).
+- **Found 2026-11-15 in the orrery** (`celestial_objects.py`, at
+  b30d6d05): every Lagrange point's `mission_info` is typed, none NASA's
+  sentence, and EM-L2 to EM-L5 each say "Earth-Moon Lagrange-1 point is
+  where the Earth's gravitational field counters the Moon's", a copying
+  slip. All ten come to the Moon's standard (L-513: a key, NASA's words
+  and page) in this round; their link today is NASA's "What is a
+  Lagrange point?" resource page.
+**Gap:** the round of its own, after ESCAPADE's path (L-533): the orrery
+keys the ten in NASA's words; the website's builder gains the serving
+shape sized above; the ten drawn, re-sized as the Note says.
 **Ref:** L-291, L-294, gallery `tools/gallery_cache_builder.py` (lines
 745-800, 910-935, 1135-1150 at `92e98ca9`), `gallery/assembler/assemble.py`
 (line 54), the sizing note.
