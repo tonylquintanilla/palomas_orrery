@@ -1,28 +1,25 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 15, 2026: the Code session (Opus) that brought Phobos and Deimos into the orrery, Mars's session 1 of 2 (L-514 (the Mars room)).
-- Written at orrery 488cad20 (your commit "mars moons") and gallery d3e97b15; GitHub's orrery has one nightly commit since, e5b5eb58. Part 2, the ledger and this page are not yet pushed.
+Last updated: November 15, 2026, noon: the coordinating session (Opus) that wrote the website session's brief, Mars's session 2 of 2 (L-514 (the Mars room)).
+- Written at orrery f5598c91 (your push of session 1, then GitHub's nightly) and gallery d3e97b15, with this page, the ledger and the brief not yet pushed.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Phobos and Deimos are now served by the orrery: each has its key, JPL's own name, NASA's sentence you chose, and NASA's page as its link (L-514 (the Mars room)).
-> - Their periods are JPL's, fetched around Mars: Phobos 0.31914 days, Deimos 1.2625 days. The typed periods and the unsourced "Retrogade" are gone.
-> - Their accuracy is one row in the constants store, 10 km for both, from the 2025 paper's "a few kilometers". The website reads it from the constants export.
-> - The orrery's own hover uses it too, on your word: seen from Mars, Phobos prints to tens of kilometres, "rounded to JPL's published accuracy for Phobos's orbit around Mars", where it said "JPL states no accuracy".
-> - The orrery's checks passed, 36 of 36, and JPL confirmed both moons' names and periods today.
+> - The website session's brief is written. Most of the page is already built from the one tree's step 2b (a moon's box, Go To on a moon, Centre on), so the session is mostly data: the two moons' entries, their words and accuracy, Mars's opening on its symbol alone, the cache build, and the checks (L-514 (the Mars room)).
+> - The skill for the website's rooms loaded at 1.42, as expected.
 >
-> **Do next:** *Mars, session 2 of 2, the website: a coordinating session writes its brief first, then a Code session in the website builds the moons into Mars's fold.*
+> **Do next:** *Mars, session 2 of 2, a Code session in the website: Phobos and Deimos served around Mars, Mars opening on its symbol alone. Its brief: `documentation/COORD_L514_website_moons_brief_20261115.md`.*
 >
 > **Needs you now:**
-> - *(do) Commit the orrery (Part 2, the ledger, this page), then Pull origin (GitHub's nightly commit), then Push origin. The two files that commit also changed already match yours exactly.*
+> - *(do) Commit and push the orrery (the brief, the ledger, this page); then open the Code session in the website folder and paste its prompt.*
 > - *(do) Each morning, Fetch origin and Pull origin on both, orrery then website, before any work. If Pull origin shows up only once you have changes: Commit them first, then Pull origin, then Push origin. If Desktop stashes your changes anyway, restore them at once: Changes tab, Stashed Changes, Restore.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
 
 *Italic* lines are the must-reads. Marks reset at every update.
 
-## The road  **>> UPDATED THIS SESSION**
+## The road
 
 Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
   1-14.[done]  Through Nov 6: the three rooms, the objects, the Sun's and
@@ -35,7 +32,7 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
                Mars room)): the orrery's half done Nov 15, the website's
                next. Then Uranus and Neptune. Io, Titan, Charon and Pluto
                come to standard in their folds, keyed in the orrery
-               first.* << moved this session
+               first.*
  16.   [later] Earth's fold: L-297 (the Lagrange points), the Earth-Moon
                barycentre, SOHO, Gaia, James Webb, Artemis II.
  17.   [later] Small-body systems' moons; then stars and exoplanets.
@@ -92,7 +89,7 @@ Waiting behind other work; a line leaves when picked up.
 - L-490 (the legacy list); L-499 (kinds of session); L-471 (a delivered
   patch is final), for safe-file-editing's next version.
 
-## Signals  **>> UPDATED THIS SESSION**
+## Signals
 
 Read from files when this page was written, not typed from memory.
 - Last cache build: 20261114T181334Z, ok, no retry on the swap (gallery swap log at d3e97b15, read Nov 15).
@@ -122,7 +119,7 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- This session: L-514 (the Mars room), "Session 1 built"; its brief `COORD_L514_orrery_moons_brief_20261114.md`. The session before: rulings 5 and the accuracy, and L-533 (ESCAPADE).
+- This session: L-514 (the Mars room), session 2's brief `COORD_L514_website_moons_brief_20261115.md`. The session before: session 1 built, its brief `COORD_L514_orrery_moons_brief_20261114.md`.
 - The caps: `DOCUMENT_CAPS.md`; L-522 (document caps); its brief
   `COORD_L522_step1_caps_brief_20261110.md` and the review beside it.
 - The tree: L-515 (one nested tree), its briefs `COORD_L515_*`.

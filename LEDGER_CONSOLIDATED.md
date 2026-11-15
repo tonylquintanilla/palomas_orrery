@@ -3920,12 +3920,27 @@ skill's split (L-522).
     from the Sun, with their words: PASS, 28 hovers; with the new map
     emptied in memory the same run fails by name (WRONG STATE, FALSE OR
     MISSING WORDS) for each.
-**Gap:** session 2, the website, its brief written when it is next: the
-two moons served and cached around Mars, their entries pointing at
-`MAR099_PHOBOS_DEIMOS_POSITION_PLACE_KM`, Mars's fold, Go To on a moon,
-and the check that a tap near Mars picks the moon meant. Before adding to
-interactive-exhibit, session 2 moves old lines out, the skill being at
-its cap (L-522).
+- **Session 2's brief, 2026-11-15, noon**, by the coordinating session
+  (Claude Opus 5.5, through the python_work door, on orrery f5598c91 and
+  gallery d3e97b15, both of Tony's folders matching), after Tony's "part
+  3 is done" with his run record
+  `documentation/WHERE_WE_ARE_11-15-26_0837_run_record.md` (his push of
+  session 1 at f06271ba, then 49c0c14 "mars moons part 3").
+  `documentation/COORD_L514_website_moons_brief_20261115.md`. Read for it
+  at gallery d3e97b15: the website has no entry for Phobos or Deimos (Io's
+  entry is the shape, around "@499" with center_slug mars); step 2b of
+  L-515 already built the moon's box (`SolarSystemFigures.childBox`), Go
+  To on a moon opening its own box (ruling 4, the Earth room's Moon too),
+  the fixed row in every centre and Centre on by `centresOf`. So session 2
+  is expected to be data and checks: the two entries, the pull, the
+  accuracy pointers, Mars's opening by `add_arrival`, the cache build,
+  the runs, the headless walk, and the tap near Mars measured.
+  interactive-exhibit loaded from the account in this session at 1.42,
+  as the manifest expects: the check the Nov 12 handoff carried is done.
+**Gap:** session 2, the website (the brief above), on Tony's go-ahead in
+that session; then Tony's phone look, which closes this item. Before
+adding to interactive-exhibit, session 2 moves old lines out, the skill
+being at its cap (L-522).
 - **Ref:** L-513 (the Moon's standards, the pattern); L-334 (what a room
   opens on, 2026-09-17); L-291 (the Earth room); L-484 (the two agree);
   L-150 (Charon's period centre, for the Pluto room).

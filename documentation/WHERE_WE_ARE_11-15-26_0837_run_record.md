@@ -218,3 +218,110 @@ JPL gave no uncertainty for either period. The "change in a year" figures are th
 - ok data/osculating_cache.json (written by the period fetch: Phobos and Deimos)
 
 Nothing is committed.
+
+================================
+
+The fix is in two places in `position_accuracy.py`: the moon-from-its-planet branch and the satellite-from-afar branch. Making the edits now.
+
+Now the two moons go into the digits tests: seen from Mars, and Phobos seen from the Sun.
+
+PASS, and the two moons are among the hovers it examined. To prove these new lines can fail, I'll switch the change off in memory and run the test again.
+
+The new lines fail without the change and pass with it. Now the hover's words, old against new, since a reworded hover goes to you side by side.
+
+Wording now matches the intent, and the Mars and Sun views are fixed. The maintenance run is going again and will take several minutes.
+
+While it runs, I'm updating the records: the deferred line comes out, and the ledger records Part 4.
+
+I can't reach the coordinating session from here: it isn't among the sessions this app can message (the 13 listed are older Code sessions, all offline or idle). So the alert will be a short message you can paste into the coordinator's chat. I'll write it once the maintenance run finishes.
+
+Part 4 is done: the orrery's own hover for Phobos and Deimos now uses their 10 km accuracy row, and the maintenance run passed again, 36 of 36.
+
+**What a visitor now reads.**
+
+Phobos, seen from Mars:
+- Before: "Distance: 9382 kilometers … JPL states no accuracy for this position, so distances are shown to the whole kilometer."
+- After: "Distance: 9380 kilometers … These distances are rounded to JPL's published accuracy for Phobos's orbit around Mars."
+
+Phobos, seen from the Sun:
+- Before: rounded to Mars's orbit, with "JPL states no accuracy for Phobos's orbit around Mars."
+- After: rounded to Phobos's own row, which is the larger of the two errors, and that sentence is gone. Deimos reads the same way.
+
+This works the way the Moon already does with Earth.
+
+**How I know it works.** The position-digits test now includes Phobos and Deimos seen from Mars, and Phobos seen from the Sun, with the exact words each must say and must not say. It passes. With the change switched off in memory, the same test fails on each moon, naming the wrong state and the false words. So the new checks can catch the fault.
+
+**The coordinator.** I can't reach it from here; it isn't among the sessions this app can message. Here is the alert to paste into its chat:
+
+```
+Built on orrery 488cad20 (Tony's commit "mars moons"; Parts 2 to 4 not yet pushed) and gallery d3e97b15. L-514 (the Mars room), session 1, the orrery's half, is done. Phobos and Deimos are keyed with JPL's names and NASA's sentences; periods fetched around Mars: 0.31914 and 1.2625 days. One accuracy row, MAR099_PHOBOS_DEIMOS_POSITION_PLACE_KM = 10.0 km (Brozovic et al. 2025, Section 6, p. 13), is in the constants export. The objects export and Horizons confirmations now hold 100 objects. One change beyond the brief, on Tony's word: the orrery's own hover (position_accuracy.py) reads the row, seen from Mars and from the Sun, since the old "JPL states no accuracy" had become false. Maintenance run: 36 of 36 passed, Tier-1 0. Session 2 (the website) is next and needs its brief: the moons served around Mars, their entries pointing at the new row, Mars's fold, Go To on a moon, and a tap near Mars picking the moon meant. The ledger's L-514 Gap names the same.
+```
+
+**Files changed this session, for your run record:**
+- ok celestial_objects.py (1 edit), in your commit "mars moons"
+- ok data/osculating_cache.json (written by the period fetch), in your commit
+- ok constants_new.py (2 edits)
+- ok position_accuracy.py (8 edits)
+- ok test_position_digits.py (2 edits)
+- ok LEDGER_CONSOLIDATED.md (4 edits plus the regenerated index)
+- ok documentation/WHERE_WE_ARE.md (10 edits, by section; 130 lines above the marker, at its cap)
+- Written by the maintenance runs: data/constants_export.json, data/objects_export.json, data/horizons_confirmations.json, data/provenance_history.json, DATA_INVENTORY.md, EXACT_ROWS_PRINTED.md, MODULE_ATLAS.md, MODULE_INDEX.md, PROVENANCE_AUDIT.md, WORKSHEET_CHECK.md, documentation/prompts/citation_review.jsonl
+
+**Token count:** this app prints no /cost figure. It shows 303,002 tokens in context at the close, 30% of a 1,000,000 window; messages account for 250,105 of them. The largest files written were constants_new.py (349 KB) and the ledger (2.6 MB).
+
+**Your run order, back at your computer:**
+1. Look over the changed files in GitHub Desktop and commit the orrery.
+2. Pull origin. GitHub's one nightly commit changed two files, and they still match yours byte for byte.
+3. Push origin.
+4. Paste the alert above into the coordinator's chat.
+
+**Tony-actions:**
+- (do) Commit, Pull origin, Push origin on the orrery. -- f06271bae02aeb867108c9564ad2d53a6e347527
+- (do) Paste the alert into the coordinating session.
+- (do) Each morning, Fetch origin and Pull origin on both, orrery then website, before any work.
+- (do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).
+
+**Where this leaves us:**
+- Phobos and Deimos meet the Moon's standard in the orrery, its hover included.
+- The website's half, session 2, is next, its brief written first.
+
+One final thought: I deferred the hover because the brief's list didn't name it, and you caught it. The rules ask whether the work reaches a thing, not whether a list names it. I've recorded that reason in the ledger entry, so the next session sees it.
+
+=============================
+
+**Coordinator**
+
+I'll confirm your push reached GitHub, then write session 2's brief, the website's half.
+
+The website-rooms skill loaded at 1.42, matching the manifest, so the last handoff's check is done. Now the website's side, read at its current state, for the brief.
+
+Session 2's brief is written and on your disk. All three files match my copies byte for byte.
+
+Your push of session 1 is on GitHub, and both your folders matched it: the orrery at f5598c91 and the website at d3e97b15. The skill for the website's rooms loaded at version 1.42, as expected, which settles the check the last handoff carried.
+
+**What session 2 does.** The page is mostly built already: step 2b of the one tree (L-515) made a moon's box, Go To on a moon opening that moon's own box, and Centre on for any body with something around it. So this session is mostly data and checks:
+1. **Part 1:** it adds the two moons' entries to the website, pulls their words and periods from the orrery, points each at the new accuracy row, and gives Mars its opening on its symbol alone. Then it stops for your go-ahead.
+2. **Part 2:** it builds the cached positions around Mars and runs the website's checks. It walks the Mars fold in a test browser, and measures whether a tap near Mars picks the moon you mean. It stops again.
+3. **Part 3:** the records, and the steps for your phone look.
+
+If it finds the page does need new code, the brief has it say why before writing any.
+
+**The prompt to paste into the Code session**, opened in the website folder:
+```
+Read the orrery's documentation/COORD_L514_website_moons_brief_20261115.md and follow its Start. Plain speech, one question per message. Stop and report after each part. Commit and push are mine.
+```
+
+**Files changed, for your run record** (orrery folder only):
+- ok LEDGER_CONSOLIDATED.md (1 edit plus the regenerated index): L-514 (the Mars room) records the brief and the skill check.
+- ok documentation/WHERE_WE_ARE.md (9 edits, by section; 127 lines above the marker).
+- new documentation/COORD_L514_website_moons_brief_20261115.md (126 lines).
+
+**Tony-actions:**
+- (do) Commit and push the orrery. -- done
+- (do) Open the Code session in the website folder and paste the prompt. -- started
+- (do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).
+
+**Where this leaves us:**
+- Mars's moons are in the orrery. The website's half is briefed and next.
+- Your phone look after session 2 closes L-514 (the Mars room).
+- ESCAPADE is the round after. -- let's rethink this. an encounter is a new type of build. 
