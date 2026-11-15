@@ -3,9 +3,9 @@
   "schema": 2,
   "taken": [],
   "held": [],
-  "clean_run_utc": "2026-11-14T17:13:59.135054+00:00",
+  "clean_run_utc": "2026-11-15T14:46:52.226054+00:00",
   "where": "GitHub Actions",
-  "run_log": "https://github.com/tonylquintanilla/palomas_orrery/actions/runs/43619828297",
+  "run_log": "https://github.com/tonylquintanilla/palomas_orrery/actions/runs/43726048829",
   "reported_not_red": [],
   "rows": [
     {
@@ -16,12 +16,12 @@
     {
       "row": "Period fetch",
       "kind": "generator",
-      "verdict": "unchanged (2 checked, not written) -- NOTHING MISSING -- 98 served objects examined, no query asked"
+      "verdict": "unchanged (2 checked, not written) -- NOTHING MISSING -- 100 served objects examined, no query asked"
     },
     {
       "row": "Horizons check",
       "kind": "generator",
-      "verdict": "unchanged (2 checked, not written) -- NOTHING DUE -- 98 entries and 26 sheets current, no query asked"
+      "verdict": "rewrote data/horizons_confirmations.json -- PASS -- 4 checked today, 6 queries"
     },
     {
       "row": "Path plan",
@@ -31,7 +31,7 @@
     {
       "row": "Objects export",
       "kind": "generator",
-      "verdict": "unchanged (1 checked, not written)"
+      "verdict": "rewrote data/objects_export.json"
     },
     {
       "row": "Drawings export",
@@ -51,7 +51,7 @@
     {
       "row": "Horizons confirmations",
       "kind": "checker",
-      "verdict": "pass -- 98 of 98 entries and 65 periods confirmed, 26 sheets read, within 30 days"
+      "verdict": "pass -- 100 of 100 entries and 67 periods confirmed, 26 sheets read, within 30 days"
     },
     {
       "row": "Horizons check suite",
