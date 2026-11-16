@@ -1005,7 +1005,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*269 live items; 253 need attention (`!`); 165 RICE-scored; 260 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*268 live items; 252 need attention (`!`); 165 RICE-scored; 261 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1186,7 +1186,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-532 | A Code session away from the computer: where its work lives (method; recorded) | OPEN | -- | 2026-11-14 |
 | ! | L-533 | ESCAPADE, Blue and Gold, on their way to Mars (orrery + gallery; recorded, after the Mars build) | OPEN | -- | 2026-11-15 |
 | ! | L-534 | Missions by destination: a mission's row under each body it goes to (gallery + orrery; design round with L-529) | OPEN | -- | 2026-11-15 |
-| ! | L-535 | The period's reason: the website's period line says what set its digits (orrery + gallery) | OPEN | -- | 2026-11-15 |
 | ! | L-536 | A moon's yearly change samples its wobble: the period's digits from many dates (orrery, the period fetch; recorded, for its own session) | OPEN | -- | 2026-11-15 |
 
 ### B. Pending Action (Tony-side)
@@ -1596,6 +1595,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-523 | A finger's tap that Plotly sends as a hover: a tap a little off a small dot opens its box (gallery, the text box; built, closed) | DONE | -- | 2026-11-12 |
 |  | L-524 | The Kepler solver's start: a stretched orbit's second half solved wrong, the site frozen at 0.3 days, and the frozen date line on a phone (gallery, the assembler and the room's title; built) | DONE | -- | 2026-11-12 |
 |  | L-527 | A first visit's guide: a walk-through that waits for the visitor (gallery, the lobby and the Solar System room; built, closed) | DONE | -- | 2026-11-12 |
+|  | L-535 | The period's reason: the website's period line says what set its digits (orrery + gallery; built, closed) | DONE | -- | 2026-11-16 |
 
 ### W.Done -- Web Publication track, closed items
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1881,101 +1881,6 @@ across a year), choose how the digits are set from it, and the period
 fetch's and the digits test's checks; Tony's word on the rule.
 **Ref:** L-535 (the period's reason); L-431 (orbital periods); L-484
 (Pluto's period at its barycentre); L-514 (the Mars room).
-
-#### [L-535] The period's reason: the website's period line says what set its digits (orrery + gallery)
-<!-- L:535 status:OPEN upd:2026-11-15 section:A flag: rice: -->
-- **Found by Tony, 2026-11-15**, at Phobos's box on his phone (run record
-  `documentation/WHERE_WE_ARE_11-15-26_0837_run_record.md`): "0.31914
-  days from JPL, but it does not say if JPL provides this as the
-  precision too." JPL states no uncertainty for a moon's or planet's
-  period; the digits are the orrery's, kept by how much the period
-  changes in a year (Phobos 0.000002 days).
-- **Read at orrery d0f90d18 and gallery f9f81266:** the orrery's own
-  period text ends with the sentence saying what set the digits
-  (`orbital_period.period_hover_lines`: "Rounded to how much the period
-  changes in a year.", "Rounded to JPL's stated uncertainty in the
-  orbit.", and the small-body database variants). The export's period
-  block carries `"words": None` for a fetched period; the reason
-  (`error_from`, `sbdb_status`) is only in its `record`, which
-  `tools/mirror_objects.py` (`period_copy`) does not copy; the website's
-  `periodLine` (`gallery/solar_system_figures.js`) prints the period
-  with no reason, for every body.
-- **Tony, 17:24:** "we should fix this in this session. easily
-  overlooked." Brief: `documentation/COORD_L535_period_digits_brief_20261115.md`
-  (the coordinating session, Claude Opus 5.5).
-- **Built 2026-11-15, night** (Claude Code, Claude Opus 5.5, through the
-  python_work door, in the session that built L-514 (the Mars room)'s
-  session 2), on orrery d0f90d18 and gallery f9f81266, both matching
-  their remotes, from the brief and four additions Tony pasted from his
-  run record `documentation/WHERE_WE_ARE_11-15-26_0837_run_record.md` (the coordinator's
-  sections), in three parts with his go-ahead after each ("Yes, start
-  Part 1", "Yes, start Part 2", "Yes, start Part 3"). Skills read from the
-  repository's copies, as the manifest expects: interactive-exhibit
-  1.42, provenance-discipline 2.36, orrery-coding-conventions 1.13,
-  horizons-orbital-mechanics 1.18, safe-file-editing 1.14,
-  agentic-pre-test 1.3, ledger-and-session-records 1.23. Tony pushed the
-  orrery's half at 3946f7d ("L535 period digits") during Part 2.
-  - THE WORDS, Tony's rulings: "for a period JPL gives no uncertainty
-    for, 'JPL gives no uncertainty for this period, so only the digits
-    that stay the same over a year are shown.'; with JPL's stated
-    uncertainty, 'Rounded to JPL's stated uncertainty in the orbit.'
-    Orrery and website alike, from one source." And, at Part 1's
-    go-ahead: where JPL gives an uncertainty but the yearly change is
-    larger, "JPL's uncertainty for this period is smaller than its change
-    over a year, so only the digits that stay the same over a year are
-    shown." A small body whose database lookup failed or found no entry
-    says the database's reason before ", so only the digits ..." (the
-    L-401 rule, say what is true).
-  - Part 1, the orrery: `orbital_period.period_reason_lines()` is the
-    one home of the sentence; the hover joins its lines with <br> (each
-    under 98 characters), `period_reason()` with a space for the export.
-    `export_objects.py` serves it as the period block's "reason" (null
-    for an open orbit, typed or missing period; the schema stays 4). The
-    digits test (`test_position_digits.py`) holds the four sentences word
-    for word, typed from the rulings, and the export's reason to the
-    hover's; two planted faults caught by name (the old year sentence,
-    the export's reason worded apart): 18 of 18. The maintenance run: 36
-    of 36. Exported at the close of Part 1: 12 planets and moons with the
-    no-uncertainty sentence, 35 asteroids with the smaller-than sentence,
-    19 bodies rounded to JPL's uncertainty, Ikeya-Seki with the
-    database's, 33 with none (the Sun, open orbits, typed or missing).
-    Not run: the xvfb headless window run (no xvfb on Windows); the
-    digits test builds the live hover for 499 bodies.
-  - Part 2, the website: before Tony's orrery push, a throwaway copy of
-    the gallery fed the orrery's local export ran the night's pass: 48 of
-    49, the one red the copy's own stand-in for the pull, so the night
-    stays green with "reason" ahead of the page. `periodLine`
-    (`gallery/solar_system_figures.js`) prints the served reason after
-    the period; the Typed facts check masks "reason" as a served word
-    (added to the store writer's SERVED_WORDS_PATCHED, the vocabulary's
-    one home) and fails by name on a page that types the sentence. Mars
-    before and after, as the website prints it: "Orbital period: 1.881
-    years (687.0 days), around the Sun, from JPL Horizons, fetched
-    2026-11-06." becomes "... fetched 2026-11-16. JPL gives no
-    uncertainty for this period, so only the digits that stay the same
-    over a year are shown."; Phobos "0.31914 days ... fetched 2026-11-15."
-    becomes "0.3192 days ... fetched 2026-11-16." with the same sentence.
-  - PHOBOS'S DIGITS MOVED, not by this build: Tony's orrery run of Nov
-    15, 18:39 Chicago, refetched Mars, Phobos and Deimos into
-    `data/osculating_cache.json` (the only three entries changed), and
-    Phobos's measured change in a year went from 0.000002 to 0.000043
-    days, so it prints 0.3192; Deimos 1.2625 became 1.2626. Taken up as
-    L-536 (a moon's yearly change), Tony's finding.
-  - Riding the build, Tony's additions 2 and 4 and his ruling on the
-    Sun, recorded on L-514 (the Mars room): every centre opens on its
-    symbol alone; Center on opens the body's fold; the Sun's view is
-    Home.
-  - Checks: the website's run, 49 of 49; the drawer walk 346 of 349, the
-    three L-521 (three red checks)'s own; the scene-address walk 44 of
-    44; the held and tap walks pass. Not run: the first guide's browser
-    walk (playwright is not installed here); the run's First guide row
-    passes and the guide's words name no shell.
-**Gap:** Tony-action (do): push the website; the website's run with
---live; a phone look at Mars's and Phobos's period line, which closes
-this item.
-**Ref:** L-431 (orbital periods); L-513 (the Moon's standards); L-514 (the
-Mars room, where it was found); interactive-exhibit, Hover text is
-written for the visitor.
 
 #### [L-529] Guided encounters: the guide's way of telling, used for a flyby (gallery; an idea, for a design talk after Mars)
 <!-- L:529 status:OPEN upd:2026-11-13 section:A flag: rice: -->
@@ -3566,6 +3471,17 @@ or the text box.
   2026-11-15): every centre on its symbol alone, never a shell; Center on
   opens the body's fold; the Sun's Center on and ?exhibit=sun are the
   Solar System view.
+- **Received 2026-11-16 from L-535 at its close** (the period's reason):
+  WHICH ROW THE OPENING'S HANDLE NAMES, put to Tony. His run record
+  `documentation/WHERE_WE_ARE_11-15-26_0837_run_record.md`, last lines: "these initial
+  solar system views should display the sun row not the earth row ...
+  it would be more consistent to have the sun row highlighted at the
+  top." The ruling pasted into the session the same day keeps "Earth at
+  the Solar System view's opening (Earth stays the opening's highlight,
+  his Sep 29 choice)". Built as ruled (Earth); the Sun would be one
+  served value, the root's arrival `highlight`, by the store writer.
+  ANSWERED, Tony, 2026-11-16, in the session: "Keep Earth". Nothing to
+  change; the opening names Earth.
 - **Received 2026-11-09, night, from L-519 at its close** (Featured's
   rethink): (1) a scene made in the Earth room opening that room, item 8
   of L-519's first phone look, not yet tried (no Earth scene exists);
@@ -17440,6 +17356,135 @@ skills/gallery-assembler/SKILL.md, skills/interactive-exhibit/SKILL.md.
 ## PENDING ACTION (Tony-side)
 
 ## C. RECONCILED LEDGER -- DONE (closed; for the record, do not re-do)
+
+#### [L-535] The period's reason: the website's period line says what set its digits (orrery + gallery; built, closed)
+<!-- L:535 status:DONE upd:2026-11-16 section:C flag: rice: -->
+- **Found by Tony, 2026-11-15**, at Phobos's box on his phone (run record
+  `documentation/WHERE_WE_ARE_11-15-26_0837_run_record.md`): "0.31914
+  days from JPL, but it does not say if JPL provides this as the
+  precision too." JPL states no uncertainty for a moon's or planet's
+  period; the digits are the orrery's, kept by how much the period
+  changes in a year (Phobos 0.000002 days).
+- **Read at orrery d0f90d18 and gallery f9f81266:** the orrery's own
+  period text ends with the sentence saying what set the digits
+  (`orbital_period.period_hover_lines`: "Rounded to how much the period
+  changes in a year.", "Rounded to JPL's stated uncertainty in the
+  orbit.", and the small-body database variants). The export's period
+  block carries `"words": None` for a fetched period; the reason
+  (`error_from`, `sbdb_status`) is only in its `record`, which
+  `tools/mirror_objects.py` (`period_copy`) does not copy; the website's
+  `periodLine` (`gallery/solar_system_figures.js`) prints the period
+  with no reason, for every body.
+- **Tony, 17:24:** "we should fix this in this session. easily
+  overlooked." Brief: `documentation/COORD_L535_period_digits_brief_20261115.md`
+  (the coordinating session, Claude Opus 5.5).
+- **Built 2026-11-15, night** (Claude Code, Claude Opus 5.5, through the
+  python_work door, in the session that built L-514 (the Mars room)'s
+  session 2), on orrery d0f90d18 and gallery f9f81266, both matching
+  their remotes, from the brief and four additions Tony pasted from his
+  run record `documentation/WHERE_WE_ARE_11-15-26_0837_run_record.md` (the coordinator's
+  sections), in three parts with his go-ahead after each ("Yes, start
+  Part 1", "Yes, start Part 2", "Yes, start Part 3"). Skills read from the
+  repository's copies, as the manifest expects: interactive-exhibit
+  1.42, provenance-discipline 2.36, orrery-coding-conventions 1.13,
+  horizons-orbital-mechanics 1.18, safe-file-editing 1.14,
+  agentic-pre-test 1.3, ledger-and-session-records 1.23. Tony pushed the
+  orrery's half at 3946f7d ("L535 period digits") during Part 2.
+  - THE WORDS, Tony's rulings: "for a period JPL gives no uncertainty
+    for, 'JPL gives no uncertainty for this period, so only the digits
+    that stay the same over a year are shown.'; with JPL's stated
+    uncertainty, 'Rounded to JPL's stated uncertainty in the orbit.'
+    Orrery and website alike, from one source." And, at Part 1's
+    go-ahead: where JPL gives an uncertainty but the yearly change is
+    larger, "JPL's uncertainty for this period is smaller than its change
+    over a year, so only the digits that stay the same over a year are
+    shown." A small body whose database lookup failed or found no entry
+    says the database's reason before ", so only the digits ..." (the
+    L-401 rule, say what is true).
+  - Part 1, the orrery: `orbital_period.period_reason_lines()` is the
+    one home of the sentence; the hover joins its lines with <br> (each
+    under 98 characters), `period_reason()` with a space for the export.
+    `export_objects.py` serves it as the period block's "reason" (null
+    for an open orbit, typed or missing period; the schema stays 4). The
+    digits test (`test_position_digits.py`) holds the four sentences word
+    for word, typed from the rulings, and the export's reason to the
+    hover's; two planted faults caught by name (the old year sentence,
+    the export's reason worded apart): 18 of 18. The maintenance run: 36
+    of 36. Exported at the close of Part 1: 12 planets and moons with the
+    no-uncertainty sentence, 35 asteroids with the smaller-than sentence,
+    19 bodies rounded to JPL's uncertainty, Ikeya-Seki with the
+    database's, 33 with none (the Sun, open orbits, typed or missing).
+    Not run: the xvfb headless window run (no xvfb on Windows); the
+    digits test builds the live hover for 499 bodies.
+  - Part 2, the website: before Tony's orrery push, a throwaway copy of
+    the gallery fed the orrery's local export ran the night's pass: 48 of
+    49, the one red the copy's own stand-in for the pull, so the night
+    stays green with "reason" ahead of the page. `periodLine`
+    (`gallery/solar_system_figures.js`) prints the served reason after
+    the period; the Typed facts check masks "reason" as a served word
+    (added to the store writer's SERVED_WORDS_PATCHED, the vocabulary's
+    one home) and fails by name on a page that types the sentence. Mars
+    before and after, as the website prints it: "Orbital period: 1.881
+    years (687.0 days), around the Sun, from JPL Horizons, fetched
+    2026-11-06." becomes "... fetched 2026-11-16. JPL gives no
+    uncertainty for this period, so only the digits that stay the same
+    over a year are shown."; Phobos "0.31914 days ... fetched 2026-11-15."
+    becomes "0.3192 days ... fetched 2026-11-16." with the same sentence.
+  - PHOBOS'S DIGITS MOVED, not by this build: Tony's orrery run of Nov
+    15, 18:39 Chicago, refetched Mars, Phobos and Deimos into
+    `data/osculating_cache.json` (the only three entries changed), and
+    Phobos's measured change in a year went from 0.000002 to 0.000043
+    days, so it prints 0.3192; Deimos 1.2625 became 1.2626. Taken up as
+    L-536 (a moon's yearly change), Tony's finding.
+  - Riding the build, Tony's additions 2 and 4 and his ruling on the
+    Sun, recorded on L-514 (the Mars room): every centre opens on its
+    symbol alone; Center on opens the body's fold; the Sun's view is
+    Home.
+  - Checks: the website's run, 49 of 49; the drawer walk 346 of 349, the
+    three L-521 (three red checks)'s own; the scene-address walk 44 of
+    44; the held and tap walks pass. Not run: the first guide's browser
+    walk (playwright is not installed here); the run's First guide row
+    passes and the guide's words name no shell.
+- **Pushed by Tony:** the orrery at 3946f7d (Part 1) and 8d362bd5 (the
+  records), the website at 997df132; the website's run with --live,
+  "2 of 2 gating checkers passed", last swap "succeeded first time".
+- **Tony's look, 2026-11-16,** in his run record `documentation/WHERE_WE_ARE_11-15-26_0837_run_record.md`:
+  "Phobos's and Mars's boxes, with the period line ending in its
+  sentence; -- yes"; "the Earth card and the Sun card; -- yes"; "Centre
+  on Earth and on Mars with the drawer open. -- correct".
+- **THE DRAWER OPENS AT THE ROW ITS HANDLE NAMES** (Tony's ruling,
+  2026-11-16, from the run record's last lines, as pasted into the
+  session): "Opening it scrolls that row into view, highlighted: Earth at
+  the Solar System view's opening (Earth stays the opening's highlight,
+  his Sep 29 choice), Venus after a tap on Venus, the Sun at the top
+  after a tap on the Sun, and a centred body with its list open." His
+  own words in the run record, on the session's last thought: "the
+  initial view of the solar system from the lobby centers on the sun
+  with the inner planets ticked, but displays the earth's row, although
+  the list starts with the sun. ... it would be more consistent to have
+  the sun row highlighted at the top." Built on gallery 997df132:
+  `sunDrawerToHandle` in `interactive.html`, called when the drawer
+  opens, scrolls the handle's row to the top of the list, its groups and
+  fold opened; walk section 39 holds the four cases and fails by name on
+  a page without the call (the opening, Venus, Centre on Mars; the Sun's
+  row is at the top either way). Section 37's distance check now allows
+  half the place the box prints (Phobos past its span on a walk dated
+  Nov 16 prints 9,200 km against 9,249.9). The gallery run, 49 of 49
+  (First guide ok); the drawer walk 351 of 354, the three L-521 (three
+  red checks)'s own; the first guide's browser walk, run with Chrome
+  (WALK_CHANNEL=chrome; the test Chromium of 2026-11-08 will not start
+  on this computer), 177 of 177 before and after: no card changes, and
+  steps 3 and 4 open the menu with Earth's row at the top, its "Center
+  on Earth" about 130 px higher, on screen. Pictures at an upright
+  phone's size: the opening, a tap on Venus, a tap on the Sun, Centre on
+  Mars, each with the drawer opened.
+- **Closed 2026-11-16 on Tony's look.** Loose ends re-homed: which row
+  the opening's handle names, put to Tony at the close, to L-515 (one
+  nested tree), answered "Keep Earth"; a moon's yearly change to L-536.
+**Gap:** none; closed.
+**Ref:** L-431 (orbital periods); L-513 (the Moon's standards); L-514 (the
+Mars room, where it was found); interactive-exhibit, Hover text is
+written for the visitor.
 
 #### [L-514] The Mars room: Mars, Phobos and Deimos (gallery + orrery, a planet room; road stage 15; built, closed)
 <!-- L:514 status:DONE upd:2026-11-15 section:C flag: rice: -->

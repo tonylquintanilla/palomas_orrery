@@ -852,3 +852,39 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 - Next on the road is ESCAPADE's path, after your look closes the period sentence.
 
 One final thought: Centre on now opens a body's list in the drawer, but the drawer still opens at the top of its list, so on a phone you scroll down to Earth or Mars to see it. If that bothers you on your look, scrolling the drawer to the centred body would be a small change. I didn't make it without your word. -- the alternative would be what Code suggested, that the row in the label should also be the position in the list displayed in the drawer. in other words, the opening scene would display the inner planets, with the earth row in the label, and opening the drawer should show the earth row highlighted and scrolled to. tapping venus would do the same thing, show the venus label, and text box, and opening the drawer would show venus scrolled to. tapping the sun, would show the sun label and short text box, and the drawer would open at the top with the sun row selected. tapping earth would be like the opening scene except that the earth's text box would be displayed too.
+
+================
+
+**Code:**
+
+The Solar System view keeps opening on Earth's row. I've recorded "Keep Earth"; no page code or setting changes, because the website already does this.
+
+**Where it's recorded**
+- **The ledger:** your answer is in L-515 (one nested tree), where I'd put the question, and in L-535 (the period's reason)'s closing note. The index regenerated with no problems.
+- **Where We Are:**
+  - The decision is gone from Needs you now and from Waiting on you.
+  - The box says the opening keeps Earth's row.
+  - The drawer line under Settled now ends "the opening names Earth".
+  - The page is at 129 lines, within its cap.
+
+**Files waiting for you:**
+- Website:
+  - `interactive.html`: the drawer opens at its handle's row.
+  - `tools/headless/walk_solar_system_drawer.js`: the walk's new section 39.
+  - `INTERACTIVE_AS_BUILT.md`: the as-built entry.
+  - Three .sha files and the module atlas and index, written by the run.
+- Orrery: `LEDGER_CONSOLIDATED.md` and `documentation/WHERE_WE_ARE.md`.
+
+**Your run order**
+1. Commit and push the website. -- 
+2. Commit and push the orrery.
+3. Run the website's maintenance run with --live from the dashboard.
+
+**Tony-actions**
+- (do) Push the website, then the orrery.
+- (do) The --live run after the push.
+- (do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).
+
+**Where this leaves us**
+- Mars and the period's sentence are both closed, and the drawer now opens where its handle points.
+- Next on the road is ESCAPADE's path (L-533), with its brief written when it's next.
