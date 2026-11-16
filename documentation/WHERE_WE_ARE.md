@@ -1,8 +1,8 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 16, 2026: the same Code session (Opus), your drawer ruling, L-535 (the period's reason) closed.
-- Written at orrery 8d362bd5 and gallery 997df132 (your pushes), with the drawer change and these records not yet committed.
+Last updated: November 16, 2026, 01:10: the coordinating session's close (Opus), its handoff to the ESCAPADE coordinator.
+- Written at orrery 273f4ac9 and gallery 1c5fe516, your pushes of the drawer and the records, with the handoff not yet pushed.
 
 > **READ THIS FIRST**
 >
@@ -13,7 +13,7 @@ Last updated: November 16, 2026: the same Code session (Opus), your drawer rulin
 > **Do next:** *ESCAPADE's path (L-533 (ESCAPADE)), its brief when it is next.*
 >
 > **Needs you now:**
-> - *(do) Commit and push the website (the drawer), then the orrery (the ledger, this page); after the website's push, its run with --live.*
+> - *(do) Commit and push the orrery: the coordinator's handoff, `documentation/HANDOFF_website_coordination_20261116.md`, and this page.*
 > - *(do) Each morning, Fetch origin and Pull origin on both, orrery then website, before any work. If Pull origin shows up only once you have changes: Commit them first, then Pull origin, then Push origin. If Desktop stashes your changes anyway, restore them at once: Changes tab, Stashed Changes, Restore.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
 
@@ -121,7 +121,7 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- This session: L-535 (the period's reason), closed, from `COORD_L535_period_digits_brief_20261115.md`, your four additions and the drawer ruling; the website's `INTERACTIVE_AS_BUILT.md`, under Center on and the drawer.
+- The handoff: `HANDOFF_website_coordination_20261116.md`. This session: L-535 (the period's reason), closed, from `COORD_L535_period_digits_brief_20261115.md`, your four additions and the drawer ruling; the website's `INTERACTIVE_AS_BUILT.md`, under Center on and the drawer.
 - The caps: `DOCUMENT_CAPS.md`; L-522 (document caps); its brief
   `COORD_L522_step1_caps_brief_20261110.md` and the review beside it.
 - The tree: L-515 (one nested tree), its briefs `COORD_L515_*`.

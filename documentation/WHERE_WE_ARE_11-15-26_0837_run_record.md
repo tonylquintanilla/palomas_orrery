@@ -876,9 +876,115 @@ The Solar System view keeps opening on Earth's row. I've recorded "Keep Earth"; 
 - Orrery: `LEDGER_CONSOLIDATED.md` and `documentation/WHERE_WE_ARE.md`.
 
 **Your run order**
-1. Commit and push the website. -- 
-2. Commit and push the orrery.
+1. Commit and push the website. -- 1c5fe516cebaa7b239d34c7573f66a0f6099cc90
+2. Commit and push the orrery. -- 273f4ac9b7ebf134c3d2ca98257dd0a01f482f59
 3. Run the website's maintenance run with --live from the dashboard.
+
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 66 files from https://palomasorrery.com/ (34 typed, 32 positions files read from data\objects_config.json)
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches (the working copy is CRLF)
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   gallery/arrival.js                             matches the working copy
+    SERVED   gallery/nav_cluster.js                         matches the working copy
+    SERVED   gallery/solar_system_figures.js                matches the working copy
+    SERVED   gallery/solar_system_drawer.js                 matches the working copy
+    SERVED   data/objects_config.json                       matches the working copy
+    SERVED   gallery/guestbook.js                           matches the working copy
+    SERVED   data/guestbook.json                            matches the working copy
+    SERVED   data/solar-system/drawings/hills_cloud.json    matches the working copy
+    SERVED   data/solar-system/drawings/van_allen_belts.json matches the working copy
+    SERVED   data/solar-system/drawings/earth_exosphere.json matches the working copy
+    SERVED   data/solar-system/drawings/sun_corona.json     matches the working copy
+    SERVED   data/solar-system/drawings/zodiacal_dust.json  matches the working copy
+    SERVED   data/solar-system/drawings/outer_oort_cloud.json matches the working copy
+    SERVED   data/solar-system/drawings/galactic_tide.json  matches the working copy
+    SERVED   gallery/source_list.js                         matches the working copy
+    SERVED   gallery/far_lines.js                           matches the working copy
+    SERVED   gallery/direction_arrows.js                    matches the working copy
+    SERVED   gallery/drawer_order.js                        matches the working copy
+    SERVED   gallery/text_box.js                            matches the working copy
+    SERVED   gallery/scene_moment.js                        matches the working copy
+    SERVED   gallery/scene_address.js                       matches the working copy
+    SERVED   gallery/picture_folds.js                       matches the working copy
+    SERVED   gallery/gallery_metadata.json                  matches the working copy
+    SERVED   gallery/assembler/compose_children.py          matches the working copy
+    SERVED   gallery/view_centre.js                         matches the working copy
+    SERVED   gallery/tap_hover.js                           matches the working copy
+    SERVED   gallery/first_guide.js                         matches the working copy
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+    SERVED   data/solar-system/positions/voyager_2.json     matches the working copy
+    SERVED   data/solar-system/positions/new_horizons.json  matches the working copy
+    SERVED   data/solar-system/positions/juno.json          matches the working copy
+    SERVED   data/solar-system/positions/osiris_apex.json   matches the working copy
+    SERVED   data/solar-system/positions/parker_solar_probe.json matches the working copy
+    SERVED   data/solar-system/positions/bepicolombo.json   matches the working copy
+    SERVED   data/solar-system/positions/solar_orbiter.json matches the working copy
+    SERVED   data/solar-system/positions/lucy.json          matches the working copy
+    SERVED   data/solar-system/positions/juice.json         matches the working copy
+    SERVED   data/solar-system/positions/psyche_spacecraft.json matches the working copy
+    SERVED   data/solar-system/positions/europa_clipper.json matches the working copy
+    SERVED   data/solar-system/positions/galileo.json       matches the working copy
+    SERVED   data/solar-system/positions/cassini.json       matches the working copy
+    SERVED   data/solar-system/positions/pioneer_10.json    matches the working copy
+    SERVED   data/solar-system/positions/pioneer_11.json    matches the working copy
+    SERVED   data/solar-system/positions/rosetta.json       matches the working copy
+    SERVED   data/solar-system/positions/akatsuki.json      matches the working copy
+    SERVED   data/solar-system/positions/dart.json          matches the working copy
+    SERVED   data/solar-system/positions/west.json          matches the working copy
+    SERVED   data/solar-system/positions/mcnaught.json      matches the working copy
+    SERVED   data/solar-system/positions/tsuchinshan_atlas.json matches the working copy
+    SERVED   data/solar-system/positions/wierzchos.json     matches the working copy
+    SERVED   data/solar-system/positions/atlas_2024_g3.json matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1.json      matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1_b.json    matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1_d.json    matches the working copy
+    SERVED   data/solar-system/positions/panstarrs_2025_r3.json matches the working copy
+    SERVED   data/solar-system/positions/borisov_2025_v1.json matches the working copy
+    SERVED   data/solar-system/positions/oumuamua.json      matches the working copy
+    SERVED   data/solar-system/positions/borisov_2i.json    matches the working copy
+    SERVED   data/solar-system/positions/atlas_3i.json      matches the working copy
+
+  PASS Served reachability       9.3s  all 66 files served and
+                                    byte-identical to the working copy
+
+  orrery export pinned at 7023d409
+
+  PASS Export freshness          0.2s  the served export is the orrery's
+                                    at 7023d409, byte for byte
+
+  orrery HEAD 273f4ac9
+  examining 3 of 190 links; the other 187 are served from the export
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  3 pointers: 1 match, 0 DRIFT, 0 UNIT MISMATCH, 2 could not be examined.
+
+  PASS Store drift               2.0s  3 pointers against orrery 273f4ac9
+                                    -- 1 match, 0 DRIFT, 0 UNIT
+                                    MISMATCH, 2 could not be examined.
+
+======================================================================
+  2 of 2 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Store drift            3 pointers against orrery 273f4ac9 -- 1
+  last swap 2026-11-15T18:52:53.967309+00:00: succeeded first time
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 
 **Tony-actions**
 - (do) Push the website, then the orrery.
@@ -888,3 +994,33 @@ The Solar System view keeps opening on Earth's row. I've recorded "Keep Earth"; 
 **Where this leaves us**
 - Mars and the period's sentence are both closed, and the drawer now opens where its handle points.
 - Next on the road is ESCAPADE's path (L-533), with its brief written when it's next.
+
+==================
+
+**Coordinator:**
+
+The handoff for the next coordinator is written and on your disk, and Where We Are points to it. Both files read back matching my copies byte for byte. Your last pushes (orrery 273f4ac9, website 1c5fe516) are its anchor, and the --live run was green.
+
+**What the handoff gives the next coordinator:**
+- **Where to start:** check both bases, read your run record, then L-533 (ESCAPADE), L-534 (missions by destination) and L-529 (guided encounters).
+- **The one check still travelling:** the Earth System skill's 1.3 must be confirmed the first time it's loaded. The website-rooms check was done here.
+- **What this session closed or opened, by item:**
+  - Closed: L-514 (the Mars room) and L-535 (the period's reason).
+  - Opened: L-533, L-534 and L-536 (a moon's yearly change).
+  - Widened: L-529 and L-297 (the Lagrange points).
+- **Six lessons**, including the red nights when the two halves of a build are pushed apart, and my own two slips.
+
+**Files changed, for your run record** (orrery folder only):
+- new documentation/HANDOFF_website_coordination_20261116.md (101 lines)
+- ok documentation/WHERE_WE_ARE.md (4 edits, by section; 129 lines above the marker)
+
+**Tony-actions:**
+- (do) Commit and push the orrery: the handoff and the page. -- 
+- (do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).
+
+**Where this leaves us:**
+- Mars is on the website with both moons, every centre opens on its symbol, and the drawer opens where its handle points.
+- A period now says what set its digits, in the same words on both sides.
+- ESCAPADE's path is next, then the Lagrange points, then one design round for destinations and encounters.
+
+Thank you, Tony. A good session.
