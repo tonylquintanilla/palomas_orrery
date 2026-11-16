@@ -1015,7 +1015,7 @@ The handoff for the next coordinator is written and on your disk, and Where We A
 - ok documentation/WHERE_WE_ARE.md (4 edits, by section; 129 lines above the marker)
 
 **Tony-actions:**
-- (do) Commit and push the orrery: the handoff and the page. -- 
+- (do) Commit and push the orrery: the handoff and the page. -- e6836b191f21bc56d2c2acb9c7dc284129fc81e2
 - (do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).
 
 **Where this leaves us:**
