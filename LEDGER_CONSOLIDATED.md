@@ -1005,7 +1005,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*269 live items; 253 need attention (`!`); 165 RICE-scored; 259 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*269 live items; 253 need attention (`!`); 165 RICE-scored; 260 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1172,7 +1172,6 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-510 | The object list's typed fields stop deciding: a small body drawn by today's eccentricity, a plan asked from before any launch (orrery, the object list and the path plan) | OPEN | -- | 2026-11-05 |
 | ! | L-511 | The orrery's export carries the words the website prints (orrery + gallery, the words) | OPEN | -- | 2026-11-03 |
 | ! | L-512 | The orrery's fallbacks when JPL cannot answer (orrery, the plot's data path) | OPEN | -- | 2026-11-04 |
-| ! | L-514 | The Mars room: Mars, Phobos and Deimos (gallery + orrery, a planet room; road stage 15) | OPEN | -- | 2026-11-15 |
 | ! | L-515 | One nested tree in place of isolated rooms (gallery, the room system; design) | OPEN | -- | 2026-11-10 |
 | ! | L-516 | Renew palomasorrery.com at Porkbun before 2027-02-13 (legacy; Tony's account) | OPEN | -- | 2026-11-07 |
 | ! | L-520 | Old pictures carry old words: the saved pictures' titles and descriptions have no source (gallery, the saved pictures; the braid) | OPEN | -- | 2026-11-08 |
@@ -1188,6 +1187,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-533 | ESCAPADE, Blue and Gold, on their way to Mars (orrery + gallery; recorded, after the Mars build) | OPEN | -- | 2026-11-15 |
 | ! | L-534 | Missions by destination: a mission's row under each body it goes to (gallery + orrery; design round with L-529) | OPEN | -- | 2026-11-15 |
 | ! | L-535 | The period's reason: the website's period line says what set its digits (orrery + gallery) | OPEN | -- | 2026-11-15 |
+| ! | L-536 | A moon's yearly change samples its wobble: the period's digits from many dates (orrery, the period fetch; recorded, for its own session) | OPEN | -- | 2026-11-15 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1589,6 +1589,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 |  | L-503 | The main asteroid belt's cloud on the website, L-443's last piece, its gallery half (gallery, the Solar System room) | DONE | -- | 2026-11-01 |
 |  | L-505 | The axis ticks and the ruler: dots on the axis lines, a ruler for the grid chip, no edge numbers (gallery, every room's frame) | DONE | -- | 2026-11-02 |
 |  | L-513 | The Moon's standards: its words, link, period and uncertainty, served by the orrery (orrery + gallery, objects; road stage 14) | DONE | -- | 2026-11-06 |
+|  | L-514 | The Mars room: Mars, Phobos and Deimos (gallery + orrery, a planet room; road stage 15; built, closed) | DONE | -- | 2026-11-15 |
 |  | L-517 | The lobby for a first-time phone visitor: one door first, the pictures into the tree (gallery, lobby and drawer; design) | DONE | -- | 2026-11-08 |
 |  | L-518 | The shared scene link: the address carries the ticked bodies and the minute (gallery, every room of the tree; built, closed) | DONE | -- | 2026-11-08 |
 |  | L-519 | Featured's rethink: Scenes, a shared link kept in the tree and on Featured (gallery, the gallery editor and the Solar System room's drawer; built, closed) | DONE | -- | 2026-11-09 |
@@ -1854,6 +1855,33 @@ ESCAPADE's path (L-533) and the Lagrange points (L-297).
 tree); L-476 (paths by the plan); L-443 (the spacecraft group); L-507
 (historical missions).
 
+#### [L-536] A moon's yearly change samples its wobble: the period's digits from many dates (orrery, the period fetch; recorded, for its own session)
+<!-- L:536 status:OPEN upd:2026-11-15 section:A flag: rice: -->
+- **Tony's finding, 2026-11-15, night,** at L-535 (the period's reason)'s
+  Part 1 report: "Phobos's yearly change jumped about 20 times between
+  two fetches a day apart, so the two-date test samples Mars's short
+  wobble of the osculating period rather than measuring it; the digits
+  should come from many dates across the year. A new ledger item, for
+  its own session." Recorded, not fixed.
+- **The case:** `data/osculating_cache.json`, Phobos's period record:
+  fetched 2026-11-15, year_change_days 0.00000196 (0.3191373 days);
+  fetched 2026-11-16, year_change_days 0.0000427 (0.3191849 days), from
+  two asks of JPL's PR a Julian year apart (horizons-orbital-mechanics,
+  A Period Depends on Its Centre). Printed 0.31914, then 0.3192. Deimos
+  the other way: 0.0000863, then 0.0000320 (1.2625, then 1.2626).
+- **Why, as far as read:** an osculating period is the period of the
+  ellipse fitted at one instant, and a moon close to an oblate planet
+  has it swing within each orbit; two instants a year apart can land
+  anywhere in that swing, so their difference measures the swing's
+  phase as much as the orbit's change. Pluto's case was the same kind
+  at a barycentre (horizons-orbital-mechanics 1.13, L-484); not yet
+  measured for Phobos.
+**Gap:** its own session: measure the swing (JPL's PR at many dates
+across a year), choose how the digits are set from it, and the period
+fetch's and the digits test's checks; Tony's word on the rule.
+**Ref:** L-535 (the period's reason); L-431 (orbital periods); L-484
+(Pluto's period at its barycentre); L-514 (the Mars room).
+
 #### [L-535] The period's reason: the website's period line says what set its digits (orrery + gallery)
 <!-- L:535 status:OPEN upd:2026-11-15 section:A flag: rice: -->
 - **Found by Tony, 2026-11-15**, at Phobos's box on his phone (run record
@@ -1875,8 +1903,76 @@ tree); L-476 (paths by the plan); L-443 (the spacecraft group); L-507
 - **Tony, 17:24:** "we should fix this in this session. easily
   overlooked." Brief: `documentation/COORD_L535_period_digits_brief_20261115.md`
   (the coordinating session, Claude Opus 5.5).
-**Gap:** the Code session of the brief, on Tony's go-ahead in it; then
-the before-and-after words for Mars and Phobos to Tony before they ship.
+- **Built 2026-11-15, night** (Claude Code, Claude Opus 5.5, through the
+  python_work door, in the session that built L-514 (the Mars room)'s
+  session 2), on orrery d0f90d18 and gallery f9f81266, both matching
+  their remotes, from the brief and four additions Tony pasted from his
+  run record `documentation/WHERE_WE_ARE_11-15-26_0837_run_record.md` (the coordinator's
+  sections), in three parts with his go-ahead after each ("Yes, start
+  Part 1", "Yes, start Part 2", "Yes, start Part 3"). Skills read from the
+  repository's copies, as the manifest expects: interactive-exhibit
+  1.42, provenance-discipline 2.36, orrery-coding-conventions 1.13,
+  horizons-orbital-mechanics 1.18, safe-file-editing 1.14,
+  agentic-pre-test 1.3, ledger-and-session-records 1.23. Tony pushed the
+  orrery's half at 3946f7d ("L535 period digits") during Part 2.
+  - THE WORDS, Tony's rulings: "for a period JPL gives no uncertainty
+    for, 'JPL gives no uncertainty for this period, so only the digits
+    that stay the same over a year are shown.'; with JPL's stated
+    uncertainty, 'Rounded to JPL's stated uncertainty in the orbit.'
+    Orrery and website alike, from one source." And, at Part 1's
+    go-ahead: where JPL gives an uncertainty but the yearly change is
+    larger, "JPL's uncertainty for this period is smaller than its change
+    over a year, so only the digits that stay the same over a year are
+    shown." A small body whose database lookup failed or found no entry
+    says the database's reason before ", so only the digits ..." (the
+    L-401 rule, say what is true).
+  - Part 1, the orrery: `orbital_period.period_reason_lines()` is the
+    one home of the sentence; the hover joins its lines with <br> (each
+    under 98 characters), `period_reason()` with a space for the export.
+    `export_objects.py` serves it as the period block's "reason" (null
+    for an open orbit, typed or missing period; the schema stays 4). The
+    digits test (`test_position_digits.py`) holds the four sentences word
+    for word, typed from the rulings, and the export's reason to the
+    hover's; two planted faults caught by name (the old year sentence,
+    the export's reason worded apart): 18 of 18. The maintenance run: 36
+    of 36. Exported at the close of Part 1: 12 planets and moons with the
+    no-uncertainty sentence, 35 asteroids with the smaller-than sentence,
+    19 bodies rounded to JPL's uncertainty, Ikeya-Seki with the
+    database's, 33 with none (the Sun, open orbits, typed or missing).
+    Not run: the xvfb headless window run (no xvfb on Windows); the
+    digits test builds the live hover for 499 bodies.
+  - Part 2, the website: before Tony's orrery push, a throwaway copy of
+    the gallery fed the orrery's local export ran the night's pass: 48 of
+    49, the one red the copy's own stand-in for the pull, so the night
+    stays green with "reason" ahead of the page. `periodLine`
+    (`gallery/solar_system_figures.js`) prints the served reason after
+    the period; the Typed facts check masks "reason" as a served word
+    (added to the store writer's SERVED_WORDS_PATCHED, the vocabulary's
+    one home) and fails by name on a page that types the sentence. Mars
+    before and after, as the website prints it: "Orbital period: 1.881
+    years (687.0 days), around the Sun, from JPL Horizons, fetched
+    2026-11-06." becomes "... fetched 2026-11-16. JPL gives no
+    uncertainty for this period, so only the digits that stay the same
+    over a year are shown."; Phobos "0.31914 days ... fetched 2026-11-15."
+    becomes "0.3192 days ... fetched 2026-11-16." with the same sentence.
+  - PHOBOS'S DIGITS MOVED, not by this build: Tony's orrery run of Nov
+    15, 18:39 Chicago, refetched Mars, Phobos and Deimos into
+    `data/osculating_cache.json` (the only three entries changed), and
+    Phobos's measured change in a year went from 0.000002 to 0.000043
+    days, so it prints 0.3192; Deimos 1.2625 became 1.2626. Taken up as
+    L-536 (a moon's yearly change), Tony's finding.
+  - Riding the build, Tony's additions 2 and 4 and his ruling on the
+    Sun, recorded on L-514 (the Mars room): every centre opens on its
+    symbol alone; Center on opens the body's fold; the Sun's view is
+    Home.
+  - Checks: the website's run, 49 of 49; the drawer walk 346 of 349, the
+    three L-521 (three red checks)'s own; the scene-address walk 44 of
+    44; the held and tap walks pass. Not run: the first guide's browser
+    walk (playwright is not installed here); the run's First guide row
+    passes and the guide's words name no shell.
+**Gap:** Tony-action (do): push the website; the website's run with
+--live; a phone look at Mars's and Phobos's period line, which closes
+this item.
 **Ref:** L-431 (orbital periods); L-513 (the Moon's standards); L-514 (the
 Mars room, where it was found); interactive-exhibit, Hover text is
 written for the visitor.
@@ -3456,6 +3552,20 @@ or the text box.
   `sunReset` through `navHome`), not the frame the page opened on; the
   skill's "the opening frame and angle" may say so. A description, not a
   wrong instruction.
+- **Received 2026-11-15, night, from L-514 at its close** (the Mars
+  room), for interactive-exhibit's next version (the skill is at its
+  cap, L-522, so old lines move out first): (1) its two Store drift
+  sentences (Provenance, "An exhibit is done when Store drift reads MATCH
+  for its pointers", and the build steps' "Store drift reads MATCH for
+  the new pointers") hold only for links the export does not serve;
+  for pointers the export serves, such as MAR099's, the checks are
+  Config mirror and Pointer join. (2) Two lines near its line 320 read as
+  one broken sentence ("A centre gets its opening (`add_arrival`): the
+  gallery's `INTERACTIVE_AS_BUILT.md`," then "A centre gets its
+  opening."). (3) What a room opens on, since L-535 (Tony's rulings of
+  2026-11-15): every centre on its symbol alone, never a shell; Center on
+  opens the body's fold; the Sun's Center on and ?exhibit=sun are the
+  Solar System view.
 - **Received 2026-11-09, night, from L-519 at its close** (Featured's
   rethink): (1) a scene made in the Earth room opening that room, item 8
   of L-519's first phone look, not yet tried (no Earth scene exists);
@@ -3817,423 +3927,6 @@ skill's split (L-522).
 - **Ref:** L-514 (the Mars room); L-443 (the drawer's groups); L-392 (the
   rooms section); L-291 (the Earth room); the protocol's The Orrery and
   the Assembler.
-
-#### [L-514] The Mars room: Mars, Phobos and Deimos (gallery + orrery, a planet room; road stage 15)
-<!-- L:514 status:OPEN upd:2026-11-15 section:A flag: rice: -->
-- **Opened 2026-11-06, night**, by the coordinating session (Claude Opus
-  5.5) through the python_work door, built on orrery b32205f4 and
-  gallery 3f2ce7fc. Tony's prompt: "Road stage 15, the planet rooms,
-  starting with Mars (Phobos, Deimos). This is a design round, not a
-  build: Mars is the first room centred on a planet since the Earth
-  room. Bring me the room's design questions one at a time: what the
-  room opens on, what its drawer lists, and how a moon's box reads. Use
-  the Moon of L-513 as the pattern for each moon (a key in the export,
-  JPL's name and period read live, NASA's own words with their page as
-  the link, a cited accuracy, days only under a year). Don't build until
-  the design settles; then propose the smallest instrument and wait for
-  my go-ahead."
-- **At the base, read 2026-11-06:**
-  - Website: `data/objects_config.json` has `mars` (id 499, around the
-    Sun, NASA's words, info link, a fetched period, a position_accuracy
-    link) with NO features served, and no entry for Phobos or Deimos.
-    The config's rooms section holds only the Solar System room; there
-    is no `mars` row in `EXHIBITS`.
-  - Orrery: `celestial_objects.py` has Phobos (401) and Deimos (402),
-    both `id_type` 'majorbody', with no `'key'`, so neither is exported.
-    Their `mission_info` is typed, not NASA's words, and carries typed
-    periods ("Mars orbital period: 0.32 Earth days."; "1.26 Earth days.
-    Retrogade."). Their links: Phobos
-    https://science.nasa.gov/resource/martian-moon-phobos/, Deimos
-    https://science.nasa.gov/mars/moons/deimos/.
-  - Deimos's "Retrogade": unsourced. NASA's Deimos page, read
-    2026-11-06 ("Deimos - NASA Science"), says "Deimos orbits Mars every
-    30 hours." and says nothing of direction. The word goes when the
-    entry takes NASA's words (the moon's box question), not before.
-  - `constants_new.py`: MARS_RADIUS_KM 3396.2 (Archinal et al. 2018,
-    equatorial) and PHOBOS_RADIUS_KM; the DE430 accuracy rows cover the
-    planets' groups and the Moon only, so no row yet gives JPL's
-    accuracy for the Martian moons.
-  - The orrery draws Mars's shells (`mars_visualization_shells.py`);
-    the road says the planet rooms open "with the planet and its moons,
-    shells later".
-- **The design questions, in Tony's order**, each recorded here with
-  its ruling: (1) what the room opens on; (2) what its drawer lists;
-  (3) how a moon's box reads.
-- **Ruling 1, what the room opens on**, Tony, Nov 6, in his run record
-  `documentation/WHERE_WE_ARE_11-6-26_2227_run_record.md`, declining the
-  coordinator's proposal (Mars as a ball, Earth's guides, both moons
-  ticked): "no. like the moon in the earth room, they should be off by
-  default. the room should open like earth, with the mars symbol only
-  for now, and in the future, with its crust shell, rotation axis,
-  equator, and terminator, when we build out the room." So the arrival
-  block serves `moon` false for both moons, and the room opens on Mars's
-  symbol alone; the crust shell, axis, equator and terminator wait for
-  the room's build-out.
-- **Ruling 2, what the drawer lists**, Tony, Nov 6, the same run record,
-  answering "Should the Mars room's drawer list just Mars (fixed), Phobos
-  and Deimos?": "yes, but this suggests that the Earth room also needs
-  the Earth symbol fixed, which it does not have." So the drawer lists
-  three rows: Mars, fixed (no tick box, always drawn; its name opens its
-  text box and panel), then Phobos, then Deimos, nearest first, each
-  with a tick box and Go To, a tick drawing the moon's marker and orbit
-  together. Rows for the shells and guides join at the build-out.
-  - The Earth room's fixed Earth row: Tony's observation, recorded here
-    because one build reaches both. Today a fixed row exists only in the
-    Solar System room (`ssDrawer`, null in the Sun and Earth rooms), so
-    a fixed centre row in a planet room is a new piece of SHARED chrome
-    (interactive-exhibit, One chrome, many rooms): built once, given to
-    the Mars and Earth rooms together, both Mode 5 targets. Put to Tony
-    with the build's instrument.
-- **Ruling 3, how a moon's box reads**, Tony, Nov 6, the same run record:
-  each Martian moon's box follows the Moon's (L-513) pattern -- name,
-  NASA's sentence with NASA's page as the panel's link, its distance
-  from Mars by the larger of the drift and JPL's accuracy, never finer
-  than whole kilometres, a sentence saying which set the digits, its
-  period in days around Mars -- with JPL's "not yet included" sentence
-  until an accuracy is cited. Tony: "yes, needs a source." and "yes.
-  but it will be part of the build." So finding and citing an accuracy
-  for the Martian moons is build work, not a guess at design.
-- **Tony's observation on the moon's three boxes**, the same run record,
-  for the template of every moon, the Earth room's Moon included: "there
-  are 3 text boxes: 1) the go to button open a short text box labeling
-  the orbit. 2) tapping the moon open's the moon's text box 3) tapping
-  the cross on the orbit open's a text box on the orbit as rendered. --
-  this is complicated for the visitor and can be easily missed and
-  tapping is hit or miss. the only obvious box is the go to's text box.
-  to make it easier on the visitor, this go to box should tell the
-  visitor to tap the moon and to tap the cross for specific information
-  about those features. perhaps we should also increase the tap area so
-  that it is easier to open those text boxes. i missed these details
-  when building the earth room, but this is the template for all future
-  moons including Mars'."
-  - Read at gallery 3f2ce7fc: Go To on the Moon's row opens the words of
-    the row's info cross, the orbit's short label "Moon's orbit, drawn
-    around Earth" (`labelTraceIndex` takes a trace marked
-    `meta.label_target` first, else the row's cross); the full box is on
-    the Moon's marker alone (`earth_geometry.js`, `moonBox`). The tap
-    reaches 22 px on a portrait phone, with text-less traces left out of
-    the pick (`SUN_PICK_RADIUS_PX`, `sunTapPicking`), and Plotly's 10 px
-    elsewhere.
-  - Put to Tony as the round's last question: the Go To box tells the
-    visitor where to tap (his proposal), or Go To opens the moon's own
-    full box (the marker marked `label_target`), as Go To on a body does
-    in the Solar System room.
-- **Ruling 4, what Go To on a moon opens**, Tony, Nov 6, 23:33 Chicago,
-  in chat: "B". Go To on a moon opens the moon's own full box (its marker
-  marked `label_target`), as Go To on a body does in the Solar System
-  room; the orbit's cross keeps its short label; no sentence tells the
-  visitor where to tap. The template for every moon, the Earth room's
-  Moon included. A larger tap area is build work, measured, since a
-  wider reach near Mars could pick Mars instead of Phobos.
-- **The design is settled** with ruling 4. The build, as proposed to
-  Tony the same night, waiting for his go-ahead:
-  - Session 1, the orrery (Claude Code): key Phobos and Deimos, JPL's
-    names read live; NASA's words and pages, the sentences brought to
-    Tony before they are written (Deimos's unsourced "Retrogade" goes);
-    periods fetched around Mars; a cited accuracy for the Martian
-    moons, or the gap recorded; the export and the maintenance run.
-  - Session 2, the website (Claude Code): the two moons served and
-    cached around Mars; the Mars room's row, opening and drawer; the
-    shared fixed centre row, given to Mars and Earth; Go To on a moon
-    opening its box, the Earth room's Moon too; the tap area measured;
-    the checks and the headless walk; then Tony's phone look.
-  - Each session's brief written when that session is next (Token
-    Economy); one interactive-exhibit bump, in session 2, if its rules
-    change.
-- **Held, Nov 7, 00:17 Chicago**, before any go-ahead: Tony opened a
-  rethink of the room system (L-515 (one nested tree)). The Mars room
-  waits behind it, and may be built as the first node of the new system
-  rather than as one more room. Its four rulings stand.
-- **Received 2026-11-09, night, from L-515's step 2b talk** (rulings 13
-  to 20 there): Mars becomes a fold of the one tree, not a room of its
-  own. Its fold lists Mars's shells and Phobos and Deimos together by
-  distance (ruling 14), which is ruling 2's three rows, nearest first;
-  "Centre on Mars" moves the view so Mars sits in the middle (ruling 15)
-  and opens on ruling 1's opening, the symbol alone (ruling 16); the axis
-  lines cross at Mars (ruling 17); Phobos and Deimos are served as JPL's
-  positions for 48 hours, built in this step (ruling 18, ruling 11).
-  Rulings 3 and 4 stand.
-- **Received 2026-11-10, from L-515's step 2b build** (one nested tree):
-  the root now draws every moon fetched around a body at its planet's
-  place, folded under the planet's row, its box the Moon's pattern. Mars
-  needs nothing new of the page for Phobos and Deimos once they are served
-  and cached around Mars: they join Mars's fold by distance, and Mars
-  becomes a centre by `centresOf`. Its opening, the symbol alone, is
-  written by the store writer's `add_arrival`, as Jupiter's and Saturn's
-  were. Found by the build: Io, Titan, Pluto and Charon are not keyed in
-  the orrery's object list either, so their boxes carry no words, link or
-  period; this item's orrery session, which keys moons, is where they come
-  in.
-- **Received 2026-11-10, night, from L-515's look at step 2b**: Tony, on
-  the live site, "tapping with my thumb works about 1/2 to 3/4 the time.
-  maybe we need a larger tap area?" -- in every view, not only near a
-  moon. So the larger tap area of ruling 4 is measured in this build for
-  the whole picture, with the risk ruling 4 named (a wider reach near
-  Mars picking Mars instead of Phobos).
-- **The build's two sessions, go-ahead 2026-11-14, night**, in the
-  coordinating session (Claude Opus 5.5, through the python_work door,
-  on orrery c314fe1a and gallery d3e97b15), in chat. Session 1, the
-  orrery: Tony, 22:21, "-- yes". Session 2, the website: the larger tap
-  area is NOT part of it, Tony asking "i believe that the larger tap
-  area has already been done for the website as a whole. please
-  confirm." Confirmed from L-523 (taps sent as hovers, closed
-  2026-11-12): a finger's tap reaches 22 px in either orientation and a
-  tap sent as a hover opens its box, site-wide. What stays is ruling
-  4's risk, checked in session 2: a tap near Mars picks the moon meant.
-- **Ruling 5, the moons' words** (rule 3's NASA sentence), chosen from
-  NASA's pages read 2026-11-14, both "last updated Nov 03, 2024":
-  - Phobos, 22:43, "2": "Phobos is on a collision course with Mars."
-    (https://science.nasa.gov/mars/moons/phobos/, "Phobos - NASA
-    Science"; replaces the orrery's image-page link.)
-  - Deimos, 22:54, "3": "Deimos is the smaller of the two Martian
-    moons and is less irregular in shape." (a Quick Facts line,
-    https://science.nasa.gov/mars/moons/deimos/). The page says nothing
-    of the orbit's direction; the orrery's "Retrogade" goes.
-- **The moons' accuracy, found 2026-11-14** (rule 3's "needs a
-  source"), with Tony at his computer saving the papers:
-  - Horizons serves both moons "{source: mar099}" around Mars; a
-    VEC_TABLE='2xr' request for Deimos prints "n.a." in every sigma
-    column, so the figure must come from a paper. mar099's release note
-    (NAIF, 2025-06-02) gives only a 2-metre interpolation error, which
-    measures the file, not the moons.
-  - THE SOURCE: Brozovic, Jacobson & Park (2025), "Revised Ephemerides
-    of the Martian Satellites, Phobos and Deimos", AJ 170:42,
-    https://doi.org/10.3847/1538-3881/addab4 (open access), whose
-    abstract names MAR099. Section 6, PDF p. 13: the realistic 1-sigma
-    uncertainty for both satellites is "on the order of a few
-    kilometers for the next couple of decades". By the Report test,
-    2 to 9.999 km all report to tens: 10 km, for both moons. Tony asked
-    whether Deimos's 2 km could print whole kilometres; the 2025 paper
-    answered it, by the rule, not by a ruling.
-  - Read and superseded: Jacobson (2010), AJ 139:668, p. 677 (Phobos
-    "no better than 1 km", Deimos "roughly 2 km"), which describes
-    MAR085. Both PDFs are in Tony's local papers/ (not pushed).
-- **Session 1's brief**: `documentation/COORD_L514_orrery_moons_brief_20261114.md`.
-- **Session 1 built, 2026-11-14 night to 2026-11-15** (Claude Code, Claude
-  Opus 5.5, through the python_work door), on orrery f06271ba and gallery
-  d3e97b15, in three parts with Tony's go-ahead after each ("Yes, go
-  ahead"). Part 1 was committed by Tony as 488cad20 ("mars moons").
-  - Part 1, `celestial_objects.py`: Phobos `'key': 'phobos'`, Deimos
-    `'key': 'deimos'`, each with `horizons_name` read live from JPL's
-    Lookup by horizons_check's three steps (major-body index: "Phobos"
-    and "Deimos", natural satellites, SPKIDs 401 and 402; the small-body
-    index found only 401 Ottilia and 402 Chloe). `mission_info` is
-    ruling 5's NASA sentence after "Horizons: 401." / "Horizons: 402.";
-    Phobos's link is NASA's Phobos page. The typed periods and
-    "Retrogade" came out; a comment above the entries cites both pages.
-    Both NASA pages re-read 2026-11-14: the sentences word for word,
-    "last updated Nov 03, 2024", Deimos's in its visible Quick Facts, and
-    no "retrograde" on either. [verified @488cad20]
-  - The periods, `period_fetch.py` around Mars ('@499'), as printed:
-    Phobos 0.31914 d (change in a year 0.000002 d), Deimos 1.2625 d (0.00009
-    d); PASS, read back as fetched. Only the two moons' cache entries
-    changed.
-  - Part 2, `constants_new.py`: ONE row after the DE430 rows,
-    `MAR099_PHOBOS_DEIMOS_POSITION_PLACE_KM = 10.0` km, declared, "a few
-    kilometers" stored as the place it reports to (2 to 9.999 km all
-    give tens), with Read, Source (the DOI, Section 6, p. 13), Ref, a Note
-    on Section 5.3's scaling (p. 11) and a Note naming Jacobson (2010) as
-    read by the coordinator and superseded. The paper's text was read by
-    the session from Tony's saved PDF (the publisher's page refused an
-    automated read). Horizons re-read 2026-11-15: both moons
-    "{source: mar099}" around Mars, "n.a." in every 2xr sigma column.
-  - The maintenance run, read for its own line: "36 of 36 gating
-    checkers passed"; Tier-1 0 on the gate. What the two keys changed:
-    the objects export 98 to 100 objects (phobos, deimos, each with NASA's
-    sentence, the link and the fetched period around Mars); the Horizons
-    confirmations 98 to 100, both identities and both periods confirmed
-    2026-11-15 (JPL's PR equal to ours to the digits shown); the constants
-    export 233 to 234 rows, the new row among them. GitHub's nightly run
-    (e5b5eb58, 2026-11-15) had already exported the two keys from 488cad20;
-    this run's two files match its bytes.
-  - Part 4, the orrery's own hover (Tony, 2026-11-15, on the close's
-    report deferring it: "why deferred? It's directly relevant to this
-    build by various rules."; then "Yes."). The session had recorded it
-    for a later orrery session because the brief's list did not name it;
-    but the build had made the hover's sentence false (JPL's figure was
-    now in the store) and the build reaches the hover, so it was done
-    here. `position_accuracy.py`: SATELLITE_ROW_NAMES gives Phobos and
-    Deimos the MAR099 row; seen from Mars (or any centre of their local
-    pair) the row governs, "JPL's published accuracy for Phobos's orbit
-    around Mars"; seen from the Sun, the larger of it and Mars's row (the
-    Moon's pattern with Earth), so theirs. Before, from Mars: "JPL states
-    no accuracy for this position", 9382 km; after: 9380 km. Before, from
-    the Sun: Mars's row with "JPL states no accuracy for Phobos's orbit
-    around Mars."; after: their own row, no such sentence.
-    `test_position_digits.py` gains Phobos and Deimos from Mars and Phobos
-    from the Sun, with their words: PASS, 28 hovers; with the new map
-    emptied in memory the same run fails by name (WRONG STATE, FALSE OR
-    MISSING WORDS) for each.
-- **Session 2's brief, 2026-11-15, noon**, by the coordinating session
-  (Claude Opus 5.5, through the python_work door, on orrery f5598c91 and
-  gallery d3e97b15, both of Tony's folders matching), after Tony's "part
-  3 is done" with his run record
-  `documentation/WHERE_WE_ARE_11-15-26_0837_run_record.md` (his push of
-  session 1 at f06271ba, then 49c0c14 "mars moons part 3").
-  `documentation/COORD_L514_website_moons_brief_20261115.md`. Read for it
-  at gallery d3e97b15: the website has no entry for Phobos or Deimos (Io's
-  entry is the shape, around "@499" with center_slug mars); step 2b of
-  L-515 already built the moon's box (`SolarSystemFigures.childBox`), Go
-  To on a moon opening its own box (ruling 4, the Earth room's Moon too),
-  the fixed row in every centre and Centre on by `centresOf`. So session 2
-  is expected to be data and checks: the two entries, the pull, the
-  accuracy pointers, Mars's opening by `add_arrival`, the cache build,
-  the runs, the headless walk, and the tap near Mars measured.
-  interactive-exhibit loaded from the account in this session at 1.42,
-  as the manifest expects: the check the Nov 12 handoff carried is done.
-- **Session 2 built, 2026-11-15** (Claude Code, Claude Opus 5.5, through
-  the python_work door), on orrery b30d6d05 and gallery d3e97b15, both
-  matching their remotes, from Tony's prompt and the brief above, in three
-  parts with his go-ahead after each ("Yes, start Part 1", "Yes, start
-  Part 2"), and the frame fit between Parts 2 and 3. Skills read from the
-  repository's copies: interactive-exhibit 1.42, gallery-cache-builder
-  1.19, gallery-assembler 1.4, provenance-discipline 2.36,
-  safe-file-editing 1.14, ledger-and-session-records 1.23, as the
-  manifest expects. Nothing committed by the session; commit and push
-  are Tony's.
-  - Part 1, the served config (`data/objects_config.json`): Phobos (401)
-    and Deimos (402) inserted before Io in Io's shape, around "@499",
-    center_slug mars, parent mars; filled by the two tools that write the
-    config (the pull's objects mirror: NASA's sentence, the link, the
-    period around Mars, 0.31914 and 1.2625 days; `mirror_constants.py`:
-    `position_accuracy` 10 km, pointing at the orrery's
-    MAR099_PHOBOS_DEIMOS_POSITION_PLACE_KM with the 2025 paper's
-    citation). Mars's opening by `store_writer.py`'s `add_arrival`:
-    drawn [], moon false (ruling 1). Both pointers match the export's
-    row by name (Config mirror, Pointer join).
-  - Part 2, the cache and the checks. `tools/gallery_cache_builder.py`
-    could not serve a body around "@499" ("Unmapped center_body"); Mars
-    went into its CENTER_SLUG_MAP on Tony's go-ahead ("Yes, add Mars to
-    CENTER_SLUG_MAP with the note"), so the website's copy now goes one
-    body past the orrery's map, which has no Mars. Phobos's and Deimos's
-    colours in `gallery/assembler/presentation.py`, the orrery's own
-    (color_map: rgb(139, 0, 0) and rgb(105, 105, 105)), by Tony's word
-    ("my phone look judges them"). The offline suite's mocks gained the
-    two moons (rough test values, never served). The nightly build ran:
-    202 served files changed, 5 new, none deleted. The gallery run: 49 of
-    49 gating checks. The Solar System figures check lists both moons
-    with "the orrery's words, link and period served".
-  - Typed facts (`documentation/smoke_typed_facts.js`): two allowances,
-    the singular "# hour" and "# day" spans (Phobos's window is about an
-    hour) and the period line "Orbital period: # days, around Mars, from
-    JPL Horizons, fetched ###.", the page's own account of its data.
-    Shown still failing, 2026-11-15, Tony's ask: a copy of the check
-    that types a wrong figure into the period line ("every 7.5 hours")
-    fails by name for Phobos, Deimos, the Moon and the Earth-Moon
-    centre's line, 5 typed sentences; the real file passes.
-  - The headless walk, section 37: Mars's fold lists Phobos then Deimos,
-    shut on opening; Centre on Mars puts Mars at the middle, both moons
-    off; Go To on each opens its own box, at midnight Phobos 9,340 km and
-    Deimos 23,460 km from Mars, in tens of kilometres by JPL's published
-    accuracy, its sentence, and the period in days; at 19:00 Phobos is
-    past its span and prints 9,410 km by the drift, with the span's
-    sentence. Four older checks that used Mars as a body with no centre
-    now use Venus. The walk's three red checks are L-521's own three.
-  - Ruling 4's risk, measured (a tap near Mars picks the moon meant), on
-    an upright phone in a browser with Plotly's own pick: Mars centred,
-    Phobos sits 45.5 px from Mars, so the 22 px reaches do not overlap; a
-    tap on each dot picks it, 20 px off Phobos still picks Phobos, and the
-    split falls at the midpoint. In the Sun's view the two moons sit 0 to
-    0.01 px from Mars, inside one reach, and the pick goes by drawing
-    order: Mars on a fresh page, Deimos after other ticking, even when
-    aimed at Mars. Recorded for the next design talk, not changed.
-  - THE FRAME FIT, found in Tony's question before Part 3 ("find why
-    Deimos falls outside the picture when Mars is centred on an upright
-    phone"). The cause: a frame is a cube, and Plotly holds the picture's
-    height to its field of view, so an upright phone's picture (331 x 689
-    on a 375 x 812 phone) showed about 0.8 of the frame across, against
-    the outermost orbit's reach of 0.83 at the room's 20 percent. Every
-    centred view had it (Deimos 22 percent of its orbit off, Io 29,
-    Titan 20, Charon 27). Tony's rulings: "fix viewFrame before Part 3,
-    with a margin: across the picture's narrow side, the outermost moon's
-    whole orbit plus 10 percent fits, worked out from each phone's own
-    width and height"; then "use that same function in every place that
-    sets a frame ... The rule everywhere: across the picture's narrow
-    side, the farthest point of what is framed plus 10 percent fits; on
-    a picture wider than tall, nothing changes. Work the grid spacing out
-    from the widened frame so the grid label matches." Built: the sum,
-    `ViewCentre.fitAcross` in `gallery/view_centre.js`, is Plotly
-    2.35.2's own, read from its scene and held to its measured matrices
-    by the View centre check; `interactive.html` calls it at each room's
-    opening, a tick, Go To (a moon's too), Center on, a tick in a centred
-    view, Home and Reset (`viewFitR`). Measured at 375 x 812: every frame
-    that had to widen holds what it frames exactly 15 px inside the side;
-    at 1200 x 700 every frame is unchanged. Walk section 38 fails on a
-    page whose Go To is not fitted.
-  - By design, Tony, 2026-11-15: "Keep the Solar System view, its Home
-    and Reset fitting where the bodies are now (Tony's ruling of Oct 2).
-    Record in Part 3 that an orbit line can run past the side there by
-    design: the dots stay inside, and Go To shows a whole orbit." At the
-    view's opening on an upright phone Mars's orbit runs 11 px past the
-    side, and Jupiter's 21 px with Jupiter ticked; every dot is inside.
-  - For interactive-exhibit's next version, two lines (the skill is at
-    its cap, L-522, so old lines move out first): (1) its two Store drift
-    sentences (Provenance, "An exhibit is done when Store drift reads
-    MATCH for its pointers", and the build steps' "Store drift reads
-    MATCH for the new pointers") hold only for links the export does not
-    serve; Store drift leaves out pointers the export serves, such as
-    MAR099's, and for those the checks are Config mirror and Pointer
-    join. (2) Two lines near its line 320 read as one broken sentence
-    ("A centre gets its opening (`add_arrival`): the gallery's
-    `INTERACTIVE_AS_BUILT.md`," then "A centre gets its opening."); the
-    pointer wants one line.
-  - Not verified: Tony's phone look, a real finger, his eyes on the two
-    colours.
-- **Tony's note on session 1, 2026-11-15**, in his run record
-  `documentation/WHERE_WE_ARE_11-15-26_0837_run_record.md`, on "Mars's
-  moons are in the orrery.": "-- need a mode 5 check". The coordinating
-  session (Claude Opus 5.5) gave the steps in chat at 12:20: in the
-  orrery's window, "Select Center Object for Your Plot" set to Mars;
-  tick Mars, "- Phobos" and "- Deimos"; "Plot Entered Date". Phobos's
-  text carries NASA's sentence, a distance in tens of kilometres and
-  "These distances are rounded to JPL's published accuracy for Phobos's
-  orbit around Mars."; Deimos the same, with no "Retrogade"; both orbits
-  around Mars; then centred on the Sun, no "JPL states no accuracy".
-  Recorded by that session after session 2 closed, so the two did not
-  write the ledger at once.
-- **Pushed 2026-11-15, evening**, in Tony's run record: the website at
-  f9f81266, the orrery at d0f90d18; the website's run with --live, "2 of
-  2 gating checkers passed", the served export pinned at b30d6d05, "last
-  swap 2026-11-15T18:52:53 ... succeeded first time".
-- **Two red nights before the website's push**, found by Tony: GitHub's
-  website run of 2026-11-15 18:56 UTC, "Objects mirror -- OBJECTS MIRROR:
-  FAIL ... REFUSED (2): phobos: a key in the orrery's export with no
-  object of that slug in the config ... deimos ...", "Nothing is to be
-  committed: the site keeps serving the previous cache". Cause: session
-  1's orrery push added two keys the website's pushed config did not yet
-  list; the website's push of f9f81266 adds them. THE LESSON, for any
-  build whose two halves add a body: an orrery push ahead of the
-  website's half turns the website's nights red until that half is
-  pushed, so push the two close together, the website's half first where
-  it can be. Carried into the briefs of L-533 (ESCAPADE) and L-535 (the
-  period's reason).
-- **Tony's website look, first part, 2026-11-15**, in his run record:
-  - The Solar System view: every planet inside; Mars's orbit "fully
-    within by about 20%".
-  - Mars's fold: the arrow "i completely missed ... the arrow is tiny and
-    not noticeable unless one is looking for it. however, it works
-    correctly." His proposal, recorded on L-534 (missions by
-    destination): a "Moons" group under a planet.
-  - Centre on Mars: the symbol alone, the axes crossing at Mars, "yes".
-  - Go To Phobos: name and NASA's sentence "yes in both the hover and
-    info"; the distance "rounded to 100 km, 9,300 km. the text suggests
-    that it has to do with the propagation error, which is okay." (past
-    the one-hour window, the drift sets the digits); the span sentence
-    "yes"; the i panel's link "yes"; the period "0.31914 days from JPL,
-    but it does not say if JPL provides this as the precision too." --
-    taken up as L-535 (the period's reason), at Tony's word, 17:24: "we
-    should fix this in this session. easily overlooked."
-  - Deimos, the taps, the colours, Reset, Home and the other four
-    centred views: not yet looked at.
-**Gap:** Tony's two looks, which close this item. (1) Tony-action (do):
-the orrery's moons, Mode 5, by the steps above. (2) Tony-action (do):
-the website, upright on his phone: Mars's fold; Centre on Mars; tick
-each moon; Go To each moon; tap each moon in the picture; Reset; and the
-five centred views (Mars, Jupiter, Saturn, the Pluto system, Earth) with
-their moons' orbits inside the picture.
-- **Ref:** L-513 (the Moon's standards, the pattern); L-334 (what a room
-  opens on, 2026-09-17); L-291 (the Earth room); L-484 (the two agree);
-  L-150 (Charon's period centre, for the Pluto room).
 
 #### [L-512] The orrery's fallbacks when JPL cannot answer (orrery, the plot's data path)
 <!-- L:512 status:OPEN upd:2026-11-04 section:A flag: rice: -->
@@ -17747,6 +17440,476 @@ skills/gallery-assembler/SKILL.md, skills/interactive-exhibit/SKILL.md.
 ## PENDING ACTION (Tony-side)
 
 ## C. RECONCILED LEDGER -- DONE (closed; for the record, do not re-do)
+
+#### [L-514] The Mars room: Mars, Phobos and Deimos (gallery + orrery, a planet room; road stage 15; built, closed)
+<!-- L:514 status:DONE upd:2026-11-15 section:C flag: rice: -->
+- **Opened 2026-11-06, night**, by the coordinating session (Claude Opus
+  5.5) through the python_work door, built on orrery b32205f4 and
+  gallery 3f2ce7fc. Tony's prompt: "Road stage 15, the planet rooms,
+  starting with Mars (Phobos, Deimos). This is a design round, not a
+  build: Mars is the first room centred on a planet since the Earth
+  room. Bring me the room's design questions one at a time: what the
+  room opens on, what its drawer lists, and how a moon's box reads. Use
+  the Moon of L-513 as the pattern for each moon (a key in the export,
+  JPL's name and period read live, NASA's own words with their page as
+  the link, a cited accuracy, days only under a year). Don't build until
+  the design settles; then propose the smallest instrument and wait for
+  my go-ahead."
+- **At the base, read 2026-11-06:**
+  - Website: `data/objects_config.json` has `mars` (id 499, around the
+    Sun, NASA's words, info link, a fetched period, a position_accuracy
+    link) with NO features served, and no entry for Phobos or Deimos.
+    The config's rooms section holds only the Solar System room; there
+    is no `mars` row in `EXHIBITS`.
+  - Orrery: `celestial_objects.py` has Phobos (401) and Deimos (402),
+    both `id_type` 'majorbody', with no `'key'`, so neither is exported.
+    Their `mission_info` is typed, not NASA's words, and carries typed
+    periods ("Mars orbital period: 0.32 Earth days."; "1.26 Earth days.
+    Retrogade."). Their links: Phobos
+    https://science.nasa.gov/resource/martian-moon-phobos/, Deimos
+    https://science.nasa.gov/mars/moons/deimos/.
+  - Deimos's "Retrogade": unsourced. NASA's Deimos page, read
+    2026-11-06 ("Deimos - NASA Science"), says "Deimos orbits Mars every
+    30 hours." and says nothing of direction. The word goes when the
+    entry takes NASA's words (the moon's box question), not before.
+  - `constants_new.py`: MARS_RADIUS_KM 3396.2 (Archinal et al. 2018,
+    equatorial) and PHOBOS_RADIUS_KM; the DE430 accuracy rows cover the
+    planets' groups and the Moon only, so no row yet gives JPL's
+    accuracy for the Martian moons.
+  - The orrery draws Mars's shells (`mars_visualization_shells.py`);
+    the road says the planet rooms open "with the planet and its moons,
+    shells later".
+- **The design questions, in Tony's order**, each recorded here with
+  its ruling: (1) what the room opens on; (2) what its drawer lists;
+  (3) how a moon's box reads.
+- **Ruling 1, what the room opens on**, Tony, Nov 6, in his run record
+  `documentation/WHERE_WE_ARE_11-6-26_2227_run_record.md`, declining the
+  coordinator's proposal (Mars as a ball, Earth's guides, both moons
+  ticked): "no. like the moon in the earth room, they should be off by
+  default. the room should open like earth, with the mars symbol only
+  for now, and in the future, with its crust shell, rotation axis,
+  equator, and terminator, when we build out the room." So the arrival
+  block serves `moon` false for both moons, and the room opens on Mars's
+  symbol alone; the crust shell, axis, equator and terminator wait for
+  the room's build-out.
+- **Ruling 2, what the drawer lists**, Tony, Nov 6, the same run record,
+  answering "Should the Mars room's drawer list just Mars (fixed), Phobos
+  and Deimos?": "yes, but this suggests that the Earth room also needs
+  the Earth symbol fixed, which it does not have." So the drawer lists
+  three rows: Mars, fixed (no tick box, always drawn; its name opens its
+  text box and panel), then Phobos, then Deimos, nearest first, each
+  with a tick box and Go To, a tick drawing the moon's marker and orbit
+  together. Rows for the shells and guides join at the build-out.
+  - The Earth room's fixed Earth row: Tony's observation, recorded here
+    because one build reaches both. Today a fixed row exists only in the
+    Solar System room (`ssDrawer`, null in the Sun and Earth rooms), so
+    a fixed centre row in a planet room is a new piece of SHARED chrome
+    (interactive-exhibit, One chrome, many rooms): built once, given to
+    the Mars and Earth rooms together, both Mode 5 targets. Put to Tony
+    with the build's instrument.
+- **Ruling 3, how a moon's box reads**, Tony, Nov 6, the same run record:
+  each Martian moon's box follows the Moon's (L-513) pattern -- name,
+  NASA's sentence with NASA's page as the panel's link, its distance
+  from Mars by the larger of the drift and JPL's accuracy, never finer
+  than whole kilometres, a sentence saying which set the digits, its
+  period in days around Mars -- with JPL's "not yet included" sentence
+  until an accuracy is cited. Tony: "yes, needs a source." and "yes.
+  but it will be part of the build." So finding and citing an accuracy
+  for the Martian moons is build work, not a guess at design.
+- **Tony's observation on the moon's three boxes**, the same run record,
+  for the template of every moon, the Earth room's Moon included: "there
+  are 3 text boxes: 1) the go to button open a short text box labeling
+  the orbit. 2) tapping the moon open's the moon's text box 3) tapping
+  the cross on the orbit open's a text box on the orbit as rendered. --
+  this is complicated for the visitor and can be easily missed and
+  tapping is hit or miss. the only obvious box is the go to's text box.
+  to make it easier on the visitor, this go to box should tell the
+  visitor to tap the moon and to tap the cross for specific information
+  about those features. perhaps we should also increase the tap area so
+  that it is easier to open those text boxes. i missed these details
+  when building the earth room, but this is the template for all future
+  moons including Mars'."
+  - Read at gallery 3f2ce7fc: Go To on the Moon's row opens the words of
+    the row's info cross, the orbit's short label "Moon's orbit, drawn
+    around Earth" (`labelTraceIndex` takes a trace marked
+    `meta.label_target` first, else the row's cross); the full box is on
+    the Moon's marker alone (`earth_geometry.js`, `moonBox`). The tap
+    reaches 22 px on a portrait phone, with text-less traces left out of
+    the pick (`SUN_PICK_RADIUS_PX`, `sunTapPicking`), and Plotly's 10 px
+    elsewhere.
+  - Put to Tony as the round's last question: the Go To box tells the
+    visitor where to tap (his proposal), or Go To opens the moon's own
+    full box (the marker marked `label_target`), as Go To on a body does
+    in the Solar System room.
+- **Ruling 4, what Go To on a moon opens**, Tony, Nov 6, 23:33 Chicago,
+  in chat: "B". Go To on a moon opens the moon's own full box (its marker
+  marked `label_target`), as Go To on a body does in the Solar System
+  room; the orbit's cross keeps its short label; no sentence tells the
+  visitor where to tap. The template for every moon, the Earth room's
+  Moon included. A larger tap area is build work, measured, since a
+  wider reach near Mars could pick Mars instead of Phobos.
+- **The design is settled** with ruling 4. The build, as proposed to
+  Tony the same night, waiting for his go-ahead:
+  - Session 1, the orrery (Claude Code): key Phobos and Deimos, JPL's
+    names read live; NASA's words and pages, the sentences brought to
+    Tony before they are written (Deimos's unsourced "Retrogade" goes);
+    periods fetched around Mars; a cited accuracy for the Martian
+    moons, or the gap recorded; the export and the maintenance run.
+  - Session 2, the website (Claude Code): the two moons served and
+    cached around Mars; the Mars room's row, opening and drawer; the
+    shared fixed centre row, given to Mars and Earth; Go To on a moon
+    opening its box, the Earth room's Moon too; the tap area measured;
+    the checks and the headless walk; then Tony's phone look.
+  - Each session's brief written when that session is next (Token
+    Economy); one interactive-exhibit bump, in session 2, if its rules
+    change.
+- **Held, Nov 7, 00:17 Chicago**, before any go-ahead: Tony opened a
+  rethink of the room system (L-515 (one nested tree)). The Mars room
+  waits behind it, and may be built as the first node of the new system
+  rather than as one more room. Its four rulings stand.
+- **Received 2026-11-09, night, from L-515's step 2b talk** (rulings 13
+  to 20 there): Mars becomes a fold of the one tree, not a room of its
+  own. Its fold lists Mars's shells and Phobos and Deimos together by
+  distance (ruling 14), which is ruling 2's three rows, nearest first;
+  "Centre on Mars" moves the view so Mars sits in the middle (ruling 15)
+  and opens on ruling 1's opening, the symbol alone (ruling 16); the axis
+  lines cross at Mars (ruling 17); Phobos and Deimos are served as JPL's
+  positions for 48 hours, built in this step (ruling 18, ruling 11).
+  Rulings 3 and 4 stand.
+- **Received 2026-11-10, from L-515's step 2b build** (one nested tree):
+  the root now draws every moon fetched around a body at its planet's
+  place, folded under the planet's row, its box the Moon's pattern. Mars
+  needs nothing new of the page for Phobos and Deimos once they are served
+  and cached around Mars: they join Mars's fold by distance, and Mars
+  becomes a centre by `centresOf`. Its opening, the symbol alone, is
+  written by the store writer's `add_arrival`, as Jupiter's and Saturn's
+  were. Found by the build: Io, Titan, Pluto and Charon are not keyed in
+  the orrery's object list either, so their boxes carry no words, link or
+  period; this item's orrery session, which keys moons, is where they come
+  in.
+- **Received 2026-11-10, night, from L-515's look at step 2b**: Tony, on
+  the live site, "tapping with my thumb works about 1/2 to 3/4 the time.
+  maybe we need a larger tap area?" -- in every view, not only near a
+  moon. So the larger tap area of ruling 4 is measured in this build for
+  the whole picture, with the risk ruling 4 named (a wider reach near
+  Mars picking Mars instead of Phobos).
+- **The build's two sessions, go-ahead 2026-11-14, night**, in the
+  coordinating session (Claude Opus 5.5, through the python_work door,
+  on orrery c314fe1a and gallery d3e97b15), in chat. Session 1, the
+  orrery: Tony, 22:21, "-- yes". Session 2, the website: the larger tap
+  area is NOT part of it, Tony asking "i believe that the larger tap
+  area has already been done for the website as a whole. please
+  confirm." Confirmed from L-523 (taps sent as hovers, closed
+  2026-11-12): a finger's tap reaches 22 px in either orientation and a
+  tap sent as a hover opens its box, site-wide. What stays is ruling
+  4's risk, checked in session 2: a tap near Mars picks the moon meant.
+- **Ruling 5, the moons' words** (rule 3's NASA sentence), chosen from
+  NASA's pages read 2026-11-14, both "last updated Nov 03, 2024":
+  - Phobos, 22:43, "2": "Phobos is on a collision course with Mars."
+    (https://science.nasa.gov/mars/moons/phobos/, "Phobos - NASA
+    Science"; replaces the orrery's image-page link.)
+  - Deimos, 22:54, "3": "Deimos is the smaller of the two Martian
+    moons and is less irregular in shape." (a Quick Facts line,
+    https://science.nasa.gov/mars/moons/deimos/). The page says nothing
+    of the orbit's direction; the orrery's "Retrogade" goes.
+- **The moons' accuracy, found 2026-11-14** (rule 3's "needs a
+  source"), with Tony at his computer saving the papers:
+  - Horizons serves both moons "{source: mar099}" around Mars; a
+    VEC_TABLE='2xr' request for Deimos prints "n.a." in every sigma
+    column, so the figure must come from a paper. mar099's release note
+    (NAIF, 2025-06-02) gives only a 2-metre interpolation error, which
+    measures the file, not the moons.
+  - THE SOURCE: Brozovic, Jacobson & Park (2025), "Revised Ephemerides
+    of the Martian Satellites, Phobos and Deimos", AJ 170:42,
+    https://doi.org/10.3847/1538-3881/addab4 (open access), whose
+    abstract names MAR099. Section 6, PDF p. 13: the realistic 1-sigma
+    uncertainty for both satellites is "on the order of a few
+    kilometers for the next couple of decades". By the Report test,
+    2 to 9.999 km all report to tens: 10 km, for both moons. Tony asked
+    whether Deimos's 2 km could print whole kilometres; the 2025 paper
+    answered it, by the rule, not by a ruling.
+  - Read and superseded: Jacobson (2010), AJ 139:668, p. 677 (Phobos
+    "no better than 1 km", Deimos "roughly 2 km"), which describes
+    MAR085. Both PDFs are in Tony's local papers/ (not pushed).
+- **Session 1's brief**: `documentation/COORD_L514_orrery_moons_brief_20261114.md`.
+- **Session 1 built, 2026-11-14 night to 2026-11-15** (Claude Code, Claude
+  Opus 5.5, through the python_work door), on orrery f06271ba and gallery
+  d3e97b15, in three parts with Tony's go-ahead after each ("Yes, go
+  ahead"). Part 1 was committed by Tony as 488cad20 ("mars moons").
+  - Part 1, `celestial_objects.py`: Phobos `'key': 'phobos'`, Deimos
+    `'key': 'deimos'`, each with `horizons_name` read live from JPL's
+    Lookup by horizons_check's three steps (major-body index: "Phobos"
+    and "Deimos", natural satellites, SPKIDs 401 and 402; the small-body
+    index found only 401 Ottilia and 402 Chloe). `mission_info` is
+    ruling 5's NASA sentence after "Horizons: 401." / "Horizons: 402.";
+    Phobos's link is NASA's Phobos page. The typed periods and
+    "Retrogade" came out; a comment above the entries cites both pages.
+    Both NASA pages re-read 2026-11-14: the sentences word for word,
+    "last updated Nov 03, 2024", Deimos's in its visible Quick Facts, and
+    no "retrograde" on either. [verified @488cad20]
+  - The periods, `period_fetch.py` around Mars ('@499'), as printed:
+    Phobos 0.31914 d (change in a year 0.000002 d), Deimos 1.2625 d (0.00009
+    d); PASS, read back as fetched. Only the two moons' cache entries
+    changed.
+  - Part 2, `constants_new.py`: ONE row after the DE430 rows,
+    `MAR099_PHOBOS_DEIMOS_POSITION_PLACE_KM = 10.0` km, declared, "a few
+    kilometers" stored as the place it reports to (2 to 9.999 km all
+    give tens), with Read, Source (the DOI, Section 6, p. 13), Ref, a Note
+    on Section 5.3's scaling (p. 11) and a Note naming Jacobson (2010) as
+    read by the coordinator and superseded. The paper's text was read by
+    the session from Tony's saved PDF (the publisher's page refused an
+    automated read). Horizons re-read 2026-11-15: both moons
+    "{source: mar099}" around Mars, "n.a." in every 2xr sigma column.
+  - The maintenance run, read for its own line: "36 of 36 gating
+    checkers passed"; Tier-1 0 on the gate. What the two keys changed:
+    the objects export 98 to 100 objects (phobos, deimos, each with NASA's
+    sentence, the link and the fetched period around Mars); the Horizons
+    confirmations 98 to 100, both identities and both periods confirmed
+    2026-11-15 (JPL's PR equal to ours to the digits shown); the constants
+    export 233 to 234 rows, the new row among them. GitHub's nightly run
+    (e5b5eb58, 2026-11-15) had already exported the two keys from 488cad20;
+    this run's two files match its bytes.
+  - Part 4, the orrery's own hover (Tony, 2026-11-15, on the close's
+    report deferring it: "why deferred? It's directly relevant to this
+    build by various rules."; then "Yes."). The session had recorded it
+    for a later orrery session because the brief's list did not name it;
+    but the build had made the hover's sentence false (JPL's figure was
+    now in the store) and the build reaches the hover, so it was done
+    here. `position_accuracy.py`: SATELLITE_ROW_NAMES gives Phobos and
+    Deimos the MAR099 row; seen from Mars (or any centre of their local
+    pair) the row governs, "JPL's published accuracy for Phobos's orbit
+    around Mars"; seen from the Sun, the larger of it and Mars's row (the
+    Moon's pattern with Earth), so theirs. Before, from Mars: "JPL states
+    no accuracy for this position", 9382 km; after: 9380 km. Before, from
+    the Sun: Mars's row with "JPL states no accuracy for Phobos's orbit
+    around Mars."; after: their own row, no such sentence.
+    `test_position_digits.py` gains Phobos and Deimos from Mars and Phobos
+    from the Sun, with their words: PASS, 28 hovers; with the new map
+    emptied in memory the same run fails by name (WRONG STATE, FALSE OR
+    MISSING WORDS) for each.
+- **Session 2's brief, 2026-11-15, noon**, by the coordinating session
+  (Claude Opus 5.5, through the python_work door, on orrery f5598c91 and
+  gallery d3e97b15, both of Tony's folders matching), after Tony's "part
+  3 is done" with his run record
+  `documentation/WHERE_WE_ARE_11-15-26_0837_run_record.md` (his push of
+  session 1 at f06271ba, then 49c0c14 "mars moons part 3").
+  `documentation/COORD_L514_website_moons_brief_20261115.md`. Read for it
+  at gallery d3e97b15: the website has no entry for Phobos or Deimos (Io's
+  entry is the shape, around "@499" with center_slug mars); step 2b of
+  L-515 already built the moon's box (`SolarSystemFigures.childBox`), Go
+  To on a moon opening its own box (ruling 4, the Earth room's Moon too),
+  the fixed row in every centre and Centre on by `centresOf`. So session 2
+  is expected to be data and checks: the two entries, the pull, the
+  accuracy pointers, Mars's opening by `add_arrival`, the cache build,
+  the runs, the headless walk, and the tap near Mars measured.
+  interactive-exhibit loaded from the account in this session at 1.42,
+  as the manifest expects: the check the Nov 12 handoff carried is done.
+- **Session 2 built, 2026-11-15** (Claude Code, Claude Opus 5.5, through
+  the python_work door), on orrery b30d6d05 and gallery d3e97b15, both
+  matching their remotes, from Tony's prompt and the brief above, in three
+  parts with his go-ahead after each ("Yes, start Part 1", "Yes, start
+  Part 2"), and the frame fit between Parts 2 and 3. Skills read from the
+  repository's copies: interactive-exhibit 1.42, gallery-cache-builder
+  1.19, gallery-assembler 1.4, provenance-discipline 2.36,
+  safe-file-editing 1.14, ledger-and-session-records 1.23, as the
+  manifest expects. Nothing committed by the session; commit and push
+  are Tony's.
+  - Part 1, the served config (`data/objects_config.json`): Phobos (401)
+    and Deimos (402) inserted before Io in Io's shape, around "@499",
+    center_slug mars, parent mars; filled by the two tools that write the
+    config (the pull's objects mirror: NASA's sentence, the link, the
+    period around Mars, 0.31914 and 1.2625 days; `mirror_constants.py`:
+    `position_accuracy` 10 km, pointing at the orrery's
+    MAR099_PHOBOS_DEIMOS_POSITION_PLACE_KM with the 2025 paper's
+    citation). Mars's opening by `store_writer.py`'s `add_arrival`:
+    drawn [], moon false (ruling 1). Both pointers match the export's
+    row by name (Config mirror, Pointer join).
+  - Part 2, the cache and the checks. `tools/gallery_cache_builder.py`
+    could not serve a body around "@499" ("Unmapped center_body"); Mars
+    went into its CENTER_SLUG_MAP on Tony's go-ahead ("Yes, add Mars to
+    CENTER_SLUG_MAP with the note"), so the website's copy now goes one
+    body past the orrery's map, which has no Mars. Phobos's and Deimos's
+    colours in `gallery/assembler/presentation.py`, the orrery's own
+    (color_map: rgb(139, 0, 0) and rgb(105, 105, 105)), by Tony's word
+    ("my phone look judges them"). The offline suite's mocks gained the
+    two moons (rough test values, never served). The nightly build ran:
+    202 served files changed, 5 new, none deleted. The gallery run: 49 of
+    49 gating checks. The Solar System figures check lists both moons
+    with "the orrery's words, link and period served".
+  - Typed facts (`documentation/smoke_typed_facts.js`): two allowances,
+    the singular "# hour" and "# day" spans (Phobos's window is about an
+    hour) and the period line "Orbital period: # days, around Mars, from
+    JPL Horizons, fetched ###.", the page's own account of its data.
+    Shown still failing, 2026-11-15, Tony's ask: a copy of the check
+    that types a wrong figure into the period line ("every 7.5 hours")
+    fails by name for Phobos, Deimos, the Moon and the Earth-Moon
+    centre's line, 5 typed sentences; the real file passes.
+  - The headless walk, section 37: Mars's fold lists Phobos then Deimos,
+    shut on opening; Centre on Mars puts Mars at the middle, both moons
+    off; Go To on each opens its own box, at midnight Phobos 9,340 km and
+    Deimos 23,460 km from Mars, in tens of kilometres by JPL's published
+    accuracy, its sentence, and the period in days; at 19:00 Phobos is
+    past its span and prints 9,410 km by the drift, with the span's
+    sentence. Four older checks that used Mars as a body with no centre
+    now use Venus. The walk's three red checks are L-521's own three.
+  - Ruling 4's risk, measured (a tap near Mars picks the moon meant), on
+    an upright phone in a browser with Plotly's own pick: Mars centred,
+    Phobos sits 45.5 px from Mars, so the 22 px reaches do not overlap; a
+    tap on each dot picks it, 20 px off Phobos still picks Phobos, and the
+    split falls at the midpoint. In the Sun's view the two moons sit 0 to
+    0.01 px from Mars, inside one reach, and the pick goes by drawing
+    order: Mars on a fresh page, Deimos after other ticking, even when
+    aimed at Mars. Recorded for the next design talk, not changed.
+  - THE FRAME FIT, found in Tony's question before Part 3 ("find why
+    Deimos falls outside the picture when Mars is centred on an upright
+    phone"). The cause: a frame is a cube, and Plotly holds the picture's
+    height to its field of view, so an upright phone's picture (331 x 689
+    on a 375 x 812 phone) showed about 0.8 of the frame across, against
+    the outermost orbit's reach of 0.83 at the room's 20 percent. Every
+    centred view had it (Deimos 22 percent of its orbit off, Io 29,
+    Titan 20, Charon 27). Tony's rulings: "fix viewFrame before Part 3,
+    with a margin: across the picture's narrow side, the outermost moon's
+    whole orbit plus 10 percent fits, worked out from each phone's own
+    width and height"; then "use that same function in every place that
+    sets a frame ... The rule everywhere: across the picture's narrow
+    side, the farthest point of what is framed plus 10 percent fits; on
+    a picture wider than tall, nothing changes. Work the grid spacing out
+    from the widened frame so the grid label matches." Built: the sum,
+    `ViewCentre.fitAcross` in `gallery/view_centre.js`, is Plotly
+    2.35.2's own, read from its scene and held to its measured matrices
+    by the View centre check; `interactive.html` calls it at each room's
+    opening, a tick, Go To (a moon's too), Center on, a tick in a centred
+    view, Home and Reset (`viewFitR`). Measured at 375 x 812: every frame
+    that had to widen holds what it frames exactly 15 px inside the side;
+    at 1200 x 700 every frame is unchanged. Walk section 38 fails on a
+    page whose Go To is not fitted.
+  - By design, Tony, 2026-11-15: "Keep the Solar System view, its Home
+    and Reset fitting where the bodies are now (Tony's ruling of Oct 2).
+    Record in Part 3 that an orbit line can run past the side there by
+    design: the dots stay inside, and Go To shows a whole orbit." At the
+    view's opening on an upright phone Mars's orbit runs 11 px past the
+    side, and Jupiter's 21 px with Jupiter ticked; every dot is inside.
+  - For interactive-exhibit's next version (re-homed at the close to
+    L-515 (one nested tree), which carries that version's notes), two
+    lines (the skill is at its cap, L-522, so old lines move out first): (1) its two Store drift
+    sentences (Provenance, "An exhibit is done when Store drift reads
+    MATCH for its pointers", and the build steps' "Store drift reads
+    MATCH for the new pointers") hold only for links the export does not
+    serve; Store drift leaves out pointers the export serves, such as
+    MAR099's, and for those the checks are Config mirror and Pointer
+    join. (2) Two lines near its line 320 read as one broken sentence
+    ("A centre gets its opening (`add_arrival`): the gallery's
+    `INTERACTIVE_AS_BUILT.md`," then "A centre gets its opening."); the
+    pointer wants one line.
+  - Not verified: Tony's phone look, a real finger, his eyes on the two
+    colours.
+- **Tony's note on session 1, 2026-11-15**, in his run record
+  `documentation/WHERE_WE_ARE_11-15-26_0837_run_record.md`, on "Mars's
+  moons are in the orrery.": "-- need a mode 5 check". The coordinating
+  session (Claude Opus 5.5) gave the steps in chat at 12:20: in the
+  orrery's window, "Select Center Object for Your Plot" set to Mars;
+  tick Mars, "- Phobos" and "- Deimos"; "Plot Entered Date". Phobos's
+  text carries NASA's sentence, a distance in tens of kilometres and
+  "These distances are rounded to JPL's published accuracy for Phobos's
+  orbit around Mars."; Deimos the same, with no "Retrogade"; both orbits
+  around Mars; then centred on the Sun, no "JPL states no accuracy".
+  Recorded by that session after session 2 closed, so the two did not
+  write the ledger at once.
+- **Pushed 2026-11-15, evening**, in Tony's run record: the website at
+  f9f81266, the orrery at d0f90d18; the website's run with --live, "2 of
+  2 gating checkers passed", the served export pinned at b30d6d05, "last
+  swap 2026-11-15T18:52:53 ... succeeded first time".
+- **Two red nights before the website's push**, found by Tony: GitHub's
+  website run of 2026-11-15 18:56 UTC, "Objects mirror -- OBJECTS MIRROR:
+  FAIL ... REFUSED (2): phobos: a key in the orrery's export with no
+  object of that slug in the config ... deimos ...", "Nothing is to be
+  committed: the site keeps serving the previous cache". Cause: session
+  1's orrery push added two keys the website's pushed config did not yet
+  list; the website's push of f9f81266 adds them. THE LESSON, for any
+  build whose two halves add a body: an orrery push ahead of the
+  website's half turns the website's nights red until that half is
+  pushed, so push the two close together, the website's half first where
+  it can be. Carried into the briefs of L-533 (ESCAPADE) and L-535 (the
+  period's reason).
+- **Tony's website look, first part, 2026-11-15**, in his run record:
+  - The Solar System view: every planet inside; Mars's orbit "fully
+    within by about 20%".
+  - Mars's fold: the arrow "i completely missed ... the arrow is tiny and
+    not noticeable unless one is looking for it. however, it works
+    correctly." His proposal, recorded on L-534 (missions by
+    destination): a "Moons" group under a planet.
+  - Centre on Mars: the symbol alone, the axes crossing at Mars, "yes".
+  - Go To Phobos: name and NASA's sentence "yes in both the hover and
+    info"; the distance "rounded to 100 km, 9,300 km. the text suggests
+    that it has to do with the propagation error, which is okay." (past
+    the one-hour window, the drift sets the digits); the span sentence
+    "yes"; the i panel's link "yes"; the period "0.31914 days from JPL,
+    but it does not say if JPL provides this as the precision too." --
+    taken up as L-535 (the period's reason), at Tony's word, 17:24: "we
+    should fix this in this session. easily overlooked."
+  - Deimos, the taps, the colours, Reset, Home and the other four
+    centred views: not yet looked at.
+- **Tony's looks, the rest, 2026-11-15, evening**, in his run record
+  `documentation/WHERE_WE_ARE_11-15-26_0837_run_record.md`:
+  - The five centred views: "correct. all of these system when tapping
+    "Center on (planet)" show the planet and the moon's orbit, except
+    earth. ... tapping Center on Earth zooms in to the Earth's crust."
+  - Home and Reset: back to the Solar System view, "yes, no change from
+    reset", by the one tree's design (L-515).
+  - The shared spot: "mars and the moons are superimposed in the solar
+    system view, and tapping generally bring up Deimos. this makes sense
+    because it is the largest orbit in the mars system."
+  - The orrery's Mode 5: the moons as in session 1; the sentence on the
+    period, "same issue as above", taken up as L-535 (the period's
+    reason).
+- **Tony's rulings, in the same run record, on the coordinator's
+  questions:**
+  - BACK STAYS AS IT IS: "i would think that "back" walks up the path.
+    but the < arrow is a browser control so it may work differently. the
+    path actually has no "lobby" element, it starts with "Solar System".
+    so the back arrow serves that purpose." Then, to "Back: fine as it
+    is": "yes".
+  - THE SHARED SPOT STAYS: to dropping it from the design talk, "yes";
+    to "fine as it is", "yes".
+  - CENTER ON, THE SYMBOL ALONE: "match. what the current default means
+    in practice is that "Center on (planet)" creates the system view
+    only while there are no planetary shells. the alternative is center
+    on the sun. in both cases it should be center on the symbol not the
+    shell, whether crust, surface, photosphere. the crust view is a
+    legacy default. we should remove it. that view should be the
+    visitor's to chose, crust + go to." And: "the question is whether the
+    shells or the symbols are primary. i would says symbols."
+- **Built in L-535 (the period's reason)'s session, 2026-11-15, night,**
+  on Tony's additions to its brief:
+  - Earth's arrival `drawn` ["crust"] and the Sun's ["photosphere"] set
+    to [] by the store writer (`tools/store_writer.py`, `save`), as
+    Mars's, Jupiter's and Saturn's: ?exhibit=earth and Center on Earth
+    open on Earth's symbol with its guides, framed on the Moon's whole
+    orbit.
+  - The Sun: Center on Sun first framed the room's half-range unfitted
+    while ?exhibit=sun framed the Sun close up; put to Tony with the
+    pictures, "Yes, like Home": Center on Sun is Home, and ?exhibit=sun
+    opens as ?exhibit=solar-system does.
+  - Tony's addition 4: "Centre on a body also opens that body's fold in
+    the drawer, for every body (ssCentreOn sets the centre's own fold
+    open, beside ssTickParent's rule), so after Centre on Mars the drawer
+    lists Phobos and Deimos, and after Centre on Earth its shells and the
+    Moon." Built in `ssCentreOn`.
+  - The walk (sections 27, 33, 34, 37) and the scene-address walk hold
+    all of it; each fails by name on a page planted without it. Tony saw
+    the openings before and after, at an upright phone's size, and said
+    "Yes, start Part 3".
+- **Closed 2026-11-15, night, on Tony's looks** (the coordinator's
+  close: "Then L-514 (the Mars room) closes on your looks, once you've
+  seen the openings"). Loose ends re-homed: the interactive-exhibit
+  lines to L-515 (one nested tree); the period's sentence to L-535 (the
+  period's reason); a moon's yearly change to L-536; the arrow in a
+  fold, and a Moons group, already on L-534 (missions by destination);
+  the shared spot, ruled to stay, off the design talk.
+**Gap:** none; closed.
+- **Ref:** L-513 (the Moon's standards, the pattern); L-334 (what a room
+  opens on, 2026-09-17); L-291 (the Earth room); L-484 (the two agree);
+  L-150 (Charon's period centre, for the Pluto room).
 
 #### [L-527] A first visit's guide: a walk-through that waits for the visitor (gallery, the lobby and the Solar System room; built, closed)
 <!-- L:527 status:DONE upd:2026-11-12 section:C flag: rice: -->

@@ -1,20 +1,20 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 15, 2026, evening: the website's Code session (Opus), Mars's session 2 of 2 (L-514 (the Mars room)).
-- Written at orrery b30d6d05 and gallery d3e97b15, with both folders' changes not yet committed.
+Last updated: November 15, 2026, night: the Code session (Opus) of L-535 (the period's reason), with your four additions.
+- Written at orrery 3946f7d (your push of Part 1) and gallery f9f81266, with the website's changes not yet committed.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - Phobos and Deimos are served on the website around Mars, with NASA's words, JPL's periods and JPL's accuracy (tens of kilometres); Mars opens on its symbol alone; the cache is built and every check passes (L-514 (the Mars room)).
-> - Every frame now fits across an upright phone's width with 10 percent to spare, by your rulings: the cube-shaped frame had let Deimos, Io, Titan and Charon run off the sides. The Solar System view still frames where bodies are now, so an orbit line may run past the side there, by design.
+> - A fetched period now ends with the sentence saying what set its digits, the same words in the orrery and on the website, from one function: "JPL gives no uncertainty for this period, so only the digits that stay the same over a year are shown.", and its two siblings (L-535 (the period's reason)).
+> - Every centre opens on its symbol alone, never a shell: the Earth card and Centre on Earth on Earth, framed on the Moon's orbit; the Sun card and Centre on the Sun as the Solar System view. Centre on opens that body's list in the drawer. Mars is closed on your looks (L-514 (the Mars room)).
 >
-> **Do next:** *finish your Mars looks, which close L-514 (the Mars room); beside them, a short Code session so the website's period line says what set its digits (L-535 (the period's reason)), brief `documentation/COORD_L535_period_digits_brief_20261115.md`.*
+> **Do next:** *push the website and look at Mars's and Phobos's period line on your phone, which closes L-535 (the period's reason); then ESCAPADE's path (L-533).*
 >
 > **Needs you now:**
-> - *(do) Commit and push the orrery (the period brief, the ledger, this page); then open the Code session and paste its prompt.*
-> - *(do) The phone look, upright: Mars's fold; Centre on Mars; tick each moon; Go To each moon; tap each moon in the picture; Reset; and the five centred views, each moon's orbit inside the picture. And your Mode 5 of the orrery's moons, centred on Mars (steps on L-514 (the Mars room)).*
+> - *(do) Commit and push the website, then the orrery (the ledger, this page); after the website's push, its run with --live from the dashboard.*
+> - *(do) The phone look: Phobos's and Mars's boxes, the period line ending with its sentence; the Earth card, the Sun card, Centre on Earth and on Mars with the drawer open.*
 > - *(do) Each morning, Fetch origin and Pull origin on both, orrery then website, before any work. If Pull origin shows up only once you have changes: Commit them first, then Pull origin, then Push origin. If Desktop stashes your changes anyway, restore them at once: Changes tab, Stashed Changes, Restore.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
 
@@ -29,11 +29,11 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
                and A2 of JPL's fallbacks (L-512), a green website night,
                the quick wins with L-423 (the website's checks), and the
                Moon's standards (L-513, closed).
- 15.   [NOW]   *Mars (L-514 (the Mars room)): both halves built Nov 15;
-               your two looks next. Then ESCAPADE's path (L-533), the
+ 15.   [NOW]   *Mars (L-514 (the Mars room)): closed Nov 15 on your
+               looks. Next ESCAPADE's path (L-533), the
                Lagrange points (L-297), the destinations and encounters
                talk (L-534, L-529), then Uranus and Neptune. Io, Titan,
-               Charon and Pluto come to standard in their folds.* << moved
+               Charon and Pluto come to standard in their folds.* << moved this session
  16.   [later] Earth's fold: the Earth-Moon barycentre, SOHO, Gaia, James Webb, Artemis II.
  17.   [later] Small-body systems' moons; then stars and exoplanets.
  18.   [goal]  The website does what the desktop orrery does, with a date
@@ -53,16 +53,18 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
 ## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings; a line leaves once it is habit, or a skill carries it.
+- Centre on opens on the symbol alone, never a shell ("the crust view is a legacy default. we should remove it"); the Sun's Centre on and the Sun card are the Solar System view ("Yes, like Home"); Back and the shared spot stay as they are (Nov 15; L-514 (the Mars room)).
+- A period's sentence says what set its digits, one source for the orrery and the website (Nov 15; L-535 (the period's reason)).
 - Every frame fits across the picture's narrow side, the farthest point of what it frames plus 10 percent; a picture wider than tall is unchanged. The Solar System view, its Home and Reset frame where bodies are now (your ruling of Oct 2), so an orbit line may run past the side there: the dots stay inside, and Go To shows a whole orbit (Nov 15; L-514 (the Mars room)).
 - Earth System layers move to Google Earth on the web, not the desktop app; a layer's one home is its page, earth/<its id>.html (Nov 13; L-001 (food insecurity), L-530 (the other layers on the web)).
 - Sentences we compose use American spelling; IPC's quoted words keep IPC's; a symbol taken from IPC is marked "after IPC" (Nov 13; L-001 (food insecurity)).
 - The room is used upright: held sideways it shows one line asking for the phone upright; the drawer need not work sideways (Nov 12; L-527 (a first visit's guide)).
 - One body's failed accuracy test: "Hold the bad data and report, then continue." A hold is not red; the night's commit title names the held body. A moon is held only when JPL gives no answer; more than five held is a failed build (Nov 11, the coordinator's changes). The room's title stays unchanged for a held body; its box says it (Nov 11, your "Yes, keep it"; L-525 (hold the bad data)).
-- The Sun direction line stays out of Earth's fold: the day-night shading and the Sun at its true place show the direction (Nov 10; L-515 (one nested tree)).
 
 ## Deferred  **>> UPDATED THIS SESSION**
 
 Waiting behind other work; a line leaves when picked up.
+- A moon's change in a year, read from two dates, catches the moon's own short wobble (Phobos's jumped 20 times in a day); the digits should come from many dates: its own session (Nov 15; L-536 (a moon's yearly change)).
 - Guided encounters, the guide's way of telling used for a flyby: a design talk after Mars (Nov 12; L-529 (guided encounters)).
 - The hold's leftovers: Earth's own box in its fold does not say a body is held; a close pass is held on its older orbit (L-526 (a close pass held)), before 2029 (Nov 11; L-525 (hold the bad data)).
 - The orrery's own Kepler solvers start the way the website's did; safe today, listed on L-524 (the Kepler solver's start), for an orrery session (Nov 11).
@@ -92,8 +94,8 @@ Waiting behind other work; a line leaves when picked up.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261115T185038Z, this session's, ok, no retry on the swap (gallery swap log, uncommitted, read Nov 15).
-- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at orrery b30d6d05, read Nov 15).
+- Last cache build: 20261115T185038Z, ok, no retry on the swap (gallery swap log at f9f81266, read Nov 15).
+- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at orrery 3946f7d, read Nov 15).
 - This page's date and the ledger's newest stamp: both Nov 15. Agree.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
@@ -107,7 +109,6 @@ At the next design talk:
   Pluto-centred view of the moons.
 - Planet 9: how to show a body that may not exist.
 - Missions by destination and encounters at every flyby and destination, one round, with your Moons group under a planet (Nov 15; L-534 (missions by destination), L-529 (guided encounters)).
-- A tap where bodies share one spot: in the Sun's view Phobos and Deimos sit on Mars's dot, and a tap there opens whichever was drawn last, sometimes Deimos when Mars was meant (Nov 15; L-514 (the Mars room)).
 - Whether the site counts visits, and tells visitors (Nov 13; for the Earth Science room's talk, L-531 (the Earth Science room)).
 
 Not urgent, in your order:
@@ -121,7 +122,7 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- This session: L-514 (the Mars room), session 2 built from `COORD_L514_website_moons_brief_20261115.md`; the frame fit in the website's `INTERACTIVE_AS_BUILT.md`, "Every frame fits across the picture".
+- This session: L-535 (the period's reason), from `COORD_L535_period_digits_brief_20261115.md` and your four additions; the openings in the website's `INTERACTIVE_AS_BUILT.md`, under Center on.
 - The caps: `DOCUMENT_CAPS.md`; L-522 (document caps); its brief
   `COORD_L522_step1_caps_brief_20261110.md` and the review beside it.
 - The tree: L-515 (one nested tree), its briefs `COORD_L515_*`.

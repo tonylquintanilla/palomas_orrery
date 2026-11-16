@@ -646,3 +646,102 @@ Additions to the brief, from Tony's rulings of Nov 15 (his run record WHERE_WE_A
 2. Centre on a body opens on its symbol alone, never a shell: set Earth's arrival drawn ["crust"] and the Sun's drawn ["photosphere"] to [] through store_writer, as Mars's, Jupiter's and Saturn's already are. This also changes what ?exhibit=earth and ?exhibit=sun open on: show me both openings and Centre on Earth and on the Sun, before and after, framed by the fit, and stop for my word before any push.
 3. Records: quote Tony's rulings from that run record (Back stays as it is; the shared spot stays; Centre on the symbol alone, Tony's "match ... the crust view is a legacy default. we should remove it"). Close L-514 (the Mars room) on his looks once he has seen the openings.
 ```
+
+===========================
+
+**Code:**
+
+I'm writing the ledger records. First I'm checking where L-514's loose ends should go when it closes, as the records skill requires.
+
+The ledger records are written in a script. Applying it and regenerating the ledger index.
+
+The index regenerated with no problems: 529 items read and 269 live. Now Where We Are, section by section, within its 130-line cap.
+
+Part 3 is done. The records are written, L-514 (the Mars room) is closed on your looks, and your Phobos finding has its own ledger item. Nothing is committed: the website's changes and these records are waiting for you.
+
+**What the records say**
+- **L-535 (the period's reason)** has the full build:
+  - your two rulings on the wording, quoted;
+  - the one function in the orrery, and what the website's export now carries;
+  - the throwaway check that the website's nightly run stays green when the orrery is pushed first;
+  - Mars's and Phobos's lines before and after, word for word;
+  - every check and its count, and what wasn't run.
+
+  It stays open until you push the website and look at Mars's and Phobos's period line on your phone.
+- **L-514 (the Mars room)** is closed and moved to the ledger's closed section. It quotes:
+  - your looks from your run record, including the five centred views and the shared spot;
+  - your three rulings: Back stays as it is, the shared spot stays, and Centre on opens on the symbol alone, with "the crust view is a legacy default. we should remove it" and "i would says symbols";
+  - "Yes, like Home" for the Sun.
+
+  Its loose ends each went somewhere:
+  - The notes for the next version of interactive-exhibit (the skill for the website's rooms) went to L-515 (one nested tree), which collects them.
+  - The period sentence went to L-535.
+  - The yearly change went to L-536.
+  - The small fold arrow and your Moons group were already on L-534 (missions by destination).
+- **L-536 (a moon's yearly change)** is new, for its own session:
+  - It holds your finding in your words.
+  - It holds the numbers from the orrery's saved orbit data: Phobos's change over a year went from 0.000002 to 0.000043 days between fetches a day apart, and Deimos's moved the other way.
+  - Its gap: measure the wobble across many dates, choose the rule, and get your word on it.
+- **Where We Are** is edited section by section and stands at 130 lines, its cap; the caps check passes.
+  - The box says what changed.
+  - Next is your push and phone look, then ESCAPADE's path (L-533).
+  - Mars's road stage reads "closed".
+  - Settled gains two lines: the symbol-alone, Sun-is-Home and Back rulings, and the one-source period sentence. The oldest line, from Nov 10, left to make room.
+  - L-536 goes under Deferred.
+  - The shared spot comes off the design-talk list, since you ruled it stays.
+- **The ledger index** regenerated with no problems: 529 items read, 269 live. The ledger and the page are ASCII with LF line endings.
+
+**Files changed**
+
+Orrery (Part 1 is already in your push, 3946f7d):
+- ok `orbital_period.py` (3 edits), `export_objects.py` (5 edits), `test_position_digits.py` (6 edits), plus what the maintenance run wrote, all pushed.
+- Waiting for you:
+  - ok `LEDGER_CONSOLIDATED.md` (4 edits: L-535, L-536 new, L-515, L-514 closed and moved; index regenerated)
+  - ok `documentation/WHERE_WE_ARE.md` (8 sections, 12 edits)
+
+Website, all waiting for you:
+- ok `interactive.html` (5 edits)
+- ok `gallery/solar_system_figures.js` (2 edits)
+- ok `tools/store_writer.py` (2 edits)
+- ok `data/objects_config.json` (2 edits by the website's text tool; the pull and copy step added the period sentences and Mars, Phobos and Deimos's new fetch)
+- ok `tools/headless/walk_solar_system_drawer.js` (10 edits)
+- ok `tools/headless/walk_scene_address.js` (3 edits)
+- ok `documentation/smoke_arrival.js` (3 edits)
+- ok `documentation/smoke_solar_system_figures.js` (2 edits)
+- ok `INTERACTIVE_AS_BUILT.md` (3 edits)
+- Written by the run: `data/objects_export.json` and `.sha`, `data/constants_export.sha`, `data/drawings/pulled_at.sha`, `MODULE_ATLAS.md`, `MODULE_INDEX.md`.
+
+**Token count:** no /cost figure prints in this app, and I can't see the context size; please take it from the app. Sizes written:
+
+| File | Bytes |
+|---|---|
+| `LEDGER_CONSOLIDATED.md` | 2,654,058 |
+| `WHERE_WE_ARE.md` | 10,904 |
+| `interactive.html` | 491,927 |
+| `INTERACTIVE_AS_BUILT.md` | 147,599 |
+| the drawer walk | 159,798 |
+| `solar_system_figures.js` | 36,935 |
+
+Sizes read: seven skills in part, the L-535 brief, your run record, the period and export code, the page's Centre on and boot code, and the full test outputs.
+
+**Your run order**
+1. In GitHub Desktop, commit and push the website: 15 files. -- 997df13281cf86a77650410c82768c9c8eadc5c7
+2. Commit and push the orrery: the ledger and Where We Are. -- 
+3. Run the website's maintenance run with --live from the dashboard.
+4. On your phone, upright:
+   - Phobos's and Mars's boxes, with the period line ending in its sentence;
+   - the Earth card and the Sun card;
+   - Centre on Earth and on Mars with the drawer open.
+
+**Tony-actions**
+- (do) Push the website, then the orrery.
+- (do) The --live run after the push.
+- (do) The phone look above. It closes L-535 (the period's reason).
+- (do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).
+
+**Where this leaves us**
+- Mars is closed: both moons on the website, every centre opening on its symbol, and the Sun's view as Home.
+- A period now says what set its digits, in the same words in the orrery and on the website.
+- Next on the road is ESCAPADE's path, after your look closes the period sentence.
+
+One final thought: Centre on now opens a body's list in the drawer, but the drawer still opens at the top of its list, so on a phone you scroll down to Earth or Mars to see it. If that bothers you on your look, scrolling the drawer to the centred body would be a small change. I didn't make it without your word.
