@@ -159,5 +159,5 @@ patch applied
 
 Do next:
   1. (do) Move this file into documentation\. -- done
-  2. (do) In GitHub Desktop (orrery): the change list shows the ledger, WHERE_WE_ARE.md, this file and, if not yet pushed, the document track's handoff of 08:35. Commit and push -- not while the website's night is running (08:17 UTC, 2:17 Chicago, often hours late).
+  2. (do) In GitHub Desktop (orrery): the change list shows the ledger, WHERE_WE_ARE.md, this file and, if not yet pushed, the document track's handoff of 08:35. Commit and push -- not while the website's night is running (08:17 UTC, 2:17 Chicago, often hours late). -- 16f9bac230eb720204f1910cce3ed8ccb635c8e2
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
