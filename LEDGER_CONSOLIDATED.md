@@ -1056,7 +1056,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-191 | Display-text duplication across the shell modules | OPEN | 2.8 | 2026-10-22 |
 | ! | L-244 | Sweep for replicated conversion factors as a class [Fable candidate] | OPEN | 2.8 | 2026-08-25 |
 | ! | L-323 | A figure in prose needs a home (the Note is not a store) | OPEN | 2.8 | 2026-09-12 |
-| ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-10-07 |
+| ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-11-16 |
 | ! | L-298 | Seeing the gap between what the orrery draws and what an exhibit serves | OPEN | 2.7 | 2026-09-07 |
 | ! | L-248 | The parsec-to-light-year factor is typed 36 times across the star pipeline | OPEN | 2.5 | 2026-08-25 |
 | ! | L-273 | A document indexer, so the README's document table stops being hand-maintained | OPEN | 2.5 | 2026-09-01 |
@@ -1176,7 +1176,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-516 | Renew palomasorrery.com at Porkbun before 2027-02-13 (legacy; Tony's account) | OPEN | -- | 2026-11-07 |
 | ! | L-520 | Old pictures carry old words: the saved pictures' titles and descriptions have no source (gallery, the saved pictures; the braid) | OPEN | -- | 2026-11-08 |
 | ! | L-521 | Three red checks in the drawer walk (gallery, the headless walk; recorded) | OPEN | -- | 2026-11-15 |
-| ! | L-522 | Document caps: how the working documents are kept from growing, and the catch-up (protocol, skills, ledger; upkeep) | OPEN | -- | 2026-11-11 |
+| ! | L-522 | Document caps: how the working documents are kept from growing, and the catch-up (protocol, skills, ledger; upkeep) | OPEN | -- | 2026-11-16 |
 | ! | L-525 | One body's failed accuracy test holds that body, not the whole site (gallery, the nightly builder's served window; built, its sentence settled Nov 11) | OPEN | -- | 2026-11-11 |
 | ! | L-526 | A body whose test fails for a real reason is drawn from the older orbit while held (gallery, the nightly builder's hold; recorded, not built) | OPEN | -- | 2026-11-11 |
 | ! | L-528 | The orrery's Kepler solvers' start: E = pi for a stretched orbit, and no error when they do not converge (orrery; recorded, not built) | OPEN | -- | 2026-11-12 |
@@ -2124,7 +2124,7 @@ Kepler solver's start, the case that raised it); L-165 (site
 continuity).
 
 #### [L-522] Document caps: how the working documents are kept from growing, and the catch-up (protocol, skills, ledger; upkeep)
-<!-- L:522 status:OPEN upd:2026-11-11 section:A flag: rice: -->
+<!-- L:522 status:OPEN upd:2026-11-16 section:A flag: rice: -->
 - **The review, 2026-11-10**
   (`documentation/REVIEW_fundamental_documents_20261110.md`, read at
   orrery b3ce81f8 and gallery cea21af1; the coordinating session, Claude
@@ -2458,6 +2458,19 @@ continuity).
 **Note (Claude):** not decided: each skill's target cap; the size limit
 for one ledger item. The harness (57 of the 176 modules are developer
 tools) was measured, not reviewed.
+- **The coordinating session's close, 2026-11-16** (Claude Fable 5.2;
+  read at orrery e84baabd and gallery 1c5fe516). Tony, 08:19: "can you
+  review the status and give me a handoff for the next Fable session to
+  pick up the document review and close this session?" The handoff is
+  `documentation/HANDOFF_document_upkeep_20261116.md`. Steps 3 to 6 have
+  not moved since Nov 11; that day the track took the tap fix (L-523),
+  the Kepler solver (L-524) and the hold (L-525) by Tony's word. The
+  caps held through three skill versions (v3.139 to v3.141): the caps
+  check passes, the protocol at 1,390 of 1,394. The ledger is 41,030
+  lines, 39,021 on Nov 10. Two notes owed since Nov 10, recorded here:
+  Where We Are's first gauge reads the last build that succeeded, so a
+  failed night still reads "ok"; and the README's cap is tripped by its
+  own generated table when a root document is added.
 **Gap:** steps 3 to 6 (step 1 built 2026-11-10, night; step 2 built
 2026-11-11); step 3's talk is held, its draft is not written.
 **Tony-action (do):** reinstall interactive-exhibit 1.41 (Settings >
@@ -10935,7 +10948,7 @@ HANDOFF_food_insecurity_sdn_projections_20261112.md
 (the Earth Science room).
 
 #### [L-060] ENSO Standalone Chart (Earth System track)
-<!-- L:060 status:OPEN upd:2026-10-07 section:A flag: rice:3/3/75/2.5 -->
+<!-- L:060 status:OPEN upd:2026-11-16 section:A flag: rice:3/3/75/2.5 -->
 - **ENSO standalone gallery chart (design locked, build next session).** Earth
   System track, not the orrery refactor. Single-unit (deg C) chart leading with
   RONI so El Nino / La Nina state reads honestly in a warming climate; ONI as a
@@ -10966,10 +10979,74 @@ HANDOFF_food_insecurity_sdn_projections_20261112.md
   OUTGOING LONGWAVE, NOT primarily "reflects more sunlight"; fold in RONI
   rationale) + add 2026 band provisional-with-flagging. Split to own L-handle if
   it risks leaking when L-060 closes.
-**Gap:** build next session. One genuine open call left (build, not design): confirm ONI file URL + IRI plume parse / skill-calibration params at HEAD before hardcoding (cached-CSV fallback if scrape unstable; model-spread band fallback if calibration params unavailable). Provenance-scan new module (Tier-1=0) before push. Resolved: plume=calibrated Gaussian envelope; schematic=Plotly; 2026 band=provisional-now; no extra traces.
+**Gap (superseded below, 2026-11-16):** build next session. One genuine open call left (build, not design): confirm ONI file URL + IRI plume parse / skill-calibration params at HEAD before hardcoding (cached-CSV fallback if scrape unstable; model-spread band fallback if calibration params unavailable). Provenance-scan new module (Tier-1=0) before push. Resolved: plume=calibrated Gaussian envelope; schematic=Plotly; 2026 band=provisional-now; no extra traces.
 - **2026-10-07:** the Earth System track is ruled central and
   sequenced behind the website build; the ruling is on L-001. This
   item waits there, not as a tail item.
+- **2026-11-16: EL NINO COMES BACK, AS A PAGE** (the coordinating
+  session of Nov 16, Claude Opus 5.5, from Tony's phone). Prompted by a
+  magazine article Tony shared, dated Nov 16, 2026, on this El Nino and
+  the Amazon's fires. Four rulings, in Tony's words:
+  - 09:06, "Yes": El Nino is its own page on the website, like Sudan's
+    (earth/[id].html, earth-system-pipeline 1.3, A Layer's Page and Its
+    Walk), with the June chart at its centre; a walk is added only if
+    it earns one. Not the old-gallery card the June spec planned: the
+    old lobby's Earth System cards are being retired (L-531 (the Earth
+    Science room)).
+  - 09:11, "Yes, interrupt.": ahead of ESCAPADE's path (L-533), as
+    Tony's words of Nov 13 on L-531 allowed ("We may interrupt again
+    for something else like el nino.").
+  - 09:15, "Switch.": the forecast is NOAA's own, the Climate
+    Prediction Center's chances season by season, on RONI, the same
+    index as the chart's main line. It replaces the June plan of the
+    IRI model plume, a band on the ONI basis (the spec's D6 and section
+    2.3). Two reasons: NOAA forecasts on RONI since Feb 1, 2026; and a
+    session of Oct 19 found the IRI plume's numbers published only as a
+    picture, to be typed in by hand each month.
+  - 12:24, "yes, please proceed.": NOAA's Climate Prediction Center
+    (CPC) is the one source of record, as IPC is for food insecurity:
+    the history (RONI.ascii.txt), the status (the ENSO Alert System)
+    and the forecast's chances, from one body. No internationally
+    agreed El Nino threshold exists (CPC +0.5, Australia's Bureau of
+    Meteorology +0.8, on its own relative index), so WMO's quarterly
+    update and the Bureau's figures are left out, not mixed in.
+  - Tony's question at 09:58, NOAA's funding and its labs, and what
+    was answered: CPC is part of the operational Weather Service
+    (CLIMATE PREDICTION CENTER/NCEP/NWS on its discussions), not the
+    research office (OAR) the FY2026 and FY2027 requests proposed to
+    eliminate; Congress kept OAR for FY2026, and the House committee
+    rejected the FY2027 request. Two safeguards, method for the build:
+    the page shows the date of NOAA's latest update and says so when
+    one is overdue; every build saves a copy of the NOAA files it read.
+    If CPC stopped, a new source of record is Tony's decision then,
+    never a fallback that switches in by itself.
+  - Still holds from the June spec (documentation/ENSO_chart_spec.md
+    v2): RONI as the lead series, a filled seesaw, red above and blue
+    below; ONI as a thin line; phases and strength computed from RONI
+    (D4), never a recalled label; the 2026 event provisional; the
+    charge-and-discharge drawing for the mechanism. A record is shown
+    as possible until the data shows one.
+  - Must be rewritten for the build: the spec's build parts (sections
+    3 and 6: the Plotly teaser, gallery_metadata.json, the old viewer's
+    i card) to the page rules; and its card notes' figures from memory
+    (the years of the deepest imbalance minima) sourced or removed.
+  - Read this session [verified, fetched Nov 16]: RONI.ascii.txt live,
+    its last season JAS 2026 at +1.69, the file's highest DJF 1983 at
+    +2.40; CPC's discussion issued 12 November 2026, the next
+    scheduled 10 December 2026.
+  - Not in this item, recorded only: the Amazon's fires as a later
+    step, if at all. The article names three pressures (El Nino,
+    deforestation, repeated fire), so a page could show El Nino as the
+    background, never the cause; its figures would come from INPE and
+    MapBiomas, not the magazine. The Phase 2 pass on
+    energy_imbalance.py stands as deferred; its chart is an old-gallery
+    card, so its form waits on L-531.
+**Gap (replaces the one above, 2026-11-16):** the brief for El Nino's
+Code session (the page by the earth-system-pipeline rules; the June
+chart with NOAA's chances as its forecast; CPC the one source; the two
+safeguards; the spec's build parts rewritten); then the build, Tony's
+phone look, and his reading of every word before it goes live. Then
+ESCAPADE's path (L-533).
 **Ref:** ENSO_chart_spec.md v2 (design spec, this session); cross-ref L-001 (Food Insecurity, same Earth System track; the track's ruling of 2026-10-07); energy_imbalance.py (Phase 2 target).
 
 #### [L-070] Food Insecurity -- regional multi-country assembly (Sudan crisis shed)
