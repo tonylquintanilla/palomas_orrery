@@ -726,17 +726,124 @@ Sizes read: seven skills in part, the L-535 brief, your run record, the period a
 
 **Your run order**
 1. In GitHub Desktop, commit and push the website: 15 files. -- 997df13281cf86a77650410c82768c9c8eadc5c7
-2. Commit and push the orrery: the ledger and Where We Are. -- 
+2. Commit and push the orrery: the ledger and Where We Are. -- 8d362bd5cf8595614142e0b1d0d795f63d368f01
 3. Run the website's maintenance run with --live from the dashboard.
+
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 66 files from https://palomasorrery.com/ (34 typed, 32 positions files read from data\objects_config.json)
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches (the working copy is CRLF)
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   gallery/arrival.js                             matches the working copy
+    SERVED   gallery/nav_cluster.js                         matches the working copy
+    SERVED   gallery/solar_system_figures.js                matches the working copy
+    SERVED   gallery/solar_system_drawer.js                 matches the working copy
+    SERVED   data/objects_config.json                       matches the working copy
+    SERVED   gallery/guestbook.js                           matches the working copy
+    SERVED   data/guestbook.json                            matches the working copy
+    SERVED   data/solar-system/drawings/hills_cloud.json    matches the working copy
+    SERVED   data/solar-system/drawings/van_allen_belts.json matches the working copy
+    SERVED   data/solar-system/drawings/earth_exosphere.json matches the working copy
+    SERVED   data/solar-system/drawings/sun_corona.json     matches the working copy
+    SERVED   data/solar-system/drawings/zodiacal_dust.json  matches the working copy
+    SERVED   data/solar-system/drawings/outer_oort_cloud.json matches the working copy
+    SERVED   data/solar-system/drawings/galactic_tide.json  matches the working copy
+    SERVED   gallery/source_list.js                         matches the working copy
+    SERVED   gallery/far_lines.js                           matches the working copy
+    SERVED   gallery/direction_arrows.js                    matches the working copy
+    SERVED   gallery/drawer_order.js                        matches the working copy
+    SERVED   gallery/text_box.js                            matches the working copy
+    SERVED   gallery/scene_moment.js                        matches the working copy
+    SERVED   gallery/scene_address.js                       matches the working copy
+    SERVED   gallery/picture_folds.js                       matches the working copy
+    SERVED   gallery/gallery_metadata.json                  matches the working copy
+    SERVED   gallery/assembler/compose_children.py          matches the working copy
+    SERVED   gallery/view_centre.js                         matches the working copy
+    SERVED   gallery/tap_hover.js                           matches the working copy
+    SERVED   gallery/first_guide.js                         matches the working copy
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+    SERVED   data/solar-system/positions/voyager_2.json     matches the working copy
+    SERVED   data/solar-system/positions/new_horizons.json  matches the working copy
+    SERVED   data/solar-system/positions/juno.json          matches the working copy
+    SERVED   data/solar-system/positions/osiris_apex.json   matches the working copy
+    SERVED   data/solar-system/positions/parker_solar_probe.json matches the working copy
+    SERVED   data/solar-system/positions/bepicolombo.json   matches the working copy
+    SERVED   data/solar-system/positions/solar_orbiter.json matches the working copy
+    SERVED   data/solar-system/positions/lucy.json          matches the working copy
+    SERVED   data/solar-system/positions/juice.json         matches the working copy
+    SERVED   data/solar-system/positions/psyche_spacecraft.json matches the working copy
+    SERVED   data/solar-system/positions/europa_clipper.json matches the working copy
+    SERVED   data/solar-system/positions/galileo.json       matches the working copy
+    SERVED   data/solar-system/positions/cassini.json       matches the working copy
+    SERVED   data/solar-system/positions/pioneer_10.json    matches the working copy
+    SERVED   data/solar-system/positions/pioneer_11.json    matches the working copy
+    SERVED   data/solar-system/positions/rosetta.json       matches the working copy
+    SERVED   data/solar-system/positions/akatsuki.json      matches the working copy
+    SERVED   data/solar-system/positions/dart.json          matches the working copy
+    SERVED   data/solar-system/positions/west.json          matches the working copy
+    SERVED   data/solar-system/positions/mcnaught.json      matches the working copy
+    SERVED   data/solar-system/positions/tsuchinshan_atlas.json matches the working copy
+    SERVED   data/solar-system/positions/wierzchos.json     matches the working copy
+    SERVED   data/solar-system/positions/atlas_2024_g3.json matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1.json      matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1_b.json    matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1_d.json    matches the working copy
+    SERVED   data/solar-system/positions/panstarrs_2025_r3.json matches the working copy
+    SERVED   data/solar-system/positions/borisov_2025_v1.json matches the working copy
+    SERVED   data/solar-system/positions/oumuamua.json      matches the working copy
+    SERVED   data/solar-system/positions/borisov_2i.json    matches the working copy
+    SERVED   data/solar-system/positions/atlas_3i.json      matches the working copy
+
+  PASS Served reachability       9.6s  all 66 files served and
+                                    byte-identical to the working copy
+
+  orrery export pinned at 3946f7d8
+
+  PASS Export freshness          0.2s  the served export is the orrery's
+                                    at 3946f7d8, byte for byte
+
+  orrery HEAD 8d362bd5
+  examining 3 of 190 links; the other 187 are served from the export
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  3 pointers: 1 match, 0 DRIFT, 0 UNIT MISMATCH, 2 could not be examined.
+
+  PASS Store drift               2.5s  3 pointers against orrery 8d362bd5
+                                    -- 1 match, 0 DRIFT, 0 UNIT
+                                    MISMATCH, 2 could not be examined.
+
+======================================================================
+  2 of 2 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Store drift            3 pointers against orrery 8d362bd5 -- 1
+  last swap 2026-11-15T18:52:53.967309+00:00: succeeded first time
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
 4. On your phone, upright:
-   - Phobos's and Mars's boxes, with the period line ending in its sentence;
-   - the Earth card and the Sun card;
-   - Centre on Earth and on Mars with the drawer open.
+   - Phobos's and Mars's boxes, with the period line ending in its sentence; -- yes
+   - the Earth card and the Sun card; -- yes
+   - Centre on Earth and on Mars with the drawer open. -- correct
 
 **Tony-actions**
-- (do) Push the website, then the orrery.
-- (do) The --live run after the push.
-- (do) The phone look above. It closes L-535 (the period's reason).
+- (do) Push the website, then the orrery. -- done
+- (do) The --live run after the push. -- done
+- (do) The phone look above. It closes L-535 (the period's reason). -- done
 - (do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).
 
 **Where this leaves us**
@@ -744,4 +851,4 @@ Sizes read: seven skills in part, the L-535 brief, your run record, the period a
 - A period now says what set its digits, in the same words in the orrery and on the website.
 - Next on the road is ESCAPADE's path, after your look closes the period sentence.
 
-One final thought: Centre on now opens a body's list in the drawer, but the drawer still opens at the top of its list, so on a phone you scroll down to Earth or Mars to see it. If that bothers you on your look, scrolling the drawer to the centred body would be a small change. I didn't make it without your word.
+One final thought: Centre on now opens a body's list in the drawer, but the drawer still opens at the top of its list, so on a phone you scroll down to Earth or Mars to see it. If that bothers you on your look, scrolling the drawer to the centred body would be a small change. I didn't make it without your word. -- the alternative would be what Code suggested, that the row in the label should also be the position in the list displayed in the drawer. in other words, the opening scene would display the inner planets, with the earth row in the label, and opening the drawer should show the earth row highlighted and scrolled to. tapping venus would do the same thing, show the venus label, and text box, and opening the drawer would show venus scrolled to. tapping the sun, would show the sun label and short text box, and the drawer would open at the top with the sun row selected. tapping earth would be like the opening scene except that the earth's text box would be displayed too.
