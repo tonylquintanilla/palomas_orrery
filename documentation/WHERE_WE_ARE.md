@@ -10,10 +10,10 @@ Last updated: November 15, 2026, evening: the website's Code session (Opus), Mar
 > - Phobos and Deimos are served on the website around Mars, with NASA's words, JPL's periods and JPL's accuracy (tens of kilometres); Mars opens on its symbol alone; the cache is built and every check passes (L-514 (the Mars room)).
 > - Every frame now fits across an upright phone's width with 10 percent to spare, by your rulings: the cube-shaped frame had let Deimos, Io, Titan and Charon run off the sides. The Solar System view still frames where bodies are now, so an orbit line may run past the side there, by design.
 >
-> **Do next:** *your phone look at Mars, upright, which closes L-514 (the Mars room); then Uranus and Neptune.*
+> **Do next:** *finish your Mars looks, which close L-514 (the Mars room); beside them, a short Code session so the website's period line says what set its digits (L-535 (the period's reason)), brief `documentation/COORD_L535_period_digits_brief_20261115.md`.*
 >
 > **Needs you now:**
-> - *(do) Commit and push the website (config and cache together), then the orrery (the ledger, this page); after the push, the website's run with --live from the dashboard.*
+> - *(do) Commit and push the orrery (the period brief, the ledger, this page); then open the Code session and paste its prompt.*
 > - *(do) The phone look, upright: Mars's fold; Centre on Mars; tick each moon; Go To each moon; tap each moon in the picture; Reset; and the five centred views, each moon's orbit inside the picture. And your Mode 5 of the orrery's moons, centred on Mars (steps on L-514 (the Mars room)).*
 > - *(do) Each morning, Fetch origin and Pull origin on both, orrery then website, before any work. If Pull origin shows up only once you have changes: Commit them first, then Pull origin, then Push origin. If Desktop stashes your changes anyway, restore them at once: Changes tab, Stashed Changes, Restore.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
@@ -106,7 +106,7 @@ At the next design talk:
   code)); two cases now, the orrery's unused date function and its
   Pluto-centred view of the moons.
 - Planet 9: how to show a body that may not exist.
-- Missions by destination and encounters at every flyby and destination, one round, by the road's order (Nov 15; L-534 (missions by destination), L-529 (guided encounters)).
+- Missions by destination and encounters at every flyby and destination, one round, with your Moons group under a planet (Nov 15; L-534 (missions by destination), L-529 (guided encounters)).
 - A tap where bodies share one spot: in the Sun's view Phobos and Deimos sit on Mars's dot, and a tap there opens whichever was drawn last, sometimes Deimos when Mars was meant (Nov 15; L-514 (the Mars room)).
 - Whether the site counts visits, and tells visitors (Nov 13; for the Earth Science room's talk, L-531 (the Earth Science room)).
 

@@ -20,14 +20,14 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T1 by domain | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|--------------|---:|---:|---:|--------:|
+| 20261116T044555Z | `d0f90d1` | 176 | 1172 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 713 | 182 | 6 | 0 |
 | 20261115T154511Z | `488cad2` | 176 | 1172 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 713 | 182 | 6 | 0 |
 | 20261115T145255Z | `488cad2` | 176 | 1171 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 713 | 181 | 6 | 0 |
 | 20261115T032329Z | `5779e1f` | 176 | 1171 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 713 | 181 | 6 | 0 |
 | 20261114T210542Z | `594e562` | 176 | 1171 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 713 | 181 | 6 | 0 |
 | 20261114T205704Z | `594e562` | 176 | 1171 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 713 | 181 | 6 | 0 |
-| 20261114T195237Z | `594e562` | 176 | 1171 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 713 | 181 | 6 | 0 |
 
-Change since the previous run: total +1, Tier-1 +0.
+Change since the previous run: total +0, Tier-1 +0.
 
 No file's Tier-1 count rose.
 
@@ -1452,9 +1452,9 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 126 | constant | OPEN_ORBIT_PLACEHOLDER_FLOOR | 1e+90 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'computation') |
-| 141 | dict | VIEW_TO_OSCULATING_CENTRE[...] | (7 entries) | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'computation') |
-| 178 | dict | PERIOD_TARGETS[...] | (2 entries) | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
+| 137 | constant | OPEN_ORBIT_PLACEHOLDER_FLOOR | 1e+90 | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'computation') |
+| 152 | dict | VIEW_TO_OSCULATING_CENTRE[...] | (7 entries) | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED (inferred from role 'computation') |
+| 189 | dict | PERIOD_TARGETS[...] | (2 entries) | 3 | 5 | **15** | Cited, not independently cross-checked | MEASURED -- independently catalogued fact (name) |
 | 1 | string | display string @ line 1 | (4 claims) | 3 | 4 | **12** | Cited, not independently cross-checked | Public-facing display string (hover/INFO) |
 
 ### orrery_rendering.py
@@ -1901,8 +1901,8 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 312 | constant | SCHEMA | 4 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 313 | constant | CADENCE_DAYS | 30 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 323 | constant | SCHEMA | 4 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 324 | constant | CADENCE_DAYS | 30 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### export_orbit_cache.py
 
@@ -2212,12 +2212,12 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 304 | dict | SENTENCES[...] | (4 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 310 | dict | NONE_WORDS[...] | (2 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 314 | dict | SPEED_WORDS[...] | (4 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 109 | constant | FLOOR_KM | 0.5 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
-| 112 | constant | SPEED_FLOOR_KM_S | 0.0005 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
-| 568 | constant | RECORDED_R_S_AU | 2.25639403e-06 | 3 | 2 | **6** | Cited, not cross-checked; date-sensitive | Internal (role 'devtool') |
+| 314 | dict | SENTENCES[...] | (4 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 320 | dict | NONE_WORDS[...] | (2 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 324 | dict | SPEED_WORDS[...] | (4 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 119 | constant | FLOOR_KM | 0.5 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
+| 122 | constant | SPEED_FLOOR_KM_S | 0.0005 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
+| 578 | constant | RECORDED_R_S_AU | 2.25639403e-06 | 3 | 2 | **6** | Cited, not cross-checked; date-sensitive | Internal (role 'devtool') |
 
 ### test_reset_completeness.py
 
@@ -2279,7 +2279,7 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 184 | dict | CENTRE_LABELS[...] | (23 entries) | 3 | 1 | **3** | Cited, not independently cross-checked | Cosmetic (name vocabulary) |
+| 195 | dict | CENTRE_LABELS[...] | (23 entries) | 3 | 1 | **3** | Cited, not independently cross-checked | Cosmetic (name vocabulary) |
 
 ### star_sphere_builder.py
 

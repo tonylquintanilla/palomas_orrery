@@ -421,21 +421,228 @@ L-297 (the Lagrange points) now follows ESCAPADE on the road, and all of this af
 
 **Your run order is unchanged:**
 1. Commit and push the website. -- f9f81266e328d906a6ebba65375b0604c77f053c
-2. Commit and push the orrery.
+2. Commit and push the orrery. -- d0f90d181235ab160a788bafeda3304ba452fe9a
 3. Run the website's maintenance run with --live.
+
+======================================================================
+  gallery maintenance run -- LIVE (after a push)
+  root: C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io   (found beside this script)
+======================================================================
+
+LIVE -- what the deployed site actually serves
+
+  fetching 66 files from https://palomasorrery.com/ (34 typed, 32 positions files read from data\objects_config.json)
+    SERVED   interactive.html                               matches the working copy
+    SERVED   gallery/feature_renderers.js                   matches the working copy
+    SERVED   gallery/earth_geometry.js                      matches the working copy
+    SERVED   gallery/assembler/resolver.py                  matches the working copy
+    SERVED   gallery/assembler/__init__.py                  matches the working copy
+    SERVED   data/solar-system/coverage_index.json          matches (the working copy is CRLF)
+    SERVED   data/solar-system/feature_configs.json         matches (the working copy is CRLF)
+    SERVED   gallery/arrival.js                             matches the working copy
+    SERVED   gallery/nav_cluster.js                         matches the working copy
+    SERVED   gallery/solar_system_figures.js                matches the working copy
+    SERVED   gallery/solar_system_drawer.js                 matches the working copy
+    SERVED   data/objects_config.json                       matches the working copy
+    SERVED   gallery/guestbook.js                           matches the working copy
+    SERVED   data/guestbook.json                            matches the working copy
+    SERVED   data/solar-system/drawings/hills_cloud.json    matches the working copy
+    SERVED   data/solar-system/drawings/van_allen_belts.json matches the working copy
+    SERVED   data/solar-system/drawings/earth_exosphere.json matches the working copy
+    SERVED   data/solar-system/drawings/sun_corona.json     matches the working copy
+    SERVED   data/solar-system/drawings/zodiacal_dust.json  matches the working copy
+    SERVED   data/solar-system/drawings/outer_oort_cloud.json matches the working copy
+    SERVED   data/solar-system/drawings/galactic_tide.json  matches the working copy
+    SERVED   gallery/source_list.js                         matches the working copy
+    SERVED   gallery/far_lines.js                           matches the working copy
+    SERVED   gallery/direction_arrows.js                    matches the working copy
+    SERVED   gallery/drawer_order.js                        matches the working copy
+    SERVED   gallery/text_box.js                            matches the working copy
+    SERVED   gallery/scene_moment.js                        matches the working copy
+    SERVED   gallery/scene_address.js                       matches the working copy
+    SERVED   gallery/picture_folds.js                       matches the working copy
+    SERVED   gallery/gallery_metadata.json                  matches the working copy
+    SERVED   gallery/assembler/compose_children.py          matches the working copy
+    SERVED   gallery/view_centre.js                         matches the working copy
+    SERVED   gallery/tap_hover.js                           matches the working copy
+    SERVED   gallery/first_guide.js                         matches the working copy
+    SERVED   data/solar-system/positions/voyager_1.json     matches the working copy
+    SERVED   data/solar-system/positions/voyager_2.json     matches the working copy
+    SERVED   data/solar-system/positions/new_horizons.json  matches the working copy
+    SERVED   data/solar-system/positions/juno.json          matches the working copy
+    SERVED   data/solar-system/positions/osiris_apex.json   matches the working copy
+    SERVED   data/solar-system/positions/parker_solar_probe.json matches the working copy
+    SERVED   data/solar-system/positions/bepicolombo.json   matches the working copy
+    SERVED   data/solar-system/positions/solar_orbiter.json matches the working copy
+    SERVED   data/solar-system/positions/lucy.json          matches the working copy
+    SERVED   data/solar-system/positions/juice.json         matches the working copy
+    SERVED   data/solar-system/positions/psyche_spacecraft.json matches the working copy
+    SERVED   data/solar-system/positions/europa_clipper.json matches the working copy
+    SERVED   data/solar-system/positions/galileo.json       matches the working copy
+    SERVED   data/solar-system/positions/cassini.json       matches the working copy
+    SERVED   data/solar-system/positions/pioneer_10.json    matches the working copy
+    SERVED   data/solar-system/positions/pioneer_11.json    matches the working copy
+    SERVED   data/solar-system/positions/rosetta.json       matches the working copy
+    SERVED   data/solar-system/positions/akatsuki.json      matches the working copy
+    SERVED   data/solar-system/positions/dart.json          matches the working copy
+    SERVED   data/solar-system/positions/west.json          matches the working copy
+    SERVED   data/solar-system/positions/mcnaught.json      matches the working copy
+    SERVED   data/solar-system/positions/tsuchinshan_atlas.json matches the working copy
+    SERVED   data/solar-system/positions/wierzchos.json     matches the working copy
+    SERVED   data/solar-system/positions/atlas_2024_g3.json matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1.json      matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1_b.json    matches the working copy
+    SERVED   data/solar-system/positions/c2025_k1_d.json    matches the working copy
+    SERVED   data/solar-system/positions/panstarrs_2025_r3.json matches the working copy
+    SERVED   data/solar-system/positions/borisov_2025_v1.json matches the working copy
+    SERVED   data/solar-system/positions/oumuamua.json      matches the working copy
+    SERVED   data/solar-system/positions/borisov_2i.json    matches the working copy
+    SERVED   data/solar-system/positions/atlas_3i.json      matches the working copy
+
+  PASS Served reachability      10.2s  all 66 files served and
+                                    byte-identical to the working copy
+
+  orrery export pinned at b30d6d05
+
+  PASS Export freshness          0.3s  the served export is the orrery's
+                                    at b30d6d05, byte for byte
+
+  orrery HEAD d0f90d18
+  examining 3 of 190 links; the other 187 are served from the export
+    NOT IN STORE  planet_poles['Jupiter']          not a top-level constant in the store
+                  /objects/2/features/orientation/pole
+    NOT IN STORE  planet_poles['Saturn']           not a top-level constant in the store
+                  /objects/3/features/orientation/pole
+  3 pointers: 1 match, 0 DRIFT, 0 UNIT MISMATCH, 2 could not be examined.
+
+  PASS Store drift               1.9s  3 pointers against orrery d0f90d18
+                                    -- 1 match, 0 DRIFT, 0 UNIT
+                                    MISMATCH, 2 could not be examined.
+
+======================================================================
+  2 of 2 gating checkers passed
+  1 report-only -- these do not gate, whatever they exit with:
+    PASS Store drift            3 pointers against orrery d0f90d18 -- 1
+  last swap 2026-11-15T18:52:53.967309+00:00: succeeded first time
+======================================================================
+
+  Offline pass: python gallery_maintenance_run.py
+
+C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
+
 4. Your two looks.
 
 Checking the moons in the orrery (Mode 5). These steps use the orrery’s own window:
 
-Open palomas_orrery.py in VS Code and press Run.
-In “Select Center Object for Your Plot”, choose Mars.
-Tick Mars, “- Phobos” and “- Deimos”, then press “Plot Entered Date”.
-Look at Phobos’s text, as session 1 reported it:
-NASA’s sentence, “Phobos is on a collision course with Mars.”
-A distance in tens of kilometres, like “9380 kilometers”.
-The line “These distances are rounded to JPL’s published accuracy for Phobos’s orbit around Mars.”
-Deimos should read the same way, with its own sentence and no “Retrogade” anywhere.
-Both orbits should circle Mars, and Deimos’s should be about two and a half times wider than Phobos’s.
-Then centre on the Sun with the same ticks. Phobos’s text should no longer say “JPL states no accuracy”.
+1. Open palomas_orrery.py in VS Code and press Run.
+2. In “Select Center Object for Your Plot”, choose Mars.
+3. Tick Mars, “- Phobos” and “- Deimos”, then press “Plot Entered Date”.
+4. Look at Phobos’s text, as session 1 reported it:
+  NASA’s sentence, “Phobos is on a collision course with Mars.”
+  A distance in tens of kilometres, like “9380 kilometers”. -- yes, but 9230 for this minute 11-16 00:33 utc
+  The line “These distances are rounded to JPL’s published accuracy for Phobos’s orbit around Mars.” -- yes
+5. Deimos should read the same way, with its own sentence and no “Retrogade” anywhere. -- yes
+6. Both orbits should circle Mars, and Deimos’s should be about two and a half times wider than Phobos’s. -- yes
+7. Then centre on the Sun with the same ticks. Phobos’s text should no longer say “JPL states no accuracy”. -- difficult to see; could not confirm
+
+Here's the website's Mode 5 list. Do it after both pushes, with the --live run green, on your phone held upright.
+
+**Start**
+1. Open the Solar System view at palomasorrery.com.
+   - Every planet's dot should be inside the picture. -- yes
+   - Mars's orbit line may run a few pixels past a side. That's by design. -- no. fully within by about 20%
+
+**Mars's fold**
+2. Tap the arrow at the start of Mars's row. -- i completely missed this on my first look. better would be a group under Mars, "Moons" that opens to Phobos and Deimos. this would be a template for the other planets too with more moon. for earth this is not needed because there is only 1. the arrow is tiny and not noticeable unless one is looking for it. however, it works correctly. in other words, "Mars" is not a group. "Moons" would be a group under Mars. in the future, "Missions" would be a group under Mars for those destined for mars or for encounters. 
+   - It should list Phobos, then Deimos, both unticked. -- yes
+3. Press Centre on Mars.
+   - Mars should sit in the middle, its symbol alone, with no moons drawn. -- yes
+   - The axis lines should cross at Mars. -- yes
+
+**The moons**
+4. Tick Phobos.
+   - Its dot and orbit appear in dark red, the whole orbit inside the picture. -- yes
+5. Tick Deimos.
+   - Its dot and orbit appear in grey. -- yes
+   - Its whole orbit should be inside the picture, with a little room at the left and right edges. This is the fix from today. -- yes
+6. Go To Phobos. Phobos's own box should open, showing:
+   - its name; -- yes
+   - NASA's sentence, "Phobos is on a collision course with Mars."; -- yes in both the hover and info
+   - its distance from Mars in tens of kilometres, around 9,340 km; -- no. it is rounded to 100 km, 9,300 km. the text suggests that it has to do with the propagation error, which is okay. 
+   - a sentence saying what set those digits. Most of the day it will say the position is outside its orbit's best-accuracy window of 1 hour either side; -- yes
+   - its period in days. -- 0.31914 days from JPL, but it does not say if JPL provides this as the precision too. 
+7. Open the i panel.
+   - Its link should be NASA's Phobos page. -- yes
+8. Go To Deimos. Its box should show:
+   - "Deimos is the smaller of the two Martian moons and is less irregular in shape."; -- yes
+   - a distance around 23,460 km; -- yes
+   - its period in days. -- yes
+
+**Tapping in the picture**
+9. Tap Phobos's dot, then Deimos's, then Mars's.
+   - Each should open its own box on the first tap. -- yes
+   - A tap between Mars and Phobos opens whichever dot is nearer. -- yes
+10. Judge the colours. Is dark red Phobos easy to tell from Mars? Is grey Deimos visible against the dark background? -- yes
+
+**Back out**
+11. Press Reset.
+    - The view should return to Mars's opening, with both moons off. -- no, reset returns to the inner solar system view with Earth selected, the original view. i tried it twice. back takes me out to the lobby.
+12. Press Home.
+    - You should be back at the Solar System view, with every planet inside the picture. -- yes, no change from reset. 
+
+**The other centred views (today's frame fix)**
+13. Centre on Jupiter, tick Io, and Go To Io. -- correct. Reset also takes me back to the inner solar system view. 
+14. Do the same for Saturn with Titan, the Pluto system with Charon, and Earth with the Moon.
+    - Each time, the moon's whole orbit should be inside the picture, with room at the sides. -- correct. all of these system when tapping "Center on (planet)" show the planet and the moon's orbit, except earth. selecting the moon and go to shows the moon's orbit. however, tapping Center on Earth zooms in to the Earth's crust. in other words, for all the planets except earth, the moon's go to and the center on (planet) buttons do the same thing, except for earth. 
+
+**The shared spot (for the design talk, not a fault)**
+15. In the Solar System view, with Phobos and Deimos ticked, tap Mars. -- mars and the moons are superimposed in the solar system view, and tapping generally bring up Deimos. this makes sense because it is the largest orbit in the mars system. 
+    - Note which box opens. It may be a moon's.
+
+For each step that looks wrong, write in your run record which step it was, what you saw, and whether it happened on the first try.
 
 I'll write ESCAPADE's brief when it's next, after your looks close Mars.
+
+============================
+
+Both looks pass on everything L-514 (the Mars room) set out to deliver. The moons, their words, distances, colours and taps, and the frame fix in all five centred views all checked out. Your three "no"s are not faults in the build, and one of them is my mistake.
+
+**Reset and Home (steps 11 and 12): my list was wrong.** Since the one tree was built (L-515 (one nested tree)), Home and Reset both return to the Solar System view's opening on purpose. I wrote that Reset would return to Mars's opening; it was never meant to. What you saw is the design.
+
+**Two real questions came out of your look, both for the design talk:**
+- **Back leaves the room.** Centring on a planet doesn't add a step to the browser's history, so Back goes straight to the lobby. On a phone a visitor may expect Back to step back up to the Solar System view. It's related to step 2b's leftover "a view centred on Jupiter is not in the shared link", since both come from a centred view not being part of the page's address. -- i would think that "back" walks up the path. but the < arrow is a browser control so it may work differently. the path actually has no "lobby" element, it starts with "Solar System". so the back arrow serves that purpose. 
+- **Centre on Earth works differently.** It opens on Earth's own shells, because Earth's fold keeps what the old Earth room opened on. Every other planet opens on its moons' orbits. You noticed that elsewhere Centre on and Go To on the moon end up doing the same thing, and Earth breaks that pattern. Should Earth match the others, or keep its shells? -- match. what the current default means in practice is that "Center on (planet)" creates the system view only while there are no planetary shells. the alternative is center on the sun. in both cases it should be center on the symbol not the shell, whether crust, surface, photosphere. the crust view is a legacy default. we should remove it. that view should be the visitor's to chose, crust + go to.  
+
+**Your other notes:**
+- **The shared spot:** you found a tap there usually opens Deimos, and that it "makes sense because it is the largest orbit". If you're content with that, I'd drop it from the design talk. -- yes. 
+- **The orrery's view centred on the Sun (step 7):** you couldn't confirm the sentence by eye. Session 1's digits test checks exactly that case, and it fails when the change is removed, so I'd count it covered. -- same issue as above
+- **9,230 km at 00:33 UTC in the orrery:** that's right. Phobos's distance from Mars swings between about 9,230 and 9,520 km over each orbit.
+
+Shall I close L-514 (the Mars room) on your looks, with Back and Centre on Earth moved to the design talk? -- i have not returned to Code with your changes. please review the fixes that we discussed and do them in this Code session, before another brief or handoff. 
+
+===============================
+
+**Coordinator:**
+
+Here are the fixes we agreed, gathered into one addition for the period session's prompt, so no new brief or handoff is needed. I can't run the orrery's export or the website's checks on your computer from here, so the Code session does the work. It starts from the L-535 (the period's reason) brief already on your disk.
+
+**The fixes:**
+1. **The period's sentence (L-535):** "JPL gives no uncertainty for this period, so only the digits that stay the same over a year are shown." Where JPL does give an uncertainty: "Rounded to JPL's stated uncertainty in the orbit." The same words in the orrery and on the website, from one source.
+2. **Centre on a body opens on its symbol alone, never on a shell (your ruling tonight).** I checked the website's settings. Two bodies break the rule today: Earth opens on its crust, and the Sun opens on its photosphere. Mars, Jupiter and Saturn already open on the symbol alone. The fix is two settings, written by the website's own text tool, with no page code. A shell's view becomes the visitor's choice: tick it, then Go To.
+
+**One consequence to look at.** These are the same settings the old Sun and Earth room links use. So the Sun card and the Earth card in the gallery would also open on the symbol alone, not the photosphere or the crust. The prompt has Code show you both openings, before and after, and stop for your word before anything is pushed. -- understood. the question is whether the shells or the symbols are primary. i would says symbols. 
+
+**Records, also in that session:** your rulings from tonight's run record:
+- **Back:** fine as it is. The trail starts at "Solar System", so Back serves as the way out. -- yes
+- **The shared spot:** fine as it is. -- yes
+- **Centre on:** the symbol alone, everywhere. -- yes
+
+Then L-514 (the Mars room) closes on your looks, once you've seen the openings.
+
+Paste this to Code, after the brief's usual prompt:
+```
+Additions to the brief, from Tony's rulings of Nov 15 (his run record WHERE_WE_ARE_11-15-26_0837_run_record.md, the coordinator's sections):
+1. The period sentence: for a period JPL gives no uncertainty for, "JPL gives no uncertainty for this period, so only the digits that stay the same over a year are shown."; with JPL's stated uncertainty, "Rounded to JPL's stated uncertainty in the orbit." Orrery and website alike, from one source.
+2. Centre on a body opens on its symbol alone, never a shell: set Earth's arrival drawn ["crust"] and the Sun's drawn ["photosphere"] to [] through store_writer, as Mars's, Jupiter's and Saturn's already are. This also changes what ?exhibit=earth and ?exhibit=sun open on: show me both openings and Centre on Earth and on the Sun, before and after, framed by the fit, and stop for my word before any push.
+3. Records: quote Tony's rulings from that run record (Back stays as it is; the shared spot stays; Centre on the symbol alone, Tony's "match ... the crust view is a legacy default. we should remove it"). Close L-514 (the Mars room) on his looks once he has seen the openings.
+```

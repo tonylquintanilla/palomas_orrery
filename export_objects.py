@@ -179,6 +179,11 @@ before this, for a served body that has none fetched, L-444). Its parts:
     words        the sentence a typed or missing period carries in the
                  orrery: "Typed value, not fetched from JPL." The website
                  prints the same words, so the two agree
+    reason       for a fetched period, what set its digits, the sentence
+                 the orrery's hover ends with
+                 (orbital_period.period_reason), one plain sentence with
+                 no <br>; null for an open orbit and for a typed or
+                 missing period (L-535)
     record       for a fetched period only, what the check and the test
                  need and the website does not show: the full days, its
                  error and what governs it (the year's change or SBDB's
@@ -293,6 +298,12 @@ only. Each period block carries "days_only", the orrery's choice by
 orbital_period.days_only, and such a period serves "years" as null, so
 the website prints the days alone and decides nothing itself. The
 schema stays 4: a reader that knows no "days_only" finds no years.)
+Module updated: November 15, 2026 with Anthropic's Claude Opus 5.5 (L-535,
+the period's reason: a fetched period block carries "reason", the
+sentence the orrery's hover ends with, from
+orbital_period.period_reason(), as plain text with no <br>; null for an
+open orbit, typed or missing period. The schema stays 4: a reader that
+knows no "reason" prints the period without it.)
 """
 
 import ast
@@ -585,6 +596,7 @@ def period_block(name, object_type, cache, typed_table):
             "open_orbit": days is None,
             "fetched": rec.get("fetched"),
             "words": None,
+            "reason": op.period_reason(rec),
         }
         block["days_only"] = op.days_only(days)
         if days is None:
@@ -639,7 +651,8 @@ def period_block(name, object_type, cache, typed_table):
         block = {"kind": "typed", "typed": True, "center": None,
                  "center_label": None, "open_orbit": typed is None,
                  "fetched": None,
-                 "words": "Typed value, not fetched from JPL."}
+                 "words": "Typed value, not fetched from JPL.",
+                 "reason": None}
         block["days_only"] = op.days_only(typed)
         if typed is None:
             block["years"] = block["days"] = None
@@ -651,7 +664,8 @@ def period_block(name, object_type, cache, typed_table):
     return ({"kind": "none", "typed": False, "center": None,
              "center_label": None, "open_orbit": False, "fetched": None,
              "days_only": False, "years": None, "days": None,
-             "words": "Not yet fetched from JPL."}, {"none": True})
+             "words": "Not yet fetched from JPL.", "reason": None},
+            {"none": True})
 
 
 def confirmation_of(record):

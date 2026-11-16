@@ -32,6 +32,8 @@ right finding, by name:
     another body's period printed as the body's  TARGET WORDS DROPPED
     JPL's "n.a." said as not included            JPL'S NONE SAID AS NOT INCLUDED
     a failed question said as JPL stating none   A FAILED QUESTION SAID AS JPL STATING NONE
+    the period's old year sentence put back      PERIOD REASON NOT THE RULED WORDS
+    the export's reason worded apart             EXPORT REASON NOT THE HOVER'S
 
 The last five go beyond the brief's six. The first two prove the static
 plot still asks for a small body's uncertainty and reads Horizons'
@@ -81,6 +83,14 @@ Tony's ruling of that evening: a period under a year prints in days only.
 The period check holds the Moon's fetched period and Mercury's typed one
 to days alone, in the hover and the parameters window, and Earth's
 period, just over a year, to years and days.)
+Module updated: November 15, 2026 with Anthropic's Claude Opus 5.5 (L-535,
+the period's reason: the sentence that says what set a period's digits
+is held, word for word, to Tony's rulings of Nov 15 for a planet, a
+small body JPL gives a stated uncertainty for, one whose uncertainty is
+smaller than its year's change, and one the database gives none for;
+and the export's "reason" is held to the hover's own words, with no
+<br>. Two planted faults: the old year sentence put back, and the
+export's reason worded apart from the hover's.)
 """
 import math
 import os
@@ -784,6 +794,57 @@ def check_period_sentence(findings, counts):
                              % (want, hover.replace('<br>', ' / '), panel)))
 
 
+# THE PERIOD'S REASON (L-535, Tony's rulings of 2026-11-15). The words
+# are typed here from the rulings, not read from orbital_period, so a
+# changed sentence shows. The hover's last lines and the export's
+# "reason" must both be these words: one source, two readers.
+YEAR_DIGITS = 'so only the digits that stay the same over a year are shown.'
+REASON_CASES = [
+    ('a planet or a moon', {'error_from': 'year_change', 'sbdb_sigma_days': None,
+                            'sbdb_status': 'not a small body; SBDB not asked'},
+     'JPL gives no uncertainty for this period, ' + YEAR_DIGITS),
+    ("a small body rounded to JPL's uncertainty",
+     {'error_from': 'sigma', 'sbdb_sigma_days': 0.002,
+      'sbdb_status': 'SBDB sigma for the period'},
+     "Rounded to JPL's stated uncertainty in the orbit."),
+    ("a small body whose uncertainty is under its year's change",
+     {'error_from': 'year_change', 'sbdb_sigma_days': 0.0002,
+      'sbdb_status': 'SBDB sigma for the period'},
+     "JPL's uncertainty for this period is smaller than its change over a year, "
+     + YEAR_DIGITS),
+    ('a small body the database gives no uncertainty for',
+     {'error_from': 'year_change', 'sbdb_sigma_days': None,
+      'sbdb_status': 'SBDB gives no sigma for the period'},
+     "JPL's small-body database gives no uncertainty for this period, " + YEAR_DIGITS),
+]
+
+
+def check_period_reason(findings, counts):
+    import export_objects
+    for label, fields, want in REASON_CASES:
+        rec = {'days': 1680.1, 'error_days': 0.004, 'center': '@sun', 'target': '1',
+               'fetched': '2026-11-15'}
+        rec.update(fields)
+        hover = orbital_period.period_hover_lines(
+            {'kind': 'fetched', 'days': rec['days'], 'record': rec, 'label': 'the Sun'})
+        said = ' '.join(hover.split('<br>')[2:])
+        counts['period'] = counts.get('period', 0) + 2
+        if said != want:
+            findings.append(('PERIOD REASON NOT THE RULED WORDS',
+                             '%s: %r, want %r' % (label, said, want)))
+        for line in hover.split('<br>'):
+            if len(line) >= 98:
+                findings.append(('PERIOD LINE TOO WIDE', '%s, %d characters: %s'
+                                 % (label, len(line), line)))
+        cache = {'Ceres': {'period': rec, 'metadata': {'horizons_id': '1',
+                                                       'center_body': '@sun'}}}
+        block, _ = export_objects.period_block('Ceres', 'asteroid', cache, {})
+        got = (block or {}).get('reason')
+        if got != said or not isinstance(got, str) or '<br>' in got:
+            findings.append(("EXPORT REASON NOT THE HOVER'S",
+                             '%s: export %r, hover %r' % (label, got, said)))
+
+
 def run_checks(sky_source=None, orrery_source=None):
     findings = []
     counts = {'hovers': 0, 'lines': 0, 'answers': 0, 'pairs': 0, 'sweep': 0, 'odd': 0,
@@ -791,6 +852,7 @@ def run_checks(sky_source=None, orrery_source=None):
     for fx in FIXTURES:
         judge_fixture(fx, findings, counts)
     check_period_sentence(findings, counts)
+    check_period_reason(findings, counts)
     check_odd_inputs(findings, counts)
     check_symmetry(findings, counts)
     check_every_object(findings, counts)
@@ -980,6 +1042,29 @@ def _failed_called_jpl_none():
         yield
 
 
+@contextmanager
+def _old_year_sentence():
+    """The sentence before L-535: the year's change named, JPL's
+    uncertainty not."""
+    real = orbital_period.period_reason_lines
+
+    def lines(rec):
+        out = real(rec)
+        if (rec or {}).get('error_from') == 'year_change':
+            return ['Rounded to how much the period changes in a year.']
+        return out
+    with _patched(orbital_period, 'period_reason_lines', lines):
+        yield
+
+
+@contextmanager
+def _export_reason_apart():
+    """The export's sentence typed apart from the hover's."""
+    with _patched(orbital_period, 'period_reason',
+                  lambda rec: 'Rounded to how much the period changes in a year.'):
+        yield
+
+
 def _sky_source_with_table():
     with open(os.path.join(HERE, 'celestial_coordinates.py'), encoding='utf-8') as f:
         src = f.read()
@@ -1020,6 +1105,10 @@ PLANTS = [
      "JPL'S NONE SAID AS NOT INCLUDED"),
     ('a failed question said as JPL stating none', _failed_called_jpl_none, {},
      'A FAILED QUESTION SAID AS JPL STATING NONE'),
+    ("the period's old year sentence put back", _old_year_sentence, {},
+     'PERIOD REASON NOT THE RULED WORDS'),
+    ("the export's reason worded apart", _export_reason_apart, {},
+     "EXPORT REASON NOT THE HOVER'S"),
 ]
 
 

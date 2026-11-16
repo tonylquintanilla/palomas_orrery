@@ -1005,7 +1005,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*268 live items; 252 need attention (`!`); 165 RICE-scored; 259 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*269 live items; 253 need attention (`!`); 165 RICE-scored; 259 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1187,6 +1187,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-532 | A Code session away from the computer: where its work lives (method; recorded) | OPEN | -- | 2026-11-14 |
 | ! | L-533 | ESCAPADE, Blue and Gold, on their way to Mars (orrery + gallery; recorded, after the Mars build) | OPEN | -- | 2026-11-15 |
 | ! | L-534 | Missions by destination: a mission's row under each body it goes to (gallery + orrery; design round with L-529) | OPEN | -- | 2026-11-15 |
+| ! | L-535 | The period's reason: the website's period line says what set its digits (orrery + gallery) | OPEN | -- | 2026-11-15 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1837,11 +1838,48 @@ orbiter rule for an arrival).
   Voyagers); past destinations (New Horizons at Pluto, Apollo 11 at the
   Moon); what a destination row shows and where Go To goes while the
   craft is far from it (ESCAPADE now).
+- **Tony's proposal, 2026-11-15**, in his run record, at Mars's fold:
+  "better would be a group under Mars, "Moons" that opens to Phobos and
+  Deimos. this would be a template for the other planets too with more
+  moon. for earth this is not needed because there is only 1. ... in
+  other words, "Mars" is not a group. "Moons" would be a group under
+  Mars. in the future, "Missions" would be a group under Mars for those
+  destined for mars or for encounters." So the round designs a planet's
+  fold as groups: Moons (where there is more than one), Missions, and
+  the shells at the build-out. The coordinator's question still to put:
+  the Moons group in this round with Missions, or built sooner alone.
 **Gap:** the design round, with L-529 (guided encounters), after
 ESCAPADE's path (L-533) and the Lagrange points (L-297).
 **Ref:** L-533 (ESCAPADE); L-529 (guided encounters); L-515 (one nested
 tree); L-476 (paths by the plan); L-443 (the spacecraft group); L-507
 (historical missions).
+
+#### [L-535] The period's reason: the website's period line says what set its digits (orrery + gallery)
+<!-- L:535 status:OPEN upd:2026-11-15 section:A flag: rice: -->
+- **Found by Tony, 2026-11-15**, at Phobos's box on his phone (run record
+  `documentation/WHERE_WE_ARE_11-15-26_0837_run_record.md`): "0.31914
+  days from JPL, but it does not say if JPL provides this as the
+  precision too." JPL states no uncertainty for a moon's or planet's
+  period; the digits are the orrery's, kept by how much the period
+  changes in a year (Phobos 0.000002 days).
+- **Read at orrery d0f90d18 and gallery f9f81266:** the orrery's own
+  period text ends with the sentence saying what set the digits
+  (`orbital_period.period_hover_lines`: "Rounded to how much the period
+  changes in a year.", "Rounded to JPL's stated uncertainty in the
+  orbit.", and the small-body database variants). The export's period
+  block carries `"words": None` for a fetched period; the reason
+  (`error_from`, `sbdb_status`) is only in its `record`, which
+  `tools/mirror_objects.py` (`period_copy`) does not copy; the website's
+  `periodLine` (`gallery/solar_system_figures.js`) prints the period
+  with no reason, for every body.
+- **Tony, 17:24:** "we should fix this in this session. easily
+  overlooked." Brief: `documentation/COORD_L535_period_digits_brief_20261115.md`
+  (the coordinating session, Claude Opus 5.5).
+**Gap:** the Code session of the brief, on Tony's go-ahead in it; then
+the before-and-after words for Mars and Phobos to Tony before they ship.
+**Ref:** L-431 (orbital periods); L-513 (the Moon's standards); L-514 (the
+Mars room, where it was found); interactive-exhibit, Hover text is
+written for the visitor.
 
 #### [L-529] Guided encounters: the guide's way of telling, used for a flyby (gallery; an idea, for a design talk after Mars)
 <!-- L:529 status:OPEN upd:2026-11-13 section:A flag: rice: -->
@@ -4153,6 +4191,40 @@ skill's split (L-522).
   around Mars; then centred on the Sun, no "JPL states no accuracy".
   Recorded by that session after session 2 closed, so the two did not
   write the ledger at once.
+- **Pushed 2026-11-15, evening**, in Tony's run record: the website at
+  f9f81266, the orrery at d0f90d18; the website's run with --live, "2 of
+  2 gating checkers passed", the served export pinned at b30d6d05, "last
+  swap 2026-11-15T18:52:53 ... succeeded first time".
+- **Two red nights before the website's push**, found by Tony: GitHub's
+  website run of 2026-11-15 18:56 UTC, "Objects mirror -- OBJECTS MIRROR:
+  FAIL ... REFUSED (2): phobos: a key in the orrery's export with no
+  object of that slug in the config ... deimos ...", "Nothing is to be
+  committed: the site keeps serving the previous cache". Cause: session
+  1's orrery push added two keys the website's pushed config did not yet
+  list; the website's push of f9f81266 adds them. THE LESSON, for any
+  build whose two halves add a body: an orrery push ahead of the
+  website's half turns the website's nights red until that half is
+  pushed, so push the two close together, the website's half first where
+  it can be. Carried into the briefs of L-533 (ESCAPADE) and L-535 (the
+  period's reason).
+- **Tony's website look, first part, 2026-11-15**, in his run record:
+  - The Solar System view: every planet inside; Mars's orbit "fully
+    within by about 20%".
+  - Mars's fold: the arrow "i completely missed ... the arrow is tiny and
+    not noticeable unless one is looking for it. however, it works
+    correctly." His proposal, recorded on L-534 (missions by
+    destination): a "Moons" group under a planet.
+  - Centre on Mars: the symbol alone, the axes crossing at Mars, "yes".
+  - Go To Phobos: name and NASA's sentence "yes in both the hover and
+    info"; the distance "rounded to 100 km, 9,300 km. the text suggests
+    that it has to do with the propagation error, which is okay." (past
+    the one-hour window, the drift sets the digits); the span sentence
+    "yes"; the i panel's link "yes"; the period "0.31914 days from JPL,
+    but it does not say if JPL provides this as the precision too." --
+    taken up as L-535 (the period's reason), at Tony's word, 17:24: "we
+    should fix this in this session. easily overlooked."
+  - Deimos, the taps, the colours, Reset, Home and the other four
+    centred views: not yet looked at.
 **Gap:** Tony's two looks, which close this item. (1) Tony-action (do):
 the orrery's moons, Mode 5, by the steps above. (2) Tony-action (do):
 the website, upright on his phone: Mars's fold; Centre on Mars; tick
