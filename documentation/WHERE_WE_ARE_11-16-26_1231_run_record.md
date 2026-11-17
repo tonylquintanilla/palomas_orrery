@@ -449,13 +449,65 @@ patch applied
 
 Do next:
   1. (do) Move this file into documentation\. -- done
-  2. (do) In GitHub Desktop (orrery): commit and push the two files and this patch. Not between 07:17 and 11:17 UTC (1:17 to 5:17 Chicago), when the night runs. -- 
+  2. (do) In GitHub Desktop (orrery): commit and push the two files and this patch. Not between 07:17 and 11:17 UTC (1:17 to 5:17 Chicago), when the night runs. -- f8a1229e777d27bba5949c74af0c5bebe3a84f2b; website pulled: 20e13fd1c22a2071b519fa8762f65803bd874309
   3. (do) Tomorrow morning: the orrery's night title should NOT start with EL NINO DUE (NOAA's next update is due 10 December).
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
-2. then move it into `documentation\`. 
-3. Commit and push the orrery, avoiding 1:17 to 5:17 in the morning Chicago time. T
-4. omorrow's orrery night title should *not* start with "EL NINO DUE." 
-5. The first real one should come after NOAA's December 10 update.
+1. The first real one should come after NOAA's December 10 update.
 
 One final thought: the suite's checks tested the flag on a record containing only the El Niño row, never alongside the night's other rows. A test of one row alone couldn't see a collision between rows. It's the "check that cannot fail" lesson in a new shape: a check needs a realistic input, not just a correct one. I'll add a line to L-060 next time the ledger is touched.
+
+=====================
+
+**Coordinator:**
+
+You don't need to add anything to the dashboard. The new test is part of the El Niño check suite, so the existing **"El Nino Check Suite"** button already runs it. That button now runs 22 checks, including the night of Nov 17 itself.
+
+**Mode 5: a phone look at the live page.** Close any old tab first, then open the site from your Home Screen.
+- El Niño's card is first in the lobby's Featured, and tapping it opens the page.
+- All five steps are there, each with its picture.
+- Both tap-to-open sections open and close.
+- A few source links open NOAA's pages.
+- The status line says 12 November and next 10 December. There's no "late" line, since Dec 10 hasn't come yet.
+- Holding the phone upright, nothing scrolls sideways.
+- The ñ shows correctly wherever "El Niño" appears.
+
+**The close patch is in your orrery folder:** `patch_L060_4_session_close_20261117.py`. I ran it on copies of your own ledger and Where We Are; both match the repo, and it applied cleanly.
+- It adds a note to the El Niño ledger item: the page is live, and the night's false "EL NINO DUE" title is fixed.
+- It records the lesson from that bug. The test checked the El Niño row on its own, so it couldn't catch one row's words setting another row's flag.
+- It points Where We Are's box at ESCAPADE next.
+
+To finish: do the phone look. Then open the patch in VS Code, click Run, move the file into `documentation\`, and commit and push the orrery.
+
+Where this leaves us:
+- El Niño's page is live and the session's records are ready to close.
+- Tomorrow morning, the orrery's night title should not start with "EL NINO DUE".
+- Next is ESCAPADE's path (L-533).
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & 'C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe' 'c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L060_4_session_close_20261117.py'
+ok L-060: the Gap of Nov 17 marked superseded
+ok L-060: the done Tony-action marked done
+ok L-060: the close note and new Gap
+ok header: date
+ok header: SHAs
+ok box: the page
+ok box: the night
+ok box: do next
+ok box: needs you now
+ok road: stage 15
+ok marks: Settled
+ok marks: Signals
+ok marks: Where the details are
+ok LEDGER_CONSOLIDATED.md written
+ok documentation\WHERE_WE_ARE.md written
+Running ledger_index.py ...
+  OK: 529 L-blocks parsed, no consistency problems.
+  Index regenerated (268 live items) in C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\LEDGER_CONSOLIDATED.md.
+ok ledger_index.py
+patch applied
+
+Do next:
+  1. (do) Move this file into documentation\.
+  2. (do) In GitHub Desktop (orrery): commit and push the ledger,
+     Where We Are and this file. Not while the night is running.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 

@@ -1,19 +1,19 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 17, 2026: El Nino's page built (Claude Code, Opus), from the brief of Nov 16.
-- Written at orrery 20a9c155 and gallery 1c5fe516, with this session's edits on your disk, not yet pushed.
+Last updated: November 17, 2026: El Nino's page live, and the night's flag fixed (coordinating session, Opus).
+- Written at orrery f8a12290 and gallery 20e13fd1, with this patch's edits on your disk.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - El Nino's page is built: five steps from NOAA's data, its pictures drawn at each build, every sentence checked against its source (L-060 (El Nino)). It is on your disk, not live; on your push it shows in the lobby's Featured, and the dashboard's Earth System group rebuilds it.
-> - The night now checks NOAA: when NOAA has anything newer than the page, the night saves a copy of NOAA's files and its commit title starts "EL NINO DUE"; you rebuild the page by hand. The page itself says when it is behind.
+> - El Nino's page is live: the lobby's Featured card opens it, and the dashboard's Earth System group rebuilds it (L-060 (El Nino)).
+> - The night's "EL NINO DUE" title is fixed: it is read from the El Nino check's own row only. The night of Nov 17 said it by mistake; its row said CURRENT.
 >
-> **Do next:** *Your phone look at El Nino's page, then your push, which puts it live. Then ESCAPADE's path (L-533 (ESCAPADE)).*
+> **Do next:** *ESCAPADE's path (L-533 (ESCAPADE)).*
 >
 > **Needs you now:**
-> - *(do) Read El Nino's preview on your phone; then commit and push the orrery, then the website.*
+> - *(do) Your phone look at the live El Nino page (the list in today's chat). Tomorrow, the orrery's night title should not start with "EL NINO DUE"; if it does, tell the next session.*
 > - *(do) Each morning, Fetch origin and Pull origin on both, orrery then website, before any work. If Pull origin shows up only once you have changes: Commit them first, then Pull origin, then Push origin. If Desktop stashes your changes anyway, restore them at once: Changes tab, Stashed Changes, Restore.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
 
@@ -29,7 +29,7 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
                the quick wins with L-423 (the website's checks), and the
                Moon's standards (L-513, closed).
  15.   [NOW]   *Mars (L-514 (the Mars room)) closed Nov 15. El Nino's
-               page (L-060 (El Nino)) built Nov 17, live on your push; then
+               page (L-060 (El Nino)) live Nov 17; next,
                ESCAPADE's path (L-533), the Lagrange points (L-297), the
                destinations and encounters talk (L-534, L-529), then Uranus
                and Neptune. Io, Titan, Charon and Pluto come to standard in their folds.* << moved this session
@@ -49,7 +49,7 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
                L-423 (the website's checks) item 3; L-357 (stale gallery
                artifacts); L-509 (obsolete code), after its talk.
 
-## Settled  **>> UPDATED THIS SESSION**
+## Settled
 
 Standing rulings; a line leaves once it is habit, or a skill carries it.
 - El Nino's monthly update: the night checks NOAA and flags "EL NINO DUE"; you rebuild the page by hand; the night never changes a page. You no longer run the Daily Run routinely; you rely on the nightly (Nov 17; L-060 (El Nino)).
@@ -90,7 +90,7 @@ Waiting behind other work; a line leaves when picked up.
 - L-490 (the legacy list); L-499 (kinds of session); L-471 (a delivered
   patch is final), for safe-file-editing's next version.
 
-## Signals  **>> UPDATED THIS SESSION**
+## Signals
 
 Read from files when this page was written, not typed from memory.
 - Last cache build: 20261115T185038Z, ok, no retry on the swap (your local gallery's swap log at f9f81266, read Nov 17).
@@ -118,7 +118,7 @@ Not urgent, in your order:
 3. Earth's list (L-413 (Earth's list)): open as enhancements, or closed
    with its seven pieces moved to their own items.
 
-## Where the details are  **>> UPDATED THIS SESSION**
+## Where the details are
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
 - El Nino: L-060 (El Nino); `enso_page_generator.py` (the page, and the night's check), its suite `test_enso_night_check.py`, the brief `COORD_L060_el_nino_page_brief_20261116.md`.

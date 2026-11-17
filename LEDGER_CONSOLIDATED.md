@@ -11164,7 +11164,7 @@ ESCAPADE's path (L-533).
   - The energy imbalance link points at the old gallery card
     (/#energy_imbalance_desktop); it moves when L-531 (the Earth
     Science room) retires the old cards.
-**Gap (replaces the one above, 2026-11-17):** Tony's phone look and his
+**Gap (superseded below, 2026-11-17):** Tony's phone look and his
 reading of every word on the preview; then his push of both
 repositories, which puts the page live; then the first nightly with the
 El Nino check, its row read in the night's record. Then ESCAPADE's
@@ -11180,8 +11180,28 @@ path (L-533).
   dashboard's Earth System group gains "El Nino Page Generator", beside
   the Food Insecurity Generator: the Run button's build in its own
   console window, no arguments. Dashboard parity green.
-- Tony-action (do): read the preview on the phone; then commit and push
+- Tony-action (do), done Nov 17: read the preview on the phone; then commit and push
   the orrery and the website.
+- **2026-11-17, LIVE** (the coordinating session, Claude Opus 5.5).
+  The page went live with Tony's push: website daa627b0, his pull at
+  20e13fd1. His run record, documentation/WHERE_WE_ARE_11-16-26_1231_
+  run_record.md: "all green".
+  - THE NIGHT'S FLAG, FIXED at f8a1229 (patch_L060_3). The orrery's
+    night of Nov 17 (c69b53b) titled itself EL NINO DUE while its El
+    Nino check row said CURRENT: night_title_flags() read every
+    row's verdict, and the El Nino check suite's own pass line names
+    EL NINO DUE. Each flag is now read from its own row only
+    (NIGHT_TITLE_FLAGS pairs 'El Nino check' with 'EL NINO DUE'). The
+    suite gains the night of Nov 17 itself as a case, 22 checks,
+    shown to fail on the old code. It runs from the dashboard's
+    existing "El Nino Check Suite" button; nothing new to add.
+  - The lesson: the suite tested the check's row alone, so it could
+    not see one row's words landing in another's flag. A check needs
+    an input shaped like the real night, every row together.
+**Gap (replaces the one above, 2026-11-17, close):** Tony's Mode 5
+look at the live page on his phone; the orrery's next night title
+must not start with EL NINO DUE while its El Nino check row says
+CURRENT. Then ESCAPADE's path (L-533).
 **Ref:** ENSO_chart_spec.md v2 (design spec, this session); cross-ref L-001 (Food Insecurity, same Earth System track; the track's ruling of 2026-10-07); energy_imbalance.py (Phase 2 target).
 
 #### [L-070] Food Insecurity -- regional multi-country assembly (Sudan crisis shed)
