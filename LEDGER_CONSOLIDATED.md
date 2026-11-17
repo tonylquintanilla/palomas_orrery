@@ -11041,11 +11041,54 @@ HANDOFF_food_insecurity_sdn_projections_20261112.md
     MapBiomas, not the magazine. The Phase 2 pass on
     energy_imbalance.py stands as deferred; its chart is an old-gallery
     card, so its form waits on L-531.
-**Gap (replaces the one above, 2026-11-16):** the brief for El Nino's
+**Gap (superseded below, 2026-11-16 evening):** the brief for El Nino's
 Code session (the page by the earth-system-pipeline rules; the June
 chart with NOAA's chances as its forecast; CPC the one source; the two
 safeguards; the spec's build parts rewritten); then the build, Tony's
 phone look, and his reading of every word before it goes live. Then
+ESCAPADE's path (L-533).
+- **2026-11-16, afternoon and evening: THE PAGE'S SHAPE AND WORDS,
+  AFTER TWO OUTSIDE REVIEWS** (the same coordinating session, Claude
+  Opus 5.5, from Tony's phone). In Tony's words:
+  - 12:45, "i think A": the page is a walk in five steps (what El Nino
+    is; since 1950 in one line; this year so far; what NOAA expects;
+    why the whole planet feels it), not chart-first. The mockup is the
+    claude.ai artifact "El Nino page mockup",
+    https://claude.ai/artifact/8dr1qD8XGuKSiEJLR4eFv3, board A.
+  - 15:54, "Yes": step 2 rests on the scientists' own words (van
+    Oldenborgh and others 2021, quoted and cited), not a paraphrase.
+  - 16:09: Tony asked for a Mode 7 review, not being expert enough to
+    judge how to present the science. Two legs: Gemini, then GPT, the
+    second on the revised words. Reviews:
+    documentation/REVIEW_L060_gemini_worksheet_20261116.md and
+    documentation/REVIEW_L060_gpt_worksheet_20261116.md. Gemini's leg:
+    four quotations not in their sources and wrong ONI figures; GPT's
+    quotations held up, and it found two errors in the revised words.
+  - 16:56, "we decided to use noaa for our authority so we will stay
+    with that decision": RONI alone on the chart; the older ONI is not
+    drawn (RONI official from February 1, 2026; NOAA keeps the ONI
+    files for continuity, NWS Public Information Statement 26-05).
+  - 19:00, "Yes", on Claude Fable's recommendation of 18:17 relayed by
+    Tony: step 3 keeps one sentence naming other agencies' records
+    only to say they are not this page's record (Japan's agency on
+    NINO.3 for a single month; the WMO's forecast), on three
+    conditions: no outside figures on the page; "other agencies", not
+    "the news"; the WMO's statement called a forecast. Both agencies
+    appear only in the sources line. Step 5 rests on NOAA alone (a 2
+    to 3 month delay of global temperature, climate.gov), within the
+    NOAA-only ruling.
+  - For the build, from the reviews: read NOAA's files fresh, never
+    through a cache (a web fetch served RONI.ascii.txt ending at JAS
+    2026 on the day the file held ASO 2026 +1.97); RONI.ascii.txt is
+    NOAA's own named file for the index (PNS 26-05); step 4's chances
+    come from roni/probabilities/; NOAA's ~60% is stated with its own
+    threshold (+2.5 or more) and date, never as the chance of passing
+    +2.40; the page's promise to redraw after each monthly update (the
+    second Thursday) is the build's to keep.
+**Gap (replaces the one above, 2026-11-16 evening):** the brief for El
+Nino's Code session, written from the mockup's words, the two reviews
+and what still holds of the June spec; then the build, Tony's phone
+look, and his reading of every word before it goes live. Then
 ESCAPADE's path (L-533).
 **Ref:** ENSO_chart_spec.md v2 (design spec, this session); cross-ref L-001 (Food Insecurity, same Earth System track; the track's ruling of 2026-10-07); energy_imbalance.py (Phase 2 target).
 

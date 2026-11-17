@@ -161,3 +161,46 @@ Do next:
   1. (do) Move this file into documentation\. -- done
   2. (do) In GitHub Desktop (orrery): the change list shows the ledger, WHERE_WE_ARE.md, this file and, if not yet pushed, the document track's handoff of 08:35. Commit and push -- not while the website's night is running (08:17 UTC, 2:17 Chicago, often hours late). -- 16f9bac230eb720204f1910cce3ed8ccb635c8e2
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+=============================
+
+The step 3 sentence and its sources line are on the canvas, and today's decisions are ready to go into the ledger.
+
+**On the canvas** (same link): step 3 now reads, "This page's record is NOAA's three-month record on RONI. Other agencies report on another stretch of the Pacific, a single month, or a forecast, so a record reported elsewhere may not be this one." The sources line names Japan's agency and the WMO, with the dates I read them, and says they're there only for that sentence. There are no figures from either.
+
+**The ledger patch** is saved in your orrery folder as `patch_L060_2_el_nino_words_20261116.py`. It adds an evening note to the El Niño entry with each of your rulings in your words:
+- the walk
+- step 2 in the scientists' own words
+- RONI alone on the chart
+- step 3's sentence, on Fable's three conditions
+- step 5 resting on NOAA alone
+
+It also lists what the build takes from the two reviews, such as reading NOAA's files fresh every time, and gives the entry a new next step. I tested it on a copy of your ledger, which matched GitHub: it applies cleanly, and a second run changes nothing.
+
+**(do) At your computer:** 
+1. open the patch in VS Code and click Run, 
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & 'C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe' 'c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L060_2_el_nino_words_20261116.py'
+ok L-060: the morning's Gap marked superseded
+ok L-060: the evening note and new Gap
+ok LEDGER_CONSOLIDATED.md (2 edits)
+Running ledger_index.py ...
+  OK: 529 L-blocks parsed, no consistency problems.
+  Index regenerated (268 live items) in C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\LEDGER_CONSOLIDATED.md.
+ok ledger_index.py
+patch applied
+
+Do next:
+  1. (do) Move this file into documentation\.
+  2. (do) In GitHub Desktop (orrery): commit and push the ledger, this file, the GPT prompt and worksheet, and the two reviews (the Gemini prompt and worksheet are already pushed). Not while the website's night is running.
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+2. then move it into `documentation\`. 
+3. In GitHub Desktop, commit and push the ledger, the patch, and the four files not yet pushed: the GPT prompt, GPT's worksheet, and the two reviews. The Gemini prompt and worksheet are already on GitHub.
+
+Where this leaves us:
+- The El Niño page's shape and words are settled, and every sentence rests on a source I re-opened today.
+- The next step is the brief for El Niño's Code session, written from the mockup, the two reviews, and the parts of the June design that still hold.
+- ESCAPADE's path waits behind El Niño.
+
+**Shall I write the brief once you've pushed?**
