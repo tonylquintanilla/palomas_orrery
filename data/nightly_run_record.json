@@ -3,9 +3,9 @@
   "schema": 2,
   "taken": [],
   "held": [],
-  "clean_run_utc": "2026-11-16T21:07:28.936465+00:00",
+  "clean_run_utc": "2026-11-17T16:55:22.846284+00:00",
   "where": "GitHub Actions",
-  "run_log": "https://github.com/tonylquintanilla/palomas_orrery/actions/runs/43956521288",
+  "run_log": "https://github.com/tonylquintanilla/palomas_orrery/actions/runs/44130831148",
   "reported_not_red": [],
   "rows": [
     {
@@ -27,6 +27,11 @@
       "row": "Path plan",
       "kind": "generator",
       "verdict": "unchanged (1 checked, not written) -- 32 paths, events akatsuki 15, atlas_2024_g3 1, atlas_3i 1, bepicolombo 35, borisov_2025_v1 1, borisov_2i 1, c2025_k1 1, c2025_k1_b 1, c2025_k1_d 1, cassini 7, dart 1, europa_clipper 5, galileo 7, juice 10, juno 4, lucy 7, mcnaught 1, new_horizons 2, osiris_apex 13, oumuamua 1, panstarrs_2025_r3 1, parker_solar_probe 49, pioneer_10 1, pioneer_11 2, psyche_spacecraft 2, rosetta 12, solar_orbiter 31, tsuchinshan_atlas 1, voyager_1 2, voyager_2 5, west 1, wierzchos 1. Asked JPL for: nothing."
+    },
+    {
+      "row": "El Nino check",
+      "kind": "generator",
+      "verdict": "unchanged (1 checked, not written) -- CURRENT -- the page shows NOAA's latest: discussion of 12 November 2026, RONI to ASO 2026, chances issued November 2026; nothing written."
     },
     {
       "row": "Objects export",
@@ -64,6 +69,11 @@
       "verdict": "pass -- 39 checks, every planted fault caught (22 planted, 8 of them for Earth's period, L-445, 2 for Pluto's, L-443)"
     },
     {
+      "row": "El Nino check suite",
+      "kind": "checker",
+      "verdict": "PASS -- 21 checks: a planted fault caught; a newer discussion, RONI season and chances each flag EL NINO DUE and save the copies once; NOAA's files as the page shows them write nothing; an outage and a changed sentence are reported; the page is never touched; the folder output, the gate and the commit title hold."
+    },
+    {
       "row": "Path plan suite",
       "kind": "checker",
       "verdict": "36 of 36 checks passed"
@@ -76,7 +86,7 @@
     {
       "row": "Orbit cache",
       "kind": "checker",
-      "verdict": "All 24 orbit cache tests passed: cache loads, old formats convert, corrupted entries are dropped; the clock reads UTC and both forms of the fetched stamp read back; the repository-wide fresh check examined 146 .py files and 20 JPL calls, every one asked fresh (2 not JPL, excepted); JPL's answers told apart (no such body, more than one, unreachable, other) on 10 faked answers to fetch_trajectory, 10 to fetch_position by astroquery and 11 by both its routes, and 4 fallback branches ask before drawing (3 bodies JPL has no solution for drawn from their papers whatever it answers); nothing left behind."
+      "verdict": "All 24 orbit cache tests passed: cache loads, old formats convert, corrupted entries are dropped; the clock reads UTC and both forms of the fetched stamp read back; the repository-wide fresh check examined 147 .py files and 20 JPL calls, every one asked fresh (2 not JPL, excepted); JPL's answers told apart (no such body, more than one, unreachable, other) on 10 faked answers to fetch_trajectory, 10 to fetch_position by astroquery and 11 by both its routes, and 4 fallback branches ask before drawing (3 bodies JPL has no solution for drawn from their papers whatever it answers); nothing left behind."
     },
     {
       "row": "Drawings export check",
