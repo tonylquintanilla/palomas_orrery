@@ -1,10 +1,10 @@
 <!-- Doc-Kind: generated | The provenance audit: every numeric claim scored against its citation, rebuilt by provenance_scanner.py on each run. Do not hand-edit. -->
 # Paloma's Orrery -- Provenance Audit
 
-Generated: November 15, 2026
-Files scanned: 176
-Total findings: 1172
-Constants: 310 | Dicts: 78 | Display strings: 784
+Generated: November 17, 2026
+Files scanned: 178
+Total findings: 1181
+Constants: 317 | Dicts: 80 | Display strings: 784
 
 Unit of provenance: the smallest thing with a coherent source citation. A dict with one block-level `# Source:` comment is ONE unit; all its entries inherit that citation. A hover string with co-referring numbers is ONE unit.
 
@@ -20,12 +20,12 @@ A run is expected every 1 day(s). Nothing here affects the exit code -- the delt
 
 | Run (UTC) | HEAD | Files | Total | T1 | T1 by domain | T2 | T3 | T4 | Gate T1 |
 |-----------|------|------:|------:|---:|--------------|---:|---:|---:|--------:|
-| 20261116T044555Z | `d0f90d1` | 176 | 1172 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 713 | 182 | 6 | 0 |
-| 20261115T154511Z | `488cad2` | 176 | 1172 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 713 | 182 | 6 | 0 |
-| 20261115T145255Z | `488cad2` | 176 | 1171 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 713 | 181 | 6 | 0 |
-| 20261115T032329Z | `5779e1f` | 176 | 1171 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 713 | 181 | 6 | 0 |
-| 20261114T210542Z | `594e562` | 176 | 1171 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 713 | 181 | 6 | 0 |
-| 20261114T205704Z | `594e562` | 176 | 1171 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 713 | 181 | 6 | 0 |
+| 20261117T150947Z | `20a9c15` | 178 | 1181 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 713 | 191 | 6 | 0 |
+| 20261117T150139Z | `20a9c15` | 178 | 1181 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 713 | 191 | 6 | 0 |
+| 20261117T142307Z | `20a9c15` | 177 | 1180 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 713 | 190 | 6 | 0 |
+| 20261117T050822Z | `20a9c15` | 177 | 1180 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 713 | 190 | 6 | 0 |
+| 20261117T044459Z | `20a9c15` | 177 | 1177 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 713 | 187 | 6 | 0 |
+| 20261117T043925Z | `20a9c15` | 176 | 1172 | 271 | orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2 | 713 | 182 | 6 | 0 |
 
 Change since the previous run: total +0, Tier-1 +0.
 
@@ -62,7 +62,7 @@ No file's Tier-1 count rose.
 |------|-------|--------|------:|
 | 1 | 16-20 | FIX NOW | 271 |
 | 2 | 10-15 | REVIEW | 713 |
-| 3 | 5-9 | LOW PRIORITY | 182 |
+| 3 | 5-9 | LOW PRIORITY | 191 |
 | 4 | 1-4 | LOWEST PRIORITY | 6 |
 
 **Whole tree, Tier-1: 271: orrery 110, Earth System 144, stars 13, utilities 2, unclassified 2.** By each file's docstring `Domain:` tag; Findings by File Type below has every tier and every domain. The push gate is the Gate Path section, not this total.
@@ -163,6 +163,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `skills_index.py` | dev_tools | 0 | 0 | 9 | 0 | 9 |
 | `eris_visualization_shells.py` | orrery | 2 | 4 | 2 | 0 | 8 |
 | `saturn_visualization_shells.py` | orrery | 1 | 7 | 0 | 0 | 8 |
+| `enso_page_generator.py` | earth_science | 0 | 0 | 8 | 0 | 8 |
 | `position_accuracy.py` | orrery | 0 | 5 | 2 | 0 | 7 |
 | `spacecraft_encounters.py` | orrery | 0 | 7 | 0 | 0 | 7 |
 | `star_sphere_builder.py` | stars | 0 | 1 | 3 | 3 | 7 |
@@ -229,6 +230,7 @@ Quick-reference counts before the per-tier detail below. Same data, grouped the 
 | `osculating_cache_manager.py` | orrery | 0 | 0 | 1 | 0 | 1 |
 | `test_dimensions.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `test_domain_split.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
+| `test_enso_night_check.py` | earth_science | 0 | 0 | 1 | 0 | 1 |
 | `test_objects_export.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `test_orbit_cache.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
 | `test_period_fetch.py` | dev_tools | 0 | 0 | 1 | 0 | 1 |
@@ -247,7 +249,7 @@ Same data again, grouped by subject-matter domain rather than by individual file
 | Domain | Files | Tier 1 | Tier 2 | Tier 3 | Tier 4 | Total |
 |--------|------:|-------:|-------:|-------:|-------:|------:|
 | Orrery (solar system + orbital mechanics) | 47 | 110 | 590 | 53 | 3 | 756 |
-| Earth System | 13 | 144 | 77 | 7 | 0 | 228 |
+| Earth System | 15 | 144 | 77 | 16 | 0 | 237 |
 | Dev Tools (audit, diagnostics, one-shot scripts) | 31 | 0 | 0 | 116 | 0 | 116 |
 | Stars (stellar neighborhood) | 12 | 13 | 41 | 6 | 3 | 63 |
 | Utilities (cross-domain shared helpers) | 1 | 2 | 0 | 0 | 0 | 2 |
@@ -1870,6 +1872,19 @@ is planned for a future session.
 | 115 | dict | KIND_ORDER[...] | (4 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 | 126 | constant | TAG_SCAN_LINES | 40 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
+### enso_page_generator.py
+
+| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
+|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
+| 105 | constant | EPISODE_THRESHOLD_C | 0.5 | 3 | 2 | **6** | Cited, not cross-checked; date-sensitive | Internal (role 'devtool') |
+| 106 | constant | EPISODE_MIN_SEASONS | 5 | 3 | 2 | **6** | Cited, not cross-checked; date-sensitive | Internal (role 'devtool') |
+| 117 | constant | EPISODE_DECIMALS | 1 | 3 | 2 | **6** | Cited, not cross-checked; date-sensitive | Internal (role 'devtool') |
+| 133 | dict | REQUEST_HEADERS[...] | (3 entries) | 3 | 2 | **6** | Cited, not cross-checked; date-sensitive | Internal (role 'devtool') |
+| 138 | constant | FETCH_TIMEOUT_S | 60 | 3 | 2 | **6** | Cited, not cross-checked; date-sensitive | Internal (role 'devtool') |
+| 644 | constant | PICTURE_WIDTH_IN | 10.0 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
+| 645 | constant | PICTURE_DPI | 100 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
+| 646 | constant | LABEL_PT | 20 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
+
 ### eris_visualization_shells.py
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
@@ -1975,9 +1990,9 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 106 | dict | ROLE_MAP[...] | (167 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 414 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 437 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 106 | dict | ROLE_MAP[...] | (169 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 416 | dict | ROLE_DESCRIPTIONS[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 439 | dict | ROLE_SECTION_TITLES[...] | (13 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### moon_visualization_shells.py
 
@@ -1999,12 +2014,12 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 583 | constant | TOOL_TIMEOUT_SECONDS | 900 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 934 | constant | HASH_LIMIT_BYTES | 2 * 1024 * 1024 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 1053 | constant | NOTE_WIDTH | 44 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 1054 | constant | NOTE_INDENT | 37 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
-| 635 | constant | ASK_EVERYTHING_SECONDS | 1800 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
-| 639 | dict | NIGHT_SKIP_WHY[...] | (5 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
+| 608 | constant | TOOL_TIMEOUT_SECONDS | 900 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 1010 | constant | HASH_LIMIT_BYTES | 2 * 1024 * 1024 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 1129 | constant | NOTE_WIDTH | 44 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 1130 | constant | NOTE_INDENT | 37 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+| 661 | constant | ASK_EVERYTHING_SECONDS | 1800 | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
+| 665 | dict | NIGHT_SKIP_WHY[...] | (5 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'devtool') |
 
 ### osculating_cache_manager.py
 
@@ -2024,11 +2039,11 @@ is planned for a future session.
 
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
-| 428 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 429 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 2742 | constant | NIGHTLY_STALE_HOURS | 24 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 2913 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
-| 3045 | dict | SECTION_SYMBOLS[...] | (8 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
+| 432 | constant | WINDOW_WIDTH | 960 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 433 | constant | WINDOW_HEIGHT | 720 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 2783 | constant | NIGHTLY_STALE_HOURS | 24 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 2954 | constant | TOOLTIP_DELAY_MS | 400 | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'gui') |
+| 3086 | dict | SECTION_SYMBOLS[...] | (8 entries) | 3 | 2 | **6** | Cited, not independently cross-checked | Internal (role 'gui') |
 
 ### path_plan.py
 
@@ -2163,6 +2178,12 @@ is planned for a future session.
 | Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
 |-----:|------|------|------------|--:|--:|------:|---------------|-------------|
 | 104 | dict | NOTES[...] | (4 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
+
+### test_enso_night_check.py
+
+| Line | Kind | Name | Size/Value | V | C | Score | Vulnerability | Criticality |
+|-----:|------|------|------------|--:|--:|------:|---------------|-------------|
+| 49 | dict | STATE[...] | (4 entries) | 4 | 2 | **8** | No source citation (recalled) | Internal (role 'devtool') |
 
 ### test_objects_export.py
 

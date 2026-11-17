@@ -1,0 +1,7 @@
+{
+  "_comment": "Written by enso_page_generator.py at every build: what earth/el_nino.html shows. The night run (enso_page_generator.py --night-check) compares NOAA's files with it and flags EL NINO DUE when NOAA has anything newer (L-060; Tony, 2026-11-17).",
+  "built": "2026-11-17",
+  "discussion_issued": "2026-11-12",
+  "roni_newest": "ASO 2026",
+  "probabilities_issued": "November 2026"
+}

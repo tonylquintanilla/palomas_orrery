@@ -56,13 +56,15 @@
     "worksheet_gemini4_medium_l456_earth_20261020.md",
     "worksheet_gemini4_medium_l456_sun_20261020.md",
     "worksheet_gemini4_standard_L410_sun_fades_20261019.md",
+    "worksheet_gemini_high_L060_el_nino_science_20261116.md",
     "worksheet_gpt-5-6-sol_pilot_constants_new_20260818.jsonl",
     "worksheet_gpt-6-medium_L321_bow_shock_20260913.md",
     "worksheet_gpt-6-medium_L321_magnetopause_magnetotail_20260913.md",
     "worksheet_gpt-6-medium_L321_van_allen_belts_20260913.md",
+    "worksheet_gpt_unstated_L060_el_nino_words_20261116.md",
     "worksheet_jupiter_visualization.md",
     "worksheet_mars_visualization.md",
     "worksheet_mercury_visualization.md"
   ],
-  "uncited_changed": "2026-10-28"
+  "uncited_changed": "2026-11-17"
 }

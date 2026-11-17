@@ -1,7 +1,7 @@
 <!-- Doc-Kind: generated | The human-browsable module index, rebuilt by module_atlas.py alongside the atlas. Do not hand-edit. -->
 # Paloma's Orrery - Module Index
 
-**Generated:** November 15, 2026 by `module_atlas.py`  
+**Generated:** November 17, 2026 by `module_atlas.py`  
 **Repository:** Paloma's Orrery - Solar System Visualization Suite  
 **Philosophy:** Data Preservation is Climate Action
 
@@ -11,9 +11,9 @@ way the old hand-maintained MODULE_INDEX.md did. This is the light,
 human-browsable view; `MODULE_ATLAS.md` is the deep reference
 (functions, dependencies, consumers) meant for AI-assisted queries.
 
-**Total Python Files:** 176  
-**Total Lines of Code (non-blank):** 142,045  
-**Total Public Functions/Classes:** 1,839
+**Total Python Files:** 178  
+**Total Lines of Code (non-blank):** 144,031  
+**Total Public Functions/Classes:** 1,881
 
 ## Classification Coverage
 
@@ -45,7 +45,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `earth_system_visualization_gui.py` | Earth System Visualization GUI for Paloma's Orrery Hub window with climate data visualizations (1,903 lines) |
 | `orbital_param_viz.py` | Interactive orbital element visualization tool. (1,965 lines) |
 | `palomas_orrery.py` | Main GUI and plotting engine for Paloma's Orrery. (9,850 lines) |
-| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (3,796 lines) |
+| `palomas_orrery_dashboard.py` | Paloma's Orrery Dashboard Central launch point for the Paloma's Orrery suite. (3,837 lines) |
 | `star_visualization_gui.py` | Stellar visualization GUI for Paloma's Orrery. (1,409 lines) |
 
 ---
@@ -225,6 +225,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `diagnose_bcodmo.py` | Diagnostic script to examine BCO-DMO pH data structure (67 lines) |
 | `doc_index.py` | - regenerate README.md's key-documents table from the documents themselves. (336 lines) |
 | `earth_system_generator.py` | Paloma's Orrery: Earth System Generator Engine Architecture: The Teaser (Plotly) & Blockbuster (KMZ) Pipeline (673 lines) |
+| `enso_page_generator.py` | El Nino's page on the website: NOAA's record since 1950 and what NOAA expects next, a walk in five steps (L-060). (1,653 lines) |
 | `exact_rows_report.py` | - which exact rows a display prints, and where. (706 lines) |
 | `examine_hot_csv.py` | Examine the HOT CSV file structure (47 lines) |
 | `export_constants.py` | - write data/constants_export.json from constants_new.py. The orrery is the producer of its numbers; the gallery reads this file and never reads orrery source. (571 lines) |
@@ -236,8 +237,8 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `ledger_index.py` | Generate the at-a-glance INDEX for the consolidated ledger. (715 lines) |
 | `measure_animation_html.py` | Measure frame payload in a saved Plotly animation HTML. (101 lines) |
 | `measure_perframe_elements.py` | Byte budget table for the per-frame animation engine. (129 lines) |
-| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (1,006 lines) |
-| `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (1,297 lines) |
+| `module_atlas.py` | Codebase encyclopedia generator for Paloma's Orrery (1,008 lines) |
+| `orrery_maintenance_run.py` | - L-188. One command, the whole maintenance suite. (1,367 lines) |
 | `path_plan.py` | - the orrery's plan for drawing each path the website serves: a spacecraft's flown and planned trajectory, and a comet on an open path around its perihelion (L-443, slice 2). (1,289 lines) |
 | `period_fetch.py` | - fetch from JPL the orbital period of each object the website serves that has none fetched yet, with the same code the orrery uses when Tony plots, so the Horizons check can compare it with JPL the same day and the objects export can carry it to the website (L-444). (667 lines) |
 | `provenance_history.py` | Run history and run-to-run delta for the provenance scanner (ledger L-189). (505 lines) |
@@ -252,6 +253,7 @@ human-browsable view; `MODULE_ATLAS.md` is the deep reference
 | `test_derived_figures.py` | - a derived constant declares no more significant figures than its inputs support, and names every derived row it cannot judge. (1,247 lines) |
 | `test_dimensions.py` | - a derived constant's unit follows from its arithmetic. (591 lines) |
 | `test_domain_split.py` | Checks for L-437: the provenance scanner's whole-tree Tier-1 total prints with its domain split, and a module's domain is read from its own docstring Domain: tag. (406 lines) |
+| `test_enso_night_check.py` | The El Nino night check (L-060) on NOAA's saved files, with no network: a newer discussion, RONI season or chances says EL NINO DUE and saves the copies; NOAA's files as the page shows them say CURRENT and write nothing; an outage is reported; the page is never touched. (220 lines) |
 | `test_horizons_check.py` | - the Horizons check (L-395, L-431) on JPL's recorded answers, with no network: every entry agrees, and every planted fault is caught by name. (870 lines) |
 | `test_maintenance_report.py` | The maintenance run's summary names every file whose Tier-1 rose since the scanner's previous run; and proof that this check can fail. (478 lines) |
 | `test_objects_export.py` | - data/objects_export.json says what the object list in celestial_objects.py holds, and no entry in the list writes a field twice. (422 lines) |

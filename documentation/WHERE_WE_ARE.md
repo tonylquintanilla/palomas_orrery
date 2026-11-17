@@ -1,19 +1,19 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 16, 2026, 12:30: the El Nino talk (Opus), an interruption before ESCAPADE; earlier today the coordinating session's close (Opus, 01:10) and the document track's (Fable, 08:35).
-- Written at orrery e84baabd and gallery 1c5fe516, read live, over your local copy holding the document track's edits, not yet pushed.
+Last updated: November 17, 2026: El Nino's page built (Claude Code, Opus), from the brief of Nov 16.
+- Written at orrery 20a9c155 and gallery 1c5fe516, with this session's edits on your disk, not yet pushed.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - El Nino interrupts, ahead of ESCAPADE: its own page on the website, like Sudan's, with the June chart at its centre (L-060 (El Nino)).
-> - Its one source is NOAA's Climate Prediction Center, the way IPC is Sudan's. The forecast is NOAA's own chances, season by season, and the page shows the date of NOAA's latest update.
+> - El Nino's page is built: five steps from NOAA's data, its pictures drawn at each build, every sentence checked against its source (L-060 (El Nino)). It is on your disk, not live; on your push it shows in the lobby's Featured, and the dashboard's Earth System group rebuilds it.
+> - The night now checks NOAA: when NOAA has anything newer than the page, the night saves a copy of NOAA's files and its commit title starts "EL NINO DUE"; you rebuild the page by hand. The page itself says when it is behind.
 >
-> **Do next:** *El Nino's brief (L-060 (El Nino)), then its Code session. ESCAPADE's path (L-533 (ESCAPADE)) waits behind it.*
+> **Do next:** *Your phone look at El Nino's page, then your push, which puts it live. Then ESCAPADE's path (L-533 (ESCAPADE)).*
 >
 > **Needs you now:**
-> - *(do) Commit and push the orrery: the document track's handoff, `documentation/HANDOFF_document_upkeep_20261116.md`, the ledger (now with El Nino's entry), this page, and `documentation/patch_L060_1_el_nino_page_20261116.py`.*
+> - *(do) Read El Nino's preview on your phone; then commit and push the orrery, then the website.*
 > - *(do) Each morning, Fetch origin and Pull origin on both, orrery then website, before any work. If Pull origin shows up only once you have changes: Commit them first, then Pull origin, then Push origin. If Desktop stashes your changes anyway, restore them at once: Changes tab, Stashed Changes, Restore.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
 
@@ -28,11 +28,11 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
                and A2 of JPL's fallbacks (L-512), a green website night,
                the quick wins with L-423 (the website's checks), and the
                Moon's standards (L-513, closed).
- 15.   [NOW]   *Mars (L-514 (the Mars room)) closed Nov 15. Now El Nino's
-               page, an interruption (L-060 (El Nino)), then ESCAPADE's
-               path (L-533), the Lagrange points (L-297), the destinations
-               and encounters talk (L-534, L-529), then Uranus and Neptune.
-               Io, Titan, Charon and Pluto come to standard in their folds.* << moved this session
+ 15.   [NOW]   *Mars (L-514 (the Mars room)) closed Nov 15. El Nino's
+               page (L-060 (El Nino)) built Nov 17, live on your push; then
+               ESCAPADE's path (L-533), the Lagrange points (L-297), the
+               destinations and encounters talk (L-534, L-529), then Uranus
+               and Neptune. Io, Titan, Charon and Pluto come to standard in their folds.* << moved this session
  16.   [later] Earth's fold: the Earth-Moon barycentre, SOHO, Gaia, James Webb, Artemis II.
  17.   [later] Small-body systems' moons; then stars and exoplanets.
  18.   [goal]  The website does what the desktop orrery does, with a date
@@ -52,12 +52,12 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
 ## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings; a line leaves once it is habit, or a skill carries it.
+- El Nino's monthly update: the night checks NOAA and flags "EL NINO DUE"; you rebuild the page by hand; the night never changes a page. You no longer run the Daily Run routinely; you rely on the nightly (Nov 17; L-060 (El Nino)).
 - El Nino is a page like Sudan's, its chart the June design; one source of record, NOAA's Climate Prediction Center, its forecast NOAA's own chances on RONI; WMO and Australia's index left out (Nov 16; L-060 (El Nino)).
 - The drawer opens at the row its handle names, scrolled into view and highlighted; the opening names Earth ("Keep Earth") (Nov 16; L-535 (the period's reason)).
 - Centre on opens on the symbol alone, never a shell ("the crust view is a legacy default. we should remove it"); the Sun's Centre on and the Sun card are the Solar System view ("Yes, like Home"); Back and the shared spot stay as they are (Nov 15; L-514 (the Mars room)).
 - A period's sentence says what set its digits, one source for the orrery and the website (Nov 15; L-535 (the period's reason)).
 - Every frame fits across the picture's narrow side, the farthest point of what it frames plus 10 percent; a picture wider than tall is unchanged. The Solar System view, its Home and Reset frame where bodies are now (your ruling of Oct 2), so an orbit line may run past the side there: the dots stay inside, and Go To shows a whole orbit (Nov 15; L-514 (the Mars room)).
-- Earth System layers move to Google Earth on the web, not the desktop app; a layer's one home is its page, earth/<its id>.html (Nov 13; L-001 (food insecurity), L-530 (the other layers on the web)).
 - Sentences we compose use American spelling; IPC's quoted words keep IPC's; a symbol taken from IPC is marked "after IPC" (Nov 13; L-001 (food insecurity)).
 
 ## Deferred
@@ -90,12 +90,12 @@ Waiting behind other work; a line leaves when picked up.
 - L-490 (the legacy list); L-499 (kinds of session); L-471 (a delivered
   patch is final), for safe-file-editing's next version.
 
-## Signals
+## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261115T185038Z, ok, no retry on the swap (gallery swap log at 997df132, read Nov 16).
-- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md as of orrery 3946f7d, unchanged at 8d362bd5, read Nov 16).
-- This page's date and the ledger's newest stamp: both Nov 16. Agree.
+- Last cache build: 20261115T185038Z, ok, no retry on the swap (your local gallery's swap log at f9f81266, read Nov 17).
+- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md, run of 20261117T142307Z on orrery 20a9c15, read Nov 17).
+- This page's date and the ledger's newest stamp: both Nov 17. Agree.
 
 ## Waiting on you
 
@@ -121,7 +121,7 @@ Not urgent, in your order:
 ## Where the details are  **>> UPDATED THIS SESSION**
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
-- El Nino: L-060 (El Nino); the June design `documentation/ENSO_chart_spec.md`, its build parts to be rewritten for a page.
+- El Nino: L-060 (El Nino); `enso_page_generator.py` (the page, and the night's check), its suite `test_enso_night_check.py`, the brief `COORD_L060_el_nino_page_brief_20261116.md`.
 - The handoff: `HANDOFF_website_coordination_20261116.md`. This session: L-535 (the period's reason), closed, from `COORD_L535_period_digits_brief_20261115.md`, your four additions and the drawer ruling; the website's `INTERACTIVE_AS_BUILT.md`, under Center on and the drawer.
 - The caps: `DOCUMENT_CAPS.md`; L-522 (document caps); that track's
   handoff, `HANDOFF_document_upkeep_20261116.md` (Nov 16).

@@ -196,7 +196,7 @@ Do next:
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
 2. then move it into `documentation\`. 
-3. In GitHub Desktop, commit and push the ledger, the patch, and the four files not yet pushed: the GPT prompt, GPT's worksheet, and the two reviews. The Gemini prompt and worksheet are already on GitHub.
+3. In GitHub Desktop, commit and push the ledger, the patch, and the four files not yet pushed: the GPT prompt, GPT's worksheet, and the two reviews. The Gemini prompt and worksheet are already on GitHub. -- 20a9c1559ee36426b69beb731ab61b51e43f87f3
 
 Where this leaves us:
 - The El Niño page's shape and words are settled, and every sentence rests on a source I re-opened today.
@@ -204,3 +204,81 @@ Where this leaves us:
 - ESCAPADE's path waits behind El Niño.
 
 **Shall I write the brief once you've pushed?**
+
+==========================
+
+**Session: OPEN: 11-16-26 1228: Opus: Code: L060 El Niño Earth Science display**
+
+Sudan's card is a wide page card under "Earth System". Checking which Earth System rooms exist before I add El Niño's.
+
+There's no El Niño room (that's L-531's to add), so the card sits in the Earth System Science door itself, like the energy imbalance chart. Adding it after Sudan's entry, written in ASCII escapes.
+
+The editor turned the escapes into real characters again. Converting them back to ASCII escapes in binary mode, with a script file to keep the shell out of it.
+
+The card is in with only my 19 lines changed, and I'm checking whether the gallery already has a tool that renders the lobby before I serve the site locally.
+
+Not a lobby renderer, so I'll write a small throwaway server in the scratchpad: it serves the website folder read-only and adds one test page holding the lobby in 360 and 375 px frames.
+
+The card displays correctly at 360 and 375 px, first in Featured, with no sideways scroll. The lobby is cropping the top labels off the 1950 chart, so I'm checking how it frames wide card images.
+
+The lobby crops wide images to 2:1, which fits Sudan's map but cuts the chart, so I'm generating a 2:1 version of the 1950 El Niño chart at build time, matching Sudan's card.
+
+Close: "1950" is clipped at the left edge. Fixing the margin and pointing the card at its own picture.
+
+The whole chart now shows in the card at both widths, labels included, with no sideways scroll. Stopping the local server and moving to the dashboard button.
+
+The Run button runs the generator with no arguments and shows its printout, so the button opens it in its own console window the same way (the dashboard's "interactive" mode), with no arguments.
+
+Same escape problem as before. Converting those four ñ characters back to `\u00f1` in binary mode.
+
+Parity is green with the new button (145 cards). Running the night-check suite and the gallery's offline checks, and correcting the ledger line that said the page has no way in from the lobby.
+
+Records updated; Where We Are is still at 130 lines. Waiting on the gallery's offline run.
+
+Both additions are in. El Niño's page has a Featured card in the lobby, and the dashboard has a button to rebuild it. Every check is green: dashboard parity, the El Niño night-check suite, and the gallery's offline run.
+
+**One change you didn't ask for:** the lobby crops each wide card's picture to a 2:1 strip. That suits Sudan's map but cut the top off the 1950 chart, including the "1982–83" label. Sudan's card has its own picture drawn for the lobby, so El Niño's now does too: `earth/el_nino.png`, the 1950 chart redrawn at 2:1 at every build. It shows the whole chart with the three event labels and "2026–27 provisional". I checked the lobby at 360 and 375 px: the card is first in Featured, above Sudan's, with no sideways scroll.
+
+**The card's words** (in `gallery/gallery_metadata.json`)
+- Title: "El Niño, 2026–27"
+- Description, the page's subtitle: "NOAA's record of El Niño and La Niña since 1950, and what NOAA expects next, in five steps."
+- Small line above the title: "Earth System Science". There is no El Niño room yet, so the card sits in that section the way the energy imbalance chart does. L-531 (the Earth Science room) can give it a room later.
+- Picture description: "NOAA's Relative Oceanic Niño Index since 1950, one sliver per season: red for El Niño, blue for La Niña, grey for neutral, the 2026–27 event shaded at the right."
+- Sources: "NOAA Climate Prediction Center"
+- Unlike Sudan's card, it has no extra label after "Earth System Science". Sudan's "Google Earth" says where that card opens, and El Niño's has nothing like that to say.
+
+**The button's words** (Earth System group, right after the Food Insecurity Controller, so just below the Food Insecurity Generator)
+- Name: "El Niño Page Generator"
+- Its line on the card: "Rebuilds El Niño's page from NOAA's files; copies it to the website."
+- Its longer description: "Rebuild the El Niño page from NOAA's files, read fresh, and copy it to the website (earth/el_nino.html and its pictures). Run it when the night's commit title says EL NINO DUE."
+- **What pressing it does:** it runs `enso_page_generator.py` with no arguments in its own console window, which stays open. That is the same thing the Run button does, and you can read the printout there: every sentence with its source, or "BUILD STOPPED".
+
+**Files changed in this turn**
+- Website:
+  - ok `gallery/gallery_metadata.json` (1 edit: the new card)
+  - new `earth/el_nino.png`
+  - rewritten by the generator: `earth/el_nino.html` and the five step pictures
+  - rewritten by the gallery run: `MODULE_ATLAS.md`, `MODULE_INDEX.md`, three `.sha` stamps
+- Orrery:
+  - ok `enso_page_generator.py` (3 edits: the card picture, its file name in the copy list, writing it)
+  - ok `palomas_orrery_dashboard.py` (3 edits: the button, its line, the update note)
+  - ok `LEDGER_CONSOLIDATED.md` (1 edit to L-060 (El Niño), plus the index rebuild)
+  - ok `documentation/WHERE_WE_ARE.md` (1 edit, still at 130 lines)
+  - new `data/earth/el_nino.png`
+
+The orrery and website files from the earlier turns are unchanged and still to commit.
+
+**Your run order**
+1. Optionally, look at the lobby card. The preview link shows only the page, not the lobby.
+2. Commit and push the orrery. Avoid the night's window, 07:17 and 11:17 UTC. -- 
+3. Commit and push the website. This puts the page live and puts the card in Featured.
+4. After the push, run `python gallery_maintenance_run.py --live`, as the gallery run asks.
+
+**Tony-action rollup**
+- (do) Push the orrery, then the website.
+- (do) Run the gallery's live check after the push.
+- (do) After the first night, check that the "El Nino check" row says CURRENT.
+
+Where this leaves us:
+- On your push, El Niño's page is live and reachable from the lobby's Featured.
+- To rebuild it, press "El Niño Page Generator" on the dashboard when the night says EL NINO DUE.

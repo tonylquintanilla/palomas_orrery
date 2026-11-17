@@ -29,7 +29,9 @@
 # with Anthropic's Claude Opus 5.5 (L-485: the concurrency group, and the
 # checkout of main as it is when the job starts). Updated November 1,
 # 2026 with Anthropic's Claude Opus 5.5 (L-485: the second scheduled
-# line, 11:17 UTC, the backstop for a night GitHub drops).
+# line, 11:17 UTC, the backstop for a night GitHub drops). Updated
+# November 17, 2026 with Anthropic's Claude Opus 5.5 (L-060: a night row's
+# flag, EL NINO DUE, at the start of the commit title).
 
 name: Nightly run
 
@@ -140,7 +142,13 @@ jobs:
           fi
           files=$(git diff --cached --name-only | tr '\n' ' ')
           day=$(date -u +%Y-%m-%d)
-          git commit -m "Nightly run $day UTC: $files" \
+          # L-060 (Tony, 2026-11-17): a flag a night row raised goes at the
+          # start of the title, as the website's HELD does: "EL NINO DUE"
+          # when NOAA has newer than the El Nino page shows. Read from the
+          # night's record, so the words have one home.
+          # night_title_flags() ends each flag with its space, or is empty.
+          flags=$(python -c "import orrery_maintenance_run as m; print(m.night_title_flags())" | tr -d '\r\n')
+          git commit -m "${flags}Nightly run $day UTC: $files" \
                      -m "Written by .github/workflows/nightly.yml (L-485): the night set ran clean, and these are the files its tools wrote."
           git push
           echo "NIGHT COMMIT: pushed $(git rev-parse HEAD): $files"

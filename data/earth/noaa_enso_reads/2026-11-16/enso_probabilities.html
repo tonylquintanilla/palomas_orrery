@@ -1,0 +1,746 @@
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//Dtd HTML 4.0 Transitional//EN">
+<html>
+
+	<head>
+		<title>Climate Prediction Center - Official NOAA CPC ENSO Probabilities</title>
+		<meta http-equiv=Content-Type content="text/html; charset=windows-1252">
+		<meta name="DC.title" content="NOAA's Climate Prediction Center">
+		<meta name="DC.description" content="The CPC issues the official U.S. 8 to 14 day outlooks. These outlooks illustrate the probabilities of having above, normal, and below normal temperature and precipitation for the 6 to 10  day period, respectively.  The outlooks also include forecast 500 millibar heights for the 6 to 10  day period.">   <meta name="DC.date.reviewed" scheme="ISO8601" content="2005-12-12">
+		<meta name="DC.date.created" scheme="ISO8601" content="2001-01-01">
+		<meta name="DC.subject" content="Climate,Climate Prediction Center,National Weather Service,National Oceanic &amp; Atmospheric Administration,NOAA,El Ni&ntilde;0,La Ni&ntilde;a,ENSO,climate outlooks,El Ni&ntilde;0 Advisory,La Ni&ntilde;a Advisory,droughts,hurricanes,Threats Assessment,Drought Assessment,Drought Monitor,CLimate Diagnostics Bulletin,6-10 day outlook,8-14 day outlook,6-10 day forecast,8-14 day forecast,MRF,UV Index,North Atlantic Oscillation,NAO,Pacific Decadal Oscillation,PDO,sea surface temperatures,SST,Palmer Drought Severity Index,African Desk,outlooks,expert assessments,monitoring,advisories,stratosphere,temperature,precipitation,snow cover,snowfall,soil moisture,OLR,ozone,degree days,CLIMATE,CLIMATE PredICTION center,EL Ni&ntilde;0,LA Ni&ntilde;a,CLIMATE OUTLOOKS,HURRICANES,ASSESSMENTS,SNOW,StrATOSPHERE,DROUGHT,OZONE,DEGREE DAYS">
+		<meta name="DC.format" content="text/html; charset=iso-8859-1">
+		<meta name="DC.language" scheme="DCTERMS.RFC1766" content="EN-US">
+		<meta name="DC.Distribution" content="Global">
+		<meta name="DC.robot" content="all">
+		<meta name="DC.creator" content="NOAA's Climate Prediction Center">
+		<meta name="DC.contributor" content="CPC Internet Team">
+		<meta name="subject.attribution" content="LRF_Forecasts">
+		<link rel="schema.DC" href="http://purl.org/dc/elements/1.1/">
+		<link rel="schema.DCTERMS" href="http://purl.org/dc/terms/">
+		<link rel="DC.rights" href="http://www.weather.gov/disclaimer.php">
+		<link href="/favicon.ico" rel="shortcut icon">
+    <link href="/cpc_common/bootstrap-icons-1.13.1/bootstrap-icons.min.css" type="text/css" rel="stylesheet">
+		<link href="/nwscwi/main.css" type="text/css" rel="stylesheet">
+
+    <style>
+      html {
+        scroll-behavior: smooth;
+      }
+      .breadcrumbs {
+        font-size: 0.75rem;
+        padding: 1rem;
+      }
+
+      .probabilities-container {
+        display: table;
+        padding-right: 2rem;
+        /*width: 100%;*/
+      }
+      .probabilities-row {
+        display: table-row;
+      }
+      .probabilities-content,
+      .sidebar-right {
+        display: table-cell;
+      }
+      .sidebar-right {
+        width: 25%;
+      }
+      @media (min-width: 1200px) {
+        .sidebar-right {
+          width: 22%;
+        }
+      }
+
+      .archives-form-container {
+        background-color: #f0f2f5;
+        padding: 2rem;
+      }
+      .archives-form-container h3 {
+        color: #0f268a;
+      }
+      form#enso-probabilities-archive {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1rem;
+      }
+      form#enso-probabilities-archive > div {
+        margin-bottom: 1rem;
+      }
+      form#enso-probabilities-archive label {
+        font-weight: bold;
+        display: block;
+        margin-bottom: 0.25rem;
+        width: 100%;
+      }
+      form#enso-probabilities-archive select {
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 0.25rem;
+        padding: 0.5rem;
+      }
+      form#enso-probabilities-archive input,
+      form#enso-probabilities-archive select {
+        cursor: pointer;
+        display: block;
+        font-size: 1rem;
+        width: 100%;
+      }
+      form#enso-probabilities-archive input.button {
+        border-width: 0;
+      }
+
+      .probabilities-description,
+      .probabilities-figure {
+        margin: 1rem 0 2rem;
+        padding: 0 2rem;
+        width: 95%;
+        max-width: 1000px;
+      }
+      .probabilities-figure img {
+        border: 1px solid #ccc;
+        height: auto;
+        padding: 1rem 0;
+        transition: border .4s;
+        max-width: 100%;
+        width: 100%;
+      }
+
+      .probabilities-figure img:hover {
+        border: 1px solid #1451c3;
+      }
+      
+      .probabilities-figure a:hover {
+        cursor: zoom-in;
+      }
+
+      @media (min-width: 1400px) {
+        .probabilities-description {
+          width: 75%;
+        }
+      }
+      .probabilities-description h1,
+      .probabilities-description h2 {
+        text-align: center;
+      }
+      .probabilities-description h1 {
+        font-size: 2rem;
+        margin-bottom: 0.5rem;
+      }
+      .probabilities-description h2 {
+        font-size: 1.125rem;
+        margin-bottom: 1.5rem;
+      }
+      .probabilities-description p {
+        font-size: 1rem;
+        line-height: 1.35;
+      }
+      .probabilities-description p.archive-label {
+        background-color: #f0f2f5;
+        display: inline-block;
+        font-size: 0.65rem;
+        text-transform: uppercase;
+        padding: 0.25rem 0.5rem;
+        font-weight: bold;
+        color: #0f268a;
+      }
+      .probabilities-description p.notice {
+        font-size: 0.85rem;
+        line-height: 1.4;
+      }
+      .probabilities-description hr {
+        background-color: #dfdfdf;
+        border-width: 0;
+        height: 1px;
+        margin: 1rem auto;
+        width: 20%;
+      }
+      .button {
+        border-radius: 0.5rem;
+        font-size: 1rem;
+        padding: 0.65rem 1.25rem;
+        text-decoration: none;
+        transition: background-color .4s;
+      }
+
+      .probabilities-description .info-toggle {
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        appearance: none;
+        /*background: none;*/
+        background-color: #f0f2f5;
+        border: 0;
+        border-radius: 3px;
+        cursor: pointer;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 1rem;
+        font-weight: 600;
+        margin-left: 0.125rem;
+        padding: 0.5rem 1rem;
+        vertical-align: text-bottom;
+      }
+
+      .probabilities-description .info-toggle:hover {
+        background-color: #dcdfe4;
+      }
+
+      .probabilities-description .info-toggle::before {
+        content: '\002b \0020'; /* Unicode character for "plus" sign (+) */
+        margin-right: 0.25rem;
+      }
+
+      .probabilities-description .info-toggle.active::before {
+        content: '\2013 \0020'; /* Unicode character for "minus" sign (-) */
+        margin-right: 0.25rem;
+      }
+
+      .probabilities-description .info-panel {
+        border-left: 4px solid #f0f2f5;
+        margin-top: 0.5rem;
+        margin-left: .25rem;
+        max-height: 0;
+        overflow: hidden;
+        padding: 0 5rem 0 1.25rem;
+        transition: max-height 0.2s ease-out;
+      }
+
+      /*.probabilities-description .info-panel p {
+        font-size: 0.875rem;
+        line-height: 1.25rem;
+      }*/
+
+      .probabilities-description .info-panel p:last-of-type {
+        margin-bottom: 1.5rem;
+      }
+
+      
+      a.skip-to-table {
+        background-color: #dee0e3;
+        color: #323436;
+      }
+      a.go-to-page,
+      .get-archive {
+        background-color: #195fe4;
+        color: #fff;
+      }
+      a.back-to-top {
+        background-color: #dee0e3;
+        color: #323436;
+        display: inline-block;
+        margin: 0.5rem auto 1rem;
+      }
+
+      a.skip-to-table:hover {
+        background-color: #b7b9bd;
+      }
+      a.go-to-page:hover,
+      .get-archive:hover {
+        background-color: #1451c3;
+        color: #fff;
+      }
+      a.back-to-top:hover {
+        background-color: #b7b9bd;
+      }
+
+      #probabilities-table-container,
+      .post-table-container,
+      .probabilities-buttons {
+        text-align: center;
+        max-width: 1000px;
+      }
+      #probabilities-table {
+        border-collapse: collapse;
+        margin: 1rem auto;
+      }
+      #probabilities-table caption {
+        font-size: 0.85rem;
+        padding: 1rem 0 0.75rem;
+      }
+      #probabilities-table th,
+      #probabilities-table td {
+        border: 1px solid #646464;
+        font-size: 1rem;
+        padding: 0.5rem 1.1rem;
+        text-align: center;
+      }
+      .probabilities-buttons {
+        margin: 1rem 0 2.5rem;
+      }
+      .probabilities-buttons a.button:nth-of-type(1) {
+        margin-right: 0.125rem;
+      }
+      .probabilities-buttons a.button:nth-of-type(2) {
+        margin-left: 0.125rem;
+      }
+
+      tr.cell-headings,
+      th[scope="row"] {
+        background-color: #f0f2f5;
+      }
+      th[scope="row"] abbr,
+      .cell-headings abbr,
+      .cell-headings p {
+        position: relative;
+        border-bottom: 2px dotted #7cbaff;
+        cursor: pointer;
+      }
+      th[scope="row"] abbr .tooltip,
+      .cell-headings abbr .tooltip,
+      .cell-headings p .tooltip {
+        visibility: hidden;
+        position: absolute;
+        width: 100px;
+        background-color: #555;
+        color: #fff;
+        font-size: 0.85rem;
+        font-weight: normal;
+        text-align: center;
+        padding: 5px 0;
+        border-radius: 6px;
+        z-index: 1;
+        opacity: 0;
+        transition: opacity .6s;
+      }
+      th[scope="row"] abbr .tooltip-right,
+      .cell-headings abbr .tooltip-right,
+      .cell-headings p .tooltip-right {
+        top: -1px;
+        /*top: -5px;*/
+        left: 125%;
+      }
+      th[scope="row"] abbr .tooltip-right::after,
+      .cell-headings abbr .tooltip-right::after,
+      .cell-headings p .tooltip-right::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 100%;
+        margin-top: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: transparent #555 transparent transparent;
+      }
+      th[scope="row"] abbr:hover .tooltip,
+      .cell-headings abbr:hover .tooltip,
+      .cell-headings p:hover .tooltip,
+      th[scope="row"] abbr:focus .tooltip,
+      .cell-headings abbr:focus .tooltip,
+      .cell-headings p:focus .tooltip, 
+      th[scope="row"] abbr:hover .tooltip-right,
+      .cell-headings abbr span.tooltip:focus, 
+      .cell-headings p span.tooltip:focus {
+        visibility: visible;
+        opacity: 1;
+      }
+      .roni-cold {
+        color: #195fe4;
+        font-weight: bold;
+      }
+      .roni-warm {
+        color: #e80016;
+        font-weight: bold;
+      }
+
+      #sidebar {
+        color: #fff;
+      }
+      #sidebar h3,
+      #sidebar h3 > a {
+        color: #f0e68c;
+        text-decoration: none;
+      }
+      #sidebar h3 > a:visited {
+        color: #f0e68c;
+        text-decoration: none;
+      }
+      #sidebar a,
+      #sidebar a:visited {
+        color: #fff;
+        text-decoration: none;
+      }
+      #sidebar a:hover {
+        text-decoration: underline;
+      }
+      .sidebar-container {
+        padding: 0 0.5rem;
+      }
+      .sidebar-container h3 {
+        font-size: 0.85rem;
+        margin-bottom: 0.25rem;
+      }
+      .sidebar-container ul {
+        padding: 0;
+        margin: 0 0.5rem;
+        list-style: none;
+      }
+      .sidebar-container ul li:not(:last-of-type) {
+        margin-bottom: 0.125rem;
+      }
+      .sidebar__images {
+        margin: 1rem 0;
+      }
+      /* For screen readers only */
+      .sr-only {
+        position: absolute;
+        left: -10000px;
+        top: auto;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+      }
+    </style>
+	</head>
+
+
+	<body leftMargin="0" background="/nwscwi/background-white.gif" topMargin="0" marginheight="0" marginwidth="0">
+
+		<table id="top-banner" cellspacing="0" cellpadding="0" width="100%" border="0" background="/nwscwi/topbanner.jpg" >
+	<tbody>
+		<tr>
+			<td align="right" height="19">
+				<a href="#contents"><img height="1" alt="skip navigation links" src="/nwscwi/skipgraphic.gif" width="1" border="0"></a>
+				<a href="https://www.weather.gov/" class="homepagelinks"><span class="nwslink">www.weather.gov</span></a>&nbsp;
+			</td>
+		</tr>
+	</tbody>
+</table>		<table id="top-logos" cellspacing="0" cellpadding="0" width="100%" border="0">
+	<tbody>
+		<tr>
+			<td rowspan="2">
+				<a href="https://www.noaa.gov/">
+				<img height="78" alt="NOAA logo - Click to go to the NOAA home page" src="/nwscwi/noaaleft.jpg" width="85" border="0"></a>
+			</td>
+			<td align="left">
+				<img height="20" alt="National Weather Service" src="/nwscwi/nws_title.jpg" width="500" border="0">
+			</td>
+			<td rowspan="2" width="100%" background="/nwscwi/ncep_bkgrnd.jpg">&nbsp;</td>
+			<td rowspan="2" align="right">
+				<a href="https://www.weather.gov/"><img height="78" alt="NWS logo - Click to go to the NWS home page" src="/nwscwi/nwsright.jpg" width="85" border="0"></a>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<img height="58" alt="Climate Prediction Center" src="/nwscwi/cpc.jpg" width="500" border="0">
+			</td>
+		</tr>
+	</tbody>
+</table>		<table id="top-nav" cellspacing="0" cellpadding="0" width="100%" background="/nwscwi/navbkgrnd.gif" border="0">
+	<tbody>
+		<tr>
+			<td align="left" width="135">
+				<img height="23" alt="" src="/nwscwi/navbarleft.jpg" width="94" border="0">
+			</td>
+			<td class="nav" align="center" width="10%">
+				<a href="/" class="menu" title="to the Climate Prediction Center home page">Home</a>
+			</td>
+			<td class="nav" align="center" width="10%">
+				<a href="/products/site_index.shtml" class="menu" title="to Climate Prediction Center site map">Site Map</a>
+			</td> 
+			<td class="nav" align="right" width="10%">
+				<a href="https://www.weather.gov/news/" class="menu" title="to National Weather Service news page">News</a>
+			</td>
+			<td class="nav" align="right" width="19%">
+				<a href="https://www.weather.gov/organization/" class="menu">Organization</a>
+			</td>
+			<td class="searchinput" align="right" width="30%">
+				<form method="get" action="https://search.usa.gov/search" style="margin-bottom:0; margin-top:0;">
+					<label for="search"><span class="yellow">Search</span> </label>
+					<input type="hidden" name="affiliate" value="weather.gov" />
+					<input type="hidden" name="v:project" value="firstgov" />
+					<input name="query" type="text" value="" size="20" maxlength="256" id="Search" />
+					<input type="submit" value="Go" />
+				</form>
+			</td>
+			<td align="right">
+				<img height="23" alt="" src="/nwscwi/navbarendcap.jpg" width="24" border="0">
+			</td>
+		</tr>
+	</tbody>
+</table>
+		<table cellSpacing="0" cellPadding="0" width="100%" border="0">
+			<tbody>
+				<tr vAlign="top">
+					<td width="136">
+						<table cellSpacing="0" cellPadding="0" width="136" border="0">
+							<tbody>
+								
+								<tr>
+									<td class="white" id="sidebar">
+                    <div class="sidebar-container">
+
+                      <h3 class="yellow"><label for="cpc-search">Search</label></h3>
+                      <form id="cpc-search" method="get" action="https://search.usa.gov/search" style="margin:0;">
+                        <input type="hidden" name="affiliate" value="ncep.noaa.gov" />
+                        <input type="hidden" name="v:sources" value="firstgov-affiliates-search" />
+                        <input type="hidden" name="v:project" value="firstgov" />
+                        <input type="hidden" name="cpc-search-query" value="site:www.cpc.ncep.noaa.gov" />
+                        <input name="cpc-search-query" type="text" maxlength="256" id="cpc-search" style="width:80px;" />
+                        <input type="submit" value="Go"  />
+                      </form>
+
+                      <h3 class="yellow"><a href="/products/forecasts/">Climate Outlooks</a></h3>
+
+                      <h3 class="yellow"><a href="/products/precip/CWlink/MJO/climwx.shtml">Climate-Weather Link</a></h3>
+                      <ul>
+                        <li><a href="/products/precip/CWlink/MJO/enso.shtml">El Ni&ntilde;o/La Ni&ntilde;a</a></li>
+                        <li><a href="/products/precip/CWlink/MJO/mjo.shtml">MJO</a></li>
+                        <li><a href="/products/precip/CWlink/daily_ao_index/teleconnections.shtml">Teleconnections</a></li>
+                            <ul>
+                              <li><a href="/products/precip/CWlink/daily_ao_index/ao.shtml">AO</a></li>
+                              <li><a href="/products/precip/CWlink/pna/nao.shtml">NAO</a></li>
+                              <li><a href="/products/precip/CWlink/pna/pna.shtml">PNA</a></li>
+                              <li><a href="/products/precip/CWlink/daily_ao_index/aao/aao.shtml">AAO</a></li>
+                            </ul>
+                        </li>
+                        <li><a href="/products/precip/CWlink/MJO/block.shtml">Blocking</a></li>
+                        <li><a href="/products/precip/CWlink/stormtracks/mstrack.shtml">Storm Tracks</a></li>
+                      </ul>
+
+                      <h3 class="yellow"><a href="/products/outreach/glossary.shtml">Climate Glossary</a></h3>
+
+                      <h3 class="yellow"><a href="/products/outreach/">Outreach</a></h3>
+
+                      <h3 class="yellow">About Us</h3>
+                      <ul>
+                        <li><a href="/information/who_we_are/mission.shtml">Our Mission</a></li>
+                        <li><a href="/information/who_we_are/">Who We Are</a></li>
+                      </ul>
+
+                      <h3 class="yellow">Contact Us</h3>
+                      <ul>
+                        <li><a href="/comment-form.php">Web Team</a></li>
+                      </ul>
+
+                      <div class="sidebar__images">
+                        <a href="https://www.usa.gov/"><img src="/nwscwi/usagov_logo_color_110wb.gif" alt="Image banner linking to USA.gov, the U.S. Government's official Web portal to all Federal, state and local government Web resources and services." width="110" height="30" border="0"></a></span>
+                      </div>
+
+                    </div>
+
+									</td>
+								</tr>
+							</tbody>
+						</table>
+
+					</td>
+					<td vAlign="top" width="100%">
+						<table cellSpacing="0" cellPadding="0" width="100%" border="0">
+							<tbody>
+								<tr>
+									<td>
+									</td>
+								</tr>
+								<tr>
+									<td>
+
+<!-- Breadcrumbs -->
+<table border="0" width="100%">
+  <tbody>
+    <tr>
+      <td>
+        <p class="breadcrumbs">
+          <a href="/" class="homepagelinks"><strong>HOME</strong></a> &gt;
+          <a href="/products/precip/CWlink/MJO/climwx.shtml" class="homepagelinks">Climate &amp; Weather Linkage</a> &gt;
+          <a href="/products/precip/CWlink/MJO/enso.shtml" class="homepagelinks">El Ni&ntilde;o / Southern Oscillation (ENSO)</a> &gt; Official NOAA CPC ENSO Probabilities
+        </p>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="probabilities-container">
+  <div class="probabilities-row">
+    <div class="probabilities-content">
+
+      <div class="probabilities-description">
+        <h1>Official NOAA CPC ENSO Probabilities</h1>
+        <h2>Issued November 2026</h2>
+        
+        <p>The bars show the chance of El Ni&ntilde;o (red bars), ENSO-Neutral (grey bars), and La Ni&ntilde;a (blue bars) provided for 9 upcoming, overlapping 3-month seasons (each letter represents a month, for example, F = February). Alternatively, <a href="#probabilities-table">the table</a> presents the percent chances in numerical form.</p>  
+
+        <button class="button info-toggle">Additional Information</button>
+
+        <div class="info-panel">
+          <p>Updates on the 2nd Thursday of each month associated with the <a href="/products/analysis_monitoring/enso_advisory/ensodisc.shtml">ENSO Diagnostics Discussion</a>.</p>
+
+          <p>The official outlook is determined by a ~10 member team, using available insights from multiple models (multi-model ensembles) and the latest observations using climate reanalysis, in situ measurements, and satellite data.</p>
+
+          <p>Probabilities are verified using the <a href="/products/analysis_monitoring/enso/roni/">Relative Oceanic Ni&ntilde;o Index (RONI)</a>, with El Ni&ntilde;o and La Ni&ntilde;a defined using -/+ 0.5 degree Celsius thresholds in sea surface temperature departures averaged in the Ni&ntilde;o-3.4 region of the east-central equatorial Pacific Ocean (170&ndash;120W, 5S&ndash;5N). The 1991&ndash;2020 climatological base period is used to define the departures.</p>
+
+          <p>A 0% chance is approximate and not exact, meaning there is still some finite, non-zero chance (e.g. .01%) of the outcome occurring.</p>
+        </div>
+      </div>
+
+
+      <div class="probabilities-buttons">
+        <a href="#probabilities-table" class="button skip-to-table">Skip to data table <i class="bi bi-arrow-down"></i></a>
+        <a href="/products/analysis_monitoring/enso/roni/outlook/" class="button go-to-page" aria-hidden="true">Go to the ENSO Outlook &nbsp;<i class="bi bi-arrow-bar-right"></i></a>
+        <a href="/products/analysis_monitoring/enso/roni/strengths/" class="button go-to-page" aria-hidden="true">Go to ENSO Strengths &nbsp;<i class="bi bi-arrow-bar-right"></i></a>
+      </div>
+
+
+      <div class="probabilities-figure" title="Click to view a larger version">
+        <a href="/archives/enso/roni/images/2026/enso-probs-current.png"><img src="/archives/enso/roni/images/2026/enso-probs-current.png" alt="Image of the latest probabilities for El Ni&ntilde;o, La Ni&ntilde;a, and ENSO-Neutral conditions for the upcoming nine overlapping 3-month seasons. The bars show the chance of El Ni&ntilde;o (red bars), ENSO-Neutral (grey bars), and La Ni&ntilde;a (blue bars) for each season."></a>
+      </div>
+
+
+      <div id="probabilities-table-container">
+
+        
+        <table id="probabilities-table">
+
+          <caption>ENSO Probabilities</caption>
+          <tbody>
+            <tr class="cell-headings">
+              <th scope="col">Season</th><th scope="col">La Ni&ntilde;a</th><th scope="col">Neutral</th><th scope="col">El Ni&ntilde;o</th>            </tr>
+
+            <tr><th scope="row"><abbr>OND <span class="tooltip tooltip-right" role="tooltip">Oct Nov Dec</span></abbr></th><td>0</td><td>0</td><td>100</td></tr><tr><th scope="row"><abbr>NDJ <span class="tooltip tooltip-right" role="tooltip">Nov Dec Jan</span></abbr></th><td>0</td><td>0</td><td>100</td></tr><tr><th scope="row"><abbr>DJF <span class="tooltip tooltip-right" role="tooltip">Dec Jan Feb</span></abbr></th><td>0</td><td>0</td><td>100</td></tr><tr><th scope="row"><abbr>JFM <span class="tooltip tooltip-right" role="tooltip">Jan Feb Mar</span></abbr></th><td>0</td><td>0</td><td>100</td></tr><tr><th scope="row"><abbr>FMA <span class="tooltip tooltip-right" role="tooltip">Feb Mar Apr</span></abbr></th><td>0</td><td>2</td><td>98</td></tr><tr><th scope="row"><abbr>MAM <span class="tooltip tooltip-right" role="tooltip">Mar Apr May</span></abbr></th><td>0</td><td>20</td><td>80</td></tr><tr><th scope="row"><abbr>AMJ <span class="tooltip tooltip-right" role="tooltip">Apr May Jun</span></abbr></th><td>1</td><td>61</td><td>38</td></tr><tr><th scope="row"><abbr>MJJ <span class="tooltip tooltip-right" role="tooltip">May Jun Jul</span></abbr></th><td>13</td><td>75</td><td>12</td></tr><tr><th scope="row"><abbr>JJA <span class="tooltip tooltip-right" role="tooltip">Jun Jul Aug</span></abbr></th><td>33</td><td>61</td><td>6</td></tr>          </tbody>
+        </table>
+
+      </div><!-- end #probabilities-table-container -->
+
+      <div class="post-table-container">
+        <a href="#top-banner" class="button back-to-top">Back to top &uparrow;</a>
+      </div>
+
+    </div><!-- .probabilities-content -->
+
+
+    <div class="sidebar-right">
+      <div class="archives-form-container">
+        <h3>Archives</h3>
+        <!--<form method="post" action="">-->
+
+        <form action="/products/analysis_monitoring/enso/roni/archives/" method="GET" class="enso-probabilities-archive" id="enso-probabilities-archive">
+          <div>
+            <label for="type">Outlook Type</label>
+            <select id="type" name="type">
+              <option value="outlook">ENSO Outlook</option>
+              <option value="probabilities" selected>ENSO Probabilities</option>
+              <option value="strengths">ENSO Strength Probabilities</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="month">Month</label>
+            <select id="month" name="month">
+              <option value="04">April</option>
+              <option value="05">May</option>
+              <option value="06">June</option>
+              <option value="07">July</option>
+              <option value="08">August</option>
+              <option value="09" selected>September</option>
+            </select>
+          </div>
+
+          <div>
+            <label for="year">Year</label>
+            <select id="year" name="year">
+              <option value="2026">2026</option>
+            </select>
+          </div>
+
+          <div>
+            <input class="button get-archive" id="get-archive" type="submit" value="Submit">
+          </div>
+        </form>
+
+      </div><!-- .archives-form-container -->
+    </div><!-- .sidebar-right -->
+
+  </div><!-- .probabilities-row -->
+</div><!-- .probabilities-container -->
+
+									</td>
+								</tr>
+							</tbody>
+						</table>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<!-- -->
+	</body>
+	<footer>
+		<table width="100%">
+			<tbody>
+				<tr>
+					<td width="135">
+					</td>
+					<td>
+						<!-- 	Climate Prediction General Footer 01
+	Programmer: Jonathan Hoopingarner
+	
+	RZDM:
+-->
+
+<table cellSpacing="0" cellPadding="0" width="96%" border="0" align="center">
+	<tbody>
+		<tr>
+			<td colspan="3">
+				<hr>
+			</td>
+		</tr>
+		<tr vAlign="top">
+			<td class="gray">
+				<a href="https://www.noaa.gov/" class="homepagelinks">
+				<span class="gray">NOAA/</span></a>
+				<a href="https://www.weather.gov/" class="homepagelinks">
+				<span class="gray">National Weather Service</span></a><br>
+				<a href="https://www.weather.gov/ncep/" class="homepagelinks">
+				<span class="gray">National Centers for Environmental Prediction</span></a><br>
+				Climate Prediction Center<br>
+5830 University Research Court<br>
+Riverdale Park, MD 20737<br>				Page Author:<a href="https://www.cpc.ncep.noaa.gov/comment-form.html" class="homepagelinks">
+				<span class="gray"> Climate Prediction Center Internet Team</span></a><br>
+				Page last modified: 			</td>
+			<td>
+				<a href="https://weather.gov/disclaimer.php" class="homepagelinks">
+				<span class="gray">Disclaimer</span></a><br>
+				<a href="https://www.noaa.gov/information-technology" class="homepagelinks">
+				<span class="gray">Information Quality</span></a><br>
+				<a href="https://www.weather.gov/credits.php" class="homepagelinks">
+				<span class="gray">Credits</span></a><br>
+				<a href="https://www.weather.gov/glossary/" class="homepagelinks">
+				<span class="gray">Glossary</span></a><br>
+			</td>
+			<td align="right"><a href="https://weather.gov/privacy.php" class="homepagelinks">
+				<span class="gray">Privacy Policy</span></a><br>
+				<a href="https://www.foia.gov/" class="homepagelinks">
+				<span class="gray">Freedom of Information Act (FOIA)</span></a><br>
+				<a href="https://www.weather.gov/admin.php" class="homepagelinks">
+				<span class="gray">About Us</span></a><br>
+				<a href="https://www.weather.gov/careers.php" class="homepagelinks">
+				<span class="gray">Career Opportunities</span></a><br>
+			</td>
+		</tr>
+	</tbody>
+</table>
+<br><br>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</footer>
+  <script>
+    // Get the "Additional Information" button
+    let infoToggle = document.querySelector(".info-toggle");
+
+    // Add click event listener to the "Additional Information" button
+    infoToggle.addEventListener("click", function() {
+      // Toggle the "active" class on the clicked button
+      this.classList.toggle("active");
+
+      // Get the "Additional Information" info element 
+      let panel = document.querySelector(".info-panel");
+
+      // Toggle the maxHeight style to show or hide the info panel
+      if (panel.style.maxHeight){
+        panel.style.maxHeight = null;
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + "px";
+      }
+    });
+  </script>
+</html>

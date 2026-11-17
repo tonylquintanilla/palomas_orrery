@@ -313,6 +313,16 @@ Module updated: November 10, 2026 with Anthropic's Claude Opus 5.5 (L-522:
 CHECKERS gains Document caps, doc_index.py --caps, after Dashboard
 parity: each working document against its cap on DOCUMENT_CAPS.md. Not a
 night row: it judges documents.)
+Module updated: November 17, 2026 with Anthropic's Claude Opus 5.5 (L-060,
+Tony's ruling of Nov 17, 08:48: GENERATORS gains El Nino check,
+enso_page_generator.py --night-check, after Path plan, and CHECKERS its
+suite, test_enso_night_check.py; both run at night. The row compares
+NOAA's files with what the El Nino page shows and, when NOAA has anything
+newer, saves dated copies under data/earth/noaa_enso_reads/ and says EL
+NINO DUE, which night_title_flags() puts at the start of the night's
+commit title. It never changes the page. An output ending in "/" is a
+folder: snapshot() fingerprints its files and the night's allow-list
+admits any file under it.)
 """
 
 import hashlib
@@ -370,6 +380,15 @@ GENERATORS = [
     # to the website. UNREACHABLE by name when JPL could not be reached.
     ('Path plan', ['path_plan.py'],
      ['data/path_plans.json'], 'PATH PLAN:'),
+    # L-060 (Tony, 2026-11-17): NOAA's three El Nino files read fresh and
+    # compared with what the El Nino page shows (data/earth/
+    # el_nino_state.json). Nothing newer: nothing written. Newer: the
+    # dated copies are saved in the folder below and the verdict says EL
+    # NINO DUE, which the night's commit title carries; Tony rebuilds the
+    # page by hand. NOAA unreachable: UNREACHABLE, reported (R4). The
+    # output is a folder (the trailing "/"), the copies' dated home.
+    ('El Nino check', ['enso_page_generator.py', '--night-check'],
+     ['data/earth/noaa_enso_reads/'], 'EL NINO CHECK:'),
     # L-395 (2026-10-01): the orrery's object list is the one definition
     # of each object the website serves. The entries carrying a 'key'
     # are exported, and the gallery pulls the file as it pulls the
@@ -459,6 +478,12 @@ CHECKERS = [
     # them a record written by another path than plotting's.
     ('Period fetch suite', ['test_period_fetch.py'],
      'PERIOD FETCH SUITE:'),
+    # L-060: the El Nino night check on planted NOAA files, no network:
+    # a newer discussion, RONI season or chances flags EL NINO DUE and
+    # saves the copies; today's files say CURRENT and write nothing; an
+    # outage is UNREACHABLE; the page is never touched.
+    ('El Nino check suite', ['test_enso_night_check.py'],
+     'EL NINO CHECK SUITE:'),
     # L-443 slice 2: the path plan against a made-up solar system in JPL's
     # vector format, no network: two flybys found to the minute, the
     # 30-day cycle, an outage, and two planted faults caught.
@@ -601,9 +626,10 @@ TOOL_TIMEOUT_SECONDS = 900
 # judge no code. They run in table order.
 NIGHT_ROWS = (
     'Constants export', 'Period fetch', 'Horizons check', 'Path plan',
-    'Objects export', 'Drawings export',
+    'El Nino check', 'Objects export', 'Drawings export',
     'Constants export check', 'Objects export check',
     'Horizons confirmations', 'Horizons check suite', 'Period fetch suite',
+    'El Nino check suite',
     'Path plan suite', 'Path or orbit suite', 'Orbit cache',
     'Drawings export check',
 )
@@ -746,6 +772,41 @@ def git_changed_paths(project_dir):
     return paths
 
 
+def night_allowed(path, allowed):
+    """True when the night may commit `path`: it is on the allow-list, or
+    it lies under an entry ending in "/", a folder a night tool declares
+    (L-060: the El Nino check's dated copies). Nothing else."""
+    for entry in allowed:
+        if path == entry:
+            return True
+        if entry.endswith('/') and path.startswith(entry):
+            return True
+    return False
+
+
+# Words a night row's verdict may carry that go at the start of the
+# night's commit title, as the website's HELD does (L-525). L-060: the El
+# Nino check says EL NINO DUE when NOAA has newer than the page shows.
+NIGHT_TITLE_FLAGS = ('EL NINO DUE',)
+
+
+def night_title_flags(project_dir='.'):
+    """The flags for tonight's commit title, read from the night's
+    record (written on a clean night, before the commit step): each of
+    NIGHT_TITLE_FLAGS that a row's verdict carries, followed by a space;
+    '' when none does or the record cannot be read."""
+    import json
+    try:
+        with open(os.path.join(project_dir, NIGHT_RECORD),
+                  encoding='utf-8') as handle:
+            rows = json.load(handle).get('rows') or []
+    except (OSError, ValueError):
+        return ''
+    found = [flag for flag in NIGHT_TITLE_FLAGS
+             if any(flag in (row.get('verdict') or '') for row in rows)]
+    return ''.join(flag + ' ' for flag in found)
+
+
 def night_gate(project_dir, results, gens, changed=None):
     """The night's verdict: (problems, reported, inside).
 
@@ -780,9 +841,9 @@ def night_gate(project_dir, results, gens, changed=None):
             problems.append('the changed files could not be read: %s' % exc)
             changed = []
     for path in changed:
-        if path not in allowed:
+        if not night_allowed(path, allowed):
             problems.append('changed outside the allow-list: %s' % path)
-    inside = [path for path in changed if path in allowed]
+    inside = [path for path in changed if night_allowed(path, allowed)]
     for path in inside:
         full = os.path.join(project_dir, path)
         if not os.path.exists(full):
@@ -895,6 +956,21 @@ def snapshot(path):
     """
     if not os.path.exists(path):
         return (None, None)
+    if os.path.isdir(path):
+        # A folder output (L-060): its files' names and bytes, walked in
+        # a fixed order, and the newest mtime among them.
+        digest = hashlib.md5()
+        mtime = os.stat(path).st_mtime_ns
+        for root, dirs, files in os.walk(path):
+            dirs.sort()
+            for name in sorted(files):
+                full = os.path.join(root, name)
+                mtime = max(mtime, os.stat(full).st_mtime_ns)
+                digest.update(os.path.relpath(full, path).replace(
+                    os.sep, '/').encode('utf-8') + b'/')
+                with open(full, 'rb') as handle:
+                    digest.update(handle.read().replace(b'\r\n', b'\n'))
+        return (mtime, digest.hexdigest())
     mtime = os.stat(path).st_mtime_ns
     with open(path, 'rb') as handle:
         digest = hashlib.md5(

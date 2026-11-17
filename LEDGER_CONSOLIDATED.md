@@ -1056,7 +1056,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-191 | Display-text duplication across the shell modules | OPEN | 2.8 | 2026-10-22 |
 | ! | L-244 | Sweep for replicated conversion factors as a class [Fable candidate] | OPEN | 2.8 | 2026-08-25 |
 | ! | L-323 | A figure in prose needs a home (the Note is not a store) | OPEN | 2.8 | 2026-09-12 |
-| ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-11-16 |
+| ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-11-17 |
 | ! | L-298 | Seeing the gap between what the orrery draws and what an exhibit serves | OPEN | 2.7 | 2026-09-07 |
 | ! | L-248 | The parsec-to-light-year factor is typed 36 times across the star pipeline | OPEN | 2.5 | 2026-08-25 |
 | ! | L-273 | A document indexer, so the README's document table stops being hand-maintained | OPEN | 2.5 | 2026-09-01 |
@@ -10948,7 +10948,7 @@ HANDOFF_food_insecurity_sdn_projections_20261112.md
 (the Earth Science room).
 
 #### [L-060] ENSO Standalone Chart (Earth System track)
-<!-- L:060 status:OPEN upd:2026-11-16 section:A flag: rice:3/3/75/2.5 -->
+<!-- L:060 status:OPEN upd:2026-11-17 section:A flag: rice:3/3/75/2.5 -->
 - **ENSO standalone gallery chart (design locked, build next session).** Earth
   System track, not the orrery refactor. Single-unit (deg C) chart leading with
   RONI so El Nino / La Nina state reads honestly in a warming climate; ONI as a
@@ -11085,11 +11085,103 @@ ESCAPADE's path (L-533).
     threshold (+2.5 or more) and date, never as the chance of passing
     +2.40; the page's promise to redraw after each monthly update (the
     second Thursday) is the build's to keep.
-**Gap (replaces the one above, 2026-11-16 evening):** the brief for El
+**Gap (superseded below, 2026-11-17):** the brief for El
 Nino's Code session, written from the mockup's words, the two reviews
 and what still holds of the June spec; then the build, Tony's phone
 look, and his reading of every word before it goes live. Then
 ESCAPADE's path (L-533).
+- **2026-11-16 to 17: THE PAGE BUILT** (the Code session through the
+  python_work door, Claude Opus 5.5, on orrery 20a9c155 and gallery
+  1c5fe516, from documentation/COORD_L060_el_nino_page_brief_20261116.md,
+  in three parts with Tony's word after each). Built:
+  enso_page_generator.py (a dedicated generator; no scalar engine). It
+  reads NOAA CPC's three files fresh (RONI.ascii.txt, the probabilities
+  page, the discussion), keeps a dated copy of each in
+  data/earth/noaa_enso_reads/<date>/, computes every figure the page
+  states, and stops the build by name when a file does not read, a
+  figure is contradicted, or the RONI file is older than the discussion
+  (the cached copy of Nov 16). It writes earth/el_nino.html and five
+  pictures into data/earth/, copies those six files by name to the
+  website's earth/ (nothing else, never the NOAA copies), and writes
+  data/earth/el_nino_state.json, what the page shows. Read Nov 16 and
+  17 [verified]: ASO 2026 +1.97; record DJF 1983 +2.40, not passed; the
+  three strongest 1982-83, 1997-98, 2015-16; El Nino Advisory;
+  discussion 12 Nov 2026, next 10 Dec 2026; NOAA's ~60% sentence read
+  out with its +2.5 threshold; chances for nine seasons, OND 100 to JJA
+  6. Checks: py_compile, a throwaway run, 0 non-ASCII; provenance
+  scanner GATE PATH 0 Tier-1; all 18 links open; 360 and 375 px with no
+  sideways scroll (headless Chrome in frames, the check shown able to
+  fail), with the tap-to-open sections closed and open and the late
+  line shown and hidden; the gallery's offline run green after one fix
+  (below).
+  - Tony's rulings in the build: step 4 draws all nine seasons; NOAA's
+    copies stay in the orrery; the event's rank stays off the page; the
+    2026-27 event is shaded and marked provisional (Nov 16 night).
+    From his reading and an outside review (Nov 17): seasons coloured by
+    NOAA's classification, red El Nino, blue La Nina, grey neutral, with
+    a key; step 2's words separate the difference (above or below zero)
+    from the classification, add "then NOAA rescales it", and put the
+    Nino 3.4 box's history and the technical note behind tap-to-open
+    sections; step 4's axis in month names, its caption larger ("chances
+    of El Nino, not its strength"); step 5, "typically follows ... by two
+    to three months". Step 2's revised words approved ("Approve step 2").
+  - THE MONTHLY UPDATE, Tony's ruling of Nov 17, 08:48 ("yes"): the
+    night checks and flags; Tony rebuilds by hand; his rulings of Oct 25
+    (DESIGN_L485_nightly_run_rulings_20261025.md) stand: the night never
+    changes a page or words a visitor reads. Built: the night row "El
+    Nino check" (enso_page_generator.py --night-check, after Path plan)
+    compares NOAA's three files with el_nino_state.json; nothing newer,
+    it writes nothing; newer, it saves the dated copies (once, not each
+    night) and says EL NINO DUE, which night_title_flags() puts at the
+    start of the nightly commit title, as the website's HELD does; NOAA
+    unreachable or its files changed, UNREACHABLE, reported (R4). Its
+    output is a folder, data/earth/noaa_enso_reads/, admitted by the
+    night's allow-list as a folder (night_allowed()); a copy holding a
+    non-ASCII byte is named, not saved, at night, as the night commits
+    ASCII only. No conflict with R1: the copies are data the night's own
+    tool writes, in the orrery. Its suite, test_enso_night_check.py (21
+    checks, a planted fault caught), is a night checker. Proven: a
+    planted discussion of 10 December prints EL NINO DUE and saves the
+    copies; NOAA's real files of Nov 17 print CURRENT and write nothing.
+    The page's own script shows the late line once the "Next expected"
+    date has passed; step 4 ends "This page is updated after each NOAA
+    update."
+  - Tony no longer runs the Daily Run routinely; he relies on the
+    nightly (Nov 17).
+  - Found by the build: NOAA marks El Nino and La Nina seasons from the
+    index rounded to one decimal; with that rule the build matches NOAA's
+    own table in 920 of 921 seasons, the one apart, MJJ 2024 (-0.45), a
+    rounding tie the file's two decimals cannot settle. The 2015
+    climate.gov post names four first boxes, Nino 1 to 4, not two; the
+    sentence was corrected with Tony's approval. The three sentences the
+    brief left half-read hold in full: the boxes (with that correction),
+    "warming the Pacific and then the world" (the FAQ: "warmer air
+    temperatures in the Pacific and subsequently, to warmer global air
+    temperatures"), and the open question (ECMWF; McPhaden 2023 leans
+    toward yes from one study while the IPCC found no clear evidence).
+    The gallery's As-built names row was red on the base commit (a run
+    record named in backticks); marked [not in the code, L-522], green.
+  - The energy imbalance link points at the old gallery card
+    (/#energy_imbalance_desktop); it moves when L-531 (the Earth
+    Science room) retires the old cards.
+**Gap (replaces the one above, 2026-11-17):** Tony's phone look and his
+reading of every word on the preview; then his push of both
+repositories, which puts the page live; then the first nightly with the
+El Nino check, its row read in the night's record. Then ESCAPADE's
+path (L-533).
+- **2026-11-17, before the push** (Tony's two additions): the page is
+  on the lobby's Featured as a wide page card like Sudan's, id el_nino
+  in gallery/gallery_metadata.json, room earth_system (no El Nino room
+  exists; L-531 (the Earth Science room) may give it one), title "El
+  Nino, 2026-27", its description the page's subtitle. Its picture,
+  earth/el_nino.png, is drawn at each build: step 2's chart at 2:1, the
+  shape the lobby frames a wide card in, as Sudan's card has its own.
+  Checked in the lobby at 360 and 375 px, no sideways scroll. And the
+  dashboard's Earth System group gains "El Nino Page Generator", beside
+  the Food Insecurity Generator: the Run button's build in its own
+  console window, no arguments. Dashboard parity green.
+- Tony-action (do): read the preview on the phone; then commit and push
+  the orrery and the website.
 **Ref:** ENSO_chart_spec.md v2 (design spec, this session); cross-ref L-001 (Food Insecurity, same Earth System track; the track's ruling of 2026-10-07); energy_imbalance.py (Phase 2 target).
 
 #### [L-070] Food Insecurity -- regional multi-country assembly (Sudan crisis shed)

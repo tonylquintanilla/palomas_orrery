@@ -72,6 +72,12 @@ Module updated: November 14, 2026 with Anthropic's Claude Opus 5.5
 beside As-built Names, for the gallery run's "Kepler solver" (L-524) and
 "First guide" (L-527) checks, which came without one; added on Tony's
 word, "yes", after Dashboard parity found them.)
+Module updated: November 17, 2026 with Anthropic's Claude Opus 5.5
+(L-060: the El Nino Check and El Nino Check Suite buttons and lines,
+for the maintenance run's two new rows, after Dashboard parity found
+them missing. And, on Tony's word, the El Nino Page Generator button
+and line in the Earth System group, beside the Food Insecurity
+Generator: the Run button's build, in its own console window.)
 July 2026: added Linux Button-4/5 wheel scrolling to match columns 1/2's
 cross-platform coverage (CTkScrollableFrame's built-in handling only
 covers Windows/Mac <MouseWheel>). Audited LAUNCH_GROUPS against both
@@ -502,6 +508,16 @@ LAUNCH_GROUPS = {
          SCRIPT_DIR,
          False,
          ["--preload", "food_insecurity"]),
+        # L-060: what VS Code's Run button does on enso_page_generator.py,
+        # in its own console window, with no arguments, so its printout
+        # (every sentence with its source, or BUILD STOPPED) stays to read.
+        ("El Ni\u00f1o Page Generator",
+         "enso_page_generator.py",
+         "Rebuild the El Ni\u00f1o page from NOAA's files, read fresh, "
+         "and copy it to the website (earth/el_nino.html and its "
+         "pictures). Run it when the night's commit title says EL NINO DUE.",
+         SCRIPT_DIR,
+         True),
     ],
     "Stars": [
         ("Star Visualization",
@@ -1651,6 +1667,22 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
+        ("El Nino Check",
+         "enso_page_generator.py",
+         "Reads NOAA's three El Nino files fresh -- the RONI data file, "
+         "the chances page and the monthly discussion -- and compares them "
+         "with what the El Nino page shows (data/earth/el_nino_state.json; "
+         "L-060). If NOAA has nothing newer it writes nothing and says "
+         "CURRENT. If NOAA has anything newer it saves a dated copy of "
+         "NOAA's files under data/earth/noaa_enso_reads/ and says EL NINO "
+         "DUE, which the night's commit title also carries: run "
+         "enso_page_generator.py yourself (VS Code's Run button) to rebuild "
+         "the page. It never changes the page. If NOAA cannot be reached it "
+         "says UNREACHABLE.",
+         SCRIPT_DIR,
+         True,
+         ["--night-check"],
+         True),
         ("Objects Export",
          "export_objects.py",
          "Write data/objects_export.json from the object list in "
@@ -2016,6 +2048,21 @@ LAUNCH_GROUPS = {
          True,
          None,
          True),
+        ("El Nino Check Suite",
+         "test_enso_night_check.py",
+         "The El Nino Check on NOAA's files as the first build saved them "
+         "(data/earth/noaa_enso_reads/2026-11-16/), with no network. A "
+         "fault is planted in a copy of the check and must be caught. Then "
+         "a newer discussion, a newer RONI season and newer chances must "
+         "each say EL NINO DUE and save the copies once; NOAA's files as "
+         "the page shows them must write nothing; an outage and a changed "
+         "sentence must be reported; the page is never touched; and the "
+         "night's folder rule and commit title must hold. "
+         "Ends on \"EL NINO CHECK SUITE: PASS\" (L-060).",
+         SCRIPT_DIR,
+         True,
+         None,
+         True),
         ("Period Fetch Suite",
          "test_period_fetch.py",
          "The Period Fetch on recorded answers, with no network "
@@ -2317,6 +2364,9 @@ CARD_LINES = {
      "Food Insecurity Generator"):
         "Builds Sudan's IPC food-insecurity layer for Google Earth from IPC data.",
     ("Earth System",
+     "El Ni\u00f1o Page Generator"):
+        "Rebuilds El Ni\u00f1o's page from NOAA's files; copies it to the website.",
+    ("Earth System",
      "Food Insecurity Controller"):
         "The Google Earth controller, opened with the food-insecurity layers loaded.",
     ("Stars",
@@ -2559,6 +2609,12 @@ CARD_LINES = {
     ("Maintenance Run",
      "Objects Export"):
         "Writes the objects export the website reads, from celestial_objects.py.",
+    ("Maintenance Run",
+     "El Nino Check"):
+        "Compares NOAA's El Nino files with the page; flags EL NINO DUE.",
+    ("Maintenance Run",
+     "El Nino Check Suite"):
+        "Checks the El Nino flag fires on newer NOAA files; planted fault.",
     ("Maintenance Run",
      "Period Fetch"):
         "Fetches missing periods, and each small body's e every 30 days.",
