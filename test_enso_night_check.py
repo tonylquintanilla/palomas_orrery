@@ -222,12 +222,19 @@ def main():
     tmpr = tempfile.mkdtemp(prefix="enso_title_")
     try:
         os.makedirs(os.path.join(tmpr, "data"))
-        for verdict, want_title in (
-                ("EL NINO DUE -- NOAA has newer", "EL NINO DUE "),
-                ("CURRENT -- the page shows NOAA's latest", "")):
+        # The third case is the night of Nov 17 (c69b53b): the check
+        # says CURRENT and this suite's own pass line names EL NINO DUE.
+        suite_line = ("PASS -- 21 checks: ... each flag EL NINO DUE and "
+                      "save the copies once")
+        for verdict, want_title, extra in (
+                ("EL NINO DUE -- NOAA has newer", "EL NINO DUE ", []),
+                ("CURRENT -- the page shows NOAA's latest", "", []),
+                ("CURRENT -- the page shows NOAA's latest", "",
+                 [{"row": "El Nino check suite",
+                   "verdict": suite_line}])):
             with open(os.path.join(tmpr, runner.NIGHT_RECORD), "w") as fh:
                 json.dump({"rows": [{"row": "El Nino check",
-                                     "verdict": verdict}]}, fh)
+                                     "verdict": verdict}] + extra}, fh)
             got = runner.night_title_flags(tmpr)
             check(got == want_title, "TITLE",
                   "a verdict %r gave the title flag %r" % (verdict, got))

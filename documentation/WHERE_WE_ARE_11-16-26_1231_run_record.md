@@ -388,3 +388,74 @@ C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io>
 Where this leaves us:
 - On your push, El Niño's page is live and reachable from the lobby's Featured.
 - To rebuild it, press "El Niño Page Generator" on the dashboard when the night says EL NINO DUE.
+
+==========================
+
+Branch main is selected. Starting the run.
+
+Run #40 is queued. I'll wait for it to finish.
+
+The run has started, and I'll report back when it finishes, usually in about five minutes.
+
+The website's nightly is green again. Run #40, which I started by hand, passed every check, including the as-built check that turned Nov 16 red.
+
+- **What it did:** it pulled the orrery's files, rebuilt the planets' positions, and passed every check. It then committed and pushed a fresh night: commit 46cc948b, with 201 files of positions and 5 small record files.
+- **Holds:** no body was held. The commit's title doesn't start with "HELD".
+- **Going live:** GitHub is publishing that commit now, the usual "pages build and deployment" row, which takes about a minute.
+- **From here:** the scheduled nights at 08:17 and 12:17 UTC should stay green.
+
+**One thing to know:** the night's commit means your website folder is now one commit behind GitHub. Before your next work there, use Fetch origin and then Pull origin in GitHub Desktop, as in your morning routine. Your orrery folder is unaffected.
+
+I changed no files this turn.
+
+**Your run order**
+1. In GitHub Desktop, use Fetch origin and Pull origin on the website before your next work there. -- daa627b07ab672fa7855f8b0a840a4b61e7179da
+
+**Tony-action rollup**
+- (do) Use Fetch origin and Pull origin on the website before your next work there.
+- (do) Tomorrow morning, check that the 08:17 UTC nightly row is green.
+
+=================================
+
+**Coordinator:**
+
+Now the patch: tie the flag to its own row, and add the case that would have caught it.
+
+I read your run record. Both pushes landed: the orrery at ece10b1e, now 74720b6 after your merge, and the website at daa627b0, with the page, its six pictures and the Featured card all on GitHub. The live check passed.
+
+**One problem, and it's mine to fix.** This morning's orrery night (commit c69b53b) titled itself **"EL NINO DUE,"** but its El Niño check row actually says **CURRENT**: NOAA has published nothing new since November 12. The flag is a false alarm. The cause is that the code looking for "EL NINO DUE" read every row of the night's record. The El Niño check *suite* passed, and its pass line describes its own test cases with the words "each flag EL NINO DUE." So every clean night would have carried the flag, which would make it meaningless. Nothing was saved or changed: the night only wrote its run record.
+
+**The fix is a small patch,** saved in your orrery folder as `patch_L060_3_title_flag_20261117.py`. It makes the flag read only from the El Niño check's own row. It also adds a test case built from this morning's night, so this can't happen again unnoticed. I checked it three ways:
+- On a copy of GitHub's files, it applies and the suite passes (22 checks).
+- A second run changes nothing.
+- The new test fails on the old code, so it can actually catch the bug.
+
+Your local files match GitHub, so it will apply cleanly.
+
+**(do) At your computer:** 
+1. open the patch in VS Code and press Run, 
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & 'C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe' 'c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L060_3_title_flag_20261117.py'
+ok the flag list pairs each flag with its row
+ok night_title_flags reads only the flag's own row
+ok night_title_flags matches by row
+ok the night of Nov 17 as a title case
+ok orrery_maintenance_run.py written
+ok test_enso_night_check.py written
+Running the El Nino check suite ...
+    planted discussion:  EL NINO CHECK: EL NINO DUE -- NOAA has newer than the page: discussion of 10 December 2026 (page: 12 November 2026). Copies: data/earth/noaa_enso_reads/2026-11-17/RONI.ascii.txt, data/earth/noaa_enso_reads/2026-11-17/enso_probabilities.html, data/earth/noaa_enso_reads/2026-11-17/ensodisc.html. Tony rebuilds the page by hand.
+  EL NINO CHECK SUITE: PASS -- 22 checks: a planted fault caught; a newer discussion, RONI season and chances each flag EL NINO DUE and save the copies once; NOAA's files as the page shows them write nothing; an outage and a changed sentence are reported; the page is never touched; the folder output, the gate and the commit title hold.
+patch applied
+
+Do next:
+  1. (do) Move this file into documentation\. -- done
+  2. (do) In GitHub Desktop (orrery): commit and push the two files and this patch. Not between 07:17 and 11:17 UTC (1:17 to 5:17 Chicago), when the night runs. -- 
+  3. (do) Tomorrow morning: the orrery's night title should NOT start with EL NINO DUE (NOAA's next update is due 10 December).
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+2. then move it into `documentation\`. 
+3. Commit and push the orrery, avoiding 1:17 to 5:17 in the morning Chicago time. T
+4. omorrow's orrery night title should *not* start with "EL NINO DUE." 
+5. The first real one should come after NOAA's December 10 update.
+
+One final thought: the suite's checks tested the flag on a record containing only the El Niño row, never alongside the night's other rows. A test of one row alone couldn't see a collision between rows. It's the "check that cannot fail" lesson in a new shape: a check needs a realistic input, not just a correct one. I'll add a line to L-060 next time the ledger is touched.

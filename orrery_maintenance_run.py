@@ -787,14 +787,18 @@ def night_allowed(path, allowed):
 # Words a night row's verdict may carry that go at the start of the
 # night's commit title, as the website's HELD does (L-525). L-060: the El
 # Nino check says EL NINO DUE when NOAA has newer than the page shows.
-NIGHT_TITLE_FLAGS = ('EL NINO DUE',)
+# Each flag is read from its OWN row only (L-060, Nov 17): the El Nino
+# check suite's pass line names EL NINO DUE when it describes its test
+# cases, and the night of Nov 17 (c69b53b) took that for the flag.
+NIGHT_TITLE_FLAGS = (('El Nino check', 'EL NINO DUE'),)
 
 
 def night_title_flags(project_dir='.'):
     """The flags for tonight's commit title, read from the night's
     record (written on a clean night, before the commit step): each of
-    NIGHT_TITLE_FLAGS that a row's verdict carries, followed by a space;
-    '' when none does or the record cannot be read."""
+    NIGHT_TITLE_FLAGS whose own row's verdict carries it, followed by a
+    space; '' when none does or the record cannot be read. Another
+    row's words never raise a flag."""
     import json
     try:
         with open(os.path.join(project_dir, NIGHT_RECORD),
@@ -802,8 +806,10 @@ def night_title_flags(project_dir='.'):
             rows = json.load(handle).get('rows') or []
     except (OSError, ValueError):
         return ''
-    found = [flag for flag in NIGHT_TITLE_FLAGS
-             if any(flag in (row.get('verdict') or '') for row in rows)]
+    found = [flag for label, flag in NIGHT_TITLE_FLAGS
+             if any(row.get('row') == label
+                    and flag in (row.get('verdict') or '')
+                    for row in rows)]
     return ''.join(flag + ' ' for flag in found)
 
 
