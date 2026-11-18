@@ -133,7 +133,7 @@ Not urgent, in your order:
 
 **Tony**: Run record:
 
-**Session: OPEN: 11-16-26 0839: Opus: Coordinator: El Niño exhibit planning**
+**Session: DONE: 11-17-26 1245: Opus: Coordinator: El Niño exhibit planning**
 
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & 'C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe' 'c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L060_1_el_nino_page_20261116.py'
 ok L-060: the old Gap marked superseded
@@ -509,5 +509,5 @@ patch applied
 Do next:
   1. (do) Move this file into documentation\.
   2. (do) In GitHub Desktop (orrery): commit and push the ledger,
-     Where We Are and this file. Not while the night is running.
+     Where We Are and this file. Not while the night is running. -- d5a37e4605ad15ea05ce1dc21d8ffdc7cf6abcdb
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
