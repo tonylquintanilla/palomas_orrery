@@ -1,19 +1,19 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 17, 2026: El Nino's page live, and the night's flag fixed (coordinating session, Opus).
-- Written at orrery f8a12290 and gallery 20e13fd1, with this patch's edits on your disk.
+Last updated: November 18, 2026: El Nino's reel posted; the coordinating session of Nov 16 to 18 closed (Opus).
+- Written at orrery a84394e and gallery 20e13fd1, with this patch's edits on your disk.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - El Nino's page is live: the lobby's Featured card opens it, and the dashboard's Earth System group rebuilds it (L-060 (El Nino)).
-> - The night's "EL NINO DUE" title is fixed: it is read from the El Nino check's own row only. The night of Nov 17 said it by mistake; its row said CURRENT.
+> - El Nino's reel is on Instagram: made from the page's own words and pictures, every sentence checked against the page; Muse only posted it. The page is live in the lobby's Featured (L-060 (El Nino)).
+> - The night of Nov 17 had no "EL NINO DUE" in its title: the fix holds. It will say it when NOAA updates, expected 10 December.
 >
 > **Do next:** *ESCAPADE's path (L-533 (ESCAPADE)).*
 >
 > **Needs you now:**
-> - *(do) Your phone look at the live El Nino page (the list in today's chat). Tomorrow, the orrery's night title should not start with "EL NINO DUE"; if it does, tell the next session.*
+> - *(do) When the orrery's night title starts "EL NINO DUE": rebuild El Nino's page from the dashboard's Earth System group, read it on your phone, then push both.*
 > - *(do) Each morning, Fetch origin and Pull origin on both, orrery then website, before any work. If Pull origin shows up only once you have changes: Commit them first, then Pull origin, then Push origin. If Desktop stashes your changes anyway, restore them at once: Changes tab, Stashed Changes, Restore.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
 
@@ -49,9 +49,10 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
                L-423 (the website's checks) item 3; L-357 (stale gallery
                artifacts); L-509 (obsolete code), after its talk.
 
-## Settled
+## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings; a line leaves once it is habit, or a skill carries it.
+- A page's reel is made by the session from the page's own words and pictures, each sentence checked against the page; Muse adds only the Boost filter if needed, no music, and posts (Nov 17; L-060 (El Nino)).
 - El Nino's monthly update: the night checks NOAA and flags "EL NINO DUE"; you rebuild the page by hand; the night never changes a page. You no longer run the Daily Run routinely; you rely on the nightly (Nov 17; L-060 (El Nino)).
 - El Nino is a page like Sudan's, its chart the June design; one source of record, NOAA's Climate Prediction Center, its forecast NOAA's own chances on RONI; WMO and Australia's index left out (Nov 16; L-060 (El Nino)).
 - The drawer opens at the row its handle names, scrolled into view and highlighted; the opening names Earth ("Keep Earth") (Nov 16; L-535 (the period's reason)).
@@ -70,12 +71,8 @@ Waiting behind other work; a line leaves when picked up.
 - Step 2b's three leftovers: Io, Titan, Pluto and Charon have no words or i-panel link until the orrery keys them; Find misses a shell of Earth's by its own name until Earth's fold is first opened; a view centred on Jupiter is not in the shared link (Nov 10; L-515 (one nested tree)).
 - Three checks red in the drawer walk before Scenes was built, the page or the walk aged, the same three again Nov 15: a gallery session that next opens the drawer (Nov 9; L-521 (three red checks)).
 - The saved pictures' words, which have no source: kept as made until the braid reaches them (Nov 8; L-520 (old pictures carry old words)).
-- Charon's period is asked around Pluto's centre, not the barycentre;
-  fix it before Pluto's room (L-150 (trusting a near-equal pair), Nov 6).
-- When the road turned to the symbols (Nov 5): L-512 (fallbacks when
-  JPL cannot answer) slices b and c; L-484 (the two agree), its brief
-  and build; L-504 (the orrery's clock), the Earth System, stamps and
-  tools; L-510 part 2, the path plan asked from before any launch.
+- Charon's period is asked around Pluto's centre, not the barycentre; fix it before Pluto's room (L-150 (trusting a near-equal pair), Nov 6).
+- When the road turned to the symbols (Nov 5): L-512 (fallbacks when JPL cannot answer) slices b and c; L-484 (the two agree), its brief and build; L-504 (the orrery's clock), the Earth System, stamps and tools; L-510 part 2, the path plan asked from before any launch.
 - The other Earth System layers on the web, and South Sudan when IPC publishes (Nov 13; L-530 (the other layers on the web), L-070 (other countries)).
 - L-511 (the export carries the words): behind the check (Nov 3).
 - L-508 (a held body's alarm), L-485 (a nightly run): the website honours no orrery hold yet; the alarm's quiet half waits, its loud half built (L-525, Nov 11).
@@ -97,12 +94,14 @@ Read from files when this page was written, not typed from memory.
 - Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md, run of 20261117T142307Z on orrery 20a9c15, read Nov 17).
 - This page's date and the ledger's newest stamp: both Nov 17. Agree.
 
-## Waiting on you
+## Waiting on you  **>> UPDATED THIS SESSION**
 
 Decisions, one at a time:
 - None now.
 
 At the next design talk:
+- El Nino's step 5, its last sentence: name NOAA as the source of the open question, and say it is the swing on NOAA's index that is studied. Your words: "in today's political environment the hedge can read as ideological not just scientific" (Nov 17; L-060 (El Nino)).
+- A page on where the planet's extra heat goes, the ocean as a heat sink, El Nino's breathing in and out one step. Your words: "That may be a separate page" (Nov 18; L-531 (the Earth Science room)).
 - How obsolete code is treated, and when it goes (L-509 (obsolete
   code)); two cases now, the orrery's unused date function and its
   Pluto-centred view of the moons.

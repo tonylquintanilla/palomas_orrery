@@ -1056,7 +1056,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-191 | Display-text duplication across the shell modules | OPEN | 2.8 | 2026-10-22 |
 | ! | L-244 | Sweep for replicated conversion factors as a class [Fable candidate] | OPEN | 2.8 | 2026-08-25 |
 | ! | L-323 | A figure in prose needs a home (the Note is not a store) | OPEN | 2.8 | 2026-09-12 |
-| ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-11-17 |
+| ! | L-060 | ENSO Standalone Chart (Earth System track) | OPEN | 2.7 | 2026-11-18 |
 | ! | L-298 | Seeing the gap between what the orrery draws and what an exhibit serves | OPEN | 2.7 | 2026-09-07 |
 | ! | L-248 | The parsec-to-light-year factor is typed 36 times across the star pipeline | OPEN | 2.5 | 2026-08-25 |
 | ! | L-273 | A document indexer, so the README's document table stops being hand-maintained | OPEN | 2.5 | 2026-09-01 |
@@ -1182,7 +1182,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-528 | The orrery's Kepler solvers' start: E = pi for a stretched orbit, and no error when they do not converge (orrery; recorded, not built) | OPEN | -- | 2026-11-12 |
 | ! | L-529 | Guided encounters: the guide's way of telling, used for a flyby (gallery; an idea, for a design talk after Mars) | OPEN | -- | 2026-11-13 |
 | ! | L-530 | The other Earth System layers on Google Earth web (Earth System; recorded, not built) | OPEN | -- | 2026-11-13 |
-| ! | L-531 | The Earth Science room in the interactive site (website; recorded, not built) | OPEN | -- | 2026-11-13 |
+| ! | L-531 | The Earth Science room in the interactive site (website; recorded, not built) | OPEN | -- | 2026-11-18 |
 | ! | L-532 | A Code session away from the computer: where its work lives (method; recorded) | OPEN | -- | 2026-11-14 |
 | ! | L-533 | ESCAPADE, Blue and Gold, on their way to Mars (orrery + gallery; recorded, after the Mars build) | OPEN | -- | 2026-11-15 |
 | ! | L-534 | Missions by destination: a mission's row under each body it goes to (gallery + orrery; design round with L-529) | OPEN | -- | 2026-11-15 |
@@ -1654,7 +1654,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 earth_system_generator.py, earth_system_common.py, scenarios_*.
 
 #### [L-531] The Earth Science room in the interactive site (website; recorded, not built)
-<!-- L:531 status:OPEN upd:2026-11-13 section:A flag: rice: -->
+<!-- L:531 status:OPEN upd:2026-11-18 section:A flag: rice: -->
 - **Tony, 2026-11-13, 15:59:** "The Sudan map is a priority so should
   be shown regardless as a featured item. Then the new room migration,
   after Mars and the rest of the moons. We may interrupt again for
@@ -1683,6 +1683,14 @@ earth_system_generator.py, earth_system_common.py, scenarios_*.
   The galactic center illustration has no wave yet; it can join the
   stars. Tony, 16:17: "stars have two methods, the 3d plotly and 2d HR
   diagrams" -- the stars room's design talk decides how each is shown.
+- **An idea, Tony, 2026-11-18** (on El Nino's step 5, which draws La
+  Nina storing heat at depth and El Nino releasing it): "Our last
+  slide also suggests an overturning not just an oscillation. And a
+  heat sink." 08:24: "That may be a separate page." A page on where
+  the planet's extra heat goes, the ocean as the sink, El Nino's
+  breathing in and out one of its steps; the energy imbalance card
+  (energy_imbalance.py), which El Nino's step 5 links to, is its
+  nearest relative. For this room's design talk; not designed.
 **Gap:** a design talk after Mars and the rest of the moons.
 **Ref:** L-001, L-530; L-519 (Featured's rethink); L-060 (ENSO).
 
@@ -10948,7 +10956,7 @@ HANDOFF_food_insecurity_sdn_projections_20261112.md
 (the Earth Science room).
 
 #### [L-060] ENSO Standalone Chart (Earth System track)
-<!-- L:060 status:OPEN upd:2026-11-17 section:A flag: rice:3/3/75/2.5 -->
+<!-- L:060 status:OPEN upd:2026-11-18 section:A flag: rice:3/3/75/2.5 -->
 - **ENSO standalone gallery chart (design locked, build next session).** Earth
   System track, not the orrery refactor. Single-unit (deg C) chart leading with
   RONI so El Nino / La Nina state reads honestly in a warming climate; ONI as a
@@ -11198,10 +11206,46 @@ path (L-533).
   - The lesson: the suite tested the check's row alone, so it could
     not see one row's words landing in another's flag. A check needs
     an input shaped like the real night, every row together.
-**Gap (replaces the one above, 2026-11-17, close):** Tony's Mode 5
+**Gap (superseded below, 2026-11-17, close):** Tony's Mode 5
 look at the live page on his phone; the orrery's next night title
 must not start with EL NINO DUE while its El Nino check row says
 CURRENT. Then ESCAPADE's path (L-533).
+- **2026-11-17 and 18, THE REEL, AND STEP 5 AGAIN** (the coordinating
+  session, Claude Opus 5.5, from Tony's phone).
+  - The reel: Tony, 14:26, "you do the initial reel and then give it
+    to Muse to resize and filter and post"; 14:29, "No music and
+    only the Boost filter if we need it." The session built it from
+    the live page (gallery 20e13fd1): seven cards in the page's look,
+    1080 x 1920, every sentence, chart caption and source name checked
+    word for word against the page by the build, which stops on any
+    that is not there. Tony's readings: 21:41, the map full width (La
+    Nina's panel dropped, its key kept); 21:53 and 21:58, the intro
+    card the title alone in the body font, steps 2 and 4 without
+    their first sentence, step 5's second paragraph fading in. Draft
+    3, 63 seconds, posted through Muse, 23:10, with a caption whose
+    every figure is on the page; #ClimateCrisis and #GlobalWarming
+    left out, as the page leaves the question open. The card builder
+    was not kept; the method is above.
+  - The night of Nov 17 (95f9f7c) carried no EL NINO DUE in its
+    title: the fix of f8a1229 holds.
+  - STEP 5'S LAST SENTENCE, for a design talk. Tony, 22:52: "the
+    distinction between the slosh and the heating is hard to grasp.
+    The heating is what people see not the slosh." 23:12: "Most
+    people think of enso as a heating even more than as an
+    oscillation." 23:19: "in today's political environment the hedge
+    can read as ideological not just scientific". Claude's proposal,
+    not ruled: name NOAA as the source of the open question, and say
+    it is the swing on NOAA's index that is being studied, each half
+    re-read against NOAA Climate.gov, Has climate change already
+    affected ENSO? (2023), before it goes in.
+  - Tony, Nov 18, 08:22: "Our last slide also suggests an overturning
+    not just an oscillation. And a heat sink." 08:24: "That may be a
+    separate page." Recorded on L-531 (the Earth Science room).
+**Gap (replaces the one above, 2026-11-18):** step 5's last sentence at
+a design talk. Each month, when the night's title starts EL NINO DUE
+(NOAA's next update is expected 10 December 2026), Tony rebuilds the
+page from the dashboard, reads it on his phone, and pushes. Then
+ESCAPADE's path (L-533).
 **Ref:** ENSO_chart_spec.md v2 (design spec, this session); cross-ref L-001 (Food Insecurity, same Earth System track; the track's ruling of 2026-10-07); energy_imbalance.py (Phase 2 target).
 
 #### [L-070] Food Insecurity -- regional multi-country assembly (Sudan crisis shed)
