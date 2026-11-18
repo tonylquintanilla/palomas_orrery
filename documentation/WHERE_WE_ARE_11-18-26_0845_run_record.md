@@ -163,5 +163,5 @@ Do next:
   1. (do) Move this file into documentation\.
   2. (do) In GitHub Desktop (orrery): commit and push the ledger,
      Where We Are, this file and the next coordinator's prompt.
-     Not while the night is running.
+     Not while the night is running. -- 0d2b5ebe1bd823cce034ad4c3f01038a085e3aaa
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
