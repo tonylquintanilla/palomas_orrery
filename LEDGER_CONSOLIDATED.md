@@ -1184,7 +1184,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-530 | The other Earth System layers on Google Earth web (Earth System; recorded, not built) | OPEN | -- | 2026-11-13 |
 | ! | L-531 | The Earth Science room in the interactive site (website; recorded, not built) | OPEN | -- | 2026-11-18 |
 | ! | L-532 | A Code session away from the computer: where its work lives (method; recorded) | OPEN | -- | 2026-11-14 |
-| ! | L-533 | ESCAPADE, Blue and Gold, on their way to Mars (orrery + gallery; recorded, after the Mars build) | OPEN | -- | 2026-11-15 |
+| ! | L-533 | ESCAPADE, Blue and Gold, on their way to Mars (orrery + gallery; recorded, after the Mars build) | OPEN | -- | 2026-11-18 |
 | ! | L-534 | Missions by destination: a mission's row under each body it goes to (gallery + orrery; design round with L-529) | OPEN | -- | 2026-11-15 |
 | ! | L-536 | A moon's yearly change samples its wobble: the period's digits from many dates (orrery, the period fetch; recorded, for its own session) | OPEN | -- | 2026-11-15 |
 
@@ -1738,7 +1738,7 @@ go-ahead.
 final).
 
 #### [L-533] ESCAPADE, Blue and Gold, on their way to Mars (orrery + gallery; recorded, after the Mars build)
-<!-- L:533 status:OPEN upd:2026-11-15 section:A flag: rice: -->
+<!-- L:533 status:OPEN upd:2026-11-18 section:A flag: rice: -->
 - **Tony's find, 2026-11-14, 22:43**, in the coordinating session
   (Claude Opus 5.5, through the python_work door, on orrery c314fe1a and
   gallery d3e97b15): NASA's article of 2026-11-09,
@@ -1806,11 +1806,76 @@ final).
     reads as the Pluto-Charon barycentre: the build checks Blue can
     never be read as Pluto's centre.
   - JPL serves the Lagrange points as bodies: SEMB-L2 is 32, EM-L2 3012.
-**Gap:** the orrery's Code session, its brief written when it is next
-(after Tony's two looks close L-514): Blue and Gold keyed with JPL's
-names and IDs, NASA's words, a path plan each (the L2 loiter as an event,
-the Earth flybys, the Mars arrival); then the website's session, the two
-craft served and drawn in the Spacecraft group.
+- **Built 2026-11-18**, the Claude Code session (Claude Opus 5.5) through
+  the python_work door, on orrery 00c89ef0 and gallery 1d3090bc, from
+  Tony's prompt and `documentation/COORD_L533_escapade_path_brief_20261118.md`,
+  in three parts with a report and his go-ahead after each.
+  - CORRECTION, from the brief: EACH CRAFT MADE ONE POWERED EARTH FLYBY,
+    not two (NASA's article: the first at 5 a.m. EST on Nov 7, the
+    second two days later). The bullets above saying "the Earth
+    flybys" of each path meant the two craft's one each. And JPL's
+    Lookup by id (sstr=-9, sstr=-10) does find each craft by name; only
+    the search by "ESCAPADE" finds the stage alone.
+  - WHICH IS WHICH, from JPL's positions (neither NASA page says): Blue
+    flew past Earth first, 2026-11-07 10:01 TDB, 8,034 km from Earth's
+    centre (about 1,663 km up); Gold second, 2026-11-09 11:00 TDB, 7,383
+    km (about 1,012 km up). Gold arrives at Mars first, 2027-09-07 00:29
+    TDB; Blue second, 2027-09-09 00:29; each "stays" (JPL's data ends
+    three days later).
+  - MEASURED NEAR EARTH AND L2 (Part 1): each inside Earth's Hill sphere
+    92 or 93 days in three stretches, the June one with one nearest
+    approach (about 545,000 km) that the orbiter rule took for a flyby;
+    never within 490,000 km of L2 (Blue's nearest 506,542 km on
+    2026-03-02, Gold's 493,733 km on 03-05). No other planned craft
+    stays within 3 million km of Earth longer than 22 days (JUICE).
+  - THE LOITER RULE, Tony's ruling of Nov 18, "Approved, with one
+    tightening" ("A craft that leaves L2 gently must not get a loop pass
+    printed as a flyby"), and "the loiter ends at its flyby": 60 days or
+    more within twice Earth's Hill sphere is one event, kind "loiter", at
+    the Lagrange point nearer on most days (SEMB-L2, 32); a pass inside
+    it is its flyby only when the path leaves within 15 days after
+    (ESCAPADE's left 11 days after; the June loop passes 141 and 143
+    days before), and the loiter ends there; its passes of the Sun go
+    as a capture's (riding_passes). `path_plan.py`; `test_path_plan.py`
+    check 22, two planted faults, 39 of 39. No other plan changed (32
+    identical), RULE stays 2. Each plan now: loiter at SEMB-L2,
+    2025-11-14 to the flyby (Blue 359 days, Gold 361), the Earth flyby,
+    the Mars arrival; the June "flyby" and the two passes of the Sun
+    (2025-12-11/12, and an hour after each flyby) gone.
+  - WEBSITE: the two entries in `data/objects_config.json` (the mirror
+    fills description, link and plan), their rows after Europa
+    Clipper's, colours blue and gold (`presentation.py`), the box's
+    loiter line (`SolarSystemFigures.loiterLine`, L2 named in words only,
+    Tony's ruling of Nov 18; drawn at L-297), the -9 check in the
+    builder's offline suite (planted fault: an lstrip of '-' reads it
+    as Pluto-Charon). A throwaway copy fed the orrery's export: the
+    mirror passed, the hand build swapped first time, each positions
+    file 33 KB (Blue 421 points, Gold 422; the loiter's 359 and 361
+    daily points kept by the window's thinning), the website's run 48
+    of 49 (the red its stand-in pull), the walk 354 of 357 (three older
+    failures; section 40, Blue's box and companions, shown failing on a
+    page planted without the line).
+  - Words in `documentation/WORDS_L533_escapade_20261118.md`:
+    APPROVED, Nov 18, evening, "Approved, with two changes": the loiter
+    sentence starts at launch ("From its launch on 13 November 2025
+    until its flyby of Earth on 7 November 2026, ..."), the day read from
+    JPL's first position (`path_plan.first_position`, served as the
+    loiter's `launch`, copied by the mirror; check 22's third planted
+    fault, the figures check's and the mirror suite's); and the
+    description says the interaction "contributes to" the loss of the
+    atmosphere (NASA: "contributing to the planet's atmospheric loss").
+    "Kidney-bean" dropped (Tony, Nov 18: NASA's
+    phrase describes the loop in a frame turning with Earth, which no
+    room shows). horizons-orbital-mechanics 1.19 (v3.142).
+  - Not verified: the website's Daily Run after the orrery's push, the
+    live site, Tony's phone look.
+**Gap:** the orrery pushed, then the website's Daily Run green, then
+the website pushed, the same evening and
+not while a night runs; his phone look (both ticked from Spacecraft,
+their boxes, the flyby and the loiter seen with Go To Earth and Earth's
+frame zoom). The row under Mars (L-534) and the encounters (L-529)
+untouched; L2 drawn at L-297. One later item: a Mars arrival counts as
+an arrival only because JPL's data runs three days past orbit insertion.
 **Ref:** L-514 (the Mars room); L-529 (guided encounters); L-476 (paths
 by the plan); horizons-orbital-mechanics (a spacecraft path's plan, the
 orbiter rule for an arrival).

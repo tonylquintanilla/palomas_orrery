@@ -1403,7 +1403,28 @@ INFO = {
         'The asteroid\'s gravity will capture the spacecraft into orbit in late July\n' 
         '2029 and the two-year prime mission will begin in August. Psyche will\n' 
         'successively lower its orbit over the span of a year, eventually coming\n' 
-        'as close as 75-km from the asteroid\'s surface.', 
+        'as close as 75-km from the asteroid\'s surface.',
+
+        # L-533: JPL's data sheet for -9 and -10, revised Nov 10, 2026,
+        # read 2026-11-18. A placeholder until Tony's "Approved"
+        # (documentation/WORDS_L533_escapade_20261118.md).
+        'ESCAPADE-Blue': 'Horizons: -9. JPL: "BACKGROUND:\n'
+        'ESCAPADE-Blue ("Escape and Plasma Acceleration and Dynamics Explorers") is\n'
+        'one of two twin spacecraft launched by a Blue Origin New Glenn rocket on\n'
+        'November 13, 2025 @ 20:45 UTC from Cape Canaveral LC-36 (USA).\n\n'
+        'It was launched to Earth-Sun L2, to remain for a year collecting data\n'
+        'on space weather. A low-altitude perigee trans-Mars injection engine burn\n'
+        'in November of 2026 will send it to Mars with the goal of characterizing\n'
+        'space weather and ionospheric variability at Mars."',
+
+        'ESCAPADE-Gold': 'Horizons: -10. JPL: "BACKGROUND:\n'
+        'ESCAPADE-Gold ("Escape and Plasma Acceleration and Dynamics Explorers") is\n'
+        'one of two twin spacecraft launched by a Blue Origin New Glenn rocket on\n'
+        'November 13, 2025 @ 20:45 UTC from Cape Canaveral LC-36 (USA).\n\n'
+        'It was launched to Earth-Sun L2, to remain for a year collecting data\n'
+        'on space weather. A low-altitude perigee trans-Mars injection engine burn\n'
+        'in November of 2026 will send it to Mars with the goal of characterizing\n'
+        'space weather and ionospheric variability at Mars."',
 
         'OSIRIS REx': 
         'Horizons: -64. OSIRIS-REx is a NASA mission that collected samples from asteroid Bennu and returned to Earth.\n' 

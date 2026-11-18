@@ -90,6 +90,18 @@ WHAT IT CHECKS
          of its mission_end and its path_cutoff (made-up dates; Akatsuki's
          real cutoff is 2024-04-26), and the cutoff is among the plan's
          inputs only where set. Planted fault: the cutoff ignored.
+     22. The loiter (L-533, ESCAPADE's path): two made-up craft ride a
+         loop on Earth's far side for months. Craft F, as ESCAPADE did,
+         makes a powered flyby and leaves about 12 days later: its plan
+         is one loiter at SEMB-L2, ending at the flyby, and the flyby,
+         its loop's pass of Earth
+         and its passes of the Sun inside the loiter (the flyby's among
+         them) not events. Craft G leaves gently, 70 days after its
+         loop's pass of Earth: its plan is the loiter alone (Tony's
+         tightening of 2026-11-18). Each loiter begins at launch, the
+         day of JPL's first position. Three planted faults: no loiter
+         found, any pass inside a loiter taken for its flyby, and the
+         launch not read.
 
 RUN COMMAND
 
@@ -126,6 +138,10 @@ typed 'orbital', is planned because its e is 1.2, and Comet Closed, at
 Module updated: November 5, 2026 with Anthropic's Claude Opus 5.5
 (L-507, more voyages: check 20, passes of the Sun inside a capture, with
 two planted faults; check 21, a path's cutoff, with one.)
+Module updated: November 18, 2026 with Anthropic's Claude Opus 5.5
+(L-533, ESCAPADE's path: check 22, the loiter, with two planted faults;
+the made-up JPL answers for SEMB-L1 and SEMB-L2, and Earth can be made
+slightly eccentric for that check.)
 """
 
 import datetime
@@ -215,9 +231,42 @@ def circle(r_au, jd, phase=0.0, inc=0.0):
             vx, vy * math.cos(inc), vy * math.sin(inc)]
 
 
+# Check 22 (L-533): Earth made slightly eccentric for that check only,
+# farthest from the Sun at Craft F's flyby and nearest 500 days either
+# side, outside the days asked, so Earth has no nearest day to the Sun of
+# its own that a pass of the Sun could ride (riding_passes). On a circle
+# its distance from the Sun varies only by rounding, which makes nearest
+# days of its own at random.
+ECCENTRIC = {"on": False, "e": 0.0167, "period": 1000.0,
+             "aph": hc.calendar_jd("2025-07-10 07:29")}
+
+
+def earth_state(jd):
+    e = circle(CIRCLES["399"], jd, phase=0.9, inc=0.02)
+    if ECCENTRIC["on"]:
+        f = 1.0 + ECCENTRIC["e"] * math.cos(
+            2 * math.pi * (jd - ECCENTRIC["aph"]) / ECCENTRIC["period"])
+        e = [c * f for c in e[:3]] + e[3:]
+    return e
+
+
+def unit(v):
+    n = math.sqrt(sum(c * c for c in v))
+    return [c / n for c in v]
+
+
 def body_state(ident, jd):
     if ident == "10":
         return [0.0] * 6
+    if ident == "399":
+        return earth_state(jd)
+    if ident in ("31", "32"):
+        # JPL's SEMB-L1 and SEMB-L2, here 0.01 AU sunward and anti-sunward
+        # of Earth (about 1.5 million km, as they are).
+        e = earth_state(jd)
+        r = math.sqrt(sum(c * c for c in e[:3]))
+        k = 1.0 + (-0.01 if ident == "31" else 0.01) / r
+        return [c * k for c in e]
     if ident == "301":
         e = circle(1.0, jd)
         m = circle(0.00257, jd)        # a small circle, its own period
@@ -271,7 +320,63 @@ def orbiter_rel(o, jd):
             o["loop"] * math.pi / o["period"] * math.sin(ph))
 
 
+# Two made-up loiterers near Earth (check 22, L-533), each from
+# 2025-01-01. While loitering each rides on Earth's far side from the Sun,
+# so nearer L2 than L1 every day, between 0.9 and 2.6 million km from
+# Earth, drifting along Earth's path at 1.2 km/s; Earth's Hill sphere
+# here is about 1.5 million km, so a loiter stays within twice it.
+#   Craft F, as ESCAPADE did: its loop comes nearest Earth on day 60,
+#   900,000 km out, inside the Hill sphere (ESCAPADE's 2026-06-29), then
+#   makes a powered flyby on 2025-07-10 07:29, 8,000 km at 3 km/s, along
+#   a straight line, and leaves twice the Hill sphere about 12 days later
+#   (ESCAPADE's 11). From the Sun the flyby is a pass of the Sun.
+#   Craft G leaves gently: its loop comes nearest on day 110, then it
+#   drifts out at 15,000 km a day more, leaving twice the Hill sphere
+#   about 70 days after. That nearest approach is a loop, not a flyby.
+LOITER_T0 = hc.calendar_jd("2025-01-01 00:00")
+LOITER_TF = hc.calendar_jd("2025-07-10 07:29")
+LOITERERS = {"-906": {"pass": 60.0, "drift": 0.0, "flyby": LOITER_TF},
+             "-907": {"pass": 110.0, "drift": 15000.0, "flyby": None}}
+LOITER_B_KM, LOITER_V, LOITER_VT = 8000.0, 3.0, 1.2
+LIMITS["-906"] = ("2025-01-01 00:00", "2025-09-01 00:00", "Craft F")
+LIMITS["-907"] = ("2025-01-01 00:00", "2025-09-01 00:00", "Craft G")
+
+LIST_LOITER = """from datetime import datetime
+OBJECT_DEFINITIONS = [
+    {'name': 'Craft F', 'key': 'craft_f', 'id': '-906', 'id_type': 'id',
+     'object_type': 'trajectory', 'start_date': datetime(2025, 1, 1)},
+    {'name': 'Craft G', 'key': 'craft_g', 'id': '-907', 'id_type': 'id',
+     'object_type': 'trajectory', 'start_date': datetime(2025, 1, 1)},
+]
+"""
+
+
+def loiter_state(ident, jd):
+    o = LOITERERS[ident]
+    e = earth_state(jd)
+    if o["flyby"] is not None and jd >= o["flyby"] - 10.0:
+        ef = earth_state(o["flyby"])
+        u, w = unit(ef[:3]), unit(ef[3:])
+        s, vd = jd - o["flyby"], LOITER_V * DAY
+        rel = ([(LOITER_B_KM * u[i] + vd * s * w[i]) / AU for i in range(3)]
+               + [vd * w[i] / AU for i in range(3)])
+    else:
+        t = jd - LOITER_T0
+        th = 2 * math.pi * (t - o["pass"]) / 240.0
+        d = 1.75e6 - 0.85e6 * math.cos(th)
+        dd = 0.85e6 * (2 * math.pi / 240.0) * math.sin(th)
+        if t > o["pass"]:
+            d, dd = d + o["drift"] * (t - o["pass"]), dd + o["drift"]
+        u, w = unit(e[:3]), unit(e[3:])
+        vt = LOITER_VT * DAY
+        rel = ([d * u[i] / AU for i in range(3)]
+               + [(dd * u[i] + vt * w[i]) / AU for i in range(3)])
+    return [e[i] + rel[i] for i in range(6)]
+
+
 def craft_state(ident, jd):
+    if ident in LOITERERS:
+        return loiter_state(ident, jd)
     if ident in ORBITERS:
         o = ORBITERS[ident]
         base = body_state("499", jd)
@@ -905,6 +1010,84 @@ def cutoff_stop(plant=False):
     return True, "2025-07-23 for a cutoff before the end, the end alone "                  "otherwise, FAR_STOP for neither"
 
 
+def loiters(plant=None):
+    """(ok, why): check 22 (L-533). Craft F and Craft G, made-up
+    loiterers. F's plan is its loiter at SEMB-L2, from its first day to
+    its flyby (Tony, 2026-11-18: "the loiter ends at its flyby"), drawn
+    daily, and its flyby of Earth at its minute: its loop's nearest approach to Earth
+    (day 60) and its passes of the Sun inside the loiter, the flyby's
+    among them, are not events. G's is its loiter alone: its loop's
+    nearest approach, inside Earth's Hill sphere 70 days before it
+    leaves, is not a flyby (Tony's tightening of 2026-11-18). plant
+    'off' finds no loiter (the rule as it was); 'loose' lets any pass
+    inside a loiter be its flyby; 'nolaunch' leaves out the launch, JPL's
+    first position (both loiters begin on their path's first day)."""
+    root = make_root(LIST_LOITER)
+    saved = (pp.LOITER_MIN_DAYS, pp.LOITER_FLYBY_DAYS, pp.first_position)
+    ECCENTRIC["on"] = True
+    try:
+        if plant == "off":
+            pp.LOITER_MIN_DAYS = 10 ** 6
+        if plant == "loose":
+            pp.LOITER_FLYBY_DAYS = 10 ** 6
+        if plant == "nolaunch":
+            pp.first_position = lambda fetch, path, day, pause: None
+        _, _, out = pp.run(root, FakeJPL(), datetime.date(2026, 10, 24),
+                           pause=0.0)
+        plans, probs = out["plans"], []
+        evs = dict((k, (plans.get(k) or {}).get("events", []))
+                   for k in ("craft_f", "craft_g"))
+        names = dict((k, [(e["kind"], e["body"]) for e in v])
+                     for k, v in evs.items())
+        if names["craft_f"] != [("loiter", "SEMB-L2"), ("flyby", "Earth")]:
+            probs.append("Craft F: %s" % names["craft_f"])
+        else:
+            lo, fly = evs["craft_f"]
+            gap = hc.calendar_jd(lo["left"]) - LOITER_TF
+            if (lo["start"] != "2025-01-01 00:00" or lo["stays"]
+                    or lo["end"] != pp.jd_to_calendar(LOITER_TF)
+                    or lo["body_id"] != "32" or lo["step"] != "1d"
+                    or lo["window"] != [lo["start"], lo["end"]]
+                    or not 10.0 <= gap <= 14.0
+                    or lo["days"] != int(LOITER_TF - LOITER_T0) + 1
+                    or lo["nearer_days"] != lo["days"]
+                    or (lo.get("launch") or "")[:10] != "2025-01-01"):
+                probs.append("Craft F's loiter: %s to %s (left %s), %s "
+                             "days, nearer %s, stays %s, step %s, launch %s"
+                             % (lo["start"], lo["end"], lo["left"],
+                                lo["days"], lo["nearer_days"], lo["stays"],
+                                lo["step"], lo.get("launch")))
+            if (fly["closest"] != pp.jd_to_calendar(LOITER_TF)
+                    or abs(fly["dist_km"] - LOITER_B_KM) > 8.0
+                    or abs(fly["v_kms"] - LOITER_V) > 3e-3):
+                probs.append("Craft F's flyby: %s, %s km, %s km/s" % (
+                    fly["closest"], fly["dist_km"], fly["v_kms"]))
+        if names["craft_g"] != [("loiter", "SEMB-L2")]:
+            probs.append("Craft G: %s" % names["craft_g"])
+        elif (evs["craft_g"][0]["stays"]
+              or evs["craft_g"][0]["end"] != evs["craft_g"][0]["left"]
+              or (evs["craft_g"][0].get("launch") or "")[:10]
+              != "2025-01-01"):
+            probs.append("Craft G's loiter: stays %s, ends %s, left %s, "
+                         "launch %s" % (
+                             evs["craft_g"][0]["stays"],
+                             evs["craft_g"][0]["end"],
+                             evs["craft_g"][0]["left"],
+                             evs["craft_g"][0].get("launch")))
+        return not probs, "; ".join(probs) or (
+            "Craft F: loiter %s to its flyby %s, %d days; Craft G: "
+            "loiter %s to %s, no flyby" % (
+                evs["craft_f"][0]["start"][:10],
+                evs["craft_f"][0]["end"],
+                evs["craft_f"][0]["days"],
+                evs["craft_g"][0]["start"][:10],
+                evs["craft_g"][0]["end"][:10]))
+    finally:
+        pp.LOITER_MIN_DAYS, pp.LOITER_FLYBY_DAYS, pp.first_position = saved
+        ECCENTRIC["on"] = False
+        shutil.rmtree(root, ignore_errors=True)
+
+
 def no_typed_ends(plant=False):
     """(ok, why): the real list's planned paths carry no end_date
     (L-476). Planted fault: one put back on Voyager 1."""
@@ -1007,6 +1190,18 @@ def main():
               "its path_cutoff (%s)" % why)
     check(not cutoff_stop(plant=True)[0],
           "21. planted fault caught: the cutoff ignored")
+    ok, why = loiters()
+    check(ok, "22. a loiter near Earth is one event at its Lagrange point; "
+              "inside it a pass of Earth is a flyby only when the path "
+              "leaves within %d days after it, the loiter ending there, "
+              "and no pass of the Sun is an event (%s)" % (pp.LOITER_FLYBY_DAYS, why))
+    for name, plant in (("no loiter found (the rule as it was)", "off"),
+                        ("any pass inside a loiter taken for its flyby",
+                         "loose"),
+                        ("the launch not read from JPL's first position",
+                         "nolaunch")):
+        check(not loiters(plant=plant)[0],
+              "22. planted fault caught: %s" % name)
     for name, plant in (("the backbone's step set to nothing",
                          plant_no_backbone),
                         ("the fine pass skipped", plant_no_fine_pass)):

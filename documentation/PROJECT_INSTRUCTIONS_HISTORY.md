@@ -4883,6 +4883,49 @@ resident.
 (Moved down from the resident protocol on 2026-11-14, when
 v3.141 made a fourth entry.)
 
+v3.139 (November 11, 2026, night): No rule changed in this document.
+ONE skill bump: gallery-cache-builder 1.18 -> 1.19 (L-525, hold the bad
+data), by the records skill's binding rule, Tony's go-ahead of Nov 11
+("Yes, all four": the builder skill, the skills index, one protocol
+version entry and the nightly job's file). ONE BODY'S FAILED TEST HOLDS
+THAT BODY, NOT THE SITE.
+
+WHAT PROMPTED IT. The Claude Code session of Nov 11 (Claude Opus 5.5),
+through the python_work door, built on orrery 02183e4d and gallery
+173d397a, from Tony's prompt and
+documentation/COORD_L525_hold_brief_20261111.md, in three parts with a
+report and his go-ahead after each, with the coordinator's two changes
+of that evening: a moon is not held for a test number over the limit,
+and more than five held is a failed build.
+
+WHAT CHANGED. gallery-cache-builder: a new section, A Body That Fails
+Its Test Is Held. A Sun-centred body whose accuracy test is more than
+0.5 degrees from JPL, or cannot be made, and any body JPL does not
+answer, is served from its last good build with a hold block, copied
+forward swap after swap, and leaves the site's window to the bodies
+that passed; the night's commit title starts "HELD <name>", the Daily
+Run prints the same line, and "HOLD ENDED" the run a hold ends; more
+than five held is a failed build, no swap. Riding it: the Validation
+stance's new abort, Layer 1's count, and a field note that said the
+page reads no served data, removed as wrong. Three passages of history
+moved to documentation/SKILL_HISTORIES.md with the oldest of four
+version entries (1.16), so the skill stays at its cap of 944 lines.
+
+THE OBLIGATION TRAVELS. This session read gallery-cache-builder 1.18
+from the repo's copy, as a Code session does, as the manifest expected.
+Tony reinstalls it (Settings > Skills) and pastes this version into the
+Project's instructions on claude.ai; the next session that loads it
+from the account confirms its copy reads 1.19 before builder work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.136 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
+(Moved down from the resident protocol on 2026-11-18, when
+v3.142 made a fourth entry.)
+
 ================================================================
 PART 2 -- LESSONS REMOVED FROM THE PROTOCOL AT v3.37
 ================================================================

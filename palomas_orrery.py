@@ -3466,6 +3466,9 @@ europa_clipper_var = tk.IntVar(value=0)
 
 psyche_var = tk.IntVar(value=0)
 
+escapade_blue_var = tk.IntVar(value=0)   # L-533
+escapade_gold_var = tk.IntVar(value=0)   # L-533
+
 osiris_rex_var = tk.IntVar(value=0)
 osiris_apex_var = tk.IntVar(value=0)
 
@@ -10163,6 +10166,8 @@ create_mission_checkbutton("JUICE", juice_var, path_drawing.span_label('juice'))
 create_mission_checkbutton("OSIRIS APEX", osiris_apex_var, path_drawing.span_label('osiris_apex'))
 create_mission_checkbutton("Psyche", psyche_var, path_drawing.span_label('psyche_spacecraft'))
 create_mission_checkbutton("Europa-Clipper", europa_clipper_var, path_drawing.span_label('europa_clipper'))
+create_mission_checkbutton("ESCAPADE-Blue", escapade_blue_var, path_drawing.span_label('escapade_blue'))
+create_mission_checkbutton("ESCAPADE-Gold", escapade_gold_var, path_drawing.span_label('escapade_gold'))
 create_mission_checkbutton("Artemis II", artemis2_var, "(2026-04-02 2:00 to 2026-04-11)")
 
 # Checkbuttons for comets

@@ -1,16 +1,16 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 18, 2026: El Nino's reel posted; the coordinating session of Nov 16 to 18 closed (Opus).
-- Written at orrery a84394e and gallery 20e13fd1, with this patch's edits on your disk.
+Last updated: November 18, 2026, evening: ESCAPADE's path built and its words approved, waiting on your pushes (Opus).
+- Written at orrery 00c89ef0 and gallery 1d3090bc, with this session's edits on your disk.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - El Nino's reel is on Instagram: made from the page's own words and pictures, every sentence checked against the page; Muse only posted it. The page is live in the lobby's Featured (L-060 (El Nino)).
-> - The night of Nov 17 had no "EL NINO DUE" in its title: the fix holds. It will say it when NOAA updates, expected 10 December.
+> - ESCAPADE's twins are drawn by their plans: each a loiter near L2 to its flyby of Earth, the flyby, and its arrival at Mars, NASA's list; the plan's false June flyby and its passes of the Sun are gone (L-533 (ESCAPADE)).
+> - The website half is built and tested in a copy: both craft in Spacecraft, the box naming L2 in words only, and a check that Blue's -9 is never read as Pluto's centre.
 >
-> **Do next:** *ESCAPADE's path (L-533 (ESCAPADE)).*
+> **Do next:** *Push the orrery, run the website's Daily Run, push the website, the same evening; then your phone look (L-533 (ESCAPADE)). The words are approved.*
 >
 > **Needs you now:**
 > - *(do) When the orrery's night title starts "EL NINO DUE": rebuild El Nino's page from the dashboard's Earth System group, read it on your phone, then push both.*
@@ -29,8 +29,8 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
                the quick wins with L-423 (the website's checks), and the
                Moon's standards (L-513, closed).
  15.   [NOW]   *Mars (L-514 (the Mars room)) closed Nov 15. El Nino's
-               page (L-060 (El Nino)) live Nov 17; next,
-               ESCAPADE's path (L-533), the Lagrange points (L-297), the
+               page (L-060 (El Nino)) live Nov 17; ESCAPADE's path (L-533)
+               built Nov 18, your look next; the Lagrange points (L-297), the
                destinations and encounters talk (L-534, L-529), then Uranus
                and Neptune. Io, Titan, Charon and Pluto come to standard in their folds.* << moved this session
  16.   [later] Earth's fold: the Earth-Moon barycentre, SOHO, Gaia, James Webb, Artemis II.
@@ -52,6 +52,7 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
 ## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings; a line leaves once it is habit, or a skill carries it.
+- A craft riding near a Lagrange point for 60 days or more is one event, a loiter, ending at its flyby; a pass inside it is a flyby only when the craft leaves within 15 days (Nov 18; L-533 (ESCAPADE); horizons-orbital-mechanics 1.19).
 - A page's reel is made by the session from the page's own words and pictures, each sentence checked against the page; Muse adds only the Boost filter if needed, no music, and posts (Nov 17; L-060 (El Nino)).
 - El Nino's monthly update: the night checks NOAA and flags "EL NINO DUE"; you rebuild the page by hand; the night never changes a page. You no longer run the Daily Run routinely; you rely on the nightly (Nov 17; L-060 (El Nino)).
 - El Nino is a page like Sudan's, its chart the June design; one source of record, NOAA's Climate Prediction Center, its forecast NOAA's own chances on RONI; WMO and Australia's index left out (Nov 16; L-060 (El Nino)).
@@ -87,14 +88,14 @@ Waiting behind other work; a line leaves when picked up.
 - L-490 (the legacy list); L-499 (kinds of session); L-471 (a delivered
   patch is final), for safe-file-editing's next version.
 
-## Signals
+## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261115T185038Z, ok, no retry on the swap (your local gallery's swap log at f9f81266, read Nov 17).
-- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md, run of 20261117T142307Z on orrery 20a9c15, read Nov 17).
-- This page's date and the ledger's newest stamp: both Nov 17. Agree.
+- Last cache build: 20261118T171805Z, ok, no retry on the swap (your local gallery's swap log at 1d3090bc, read Nov 18).
+- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md, run of 20261118T210633Z on orrery 00c89ef, read Nov 18).
+- This page's date and the ledger's newest stamp: both Nov 18. Agree.
 
-## Waiting on you  **>> UPDATED THIS SESSION**
+## Waiting on you
 
 Decisions, one at a time:
 - None now.
@@ -121,7 +122,7 @@ Not urgent, in your order:
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
 - El Nino: L-060 (El Nino); `enso_page_generator.py` (the page, and the night's check), its suite `test_enso_night_check.py`, the brief `COORD_L060_el_nino_page_brief_20261116.md`.
-- The handoff: `HANDOFF_website_coordination_20261116.md`. This session: L-535 (the period's reason), closed, from `COORD_L535_period_digits_brief_20261115.md`, your four additions and the drawer ruling; the website's `INTERACTIVE_AS_BUILT.md`, under Center on and the drawer.
+- This session: L-533 (ESCAPADE), its brief `COORD_L533_escapade_path_brief_20261118.md`, the words `WORDS_L533_escapade_20261118.md`; the coordinating handoff `HANDOFF_website_coordination_20261116.md`.
 - The caps: `DOCUMENT_CAPS.md`; L-522 (document caps); that track's
   handoff, `HANDOFF_document_upkeep_20261116.md` (Nov 16).
 - The tree: L-515 (one nested tree), its briefs `COORD_L515_*`.

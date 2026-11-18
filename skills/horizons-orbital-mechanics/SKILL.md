@@ -1,14 +1,22 @@
 ---
 name: horizons-orbital-mechanics
 description: JPL Horizons API and orbital mechanics reference for the Paloma's Orrery project (astroquery Horizons queries, orbit_data_manager, osculating_cache_manager, idealized_orbits, apsidal_markers, spacecraft_encounters, close_approach_data, position_accuracy, orbital_period, period_fetch, path_plan, path_or_orbit). Use for any Paloma's Orrery task involving Horizons queries or ephemerides, coordinate center bodies, reference frames, osculating elements, orbit caches, a small body's position uncertainty (VEC_TABLE 2xr), orbital periods and the centre they are taken around, the drawn orbit and its markers' dates, which Horizons record serves a body (helio_id, a pinned comet record, a skip list), encounter or flyby resolution, or whenever a rendered orbit looks wrong or an ephemeris API returns empty. Do not use for projects other than Paloma's Orrery.
-fires_when: Horizons queries, centers, frames, osculating elements, encounters, comet record pinning, 2xr uncertainties, periods, the drawn orbit's centre, the Horizons check (horizons_check.py, its period comparison and the data sheets' re-read), the period fetch before it (period_fetch.py), which record serves a body (helio_id, re-pinning a comet, JPL's exact name, a body on a skip list), a spacecraft path's plan and its flybys (path_plan.py -- the Hill sphere, JPL's GM, the window and step, the orbiter rule for an arrival, a departure, a capture), a comet whose designation matches its own pieces, a comet on an open path's plan (its span, its TP, its perihelion), an entry asked by JPL's number in the Horizons check, the clock read as UTC (utc_clock), astroquery's saved answers (cache=), a 2xr answer with no figure (n.a.), Pluto's period asked of its barycentre, an ended mission's mission_end (its path stopped on the day it ended; the agency's own page; a craft that flew on and its end_note; an end after JPL's data), a capture's passes of the Sun (riding_passes), the orrery's drawing of a path by its plan (path_drawing.py, only around the Sun), a small body drawn as a path or an orbit by its database e (path_or_orbit.py, data/small_body_solutions.json)
+fires_when: Horizons queries, centers, frames, osculating elements, encounters, comet record pinning, 2xr uncertainties, periods, the drawn orbit's centre, the Horizons check (horizons_check.py, its period comparison and the data sheets' re-read), the period fetch before it (period_fetch.py), which record serves a body (helio_id, re-pinning a comet, JPL's exact name, a body on a skip list), a spacecraft path's plan and its flybys (path_plan.py -- the Hill sphere, JPL's GM, the window and step, the orbiter rule for an arrival, a departure, a capture), a comet whose designation matches its own pieces, a comet on an open path's plan (its span, its TP, its perihelion), an entry asked by JPL's number in the Horizons check, the clock read as UTC (utc_clock), astroquery's saved answers (cache=), a 2xr answer with no figure (n.a.), Pluto's period asked of its barycentre, an ended mission's mission_end (its path stopped on the day it ended; the agency's own page; a craft that flew on and its end_note; an end after JPL's data), a capture's passes of the Sun (riding_passes), a loiter near a Lagrange point (ESCAPADE's), the orrery's drawing of a path by its plan (path_drawing.py, only around the Sun), a small body drawn as a path or an orbit by its database e (path_or_orbit.py, data/small_body_solutions.json)
 ---
 
 # Horizons and Orbital Mechanics Reference
 
-Read this file in 5 parts: lines 1-225, 226-483, 484-603, 604-842, 843-904.
+Read this file in 5 parts: lines 1-221, 222-479, 480-599, 600-842, 843-904.
 
-Skill version: 1.18 | 2026-11-05, with Anthropic's Claude Opus 5.5, at
+Skill version: 1.19 | 2026-11-18, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ 00c89ef0 and gallery @ 1d3090bc. v1.19 (L-533,
+ESCAPADE's path) adds THE LOITER under How a Path's Events Are Found,
+Tony's ruling of 2026-11-18 with his tightening: months within twice
+Earth's Hill sphere are one event at a Lagrange point, ending at the
+flyby that ends them; inside, a pass of Earth is that flyby only when
+the path leaves within 15 days. Read from path_plan.py and ESCAPADE's
+plans made that day before it was written.
+Earlier: 1.18 | 2026-11-05, with Anthropic's Claude Opus 5.5, at
 palomas_orrery @ fb0a8dce and gallery @ 3660993e. v1.18 (L-507, more
 voyages, with L-510's carried sentence). An Ended Mission Ends on Its
 mission_end takes the AGENCY'S own page (NASA, ESA, JAXA), and gains
@@ -37,24 +45,12 @@ are five. Under Query Mechanics: every astroquery call in the repository
 now asks fresh, checked on Python's parser (test_orbit_cache.
 TestFreshCalls), where nine had not. Read from the code at 79018c0c and
 the session's own edits before it was written.
-Earlier: 1.16 | 2026-11-04, with Anthropic's Claude Opus 5.5, at
-palomas_orrery @ eab623f5 and gallery @ 5abca2c6. v1.16 (L-510, part 1)
-adds A Small Body Is Drawn by Its Database e: a small body is drawn as a
-path when its orbit solution's e in JPL's Small-Body Database is at or
-above 1, and as an orbit below it (path_or_orbit.py), the e refreshed by
-the period fetch every 30 days; the typed object_type and the retired
-open_path no longer decide it (Tony, 2026-11-04: "Use the e that JPL
-classes by"). A Comet on an Open Path is chosen so, and piece C of
-C/2025 K1 is an orbit since. And the sentence carried on L-485: the
-orrery's drawing of a plan keeps the website's daily tail and leaves out
-only its last-day pair. Read from the code built that day and JPL's
-answers of 2026-11-04 before it was written.
 Older entries are in documentation/SKILL_HISTORIES.md, moved there on
 2026-10-12, 2026-10-13 and 2026-10-14 (L-431), 2026-10-15 (L-444,
 L-445), 2026-10-22 (L-443), 2026-10-24 (L-443), 2026-10-25 (L-443),
 2026-10-26 (L-443), 2026-10-29 (L-504), 2026-11-02 (L-507), 2026-11-03
-(L-476), 2026-11-04 (L-510) and 2026-11-04 (L-512) and 2026-11-05
-(L-507).
+(L-476), 2026-11-04 (L-510), 2026-11-04 (L-512), 2026-11-05 (L-507)
+and 2026-11-18 (L-533).
 
 ## Contents
 
@@ -687,6 +683,17 @@ first run against JPL is Tony's.
   removes (BepiColombo's was the only pass inside any capture), so RULE
   stays 2 and no plan was made again for it. `test_path_plan.py` check
   20, with two planted faults.
+- THE LOITER (v1.19, L-533; Tony, 2026-11-18). A Lagrange point has no
+  mass, so the orbiter rule cannot see a craft riding near one (ESCAPADE
+  near L2: a false flyby of Earth, and passes of the Sun). 60 days or
+  more within twice Earth's Hill sphere (about 3 million km) is a
+  LOITER, one event named for the point nearer on most days (JPL's
+  SEMB-L1, 31, or SEMB-L2, 32): closest its nearest day to it, window
+  its days at a 1-day step. Inside it a pass of Earth is the FLYBY only
+  when the path leaves within 15 days after it, and the loiter ends
+  there; ESCAPADE's left 11 days after. Its passes of the Sun go as a
+  capture's. No other planned craft stays 23 days, so RULE stayed 2.
+  `test_path_plan.py` check 22, two planted faults.
 - THE RULE IS AMONG A PLAN'S INPUTS (`RULE`, now 2), so a plan made by
   an older rule is made again at once, like one whose id or span
   changed.
@@ -745,13 +752,9 @@ first run against JPL is Tony's.
   where set, and `cutoff_note` likewise; the website's mirror copies all
   three (export_objects.py, tools/mirror_objects.py). `mission_end` is among the
   plan's inputs ONLY where it is set, so no plan of a mission still
-  flying changes its fingerprint and is made again. Galileo and Cassini
-  (2017-09-15, JPL's last day the same) were the first, planned
-  2026-11-03: Galileo flies past Venus (1990-02-10) and Earth twice
-  (1990-12-08, 1992-12-08) and arrives at Jupiter (1995-12-07), staying;
-  Cassini flies past Venus twice, Earth (1999-08-18) and Jupiter
-  (2000-12-30, 9.8 million km) and arrives at Saturn (2004-07-01),
-  staying. `test_path_plan.py` check 18, with a planted fault.
+  flying changes its fingerprint and is made again (Galileo's and
+  Cassini's first plans: SKILL_HISTORIES.md). `test_path_plan.py` check
+  18, with a planted fault.
 - A PLAN DRAWS A PATH ONLY AROUND THE SUN (v1.15, L-476; Tony,
   2026-11-03, 12:06 Chicago: "yes and the orrery and the website should
   both follow this"). A backbone at 7 days thinned at 0.02 AU is worked
@@ -780,12 +783,9 @@ first run against JPL is Tony's.
   suits any JPL run that can take minutes.
 - KEYING. A key in the objects export with no website entry stops the
   website's objects mirror, and with it the Daily Run's pulls. So a
-  spacecraft is keyed in the same round as its website entry. The twelve
-  were keyed on 2026-10-25 (orrery patch_L443_13), and the temporary
-  --preview flag that planned them by name before then went with it;
-  that patch carried each preview plan made by the orbiter rule into
-  data/path_plans.json under its new key, so no second half-hour run was
-  needed. A spacecraft serves no orbital period in the export.
+  spacecraft is keyed in the same round as its website entry (the
+  twelve's keying of 2026-10-25: SKILL_HISTORIES.md). A spacecraft serves
+  no orbital period in the export.
 - ON THE WEBSITE the builder thins each event's window at the event's
   own scale, a point kept where the path bends away from the chord by
   more than 1% of the passing distance (gallery-cache-builder, A

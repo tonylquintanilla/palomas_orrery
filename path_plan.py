@@ -58,8 +58,9 @@ WHAT A PLAN IS
                 backbone gives, with the body, the moment, the distance
                 and the speed, and the window and step to fetch around it;
                 and its kind, by the orbiter rule below: flyby, arrival
-                (stays true when it never leaves), departure, or
-                perihelion (a pass of the Sun).
+                (stays true when it never leaves), departure,
+                perihelion (a pass of the Sun), or loiter (months spent
+                near a Lagrange point, L-533).
       searched  every body whose nearest approaches were looked for.
       made      the day the plan was made.
 
@@ -126,6 +127,23 @@ HOW AN EVENT IS FOUND
     one arrival (the preview of 2026-10-24). The rule a plan was made by
     is among its inputs (RULE), so a plan made by an older rule is made
     again.
+
+    THE LOITER (Tony's ruling of 2026-11-18, L-533, ESCAPADE's path). A
+    stretch of 60 days or more in which a path stays within twice Earth's
+    Hill sphere (about 3 million km) is a LOITER, one event named for the
+    Lagrange point the path is nearer on most of those days, JPL's
+    SEMB-L1 (31) or SEMB-L2 (32), asked daily over them. Its closest is
+    its nearest day to that point. It ends at its flyby, where it has one
+    (Tony, 2026-11-18), else on the last of those days; its window runs
+    to its end at a 1-day step, since the loop lies within the backbone's
+    0.02 AU of Earth's own path and would be thinned away. Inside it the
+    path rides with Earth, as in a capture: its nearest approaches to
+    Earth are its loops, and one is its FLYBY only where the path leaves
+    twice the Hill sphere within 15 days after it (Tony's tightening: "A
+    craft that leaves L2 gently must not get a loop pass printed as a
+    flyby"); ESCAPADE's twins left 11 days after theirs. Its passes of the Sun are dropped as a capture's are
+    (riding_passes). No other planned path stays near Earth longer than
+    22 days, so the rule made no other plan again and RULE stays 2.
 
     A candidate is then found exactly in two passes, the orrery's
     resolve_encounter_time numbers: hourly for a day and a half either
@@ -230,6 +248,9 @@ Module updated: November 4, 2026 with Anthropic's Claude Opus 5.5
 path_or_orbit.drawn_as_path, no longer by the list's retired 'open_path';
 a keyed small body with no database e stops the run by name, FAIL, with
 every plan kept as it was.)
+Module updated: November 18, 2026 with Anthropic's Claude Opus 5.5
+(L-533, ESCAPADE's path: the loiter, a new kind of event, by Tony's
+ruling of that day; see HOW AN EVENT IS FOUND.)
 """
 
 import ast
@@ -258,7 +279,7 @@ SCHEMA = 1
 RULE = 2
 # How a run's lines name each kind of event.
 WORD = {"flyby": "flyby", "arrival": "arrival", "departure": "departure",
-        "perihelion": "pass of the Sun"}
+        "perihelion": "pass of the Sun", "loiter": "loiter"}   # L-533
 CADENCE_DAYS = 30
 KEEP_PAST_DAYS = 30        # events older than this are carried, not re-found
 OVERLAP_DAYS = 3           # the re-search starts this much before them
@@ -743,6 +764,157 @@ def riding_passes(near, held):
     return kept, dropped
 
 
+# L-533 (ESCAPADE's path): THE LOITER, Tony's ruling of 2026-11-18
+# ("Approved, with one tightening"). ESCAPADE's twins rode a loop around
+# the Sun-Earth L2 point for a year after launch, in what NASA calls a
+# "loiter" orbit, then made one powered flyby of Earth each
+# and left for Mars. A Lagrange point has no mass, so the orbiter rule
+# alone cannot see it: it took the loop's near side for a flyby of Earth
+# (2026-06-29 and 06-30) and the loop seen from the Sun for passes of
+# the Sun (2025-12-11 and 12, and an hour after each flyby).
+LOITER_BODY = "399"            # Earth: the loiters drawn are near it
+LOITER_HILL_RADII = 2.0        # within twice its Hill sphere (about
+                               # 3 million km)
+LOITER_MIN_DAYS = 60           # for 60 days or more; ESCAPADE's are 370
+                               # and 372 days, and no other planned craft
+                               # stays 23 (JUICE, 22, 2024-08)
+LOITER_FLYBY_DAYS = 15         # a pass inside a loiter is its flyby only
+                               # when the path leaves twice the Hill
+                               # sphere within this many days after it;
+                               # ESCAPADE's left 11 days after each flyby
+LOITER_STEP = "1d"             # the loop lies within 0.02 AU of Earth's
+                               # own path, so the backbone's thinning
+                               # would draw Earth's orbit in its place
+LAGRANGE_POINTS = (("SEMB-L1", "31"), ("SEMB-L2", "32"))   # JPL's ids,
+                               # the Sun and the Earth-Moon barycentre's
+
+
+def loiter_stretches(series, gate):
+    """[(first, last)] index runs of LOITER_MIN_DAYS days or more in which
+    the path stays within LOITER_HILL_RADII of the body's Hill sphere
+    radius, each day tested at the distance less half a day's travel, as
+    stretches tests the Hill sphere itself."""
+    def wide(jd):
+        hill = gate(jd)
+        return None if hill is None else LOITER_HILL_RADII * hill
+    return [(a, b) for a, b in stretches(series, wide)
+            if b - a + 1 >= LOITER_MIN_DAYS]
+
+
+def loiter_keeps(near, loiters):
+    """(kept, dropped count): the body's candidates, less the loops of a
+    loiter. loiters is [(first jd, last jd, ended)], the last jd the last
+    day the path stays within twice the body's Hill sphere.
+
+    Inside a loiter the path rides with the body, as in a capture, so its
+    nearest approaches are its loops and not events. One is the loiter's
+    FLYBY only where the path left within LOITER_FLYBY_DAYS after it
+    (Tony's tightening of 2026-11-18: "A craft that leaves L2 gently must
+    not get a loop pass printed as a flyby"); a loiter still running at
+    the end of the days searched has none. A pure filter, as
+    riding_passes is."""
+    kept, dropped = [], 0
+    for c in near:
+        jd = c[0]
+        inside = [s for s in loiters if s[0] <= jd <= s[1]]
+        if inside and not any(s[2] and s[1] - jd <= LOITER_FLYBY_DAYS
+                              for s in inside):
+            dropped += 1
+            continue
+        kept.append(c)
+    return kept, dropped
+
+
+def lagrange_nearer(per_point):
+    """(index, days nearer) of the point the path is nearer on most of the
+    days, from [(name, id, series)], each series daily_series of the path
+    against that point."""
+    by = [dict((round(s[0], 4), s[1]) for s in p[2]) for p in per_point]
+    counts = [0] * len(per_point)
+    for jd in by[0]:
+        ds = [m.get(jd) for m in by]
+        if None in ds:
+            continue
+        counts[ds.index(min(ds))] += 1
+    k = counts.index(max(counts))
+    return k, counts[k]
+
+
+def first_position(fetch, path, first_day, pause):
+    """jd (TDB) of JPL's first position for the path, or None where JPL has
+    positions before first_day (the plan's first whole day), so the path's
+    first day is not where JPL's data begins. Asked for the day before,
+    JPL refuses, naming its first moment to the minute in UT ("prior to
+    A.D. 2025-NOV-13 21:31"); the path is then asked each minute for an
+    hour from three minutes after it, which clears the minute or so TDB
+    runs ahead of UT, and the first row is the first position. L-533:
+    a loiter that begins on the path's first day begins at launch, and
+    the box says so ("From its launch on 13 November 2025"; Tony,
+    2026-11-18: "the launch day read from JPL's first position, never
+    typed")."""
+    day_before = first_day - datetime.timedelta(days=1)
+    try:
+        text = fetch(vectors_url(path["id"], path["id_type"], "500@10",
+                                 ymd(day_before), ymd(first_day), "1h"))
+    except hc.Unreachable as exc:
+        raise Unreachable(str(exc))
+    if pause:
+        time.sleep(pause)
+    try:
+        parse_vectors(text)
+        return None                 # JPL has positions before first_day
+    except Refused:
+        pass
+    m = LIMIT.search(text)
+    if not m or m.group(1) != "prior to" or m.group(5) is None:
+        return None
+    moment = datetime.datetime(int(m.group(2)), MONTHS.index(m.group(3)) + 1,
+                               int(m.group(4)), int(m.group(5)),
+                               int(m.group(6))) + datetime.timedelta(minutes=3)
+    stop = moment + datetime.timedelta(hours=1)
+    rows = ask(fetch, vectors_url(path["id"], path["id_type"], "500@10",
+                                  moment.strftime("%Y-%m-%d %H:%M"),
+                                  stop.strftime("%Y-%m-%d %H:%M"), "1m"),
+               pause)
+    return rows[0][0] if rows else None
+
+
+def loiter_event(fetch, path_rows, first, end, left, ended, pause,
+                 launch=None):
+    """The event of a loiter from the jd first to the jd end: its flyby's
+    minute where it has one (Tony, 2026-11-18: "the loiter ends at its
+    flyby"), else left, the last day the path stays within twice the
+    body's Hill sphere. Named for the Lagrange point it is nearer on most
+    of its days, asked of JPL daily over them. Its closest is its nearest
+    day to that point, daily and not refined; its window is its own days,
+    drawn at LOITER_STEP. 'left' is kept for the next plan, which judges
+    passes inside the loiter by it (loiter_keeps, riding_passes). launch
+    is the jd of JPL's first position where the loiter begins on the
+    path's first day (first_position), served as 'launch'; None else."""
+    w0, w1 = jd_to_calendar(first), jd_to_calendar(end)
+    per = []
+    for name, ident in LAGRANGE_POINTS:
+        try:
+            got = ask(fetch, vectors_url(ident, None, "500@10", w0, w1,
+                                         LOITER_STEP), pause)
+        except Refused as exc:
+            raise Unreachable("JPL gave no positions for %s from %s to %s "
+                              "(%s)" % (name, w0, w1, exc))
+        per.append((name, ident, daily_series(path_rows, got)))
+    k, nearer = lagrange_nearer(per)
+    name, ident, near = per[k]
+    lo = min(near, key=lambda s: s[1])
+    return {"body": name, "body_id": ident, "kind": "loiter",
+            "stays": not ended, "start": w0, "end": w1,
+            "left": jd_to_calendar(left),
+            "launch": None if launch is None else jd_to_calendar(launch),
+            "days": len(near), "nearer_days": nearer,
+            "closest": jd_to_calendar(lo[0]), "jd": round(lo[0], 6),
+            "dist_km": round(lo[1], 1), "v_kms": round(lo[2], 3),
+            "ideal_step_s": None, "hill_km": None,
+            "window": [w0, w1], "step": LOITER_STEP}
+
+
 def refine(fetch, path, body, jd, pause):
     """(jd, dist_km, v_kms) at the nearest minute, in the two passes."""
     def rows(start_jd, stop_jd, step):
@@ -850,9 +1022,17 @@ def search_start(path, previous, inputs, today, start=None, end=None):
             or previous.get("inputs_sha256") != inputs_sha256(inputs)):
         return start, []
     cut = today - datetime.timedelta(days=KEEP_PAST_DAYS)
+    # L-533: a loiter is carried once the path has left it before the cut
+    # (its 'left' day); one not yet over is looked for again whole, from
+    # its first day, so it is never found again as a shorter one.
     carried = [e for e in previous.get("events", [])
-               if e["closest"][:10] < ymd(cut)]
+               if ((e.get("left") or e["end"]) if e.get("kind") == "loiter"
+                   else e["closest"])[:10] < ymd(cut)]
     begin = max(start, cut - datetime.timedelta(days=OVERLAP_DAYS))
+    for e in previous.get("events", []):
+        if e.get("kind") == "loiter" and e not in carried:
+            begin = min(begin, max(start, datetime.date.fromisoformat(
+                e["start"][:10]) - datetime.timedelta(days=OVERLAP_DAYS)))
     # A path that ended before the cut has nothing left to look at: its
     # events are all carried and nothing is asked.
     return (min(begin, end), carried)
@@ -977,6 +1157,26 @@ def make_plan(fetch, path, bodies, today, rows, previous=None, pause=0.0,
             continue
         held.extend(capture_spans(path_rows, rows.get(body),
                                   gate_for(body), body[0]))
+    # L-533: the loiters, carried and found, before Earth's passes and the
+    # Sun's are judged (loiter_keeps, riding_passes).
+    loiters = [(hc.calendar_jd(e["start"]),
+                hc.calendar_jd(e.get("left") or e["end"]),
+                not e.get("stays")) for e in carried
+               if e.get("kind") == "loiter"]
+    home = next((b for b in bodies if b[2] == LOITER_BODY), None)
+    pending = []        # the loiters found, made once their flyby is known
+    if home is not None and rows.get(home) is not None:
+        series = daily_series(path_rows, rows.get(home))
+        for a, b in loiter_stretches(series, gate_for(home)):
+            ended = b < len(series) - 1
+            loiters.append((series[a][0], series[b][0], ended))
+            if a == 0 and begin > start:
+                continue        # under way on the first day searched:
+                                # the previous plan carries it
+            pending.append(loiters[-1])
+        own_series = sun_series(rows.get(home))
+        own = [own_series[i][0] for i in nearest_days(own_series)]
+        held.extend((s[0], s[1], home[0], own) for s in loiters)
     for body in bodies:
         body_rows = rows.get(body)
         if body_rows is None:
@@ -984,6 +1184,12 @@ def make_plan(fetch, path, bodies, today, rows, previous=None, pause=0.0,
         searched.append(body[0])
         gate = gate_for(body)
         near = candidates(path_rows, body_rows, gate)
+        if body is home and loiters:
+            near, looped = loiter_keeps(near, loiters)
+            if looped:
+                progress.say("%s: %d nearest approach(es) to %s inside its "
+                             "loiter are its loops, not events (the loiter "
+                             "rule)" % (path["name"], looped, body[0]))
         if gate is None and held:
             near, dropped = riding_passes(near, held)
             if dropped:
@@ -1022,6 +1228,25 @@ def make_plan(fetch, path, bodies, today, rows, previous=None, pause=0.0,
             progress.say("%s: %s of %s, %s TDB, %s km, %.3f km/s"
                          % (path["name"], WORD[kind], body[0],
                             jd_to_calendar(fjd), "{:,.0f}".format(d), v))
+    # L-533: each loiter found ends at its flyby, where it has one.
+    for first, left, ended in pending:
+        progress.check()
+        flybys = [e["jd"] for e in events if e["body"] == home[0]
+                  and e["kind"] == "flyby" and first <= e["jd"] <= left + 1.0]
+        # L-533: a loiter from the path's first day, on a plan made from
+        # the start, begins at launch: JPL's first position.
+        launch = (first_position(fetch, path, start, pause)
+                  if begin == start and abs(first - path_rows[0][0]) < 1e-6
+                  else None)
+        ev = loiter_event(fetch, path_rows, first,
+                          max(flybys) if flybys else left, left, ended, pause,
+                          launch)
+        events.append(ev)
+        progress.say("%s: loiter at %s, %s to %s, %d days, nearer it than "
+                     "the other point on %d; nearest %s TDB, %s km"
+                     % (path["name"], ev["body"], ev["start"][:10],
+                        ev["end"], ev["days"], ev["nearer_days"],
+                        ev["closest"], "{:,.0f}".format(ev["dist_km"])))
     events.sort(key=lambda e: e["jd"])
     return {"name": path["name"], "horizons_id": path["id"],
             "id_type": path.get("id_type"), "kind": "spacecraft",
@@ -1199,6 +1424,11 @@ def kind_label(event):
         return ""
     if kind == "arrival" and event.get("stays"):
         return "arrival (stays to the end of JPL's data)"
+    if kind == "loiter":                                    # L-533
+        return "loiter, %s to %s, %d days%s" % (
+            event["start"][:10], event["end"][:10], event["days"],
+            " (still there at the end of JPL's data)"
+            if event.get("stays") else "")
     return WORD.get(kind, kind)
 
 

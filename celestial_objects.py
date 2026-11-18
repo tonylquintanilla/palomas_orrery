@@ -1212,6 +1212,30 @@ OBJECT_DEFINITIONS = [
     'mission_url': 'https://science.nasa.gov/mission/europa-clipper/', 
     'mission_info': 'Horizons: -159. NASA\'s Europa Clipper, launched in October 2024, reaches Jupiter in April 2030. It will fly past Jupiter\'s moon Europa 49 times, to learn whether the ocean thought to lie under its ice could support life.'},
 
+    # L-533 (ESCAPADE's path), keyed 2026-11-18. JPL's names, read that
+    # day from the Lookup by id (sstr=-9 and sstr=-10, group=mb):
+    # "ESCAPADE-Blue (spacecraft)", 2025-260A; "ESCAPADE-Gold
+    # (spacecraft)", 2025-260B. "EscaPADE STAGE" (-9901495) is the rocket
+    # stage, not drawn. mission_info is a placeholder until Tony's
+    # "Approved" (documentation/WORDS_L533_escapade_20261118.md).
+    {'name': 'ESCAPADE-Blue', 'key': 'escapade_blue', 'id': '-9', 'horizons_name': 'ESCAPADE-Blue (spacecraft)', 'var_name': 'escapade_blue_var', 'color_key': 'ESCAPADE-Blue', 'symbol': 'diamond-open',
+    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2025, 11, 14),
+    # 2025-Nov-13 21:31 to 2027-Sep-12 00:28 (JPL's data sheet, revised Nov 10, 2026)
+    # "Tracking data through November 10, 2026. Prediction thereafter."
+    'mission_url': 'https://science.nasa.gov/mission/escapade/',   # NASA's mission page, read 2026-11-18
+    # Words: NASA's mission page and its article of 2026-11-09, read
+    # 2026-11-18 (documentation/WORDS_L533_escapade_20261118.md).
+    'mission_info': 'Horizons: -9. ESCAPADE-Blue is one of NASA\'s two identical ESCAPADE spacecraft, launched on November 13, 2025. At Mars the twins will fly in formation to study how the solar wind interacts with the planet\'s magnetic environment and contributes to the loss of its atmosphere.'},
+
+    {'name': 'ESCAPADE-Gold', 'key': 'escapade_gold', 'id': '-10', 'horizons_name': 'ESCAPADE-Gold (spacecraft)', 'var_name': 'escapade_gold_var', 'color_key': 'ESCAPADE-Gold', 'symbol': 'diamond-open',
+    'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True, 'start_date': datetime(2025, 11, 14),
+    # 2025-Nov-13 21:32 to 2027-Sep-10 00:28 (JPL's data sheet, revised Nov 10, 2026)
+    # "Tracking data through November 9, 2026. Prediction thereafter."
+    'mission_url': 'https://science.nasa.gov/mission/escapade/',   # NASA's mission page, read 2026-11-18
+    # Words: NASA's mission page and its article of 2026-11-09, read
+    # 2026-11-18 (documentation/WORDS_L533_escapade_20261118.md).
+    'mission_info': 'Horizons: -10. ESCAPADE-Gold is one of NASA\'s two identical ESCAPADE spacecraft, launched on November 13, 2025. At Mars the twins will fly in formation to study how the solar wind interacts with the planet\'s magnetic environment and contributes to the loss of its atmosphere.'},
+
     {'name': 'BepiColombo', 'key': 'bepicolombo', 'id': '-121', 'horizons_name': 'BepiColombo (Spacecraft)', 'var_name': 'bepicolombo_var', 'color_key': 'BepiColombo', 'symbol': 'diamond-open', 
     # 'id': '-121', 2018-080A
     'object_type': 'trajectory', 'id_type': 'id', 'is_mission': True,

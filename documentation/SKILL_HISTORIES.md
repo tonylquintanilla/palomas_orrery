@@ -1723,6 +1723,35 @@ from path_plan.py, path_drawing.py and the website's builder at
 written.
 (Moved down 2026-11-05, when 1.18 made a fourth entry.)
 
+Earlier: 1.16 | 2026-11-04, with Anthropic's Claude Opus 5.5, at
+palomas_orrery @ eab623f5 and gallery @ 5abca2c6. v1.16 (L-510, part 1)
+adds A Small Body Is Drawn by Its Database e: a small body is drawn as a
+path when its orbit solution's e in JPL's Small-Body Database is at or
+above 1, and as an orbit below it (path_or_orbit.py), the e refreshed by
+the period fetch every 30 days; the typed object_type and the retired
+open_path no longer decide it (Tony, 2026-11-04: "Use the e that JPL
+classes by"). A Comet on an Open Path is chosen so, and piece C of
+C/2025 K1 is an orbit since. And the sentence carried on L-485: the
+orrery's drawing of a plan keeps the website's daily tail and leaves out
+only its last-day pair. Read from the code built that day and JPL's
+answers of 2026-11-04 before it was written.
+(Moved down 2026-11-18, when 1.19 made a fourth entry.)
+
+Moved 2026-11-18 (L-533) from How a Path's Events Are Found, to keep
+the skill at its cap, word for word:
+- From AN ENDED MISSION ENDS ON ITS mission_end: "Galileo and Cassini
+  (2017-09-15, JPL's last day the same) were the first, planned
+  2026-11-03: Galileo flies past Venus (1990-02-10) and Earth twice
+  (1990-12-08, 1992-12-08) and arrives at Jupiter (1995-12-07), staying;
+  Cassini flies past Venus twice, Earth (1999-08-18) and Jupiter
+  (2000-12-30, 9.8 million km) and arrives at Saturn (2004-07-01),
+  staying."
+- From KEYING: "The twelve were keyed on 2026-10-25 (orrery
+  patch_L443_13), and the temporary --preview flag that planned them
+  by name before then went with it; that patch carried each preview
+  plan made by the orbiter rule into data/path_plans.json under its
+  new key, so no second half-hour run was needed."
+
 ## earth-system-pipeline
 
 Moved here 2026-11-14, when 1.3 (L-001) was applied on Tony's word

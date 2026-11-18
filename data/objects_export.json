@@ -1,9 +1,9 @@
 {
   "schema": 4,
-  "source_sha256": "253b2ce2811116d05634eb79b790fe31c65bd78e0ce0de31c18eb9ff2abcf74f",
-  "period_inputs_sha256": "4ff4555c7aed626a76756348e1db8034bc07f2f67e7966f56835c4ba5e6dfe12",
-  "confirmations_sha256": "1335e227665f341ca95e0f831d46e8871b3d2f5c46026ad3be7e3807356690db",
-  "paths_sha256": "c8fd046d767f68aa97c46b5765e71fae6cdab7127fd6f04ebbc181b37be771df",
+  "source_sha256": "41cab8ae1a13b7a5350d2c8bcac2b286fe936ae8b430c64d2e83975f209ac849",
+  "period_inputs_sha256": "25b3e90fcb26fd015350a38a5b3222f4d97c707c285c49958da72b8fa40127d2",
+  "confirmations_sha256": "7e8469d18e75a103468d6b513fa840e216bf550aff2208497bc0d6a89025f3c4",
+  "paths_sha256": "f08ab85a7997186dc2d4125a06338e0feb6b7faffb540adb40bec019e241362f",
   "cadence_days": 30,
   "objects": {
     "sun": {
@@ -8888,6 +8888,226 @@
         ]
       }
     },
+    "escapade_blue": {
+      "name": "ESCAPADE-Blue",
+      "horizons_id": "-9",
+      "horizons_name": "ESCAPADE-Blue (spacecraft)",
+      "id_type": "id",
+      "object_type": "trajectory",
+      "description": "ESCAPADE-Blue is one of NASA's two identical ESCAPADE spacecraft, launched on November 13, 2025. At Mars the twins will fly in formation to study how the solar wind interacts with the planet's magnetic environment and contributes to the loss of its atmosphere.",
+      "info_url": "https://science.nasa.gov/mission/escapade/",
+      "period": null,
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-11-18",
+          "horizons_id": "-9",
+          "id_type": "id",
+          "horizons_name": "ESCAPADE-Blue (spacecraft)"
+        },
+        "period": null,
+        "hold": null
+      },
+      "path": {
+        "made": "2026-11-18",
+        "span": {
+          "end": "2027-09-12",
+          "start": "2025-11-14"
+        },
+        "backbone": {
+          "step": "7d",
+          "thin_tol_au": 0.02
+        },
+        "events": [
+          {
+            "body": "SEMB-L2",
+            "body_id": "32",
+            "closest": "2026-03-02 00:00",
+            "days": 359,
+            "dist_km": 506542.2,
+            "end": "2026-11-07 10:01",
+            "hill_km": null,
+            "ideal_step_s": null,
+            "jd": 2461101.5,
+            "kind": "loiter",
+            "launch": "2025-11-13 21:33",
+            "left": "2026-11-18 00:00",
+            "nearer_days": 285,
+            "start": "2025-11-14 00:00",
+            "stays": false,
+            "step": "1d",
+            "v_kms": 0.765,
+            "window": [
+              "2025-11-14 00:00",
+              "2026-11-07 10:01"
+            ]
+          },
+          {
+            "body": "Earth",
+            "body_id": "399",
+            "closest": "2026-11-07 10:01",
+            "dist_km": 8033.8,
+            "hill_km": 1483391,
+            "ideal_step_s": 80.6,
+            "jd": 2461351.917361,
+            "kind": "flyby",
+            "stays": false,
+            "step": "1m",
+            "v_kms": 10.443,
+            "window": [
+              "2026-11-07 08:44",
+              "2026-11-07 11:17"
+            ]
+          },
+          {
+            "body": "Mars",
+            "body_id": "499",
+            "closest": "2027-09-09 00:29",
+            "dist_km": 3799.4,
+            "hill_km": 1078463,
+            "ideal_step_s": 83.1,
+            "jd": 2461657.520139,
+            "kind": "arrival",
+            "stays": true,
+            "step": "1m",
+            "v_kms": 4.787,
+            "window": [
+              "2027-09-08 23:09",
+              "2027-09-09 01:48"
+            ]
+          }
+        ],
+        "searched": [
+          "Sun",
+          "Mercury",
+          "Venus",
+          "Earth",
+          "Moon",
+          "Mars",
+          "Jupiter",
+          "Saturn",
+          "Uranus",
+          "Neptune",
+          "Pluto",
+          "Ceres",
+          "16 Psyche",
+          "Dinkinesh",
+          "Itokawa",
+          "Ryugu",
+          "Vesta",
+          "Churyumov"
+        ]
+      }
+    },
+    "escapade_gold": {
+      "name": "ESCAPADE-Gold",
+      "horizons_id": "-10",
+      "horizons_name": "ESCAPADE-Gold (spacecraft)",
+      "id_type": "id",
+      "object_type": "trajectory",
+      "description": "ESCAPADE-Gold is one of NASA's two identical ESCAPADE spacecraft, launched on November 13, 2025. At Mars the twins will fly in formation to study how the solar wind interacts with the planet's magnetic environment and contributes to the loss of its atmosphere.",
+      "info_url": "https://science.nasa.gov/mission/escapade/",
+      "period": null,
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-11-18",
+          "horizons_id": "-10",
+          "id_type": "id",
+          "horizons_name": "ESCAPADE-Gold (spacecraft)"
+        },
+        "period": null,
+        "hold": null
+      },
+      "path": {
+        "made": "2026-11-18",
+        "span": {
+          "end": "2027-09-10",
+          "start": "2025-11-14"
+        },
+        "backbone": {
+          "step": "7d",
+          "thin_tol_au": 0.02
+        },
+        "events": [
+          {
+            "body": "SEMB-L2",
+            "body_id": "32",
+            "closest": "2026-03-05 00:00",
+            "days": 361,
+            "dist_km": 493733.3,
+            "end": "2026-11-09 11:00",
+            "hill_km": null,
+            "ideal_step_s": null,
+            "jd": 2461104.5,
+            "kind": "loiter",
+            "launch": "2025-11-13 21:33",
+            "left": "2026-11-20 00:00",
+            "nearer_days": 283,
+            "start": "2025-11-14 00:00",
+            "stays": false,
+            "step": "1d",
+            "v_kms": 0.756,
+            "window": [
+              "2025-11-14 00:00",
+              "2026-11-09 11:00"
+            ]
+          },
+          {
+            "body": "Earth",
+            "body_id": "399",
+            "closest": "2026-11-09 11:00",
+            "dist_km": 7382.6,
+            "hill_km": 1482669,
+            "ideal_step_s": 71.4,
+            "jd": 2461353.958333,
+            "kind": "flyby",
+            "stays": false,
+            "step": "1m",
+            "v_kms": 10.825,
+            "window": [
+              "2026-11-09 09:51",
+              "2026-11-09 12:08"
+            ]
+          },
+          {
+            "body": "Mars",
+            "body_id": "499",
+            "closest": "2027-09-07 00:29",
+            "dist_km": 3798.8,
+            "hill_km": 1080323,
+            "ideal_step_s": 83.1,
+            "jd": 2461655.520139,
+            "kind": "arrival",
+            "stays": true,
+            "step": "1m",
+            "v_kms": 4.789,
+            "window": [
+              "2027-09-06 23:09",
+              "2027-09-07 01:48"
+            ]
+          }
+        ],
+        "searched": [
+          "Sun",
+          "Mercury",
+          "Venus",
+          "Earth",
+          "Moon",
+          "Mars",
+          "Jupiter",
+          "Saturn",
+          "Uranus",
+          "Neptune",
+          "Pluto",
+          "Ceres",
+          "16 Psyche",
+          "Dinkinesh",
+          "Itokawa",
+          "Ryugu",
+          "Vesta",
+          "Churyumov"
+        ]
+      }
+    },
     "bepicolombo": {
       "name": "BepiColombo",
       "horizons_id": "-121",
@@ -10502,6 +10722,14 @@
       "2024",
       "2030",
       "49"
+    ],
+    "escapade_blue": [
+      "13",
+      "2025"
+    ],
+    "escapade_gold": [
+      "13",
+      "2025"
     ],
     "bepicolombo": [
       "2018"

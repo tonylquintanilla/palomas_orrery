@@ -5546,6 +5546,8 @@ def color_map(planet):
         'Pioneer 11': 'green',
         'Clipper': 'red',
         'Psyche': 'green',
+        'ESCAPADE-Blue': 'blue',   # ESCAPADE: placeholder, Tony's eye
+        'ESCAPADE-Gold': 'gold',   # ESCAPADE: placeholder, Tony's eye
         'JUICE': 'blue', 
         'OSIRIS': 'cyan',
         'Parker': 'white',

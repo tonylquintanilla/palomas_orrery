@@ -1,8 +1,8 @@
 <!-- Doc-Kind: zoned | The protocol. How a session is run, which checks are load-bearing, and why. Carries the generated skill manifest. -->
 PROJECT INSTRUCTIONS
-Tony Quintanilla, PE | Claude | v3.141 | November 14, 2026
+Tony Quintanilla, PE | Claude | v3.142 | November 18, 2026
 
-Cut from 5779e1f0 at https://github.com/tonylquintanilla/palomas_orrery
+Cut from 00c89ef0 at https://github.com/tonylquintanilla/palomas_orrery
 (branch main). Gallery repo: tonyquintanilla/tonyquintanilla.github.io.
 Full version history and the v3.37 lessons record:
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md
@@ -489,7 +489,7 @@ safe-file-editing            1.14 Editing existing files, patch scripts,
                                   sed/regex edits, encoding checks (portable)
 agentic-pre-test             1.3  BEFORE delivering complete files/agentic
                                   code; after data-content sweeps
-horizons-orbital-mechanics   1.18 Horizons queries, centers, frames, osculating
+horizons-orbital-mechanics   1.19 Horizons queries, centers, frames, osculating
                                   elements, encounters, comet record pinning,
                                   2xr uncertainties, periods, the drawn orbit's
                                   centre, the Horizons check
@@ -514,6 +514,7 @@ horizons-orbital-mechanics   1.18 Horizons queries, centers, frames, osculating
                                   agency's own page; a craft that flew on and
                                   its end_note; an end after JPL's data), a
                                   capture's passes of the Sun (riding_passes),
+                                  a loiter near a Lagrange point (ESCAPADE's),
                                   the orrery's drawing of a path by its plan
                                   (path_drawing.py, only around the Sun), a
                                   small body drawn as a path or an orbit by its
@@ -1259,6 +1260,44 @@ The rule is mechanical, and it is what stops this section growing back:
 when a fourth entry is added, the oldest of the four moves down into
 that file. An entry lives in exactly one place, never both.
 
+v3.142 (November 18, 2026): No rule changed in this document. ONE
+skill bump: horizons-orbital-mechanics 1.18 -> 1.19 (L-533, ESCAPADE's
+path), by the records skill's binding rule, on the brief's section 8
+(documentation/COORD_L533_escapade_path_brief_20261118.md: "The rule
+then goes into horizons-orbital-mechanics ... it is method from then
+on") and Tony's ruling of Nov 18 on the loiter: "Approved, with one
+tightening", then "the loiter ends at its flyby". A CRAFT RIDING NEAR A
+LAGRANGE POINT.
+
+WHAT PROMPTED IT. The Claude Code session of Nov 18 (Claude Opus 5.5),
+through the python_work door, built ESCAPADE's path on orrery 00c89ef0
+and gallery 1d3090bc, from Tony's prompt and the brief, in three parts
+with a report and his go-ahead after each.
+
+WHAT CHANGED. horizons-orbital-mechanics: THE LOITER, under How a
+Path's Events Are Found. A Lagrange point has no mass, so the orbiter
+rule cannot see a craft riding near one; ESCAPADE's year near L2 gave a
+false flyby of Earth and passes of the Sun. Sixty days or more within
+twice Earth's Hill sphere is one event at the point nearer on most
+days, ending at the flyby that ends it; inside it a pass of Earth is
+that flyby only when the path leaves within 15 days. To stay at the cap
+of 904 lines, the 1.16 entry and two passages of history (Galileo's and
+Cassini's first plans; the twelve's keying) moved to
+documentation/SKILL_HISTORIES.md.
+
+THE OBLIGATION TRAVELS. This session read horizons-orbital-mechanics
+1.18 from the repo's copy, as a Code session does, as the manifest
+expected. Tony reinstalls it (Settings > Skills) and pastes this
+version into the Project's instructions on claude.ai; the next session
+that loads it from the account confirms its copy reads 1.19 before
+Horizons work.
+
+The header stamp and the SHA anchor move with this entry.
+
+Version history: v3.139 moves down to
+documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
+resident.
+
 v3.141 (November 14, 2026, night): No rule changed in this document.
 ONE skill bump: earth-system-pipeline 1.2 -> 1.3 (L-001, food
 insecurity), by the records skill's binding rule, Tony's word of Nov
@@ -1347,44 +1386,5 @@ Version history: v3.137 moves down to
 documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
 resident.
 
-v3.139 (November 11, 2026, night): No rule changed in this document.
-ONE skill bump: gallery-cache-builder 1.18 -> 1.19 (L-525, hold the bad
-data), by the records skill's binding rule, Tony's go-ahead of Nov 11
-("Yes, all four": the builder skill, the skills index, one protocol
-version entry and the nightly job's file). ONE BODY'S FAILED TEST HOLDS
-THAT BODY, NOT THE SITE.
-
-WHAT PROMPTED IT. The Claude Code session of Nov 11 (Claude Opus 5.5),
-through the python_work door, built on orrery 02183e4d and gallery
-173d397a, from Tony's prompt and
-documentation/COORD_L525_hold_brief_20261111.md, in three parts with a
-report and his go-ahead after each, with the coordinator's two changes
-of that evening: a moon is not held for a test number over the limit,
-and more than five held is a failed build.
-
-WHAT CHANGED. gallery-cache-builder: a new section, A Body That Fails
-Its Test Is Held. A Sun-centred body whose accuracy test is more than
-0.5 degrees from JPL, or cannot be made, and any body JPL does not
-answer, is served from its last good build with a hold block, copied
-forward swap after swap, and leaves the site's window to the bodies
-that passed; the night's commit title starts "HELD <name>", the Daily
-Run prints the same line, and "HOLD ENDED" the run a hold ends; more
-than five held is a failed build, no swap. Riding it: the Validation
-stance's new abort, Layer 1's count, and a field note that said the
-page reads no served data, removed as wrong. Three passages of history
-moved to documentation/SKILL_HISTORIES.md with the oldest of four
-version entries (1.16), so the skill stays at its cap of 944 lines.
-
-THE OBLIGATION TRAVELS. This session read gallery-cache-builder 1.18
-from the repo's copy, as a Code session does, as the manifest expected.
-Tony reinstalls it (Settings > Skills) and pastes this version into the
-Project's instructions on claude.ai; the next session that loads it
-from the account confirms its copy reads 1.19 before builder work.
-
-The header stamp and the SHA anchor move with this entry.
-
-Version history: v3.136 moves down to
-documentation/PROJECT_INSTRUCTIONS_HISTORY.md PART 1 to keep three
-resident.
 
 Functional for Claude, readable for human, signal preserved.

@@ -2065,6 +2065,34 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-159&group=sb&format=text"
       ]
     },
+    "escapade_blue": {
+      "confirmed": "2026-11-18",
+      "horizons_id": "-9",
+      "id_type": "id",
+      "horizons_name": "ESCAPADE-Blue (spacecraft)",
+      "object_type": "trajectory",
+      "list_sha256": "aa895fa0eecb6d687cec764048c09b1fc713f68a809602a3f9ef2422d7b7d56b",
+      "jpl_name": "ESCAPADE-Blue (spacecraft)",
+      "jpl_type": "spacecraft",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-9&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-9&group=sb&format=text"
+      ]
+    },
+    "escapade_gold": {
+      "confirmed": "2026-11-18",
+      "horizons_id": "-10",
+      "id_type": "id",
+      "horizons_name": "ESCAPADE-Gold (spacecraft)",
+      "object_type": "trajectory",
+      "list_sha256": "aa895fa0eecb6d687cec764048c09b1fc713f68a809602a3f9ef2422d7b7d56b",
+      "jpl_name": "ESCAPADE-Gold (spacecraft)",
+      "jpl_type": "spacecraft",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-10&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=-10&group=sb&format=text"
+      ]
+    },
     "bepicolombo": {
       "confirmed": "2026-10-31",
       "horizons_id": "-121",

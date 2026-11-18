@@ -165,3 +165,26 @@ Do next:
      Where We Are, this file and the next coordinator's prompt.
      Not while the night is running. -- 0d2b5ebe1bd823cce034ad4c3f01038a085e3aaa
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+=====================
+
+This is ready to commit. The two changes are in, every check they touch passed, and each new check was shown failing once.
+
+One correction to my own note: I was wrong to call "drives" ours. The Code session read NASA's whole page. Its opening line says "drives the planet's atmospheric escape", and its overview says "contributing". My fetch had shown only the second. "Contributes to" is still NASA's, so nothing needs changing.
+
+The final run order is right as written. My earlier advice to discard the three .sha files first isn't needed. Both your edits and tonight's nightly wrote the same content into them, so they merge cleanly. Here is the order:
+1. **Orrery:** Commit, then Pull origin, then Push origin. -- 
+2. **Website:** Commit, then Pull origin. Don't push yet.
+3. **Website's Daily Run** from the dashboard. Check that its last lines are green and the swap log's last build says "ok".
+4. **Website:** Commit what the Daily Run wrote, then Push origin.
+5. **Your phone look:** tick both craft, read their boxes, then use Go To Earth with the frame zoom.
+
+After the push, reinstall horizons-orbital-mechanics 1.19 and paste v3.142 into the Project's instructions.
+
+When you've done the phone look, tell me what you saw. I'll then write this session's close: your withdrawal of the Moons group, the Lagrange points as the next round, and the prompt for the next coordinator.
+
+**Where this leaves us**
+- ESCAPADE's path is built and checked in both repositories, with your words approved. It is waiting on your push, the Daily Run and your phone look.
+- Next on the road: all ten Lagrange points in their own round (L-297), then the design talk on rows under destinations and on encounters.
+
+One final thought: the Code session ended at over half a million tokens and had to compact once. Next time a build crosses both repositories, I'd give the website part its own session.
