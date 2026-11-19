@@ -168,6 +168,8 @@ PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
 =====================
 
+**Session: DONE: 11-18-26 1805: Opus: Coordinator: L533 Coordinator session planning**
+
 This is ready to commit. The two changes are in, every check they touch passed, and each new check was shown failing once.
 
 One correction to my own note: I was wrong to call "drives" ours. The Code session read NASA's whole page. Its opening line says "drives the planet's atmospheric escape", and its overview says "contributing". My fetch had shown only the second. "Contributes to" is still NASA's, so nothing needs changing.
@@ -664,7 +666,7 @@ Do next:
   1. (do) Move this file into documentation\.
   2. (do) In GitHub Desktop (orrery): commit and push the ledger,
      Where We Are, this file and the next coordinator's prompt.
-     Not while the night is running.
+     Not while the night is running. -- a1b7673c98b45b05c93c289bade3ab9bec76eb7e
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
 2. Move the patch into `documentation\`.
