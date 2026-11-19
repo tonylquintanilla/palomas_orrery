@@ -3,9 +3,9 @@
   "schema": 2,
   "taken": [],
   "held": [],
-  "clean_run_utc": "2026-11-19T16:35:35.826071+00:00",
+  "clean_run_utc": "2026-11-19T19:32:46.378208+00:00",
   "where": "GitHub Actions",
-  "run_log": "https://github.com/tonylquintanilla/palomas_orrery/actions/runs/44567514248",
+  "run_log": "https://github.com/tonylquintanilla/palomas_orrery/actions/runs/44599100355",
   "reported_not_red": [],
   "rows": [
     {
@@ -16,12 +16,12 @@
     {
       "row": "Period fetch",
       "kind": "generator",
-      "verdict": "unchanged (2 checked, not written) -- NOTHING MISSING -- 102 served objects examined, no query asked"
+      "verdict": "unchanged (2 checked, not written) -- NOTHING MISSING -- 110 served objects examined, no query asked"
     },
     {
       "row": "Horizons check",
       "kind": "generator",
-      "verdict": "unchanged (2 checked, not written) -- NOTHING DUE -- 102 entries and 28 sheets current, no query asked"
+      "verdict": "unchanged (2 checked, not written) -- NOTHING DUE -- 110 entries and 28 sheets current, no query asked"
     },
     {
       "row": "Path plan",
@@ -46,7 +46,7 @@
     {
       "row": "Constants export check",
       "kind": "checker",
-      "verdict": "Export matches the store: sha256 aa47bc5850bd on both sides; 234 rows re-read, 57 not exported, 46 tokens; 835 conversions re-computed, 12 of 12 worked cases hold; 234 citations worked out again, 8 of 8 worked cases hold."
+      "verdict": "Export matches the store: sha256 97ca403f198e on both sides; 234 rows re-read, 57 not exported, 46 tokens; 835 conversions re-computed, 12 of 12 worked cases hold; 234 citations worked out again, 8 of 8 worked cases hold."
     },
     {
       "row": "Objects export check",
@@ -56,7 +56,7 @@
     {
       "row": "Horizons confirmations",
       "kind": "checker",
-      "verdict": "pass -- 102 of 102 entries and 67 periods confirmed, 28 sheets read, within 30 days"
+      "verdict": "pass -- 110 of 110 entries and 67 periods confirmed, 28 sheets read, within 30 days"
     },
     {
       "row": "Horizons check suite",
