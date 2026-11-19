@@ -1005,7 +1005,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*268 live items; 252 need attention (`!`); 165 RICE-scored; 261 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*269 live items; 253 need attention (`!`); 165 RICE-scored; 261 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1077,7 +1077,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-321 | The orrery's hover text joins the provenance braid, Earth first | OPEN | 1.8 | 2026-09-12 |
 | ! | L-337 | A centre marker for bodies without shells in the exhibit rooms | OPEN | 1.8 | 2026-09-19 |
 |  | L-194 | Text-only assertions -- claims the scanner cannot see | DEFERRED | 1.4 | 2026-08-15 |
-| ! | L-297 | Earth-Moon Lagrange points: serving path sized, deferred from the Earth exhibit | OPEN | 1.4 | 2026-11-15 |
+| ! | L-297 | Earth-Moon Lagrange points: serving path sized, deferred from the Earth exhibit | OPEN | 1.4 | 2026-11-18 |
 | ! | L-314 | Live solar wind conditions for the magnetosphere shells (SWPC through the nightly builder) | OPEN | 1.3 | 2026-10-21 |
 | ! | L-253 | The 660 discontinuity's depth variation -- held unsourced | OPEN | 1.2 | 2026-08-26 |
 |  | L-308 | A shell-legend surface for static cards (deferred, with its trigger) | DEFERRED | 1.2 | 2026-10-04 |
@@ -1180,13 +1180,14 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-525 | One body's failed accuracy test holds that body, not the whole site (gallery, the nightly builder's served window; built, its sentence settled Nov 11) | OPEN | -- | 2026-11-11 |
 | ! | L-526 | A body whose test fails for a real reason is drawn from the older orbit while held (gallery, the nightly builder's hold; recorded, not built) | OPEN | -- | 2026-11-11 |
 | ! | L-528 | The orrery's Kepler solvers' start: E = pi for a stretched orbit, and no error when they do not converge (orrery; recorded, not built) | OPEN | -- | 2026-11-12 |
-| ! | L-529 | Guided encounters: the guide's way of telling, used for a flyby (gallery; an idea, for a design talk after Mars) | OPEN | -- | 2026-11-13 |
+| ! | L-529 | Guided encounters: the guide's way of telling, used for a flyby (gallery; an idea, for a design talk after Mars) | OPEN | -- | 2026-11-18 |
 | ! | L-530 | The other Earth System layers on Google Earth web (Earth System; recorded, not built) | OPEN | -- | 2026-11-13 |
 | ! | L-531 | The Earth Science room in the interactive site (website; recorded, not built) | OPEN | -- | 2026-11-18 |
 | ! | L-532 | A Code session away from the computer: where its work lives (method; recorded) | OPEN | -- | 2026-11-14 |
-| ! | L-533 | ESCAPADE, Blue and Gold, on their way to Mars (orrery + gallery; recorded, after the Mars build) | OPEN | -- | 2026-11-18 |
-| ! | L-534 | Missions by destination: a mission's row under each body it goes to (gallery + orrery; design round with L-529) | OPEN | -- | 2026-11-15 |
+| ! | L-533 | ESCAPADE, Blue and Gold, on their way to Mars (orrery + gallery; path live Nov 18, the row under Mars waits for L-534) | OPEN | -- | 2026-11-18 |
+| ! | L-534 | Missions by destination: a mission's row under each body it goes to (gallery + orrery; design round with L-529) | OPEN | -- | 2026-11-18 |
 | ! | L-536 | A moon's yearly change samples its wobble: the period's digits from many dates (orrery, the period fetch; recorded, for its own session) | OPEN | -- | 2026-11-15 |
+| ! | L-537 | The skills page moved: Settings > Skills is now Plugins in the sidebar (records; carried to the next protocol or skill bump) | OPEN | -- | 2026-11-18 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1737,7 +1738,7 @@ go-ahead.
 **Ref:** L-001; L-499 (kinds of session); L-471 (a delivered patch is
 final).
 
-#### [L-533] ESCAPADE, Blue and Gold, on their way to Mars (orrery + gallery; recorded, after the Mars build)
+#### [L-533] ESCAPADE, Blue and Gold, on their way to Mars (orrery + gallery; path live Nov 18, the row under Mars waits for L-534)
 <!-- L:533 status:OPEN upd:2026-11-18 section:A flag: rice: -->
 - **Tony's find, 2026-11-14, 22:43**, in the coordinating session
   (Claude Opus 5.5, through the python_work door, on orrery c314fe1a and
@@ -1869,19 +1870,63 @@ final).
     room shows). horizons-orbital-mechanics 1.19 (v3.142).
   - Not verified: the website's Daily Run after the orrery's push, the
     live site, Tony's phone look.
-**Gap:** the orrery pushed, then the website's Daily Run green, then
-the website pushed, the same evening and
-not while a night runs; his phone look (both ticked from Spacecraft,
-their boxes, the flyby and the loiter seen with Go To Earth and Earth's
-frame zoom). The row under Mars (L-534) and the encounters (L-529)
-untouched; L2 drawn at L-297. One later item: a Mars arrival counts as
-an arrival only because JPL's data runs three days past orbit insertion.
+- **2026-11-18, evening, LIVE AND LOOKED AT** (the coordinating
+  session, Claude Opus 5.5, through the python_work door).
+  - Pushed: the orrery at 342d2bc4; the website's build at deae684 and
+    its Daily Run at 133dbd21 (49 of 49 checks, the swap first time,
+    run 20261118T230303Z). horizons-orbital-mechanics 1.19 reinstalled
+    and v3.142 pasted into the Project's instructions, Tony's "done";
+    the next session's load confirms 1.19.
+  - Tony's phone look, 17:44 to 17:48, four pictures: both craft just
+    past Earth, where JPL has them; the boxes as approved. His words,
+    17:52: "The only thing I miss are the dates of flybys. For example
+    it seems that the two craft are near earth right now. I assume this
+    can be shown with the encounters. We also don't say what the
+    destination or basic mission objective is." Carried: each event's
+    date to L-529, the destination and purpose to L-534. Accepted as
+    done, 17:58, "Yes", with those carried.
+  - THE TWO NAMES OVERLAP. The twins fly side by side, so their labels
+    print on each other ("ESCAPADE-Gbld" in his pictures), all the
+    way to Mars. Tony, 17:57: "On the names overlap consider putting
+    one of the names on the opposite side of its symbol." It rides
+    L-297's round (17:58, "Yes"): a label side per body, which also
+    serves the Lagrange points beside Earth and the Moon. Every craft's
+    label is set "top center" in gallery/assembler/render_spacecraft.py
+    at 133dbd21.
+  - THE BOX'S LAST DAY STOPS SHORT OF THE PLAN. Gold's box: "as far as
+    7 September 2027", its plan's span to 2027-09-10; Blue's: "10
+    September 2027", its span to 2027-09-12 (data/objects_config.json
+    at 133dbd21). Cause not found; explained before anything is
+    changed, in the next website session (rides L-297).
+  - THE LOOPS ARE NOT VISIBLE ON THE WEBSITE. Tony's picture of 18:01,
+    zoomed on today's Earth (0.01 AU scale): the twins' outbound lines
+    and their lines of a year ago, no loops. A Sun-centred view spreads
+    the year near Earth along Earth's whole orbit (about 2.6 million km
+    a day), the flyby sits where Earth was ten days ago, and at the
+    Solar System's scale the loops are too small to see. The loops
+    show only in a view centred on Earth (the orrery's picture of
+    14:11); the website draws a planned path around the Sun alone
+    (L-476, Tony, 2026-11-03). Tony, 18:05, "Yes": the box's words
+    stay, as they state what the craft did, and the loops wait for an
+    Earth-centred path view, with Earth's fold (road stage 16: SOHO,
+    Gaia and JWST need it too). The coordinator's own run order had
+    asked for the loiter to be looked at with Go To Earth, which no
+    Sun-centred view can show.
+  - SESSION SIZE: the Code session reported its context at 525,685
+    tokens of 1,000,000 at its end, compacted once, no /cost figure.
+    The coordinator's suggestion, not ruled: a build across both
+    repositories gives the website half a session of its own.
+**Gap:** the row under Mars, by L-534's rule once it is designed. The
+label side and the box's last day ride L-297. The loops near L2, with
+an Earth-centred path view in Earth's fold. One later item: a Mars
+arrival counts as one only because JPL's data runs three days past
+orbit insertion; the plan's 30-day remake shows it if JPL trims that.
 **Ref:** L-514 (the Mars room); L-529 (guided encounters); L-476 (paths
 by the plan); horizons-orbital-mechanics (a spacecraft path's plan, the
 orbiter rule for an arrival).
 
 #### [L-534] Missions by destination: a mission's row under each body it goes to (gallery + orrery; design round with L-529)
-<!-- L:534 status:OPEN upd:2026-11-15 section:A flag: rice: -->
+<!-- L:534 status:OPEN upd:2026-11-18 section:A flag: rice: -->
 - **Tony's rulings, 2026-11-15**, in the coordinating session (Claude
   Opus 5.5, through the python_work door, on orrery b30d6d05 and gallery
   d3e97b15), starting from ESCAPADE (L-533): 16:07, "add it as a row
@@ -1922,8 +1967,27 @@ orbiter rule for an arrival).
   fold as groups: Moons (where there is more than one), Missions, and
   the shells at the build-out. The coordinator's question still to put:
   the Moons group in this round with Missions, or built sooner alone.
-**Gap:** the design round, with L-529 (guided encounters), after
-ESCAPADE's path (L-533) and the Lagrange points (L-297).
+- **2026-11-18, the coordinating session** (Claude Opus 5.5, through
+  the python_work door, on orrery 0d2b5eb to 342d2bc4).
+  - THE MOONS GROUP WITHDRAWN. Tony, 10:08: "On note, I withdraw the
+    moons group idea, moons should be placed with the shells by
+    distance like earths moon." So a planet's fold lists its moons
+    among its shells by distance, as Earth's Moon is, and the round
+    designs the Missions rows only. The coordinator's question above
+    (Moons in this round or sooner) goes with it.
+  - THE DESTINATION IN THE BOX. From ESCAPADE's phone look, 17:52: "We
+    also don't say what the destination or basic mission objective
+    is." The box names neither; the i panel has the purpose. ESCAPADE
+    is the worked example: a line read from the plan's arrival event,
+    such as the day it arrives at Mars.
+  - A LAGRANGE POINT AS A DESTINATION. JWST, Gaia and SOHO (road stage
+    16) sit at L1 or L2 for their whole missions, so the rule meets a
+    destination that is a point, not a body (L-297), and the loiter
+    rule (L-533) would read each mission as one long loiter.
+  - THE ORDER. Tony, 13:31: "Keep as planned after escapade": the
+    Lagrange points' round first, then this one.
+**Gap:** the design round, with L-529 (guided encounters), after the
+Lagrange points (L-297); ESCAPADE (L-533) the worked example.
 **Ref:** L-533 (ESCAPADE); L-529 (guided encounters); L-515 (one nested
 tree); L-476 (paths by the plan); L-443 (the spacecraft group); L-507
 (historical missions).
@@ -1955,8 +2019,32 @@ fetch's and the digits test's checks; Tony's word on the rule.
 **Ref:** L-535 (the period's reason); L-431 (orbital periods); L-484
 (Pluto's period at its barycentre); L-514 (the Mars room).
 
+#### [L-537] The skills page moved: Settings > Skills is now Plugins in the sidebar (records; carried to the next protocol or skill bump)
+<!-- L:537 status:OPEN upd:2026-11-18 section:A flag: rice: -->
+- **Found 2026-11-18, evening**, reinstalling horizons-orbital-mechanics
+  1.19, in the coordinating session (Claude Opus 5.5). Tony: "where
+  has skills management gone?" Anthropic's help pages, read that
+  evening: skills had moved from Settings to Customize > Skills, and
+  Customize is renamed Plugins in the sidebar, one Plugins page in
+  place of the separate Skills, Connectors and Plugins tabs
+  (support.claude.com, article 17740565, "Manage plugins, skills and
+  connectors from one Plugins page"). Tony found it and reinstalled;
+  17:30: "i had to down vote this new buried method."
+- **Where the old words stand**, at orrery 342d2bc4:
+  PROJECT_INSTRUCTIONS.md five times (the Stale Skill gate among them)
+  and skills/interactive-exhibit/SKILL.md once. Each would send Tony
+  to a place that no longer exists. By the records skill's rule a
+  wrong instruction is corrected in the session that finds it; it is
+  carried instead, so as not to ask a second reinstall and protocol
+  paste of Tony the same night, and he knows the new place. Read the
+  help page again when correcting: the page was moving that week.
+**Gap:** the correction, at the next protocol version and at
+interactive-exhibit's next version (L-297's round, if it bumps it).
+**Ref:** ledger-and-session-records (a wrong sentence in a skill: bump
+now, or carry it); the protocol's Stale Skill = Stop.
+
 #### [L-529] Guided encounters: the guide's way of telling, used for a flyby (gallery; an idea, for a design talk after Mars)
-<!-- L:529 status:OPEN upd:2026-11-13 section:A flag: rice: -->
+<!-- L:529 status:OPEN upd:2026-11-18 section:A flag: rice: -->
 - **Tony, 2026-11-12, 20:34,** after his phone look at the finished
   guide (L-527 (a first visit's guide)): "it works great. i'm thinking
   this might be a good way to create encounters, with labels and focus
@@ -1997,9 +2085,16 @@ fetch's and the digits test's checks; Tony's word on the rule.
   encounters are read from the plans, not found again. ESCAPADE's L2
   loiter adds a kind (L-533). Designed together with L-534 (missions by
   destination), which reads the same events.
-**Gap:** one design round with L-534, after ESCAPADE's path (L-533) and
-the Lagrange points (L-297), by the road's order; then which encounter
-first.
+- **2026-11-18, from ESCAPADE's phone look** (the coordinating session,
+  Claude Opus 5.5). Tony, 17:52: "The only thing I miss are the dates
+  of flybys. For example it seems that the two craft are near earth
+  right now. I assume this can be shown with the encounters." Each
+  flyby and arrival has its moment in the plan (`path.events`); the
+  box gives one only inside ESCAPADE's loiter sentence. ESCAPADE is
+  the worked example, and its loiter the new kind of event the round
+  reads (L-533).
+**Gap:** one design round with L-534, after the Lagrange points
+(L-297), by the road's order; then which encounter first.
 **Ref:** L-527 (a first visit's guide: the card, the ring, the camera's
 swing, `gallery/first_guide.js`); L-507 (historical missions, whose
 encounters were to become saved scenes); L-489 (compositions: Artemis II
@@ -16063,7 +16158,7 @@ the Sun-Earth Lagrange points with it.
 question carried out of it), L-286 (rooms), interactive.html.
 
 #### [L-297] Earth-Moon Lagrange points: serving path sized, deferred from the Earth exhibit
-<!-- L:297 status:OPEN upd:2026-11-15 section:A flag: rice:2/3/70/3 -->
+<!-- L:297 status:OPEN upd:2026-11-18 section:A flag: rice:2/3/70/3 -->
 - **Sized 2026-09-07 before any Earth code, on the build order's
   instruction.** Record:
   `documentation/SIZING_earth_moon_lagrange_20260907.md` (gallery repo).
@@ -16113,9 +16208,23 @@ points are one group per pair (ruling 4 there).
   slip. All ten come to the Moon's standard (L-513: a key, NASA's words
   and page) in this round; their link today is NASA's "What is a
   Lagrange point?" resource page.
-**Gap:** the round of its own, after ESCAPADE's path (L-533): the orrery
-keys the ten in NASA's words; the website's builder gains the serving
-shape sized above; the ten drawn, re-sized as the Note says.
+- **2026-11-18, NEXT** (the coordinating session, Claude Opus 5.5).
+  ESCAPADE's path went live without L2 drawn; its box names L2 in
+  words (L-533). Tony, 13:28: "We should also add L2 as an object to
+  the website for this loiter and later uses"; reminded of the ruling
+  of Nov 15 above, 13:31: "Keep as planned after escapade". So this
+  round is next, all ten together, before the design round (L-534,
+  L-529).
+  - TWO RIDERS from ESCAPADE, Tony's "Yes" of 17:58: a label side per
+    body (17:57, "consider putting one of the names on the opposite
+    side of its symbol"), for the twins and for the points beside
+    Earth and the Moon; and the box's last day, 2 or 3 days short of
+    the plan's span for each twin, explained before it is changed.
+  - A third, if this round bumps interactive-exhibit: the skills
+    page's new place (L-537).
+**Gap:** the round of its own, next: the orrery keys the ten in NASA's
+words; the website's builder gains the serving shape sized above; the
+ten drawn, re-sized as the Note says; the two riders above.
 **Ref:** L-291, L-294, gallery `tools/gallery_cache_builder.py` (lines
 745-800, 910-935, 1135-1150 at `92e98ca9`), `gallery/assembler/assemble.py`
 (line 54), the sizing note.

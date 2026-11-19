@@ -1,16 +1,16 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 18, 2026, evening: ESCAPADE's path built and its words approved, waiting on your pushes (Opus).
-- Written at orrery 00c89ef0 and gallery 1d3090bc, with this session's edits on your disk.
+Last updated: November 18, 2026, night: ESCAPADE's path live and looked at; the coordinating session of Nov 18 closed (Opus).
+- Written at orrery 342d2bc4 and gallery 133dbd21, with this patch's edits on your disk.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - ESCAPADE's twins are drawn by their plans: each a loiter near L2 to its flyby of Earth, the flyby, and its arrival at Mars, NASA's list; the plan's false June flyby and its passes of the Sun are gone (L-533 (ESCAPADE)).
-> - The website half is built and tested in a copy: both craft in Spacecraft, the box naming L2 in words only, and a check that Blue's -9 is never read as Pluto's centre.
+> - ESCAPADE's twins are live, on the website and in the orrery: each a year of loops near L2, its flyby of Earth (Blue Nov 7, Gold Nov 9), and its arrival at Mars next September, drawn from JPL by their plans (L-533 (ESCAPADE)).
+> - Your phone look accepted it. Your two misses, each event's date and the destination in the box, go to the design talk; the overlapping names ride the Lagrange round.
 >
-> **Do next:** *Push the orrery, run the website's Daily Run, push the website, the same evening; then your phone look (L-533 (ESCAPADE)). The words are approved.*
+> **Do next:** *The ten Lagrange points in one round (L-297 (the Lagrange points)), with a label side for ESCAPADE's twins; then the design talk on destinations and encounters.*
 >
 > **Needs you now:**
 > - *(do) When the orrery's night title starts "EL NINO DUE": rebuild El Nino's page from the dashboard's Earth System group, read it on your phone, then push both.*
@@ -30,7 +30,7 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
                Moon's standards (L-513, closed).
  15.   [NOW]   *Mars (L-514 (the Mars room)) closed Nov 15. El Nino's
                page (L-060 (El Nino)) live Nov 17; ESCAPADE's path (L-533)
-               built Nov 18, your look next; the Lagrange points (L-297), the
+               live Nov 18; next, the Lagrange points (L-297), the
                destinations and encounters talk (L-534, L-529), then Uranus
                and Neptune. Io, Titan, Charon and Pluto come to standard in their folds.* << moved this session
  16.   [later] Earth's fold: the Earth-Moon barycentre, SOHO, Gaia, James Webb, Artemis II.
@@ -52,7 +52,8 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
 ## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings; a line leaves once it is habit, or a skill carries it.
-- A craft riding near a Lagrange point for 60 days or more is one event, a loiter, ending at its flyby; a pass inside it is a flyby only when the craft leaves within 15 days (Nov 18; L-533 (ESCAPADE); horizons-orbital-mechanics 1.19).
+- Moons sit with their planet's shells by distance, as Earth's Moon does; there is no Moons group (Nov 18; L-534 (missions by destination)).
+- ESCAPADE's words leave out NASA's "kidney-bean": it is the loop seen from a view that turns with Earth, and no room turns (Nov 18; L-533 (ESCAPADE)).
 - A page's reel is made by the session from the page's own words and pictures, each sentence checked against the page; Muse adds only the Boost filter if needed, no music, and posts (Nov 17; L-060 (El Nino)).
 - El Nino's monthly update: the night checks NOAA and flags "EL NINO DUE"; you rebuild the page by hand; the night never changes a page. You no longer run the Daily Run routinely; you rely on the nightly (Nov 17; L-060 (El Nino)).
 - El Nino is a page like Sudan's, its chart the June design; one source of record, NOAA's Climate Prediction Center, its forecast NOAA's own chances on RONI; WMO and Australia's index left out (Nov 16; L-060 (El Nino)).
@@ -66,7 +67,7 @@ Standing rulings; a line leaves once it is habit, or a skill carries it.
 
 Waiting behind other work; a line leaves when picked up.
 - A moon's change in a year, read from two dates, catches the moon's own short wobble (Phobos's jumped 20 times in a day); the digits should come from many dates: its own session (Nov 15; L-536 (a moon's yearly change)).
-- Guided encounters, the guide's way of telling used for a flyby: a design talk after Mars (Nov 12; L-529 (guided encounters)).
+- ESCAPADE's loops near L2 show only in a view centred on Earth, and the website draws a planned path around the Sun alone: with Earth's fold, where SOHO, Gaia and JWST need it too (Nov 18; L-533 (ESCAPADE)).
 - The hold's leftovers: Earth's own box in its fold does not say a body is held; a close pass is held on its older orbit (L-526 (a close pass held)), before 2029 (Nov 11; L-525 (hold the bad data)).
 - The orrery's own Kepler solvers start the way the website's did; safe today, listed on L-524 (the Kepler solver's start), for an orrery session (Nov 11).
 - Step 2b's three leftovers: Io, Titan, Pluto and Charon have no words or i-panel link until the orrery keys them; Find misses a shell of Earth's by its own name until Earth's fold is first opened; a view centred on Jupiter is not in the shared link (Nov 10; L-515 (one nested tree)).
@@ -79,9 +80,7 @@ Waiting behind other work; a line leaves when picked up.
 - L-508 (a held body's alarm), L-485 (a nightly run): the website honours no orrery hold yet; the alarm's quiet half waits, its loud half built (L-525, Nov 11).
 - L-462 (a shorter run); L-128 (the ice lines); L-500 (eyeballed numbers).
 - L-483 (a comet room), after historical missions' slice 2.
-- L-489 (compositions), with L-486 and L-488 under it: Artemis II in
-  the Earth room first, with slice 2 (L-507 (historical missions));
-  Apollo 11's S-IVB with them (Nov 5).
+- L-489 (compositions), with L-486 and L-488 under it: Artemis II in the Earth room first, with slice 2 (L-507 (historical missions)); Apollo 11's S-IVB with them (Nov 5).
 - A body crossing e = 1: its drawer row waits for JPL's class (L-510 (the typed fields), Nov 5).
 - A craft riding a planet on 7-day points cuts corners between windows:
   a later item on L-507 (historical missions) (Nov 5).
@@ -91,11 +90,11 @@ Waiting behind other work; a line leaves when picked up.
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261118T171805Z, ok, no retry on the swap (your local gallery's swap log at 1d3090bc, read Nov 18).
-- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md, run of 20261118T210633Z on orrery 00c89ef, read Nov 18).
+- Last cache build: 20261118T230303Z, ok, no retry on the swap (the website's swap log at 133dbd21, read Nov 18).
+- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at orrery 342d2bc4, generated Nov 18, read Nov 18).
 - This page's date and the ledger's newest stamp: both Nov 18. Agree.
 
-## Waiting on you
+## Waiting on you  **>> UPDATED THIS SESSION**
 
 Decisions, one at a time:
 - None now.
@@ -107,7 +106,7 @@ At the next design talk:
   code)); two cases now, the orrery's unused date function and its
   Pluto-centred view of the moons.
 - Planet 9: how to show a body that may not exist.
-- Missions by destination and encounters at every flyby and destination, one round, with your Moons group under a planet (Nov 15; L-534 (missions by destination), L-529 (guided encounters)).
+- Missions by destination and encounters at every flyby and destination, one round, after the Lagrange points, ESCAPADE the worked example. Your words of Nov 18: "The only thing I miss are the dates of flybys"; "We also don't say what the destination or basic mission objective is" (L-534 (missions by destination), L-529 (guided encounters)).
 - Whether the site counts visits, and tells visitors (Nov 13; for the Earth Science room's talk, L-531 (the Earth Science room)).
 
 Not urgent, in your order:
