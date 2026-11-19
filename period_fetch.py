@@ -36,7 +36,8 @@ WHAT IT ASKS, AND WHEN
 
     Two kinds of served object are named and not fetched, for the reason
     plotting does not fetch them either:
-      - the Sun, which orbits nothing here (the export carries no period);
+      - the Sun, which orbits nothing here (the export carries no period),
+        and a Lagrange point, which has no orbit of its own (L-297);
       - an object plotting's pre-fetch never asks elements for: an
         object_type outside PLOTTED_TYPES, a mission, or a name in
         SKIP_NAMES. Both lists copy palomas_orrery.py's pre-fetch filter,
@@ -165,6 +166,9 @@ part 1: every served small body's database e and its elements refreshed
 on the 30-day cycle; a comet is drawn as a path by its database e
 (path_or_orbit.py), no longer by the retired 'open_path', and is no
 longer skipped for its elements.)
+Module updated: November 18, 2026 with Anthropic's Claude Opus 5.5 (L-297,
+the Lagrange points: a point is named and not asked, since the export
+serves it no period.)
 """
 
 import ast
@@ -313,7 +317,13 @@ def classify(entries, cache, typed, solutions=None):
         block, _inputs = export_objects.period_block(
             entry["name"], entry["object_type"], cache, typed)
         if block is None:
-            skipped.append((entry, "orbits nothing here, so no period"))
+            if entry["object_type"] == "lagrange_point":
+                # L-297: a point has no orbit of its own; the export
+                # serves none, so none is asked.
+                skipped.append((entry, "a Lagrange point has no orbit of "
+                                       "its own, so no period"))
+            else:
+                skipped.append((entry, "orbits nothing here, so no period"))
             continue
         want = wanted_target(entry, cache)
         if block.get("kind") == "fetched" and block.get("target") != want:

@@ -197,6 +197,11 @@ Pluto-centred view of Pluto's moons is marked DEPRECATED where this file
 serves it -- the centre menu that offers 'Pluto', the two element
 pre-fetches' 'Pluto' half, and the animation's barycentre marker for that
 view. Nothing this module does changed.
+Module updated: November 18, 2026 with Anthropic's Claude Opus 5.5 (L-297,
+the Lagrange points): the checkboxes carry the names visitors see,
+Earth-Moon L1 ... and Earth-Sun L1 ..., under "Earth-Sun Lagrange
+Points:"; EM-L3 and L3 are gone, since JPL has no L3 record and those
+two drew the asteroids 3013 Dobrovoleva and 33 Polyhymnia.
 
 """
 #Paloma's Orrery - Solar System Visualization Tool
@@ -3183,16 +3188,16 @@ asteroid_dw_var = tk.IntVar(value=0)
 yr4_var = tk.IntVar(value=0)
 
 # Lagrange Points
-# Earth-Moon Lagrange Points
+# Earth-Moon Lagrange Points (L-297: JPL has no L3, so there is
+# none here)
 eml1_var= tk.IntVar(value=0) 
 eml2_var= tk.IntVar(value=0)
-eml3_var= tk.IntVar(value=0)
 eml4_var= tk.IntVar(value=0)
 eml5_var= tk.IntVar(value=0)
-# Sun-Earth-Moon-Barycenter Lagrange Points
+# Earth-Sun Lagrange Points (JPL's Sun & Earth-Moon Barycenter
+# points, SEMB-L1 and so on; no L3, L-297)
 l1_var= tk.IntVar(value=0) 
 l2_var= tk.IntVar(value=0) 
-l3_var= tk.IntVar(value=0) 
 l4_var= tk.IntVar(value=0) 
 l5_var= tk.IntVar(value=0) 
 
@@ -9540,22 +9545,20 @@ create_celestial_checkbutton("Earth-Moon Barycenter", earth_moon_barycenter_var)
 earth_moon_lagrange_label = tk.Label(celestial_frame, text="Earth-Moon Lagrange Points:", font=("Arial", 9, "bold"))
 earth_moon_lagrange_label.pack(anchor='w', pady=(5, 0))
 
-# Earth-Moon lagrange points
-create_celestial_checkbutton("EM-L1", eml1_var)
-create_celestial_checkbutton("EM-L2", eml2_var)
-create_celestial_checkbutton("EM-L3", eml3_var)
-create_celestial_checkbutton("EM-L4", eml4_var)
-create_celestial_checkbutton("EM-L5", eml5_var)
+# Earth-Moon Lagrange points, by the names visitors see (L-297)
+create_celestial_checkbutton("Earth-Moon L1", eml1_var)
+create_celestial_checkbutton("Earth-Moon L2", eml2_var)
+create_celestial_checkbutton("Earth-Moon L4", eml4_var)
+create_celestial_checkbutton("Earth-Moon L5", eml5_var)
 
-sun_earth_moon_lagrange_label = tk.Label(celestial_frame, text="Sun-Earth-Moon Lagrange Points:", font=("Arial", 9, "bold"))
+sun_earth_moon_lagrange_label = tk.Label(celestial_frame, text="Earth-Sun Lagrange Points:", font=("Arial", 9, "bold"))
 sun_earth_moon_lagrange_label.pack(anchor='w', pady=(5, 0))
 
-# Sun-Earth-Moon lagrange points
-create_celestial_checkbutton("L1", l1_var)
-create_celestial_checkbutton("L2", l2_var)
-create_celestial_checkbutton("L3", l3_var)
-create_celestial_checkbutton("L4", l4_var)
-create_celestial_checkbutton("L5", l5_var)
+# Earth-Sun Lagrange points, by the names visitors see (L-297)
+create_celestial_checkbutton("Earth-Sun L1", l1_var)
+create_celestial_checkbutton("Earth-Sun L2", l2_var)
+create_celestial_checkbutton("Earth-Sun L4", l4_var)
+create_celestial_checkbutton("Earth-Sun L5", l5_var)
 
 # Near Earth asteroids
 apollo_nea_label = tk.Label(celestial_frame, text="Near-Earth Asteroids (Apollo-type, a > 1.0 AU AND q < 1.017 AU):", font=("Arial", 9, "bold"))

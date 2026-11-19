@@ -8,7 +8,7 @@ Rebuilt by `exact_rows_report.py` on every orrery maintenance run. An exact row 
 - 47 exact rows in `constants_new.py`.
 - 11 printed by at least one display: `SUN_RADIUS_KM`, `EARTH_LEO_UPPER_ALTITUDE_KM`, `EARTH_VAN_ALLEN_OUTER_RADII`, `EARTH_SOLAR_WIND_PRESSURE_NPA`, `EARTH_SOLAR_WIND_BZ_NT`, `EARTH_MAGNETOPAUSE_CUT_ANGLE_DEG`, `EARTH_BOW_SHOCK_CUT_ANGLE_DEG`, `INNER_CORONA_RADII`, `HELMET_CUSP_RADII`, `INNER_LIMIT_OORT_CLOUD_AU`, `OUTER_OORT_CLOUD_AU`.
 - 40 printing lines: 25 in the orrery, 15 in the gallery.
-- Gallery pointers to exact rows with no PRINTS entry (NOT FOLLOWED): 3: `MAIN_BELT_SAMPLE_ORBITS` at `/rooms/solar-system/drawer/rows/80/feature/sample_orbits`, `MAIN_BELT_JPL_COUNT` at `/rooms/solar-system/drawer/rows/80/feature/jpl_count`, `MAIN_BELT_SAMPLE_H_MAX` at `/rooms/solar-system/drawer/rows/80/feature/h_max`.
+- Gallery pointers to exact rows with no PRINTS entry (NOT FOLLOWED): 3: `MAIN_BELT_SAMPLE_ORBITS` at `/rooms/solar-system/drawer/rows/85/feature/sample_orbits`, `MAIN_BELT_JPL_COUNT` at `/rooms/solar-system/drawer/rows/85/feature/jpl_count`, `MAIN_BELT_SAMPLE_H_MAX` at `/rooms/solar-system/drawer/rows/85/feature/h_max`.
 - Gallery pointers to exact rows read only to place a drawing (DRAWN, not printed): 14: `SUN_RADIUS_KM`, `ROCHE_LIMIT_DRAWN_RADII`, `GALACTIC_NORTH_POLE_RA_J2000_DEG`, `GALACTIC_NORTH_POLE_DEC_J2000_DEG`, `OUTER_OORT_CLOUD_AU`, `DE430_TERRESTRIAL_POSITION_PLACE_KM`, `EARTH_MAGNETOTAIL_DRAWN_RADIUS_RADII`, `EARTH_MAGNETOTAIL_DRAWN_END_RADII`, `EARTH_POLE_RA_J2000_DEG`, `EARTH_POLE_DEC_J2000_DEG`, `DE430_JUPITER_SATURN_POSITION_PLACE_KM`, `DE430_URANUS_NEPTUNE_PLUTO_POSITION_PLACE_KM`, `DE430_MOON_POSITION_PLACE_KM`, `MAR099_PHOBOS_DEIMOS_POSITION_PLACE_KM`.
 - PRINTS or DRAWN entries that no longer match a pointer or their line (BROKEN): 0.
 
@@ -93,14 +93,14 @@ Rule 7: each printed exact row states a print count, each orrery line prints it 
 
 ### `INNER_LIMIT_OORT_CLOUD_AU`
 
-- orrery `palomas_orrery.py` line 10653: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
+- orrery `palomas_orrery.py` line 10656: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
 - orrery `solar_visualization_shells.py` line 209: `_OORT_INNER_EDGE = row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)`
 - orrery `solar_visualization_shells.py` line 1163: `f'From {_OORT_INNER_EDGE} AU ({row_text("INNER_LIMIT_OORT_CLOUD_AU", unit="km", grouping=True...`
 - gallery `gallery/feature_renderers.js` line 2376 (config `/objects/0/features/oort_cloud/hills_cloud_torus/inner_radius`): `hover += "From " + (fmtAuServed(cfg.inner_radius) || fmtAu(lo)) + "," +`
 
 ### `OUTER_OORT_CLOUD_AU`
 
-- orrery `palomas_orrery.py` line 10653: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
+- orrery `palomas_orrery.py` line 10656: `f"* Inner Limit of Oort Cloud: {row_text('INNER_LIMIT_OORT_CLOUD_AU', grouping=True)} AU\n* O...`
 - orrery `solar_visualization_shells.py` line 219: `_OORT_OUTER_EDGE = row_text('OUTER_OORT_CLOUD_AU', grouping=True)`
 - gallery `gallery/feature_renderers.js` line 2483 (config `/objects/0/features/oort_cloud/outer_oort_clumpy/outer_radius`): `var z = fmtAuServed(cfg.outer_radius) || fmtAu(hi);`
 - gallery `gallery/feature_renderers.js` line 2483 (config `/objects/0/features/oort_cloud/galactic_tide/outer_radius`): `var z = fmtAuServed(cfg.outer_radius) || fmtAu(hi);`
@@ -172,16 +172,16 @@ No display prints these exact rows. Under Rule 7 they carry no print count. The 
   - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 244 (config `/objects/7/position_accuracy`): `v = node.value;`
   - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 243 (config `/objects/8/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
   - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 244 (config `/objects/8/position_accuracy`): `v = node.value;`
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 243 (config `/objects/14/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 244 (config `/objects/14/position_accuracy`): `v = node.value;`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 243 (config `/objects/22/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 244 (config `/objects/22/position_accuracy`): `v = node.value;`
 - `DE430_MOON_POSITION_PLACE_KM`: named on 5 other orrery line(s).
   - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 243 (config `/objects/9/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
   - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 244 (config `/objects/9/position_accuracy`): `v = node.value;`
 - `MAR099_PHOBOS_DEIMOS_POSITION_PLACE_KM`: named on 7 other orrery line(s).
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 243 (config `/objects/10/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 244 (config `/objects/10/position_accuracy`): `v = node.value;`
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 243 (config `/objects/11/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
-  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 244 (config `/objects/11/position_accuracy`): `v = node.value;`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 243 (config `/objects/18/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 244 (config `/objects/18/position_accuracy`): `v = node.value;`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 243 (config `/objects/19/position_accuracy`): `if (node.unit === "km" && typeof node.value === "number") {`
+  - gallery: read to draw, not printed, at `gallery/solar_system_figures.js` line 244 (config `/objects/19/position_accuracy`): `v = node.value;`
 - `GM_SUN_SI`: named on 2 other orrery line(s).
 - `BOLTZMANN_CONSTANT_J_PER_K`: named on 2 other orrery line(s).
 - `M3_PER_KM3`: named on 1 other orrery line(s).

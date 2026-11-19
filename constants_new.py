@@ -243,6 +243,10 @@ temperature and density and the convection zone's base from Bahcall,
 Pinsonneault and Basu (2001), the chromosphere's bottom and top from
 Carlsson (2007); NASA/Marshall's temperature words come off three
 Source lines.)
+Module updated: November 18, 2026 with Anthropic's Claude Opus 5.5
+(L-297, the Lagrange points: color_map turns a name shown into its
+colour key by celestial_objects.COLOR_KEY_BY_NAME before the table is
+read, so the eight points keep their colours under their new names.)
 """
 
 import math
@@ -5654,6 +5658,11 @@ def color_map(planet):
         'Leleakuhonua': 'cyan',
         '2017 OF201': 'rgb(150, 90, 60)',                       
     }
+    # A name shown that is not one of the table's keys is first turned
+    # into its key: the Lagrange points (L-297) show Tony's names and keep
+    # their colour lines under JPL's. The map is in celestial_objects.py.
+    from celestial_objects import COLOR_KEY_BY_NAME
+    planet = COLOR_KEY_BY_NAME.get(planet, planet)
     return colors.get(planet, 'goldenrod')
 
 # Define positions for stellar class labels with different x positions and fonts

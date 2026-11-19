@@ -15,12 +15,14 @@ Repo copies stale/absent; this reflects the live local stores.
 | .kmz | 40 | 14.5 MB | western_heatwave_march_21_blockbuster.kmz (904.7 KB) | 2026-11-14 |
 | .html | 46 | 9.6 MB | western_heatwave_march_26_teaser.html (1.4 MB) | 2026-11-17 |
 | .pdf | 1 | 7.1 MB | IPC_Sudan_Acute_Food_Insecurity_Feb2026_Jan2027_Special_Report.pdf (7.1 MB) | 2026-11-13 |
-| .json | 68 | 3.4 MB | constants_export.json (333.1 KB) | 2026-11-18 |
+| .json | 68 | 3.4 MB | constants_export.json (333.1 KB) | 2026-11-19 |
 | .geojson | 2 | 1.4 MB | IPC_SD_A_87143417_2026-11-13.geojson (713.9 KB) | 2026-11-13 |
 | .kml | 116 | 1.3 MB | 2015-05-24_spikes_india_pak_2015.kml (107.5 KB) | 2026-11-14 |
 | .backup | 3 | 384.7 KB | co2_mauna_loa_monthly.json.backup (177.6 KB) | 2026-01-15 |
 | .xlsx | 1 | 354.0 KB | IPC_SD_Acute_Food_Insecurity_Analysis___SD_February_2026_2026-11-13.xlsx (354.0 KB) | 2026-11-13 |
 | .txt | 2 | 28.8 KB | RONI.ascii.txt (14.4 KB) | 2026-11-17 |
+| .bak1 | 1 | 3.8 KB | close_approach_cache.json.bak1 (3.8 KB) | 2026-11-18 |
+| .bak2 | 1 | 3.6 KB | close_approach_cache.json.bak2 (3.6 KB) | 2026-11-18 |
 
 ## star_properties_magnitude.pkl
 
@@ -33,22 +35,22 @@ Repo copies stale/absent; this reflects the live local stores.
 
 Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
-**Total size:** 475.7 MB (1986 files)
+**Total size:** 503.5 MB (4114 files)
 
-**GitHub Pages headroom:** 548 MB remaining of 1024 MB ceiling (46.5% used)
+**GitHub Pages headroom:** 520 MB remaining of 1024 MB ceiling (49.2% used)
 
 ### By extension
 
 | ext | count | total | biggest | newest |
 |---|---|---|---|---|
-| .json | 1272 | 434.1 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-11-18 |
+| .json | 2969 | 450.3 MB | current_comets_social_view_20260210_2331.json (32.2 MB) | 2026-11-18 |
+| .jsonl | 711 | 18.4 MB | encke.jsonl (66.0 KB) | 2026-11-18 |
 | .kmz | 38 | 14.3 MB | western_heatwave_march_21_blockbuster.kmz (904.7 KB) | 2026-06-29 |
-| .py | 290 | 10.0 MB | patch_L330_3_website_belts_words_20261017.py (451.6 KB) | 2026-11-18 |
+| .py | 291 | 10.0 MB | patch_L330_3_website_belts_words_20261017.py (451.6 KB) | 2026-11-19 |
 | .png | 15 | 7.7 MB | palomas_orrery_logo.png (5.1 MB) | 2026-11-17 |
-| .jsonl | 281 | 6.8 MB | encke.jsonl (65.4 KB) | 2026-11-18 |
 | .js | 53 | 1.4 MB | feature_renderers.js (214.5 KB) | 2026-11-18 |
-| .html | 7 | 776.0 KB | interactive.html (483.4 KB) | 2026-11-18 |
-| .md | 9 | 251.0 KB | INTERACTIVE_AS_BUILT.md (146.6 KB) | 2026-11-18 |
+| .html | 7 | 783.1 KB | interactive.html (490.5 KB) | 2026-11-18 |
+| .md | 9 | 256.9 KB | INTERACTIVE_AS_BUILT.md (149.3 KB) | 2026-11-19 |
 | .jpg | 4 | 210.8 KB | palomas_orrery_wall.jpg (95.2 KB) | 2026-11-08 |
 | .ico | 1 | 137.3 KB | favicon.ico (137.3 KB) | 2025-11-28 |
 | .diff | 2 | 27.6 KB | gallery_cache_builder.py.diff (20.4 KB) | 2026-07-16 |
@@ -89,7 +91,7 @@ Path: `C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io`
 
 | repo | served size | ceiling | headroom | used |
 |---|---|---|---|---|
-| gallery | 475.7 MB | 1024 MB | 548 MB | 46.5% |
+| gallery | 503.5 MB | 1024 MB | 520 MB | 49.2% |
 | orrery (gitignored data) | 578.6 MB | n/a (not served) | -- | -- |
 
 Note: orrery data is local/gitignored. If orbit cache files are pushed to either repo for web serving, re-run this inventory to update headroom.

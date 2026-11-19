@@ -84,5 +84,77 @@
     "date_max": "2026-05-02",
     "dist_max": "0.5",
     "fetched": "2026-06-12"
+  },
+  "close_approach:3011:Earth": {
+    "designation": "3011",
+    "body": "Earth",
+    "approaches": [],
+    "date_min": "2026-11-19",
+    "date_max": "2026-12-17",
+    "dist_max": "0.5",
+    "fetched": "2026-11-19"
+  },
+  "close_approach:3012:Earth": {
+    "designation": "3012",
+    "body": "Earth",
+    "approaches": [],
+    "date_min": "2026-11-19",
+    "date_max": "2026-12-17",
+    "dist_max": "0.5",
+    "fetched": "2026-11-19"
+  },
+  "close_approach:3014:Earth": {
+    "designation": "3014",
+    "body": "Earth",
+    "approaches": [],
+    "date_min": "2026-11-19",
+    "date_max": "2026-12-17",
+    "dist_max": "0.5",
+    "fetched": "2026-11-19"
+  },
+  "close_approach:3015:Earth": {
+    "designation": "3015",
+    "body": "Earth",
+    "approaches": [],
+    "date_min": "2026-11-19",
+    "date_max": "2026-12-17",
+    "dist_max": "0.5",
+    "fetched": "2026-11-19"
+  },
+  "close_approach:31:Earth": {
+    "designation": "31",
+    "body": "Earth",
+    "approaches": [],
+    "date_min": "2026-11-19",
+    "date_max": "2026-12-17",
+    "dist_max": "0.5",
+    "fetched": "2026-11-19"
+  },
+  "close_approach:32:Earth": {
+    "designation": "32",
+    "body": "Earth",
+    "approaches": [],
+    "date_min": "2026-11-19",
+    "date_max": "2026-12-17",
+    "dist_max": "0.5",
+    "fetched": "2026-11-19"
+  },
+  "close_approach:34:Earth": {
+    "designation": "34",
+    "body": "Earth",
+    "approaches": [],
+    "date_min": "2026-11-19",
+    "date_max": "2026-12-17",
+    "dist_max": "0.5",
+    "fetched": "2026-11-19"
+  },
+  "close_approach:35:Earth": {
+    "designation": "35",
+    "body": "Earth",
+    "approaches": [],
+    "date_min": "2026-11-19",
+    "date_max": "2026-12-17",
+    "dist_max": "0.5",
+    "fetched": "2026-11-19"
   }
 }

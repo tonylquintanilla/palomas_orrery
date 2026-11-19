@@ -86,14 +86,14 @@
       ],
       "carried_from": "the website's data/horizons_confirmations.json at gallery 924977a3 (L-431 build 3, 2026-10-14)",
       "period": {
-        "confirmed": "2026-11-06",
+        "confirmed": "2026-11-19",
         "center": "@sun",
         "target": "3",
-        "epoch": "2026-11-06 20:07",
-        "days": 365.2506251782538,
-        "error_days": 0.0023893369036613876,
-        "jpl_days": 365.2506251782538,
-        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='3'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461351.338194445'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
+        "epoch": "2026-11-19 03:47",
+        "days": 365.252723903852,
+        "error_days": 0.000741985275794832,
+        "jpl_days": 365.252723903852,
+        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='3'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@sun'&TLIST='2461363.657638889'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
       },
       "list_sha256": "296eff87a9572efb2c94854f87b6a6a2ecfa9936bfad404b122a5cf1c8752a66"
     },
@@ -111,14 +111,14 @@
         "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=301&group=sb&format=text"
       ],
       "period": {
-        "confirmed": "2026-11-07",
+        "confirmed": "2026-11-19",
         "center": "@399",
         "target": "301",
-        "epoch": "2026-11-06 23:47",
-        "days": 27.42568868369487,
-        "error_days": 0.6199933502843287,
-        "jpl_days": 27.42568868369487,
-        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='301'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@399'&TLIST='2461351.490972222'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
+        "epoch": "2026-11-19 03:47",
+        "days": 26.87753929629526,
+        "error_days": 0.047053593126598514,
+        "jpl_days": 26.87753929629526,
+        "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='301'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@399'&TLIST='2461363.657638889'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
       }
     },
     "mars": {
@@ -708,6 +708,118 @@
         "jpl_days": 103249.7029099222,
         "query": "https://ssd.jpl.nasa.gov/api/horizons.api?format=text&COMMAND='2026%20ED138%3B'&OBJ_DATA=NO&MAKE_EPHEM=YES&EPHEM_TYPE=ELEMENTS&CENTER='@0'&TLIST='2461342.120138889'&OUT_UNITS='AU-D'&REF_PLANE='ECLIPTIC'&REF_SYSTEM='ICRF'&TP_TYPE='ABSOLUTE'&CSV_FORMAT='NO'"
       }
+    },
+    "em_l1": {
+      "confirmed": "2026-11-19",
+      "horizons_id": "3011",
+      "id_type": "id",
+      "horizons_name": "EM-L1",
+      "object_type": "lagrange_point",
+      "list_sha256": "8b5f83e5a56e573bad6247514faa021f159d827c755c1d26732336cc3a291170",
+      "jpl_name": "EM-L1",
+      "jpl_type": "other",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=3011&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=3011&group=sb&format=text"
+      ]
+    },
+    "em_l2": {
+      "confirmed": "2026-11-19",
+      "horizons_id": "3012",
+      "id_type": "id",
+      "horizons_name": "EM-L2",
+      "object_type": "lagrange_point",
+      "list_sha256": "8b5f83e5a56e573bad6247514faa021f159d827c755c1d26732336cc3a291170",
+      "jpl_name": "EM-L2",
+      "jpl_type": "other",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=3012&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=3012&group=sb&format=text"
+      ]
+    },
+    "em_l4": {
+      "confirmed": "2026-11-19",
+      "horizons_id": "3014",
+      "id_type": "id",
+      "horizons_name": "EM-L4",
+      "object_type": "lagrange_point",
+      "list_sha256": "8b5f83e5a56e573bad6247514faa021f159d827c755c1d26732336cc3a291170",
+      "jpl_name": "EM-L4",
+      "jpl_type": "other",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=3014&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=3014&group=sb&format=text"
+      ]
+    },
+    "em_l5": {
+      "confirmed": "2026-11-19",
+      "horizons_id": "3015",
+      "id_type": "id",
+      "horizons_name": "EM-L5",
+      "object_type": "lagrange_point",
+      "list_sha256": "8b5f83e5a56e573bad6247514faa021f159d827c755c1d26732336cc3a291170",
+      "jpl_name": "EM-L5",
+      "jpl_type": "other",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=3015&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=3015&group=sb&format=text"
+      ]
+    },
+    "semb_l1": {
+      "confirmed": "2026-11-19",
+      "horizons_id": "31",
+      "id_type": "id",
+      "horizons_name": "SEMB-L1",
+      "object_type": "lagrange_point",
+      "list_sha256": "8b5f83e5a56e573bad6247514faa021f159d827c755c1d26732336cc3a291170",
+      "jpl_name": "SEMB-L1",
+      "jpl_type": "other",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=31&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=31&group=sb&format=text"
+      ]
+    },
+    "semb_l2": {
+      "confirmed": "2026-11-19",
+      "horizons_id": "32",
+      "id_type": "id",
+      "horizons_name": "SEMB-L2",
+      "object_type": "lagrange_point",
+      "list_sha256": "8b5f83e5a56e573bad6247514faa021f159d827c755c1d26732336cc3a291170",
+      "jpl_name": "SEMB-L2",
+      "jpl_type": "other",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=32&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=32&group=sb&format=text"
+      ]
+    },
+    "semb_l4": {
+      "confirmed": "2026-11-19",
+      "horizons_id": "34",
+      "id_type": "id",
+      "horizons_name": "SEMB-L4",
+      "object_type": "lagrange_point",
+      "list_sha256": "8b5f83e5a56e573bad6247514faa021f159d827c755c1d26732336cc3a291170",
+      "jpl_name": "SEMB-L4",
+      "jpl_type": "other",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=34&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=34&group=sb&format=text"
+      ]
+    },
+    "semb_l5": {
+      "confirmed": "2026-11-19",
+      "horizons_id": "35",
+      "id_type": "id",
+      "horizons_name": "SEMB-L5",
+      "object_type": "lagrange_point",
+      "list_sha256": "8b5f83e5a56e573bad6247514faa021f159d827c755c1d26732336cc3a291170",
+      "jpl_name": "SEMB-L5",
+      "jpl_type": "other",
+      "queries": [
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=35&group=mb&format=text",
+        "https://ssd.jpl.nasa.gov/api/horizons_lookup.api?sstr=35&group=sb&format=text"
+      ]
     },
     "asteroid_2025_pn7": {
       "confirmed": "2026-10-31",

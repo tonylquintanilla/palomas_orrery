@@ -207,6 +207,14 @@ def self_test():
         if not str(exc).startswith("Mars: no e from JPL's Small-Body"):
             problems.append("a small body with no database e was refused "
                             "without its name: %s" % exc)
+    # L-297: a Lagrange point serves no period, as the Sun serves none,
+    # and not "Not yet fetched from JPL."
+    point = good.replace("'horizons_name': 'Mars',",
+                         "'horizons_name': 'Mars', "
+                         "'object_type': 'lagrange_point',")
+    if ex.build_export(point)["objects"]["mars"].get("period") is not None:
+        problems.append("a Lagrange point was exported with a period "
+                        "block")
     if (export["objects"]["mars"]["horizons_id"] != "499"):
         problems.append("an entry with no helio_id was not served by its id")
 

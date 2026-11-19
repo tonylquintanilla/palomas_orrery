@@ -1,8 +1,8 @@
 {
   "schema": 4,
-  "source_sha256": "41cab8ae1a13b7a5350d2c8bcac2b286fe936ae8b430c64d2e83975f209ac849",
-  "period_inputs_sha256": "25b3e90fcb26fd015350a38a5b3222f4d97c707c285c49958da72b8fa40127d2",
-  "confirmations_sha256": "7e8469d18e75a103468d6b513fa840e216bf550aff2208497bc0d6a89025f3c4",
+  "source_sha256": "ae0e6ae87dc657469ad446ba90ce406c167f52962ade69fc13bccb7a73482cdc",
+  "period_inputs_sha256": "8ed60d5ab42b98e682c9e6d10191f642b0d123aa5db5072334391f3fa968abbd",
+  "confirmations_sha256": "b4b3b37bcdc72ef3055e31c6f66b765c998265a81d33213a7838e91ea29cba73",
   "paths_sha256": "f08ab85a7997186dc2d4125a06338e0feb6b7faffb540adb40bec019e241362f",
   "cadence_days": 30,
   "objects": {
@@ -170,37 +170,37 @@
         "target": "3",
         "target_label": "the Earth-Moon center of mass",
         "open_orbit": false,
-        "fetched": "2026-11-06",
+        "fetched": "2026-11-19",
         "words": null,
         "reason": "JPL gives no uncertainty for this period, so only the digits that stay the same over a year are shown.",
         "days_only": false,
         "years": {
-          "value": 1.0,
+          "value": 1.00001,
           "figures": 6,
-          "text": "1.00000"
+          "text": "1.00001"
         },
         "days": {
-          "value": 365.25,
-          "figures": 5,
-          "text": "365.25"
+          "value": 365.253,
+          "figures": 6,
+          "text": "365.253"
         },
         "record": {
-          "days": 365.2506251782538,
-          "error_days": 0.0023893369036613876,
+          "days": 365.252723903852,
+          "error_days": 0.000741985275794832,
           "error_from": "year_change",
           "sbdb_status": "not a small body; SBDB not asked",
-          "epoch": "2026-11-06 20:07",
+          "epoch": "2026-11-19 03:47",
           "elements": {
-            "a": 0.9999895636844709,
-            "e": 0.01667149395100916,
-            "i": 0.003593006355457907,
-            "omega": 287.894963688731,
-            "Omega": 175.2076519942275,
-            "TP": 2461409.596889203,
-            "MA": 302.578797495749,
-            "TA": 300.9509439628074,
-            "q": 0.9833182437224333,
-            "epoch": "2026-11-06 20:07 osc."
+            "a": 0.9999933942992886,
+            "e": 0.01667932635334228,
+            "i": 0.003599533680311726,
+            "omega": 287.7588996708001,
+            "Omega": 175.3483986352872,
+            "TP": 2461409.601127399,
+            "MA": 314.7172278777336,
+            "TA": 313.3389992263275,
+            "q": 0.9833141781245843,
+            "epoch": "2026-11-19 03:47 osc."
           }
         }
       },
@@ -212,12 +212,12 @@
           "horizons_name": "Earth"
         },
         "period": {
-          "confirmed": "2026-11-06",
+          "confirmed": "2026-11-19",
           "center": "@sun",
-          "epoch": "2026-11-06 20:07",
-          "days": 365.2506251782538,
-          "jpl_days": 365.2506251782538,
-          "error_days": 0.0023893369036613876
+          "epoch": "2026-11-19 03:47",
+          "days": 365.252723903852,
+          "jpl_days": 365.252723903852,
+          "error_days": 0.000741985275794832
         },
         "hold": null
       }
@@ -238,33 +238,33 @@
         "target": "301",
         "target_label": null,
         "open_orbit": false,
-        "fetched": "2026-11-06",
+        "fetched": "2026-11-19",
         "words": null,
         "reason": "JPL gives no uncertainty for this period, so only the digits that stay the same over a year are shown.",
         "days_only": true,
         "years": null,
         "days": {
-          "value": 27.0,
-          "figures": 2,
-          "text": "27"
+          "value": 26.9,
+          "figures": 3,
+          "text": "26.9"
         },
         "record": {
-          "days": 27.42568868369487,
-          "error_days": 0.6199933502843287,
+          "days": 26.87753929629526,
+          "error_days": 0.047053593126598514,
           "error_from": "year_change",
           "sbdb_status": "not a small body; SBDB not asked",
-          "epoch": "2026-11-06 23:47",
+          "epoch": "2026-11-19 03:47",
           "elements": {
-            "a": 0.002578405422484208,
-            "e": 0.04037427243226854,
-            "i": 5.010316315093197,
-            "omega": 121.5210812185545,
-            "Omega": 326.2757607411543,
-            "TP": 2461343.462008743,
-            "MA": 105.3912222969847,
-            "TA": 109.7885444896174,
-            "q": 0.002474304179515993,
-            "epoch": "2026-11-06 23:47 osc."
+            "a": 0.00254393404964661,
+            "e": 0.06997113339645994,
+            "i": 5.034586734002451,
+            "omega": 133.0322396513631,
+            "Omega": 324.7308864984577,
+            "TP": 2461371.469083545,
+            "MA": 255.3728596518282,
+            "TA": 247.8044256254258,
+            "q": 0.002365932100906991,
+            "epoch": "2026-11-19 03:47 osc."
           },
           "paired": false,
           "not_paired": "the cache holds no Sun-centred elements for this body"
@@ -278,12 +278,12 @@
           "horizons_name": "Moon"
         },
         "period": {
-          "confirmed": "2026-11-07",
+          "confirmed": "2026-11-19",
           "center": "@399",
-          "epoch": "2026-11-06 23:47",
-          "days": 27.42568868369487,
-          "jpl_days": 27.42568868369487,
-          "error_days": 0.6199933502843287
+          "epoch": "2026-11-19 03:47",
+          "days": 26.87753929629526,
+          "jpl_days": 26.87753929629526,
+          "error_days": 0.047053593126598514
         },
         "hold": null
       }
@@ -2157,6 +2157,166 @@
           "jpl_days": 103249.7029099222,
           "error_days": 10.294
         },
+        "hold": null
+      }
+    },
+    "em_l1": {
+      "name": "Earth-Moon L1",
+      "horizons_id": "3011",
+      "horizons_name": "EM-L1",
+      "id_type": "id",
+      "object_type": "lagrange_point",
+      "description": "JPL names it EM-L1, the Earth-Moon Lagrange-1 point. NASA: \"Lagrange points are positions in space where objects sent there tend to stay put.\" \"The unstable Lagrange points - labeled L1, L2 and L3 - lie along the line connecting the two large masses.\"",
+      "info_url": "https://science.nasa.gov/resource/what-is-a-lagrange-point/",
+      "period": null,
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-11-19",
+          "horizons_id": "3011",
+          "id_type": "id",
+          "horizons_name": "EM-L1"
+        },
+        "period": null,
+        "hold": null
+      }
+    },
+    "em_l2": {
+      "name": "Earth-Moon L2",
+      "horizons_id": "3012",
+      "horizons_name": "EM-L2",
+      "id_type": "id",
+      "object_type": "lagrange_point",
+      "description": "JPL names it EM-L2, the Earth-Moon Lagrange-2 point. NASA: \"Lagrange points are positions in space where objects sent there tend to stay put.\" \"The unstable Lagrange points - labeled L1, L2 and L3 - lie along the line connecting the two large masses.\"",
+      "info_url": "https://science.nasa.gov/resource/what-is-a-lagrange-point/",
+      "period": null,
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-11-19",
+          "horizons_id": "3012",
+          "id_type": "id",
+          "horizons_name": "EM-L2"
+        },
+        "period": null,
+        "hold": null
+      }
+    },
+    "em_l4": {
+      "name": "Earth-Moon L4",
+      "horizons_id": "3014",
+      "horizons_name": "EM-L4",
+      "id_type": "id",
+      "object_type": "lagrange_point",
+      "description": "JPL names it EM-L4, the Earth-Moon Lagrange-4 point. NASA: \"Lagrange points are positions in space where objects sent there tend to stay put.\" \"The stable Lagrange points - labeled L4 and L5 - form the apex of two equilateral triangles that have the large masses at their vertices.\" \"In 1956 the Polish astronomer Kordylewski discovered large concentrations of dust at the Trojan points of the Earth-Moon system.\"",
+      "info_url": "https://science.nasa.gov/resource/what-is-a-lagrange-point/",
+      "period": null,
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-11-19",
+          "horizons_id": "3014",
+          "id_type": "id",
+          "horizons_name": "EM-L4"
+        },
+        "period": null,
+        "hold": null
+      }
+    },
+    "em_l5": {
+      "name": "Earth-Moon L5",
+      "horizons_id": "3015",
+      "horizons_name": "EM-L5",
+      "id_type": "id",
+      "object_type": "lagrange_point",
+      "description": "JPL names it EM-L5, the Earth-Moon Lagrange-5 point. NASA: \"Lagrange points are positions in space where objects sent there tend to stay put.\" \"The stable Lagrange points - labeled L4 and L5 - form the apex of two equilateral triangles that have the large masses at their vertices.\" \"In 1956 the Polish astronomer Kordylewski discovered large concentrations of dust at the Trojan points of the Earth-Moon system.\"",
+      "info_url": "https://science.nasa.gov/resource/what-is-a-lagrange-point/",
+      "period": null,
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-11-19",
+          "horizons_id": "3015",
+          "id_type": "id",
+          "horizons_name": "EM-L5"
+        },
+        "period": null,
+        "hold": null
+      }
+    },
+    "semb_l1": {
+      "name": "Earth-Sun L1",
+      "horizons_id": "31",
+      "horizons_name": "SEMB-L1",
+      "id_type": "id",
+      "object_type": "lagrange_point",
+      "description": "JPL names it SEMB-L1, the Sun & Earth-Moon Barycenter Lagrange-1 point. The Earth-Moon barycenter is the center of mass of Earth and the Moon. NASA: \"Lagrange points are positions in space where objects sent there tend to stay put.\" \"The unstable Lagrange points - labeled L1, L2 and L3 - lie along the line connecting the two large masses.\"",
+      "info_url": "https://science.nasa.gov/resource/what-is-a-lagrange-point/",
+      "period": null,
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-11-19",
+          "horizons_id": "31",
+          "id_type": "id",
+          "horizons_name": "SEMB-L1"
+        },
+        "period": null,
+        "hold": null
+      }
+    },
+    "semb_l2": {
+      "name": "Earth-Sun L2",
+      "horizons_id": "32",
+      "horizons_name": "SEMB-L2",
+      "id_type": "id",
+      "object_type": "lagrange_point",
+      "description": "JPL names it SEMB-L2, the Sun & Earth-Moon Barycenter Lagrange-2 point. The Earth-Moon barycenter is the center of mass of Earth and the Moon. NASA: \"Lagrange points are positions in space where objects sent there tend to stay put.\" \"The unstable Lagrange points - labeled L1, L2 and L3 - lie along the line connecting the two large masses.\" \"L2 is ideal for astronomy because a spacecraft is close enough to readily communicate with Earth, can keep Sun, Earth and Moon behind the spacecraft for solar power and (with appropriate shielding) provides a clear view of deep space for our telescopes.\"",
+      "info_url": "https://science.nasa.gov/resource/what-is-a-lagrange-point/",
+      "period": null,
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-11-19",
+          "horizons_id": "32",
+          "id_type": "id",
+          "horizons_name": "SEMB-L2"
+        },
+        "period": null,
+        "hold": null
+      }
+    },
+    "semb_l4": {
+      "name": "Earth-Sun L4",
+      "horizons_id": "34",
+      "horizons_name": "SEMB-L4",
+      "id_type": "id",
+      "object_type": "lagrange_point",
+      "description": "JPL names it SEMB-L4, the Sun & Earth-Moon Barycenter Lagrange-4 point. The Earth-Moon barycenter is the center of mass of Earth and the Moon. NASA: \"Lagrange points are positions in space where objects sent there tend to stay put.\" \"The stable Lagrange points - labeled L4 and L5 - form the apex of two equilateral triangles that have the large masses at their vertices. L4 leads the orbit of earth and L5 follows.\" \"In 2010 NASA's WISE telescope finally confirmed the first Trojan asteroid (2010 TK7) around Earth's leading Lagrange point.\"",
+      "info_url": "https://science.nasa.gov/resource/what-is-a-lagrange-point/",
+      "period": null,
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-11-19",
+          "horizons_id": "34",
+          "id_type": "id",
+          "horizons_name": "SEMB-L4"
+        },
+        "period": null,
+        "hold": null
+      }
+    },
+    "semb_l5": {
+      "name": "Earth-Sun L5",
+      "horizons_id": "35",
+      "horizons_name": "SEMB-L5",
+      "id_type": "id",
+      "object_type": "lagrange_point",
+      "description": "JPL names it SEMB-L5, the Sun & Earth-Moon Barycenter Lagrange-5 point. The Earth-Moon barycenter is the center of mass of Earth and the Moon. NASA: \"Lagrange points are positions in space where objects sent there tend to stay put.\" \"The stable Lagrange points - labeled L4 and L5 - form the apex of two equilateral triangles that have the large masses at their vertices. L4 leads the orbit of earth and L5 follows.\"",
+      "info_url": "https://science.nasa.gov/resource/what-is-a-lagrange-point/",
+      "period": null,
+      "confirmation": {
+        "identity": {
+          "confirmed": "2026-11-19",
+          "horizons_id": "35",
+          "id_type": "id",
+          "horizons_name": "SEMB-L5"
+        },
+        "period": null,
         "hold": null
       }
     },
@@ -10515,6 +10675,68 @@
       "11",
       "2026",
       "2016"
+    ],
+    "em_l1": [
+      "1",
+      "1",
+      "1",
+      "2",
+      "3"
+    ],
+    "em_l2": [
+      "2",
+      "2",
+      "1",
+      "2",
+      "3"
+    ],
+    "em_l4": [
+      "4",
+      "4",
+      "4",
+      "5",
+      "1956"
+    ],
+    "em_l5": [
+      "5",
+      "5",
+      "4",
+      "5",
+      "1956"
+    ],
+    "semb_l1": [
+      "1",
+      "1",
+      "1",
+      "2",
+      "3"
+    ],
+    "semb_l2": [
+      "2",
+      "2",
+      "1",
+      "2",
+      "3",
+      "2"
+    ],
+    "semb_l4": [
+      "4",
+      "4",
+      "4",
+      "5",
+      "4",
+      "5",
+      "2010",
+      "2010",
+      "7"
+    ],
+    "semb_l5": [
+      "5",
+      "5",
+      "4",
+      "5",
+      "4",
+      "5"
     ],
     "asteroid_2025_pn7": [
       "2025",

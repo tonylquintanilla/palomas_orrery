@@ -1005,7 +1005,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 
 ## INDEX (generated -- status board; edit DETAIL blocks, then re-run ledger_index.py)
 
-*269 live items; 253 need attention (`!`); 165 RICE-scored; 261 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
+*270 live items; 254 need attention (`!`); 165 RICE-scored; 261 closed (section C + O.Done/W.Done); 7 retired (never reused): L-059, L-081-084, L-438-439. Find an `L-0NN` handle (Ctrl+F in VS Code) to jump to any item; search `| ! |` to list every gap. See "Using and maintaining this ledger" above for details.*
 
 ### A. Active Separate Tracks
 | Gap | L# | Item | Disposition | Score | Updated |
@@ -1077,7 +1077,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-321 | The orrery's hover text joins the provenance braid, Earth first | OPEN | 1.8 | 2026-09-12 |
 | ! | L-337 | A centre marker for bodies without shells in the exhibit rooms | OPEN | 1.8 | 2026-09-19 |
 |  | L-194 | Text-only assertions -- claims the scanner cannot see | DEFERRED | 1.4 | 2026-08-15 |
-| ! | L-297 | Earth-Moon Lagrange points: serving path sized, deferred from the Earth exhibit | OPEN | 1.4 | 2026-11-18 |
+| ! | L-297 | Earth-Moon Lagrange points: serving path sized, deferred from the Earth exhibit | OPEN | 1.4 | 2026-11-19 |
 | ! | L-314 | Live solar wind conditions for the magnetosphere shells (SWPC through the nightly builder) | OPEN | 1.3 | 2026-10-21 |
 | ! | L-253 | The 660 discontinuity's depth variation -- held unsourced | OPEN | 1.2 | 2026-08-26 |
 |  | L-308 | A shell-legend surface for static cards (deferred, with its trigger) | DEFERRED | 1.2 | 2026-10-04 |
@@ -1140,7 +1140,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-427 | Rows a neighbour's citation had been crediting (store) | OPEN | -- | 2026-10-09 |
 | ! | L-429 | The room button on the row, in the Solar System room's list (gallery, exhibits) | OPEN | -- | 2026-10-10 |
 | ! | L-430 | Uncited lines in the orrery's Oort cloud tooltips and the Sun's reach text (orrery, words) | OPEN | -- | 2026-10-10 |
-| ! | L-432 | Objects drawn in the default goldenrod (orrery, colours) | OPEN | -- | 2026-10-28 |
+| ! | L-432 | Objects drawn in the default goldenrod (orrery, colours) | OPEN | -- | 2026-11-18 |
 | ! | L-435 | Standing rulings that are method, held only on Tony's page (skills, records) | OPEN | -- | 2026-10-12 |
 | ! | L-449 | A cache build dropped the 82 build-run records it should have carried (gallery, cache builder) | OPEN | -- | 2026-10-17 |
 | ! | L-454 | A drawn device for edges that move: the magnetopause, the bow shock and their kind (orrery + gallery, design) | OPEN | -- | 2026-10-28 |
@@ -1188,6 +1188,7 @@ as an archive of the prioritization thinking -- no cleanup on close.
 | ! | L-534 | Missions by destination: a mission's row under each body it goes to (gallery + orrery; design round with L-529) | OPEN | -- | 2026-11-18 |
 | ! | L-536 | A moon's yearly change samples its wobble: the period's digits from many dates (orrery, the period fetch; recorded, for its own session) | OPEN | -- | 2026-11-15 |
 | ! | L-537 | The skills page moved: Settings > Skills is now Plugins in the sidebar (records; carried to the next protocol or skill bump) | OPEN | -- | 2026-11-18 |
+| ! | L-538 | The orbiters' printed error: a craft near a planet prints more digits than its working-out earns (gallery; found by L-297) | OPEN | -- | 2026-11-19 |
 
 ### B. Pending Action (Tony-side)
 
@@ -1916,8 +1917,29 @@ final).
     tokens of 1,000,000 at its end, compacted once, no /cost figure.
     The coordinator's suggestion, not ruled: a build across both
     repositories gives the website half a session of its own.
+**Note:** (2026-11-19, L-297's Session 2, Claude Opus 5.5 in Claude Code)
+the two riders.
+- THE LABEL SIDE IS BUILT: Gold's name below its symbol, Blue's above;
+  approved on Tony's look of Nov 19 (L-297's note).
+- THE BOX'S LAST DAY, the cause found, nothing changed. The builder asks
+  JPL for a path's backbone a point every 7 days counted from the span's
+  start, and never asks for the span's last day itself, so a path stops
+  at its last 7-day point before the end. Blue's span is 667 days, 95
+  weeks and 2 days: its last point is 2027-09-10, 2 days short of
+  2027-09-12. Gold's is exactly 95 weeks, so its last 7-day point would
+  fall on its last day, but it is asked a minute after midnight (the 69 s
+  added for JPL's clock, printed to the minute) while the stop asked is
+  that midnight, so it is dropped too, and Gold's path ends at its Mars
+  arrival window, 2027-09-07 01:49, 3 days short of 2027-09-10. JPL
+  holds both to the span's end (asked Nov 19). It is not the twins
+  alone: 27 of the 34 paths still flying stop 1 to 7 days short (Voyager
+  2 and Osiris-APEX 5, New Horizons, Juno, Lucy and the 7 comets on
+  open paths 7). WHAT WOULD CHANGE: ask the span's last moment too, as
+  `fetch_path_last_day` already does for an ended mission; each dashed
+  line would then run to its span's end and each box name that day.
+  **Tony-action (decide):** whether to make that change.
 **Gap:** the row under Mars, by L-534's rule once it is designed. The
-label side and the box's last day ride L-297. The loops near L2, with
+box's last day waits for Tony's ruling (the note of Nov 19). The loops near L2, with
 an Earth-centred path view in Earth's fold. One later item: a Mars
 arrival counts as one only because JPL's data runs three days past
 orbit insertion; the plan's 30-day remake shows it if JPL trims that.
@@ -2042,6 +2064,37 @@ fetch's and the digits test's checks; Tony's word on the rule.
 interactive-exhibit's next version (L-297's round, if it bumps it).
 **Ref:** ledger-and-session-records (a wrong sentence in a skill: bump
 now, or carry it); the protocol's Stale Skill = Stop.
+
+#### [L-538] The orbiters' printed error: a craft near a planet prints more digits than its working-out earns (gallery; found by L-297)
+<!-- L:538 status:OPEN upd:2026-11-19 section:A flag: rice: -->
+- **Found 2026-11-19** in L-297's Session 2 (Claude Opus 5.5 in Claude
+  Code, website 133dbd21), holding the curve's error to every served path.
+  LIVE TODAY, before and apart from that round: a spacecraft's box prints
+  its distance to the place the marker's error earns, and the error is the
+  parabola against the chord (`render_spacecraft.position_at`). For a
+  craft that orbits a planet, its served points (a day or a week apart)
+  cannot see the loops between them, and the real miss is larger than the
+  printed error.
+- **Measured** (each served point held out and predicted from the rest,
+  which doubles the spacing, so harder than a real minute), inside the
+  dates a visitor can pick (JD 2461275.5 to 2461451.4, read from the
+  served cache): JUNO 6 of 27 points missed by more than the printed
+  error, worst 2.8 times it; BEPICOLOMBO 1 of 292, 6.8 times. Across all
+  their served days: Juno 129 of 280 (42.6 times), Galileo 69 of 301
+  (12.4), Europa Clipper 19 of 188 (13.3), Cassini 12 of 216 (6.7),
+  Voyager 2 3, and Akatsuki, BepiColombo, Osiris-APEX, Parker, Pioneer
+  11, Solar Orbiter, Voyager 1 2 each, Lucy and New Horizons 1. The
+  curve's error does not cure it (Juno 77, BepiColombo 6 inside it), so
+  it is off for them (Tony, Nov 19).
+- The likely cure is finer served points near the minute shown for a
+  craft in orbit around a planet, which is the orrery's path plan
+  (horizons-orbital-mechanics, a spacecraft path's plan), or a figure
+  that knows the orbit. Not designed.
+**Gap:** the design, in an orrery session with the path plan; until then
+those boxes print up to about one place finer than earned.
+**Ref:** L-297 (the curve's error, Tony's ruling of Nov 19); gallery
+`tools/test_curve_error.py` (run with every kind to measure);
+provenance-discipline, A Computed Position Prints What Its Errors Earn.
 
 #### [L-529] Guided encounters: the guide's way of telling, used for a flyby (gallery; an idea, for a design talk after Mars)
 <!-- L:529 status:OPEN upd:2026-11-18 section:A flag: rice: -->
@@ -8217,7 +8270,7 @@ One Bump), and leaves the page's Settled list once it is in the skill.
 L-424; L-434; skills/*/SKILL.md.
 
 #### [L-432] Objects drawn in the default goldenrod (orrery, colours)
-<!-- L:432 status:OPEN upd:2026-10-28 section:A flag: rice: -->
+<!-- L:432 status:OPEN upd:2026-11-18 section:A flag: rice: -->
 - **Tony, 2026-10-10, in his run record** (`documentation/WHERE_WE_ARE_10-10-26_2019_run_record.md` at 6fc3648): "the color dictionary
   is a drawing choice and kept by hand. the default color is often
   goldenrod, but we should switch it up to avoid clashing with nearby
@@ -8242,6 +8295,14 @@ L-424; L-434; skills/*/SKILL.md.
   the run red, and 2026 ED138 draws in the default goldenrod. The class
   is the colour table's place: in the drawing code, or a shape the
   check reads (provenance-discipline, Three Kinds of Drawing Number).
+- **Received 2026-11-18 from L-297 (the Lagrange points):** the same
+  red, renaming the points' colour lines (EM-L1 ... to Earth-Moon L1
+  ..., L1 ... to Earth-Sun L1 ...). The table was left as committed, so
+  the eight points drew goldenrod, and the lines 'EM-L3' and 'L3' stay
+  in it with no body to colour. The same night the eight got their
+  colours back without a colour line changed: a map from each name
+  shown to its key (celestial_objects.COLOR_KEY_BY_NAME), read by
+  color_map first. The two L3 lines stay here.
 **Gap:** trace which of the 27 actually draw goldenrod; then Tony picks
 colours, Encke first, beside Halley and the other comets.
 **Ref:** `constants_new.py` (`color_map`); `celestial_objects.py`;
@@ -16158,7 +16219,7 @@ the Sun-Earth Lagrange points with it.
 question carried out of it), L-286 (rooms), interactive.html.
 
 #### [L-297] Earth-Moon Lagrange points: serving path sized, deferred from the Earth exhibit
-<!-- L:297 status:OPEN upd:2026-11-18 section:A flag: rice:2/3/70/3 -->
+<!-- L:297 status:OPEN upd:2026-11-19 section:A flag: rice:2/3/70/3 -->
 - **Sized 2026-09-07 before any Earth code, on the build order's
   instruction.** Record:
   `documentation/SIZING_earth_moon_lagrange_20260907.md` (gallery repo).
@@ -16222,10 +16283,157 @@ points are one group per pair (ruling 4 there).
     the plan's span for each twin, explained before it is changed.
   - A third, if this round bumps interactive-exhibit: the skills
     page's new place (L-537).
-**Gap:** the round of its own, next: the orrery keys the ten in NASA's
-words; the website's builder gains the serving shape sized above; the
-ten drawn, re-sized as the Note says; the two riders above.
-**Ref:** L-291, L-294, gallery `tools/gallery_cache_builder.py` (lines
+**Note:** (2026-11-18, night, Session 1 of the brief
+`COORD_L297_lagrange_points_brief_20261118.md`, Claude Opus 5.5 in
+Claude Code, at orrery 53bf2469 and website 133dbd21) the orrery keyed
+eight points, not ten.
+- **JPL has no L3.** The Lookup finds nothing for 3013 or 33; asked by
+  number, JPL's main service answers with the asteroid of that number,
+  "3013 Dobrovoleva (1979 SD7)" and "33 Polyhymnia (A854 UB)". The
+  orrery asks the same way (astroquery, id_type 'id', which is now the
+  same as none), so its EM-L3 and L3 checkboxes drew those two
+  asteroids under the points' names; EM-L3's info text was written as a
+  JPL data sheet JPL does not have. The Horizons check refuses 3013 by
+  name ("no object in either index whose primary id is 3013"), so it
+  would have caught it at keying. Both entries are gone: list entries,
+  checkboxes, info text, colours.
+- **The eight as keyed** (display name, key, JPL's name and id, around):
+  Earth-Moon L1 em_l1 EM-L1 3011, L2 em_l2 EM-L2 3012, L4 em_l4 EM-L4
+  3014, L5 em_l5 EM-L5 3015, around Earth; Earth-Sun L1 semb_l1 SEMB-L1
+  31, L2 semb_l2 SEMB-L2 32, L4 semb_l4 SEMB-L4 34, L5 semb_l5 SEMB-L5
+  35, around the Sun. horizons_name is JPL's name; the display names
+  are Tony's ruling ("Earth-Sun" is NASA's word on the page quoted:
+  "The L1 point of the Earth-Sun system"). Groups: "Earth-Moon Lagrange
+  Points" and "Earth-Sun Lagrange Points", the GUI headings too.
+- **The words as approved**, Tony's "Approved, with three changes" of
+  2026-11-18 (`WORDS_L297_lagrange_points_20261118.md`): sentence A
+  reads "JPL names it EM-L1, the Earth-Moon Lagrange-1 point." and
+  "JPL names it SEMB-L1, the Sun & Earth-Moon Barycenter Lagrange-1
+  point."; the barycenter gloss for the Earth-Sun four; NASA's
+  sentences whole, from "What is a Lagrange Point?"; Kordylewski for
+  Earth-Moon L4 and L5; WISE for Earth-Sun L4 only; SOHO and Webb left
+  out. Link: NASA's page for all eight. Info text: JPL's eight data
+  sheets as read that day, verbatim (the SEMB sheets revised Mar 23,
+  2026); the unsourced bullets gone.
+- **No period for a point**: export_objects.NO_PERIOD_TYPES ("fixed",
+  "lagrange_point"), so a point's period is null, as the Sun's; the
+  period fetch names it and asks nothing. test_objects_export.py's self
+  test holds it.
+- **The typed span stays, as JPL's.** The last search found a live
+  reader: path_drawing.entry_span, which bounds the special fetch and
+  the animation (palomas_orrery.py). So, as the words file proposed, it
+  is JPL's span from each data sheet: 1900-01-01 to 2151-01-01 for the
+  Earth-Moon points, 1900-01-02 to 2150-12-31 for the Earth-Sun points.
+- **Verified against claimed:** verified, by the maintenance run at the close (read
+  from its output, not predicted): the Horizons check confirmed all
+  eight by JPL's names (data/horizons_confirmations.json, dated
+  2026-11-19 by UTC); the objects export carries the eight, each with
+  period null and NASA's page as info_url, and no L3; the period fetch
+  asked nothing (110 served objects). Not verified: the orrery's window,
+  not opened by eye; the drawing of the eight was run headless (below).
+  The colours' run (run 3) passed too: 37 of 37, Tier-1 0 on the gate
+  path, no file's count rose.
+- **One red on the first run, undone:** the Constants change check
+  cannot read a colour line whose name holds a digit (L-432), so the
+  colour table was put back as committed; the two L3 colour lines stay
+  in it, unused, for L-432.
+- **The colours, the same night (Tony: "Make each of the eight draw in
+  its existing colour without adding or renaming any colour line"):**
+  `celestial_objects.COLOR_KEY_BY_NAME` maps each name shown to its
+  colour line's key (Earth-Moon L1 to EM-L1 ..., Earth-Sun L1 to L1
+  ...), and `color_map` reads it before the table, by a two-line lookup
+  that holds no number. The Constants change check reads the change and
+  passes it ("no numeric value moved", the docstring stamp read as
+  docstring). A plot with the eight ticked, run headless from the
+  orrery's own plot_objects around the Sun and around Earth, drew each
+  in its colour: L1 cyan, L2 white, L4 magenta, L5 red.
+- **Seen while plotting, not changed (a finding, for the record):** a
+  ticked point still enters the osculating pre-fetch (its object_type
+  is on that list), and JPL answers "Required masses not defined,
+  osculating elements not available", printed with a traceback and
+  passed over; and the close-approach cache asks JPL's small-body
+  service by the point's number (3011 ...), which answers with no
+  approaches. Both predate this round; the plot is drawn.
+**Note:** (2026-11-19, Session 2 of the brief, Claude Opus 5.5 in Claude
+Code, at website 133dbd21 and orrery 53bf2469 with Session 1's work on
+Tony's disk) the website serves and draws the eight.
+- **Served, a fourth shape** (`tools/gallery_cache_builder.py`,
+  `serving_shape` 'point'): no elements; each point fetched after every
+  other body, its positions from JPL around its centre (Earth for the
+  Earth-Moon four, the Sun for the Earth-Sun four) a day apart across the
+  served window and a day past each edge, and AN HOUR APART FROM YESTERDAY
+  TO THE DAY AFTER TOMORROW (Tony, Nov 19: "an hour apart from yesterday
+  to the day after tomorrow, a day apart elsewhere, as you recommend");
+  272 points, 21 KB each, read live. JPL's answer is held to the point's
+  own name (asked for 3013, JPL answers the asteroid Dobrovoleva; refused
+  by name). A point never takes part in the served window
+  (`served_window_from`), so it cannot narrow it: planted, a point let in
+  with a half-day span narrowed the window to 0.5 days. A failed fetch
+  serves its saved days inside the window, today's point nulled, and the
+  room draws the marker wherever they cover the minute (Tony, Nov 19).
+  The validator's #L refuses elements, the window's frame, no today's
+  point, a short last day, a day gap, a missing hour near today; each
+  planted.
+- **The mirror was tested against the export on Tony's disk**: a
+  throwaway copy of the config and that export, the mirror run there
+  (linked 110, nothing refused), then the website's own export with only
+  the eight entries from the local one, written there (48 fields) and
+  copied back; the real check passes against GitHub's export, which does
+  not hold the eight yet.
+- **Drawn**: a marker alone, the orrery's open square, the name beside
+  it (`render_spacecraft.build_point_traces`). The Earth-Sun four are a
+  root group, "Earth-Sun Lagrange Points", after Earth's row; the
+  Earth-Moon four are Earth's children, in its fold by their distance now,
+  drawn at Earth's place by ADDING (`compose_children.
+  build_point_child_traces`). RULING 4 WAS REPLACED BY RULING 6 (Nov 7,
+  11:26, "What is the fetched center should rule"; L-515's note): no
+  listing by pair, so the drawer and the tree agree. The box
+  (`SolarSystemFigures.pointBox`): name, the approved words, distance
+  from its own centre, "JPL states no accuracy for this position." (JPL's
+  2xr answer for EM-L2 and SEMB-L2, every uncertainty column "n.a.", read
+  Nov 19); no orbit, no period. Colours the orrery's (L1 cyan, L2 white,
+  L4 magenta, L5 red): approved on Tony's look of Nov 19.
+- **The label side** (`presentation.label_side_for`): ESCAPADE-Gold's
+  name below, Earth-Sun L1 below, both L2s on the right, Earth-Moon L1 on
+  the left (Tony's look, Nov 19: "so it no longer runs into Earth-Moon
+  L2's square"); every other body "top center". The Solar System view's
+  pile-up of Earth, the twins and Earth-Sun L1 and L2 stays (Tony: "at
+  that scale they share a few pixels, and centring on Earth with the
+  frame zoom is the answer"). ESCAPADE's box now says "around the point
+  called Earth-Sun L2", read from the point's own entry.
+- **The error for the curve** (Tony, Nov 18, 18:56). Twice the larger of
+  the gaps between the drawn parabola and the cubic through its points
+  and one more, on each side (`position_at`, curve=True, CURVE_FACTOR 2).
+  Measured, held out and against JPL's own finer points: never under the
+  real miss for EM-L2 and SEMB-L1 a day and an hour apart, Psyche,
+  3I/ATLAS, nor ESCAPADE Blue's and Gold's Earth flybys (292 cases; worst
+  miss 0.65 of it); undoubled it came under about half the time. Held to
+  every served path it fails for craft orbiting near a planet (L-538).
+  Tony, Nov 19: "on for the Lagrange points and the open-path comets
+  only ... Leave it off for every other body" (`CURVE_KINDS`). The
+  gallery run's "Curve error" row (`tools/test_curve_error.py`, gates)
+  holds those kinds: on the built copy 2,978 points held out across 21
+  files, worst miss 0.54 of the figure; self-test, undoubled, 422 caught.
+  What the boxes print, Nov 19 03:00 UTC: Earth-Sun L1 to the 100 km
+  (the chord figure gave the 10,000 km); 3I/ATLAS to the 1 km (10 km).
+- **Verified against claimed:** the builder's suite 579 of 579; live dry
+  runs of all eight; a full build into a scratch copy of the served cache
+  (the website's untouched) and the real page on it, desktop only, three
+  pictures, Tony's look of Nov 19 on the preview; the website's checkers
+  that need the build or the push (Cache in step, Solar System figures,
+  Served list, Curve error, the objects mirror and its suite) passed on a
+  copy holding the built cache and the local export. Not verified: the
+  phone; the Daily Run; the live site.
+- NOT DONE THIS ROUND, by the push time (Tony: push before 16:00 UTC):
+  the skill bumps of the brief's section 7 (gallery-cache-builder,
+  interactive-exhibit, provenance-discipline 2.37) and L-537 with them.
+  They change no served file, so they ride a later commit.
+**Gap:** the push and the Daily Run (Tony's run order of Nov 19); Tony's
+phone look; the skill bumps above, one protocol entry (v3.143), with
+L-537.
+**Ref:** L-291, L-294, L-538 (the orbiters' printed error), gallery
+`INTERACTIVE_AS_BUILT.md` (The Lagrange points), gallery
+`tools/gallery_cache_builder.py` (lines
 745-800, 910-935, 1135-1150 at `92e98ca9`), `gallery/assembler/assemble.py`
 (line 54), the sizing note.
 

@@ -509,135 +509,181 @@ INFO = {
             'In essence, 2024 DW was a relatively small asteroid that had a close encounter with Earth, providing astronomers with an ' 
             'opportunity to study near-Earth objects.',
 
-        # Source: JPL Horizons ephemeris (text reproduced verbatim from Horizons output, Revised Jul 11 2019)
-        'EM-L1': 'Horizons: 3011. From JPL Horizons ephemeris:  Revised: Jul 11, 2019; EM-L1; 3011; Earth-Moon Lagrange 1\n' 
-        '#1) The Earth-Moon Lagrange-1 point (EM-L1) is an equilibirium location where the Moon\'s gravitational field partially \n' 
-        '    counters that of the Earth.\n' 
-        '#2) This point is between the Earth and Moon, about 84.907% of the distance from the Earth\'s center in the direction of \n' 
-        '    the Moon\'s center (303000 to 345000 km from Earth, averaging ~327000 km), or 15.093% from the Moon in the direction \n' 
-        '    of the Earth (53800 to 61400 km from Moon, averaging ~58100 km).\n' 
-        '#3) EM-L1 is an unstable equilibrium point. This means an object at that location will remain there unless disturbed, \n' 
-        '    whereupon it will move away.  In practice, there will always be some disturbance.',
+        # Source: JPL Horizons, the data sheet for 3011 (revised Jul 11, 2019),
+        # read 2026-11-18 from the main service (COMMAND='3011',
+        # MAKE_EPHEM='NO'), verbatim; L-297 (the Lagrange points).
+        'Earth-Moon L1': 'Horizons: 3011. JPL: "Revised: Jul 11, 2019                  EM-L1                              3011\n'
+        '                              (Earth-Moon Lagrange 1)\n'
+        '\n'
+        ' #1) The Earth-Moon Lagrange-1 point (EM-L1) is an equilibirium location where\n'
+        '      the Moon\'s gravitational field partially counters that of the Earth.\n'
+        '\n'
+        ' #2) This point is between the Earth and Moon, about 84.907% of the distance\n'
+        '      from the Earth\'s center in the direction of the Moon\'s center (303000\n'
+        '      to 345000 km from Earth,averaging ~327000 km), or 15.093% from the Moon\n'
+        '      in the direction of the Earth (53800 to 61400 km from Moon, averaging\n'
+        '      ~58100 km).\n'
+        '\n'
+        ' #4) EM-L1 is an unstable equilibrium point. This means an object at that\n'
+        '      location will remain there unless disturbed, whereupon it will move\n'
+        '      away.  In practice, there will always be some disturbance.\n'
+        '\n'
+        'Time-span available: 1900-Jan-01 to 2151-Jan-01"',
 
-        # Source: JPL Horizons ephemeris (text reproduced verbatim from Horizons output, Revised Jul 11 2019)
-        'EM-L2': 'Horizons: 3012. From JPL Horizons ephemeris:  Revised: Jul 11, 2019; EM-L2; 3012; Earth-Moon Lagrange 2\n' 
-        '#1) The Earth-Moon Lagrange-2 point (EM-L2) is an equilibirium location where the Moon\'s gravitational field partially \n' 
-        '    counters that of the Earth.\n' 
-        '#2) This point is past the Moon on the Earth-Moon line, about 116.783% of the EM distance (416300 to 475000 km from Earth \n' 
-        '    center, averaging ~449600 km), or 16.783% of the EM distance from the Moon, in the direction away from the Earth \n' 
-        '    (59800 to 68300 km from Moon center, averaging ~64600 km).\n' 
-        '#3) EM-L2 is an unstable equilibrium point. This means an object at that location will remain there unless disturbed, \n' 
-        '    whereupon it will move away.  In practice, there will always be some disturbance.', 
+        # Source: JPL Horizons, the data sheet for 3012 (revised Jul 11, 2019),
+        # read 2026-11-18 from the main service (COMMAND='3012',
+        # MAKE_EPHEM='NO'), verbatim; L-297 (the Lagrange points).
+        'Earth-Moon L2': 'Horizons: 3012. JPL: "Revised: Jul 11, 2019                  EM-L2                              3012\n'
+        '                              (Earth-Moon Lagrange 2)\n'
+        '\n'
+        ' #1) The Earth-Moon Lagrange-2 point (EM-L2) is an equilibirium location where\n'
+        '      the Moon\'s gravitational field partially counters that of the Earth.\n'
+        '\n'
+        ' #2) This point is past the Moon on the Earth-Moon line, about 116.783% of\n'
+        '      the EM distance (416300 to 475000 km from Earth center, averaging\n'
+        '      ~449600 km), or 16.783% of the EM distance from the Moon, in the\n'
+        '      direction away from the Earth (59800 to 68300 km from Moon center,\n'
+        '      averaging ~64600 km).\n'
+        '\n'
+        ' #4) EM-L2 is an unstable equilibrium point. This means an object at that\n'
+        '      location will remain there unless disturbed, whereupon it will move\n'
+        '      away.  In practice, there will always be some disturbance.\n'
+        '\n'
+        'Time-span available: 1900-Jan-01 to 2151-Jan-01"',
 
-        'EM-L3': 'Horizons: 3013. From JPL Horizons ephemeris:  Revised: Jul 11, 2019; EM-L3; 3013; Earth-Moon Lagrange 3\n' 
-        '#1) The Earth-Moon Lagrange-3 point (EM-L3) is an equilibirium location where the Moon\'s gravitational field partially \n' 
-        '    counters that of the Earth.\n'  
-        '#3) EM-L3 is an unstable equilibrium point. This means an object at that location will remain there unless disturbed, \n' 
-        '    whereupon it will move away.  In practice, there will always be some disturbance.', 
+        # Source: JPL Horizons, the data sheet for 3014 (revised Jul 11, 2019),
+        # read 2026-11-18 from the main service (COMMAND='3014',
+        # MAKE_EPHEM='NO'), verbatim; L-297 (the Lagrange points).
+        'Earth-Moon L4': 'Horizons: 3014. JPL: "Revised: Jul 11, 2019                 EM-L4                               3014\n'
+        '                             (Earth-Moon Lagrange 4)\n'
+        '\n'
+        ' #1) The Earth-Moon Lagrange-4 point (EM-L4) is a location where the Moon\'s\n'
+        '      gravitational field partially counters that of the Earth. EM-L4 is one\n'
+        '      of the stable "Trojan" points (along with EM-L5). Small perturbations\n'
+        '      can displace an object from EM-L4, but it can return to the stable\n'
+        '      point.\n'
+        '\n'
+        ' #2) EM-L4 lies 60 degrees ahead of the Earth-Moon system along the Moon\'s\n'
+        '      orbit in plane of the orbit. It is about 1 lunar distance from the\n'
+        '      Earth and from the Moon (straight-lines), so 356000 to 407000 km,\n'
+        '      averaging 385000 km from Earth and Moon centers, forming the apex of\n'
+        '      an equilateral triangle, with the Earth and Moon defining the base-line.\n'
+        '\n'
+        'Time-span available: 1900-Jan-01 to 2151-Jan-01"',
 
-        # Source: JPL Horizons ephemeris (text reproduced verbatim from Horizons output, Revised Jul 11 2019)
-        'EM-L4': 'Horizons: 3014. From JPL Horizons ephemeris:  Revised: Jul 11, 2019; EM-L4; 3014; Earth-Moon Lagrange 4\n' 
-        '#1) The Earth-Moon Lagrange-4 point (EM-L4) is a location where the Moon\'s gravitational field partially counters that of \n' 
-        '    the Earth. EM-L4 is one of the stable "Trojan" points (along with EM-L5). Small perturbations can displace an object \n' 
-        '    from EM-L4, but it can return to the stable point.\n' 
-        '#2) EM-L4 lies 60 degrees ahead of the Earth-Moon system along the Moon\'s orbit in plane of the orbit. It is about 1 lunar \n' 
-        '    distance from the Earth and from the Moon (straight-lines), so 356000 to 407000 km, averaging 385000 km from Earth and \n' 
-        '    Moon centers, forming the apex of an equilateral triangle, with the Earth and Moon defining the base-line.',
+        # Source: JPL Horizons, the data sheet for 3015 (revised Jul 11, 2019),
+        # read 2026-11-18 from the main service (COMMAND='3015',
+        # MAKE_EPHEM='NO'), verbatim; L-297 (the Lagrange points).
+        'Earth-Moon L5': 'Horizons: 3015. JPL: "Revised: Jul 11, 2019                 EM-L5                               3015\n'
+        '                             (Earth-Moon Lagrange 5)\n'
+        '\n'
+        ' #1) The Earth-Moon Lagrange-5 point (EM-L5) is a location where the Moon\'s\n'
+        '      gravitational field partially counters that of the Earth. EM-L5 is one\n'
+        '      of the stable "Trojan" points (along with EM-L4). Small perturbations\n'
+        '      can displace an object from EM-L5, but it can return to the stable\n'
+        '      point.\n'
+        '\n'
+        ' #2) EM-L5 lies 60 degrees behind the Earth-Moon system along the Moon\'s\n'
+        '      orbit in plane of the orbit. It is about 1 lunar distance from the\n'
+        '      Earth and from the Moon (straight-lines), so 356000 to 407000 km,\n'
+        '      averaging 385000 km from Earth and Moon centers, forming the apex of\n'
+        '      an equilateral triangle, with the Earth and Moon defining the base-line.\n'
+        '\n'
+        'Time-span available: 1900-Jan-01 to 2151-Jan-01"',
 
-        # Source: JPL Horizons ephemeris (text reproduced verbatim from Horizons output, Revised Jul 11 2019)
-        'EM-L5': 'Horizons: 3015. From JPL Horizons ephemeris:  Revised: Jul 11, 2019; EM-L5; 3014; Earth-Moon Lagrange 5\n' 
-        '#1) The Earth-Moon Lagrange-5 point (EM-L5) is a location where the Moon\'s gravitational field partially counters that of \n' 
-        '    the Earth. EM-L5 is one of the stable "Trojan" points (along with EM-L4). Small perturbations can displace an object \n' 
-        '    from EM-L4, but it can return to the stable point.\n' 
-        '#2) EM-L5 lies 60 degrees behind the Earth-Moon system along the Moon\'s orbit in plane of the orbit. It is about 1 lunar \n' 
-        '    distance from the Earth and from the Moon (straight-lines), so 356000 to 407000 km, averaging 385000 km from Earth and \n' 
-        '    Moon centers, forming the apex of an equilateral triangle, with the Earth and Moon defining the base-line.',
+        # Source: JPL Horizons, the data sheet for 31 (revised Mar 23, 2026),
+        # read 2026-11-18 from the main service (COMMAND='31',
+        # MAKE_EPHEM='NO'), verbatim; L-297 (the Lagrange points).
+        'Earth-Sun L1': 'Horizons: 31. JPL: "Revised: Mar 23, 2026                SEMB-L1                                31\n'
+        '                     (Sun & Earth-Moon Barycenter Lagrange 1)\n'
+        '\n'
+        ' #1) The Sun & Earth-Moon Barycenter Lagrange-1 point (SEMB-L1) is a location\n'
+        '      where the Earth\'s gravitational field partially counters that of the\n'
+        '      Sun.\n'
+        '\n'
+        ' #2) This L1 point is about 1.5 million km (~900,000 miles) away from the\n'
+        '      Earth in the direction of the Sun, or slightly less than one percent of\n'
+        '      the way to the Sun (four times the distance from Earth to the Moon)\n'
+        '\n'
+        ' #3) The solar wind reaches L1 about an hour before it reaches Earth, making\n'
+        '      it a good place to observe changes in solar activity before the change\n'
+        '      propagates to the Earth. L1 provides an uninterrupted view of the Sun,\n'
+        '      being between the Earth and Sun.\n'
+        '\n'
+        ' #4) L1 is an unstable equilibrium point. This means an object at that\n'
+        '      location will remain there unless disturbed, whereupon it will move\n'
+        '      away.  In practice, there will always be some disturbance. Further,\n'
+        '      since the Sun is a radio source, communications with spacecraft at\n'
+        '      L1 are difficult to pick out against the background noise. Thus,\n'
+        '      spacecraft such as Genesis, WIND, SOHO, and ACE are placed in "halo"\n'
+        '      orbits around the L1 point. SMART-1 flew through L1 prior to lunar\n'
+        '      impact.\n'
+        '\n'
+        'Time-span available: 1900-Jan-02 to 2150-Dec-31"',
 
-        'L1': 'Horizons: 31. From JPL Horizons ephemeris: Revised: Aug 29, 2013; SEMB-L1; 31; Sun & Earth-Moon Barycenter Lagrange 1\n' 
-        '#1) The Sun & Earth-Moon Barycenter Lagrange-1 point (SEMB-L1) is a location where the Earth\'s gravitational field partially \n' 
-        '    counters that of the Sun.\n' 
-        '#2) This L1 point is about 1.5 million km (~900,000 miles) away from the Earth in the direction of the Sun, or slightly less than \n' 
-        '    one percent of the way to the Sun (four times the distance from Earth to the Moon)\n' 
-        '#3) The solar wind reaches L1 about an hour before it reaches Earth, making it a good place to observe changes in solar activity \n' 
-        '    before the change propagates to the Earth. L1 provides an uninterrupted view of the Sun, being between the Earth and Sun.\n' 
-        '#4) L1 is an unstable equilibrium point. This means an object at that location will remain there unless disturbed, whereupon it \n' 
-        '    will move away. In practice, there will always be some disturbance. Further, since the Sun is a radio source, communications \n' 
-        '    with spacecraft at L1 are difficult to pick out against the background noise. Thus, spacecraft such as Genesis, WIND, SOHO, \n' 
-        '    and ACE are placed in "halo" orbits around the L1 point. SMART-1 flew through L1 prior to lunar impact.\n' 
-        '* SEMB-L1 and SEMB-L2 will generally track along the Earth-Moon Barycenter\'s orbit, staying on the line between the Sun and the EMB.\n' 
-        '* For the unstable L1, L2, L3 points, they are more like moving "targets" that a spacecraft must constantly adjust to stay near.', 
+        # Source: JPL Horizons, the data sheet for 32 (revised Mar 23, 2026),
+        # read 2026-11-18 from the main service (COMMAND='32',
+        # MAKE_EPHEM='NO'), verbatim; L-297 (the Lagrange points).
+        'Earth-Sun L2': 'Horizons: 32. JPL: "Revised: Mar 23, 2026                SEMB-L2                                32\n'
+        '                     (Sun & Earth-Moon Barycenter Lagrange 2)\n'
+        '\n'
+        ' #1) The Sun & Earth-Moon Barycenter Lagrange-2 (L2) point is a location\n'
+        '      where the Earth\'s gravitational field partially counters that of the\n'
+        '      Sun.\n'
+        '\n'
+        ' #2) This L2 point is about 1.5 million km (~900,000 miles) away from the\n'
+        '      Earth, opposite the direction of the Sun, or slightly less than one\n'
+        '      percent of the Earth-Sun distance (four times the distance from Earth\n'
+        '      to the Moon)\n'
+        '\n'
+        ' #3) L2 has been selected as the location of the next generation James Webb\n'
+        '      Space Telescope, was used by the Genesis spacecraft on the return to\n'
+        '      Earth, and is (or will be) used for WMAP, Herschel, and Planck\n'
+        '      spacecraft.\n'
+        '\n'
+        'Time-span available: 1900-Jan-02 to 2150-Dec-31"',
 
-        'L2': 'Horizons: 32. Sun-Earth-Moon Barycenter Lagrange point 2. From JPL Horizons:\n' 
-        '#1) The Sun & Earth-Moon Barycenter Lagrange-2 (L2) point is a location where the Earth\'s gravitational field partially \n' 
-        '    counters that of the Sun.\n' 
-        '#2) This L2 point is about 1.5 million km (~900,000 miles) away from the Earth, opposite the direction of the Sun, or slightly \n' 
-        '    less than one percent of the Earth-Sun distance (four times the distance from Earth to the Moon)\n' 
-        '#3) L2 has been selected as the location of the next generation James Webb Space Telescope, was used by the Genesis spacecraft \n' 
-        '    on the return to Earth, and is (or will be) used for WMAP, Herschel, and Planck spacecraft.\n' 
-        '* SEMB-L1 and SEMB-L2 will generally track along the Earth-Moon Barycenter\'s orbit, staying on the line between the Sun and the EMB.\n' 
-        '* For the unstable L1, L2, L3 points, they are more like moving "targets" that a spacecraft must constantly adjust to stay near.', 
+        # Source: JPL Horizons, the data sheet for 34 (revised Mar 23, 2026),
+        # read 2026-11-18 from the main service (COMMAND='34',
+        # MAKE_EPHEM='NO'), verbatim; L-297 (the Lagrange points).
+        'Earth-Sun L4': 'Horizons: 34. JPL: "Revised: Mar 23, 2026                SEMB-L4                                34\n'
+        '                     (Sun & Earth-Moon Barycenter Lagrange 4)\n'
+        '\n'
+        ' #1) The Sun & Earth-Moon Barycenter Lagrange-4 (SEMB-L4) point is a location\n'
+        '      where the Earth\'s gravitational field partially counters that of the\n'
+        '      Sun.  L4 is one of the stable "Trojan" points (along with L5). Small\n'
+        '      perturbations can displace an object from L4, but it can return to the\n'
+        '      stable point.\n'
+        '\n'
+        ' #2) L4 lies 60 degrees ahead of the Earth-Moon system along the heliocentric\n'
+        '      orbit in plane of the orbit. It is about 1 au distant from the Earth\n'
+        '      (straight-line), forming the apex of an equilateral triangle, with the\n'
+        '      Sun and Earth-Moon barycenter defining the base-line.\n'
+        '\n'
+        ' #3) The STEREO-A spacecraft passes through L4.\n'
+        '\n'
+        'Time-span available: 1900-Jan-02 to 2150-Dec-31"',
 
-        # Source: JPL Horizons ephemeris (text reproduced verbatim from Horizons output)
-        'L3': 'Horizons: 33. Sun-Earth-Moon Barycenter Lagrange point 3. From JPL Horizons: The Sun & Earth-Moon Barycenter Lagrange-2 (L3) point is \n' 
-        'a location where the Earth\'s gravitational field partially counters that of the Sun.\n' 
-        '* Here\'s why you\'re observing that irregular motion for SEMB-L3, while the others (especially L4 and L5) appear to trace a \n' 
-        '  more circular path:\n' 
-        '  * L3\'s Unstable and Collinear Nature: L3, like L1 and L2, lies along the line connecting the two primary bodies (Sun and Earth-Moon Barycenter in \n' 
-        '      this case). These collinear points are inherently unstable equilibrium points. Any slight perturbation (and there are \n' 
-        '      many in the real solar system, from other planets, the Moon\'s wobble, solar wind pressure, etc.) will cause a body at \n' 
-        '      L3 to drift away from the exact point.\n' 
-        '  * "Hidden" from View: SEMB-L3 is on the opposite side of the Sun from the Earth. It\'s essentially orbiting the Sun at approximately the same \n' 
-        '      distance as Earth, but 180 degrees out of phase.\n' 
-        '  * The Dominant Influence of the Sun: The Sun\'s gravity is overwhelming. L3 is essentially a point that "tries" to stay at the same solar orbital distance as \n' 
-        '      Earth, but because it\'s behind the Sun, the gravitational pull from the Earth (and Moon) is very subtle and often \n' 
-        '      insufficient to perfectly hold it in a perfectly symmetric orbit around the Sun.\n' 
-        '  * Perturbations from Other Planets: While L1, L2, L4, and L5 also experience perturbations, L3 is particularly sensitive. The gravitational tugs from Venus, \n' 
-        '      Jupiter, and other planets, even though small, can have a noticeable effect on the precise location of the unstable L3 \n' 
-        '      point. These perturbations will cause L3\'s ideal position to constantly shift slightly, resulting in an "irregular" or \n' 
-        '      "wobbly" path when observed over time.\n' 
-        '  * Influence of the Moon\'s Orbit: Even though we use the Earth-Moon Barycenter (EMB) as the secondary body for SEMB-L* calculations, the Moon\'s actual \n' 
-        '      orbit around the Earth means that the "effective" secondary mass is constantly shifting slightly relative to the ideal \n' 
-        '      EMB point. This introduces a small, but continuous, perturbation on all the SEMB-L* points, which is more noticeable for \n' 
-        '      the unstable ones like L3.\n' 
-        '  *Reference Frame and "Ideal" Orbit: When you plot the L-points, you\'re usually plotting their positions in an inertial frame (like the Solar System Barycenter \n' 
-        '      frame). In this frame: SEMB-L1 and SEMB-L2 will generally track along the Earth-Moon Barycenter\'s orbit, staying on the \n' 
-        '      line between the Sun and the EMB. SEMB-L4 and SEMB-L5 are the stable points. In an idealized circular restricted three-body \n' 
-        '      problem, they would form equilateral triangles with the two primaries and trace the same perfect circular orbit as the \n' 
-        '      secondary. In reality, they also exhibit small, stable librations (oscillations) around the ideal points, but their overall \n' 
-        '      path will closely follow the EMB\'s orbit. SEMB-L3\'s instability means it doesn\'t settle into such a neat pattern of \n' 
-        '      librations. Its position is constantly being nudged away from the ideal, resulting in a more complex, non-circular trajectory \n' 
-        '      that reflects these ongoing instabilities and perturbations. In essence, L3 is highly sensitive to the "messiness" of the real \n' 
-        '      solar system. While the mathematical definition of L3 exists, its physical location is constantly being pulled and pushed by \n' 
-        '      various gravitational forces, leading to the irregular path you observed. It\'s a fantastic demonstration of the difference \n' 
-        '      between idealized mathematical models and the complex reality of celestial mechanics!',
-
-        # Source: JPL Horizons ephemeris (text reproduced verbatim from Horizons output, Revised Aug 29 2013)
-        'L4': 'Horizons: 34. From JPL Horizons: Revised: Aug 29, 2013; SEMB-L4; 34; Sun & Earth-Moon Barycenter Lagrange 4\n' 
-        '#1) The Sun & Earth-Moon Barycenter Lagrange-4 (SEMB-L4) point is a location where the Earth\'s gravitational field partially \n' 
-        '    counters that of the Sun.  L4 is one of the stable "Trojan" points (along with L5). Small perturbations can displace an \n' 
-        '    object from L4, but it can return to the stable point.\n' 
-        '#2) L4 lies 60 degrees ahead of the Earth-Moon system along the heliocentric orbit in plane of the orbit. It is about 1 au \n' 
-        '    distant from the Earth (straight-line), forming the apex of an equilateral triangle, with the Sun and Earth-Moon barycenter \n' 
-        '    defining the base-line.\n' 
-        '#3) The STEREO-A spacecraft passes through L4.\n' 
-        '* SEMB-L4 and SEMB-L5 are the stable points. In an idealized circular restricted three-body problem, they would form \n' 
-        '  equilateral triangles with the two primaries and trace the same perfect circular orbit as the secondary. In reality, they \n' 
-        '  also exhibit small, stable librations (oscillations) around the ideal points, but their overall path will closely follow \n' 
-        '  the EMB\'s orbit.',  
-
-        # Source: JPL Horizons ephemeris (text reproduced verbatim from Horizons output, Revised Aug 29 2013)
-        'L5': 'Horizons: 35. From JPL Horizons:  Revised: Aug 29, 2013; SEMB-L5; 35; Sun & Earth-Moon Barycenter Lagrange 5\n' 
-        '#1) The Sun & Earth-Moon Barycenter Lagrange-5 (SEMB-L5) point is a location where the Earth\'s gravitational field partially \n' 
-        '    counters that of the Sun. L5 is one of the stable "Trojan" points (along with L4). Small perturbations will displace an \n' 
-        '    object from L5, but the object can return to the stable point.\n' 
-        '#2) L5 lies 60 degrees behind the Earth-Moon system along the heliocentric orbit and in the plane of the orbit. It is about \n' 
-        '    1 AU distant from the Earth (straight-line), forming the apex of an equilateral triangle, with the Sun and Earth-Moon \n' 
-        '    barycenter defining the base-line.\n' 
-        '#3) The STEREO-B spacecraft passes through L5.\n' 
-        '* SEMB-L4 and SEMB-L5 are the stable points. In an idealized circular restricted three-body problem, they would form \n' 
-        '  equilateral triangles with the two primaries and trace the same perfect circular orbit as the secondary. In reality, they \n' 
-        '  also exhibit small, stable librations (oscillations) around the ideal points, but their overall path will closely follow \n' 
-        '  the EMB\'s orbit.',        
+        # Source: JPL Horizons, the data sheet for 35 (revised Mar 23, 2026),
+        # read 2026-11-18 from the main service (COMMAND='35',
+        # MAKE_EPHEM='NO'), verbatim; L-297 (the Lagrange points).
+        'Earth-Sun L5': 'Horizons: 35. JPL: "Revised: Mar 23, 2026                SEMB-L5                                35\n'
+        '                     (Sun & Earth-Moon Barycenter Lagrange 5)\n'
+        '\n'
+        ' #1) The Sun & Earth-Moon Barycenter Lagrange-5 (SEMB-L5) point is a location\n'
+        '      where the Earth\'s gravitational field partially counters that of the\n'
+        '      Sun. L5 is one of the stable "Trojan" points (along with L4). Small\n'
+        '      perturbations will displace an object from L5, but the object can return\n'
+        '      to the stable point.\n'
+        '\n'
+        ' #2) L5 lies 60 degrees behind the Earth-Moon system along the heliocentric\n'
+        '      orbit and in the plane of the orbit. It is about 1 AU distant from the\n'
+        '      Earth (straight-line), forming the apex of an equilateral triangle,\n'
+        '      with the Sun and Earth-Moon barycenter defining the base-line.\n'
+        '\n'
+        ' #3) The STEREO-B spacecraft passes through L5.\n'
+        '\n'
+        'Time-span available: 1900-Jan-02 to 2150-Dec-31"',
 
         # Source: NASA Mars Exploration Program (mission list, planetary facts)
         'Mars': 'Horizons: 499. Known as the Red Planet, fourth planet from the Sun.\n' 

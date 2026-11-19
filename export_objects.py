@@ -84,7 +84,8 @@ One JSON file, data/objects_export.json:
                                    and for a spacecraft, which has no
                                    orbital period (L-443 build B), or a
                                    comet on an open path (slice 2's
-                                   comets)
+                                   comets), or a Lagrange point, which
+                                   has no orbit of its own (L-297)
                       open_path    true for a small body whose orbit
                                    solution's e in JPL's Small-Body
                                    Database is at or above 1, drawn as a
@@ -304,6 +305,10 @@ sentence the orrery's hover ends with, from
 orbital_period.period_reason(), as plain text with no <br>; null for an
 open orbit, typed or missing period. The schema stays 4: a reader that
 knows no "reason" prints the period without it.)
+Module updated: November 18, 2026 with Anthropic's Claude Opus 5.5 (L-297,
+the Lagrange points: NO_PERIOD_TYPES; a point serves no period, null as
+the Sun's is, where the period block would have said "Not yet fetched
+from JPL".)
 """
 
 import ast
@@ -556,12 +561,20 @@ def _strip_osc(epoch):
     return str(epoch or "").replace(" osc.", "").strip()
 
 
+# The object types that serve no period: the Sun, the centre, which
+# orbits nothing here, and (L-297, 2026-11-18) a Lagrange point, which
+# has no orbit of its own: it is a place set by two bodies, and its path
+# is theirs. Its block would otherwise read "Not yet fetched from JPL.",
+# which is not true of a point.
+NO_PERIOD_TYPES = ("fixed", "lagrange_point")
+
+
 def period_block(name, object_type, cache, typed_table):
     """(period, inputs) for one keyed entry: the export's period block
     and the slice of the inputs it was read from, for the fingerprint.
     Raises ExportError on a record that cannot be exported honestly."""
     import orbital_period as op
-    if object_type == "fixed":
+    if object_type in NO_PERIOD_TYPES:
         return None, None
     entry = cache.get(name) if isinstance(cache, dict) else None
     entry = entry if isinstance(entry, dict) else {}
@@ -808,7 +821,7 @@ def build_export(text, cache=None, typed_table=None, confirmations=None,
 def period_summary(key, period):
     """One line naming an exported period, for the run's output."""
     if period is None:
-        return "%s: no period (the centre, or a path)" % key
+        return "%s: no period (the centre, a path, or a point)" % key
     if period["kind"] == "none":
         return "%s: none (not yet fetched)" % key
     if period["open_orbit"]:

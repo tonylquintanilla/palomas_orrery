@@ -78,6 +78,10 @@ for the maintenance run's two new rows, after Dashboard parity found
 them missing. And, on Tony's word, the El Nino Page Generator button
 and line in the Earth System group, beside the Food Insecurity
 Generator: the Run button's build, in its own console window.)
+Module updated: November 19, 2026 with Anthropic's Claude Opus 5.5
+(L-297: the website's Curve Error button and line, beside Compose
+Children, for the gallery run's new "Curve error" check; added on Tony's
+word, "Yes, add the button", after Dashboard parity found it.)
 July 2026: added Linux Button-4/5 wheel scrolling to match columns 1/2's
 cross-platform coverage (CTkScrollableFrame's built-in handling only
 covers Windows/Mac <MouseWheel>). Audited LAUNCH_GROUPS against both
@@ -1257,6 +1261,18 @@ LAUNCH_GROUPS = {
         "cases, the real served moons, the page's wiring. It breaks the "
         "module three ways first, to show it can fail. GATES the gallery "
         "runner. Runs from the gallery repo ROOT.",
+        GALLERY_REPO_DIR,
+        True,
+        None,
+        True),
+        ("Curve Error",
+        os.path.join("tools", "test_curve_error.py"),
+        "A Lagrange point's or an open-path comet's box prints the error "
+        "of the curve the page draws between its served points (L-297). "
+        "Every served point of those kinds is held out and predicted, and "
+        "the real miss must never exceed the printed error. With the "
+        "figure undoubled it must find misses first, to show it can fail. "
+        "GATES the gallery runner. Runs from the gallery repo ROOT.",
         GALLERY_REPO_DIR,
         True,
         None,
@@ -2516,6 +2532,9 @@ CARD_LINES = {
     ("Gallery -- checks and data",
      "Compose Children"):
         "Checks each moon is drawn at its planet's place, by adding.",
+    ("Gallery -- checks and data",
+     "Curve Error"):
+        "Checks a point's printed error is never smaller than its miss.",
     ("Gallery -- checks and data",
      "View Centre"):
         "Checks Centre on, the trail, and the shift that keeps precision.",

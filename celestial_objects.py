@@ -436,57 +436,88 @@ OBJECT_DEFINITIONS = [
     'mission_url': 'https://en.wikipedia.org/wiki/2026_ED138'},
 
     # Lagrange Points
+    # L-297 (the Lagrange points), keyed 2026-11-18. JPL's names, read
+    # that day from the Lookup by id (group=mb), and its data sheets
+    # from the main service: EM-L1 3011, EM-L2 3012, EM-L4 3014, EM-L5
+    # 3015 (revised Jul 11, 2019); SEMB-L1 31, SEMB-L2 32, SEMB-L4 34,
+    # SEMB-L5 35 (revised Mar 23, 2026); they are horizons_name. JPL has
+    # no L3 record: asked by number, 3013 is the asteroid 3013
+    # Dobrovoleva and 33 the asteroid 33 Polyhymnia, which the orrery's
+    # EM-L3 and L3 drew until this day; both entries were taken out.
+    # The names shown are Tony's ruling of 2026-11-18, "Earth-Sun"
+    # being NASA's word on the page quoted ("The L1 point of the
+    # Earth-Sun system"). The span is JPL's, from each data sheet; it
+    # bounds the fetch and the animation (path_drawing.entry_span). The
+    # words are Tony's "Approved" of 2026-11-18, with his three changes
+    # (documentation/WORDS_L297_lagrange_points_20261118.md). Colours:
+    # the colour table (constants_new.py, color_map) keeps its lines
+    # under JPL's names; COLOR_KEY_BY_NAME, after this list, turns each
+    # name shown into its key, so no colour line changed (L-432).
     # Earth-Moon Lagrange Points
-    {'name': 'EM-L1', 'id': '3011', 'var_name': 'eml1_var', 'color_key': 'EM-L1', 'symbol': 'square-open', 'object_type': 'lagrange_point',    
-    'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
-    'mission_info': 'Horizons: 3011. Earth-Moon Lagrange-1 point is where the Earth\'s gravitational field counters the Moon\'s',
-    'mission_url': 'http://hyperphysics.phy-astr.gsu.edu/hbase/Mechanics/lagpt.html'},  
+    # Source: NASA, "What is a Lagrange Point?", https://science.nasa.gov/resource/what-is-a-lagrange-point/ (read
+    # 2026-11-18); span: JPL's data sheet for 3011, revised Jul 11, 2019, read
+    # 2026-11-18 ("Time-span available: 1900-Jan-01 to 2151-Jan-01").
+    {'name': 'Earth-Moon L1', 'key': 'em_l1', 'id': '3011', 'horizons_name': 'EM-L1', 'var_name': 'eml1_var', 'color_key': 'Earth-Moon L1', 'symbol': 'square-open', 'object_type': 'lagrange_point',
+    'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2151, 1, 1),
+    'mission_info': 'Horizons: 3011. JPL names it EM-L1, the Earth-Moon Lagrange-1 point. NASA: "Lagrange points are positions in space where objects sent there tend to stay put." "The unstable Lagrange points - labeled L1, L2 and L3 - lie along the line connecting the two large masses."',
+    'mission_url': 'https://science.nasa.gov/resource/what-is-a-lagrange-point/'},
 
-    {'name': 'EM-L2', 'id': '3012', 'var_name': 'eml2_var', 'color_key': 'EM-L2', 'symbol': 'square-open', 'object_type': 'lagrange_point',   
-    'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
-    'mission_info': 'Horizons: 3012. Earth-Moon Lagrange-1 point is where the Earth\'s gravitational field counters the Moon\'s',
-    'mission_url': 'http://hyperphysics.phy-astr.gsu.edu/hbase/Mechanics/lagpt.html'}, 
+    # Source: NASA, "What is a Lagrange Point?", https://science.nasa.gov/resource/what-is-a-lagrange-point/ (read
+    # 2026-11-18); span: JPL's data sheet for 3012, revised Jul 11, 2019, read
+    # 2026-11-18 ("Time-span available: 1900-Jan-01 to 2151-Jan-01").
+    {'name': 'Earth-Moon L2', 'key': 'em_l2', 'id': '3012', 'horizons_name': 'EM-L2', 'var_name': 'eml2_var', 'color_key': 'Earth-Moon L2', 'symbol': 'square-open', 'object_type': 'lagrange_point',
+    'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2151, 1, 1),
+    'mission_info': 'Horizons: 3012. JPL names it EM-L2, the Earth-Moon Lagrange-2 point. NASA: "Lagrange points are positions in space where objects sent there tend to stay put." "The unstable Lagrange points - labeled L1, L2 and L3 - lie along the line connecting the two large masses."',
+    'mission_url': 'https://science.nasa.gov/resource/what-is-a-lagrange-point/'},
 
-    {'name': 'EM-L3', 'id': '3013', 'var_name': 'eml3_var', 'color_key': 'EM-L3', 'symbol': 'square-open', 'object_type': 'lagrange_point',   
-    'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
-    'mission_info': 'Horizons: 3013. Earth-Moon Lagrange-1 point is where the Earth\'s gravitational field counters the Moon\'s',
-    'mission_url': 'http://hyperphysics.phy-astr.gsu.edu/hbase/Mechanics/lagpt.html'},
+    # Source: NASA, "What is a Lagrange Point?", https://science.nasa.gov/resource/what-is-a-lagrange-point/ (read
+    # 2026-11-18); span: JPL's data sheet for 3014, revised Jul 11, 2019, read
+    # 2026-11-18 ("Time-span available: 1900-Jan-01 to 2151-Jan-01").
+    {'name': 'Earth-Moon L4', 'key': 'em_l4', 'id': '3014', 'horizons_name': 'EM-L4', 'var_name': 'eml4_var', 'color_key': 'Earth-Moon L4', 'symbol': 'square-open', 'object_type': 'lagrange_point',
+    'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2151, 1, 1),
+    'mission_info': 'Horizons: 3014. JPL names it EM-L4, the Earth-Moon Lagrange-4 point. NASA: "Lagrange points are positions in space where objects sent there tend to stay put." "The stable Lagrange points - labeled L4 and L5 - form the apex of two equilateral triangles that have the large masses at their vertices." "In 1956 the Polish astronomer Kordylewski discovered large concentrations of dust at the Trojan points of the Earth-Moon system."',
+    'mission_url': 'https://science.nasa.gov/resource/what-is-a-lagrange-point/'},
 
-    {'name': 'EM-L4', 'id': '3014', 'var_name': 'eml4_var', 'color_key': 'EM-L4', 'symbol': 'square-open', 'object_type': 'lagrange_point',    
-    'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
-    'mission_info': 'Horizons: 3014. Earth-Moon Lagrange-1 point is where the Earth\'s gravitational field counters the Moon\'s',
-    'mission_url': 'http://hyperphysics.phy-astr.gsu.edu/hbase/Mechanics/lagpt.html'},
+    # Source: NASA, "What is a Lagrange Point?", https://science.nasa.gov/resource/what-is-a-lagrange-point/ (read
+    # 2026-11-18); span: JPL's data sheet for 3015, revised Jul 11, 2019, read
+    # 2026-11-18 ("Time-span available: 1900-Jan-01 to 2151-Jan-01").
+    {'name': 'Earth-Moon L5', 'key': 'em_l5', 'id': '3015', 'horizons_name': 'EM-L5', 'var_name': 'eml5_var', 'color_key': 'Earth-Moon L5', 'symbol': 'square-open', 'object_type': 'lagrange_point',
+    'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2151, 1, 1),
+    'mission_info': 'Horizons: 3015. JPL names it EM-L5, the Earth-Moon Lagrange-5 point. NASA: "Lagrange points are positions in space where objects sent there tend to stay put." "The stable Lagrange points - labeled L4 and L5 - form the apex of two equilateral triangles that have the large masses at their vertices." "In 1956 the Polish astronomer Kordylewski discovered large concentrations of dust at the Trojan points of the Earth-Moon system."',
+    'mission_url': 'https://science.nasa.gov/resource/what-is-a-lagrange-point/'},
 
-    {'name': 'EM-L5', 'id': '3015', 'var_name': 'eml5_var', 'color_key': 'EM-L5', 'symbol': 'square-open', 'object_type': 'lagrange_point',    
-    'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
-    'mission_info': 'Horizons: 3015. Earth-Moon Lagrange-1 point is where the Earth\'s gravitational field counters the Moon\'s',
-    'mission_url': 'http://hyperphysics.phy-astr.gsu.edu/hbase/Mechanics/lagpt.html'},    
+    # Earth-Sun Lagrange Points (JPL's Sun & Earth-Moon Barycenter points)
+    # Source: NASA, "What is a Lagrange Point?", https://science.nasa.gov/resource/what-is-a-lagrange-point/ (read
+    # 2026-11-18); span: JPL's data sheet for 31, revised Mar 23, 2026, read
+    # 2026-11-18 ("Time-span available: 1900-Jan-02 to 2150-Dec-31").
+    {'name': 'Earth-Sun L1', 'key': 'semb_l1', 'id': '31', 'horizons_name': 'SEMB-L1', 'var_name': 'l1_var', 'color_key': 'Earth-Sun L1', 'symbol': 'square-open', 'object_type': 'lagrange_point',
+    'id_type': 'id', 'start_date': datetime(1900, 1, 2), 'end_date': datetime(2150, 12, 31),
+    'mission_info': 'Horizons: 31. JPL names it SEMB-L1, the Sun & Earth-Moon Barycenter Lagrange-1 point. The Earth-Moon barycenter is the center of mass of Earth and the Moon. NASA: "Lagrange points are positions in space where objects sent there tend to stay put." "The unstable Lagrange points - labeled L1, L2 and L3 - lie along the line connecting the two large masses."',
+    'mission_url': 'https://science.nasa.gov/resource/what-is-a-lagrange-point/'},
 
-    # Sun-Earth-Moon-Barycenter Lagrange Points
-    {'name': 'L1', 'id': '31', 'var_name': 'l1_var', 'color_key': 'L1', 'symbol': 'square-open', 'object_type': 'lagrange_point',    # SEMB-L1 31
-    'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
-    'mission_info': 'Horizons: 31. The Sun & Earth-Moon Barycenter Lagrange-1 point is where the Earth\'s gravitational field counters the Sun\'s',
-    'mission_url': 'https://science.nasa.gov/resource/what-is-a-lagrange-point/#:~:text=The%20L2%20point%20of%20the,regular%20course%20and%20altitude%20corrections.'},    
+    # Source: NASA, "What is a Lagrange Point?", https://science.nasa.gov/resource/what-is-a-lagrange-point/ (read
+    # 2026-11-18); span: JPL's data sheet for 32, revised Mar 23, 2026, read
+    # 2026-11-18 ("Time-span available: 1900-Jan-02 to 2150-Dec-31").
+    {'name': 'Earth-Sun L2', 'key': 'semb_l2', 'id': '32', 'horizons_name': 'SEMB-L2', 'var_name': 'l2_var', 'color_key': 'Earth-Sun L2', 'symbol': 'square-open', 'object_type': 'lagrange_point',
+    'id_type': 'id', 'start_date': datetime(1900, 1, 2), 'end_date': datetime(2150, 12, 31),
+    'mission_info': 'Horizons: 32. JPL names it SEMB-L2, the Sun & Earth-Moon Barycenter Lagrange-2 point. The Earth-Moon barycenter is the center of mass of Earth and the Moon. NASA: "Lagrange points are positions in space where objects sent there tend to stay put." "The unstable Lagrange points - labeled L1, L2 and L3 - lie along the line connecting the two large masses." "L2 is ideal for astronomy because a spacecraft is close enough to readily communicate with Earth, can keep Sun, Earth and Moon behind the spacecraft for solar power and (with appropriate shielding) provides a clear view of deep space for our telescopes."',
+    'mission_url': 'https://science.nasa.gov/resource/what-is-a-lagrange-point/'},
 
-    {'name': 'L2', 'id': '32', 'var_name': 'l2_var', 'color_key': 'L2', 'symbol': 'square-open', 'object_type': 'lagrange_point',    # SEMB-L2 32
-    'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
-    'mission_info': 'Horizons: 32. The Sun & Earth-Moon Barycenter Lagrange-2 point is where the Earth\'s gravitational field counters the Sun\'s',
-    'mission_url': 'https://science.nasa.gov/resource/what-is-a-lagrange-point/#:~:text=The%20L2%20point%20of%20the,regular%20course%20and%20altitude%20corrections.'},    
+    # Source: NASA, "What is a Lagrange Point?", https://science.nasa.gov/resource/what-is-a-lagrange-point/ (read
+    # 2026-11-18); span: JPL's data sheet for 34, revised Mar 23, 2026, read
+    # 2026-11-18 ("Time-span available: 1900-Jan-02 to 2150-Dec-31").
+    {'name': 'Earth-Sun L4', 'key': 'semb_l4', 'id': '34', 'horizons_name': 'SEMB-L4', 'var_name': 'l4_var', 'color_key': 'Earth-Sun L4', 'symbol': 'square-open', 'object_type': 'lagrange_point',
+    'id_type': 'id', 'start_date': datetime(1900, 1, 2), 'end_date': datetime(2150, 12, 31),
+    'mission_info': 'Horizons: 34. JPL names it SEMB-L4, the Sun & Earth-Moon Barycenter Lagrange-4 point. The Earth-Moon barycenter is the center of mass of Earth and the Moon. NASA: "Lagrange points are positions in space where objects sent there tend to stay put." "The stable Lagrange points - labeled L4 and L5 - form the apex of two equilateral triangles that have the large masses at their vertices. L4 leads the orbit of earth and L5 follows." "In 2010 NASA\'s WISE telescope finally confirmed the first Trojan asteroid (2010 TK7) around Earth\'s leading Lagrange point."',
+    'mission_url': 'https://science.nasa.gov/resource/what-is-a-lagrange-point/'},
 
-    {'name': 'L3', 'id': '33', 'var_name': 'l3_var', 'color_key': 'L3', 'symbol': 'square-open', 'object_type': 'lagrange_point',    # SEMB-L3 33
-    'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
-    'mission_info': 'Horizons: 33. The Sun & Earth-Moon Barycenter Lagrange-3 point is where the Earth\'s gravitational field counters the Sun\'s',
-    'mission_url': 'https://science.nasa.gov/resource/what-is-a-lagrange-point/#:~:text=The%20L2%20point%20of%20the,regular%20course%20and%20altitude%20corrections.'},    
-
-    {'name': 'L4', 'id': '34', 'var_name': 'l4_var', 'color_key': 'L4', 'symbol': 'square-open', 'object_type': 'lagrange_point',    # SEMB-L4 34
-    'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
-    'mission_info': 'Horizons: 34. The Sun & Earth-Moon Barycenter Lagrange-4 point is where the Earth\'s gravitational field counters the Sun\'s',
-    'mission_url': 'https://science.nasa.gov/resource/what-is-a-lagrange-point/#:~:text=The%20L2%20point%20of%20the,regular%20course%20and%20altitude%20corrections.'},    
-
-    {'name': 'L5', 'id': '35', 'var_name': 'l5_var', 'color_key': 'L5', 'symbol': 'square-open', 'object_type': 'lagrange_point',    # SEMB-L5 35
-    'id_type': 'id', 'start_date': datetime(1900, 1, 1), 'end_date': datetime(2050, 12, 31), 
-    'mission_info': 'Horizons: 35. The Sun & Earth-Moon Barycenter Lagrange-5 point is where the Earth\'s gravitational field counters the Sun\'s',
-    'mission_url': 'https://science.nasa.gov/resource/what-is-a-lagrange-point/#:~:text=The%20L2%20point%20of%20the,regular%20course%20and%20altitude%20corrections.'},    
+    # Source: NASA, "What is a Lagrange Point?", https://science.nasa.gov/resource/what-is-a-lagrange-point/ (read
+    # 2026-11-18); span: JPL's data sheet for 35, revised Mar 23, 2026, read
+    # 2026-11-18 ("Time-span available: 1900-Jan-02 to 2150-Dec-31").
+    {'name': 'Earth-Sun L5', 'key': 'semb_l5', 'id': '35', 'horizons_name': 'SEMB-L5', 'var_name': 'l5_var', 'color_key': 'Earth-Sun L5', 'symbol': 'square-open', 'object_type': 'lagrange_point',
+    'id_type': 'id', 'start_date': datetime(1900, 1, 2), 'end_date': datetime(2150, 12, 31),
+    'mission_info': 'Horizons: 35. JPL names it SEMB-L5, the Sun & Earth-Moon Barycenter Lagrange-5 point. The Earth-Moon barycenter is the center of mass of Earth and the Moon. NASA: "Lagrange points are positions in space where objects sent there tend to stay put." "The stable Lagrange points - labeled L4 and L5 - form the apex of two equilateral triangles that have the large masses at their vertices. L4 leads the orbit of earth and L5 follows."',
+    'mission_url': 'https://science.nasa.gov/resource/what-is-a-lagrange-point/'},
 
     # Near-Earth Asteroids
 
@@ -1667,6 +1698,22 @@ OBJECT_DEFINITIONS = [
      'mission_url': 'https://www.eso.org/public/news/eso2202/'},
 
 ]
+
+# A name shown -> the key of its line in the colour table
+# (constants_new.color_map, which reads this map first). The Lagrange
+# points (L-297) show Tony's names of 2026-11-18; their colour lines
+# keep JPL's names, unchanged, so the Constants change check reads no
+# changed colour line. A name not here is its own key.
+COLOR_KEY_BY_NAME = {
+    'Earth-Moon L1': 'EM-L1',
+    'Earth-Moon L2': 'EM-L2',
+    'Earth-Moon L4': 'EM-L4',
+    'Earth-Moon L5': 'EM-L5',
+    'Earth-Sun L1': 'L1',
+    'Earth-Sun L2': 'L2',
+    'Earth-Sun L4': 'L4',
+    'Earth-Sun L5': 'L5',
+}
 
 
 def build_objects_list(definitions, vars_dict, color_map_func):
