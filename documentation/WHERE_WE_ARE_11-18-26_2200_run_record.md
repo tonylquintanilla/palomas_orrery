@@ -1123,7 +1123,7 @@ Do next:
   2. (do) In GitHub Desktop (orrery): commit and push the ledger,
      Where We Are, this file and the next coordinator's prompt
      (documentation\PROMPT_coordinator_start_20261120.md).
-     Not while a night is running. -- 
+     Not while a night is running. -- ec0213a6c30cb75177a3a696f58c32a5b540151d
 PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
 
 2. Move the patch into `documentation\`.
