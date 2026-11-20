@@ -1132,3 +1132,40 @@ PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 **Where this leaves us**
 - The Lagrange round is done: eight points live, looked at, and recorded.
 - Next is the design talk on destinations and encounters, with five cleanup items, each already ruled, waiting beside it in whatever order you choose.
+
+==================================================
+
+I've written both patches and tested them on throwaway copies of the two repositories. I couldn't place them in your folders because your computer isn't connected right now, so please save each one from its file card.
+
+- **Orrery:** save patch_L533_1_brighter_craft_orrery.py in palomas_orrery_for_github, open it in VS Code and click Run. It changes ESCAPADE-Blue to turquoise in the orrery's colour table and marks Gold as kept.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & 'C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe' 'c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L533_1_brighter_craft_orrery.py'
+ok   orrery_colors.py: they show, the two L3 lines gone, as JPL has no L3, L-297.)
+ok   orrery_colors.py: 'ESCAPADE-Blue': 'blue',   # ESCAPADE: placeholder, Tony's e
+patch applied (2 edits, 1 files)
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+- **Website:** save patch_L533_2_brighter_craft_website.py in tonyquintanilla.github.io and click Run.
+  - It changes ESCAPADE-Blue to turquoise on the website too.
+  - It gives every spacecraft's open diamond a 2-pixel outline in its own colour, so the symbol reads as a thick line instead of a hairline.
+  - Comets are unchanged.
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> & 'C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe' 'c:/Users/tonyq/OneDrive/Desktop/python_work/tonyquintanilla.github.io/patch_L533_2_brighter_craft_website.py'
+ok   gallery/assembler/render_spacecraft.py: err_from; build_spacecraft_traces takes the body's category.
+ok   gallery/assembler/render_spacecraft.py: MARKER_SIZE = 6
+ok   gallery/assembler/render_spacecraft.py: "marker": {"symbol": symbol, "size": MARKER_SIZE,
+ok   gallery/assembler/presentation.py: "top center" for every body not set: ESCAPADE's twins on opp
+ok   gallery/assembler/presentation.py: # for Tony's phone look (Mode 5).
+patch applied (5 edits, 2 files)
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\tonyquintanilla.github.io> 
+
+Each patch prints one "ok" line per edit, then "patch applied". If anything doesn't match, it prints an error and writes nothing. In the test, ESCAPADE-Blue's marker came out turquoise with its 2-pixel outline. The tests on how moons and Lagrange points are placed and on the path error estimate still passed.
+
+**When to push.** The page reads this code live, so you'll see the change on your phone as soon as GitHub serves it, with no nightly run needed. The nights have been running late in the morning: the orrery's around 10:30 a.m. and the website's around 11:20 a.m., with second runs in the early afternoon. So commit and push both repositories before about 10:15 this morning, or after about 3 p.m.
+
+If the diamonds look right but still small, the outline width is one number at the top of render_spacecraft.py, and the next patch can raise it.
+
+Where this leaves us:
+- The reel's draft 2 already has the cuts you asked for (no drawer, nothing zoomed out past the 0.5 AU tick).
+- The brighter craft are ready to run. After your phone look, a new recording of the same moves gives draft 3.
+- The session-close patch from yesterday, patch_L297_3_close_session_20261119.py, still needs to run. It doesn't touch these files, so the order between them doesn't matter.

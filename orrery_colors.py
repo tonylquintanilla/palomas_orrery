@@ -27,6 +27,9 @@ Domain: orrery
 Module updated: November 19, 2026 with Anthropic's Claude Opus 5.5 (L-432: moved here
 from constants_new.py whole; the eight Lagrange points keyed by the names
 they show, the two L3 lines gone, as JPL has no L3, L-297.)
+Module updated: November 20, 2026 with Anthropic's Claude Opus 5.5 (L-533,
+the ESCAPADE reel: ESCAPADE-Blue turquoise, the website's too, by Tony's
+ruling of 2026-11-20; ESCAPADE-Gold kept.)
 """
 
 
@@ -105,8 +108,8 @@ def color_map(planet):
         'Pioneer 11': 'green',
         'Clipper': 'red',
         'Psyche': 'green',
-        'ESCAPADE-Blue': 'blue',   # ESCAPADE: placeholder, Tony's eye
-        'ESCAPADE-Gold': 'gold',   # ESCAPADE: placeholder, Tony's eye
+        'ESCAPADE-Blue': 'turquoise',   # Tony, 2026-11-20: teal, brighter than blue
+        'ESCAPADE-Gold': 'gold',   # Tony, 2026-11-20: kept
         'JUICE': 'blue', 
         'OSIRIS': 'cyan',
         'Parker': 'white',
