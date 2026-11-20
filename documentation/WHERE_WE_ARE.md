@@ -1,19 +1,18 @@
 <!-- Doc-Kind: hand | Where the project is and where it is going, in plain words. One file, edited by section; Tony's run record sits below the marker at the end and no patch edits it. -->
 # Where We Are
 
-Last updated: November 19, 2026, morning: the Lagrange points built on the website too, not pushed (Opus, Claude Code).
-- Written at orrery 53bf2469 and gallery 133dbd21, with both Lagrange sessions' edits on your disk.
+Last updated: November 19, 2026, night: the Lagrange points live and looked at; this round's cleanup ruled (Opus, coordinating session).
+- Written at orrery 1c0688ca and gallery 0c832de1, with this patch's edits on your disk.
 
 > **READ THIS FIRST**
 >
 > **Changed since you last read this:**
-> - The website now serves and draws the eight Lagrange points: the Earth-Moon four in Earth's fold, the Earth-Sun four in a group after Earth, each a square in the orrery's colour, with NASA's words and its distance from its own centre, served an hour apart near today (L-297 (the Lagrange points)).
-> - The twins' names sit on opposite sides, and Earth-Moon L1's name is on the left. The points' and the open-path comets' boxes print the curve's error, held by a new daily check; craft orbiting a planet print a digit too many inside your dates, logged as L-538 (the orbiters' printed error). Nothing pushed yet.
+> - The eight Lagrange points are live on the website and in the orrery, and your phone look passed every line. L4 and L5 sit just off the Moon's drawn orbit by geometry: JPL puts them at the Moon's distance now, 60 degrees either side, and the orbit is an ellipse (L-297 (the Lagrange points), closed).
+> - The orrery's colours live in their own drawing file now, `orrery_colors.py`; three skills updated, the protocol at v3.143, the skills page at Plugins (L-432 (the default goldenrod), L-537 (the skills page), closed).
 >
-> **Do next:** *Push both by the run order, before 16:00 UTC; the Daily Run; your phone look; then the round's skill bumps (L-297 (the Lagrange points)); then the design talk on destinations and encounters.*
+> **Do next:** *The design talk on destinations and encounters (L-534 (missions by destination), L-529 (guided encounters)); beside it, this round's cleanup (the road, line b).*
 >
 > **Needs you now:**
-> - *(do) Push the orrery, then the website after the Daily Run, before 16:00 UTC (GitHub runs the nights hours late).*
 > - *(do) When the orrery's night title starts "EL NINO DUE": rebuild El Nino's page from the dashboard's Earth System group, read it on your phone, then push both.*
 > - *(do) Each morning, Fetch origin and Pull origin on both, orrery then website, before any work. If Pull origin shows up only once you have changes: Commit them first, then Pull origin, then Push origin. If Desktop stashes your changes anyway, restore them at once: Changes tab, Stashed Changes, Restore.*
 > - *(do) Renew palomasorrery.com at Porkbun by 13 Feb 2027 (L-516).*
@@ -31,8 +30,8 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
                Moon's standards (L-513, closed).
  15.   [NOW]   *Mars (L-514 (the Mars room)) closed Nov 15. El Nino's
                page (L-060 (El Nino)) live Nov 17; ESCAPADE's path (L-533)
-               live Nov 18; the Lagrange points (L-297): both
-               halves built Nov 18 and 19, the push next; then the
+               live Nov 18; the Lagrange points (L-297) live
+               Nov 19, on your phone look; next, the
                destinations and encounters talk (L-534, L-529), then Uranus and Neptune. Io, Titan, Charon and Pluto come to standard in their folds.* << moved this session
  16.   [later] Earth's fold: the Earth-Moon barycentre, SOHO, Gaia, James Webb, Artemis II.
  17.   [later] Small-body systems' moons; then stars and exoplanets.
@@ -46,13 +45,18 @@ Your order of Nov 5 (run record `WHERE_WE_ARE_11-4-26_2321_run_record.md`).
   d.   [beside] Document caps (L-522 (document caps)): steps 1 and 2
                built Nov 10 and 11; steps 3 to 6 between builds, the
                protocol's reduction first, for a new Fable session.
-  b.   [beside] Housekeeping: L-424, L-425, L-426 (the checkers' three);
+  b.   [beside] This round's cleanup, each ruled Nov 19 (the order is yours): every path to its last day, L-533 (ESCAPADE); the orbiters' hourly points, L-538 (the orbiters' printed error); every entry checked against JPL, L-539 (every entry checked); the period's swing in its sentence, L-536 (a moon's yearly change); the 24 in goldenrod, L-432 (the default goldenrod), at your desk. << new this session
+  h.   [beside] Housekeeping: L-424, L-425, L-426 (the checkers' three);
                L-423 (the website's checks) item 3; L-357 (stale gallery
                artifacts); L-509 (obsolete code), after its talk.
 
 ## Settled  **>> UPDATED THIS SESSION**
 
 Standing rulings; a line leaves once it is habit, or a skill carries it.
+- Every path runs to its span's last day: the website asks JPL for it too (Nov 19; L-533 (ESCAPADE)).
+- A period prints today's figure with only the digits its swing allows, and its sentence gives the swing's measured range (Nov 19; L-536 (a moon's yearly change)).
+- A craft orbiting a planet gets the real fix, hourly points near today, and no stopgap (Nov 19; L-538 (the orbiters' printed error)).
+- Every entry the orrery asks JPL for is checked against JPL, starting from a one-time list you scan (Nov 19; L-539 (every entry checked)).
 - The points are served a day apart, an hour apart from yesterday to the day after tomorrow; colours and name sides as built, Earth-Moon L1's name on the left; the pile-up in the Solar System view stays (Nov 19; L-297 (the Lagrange points)).
 - The curve's error is on for the Lagrange points and the open-path comets only, held by the daily "Curve error" check (Nov 19; L-297 (the Lagrange points)).
 - The Lagrange points are shown as Earth-Moon L1, L2, L4, L5 and Earth-Sun L1, L2, L4, L5, "Earth-Sun" being NASA's word; JPL's names (EM-L1, SEMB-L1) are the source line (Nov 18; L-297 (the Lagrange points)).
@@ -60,14 +64,10 @@ Standing rulings; a line leaves once it is habit, or a skill carries it.
 - ESCAPADE's words leave out NASA's "kidney-bean": it is the loop seen from a view that turns with Earth, and no room turns (Nov 18; L-533 (ESCAPADE)).
 - A page's reel is made by the session from the page's own words and pictures, each sentence checked against the page; Muse adds only the Boost filter if needed, no music, and posts (Nov 17; L-060 (El Nino)).
 - El Nino's monthly update: the night checks NOAA and flags "EL NINO DUE"; you rebuild the page by hand; the night never changes a page. You no longer run the Daily Run routinely; you rely on the nightly (Nov 17; L-060 (El Nino)).
-- El Nino is a page like Sudan's, its chart the June design; one source of record, NOAA's Climate Prediction Center, its forecast NOAA's own chances on RONI; WMO and Australia's index left out (Nov 16; L-060 (El Nino)).
-- The drawer opens at the row its handle names, scrolled into view and highlighted; the opening names Earth ("Keep Earth") (Nov 16; L-535 (the period's reason)).
-- Every frame fits across the picture's narrow side, the farthest point of what it frames plus 10 percent; a picture wider than tall is unchanged. The Solar System view, its Home and Reset frame where bodies are now (your ruling of Oct 2), so an orbit line may run past the side there: the dots stay inside, and Go To shows a whole orbit (Nov 15; L-514 (the Mars room)).
 
 ## Deferred  **>> UPDATED THIS SESSION**
 
 Waiting behind other work; a line leaves when picked up.
-- A moon's change in a year, read from two dates, catches the moon's own short wobble (Phobos's jumped 20 times in a day); the digits should come from many dates: its own session (Nov 15; L-536 (a moon's yearly change)).
 - ESCAPADE's loops near L2 show only in a view centred on Earth, and the website draws a planned path around the Sun alone: with Earth's fold, where SOHO, Gaia and JWST need it too (Nov 18; L-533 (ESCAPADE)).
 - The hold's leftovers: Earth's own box in its fold does not say a body is held; a close pass is held on its older orbit (L-526 (a close pass held)), before 2029 (Nov 11; L-525 (hold the bad data)).
 - The orrery's own Kepler solvers start the way the website's did; safe today, listed on L-524 (the Kepler solver's start), for an orrery session (Nov 11).
@@ -83,21 +83,20 @@ Waiting behind other work; a line leaves when picked up.
 - L-483 (a comet room), after historical missions' slice 2.
 - L-489 (compositions), with L-486 and L-488 under it: Artemis II in the Earth room first, with slice 2 (L-507 (historical missions)); Apollo 11's S-IVB with them (Nov 5).
 - A body crossing e = 1: its drawer row waits for JPL's class (L-510 (the typed fields), Nov 5).
-- A craft orbiting a planet: its points cut corners, and inside your dates Juno and BepiColombo print a digit too many (Nov 19; L-538 (the orbiters' printed error), with L-507 (historical missions)).
 - L-490 (the legacy list); L-499 (kinds of session); L-471 (a delivered
   patch is final), for safe-file-editing's next version.
 
 ## Signals  **>> UPDATED THIS SESSION**
 
 Read from files when this page was written, not typed from memory.
-- Last cache build: 20261118T230303Z, ok, no retry on the swap (the website's swap log at 133dbd21, read Nov 18).
-- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md, generated by this session's maintenance run, Nov 18, read Nov 18).
+- Last cache build: 20261119T204434Z, ok, no retry on the swap (the website's swap log at 0c832de1, read Nov 19).
+- Tier-1 on the gate path: 0, the push gate holds (PROVENANCE_AUDIT.md at orrery 1c0688ca, generated Nov 19, read Nov 19).
 - This page's date and the ledger's newest stamp: both Nov 19. Agree.
 
 ## Waiting on you  **>> UPDATED THIS SESSION**
 
 Decisions, one at a time:
-- 27 of 34 flying paths stop 1 to 7 days short of their span, the twins among them: ask JPL for each span's last day too? (L-533 (ESCAPADE)).
+- None open. The last day was ruled Nov 19: yes, each path asks for its span's last day (L-533 (ESCAPADE)).
 
 At the next design talk:
 - El Nino's step 5, its last sentence: name NOAA as the source of the open question, and say it is the swing on NOAA's index that is studied. Your words: "in today's political environment the hedge can read as ideological not just scientific" (Nov 17; L-060 (El Nino)).
@@ -106,6 +105,7 @@ At the next design talk:
   code)); two cases now, the orrery's unused date function and its
   Pluto-centred view of the moons.
 - Planet 9: how to show a body that may not exist.
+- A tidier Solar System view: where several names share a few pixels, only the largest body's name until you zoom in (Nov 19; L-297 (the Lagrange points)).
 - Missions by destination and encounters at every flyby and destination, one round, after the Lagrange points, ESCAPADE the worked example. Your words of Nov 18: "The only thing I miss are the dates of flybys"; "We also don't say what the destination or basic mission objective is" (L-534 (missions by destination), L-529 (guided encounters)).
 - Whether the site counts visits, and tells visitors (Nov 13; for the Earth Science room's talk, L-531 (the Earth Science room)).
 
@@ -121,7 +121,7 @@ Not urgent, in your order:
 
 - Every item: `LEDGER_CONSOLIDATED.md`.
 - El Nino: L-060 (El Nino); `enso_page_generator.py` (the page, and the night's check), its suite `test_enso_night_check.py`, the brief `COORD_L060_el_nino_page_brief_20261116.md`.
-- This round: L-297 (the Lagrange points), its brief `COORD_L297_lagrange_points_brief_20261118.md`, the words `WORDS_L297_lagrange_points_20261118.md`; the website's `INTERACTIVE_AS_BUILT.md`, The Lagrange points; L-538 (the orbiters' printed error).
+- This round: L-297 (the Lagrange points), its brief `COORD_L297_lagrange_points_brief_20261118.md`, the words `WORDS_L297_lagrange_points_20261118.md`; the website's `INTERACTIVE_AS_BUILT.md`, The Lagrange points; the close `patch_L297_3_close_session_20261119.py`; your run record `WHERE_WE_ARE_11-18-26_2200_run_record.md`.
 - The caps: `DOCUMENT_CAPS.md`; L-522 (document caps); that track's
   handoff, `HANDOFF_document_upkeep_20261116.md` (Nov 16).
 - The tree: L-515 (one nested tree), its briefs `COORD_L515_*`.

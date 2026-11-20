@@ -1030,25 +1030,105 @@ FILES WRITTEN THIS RUN
 
 C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github>
 
-4. Open the orrery and check a few colours.
+4. Open the orrery and check a few colours. -- okay
 5. Move both patches into `documentation\`, -- done 
-6. then commit and push. Make sure the new `orrery_colors.py` is in the change list. -- gallery nightly at 0c832de1caf357efd34c6b5c36770ee394d0bbec; orrery at 
-7. Reinstall three skills (gallery-cache-builder, interactive-exhibit, provenance-discipline) from Plugins in the sidebar, 
-8. and paste `PROJECT_INSTRUCTIONS.md` into the Project's instructions.
+6. then commit and push. Make sure the new `orrery_colors.py` is in the change list. -- gallery nightly at 0c832de1caf357efd34c6b5c36770ee394d0bbec; orrery at 1c0688ca6660b991c3de917826304892b9e7fa9f
+7. Reinstall three skills (gallery-cache-builder, interactive-exhibit, provenance-discipline) from Plugins in the sidebar, -- done
+8. and paste `PROJECT_INSTRUCTIONS.md` into the Project's instructions. -- done
 
 **Still waiting:** your phone look at the Lagrange points. 
 
 Solar System room. 
-1. In the drawer, “Earth-Sun Lagrange Points” sits right after Earth; tick it. 
-2. L4 sits on Earth’s orbit ahead of Earth, and L5 behind it. 
-3. L1 and L2 share Earth’s pixels at this scale, as you ruled. 
-4. Tap Earth-Sun L4: its box gives NASA’s words, its distance from the Sun, and “JPL states no accuracy for this position.”
+1. In the drawer, “Earth-Sun Lagrange Points” sits right after Earth; tick it. -- yes
+2. L4 sits on Earth’s orbit ahead of Earth, and L5 behind it. -- yes
+3. L1 and L2 share Earth’s pixels at this scale, as you ruled. -- yes
+4. Tap Earth-Sun L4: its box gives NASA’s words, its distance from the Sun, and “JPL states no accuracy for this position.” -- yes
 Center on Earth, 
-1. open Earth’s fold. The order is Earth-Moon L1, Moon, L5, L4, L2. Tick the four and zoom to the Moon’s orbit:
-2. L1 sits between Earth and the Moon (about 330,000 km from Earth), its name on the left;
-3. L2 sits beyond the Moon (about 450,000 km);
-4. L4 and L5 sit on the Moon’s orbit, ahead of and behind it.
-5. Still centred on Earth, zoom out. With Earth-Sun L1 and L2 ticked, each is about 1.5 million km from Earth, L1 toward the Sun.
-6. Tick ESCAPADE-Blue and Gold. Their names are on opposite sides of their symbols, and Blue’s box says “around the point called Earth-Sun L2”.
+1. open Earth’s fold. The order is Earth-Moon L1, Moon, L5, L4, L2. Tick the four and zoom to the Moon’s orbit: 
+2. L1 sits between Earth and the Moon (about 330,000 km from Earth), its name on the left; -- yes
+3. L2 sits beyond the Moon (about 450,000 km); -- yes
+4. L4 and L5 sit on the Moon’s orbit, ahead of and behind it. -- nearly on the drawn orbit. i assume that is because of the perturbations. looking at the orrery plots one can see that the orbits are not completely congruent. 
+5. Still centred on Earth, zoom out. With Earth-Sun L1 and L2 ticked, each is about 1.5 million km from Earth, L1 toward the Sun. -- yes
+6. Tick ESCAPADE-Blue and Gold. Their names are on opposite sides of their symbols, and Blue’s box says “around the point called Earth-Sun L2”. -- yes
 
 When you tell me what you saw, I'll write the session's close: this afternoon's three rulings, the round's outcome and the next coordinator's prompt. The 24 goldenrod bodies are a desk job after the colour patch.
+
+==============================
+
+Recorded. That's every decision from this round, so I'll write the close now: the ledger notes, the page, and the next coordinator's prompt. First, the exact text of the ledger items it touches.
+
+Ruling recorded. One count needs refreshing before it goes on the ledger: the bodies still drawn in goldenrod, on the colour table as you pushed it.
+
+I used a clumsy two-step for the box's lines. I'll replace it with a single edit on the exact old text before testing.
+
+The session's close is written: a patch that updates the ledger and Where We Are, and the next coordinator's prompt. Both are in your orrery folder and match what I tested. The patch ran clean on a throwaway copy of your pushed orrery, keeps Where We Are within its 130 lines, and refuses a second run.
+
+**What the close records:**
+- **The Lagrange points are closed (L-297)**, with your phone look and the measured reason L4 and L5 sit off the drawn orbit. Its two leftover orrery errors move to L-512, the item for JPL fallbacks: ticking a point asks JPL for orbit figures it doesn't have.
+- **Your four rulings from today:**
+  - Every path runs to its real last day (L-533).
+  - The orbiters get hourly points near today, with no stopgap (L-538).
+  - The Moon's period prints today's figure with the swing's range in its sentence (L-536).
+  - Every entry the orrery asks JPL for gets checked (new item, L-539).
+- **The colour table is moved (L-432),** with the 24 goldenrod bodies named. For Planet 9, Mani and Vanth, the cause is now clear: their colour keys point at lines that don't exist.
+- **Where We Are:** the next step is the design talk on destinations and encounters, with today's cleanup listed beside it for you to order. The tidier label idea joins the design talk list. -- let's do the cleanup first in a cleanup round. perhaps there are other items that would work together with this. 
+
+**One correction to something I told you:** the 57 unchecked entries are 43 moons, 8 spacecraft, 3 barycentres, plus Menoetius, Pluto and the small body 6AC4721. I'd said 47 moons and 2 barycentres. The total of 57 was right, and the ledger has the full list.
+
+**To finish:**
+1. Run `patch_L297_3_close_session_20261119.py` from VS Code. You should see "ok" lines, then "patch applied".
+
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> & 'C:\Users\tonyq\AppData\Local\Programs\Python\Python313\python.exe' 'c:/Users/tonyq/OneDrive/Desktop/python_work/palomas_orrery_for_github/patch_L297_3_close_session_20261119.py'
+ok L-297: DONE
+ok L-297: the note, Gap none
+ok L-512: date stamp
+ok L-512: received from L-297
+ok L-533: date stamp
+ok L-533: the last day ruled
+ok L-536: date stamp
+ok L-536: Tony's rule
+ok L-538: no stopgap
+ok L-432: date stamp
+ok L-432: the table moved, the 24 named
+ok L-539: new item
+ok header
+ok box: changed
+ok box: do next
+ok box: needs you now
+ok road: stage 15
+ok road: line b
+ok Settled: four rulings in
+ok Settled: the drawer line out
+ok Settled: El Nino's design line out
+ok Settled: the frame line out
+ok Deferred: L-536 out, on the road
+ok Deferred: L-538 out, on the road
+ok Signals: the cache build
+ok Signals: Tier-1
+ok Waiting on you: the decision answered
+ok Waiting on you: the labels to the design talk
+ok Where the details are: this round
+ok LEDGER_CONSOLIDATED.md written
+ok documentation\WHERE_WE_ARE.md written (129 lines above the marker)
+Running ledger_index.py ...
+    - [auto-fix] L-297: status DONE, tagged 'A', but not physically inside any track's own span, so the general archive -- correct tag is 'C'
+    - [auto-fix] L-297: belongs in closed bucket 'C' but is not physically located in its destination heading
+  Retagged 1 block(s) to their correct closed bucket; physically moved 1 block(s) into their bucket's destination heading.
+  Index regenerated (269 live items) in C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github\LEDGER_CONSOLIDATED.md.
+ok ledger_index.py
+patch applied
+
+Do next:
+  1. (do) Move this file into documentation\.
+  2. (do) In GitHub Desktop (orrery): commit and push the ledger,
+     Where We Are, this file and the next coordinator's prompt
+     (documentation\PROMPT_coordinator_start_20261120.md).
+     Not while a night is running. -- 
+PS C:\Users\tonyq\OneDrive\Desktop\python_work\palomas_orrery_for_github> 
+
+2. Move the patch into `documentation\`.
+3. Commit and push the orrery: the ledger, Where We Are, the patch and `PROMPT_coordinator_start_20261120.md`. Tomorrow's nights should land around 10:30 a.m. and 1:30 p.m., so tonight is clear.
+
+**Where this leaves us**
+- The Lagrange round is done: eight points live, looked at, and recorded.
+- Next is the design talk on destinations and encounters, with five cleanup items, each already ruled, waiting beside it in whatever order you choose.
